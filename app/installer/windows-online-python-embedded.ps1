@@ -3,6 +3,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifestPath = Join-Path $runtime "release-source.json"
 if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
@@ -66,6 +68,23 @@ function Get-VerifiedDownload(
   }
 }
 
+function Get-PipMetadataVersion([string]$Executable) {
+  $oldPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  try {
+    $lines = @(& $Executable -c "import importlib.metadata; print(importlib.metadata.version('pip'))" 2>&1 |
+      ForEach-Object { $_.ToString().Trim() } |
+      Where-Object { $_ })
+    $exit = $LASTEXITCODE
+    if ($exit -ne 0 -or $lines.Count -ne 1) { return $null }
+    return $lines[0]
+  } catch {
+    return $null
+  } finally {
+    $ErrorActionPreference = $oldPreference
+  }
+}
+
 function Test-PrivatePython([string]$Executable, [string]$ExpectedVersion, [string]$ExpectedPipVersion) {
   if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { return $false }
   $oldPreference = $ErrorActionPreference
@@ -74,9 +93,8 @@ function Test-PrivatePython([string]$Executable, [string]$ExpectedVersion, [stri
     $pythonVersion = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString().Trim() } | Where-Object { $_ }) | Select-Object -First 1
     $pythonExit = $LASTEXITCODE
     if ($pythonExit -ne 0 -or $pythonVersion -ne "Python $ExpectedVersion") { return $false }
-    $pipVersionLine = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString().Trim() } | Where-Object { $_ }) | Select-Object -First 1
-    $pipExit = $LASTEXITCODE
-    if ($pipExit -ne 0 -or $pipVersionLine -notmatch ('^pip\s+' + [regex]::Escape($ExpectedPipVersion) + '\s+')) { return $false }
+    $pipVersionValue = Get-PipMetadataVersion $Executable
+    if ($pipVersionValue -ne $ExpectedPipVersion) { return $false }
     return $true
   } catch {
     return $false
@@ -95,12 +113,11 @@ function Write-PrivatePythonDiagnostics([string]$Executable) {
   try {
     $versionOutput = @(& $Executable --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
     $versionExit = $LASTEXITCODE
-    $pipOutput = @(& $Executable -m pip --version 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
-    $pipExit = $LASTEXITCODE
+    $pipVersionValue = Get-PipMetadataVersion $Executable
     $pathOutput = @(& $Executable -c "import sys; print(repr(sys.path))" 2>&1 | ForEach-Object { $_.ToString() }) -join " | "
     $pathExit = $LASTEXITCODE
     Write-Host "EMBEDDED_PYTHON_DIAG versionExit=$versionExit version=$versionOutput"
-    Write-Host "EMBEDDED_PYTHON_DIAG pipExit=$pipExit pip=$pipOutput"
+    Write-Host "EMBEDDED_PYTHON_DIAG pipMetadataVersion=$pipVersionValue"
     Write-Host "EMBEDDED_PYTHON_DIAG pathExit=$pathExit path=$pathOutput"
   } finally {
     $ErrorActionPreference = $oldPreference
@@ -162,7 +179,8 @@ if (-not (Test-PrivatePython $pythonExe $pythonVersion $pipVersion)) {
 $oldPreference = $ErrorActionPreference
 $ErrorActionPreference = "Continue"
 try {
-  $isolation = @(& $pythonExe -c "import site,sys; assert sys.flags.isolated == 1; assert site.ENABLE_USER_SITE is False; print('PYTHON_ISOLATION_PASS')" 2>&1 | ForEach-Object { $_.ToString().Trim() })
+  $isolation = @(& $pythonExe -c "import site,sys; assert sys.flags.isolated == 1; assert site.ENABLE_USER_SITE is False; print('PYTHON_ISOLATION_PASS')" 2>&1 |
+    ForEach-Object { $_.ToString().Trim() })
   $isolationExit = $LASTEXITCODE
 } finally {
   $ErrorActionPreference = $oldPreference

@@ -47,6 +47,7 @@ Copy-Item (Join-Path $installer "windows-release-requirements.txt") (Join-Path $
 $bootstrap = Join-Path $payload "bootstrap"
 New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
+  "windows-online-bootstrap-entry.ps1",
   "windows-online-python-embedded.ps1",
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
@@ -75,6 +76,7 @@ foreach ($required in @(
   "lex-runtime-sidecar.exe",
   "release-source.json",
   "release-requirements.txt",
+  "bootstrap\windows-online-bootstrap-entry.ps1",
   "bootstrap\windows-online-python-embedded.ps1",
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",

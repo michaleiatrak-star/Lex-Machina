@@ -16,25 +16,13 @@ lex_offline_bundle:
   Goto lex_runtime_selftest
 
 lex_online_bootstrap:
-  DetailPrint "Lex Machina: przygotowanie izolowanego prywatnego Pythona..."
-  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\runtime\bootstrap\windows-online-python-embedded.ps1" -RuntimeRoot "$INSTDIR\runtime"'
+  DetailPrint "Lex Machina: przygotowanie izolowanego prywatnego runtime..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\runtime\bootstrap\windows-online-bootstrap-entry.ps1" -RuntimeRoot "$INSTDIR\runtime"'
   Pop $0
   Pop $1
   ${If} $0 != 0
     FileOpen $2 "$INSTDIR\runtime\bootstrap-install-error.log" w
-    FileWrite $2 "stage=online-python-embedded$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
-    FileClose $2
-    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: przygotowanie prywatnego Pythona nie powiodło się.$\r$\n$1" /SD IDOK
-    Abort
-  ${EndIf}
-
-  DetailPrint "Lex Machina: sprawdzanie i pobieranie brakujących składników runtime..."
-  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\runtime\bootstrap\windows-online-bootstrap.ps1" -RuntimeRoot "$INSTDIR\runtime"'
-  Pop $0
-  Pop $1
-  ${If} $0 != 0
-    FileOpen $2 "$INSTDIR\runtime\bootstrap-install-error.log" w
-    FileWrite $2 "stage=online-bootstrap$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileWrite $2 "stage=online-bootstrap-entry$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
     FileClose $2
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: przygotowanie składników nie powiodło się.$\r$\n$1" /SD IDOK
     Abort

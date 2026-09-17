@@ -11,7 +11,10 @@ const workflow = read(".github/workflows/lex-installer.yml");
 const acceptance = read("app/installer/windows-installer-acceptance.ps1");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
+const entry = read("app/installer/windows-online-bootstrap-entry.ps1");
+const embeddedPython = read("app/installer/windows-online-python-embedded.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
+const manifest = read("app/installer/windows-release-source.json");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
 
 const checks = {
@@ -44,6 +47,17 @@ const checks = {
     selftest.includes("SELFTEST_OCR_INFERENCE_FAILED") &&
     selftest.includes("SELFTEST_NER_INFERENCE_FAILED") &&
     selftest.includes("SELFTEST_DOCX_RENDER_FAILED"),
+  registryIndependentPrivatePython:
+    hooks.includes("windows-online-bootstrap-entry.ps1") &&
+    entry.includes("PYTHONUTF8") &&
+    entry.includes("windows-online-python-embedded.ps1") &&
+    embeddedPython.includes("onlineEmbeddable") &&
+    embeddedPython.includes("pipBootstrap") &&
+    embeddedPython.includes("Get-VerifiedDownload") &&
+    embeddedPython.includes("importlib.metadata.version('pip')") &&
+    embeddedPython.includes("sys.flags.isolated == 1") &&
+    manifest.includes('"onlineEmbeddable"') &&
+    manifest.includes('"pipBootstrap"'),
   missingOnlyAndHashChecked:
     bootstrap.includes("Test-CommandVersion") &&
     bootstrap.includes("verify-python-package-set.py") &&
@@ -53,7 +67,7 @@ const checks = {
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
   postInstallFailClosed:
-    hooks.includes("windows-online-bootstrap.ps1") &&
+    hooks.includes("windows-online-bootstrap-entry.ps1") &&
     hooks.includes("--self-test") &&
     hooks.includes("Abort")
 };
