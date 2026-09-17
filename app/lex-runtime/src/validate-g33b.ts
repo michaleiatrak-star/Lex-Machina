@@ -55,7 +55,11 @@ const checks = {
       source.systemPrerequisites?.visualCppRuntime?.sha256 ?? ""
     ) &&
     bootstrap.includes("visual-cpp-runtime") &&
-    bootstrap.includes("-Verb RunAs"),
+    bootstrap.includes(
+      'Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"'
+    ) &&
+    bootstrap.includes("if (-not (Test-IsAdministrator))") &&
+    bootstrap.includes('$startArgs.Verb = "RunAs"'),
   verifiedSourceCache:
     source.notes?.cachePolicy === "REUSE_ONLY_AFTER_SHA256_VERIFICATION" &&
     bootstrap.includes("Using verified cache") &&
