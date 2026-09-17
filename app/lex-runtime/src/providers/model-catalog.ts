@@ -112,6 +112,39 @@ export class DynamicModelCatalog {
     private readonly localModels: LocalModelRuntime = new DefaultLocalModelRuntime()
   ) {}
 
+  localContextWindow(
+    modelId: string
+  ): number | undefined {
+    const runtime =
+      this.localModels.status();
+    if (
+      !runtime.configured ||
+      runtime.selectedModelId !==
+        modelId
+    ) {
+      return undefined;
+    }
+    const selected =
+      this.localModels
+        .listModels()
+        .find(
+          (model) =>
+            model.id === modelId &&
+            model.installed
+        );
+    if (!selected) {
+      return undefined;
+    }
+    const value =
+      selected.configuredContextWindow ??
+      selected.contextWindow;
+    return Number.isInteger(value) &&
+      value >= 8_192 &&
+      value <= 262_144
+      ? value
+      : undefined;
+  }
+
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
     if (provider === "openai") {
       const local = this.listConfiguredLocalOpenAiModels();
