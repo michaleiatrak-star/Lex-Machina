@@ -288,7 +288,7 @@ export class LexExecutionEngine {
     try {
       workflowPlan = createDeterministicWorkflowPlan(
         this.registry,
-        skillSelection.executionSkills
+        skillSelection.workflowExecutionSkill
       );
     } catch (error) {
       const detail =
