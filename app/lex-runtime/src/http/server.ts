@@ -9,6 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
+import { registerWorkspaceRoutes } from "./workspace-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
 import {
@@ -62,6 +63,9 @@ import {
 import {
   SecureCaseArtifactStore
 } from "../case-artifact-store.js";
+import {
+  EncryptedCaseWorkspaceStore
+} from "../case-workspace-store.js";
 import {
   LegacyCaseStorageMigrator
 } from "../legacy-case-migration.js";
@@ -258,6 +262,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const workspaceStore =
+    new EncryptedCaseWorkspaceStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const documentGenerationState =
     new DocumentGenerationStateStore({
       rootDir:
@@ -280,7 +289,8 @@ export async function startLocalServer(options?: {
       privacyVaultStore,
       secureCaseUploadStore,
       secureCaseDocumentStore,
-      secureCaseArtifactStore
+      secureCaseArtifactStore,
+      workspaceStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
@@ -414,6 +424,21 @@ export async function startLocalServer(options?: {
       caseAccessService,
       migrator:
         legacyCaseStorageMigrator
+    }
+  );
+  registerWorkspaceRoutes(
+    app,
+    {
+      authService,
+      caseAccessService,
+      uploads:
+        secureCaseUploadStore,
+      templates:
+        sharedTemplateStore,
+      workspace:
+        workspaceStore,
+      rootDir:
+        caseFileStore.rootDir
     }
   );
   app.use(coreApp);
