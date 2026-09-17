@@ -179,7 +179,8 @@ describe(
         state =
           markProcessCheckpointNotApplicable(
             state,
-            "CP-1b"
+            "CP-1b",
+            "Tylko jedna realna ścieżka strategiczna w tej sprawie."
           );
         expect(
           state.checkpoints["CP-1b"]
@@ -203,7 +204,8 @@ describe(
         expect(() =>
           markProcessCheckpointNotApplicable(
             state,
-            "CP-W1"
+            "CP-W1",
+            "Nie dotyczy"
           )
         ).toThrow(
           "PROCESS_PLEADING_NA_TRANSITION_INVALID"
