@@ -235,8 +235,9 @@ pub fn run() {
     );
     let protocol_bridge = Arc::clone(&bridge);
     let setup_bridge = Arc::clone(&bridge);
+    let exit_bridge = Arc::clone(&bridge);
 
-    tauri::Builder::default()
+    let app = tauri::Builder::default()
         .invoke_handler(
             tauri::generate_handler![
                 open_external_url,
@@ -266,8 +267,14 @@ pub fn run() {
                 .map_err(io::Error::other)?;
             Ok(())
         })
-        .run(tauri::generate_context!())
-        .expect("error while running Lex Machina desktop");
+        .build(tauri::generate_context!())
+        .expect("error while building Lex Machina desktop");
+
+    app.run(move |_app_handle, event| {
+        if matches!(event, tauri::RunEvent::Exit) {
+            let _ = exit_bridge.shutdown();
+        }
+    });
 }
 
 #[cfg(test)]
