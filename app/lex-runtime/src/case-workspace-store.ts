@@ -614,16 +614,27 @@ export class EncryptedCaseWorkspaceStore {
     caseId: string;
     caseDataKey: Buffer;
     keyVersion: number;
+    expectedRevision?: number;
   }): Promise<boolean> {
     const index = await this.read(
       args.caseId,
       args.caseDataKey,
       args.keyVersion
     );
-    if (
-      !index.workflows?.processPleading
-    ) {
+    const current =
+      index.workflows?.processPleading;
+    if (!current) {
       return false;
+    }
+    if (
+      args.expectedRevision !==
+        undefined &&
+      current.revision !==
+        args.expectedRevision
+    ) {
+      throw new Error(
+        "PROCESS_PLEADING_STATE_CONFLICT"
+      );
     }
     delete index.workflows
       .processPleading;
