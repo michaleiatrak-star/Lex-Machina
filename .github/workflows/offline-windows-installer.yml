@@ -96,14 +96,39 @@ jobs:
       - name: Rebuild thin installer payload
         shell: pwsh
         run: |
-          # The complete offline runtime contains tens of thousands of files. Moving
-          # it out of the Tauri resource path is atomic on the runner volume and
-          # avoids a slow/partial recursive delete before the thin payload rebuild.
+          # The complete offline runtime contains tens of thousands of files. The
+          # payload self-test can leave a private Node/sidecar child alive briefly,
+          # which keeps a Windows handle inside runtime and makes Directory.Move
+          # fail with AccessDenied. Retire only processes whose executable lives
+          # inside this generated runtime, then atomically move the tree aside.
           $fullRuntime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
           $retiredRuntime = Join-Path $env:RUNNER_TEMP "lex-offline-runtime-built"
+
+          Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+              if ($_.Path -and $_.Path.StartsWith($fullRuntime, [StringComparison]::OrdinalIgnoreCase)) {
+                Write-Host "Stopping generated-runtime process before thin rebuild: $($_.ProcessName) pid=$($_.Id) path=$($_.Path)"
+                Stop-Process -Id $_.Id -Force -ErrorAction Stop
+              }
+            } catch {
+              Write-Host "Process inspection/stop note: $($_.Exception.Message)"
+            }
+          }
+          Start-Sleep -Seconds 2
+
           Remove-Item -LiteralPath $retiredRuntime -Recurse -Force -ErrorAction SilentlyContinue
-          [IO.Directory]::Move($fullRuntime, $retiredRuntime)
-          if (Test-Path -LiteralPath $fullRuntime) {
+          $moved = $false
+          for ($attempt = 1; $attempt -le 10 -and -not $moved; $attempt++) {
+            try {
+              [IO.Directory]::Move($fullRuntime, $retiredRuntime)
+              $moved = $true
+            } catch {
+              if ($attempt -eq 10) { throw }
+              Write-Host "Runtime retirement attempt $attempt blocked by a transient handle; retrying."
+              Start-Sleep -Seconds 2
+            }
+          }
+          if (-not $moved -or (Test-Path -LiteralPath $fullRuntime)) {
             throw "OFFLINE_FULL_RUNTIME_RETIRE_FAILED"
           }
 
