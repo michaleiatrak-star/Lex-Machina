@@ -145,6 +145,33 @@ function rankSkills(
     );
 }
 
+function referencedExecutionSkills(
+  registry: LexSkillRegistry,
+  sourceNames: readonly string[],
+  candidates: readonly LexSkillRecord[]
+): string[] {
+  const executionCandidates = candidates.filter(isExecutionSkill);
+  const referenced: string[] = [];
+
+  for (const sourceName of sourceNames) {
+    const source = registry.get(sourceName);
+    if (!source) continue;
+    const declared = source.frontmatter.dependencies?.requires ?? [];
+
+    for (const target of executionCandidates) {
+      if (target.name === sourceName) continue;
+      if (
+        declared.includes(target.name) ||
+        source.body.includes(target.name)
+      ) {
+        referenced.push(target.name);
+      }
+    }
+  }
+
+  return [...new Set(referenced)];
+}
+
 export function resolveAdditionalSkills(
   registry: LexSkillRegistry,
   query: string,
@@ -203,6 +230,17 @@ export function resolveAdditionalSkills(
         executionSkills.add(item.skill.name);
         selected.add(item.skill.name);
       }
+    }
+
+    const delegatedExecution = referencedExecutionSkills(
+      registry,
+      [...executionSkills],
+      candidates
+    );
+    for (const name of delegatedExecution) {
+      if (executionSkills.size >= 6) break;
+      executionSkills.add(name);
+      selected.add(name);
     }
 
     const rankedDomains = rankSkills(
