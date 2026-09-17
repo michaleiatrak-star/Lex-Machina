@@ -524,6 +524,10 @@ export type SkillUpdateStatusResponse = {
   latestVersion?: string;
   checkedAt: string;
   bundleReady: boolean;
+  verificationReady: boolean;
+  blockedReason?:
+    | "SIGNED_INDEX_MISSING"
+    | "SIGNER_POLICY_MISSING";
 };
 
 export type SkillUpdateApplyResponse = {
