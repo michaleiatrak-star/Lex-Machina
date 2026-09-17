@@ -3,13 +3,18 @@ param(
   [Parameter(Mandatory=$true)][string]$RuntimeBundlePath,
   [Parameter(Mandatory=$true)][string]$OutputPath,
   [string]$ReceiptPath,
-  [string]$ComponentLockPath
+  [string]$ComponentLockPath,
+  [string]$IconPath
 )
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
 $runtimeBundle = (Resolve-Path -LiteralPath $RuntimeBundlePath).Path
 $source = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "offline-selfextract/OfflineSelfExtractor.cs")).Path
+if (-not $IconPath) {
+  $IconPath = Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
+}
+$icon = (Resolve-Path -LiteralPath $IconPath).Path
 $output = [IO.Path]::GetFullPath($OutputPath)
 $outputDir = Split-Path -Parent $output
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
@@ -42,6 +47,7 @@ try {
 
   & $compiler /nologo /target:winexe /optimize+ /platform:x64 `
     "/out:$stub" `
+    "/win32icon:$icon" `
     /reference:System.dll `
     /reference:System.Core.dll `
     /reference:System.IO.Compression.dll `
@@ -89,6 +95,7 @@ try {
   $outInfo = Get-Item -LiteralPath $output
   $outHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash.ToLowerInvariant()
   Write-Host "OFFLINE_STANDALONE_READY:$output"
+  Write-Host "OFFLINE_STANDALONE_ICON=$icon"
   Write-Host "OFFLINE_STANDALONE_BYTES=$($outInfo.Length)"
   Write-Host "OFFLINE_STANDALONE_SHA256=$outHash"
   Write-Host "OFFLINE_STANDALONE_PAYLOAD_SHA256=$payloadHashHex"
