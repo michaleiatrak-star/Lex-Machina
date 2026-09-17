@@ -342,6 +342,12 @@ export class LocalModelRuntime {
     if (!model) {
       throw new Error("LOCAL_MODEL_UNKNOWN");
     }
+    if (
+      path.basename(model.filename) !== model.filename ||
+      model.filename.includes("..")
+    ) {
+      throw new Error("LOCAL_MODEL_FILENAME_INVALID");
+    }
 
     await this.stop();
     const target = path.join(
@@ -402,51 +408,6 @@ export class LocalModelRuntime {
     } finally {
       this.startup = null;
     }
-  }
-
-  async remove(modelId: string): Promise<{
-    modelId: string;
-    removed: boolean;
-    configurationCleared: boolean;
-  }> {
-    const canonical = normalizeModelId(modelId);
-    const spec = this.modelSpec(canonical);
-    if (!spec) {
-      throw new Error("LOCAL_MODEL_UNKNOWN");
-    }
-    if (
-      path.basename(spec.filename) !== spec.filename ||
-      spec.filename.includes("..")
-    ) {
-      throw new Error("LOCAL_MODEL_FILENAME_INVALID");
-    }
-
-    await this.stop();
-
-    const modelPath = path.join(
-      this.rootDir,
-      "models",
-      spec.filename
-    );
-    const removed = fs.existsSync(modelPath);
-    fs.rmSync(modelPath, { force: true });
-
-    const config = this.readConfig();
-    const configurationCleared = Boolean(
-      config &&
-      normalizeModelId(config.model.id) === canonical
-    );
-    if (configurationCleared) {
-      fs.rmSync(this.configPath(), {
-        force: true
-      });
-    }
-
-    return {
-      modelId: canonical,
-      removed,
-      configurationCleared
-    };
   }
 
   async stop(): Promise<void> {
