@@ -52,7 +52,8 @@ foreach ($file in @(
   "prefetch-release-models.py",
   "verify-python-package-set.py",
   "generate-component-lock.ps1",
-  "windows-payload-selftest.ps1"
+  "windows-payload-selftest.ps1",
+  "windows-payload-python-selftest.py"
 )) {
   Copy-Item (Join-Path $installer $file) (Join-Path $bootstrap $file)
 }
@@ -76,7 +77,8 @@ foreach ($required in @(
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
   "bootstrap\verify-python-package-set.py",
-  "bootstrap\windows-payload-selftest.ps1"
+  "bootstrap\windows-payload-selftest.ps1",
+  "bootstrap\windows-payload-python-selftest.py"
 )) {
   if (-not (Test-Path -LiteralPath (Join-Path $payload $required) -PathType Leaf)) {
     throw "ONLINE_PAYLOAD_REQUIRED_FILE_MISSING:$required"
