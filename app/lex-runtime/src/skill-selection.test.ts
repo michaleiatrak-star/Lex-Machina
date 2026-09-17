@@ -77,6 +77,11 @@ function registryWithSkills(): LexSkillRegistry {
       type: "executive-pisma"
     },
     {
+      name: "pisma-proste-v2",
+      description: "wezwanie do zapłaty wgląd uzasadnienie sprzeciw klauzula",
+      type: "executive-pisma"
+    },
+    {
       name: "przewodnik-prawny-v2",
       description: "ogólna analiza prawna i dobór dalszych działań",
       type: "executive-guide"
@@ -190,6 +195,46 @@ describe("skill selection", () => {
     expect(selected.executionSkills).toContain("analizator-umow-v1");
     expect(selected.domainSkills).toContain("dr-03-prawo-procesowe");
     expect(selected.executionSkills.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("routes an explicit simple-letter request before semantic scoring", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj wezwanie do zapłaty.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-proste-v2");
+  });
+
+  it("keeps process pleading priority when the query also mentions a simple pre-litigation letter", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj pozew po bezskutecznym wezwaniu do zapłaty.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-procesowe-v3");
+    expect(selected.executionSkills).not.toContain("pisma-proste-v2");
+  });
+
+  it("normalizes Polish diacritics for explicit process routing", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Trzeba przygotować zażalenie na postanowienie.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-procesowe-v3");
   });
 
   it("uses the general legal guide when automatic mode has no semantic match", () => {
