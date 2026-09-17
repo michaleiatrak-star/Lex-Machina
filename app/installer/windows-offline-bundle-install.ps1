@@ -8,6 +8,12 @@ $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $bundle = (Resolve-Path -LiteralPath $BundlePath).Path
 $receiptPath = Join-Path $runtime "offline-runtime.json"
 
+function Test-IsAdministrator {
+  $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = [Security.Principal.WindowsPrincipal]::new($identity)
+  return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
 if (-not (Test-Path -LiteralPath $receiptPath -PathType Leaf)) {
   throw "OFFLINE_BUNDLE_RECEIPT_MISSING"
 }
@@ -32,6 +38,7 @@ if ($actualHash -ne $receipt.sha256.ToLowerInvariant()) {
 
 $stage = Join-Path $env:TEMP ("LexMachinaOfflineRuntime-" + [Guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $stage | Out-Null
+$vcFirewallRule = $null
 
 try {
   Write-Host "Extracting verified offline runtime bundle"
@@ -94,6 +101,12 @@ try {
     $vcInstalled = $false
   }
 
+  $forceVcInstall = $env:LEX_FORCE_VC_RUNTIME_INSTALL -eq "1"
+  if ($forceVcInstall) {
+    Write-Host "Forcing bundled Visual C++ runtime fallback for acceptance coverage"
+    $vcInstalled = $false
+  }
+
   if (-not $vcInstalled) {
     $vcInstaller = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
     if (-not (Test-Path -LiteralPath $vcInstaller -PathType Leaf)) {
@@ -104,10 +117,30 @@ try {
       throw "OFFLINE_BUNDLE_VC_RUNTIME_HASH_MISMATCH"
     }
 
+    if ($env:LEX_ACCEPTANCE_BLOCK_NETWORK -eq "1") {
+      if (-not (Test-IsAdministrator)) {
+        throw "OFFLINE_BUNDLE_VC_FIREWALL_REQUIRES_ELEVATION"
+      }
+      $vcFirewallRule = "LexMachina-Acceptance-vc-redist-$([Guid]::NewGuid().ToString('N'))"
+      New-NetFirewallRule `
+        -DisplayName $vcFirewallRule `
+        -Direction Outbound `
+        -Action Block `
+        -Program $vcInstaller `
+        -Profile Any | Out-Null
+      Write-Host "Acceptance firewall: outbound blocked for bundled VC++ installer"
+    }
+
     Write-Host "Installing verified bundled Visual C++ runtime"
-    $vcProcess = Start-Process -FilePath $vcInstaller -ArgumentList @(
-      "/install", "/quiet", "/norestart"
-    ) -Verb RunAs -PassThru
+    $startArgs = @{
+      FilePath = $vcInstaller
+      ArgumentList = @("/install", "/quiet", "/norestart")
+      PassThru = $true
+    }
+    if (-not (Test-IsAdministrator)) {
+      $startArgs.Verb = "RunAs"
+    }
+    $vcProcess = Start-Process @startArgs
     if (-not $vcProcess.WaitForExit(600000)) {
       Stop-Process -Id $vcProcess.Id -Force -ErrorAction SilentlyContinue
       throw "OFFLINE_BUNDLE_VC_RUNTIME_TIMEOUT"
@@ -116,6 +149,7 @@ try {
     if ($vcProcess.ExitCode -notin @(0, 1638, 3010)) {
       throw "OFFLINE_BUNDLE_VC_RUNTIME_FAILED:$($vcProcess.ExitCode)"
     }
+    Write-Host "Bundled Visual C++ runtime fallback exercised; exit=$($vcProcess.ExitCode)"
   }
 
   $selfTest = Join-Path $runtime "bootstrap\windows-payload-selftest.ps1"
@@ -129,5 +163,8 @@ try {
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
 } finally {
+  if ($vcFirewallRule) {
+    Remove-NetFirewallRule -DisplayName $vcFirewallRule -ErrorAction SilentlyContinue
+  }
   Remove-Item -LiteralPath $stage -Recurse -Force -ErrorAction SilentlyContinue
 }
