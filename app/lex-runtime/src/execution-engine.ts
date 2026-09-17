@@ -65,6 +65,47 @@ function combineSkillPrompt(
     .join("\n\n---\n\n");
 }
 
+const EXTRA_SKILL_MARKER =
+  /^\[LEX_EXTRA_SKILLS:([a-z0-9,-]{1,640})\]\r?\n/;
+
+function extractRequestedExtraSkills(
+  query: string
+): {
+  query: string;
+  skills: string[];
+} {
+  const match =
+    query.match(
+      EXTRA_SKILL_MARKER
+    );
+  if (!match) {
+    return {
+      query,
+      skills: []
+    };
+  }
+
+  const raw = match[1] ?? "";
+  const skills = [
+    ...new Set(
+      raw
+        .split(",")
+        .map((item) => item.trim())
+        .filter((item) =>
+          /^[a-z0-9-]{2,80}$/.test(item)
+        )
+    )
+  ].slice(0, 8);
+
+  return {
+    query:
+      query.slice(
+        match[0].length
+      ),
+    skills
+  };
+}
+
 export class LexExecutionEngine {
   constructor(
     private readonly registry: LexSkillRegistry,
@@ -98,6 +139,11 @@ export class LexExecutionEngine {
         ...(detail ? { detail } : {})
       });
     };
+
+    const routedQuery =
+      extractRequestedExtraSkills(
+        args.query
+      );
 
     const session = new LegalSession(this.registry);
     const bootstrap = session.initializeLegalQuery();
@@ -198,11 +244,50 @@ export class LexExecutionEngine {
       );
     }
 
+    const extraSkills =
+      routedQuery.skills.filter(
+        (skill) =>
+          ![
+            "prawny-router-v3",
+            "prawo-polskie-v2",
+            "shared",
+            args.route.primarySkill
+          ].includes(skill)
+      );
+
+    for (const skillName of extraSkills) {
+      if (!this.registry.get(skillName)) {
+        emit(
+          "skill_read",
+          skillName,
+          "BLOCKED",
+          "EXTRA_SKILL_NOT_FOUND"
+        );
+        throw new LexExecutionError(
+          "Requested additional skill does not exist.",
+          skillName,
+          [...events]
+        );
+      }
+      emit(
+        "skill_read",
+        skillName,
+        "OK",
+        "CHAT_SELECTED_EXTRA_SKILL"
+      );
+    }
+
     emit(
       "route",
       args.route.primarySkill,
       "OK",
-      `mode=${args.route.mode};jurisdiction=PL`
+      [
+        `mode=${args.route.mode}`,
+        "jurisdiction=PL",
+        extraSkills.length > 0
+          ? `extra=${extraSkills.join(",")}`
+          : "extra=none"
+      ].join(";")
     );
     emit(
       "skill_read",
@@ -215,7 +300,8 @@ export class LexExecutionEngine {
       [
         "prawny-router-v3",
         "prawo-polskie-v2",
-        args.route.primarySkill
+        args.route.primarySkill,
+        ...extraSkills
       ]
     );
 
@@ -272,7 +358,7 @@ export class LexExecutionEngine {
             : []),
           {
             role: "user",
-            content: args.query
+            content: routedQuery.query
           }
         ],
         ...(args.tools?.length
