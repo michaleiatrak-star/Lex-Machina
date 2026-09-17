@@ -127,17 +127,30 @@ Still required for full gates:
 
 ## G39C — effective extended context orchestrator
 
-Status: **OPEN**
+Status: **PARTIAL / VERIFYING**
 
-Required:
+Implemented:
 
-- deterministic chunk/source units;
-- retrieval and token budgeting;
-- summary backlinks;
-- re-fetch original evidence before final citation;
-- UI distinction: native context / active runtime context / effective retrieved context.
+- deterministic context budget module with explicit per-session report;
+- local model sessions read the actually configured context window from the shared `LocalModelRuntime` instance without querying a cloud catalog;
+- selected 64k–200k runtime context is therefore the budget input rather than a hard-coded context size;
+- conservative reserves are kept for system/query content, output generation and safety margin;
+- manually selected evidence has priority and is never silently truncated: an over-budget manual selection fails closed;
+- case/firm retrieval fills only the remaining budget and is cut only at complete chunk boundaries;
+- legacy sessions whose model context is unknown retain the previous 160k-character hard cap;
+- existing deterministic local knowledge retrieval remains the source of case/firm knowledge chunks;
+- existing `LEXDOC` citation markers remain validated against real document/chunk identifiers and exact quote locations;
+- session audit/response exposes context strategy, model window, document budget, estimated usage and selected/omitted chunk/document counts.
 
-A 200k llama.cpp context is not a substitute for this gate.
+Still required before G39C PASS:
+
+- summary backlinks for context compression;
+- re-fetch the encrypted original evidence immediately before final citation acceptance;
+- expose native context / active runtime context / effective retrieved context distinctly in the UI;
+- quality/regression benchmarks across 64k / 96k / 128k / 160k / 200k;
+- token estimation calibration against the bundled tokenizer/runtime rather than the current conservative character heuristic.
+
+A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
 ## G39H/I — deterministic execution engine and skill migration
 
@@ -174,7 +187,10 @@ Implemented multi-turn process-pleading state slice:
 - the runtime injects the exact active stage/checkpoint into the provider system context; it is not accepted from user request JSON;
 - after a successful provider turn the runtime may mark only the exact permitted checkpoint as `PENDING_CONFIRMATION`;
 - a dedicated pure execution gate is unit-tested for missing state, missing start acceptance, pending confirmation and stale revision;
-- the desktop UI has deterministic controls for initialization, start acceptance, current checkpoint confirmation and continuation; it has no control that can directly mark a checkpoint as completed.
+- the desktop UI has deterministic controls for initialization, start acceptance, current checkpoint confirmation and continuation; it has no control that can directly mark a checkpoint as completed;
+- conditional N/A decisions require an explicit bounded reason and valid optimistic-concurrency revision;
+- workflow reset requires a dedicated confirmation token plus matching revision; stale reset/N/A requests fail with conflict;
+- no public endpoint exists for `checkpoint-ready`; only the verified runtime execution gate can move semantic work into pending confirmation.
 
 Still required before G39H/I PASS:
 
