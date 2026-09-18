@@ -17,6 +17,7 @@ export type FinalizationFinding = {
     | "UNVERIFIED_MARKED"
     | "MISSING_LEDGER_RECORD"
     | "MISSING_VERIFICATION_MARKER"
+    | "VERIFICATION_MARKER_MISMATCH"
     | "UNVERIFIED_NOT_MARKED";
   record?: VerificationRecord;
 };
@@ -61,6 +62,29 @@ const CASE_QUOTE_MARKER =
   /✅\s*\[CASE-QUOTE:([a-f0-9]{20})\]/giu;
 const CASE_SUPPORT_MARKER =
   /🔗\s*\[CASE-SUPPORT:([a-f0-9]{20})\]/giu;
+
+function expectedVerificationMarker(
+  record: VerificationRecord
+): string | null {
+  if (
+    record.status !== "VERIFIED" ||
+    !record.sourceUrl?.trim() ||
+    !record.fetchedAt?.trim()
+  ) {
+    return null;
+  }
+
+  return [
+    "✅ [VER: ",
+    record.sourceUrl,
+    ", ",
+    record.fetchedAt.slice(0, 10),
+    record.asOf
+      ? `, STAN NA ${record.asOf}`
+      : "",
+    "]"
+  ].join("");
+}
 
 const ARTICLE_PATTERN =
   /\bart\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?:\s*§\s*\d+[a-zA-Z]*)?(?:\s+(?:KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP))?/giu;
@@ -132,10 +156,27 @@ export class FinalizationGate {
       }
 
       if (record.status === "VERIFIED") {
+        const expectedMarker =
+          expectedVerificationMarker(
+            record
+          );
+
         if (!VERIFIED_MARKER.test(reference.lineText)) {
           findings.push({
             reference,
             status: "MISSING_VERIFICATION_MARKER",
+            record
+          });
+        } else if (
+          !expectedMarker ||
+          !reference.lineText.includes(
+            expectedMarker
+          )
+        ) {
+          findings.push({
+            reference,
+            status:
+              "VERIFICATION_MARKER_MISMATCH",
             record
           });
         } else {
@@ -360,6 +401,7 @@ export class FinalizationGate {
       [
         "MISSING_LEDGER_RECORD",
         "MISSING_VERIFICATION_MARKER",
+        "VERIFICATION_MARKER_MISMATCH",
         "UNVERIFIED_NOT_MARKED"
       ].includes(finding.status)
     ) ||
