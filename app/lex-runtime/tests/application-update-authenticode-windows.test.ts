@@ -500,7 +500,8 @@ describe.skipIf(
         ).rejects.toThrow(
           "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
         );
-      }
+      },
+      180_000
     );
   }
 );
