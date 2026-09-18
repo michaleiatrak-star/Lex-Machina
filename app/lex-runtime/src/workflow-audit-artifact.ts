@@ -183,6 +183,23 @@ export function buildWorkflowAuditArtifact(
     );
   }
 
+  if (
+    internal.auditEvents.length !==
+      result.audit.eventCount ||
+    internal.auditEvents.at(-1)
+      ?.type !==
+      "session_closed" ||
+    internal.auditEvents.some(
+      (event) =>
+        event.status ===
+          "BLOCKED"
+    )
+  ) {
+    throw new Error(
+      "WORKFLOW_AUDIT_EVENTS_INCONSISTENT"
+    );
+  }
+
   const events =
     internal.auditEvents.map(
       (event, index) => {
@@ -427,6 +444,15 @@ export function parseWorkflowAuditArtifact(
       ?.result !== "PASS" ||
     payload.audit
       .closed !== true ||
+    typeof payload.audit
+      .eventCount !==
+      "number" ||
+    !Number.isSafeInteger(
+      payload.audit
+        .eventCount
+    ) ||
+    payload.audit
+      .eventCount < 1 ||
     !Array.isArray(
       payload.events
     ) ||
@@ -435,6 +461,23 @@ export function parseWorkflowAuditArtifact(
       MAX_EVENTS ||
     !Array.isArray(
       payload.citations
+    )
+  ) {
+    throw new Error(
+      "WORKFLOW_AUDIT_ARTIFACT_INVALID"
+    );
+  }
+
+  if (
+    payload.events.length !==
+      payload.audit.eventCount ||
+    payload.events.at(-1)
+      ?.type !==
+      "session_closed" ||
+    payload.events.some(
+      (event) =>
+        event.status ===
+          "BLOCKED"
     )
   ) {
     throw new Error(
