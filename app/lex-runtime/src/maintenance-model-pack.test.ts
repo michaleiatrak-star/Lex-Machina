@@ -133,6 +133,7 @@ function verifiedIndex(args?: {
   maxAppVersion?: string;
   modelId?: string;
   sha256?: string;
+  packVersion?: string;
 }): VerifiedModelPackIndex {
   return {
     signerKeyId:
@@ -143,7 +144,9 @@ function verifiedIndex(args?: {
       schemaVersion: 1,
       kind:
         "LEX_MACHINA_MODEL_PACK_INDEX",
-      version: "0.1.4",
+      version:
+        args?.packVersion ??
+        "0.1.4",
       compatibility: {
         minAppVersion:
           args?.minAppVersion ??
@@ -363,6 +366,76 @@ describe(
           status.blockedReason
         ).toBe(
           "APP_INCOMPATIBLE"
+        );
+      }
+    );
+
+    it(
+      "blocks replay of a signed model-pack older than the installed signed receipt",
+      async () => {
+        const maintenance =
+          service({
+            verified:
+              verifiedIndex({
+                packVersion:
+                  "0.1.4",
+                sha256:
+                  "b".repeat(64)
+              })
+          });
+
+        const status =
+          await maintenance
+            .modelPackStatus({
+              modelId:
+                "local/bielik-11b-v3-q4km",
+              sha256:
+                "a".repeat(64),
+              packVersion:
+                "0.1.5"
+            });
+
+        expect(status.status)
+          .toBe("BLOCKED");
+        expect(
+          status.blockedReason
+        ).toBe(
+          "PACK_VERSION_ROLLBACK"
+        );
+      }
+    );
+
+    it(
+      "blocks a different model hash under the same signed pack version",
+      async () => {
+        const maintenance =
+          service({
+            verified:
+              verifiedIndex({
+                packVersion:
+                  "0.1.4",
+                sha256:
+                  "b".repeat(64)
+              })
+          });
+
+        const status =
+          await maintenance
+            .modelPackStatus({
+              modelId:
+                "local/bielik-11b-v3-q4km",
+              sha256:
+                "a".repeat(64),
+              packVersion:
+                "0.1.4"
+            });
+
+        expect(status.status)
+          .toBe("BLOCKED");
+        expect(
+          status.blockedReason
+        ).toBe(
+          "PACK_VERSION_HASH_CONFLICT"
         );
       }
     );
