@@ -539,6 +539,49 @@ export class LexExecutionEngine {
     }
 
     if (
+      args.guideContext &&
+      workflowPlan.id !==
+        "LEGAL_GUIDE_V1"
+    ) {
+      emit(
+        "gate",
+        "G39I_GUIDE_STATE_BINDING",
+        "BLOCKED",
+        "GUIDE_STATE_ON_NON_GUIDE_WORKFLOW"
+      );
+      throw new LexExecutionError(
+        "Legal-guide state was bound to a non-guide workflow.",
+        "G39I_GUIDE_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      workflowPlan.id ===
+        "LEGAL_GUIDE_V1" &&
+      !args.guideContext
+    ) {
+      emit(
+        "gate",
+        "G39I_GUIDE_STATE_BINDING",
+        "BLOCKED",
+        "GUIDE_STATE_CONTEXT_MISSING"
+      );
+      throw new LexExecutionError(
+        "Persisted legal-guide session context is required.",
+        "G39I_GUIDE_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (args.guideContext) {
+      emit(
+        "gate",
+        "G39I_GUIDE_STATE_BINDING",
+        "OK",
+        `step=${args.guideContext.step};mode=${args.guideContext.interactionMode};revision=${args.guideContext.revision};raw=${args.guideContext.rawAnalysis}`
+      );
+    }
+
+    if (
       args.processWorkflowContext &&
       workflowPlan.id !==
         "PROCESS_PLEADING_V1"
