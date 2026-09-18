@@ -189,6 +189,17 @@
   font-weight: 700;
 }
 
+.chat-model-select-row {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.6fr) minmax(140px, 1.4fr);
+  gap: 6px;
+}
+
+.chat-model-select-row select:first-child {
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .chat-model-lanes small,
 .chat-aux-model-chip small {
   color: #7a8781;
