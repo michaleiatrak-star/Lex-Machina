@@ -1,9 +1,0 @@
-{
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "main-capability",
-  "description": "Minimal capability for the Lex Machina main window.",
-  "windows": ["main"],
-  "permissions": [
-    "core:default"
-  ]
-}
