@@ -2,6 +2,15 @@ name: Lex Windows Online Installer
 
 on:
   workflow_call:
+  push:
+    branches:
+      - work/g39-installer-repair-2026-09-18
+    paths:
+      - "app/installer/**"
+      - "app/lex-desktop/**"
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - ".github/workflows/lex-installer.yml"
   pull_request:
     paths:
       - "app/installer/**"
