@@ -127,7 +127,11 @@ export type SkillOverlayStartupResult = {
 };
 
 export function validateSkillOverlayRoot(
-  root: string
+  root: string,
+  options?: {
+    requireVersionMarker?: boolean;
+    fallbackVersion?: string;
+  }
 ): {
   healthy: boolean;
   version: string | null;
@@ -146,35 +150,62 @@ export function validateSkillOverlayRoot(
   }
 
   let version: string | null = null;
-  try {
-    const marker = JSON.parse(
-      fs.readFileSync(
-        markerPath(resolved),
-        "utf8"
-      )
-    ) as {
-      version?: unknown;
-    };
-    if (
-      typeof marker.version !==
-        "string" ||
-      !/^\d+\.\d+\.\d+$/.test(
-        marker.version
-      )
-    ) {
+  const versionMarker =
+    markerPath(resolved);
+  if (
+    fs.existsSync(
+      versionMarker
+    )
+  ) {
+    try {
+      const marker = JSON.parse(
+        fs.readFileSync(
+          versionMarker,
+          "utf8"
+        )
+      ) as {
+        version?: unknown;
+      };
+      if (
+        typeof marker.version !==
+          "string" ||
+        !/^\d+\.\d+\.\d+$/.test(
+          marker.version
+        )
+      ) {
+        return {
+          healthy: false,
+          version: null,
+          issues: [
+            "VERSION_MARKER_INVALID"
+          ]
+        };
+      }
+      version = marker.version;
+    } catch {
       return {
         healthy: false,
         version: null,
-        issues: ["VERSION_MARKER_INVALID"]
+        issues: [
+          "VERSION_MARKER_INVALID"
+        ]
       };
     }
-    version = marker.version;
-  } catch {
+  } else if (
+    options?.requireVersionMarker ??
+    true
+  ) {
     return {
       healthy: false,
       version: null,
-      issues: ["VERSION_MARKER_MISSING_OR_INVALID"]
+      issues: [
+        "VERSION_MARKER_MISSING"
+      ]
     };
+  } else {
+    version =
+      options?.fallbackVersion ??
+      null;
   }
 
   const registry =
@@ -305,7 +336,13 @@ export function recoverSkillOverlayForStartup(
     const bundledHealth =
       bundledRoot
         ? validateSkillOverlayRoot(
-            bundledRoot
+            bundledRoot,
+            {
+              requireVersionMarker:
+                false,
+              fallbackVersion:
+                CURRENT_APPLICATION_VERSION
+            }
           )
         : {
             healthy: false,
