@@ -187,7 +187,9 @@ jobs:
           Remove-Item -LiteralPath $verifyDir -Recurse -Force -ErrorAction SilentlyContinue
           New-Item -ItemType Directory -Force -Path $verifyDir | Out-Null
           try {
-            & tar.exe -xf $bundle -C $verifyDir
+            ./app/installer/extract-offline-zip.ps1 `
+              -ArchivePath $bundle `
+              -DestinationPath $verifyDir
             if ($LASTEXITCODE -ne 0) {
               throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_EXTRACT_FAILED:$LASTEXITCODE"
             }
