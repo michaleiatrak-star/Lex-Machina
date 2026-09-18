@@ -135,6 +135,13 @@ function verifiedIndex(args?: {
   sha256?: string;
   packVersion?: string;
 }): VerifiedModelPackIndex {
+  const modelId =
+    args?.modelId ??
+    "local/bielik-11b-v3-q4km";
+  const mistral =
+    modelId.startsWith(
+      "local/mistral-"
+    );
   return {
     signerKeyId:
       "model-release-test",
@@ -161,12 +168,19 @@ function verifiedIndex(args?: {
       models: [
         {
           id:
-            args?.modelId ??
-            "local/bielik-11b-v3-q4km",
+            modelId,
+          family:
+            mistral
+              ? "MISTRAL"
+              : "BIELIK",
           displayName:
-            "Bielik 11B v3",
+            mistral
+              ? "Mistral NeMo 12B"
+              : "Bielik 11B v3",
           filename:
-            "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
+            mistral
+              ? "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"
+              : "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
           url:
             "https://example.invalid/Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
           sha256:
@@ -174,8 +188,14 @@ function verifiedIndex(args?: {
             "b".repeat(64),
           quantization:
             "Q4_K_M",
+          bytes:
+            mistral
+              ? 7_000_000_000
+              : 6_000_000_000,
           nativeContext:
-            32_768,
+            mistral
+              ? 131_072
+              : 32_768,
           minimumContext:
             64_000,
           maximumRuntimeContext:
@@ -305,6 +325,47 @@ describe(
         ).toBe(
           "model-release-test"
         );
+      }
+    );
+
+    it(
+      "reports the Mistral update channel and signed target metadata",
+      async () => {
+        const modelId =
+          "local/mistral-nemo-12b-q4km";
+        const maintenance =
+          service({
+            verified:
+              verifiedIndex({
+                modelId,
+                sha256:
+                  "d".repeat(64)
+              })
+          });
+
+        const status =
+          await maintenance
+            .modelPackStatus({
+              modelId,
+              sha256:
+                "a".repeat(64)
+            });
+
+        expect(status)
+          .toMatchObject({
+            status: "AVAILABLE",
+            modelId,
+            modelFamily:
+              "MISTRAL",
+            targetModelId:
+              modelId,
+            targetDisplayName:
+              "Mistral NeMo 12B",
+            targetBytes:
+              7_000_000_000,
+            targetSha256:
+              "d".repeat(64)
+          });
       }
     );
 
