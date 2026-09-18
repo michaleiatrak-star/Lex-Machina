@@ -29,6 +29,11 @@ import {
   validateContractAnalysisState,
   type ContractAnalysisState
 } from "./contract-analysis-state.js";
+import {
+  validateOrderedCaseWorkflowState,
+  type OrderedCaseWorkflowId,
+  type OrderedCaseWorkflowState
+} from "./ordered-case-workflow-state.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -75,6 +80,12 @@ export type CaseWorkspaceIndex = {
     courtAnalysis?: CourtAnalysisState;
     chronology?: ChronologyState;
     contractAnalysis?: ContractAnalysisState;
+    orderedCase?: Partial<
+      Record<
+        OrderedCaseWorkflowId,
+        OrderedCaseWorkflowState
+      >
+    >;
   };
 };
 
@@ -319,6 +330,59 @@ export class EncryptedCaseWorkspaceStore {
           );
         if (workflow.caseId !== caseId) {
           throw new Error("WORKSPACE_INDEX_INVALID");
+        }
+      }
+      if (index.workflows.orderedCase) {
+        if (
+          typeof index.workflows
+            .orderedCase !== "object" ||
+          Array.isArray(
+            index.workflows
+              .orderedCase
+          )
+        ) {
+          throw new Error(
+            "WORKSPACE_INDEX_INVALID"
+          );
+        }
+        for (
+          const [
+            workflowId,
+            rawState
+          ]
+          of Object.entries(
+            index.workflows
+              .orderedCase
+          )
+        ) {
+          if (!rawState) continue;
+          if (
+            ![
+              "EVIDENCE_ANALYSIS_V1",
+              "WITNESS_QUESTIONING_V1"
+            ].includes(
+              workflowId
+            )
+          ) {
+            throw new Error(
+              "WORKSPACE_INDEX_INVALID"
+            );
+          }
+          const workflow =
+            validateOrderedCaseWorkflowState(
+              rawState as
+                OrderedCaseWorkflowState
+            );
+          if (
+            workflow.caseId !==
+              caseId ||
+            workflow.workflowId !==
+              workflowId
+          ) {
+            throw new Error(
+              "WORKSPACE_INDEX_INVALID"
+            );
+          }
         }
       }
     }
@@ -1014,6 +1078,139 @@ export class EncryptedCaseWorkspaceStore {
 
     delete workflows
       .contractAnalysis;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return true;
+  }
+
+  async getOrderedCaseWorkflowState(args: {
+    caseId: string;
+    workflowId:
+      OrderedCaseWorkflowId;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<OrderedCaseWorkflowState | null> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const state =
+      index.workflows
+        ?.orderedCase
+        ?.[args.workflowId];
+    return state
+      ? validateOrderedCaseWorkflowState(
+          state
+        )
+      : null;
+  }
+
+  async saveOrderedCaseWorkflowState(args: {
+    caseId: string;
+    workflowId:
+      OrderedCaseWorkflowId;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    state:
+      OrderedCaseWorkflowState;
+    expectedRevision?: number;
+  }): Promise<OrderedCaseWorkflowState> {
+    const state =
+      validateOrderedCaseWorkflowState(
+        args.state
+      );
+    if (
+      state.caseId !== args.caseId ||
+      state.workflowId !==
+        args.workflowId
+    ) {
+      throw new Error(
+        "ORDERED_WORKFLOW_CASE_OR_ID_MISMATCH"
+      );
+    }
+
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const current =
+      index.workflows
+        ?.orderedCase
+        ?.[args.workflowId];
+
+    if (
+      args.expectedRevision !==
+        undefined &&
+      (
+        !current ||
+        current.revision !==
+          args.expectedRevision
+      )
+    ) {
+      throw new Error(
+        "ORDERED_WORKFLOW_STATE_CONFLICT"
+      );
+    }
+
+    index.workflows ??= {};
+    index.workflows.orderedCase ??= {};
+    index.workflows
+      .orderedCase[
+        args.workflowId
+      ] = state;
+
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return validateOrderedCaseWorkflowState(
+      state
+    );
+  }
+
+  async clearOrderedCaseWorkflowState(args: {
+    caseId: string;
+    workflowId:
+      OrderedCaseWorkflowId;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    expectedRevision?: number;
+  }): Promise<boolean> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const workflows =
+      index.workflows
+        ?.orderedCase;
+    const current =
+      workflows?.[
+        args.workflowId
+      ];
+    if (!workflows || !current) {
+      return false;
+    }
+    if (
+      args.expectedRevision !==
+        undefined &&
+      current.revision !==
+        args.expectedRevision
+    ) {
+      throw new Error(
+        "ORDERED_WORKFLOW_STATE_CONFLICT"
+      );
+    }
+
+    delete workflows[
+      args.workflowId
+    ];
     await this.write(
       index,
       args.caseDataKey,
