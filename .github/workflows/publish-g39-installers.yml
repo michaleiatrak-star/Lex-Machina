@@ -161,6 +161,7 @@ jobs:
           runs="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$source_sha&status=success&per_page=100")"
           for workflow in \
             ".github/workflows/lex-runtime.yml" \
+            ".github/workflows/f138-structural-audit.yml" \
             ".github/workflows/g39-installer-state.yml" \
             ".github/workflows/lex-installer.yml" \
             ".github/workflows/offline-windows-installer.yml"; do
