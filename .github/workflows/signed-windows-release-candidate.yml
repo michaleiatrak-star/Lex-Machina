@@ -92,6 +92,13 @@ jobs:
           }
           Write-Host "Signing receipts: $($receipts.Count)"
 
+      - name: Verify canonical Windows branding on signed artifacts
+        shell: pwsh
+        run: |
+          ./app/installer/windows-branding-selftest.ps1 \`
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" \`
+            -InstallerPath "${{ steps.locate.outputs.installer }}"
+
       - name: Provision VC++ prerequisite for unattended signed acceptance
         shell: pwsh
         run: |
