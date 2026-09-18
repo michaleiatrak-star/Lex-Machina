@@ -154,7 +154,7 @@ export class FinalizationGate {
             VERIFIED_MARKER_TOKEN
           ) ?? [];
       const allowedLineMarkers =
-        new Set(
+        new Set<string>(
           references
             .filter(
               (candidate) =>
