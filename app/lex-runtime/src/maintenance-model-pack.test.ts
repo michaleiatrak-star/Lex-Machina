@@ -212,6 +212,8 @@ function service(args?: {
   trustReady?: boolean;
   verified?:
     VerifiedModelPackIndex;
+  appReleaseStatus?:
+    UpdateDiscoveryResult["status"];
 }) {
   const indexBytes =
     new TextEncoder().encode(
@@ -226,6 +228,18 @@ function service(args?: {
       indexBytes,
       signatureBytes
     );
+  if (
+    args?.appReleaseStatus
+  ) {
+    result.status =
+      args.appReleaseStatus;
+    if (
+      args.appReleaseStatus ===
+        "NO_RELEASE"
+    ) {
+      delete result.latestVersion;
+    }
+  }
   const payloads =
     new Map<
       string,
@@ -289,6 +303,46 @@ describe(
         expect(
           status.verificationReady
         ).toBe(false);
+      }
+    );
+
+    it(
+      "uses a dedicated model-pack release even when there is no application release",
+      async () => {
+        const maintenance =
+          service({
+            appReleaseStatus:
+              "NO_RELEASE",
+            verified:
+              verifiedIndex({
+                sha256:
+                  "b".repeat(64),
+                packVersion:
+                  "0.1.7"
+              })
+          });
+
+        const status =
+          await maintenance
+            .modelPackStatus({
+              modelId:
+                "local/bielik-11b-v3-q4km",
+              sha256:
+                "a".repeat(64),
+              packVersion:
+                "0.1.6"
+            });
+
+        expect(status.status)
+          .toBe("AVAILABLE");
+        expect(
+          status.latestPackVersion
+        ).toBe("0.1.7");
+        expect(
+          status.targetSha256
+        ).toBe(
+          "b".repeat(64)
+        );
       }
     );
 
