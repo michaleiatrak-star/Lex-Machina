@@ -9,7 +9,7 @@ PRAWO-HARDGATE.md i shared/tools/ — ten protokół nie jest samodzielnym skill
 wywoływanym intencją użytkownika, tylko modułem ładowanym przez router, dokładnie
 jak PRAWO-HARDGATE.md)
 wywoływane przez: prawny-router-v3 (required_modules), potencjalnie każdy DR-skill
-narzędzia: shared/tools/test_mcp_protocol.py, shared/tools/connector_health_check.py
+narzędzia (kontrakt dla portalu — kod NIE jest dystrybuowany w tym pakiecie): shared/tools/test_mcp_protocol.py, shared/tools/connector_health_check.py
 
 ---
 

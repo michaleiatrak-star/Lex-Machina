@@ -146,8 +146,13 @@ kompletności.
 
 ## Serwery referencyjne (2026-07-13g/i/k) — 7 z 9 zbadanych priorytetowych źródeł
 
-`shared/tools/mcp-servers/` zawiera **realne, przetestowane protokołem MCP**
-serwery dla 7 źródeł o potwierdzonym publicznym API. Napisane po tym jak: (a)
+`shared/tools/mcp-servers/` zawierało **realne, przetestowane protokołem MCP**
+serwery dla 7 źródeł o potwierdzonym publicznym API. ⛔ Kod ten NIE jest
+dystrybuowany w tym pakiecie — został skompaktowany, a w repozytorium pozostał
+po nim wyłącznie inwentarz ścieżek i SHA-256 w `shared/PORTABILITY-MANIFEST.md`.
+Poniższa tabela jest zapisem tego, co zbudowano i przetestowano, nie wskazaniem
+plików do uruchomienia. Stan dostępu maszynowego do samych źródeł (mierzony, z
+datą pomiaru) trzyma `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`. Napisane po tym jak: (a)
 żaden gotowy projekt OSS nie dał się zainstalować i przetestować z tego
 środowiska, (b) research 2026-07-13j/k potwierdził, które źródła mają
 publiczne API. To NIE zastępuje rekomendacji "integruj gotowe OSS, nie buduj
@@ -163,6 +168,6 @@ od zera" dla produkcji.
 | `ceidg-example` | CEIDG (jednoosobowe działalności) | **Tak** | **Najniższa** — dokumentacja sugeruje API asynchroniczne |
 | `eurlex-example` | EUR-Lex/CELLAR (prawo UE) | Nie | Niska co do zapytania SPARQL (uproszczone) |
 
-Każdy katalog ma własny README z pełnym statusem testów i ograniczeniami.
+Każdy katalog miał własny README z pełnym statusem testów i ograniczeniami (w skompaktowanym archiwum, poza repozytorium).
 Priorytety wdrożenia wg wpływu: **EUR-Lex** (32 odwołania w dr-*/, największy
 zwrot), **KRS** (wspiera PODMIOT-GATE routera), pozostałe wg potrzeb.

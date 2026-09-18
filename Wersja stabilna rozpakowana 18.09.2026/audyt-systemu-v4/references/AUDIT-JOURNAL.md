@@ -1,5 +1,19 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-18 — skrypty `shared/tools/` i przykłady MCP: gdzie naprawdę są
+
+**Wyzwalacz:** README repozytorium linkował do `shared/tools/mcp-servers/`, którego nie ma na dysku. Pytanie użytkownika: czy te skrypty nie zostały przeniesione do `audyt-systemu-v4/`.
+
+**Pomiar.** `find` po całym drzewie obu kanałów na ośmiu nazwach (`walidator_cytowan.py`, `extract_api_verification_log.py`, `export_gate.py`, `hash_chain_verify.py`, `append_event.py`, `router_event_parser.py`, `test_mcp_protocol.py`, `connector_health_check.py`) oraz na `mcp-servers*`: **0 trafień**. `git log --all --diff-filter=A` na tych samych wzorcach: **0 commitów** — pliki nie występują w żadnym punkcie historii repozytorium.
+
+**Wynik — hipoteza o przeniesieniu ODRZUCONA.** Skrypty nie zostały przeniesione do `audyt-systemu-v4/scripts/`; ten katalog ma własny, rozłączny zestaw 43 narzędzi audytu SILNIKA (`ci_check_shared.py`, `check_*.py`, `test_*.py`), zgodnie z rozdziałem opisanym w AUDYT-2026-07-12g. Kod bramki cytowań i przykładowe serwery MCP po prostu nigdy nie trafiły do repozytorium — istnieje wyłącznie ich dokumentacja.
+
+**Kontrola integralności.** `CHECKSUMS.sha256` w `shared` jest spójny (172 wpisy = 172 pliki, T21 PASS) i nie zawiera żadnego `.py` — sam pakiet nigdy nie twierdził, że kod ma. Rozjazd był wyłącznie w treści opisowej: `SKILL.md` pkt 7 i `PORTABILITY-MANIFEST.md` mówiły o archiwum „zapakowanym wewnętrznie", a `DEPENDENCY-GRAPH.md` dawał skryptom status ACTIVE.
+
+**Naprawa:** `shared` 3.78, `audyt-systemu-v4` 6.120. Odniesienia operacyjne oznaczone jako kontrakt dla implementacji po stronie portalu, bez usuwania samych specyfikacji: `SKILL.md` (pkt 6, 7, tabela `tools/`), `tools/README.md` (nota o zawartości pakietu), `DEPENDENCY-GRAPH.md` (ACTIVE → SPEC w pięciu wierszach + nota nad tabelą), `AUDIT-TRAIL-SPEC.md`, `MCP-INTEGRACJA.md`, `KONEKTORY-REKOMENDOWANE.md`, `PORTABILITY-MANIFEST.md`, `CHECKLIST-DEDUP.md`. Inwentarz dostępu maszynowego do źródeł wskazany jako `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` — tam też skierowany link z README repozytorium.
+
+**Zakres ograniczony świadomie:** wpisy historyczne w CHANGELOG-ach i w tym dzienniku pozostawiono bez zmian — opisują stan z dnia zdarzenia. Nie odtwarzano kodu: nie ma go w żadnym commicie, więc odtworzenie byłoby napisaniem nowego, nie przywróceniem.
+
 ## AUDYT-2026-09-14b — CBOSA retrieval/snapshot: host post-check i zakres treści
 
 **Wyzwalacz:** użytkownik wskazał praktyczną wartość snapshotów CBOSA przy dużym korpusie orzeczeń i polecił wprowadzić korekty, o ile pomiar to potwierdza.

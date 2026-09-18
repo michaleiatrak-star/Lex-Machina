@@ -1,5 +1,14 @@
 # shared/tools/ — narzędzia produkcyjne poza pipeline'em LLM
 
+> ⛔ **Co jest w repozytorium:** wyłącznie ten plik. Skrypty opisane niżej
+> (`walidator_cytowan.py`, `extract_api_verification_log.py`, `export_gate.py`,
+> `hash_chain_verify.py`, `append_event.py`, `router_event_parser.py`,
+> `test_mcp_protocol.py`, `connector_health_check.py`) oraz katalog
+> `mcp-servers/` nie są dystrybuowane ze skillem — ten README jest ich
+> kontraktem: opisuje wejście, wyjście, kody wyjścia i miejsce w pipelinie,
+> po stronie portalu. Wywołania w przykładach pokazują interfejs, nie ścieżki
+> istniejące w tym pakiecie.
+
 Ten katalog, w odróżnieniu od reszty `shared/` (markdown wczytywany przez
 `view()` w trakcie sesji modelu), zawiera kod uruchamiany **przez portal**,
 poza kontekstem rozmowy z modelem — jako bramka przed dopuszczeniem pisma
@@ -53,8 +62,9 @@ w `content[]` bloki `server_tool_use` (web_search/web_fetch) i
 `web_search_tool_result`/`web_fetch_tool_result` — to jest gotowy,
 ustrukturyzowany ślad tego, co faktycznie zweryfikowano w danej sesji.
 
-**Aktualizacja 2026-07-13d — kroki 1 i 2 poniżej są teraz zaimplementowane
-i przetestowane** (wcześniej ten README tylko je opisywał, bez kodu):
+**Aktualizacja 2026-07-13d — kroki 1 i 2 poniżej zostały zaimplementowane
+i przetestowane** (wcześniej ten README tylko je opisywał). Wyniki testów niżej
+dotyczą tamtej implementacji; w tym repozytorium kodu nie ma:
 
 1. ✅ **`extract_api_verification_log.py`** — buduje `sesja.json` automatycznie
    z surowej konwersacji API (bloki `server_tool_use`/`*_tool_result`), zamiast
@@ -124,4 +134,4 @@ w `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-12g.
 
 Dla nowych integracji preferuj `{"session_id":"...","events":[...]}`. Event zawiera `tool`, źródło, opcjonalny `query_context` i status. Claude/Anthropic legacy pozostaje obsługiwany; obsługiwane są też generyczne tool-call/result i ukończone wpisy Responses-style. Sam call bez wyniku nie jest weryfikacją.
 
-Twardy limit 200 plików wymaga kompaktowania wyłącznie technicznych przykładów MCP: 42 plików z dawnego `tools/mcp-servers/**` znajduje się byte-for-byte w `tools/mcp-servers/mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`). Rozpakuj archiwum przed uruchamianiem przykładowego serwera.
+Twardy limit 200 plików wymusił skompaktowanie wyłącznie technicznych przykładów MCP: 42 pliki z dawnego `tools/mcp-servers/**` zostały spakowane byte-for-byte do `mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`). ⛔ Archiwum nie jest dystrybuowane w tym pakiecie — pozostał po nim inwentarz ścieżek i sum w `shared/PORTABILITY-MANIFEST.md`. Stan dostępu maszynowego do samych źródeł (mierzony, z datą pomiaru): `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`, rekomendacje wdrożeniowe: `shared/KONEKTORY-REKOMENDOWANE.md`.

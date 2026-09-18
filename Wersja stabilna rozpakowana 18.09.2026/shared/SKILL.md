@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.77"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.78"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.77 (2026-09-16, F-189): ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Acce…
+  Wersja bieżąca: 3.78 (2026-09-18): tools/ i mcp-servers — kod nie jest dystrybuowany w pakiecie, opisy oznaczone jako kontrakt dla portalu.
+  Poprzednia: 3.77 (2026-09-16, F-189): ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Acce…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -66,8 +67,8 @@ changelog: |
 3. `web_search` / `web_fetch` oznaczają świeże wyszukanie lub odczyt źródła. Jeśli host ma inną nazwę narzędzia, użyj równoważnej funkcji. PRAWO-HARDGATE, hierarchia źródeł i statusy pozostają bez zmian.
 4. `/mnt/user-data/...` oznacza rzeczywiste pliki użytkownika dostępne w hoście; wymagany ponowny odczyt jest faktycznym odczytem źródła.
 5. `show_widget`, `present_files`, `create_file`, shell/Python i podobne operacje wykonuj równoważną natywną funkcją hosta, jeśli literalna nazwa nie istnieje. Nie pomijaj bramek jakości.
-6. `tools/` to kod integracyjny portalu. `extract_api_verification_log.py` przyjmuje neutralne `events` i zachowuje zgodność z Claude legacy, generycznymi tool-call oraz Responses-style.
-7. Ze względu na twardy limit 200 plików, 42 technicznych plików przykładowych serwerów MCP jest zachowanych bezstratnie w `tools/mcp-servers/mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`). Gdy potrzebujesz kodu przykładowego serwera, rozpakuj ten plik; moduły promptowe nie zależą od jego rozwinięcia.
+6. `tools/` opisuje kod integracyjny portalu. W pakiecie jest wyłącznie `tools/README.md` — samego kodu skill nie dystrybuuje, implementuje go portal. Kontrakt `extract_api_verification_log.py`: przyjmuje neutralne `events` i zachowuje zgodność z Claude legacy, generycznymi tool-call oraz Responses-style.
+7. 42 techniczne pliki przykładowych serwerów MCP zostały skompaktowane do `tools/mcp-servers/mcp-servers-examples.zip` (SHA-256 `6b16d446e08ec5a3c401b371a7bf697e2b898bf2b903e2a1531a2ec818642756`) i NIE są dystrybuowane w tym pakiecie — pozostał po nich inwentarz ścieżek i sum w `PORTABILITY-MANIFEST.md`. Moduły promptowe nie zależą od tego kodu. Inwentarz dostępu maszynowego do źródeł: `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`.
 
 **Zasada nadrzędna:** jeśli istniejąca instrukcja jest zrozumiała i wykonalna w bieżącym hoście, wykonaj ją bez konwersji. Adapter działa tylko na granicy runtime.
 
@@ -125,12 +126,13 @@ Wszystkie pliki są kanoniczne — nie istnieją stuby ani kopie w innych lokali
 
 ## tools/ — narzędzia produkcyjne (kod, nie markdown)
 
-`shared/tools/` zawiera skrypty uruchamiane przez portal poza sesją modelu
-— nie wczytuj ich przez `view()`, to nie są moduły promptowe:
+`shared/tools/` dokumentuje skrypty uruchamiane przez portal poza sesją modelu
+— nie wczytuj ich przez `view()`, to nie są moduły promptowe. W pakiecie jest
+sam opis (`tools/README.md`); kod implementuje portal:
 
 | Plik | Rola |
 |------|------|
-| `tools/walidator_cytowan.py` | Deterministyczna bramka: sprawdza, czy każde powołanie w gotowym piśmie ma odpowiadający log web_fetch. Pełny opis: `tools/README.md` |
+| `tools/walidator_cytowan.py` (kod po stronie portalu) | Deterministyczna bramka: sprawdza, czy każde powołanie w gotowym piśmie ma odpowiadający log web_fetch. Pełny opis i kontrakt wejścia: `tools/README.md` |
 
 ## Jak korzystać
 

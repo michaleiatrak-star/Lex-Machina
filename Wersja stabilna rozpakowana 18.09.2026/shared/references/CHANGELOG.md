@@ -1,5 +1,8 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.78 — 2026-09-18
+
+- tools/ i mcp-servers — sprostowanie odniesień do stanu faktycznego: kod bramki cytowań (`walidator_cytowan.py`, `extract_api_verification_log.py`, `export_gate.py`, `hash_chain_verify.py`, `append_event.py`, `router_event_parser.py`, `test_mcp_protocol.py`, `connector_health_check.py`) oraz `tools/mcp-servers/mcp-servers-examples.zip` NIE są dystrybuowane w pakiecie — `tools/` zawiera sam `README.md`. Opisy oznaczone jako kontrakt dla portalu (SKILL.md pkt 6-7 i tabela tools/, tools/README.md, DEPENDENCY-GRAPH status ACTIVE na SPEC, AUDIT-TRAIL-SPEC, MCP-INTEGRACJA, KONEKTORY-REKOMENDOWANE, PORTABILITY-MANIFEST). Odesłanie do inwentarza dostępu maszynowego `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`.
 ## 3.77 — 2026-09-16 — F-189
 
 - ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Accept: application/xhtml+xml zwraca cały akt (RODO, 650/2012, AI Act, NIS2, DORA — zmierzone). terminy.md — nowa sekcja „Akty UE poza RODO” (EPS art. 70; AI Act art. 73: 15/2/10 dni) oraz podniesione do RZĘDU 1 wiersze RODO art. 78 ust. 2–3 i art. 83 ust. 3–6.

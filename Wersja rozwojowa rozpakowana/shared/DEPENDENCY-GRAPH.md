@@ -88,16 +88,21 @@
 
 ## Narzędzia deweloperskie (kod, nie markdown — poza pipeline'em LLM)
 
+> **Co jest w pakiecie:** z tej tabeli w repozytorium znajdują się wyłącznie
+> skrypty `audyt-systemu-v4/scripts/` (audyt silnika) i moduły `.md`. Pozycje
+> `shared/tools/*.py` są kontraktem dla implementacji po stronie portalu —
+> `shared/tools/` zawiera sam `README.md` z ich opisem, bez kodu.
+
 | Plik | Status | Rola |
 |------|--------|------|
 | `audyt-systemu-v4/scripts/ci_check_shared.py` | ACTIVE (dev/CI) | Wykrywa zerwane odwołania view() i duplikaty MD5 w całym silniku; git pre-commit hook |
-| `tools/walidator_cytowan.py` | ACTIVE (produkcyjna bramka, poza LLM) | Sprawdza, czy każde powołanie w finalnym piśmie ma odpowiadające zdarzenie weryfikacji w logu sesji API — uruchamiane przez portal przed present_files, nie przez skille |
-| `tools/extract_api_verification_log.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Buduje log sesji wymagany przez walidator_cytowan.py automatycznie z surowej konwersacji Claude API (bloki server_tool_use/*_tool_result) — domyka lukę integracyjną opisaną w README (krok 1) |
-| `tools/export_gate.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Łączy extract_api_verification_log.py + walidator_cytowan.py w jedno wywołanie — jedyny punkt, który portal musi wpiąć w pipeline przed present_files/eksportem |
+| `tools/walidator_cytowan.py` | SPEC (produkcyjna bramka, poza LLM; kod po stronie portalu, nie w pakiecie) | Sprawdza, czy każde powołanie w finalnym piśmie ma odpowiadające zdarzenie weryfikacji w logu sesji API — uruchamiane przez portal przed present_files, nie przez skille |
+| `tools/extract_api_verification_log.py` | SPEC (produkcyjna bramka, poza LLM; kod po stronie portalu, nie w pakiecie) | Dodany 2026-07-13d. Buduje log sesji wymagany przez walidator_cytowan.py automatycznie z surowej konwersacji Claude API (bloki server_tool_use/*_tool_result) — domyka lukę integracyjną opisaną w README (krok 1) |
+| `tools/export_gate.py` | SPEC (produkcyjna bramka, poza LLM; kod po stronie portalu, nie w pakiecie) | Dodany 2026-07-13d. Łączy extract_api_verification_log.py + walidator_cytowan.py w jedno wywołanie — jedyny punkt, który portal musi wpiąć w pipeline przed present_files/eksportem |
 | `MCP-INTEGRACJA.md` + `KONEKTORY-REKOMENDOWANE.md` + `SCHEMAT-ODPOWIEDZI-MCP.md` | ACTIVE (protokół ładowany przez router) | Skonsolidowane 2026-07-13f z osobnego skilla mcp-zrodla-prawa-v1 (usunięty). Warstwa MCP jako uzupełnienie PRAWO-HARDGATE.md — patrz `required_modules` w prawny-router-v3 |
-| `tools/test_mcp_protocol.py` + `tools/connector_health_check.py` | ACTIVE (testy/narzędzia dev, poza LLM) | Skonsolidowane 2026-07-13f razem z MCP-INTEGRACJA.md. Klasyfikacja odpowiedzi connectora (6 testów jednostkowych) + health-check dostępności connectorów |
+| `tools/test_mcp_protocol.py` + `tools/connector_health_check.py` | SPEC (testy/narzędzia dev, poza LLM; kod nie jest dystrybuowany w pakiecie) | Skonsolidowane 2026-07-13f razem z MCP-INTEGRACJA.md. Klasyfikacja odpowiedzi connectora (6 testów jednostkowych) + health-check dostępności connectorów |
 | `AUDIT-TRAIL-SPEC.md` | ACTIVE (specyfikacja, poza silnikiem) | Skonsolidowane 2026-07-13f z osobnego skilla audit-trail-portal-v1 (usunięty). Specyfikacja logu hash-chain zgodnego z art. 12 AI Act, do wdrożenia po stronie portalu |
-| `tools/hash_chain_verify.py` + `append_event.py` + `router_event_parser.py` | ACTIVE (referencyjne, poza LLM) | Skonsolidowane 2026-07-13f razem z AUDIT-TRAIL-SPEC.md. Zapis/weryfikacja/parsowanie logu hash-chain |
+| `tools/hash_chain_verify.py` + `append_event.py` + `router_event_parser.py` | SPEC (referencyjne, poza LLM; kod nie jest dystrybuowany w pakiecie) | Skonsolidowane 2026-07-13f razem z AUDIT-TRAIL-SPEC.md. Zapis/weryfikacja/parsowanie logu hash-chain |
 
 
 ## Moduły orkiestratora i routingu
