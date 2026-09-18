@@ -63,7 +63,9 @@ try {
     "-NoProfile",
     "-NonInteractive",
     "-ExecutionPolicy", "Bypass",
-    "-File", $purge,
+    "-File", $purge
+  )
+  $scriptArgs = @(
     "-DataRootOverride", $dataRoot,
     "-LocalAppRootOverride", $localRoot,
     "-RoamingAppRootOverride", $roamingRoot,
@@ -71,12 +73,12 @@ try {
     "-SkipProcessStop"
   )
 
-  $probeProcess = Start-Process -FilePath $powershell -ArgumentList (@("-Mode", "Probe") + $commonArgs) -PassThru -Wait
+  $probeProcess = Start-Process -FilePath $powershell -ArgumentList ($commonArgs + @("-Mode", "Probe") + $scriptArgs) -PassThru -Wait
   if ($probeProcess.ExitCode -ne 10) {
     throw "PROFILE_LIFECYCLE_PROBE_FAILED:$($probeProcess.ExitCode)"
   }
 
-  $purgeProcess = Start-Process -FilePath $powershell -ArgumentList (@("-Mode", "Purge") + $commonArgs) -PassThru -Wait
+  $purgeProcess = Start-Process -FilePath $powershell -ArgumentList ($commonArgs + @("-Mode", "Purge") + $scriptArgs) -PassThru -Wait
   if ($purgeProcess.ExitCode -ne 0) {
     throw "PROFILE_LIFECYCLE_PURGE_FAILED:$($purgeProcess.ExitCode)"
   }
