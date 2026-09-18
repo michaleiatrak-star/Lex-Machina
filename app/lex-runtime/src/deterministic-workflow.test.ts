@@ -995,6 +995,89 @@ describe("deterministic legal workflow", () => {
   );
 
   it(
+    "keeps witness W1/W2 output flexible until a final W3 package is claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "przesluchanie-swiadkow-v2-min90"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "W2: tezy dowodowe i model przesłuchania. W3 powstanie po checkpoint."
+            .replace("W3", "kolejny etap")
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "enforces the final witness W3 package only when claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "przesluchanie-swiadkow-v2-min90"
+        );
+
+      const complete = [
+        "## ETAP W3 — PYTANIA",
+        "### BLOK A — Pytania identyfikujące i wiarygodnościowe",
+        "A-1 ✔",
+        "A-2 ✔",
+        "A-3 ✔",
+        "A-4 n.d.",
+        "### BLOK B — Pytania główne",
+        "### BLOK C — Pytania kontrolne i zabezpieczające",
+        "### BLOK D — Pytania na sprzeczności",
+        "⬛ BLOK D: niedostępny — brak dokumentu z wcześniejszymi zeznaniami.",
+        "### MACIERZ FINALNA",
+        "### SCORING FINALNY: 7/10",
+        "### REKOMENDACJE KOŃCOWE"
+      ].join("\n");
+
+      const pass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+        );
+      expect(pass.result)
+        .toBe("PASS");
+      expect(pass.mode)
+        .toBe("WITNESS_W3_FINAL");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+            .replace(
+              "A-3 ✔\n",
+              ""
+            )
+            .replace(
+              "### BLOK B — Pytania główne\n### BLOK C — Pytania kontrolne i zabezpieczające",
+              "### BLOK C — Pytania kontrolne i zabezpieczające\n### BLOK B — Pytania główne"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("A-3");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
+  it(
     "keeps the short contract-analysis format flexible",
     () => {
       const registry = fixture();
