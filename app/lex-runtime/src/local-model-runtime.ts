@@ -1267,30 +1267,38 @@ export class LocalModelRuntime {
         const tokenizerCalibration =
           await this
             .calibrateTokenizer();
-        this.writeQualification({
-          schemaVersion: 1,
-          result: "PASS",
-          modelId: canonical,
-          contextTokens:
-            config.context.requestedTokens,
-          contextMode:
-            config.context.mode,
-          engine: "llama.cpp",
-          backend:
-            configBackend(
-              config
-            ) ??
-            "CPU_X64_PORTABLE",
-          startupMs:
-            Math.max(
-              0,
-              Date.now() -
-                startupStartedAt
-            ),
-          tokenizerCalibration,
-          validatedAt:
-            new Date().toISOString()
-        });
+        const qualification:
+          LocalContextQualification = {
+            schemaVersion: 1,
+            result: "PASS",
+            modelId: canonical,
+            contextTokens:
+              config.context.requestedTokens,
+            contextMode:
+              config.context.mode,
+            engine: "llama.cpp",
+            backend:
+              configBackend(
+                config
+              ) ??
+              "CPU_X64_PORTABLE",
+            startupMs:
+              Math.max(
+                0,
+                Date.now() -
+                  startupStartedAt
+              ),
+            tokenizerCalibration,
+            validatedAt:
+              new Date().toISOString()
+          };
+        this.writeQualification(
+          qualification
+        );
+        this.writeModelProfile(
+          config,
+          qualification
+        );
         this.provisioningProgress = {
           phase: "READY",
           label: canonical,
@@ -1493,31 +1501,39 @@ export class LocalModelRuntime {
       const tokenizerCalibration =
         await this
           .calibrateTokenizer();
-      this.writeQualification({
-        schemaVersion: 1,
-        result: "PASS",
-        modelId: canonical,
-        contextTokens,
-        contextMode:
-          validatedConfig
-            .context.mode,
-        engine: "llama.cpp",
-        backend:
-          configBackend(
+      const qualification:
+        LocalContextQualification = {
+          schemaVersion: 1,
+          result: "PASS",
+          modelId: canonical,
+          contextTokens,
+          contextMode:
             validatedConfig
-          ) ??
-          "CPU_X64_PORTABLE",
-        startupMs:
-          Math.max(
-            0,
-            Date.now() -
-              startedAt
-          ),
-        tokenizerCalibration,
-        validatedAt:
-          new Date()
-            .toISOString()
-      });
+              .context.mode,
+          engine: "llama.cpp",
+          backend:
+            configBackend(
+              validatedConfig
+            ) ??
+            "CPU_X64_PORTABLE",
+          startupMs:
+            Math.max(
+              0,
+              Date.now() -
+                startedAt
+            ),
+          tokenizerCalibration,
+          validatedAt:
+            new Date()
+              .toISOString()
+        };
+      this.writeQualification(
+        qualification
+      );
+      this.writeModelProfile(
+        validatedConfig,
+        qualification
+      );
       this.provisioningProgress = {
         phase: "READY",
         label: canonical,
@@ -1980,6 +1996,19 @@ export class LocalModelRuntime {
         { force: true }
       );
     }
+
+    fs.rmSync(
+      this.profileConfigPath(
+        canonical
+      ),
+      { force: true }
+    );
+    fs.rmSync(
+      this.profileQualificationPath(
+        canonical
+      ),
+      { force: true }
+    );
 
     return {
       removedModelId: canonical,
@@ -3356,9 +3385,14 @@ export class LocalModelRuntime {
     const selected = config && normalizeModelId(config.model.id) === canonical
       ? config
       : null;
+    const profile =
+      selected ??
+      this.readProfileConfig(
+        canonical
+      );
     const minimum = model.minimumContext ?? this.contextPolicy().minimum;
     const maximum = model.maximumRuntimeContext ?? model.nativeContext;
-    const contextWindow = selected?.context.requestedTokens ?? Math.max(minimum, model.nativeContext);
+    const contextWindow = profile?.context.requestedTokens ?? Math.max(minimum, model.nativeContext);
     return {
       provider: "local",
       id: canonical,
@@ -3368,8 +3402,8 @@ export class LocalModelRuntime {
       nativeContextWindow: model.nativeContext,
       minimumContextWindow: minimum,
       maximumContextWindow: maximum,
-      ...(selected ? { configuredContextWindow: selected.context.requestedTokens } : {}),
-      contextMode: selected?.context.mode ?? (
+      ...(profile ? { configuredContextWindow: profile.context.requestedTokens } : {}),
+      contextMode: profile?.context.mode ?? (
         contextWindow > model.nativeContext ? "YARN_EXTENDED" : "NATIVE_OR_REDUCED"
       ),
       quantization: model.quantization,
