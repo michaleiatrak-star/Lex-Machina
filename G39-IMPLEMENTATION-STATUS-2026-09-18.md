@@ -372,14 +372,30 @@ Installer publication policy:
 - online/offline **manual installers may be published as a GitHub pre-release** after runtime + structural + online + offline acceptance all pass;
 - in-app application/skill/model update channels remain disabled by fail-closed trust policy until their production keys are configured.
 
+## Online-first RC publication — 2026-09-18
+
+Source SHA for the first published installer: `fa5bc4ed8b446d2ffe80e52720bb357b13d1c26d`.
+
+Evidence on that exact source SHA:
+- Lex Runtime Validation: **PASS**;
+- F-138 structural audit: **PASS**;
+- G39 Installer State Machine: **PASS**;
+- Windows Online Installer installed-copy acceptance: **PASS**;
+- Windows Offline Installer clean-machine acceptance: **FAIL / FIXING**.
+
+Publication policy has been split without weakening the full release gate:
+- the online-first publisher may publish only the accepted online installer after the four online-relevant gates above are green on the exact source SHA;
+- the existing full publisher still requires offline acceptance and will add/replace the offline asset only after clean-machine PASS;
+- both publishers independently re-check artifact SHA-256 before upload;
+- production application/skill/model-pack update channels remain fail-closed until signing trust roots are configured.
+
 ## Current closure order / roadmap
 
-1. obtain PASS of `Lex Runtime Validation` on the final non-main HEAD, including the corrected G18 temporal-freshness contract, G39K dual-model routing, skill-overlay restart rollback and SIMPLE_LETTER_V1 output gate;
-2. obtain PASS of F-138 and G39 Installer State Machine on that same final HEAD;
-3. obtain PASS of the exact-head online installed-copy Windows acceptance, including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
-4. obtain PASS of the exact-head standalone offline clean-machine Windows acceptance;
-5. only when steps 1–4 refer to the same source SHA, publish/update the unsigned `v0.1.3-g39-rc1` prerelease from a non-main release branch and attach SHA-256 receipts;
-6. after the RC evidence is green, close the installer integration slice G39G for the prerelease track; keep production update/signing gates separate and fail-closed;
+1. keep Runtime + F-138 + G39 Installer State Machine green on the exact source SHA used for publication;
+2. publish the online x64 installer immediately after exact-SHA online installed-copy acceptance PASS and attach SHA-256 receipts;
+3. continue fixing the standalone offline clean-machine path without blocking availability of the already accepted online installer;
+4. add the offline x64 installer to the same `v0.1.3-g39-rc1` prerelease only after its own clean-machine PASS and checksum re-verification;
+5. close the complete installer integration slice G39G only when both online and offline acceptance evidence is green; keep production update/signing gates separate and fail-closed;
 7. execute and review the self-hosted Local AI CPU/Vulkan 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
 8. execute the semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
 9. configure production Authenticode and Ed25519 application/skill/model-pack trust roots and execute signed update/rollback acceptance;
