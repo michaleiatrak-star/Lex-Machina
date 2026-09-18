@@ -1,6 +1,7 @@
 name: F-138 structural audit
 
 on:
+  workflow_call:
   pull_request:
   push:
     branches:
