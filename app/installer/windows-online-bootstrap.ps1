@@ -92,6 +92,35 @@ function Test-CommandVersion(
   }
 }
 
+function Ensure-VisualCppRuntime {
+  $vcInstalled = $false
+  $vc = $manifest.systemPrerequisites.visualCppRuntime
+  try {
+    $installedFlag = Get-ItemPropertyValue -Path "HKLM:\\SOFTWARE\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64" -Name Installed -ErrorAction Stop
+    $installedVersionText = (Get-ItemPropertyValue -Path "HKLM:\\SOFTWARE\\Microsoft\\VisualStudio\\14.0\\VC\\Runtimes\\x64" -Name Version -ErrorAction Stop).ToString().TrimStart("v")
+    $vcInstalled = ($installedFlag -eq 1 -and ([Version]$installedVersionText) -ge ([Version]$vc.version))
+  } catch { $vcInstalled = $false }
+
+  $forceAcceptanceVc = ($env:CI -eq "true" -and $env:LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME -eq "1")
+  if (-not $vcInstalled -or $forceAcceptanceVc) {
+    $bundledVc = Join-Path $runtime "prerequisites\\vc_redist.x64.exe"
+    if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
+      $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
+      if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
+        throw "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled expected=$($vc.sha256) actual=$bundledHash"
+      }
+      $vcInstaller = $bundledVc
+    } else {
+      $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
+      Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
+    }
+    $startArgs = @{ FilePath=$vcInstaller; ArgumentList=@("/install","/quiet","/norestart"); Wait=$true; PassThru=$true }
+    if (-not (Test-IsAdministrator)) { $startArgs.Verb = "RunAs" }
+    $vcInstall = Start-Process @startArgs
+    if ($vcInstall.ExitCode -notin @(0,1638,3010)) { throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)" }
+  }
+}
+
 Write-Host "[1/6] Private Node"
 $nodeDir = Join-Path $runtime "node"
 $nodeExe = Join-Path $nodeDir "node.exe"
@@ -112,29 +141,27 @@ if (-not (Test-CommandVersion $nodeExe @("--version") $nodeExpected)) {
   throw "BOOTSTRAP_NODE_VERSION_INVALID"
 }
 
-Write-Host "[2/6] Private Python"
+Write-Host "[2/6] System prerequisites"
+Ensure-VisualCppRuntime
+
+Write-Host "[3/6] Private Python"
+$privatePythonHelper = Join-Path $bootstrapRoot "install-private-python.ps1"
+if (-not (Test-Path -LiteralPath $privatePythonHelper -PathType Leaf)) {
+  throw "BOOTSTRAP_PRIVATE_PYTHON_HELPER_MISSING"
+}
+& $privatePythonHelper -ManifestPath $manifestPath -RuntimeRoot $runtime -CacheRoot $cache
+if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PRIVATE_PYTHON_PROVISION_FAILED" }
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonExpected = "Python $($manifest.runtime.python.version)"
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
-  Remove-Item $pythonDir -Recurse -Force -ErrorAction SilentlyContinue
-  $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
-  Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
-  $args = @(
-    "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
-    "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
-    "Include_pip=1", "PrependPath=0", "Shortcuts=0"
-  )
-  $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
-  if ($install.ExitCode -ne 0) {
-    throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
-  }
-}
-if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
-  throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
+  $pythonVersionActual = if (Test-Path -LiteralPath $pythonExe -PathType Leaf) {
+    try { (& $pythonExe --version 2>&1 | Select-Object -First 1).ToString().Trim() } catch { "EXECUTION_FAILED:$($_.Exception.Message)" }
+  } else { "MISSING:$pythonExe" }
+  throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonVersionActual"
 }
 
-Write-Host "[3/6] Pinned Python/ML packages"
+Write-Host "[4/6] Pinned Python/ML packages"
 $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
@@ -150,7 +177,7 @@ if ($LASTEXITCODE -ne 0) {
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
 
-Write-Host "[4/6] OCR/NER models"
+Write-Host "[5/6] OCR/NER models"
 $modelRoot = Join-Path $runtime "models"
 $paddleOfficial = Join-Path $modelRoot "paddle\official_models"
 $stanzaPl = Join-Path $modelRoot "stanza\pl"
@@ -171,47 +198,6 @@ if (-not $modelsReady) {
   New-Item -ItemType Directory -Force -Path $modelRoot | Out-Null
   & $pythonExe (Join-Path $bootstrapRoot "prefetch-release-models.py") $modelRoot
   if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_MODEL_PREFETCH_FAILED" }
-}
-
-Write-Host "[5/6] System prerequisites"
-$vcInstalled = $false
-$vc = $manifest.systemPrerequisites.visualCppRuntime
-try {
-  $installedFlag = Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Installed -ErrorAction Stop
-  $installedVersionText = (Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Version -ErrorAction Stop).ToString().TrimStart("v")
-  $vcInstalled = (
-    $installedFlag -eq 1 -and
-    ([Version]$installedVersionText) -ge ([Version]$vc.version)
-  )
-} catch {
-  $vcInstalled = $false
-}
-if (-not $vcInstalled) {
-  $bundledVc = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
-  if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
-    $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
-    if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
-      throw "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled expected=$($vc.sha256) actual=$bundledHash"
-    }
-    Write-Host "Using verified bundled visual-cpp-runtime"
-    $vcInstaller = $bundledVc
-  } else {
-    $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
-    Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
-  }
-  $startArgs = @{
-    FilePath = $vcInstaller
-    ArgumentList = @("/install", "/quiet", "/norestart")
-    Wait = $true
-    PassThru = $true
-  }
-  if (-not (Test-IsAdministrator)) {
-    $startArgs.Verb = "RunAs"
-  }
-  $vcInstall = Start-Process @startArgs
-  if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
-    throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)"
-  }
 }
 
 Write-Host "[6/6] Integrity lock and offline acceptance"
