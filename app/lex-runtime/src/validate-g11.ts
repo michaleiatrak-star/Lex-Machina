@@ -22,6 +22,9 @@ import {
 import {
   requireProcessExecutionPermit
 } from "./process-pleading-execution-gate.js";
+import {
+  createGuideSessionState
+} from "./guide-session-state.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
@@ -85,6 +88,17 @@ if (declarationIssues.length === 0 && matrix.result === "PASS") {
           }
         | undefined;
 
+      const guideContext =
+        workflow.id ===
+          "LEGAL_GUIDE_V1"
+          ? createGuideSessionState(
+              "authsess_" +
+                "0".repeat(32),
+              "PRAWNIK",
+              "2026-01-01T00:00:00.000Z"
+            )
+          : undefined;
+
       if (
         workflow.id ===
           "PROCESS_PLEADING_V1"
@@ -119,6 +133,11 @@ if (declarationIssues.length === 0 && matrix.result === "PASS") {
           primarySkill: skill,
           mode: "PRAWNIK"
         },
+        ...(guideContext
+          ? {
+              guideContext
+            }
+          : {}),
         ...(processWorkflowContext
           ? {
               processWorkflowContext
