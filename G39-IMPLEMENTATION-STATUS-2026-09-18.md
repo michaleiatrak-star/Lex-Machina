@@ -25,9 +25,10 @@ Implemented:
 - online/offline acceptance contract now treats Local AI as optional post-install provisioning;
 - the state probe can discover an existing current-user install from the Tauri uninstall key and records the registered install root plus discovery source;
 - an upgrade/repair attempt targeting a different directory than the registered installation fails closed with exit code 24 instead of creating a second inconsistent copy;
-- the self-test covers a registered installation in a non-default directory, a correctly restored target path, and the mismatched-target block;
+- the self-test covers a registered installation in a non-default directory, a correctly restored target path, the `UninstallString` fallback when `InstallLocation` is absent, and the mismatched-target block;
 - Tauri's built-in maintenance page remains in use, avoiding a fork of the full NSIS template;
-- an explicit Polish custom language file makes the maintenance choices user-facing as update-in-place / repair-reinstall / uninstall rather than the ambiguous default wording.
+- an explicit Polish custom language file makes the maintenance choices user-facing as update-in-place / repair-reinstall / uninstall rather than the ambiguous default wording;
+- the G39 installer gate validates that Polish is enabled in Tauri config, the custom language file is actually wired, the offline overlay does not remove it, all Tauri 2.11.5 custom `LangString` keys are present exactly once and the maintenance labels retain update/repair semantics.
 
 Evidence already observed on an earlier head:
 
@@ -131,6 +132,9 @@ Context policy:
 - model-pack update discovery uses a separate Ed25519-signed index trust root; update metadata is schema-validated, HTTPS-only and fail-closed while the production public key is absent;
 - model updates are user-approved from the Local AI UI and may change only the signed URL/hash for an app-approved model identity; filename, quantization, license and context capabilities require an application update;
 - model replacement keeps the prior GGUF as rollback until the new runtime passes `/health`;
+- signed model-pack installs persist `packVersion`, signer key id, index SHA-256 and model SHA-256 in a local receipt;
+- subsequent signed model updates are monotonic: an older signed pack is blocked as rollback/replay and the same pack version with a different model hash is blocked as an integrity conflict; the runtime enforces this again internally before provisioning, not only in the UI/status layer;
+- a corrupted/mismatched local signed-pack receipt fails closed instead of silently discarding update history;
 - provisioning/update now writes a persistent crash-recovery journal plus config/qualification backups; interrupted replacement is rolled back automatically at the next runtime construction, while invalid recovery metadata fails closed.
 
 Still required for full gates:
@@ -221,14 +225,16 @@ New/updated validation:
 - process state, execution permit, applicability and encrypted persistence tests remain active;
 - bounded AUTO has pure runner tests plus HTTP integration across ACL/encrypted workspace;
 - court-analysis state and execution permit tests exist plus HTTP persistence/blocked-node integration;
+- successful stateful workflow nodes persist a privacy-bounded audit artifact in `SecureCaseArtifactStore`; artifacts are encrypted with the case data key, participate in case-key rotation, expose no answer/document body, and are independently retrievable through an `ANALYZE`-guarded `/workflow-audits/:artifactId` endpoint with manifest/payload hash verification;
+- workflow history stores resolvable `artifact://artifact_…` references rather than opaque integrity-only ids;
+- the real-corpus skill↔engine parity suite validates required fresh-resource declarations for all 11 migrated execution workflows; deeper checkpoint semantic parity remains active for process/court/chronology/contract state machines;
 - G16 verification-loop validator has been updated to perform the new statute-workflow fresh reads instead of bypassing the deterministic preflight.
 
 Still required before G39H/I PASS:
 
-- current-head CI must be green after the latest AUTO/court-analysis integration;
-- persist or link a durable per-session audit artifact so court-analysis audit references are independently resolvable, not only integrity-oriented identifiers;
+- current-head CI must be green after the latest AUTO/stateful/audit integration and expanded all-workflow parity matrix;
 - extend stateful deterministic execution beyond process/court/chronology/contract workflows only where multi-turn state materially improves correctness; report skills remain high-determinism schema/output workflows rather than artificial state machines;
-- comparative regression tests skill-only vs engine-controlled for each migrated workflow;
+- deepen comparative parity for non-stateful workflows from resource-declaration parity to output-schema/gate semantic parity where it adds regression value;
 - after two stable releases, shorten duplicated skill instructions that are now runtime-enforced.
 
 Invariant:
