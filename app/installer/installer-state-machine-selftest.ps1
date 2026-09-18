@@ -12,11 +12,15 @@ if (-not (Test-Path -LiteralPath $hooks -PathType Leaf)) {
 }
 $hookText = Get-Content -Raw -LiteralPath $hooks
 foreach ($required in @(
-  'File "/oname=prefetch-release-models.py"',
-  'CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\prefetch-release-models.py" "$INSTDIR\runtime\bootstrap\prefetch-release-models.py"'
+  'SetOutPath "$INSTDIR\runtime"',
+  'File /r "${LEX_HOOK_FILE_DIR}\..\runtime\*"',
+  'IfFileExists "$INSTDIR\runtime\app\dist\http\server.js"',
+  'IfFileExists "$INSTDIR\runtime\lex-runtime-sidecar.exe"',
+  'RMDir /r "$INSTDIR\runtime\app"',
+  'RMDir /r "$INSTDIR\runtime\bootstrap"'
 )) {
   if (-not $hookText.Contains($required)) {
-    throw "INSTALL_STATE_SELFTEST_BOOTSTRAP_EMBED_CONTRACT_MISSING:$required"
+    throw "INSTALL_STATE_SELFTEST_RUNTIME_EMBED_CONTRACT_MISSING:$required"
   }
 }
 
