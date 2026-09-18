@@ -1010,6 +1010,12 @@ export class MaintenanceService {
       );
     }
 
+    const family =
+      model.family ??
+      modelUpdateFamilyForId(
+        model.id
+      );
+
     return {
       packVersion:
         index.version,
@@ -1019,12 +1025,9 @@ export class MaintenanceService {
         verified.indexSha256,
       model: {
         ...model,
-        family:
-          model.family ??
-          modelUpdateFamilyForId(
-            model.id
-          ) ??
-          undefined
+        ...(family
+          ? { family }
+          : {})
       }
     };
   }
