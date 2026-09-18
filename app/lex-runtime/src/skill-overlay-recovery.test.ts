@@ -12,6 +12,7 @@ import {
   installedSkillOverlayPreviousRoot,
   installedSkillOverlayRoot,
   installedSkillOverlayVersion,
+  commitSkillOverlayRuntimeHealth,
   recoverSkillOverlayForStartup
 } from "./maintenance-service.js";
 import {
@@ -24,7 +25,8 @@ let previousLocalAppData:
 
 function writeSkillCorpus(
   target: string,
-  version?: string
+  version?: string,
+  health?: string
 ): void {
   const shared =
     path.join(
@@ -90,7 +92,10 @@ function writeSkillCorpus(
         {
           version,
           installedAt:
-            "2026-09-18T00:00:00.000Z"
+            "2026-09-18T00:00:00.000Z",
+          ...(health
+            ? { health }
+            : {})
         },
         null,
         2
@@ -155,7 +160,7 @@ describe(
   "skill overlay restart recovery",
   () => {
     it(
-      "accepts a healthy current overlay and records restart health",
+      "keeps a legacy healthy current overlay without inventing a restart-validation cycle",
       () => {
         const current =
           installedSkillOverlayRoot();
@@ -186,9 +191,144 @@ describe(
           .toBe("0.1.4");
         expect(
           marker(current).health
+        ).toBeUndefined();
+      }
+    );
+
+    it(
+      "commits a newly activated overlay only after runtime startup health is explicitly confirmed",
+      () => {
+        const current =
+          installedSkillOverlayRoot();
+        writeSkillCorpus(
+          current,
+          "0.1.4",
+          "PENDING_RESTART_VALIDATION"
+        );
+
+        const previous =
+          installedSkillOverlayPreviousRoot();
+        writeSkillCorpus(
+          previous,
+          "0.1.3",
+          "ACTIVE_HEALTHY"
+        );
+
+        const bundled =
+          path.join(
+            root,
+            "bundled"
+          );
+        writeSkillCorpus(
+          bundled
+        );
+
+        const first =
+          recoverSkillOverlayForStartup(
+            bundled
+          );
+
+        expect(first.action)
+          .toBe(
+            "CURRENT_RUNTIME_VALIDATION"
+          );
+        expect(
+          marker(current).health
+        ).toBe(
+          "RUNTIME_VALIDATION_IN_PROGRESS"
+        );
+
+        commitSkillOverlayRuntimeHealth(
+          current
+        );
+
+        expect(
+          marker(current).health
         ).toBe(
           "ACTIVE_HEALTHY"
         );
+        expect(
+          marker(current)
+            .runtimeValidatedAt
+        ).toEqual(
+          expect.any(String)
+        );
+
+        const next =
+          recoverSkillOverlayForStartup(
+            bundled
+          );
+        expect(next.action)
+          .toBe(
+            "CURRENT_HEALTHY"
+          );
+        expect(
+          installedSkillOverlayVersion()
+        ).toBe("0.1.4");
+        expect(
+          fs.existsSync(previous)
+        ).toBe(true);
+      }
+    );
+
+    it(
+      "rolls back a structurally valid overlay when the prior runtime startup never committed health",
+      () => {
+        const current =
+          installedSkillOverlayRoot();
+        writeSkillCorpus(
+          current,
+          "0.1.4",
+          "PENDING_RESTART_VALIDATION"
+        );
+
+        const previous =
+          installedSkillOverlayPreviousRoot();
+        writeSkillCorpus(
+          previous,
+          "0.1.3",
+          "ACTIVE_HEALTHY"
+        );
+
+        const bundled =
+          path.join(
+            root,
+            "bundled"
+          );
+        writeSkillCorpus(
+          bundled
+        );
+
+        const first =
+          recoverSkillOverlayForStartup(
+            bundled
+          );
+        expect(first.action)
+          .toBe(
+            "CURRENT_RUNTIME_VALIDATION"
+          );
+
+        const second =
+          recoverSkillOverlayForStartup(
+            bundled
+          );
+
+        expect(second.action)
+          .toBe(
+            "ROLLED_BACK_TO_PREVIOUS"
+          );
+        expect(second.version)
+          .toBe("0.1.3");
+        expect(
+          second.rolledBackFromVersion
+        ).toBe("0.1.4");
+        expect(
+          marker(
+            installedSkillOverlayRoot()
+          ).rollbackReason
+        ).toEqual([
+          "RUNTIME_VALIDATION_INCOMPLETE"
+        ]);
       }
     );
 
