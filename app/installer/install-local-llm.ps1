@@ -3,6 +3,8 @@ param(
   [Parameter(Mandatory=$true)][string]$ManifestPath,
   [Parameter(Mandatory=$true)][string]$ModelId,
   [Parameter(Mandatory=$true)][int]$ContextTokens,
+  [ValidateSet("CPU_X64_PORTABLE", "VULKAN_X64")]
+  [string]$Backend = "CPU_X64_PORTABLE",
   [string]$LocalAiRoot,
   [string]$CacheRoot
 )
@@ -212,33 +214,184 @@ if ($extended -and ($null -eq $model.contextExtension -or $model.contextExtensio
   throw "LOCAL_LLM_CONTEXT_EXTENSION_NOT_ALLOWED:$ModelId:$ContextTokens"
 }
 
-$engineDir = Join-Path $localRoot "engine\llama"
 $modelDir = Join-Path $localRoot "models"
 New-Item -ItemType Directory -Force -Path $modelDir | Out-Null
 
 $engine = $manifest.runtime.llamaCpp
-$engineZip = Join-Path $cache ("llama-" + $engine.version + "-win-cpu-x64.zip")
-Get-VerifiedDownload $engine.url $engine.sha256 $engineZip "llama.cpp"
-$serverPath = Join-Path $engineDir "llama-server.exe"
-if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
-  $extract = Join-Path $cache ("llama-extract-" + $engine.version)
-  Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
-  Expand-Archive -LiteralPath $engineZip -DestinationPath $extract -Force
-  $server = Get-ChildItem -Path $extract -Recurse -File -Filter "llama-server.exe" | Select-Object -First 1
-  if (-not $server) { throw "LOCAL_LLM_ENGINE_ARCHIVE_LAYOUT_INVALID" }
-  $sourceDir = Split-Path -Parent $server.FullName
-  $stagedEngine = Join-Path $localRoot ("engine\llama-stage-" + [Guid]::NewGuid().ToString("N"))
-  New-Item -ItemType Directory -Force -Path $stagedEngine | Out-Null
-  Copy-Item (Join-Path $sourceDir "*") $stagedEngine -Recurse -Force
-  if (-not (Test-Path -LiteralPath (Join-Path $stagedEngine "llama-server.exe") -PathType Leaf)) {
-    Remove-Item $stagedEngine -Recurse -Force -ErrorAction SilentlyContinue
-    throw "LOCAL_LLM_SERVER_MISSING"
-  }
-  Remove-Item $engineDir -Recurse -Force -ErrorAction SilentlyContinue
-  Move-Item $stagedEngine $engineDir
+if (-not $engine.version) {
+  throw "LOCAL_LLM_ENGINE_VERSION_MISSING"
 }
-if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
-  throw "LOCAL_LLM_SERVER_MISSING"
+
+function Get-EngineBackend([string]$BackendId) {
+  $entries = @($engine.backends)
+  if ($entries.Count -gt 0) {
+    $match = @($entries | Where-Object { $_.id -eq $BackendId }) | Select-Object -First 1
+    if ($null -eq $match) {
+      throw "LOCAL_LLM_BACKEND_NOT_IN_MANIFEST:$BackendId"
+    }
+    if (-not $match.url -or -not $match.sha256) {
+      throw "LOCAL_LLM_BACKEND_MANIFEST_INVALID:$BackendId"
+    }
+    return $match
+  }
+
+  if ($BackendId -ne "CPU_X64_PORTABLE") {
+    throw "LOCAL_LLM_BACKEND_NOT_IN_MANIFEST:$BackendId"
+  }
+  return [pscustomobject]@{
+    id = "CPU_X64_PORTABLE"
+    url = $engine.url
+    sha256 = $engine.sha256
+    gpuOffload = $false
+  }
+}
+
+function Install-EngineBackend([object]$BackendSpec) {
+  $backendId = [string]$BackendSpec.id
+  if ($backendId -notmatch '^[A-Z0-9_]{3,64}
+$cachedModel = Join-Path $cache $model.filename
+Get-VerifiedDownload $model.url $model.sha256 $cachedModel ("model:" + $model.id)
+$target = Join-Path $modelDir $model.filename
+$copyRequired = $true
+if (Test-Path -LiteralPath $target -PathType Leaf) {
+  $targetHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
+  $copyRequired = $targetHash -ne $model.sha256.ToLowerInvariant()
+}
+if ($copyRequired) {
+  $temporary = $target + ".tmp"
+  Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+  Copy-Item -LiteralPath $cachedModel -Destination $temporary -Force
+  $temporaryHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $temporary).Hash.ToLowerInvariant()
+  if ($temporaryHash -ne $model.sha256.ToLowerInvariant()) {
+    Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+    throw "LOCAL_LLM_STAGED_HASH_MISMATCH:$($model.id)"
+  }
+  Move-Item -LiteralPath $temporary -Destination $target -Force
+}
+
+$launchArgs = @(
+  "--model", $target,
+  "--host", "127.0.0.1",
+  "--port", "0",
+  "--ctx-size", $ContextTokens.ToString()
+)
+$contextMode = "NATIVE_OR_REDUCED"
+$ropeScale = 1.0
+if ([bool]$selectedBackend.gpuOffload) {
+  $launchArgs += @(
+    "--n-gpu-layers", "999"
+  )
+}
+if ($extended) {
+  $contextMode = "YARN_EXTENDED"
+  $ropeScale = [Math]::Round(($ContextTokens / [double]$nativeContext), 8)
+  $launchArgs += @(
+    "--rope-scaling", "yarn",
+    "--rope-scale", $ropeScale.ToString([Globalization.CultureInfo]::InvariantCulture),
+    "--yarn-orig-ctx", $nativeContext.ToString()
+  )
+}
+
+$config = [ordered]@{
+  schemaVersion = 1
+  configuredAt = (Get-Date).ToUniversalTime().ToString("o")
+  applicationVersion = $manifest.applicationVersion
+  model = [ordered]@{
+    id = $model.id
+    displayName = $model.displayName
+    filename = $model.filename
+    path = $target
+    sha256 = $model.sha256.ToLowerInvariant()
+    quantization = $model.quantization
+    nativeContext = $nativeContext
+  }
+  context = [ordered]@{
+    requestedTokens = $ContextTokens
+    mode = $contextMode
+    extendedBeyondNative = $extended
+    ropeScale = $ropeScale
+  }
+  engine = [ordered]@{
+    type = "llama.cpp"
+    version = $engine.version
+    backend = [string]$selectedBackend.id
+    gpuOffload = [bool]$selectedBackend.gpuOffload
+    executable = $serverPath
+    fallbackBackend = if ($fallbackBackend) { [string]$fallbackBackend.id } else { $null }
+    fallbackExecutable = $fallbackServerPath
+    bind = "127.0.0.1"
+    launchArgs = @($launchArgs)
+  }
+  network = [ordered]@{
+    requiredForProvisioning = $true
+    requiredForInference = $false
+  }
+}
+$configPath = Join-Path $localRoot "config.json"
+$configTemp = $configPath + ".tmp"
+[IO.File]::WriteAllText(
+  $configTemp,
+  (($config | ConvertTo-Json -Depth 10) + [Environment]::NewLine),
+  [Text.UTF8Encoding]::new($false)
+)
+Move-Item -LiteralPath $configTemp -Destination $configPath -Force
+
+$result = [ordered]@{
+  status = "READY"
+  root = $localRoot
+  configPath = $configPath
+  modelId = $model.id
+  contextTokens = $ContextTokens
+  contextMode = $contextMode
+  backend = [string]$selectedBackend.id
+} | ConvertTo-Json -Compress
+Write-Output $result
+Write-Host "LEX_LOCAL_LLM_INSTALL_PASS:$localRoot"
+) {
+    throw "LOCAL_LLM_BACKEND_ID_INVALID:$backendId"
+  }
+
+  $engineZip = Join-Path $cache ("llama-" + $engine.version + "-" + $backendId.ToLowerInvariant() + ".zip")
+  Get-VerifiedDownload $BackendSpec.url $BackendSpec.sha256 $engineZip ("llama.cpp:" + $backendId)
+
+  $engineDir = Join-Path $localRoot ("engine\llama\" + $engine.version + "\" + $backendId)
+  $serverPath = Join-Path $engineDir "llama-server.exe"
+  if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
+    $extract = Join-Path $cache ("llama-extract-" + $engine.version + "-" + $backendId.ToLowerInvariant())
+    Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
+    Expand-Archive -LiteralPath $engineZip -DestinationPath $extract -Force
+    $server = Get-ChildItem -Path $extract -Recurse -File -Filter "llama-server.exe" | Select-Object -First 1
+    if (-not $server) {
+      throw "LOCAL_LLM_ENGINE_ARCHIVE_LAYOUT_INVALID:$backendId"
+    }
+
+    $sourceDir = Split-Path -Parent $server.FullName
+    $stagedEngine = $engineDir + ".stage-" + [Guid]::NewGuid().ToString("N")
+    New-Item -ItemType Directory -Force -Path $stagedEngine | Out-Null
+    Copy-Item (Join-Path $sourceDir "*") $stagedEngine -Recurse -Force
+    if (-not (Test-Path -LiteralPath (Join-Path $stagedEngine "llama-server.exe") -PathType Leaf)) {
+      Remove-Item $stagedEngine -Recurse -Force -ErrorAction SilentlyContinue
+      throw "LOCAL_LLM_SERVER_MISSING:$backendId"
+    }
+    Remove-Item $engineDir -Recurse -Force -ErrorAction SilentlyContinue
+    $engineParent = Split-Path -Parent $engineDir
+    New-Item -ItemType Directory -Force -Path $engineParent | Out-Null
+    Move-Item $stagedEngine $engineDir
+  }
+
+  if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
+    throw "LOCAL_LLM_SERVER_MISSING:$backendId"
+  }
+  return $serverPath
+}
+
+$selectedBackend = Get-EngineBackend $Backend
+$serverPath = Install-EngineBackend $selectedBackend
+$fallbackBackend = $null
+$fallbackServerPath = $null
+if ([bool]$selectedBackend.gpuOffload) {
+  $fallbackBackend = Get-EngineBackend "CPU_X64_PORTABLE"
+  $fallbackServerPath = Install-EngineBackend $fallbackBackend
 }
 
 $cachedModel = Join-Path $cache $model.filename
