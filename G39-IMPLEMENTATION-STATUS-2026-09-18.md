@@ -258,6 +258,56 @@ Invariant:
 
 - automatic mode may choose goals/skills and execute bounded semantic nodes, but security, privacy, source hierarchy, citations, provenance, STOP/fail-closed rules and final validation remain deterministic in every mode.
 
+## G39K — program-controlled multi-model routing
+
+Status: **IMPLEMENTED / VERIFYING**
+
+Purpose:
+
+- keep one user-selected primary model responsible for semantic reasoning and the final answer;
+- optionally use a separately configured auxiliary model for bounded helper tasks;
+- keep task assignment, ordering, verification, caching and audit under deterministic program control;
+- prohibit model-to-model delegation and duplicate whole-task execution.
+
+Implemented vertical slice:
+
+- per-user routing preference is persisted in the existing local auth SQLite store;
+- the preference contains an explicit enable/disable toggle plus auxiliary provider/model;
+- the default auxiliary selection is `local/bielik-11b-v3-q4km`, but the auxiliary lane is disabled until the user activates it;
+- the main chat exposes the current primary model as a dropdown and shows the configured auxiliary model separately;
+- the settings page lets the user activate/change/save the auxiliary provider/model;
+- each session receives only the current user turn as `auxiliaryText`; the helper never receives the full conversation by default;
+- deterministic eligibility currently permits only `LEGAL_REFERENCE_PREFLIGHT` when the current turn contains an explicit art./Dz.U./sygnatura-style reference;
+- the helper has no runtime tools, uses reasoning=none and is instructed to return only bounded JSON reference candidates;
+- helper output is never evidence and never creates VERIFIED status;
+- extracted statute/journal candidates are converted by the program into `verify_legal_reference`; supported SN signatures are converted into `verify_case_reference`;
+- those existing deterministic verification tools perform official-source checking and write the verification ledger;
+- exact duplicate verifier calls made later by the primary model are served from the preflight cache rather than repeated;
+- if primary and auxiliary provider/model are identical, the helper lane is skipped;
+- if the auxiliary model is unavailable or fails, the auxiliary gate is DEGRADED/FAILED but does not silently replace the primary model or block the whole answer;
+- session audit records `G39K_AUXILIARY_MODEL_ROUTING`;
+- session/UI metadata exposes primary model, auxiliary model, auxiliary status, task count and deterministic verification count;
+- Tauri trust-boundary explicitly allows only GET/PUT for the routing-preference endpoint.
+
+Intentional non-delegation:
+
+- LEXDOC citation resolution, protected-document re-fetch, citation-marker validation and freshness remain deterministic code and are not delegated to the auxiliary LLM;
+- source hierarchy, source admissibility, finalization, privacy, workflow checkpoints and citation coverage remain deterministic invariants;
+- the auxiliary model does not draft a second answer, critique the complete primary answer or decide legal strategy;
+- the primary model remains free to verify new references it introduces itself; only exact preflight duplicates are cached.
+
+Validation added:
+
+- scheduler tests cover disabled mode, no eligible task, primary=auxiliary collision, legal-reference extraction + deterministic verification/cache, and helper failure degradation;
+- current-head TypeScript/runtime, Tauri trust-boundary and installer CI are still required before G39K can be promoted to PASS.
+
+Next slices after this vertical slice is green:
+
+1. add a deterministic post-draft citation-coverage scanner that may use the auxiliary model only to classify candidate factual/legal claims, while the runtime remains the decision-maker;
+2. add per-task counters/latency to the execution audit and UI;
+3. optionally allow distinct auxiliary task policies (reference extraction, bounded source-label normalization, non-semantic formatting checks) with an explicit allowlist;
+4. never add an unrestricted "delegate to helper" primitive.
+
 ## G39J — release / supply-chain hardening
 
 Status: **PARTIAL / BLOCKED FOR PRODUCTION TRUST CONFIGURATION**
@@ -284,7 +334,7 @@ External / production blockers:
 
 ## Current closure order
 
-1. obtain current-head runtime validation PASS including skill-overlay restart rollback and the SIMPLE_LETTER_V1 output gate;
+1. obtain current-head runtime validation PASS including G39K dual-model routing tests, skill-overlay restart rollback and the SIMPLE_LETTER_V1 output gate;
 2. obtain current-head online installer acceptance PASS including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
 3. obtain current-head offline installer acceptance PASS;
 4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
