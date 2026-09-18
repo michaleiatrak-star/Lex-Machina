@@ -49,6 +49,8 @@ export type DeterministicWorkflowOutputReport = {
     | "COURT_CHECKPOINT"
     | "COURT_FINAL"
     | "EVIDENCE_FINAL"
+    | "CONTRACT_FINAL"
+    | "CONTRACT_LITE"
     | "STATUTE_FINAL"
     | "CASE_LAW_FINAL";
   required: string[];
@@ -183,6 +185,34 @@ const EVIDENCE_ANALYSIS_FINAL_MARKERS = [
   "TERMINY:",
   "SPRZECZNOŚCI",
   "REKOMENDACJE:"
+] as const;
+
+const CONTRACT_ANALYSIS_FULL_MARKERS = [
+  "RAPORT ANALIZY UMOWY V1",
+  "## 1. IDENTYFIKACJA",
+  "## 2. BALANS DOKUMENTU",
+  "## 3. KLAUZULE NIEDOZWOLONE",
+  "## 4. KLAUZULE NIEZGODNE Z PRAWEM",
+  "## 5. KLAUZULE RYZYKOWNE",
+  "## 6. EKSPOZYCJA FINANSOWA",
+  "## 7. ALERTY RODO",
+  "## 8. KLAUZULE KORZYSTNE DLA STRONY CHRONIONEJ",
+  "## 9. BRAKUJĄCE KLAUZULE",
+  "## 10. REKOMENDACJE ZMIAN",
+  "## 11. PLAN DZIAŁANIA PRZED PODPISANIEM",
+  "## 12. OCENA OGÓLNA",
+  "## 13. DISCLAIMER"
+] as const;
+
+const CONTRACT_ANALYSIS_LITE_MARKERS = [
+  "RAPORT ANALIZY UMOWY — LITE",
+  "## 1. IDENTYFIKACJA + FORMA",
+  "## 2. BALANS:",
+  "## 3. KLAUZULE KRYTYCZNE I WYSOKIEGO RYZYKA",
+  "## 4. EKSPOZYCJA",
+  "## 5. BRAKUJĄCE KLAUZULE",
+  "## 6. OCENA OGÓLNA + PLAN 3 KROKÓW",
+  "## 7. DISCLAIMER"
 ] as const;
 
 const STATUTE_ANALYSIS_FINAL_MARKERS = [
@@ -415,6 +445,14 @@ export function deterministicWorkflowPrompt(
       ? [
           "EVIDENCE_ANALYSIS_V1 may return bounded intermediate findings without forcing a final report.",
           "If you claim a full RAPORT DOWODOWY, the runtime requires the canonical MD6 sections in order: POZYCJA PROCESOWA → HIERARCHIA → WALIDACJA → POKRYCIE → DOWODY DO PISMA → TERMINY → SPRZECZNOŚCI → REKOMENDACJE."
+        ]
+      : []),
+    ...(plan.id === "CONTRACT_ANALYSIS_V1"
+      ? [
+          "CONTRACT_ANALYSIS_V1 keeps the value-based report scale from the skill.",
+          "If you claim RAPORT ANALIZY UMOWY v1, the runtime requires the canonical F.1 sections 1-13 in order.",
+          "If you claim RAPORT ANALIZY UMOWY — LITE, the runtime requires the canonical F.1-LITE sections 1-7 in order.",
+          "A short F.2-style answer remains flexible and is not forced into either long report schema."
         ]
       : []),
     ...(plan.id === "STATUTE_ANALYSIS_V1"
@@ -667,6 +705,92 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "EVIDENCE_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "CONTRACT_ANALYSIS_V1"
+  ) {
+    const claimsLite =
+      normalized.includes(
+        "RAPORT ANALIZY UMOWY — LITE"
+      );
+    const claimsFull =
+      !claimsLite &&
+      normalized.includes(
+        "RAPORT ANALIZY UMOWY V1"
+      );
+
+    if (!claimsFull && !claimsLite) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const markers =
+      claimsLite
+        ? CONTRACT_ANALYSIS_LITE_MARKERS
+        : CONTRACT_ANALYSIS_FULL_MARKERS;
+    const required = [
+      ...markers
+    ];
+    const observed =
+      markers.filter(
+        (marker) =>
+          normalized.includes(
+            marker
+          )
+      );
+    const missing =
+      markers.filter(
+        (marker) =>
+          !normalized.includes(
+            marker
+          )
+      );
+    const positions =
+      markers.map(
+        (marker) =>
+          normalized.indexOf(
+            marker
+          )
+      );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode:
+        claimsLite
+          ? "CONTRACT_LITE"
+          : "CONTRACT_FINAL",
       required,
       observed: [
         ...observed
