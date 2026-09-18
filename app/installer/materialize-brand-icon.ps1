@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+# Permanent branding rule: every Windows EXE/NSIS icon is generated only from this pinned canonical source.
 $expectedSourceSha256 = "a7e7b45705b352e6959ccd487c78bdc22a28169c799e40b2881f2e61654aee79"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
