@@ -144,6 +144,9 @@ type ModelPackUpdateStatus = {
   targetBytes?: number;
   targetSha256?: string;
   verificationReady: boolean;
+  signatureMode:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
   signerKeyId?: string;
   blockedReason?:
     | "SIGNED_INDEX_MISSING"
@@ -224,20 +227,20 @@ function modelPackBlockLabel(
 ): string {
   switch (reason) {
     case "SIGNED_INDEX_MISSING":
-      return "brak podpisanego indeksu model-pack";
+      return "brak podpisu indeksu model-pack w trybie wymagającym podpisu";
     case "SIGNER_POLICY_MISSING":
       return "brak skonfigurowanego zaufanego klucza Ed25519";
     case "APP_INCOMPATIBLE":
       return "pakiet nie jest zgodny z tą wersją aplikacji";
     case "MODEL_NOT_IN_INDEX":
-      return "zainstalowanego modelu nie ma w podpisanym indeksie";
+      return "zainstalowanego modelu nie ma w indeksie aktualizacji";
     case "PACK_VERSION_ROLLBACK":
-      return "wykryto próbę cofnięcia do starszego podpisanego pakietu";
+      return "wykryto próbę cofnięcia do starszego pakietu";
     case "PACK_VERSION_HASH_CONFLICT":
       return "ta sama wersja pakietu ma inny hash modelu";
     case "INDEX_INVALID":
     case undefined:
-      return "indeks podpisanej aktualizacji jest nieprawidłowy";
+      return "indeks aktualizacji jest nieprawidłowy";
   }
 }
 
@@ -817,7 +820,9 @@ export function LocalAiSetupPanel({
                         ? "aktualny"
                         : modelUpdate.status === "AVAILABLE"
                           ? [
-                              `dostępna podpisana paczka ${modelUpdate.latestPackVersion ?? ""}`,
+                              modelUpdate.signatureMode === "SIGNED_REQUIRED"
+                                ? `dostępna podpisana paczka ${modelUpdate.latestPackVersion ?? ""}`
+                                : `dostępna paczka ${modelUpdate.latestPackVersion ?? ""} · podpis tymczasowo opcjonalny`,
                               modelUpdate.targetDisplayName
                                 ? `→ ${modelUpdate.targetDisplayName}`
                                 : "",
@@ -833,6 +838,13 @@ export function LocalAiSetupPanel({
                     </span>
                   ) : null}
                 </div>
+
+                {modelUpdate?.signatureMode === "UNSIGNED_ALLOWED" ? (
+                  <p className="local-ai-warning">
+                    Tryb przejściowy aktualizacji modeli: podpis Ed25519 indeksu jest opcjonalny.
+                    Indeks JSON, HTTPS, zgodność wersji i SHA-256 modelu pozostają obowiązkowe.
+                  </p>
+                ) : null}
 
                 {extended ? (
                   <p className="local-ai-warning">
