@@ -31,7 +31,7 @@ function powershell(
   extraEnv: Record<string, string> = {}
 ): string {
   const result = spawnSync(
-    "powershell.exe",
+    "pwsh.exe",
     [
       "-NoProfile",
       "-NonInteractive",
@@ -77,21 +77,34 @@ function createTrustedForeignSignedExecutable(
     target
   );
 
-  const certFile =
+  const pfxFile =
     path.join(
       targetRoot,
-      "foreign-signer.cer"
+      "foreign-signer.pfx"
     );
   const script = [
     "$ErrorActionPreference='Stop'",
     "$target=$env:LEX_AUTH_TEST_TARGET",
-    "$certFile=$env:LEX_AUTH_TEST_CERT_FILE",
-    "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina Foreign Signer Test' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyAlgorithm RSA -KeyLength 2048 -HashAlgorithm SHA256 -KeyExportPolicy Exportable -NotAfter (Get-Date).AddDays(2)",
-    "Export-Certificate -Cert $cert -FilePath $certFile -Force | Out-Null",
-    "Import-Certificate -FilePath $certFile -CertStoreLocation 'Cert:\\CurrentUser\\Root' | Out-Null",
-    "Import-Certificate -FilePath $certFile -CertStoreLocation 'Cert:\\CurrentUser\\TrustedPublisher' | Out-Null",
-    "$signed=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
-    "if ($signed.Status -ne 'Valid') { throw ('SIGNATURE_NOT_VALID:' + $signed.Status) }",
+    "$pfxFile=$env:LEX_AUTH_TEST_PFX_FILE",
+    "$password=$env:LEX_AUTH_TEST_PFX_PASSWORD",
+    "$rsa=[Security.Cryptography.RSA]::Create(2048)",
+    "$request=[Security.Cryptography.X509Certificates.CertificateRequest]::new('CN=Lex Machina Foreign Signer Test',$rsa,[Security.Cryptography.HashAlgorithmName]::SHA256,[Security.Cryptography.RSASignaturePadding]::Pkcs1)",
+    "$oids=[Security.Cryptography.OidCollection]::new()",
+    "[void]$oids.Add([Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
+    "$request.CertificateExtensions.Add([Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$false))",
+    "$request.CertificateExtensions.Add([Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
+    "$certificate=$request.CreateSelfSigned([DateTimeOffset]::UtcNow.AddMinutes(-5),[DateTimeOffset]::UtcNow.AddDays(2))",
+    "$pfx=$certificate.Export([Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
+    "[IO.File]::WriteAllBytes($pfxFile,$pfx)",
+    "foreach ($storeName in @('Root','TrustedPublisher')) {",
+    "  $store=[Security.Cryptography.X509Certificates.X509Store]::new($storeName,[Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
+    "  try { $store.Open([Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite); $store.Add($certificate) } finally { $store.Close(); $store.Dispose() }",
+    "}",
+    "$kits=Join-Path ([Environment]::GetFolderPath('ProgramFilesX86')) 'Windows Kits\\10\\bin'",
+    "$signTool=Get-ChildItem -LiteralPath $kits -Directory | Sort-Object Name -Descending | ForEach-Object { Join-Path $_.FullName 'x64\\signtool.exe' } | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1",
+    "if (-not $signTool) { throw 'SIGNTOOL_NOT_FOUND' }",
+    "& $signTool sign /fd SHA256 /f $pfxFile /p $password $target",
+    "if ($LASTEXITCODE -ne 0) { throw ('SIGNTOOL_FAILED:' + $LASTEXITCODE) }",
     "$check=Get-AuthenticodeSignature -LiteralPath $target",
     "if ($check.Status -ne 'Valid' -or $null -eq $check.SignerCertificate) { throw ('SIGNATURE_RECHECK_FAILED:' + $check.Status) }",
     "$check.SignerCertificate.Thumbprint"
@@ -103,8 +116,10 @@ function createTrustedForeignSignedExecutable(
       {
         LEX_AUTH_TEST_TARGET:
           target,
-        LEX_AUTH_TEST_CERT_FILE:
-          certFile
+        LEX_AUTH_TEST_PFX_FILE:
+          pfxFile,
+        LEX_AUTH_TEST_PFX_PASSWORD:
+          "LexMachina-G39J-Test-Only!"
       }
     )
       .split(/\r?\n/)
@@ -146,17 +161,19 @@ function removeTestCertificate(
   const script = [
     "$ErrorActionPreference='SilentlyContinue'",
     "$thumb=$env:LEX_AUTH_TEST_THUMBPRINT",
-    "foreach ($store in @('Cert:\\CurrentUser\\My','Cert:\\CurrentUser\\Root','Cert:\\CurrentUser\\TrustedPublisher')) {",
-    "  Get-ChildItem -LiteralPath $store | Where-Object { $_.Thumbprint -eq $thumb } | Remove-Item -Force",
+    "foreach ($storeName in @('Root','TrustedPublisher','My')) {",
+    "  $store=[Security.Cryptography.X509Certificates.X509Store]::new($storeName,[Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
+    "  try {",
+    "    $store.Open([Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
+    "    @($store.Certificates | Where-Object { $_.Thumbprint -eq $thumb }) | ForEach-Object { $store.Remove($_) }",
+    "  } finally { $store.Close(); $store.Dispose() }",
     "}"
   ].join("; ");
   spawnSync(
-    "powershell.exe",
+    "pwsh.exe",
     [
       "-NoProfile",
       "-NonInteractive",
-      "-ExecutionPolicy",
-      "Bypass",
       "-Command",
       script
     ],
