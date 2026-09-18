@@ -5,7 +5,8 @@ import type { LexSkillRegistry } from "./registry.js";
 export type DeterministicWorkflowId =
   | "LEGAL_QUERY_V1"
   | "SIMPLE_LETTER_V1"
-  | "PROCESS_PLEADING_V1";
+  | "PROCESS_PLEADING_V1"
+  | "COURT_ANALYSIS_V1";
 
 export type DeterministicWorkflowPlan = {
   id: DeterministicWorkflowId;
@@ -44,6 +45,12 @@ const PROCESS_PLEADING_RESOURCES = [
   "pisma-procesowe-v3/references/SELF-CHECK-PISMA.md"
 ] as const;
 
+const COURT_ANALYSIS_RESOURCES = [
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "analiza-sadowa-v6/references/WERYFIKACJA-DOWODOW.md"
+] as const;
+
 function assertReadableResource(
   registry: LexSkillRegistry,
   skillName: string,
@@ -74,24 +81,32 @@ export function createDeterministicWorkflowPlan(
     workflowExecutionSkill === "pisma-procesowe-v3";
   const hasSimple =
     workflowExecutionSkill === "pisma-proste-v2";
+  const hasCourtAnalysis =
+    workflowExecutionSkill === "analiza-sadowa-v6";
 
   const executionSkill = hasProcess
     ? "pisma-procesowe-v3"
     : hasSimple
       ? "pisma-proste-v2"
-      : workflowExecutionSkill;
+      : hasCourtAnalysis
+        ? "analiza-sadowa-v6"
+        : workflowExecutionSkill;
 
   const id: DeterministicWorkflowId = hasProcess
     ? "PROCESS_PLEADING_V1"
     : hasSimple
       ? "SIMPLE_LETTER_V1"
-      : "LEGAL_QUERY_V1";
+      : hasCourtAnalysis
+        ? "COURT_ANALYSIS_V1"
+        : "LEGAL_QUERY_V1";
 
   const requiredFreshResources = hasProcess
     ? [...PROCESS_PLEADING_RESOURCES]
     : hasSimple
       ? [...SIMPLE_LETTER_RESOURCES]
-      : [];
+      : hasCourtAnalysis
+        ? [...COURT_ANALYSIS_RESOURCES]
+        : [];
 
   if (executionSkill) {
     const skill = registry.get(executionSkill);
