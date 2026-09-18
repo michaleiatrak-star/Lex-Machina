@@ -1041,6 +1041,32 @@ export class SafeSessionExecutor implements SessionExecutor {
               `guide=${guideOutput?.result ?? "N/A"}`,
               `reportBlueprint=${reportBlueprintBlocked ? "BLOCKED" : "PASS"}`
             ].join(";")
+        },
+        documentCitations: {
+          accepted:
+            processedDocumentCitations
+              .citations.length,
+          rejected:
+            processedDocumentCitations
+              .rejectedMarkers,
+          quotedWithoutExactHighlight:
+            processedDocumentCitations
+              .citations
+              .filter(
+                (citation) =>
+                  Boolean(
+                    citation.quote
+                  ) &&
+                  (
+                    citation
+                      .highlightStart ===
+                      undefined ||
+                    citation
+                      .highlightEnd ===
+                      undefined
+                  )
+              )
+              .length
         }
       });
     const gateIBlocked =
@@ -1236,6 +1262,12 @@ export class SafeSessionExecutor implements SessionExecutor {
             if (
               check("SOURCE_PROVENANCE")
                 ?.result !==
+                  "PASS" ||
+              check("SOURCE_HIERARCHY")
+                ?.result !==
+                  "PASS" ||
+              check("TEMPORAL_FRESHNESS")
+                ?.result !==
                   "PASS"
             ) {
               gateITurn =
@@ -1252,10 +1284,16 @@ export class SafeSessionExecutor implements SessionExecutor {
                 );
 
               if (
+                check("CITATION_LEDGER")
+                  ?.result !==
+                    "PASS" ||
                 check("LEGAL_CITATIONS")
                   ?.result !==
                     "PASS" ||
                 check("CASE_SIGNATURES")
+                  ?.result !==
+                    "PASS" ||
+                check("DOCUMENT_CITATIONS")
                   ?.result !==
                     "PASS"
               ) {
