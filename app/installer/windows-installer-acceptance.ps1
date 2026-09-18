@@ -5,12 +5,74 @@ param(
   [switch]$BlockNetworkDuringInstall,
   [switch]$ForceVisualCppRuntimeInstall,
   [switch]$StandaloneOfflineExe,
+  [switch]$RequireAuthenticode,
+  [string]$SigningManifestPath,
   [int]$InstallTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
 $installerInfo = Get-Item -LiteralPath $installer
+$trustedSignerThumbprints = @()
+
+function Normalize-Thumbprint([string]$Value) {
+  return (($Value -replace "\s+", "").ToUpperInvariant())
+}
+
+function Assert-PinnedAuthenticode(
+  [string]$Path,
+  [string]$Label
+) {
+  if (-not $RequireAuthenticode) {
+    return
+  }
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_SIGNATURE_TARGET_MISSING:$Label:$Path"
+  }
+
+  $signature = Get-AuthenticodeSignature -LiteralPath $Path
+  if (
+    $signature.Status -ne "Valid" -or
+    $null -eq $signature.SignerCertificate
+  ) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_INVALID:$Label:$($signature.Status)"
+  }
+
+  $thumbprint = Normalize-Thumbprint $signature.SignerCertificate.Thumbprint
+  if ($trustedSignerThumbprints -notcontains $thumbprint) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_SIGNER_NOT_PINNED:$Label:$thumbprint"
+  }
+  if ($null -eq $signature.TimeStamperCertificate) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_TIMESTAMP_MISSING:$Label"
+  }
+
+  Write-Host "Authenticode PASS: $Label signer=$thumbprint timestamp=$($signature.TimeStamperCertificate.Subject)"
+}
+
+if ($RequireAuthenticode) {
+  if ([string]::IsNullOrWhiteSpace($SigningManifestPath)) {
+    throw "INSTALLER_ACCEPTANCE_SIGNING_MANIFEST_REQUIRED"
+  }
+  $signingManifest = (Resolve-Path -LiteralPath $SigningManifestPath).Path
+  $release = Get-Content -Raw -LiteralPath $signingManifest | ConvertFrom-Json
+  $trustedSignerThumbprints = @(
+    $release.applicationUpdate.trustedSignerThumbprints |
+      ForEach-Object {
+        if ($_ -is [string]) {
+          Normalize-Thumbprint $_
+        }
+      } |
+      Where-Object {
+        $_ -match "^[A-F0-9]{40}$"
+      } |
+      Select-Object -Unique
+  )
+  if ($trustedSignerThumbprints.Count -lt 1) {
+    throw "INSTALLER_ACCEPTANCE_SIGNER_POLICY_MISSING"
+  }
+  Assert-PinnedAuthenticode $installer "installer"
+}
+
 if ($StandaloneOfflineExe) {
   if ($ExpectedNetworkRequiredAtInstall) {
     throw "INSTALLER_ACCEPTANCE_STANDALONE_OFFLINE_NETWORK_POLICY_INVALID"
@@ -133,6 +195,7 @@ try {
     throw "INSTALLER_ACCEPTANCE_SIDECAR_MISSING:$sidecarPath"
   }
   $sidecar = Get-Item -LiteralPath $sidecarPath
+  Assert-PinnedAuthenticode $sidecar.FullName "runtime-sidecar"
   $componentLock = Join-Path $runtimeRoot "component-lock.json"
   $privateNode = Join-Path $runtimeRoot "node\node.exe"
   $privatePython = Join-Path $runtimeRoot "python\python.exe"
@@ -200,6 +263,9 @@ try {
   if (-not $app) {
     throw "INSTALLER_ACCEPTANCE_DESKTOP_EXE_MISSING"
   }
+  Assert-PinnedAuthenticode $app.FullName "desktop-exe"
+  $uninstaller = Join-Path $InstallRoot "uninstall.exe"
+  Assert-PinnedAuthenticode $uninstaller "uninstaller"
   if ($BlockNetworkDuringInstall) {
     Add-AcceptanceFirewallBlock $app.FullName "desktop"
   }
