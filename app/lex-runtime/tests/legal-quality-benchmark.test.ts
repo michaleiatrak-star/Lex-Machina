@@ -137,6 +137,55 @@ describe(
     );
 
     it(
+      "fails an incorrect issue verdict even when the decision and cited sources are otherwise exact",
+      () => {
+        const sample =
+          corpus().cases[0]!;
+        const raw =
+          JSON.stringify({
+            decision: "TIMELY",
+            issues: [
+              {
+                id:
+                  "ISSUE_DEFAULT_DEADLINE",
+                verdict:
+                  "WRONG_VERDICT",
+                sources: [
+                  "R1"
+                ]
+              },
+              {
+                id:
+                  "ISSUE_E_CHANNEL_EXCEPTION",
+                verdict:
+                  "SPECIAL_21_DAY_RULE_CONTROLS",
+                sources: [
+                  "R1",
+                  "R2",
+                  "F1",
+                  "F2"
+                ]
+              }
+            ]
+          });
+        const score =
+          scoreLegalQualityCase(
+            sample,
+            raw
+          );
+
+        expect(score.passed)
+          .toBe(false);
+        expect(
+          score.decisionCorrect
+        ).toBe(true);
+        expect(
+          score.issueRecall
+        ).toBe(0.5);
+      }
+    );
+
+    it(
       "fails missing issues and citations",
       () => {
         const sample =
