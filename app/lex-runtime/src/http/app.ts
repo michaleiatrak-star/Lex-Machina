@@ -166,6 +166,15 @@ import {
   parseWorkflowAuditArtifact,
   type StatefulWorkflowAuditId
 } from "../workflow-audit-artifact.js";
+import {
+  completeOrderedCaseExecution,
+  createOrderedCaseWorkflowState,
+  nextOrderedCaseCheckpoint,
+  requireOrderedCaseExecutionPermit,
+  type OrderedCaseExecutionPermit,
+  type OrderedCaseWorkflowId,
+  type OrderedCaseWorkflowState
+} from "../ordered-case-workflow-state.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -427,6 +436,11 @@ export type LexHttpAppOptions = {
     EncryptedCaseWorkspaceStore,
     | "getContractAnalysisState"
     | "saveContractAnalysisState"
+  >;
+  orderedCaseWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getOrderedCaseWorkflowState"
+    | "saveOrderedCaseWorkflowState"
   >;
   documentGenerationState?: Pick<
     DocumentGenerationStateStore,
