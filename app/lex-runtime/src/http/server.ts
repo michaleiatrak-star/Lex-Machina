@@ -100,6 +100,9 @@ import {
 import {
   LocalSupportService
 } from "../support-service.js";
+import {
+  GuideSessionStateStore
+} from "../guide-session-state.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -343,6 +346,16 @@ export async function startLocalServer(options?: {
     new LocalAuthService(
       authStore
     );
+  const guideSessionStore =
+    new GuideSessionStateStore();
+  const unsubscribeGuideRevocation =
+    authService.onSessionRevoked(
+      (event) => {
+        guideSessionStore.revoke(
+          event.sessionId
+        );
+      }
+    );
   const supportService =
     new LocalSupportService({
       installationId:
@@ -457,6 +470,7 @@ export async function startLocalServer(options?: {
     credentialResolver: credentials,
     credentialManager: credentials,
     updateDiscovery,
+    guideSessionStore,
     processWorkflowStore:
       workspaceStore,
     courtAnalysisWorkflowStore:
@@ -563,6 +577,8 @@ export async function startLocalServer(options?: {
               void localModels.stop();
               credentials.close();
               supportService.close();
+              unsubscribeGuideRevocation();
+              guideSessionStore.clear();
               authService.close();
               if (error) closeReject(error);
               else closeResolve();
