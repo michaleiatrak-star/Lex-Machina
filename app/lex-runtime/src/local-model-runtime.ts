@@ -5,6 +5,9 @@ import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import type {
   ModelPackEntry
 } from "./model-pack-verifier.js";
+import {
+  compareVersions
+} from "./update-discovery.js";
 
 export type LocalModelId = string;
 
@@ -408,6 +411,8 @@ export class LocalModelRuntime {
     modelId: LocalModelId;
     sha256: string;
     contextTokens: number;
+    packVersion?: string;
+    signerKeyId?: string;
   } | null {
     const config = this.readConfig();
     if (
@@ -432,6 +437,25 @@ export class LocalModelRuntime {
     ) {
       return null;
     }
+    const receipt =
+      this.readModelPackReceipt();
+    if (
+      receipt &&
+      (
+        normalizeModelId(
+          receipt.modelId
+        ) !== modelId ||
+        receipt.modelSha256
+          .toLowerCase() !==
+          config.model.sha256
+            .toLowerCase()
+      )
+    ) {
+      throw new Error(
+        "MODEL_PACK_RECEIPT_STATE_MISMATCH"
+      );
+    }
+
     return {
       modelId,
       sha256:
@@ -439,7 +463,15 @@ export class LocalModelRuntime {
           .toLowerCase(),
       contextTokens:
         config.context
-          .requestedTokens
+          .requestedTokens,
+      ...(receipt
+        ? {
+            packVersion:
+              receipt.packVersion,
+            signerKeyId:
+              receipt.signerKeyId
+          }
+        : {})
     };
   }
 
@@ -1200,6 +1232,33 @@ export class LocalModelRuntime {
       );
     }
     if (
+      installed.packVersion
+    ) {
+      const versionComparison =
+        compareVersions(
+          args.target.packVersion,
+          installed.packVersion
+        );
+      if (
+        versionComparison < 0
+      ) {
+        throw new Error(
+          "MODEL_PACK_UPDATE_ROLLBACK_BLOCKED"
+        );
+      }
+      if (
+        versionComparison === 0 &&
+        installed.sha256 !==
+          entry.sha256
+            .toLowerCase()
+      ) {
+        throw new Error(
+          "MODEL_PACK_UPDATE_VERSION_HASH_CONFLICT"
+        );
+      }
+    }
+
+    if (
       !args.force &&
       installed.sha256 ===
         entry.sha256
@@ -1866,6 +1925,77 @@ export class LocalModelRuntime {
       this.rootDir,
       "model-pack-install.json"
     );
+  }
+
+  private readModelPackReceipt():
+    LocalModelPackReceipt | null {
+    const target =
+      this.modelPackReceiptPath();
+    if (
+      !fs.existsSync(target)
+    ) {
+      return null;
+    }
+
+    const receipt =
+      readJson<LocalModelPackReceipt>(
+        target
+      );
+    if (
+      !receipt ||
+      receipt.schemaVersion !== 1 ||
+      receipt.kind !==
+        "LEX_MACHINA_MODEL_PACK_INSTALL" ||
+      typeof receipt.packVersion !==
+        "string" ||
+      !/^\d+\.\d+\.\d+$/.test(
+        receipt.packVersion
+      ) ||
+      typeof receipt.signerKeyId !==
+        "string" ||
+      !/^[A-Za-z0-9._-]{3,96}$/.test(
+        receipt.signerKeyId
+      ) ||
+      typeof receipt.indexSha256 !==
+        "string" ||
+      !/^[a-f0-9]{64}$/i.test(
+        receipt.indexSha256
+      ) ||
+      typeof receipt.modelId !==
+        "string" ||
+      receipt.modelId.length < 3 ||
+      receipt.modelId.length > 160 ||
+      typeof receipt.modelSha256 !==
+        "string" ||
+      !/^[a-f0-9]{64}$/i.test(
+        receipt.modelSha256
+      ) ||
+      typeof receipt.installedAt !==
+        "string" ||
+      Number.isNaN(
+        Date.parse(
+          receipt.installedAt
+        )
+      )
+    ) {
+      throw new Error(
+        "MODEL_PACK_RECEIPT_INVALID"
+      );
+    }
+
+    return {
+      ...receipt,
+      modelId:
+        normalizeModelId(
+          receipt.modelId
+        ),
+      indexSha256:
+        receipt.indexSha256
+          .toLowerCase(),
+      modelSha256:
+        receipt.modelSha256
+          .toLowerCase()
+    };
   }
 
   private writeModelPackReceipt(
