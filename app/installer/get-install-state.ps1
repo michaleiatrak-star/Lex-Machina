@@ -44,7 +44,7 @@ function Get-RegisteredInstallRoot([string]$Name) {
 
     $uninstall = [string]$item.UninstallString
     if ($uninstall -match '^"([^"]+)\\uninstall\.exe"') {
-      $root = Normalize-InstallRoot ([IO.Path]::GetDirectoryName($matches[1]))
+      $root = Normalize-InstallRoot $matches[1]
       if ($root) {
         return [pscustomobject]@{
           Root = $root
