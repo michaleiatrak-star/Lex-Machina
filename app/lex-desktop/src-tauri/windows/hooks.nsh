@@ -22,34 +22,41 @@
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
-  ; Installer-critical bootstrap files are embedded explicitly instead of
-  ; relying on the ordinary Tauri resource copy layout. This keeps online,
-  ; offline and repair paths deterministic and available before bootstrap.
-  SetOutPath "$PLUGINSDIR\lex-bootstrap"
-  File "/oname=windows-online-bootstrap.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-online-bootstrap.ps1"
-  File "/oname=windows-offline-bundle-install.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-offline-bundle-install.ps1"
-  File "/oname=app-update-transaction.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\app-update-transaction.ps1"
-  File "/oname=generate-component-lock.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\generate-component-lock.ps1"
-  File "/oname=windows-payload-selftest.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-payload-selftest.ps1"
-  File "/oname=windows-payload-python-selftest.py" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-payload-python-selftest.py"
-  File "/oname=prefetch-release-models.py" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\prefetch-release-models.py"
-  File "/oname=verify-python-package-set.py" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\verify-python-package-set.py"
-  File "/oname=release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
-  File "/oname=release-requirements.txt" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-requirements.txt"
+  ; NSIS is the single owner of the thin runtime payload. The desktop trust
+  ; boundary requires an exact $INSTDIR\runtime layout, so do not rely on a
+  ; second Tauri resource-mapping layer for these files.
+  ;
+  ; Preserve heavy bootstrap components (node/python/models) across
+  ; update/repair so they can be reused after version/hash checks. Replace
+  ; only the app-owned thin payload deterministically.
+  RMDir /r "$INSTDIR\runtime\app"
+  RMDir /r "$INSTDIR\runtime\corpus"
+  RMDir /r "$INSTDIR\runtime\ocr"
+  RMDir /r "$INSTDIR\runtime\privacy"
+  RMDir /r "$INSTDIR\runtime\storage"
+  RMDir /r "$INSTDIR\runtime\bootstrap"
+  Delete "$INSTDIR\runtime\lex-runtime-sidecar.exe"
+  Delete "$INSTDIR\runtime\release-source.json"
+  Delete "$INSTDIR\runtime\release-requirements.txt"
+  Delete "$INSTDIR\runtime\npm-dependency-tree.json"
+  Delete "$INSTDIR\runtime\component-lock.json"
 
   CreateDirectory "$INSTDIR\runtime"
-  CreateDirectory "$INSTDIR\runtime\bootstrap"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-online-bootstrap.ps1" "$INSTDIR\runtime\bootstrap\windows-online-bootstrap.ps1"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-offline-bundle-install.ps1" "$INSTDIR\runtime\bootstrap\windows-offline-bundle-install.ps1"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\app-update-transaction.ps1" "$INSTDIR\runtime\bootstrap\app-update-transaction.ps1"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\generate-component-lock.ps1" "$INSTDIR\runtime\bootstrap\generate-component-lock.ps1"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-payload-selftest.ps1" "$INSTDIR\runtime\bootstrap\windows-payload-selftest.ps1"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\windows-payload-python-selftest.py" "$INSTDIR\runtime\bootstrap\windows-payload-python-selftest.py"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\prefetch-release-models.py" "$INSTDIR\runtime\bootstrap\prefetch-release-models.py"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\verify-python-package-set.py" "$INSTDIR\runtime\bootstrap\verify-python-package-set.py"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\release-source.json" "$INSTDIR\runtime\release-source.json"
-  CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\release-requirements.txt" "$INSTDIR\runtime\release-requirements.txt"
+  SetOutPath "$INSTDIR\runtime"
+  File /r "${LEX_HOOK_FILE_DIR}\..\runtime\*"
   SetOutPath "$INSTDIR"
+
+  ; Fail before downloading large components if the embedded thin payload is
+  ; structurally incomplete.
+  IfFileExists "$INSTDIR\runtime\app\dist\http\server.js" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera kompletnego runtime aplikacji (brak app\dist\http\server.js)." /SD IDOK
+    Abort
+  IfFileExists "$INSTDIR\runtime\corpus\*" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera korpusu skilli." /SD IDOK
+    Abort
+  IfFileExists "$INSTDIR\runtime\lex-runtime-sidecar.exe" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera natywnego sidecara runtime." /SD IDOK
+    Abort
 
   IfFileExists "$EXEDIR\LexMachina-Offline-Runtime.zip" lex_offline_bundle lex_online_bootstrap
 
@@ -95,5 +102,6 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Dane spraw pozostają zachowane poza katalogiem aplikacji."
+  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  RMDir /r "$INSTDIR\runtime"
 !macroend
