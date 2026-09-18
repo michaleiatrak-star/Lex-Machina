@@ -1066,8 +1066,14 @@ export class MaintenanceService {
     if (
       discovery.status ===
         "UNAVAILABLE" ||
-      discovery.status ===
-        "NO_RELEASE"
+      (
+        discovery.status ===
+          "NO_RELEASE" &&
+        (
+          !discovery.modelPackIndex ||
+          !discovery.modelPackSignature
+        )
+      )
     ) {
       return {
         status:
