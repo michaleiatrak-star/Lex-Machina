@@ -5,6 +5,39 @@ param(
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path $PayloadRoot).Path
 
+if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
+  function Get-FileHash {
+    param(
+      [string]$Path,
+      [string]$LiteralPath,
+      [string]$Algorithm = "SHA256"
+    )
+    if ($Algorithm.ToUpperInvariant() -ne "SHA256") {
+      throw "SELFTEST_HASH_ALGORITHM_UNSUPPORTED:$Algorithm"
+    }
+    $target = if ($LiteralPath) { $LiteralPath } else { $Path }
+    if (-not $target) { throw "SELFTEST_HASH_PATH_MISSING" }
+
+    $stream = [IO.File]::OpenRead($target)
+    try {
+      $sha = [Security.Cryptography.SHA256]::Create()
+      try {
+        $bytes = $sha.ComputeHash($stream)
+      } finally {
+        $sha.Dispose()
+      }
+    } finally {
+      $stream.Dispose()
+    }
+
+    [pscustomobject]@{
+      Algorithm = "SHA256"
+      Hash = ([BitConverter]::ToString($bytes) -replace '-','')
+      Path = [IO.Path]::GetFullPath($target)
+    }
+  }
+}
+
 function Require-File([string]$Relative) {
   $path = Join-Path $root $Relative
   if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
