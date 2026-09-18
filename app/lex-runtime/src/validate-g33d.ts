@@ -86,8 +86,10 @@ const checks = {
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
   canonicalWindowsBranding:
-    branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
-    branding.includes("lex-machina-brand-source.png") &&
+    branding.includes("c3f357f2573cb7c35385dd04ced9af8ec4ed2c62fbed5e282e946d49d915e898") &&
+    branding.includes("brand-source-b64") &&
+    branding.includes("FromBase64String") &&
+    branding.includes("LEX_BRAND_SOURCE_MODE:BASE64_CHUNKS") &&
     onlineBuild.includes("materialize-brand-icon.ps1") &&
     offlineBuild.includes("materialize-brand-icon.ps1"),
   windowsPathAndPrerequisiteRegression:
