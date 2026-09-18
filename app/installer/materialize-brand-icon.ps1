@@ -4,12 +4,15 @@ param(
   ),
   [string]$OutputIconPath = (
     Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
+  ),
+  [string]$CanonicalBase64Path = (
+    Join-Path $PSScriptRoot "lex-machina-brand-source.b64"
   )
 )
 
 $ErrorActionPreference = "Stop"
 # Canonical Lex Machina artwork is hash-pinned.
-$expectedSourceSha256 = "6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616"
+$expectedSourceSha256 = "0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
@@ -30,9 +33,25 @@ function Read-U32BigEndian([byte[]]$Data, [int]$Offset) {
   )
 }
 
-$sourceFile = (Resolve-Path -LiteralPath $SourceImagePath).Path
-$sourceBytes = [IO.File]::ReadAllBytes($sourceFile)
+$base64File = (Resolve-Path -LiteralPath $CanonicalBase64Path).Path
+$encoded = (Get-Content -Raw -LiteralPath $base64File) -replace '\s', ''
+if ([string]::IsNullOrWhiteSpace($encoded)) {
+  throw "LEX_BRAND_BASE64_SOURCE_EMPTY"
+}
+try {
+  $sourceBytes = [Convert]::FromBase64String($encoded)
+} catch {
+  throw "LEX_BRAND_BASE64_SOURCE_INVALID:$($_.Exception.Message)"
+}
 $actualSourceSha256 = Get-Sha256Hex $sourceBytes
+if ($actualSourceSha256 -ne $expectedSourceSha256) {
+  throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
+}
+
+$sourceFile = [IO.Path]::GetFullPath($SourceImagePath)
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $sourceFile) | Out-Null
+[IO.File]::WriteAllBytes($sourceFile, $sourceBytes)
+$actualSourceSha256 = Get-Sha256Hex ([IO.File]::ReadAllBytes($sourceFile))
 if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
 }
