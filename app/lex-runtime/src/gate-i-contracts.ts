@@ -7,7 +7,6 @@ import type {
 
 export type GateIStateModel =
   | "DURABLE_CASE"
-  | "CASE_BOUND_WHEN_AVAILABLE"
   | "CHAT_TURN"
   | "SCHEMA_PIPELINE";
 
@@ -130,7 +129,7 @@ const CONTRACTS:
     },
     EVIDENCE_ANALYSIS_V1: {
       stateModel:
-        "CASE_BOUND_WHEN_AVAILABLE",
+        "DURABLE_CASE",
       canonicalStages: [
         "AD-KROK0-BLOKADA",
         "AD-KROK0a-MODE",
@@ -226,7 +225,7 @@ const CONTRACTS:
     },
     WITNESS_QUESTIONING_V1: {
       stateModel:
-        "CASE_BOUND_WHEN_AVAILABLE",
+        "DURABLE_CASE",
       canonicalStages: [
         "PRE-W1a-SD-VER",
         "PRE-W1a.4-RZ-SHOW",
