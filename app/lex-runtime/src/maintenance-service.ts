@@ -91,6 +91,8 @@ export type ModelPackUpdateStatus = {
     | "SIGNER_POLICY_MISSING"
     | "APP_INCOMPATIBLE"
     | "MODEL_NOT_IN_INDEX"
+    | "PACK_VERSION_ROLLBACK"
+    | "PACK_VERSION_HASH_CONFLICT"
     | "INDEX_INVALID";
 };
 
@@ -898,6 +900,7 @@ export class MaintenanceService {
       | {
           modelId: string;
           sha256: string;
+          packVersion?: string;
         }
       | null
   ): Promise<ModelPackUpdateStatus> {
@@ -974,6 +977,67 @@ export class MaintenanceService {
           .verifiedModelPackTarget(
             installed.modelId
           );
+      if (
+        installed.packVersion
+      ) {
+        const packComparison =
+          compareVersions(
+            target.packVersion,
+            installed.packVersion
+          );
+        if (
+          packComparison < 0
+        ) {
+          return {
+            status: "BLOCKED",
+            checkedAt:
+              discovery.checkedAt,
+            modelId:
+              installed.modelId,
+            currentSha256:
+              installed.sha256
+                .toLowerCase(),
+            latestPackVersion:
+              target.packVersion,
+            targetSha256:
+              target.model.sha256,
+            verificationReady:
+              true,
+            signerKeyId:
+              target.signerKeyId,
+            blockedReason:
+              "PACK_VERSION_ROLLBACK"
+          };
+        }
+        if (
+          packComparison === 0 &&
+          target.model.sha256 !==
+            installed.sha256
+              .toLowerCase()
+        ) {
+          return {
+            status: "BLOCKED",
+            checkedAt:
+              discovery.checkedAt,
+            modelId:
+              installed.modelId,
+            currentSha256:
+              installed.sha256
+                .toLowerCase(),
+            latestPackVersion:
+              target.packVersion,
+            targetSha256:
+              target.model.sha256,
+            verificationReady:
+              true,
+            signerKeyId:
+              target.signerKeyId,
+            blockedReason:
+              "PACK_VERSION_HASH_CONFLICT"
+          };
+        }
+      }
+
       const available =
         target.model.sha256 !==
           installed.sha256
