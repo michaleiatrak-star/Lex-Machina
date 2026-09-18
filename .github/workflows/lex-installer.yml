@@ -2,6 +2,15 @@ name: Lex Windows Online Installer
 
 on:
   workflow_call:
+  push:
+    branches:
+      - work/g39-installer-repair-2026-09-18
+    paths:
+      - "app/installer/**"
+      - "app/lex-desktop/**"
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - ".github/workflows/lex-installer.yml"
   pull_request:
     paths:
       - "app/installer/**"
@@ -85,36 +94,10 @@ jobs:
             -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
             -InstallerPath $installer.FullName
 
-      - name: Provision VC++ prerequisite for unattended acceptance runner
-        shell: pwsh
-        run: |
-          # The product bootstrap can elevate interactively when VC++ is absent.
-          # GitHub Actions has no interactive UAC surface, so provision the exact
-          # pinned prerequisite up front and let the installer exercise the rest
-          # of the real online bootstrap path without an invisible elevation wait.
-          $manifest = Get-Content -Raw "app/installer/windows-release-source.json" | ConvertFrom-Json
-          $vc = $manifest.systemPrerequisites.visualCppRuntime
-          if ($vc.sha256 -notmatch '^[a-fA-F0-9]{64}$') {
-            throw "ACCEPTANCE_VC_HASH_INVALID"
-          }
-
-          $vcInstaller = Join-Path $env:RUNNER_TEMP "vc_redist.x64-$($vc.version).exe"
-          Invoke-WebRequest -UseBasicParsing -Uri $vc.url -OutFile $vcInstaller
-          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $vcInstaller).Hash.ToLowerInvariant()
-          if ($actual -ne $vc.sha256.ToLowerInvariant()) {
-            throw "ACCEPTANCE_VC_HASH_MISMATCH expected=$($vc.sha256) actual=$actual"
-          }
-
-          $install = Start-Process -FilePath $vcInstaller -ArgumentList @(
-            "/install", "/quiet", "/norestart"
-          ) -Wait -PassThru
-          if ($install.ExitCode -notin @(0, 1638, 3010)) {
-            throw "ACCEPTANCE_VC_INSTALL_FAILED:$($install.ExitCode)"
-          }
-          Write-Host "Acceptance VC++ prerequisite exit code: $($install.ExitCode)"
-
       - name: G33D installed-copy online bootstrap acceptance
         shell: pwsh
+        env:
+          LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME: "1"
         run: |
           $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" |
             Sort-Object LastWriteTime -Descending |

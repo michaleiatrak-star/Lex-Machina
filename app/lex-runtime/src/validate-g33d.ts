@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,6 +14,29 @@ const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
+const privatePython = read("app/installer/install-private-python.ps1");
+const onlineBuild = read("app/installer/build-windows-online.ps1");
+const offlineBuild = read("app/installer/build-windows-offline.ps1");
+const branding = read("app/installer/materialize-brand-icon.ps1");
+const runtimeSidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
+const trustBoundary = read("app/lex-desktop/src-tauri/src/trust_boundary.rs");
+const canonicalBrandBase64 = read(
+  "app/installer/lex-machina-brand-source.b64"
+).replace(/\s+/g, "");
+const canonicalBrandSha256 = createHash("sha256")
+  .update(Buffer.from(canonicalBrandBase64, "base64"))
+  .digest("hex");
+const releaseSource = JSON.parse(
+  read("app/installer/windows-release-source.json")
+) as {
+  runtime?: {
+    python?: {
+      url?: string;
+      sha256?: string;
+      delivery?: string;
+    };
+  };
+};
 const tauriConfig = JSON.parse(
   read("app/lex-desktop/src-tauri/tauri.conf.json")
 ) as {
@@ -59,6 +83,49 @@ const checks = {
     packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
+  appLocalPrivatePython:
+    releaseSource.runtime?.python?.delivery === "APP_LOCAL_ZIP" &&
+    releaseSource.runtime?.python?.url?.endsWith("-amd64.zip") === true &&
+    /^[a-f0-9]{64}$/i.test(releaseSource.runtime?.python?.sha256 ?? "") &&
+    privatePython.includes("PRIVATE_PYTHON_SOURCE_HASH_MISMATCH") &&
+    privatePython.includes("Expand-Archive") &&
+    privatePython.includes("PRIVATE_PYTHON_PIP_MISSING") &&
+    bootstrap.includes("install-private-python.ps1") &&
+    !bootstrap.includes("TargetDir=") &&
+    offlineBuild.includes("install-private-python.ps1") &&
+    !offlineBuild.includes("pythonInstaller"),
+  canonicalWindowsBranding:
+    canonicalBrandSha256 ===
+      "0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67" &&
+    branding.includes("lex-machina-brand-source.b64") &&
+    branding.includes("0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67") &&
+    branding.includes("[Convert]::FromBase64String") &&
+    branding.includes("lex-machina-brand-source.png") &&
+    onlineBuild.includes("materialize-brand-icon.ps1") &&
+    offlineBuild.includes("materialize-brand-icon.ps1"),
+  cleanAdminLifecycle:
+    runtimeSidecar.includes("--purge-user-state") &&
+    runtimeSidecar.includes("LEX_USER_STATE_PURGE_PASS") &&
+    runtimeSidecar.includes('MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop"') &&
+    runtimeSidecar.includes('PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential"') &&
+    runtimeSidecar.includes('SUPPORT_KEYRING_SERVICE: &str = "LexMachina/SupportIdentity"') &&
+    runtimeSidecar.includes('push_owned_root(&mut roots, "USERPROFILE", ".lex-machina")') &&
+    runtimeSidecar.includes('push_owned_root(&mut roots, "LOCALAPPDATA", "LexMachina")') &&
+    hooks.includes("całkowicie czystym profilem administratora") &&
+    hooks.includes('/SD IDNO IDNO lex_clean_profile_done') &&
+    hooks.includes('lex-runtime-sidecar.exe" --purge-user-state') &&
+    hooks.includes('/SD IDYES IDYES lex_full_uninstall_confirmed') &&
+    hooks.includes("Deinstalacja została zatrzymana") &&
+    trustBoundary.includes('const MANAGED_LOGIN: &str = "local-admin"') &&
+    trustBoundary.includes("/api/auth/bootstrap-managed") &&
+    trustBoundary.includes("requires_bootstrap"),
+  windowsPathAndPrerequisiteRegression:
+    acceptance.includes("Lex Machina Installed ") &&
+    acceptance.includes("expectedPythonVersion") &&
+    workflow.includes("LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME") &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') >= 0 &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') <
+      bootstrap.indexOf('Write-Host "[3/6] Private Python"'),
   postInstallFailClosed:
     hooks.includes("windows-online-bootstrap.ps1") &&
     hooks.includes("--self-test") &&

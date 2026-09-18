@@ -1,3 +1,5 @@
+// Lex Machina runtime sidecar.
+use keyring::{Entry, Error as KeyringError};
 use sha2::{Digest, Sha256};
 use std::{
     env,
@@ -115,6 +117,73 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
     Ok(verified)
 }
 
+const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
+const MANAGED_LOGIN: &str = "local-admin";
+const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
+const SUPPORT_KEYRING_SERVICE: &str = "LexMachina/SupportIdentity";
+const SUPPORT_INSTALLATION_ACCOUNT: &str = "installation-id";
+const SUPPORT_SIGNING_KEY_ACCOUNT: &str = "challenge-signing-key";
+
+fn delete_keyring_entry(service: &str, account: &str) -> Result<(), String> {
+    let entry = Entry::new(service, account)
+        .map_err(|error| format!("SIDECAR_PURGE_KEYRING_OPEN_FAILED:{service}:{account}:{error}"))?;
+    match entry.delete_credential() {
+        Ok(()) | Err(KeyringError::NoEntry) => Ok(()),
+        Err(error) => Err(format!(
+            "SIDECAR_PURGE_KEYRING_DELETE_FAILED:{service}:{account}:{error}"
+        )),
+    }
+}
+
+fn push_owned_root(roots: &mut Vec<PathBuf>, base_var: &str, child: &str) {
+    if let Some(base) = env::var_os(base_var) {
+        let base = PathBuf::from(base);
+        if !base.as_os_str().is_empty() {
+            roots.push(base.join(child));
+        }
+    }
+}
+
+fn owned_user_state_roots() -> Vec<PathBuf> {
+    let mut roots = Vec::new();
+    push_owned_root(&mut roots, "USERPROFILE", ".lex-machina");
+    push_owned_root(&mut roots, "LOCALAPPDATA", "LexMachina");
+    push_owned_root(&mut roots, "LOCALAPPDATA", "pl.lexmachina.desktop");
+    push_owned_root(&mut roots, "APPDATA", "LexMachina");
+    push_owned_root(&mut roots, "APPDATA", "pl.lexmachina.desktop");
+    push_owned_root(&mut roots, "TEMP", "LexMachinaOpen");
+    push_owned_root(&mut roots, "TEMP", "LexMachinaUpdate");
+    roots
+}
+
+fn remove_owned_tree(path: &Path) -> Result<(), String> {
+    if !path.exists() {
+        return Ok(());
+    }
+    if !path.is_dir() {
+        return Err(format!("SIDECAR_PURGE_PATH_NOT_DIRECTORY:{}", path.display()));
+    }
+    fs::remove_dir_all(path)
+        .map_err(|error| format!("SIDECAR_PURGE_DELETE_FAILED:{}:{error}", path.display()))
+}
+
+fn purge_user_state() -> Result<(), String> {
+    delete_keyring_entry(MANAGED_KEYRING_SERVICE, MANAGED_LOGIN)?;
+    for provider in ["openai", "anthropic", "xai"] {
+        delete_keyring_entry(PROVIDER_KEYRING_SERVICE, provider)?;
+    }
+    for account in [SUPPORT_INSTALLATION_ACCOUNT, SUPPORT_SIGNING_KEY_ACCOUNT] {
+        delete_keyring_entry(SUPPORT_KEYRING_SERVICE, account)?;
+    }
+
+    for root in owned_user_state_roots() {
+        remove_owned_tree(&root)?;
+    }
+
+    println!("LEX_USER_STATE_PURGE_PASS");
+    Ok(())
+}
+
 fn installed_skill_overlay() -> Option<PathBuf> {
     let local = env::var_os("LOCALAPPDATA")?;
     let root = PathBuf::from(local)
@@ -182,8 +251,14 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
 }
 
 fn run() -> Result<i32, String> {
+    let args: Vec<String> = env::args().skip(1).collect();
+    if args.iter().any(|arg| arg == "--purge-user-state") {
+        purge_user_state()?;
+        return Ok(0);
+    }
+
     let root = runtime_root()?;
-    if env::args().skip(1).any(|arg| arg == "--self-test") {
+    if args.iter().any(|arg| arg == "--self-test") {
         self_test(&root)?;
         return Ok(0);
     }
