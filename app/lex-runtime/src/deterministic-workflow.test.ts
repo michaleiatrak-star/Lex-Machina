@@ -674,6 +674,88 @@ describe("deterministic legal workflow", () => {
     ]);
   });
 
+  it(
+    "allows a narrow statute answer without pretending a full Moduł 4 report",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-przepisow-v2"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "Stan prawny na 2026-09-18. Krótkie wyjaśnienie przepisu bez pełnego raportu."
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "requires the canonical statute-analysis Moduł 4 structure when a full report is claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-przepisow-v2"
+        );
+
+      const complete = [
+        "RAPORT ANALIZY — art. testowy",
+        "Stan prawny na: 2026-09-18",
+        "1. PRZEPIS",
+        "2. STRUKTURA PRZESŁANEK",
+        "3. WYNIK: ? NIEJEDNOZNACZNY",
+        "4. PRZESŁANKI — PODSUMOWANIE",
+        "5. UZASADNIENIE MERYTORYCZNE",
+        "6. LINIA ORZECZNICZA (skrót)",
+        "7. RYZYKA I ZASTRZEŻENIA",
+        "DRZEWO-LIMIT — wynik literalny nie zastępuje wykładni orzeczniczej.",
+        "8. REKOMENDACJE",
+        "9. POWIĄZANE PRZEPISY",
+        "10. ŹRÓDŁA"
+      ].join("\n");
+
+      const pass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+        );
+      expect(pass.result)
+        .toBe("PASS");
+      expect(pass.mode)
+        .toBe("STATUTE_FINAL");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+            .replace(
+              "DRZEWO-LIMIT — wynik literalny nie zastępuje wykładni orzeczniczej.\n",
+              ""
+            )
+            .replace(
+              "9. POWIĄZANE PRZEPISY\n10. ŹRÓDŁA",
+              "10. ŹRÓDŁA\n9. POWIĄZANE PRZEPISY"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("DRZEWO-LIMIT");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
   it.each([
     ["analizator-umow-v1", "CONTRACT_ANALYSIS_V1", contractResources],
     ["chronologia-sprawy-v1", "CHRONOLOGY_V1", chronologyResources],
