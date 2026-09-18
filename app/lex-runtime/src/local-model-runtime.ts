@@ -2066,24 +2066,28 @@ export class LocalModelRuntime {
           `LOCAL_MODEL_PROFILE_NOT_CONFIGURED:${canonical}`
         );
       }
-      await this.stop();
-      this.writeConfig(
-        profile
-      );
       const qualification =
         this.readProfileQualification(
           canonical
         );
-      if (qualification) {
-        this.writeQualification(
-          qualification
-        );
-      } else {
-        fs.rmSync(
-          this.qualificationPath(),
-          { force: true }
+      if (
+        !qualification ||
+        qualification
+          .contextTokens !==
+          profile.context
+            .requestedTokens
+      ) {
+        throw new Error(
+          `LOCAL_MODEL_PROFILE_NOT_QUALIFIED:${canonical}`
         );
       }
+      await this.stop();
+      this.writeConfig(
+        profile
+      );
+      this.writeQualification(
+        qualification
+      );
       config = profile;
     }
 
@@ -3415,10 +3419,25 @@ export class LocalModelRuntime {
     const selected = config && normalizeModelId(config.model.id) === canonical
       ? config
       : null;
-    const profile =
-      selected ??
+    const savedProfile =
       this.readProfileConfig(
         canonical
+      );
+    const savedQualification =
+      this.readProfileQualification(
+        canonical
+      );
+    const profile =
+      selected ??
+      (
+        savedProfile &&
+        savedQualification &&
+        savedQualification
+          .contextTokens ===
+          savedProfile.context
+            .requestedTokens
+          ? savedProfile
+          : null
       );
     const minimum = model.minimumContext ?? this.contextPolicy().minimum;
     const maximum = model.maximumRuntimeContext ?? model.nativeContext;
