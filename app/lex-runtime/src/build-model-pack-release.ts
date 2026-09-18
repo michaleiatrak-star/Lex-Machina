@@ -135,6 +135,13 @@ const models =
           "string"
           ? model.displayName
           : "";
+      const updateFamily =
+        model.updateFamily ===
+          "BIELIK" ||
+        model.updateFamily ===
+          "MISTRAL"
+          ? model.updateFamily
+          : "";
       const filename =
         typeof model.filename ===
           "string"
@@ -190,6 +197,7 @@ const models =
         ) ||
         !displayName ||
         displayName.length > 200 ||
+        !updateFamily ||
         !/^[A-Za-z0-9._-]+\.gguf$/i.test(
           filename
         ) ||
@@ -223,6 +231,8 @@ const models =
 
       return {
         id,
+        family:
+          updateFamily,
         displayName,
         filename,
         url:
