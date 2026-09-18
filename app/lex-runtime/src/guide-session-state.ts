@@ -82,7 +82,7 @@ export type GuideTransition =
     };
 
 const SESSION_ID =
-  /^session_[a-f0-9]{32}$/;
+  /^authsess_[a-f0-9]{32}$/;
 const ACTION_ID =
   /^[A-Za-z0-9._:-]{3,96}$/;
 
