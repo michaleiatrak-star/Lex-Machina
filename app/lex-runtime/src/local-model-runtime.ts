@@ -11,6 +11,14 @@ import {
 
 export type LocalModelId = string;
 
+export type LocalBackendId =
+  | "CPU_X64_PORTABLE"
+  | "VULKAN_X64";
+
+export type LocalBackendPreference =
+  | "AUTO"
+  | LocalBackendId;
+
 export type LocalModelDescriptor = {
   provider: "local";
   id: LocalModelId;
@@ -48,6 +56,14 @@ type ReleaseManifest = {
     llamaCpp?: {
       version?: string;
       backend?: string;
+      backendPolicy?: string;
+      backends?: Array<{
+        id?: string;
+        url?: string;
+        sha256?: string;
+        bytes?: number;
+        gpuOffload?: boolean;
+      }>;
     };
   };
   models?: {
@@ -60,6 +76,12 @@ type ReleaseManifest = {
       step?: number;
       recommendedProfiles?: number[];
       default?: number;
+    };
+    backendSelection?: {
+      allowed?: string[];
+      default?: string;
+      autoPolicy?: string;
+      validation?: string;
     };
   };
 };
@@ -81,6 +103,7 @@ export type LocalContextQualification = {
     | "NATIVE_OR_REDUCED"
     | "YARN_EXTENDED";
   engine: "llama.cpp";
+  backend?: LocalBackendId;
   startupMs: number;
   tokenizerCalibration?:
     LocalTokenizerCalibration;
@@ -135,7 +158,12 @@ export type LocalHardwareProfile = {
     driverVersion?: string;
   }>;
   packagedBackend: string;
-  gpuOffloadEnabled: false;
+  configuredBackend:
+    LocalBackendId | null;
+  backendSelectionMode:
+    LocalBackendPreference | null;
+  gpuCandidateDetected: boolean;
+  gpuOffloadEnabled: boolean;
   detectedAt: string;
 };
 
@@ -263,7 +291,15 @@ type LocalAiConfig = {
   engine: {
     type: "llama.cpp";
     version?: string;
+    backend?: LocalBackendId;
+    selectionMode?:
+      LocalBackendPreference;
+    gpuOffload?: boolean;
     executable: string;
+    fallbackBackend?:
+      LocalBackendId | null;
+    fallbackExecutable?:
+      string | null;
     bind: "127.0.0.1";
   };
   network: {
@@ -327,6 +363,66 @@ function readJson<T>(file: string): T | null {
 
 function finiteInteger(value: unknown): value is number {
   return typeof value === "number" && Number.isInteger(value) && value > 0;
+}
+
+function isBackendId(
+  value: unknown
+): value is LocalBackendId {
+  return (
+    value ===
+      "CPU_X64_PORTABLE" ||
+    value === "VULKAN_X64"
+  );
+}
+
+function isBackendPreference(
+  value: unknown
+): value is
+  LocalBackendPreference {
+  return (
+    value === "AUTO" ||
+    isBackendId(value)
+  );
+}
+
+function configBackend(
+  config: LocalAiConfig | null
+): LocalBackendId | null {
+  if (!config) return null;
+  return isBackendId(
+    config.engine.backend
+  )
+    ? config.engine.backend
+    : "CPU_X64_PORTABLE";
+}
+
+function configSelectionMode(
+  config: LocalAiConfig | null
+): LocalBackendPreference | null {
+  if (!config) return null;
+  return isBackendPreference(
+    config.engine.selectionMode
+  )
+    ? config.engine.selectionMode
+    : configBackend(config);
+}
+
+function usableAcceleratorName(
+  name: string
+): boolean {
+  return ![
+    "microsoft basic display",
+    "remote display",
+    "indirect display",
+    "virtual display"
+  ].some(
+    (needle) =>
+      name
+        .toLocaleLowerCase(
+          "en"
+        )
+        .includes(needle)
+  );
 }
 
 function normalizeModelId(id: string): string {
@@ -595,6 +691,48 @@ export class LocalModelRuntime {
       }
     }
 
+    const config =
+      this.readConfig();
+    const qualification =
+      this.readQualification();
+    const configuredBackend =
+      configBackend(config);
+    const selectionMode =
+      configSelectionMode(
+        config
+      );
+    const gpuCandidateDetected =
+      accelerators.some(
+        (item) =>
+          usableAcceleratorName(
+            item.name
+          )
+      );
+    const gpuOffloadEnabled =
+      Boolean(
+        config &&
+        configuredBackend ===
+          "VULKAN_X64" &&
+        config.engine.gpuOffload ===
+          true &&
+        qualification &&
+        normalizeModelId(
+          qualification.modelId
+        ) ===
+          normalizeModelId(
+            config.model.id
+          ) &&
+        qualification
+          .contextTokens ===
+          config.context
+            .requestedTokens &&
+        (
+          qualification.backend ??
+          configuredBackend
+        ) ===
+          configuredBackend
+      );
+
     const value: LocalHardwareProfile = {
       platform:
         process.platform,
@@ -614,7 +752,11 @@ export class LocalModelRuntime {
           ?.llamaCpp
           ?.backend ??
         "UNKNOWN",
-      gpuOffloadEnabled: false,
+      configuredBackend,
+      backendSelectionMode:
+        selectionMode,
+      gpuCandidateDetected,
+      gpuOffloadEnabled,
       detectedAt:
         new Date().toISOString()
     };
