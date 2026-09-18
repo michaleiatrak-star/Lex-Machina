@@ -714,7 +714,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const workflowReads: DeterministicWorkflowReadReport =
       evaluateDeterministicWorkflowReads(
         execution.workflowPlan,
-        corpusAudit
+        corpusAudit,
+        execution.events
       );
     const workflowResourcesBlocked =
       workflowReads.result === "BLOCKED";
