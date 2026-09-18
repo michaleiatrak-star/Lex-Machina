@@ -4,12 +4,12 @@
   "applicationVersion": "0.1.3",
   "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
   "applicationUpdate": {
-    "verification": "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
+    "verification": "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
     "trustedSignerThumbprints": [],
     "transaction": "EXTERNAL_RUNNER_BACKUP_HEALTHCHECK_ROLLBACK",
     "stagingRoot": "%TEMP%\\LexMachinaUpdate",
-    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
-    "temporaryUnsignedAllowed": true
+    "policy": "FAIL_CLOSED_UNTIL_AUTHENTICODE_TRUST_ROOT_CONFIGURED",
+    "temporaryUnsignedAllowed": false
   },
   "runtime": {
     "node": {
