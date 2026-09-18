@@ -959,7 +959,21 @@ export class SafeSessionExecutor implements SessionExecutor {
           execution.events,
         workflowReads,
         verificationRecords,
-        finalization
+        finalization,
+        outputValidation: {
+          result:
+            workflowOutputBlocked ||
+            guideOutputBlocked ||
+            reportBlueprintBlocked
+              ? "BLOCKED"
+              : "PASS",
+          detail:
+            [
+              `workflow=${workflowOutput.result}`,
+              `guide=${guideOutput?.result ?? "N/A"}`,
+              `reportBlueprint=${reportBlueprintBlocked ? "BLOCKED" : "PASS"}`
+            ].join(";")
+        }
       });
     const gateIBlocked =
       gateI.result ===
