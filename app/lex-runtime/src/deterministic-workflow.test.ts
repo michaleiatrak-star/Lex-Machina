@@ -530,6 +530,103 @@ describe("deterministic legal workflow", () => {
     expect(report.missing).toEqual([]);
   });
 
+  it(
+    "does not require the final court report during earlier court-analysis checkpoints",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analiza-sadowa-v6"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "PRZEJŚCIE III — RAPORT ADVERSARIALNY\nWeryfikacja pierwsza.",
+          {
+            courtCheckpoint:
+              "FIRST_VERIFICATION_COMPLETE"
+          }
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("COURT_CHECKPOINT");
+      expect(report.missing)
+        .toEqual([]);
+    }
+  );
+
+  it(
+    "requires the complete court-analysis final report at FINAL_REPORT_PRESENTED",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analiza-sadowa-v6"
+        );
+      const valid =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "RAPORT ANALITYCZNY — sprawa testowa",
+            "EXECUTIVE SUMMARY",
+            "PRZEJŚCIE I — MAPA FAKTYCZNA",
+            "PRZEJŚCIE II — MACIERZ FAKT-NORMA",
+            "PRZEJŚCIE III — RAPORT ADVERSARIALNY",
+            "PRZEJŚCIE IV — AUTOKOREKTA",
+            "§1. KWALIFIKACJA PRAWNA I ZNAMIONA",
+            "§2. ORZECZNICTWO",
+            "§3. STRONA PODMIOTOWA",
+            "§4. OCENA MATERIAŁU DOWODOWEGO",
+            "§5. SŁABOŚCI STRON",
+            "§6. TEST IN DUBIO",
+            "§7. SYGNAŁY PROCEDURALNE",
+            "§8. MODUŁY SPECJALISTYCZNE",
+            "§9. PREDYKCJA ROZSTRZYGNIĘCIA",
+            "§10. REKOMENDACJE PROCESOWE",
+            "§11. AUTOKOREKTA"
+          ].join("\n"),
+          {
+            courtCheckpoint:
+              "FINAL_REPORT_PRESENTED"
+          }
+        );
+
+      expect(valid.result)
+        .toBe("PASS");
+      expect(valid.mode)
+        .toBe("COURT_FINAL");
+      expect(valid.orderValid)
+        .toBe(true);
+
+      const invalid =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "RAPORT ANALITYCZNY",
+            "EXECUTIVE SUMMARY",
+            "PRZEJŚCIE I",
+            "§1. KWALIFIKACJA",
+            "§11. AUTOKOREKTA"
+          ].join("\n"),
+          {
+            courtCheckpoint:
+              "FINAL_REPORT_PRESENTED"
+          }
+        );
+
+      expect(invalid.result)
+        .toBe("BLOCKED");
+      expect(invalid.missing)
+        .toContain("§10.");
+      expect(invalid.orderValid)
+        .toBe(false);
+    }
+  );
+
   it("uses the evidence-analysis workflow with only always-on deterministic gates", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
