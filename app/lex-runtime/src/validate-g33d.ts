@@ -64,13 +64,16 @@ const checks = {
     hooks.includes("--self-test") &&
     hooks.includes("Abort"),
   deterministicRuntimeResourceMapping:
-    Boolean(
-      tauriConfig.bundle?.resources &&
-      typeof tauriConfig.bundle.resources === "object" &&
-      !Array.isArray(tauriConfig.bundle.resources) &&
-      (
-        tauriConfig.bundle.resources as Record<string, unknown>
-      ).runtime === "runtime"
+    tauriConfig.bundle?.resources === undefined &&
+    hooks.includes('SetOutPath "$INSTDIR\\runtime"') &&
+    hooks.includes(
+      'File /r "${LEX_HOOK_FILE_DIR}\\..\\runtime\\*"'
+    ) &&
+    hooks.includes(
+      'IfFileExists "$INSTDIR\\runtime\\app\\dist\\http\\server.js"'
+    ) &&
+    hooks.includes(
+      'RMDir /r "$INSTDIR\\runtime\\app"'
     )
 };
 
