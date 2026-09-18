@@ -219,6 +219,65 @@ describe("deterministic legal workflow", () => {
   );
 
   it(
+    "blocks an intake-only response that names no concrete missing data",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-proste-v2"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "📋 DANE DO UZUPEŁNIENIA"
+        );
+
+      expect(report.result)
+        .toBe("BLOCKED");
+      expect(report.mode)
+        .toBe("INTAKE_REQUIRED");
+      expect(report.missing)
+        .toContain(
+          "KONKRETNA LISTA BRAKUJĄCYCH DANYCH"
+        );
+    }
+  );
+
+  it(
+    "blocks orphaned ready-letter sections in an intake-only response",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-proste-v2"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "📋 DANE DO UZUPEŁNIENIA",
+            "Proszę podać adres strony przeciwnej.",
+            "💡 UWAGI PRAKTYCZNE",
+            "Zachowaj dokumenty."
+          ].join("\n")
+        );
+
+      expect(report.result)
+        .toBe("BLOCKED");
+      expect(report.mode)
+        .toBe("INTAKE_REQUIRED");
+      expect(report.orderValid)
+        .toBe(false);
+      expect(report.missing)
+        .toContain(
+          "BRAK SEKCJI GOTOWEGO PISMA"
+        );
+    }
+  );
+
+  it(
     "accepts a complete simple-letter M9 presentation contract",
     () => {
       const registry = fixture();

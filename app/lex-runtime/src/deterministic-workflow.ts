@@ -472,18 +472,84 @@ export function evaluateDeterministicWorkflowOutput(
     intakeRequired &&
     !hasLetterBody
   ) {
+    const marker =
+      "DANE DO UZUPEŁNIENIA";
+    const markerIndex =
+      normalizedSimple.indexOf(
+        marker
+      );
+    const intakeTail =
+      markerIndex >= 0
+        ? normalizedSimple.slice(
+            markerIndex +
+              marker.length
+          )
+        : "";
+    const hasSpecificMissingData =
+      intakeTail
+        .split(/\r?\n/)
+        .some((line) =>
+          /[A-ZĄĆĘŁŃÓŚŹŻ0-9]{2,}/.test(
+            line
+          )
+        );
+    const partialArtifactMarkers =
+      SIMPLE_LETTER_READY_MARKERS
+        .filter(
+          (readyMarker) =>
+            readyMarker !==
+              "TREŚĆ PISMA" &&
+            normalizedSimple.includes(
+              readyMarker
+            )
+        );
+
+    const required = [
+      "DANE DO UZUPEŁNIENIA",
+      "KONKRETNA LISTA BRAKUJĄCYCH DANYCH",
+      "BRAK SEKCJI GOTOWEGO PISMA"
+    ];
+    const observed = [
+      "DANE DO UZUPEŁNIENIA",
+      ...(hasSpecificMissingData
+        ? [
+            "KONKRETNA LISTA BRAKUJĄCYCH DANYCH"
+          ]
+        : []),
+      ...(partialArtifactMarkers.length ===
+      0
+        ? [
+            "BRAK SEKCJI GOTOWEGO PISMA"
+          ]
+        : [])
+    ];
+    const missing = [
+      ...(!hasSpecificMissingData
+        ? [
+            "KONKRETNA LISTA BRAKUJĄCYCH DANYCH"
+          ]
+        : []),
+      ...(partialArtifactMarkers.length >
+      0
+        ? [
+            "BRAK SEKCJI GOTOWEGO PISMA"
+          ]
+        : [])
+    ];
+
     return {
       workflow: plan.id,
       mode: "INTAKE_REQUIRED",
-      required: [
-        "DANE DO UZUPEŁNIENIA"
-      ],
-      observed: [
-        "DANE DO UZUPEŁNIENIA"
-      ],
-      missing: [],
-      orderValid: true,
-      result: "PASS"
+      required,
+      observed,
+      missing,
+      orderValid:
+        partialArtifactMarkers.length ===
+        0,
+      result:
+        missing.length === 0
+          ? "PASS"
+          : "BLOCKED"
     };
   }
 
