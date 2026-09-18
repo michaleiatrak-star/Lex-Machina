@@ -441,7 +441,8 @@ export async function startLocalServer(options?: {
           legalSourceVerifier,
           undefined,
           new TemporalSourceFreshnessChecker()
-        )
+        ),
+      new LocalStanzaNamedEntityRecognizer()
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(
