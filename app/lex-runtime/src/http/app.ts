@@ -384,7 +384,8 @@ export type LexHttpAppOptions = {
     Partial<
       Pick<
         DynamicModelCatalog,
-        "localContextWindow"
+        | "localContextWindow"
+        | "localTokenCharsPerToken"
       >
     >;
   credentialResolver?: ProviderCredentialResolver;
@@ -5702,6 +5703,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       if (localContextWindow) {
         request.modelContextTokens =
           localContextWindow;
+        const localTokenCharsPerToken =
+          options.modelCatalog
+            .localTokenCharsPerToken?.(
+              request.model
+            );
+        if (
+          localTokenCharsPerToken
+        ) {
+          request.tokenCharsPerToken =
+            localTokenCharsPerToken;
+        }
       }
 
       const previewPlan =
