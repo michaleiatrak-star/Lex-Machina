@@ -141,6 +141,9 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
+  ; The product contract is a full destructive uninstall. Keep Tauri's own
+  ; app-data branch aligned with the mandatory Lex purge below.
+  StrCpy $DeleteAppDataCheckboxState 1
   SetOutPath "$PLUGINSDIR"
   File "/oname=lex-purge-user-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\purge-windows-user-state.ps1"
 
