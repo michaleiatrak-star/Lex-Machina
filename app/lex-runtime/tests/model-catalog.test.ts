@@ -169,6 +169,38 @@ describe("DynamicModelCatalog", () => {
             "2026-09-18T10:00:01.000Z"
         }
       }),
+      qualificationForModel: (
+        modelId: string
+      ) =>
+        modelId ===
+          "local/mistral-nemo"
+          ? {
+              schemaVersion: 1 as const,
+              result: "PASS" as const,
+              modelId:
+                "local/mistral-nemo",
+              contextTokens:
+                128_000,
+              contextMode:
+                "NATIVE_OR_REDUCED" as const,
+              engine:
+                "llama.cpp" as const,
+              startupMs: 1234,
+              tokenizerCalibration: {
+                endpoint:
+                  "/tokenize" as const,
+                sampleCount: 3,
+                observedMinCharsPerToken:
+                  2.71,
+                conservativeCharsPerToken:
+                  2.439,
+                calibratedAt:
+                  "2026-09-18T10:00:00.000Z"
+              },
+              validatedAt:
+                "2026-09-18T10:00:01.000Z"
+            }
+          : null,
       listModels: () => []
     } as unknown as
       LocalModelRuntime;
