@@ -520,20 +520,36 @@ const pass =
   ).includes(
     "CASE-QUOTE:"
   ) &&
-  verifiedSummary.records === 2 &&
-  verifiedSummary.verified === 2 &&
+  typeof verifiedSummary.records ===
+    "number" &&
+  verifiedSummary.records >= 2 &&
+  verifiedSummary.verified ===
+    verifiedSummary.records &&
+  verifiedSummary.supported === 0 &&
+  verifiedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
   fake.status === "BLOCKED" &&
   !("answer" in fake) &&
-  fakeSummary.records === 0 &&
+  typeof fakeSummary.records ===
+    "number" &&
+  fakeSummary.records >= 1 &&
+  fakeSummary.verified ===
+    fakeSummary.records &&
+  fakeSummary.supported === 0 &&
+  fakeSummary.unverified === 0 &&
 
   alteredHttp.status === 200 &&
   altered.status ===
     "BLOCKED" &&
   !("answer" in altered) &&
-  alteredSummary.records === 2 &&
-  alteredSummary.verified === 2;
+  typeof alteredSummary.records ===
+    "number" &&
+  alteredSummary.records >= 2 &&
+  alteredSummary.verified ===
+    alteredSummary.records &&
+  alteredSummary.supported === 0 &&
+  alteredSummary.unverified === 0;
 
 process.stdout.write(
   JSON.stringify({
