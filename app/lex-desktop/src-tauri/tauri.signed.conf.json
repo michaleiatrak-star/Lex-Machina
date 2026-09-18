@@ -1,0 +1,18 @@
+{
+  "bundle": {
+    "windows": {
+      "signCommand": {
+        "cmd": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "../../installer/tauri-sign-command.ps1",
+          "%1"
+        ]
+      }
+    }
+  }
+}
