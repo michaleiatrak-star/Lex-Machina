@@ -177,6 +177,8 @@ try {
     Write-Host "Acceptance: forcing verified bundled VC++ fallback branch"
   }
 
+  $preinstallDiagnostic = Join-Path $env:TEMP "LexMachinaPreinstall-error.log"
+  Remove-Item -LiteralPath $preinstallDiagnostic -Force -ErrorAction SilentlyContinue
   Write-Host "G33D: silent install to $InstallRoot"
   $arguments = @("/S", "/D=$InstallRoot")
   $process = Start-Process -FilePath $installer -ArgumentList $arguments -PassThru
@@ -187,6 +189,10 @@ try {
   $process.Refresh()
   if ($process.ExitCode -ne 0) {
     $diagnosticLog = Join-Path $InstallRoot "runtime\bootstrap-install-error.log"
+    if (Test-Path -LiteralPath $preinstallDiagnostic -PathType Leaf) {
+      Write-Host "Installer preinstall diagnostic follows:"
+      Get-Content -LiteralPath $preinstallDiagnostic | Out-Host
+    }
     if (Test-Path -LiteralPath $diagnosticLog -PathType Leaf) {
       Write-Host "Installer bootstrap diagnostic follows:"
       Get-Content -LiteralPath $diagnosticLog | Out-Host
