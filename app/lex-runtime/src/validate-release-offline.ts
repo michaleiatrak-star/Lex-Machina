@@ -170,10 +170,16 @@ const checks = {
       'Copy-Item $vcRedist (Join-Path $prerequisites "vc_redist.x64.exe")'
     ) &&
     bootstrap.includes(
-      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
+      "vc_redist.x64.exe"
+    ) &&
+    bootstrap.includes(
+      "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled"
     ) &&
     offlineBundleInstall.includes(
-      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
+      "vc_redist.x64.exe"
+    ) &&
+    offlineBundleInstall.includes(
+      "OFFLINE_BUNDLE_VC_RUNTIME_HASH_MISMATCH"
     ),
   installedCopyAcceptance:
     workflow.includes(
