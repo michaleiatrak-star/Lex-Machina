@@ -11,7 +11,7 @@ const source = JSON.parse(read("app/installer/windows-release-source.json"));
 const build = read("app/installer/build-windows-online.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
-const privatePython = read("app/installer/install-private-python.ps1");
+const privatePythonHelperSource = read("app/installer/install-private-python.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const sidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
@@ -45,11 +45,11 @@ const checks = {
     source.runtime?.python?.delivery === "APP_LOCAL_ZIP" &&
     /^[a-f0-9]{64}$/i.test(source.runtime?.python?.sha256 ?? "") &&
     bootstrap.includes("install-private-python.ps1") &&
-    privatePython.includes("Invoke-WebRequest") &&
-    privatePython.includes("pythonSource.sha256") &&
-    privatePython.includes("Expand-Archive") &&
-    privatePython.includes("PRIVATE_PYTHON_READY") &&
-    !privatePython.includes("TargetDir=") &&
+    privatePythonHelperSource.includes("Invoke-WebRequest") &&
+    privatePythonHelperSource.includes("pythonSource.sha256") &&
+    privatePythonHelperSource.includes("Expand-Archive") &&
+    privatePythonHelperSource.includes("PRIVATE_PYTHON_READY") &&
+    !privatePythonHelperSource.includes("TargetDir=") &&
     sidecar.includes('join("python")') &&
     sidecar.includes('join("python.exe")'),
   pinnedPackagesOnlyIfNeeded:
