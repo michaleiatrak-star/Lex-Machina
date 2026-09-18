@@ -8,6 +8,8 @@ on:
       - "app/installer/windows-release-source.json"
       - "app/installer/sign-windows-artifact.ps1"
       - "app/installer/sign-windows-artifact-selftest.ps1"
+      - "app/installer/polish-nsis-language-selftest.ps1"
+      - "app/lex-desktop/src-tauri/windows/Polish.nsh"
       - "app/lex-desktop/src-tauri/windows/hooks.nsh"
       - ".github/workflows/g39-installer-state.yml"
   workflow_dispatch:
@@ -36,3 +38,7 @@ jobs:
       - name: G39J Authenticode fail-closed policy
         shell: pwsh
         run: ./app/installer/sign-windows-artifact-selftest.ps1
+
+      - name: Polish NSIS maintenance language contract
+        shell: pwsh
+        run: ./app/installer/polish-nsis-language-selftest.ps1
