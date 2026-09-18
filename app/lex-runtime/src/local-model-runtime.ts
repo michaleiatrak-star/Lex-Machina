@@ -1542,6 +1542,8 @@ export class LocalModelRuntime {
     };
     contextTokens: number;
     force?: boolean;
+    backendPreference?:
+      LocalBackendPreference;
   }): Promise<{
     model: LocalModelDescriptor;
     contextTokens: number;
@@ -1555,7 +1557,9 @@ export class LocalModelRuntime {
         entry.id
       );
     const installed =
-      this.installedModelUpdateIdentity();
+      this.installedModelUpdateIdentity(
+        canonical
+      );
     if (
       !installed ||
       installed.modelId !==
@@ -1740,6 +1744,30 @@ export class LocalModelRuntime {
     let committedReceipt:
       LocalModelPackReceipt | null =
         null;
+    const existingConfig =
+      this.readConfig();
+    const preserveActiveConfiguration =
+      Boolean(
+        existingConfig &&
+        normalizeModelId(
+          existingConfig.model.id
+        ) !== canonical
+      );
+    const backendPreference =
+      args.backendPreference ??
+      configSelectionMode(
+        existingConfig
+      ) ??
+      "AUTO";
+
+    if (
+      preserveActiveConfiguration
+    ) {
+      this.beginInactiveModelUpdate(
+        canonical
+      );
+    }
+
     try {
       const result =
         await this.provision(
@@ -1794,9 +1822,7 @@ export class LocalModelRuntime {
                 receipt;
             }
           },
-          configSelectionMode(
-            this.readConfig()
-          ) ?? "AUTO"
+          backendPreference
         );
 
       if (!committedReceipt) {
@@ -1805,11 +1831,32 @@ export class LocalModelRuntime {
         );
       }
 
+      if (
+        preserveActiveConfiguration
+      ) {
+        this.restoreInactiveModelUpdate();
+      }
+
       return {
         ...result,
+        model:
+          this.publicDescriptor(
+            trustedModel,
+            this.readConfig()
+          ),
         receipt:
           committedReceipt
       };
+    } catch (error) {
+      if (
+        preserveActiveConfiguration &&
+        fs.existsSync(
+          this.inactiveModelUpdateTransactionPath()
+        )
+      ) {
+        this.restoreInactiveModelUpdate();
+      }
+      throw error;
     } finally {
       fs.rmSync(
         manifestPath,
