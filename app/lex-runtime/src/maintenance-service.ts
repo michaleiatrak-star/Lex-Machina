@@ -111,6 +111,269 @@ export function installedSkillOverlayRoot(): string {
   return path.join(localAppDataRoot(), "skills", "current");
 }
 
+export function installedSkillOverlayPreviousRoot(): string {
+  return path.join(localAppDataRoot(), "skills", "previous");
+}
+
+export type SkillOverlayStartupResult = {
+  root: string | null;
+  action:
+    | "BUNDLED"
+    | "CURRENT_HEALTHY"
+    | "ROLLED_BACK_TO_PREVIOUS";
+  version: string | null;
+  rolledBackFromVersion?: string;
+};
+
+export function validateSkillOverlayRoot(
+  root: string
+): {
+  healthy: boolean;
+  version: string | null;
+  issues: string[];
+} {
+  const resolved = path.resolve(root);
+  if (
+    !fs.existsSync(resolved) ||
+    !fs.statSync(resolved).isDirectory()
+  ) {
+    return {
+      healthy: false,
+      version: null,
+      issues: ["ROOT_MISSING"]
+    };
+  }
+
+  let version: string | null = null;
+  try {
+    const marker = JSON.parse(
+      fs.readFileSync(
+        markerPath(resolved),
+        "utf8"
+      )
+    ) as {
+      version?: unknown;
+    };
+    if (
+      typeof marker.version !==
+        "string" ||
+      !/^\d+\.\d+\.\d+$/.test(
+        marker.version
+      )
+    ) {
+      return {
+        healthy: false,
+        version: null,
+        issues: ["VERSION_MARKER_INVALID"]
+      };
+    }
+    version = marker.version;
+  } catch {
+    return {
+      healthy: false,
+      version: null,
+      issues: ["VERSION_MARKER_MISSING_OR_INVALID"]
+    };
+  }
+
+  const registry =
+    new LexSkillRegistry(resolved);
+  const issues = [
+    ...registry.scan(),
+    ...registry.validateDeclarations()
+  ].map(
+    (issue) =>
+      issue.code +
+      ":" +
+      (issue.skill ?? "") +
+      ":" +
+      (issue.target ?? "")
+  );
+  if (
+    registry.skills.size === 0
+  ) {
+    issues.push("NO_SKILLS");
+  }
+
+  return {
+    healthy:
+      issues.length === 0,
+    version,
+    issues
+  };
+}
+
+function writeSkillHealthMarker(
+  root: string,
+  patch: Record<string, unknown>
+): void {
+  const target =
+    markerPath(root);
+  let existing:
+    Record<string, unknown> = {};
+  try {
+    const parsed = JSON.parse(
+      fs.readFileSync(
+        target,
+        "utf8"
+      )
+    ) as unknown;
+    if (
+      parsed &&
+      typeof parsed === "object" &&
+      !Array.isArray(parsed)
+    ) {
+      existing =
+        parsed as
+          Record<string, unknown>;
+    }
+  } catch {
+    // Validation runs before this helper is used.
+  }
+
+  const temporary =
+    target + ".tmp";
+  fs.writeFileSync(
+    temporary,
+    JSON.stringify(
+      {
+        ...existing,
+        ...patch
+      },
+      null,
+      2
+    ) + "\n",
+    "utf8"
+  );
+  fs.renameSync(
+    temporary,
+    target
+  );
+}
+
+export function recoverSkillOverlayForStartup():
+  SkillOverlayStartupResult {
+  const current =
+    installedSkillOverlayRoot();
+  const previous =
+    installedSkillOverlayPreviousRoot();
+
+  if (
+    !fs.existsSync(current)
+  ) {
+    return {
+      root: null,
+      action: "BUNDLED",
+      version: null
+    };
+  }
+
+  const currentHealth =
+    validateSkillOverlayRoot(
+      current
+    );
+  if (
+    currentHealth.healthy
+  ) {
+    writeSkillHealthMarker(
+      current,
+      {
+        health:
+          "ACTIVE_HEALTHY",
+        validatedAt:
+          new Date().toISOString()
+      }
+    );
+    return {
+      root: current,
+      action:
+        "CURRENT_HEALTHY",
+      version:
+        currentHealth.version
+    };
+  }
+
+  const previousHealth =
+    validateSkillOverlayRoot(
+      previous
+    );
+  if (
+    !previousHealth.healthy
+  ) {
+    throw new Error(
+      "SKILL_OVERLAY_STARTUP_INVALID_NO_ROLLBACK:current=" +
+      currentHealth.issues.join(",") +
+      ":previous=" +
+      previousHealth.issues.join(",")
+    );
+  }
+
+  const failed =
+    path.join(
+      path.dirname(current),
+      "failed-" +
+      Date.now() +
+      "-" +
+      randomBytes(4).toString("hex")
+    );
+
+  fs.renameSync(
+    current,
+    failed
+  );
+  try {
+    fs.renameSync(
+      previous,
+      current
+    );
+  } catch (error) {
+    fs.renameSync(
+      failed,
+      current
+    );
+    throw error;
+  }
+
+  try {
+    writeSkillHealthMarker(
+      current,
+      {
+        health:
+          "ROLLED_BACK_HEALTHY",
+        validatedAt:
+          new Date().toISOString(),
+        rolledBackFromVersion:
+          currentHealth.version,
+        rollbackReason:
+          currentHealth.issues
+      }
+    );
+    fs.rmSync(
+      failed,
+      {
+        recursive: true,
+        force: true
+      }
+    );
+  } catch (error) {
+    throw error;
+  }
+
+  return {
+    root: current,
+    action:
+      "ROLLED_BACK_TO_PREVIOUS",
+    version:
+      previousHealth.version,
+    ...(currentHealth.version
+      ? {
+          rolledBackFromVersion:
+            currentHealth.version
+        }
+      : {})
+  };
+}
+
 export function applicationUpdateStagingRoot(): string {
   return path.join(os.tmpdir(), "LexMachinaUpdate");
 }
@@ -824,14 +1087,20 @@ export class MaintenanceService {
     );
 
     const current = installedSkillOverlayRoot();
-    const backup = path.join(skillsRoot, "previous");
+    const backup = installedSkillOverlayPreviousRoot();
     fs.rmSync(backup, { recursive: true, force: true });
     if (fs.existsSync(current)) {
       fs.renameSync(current, backup);
     }
     try {
       fs.renameSync(candidate, current);
-      fs.rmSync(backup, { recursive: true, force: true });
+      writeSkillHealthMarker(
+        current,
+        {
+          health:
+            "PENDING_RESTART_VALIDATION"
+        }
+      );
     } catch (error) {
       fs.rmSync(current, { recursive: true, force: true });
       if (fs.existsSync(backup)) {
