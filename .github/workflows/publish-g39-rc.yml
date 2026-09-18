@@ -6,7 +6,6 @@ on:
       - "feature/g39-execution-2026-09-17"
     paths:
       - "release/g39-rc.json"
-      - ".github/workflows/publish-g39-rc.yml"
 
 permissions:
   contents: read
