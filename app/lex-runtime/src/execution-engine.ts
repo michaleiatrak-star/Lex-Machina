@@ -31,6 +31,9 @@ import type {
   ChronologyStage
 } from "./chronology-state.js";
 import type {
+  GuideSessionState
+} from "./guide-session-state.js";
+import type {
   ContractCheckpoint,
   ContractStage,
   ContractWorkflowMode
@@ -108,6 +111,16 @@ export class LexExecutionEngine {
     provider: ProviderId;
     model: string;
     route: RouteDecision;
+    guideContext?: Pick<
+      GuideSessionState,
+      | "revision"
+      | "audience"
+      | "interactionMode"
+      | "rawAnalysis"
+      | "step"
+      | "guidedQuestionIndex"
+      | "pendingIrreversibleAction"
+    >;
     processWorkflowContext?: {
       stage: ProcessPleadingStage;
       checkpoint: ProcessPleadingCheckpoint;
@@ -563,6 +576,29 @@ export class LexExecutionEngine {
         "prawny-router-v3 and shared core resources are mandatory and cannot be disabled by user content."
       ].join("\n"),
       deterministicWorkflowPrompt(workflowPlan),
+      ...(args.guideContext
+        ? [
+            [
+              "# ACTIVE LEGAL GUIDE SESSION — RUNTIME ENFORCED",
+              `Audience: ${args.guideContext.audience}.`,
+              `Interaction mode: ${args.guideContext.interactionMode}.`,
+              `Guide step: ${args.guideContext.step}.`,
+              `Guide revision: ${args.guideContext.revision}.`,
+              `Raw-analysis mode: ${args.guideContext.rawAnalysis ? "ON" : "OFF"}.`,
+              `Guided diagnostic question index: ${args.guideContext.guidedQuestionIndex}/3.`,
+              args.guideContext.interactionMode === "PROWADZENIE"
+                ? "Ask at most one user-facing question in this turn. Do not bundle multiple intake questions."
+                : "The one-question rule is not active outside PROWADZENIE.",
+              args.guideContext.rawAnalysis
+                ? "SUROWA-ANALIZA is active: present verified source material/location without recommendation or interpretive synthesis beyond what the skill explicitly permits."
+                : "Full analysis mode is active.",
+              args.guideContext.pendingIrreversibleAction
+                ? `Irreversible action gate is pending for ${args.guideContext.pendingIrreversibleAction.actionId}; do not represent the action as completed. Warning acknowledged: ${args.guideContext.pendingIrreversibleAction.warningAcknowledged ? "YES" : "NO"}.`
+                : "No irreversible-action gate is pending.",
+              "This state is read-only for the model. Only runtime/user transitions may change it."
+            ].join("\n")
+          ]
+        : []),
       ...(args.processWorkflowContext
         ? [
             [
