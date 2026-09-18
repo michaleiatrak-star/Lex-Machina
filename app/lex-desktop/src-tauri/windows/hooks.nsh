@@ -21,6 +21,28 @@
   ${EndIf}
   DetailPrint "Lex Machina: stan instalacji $1"
 
+  Delete "$PLUGINSDIR\lex-clean-profile.flag"
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-read-install-state.ps1" -StatePath "$PLUGINSDIR\lex-install-state.json"'
+  Pop $R6
+  Pop $R7
+  ${If} $R6 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się odczytać trybu instalacji." /SD IDOK
+    Abort
+  ${EndIf}
+
+  ${If} $R7 == "FRESH"
+    MessageBox MB_ICONQUESTION|MB_YESNO "Lex Machina: to jest nowa instalacja.$\r$\n$\r$\nCzy utworzyć całkowicie czysty profil administratora?$\r$\n$\r$\nWybranie TAK usuwa pozostałości profilu poprzedniej instalacji. Aktualizacja lub naprawa zachowuje obecny profil." /SD IDNO IDYES lex_clean_profile_selected
+    Goto lex_clean_profile_done
+
+lex_clean_profile_selected:
+    FileOpen $R8 "$PLUGINSDIR\lex-clean-profile.flag" w
+    FileWrite $R8 "1"
+    FileClose $R8
+    DetailPrint "Lex Machina: wybrano czysty profil administratora."
+
+lex_clean_profile_done:
+  ${EndIf}
+
   ; Tauri copies the main executable immediately after PREINSTALL.
   ; Restore the installer output directory after embedding probe files in
   ; $PLUGINSDIR, otherwise the main EXE would be emitted into the temporary
