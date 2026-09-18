@@ -120,7 +120,8 @@ export type SkillOverlayStartupResult = {
   action:
     | "BUNDLED"
     | "CURRENT_HEALTHY"
-    | "ROLLED_BACK_TO_PREVIOUS";
+    | "ROLLED_BACK_TO_PREVIOUS"
+    | "ROLLED_BACK_TO_BUNDLED";
   version: string | null;
   rolledBackFromVersion?: string;
 };
@@ -251,8 +252,9 @@ function writeSkillHealthMarker(
   );
 }
 
-export function recoverSkillOverlayForStartup():
-  SkillOverlayStartupResult {
+export function recoverSkillOverlayForStartup(
+  bundledRoot?: string
+): SkillOverlayStartupResult {
   const current =
     installedSkillOverlayRoot();
   const previous =
@@ -300,11 +302,72 @@ export function recoverSkillOverlayForStartup():
   if (
     !previousHealth.healthy
   ) {
+    const bundledHealth =
+      bundledRoot
+        ? validateSkillOverlayRoot(
+            bundledRoot
+          )
+        : {
+            healthy: false,
+            version: null,
+            issues: [
+              "BUNDLED_ROOT_NOT_PROVIDED"
+            ]
+          };
+
+    if (
+      bundledRoot &&
+      bundledHealth.healthy
+    ) {
+      const failed =
+        path.join(
+          path.dirname(current),
+          "failed-" +
+          Date.now() +
+          "-" +
+          randomBytes(4)
+            .toString("hex")
+        );
+      fs.renameSync(
+        current,
+        failed
+      );
+      try {
+        fs.rmSync(
+          failed,
+          {
+            recursive: true,
+            force: true
+          }
+        );
+      } catch {
+        // Keeping a quarantined failed overlay is safer than restoring it.
+      }
+      return {
+        root:
+          path.resolve(
+            bundledRoot
+          ),
+        action:
+          "ROLLED_BACK_TO_BUNDLED",
+        version:
+          bundledHealth.version,
+        ...(currentHealth.version
+          ? {
+              rolledBackFromVersion:
+                currentHealth.version
+            }
+          : {})
+      };
+    }
+
     throw new Error(
       "SKILL_OVERLAY_STARTUP_INVALID_NO_ROLLBACK:current=" +
       currentHealth.issues.join(",") +
       ":previous=" +
-      previousHealth.issues.join(",")
+      previousHealth.issues.join(",") +
+      ":bundled=" +
+      bundledHealth.issues.join(",")
     );
   }
 
