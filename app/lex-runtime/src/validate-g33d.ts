@@ -59,6 +59,12 @@ const checks = {
     packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
+  windowsPathAndPrerequisiteRegression:
+    acceptance.includes("Lex Machina Installed ") &&
+    workflow.includes("LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME") &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') >= 0 &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') <
+      bootstrap.indexOf('Write-Host "[3/6] Private Python"'),
   postInstallFailClosed:
     hooks.includes("windows-online-bootstrap.ps1") &&
     hooks.includes("--self-test") &&
