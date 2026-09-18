@@ -9,6 +9,11 @@ import {
   createProcessPleadingState,
   markProcessCheckpointReady
 } from "./process-pleading-state.js";
+import {
+  completeChronologyCheckpoint,
+  createChronologyState,
+  requireChronologyTemporalGate
+} from "./chronology-state.js";
 
 const roots: string[] = [];
 
@@ -190,6 +195,102 @@ describe("encrypted case workspace", () => {
       .toBe("CP-1a");
     expect(afterRekey?.history.length)
       .toBeGreaterThanOrEqual(3);
+  });
+
+  it("keeps chronology workflow state encrypted and preserves the temporal-gate decision across key rotation", async () => {
+    const { rootDir, caseId, key, store } =
+      fixture();
+
+    let state =
+      createChronologyState(
+        caseId,
+        "2026-09-18T08:00:00.000Z"
+      );
+    state =
+      requireChronologyTemporalGate(
+        state,
+        true,
+        "2026-09-18T08:00:01.000Z"
+      );
+    state =
+      completeChronologyCheckpoint(
+        state,
+        "DOCUMENT_INVENTORY_COMPLETE",
+        [
+          "audit://chronology/inventory"
+        ],
+        "2026-09-18T08:00:02.000Z"
+      );
+
+    await store.saveChronologyState({
+      caseId,
+      caseDataKey: key,
+      keyVersion: 1,
+      state
+    });
+
+    const loaded =
+      await store.getChronologyState({
+        caseId,
+        caseDataKey: key,
+        keyVersion: 1
+      });
+    expect(loaded?.stage)
+      .toBe("THREADS");
+    expect(
+      loaded?.temporalGateRequired
+    ).toBe(true);
+    expect(
+      loaded?.closedCheckpoints
+    ).toEqual([
+      "DOCUMENT_INVENTORY_COMPLETE"
+    ]);
+
+    const onDisk =
+      fs.readFileSync(
+        path.join(
+          rootDir,
+          "cases",
+          caseId,
+          "secure",
+          "workspace",
+          "index.lmw1"
+        ),
+        "utf8"
+      );
+    expect(onDisk)
+      .not.toContain("CHRONOLOGY_V1");
+    expect(onDisk)
+      .not.toContain(
+        "DOCUMENT_INVENTORY_COMPLETE"
+      );
+    expect(onDisk)
+      .not.toContain(
+        "temporalGateRequired"
+      );
+
+    const next = randomBytes(32);
+    expect(
+      await store.rekeyCaseWorkspace({
+        caseId,
+        oldCaseDataKey: key,
+        oldKeyVersion: 1,
+        newCaseDataKey: next,
+        newKeyVersion: 2
+      })
+    ).toBe(true);
+
+    const afterRekey =
+      await store.getChronologyState({
+        caseId,
+        caseDataKey: next,
+        keyVersion: 2
+      });
+    expect(afterRekey?.stage)
+      .toBe("THREADS");
+    expect(
+      afterRekey?.temporalGateRequired
+    ).toBe(true);
   });
 
   it("re-encrypts the workspace when the case key rotates", async () => {
