@@ -6859,17 +6859,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           result.workflow.result ===
             "PASS"
         ) {
-          const auditRef =
-            [
-              "audit://session",
-              createHash("sha256")
-                .update(
-                  `${result.sessionId}\0${contractContext.permit.checkpoint}`
-                )
-                .digest("hex"),
-              contractContext.permit
-                .checkpoint
-            ].join("/");
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
 
           state =
             await options
@@ -6898,16 +6895,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       "CONTRACT_STATE_CONFLICT"
                     );
                   }
-                  const next =
-                    completeContractExecution(
-                      current,
-                      contractContext!
-                        .permit,
-                      [auditRef]
-                    );
-                  return await options
-                    .contractWorkflowStore!
-                    .saveContractAnalysisState({
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
                       caseId:
                         contractContext!
                           .caseId,
@@ -6915,10 +6908,60 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       keyVersion:
                         caseView
                           .keyVersion,
-                      state: next,
-                      expectedRevision:
-                        current.revision
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "CONTRACT_ANALYSIS_V1",
+                      checkpoint:
+                        contractContext!
+                          .permit
+                          .checkpoint,
+                      result
                     });
+
+                  try {
+                    const next =
+                      completeContractExecution(
+                        current,
+                        contractContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .contractWorkflowStore!
+                      .saveContractAnalysisState({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
                 }
               );
         }
@@ -6974,17 +7017,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           result.workflow.result ===
             "PASS"
         ) {
-          const auditRef =
-            [
-              "audit://session",
-              createHash("sha256")
-                .update(
-                  `${result.sessionId}\0${chronologyContext.permit.checkpoint}`
-                )
-                .digest("hex"),
-              chronologyContext.permit
-                .checkpoint
-            ].join("/");
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
 
           state =
             await options
@@ -7013,16 +7053,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       "CHRONOLOGY_STATE_CONFLICT"
                     );
                   }
-                  const next =
-                    completeChronologyExecution(
-                      current,
-                      chronologyContext!
-                        .permit,
-                      [auditRef]
-                    );
-                  return await options
-                    .chronologyWorkflowStore!
-                    .saveChronologyState({
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
                       caseId:
                         chronologyContext!
                           .caseId,
@@ -7030,10 +7066,60 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       keyVersion:
                         caseView
                           .keyVersion,
-                      state: next,
-                      expectedRevision:
-                        current.revision
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "CHRONOLOGY_V1",
+                      checkpoint:
+                        chronologyContext!
+                          .permit
+                          .checkpoint,
+                      result
                     });
+
+                  try {
+                    const next =
+                      completeChronologyExecution(
+                        current,
+                        chronologyContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
                 }
               );
         }
@@ -7090,17 +7176,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           result.workflow.result ===
             "PASS"
         ) {
-          const auditRef =
-            [
-              "audit://session",
-              createHash("sha256")
-                .update(
-                  `${result.sessionId}\0${courtContext.permit.checkpoint}`
-                )
-                .digest("hex"),
-              courtContext.permit
-                .checkpoint
-            ].join("/");
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
 
           state =
             await options
@@ -7129,16 +7212,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       "COURT_ANALYSIS_STATE_CONFLICT"
                     );
                   }
-                  const next =
-                    completeCourtAnalysisExecution(
-                      current,
-                      courtContext!
-                        .permit,
-                      [auditRef]
-                    );
-                  return await options
-                    .courtAnalysisWorkflowStore!
-                    .saveCourtAnalysisState({
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
                       caseId:
                         courtContext!
                           .caseId,
@@ -7146,10 +7225,60 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       keyVersion:
                         caseView
                           .keyVersion,
-                      state: next,
-                      expectedRevision:
-                        current.revision
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "COURT_ANALYSIS_V1",
+                      checkpoint:
+                        courtContext!
+                          .permit
+                          .checkpoint,
+                      result
                     });
+
+                  try {
+                    const next =
+                      completeCourtAnalysisExecution(
+                        current,
+                        courtContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .courtAnalysisWorkflowStore!
+                      .saveCourtAnalysisState({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
                 }
               );
         }
