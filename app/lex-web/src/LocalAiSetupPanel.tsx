@@ -487,7 +487,9 @@ export function LocalAiSetupPanel({
     setBusy(true);
     setError("");
     setMessage(
-      "Pobieram podpisaną aktualizację modelu do stagingu. Stary GGUF pozostaje rollbackiem do czasu udanego testu /health."
+      modelUpdate.signatureMode === "UNSIGNED_ALLOWED"
+        ? "Pobieram aktualizację modelu do stagingu. Tryb przejściowy dopuszcza brak podpisu, ale SHA-256, indeks, zgodność i rollback pozostają obowiązkowe."
+        : "Pobieram podpisaną aktualizację modelu do stagingu. Stary GGUF pozostaje rollbackiem do czasu udanego testu /health."
     );
     const polling =
       startProvisioningPolling();
@@ -532,7 +534,9 @@ export function LocalAiSetupPanel({
             result.model.id
         );
       setMessage(
-        `Model ${result.model.displayName} zaktualizowano z podpisanego pakietu ${result.receipt.packVersion}. Podpis: ${result.receipt.signerKeyId}. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.${preservedOtherActive ? " Poprzednio aktywny model pozostał aktywny." : ""}`
+        result.receipt.signerKeyId === "UNSIGNED_ALLOWED"
+          ? `Model ${result.model.displayName} zaktualizowano z pakietu ${result.receipt.packVersion}. Tryb unsigned: SHA-256 + indeks + walidacja runtime PASS. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.${preservedOtherActive ? " Poprzednio aktywny model pozostał aktywny." : ""}`
+          : `Model ${result.model.displayName} zaktualizowano z podpisanego pakietu ${result.receipt.packVersion}. Podpis: ${result.receipt.signerKeyId}. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.${preservedOtherActive ? " Poprzednio aktywny model pozostał aktywny." : ""}`
       );
     } catch (problem) {
       setError(
