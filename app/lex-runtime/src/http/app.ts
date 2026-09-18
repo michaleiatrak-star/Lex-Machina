@@ -5900,6 +5900,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       if (
         error instanceof Error &&
+        error.message.startsWith(
+          "PROCESS_PLEADING_"
+        )
+      ) {
+        res.status(409).json({
+          error:
+            error.message
+              .split(":", 1)[0]
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
         [
           "DOCUMENT_CITATION_SOURCE_CHANGED",
           "DOCUMENT_CITATION_SOURCE_UNAVAILABLE",
