@@ -28,38 +28,44 @@ if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
 }
 
-Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName PresentationCore
 $sourceStream = [IO.MemoryStream]::new($sourceBytes, $false)
-$sourceImage = $null
 $frames = [Collections.Generic.List[byte[]]]::new()
 try {
-  $sourceImage = [Drawing.Image]::FromStream($sourceStream, $true, $true)
-  if ($sourceImage.Width -ne 256 -or $sourceImage.Height -ne 256) {
-    throw "LEX_BRAND_SOURCE_DIMENSIONS_INVALID:$($sourceImage.Width)x$($sourceImage.Height)"
+  $decoder = [System.Windows.Media.Imaging.PngBitmapDecoder]::new(
+    $sourceStream,
+    [System.Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
+    [System.Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+  )
+  if ($decoder.Frames.Count -ne 1) {
+    throw "LEX_BRAND_SOURCE_FRAME_COUNT_INVALID:$($decoder.Frames.Count)"
+  }
+  $sourceFrame = $decoder.Frames[0]
+  if ($sourceFrame.PixelWidth -ne 256 -or $sourceFrame.PixelHeight -ne 256) {
+    throw "LEX_BRAND_SOURCE_DIMENSIONS_INVALID:$($sourceFrame.PixelWidth)x$($sourceFrame.PixelHeight)"
   }
 
   foreach ($size in $sizes) {
-    $bitmap = [Drawing.Bitmap]::new($size, $size, [Drawing.Imaging.PixelFormat]::Format32bppArgb)
-    $graphics = [Drawing.Graphics]::FromImage($bitmap)
+    $scaleX = [double]$size / [double]$sourceFrame.PixelWidth
+    $scaleY = [double]$size / [double]$sourceFrame.PixelHeight
+    $transform = [System.Windows.Media.ScaleTransform]::new($scaleX, $scaleY)
+    $resized = [System.Windows.Media.Imaging.TransformedBitmap]::new(
+      $sourceFrame,
+      $transform
+    )
+    $encoder = [System.Windows.Media.Imaging.PngBitmapEncoder]::new()
+    $encoder.Frames.Add(
+      [System.Windows.Media.Imaging.BitmapFrame]::Create($resized)
+    )
     $frameStream = [IO.MemoryStream]::new()
     try {
-      $graphics.Clear([Drawing.Color]::Transparent)
-      $graphics.CompositingMode = [Drawing.Drawing2D.CompositingMode]::SourceOver
-      $graphics.CompositingQuality = [Drawing.Drawing2D.CompositingQuality]::HighQuality
-      $graphics.InterpolationMode = [Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-      $graphics.PixelOffsetMode = [Drawing.Drawing2D.PixelOffsetMode]::HighQuality
-      $graphics.SmoothingMode = [Drawing.Drawing2D.SmoothingMode]::HighQuality
-      $graphics.DrawImage($sourceImage, [Drawing.Rectangle]::new(0, 0, $size, $size))
-      $bitmap.Save($frameStream, [Drawing.Imaging.ImageFormat]::Png)
+      $encoder.Save($frameStream)
       $frames.Add($frameStream.ToArray())
     } finally {
       $frameStream.Dispose()
-      $graphics.Dispose()
-      $bitmap.Dispose()
     }
   }
 } finally {
-  if ($sourceImage) { $sourceImage.Dispose() }
   $sourceStream.Dispose()
 }
 
