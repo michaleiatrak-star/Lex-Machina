@@ -25,6 +25,11 @@ import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
 import {
+  ReportBlueprintToolRuntime,
+  type AcceptedReportBlueprint,
+  type ReportBlueprintKind
+} from "./report-blueprint-tool-runtime.js";
+import {
   evaluateDeterministicWorkflowOutput,
   evaluateDeterministicWorkflowReads,
   type DeterministicWorkflowReadReport
@@ -213,6 +218,7 @@ export type SessionExecutionResponse = {
     result: "PASS";
     checked: number;
   };
+  reportBlueprint?: AcceptedReportBlueprint;
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: PublicBlockedReference[];
   verification: {
@@ -389,6 +395,7 @@ export class SafeSessionExecutor implements SessionExecutor {
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
     const corpusTools = new LegalCorpusToolRuntime(this.registry);
+    const reportTools = new ReportBlueprintToolRuntime();
 
     const auxiliary =
       await this.auxiliaryScheduler
@@ -491,10 +498,12 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     const toolSchemas = [
       ...corpusTools.schemas(),
+      ...reportTools.schemas(),
       ...(verificationTools ? verificationTools.schemas() : [])
     ];
     const toolPrompt = [
       corpusTools.systemPromptAppendix(),
+      reportTools.systemPromptAppendix(),
       ...(verificationTools
         ? [verificationTools.systemPromptAppendix()]
         : []),
@@ -544,10 +553,18 @@ export class SafeSessionExecutor implements SessionExecutor {
       toolSystemPromptAppendix: toolPrompt,
       runTools: async (calls) => {
         const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
-        const verificationCalls = calls.filter((call) => !corpusTools.handles(call.name));
+        const reportCalls = calls.filter((call) => reportTools.handles(call.name));
+        const verificationCalls = calls.filter(
+          (call) =>
+            !corpusTools.handles(call.name) &&
+            !reportTools.handles(call.name)
+        );
 
         const corpusResults = corpusCalls.length > 0
           ? await corpusTools.runTools(corpusCalls)
+          : [];
+        const reportResults = reportCalls.length > 0
+          ? await reportTools.runTools(reportCalls)
           : [];
         const cachedVerificationResults:
           NormalizedToolResult[] = [];
@@ -594,6 +611,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         const byId = new Map(
           [
             ...corpusResults,
+            ...reportResults,
             ...cachedVerificationResults,
             ...verificationResults
           ].map((result) => [
@@ -638,6 +656,24 @@ export class SafeSessionExecutor implements SessionExecutor {
       corpusBlocked ? "BLOCKED" : "OK",
       { toolEvents: corpusAudit.length }
     );
+
+    const reportAudit =
+      reportTools.auditEvents();
+    for (const event of reportAudit) {
+      audit.record(
+        "tool_decision",
+        event.target,
+        event.decision === "ALLOW"
+          ? "OK"
+          : "BLOCKED",
+        {
+          tool: event.tool,
+          ...(event.detail
+            ? event.detail
+            : {})
+        }
+      );
+    }
 
     const workflowReads: DeterministicWorkflowReadReport =
       evaluateDeterministicWorkflowReads(
@@ -742,8 +778,56 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
+    const requiredReportKind:
+      ReportBlueprintKind | null =
+        execution.workflowPlan.id ===
+          "CLIENT_REPORT_V1"
+          ? "CLIENT_REPORT_V1"
+          : execution.workflowPlan.id ===
+              "SITUATION_REPORT_V1"
+            ? "SITUATION_REPORT_V1"
+            : null;
+    const reportBlueprint =
+      requiredReportKind
+        ? reportTools.acceptedFor(
+            requiredReportKind
+          )
+        : null;
+    const reportBlueprintBlocked =
+      requiredReportKind !== null &&
+      reportBlueprint === null;
+
+    audit.record(
+      "gate",
+      "G39I_REPORT_BLUEPRINT",
+      reportBlueprintBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        required:
+          requiredReportKind,
+        accepted:
+          reportBlueprint?.kind ??
+          null,
+        toolEvents:
+          reportAudit.length
+      }
+    );
+
+    const finalizationText =
+      reportBlueprint
+        ? [
+            processedDocumentCitations.text,
+            "[STRUCTURED_REPORT_BLUEPRINT_DATA]",
+            JSON.stringify(
+              reportBlueprint.blueprint
+            ),
+            "[/STRUCTURED_REPORT_BLUEPRINT_DATA]"
+          ].join("\n")
+        : processedDocumentCitations.text;
+
     const finalization = this.finalizer.finalize({
-      text: processedDocumentCitations.text,
+      text: finalizationText,
       ledger,
       audit,
       closeSession: false
@@ -753,7 +837,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       finalization.result !== "PASS" ||
       corpusBlocked ||
       workflowResourcesBlocked ||
-      workflowOutputBlocked;
+      workflowOutputBlocked ||
+      reportBlueprintBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -763,7 +848,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         finalization: finalization.result,
         corpusBlocked,
         workflowResourcesBlocked,
-        workflowOutputBlocked
+        workflowOutputBlocked,
+        reportBlueprintBlocked
       }
     );
 
@@ -771,7 +857,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       finalization.result === "PASS" &&
       !corpusBlocked &&
       !workflowResourcesBlocked &&
-      !workflowOutputBlocked;
+      !workflowOutputBlocked &&
+      !reportBlueprintBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -825,7 +912,12 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? {
             answer: processedDocumentCitations.text,
-            documentCitations: processedDocumentCitations.citations
+            documentCitations: processedDocumentCitations.citations,
+            ...(reportBlueprint
+              ? {
+                  reportBlueprint
+                }
+              : {})
           }
         : {}),
       finalization: finalization.result,
@@ -852,6 +944,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         result:
           workflowResourcesBlocked ||
           workflowOutputBlocked ||
+          reportBlueprintBlocked ||
           finalization.result !== "PASS"
             ? "BLOCKED"
             : "PASS",
