@@ -220,8 +220,7 @@ Still required before G39H/I PASS:
 
 - current-head CI must be green after the latest AUTO/court-analysis integration;
 - persist or link a durable per-session audit artifact so court-analysis audit references are independently resolvable, not only integrity-oriented identifiers;
-- extend stateful deterministic execution beyond process/court workflows where a multi-turn state machine materially improves correctness;
-- add stateful deterministic execution only where multi-turn state materially improves correctness: chronology event inventory/contradiction lifecycle and contract-analysis step registry are the next candidates; report skills remain high-determinism schema/output workflows rather than artificial state machines;
+- extend stateful deterministic execution beyond process/court/chronology/contract workflows only where multi-turn state materially improves correctness; report skills remain high-determinism schema/output workflows rather than artificial state machines;
 - comparative regression tests skill-only vs engine-controlled for each migrated workflow;
 - after two stable releases, shorten duplicated skill instructions that are now runtime-enforced.
 
@@ -255,13 +254,13 @@ External / production blockers:
 
 ## Current closure order
 
-1. obtain current-head runtime validation PASS after the remaining execution-skill preflights/routing changes;
-2. obtain current-head online installer acceptance PASS with explicit `runtime → runtime` resource mapping and the registered-install-root G39G2 gate;
+1. obtain current-head runtime validation PASS after contract-analysis HTTP integration and case-law fixture updates;
+2. obtain current-head online installer acceptance PASS with G39G2 registered-install-root and Polish maintenance-language gates;
 3. obtain current-head offline installer acceptance PASS;
 4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
-5. implement stateful chronology execution (inventory → extraction → contradiction index → report) with encrypted per-case persistence;
-6. implement contract-analysis deterministic step registry/mode transitions without moving semantic risk assessment/negotiation into code;
-7. implement G39C summary backlinks plus tokenizer calibration;
+5. implement G39C summary backlinks/context compression with provenance-preserving re-fetch;
+6. calibrate context token estimation against the bundled llama.cpp tokenizer/runtime;
+7. add comparative skill-only vs engine-controlled regression suites for process/court/chronology/contract workflows;
 8. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
 9. configure production application/skill/model-pack signing and execute signed acceptance;
 10. enable protected `main` / release rules outside this GitHub integration;
