@@ -21,6 +21,7 @@ import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
 import {
+  evaluateDeterministicWorkflowOutput,
   evaluateDeterministicWorkflowReads,
   type DeterministicWorkflowReadReport
 } from "./deterministic-workflow.js";
@@ -569,6 +570,36 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
+    const workflowOutput =
+      evaluateDeterministicWorkflowOutput(
+        execution.workflowPlan,
+        processedDocumentCitations.text
+      );
+    const workflowOutputBlocked =
+      workflowOutput.result ===
+        "BLOCKED";
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_OUTPUT",
+      workflowOutputBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        workflow:
+          workflowOutput.workflow,
+        mode:
+          workflowOutput.mode,
+        required:
+          workflowOutput.required,
+        observed:
+          workflowOutput.observed,
+        missing:
+          workflowOutput.missing,
+        orderValid:
+          workflowOutput.orderValid
+      }
+    );
+
     const finalization = this.finalizer.finalize({
       text: processedDocumentCitations.text,
       ledger,
@@ -579,7 +610,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const workflowFinalizationBlocked =
       finalization.result !== "PASS" ||
       corpusBlocked ||
-      workflowResourcesBlocked;
+      workflowResourcesBlocked ||
+      workflowOutputBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -588,14 +620,16 @@ export class SafeSessionExecutor implements SessionExecutor {
         workflow: execution.workflowPlan.id,
         finalization: finalization.result,
         corpusBlocked,
-        workflowResourcesBlocked
+        workflowResourcesBlocked,
+        workflowOutputBlocked
       }
     );
 
     const safeToPresent =
       finalization.result === "PASS" &&
       !corpusBlocked &&
-      !workflowResourcesBlocked;
+      !workflowResourcesBlocked &&
+      !workflowOutputBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -660,7 +694,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       workflow: {
         id: execution.workflowPlan.id,
         result:
-          workflowResourcesBlocked || finalization.result !== "PASS"
+          workflowResourcesBlocked ||
+          workflowOutputBlocked ||
+          finalization.result !== "PASS"
             ? "BLOCKED"
             : "PASS",
         requiredResources: workflowReads.required,
