@@ -3,6 +3,7 @@ name: G39 Installer State Machine
 on:
   pull_request:
     paths:
+      - "app/installer/*.ps1"
       - "app/installer/get-install-state.ps1"
       - "app/installer/installer-state-machine-selftest.ps1"
       - "app/installer/windows-release-source.json"
@@ -33,6 +34,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Parse installer PowerShell scripts
+        shell: pwsh
+        run: ./app/installer/powershell-syntax-selftest.ps1
 
       - name: Exercise Fresh / Upgrade / Repair / Current / DowngradeBlocked
         shell: pwsh
