@@ -111,7 +111,6 @@ $stream = [IO.File]::Open(
 $writer = [IO.BinaryWriter]::new($stream)
 
 try {
-  # ICONDIR
   $writer.Write([UInt16]0)
   $writer.Write([UInt16]1)
   $writer.Write([UInt16]$frames.Count)
@@ -121,10 +120,14 @@ try {
   for ($index = 0; $index -lt $frames.Count; $index++) {
     $size = [int]$sizes[$index]
     $frame = $frames[$index]
+    $dimensionByte = if ($size -eq 256) {
+      [byte]0
+    } else {
+      [byte]$size
+    }
 
-    # ICONDIRENTRY. A width/height byte of 0 means 256.
-    $writer.Write([byte](if ($size -eq 256) { 0 } else { $size }))
-    $writer.Write([byte](if ($size -eq 256) { 0 } else { $size }))
+    $writer.Write($dimensionByte)
+    $writer.Write($dimensionByte)
     $writer.Write([byte]0)
     $writer.Write([byte]0)
     $writer.Write([UInt16]1)
