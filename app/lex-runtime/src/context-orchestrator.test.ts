@@ -9,6 +9,9 @@ import type {
 import {
   orchestrateDocumentContext
 } from "./context-orchestrator.js";
+import {
+  processDocumentCitationMarkers
+} from "./document-citations.js";
 
 function attachment(
   id: string,
@@ -278,6 +281,31 @@ describe(
           result.report
             .backlinkedChunks
         ).toBe(1);
+
+        const cited =
+          processDocumentCitationMarkers(
+            `„Termin zapłaty wynosi 14 dni od doręczenia faktury.”[[LEXDOC:${knowledge.documentId}:7]]`,
+            result.citationSources
+          );
+        expect(
+          cited.rejectedMarkers
+        ).toBe(0);
+        expect(
+          cited.citations
+        ).toHaveLength(1);
+        expect(
+          cited.citations[0]
+            ?.contextText
+        ).toBe(
+          knowledge.chunks[0]
+            ?.text
+        );
+        expect(
+          cited.citations[0]
+            ?.highlightStart
+        ).toBeGreaterThanOrEqual(
+          0
+        );
       }
     );
 
