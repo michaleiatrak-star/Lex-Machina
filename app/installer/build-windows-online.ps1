@@ -20,6 +20,10 @@ Write-Host "[0/4] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
 
+Write-Host "[profile] Clean admin / destructive uninstall lifecycle self-test"
+& (Join-Path $installer "profile-lifecycle-selftest.ps1")
+if ($LASTEXITCODE -ne 0) { throw "Profile lifecycle self-test failed" }
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 
