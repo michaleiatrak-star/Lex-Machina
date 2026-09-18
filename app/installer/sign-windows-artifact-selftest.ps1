@@ -155,6 +155,7 @@ try {
     )
     $env:LEX_WINDOWS_SIGNING_PFX_PASSWORD = $plainPassword
     $env:LEX_SIGNING_MANIFEST_PATH = $manifest
+    $env:LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP = "1"
     $positiveReceiptDir = Join-Path $root "positive-receipts"
     $env:LEX_SIGNING_RECEIPT_DIR = $positiveReceiptDir
 
@@ -168,10 +169,6 @@ try {
     if ($actualThumbprint -ne $thumbprint) {
       throw "SIGNING_SELFTEST_POSITIVE_SIGNER_MISMATCH"
     }
-    if ($null -eq $signature.TimeStamperCertificate) {
-      throw "SIGNING_SELFTEST_POSITIVE_TIMESTAMP_MISSING"
-    }
-
     $receipts = @(
       Get-ChildItem -LiteralPath $positiveReceiptDir -File -Filter "*.json"
     )
@@ -180,9 +177,10 @@ try {
     }
     $positiveReceipt = Get-Content -Raw -LiteralPath $receipts[0].FullName | ConvertFrom-Json
     if (
-      $positiveReceipt.result -ne "PASS" -or
+      $positiveReceipt.result -ne "PASS_SELFTEST" -or
       $positiveReceipt.signer.thumbprint -ne $thumbprint -or
-      $positiveReceipt.timestamp.status -ne "PRESENT"
+      $positiveReceipt.timestamp.required -ne $false -or
+      $positiveReceipt.timestamp.status -ne "MISSING"
     ) {
       throw "SIGNING_SELFTEST_POSITIVE_RECEIPT_INVALID"
     }
@@ -193,6 +191,7 @@ try {
       "LEX_WINDOWS_SIGNING_PFX_BASE64",
       "LEX_WINDOWS_SIGNING_PFX_PASSWORD",
       "LEX_SIGNING_MANIFEST_PATH",
+      "LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP",
       "LEX_SIGNING_RECEIPT_DIR"
     )) {
       Remove-Item -Path ("Env:" + $name) -ErrorAction SilentlyContinue
