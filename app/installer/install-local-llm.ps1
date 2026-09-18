@@ -192,10 +192,10 @@ if ($minimum -lt 1 -or $maximum -lt $minimum -or $step -lt 1) {
   throw "LOCAL_LLM_CONTEXT_POLICY_INVALID"
 }
 if ($ContextTokens -lt $minimum -or $ContextTokens -gt $maximum) {
-  throw "LOCAL_LLM_CONTEXT_OUT_OF_RANGE:$ContextTokens:$minimum:$maximum"
+  throw "LOCAL_LLM_CONTEXT_OUT_OF_RANGE:${ContextTokens}:${minimum}:${maximum}"
 }
 if ((($ContextTokens - $minimum) % $step) -ne 0) {
-  throw "LOCAL_LLM_CONTEXT_STEP_INVALID:$ContextTokens:$step"
+  throw "LOCAL_LLM_CONTEXT_STEP_INVALID:${ContextTokens}:${step}"
 }
 
 $model = @($manifest.models.localLlm | Where-Object { $_.id -eq $ModelId }) | Select-Object -First 1
@@ -209,11 +209,11 @@ $nativeContext = [int]$model.nativeContext
 $modelMinimum = if ($model.minimumContext) { [int]$model.minimumContext } else { $minimum }
 $modelMaximum = if ($model.maximumRuntimeContext) { [int]$model.maximumRuntimeContext } else { $nativeContext }
 if ($ContextTokens -lt $modelMinimum -or $ContextTokens -gt $modelMaximum) {
-  throw "LOCAL_LLM_MODEL_CONTEXT_UNSUPPORTED:$ModelId:$ContextTokens:$modelMinimum:$modelMaximum"
+  throw "LOCAL_LLM_MODEL_CONTEXT_UNSUPPORTED:${ModelId}:${ContextTokens}:${modelMinimum}:${modelMaximum}"
 }
 $extended = $ContextTokens -gt $nativeContext
 if ($extended -and ($null -eq $model.contextExtension -or $model.contextExtension.enabled -ne $true)) {
-  throw "LOCAL_LLM_CONTEXT_EXTENSION_NOT_ALLOWED:$ModelId:$ContextTokens"
+  throw "LOCAL_LLM_CONTEXT_EXTENSION_NOT_ALLOWED:${ModelId}:${ContextTokens}"
 }
 
 $modelDir = Join-Path $localRoot "models"
