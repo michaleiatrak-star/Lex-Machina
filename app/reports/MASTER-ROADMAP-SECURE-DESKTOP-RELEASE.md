@@ -1,0 +1,1784 @@
+# Lex Machina — Master Roadmap to Secure Desktop Release
+
+Status: **HISTORICAL BASELINE RECONCILED — G39 RC VERIFYING**  
+Date: 2026-09-18  
+Current RC source baseline: `b159efffec9f607021c282cc9828986fce7e16dc` on `feature/g39-execution-2026-09-17`
+
+This roadmap consolidates the completed gates and all design decisions from G31, G33 and G34 into one execution sequence.
+
+> **2026-09-18 reconciliation.** Ten plik zachowuje historyczną sekwencję G31–G38. Bieżącym źródłem prawdy dla G39 jest `G39-IMPLEMENTATION-STATUS-2026-09-18.md`, a produktowa roadmapa jest w `app/ROADMAP.md`. Dla RC 0.1.3 nie wolno wnioskować PASS z historycznych wpisów: publikacja wymaga exact-SHA PASS dla Lex Runtime Validation, F-138, G39 Installer State Machine, online installed-copy acceptance i offline clean-machine acceptance. Produkcyjne podpisy/trust roots oraz benchmarki Local AI pozostają osobnymi gate'ami i nie są zamykane przez niesygnowany prerelease.
+
+
+It is intentionally ordered so that the installer is built only after storage, identity, vault, document generation and desktop trust boundaries are stable.
+
+---
+
+# 1. Current baseline
+
+Validated implementation baseline:
+
+- G0-G29 — PASS
+- G27A — PASS
+- G28A — PASS
+- G31A — PASS
+- G31B — PASS
+- G32 — PASS
+- G34A — PASS
+- G34B — PASS
+- G34C — PASS
+- G34D — PASS
+- G35A — PASS
+- G35B — PASS
+- G31C1 — PASS
+- G34E — PASS
+- G34F1 — PASS (foundation only; full G34F still open)
+- G34H1 — PASS
+- G34H2 — PASS
+- G34H3 — PASS
+- G34H4 — PASS
+- G34H5 — PASS
+- G36 — PASS
+- P4B — PASS
+
+Validated code SHA:
+- `4a32f21f49de6d484bfdae3686c16437ebe3fb40`
+
+Validated CI:
+- Lex Runtime Validation `35092482078` — success
+- F-138 `35092482105` — success
+
+Designs completed but not yet fully implemented:
+- G31C2
+- G31D/G31E
+- G33A-G33D
+- full G34F integration with actual deanonymization/export
+- G34G
+- G31B2 stored-file/member processing
+
+Open independent capability:
+- G30 — Open Web Discovery
+
+Do not claim full G31/G33/G34 PASS until their remaining implementation gates are green. G34A-G34D are validated sub-gates only.
+
+---
+
+# 2. Release target
+
+Target release behavior:
+
+```text
+install offline
+    ↓
+create/login local user
+    ↓
+open existing or create new case
+    ↓
+encrypted local case storage
+    ↓
+upload PDF/image/ZIP/DOCX/ODT/TXT/Markdown/XLSX/XLSM/CSV/TSV
+    ↓
+local extraction/OCR
+    ↓
+local privacy review
+    ↓
+encrypted reversible vault
+    ↓
+select protected chunks
+    ↓
+provider sees protected aliases only
+    ↓
+AI returns typed legal-document AST
+    ↓
+local deterministic DOCX/ODT rendering
+    ↓
+password reauthorization
+    ↓
+local file-to-file deanonymization
+    ↓
+legal/package/token validation
+    ↓
+encrypted artifact store
+    ↓
+one-use local download
+```
+
+No provider call is permitted after a deanonymization grant is consumed.
+
+---
+
+# 3. Critical-path dependency map
+
+```text
+BASELINE
+ G0-G29 + G27A/G28A + G31A/B + G32
+                |
+                v
+ PHASE 1 — G34A/G34B
+ accounts + login + sessions + throttling
+                |
+                v
+ PHASE 2 — G34C/G34D
+ case ACL + per-user case-key envelopes
+                |
+                v
+ PHASE 2B — G35A/G35B
+ case workspace + shared firm templates
+                |
+                v
+ PHASE 3 — G31C1
+ encrypted persistent privacy vault
+                |
+                +----------+
+                |          |
+                v          v
+ PHASE 4A      PHASE 4B
+ G34E/F        case lifecycle UX
+ recovery      reopen/list/select cases
+ reauth
+                |          |
+                +----+-----+
+                     v
+ PHASE 5 — G34H
+ encrypted case storage + migration
+                     |
+                     v
+ PHASE 6 — G31B2
+ process selected stored/ZIP members
+                     |
+                     v
+ PHASE 7 — G31C2
+ typed authoring AST + generation aliases
+                     |
+              +------+------+
+              |             |
+              v             v
+ PHASE 8      PHASE 9
+ G31D DOCX    G31E ODT
+              |             |
+              +------+------+
+                     v
+ PHASE 10 — G34G
+ Tauri production trust/session boundary
+                     |
+                     v
+ PHASE 11 — G33A/B
+ frozen component lock + offline payload
+                     |
+                     v
+ PHASE 12 — G33C/D
+ guided installer + repair/update/rollback
+                     |
+                     v
+ PHASE 13
+ release hardening / clean-machine acceptance
+```
+
+G30 Open Web Discovery runs as a parallel track and does not block the secure local-document/installer critical path unless release scope explicitly requires it.
+
+---
+
+# 4. Execution rule
+
+Each phase follows the same closure pattern:
+
+1. schema/contracts;
+2. implementation;
+3. unit tests;
+4. adversarial/negative tests;
+5. deterministic validation gate;
+6. UI integration;
+7. browser/desktop boundary test;
+8. migration/restart test where applicable;
+9. CI green;
+10. build report + BUILD-LOG entry;
+11. only then begin a dependent phase.
+
+No phase may be marked PASS from architecture documentation alone.
+
+---
+
+# PHASE 0 — BASELINE FREEZE / TEST HARNESS
+
+Goal: protect the already-working runtime while security/storage is refactored.
+
+## P0-T01 — Record implementation baseline
+- keep validated code SHA/reference;
+- keep current run ids;
+- capture all current G0-G32 expected PASS outputs.
+
+## P0-T02 — Add future gate slots
+Add scripts/jobs for:
+- G34A;
+- G34B;
+- G34C;
+- G34D;
+- G31C1;
+- G34E;
+- G34F;
+- G34H;
+- G31C2;
+- G31D;
+- G31E;
+- G34G;
+- G33A-D.
+
+Initially they must not falsely PASS.
+
+## P0-T03 — Secret-regression scanner
+CI/static checks for:
+- password fields serialized/logged;
+- session tokens in localStorage/sessionStorage;
+- plaintext vault patterns;
+- provider requests containing vault values;
+- deanonymized artifact provider upload.
+
+## P0 PASS
+Existing gates remain green and no new security gate is reported PASS.
+
+---
+
+# PHASE 1 — G34A/G34B LOCAL IDENTITY + LOGIN/SESSION
+
+Goal: replace the unauthenticated localhost trust model.
+
+Primary spec:
+- `G34-IDENTITY-LOGIN-VAULT-ARCHITECTURE.md`
+- `G34-AUTH-SESSION-REAUTH-PROTOCOL.md`
+
+## P1-T01 — Auth persistence layer
+Implement local auth database with:
+- users;
+- KDF parameters;
+- UMK envelopes;
+- authEpoch;
+- rate-limit state;
+- security events.
+
+Recommended implementation decision to make before coding:
+- SQLite for transactional local metadata;
+- migration/version table;
+- restrictive filesystem permissions.
+
+## P1-T02 — Argon2id service
+Implement:
+- password normalization contract;
+- salt generation;
+- configurable release KDF policy;
+- dummy account/KDF path;
+- KDF upgrade/rewrap after successful login.
+
+## P1-T03 — First-user bootstrap
+Implement:
+- zero-users-only bootstrap;
+- first ADMIN;
+- random UMK;
+- encrypted UMK envelope;
+- atomic race protection.
+
+## P1-T04 — Session manager
+Implement trusted-memory:
+- random session handles;
+- 15-minute idle deadline;
+- 8-hour overall deadline;
+- authEpoch checks;
+- no restart persistence.
+
+## P1-T05 — Login throttling
+Implement exact backoff:
+- failures 1-4: no added delay;
+- 5: 30s;
+- 6: 60s;
+- 7: 2m;
+- 8: 5m;
+- 9: 15m;
+- 10+: 30m;
+- 24h quiet reset.
+
+Index by protected `loginTag`, not plaintext guessed login.
+
+## P1-T06 — Auth middleware
+Public only:
+- health;
+- auth status;
+- zero-user bootstrap;
+- login.
+
+All other API surfaces require authentication.
+
+## P1-T07 — Lock/logout
+Implement:
+- immediate trusted-runtime revocation;
+- key-cache cleanup;
+- intent/grant invalidation;
+- idempotent logout;
+- user lock;
+- restart = no session.
+
+## P1-T08 — Login UI
+Add:
+- bootstrap screen;
+- login;
+- retry countdown;
+- session warning;
+- lock/logout;
+- locked state that removes sensitive React state.
+
+## P1-T09 — Activity classification
+Ensure:
+- deliberate user actions refresh idle;
+- polling/streaming/OCR/animations do not.
+
+## P1 tests
+Must include:
+- existing vs nonexistent timing/cost-class behavior;
+- disabled account generic failure;
+- throttling survives restart;
+- no bearer in browser storage;
+- idle and absolute expiry;
+- background traffic does not refresh idle;
+- authEpoch invalidation;
+- UI raw text removed on lock.
+
+## G34A PASS
+First account/bootstrap/UMK envelope implemented.
+
+## G34B PASS
+Login/session/throttling/lock/logout implemented and all non-public API routes authenticated.
+
+---
+
+# PHASE 2 — G34C/G34D CASE ACL + KEY ENVELOPES
+
+Goal: identity controls actual case access cryptographically, not only UI visibility.
+
+## P2-T01 — Case ownership migration
+Extend case metadata:
+- createdByUserId;
+- keyVersion;
+- owner ACL.
+
+Existing development cases require explicit migration/import ownership assignment.
+
+Never silently assign old cases to an arbitrary account.
+
+## P2-T02 — Case ACL service
+Roles:
+- OWNER;
+- EDITOR;
+- ANALYST;
+- VIEWER.
+
+Separate:
+- app ADMIN role;
+- case access role;
+- `canReidentify`.
+
+## P2-T03 — Case Data Key
+For each new case:
+- random 256-bit CDK;
+- no plaintext storage.
+
+## P2-T04 — Per-user key envelope
+Implement:
+- UMK-derived case-wrap keys;
+- authenticated wrapping;
+- key version/AAD.
+
+## P2-T05 — Offline case sharing
+Implement preferred per-user asymmetric keypair:
+- public key stored in user directory;
+- private key encrypted under UMK;
+- owner can prepare case envelope for logged-out target user.
+
+## P2-T06 — ACL middleware
+Every case/document/upload/session/artifact route:
+- resolve user;
+- resolve case;
+- verify role/capability.
+
+## P2-T07 — Revocation
+Implement:
+- ACL removal;
+- eager session impact where needed;
+- documented strong-revocation path via CDK rotation.
+
+## P2-T08 — Case list/open API
+Add:
+- list cases visible to user;
+- open metadata;
+- no automatic creation merely because UI mounts.
+
+## P2-T09 — Case selector UI
+Replace current startup auto-case model with:
+- recent cases;
+- open existing case;
+- create new case;
+- role/capability display.
+
+## G34C PASS
+Case ACL is enforced on all case-scoped access.
+
+## G34D PASS
+Per-user case-key envelopes and tested grant/revoke/key-rotation mechanics exist.
+
+---
+
+# PHASE 2B — G35A/G35B CASE WORKSPACE + FIRM TEMPLATE LIBRARY
+
+Goal: one browsable workspace per legal case plus one reusable office-template library shared safely across authorized cases.
+
+Primary spec:
+- `G35-CASE-WORKSPACE-TEMPLATE-LIBRARY.md`
+
+## P2B-T01 — Case file inventory
+List persisted upload manifests and safe ZIP member metadata from exactly one selected case.
+
+## P2B-T02 — Case file API
+`GET /api/cases/:caseId/files`:
+- requires READ;
+- no arbitrary path parameter;
+- metadata only in G35A.
+
+## P2B-T03 — Case workspace UI
+When case selection changes:
+- clear prior-case file inventory;
+- load only selected case files;
+- show filename/type/size/time/archive members.
+
+## P2B-T04 — Shared template store
+Create application scope:
+`shared/templates/template_<opaque-id>/`.
+
+Persist:
+- manifest;
+- original DOCX/ODT;
+- hash;
+- safe filename;
+- creator user id.
+
+## P2B-T05 — Shared template permissions
+Initial policy:
+- authenticated users: list metadata;
+- ADMIN: add template;
+- no case ACL row is created for a template.
+
+## P2B-T06 — Cross-case template reference
+`GET /api/cases/:caseId/templates` first verifies READ for that case and then returns references to the same shared library.
+
+No physical copy into the case.
+
+## P2B-T07 — Template UI
+Show common office templates beside the selected case.
+ADMIN may add a template.
+Changing cases does not duplicate or move the shared template.
+
+## G35A PASS — IMPLEMENTED / VALIDATED
+Authorized user can browse the persisted file inventory of one selected case without seeing another case's files.
+
+Validated code SHA: `181e439232dac1c3e00f9cb45fd1596329d986a8`.
+
+## G35B PASS — IMPLEMENTED / VALIDATED
+A single stored firm template can be listed from multiple independently authorized cases without weakening case ACL or copying the template.
+
+Validated code SHA: `181e439232dac1c3e00f9cb45fd1596329d986a8`.
+
+## G35C — later generation integration
+After G31C2/G31D/G31E, selected `templateId` may supply a locally validated style/structure profile to deterministic generation. Raw template package bytes must not be sent automatically to AI.
+
+---
+
+# PHASE 2C — G36 LEGAL SKILL RUNTIME COMPLETENESS
+
+Goal: the desktop runtime must not merely detect legal SKILL.md files; it must actually be able to read the canonical local skill tree on demand and prove that mandatory core resources were read.
+
+Current pre-G36 gap identified on 2026-09-16:
+- registry safely resolves `modules/`, `references/`, `shared/` and cross-skill paths;
+- execution loaded only `prawny-router-v3`, `prawo-polskie-v2` and the selected DR SKILL.md body;
+- `LegalSession` previously emitted `resource_read=OK` for three core resources after existence checks only, without injecting their content;
+- arbitrary `view ...` references inside the corpus were not executable by the provider runtime.
+
+## P2C-T01 — Real core-resource reads
+The always-required router resources are opened as UTF-8 and their exact content is inserted into the execution system prompt.
+
+Fail closed on missing, unreadable or empty core resources.
+
+## P2C-T02 — Safe legal corpus tools
+Every legal provider session exposes local-only tools:
+- `list_legal_skills`;
+- `list_legal_resources`;
+- `read_legal_resource`.
+
+No arbitrary operating-system path is accepted.
+
+## P2C-T03 — Full-resource pagination
+Large text modules can be read in deterministic chunks using offset/nextOffset until EOF.
+
+This makes the complete textual resource readable without placing the whole corpus in one prompt.
+
+## P2C-T04 — Cross-skill and shared reads
+Support canonical semantic paths:
+- `modules/...`;
+- `references/...`;
+- `shared/...`;
+- `<other-skill>/SKILL.md`;
+- other text resources under a registered skill.
+
+## P2C-T05 — Corpus/tool audit
+Record legal corpus list/read decisions and close the G36 gate as BLOCKED after an invalid/path-escape resource attempt.
+
+## P2C-T06 — Current-law separation
+Local skill content is workflow/domain context, not fresh proof of statutory or case-law validity.
+
+Legal citations still require the existing official-source verification tools and temporal gates.
+
+## G36 PASS — IMPLEMENTED / VALIDATED
+
+Validated implementation SHA: `5c19ec48f2c25b5bee7c39a63717e7c808cb3a3e`.
+
+Production-corpus validation:
+- 32 registered skills;
+- 16 DR skills;
+- 1,252 listed resources;
+- 1,187 supported textual resources read fully;
+- 16,210,656 text characters read;
+- 0 structural issues;
+- 0 unreadable supported text resources.
+
+PASS requires:
+- actual core resource content present in execution prompt;
+- full paginated module read;
+- shared/cross-skill access;
+- path traversal blocked;
+- deterministic validator and full regression green.
+
+Important semantic limit:
+- G36 means the runtime can access the full canonical textual skill corpus on demand;
+- it does not mean every file is preloaded into every prompt;
+- it does not convert COV/B+ corpus coverage into a claim that every provision of Polish law is stored locally or current without live verification.
+
+---
+
+# PHASE 3 — G31C1 ENCRYPTED PERSISTENT PRIVACY VAULT
+
+Goal: reversible privacy mapping survives restart without plaintext persistence.
+
+## P3-T01 — Vault binary format
+Implement LMV1:
+- magic/version;
+- cipher suite;
+- key version;
+- generation;
+- nonce;
+- AAD;
+- ciphertext/tag.
+
+## P3-T02 — Key derivation
+`CDK → HKDF-SHA256(... "lex/privacy-vault/v1") → PVK`.
+
+## P3-T03 — Canonical payload
+Persist only:
+- document counters;
+- token;
+- kind;
+- value;
+- creation metadata.
+
+Do not persist duplicate reverse map.
+
+## P3-T04 — Atomic writer
+Implement:
+- partial;
+- fsync/close;
+- decrypt verification;
+- atomic replace;
+- generation monotonicity.
+
+## P3-T05 — Runtime vault adapter
+Replace production RAM-only `PseudonymizationVault` storage with:
+- unlocked per-case in-memory view;
+- encrypted persistence backend;
+- exact token lookup;
+- fail closed on unknown/corrupt token.
+
+## P3-T06 — Restart round trip
+Test:
+- pseudonymize;
+- close runtime;
+- restart;
+- authenticate;
+- reopen case;
+- recover exact mapping.
+
+## P3-T07 — Corruption tests
+- truncated file;
+- modified tag;
+- wrong case AAD;
+- stale generation;
+- wrong key version.
+
+All fail closed.
+
+## G31C1 PASS — IMPLEMENTED / VALIDATED
+
+No plaintext reversible map is written to disk and mapping survives restart.
+
+Validated code SHA: `8c1a4c3c61b3e3b28c5c648adcfbf932c7dd7394`.
+
+Validation:
+- restart round-trip;
+- wrong key fail-closed;
+- corruption/truncation fail-closed;
+- wrong case/AAD fail-closed;
+- wrong keyVersion fail-closed;
+- stale generation/meta mismatch fail-closed;
+- CDK rotation rekeys the vault.
+
+---
+
+# PHASE 4A — G34E/G34F RECOVERY + TRANSACTION REAUTH
+
+Goal: secure lifecycle and exact authorization before clear-PII operations.
+
+## P4A-T01 — Recovery envelope
+Implement high-entropy one-time recovery secret:
+- shown once;
+- creates second UMK envelope;
+- no security questions.
+
+## P4A-T02 — Password change
+- verify current password;
+- unwrap same UMK;
+- new salt/KDF;
+- rewrap only;
+- authEpoch++;
+- revoke other sessions/grants.
+
+## P4A-T03 — Recovery flow
+- recover same UMK;
+- set new password;
+- rotate recovery material;
+- authEpoch++;
+- revoke sessions/grants.
+
+## P4A-T04 — Deanonymization intent
+Bind:
+- session/user;
+- case;
+- artifact;
+- SHA-256;
+- vault generation;
+- case key version;
+- 5-minute expiry.
+
+## P4A-T05 — Password step-up
+Exact G34F protocol:
+- fresh Argon2/UMK confirmation;
+- same throttling counter;
+- ACL + `canReidentify`;
+- no vault open yet.
+
+## P4A-T06 — One-use grant
+- 90 seconds;
+- one use;
+- transaction-bound;
+- consume before vault unlock.
+
+## P4A-T07 — Sensitive download ticket
+- same session;
+- exact final hash;
+- 60 seconds;
+- one use.
+
+## P4A-T08 — Cancellation
+Session revoke during deanonymization:
+- abort;
+- remove/quarantine partial;
+- never mark downloadable.
+
+## G34E PASS — IMPLEMENTED / VALIDATED
+Recovery/password lifecycle preserves the same UMK and existing case CDKs.
+
+Validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`.
+
+## G34F1 PASS — IMPLEMENTED / VALIDATED
+Transaction reauthorization foundation requires exact target binding, fresh password, one-use grant, expiry and automatic session revocation.
+
+Validated code SHA: `f057a0bb22ba89c8a4eb9cb5f9dc774c8cde6524`.
+
+## Full G34F — PASS
+
+Validated on SHA `e0035c68a2034bc4e4132adc28614fb752e10c4f` by gate `G34F_FULL_DEANONYMIZATION_EXPORT`.
+
+The production path now requires exact-artifact intent → fresh password reauthorization → one-use grant consumption before CDK/vault access → local DOCX/ODT deanonymization → zero-token package validation → local HYBRID → G8/G10 on the final extracted text/bytes → encrypted CLEAR_PII artifact commit → same-session one-use 60-second download ticket. The raw-AST HTTP bypass was removed.
+
+---
+
+# PHASE 4B — CASE LIFECYCLE / USER EXPERIENCE
+
+Can run partly in parallel with Phase 4A after G34C.
+
+Goal: remove current prototype behavior where every app mount creates a new case.
+
+## P4B-T01 — Case registry
+List:
+- display name;
+- createdAt/updatedAt;
+- user's case role;
+- non-sensitive counts/status.
+
+## P4B-T02 — Open/close active case
+UI explicitly opens one case.
+
+## P4B-T03 — Rename/archive
+Owner/editor policy for display metadata.
+
+## P4B-T04 — Delete flow
+OWNER + recent reauth:
+- precise deletion preview;
+- encrypted key/data deletion;
+- audit.
+
+## P4B-T05 — Existing-case migration
+Detect legacy G31A cases and require explicit owner import/migration.
+
+No silent deletion/move.
+
+## P4B PASS — IMPLEMENTED / VALIDATED
+Restart allows the same authorized user to log in and reopen an existing case without re-uploading files.
+
+Validated code SHA: `4a32f21f49de6d484bfdae3686c16437ebe3fb40`.
+
+Validation:
+- rename persists in SQLite and `case.json`;
+- archive/unarchive persists across restart;
+- archived cases remain readable/manageable but reject WRITE / ANALYZE / REIDENTIFY;
+- permanent delete requires OWNER + fresh current-password reauthentication;
+- wrong password preserves the case;
+- delete removes the case directory, registry row and ACL cascade;
+- schema v3 upgrades safely to v4 `archived_at`;
+- web lifecycle controls and G14 bundle safety pass.
+
+See `BUILD-0040-P4B-CASE-LIFECYCLE.md`.
+
+---
+
+# PHASE 5 — G34H FULL SENSITIVE CASE ENCRYPTION AT REST
+
+Execution split:
+
+- G34H1 — encrypted incoming/raw upload container;
+- G34H2 — encrypted ZIP extracted members + working-file hygiene;
+- G34H3 — encrypted protected/document persistence;
+- G34H4 — encrypted artifacts/audit-sensitive payloads;
+- G34H5 — explicit legacy plaintext migration and verification.
+
+
+
+Goal: Lex login cannot be bypassed by directly browsing the case directory.
+
+This is mandatory for secure SHARED_WORKSTATION claims.
+
+## P5-T01 — LME encrypted blob/container
+Define versioned authenticated format for:
+- raw upload;
+- extracted member;
+- OCR/raw source;
+- sensitive artifact.
+
+## P5-T02 — Opaque storage IDs
+No original client/matter filename in filesystem path.
+
+Original filename lives inside encrypted metadata.
+
+## P5-T03 — Streaming encrypt/decrypt
+Avoid loading large files entirely in RAM where practical.
+
+## P5-T04 — Upload store migration
+Change:
+- HTTP/store path;
+- incoming originals;
+- hashes/manifest behavior.
+
+## P5-T05 — ZIP extraction into secure store
+Safe ZIP logic remains.
+Extraction worker output must be re-encrypted immediately or adapted to encrypted staging.
+
+No long-lived plaintext extracted tree.
+
+## P5-T06 — OCR worker plaintext contract
+Where workers need a path:
+- random Lex work dir;
+- restrictive permissions;
+- lifecycle tied to job;
+- cleanup on success/failure/startup recovery.
+
+## P5-T07 — Artifact encryption
+Deanonymized final artifact remains encrypted at rest in Lex store.
+Plaintext exists only:
+- transiently during local processing;
+- in explicitly downloaded/exported user file.
+
+## P5-T08 — Migration
+Explicit migration of old plaintext G31A cases:
+- preflight;
+- sufficient disk space;
+- encrypt to staging;
+- verify;
+- atomic cutover;
+- never delete old copy before validation;
+- user-visible recovery path.
+
+## P5-T09 — Filesystem adversarial tests
+Prove direct inspection of Lex data directory does not expose:
+- upload contents;
+- original filenames;
+- vault values;
+- final artifact PII.
+
+## G34H PASS
+Secure shared-workstation at-rest boundary is real, not only an API permission layer.
+
+---
+
+# PHASE 6 — G31B2 STORED FILE / ZIP MEMBER PROCESSING
+
+Goal: case files persist once and are processed from stored references rather than browser re-upload.
+
+## P6-T01 — Stored-file identity
+Introduce opaque `fileId` referencing:
+- direct upload;
+- extracted ZIP member.
+
+## P6-T02 — Trusted type detection
+Do not rely only on extension:
+- signature/parser confirmation where applicable.
+
+## P6-T03 — Process selected member API
+User explicitly selects one stored file/member.
+Server resolves it from manifest/fileId.
+No arbitrary relative paths supplied by browser.
+
+## P6-T04 — Existing supported formats
+PDF/JPEG/PNG/WebP/TIFF:
+- decrypt/stage locally;
+- reuse G27/G27A pipeline.
+
+## P6-T05 — DOCX/ODT input extraction
+Add local text-intake adapters only if needed for source-document analysis.
+This is separate from generated DOCX/ODT output.
+
+No arbitrary active content execution.
+
+## P6-T06 — ZIP UI
+- full safe manifest;
+- filter/search;
+- explicitly choose files;
+- process selected;
+- no automatic provider attachment.
+
+## P6 PASS
+Existing stored case material can be reopened and processed without re-upload.
+
+---
+
+# PHASE 7 — G31C2 TYPED AUTHORING AST + GENERATION ALIASES
+
+Goal: provider generates semantics, never OOXML/ODF.
+
+## P7-T01 — LegalDocumentAst schema
+Define exact:
+- document type;
+- locale;
+- style profile;
+- block node union;
+- inline node union;
+- limits.
+
+## P7-T02 — AST validator
+Reject:
+- unknown node kinds;
+- excessive depth/size;
+- duplicate ids;
+- invalid refs;
+- unsupported embedded/executable content.
+
+## P7-T03 — Backend vault lookup API
+Internal only:
+- `hasToken`;
+- `resolveToken`;
+- safe enumeration/manifest as needed.
+
+Never expose clear token map over public HTTP.
+
+## P7-T04 — Generation alias registry
+Map:
+`LMPII alias → documentId + source token`.
+
+Prevent collisions across documents.
+
+## P7-T05 — Protected context remapping
+Before provider call:
+- selected G32 chunks only;
+- replace source document tokens with generation aliases;
+- no raw values.
+
+## P7-T06 — Typed `pii_ref`
+PII token cannot appear as arbitrary text node.
+Unknown aliases block.
+
+## P7-T07 — Privacy regression gate
+Scan model-created normal text for newly emitted identifiers.
+
+## P7-T08 — Provider structured-output contract
+Model returns strict JSON AST/patch, not XML.
+
+## G31C2 PASS
+Provider can author a validated tokenized legal document AST without access to clear values.
+
+---
+
+# PHASE 8 — G31D DETERMINISTIC DOCX
+
+Goal: production DOCX with local re-identification and exact download.
+
+## P8-T01 — Renderer technology spike
+Select deterministic ZIP/XML implementation.
+Criteria:
+- fixed timestamps/order;
+- stable IDs;
+- no volatile metadata;
+- exact control over package parts.
+
+## P8-T02 — Core OOXML renderer
+Implement:
+- document;
+- styles;
+- numbering;
+- settings;
+- font table;
+- headers/footers;
+- footnotes as scoped.
+
+## P8-T03 — Legal style profiles
+Implement corpus design rules:
+- Arial 11.5;
+- margins;
+- headings;
+- justification;
+- spacing;
+- lists/tables;
+- signatures.
+
+## P8-T04 — Tokenized render
+Every PII ref rendered predictably in visible-text scope.
+
+## P8-T05 — Token gate B
+No malformed/unknown/source PII token and no alias in forbidden package locations.
+
+## P8-T06 — File-to-file deanonymizer
+`tokenized.docx → final.partial`.
+Handle split runs structurally.
+
+## P8-T07 — Token gate C
+Zero remaining privacy tokens.
+
+## P8-T08 — OOXML validator
+Required parts/XML relationships/forbidden content.
+
+Reject:
+- macros;
+- ActiveX;
+- OLE;
+- altChunk;
+- external templates/media.
+
+## P8-T09 — Re-read final visible text
+Feed exact extracted final text to final export/legal gate.
+
+## P8-T10 — Local LibreOffice QA
+Headless reopen/render preview.
+CI strategy can separate deterministic structural gate from optional heavier visual integration.
+
+## P8-T11 — Encrypted artifact store/download
+Integrate G34F grant and G34H storage.
+Immediate one-use download ticket.
+
+## G31D PASS
+DOCX is deterministic, locally deanonymized, validated and downloadable.
+
+---
+
+# PHASE 9 — G31E DETERMINISTIC ODT
+
+Goal: same semantic pipeline for ODT.
+
+## P9-T01 — Extend G10/export contract
+Add ODT as HYBRID-required equivalent before renderer PASS.
+
+## P9-T02 — ODF renderer
+Required package:
+- first uncompressed `mimetype`;
+- content.xml;
+- styles.xml;
+- meta.xml;
+- settings.xml;
+- META-INF/manifest.xml.
+
+## P9-T03 — Deterministic style mapping
+Same legal semantics as DOCX.
+
+## P9-T04 — Token gate B
+Same alias/location rules.
+
+## P9-T05 — File-to-file ODF deanonymizer
+Handle split spans/text nodes.
+
+## P9-T06 — Token gate C
+Zero remaining privacy tokens.
+
+## P9-T07 — ODF package validator
+Reject:
+- scripts;
+- macros;
+- arbitrary embeds;
+- external linked content;
+- unknown forbidden parts.
+
+## P9-T08 — Local re-read/LibreOffice QA
+Same final legal/export principle.
+
+## P9-T09 — Encrypted artifact/download
+Same G34F/G34H path.
+
+## G31E PASS
+ODT reaches parity with DOCX for required release behavior.
+
+---
+
+# PHASE 10 — G34G TAURI PRODUCTION TRUST BOUNDARY
+
+Goal: desktop production UI does not hold reusable runtime authentication secrets.
+
+## P10-T01 — Tauri shell
+Reuse React/Vite UI.
+
+## P10-T02 — Narrow command surface
+Examples:
+- auth status/login/logout/lock;
+- case list/open/create;
+- upload/process;
+- privacy review;
+- provider operation;
+- generate artifact;
+- reauthorize/download.
+
+No generic shell/command execution from web UI.
+
+## P10-T03 — Session ownership
+Rust owns:
+- active session handle;
+- sensitive IPC state;
+- OS lock lifecycle integration.
+
+React never receives reusable bearer secret.
+
+## P10-T04 — Secret store integration
+Use platform key store / Stronghold only through Rust-side narrow APIs.
+
+## P10-T05 — OS lock/resume
+Integrate workstation lock/suspend/resume with normative G34 protocol.
+
+## P10-T06 — Loopback runtime hardening
+If runtime remains separate process:
+- dynamic/authenticated IPC/loopback bootstrap;
+- no unauthenticated reusable port endpoint;
+- child lifetime bound to desktop shell as appropriate.
+
+## G34G PASS
+Production session and secret boundary is enforced outside browser JavaScript.
+
+---
+
+# PHASE 11 — G33A/G33B INSTALLER PAYLOAD
+
+Goal: reproducible full offline package.
+
+## P11-T01 — Freeze release dependency versions
+Exact:
+- Node;
+- Python;
+- npm runtime dependencies;
+- Paddle;
+- Torch;
+- Stanza;
+- models;
+- LibreOffice;
+- WebView2 prerequisite;
+- VC runtime.
+
+## P11-T02 — Component lock
+Production signed manifest:
+- exact version;
+- target architecture;
+- source/provenance;
+- license;
+- hashes;
+- size;
+- min OS;
+- probe.
+
+## P11-T03 — Private runtimes
+Build application-private:
+- Node/runtime;
+- Python;
+- Python packages;
+- model assets;
+- LibreOffice;
+- corpus.
+
+No install-time public `pip install` or `npm install`.
+
+## P11-T04 — Offline prerequisites
+Bundle only prerequisites actually needed for target:
+- WebView2 offline installer;
+- VC runtime where necessary.
+
+## P11-T05 — License/compliance bundle
+Produce notices/license inventory for redistributed runtimes/models.
+
+## G33A PASS
+Component manifest is immutable/reproducible and complete.
+
+## G33B PASS
+Clean offline VM can install all required runtime components from package.
+
+---
+
+# PHASE 12 — G33C/G33D GUIDED INSTALLER / REPAIR / UPDATE
+
+Goal: step-by-step setup with real health state.
+
+## P12-T01 — Native installer
+Windows x86-64 first release target.
+
+Per-user default.
+No PATH pollution.
+No global Python/Node ownership.
+
+## P12-T02 — First-run wizard
+Steps:
+1. welcome/privacy;
+2. environment scan;
+3. install plan;
+4. data location;
+5. install/repair;
+6. local self-test;
+7. create first ADMIN;
+8. optional provider setup;
+9. ready.
+
+## P12-T03 — Real progress/animations
+State-driven only:
+- probe;
+- extract;
+- verify;
+- self-test.
+
+Respect reduced-motion.
+No fake timer progress.
+
+## P12-T04 — Transactional version install
+`version.staging → verify → atomic current pointer`.
+
+## P12-T05 — Repair
+Rehash/restore application payload only.
+Never delete:
+- cases;
+- vault;
+- account db;
+- provider secrets.
+
+## P12-T06 — Update
+Signed update metadata/artifact.
+Rollback on failed self-test.
+
+## P12-T07 — Uninstall
+Default preserves case data.
+Explicit second confirmation to delete data.
+
+## P12-T08 — Installer self-test
+Must cover:
+- auth DB;
+- bootstrap lock;
+- login failure/success;
+- vault restart;
+- case ACL;
+- OCR;
+- NER;
+- DOCX/ODT synthetic round trip;
+- LibreOffice;
+- encrypted at-rest paths.
+
+## G33C PASS
+Guided setup/repair UI works.
+
+## G33D PASS
+Update/rollback/uninstall and full clean-machine self-test pass.
+
+---
+
+# PHASE 13 — RELEASE HARDENING
+
+Goal: prove integrated behavior on an actual release candidate.
+
+## P13-T01 — Clean-machine matrix
+At minimum:
+- clean Windows 11 x86-64;
+- no Node;
+- no Python;
+- no LibreOffice;
+- no provider key;
+- offline during install/self-test.
+
+## P13-T02 — Multi-user acceptance
+Two local Lex users:
+- independent login;
+- user B cannot list/read A-only case;
+- grant B access;
+- revoke;
+- rotate key;
+- B loses future cryptographic access.
+
+## P13-T03 — Restart/crash matrix
+Crash during:
+- vault save;
+- case encryption migration;
+- DOCX deanonymization;
+- installer update.
+
+Recover without false PASS.
+
+## P13-T04 — Filesystem inspection
+No plaintext:
+- vault map;
+- upload;
+- extracted source;
+- OCR raw data;
+- sensitive stored artifacts.
+
+## P13-T05 — Privacy/provider trace
+Prove provider traffic contains:
+- protected chunks;
+- approved generation aliases;
+and never:
+- clear PII;
+- vault;
+- decrypted final artifact.
+
+## P13-T06 — Update migration test
+Old release data → new release:
+- backup;
+- migration;
+- validation;
+- rollback path.
+
+## P13-T07 — Supply-chain validation
+- package signatures;
+- component manifest;
+- hash verification;
+- dependency inventory.
+
+## P13-T08 — Final release report
+One report containing:
+- exact commit;
+- installer hash;
+- component lock hash;
+- all gate results;
+- VM acceptance evidence;
+- known limitations.
+
+---
+
+# PARALLEL TRACK — G30 OPEN WEB DISCOVERY
+
+G30 is independent from secure local document/installer critical path.
+
+## G30-T01 — Local SearXNG discovery architecture
+- local service;
+- unrestricted public-domain discovery;
+- source-tier classification after discovery.
+
+## G30-T02 — Tool broker integration
+- provider cannot bypass safety/policy;
+- query/result audit;
+- source URL/evidence normalization.
+
+## G30-T03 — Legal-source routing
+Discovery is not evidence by itself.
+Discovered source must pass appropriate legal verification.
+
+## G30-T04 — Privacy boundary
+Never send raw case PII into search automatically.
+User intent + protected query construction.
+
+## G30 PASS
+Only when deterministic + live tests prove search discovery cannot bypass source verification/privacy controls.
+
+---
+
+# 5. Cross-cutting test matrix
+
+Every security/storage phase must test:
+
+### Positive
+- normal single-user path;
+- multi-user authorized path;
+- restart/resume;
+- successful export.
+
+### Authorization negative
+- wrong user;
+- wrong case;
+- insufficient role;
+- missing `canReidentify`;
+- disabled account;
+- expired session;
+- stale authEpoch.
+
+### Crypto negative
+- wrong key;
+- modified ciphertext;
+- modified AAD;
+- stale key version;
+- stale vault generation;
+- truncated file.
+
+### Race/crash
+- simultaneous first-user bootstrap;
+- simultaneous vault update;
+- case access changed mid-operation;
+- session revoked mid-job;
+- process killed before atomic rename.
+
+### Privacy
+- no clear PII in logs;
+- no clear PII in public metadata;
+- no vault in browser;
+- no vault/provider crossing;
+- no persistent session secret;
+- no provider after deanonymization grant consumption.
+
+### Filesystem
+- traversal;
+- symlink;
+- ZIP bomb;
+- unsafe filename;
+- permission denial;
+- disk full;
+- stale partial files.
+
+---
+
+# 6. Migration plan from current development state
+
+Current development data cannot be silently treated as secure multi-user data.
+
+Migration wizard/process must classify:
+
+### Legacy case
+Current G31A layout with plaintext originals/extracted files.
+
+### Migration steps
+1. authenticate destination OWNER;
+2. inventory legacy case;
+3. show case/display metadata;
+4. choose import;
+5. generate CDK;
+6. encrypt files into new secure staging;
+7. initialize encrypted vault;
+8. verify hashes/counts;
+9. atomically register new secure case;
+10. retain old legacy directory until user explicitly approves deletion.
+
+Do not silently convert/remove legacy source data.
+
+---
+
+# 7. Definition of first installable release
+
+The first installer may be called release-ready only when all are PASS:
+
+- existing G0-G29/G27A/G28A/G31A/G31B/G32;
+- G34A;
+- G34B;
+- G34C;
+- G34D;
+- G31C1;
+- G34E;
+- G34F;
+- G34H;
+- case reopen/lifecycle;
+- stored-file processing;
+- G31C2;
+- G31D;
+- G31E;
+- G34G;
+- G35A;
+- G35B;
+- G35C template-generation integration;
+- G36 legal skill runtime completeness;
+- G38 encrypted firm knowledge + case/firm retrieval + extended document intake;
+- G33A;
+- G33B;
+- G33C;
+- G33D;
+- final clean-machine acceptance.
+
+G30 can remain a separately scoped release capability if explicitly excluded from the first desktop package.
+
+---
+
+# 8. Recommended execution batches
+
+To keep reviews manageable:
+
+### Batch A — Identity foundation — COMPLETE / PASS
+P0 + P1
+
+Validated code SHA: `b3783309189a6d043fc077e52c736e16b64c10d5`  
+Validation run: `35069444351`  
+F-138: `35069444331`
+
+### Batch B — Case authorization/key ownership — COMPLETE / PASS
+P2
+
+Validated code SHA: `a41fd86dd550dc41c93705edc423516d05199d8c`  
+Validation run: `35072926001`  
+F-138: `35072925987`
+
+### Batch C — Vault + recovery + reauthorization
+P3 + P4A
+
+### Parallel Core Batch — Legal skill runtime completeness
+P2C / G36
+
+### Batch D — Case lifecycle + encrypted file store — GATE SETS COMPLETE
+P4B + G34H1-H5 are PASS. Direct HTTP stream-to-encrypted-store intake remains a Phase 5 hardening item.
+
+### Batch E — Stored-file processing + authoring AST
+P6 + P7
+
+### Batch F — DOCX
+P8
+
+### Batch G — ODT
+P9
+
+### Batch H — Tauri trust boundary
+P10
+
+### Batch I — Installer payload
+P11
+
+### Batch J — Installer UX/update/repair
+P12
+
+### Batch K — Release acceptance
+P13
+
+At the end of every batch:
+- update PR;
+- append BUILD-LOG only for actual implemented PASS work;
+- publish validation evidence;
+- keep failed/open gates explicit.
+
+---
+
+# 9. Immediate next implementation batch
+
+Completed/validated on the current critical path:
+- G34A-G34E;
+- G34F1 transaction reauthorization foundation;
+- G31C1 encrypted persistent privacy vault;
+- G35A/G35B case workspace + shared template foundation;
+- G34H1/G34H2/G34H3/G34H4/G34H5;
+- G36 legal skill runtime completeness;
+- P4B case lifecycle.
+
+Validated implementation SHA:
+- `4a32f21f49de6d484bfdae3686c16437ebe3fb40`
+
+Validation:
+- Lex Runtime Validation `35092482078` — success;
+- F-138 `35092482105` — success;
+- P4B_CASE_LIFECYCLE — PASS;
+- G34H1-H5 — PASS;
+- G36 — PASS;
+- web build/G14 and G17/G19/G20/G22 live probes — success.
+
+## Closure audit before moving forward
+
+The following earlier phases are fully closed for their current gate scope:
+- Phase 0 — current baseline regression coverage;
+- Phase 1 — G34A/G34B identity/login/session;
+- Phase 2 — G34C/G34D ACL + case-key envelopes;
+- Phase 2B — G35A/G35B workspace/template foundation;
+- Phase 2C — G36 legal-skill runtime completeness;
+- Phase 3 — G31C1 encrypted persistent vault;
+- Phase 4B — P4B case lifecycle: list/create/reopen/select/import/rename/archive/unarchive/delete;
+- Phase 5 — G34H1-H5 encrypted-at-rest gate set for supported storage formats.
+
+The following earlier work is still **not fully closed**:
+- Phase 4A — G34E is PASS and G34F1 is PASS, but full G34F remains open until real G31D/G31E deanonymization/export consumes the one-use grant;
+- Phase 5 engineering hardening — production direct HTTP upload intake is still bounded whole-body memory buffering before encrypted persistence; true stream-to-encrypted-store intake remains open.
+
+G34H5 migration remains deliberately fail-closed:
+- known legacy uploads are encrypted and verified before plaintext removal;
+- unknown/non-empty legacy documents/artifacts/audit content is preserved and blocks migration;
+- no secure-erase guarantee is claimed for SSD/flash storage.
+
+## Next execution order
+
+1. implement G31B2 stored-file/member processing:
+   - opaque stored upload/member ids;
+   - safe member metadata resolution;
+   - magic-signature/media validation;
+   - processing without browser re-upload;
+2. **PASS** — G31C2 typed LegalDocumentAst + generation aliases;
+3. **PASS** — G35C safe template-profile integration;
+4. **PASS** — G31D DOCX and G31E ODT;
+5. **PASS** — full G34F grant consumption, final G8/G10 and one-use sensitive download;
+6. implement G34G Tauri production trust boundary;
+7. implement G33A-G33D installer and clean-machine release acceptance.
+
+Parallel/open:
+- G30 Open Web Discovery remains independently open and does not block the secure local-document path unless included in release scope.
+
+Do not claim full G31/G33/G34 release completion until their remaining gates are green.
+
+
+---
+
+# G37 CROSS-CUTTING TRACK — ACCOUNT UX, PROVIDER CREDENTIALS, SUPPORT ACCESS AND UPDATE DISCOVERY
+
+Primary spec:
+- `G37-ACCOUNT-ONBOARDING-SUPPORT-UPDATE-ROADMAP.md`
+
+Audit:
+- `AUDIT-G37-ACCOUNT-UPDATE-UX-2026-09-16.md`
+
+Validated build reports:
+- `BUILD-0041-G37A-ACCOUNT-ONBOARDING-DND.md`;
+- `BUILD-0042-G37C1-E1-CREDENTIALS-UPDATE-DISCOVERY.md`.
+
+## G37A — PASS
+
+Validated code SHA: `f4cb530e47b8af15d5a7320330939fcfc0054176`.
+
+Closed:
+- ADMIN user-management UI;
+- create ordinary users;
+- activate/deactivate users;
+- immediate target-session revocation;
+- guarded hard delete;
+- provider key-console links;
+- single-file drag-and-drop on conversation composer;
+- G31B2 callback error-boundary regression.
+
+## G37C1 — PASS
+
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Closed:
+- memory-only provider key override;
+- ADMIN set/delete endpoint;
+- environment fallback;
+- zeroization on replace/clear/shutdown;
+- no browser persistence and no secret echo.
+
+Still open:
+- G37C2 persistent credentials through OS credential vault/keychain.
+
+## G37E1 — PASS
+
+Validated code SHA: `b8cdbeeb83a1b7a733dd47180e44deb3f95faadd`.
+
+Closed:
+- GitHub Release discovery;
+- strict semver;
+- draft/prerelease filtering;
+- trusted repository-bound release URLs;
+- non-blocking update status UI;
+- no download/install side effect.
+
+Still open:
+- G37E2 signed release metadata/artifacts;
+- user-approved download/install;
+- staging;
+- self-test;
+- atomic switch;
+- rollback;
+- schema migration backup/recovery.
+
+G37E2 remains sequenced after G34G and G33A-G33D because the updater must live inside the production desktop trust boundary.
+
+## G37B — OPEN / DESKTOP DEPENDENCY
+
+Passwordless first ADMIN may only be implemented with an OS-protected bootstrap secret and `PASSWORD_SETUP_PENDING`. Empty passwords and plaintext fallback files are prohibited.
+
+## G37D — OPEN / DESKTOP DEPENDENCY
+
+SERVICE support identity must be temporary, signed, installation-bound, time-limited, locally approved and fully audited. No universal embedded support password.
+
+## G37F — OPEN
+
+Multi-file drag-and-drop, queue/progress and multi-document privacy UX.
+
+## G37G — IN PROGRESS
+
+Repository closure:
+- PR #39 merged to `main` during G37;
+- PR #17 was closed as superseded after audit; its historical branch remains retained pending separate retention cleanup;
+- stale branches with `ahead=0` may be cleanup candidates;
+- diverged historical branches require explicit inspection before deletion;
+- PR #38 remains the parent application line;
+- PR #40 contains G37 execution.
+
+## Updated critical path
+
+1. preserve green `feature/local-runtime` + G37 work;
+2. keep G38 green: encrypted firm know-how, case/firm retrieval and extended digital document intake;
+3. **PASS** — G31C2 + G35C;
+4. **PASS** — G31D/G31E + full G34F;
+5. G34G production Tauri trust boundary;
+6. G33A-G33D installer/update transaction;
+7. G37B/G37C2/G37D/G37E2 desktop integration;
+8. G37F multi-file UX;
+9. clean-machine acceptance including G38 PDF/DOCX/ODT/XLSX retrieval self-tests;
+10. G37G repository cleanup and signed release.
+
+
+---
+
+# G38 KNOWLEDGE AND RETRIEVAL TRACK — ENCRYPTED FIRM KNOW-HOW, CASE SEARCH AND EXTENDED DOCUMENT INTAKE
+
+Primary roadmap:
+- `G38-FIRM-KNOWLEDGE-RETRIEVAL-ROADMAP.md`
+
+Audit:
+- `AUDIT-G38-KNOWLEDGE-RETRIEVAL-FORMATS-2026-09-16.md`
+
+Current status: **PASS**.
+
+Validated code SHA:
+- `2e42a4e29ad48e8c5004866e7535746fdd0ac44a`
+
+Validated CI:
+- F-138 `35102533273` — success;
+- Lex Runtime Validation `35102533235` — success;
+- runtime 55/55 files, 207/207 tests;
+- web 1/1 file, 15/15 tests;
+- production build/G14/live G17/G19/G20/G22 — success.
+
+## G38A — encrypted firm workspace
+
+Implemented:
+- unique `FIRM_KNOWLEDGE` workspace;
+- ADMIN creation;
+- same OWNER/EDITOR/ANALYST/VIEWER ACL as a matter;
+- per-user key envelopes;
+- revoke → key rotation/rekey;
+- dedicated firm-knowledge UI and collaborator management.
+
+## G38B — local protected retrieval
+
+Implemented:
+- local lexical search over protected/pseudonymized chunks;
+- current matter search;
+- firm-knowledge search;
+- search after ACL and case-key unwrap only;
+- no vault/reidentification map leaves the local trust boundary.
+
+## G38C — controlled use in provider context
+
+Implemented:
+- explicit `includeCase` and `includeFirm` session controls;
+- `ANALYZE` capability required;
+- local ranking;
+- bounded protected chunks only;
+- manual search hit may be added to analysis.
+
+## G38D — extended document formats
+
+Implemented local privacy/retrieval intake:
+- digital PDF — text layer first, OCR only for insufficient-text pages;
+- JPEG/PNG/WebP/TIFF;
+- TXT/Markdown;
+- DOCX/ODT;
+- XLSX/XLSM;
+- CSV/TSV.
+
+Spreadsheet safety:
+- no VBA execution;
+- no macro execution;
+- no formula evaluation;
+- formula source and optional cached result are treated only as text;
+- ZIP/XML limits and DTD/ENTITY rejection;
+- bounded worker execution.
+
+Legacy binary `.xls` remains explicitly unsupported until a pinned offline BIFF parser passes adversarial tests.
+
+## G38E — restart-safe document identity
+
+Implemented:
+- document attachment selection carries explicit `caseId`;
+- finalization binds document to explicit case;
+- protected document restoration from encrypted store after process restart;
+- no authorization dependence on ephemeral `documentId → caseId` process memory.
+
+## G38 validation requirements
+
+Before G38 may be marked PASS:
+- strict TypeScript typecheck;
+- Python worker syntax;
+- digital-PDF no-OCR regression;
+- DOCX/ODT tests;
+- XLSX/XLSM/CSV/TSV tests;
+- protected document privacy/chunk tests;
+- firm workspace ACL tests;
+- multi-user document grant/revoke/rekey test;
+- web tests/build/G14;
+- full deterministic runtime gates;
+- required live probes.
+
+Installer acceptance must later include at least:
+- digital PDF without OCR;
+- scanned PDF with OCR;
+- DOCX/ODT;
+- XLSX;
+- firm/case retrieval;
+- multi-user revoke/rekey.
+
+
+## G39 validated authoring closure — 2026-09-16
+
+Validated code SHA:
+- `e0035c68a2034bc4e4132adc28614fb752e10c4f`
+
+CI evidence:
+- F-138 structural audit `35108047959` — SUCCESS;
+- Lex Runtime Validation `35108047936` — SUCCESS;
+- runtime tests — 61/61 files, 220/220 tests PASS;
+- web tests — 1/1 file, 16/16 tests PASS;
+- production web build and G14 bundle safety — PASS;
+- live G17/G19/G20/G22 — PASS;
+- `G31C2_TYPED_AUTHORING_AST` — PASS;
+- `G31D_DETERMINISTIC_DOCX` — PASS;
+- `G31E_DETERMINISTIC_ODT` — PASS;
+- `G35C_TEMPLATE_ASSISTED_GENERATION` — PASS;
+- `G34F_FULL_DEANONYMIZATION_EXPORT` — PASS.
+
+Remaining critical installer path:
+1. G34G Tauri production trust boundary;
+2. G33A-G33D offline installer / repair / rollback / signed update;
+3. remaining G37 desktop-only integrations and clean-machine release acceptance.

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "status": "DESIGN_EXAMPLE_NOT_RELEASE_LOCK",
+  "target": "windows-x86_64",
+  "applicationVersion": "0.0.0-design",
+  "components": [
+    {
+      "id": "lex-desktop",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "app/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "lex-runtime",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "runtime/lex-runtime/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "node-runtime",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "runtime/node/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "python-runtime",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "runtime/python/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "paddle-ocr-pl",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "models/paddle/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "stanza-pl-ner",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "models/stanza/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "libreoffice-headless",
+      "mode": "private",
+      "required": true,
+      "version": "TBD",
+      "relativePath": "runtime/libreoffice/",
+      "sha256Manifest": "TBD"
+    },
+    {
+      "id": "webview2",
+      "mode": "system-prerequisite",
+      "required": true,
+      "minimumVersion": "TBD",
+      "bundledInstaller": "prerequisites/webview2-offline.exe"
+    },
+    {
+      "id": "vc-runtime",
+      "mode": "system-prerequisite",
+      "required": true,
+      "minimumVersion": "TBD",
+      "bundledInstaller": "prerequisites/vc-redist-x64.exe"
+    }
+  ]
+}

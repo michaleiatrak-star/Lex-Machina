@@ -1,0 +1,142 @@
+export type AppRole = "ADMIN" | "USER";
+
+export type CaseRole =
+  | "OWNER"
+  | "EDITOR"
+  | "ANALYST"
+  | "VIEWER";
+
+export type LocalUserStatus =
+  | "ACTIVE"
+  | "DISABLED";
+
+export type AssistantModelProvider =
+  | "openai"
+  | "anthropic"
+  | "xai";
+
+export type ModelRoutingPreferences = {
+  auxiliaryEnabled: boolean;
+  auxiliaryProvider: AssistantModelProvider;
+  auxiliaryModel: string;
+  updatedAt?: string;
+};
+
+export const DEFAULT_MODEL_ROUTING_PREFERENCES:
+  ModelRoutingPreferences = {
+    auxiliaryEnabled: false,
+    auxiliaryProvider: "openai",
+    auxiliaryModel:
+      "local/bielik-11b-v3-q4km"
+  };
+
+
+export type AuthKdfPolicy = {
+  algorithm: "ARGON2ID";
+  memoryKiB: number;
+  iterations: number;
+  parallelism: number;
+  keyLength: number;
+  version: number;
+};
+
+export type PublicLocalUser = {
+  userId: string;
+  loginName: string;
+  displayName: string;
+  appRole: AppRole;
+  status: LocalUserStatus;
+  passwordSetupPending?: boolean;
+  createdAt: string;
+  lastLoginAt?: string;
+};
+
+export type StoredLocalUser = PublicLocalUser & {
+  normalizedLoginName: string;
+  updatedAt: string;
+  authEpoch: number;
+  kdf: AuthKdfPolicy;
+  kdfSalt: Buffer;
+  umkWrapNonce: Buffer;
+  umkWrapCiphertext: Buffer;
+  umkWrapTag: Buffer;
+  umkKeyVersion: number;
+  sharingPublicKeyAlgorithm?: "X25519";
+  sharingPublicKey?: Buffer;
+  sharingPrivateKeyWrapNonce?: Buffer;
+  sharingPrivateKeyWrapCiphertext?: Buffer;
+  sharingPrivateKeyWrapTag?: Buffer;
+  sharingKeyVersion?: number;
+};
+
+export type AuthSessionView = {
+  sessionId: string;
+  userId: string;
+  createdAt: string;
+  lastActivityAt: string;
+  lastFullAuthenticationAt: string;
+  idleExpiresAt: string;
+  overallExpiresAt: string;
+};
+
+export type AuthenticatedContext = {
+  user: PublicLocalUser;
+  session: AuthSessionView;
+};
+
+export type AuthSuccess = AuthenticatedContext & {
+  sessionToken: string;
+};
+
+export type AuthStatus = {
+  initialized: boolean;
+  requiresBootstrap: boolean;
+};
+
+export type AuthClock = {
+  now(): number;
+};
+
+export type AuthSessionPolicy = {
+  idleTimeoutMs: number;
+  overallTimeoutMs: number;
+};
+
+export const DEFAULT_AUTH_SESSION_POLICY:
+  AuthSessionPolicy = {
+    idleTimeoutMs: 15 * 60 * 1000,
+    overallTimeoutMs: 8 * 60 * 60 * 1000
+  };
+
+export const DEFAULT_AUTH_KDF:
+  AuthKdfPolicy = {
+    algorithm: "ARGON2ID",
+    memoryKiB: 64 * 1024,
+    iterations: 3,
+    parallelism: 1,
+    keyLength: 32,
+    version: 1
+  };
+
+
+export type StoredRecoveryEnvelope = {
+  userId: string;
+  algorithm: "HKDF-SHA256-AES-256-GCM";
+  salt: Buffer;
+  nonce: Buffer;
+  ciphertext: Buffer;
+  tag: Buffer;
+  keyVersion: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type RecoveryCodeResult = {
+  recoveryCode: string;
+  createdAt: string;
+};
+
+export type AuthRecoverySuccess =
+  AuthSuccess & {
+    recoveryCode: string;
+  };
