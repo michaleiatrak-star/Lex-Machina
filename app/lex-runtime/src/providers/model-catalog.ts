@@ -119,22 +119,15 @@ export class DynamicModelCatalog {
   localContextWindow(
     modelId: string
   ): number | undefined {
-    const runtime =
-      this.localModels.status();
-    if (
-      !runtime.configured ||
-      runtime.selectedModelId !==
-        modelId
-    ) {
-      return undefined;
-    }
     const selected =
       this.localModels
         .listModels()
         .find(
           (model) =>
             model.id === modelId &&
-            model.installed
+            model.installed &&
+            model.configuredContextWindow !==
+              undefined
         );
     if (!selected) {
       return undefined;
@@ -152,21 +145,12 @@ export class DynamicModelCatalog {
   localTokenCharsPerToken(
     modelId: string
   ): number | undefined {
-    const runtime =
-      this.localModels.status();
-    if (
-      !runtime.configured ||
-      runtime.selectedModelId !==
-        modelId ||
-      runtime.qualification
-        ?.modelId !==
-        modelId
-    ) {
-      return undefined;
-    }
     const value =
-      runtime.qualification
-        .tokenizerCalibration
+      this.localModels
+        .qualificationForModel(
+          modelId
+        )
+        ?.tokenizerCalibration
         ?.conservativeCharsPerToken;
     return (
       typeof value ===
@@ -202,35 +186,40 @@ export class DynamicModelCatalog {
   }
 
   private listConfiguredLocalOpenAiModels(): ModelDescriptor[] {
-    const runtime = this.localModels.status();
-    if (!runtime.configured || !runtime.selectedModelId) return [];
-    const selected = this.localModels
+    return this.localModels
       .listModels()
-      .find((model) => model.id === runtime.selectedModelId);
-    if (!selected || !selected.installed) return [];
-    return [{
-      provider: "openai",
-      id: selected.id,
-      displayName: `Lokalny · ${selected.displayName}`,
-      selectable: true,
-      contextWindow:
-        selected.configuredContextWindow ??
-        selected.contextWindow,
-      nativeContextWindow:
-        selected.nativeContextWindow,
-      contextMode:
-        selected.contextMode,
-      ownedBy: "local",
-      inputModalities: ["text"],
-      outputModalities: ["text"],
-      capabilities: [
-        "local-only",
-        "offline-inference",
-        selected.contextMode === "YARN_EXTENDED"
-          ? "yarn-context-extension"
-          : "native-context"
-      ]
-    }];
+      .filter(
+        (model) =>
+          model.installed &&
+          model.configuredContextWindow !==
+            undefined
+      )
+      .map((model) => ({
+        provider: "openai" as const,
+        id: model.id,
+        displayName:
+          `Lokalny · ${model.displayName}`,
+        selectable: true,
+        contextWindow:
+          model.configuredContextWindow ??
+          model.contextWindow,
+        nativeContextWindow:
+          model.nativeContextWindow,
+        contextMode:
+          model.contextMode,
+        ownedBy: "local",
+        inputModalities: ["text"],
+        outputModalities: ["text"],
+        capabilities: [
+          "local-only",
+          "offline-inference",
+          "switchable-profile",
+          model.contextMode ===
+            "YARN_EXTENDED"
+            ? "yarn-context-extension"
+            : "native-context"
+        ]
+      }));
   }
 
   private async listOpenAI(apiKey: string): Promise<ModelDescriptor[]> {
