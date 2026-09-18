@@ -228,6 +228,14 @@ function executionMessage(
       execution.documentCitationFreshness
         ? ` · cytaty odświeżone: ${execution.documentCitationFreshness.checked}`
         : "";
+    const workflowMeta =
+      execution.processAuto
+        ? ` · AUTO: ${execution.processAuto.steps.length}/${execution.processAuto.maxSteps} kroków · ${execution.processAuto.stopped}`
+        : execution.processWorkflow
+          ? ` · proces: ${execution.processWorkflow.stage}${execution.processWorkflow.pendingCheckpoint ? ` · czeka: ${execution.processWorkflow.pendingCheckpoint}` : ""}`
+          : execution.courtWorkflow
+            ? ` · analiza sądowa: ${execution.courtWorkflow.stage}${execution.courtWorkflow.nextCheckpoint ? ` · następny: ${execution.courtWorkflow.nextCheckpoint}` : ""}`
+            : "";
     return {
       id: messageId(),
       role: "assistant",
@@ -240,6 +248,7 @@ function executionMessage(
         domainMeta +
         contextMeta +
         citationMeta +
+        workflowMeta +
         ` · VERIFIED ${execution.verification.verified}` +
         ` · SUPPORTED ${execution.verification.supported}`
     };
@@ -701,7 +710,13 @@ export default function MatterChatApp({
                         ? "Pipeline tej sprawy ma już status FINAL."
                         : code.startsWith("PROCESS_PLEADING_")
                           ? `Pipeline pisma procesowego zablokował wykonanie: ${code}`
-                          : `Nie udało się wykonać sesji: ${code}`;
+                          : code === "COURT_ANALYSIS_CASE_REQUIRED"
+                            ? "Analiza sądowa musi być powiązana z aktywną sprawą."
+                            : code === "COURT_ANALYSIS_ALREADY_COMPLETE"
+                              ? "Deterministyczna analiza sądowa tej sprawy została już zakończona."
+                              : code.startsWith("COURT_ANALYSIS_")
+                                ? `Pipeline analizy sądowej zablokował wykonanie: ${code}`
+                                : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
       setMessages((current) => [
         ...current,
