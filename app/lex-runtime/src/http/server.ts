@@ -433,6 +433,8 @@ export async function startLocalServer(options?: {
       workspaceStore,
     courtAnalysisWorkflowStore:
       workspaceStore,
+    chronologyWorkflowStore:
+      workspaceStore,
     documentGenerationState,
     caseFileStore,
     secureCaseUploadStore,
