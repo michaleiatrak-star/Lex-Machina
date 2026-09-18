@@ -26,23 +26,40 @@ function localAiRoot(): string {
   return path.resolve(os.homedir(), ".lex-machina", "local-ai");
 }
 
-function localAiExecutionReady(): boolean {
+function localConfigExecutionReady(
+  configPath: string
+): boolean {
   try {
     const config = JSON.parse(
-      fs.readFileSync(path.join(localAiRoot(), "config.json"), "utf8")
+      fs.readFileSync(
+        configPath,
+        "utf8"
+      )
     ) as {
       schemaVersion?: unknown;
-      model?: { path?: unknown };
-      engine?: { executable?: unknown };
+      model?: {
+        path?: unknown;
+      };
+      engine?: {
+        executable?: unknown;
+      };
     };
-    if (config.schemaVersion !== 1) return false;
+    if (
+      config.schemaVersion !== 1
+    ) {
+      return false;
+    }
     const modelPath =
-      typeof config.model?.path === "string"
+      typeof config.model?.path ===
+        "string"
         ? config.model.path
         : "";
     const enginePath =
-      typeof config.engine?.executable === "string"
-        ? config.engine.executable
+      typeof config.engine
+        ?.executable ===
+        "string"
+        ? config.engine
+            .executable
         : "";
     return Boolean(
       modelPath &&
@@ -50,6 +67,55 @@ function localAiExecutionReady(): boolean {
       fs.existsSync(modelPath) &&
       fs.existsSync(enginePath)
     );
+  } catch {
+    return false;
+  }
+}
+
+function localAiExecutionReady(): boolean {
+  const root =
+    localAiRoot();
+  if (
+    localConfigExecutionReady(
+      path.join(
+        root,
+        "config.json"
+      )
+    )
+  ) {
+    return true;
+  }
+
+  const profiles =
+    path.join(
+      root,
+      "profiles"
+    );
+  try {
+    return fs
+      .readdirSync(
+        profiles,
+        {
+          withFileTypes: true
+        }
+      )
+      .filter(
+        (entry) =>
+          entry.isFile() &&
+          entry.name.endsWith(
+            ".config.json"
+          )
+      )
+      .slice(0, 16)
+      .some(
+        (entry) =>
+          localConfigExecutionReady(
+            path.join(
+              profiles,
+              entry.name
+            )
+          )
+      );
   } catch {
     return false;
   }
