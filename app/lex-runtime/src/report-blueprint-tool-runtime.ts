@@ -257,30 +257,70 @@ export class ReportBlueprintToolRuntime {
           Record<string, unknown>
       );
 
-    const policy =
+    if (
       reportType ===
         "CLIENT_REPORT_V1"
-        ? validateClientReportBlueprint(
-            record
-          )
-        : validateSituationReportBlueprint(
-            record
-          );
+    ) {
+      const policy =
+        validateClientReportBlueprint(
+          record
+        );
+      if (
+        policy.result ===
+          "BLOCKED"
+      ) {
+        throw new Error(
+          [
+            "REPORT_BLUEPRINT_POLICY_BLOCKED",
+            ...policy.errors
+          ].join(":")
+        );
+      }
 
+      this.accepted.set(
+        reportType,
+        {
+          kind: reportType,
+          blueprint: record,
+          policy
+        }
+      );
+      this.events.push({
+        tool:
+          SUBMIT_REPORT_BLUEPRINT,
+        target: reportType,
+        decision: "ALLOW",
+        detail: {
+          profile:
+            policy.profile ??
+            null,
+          mode:
+            policy.mode ??
+            null,
+          warnings:
+            policy.warnings
+        }
+      });
+      return JSON.stringify({
+        status: "OK",
+        reportType,
+        policy
+      });
+    }
+
+    const policy =
+      validateSituationReportBlueprint(
+        record
+      );
     if (
       policy.result ===
         "BLOCKED"
     ) {
-      const detail =
-        reportType ===
-          "CLIENT_REPORT_V1"
-          ? policy.errors
-          : policy
-              .hardGateErrors;
       throw new Error(
         [
           "REPORT_BLUEPRINT_POLICY_BLOCKED",
-          ...detail
+          ...policy
+            .hardGateErrors
         ].join(":")
       );
     }
@@ -288,45 +328,24 @@ export class ReportBlueprintToolRuntime {
     this.accepted.set(
       reportType,
       {
-        kind:
-          reportType,
-        blueprint:
-          record,
+        kind: reportType,
+        blueprint: record,
         policy
       }
     );
     this.events.push({
       tool:
         SUBMIT_REPORT_BLUEPRINT,
-      target:
-        reportType,
-      decision:
-        "ALLOW",
-      detail:
-        reportType ===
-          "CLIENT_REPORT_V1"
-          ? {
-              profile:
-                policy.profile ??
-                null,
-              mode:
-                policy.mode ??
-                null,
-              warnings:
-                policy
-                  .warnings
-            }
-          : {
-              completeness:
-                policy
-                  .completeness,
-              missingRequired:
-                policy
-                  .missingRequired,
-              warnings:
-                policy
-                  .warnings
-            }
+      target: reportType,
+      decision: "ALLOW",
+      detail: {
+        completeness:
+          policy.completeness,
+        missingRequired:
+          policy.missingRequired,
+        warnings:
+          policy.warnings
+      }
     });
 
     return JSON.stringify({
