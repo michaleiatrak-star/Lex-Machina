@@ -3,13 +3,23 @@ param(
   [Parameter(Mandatory=$true)][string]$RuntimeBundlePath,
   [Parameter(Mandatory=$true)][string]$OutputPath,
   [string]$ReceiptPath,
-  [string]$ComponentLockPath
+  [string]$ComponentLockPath,
+  [string]$IconPath
 )
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
 $runtimeBundle = (Resolve-Path -LiteralPath $RuntimeBundlePath).Path
 $source = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "offline-selfextract/OfflineSelfExtractor.cs")).Path
+
+if ([string]::IsNullOrWhiteSpace($IconPath)) {
+  $IconPath = Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
+}
+if (-not (Test-Path -LiteralPath $IconPath -PathType Leaf)) {
+  throw "OFFLINE_STANDALONE_ICON_MISSING:$IconPath"
+}
+$icon = (Resolve-Path -LiteralPath $IconPath).Path
+
 $output = [IO.Path]::GetFullPath($OutputPath)
 $outputDir = Split-Path -Parent $output
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
@@ -42,6 +52,7 @@ try {
 
   & $compiler /nologo /target:winexe /optimize+ /platform:x64 `
     "/out:$stub" `
+    "/win32icon:$icon" `
     /reference:System.dll `
     /reference:System.Core.dll `
     /reference:System.IO.Compression.dll `
