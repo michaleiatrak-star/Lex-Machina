@@ -23,6 +23,7 @@ export type DeterministicWorkflowPlan = {
   executionSkill: string | null;
   escalatedFromSimpleLetter: boolean;
   requiredFreshResources: string[];
+  semanticContextResources: string[];
   phases: readonly [
     "PREFLIGHT",
     "SEMANTIC_EXECUTION",
@@ -142,6 +143,30 @@ const SITUATION_REPORT_RESOURCES = [
   "shared/SELF-CHECK-ANTY-FASADA.md",
   "shared/MOD-WIDGET-IO.md"
 ] as const;
+
+const SEMANTIC_CONTEXT_RESOURCES:
+  Readonly<
+    Partial<
+      Record<
+        DeterministicWorkflowId,
+        readonly string[]
+      >
+    >
+  > = {
+    COURT_ANALYSIS_V1: [
+      "analiza-sadowa-v6/references/WERYFIKACJA-DOWODOW.md"
+    ],
+    CHRONOLOGY_V1: [
+      "chronologia-sprawy-v1/references/ekstrakcja-zdarzen.md",
+      "chronologia-sprawy-v1/references/sprzecznosci-dat.md"
+    ],
+    WITNESS_QUESTIONING_V1: [
+      "przesluchanie-swiadkow-v2-min90/references/WITNESS-INTELLIGENCE.md"
+    ],
+    CLIENT_REPORT_V1: [
+      "raport-klienta-v1/references/jezyk-klienta.md"
+    ]
+  };
 
 const SIMPLE_LETTER_READY_MARKERS = [
   "TREŚĆ PISMA",
@@ -408,11 +433,24 @@ export function createDeterministicWorkflowPlan(
     }
   }
 
+  const semanticContextResources = [
+    ...(
+      SEMANTIC_CONTEXT_RESOURCES[
+        id
+      ] ?? []
+    )
+  ].filter(
+    (resource) =>
+      requiredFreshResources
+        .includes(resource)
+  );
+
   return {
     id,
     executionSkill,
     escalatedFromSimpleLetter: false,
     requiredFreshResources,
+    semanticContextResources,
     phases: [
       "PREFLIGHT",
       "SEMANTIC_EXECUTION",
@@ -437,12 +475,12 @@ export function deterministicWorkflowPrompt(
     "# DETERMINISTIC RUNTIME WORKFLOW",
     `Workflow: ${plan.id}.`,
     "The runtime enforces PREFLIGHT → SEMANTIC_EXECUTION → FINALIZATION.",
-    "Before completing this turn, perform fresh read_legal_resource calls for every resource below.",
-    "Merely mentioning a filename or remembering an earlier copy does not satisfy the gate.",
+    "Mandatory workflow resources are pre-read by deterministic runtime before provider execution.",
+    "Do not spend tool calls reopening the resources listed below unless a separate semantic need requires a different resource or pagination range.",
     ...plan.requiredFreshResources.map(
-      (resource) => `- ${resource}`
+      (resource) => `- runtime-read: ${resource}`
     ),
-    "The runtime will compare actual corpus-tool audit events against this list and block presentation if any required read is missing.",
+    "Only resources explicitly injected under RUNTIME-PRELOADED SEMANTIC CONTEXT should be treated as semantic reading material. The remaining required resources are mechanical policy enforced by code.",
     ...(plan.id === "SIMPLE_LETTER_V1"
       ? [
           "SIMPLE_LETTER_V1 output contract is runtime-enforced.",
