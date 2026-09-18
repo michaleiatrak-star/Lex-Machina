@@ -447,7 +447,15 @@ process.stdout.write(
         goodFetches[0] ?? null,
       answerReleased:
         typeof good.answer ===
-        "string"
+        "string",
+      loadedSkills:
+        good.loadedSkills,
+      workflow:
+        good.workflow,
+      gateI:
+        good.gateI,
+      gateITurn:
+        good.gateITurn
     },
     extractionFailurePath: {
       http: badHttp.status,
@@ -459,7 +467,15 @@ process.stdout.write(
       sourceUrl:
         badFetches[0] ?? null,
       answerReleased:
-        "answer" in bad
+        "answer" in bad,
+      loadedSkills:
+        bad.loadedSkills,
+      workflow:
+        bad.workflow,
+      gateI:
+        bad.gateI,
+      gateITurn:
+        bad.gateITurn
     },
     liveOfficialNetworkCallExecuted:
       false,
