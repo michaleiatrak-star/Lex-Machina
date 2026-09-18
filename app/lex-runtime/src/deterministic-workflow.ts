@@ -1368,18 +1368,35 @@ export function evaluateDeterministicWorkflowOutput(
 
 export function evaluateDeterministicWorkflowReads(
   plan: DeterministicWorkflowPlan,
-  corpusAudit: readonly LegalCorpusAuditEvent[]
+  corpusAudit: readonly LegalCorpusAuditEvent[],
+  executionEvents: readonly {
+    type: string;
+    target: string;
+    status: string;
+  }[] = []
 ): DeterministicWorkflowReadReport {
   const observed = [
-    ...new Set(
-      corpusAudit
+    ...new Set([
+      ...corpusAudit
         .filter(
           (event) =>
             event.tool === "read_legal_resource" &&
             event.decision === "ALLOW"
         )
-        .map((event) => event.target)
-    )
+        .map((event) => event.target),
+      ...executionEvents
+        .filter(
+          (event) =>
+            event.type === "resource_read" &&
+            event.status === "OK" &&
+            plan.requiredFreshResources
+              .includes(event.target)
+        )
+        .map(
+          (event) =>
+            event.target
+        )
+    ])
   ];
 
   const missing =
