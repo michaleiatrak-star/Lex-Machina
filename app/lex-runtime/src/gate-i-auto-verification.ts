@@ -16,6 +16,52 @@ const SUPREME_COURT =
   /\b(?:SN|SĄD\s+NAJWYŻSZY|SĄDU\s+NAJWYŻSZEGO)\b/iu;
 const CASE_SIGNATURE =
   /\bsygn\.?\s*(?:akt\s*)?([A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,8}(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,12}){0,3}\s+\d+\/\d{2,4})\b/iu;
+const HISTORICAL_SCOPE =
+  /\b(?:według\s+stanu\s+na|stan(?:u)?\s+(?:prawa\s+)?na|na\s+dzień)\s+(\d{4}-\d{2}-\d{2})\b/giu;
+const EXPLICIT_UNVERIFIED_MARKER =
+  "⚠️ [NIEWERYFIKOWANE]";
+
+export function detectHistoricalAsOf(
+  value: string
+): string | undefined {
+  const matches = [
+    ...value.matchAll(
+      HISTORICAL_SCOPE
+    )
+  ]
+    .map((match) => match[1])
+    .filter(
+      (date): date is string =>
+        Boolean(date)
+    );
+  const unique = [
+    ...new Set(matches)
+  ];
+  return unique.length === 1
+    ? unique[0]
+    : undefined;
+}
+
+function ledgerRecordForScope(
+  ledger: VerificationLedger,
+  claim: string,
+  asOf?: string
+): VerificationRecord | undefined {
+  const records =
+    ledger.find(claim);
+  return [...records]
+    .reverse()
+    .find(
+      (record) =>
+        asOf
+          ? record.asOf === asOf &&
+            record.temporalMode ===
+              "HISTORICAL"
+          : !record.asOf &&
+            record.temporalMode !==
+              "HISTORICAL"
+    );
+}
 
 function normalizedClaim(
   value: string
@@ -106,16 +152,21 @@ export type GateIAutoVerificationPlan = {
       | "ACT_ALIAS_AMBIGUOUS"
       | "COURT_FAMILY_AMBIGUOUS"
       | "CASE_SIGNATURE_INVALID"
+      | "EXPLICIT_UNVERIFIED_MARKER"
       | "UNSUPPORTED_KIND";
   }>;
 };
 
 export function planAutomaticLegalVerification(
   text: string,
-  ledger: VerificationLedger
+  ledger: VerificationLedger,
+  requestedAsOf?: string
 ): GateIAutoVerificationPlan {
   const references =
     detectLegalReferences(text);
+  const globalAsOf =
+    requestedAsOf ??
+    detectHistoricalAsOf(text);
   const calls:
     NormalizedToolCall[] = [];
   const skipped:
@@ -134,9 +185,31 @@ export function planAutomaticLegalVerification(
     }
     seen.add(key);
 
+    const referenceAsOf =
+      detectHistoricalAsOf(
+        reference.lineText
+      ) ??
+      globalAsOf;
+
     if (
-      ledger.latest(
-        reference.claim
+      reference.lineText.includes(
+        EXPLICIT_UNVERIFIED_MARKER
+      )
+    ) {
+      skipped.push({
+        claim:
+          reference.claim,
+        reason:
+          "EXPLICIT_UNVERIFIED_MARKER"
+      });
+      continue;
+    }
+
+    if (
+      ledgerRecordForScope(
+        ledger,
+        reference.claim,
+        referenceAsOf
       )
     ) {
       skipped.push({
@@ -179,7 +252,13 @@ export function planAutomaticLegalVerification(
           kind:
             reference.kind,
           act:
-            alias
+            alias,
+          ...(referenceAsOf
+            ? {
+                asOf:
+                  referenceAsOf
+              }
+            : {})
         }
       });
       continue;
@@ -280,13 +359,17 @@ function marker(
 
 export function applyAutomaticVerificationMarkers(
   text: string,
-  ledger: VerificationLedger
+  ledger: VerificationLedger,
+  requestedAsOf?: string
 ): {
   text: string;
   inserted: number;
 } {
   const references =
     detectLegalReferences(text);
+  const globalAsOf =
+    requestedAsOf ??
+    detectHistoricalAsOf(text);
   if (
     references.length === 0
   ) {
@@ -303,9 +386,23 @@ export function applyAutomaticVerificationMarkers(
     >();
 
   for (const reference of references) {
+    if (
+      reference.lineText.includes(
+        EXPLICIT_UNVERIFIED_MARKER
+      )
+    ) {
+      continue;
+    }
+    const referenceAsOf =
+      detectHistoricalAsOf(
+        reference.lineText
+      ) ??
+      globalAsOf;
     const record =
-      ledger.latest(
-        reference.claim
+      ledgerRecordForScope(
+        ledger,
+        reference.claim,
+        referenceAsOf
       );
     if (!record) {
       continue;
