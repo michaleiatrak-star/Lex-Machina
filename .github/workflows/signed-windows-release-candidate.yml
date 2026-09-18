@@ -53,11 +53,25 @@ jobs:
         shell: pwsh
         run: ./app/installer/build-windows-online.ps1
 
-      - name: Build NSIS installer
-        working-directory: app/lex-desktop
-        run: npx tauri build --bundles nsis
+      - name: Prepare signing metadata directory
+        id: signing
+        shell: pwsh
+        run: |
+          $metadata = Join-Path $env:RUNNER_TEMP "lex-signed-release-metadata"
+          $receipts = Join-Path $metadata "signing-receipts"
+          New-Item -ItemType Directory -Force -Path $receipts | Out-Null
+          "LEX_SIGNING_RECEIPT_DIR=$receipts" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "metadata=$metadata" >> $env:GITHUB_OUTPUT
+          "receipts=$receipts" >> $env:GITHUB_OUTPUT
 
-      - name: Locate installer and metadata directory
+      - name: Build and sign NSIS installer plus Windows PE payloads
+        working-directory: app/lex-desktop
+        env:
+          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
+          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
+        run: npx tauri build --bundles nsis --config src-tauri/tauri.signed.conf.json
+
+      - name: Locate signed installer
         id: locate
         shell: pwsh
         run: |
@@ -67,22 +81,16 @@ jobs:
           if (-not $installer) {
             throw "SIGNED_RELEASE_INSTALLER_NOT_FOUND"
           }
-          $metadata = Join-Path $env:RUNNER_TEMP "lex-signed-release-metadata"
-          New-Item -ItemType Directory -Force -Path $metadata | Out-Null
           "installer=$($installer.FullName)" >> $env:GITHUB_OUTPUT
-          "metadata=$metadata" >> $env:GITHUB_OUTPUT
+          "metadata=${{ steps.signing.outputs.metadata }}" >> $env:GITHUB_OUTPUT
           Write-Host "Installer: $($installer.FullName)"
-
-      - name: Sign and verify Authenticode against pinned manifest trust root
-        shell: pwsh
-        env:
-          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
-          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
-        run: |
-          ./app/installer/sign-windows-artifact.ps1 `
-            -ArtifactPath "${{ steps.locate.outputs.installer }}" `
-            -ManifestPath "app/installer/windows-release-source.json" `
-            -ReceiptPath (Join-Path "${{ steps.locate.outputs.metadata }}" "Authenticode-Receipt.json")
+          $receipts = @(
+            Get-ChildItem -LiteralPath "${{ steps.signing.outputs.receipts }}" -File -Filter "*.json"
+          )
+          if ($receipts.Count -lt 3) {
+            throw "SIGNED_RELEASE_RECEIPTS_INCOMPLETE:$($receipts.Count)"
+          }
+          Write-Host "Signing receipts: $($receipts.Count)"
 
       - name: Provision VC++ prerequisite for unattended signed acceptance
         shell: pwsh
@@ -107,7 +115,9 @@ jobs:
         shell: pwsh
         run: |
           ./app/installer/windows-installer-acceptance.ps1 `
-            -InstallerPath "${{ steps.locate.outputs.installer }}"
+            -InstallerPath "${{ steps.locate.outputs.installer }}" `
+            -RequireAuthenticode `
+            -SigningManifestPath "app/installer/windows-release-source.json"
 
       - name: Generate npm CycloneDX SBOMs and Rust dependency inventory
         shell: pwsh
@@ -147,11 +157,14 @@ jobs:
             $installer,
             $releaseManifest,
             $componentLock,
-            (Join-Path $out "Authenticode-Receipt.json"),
             (Join-Path $out "sbom-lex-runtime.cdx.json"),
             (Join-Path $out "sbom-lex-web.cdx.json"),
             (Join-Path $out "sbom-lex-desktop.cdx.json"),
             (Join-Path $out "cargo-metadata.json")
+          )
+          $files += @(
+            Get-ChildItem -LiteralPath (Join-Path $out "signing-receipts") -File -Filter "*.json" |
+              ForEach-Object { $_.FullName }
           )
 
           $subjects = @()
@@ -200,7 +213,7 @@ jobs:
           name: LexMachina-Windows-Signed-Release-Candidate
           path: |
             ${{ steps.locate.outputs.installer }}
-            ${{ steps.locate.outputs.metadata }}/Authenticode-Receipt.json
+            ${{ steps.locate.outputs.metadata }}/signing-receipts/*.json
             ${{ steps.locate.outputs.metadata }}/release-provenance.json
             ${{ steps.locate.outputs.metadata }}/sbom-lex-runtime.cdx.json
             ${{ steps.locate.outputs.metadata }}/sbom-lex-web.cdx.json
