@@ -123,6 +123,8 @@ type ModelPackUpdateStatus = {
     | "SIGNER_POLICY_MISSING"
     | "APP_INCOMPATIBLE"
     | "MODEL_NOT_IN_INDEX"
+    | "PACK_VERSION_ROLLBACK"
+    | "PACK_VERSION_HASH_CONFLICT"
     | "INDEX_INVALID";
 };
 
@@ -186,6 +188,29 @@ function progressLabel(
       return "Gotowe";
     case "FAILED":
       return "Błąd";
+  }
+}
+
+function modelPackBlockLabel(
+  reason:
+    ModelPackUpdateStatus["blockedReason"]
+): string {
+  switch (reason) {
+    case "SIGNED_INDEX_MISSING":
+      return "brak podpisanego indeksu model-pack";
+    case "SIGNER_POLICY_MISSING":
+      return "brak skonfigurowanego zaufanego klucza Ed25519";
+    case "APP_INCOMPATIBLE":
+      return "pakiet nie jest zgodny z tą wersją aplikacji";
+    case "MODEL_NOT_IN_INDEX":
+      return "zainstalowanego modelu nie ma w podpisanym indeksie";
+    case "PACK_VERSION_ROLLBACK":
+      return "wykryto próbę cofnięcia do starszego podpisanego pakietu";
+    case "PACK_VERSION_HASH_CONFLICT":
+      return "ta sama wersja pakietu ma inny hash modelu";
+    case "INDEX_INVALID":
+    case undefined:
+      return "indeks podpisanej aktualizacji jest nieprawidłowy";
   }
 }
 
@@ -662,7 +687,7 @@ export function LocalAiSetupPanel({
                             ? "model nie jest jeszcze skonfigurowany"
                             : modelUpdate.status === "UNAVAILABLE"
                               ? "sprawdzenie niedostępne"
-                              : `zablokowany bezpiecznie: ${modelUpdate.blockedReason ?? "INDEX_INVALID"}`}
+                              : `zablokowany bezpiecznie: ${modelPackBlockLabel(modelUpdate.blockedReason)}`}
                     </span>
                   ) : null}
                 </div>
