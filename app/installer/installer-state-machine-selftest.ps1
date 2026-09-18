@@ -140,6 +140,17 @@ try {
     throw "INSTALL_STATE_SELFTEST_REGISTERED_DISCOVERY_FAILED"
   }
 
+  Remove-ItemProperty -LiteralPath $registryKey -Name "InstallLocation" -ErrorAction Stop
+  $fallback = Invoke-Probe (Join-Path $temp "default-fallback-location\runtime") $target -DiscoverRegisteredInstall -ProductName $registryProduct
+  Assert-State "UPGRADE" $fallback "upgrade-uninstall-string-fallback"
+  if (
+    $fallback.Result.discoverySource -ne "HKCU_UNINSTALL_UNINSTALLSTRING" -or
+    [IO.Path]::GetFullPath([string]$fallback.Result.registeredInstallRoot) -ne [IO.Path]::GetFullPath($registeredInstallRoot)
+  ) {
+    throw "INSTALL_STATE_SELFTEST_UNINSTALLSTRING_DISCOVERY_FAILED"
+  }
+  Set-ItemProperty -LiteralPath $registryKey -Name "InstallLocation" -Value $registeredInstallRoot
+
   $hydrated = Invoke-Probe $registeredRuntime $target -DiscoverRegisteredInstall -FailOnInstallRootMismatch -ProductName $registryProduct
   Assert-State "UPGRADE" $hydrated "upgrade-hydrated-registered-location"
   if ($hydrated.Result.installRootMismatch -ne $false) {
