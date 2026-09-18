@@ -11,7 +11,8 @@ import {
   vi
 } from "vitest";
 import {
-  createLexHttpApp
+  createLexHttpApp,
+  type LexHttpAppOptions
 } from "../src/http/app.js";
 import {
   registerWorkspaceRoutes
@@ -237,6 +238,69 @@ function fixture() {
       })
     );
 
+  const artifactId =
+    "artifact_" +
+    "a".repeat(32);
+  const readState =
+    vi.fn(
+      async (
+        caseId: string,
+        requestedArtifactId: string
+      ) => ({
+        schemaVersion: 1 as const,
+        caseId,
+        artifactId:
+          requestedArtifactId,
+        format:
+          "docx" as const,
+        state:
+          "TOKENIZED_VALIDATED" as const,
+        tokenizedSha256:
+          "a".repeat(64),
+        vaultGeneration: 1,
+        caseKeyVersion: 1,
+        workflowRequirement:
+          "PROCESS_PLEADING_FINAL" as const,
+        createdAt:
+          "2026-09-18T00:00:00.000Z"
+      })
+    );
+
+  const createIntent =
+    vi.fn(
+      async () => {
+        throw new Error(
+          "TEST_REAUTH_INTENT_SHOULD_NOT_BE_CREATED"
+        );
+      }
+    );
+
+  const reauthorizationManager =
+    {
+      createIntent,
+      authorizeIntent:
+        vi.fn(
+          async () => {
+            throw new Error(
+              "TEST_REAUTHORIZATION_NOT_USED"
+            );
+          }
+        ),
+      consumeGrant:
+        vi.fn(
+          async () => {
+            throw new Error(
+              "TEST_REAUTHORIZATION_NOT_USED"
+            );
+          }
+        )
+    } as unknown as
+      NonNullable<
+        LexHttpAppOptions[
+          "reauthorizationManager"
+        ]
+      >;
+
   const core =
     createLexHttpApp({
       registry:
@@ -255,6 +319,10 @@ function fixture() {
         cases,
       processWorkflowStore:
         workspace,
+      documentGenerationState: {
+        readState
+      },
+      reauthorizationManager,
       sessionExecutor: {
         execute
       }
@@ -321,7 +389,10 @@ function fixture() {
     root,
     app,
     auth,
-    execute
+    execute,
+    artifactId,
+    readState,
+    createIntent
   };
 }
 
@@ -638,6 +709,128 @@ describe(
           encrypted
         ).not.toContain(
           "PENDING_CONFIRMATION"
+        );
+
+        current.auth.close();
+      }
+    );
+
+    it(
+      "blocks deanonymization intent until the persisted process workflow is FINAL",
+      async () => {
+        const current =
+          fixture();
+
+        const bootstrap =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/auth/bootstrap"
+            )
+            .send({
+              loginName:
+                "owner-final",
+              displayName:
+                "Owner Final",
+              password:
+                "G39I final artifact strong password 2026"
+            })
+            .expect(201);
+        const authorization =
+          `Bearer ${String(
+            bootstrap.body
+              .sessionToken
+          )}`;
+
+        const createdCase =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/cases"
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .send({
+              displayName:
+                "Final gate E2E"
+            })
+            .expect(201);
+        const caseId =
+          String(
+            createdCase.body
+              .caseId
+          );
+
+        await request(
+          current.app
+        )
+          .post(
+            `/api/cases/${caseId}/workflow/process-pleading/initialize`
+          )
+          .set(
+            "Authorization",
+            authorization
+          )
+          .send({
+            mode:
+              "CHECKPOINT"
+          })
+          .expect(201);
+
+        await request(
+          current.app
+        )
+          .post(
+            `/api/cases/${caseId}/artifacts/${current.artifactId}/deanonymization-intent`
+          )
+          .set(
+            "Authorization",
+            authorization
+          )
+          .send({})
+          .expect(
+            409,
+            {
+              error:
+                "PROCESS_PLEADING_FINAL_REQUIRED"
+            }
+          );
+
+        expect(
+          current.readState
+        ).toHaveBeenCalledWith(
+          caseId,
+          current.artifactId
+        );
+        expect(
+          current.createIntent
+        ).not.toHaveBeenCalled();
+
+        const encrypted =
+          fs.readFileSync(
+            path.join(
+              current.root,
+              "cases",
+              caseId,
+              "secure",
+              "workspace",
+              "index.lmw1"
+            ),
+            "utf8"
+          );
+        expect(
+          encrypted
+        ).not.toContain(
+          "PROCESS_PLEADING_V1"
+        );
+        expect(
+          encrypted
+        ).not.toContain(
+          "CG_ACCEPTANCE"
         );
 
         current.auth.close();
