@@ -30,6 +30,11 @@ import type {
   ChronologyCheckpoint,
   ChronologyStage
 } from "./chronology-state.js";
+import type {
+  ContractCheckpoint,
+  ContractStage,
+  ContractWorkflowMode
+} from "./contract-analysis-state.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -124,6 +129,15 @@ export class LexExecutionEngine {
       checkpoint:
         ChronologyCheckpoint;
       temporalGateRequired: boolean;
+    };
+    contractWorkflowContext?: {
+      mode: ContractWorkflowMode;
+      stage: Exclude<
+        ContractStage,
+        "COMPLETE"
+      >;
+      checkpoint:
+        ContractCheckpoint;
     };
     tools?: NormalizedToolSchema[];
     toolSystemPromptAppendix?: string;
@@ -478,6 +492,49 @@ export class LexExecutionEngine {
       );
     }
 
+    if (
+      args.contractWorkflowContext &&
+      workflowPlan.id !==
+        "CONTRACT_ANALYSIS_V1"
+    ) {
+      emit(
+        "gate",
+        "G39I_CONTRACT_STATE_BINDING",
+        "BLOCKED",
+        "CONTRACT_STATE_ON_NON_CONTRACT_WORKFLOW"
+      );
+      throw new LexExecutionError(
+        "Contract-analysis state was bound to a non-contract workflow.",
+        "G39I_CONTRACT_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      workflowPlan.id ===
+        "CONTRACT_ANALYSIS_V1" &&
+      !args.contractWorkflowContext
+    ) {
+      emit(
+        "gate",
+        "G39I_CONTRACT_STATE_BINDING",
+        "BLOCKED",
+        "CONTRACT_STATE_CONTEXT_MISSING"
+      );
+      throw new LexExecutionError(
+        "Persisted contract-analysis context is required.",
+        "G39I_CONTRACT_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (args.contractWorkflowContext) {
+      emit(
+        "gate",
+        "G39I_CONTRACT_STATE_BINDING",
+        "OK",
+        `mode=${args.contractWorkflowContext.mode};stage=${args.contractWorkflowContext.stage};checkpoint=${args.contractWorkflowContext.checkpoint}`
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -542,6 +599,20 @@ export class LexExecutionEngine {
               "Execute only this chronology checkpoint in this turn.",
               "Do not claim completion of inventory, thread identification, extraction, temporal analysis, contradiction indexing or final report stages that are later than the active checkpoint.",
               "Event meaning, certainty class, provenance and contradiction significance remain semantic work; the runtime controls only stage order and finalization."
+            ].join("\n")
+          ]
+        : []),
+      ...(args.contractWorkflowContext
+        ? [
+            [
+              "# ACTIVE CONTRACT ANALYSIS STATE — RUNTIME ENFORCED",
+              `Mode: ${args.contractWorkflowContext.mode}.`,
+              `Stage: ${args.contractWorkflowContext.stage}.`,
+              `Active AU checkpoint: ${args.contractWorkflowContext.checkpoint}.`,
+              "Execute only this AU checkpoint in this turn.",
+              "Do not advance, claim completion of, or synthesize output reserved for a later AU checkpoint.",
+              "Clause risk, interpretation, negotiation position and proposed wording remain semantic model work; the runtime controls only intake/routing, step order, validation and finalization.",
+              "AU-HYBRID, AU-STRIP, AU-POST and AU-DISC are mandatory finalization gates and cannot be treated as N/A."
             ].join("\n")
           ]
         : []),
