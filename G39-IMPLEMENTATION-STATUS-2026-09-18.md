@@ -315,10 +315,13 @@ Next slices after this vertical slice is green:
 
 ## G39J — release / supply-chain hardening
 
-Status: **PARTIAL / BLOCKED FOR PRODUCTION TRUST CONFIGURATION**
+Status: **PARTIAL / TEMPORARY UNSIGNED MODE ENABLED**
 
 Implemented in repo:
 
+- temporary development policy is explicitly enabled for application, skill and model-pack updates: signatures may be absent, but SHA-256, version/compatibility checks, structural validation, transactional activation, health checks and rollback remain mandatory;
+- receipts/markers expose the unsigned state (`UNSIGNED_ALLOWED`) so the relaxed trust posture is auditable and can be removed later without changing the transaction architecture;
+- signed release workflows and verifiers remain in repo and are not deleted; switching back to `SIGNED_REQUIRED` is a policy/trust-root change rather than a redesign;
 - release-critical online/offline/skill-candidate workflows pin `checkout`, `setup-node` and `upload-artifact` to exact commit SHA;
 - Windows signing gate verifies that the CI PFX certificate thumbprint is already present in the committed application trust root; the signing secret cannot define its own trust root;
 - Authenticode signing requires SHA-256, RFC3161 timestamping and a post-signature verification pass;
@@ -330,10 +333,11 @@ Implemented in repo:
 - Windows branding is no longer the 1×1 fallback: build.rs generates a deterministic multi-size dark-green/ivory `LM` ICO; the same icon is assigned to the application executable, NSIS installer/uninstaller and standalone offline wrapper;
 - signed skill-update release-candidate workflow exists and requires an Ed25519 private key secret;
 - signed model-pack verifier, dedicated trust root, metadata builder and manual release-candidate workflow are implemented; tampered metadata, untrusted key id and unsafe model metadata are rejected in unit tests;
-- application, skill and model-pack update channels remain fail-closed while their committed production public trust roots are empty.
+- production signed mode remains fail-closed when selected, but the current development manifest deliberately selects `UNSIGNED_ALLOWED` so installation and updates can proceed without configured production keys.
 
 External / production blockers:
 
+- before production release, disable `temporaryUnsignedAllowed` and restore `SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER` / `SHA256_AND_ED25519_SIGNED_INDEX` on all three update channels;
 - configure the real production Authenticode certificate and commit its public thumbprint to `applicationUpdate.trustedSignerThumbprints`;
 - configure the corresponding CI PFX/password secrets and execute a signed installer/update acceptance;
 - configure the production Ed25519 skill signing key and commit its public key to the skill trust root;
