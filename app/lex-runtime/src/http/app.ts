@@ -6550,6 +6550,122 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (
+        chronologyContext &&
+        options.caseAccessService &&
+        options
+          .chronologyWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              chronologyContext.caseId
+            );
+
+        let state =
+          chronologyContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "CHRONOLOGY_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          const auditRef =
+            [
+              "audit://session",
+              createHash("sha256")
+                .update(
+                  `${result.sessionId}\0${chronologyContext.permit.checkpoint}`
+                )
+                .digest("hex"),
+              chronologyContext.permit
+                .checkpoint
+            ].join("/");
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                chronologyContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .getChronologyState({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "CHRONOLOGY_STATE_CONFLICT"
+                    );
+                  }
+                  const next =
+                    completeChronologyExecution(
+                      current,
+                      chronologyContext!
+                        .permit,
+                      [auditRef]
+                    );
+                  return await options
+                    .chronologyWorkflowStore!
+                    .saveChronologyState({
+                      caseId:
+                        chronologyContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      state: next,
+                      expectedRevision:
+                        current.revision
+                    });
+                }
+              );
+        }
+
+        result.chronologyWorkflow = {
+          caseId:
+            chronologyContext.caseId,
+          revision:
+            state.revision,
+          stage:
+            state.stage,
+          temporalGateRequired:
+            state
+              .temporalGateRequired,
+          nextCheckpoint:
+            nextChronologyCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
         courtContext &&
         options.caseAccessService &&
         options
