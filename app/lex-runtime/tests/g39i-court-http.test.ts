@@ -40,9 +40,14 @@ import {
 import {
   EncryptedCaseWorkspaceStore
 } from "../src/case-workspace-store.js";
-import type {
-  SessionExecutor
+import {
+  SESSION_EXECUTION_INTERNAL,
+  type SessionExecutionResponse,
+  type SessionExecutor
 } from "../src/session-executor.js";
+import {
+  SecureCaseArtifactStore
+} from "../src/case-artifact-store.js";
 
 const roots: string[] = [];
 const DR =
@@ -190,61 +195,117 @@ function fixture(
     new EncryptedCaseWorkspaceStore({
       rootDir: root
     });
+  const artifacts =
+    new SecureCaseArtifactStore({
+      rootDir: root
+    });
 
   const execute =
     vi.fn<
       SessionExecutor["execute"]
     >(
-      async (input) => ({
-        sessionId:
-          "session-g39i-court",
-        status:
-          blocked
-            ? "BLOCKED"
-            : "DRAFT_PRESENTABLE",
-        provider:
-          input.provider,
-        model:
-          input.model,
-        primarySkill:
-          input.primarySkill,
-        ...(!blocked
-          ? {
-              answer:
-                "court-stage-result"
+      async (input) => {
+        const result:
+          SessionExecutionResponse = {
+          sessionId:
+            "session-g39i-court",
+          status:
+            blocked
+              ? "BLOCKED"
+              : "DRAFT_PRESENTABLE",
+          provider:
+            input.provider,
+          model:
+            input.model,
+          primarySkill:
+            input.primarySkill,
+          ...(!blocked
+            ? {
+                answer:
+                  "court-stage-result"
+              }
+            : {}),
+          finalization:
+            blocked
+              ? "BLOCKED"
+              : "PASS",
+          blockedReferences: [],
+          verification: {
+            records: 0,
+            verified: 0,
+            supported: 0,
+            unverified: 0
+          },
+          evidence: [],
+          audit: {
+            result:
+              blocked
+                ? "BLOCKED"
+                : "PASS",
+            eventCount:
+              blocked
+                ? 1
+                : 3,
+            closed: true
+          },
+          workflow: {
+            id:
+              "COURT_ANALYSIS_V1",
+            result:
+              blocked
+                ? "BLOCKED"
+                : "PASS",
+            requiredResources: [],
+            missingResources: []
+          }
+        };
+
+        if (!blocked) {
+          Object.defineProperty(
+            result,
+            SESSION_EXECUTION_INTERNAL,
+            {
+              value: {
+                verificationRecords: [],
+                auditEvents: [
+                  {
+                    sequence: 1,
+                    timestamp:
+                      "2026-09-18T07:00:00.000Z",
+                    type:
+                      "session_started",
+                    target:
+                      "session-g39i-court",
+                    status: "OK"
+                  },
+                  {
+                    sequence: 2,
+                    timestamp:
+                      "2026-09-18T07:00:01.000Z",
+                    type: "gate",
+                    target:
+                      "G39H_WORKFLOW_FINALIZATION",
+                    status: "OK"
+                  },
+                  {
+                    sequence: 3,
+                    timestamp:
+                      "2026-09-18T07:00:02.000Z",
+                    type:
+                      "session_closed",
+                    target:
+                      "session-g39i-court",
+                    status: "OK"
+                  }
+                ]
+              },
+              enumerable: false
             }
-          : {}),
-        finalization:
-          blocked
-            ? "BLOCKED"
-            : "PASS",
-        blockedReferences: [],
-        verification: {
-          records: 0,
-          verified: 0,
-          supported: 0,
-          unverified: 0
-        },
-        evidence: [],
-        audit: {
-          result:
-            blocked
-              ? "BLOCKED"
-              : "PASS",
-          eventCount: 1,
-          closed: true
-        },
-        workflow: {
-          id:
-            "COURT_ANALYSIS_V1",
-          result:
-            blocked
-              ? "BLOCKED"
-              : "PASS",
-          requiredResources: [],
-          missingResources: []
+          );
         }
-      })
+
+        return result;
+      }
     );
 
   const core =
@@ -264,6 +325,8 @@ function fixture(
         cases,
       courtAnalysisWorkflowStore:
         workspace,
+      secureCaseArtifactStore:
+        artifacts,
       sessionExecutor: {
         execute
       }
@@ -505,6 +568,58 @@ describe(
           .not.toContain(
             "PASS_I_FACTS"
           );
+
+        const state =
+          await request(
+            current.app
+          )
+            .get(
+              `/api/cases/${caseId}/workflow/court-analysis`
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .expect(200);
+        const auditRef =
+          String(
+            state.body.state
+              .history.at(-1)
+              .auditRefs[0]
+          );
+        expect(auditRef)
+          .toMatch(
+            /^artifact:\/\/artifact_[a-f0-9]{32}$/
+          );
+        const auditId =
+          auditRef.slice(
+            "artifact://".length
+          );
+        const audit =
+          await request(
+            current.app
+          )
+            .get(
+              `/api/cases/${caseId}/workflow-audits/${auditId}`
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .expect(200);
+        expect(
+          audit.body.audit
+        ).toMatchObject({
+          caseId,
+          workflowId:
+            "COURT_ANALYSIS_V1",
+          checkpoint:
+            "SD_VER_COMPLETE",
+          audit: {
+            result: "PASS",
+            closed: true
+          }
+        });
 
         current.auth.close();
       }
