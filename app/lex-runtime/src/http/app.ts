@@ -7671,6 +7671,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      if (
+        error instanceof Error &&
+        error.message ===
+          "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+      ) {
+        res.status(503).json({
+          error:
+            "WORKFLOW_AUDIT_UNAVAILABLE"
+        });
+        return;
+      }
+
       res.status(500).json({
         error: "SESSION_EXECUTION_FAILED"
       });
