@@ -27,35 +27,55 @@ function normalizedClaim(
     .trim();
 }
 
+function aliases(
+  value: string
+): string[] {
+  return [
+    ...new Set(
+      [...value.matchAll(
+        ACT_ALIAS
+      )]
+        .map(
+          (match) =>
+            match[1]
+              ?.toLocaleUpperCase(
+                "pl"
+              )
+        )
+        .filter(
+          (
+            item
+          ): item is string =>
+            Boolean(item)
+        )
+    )
+  ];
+}
+
 function uniqueActAlias(
   reference: DetectedLegalReference
 ): string | null {
-  const candidates = [
-    ...reference.claim.matchAll(
-      ACT_ALIAS
-    ),
-    ...reference.lineText.matchAll(
-      ACT_ALIAS
-    )
-  ]
-    .map(
-      (match) =>
-        match[1]
-          ?.toLocaleUpperCase(
-            "pl"
-          )
-    )
-    .filter(
-      (
-        value
-      ): value is string =>
-        Boolean(value)
+  const claimAliases =
+    aliases(
+      reference.claim
     );
+  if (
+    claimAliases.length === 1
+  ) {
+    return claimAliases[0]!;
+  }
+  if (
+    claimAliases.length > 1
+  ) {
+    return null;
+  }
 
-  const unique =
-    [...new Set(candidates)];
-  return unique.length === 1
-    ? unique[0]!
+  const lineAliases =
+    aliases(
+      reference.lineText
+    );
+  return lineAliases.length === 1
+    ? lineAliases[0]!
     : null;
 }
 
@@ -84,7 +104,7 @@ export type GateIAutoVerificationPlan = {
     reason:
       | "ALREADY_IN_LEDGER"
       | "ACT_ALIAS_AMBIGUOUS"
-      | "CASE_FAMILY_AMBIGUOUS"
+      | "COURT_FAMILY_AMBIGUOUS"
       | "CASE_SIGNATURE_INVALID"
       | "UNSUPPORTED_KIND";
   }>;
@@ -178,7 +198,7 @@ export function planAutomaticLegalVerification(
           claim:
             reference.claim,
           reason:
-            "CASE_FAMILY_AMBIGUOUS"
+            "COURT_FAMILY_AMBIGUOUS"
         });
         continue;
       }
@@ -230,6 +250,13 @@ function marker(
     VerificationRecord
 ): string | null {
   if (
+    record.status ===
+      "UNVERIFIED"
+  ) {
+    return "⚠️ [NIEWERYFIKOWANE]";
+  }
+
+  if (
     record.status !==
       "VERIFIED" ||
     !record.sourceUrl ||
@@ -280,11 +307,7 @@ export function applyAutomaticVerificationMarkers(
       ledger.latest(
         reference.claim
       );
-    if (
-      !record ||
-      record.status !==
-        "VERIFIED"
-    ) {
+    if (!record) {
       continue;
     }
 
