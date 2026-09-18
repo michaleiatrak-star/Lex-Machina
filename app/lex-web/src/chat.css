@@ -237,6 +237,17 @@
   color: #79352d;
 }
 
+.chat-inline-warning {
+  margin: 0;
+  padding: 9px 10px;
+  border: 1px solid #d8c68a;
+  border-radius: 10px;
+  background: #fff9df;
+  color: #66520b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .chat-panel {
   position: relative;
   display: grid;
