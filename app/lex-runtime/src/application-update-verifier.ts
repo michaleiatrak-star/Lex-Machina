@@ -219,6 +219,14 @@ implements ApplicationInstallerVerifier {
     installerPath: string,
     expectedVersion?: string
   ): VerifiedApplicationPublisher {
+    const trusted =
+      this.configuredTrustedThumbprints
+        ? validateTrustedThumbprints(
+            this.configuredTrustedThumbprints
+          )
+        : trustedUpdateSignerThumbprints(
+            this.manifestPath
+          );
     const parsed =
       this.probe(
         installerPath
