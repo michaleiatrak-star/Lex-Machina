@@ -82,7 +82,7 @@ if ($StandaloneOfflineExe) {
   throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
 }
 if (-not $InstallRoot) {
-  $InstallRoot = Join-Path $env:RUNNER_TEMP ("LexMachinaInstalled-" + [Guid]::NewGuid().ToString("N"))
+  $InstallRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Installed " + [Guid]::NewGuid().ToString("N"))
 }
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
