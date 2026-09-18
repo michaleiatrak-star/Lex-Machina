@@ -1,6 +1,6 @@
 param(
-  [string]$SourceBase64Path = (
-    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.jpg.b64"
+  [string]$SourceImagePath = (
+    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.jpg"
   ),
 
   [string]$OutputIconPath = (
@@ -9,7 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$expectedSourceSha256 = "07270993775ef6171baefdec1b6e81b162f9cdcd913358a965a61544801a4c6a"
+$expectedSourceSha256 = "d9749565c559ce04dc173479466088d9f3c3d3807a4d0f06126130d38d3036db"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
@@ -23,16 +23,8 @@ function Get-Sha256Hex([byte[]]$Bytes) {
   }
 }
 
-$sourceFile = (Resolve-Path -LiteralPath $SourceBase64Path).Path
-$encoded = Get-Content -Raw -LiteralPath $sourceFile
-$encoded = $encoded -replace "\s", ""
-
-try {
-  $sourceBytes = [Convert]::FromBase64String($encoded)
-} catch {
-  throw "LEX_BRAND_SOURCE_BASE64_INVALID"
-}
-
+$sourceFile = (Resolve-Path -LiteralPath $SourceImagePath).Path
+$sourceBytes = [IO.File]::ReadAllBytes($sourceFile)
 $actualSourceSha256 = Get-Sha256Hex $sourceBytes
 if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
