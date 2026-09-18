@@ -304,7 +304,8 @@ export class LegalCorpusToolRuntime {
     return [
       "# LOCAL LEGAL CORPUS ACCESS",
       "The complete Lex Machina legal corpus is available locally through list_legal_skills, list_legal_resources and read_legal_resource.",
-      "When any loaded SKILL.md says 'view <path>', perform a fresh read_legal_resource call before relying on that resource. Do not pretend a resource was read merely because its filename appeared in a skill.",
+      "Mandatory deterministic workflow resources are preloaded and audited by the runtime before semantic execution; do not repeat those reads merely to satisfy a checklist.",
+      "Use read_legal_resource only for additional semantic/domain material that the current reasoning step actually needs. Do not pretend a resource was read merely because its filename appeared in a skill.",
       "Use list_legal_resources when the exact module/reference filename is unknown.",
       "A read result is local procedural/domain corpus context, not proof that a statute or judgment is currently valid. Current legal citations must still pass the separate legal verification tools.",
       "Never request or infer arbitrary operating-system paths. Only semantic corpus paths are permitted.",
@@ -328,6 +329,135 @@ export class LegalCorpusToolRuntime {
           : {})
       })
     );
+  }
+
+  async preloadResources(
+    skill: string,
+    semanticPaths:
+      readonly string[]
+  ): Promise<{
+    resources: number;
+    pages: number;
+    charsRead: number;
+  }> {
+    if (
+      !this.registry.get(skill)
+    ) {
+      throw new Error(
+        "LEGAL_SKILL_NOT_FOUND"
+      );
+    }
+
+    let pages = 0;
+    let charsRead = 0;
+    const unique =
+      [...new Set(
+        semanticPaths
+      )];
+
+    for (
+      const semanticPath
+      of unique
+    ) {
+      let offset = 0;
+      let complete = false;
+      let guard = 0;
+
+      while (!complete) {
+        guard += 1;
+        if (guard > 4096) {
+          throw new Error(
+            "LEGAL_RESOURCE_PRELOAD_PAGE_LIMIT"
+          );
+        }
+
+        const call:
+          NormalizedToolCall = {
+            id:
+              `runtime-preload-${pages + 1}`,
+            name:
+              READ_RESOURCE,
+            input: {
+              skill,
+              path:
+                semanticPath,
+              offset,
+              maxChars:
+                MAX_READ_CHARS
+            }
+          };
+        const [result] =
+          await this.runTools(
+            [call]
+          );
+        if (!result) {
+          throw new Error(
+            "LEGAL_RESOURCE_PRELOAD_FAILED"
+          );
+        }
+
+        let payload:
+          Record<string, unknown>;
+        try {
+          payload =
+            JSON.parse(
+              result.content
+            ) as Record<
+              string,
+              unknown
+            >;
+        } catch {
+          throw new Error(
+            "LEGAL_RESOURCE_PRELOAD_INVALID_RESULT"
+          );
+        }
+        if (
+          payload.status !==
+            "OK" ||
+          typeof payload
+            .returnedChars !==
+            "number"
+        ) {
+          throw new Error(
+            "LEGAL_RESOURCE_PRELOAD_BLOCKED"
+          );
+        }
+
+        pages += 1;
+        charsRead +=
+          payload.returnedChars;
+
+        if (
+          payload.nextOffset ===
+            null
+        ) {
+          complete = true;
+        } else if (
+          typeof payload
+            .nextOffset ===
+              "number" &&
+          Number.isSafeInteger(
+            payload.nextOffset
+          ) &&
+          payload.nextOffset >
+            offset
+        ) {
+          offset =
+            payload.nextOffset;
+        } else {
+          throw new Error(
+            "LEGAL_RESOURCE_PRELOAD_CURSOR_INVALID"
+          );
+        }
+      }
+    }
+
+    return {
+      resources:
+        unique.length,
+      pages,
+      charsRead
+    };
   }
 
   async runTools(
