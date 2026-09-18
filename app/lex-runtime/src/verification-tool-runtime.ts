@@ -927,6 +927,26 @@ export class LegalVerificationToolRuntime {
             status:
               statutoryStatus,
             temporalMode,
+            ...(freshness &&
+            (
+              freshness.status ===
+                "CURRENT" ||
+              freshness.status ===
+                "HISTORICAL"
+            )
+              ? {
+                  temporalFreshnessStatus:
+                    freshness.status,
+                  freshnessCheckedAt:
+                    freshness.checkedAt,
+                  ...(freshness.currentEli
+                    ? {
+                        currentEli:
+                          freshness.currentEli
+                      }
+                    : {})
+                }
+              : {}),
             ...(asOf ? { asOf } : {})
           };
 
