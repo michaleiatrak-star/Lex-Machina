@@ -28,7 +28,7 @@ const testCertificateThumbprints: string[] = [];
 
 function powershell(
   script: string,
-  args: string[] = []
+  extraEnv: Record<string, string> = {}
 ): string {
   const result = spawnSync(
     "powershell.exe",
@@ -38,13 +38,16 @@ function powershell(
       "-ExecutionPolicy",
       "Bypass",
       "-Command",
-      script,
-      ...args
+      script
     ],
     {
       encoding: "utf8",
       windowsHide: true,
-      timeout: 60_000
+      timeout: 60_000,
+      env: {
+        ...process.env,
+        ...extraEnv
+      }
     }
   );
   if (result.status !== 0) {
@@ -81,8 +84,8 @@ function createTrustedForeignSignedExecutable(
     );
   const script = [
     "$ErrorActionPreference='Stop'",
-    "$target=$args[0]",
-    "$certFile=$args[1]",
+    "$target=$env:LEX_AUTH_TEST_TARGET",
+    "$certFile=$env:LEX_AUTH_TEST_CERT_FILE",
     "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina Foreign Signer Test' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyAlgorithm RSA -KeyLength 2048 -HashAlgorithm SHA256 -KeyExportPolicy Exportable -NotAfter (Get-Date).AddDays(2)",
     "Export-Certificate -Cert $cert -FilePath $certFile -Force | Out-Null",
     "Import-Certificate -FilePath $certFile -CertStoreLocation 'Cert:\\CurrentUser\\Root' | Out-Null",
@@ -97,7 +100,12 @@ function createTrustedForeignSignedExecutable(
   const thumbprint =
     powershell(
       script,
-      [target, certFile]
+      {
+        LEX_AUTH_TEST_TARGET:
+          target,
+        LEX_AUTH_TEST_CERT_FILE:
+          certFile
+      }
     )
       .split(/\r?\n/)
       .map((line) => line.trim())
@@ -137,7 +145,7 @@ function removeTestCertificate(
 ): void {
   const script = [
     "$ErrorActionPreference='SilentlyContinue'",
-    "$thumb=$args[0]",
+    "$thumb=$env:LEX_AUTH_TEST_THUMBPRINT",
     "foreach ($store in @('Cert:\\CurrentUser\\My','Cert:\\CurrentUser\\Root','Cert:\\CurrentUser\\TrustedPublisher')) {",
     "  Get-ChildItem -LiteralPath $store | Where-Object { $_.Thumbprint -eq $thumb } | Remove-Item -Force",
     "}"
@@ -150,13 +158,17 @@ function removeTestCertificate(
       "-ExecutionPolicy",
       "Bypass",
       "-Command",
-      script,
-      thumbprint
+      script
     ],
     {
       encoding: "utf8",
       windowsHide: true,
-      timeout: 30_000
+      timeout: 30_000,
+      env: {
+        ...process.env,
+        LEX_AUTH_TEST_THUMBPRINT:
+          thumbprint
+      }
     }
   );
 }
