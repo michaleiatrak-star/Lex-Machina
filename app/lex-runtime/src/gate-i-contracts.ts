@@ -431,3 +431,174 @@ export function evaluateGateIWorkflowContract(args: {
     checks
   };
 }
+
+export type GateISubgateId =
+  | "I-A_ROUTER"
+  | "I-B_CORE_RESOURCES"
+  | "I-C_WORKFLOW_RESOURCES"
+  | "I-D_SOURCE_PROVENANCE"
+  | "I-E_LEGAL_CITATIONS"
+  | "I-F_CASE_SIGNATURES"
+  | "I-G_OUTPUT_CONTRACT"
+  | "I-H_FINALIZATION"
+  | "I-I_INPUT_COMPLETENESS"
+  | "I-J_STATE_TRANSITION";
+
+export type GateISubgateReport = {
+  gate:
+    "G39I_SUBGATES_A_J";
+  workflow:
+    DeterministicWorkflowId;
+  stateModel:
+    GateIStateModel;
+  result:
+    "PASS" | "BLOCKED";
+  subgates: Array<{
+    id: GateISubgateId;
+    result:
+      | "PASS"
+      | "BLOCKED"
+      | "NOT_APPLICABLE";
+    detail: string;
+  }>;
+};
+
+export function evaluateGateISubgates(args: {
+  contract:
+    GateIWorkflowContract;
+  invariants:
+    GateIInvariantReport;
+  input:
+    GateIInputCompletenessReport;
+  outputPass: boolean;
+  stateTransitionPass: boolean;
+  finalizationPass: boolean;
+}): GateISubgateReport {
+  const common =
+    args.invariants.checks.map(
+      (check) => ({
+        id:
+          check.subgate as
+            GateISubgateId,
+        result:
+          check.result,
+        detail:
+          check.detail
+      })
+    );
+
+  const replace = (
+    id: GateISubgateId,
+    result:
+      | "PASS"
+      | "BLOCKED",
+    detail: string
+  ) => {
+    const found =
+      common.find(
+        (item) =>
+          item.id === id
+      );
+    if (found) {
+      found.result = result;
+      found.detail = detail;
+    } else {
+      common.push({
+        id,
+        result,
+        detail
+      });
+    }
+  };
+
+  replace(
+    "I-G_OUTPUT_CONTRACT",
+    args.outputPass
+      ? "PASS"
+      : "BLOCKED",
+    args.outputPass
+      ? "skill output contract passed"
+      : "skill output contract blocked"
+  );
+  replace(
+    "I-H_FINALIZATION",
+    args.finalizationPass
+      ? "PASS"
+      : "BLOCKED",
+    args.finalizationPass
+      ? "finalization passed"
+      : "finalization blocked"
+  );
+
+  const stateRequired =
+    args.contract.stateModel ===
+      "DURABLE_CASE";
+  const stateCaseBound =
+    args.contract.stateModel ===
+      "CASE_BOUND_WHEN_AVAILABLE";
+
+  const stateResult:
+    | "PASS"
+    | "BLOCKED"
+    | "NOT_APPLICABLE" =
+      stateRequired
+        ? (
+            args
+              .stateTransitionPass
+              ? "PASS"
+              : "BLOCKED"
+          )
+        : stateCaseBound
+          ? (
+              args
+                .stateTransitionPass
+                ? "PASS"
+                : "NOT_APPLICABLE"
+            )
+          : "NOT_APPLICABLE";
+
+  const subgates = [
+    ...common,
+    {
+      id:
+        "I-I_INPUT_COMPLETENESS" as const,
+      result:
+        args.input.result,
+      detail:
+        args.input.reason
+    },
+    {
+      id:
+        "I-J_STATE_TRANSITION" as const,
+      result:
+        stateResult,
+      detail:
+        `stateModel=${args.contract.stateModel}`
+    }
+  ].sort(
+    (left, right) =>
+      left.id.localeCompare(
+        right.id,
+        "en"
+      )
+  );
+
+  return {
+    gate:
+      "G39I_SUBGATES_A_J",
+    workflow:
+      args.contract.workflow,
+    stateModel:
+      args.contract.stateModel,
+    result:
+      subgates.some(
+        (item) =>
+          item.result ===
+            "BLOCKED"
+      )
+        ? "BLOCKED"
+        : "PASS",
+    subgates
+  };
+}
+
