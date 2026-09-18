@@ -38,86 +38,65 @@ Closure evidence:
 
 ## G39F — application update transaction
 
-Status: **IMPLEMENTED / VERIFYING — TEMPORARY UNSIGNED MODE ENABLED**
+Status: **IMPLEMENTED / BLOCKED FOR PRODUCTION SIGNING**
 
 Implemented:
 
 1. discovery of a newer GitHub release;
 2. release asset requires GitHub-provided SHA-256 digest;
 3. download into fixed staging root;
-4. SHA-256 + exact ProductVersion are mandatory; Authenticode is verified when present/trusted, but is temporarily optional under the explicit development policy;
-5. immutable receipt containing version, SHA-256, size, ProductVersion and either verified signer identity or the explicit `UNSIGNED_ALLOWED` marker;
-6. native Tauri handoff accepts only a constrained receipt token;
-7. external update runner waits for the current process to exit;
-8. private runtime process tree is stopped on Tauri `RunEvent::Exit`;
-9. backup capacity check;
-10. backup of installation files and uninstall registry metadata;
-11. NSIS update with `/S /UPDATE /D=<existing install root>`;
+4. exact installer ProductVersion must match the discovered release version;
+5. Authenticode verification is mandatory and must match a committed pinned publisher thumbprint;
+6. immutable receipt contains version, SHA-256, size, ProductVersion and verified signer identity;
+7. native Tauri handoff accepts only a constrained receipt token;
+8. external update runner waits for the current process to exit;
+9. private runtime process tree is stopped on Tauri `RunEvent::Exit`;
+10. backup-capacity check plus backup of installation files and uninstall registry metadata;
+11. NSIS update uses `/S /UPDATE /D=<existing install root>`;
 12. post-install version check and runtime sidecar self-test;
 13. rollback of files and registry on failure;
-14. transaction journal with PREPARED / BACKED_UP / INSTALLING / VERIFYING / COMMITTED / ROLLING_BACK / ROLLED_BACK / ROLLBACK_FAILED states;
-15. maintenance UI: check -> download+verify -> install+restart;
-16. the staged Authenticode-signed EXE exposes a Windows `ProductVersion` that must normalize exactly to the discovered release version before the receipt is committed or NSIS is launched; a reused older signed installer under a newer GitHub tag therefore fails in staging, while the transaction runner independently re-checks the installed runtime version after NSIS and rolls back on mismatch.
+14. transaction journal covers PREPARED / BACKED_UP / INSTALLING / VERIFYING / COMMITTED / ROLLING_BACK / ROLLED_BACK / ROLLBACK_FAILED;
+15. maintenance UI supports check -> download+verify -> install+restart;
+16. signed installer acceptance independently re-checks ProductVersion and publisher trust before commit.
 
-Current development policy:
+Release policy for 0.1.3:
 
-- `applicationUpdate.verification = SHA256_REQUIRED_SIGNATURE_OPTIONAL`;
-- `temporaryUnsignedAllowed = true`;
-- an unsigned update is accepted only after release-asset SHA-256 verification and exact installer ProductVersion validation;
-- transaction runner re-checks SHA-256/ProductVersion before NSIS and keeps backup, post-install self-test and rollback unchanged;
-- a valid trusted Authenticode signature is still used when available.
+- `verification = SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER`;
+- `temporaryUnsignedAllowed = false`;
+- `trustedSignerThumbprints = []` until the production certificate is configured;
+- therefore in-app application update installation fails closed in 0.1.3, while manual online/offline installers can still be distributed as a pre-release.
 
-Production hardening remains open:
-
-- disable `temporaryUnsignedAllowed`;
-- restore `SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER`;
-- configure the production thumbprint/certificate and run signed update acceptance.
-
-G39F may be promoted for the current development phase after current-head transaction/installer CI is green; signed acceptance remains a G39J production gate.
+Do not mark G39F PASS until a production Authenticode certificate thumbprint is committed, the corresponding CI signing secret is configured and a signed update acceptance/rollback run succeeds.
 
 ## G39E — skill update transaction
 
-Status: **IMPLEMENTED / VERIFYING — TEMPORARY UNSIGNED MODE ENABLED**
+Status: **IMPLEMENTED / BLOCKED FOR PRODUCTION SIGNING**
 
 Implemented:
 
-- update discovery for ZIP + mandatory `LexMachina-Skills-Index.json` + optional detached `.sig` in the current development mode;
-- verified GitHub release-asset SHA-256 for every present transport artifact;
-- independent Ed25519 publisher trust root remains implemented for signed mode;
-- current explicit policy permits `UNSIGNED_ALLOWED` when the signature/trust root is absent;
-- index schema remains mandatory with release version, bundle SHA/size, min/max app compatibility and per-skill version/SHA/dependencies;
-- index release version must equal the discovered release version regardless of signature mode;
-- app compatibility is checked before downloading/activating the bundle;
-- archive extraction into an isolated work directory;
-- full corpus registry scan and declaration validation;
-- exact skill-set, version, `SKILL.md` hash and dependency comparison against the signed index;
-- candidate -> current atomic rename;
-- previous version rollback if activation fails;
-- installed marker stores index SHA-256 and signer key id or explicit `UNSIGNED_ALLOWED`;
-- maintenance UI exposes trust readiness and explains missing signer/index states;
-- unit tests cover valid Ed25519 signature, tampered index, unknown signer and invalid schema.
+- update discovery and download to staging/work directory;
+- release asset SHA-256 verification;
+- Ed25519 signed index verifier with trusted key-id matching;
+- app compatibility constraints (`minAppVersion` / `maxAppVersion`);
+- bundle SHA-256/size checks;
+- exact skill set/version/hash/dependency validation;
+- full corpus registry scan and declaration validation before activation;
+- candidate -> current atomic rename with previous-version rollback;
+- version marker and maintenance UI for check/apply;
+- negative tests for tampered signature/index, untrusted key, version mismatch, dependency mismatch and changed `SKILL.md` hash;
+- deterministic signed skill-release candidate builder/workflow.
 
-Restart/rollback closure implemented:
+Release policy for 0.1.3:
 
-- activation keeps the prior healthy overlay in `skills/previous` and marks the new overlay `PENDING_RESTART_VALIDATION`;
-- first startup changes only that new overlay to `RUNTIME_VALIDATION_IN_PROGRESS`; structural registry/dependency validation alone no longer commits health;
-- `startLocalServer()` commits `ACTIVE_HEALTHY` only from the real HTTP `listening` callback, after the registry and the full runtime/app stack have been constructed;
-- if the next startup still sees `RUNTIME_VALIDATION_IN_PROGRESS`, the prior bootstrap is treated as interrupted/failed and the structurally valid-but-uncommitted current overlay is rolled back to retained `previous`; if no valid previous overlay exists it falls back to the bundled corpus; if current/previous/bundled are all unhealthy startup fails closed;
-- legacy healthy overlays without the new health state are not forced through a synthetic rollback cycle;
-- tests cover explicit runtime-health commit, interrupted-start rollback, corrupt-current rollback to previous, fallback to bundled and no-healthy-copy failure;
-- maintenance-level negative tests prove signed min/max app incompatibility and release/index version mismatch fail before ZIP download; dependency/hash/version mismatch of the extracted candidate is covered by candidate-index validation tests.
+- `verification = SHA256_AND_ED25519_SIGNED_INDEX`;
+- `temporaryUnsignedAllowed = false`;
+- `trustedEd25519PublicKeys = []` until the production skill signing key is configured;
+- therefore remote skill update application fails closed in 0.1.3.
 
-Current development closure:
+Still required for PASS:
 
-- unsigned skill update remains gated by index schema, app compatibility, bundle SHA-256/size, exact skill set/version/hash/dependencies, structural registry validation and restart-health rollback;
-- current-head CI/acceptance must be green.
-
-Production hardening remains open under G39J:
-
-- disable `temporaryUnsignedAllowed`;
-- configure the real production Ed25519 public key;
-- publish signed index/signature assets;
-- acceptance test against a real signed skills release.
+- configure the production Ed25519 public key in the committed trust root and matching private-key CI secret;
+- publish a signed skill release and verify restart healthcheck/rollback on the installed application.
 
 ## G39A/B/D — Local AI runtime, model provisioning and UI
 
@@ -328,36 +307,31 @@ Next slices after this vertical slice is green:
 
 ## G39J — release / supply-chain hardening
 
-Status: **PARTIAL / TEMPORARY UNSIGNED MODE ENABLED**
+Status: **PARTIAL / BLOCKED FOR PRODUCTION TRUST CONFIGURATION**
 
 Implemented in repo:
 
-- temporary development policy is explicitly enabled for application, skill and model-pack updates: signatures may be absent, but SHA-256, version/compatibility checks, structural validation, transactional activation, health checks and rollback remain mandatory;
-- receipts/markers expose the unsigned state (`UNSIGNED_ALLOWED`) so the relaxed trust posture is auditable and can be removed later without changing the transaction architecture;
-- the unsigned development path is explicitly tested: application updates require SHA-256 plus matching ProductVersion, skill/model index signatures may be omitted only when the manifest selects the temporary policy, malformed indices remain rejected, and separate injected `SIGNED_REQUIRED` tests continue to reject foreign/untrusted signers;
-- signed release workflows and verifiers remain in repo and are not deleted; switching back to `SIGNED_REQUIRED` is a policy/trust-root change rather than a redesign;
-- release-critical online/offline/skill-candidate workflows pin `checkout`, `setup-node` and `upload-artifact` to exact commit SHA;
-- Windows signing gate verifies that the CI PFX certificate thumbprint is already present in the committed application trust root; the signing secret cannot define its own trust root;
-- Authenticode signing requires SHA-256, RFC3161 timestamping and a post-signature verification pass;
-- Tauri signed-release overlays route the main `lex-machina.exe`, signable bundled EXE/DLL resources, NSIS uninstaller and final NSIS installer through the same pinned signing wrapper during bundling rather than signing only the final installer after build;
-- signed installed-copy acceptance independently verifies valid Authenticode, timestamp and pinned signer thumbprint on the installer, installed desktop EXE, runtime sidecar and uninstaller;
-- negative CI self-test covers empty trust root and missing signing secret and must fail closed without producing a receipt; a positive CI path uses a temporary locally trusted code-signing certificate and the exact Tauri wrapper to validate successful pinned signing without exposing any production key;
-- manual signed Windows release-candidate workflow builds the online installer with Tauri-level signing, runs signed installed-copy acceptance, generates npm CycloneDX SBOMs and Rust dependency inventory, writes release provenance including per-artifact signing receipts and requests GitHub build-provenance attestation;
-- the reusable offline workflow has a `signed=true` production mode: inner NSIS payloads use the same signing overlay and the outer standalone `LexMachina-Offline-Setup.exe` is separately Authenticode-signed and accepted;
-- Windows branding is no longer the 1×1 fallback: build.rs generates a deterministic multi-size dark-green/ivory `LM` ICO; the same icon is assigned to the application executable, NSIS installer/uninstaller and standalone offline wrapper;
-- signed skill-update release-candidate workflow exists and requires an Ed25519 private key secret;
-- signed model-pack verifier, dedicated trust root, metadata builder and manual release-candidate workflow are implemented; tampered metadata, untrusted key id and unsafe model metadata are rejected in unit tests;
-- production signed mode remains fail-closed when selected, but the current development manifest deliberately selects `UNSIGNED_ALLOWED` so installation and updates can proceed without configured production keys.
+- release-critical workflows pin GitHub Actions to exact commit SHA;
+- Windows signing gate requires the CI PFX certificate thumbprint to already exist in the committed application trust root;
+- Authenticode signing uses SHA-256 + RFC3161 timestamping and post-signature verification;
+- negative CI self-tests cover empty trust root, missing signing secret and foreign/untrusted signer paths;
+- signed Windows release-candidate workflow builds/accepts installers, emits SBOM/provenance and requests GitHub build-provenance attestation;
+- signed skill-update and signed model-pack release-candidate workflows use separate Ed25519 trust roots;
+- model-pack index verifier rejects tampered metadata, untrusted key IDs and unsafe model metadata;
+- online/offline manual release pipeline re-verifies acceptance receipts and SHA-256 before GitHub publication;
+- release `0.1.3` uses fail-closed update policies for application, skills and model-pack metadata; no unsigned self-update channel is enabled.
 
-External / production blockers:
+Current external blockers:
 
-- before production release, disable `temporaryUnsignedAllowed` and restore `SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER` / `SHA256_AND_ED25519_SIGNED_INDEX` on all three update channels;
-- configure the real production Authenticode certificate and commit its public thumbprint to `applicationUpdate.trustedSignerThumbprints`;
-- configure the corresponding CI PFX/password secrets and execute a signed installer/update acceptance;
-- configure the production Ed25519 skill signing key and commit its public key to the skill trust root;
-- configure the production Ed25519 model-pack signing key and commit its public key to the model-pack trust root, then execute a real signed model update acceptance;
-- protect `main` / release rules and required status checks in GitHub repository administration. The current GitHub integration cannot read or modify branch-protection settings (403: administration permission unavailable), so this cannot be marked PASS from this session;
-- production trust configuration remains external; the repo-level negative acceptance for a correctly hashed installer signed by an untrusted certificate is implemented on the Windows online-installer workflow using a temporary trusted test signing certificate and an intentionally different pinned thumbprint. It must still pass on the current head. Tampered/untrusted model-pack metadata is already covered at verifier level.
+- application Authenticode trust root is intentionally empty;
+- skill and model-pack Ed25519 trust roots are intentionally empty;
+- GitHub integration cannot read/modify branch-protection administration (403), so protected `main` / required status checks remain an external repository-admin task;
+- production signed release cannot be marked PASS until the real certificates/keys are configured and signed acceptance succeeds.
+
+Installer publication policy:
+
+- online/offline **manual installers may be published as a GitHub pre-release** after runtime + structural + online + offline acceptance all pass;
+- in-app application/skill/model update channels remain disabled by fail-closed trust policy until their production keys are configured.
 
 ## Current closure order
 
