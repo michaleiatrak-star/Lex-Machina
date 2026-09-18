@@ -48,7 +48,8 @@ export type DeterministicWorkflowOutputReport = {
     | "PROCESS_FINAL"
     | "COURT_CHECKPOINT"
     | "COURT_FINAL"
-    | "STATUTE_FINAL";
+    | "STATUTE_FINAL"
+    | "CASE_LAW_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -185,6 +186,14 @@ const STATUTE_ANALYSIS_FINAL_MARKERS = [
   "8. REKOMENDACJE",
   "9. POWIĄZANE PRZEPISY",
   "10. ŹRÓDŁA"
+] as const;
+
+const CASE_LAW_FINAL_MARKERS = [
+  "RAPORT ORZECZEŃ",
+  "WSKAŹNIK POKRYCIA PRZESŁANEK",
+  "PLAN MINIMUM",
+  "[A] ORZECZENIA WSPIERAJĄCE TEZĘ",
+  "[B] LINIA PRZECIWNA"
 ] as const;
 
 
@@ -380,6 +389,13 @@ export function deterministicWorkflowPrompt(
           "COURT_ANALYSIS_V1 final-report structure is runtime-enforced only at FINAL_REPORT_PRESENTED.",
           "At that checkpoint present RAPORT ANALITYCZNY, EXECUTIVE SUMMARY, the four pass summaries, and RAPORT §1-§11 in order.",
           "Do not merge the following situational-report or process-pleading-offer checkpoints into the final-report turn."
+        ]
+      : []),
+    ...(plan.id === "CASE_LAW_V1"
+      ? [
+          "CASE_LAW_V1 keeps short single-reference answers flexible.",
+          "If you claim to present a full RAPORT ORZECZEŃ, the runtime requires WSKAŹNIK POKRYCIA PRZESŁANEK → PLAN MINIMUM → [A] ORZECZENIA WSPIERAJĄCE TEZĘ → [B] LINIA PRZECIWNA in that order.",
+          "The BILANS section remains conditional on the directional Faza 1-D and is therefore not blindly required by this output gate."
         ]
       : []),
     ...(plan.id === "STATUTE_ANALYSIS_V1"
@@ -632,6 +648,80 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "STATUTE_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "CASE_LAW_V1"
+  ) {
+    const claimsFullReport =
+      normalized.includes(
+        "RAPORT ORZECZEŃ"
+      );
+
+    if (!claimsFullReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...CASE_LAW_FINAL_MARKERS
+    ];
+    const observed =
+      CASE_LAW_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      CASE_LAW_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      CASE_LAW_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode: "CASE_LAW_FINAL",
       required,
       observed: [
         ...observed
