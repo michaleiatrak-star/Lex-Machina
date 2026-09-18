@@ -46,6 +46,11 @@ import {
   createContractAnalysisState,
   type ContractWorkflowMode
 } from "../contract-analysis-state.js";
+import {
+  createOrderedCaseWorkflowState,
+  nextOrderedCaseCheckpoint,
+  type OrderedCaseWorkflowId
+} from "../ordered-case-workflow-state.js";
 
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
@@ -88,6 +93,7 @@ function sendError(res: Response, error: unknown): void {
     code === "PROCESS_PLEADING_STATE_CONFLICT" ||
     code === "COURT_ANALYSIS_STATE_EXISTS" ||
     code === "COURT_ANALYSIS_STATE_CONFLICT" ||
+    code === "ORDERED_WORKFLOW_STATE_CONFLICT" ||
     code === "CHRONOLOGY_STATE_EXISTS" ||
     code === "CHRONOLOGY_STATE_CONFLICT" ||
     code === "CONTRACT_STATE_EXISTS" ||
@@ -1253,6 +1259,252 @@ export function registerWorkspaceRoutes(
         }
         res.json({
           caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/ordered/:workflowId",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          )
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_ID_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "ANALYZE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "ANALYZE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          workflowId,
+          state,
+          nextCheckpoint:
+            state
+              ? nextOrderedCaseCheckpoint(
+                  state
+                )
+              : null
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/ordered/:workflowId/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          )
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_ID_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getOrderedCaseWorkflowState({
+                      caseId,
+                      workflowId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  return existing;
+                }
+                return await dependencies
+                  .workspace
+                  .saveOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createOrderedCaseWorkflowState(
+                        workflowId,
+                        caseId
+                      )
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          workflowId,
+          state,
+          nextCheckpoint:
+            nextOrderedCaseCheckpoint(
+              state
+            )
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/ordered/:workflowId/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          ) ||
+          confirmation !==
+            "RESET_ORDERED_WORKFLOW" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+        if (!cleared) {
+          throw new Error(
+            "ORDERED_WORKFLOW_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          workflowId,
           reset: true
         });
       } catch (error) {
