@@ -127,6 +127,9 @@ $oldAllProxy = $env:ALL_PROXY
 $oldNoProxy = $env:NO_PROXY
 $oldAcceptanceBlockNetwork = $env:LEX_ACCEPTANCE_BLOCK_NETWORK
 $oldForceVcRuntime = $env:LEX_FORCE_VC_RUNTIME_INSTALL
+$oldLexDataDir = $env:LEX_DATA_DIR
+$cleanProfileRoot = $null
+$profileProbePath = $null
 
 try {
   if ($BlockNetworkDuringInstall) {
@@ -307,11 +310,25 @@ try {
   }
   Assert-PinnedAuthenticode $uninstaller "uninstaller"
 
+  $profileCleanup = Join-Path $registeredInstallRoot "lex-profile-cleanup.exe"
+  if (-not (Test-Path -LiteralPath $profileCleanup -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_CLEANUP_MISSING:$profileCleanup"
+  }
+  Write-Host "G33D: profile cleanup helper self-test"
+  & $profileCleanup --self-test | Out-Host
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_CLEANUP_SELFTEST_FAILED"
+  }
+
   if ($BlockNetworkDuringInstall) {
     Add-AcceptanceFirewallBlock $app.FullName "desktop"
   }
 
-  Write-Host "G33D: first desktop startup without provider key"
+  $cleanProfileRoot = Join-Path $env:RUNNER_TEMP ("LexMachina Clean Admin " + [Guid]::NewGuid().ToString("N"))
+  Remove-Item -LiteralPath $cleanProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  $env:LEX_DATA_DIR = $cleanProfileRoot
+
+  Write-Host "G33D: first desktop startup with a clean admin profile"
   $desktop = Start-Process -FilePath $app.FullName -PassThru
   try {
     Start-Sleep -Seconds 12
@@ -330,20 +347,56 @@ try {
       Stop-Process -Force -ErrorAction SilentlyContinue
   }
 
+  $authDb = Join-Path $cleanProfileRoot "auth\auth.sqlite"
+  if (-not (Test-Path -LiteralPath $authDb -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_DB_MISSING:$authDb"
+  }
+  $profileProbePath = Join-Path $env:RUNNER_TEMP ("lex-clean-admin-probe-" + [Guid]::NewGuid().ToString("N") + ".cjs")
+  @'
+const { DatabaseSync } = require("node:sqlite");
+const db = new DatabaseSync(process.argv[2], { readOnly: true });
+const users = db.prepare(
+  "SELECT login_name, app_role, status, password_setup_pending FROM users ORDER BY created_at"
+).all();
+db.close();
+if (
+  users.length !== 1 ||
+  users[0].login_name !== "local-admin" ||
+  users[0].app_role !== "ADMIN" ||
+  users[0].status !== "ACTIVE" ||
+  Number(users[0].password_setup_pending) !== 1
+) {
+  console.error(JSON.stringify(users));
+  process.exit(1);
+}
+console.log("INSTALLER_ACCEPTANCE_CLEAN_ADMIN_PASS");
+'@ | Set-Content -LiteralPath $profileProbePath -Encoding UTF8
+  & $privateNode $profileProbePath $authDb | Out-Host
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_INVALID"
+  }
+
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+  Write-Host "User action after installation: SET_NEW_ADMIN_PASSWORD_OR_PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
   }
   $env:PATH = $oldPath
+  if ($profileProbePath) {
+    Remove-Item -LiteralPath $profileProbePath -Force -ErrorAction SilentlyContinue
+  }
+  if ($cleanProfileRoot) {
+    Remove-Item -LiteralPath $cleanProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  }
   foreach ($pair in @(
     @{ Name = "HTTP_PROXY"; Value = $oldHttpProxy },
     @{ Name = "HTTPS_PROXY"; Value = $oldHttpsProxy },
     @{ Name = "ALL_PROXY"; Value = $oldAllProxy },
     @{ Name = "NO_PROXY"; Value = $oldNoProxy },
     @{ Name = "LEX_ACCEPTANCE_BLOCK_NETWORK"; Value = $oldAcceptanceBlockNetwork },
-    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime }
+    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime },
+    @{ Name = "LEX_DATA_DIR"; Value = $oldLexDataDir }
   )) {
     if ($null -eq $pair.Value) {
       Remove-Item -Path ("Env:" + $pair.Name) -ErrorAction SilentlyContinue
