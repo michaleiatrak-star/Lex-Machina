@@ -241,7 +241,7 @@ function executionMessage(
             : "";
     const modelRoutingMeta =
       execution.modelRouting?.auxiliary
-        ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}]${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}`
+        ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}] · helper ${execution.modelRouting.auxiliary.latencyMs} ms${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}${execution.modelRouting.auxiliary.cachedVerifierReuses > 0 ? ` · cache reuse: ${execution.modelRouting.auxiliary.cachedVerifierReuses}` : ""}`
         : ` · główny: ${execution.model}`;
     return {
       id: messageId(),
