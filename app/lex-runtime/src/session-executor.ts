@@ -80,6 +80,7 @@ export type SessionExecutionRequest = {
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
   modelContextTokens?: number;
+  tokenCharsPerToken?: number;
   processWorkflowContext?: {
     stage: ProcessPleadingStage;
     checkpoint: ProcessPleadingCheckpoint;
@@ -362,6 +363,12 @@ export class SafeSessionExecutor implements SessionExecutor {
           ? {
               modelContextTokens:
                 request.modelContextTokens
+            }
+          : {}),
+        ...(request.tokenCharsPerToken
+          ? {
+              tokenCharsPerToken:
+                request.tokenCharsPerToken
             }
           : {})
       });
