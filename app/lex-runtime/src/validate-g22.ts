@@ -607,6 +607,17 @@ process.stdout.write(
         found.finalization,
       verification:
         foundVerification,
+      workflow:
+        found.workflow ?? null,
+      gateI:
+        found.gateI ?? null,
+      gateIWorkflowContract:
+        found.gateIWorkflowContract ??
+        null,
+      gateITurn:
+        found.gateITurn ?? null,
+      audit:
+        found.audit ?? null,
       answerReleased:
         typeof found.answer ===
         "string"
