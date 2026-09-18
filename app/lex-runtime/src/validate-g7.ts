@@ -43,7 +43,7 @@ if (scanIssues.length || declarationIssues.length) {
   const results = [];
   for (const provider of ["openai", "anthropic", "xai"] as const) {
     const result = await engine.executePolishLegalQuery({
-      query: "Spór dotyczący wykonania umowy — test techniczny routingu bez analizy prawnej.",
+      query: "Test techniczny pionowego routingu domeny cywilnej bez uruchamiania wykonawczego workflow dokumentowego.",
       provider,
       model: `${provider}-g7-test`,
       route: {
