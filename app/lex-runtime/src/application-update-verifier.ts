@@ -6,10 +6,14 @@ export type VerifiedApplicationPublisher = {
   verification: "AUTHENTICODE";
   subject: string;
   thumbprint: string;
+  productVersion: string;
 };
 
 export interface ApplicationInstallerVerifier {
-  verify(installerPath: string): VerifiedApplicationPublisher;
+  verify(
+    installerPath: string,
+    expectedVersion?: string
+  ): VerifiedApplicationPublisher;
 }
 
 type UpdateTrustManifest = {
@@ -21,6 +25,51 @@ type UpdateTrustManifest = {
 
 function normalizeThumbprint(value: string): string {
   return value.replaceAll(/\s+/g, "").toUpperCase();
+}
+
+export function normalizeApplicationProductVersion(
+  value: string
+): string {
+  const match =
+    /^(\d+)\.(\d+)\.(\d+)(?:\.0)?$/
+      .exec(
+        value.trim()
+      );
+  if (!match) {
+    throw new Error(
+      "APPLICATION_UPDATE_PRODUCT_VERSION_INVALID"
+    );
+  }
+  return [
+    Number(match[1]),
+    Number(match[2]),
+    Number(match[3])
+  ].join(".");
+}
+
+export function assertApplicationInstallerVersion(
+  actual: string,
+  expected: string
+): string {
+  if (
+    !/^\d+\.\d+\.\d+$/.test(
+      expected
+    )
+  ) {
+    throw new Error(
+      "APPLICATION_UPDATE_EXPECTED_VERSION_INVALID"
+    );
+  }
+  const normalized =
+    normalizeApplicationProductVersion(
+      actual
+    );
+  if (normalized !== expected) {
+    throw new Error(
+      `APPLICATION_UPDATE_VERSION_MISMATCH:expected=${expected}:actual=${normalized}`
+    );
+  }
+  return normalized;
 }
 
 function validateTrustedThumbprints(values: readonly string[]): string[] {
@@ -77,7 +126,10 @@ implements ApplicationInstallerVerifier {
     private readonly manifestPath?: string
   ) {}
 
-  verify(installerPath: string): VerifiedApplicationPublisher {
+  verify(
+    installerPath: string,
+    expectedVersion?: string
+  ): VerifiedApplicationPublisher {
     if (process.platform !== "win32") {
       throw new Error("APPLICATION_UPDATE_PLATFORM_UNSUPPORTED");
     }
@@ -88,7 +140,9 @@ implements ApplicationInstallerVerifier {
       "$ErrorActionPreference='Stop'",
       "$signature=Get-AuthenticodeSignature -LiteralPath $args[0]",
       "if ($signature.Status -ne 'Valid' -or $null -eq $signature.SignerCertificate) { exit 23 }",
-      "$result=[ordered]@{subject=$signature.SignerCertificate.Subject;thumbprint=$signature.SignerCertificate.Thumbprint}",
+      "$version=(Get-Item -LiteralPath $args[0]).VersionInfo.ProductVersion",
+      "if ([string]::IsNullOrWhiteSpace($version)) { exit 24 }",
+      "$result=[ordered]@{subject=$signature.SignerCertificate.Subject;thumbprint=$signature.SignerCertificate.Thumbprint;productVersion=$version}",
       "$result | ConvertTo-Json -Compress"
     ].join("; ");
     const result = spawnSync(
@@ -111,7 +165,11 @@ implements ApplicationInstallerVerifier {
     if (result.status !== 0) {
       throw new Error("APPLICATION_UPDATE_SIGNATURE_INVALID");
     }
-    let parsed: { subject?: unknown; thumbprint?: unknown };
+    let parsed: {
+      subject?: unknown;
+      thumbprint?: unknown;
+      productVersion?: unknown;
+    };
     try {
       parsed = JSON.parse(result.stdout.trim()) as typeof parsed;
     } catch {
@@ -119,7 +177,8 @@ implements ApplicationInstallerVerifier {
     }
     if (
       typeof parsed.subject !== "string" ||
-      typeof parsed.thumbprint !== "string"
+      typeof parsed.thumbprint !== "string" ||
+      typeof parsed.productVersion !== "string"
     ) {
       throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
     }
@@ -127,10 +186,21 @@ implements ApplicationInstallerVerifier {
     if (!trusted.includes(actual)) {
       throw new Error("APPLICATION_UPDATE_SIGNER_NOT_TRUSTED");
     }
+    const productVersion =
+      expectedVersion
+        ? assertApplicationInstallerVersion(
+            parsed.productVersion,
+            expectedVersion
+          )
+        : normalizeApplicationProductVersion(
+            parsed.productVersion
+          );
+
     return {
       verification: "AUTHENTICODE",
       subject: parsed.subject,
-      thumbprint: actual
+      thumbprint: actual,
+      productVersion
     };
   }
 }
