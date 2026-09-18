@@ -49,6 +49,10 @@ jobs:
         working-directory: app/lex-runtime
         run: npm install --no-audit --no-fund
 
+      - name: G39J reject correctly hashed foreign-signed installer
+        working-directory: app/lex-runtime
+        run: npx vitest run tests/application-update-authenticode-windows.test.ts
+
       - name: G33D static release contract
         working-directory: app/lex-runtime
         run: npm run validate:g33d
