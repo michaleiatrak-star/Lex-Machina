@@ -127,6 +127,8 @@ $oldAllProxy = $env:ALL_PROXY
 $oldNoProxy = $env:NO_PROXY
 $oldAcceptanceBlockNetwork = $env:LEX_ACCEPTANCE_BLOCK_NETWORK
 $oldForceVcRuntime = $env:LEX_FORCE_VC_RUNTIME_INSTALL
+$oldLexDataDir = $env:LEX_DATA_DIR
+$acceptanceProfileRoot = $null
 
 try {
   if ($BlockNetworkDuringInstall) {
@@ -311,7 +313,11 @@ try {
     Add-AcceptanceFirewallBlock $app.FullName "desktop"
   }
 
-  Write-Host "G33D: first desktop startup without provider key"
+  $acceptanceProfileRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Fresh Profile " + [Guid]::NewGuid().ToString("N"))
+  Remove-Item -LiteralPath $acceptanceProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  $env:LEX_DATA_DIR = $acceptanceProfileRoot
+
+  Write-Host "G33D: first desktop startup with a clean local admin profile"
   $desktop = Start-Process -FilePath $app.FullName -PassThru
   try {
     Start-Sleep -Seconds 12
@@ -330,6 +336,62 @@ try {
       Stop-Process -Force -ErrorAction SilentlyContinue
   }
 
+  $authDb = Join-Path $acceptanceProfileRoot "auth\auth.sqlite"
+  if (-not (Test-Path -LiteralPath $authDb -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_FRESH_ADMIN_DB_MISSING:$authDb"
+  }
+
+  $adminProbe = @'
+const { DatabaseSync } = require("node:sqlite");
+const db = new DatabaseSync(process.argv[1], { readOnly: true });
+const rows = db.prepare(
+  "SELECT login_name, app_role, status, password_setup_pending FROM users ORDER BY created_at"
+).all();
+db.close();
+process.stdout.write(JSON.stringify(rows));
+'@
+  $adminRowsJson = (& $privateNode -e $adminProbe $authDb 2>&1 | Out-String).Trim()
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_FRESH_ADMIN_PROBE_FAILED:$adminRowsJson"
+  }
+  $adminRows = @($adminRowsJson | ConvertFrom-Json)
+  if (
+    $adminRows.Count -ne 1 -or
+    [string]$adminRows[0].login_name -ne "local-admin" -or
+    [string]$adminRows[0].app_role -ne "ADMIN" -or
+    [string]$adminRows[0].status -ne "ACTIVE" -or
+    [int]$adminRows[0].password_setup_pending -ne 1
+  ) {
+    throw "INSTALLER_ACCEPTANCE_FRESH_ADMIN_INVALID:$adminRowsJson"
+  }
+  Write-Host "Fresh admin PASS: exactly one ACTIVE ADMIN local-admin with password setup pending"
+
+  Write-Host "G33D: destructive uninstall removes profile and Windows credentials"
+  $uninstallProcess = Start-Process -FilePath $uninstaller -ArgumentList @("/S") -PassThru
+  if (-not $uninstallProcess.WaitForExit(300000)) {
+    Stop-Process -Id $uninstallProcess.Id -Force -ErrorAction SilentlyContinue
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_TIMEOUT"
+  }
+  $uninstallProcess.Refresh()
+  if ($uninstallProcess.ExitCode -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_FAILED:$($uninstallProcess.ExitCode)"
+  }
+  Start-Sleep -Milliseconds 750
+
+  if (Test-Path -LiteralPath $acceptanceProfileRoot) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_PURGE_FAILED:$acceptanceProfileRoot"
+  }
+
+  $purgeScript = Join-Path $PSScriptRoot "purge-windows-user-state.ps1"
+  $probeLocal = Join-Path $env:RUNNER_TEMP ("LexMachina-Probe-Local-" + [Guid]::NewGuid().ToString("N"))
+  $probeRoaming = Join-Path $env:RUNNER_TEMP ("LexMachina-Probe-Roaming-" + [Guid]::NewGuid().ToString("N"))
+  $probeArgs = @("-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", $purgeScript, "-Mode", "Probe", "-DataRootOverride", $acceptanceProfileRoot, "-LocalAppRootOverride", $probeLocal, "-RoamingAppRootOverride", $probeRoaming, "-SkipProcessStop")
+  $probeProcess = Start-Process -FilePath "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -ArgumentList $probeArgs -PassThru -Wait
+  if ($probeProcess.ExitCode -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_CREDENTIAL_PURGE_FAILED:$($probeProcess.ExitCode)"
+  }
+  Write-Host "Destructive uninstall PASS: profile data and Lex Machina credentials removed"
+
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
   Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 } finally {
@@ -337,13 +399,17 @@ try {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
   }
   $env:PATH = $oldPath
+  if ($acceptanceProfileRoot -and (Test-Path -LiteralPath $acceptanceProfileRoot)) {
+    Remove-Item -LiteralPath $acceptanceProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  }
   foreach ($pair in @(
     @{ Name = "HTTP_PROXY"; Value = $oldHttpProxy },
     @{ Name = "HTTPS_PROXY"; Value = $oldHttpsProxy },
     @{ Name = "ALL_PROXY"; Value = $oldAllProxy },
     @{ Name = "NO_PROXY"; Value = $oldNoProxy },
     @{ Name = "LEX_ACCEPTANCE_BLOCK_NETWORK"; Value = $oldAcceptanceBlockNetwork },
-    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime }
+    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime },
+    @{ Name = "LEX_DATA_DIR"; Value = $oldLexDataDir }
   )) {
     if ($null -eq $pair.Value) {
       Remove-Item -Path ("Env:" + $pair.Name) -ErrorAction SilentlyContinue
