@@ -14,6 +14,7 @@ import type {
 const WORKFLOWS:
   DeterministicWorkflowId[] = [
     "LEGAL_QUERY_V1",
+    "LEGAL_GUIDE_V1",
     "SIMPLE_LETTER_V1",
     "PROCESS_PLEADING_V1",
     "COURT_ANALYSIS_V1",
@@ -111,6 +112,18 @@ describe(
             "przesluchanie-swiadkow-v2-min90"
           ).stateModel
         ).toBe("DURABLE_CASE");
+      }
+    );
+
+    it(
+      "uses durable session state for the legal guide",
+      () => {
+        expect(
+          gateIWorkflowContract(
+            "LEGAL_GUIDE_V1",
+            "przewodnik-prawny-v2"
+          ).stateModel
+        ).toBe("DURABLE_SESSION");
       }
     );
 
