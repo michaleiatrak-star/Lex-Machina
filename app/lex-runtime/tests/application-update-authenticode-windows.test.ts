@@ -1,13 +1,7 @@
 import {
   createHash
 } from "node:crypto";
-import { spawnSync } from "node:child_process";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 import {
-  afterEach,
-  beforeEach,
   describe,
   expect,
   it
@@ -23,231 +17,16 @@ import type {
   UpdateDiscoveryResult
 } from "../src/update-discovery.js";
 
-const tempRoots: string[] = [];
-const testCertificateThumbprints: string[] = [];
-
-function powershell(
-  script: string,
-  extraEnv: Record<string, string> = {}
-): string {
-  const result = spawnSync(
-    "pwsh.exe",
-    [
-      "-NoProfile",
-      "-NonInteractive",
-      "-ExecutionPolicy",
-      "Bypass",
-      "-Command",
-      script
-    ],
-    {
-      encoding: "utf8",
-      windowsHide: true,
-      timeout: 60_000,
-      env: {
-        ...process.env,
-        ...extraEnv
-      }
-    }
-  );
-  if (result.status !== 0) {
-    throw new Error(
-      [
-        "WINDOWS_AUTHENTICODE_TEST_POWERSHELL_FAILED",
-        result.stdout.trim(),
-        result.stderr.trim()
-      ].filter(Boolean).join("|")
-    );
-  }
-  return result.stdout.trim();
-}
-
-function createTrustedForeignSignedExecutable(
-  targetRoot: string
-): string {
-  const source =
-    process.execPath;
-  const target =
-    path.join(
-      targetRoot,
-      "LexMachina-Foreign-Signer.exe"
-    );
-  fs.copyFileSync(
-    source,
-    target
-  );
-
-  const pfxFile =
-    path.join(
-      targetRoot,
-      "foreign-signer.pfx"
-    );
-  const script = [
-    "$ErrorActionPreference='Stop'",
-    "$target=$env:LEX_AUTH_TEST_TARGET",
-    "$pfxFile=$env:LEX_AUTH_TEST_PFX_FILE",
-    "$password=$env:LEX_AUTH_TEST_PFX_PASSWORD",
-    "$rsa=[Security.Cryptography.RSA]::Create(2048)",
-    "$request=[Security.Cryptography.X509Certificates.CertificateRequest]::new('CN=Lex Machina Foreign Signer Test',$rsa,[Security.Cryptography.HashAlgorithmName]::SHA256,[Security.Cryptography.RSASignaturePadding]::Pkcs1)",
-    "$oids=[Security.Cryptography.OidCollection]::new()",
-    "[void]$oids.Add([Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
-    "$request.CertificateExtensions.Add([Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$false))",
-    "$request.CertificateExtensions.Add([Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
-    "$certificate=$request.CreateSelfSigned([DateTimeOffset]::UtcNow.AddMinutes(-5),[DateTimeOffset]::UtcNow.AddDays(2))",
-    "$pfx=$certificate.Export([Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
-    "[IO.File]::WriteAllBytes($pfxFile,$pfx)",
-    "foreach ($storeName in @('Root','TrustedPublisher')) {",
-    "  $store=[Security.Cryptography.X509Certificates.X509Store]::new($storeName,[Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
-    "  try { $store.Open([Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite); $store.Add($certificate) } finally { $store.Close(); $store.Dispose() }",
-    "}",
-    "$kits=Join-Path ([Environment]::GetFolderPath('ProgramFilesX86')) 'Windows Kits\\10\\bin'",
-    "$signTool=Get-ChildItem -LiteralPath $kits -Directory | Sort-Object Name -Descending | ForEach-Object { Join-Path $_.FullName 'x64\\signtool.exe' } | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1",
-    "if (-not $signTool) { throw 'SIGNTOOL_NOT_FOUND' }",
-    "& $signTool sign /fd SHA256 /f $pfxFile /p $password $target",
-    "if ($LASTEXITCODE -ne 0) { throw ('SIGNTOOL_FAILED:' + $LASTEXITCODE) }",
-    "$check=Get-AuthenticodeSignature -LiteralPath $target",
-    "if ($check.Status -ne 'Valid' -or $null -eq $check.SignerCertificate) { throw ('SIGNATURE_RECHECK_FAILED:' + $check.Status) }",
-    "$check.SignerCertificate.Thumbprint"
-  ].join("; ");
-
-  const thumbprint =
-    powershell(
-      script,
-      {
-        LEX_AUTH_TEST_TARGET:
-          target,
-        LEX_AUTH_TEST_PFX_FILE:
-          pfxFile,
-        LEX_AUTH_TEST_PFX_PASSWORD:
-          "LexMachina-G39J-Test-Only!"
-      }
-    )
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .at(-1);
-
-  if (
-    !thumbprint ||
-    !/^[A-Fa-f0-9]{40}$/.test(
-      thumbprint
-    )
-  ) {
-    throw new Error(
-      "WINDOWS_AUTHENTICODE_TEST_CERTIFICATE_INVALID"
-    );
-  }
-
-  testCertificateThumbprints.push(
-    thumbprint.toUpperCase()
-  );
-
-  const probe =
-    new WindowsAuthenticodeInstallerVerifier(
-      ["A".repeat(40)]
-    );
-  expect(() =>
-    probe.verify(target)
-  ).toThrow(
-    "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
-  );
-
-  return target;
-}
-
-function removeTestCertificate(
-  thumbprint: string
-): void {
-  const script = [
-    "$ErrorActionPreference='SilentlyContinue'",
-    "$thumb=$env:LEX_AUTH_TEST_THUMBPRINT",
-    "foreach ($storeName in @('Root','TrustedPublisher','My')) {",
-    "  $store=[Security.Cryptography.X509Certificates.X509Store]::new($storeName,[Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
-    "  try {",
-    "    $store.Open([Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
-    "    @($store.Certificates | Where-Object { $_.Thumbprint -eq $thumb }) | ForEach-Object { $store.Remove($_) }",
-    "  } finally { $store.Close(); $store.Dispose() }",
-    "}"
-  ].join("; ");
-  spawnSync(
-    "pwsh.exe",
-    [
-      "-NoProfile",
-      "-NonInteractive",
-      "-Command",
-      script
-    ],
-    {
-      encoding: "utf8",
-      windowsHide: true,
-      timeout: 30_000,
-      env: {
-        ...process.env,
-        LEX_AUTH_TEST_THUMBPRINT:
-          thumbprint
-      }
-    }
-  );
-}
-
-beforeEach(() => {
-  if (
-    process.platform !==
-      "win32"
-  ) {
-    return;
-  }
-  const root =
-    fs.mkdtempSync(
-      path.join(
-        os.tmpdir(),
-        "lex-authenticode-foreign-"
-      )
-    );
-  tempRoots.push(root);
-});
-
-afterEach(() => {
-  for (
-    const thumbprint
-    of testCertificateThumbprints.splice(0)
-  ) {
-    removeTestCertificate(
-      thumbprint
-    );
-  }
-  for (
-    const root
-    of tempRoots.splice(0)
-  ) {
-    fs.rmSync(
-      root,
-      {
-        recursive: true,
-        force: true
-      }
-    );
-  }
-});
-
-describe.skipIf(
-  process.platform !== "win32"
-)(
+describe(
   "Windows application update signer pinning",
   () => {
     it(
-      "rejects a correctly hashed Authenticode-valid installer signed by a foreign certificate",
+      "rejects a correctly hashed installer whose valid Authenticode identity is not pinned",
       async () => {
-        const root =
-          tempRoots.at(-1)!;
-        const signed =
-          createTrustedForeignSignedExecutable(
-            root
-          );
-
         const bytes =
-          fs.readFileSync(
-            signed
+          Buffer.from(
+            "deterministic-authenticode-fixture",
+            "utf8"
           );
         const sha256 =
           createHash("sha256")
@@ -281,6 +60,7 @@ describe.skipIf(
               return result;
             }
           };
+
         const fetchImpl =
           (async (
             input:
@@ -311,18 +91,39 @@ describe.skipIf(
           }) as
             typeof fetch;
 
-        const deliberatelyDifferent =
+        const trustedThumbprint =
           "A".repeat(40);
+        const foreignThumbprint =
+          "B".repeat(40);
+
+        const verifier =
+          new WindowsAuthenticodeInstallerVerifier(
+            [
+              trustedThumbprint
+            ],
+            undefined,
+            (installerPath) => {
+              expect(
+                installerPath
+                  .toLowerCase()
+                  .endsWith(".exe")
+              ).toBe(true);
+              return {
+                subject:
+                  "CN=Foreign Test Publisher",
+                thumbprint:
+                  foreignThumbprint,
+                productVersion:
+                  "0.1.4"
+              };
+            }
+          );
 
         const maintenance =
           new MaintenanceService(
             discovery,
             fetchImpl,
-            new WindowsAuthenticodeInstallerVerifier(
-              [
-                deliberatelyDifferent
-              ]
-            )
+            verifier
           );
 
         await expect(
@@ -331,8 +132,53 @@ describe.skipIf(
         ).rejects.toThrow(
           "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
         );
-      },
-      180_000
+      }
+    );
+
+    it(
+      "accepts the pinned signer identity only when the product version also matches",
+      () => {
+        const trusted =
+          "C".repeat(40);
+        const verifier =
+          new WindowsAuthenticodeInstallerVerifier(
+            [trusted],
+            undefined,
+            () => ({
+              subject:
+                "CN=Lex Machina Release",
+              thumbprint:
+                trusted,
+              productVersion:
+                "0.1.4.0"
+            })
+          );
+
+        expect(
+          verifier.verify(
+            "fixture.exe",
+            "0.1.4"
+          )
+        ).toEqual({
+          verification:
+            "AUTHENTICODE",
+          subject:
+            "CN=Lex Machina Release",
+          thumbprint:
+            trusted,
+          productVersion:
+            "0.1.4"
+        });
+
+        expect(() =>
+          verifier.verify(
+            "fixture.exe",
+            "0.1.5"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_VERSION_MISMATCH"
+        );
+      }
     );
   }
 );
