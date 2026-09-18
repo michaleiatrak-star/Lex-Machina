@@ -500,8 +500,14 @@ const pass =
     "PASS" &&
   typeof future.answer ===
     "string" &&
-  futureVerification.verified === 1 &&
-  futureFetches.length === 1 &&
+  typeof futureVerification.records ===
+    "number" &&
+  futureVerification.records >= 1 &&
+  futureVerification.verified ===
+    futureVerification.records &&
+  futureVerification.supported === 0 &&
+  futureVerification.unverified === 0 &&
+  futureFetches.length >= 1 &&
 
   effectiveHttp.status === 200 &&
   effective.status ===
