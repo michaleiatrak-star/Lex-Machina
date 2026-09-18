@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory=$true)]
-  [ValidateSet("FreshInstall", "Uninstall")]
+  [ValidateSet("FreshInstall", "Uninstall", "VerifyPurged")]
   [string]$Mode,
 
   [string]$InstallStatePath,
@@ -81,7 +81,9 @@ if ($Mode -eq "FreshInstall") {
   }
 }
 
-Stop-LexMachinaProcesses $InstallRoot
+if ($Mode -ne "VerifyPurged") {
+  Stop-LexMachinaProcesses $InstallRoot
+}
 
 if (-not ("LexMachinaCredentialPurge" -as [type])) {
   Add-Type -TypeDefinition @"
@@ -148,6 +150,47 @@ public static class LexMachinaCredentialPurge
         return false;
     }
 
+    public static string[] ListAll()
+    {
+        UInt32 count;
+        IntPtr credentials;
+        if (!CredEnumerate(null, 0, out count, out credentials))
+        {
+            int error = Marshal.GetLastWin32Error();
+            if (error == 1168)
+            {
+                return new string[0];
+            }
+            throw new Win32Exception(error, "CredEnumerate failed");
+        }
+
+        List<string> matches = new List<string>();
+        try
+        {
+            for (UInt32 index = 0; index < count; index++)
+            {
+                IntPtr credentialPointer = Marshal.ReadIntPtr(
+                    credentials,
+                    checked((int)index * IntPtr.Size)
+                );
+                CREDENTIAL credential =
+                    (CREDENTIAL)Marshal.PtrToStructure(
+                        credentialPointer,
+                        typeof(CREDENTIAL)
+                    );
+                if (IsLexMachinaTarget(credential.TargetName))
+                {
+                    matches.Add(credential.TargetName);
+                }
+            }
+        }
+        finally
+        {
+            CredFree(credentials);
+        }
+        return matches.ToArray();
+    }
+
     public static string[] DeleteAll()
     {
         UInt32 count;
@@ -204,11 +247,6 @@ public static class LexMachinaCredentialPurge
 "@
 }
 
-$deletedCredentials = [LexMachinaCredentialPurge]::DeleteAll()
-foreach ($target in $deletedCredentials) {
-  Write-Host "Removed Windows credential: $target"
-}
-
 $paths = [Collections.Generic.List[object]]::new()
 
 if ($env:USERPROFILE) {
@@ -259,6 +297,27 @@ if ($env:TEMP) {
 $seen = [Collections.Generic.HashSet[string]]::new(
   [StringComparer]::OrdinalIgnoreCase
 )
+
+if ($Mode -eq "VerifyPurged") {
+  $remainingCredentials = @([LexMachinaCredentialPurge]::ListAll())
+  if ($remainingCredentials.Count -gt 0) {
+    throw "PROFILE_PURGE_CREDENTIAL_REMAINS:$($remainingCredentials -join ',')"
+  }
+  foreach ($item in $paths) {
+    $full = [IO.Path]::GetFullPath([string]$item.Path)
+    if ($seen.Add($full) -and (Test-Path -LiteralPath $full)) {
+      throw "PROFILE_PURGE_PATH_REMAINS:$full"
+    }
+  }
+  Write-Host "LEX_PROFILE_PURGE_VERIFY_PASS"
+  exit 0
+}
+
+$deletedCredentials = [LexMachinaCredentialPurge]::DeleteAll()
+foreach ($target in $deletedCredentials) {
+  Write-Host "Removed Windows credential: $target"
+}
+
 foreach ($item in $paths) {
   $full = [IO.Path]::GetFullPath([string]$item.Path)
   if ($seen.Add($full)) {
