@@ -542,6 +542,99 @@ export function applyGuideTransition(
   );
 }
 
+export type GuideOutputReport = {
+  questionCount: number;
+  oneQuestionRuleActive: boolean;
+  irreversibleWarningRequired:
+    boolean;
+  irreversibleWarningPresent:
+    boolean;
+  result:
+    | "PASS"
+    | "BLOCKED";
+  violations: string[];
+};
+
+export function evaluateGuideOutput(
+  state: Pick<
+    GuideSessionState,
+    | "interactionMode"
+    | "pendingIrreversibleAction"
+  >,
+  text: string
+): GuideOutputReport {
+  const withoutCode =
+    text.replace(
+      /```[\s\S]*?```/g,
+      ""
+    );
+  const withoutUrls =
+    withoutCode.replace(
+      /https?:\/\/\S+/gi,
+      ""
+    );
+  const questionCount =
+    (
+      withoutUrls.match(
+        /\?/g
+      ) ?? []
+    ).length;
+  const oneQuestionRuleActive =
+    state.interactionMode ===
+      "PROWADZENIE";
+  const irreversibleWarningRequired =
+    Boolean(
+      state
+        .pendingIrreversibleAction &&
+      !state
+        .pendingIrreversibleAction
+        .warningAcknowledged
+    );
+  const normalized =
+    withoutCode
+      .normalize("NFC")
+      .toLocaleUpperCase("pl");
+  const irreversibleWarningPresent =
+    !irreversibleWarningRequired ||
+    normalized.includes(
+      "OSTRZEŻENIE"
+    ) ||
+    normalized.includes(
+      "NIEODWRACAL"
+    );
+
+  const violations: string[] =
+    [];
+  if (
+    oneQuestionRuleActive &&
+    questionCount > 1
+  ) {
+    violations.push(
+      "GUIDE_ONE_QUESTION_RULE"
+    );
+  }
+  if (
+    irreversibleWarningRequired &&
+    !irreversibleWarningPresent
+  ) {
+    violations.push(
+      "GUIDE_IRREVERSIBLE_WARNING_REQUIRED"
+    );
+  }
+
+  return {
+    questionCount,
+    oneQuestionRuleActive,
+    irreversibleWarningRequired,
+    irreversibleWarningPresent,
+    result:
+      violations.length === 0
+        ? "PASS"
+        : "BLOCKED",
+    violations
+  };
+}
+
 export class GuideSessionStateStore {
   private readonly states =
     new Map<
