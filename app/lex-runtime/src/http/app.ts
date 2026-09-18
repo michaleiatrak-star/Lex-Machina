@@ -7209,6 +7209,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (
+        sendContractWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
         error instanceof Error &&
         [
           "DOCUMENT_CITATION_SOURCE_CHANGED",
