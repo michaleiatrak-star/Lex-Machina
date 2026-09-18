@@ -6,6 +6,20 @@ if (-not (Test-Path -LiteralPath $probe -PathType Leaf)) {
   throw "INSTALL_STATE_SELFTEST_PROBE_MISSING"
 }
 
+$hooks = Join-Path $PSScriptRoot "..\lex-desktop\src-tauri\windows\hooks.nsh"
+if (-not (Test-Path -LiteralPath $hooks -PathType Leaf)) {
+  throw "INSTALL_STATE_SELFTEST_NSIS_HOOKS_MISSING"
+}
+$hookText = Get-Content -Raw -LiteralPath $hooks
+foreach ($required in @(
+  'File "/oname=prefetch-release-models.py"',
+  'CopyFiles /SILENT "$PLUGINSDIR\lex-bootstrap\prefetch-release-models.py" "$INSTDIR\runtime\bootstrap\prefetch-release-models.py"'
+)) {
+  if (-not $hookText.Contains($required)) {
+    throw "INSTALL_STATE_SELFTEST_BOOTSTRAP_EMBED_CONTRACT_MISSING:$required"
+  }
+}
+
 $powershell = Join-Path $PSHOME "powershell.exe"
 if (-not (Test-Path -LiteralPath $powershell -PathType Leaf)) {
   $command = Get-Command powershell.exe -ErrorAction SilentlyContinue
