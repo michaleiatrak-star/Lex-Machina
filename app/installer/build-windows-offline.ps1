@@ -20,6 +20,13 @@ function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
 
 if ($env:OS -ne "Windows_NT") { throw "Windows offline payload must be built on Windows." }
 
+Write-Host "[brand] Materialize canonical Lex Machina Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+$brandIcon = Join-Path $tauri "icons\\icon.ico"
+if (-not (Test-Path -LiteralPath $brandIcon -PathType Leaf)) {
+  throw "LEX_BRAND_ICON_MATERIALIZATION_FAILED"
+}
+
 Write-Host "[0/10] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
@@ -94,7 +101,7 @@ Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.python.url -OutFile 
 Assert-Sha256 $pythonInstaller $sourceLock.runtime.python.sha256 "python-runtime-source"
 $pythonDir = Join-Path $payload "python"
 $args = @(
-  "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
+  "/quiet", "InstallAllUsers=0", "TargetDir=`"$pythonDir`"", "Include_launcher=0",
   "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
   "Include_pip=1", "PrependPath=0", "Shortcuts=0"
 )
