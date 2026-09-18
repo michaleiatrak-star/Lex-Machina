@@ -36,6 +36,19 @@ export type DeterministicWorkflowReadReport = {
   result: "PASS" | "BLOCKED";
 };
 
+export type DeterministicWorkflowOutputReport = {
+  workflow: DeterministicWorkflowId;
+  mode:
+    | "NOT_APPLICABLE"
+    | "INTAKE_REQUIRED"
+    | "READY_ARTIFACT";
+  required: string[];
+  observed: string[];
+  missing: string[];
+  orderValid: boolean;
+  result: "PASS" | "BLOCKED";
+};
+
 const SIMPLE_LETTER_RESOURCES = [
   "shared/NAZEWNICTWO-STRON.md",
   "pisma-proste-v2/references/M1-zasady.md",
@@ -115,6 +128,13 @@ const SITUATION_REPORT_RESOURCES = [
   "shared/PRAWO-HARDGATE.md",
   "shared/SELF-CHECK-ANTY-FASADA.md",
   "shared/MOD-WIDGET-IO.md"
+] as const;
+
+const SIMPLE_LETTER_READY_MARKERS = [
+  "TREŚĆ PISMA",
+  "UWAGI PRAKTYCZNE",
+  "CO DALEJ",
+  "HYBRID-VALIDATION"
 ] as const;
 
 function assertReadableResource(
@@ -289,12 +309,135 @@ export function deterministicWorkflowPrompt(
       (resource) => `- ${resource}`
     ),
     "The runtime will compare actual corpus-tool audit events against this list and block presentation if any required read is missing.",
+    ...(plan.id === "SIMPLE_LETTER_V1"
+      ? [
+          "SIMPLE_LETTER_V1 output contract is runtime-enforced.",
+          "If critical intake data are missing, present an explicit DANE DO UZUPEŁNIENIA section and do not pretend a complete letter is ready.",
+          "Otherwise present the required sections in this order: TREŚĆ PISMA → UWAGI PRAKTYCZNE → CO DALEJ → HYBRID-VALIDATION.",
+          "The HYBRID-VALIDATION section must include the final count statement 'Pismo zawiera ... pól do uzupełnienia.'."
+        ]
+      : []),
     ...(plan.escalatedFromSimpleLetter
       ? [
           "Both simple and process pleading skills were selected. The stricter PROCESS_PLEADING_V1 workflow controls this turn."
         ]
       : [])
   ].join("\n");
+}
+
+export function evaluateDeterministicWorkflowOutput(
+  plan: DeterministicWorkflowPlan,
+  text: string
+): DeterministicWorkflowOutputReport {
+  if (plan.id !== "SIMPLE_LETTER_V1") {
+    return {
+      workflow: plan.id,
+      mode: "NOT_APPLICABLE",
+      required: [],
+      observed: [],
+      missing: [],
+      orderValid: true,
+      result: "PASS"
+    };
+  }
+
+  const normalized =
+    text
+      .normalize("NFC")
+      .toLocaleUpperCase("pl");
+  const intakeRequired =
+    normalized.includes(
+      "DANE DO UZUPEŁNIENIA"
+    );
+  const hasLetterBody =
+    normalized.includes(
+      "TREŚĆ PISMA"
+    );
+
+  if (
+    intakeRequired &&
+    !hasLetterBody
+  ) {
+    return {
+      workflow: plan.id,
+      mode: "INTAKE_REQUIRED",
+      required: [
+        "DANE DO UZUPEŁNIENIA"
+      ],
+      observed: [
+        "DANE DO UZUPEŁNIENIA"
+      ],
+      missing: [],
+      orderValid: true,
+      result: "PASS"
+    };
+  }
+
+  const required = [
+    ...SIMPLE_LETTER_READY_MARKERS,
+    "PISMO ZAWIERA … PÓL DO UZUPEŁNIENIA"
+  ];
+  const observed: string[] =
+    SIMPLE_LETTER_READY_MARKERS
+      .filter((marker) =>
+        normalized.includes(
+          marker
+        )
+      );
+  const missing: string[] =
+    SIMPLE_LETTER_READY_MARKERS
+      .filter((marker) =>
+        !normalized.includes(
+          marker
+        )
+      );
+
+  const positions =
+    SIMPLE_LETTER_READY_MARKERS
+      .map((marker) =>
+        normalized.indexOf(
+          marker
+        )
+      );
+  const orderValid =
+    missing.length === 0 &&
+    positions.every(
+      (position, index) =>
+        index === 0 ||
+        position >
+          positions[index - 1]!
+    );
+
+  const hasCompletionCount =
+    normalized.includes(
+      "PISMO ZAWIERA"
+    ) &&
+    normalized.includes(
+      "PÓL DO UZUPEŁNIENIA"
+    );
+  if (hasCompletionCount) {
+    observed.push(
+      "PISMO ZAWIERA … PÓL DO UZUPEŁNIENIA"
+    );
+  } else {
+    missing.push(
+      "PISMO ZAWIERA … PÓL DO UZUPEŁNIENIA"
+    );
+  }
+
+  return {
+    workflow: plan.id,
+    mode: "READY_ARTIFACT",
+    required,
+    observed,
+    missing,
+    orderValid,
+    result:
+      missing.length === 0 &&
+      orderValid
+        ? "PASS"
+        : "BLOCKED"
+  };
 }
 
 export function evaluateDeterministicWorkflowReads(
