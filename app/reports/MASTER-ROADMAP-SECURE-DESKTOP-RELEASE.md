@@ -1,10 +1,13 @@
 # Lex Machina — Master Roadmap to Secure Desktop Release
 
-Status: **IN EXECUTION — G31C2/G31D/G31E + G35C + FULL G34F + G38 PASS; NEXT G34G → G33A-D**  
-Date: 2026-09-16  
-Branch baseline: `feature/local-runtime`
+Status: **HISTORICAL BASELINE RECONCILED — G39 RC VERIFYING**  
+Date: 2026-09-18  
+Current RC source baseline: `b159efffec9f607021c282cc9828986fce7e16dc` on `feature/g39-execution-2026-09-17`
 
 This roadmap consolidates the completed gates and all design decisions from G31, G33 and G34 into one execution sequence.
+
+> **2026-09-18 reconciliation.** Ten plik zachowuje historyczną sekwencję G31–G38. Bieżącym źródłem prawdy dla G39 jest `G39-IMPLEMENTATION-STATUS-2026-09-18.md`, a produktowa roadmapa jest w `app/ROADMAP.md`. Dla RC 0.1.3 nie wolno wnioskować PASS z historycznych wpisów: publikacja wymaga exact-SHA PASS dla Lex Runtime Validation, F-138, G39 Installer State Machine, online installed-copy acceptance i offline clean-machine acceptance. Produkcyjne podpisy/trust roots oraz benchmarki Local AI pozostają osobnymi gate'ami i nie są zamykane przez niesygnowany prerelease.
+
 
 It is intentionally ordered so that the installer is built only after storage, identity, vault, document generation and desktop trust boundaries are stable.
 
