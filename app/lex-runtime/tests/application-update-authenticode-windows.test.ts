@@ -5,9 +5,6 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import {
-  spawnSync
-} from "node:child_process";
-import {
   afterEach,
   beforeEach,
   describe,
@@ -26,105 +23,13 @@ import type {
 } from "../src/update-discovery.js";
 
 const tempRoots: string[] = [];
-function findSignTool(): string {
-  const where = spawnSync(
-    path.join(
-      process.env.SystemRoot ??
-        "C:\\Windows",
-      "System32",
-      "where.exe"
-    ),
-    ["signtool.exe"],
-    {
-      encoding: "utf8",
-      windowsHide: true,
-      timeout: 10_000
-    }
-  );
-  const fromPath =
-    where.status === 0
-      ? where.stdout
-          .split(/\r?\n/)
-          .map((line) =>
-            line.trim()
-          )
-          .find((line) =>
-            line &&
-            fs.existsSync(line)
-          )
-      : undefined;
-  if (fromPath) {
-    return fromPath;
-  }
-
-  const programFilesX86 =
-    process.env[
-      "ProgramFiles(x86)"
-    ] ??
-    "C:\\Program Files (x86)";
-  const binRoot =
-    path.join(
-      programFilesX86,
-      "Windows Kits",
-      "10",
-      "bin"
-    );
-  if (
-    fs.existsSync(binRoot)
-  ) {
-    const versions =
-      fs.readdirSync(
-        binRoot,
-        {
-          withFileTypes: true
-        }
-      )
-        .filter(
-          (entry) =>
-            entry.isDirectory()
-        )
-        .map(
-          (entry) =>
-            entry.name
-        )
-        .sort()
-        .reverse();
-    for (
-      const version
-      of versions
-    ) {
-      const candidate =
-        path.join(
-          binRoot,
-          version,
-          "x64",
-          "signtool.exe"
-        );
-      if (
-        fs.existsSync(
-          candidate
-        )
-      ) {
-        return candidate;
-      }
-    }
-  }
-
-  throw new Error(
-    "WINDOWS_AUTHENTICODE_TEST_SIGNTOOL_MISSING"
-  );
-}
-
 function copyTrustedForeignSignedExecutable(
   targetRoot: string
 ): string {
-  const signTool =
-    findSignTool();
   const systemRoot =
     process.env.SystemRoot ??
     "C:\\Windows";
   const candidates = [
-    signTool,
     path.join(
       systemRoot,
       "System32",
@@ -154,6 +59,10 @@ function copyTrustedForeignSignedExecutable(
       targetRoot,
       "LexMachina-Foreign-Signer.exe"
     );
+  const probe =
+    new WindowsAuthenticodeInstallerVerifier(
+      ["A".repeat(40)]
+    );
   const failures:
     string[] = [];
 
@@ -173,40 +82,27 @@ function copyTrustedForeignSignedExecutable(
       candidate,
       target
     );
-    const verified =
-      spawnSync(
-        signTool,
-        [
-          "verify",
-          "/pa",
-          "/all",
-          target
-        ],
-        {
-          encoding: "utf8",
-          windowsHide: true,
-          timeout: 30_000
-        }
+    try {
+      probe.verify(target);
+      failures.push(
+        `${path.basename(candidate)}:UNEXPECTED_PIN_MATCH`
       );
-
-    if (
-      verified.status === 0
-    ) {
-      return target;
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      if (
+        message ===
+          "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
+      ) {
+        return target;
+      }
+      failures.push(
+        `${path.basename(candidate)}:${message}`
+      );
     }
 
-    failures.push(
-      [
-        path.basename(
-          candidate
-        ),
-        verified.stdout.trim(),
-        verified.stderr.trim()
-      ]
-        .filter(Boolean)
-        .join(":")
-        .slice(0, 2_000)
-    );
     fs.rmSync(
       target,
       { force: true }
