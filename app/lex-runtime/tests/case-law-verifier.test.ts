@@ -110,7 +110,9 @@ describe("SupremeCourtCaseVerifier", () => {
       verificationMethod:
         "web_fetch",
       sourceFormat: "TEXT",
-      caseScope: "FULL_TEXT"
+      caseScope: "FULL_TEXT",
+      caseSignature:
+        "III CZP 25/11"
     });
     expect(result.judgment).toMatchObject({
       signature:
