@@ -86,6 +86,12 @@ import {
   applyAutomaticVerificationMarkers,
   planAutomaticLegalVerification
 } from "./gate-i-auto-verification.js";
+import {
+  evaluateGateIInputCompleteness,
+  evaluateGateISubgates,
+  gateIWorkflowContract,
+  type GateISubgateReport
+} from "./gate-i-contracts.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -270,6 +276,7 @@ export type SessionExecutionResponse = {
     missingResources: string[];
   };
   gateI?: GateIInvariantReport;
+  gateISubgates?: GateISubgateReport;
   gateITurn?: GateITurnState;
   context?: ContextBudgetReport;
   courtWorkflow?: {
@@ -465,6 +472,30 @@ export class SafeSessionExecutor implements SessionExecutor {
         : "OK",
       {
         ...auxiliary.summary
+      }
+    );
+
+    const gateIInput =
+      evaluateGateIInputCompleteness(
+        request.query,
+        request.documentAttachments
+          ?.length ?? 0
+      );
+
+    audit.record(
+      "gate",
+      "G39I_INPUT_COMPLETENESS",
+      gateIInput.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      {
+        attachmentAssertion:
+          gateIInput.attachmentAssertion,
+        attachmentCount:
+          gateIInput.attachmentCount,
+        reason:
+          gateIInput.reason
       }
     );
 
@@ -979,6 +1010,77 @@ export class SafeSessionExecutor implements SessionExecutor {
       gateI.result ===
         "BLOCKED";
 
+    const gateIContract =
+      gateIWorkflowContract(
+        execution.workflowPlan.id,
+        execution.workflowPlan
+          .executionSkill
+      );
+    const durableStateContextPresent =
+      execution.workflowPlan.id ===
+        "PROCESS_PLEADING_V1"
+        ? Boolean(
+            request
+              .processWorkflowContext
+          )
+        : execution.workflowPlan.id ===
+            "COURT_ANALYSIS_V1"
+          ? Boolean(
+              request
+                .courtWorkflowContext
+            )
+          : execution.workflowPlan.id ===
+              "CHRONOLOGY_V1"
+            ? Boolean(
+                request
+                  .chronologyWorkflowContext
+              )
+            : execution.workflowPlan.id ===
+                "CONTRACT_ANALYSIS_V1"
+              ? Boolean(
+                  request
+                    .contractWorkflowContext
+                )
+              : true;
+
+    const gateISubgates =
+      evaluateGateISubgates({
+        contract:
+          gateIContract,
+        invariants:
+          gateI,
+        input:
+          gateIInput,
+        outputPass:
+          !workflowOutputBlocked &&
+          !guideOutputBlocked &&
+          !reportBlueprintBlocked,
+        stateTransitionPass:
+          durableStateContextPresent,
+        finalizationPass:
+          finalization.result ===
+            "PASS"
+      });
+    const gateISubgatesBlocked =
+      gateISubgates.result ===
+        "BLOCKED";
+
+    audit.record(
+      "gate",
+      gateISubgates.gate,
+      gateISubgatesBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        workflow:
+          gateISubgates.workflow,
+        stateModel:
+          gateISubgates.stateModel,
+        subgates:
+          gateISubgates.subgates
+      }
+    );
+
     let gateITurn =
       createGateITurnState(
         execution.workflowPlan.id
@@ -1205,7 +1307,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       workflowOutputBlocked ||
       guideOutputBlocked ||
       reportBlueprintBlocked ||
-      gateIBlocked;
+      gateIBlocked ||
+      gateISubgatesBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -1325,6 +1428,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         missingResources: workflowReads.missing
       },
       gateI,
+      gateISubgates,
       gateITurn
     };
 
