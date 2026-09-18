@@ -8,7 +8,11 @@ import {
   type ExecutionEvent
 } from "./execution-engine.js";
 import { ProviderGateway } from "./providers/gateway.js";
-import type { ProviderId } from "./providers/types.js";
+import type {
+  NormalizedToolCall,
+  NormalizedToolResult,
+  ProviderId
+} from "./providers/types.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
   VerificationLedger,
@@ -53,6 +57,12 @@ import {
   orchestrateDocumentContext,
   type ContextBudgetReport
 } from "./context-orchestrator.js";
+import {
+  AuxiliaryModelScheduler,
+  auxiliaryVerificationCallKey,
+  type AuxiliaryRoutingConfig,
+  type AuxiliaryRoutingSummary
+} from "./auxiliary-model-scheduler.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -78,10 +88,19 @@ export type SessionExecutionRequest = {
   documentAttachments?: SessionDocumentAttachment[];
   provider: ProviderId;
   model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: AuxiliaryRoutingSummary;
+  };
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
+  auxiliaryText?: string;
+  auxiliaryRouting?: AuxiliaryRoutingConfig;
   processWorkflowContext?: {
     stage: ProcessPleadingStage;
     checkpoint: ProcessPleadingCheckpoint;
@@ -331,14 +350,23 @@ export interface SessionExecutor {
 
 export class SafeSessionExecutor implements SessionExecutor {
   private readonly engine: LexExecutionEngine;
+  private readonly auxiliaryScheduler:
+    AuxiliaryModelScheduler;
 
   constructor(
     private readonly registry: LexSkillRegistry,
-    providers: ProviderGateway,
+    private readonly providers: ProviderGateway,
     private readonly finalizer = new AuditedFinalizer(),
     private readonly verificationToolFactory?: LegalVerificationToolFactory
   ) {
-    this.engine = new LexExecutionEngine(registry, providers);
+    this.engine = new LexExecutionEngine(
+      registry,
+      providers
+    );
+    this.auxiliaryScheduler =
+      new AuxiliaryModelScheduler(
+        providers
+      );
   }
 
   async execute(
@@ -354,6 +382,47 @@ export class SafeSessionExecutor implements SessionExecutor {
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
     const corpusTools = new LegalCorpusToolRuntime(this.registry);
+
+    const auxiliary =
+      await this.auxiliaryScheduler
+        .preflight({
+          config:
+            request.auxiliaryRouting ?? {
+              enabled: false,
+              provider: "openai",
+              model:
+                "local/bielik-11b-v3-q4km"
+            },
+          primary: {
+            provider:
+              request.provider,
+            model:
+              request.model
+          },
+          currentUserText:
+            request.auxiliaryText ??
+            request.query,
+          ...(verificationTools
+            ? {
+                runVerificationTools:
+                  (calls) =>
+                    verificationTools
+                      .runTools(calls)
+              }
+            : {})
+        });
+
+    audit.record(
+      "gate",
+      "G39K_AUXILIARY_MODEL_ROUTING",
+      auxiliary.summary.status ===
+        "FAILED"
+        ? "DEGRADED"
+        : "OK",
+      {
+        ...auxiliary.summary
+      }
+    );
 
     const contextSelection =
       orchestrateDocumentContext({
@@ -422,6 +491,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(verificationTools
         ? [verificationTools.systemPromptAppendix()]
         : []),
+      ...(auxiliary.appendix
+        ? [auxiliary.appendix]
+        : []),
       ...(attachments.length > 0
         ? [documentCitationSystemPrompt(attachments)]
         : [])
@@ -470,12 +542,51 @@ export class SafeSessionExecutor implements SessionExecutor {
         const corpusResults = corpusCalls.length > 0
           ? await corpusTools.runTools(corpusCalls)
           : [];
-        const verificationResults = verificationCalls.length > 0 && verificationTools
-          ? await verificationTools.runTools(verificationCalls)
-          : [];
+        const cachedVerificationResults:
+          NormalizedToolResult[] = [];
+        const uncachedVerificationCalls:
+          NormalizedToolCall[] = [];
+
+        for (
+          const call
+          of verificationCalls
+        ) {
+          const cached =
+            auxiliary
+              .cachedVerificationResults
+              .get(
+                auxiliaryVerificationCallKey(
+                  call
+                )
+              );
+          if (cached) {
+            cachedVerificationResults.push({
+              ...cached,
+              tool_use_id:
+                call.id
+            });
+          } else {
+            uncachedVerificationCalls.push(
+              call
+            );
+          }
+        }
+
+        const verificationResults =
+          uncachedVerificationCalls.length > 0 &&
+          verificationTools
+            ? await verificationTools
+                .runTools(
+                  uncachedVerificationCalls
+                )
+            : [];
 
         const byId = new Map(
-          [...corpusResults, ...verificationResults].map((result) => [
+          [
+            ...corpusResults,
+            ...cachedVerificationResults,
+            ...verificationResults
+          ].map((result) => [
             result.tool_use_id,
             result
           ])
@@ -683,6 +794,20 @@ export class SafeSessionExecutor implements SessionExecutor {
       status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
       provider: request.provider,
       model: request.model,
+      modelRouting: {
+        primary: {
+          provider:
+            request.provider,
+          model:
+            request.model
+        },
+        ...(request.auxiliaryRouting
+          ? {
+              auxiliary:
+                auxiliary.summary
+            }
+          : {})
+      },
       primarySkill: request.primarySkill,
       loadedSkills: execution.loadedSkills,
       executionSkills: execution.executionSkills,
