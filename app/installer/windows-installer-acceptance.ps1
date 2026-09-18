@@ -362,13 +362,14 @@ const { DatabaseSync } = require("node:sqlite");
 const db = new DatabaseSync(process.argv[1], { readOnly: true });
 try {
   const rows = db.prepare(
-    "SELECT login_name, app_role, status FROM users ORDER BY created_at, user_id"
+    "SELECT login_name, app_role, status, password_setup_pending FROM users ORDER BY created_at, user_id"
   ).all();
   if (
     rows.length !== 1 ||
     rows[0].login_name !== "local-admin" ||
     rows[0].app_role !== "ADMIN" ||
-    rows[0].status !== "ACTIVE"
+    rows[0].status !== "ACTIVE" ||
+    rows[0].password_setup_pending !== 1
   ) {
     process.stderr.write("CLEAN_ADMIN_INVALID:" + JSON.stringify(rows));
     process.exit(2);
