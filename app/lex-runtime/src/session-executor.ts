@@ -196,6 +196,13 @@ export type SessionExecutionResponse = {
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
   provider: ProviderId;
   model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: AuxiliaryRoutingSummary;
+  };
   primarySkill: string;
   loadedSkills?: string[];
   executionSkills?: string[];
