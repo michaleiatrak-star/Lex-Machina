@@ -484,6 +484,27 @@ function sendReauthorizationError(
   return true;
 }
 
+function sendProcessWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "PROCESS_PLEADING_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
 function sendSupportError(
   res: Response,
   error: unknown
@@ -4780,6 +4801,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           !sendReauthorizationError(
             res,
             error
+          ) &&
+          !sendProcessWorkflowError(
+            res,
+            error
           )
         ) {
           res.status(500).json({
@@ -4845,6 +4870,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             error
           ) &&
           !sendReauthorizationError(
+            res,
+            error
+          ) &&
+          !sendProcessWorkflowError(
             res,
             error
           )
@@ -4979,6 +5008,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             error
           ) &&
           !sendReauthorizationError(
+            res,
+            error
+          ) &&
+          !sendProcessWorkflowError(
             res,
             error
           )
@@ -5899,16 +5932,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (
-        error instanceof Error &&
-        error.message.startsWith(
-          "PROCESS_PLEADING_"
+        sendProcessWorkflowError(
+          res,
+          error
         )
       ) {
-        res.status(409).json({
-          error:
-            error.message
-              .split(":", 1)[0]
-        });
         return;
       }
 
