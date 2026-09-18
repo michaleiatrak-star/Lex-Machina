@@ -411,16 +411,25 @@ try {
   if ($uninstallProcess.ExitCode -ne 0) {
     throw "INSTALLER_ACCEPTANCE_UNINSTALL_FAILED:$($uninstallProcess.ExitCode)"
   }
-  Start-Sleep -Seconds 3
+  # NSIS may launch the final self-delete/registry cleanup from a temporary
+  # process after the original uninstaller process exits. Require the registry
+  # entry to disappear, but allow that documented hand-off to finish.
+  $uninstallCleanupDeadline = (Get-Date).AddSeconds(60)
+  do {
+    $registeredAfterUninstall = Get-ItemProperty -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
+    if (-not $registeredAfterUninstall) {
+      break
+    }
+    Start-Sleep -Milliseconds 500
+  } while ((Get-Date) -lt $uninstallCleanupDeadline)
+
+  if ($registeredAfterUninstall) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_REGISTRY_REMAINS"
+  }
 
   & (Join-Path $PSScriptRoot "purge-user-data.ps1") -Mode VerifyPurged -InstallRoot $InstallRoot
   if ($LASTEXITCODE -ne 0) {
     throw "INSTALLER_ACCEPTANCE_PROFILE_PURGE_VERIFY_FAILED"
-  }
-
-  $registeredAfterUninstall = Get-ItemProperty -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
-  if ($registeredAfterUninstall) {
-    throw "INSTALLER_ACCEPTANCE_UNINSTALL_REGISTRY_REMAINS"
   }
   if (Test-Path -LiteralPath $InstallRoot) {
     $remaining = @(
