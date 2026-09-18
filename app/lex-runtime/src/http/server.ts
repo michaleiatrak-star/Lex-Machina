@@ -23,9 +23,8 @@ import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
 import {
-  installedSkillOverlayRoot,
-  installedSkillOverlayVersion,
-  MaintenanceService
+  MaintenanceService,
+  recoverSkillOverlayForStartup
 } from "../maintenance-service.js";
 import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
@@ -200,22 +199,45 @@ function loopbackOriginGuard(
   });
 }
 
+export function bundledRuntimeRoot(): string {
+  const here =
+    path.dirname(
+      fileURLToPath(
+        import.meta.url
+      )
+    );
+  const repositoryRoot =
+    path.resolve(
+      here,
+      "../../../.."
+    );
+  return path.resolve(
+    path.join(
+      repositoryRoot,
+      "Wersja rozwojowa rozpakowana"
+    )
+  );
+}
+
 export function resolveRuntimeRoot(): string {
   const explicitlyConfigured =
-    process.env.LEX_SKILLS_PATH?.trim();
+    process.env
+      .LEX_SKILLS_PATH
+      ?.trim();
   if (explicitlyConfigured) {
-    return path.resolve(explicitlyConfigured);
+    return path.resolve(
+      explicitlyConfigured
+    );
   }
 
-  if (installedSkillOverlayVersion()) {
-    return installedSkillOverlayRoot();
-  }
-
-  const here = path.dirname(fileURLToPath(import.meta.url));
-  const repositoryRoot = path.resolve(here, "../../../..");
-  return path.resolve(
-    path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
-  );
+  const bundled =
+    bundledRuntimeRoot();
+  const recovered =
+    recoverSkillOverlayForStartup(
+      bundled
+    );
+  return recovered.root ??
+    bundled;
 }
 
 export async function startLocalServer(options?: {
