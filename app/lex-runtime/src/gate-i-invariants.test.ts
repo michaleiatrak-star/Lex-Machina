@@ -88,7 +88,12 @@ describe(
               reads(),
             verificationRecords: [],
             finalization:
-              finalization()
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            }
           });
 
         expect(report.result)
@@ -130,7 +135,12 @@ describe(
             verificationRecords:
               records,
             finalization:
-              finalization()
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            }
           });
 
         expect(
@@ -176,7 +186,12 @@ describe(
               reads(),
             verificationRecords: [],
             finalization:
-              final
+              final,
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            }
           });
 
         expect(report.result)
@@ -188,6 +203,73 @@ describe(
                 "CASE_SIGNATURES"
           )?.result
         ).toBe("BLOCKED");
+      }
+    );
+
+    it(
+      "assigns every mechanical invariant to a stable Gate I subgate",
+      () => {
+        const report =
+          evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads:
+              reads(),
+            verificationRecords: [],
+            finalization:
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            }
+          });
+
+        expect(
+          report.checks.map(
+            (item) =>
+              item.subgate
+          )
+        ).toEqual([
+          "I-A_ROUTER",
+          "I-B_CORE_RESOURCES",
+          "I-C_WORKFLOW_RESOURCES",
+          "I-D_SOURCE_PROVENANCE",
+          "I-E_LEGAL_CITATIONS",
+          "I-F_CASE_SIGNATURES",
+          "I-G_OUTPUT_CONTRACT",
+          "I-H_FINALIZATION"
+        ]);
+      }
+    );
+
+    it(
+      "blocks I-G when a skill-specific output contract fails",
+      () => {
+        const report =
+          evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads:
+              reads(),
+            verificationRecords: [],
+            finalization:
+              finalization(),
+            outputValidation: {
+              result:
+                "BLOCKED",
+              detail:
+                "workflow=BLOCKED"
+            }
+          });
+
+        expect(
+          report.checks.find(
+            (item) =>
+              item.subgate ===
+                "I-G_OUTPUT_CONTRACT"
+          )?.result
+        ).toBe("BLOCKED");
+        expect(report.result)
+          .toBe("BLOCKED");
       }
     );
 
@@ -215,7 +297,12 @@ describe(
               reads(),
             verificationRecords: [],
             finalization:
-              finalization()
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            }
           });
 
         expect(
