@@ -2,6 +2,17 @@ name: Lex Machina Offline Windows Installer
 
 on:
   workflow_call:
+    inputs:
+      signed:
+        description: "Build and verify Authenticode-signed offline artifacts"
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      LEX_WINDOWS_SIGNING_PFX_BASE64:
+        required: false
+      LEX_WINDOWS_SIGNING_PFX_PASSWORD:
+        required: false
   workflow_dispatch:
   pull_request:
     paths:
@@ -143,11 +154,30 @@ jobs:
             [Text.UTF8Encoding]::new($false)
           )
 
+      - name: Prepare offline signing receipts
+        if: ${{ inputs.signed == true }}
+        shell: pwsh
+        run: |
+          $receipts = Join-Path $env:RUNNER_TEMP "lex-offline-signing-receipts"
+          New-Item -ItemType Directory -Force -Path $receipts | Out-Null
+          "LEX_SIGNING_RECEIPT_DIR=$receipts" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: Build NSIS offline installer
         working-directory: app/lex-desktop
         env:
           CI: "true"
-        run: npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
+          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
+          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
+        shell: pwsh
+        run: |
+          if ("${{ inputs.signed }}" -eq "true") {
+            npx tauri build --bundles nsis --config src-tauri/tauri.offline.signed.conf.json
+          } else {
+            npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
+          }
+          if ($LASTEXITCODE -ne 0) {
+            throw "OFFLINE_TAURI_BUILD_FAILED:$LASTEXITCODE"
+          }
 
       - name: Assemble internal offline distribution
         id: locate
@@ -182,22 +212,46 @@ jobs:
             -InstallerPath "${{ steps.locate.outputs.installer }}" `
             -RuntimeBundlePath "${{ steps.locate.outputs.bundle }}" `
             -ComponentLockPath "${{ steps.locate.outputs.lock }}" `
+            -IconPath "app/lex-desktop/src-tauri/icons/icon.ico" `
             -OutputPath $output
 
           $resolved = (Resolve-Path -LiteralPath $output).Path
           "installer=$resolved" >> $env:GITHUB_OUTPUT
           Write-Host "Standalone offline installer: $resolved"
 
+      - name: Sign standalone offline wrapper
+        if: ${{ inputs.signed == true }}
+        shell: pwsh
+        env:
+          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
+          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
+        run: |
+          $receipt = Join-Path $env:LEX_SIGNING_RECEIPT_DIR "LexMachina-Offline-Setup-signature.json"
+          ./app/installer/sign-windows-artifact.ps1 `
+            -ArtifactPath "${{ steps.standalone.outputs.installer }}" `
+            -ManifestPath "app/installer/windows-release-source.json" `
+            -ReceiptPath $receipt
+
+          $receiptDest = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/signing-receipts"
+          New-Item -ItemType Directory -Force -Path $receiptDest | Out-Null
+          Copy-Item -LiteralPath $env:LEX_SIGNING_RECEIPT_DIR -Destination $receiptDest -Recurse -Force
+
       - name: Offline clean-machine standalone EXE acceptance
         shell: pwsh
         run: |
-          ./app/installer/windows-installer-acceptance.ps1 `
-            -InstallerPath "${{ steps.standalone.outputs.installer }}" `
-            -ExpectedNetworkRequiredAtInstall $false `
-            -BlockNetworkDuringInstall `
-            -ForceVisualCppRuntimeInstall `
-            -StandaloneOfflineExe `
-            -InstallTimeoutSeconds 6000
+          $arguments = @{
+            InstallerPath = "${{ steps.standalone.outputs.installer }}"
+            ExpectedNetworkRequiredAtInstall = $false
+            BlockNetworkDuringInstall = $true
+            ForceVisualCppRuntimeInstall = $true
+            StandaloneOfflineExe = $true
+            InstallTimeoutSeconds = 6000
+          }
+          if ("${{ inputs.signed }}" -eq "true") {
+            $arguments.RequireAuthenticode = $true
+            $arguments.SigningManifestPath = "app/installer/windows-release-source.json"
+          }
+          ./app/installer/windows-installer-acceptance.ps1 @arguments
 
       - name: Record standalone distribution SHA-256
         shell: pwsh
@@ -235,11 +289,12 @@ jobs:
       - name: Upload standalone offline EXE
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: LexMachina-Windows-Offline-Setup
+          name: ${{ inputs.signed == true && 'LexMachina-Windows-Offline-Signed-Setup' || 'LexMachina-Windows-Offline-Setup' }}
           path: |
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/LexMachina-Offline-Setup.exe
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/SHA256-OFFLINE.txt
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/component-lock-offline.json
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/signing-receipts/*.json
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
