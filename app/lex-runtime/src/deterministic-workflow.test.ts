@@ -48,6 +48,49 @@ const statuteResources = [
   "shared/SELF-CHECK-ANTY-FASADA.md"
 ];
 
+const contractResources = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-STEP-TRACKER.md"
+];
+
+const chronologyResources = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "chronologia-sprawy-v1/references/ekstrakcja-zdarzen.md",
+  "chronologia-sprawy-v1/references/sprzecznosci-dat.md",
+  "shared/MOD-OS-CZASU-PRZESLANEK.md"
+];
+
+const caseLawResources = [
+  "shared/MCP-INTEGRACJA.md",
+  "shared/SYGNATURY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+];
+
+const witnessResources = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/MOD-STEP-TRACKER.md",
+  "przesluchanie-swiadkow-v2-min90/references/WITNESS-INTELLIGENCE.md"
+];
+
+const clientReportResources = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "raport-klienta-v1/references/jezyk-klienta.md",
+  "raport-klienta-v1/references/BLUEPRINT-SCHEMA.md"
+];
+
+const situationReportResources = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-WIDGET-IO.md"
+];
+
 function writeFile(root: string, relative: string): void {
   const target = path.join(root, ...relative.split("/"));
   fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -65,7 +108,13 @@ function fixture(): LexSkillRegistry {
     "pisma-procesowe-v3",
     "analiza-sadowa-v6",
     "analizator-dowodow-v3",
-    "analizator-przepisow-v2"
+    "analizator-przepisow-v2",
+    "analizator-umow-v1",
+    "chronologia-sprawy-v1",
+    "orzeczenia-sadowe-v2",
+    "przesluchanie-swiadkow-v2-min90",
+    "raport-klienta-v1",
+    "raport-sytuacyjny-v2"
   ]) {
     writeFile(
       root,
@@ -77,7 +126,7 @@ function fixture(): LexSkillRegistry {
         "---",
         `name: ${skill}`,
         'version: "test"',
-        `type: ${["analiza-sadowa-v6", "analizator-dowodow-v3", "analizator-przepisow-v2"].includes(skill) ? "executive-analiza" : "executive-pisma"}`,
+        `type: ${["analiza-sadowa-v6", "analizator-dowodow-v3", "analizator-przepisow-v2", "analizator-umow-v1", "chronologia-sprawy-v1", "orzeczenia-sadowe-v2", "przesluchanie-swiadkow-v2-min90"].includes(skill) ? "executive-analiza" : "ux-raport"}`,
         "---",
         "",
         "# Fixture"
@@ -90,7 +139,13 @@ function fixture(): LexSkillRegistry {
     ...processResources,
     ...courtResources,
     ...evidenceResources,
-    ...statuteResources
+    ...statuteResources,
+    ...contractResources,
+    ...chronologyResources,
+    ...caseLawResources,
+    ...witnessResources,
+    ...clientReportResources,
+    ...situationReportResources
   ]) {
     writeFile(root, resource);
   }
@@ -237,6 +292,55 @@ describe("deterministic legal workflow", () => {
       "shared/SELF-CHECK-ANTY-FASADA.md"
     ]);
   });
+
+  it.each([
+    ["analizator-umow-v1", "CONTRACT_ANALYSIS_V1", contractResources],
+    ["chronologia-sprawy-v1", "CHRONOLOGY_V1", chronologyResources],
+    ["orzeczenia-sadowe-v2", "CASE_LAW_V1", caseLawResources],
+    ["przesluchanie-swiadkow-v2-min90", "WITNESS_QUESTIONING_V1", witnessResources],
+    ["raport-klienta-v1", "CLIENT_REPORT_V1", clientReportResources],
+    ["raport-sytuacyjny-v2", "SITUATION_REPORT_V1", situationReportResources]
+  ] as const)(
+    "uses deterministic preflight %s → %s and requires every fresh read",
+    (skill, workflow, resources) => {
+      const registry = fixture();
+      const plan = createDeterministicWorkflowPlan(
+        registry,
+        skill
+      );
+
+      expect(plan.id).toBe(workflow);
+      expect(plan.requiredFreshResources)
+        .toEqual(resources);
+
+      const pass =
+        evaluateDeterministicWorkflowReads(
+          plan,
+          resources.map((target) => ({
+            tool: "read_legal_resource",
+            target,
+            decision: "ALLOW" as const
+          }))
+        );
+      expect(pass.result).toBe("PASS");
+
+      const blocked =
+        evaluateDeterministicWorkflowReads(
+          plan,
+          resources.slice(0, -1).map((target) => ({
+            tool: "read_legal_resource",
+            target,
+            decision: "ALLOW" as const
+          }))
+        );
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toEqual([
+          resources.at(-1)
+        ]);
+    }
+  );
 
   it("blocks preflight when a required process resource is missing", () => {
     const registry = fixture();
