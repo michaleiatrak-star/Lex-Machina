@@ -933,6 +933,25 @@ export class MaintenanceService {
     );
     const verificationReady =
       this.skillTrustReady();
+    let blockedReason:
+      SkillUpdateStatus["blockedReason"] |
+      null = null;
+    if (
+      available &&
+      !indexAssetsReady
+    ) {
+      blockedReason =
+        status.skillsIndex
+          ? "SIGNED_INDEX_MISSING"
+          : "INDEX_MISSING";
+    } else if (
+      available &&
+      !verificationReady
+    ) {
+      blockedReason =
+        "SIGNER_POLICY_MISSING";
+    }
+
     return {
       currentVersion,
       status:
@@ -948,21 +967,9 @@ export class MaintenanceService {
         verificationReady,
       verificationReady,
       signatureMode,
-      ...(available && !indexAssetsReady
-        ? {
-            blockedReason:
-              (
-                status.skillsIndex
-                  ? "SIGNED_INDEX_MISSING"
-                  : "INDEX_MISSING"
-              ) as SkillUpdateStatus["blockedReason"]
-          }
-        : available && !verificationReady
-          ? {
-              blockedReason:
-                "SIGNER_POLICY_MISSING" as const
-            }
-          : {})
+      ...(blockedReason
+        ? { blockedReason }
+        : {})
     };
   }
 
