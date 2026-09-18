@@ -17,6 +17,10 @@ import {
   validateProcessPleadingState,
   type ProcessPleadingState
 } from "./process-pleading-state.js";
+import {
+  validateCourtAnalysisState,
+  type CourtAnalysisState
+} from "./court-analysis-state.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -60,6 +64,7 @@ export type CaseWorkspaceIndex = {
   };
   workflows?: {
     processPleading?: ProcessPleadingState;
+    courtAnalysis?: CourtAnalysisState;
   };
 };
 
@@ -274,6 +279,15 @@ export class EncryptedCaseWorkspaceStore {
         const workflow =
           validateProcessPleadingState(
             index.workflows.processPleading
+          );
+        if (workflow.caseId !== caseId) {
+          throw new Error("WORKSPACE_INDEX_INVALID");
+        }
+      }
+      if (index.workflows.courtAnalysis) {
+        const workflow =
+          validateCourtAnalysisState(
+            index.workflows.courtAnalysis
           );
         if (workflow.caseId !== caseId) {
           throw new Error("WORKSPACE_INDEX_INVALID");
@@ -639,6 +653,119 @@ export class EncryptedCaseWorkspaceStore {
       );
     }
     delete workflows.processPleading;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return true;
+  }
+
+  async getCourtAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<CourtAnalysisState | null> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const state =
+      index.workflows?.courtAnalysis;
+    return state
+      ? validateCourtAnalysisState(
+          state
+        )
+      : null;
+  }
+
+  async saveCourtAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    state: CourtAnalysisState;
+    expectedRevision?: number;
+  }): Promise<CourtAnalysisState> {
+    const state =
+      validateCourtAnalysisState(
+        args.state
+      );
+    if (
+      state.caseId !==
+        args.caseId
+    ) {
+      throw new Error(
+        "COURT_ANALYSIS_CASE_ID_MISMATCH"
+      );
+    }
+
+    const index =
+      await this.read(
+        args.caseId,
+        args.caseDataKey,
+        args.keyVersion
+      );
+    const current =
+      index.workflows?.courtAnalysis;
+    if (
+      args.expectedRevision !==
+        undefined &&
+      (
+        !current ||
+        current.revision !==
+          args.expectedRevision
+      )
+    ) {
+      throw new Error(
+        "COURT_ANALYSIS_STATE_CONFLICT"
+      );
+    }
+
+    index.workflows ??= {};
+    index.workflows.courtAnalysis =
+      state;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return validateCourtAnalysisState(
+      state
+    );
+  }
+
+  async clearCourtAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    expectedRevision?: number;
+  }): Promise<boolean> {
+    const index =
+      await this.read(
+        args.caseId,
+        args.caseDataKey,
+        args.keyVersion
+      );
+    const workflows =
+      index.workflows;
+    const current =
+      workflows?.courtAnalysis;
+    if (!workflows || !current) {
+      return false;
+    }
+    if (
+      args.expectedRevision !==
+        undefined &&
+      current.revision !==
+        args.expectedRevision
+    ) {
+      throw new Error(
+        "COURT_ANALYSIS_STATE_CONFLICT"
+      );
+    }
+
+    delete workflows.courtAnalysis;
     await this.write(
       index,
       args.caseDataKey,
