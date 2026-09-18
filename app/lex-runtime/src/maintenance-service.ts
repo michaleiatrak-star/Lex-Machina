@@ -955,7 +955,7 @@ export class MaintenanceService {
                 status.skillsIndex
                   ? "SIGNED_INDEX_MISSING"
                   : "INDEX_MISSING"
-              ) as const
+              ) as SkillUpdateStatus["blockedReason"]
           }
         : available && !verificationReady
           ? {
