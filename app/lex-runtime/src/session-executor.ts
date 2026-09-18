@@ -62,8 +62,9 @@ import {
   orchestrateDocumentContext,
   type ContextBudgetReport
 } from "./context-orchestrator.js";
-import type {
-  GuideSessionState
+import {
+  evaluateGuideOutput,
+  type GuideSessionState
 } from "./guide-session-state.js";
 import {
   AuxiliaryModelScheduler,
@@ -797,6 +798,43 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
+    const guideOutput =
+      request.guideContext
+        ? evaluateGuideOutput(
+            request.guideContext,
+            processedDocumentCitations.text
+          )
+        : null;
+    const guideOutputBlocked =
+      guideOutput?.result ===
+        "BLOCKED";
+    audit.record(
+      "gate",
+      "G39I_GUIDE_OUTPUT",
+      guideOutputBlocked
+        ? "BLOCKED"
+        : "OK",
+      guideOutput
+        ? {
+            questionCount:
+              guideOutput.questionCount,
+            oneQuestionRuleActive:
+              guideOutput
+                .oneQuestionRuleActive,
+            irreversibleWarningRequired:
+              guideOutput
+                .irreversibleWarningRequired,
+            irreversibleWarningPresent:
+              guideOutput
+                .irreversibleWarningPresent,
+            violations:
+              guideOutput.violations
+          }
+        : {
+            active: false
+          }
+    );
+
     const requiredReportKind:
       ReportBlueprintKind | null =
         execution.workflowPlan.id ===
@@ -857,6 +895,7 @@ export class SafeSessionExecutor implements SessionExecutor {
       corpusBlocked ||
       workflowResourcesBlocked ||
       workflowOutputBlocked ||
+      guideOutputBlocked ||
       reportBlueprintBlocked;
     audit.record(
       "gate",
@@ -868,6 +907,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         corpusBlocked,
         workflowResourcesBlocked,
         workflowOutputBlocked,
+        guideOutputBlocked,
         reportBlueprintBlocked
       }
     );
@@ -877,6 +917,7 @@ export class SafeSessionExecutor implements SessionExecutor {
       !corpusBlocked &&
       !workflowResourcesBlocked &&
       !workflowOutputBlocked &&
+      !guideOutputBlocked &&
       !reportBlueprintBlocked;
     audit.record(
       "gate",
@@ -963,6 +1004,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         result:
           workflowResourcesBlocked ||
           workflowOutputBlocked ||
+          guideOutputBlocked ||
           reportBlueprintBlocked ||
           finalization.result !== "PASS"
             ? "BLOCKED"
