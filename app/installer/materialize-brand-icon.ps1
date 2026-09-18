@@ -1,6 +1,6 @@
 param(
   [string]$SourceImagePath = (
-    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.jpg"
+    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.png"
   ),
   [string]$OutputIconPath = (
     Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$expectedSourceSha256 = "1cb02043e7ae64df0b2cb04270b7211bba8ab4238e5ca8bfad9c50fb2caadaf3"
+$expectedSourceSha256 = "0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
