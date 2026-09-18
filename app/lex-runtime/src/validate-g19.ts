@@ -214,9 +214,56 @@ class TemporalProvider implements ProviderAdapter {
         candidate.function.name ===
         "verify_legal_reference"
     );
-    if (!tool || !params.runTools) {
+    const readTool = params.tools?.find(
+      (candidate) =>
+        candidate.function.name ===
+        "read_legal_resource"
+    );
+    if (
+      !tool ||
+      !readTool ||
+      !params.runTools
+    ) {
       throw new Error(
-        "G19_VERIFICATION_TOOL_MISSING"
+        "G19_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              `g19-read-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G19_STATUTE_PREFLIGHT_READ_FAILED"
       );
     }
 
