@@ -334,6 +334,7 @@ Implemented in repo:
 
 - temporary development policy is explicitly enabled for application, skill and model-pack updates: signatures may be absent, but SHA-256, version/compatibility checks, structural validation, transactional activation, health checks and rollback remain mandatory;
 - receipts/markers expose the unsigned state (`UNSIGNED_ALLOWED`) so the relaxed trust posture is auditable and can be removed later without changing the transaction architecture;
+- the unsigned development path is explicitly tested: application updates require SHA-256 plus matching ProductVersion, skill/model index signatures may be omitted only when the manifest selects the temporary policy, malformed indices remain rejected, and separate injected `SIGNED_REQUIRED` tests continue to reject foreign/untrusted signers;
 - signed release workflows and verifiers remain in repo and are not deleted; switching back to `SIGNED_REQUIRED` is a policy/trust-root change rather than a redesign;
 - release-critical online/offline/skill-candidate workflows pin `checkout`, `setup-node` and `upload-artifact` to exact commit SHA;
 - Windows signing gate verifies that the CI PFX certificate thumbprint is already present in the committed application trust root; the signing secret cannot define its own trust root;
