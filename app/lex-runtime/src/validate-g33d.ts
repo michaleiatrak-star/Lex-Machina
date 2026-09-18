@@ -13,6 +13,13 @@ const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
+const tauriConfig = JSON.parse(
+  read("app/lex-desktop/src-tauri/tauri.conf.json")
+) as {
+  bundle?: {
+    resources?: unknown;
+  };
+};
 
 const checks = {
   realOnlineBootstrapJob:
@@ -55,7 +62,16 @@ const checks = {
   postInstallFailClosed:
     hooks.includes("windows-online-bootstrap.ps1") &&
     hooks.includes("--self-test") &&
-    hooks.includes("Abort")
+    hooks.includes("Abort"),
+  deterministicRuntimeResourceMapping:
+    Boolean(
+      tauriConfig.bundle?.resources &&
+      typeof tauriConfig.bundle.resources === "object" &&
+      !Array.isArray(tauriConfig.bundle.resources) &&
+      (
+        tauriConfig.bundle.resources as Record<string, unknown>
+      ).runtime === "runtime"
+    )
 };
 
 const pass = Object.values(checks).every(Boolean);
