@@ -11,5 +11,8 @@
   ],
   "localAiDelivery": "USER_INITIATED_AFTER_INSTALL",
   "signingPolicy": "RC_UNSIGNED_APPLICATION_UPDATES_REMAIN_FAIL_CLOSED",
-  "createdFor": "G39 installer release candidate"
+  "createdFor": "G39 installer release candidate",
+  "attempt": 2,
+  "retriggerReason": "INSTALLED_COPY_MAIN_BINARY_RESOLVED_FROM_TAURI_UNINSTALL_METADATA",
+  "previousFailedRun": 35341919871
 }
