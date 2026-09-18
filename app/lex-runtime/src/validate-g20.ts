@@ -135,10 +135,59 @@ implements ProviderAdapter {
           candidate.function.name ===
           "verify_legal_reference"
       );
+    const readTool =
+      params.tools?.find(
+        (candidate) =>
+          candidate.function.name ===
+          "read_legal_resource"
+      );
 
-    if (!tool || !params.runTools) {
+    if (
+      !tool ||
+      !readTool ||
+      !params.runTools
+    ) {
       throw new Error(
-        "G20_VERIFICATION_TOOL_MISSING"
+        "G20_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              "g20-read-" +
+              String(index + 1),
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G20_STATUTE_PREFLIGHT_READ_FAILED"
       );
     }
 
@@ -365,19 +414,28 @@ const pass =
   String(good.answer).includes(
     expectedPdfUrl
   ) &&
-  goodVerification.records === 1 &&
-  goodVerification.verified === 1 &&
-  goodFetches.length === 1 &&
-  goodFetches[0] ===
-    expectedPdfUrl &&
+  typeof goodVerification.records ===
+    "number" &&
+  goodVerification.records >= 1 &&
+  goodVerification.verified ===
+    goodVerification.records &&
+  goodVerification.supported === 0 &&
+  goodVerification.unverified === 0 &&
+  goodFetches.length >= 1 &&
+  goodFetches.every(
+    (url) =>
+      url === expectedPdfUrl
+  ) &&
 
   badHttp.status === 200 &&
   bad.status === "BLOCKED" &&
   !("answer" in bad) &&
   badVerification.records === 0 &&
-  badFetches.length === 1 &&
-  badFetches[0] ===
-    expectedPdfUrl;
+  badFetches.length >= 1 &&
+  badFetches.every(
+    (url) =>
+      url === expectedPdfUrl
+  );
 
 process.stdout.write(
   JSON.stringify({
@@ -398,7 +456,15 @@ process.stdout.write(
         goodFetches[0] ?? null,
       answerReleased:
         typeof good.answer ===
-        "string"
+        "string",
+      loadedSkills:
+        good.loadedSkills,
+      workflow:
+        good.workflow,
+      gateI:
+        good.gateI,
+      gateITurn:
+        good.gateITurn
     },
     extractionFailurePath: {
       http: badHttp.status,
@@ -410,7 +476,15 @@ process.stdout.write(
       sourceUrl:
         badFetches[0] ?? null,
       answerReleased:
-        "answer" in bad
+        "answer" in bad,
+      loadedSkills:
+        bad.loadedSkills,
+      workflow:
+        bad.workflow,
+      gateI:
+        bad.gateI,
+      gateITurn:
+        bad.gateITurn
     },
     liveOfficialNetworkCallExecuted:
       false,

@@ -11,6 +11,17 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[brand] Materialize canonical Lex Machina Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+$brandIcon = Join-Path $tauri "icons\\icon.ico"
+if (-not (Test-Path -LiteralPath $brandIcon -PathType Leaf)) {
+  throw "LEX_BRAND_ICON_MATERIALIZATION_FAILED"
+}
+
+Write-Host "[0/4] Installer state machine self-test"
+& (Join-Path $installer "installer-state-machine-selftest.ps1")
+if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
+
 Remove-Item $payload -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $payload -ItemType Directory | Out-Null
 
@@ -49,6 +60,12 @@ New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
+  "extract-offline-zip.ps1",
+  "app-update-transaction.ps1",
+  "app-update-verification.ps1",
+  "install-local-llm.ps1",
+  "get-install-state.ps1",
+  "installer-state-machine-selftest.ps1",
   "prefetch-release-models.py",
   "verify-python-package-set.py",
   "generate-component-lock.ps1",
@@ -76,6 +93,11 @@ foreach ($required in @(
   "release-requirements.txt",
   "bootstrap\windows-online-bootstrap.ps1",
   "bootstrap\windows-offline-bundle-install.ps1",
+  "bootstrap\app-update-transaction.ps1",
+  "bootstrap\install-local-llm.ps1",
+  "bootstrap\get-install-state.ps1",
+  "bootstrap\installer-state-machine-selftest.ps1",
+  "bootstrap\prefetch-release-models.py",
   "bootstrap\verify-python-package-set.py",
   "bootstrap\windows-payload-selftest.ps1",
   "bootstrap\windows-payload-python-selftest.py"

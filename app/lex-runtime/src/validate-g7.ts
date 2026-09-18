@@ -43,7 +43,7 @@ if (scanIssues.length || declarationIssues.length) {
   const results = [];
   for (const provider of ["openai", "anthropic", "xai"] as const) {
     const result = await engine.executePolishLegalQuery({
-      query: "Spór dotyczący wykonania umowy — test techniczny routingu bez analizy prawnej.",
+      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTest techniczny pionowego routingu domeny cywilnej bez uruchamiania wykonawczego workflow dokumentowego.',
       provider,
       model: `${provider}-g7-test`,
       route: {
@@ -68,6 +68,8 @@ if (scanIssues.length || declarationIssues.length) {
       skillReads.includes("prawo-polskie-v2") &&
       skillReads.includes("dr-02-prawo-cywilne-rodzinne-gospodarcze") &&
       routingMapRead?.status === "OK" &&
+      result.workflowPlan.id === "LEGAL_QUERY_V1" &&
+      result.workflowPlan.executionSkill === null &&
       result.events.at(-1)?.target === "G7_VERTICAL_SLICE";
 
     results.push({
@@ -75,6 +77,8 @@ if (scanIssues.length || declarationIssues.length) {
       pass,
       skillReads,
       routingMapRead: routingMapRead?.status ?? null,
+      workflow: result.workflowPlan.id,
+      executionSkill: result.workflowPlan.executionSkill,
       output: result.output
     });
   }

@@ -29,7 +29,11 @@ function skill(root: string, name: string): void {
   );
 }
 
-function fixture(): LexSkillRegistry {
+function fixture(
+  options: {
+    reports?: boolean;
+  } = {}
+): LexSkillRegistry {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "lex-session-"));
   roots.push(root);
 
@@ -57,6 +61,49 @@ function fixture(): LexSkillRegistry {
     path.join(root, "prawo-polskie-v2", "ROUTING-MAP.md"),
     DR + "\n"
   );
+
+  if (options.reports) {
+    skill(
+      root,
+      "shared"
+    );
+    skill(
+      root,
+      "raport-klienta-v1"
+    );
+    fs.writeFileSync(
+      path.join(
+        root,
+        "shared",
+        "SELF-CHECK-ANTY-FASADA.md"
+      ),
+      "# self check\n"
+    );
+    const reportDir =
+      path.join(
+        root,
+        "raport-klienta-v1",
+        "references"
+      );
+    fs.mkdirSync(
+      reportDir,
+      { recursive: true }
+    );
+    fs.writeFileSync(
+      path.join(
+        reportDir,
+        "jezyk-klienta.md"
+      ),
+      "# jezyk klienta\n"
+    );
+    fs.writeFileSync(
+      path.join(
+        reportDir,
+        "BLUEPRINT-SCHEMA.md"
+      ),
+      "# blueprint schema\n"
+    );
+  }
 
   const registry = new LexSkillRegistry(root);
   registry.scan();
@@ -95,6 +142,256 @@ describe("SafeSessionExecutor", () => {
       closed: true
     });
   });
+
+  it(
+    "blocks CLIENT_REPORT_V1 when the provider omits the structured blueprint",
+    async () => {
+      const adapter:
+        ProviderAdapter = {
+          id: "openai",
+          label:
+            "report-no-blueprint",
+          capabilities: {
+            streaming: true,
+            tools: true,
+            reasoning: true,
+            modelDiscovery: false
+          },
+          async stream(params) {
+            await params.runTools?.([
+              {
+                id: "r1",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill: "shared",
+                  path:
+                    "shared/PRAWO-HARDGATE.md"
+                }
+              },
+              {
+                id: "r2",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill: "shared",
+                  path:
+                    "shared/SELF-CHECK-ANTY-FASADA.md"
+                }
+              },
+              {
+                id: "r3",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill:
+                    "raport-klienta-v1",
+                  path:
+                    "references/jezyk-klienta.md"
+                }
+              },
+              {
+                id: "r4",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill:
+                    "raport-klienta-v1",
+                  path:
+                    "references/BLUEPRINT-SCHEMA.md"
+                }
+              }
+            ]);
+            return {
+              fullText:
+                "Raport dla klienta przygotowany bez twierdzeń o prawie."
+            };
+          }
+        };
+
+      const providers =
+        new ProviderRegistry();
+      providers.register(
+        adapter
+      );
+      const executor =
+        new SafeSessionExecutor(
+          fixture({
+            reports: true
+          }),
+          new ProviderGateway(
+            providers
+          )
+        );
+
+      const result =
+        await executor.execute({
+          query:
+            '__LEX_SKILLS_V1__{"auto":false,"manual":["raport-klienta-v1"]}\nPrzygotuj raport dla klienta.',
+          provider: "openai",
+          model: "test",
+          primarySkill: DR,
+          mode: "PRAWNIK"
+        });
+
+      expect(
+        result.workflow?.id
+      ).toBe(
+        "CLIENT_REPORT_V1"
+      );
+      expect(result.status)
+        .toBe("BLOCKED");
+      expect(
+        result.reportBlueprint
+      ).toBeUndefined();
+    }
+  );
+
+  it(
+    "presents CLIENT_REPORT_V1 only after an accepted structured blueprint",
+    async () => {
+      const adapter:
+        ProviderAdapter = {
+          id: "openai",
+          label:
+            "report-with-blueprint",
+          capabilities: {
+            streaming: true,
+            tools: true,
+            reasoning: true,
+            modelDiscovery: false
+          },
+          async stream(params) {
+            await params.runTools?.([
+              {
+                id: "r1",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill: "shared",
+                  path:
+                    "shared/PRAWO-HARDGATE.md"
+                }
+              },
+              {
+                id: "r2",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill: "shared",
+                  path:
+                    "shared/SELF-CHECK-ANTY-FASADA.md"
+                }
+              },
+              {
+                id: "r3",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill:
+                    "raport-klienta-v1",
+                  path:
+                    "references/jezyk-klienta.md"
+                }
+              },
+              {
+                id: "r4",
+                name:
+                  "read_legal_resource",
+                input: {
+                  skill:
+                    "raport-klienta-v1",
+                  path:
+                    "references/BLUEPRINT-SCHEMA.md"
+                }
+              },
+              {
+                id: "b1",
+                name:
+                  "submit_report_blueprint",
+                input: {
+                  reportType:
+                    "CLIENT_REPORT_V1",
+                  blueprint: {
+                    profile: "IND",
+                    tryb:
+                      "standard",
+                    kancelaria:
+                      null,
+                    klient:
+                      "Klient A",
+                    prawnik:
+                      null,
+                    sprawa:
+                      "Sprawa testowa.",
+                    etap:
+                      "I instancja",
+                    kontekst:
+                      "Brak nowych zdarzeń.",
+                    ocena: {
+                      opis:
+                        "Pozycja stabilna.",
+                      podstawa:
+                        "Dostarczone dokumenty."
+                    },
+                    assessment: {
+                      level:
+                        "neutral"
+                    },
+                    potwierdzenie_odbioru:
+                      null
+                  }
+                }
+              }
+            ]);
+            return {
+              fullText:
+                "Raport dla klienta przygotowany bez twierdzeń o prawie."
+            };
+          }
+        };
+
+      const providers =
+        new ProviderRegistry();
+      providers.register(
+        adapter
+      );
+      const executor =
+        new SafeSessionExecutor(
+          fixture({
+            reports: true
+          }),
+          new ProviderGateway(
+            providers
+          )
+        );
+
+      const result =
+        await executor.execute({
+          query:
+            '__LEX_SKILLS_V1__{"auto":false,"manual":["raport-klienta-v1"]}\nPrzygotuj raport dla klienta.',
+          provider: "openai",
+          model: "test",
+          primarySkill: DR,
+          mode: "PRAWNIK"
+        });
+
+      expect(result.status)
+        .toBe(
+          "DRAFT_PRESENTABLE"
+        );
+      expect(
+        result.reportBlueprint
+          ?.kind
+      ).toBe(
+        "CLIENT_REPORT_V1"
+      );
+      expect(
+        result.reportBlueprint
+          ?.policy.result
+      ).toBe("PASS");
+    }
+  );
 
   it("sends finalized protected chunks as untrusted document context", async () => {
     let captured:

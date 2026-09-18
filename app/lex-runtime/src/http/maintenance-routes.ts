@@ -3,7 +3,10 @@ import {
   AuthError,
   type AuthService
 } from "../auth/service.js";
-import type { LocalModelRuntime } from "../local-model-runtime.js";
+import type {
+  LocalBackendPreference,
+  LocalModelRuntime
+} from "../local-model-runtime.js";
 import type { MaintenanceService } from "../maintenance-service.js";
 
 function authenticated(
@@ -51,15 +54,20 @@ function sendMaintenanceError(
     ? error.message.split(":", 1)[0]!
     : "MAINTENANCE_FAILED";
   const status =
-    code.includes("NOT_AVAILABLE")
+    code.includes("IN_PROGRESS")
       ? 409
-      : code.includes("UNKNOWN")
-        ? 404
-        : code.includes("MISSING") ||
-            code.includes("NOT_VERIFIED") ||
-            code.includes("VALIDATION")
-          ? 503
-          : 500;
+      : code.includes("NOT_AVAILABLE") ||
+          code.includes("UNSUPPORTED") ||
+          code.includes("INVALID")
+        ? 409
+        : code.includes("UNKNOWN")
+          ? 404
+          : code.includes("MISSING") ||
+              code.includes("NOT_VERIFIED") ||
+              code.includes("VALIDATION") ||
+              code.includes("PROVISIONING_FAILED")
+            ? 503
+            : 500;
   res.status(status).json({ error: code });
 }
 
@@ -95,6 +103,165 @@ export function registerMaintenanceRoutes(
           return;
         }
         throw error;
+      }
+    }
+  );
+
+  app.post(
+    "/api/local-models/provision",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const modelId =
+          typeof req.body?.modelId === "string"
+            ? req.body.modelId.trim()
+            : "";
+        const contextTokens = Number(req.body?.contextTokens);
+        if (!modelId) {
+          res.status(400).json({ error: "LOCAL_MODEL_ID_REQUIRED" });
+          return;
+        }
+        if (!Number.isInteger(contextTokens)) {
+          res.status(400).json({ error: "LOCAL_MODEL_CONTEXT_INVALID" });
+          return;
+        }
+
+        const runtimeBefore =
+          localModels.status();
+        const rawBackend =
+          typeof req.body
+            ?.backendPreference ===
+            "string"
+            ? req.body
+                .backendPreference
+                .trim()
+            : "";
+        const backendPreference =
+          (
+            rawBackend ||
+            runtimeBefore
+              .hardware
+              .backendSelectionMode ||
+            runtimeBefore
+              .backendPolicy
+              .default
+          ) as
+            LocalBackendPreference;
+        if (
+          !runtimeBefore
+            .backendPolicy
+            .allowed
+            .includes(
+              backendPreference
+            )
+        ) {
+          res.status(400).json({
+            error:
+              "LOCAL_MODEL_BACKEND_INVALID"
+          });
+          return;
+        }
+
+        const sameModel =
+          localModels
+            .configuredModelId() ===
+            modelId;
+        const sameBackendMode =
+          runtimeBefore
+            .hardware
+            .backendSelectionMode ===
+            backendPreference;
+
+        const provisioned =
+          sameModel &&
+          sameBackendMode
+            ? await localModels
+                .reconfigureContext(
+                  modelId,
+                  contextTokens
+                )
+            : await localModels
+                .provision(
+                  modelId,
+                  contextTokens,
+                  undefined,
+                  backendPreference
+                );
+        res.json({
+          ...provisioned,
+          runtime: localModels.status()
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/local-models/repair",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const repaired =
+          localModels
+            .requiresModelPackRepair()
+            ? await (async () => {
+                const installed =
+                  localModels
+                    .installedModelUpdateIdentity();
+                if (!installed) {
+                  throw new Error(
+                    "MODEL_PACK_REPAIR_MODEL_NOT_INSTALLED"
+                  );
+                }
+                const target =
+                  await maintenance
+                    .verifiedModelPackTarget(
+                      installed.modelId
+                    );
+                return await localModels
+                  .applyVerifiedModelPack({
+                    target,
+                    contextTokens:
+                      installed
+                        .contextTokens,
+                    force: true
+                  });
+              })()
+            : await localModels
+                .repair();
+        res.json({
+          ...repaired,
+          runtime: localModels.status()
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/local-models/remove",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const modelId =
+          typeof req.body?.modelId === "string"
+            ? req.body.modelId.trim()
+            : "";
+        if (!modelId) {
+          res.status(400).json({
+            error: "LOCAL_MODEL_ID_REQUIRED"
+          });
+          return;
+        }
+        const removed = await localModels.remove(modelId);
+        res.json({
+          ...removed,
+          runtime: localModels.status()
+        });
+      } catch (error) {
+        sendMaintenanceError(res, error);
       }
     }
   );
@@ -141,6 +308,130 @@ export function registerMaintenanceRoutes(
           });
           return;
         }
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/local-models/update/status",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const requestedModelId =
+          typeof req.query.modelId === "string"
+            ? req.query.modelId.trim()
+            : "";
+        const installed =
+          localModels.installedModelUpdateIdentity(
+            requestedModelId || undefined
+          );
+        res.json(
+          await maintenance.modelPackStatus(
+            installed
+              ? {
+                  modelId:
+                    installed.modelId,
+                  sha256:
+                    installed.sha256,
+                  ...(installed.packVersion
+                    ? {
+                        packVersion:
+                          installed.packVersion
+                      }
+                    : {})
+                }
+              : null
+          )
+        );
+      } catch (error) {
+        sendMaintenanceError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/local-models/update/apply",
+    async (req, res) => {
+      if (!requireAdmin(req, res, authService)) return;
+      try {
+        const requestedModelId =
+          typeof req.body?.modelId ===
+            "string"
+            ? req.body.modelId.trim()
+            : "";
+        const installed =
+          localModels.installedModelUpdateIdentity(
+            requestedModelId || undefined
+          );
+        if (!installed) {
+          throw new Error(
+            "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
+          );
+        }
+
+        const runtimeBefore =
+          localModels.status();
+        const requestedContext =
+          Number(req.body?.contextTokens);
+        const contextTokens =
+          Number.isInteger(requestedContext)
+            ? requestedContext
+            : installed.contextTokens;
+        const rawBackend =
+          typeof req.body?.backendPreference ===
+            "string"
+            ? req.body.backendPreference.trim()
+            : "";
+        const backendPreference =
+          (
+            rawBackend ||
+            runtimeBefore.hardware
+              .backendSelectionMode ||
+            runtimeBefore.backendPolicy
+              .default
+          ) as LocalBackendPreference;
+        if (
+          !runtimeBefore.backendPolicy.allowed
+            .includes(backendPreference)
+        ) {
+          res.status(400).json({
+            error:
+              "LOCAL_MODEL_BACKEND_INVALID"
+          });
+          return;
+        }
+
+        const target =
+          await maintenance
+            .verifiedModelPackTarget(
+              installed.modelId
+            );
+        const result =
+          await localModels
+            .applyVerifiedModelPack({
+              target,
+              contextTokens,
+              backendPreference
+            });
+        res.json({
+          ...result,
+          runtime:
+            localModels.status(),
+          update:
+            await maintenance
+              .modelPackStatus({
+                modelId:
+                  installed.modelId,
+                sha256:
+                  result.receipt
+                    .modelSha256,
+                packVersion:
+                  result.receipt
+                    .packVersion
+              })
+        });
+      } catch (error) {
         sendMaintenanceError(res, error);
       }
     }

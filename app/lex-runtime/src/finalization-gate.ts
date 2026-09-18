@@ -17,6 +17,7 @@ export type FinalizationFinding = {
     | "UNVERIFIED_MARKED"
     | "MISSING_LEDGER_RECORD"
     | "MISSING_VERIFICATION_MARKER"
+    | "VERIFICATION_MARKER_MISMATCH"
     | "UNVERIFIED_NOT_MARKED";
   record?: VerificationRecord;
 };
@@ -56,11 +57,36 @@ export type FinalizationReport = {
 };
 
 const VERIFIED_MARKER = /✅\s*\[VER:/iu;
+const VERIFIED_MARKER_TOKEN =
+  /✅\s*\[VER:[^\]\r\n]+\]/giu;
 const UNVERIFIED_MARKER = /⚠️?\s*\[NIEWERYFIKOWANE\]/iu;
 const CASE_QUOTE_MARKER =
   /✅\s*\[CASE-QUOTE:([a-f0-9]{20})\]/giu;
 const CASE_SUPPORT_MARKER =
   /🔗\s*\[CASE-SUPPORT:([a-f0-9]{20})\]/giu;
+
+function expectedVerificationMarker(
+  record: VerificationRecord
+): string | null {
+  if (
+    record.status !== "VERIFIED" ||
+    !record.sourceUrl?.trim() ||
+    !record.fetchedAt?.trim()
+  ) {
+    return null;
+  }
+
+  return [
+    "✅ [VER: ",
+    record.sourceUrl,
+    ", ",
+    record.fetchedAt.slice(0, 10),
+    record.asOf
+      ? `, STAN NA ${record.asOf}`
+      : "",
+    "]"
+  ].join("");
+}
 
 const ARTICLE_PATTERN =
   /\bart\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?:\s*§\s*\d+[a-zA-Z]*)?(?:\s+(?:KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP))?/giu;
@@ -122,6 +148,50 @@ export class FinalizationGate {
     const caseSupportFindings: CaseSupportFinding[] = [];
 
     for (const reference of references) {
+      const lineMarkers:
+        string[] =
+          reference.lineText.match(
+            VERIFIED_MARKER_TOKEN
+          ) ?? [];
+      const allowedLineMarkers =
+        new Set<string>(
+          references
+            .filter(
+              (candidate) =>
+                candidate.line ===
+                  reference.line
+            )
+            .map(
+              (candidate) =>
+                ledger.latest(
+                  candidate.claim
+                )
+            )
+            .filter(
+              (
+                candidate
+              ): candidate is VerificationRecord =>
+                candidate?.status ===
+                  "VERIFIED"
+            )
+            .map(
+              expectedVerificationMarker
+            )
+            .filter(
+              (
+                marker
+              ): marker is string =>
+                Boolean(marker)
+            )
+        );
+      const unexpectedLineMarker =
+        lineMarkers.some(
+          (marker) =>
+            !allowedLineMarkers.has(
+              marker
+            )
+        );
+
       const record = ledger.latest(reference.claim);
       if (!record) {
         findings.push({
@@ -132,10 +202,28 @@ export class FinalizationGate {
       }
 
       if (record.status === "VERIFIED") {
+        const expectedMarker =
+          expectedVerificationMarker(
+            record
+          );
+
         if (!VERIFIED_MARKER.test(reference.lineText)) {
           findings.push({
             reference,
             status: "MISSING_VERIFICATION_MARKER",
+            record
+          });
+        } else if (
+          !expectedMarker ||
+          !lineMarkers.includes(
+            expectedMarker
+          ) ||
+          unexpectedLineMarker
+        ) {
+          findings.push({
+            reference,
+            status:
+              "VERIFICATION_MARKER_MISMATCH",
             record
           });
         } else {
@@ -360,6 +448,7 @@ export class FinalizationGate {
       [
         "MISSING_LEDGER_RECORD",
         "MISSING_VERIFICATION_MARKER",
+        "VERIFICATION_MARKER_MISMATCH",
         "UNVERIFIED_NOT_MARKED"
       ].includes(finding.status)
     ) ||

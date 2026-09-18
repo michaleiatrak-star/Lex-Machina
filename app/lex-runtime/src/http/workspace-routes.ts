@@ -27,6 +27,30 @@ import type {
   EncryptedCaseWorkspaceStore,
   WorkspaceThreadMessage
 } from "../case-workspace-store.js";
+import {
+  PROCESS_PLEADING_CHECKPOINTS,
+  acceptProcessPleadingStart,
+  confirmProcessCheckpoint,
+  createProcessPleadingState,
+  markProcessCheckpointNotApplicable,
+  type ProcessPleadingCheckpoint,
+  type ProcessPleadingMode
+} from "../process-pleading-state.js";
+import {
+  createCourtAnalysisState
+} from "../court-analysis-state.js";
+import {
+  createChronologyState
+} from "../chronology-state.js";
+import {
+  createContractAnalysisState,
+  type ContractWorkflowMode
+} from "../contract-analysis-state.js";
+import {
+  createOrderedCaseWorkflowState,
+  nextOrderedCaseCheckpoint,
+  type OrderedCaseWorkflowId
+} from "../ordered-case-workflow-state.js";
 
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
@@ -64,7 +88,18 @@ function sendError(res: Response, error: unknown): void {
   }
   if (
     code === "CASE_ARCHIVED" ||
-    code === "WORKSPACE_FOLDER_NOT_EMPTY"
+    code === "WORKSPACE_FOLDER_NOT_EMPTY" ||
+    code === "PROCESS_PLEADING_STATE_EXISTS" ||
+    code === "PROCESS_PLEADING_STATE_CONFLICT" ||
+    code === "COURT_ANALYSIS_STATE_EXISTS" ||
+    code === "COURT_ANALYSIS_STATE_CONFLICT" ||
+    code === "ORDERED_WORKFLOW_STATE_CONFLICT" ||
+    code === "CHRONOLOGY_STATE_EXISTS" ||
+    code === "CHRONOLOGY_STATE_CONFLICT" ||
+    code === "CONTRACT_STATE_EXISTS" ||
+    code === "CONTRACT_STATE_CONFLICT" ||
+    code.includes("PROCESS_PLEADING_CONFIRMATION") ||
+    code.includes("PROCESS_PLEADING_START_TRANSITION")
   ) {
     res.status(409).json({ error: code });
     return;
@@ -72,7 +107,8 @@ function sendError(res: Response, error: unknown): void {
   if (
     code.includes("INVALID") ||
     code.includes("TOO_LARGE") ||
-    code.includes("LIMIT_EXCEEDED")
+    code.includes("LIMIT_EXCEEDED") ||
+    code.includes("TRANSITION")
   ) {
     res.status(422).json({ error: code });
     return;
@@ -219,6 +255,1263 @@ export function registerWorkspaceRoutes(
       sendError(res, error);
     }
   });
+
+  app.get(
+    "/api/cases/:caseId/workflow/process-pleading",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const mode: ProcessPleadingMode =
+          req.body?.mode === "AUTO"
+            ? "AUTO"
+            : "CHECKPOINT";
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createProcessPleadingState(
+                        caseId,
+                        mode
+                      )
+                  });
+              }
+            );
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/accept-start",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                const next =
+                  acceptProcessPleadingStart(
+                    current
+                  );
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/confirm",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const checkpoint =
+          typeof req.body?.checkpoint ===
+            "string"
+            ? req.body.checkpoint.trim()
+            : "";
+        if (
+          !PROCESS_PLEADING_CHECKPOINTS
+            .includes(
+              checkpoint as
+                ProcessPleadingCheckpoint
+            )
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_CHECKPOINT_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies
+                    .workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                const next =
+                  confirmProcessCheckpoint(
+                    current,
+                    checkpoint as
+                      ProcessPleadingCheckpoint
+                  );
+                return await dependencies
+                  .workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/not-applicable",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const checkpoint =
+          typeof req.body?.checkpoint === "string"
+            ? req.body.checkpoint.trim()
+            : "";
+        const reason =
+          typeof req.body?.reason === "string"
+            ? req.body.reason
+            : "";
+        const expectedRevision =
+          Number(req.body?.expectedRevision);
+
+        if (
+          !PROCESS_PLEADING_CHECKPOINTS.includes(
+            checkpoint as ProcessPleadingCheckpoint
+          ) ||
+          !Number.isSafeInteger(expectedRevision) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_NA_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService.assertAccess(
+          actor,
+          caseId,
+          "WRITE"
+        );
+        const caseView =
+          dependencies.caseAccessService.openCase(
+            actor,
+            caseId
+          );
+
+        const state =
+          await dependencies.caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const current =
+                  await dependencies.workspace
+                    .getProcessPleadingState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_NOT_FOUND"
+                  );
+                }
+                if (
+                  current.revision !==
+                    expectedRevision
+                ) {
+                  throw new Error(
+                    "PROCESS_PLEADING_STATE_CONFLICT"
+                  );
+                }
+                const next =
+                  markProcessCheckpointNotApplicable(
+                    current,
+                    checkpoint as
+                      ProcessPleadingCheckpoint,
+                    reason
+                  );
+                return await dependencies.workspace
+                  .saveProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state: next,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+
+        res.json({ caseId, state });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/process-pleading/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(req.body?.expectedRevision);
+        const confirmation =
+          typeof req.body?.confirmation === "string"
+            ? req.body.confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_PROCESS_PLEADING" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "PROCESS_PLEADING_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService.assertAccess(
+          actor,
+          caseId,
+          "WRITE"
+        );
+        const caseView =
+          dependencies.caseAccessService.openCase(
+            actor,
+            caseId
+          );
+        const cleared =
+          await dependencies.caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearProcessPleadingState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "PROCESS_PLEADING_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/court-analysis",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getCourtAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/court-analysis/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getCourtAnalysisState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "COURT_ANALYSIS_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveCourtAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createCourtAnalysisState(
+                        caseId
+                      )
+                  });
+              }
+            );
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/court-analysis/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_COURT_ANALYSIS" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "COURT_ANALYSIS_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearCourtAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "COURT_ANALYSIS_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/chronology",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/chronology/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getChronologyState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "CHRONOLOGY_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createChronologyState(
+                        caseId
+                      )
+                  });
+              }
+            );
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/chronology/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_CHRONOLOGY" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "CHRONOLOGY_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "CHRONOLOGY_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/contract-analysis",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getContractAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/contract-analysis/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const rawMode =
+          typeof req.body?.mode ===
+            "string"
+            ? req.body.mode
+                .trim()
+                .toUpperCase()
+            : "";
+        if (
+          ![
+            "ANALYSIS",
+            "REDACTION",
+            "DRAFT",
+            "SUPPLEMENT"
+          ].includes(rawMode)
+        ) {
+          throw new Error(
+            "CONTRACT_MODE_INVALID"
+          );
+        }
+        const mode =
+          rawMode as
+            ContractWorkflowMode;
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getContractAnalysisState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "CONTRACT_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveContractAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createContractAnalysisState(
+                        caseId,
+                        mode
+                      )
+                  });
+              }
+            );
+
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/contract-analysis/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_CONTRACT_ANALYSIS" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "CONTRACT_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearContractAnalysisState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "CONTRACT_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/ordered/:workflowId",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          )
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_ID_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "ANALYZE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "ANALYZE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          workflowId,
+          state,
+          nextCheckpoint:
+            state
+              ? nextOrderedCaseCheckpoint(
+                  state
+                )
+              : null
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/ordered/:workflowId/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          )
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_ID_INVALID"
+          );
+        }
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getOrderedCaseWorkflowState({
+                      caseId,
+                      workflowId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  return existing;
+                }
+                return await dependencies
+                  .workspace
+                  .saveOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createOrderedCaseWorkflowState(
+                        workflowId,
+                        caseId
+                      )
+                  });
+              }
+            );
+        res.json({
+          caseId,
+          workflowId,
+          state,
+          nextCheckpoint:
+            nextOrderedCaseCheckpoint(
+              state
+            )
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/ordered/:workflowId/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const workflowId =
+          String(
+            req.params.workflowId ?? ""
+          ).trim() as
+            OrderedCaseWorkflowId;
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+        if (
+          ![
+            "EVIDENCE_ANALYSIS_V1",
+            "WITNESS_QUESTIONING_V1"
+          ].includes(
+            workflowId
+          ) ||
+          confirmation !==
+            "RESET_ORDERED_WORKFLOW" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "ORDERED_WORKFLOW_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearOrderedCaseWorkflowState({
+                    caseId,
+                    workflowId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+        if (!cleared) {
+          throw new Error(
+            "ORDERED_WORKFLOW_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          workflowId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
 
   app.post("/api/cases/:caseId/workspace/folders", async (req, res) => {
     try {

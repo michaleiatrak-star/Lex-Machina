@@ -13,6 +13,13 @@ const selftest = read("app/installer/windows-payload-selftest.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
+const tauriConfig = JSON.parse(
+  read("app/lex-desktop/src-tauri/tauri.conf.json")
+) as {
+  bundle?: {
+    resources?: unknown;
+  };
+};
 
 const checks = {
   realOnlineBootstrapJob:
@@ -52,10 +59,28 @@ const checks = {
     packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
+  windowsPathAndPrerequisiteRegression:
+    acceptance.includes("Lex Machina Installed ") &&
+    workflow.includes("LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME") &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') >= 0 &&
+    bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') <
+      bootstrap.indexOf('Write-Host "[3/6] Private Python"'),
   postInstallFailClosed:
     hooks.includes("windows-online-bootstrap.ps1") &&
     hooks.includes("--self-test") &&
-    hooks.includes("Abort")
+    hooks.includes("Abort"),
+  deterministicRuntimeResourceMapping:
+    tauriConfig.bundle?.resources === undefined &&
+    hooks.includes('SetOutPath "$INSTDIR\\runtime"') &&
+    hooks.includes(
+      'File /r "${LEX_HOOK_FILE_DIR}\\..\\runtime\\*"'
+    ) &&
+    hooks.includes(
+      'IfFileExists "$INSTDIR\\runtime\\app\\dist\\http\\server.js"'
+    ) &&
+    hooks.includes(
+      'RMDir /r "$INSTDIR\\runtime\\app"'
+    )
 };
 
 const pass = Object.values(checks).every(Boolean);
@@ -63,6 +88,7 @@ console.log(JSON.stringify({
   gate: "G33D_INSTALLER_BOOTSTRAP_SELFTEST_ACCEPTANCE",
   result: pass ? "PASS" : "BLOCKED",
   checks,
-  expectedUserActionAfterInstall: "PROVIDER_API_KEY_ONLY"
+  expectedUserActionAfterInstall:
+    "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 }, null, 2));
 if (!pass) process.exitCode = 1;

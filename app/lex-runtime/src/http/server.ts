@@ -23,9 +23,9 @@ import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
 import {
-  installedSkillOverlayRoot,
-  installedSkillOverlayVersion,
-  MaintenanceService
+  MaintenanceService,
+  commitSkillOverlayRuntimeHealth,
+  recoverSkillOverlayForStartup
 } from "../maintenance-service.js";
 import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
@@ -100,6 +100,9 @@ import {
 import {
   LocalSupportService
 } from "../support-service.js";
+import {
+  GuideSessionStateStore
+} from "../guide-session-state.js";
 
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4317;
@@ -200,22 +203,45 @@ function loopbackOriginGuard(
   });
 }
 
+export function bundledRuntimeRoot(): string {
+  const here =
+    path.dirname(
+      fileURLToPath(
+        import.meta.url
+      )
+    );
+  const repositoryRoot =
+    path.resolve(
+      here,
+      "../../../.."
+    );
+  return path.resolve(
+    path.join(
+      repositoryRoot,
+      "Wersja rozwojowa rozpakowana"
+    )
+  );
+}
+
 export function resolveRuntimeRoot(): string {
   const explicitlyConfigured =
-    process.env.LEX_SKILLS_PATH?.trim();
+    process.env
+      .LEX_SKILLS_PATH
+      ?.trim();
   if (explicitlyConfigured) {
-    return path.resolve(explicitlyConfigured);
+    return path.resolve(
+      explicitlyConfigured
+    );
   }
 
-  if (installedSkillOverlayVersion()) {
-    return installedSkillOverlayRoot();
-  }
-
-  const here = path.dirname(fileURLToPath(import.meta.url));
-  const repositoryRoot = path.resolve(here, "../../../..");
-  return path.resolve(
-    path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
-  );
+  const bundled =
+    bundledRuntimeRoot();
+  const recovered =
+    recoverSkillOverlayForStartup(
+      bundled
+    );
+  return recovered.root ??
+    bundled;
 }
 
 export async function startLocalServer(options?: {
@@ -234,7 +260,12 @@ export async function startLocalServer(options?: {
 
   assertLoopbackHost(host);
 
-  const registry = new LexSkillRegistry(resolveRuntimeRoot());
+  const runtimeRoot =
+    resolveRuntimeRoot();
+  const registry =
+    new LexSkillRegistry(
+      runtimeRoot
+    );
   const issues = [...registry.scan(), ...registry.validateDeclarations()];
   if (issues.length > 0) {
     throw new Error(
@@ -315,6 +346,16 @@ export async function startLocalServer(options?: {
     new LocalAuthService(
       authStore
     );
+  const guideSessionStore =
+    new GuideSessionStateStore();
+  const unsubscribeGuideRevocation =
+    authService.onSessionRevoked(
+      (event) => {
+        guideSessionStore.revoke(
+          event.sessionId
+        );
+      }
+    );
   const supportService =
     new LocalSupportService({
       installationId:
@@ -375,6 +416,12 @@ export async function startLocalServer(options?: {
     localModels
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  const modelCatalog =
+    new DynamicModelCatalog(
+      credentials,
+      undefined,
+      localModels
+    );
 
   const legalSourceVerifier =
     new OfficialLegalSourceVerifier(
@@ -394,7 +441,8 @@ export async function startLocalServer(options?: {
           legalSourceVerifier,
           undefined,
           new TemporalSourceFreshnessChecker()
-        )
+        ),
+      new LocalStanzaNamedEntityRecognizer()
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(
@@ -419,10 +467,22 @@ export async function startLocalServer(options?: {
 
   const coreApp = createLexHttpApp({
     registry,
-    modelCatalog: new DynamicModelCatalog(credentials),
+    modelCatalog,
     credentialResolver: credentials,
     credentialManager: credentials,
     updateDiscovery,
+    guideSessionStore,
+    processWorkflowStore:
+      workspaceStore,
+    courtAnalysisWorkflowStore:
+      workspaceStore,
+    chronologyWorkflowStore:
+      workspaceStore,
+    contractWorkflowStore:
+      workspaceStore,
+    orderedCaseWorkflowStore:
+      workspaceStore,
+    documentGenerationState,
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
@@ -488,6 +548,23 @@ export async function startLocalServer(options?: {
     const server = app.listen(port, host);
     server.once("error", reject);
     server.once("listening", () => {
+      try {
+        commitSkillOverlayRuntimeHealth(
+          runtimeRoot
+        );
+      } catch (error) {
+        server.close(() => {
+          reject(
+            error instanceof Error
+              ? error
+              : new Error(
+                  String(error)
+                )
+          );
+        });
+        return;
+      }
+
       const address = server.address();
       const actualPort =
         typeof address === "object" && address
@@ -503,6 +580,8 @@ export async function startLocalServer(options?: {
               void localModels.stop();
               credentials.close();
               supportService.close();
+              unsubscribeGuideRevocation();
+              guideSessionStore.clear();
               authService.close();
               if (error) closeReject(error);
               else closeResolve();

@@ -14,6 +14,12 @@ const STOP_WORDS = new Set([
   "this", "with"
 ]);
 
+const EXECUTION_SKILL_NAME_OVERRIDES =
+  new Set([
+    "przesluchanie-swiadkow-v2-min90",
+    "raport-klienta-v1"
+  ]);
+
 export type SkillSelectionEnvelope = {
   query: string;
   automatic: boolean;
@@ -24,6 +30,7 @@ export type ResolvedSkillSelection = {
   additionalSkills: string[];
   loadedSkills: string[];
   executionSkills: string[];
+  workflowExecutionSkill: string | null;
   domainSkills: string[];
 };
 
@@ -31,7 +38,8 @@ function normalize(value: string): string {
   return value
     .normalize("NFKD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+    .toLowerCase()
+    .replaceAll("ł", "l");
 }
 
 function tokens(value: string): Set<string> {
@@ -92,6 +100,187 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
   }
 }
 
+type ExplicitExecutionRule = {
+  skill: string;
+  patterns: RegExp[];
+};
+
+const EXPLICIT_EXECUTION_RULES: readonly ExplicitExecutionRule[] = [
+  {
+    skill: "pisma-procesowe-v3",
+    patterns: [
+      /\bpozew\b/,
+      /\bapelacj[a-z]*\b/,
+      /\bzazalen[a-z]*\b/,
+      /\bodpowiedz na pozew\b/,
+      /\bpismo procesow[a-z]*\b/,
+      /\bpismo wielowatk[a-z]*\b/,
+      /\bskarga kasacyjn[a-z]*\b/
+    ]
+  },
+  {
+    skill: "pisma-proste-v2",
+    patterns: [
+      /\bsprzeciw od nakazu\b/,
+      /\bklauzul[a-z]* wykonalnosci\b/,
+      /\bprzywrocen[a-z]* terminu\b/,
+      /\bwglad do akt\b/,
+      /\bwniosek o uzasadnienie\b/,
+      /\bwezwanie do zaplaty\b/,
+      /\bostateczne wezwanie\b/
+    ]
+  },
+  {
+    skill: "analizator-umow-v1",
+    patterns: [
+      /\bumow[a-z]*\b/,
+      /\bowu\b/,
+      /\bkontrakt[a-z]*\b/,
+      /\bugod[a-z]*\b/,
+      /\bregulamin[a-z]*\b/,
+      /\btestament[a-z]*\b/,
+      /\bklauzul[a-z]*\b/
+    ]
+  },
+  {
+    skill: "chronologia-sprawy-v1",
+    patterns: [
+      /\bchronologi[a-z]*\b/,
+      /\bos czasu\b/,
+      /\btimeline\b/,
+      /\bkolejnosc zdarzen\b/
+    ]
+  },
+  {
+    skill: "raport-klienta-v1",
+    patterns: [
+      /\braport dla klient[a-z]*\b/,
+      /\bpodsumowani[a-z]* dla klient[a-z]*\b/,
+      /\bstatus dla klient[a-z]*\b/
+    ]
+  },
+  {
+    skill: "raport-sytuacyjny-v2",
+    patterns: [
+      /\braport sytuacyjn[a-z]*\b/,
+      /\bwidok sytuacji\b/,
+      /\bstatus sprawy z ryzykami\b/
+    ]
+  },
+  {
+    skill: "analiza-sadowa-v6",
+    patterns: [
+      /\bjakie mam szanse\b/,
+      /\banaliza pozycji\b/,
+      /\bpismo przeciwnika\b/,
+      /\bwyrok[a-z]*\b/,
+      /\bnakaz zaplaty\b/
+    ]
+  },
+  {
+    skill: "orzeczenia-sadowe-v2",
+    patterns: [
+      /\bznajdz wyrok\b/,
+      /\bprecedens[a-z]*\b/,
+      /\blinia orzecznicz[a-z]*\b/,
+      /\bweryfikacj[a-z]* sygnatur[a-z]*\b/
+    ]
+  },
+  {
+    skill: "analizator-dowodow-v3",
+    patterns: [
+      /\bmail[a-z]*\b/,
+      /\bsms[a-z]*\b/,
+      /\bnagran[a-z]*\b/,
+      /\bfaktur[a-z]*\b/,
+      /\btermin[a-z]* procesow[a-z]*\b/,
+      /\bkoszt[a-z]* sadow[a-z]*\b/,
+      /\boplat[a-z]* komornicz[a-z]*\b/
+    ]
+  },
+  {
+    skill: "przesluchanie-swiadkow-v2-min90",
+    patterns: [
+      /\bswiadek\b/,
+      /\bswiadk[a-z]*\b/,
+      /\bbiegly\b/,
+      /\bpytani[a-z]* do swiadk[a-z]*\b/,
+      /\bcross examination\b/
+    ]
+  },
+  {
+    skill: "analizator-przepisow-v2",
+    patterns: [
+      /\bart\.?\s*\d+/,
+      /\bprzeslank[a-z]*\b/,
+      /\bwykladni[a-z]*\b/,
+      /\bczy mnie dotyczy\b/,
+      /\bzweryfikuj[a-z]* (?:te |ten )?przepis[a-z]*\b/
+    ]
+  },
+  {
+    skill: "przewodnik-prawny-v2",
+    patterns: [
+      /\bco mam zrobic\b/,
+      /\bod czego zaczac\b/,
+      /\bwyjasn[a-z]* wynik[a-z]*\b/
+    ]
+  }
+];
+
+function explicitExecutionSkillHints(
+  query: string,
+  candidates: readonly LexSkillRecord[]
+): string[] {
+  const normalized = normalize(query)
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const available = new Set(
+    candidates
+      .filter(isExecutionSkill)
+      .map((skill) => skill.name)
+  );
+
+  const matched = EXPLICIT_EXECUTION_RULES
+    .filter(
+      (rule) =>
+        available.has(rule.skill) &&
+        rule.patterns.some((pattern) =>
+          pattern.test(normalized)
+        )
+    )
+    .map((rule) => rule.skill);
+
+  let resolved = matched;
+  if (
+    resolved.includes("pisma-procesowe-v3") &&
+    resolved.includes("pisma-proste-v2")
+  ) {
+    resolved = resolved.filter(
+      (skill) => skill !== "pisma-proste-v2"
+    );
+  }
+
+  // A specific case-law research request (find/verify judgment,
+  // jurisprudential line) must control the workflow instead of the
+  // broader court-analysis rule that can also match the word "wyrok".
+  if (
+    resolved.includes("orzeczenia-sadowe-v2")
+  ) {
+    resolved = [
+      "orzeczenia-sadowe-v2",
+      ...resolved.filter(
+        (skill) =>
+          skill !== "orzeczenia-sadowe-v2" &&
+          skill !== "analiza-sadowa-v6"
+      )
+    ];
+  }
+
+  return resolved;
+}
+
 function scoreSkill(
   queryTokens: Set<string>,
   name: string,
@@ -111,8 +300,18 @@ function scoreSkill(
 
 function isExecutionSkill(skill: LexSkillRecord): boolean {
   return (
-    typeof skill.frontmatter.type === "string" &&
-    skill.frontmatter.type.toLowerCase().startsWith("executive-")
+    EXECUTION_SKILL_NAME_OVERRIDES.has(
+      skill.name
+    ) ||
+    (
+      typeof skill.frontmatter.type ===
+        "string" &&
+      skill.frontmatter.type
+        .toLowerCase()
+        .startsWith(
+          "executive-"
+        )
+    )
   );
 }
 
@@ -195,12 +394,32 @@ export function resolveAdditionalSkills(
 
   const selected = new Set<string>(manual);
   const executionSkills = new Set<string>();
+  let workflowExecutionSkill: string | null = null;
+  const promoteWorkflowExecutionSkill = (name: string) => {
+    if (name === "pisma-procesowe-v3") {
+      workflowExecutionSkill = name;
+      return;
+    }
+    if (
+      workflowExecutionSkill !== "pisma-procesowe-v3" &&
+      name === "pisma-proste-v2"
+    ) {
+      workflowExecutionSkill = name;
+      return;
+    }
+    if (workflowExecutionSkill === null) {
+      workflowExecutionSkill = name;
+    }
+  };
   const domainSkills = new Set<string>([primarySkill]);
 
   for (const name of manual) {
     const skill = registry.get(name);
     if (!skill) continue;
-    if (isExecutionSkill(skill)) executionSkills.add(name);
+    if (isExecutionSkill(skill)) {
+      executionSkills.add(name);
+      promoteWorkflowExecutionSkill(name);
+    }
     if (isDomainSkill(skill)) domainSkills.add(name);
   }
 
@@ -213,22 +432,54 @@ export function resolveAdditionalSkills(
       candidates.filter(isExecutionSkill),
       queryTokens
     );
-    const matchingExecution = rankedExecution
-      .filter((item) => item.score >= 2)
-      .slice(0, 4);
+    const explicitExecution =
+      explicitExecutionSkillHints(
+        query,
+        candidates
+      );
 
-    if (matchingExecution.length === 0 && executionSkills.size === 0) {
+    for (const name of explicitExecution) {
+      if (executionSkills.size >= 4) break;
+      executionSkills.add(name);
+      selected.add(name);
+      promoteWorkflowExecutionSkill(name);
+    }
+
+    const matchingExecution = rankedExecution
+      .filter(
+        (item) =>
+          item.score >= 2 &&
+          !executionSkills.has(item.skill.name) &&
+          !(
+            explicitExecution.includes("pisma-procesowe-v3") &&
+            item.skill.name === "pisma-proste-v2"
+          )
+      )
+      .slice(
+        0,
+        Math.max(0, 4 - executionSkills.size)
+      );
+
+    if (
+      explicitExecution.length === 0 &&
+      matchingExecution.length === 0 &&
+      executionSkills.size === 0
+    ) {
       const fallback =
         candidates.find((skill) => skill.name === "przewodnik-prawny-v2") ??
         rankedExecution[0]?.skill;
       if (fallback) {
         executionSkills.add(fallback.name);
         selected.add(fallback.name);
+        promoteWorkflowExecutionSkill(fallback.name);
       }
     } else {
       for (const item of matchingExecution) {
         executionSkills.add(item.skill.name);
         selected.add(item.skill.name);
+        if (workflowExecutionSkill === null) {
+          promoteWorkflowExecutionSkill(item.skill.name);
+        }
       }
     }
 
@@ -284,6 +535,10 @@ export function resolveAdditionalSkills(
       ...additionalSkills
     ],
     executionSkills: [...executionSkills].filter((name) => retained.has(name)),
+    workflowExecutionSkill:
+      workflowExecutionSkill && retained.has(workflowExecutionSkill)
+        ? workflowExecutionSkill
+        : null,
     domainSkills: [...domainSkills].filter(
       (name) => name === primarySkill || retained.has(name)
     )

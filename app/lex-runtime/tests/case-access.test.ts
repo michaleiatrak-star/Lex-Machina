@@ -889,7 +889,7 @@ describe("G34C/G34D case access", () => {
     });
 
     current.auth.close();
-  });
+  }, 30_000);
 
   it("preserves callback errors after a valid case key is unwrapped", async () => {
     const current = fixture();

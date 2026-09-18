@@ -304,7 +304,8 @@ export class LegalCorpusToolRuntime {
     return [
       "# LOCAL LEGAL CORPUS ACCESS",
       "The complete Lex Machina legal corpus is available locally through list_legal_skills, list_legal_resources and read_legal_resource.",
-      "When any loaded SKILL.md says 'view <path>', perform a fresh read_legal_resource call before relying on that resource. Do not pretend a resource was read merely because its filename appeared in a skill.",
+      "Mandatory deterministic workflow resources are preloaded and audited by the runtime before semantic execution; do not repeat those reads merely to satisfy a checklist.",
+      "Use read_legal_resource only for additional semantic/domain material that the current reasoning step actually needs. Do not pretend a resource was read merely because its filename appeared in a skill.",
       "Use list_legal_resources when the exact module/reference filename is unknown.",
       "A read result is local procedural/domain corpus context, not proof that a statute or judgment is currently valid. Current legal citations must still pass the separate legal verification tools.",
       "Never request or infer arbitrary operating-system paths. Only semantic corpus paths are permitted.",

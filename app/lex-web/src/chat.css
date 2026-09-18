@@ -153,6 +153,79 @@
   gap: 10px;
 }
 
+.chat-model-lanes {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.chat-model-lanes > label,
+.chat-aux-model-chip {
+  display: grid;
+  gap: 2px;
+  min-width: 170px;
+  padding: 8px 10px;
+  border: 1px solid rgba(32, 56, 48, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.chat-model-lanes > label > span,
+.chat-aux-model-chip > span {
+  color: #66756e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chat-model-lanes select {
+  width: 100%;
+  max-width: 250px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+}
+
+.chat-model-select-row {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.6fr) minmax(140px, 1.4fr);
+  gap: 6px;
+}
+
+.chat-model-select-row select:first-child {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chat-model-lanes small,
+.chat-aux-model-chip small {
+  color: #7a8781;
+  font-size: 10px;
+}
+
+.chat-aux-model-chip strong {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.chat-toggle-row {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+}
+
+.chat-toggle-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
 .chat-hidden-file-input {
   position: fixed;
   width: 1px;
@@ -173,6 +246,17 @@
   border: 1px solid #d8b0a9;
   background: #fff2ef;
   color: #79352d;
+}
+
+.chat-inline-warning {
+  margin: 0;
+  padding: 9px 10px;
+  border: 1px solid #d8c68a;
+  border-radius: 10px;
+  background: #fff9df;
+  color: #66520b;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .chat-panel {
@@ -587,6 +671,16 @@
 @media (max-width: 680px) {
   .chat-main {
     padding: 18px 12px 28px;
+  }
+
+  .chat-model-lanes {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .chat-model-lanes > label,
+  .chat-aux-model-chip {
+    flex: 1 1 180px;
   }
 
   .chat-page-header,

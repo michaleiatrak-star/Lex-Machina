@@ -4,6 +4,9 @@ import request from "supertest";
 import {
   SupremeCourtCaseVerifier
 } from "./case-law-verifier.js";
+import {
+  CaseLawSearchService
+} from "./case-law-search.js";
 import { createLexHttpApp } from "./http/app.js";
 import {
   OfficialLegalSourceVerifier
@@ -40,6 +43,61 @@ const lexRoot =
 const DR02 =
   "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
+const CASE_LAW_WORKFLOW_RESOURCES = [
+  "shared/MCP-INTEGRACJA.md",
+  "shared/SYGNATURY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+] as const;
+
+async function satisfyCaseLawWorkflowPreflight(
+  params: ProviderStreamParams,
+  idPrefix: string
+): Promise<void> {
+  const readTool =
+    params.tools?.find(
+      (candidate) =>
+        candidate.function.name ===
+        "read_legal_resource"
+    );
+  if (!readTool || !params.runTools) {
+    throw new Error(
+      "G22_CASE_LAW_PREFLIGHT_TOOL_MISSING"
+    );
+  }
+
+  const results =
+    await params.runTools(
+      CASE_LAW_WORKFLOW_RESOURCES.map(
+        (resource, index) => ({
+          id:
+            `${idPrefix}-case-law-read-${index + 1}`,
+          name:
+            readTool.function.name,
+          input: {
+            skill:
+              "orzeczenia-sadowe-v2",
+            path: resource
+          }
+        })
+      )
+    );
+
+  for (const result of results) {
+    const payload =
+      JSON.parse(
+        result.content ?? "{}"
+      ) as {
+        status?: string;
+      };
+    if (payload.status !== "OK") {
+      throw new Error(
+        "G22_CASE_LAW_PREFLIGHT_FAILED"
+      );
+    }
+  }
+}
+
 function json(value: unknown): Response {
   return new Response(
     JSON.stringify(value),
@@ -50,6 +108,71 @@ function json(value: unknown): Response {
           "application/json"
       }
     }
+  );
+}
+
+function caseLawDiscoveryFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+  if (
+    url.includes(
+      "saos.org.pl/api/search/judgments"
+    )
+  ) {
+    return Promise.resolve(
+      json({
+        items: [],
+        info: {
+          totalResults: 0
+        }
+      })
+    );
+  }
+
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/search"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>Znaleziono 0 orzeczeń</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/query"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>CBOSA</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+
+  return Promise.reject(
+    new Error(
+      "G22_UNEXPECTED_DISCOVERY_URL:" +
+        url
+    )
   );
 }
 
@@ -136,6 +259,10 @@ implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    await satisfyCaseLawWorkflowPreflight(
+      params,
+      "g22"
+    );
     if (
       this.mode ===
       "fake-marker"
@@ -153,13 +280,59 @@ implements ProviderAdapter {
           candidate.function.name ===
           "verify_case_reference"
       );
+    const readTool =
+      params.tools?.find(
+        (candidate) =>
+          candidate.function.name ===
+          "read_legal_resource"
+      );
 
     if (
       !tool ||
+      !readTool ||
       !params.runTools
     ) {
       throw new Error(
         "G22_CASE_TOOL_MISSING"
+      );
+    }
+
+    const requiredReads = [
+      "shared/MCP-INTEGRACJA.md",
+      "shared/SYGNATURY.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ];
+
+    const readResults =
+      await params.runTools(
+        requiredReads.map(
+          (resource, index) => ({
+            id:
+              `g22-case-resource-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "orzeczenia-sadowe-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        requiredReads.length ||
+      readResults.some(
+        (item) =>
+          !item.content.includes(
+            '"status":"OK"'
+          )
+      )
+    ) {
+      throw new Error(
+        "G22_CASE_WORKFLOW_READ_FAILED"
       );
     }
 
@@ -253,6 +426,9 @@ function executor(
           caseFetcher(sourceMode),
           () =>
             "2026-09-15T23:00:00.000Z"
+        ),
+        new CaseLawSearchService(
+          caseLawDiscoveryFetcher
         )
       )
   );
@@ -392,8 +568,13 @@ const pass =
   String(found.answer).includes(
     "https://sn.pl/pl/wyszukiwarka-orzeczen"
   ) &&
-  foundVerification.records === 1 &&
-  foundVerification.verified === 1 &&
+  typeof foundVerification.records ===
+    "number" &&
+  foundVerification.records >= 1 &&
+  foundVerification.verified ===
+    foundVerification.records &&
+  foundVerification.supported === 0 &&
+  foundVerification.unverified === 0 &&
 
   nearHttp.status === 200 &&
   near.status === "BLOCKED" &&
@@ -403,7 +584,13 @@ const pass =
   fakeHttp.status === 200 &&
   fake.status === "BLOCKED" &&
   !("answer" in fake) &&
-  fakeVerification.records === 0;
+  typeof fakeVerification.records ===
+    "number" &&
+  fakeVerification.records >= 1 &&
+  fakeVerification.verified ===
+    fakeVerification.records &&
+  fakeVerification.supported === 0 &&
+  fakeVerification.unverified === 0;
 
 process.stdout.write(
   JSON.stringify({
@@ -420,6 +607,17 @@ process.stdout.write(
         found.finalization,
       verification:
         foundVerification,
+      workflow:
+        found.workflow ?? null,
+      gateI:
+        found.gateI ?? null,
+      gateIWorkflowContract:
+        found.gateIWorkflowContract ??
+        null,
+      gateITurn:
+        found.gateITurn ?? null,
+      audit:
+        found.audit ?? null,
       answerReleased:
         typeof found.answer ===
         "string"

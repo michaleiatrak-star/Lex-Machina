@@ -187,6 +187,45 @@ impl RuntimeBridge {
         Ok(())
     }
 
+    pub fn shutdown(&self) -> Result<(), String> {
+        let mut state = self
+            .state
+            .lock()
+            .map_err(|_| "DESKTOP_STATE_POISONED".to_string())?;
+
+        state.address = None;
+        if let Some(mut token) = state.session_token.take() {
+            unsafe_zero_string(&mut token);
+        }
+        if let Some(mut token) = state.service_token.take() {
+            unsafe_zero_string(&mut token);
+        }
+        if let Some(mut secret) = state.managed_password.take() {
+            unsafe_zero_string(&mut secret);
+        }
+
+        if let Some(mut child) = state.child.take() {
+            #[cfg(target_os = "windows")]
+            {
+                let pid = child.id().to_string();
+                let _ = Command::new("taskkill.exe")
+                    .args(["/PID", &pid, "/T", "/F"])
+                    .stdout(Stdio::null())
+                    .stderr(Stdio::null())
+                    .status();
+            }
+
+            #[cfg(not(target_os = "windows"))]
+            {
+                let _ = child.kill();
+            }
+
+            let _ = child.wait();
+        }
+
+        Ok(())
+    }
+
     pub fn ensure_managed_identity(&self) -> Result<bool, String> {
         let entry = match Entry::new(
             MANAGED_KEYRING_SERVICE,
@@ -1161,7 +1200,26 @@ fn route_allowed(method: &str, path: &str) -> bool {
         "/api/cases"
         | "/api/providers"
         | "/api/routes"
-        | "/api/update/status" => method == "GET" || (path == "/api/cases" && method == "POST"),
+        | "/api/update/status"
+        | "/api/local-models"
+        | "/api/local-models/update/status"
+        | "/api/skills/update/status"
+        | "/api/model-routing/preferences"
+        | "/api/guide/state" => {
+            method == "GET"
+                || (path == "/api/cases" && method == "POST")
+                || (path == "/api/model-routing/preferences" && method == "PUT")
+        }
+        "/api/update/download"
+        | "/api/local-models/provision"
+        | "/api/local-models/repair"
+        | "/api/local-models/remove"
+        | "/api/local-models/start"
+        | "/api/local-models/stop"
+        | "/api/local-models/update/apply"
+        | "/api/skills/update/apply"
+        | "/api/guide/initialize"
+        | "/api/guide/transition" => method == "POST",
         "/api/firm-knowledge" | "/api/shared/templates" => {
             method == "GET" || method == "POST"
         }
@@ -1531,6 +1589,25 @@ mod tests {
         assert!(route_allowed("POST", "/api/cases/case_abc/files"));
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));
         assert!(!route_allowed("POST", "/api/update/status"));
+        assert!(route_allowed("POST", "/api/update/download"));
+        assert!(route_allowed("GET", "/api/local-models"));
+        assert!(route_allowed("GET", "/api/local-models/update/status"));
+        assert!(route_allowed("POST", "/api/local-models/update/apply"));
+        assert!(route_allowed("GET", "/api/guide/state"));
+        assert!(route_allowed("POST", "/api/guide/initialize"));
+        assert!(route_allowed("POST", "/api/guide/transition"));
+        assert!(!route_allowed("DELETE", "/api/guide/state"));
+        assert!(route_allowed("POST", "/api/local-models/provision"));
+        assert!(route_allowed("POST", "/api/local-models/repair"));
+        assert!(route_allowed("POST", "/api/local-models/remove"));
+        assert!(route_allowed("POST", "/api/local-models/start"));
+        assert!(route_allowed("POST", "/api/local-models/stop"));
+        assert!(route_allowed("GET", "/api/skills/update/status"));
+        assert!(route_allowed("GET", "/api/model-routing/preferences"));
+        assert!(route_allowed("PUT", "/api/model-routing/preferences"));
+        assert!(!route_allowed("POST", "/api/model-routing/preferences"));
+        assert!(route_allowed("POST", "/api/skills/update/apply"));
+        assert!(!route_allowed("DELETE", "/api/local-models"));
         assert!(!route_allowed("POST", "/api/auth/bootstrap-managed"));
         assert!(route_allowed("POST", "/api/admin/support/challenge"));
         assert!(route_allowed("POST", "/api/admin/support/activate"));

@@ -23,8 +23,14 @@ const checks = {
   webViewDownloadIfMissing:
     config.bundle?.windows?.webviewInstallMode?.type === "downloadBootstrapper",
   thinBundledRuntime:
-    Array.isArray(config.bundle?.resources) &&
-    config.bundle.resources.includes("runtime/**/*") &&
+    config.bundle?.resources === undefined &&
+    hooks.includes('SetOutPath "$INSTDIR\\runtime"') &&
+    hooks.includes(
+      'File /r "${LEX_HOOK_FILE_DIR}\\..\\runtime\\*"'
+    ) &&
+    hooks.includes(
+      'IfFileExists "$INSTDIR\\runtime\\app\\dist\\http\\server.js"'
+    ) &&
     build.includes("Thin payload contract") &&
     build.includes("windows-online-bootstrap.ps1") &&
     build.includes("verify-python-package-set.py"),
@@ -69,10 +75,15 @@ const checks = {
     source.notes?.cachePolicy === "REUSE_ONLY_AFTER_SHA256_VERIFICATION" &&
     bootstrap.includes("Using verified cache") &&
     bootstrap.includes("BOOTSTRAP_HASH_MISMATCH"),
-  postBootstrapNetworkIndependent:
-    source.notes?.networkAtInstall === "REQUIRED_FOR_MISSING_COMPONENTS" &&
-    source.notes?.networkAfterBootstrapBeforeProviderUse === "FORBIDDEN" &&
+  coreRuntimeNetworkIndependentAfterBootstrap:
+    source.localAi?.delivery === "USER_INITIATED_AFTER_INSTALL" &&
+    source.localAi?.applicationUsableWithoutLocalAi === true &&
+    source.notes?.networkAtInstall ===
+      "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL" &&
+    source.notes?.networkAfterBootstrapBeforeProviderUse ===
+      "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES" &&
     selftest.includes("runtimeNetworkRequiredAfterBootstrap") &&
+    selftest.includes("LOCAL_AI_PROVISIONING") &&
     paddle.includes("LEX_PADDLE_MODEL_DIR is required") &&
     sidecar.includes("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK") &&
     stanza.includes("download_method=None"),
@@ -85,6 +96,7 @@ console.log(JSON.stringify({
   gate: "G33B_VERIFIED_ONLINE_BOOTSTRAP_INSTALLATION",
   result: pass ? "PASS" : "BLOCKED",
   checks,
-  expectedUserActionAfterInstall: "PROVIDER_API_KEY_ONLY"
+  expectedUserActionAfterInstall:
+    "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 }, null, 2));
 if (!pass) process.exitCode = 1;

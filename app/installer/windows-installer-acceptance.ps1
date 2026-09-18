@@ -5,12 +5,74 @@ param(
   [switch]$BlockNetworkDuringInstall,
   [switch]$ForceVisualCppRuntimeInstall,
   [switch]$StandaloneOfflineExe,
+  [switch]$RequireAuthenticode,
+  [string]$SigningManifestPath,
   [int]$InstallTimeoutSeconds = 3600
 )
 
 $ErrorActionPreference = "Stop"
 $installer = (Resolve-Path -LiteralPath $InstallerPath).Path
 $installerInfo = Get-Item -LiteralPath $installer
+$trustedSignerThumbprints = @()
+
+function Normalize-Thumbprint([string]$Value) {
+  return (($Value -replace "\s+", "").ToUpperInvariant())
+}
+
+function Assert-PinnedAuthenticode(
+  [string]$Path,
+  [string]$Label
+) {
+  if (-not $RequireAuthenticode) {
+    return
+  }
+  if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_SIGNATURE_TARGET_MISSING:${Label}:${Path}"
+  }
+
+  $signature = Get-AuthenticodeSignature -LiteralPath $Path
+  if (
+    $signature.Status -ne "Valid" -or
+    $null -eq $signature.SignerCertificate
+  ) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_INVALID:${Label}:$($signature.Status)"
+  }
+
+  $thumbprint = Normalize-Thumbprint $signature.SignerCertificate.Thumbprint
+  if ($trustedSignerThumbprints -notcontains $thumbprint) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_SIGNER_NOT_PINNED:${Label}:${thumbprint}"
+  }
+  if ($null -eq $signature.TimeStamperCertificate) {
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_TIMESTAMP_MISSING:${Label}"
+  }
+
+  Write-Host "Authenticode PASS: $Label signer=$thumbprint timestamp=$($signature.TimeStamperCertificate.Subject)"
+}
+
+if ($RequireAuthenticode) {
+  if ([string]::IsNullOrWhiteSpace($SigningManifestPath)) {
+    throw "INSTALLER_ACCEPTANCE_SIGNING_MANIFEST_REQUIRED"
+  }
+  $signingManifest = (Resolve-Path -LiteralPath $SigningManifestPath).Path
+  $release = Get-Content -Raw -LiteralPath $signingManifest | ConvertFrom-Json
+  $trustedSignerThumbprints = @(
+    $release.applicationUpdate.trustedSignerThumbprints |
+      ForEach-Object {
+        if ($_ -is [string]) {
+          Normalize-Thumbprint $_
+        }
+      } |
+      Where-Object {
+        $_ -match "^[A-F0-9]{40}$"
+      } |
+      Select-Object -Unique
+  )
+  if ($trustedSignerThumbprints.Count -lt 1) {
+    throw "INSTALLER_ACCEPTANCE_SIGNER_POLICY_MISSING"
+  }
+  Assert-PinnedAuthenticode $installer "installer"
+}
+
 if ($StandaloneOfflineExe) {
   if ($ExpectedNetworkRequiredAtInstall) {
     throw "INSTALLER_ACCEPTANCE_STANDALONE_OFFLINE_NETWORK_POLICY_INVALID"
@@ -20,7 +82,7 @@ if ($StandaloneOfflineExe) {
   throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
 }
 if (-not $InstallRoot) {
-  $InstallRoot = Join-Path $env:RUNNER_TEMP ("LexMachinaInstalled-" + [Guid]::NewGuid().ToString("N"))
+  $InstallRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Installed " + [Guid]::NewGuid().ToString("N"))
 }
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
@@ -133,10 +195,15 @@ try {
     throw "INSTALLER_ACCEPTANCE_SIDECAR_MISSING:$sidecarPath"
   }
   $sidecar = Get-Item -LiteralPath $sidecarPath
+  Assert-PinnedAuthenticode $sidecar.FullName "runtime-sidecar"
   $componentLock = Join-Path $runtimeRoot "component-lock.json"
   $privateNode = Join-Path $runtimeRoot "node\node.exe"
   $privatePython = Join-Path $runtimeRoot "python\python.exe"
-  foreach ($required in @($componentLock, $privateNode, $privatePython)) {
+  foreach ($required in @(
+    $componentLock,
+    $privateNode,
+    $privatePython
+  )) {
     if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
       throw "INSTALLER_ACCEPTANCE_PRIVATE_RUNTIME_MISSING:$required"
     }
@@ -155,8 +222,14 @@ try {
   if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
     throw "INSTALLER_ACCEPTANCE_RUNTIME_NETWORK_POLICY_INVALID"
   }
-  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
+  if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP") {
     throw "INSTALLER_ACCEPTANCE_USER_ACTION_POLICY_INVALID"
+  }
+  if ($lock.localAi.requiredForApplicationHealth -ne $false) {
+    throw "INSTALLER_ACCEPTANCE_LOCAL_AI_OPTIONAL_POLICY_INVALID"
+  }
+  if ($lock.localAi.delivery -ne "USER_INITIATED_AFTER_INSTALL") {
+    throw "INSTALLER_ACCEPTANCE_LOCAL_AI_DELIVERY_POLICY_INVALID"
   }
 
   # Do not let the acceptance test accidentally use runner Node/Python.
@@ -181,15 +254,57 @@ try {
     throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED"
   }
 
-  $app = Get-ChildItem -Path $InstallRoot -File -Recurse |
-    Where-Object {
-      $_.Name -match '^lex[- ]machina\.exe$' -and
-      $_.FullName -notmatch '\\runtime\\'
-    } |
-    Select-Object -First 1
-  if (-not $app) {
-    throw "INSTALLER_ACCEPTANCE_DESKTOP_EXE_MISSING"
+  $uninstallKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Lex Machina"
+  $registered = Get-ItemProperty -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
+  if (-not $registered) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_REGISTRY_MISSING"
   }
+
+  $registeredInstallRoot = ([string]$registered.InstallLocation).Trim().Trim('"')
+  if ([string]::IsNullOrWhiteSpace($registeredInstallRoot)) {
+    throw "INSTALLER_ACCEPTANCE_INSTALLLOCATION_MISSING"
+  }
+  $registeredInstallRoot = [IO.Path]::GetFullPath($registeredInstallRoot)
+
+  if (
+    -not [string]::Equals(
+      $registeredInstallRoot.TrimEnd('\'),
+      $InstallRoot.TrimEnd('\'),
+      [StringComparison]::OrdinalIgnoreCase
+    )
+  ) {
+    throw "INSTALLER_ACCEPTANCE_REGISTERED_ROOT_MISMATCH:expected=$InstallRoot actual=$registeredInstallRoot"
+  }
+
+  $registeredMainBinary = ([string]$registered.MainBinaryName).Trim().Trim('"')
+  if ([string]::IsNullOrWhiteSpace($registeredMainBinary)) {
+    throw "INSTALLER_ACCEPTANCE_MAINBINARYNAME_MISSING"
+  }
+  if (
+    [IO.Path]::GetFileName($registeredMainBinary) -ne $registeredMainBinary -or
+    [IO.Path]::GetExtension($registeredMainBinary) -ne ".exe"
+  ) {
+    throw "INSTALLER_ACCEPTANCE_MAINBINARYNAME_INVALID:$registeredMainBinary"
+  }
+
+  $appPath = Join-Path $registeredInstallRoot $registeredMainBinary
+  if (-not (Test-Path -LiteralPath $appPath -PathType Leaf)) {
+    Write-Host "Installed root top-level files:"
+    Get-ChildItem -LiteralPath $registeredInstallRoot -File -Force -ErrorAction SilentlyContinue |
+      Sort-Object Name |
+      ForEach-Object { Write-Host " - $($_.Name)" }
+    throw "INSTALLER_ACCEPTANCE_DESKTOP_EXE_MISSING:$appPath"
+  }
+
+  $app = Get-Item -LiteralPath $appPath
+  Assert-PinnedAuthenticode $app.FullName "desktop-exe"
+
+  $uninstaller = Join-Path $registeredInstallRoot "uninstall.exe"
+  if (-not (Test-Path -LiteralPath $uninstaller -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALLER_MISSING:$uninstaller"
+  }
+  Assert-PinnedAuthenticode $uninstaller "uninstaller"
+
   if ($BlockNetworkDuringInstall) {
     Add-AcceptanceFirewallBlock $app.FullName "desktop"
   }
@@ -214,7 +329,7 @@ try {
   }
 
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_ONLY"
+  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue

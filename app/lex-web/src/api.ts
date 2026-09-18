@@ -459,6 +459,10 @@ export type ModelDescriptor = {
   createdAt?: string;
   ownedBy?: string;
   contextWindow?: number;
+  nativeContextWindow?: number;
+  contextMode?:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
   inputModalities?: string[];
   outputModalities?: string[];
   capabilities?: string[];
@@ -489,6 +493,85 @@ export type ProviderStatusResponse = {
   providers: ProviderConfigurationStatus[];
 };
 
+export type ModelRoutingPreferences = {
+  auxiliaryEnabled: boolean;
+  auxiliaryProvider: ProviderId;
+  auxiliaryModel: string;
+  updatedAt?: string;
+};
+
+export type GuideSessionState = {
+  schemaVersion: 1;
+  sessionId: string;
+  revision: number;
+  audience: "LAIK" | "PRAWNIK";
+  interactionMode:
+    | "PROWADZENIE"
+    | "QA"
+    | "MENU";
+  rawAnalysis: boolean;
+  step:
+    | "FAZA0"
+    | "A"
+    | "B"
+    | "C"
+    | "D"
+    | "E"
+    | "F"
+    | "G"
+    | "H"
+    | "I"
+    | "M"
+    | "Q";
+  guidedQuestionIndex:
+    0 | 1 | 2 | 3;
+  pendingIrreversibleAction:
+    | {
+        actionId: string;
+        warningAcknowledged:
+          boolean;
+      }
+    | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GuideTransition =
+  | {
+      type: "SET_AUDIENCE";
+      audience:
+        "LAIK" | "PRAWNIK";
+    }
+  | {
+      type:
+        "SET_INTERACTION_MODE";
+      mode:
+        | "PROWADZENIE"
+        | "QA"
+        | "MENU";
+    }
+  | {
+      type:
+        "SET_RAW_ANALYSIS";
+      enabled: boolean;
+    }
+  | {
+      type: "MOVE_STEP";
+      step:
+        GuideSessionState["step"];
+    }
+  | {
+      type:
+        "ADVANCE_GUIDED_QUESTION";
+    }
+  | {
+      type:
+        | "BEGIN_IRREVERSIBLE_ACTION"
+        | "ACKNOWLEDGE_IRREVERSIBLE_WARNING"
+        | "CLEAR_IRREVERSIBLE_ACTION";
+      actionId: string;
+    };
+
 export type UpdateStatusResponse = {
   currentVersion: string;
   status:
@@ -501,6 +584,55 @@ export type UpdateStatusResponse = {
   releaseUrl?: string;
   releaseName?: string;
   publishedAt?: string;
+};
+
+export type ApplicationUpdateDownloadResponse = {
+  version: string;
+  token: string;
+  receiptToken: string;
+  filename: string;
+  sha256: string;
+  bytes: number;
+  stagedAt: string;
+  publisher:
+    | {
+        verification: "AUTHENTICODE";
+        subject: string;
+        thumbprint: string;
+        productVersion: string;
+      }
+    | {
+        verification: "UNSIGNED_ALLOWED";
+        subject: null;
+        thumbprint: null;
+        productVersion: string;
+        warning:
+          "TEMPORARY_UNSIGNED_UPDATE_ALLOWED";
+      };
+};
+
+export type SkillUpdateStatusResponse = {
+  currentVersion: string;
+  status: "UP_TO_DATE" | "AVAILABLE" | "UNAVAILABLE";
+  latestVersion?: string;
+  checkedAt: string;
+  bundleReady: boolean;
+  verificationReady: boolean;
+  signatureMode:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
+  blockedReason?:
+    | "INDEX_MISSING"
+    | "SIGNED_INDEX_MISSING"
+    | "SIGNER_POLICY_MISSING";
+};
+
+export type SkillUpdateApplyResponse = {
+  previousVersion: string;
+  installedVersion: string;
+  installedAt: string;
+  restartRequired: true;
+  skillRoot: string;
 };
 
 
@@ -543,8 +675,51 @@ export type SessionExecutionResponse = {
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
   provider: ProviderId;
   model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: {
+      enabled: boolean;
+      provider: ProviderId;
+      model: string;
+      status:
+        | "DISABLED"
+        | "SKIPPED_NO_ELIGIBLE_TASK"
+        | "SKIPPED_SAME_AS_PRIMARY"
+        | "PASS"
+        | "FAILED";
+      tasks: Array<
+        "LEGAL_REFERENCE_PREFLIGHT"
+      >;
+      extractedCandidates: number;
+      deterministicVerifications: number;
+      cachedVerifierReuses: number;
+      latencyMs: number;
+      error?: string;
+    };
+  };
   primarySkill: string;
   answer?: string;
+  documentCitationFreshness?: {
+    result: "PASS";
+    checked: number;
+  };
+  context?: {
+    strategy:
+      | "MODEL_CONTEXT_WINDOW"
+      | "LEGACY_CHAR_CAP";
+    modelContextTokens?: number;
+    reservedOutputTokens?: number;
+    reservedSystemTokens?: number;
+    documentBudgetTokens?: number;
+    estimatedDocumentTokens: number;
+    selectedChunks: number;
+    omittedChunks: number;
+    selectedDocuments: number;
+    omittedDocuments: number;
+  };
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: BlockedReference[];
   verification: {
@@ -558,7 +733,139 @@ export type SessionExecutionResponse = {
     result: "PASS" | "BLOCKED";
     eventCount: number;
     closed: boolean;
+    missing?: string[];
+    violations?: string[];
   };
+  workflow?: {
+    id: string;
+    result: "PASS" | "BLOCKED";
+    requiredResources: string[];
+    missingResources: string[];
+  };
+  processAuto?: {
+    maxSteps: number;
+    stopped:
+      | "FINAL"
+      | "LIMIT_REACHED"
+      | "NODE_BLOCKED";
+    limitReached: boolean;
+    steps: Array<{
+      stage:
+        Exclude<
+          ProcessPleadingStage,
+          "CG_ACCEPTANCE" | "FINAL"
+        >;
+      checkpoint:
+        ProcessPleadingCheckpoint;
+      revisionAfter: number;
+      status:
+        | "DRAFT_PRESENTABLE"
+        | "BLOCKED";
+      answer?: string;
+    }>;
+  };
+  processWorkflow?: ProcessPleadingWorkflowView;
+  courtWorkflow?: CourtAnalysisWorkflowView;
+};
+
+export type ProcessPleadingCheckpoint =
+  | "CP-1a"
+  | "CP-1b"
+  | "CP-1c-skan"
+  | "CP-PD"
+  | "CP-FSL-D"
+  | "CP-1c-macierz"
+  | "CP-1c-lancuch"
+  | "CP-1d-anomalie"
+  | "CP-1d"
+  | "CP-W1"
+  | "CP-PRE-W2"
+  | "CP-ATAK"
+  | "CP-PODMIOT"
+  | "CP-QUALITY"
+  | "CP-AUDYT"
+  | "CP-PEER";
+
+export type ProcessPleadingCheckpointStatus =
+  | "OPEN"
+  | "PENDING_CONFIRMATION"
+  | "CLOSED"
+  | "NA";
+
+export type ProcessPleadingStage =
+  | "CG_ACCEPTANCE"
+  | "W1"
+  | "PRE_W2"
+  | "W2"
+  | "W3"
+  | "FINAL";
+
+export type ProcessPleadingWorkflowView = {
+  caseId: string;
+  mode: "CHECKPOINT" | "AUTO";
+  revision: number;
+  stage: ProcessPleadingStage;
+  documentStatus: "DRAFT" | "FINAL";
+  pendingCheckpoint: ProcessPleadingCheckpoint | null;
+  checkpoints: Record<
+    ProcessPleadingCheckpoint,
+    ProcessPleadingCheckpointStatus
+  >;
+};
+
+export type ProcessPleadingWorkflowState =
+  ProcessPleadingWorkflowView & {
+    schemaVersion: 1;
+    workflowId: "PROCESS_PLEADING_V1";
+    startAccepted: boolean;
+    history: Array<{
+      sequence: number;
+      at: string;
+      type: string;
+      checkpoint?: ProcessPleadingCheckpoint;
+      fromStage?: ProcessPleadingStage;
+      toStage?: ProcessPleadingStage;
+    }>;
+    createdAt: string;
+    updatedAt: string;
+  };
+
+export type ProcessPleadingWorkflowResponse = {
+  caseId: string;
+  state: ProcessPleadingWorkflowState | null;
+};
+
+export type CourtAnalysisCheckpoint =
+  | "SD_VER_COMPLETE"
+  | "PASS_I_ISOLATION_CLEAN"
+  | "PASS_II_SOURCES_VERIFIED"
+  | "FIRST_VERIFICATION_COMPLETE"
+  | "FINAL_VERIFICATION_COMPLETE"
+  | "FINAL_GATE_APPROVED"
+  | "FINAL_REPORT_PRESENTED"
+  | "SITUATIONAL_REPORT_PRESENTED"
+  | "PROCESS_PLEADING_OFFER_PRESENTED";
+
+export type CourtAnalysisStage =
+  | "EVIDENCE_SCAN"
+  | "PASS_I_FACTS"
+  | "PASS_II_LAW"
+  | "PASS_III_ADVERSARIAL"
+  | "PASS_IV_FINAL_VERIFICATION"
+  | "FINAL_REPORT"
+  | "SITUATIONAL_REPORT"
+  | "PROCESS_PLEADING_OFFER"
+  | "COMPLETE";
+
+export type CourtAnalysisWorkflowView = {
+  caseId: string;
+  revision: number;
+  stage:
+    CourtAnalysisStage;
+  nextCheckpoint:
+    CourtAnalysisCheckpoint | null;
+  closedCheckpoints:
+    CourtAnalysisCheckpoint[];
 };
 
 export type ApiFailure = {
@@ -1502,6 +1809,53 @@ export function clearProviderApiKey(
   );
 }
 
+export function getGuideState():
+  Promise<{
+    state:
+      GuideSessionState | null;
+  }> {
+  return json(
+    "/api/guide/state"
+  );
+}
+
+export function initializeGuideState(
+  audience:
+    "LAIK" | "PRAWNIK"
+): Promise<{
+  state:
+    GuideSessionState;
+}> {
+  return json(
+    "/api/guide/initialize",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        audience
+      })
+    }
+  );
+}
+
+export function transitionGuideState(
+  expectedRevision: number,
+  transition: GuideTransition
+): Promise<{
+  state:
+    GuideSessionState;
+}> {
+  return json(
+    "/api/guide/transition",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        expectedRevision,
+        transition
+      })
+    }
+  );
+}
+
 export function getUpdateStatus():
   Promise<UpdateStatusResponse> {
   return json<UpdateStatusResponse>(
@@ -1509,8 +1863,88 @@ export function getUpdateStatus():
   );
 }
 
+export function getSkillUpdateStatus():
+  Promise<SkillUpdateStatusResponse> {
+  return json<SkillUpdateStatusResponse>(
+    "/api/skills/update/status"
+  );
+}
+
+export function applySkillUpdate():
+  Promise<SkillUpdateApplyResponse> {
+  return json<SkillUpdateApplyResponse>(
+    "/api/skills/update/apply",
+    { method: "POST" }
+  );
+}
+
+export function downloadApplicationUpdate():
+  Promise<ApplicationUpdateDownloadResponse> {
+  return json<ApplicationUpdateDownloadResponse>(
+    "/api/update/download",
+    { method: "POST" }
+  );
+}
+
+export async function installStagedApplicationUpdate(
+  receiptToken: string
+): Promise<void> {
+  if (!isDesktopShell()) {
+    throw new ApiError(
+      "APPLICATION_UPDATE_DESKTOP_REQUIRED",
+      409
+    );
+  }
+  const internals = (
+    window as Window & {
+      __TAURI_INTERNALS__?: {
+        invoke?: (
+          command: string,
+          args?: Record<string, unknown>
+        ) => Promise<unknown>;
+      };
+    }
+  ).__TAURI_INTERNALS__;
+  if (!internals?.invoke) {
+    throw new ApiError(
+      "TAURI_INVOKE_UNAVAILABLE",
+      503
+    );
+  }
+  await internals.invoke(
+    "install_application_update",
+    { receiptToken }
+  );
+}
+
 export function getProviderStatus(): Promise<ProviderStatusResponse> {
   return json<ProviderStatusResponse>("/api/providers");
+}
+
+export function getModelRoutingPreferences():
+  Promise<ModelRoutingPreferences> {
+  return json<ModelRoutingPreferences>(
+    "/api/model-routing/preferences"
+  );
+}
+
+export function setModelRoutingPreferences(
+  input: ModelRoutingPreferences
+): Promise<ModelRoutingPreferences> {
+  return json<ModelRoutingPreferences>(
+    "/api/model-routing/preferences",
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        auxiliaryEnabled:
+          input.auxiliaryEnabled,
+        auxiliaryProvider:
+          input.auxiliaryProvider,
+        auxiliaryModel:
+          input.auxiliaryModel
+      })
+    }
+  );
 }
 
 export function validateRoute(
@@ -1528,11 +1962,66 @@ export function getModels(
   return json<ModelsResponse>(`/api/models/${provider}`);
 }
 
+export function getProcessPleadingWorkflow(
+  caseId: string
+): Promise<ProcessPleadingWorkflowResponse> {
+  return json<ProcessPleadingWorkflowResponse>(
+    `/api/cases/${caseId}/workflow/process-pleading`
+  );
+}
+
+export function initializeProcessPleadingWorkflow(
+  caseId: string,
+  mode: "CHECKPOINT" | "AUTO" = "CHECKPOINT"
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/initialize`,
+    {
+      method: "POST",
+      body: JSON.stringify({ mode })
+    }
+  );
+}
+
+export function acceptProcessPleadingWorkflowStart(
+  caseId: string
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/accept-start`,
+    { method: "POST" }
+  );
+}
+
+export function confirmProcessPleadingCheckpoint(
+  caseId: string,
+  checkpoint: ProcessPleadingCheckpoint
+): Promise<{
+  caseId: string;
+  state: ProcessPleadingWorkflowState;
+}> {
+  return json(
+    `/api/cases/${caseId}/workflow/process-pleading/confirm`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        checkpoint
+      })
+    }
+  );
+}
+
 export function executeSession(input: {
   query: string;
   provider: ProviderId;
   model: string;
   primarySkill: string;
+  auxiliaryText?: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
   knowledge?: {

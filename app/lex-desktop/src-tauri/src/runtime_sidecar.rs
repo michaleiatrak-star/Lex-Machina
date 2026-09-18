@@ -62,15 +62,22 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
         return Err("SIDECAR_COMPONENT_LOCK_RUNTIME_NETWORK_POLICY".to_string());
     }
     if lock.get("expectedUserActionAfterInstall").and_then(|value| value.as_str())
-        != Some("PROVIDER_API_KEY_OR_LOCAL_MODEL")
+        != Some("PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP")
     {
         return Err("SIDECAR_COMPONENT_LOCK_USER_ACTION_POLICY".to_string());
+    }
+    if lock
+        .get("localAi")
+        .and_then(|value| value.get("requiredForApplicationHealth"))
+        .and_then(|value| value.as_bool())
+        != Some(false)
+    {
+        return Err("SIDECAR_COMPONENT_LOCK_LOCAL_AI_POLICY".to_string());
     }
 
     let required_ids = [
         "node-runtime", "python-runtime", "lex-runtime", "legal-corpus",
-        "paddle-ocr-pl", "stanza-pl-ner", "local-llm-engine",
-        "mistral-nemo-local", "bielik-local", "runtime-sidecar",
+        "paddle-ocr-pl", "stanza-pl-ner", "runtime-sidecar",
     ];
     let components = lock.get("components").and_then(|value| value.as_array())
         .ok_or_else(|| "SIDECAR_COMPONENT_LOCK_COMPONENTS_INVALID".to_string())?;
@@ -108,20 +115,6 @@ fn validate_component_lock(root: &Path) -> Result<usize, String> {
     Ok(verified)
 }
 
-fn require_local_llm(root: &Path) -> Result<PathBuf, String> {
-    let llm = required_dir(root.join("llm"), "SIDECAR_LLM_ROOT_MISSING")?;
-    required_file(llm.join("llama").join("llama-server.exe"), "SIDECAR_LLAMA_SERVER_MISSING")?;
-    required_file(
-        llm.join("models").join("Mistral-Nemo-Instruct-2407-Q4_K_M.gguf"),
-        "SIDECAR_MISTRAL_MODEL_MISSING",
-    )?;
-    required_file(
-        llm.join("models").join("Bielik-11B-v3.0-Instruct.Q4_K_M.gguf"),
-        "SIDECAR_BIELIK_MODEL_MISSING",
-    )?;
-    Ok(llm)
-}
-
 fn installed_skill_overlay() -> Option<PathBuf> {
     let local = env::var_os("LOCALAPPDATA")?;
     let root = PathBuf::from(local)
@@ -142,7 +135,6 @@ fn self_test(root: &Path) -> Result<(), String> {
     required_dir(root.join("corpus"), "SIDECAR_CORPUS_MISSING")?;
     required_dir(root.join("models").join("paddle").join("official_models"), "SIDECAR_PADDLE_MODELS_MISSING")?;
     required_dir(root.join("models").join("stanza").join("pl"), "SIDECAR_STANZA_MODELS_MISSING")?;
-    require_local_llm(root)?;
 
     let verified_files = validate_component_lock(root)?;
     println!("{}", serde_json::json!({
@@ -150,8 +142,8 @@ fn self_test(root: &Path) -> Result<(), String> {
         "result": "PASS",
         "verifiedFiles": verified_files,
         "runtimeNetworkRequiredAfterBootstrap": false,
-        "expectedUserActionAfterInstall": "PROVIDER_API_KEY_OR_LOCAL_MODEL",
-        "localModelsPreinstalled": ["Mistral NeMo 12B Q4_K_M", "Bielik 11B v3 Q4_K_M"]
+        "expectedUserActionAfterInstall": "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP",
+        "localAiRequiredForApplicationHealth": false
     }));
     Ok(())
 }
@@ -165,13 +157,12 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
     let paddle = required_dir(root.join("models").join("paddle"), "SIDECAR_PADDLE_MODELS_MISSING")?;
     let paddle_official = required_dir(paddle.join("official_models"), "SIDECAR_PADDLE_OFFICIAL_MODELS_MISSING")?;
     let stanza = required_dir(root.join("models").join("stanza"), "SIDECAR_STANZA_MODELS_MISSING")?;
-    let llm = require_local_llm(root)?;
 
     let status = Command::new(node)
         .arg(server)
         .current_dir(root.join("app"))
+        .env("LEX_RUNTIME_ROOT", root)
         .env("LEX_SKILLS_PATH", skills)
-        .env("LEX_LOCAL_LLM_ROOT", llm)
         .env("LEX_OCR_PYTHON", &python)
         .env("LEX_NER_PYTHON", &python)
         .env("LEX_STORAGE_PYTHON", &python)

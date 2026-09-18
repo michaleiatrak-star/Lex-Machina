@@ -28,7 +28,7 @@ async function buildExecutionAudit(id: string): Promise<AuditTrail> {
   );
 
   const execution = await engine.executePolishLegalQuery({
-    query: "Test techniczny eksportu — bez analizy prawnej.",
+    query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTest techniczny eksportu — bez analizy prawnej.',
     provider: "openai",
     model: "g10-test",
     route: {

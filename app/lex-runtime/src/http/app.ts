@@ -27,7 +27,8 @@ import type {
 import type {
   SessionDocumentAttachment,
   SessionExecutor,
-  SessionExecutionRequest
+  SessionExecutionRequest,
+  SessionExecutionResponse
 } from "../session-executor.js";
 import type {
   DocumentChunkSelection,
@@ -54,6 +55,10 @@ import type {
   AuthenticatedContext,
   CaseRole
 } from "../auth/types.js";
+import {
+  parseGuideTransition,
+  type GuideSessionStateStore
+} from "../guide-session-state.js";
 import {
   CaseAccessError,
   type LocalCaseAccessService
@@ -93,6 +98,83 @@ import {
   assertStoredDocumentSignature,
   storedDocumentMediaType
 } from "../stored-document-source.js";
+import type {
+  EncryptedCaseWorkspaceStore
+} from "../case-workspace-store.js";
+import type {
+  DocumentGenerationStateStore
+} from "../document-generation-state.js";
+import {
+  parseSkillSelectionEnvelope,
+  resolveAdditionalSkills
+} from "../skill-selection.js";
+import {
+  createDeterministicWorkflowPlan
+} from "../deterministic-workflow.js";
+import type {
+  ProcessPleadingState
+} from "../process-pleading-state.js";
+import {
+  completeProcessExecution,
+  requireProcessExecutionPermit,
+  type ProcessExecutionPermit
+} from "../process-pleading-execution-gate.js";
+import {
+  PROCESS_AUTO_MAX_STEPS,
+  runBoundedProcessAutoSequence
+} from "../process-pleading-auto-runner.js";
+import {
+  applyDeterministicProcessApplicability,
+  evidenceInventoryFromUploads,
+  type ProcessEvidenceInventory
+} from "../process-pleading-applicability.js";
+import {
+  createCourtAnalysisState,
+  nextCourtAnalysisCheckpoint,
+  type CourtAnalysisState
+} from "../court-analysis-state.js";
+import {
+  completeCourtAnalysisExecution,
+  requireCourtAnalysisExecutionPermit,
+  type CourtAnalysisExecutionPermit
+} from "../court-analysis-execution-gate.js";
+import {
+  createChronologyState,
+  nextChronologyCheckpoint,
+  requireChronologyTemporalGate,
+  type ChronologyState
+} from "../chronology-state.js";
+import {
+  completeChronologyExecution,
+  requireChronologyExecutionPermit,
+  type ChronologyExecutionPermit
+} from "../chronology-execution-gate.js";
+import {
+  chronologyTemporalGateRequired
+} from "../chronology-date-trigger.js";
+import {
+  nextContractCheckpoint,
+  type ContractAnalysisState
+} from "../contract-analysis-state.js";
+import {
+  completeContractExecution,
+  requireContractExecutionPermit,
+  type ContractExecutionPermit
+} from "../contract-analysis-execution-gate.js";
+import {
+  buildWorkflowAuditArtifact,
+  parseWorkflowAuditArtifact,
+  type StatefulWorkflowAuditId
+} from "../workflow-audit-artifact.js";
+import {
+  completeOrderedCaseExecution,
+  createOrderedCaseWorkflowState,
+  nextOrderedCaseCheckpoint,
+  requireOrderedCaseExecutionPermit,
+  type OrderedCaseExecutionPermit,
+  type OrderedCaseWorkflowId,
+  type OrderedCaseWorkflowState
+} from "../ordered-case-workflow-state.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -315,11 +397,55 @@ function loopbackOriginGuard(
 
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
-  modelCatalog: Pick<DynamicModelCatalog, "list">;
+  modelCatalog:
+    Pick<DynamicModelCatalog, "list"> &
+    Partial<
+      Pick<
+        DynamicModelCatalog,
+        | "localContextWindow"
+        | "localTokenCharsPerToken"
+      >
+    >;
   credentialResolver?: ProviderCredentialResolver;
   credentialManager?: ProviderCredentialManager;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
+  guideSessionStore?: Pick<
+    GuideSessionStateStore,
+    | "get"
+    | "initialize"
+    | "transition"
+    | "revoke"
+  >;
+  processWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getProcessPleadingState"
+    | "saveProcessPleadingState"
+  >;
+  courtAnalysisWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getCourtAnalysisState"
+    | "saveCourtAnalysisState"
+  >;
+  chronologyWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getChronologyState"
+    | "saveChronologyState"
+  >;
+  contractWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getContractAnalysisState"
+    | "saveContractAnalysisState"
+  >;
+  orderedCaseWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getOrderedCaseWorkflowState"
+    | "saveOrderedCaseWorkflowState"
+  >;
+  documentGenerationState?: Pick<
+    DocumentGenerationStateStore,
+    "readState"
+  >;
   documentService?: DocumentService;
   caseFileStore?:
     Pick<
@@ -388,8 +514,10 @@ export type LexHttpAppOptions = {
   >;
   secureCaseArtifactStore?: Pick<
     SecureCaseArtifactStore,
+    | "saveArtifact"
     | "listArtifacts"
     | "readArtifact"
+    | "deleteArtifact"
   >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
@@ -414,6 +542,88 @@ export type LexHttpAppOptions = {
   >;
 };
 
+async function persistWorkflowAuditArtifact(
+  args: {
+    store: Pick<
+      SecureCaseArtifactStore,
+      | "saveArtifact"
+      | "deleteArtifact"
+    >;
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    createdByUserId: string;
+    workflowId:
+      StatefulWorkflowAuditId;
+    checkpoint: string;
+    result:
+      SessionExecutionResponse;
+  }
+): Promise<{
+  artifactId: string;
+  auditRef: string;
+  sha256: string;
+  bytes: number;
+}> {
+  const payload =
+    buildWorkflowAuditArtifact({
+      caseId:
+        args.caseId,
+      workflowId:
+        args.workflowId,
+      checkpoint:
+        args.checkpoint,
+      result:
+        args.result
+    });
+
+  try {
+    const artifact =
+      await args.store
+        .saveArtifact({
+          caseId:
+            args.caseId,
+          filename:
+            [
+              "workflow-audit",
+              args.workflowId
+                .toLowerCase(),
+              args.checkpoint
+                .toLowerCase(),
+              args.result
+                .sessionId
+            ].join("-") +
+            ".json",
+          mediaType:
+            "application/vnd.lexmachina.workflow-audit+json",
+          data:
+            payload,
+          caseDataKey:
+            args.caseDataKey,
+          keyVersion:
+            args.keyVersion,
+          sensitivity:
+            "PROTECTED",
+          createdByUserId:
+            args.createdByUserId
+        });
+
+    return {
+      artifactId:
+        artifact.artifactId,
+      auditRef:
+        "artifact://" +
+        artifact.artifactId,
+      sha256:
+        artifact.sha256,
+      bytes:
+        artifact.bytes
+    };
+  } finally {
+    payload.fill(0);
+  }
+}
+
 
 function sendReauthorizationError(
   res: Response,
@@ -437,6 +647,90 @@ function sendReauthorizationError(
         : 409;
   res.status(status).json({
     error: error.code
+  });
+  return true;
+}
+
+function sendProcessWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "PROCESS_PLEADING_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
+function sendCourtWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "COURT_ANALYSIS_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
+function sendChronologyWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "CHRONOLOGY_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
+function sendContractWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "CONTRACT_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
   });
   return true;
 }
@@ -689,6 +983,100 @@ function parseSessionKnowledgeRequest(
   };
 }
 
+async function assertDocumentWorkflowFinalizationAllowed(
+  options: Pick<
+    LexHttpAppOptions,
+    | "documentGenerationState"
+    | "processWorkflowStore"
+  >,
+  args: {
+    caseId: string;
+    artifactId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }
+): Promise<void> {
+  if (!options.documentGenerationState) {
+    throw new Error(
+      "DOCUMENT_GENERATION_STATE_SERVICE_UNAVAILABLE"
+    );
+  }
+  const generation =
+    await options
+      .documentGenerationState
+      .readState(
+        args.caseId,
+        args.artifactId
+      );
+  if (!generation) {
+    throw new Error(
+      "GENERATION_STATE_MISSING"
+    );
+  }
+  if (
+    generation.workflowRequirement !==
+      "PROCESS_PLEADING_FINAL"
+  ) {
+    return;
+  }
+  if (!options.processWorkflowStore) {
+    throw new Error(
+      "PROCESS_PLEADING_STATE_SERVICE_UNAVAILABLE"
+    );
+  }
+  const processState =
+    await options
+      .processWorkflowStore
+      .getProcessPleadingState({
+        caseId: args.caseId,
+        caseDataKey:
+          args.caseDataKey,
+        keyVersion:
+          args.keyVersion
+      });
+  if (
+    !processState ||
+    processState.stage !== "FINAL" ||
+    processState.documentStatus !==
+      "FINAL" ||
+    processState.pendingCheckpoint !==
+      null
+  ) {
+    throw new Error(
+      "PROCESS_PLEADING_FINAL_REQUIRED"
+    );
+  }
+}
+
+function previewSessionWorkflow(
+  registry: LexSkillRegistry,
+  request: SessionExecutionRequest
+) {
+  const envelope =
+    parseSkillSelectionEnvelope(
+      request.query
+    );
+  const effectiveQuery =
+    envelope.query.trim();
+  if (!effectiveQuery) {
+    throw new Error(
+      "EMPTY_QUERY_AFTER_SKILL_ENVELOPE"
+    );
+  }
+  const selection =
+    resolveAdditionalSkills(
+      registry,
+      effectiveQuery,
+      request.primarySkill,
+      envelope.automatic,
+      envelope.manualSkills
+    );
+  return createDeterministicWorkflowPlan(
+    registry,
+    selection.workflowExecutionSkill
+  );
+}
+
 function parseSessionRequest(
   body: unknown
 ): SessionExecutionRequest | null {
@@ -717,6 +1105,13 @@ function parseSessionRequest(
     value.mode === "LAIK" || value.mode === "PRAWNIK"
       ? value.mode
       : "PRAWNIK";
+  const auxiliaryText =
+    typeof value.auxiliaryText ===
+      "string"
+      ? value.auxiliaryText
+          .normalize("NFKC")
+          .trim()
+      : "";
 
   if (
     query.length < 1 ||
@@ -725,7 +1120,8 @@ function parseSessionRequest(
     model.length < 1 ||
     model.length > 256 ||
     primarySkill.length < 1 ||
-    primarySkill.length > 160
+    primarySkill.length > 160 ||
+    auxiliaryText.length > 12_000
   ) {
     return null;
   }
@@ -735,8 +1131,103 @@ function parseSessionRequest(
     provider,
     model,
     primarySkill,
-    mode
+    mode,
+    ...(auxiliaryText
+      ? { auxiliaryText }
+      : {})
   };
+}
+
+async function refreshDocumentCitations(args: {
+  result: SessionExecutionResponse;
+  documentService: DocumentService;
+  caseAccessService?: Pick<
+    LocalCaseAccessService,
+    "assertAccess" | "openCase" | "withCaseDataKey"
+  >;
+  actor?: AuthenticatedContext;
+}): Promise<number> {
+  const citations =
+    args.result.documentCitations ?? [];
+  if (citations.length === 0) {
+    return 0;
+  }
+
+  for (const citation of citations) {
+    if (
+      citation.caseId &&
+      args.caseAccessService &&
+      args.documentService.restoreDocument
+    ) {
+      if (!args.actor) {
+        throw new Error(
+          "DOCUMENT_CITATION_REFRESH_AUTH_REQUIRED"
+        );
+      }
+      args.caseAccessService.assertAccess(
+        args.actor,
+        citation.caseId,
+        "ANALYZE"
+      );
+      const caseView =
+        args.caseAccessService.openCase(
+          args.actor,
+          citation.caseId
+        );
+      await args.caseAccessService
+        .withCaseDataKey(
+          args.actor,
+          citation.caseId,
+          "ANALYZE",
+          (caseDataKey) =>
+            args.documentService
+              .restoreDocument!({
+                caseId:
+                  citation.caseId!,
+                documentId:
+                  citation.documentId,
+                caseDataKey,
+                keyVersion:
+                  caseView.keyVersion
+              })
+        );
+    }
+
+    const refreshed =
+      await args.documentService
+        .resolveProtectedChunks({
+          documentId:
+            citation.documentId,
+          chunkIndices: [
+            citation.chunkIndex
+          ]
+        });
+    const chunk =
+      refreshed.chunks.find(
+        (item) =>
+          item.index ===
+            citation.chunkIndex
+      );
+    if (!chunk) {
+      throw new Error(
+        "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+      );
+    }
+    if (
+      chunk.pageStart !==
+        citation.pageStart ||
+      chunk.pageEnd !==
+        citation.pageEnd ||
+      chunk.text !==
+        citation.contextText
+    ) {
+      throw new Error(
+        "DOCUMENT_CITATION_SOURCE_CHANGED"
+      );
+    }
+  }
+
+  return citations.length;
 }
 
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
@@ -1138,6 +1629,155 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.json(
           responseAuthContext(res)
         );
+      }
+    );
+
+    app.get(
+      "/api/guide/state",
+      (_req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const actor =
+          responseAuthContext(res);
+        res.json({
+          state:
+            options.guideSessionStore
+              .get(
+                actor.session
+                  .sessionId
+              )
+        });
+      }
+    );
+
+    app.post(
+      "/api/guide/initialize",
+      (req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const actor =
+          responseAuthContext(res);
+        const audience =
+          req.body?.audience ===
+            "LAIK" ||
+          req.body?.audience ===
+            "PRAWNIK"
+            ? req.body.audience
+            : null;
+        if (!audience) {
+          res.status(400).json({
+            error:
+              "GUIDE_AUDIENCE_INVALID"
+          });
+          return;
+        }
+        res.json({
+          state:
+            options.guideSessionStore
+              .initialize(
+                actor.session
+                  .sessionId,
+                audience
+              )
+        });
+      }
+    );
+
+    app.post(
+      "/api/guide/transition",
+      (req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const transition =
+          parseGuideTransition(
+            req.body?.transition
+          );
+        if (
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1 ||
+          !transition
+        ) {
+          res.status(400).json({
+            error:
+              "GUIDE_TRANSITION_REQUEST_INVALID"
+          });
+          return;
+        }
+
+        try {
+          const actor =
+            responseAuthContext(res);
+          res.json({
+            state:
+              options.guideSessionStore
+                .transition({
+                  sessionId:
+                    actor.session
+                      .sessionId,
+                  expectedRevision,
+                  transition
+                })
+          });
+        } catch (error) {
+          const code =
+            error instanceof Error
+              ? error.message
+              : "GUIDE_TRANSITION_FAILED";
+          res.status(
+            code ===
+              "GUIDE_SESSION_STATE_CONFLICT" ||
+            code ===
+              "GUIDE_IRREVERSIBLE_ACTION_PENDING"
+              ? 409
+              : code.includes(
+                    "INVALID"
+                  ) ||
+                  code.includes(
+                    "TRANSITION"
+                  ) ||
+                  code.includes(
+                    "MISMATCH"
+                  ) ||
+                  code.includes(
+                    "CONFIRMATION_REQUIRED"
+                  )
+                ? 422
+                : code ===
+                    "GUIDE_SESSION_STATE_NOT_FOUND"
+                  ? 404
+                  : 500
+          ).json({
+            error: code
+          });
+        }
       }
     );
 
@@ -3339,6 +3979,115 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  app.get(
+    "/api/model-routing/preferences",
+    (_req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const actor =
+        responseAuthContext(res);
+      res.json(
+        options.authService
+          .getModelRoutingPreferences(
+            actor
+          )
+      );
+    }
+  );
+
+  app.put(
+    "/api/model-routing/preferences",
+    (req, res) => {
+      if (!options.authService) {
+        res.status(503).json({
+          error:
+            "AUTH_SERVICE_UNAVAILABLE"
+        });
+        return;
+      }
+      const body =
+        req.body &&
+        typeof req.body ===
+          "object" &&
+        !Array.isArray(req.body)
+          ? req.body as
+              Record<
+                string,
+                unknown
+              >
+          : null;
+      const provider =
+        typeof body
+          ?.auxiliaryProvider ===
+          "string"
+          ? body
+              .auxiliaryProvider
+          : "";
+      const model =
+        typeof body
+          ?.auxiliaryModel ===
+          "string"
+          ? body
+              .auxiliaryModel
+              .trim()
+          : "";
+      const enabled =
+        body?.auxiliaryEnabled;
+
+      if (
+        typeof enabled !==
+          "boolean" ||
+        !isProviderId(provider) ||
+        model.length < 1 ||
+        model.length > 256
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_MODEL_ROUTING_PREFERENCES"
+        });
+        return;
+      }
+
+      const actor =
+        responseAuthContext(res);
+      try {
+        res.json(
+          options.authService
+            .setModelRoutingPreferences(
+              actor,
+              {
+                auxiliaryEnabled:
+                  enabled,
+                auxiliaryProvider:
+                  provider,
+                auxiliaryModel:
+                  model
+              }
+            )
+        );
+      } catch (error) {
+        if (
+          error instanceof
+            AuthError
+        ) {
+          res.status(
+            error.httpStatus
+          ).json({
+            error:
+              error.code
+          });
+          return;
+        }
+        throw error;
+      }
+    }
+  );
+
   app.get("/api/providers", async (_req, res) => {
     if (!options.credentialResolver) {
       res.status(503).json({
@@ -3374,6 +4123,38 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         models: sanitizeModels(models)
       });
     } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.startsWith(
+          "PROCESS_PLEADING_"
+        )
+      ) {
+        const code =
+          error.message.split(
+            ":",
+            1
+          )[0]!;
+        res.status(
+          code ===
+            "PROCESS_PLEADING_CASE_REQUIRED"
+            ? 422
+            : 409
+        ).json({
+          error: code,
+          ...(error.message.includes(":")
+            ? {
+                detail:
+                  error.message.slice(
+                    error.message.indexOf(
+                      ":"
+                    ) + 1
+                  )
+              }
+            : {})
+        });
+        return;
+      }
+
       if (error instanceof MissingProviderCredentialError) {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
@@ -4449,7 +5230,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     "/api/cases/:caseId/artifacts/:artifactId/deanonymization-intent",
     async (req, res) => {
       if (
-        !options.reauthorizationManager
+        !options.reauthorizationManager ||
+        !options.caseAccessService ||
+        !options.documentGenerationState
       ) {
         res.status(503).json({
           error:
@@ -4458,22 +5241,52 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
       try {
+        const context =
+          responseAuthContext(res);
+        const caseId =
+          String(
+            req.params.caseId ??
+              ""
+          );
+        const artifactId =
+          String(
+            req.params
+              .artifactId ??
+              ""
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        await options
+          .caseAccessService
+          .withCaseDataKey(
+            context,
+            caseId,
+            "ANALYZE",
+            async (
+              caseDataKey
+            ) =>
+              await assertDocumentWorkflowFinalizationAllowed(
+                options,
+                {
+                  caseId,
+                  artifactId,
+                  caseDataKey,
+                  keyVersion:
+                    caseView.keyVersion
+                }
+              )
+          );
         const intent =
           await options
             .reauthorizationManager
             .createIntent(
-              responseAuthContext(
-                res
-              ),
-              String(
-                req.params.caseId ??
-                  ""
-              ),
-              String(
-                req.params
-                  .artifactId ??
-                  ""
-              )
+              context,
+              caseId,
+              artifactId
             );
         res.status(201).json({
           intent
@@ -4485,6 +5298,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             error
           ) &&
           !sendReauthorizationError(
+            res,
+            error
+          ) &&
+          !sendProcessWorkflowError(
             res,
             error
           )
@@ -4554,6 +5371,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           !sendReauthorizationError(
             res,
             error
+          ) &&
+          !sendProcessWorkflowError(
+            res,
+            error
           )
         ) {
           res.status(500).json({
@@ -4611,8 +5432,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "REIDENTIFY",
               async (
                 caseDataKey
-              ) =>
-                await options
+              ) => {
+                await assertDocumentWorkflowFinalizationAllowed(
+                  options,
+                  {
+                    caseId:
+                      target.caseId,
+                    artifactId:
+                      target.artifactId,
+                    caseDataKey,
+                    keyVersion:
+                      target
+                        .caseKeyVersion
+                  }
+                );
+                return await options
                   .documentAuthoringService!
                   .deanonymizeConsumed({
                     target,
@@ -4633,7 +5467,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                               .filename
                         }
                       : {})
-                  })
+                  });
+              }
             );
         const downloadTicket =
           options
@@ -4672,6 +5507,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             error
           ) &&
           !sendReauthorizationError(
+            res,
+            error
+          ) &&
+          !sendProcessWorkflowError(
             res,
             error
           )
@@ -4861,6 +5700,190 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  app.get(
+    "/api/cases/:caseId/workflow-audits/:artifactId",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options
+          .secureCaseArtifactStore
+      ) {
+        res.status(503).json({
+          error:
+            "WORKFLOW_AUDIT_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const caseId =
+        String(
+          req.params.caseId ??
+            ""
+        );
+      const artifactId =
+        String(
+          req.params
+            .artifactId ??
+            ""
+        );
+      if (
+        !/^case_[a-f0-9]{32}$/.test(
+          caseId
+        ) ||
+        !/^artifact_[a-f0-9]{32}$/.test(
+          artifactId
+        )
+      ) {
+        res.status(400).json({
+          error:
+            "WORKFLOW_AUDIT_ID_INVALID"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const view =
+          options
+            .caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+
+        const result =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) => {
+                const artifacts =
+                  await options
+                    .secureCaseArtifactStore!
+                    .listArtifacts({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion
+                    });
+                const artifact =
+                  artifacts.find(
+                    (item) =>
+                      item.artifactId ===
+                        artifactId &&
+                      item.sensitivity ===
+                        "PROTECTED" &&
+                      item.mediaType ===
+                        "application/vnd.lexmachina.workflow-audit+json"
+                  );
+                if (!artifact) {
+                  throw new Error(
+                    "WORKFLOW_AUDIT_NOT_FOUND"
+                  );
+                }
+
+                const data =
+                  await options
+                    .secureCaseArtifactStore!
+                    .readArtifact({
+                      caseId,
+                      artifactId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion,
+                      maxBytes:
+                        2 *
+                        1024 *
+                        1024
+                    });
+                try {
+                  const digest =
+                    createHash(
+                      "sha256"
+                    )
+                      .update(data)
+                      .digest(
+                        "hex"
+                      );
+                  if (
+                    digest !==
+                    artifact.sha256
+                  ) {
+                    throw new Error(
+                      "WORKFLOW_AUDIT_HASH_MISMATCH"
+                    );
+                  }
+                  const audit =
+                    parseWorkflowAuditArtifact(
+                      data
+                    );
+                  if (
+                    audit.caseId !==
+                      caseId
+                  ) {
+                    throw new Error(
+                      "WORKFLOW_AUDIT_CASE_MISMATCH"
+                    );
+                  }
+                  return {
+                    artifactId,
+                    sha256:
+                      artifact.sha256,
+                    createdAt:
+                      artifact.createdAt,
+                    audit
+                  };
+                } finally {
+                  data.fill(0);
+                }
+              }
+            );
+
+        res.setHeader(
+          "Cache-Control",
+          "no-store"
+        );
+        res.json(result);
+      } catch (error) {
+        if (
+          sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          return;
+        }
+
+        const message =
+          error instanceof Error
+            ? error.message
+            : "WORKFLOW_AUDIT_READ_FAILED";
+        const status =
+          message ===
+            "WORKFLOW_AUDIT_NOT_FOUND"
+            ? 404
+            : message ===
+                "WORKFLOW_AUDIT_HASH_MISMATCH" ||
+              message ===
+                "WORKFLOW_AUDIT_CASE_MISMATCH" ||
+              message ===
+                "WORKFLOW_AUDIT_ARTIFACT_INVALID" ||
+              message ===
+                "WORKFLOW_AUDIT_ARTIFACT_SIZE_INVALID"
+              ? 409
+              : 422;
+        res.status(status).json({
+          error: message
+        });
+      }
+    }
+  );
+
   app.post("/api/sessions/execute", async (req, res) => {
     if (!options.sessionExecutor) {
       res.status(503).json({
@@ -4896,6 +5919,97 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         reason: route.reason
       });
       return;
+    }
+
+    if (options.authService) {
+      const actor =
+        responseAuthContext(res);
+      const preferences =
+        options.authService
+          .getModelRoutingPreferences(
+            actor
+          );
+      request.auxiliaryRouting = {
+        enabled:
+          preferences
+            .auxiliaryEnabled,
+        provider:
+          preferences
+            .auxiliaryProvider,
+        model:
+          preferences
+            .auxiliaryModel
+      };
+
+      if (
+        request.primarySkill ===
+          "przewodnik-prawny-v2"
+      ) {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        let guide =
+          options.guideSessionStore
+            .get(
+              actor.session
+                .sessionId
+            ) ??
+          options.guideSessionStore
+            .initialize(
+              actor.session
+                .sessionId,
+              request.mode
+            );
+        if (
+          guide.audience !==
+            request.mode
+        ) {
+          guide =
+            options.guideSessionStore
+              .transition({
+                sessionId:
+                  actor.session
+                    .sessionId,
+                expectedRevision:
+                  guide.revision,
+                transition: {
+                  type:
+                    "SET_AUDIENCE",
+                  audience:
+                    request.mode
+                }
+              });
+        }
+        request.guideContext = {
+          revision:
+            guide.revision,
+          audience:
+            guide.audience,
+          interactionMode:
+            guide
+              .interactionMode,
+          rawAnalysis:
+            guide.rawAnalysis,
+          step: guide.step,
+          guidedQuestionIndex:
+            guide
+              .guidedQuestionIndex,
+          pendingIrreversibleAction:
+            guide
+              .pendingIrreversibleAction
+              ? {
+                  ...guide
+                    .pendingIrreversibleAction
+                }
+              : null
+        };
+      }
     }
 
     try {
@@ -5239,7 +6353,1927 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           sessionAttachments;
       }
 
-      const result = await options.sessionExecutor.execute(request);
+      const localContextWindow =
+        options.modelCatalog
+          .localContextWindow?.(
+            request.model
+          );
+      if (localContextWindow) {
+        request.modelContextTokens =
+          localContextWindow;
+        const localTokenCharsPerToken =
+          options.modelCatalog
+            .localTokenCharsPerToken?.(
+              request.model
+            );
+        if (
+          localTokenCharsPerToken
+        ) {
+          request.tokenCharsPerToken =
+            localTokenCharsPerToken;
+        }
+      }
+
+      const previewPlan =
+        previewSessionWorkflow(
+          options.registry,
+          request
+        );
+      let processContext:
+        | {
+            caseId: string;
+            permit: ProcessExecutionPermit;
+            state: ProcessPleadingState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "PROCESS_PLEADING_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options.processWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "PROCESS_PLEADING_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (caseId):
+                  caseId is string =>
+                    Boolean(caseId)
+              )
+          );
+        const processCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!processCaseId) {
+          throw new Error(
+            "PROCESS_PLEADING_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            processCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processCaseId
+            );
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              processCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const current =
+                  await options
+                    .processWorkflowStore!
+                    .getProcessPleadingState({
+                      caseId:
+                        processCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  return null;
+                }
+
+                let inventory:
+                  ProcessEvidenceInventory = {
+                    fileCount: null,
+                    complete: false,
+                    source:
+                      "UNAVAILABLE"
+                  };
+
+                if (
+                  options
+                    .secureCaseUploadStore
+                ) {
+                  const uploads =
+                    await options
+                      .secureCaseUploadStore
+                      .listUploads({
+                        caseId:
+                          processCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  inventory =
+                    evidenceInventoryFromUploads(
+                      uploads,
+                      "ENCRYPTED_CASE_UPLOADS"
+                    );
+                } else if (
+                  options
+                    .caseFileStore
+                    ?.listUploads
+                ) {
+                  const uploads =
+                    await options
+                      .caseFileStore
+                      .listUploads(
+                        processCaseId
+                      );
+                  inventory =
+                    evidenceInventoryFromUploads(
+                      uploads,
+                      "LEGACY_CASE_UPLOADS"
+                    );
+                }
+
+                const applicability =
+                  applyDeterministicProcessApplicability(
+                    current,
+                    inventory
+                  );
+
+                if (
+                  applicability.state
+                    .revision ===
+                  current.revision
+                ) {
+                  return current;
+                }
+
+                return await options
+                  .processWorkflowStore!
+                  .saveProcessPleadingState({
+                    caseId:
+                      processCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion,
+                    state:
+                      applicability.state,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
+            );
+        const permit =
+          requireProcessExecutionPermit(
+            state
+          );
+        request.processWorkflowContext = {
+          stage: permit.stage,
+          checkpoint:
+            permit.checkpoint,
+          mode: permit.mode
+        };
+        processContext = {
+          caseId:
+            processCaseId,
+          permit,
+          state: state!
+        };
+      }
+
+      let courtContext:
+        | {
+            caseId: string;
+            permit:
+              CourtAnalysisExecutionPermit;
+            state:
+              CourtAnalysisState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "COURT_ANALYSIS_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .courtAnalysisWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "COURT_ANALYSIS_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const courtCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!courtCaseId) {
+          throw new Error(
+            "COURT_ANALYSIS_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            courtCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              courtCaseId
+            );
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              courtCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const current =
+                  await options
+                    .courtAnalysisWorkflowStore!
+                    .getCourtAnalysisState({
+                      caseId:
+                        courtCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (current) {
+                  return current;
+                }
+                return await options
+                  .courtAnalysisWorkflowStore!
+                  .saveCourtAnalysisState({
+                    caseId:
+                      courtCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion,
+                    state:
+                      createCourtAnalysisState(
+                        courtCaseId
+                      )
+                  });
+              }
+            );
+
+        const permit =
+          requireCourtAnalysisExecutionPermit(
+            state
+          );
+        request.courtWorkflowContext = {
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint
+        };
+        courtContext = {
+          caseId:
+            courtCaseId,
+          permit,
+          state
+        };
+      }
+
+      let chronologyContext:
+        | {
+            caseId: string;
+            permit:
+              ChronologyExecutionPermit;
+            state:
+              ChronologyState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "CHRONOLOGY_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .chronologyWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "CHRONOLOGY_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const chronologyCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!chronologyCaseId) {
+          throw new Error(
+            "CHRONOLOGY_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            chronologyCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              chronologyCaseId
+            );
+
+        const temporalRequired =
+          chronologyTemporalGateRequired([
+            request.query,
+            ...sessionAttachments.flatMap(
+              (attachment) =>
+                attachment.chunks.map(
+                  (chunk) =>
+                    chunk.text
+                )
+            )
+          ]);
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              chronologyCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                let current =
+                  await options
+                    .chronologyWorkflowStore!
+                    .getChronologyState({
+                      caseId:
+                        chronologyCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+
+                if (!current) {
+                  current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state:
+                          createChronologyState(
+                            chronologyCaseId
+                          )
+                      });
+                }
+
+                if (
+                  temporalRequired &&
+                  !current
+                    .temporalGateRequired
+                ) {
+                  const next =
+                    requireChronologyTemporalGate(
+                      current,
+                      true
+                    );
+                  current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                }
+                return current;
+              }
+            );
+
+        const permit =
+          requireChronologyExecutionPermit(
+            state
+          );
+        request.chronologyWorkflowContext = {
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint,
+          temporalGateRequired:
+            state
+              .temporalGateRequired
+        };
+        chronologyContext = {
+          caseId:
+            chronologyCaseId,
+          permit,
+          state
+        };
+      }
+
+      let contractContext:
+        | {
+            caseId: string;
+            permit:
+              ContractExecutionPermit;
+            state:
+              ContractAnalysisState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "CONTRACT_ANALYSIS_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .contractWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "CONTRACT_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const contractCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!contractCaseId) {
+          throw new Error(
+            "CONTRACT_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            contractCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              contractCaseId
+            );
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              contractCaseId,
+              "WRITE",
+              (
+                caseDataKey
+              ) =>
+                options
+                  .contractWorkflowStore!
+                  .getContractAnalysisState({
+                    caseId:
+                      contractCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion
+                  })
+            );
+        if (!state) {
+          throw new Error(
+            "CONTRACT_STATE_REQUIRED"
+          );
+        }
+
+        const permit =
+          requireContractExecutionPermit(
+            state
+          );
+        request.contractWorkflowContext = {
+          mode:
+            permit.mode,
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint
+        };
+        contractContext = {
+          caseId:
+            contractCaseId,
+          permit,
+          state
+        };
+      }
+
+      let orderedCaseContext:
+        | {
+            caseId: string;
+            permit:
+              OrderedCaseExecutionPermit;
+            state:
+              OrderedCaseWorkflowState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "EVIDENCE_ANALYSIS_V1" ||
+        previewPlan.id ===
+          "WITNESS_QUESTIONING_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .orderedCaseWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "ORDERED_WORKFLOW_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const workflowId =
+          previewPlan.id as
+            OrderedCaseWorkflowId;
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const orderedCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!orderedCaseId) {
+          throw new Error(
+            "ORDERED_WORKFLOW_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            orderedCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              orderedCaseId
+            );
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              orderedCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                let current =
+                  await options
+                    .orderedCaseWorkflowStore!
+                    .getOrderedCaseWorkflowState({
+                      caseId:
+                        orderedCaseId,
+                      workflowId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  current =
+                    await options
+                      .orderedCaseWorkflowStore!
+                      .saveOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseId,
+                        workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state:
+                          createOrderedCaseWorkflowState(
+                            workflowId,
+                            orderedCaseId
+                          )
+                      });
+                }
+                return current;
+              }
+            );
+
+        const permit =
+          requireOrderedCaseExecutionPermit(
+            state
+          );
+        request
+          .orderedCaseWorkflowContext = {
+            workflowId,
+            checkpoint:
+              permit.checkpoint,
+            revision:
+              permit.revision
+          };
+        orderedCaseContext = {
+          caseId:
+            orderedCaseId,
+          permit,
+          state
+        };
+      }
+
+      if (
+        processContext?.permit.mode ===
+          "AUTO" &&
+        options.caseAccessService &&
+        options.processWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processContext.caseId
+            );
+
+        const refreshCitations =
+          async (
+            result:
+              SessionExecutionResponse
+          ) => {
+            if (
+              !result.documentCitations ||
+              result.documentCitations
+                .length === 0
+            ) {
+              return;
+            }
+            if (!options.documentService) {
+              throw new Error(
+                "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+              );
+            }
+            const checked =
+              await refreshDocumentCitations({
+                result,
+                documentService:
+                  options.documentService,
+                caseAccessService:
+                  options.caseAccessService!,
+                actor
+              });
+            result.documentCitationFreshness = {
+              result: "PASS",
+              checked
+            };
+          };
+
+        const auto =
+          await runBoundedProcessAutoSequence<
+            SessionExecutionResponse
+          >({
+            initialState:
+              processContext.state,
+            prepareState:
+              async (expected) =>
+                await options
+                  .caseAccessService!
+                  .withCaseDataKey(
+                    actor,
+                    processContext!
+                      .caseId,
+                    "WRITE",
+                    async (
+                      caseDataKey
+                    ) => {
+                      const current =
+                        await options
+                          .processWorkflowStore!
+                          .getProcessPleadingState({
+                            caseId:
+                              processContext!
+                                .caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView
+                                .keyVersion
+                          });
+                      if (
+                        !current ||
+                        current.revision !==
+                          expected.revision
+                      ) {
+                        throw new Error(
+                          "PROCESS_PLEADING_STATE_CONFLICT"
+                        );
+                      }
+
+                      let inventory:
+                        ProcessEvidenceInventory = {
+                          fileCount:
+                            null,
+                          complete:
+                            false,
+                          source:
+                            "UNAVAILABLE"
+                        };
+
+                      if (
+                        options
+                          .secureCaseUploadStore
+                      ) {
+                        const uploads =
+                          await options
+                            .secureCaseUploadStore
+                            .listUploads({
+                              caseId:
+                                processContext!
+                                  .caseId,
+                              caseDataKey,
+                              keyVersion:
+                                caseView
+                                  .keyVersion
+                            });
+                        inventory =
+                          evidenceInventoryFromUploads(
+                            uploads,
+                            "ENCRYPTED_CASE_UPLOADS"
+                          );
+                      } else if (
+                        options
+                          .caseFileStore
+                          ?.listUploads
+                      ) {
+                        const uploads =
+                          await options
+                            .caseFileStore
+                            .listUploads(
+                              processContext!
+                                .caseId
+                            );
+                        inventory =
+                          evidenceInventoryFromUploads(
+                            uploads,
+                            "LEGACY_CASE_UPLOADS"
+                          );
+                      }
+
+                      const applicability =
+                        applyDeterministicProcessApplicability(
+                          current,
+                          inventory
+                        );
+                      if (
+                        applicability.state
+                          .revision ===
+                        current.revision
+                      ) {
+                        return current;
+                      }
+                      return await options
+                        .processWorkflowStore!
+                        .saveProcessPleadingState({
+                          caseId:
+                            processContext!
+                              .caseId,
+                          caseDataKey,
+                          keyVersion:
+                            caseView
+                              .keyVersion,
+                          state:
+                            applicability
+                              .state,
+                          expectedRevision:
+                            current.revision
+                        });
+                    }
+                  ),
+            execute:
+              async (
+                permit
+              ) => {
+                const nodeRequest:
+                  SessionExecutionRequest = {
+                    ...request,
+                    processWorkflowContext: {
+                      stage:
+                        permit.stage,
+                      checkpoint:
+                        permit.checkpoint,
+                      mode:
+                        permit.mode
+                    }
+                  };
+                const nodeResult =
+                  await options
+                    .sessionExecutor!
+                    .execute(
+                      nodeRequest
+                    );
+                await refreshCitations(
+                  nodeResult
+                );
+                const commit =
+                  nodeResult.status ===
+                    "DRAFT_PRESENTABLE" &&
+                  nodeResult.workflow
+                    ?.id ===
+                    "PROCESS_PLEADING_V1" &&
+                  nodeResult.workflow
+                    .result ===
+                    "PASS";
+                return {
+                  result:
+                    nodeResult,
+                  commit
+                };
+              },
+            persist:
+              async (
+                previous,
+                next
+              ) =>
+                await options
+                  .caseAccessService!
+                  .withCaseDataKey(
+                    actor,
+                    processContext!
+                      .caseId,
+                    "WRITE",
+                    async (
+                      caseDataKey
+                    ) => {
+                      const current =
+                        await options
+                          .processWorkflowStore!
+                          .getProcessPleadingState({
+                            caseId:
+                              processContext!
+                                .caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView
+                                .keyVersion
+                          });
+                      if (
+                        !current ||
+                        current.revision !==
+                          previous.revision
+                      ) {
+                        throw new Error(
+                          "PROCESS_PLEADING_STATE_CONFLICT"
+                        );
+                      }
+                      return await options
+                        .processWorkflowStore!
+                        .saveProcessPleadingState({
+                          caseId:
+                            processContext!
+                              .caseId,
+                          caseDataKey,
+                          keyVersion:
+                            caseView
+                              .keyVersion,
+                          state:
+                            next,
+                          expectedRevision:
+                            previous
+                              .revision
+                        });
+                    }
+                  )
+          });
+
+        const lastSuccessful =
+          auto.steps.at(-1)
+            ?.result;
+        const response =
+          auto.blockedResult ??
+          lastSuccessful;
+        if (!response) {
+          throw new Error(
+            "PROCESS_PLEADING_AUTO_RESULT_MISSING"
+          );
+        }
+
+        const successfulAnswers =
+          auto.steps
+            .filter(
+              (step) =>
+                typeof step.result
+                  .answer ===
+                  "string" &&
+                step.result.answer
+                  .trim()
+            )
+            .map(
+              (step) =>
+                [
+                  `## ${step.permit.checkpoint}`,
+                  step.result.answer!
+                    .trim()
+                ].join("\n\n")
+            );
+
+        if (
+          response.status ===
+            "DRAFT_PRESENTABLE" &&
+          successfulAnswers.length > 0
+        ) {
+          response.answer =
+            successfulAnswers.join(
+              "\n\n---\n\n"
+            );
+        }
+
+        response.processAuto = {
+          maxSteps:
+            PROCESS_AUTO_MAX_STEPS,
+          stopped:
+            auto.stopped,
+          limitReached:
+            auto.limitReached,
+          steps:
+            auto.steps.map(
+              (step) => ({
+                stage:
+                  step.permit.stage,
+                checkpoint:
+                  step.permit
+                    .checkpoint,
+                revisionAfter:
+                  step.revisionAfter,
+                status:
+                  step.result.status,
+                ...(typeof step
+                  .result.answer ===
+                    "string"
+                  ? {
+                      answer:
+                        step.result
+                          .answer
+                    }
+                  : {})
+              })
+            )
+        };
+        response.processWorkflow = {
+          caseId:
+            processContext.caseId,
+          mode:
+            auto.state.mode,
+          revision:
+            auto.state.revision,
+          stage:
+            auto.state.stage,
+          documentStatus:
+            auto.state
+              .documentStatus,
+          pendingCheckpoint:
+            auto.state
+              .pendingCheckpoint,
+          checkpoints: {
+            ...auto.state
+              .checkpoints
+          }
+        };
+
+        res.json(response);
+        return;
+      }
+
+      const result =
+        await options
+          .sessionExecutor
+          .execute(request);
+
+      if (
+        result.documentCitations &&
+        result.documentCitations.length > 0
+      ) {
+        if (!options.documentService) {
+          throw new Error(
+            "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+          );
+        }
+        const actor =
+          options.caseAccessService
+            ? responseAuthContext(res)
+            : undefined;
+        const checked =
+          await refreshDocumentCitations({
+            result,
+            documentService:
+              options.documentService,
+            ...(options.caseAccessService
+              ? {
+                  caseAccessService:
+                    options.caseAccessService
+                }
+              : {}),
+            ...(actor
+              ? { actor }
+              : {})
+          });
+        result.documentCitationFreshness = {
+          result: "PASS",
+          checked
+        };
+      }
+
+      if (
+        orderedCaseContext &&
+        options.caseAccessService &&
+        options
+          .orderedCaseWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              orderedCaseContext.caseId
+            );
+
+        let state =
+          orderedCaseContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            orderedCaseContext
+              .permit.workflowId &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                orderedCaseContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .orderedCaseWorkflowStore!
+                      .getOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        workflowId:
+                          orderedCaseContext!
+                            .permit
+                            .workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "ORDERED_WORKFLOW_STATE_CONFLICT"
+                    );
+                  }
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
+                      caseId:
+                        orderedCaseContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        orderedCaseContext!
+                          .permit
+                          .workflowId,
+                      checkpoint:
+                        orderedCaseContext!
+                          .permit
+                          .checkpoint,
+                      result
+                    });
+
+                  try {
+                    const next =
+                      completeOrderedCaseExecution(
+                        current,
+                        orderedCaseContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .orderedCaseWorkflowStore!
+                      .saveOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        workflowId:
+                          orderedCaseContext!
+                            .permit
+                            .workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
+                }
+              );
+        }
+
+        result.orderedCaseWorkflow = {
+          workflowId:
+            state.workflowId,
+          caseId:
+            state.caseId,
+          revision:
+            state.revision,
+          status:
+            state.status,
+          nextCheckpoint:
+            nextOrderedCaseCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
+        contractContext &&
+        options.caseAccessService &&
+        options
+          .contractWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              contractContext.caseId
+            );
+
+        let state =
+          contractContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "CONTRACT_ANALYSIS_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                contractContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .contractWorkflowStore!
+                      .getContractAnalysisState({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "CONTRACT_STATE_CONFLICT"
+                    );
+                  }
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
+                      caseId:
+                        contractContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "CONTRACT_ANALYSIS_V1",
+                      checkpoint:
+                        contractContext!
+                          .permit
+                          .checkpoint,
+                      result
+                    });
+
+                  try {
+                    const next =
+                      completeContractExecution(
+                        current,
+                        contractContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .contractWorkflowStore!
+                      .saveContractAnalysisState({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
+                }
+              );
+        }
+
+        result.contractWorkflow = {
+          caseId:
+            contractContext.caseId,
+          revision:
+            state.revision,
+          mode:
+            state.mode,
+          stage:
+            state.stage,
+          nextCheckpoint:
+            nextContractCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
+        chronologyContext &&
+        options.caseAccessService &&
+        options
+          .chronologyWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              chronologyContext.caseId
+            );
+
+        let state =
+          chronologyContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "CHRONOLOGY_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                chronologyContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .getChronologyState({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "CHRONOLOGY_STATE_CONFLICT"
+                    );
+                  }
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
+                      caseId:
+                        chronologyContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "CHRONOLOGY_V1",
+                      checkpoint:
+                        chronologyContext!
+                          .permit
+                          .checkpoint,
+                      result
+                    });
+
+                  try {
+                    const next =
+                      completeChronologyExecution(
+                        current,
+                        chronologyContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          chronologyContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
+                }
+              );
+        }
+
+        result.chronologyWorkflow = {
+          caseId:
+            chronologyContext.caseId,
+          revision:
+            state.revision,
+          stage:
+            state.stage,
+          temporalGateRequired:
+            state
+              .temporalGateRequired,
+          nextCheckpoint:
+            nextChronologyCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
+        courtContext &&
+        options.caseAccessService &&
+        options
+          .courtAnalysisWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              courtContext.caseId
+            );
+
+        let state =
+          courtContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "COURT_ANALYSIS_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                courtContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .courtAnalysisWorkflowStore!
+                      .getCourtAnalysisState({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "COURT_ANALYSIS_STATE_CONFLICT"
+                    );
+                  }
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
+                      caseId:
+                        courtContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        "COURT_ANALYSIS_V1",
+                      checkpoint:
+                        courtContext!
+                          .permit
+                          .checkpoint,
+                      result
+                    });
+
+                  try {
+                    const next =
+                      completeCourtAnalysisExecution(
+                        current,
+                        courtContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .courtAnalysisWorkflowStore!
+                      .saveCourtAnalysisState({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
+                }
+              );
+        }
+
+        result.courtWorkflow = {
+          caseId:
+            courtContext.caseId,
+          revision:
+            state.revision,
+          stage:
+            state.stage,
+          nextCheckpoint:
+            nextCourtAnalysisCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
+        processContext &&
+        options.caseAccessService &&
+        options.processWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processContext.caseId
+            );
+
+        let state =
+          processContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.workflow?.id ===
+            "PROCESS_PLEADING_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                processContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .processWorkflowStore!
+                      .getProcessPleadingState({
+                        caseId:
+                          processContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "PROCESS_PLEADING_STATE_CONFLICT"
+                    );
+                  }
+                  const next =
+                    completeProcessExecution(
+                      current,
+                      processContext!
+                        .permit
+                    );
+                  return await options
+                    .processWorkflowStore!
+                    .saveProcessPleadingState({
+                      caseId:
+                        processContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      state: next,
+                      expectedRevision:
+                        current.revision
+                    });
+                }
+              );
+        }
+
+        result.processWorkflow = {
+          caseId:
+            processContext.caseId,
+          mode: state.mode,
+          revision: state.revision,
+          stage: state.stage,
+          documentStatus:
+            state.documentStatus,
+          pendingCheckpoint:
+            state.pendingCheckpoint,
+          checkpoints: {
+            ...state.checkpoints
+          }
+        };
+      }
+
       res.json(result);
     } catch (error) {
       if (
@@ -5255,6 +8289,56 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(503).json({
           error: "PROVIDER_NOT_CONFIGURED",
           provider: error.provider
+        });
+        return;
+      }
+
+      if (
+        sendProcessWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        sendCourtWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        sendChronologyWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        sendContractWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        error instanceof Error &&
+        [
+          "DOCUMENT_CITATION_SOURCE_CHANGED",
+          "DOCUMENT_CITATION_SOURCE_UNAVAILABLE",
+          "DOCUMENT_CITATION_REFRESH_AUTH_REQUIRED"
+        ].includes(error.message)
+      ) {
+        res.status(409).json({
+          error: error.message
         });
         return;
       }
@@ -5281,6 +8365,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(502).json({
           error: "PROVIDER_EXECUTION_FAILED",
           provider: error.provider
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
+        error.message ===
+          "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+      ) {
+        res.status(503).json({
+          error:
+            "WORKFLOW_AUDIT_UNAVAILABLE"
         });
         return;
       }

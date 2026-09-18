@@ -304,6 +304,13 @@ export class LocalDocumentAuthoringService {
             vaultGeneration,
             caseKeyVersion:
               args.keyVersion,
+            ...(validated.ast.documentType ===
+              "pleading"
+              ? {
+                  workflowRequirement:
+                    "PROCESS_PLEADING_FINAL" as const
+                }
+              : {}),
             createdAt:
               new Date()
                 .toISOString()

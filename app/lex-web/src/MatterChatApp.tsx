@@ -10,7 +10,9 @@ import { DocumentCitationContent } from "./DocumentCitationContent.js";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
 import { WorkspaceManager } from "./WorkspaceManager.js";
+import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
+  ApiError,
   apiBase,
   archiveCase,
   clearProviderApiKey,
@@ -19,11 +21,13 @@ import {
   executeSession,
   getHealth,
   getModels,
+  getModelRoutingPreferences,
   getProviderStatus,
   getRoutes,
   isDesktopShell,
   listCases,
   renameCase,
+  setModelRoutingPreferences,
   setProviderApiKey,
   unarchiveCase,
   type AuthenticatedUser,
@@ -31,6 +35,7 @@ import {
   type DocumentAttachmentSelection,
   type EvidenceItem,
   type ModelDescriptor,
+  type ModelRoutingPreferences,
   type ProviderId,
   type SessionExecutionResponse
 } from "./api.js";
@@ -216,6 +221,28 @@ function executionMessage(
     const domainMeta = execution.domainSkills?.length
       ? ` · domeny: ${execution.domainSkills.map(labelForSkill).join(", ")}`
       : "";
+    const contextMeta =
+      execution.context?.modelContextTokens
+        ? ` · runtime ${execution.context.modelContextTokens.toLocaleString("pl-PL")} tok. · dokumenty ~${execution.context.estimatedDocumentTokens.toLocaleString("pl-PL")} tok.${execution.context.omittedChunks > 0 ? ` · pominięte chunki: ${execution.context.omittedChunks}` : ""}`
+        : execution.context
+          ? ` · dokumenty ~${execution.context.estimatedDocumentTokens.toLocaleString("pl-PL")} tok.`
+          : "";
+    const citationMeta =
+      execution.documentCitationFreshness
+        ? ` · cytaty odświeżone: ${execution.documentCitationFreshness.checked}`
+        : "";
+    const workflowMeta =
+      execution.processAuto
+        ? ` · AUTO: ${execution.processAuto.steps.length}/${execution.processAuto.maxSteps} kroków · ${execution.processAuto.stopped}`
+        : execution.processWorkflow
+          ? ` · proces: ${execution.processWorkflow.stage}${execution.processWorkflow.pendingCheckpoint ? ` · czeka: ${execution.processWorkflow.pendingCheckpoint}` : ""}`
+          : execution.courtWorkflow
+            ? ` · analiza sądowa: ${execution.courtWorkflow.stage}${execution.courtWorkflow.nextCheckpoint ? ` · następny: ${execution.courtWorkflow.nextCheckpoint}` : ""}`
+            : "";
+    const modelRoutingMeta =
+      execution.modelRouting?.auxiliary
+        ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}] · helper ${execution.modelRouting.auxiliary.latencyMs} ms${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}${execution.modelRouting.auxiliary.cachedVerifierReuses > 0 ? ` · cache reuse: ${execution.modelRouting.auxiliary.cachedVerifierReuses}` : ""}`
+        : ` · główny: ${execution.model}`;
     return {
       id: messageId(),
       role: "assistant",
@@ -226,6 +253,10 @@ function executionMessage(
         `routing: ${labelForSkill(execution.primarySkill || route)}` +
         skillMeta +
         domainMeta +
+        contextMeta +
+        citationMeta +
+        workflowMeta +
+        modelRoutingMeta +
         ` · VERIFIED ${execution.verification.verified}` +
         ` · SUPPORTED ${execution.verification.supported}`
     };
@@ -280,6 +311,19 @@ export default function MatterChatApp({
   const [models, setModels] = useState<ModelDescriptor[]>([]);
   const [model, setModel] = useState("");
   const [modelError, setModelError] = useState("");
+  const [modelRouting, setModelRouting] =
+    useState<ModelRoutingPreferences>({
+      auxiliaryEnabled: false,
+      auxiliaryProvider: "openai",
+      auxiliaryModel:
+        "local/bielik-11b-v3-q4km"
+    });
+  const [auxiliaryModels, setAuxiliaryModels] =
+    useState<ModelDescriptor[]>([]);
+  const [modelRoutingBusy, setModelRoutingBusy] =
+    useState(false);
+  const [modelRoutingMessage, setModelRoutingMessage] =
+    useState("");
 
   const [routes, setRoutes] = useState<string[]>([]);
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
@@ -292,6 +336,10 @@ export default function MatterChatApp({
   const [pendingFirstMessage, setPendingFirstMessage] = useState<string | null>(null);
   const [executing, setExecuting] = useState(false);
   const [executionError, setExecutionError] = useState("");
+  const [processWorkflowVisible, setProcessWorkflowVisible] =
+    useState(false);
+  const [processWorkflowRefresh, setProcessWorkflowRefresh] =
+    useState(0);
   const {
     messages,
     setMessages,
@@ -326,6 +374,12 @@ export default function MatterChatApp({
   const providerDefinition = PROVIDERS.find((item) => item.id === provider);
   const providerConfigured = providerConfiguration[provider];
   const selectedModel = models.find((item) => item.id === model);
+  const selectedAuxiliaryModel =
+    auxiliaryModels.find(
+      (item) =>
+        item.id ===
+          modelRouting.auxiliaryModel
+    );
   const executionSkills = useMemo(
     () => skills
       .filter(isExecutionSkill)
@@ -367,9 +421,10 @@ export default function MatterChatApp({
       getHealth(),
       getRoutes(),
       getProviderStatus(),
-      listCases()
+      listCases(),
+      getModelRoutingPreferences()
     ])
-      .then(([health, routeList, providerStatus, caseList]) => {
+      .then(([health, routeList, providerStatus, caseList, routingPreferences]) => {
         if (cancelled) return;
         setRuntimeOnline(health.status === "ok" && health.localOnly === true);
         setRoutes(routeList.primarySkills);
@@ -384,6 +439,9 @@ export default function MatterChatApp({
           Object.fromEntries(
             providerStatus.providers.map((item) => [item.provider, item.configured])
           ) as Record<ProviderId, boolean>
+        );
+        setModelRouting(
+          routingPreferences
         );
       })
       .catch((error) => {
@@ -443,12 +501,60 @@ export default function MatterChatApp({
   }, [provider, providerConfigured]);
 
   useEffect(() => {
+    let cancelled = false;
+    setAuxiliaryModels([]);
+
+    const configured =
+      providerConfiguration[
+        modelRouting.auxiliaryProvider
+      ];
+    if (
+      configured !== true &&
+      !modelRouting.auxiliaryModel
+        .startsWith("local/")
+    ) {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    void getModels(
+      modelRouting.auxiliaryProvider
+    )
+      .then((response) => {
+        if (!cancelled) {
+          setAuxiliaryModels(
+            response.models.filter(
+              (item) =>
+                item.selectable
+            )
+          );
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAuxiliaryModels([]);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    modelRouting.auxiliaryProvider,
+    modelRouting.auxiliaryModel,
+    providerConfiguration
+  ]);
+
+  useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
     setDocumentAttachments([]);
     setIncludeCaseKnowledge(false);
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setDeletePhrase("");
     setDeletePassword("");
+    setProcessWorkflowVisible(false);
+    setProcessWorkflowRefresh((value) => value + 1);
   }, [caseId, selectedCase?.displayName]);
 
   useEffect(() => {
@@ -589,6 +695,32 @@ export default function MatterChatApp({
     }
   }
 
+  async function saveModelRouting(): Promise<void> {
+    if (modelRoutingBusy) return;
+    setModelRoutingBusy(true);
+    setModelRoutingMessage("");
+    try {
+      const saved =
+        await setModelRoutingPreferences(
+          modelRouting
+        );
+      setModelRouting(saved);
+      setModelRoutingMessage(
+        saved.auxiliaryEnabled
+          ? "Model pomocniczy aktywny. Program użyje go tylko dla dozwolonych zadań pomocniczych."
+          : "Model pomocniczy wyłączony."
+      );
+    } catch (error) {
+      setModelRoutingMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setModelRoutingBusy(false);
+    }
+  }
+
   async function executeMessage(plain: string): Promise<void> {
     if (
       executing ||
@@ -622,30 +754,48 @@ export default function MatterChatApp({
         ),
         provider,
         model,
+        auxiliaryText:
+          plain.trim(),
         primarySkill: route,
         mode: "PRAWNIK",
         ...(documentAttachments.length > 0
           ? { attachments: documentAttachments }
           : {}),
-        ...(includeCaseKnowledge || includeFirmKnowledge
-          ? {
-              knowledge: {
-                ...(includeCaseKnowledge
-                  ? { caseId, includeCase: true }
-                  : { includeCase: false }),
-                includeFirm: includeFirmKnowledge,
-                limit: 8
-              }
-            }
-          : {})
+        knowledge: {
+          caseId,
+          includeCase: includeCaseKnowledge,
+          includeFirm: includeFirmKnowledge,
+          limit: 8
+        }
       }) as ExtendedExecution;
 
+      if (result.processWorkflow) {
+        setProcessWorkflowVisible(true);
+        setProcessWorkflowRefresh(
+          (value) => value + 1
+        );
+      }
       setMessages((current) => [
         ...current,
         executionMessage(result, route)
       ]);
     } catch (error) {
-      const code = error instanceof Error ? error.message : String(error);
+      const code =
+        error instanceof ApiError
+          ? error.code
+          : error instanceof Error
+            ? error.message
+            : String(error);
+      if (
+        code.startsWith(
+          "PROCESS_PLEADING_"
+        )
+      ) {
+        setProcessWorkflowVisible(true);
+        setProcessWorkflowRefresh(
+          (value) => value + 1
+        );
+      }
       const friendly =
         code === "PROVIDER_NOT_CONFIGURED"
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
@@ -653,7 +803,25 @@ export default function MatterChatApp({
             ? "Provider odrzucił lub przerwał wykonanie."
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
               ? "Nie udało się bezpiecznie dołączyć wybranych fragmentów dokumentu."
-              : `Nie udało się wykonać sesji: ${code}`;
+              : code === "PROCESS_PLEADING_STATE_REQUIRED"
+                ? "To zadanie wymaga deterministycznego pipeline pisma procesowego. Uruchom go w panelu procesu i zaakceptuj start."
+                : code === "PROCESS_PLEADING_START_ACCEPTANCE_REQUIRED"
+                  ? "Pipeline pisma procesowego czeka na Twoją akceptację startu."
+                  : code === "PROCESS_PLEADING_CONFIRMATION_REQUIRED"
+                    ? "Pipeline czeka na potwierdzenie bieżącego checkpointu."
+                    : code === "PROCESS_PLEADING_CASE_REQUIRED"
+                      ? "Pismo procesowe musi być powiązane z aktywną sprawą."
+                      : code === "PROCESS_PLEADING_ALREADY_FINAL"
+                        ? "Pipeline tej sprawy ma już status FINAL."
+                        : code.startsWith("PROCESS_PLEADING_")
+                          ? `Pipeline pisma procesowego zablokował wykonanie: ${code}`
+                          : code === "COURT_ANALYSIS_CASE_REQUIRED"
+                            ? "Analiza sądowa musi być powiązana z aktywną sprawą."
+                            : code === "COURT_ANALYSIS_ALREADY_COMPLETE"
+                              ? "Deterministyczna analiza sądowa tej sprawy została już zakończona."
+                              : code.startsWith("COURT_ANALYSIS_")
+                                ? `Pipeline analizy sądowej zablokował wykonanie: ${code}`
+                                : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
       setMessages((current) => [
         ...current,
@@ -847,6 +1015,64 @@ export default function MatterChatApp({
             </h1>
           </div>
           <div className="chat-header-actions">
+            {activeTab === "chat" ? (
+              <div className="chat-model-lanes">
+                <label>
+                  <span>Model główny</span>
+                  <div className="chat-model-select-row">
+                    <select
+                      aria-label="Provider modelu głównego"
+                      value={provider}
+                      disabled={executing}
+                      onChange={(event) => {
+                        setProvider(
+                          event.target.value as ProviderId
+                        );
+                        setProviderApiKeyInput("");
+                        setProviderKeyMessage("");
+                      }}
+                    >
+                      {PROVIDERS.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.label}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      aria-label="Model główny"
+                      value={model}
+                      disabled={executing || models.length === 0}
+                      onChange={(event) => setModel(event.target.value)}
+                    >
+                      {models.length === 0 ? (
+                        <option value="">Brak modeli</option>
+                      ) : null}
+                      {models.map((item) => (
+                        <option
+                          key={item.id}
+                          value={item.id}
+                          disabled={!item.selectable}
+                        >
+                          {item.displayName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </label>
+                <div className="chat-aux-model-chip">
+                  <span>Pomocniczy</span>
+                  <strong>
+                    {modelRouting.auxiliaryEnabled
+                      ? selectedAuxiliaryModel?.displayName ??
+                        modelRouting.auxiliaryModel
+                      : "wyłączony"}
+                  </strong>
+                  {modelRouting.auxiliaryEnabled ? (
+                    <small>{modelRouting.auxiliaryProvider}</small>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
             <button
               type="button"
               className="chat-secondary-action"
@@ -945,6 +1171,22 @@ export default function MatterChatApp({
             }}
             onDrop={handleDrop}
           >
+            <ProcessPleadingWorkflowPanel
+              caseId={caseId}
+              forceVisible={processWorkflowVisible}
+              refreshToken={processWorkflowRefresh}
+              canWrite={Boolean(
+                selectedCase &&
+                !selectedCase.archivedAt &&
+                canWriteCase(selectedCase)
+              )}
+              busy={executing || caseBusy}
+              onContinue={() => {
+                void executeMessage(
+                  "Kontynuuj pipeline pisma procesowego zgodnie z aktywnym checkpointem."
+                );
+              }}
+            />
             <div className="chat-message-list" aria-live="polite">
               {threadLoading ? (
                 <article className="chat-message chat-message-system">
@@ -1400,7 +1642,15 @@ export default function MatterChatApp({
                 </p>
               ) : null}
               {selectedModel?.contextWindow ? (
-                <small>Kontekst: {selectedModel.contextWindow.toLocaleString("pl-PL")} tokenów</small>
+                <small>
+                  Aktywne okno runtime: {selectedModel.contextWindow.toLocaleString("pl-PL")} tokenów
+                  {selectedModel.nativeContextWindow
+                    ? ` · natywne: ${selectedModel.nativeContextWindow.toLocaleString("pl-PL")}`
+                    : ""}
+                  {selectedModel.contextMode === "YARN_EXTENDED"
+                    ? " · rozszerzone YaRN"
+                    : ""}
+                </small>
               ) : null}
               {providerDefinition ? (
                 <button
@@ -1412,6 +1662,117 @@ export default function MatterChatApp({
                     ? `Klucz API dla ${providerDefinition.label} — otwórz w przeglądarce ↗`
                     : `Utwórz / pobierz klucz ${providerDefinition.label} — otwórz w przeglądarce ↗`}
                 </button>
+              ) : null}
+            </article>
+
+            <article className="chat-card">
+              <p className="eyebrow">Rozdział pracy modeli</p>
+              <h2>Model pomocniczy</h2>
+              <label className="chat-toggle-row">
+                <input
+                  type="checkbox"
+                  checked={modelRouting.auxiliaryEnabled}
+                  onChange={(event) =>
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryEnabled: event.target.checked
+                    }))
+                  }
+                />
+                <span>
+                  Aktywuj programistyczny lane pomocniczy
+                </span>
+              </label>
+              <p>
+                Helper nie odpowiada na całe pytanie. Program może przekazać mu wyłącznie
+                zamknięte zadania pomocnicze, np. wyłuskanie jawnych referencji do przepisów,
+                Dz.U. lub sygnatur. Weryfikację wykonuje następnie deterministyczny runtime.
+              </p>
+              <label>
+                Provider pomocniczy
+                <select
+                  value={modelRouting.auxiliaryProvider}
+                  onChange={(event) => {
+                    const next = event.target.value as ProviderId;
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryProvider: next,
+                      auxiliaryModel:
+                        next === "openai"
+                          ? "local/bielik-11b-v3-q4km"
+                          : ""
+                    }));
+                    setModelRoutingMessage("");
+                  }}
+                >
+                  {PROVIDERS.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Model pomocniczy
+                <select
+                  value={modelRouting.auxiliaryModel}
+                  disabled={modelRoutingBusy}
+                  onChange={(event) =>
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryModel: event.target.value
+                    }))
+                  }
+                >
+                  {!auxiliaryModels.some(
+                    (item) => item.id === modelRouting.auxiliaryModel
+                  ) && modelRouting.auxiliaryModel ? (
+                    <option value={modelRouting.auxiliaryModel}>
+                      {modelRouting.auxiliaryModel ===
+                      "local/bielik-11b-v3-q4km"
+                        ? "Bielik 11B v3 · domyślny"
+                        : modelRouting.auxiliaryModel}
+                    </option>
+                  ) : null}
+                  {auxiliaryModels.length === 0 &&
+                  !modelRouting.auxiliaryModel ? (
+                    <option value="">Brak dostępnych modeli</option>
+                  ) : null}
+                  {auxiliaryModels.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.displayName}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <small>
+                Domyślny helper: Bielik. Jeżeli nie jest zainstalowany, aktywne
+                zadanie pomocnicze zostanie oznaczone jako FAILED/DEGRADED,
+                ale model główny nadal może wykonać odpowiedź.
+              </small>
+              {modelRouting.auxiliaryEnabled &&
+              !modelRouting.auxiliaryModel.startsWith("local/") ? (
+                <p className="chat-inline-warning">
+                  Uwaga: pomocniczy model nie jest lokalny. Program może wysłać
+                  do wskazanego providera wyłącznie bieżącą wypowiedź użytkownika
+                  potrzebną do dozwolonego zadania pomocniczego.
+                </p>
+              ) : null}
+              <button
+                type="button"
+                className="chat-primary-action"
+                disabled={
+                  modelRoutingBusy ||
+                  !modelRouting.auxiliaryModel.trim()
+                }
+                onClick={() => void saveModelRouting()}
+              >
+                {modelRoutingBusy
+                  ? "Zapisywanie…"
+                  : "Zapisz rozdział modeli"}
+              </button>
+              {modelRoutingMessage ? (
+                <small>{modelRoutingMessage}</small>
               ) : null}
             </article>
 

@@ -1,4 +1,69 @@
+!define LEX_HOOK_FILE_DIR "${__FILEDIR__}"
+
+!macro NSIS_HOOK_PREINSTALL
+  SetOutPath "$PLUGINSDIR"
+  File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
+  File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+
+  DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-get-install-state.ps1" -RuntimeRoot "$INSTDIR\runtime" -TargetManifestPath "$PLUGINSDIR\lex-target-release-source.json" -OutputPath "$PLUGINSDIR\lex-install-state.json" -ProductName "Lex Machina" -DiscoverRegisteredInstall -FailOnInstallRootMismatch -FailOnDowngrade'
+  Pop $0
+  Pop $1
+  ${If} $0 == 24
+    DetailPrint "Lex Machina: wykryto zmianę katalogu istniejącej instalacji."
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: wykryto istniejącą instalację w innym katalogu niż wybrany cel.$\r$\n$\r$\nW trybie aktualizacji/naprawy zachowaj wykrytą lokalizację programu. Jeżeli chcesz przenieść program, najpierw odinstaluj poprzednią instalację." /SD IDOK
+    Abort
+  ${ElseIf} $0 != 0
+    DetailPrint "Lex Machina: preinstall state gate zablokował instalację (exit=$0)."
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja została zatrzymana przez kontrolę stanu.$\r$\n$1$\r$\n$\r$\nJeżeli zainstalowana wersja jest nowsza, użyj nowszego instalatora zamiast wykonywać downgrade." /SD IDOK
+    Abort
+  ${EndIf}
+  DetailPrint "Lex Machina: stan instalacji $1"
+
+  ; Tauri copies the main executable immediately after PREINSTALL.
+  ; Restore the installer output directory after embedding probe files in
+  ; $PLUGINSDIR, otherwise the main EXE would be emitted into the temporary
+  ; plugin directory and disappear at installer shutdown.
+  SetOutPath "$INSTDIR"
+!macroend
+
 !macro NSIS_HOOK_POSTINSTALL
+  ; NSIS is the single owner of the thin runtime payload. The desktop trust
+  ; boundary requires an exact $INSTDIR\runtime layout, so do not rely on a
+  ; second Tauri resource-mapping layer for these files.
+  ;
+  ; Preserve heavy bootstrap components (node/python/models) across
+  ; update/repair so they can be reused after version/hash checks. Replace
+  ; only the app-owned thin payload deterministically.
+  RMDir /r "$INSTDIR\runtime\app"
+  RMDir /r "$INSTDIR\runtime\corpus"
+  RMDir /r "$INSTDIR\runtime\ocr"
+  RMDir /r "$INSTDIR\runtime\privacy"
+  RMDir /r "$INSTDIR\runtime\storage"
+  RMDir /r "$INSTDIR\runtime\bootstrap"
+  Delete "$INSTDIR\runtime\lex-runtime-sidecar.exe"
+  Delete "$INSTDIR\runtime\release-source.json"
+  Delete "$INSTDIR\runtime\release-requirements.txt"
+  Delete "$INSTDIR\runtime\npm-dependency-tree.json"
+  Delete "$INSTDIR\runtime\component-lock.json"
+
+  CreateDirectory "$INSTDIR\runtime"
+  SetOutPath "$INSTDIR\runtime"
+  File /r "${LEX_HOOK_FILE_DIR}\..\runtime\*"
+  SetOutPath "$INSTDIR"
+
+  ; Fail before downloading large components if the embedded thin payload is
+  ; structurally incomplete.
+  IfFileExists "$INSTDIR\runtime\app\dist\http\server.js" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera kompletnego runtime aplikacji (brak app\dist\http\server.js)." /SD IDOK
+    Abort
+  IfFileExists "$INSTDIR\runtime\corpus\*" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera korpusu skilli." /SD IDOK
+    Abort
+  IfFileExists "$INSTDIR\runtime\lex-runtime-sidecar.exe" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera natywnego sidecara runtime." /SD IDOK
+    Abort
+
   IfFileExists "$EXEDIR\LexMachina-Offline-Runtime.zip" lex_offline_bundle lex_online_bootstrap
 
 lex_offline_bundle:
@@ -43,5 +108,6 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Dane spraw pozostają zachowane poza katalogiem aplikacji."
+  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  RMDir /r "$INSTDIR\runtime"
 !macroend

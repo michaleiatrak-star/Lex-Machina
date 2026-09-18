@@ -1,6 +1,7 @@
 name: Lex Windows Online Installer
 
 on:
+  workflow_call:
   pull_request:
     paths:
       - "app/installer/**"
@@ -30,10 +31,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "24"
 
@@ -48,6 +49,10 @@ jobs:
       - name: Install runtime validation dependencies
         working-directory: app/lex-runtime
         run: npm install --no-audit --no-fund
+
+      - name: G39J reject correctly hashed foreign-signed installer
+        working-directory: app/lex-runtime
+        run: npx vitest run tests/application-update-authenticode-windows.test.ts
 
       - name: G33D static release contract
         working-directory: app/lex-runtime
@@ -69,36 +74,21 @@ jobs:
         working-directory: app/lex-desktop
         run: npx tauri build --bundles nsis
 
-      - name: Provision VC++ prerequisite for unattended acceptance runner
+      - name: Windows branding acceptance
         shell: pwsh
         run: |
-          # The product bootstrap can elevate interactively when VC++ is absent.
-          # GitHub Actions has no interactive UAC surface, so provision the exact
-          # pinned prerequisite up front and let the installer exercise the rest
-          # of the real online bootstrap path without an invisible elevation wait.
-          $manifest = Get-Content -Raw "app/installer/windows-release-source.json" | ConvertFrom-Json
-          $vc = $manifest.systemPrerequisites.visualCppRuntime
-          if ($vc.sha256 -notmatch '^[a-fA-F0-9]{64}$') {
-            throw "ACCEPTANCE_VC_HASH_INVALID"
-          }
-
-          $vcInstaller = Join-Path $env:RUNNER_TEMP "vc_redist.x64-$($vc.version).exe"
-          Invoke-WebRequest -UseBasicParsing -Uri $vc.url -OutFile $vcInstaller
-          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $vcInstaller).Hash.ToLowerInvariant()
-          if ($actual -ne $vc.sha256.ToLowerInvariant()) {
-            throw "ACCEPTANCE_VC_HASH_MISMATCH expected=$($vc.sha256) actual=$actual"
-          }
-
-          $install = Start-Process -FilePath $vcInstaller -ArgumentList @(
-            "/install", "/quiet", "/norestart"
-          ) -Wait -PassThru
-          if ($install.ExitCode -notin @(0, 1638, 3010)) {
-            throw "ACCEPTANCE_VC_INSTALL_FAILED:$($install.ExitCode)"
-          }
-          Write-Host "Acceptance VC++ prerequisite exit code: $($install.ExitCode)"
+          $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" -File |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw "NSIS_INSTALLER_NOT_FOUND_FOR_BRANDING" }
+          ./app/installer/windows-branding-selftest.ps1 `
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
+            -InstallerPath $installer.FullName
 
       - name: G33D installed-copy online bootstrap acceptance
         shell: pwsh
+        env:
+          LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME: "1"
         run: |
           $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" |
             Sort-Object LastWriteTime -Descending |
@@ -119,7 +109,7 @@ jobs:
           Get-Content "app\lex-desktop\src-tauri\target\release\bundle\nsis\SHA256.txt"
 
       - name: Publish online installer
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: LexMachina-Windows-Online-Installer
           path: |

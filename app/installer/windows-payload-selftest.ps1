@@ -5,6 +5,39 @@ param(
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path $PayloadRoot).Path
 
+if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
+  function Get-FileHash {
+    param(
+      [string]$Path,
+      [string]$LiteralPath,
+      [string]$Algorithm = "SHA256"
+    )
+    if ($Algorithm.ToUpperInvariant() -ne "SHA256") {
+      throw "SELFTEST_HASH_ALGORITHM_UNSUPPORTED:$Algorithm"
+    }
+    $target = if ($LiteralPath) { $LiteralPath } else { $Path }
+    if (-not $target) { throw "SELFTEST_HASH_PATH_MISSING" }
+
+    $stream = [IO.File]::OpenRead($target)
+    try {
+      $sha = [Security.Cryptography.SHA256]::Create()
+      try {
+        $bytes = $sha.ComputeHash($stream)
+      } finally {
+        $sha.Dispose()
+      }
+    } finally {
+      $stream.Dispose()
+    }
+
+    [pscustomobject]@{
+      Algorithm = "SHA256"
+      Hash = ([BitConverter]::ToString($bytes) -replace '-','')
+      Path = [IO.Path]::GetFullPath($target)
+    }
+  }
+}
+
 function Require-File([string]$Relative) {
   $path = Join-Path $root $Relative
   if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -25,6 +58,8 @@ $python = Require-File "python\python.exe"
 $server = Require-File "app\dist\http\server.js"
 $sidecar = Require-File "lex-runtime-sidecar.exe"
 $lockPath = Require-File "component-lock.json"
+$appUpdateTransaction = Require-File "bootstrap\app-update-transaction.ps1"
+$appUpdateVerification = Require-File "bootstrap\app-update-verification.ps1"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
 $documentWorker = Require-File "storage\legal_document_worker.py"
@@ -82,18 +117,23 @@ if ($null -eq $lock.networkRequiredAtInstall) {
 if ($lock.runtimeNetworkRequiredAfterBootstrap -ne $false) {
   throw "SELFTEST_LOCK_RUNTIME_NETWORK_POLICY_INVALID"
 }
-if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_ONLY") {
+if ($lock.expectedUserActionAfterInstall -ne "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP") {
   throw "SELFTEST_LOCK_USER_ACTION_POLICY_INVALID"
 }
-foreach ($entry in $lock.files) {
-  $path = Join-Path $root ($entry.path -replace '/','\')
-  if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-    throw "SELFTEST_LOCK_FILE_MISSING:$($entry.path)"
-  }
-  $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $path).Hash.ToLowerInvariant()
-  if ($actual -ne $entry.sha256) {
-    throw "SELFTEST_LOCK_HASH_MISMATCH:$($entry.path)"
-  }
+if ($null -eq $lock.localAi -or $lock.localAi.requiredForApplicationHealth -ne $false) {
+  throw "SELFTEST_LOCK_LOCAL_AI_POLICY_INVALID"
+}
+if (@($lock.optionalNetworkActionsAfterInstall) -notcontains "LOCAL_AI_PROVISIONING") {
+  throw "SELFTEST_LOCK_LOCAL_AI_PROVISIONING_POLICY_MISSING"
+}
+# Re-verify the complete immutable payload after loading the private Python
+# stacks. The native sidecar uses the same component-lock but performs hashing
+# without depending on PowerShell module availability or tens of thousands of
+# per-file cmdlet invocations.
+Write-Host "Self-test: post-import native component-lock verification"
+& $sidecar --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) {
+  throw "SELFTEST_POST_IMPORT_COMPONENT_LOCK_FAILED"
 }
 
 $temp = Join-Path $env:TEMP ("lex-installer-selftest-" + [Guid]::NewGuid().ToString("N"))
@@ -213,12 +253,29 @@ try {
     if ($process -and -not $process.HasExited) {
       Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
     }
+
+    # The Rust sidecar owns a child Node runtime. Stopping only the parent can
+    # leave that child alive on Windows and make the release payload mutable
+    # while the offline archive is being assembled.
+    $runtimePrefix = $root.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+    Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+      try {
+        if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+          Write-Host "Self-test cleanup: stopping runtime child $($_.ProcessName) pid=$($_.Id)"
+          Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+        }
+      } catch {
+        Write-Host "Self-test runtime child cleanup note: $($_.Exception.Message)"
+      }
+    }
+    Start-Sleep -Milliseconds 500
+
     $env:LEX_HOST = $oldHost
     $env:LEX_PORT = $oldPort
     $env:LEX_DESKTOP_BOOTSTRAP_TOKEN = $oldBootstrap
   }
 
-  Write-Host "LEX_INSTALLER_SELFTEST_PASS"
+  Write-Host "LEX_INSTALLER_SELFTEST_PASS:LOCAL_AI_OPTIONAL"
 } finally {
   foreach ($key in $oldEnv.Keys) {
     Set-Item -Path ("Env:" + $key) -Value $oldEnv[$key] -ErrorAction SilentlyContinue

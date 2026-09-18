@@ -26,7 +26,7 @@ const exactPython = requirements.every((line: string) =>
 const sha256 = (value: unknown) =>
   typeof value === "string" && /^[a-f0-9]{64}$/i.test(value);
 const pinnedSources =
-  source.schemaVersion === 2 &&
+  source.schemaVersion === 4 &&
   source.installerMode === "ONLINE_BOOTSTRAP_DEFAULT" &&
   source.target === "windows-x86_64" &&
   /^\d+\.\d+\.\d+$/.test(source.runtime?.node?.version ?? "") &&
@@ -49,7 +49,11 @@ const lockContract =
   generator.includes("sourceCommit") &&
   generator.includes("NetworkRequiredAtInstall") &&
   generator.includes("runtimeNetworkRequiredAfterBootstrap = $false") &&
-  generator.includes('expectedUserActionAfterInstall = "PROVIDER_API_KEY_ONLY"');
+  generator.includes('expectedUserActionAfterInstall = "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"') &&
+  generator.includes('delivery = "USER_INITIATED_AFTER_INSTALL"') &&
+  !generator.includes('id="local-llm-engine"') &&
+  !generator.includes('id="mistral-nemo-local"') &&
+  !generator.includes('id="bielik-local"');
 
 const pass =
   exactProd &&

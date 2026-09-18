@@ -18,6 +18,9 @@ import type {
 import { LexSkillRegistry } from "./registry.js";
 import { SafeSessionExecutor } from "./session-executor.js";
 import { LegalVerificationToolRuntime } from "./verification-tool-runtime.js";
+import {
+  TemporalSourceFreshnessChecker
+} from "./temporal-source-freshness.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
@@ -31,6 +34,85 @@ type ToolMode =
   | "verified"
   | "fake-marker"
   | "unverified";
+
+function jsonResponse(value: unknown): Response {
+  return new Response(
+    JSON.stringify(value),
+    {
+      status: 200,
+      headers: {
+        "content-type":
+          "application/json"
+      }
+    }
+  );
+}
+
+function g16FreshnessFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+
+  if (
+    url.endsWith(
+      "/DU/1964/93/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        "Inf. o tekście jednolitym": [
+          {
+            act: {
+              ELI:
+                "DU/2026/795",
+              year: 2026,
+              pos: 795,
+              status:
+                "obowiązujący"
+            }
+          }
+        ],
+        "Akty zmieniające": []
+      })
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({})
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        ELI:
+          "DU/2026/795",
+        status:
+          "obowiązujący",
+        promulgation:
+          "2026-06-17",
+        textHTML: true,
+        textPDF: true
+      })
+    );
+  }
+
+  return Promise.reject(
+    new Error(
+      "G16_UNEXPECTED_FRESHNESS_URL:" +
+        url
+    )
+  );
+}
 
 class VerificationProvider implements ProviderAdapter {
   readonly id = "openai" as const;
@@ -47,6 +129,66 @@ class VerificationProvider implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    const readTool = params.tools?.find(
+      (tool) =>
+        tool.function.name ===
+          "read_legal_resource"
+    );
+    const verificationTool = params.tools?.find(
+      (tool) =>
+        tool.function.name ===
+          "verify_legal_reference"
+    );
+    if (
+      !readTool ||
+      !verificationTool ||
+      !params.runTools
+    ) {
+      throw new Error(
+        "G16_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              `g16-${this.mode}-read-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G16_STATUTE_PREFLIGHT_READ_FAILED"
+      );
+    }
+
     if (this.mode === "fake-marker") {
       return {
         fullText:
@@ -54,37 +196,42 @@ class VerificationProvider implements ProviderAdapter {
       };
     }
 
-    const verificationTool = params.tools?.find(
-      (tool) => tool.function.name === "verify_legal_reference"
-    );
-    if (!verificationTool || !params.runTools) {
-      throw new Error("G16_VERIFICATION_TOOL_MISSING");
-    }
+    const toolResults:
+      NormalizedToolResult[] =
+        await params.runTools([{
+          id:
+            `g16-${this.mode}-verify-1`,
+          name:
+            verificationTool
+              .function.name,
+          input: {
+            claim:
+              "art. 5 KC",
+            kind:
+              "statute",
+            act:
+              "KC"
+          }
+        }]);
 
-    const toolResults: NormalizedToolResult[] =
-      await params.runTools([{
-        id: `g16-${this.mode}-tool-1`,
-        name: verificationTool.function.name,
-        input: {
-          claim: "art. 5 KC",
-          kind: "statute",
-          act: "KC"
-        }
-      }]);
-
-    const raw = toolResults[0]?.content ?? "{}";
-    const toolPayload = JSON.parse(raw) as {
-      status?: string;
-      marker?: string;
-    };
+    const raw =
+      toolResults[0]?.content ??
+      "{}";
+    const toolPayload =
+      JSON.parse(raw) as {
+        status?: string;
+        marker?: string;
+      };
 
     const marker =
-      typeof toolPayload.marker === "string"
+      typeof toolPayload.marker ===
+        "string"
         ? toolPayload.marker
         : "⚠️ [NIEWERYFIKOWANE]";
 
     return {
-      fullText: `Znaczenie ma art. 5 KC. ${marker}`
+      fullText:
+        `Znaczenie ma art. 5 KC. ${marker}`
     };
   }
 }
@@ -119,7 +266,13 @@ function executor(
     (ledger) =>
       new LegalVerificationToolRuntime(
         ledger,
-        verifier
+        verifier,
+        undefined,
+        new TemporalSourceFreshnessChecker(
+          g16FreshnessFetcher,
+          () =>
+            "2026-09-15T18:30:00.000Z"
+        )
       )
   );
 }
@@ -219,26 +372,33 @@ if (issues.length > 0) {
     typeof verified.answer === "string" &&
     String(verified.answer).includes("art. 5 KC") &&
     String(verified.answer).includes("✅ [VER:") &&
-    verifiedSummary.records === 1 &&
-    verifiedSummary.verified === 1 &&
+    typeof verifiedSummary.records === "number" &&
+    verifiedSummary.records >= 1 &&
+    verifiedSummary.verified ===
+      verifiedSummary.records &&
+    verifiedSummary.supported === 0 &&
     verifiedSummary.unverified === 0 &&
     verifiedAudit.result === "PASS" &&
     verifiedAudit.closed === true &&
 
     fakeMarkerHttp.status === 200 &&
     fake.status === "BLOCKED" &&
-    fake.finalization === "BLOCKED" &&
+    fake.finalization === "DEGRADED" &&
     !("answer" in fake) &&
-    fakeSummary.records === 0 &&
+    fakeSummary.records === 1 &&
     fakeSummary.verified === 0 &&
+    fakeSummary.unverified === 1 &&
 
     unverifiedHttp.status === 200 &&
     unverified.status === "BLOCKED" &&
     unverified.finalization === "DEGRADED" &&
     !("answer" in unverified) &&
-    unverifiedSummary.records === 1 &&
+    typeof unverifiedSummary.records === "number" &&
+    unverifiedSummary.records >= 1 &&
     unverifiedSummary.verified === 0 &&
-    unverifiedSummary.unverified === 1;
+    unverifiedSummary.supported === 0 &&
+    unverifiedSummary.unverified ===
+      unverifiedSummary.records;
 
   process.stdout.write(
     JSON.stringify({

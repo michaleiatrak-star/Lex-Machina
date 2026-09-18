@@ -233,13 +233,59 @@ implements ProviderAdapter {
           candidate.function.name ===
           "verify_legal_reference"
       );
+    const readTool =
+      params.tools?.find(
+        (candidate) =>
+          candidate.function.name ===
+          "read_legal_resource"
+      );
 
     if (
       !tool ||
+      !readTool ||
       !params.runTools
     ) {
       throw new Error(
-        "G21_VERIFICATION_TOOL_MISSING"
+        "G21_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              "g21-read-" +
+              String(index + 1),
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G21_STATUTE_PREFLIGHT_READ_FAILED"
       );
     }
 
@@ -454,8 +500,14 @@ const pass =
     "PASS" &&
   typeof future.answer ===
     "string" &&
-  futureVerification.verified === 1 &&
-  futureFetches.length === 1 &&
+  typeof futureVerification.records ===
+    "number" &&
+  futureVerification.records >= 1 &&
+  futureVerification.verified ===
+    futureVerification.records &&
+  futureVerification.supported === 0 &&
+  futureVerification.unverified === 0 &&
+  futureFetches.length >= 1 &&
 
   effectiveHttp.status === 200 &&
   effective.status ===

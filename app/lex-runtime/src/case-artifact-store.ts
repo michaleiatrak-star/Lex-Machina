@@ -550,6 +550,47 @@ export class SecureCaseArtifactStore {
     });
   }
 
+  async deleteArtifact(args: {
+    caseId: string;
+    artifactId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<void> {
+    await this
+      .assertCaseKeyVersion(
+        args.caseId,
+        args.keyVersion
+      );
+
+    const dir =
+      this.artifactDir(
+        args.caseId,
+        args.artifactId
+      );
+
+    // Resolve/validate the artifact path before removal. The case data key
+    // requirement keeps deletion behind the same case-access boundary as
+    // reads/writes, even though recursive removal itself does not decrypt.
+    if (
+      !Buffer.isBuffer(
+        args.caseDataKey
+      ) ||
+      args.caseDataKey.length < 16
+    ) {
+      throw new Error(
+        "CASE_DATA_KEY_INVALID"
+      );
+    }
+
+    await rm(
+      dir,
+      {
+        recursive: true,
+        force: true
+      }
+    );
+  }
+
   async rekeyCaseArtifacts(args: {
     caseId: string;
     oldCaseDataKey: Buffer;

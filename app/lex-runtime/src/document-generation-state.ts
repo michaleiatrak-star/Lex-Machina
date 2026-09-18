@@ -33,6 +33,8 @@ export type StoredDocumentGenerationState = {
   tokenizedSha256: string;
   vaultGeneration: number;
   caseKeyVersion: number;
+  workflowRequirement?:
+    | "PROCESS_PLEADING_FINAL";
   createdAt: string;
   finalizedAt?: string;
   finalArtifactId?: string;
@@ -231,6 +233,12 @@ implements DeanonymizationTargetResolver {
       Number(
         value.caseKeyVersion
       ) < 1 ||
+      (
+        value.workflowRequirement !==
+          undefined &&
+        value.workflowRequirement !==
+          "PROCESS_PLEADING_FINAL"
+      ) ||
       typeof value.createdAt !==
         "string"
     ) {

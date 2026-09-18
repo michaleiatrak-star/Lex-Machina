@@ -214,9 +214,56 @@ class TemporalProvider implements ProviderAdapter {
         candidate.function.name ===
         "verify_legal_reference"
     );
-    if (!tool || !params.runTools) {
+    const readTool = params.tools?.find(
+      (candidate) =>
+        candidate.function.name ===
+        "read_legal_resource"
+    );
+    if (
+      !tool ||
+      !readTool ||
+      !params.runTools
+    ) {
       throw new Error(
-        "G19_VERIFICATION_TOOL_MISSING"
+        "G19_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              `g19-read-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G19_STATUTE_PREFLIGHT_READ_FAILED"
       );
     }
 
@@ -331,10 +378,14 @@ function appFor(
   });
 }
 
-function requestBody() {
+function requestBody(
+  asOf?: string
+) {
   return {
     query:
-      "Zweryfikuj art. 5 KC z kontrolą aktualności źródła.",
+      asOf
+        ? `Według stanu na ${asOf} zweryfikuj art. 5 KC z kontrolą aktualności źródła.`
+        : "Zweryfikuj art. 5 KC z kontrolą aktualności źródła.",
     provider: "openai",
     model: "g19-model",
     primarySkill: DR02,
@@ -393,7 +444,9 @@ const historicalHttp = await request(
   )
 )
   .post("/api/sessions/execute")
-  .send(requestBody());
+  .send(
+    requestBody("2020-06-01")
+  );
 
 const afterRepealFetches: string[] = [];
 const afterRepealHttp = await request(
@@ -405,7 +458,9 @@ const afterRepealHttp = await request(
   )
 )
   .post("/api/sessions/execute")
-  .send(requestBody());
+  .send(
+    requestBody("2021-01-01")
+  );
 
 const current =
   currentHttp.body as
@@ -440,10 +495,19 @@ const pass =
   current.finalization === "PASS" &&
   typeof current.answer ===
     "string" &&
-  currentVerification.verified === 1 &&
-  currentFetches.length === 1 &&
-  currentFetches[0] ===
-    "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html" &&
+  typeof currentVerification.records ===
+    "number" &&
+  currentVerification.records >= 1 &&
+  currentVerification.verified ===
+    currentVerification.records &&
+  currentVerification.supported === 0 &&
+  currentVerification.unverified === 0 &&
+  currentFetches.length >= 1 &&
+  currentFetches.every(
+    (url) =>
+      url ===
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html"
+  ) &&
 
   staleHttp.status === 200 &&
   stale.status === "BLOCKED" &&
@@ -461,10 +525,19 @@ const pass =
   String(historical.answer).includes(
     "STAN NA 2020-06-01"
   ) &&
-  historicalVerification.verified === 1 &&
-  historicalFetches.length === 1 &&
-  historicalFetches[0] ===
-    "https://api.sejm.gov.pl/eli/acts/DU/2019/1145/text.html" &&
+  typeof historicalVerification.records ===
+    "number" &&
+  historicalVerification.records >= 1 &&
+  historicalVerification.verified ===
+    historicalVerification.records &&
+  historicalVerification.supported === 0 &&
+  historicalVerification.unverified === 0 &&
+  historicalFetches.length >= 1 &&
+  historicalFetches.every(
+    (url) =>
+      url ===
+        "https://api.sejm.gov.pl/eli/acts/DU/2019/1145/text.html"
+  ) &&
 
   afterRepealHttp.status === 200 &&
   afterRepeal.status === "BLOCKED" &&

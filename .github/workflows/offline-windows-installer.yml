@@ -1,6 +1,18 @@
 name: Lex Machina Offline Windows Installer
 
 on:
+  workflow_call:
+    inputs:
+      signed:
+        description: "Build and verify Authenticode-signed offline artifacts"
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      LEX_WINDOWS_SIGNING_PFX_BASE64:
+        required: false
+      LEX_WINDOWS_SIGNING_PFX_PASSWORD:
+        required: false
   workflow_dispatch:
   pull_request:
     paths:
@@ -30,10 +42,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup Node 24
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "24.21.0"
 
@@ -65,10 +77,6 @@ jobs:
         shell: pwsh
         run: ./app/installer/build-windows-offline.ps1
 
-      - name: Verify native G34G tests
-        working-directory: app/lex-desktop
-        run: cargo test --manifest-path src-tauri/Cargo.toml
-
       - name: Stage external offline runtime bundle
         id: runtime_bundle
         shell: pwsh
@@ -76,12 +84,130 @@ jobs:
           $bundleDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle"
           New-Item -ItemType Directory -Force -Path $bundleDir | Out-Null
           $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
+          $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+
+          # The payload self-test launches a native sidecar which can spawn the private
+          # Node runtime. Kill every child executable rooted in the payload before
+          # taking the immutable offline snapshot.
+          Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+              if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+                Write-Host "Stopping generated-runtime process before offline snapshot: $($_.ProcessName) pid=$($_.Id) path=$($_.Path)"
+                Stop-Process -Id $_.Id -Force -ErrorAction Stop
+              }
+            } catch {
+              Write-Host "Offline snapshot process cleanup note: $($_.Exception.Message)"
+            }
+          }
+          Start-Sleep -Seconds 1
+
+          $lockPath = Join-Path $runtime "component-lock.json"
+          if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_SOURCE_COMPONENT_LOCK_MISSING"
+          }
+          $sourceLock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
+          foreach ($entry in $sourceLock.files) {
+            $sourcePath = Join-Path $runtime $entry.path.Replace('/', '\')
+            if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_SOURCE_LOCK_FILE_MISSING:$($entry.path)"
+            }
+            $sourceHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourcePath).Hash.ToLowerInvariant()
+            if ($sourceHash -ne $entry.sha256) {
+              throw "OFFLINE_RUNTIME_SOURCE_LOCK_HASH_MISMATCH:$($entry.path)"
+            }
+          }
+          Write-Host "Offline source lock verified immediately before archive: $($sourceLock.files.Count) files"
           $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
           Remove-Item -LiteralPath $bundle -Force -ErrorAction SilentlyContinue
 
-          & tar.exe -a -c -f $bundle -C $runtime .
-          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
+          # Do not use Windows bsdtar to CREATE this ZIP. On hosted Windows
+          # runners it can mis-detect ordinary npm files as the output archive
+          # ("Can't add archive to itself"), omit them, and still leave a ZIP behind.
+          # Build the ZIP explicitly from the already-verified component lock.
+          Add-Type -AssemblyName System.IO.Compression
+          $bundleStream = [IO.File]::Open(
+            $bundle,
+            [IO.FileMode]::CreateNew,
+            [IO.FileAccess]::ReadWrite,
+            [IO.FileShare]::None
+          )
+          try {
+            $zip = [IO.Compression.ZipArchive]::new(
+              $bundleStream,
+              [IO.Compression.ZipArchiveMode]::Create,
+              $false
+            )
+            try {
+              $fixedZipTime = [DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
+
+              function Add-LexOfflineZipEntry {
+                param(
+                  [Parameter(Mandatory=$true)][string]$SourcePath,
+                  [Parameter(Mandatory=$true)][string]$EntryPath
+                )
+
+                $normalizedEntry = $EntryPath.Replace('\', '/')
+                $zipEntry = $zip.CreateEntry(
+                  $normalizedEntry,
+                  [IO.Compression.CompressionLevel]::Fastest
+                )
+                $zipEntry.LastWriteTime = $fixedZipTime
+                $sourceStream = [IO.File]::OpenRead($SourcePath)
+                try {
+                  $entryStream = $zipEntry.Open()
+                  try {
+                    $sourceStream.CopyTo($entryStream)
+                  } finally {
+                    $entryStream.Dispose()
+                  }
+                } finally {
+                  $sourceStream.Dispose()
+                }
+              }
+
+              Add-LexOfflineZipEntry -SourcePath $lockPath -EntryPath "component-lock.json"
+              foreach ($entry in $sourceLock.files) {
+                $sourcePath = Join-Path $runtime $entry.path.Replace('/', '\')
+                Add-LexOfflineZipEntry -SourcePath $sourcePath -EntryPath $entry.path
+              }
+            } finally {
+              $zip.Dispose()
+            }
+          } finally {
+            $bundleStream.Dispose()
+          }
+
+          if (-not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
             throw "OFFLINE_RUNTIME_ARCHIVE_FAILED"
+          }
+
+          # Fail during packaging, not minutes later during clean-machine install,
+          # if the archive and component lock diverge.
+          $verifyDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle-verify"
+          Remove-Item -LiteralPath $verifyDir -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $verifyDir | Out-Null
+          try {
+            ./app/installer/extract-offline-zip.ps1 `
+              -ArchivePath $bundle `
+              -DestinationPath $verifyDir
+            $archiveLockPath = Join-Path $verifyDir "component-lock.json"
+            if (-not (Test-Path -LiteralPath $archiveLockPath -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_COMPONENT_LOCK_MISSING"
+            }
+            $archiveLock = Get-Content -Raw -LiteralPath $archiveLockPath | ConvertFrom-Json
+            foreach ($entry in $archiveLock.files) {
+              $archivePath = Join-Path $verifyDir $entry.path.Replace('/', '\')
+              if (-not (Test-Path -LiteralPath $archivePath -PathType Leaf)) {
+                throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING:$($entry.path)"
+              }
+              $archiveHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archivePath).Hash.ToLowerInvariant()
+              if ($archiveHash -ne $entry.sha256) {
+                throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH:$($entry.path)"
+              }
+            }
+            Write-Host "Offline archive lock verified after extraction: $($archiveLock.files.Count) files"
+          } finally {
+            Remove-Item -LiteralPath $verifyDir -Recurse -Force -ErrorAction SilentlyContinue
           }
 
           $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundle).Hash.ToLowerInvariant()
@@ -92,6 +218,10 @@ jobs:
           "sha256=$hash" >> $env:GITHUB_OUTPUT
           "bytes=$bytes" >> $env:GITHUB_OUTPUT
           Write-Host "Offline runtime bundle: $bundle ($bytes bytes, sha256=$hash)"
+
+      - name: Verify native G34G tests
+        working-directory: app/lex-desktop
+        run: cargo test --manifest-path src-tauri/Cargo.toml
 
       - name: Rebuild thin installer payload
         shell: pwsh
@@ -142,11 +272,41 @@ jobs:
             [Text.UTF8Encoding]::new($false)
           )
 
+      - name: Prepare offline signing receipts
+        if: ${{ inputs.signed == true }}
+        shell: pwsh
+        run: |
+          $receipts = Join-Path $env:RUNNER_TEMP "lex-offline-signing-receipts"
+          New-Item -ItemType Directory -Force -Path $receipts | Out-Null
+          "LEX_SIGNING_RECEIPT_DIR=$receipts" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: Build NSIS offline installer
         working-directory: app/lex-desktop
         env:
           CI: "true"
-        run: npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
+          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
+          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
+        shell: pwsh
+        run: |
+          if ("${{ inputs.signed }}" -eq "true") {
+            npx tauri build --bundles nsis --config src-tauri/tauri.offline.signed.conf.json
+          } else {
+            npx tauri build --bundles nsis --config src-tauri/tauri.offline.conf.json
+          }
+          if ($LASTEXITCODE -ne 0) {
+            throw "OFFLINE_TAURI_BUILD_FAILED:$LASTEXITCODE"
+          }
+
+      - name: Windows branding acceptance for inner offline installer
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" -File |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw "OFFLINE_NSIS_INSTALLER_NOT_FOUND_FOR_BRANDING" }
+          ./app/installer/windows-branding-selftest.ps1 `
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
+            -InstallerPath $installer.FullName
 
       - name: Assemble internal offline distribution
         id: locate
@@ -181,22 +341,54 @@ jobs:
             -InstallerPath "${{ steps.locate.outputs.installer }}" `
             -RuntimeBundlePath "${{ steps.locate.outputs.bundle }}" `
             -ComponentLockPath "${{ steps.locate.outputs.lock }}" `
+            -IconPath "app/lex-desktop/src-tauri/icons/icon.ico" `
             -OutputPath $output
 
           $resolved = (Resolve-Path -LiteralPath $output).Path
           "installer=$resolved" >> $env:GITHUB_OUTPUT
           Write-Host "Standalone offline installer: $resolved"
 
+      - name: Windows branding acceptance for standalone offline wrapper
+        shell: pwsh
+        run: |
+          ./app/installer/windows-branding-selftest.ps1 `
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
+            -InstallerPath "${{ steps.standalone.outputs.installer }}"
+
+      - name: Sign standalone offline wrapper
+        if: ${{ inputs.signed == true }}
+        shell: pwsh
+        env:
+          LEX_WINDOWS_SIGNING_PFX_BASE64: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_BASE64 }}
+          LEX_WINDOWS_SIGNING_PFX_PASSWORD: ${{ secrets.LEX_WINDOWS_SIGNING_PFX_PASSWORD }}
+        run: |
+          $receipt = Join-Path $env:LEX_SIGNING_RECEIPT_DIR "LexMachina-Offline-Setup-signature.json"
+          ./app/installer/sign-windows-artifact.ps1 `
+            -ArtifactPath "${{ steps.standalone.outputs.installer }}" `
+            -ManifestPath "app/installer/windows-release-source.json" `
+            -ReceiptPath $receipt
+
+          $receiptDest = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/signing-receipts"
+          New-Item -ItemType Directory -Force -Path $receiptDest | Out-Null
+          Get-ChildItem -LiteralPath $env:LEX_SIGNING_RECEIPT_DIR -File -Filter "*.json" |
+            Copy-Item -Destination $receiptDest -Force
+
       - name: Offline clean-machine standalone EXE acceptance
         shell: pwsh
         run: |
-          ./app/installer/windows-installer-acceptance.ps1 `
-            -InstallerPath "${{ steps.standalone.outputs.installer }}" `
-            -ExpectedNetworkRequiredAtInstall $false `
-            -BlockNetworkDuringInstall `
-            -ForceVisualCppRuntimeInstall `
-            -StandaloneOfflineExe `
-            -InstallTimeoutSeconds 6000
+          $arguments = @{
+            InstallerPath = "${{ steps.standalone.outputs.installer }}"
+            ExpectedNetworkRequiredAtInstall = $false
+            BlockNetworkDuringInstall = $true
+            ForceVisualCppRuntimeInstall = $true
+            StandaloneOfflineExe = $true
+            InstallTimeoutSeconds = 6000
+          }
+          if ("${{ inputs.signed }}" -eq "true") {
+            $arguments.RequireAuthenticode = $true
+            $arguments.SigningManifestPath = "app/installer/windows-release-source.json"
+          }
+          ./app/installer/windows-installer-acceptance.ps1 @arguments
 
       - name: Record standalone distribution SHA-256
         shell: pwsh
@@ -232,13 +424,14 @@ jobs:
             -Destination "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/component-lock-offline.json" -Force
 
       - name: Upload standalone offline EXE
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: LexMachina-Windows-Offline-Setup
+          name: ${{ inputs.signed == true && 'LexMachina-Windows-Offline-Signed-Setup' || 'LexMachina-Windows-Offline-Setup' }}
           path: |
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/LexMachina-Offline-Setup.exe
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/SHA256-OFFLINE.txt
             app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/component-lock-offline.json
+            app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/signing-receipts/*.json
           if-no-files-found: error
           compression-level: 0
           retention-days: 14

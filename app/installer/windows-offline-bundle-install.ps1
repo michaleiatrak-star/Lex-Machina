@@ -77,15 +77,11 @@ $vcFirewallRule = $null
 
 try {
   Write-Host "Extracting verified offline runtime bundle"
-  $tar = Get-Command tar.exe -ErrorAction SilentlyContinue
-  if ($tar) {
-    & $tar.Source -xf $bundle -C $stage
-    if ($LASTEXITCODE -ne 0) {
-      throw "OFFLINE_BUNDLE_EXTRACT_FAILED:$LASTEXITCODE"
-    }
-  } else {
-    Expand-Archive -LiteralPath $bundle -DestinationPath $stage -Force
+  $extractor = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "extract-offline-zip.ps1"
+  if (-not (Test-Path -LiteralPath $extractor -PathType Leaf)) {
+    throw "OFFLINE_BUNDLE_EXTRACTOR_MISSING"
   }
+  & $extractor -ArchivePath $bundle -DestinationPath $stage
 
   $lockPath = Join-Path $stage "component-lock.json"
   if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
@@ -191,9 +187,15 @@ try {
   if (-not (Test-Path -LiteralPath $selfTest -PathType Leaf)) {
     throw "OFFLINE_BUNDLE_SELFTEST_SCRIPT_MISSING"
   }
-  & $selfTest -PayloadRoot $runtime
+  try {
+    & $selfTest -PayloadRoot $runtime 2>&1 |
+      ForEach-Object { Write-Host $_ }
+  } catch {
+    Write-Host "OFFLINE_BUNDLE_SELFTEST_EXCEPTION:$($_.Exception.Message)"
+    throw
+  }
   if ($LASTEXITCODE -ne 0) {
-    throw "OFFLINE_BUNDLE_SELFTEST_FAILED"
+    throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$LASTEXITCODE"
   }
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"

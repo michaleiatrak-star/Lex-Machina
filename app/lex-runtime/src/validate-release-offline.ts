@@ -65,6 +65,10 @@ const offlineBundleInstall =
   read(
     "app/installer/windows-offline-bundle-install.ps1"
   );
+const offlineZipExtractor =
+  read(
+    "app/installer/extract-offline-zip.ps1"
+  );
 const hooks =
   read(
     "app/lex-desktop/src-tauri/windows/hooks.nsh"
@@ -114,8 +118,25 @@ const checks = {
     workflow.includes(
       "LexMachina-Offline-Runtime.zip"
     ) &&
+    (
+      workflow.includes(
+        "System.IO.Compression.ZipArchive"
+      ) ||
+      workflow.includes(
+        "IO.Compression.ZipArchive"
+      )
+    ) &&
     workflow.includes(
-      "tar.exe -a -c -f"
+      "Add-LexOfflineZipEntry"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH"
+    ) &&
+    workflow.includes(
+      "extract-offline-zip.ps1"
     ) &&
     workflow.includes(
       "Build standalone offline EXE"
@@ -159,6 +180,15 @@ const checks = {
     offlineBundleInstall.includes(
       "OFFLINE_BUNDLE_LOCK_HASH_MISMATCH"
     ) &&
+    offlineBundleInstall.includes(
+      "extract-offline-zip.ps1"
+    ) &&
+    offlineZipExtractor.includes(
+      "OFFLINE_ZIP_UNSAFE_ENTRY"
+    ) &&
+    offlineZipExtractor.includes(
+      "OFFLINE_ZIP_DUPLICATE_ENTRY"
+    ) &&
     hooks.includes(
       "windows-offline-bundle-install.ps1"
     ) &&
@@ -180,16 +210,16 @@ const checks = {
       "Offline clean-machine standalone EXE acceptance"
     ) &&
     workflow.includes(
-      "-ExpectedNetworkRequiredAtInstall $false"
+      "ExpectedNetworkRequiredAtInstall = $false"
     ) &&
     workflow.includes(
-      "-BlockNetworkDuringInstall"
+      "BlockNetworkDuringInstall = $true"
     ) &&
     workflow.includes(
-      "-ForceVisualCppRuntimeInstall"
+      "ForceVisualCppRuntimeInstall = $true"
     ) &&
     workflow.includes(
-      "-StandaloneOfflineExe"
+      "StandaloneOfflineExe = $true"
     ) &&
     acceptance.includes(
       "StandaloneOfflineExe"

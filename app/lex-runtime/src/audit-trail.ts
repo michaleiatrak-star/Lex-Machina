@@ -111,6 +111,7 @@ export class AuditTrail {
   validateCompletion(options?: {
     requireVerification?: boolean;
     requireToolActivity?: boolean;
+    requireDeterministicWorkflow?: boolean;
   }): AuditCompletenessReport {
     const missing: string[] = [];
     const violations: string[] = [];
@@ -162,6 +163,43 @@ export class AuditTrail {
       !events.some((event) => event.type === "tool_decision")
     ) {
       missing.push("tool_decision");
+    }
+
+    if (options?.requireDeterministicWorkflow) {
+      const gates = [
+        "G39H_WORKFLOW_PREFLIGHT",
+        "G39H_WORKFLOW_PROVIDER_COMPLETE",
+        "G39H_WORKFLOW_RESOURCE_READS",
+        "G39H_WORKFLOW_FINALIZATION"
+      ] as const;
+      const indices = gates.map((target) =>
+        events.findIndex(
+          (event) =>
+            event.type === "gate" &&
+            event.target === target
+        )
+      );
+
+      gates.forEach((target, index) => {
+        if (indices[index] === -1) {
+          missing.push(
+            target.toLowerCase()
+          );
+        }
+      });
+
+      if (
+        indices.every((index) => index >= 0) &&
+        !indices.every(
+          (index, position) =>
+            position === 0 ||
+            index > indices[position - 1]!
+        )
+      ) {
+        violations.push(
+          "deterministic_workflow_order_invalid"
+        );
+      }
     }
 
     if (

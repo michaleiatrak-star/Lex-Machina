@@ -1,3 +1,5 @@
+import type { LocalModelRuntime } from "../local-model-runtime.js";
+import { LocalModelRuntime as DefaultLocalModelRuntime } from "../local-model-runtime.js";
 import {
   MissingProviderCredentialError,
   type ProviderCredentialResolver
@@ -13,6 +15,10 @@ export type ModelDescriptor = {
   createdAt?: string;
   ownedBy?: string;
   contextWindow?: number;
+  nativeContextWindow?: number;
+  contextMode?:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
   inputModalities?: string[];
   outputModalities?: string[];
   capabilities?: string[];
@@ -106,20 +112,114 @@ async function parseJson(response: Response, provider: ProviderId): Promise<unkn
 export class DynamicModelCatalog {
   constructor(
     private readonly credentials: ProviderCredentialResolver,
-    private readonly fetcher: FetchLike = globalThis.fetch.bind(globalThis)
+    private readonly fetcher: FetchLike = globalThis.fetch.bind(globalThis),
+    private readonly localModels: LocalModelRuntime = new DefaultLocalModelRuntime()
   ) {}
 
+  localContextWindow(
+    modelId: string
+  ): number | undefined {
+    const selected =
+      this.localModels
+        .listModels()
+        .find(
+          (model) =>
+            model.id === modelId &&
+            model.installed &&
+            model.configuredContextWindow !==
+              undefined
+        );
+    if (!selected) {
+      return undefined;
+    }
+    const value =
+      selected.configuredContextWindow ??
+      selected.contextWindow;
+    return Number.isInteger(value) &&
+      value >= 8_192 &&
+      value <= 262_144
+      ? value
+      : undefined;
+  }
+
+  localTokenCharsPerToken(
+    modelId: string
+  ): number | undefined {
+    const value =
+      this.localModels
+        .qualificationForModel(
+          modelId
+        )
+        ?.tokenizerCalibration
+        ?.conservativeCharsPerToken;
+    return (
+      typeof value ===
+        "number" &&
+      Number.isFinite(value) &&
+      value >= 1 &&
+      value <= 3
+    )
+      ? value
+      : undefined;
+  }
+
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
+    if (provider === "openai") {
+      const local = this.listConfiguredLocalOpenAiModels();
+      const key = await this.credentials.getApiKey(provider);
+      if (!key) {
+        if (local.length > 0) return local;
+        throw new MissingProviderCredentialError(provider);
+      }
+      return [
+        ...local,
+        ...await this.listOpenAI(key)
+      ];
+    }
+
     const key = await this.credentials.getApiKey(provider);
     if (!key) throw new MissingProviderCredentialError(provider);
-
-    if (provider === "openai") {
-      return this.listOpenAI(key);
-    }
     if (provider === "anthropic") {
       return this.listAnthropic(key);
     }
     return this.listXai(key);
+  }
+
+  private listConfiguredLocalOpenAiModels(): ModelDescriptor[] {
+    return this.localModels
+      .listModels()
+      .filter(
+        (model) =>
+          model.installed &&
+          model.configuredContextWindow !==
+            undefined
+      )
+      .map((model) => ({
+        provider: "openai" as const,
+        id: model.id,
+        displayName:
+          `Lokalny · ${model.displayName}`,
+        selectable: true,
+        contextWindow:
+          model.configuredContextWindow ??
+          model.contextWindow,
+        nativeContextWindow:
+          model.nativeContextWindow,
+        contextMode:
+          model.contextMode,
+        ownedBy: "local",
+        inputModalities: ["text"],
+        outputModalities: ["text"],
+        capabilities: [
+          "local-only",
+          "offline-inference",
+          "switchable-profile",
+          model.contextMode ===
+            "YARN_EXTENDED"
+            ? "yarn-context-extension"
+            : "native-context"
+        ]
+      }));
   }
 
   private async listOpenAI(apiKey: string): Promise<ModelDescriptor[]> {

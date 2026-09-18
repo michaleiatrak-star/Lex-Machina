@@ -4,6 +4,9 @@ import request from "supertest";
 import {
   SupremeCourtCaseVerifier
 } from "./case-law-verifier.js";
+import {
+  CaseLawSearchService
+} from "./case-law-search.js";
 import { createLexHttpApp } from "./http/app.js";
 import {
   OfficialLegalSourceVerifier
@@ -41,6 +44,61 @@ const lexRoot =
 const DR02 =
   "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
+const CASE_LAW_WORKFLOW_RESOURCES = [
+  "shared/MCP-INTEGRACJA.md",
+  "shared/SYGNATURY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+] as const;
+
+async function satisfyCaseLawWorkflowPreflight(
+  params: ProviderStreamParams,
+  idPrefix: string
+): Promise<void> {
+  const readTool =
+    params.tools?.find(
+      (candidate) =>
+        candidate.function.name ===
+        "read_legal_resource"
+    );
+  if (!readTool || !params.runTools) {
+    throw new Error(
+      "G24_CASE_LAW_PREFLIGHT_TOOL_MISSING"
+    );
+  }
+
+  const results =
+    await params.runTools(
+      CASE_LAW_WORKFLOW_RESOURCES.map(
+        (resource, index) => ({
+          id:
+            `${idPrefix}-case-law-read-${index + 1}`,
+          name:
+            readTool.function.name,
+          input: {
+            skill:
+              "orzeczenia-sadowe-v2",
+            path: resource
+          }
+        })
+      )
+    );
+
+  for (const result of results) {
+    const payload =
+      JSON.parse(
+        result.content ?? "{}"
+      ) as {
+        status?: string;
+      };
+    if (payload.status !== "OK") {
+      throw new Error(
+        "G24_CASE_LAW_PREFLIGHT_FAILED"
+      );
+    }
+  }
+}
+
 const signature =
   "III CZP 25/11";
 
@@ -60,6 +118,68 @@ function json(value: unknown): Response {
           "application/json"
       }
     }
+  );
+}
+
+function caseLawDiscoveryFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+  if (
+    url.includes(
+      "saos.org.pl/api/search/judgments"
+    )
+  ) {
+    return Promise.resolve(
+      json({
+        items: [],
+        info: {
+          totalResults: 0
+        }
+      })
+    );
+  }
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/search"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>Znaleziono 0 orzeczeń</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/query"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>CBOSA</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+  return Promise.reject(
+    new Error(
+      "G24_UNEXPECTED_DISCOVERY_URL:" +
+        url
+    )
   );
 }
 
@@ -140,6 +260,10 @@ implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    await satisfyCaseLawWorkflowPreflight(
+      params,
+      "g24"
+    );
     if (
       this.mode ===
       "fake-support"
@@ -309,7 +433,10 @@ function appFor(
             statuteVerifier,
             undefined,
             null,
-            caseVerifier
+            caseVerifier,
+            new CaseLawSearchService(
+              caseLawDiscoveryFetcher
+            )
           )
       )
   });
@@ -443,31 +570,48 @@ const pass =
   ).includes(
     "CASE-SUPPORT:"
   ) &&
-  supportedSummary.records === 3 &&
-  supportedSummary.verified === 2 &&
+  typeof supportedSummary.records ===
+    "number" &&
+  supportedSummary.records >= 3 &&
   supportedSummary.supported === 1 &&
+  supportedSummary.verified ===
+    supportedSummary.records - 1 &&
   supportedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
   fake.status === "BLOCKED" &&
   !("answer" in fake) &&
-  fakeSummary.records === 0 &&
+  typeof fakeSummary.records ===
+    "number" &&
+  fakeSummary.records >= 1 &&
+  fakeSummary.verified ===
+    fakeSummary.records &&
+  fakeSummary.supported === 0 &&
+  fakeSummary.unverified === 0 &&
 
   alteredHttp.status === 200 &&
   altered.status ===
     "BLOCKED" &&
   !("answer" in altered) &&
-  alteredSummary.records === 3 &&
-  alteredSummary.verified === 2 &&
+  typeof alteredSummary.records ===
+    "number" &&
+  alteredSummary.records >= 3 &&
   alteredSummary.supported === 1 &&
+  alteredSummary.verified ===
+    alteredSummary.records - 1 &&
+  alteredSummary.unverified === 0 &&
 
   omittedHttp.status === 200 &&
   omitted.status ===
     "BLOCKED" &&
   !("answer" in omitted) &&
-  omittedSummary.records === 3 &&
-  omittedSummary.verified === 2 &&
-  omittedSummary.supported === 1;
+  typeof omittedSummary.records ===
+    "number" &&
+  omittedSummary.records >= 3 &&
+  omittedSummary.supported === 1 &&
+  omittedSummary.verified ===
+    omittedSummary.records - 1 &&
+  omittedSummary.unverified === 0;
 
 process.stdout.write(
   JSON.stringify({

@@ -1,6 +1,6 @@
 {
   "name": "@lex-machina/runtime",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -75,7 +75,11 @@
     "validate:g37d": "tsx src/validate-g37d.ts",
     "validate:g37c2": "tsx src/validate-g37c2.ts",
     "validate:g37f": "tsx src/validate-g37f.ts",
-    "validate:release-offline": "tsx src/validate-release-offline.ts"
+    "validate:release-offline": "tsx src/validate-release-offline.ts",
+    "build:skill-update-release": "tsx src/build-skill-update-release.ts",
+    "build:model-pack-release": "tsx src/build-model-pack-release.ts",
+    "benchmark:local-context": "tsx src/benchmark-local-context.ts",
+    "benchmark:local-legal-quality": "tsx src/benchmark-local-legal-quality.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.49",

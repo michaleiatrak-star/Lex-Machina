@@ -59,7 +59,7 @@ if (issues.length > 0) {
   const safeHttp = await request(appWithExecutor(safeExecutor))
     .post("/api/sessions/execute")
     .send({
-      query: "Techniczny test G15 bez analizy prawnej.",
+      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nScenariusz kontrolny G15 alfa beta gamma.',
       provider: "openai",
       model: "g15-safe",
       primarySkill: DR02,
@@ -92,7 +92,7 @@ if (issues.length > 0) {
   const unsafeHttp = await request(appWithExecutor(unsafeExecutor))
     .post("/api/sessions/execute")
     .send({
-      query: "Techniczny test blokady G15.",
+      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTechniczny test blokady G15.',
       provider: "anthropic",
       model: "g15-unsafe",
       primarySkill: DR02,
@@ -102,7 +102,7 @@ if (issues.length > 0) {
   const invalidRouteHttp = await request(appWithExecutor(safeExecutor))
     .post("/api/sessions/execute")
     .send({
-      query: "Test niedozwolonego routingu.",
+      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTest niedozwolonego routingu.',
       provider: "openai",
       model: "g15-safe",
       primarySkill: "pisma-procesowe-v3",
@@ -130,6 +130,8 @@ if (issues.length > 0) {
     typeof safe.answer === "string" &&
     safeAudit.result === "PASS" &&
     safeAudit.closed === true &&
+    (safe.workflow as Record<string, unknown> | undefined)?.id ===
+      "LEGAL_QUERY_V1" &&
     unsafeHttp.status === 200 &&
     unsafe.status === "BLOCKED" &&
     unsafe.finalization === "BLOCKED" &&
@@ -152,6 +154,9 @@ if (issues.length > 0) {
         status: safe.status,
         finalization: safe.finalization,
         audit: safeAudit.result,
+        auditMissing: safeAudit.missing ?? [],
+        auditViolations: safeAudit.violations ?? [],
+        workflow: safe.workflow ?? null,
         answerReleased: typeof safe.answer === "string"
       },
       blockedPath: {
@@ -159,6 +164,9 @@ if (issues.length > 0) {
         status: unsafe.status,
         finalization: unsafe.finalization,
         audit: unsafeAudit.result,
+        auditMissing: unsafeAudit.missing ?? [],
+        auditViolations: unsafeAudit.violations ?? [],
+        workflow: unsafe.workflow ?? null,
         answerReleased: "answer" in unsafe,
         references: unsafeReferences
       },

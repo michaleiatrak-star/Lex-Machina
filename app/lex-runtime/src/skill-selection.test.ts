@@ -64,7 +64,22 @@ function registryWithSkills(): LexSkillRegistry {
     {
       name: "raport-klienta-v1",
       description: "podsumowanie dla klienta rekomendacje ryzyka i działania",
+      type: "ux-raport"
+    },
+    {
+      name: "raport-sytuacyjny-v2",
+      description: "raport sytuacyjny status sprawy ryzyka terminy priorytety",
       type: "executive-raport"
+    },
+    {
+      name: "orzeczenia-sadowe-v2",
+      description: "research orzecznictwa sygnatury linia orzecznicza wyroki",
+      type: "executive-analiza"
+    },
+    {
+      name: "przesluchanie-swiadkow-v2-min90",
+      description: "przesłuchanie świadka pytania kontrolne sprzeczności dowody",
+      type: "legal-skill"
     },
     {
       name: "analizator-umow-v1",
@@ -77,9 +92,24 @@ function registryWithSkills(): LexSkillRegistry {
       type: "executive-pisma"
     },
     {
+      name: "pisma-proste-v2",
+      description: "wezwanie do zapłaty wgląd uzasadnienie sprzeciw klauzula",
+      type: "executive-pisma"
+    },
+    {
       name: "przewodnik-prawny-v2",
       description: "ogólna analiza prawna i dobór dalszych działań",
       type: "executive-guide"
+    },
+    {
+      name: "analizator-dowodow-v3",
+      description: "analiza dowodów dokumentów nagrań sms maili sprzeczności",
+      type: "executive-analiza"
+    },
+    {
+      name: "analizator-przepisow-v2",
+      description: "analiza przepisu wykładnia przesłanki stan prawny nowelizacje",
+      type: "executive-analiza"
     }
   ];
   const crossSkillBodies: Record<string, string> = {
@@ -190,6 +220,126 @@ describe("skill selection", () => {
     expect(selected.executionSkills).toContain("analizator-umow-v1");
     expect(selected.domainSkills).toContain("dr-03-prawo-procesowe");
     expect(selected.executionSkills.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("routes an explicit simple-letter request before semantic scoring", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj wezwanie do zapłaty.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-proste-v2");
+  });
+
+  it("keeps process pleading priority when the query also mentions a simple pre-litigation letter", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj pozew po bezskutecznym wezwaniu do zapłaty.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-procesowe-v3");
+    expect(selected.executionSkills).not.toContain("pisma-proste-v2");
+  });
+
+  it("normalizes Polish diacritics for explicit process routing", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Trzeba przygotować zażalenie na postanowienie.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toContain("pisma-procesowe-v3");
+  });
+
+  it.each([
+    [
+      "Zbuduj chronologię sprawy i oś czasu zdarzeń.",
+      "chronologia-sprawy-v1"
+    ],
+    [
+      "Przygotuj raport dla klienta z rekomendacjami.",
+      "raport-klienta-v1"
+    ],
+    [
+      "Przygotuj raport sytuacyjny ze statusem sprawy i ryzykami.",
+      "raport-sytuacyjny-v2"
+    ],
+    [
+      "Przygotuj pytania do świadka i plan przesłuchania.",
+      "przesluchanie-swiadkow-v2-min90"
+    ],
+    [
+      "Znajdź wyrok i sprawdź linię orzeczniczą.",
+      "orzeczenia-sadowe-v2"
+    ]
+  ])(
+    "routes explicit execution request %s to %s",
+    (query, expectedSkill) => {
+      const registry =
+        registryWithSkills();
+      const selected =
+        resolveAdditionalSkills(
+          registry,
+          query,
+          "dr-03-prawo-procesowe",
+          true,
+          []
+        );
+
+      expect(
+        selected.executionSkills
+      ).toContain(
+        expectedSkill
+      );
+      expect(
+        selected.workflowExecutionSkill
+      ).toBe(
+        expectedSkill
+      );
+    }
+  );
+
+  it("routes explicit evidence material to the evidence analyzer", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przeanalizuj nagranie, SMS-y i sprzeczności między dowodami.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills)
+      .toContain("analizator-dowodow-v3");
+    expect(selected.workflowExecutionSkill)
+      .toBe("analizator-dowodow-v3");
+  });
+
+  it("routes a specific statutory interpretation request to the statute analyzer", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Zweryfikuj art. 415 KC i wyjaśnij przesłanki oraz wykładnię przepisu.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills)
+      .toContain("analizator-przepisow-v2");
+    expect(selected.workflowExecutionSkill)
+      .toBe("analizator-przepisow-v2");
   });
 
   it("uses the general legal guide when automatic mode has no semantic match", () => {

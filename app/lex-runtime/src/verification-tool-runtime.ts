@@ -921,12 +921,50 @@ export class LegalVerificationToolRuntime {
           "VERIFIED" | "UNVERIFIED" =
           result.record.status;
 
+        const acceptedFreshnessStatus:
+          | "CURRENT"
+          | "HISTORICAL"
+          | undefined =
+          freshness?.status ===
+            "CURRENT" ||
+          freshness?.status ===
+            "HISTORICAL"
+            ? freshness.status
+            : result.record
+                .sourceFormat ===
+                "PDF" &&
+              freshness?.status ===
+                "CURRENT_TEXT_REQUIRES_PDF"
+              ? "CURRENT"
+              : result.record
+                    .sourceFormat ===
+                    "PDF" &&
+                  freshness?.status ===
+                    "HISTORICAL_TEXT_REQUIRES_PDF"
+                ? "HISTORICAL"
+                : undefined;
+
         const statutoryRecord:
           VerificationRecord = {
             ...result.record,
             status:
               statutoryStatus,
             temporalMode,
+            ...(freshness &&
+            acceptedFreshnessStatus
+              ? {
+                  temporalFreshnessStatus:
+                    acceptedFreshnessStatus,
+                  freshnessCheckedAt:
+                    freshness.checkedAt,
+                  ...(freshness.currentEli
+                    ? {
+                        currentEli:
+                          freshness.currentEli
+                      }
+                    : {})
+                }
+              : {}),
             ...(asOf ? { asOf } : {})
           };
 

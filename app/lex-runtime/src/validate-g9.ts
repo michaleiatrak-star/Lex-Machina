@@ -47,7 +47,7 @@ if (issues.length > 0) {
   );
 
   const execution = await engine.executePolishLegalQuery({
-    query: "Test techniczny audytu — bez analizy prawnej.",
+    query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTest techniczny audytu — bez analizy prawnej.',
     provider: "openai",
     model: "g9-test",
     route: {

@@ -1,0 +1,233 @@
+name: Publish G39 Installer Release
+
+on:
+  push:
+    branches:
+      - release/0.1.3-g39-rc1
+    paths:
+      - ".release/source-sha.txt"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      RELEASE_TAG: v0.1.3-g39-rc1
+      RELEASE_TITLE: Lex Machina v0.1.3 G39 RC1
+
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Resolve validated source commit
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="$(tr -d '\r\n ' < .release/source-sha.txt)"
+          if [[ ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "INVALID_RELEASE_SOURCE_SHA" >&2
+            exit 1
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/commits/$source_sha" >/dev/null
+          echo "sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "Publishing validated source: $source_sha"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Locate successful installer workflow runs
+        id: runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="${{ steps.source.outputs.sha }}"
+          json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$source_sha&status=success&per_page=100")"
+
+          online_run="$(jq -r '
+            [.workflow_runs[]
+              | select(.path == ".github/workflows/lex-installer.yml")
+              | select(.conclusion == "success")]
+            | sort_by(.run_number)
+            | last
+            | .id // empty
+          ' <<<"$json")"
+
+          offline_run="$(jq -r '
+            [.workflow_runs[]
+              | select(.path == ".github/workflows/offline-windows-installer.yml")
+              | select(.conclusion == "success")]
+            | sort_by(.run_number)
+            | last
+            | .id // empty
+          ' <<<"$json")"
+
+          if [[ -z "$online_run" || -z "$offline_run" ]]; then
+            echo "VALIDATED_INSTALLER_RUNS_NOT_FOUND online=$online_run offline=$offline_run" >&2
+            exit 1
+          fi
+
+          echo "online=$online_run" >> "$GITHUB_OUTPUT"
+          echo "offline=$offline_run" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Download exact accepted workflow artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-input/online release-input/offline release-out
+
+          download_named_artifact() {
+            local run_id="$1"
+            local name="$2"
+            local destination="$3"
+            artifacts="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/artifacts?per_page=100")"
+            artifact_id="$(jq -r --arg name "$name" '
+              [.artifacts[]
+                | select(.name == $name)
+                | select(.expired == false)]
+              | first
+              | .id // empty
+            ' <<<"$artifacts")"
+            if [[ -z "$artifact_id" ]]; then
+              echo "RELEASE_ARTIFACT_NOT_FOUND run=$run_id name=$name" >&2
+              exit 1
+            fi
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > "$destination/artifact.zip"
+            unzip -q "$destination/artifact.zip" -d "$destination/files"
+          }
+
+          download_named_artifact "${{ steps.runs.outputs.online }}" "LexMachina-Windows-Online-Installer" "release-input/online"
+          download_named_artifact "${{ steps.runs.outputs.offline }}" "LexMachina-Windows-Offline-Setup" "release-input/offline"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Verify online and offline receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          online_sha_file="$(find release-input/online/files -type f -name 'SHA256.txt' -print -quit)"
+          online_exe="$(find release-input/online/files -type f -name '*.exe' -print -quit)"
+          offline_sha_file="$(find release-input/offline/files -type f -name 'SHA256-OFFLINE.txt' -print -quit)"
+          offline_exe="$(find release-input/offline/files -type f -name 'LexMachina-Offline-Setup.exe' -print -quit)"
+
+          for file in "$online_sha_file" "$online_exe" "$offline_sha_file" "$offline_exe"; do
+            if [[ -z "$file" || ! -f "$file" ]]; then
+              echo "RELEASE_EXPECTED_FILE_MISSING:$file" >&2
+              exit 1
+            fi
+          done
+
+          online_expected="$(awk -F= '$1=="sha256"{print $2}' "$online_sha_file" | tr -d '\r\n ')"
+          online_actual="$(sha256sum "$online_exe" | awk '{print $1}')"
+          if [[ "$online_expected" != "$online_actual" ]]; then
+            echo "ONLINE_RELEASE_HASH_MISMATCH expected=$online_expected actual=$online_actual" >&2
+            exit 1
+          fi
+
+          offline_expected="$(awk -F= '$1=="sha256"{print $2}' "$offline_sha_file" | tr -d '\r\n ')"
+          offline_actual="$(sha256sum "$offline_exe" | awk '{print $1}')"
+          if [[ "$offline_expected" != "$offline_actual" ]]; then
+            echo "OFFLINE_RELEASE_HASH_MISMATCH expected=$offline_expected actual=$offline_actual" >&2
+            exit 1
+          fi
+
+          cp "$online_exe" "release-out/Lex-Machina-0.1.3-G39-Online-x64-Setup.exe"
+          cp "$offline_exe" "release-out/Lex-Machina-0.1.3-G39-Offline-x64-Setup.exe"
+          cp "$online_sha_file" "release-out/CI-SHA256-ONLINE.txt"
+          cp "$offline_sha_file" "release-out/CI-SHA256-OFFLINE.txt"
+          if [[ -f "G39-IMPLEMENTATION-STATUS-2026-09-18.md" ]]; then
+            cp "G39-IMPLEMENTATION-STATUS-2026-09-18.md" "release-out/"
+          fi
+          (
+            cd release-out
+            sha256sum \
+              "Lex-Machina-0.1.3-G39-Online-x64-Setup.exe" \
+              "Lex-Machina-0.1.3-G39-Offline-x64-Setup.exe" \
+              > SHA256SUMS.txt
+          )
+          cat release-out/SHA256SUMS.txt
+
+      - name: Verify release target has required successful workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="${{ steps.source.outputs.sha }}"
+          runs="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$source_sha&status=success&per_page=100")"
+          for workflow in \
+            ".github/workflows/lex-runtime.yml" \
+            ".github/workflows/f138-structural-audit.yml" \
+            ".github/workflows/g39-installer-state.yml" \
+            ".github/workflows/lex-installer.yml" \
+            ".github/workflows/offline-windows-installer.yml"; do
+            count="$(jq -r --arg path "$workflow" '[.workflow_runs[] | select(.path == $path and .conclusion == "success")] | length' <<<"$runs")"
+            if [[ "$count" -lt 1 ]]; then
+              echo "RELEASE_REQUIRED_WORKFLOW_NOT_GREEN:$workflow" >&2
+              exit 1
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.3 — G39 RC1
+
+          Ten prerelease zawiera dwa zaakceptowane przez CI instalatory Windows:
+
+          - Online — lekki instalator programu. Lokalna AI nie jest instalowana automatycznie; Bielik/Mistral są pobierane dopiero po wyraźnym wyborze użytkownika w aplikacji.
+          - Offline — samodzielny instalator programu i prywatnego runtime. Lokalna AI pozostaje opcjonalna i jest provisionowana po instalacji.
+
+          Najważniejsze zmiany G39:
+          - deterministyczny stan instalatora FRESH / UPGRADE / REPAIR / CURRENT / DOWNGRADE_BLOCKED;
+          - wykrywanie poprzedniego katalogu instalacji i blokada przypadkowej drugiej kopii podczas aktualizacji;
+          - opcjonalna Local AI po instalacji, profile 64k–200k z realnym smoke-testem i qualification receipt;
+          - live progress pobierania modeli i hardware/backend discovery;
+          - transakcyjny updater programu i skilli, fail-closed przy braku produkcyjnego trust root;
+          - deterministyczny workflow pism procesowych i budżetowanie kontekstu/cytatów.
+
+          Status podpisu: artefakty RC nie są traktowane jako produkcyjnie podpisane, dopóki trust root Authenticode i sekrety podpisu nie zostaną skonfigurowane oraz signed release candidate nie przejdzie acceptance. Updater aplikacji celowo pozostaje fail-closed.
+
+          SHA-256 obu instalatorów znajduje się w SHA256SUMS.txt.
+          EOF
+
+      - name: Create or update prerelease
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="${{ steps.source.outputs.sha }}"
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-out/RELEASE-NOTES.md \
+              --prerelease \
+              --target "$source_sha"
+          else
+            gh release create "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-out/RELEASE-NOTES.md \
+              --prerelease \
+              --target "$source_sha"
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber \
+            release-out/Lex-Machina-0.1.3-G39-Online-x64-Setup.exe \
+            release-out/Lex-Machina-0.1.3-G39-Offline-x64-Setup.exe \
+            release-out/SHA256SUMS.txt \
+            release-out/CI-SHA256-ONLINE.txt \
+            release-out/CI-SHA256-OFFLINE.txt
+
+          if [[ -f release-out/G39-IMPLEMENTATION-STATUS-2026-09-18.md ]]; then
+            gh release upload "$RELEASE_TAG" --clobber release-out/G39-IMPLEMENTATION-STATUS-2026-09-18.md
+          fi
+
+          gh release view "$RELEASE_TAG" --json url,tagName,name,isPrerelease,publishedAt
+        env:
+          GH_TOKEN: ${{ github.token }}
