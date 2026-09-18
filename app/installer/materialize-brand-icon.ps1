@@ -73,10 +73,10 @@ try {
 
   $sourceStream = [IO.MemoryStream]::new($sourceBytes, $false)
   try {
-    $decoder = [Windows.Media.Imaging.PngBitmapDecoder]::new(
+    $decoder = [System.Windows.Media.Imaging.PngBitmapDecoder]::new(
       $sourceStream,
-      [Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
-      [Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+      [System.Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
+      [System.Windows.Media.Imaging.BitmapCacheOption]::OnLoad
     )
     if ($decoder.Frames.Count -lt 1) {
       throw "LEX_BRAND_WPF_FRAME_MISSING"
@@ -91,14 +91,14 @@ try {
       $bitmap = if ($size -eq 256) {
         $sourceBitmap
       } else {
-        [Windows.Media.Imaging.TransformedBitmap]::new(
+        [System.Windows.Media.Imaging.TransformedBitmap]::new(
           $sourceBitmap,
-          [Windows.Media.ScaleTransform]::new($scale, $scale)
+          [System.Windows.Media.ScaleTransform]::new($scale, $scale)
         )
       }
 
-      $encoder = [Windows.Media.Imaging.PngBitmapEncoder]::new()
-      $encoder.Frames.Add([Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
+      $encoder = [System.Windows.Media.Imaging.PngBitmapEncoder]::new()
+      $encoder.Frames.Add([System.Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
       $frameStream = [IO.MemoryStream]::new()
       try {
         $encoder.Save($frameStream)
