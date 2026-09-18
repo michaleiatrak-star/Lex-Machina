@@ -165,6 +165,26 @@ export type SessionExecutionResponse = {
     missingResources: string[];
   };
   context?: ContextBudgetReport;
+  processAuto?: {
+    maxSteps: number;
+    stopped:
+      | "FINAL"
+      | "LIMIT_REACHED"
+      | "NODE_BLOCKED";
+    limitReached: boolean;
+    steps: Array<{
+      stage: Exclude<
+        ProcessPleadingStage,
+        "CG_ACCEPTANCE" | "FINAL"
+      >;
+      checkpoint:
+        ProcessPleadingCheckpoint;
+      revisionAfter: number;
+      status:
+        "DRAFT_PRESENTABLE" | "BLOCKED";
+      answer?: string;
+    }>;
+  };
   processWorkflow?: {
     caseId: string;
     mode: ProcessPleadingMode;
