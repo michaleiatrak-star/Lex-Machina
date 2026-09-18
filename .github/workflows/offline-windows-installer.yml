@@ -179,6 +179,17 @@ jobs:
             throw "OFFLINE_TAURI_BUILD_FAILED:$LASTEXITCODE"
           }
 
+      - name: Windows branding acceptance for inner offline installer
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem "app\lex-desktop\src-tauri\target\release\bundle\nsis\*.exe" -File |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) { throw "OFFLINE_NSIS_INSTALLER_NOT_FOUND_FOR_BRANDING" }
+          ./app/installer/windows-branding-selftest.ps1 `
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
+            -InstallerPath $installer.FullName
+
       - name: Assemble internal offline distribution
         id: locate
         shell: pwsh
@@ -218,6 +229,13 @@ jobs:
           $resolved = (Resolve-Path -LiteralPath $output).Path
           "installer=$resolved" >> $env:GITHUB_OUTPUT
           Write-Host "Standalone offline installer: $resolved"
+
+      - name: Windows branding acceptance for standalone offline wrapper
+        shell: pwsh
+        run: |
+          ./app/installer/windows-branding-selftest.ps1 `
+            -DesktopExePath "app/lex-desktop/src-tauri/target/release/lex-machina.exe" `
+            -InstallerPath "${{ steps.standalone.outputs.installer }}"
 
       - name: Sign standalone offline wrapper
         if: ${{ inputs.signed == true }}
