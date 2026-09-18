@@ -433,6 +433,10 @@ export function createDeterministicWorkflowPlan(
     }
   }
 
+  const requiredResourceSet =
+    new Set<string>(
+      requiredFreshResources
+    );
   const semanticContextResources = [
     ...(
       SEMANTIC_CONTEXT_RESOURCES[
@@ -441,8 +445,9 @@ export function createDeterministicWorkflowPlan(
     )
   ].filter(
     (resource) =>
-      requiredFreshResources
-        .includes(resource)
+      requiredResourceSet.has(
+        resource
+      )
   );
 
   return {
