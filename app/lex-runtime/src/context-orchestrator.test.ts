@@ -167,8 +167,103 @@ describe(
         ).toBeGreaterThan(1);
         expect(
           result.report
-            .omittedChunks
+            .compressedChunks
         ).toBeGreaterThan(0);
+        expect(
+          result.report
+            .backlinkedChunks
+        ).toBe(
+          result.report
+            .compressedChunks
+        );
+        expect(
+          result.report
+            .compressionSavedTokens
+        ).toBeGreaterThan(0);
+      }
+    );
+
+    it(
+      "keeps full originals as citation sources when retrieved chunks are represented by exact extractive digests",
+      () => {
+        const original =
+          [
+            "Wstęp bez znaczenia.",
+            "Termin zapłaty wynosi 14 dni od doręczenia faktury.",
+            "Dalsza część dokumentu opisuje odpowiedzialność i wykonanie świadczenia.",
+            "Koniec."
+          ].join(
+            " ".repeat(2_000)
+          );
+        const knowledge =
+          attachment(
+            "doc_case_5555555555555555",
+            "CASE_KNOWLEDGE",
+            [
+              {
+                index: 7,
+                text:
+                  original.repeat(20)
+              }
+            ]
+          );
+
+        const result =
+          orchestrateDocumentContext({
+            attachments: [
+              knowledge
+            ],
+            query:
+              "Jaki jest termin zapłaty faktury?",
+            systemPrompt:
+              "S".repeat(90_000),
+            modelContextTokens:
+              64_000
+          });
+
+        const promptChunk =
+          result.attachments[0]
+            ?.chunks[0];
+        const sourceChunk =
+          result.citationSources[0]
+            ?.chunks[0];
+
+        expect(
+          promptChunk
+            ?.representation
+        ).toBe(
+          "EXTRACTIVE_DIGEST"
+        );
+        expect(
+          sourceChunk
+            ?.representation
+        ).toBe("FULL");
+        expect(
+          sourceChunk?.text
+        ).toBe(
+          knowledge.chunks[0]
+            ?.text
+        );
+        expect(
+          knowledge.chunks[0]
+            ?.text.includes(
+              promptChunk?.text ??
+                "__missing__"
+            )
+        ).toBe(true);
+        expect(
+          promptChunk?.text
+        ).toContain(
+          "Termin zapłaty wynosi 14 dni"
+        );
+        expect(
+          result.report
+            .compressedChunks
+        ).toBe(1);
+        expect(
+          result.report
+            .backlinkedChunks
+        ).toBe(1);
       }
     );
 
