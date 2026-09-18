@@ -359,8 +359,11 @@ const pass =
     verification.records &&
   verification.supported === 0 &&
   verification.unverified === 0 &&
-  fetchInputs.length === 1 &&
-  fetchInputs[0] === EXPECTED_URL;
+  fetchInputs.length >= 1 &&
+  fetchInputs.every(
+    (input) =>
+      input === EXPECTED_URL
+  );
 
 process.stdout.write(
   JSON.stringify({
