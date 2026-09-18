@@ -896,6 +896,7 @@ export class LocalModelRuntime {
     state: "STOPPED" | "PROVISIONING" | "STARTING" | "READY";
     endpoint: string;
     contextPolicy: ReturnType<LocalModelRuntime["contextPolicy"]>;
+    backendPolicy: ReturnType<LocalModelRuntime["backendSelectionPolicy"]>;
     qualification: LocalContextQualification | null;
     progress: LocalProvisioningProgress | null;
     hardware: LocalHardwareProfile;
@@ -931,6 +932,8 @@ export class LocalModelRuntime {
             : "STOPPED",
       endpoint: `http://${this.host}:${this.port}/v1`,
       contextPolicy: this.contextPolicy(),
+      backendPolicy:
+        this.backendSelectionPolicy(),
       qualification: this.readQualification(),
       progress: this.provisioningProgress
         ? { ...this.provisioningProgress }
@@ -1126,6 +1129,7 @@ export class LocalModelRuntime {
     this.provisioning = task;
     try {
       await task;
+      this.hardwareCache = null;
 
       let config = this.readConfig();
       if (!config || normalizeModelId(config.model.id) !== canonical) {
@@ -2311,6 +2315,13 @@ export class LocalModelRuntime {
       ) ||
       receipt.engine !==
         "llama.cpp" ||
+      (
+        receipt.backend !==
+          undefined &&
+        !isBackendId(
+          receipt.backend
+        )
+      ) ||
       !Number.isFinite(
         receipt.startupMs
       ) ||
@@ -2405,6 +2416,7 @@ export class LocalModelRuntime {
       temporary,
       target
     );
+    this.hardwareCache = null;
   }
 
   private manifest(): ReleaseManifest {
