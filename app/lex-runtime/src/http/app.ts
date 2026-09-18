@@ -7542,6 +7542,175 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (
+        orderedCaseContext &&
+        options.caseAccessService &&
+        options
+          .orderedCaseWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              orderedCaseContext.caseId
+            );
+
+        let state =
+          orderedCaseContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            orderedCaseContext
+              .permit.workflowId &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          if (
+            !options
+              .secureCaseArtifactStore
+          ) {
+            throw new Error(
+              "WORKFLOW_AUDIT_STORE_UNAVAILABLE"
+            );
+          }
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                orderedCaseContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .orderedCaseWorkflowStore!
+                      .getOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        workflowId:
+                          orderedCaseContext!
+                            .permit
+                            .workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "ORDERED_WORKFLOW_STATE_CONFLICT"
+                    );
+                  }
+
+                  const auditArtifact =
+                    await persistWorkflowAuditArtifact({
+                      store:
+                        options
+                          .secureCaseArtifactStore!,
+                      caseId:
+                        orderedCaseContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      createdByUserId:
+                        actor.user
+                          .userId,
+                      workflowId:
+                        orderedCaseContext!
+                          .permit
+                          .workflowId,
+                      checkpoint:
+                        orderedCaseContext!
+                          .permit
+                          .checkpoint,
+                      result
+                    });
+
+                  try {
+                    const next =
+                      completeOrderedCaseExecution(
+                        current,
+                        orderedCaseContext!
+                          .permit,
+                        [
+                          auditArtifact
+                            .auditRef
+                        ]
+                      );
+                    return await options
+                      .orderedCaseWorkflowStore!
+                      .saveOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        workflowId:
+                          orderedCaseContext!
+                            .permit
+                            .workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                  } catch (error) {
+                    await options
+                      .secureCaseArtifactStore!
+                      .deleteArtifact({
+                        caseId:
+                          orderedCaseContext!
+                            .caseId,
+                        artifactId:
+                          auditArtifact
+                            .artifactId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                    throw error;
+                  }
+                }
+              );
+        }
+
+        result.orderedCaseWorkflow = {
+          workflowId:
+            state.workflowId,
+          caseId:
+            state.caseId,
+          revision:
+            state.revision,
+          status:
+            state.status,
+          nextCheckpoint:
+            nextOrderedCaseCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
         contractContext &&
         options.caseAccessService &&
         options
