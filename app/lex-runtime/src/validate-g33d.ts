@@ -17,6 +17,7 @@ const privatePython = read("app/installer/install-private-python.ps1");
 const onlineBuild = read("app/installer/build-windows-online.ps1");
 const offlineBuild = read("app/installer/build-windows-offline.ps1");
 const branding = read("app/installer/materialize-brand-icon.ps1");
+const profilePurge = read("app/installer/purge-user-data.ps1");
 const releaseSource = JSON.parse(
   read("app/installer/windows-release-source.json")
 ) as {
@@ -86,10 +87,22 @@ const checks = {
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
   canonicalWindowsBranding:
-    branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
-    branding.includes("lex-machina-brand-source.png") &&
+    branding.includes("b67a1d0eeb9073d96c72097c22c7d57edef2bc4abb4c08f1ae92a3bb320cbb4c") &&
+    branding.includes("lex-machina-brand-source.jpg") &&
     onlineBuild.includes("materialize-brand-icon.ps1") &&
     offlineBuild.includes("materialize-brand-icon.ps1"),
+  cleanProfileLifecycle:
+    hooks.includes("purge-user-data.ps1") &&
+    hooks.includes("-Mode FreshInstall") &&
+    hooks.includes("-Mode Uninstall") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_CLEAN_ADMIN_INVALID") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_PROFILE_PURGE_VERIFY_FAILED") &&
+    acceptance.includes("full uninstall profile/password purge acceptance") &&
+    profilePurge.includes("LexMachina/Desktop") &&
+    profilePurge.includes("LexMachina/ProviderCredential") &&
+    profilePurge.includes("LexMachina/SupportIdentity") &&
+    profilePurge.includes(".lex-machina") &&
+    profilePurge.includes("LEX_FULL_UNINSTALL_PURGE_PASS"),
   windowsPathAndPrerequisiteRegression:
     acceptance.includes("Lex Machina Installed ") &&
     acceptance.includes("expectedPythonVersion") &&
