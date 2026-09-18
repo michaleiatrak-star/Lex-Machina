@@ -716,6 +716,231 @@ describe(
     );
 
     it(
+      "runs at most four AUTO semantic checkpoints while preserving deterministic applicability and encrypted state",
+      async () => {
+        const current =
+          fixture();
+
+        const bootstrap =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/auth/bootstrap"
+            )
+            .send({
+              loginName:
+                "owner-auto",
+              displayName:
+                "Owner Auto",
+              password:
+                "G39I auto strong password 2026"
+            })
+            .expect(201);
+        const authorization =
+          `Bearer ${String(
+            bootstrap.body
+              .sessionToken
+          )}`;
+
+        const createdCase =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/cases"
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .send({
+              displayName:
+                "AUTO bounded E2E"
+            })
+            .expect(201);
+        const caseId =
+          String(
+            createdCase.body
+              .caseId
+          );
+
+        await request(
+          current.app
+        )
+          .post(
+            `/api/cases/${caseId}/workflow/process-pleading/initialize`
+          )
+          .set(
+            "Authorization",
+            authorization
+          )
+          .send({
+            mode:
+              "AUTO"
+          })
+          .expect(201);
+
+        await request(
+          current.app
+        )
+          .post(
+            `/api/cases/${caseId}/workflow/process-pleading/accept-start`
+          )
+          .set(
+            "Authorization",
+            authorization
+          )
+          .send({})
+          .expect(200);
+
+        const response =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/sessions/execute"
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .send({
+              query:
+                "Przygotuj pismo procesowe w trybie automatycznym.",
+              provider:
+                "openai",
+              model:
+                "gpt-test",
+              primarySkill:
+                DR,
+              mode:
+                "PRAWNIK",
+              knowledge: {
+                caseId,
+                includeCase:
+                  false,
+                includeFirm:
+                  false,
+                limit: 8
+              }
+            })
+            .expect(200);
+
+        expect(
+          current.execute
+        ).toHaveBeenCalledTimes(
+          4
+        );
+        expect(
+          current.execute.mock.calls.map(
+            (call) =>
+              call[0]
+                .processWorkflowContext
+                ?.checkpoint
+          )
+        ).toEqual([
+          "CP-1a",
+          "CP-1b",
+          "CP-FSL-D",
+          "CP-1c-lancuch"
+        ]);
+
+        expect(
+          response.body
+            .processAuto
+            .limitReached
+        ).toBe(true);
+        expect(
+          response.body
+            .processAuto
+            .stopped
+        ).toBe(
+          "LIMIT_REACHED"
+        );
+        expect(
+          response.body
+            .processAuto
+            .steps
+        ).toHaveLength(4);
+        expect(
+          response.body
+            .processWorkflow
+            .pendingCheckpoint
+        ).toBeNull();
+        expect(
+          response.body
+            .processWorkflow
+            .checkpoints[
+              "CP-1c-skan"
+            ]
+        ).toBe("NA");
+        expect(
+          response.body
+            .processWorkflow
+            .checkpoints[
+              "CP-PD"
+            ]
+        ).toBe("NA");
+        expect(
+          response.body
+            .processWorkflow
+            .checkpoints[
+              "CP-1c-macierz"
+            ]
+        ).toBe("NA");
+        expect(
+          response.body
+            .processWorkflow
+            .checkpoints[
+              "CP-1d-anomalie"
+            ]
+        ).toBe("OPEN");
+        expect(
+          String(
+            response.body.answer
+          )
+        ).toContain(
+          "## CP-1a"
+        );
+        expect(
+          String(
+            response.body.answer
+          )
+        ).toContain(
+          "## CP-1c-lancuch"
+        );
+
+        const encrypted =
+          fs.readFileSync(
+            path.join(
+              current.root,
+              "cases",
+              caseId,
+              "secure",
+              "workspace",
+              "index.lmw1"
+            ),
+            "utf8"
+          );
+        expect(encrypted)
+          .not.toContain(
+            "CP-1a"
+          );
+        expect(encrypted)
+          .not.toContain(
+            "CP-FSL-D"
+          );
+        expect(encrypted)
+          .not.toContain(
+            "PENDING_CONFIRMATION"
+          );
+
+        current.auth.close();
+      }
+    );
+
+    it(
       "blocks deanonymization intent until the persisted process workflow is FINAL",
       async () => {
         const current =
