@@ -58,30 +58,27 @@ try {
     Set-Content -LiteralPath (Join-Path $dir "sensitive-test.txt") -Value "must-be-deleted" -NoNewline
   }
 
-  $probeArgs = @{
-    Mode = "Probe"
-    DataRootOverride = $dataRoot
-    LocalAppRootOverride = $localRoot
-    RoamingAppRootOverride = $roamingRoot
-    SkipCredentialManager = $true
-    SkipProcessStop = $true
-  }
-  & $purge @probeArgs
-  if ($LASTEXITCODE -ne 10) {
-    throw "PROFILE_LIFECYCLE_PROBE_FAILED:$LASTEXITCODE"
+  $powershell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+  $commonArgs = @(
+    "-NoProfile",
+    "-NonInteractive",
+    "-ExecutionPolicy", "Bypass",
+    "-File", $purge,
+    "-DataRootOverride", $dataRoot,
+    "-LocalAppRootOverride", $localRoot,
+    "-RoamingAppRootOverride", $roamingRoot,
+    "-SkipCredentialManager",
+    "-SkipProcessStop"
+  )
+
+  $probeProcess = Start-Process -FilePath $powershell -ArgumentList (@("-Mode", "Probe") + $commonArgs) -PassThru -Wait
+  if ($probeProcess.ExitCode -ne 10) {
+    throw "PROFILE_LIFECYCLE_PROBE_FAILED:$($probeProcess.ExitCode)"
   }
 
-  $purgeArgs = @{
-    Mode = "Purge"
-    DataRootOverride = $dataRoot
-    LocalAppRootOverride = $localRoot
-    RoamingAppRootOverride = $roamingRoot
-    SkipCredentialManager = $true
-    SkipProcessStop = $true
-  }
-  & $purge @purgeArgs
-  if ($LASTEXITCODE -ne 0) {
-    throw "PROFILE_LIFECYCLE_PURGE_FAILED:$LASTEXITCODE"
+  $purgeProcess = Start-Process -FilePath $powershell -ArgumentList (@("-Mode", "Purge") + $commonArgs) -PassThru -Wait
+  if ($purgeProcess.ExitCode -ne 0) {
+    throw "PROFILE_LIFECYCLE_PURGE_FAILED:$($purgeProcess.ExitCode)"
   }
 
   foreach ($dir in @($dataRoot, $localRoot, $roamingRoot)) {
