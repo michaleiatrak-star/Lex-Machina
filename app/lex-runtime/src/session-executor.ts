@@ -92,6 +92,9 @@ import {
   gateIWorkflowContract,
   type GateISubgateReport
 } from "./gate-i-contracts.js";
+import type {
+  OrderedCaseWorkflowId
+} from "./ordered-case-workflow-state.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -170,6 +173,12 @@ export type SessionExecutionRequest = {
     >;
     checkpoint:
       ContractCheckpoint;
+  };
+  orderedCaseWorkflowContext?: {
+    workflowId:
+      OrderedCaseWorkflowId;
+    checkpoint: string;
+    revision: number;
   };
 };
 
@@ -308,6 +317,19 @@ export type SessionExecutionResponse = {
       ContractCheckpoint | null;
     closedCheckpoints:
       ContractCheckpoint[];
+  };
+  orderedCaseWorkflow?: {
+    workflowId:
+      OrderedCaseWorkflowId;
+    caseId: string;
+    revision: number;
+    status:
+      | "ACTIVE"
+      | "COMPLETE";
+    nextCheckpoint:
+      string | null;
+    closedCheckpoints:
+      string[];
   };
   processAuto?: {
     maxSteps: number;
@@ -614,6 +636,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         ? {
             contractWorkflowContext:
               request.contractWorkflowContext
+          }
+        : {}),
+      ...(request.orderedCaseWorkflowContext
+        ? {
+            orderedCaseWorkflowContext:
+              request.orderedCaseWorkflowContext
           }
         : {}),
       tools: toolSchemas,
