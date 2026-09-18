@@ -35,6 +35,10 @@ import type {
   ProcessPleadingMode,
   ProcessPleadingStage
 } from "./process-pleading-state.js";
+import type {
+  CourtAnalysisCheckpoint,
+  CourtAnalysisStage
+} from "./court-analysis-state.js";
 import {
   orchestrateDocumentContext,
   type ContextBudgetReport
@@ -67,6 +71,14 @@ export type SessionExecutionRequest = {
     stage: ProcessPleadingStage;
     checkpoint: ProcessPleadingCheckpoint;
     mode: ProcessPleadingMode;
+  };
+  courtWorkflowContext?: {
+    stage: Exclude<
+      CourtAnalysisStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      CourtAnalysisCheckpoint;
   };
 };
 
@@ -165,6 +177,16 @@ export type SessionExecutionResponse = {
     missingResources: string[];
   };
   context?: ContextBudgetReport;
+  courtWorkflow?: {
+    caseId: string;
+    revision: number;
+    stage:
+      CourtAnalysisStage;
+    nextCheckpoint:
+      CourtAnalysisCheckpoint | null;
+    closedCheckpoints:
+      CourtAnalysisCheckpoint[];
+  };
   processAuto?: {
     maxSteps: number;
     stopped:
@@ -347,6 +369,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         ? {
             processWorkflowContext:
               request.processWorkflowContext
+          }
+        : {}),
+      ...(request.courtWorkflowContext
+        ? {
+            courtWorkflowContext:
+              request.courtWorkflowContext
           }
         : {}),
       tools: toolSchemas,
