@@ -5,9 +5,6 @@
         "type": "offlineInstaller",
         "silent": true
       }
-    },
-    "resources": {
-      "runtime": "runtime"
     }
   }
 }
