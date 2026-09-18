@@ -121,6 +121,20 @@ describe(
         write(
           path.join(
             localRoot,
+            "model-pack-install.json"
+          ),
+          '{"receipt":"new"}'
+        );
+        write(
+          path.join(
+            localRoot,
+            "model-pack-install.json.lex-rollback"
+          ),
+          '{"receipt":"old"}'
+        );
+        write(
+          path.join(
+            localRoot,
             "provision-transaction.json"
           ),
           JSON.stringify({
@@ -132,6 +146,8 @@ describe(
             hadPreviousConfig:
               true,
             hadPreviousQualification:
+              true,
+            hadPreviousModelPackReceipt:
               true,
             startedAt:
               new Date().toISOString()
@@ -174,6 +190,17 @@ describe(
           )
         ).toBe(
           '{"qualification":"old"}'
+        );
+        expect(
+          fs.readFileSync(
+            path.join(
+              localRoot,
+              "model-pack-install.json"
+            ),
+            "utf8"
+          )
+        ).toBe(
+          '{"receipt":"old"}'
         );
         expect(
           fs.existsSync(
@@ -243,6 +270,8 @@ describe(
               false,
             hadPreviousQualification:
               false,
+            hadPreviousModelPackReceipt:
+              false,
             startedAt:
               new Date().toISOString()
           })
@@ -278,6 +307,14 @@ describe(
             )
           )
         ).toBe(false);
+        expect(
+          fs.existsSync(
+            path.join(
+              localRoot,
+              "model-pack-install.json"
+            )
+          )
+        ).toBe(false);
       }
     );
 
@@ -306,6 +343,8 @@ describe(
             hadPreviousConfig:
               true,
             hadPreviousQualification:
+              true,
+            hadPreviousModelPackReceipt:
               true,
             startedAt:
               new Date().toISOString()
