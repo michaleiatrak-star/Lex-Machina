@@ -23,6 +23,15 @@ function Get-Sha256Hex([byte[]]$Bytes) {
 
 $sourceFile = (Resolve-Path -LiteralPath $SourceImagePath).Path
 $sourceBytes = [IO.File]::ReadAllBytes($sourceFile)
+$pngSignature = [byte[]](137, 80, 78, 71, 13, 10, 26, 10)
+if ($sourceBytes.Length -lt $pngSignature.Length) {
+  throw "LEX_BRAND_SOURCE_PNG_SIGNATURE_INVALID"
+}
+for ($i = 0; $i -lt $pngSignature.Length; $i++) {
+  if ($sourceBytes[$i] -ne $pngSignature[$i]) {
+    throw "LEX_BRAND_SOURCE_PNG_SIGNATURE_INVALID"
+  }
+}
 $actualSourceSha256 = Get-Sha256Hex $sourceBytes
 if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
