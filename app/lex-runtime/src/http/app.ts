@@ -148,6 +148,15 @@ import {
 import {
   chronologyTemporalGateRequired
 } from "../chronology-date-trigger.js";
+import {
+  nextContractCheckpoint,
+  type ContractAnalysisState
+} from "../contract-analysis-state.js";
+import {
+  completeContractExecution,
+  requireContractExecutionPermit,
+  type ContractExecutionPermit
+} from "../contract-analysis-execution-gate.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -397,6 +406,11 @@ export type LexHttpAppOptions = {
     | "getChronologyState"
     | "saveChronologyState"
   >;
+  contractWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getContractAnalysisState"
+    | "saveContractAnalysisState"
+  >;
   documentGenerationState?: Pick<
     DocumentGenerationStateStore,
     "readState"
@@ -572,6 +586,27 @@ function sendChronologyWorkflowError(
     !(error instanceof Error) ||
     !error.message.startsWith(
       "CHRONOLOGY_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
+function sendContractWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "CONTRACT_"
     )
   ) {
     return false;
@@ -6170,6 +6205,128 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         };
       }
 
+      let contractContext:
+        | {
+            caseId: string;
+            permit:
+              ContractExecutionPermit;
+            state:
+              ContractAnalysisState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "CONTRACT_ANALYSIS_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .contractWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "CONTRACT_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const contractCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!contractCaseId) {
+          throw new Error(
+            "CONTRACT_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            contractCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              contractCaseId
+            );
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              contractCaseId,
+              "WRITE",
+              (
+                caseDataKey
+              ) =>
+                options
+                  .contractWorkflowStore!
+                  .getContractAnalysisState({
+                    caseId:
+                      contractCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion
+                  })
+            );
+        if (!state) {
+          throw new Error(
+            "CONTRACT_STATE_REQUIRED"
+          );
+        }
+
+        const permit =
+          requireContractExecutionPermit(
+            state
+          );
+        request.contractWorkflowContext = {
+          mode:
+            permit.mode,
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint
+        };
+        contractContext = {
+          caseId:
+            contractCaseId,
+          permit,
+          state
+        };
+      }
+
       if (
         processContext?.permit.mode ===
           "AUTO" &&
@@ -6567,6 +6724,121 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         result.documentCitationFreshness = {
           result: "PASS",
           checked
+        };
+      }
+
+      if (
+        contractContext &&
+        options.caseAccessService &&
+        options
+          .contractWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              contractContext.caseId
+            );
+
+        let state =
+          contractContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "CONTRACT_ANALYSIS_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          const auditRef =
+            [
+              "audit://session",
+              createHash("sha256")
+                .update(
+                  `${result.sessionId}\0${contractContext.permit.checkpoint}`
+                )
+                .digest("hex"),
+              contractContext.permit
+                .checkpoint
+            ].join("/");
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                contractContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .contractWorkflowStore!
+                      .getContractAnalysisState({
+                        caseId:
+                          contractContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "CONTRACT_STATE_CONFLICT"
+                    );
+                  }
+                  const next =
+                    completeContractExecution(
+                      current,
+                      contractContext!
+                        .permit,
+                      [auditRef]
+                    );
+                  return await options
+                    .contractWorkflowStore!
+                    .saveContractAnalysisState({
+                      caseId:
+                        contractContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      state: next,
+                      expectedRevision:
+                        current.revision
+                    });
+                }
+              );
+        }
+
+        result.contractWorkflow = {
+          caseId:
+            contractContext.caseId,
+          revision:
+            state.revision,
+          mode:
+            state.mode,
+          stage:
+            state.stage,
+          nextCheckpoint:
+            nextContractCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
         };
       }
 
