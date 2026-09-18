@@ -135,7 +135,7 @@ Context policy:
 - the Local AI UI shows the last hardware-qualified profile instead of presenting a configured context as implicitly validated;
 - repair and deterministic model removal are implemented; removal clears only the selected GGUF/config/qualification and keeps the shared engine cache when appropriate;
 - multi-GB engine/model downloads are streamed to `.part`, report verified byte/percent progress to the runtime UI, and become cache entries only after SHA-256 verification;
-- runtime reports RAM/CPU and detected Windows video controllers while truthfully exposing the currently packaged `CPU_X64_PORTABLE` backend and `gpuOffloadEnabled=false`;
+- runtime reports RAM/CPU and detected Windows video controllers; the manifest pins both `CPU_X64_PORTABLE` and `VULKAN_X64`, with user-selectable `AUTO / VULKAN_X64 / CPU_X64_PORTABLE`; AUTO may try Vulkan only when an accelerator is detected and retains CPU fallback; GPU offload is reported as active only after the configured Vulkan backend passes runtime health/tokenizer qualification;
 - model-pack update discovery uses a separate Ed25519-signed index trust root; update metadata is schema-validated, HTTPS-only and fail-closed while the production public key is absent;
 - model updates are user-approved from the Local AI UI and may change only the signed URL/hash for an app-approved model identity; filename, quantization, license and context capabilities require an application update;
 - model replacement keeps the prior GGUF as rollback until the new runtime passes `/health`;
@@ -146,7 +146,7 @@ Context policy:
 
 Still required for full gates:
 
-- GPU backend packaging/selection and actual offload support (hardware discovery alone is not GPU execution);
+- execute Vulkan and CPU backend qualification/benchmark acceptance on representative supported Windows hardware; backend implementation/selection exists, but production GPU support is not considered qualified until those artifacts are reviewed;
 - execute the committed self-hosted Windows benchmark matrix for 64k / 96k / 128k / 160k / 200k on representative supported hardware; the harness restores the user's previous context after execution;
 - context-capability acceptance is explicitly 3/3 exact passkey recall at three positions with prompts fitted to 72% of each requested context; this is a long-context qualification threshold, not a general legal-quality score;
 - define and run a separate semantic/legal-quality benchmark before claiming extended-context legal quality;
