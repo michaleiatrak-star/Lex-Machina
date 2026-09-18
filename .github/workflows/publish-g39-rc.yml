@@ -1,0 +1,151 @@
+name: Publish G39 Windows Installer RC
+
+on:
+  push:
+    branches:
+      - "feature/g39-execution-2026-09-17"
+    paths:
+      - "release/g39-rc.json"
+      - ".github/workflows/publish-g39-rc.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  online:
+    uses: ./.github/workflows/lex-installer.yml
+
+  offline:
+    uses: ./.github/workflows/offline-windows-installer.yml
+    with:
+      signed: false
+
+  publish:
+    name: Publish accepted Windows installer prerelease
+    needs:
+      - online
+      - offline
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Validate release marker
+        id: marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          marker="release/g39-rc.json"
+          test -f "$marker"
+
+          version="$(python -c 'import json; print(json.load(open("release/g39-rc.json", encoding="utf-8"))["version"])')"
+          tag="$(python -c 'import json; print(json.load(open("release/g39-rc.json", encoding="utf-8"))["tag"])')"
+          channel="$(python -c 'import json; print(json.load(open("release/g39-rc.json", encoding="utf-8"))["channel"])')"
+
+          if [[ "$version" != "0.1.3" ]]; then
+            echo "Unexpected version: $version" >&2
+            exit 1
+          fi
+          if [[ "$tag" != "v0.1.3-g39-rc1" ]]; then
+            echo "Unexpected tag: $tag" >&2
+            exit 1
+          fi
+          if [[ "$channel" != "prerelease" ]]; then
+            echo "Release marker must be prerelease" >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Download accepted online installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: dist/online
+
+      - name: Download accepted offline installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Offline-Setup
+          path: dist/offline
+
+      - name: Normalize release assets and verify receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/publish
+
+          online="$(find dist/online -maxdepth 1 -type f -name '*.exe' | head -n 1)"
+          offline="dist/offline/LexMachina-Offline-Setup.exe"
+
+          test -n "$online"
+          test -f "$online"
+          test -f "$offline"
+          test -f "dist/online/SHA256.txt"
+          test -f "dist/offline/SHA256-OFFLINE.txt"
+          test -f "dist/offline/component-lock-offline.json"
+
+          cp "$online" "dist/publish/LexMachina-Online-Setup.exe"
+          cp "$offline" "dist/publish/LexMachina-Offline-Setup.exe"
+          cp "dist/online/SHA256.txt" "dist/publish/SHA256-ONLINE-BUILD.txt"
+          cp "dist/offline/SHA256-OFFLINE.txt" "dist/publish/SHA256-OFFLINE-BUILD.txt"
+          cp "dist/offline/component-lock-offline.json" "dist/publish/component-lock-offline.json"
+          cp "app/installer/windows-release-source.json" "dist/publish/windows-release-source.json"
+
+          (
+            cd dist/publish
+            sha256sum               LexMachina-Online-Setup.exe               LexMachina-Offline-Setup.exe               component-lock-offline.json               windows-release-source.json               > SHA256SUMS.txt
+          )
+
+          cat dist/publish/SHA256SUMS.txt
+
+      - name: Generate prerelease notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'EOF'
+          ## Lex Machina 0.1.3 — G39 RC1
+
+          Windows installer release candidate built from the G39 execution branch.
+
+          ### Installers
+          - **LexMachina-Online-Setup.exe** — installs the application/private runtime; Local AI is optional and is downloaded only after installation at the user's explicit request.
+          - **LexMachina-Offline-Setup.exe** — standalone offline application/runtime installer; Local AI model weights are still optional post-install components and are not embedded.
+
+          ### G39 changes in this candidate
+          - deterministic installer state detection (fresh / upgrade / repair / current / downgrade-blocked);
+          - existing installation root discovery and mismatch protection;
+          - application and skill maintenance/update UI;
+          - Local AI post-install provisioning, repair/remove, context selection 64k–200k with real startup qualification;
+          - live verified model-download progress and hardware/backend visibility;
+          - deterministic process-pleading state/checkpoint engine;
+          - context budgeting and citation-source re-fetch;
+          - supply-chain fail-closed gates, pinned release-critical GitHub Actions, SBOM/provenance workflow scaffolding.
+
+          ### Security / signing status
+          This is a **prerelease candidate**, not a stable production release. The application-update trust root intentionally remains fail-closed until the production Authenticode certificate thumbprint and CI signing secret are configured. These RC installers therefore must not be treated as satisfying the final signed-production-update gate.
+
+          SHA-256 values are included in **SHA256SUMS.txt**.
+          EOF
+
+      - name: Refuse to overwrite an existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "${{ steps.marker.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Release already exists: ${{ steps.marker.outputs.tag }}" >&2
+            exit 1
+          fi
+
+      - name: Publish prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "${{ steps.marker.outputs.tag }}"             --repo "${{ github.repository }}"             --target "${{ github.sha }}"             --title "Lex Machina ${{ steps.marker.outputs.version }} G39 RC1"             --prerelease             --notes-file release-notes.md             dist/publish/LexMachina-Online-Setup.exe             dist/publish/LexMachina-Offline-Setup.exe             dist/publish/SHA256SUMS.txt             dist/publish/SHA256-ONLINE-BUILD.txt             dist/publish/SHA256-OFFLINE-BUILD.txt             dist/publish/component-lock-offline.json             dist/publish/windows-release-source.json
