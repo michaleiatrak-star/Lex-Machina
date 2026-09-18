@@ -21,10 +21,22 @@ export type GateICheckId =
   | "SOURCE_PROVENANCE"
   | "LEGAL_CITATIONS"
   | "CASE_SIGNATURES"
+  | "OUTPUT_CONTRACT"
   | "FINALIZATION";
+
+export type GateISubgate =
+  | "I-A_ROUTER"
+  | "I-B_CORE_RESOURCES"
+  | "I-C_WORKFLOW_RESOURCES"
+  | "I-D_SOURCE_PROVENANCE"
+  | "I-E_LEGAL_CITATIONS"
+  | "I-F_CASE_SIGNATURES"
+  | "I-G_OUTPUT_CONTRACT"
+  | "I-H_FINALIZATION";
 
 export type GateICheck = {
   id: GateICheckId;
+  subgate: GateISubgate;
   result: "PASS" | "BLOCKED";
   detail: string;
 };
@@ -53,6 +65,7 @@ function routerFirst(
     firstSkill.status === "OK";
   return {
     id: "ROUTER_FIRST",
+    subgate: "I-A_ROUTER",
     result:
       pass ? "PASS" : "BLOCKED",
     detail:
@@ -89,6 +102,7 @@ function coreResources(
       );
   return {
     id: "CORE_RESOURCES",
+    subgate: "I-B_CORE_RESOURCES",
     result:
       missing.length === 0
         ? "PASS"
@@ -107,6 +121,8 @@ function workflowResources(
   return {
     id:
       "WORKFLOW_RESOURCES",
+    subgate:
+      "I-C_WORKFLOW_RESOURCES",
     result:
       report.result,
     detail:
@@ -187,6 +203,8 @@ function provenance(
   return {
     id:
       "SOURCE_PROVENANCE",
+    subgate:
+      "I-D_SOURCE_PROVENANCE",
     result:
       invalid.length === 0
         ? "PASS"
@@ -212,6 +230,8 @@ function citations(
   return {
     id:
       "LEGAL_CITATIONS",
+    subgate:
+      "I-E_LEGAL_CITATIONS",
     result:
       invalid.length === 0
         ? "PASS"
@@ -269,6 +289,8 @@ function caseSignatures(
   return {
     id:
       "CASE_SIGNATURES",
+    subgate:
+      "I-F_CASE_SIGNATURES",
     result:
       invalid === 0
         ? "PASS"
@@ -290,6 +312,10 @@ export function evaluateGateIInvariants(
       readonly VerificationRecord[];
     finalization:
       FinalizationReport;
+    outputValidation: {
+      result: "PASS" | "BLOCKED";
+      detail: string;
+    };
   }
 ): GateIInvariantReport {
   const checks:
@@ -310,7 +336,21 @@ export function evaluateGateIInvariants(
       ),
       {
         id:
+          "OUTPUT_CONTRACT",
+        subgate:
+          "I-G_OUTPUT_CONTRACT",
+        result:
+          args.outputValidation
+            .result,
+        detail:
+          args.outputValidation
+            .detail
+      },
+      {
+        id:
           "FINALIZATION",
+        subgate:
+          "I-H_FINALIZATION",
         result:
           args.finalization
             .result === "PASS"
