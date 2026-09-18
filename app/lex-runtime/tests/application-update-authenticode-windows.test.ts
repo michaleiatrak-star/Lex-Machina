@@ -29,7 +29,39 @@ function copyTrustedForeignSignedExecutable(
   const systemRoot =
     process.env.SystemRoot ??
     "C:\\Windows";
+  const programFiles =
+    process.env.ProgramFiles ??
+    "C:\\Program Files";
+  const programFilesX86 =
+    process.env[
+      "ProgramFiles(x86)"
+    ] ??
+    "C:\\Program Files (x86)";
   const candidates = [
+    process.execPath,
+    path.join(
+      programFiles,
+      "PowerShell",
+      "7",
+      "pwsh.exe"
+    ),
+    path.join(
+      programFiles,
+      "dotnet",
+      "dotnet.exe"
+    ),
+    path.join(
+      programFiles,
+      "Git",
+      "bin",
+      "git.exe"
+    ),
+    path.join(
+      programFilesX86,
+      "Git",
+      "bin",
+      "git.exe"
+    ),
     path.join(
       systemRoot,
       "System32",
