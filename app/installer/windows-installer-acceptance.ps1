@@ -27,7 +27,7 @@ function Assert-PinnedAuthenticode(
     return
   }
   if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-    throw "INSTALLER_ACCEPTANCE_SIGNATURE_TARGET_MISSING:$Label:$Path"
+    throw "INSTALLER_ACCEPTANCE_SIGNATURE_TARGET_MISSING:${Label}:${Path}"
   }
 
   $signature = Get-AuthenticodeSignature -LiteralPath $Path
@@ -35,15 +35,15 @@ function Assert-PinnedAuthenticode(
     $signature.Status -ne "Valid" -or
     $null -eq $signature.SignerCertificate
   ) {
-    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_INVALID:$Label:$($signature.Status)"
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_INVALID:${Label}:$($signature.Status)"
   }
 
   $thumbprint = Normalize-Thumbprint $signature.SignerCertificate.Thumbprint
   if ($trustedSignerThumbprints -notcontains $thumbprint) {
-    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_SIGNER_NOT_PINNED:$Label:$thumbprint"
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_SIGNER_NOT_PINNED:${Label}:${thumbprint}"
   }
   if ($null -eq $signature.TimeStamperCertificate) {
-    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_TIMESTAMP_MISSING:$Label"
+    throw "INSTALLER_ACCEPTANCE_AUTHENTICODE_TIMESTAMP_MISSING:${Label}"
   }
 
   Write-Host "Authenticode PASS: $Label signer=$thumbprint timestamp=$($signature.TimeStamperCertificate.Subject)"
