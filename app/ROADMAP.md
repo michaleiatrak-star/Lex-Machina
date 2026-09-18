@@ -100,7 +100,7 @@ Kryteria zamknięcia:
 
 ## R0.1.3 — G39 release candidate — VERIFYING
 
-Źródłowy kandydat aplikacji: `b159efffec9f607021c282cc9828986fce7e16dc`.
+Źródłowy kandydat aplikacji dla pierwszego artefaktu RC: `fa5bc4ed8b446d2ffe80e52720bb357b13d1c26d`.
 Publikacja jest prowadzona wyłącznie poza `main`, przez `release/0.1.3-g39-rc1`.
 
 ### G39-RC1 — bramka publikacji instalatorów
@@ -110,9 +110,10 @@ Warunki publikacji muszą być spełnione **na tym samym source SHA**:
 - Lex Runtime Validation: **PASS**;
 - F-138 structural audit: **PASS**;
 - G39 Installer State Machine: **PASS**;
-- Windows Online Installer installed-copy acceptance: **VERIFYING**;
-- Windows Offline Installer standalone clean-machine acceptance: **VERIFYING**;
-- publisher ponownie sprawdza SHA-256 artefaktów i odrzuca brak któregokolwiek z pięciu wymaganych workflow.
+- Windows Online Installer installed-copy acceptance: **PASS**;
+- Windows Offline Installer standalone clean-machine acceptance: **BLOCKED / FIXING**;
+- publisher online-first ponownie sprawdza Runtime + F-138 + G39 state + Online na dokładnym source SHA i publikuje wyłącznie instalator online;
+- pełny publisher pozostaje fail-closed i dołącza instalator offline dopiero po jego clean-machine PASS na zweryfikowanym source SHA.
 
 ### Zakres RC
 
@@ -121,7 +122,7 @@ Warunki publikacji muszą być spełnione **na tym samym source SHA**:
 - Local AI jako opcjonalne provisioning po instalacji, nie jako składnik wymagany do zdrowej instalacji;
 - runtime/source/citation/finalization gates egzekwowane deterministycznie;
 - transakcyjne kanały update aplikacji/skilli/model-packów pozostają fail-closed bez produkcyjnych trust roots;
-- RC może być opublikowany jako ręczny, niesygnowany prerelease dopiero po komplecie pięciu gate'ów powyżej.
+- RC jest publikowany etapowo: zweryfikowany online może być wydany po PASS własnej ścieżki i wspólnych gate'ów; offline jest dołączany później dopiero po clean-machine PASS. Produkcyjne auto-update nadal pozostaje fail-closed.
 
 ### Gate'y pozostające poza zamknięciem RC
 
