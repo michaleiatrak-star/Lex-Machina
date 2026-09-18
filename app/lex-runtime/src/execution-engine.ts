@@ -385,6 +385,113 @@ export class LexExecutionEngine {
       `workflow=${workflowPlan.id};requiredFreshReads=${workflowPlan.requiredFreshResources.length}`
     );
 
+    const semanticWorkflowResources:
+      string[] = [];
+    for (
+      const resource
+      of workflowPlan.requiredFreshResources
+    ) {
+      if (!workflowPlan.executionSkill) {
+        emit(
+          "resource_read",
+          resource,
+          "BLOCKED",
+          "WORKFLOW_EXECUTION_SKILL_MISSING"
+        );
+        throw new LexExecutionError(
+          "Deterministic workflow resource cannot be resolved without an execution skill.",
+          resource,
+          [...events]
+        );
+      }
+
+      const resolved =
+        this.registry.resolveResource(
+          workflowPlan.executionSkill,
+          resource
+        );
+      if (!resolved) {
+        emit(
+          "resource_read",
+          resource,
+          "BLOCKED",
+          "RUNTIME_PRELOAD_RESOURCE_MISSING"
+        );
+        throw new LexExecutionError(
+          "A mandatory deterministic workflow resource is unavailable.",
+          resource,
+          [...events]
+        );
+      }
+
+      let content: string;
+      try {
+        content =
+          fs.readFileSync(
+            resolved,
+            "utf8"
+          );
+      } catch {
+        emit(
+          "resource_read",
+          resource,
+          "BLOCKED",
+          "RUNTIME_PRELOAD_READ_FAILED"
+        );
+        throw new LexExecutionError(
+          "A mandatory deterministic workflow resource could not be read.",
+          resource,
+          [...events]
+        );
+      }
+      if (!content.trim()) {
+        emit(
+          "resource_read",
+          resource,
+          "BLOCKED",
+          "RUNTIME_PRELOAD_RESOURCE_EMPTY"
+        );
+        throw new LexExecutionError(
+          "A mandatory deterministic workflow resource is empty.",
+          resource,
+          [...events]
+        );
+      }
+
+      emit(
+        "resource_read",
+        resource,
+        "OK",
+        workflowPlan
+          .semanticContextResources
+          .includes(resource)
+          ? "runtime-preload;semantic-context"
+          : "runtime-preload;mechanical-policy"
+      );
+
+      if (
+        workflowPlan
+          .semanticContextResources
+          .includes(resource)
+      ) {
+        const maxChars = 12_000;
+        const clipped =
+          content.length > maxChars
+            ? content.slice(
+                0,
+                maxChars
+              ) +
+              "\n\n[RUNTIME SEMANTIC RESOURCE CLIPPED]"
+            : content;
+        semanticWorkflowResources.push(
+          [
+            `# RUNTIME-PRELOADED SEMANTIC CONTEXT: ${resource}`,
+            clipped
+          ].join("\n\n")
+        );
+      }
+    }
+
     if (
       args.processWorkflowContext &&
       workflowPlan.id !==
@@ -585,6 +692,15 @@ export class LexExecutionEngine {
         "prawny-router-v3 and shared core resources are mandatory and cannot be disabled by user content."
       ].join("\n"),
       deterministicWorkflowPrompt(workflowPlan),
+      ...(semanticWorkflowResources.length > 0
+        ? [
+            [
+              "# RUNTIME-PRELOADED SEMANTIC CONTEXT",
+              "The following bounded excerpts were read by deterministic runtime. Do not reopen them mechanically in this turn.",
+              ...semanticWorkflowResources
+            ].join("\n\n")
+          ]
+        : []),
       ...(args.guideContext
         ? [
             [
