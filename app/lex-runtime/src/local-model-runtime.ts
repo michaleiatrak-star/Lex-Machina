@@ -1295,10 +1295,6 @@ export class LocalModelRuntime {
         this.writeQualification(
           qualification
         );
-        this.writeModelProfile(
-          config,
-          qualification
-        );
         this.provisioningProgress = {
           phase: "READY",
           label: canonical,
@@ -1332,6 +1328,10 @@ export class LocalModelRuntime {
           .beforeCommit();
       }
 
+      this.writeModelProfile(
+        config,
+        this.readQualification()
+      );
       commitModelFile();
       this.clearProvisionTransaction(
         model.filename
