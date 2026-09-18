@@ -98,7 +98,9 @@ function fakeFetch(
       );
     }
     return new Response(
-      bytes,
+      new TextDecoder().decode(
+        bytes
+      ),
       {
         status: 200,
         headers: {
