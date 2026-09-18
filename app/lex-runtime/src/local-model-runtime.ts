@@ -107,6 +107,7 @@ type LocalProvisionTransaction = {
   hadPreviousModel: boolean;
   hadPreviousConfig: boolean;
   hadPreviousQualification: boolean;
+  hadPreviousModelPackReceipt: boolean;
   startedAt: string;
 };
 
@@ -724,6 +725,16 @@ export class LocalModelRuntime {
             qualificationPath
           )
         : null;
+    const modelPackReceiptPath =
+      this.modelPackReceiptPath();
+    const previousModelPackReceipt =
+      fs.existsSync(
+        modelPackReceiptPath
+      )
+        ? fs.readFileSync(
+            modelPackReceiptPath
+          )
+        : null;
     const targetModelPath =
       path.join(
         this.rootDir,
@@ -759,11 +770,15 @@ export class LocalModelRuntime {
         hadPreviousQualification:
           previousQualification !==
             null,
+        hadPreviousModelPackReceipt:
+          previousModelPackReceipt !==
+            null,
         startedAt:
           new Date().toISOString()
       },
       previousConfig,
-      previousQualification
+      previousQualification,
+      previousModelPackReceipt
     );
 
     if (previousTargetWasActive) {
@@ -919,6 +934,17 @@ export class LocalModelRuntime {
       } else {
         fs.rmSync(
           qualificationPath,
+          { force: true }
+        );
+      }
+      if (previousModelPackReceipt) {
+        fs.writeFileSync(
+          modelPackReceiptPath,
+          previousModelPackReceipt
+        );
+      } else {
+        fs.rmSync(
+          modelPackReceiptPath,
           { force: true }
         );
       }
@@ -1531,10 +1557,15 @@ export class LocalModelRuntime {
     return `${this.qualificationPath()}.lex-rollback`;
   }
 
+  private modelPackReceiptRollbackPath(): string {
+    return `${this.modelPackReceiptPath()}.lex-rollback`;
+  }
+
   private writeProvisionTransaction(
     transaction: LocalProvisionTransaction,
     previousConfig: Buffer | null,
-    previousQualification: Buffer | null
+    previousQualification: Buffer | null,
+    previousModelPackReceipt: Buffer | null
   ): void {
     fs.mkdirSync(
       this.rootDir,
@@ -1544,6 +1575,8 @@ export class LocalModelRuntime {
       this.configRollbackPath();
     const qualificationBackup =
       this.qualificationRollbackPath();
+    const modelPackReceiptBackup =
+      this.modelPackReceiptRollbackPath();
     const marker =
       this.provisionTransactionPath();
 
@@ -1553,6 +1586,10 @@ export class LocalModelRuntime {
     );
     fs.rmSync(
       qualificationBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      modelPackReceiptBackup,
       { force: true }
     );
     fs.rmSync(
@@ -1571,6 +1608,13 @@ export class LocalModelRuntime {
       fs.writeFileSync(
         qualificationBackup,
         previousQualification,
+        { flag: "wx" }
+      );
+    }
+    if (previousModelPackReceipt) {
+      fs.writeFileSync(
+        modelPackReceiptBackup,
+        previousModelPackReceipt,
         { flag: "wx" }
       );
     }
@@ -1602,6 +1646,10 @@ export class LocalModelRuntime {
     );
     fs.rmSync(
       this.qualificationRollbackPath(),
+      { force: true }
+    );
+    fs.rmSync(
+      this.modelPackReceiptRollbackPath(),
       { force: true }
     );
     fs.rmSync(
@@ -1653,6 +1701,8 @@ export class LocalModelRuntime {
       typeof transaction.hadPreviousConfig !==
         "boolean" ||
       typeof transaction.hadPreviousQualification !==
+        "boolean" ||
+      typeof transaction.hadPreviousModelPackReceipt !==
         "boolean"
     ) {
       throw new Error(
@@ -1672,6 +1722,8 @@ export class LocalModelRuntime {
       this.configRollbackPath();
     const qualificationBackup =
       this.qualificationRollbackPath();
+    const modelPackReceiptBackup =
+      this.modelPackReceiptRollbackPath();
 
     try {
       if (
@@ -1752,6 +1804,29 @@ export class LocalModelRuntime {
       } else {
         fs.rmSync(
           this.qualificationPath(),
+          { force: true }
+        );
+      }
+
+      if (
+        transaction.hadPreviousModelPackReceipt
+      ) {
+        if (
+          !fs.existsSync(
+            modelPackReceiptBackup
+          )
+        ) {
+          throw new Error(
+            "LOCAL_MODEL_RECOVERY_MODEL_PACK_RECEIPT_BACKUP_MISSING"
+          );
+        }
+        fs.copyFileSync(
+          modelPackReceiptBackup,
+          this.modelPackReceiptPath()
+        );
+      } else {
+        fs.rmSync(
+          this.modelPackReceiptPath(),
           { force: true }
         );
       }
