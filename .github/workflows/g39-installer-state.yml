@@ -13,6 +13,7 @@ on:
       - "app/installer/sign-windows-artifact.ps1"
       - "app/installer/sign-windows-artifact-selftest.ps1"
       - "app/installer/polish-nsis-language-selftest.ps1"
+      - "app/installer/nsis-hook-contract-selftest.ps1"
       - "app/lex-desktop/src-tauri/windows/Polish.nsh"
       - "app/lex-desktop/src-tauri/tauri.offline.conf.json"
       - "app/lex-desktop/src-tauri/tauri.conf.json"
@@ -52,6 +53,10 @@ jobs:
       - name: G39J Authenticode fail-closed policy
         shell: pwsh
         run: ./app/installer/sign-windows-artifact-selftest.ps1
+
+      - name: NSIS PREINSTALL output-directory contract
+        shell: pwsh
+        run: ./app/installer/nsis-hook-contract-selftest.ps1
 
       - name: Polish NSIS maintenance language contract
         shell: pwsh
