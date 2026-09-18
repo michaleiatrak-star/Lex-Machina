@@ -95,6 +95,26 @@ function parseProfiles(
   );
 }
 
+function parseBackendPreference(
+  value: string | undefined,
+  fallback:
+    LocalBackendPreference
+): LocalBackendPreference {
+  if (!value) {
+    return fallback;
+  }
+  if (
+    value !== "AUTO" &&
+    value !== "VULKAN_X64" &&
+    value !== "CPU_X64_PORTABLE"
+  ) {
+    fail(
+      "LOCAL_CONTEXT_BENCHMARK_BACKEND_INVALID"
+    );
+  }
+  return value;
+}
+
 async function tokenize(
   endpoint: string,
   content: string
@@ -436,6 +456,23 @@ async function main(): Promise<void> {
       initialStatus
         .backendPolicy
         .default;
+  const benchmarkBackendMode =
+    parseBackendPreference(
+      argument("backend"),
+      originalBackendMode
+    );
+  if (
+    !initialStatus
+      .backendPolicy
+      .allowed
+      .includes(
+        benchmarkBackendMode
+      )
+  ) {
+    fail(
+      "LOCAL_CONTEXT_BENCHMARK_BACKEND_NOT_ALLOWED"
+    );
+  }
   const models =
     runtime.listModels();
   const descriptor =
@@ -496,7 +533,7 @@ async function main(): Promise<void> {
           modelId,
           contextTokens,
           undefined,
-          originalBackendMode
+          benchmarkBackendMode
         );
         await runtime.ensureRunning(
           modelId
@@ -693,6 +730,7 @@ async function main(): Promise<void> {
     },
     originalContext,
     originalBackendMode,
+    benchmarkBackendMode,
     profiles: results,
     fatalError: fatal,
     generatedAt:
@@ -741,7 +779,9 @@ async function main(): Promise<void> {
               contextTokens:
                 item.contextTokens,
               result:
-                item.result
+                item.result,
+              backend:
+                item.backend
             })
           )
       },
