@@ -6,6 +6,9 @@ import type {
 import type {
   ProviderGateway
 } from "./providers/gateway.js";
+import {
+  detectHistoricalAsOf
+} from "./gate-i-auto-verification.js";
 
 export type AuxiliaryRoutingConfig = {
   enabled: boolean;
@@ -145,6 +148,10 @@ function parseCandidates(
       .toLocaleLowerCase(
         "pl"
       );
+  const requestedAsOf =
+    detectHistoricalAsOf(
+      sourceText
+    );
 
   for (
     const item
@@ -196,27 +203,39 @@ function parseCandidates(
       if (!act) {
         continue;
       }
-      const asOf =
+      const modelAsOf =
         bounded(
           record.asOf,
           10
         );
       if (
-        asOf &&
+        modelAsOf &&
         (
           !SAFE_DATE.test(
-            asOf
+            modelAsOf
           ) ||
           !sourceNormalized
             .includes(
-              asOf.toLocaleLowerCase(
-                "pl"
-              )
+              modelAsOf
+                .toLocaleLowerCase(
+                  "pl"
+                )
             )
         )
       ) {
         continue;
       }
+      if (
+        requestedAsOf &&
+        modelAsOf &&
+        modelAsOf !==
+          requestedAsOf
+      ) {
+        continue;
+      }
+      const asOf =
+        requestedAsOf ??
+        modelAsOf;
       const key =
         [
           kind,
