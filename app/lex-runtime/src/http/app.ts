@@ -6997,6 +6997,150 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         };
       }
 
+      let orderedCaseContext:
+        | {
+            caseId: string;
+            permit:
+              OrderedCaseExecutionPermit;
+            state:
+              OrderedCaseWorkflowState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "EVIDENCE_ANALYSIS_V1" ||
+        previewPlan.id ===
+          "WITNESS_QUESTIONING_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .orderedCaseWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "ORDERED_WORKFLOW_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const workflowId =
+          previewPlan.id as
+            OrderedCaseWorkflowId;
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const orderedCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!orderedCaseId) {
+          throw new Error(
+            "ORDERED_WORKFLOW_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            orderedCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              orderedCaseId
+            );
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              orderedCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                let current =
+                  await options
+                    .orderedCaseWorkflowStore!
+                    .getOrderedCaseWorkflowState({
+                      caseId:
+                        orderedCaseId,
+                      workflowId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  current =
+                    await options
+                      .orderedCaseWorkflowStore!
+                      .saveOrderedCaseWorkflowState({
+                        caseId:
+                          orderedCaseId,
+                        workflowId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state:
+                          createOrderedCaseWorkflowState(
+                            workflowId,
+                            orderedCaseId
+                          )
+                      });
+                }
+                return current;
+              }
+            );
+
+        const permit =
+          requireOrderedCaseExecutionPermit(
+            state
+          );
+        request
+          .orderedCaseWorkflowContext = {
+            workflowId,
+            checkpoint:
+              permit.checkpoint,
+            revision:
+              permit.revision
+          };
+        orderedCaseContext = {
+          caseId:
+            orderedCaseId,
+          permit,
+          state
+        };
+      }
+
       if (
         processContext?.permit.mode ===
           "AUTO" &&
