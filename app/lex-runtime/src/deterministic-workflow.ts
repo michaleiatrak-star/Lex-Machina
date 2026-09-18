@@ -47,7 +47,8 @@ export type DeterministicWorkflowOutputReport = {
     | "PROCESS_CHECKPOINT"
     | "PROCESS_FINAL"
     | "COURT_CHECKPOINT"
-    | "COURT_FINAL";
+    | "COURT_FINAL"
+    | "STATUTE_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -168,6 +169,22 @@ const COURT_ANALYSIS_FINAL_MARKERS = [
   "§9.",
   "§10.",
   "§11."
+] as const;
+
+const STATUTE_ANALYSIS_FINAL_MARKERS = [
+  "RAPORT ANALIZY",
+  "STAN PRAWNY NA",
+  "1. PRZEPIS",
+  "2. STRUKTURA PRZESŁANEK",
+  "3. WYNIK",
+  "4. PRZESŁANKI",
+  "5. UZASADNIENIE MERYTORYCZNE",
+  "6. LINIA ORZECZNICZA",
+  "7. RYZYKA I ZASTRZEŻENIA",
+  "DRZEWO-LIMIT",
+  "8. REKOMENDACJE",
+  "9. POWIĄZANE PRZEPISY",
+  "10. ŹRÓDŁA"
 ] as const;
 
 
@@ -365,6 +382,12 @@ export function deterministicWorkflowPrompt(
           "Do not merge the following situational-report or process-pleading-offer checkpoints into the final-report turn."
         ]
       : []),
+    ...(plan.id === "STATUTE_ANALYSIS_V1"
+      ? [
+          "STATUTE_ANALYSIS_V1 may answer a narrow question without forcing a full report.",
+          "If you present a full 'RAPORT ANALIZY', the runtime requires the canonical Moduł 4 sections 1-10 in order and the DRZEWO-LIMIT warning inside the risk section."
+        ]
+      : []),
     ...(plan.escalatedFromSimpleLetter
       ? [
           "Both simple and process pleading skills were selected. The stricter PROCESS_PLEADING_V1 workflow controls this turn."
@@ -535,6 +558,80 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "COURT_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "STATUTE_ANALYSIS_V1"
+  ) {
+    const claimsFullReport =
+      normalized.includes(
+        "RAPORT ANALIZY"
+      );
+
+    if (!claimsFullReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...STATUTE_ANALYSIS_FINAL_MARKERS
+    ];
+    const observed =
+      STATUTE_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      STATUTE_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      STATUTE_ANALYSIS_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode: "STATUTE_FINAL",
       required,
       observed: [
         ...observed
