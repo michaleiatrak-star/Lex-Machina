@@ -85,6 +85,16 @@ function registryWithSkills(): LexSkillRegistry {
       name: "przewodnik-prawny-v2",
       description: "ogólna analiza prawna i dobór dalszych działań",
       type: "executive-guide"
+    },
+    {
+      name: "analizator-dowodow-v3",
+      description: "analiza dowodów dokumentów nagrań sms maili sprzeczności",
+      type: "executive-analiza"
+    },
+    {
+      name: "analizator-przepisow-v2",
+      description: "analiza przepisu wykładnia przesłanki stan prawny nowelizacje",
+      type: "executive-analiza"
     }
   ];
   const crossSkillBodies: Record<string, string> = {
@@ -235,6 +245,38 @@ describe("skill selection", () => {
     );
 
     expect(selected.executionSkills).toContain("pisma-procesowe-v3");
+  });
+
+  it("routes explicit evidence material to the evidence analyzer", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przeanalizuj nagranie, SMS-y i sprzeczności między dowodami.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills)
+      .toContain("analizator-dowodow-v3");
+    expect(selected.workflowExecutionSkill)
+      .toBe("analizator-dowodow-v3");
+  });
+
+  it("routes a specific statutory interpretation request to the statute analyzer", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Zweryfikuj art. 415 KC i wyjaśnij przesłanki oraz wykładnię przepisu.",
+      "dr-02-prawo-cywilne",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills)
+      .toContain("analizator-przepisow-v2");
+    expect(selected.workflowExecutionSkill)
+      .toBe("analizator-przepisow-v2");
   });
 
   it("uses the general legal guide when automatic mode has no semantic match", () => {
