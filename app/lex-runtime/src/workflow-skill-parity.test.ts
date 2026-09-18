@@ -113,6 +113,10 @@ describe(
   () => {
     it.each([
       [
+        "pisma-proste-v2",
+        "SIMPLE_LETTER_V1"
+      ],
+      [
         "pisma-procesowe-v3",
         "PROCESS_PLEADING_V1"
       ],
@@ -121,12 +125,36 @@ describe(
         "COURT_ANALYSIS_V1"
       ],
       [
-        "chronologia-sprawy-v1",
-        "CHRONOLOGY_V1"
+        "analizator-dowodow-v3",
+        "EVIDENCE_ANALYSIS_V1"
+      ],
+      [
+        "analizator-przepisow-v2",
+        "STATUTE_ANALYSIS_V1"
       ],
       [
         "analizator-umow-v1",
         "CONTRACT_ANALYSIS_V1"
+      ],
+      [
+        "chronologia-sprawy-v1",
+        "CHRONOLOGY_V1"
+      ],
+      [
+        "orzeczenia-sadowe-v2",
+        "CASE_LAW_V1"
+      ],
+      [
+        "przesluchanie-swiadkow-v2-min90",
+        "WITNESS_QUESTIONING_V1"
+      ],
+      [
+        "raport-klienta-v1",
+        "CLIENT_REPORT_V1"
+      ],
+      [
+        "raport-sytuacyjny-v2",
+        "SITUATION_REPORT_V1"
       ]
     ] as const)(
       "keeps deterministic fresh-read resources declared by %s",
