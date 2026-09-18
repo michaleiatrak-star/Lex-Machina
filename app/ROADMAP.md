@@ -100,7 +100,7 @@ Kryteria zamknięcia:
 
 ## R0.1.3 — G39 release candidate — VERIFYING
 
-Źródłowy kandydat aplikacji dla pierwszego artefaktu RC: `fa5bc4ed8b446d2ffe80e52720bb357b13d1c26d`.
+Źródłowy kandydat aplikacji dla aktualnego wydania online RC: `85b88ba4fc758163370f5dac8c9d887bdfbb94e9`.
 Publikacja jest prowadzona wyłącznie poza `main`, przez `release/0.1.3-g39-rc1`.
 
 ### G39-RC1 — bramka publikacji instalatorów
@@ -111,8 +111,8 @@ Warunki publikacji muszą być spełnione **na tym samym source SHA**:
 - F-138 structural audit: **PASS**;
 - G39 Installer State Machine: **PASS**;
 - Windows Online Installer installed-copy acceptance: **PASS**;
-- Windows Offline Installer standalone clean-machine acceptance: **BLOCKED / FIXING**;
-- publisher online-first ponownie sprawdza Runtime + F-138 + G39 state + Online na dokładnym source SHA i publikuje wyłącznie instalator online;
+- Windows Offline Installer standalone clean-machine acceptance: **DEFERRED / NOT PUBLISHED**;
+- publisher online-first ponownie sprawdził Runtime + F-138 + G39 state + Online na dokładnym source SHA i opublikował wyłącznie instalator online w `v0.1.3-g39-rc1`;
 - pełny publisher pozostaje fail-closed i dołącza instalator offline dopiero po jego clean-machine PASS na zweryfikowanym source SHA.
 
 ### Zakres RC
@@ -123,6 +123,7 @@ Warunki publikacji muszą być spełnione **na tym samym source SHA**:
 - runtime/source/citation/finalization gates egzekwowane deterministycznie;
 - transakcyjne kanały update aplikacji/skilli/model-packów pozostają fail-closed bez produkcyjnych trust roots;
 - RC jest publikowany etapowo: zweryfikowany online może być wydany po PASS własnej ścieżki i wspólnych gate'ów; offline jest dołączany później dopiero po clean-machine PASS. Produkcyjne auto-update nadal pozostaje fail-closed.
+- opublikowany asset online: `Lex-Machina-0.1.3-G39-Online-x64-Setup.exe` wraz z `SHA256-ONLINE.txt` i `CI-SHA256-ONLINE.txt`; artefakt pochodzi z dokładnego source SHA powyżej.
 
 ### Gate'y pozostające poza zamknięciem RC
 
