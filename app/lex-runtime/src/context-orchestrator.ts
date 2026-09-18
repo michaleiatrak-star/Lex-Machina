@@ -10,6 +10,9 @@ export type ContextBudgetReport = {
   documentBudgetTokens?: number;
   estimatedDocumentTokens: number;
   selectedChunks: number;
+  compressedChunks: number;
+  backlinkedChunks: number;
+  compressionSavedTokens: number;
   omittedChunks: number;
   selectedDocuments: number;
   omittedDocuments: number;
@@ -17,16 +20,240 @@ export type ContextBudgetReport = {
 
 export type OrchestratedDocumentContext = {
   attachments: SessionDocumentAttachment[];
+  citationSources: SessionDocumentAttachment[];
   report: ContextBudgetReport;
 };
 
 const LEGACY_CHAR_CAP = 160_000;
 const MIN_CONTEXT_WINDOW = 8_192;
 const MAX_CONTEXT_WINDOW = 262_144;
+const DIGEST_MIN_TOKENS = 96;
+const DIGEST_MAX_TOKENS = 1_024;
+const DIGEST_SEPARATOR = "\n[…]\n";
+
+const QUERY_STOP_WORDS =
+  new Set([
+    "oraz",
+    "jest",
+    "dla",
+    "nie",
+    "sie",
+    "czy",
+    "jak",
+    "lub",
+    "ale",
+    "przez",
+    "przy",
+    "ten",
+    "ta",
+    "to",
+    "te",
+    "tych",
+    "tym",
+    "ktory",
+    "ktora",
+    "ktore",
+    "jako",
+    "jego",
+    "jej",
+    "ich"
+  ]);
 
 function estimateTokens(text: string): number {
   // Conservative for Polish/legal prose: assume at most ~3 UTF-16 chars/token.
   return Math.max(1, Math.ceil(text.length / 3));
+}
+function normalizedText(
+  value: string
+): string {
+  return value
+    .normalize("NFKD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase();
+}
+
+function queryTerms(
+  value: string
+): string[] {
+  return [
+    ...new Set(
+      (
+        normalizedText(value)
+          .match(/[\p{L}\p{N}]+/gu) ??
+        []
+      ).filter(
+        (term) =>
+          term.length >= 3 &&
+          !QUERY_STOP_WORDS.has(
+            term
+          )
+      )
+    )
+  ].slice(0, 32);
+}
+
+function extractiveDigest(
+  text: string,
+  query: string,
+  maxTokens: number
+): string | null {
+  if (
+    maxTokens <
+      DIGEST_MIN_TOKENS
+  ) {
+    return null;
+  }
+
+  const maxChars =
+    Math.max(
+      1,
+      maxTokens * 3
+    );
+  const terms =
+    queryTerms(query);
+  const candidates:
+    Array<{
+      index: number;
+      text: string;
+      score: number;
+    }> = [];
+
+  const pattern =
+    /[^\n.!?]+(?:[.!?]+|(?=\n)|$)/gu;
+  let match:
+    RegExpExecArray | null;
+  let sequence = 0;
+  while (
+    (
+      match =
+        pattern.exec(text)
+    ) !== null
+  ) {
+    const exact =
+      match[0]
+        ?.trim();
+    if (!exact) {
+      continue;
+    }
+    const normalized =
+      normalizedText(exact);
+    let score = 0;
+    for (
+      const term of terms
+    ) {
+      let cursor = 0;
+      while (
+        (
+          cursor =
+            normalized.indexOf(
+              term,
+              cursor
+            )
+        ) >= 0
+      ) {
+        score += 1;
+        cursor +=
+          term.length;
+      }
+    }
+    candidates.push({
+      index:
+        sequence,
+      text:
+        exact,
+      score
+    });
+    sequence += 1;
+  }
+
+  if (
+    candidates.length === 0
+  ) {
+    const fallback =
+      text
+        .slice(
+          0,
+          maxChars
+        )
+        .trim();
+    return fallback ||
+      null;
+  }
+
+  const ranked =
+    [...candidates]
+      .sort(
+        (left, right) =>
+          right.score -
+            left.score ||
+          left.index -
+            right.index
+      );
+
+  const chosen:
+    typeof candidates = [];
+  let usedChars = 0;
+  for (
+    const candidate
+    of ranked
+  ) {
+    const separatorChars =
+      chosen.length > 0
+        ? DIGEST_SEPARATOR
+            .length
+        : 0;
+    const remaining =
+      maxChars -
+      usedChars -
+      separatorChars;
+    if (
+      remaining <= 0
+    ) {
+      break;
+    }
+
+    const excerpt =
+      candidate.text.length <=
+        remaining
+        ? candidate.text
+        : candidate.text
+            .slice(
+              0,
+              remaining
+            )
+            .trimEnd();
+    if (!excerpt) {
+      continue;
+    }
+    chosen.push({
+      ...candidate,
+      text:
+        excerpt
+    });
+    usedChars +=
+      separatorChars +
+      excerpt.length;
+    if (
+      usedChars >=
+        maxChars
+    ) {
+      break;
+    }
+  }
+
+  return chosen
+    .sort(
+      (left, right) =>
+        left.index -
+        right.index
+    )
+    .map(
+      (candidate) =>
+        candidate.text
+    )
+    .join(
+      DIGEST_SEPARATOR
+    ) || null;
 }
 
 function metadataTokens(
@@ -35,8 +262,13 @@ function metadataTokens(
 ): number {
   const scope =
     attachment.sourceScope ?? "MANUAL";
+  const representation =
+    chunk.representation ===
+      "EXTRACTIVE_DIGEST"
+      ? " EXTRACTIVE_DIGEST BACKLINK ORIGINAL_CHUNK"
+      : "";
   return estimateTokens(
-    `[${scope} ${attachment.documentId} CHUNK ${chunk.index} PAGES ${chunk.pageStart}-${chunk.pageEnd}]`
+    `[${scope} ${attachment.documentId} CHUNK ${chunk.index} PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`
   ) + 8;
 }
 
@@ -95,6 +327,7 @@ export function orchestrateDocumentContext(args: {
   if (attachments.length === 0) {
     return {
       attachments: [],
+      citationSources: [],
       report: {
         strategy:
           args.modelContextTokens
@@ -108,6 +341,9 @@ export function orchestrateDocumentContext(args: {
           : {}),
         estimatedDocumentTokens: 0,
         selectedChunks: 0,
+        compressedChunks: 0,
+        backlinkedChunks: 0,
+        compressionSavedTokens: 0,
         omittedChunks: 0,
         selectedDocuments: 0,
         omittedDocuments: 0
@@ -133,6 +369,14 @@ export function orchestrateDocumentContext(args: {
     }
     return {
       attachments,
+      citationSources:
+        attachments.map(
+          (attachment) =>
+            cloneWithChunks(
+              attachment,
+              attachment.chunks
+            )
+        ),
       report: {
         strategy: "LEGACY_CHAR_CAP",
         estimatedDocumentTokens:
@@ -157,6 +401,9 @@ export function orchestrateDocumentContext(args: {
               attachment.chunks.length,
             0
           ),
+        compressedChunks: 0,
+        backlinkedChunks: 0,
+        compressionSavedTokens: 0,
         omittedChunks: 0,
         selectedDocuments:
           attachments.length,
@@ -258,7 +505,12 @@ export function orchestrateDocumentContext(args: {
   const selected:
     SessionDocumentAttachment[] = [];
   let selectedChunks = 0;
+  let compressedChunks = 0;
+  let backlinkedChunks = 0;
+  let compressionSavedTokens = 0;
   let omittedChunks = 0;
+  const selectedChunkKeys =
+    new Set<string>();
   const omittedDocumentIds =
     new Set<string>();
 
@@ -288,6 +540,14 @@ export function orchestrateDocumentContext(args: {
         attachment.chunks
       )
     );
+    for (
+      const chunk
+      of attachment.chunks
+    ) {
+      selectedChunkKeys.add(
+        `${attachment.documentId}:${chunk.index}`
+      );
+    }
   }
 
   // Retrieved knowledge fills only the remaining budget and is cut at
@@ -307,14 +567,91 @@ export function orchestrateDocumentContext(args: {
           documentBudget
       ) {
         used += cost;
-        chunks.push({ ...chunk });
+        chunks.push({
+          ...chunk,
+          representation:
+            "FULL"
+        });
         selectedChunks += 1;
-      } else {
-        omittedChunks += 1;
-        omittedDocumentIds.add(
-          attachment.documentId
+        selectedChunkKeys.add(
+          `${attachment.documentId}:${chunk.index}`
         );
+        continue;
       }
+
+      const remaining =
+        documentBudget -
+        used;
+      const digestBudget =
+        Math.min(
+          DIGEST_MAX_TOKENS,
+          Math.max(
+            0,
+            remaining -
+              metadataTokens(
+                attachment,
+                {
+                  ...chunk,
+                  text: "",
+                  representation:
+                    "EXTRACTIVE_DIGEST",
+                  originalChars:
+                    chunk.text.length
+                }
+              )
+          )
+        );
+      const digestText =
+        extractiveDigest(
+          chunk.text,
+          args.query,
+          digestBudget
+        );
+      if (digestText) {
+        const digestChunk = {
+          ...chunk,
+          text:
+            digestText,
+          representation:
+            "EXTRACTIVE_DIGEST" as const,
+          originalChars:
+            chunk.text.length
+        };
+        const digestCost =
+          chunkTokens(
+            attachment,
+            digestChunk
+          );
+        if (
+          used +
+            digestCost <=
+          documentBudget
+        ) {
+          used +=
+            digestCost;
+          chunks.push(
+            digestChunk
+          );
+          selectedChunks += 1;
+          compressedChunks += 1;
+          backlinkedChunks += 1;
+          compressionSavedTokens +=
+            Math.max(
+              0,
+              cost -
+                digestCost
+            );
+          selectedChunkKeys.add(
+            `${attachment.documentId}:${chunk.index}`
+          );
+          continue;
+        }
+      }
+
+      omittedChunks += 1;
+      omittedDocumentIds.add(
+        attachment.documentId
+      );
     }
     if (chunks.length > 0) {
       selected.push(
@@ -360,8 +697,38 @@ export function orchestrateDocumentContext(args: {
     }
   }
 
+  const citationSources =
+    attachments
+      .map(
+        (attachment) =>
+          cloneWithChunks(
+            attachment,
+            attachment.chunks
+              .filter(
+                (chunk) =>
+                  selectedChunkKeys
+                    .has(
+                      `${attachment.documentId}:${chunk.index}`
+                    )
+              )
+              .map(
+                (chunk) => ({
+                  ...chunk,
+                  representation:
+                    "FULL" as const
+                })
+              )
+          )
+      )
+      .filter(
+        (attachment) =>
+          attachment.chunks
+            .length > 0
+      );
+
   return {
     attachments: selected,
+    citationSources,
     report: {
       strategy:
         "MODEL_CONTEXT_WINDOW",
@@ -376,6 +743,9 @@ export function orchestrateDocumentContext(args: {
       estimatedDocumentTokens:
         used,
       selectedChunks,
+      compressedChunks,
+      backlinkedChunks,
+      compressionSavedTokens,
       omittedChunks,
       selectedDocuments:
         selectedIds.size,
