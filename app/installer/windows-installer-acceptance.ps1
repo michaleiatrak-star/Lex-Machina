@@ -254,15 +254,106 @@ try {
     throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED"
   }
 
-  $app = Get-ChildItem -Path $InstallRoot -File -Recurse |
-    Where-Object {
-      $_.Name -match '^lex[- ]machina\.exe$' -and
-      $_.FullName -notmatch '\\runtime\\'
-    } |
-    Select-Object -First 1
-  if (-not $app) {
-    throw "INSTALLER_ACCEPTANCE_DESKTOP_EXE_MISSING"
+  $uninstallKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Lex Machina"
+  $registered = Get-ItemProperty -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
+  $registeredInstallRoot = if ($registered -and $registered.InstallLocation) {
+    [IO.Path]::GetFullPath(([string]$registered.InstallLocation).Trim().Trim('"'))
+  } else {
+    $null
   }
+  if (
+    $registeredInstallRoot -and
+    -not [string]::Equals(
+      $registeredInstallRoot.TrimEnd('\'),
+      $InstallRoot.TrimEnd('\'),
+      [StringComparison]::OrdinalIgnoreCase
+    )
+  ) {
+    throw "INSTALLER_ACCEPTANCE_REGISTERED_ROOT_MISMATCH:expected=$InstallRoot actual=$registeredInstallRoot"
+  }
+
+  $registeredMainBinary = if ($registered -and $registered.MainBinaryName) {
+    [string]$registered.MainBinaryName
+  } else {
+    $null
+  }
+  $appPath = if (
+    $registeredMainBinary -and
+    $registeredMainBinary -match '^[A-Za-z0-9._ -]+\.exe  $uninstaller = Join-Path $InstallRoot "uninstall.exe"
+  Assert-PinnedAuthenticode $uninstaller "uninstaller"
+  if ($BlockNetworkDuringInstall) {
+    Add-AcceptanceFirewallBlock $app.FullName "desktop"
+  }
+
+  Write-Host "G33D: first desktop startup without provider key"
+  $desktop = Start-Process -FilePath $app.FullName -PassThru
+  try {
+    Start-Sleep -Seconds 12
+    if ($desktop.HasExited) {
+      throw "INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT:$($desktop.ExitCode)"
+    }
+  } finally {
+    if ($desktop -and -not $desktop.HasExited) {
+      Stop-Process -Id $desktop.Id -Force -ErrorAction SilentlyContinue
+      $desktop.WaitForExit(10000) | Out-Null
+    }
+    Get-Process -Name "lex-runtime-sidecar" -ErrorAction SilentlyContinue |
+      Stop-Process -Force -ErrorAction SilentlyContinue
+    Get-Process -Name "node" -ErrorAction SilentlyContinue |
+      Where-Object { $_.Path -like "$runtimeRoot*" } |
+      Stop-Process -Force -ErrorAction SilentlyContinue
+  }
+
+  Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
+  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+} finally {
+  foreach ($ruleName in $firewallRules) {
+    Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+  }
+  $env:PATH = $oldPath
+  foreach ($pair in @(
+    @{ Name = "HTTP_PROXY"; Value = $oldHttpProxy },
+    @{ Name = "HTTPS_PROXY"; Value = $oldHttpsProxy },
+    @{ Name = "ALL_PROXY"; Value = $oldAllProxy },
+    @{ Name = "NO_PROXY"; Value = $oldNoProxy },
+    @{ Name = "LEX_ACCEPTANCE_BLOCK_NETWORK"; Value = $oldAcceptanceBlockNetwork },
+    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime }
+  )) {
+    if ($null -eq $pair.Value) {
+      Remove-Item -Path ("Env:" + $pair.Name) -ErrorAction SilentlyContinue
+    } else {
+      Set-Item -Path ("Env:" + $pair.Name) -Value $pair.Value
+    }
+  }
+}
+
+  ) {
+    Join-Path $InstallRoot $registeredMainBinary
+  } else {
+    $null
+  }
+
+  if (-not $appPath -or -not (Test-Path -LiteralPath $appPath -PathType Leaf)) {
+    $rootExecutables = @(
+      Get-ChildItem -Path $InstallRoot -File -Filter "*.exe" -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -ne "uninstall.exe" }
+    )
+    Write-Host "Installed root executable candidates:"
+    if ($rootExecutables.Count -eq 0) {
+      Write-Host " - none"
+    } else {
+      $rootExecutables | ForEach-Object { Write-Host " - $($_.FullName)" }
+    }
+    if ($rootExecutables.Count -eq 1) {
+      $appPath = $rootExecutables[0].FullName
+    }
+  }
+
+  if (-not $appPath -or -not (Test-Path -LiteralPath $appPath -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_DESKTOP_EXE_MISSING:registeredMainBinary=$registeredMainBinary"
+  }
+  $app = Get-Item -LiteralPath $appPath
+  Write-Host "G33D: desktop executable $($app.FullName)"
   Assert-PinnedAuthenticode $app.FullName "desktop-exe"
   $uninstaller = Join-Path $InstallRoot "uninstall.exe"
   Assert-PinnedAuthenticode $uninstaller "uninstaller"
