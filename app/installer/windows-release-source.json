@@ -27,7 +27,27 @@
       "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7",
       "backend": "CPU_X64_PORTABLE",
       "bind": "127.0.0.1",
-      "delivery": "ON_DEMAND_AFTER_INSTALL"
+      "delivery": "ON_DEMAND_AFTER_INSTALL",
+      "backends": [
+        {
+          "id": "CPU_X64_PORTABLE",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+          "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7",
+          "bytes": 18427629,
+          "gpuOffload": false
+        },
+        {
+          "id": "VULKAN_X64",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-vulkan-x64.zip",
+          "sha256": "1ee3ad952f4ba71f438bd6d7bebef19e1c7af04adcaa35d08b4ddabb27d4c642",
+          "bytes": 31674542,
+          "gpuOffload": true,
+          "launch": {
+            "gpuLayers": "AUTO_MAX"
+          }
+        }
+      ],
+      "backendPolicy": "USER_SELECTABLE_AUTO_WITH_CPU_FALLBACK"
     }
   },
   "pythonPackages": {
@@ -111,7 +131,17 @@
       "default": 64000
     },
     "networkRequiredOnlyWhenProvisioning": true,
-    "applicationUsableWithoutLocalAi": true
+    "applicationUsableWithoutLocalAi": true,
+    "backendSelection": {
+      "allowed": [
+        "AUTO",
+        "VULKAN_X64",
+        "CPU_X64_PORTABLE"
+      ],
+      "default": "AUTO",
+      "autoPolicy": "TRY_VULKAN_WHEN_ACCELERATOR_IS_DETECTED_THEN_CPU_FALLBACK",
+      "validation": "BACKEND_IS_ACTIVE_ONLY_AFTER_LLAMA_SERVER_HEALTH_AND_TOKENIZER_CALIBRATION"
+    }
   },
   "systemPrerequisites": {
     "webview2": {
