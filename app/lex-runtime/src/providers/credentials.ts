@@ -27,7 +27,8 @@ function localAiRoot(): string {
 }
 
 function localConfigExecutionReady(
-  configPath: string
+  configPath: string,
+  qualificationPath: string
 ): boolean {
   try {
     const config = JSON.parse(
@@ -38,17 +39,53 @@ function localConfigExecutionReady(
     ) as {
       schemaVersion?: unknown;
       model?: {
+        id?: unknown;
         path?: unknown;
+      };
+      context?: {
+        requestedTokens?: unknown;
       };
       engine?: {
         executable?: unknown;
       };
     };
+    const qualification =
+      JSON.parse(
+        fs.readFileSync(
+          qualificationPath,
+          "utf8"
+        )
+      ) as {
+        schemaVersion?: unknown;
+        result?: unknown;
+        modelId?: unknown;
+        contextTokens?: unknown;
+      };
+
     if (
-      config.schemaVersion !== 1
+      config.schemaVersion !== 1 ||
+      qualification.schemaVersion !== 1 ||
+      qualification.result !== "PASS" ||
+      typeof config.model?.id !==
+        "string" ||
+      typeof qualification.modelId !==
+        "string" ||
+      qualification.modelId !==
+        config.model.id ||
+      typeof config.context
+        ?.requestedTokens !==
+        "number" ||
+      !Number.isSafeInteger(
+        config.context
+          .requestedTokens
+      ) ||
+      qualification.contextTokens !==
+        config.context
+          .requestedTokens
     ) {
       return false;
     }
+
     const modelPath =
       typeof config.model?.path ===
         "string"
@@ -80,6 +117,10 @@ function localAiExecutionReady(): boolean {
       path.join(
         root,
         "config.json"
+      ),
+      path.join(
+        root,
+        "context-qualification.json"
       )
     )
   ) {
@@ -108,13 +149,23 @@ function localAiExecutionReady(): boolean {
       )
       .slice(0, 16)
       .some(
-        (entry) =>
-          localConfigExecutionReady(
+        (entry) => {
+          const qualificationName =
+            entry.name.replace(
+              /\.config\.json$/,
+              ".qualification.json"
+            );
+          return localConfigExecutionReady(
             path.join(
               profiles,
               entry.name
+            ),
+            path.join(
+              profiles,
+              qualificationName
             )
-          )
+          );
+        }
       );
   } catch {
     return false;
