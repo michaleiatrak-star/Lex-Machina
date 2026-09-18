@@ -21,6 +21,9 @@ import { LexSkillRegistry } from "./registry.js";
 import { SafeSessionExecutor } from "./session-executor.js";
 import { VerificationLedger } from "./verification-ledger.js";
 import { LegalVerificationToolRuntime } from "./verification-tool-runtime.js";
+import {
+  TemporalSourceFreshnessChecker
+} from "./temporal-source-freshness.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
@@ -31,6 +34,85 @@ const lexRoot = path.resolve(
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 const EXPECTED_URL =
   "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html";
+
+function jsonResponse(value: unknown): Response {
+  return new Response(
+    JSON.stringify(value),
+    {
+      status: 200,
+      headers: {
+        "content-type":
+          "application/json"
+      }
+    }
+  );
+}
+
+function g18FreshnessFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+
+  if (
+    url.endsWith(
+      "/DU/1964/93/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        "Inf. o tekście jednolitym": [
+          {
+            act: {
+              ELI:
+                "DU/2026/795",
+              year: 2026,
+              pos: 795,
+              status:
+                "obowiązujący"
+            }
+          }
+        ],
+        "Akty zmieniające": []
+      })
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({})
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        ELI:
+          "DU/2026/795",
+        status:
+          "obowiązujący",
+        promulgation:
+          "2026-06-17",
+        textHTML: true,
+        textPDF: true
+      })
+    );
+  }
+
+  return Promise.reject(
+    new Error(
+      "G18_UNEXPECTED_FRESHNESS_URL:" +
+        url
+    )
+  );
+}
 
 class ResolverProvider implements ProviderAdapter {
   readonly id = "openai" as const;
@@ -215,7 +297,12 @@ const sessionExecutor = new SafeSessionExecutor(
     new LegalVerificationToolRuntime(
       ledger,
       verifier,
-      resolver
+      resolver,
+      new TemporalSourceFreshnessChecker(
+        g18FreshnessFetcher,
+        () =>
+          "2026-09-15T20:00:00.000Z"
+      )
     )
 );
 
@@ -266,8 +353,11 @@ const pass =
   body.finalization === "PASS" &&
   typeof body.answer === "string" &&
   String(body.answer).includes("✅ [VER:") &&
-  verification.records === 1 &&
-  verification.verified === 1 &&
+  typeof verification.records === "number" &&
+  verification.records >= 1 &&
+  verification.verified ===
+    verification.records &&
+  verification.supported === 0 &&
   verification.unverified === 0 &&
   fetchInputs.length === 1 &&
   fetchInputs[0] === EXPECTED_URL;
