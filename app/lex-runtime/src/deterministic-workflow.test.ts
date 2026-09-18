@@ -4,6 +4,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   createDeterministicWorkflowPlan,
+  evaluateDeterministicWorkflowOutput,
   evaluateDeterministicWorkflowReads
 } from "./deterministic-workflow.js";
 import { LexSkillRegistry } from "./registry.js";
@@ -187,6 +188,110 @@ describe("deterministic legal workflow", () => {
     expect(report.result).toBe("PASS");
     expect(report.missing).toEqual([]);
   });
+
+  it(
+    "accepts an explicit simple-letter intake gap without pretending the letter is ready",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-proste-v2"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "📋 DANE DO UZUPEŁNIENIA",
+            "Proszę podać nazwę sądu, strony i datę doręczenia."
+          ].join("\n")
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe(
+          "INTAKE_REQUIRED"
+        );
+      expect(report.missing)
+        .toEqual([]);
+    }
+  );
+
+  it(
+    "accepts a complete simple-letter M9 presentation contract",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-proste-v2"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "════════ TREŚĆ PISMA ════════",
+            "WEZWANIE DO ZAPŁATY",
+            "Treść.",
+            "💡 UWAGI PRAKTYCZNE",
+            "Zachowaj dowód nadania.",
+            "📅 CO DALEJ",
+            "Po doręczeniu odczekaj wskazany termin.",
+            "📋 HYBRID-VALIDATION",
+            "Pismo zawiera ⬛ [0] pól do uzupełnienia."
+          ].join("\n")
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe(
+          "READY_ARTIFACT"
+        );
+      expect(report.orderValid)
+        .toBe(true);
+      expect(report.missing)
+        .toEqual([]);
+    }
+  );
+
+  it(
+    "blocks a simple-letter artifact that omits or reorders mandatory M9 sections",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-proste-v2"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "📋 HYBRID-VALIDATION",
+            "Pismo zawiera ⬛ [0] pól do uzupełnienia.",
+            "════════ TREŚĆ PISMA ════════",
+            "Treść.",
+            "📅 CO DALEJ",
+            "Krok."
+          ].join("\n")
+        );
+
+      expect(report.result)
+        .toBe("BLOCKED");
+      expect(report.mode)
+        .toBe(
+          "READY_ARTIFACT"
+        );
+      expect(report.orderValid)
+        .toBe(false);
+      expect(report.missing)
+        .toContain(
+          "UWAGI PRAKTYCZNE"
+        );
+    }
+  );
 
   it("fails closed when one mandatory fresh read is absent", () => {
     const registry = fixture();
