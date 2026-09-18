@@ -18,6 +18,7 @@ on:
   push:
     branches:
       - feature/local-runtime
+      - work/g39-installer-repair-2026-09-18
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
