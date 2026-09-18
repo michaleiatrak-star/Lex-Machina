@@ -1221,6 +1221,16 @@ export class MaintenanceService {
             .toLowerCase(),
         latestPackVersion:
           target.packVersion,
+        targetModelId:
+          target.model.id,
+        targetDisplayName:
+          target.model.displayName,
+        ...(target.model.bytes
+          ? {
+              targetBytes:
+                target.model.bytes
+            }
+          : {}),
         targetSha256:
           target.model.sha256,
         verificationReady:
