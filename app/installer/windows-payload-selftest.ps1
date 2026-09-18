@@ -126,15 +126,14 @@ if ($null -eq $lock.localAi -or $lock.localAi.requiredForApplicationHealth -ne $
 if (@($lock.optionalNetworkActionsAfterInstall) -notcontains "LOCAL_AI_PROVISIONING") {
   throw "SELFTEST_LOCK_LOCAL_AI_PROVISIONING_POLICY_MISSING"
 }
-foreach ($entry in $lock.files) {
-  $path = Join-Path $root ($entry.path -replace '/','\')
-  if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-    throw "SELFTEST_LOCK_FILE_MISSING:$($entry.path)"
-  }
-  $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $path).Hash.ToLowerInvariant()
-  if ($actual -ne $entry.sha256) {
-    throw "SELFTEST_LOCK_HASH_MISMATCH:$($entry.path)"
-  }
+# Re-verify the complete immutable payload after loading the private Python
+# stacks. The native sidecar uses the same component-lock but performs hashing
+# without depending on PowerShell module availability or tens of thousands of
+# per-file cmdlet invocations.
+Write-Host "Self-test: post-import native component-lock verification"
+& $sidecar --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) {
+  throw "SELFTEST_POST_IMPORT_COMPONENT_LOCK_FAILED"
 }
 
 $temp = Join-Path $env:TEMP ("lex-installer-selftest-" + [Guid]::NewGuid().ToString("N"))
