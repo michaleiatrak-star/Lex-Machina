@@ -38,15 +38,15 @@ Closure evidence:
 
 ## G39F — application update transaction
 
-Status: **IMPLEMENTED / BLOCKED FOR PRODUCTION SIGNING**
+Status: **IMPLEMENTED / VERIFYING — TEMPORARY UNSIGNED MODE ENABLED**
 
 Implemented:
 
 1. discovery of a newer GitHub release;
 2. release asset requires GitHub-provided SHA-256 digest;
 3. download into fixed staging root;
-4. Authenticode verification with pinned publisher policy;
-5. immutable receipt containing version, SHA-256, size and signer identity;
+4. SHA-256 + exact ProductVersion are mandatory; Authenticode is verified when present/trusted, but is temporarily optional under the explicit development policy;
+5. immutable receipt containing version, SHA-256, size, ProductVersion and either verified signer identity or the explicit `UNSIGNED_ALLOWED` marker;
 6. native Tauri handoff accepts only a constrained receipt token;
 7. external update runner waits for the current process to exit;
 8. private runtime process tree is stopped on Tauri `RunEvent::Exit`;
@@ -59,34 +59,41 @@ Implemented:
 15. maintenance UI: check -> download+verify -> install+restart;
 16. the staged Authenticode-signed EXE exposes a Windows `ProductVersion` that must normalize exactly to the discovered release version before the receipt is committed or NSIS is launched; a reused older signed installer under a newer GitHub tag therefore fails in staging, while the transaction runner independently re-checks the installed runtime version after NSIS and rolls back on mismatch.
 
-Production blocker:
+Current development policy:
 
-- `applicationUpdate.trustedSignerThumbprints` is intentionally empty;
-- application updates therefore fail closed until the production Authenticode certificate thumbprint is configured and release artifacts are signed by that certificate.
+- `applicationUpdate.verification = SHA256_REQUIRED_SIGNATURE_OPTIONAL`;
+- `temporaryUnsignedAllowed = true`;
+- an unsigned update is accepted only after release-asset SHA-256 verification and exact installer ProductVersion validation;
+- transaction runner re-checks SHA-256/ProductVersion before NSIS and keeps backup, post-install self-test and rollback unchanged;
+- a valid trusted Authenticode signature is still used when available.
 
-Negative unit tests now also prove that the signer policy rejects an empty trust root, malformed thumbprints and any weakened `SHA256_ONLY` policy.
+Production hardening remains open:
 
-Do not mark G39F PASS before a signed release acceptance test succeeds.
+- disable `temporaryUnsignedAllowed`;
+- restore `SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER`;
+- configure the production thumbprint/certificate and run signed update acceptance.
+
+G39F may be promoted for the current development phase after current-head transaction/installer CI is green; signed acceptance remains a G39J production gate.
 
 ## G39E — skill update transaction
 
-Status: **IMPLEMENTED / BLOCKED FOR PRODUCTION SIGNING**
+Status: **IMPLEMENTED / VERIFYING — TEMPORARY UNSIGNED MODE ENABLED**
 
 Implemented:
 
-- update discovery for ZIP + `LexMachina-Skills-Index.json` + detached `.sig`;
-- verified GitHub release-asset SHA-256 for all three transport artifacts;
-- independent Ed25519 publisher trust root from the installed release manifest;
-- fail-closed behavior when the production skill signer is not configured;
-- signed index schema with release version, bundle SHA/size, min/max app compatibility and per-skill version/SHA/dependencies;
-- signed release version must equal the discovered release version;
+- update discovery for ZIP + mandatory `LexMachina-Skills-Index.json` + optional detached `.sig` in the current development mode;
+- verified GitHub release-asset SHA-256 for every present transport artifact;
+- independent Ed25519 publisher trust root remains implemented for signed mode;
+- current explicit policy permits `UNSIGNED_ALLOWED` when the signature/trust root is absent;
+- index schema remains mandatory with release version, bundle SHA/size, min/max app compatibility and per-skill version/SHA/dependencies;
+- index release version must equal the discovered release version regardless of signature mode;
 - app compatibility is checked before downloading/activating the bundle;
 - archive extraction into an isolated work directory;
 - full corpus registry scan and declaration validation;
 - exact skill-set, version, `SKILL.md` hash and dependency comparison against the signed index;
 - candidate -> current atomic rename;
 - previous version rollback if activation fails;
-- installed marker stores signed-index SHA-256 and signer key id;
+- installed marker stores index SHA-256 and signer key id or explicit `UNSIGNED_ALLOWED`;
 - maintenance UI exposes trust readiness and explains missing signer/index states;
 - unit tests cover valid Ed25519 signature, tampered index, unknown signer and invalid schema.
 
@@ -100,10 +107,16 @@ Restart/rollback closure implemented:
 - tests cover explicit runtime-health commit, interrupted-start rollback, corrupt-current rollback to previous, fallback to bundled and no-healthy-copy failure;
 - maintenance-level negative tests prove signed min/max app incompatibility and release/index version mismatch fail before ZIP download; dependency/hash/version mismatch of the extracted candidate is covered by candidate-index validation tests.
 
-Still required for full roadmap PASS:
+Current development closure:
 
-- configure the real production Ed25519 public key in the release manifest;
-- publish signed index/signature assets from the release pipeline;
+- unsigned skill update remains gated by index schema, app compatibility, bundle SHA-256/size, exact skill set/version/hash/dependencies, structural registry validation and restart-health rollback;
+- current-head CI/acceptance must be green.
+
+Production hardening remains open under G39J:
+
+- disable `temporaryUnsignedAllowed`;
+- configure the real production Ed25519 public key;
+- publish signed index/signature assets;
 - acceptance test against a real signed skills release.
 
 ## G39A/B/D — Local AI runtime, model provisioning and UI
@@ -350,7 +363,7 @@ External / production blockers:
 1. obtain current-head runtime validation PASS including G39K dual-model routing tests, skill-overlay restart rollback and the SIMPLE_LETTER_V1 output gate;
 2. obtain current-head online installer acceptance PASS including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
 3. obtain current-head offline installer acceptance PASS;
-4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
+4. if installer/update transaction acceptance is green, promote G39G and the current-development G39F path without waiting for production signing;
 5. after current-head runtime CI is green, promote the implemented G39C context-orchestrator slices from VERIFYING and mark the new G39E restart-health transaction as verified;
 6. validate the expanded real-corpus skill↔engine parity and simple-letter output-contract suites on current-head CI;
 7. execute and review the self-hosted Local AI 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
