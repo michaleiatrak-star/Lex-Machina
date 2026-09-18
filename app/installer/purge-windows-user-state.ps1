@@ -162,8 +162,7 @@ function Get-LexCredentialTargets {
       if (
         $targetName -and
         (
-          $targetName -match "(?i)\.LexMachina/" -or
-          $targetName -match "(?i)^LexMachina/"
+          $targetName -match "(?i)LexMachina/"
         )
       ) {
         $targets.Add([pscustomobject]@{
