@@ -5,6 +5,7 @@ import {
 } from "vitest";
 import {
   applyAutomaticVerificationMarkers,
+  detectHistoricalAsOf,
   planAutomaticLegalVerification
 } from "./gate-i-auto-verification.js";
 import {
@@ -43,6 +44,84 @@ describe(
                 "verify_legal_reference"
           )
         ).toBe(true);
+      }
+    );
+
+    it(
+      "propagates an explicit historical legal-state date into deterministic verification",
+      () => {
+        const text =
+          "Według stanu na 2020-06-01 znaczenie ma art. 5 KC.";
+        const plan =
+          planAutomaticLegalVerification(
+            text,
+            new VerificationLedger()
+          );
+
+        expect(
+          detectHistoricalAsOf(text)
+        ).toBe("2020-06-01");
+        expect(plan.calls)
+          .toHaveLength(1);
+        expect(
+          plan.calls[0]?.input
+        ).toMatchObject({
+          act: "KC",
+          asOf: "2020-06-01"
+        });
+      }
+    );
+
+    it(
+      "never upgrades an explicit unverified marker to a current-law verification",
+      () => {
+        const ledger =
+          new VerificationLedger();
+        ledger.add({
+          claim:
+            "art. 5 KC",
+          kind: "statute",
+          status:
+            "VERIFIED",
+          sourceUrl:
+            "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+          sourceTier: "R1",
+          fetchedAt:
+            "2026-09-18T12:00:00.000Z",
+          verificationMethod:
+            "web_fetch",
+          temporalMode:
+            "CURRENT",
+          temporalFreshnessStatus:
+            "CURRENT"
+        });
+
+        const text =
+          "Znaczenie ma art. 5 KC. ⚠️ [NIEWERYFIKOWANE]";
+        const plan =
+          planAutomaticLegalVerification(
+            text,
+            ledger,
+            "2021-01-01"
+          );
+        const marked =
+          applyAutomaticVerificationMarkers(
+            text,
+            ledger,
+            "2021-01-01"
+          );
+
+        expect(plan.calls)
+          .toHaveLength(0);
+        expect(
+          plan.skipped[0]?.reason
+        ).toBe(
+          "EXPLICIT_UNVERIFIED_MARKER"
+        );
+        expect(marked.inserted)
+          .toBe(0);
+        expect(marked.text)
+          .not.toContain("✅ [VER:");
       }
     );
 
