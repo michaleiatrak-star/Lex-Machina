@@ -53,7 +53,8 @@ export type DeterministicWorkflowOutputReport = {
     | "CONTRACT_LITE"
     | "STATUTE_FINAL"
     | "CASE_LAW_FINAL"
-    | "CHRONOLOGY_FINAL";
+    | "CHRONOLOGY_FINAL"
+    | "WITNESS_W3_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -252,6 +253,21 @@ const CHRONOLOGY_FINAL_MARKERS = [
   "ZDARZENIA NIEUSTALONE CHRONOLOGICZNIE",
   "REKOMENDACJE DO PISMA"
 ] as const;
+
+const WITNESS_W3_FINAL_MARKERS = [
+  "BLOK A",
+  "A-1",
+  "A-2",
+  "A-3",
+  "A-4",
+  "BLOK B",
+  "BLOK C",
+  "BLOK D",
+  "MACIERZ FINALNA",
+  "SCORING FINALNY",
+  "REKOMENDACJE KOŃCOWE"
+] as const;
+
 
 
 
@@ -460,6 +476,12 @@ export function deterministicWorkflowPrompt(
       ? [
           "CHRONOLOGY_V1 may return bounded intermediate chronology findings without forcing the full report.",
           "If you claim a full CHRONOLOGIA SPRAWY report, the runtime requires INWENTARYZACJA DOKUMENTÓW → OŚ CZASU — WĄTEK → OŚ CZASU — WIDOK ZBIORCZY → FAKTY BEZSPORNE → INDEKS SPRZECZNOŚCI → ZDARZENIA WYDEDUKOWANE — REJESTR → LUKI CZASOWE → ZDARZENIA NIEUSTALONE CHRONOLOGICZNIE → REKOMENDACJE DO PISMA in order."
+        ]
+      : []),
+    ...(plan.id === "WITNESS_QUESTIONING_V1"
+      ? [
+          "WITNESS_QUESTIONING_V1 keeps W1/W2 and bounded question drafts flexible.",
+          "If you claim the final W3 package, the runtime requires BLOK A with A-1/A-2/A-3/A-4 coverage → BLOK B → BLOK C → BLOK D (or an explicit unavailable marker) → MACIERZ FINALNA → SCORING FINALNY → REKOMENDACJE KOŃCOWE in order."
         ]
       : []),
     ...(plan.id === "EVIDENCE_ANALYSIS_V1"
@@ -886,6 +908,87 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "STATUTE_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "WITNESS_QUESTIONING_V1"
+  ) {
+    const claimsFinalW3 =
+      normalized.includes(
+        "ETAP W3"
+      ) ||
+      normalized.includes(
+        "MACIERZ FINALNA"
+      ) ||
+      normalized.includes(
+        "SCORING FINALNY"
+      );
+
+    if (!claimsFinalW3) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...WITNESS_W3_FINAL_MARKERS
+    ];
+    const observed =
+      WITNESS_W3_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      WITNESS_W3_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      WITNESS_W3_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode:
+        "WITNESS_W3_FINAL",
       required,
       observed: [
         ...observed
