@@ -38,6 +38,9 @@ import type {
   ContractStage,
   ContractWorkflowMode
 } from "./contract-analysis-state.js";
+import {
+  gateISemanticPrompt
+} from "./gate-i-semantic-contract.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -94,7 +97,13 @@ function combineSkillPrompt(
           `Missing skill while building prompt: ${name}`
         );
       }
-      return `# SKILL: ${name}\n\n${skill.body}`;
+      const semantic =
+        gateISemanticPrompt(
+          name
+        );
+      return semantic
+        ? semantic
+        : `# SKILL: ${name}\n\n${skill.body}`;
     })
     .join("\n\n---\n\n");
 }
