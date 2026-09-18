@@ -497,8 +497,13 @@ const pass =
   String(found.answer).includes(
     "https://sn.pl/pl/wyszukiwarka-orzeczen"
   ) &&
-  foundVerification.records === 1 &&
-  foundVerification.verified === 1 &&
+  typeof foundVerification.records ===
+    "number" &&
+  foundVerification.records >= 1 &&
+  foundVerification.verified ===
+    foundVerification.records &&
+  foundVerification.supported === 0 &&
+  foundVerification.unverified === 0 &&
 
   nearHttp.status === 200 &&
   near.status === "BLOCKED" &&
