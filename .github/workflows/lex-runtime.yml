@@ -252,10 +252,12 @@ jobs:
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
-    # Probe from the actual Windows release class. Ubuntu has independently
-    # confirmed live SAOS, while CBOSA is documented as egress-sensitive.
-    # Deterministic transport semantics remain covered on the main job.
-    runs-on: windows-latest
+    # Live source reachability is validated from Ubuntu, where SAOS is
+    # consistently reachable; CBOSA may still be egress-sensitive and the
+    # validator reports that as EXTERNAL_BLOCKED rather than a product defect.
+    # Windows transport semantics and desktop release-class behavior remain
+    # covered by deterministic tests and the Windows Tauri/installer jobs.
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: app/lex-runtime
