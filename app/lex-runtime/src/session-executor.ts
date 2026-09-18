@@ -67,6 +67,10 @@ import {
   type GuideSessionState
 } from "./guide-session-state.js";
 import {
+  evaluateGateIInvariants,
+  type GateIInvariantReport
+} from "./gate-i-invariants.js";
+import {
   AuxiliaryModelScheduler,
   auxiliaryVerificationCallKey,
   type AuxiliaryRoutingConfig,
@@ -255,6 +259,7 @@ export type SessionExecutionResponse = {
     requiredResources: string[];
     missingResources: string[];
   };
+  gateI?: GateIInvariantReport;
   context?: ContextBudgetReport;
   courtWorkflow?: {
     caseId: string;
@@ -890,13 +895,45 @@ export class SafeSessionExecutor implements SessionExecutor {
       closeSession: false
     });
 
+    const verificationRecords =
+      ledger.all();
+    const gateI =
+      evaluateGateIInvariants({
+        events:
+          execution.events,
+        workflowReads,
+        verificationRecords,
+        finalization
+      });
+    const gateIBlocked =
+      gateI.result ===
+        "BLOCKED";
+    audit.record(
+      "gate",
+      gateI.gate,
+      gateIBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        checks:
+          gateI.checks,
+        verifiedOrSupportedRecords:
+          gateI.verifiedOrSupportedRecords,
+        legalReferences:
+          gateI.legalReferences,
+        caseReferences:
+          gateI.caseReferences
+      }
+    );
+
     const workflowFinalizationBlocked =
       finalization.result !== "PASS" ||
       corpusBlocked ||
       workflowResourcesBlocked ||
       workflowOutputBlocked ||
       guideOutputBlocked ||
-      reportBlueprintBlocked;
+      reportBlueprintBlocked ||
+      gateIBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -918,7 +955,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       !workflowResourcesBlocked &&
       !workflowOutputBlocked &&
       !guideOutputBlocked &&
-      !reportBlueprintBlocked;
+      !reportBlueprintBlocked &&
+      !gateIBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -930,7 +968,6 @@ export class SafeSessionExecutor implements SessionExecutor {
       { finalization: finalization.result }
     );
 
-    const verificationRecords = ledger.all();
     const completeness = audit.validateCompletion({
       requireVerification: finalization.references.length > 0,
       requireToolActivity:
@@ -1006,12 +1043,14 @@ export class SafeSessionExecutor implements SessionExecutor {
           workflowOutputBlocked ||
           guideOutputBlocked ||
           reportBlueprintBlocked ||
-          finalization.result !== "PASS"
+          finalization.result !== "PASS" ||
+          gateIBlocked
             ? "BLOCKED"
             : "PASS",
         requiredResources: workflowReads.required,
         missingResources: workflowReads.missing
-      }
+      },
+      gateI
     };
 
     Object.defineProperty(
