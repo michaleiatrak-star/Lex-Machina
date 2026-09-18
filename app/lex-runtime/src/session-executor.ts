@@ -65,6 +65,10 @@ export type SessionDocumentAttachment = {
     pageStart: number;
     pageEnd: number;
     text: string;
+    representation?:
+      | "FULL"
+      | "EXTRACTIVE_DIGEST";
+    originalChars?: number;
   }>;
 };
 
@@ -280,8 +284,13 @@ function buildDocumentContext(
           : attachment.sourceScope === "CASE_KNOWLEDGE"
             ? "CASE KNOWLEDGE"
             : "DOCUMENT";
+      const representation =
+        chunk.representation ===
+          "EXTRACTIVE_DIGEST"
+          ? " · EXTRACTIVE DIGEST · BACKLINK=ORIGINAL_CHUNK"
+          : "";
       return [
-        `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}]`,
+        `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
         chunk.text
       ].join("\n");
     });
@@ -358,6 +367,8 @@ export class SafeSessionExecutor implements SessionExecutor {
       });
     const attachments =
       contextSelection.attachments;
+    const citationSources =
+      contextSelection.citationSources;
     const documentContext =
       attachments.length > 0
         ? buildDocumentContext(
@@ -381,6 +392,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         "OK",
         {
           chunks: attachment.chunks.map((chunk) => chunk.index),
+          representations:
+            attachment.chunks.map(
+              (chunk) =>
+                chunk.representation ??
+                "FULL"
+            ),
           protectedOnly: true,
           ...(attachment.caseId ? { caseId: attachment.caseId } : {}),
           ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {})
@@ -528,7 +545,10 @@ export class SafeSessionExecutor implements SessionExecutor {
     }
 
     const processedDocumentCitations =
-      processDocumentCitationMarkers(execution.output, attachments);
+      processDocumentCitationMarkers(
+        execution.output,
+        citationSources
+      );
     audit.record(
       "gate",
       "LOCAL_DOCUMENT_DEEP_LINKS",
