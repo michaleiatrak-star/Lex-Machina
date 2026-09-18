@@ -93,6 +93,11 @@ describe(
               result: "PASS",
               detail:
                 "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
@@ -140,6 +145,11 @@ describe(
               result: "PASS",
               detail:
                 "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
@@ -148,6 +158,135 @@ describe(
             (check) =>
               check.id ===
                 "SOURCE_PROVENANCE"
+          )?.result
+        ).toBe("BLOCKED");
+      }
+    );
+
+    it(
+      "requires official source tier and explicit temporal freshness proof for verified statutes",
+      () => {
+        const good:
+          VerificationRecord = {
+            claim: "art. 5 KC",
+            kind: "statute",
+            status: "VERIFIED",
+            sourceUrl:
+              "https://eli.gov.pl/",
+            sourceTier: "R1",
+            fetchedAt:
+              "2026-09-18T10:00:00.000Z",
+            verificationMethod:
+              "web_fetch",
+            temporalMode:
+              "CURRENT",
+            temporalFreshnessStatus:
+              "CURRENT",
+            freshnessCheckedAt:
+              "2026-09-18T09:59:59.000Z"
+          };
+        const pass =
+          evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads:
+              reads(),
+            verificationRecords: [
+              good
+            ],
+            finalization:
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
+            }
+          });
+
+        expect(
+          pass.checks.find(
+            (check) =>
+              check.id ===
+                "SOURCE_HIERARCHY"
+          )?.result
+        ).toBe("PASS");
+        expect(
+          pass.checks.find(
+            (check) =>
+              check.id ===
+                "TEMPORAL_FRESHNESS"
+          )?.result
+        ).toBe("PASS");
+
+        const stale =
+          evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads:
+              reads(),
+            verificationRecords: [
+              {
+                ...good,
+                temporalFreshnessStatus:
+                  undefined,
+                freshnessCheckedAt:
+                  undefined
+              }
+            ],
+            finalization:
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
+            }
+          });
+        expect(
+          stale.checks.find(
+            (check) =>
+              check.id ===
+                "TEMPORAL_FRESHNESS"
+          )?.result
+        ).toBe("BLOCKED");
+      }
+    );
+
+    it(
+      "blocks rejected or unanchored local document citations",
+      () => {
+        const report =
+          evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads:
+              reads(),
+            verificationRecords: [],
+            finalization:
+              finalization(),
+            outputValidation: {
+              result: "PASS",
+              detail:
+                "workflow=PASS"
+            },
+            documentCitations: {
+              accepted: 1,
+              rejected: 1,
+              quotedWithoutExactHighlight: 1
+            }
+          });
+
+        expect(
+          report.checks.find(
+            (check) =>
+              check.id ===
+                "DOCUMENT_CITATIONS"
           )?.result
         ).toBe("BLOCKED");
       }
@@ -191,6 +330,11 @@ describe(
               result: "PASS",
               detail:
                 "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
@@ -221,6 +365,11 @@ describe(
               result: "PASS",
               detail:
                 "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
@@ -234,8 +383,12 @@ describe(
           "I-B_CORE_RESOURCES",
           "I-C_WORKFLOW_RESOURCES",
           "I-D_SOURCE_PROVENANCE",
-          "I-E_LEGAL_CITATIONS",
+          "I-D1_SOURCE_HIERARCHY",
+          "I-D2_TEMPORAL_FRESHNESS",
+          "I-E_CITATION_LEDGER",
+          "I-E1_LEGAL_CITATIONS",
           "I-F_CASE_SIGNATURES",
+          "I-F1_DOCUMENT_CITATIONS",
           "I-G_OUTPUT_CONTRACT",
           "I-H_FINALIZATION"
         ]);
@@ -258,6 +411,11 @@ describe(
                 "BLOCKED",
               detail:
                 "workflow=BLOCKED"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
@@ -302,6 +460,11 @@ describe(
               result: "PASS",
               detail:
                 "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+              accepted: 0,
+              rejected: 0,
+              quotedWithoutExactHighlight: 0
             }
           });
 
