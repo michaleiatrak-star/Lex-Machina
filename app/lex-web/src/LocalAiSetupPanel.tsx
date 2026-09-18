@@ -136,8 +136,12 @@ type ModelPackUpdateStatus = {
     | "BLOCKED";
   checkedAt: string;
   modelId?: string;
+  modelFamily?: "BIELIK" | "MISTRAL";
   currentSha256?: string;
   latestPackVersion?: string;
+  targetModelId?: string;
+  targetDisplayName?: string;
+  targetBytes?: number;
   targetSha256?: string;
   verificationReady: boolean;
   signerKeyId?: string;
@@ -438,7 +442,10 @@ export function LocalAiSetupPanel({
     if (
       user.appRole !== "ADMIN" ||
       busy ||
-      modelUpdate?.status !== "AVAILABLE"
+      modelUpdate?.status !== "AVAILABLE" ||
+      !selected ||
+      modelUpdate.modelId !==
+        selected.id
     ) {
       return;
     }
@@ -463,7 +470,14 @@ export function LocalAiSetupPanel({
         }
       >(
         "/api/local-models/update/apply",
-        { method: "POST" }
+        {
+          method: "POST",
+          body:
+            JSON.stringify({
+              modelId:
+                selected.id
+            })
+        }
       );
       setData((current) => current ? {
         ...current,
@@ -752,11 +766,24 @@ export function LocalAiSetupPanel({
                   )}
                   {user.appRole === "ADMIN" && modelUpdate ? (
                     <span>
-                      Kanał aktualizacji modelu:{" "}
+                      Kanał aktualizacji{" "}
+                      {modelUpdate.modelFamily === "BIELIK"
+                        ? "Bielik"
+                        : modelUpdate.modelFamily === "MISTRAL"
+                          ? "Mistral"
+                          : "modelu"}:{" "}
                       {modelUpdate.status === "UP_TO_DATE"
                         ? "aktualny"
                         : modelUpdate.status === "AVAILABLE"
-                          ? `dostępna podpisana aktualizacja ${modelUpdate.latestPackVersion ?? ""}`
+                          ? [
+                              `dostępna podpisana paczka ${modelUpdate.latestPackVersion ?? ""}`,
+                              modelUpdate.targetDisplayName
+                                ? `→ ${modelUpdate.targetDisplayName}`
+                                : "",
+                              modelUpdate.targetBytes
+                                ? `(${formatBytes(modelUpdate.targetBytes)})`
+                                : ""
+                            ].filter(Boolean).join(" ")
                           : modelUpdate.status === "NOT_CONFIGURED"
                             ? "model nie jest jeszcze skonfigurowany"
                             : modelUpdate.status === "UNAVAILABLE"
@@ -849,7 +876,10 @@ export function LocalAiSetupPanel({
                       disabled={
                         busy ||
                         data.runtime.provisioning ||
-                        modelUpdate?.status !== "AVAILABLE"
+                        modelUpdate?.status !== "AVAILABLE" ||
+                        !selected ||
+                        modelUpdate.modelId !==
+                          selected.id
                       }
                       onClick={() => void applyModelUpdate()}
                     >
