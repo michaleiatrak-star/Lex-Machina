@@ -533,9 +533,6 @@ export function evaluateGateISubgates(args: {
   const stateRequired =
     args.contract.stateModel ===
       "DURABLE_CASE";
-  const stateCaseBound =
-    args.contract.stateModel ===
-      "CASE_BOUND_WHEN_AVAILABLE";
 
   const stateResult:
     | "PASS"
@@ -548,14 +545,7 @@ export function evaluateGateISubgates(args: {
               ? "PASS"
               : "BLOCKED"
           )
-        : stateCaseBound
-          ? (
-              args
-                .stateTransitionPass
-                ? "PASS"
-                : "NOT_APPLICABLE"
-            )
-          : "NOT_APPLICABLE";
+        : "NOT_APPLICABLE";
 
   const subgates = [
     ...common,
