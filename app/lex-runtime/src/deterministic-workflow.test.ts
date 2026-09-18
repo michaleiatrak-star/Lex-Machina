@@ -33,6 +33,21 @@ const courtResources = [
   "analiza-sadowa-v6/references/WERYFIKACJA-DOWODOW.md"
 ];
 
+const evidenceResources = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/MOD-STEP-TRACKER.md",
+  "shared/DOMAIN-LOCK.md",
+  "shared/RATE-COMPLETENESS.md"
+];
+
+const statuteResources = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/HIERARCHIA-ZRODEL.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+];
+
 function writeFile(root: string, relative: string): void {
   const target = path.join(root, ...relative.split("/"));
   fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -48,7 +63,9 @@ function fixture(): LexSkillRegistry {
   for (const skill of [
     "pisma-proste-v2",
     "pisma-procesowe-v3",
-    "analiza-sadowa-v6"
+    "analiza-sadowa-v6",
+    "analizator-dowodow-v3",
+    "analizator-przepisow-v2"
   ]) {
     writeFile(
       root,
@@ -60,7 +77,7 @@ function fixture(): LexSkillRegistry {
         "---",
         `name: ${skill}`,
         'version: "test"',
-        `type: ${skill === "analiza-sadowa-v6" ? "executive-analiza" : "executive-pisma"}`,
+        `type: ${["analiza-sadowa-v6", "analizator-dowodow-v3", "analizator-przepisow-v2"].includes(skill) ? "executive-analiza" : "executive-pisma"}`,
         "---",
         "",
         "# Fixture"
@@ -71,7 +88,9 @@ function fixture(): LexSkillRegistry {
   for (const resource of [
     ...simpleResources,
     ...processResources,
-    ...courtResources
+    ...courtResources,
+    ...evidenceResources,
+    ...statuteResources
   ]) {
     writeFile(root, resource);
   }
@@ -170,6 +189,53 @@ describe("deterministic legal workflow", () => {
       );
     expect(report.result).toBe("PASS");
     expect(report.missing).toEqual([]);
+  });
+
+  it("uses the evidence-analysis workflow with only always-on deterministic gates", () => {
+    const registry = fixture();
+    const plan = createDeterministicWorkflowPlan(
+      registry,
+      "analizator-dowodow-v3"
+    );
+
+    expect(plan.id).toBe("EVIDENCE_ANALYSIS_V1");
+    expect(plan.requiredFreshResources)
+      .toEqual(evidenceResources);
+
+    const report = evaluateDeterministicWorkflowReads(
+      plan,
+      evidenceResources.map((target) => ({
+        tool: "read_legal_resource",
+        target,
+        decision: "ALLOW" as const
+      }))
+    );
+    expect(report.result).toBe("PASS");
+  });
+
+  it("uses the statute-analysis workflow and requires source-hierarchy/freshness gates", () => {
+    const registry = fixture();
+    const plan = createDeterministicWorkflowPlan(
+      registry,
+      "analizator-przepisow-v2"
+    );
+
+    expect(plan.id).toBe("STATUTE_ANALYSIS_V1");
+    expect(plan.requiredFreshResources)
+      .toEqual(statuteResources);
+
+    const report = evaluateDeterministicWorkflowReads(
+      plan,
+      statuteResources.slice(0, -1).map((target) => ({
+        tool: "read_legal_resource",
+        target,
+        decision: "ALLOW" as const
+      }))
+    );
+    expect(report.result).toBe("BLOCKED");
+    expect(report.missing).toEqual([
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ]);
   });
 
   it("blocks preflight when a required process resource is missing", () => {
