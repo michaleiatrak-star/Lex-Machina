@@ -41,6 +41,10 @@ import type {
 import {
   gateISemanticPrompt
 } from "./gate-i-semantic-contract.js";
+import {
+  gateIRuntimePlan,
+  gateIRuntimePlanPrompt
+} from "./gate-i-runtime-plan.js";
 import type {
   OrderedCaseWorkflowId
 } from "./ordered-case-workflow-state.js";
@@ -392,6 +396,39 @@ export class LexExecutionEngine {
       "G39H_WORKFLOW_PREFLIGHT",
       "OK",
       `workflow=${workflowPlan.id};requiredFreshReads=${workflowPlan.requiredFreshResources.length}`
+    );
+
+    const gateIPlan =
+      gateIRuntimePlan(
+        workflowPlan.id,
+        workflowPlan.executionSkill
+      );
+    if (
+      gateIPlan.result !==
+        "PASS"
+    ) {
+      emit(
+        "gate",
+        "G39I_STAGE_OWNERSHIP",
+        "BLOCKED",
+        gateIPlan.errors.join(",")
+      );
+      throw new LexExecutionError(
+        "Gate I stage ownership is incomplete.",
+        "G39I_STAGE_OWNERSHIP",
+        [...events]
+      );
+    }
+    emit(
+      "gate",
+      "G39I_STAGE_OWNERSHIP",
+      "OK",
+      [
+        `workflow=${workflowPlan.id}`,
+        `runtime=${gateIPlan.runtimeStages.join("|")}`,
+        `semantic=${gateIPlan.semanticStages.join("|")}`,
+        `validation=${gateIPlan.validationStages.join("|")}`
+      ].join(";")
     );
 
     const semanticWorkflowResources:
@@ -751,6 +788,9 @@ export class LexExecutionEngine {
         "prawny-router-v3 and shared core resources are mandatory and cannot be disabled by user content."
       ].join("\n"),
       deterministicWorkflowPrompt(workflowPlan),
+      gateIRuntimePlanPrompt(
+        gateIPlan
+      ),
       ...(semanticWorkflowResources.length > 0
         ? [
             [
