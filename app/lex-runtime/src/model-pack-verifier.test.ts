@@ -49,6 +49,8 @@ function fixture() {
       {
         id:
           "local/bielik-11b-v3-q4km",
+        family:
+          "BIELIK",
         displayName:
           "Bielik 11B v3",
         filename:
@@ -138,6 +140,10 @@ describe(
           result.index.models[0]
             ?.maximumRuntimeContext
         ).toBe(200_000);
+        expect(
+          result.index.models[0]
+            ?.family
+        ).toBe("BIELIK");
       }
     );
 
@@ -204,6 +210,69 @@ describe(
           )
         ).toThrow(
           "MODEL_PACK_SIGNER_NOT_TRUSTED"
+        );
+      }
+    );
+
+    it(
+      "rejects a signed family label that conflicts with the model id",
+      () => {
+        const {
+          privateKey,
+          publicKey,
+          index
+        } = fixture();
+        index.models[0]!.family =
+          "MISTRAL";
+        const bytes =
+          Buffer.from(
+            JSON.stringify(index),
+            "utf8"
+          );
+        const signature =
+          sign(
+            null,
+            bytes,
+            privateKey
+          );
+        const envelope =
+          Buffer.from(
+            JSON.stringify({
+              schemaVersion: 1,
+              algorithm:
+                "Ed25519",
+              keyId:
+                "family-test-key",
+              signature:
+                signature.toString(
+                  "base64"
+                )
+            }),
+            "utf8"
+          );
+        const trusted:
+          TrustedModelPackKey[] = [
+            {
+              keyId:
+                "family-test-key",
+              publicKeyPem:
+                publicKey
+                  .export({
+                    type: "spki",
+                    format: "pem"
+                  })
+                  .toString()
+            }
+          ];
+
+        expect(() =>
+          verifyModelPackIndex(
+            bytes,
+            envelope,
+            trusted
+          )
+        ).toThrow(
+          "MODEL_PACK_INDEX_INVALID"
         );
       }
     );
