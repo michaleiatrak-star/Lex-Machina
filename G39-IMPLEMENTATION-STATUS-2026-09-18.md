@@ -123,6 +123,7 @@ Context policy:
 - after provisioning the runtime actually launches llama.cpp with the selected context and waits for `/health`;
 - if the selected context cannot start successfully, the configuration is rolled back while downloaded files remain cached for a lower-context retry;
 - successful provisioning/repair writes a local qualification receipt with model id, exact context, native/YaRN mode, validation timestamp and measured startup time;
+- qualification now requires the pinned llama.cpp `/tokenize` endpoint to calibrate three fixed non-sensitive Polish/legal samples; provisioning/reconfigure rolls back if tokenizer calibration fails, and legacy receipts without calibration are no longer accepted as qualified;
 - the Local AI UI shows the last hardware-qualified profile instead of presenting a configured context as implicitly validated;
 - repair and deterministic model removal are implemented; removal clears only the selected GGUF/config/qualification and keeps the shared engine cache when appropriate;
 - multi-GB engine/model downloads are streamed to `.part`, report verified byte/percent progress to the runtime UI, and become cache entries only after SHA-256 verification;
@@ -135,8 +136,9 @@ Context policy:
 Still required for full gates:
 
 - GPU backend packaging/selection and actual offload support (hardware discovery alone is not GPU execution);
-- benchmark matrix for 64k / 96k / 128k / 160k / 200k;
-- explicit quality acceptance thresholds for extended context;
+- execute the committed self-hosted Windows benchmark matrix for 64k / 96k / 128k / 160k / 200k on representative supported hardware; the harness restores the user's previous context after execution;
+- context-capability acceptance is explicitly 3/3 exact passkey recall at three positions with prompts fitted to 72% of each requested context; this is a long-context qualification threshold, not a general legal-quality score;
+- define and run a separate semantic/legal-quality benchmark before claiming extended-context legal quality;
 - configure and exercise the production Ed25519 model-pack signing key/trust root in a real release acceptance.
 
 ## G39C — effective extended context orchestrator
@@ -168,7 +170,8 @@ Implemented:
 Still required before G39C PASS:
 
 - current-head runtime validation must be green;
-- quality/regression benchmarks across 64k / 96k / 128k / 160k / 200k.
+- the committed self-hosted 64k / 96k / 128k / 160k / 200k long-context benchmark must be executed and its artifact reviewed on representative supported hardware;
+- separate semantic/legal-quality regression criteria remain required before treating extended context as a quality guarantee.
 
 A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
@@ -262,9 +265,10 @@ External / production blockers:
 2. obtain current-head online installer acceptance PASS with G39G2 registered-install-root and Polish maintenance-language gates;
 3. obtain current-head offline installer acceptance PASS;
 4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
-5. after current-head CI is green, promote the implemented G39C summary-backlink and tokenizer-calibration slices from VERIFYING;
-6. add comparative skill-only vs engine-controlled regression suites for process/court/chronology/contract workflows;
-7. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
-8. configure production application/skill/model-pack signing and execute signed acceptance;
-9. enable protected `main` / release rules outside this GitHub integration;
-10. close G39J only after the external trust controls above are verified.
+5. after current-head CI is green, promote the implemented G39C summary-backlink/tokenizer-calibration slices from VERIFYING;
+6. validate the new real-corpus skill↔engine parity suite for process/court/chronology/contract workflows on current-head CI;
+7. execute and review the self-hosted Local AI 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
+8. add a separate semantic/legal-quality benchmark for extended-context use;
+9. configure production application/skill/model-pack signing and execute signed acceptance;
+10. enable protected `main` / release rules outside this GitHub integration;
+11. close G39J only after the external trust controls above are verified.
