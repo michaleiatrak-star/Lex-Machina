@@ -14,6 +14,10 @@ import {
   createChronologyState,
   requireChronologyTemporalGate
 } from "./chronology-state.js";
+import {
+  completeContractCheckpoint,
+  createContractAnalysisState
+} from "./contract-analysis-state.js";
 
 const roots: string[] = [];
 
@@ -291,6 +295,104 @@ describe("encrypted case workspace", () => {
     expect(
       afterRekey?.temporalGateRequired
     ).toBe(true);
+  });
+
+  it("keeps contract-analysis AU state encrypted and preserves it across key rotation", async () => {
+    const {
+      rootDir,
+      caseId,
+      key,
+      store
+    } = fixture();
+
+    let state =
+      createContractAnalysisState(
+        caseId,
+        "DRAFT",
+        "2026-09-18T09:40:00.000Z"
+      );
+    state =
+      completeContractCheckpoint(
+        state,
+        "AU-F0",
+        [
+          "audit://contract/AU-F0"
+        ],
+        "2026-09-18T09:40:01.000Z"
+      );
+
+    await store.saveContractAnalysisState({
+      caseId,
+      caseDataKey: key,
+      keyVersion: 1,
+      state
+    });
+
+    const loaded =
+      await store
+        .getContractAnalysisState({
+          caseId,
+          caseDataKey: key,
+          keyVersion: 1
+        });
+    expect(loaded?.mode)
+      .toBe("DRAFT");
+    expect(loaded?.stage)
+      .toBe("INTAKE");
+    expect(
+      loaded?.closedCheckpoints
+    ).toEqual(["AU-F0"]);
+
+    const onDisk =
+      fs.readFileSync(
+        path.join(
+          rootDir,
+          "cases",
+          caseId,
+          "secure",
+          "workspace",
+          "index.lmw1"
+        ),
+        "utf8"
+      );
+    expect(onDisk)
+      .not.toContain(
+        "CONTRACT_ANALYSIS_V1"
+      );
+    expect(onDisk)
+      .not.toContain("AU-F0");
+    expect(onDisk)
+      .not.toContain("DRAFT");
+
+    const next =
+      randomBytes(32);
+    expect(
+      await store
+        .rekeyCaseWorkspace({
+          caseId,
+          oldCaseDataKey: key,
+          oldKeyVersion: 1,
+          newCaseDataKey: next,
+          newKeyVersion: 2
+        })
+    ).toBe(true);
+
+    const afterRekey =
+      await store
+        .getContractAnalysisState({
+          caseId,
+          caseDataKey: next,
+          keyVersion: 2
+        });
+    expect(afterRekey?.mode)
+      .toBe("DRAFT");
+    expect(
+      afterRekey
+        ?.closedCheckpoints
+    ).toEqual(["AU-F0"]);
+    expect(
+      afterRekey?.revision
+    ).toBe(2);
   });
 
   it("re-encrypts the workspace when the case key rotates", async () => {
