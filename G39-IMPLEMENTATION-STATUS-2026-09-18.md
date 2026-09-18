@@ -374,14 +374,14 @@ Installer publication policy:
 
 ## Online-first RC publication — 2026-09-18
 
-Source SHA for the first published installer: `fa5bc4ed8b446d2ffe80e52720bb357b13d1c26d`.
+Source SHA for the current published online installer: `85b88ba4fc758163370f5dac8c9d887bdfbb94e9`.
 
 Evidence on that exact source SHA:
 - Lex Runtime Validation: **PASS**;
 - F-138 structural audit: **PASS**;
 - G39 Installer State Machine: **PASS**;
 - Windows Online Installer installed-copy acceptance: **PASS**;
-- Windows Offline Installer clean-machine acceptance: **FAIL / FIXING**.
+- Windows Offline Installer clean-machine acceptance: **DEFERRED / NOT PUBLISHED**.
 
 Publication policy has been split without weakening the full release gate:
 - the online-first publisher may publish only the accepted online installer after the four online-relevant gates above are green on the exact source SHA;
@@ -389,10 +389,17 @@ Publication policy has been split without weakening the full release gate:
 - both publishers independently re-check artifact SHA-256 before upload;
 - production application/skill/model-pack update channels remain fail-closed until signing trust roots are configured.
 
+Published online RC assets:
+- `Lex-Machina-0.1.3-G39-Online-x64-Setup.exe`;
+- `SHA256-ONLINE.txt`;
+- `CI-SHA256-ONLINE.txt`.
+
+The online publisher re-verified the exact-source gates and the installer receipt before replacing the prerelease assets.
+
 ## Current closure order / roadmap
 
 1. keep Runtime + F-138 + G39 Installer State Machine green on the exact source SHA used for publication;
-2. publish the online x64 installer immediately after exact-SHA online installed-copy acceptance PASS and attach SHA-256 receipts;
+2. **DONE** — online x64 installer published to `v0.1.3-g39-rc1` from exact accepted SHA with SHA-256 receipts;
 3. continue fixing the standalone offline clean-machine path without blocking availability of the already accepted online installer;
 4. add the offline x64 installer to the same `v0.1.3-g39-rc1` prerelease only after its own clean-machine PASS and checksum re-verification;
 5. close the complete installer integration slice G39G only when both online and offline acceptance evidence is green; keep production update/signing gates separate and fail-closed;
