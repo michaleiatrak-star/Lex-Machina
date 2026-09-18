@@ -168,21 +168,21 @@
     "modelPackUpdateSigning": "TEMPORARY: model-pack index signatures are optional; index schema, compatibility and model SHA-256 remain mandatory."
   },
   "modelPackUpdate": {
-    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-ModelPack-Index.json",
     "signatureAsset": "LexMachina-ModelPack-Index.sig",
     "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
-    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
-    "temporaryUnsignedAllowed": true
+    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": false
   },
   "skillUpdate": {
-    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-Skills-Index.json",
     "signatureAsset": "LexMachina-Skills-Index.sig",
     "activation": "VALIDATE_THEN_ATOMIC_SWITCH_WITH_ROLLBACK",
-    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
-    "temporaryUnsignedAllowed": true
+    "policy": "FAIL_CLOSED_UNTIL_SKILL_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": false
   }
 }
