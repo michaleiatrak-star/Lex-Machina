@@ -2,6 +2,9 @@ import {
   generateKeyPairSync,
   sign
 } from "node:crypto";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   verifySkillUpdateIndex,
@@ -96,6 +99,101 @@ describe("signed skill update index", () => {
       .toBe("0.1.4");
     expect(result.index.skills[0]?.id)
       .toBe("prawny-router-v3");
+  });
+
+
+  it("allows an unsigned index only under the explicit temporary policy", () => {
+    const { indexBytes } = fixture();
+    const root = fs.mkdtempSync(
+      path.join(os.tmpdir(), "lex-skill-unsigned-")
+    );
+    const manifestPath = path.join(
+      root,
+      "release-source.json"
+    );
+    try {
+      fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+          skillUpdate: {
+            verification:
+              "SHA256_AND_OPTIONAL_ED25519_INDEX",
+            trustedEd25519PublicKeys: [],
+            temporaryUnsignedAllowed: true
+          }
+        }),
+        "utf8"
+      );
+
+      const result =
+        verifySkillUpdateIndex(
+          indexBytes,
+          new Uint8Array(),
+          undefined,
+          manifestPath
+        );
+
+      expect(result.signerKeyId)
+        .toBe("UNSIGNED_ALLOWED");
+      expect(result.index.version)
+        .toBe("0.1.4");
+
+      expect(() =>
+        verifySkillUpdateIndex(
+          Buffer.from("{}", "utf8"),
+          new Uint8Array(),
+          undefined,
+          manifestPath
+        )
+      ).toThrow(
+        "SKILL_UPDATE_INDEX_INVALID"
+      );
+    } finally {
+      fs.rmSync(root, {
+        recursive: true,
+        force: true
+      });
+    }
+  });
+
+  it("restores fail-closed behavior when signed mode is selected", () => {
+    const { indexBytes } = fixture();
+    const root = fs.mkdtempSync(
+      path.join(os.tmpdir(), "lex-skill-signed-")
+    );
+    const manifestPath = path.join(
+      root,
+      "release-source.json"
+    );
+    try {
+      fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+          skillUpdate: {
+            verification:
+              "SHA256_AND_ED25519_SIGNED_INDEX",
+            trustedEd25519PublicKeys: []
+          }
+        }),
+        "utf8"
+      );
+
+      expect(() =>
+        verifySkillUpdateIndex(
+          indexBytes,
+          new Uint8Array(),
+          undefined,
+          manifestPath
+        )
+      ).toThrow(
+        "SKILL_UPDATE_SIGNER_POLICY_MISSING"
+      );
+    } finally {
+      fs.rmSync(root, {
+        recursive: true,
+        force: true
+      });
+    }
   });
 
   it("rejects a tampered index even when the signature envelope is unchanged", () => {
