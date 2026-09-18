@@ -124,16 +124,20 @@ Context policy:
 - if the selected context cannot start successfully, the configuration is rolled back while downloaded files remain cached for a lower-context retry;
 - successful provisioning/repair writes a local qualification receipt with model id, exact context, native/YaRN mode, validation timestamp and measured startup time;
 - the Local AI UI shows the last hardware-qualified profile instead of presenting a configured context as implicitly validated;
-- repair and deterministic model removal are implemented; removal clears only the selected GGUF/config/qualification and keeps the shared engine cache when appropriate.
+- repair and deterministic model removal are implemented; removal clears only the selected GGUF/config/qualification and keeps the shared engine cache when appropriate;
+- multi-GB engine/model downloads are streamed to `.part`, report verified byte/percent progress to the runtime UI, and become cache entries only after SHA-256 verification;
+- runtime reports RAM/CPU and detected Windows video controllers while truthfully exposing the currently packaged `CPU_X64_PORTABLE` backend and `gpuOffloadEnabled=false`;
+- model-pack update discovery uses a separate Ed25519-signed index trust root; update metadata is schema-validated, HTTPS-only and fail-closed while the production public key is absent;
+- model updates are user-approved from the Local AI UI and may change only the signed URL/hash for an app-approved model identity; filename, quantization, license and context capabilities require an application update;
+- model replacement keeps the prior GGUF as rollback until the new runtime passes `/health`;
+- provisioning/update now writes a persistent crash-recovery journal plus config/qualification backups; interrupted replacement is rolled back automatically at the next runtime construction, while invalid recovery metadata fails closed.
 
 Still required for full gates:
 
-- GPU/backend discovery and selection;
-- progress reporting during multi-GB downloads;
-- explicit model-pack update discovery/versioning beyond repair/re-provision;
+- GPU backend packaging/selection and actual offload support (hardware discovery alone is not GPU execution);
 - benchmark matrix for 64k / 96k / 128k / 160k / 200k;
 - explicit quality acceptance thresholds for extended context;
-- signed model-pack metadata rather than relying only on fixed upstream URLs and hashes.
+- configure and exercise the production Ed25519 model-pack signing key/trust root in a real release acceptance.
 
 ## G39C — effective extended context orchestrator
 
@@ -207,9 +211,9 @@ Implemented multi-turn process-pleading state slice:
 
 Still required before G39H/I PASS:
 
-1. deterministically evaluate conditional checkpoint applicability where possible (file counts, attachment presence, evidence counts, document classes) and record an explicit N/A reason rather than relying on semantic narrative;
+1. extend deterministic checkpoint applicability beyond the implemented persisted-file inventory rules only when the required facts are available as typed runtime state; do not infer semantic conditions from filenames or narrative;
 2. make AUTO mode run a bounded sequence of semantic checkpoint nodes in one requested workflow without requiring repeated user messages, while preserving all deterministic invariant gates;
-3. add end-to-end HTTP tests around ACL + encrypted workflow store + provider call suppression and final-artifact suppression;
+3. extend the new end-to-end HTTP coverage (ACL + encrypted workflow store + provider suppression/advance) to explicit final-artifact suppression/finalization;
 4. migrate `analiza-sadowa-v6`;
 5. migrate `analizator-dowodow-v3`;
 6. migrate `analizator-przepisow-v2`;
@@ -231,26 +235,27 @@ Implemented in repo:
 - negative CI self-test covers empty trust root and missing signing secret and must fail closed without producing a receipt;
 - manual signed Windows release-candidate workflow builds the online installer, signs it, runs installed-copy acceptance, generates npm CycloneDX SBOMs and Rust dependency inventory, writes a release provenance receipt and requests GitHub build-provenance attestation;
 - signed skill-update release-candidate workflow exists and requires an Ed25519 private key secret;
-- application updater and skill updater remain fail-closed while their committed public trust roots are empty.
+- signed model-pack verifier, dedicated trust root, metadata builder and manual release-candidate workflow are implemented; tampered metadata, untrusted key id and unsafe model metadata are rejected in unit tests;
+- application, skill and model-pack update channels remain fail-closed while their committed production public trust roots are empty.
 
 External / production blockers:
 
 - configure the real production Authenticode certificate and commit its public thumbprint to `applicationUpdate.trustedSignerThumbprints`;
 - configure the corresponding CI PFX/password secrets and execute a signed installer/update acceptance;
 - configure the production Ed25519 skill signing key and commit its public key to the skill trust root;
-- signed model-pack metadata/trust root is still required;
+- configure the production Ed25519 model-pack signing key and commit its public key to the model-pack trust root, then execute a real signed model update acceptance;
 - protect `main` / release rules and required status checks in GitHub repository administration. The current GitHub integration cannot read or modify branch-protection settings (403: administration permission unavailable), so this cannot be marked PASS from this session;
-- add/verify negative tests for a correctly hashed installer signed by an untrusted certificate and for tampered signed model metadata once model-pack signing exists.
+- add/verify a release-level negative acceptance test for a correctly hashed installer signed by an untrusted certificate. Tampered/untrusted model-pack metadata is already covered at verifier level.
 
 ## Current closure order
 
-1. make current-head runtime validation green;
-2. make current-head online installer acceptance green;
-3. make current-head offline installer acceptance green;
-4. add/update transaction tests for G39F without weakening the empty-signer fail-closed policy;
-5. configure production signing and execute signed update acceptance;
-6. complete G39E signed compatibility index;
-7. complete Local AI model-manager actions and benchmark matrix;
-8. implement G39C;
-9. implement G39H/I;
-10. complete G39J.
+1. keep current-head runtime validation green after crash-journal and G39I HTTP integration tests;
+2. obtain current-head online installer acceptance PASS after embedding the OCR/NER prefetch helper;
+3. obtain current-head offline installer acceptance PASS;
+4. extend process-workflow E2E to final-artifact suppression and design bounded AUTO semantic-node execution;
+5. implement G39C summary backlinks and tokenizer calibration;
+6. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
+7. migrate court/evidence/statute analyzers into the deterministic engine;
+8. configure production application/skill/model-pack signing and execute signed acceptance;
+9. enable protected `main` / release rules outside this GitHub integration;
+10. close G39J only after the external trust controls above are verified.
