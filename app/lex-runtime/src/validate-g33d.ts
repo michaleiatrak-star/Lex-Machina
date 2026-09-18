@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,6 +18,14 @@ const privatePython = read("app/installer/install-private-python.ps1");
 const onlineBuild = read("app/installer/build-windows-online.ps1");
 const offlineBuild = read("app/installer/build-windows-offline.ps1");
 const branding = read("app/installer/materialize-brand-icon.ps1");
+const runtimeSidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
+const trustBoundary = read("app/lex-desktop/src-tauri/src/trust_boundary.rs");
+const canonicalBrandBase64 = read(
+  "app/installer/lex-machina-brand-source.b64"
+).replace(/\s+/g, "");
+const canonicalBrandSha256 = createHash("sha256")
+  .update(Buffer.from(canonicalBrandBase64, "base64"))
+  .digest("hex");
 const releaseSource = JSON.parse(
   read("app/installer/windows-release-source.json")
 ) as {
@@ -86,10 +95,30 @@ const checks = {
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
   canonicalWindowsBranding:
-    branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
+    canonicalBrandSha256 ===
+      "0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67" &&
+    branding.includes("lex-machina-brand-source.b64") &&
+    branding.includes("0d9caa856588dcb987dfff63317090038422e7e437036915a99864d86bb66a67") &&
+    branding.includes("[Convert]::FromBase64String") &&
     branding.includes("lex-machina-brand-source.png") &&
     onlineBuild.includes("materialize-brand-icon.ps1") &&
     offlineBuild.includes("materialize-brand-icon.ps1"),
+  cleanAdminLifecycle:
+    runtimeSidecar.includes("--purge-user-state") &&
+    runtimeSidecar.includes("LEX_USER_STATE_PURGE_PASS") &&
+    runtimeSidecar.includes('MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop"') &&
+    runtimeSidecar.includes('PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential"') &&
+    runtimeSidecar.includes('SUPPORT_KEYRING_SERVICE: &str = "LexMachina/SupportIdentity"') &&
+    runtimeSidecar.includes('push_owned_root(&mut roots, "USERPROFILE", ".lex-machina")') &&
+    runtimeSidecar.includes('push_owned_root(&mut roots, "LOCALAPPDATA", "LexMachina")') &&
+    hooks.includes("całkowicie czystym profilem administratora") &&
+    hooks.includes('/SD IDNO IDNO lex_clean_profile_done') &&
+    hooks.includes('lex-runtime-sidecar.exe" --purge-user-state') &&
+    hooks.includes('/SD IDYES IDYES lex_full_uninstall_confirmed') &&
+    hooks.includes("Deinstalacja została zatrzymana") &&
+    trustBoundary.includes('const MANAGED_LOGIN: &str = "local-admin"') &&
+    trustBoundary.includes("/api/auth/bootstrap-managed") &&
+    trustBoundary.includes("requires_bootstrap"),
   windowsPathAndPrerequisiteRegression:
     acceptance.includes("Lex Machina Installed ") &&
     acceptance.includes("expectedPythonVersion") &&
