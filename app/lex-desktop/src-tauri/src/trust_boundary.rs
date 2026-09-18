@@ -1204,7 +1204,8 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/local-models"
         | "/api/local-models/update/status"
         | "/api/skills/update/status"
-        | "/api/model-routing/preferences" => {
+        | "/api/model-routing/preferences"
+        | "/api/guide/state" => {
             method == "GET"
                 || (path == "/api/cases" && method == "POST")
                 || (path == "/api/model-routing/preferences" && method == "PUT")
@@ -1216,7 +1217,9 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/local-models/start"
         | "/api/local-models/stop"
         | "/api/local-models/update/apply"
-        | "/api/skills/update/apply" => method == "POST",
+        | "/api/skills/update/apply"
+        | "/api/guide/initialize"
+        | "/api/guide/transition" => method == "POST",
         "/api/firm-knowledge" | "/api/shared/templates" => {
             method == "GET" || method == "POST"
         }
@@ -1590,6 +1593,10 @@ mod tests {
         assert!(route_allowed("GET", "/api/local-models"));
         assert!(route_allowed("GET", "/api/local-models/update/status"));
         assert!(route_allowed("POST", "/api/local-models/update/apply"));
+        assert!(route_allowed("GET", "/api/guide/state"));
+        assert!(route_allowed("POST", "/api/guide/initialize"));
+        assert!(route_allowed("POST", "/api/guide/transition"));
+        assert!(!route_allowed("DELETE", "/api/guide/state"));
         assert!(route_allowed("POST", "/api/local-models/provision"));
         assert!(route_allowed("POST", "/api/local-models/repair"));
         assert!(route_allowed("POST", "/api/local-models/remove"));
