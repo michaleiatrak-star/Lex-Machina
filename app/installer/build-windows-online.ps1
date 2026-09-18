@@ -11,6 +11,13 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[brand] Materialize canonical Lex Machina Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+$brandIcon = Join-Path $tauri "icons\\icon.ico"
+if (-not (Test-Path -LiteralPath $brandIcon -PathType Leaf)) {
+  throw "LEX_BRAND_ICON_MATERIALIZATION_FAILED"
+}
+
 Write-Host "[0/4] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
