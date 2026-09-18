@@ -479,6 +479,8 @@ export async function startLocalServer(options?: {
       workspaceStore,
     contractWorkflowStore:
       workspaceStore,
+    orderedCaseWorkflowStore:
+      workspaceStore,
     documentGenerationState,
     caseFileStore,
     secureCaseUploadStore,
