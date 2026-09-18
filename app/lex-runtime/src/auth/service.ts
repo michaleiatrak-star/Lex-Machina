@@ -12,10 +12,12 @@ import type {
   PublicLocalUser,
   RecoveryCodeResult,
   LocalUserStatus,
+  ModelRoutingPreferences,
   StoredLocalUser
 } from "./types.js";
 import {
-  DEFAULT_AUTH_KDF
+  DEFAULT_AUTH_KDF,
+  DEFAULT_MODEL_ROUTING_PREFERENCES
 } from "./types.js";
 import {
   decryptRecoveryUserMasterKey,
@@ -80,6 +82,18 @@ export class AuthError extends Error {
 
 export interface AuthService {
   status(): AuthStatus;
+  getModelRoutingPreferences(
+    actor: AuthenticatedContext
+  ): ModelRoutingPreferences;
+  setModelRoutingPreferences(
+    actor: AuthenticatedContext,
+    input: {
+      auxiliaryEnabled: boolean;
+      auxiliaryProvider:
+        ModelRoutingPreferences["auxiliaryProvider"];
+      auxiliaryModel: string;
+    }
+  ): ModelRoutingPreferences;
   bootstrap(input: {
     loginName: string;
     displayName: string;
@@ -360,6 +374,69 @@ implements AuthService {
       requiresBootstrap:
         !initialized
     };
+  }
+
+  getModelRoutingPreferences(
+    actor: AuthenticatedContext
+  ): ModelRoutingPreferences {
+    const stored =
+      this.store
+        .getModelRoutingPreferences(
+          actor.user.userId
+        );
+    return stored
+      ? { ...stored }
+      : {
+          ...DEFAULT_MODEL_ROUTING_PREFERENCES
+        };
+  }
+
+  setModelRoutingPreferences(
+    actor: AuthenticatedContext,
+    input: {
+      auxiliaryEnabled: boolean;
+      auxiliaryProvider:
+        ModelRoutingPreferences["auxiliaryProvider"];
+      auxiliaryModel: string;
+    }
+  ): ModelRoutingPreferences {
+    const model =
+      input.auxiliaryModel
+        .normalize("NFKC")
+        .trim();
+    if (
+      model.length < 1 ||
+      model.length > 256 ||
+      (
+        model.startsWith("local/") &&
+        input.auxiliaryProvider !==
+          "openai"
+      )
+    ) {
+      throw new AuthError(
+        "INVALID_USER_REQUEST",
+        400
+      );
+    }
+
+    const value:
+      ModelRoutingPreferences = {
+        auxiliaryEnabled:
+          input.auxiliaryEnabled,
+        auxiliaryProvider:
+          input.auxiliaryProvider,
+        auxiliaryModel: model,
+        updatedAt:
+          new Date(
+            this.clock.now()
+          ).toISOString()
+      };
+    this.store
+      .setModelRoutingPreferences(
+        actor.user.userId,
+        value
+      );
+    return { ...value };
   }
 
   async bootstrap(input: {
