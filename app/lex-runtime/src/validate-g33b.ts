@@ -23,11 +23,13 @@ const checks = {
   webViewDownloadIfMissing:
     config.bundle?.windows?.webviewInstallMode?.type === "downloadBootstrapper",
   thinBundledRuntime:
-    Boolean(
-      config.bundle?.resources &&
-      typeof config.bundle.resources === "object" &&
-      !Array.isArray(config.bundle.resources) &&
-      config.bundle.resources.runtime === "runtime"
+    config.bundle?.resources === undefined &&
+    hooks.includes('SetOutPath "$INSTDIR\\runtime"') &&
+    hooks.includes(
+      'File /r "${LEX_HOOK_FILE_DIR}\\..\\runtime\\*"'
+    ) &&
+    hooks.includes(
+      'IfFileExists "$INSTDIR\\runtime\\app\\dist\\http\\server.js"'
     ) &&
     build.includes("Thin payload contract") &&
     build.includes("windows-online-bootstrap.ps1") &&
