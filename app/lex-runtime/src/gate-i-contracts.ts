@@ -5,18 +5,9 @@ import type {
   GateIInvariantReport
 } from "./gate-i-invariants.js";
 
-export type GateISubgateId =
-  | "I0_BOOTSTRAP"
-  | "I1_POLICY_PREFLIGHT"
-  | "I2_INPUT_COMPLETENESS"
-  | "I3_SOURCE_PROVENANCE"
-  | "I4_CITATIONS_SIGNATURES"
-  | "I5_SKILL_OUTPUT"
-  | "I6_STATE_TRANSITION"
-  | "I7_FINALIZATION";
-
 export type GateIStateModel =
   | "DURABLE_CASE"
+  | "CASE_BOUND_WHEN_AVAILABLE"
   | "CHAT_TURN"
   | "SCHEMA_PIPELINE";
 
@@ -139,17 +130,19 @@ const CONTRACTS:
     },
     EVIDENCE_ANALYSIS_V1: {
       stateModel:
-        "CHAT_TURN",
+        "CASE_BOUND_WHEN_AVAILABLE",
       canonicalStages: [
-        "AD_KROK0_BLOCK",
-        "AD_KROK0A_MODE",
-        "AD_KROK0B_SDVER",
-        "AD_KROK0C_TRACKER",
-        "AD_KROK1_INTAKE",
-        "AD_KROK2_ROUTER",
-        "AD_KROK3_EXECUTION",
-        "AD_KROK3B_SYNTHESIS",
-        "AD_KROK4_OUTPUT"
+        "AD-KROK0-BLOKADA",
+        "AD-KROK0a-MODE",
+        "AD-KROK0b-SDVER",
+        "AD-KROK0c-STINIT",
+        "AD-KROK1-INTAKE",
+        "AD-KROK2-ROUTER",
+        "AD-BLOKG-STRONY",
+        "AD-BLOKJ-LAPSUSY",
+        "AD-BLOKH-DIS",
+        "AD-KROK3-WYKONANIE",
+        "AD-KROK4-DASHBOARD"
       ],
       mandatoryPolicies: [
         ...COMMON,
@@ -233,16 +226,20 @@ const CONTRACTS:
     },
     WITNESS_QUESTIONING_V1: {
       stateModel:
-        "CHAT_TURN",
+        "CASE_BOUND_WHEN_AVAILABLE",
       canonicalStages: [
-        "PRE_W1_EVIDENCE",
-        "W1_INTAKE",
-        "W2_THESES_AND_MODEL",
-        "W2_CHECKPOINT",
-        "W3_QUESTIONS",
-        "OPTIONAL_W4_REHEARSAL",
-        "OPTIONAL_W5_BINDER",
-        "OPTIONAL_W6_ADAPTATION"
+        "PRE-W1a-SD-VER",
+        "PRE-W1a.4-RZ-SHOW",
+        "KROK-PRE-W1-INTELLIGENCE",
+        "KROK-0-KONTEKST",
+        "W1-INTAKE",
+        "W1-SUPPLEMENT",
+        "W2-THESES-AND-MODEL",
+        "CHECKPOINT-W2",
+        "W3-QUESTIONS",
+        "W4-REHEARSAL",
+        "W5-BINDER",
+        "W6-LIVE-DIRECT"
       ],
       mandatoryPolicies: [
         ...COMMON,
@@ -355,8 +352,10 @@ export function evaluateGateIInputCompleteness(
   };
 }
 
-export type GateISubgateResult = {
-  id: GateISubgateId;
+export type GateIWorkflowExtensionCheck = {
+  subgate:
+    | "I-I_INPUT_COMPLETENESS"
+    | "I-J_STATE_TRANSITION";
   result:
     | "PASS"
     | "BLOCKED"
@@ -364,175 +363,72 @@ export type GateISubgateResult = {
   detail: string;
 };
 
-export type GateISubgateReport = {
+export type GateIWorkflowContractReport = {
   gate:
-    "G39I_SUBGATES";
+    "G39I_WORKFLOW_CONTRACT";
   workflow:
     DeterministicWorkflowId;
   stateModel:
     GateIStateModel;
+  commonInvariants:
+    "PASS" | "BLOCKED";
   result:
-    | "PASS"
-    | "BLOCKED";
-  subgates:
-    GateISubgateResult[];
+    "PASS" | "BLOCKED";
+  checks:
+    GateIWorkflowExtensionCheck[];
 };
 
-function invariant(
-  report:
-    GateIInvariantReport,
-  id:
-    GateIInvariantReport["checks"][number]["id"]
-): boolean {
-  return report.checks
-    .find(
-      (check) =>
-        check.id === id
-    )?.result === "PASS";
-}
-
-export function evaluateGateISubgates(args: {
+export function evaluateGateIWorkflowContract(args: {
   contract:
     GateIWorkflowContract;
   invariants:
     GateIInvariantReport;
   input:
     GateIInputCompletenessReport;
-  outputPass: boolean;
-  stateTransitionPass: boolean;
-  finalizationPass: boolean;
-}): GateISubgateReport {
-  const bootstrap =
-    invariant(
-      args.invariants,
-      "ROUTER_FIRST"
-    ) &&
-    invariant(
-      args.invariants,
-      "CORE_RESOURCES"
-    );
-  const policy =
-    invariant(
-      args.invariants,
-      "WORKFLOW_RESOURCES"
-    );
-  const source =
-    invariant(
-      args.invariants,
-      "SOURCE_PROVENANCE"
-    );
-  const citations =
-    invariant(
-      args.invariants,
-      "LEGAL_CITATIONS"
-    ) &&
-    invariant(
-      args.invariants,
-      "CASE_SIGNATURES"
-    );
-
-  const stateApplicable =
-    args.contract.stateModel ===
-      "DURABLE_CASE";
-
-  const subgates:
-    GateISubgateResult[] = [
+  stateTransition:
+    | "PASS"
+    | "BLOCKED"
+    | "NOT_APPLICABLE";
+}): GateIWorkflowContractReport {
+  const checks:
+    GateIWorkflowExtensionCheck[] = [
       {
-        id: "I0_BOOTSTRAP",
-        result:
-          bootstrap
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          "router-first + core legal resources"
-      },
-      {
-        id:
-          "I1_POLICY_PREFLIGHT",
-        result:
-          policy
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          `runtime-owned policies=${args.contract.mandatoryPolicies.length}`
-      },
-      {
-        id:
-          "I2_INPUT_COMPLETENESS",
+        subgate:
+          "I-I_INPUT_COMPLETENESS",
         result:
           args.input.result,
         detail:
           args.input.reason
       },
       {
-        id:
-          "I3_SOURCE_PROVENANCE",
+        subgate:
+          "I-J_STATE_TRANSITION",
         result:
-          source
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          "verified/supported records require runtime provenance"
-      },
-      {
-        id:
-          "I4_CITATIONS_SIGNATURES",
-        result:
-          citations
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          "legal citations + case signatures"
-      },
-      {
-        id:
-          "I5_SKILL_OUTPUT",
-        result:
-          args.outputPass
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          "workflow/guide/report output contract"
-      },
-      {
-        id:
-          "I6_STATE_TRANSITION",
-        result:
-          !stateApplicable
-            ? "NOT_APPLICABLE"
-            : args.stateTransitionPass
-              ? "PASS"
-              : "BLOCKED",
+          args.stateTransition,
         detail:
           `stateModel=${args.contract.stateModel}`
-      },
-      {
-        id:
-          "I7_FINALIZATION",
-        result:
-          args.finalizationPass
-            ? "PASS"
-            : "BLOCKED",
-        detail:
-          "hard finalization gate"
       }
     ];
 
   return {
     gate:
-      "G39I_SUBGATES",
+      "G39I_WORKFLOW_CONTRACT",
     workflow:
       args.contract.workflow,
     stateModel:
       args.contract.stateModel,
+    commonInvariants:
+      args.invariants.result,
     result:
-      subgates.every(
-        (subgate) =>
-          subgate.result !==
+      args.invariants.result ===
+        "PASS" &&
+      checks.every(
+        (check) =>
+          check.result !==
             "BLOCKED"
       )
         ? "PASS"
         : "BLOCKED",
-    subgates
+    checks
   };
 }
