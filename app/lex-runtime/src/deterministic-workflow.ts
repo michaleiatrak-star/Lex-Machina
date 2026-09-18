@@ -6,7 +6,9 @@ export type DeterministicWorkflowId =
   | "LEGAL_QUERY_V1"
   | "SIMPLE_LETTER_V1"
   | "PROCESS_PLEADING_V1"
-  | "COURT_ANALYSIS_V1";
+  | "COURT_ANALYSIS_V1"
+  | "EVIDENCE_ANALYSIS_V1"
+  | "STATUTE_ANALYSIS_V1";
 
 export type DeterministicWorkflowPlan = {
   id: DeterministicWorkflowId;
@@ -51,6 +53,21 @@ const COURT_ANALYSIS_RESOURCES = [
   "analiza-sadowa-v6/references/WERYFIKACJA-DOWODOW.md"
 ] as const;
 
+const EVIDENCE_ANALYSIS_RESOURCES = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/MOD-STEP-TRACKER.md",
+  "shared/DOMAIN-LOCK.md",
+  "shared/RATE-COMPLETENESS.md"
+] as const;
+
+const STATUTE_ANALYSIS_RESOURCES = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/HIERARCHIA-ZRODEL.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+] as const;
+
 function assertReadableResource(
   registry: LexSkillRegistry,
   skillName: string,
@@ -83,6 +100,10 @@ export function createDeterministicWorkflowPlan(
     workflowExecutionSkill === "pisma-proste-v2";
   const hasCourtAnalysis =
     workflowExecutionSkill === "analiza-sadowa-v6";
+  const hasEvidenceAnalysis =
+    workflowExecutionSkill === "analizator-dowodow-v3";
+  const hasStatuteAnalysis =
+    workflowExecutionSkill === "analizator-przepisow-v2";
 
   const executionSkill = hasProcess
     ? "pisma-procesowe-v3"
@@ -90,7 +111,11 @@ export function createDeterministicWorkflowPlan(
       ? "pisma-proste-v2"
       : hasCourtAnalysis
         ? "analiza-sadowa-v6"
-        : workflowExecutionSkill;
+        : hasEvidenceAnalysis
+          ? "analizator-dowodow-v3"
+          : hasStatuteAnalysis
+            ? "analizator-przepisow-v2"
+            : workflowExecutionSkill;
 
   const id: DeterministicWorkflowId = hasProcess
     ? "PROCESS_PLEADING_V1"
@@ -98,7 +123,11 @@ export function createDeterministicWorkflowPlan(
       ? "SIMPLE_LETTER_V1"
       : hasCourtAnalysis
         ? "COURT_ANALYSIS_V1"
-        : "LEGAL_QUERY_V1";
+        : hasEvidenceAnalysis
+          ? "EVIDENCE_ANALYSIS_V1"
+          : hasStatuteAnalysis
+            ? "STATUTE_ANALYSIS_V1"
+            : "LEGAL_QUERY_V1";
 
   const requiredFreshResources = hasProcess
     ? [...PROCESS_PLEADING_RESOURCES]
