@@ -1,6 +1,7 @@
 name: Lex Windows Online Installer
 
 on:
+  workflow_call:
   pull_request:
     paths:
       - "app/installer/**"
