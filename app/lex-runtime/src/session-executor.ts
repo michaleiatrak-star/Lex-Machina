@@ -82,6 +82,10 @@ import {
   type AuxiliaryRoutingConfig,
   type AuxiliaryRoutingSummary
 } from "./auxiliary-model-scheduler.js";
+import {
+  applyAutomaticVerificationMarkers,
+  planAutomaticLegalVerification
+} from "./gate-i-auto-verification.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -726,6 +730,50 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
+    const automaticVerificationPlan =
+      planAutomaticLegalVerification(
+        execution.output,
+        ledger
+      );
+    let automaticVerificationExecuted = 0;
+
+    if (
+      automaticVerificationPlan.calls.length > 0 &&
+      verificationTools
+    ) {
+      const results =
+        await verificationTools.runTools(
+          automaticVerificationPlan.calls
+        );
+      automaticVerificationExecuted =
+        results.length;
+    }
+
+    const automaticVerification =
+      applyAutomaticVerificationMarkers(
+        execution.output,
+        ledger
+      );
+
+    audit.record(
+      "gate",
+      "G39I_AUTO_POST_DRAFT_VERIFICATION",
+      automaticVerificationPlan.calls.length > 0 &&
+      !verificationTools
+        ? "BLOCKED"
+        : "OK",
+      {
+        planned:
+          automaticVerificationPlan.calls.length,
+        executed:
+          automaticVerificationExecuted,
+        insertedMarkers:
+          automaticVerification.inserted,
+        skipped:
+          automaticVerificationPlan.skipped
+      }
+    );
+
     if (verificationTools) {
       for (const toolEvent of verificationTools.auditEvents()) {
         audit.record(
@@ -743,7 +791,7 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     const processedDocumentCitations =
       processDocumentCitationMarkers(
-        execution.output,
+        automaticVerification.text,
         citationSources
       );
     audit.record(
