@@ -77,14 +77,13 @@ $vcFirewallRule = $null
 
 try {
   Write-Host "Extracting verified offline runtime bundle"
-  $tar = Get-Command tar.exe -ErrorAction SilentlyContinue
-  if ($tar) {
-    & $tar.Source -xf $bundle -C $stage
-    if ($LASTEXITCODE -ne 0) {
-      throw "OFFLINE_BUNDLE_EXTRACT_FAILED:$LASTEXITCODE"
-    }
-  } else {
-    Expand-Archive -LiteralPath $bundle -DestinationPath $stage -Force
+  $extractor = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "extract-offline-zip.ps1"
+  if (-not (Test-Path -LiteralPath $extractor -PathType Leaf)) {
+    throw "OFFLINE_BUNDLE_EXTRACTOR_MISSING"
+  }
+  & $extractor -ArchivePath $bundle -DestinationPath $stage
+  if ($LASTEXITCODE -ne 0) {
+    throw "OFFLINE_BUNDLE_EXTRACT_FAILED:$LASTEXITCODE"
   }
 
   $lockPath = Join-Path $stage "component-lock.json"
