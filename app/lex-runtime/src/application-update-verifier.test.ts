@@ -8,9 +8,11 @@ import {
   it
 } from "vitest";
 import {
+  applicationUpdateSignatureMode,
   assertApplicationInstallerVersion,
   normalizeApplicationProductVersion,
-  trustedUpdateSignerThumbprints
+  trustedUpdateSignerThumbprints,
+  WindowsAuthenticodeInstallerVerifier
 } from "./application-update-verifier.js";
 
 const roots: string[] = [];
@@ -154,6 +156,71 @@ describe(
         ).toThrow(
           "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
         );
+      }
+    );
+
+    it(
+      "allows the explicit temporary unsigned policy while keeping signer lookup fail-closed",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
+            trustedSignerThumbprints: [],
+            temporaryUnsignedAllowed: true
+          });
+
+        expect(
+          applicationUpdateSignatureMode(
+            path
+          )
+        ).toBe("OPTIONAL");
+        expect(() =>
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
+        );
+      }
+    );
+
+    it(
+      "returns an explicit unsigned receipt identity after ProductVersion verification",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
+            trustedSignerThumbprints: [],
+            temporaryUnsignedAllowed: true
+          });
+        const verifier =
+          new WindowsAuthenticodeInstallerVerifier(
+            undefined,
+            path,
+            () => {
+              throw new Error(
+                "AUTHENTICODE_MUST_NOT_BE_REQUIRED"
+              );
+            },
+            () => "0.1.4.0"
+          );
+
+        expect(
+          verifier.verify(
+            "fixture.exe",
+            "0.1.4"
+          )
+        ).toEqual({
+          verification:
+            "UNSIGNED_ALLOWED",
+          subject: null,
+          thumbprint: null,
+          productVersion: "0.1.4",
+          warning:
+            "TEMPORARY_UNSIGNED_UPDATE_ALLOWED"
+        });
       }
     );
 
