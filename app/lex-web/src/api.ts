@@ -493,6 +493,13 @@ export type ProviderStatusResponse = {
   providers: ProviderConfigurationStatus[];
 };
 
+export type ModelRoutingPreferences = {
+  auxiliaryEnabled: boolean;
+  auxiliaryProvider: ProviderId;
+  auxiliaryModel: string;
+  updatedAt?: string;
+};
+
 export type UpdateStatusResponse = {
   currentVersion: string;
   status:
@@ -583,6 +590,29 @@ export type SessionExecutionResponse = {
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
   provider: ProviderId;
   model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: {
+      enabled: boolean;
+      provider: ProviderId;
+      model: string;
+      status:
+        | "DISABLED"
+        | "SKIPPED_NO_ELIGIBLE_TASK"
+        | "SKIPPED_SAME_AS_PRIMARY"
+        | "PASS"
+        | "FAILED";
+      tasks: Array<
+        "LEGAL_REFERENCE_PREFLIGHT"
+      >;
+      extractedCandidates: number;
+      deterministicVerifications: number;
+      error?: string;
+    };
+  };
   primarySkill: string;
   answer?: string;
   documentCitationFreshness?: {
@@ -1757,6 +1787,32 @@ export function getProviderStatus(): Promise<ProviderStatusResponse> {
   return json<ProviderStatusResponse>("/api/providers");
 }
 
+export function getModelRoutingPreferences():
+  Promise<ModelRoutingPreferences> {
+  return json<ModelRoutingPreferences>(
+    "/api/model-routing/preferences"
+  );
+}
+
+export function setModelRoutingPreferences(
+  input: ModelRoutingPreferences
+): Promise<ModelRoutingPreferences> {
+  return json<ModelRoutingPreferences>(
+    "/api/model-routing/preferences",
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        auxiliaryEnabled:
+          input.auxiliaryEnabled,
+        auxiliaryProvider:
+          input.auxiliaryProvider,
+        auxiliaryModel:
+          input.auxiliaryModel
+      })
+    }
+  );
+}
+
 export function validateRoute(
   primarySkill: string
 ): Promise<RouteValidationResponse> {
@@ -1831,6 +1887,7 @@ export function executeSession(input: {
   provider: ProviderId;
   model: string;
   primarySkill: string;
+  auxiliaryText?: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
   knowledge?: {
