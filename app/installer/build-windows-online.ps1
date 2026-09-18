@@ -53,6 +53,7 @@ New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
+  "extract-offline-zip.ps1",
   "app-update-transaction.ps1",
   "app-update-verification.ps1",
   "install-local-llm.ps1",
