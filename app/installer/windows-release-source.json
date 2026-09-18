@@ -163,9 +163,9 @@
     "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
-    "applicationUpdateSigning": "TEMPORARY: unsigned application updates are allowed after SHA-256 and ProductVersion verification. Switch applicationUpdate.verification back to SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER before production trust enforcement.",
-    "skillUpdateSigning": "TEMPORARY: skill index signatures are optional; index schema, compatibility, bundle SHA-256 and structural validation remain mandatory.",
-    "modelPackUpdateSigning": "TEMPORARY: model-pack index signatures are optional; index schema, compatibility and model SHA-256 remain mandatory."
+    "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
+    "skillUpdateSigning": "Skill self-update is fail-closed until a production Ed25519 public key is committed to the skill trust root and the release index is signed by the matching private key.",
+    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key."
   },
   "modelPackUpdate": {
     "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
