@@ -8,6 +8,7 @@ on:
       - "app/installer/windows-release-source.json"
       - "app/installer/sign-windows-artifact.ps1"
       - "app/installer/sign-windows-artifact-selftest.ps1"
+      - "app/installer/untrusted-authenticode-selftest.ps1"
       - "app/installer/polish-nsis-language-selftest.ps1"
       - "app/lex-desktop/src-tauri/windows/Polish.nsh"
       - "app/lex-desktop/src-tauri/tauri.offline.conf.json"
@@ -40,6 +41,10 @@ jobs:
       - name: G39J Authenticode fail-closed policy
         shell: pwsh
         run: ./app/installer/sign-windows-artifact-selftest.ps1
+
+      - name: G39J reject valid but untrusted Authenticode signer
+        shell: pwsh
+        run: ./app/installer/untrusted-authenticode-selftest.ps1
 
       - name: Polish NSIS maintenance language contract
         shell: pwsh
