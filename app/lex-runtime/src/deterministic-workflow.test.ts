@@ -916,6 +916,85 @@ describe("deterministic legal workflow", () => {
   );
 
   it(
+    "keeps a short chronology finding flexible without forcing the full report",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "chronologia-sprawy-v1"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "Najwcześniejsze pewne zdarzenie wynika z DOK-01; pełna oś nie jest jeszcze prezentowana."
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "enforces the canonical full chronology report structure only when claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "chronologia-sprawy-v1"
+        );
+
+      const complete = [
+        "## CHRONOLOGIA SPRAWY — test",
+        "### INWENTARYZACJA DOKUMENTÓW",
+        "### OŚ CZASU — WĄTEK [W1]: główny",
+        "### OŚ CZASU — WIDOK ZBIORCZY (CROSS-WĄTEK)",
+        "### FAKTY BEZSPORNE",
+        "### INDEKS SPRZECZNOŚCI",
+        "### ZDARZENIA WYDEDUKOWANE — REJESTR",
+        "### LUKI CZASOWE",
+        "### ZDARZENIA NIEUSTALONE CHRONOLOGICZNIE",
+        "### REKOMENDACJE DO PISMA"
+      ].join("\n");
+
+      const pass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+        );
+      expect(pass.result)
+        .toBe("PASS");
+      expect(pass.mode)
+        .toBe("CHRONOLOGY_FINAL");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+            .replace(
+              "### LUKI CZASOWE\n",
+              ""
+            )
+            .replace(
+              "### FAKTY BEZSPORNE\n### INDEKS SPRZECZNOŚCI",
+              "### INDEKS SPRZECZNOŚCI\n### FAKTY BEZSPORNE"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("LUKI CZASOWE");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
+  it(
     "keeps the short contract-analysis format flexible",
     () => {
       const registry = fixture();
