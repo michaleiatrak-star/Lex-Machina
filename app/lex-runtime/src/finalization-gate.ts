@@ -57,6 +57,8 @@ export type FinalizationReport = {
 };
 
 const VERIFIED_MARKER = /✅\s*\[VER:/iu;
+const VERIFIED_MARKER_TOKEN =
+  /✅\s*\[VER:[^\]\r\n]+\]/giu;
 const UNVERIFIED_MARKER = /⚠️?\s*\[NIEWERYFIKOWANE\]/iu;
 const CASE_QUOTE_MARKER =
   /✅\s*\[CASE-QUOTE:([a-f0-9]{20})\]/giu;
@@ -146,6 +148,49 @@ export class FinalizationGate {
     const caseSupportFindings: CaseSupportFinding[] = [];
 
     for (const reference of references) {
+      const lineMarkers =
+        reference.lineText.match(
+          VERIFIED_MARKER_TOKEN
+        ) ?? [];
+      const allowedLineMarkers =
+        new Set(
+          references
+            .filter(
+              (candidate) =>
+                candidate.line ===
+                  reference.line
+            )
+            .map(
+              (candidate) =>
+                ledger.latest(
+                  candidate.claim
+                )
+            )
+            .filter(
+              (
+                candidate
+              ): candidate is VerificationRecord =>
+                candidate?.status ===
+                  "VERIFIED"
+            )
+            .map(
+              expectedVerificationMarker
+            )
+            .filter(
+              (
+                marker
+              ): marker is string =>
+                Boolean(marker)
+            )
+        );
+      const unexpectedLineMarker =
+        lineMarkers.some(
+          (marker) =>
+            !allowedLineMarkers.has(
+              marker
+            )
+        );
+
       const record = ledger.latest(reference.claim);
       if (!record) {
         findings.push({
@@ -169,9 +214,10 @@ export class FinalizationGate {
           });
         } else if (
           !expectedMarker ||
-          !reference.lineText.includes(
+          !lineMarkers.includes(
             expectedMarker
-          )
+          ) ||
+          unexpectedLineMarker
         ) {
           findings.push({
             reference,
