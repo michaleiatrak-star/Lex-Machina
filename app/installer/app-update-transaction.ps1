@@ -50,7 +50,7 @@ function Assert-SimpleToken([string]$Value, [string]$Code, [string]$Extension) {
     -not $Value.EndsWith($Extension, [StringComparison]::OrdinalIgnoreCase) -or
     $Value -notmatch '^[A-Za-z0-9._-]+$'
   ) {
-    throw "$Code:$Value"
+    throw ($Code + ":" + $Value)
   }
 }
 
