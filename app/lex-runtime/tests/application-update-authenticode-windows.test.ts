@@ -55,7 +55,24 @@ function powershell(
       {
         encoding: "utf8",
         windowsHide: true,
-        timeout: 120_000
+        timeout: 120_000,
+        env: (() => {
+          const env = {
+            ...process.env
+          };
+          for (
+            const key
+            of Object.keys(env)
+          ) {
+            if (
+              key.toLowerCase() ===
+                "psmodulepath"
+            ) {
+              delete env[key];
+            }
+          }
+          return env;
+        })()
       }
     );
   if (
