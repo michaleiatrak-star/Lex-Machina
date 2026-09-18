@@ -179,6 +179,22 @@ export class DynamicModelCatalog {
       : undefined;
   }
 
+  async localTokenCalibration(
+    modelId: string
+  ) {
+    const contextWindow =
+      this.localContextWindow(
+        modelId
+      );
+    if (!contextWindow) {
+      return undefined;
+    }
+    return await this.localModels
+      .tokenCalibration(
+        modelId
+      );
+  }
+
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
     if (provider === "openai") {
       const local = this.listConfiguredLocalOpenAiModels();
