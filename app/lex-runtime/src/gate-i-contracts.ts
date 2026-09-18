@@ -7,6 +7,7 @@ import type {
 
 export type GateIStateModel =
   | "DURABLE_CASE"
+  | "DURABLE_SESSION"
   | "CHAT_TURN"
   | "SCHEMA_PIPELINE";
 
@@ -72,6 +73,24 @@ const CONTRACTS:
       ],
       mandatoryPolicies: [
         ...COMMON
+      ]
+    },
+    LEGAL_GUIDE_V1: {
+      stateModel:
+        "DURABLE_SESSION",
+      canonicalStages: [
+        "SESSION_STATE",
+        "ACTIVE_GUIDE_STEP",
+        "SOURCE_VERIFICATION",
+        "OUTPUT_GUARD",
+        "FINALIZE"
+      ],
+      mandatoryPolicies: [
+        ...COMMON,
+        "DOMAIN_LOCK",
+        "RATE_COMPLETENESS",
+        "IRREVERSIBLE_ACTION_WARNING",
+        "OUTPUT_SCHEMA"
       ]
     },
     SIMPLE_LETTER_V1: {
