@@ -147,6 +147,14 @@ type LocalProvisionTransaction = {
   startedAt: string;
 };
 
+type InactiveModelUpdateTransaction = {
+  schemaVersion: 1;
+  targetModelId: string;
+  hadPreviousConfig: boolean;
+  hadPreviousQualification: boolean;
+  startedAt: string;
+};
+
 export type LocalHardwareProfile = {
   platform: NodeJS.Platform;
   arch: string;
@@ -461,6 +469,7 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_PORT_INVALID");
     }
     this.recoverInterruptedProvision();
+    this.recoverInterruptedInactiveModelUpdate();
   }
 
   listModels(): LocalModelDescriptor[] {
