@@ -157,6 +157,11 @@ import {
   requireContractExecutionPermit,
   type ContractExecutionPermit
 } from "../contract-analysis-execution-gate.js";
+import {
+  buildWorkflowAuditArtifact,
+  parseWorkflowAuditArtifact,
+  type StatefulWorkflowAuditId
+} from "../workflow-audit-artifact.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -484,8 +489,10 @@ export type LexHttpAppOptions = {
   >;
   secureCaseArtifactStore?: Pick<
     SecureCaseArtifactStore,
+    | "saveArtifact"
     | "listArtifacts"
     | "readArtifact"
+    | "deleteArtifact"
   >;
   caseAccessService?: Pick<
     LocalCaseAccessService,
@@ -509,6 +516,88 @@ export type LexHttpAppOptions = {
     | "withCaseDataKey"
   >;
 };
+
+async function persistWorkflowAuditArtifact(
+  args: {
+    store: Pick<
+      SecureCaseArtifactStore,
+      | "saveArtifact"
+      | "deleteArtifact"
+    >;
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    createdByUserId: string;
+    workflowId:
+      StatefulWorkflowAuditId;
+    checkpoint: string;
+    result:
+      SessionExecutionResponse;
+  }
+): Promise<{
+  artifactId: string;
+  auditRef: string;
+  sha256: string;
+  bytes: number;
+}> {
+  const payload =
+    buildWorkflowAuditArtifact({
+      caseId:
+        args.caseId,
+      workflowId:
+        args.workflowId,
+      checkpoint:
+        args.checkpoint,
+      result:
+        args.result
+    });
+
+  try {
+    const artifact =
+      await args.store
+        .saveArtifact({
+          caseId:
+            args.caseId,
+          filename:
+            [
+              "workflow-audit",
+              args.workflowId
+                .toLowerCase(),
+              args.checkpoint
+                .toLowerCase(),
+              args.result
+                .sessionId
+            ].join("-") +
+            ".json",
+          mediaType:
+            "application/vnd.lexmachina.workflow-audit+json",
+          data:
+            payload,
+          caseDataKey:
+            args.caseDataKey,
+          keyVersion:
+            args.keyVersion,
+          sensitivity:
+            "PROTECTED",
+          createdByUserId:
+            args.createdByUserId
+        });
+
+    return {
+      artifactId:
+        artifact.artifactId,
+      auditRef:
+        "artifact://" +
+        artifact.artifactId,
+      sha256:
+        artifact.sha256,
+      bytes:
+        artifact.bytes
+    };
+  } finally {
+    payload.fill(0);
+  }
+}
 
 
 function sendReauthorizationError(
