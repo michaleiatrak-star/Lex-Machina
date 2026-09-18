@@ -519,6 +519,7 @@ export type ApplicationUpdateDownloadResponse = {
     verification: "AUTHENTICODE";
     subject: string;
     thumbprint: string;
+    productVersion: string;
   };
 };
 
