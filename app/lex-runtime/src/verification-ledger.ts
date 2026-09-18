@@ -28,6 +28,9 @@ export type VerificationRecord = {
   toolCallId?: string;
   verificationMethod?: VerificationMethod;
   temporalMode?: "CURRENT" | "HISTORICAL";
+  temporalFreshnessStatus?: "CURRENT" | "HISTORICAL";
+  freshnessCheckedAt?: string;
+  currentEli?: string;
   asOf?: string;
   sourceFormat?: "TEXT" | "PDF";
   caseScope?:
