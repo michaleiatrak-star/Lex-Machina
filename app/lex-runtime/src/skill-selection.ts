@@ -252,15 +252,33 @@ function explicitExecutionSkillHints(
     )
     .map((rule) => rule.skill);
 
+  let resolved = matched;
   if (
-    matched.includes("pisma-procesowe-v3") &&
-    matched.includes("pisma-proste-v2")
+    resolved.includes("pisma-procesowe-v3") &&
+    resolved.includes("pisma-proste-v2")
   ) {
-    return matched.filter(
+    resolved = resolved.filter(
       (skill) => skill !== "pisma-proste-v2"
     );
   }
-  return matched;
+
+  // A specific case-law research request (find/verify judgment,
+  // jurisprudential line) must control the workflow instead of the
+  // broader court-analysis rule that can also match the word "wyrok".
+  if (
+    resolved.includes("orzeczenia-sadowe-v2")
+  ) {
+    resolved = [
+      "orzeczenia-sadowe-v2",
+      ...resolved.filter(
+        (skill) =>
+          skill !== "orzeczenia-sadowe-v2" &&
+          skill !== "analiza-sadowa-v6"
+      )
+    ];
+  }
+
+  return resolved;
 }
 
 function scoreSkill(
