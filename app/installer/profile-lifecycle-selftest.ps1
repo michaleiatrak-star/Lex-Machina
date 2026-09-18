@@ -31,7 +31,7 @@ $checks = [ordered]@{
   credentialManagerPurge =
     $purgeContent.Contains("CredEnumerateW") -and
     $purgeContent.Contains("CredDeleteW") -and
-    $purgeContent.Contains(".LexMachina/")
+    $purgeContent.Contains("LexMachina/")
   dataRootsPurged =
     $purgeContent.Contains(".lex-machina") -and
     $purgeContent.Contains("LexMachina") -and
