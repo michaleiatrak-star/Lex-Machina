@@ -116,6 +116,10 @@ import {
   type ProcessExecutionPermit
 } from "../process-pleading-execution-gate.js";
 import {
+  PROCESS_AUTO_MAX_STEPS,
+  runBoundedProcessAutoSequence
+} from "../process-pleading-auto-runner.js";
+import {
   applyDeterministicProcessApplicability,
   evidenceInventoryFromUploads,
   type ProcessEvidenceInventory
@@ -5780,6 +5784,367 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           permit,
           state: state!
         };
+      }
+
+      if (
+        processContext?.permit.mode ===
+          "AUTO" &&
+        options.caseAccessService &&
+        options.processWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              processContext.caseId
+            );
+
+        const refreshCitations =
+          async (
+            result:
+              SessionExecutionResponse
+          ) => {
+            if (
+              !result.documentCitations ||
+              result.documentCitations
+                .length === 0
+            ) {
+              return;
+            }
+            if (!options.documentService) {
+              throw new Error(
+                "DOCUMENT_CITATION_SOURCE_UNAVAILABLE"
+              );
+            }
+            const checked =
+              await refreshDocumentCitations({
+                result,
+                documentService:
+                  options.documentService,
+                caseAccessService:
+                  options.caseAccessService!,
+                actor
+              });
+            result.documentCitationFreshness = {
+              result: "PASS",
+              checked
+            };
+          };
+
+        const auto =
+          await runBoundedProcessAutoSequence<
+            SessionExecutionResponse
+          >({
+            initialState:
+              processContext.state,
+            prepareState:
+              async (expected) =>
+                await options
+                  .caseAccessService!
+                  .withCaseDataKey(
+                    actor,
+                    processContext!
+                      .caseId,
+                    "WRITE",
+                    async (
+                      caseDataKey
+                    ) => {
+                      const current =
+                        await options
+                          .processWorkflowStore!
+                          .getProcessPleadingState({
+                            caseId:
+                              processContext!
+                                .caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView
+                                .keyVersion
+                          });
+                      if (
+                        !current ||
+                        current.revision !==
+                          expected.revision
+                      ) {
+                        throw new Error(
+                          "PROCESS_PLEADING_STATE_CONFLICT"
+                        );
+                      }
+
+                      let inventory:
+                        ProcessEvidenceInventory = {
+                          fileCount:
+                            null,
+                          complete:
+                            false,
+                          source:
+                            "UNAVAILABLE"
+                        };
+
+                      if (
+                        options
+                          .secureCaseUploadStore
+                      ) {
+                        const uploads =
+                          await options
+                            .secureCaseUploadStore
+                            .listUploads({
+                              caseId:
+                                processContext!
+                                  .caseId,
+                              caseDataKey,
+                              keyVersion:
+                                caseView
+                                  .keyVersion
+                            });
+                        inventory =
+                          evidenceInventoryFromUploads(
+                            uploads,
+                            "ENCRYPTED_CASE_UPLOADS"
+                          );
+                      } else if (
+                        options
+                          .caseFileStore
+                          ?.listUploads
+                      ) {
+                        const uploads =
+                          await options
+                            .caseFileStore
+                            .listUploads(
+                              processContext!
+                                .caseId
+                            );
+                        inventory =
+                          evidenceInventoryFromUploads(
+                            uploads,
+                            "LEGACY_CASE_UPLOADS"
+                          );
+                      }
+
+                      const applicability =
+                        applyDeterministicProcessApplicability(
+                          current,
+                          inventory
+                        );
+                      if (
+                        applicability.state
+                          .revision ===
+                        current.revision
+                      ) {
+                        return current;
+                      }
+                      return await options
+                        .processWorkflowStore!
+                        .saveProcessPleadingState({
+                          caseId:
+                            processContext!
+                              .caseId,
+                          caseDataKey,
+                          keyVersion:
+                            caseView
+                              .keyVersion,
+                          state:
+                            applicability
+                              .state,
+                          expectedRevision:
+                            current.revision
+                        });
+                    }
+                  ),
+            execute:
+              async (
+                permit
+              ) => {
+                const nodeRequest:
+                  SessionExecutionRequest = {
+                    ...request,
+                    processWorkflowContext: {
+                      stage:
+                        permit.stage,
+                      checkpoint:
+                        permit.checkpoint,
+                      mode:
+                        permit.mode
+                    }
+                  };
+                const nodeResult =
+                  await options
+                    .sessionExecutor!
+                    .execute(
+                      nodeRequest
+                    );
+                await refreshCitations(
+                  nodeResult
+                );
+                const commit =
+                  nodeResult.status ===
+                    "DRAFT_PRESENTABLE" &&
+                  nodeResult.workflow
+                    ?.id ===
+                    "PROCESS_PLEADING_V1" &&
+                  nodeResult.workflow
+                    .result ===
+                    "PASS";
+                return {
+                  result:
+                    nodeResult,
+                  commit
+                };
+              },
+            persist:
+              async (
+                previous,
+                next
+              ) =>
+                await options
+                  .caseAccessService!
+                  .withCaseDataKey(
+                    actor,
+                    processContext!
+                      .caseId,
+                    "WRITE",
+                    async (
+                      caseDataKey
+                    ) => {
+                      const current =
+                        await options
+                          .processWorkflowStore!
+                          .getProcessPleadingState({
+                            caseId:
+                              processContext!
+                                .caseId,
+                            caseDataKey,
+                            keyVersion:
+                              caseView
+                                .keyVersion
+                          });
+                      if (
+                        !current ||
+                        current.revision !==
+                          previous.revision
+                      ) {
+                        throw new Error(
+                          "PROCESS_PLEADING_STATE_CONFLICT"
+                        );
+                      }
+                      return await options
+                        .processWorkflowStore!
+                        .saveProcessPleadingState({
+                          caseId:
+                            processContext!
+                              .caseId,
+                          caseDataKey,
+                          keyVersion:
+                            caseView
+                              .keyVersion,
+                          state:
+                            next,
+                          expectedRevision:
+                            previous
+                              .revision
+                        });
+                    }
+                  )
+          });
+
+        const lastSuccessful =
+          auto.steps.at(-1)
+            ?.result;
+        const response =
+          auto.blockedResult ??
+          lastSuccessful;
+        if (!response) {
+          throw new Error(
+            "PROCESS_PLEADING_AUTO_RESULT_MISSING"
+          );
+        }
+
+        const successfulAnswers =
+          auto.steps
+            .filter(
+              (step) =>
+                typeof step.result
+                  .answer ===
+                  "string" &&
+                step.result.answer
+                  .trim()
+            )
+            .map(
+              (step) =>
+                [
+                  `## ${step.permit.checkpoint}`,
+                  step.result.answer!
+                    .trim()
+                ].join("\n\n")
+            );
+
+        if (
+          response.status ===
+            "DRAFT_PRESENTABLE" &&
+          successfulAnswers.length > 0
+        ) {
+          response.answer =
+            successfulAnswers.join(
+              "\n\n---\n\n"
+            );
+        }
+
+        response.processAuto = {
+          maxSteps:
+            PROCESS_AUTO_MAX_STEPS,
+          stopped:
+            auto.stopped,
+          limitReached:
+            auto.limitReached,
+          steps:
+            auto.steps.map(
+              (step) => ({
+                stage:
+                  step.permit.stage,
+                checkpoint:
+                  step.permit
+                    .checkpoint,
+                revisionAfter:
+                  step.revisionAfter,
+                status:
+                  step.result.status,
+                ...(typeof step
+                  .result.answer ===
+                    "string"
+                  ? {
+                      answer:
+                        step.result
+                          .answer
+                    }
+                  : {})
+              })
+            )
+        };
+        response.processWorkflow = {
+          caseId:
+            processContext.caseId,
+          mode:
+            auto.state.mode,
+          revision:
+            auto.state.revision,
+          stage:
+            auto.state.stage,
+          documentStatus:
+            auto.state
+              .documentStatus,
+          pendingCheckpoint:
+            auto.state
+              .pendingCheckpoint,
+          checkpoints: {
+            ...auto.state
+              .checkpoints
+          }
+        };
+
+        res.json(response);
+        return;
       }
 
       const result =
