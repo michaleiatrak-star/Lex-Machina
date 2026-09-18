@@ -74,6 +74,7 @@
     "localLlm": [
       {
         "id": "local/mistral-nemo-12b-q4km",
+        "updateFamily": "MISTRAL",
         "displayName": "Mistral NeMo 12B Instruct Q4_K_M",
         "sourceModel": "mistralai/Mistral-Nemo-Instruct-2407",
         "ggufRepository": "second-state/Mistral-Nemo-Instruct-2407-GGUF",
@@ -94,6 +95,7 @@
       },
       {
         "id": "local/bielik-11b-v3-q4km",
+        "updateFamily": "BIELIK",
         "displayName": "Bielik 11B v3 Instruct Q4_K_M",
         "sourceModel": "speakleash/Bielik-11B-v3.0-Instruct",
         "ggufRepository": "speakleash/Bielik-11B-v3.0-Instruct-GGUF",
