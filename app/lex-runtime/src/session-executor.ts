@@ -88,9 +88,9 @@ import {
 } from "./gate-i-auto-verification.js";
 import {
   evaluateGateIInputCompleteness,
-  evaluateGateISubgates,
+  evaluateGateIWorkflowContract,
   gateIWorkflowContract,
-  type GateISubgateReport
+  type GateIWorkflowContractReport
 } from "./gate-i-contracts.js";
 import type {
   OrderedCaseWorkflowId
@@ -285,7 +285,7 @@ export type SessionExecutionResponse = {
     missingResources: string[];
   };
   gateI?: GateIInvariantReport;
-  gateISubgates?: GateISubgateReport;
+  gateIWorkflowContract?: GateIWorkflowContractReport;
   gateITurn?: GateITurnState;
   context?: ContextBudgetReport;
   courtWorkflow?: {
@@ -872,7 +872,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         execution.workflowPlan,
         processedDocumentCitations.text,
         request.processWorkflowContext ||
-        request.courtWorkflowContext
+        request.courtWorkflowContext ||
+        request.orderedCaseWorkflowContext
           ? {
               ...(request.processWorkflowContext
                 ? {
@@ -887,6 +888,14 @@ export class SafeSessionExecutor implements SessionExecutor {
                     courtCheckpoint:
                       request
                         .courtWorkflowContext
+                        .checkpoint
+                  }
+                : {}),
+              ...(request.orderedCaseWorkflowContext
+                ? {
+                    orderedCheckpoint:
+                      request
+                        .orderedCaseWorkflowContext
                         .checkpoint
                   }
                 : {})
@@ -1044,68 +1053,78 @@ export class SafeSessionExecutor implements SessionExecutor {
         execution.workflowPlan
           .executionSkill
       );
-    const durableStateContextPresent =
-      execution.workflowPlan.id ===
-        "PROCESS_PLEADING_V1"
-        ? Boolean(
-            request
-              .processWorkflowContext
-          )
-        : execution.workflowPlan.id ===
-            "COURT_ANALYSIS_V1"
-          ? Boolean(
+
+    const stateTransition:
+      | "PASS"
+      | "BLOCKED"
+      | "NOT_APPLICABLE" =
+      gateIContract.stateModel ===
+        "DURABLE_CASE"
+        ? (
+            (
+              execution.workflowPlan.id ===
+                "PROCESS_PLEADING_V1" &&
+              request
+                .processWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "COURT_ANALYSIS_V1" &&
               request
                 .courtWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "CHRONOLOGY_V1" &&
+              request
+                .chronologyWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "CONTRACT_ANALYSIS_V1" &&
+              request
+                .contractWorkflowContext
             )
-          : execution.workflowPlan.id ===
-              "CHRONOLOGY_V1"
-            ? Boolean(
-                request
-                  .chronologyWorkflowContext
-              )
-            : execution.workflowPlan.id ===
-                "CONTRACT_ANALYSIS_V1"
-              ? Boolean(
-                  request
-                    .contractWorkflowContext
-                )
-              : true;
+          )
+          ? "PASS"
+          : "BLOCKED"
+        : gateIContract.stateModel ===
+            "CASE_BOUND_WHEN_AVAILABLE"
+          ? request
+              .orderedCaseWorkflowContext
+            ? "PASS"
+            : "NOT_APPLICABLE"
+          : "NOT_APPLICABLE";
 
-    const gateISubgates =
-      evaluateGateISubgates({
+    const gateIWorkflowContractReport =
+      evaluateGateIWorkflowContract({
         contract:
           gateIContract,
         invariants:
           gateI,
         input:
           gateIInput,
-        outputPass:
-          !workflowOutputBlocked &&
-          !guideOutputBlocked &&
-          !reportBlueprintBlocked,
-        stateTransitionPass:
-          durableStateContextPresent,
-        finalizationPass:
-          finalization.result ===
-            "PASS"
+        stateTransition
       });
-    const gateISubgatesBlocked =
-      gateISubgates.result ===
+    const gateIWorkflowContractBlocked =
+      gateIWorkflowContractReport.result ===
         "BLOCKED";
 
     audit.record(
       "gate",
-      gateISubgates.gate,
-      gateISubgatesBlocked
+      gateIWorkflowContractReport.gate,
+      gateIWorkflowContractBlocked
         ? "BLOCKED"
         : "OK",
       {
         workflow:
-          gateISubgates.workflow,
+          gateIWorkflowContractReport.workflow,
         stateModel:
-          gateISubgates.stateModel,
-        subgates:
-          gateISubgates.subgates
+          gateIWorkflowContractReport.stateModel,
+        commonInvariants:
+          gateIWorkflowContractReport.commonInvariants,
+        checks:
+          gateIWorkflowContractReport.checks
       }
     );
 
@@ -1336,7 +1355,7 @@ export class SafeSessionExecutor implements SessionExecutor {
       guideOutputBlocked ||
       reportBlueprintBlocked ||
       gateIBlocked ||
-      gateISubgatesBlocked;
+      gateIWorkflowContractBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -1456,7 +1475,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         missingResources: workflowReads.missing
       },
       gateI,
-      gateISubgates,
+      gateIWorkflowContract:
+        gateIWorkflowContractReport,
       gateITurn
     };
 
