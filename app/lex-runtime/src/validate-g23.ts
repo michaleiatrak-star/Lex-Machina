@@ -41,6 +41,61 @@ const lexRoot =
 const DR02 =
   "dr-02-prawo-cywilne-rodzinne-gospodarcze";
 
+const CASE_LAW_WORKFLOW_RESOURCES = [
+  "shared/MCP-INTEGRACJA.md",
+  "shared/SYGNATURY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+] as const;
+
+async function satisfyCaseLawWorkflowPreflight(
+  params: ProviderStreamParams,
+  idPrefix: string
+): Promise<void> {
+  const readTool =
+    params.tools?.find(
+      (candidate) =>
+        candidate.function.name ===
+        "read_legal_resource"
+    );
+  if (!readTool || !params.runTools) {
+    throw new Error(
+      "G23_CASE_LAW_PREFLIGHT_TOOL_MISSING"
+    );
+  }
+
+  const results =
+    await params.runTools(
+      CASE_LAW_WORKFLOW_RESOURCES.map(
+        (resource, index) => ({
+          id:
+            `${idPrefix}-case-law-read-${index + 1}`,
+          name:
+            readTool.function.name,
+          input: {
+            skill:
+              "orzeczenia-sadowe-v2",
+            path: resource
+          }
+        })
+      )
+    );
+
+  for (const result of results) {
+    const payload =
+      JSON.parse(
+        result.content ?? "{}"
+      ) as {
+        status?: string;
+      };
+    if (payload.status !== "OK") {
+      throw new Error(
+        "G23_CASE_LAW_PREFLIGHT_FAILED"
+      );
+    }
+  }
+}
+
 const signature =
   "III CZP 25/11";
 
@@ -136,6 +191,10 @@ implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    await satisfyCaseLawWorkflowPreflight(
+      params,
+      "g23"
+    );
     if (
       this.mode ===
       "fake-marker"
