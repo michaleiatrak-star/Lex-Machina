@@ -72,41 +72,141 @@ function powershell(
   return result.stdout.trim();
 }
 
+function findSignTool(): string {
+  const where = spawnSync(
+    path.join(
+      process.env.SystemRoot ??
+        "C:\\Windows",
+      "System32",
+      "where.exe"
+    ),
+    ["signtool.exe"],
+    {
+      encoding: "utf8",
+      windowsHide: true,
+      timeout: 10_000
+    }
+  );
+  const fromPath =
+    where.status === 0
+      ? where.stdout
+          .split(/\r?\n/)
+          .map((line) =>
+            line.trim()
+          )
+          .find((line) =>
+            line &&
+            fs.existsSync(line)
+          )
+      : undefined;
+  if (fromPath) {
+    return fromPath;
+  }
+
+  const programFilesX86 =
+    process.env[
+      "ProgramFiles(x86)"
+    ] ??
+    "C:\\Program Files (x86)";
+  const binRoot =
+    path.join(
+      programFilesX86,
+      "Windows Kits",
+      "10",
+      "bin"
+    );
+  if (
+    fs.existsSync(binRoot)
+  ) {
+    const versions =
+      fs.readdirSync(
+        binRoot,
+        {
+          withFileTypes: true
+        }
+      )
+        .filter(
+          (entry) =>
+            entry.isDirectory()
+        )
+        .map(
+          (entry) =>
+            entry.name
+        )
+        .sort()
+        .reverse();
+    for (
+      const version
+      of versions
+    ) {
+      const candidate =
+        path.join(
+          binRoot,
+          version,
+          "x64",
+          "signtool.exe"
+        );
+      if (
+        fs.existsSync(
+          candidate
+        )
+      ) {
+        return candidate;
+      }
+    }
+  }
+
+  throw new Error(
+    "WINDOWS_AUTHENTICODE_TEST_SIGNTOOL_MISSING"
+  );
+}
+
 function createTrustedTestSigner(
   target: string
 ): string {
+  const root =
+    path.dirname(target);
+  const pfx =
+    path.join(
+      root,
+      "foreign-signer.pfx"
+    );
+  const password =
+    "LexMachina-CI-" +
+    Math.random()
+      .toString(16)
+      .slice(2);
   const command = [
     "$ErrorActionPreference='Stop'",
-    `$target=${psLiteral(target)}`,
+    `$pfx=${psLiteral(pfx)}`,
+    `$password=${psLiteral(password)}`,
     "$rsa=[System.Security.Cryptography.RSA]::Create(2048)",
     "$dn=[System.Security.Cryptography.X509Certificates.X500DistinguishedName]::new('CN=Lex Machina CI Foreign Signer')",
     "$req=[System.Security.Cryptography.X509Certificates.CertificateRequest]::new($dn,$rsa,[System.Security.Cryptography.HashAlgorithmName]::SHA256,[System.Security.Cryptography.RSASignaturePadding]::Pkcs1)",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509KeyUsageExtension]::new([System.Security.Cryptography.X509Certificates.X509KeyUsageFlags]::DigitalSignature,$true))",
     "$oids=[System.Security.Cryptography.OidCollection]::new()",
     "$null=$oids.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
     "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
-    "$stores=@('My','Root','TrustedPublisher')",
+    "$stores=@('Root','TrustedPublisher')",
     "foreach($storeName in $stores){",
     "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
     "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
     "  try { $store.Add($cert) } finally { $store.Close() }",
     "}",
-    "$signed=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
-    "if ($signed.Status -ne 'Valid') { throw ('TEST_SIGNATURE_NOT_VALID:' + $signed.Status) }",
-    "$check=Get-AuthenticodeSignature -LiteralPath $target",
-    "if ($check.Status -ne 'Valid') { throw ('TEST_SIGNATURE_RECHECK_NOT_VALID:' + $check.Status) }",
+    "$bytes=$cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
+    "[IO.File]::WriteAllBytes($pfx,$bytes)",
     "$thumb=$cert.Thumbprint",
+    "[Array]::Clear($bytes,0,$bytes.Length)",
     "$cert.Dispose()",
     "$rsa.Dispose()",
     "$thumb"
   ].join("; ");
 
   const output =
-    powershell(
-      command
-    )
+    powershell(command)
       .split(/\r?\n/)
       .map((line) =>
         line.trim()
@@ -124,6 +224,75 @@ function createTrustedTestSigner(
       "WINDOWS_AUTHENTICODE_TEST_THUMBPRINT_INVALID"
     );
   }
+
+  const signTool =
+    findSignTool();
+  const signed =
+    spawnSync(
+      signTool,
+      [
+        "sign",
+        "/fd",
+        "SHA256",
+        "/f",
+        pfx,
+        "/p",
+        password,
+        target
+      ],
+      {
+        encoding: "utf8",
+        windowsHide: true,
+        timeout: 30_000
+      }
+    );
+  if (
+    signed.status !== 0
+  ) {
+    throw new Error(
+      [
+        "WINDOWS_AUTHENTICODE_TEST_SIGN_FAILED",
+        signed.stdout.trim(),
+        signed.stderr.trim()
+      ]
+        .filter(Boolean)
+        .join(":")
+    );
+  }
+
+  const verified =
+    spawnSync(
+      signTool,
+      [
+        "verify",
+        "/pa",
+        "/all",
+        target
+      ],
+      {
+        encoding: "utf8",
+        windowsHide: true,
+        timeout: 30_000
+      }
+    );
+  if (
+    verified.status !== 0
+  ) {
+    throw new Error(
+      [
+        "WINDOWS_AUTHENTICODE_TEST_VERIFY_FAILED",
+        verified.stdout.trim(),
+        verified.stderr.trim()
+      ]
+        .filter(Boolean)
+        .join(":")
+    );
+  }
+
+  fs.rmSync(
+    pfx,
+    { force: true }
+  );
   testThumbprints.push(
     output.toUpperCase()
   );
