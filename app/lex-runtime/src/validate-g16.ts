@@ -47,6 +47,66 @@ class VerificationProvider implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    const readTool = params.tools?.find(
+      (tool) =>
+        tool.function.name ===
+          "read_legal_resource"
+    );
+    const verificationTool = params.tools?.find(
+      (tool) =>
+        tool.function.name ===
+          "verify_legal_reference"
+    );
+    if (
+      !readTool ||
+      !verificationTool ||
+      !params.runTools
+    ) {
+      throw new Error(
+        "G16_REQUIRED_TOOL_MISSING"
+      );
+    }
+
+    const statuteResources = [
+      "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/HIERARCHIA-ZRODEL.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ] as const;
+
+    const readResults =
+      await params.runTools(
+        statuteResources.map(
+          (resource, index) => ({
+            id:
+              `g16-${this.mode}-read-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "analizator-przepisow-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+
+    if (
+      readResults.length !==
+        statuteResources.length ||
+      readResults.some(
+        (result) =>
+          typeof result.content !==
+            "string" ||
+          !result.content.trim()
+      )
+    ) {
+      throw new Error(
+        "G16_STATUTE_PREFLIGHT_READ_FAILED"
+      );
+    }
+
     if (this.mode === "fake-marker") {
       return {
         fullText:
@@ -54,37 +114,42 @@ class VerificationProvider implements ProviderAdapter {
       };
     }
 
-    const verificationTool = params.tools?.find(
-      (tool) => tool.function.name === "verify_legal_reference"
-    );
-    if (!verificationTool || !params.runTools) {
-      throw new Error("G16_VERIFICATION_TOOL_MISSING");
-    }
+    const toolResults:
+      NormalizedToolResult[] =
+        await params.runTools([{
+          id:
+            `g16-${this.mode}-verify-1`,
+          name:
+            verificationTool
+              .function.name,
+          input: {
+            claim:
+              "art. 5 KC",
+            kind:
+              "statute",
+            act:
+              "KC"
+          }
+        }]);
 
-    const toolResults: NormalizedToolResult[] =
-      await params.runTools([{
-        id: `g16-${this.mode}-tool-1`,
-        name: verificationTool.function.name,
-        input: {
-          claim: "art. 5 KC",
-          kind: "statute",
-          act: "KC"
-        }
-      }]);
-
-    const raw = toolResults[0]?.content ?? "{}";
-    const toolPayload = JSON.parse(raw) as {
-      status?: string;
-      marker?: string;
-    };
+    const raw =
+      toolResults[0]?.content ??
+      "{}";
+    const toolPayload =
+      JSON.parse(raw) as {
+        status?: string;
+        marker?: string;
+      };
 
     const marker =
-      typeof toolPayload.marker === "string"
+      typeof toolPayload.marker ===
+        "string"
         ? toolPayload.marker
         : "⚠️ [NIEWERYFIKOWANE]";
 
     return {
-      fullText: `Znaczenie ma art. 5 KC. ${marker}`
+      fullText:
+        `Znaczenie ma art. 5 KC. ${marker}`
     };
   }
 }
