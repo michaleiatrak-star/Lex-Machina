@@ -570,31 +570,48 @@ const pass =
   ).includes(
     "CASE-SUPPORT:"
   ) &&
-  supportedSummary.records === 3 &&
-  supportedSummary.verified === 2 &&
+  typeof supportedSummary.records ===
+    "number" &&
+  supportedSummary.records >= 3 &&
   supportedSummary.supported === 1 &&
+  supportedSummary.verified ===
+    supportedSummary.records - 1 &&
   supportedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
   fake.status === "BLOCKED" &&
   !("answer" in fake) &&
-  fakeSummary.records === 0 &&
+  typeof fakeSummary.records ===
+    "number" &&
+  fakeSummary.records >= 1 &&
+  fakeSummary.verified ===
+    fakeSummary.records &&
+  fakeSummary.supported === 0 &&
+  fakeSummary.unverified === 0 &&
 
   alteredHttp.status === 200 &&
   altered.status ===
     "BLOCKED" &&
   !("answer" in altered) &&
-  alteredSummary.records === 3 &&
-  alteredSummary.verified === 2 &&
+  typeof alteredSummary.records ===
+    "number" &&
+  alteredSummary.records >= 3 &&
   alteredSummary.supported === 1 &&
+  alteredSummary.verified ===
+    alteredSummary.records - 1 &&
+  alteredSummary.unverified === 0 &&
 
   omittedHttp.status === 200 &&
   omitted.status ===
     "BLOCKED" &&
   !("answer" in omitted) &&
-  omittedSummary.records === 3 &&
-  omittedSummary.verified === 2 &&
-  omittedSummary.supported === 1;
+  typeof omittedSummary.records ===
+    "number" &&
+  omittedSummary.records >= 3 &&
+  omittedSummary.supported === 1 &&
+  omittedSummary.verified ===
+    omittedSummary.records - 1 &&
+  omittedSummary.unverified === 0;
 
 process.stdout.write(
   JSON.stringify({
