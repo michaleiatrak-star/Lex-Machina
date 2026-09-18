@@ -1,6 +1,7 @@
 name: Lex Runtime Validation
 
 on:
+  workflow_call:
   pull_request:
     paths:
       - "app/lex-runtime/**"
