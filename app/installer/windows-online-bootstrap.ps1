@@ -121,7 +121,7 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
   Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
   $args = @(
-    "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
+    "/quiet", "InstallAllUsers=0", "TargetDir=`"$pythonDir`"", "Include_launcher=0",
     "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
     "Include_pip=1", "PrependPath=0", "Shortcuts=0"
   )
@@ -131,7 +131,16 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   }
 }
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
-  throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
+  $pythonVersionActual = if (Test-Path -LiteralPath $pythonExe -PathType Leaf) {
+    try {
+      (& $pythonExe --version 2>&1 | Select-Object -First 1).ToString().Trim()
+    } catch {
+      "EXECUTION_FAILED:$($_.Exception.Message)"
+    }
+  } else {
+    "MISSING:$pythonExe"
+  }
+  throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonVersionActual"
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"
