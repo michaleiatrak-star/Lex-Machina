@@ -393,9 +393,12 @@ if (issues.length > 0) {
     unverified.status === "BLOCKED" &&
     unverified.finalization === "DEGRADED" &&
     !("answer" in unverified) &&
-    unverifiedSummary.records === 1 &&
+    typeof unverifiedSummary.records === "number" &&
+    unverifiedSummary.records >= 1 &&
     unverifiedSummary.verified === 0 &&
-    unverifiedSummary.unverified === 1;
+    unverifiedSummary.supported === 0 &&
+    unverifiedSummary.unverified ===
+      unverifiedSummary.records;
 
   process.stdout.write(
     JSON.stringify({
