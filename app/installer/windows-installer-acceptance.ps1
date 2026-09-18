@@ -356,6 +356,32 @@ try {
     if (-not (Test-Path -LiteralPath $authDb -PathType Leaf)) {
       throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_NOT_BOOTSTRAPPED:$authDb"
     }
+
+    $adminProbe = @'
+const { DatabaseSync } = require("node:sqlite");
+const db = new DatabaseSync(process.argv[1], { readOnly: true });
+try {
+  const rows = db.prepare(
+    "SELECT login_name, app_role, status FROM users ORDER BY created_at, user_id"
+  ).all();
+  if (
+    rows.length !== 1 ||
+    rows[0].login_name !== "local-admin" ||
+    rows[0].app_role !== "ADMIN" ||
+    rows[0].status !== "ACTIVE"
+  ) {
+    process.stderr.write("CLEAN_ADMIN_INVALID:" + JSON.stringify(rows));
+    process.exit(2);
+  }
+  process.stdout.write("CLEAN_ADMIN_PASS");
+} finally {
+  db.close();
+}
+'@
+    & $privateNode -e $adminProbe $authDb | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+      throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_INVALID"
+    }
   } finally {
     if ($desktop -and -not $desktop.HasExited) {
       Stop-Process -Id $desktop.Id -Force -ErrorAction SilentlyContinue
