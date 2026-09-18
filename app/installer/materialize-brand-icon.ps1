@@ -1,6 +1,6 @@
 param(
-  [string]$SourceImagePath = (
-    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.jpg"
+  [string]$SourceChunkDirectory = (
+    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/brand-source-b64"
   ),
   [string]$OutputIconPath = (
     Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$expectedSourceSha256 = "1cb02043e7ae64df0b2cb04270b7211bba8ab4238e5ca8bfad9c50fb2caadaf3"
+$expectedSourceSha256 = "9af951fd535e9d77765b3b5893d19a3e5cdb204f9b71d9995305ed91e758b162"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
@@ -20,64 +20,113 @@ function Get-Sha256Hex([byte[]]$Bytes) {
   }
 }
 
-$sourceFile = (Resolve-Path -LiteralPath $SourceImagePath).Path
-$sourceBytes = [IO.File]::ReadAllBytes($sourceFile)
+function Read-U32BigEndian([byte[]]$Data, [int]$Offset) {
+  return (
+    ([uint32]$Data[$Offset] -shl 24) -bor
+    ([uint32]$Data[$Offset + 1] -shl 16) -bor
+    ([uint32]$Data[$Offset + 2] -shl 8) -bor
+    ([uint32]$Data[$Offset + 3])
+  )
+}
+
+$chunkRoot = (Resolve-Path -LiteralPath $SourceChunkDirectory).Path
+$chunks = @(Get-ChildItem -LiteralPath $chunkRoot -File -Filter "*.txt" | Sort-Object Name)
+if ($chunks.Count -ne 6) {
+  throw "LEX_BRAND_SOURCE_CHUNK_COUNT_INVALID:$($chunks.Count)"
+}
+$encoded = [string]::Concat(@(
+  $chunks | ForEach-Object {
+    (Get-Content -Raw -LiteralPath $_.FullName).Trim()
+  }
+))
+try {
+  $sourceBytes = [Convert]::FromBase64String($encoded)
+} catch {
+  throw "LEX_BRAND_SOURCE_BASE64_INVALID"
+}
 $actualSourceSha256 = Get-Sha256Hex $sourceBytes
 if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
 }
 
-Add-Type -AssemblyName WindowsBase
-Add-Type -AssemblyName PresentationCore
+$pngSignature = [byte[]](0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A)
+if ($sourceBytes.Length -lt 24) {
+  throw "LEX_BRAND_SOURCE_TOO_SMALL"
+}
+for ($i = 0; $i -lt $pngSignature.Length; $i++) {
+  if ($sourceBytes[$i] -ne $pngSignature[$i]) {
+    throw "LEX_BRAND_SOURCE_NOT_PNG"
+  }
+}
+$sourceWidth = [int](Read-U32BigEndian $sourceBytes 16)
+$sourceHeight = [int](Read-U32BigEndian $sourceBytes 20)
+if ($sourceWidth -ne 256 -or $sourceHeight -ne 256) {
+  throw "LEX_BRAND_SOURCE_DIMENSIONS_INVALID width=$sourceWidth height=$sourceHeight"
+}
 
-$sourceStream = [IO.MemoryStream]::new($sourceBytes, $false)
 $frames = [Collections.Generic.List[byte[]]]::new()
+$decoderMode = "WPF_RESAMPLED"
+
 try {
+  Add-Type -AssemblyName WindowsBase
+  Add-Type -AssemblyName PresentationCore
+
+  $sourceStream = [IO.MemoryStream]::new($sourceBytes, $false)
   try {
-    $decoder = [Windows.Media.Imaging.BitmapDecoder]::Create(
+    $decoder = [System.Windows.Media.Imaging.PngBitmapDecoder]::new(
       $sourceStream,
-      [Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
-      [Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+      [System.Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
+      [System.Windows.Media.Imaging.BitmapCacheOption]::OnLoad
     )
-  } catch {
-    throw "LEX_BRAND_SOURCE_DECODE_FAILED:$($_.Exception.Message)"
-  }
-
-  if ($decoder.Frames.Count -lt 1) {
-    throw "LEX_BRAND_SOURCE_FRAME_MISSING"
-  }
-  $sourceBitmap = $decoder.Frames[0]
-  if ($sourceBitmap.PixelWidth -ne 256 -or $sourceBitmap.PixelHeight -ne 256) {
-    throw "LEX_BRAND_SOURCE_DIMENSIONS_INVALID width=$($sourceBitmap.PixelWidth) height=$($sourceBitmap.PixelHeight)"
-  }
-
-  foreach ($size in $sizes) {
-    $scale = [double]$size / 256.0
-    $bitmap = if ($size -eq 256) {
-      $sourceBitmap
-    } else {
-      [Windows.Media.Imaging.TransformedBitmap]::new(
-        $sourceBitmap,
-        [Windows.Media.ScaleTransform]::new($scale, $scale)
-      )
+    if ($decoder.Frames.Count -lt 1) {
+      throw "LEX_BRAND_WPF_FRAME_MISSING"
+    }
+    $sourceBitmap = $decoder.Frames[0]
+    if ($sourceBitmap.PixelWidth -ne 256 -or $sourceBitmap.PixelHeight -ne 256) {
+      throw "LEX_BRAND_WPF_DIMENSIONS_INVALID width=$($sourceBitmap.PixelWidth) height=$($sourceBitmap.PixelHeight)"
     }
 
-    $encoder = [Windows.Media.Imaging.PngBitmapEncoder]::new()
-    $encoder.Frames.Add([Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
-    $frameStream = [IO.MemoryStream]::new()
-    try {
-      $encoder.Save($frameStream)
-      $frameBytes = $frameStream.ToArray()
-      if ($frameBytes.Length -lt 24) {
-        throw "LEX_BRAND_FRAME_TOO_SMALL:$size"
+    foreach ($size in $sizes) {
+      $scale = [double]$size / 256.0
+      $bitmap = if ($size -eq 256) {
+        $sourceBitmap
+      } else {
+        [System.Windows.Media.Imaging.TransformedBitmap]::new(
+          $sourceBitmap,
+          [System.Windows.Media.ScaleTransform]::new($scale, $scale)
+        )
       }
-      $frames.Add($frameBytes)
-    } finally {
-      $frameStream.Dispose()
+
+      $encoder = [System.Windows.Media.Imaging.PngBitmapEncoder]::new()
+      $encoder.Frames.Add([System.Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
+      $frameStream = [IO.MemoryStream]::new()
+      try {
+        $encoder.Save($frameStream)
+        $frameBytes = $frameStream.ToArray()
+        if ($frameBytes.Length -lt 24) {
+          throw "LEX_BRAND_WPF_FRAME_TOO_SMALL:$size"
+        }
+        $frames.Add($frameBytes)
+      } finally {
+        $frameStream.Dispose()
+      }
     }
+  } finally {
+    $sourceStream.Dispose()
   }
-} finally {
-  $sourceStream.Dispose()
+} catch {
+  # ICO supports PNG-compressed frames. If a runner cannot initialize WPF,
+  # preserve the canonical verified source as the payload for each nominal
+  # size. Windows/NSIS can scale the 256px PNG while the ICO directory remains
+  # deterministic and complete.
+  Write-Warning "WPF icon resampling unavailable; using canonical PNG payload fallback: $($_.Exception.Message)"
+  $decoderMode = "CANONICAL_PNG_FALLBACK"
+  $frames.Clear()
+  foreach ($size in $sizes) {
+    $copy = [byte[]]::new($sourceBytes.Length)
+    [Array]::Copy($sourceBytes, $copy, $sourceBytes.Length)
+    $frames.Add($copy)
+  }
 }
 
 if ($frames.Count -ne $sizes.Count) {
@@ -125,7 +174,8 @@ Move-Item -LiteralPath $temp -Destination $output -Force
 $iconBytes = [IO.File]::ReadAllBytes($output)
 
 Write-Host "LEX_BRAND_ICON_READY:$output"
+Write-Host "LEX_BRAND_SOURCE_MODE:BASE64_CHUNKS"
 Write-Host "LEX_BRAND_SOURCE_SHA256:$actualSourceSha256"
 Write-Host "LEX_BRAND_ICON_SHA256:$(Get-Sha256Hex $iconBytes)"
 Write-Host "LEX_BRAND_ICON_SIZES:$($sizes -join ',')"
-Write-Host "LEX_BRAND_ICON_MODE:WPF_RESAMPLED"
+Write-Host "LEX_BRAND_ICON_MODE:$decoderMode"
