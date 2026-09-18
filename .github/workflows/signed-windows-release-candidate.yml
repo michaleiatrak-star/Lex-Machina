@@ -223,3 +223,10 @@ jobs:
             app/installer/windows-release-source.json
           if-no-files-found: error
           retention-days: 14
+
+
+  build-signed-offline-release-candidate:
+    uses: ./.github/workflows/offline-windows-installer.yml
+    with:
+      signed: true
+    secrets: inherit
