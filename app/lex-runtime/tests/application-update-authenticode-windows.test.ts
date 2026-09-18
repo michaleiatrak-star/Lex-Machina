@@ -77,6 +77,10 @@ function createTrustedTestSigner(
 ): string {
   const command = [
     "$ErrorActionPreference='Stop'",
+    "Import-Module Microsoft.PowerShell.Security -ErrorAction Stop",
+    "Import-Module PKI -ErrorAction Stop",
+    "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { New-PSDrive -Name Cert -PSProvider Certificate -Root '\\\\' -Scope Global | Out-Null }",
+    "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { throw 'CERTIFICATE_PROVIDER_UNAVAILABLE' }",
     `$target=${psLiteral(target)}`,
     "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina CI Foreign Signer' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyExportPolicy Exportable -KeyLength 2048 -HashAlgorithm SHA256 -NotAfter (Get-Date).AddDays(2)",
     "$root=New-Object System.Security.Cryptography.X509Certificates.X509Store('Root','CurrentUser')",
@@ -140,6 +144,8 @@ function cleanupCertificate(
     powershell(
       [
         "$ErrorActionPreference='SilentlyContinue'",
+        "Import-Module Microsoft.PowerShell.Security -ErrorAction SilentlyContinue",
+        "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { New-PSDrive -Name Cert -PSProvider Certificate -Root '\\\\' -Scope Global -ErrorAction SilentlyContinue | Out-Null }",
         `$thumb=${psLiteral(escaped)}`,
         "foreach($store in @('My','Root','TrustedPublisher')) {",
         "  $item='Cert:\\CurrentUser\\' + $store + '\\' + $thumb",
