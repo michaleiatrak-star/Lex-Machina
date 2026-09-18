@@ -64,6 +64,20 @@
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalator nie zawiera natywnego sidecara runtime." /SD IDOK
     Abort
 
+  ; Every interactive installation offers an explicit clean-profile path.
+  ; Silent CI/update installs default to preserving current user data.
+  MessageBox MB_ICONQUESTION|MB_YESNO "Czy chcesz rozpocząć z całkowicie czystym profilem administratora?$\r$\n$\r$\nTAK usunie wszystkie dotychczasowe profile Lex Machina, sprawy, hasła lokalne, zapisane klucze API, Local AI i ustawienia bieżącego użytkownika. Po instalacji zostanie utworzone nowe czyste konto administratora.$\r$\n$\r$\nNIE zachowa istniejący profil (aktualizacja/naprawa)." /SD IDNO IDNO lex_clean_profile_done
+  DetailPrint "Lex Machina: czyszczenie profilu przed utworzeniem nowego administratora..."
+  nsExec::ExecToStack '"$INSTDIR\runtime\lex-runtime-sidecar.exe" --purge-user-state'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się bezpiecznie usunąć starego profilu.$\r$\n$1$\r$\n$\r$\nInstalacja została zatrzymana, aby nie pozostawić mieszanego stanu kont." /SD IDOK
+    Abort
+  ${EndIf}
+  DetailPrint "Lex Machina: czysty profil gotowy; pierwsze uruchomienie utworzy nowe konto administratora."
+lex_clean_profile_done:
+
   IfFileExists "$EXEDIR\LexMachina-Offline-Runtime.zip" lex_offline_bundle lex_online_bootstrap
 
 lex_offline_bundle:
@@ -108,6 +122,23 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  MessageBox MB_ICONEXCLAMATION|MB_YESNO "Pełna deinstalacja Lex Machina usunie program oraz wszystkie dane bieżącego użytkownika: profile i konta, sprawy i dokumenty, lokalne hasła i recovery, zapisane klucze API, Local AI, ustawienia i dane tymczasowe.$\r$\n$\r$\nTej operacji nie można cofnąć. Kontynuować?" /SD IDYES IDYES lex_full_uninstall_confirmed
+  Abort
+
+lex_full_uninstall_confirmed:
+  IfFileExists "$INSTDIR\runtime\lex-runtime-sidecar.exe" +3 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: brak narzędzia bezpiecznego czyszczenia profilu. Deinstalacja została zatrzymana, aby nie pozostawić profili lub haseł." /SD IDOK
+    Abort
+
+  DetailPrint "Lex Machina: usuwanie profili, spraw, haseł, kluczy API, Local AI i ustawień..."
+  nsExec::ExecToStack '"$INSTDIR\runtime\lex-runtime-sidecar.exe" --purge-user-state'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: pełne czyszczenie danych nie powiodło się.$\r$\n$1$\r$\n$\r$\nDeinstalacja została zatrzymana, aby nie zgłosić sukcesu przy pozostawionych profilach lub hasłach." /SD IDOK
+    Abort
+  ${EndIf}
+
+  DetailPrint "Lex Machina: dane użytkownika usunięte. Usuwanie prywatnego runtime programu."
   RMDir /r "$INSTDIR\runtime"
 !macroend
