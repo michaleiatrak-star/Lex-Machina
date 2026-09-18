@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import type { LegalCorpusAuditEvent } from "./legal-corpus-tool-runtime.js";
 import type { LexSkillRegistry } from "./registry.js";
+import type { ProcessPleadingCheckpoint } from "./process-pleading-state.js";
 
 export type DeterministicWorkflowId =
   | "LEGAL_QUERY_V1"
@@ -41,7 +42,9 @@ export type DeterministicWorkflowOutputReport = {
   mode:
     | "NOT_APPLICABLE"
     | "INTAKE_REQUIRED"
-    | "READY_ARTIFACT";
+    | "READY_ARTIFACT"
+    | "PROCESS_CHECKPOINT"
+    | "PROCESS_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -136,6 +139,14 @@ const SIMPLE_LETTER_READY_MARKERS = [
   "CO DALEJ",
   "HYBRID-VALIDATION"
 ] as const;
+
+const PROCESS_PLEADING_FINAL_MARKERS = [
+  "RAPORT W3",
+  "STATUS PISMA",
+  "UWAGI REDAKCYJNE PRZED ZŁOŻENIEM",
+  "REJESTR KROKÓW"
+] as const;
+
 
 function assertReadableResource(
   registry: LexSkillRegistry,
@@ -317,6 +328,13 @@ export function deterministicWorkflowPrompt(
           "The HYBRID-VALIDATION section must include the final count statement 'Pismo zawiera ... pól do uzupełnienia.'."
         ]
       : []),
+    ...(plan.id === "PROCESS_PLEADING_V1"
+      ? [
+          "PROCESS_PLEADING_V1 output state is runtime-enforced.",
+          "Do not claim STATUS PISMA: GOTOWE before the final CP-PEER checkpoint.",
+          "At CP-PEER the finalization package must expose RAPORT W3 → STATUS PISMA → UWAGI REDAKCYJNE PRZED ZŁOŻENIEM → REJESTR KROKÓW."
+        ]
+      : []),
     ...(plan.escalatedFromSimpleLetter
       ? [
           "Both simple and process pleading skills were selected. The stricter PROCESS_PLEADING_V1 workflow controls this turn."
@@ -327,8 +345,107 @@ export function deterministicWorkflowPrompt(
 
 export function evaluateDeterministicWorkflowOutput(
   plan: DeterministicWorkflowPlan,
-  text: string
+  text: string,
+  context?: {
+    processCheckpoint?:
+      ProcessPleadingCheckpoint;
+  }
 ): DeterministicWorkflowOutputReport {
+  const normalized =
+    text
+      .normalize("NFC")
+      .toLocaleUpperCase("pl");
+
+  if (
+    plan.id ===
+      "PROCESS_PLEADING_V1"
+  ) {
+    const finalCheckpoint =
+      context?.processCheckpoint ===
+        "CP-PEER";
+
+    if (!finalCheckpoint) {
+      const prematureFinalStatus =
+        /STATUS\s+PISMA\s*[:=]\s*(?:✅\s*)?(?:FINAL\s*[—-]\s*)?GOTOWE(?:\s+DO\s+ZŁOŻENIA)?/u
+          .test(normalized);
+      return {
+        workflow: plan.id,
+        mode:
+          "PROCESS_CHECKPOINT",
+        required: [],
+        observed:
+          prematureFinalStatus
+            ? [
+                "PREMATURE_FINAL_STATUS"
+              ]
+            : [],
+        missing:
+          prematureFinalStatus
+            ? [
+                "CP-PEER_REQUIRED_FOR_FINAL_STATUS"
+              ]
+            : [],
+        orderValid:
+          !prematureFinalStatus,
+        result:
+          prematureFinalStatus
+            ? "BLOCKED"
+            : "PASS"
+      };
+    }
+
+    const required = [
+      ...PROCESS_PLEADING_FINAL_MARKERS
+    ];
+    const observed =
+      PROCESS_PLEADING_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      PROCESS_PLEADING_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      PROCESS_PLEADING_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode: "PROCESS_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
   if (plan.id !== "SIMPLE_LETTER_V1") {
     return {
       workflow: plan.id,
@@ -341,16 +458,13 @@ export function evaluateDeterministicWorkflowOutput(
     };
   }
 
-  const normalized =
-    text
-      .normalize("NFC")
-      .toLocaleUpperCase("pl");
+  const normalizedSimple = normalized;
   const intakeRequired =
-    normalized.includes(
+    normalizedSimple.includes(
       "DANE DO UZUPEŁNIENIA"
     );
   const hasLetterBody =
-    normalized.includes(
+    normalizedSimple.includes(
       "TREŚĆ PISMA"
     );
 
@@ -380,14 +494,14 @@ export function evaluateDeterministicWorkflowOutput(
   const observed: string[] =
     SIMPLE_LETTER_READY_MARKERS
       .filter((marker) =>
-        normalized.includes(
+        normalizedSimple.includes(
           marker
         )
       );
   const missing: string[] =
     SIMPLE_LETTER_READY_MARKERS
       .filter((marker) =>
-        !normalized.includes(
+        !normalizedSimple.includes(
           marker
         )
       );
@@ -395,7 +509,7 @@ export function evaluateDeterministicWorkflowOutput(
   const positions =
     SIMPLE_LETTER_READY_MARKERS
       .map((marker) =>
-        normalized.indexOf(
+        normalizedSimple.indexOf(
           marker
         )
       );
@@ -409,10 +523,10 @@ export function evaluateDeterministicWorkflowOutput(
     );
 
   const hasCompletionCount =
-    normalized.includes(
+    normalizedSimple.includes(
       "PISMO ZAWIERA"
     ) &&
-    normalized.includes(
+    normalizedSimple.includes(
       "PÓL DO UZUPEŁNIENIA"
     );
   if (hasCompletionCount) {
