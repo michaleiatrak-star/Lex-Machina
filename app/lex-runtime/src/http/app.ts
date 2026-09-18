@@ -6355,6 +6355,119 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (
+        courtContext &&
+        options.caseAccessService &&
+        options
+          .courtAnalysisWorkflowStore
+      ) {
+        const actor =
+          responseAuthContext(res);
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              courtContext.caseId
+            );
+
+        let state =
+          courtContext.state;
+        if (
+          result.status ===
+            "DRAFT_PRESENTABLE" &&
+          result.finalization ===
+            "PASS" &&
+          result.audit.result ===
+            "PASS" &&
+          result.audit.closed ===
+            true &&
+          result.workflow?.id ===
+            "COURT_ANALYSIS_V1" &&
+          result.workflow.result ===
+            "PASS"
+        ) {
+          const auditRef =
+            [
+              "audit://session",
+              createHash("sha256")
+                .update(
+                  `${result.sessionId}\0${courtContext.permit.checkpoint}`
+                )
+                .digest("hex"),
+              courtContext.permit
+                .checkpoint
+            ].join("/");
+
+          state =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                actor,
+                courtContext.caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) => {
+                  const current =
+                    await options
+                      .courtAnalysisWorkflowStore!
+                      .getCourtAnalysisState({
+                        caseId:
+                          courtContext!
+                            .caseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  if (!current) {
+                    throw new Error(
+                      "COURT_ANALYSIS_STATE_CONFLICT"
+                    );
+                  }
+                  const next =
+                    completeCourtAnalysisExecution(
+                      current,
+                      courtContext!
+                        .permit,
+                      [auditRef]
+                    );
+                  return await options
+                    .courtAnalysisWorkflowStore!
+                    .saveCourtAnalysisState({
+                      caseId:
+                        courtContext!
+                          .caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      state: next,
+                      expectedRevision:
+                        current.revision
+                    });
+                }
+              );
+        }
+
+        result.courtWorkflow = {
+          caseId:
+            courtContext.caseId,
+          revision:
+            state.revision,
+          stage:
+            state.stage,
+          nextCheckpoint:
+            nextCourtAnalysisCheckpoint(
+              state
+            ),
+          closedCheckpoints: [
+            ...state
+              .closedCheckpoints
+          ]
+        };
+      }
+
+      if (
         processContext &&
         options.caseAccessService &&
         options.processWorkflowStore
@@ -6466,6 +6579,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       if (
         sendProcessWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        sendCourtWorkflowError(
           res,
           error
         )
