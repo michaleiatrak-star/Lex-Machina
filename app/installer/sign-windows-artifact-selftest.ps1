@@ -78,6 +78,27 @@ try {
 
   Invoke-ExpectedFailure "WINDOWS_SIGNING_SECRET_MISSING"
 
+  [IO.File]::WriteAllText(
+    $manifest,
+    (@{
+      schemaVersion = 4
+      applicationVersion = "0.1.3"
+      applicationUpdate = @{
+        verification = "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER"
+        trustedSignerThumbprints = @(
+          "1111111111111111111111111111111111111111"
+        )
+      }
+    } | ConvertTo-Json -Depth 5),
+    [Text.UTF8Encoding]::new($false)
+  )
+  $env:LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP = "1"
+  try {
+    Invoke-ExpectedFailure "WINDOWS_SIGNING_SELFTEST_SCOPE_INVALID"
+  } finally {
+    Remove-Item Env:LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP -ErrorAction SilentlyContinue
+  }
+
   if (Test-Path -LiteralPath $receipt) {
     throw "SIGNING_SELFTEST_RECEIPT_MUST_NOT_EXIST"
   }
