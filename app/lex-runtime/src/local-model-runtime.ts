@@ -947,7 +947,10 @@ export class LocalModelRuntime {
       manifestPath: string;
       beforeCommit?: () =>
         Promise<void> | void;
-    }
+    },
+    backendPreference:
+      LocalBackendPreference =
+        "AUTO"
   ): Promise<{
     model: LocalModelDescriptor;
     contextTokens: number;
@@ -971,6 +974,19 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_UNKNOWN");
     }
     this.validateContext(model, contextTokens);
+    if (
+      !isBackendPreference(
+        backendPreference
+      )
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_BACKEND_INVALID"
+      );
+    }
+    const selectedBackend =
+      this.resolveBackend(
+        backendPreference
+      );
 
     await this.stop();
     this.recoverInterruptedProvision();
@@ -1088,6 +1104,7 @@ export class LocalModelRuntime {
       } else {
         fs.rmSync(configPath, { force: true });
       }
+      this.hardwareCache = null;
     };
 
     this.provisioningProgress = {
@@ -1102,13 +1119,15 @@ export class LocalModelRuntime {
     const task = this.runProvisioner(
       canonical,
       contextTokens,
-      sourceOverride?.manifestPath
+      sourceOverride?.manifestPath,
+      selectedBackend,
+      backendPreference
     );
     this.provisioning = task;
     try {
       await task;
 
-      const config = this.readConfig();
+      let config = this.readConfig();
       if (!config || normalizeModelId(config.model.id) !== canonical) {
         throw new Error("LOCAL_MODEL_PROVISIONING_CONFIG_MISSING");
       }
@@ -1130,7 +1149,12 @@ export class LocalModelRuntime {
 
       try {
         const startupStartedAt = Date.now();
-        await this.ensureRunning(canonical);
+        config =
+          await this
+            .ensureRunningWithAutoFallback(
+              canonical,
+              config
+            );
         const tokenizerCalibration =
           await this
             .calibrateTokenizer();
@@ -1143,6 +1167,11 @@ export class LocalModelRuntime {
           contextMode:
             config.context.mode,
           engine: "llama.cpp",
+          backend:
+            configBackend(
+              config
+            ) ??
+            "CPU_X64_PORTABLE",
           startupMs:
             Math.max(
               0,
@@ -2609,7 +2638,11 @@ export class LocalModelRuntime {
   private async runProvisioner(
     modelId: string,
     contextTokens: number,
-    manifestOverride?: string
+    manifestOverride: string | undefined,
+    backend:
+      LocalBackendId,
+    backendMode:
+      LocalBackendPreference
   ): Promise<void> {
     const script = this.provisionerPath();
     const manifest =
@@ -2649,6 +2682,10 @@ export class LocalModelRuntime {
       modelId,
       "-ContextTokens",
       String(contextTokens),
+      "-Backend",
+      backend,
+      "-BackendMode",
+      backendMode,
       "-LocalAiRoot",
       this.rootDir
     ];
