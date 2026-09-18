@@ -322,8 +322,12 @@ Implemented in repo:
 - release-critical online/offline/skill-candidate workflows pin `checkout`, `setup-node` and `upload-artifact` to exact commit SHA;
 - Windows signing gate verifies that the CI PFX certificate thumbprint is already present in the committed application trust root; the signing secret cannot define its own trust root;
 - Authenticode signing requires SHA-256, RFC3161 timestamping and a post-signature verification pass;
-- negative CI self-test covers empty trust root and missing signing secret and must fail closed without producing a receipt;
-- manual signed Windows release-candidate workflow builds the online installer, signs it, runs installed-copy acceptance, generates npm CycloneDX SBOMs and Rust dependency inventory, writes a release provenance receipt and requests GitHub build-provenance attestation;
+- Tauri signed-release overlays route the main `lex-machina.exe`, signable bundled EXE/DLL resources, NSIS uninstaller and final NSIS installer through the same pinned signing wrapper during bundling rather than signing only the final installer after build;
+- signed installed-copy acceptance independently verifies valid Authenticode, timestamp and pinned signer thumbprint on the installer, installed desktop EXE, runtime sidecar and uninstaller;
+- negative CI self-test covers empty trust root and missing signing secret and must fail closed without producing a receipt; a positive CI path uses a temporary locally trusted code-signing certificate and the exact Tauri wrapper to validate successful pinned signing without exposing any production key;
+- manual signed Windows release-candidate workflow builds the online installer with Tauri-level signing, runs signed installed-copy acceptance, generates npm CycloneDX SBOMs and Rust dependency inventory, writes release provenance including per-artifact signing receipts and requests GitHub build-provenance attestation;
+- the reusable offline workflow has a `signed=true` production mode: inner NSIS payloads use the same signing overlay and the outer standalone `LexMachina-Offline-Setup.exe` is separately Authenticode-signed and accepted;
+- Windows branding is no longer the 1×1 fallback: build.rs generates a deterministic multi-size dark-green/ivory `LM` ICO; the same icon is assigned to the application executable, NSIS installer/uninstaller and standalone offline wrapper;
 - signed skill-update release-candidate workflow exists and requires an Ed25519 private key secret;
 - signed model-pack verifier, dedicated trust root, metadata builder and manual release-candidate workflow are implemented; tampered metadata, untrusted key id and unsafe model metadata are rejected in unit tests;
 - application, skill and model-pack update channels remain fail-closed while their committed production public trust roots are empty.
