@@ -16,6 +16,16 @@ export interface ApplicationInstallerVerifier {
   ): VerifiedApplicationPublisher;
 }
 
+export type AuthenticodeProbeResult = {
+  subject: string;
+  thumbprint: string;
+  productVersion: string;
+};
+
+export type AuthenticodeProbe = (
+  installerPath: string
+) => AuthenticodeProbeResult;
+
 type UpdateTrustManifest = {
   applicationUpdate?: {
     verification?: unknown;
@@ -134,71 +144,85 @@ export function trustedUpdateSignerThumbprints(
   return validateTrustedThumbprints(values);
 }
 
+function probeWindowsAuthenticode(
+  installerPath: string
+): AuthenticodeProbeResult {
+  if (process.platform !== "win32") {
+    throw new Error("APPLICATION_UPDATE_PLATFORM_UNSUPPORTED");
+  }
+  const command = [
+    "$ErrorActionPreference='Stop'",
+    "$signature=Get-AuthenticodeSignature -LiteralPath $args[0]",
+    "if ($signature.Status -ne 'Valid' -or $null -eq $signature.SignerCertificate) { exit 23 }",
+    "$version=(Get-Item -LiteralPath $args[0]).VersionInfo.ProductVersion",
+    "if ([string]::IsNullOrWhiteSpace($version)) { exit 24 }",
+    "$result=[ordered]@{subject=$signature.SignerCertificate.Subject;thumbprint=$signature.SignerCertificate.Thumbprint;productVersion=$version}",
+    "$result | ConvertTo-Json -Compress"
+  ].join("; ");
+  const result = spawnSync(
+    "powershell.exe",
+    [
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-Command",
+      command,
+      installerPath
+    ],
+    {
+      encoding: "utf8",
+      windowsHide: true,
+      timeout: 30_000,
+      env:
+        windowsPowerShellEnvironment()
+    }
+  );
+  if (result.status !== 0) {
+    throw new Error("APPLICATION_UPDATE_SIGNATURE_INVALID");
+  }
+
+  let parsed: {
+    subject?: unknown;
+    thumbprint?: unknown;
+    productVersion?: unknown;
+  };
+  try {
+    parsed = JSON.parse(result.stdout.trim()) as typeof parsed;
+  } catch {
+    throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
+  }
+  if (
+    typeof parsed.subject !== "string" ||
+    typeof parsed.thumbprint !== "string" ||
+    typeof parsed.productVersion !== "string"
+  ) {
+    throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
+  }
+  return {
+    subject: parsed.subject,
+    thumbprint: parsed.thumbprint,
+    productVersion: parsed.productVersion
+  };
+}
+
 export class WindowsAuthenticodeInstallerVerifier
 implements ApplicationInstallerVerifier {
   constructor(
     private readonly configuredTrustedThumbprints?: readonly string[],
-    private readonly manifestPath?: string
+    private readonly manifestPath?: string,
+    private readonly probe: AuthenticodeProbe =
+      probeWindowsAuthenticode
   ) {}
 
   verify(
     installerPath: string,
     expectedVersion?: string
   ): VerifiedApplicationPublisher {
-    if (process.platform !== "win32") {
-      throw new Error("APPLICATION_UPDATE_PLATFORM_UNSUPPORTED");
-    }
-    const trusted = this.configuredTrustedThumbprints
-      ? validateTrustedThumbprints(this.configuredTrustedThumbprints)
-      : trustedUpdateSignerThumbprints(this.manifestPath);
-    const command = [
-      "$ErrorActionPreference='Stop'",
-      "$signature=Get-AuthenticodeSignature -LiteralPath $args[0]",
-      "if ($signature.Status -ne 'Valid' -or $null -eq $signature.SignerCertificate) { exit 23 }",
-      "$version=(Get-Item -LiteralPath $args[0]).VersionInfo.ProductVersion",
-      "if ([string]::IsNullOrWhiteSpace($version)) { exit 24 }",
-      "$result=[ordered]@{subject=$signature.SignerCertificate.Subject;thumbprint=$signature.SignerCertificate.Thumbprint;productVersion=$version}",
-      "$result | ConvertTo-Json -Compress"
-    ].join("; ");
-    const result = spawnSync(
-      "powershell.exe",
-      [
-        "-NoProfile",
-        "-NonInteractive",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-Command",
-        command,
+    const parsed =
+      this.probe(
         installerPath
-      ],
-      {
-        encoding: "utf8",
-        windowsHide: true,
-        timeout: 30_000,
-        env:
-          windowsPowerShellEnvironment()
-      }
-    );
-    if (result.status !== 0) {
-      throw new Error("APPLICATION_UPDATE_SIGNATURE_INVALID");
-    }
-    let parsed: {
-      subject?: unknown;
-      thumbprint?: unknown;
-      productVersion?: unknown;
-    };
-    try {
-      parsed = JSON.parse(result.stdout.trim()) as typeof parsed;
-    } catch {
-      throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
-    }
-    if (
-      typeof parsed.subject !== "string" ||
-      typeof parsed.thumbprint !== "string" ||
-      typeof parsed.productVersion !== "string"
-    ) {
-      throw new Error("APPLICATION_UPDATE_SIGNATURE_RESULT_INVALID");
-    }
+      );
     const actual = normalizeThumbprint(parsed.thumbprint);
     if (!trusted.includes(actual)) {
       throw new Error("APPLICATION_UPDATE_SIGNER_NOT_TRUSTED");
