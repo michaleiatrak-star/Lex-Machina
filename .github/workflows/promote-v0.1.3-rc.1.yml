@@ -1,0 +1,200 @@
+name: Promote Lex Machina v0.1.3-rc.1 Installers
+
+on:
+  push:
+    branches:
+      - "release/v0.1.3-rc.1"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  promote-tested-installers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_SHA: e0b090ba71a9f71fde244cd72c474854b0ea2146
+      ONLINE_RUN_ID: "35341266396"
+      OFFLINE_RUN_ID: "35341266578"
+      RELEASE_TAG: "v0.1.3-rc.1"
+
+    steps:
+      - name: Wait for exact installer acceptance runs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          wait_for_run() {
+            local run_id="$1"
+            local label="$2"
+
+            for attempt in $(seq 1 240); do
+              status="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" --jq '.status')"
+              conclusion="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" --jq '.conclusion // ""')"
+              head_sha="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" --jq '.head_sha')"
+
+              echo "${label}: status=${status} conclusion=${conclusion:-pending} head_sha=${head_sha}"
+
+              if [[ "$head_sha" != "$SOURCE_SHA" ]]; then
+                echo "::error::${label} run head SHA differs from frozen release source"
+                exit 41
+              fi
+
+              if [[ "$status" == "completed" ]]; then
+                if [[ "$conclusion" != "success" ]]; then
+                  echo "::error::${label} run concluded ${conclusion}"
+                  exit 42
+                fi
+                return 0
+              fi
+
+              sleep 30
+            done
+
+            echo "::error::Timed out waiting for ${label} run ${run_id}"
+            exit 43
+          }
+
+          wait_for_run "$ONLINE_RUN_ID" "online"
+          wait_for_run "$OFFLINE_RUN_ID" "offline"
+
+      - name: Download accepted installer artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release/online release/offline
+
+          gh run download "$ONLINE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "LexMachina-Windows-Online-Installer" --dir release/online
+          gh run download "$OFFLINE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "LexMachina-Windows-Offline-Setup" --dir release/offline
+
+          find release -maxdepth 3 -type f -print
+
+      - name: Re-verify artifact hashes and normalize release filenames
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          online_sha_file="release/online/SHA256.txt"
+          offline_sha_file="release/offline/SHA256-OFFLINE.txt"
+
+          test -f "$online_sha_file"
+          test -f "$offline_sha_file"
+
+          online_exe="$(find release/online -maxdepth 1 -type f -name '*.exe' | head -n 1)"
+          offline_exe="release/offline/LexMachina-Offline-Setup.exe"
+
+          test -n "$online_exe"
+          test -f "$offline_exe"
+
+          expected_online="$(grep '^sha256=' "$online_sha_file" | head -n 1 | cut -d= -f2 | tr 'A-F' 'a-f')"
+          expected_offline="$(grep '^sha256=' "$offline_sha_file" | head -n 1 | cut -d= -f2 | tr 'A-F' 'a-f')"
+
+          actual_online="$(sha256sum "$online_exe" | awk '{print $1}')"
+          actual_offline="$(sha256sum "$offline_exe" | awk '{print $1}')"
+
+          if [[ ! "$expected_online" =~ ^[a-f0-9]{64}$ ]] || [[ "$expected_online" != "$actual_online" ]]; then
+            echo "::error::Online installer SHA-256 verification failed"
+            exit 44
+          fi
+
+          if [[ ! "$expected_offline" =~ ^[a-f0-9]{64}$ ]] || [[ "$expected_offline" != "$actual_offline" ]]; then
+            echo "::error::Offline installer SHA-256 verification failed"
+            exit 45
+          fi
+
+          cp "$online_exe" "release/LexMachina-Online-Setup.exe"
+          cp "$offline_exe" "release/LexMachina-Offline-Setup.exe"
+          cp "$online_sha_file" "release/SHA256-ONLINE.txt"
+          cp "$offline_sha_file" "release/SHA256-OFFLINE.txt"
+          cp "release/offline/component-lock-offline.json" "release/component-lock-offline.json"
+
+          release_source="$(find release/online -maxdepth 1 -type f -name 'release-source.json' | head -n 1)"
+          if [[ -n "$release_source" ]]; then
+            cp "$release_source" "release/release-source.json"
+          fi
+
+          online_bytes="$(stat -c '%s' release/LexMachina-Online-Setup.exe)"
+          offline_bytes="$(stat -c '%s' release/LexMachina-Offline-Setup.exe)"
+
+          {
+            echo "schemaVersion=1"
+            echo "release=${RELEASE_TAG}"
+            echo "source_sha=${SOURCE_SHA}"
+            echo "online_run_id=${ONLINE_RUN_ID}"
+            echo "offline_run_id=${OFFLINE_RUN_ID}"
+            echo "online_sha256=${actual_online}"
+            echo "online_bytes=${online_bytes}"
+            echo "offline_sha256=${actual_offline}"
+            echo "offline_bytes=${offline_bytes}"
+            echo "authenticode=UNSIGNED_RELEASE_CANDIDATE"
+            echo "application_update_channel=FAIL_CLOSED_UNTIL_TRUSTED_SIGNER_CONFIGURED"
+            echo "local_ai=USER_INITIATED_AFTER_INSTALL"
+          } > release/RELEASE-AUDIT.txt
+
+      - name: Create prerelease notes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > release/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.3 RC1
+
+          Release candidate built from the exact source commit that passed the dedicated online/offline installer acceptance workflows.
+
+          ### Installers
+
+          - **LexMachina-Online-Setup.exe** — small online installer; downloads the pinned private runtime components during installation.
+          - **LexMachina-Offline-Setup.exe** — standalone offline installer; installs the complete private application runtime without network access.
+
+          ### Local AI
+
+          Local models are not bundled into either application installer. After installing Lex Machina, an administrator may explicitly choose a local model in the application. Only the selected model is downloaded. The runtime validates the requested context profile on the user's machine before committing the configuration.
+
+          Context profiles are selectable in the configured 64k–200k range. Values above a model's native context are clearly marked as extended/YaRN and are accepted only after the local engine starts successfully with that profile.
+
+          ### Security / RC status
+
+          This prerelease is intentionally marked **unsigned RC**. The production application-updater trust root remains fail-closed until a pinned Authenticode production certificate is configured. The RC must not be treated as a production signed update.
+
+          Both installers were accepted by their dedicated Windows workflows and are accompanied by SHA-256 receipts. The release promotion re-checks those hashes before publication.
+
+          Source commit: `e0b090ba71a9f71fde244cd72c474854b0ea2146`
+          Online acceptance run: `35341266396`
+          Offline acceptance run: `35341266578`
+          EOF
+
+      - name: Refuse to overwrite an existing release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::Release ${RELEASE_TAG} already exists; refusing to overwrite it."
+            exit 46
+          fi
+
+      - name: Publish v0.1.3-rc.1
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          assets=(
+            "release/LexMachina-Online-Setup.exe"
+            "release/LexMachina-Offline-Setup.exe"
+            "release/SHA256-ONLINE.txt"
+            "release/SHA256-OFFLINE.txt"
+            "release/component-lock-offline.json"
+            "release/RELEASE-AUDIT.txt"
+          )
+
+          if [[ -f release/release-source.json ]]; then
+            assets+=("release/release-source.json")
+          fi
+
+          gh release create "$RELEASE_TAG"             --repo "$GITHUB_REPOSITORY"             --target "$SOURCE_SHA"             --title "Lex Machina 0.1.3 RC1"             --notes-file release/RELEASE-NOTES.md             --prerelease             "${assets[@]}"
+
+      - name: Verify published release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view "$RELEASE_TAG"             --repo "$GITHUB_REPOSITORY"             --json tagName,isPrerelease,targetCommitish,url,assets             --jq '.'
