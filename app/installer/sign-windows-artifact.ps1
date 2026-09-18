@@ -12,11 +12,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$selfTestAllowMissingTimestamp =
+$selfTestRequested =
   [Environment]::GetEnvironmentVariable(
     "LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP",
     "Process"
   ) -eq "1"
+$selfTestAllowMissingTimestamp = $false
 
 
 function Normalize-Thumbprint([string]$Value) {
@@ -61,6 +62,47 @@ if ($extension -notin @(".exe", ".dll")) {
 }
 
 $release = Get-Content -Raw -LiteralPath $manifest | ConvertFrom-Json
+
+if ($selfTestRequested) {
+  $runnerTemp = [Environment]::GetEnvironmentVariable(
+    "RUNNER_TEMP",
+    "Process"
+  )
+  if ([string]::IsNullOrWhiteSpace($runnerTemp)) {
+    throw "WINDOWS_SIGNING_SELFTEST_SCOPE_INVALID"
+  }
+
+  $runnerTempFull = [IO.Path]::GetFullPath($runnerTemp).TrimEnd('\')
+  $artifactFull = [IO.Path]::GetFullPath($artifact)
+  $manifestFull = [IO.Path]::GetFullPath($manifest)
+  $receiptFull = [IO.Path]::GetFullPath($receipt)
+  $prefix = $runnerTempFull + "\"
+
+  $artifactInRunnerTemp = $artifactFull.StartsWith(
+    $prefix,
+    [StringComparison]::OrdinalIgnoreCase
+  )
+  $manifestInRunnerTemp = $manifestFull.StartsWith(
+    $prefix,
+    [StringComparison]::OrdinalIgnoreCase
+  )
+  $receiptInRunnerTemp = $receiptFull.StartsWith(
+    $prefix,
+    [StringComparison]::OrdinalIgnoreCase
+  )
+
+  if (
+    [string]$release.applicationVersion -ne "0.0.0-test" -or
+    -not $artifactInRunnerTemp -or
+    -not $manifestInRunnerTemp -or
+    -not $receiptInRunnerTemp
+  ) {
+    throw "WINDOWS_SIGNING_SELFTEST_SCOPE_INVALID"
+  }
+
+  $selfTestAllowMissingTimestamp = $true
+}
+
 $trusted = @(
   $release.applicationUpdate.trustedSignerThumbprints |
     ForEach-Object {
