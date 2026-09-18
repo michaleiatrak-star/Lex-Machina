@@ -790,6 +790,8 @@ export class SupremeCourtCaseVerifier {
           "web_fetch",
         sourceFormat: "TEXT",
         caseScope: "FULL_TEXT",
+        caseSignature:
+          normalizedSignature,
         evidence:
           [
             "Sąd Najwyższy",
