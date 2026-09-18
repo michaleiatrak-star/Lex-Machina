@@ -59,7 +59,7 @@ if (issues.length > 0) {
   const safeHttp = await request(appWithExecutor(safeExecutor))
     .post("/api/sessions/execute")
     .send({
-      query: "Techniczny test G15 bez analizy prawnej.",
+      query: "Scenariusz kontrolny G15 alfa beta gamma.",
       provider: "openai",
       model: "g15-safe",
       primarySkill: DR02,
@@ -130,6 +130,8 @@ if (issues.length > 0) {
     typeof safe.answer === "string" &&
     safeAudit.result === "PASS" &&
     safeAudit.closed === true &&
+    (safe.workflow as Record<string, unknown> | undefined)?.id ===
+      "LEGAL_QUERY_V1" &&
     unsafeHttp.status === 200 &&
     unsafe.status === "BLOCKED" &&
     unsafe.finalization === "BLOCKED" &&
