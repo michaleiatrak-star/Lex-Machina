@@ -3,7 +3,10 @@ import {
   AuthError,
   type AuthService
 } from "../auth/service.js";
-import type { LocalModelRuntime } from "../local-model-runtime.js";
+import type {
+  LocalBackendPreference,
+  LocalModelRuntime
+} from "../local-model-runtime.js";
 import type { MaintenanceService } from "../maintenance-service.js";
 
 function authenticated(
@@ -122,9 +125,56 @@ export function registerMaintenanceRoutes(
           res.status(400).json({ error: "LOCAL_MODEL_CONTEXT_INVALID" });
           return;
         }
+
+        const runtimeBefore =
+          localModels.status();
+        const rawBackend =
+          typeof req.body
+            ?.backendPreference ===
+            "string"
+            ? req.body
+                .backendPreference
+                .trim()
+            : "";
+        const backendPreference =
+          (
+            rawBackend ||
+            runtimeBefore
+              .hardware
+              .backendSelectionMode ||
+            runtimeBefore
+              .backendPolicy
+              .default
+          ) as
+            LocalBackendPreference;
+        if (
+          !runtimeBefore
+            .backendPolicy
+            .allowed
+            .includes(
+              backendPreference
+            )
+        ) {
+          res.status(400).json({
+            error:
+              "LOCAL_MODEL_BACKEND_INVALID"
+          });
+          return;
+        }
+
+        const sameModel =
+          localModels
+            .configuredModelId() ===
+            modelId;
+        const sameBackendMode =
+          runtimeBefore
+            .hardware
+            .backendSelectionMode ===
+            backendPreference;
+
         const provisioned =
-          localModels.configuredModelId() ===
-            modelId
+          sameModel &&
+          sameBackendMode
             ? await localModels
                 .reconfigureContext(
                   modelId,
@@ -133,7 +183,9 @@ export function registerMaintenanceRoutes(
             : await localModels
                 .provision(
                   modelId,
-                  contextTokens
+                  contextTokens,
+                  undefined,
+                  backendPreference
                 );
         res.json({
           ...provisioned,
