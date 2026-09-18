@@ -118,18 +118,20 @@ describe(
           ),
           '{"qualification":"old"}'
         );
-        write(
+        const modelPackReceipt =
           path.join(
             localRoot,
-            "model-pack-install.json"
-          ),
+            "models",
+            filename +
+              ".model-pack.json"
+          );
+        write(
+          modelPackReceipt,
           '{"receipt":"new"}'
         );
         write(
-          path.join(
-            localRoot,
-            "model-pack-install.json.lex-rollback"
-          ),
+          modelPackReceipt +
+            ".lex-rollback",
           '{"receipt":"old"}'
         );
         write(
@@ -193,10 +195,7 @@ describe(
         );
         expect(
           fs.readFileSync(
-            path.join(
-              localRoot,
-              "model-pack-install.json"
-            ),
+            modelPackReceipt,
             "utf8"
           )
         ).toBe(
@@ -304,6 +303,16 @@ describe(
             path.join(
               localRoot,
               "context-qualification.json"
+            )
+          )
+        ).toBe(false);
+        expect(
+          fs.existsSync(
+            path.join(
+              localRoot,
+              "models",
+              filename +
+                ".model-pack.json"
             )
           )
         ).toBe(false);
