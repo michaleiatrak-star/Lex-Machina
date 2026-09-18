@@ -49,8 +49,9 @@ $artifact = (Resolve-Path -LiteralPath $ArtifactPath).Path
 $manifest = (Resolve-Path -LiteralPath $ManifestPath).Path
 $receipt = [IO.Path]::GetFullPath($ReceiptPath)
 
-if ([IO.Path]::GetExtension($artifact) -ne ".exe") {
-  throw "WINDOWS_SIGNING_ARTIFACT_NOT_EXE"
+$extension = [IO.Path]::GetExtension($artifact).ToLowerInvariant()
+if ($extension -notin @(".exe", ".dll")) {
+  throw "WINDOWS_SIGNING_ARTIFACT_NOT_PE"
 }
 
 $release = Get-Content -Raw -LiteralPath $manifest | ConvertFrom-Json
@@ -119,7 +120,12 @@ try {
   }
 
   $signTool = Find-SignTool
-  $temporaryPfx = Join-Path $env:RUNNER_TEMP (
+  $tempRoot = if ([string]::IsNullOrWhiteSpace($env:RUNNER_TEMP)) {
+    [IO.Path]::GetTempPath()
+  } else {
+    $env:RUNNER_TEMP
+  }
+  $temporaryPfx = Join-Path $tempRoot (
     "lex-signing-" + [guid]::NewGuid().ToString("N") + ".pfx"
   )
 
