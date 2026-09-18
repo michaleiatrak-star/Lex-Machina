@@ -135,7 +135,11 @@ export function createDeterministicWorkflowPlan(
       ? [...SIMPLE_LETTER_RESOURCES]
       : hasCourtAnalysis
         ? [...COURT_ANALYSIS_RESOURCES]
-        : [];
+        : hasEvidenceAnalysis
+          ? [...EVIDENCE_ANALYSIS_RESOURCES]
+          : hasStatuteAnalysis
+            ? [...STATUTE_ANALYSIS_RESOURCES]
+            : [];
 
   if (executionSkill) {
     const skill = registry.get(executionSkill);
