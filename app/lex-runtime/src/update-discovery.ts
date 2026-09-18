@@ -88,6 +88,23 @@ function releaseVersion(tag: string): string | null {
   return parseSemver(normalized) ? normalized : null;
 }
 
+function modelPackReleaseVersion(
+  tag: string
+): string | null {
+  const match =
+    /^model-pack-v?(\d+\.\d+\.\d+)$/i.exec(
+      tag
+    );
+  if (!match) {
+    return null;
+  }
+  return parseSemver(
+    match[1]!
+  )
+    ? match[1]!
+    : null;
+}
+
 function trustedReleaseUrl(
   value: string,
   repository: string
@@ -233,22 +250,42 @@ implements UpdateDiscovery {
         };
       }
 
-      const candidates = (payload as GitHubRelease[])
+      const releases =
+        payload as GitHubRelease[];
+      const eligible = (
+        release: GitHubRelease
+      ) =>
+        release.draft !== true &&
+        (
+          this.includePrerelease ||
+          release.prerelease !==
+            true
+        ) &&
+        typeof release.tag_name ===
+          "string" &&
+        typeof release.html_url ===
+          "string" &&
+        trustedReleaseUrl(
+          release.html_url,
+          this.repository
+        );
+
+      const candidates = releases
         .flatMap((release) => {
-          if (
-            release.draft === true ||
-            (!this.includePrerelease && release.prerelease === true) ||
-            typeof release.tag_name !== "string" ||
-            typeof release.html_url !== "string" ||
-            !trustedReleaseUrl(release.html_url, this.repository)
-          ) {
+          if (!eligible(release)) {
             return [];
           }
-          const version = releaseVersion(release.tag_name);
-          if (!version) return [];
+          const version =
+            releaseVersion(
+              release.tag_name as string
+            );
+          if (!version) {
+            return [];
+          }
           return [{
             version,
-            releaseUrl: release.html_url,
+            releaseUrl:
+              release.html_url as string,
             release,
             ...(typeof release.name === "string" && release.name.trim()
               ? { releaseName: release.name.trim().slice(0, 200) }
@@ -261,35 +298,133 @@ implements UpdateDiscovery {
               : {})
           }];
         })
-        .sort((a, b) => compareVersions(b.version, a.version));
+        .sort((a, b) =>
+          compareVersions(
+            b.version,
+            a.version
+          )
+        );
 
-      const latest = candidates[0];
+      const modelPackCandidates =
+        releases
+          .flatMap((release) => {
+            if (!eligible(release)) {
+              return [];
+            }
+            const version =
+              modelPackReleaseVersion(
+                release.tag_name as string
+              );
+            if (!version) {
+              return [];
+            }
+            const assets =
+              chooseAssets(
+                release,
+                this.repository
+              );
+            if (
+              !assets.modelPackIndex ||
+              !assets.modelPackSignature
+            ) {
+              return [];
+            }
+            return [{
+              version,
+              release,
+              assets
+            }];
+          })
+          .sort((a, b) =>
+            compareVersions(
+              b.version,
+              a.version
+            )
+          );
+
+      const latest =
+        candidates[0];
+      const dedicatedModelPack =
+        modelPackCandidates[0];
+      const applicationAssets =
+        latest
+          ? chooseAssets(
+              latest.release,
+              this.repository
+            )
+          : {};
+      const modelPackAssets =
+        dedicatedModelPack
+          ? {
+              modelPackIndex:
+                dedicatedModelPack
+                  .assets
+                  .modelPackIndex!,
+              modelPackSignature:
+                dedicatedModelPack
+                  .assets
+                  .modelPackSignature!
+            }
+          : {
+              ...(applicationAssets
+                .modelPackIndex
+                ? {
+                    modelPackIndex:
+                      applicationAssets
+                        .modelPackIndex
+                  }
+                : {}),
+              ...(applicationAssets
+                .modelPackSignature
+                ? {
+                    modelPackSignature:
+                      applicationAssets
+                        .modelPackSignature
+                  }
+                : {})
+            };
+
       if (!latest) {
         return {
-          currentVersion: this.currentVersion,
+          currentVersion:
+            this.currentVersion,
           status: "NO_RELEASE",
-          checkedAt
+          checkedAt,
+          ...modelPackAssets
         };
       }
 
-      const comparison = compareVersions(
-        this.currentVersion,
-        latest.version
-      );
-      const assets = chooseAssets(latest.release, this.repository);
+      const comparison =
+        compareVersions(
+          this.currentVersion,
+          latest.version
+        );
       return {
-        currentVersion: this.currentVersion,
-        status: comparison < 0 ? "AVAILABLE" : "UP_TO_DATE",
+        currentVersion:
+          this.currentVersion,
+        status:
+          comparison < 0
+            ? "AVAILABLE"
+            : "UP_TO_DATE",
         checkedAt,
-        latestVersion: latest.version,
-        releaseUrl: latest.releaseUrl,
+        latestVersion:
+          latest.version,
+        releaseUrl:
+          latest.releaseUrl,
         ...(latest.releaseName
-          ? { releaseName: latest.releaseName }
+          ? {
+              releaseName:
+                latest.releaseName
+            }
           : {}),
         ...(latest.publishedAt
-          ? { publishedAt: latest.publishedAt }
+          ? {
+              publishedAt:
+                latest.publishedAt
+            }
           : {}),
-        ...assets
+        ...applicationAssets,
+        ...modelPackAssets
       };
     } catch {
       return {
