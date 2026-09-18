@@ -292,10 +292,11 @@ if (issues.length > 0) {
 
     fakeMarkerHttp.status === 200 &&
     fake.status === "BLOCKED" &&
-    fake.finalization === "BLOCKED" &&
+    fake.finalization === "DEGRADED" &&
     !("answer" in fake) &&
-    fakeSummary.records === 0 &&
+    fakeSummary.records === 1 &&
     fakeSummary.verified === 0 &&
+    fakeSummary.unverified === 1 &&
 
     unverifiedHttp.status === 200 &&
     unverified.status === "BLOCKED" &&
