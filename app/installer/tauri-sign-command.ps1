@@ -6,7 +6,15 @@ param(
 $ErrorActionPreference = "Stop"
 
 $artifact = (Resolve-Path -LiteralPath $ArtifactPath).Path
-$manifest = Join-Path $PSScriptRoot "windows-release-source.json"
+$manifestOverride = [Environment]::GetEnvironmentVariable(
+  "LEX_SIGNING_MANIFEST_PATH",
+  "Process"
+)
+$manifest = if ([string]::IsNullOrWhiteSpace($manifestOverride)) {
+  Join-Path $PSScriptRoot "windows-release-source.json"
+} else {
+  [IO.Path]::GetFullPath($manifestOverride)
+}
 $signer = Join-Path $PSScriptRoot "sign-windows-artifact.ps1"
 
 if (-not (Test-Path -LiteralPath $manifest -PathType Leaf)) {
