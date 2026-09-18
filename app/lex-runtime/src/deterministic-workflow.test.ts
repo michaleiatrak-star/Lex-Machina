@@ -11,6 +11,15 @@ import { LexSkillRegistry } from "./registry.js";
 
 const roots: string[] = [];
 
+const guideResources = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/DOMAIN-LOCK.md",
+  "shared/RATE-COMPLETENESS.md",
+  "przewodnik-prawny-v2/references/TRYB-SUROWA-ANALIZA.md"
+];
+
 const simpleResources = [
   "shared/NAZEWNICTWO-STRON.md",
   "pisma-proste-v2/references/M1-zasady.md",
@@ -115,7 +124,8 @@ function fixture(): LexSkillRegistry {
     "orzeczenia-sadowe-v2",
     "przesluchanie-swiadkow-v2-min90",
     "raport-klienta-v1",
-    "raport-sytuacyjny-v2"
+    "raport-sytuacyjny-v2",
+    "przewodnik-prawny-v2"
   ]) {
     writeFile(
       root,
@@ -136,6 +146,7 @@ function fixture(): LexSkillRegistry {
   }
 
   for (const resource of [
+    ...guideResources,
     ...simpleResources,
     ...processResources,
     ...courtResources,
@@ -1182,6 +1193,7 @@ describe("deterministic legal workflow", () => {
   );
 
   it.each([
+    ["przewodnik-prawny-v2", "LEGAL_GUIDE_V1", guideResources],
     ["analizator-umow-v1", "CONTRACT_ANALYSIS_V1", contractResources],
     ["chronologia-sprawy-v1", "CHRONOLOGY_V1", chronologyResources],
     ["orzeczenia-sadowe-v2", "CASE_LAW_V1", caseLawResources],
