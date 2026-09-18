@@ -224,7 +224,7 @@ describe(
           plan.skipped[0]
             ?.reason
         ).toBe(
-          "CASE_FAMILY_AMBIGUOUS"
+          "COURT_FAMILY_AMBIGUOUS"
         );
       }
     );
