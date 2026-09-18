@@ -513,7 +513,13 @@ const pass =
   fakeHttp.status === 200 &&
   fake.status === "BLOCKED" &&
   !("answer" in fake) &&
-  fakeVerification.records === 0;
+  typeof fakeVerification.records ===
+    "number" &&
+  fakeVerification.records >= 1 &&
+  fakeVerification.verified ===
+    fakeVerification.records &&
+  fakeVerification.supported === 0 &&
+  fakeVerification.unverified === 0;
 
 process.stdout.write(
   JSON.stringify({
