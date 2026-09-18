@@ -3,6 +3,7 @@
 !macro NSIS_HOOK_PREINSTALL
   SetOutPath "$PLUGINSDIR"
   File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
+  File "/oname=lex-read-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\read-install-state.ps1"
   File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
 
   DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
