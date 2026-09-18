@@ -573,7 +573,14 @@ export class SafeSessionExecutor implements SessionExecutor {
     const workflowOutput =
       evaluateDeterministicWorkflowOutput(
         execution.workflowPlan,
-        processedDocumentCitations.text
+        processedDocumentCitations.text,
+        request.processWorkflowContext
+          ? {
+              processCheckpoint:
+                request.processWorkflowContext
+                  .checkpoint
+            }
+          : undefined
       );
     const workflowOutputBlocked =
       workflowOutput.result ===
