@@ -21,6 +21,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  runtime:
+    uses: ./.github/workflows/lex-runtime.yml
+    secrets: inherit
+
+  structural_audit:
+    uses: ./.github/workflows/f138-structural-audit.yml
+    secrets: inherit
+
   online:
     uses: ./.github/workflows/lex-installer.yml
     secrets: inherit
@@ -32,6 +40,8 @@ jobs:
   publish:
     name: Publish accepted Windows installers
     needs:
+      - runtime
+      - structural_audit
       - online
       - offline
     runs-on: ubuntu-latest
