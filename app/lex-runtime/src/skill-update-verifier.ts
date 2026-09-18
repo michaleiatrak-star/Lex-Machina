@@ -44,6 +44,7 @@ type SkillUpdateTrustManifest = {
   skillUpdate?: {
     verification?: unknown;
     trustedEd25519PublicKeys?: unknown;
+    temporaryUnsignedAllowed?: unknown;
   };
 };
 
@@ -142,10 +143,13 @@ function parseTrustedKeys(
   return result;
 }
 
-export function trustedSkillUpdateKeys(
+function skillUpdateVerificationPolicy(
   manifestPath: string =
     defaultManifestPath()
-): TrustedSkillUpdateKey[] {
+): {
+  mode: "SIGNED_REQUIRED" | "UNSIGNED_ALLOWED";
+  keys: TrustedSkillUpdateKey[];
+} {
   let manifest: SkillUpdateTrustManifest;
   try {
     manifest = JSON.parse(
@@ -161,25 +165,78 @@ export function trustedSkillUpdateKeys(
   }
 
   if (
-    manifest.skillUpdate?.verification !==
+    manifest.skillUpdate?.verification ===
       "SHA256_AND_ED25519_SIGNED_INDEX"
+  ) {
+    return {
+      mode: "SIGNED_REQUIRED",
+      keys: parseTrustedKeys(
+        manifest.skillUpdate
+          .trustedEd25519PublicKeys
+      )
+    };
+  }
+
+  if (
+    manifest.skillUpdate?.verification ===
+      "SHA256_AND_OPTIONAL_ED25519_INDEX" &&
+    manifest.skillUpdate
+      .temporaryUnsignedAllowed === true
+  ) {
+    let keys:
+      TrustedSkillUpdateKey[] = [];
+    try {
+      keys = parseTrustedKeys(
+        manifest.skillUpdate
+          .trustedEd25519PublicKeys
+      );
+    } catch {
+      keys = [];
+    }
+    return {
+      mode: "UNSIGNED_ALLOWED",
+      keys
+    };
+  }
+
+  throw new Error(
+    "SKILL_UPDATE_SIGNER_POLICY_MISSING"
+  );
+}
+
+export function skillUpdateSignatureMode(
+  manifestPath?: string
+): "SIGNED_REQUIRED" | "UNSIGNED_ALLOWED" {
+  return skillUpdateVerificationPolicy(
+    manifestPath
+  ).mode;
+}
+
+export function trustedSkillUpdateKeys(
+  manifestPath: string =
+    defaultManifestPath()
+): TrustedSkillUpdateKey[] {
+  const policy =
+    skillUpdateVerificationPolicy(
+      manifestPath
+    );
+  if (
+    policy.keys.length === 0
   ) {
     throw new Error(
       "SKILL_UPDATE_SIGNER_POLICY_MISSING"
     );
   }
-
-  return parseTrustedKeys(
-    manifest.skillUpdate
-      .trustedEd25519PublicKeys
-  );
+  return policy.keys;
 }
 
 export function skillUpdateTrustReady(
   manifestPath?: string
 ): boolean {
   try {
-    trustedSkillUpdateKeys(manifestPath);
+    skillUpdateVerificationPolicy(
+      manifestPath
+    );
     return true;
   } catch {
     return false;
@@ -242,7 +299,7 @@ function parseSignatureEnvelope(
   };
 }
 
-function parseIndex(
+export function parseSkillUpdateIndex(
   data: Uint8Array
 ): SkillUpdateIndex {
   let value: unknown;
@@ -412,11 +469,41 @@ export function verifySkillUpdateIndex(
   configuredKeys?: readonly TrustedSkillUpdateKey[],
   manifestPath?: string
 ): VerifiedSkillIndex {
-  const keys = configuredKeys
-    ? parseTrustedKeys(configuredKeys)
-    : trustedSkillUpdateKeys(
-        manifestPath
-      );
+  const policy =
+    configuredKeys
+      ? {
+          mode:
+            "SIGNED_REQUIRED" as const,
+          keys:
+            parseTrustedKeys(
+              configuredKeys
+            )
+        }
+      : skillUpdateVerificationPolicy(
+          manifestPath
+        );
+
+  if (
+    policy.mode ===
+      "UNSIGNED_ALLOWED" &&
+    (
+      signatureBytes.byteLength === 0 ||
+      policy.keys.length === 0
+    )
+  ) {
+    return {
+      index:
+        parseSkillUpdateIndex(
+          indexBytes
+        ),
+      signerKeyId:
+        "UNSIGNED_ALLOWED",
+      indexSha256:
+        sha256(indexBytes)
+    };
+  }
+
+  const keys = policy.keys;
   const envelope =
     parseSignatureEnvelope(
       signatureBytes
@@ -448,7 +535,7 @@ export function verifySkillUpdateIndex(
   }
 
   return {
-    index: parseIndex(indexBytes),
+    index: parseSkillUpdateIndex(indexBytes),
     signerKeyId: trusted.keyId,
     indexSha256:
       sha256(indexBytes)
