@@ -73,21 +73,11 @@ function Get-UpdateVerificationMode([object]$Manifest) {
 }
 
 function Get-TrustedSignerThumbprints([object]$Manifest) {
-  if ((Get-UpdateVerificationMode $Manifest) -ne "SIGNED_REQUIRED") {
-    return @()
-  }
+  $mode = Get-UpdateVerificationMode $Manifest
   $trusted = @(
     $Manifest.applicationUpdate.trustedSignerThumbprints |
       ForEach-Object { Normalize-Thumbprint ([string]$_) } |
-      Where-Object { $_ -match '^[A-F0-9]{40}$' } |
-      Select-Object -Unique
-  )
-  if ($trusted.Count -lt 1) {
-    throw "UPDATE_TRUST_POLICY_EMPTY"
-  }
-  return $trusted
-}
-
+      Where-Object { $_ -match '^[A-F0-9]{40}
 function Assert-Authenticode(
   [string]$Installer,
   [string[]]$Trusted,
@@ -115,19 +105,9 @@ function Assert-InstallerProductVersion(
   if ([string]::IsNullOrWhiteSpace($raw)) {
     throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISSING"
   }
-  $normalized = $raw.Trim()
-  if ($normalized -match '^(\d+)\.(\d+)\.(\d+)\.0$') {
-    $normalized = "$($matches[1]).$($matches[2]).$($matches[3])"
-  }
-  $actual = try { [Version]$normalized } catch {
-    throw "UPDATE_INSTALLER_PRODUCT_VERSION_INVALID:$raw"
-  }
-  if ($actual -ne $Expected) {
-    throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISMATCH:expected=$Expected actual=$actual"
-  }
-  return $actual.ToString()
-}
 
+  $normalized = $raw.Trim()
+  if ($normalized -match '^(\d+)\.(\d+)\.(\d+)\.0
 function Stop-LexProcesses([string]$ApplicationRoot) {
   $normalizedRoot = (Full-Path $ApplicationRoot).TrimEnd('\') + '\'
   $localAiRoot = if ($env:LOCALAPPDATA) {
@@ -270,18 +250,24 @@ if ([string]$receiptObject.sha256 -notmatch '^[a-fA-F0-9]{64}$') {
 if ($null -eq $receiptObject.publisher) {
   throw "UPDATE_RECEIPT_PUBLISHER_INVALID"
 }
-$receiptVerification = [string]$receiptObject.publisher.verification
+$publisherVerification = [string]$receiptObject.publisher.verification
 if (
   $verificationMode -eq "SIGNED_REQUIRED" -and
-  $receiptVerification -ne "AUTHENTICODE"
+  $publisherVerification -ne "AUTHENTICODE"
 ) {
   throw "UPDATE_RECEIPT_PUBLISHER_INVALID"
 }
 if (
   $verificationMode -eq "UNSIGNED_ALLOWED" -and
-  $receiptVerification -notin @("AUTHENTICODE", "UNSIGNED_ALLOWED")
+  $publisherVerification -notin @("AUTHENTICODE", "UNSIGNED_ALLOWED")
 ) {
   throw "UPDATE_RECEIPT_PUBLISHER_INVALID"
+}
+if (
+  $publisherVerification -eq "UNSIGNED_ALLOWED" -and
+  [string]$receiptObject.publisher.warning -ne "TEMPORARY_UNSIGNED_UPDATE_ALLOWED"
+) {
+  throw "UPDATE_RECEIPT_UNSIGNED_WARNING_INVALID"
 }
 $targetVersion = try { [Version]([string]$receiptObject.version) } catch {
   throw "UPDATE_TARGET_VERSION_INVALID"
@@ -298,16 +284,17 @@ $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $installer).Hash.ToLo
 if ($actualHash -ne ([string]$receiptObject.sha256).ToLowerInvariant()) {
   throw "UPDATE_INSTALLER_HASH_MISMATCH"
 }
+
+$verifiedProductVersion = Assert-InstallerProductVersion $installer $targetVersion
 $verifiedThumbprint = $null
-if ($receiptVerification -eq "AUTHENTICODE") {
+if ($publisherVerification -eq "AUTHENTICODE") {
+  if ($trustedSigners.Count -lt 1) {
+    throw "UPDATE_TRUST_POLICY_EMPTY"
+  }
   $verifiedThumbprint = Assert-Authenticode `
     $installer `
     $trustedSigners `
     ([string]$receiptObject.publisher.thumbprint)
-} elseif ($verificationMode -eq "UNSIGNED_ALLOWED") {
-  [void](Assert-InstallerProductVersion $installer $targetVersion)
-} else {
-  throw "UPDATE_RECEIPT_PUBLISHER_INVALID"
 }
 
 $backupBase = if ($env:LOCALAPPDATA) {
@@ -339,10 +326,9 @@ $journalState = [ordered]@{
   backupRoot = $backupRoot
   receiptPath = $receipt
   installerPath = $installer
-  verificationMode = $verificationMode
-  publisherVerification = $receiptVerification
+  publisherVerification = $publisherVerification
   signerThumbprint = $verifiedThumbprint
-  unsignedWarning = if ($receiptVerification -eq "UNSIGNED_ALLOWED") { "TEMPORARY_UNSIGNED_UPDATE_ALLOWED" } else { $null }
+  productVersion = $verifiedProductVersion
   lastError = $null
 }
 Write-JsonAtomic $journal $journalState
@@ -452,7 +438,7 @@ try {
  } |
       Select-Object -Unique
   )
-  if ($trusted.Count -lt 1) {
+  if ($mode -eq "SIGNED_REQUIRED" -and $trusted.Count -lt 1) {
     throw "UPDATE_TRUST_POLICY_EMPTY"
   }
   return $trusted
@@ -777,9 +763,13 @@ try {
 ) {
     $normalized = "$($matches[1]).$($matches[2]).$($matches[3])"
   }
-  $actual = try { [Version]$normalized } catch {
+
+  $actual = try {
+    [Version]$normalized
+  } catch {
     throw "UPDATE_INSTALLER_PRODUCT_VERSION_INVALID:$raw"
   }
+
   if ($actual -ne $Expected) {
     throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISMATCH:expected=$Expected actual=$actual"
   }
@@ -1086,7 +1076,7 @@ try {
  } |
       Select-Object -Unique
   )
-  if ($trusted.Count -lt 1) {
+  if ($mode -eq "SIGNED_REQUIRED" -and $trusted.Count -lt 1) {
     throw "UPDATE_TRUST_POLICY_EMPTY"
   }
   return $trusted
