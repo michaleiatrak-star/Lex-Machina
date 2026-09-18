@@ -915,6 +915,110 @@ describe("deterministic legal workflow", () => {
     }
   );
 
+  it(
+    "keeps the short contract-analysis format flexible",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-umow-v1"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "✅ W porządku: 8\n⚠ Ryzykowne: 2\n🔑 Priorytet: zmiana klauzuli odpowiedzialności"
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "enforces the canonical full and LITE contract report structures only when claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-umow-v1"
+        );
+
+      const full = [
+        "RAPORT ANALIZY UMOWY v1",
+        "## 1. IDENTYFIKACJA",
+        "## 2. BALANS DOKUMENTU",
+        "## 3. KLAUZULE NIEDOZWOLONE (UOKiK / art. 385¹ KC)",
+        "## 4. KLAUZULE NIEZGODNE Z PRAWEM",
+        "## 5. KLAUZULE RYZYKOWNE (zgodne z prawem, ale niekorzystne)",
+        "## 6. EKSPOZYCJA FINANSOWA",
+        "## 7. ALERTY RODO",
+        "## 8. KLAUZULE KORZYSTNE DLA STRONY CHRONIONEJ",
+        "## 9. BRAKUJĄCE KLAUZULE",
+        "## 10. REKOMENDACJE ZMIAN",
+        "## 11. PLAN DZIAŁANIA PRZED PODPISANIEM",
+        "## 12. OCENA OGÓLNA",
+        "## 13. DISCLAIMER"
+      ].join("\n");
+
+      const fullPass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          full
+        );
+      expect(fullPass.result)
+        .toBe("PASS");
+      expect(fullPass.mode)
+        .toBe("CONTRACT_FINAL");
+
+      const lite = [
+        "RAPORT ANALIZY UMOWY — LITE",
+        "## 1. IDENTYFIKACJA + FORMA",
+        "## 2. BALANS: A 5/10 vs B 5/10",
+        "## 3. KLAUZULE KRYTYCZNE I WYSOKIEGO RYZYKA",
+        "## 4. EKSPOZYCJA (skrócona)",
+        "## 5. BRAKUJĄCE KLAUZULE (dealbreakery)",
+        "## 6. OCENA OGÓLNA + PLAN 3 KROKÓW",
+        "## 7. DISCLAIMER"
+      ].join("\n");
+
+      const litePass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          lite
+        );
+      expect(litePass.result)
+        .toBe("PASS");
+      expect(litePass.mode)
+        .toBe("CONTRACT_LITE");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          lite
+            .replace(
+              "## 4. EKSPOZYCJA (skrócona)\n",
+              ""
+            )
+            .replace(
+              "## 5. BRAKUJĄCE KLAUZULE (dealbreakery)\n## 6. OCENA OGÓLNA + PLAN 3 KROKÓW",
+              "## 6. OCENA OGÓLNA + PLAN 3 KROKÓW\n## 5. BRAKUJĄCE KLAUZULE (dealbreakery)"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("## 4. EKSPOZYCJA");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
   it.each([
     ["analizator-umow-v1", "CONTRACT_ANALYSIS_V1", contractResources],
     ["chronologia-sprawy-v1", "CHRONOLOGY_V1", chronologyResources],
