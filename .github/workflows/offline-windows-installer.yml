@@ -77,10 +77,6 @@ jobs:
         shell: pwsh
         run: ./app/installer/build-windows-offline.ps1
 
-      - name: Verify native G34G tests
-        working-directory: app/lex-desktop
-        run: cargo test --manifest-path src-tauri/Cargo.toml
-
       - name: Stage external offline runtime bundle
         id: runtime_bundle
         shell: pwsh
@@ -88,12 +84,75 @@ jobs:
           $bundleDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle"
           New-Item -ItemType Directory -Force -Path $bundleDir | Out-Null
           $runtime = (Resolve-Path "app/lex-desktop/src-tauri/runtime").Path
+          $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+
+          # The payload self-test launches a native sidecar which can spawn the private
+          # Node runtime. Kill every child executable rooted in the payload before
+          # taking the immutable offline snapshot.
+          Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+              if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+                Write-Host "Stopping generated-runtime process before offline snapshot: $($_.ProcessName) pid=$($_.Id) path=$($_.Path)"
+                Stop-Process -Id $_.Id -Force -ErrorAction Stop
+              }
+            } catch {
+              Write-Host "Offline snapshot process cleanup note: $($_.Exception.Message)"
+            }
+          }
+          Start-Sleep -Seconds 1
+
+          $lockPath = Join-Path $runtime "component-lock.json"
+          if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
+            throw "OFFLINE_RUNTIME_SOURCE_COMPONENT_LOCK_MISSING"
+          }
+          $sourceLock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json
+          foreach ($entry in $sourceLock.files) {
+            $sourcePath = Join-Path $runtime $entry.path.Replace('/', '\')
+            if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_SOURCE_LOCK_FILE_MISSING:$($entry.path)"
+            }
+            $sourceHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourcePath).Hash.ToLowerInvariant()
+            if ($sourceHash -ne $entry.sha256) {
+              throw "OFFLINE_RUNTIME_SOURCE_LOCK_HASH_MISMATCH:$($entry.path)"
+            }
+          }
+          Write-Host "Offline source lock verified immediately before archive: $($sourceLock.files.Count) files"
           $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
           Remove-Item -LiteralPath $bundle -Force -ErrorAction SilentlyContinue
 
           & tar.exe -a -c -f $bundle -C $runtime .
           if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
             throw "OFFLINE_RUNTIME_ARCHIVE_FAILED"
+          }
+
+          # Fail during packaging, not minutes later during clean-machine install,
+          # if the archive and component lock diverge.
+          $verifyDir = Join-Path $env:RUNNER_TEMP "lex-offline-bundle-verify"
+          Remove-Item -LiteralPath $verifyDir -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force -Path $verifyDir | Out-Null
+          try {
+            & tar.exe -xf $bundle -C $verifyDir
+            if ($LASTEXITCODE -ne 0) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_EXTRACT_FAILED:$LASTEXITCODE"
+            }
+            $archiveLockPath = Join-Path $verifyDir "component-lock.json"
+            if (-not (Test-Path -LiteralPath $archiveLockPath -PathType Leaf)) {
+              throw "OFFLINE_RUNTIME_ARCHIVE_COMPONENT_LOCK_MISSING"
+            }
+            $archiveLock = Get-Content -Raw -LiteralPath $archiveLockPath | ConvertFrom-Json
+            foreach ($entry in $archiveLock.files) {
+              $archivePath = Join-Path $verifyDir $entry.path.Replace('/', '\')
+              if (-not (Test-Path -LiteralPath $archivePath -PathType Leaf)) {
+                throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING:$($entry.path)"
+              }
+              $archiveHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archivePath).Hash.ToLowerInvariant()
+              if ($archiveHash -ne $entry.sha256) {
+                throw "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH:$($entry.path)"
+              }
+            }
+            Write-Host "Offline archive lock verified after extraction: $($archiveLock.files.Count) files"
+          } finally {
+            Remove-Item -LiteralPath $verifyDir -Recurse -Force -ErrorAction SilentlyContinue
           }
 
           $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundle).Hash.ToLowerInvariant()
@@ -104,6 +163,10 @@ jobs:
           "sha256=$hash" >> $env:GITHUB_OUTPUT
           "bytes=$bytes" >> $env:GITHUB_OUTPUT
           Write-Host "Offline runtime bundle: $bundle ($bytes bytes, sha256=$hash)"
+
+      - name: Verify native G34G tests
+        working-directory: app/lex-desktop
+        run: cargo test --manifest-path src-tauri/Cargo.toml
 
       - name: Rebuild thin installer payload
         shell: pwsh

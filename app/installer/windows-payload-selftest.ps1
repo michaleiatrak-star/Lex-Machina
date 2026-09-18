@@ -221,6 +221,23 @@ try {
     if ($process -and -not $process.HasExited) {
       Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
     }
+
+    # The Rust sidecar owns a child Node runtime. Stopping only the parent can
+    # leave that child alive on Windows and make the release payload mutable
+    # while the offline archive is being assembled.
+    $runtimePrefix = $root.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+    Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+      try {
+        if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+          Write-Host "Self-test cleanup: stopping runtime child $($_.ProcessName) pid=$($_.Id)"
+          Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+        }
+      } catch {
+        Write-Host "Self-test runtime child cleanup note: $($_.Exception.Message)"
+      }
+    }
+    Start-Sleep -Milliseconds 500
+
     $env:LEX_HOST = $oldHost
     $env:LEX_PORT = $oldPort
     $env:LEX_DESKTOP_BOOTSTRAP_TOKEN = $oldBootstrap
