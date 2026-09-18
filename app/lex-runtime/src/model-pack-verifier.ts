@@ -73,6 +73,7 @@ type ModelPackTrustManifest = {
   modelPackUpdate?: {
     verification?: unknown;
     trustedEd25519PublicKeys?: unknown;
+    temporaryUnsignedAllowed?: unknown;
   };
 };
 
@@ -191,10 +192,13 @@ function parseTrustedKeys(
   return keys;
 }
 
-export function trustedModelPackKeys(
+function modelPackVerificationPolicy(
   manifestPath: string =
     defaultManifestPath()
-): TrustedModelPackKey[] {
+): {
+  mode: "SIGNED_REQUIRED" | "UNSIGNED_ALLOWED";
+  keys: TrustedModelPackKey[];
+} {
   let manifest:
     ModelPackTrustManifest;
   try {
@@ -212,25 +216,77 @@ export function trustedModelPackKeys(
 
   if (
     manifest.modelPackUpdate
-      ?.verification !==
+      ?.verification ===
       "SHA256_AND_ED25519_SIGNED_INDEX"
+  ) {
+    return {
+      mode: "SIGNED_REQUIRED",
+      keys: parseTrustedKeys(
+        manifest.modelPackUpdate
+          .trustedEd25519PublicKeys
+      )
+    };
+  }
+
+  if (
+    manifest.modelPackUpdate
+      ?.verification ===
+      "SHA256_AND_OPTIONAL_ED25519_INDEX" &&
+    manifest.modelPackUpdate
+      .temporaryUnsignedAllowed === true
+  ) {
+    let keys:
+      TrustedModelPackKey[] = [];
+    try {
+      keys = parseTrustedKeys(
+        manifest.modelPackUpdate
+          .trustedEd25519PublicKeys
+      );
+    } catch {
+      keys = [];
+    }
+    return {
+      mode: "UNSIGNED_ALLOWED",
+      keys
+    };
+  }
+
+  throw new Error(
+    "MODEL_PACK_SIGNER_POLICY_MISSING"
+  );
+}
+
+export function modelPackSignatureMode(
+  manifestPath?: string
+): "SIGNED_REQUIRED" | "UNSIGNED_ALLOWED" {
+  return modelPackVerificationPolicy(
+    manifestPath
+  ).mode;
+}
+
+export function trustedModelPackKeys(
+  manifestPath: string =
+    defaultManifestPath()
+): TrustedModelPackKey[] {
+  const policy =
+    modelPackVerificationPolicy(
+      manifestPath
+    );
+  if (
+    policy.keys.length === 0
   ) {
     throw new Error(
       "MODEL_PACK_SIGNER_POLICY_MISSING"
     );
   }
-
-  return parseTrustedKeys(
-    manifest.modelPackUpdate
-      .trustedEd25519PublicKeys
-  );
+  return policy.keys;
 }
 
 export function modelPackTrustReady(
   manifestPath?: string
 ): boolean {
   try {
-    trustedModelPackKeys(
+    modelPackVerificationPolicy(
       manifestPath
     );
     return true;
@@ -332,7 +388,7 @@ function positiveInteger(
   );
 }
 
-function parseIndex(
+export function parseModelPackIndex(
   data: Uint8Array
 ): ModelPackIndex {
   let value: unknown;
@@ -577,14 +633,44 @@ export function verifyModelPackIndex(
     readonly TrustedModelPackKey[],
   manifestPath?: string
 ): VerifiedModelPackIndex {
-  const keys =
+  const policy =
     configuredKeys
-      ? parseTrustedKeys(
-          configuredKeys
-        )
-      : trustedModelPackKeys(
+      ? {
+          mode:
+            "SIGNED_REQUIRED" as const,
+          keys:
+            parseTrustedKeys(
+              configuredKeys
+            )
+        }
+      : modelPackVerificationPolicy(
           manifestPath
         );
+
+  if (
+    policy.mode ===
+      "UNSIGNED_ALLOWED" &&
+    (
+      signatureBytes.byteLength === 0 ||
+      policy.keys.length === 0
+    )
+  ) {
+    return {
+      index:
+        parseModelPackIndex(
+          indexBytes
+        ),
+      signerKeyId:
+        "UNSIGNED_ALLOWED",
+      indexSha256:
+        createHash("sha256")
+          .update(indexBytes)
+          .digest("hex")
+    };
+  }
+
+  const keys =
+    policy.keys;
   const envelope =
     parseSignature(
       signatureBytes
@@ -622,7 +708,7 @@ export function verifyModelPackIndex(
 
   return {
     index:
-      parseIndex(
+      parseModelPackIndex(
         indexBytes
       ),
     signerKeyId:
