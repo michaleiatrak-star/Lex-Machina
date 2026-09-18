@@ -149,6 +149,36 @@ export class DynamicModelCatalog {
       : undefined;
   }
 
+  localTokenCharsPerToken(
+    modelId: string
+  ): number | undefined {
+    const runtime =
+      this.localModels.status();
+    if (
+      !runtime.configured ||
+      runtime.selectedModelId !==
+        modelId ||
+      runtime.qualification
+        ?.modelId !==
+        modelId
+    ) {
+      return undefined;
+    }
+    const value =
+      runtime.qualification
+        .tokenizerCalibration
+        ?.conservativeCharsPerToken;
+    return (
+      typeof value ===
+        "number" &&
+      Number.isFinite(value) &&
+      value >= 1 &&
+      value <= 3
+    )
+      ? value
+      : undefined;
+  }
+
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
     if (provider === "openai") {
       const local = this.listConfiguredLocalOpenAiModels();
