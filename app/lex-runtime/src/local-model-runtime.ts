@@ -893,11 +893,7 @@ export class LocalModelRuntime {
               Date.now() -
                 startupStartedAt
             ),
-          ...(tokenizerCalibration
-            ? {
-                tokenizerCalibration
-              }
-            : {}),
+          tokenizerCalibration,
           validatedAt:
             new Date().toISOString()
         });
@@ -1122,11 +1118,7 @@ export class LocalModelRuntime {
             Date.now() -
               startedAt
           ),
-        ...(tokenizerCalibration
-          ? {
-              tokenizerCalibration
-            }
-          : {}),
+        tokenizerCalibration,
         validatedAt:
           new Date()
             .toISOString()
@@ -2328,10 +2320,7 @@ export class LocalModelRuntime {
   }
 
   private async calibrateTokenizer():
-    Promise<
-      LocalTokenizerCalibration |
-      null
-    > {
+    Promise<LocalTokenizerCalibration> {
     const samples = [
       "Powód wnosi o zasądzenie kwoty 12 345,67 zł wraz z odsetkami ustawowymi za opóźnienie od dnia 18 września 2026 r.",
       "§ 4. Wykonawca zobowiązuje się wykonać przedmiot umowy w terminie 14 dni od doręczenia kompletnej dokumentacji.",
@@ -2340,12 +2329,14 @@ export class LocalModelRuntime {
 
     const ratios:
       number[] = [];
-    try {
-      for (
-        const sample
-        of samples
-      ) {
-        const response =
+
+    for (
+      const sample
+      of samples
+    ) {
+      let response: Response;
+      try {
+        response =
           await fetch(
             `http://${this.host}:${this.port}/tokenize`,
             {
@@ -2373,29 +2364,77 @@ export class LocalModelRuntime {
                 )
             }
           );
-        if (!response.ok) {
-          return null;
-        }
-        const payload =
+      } catch (error) {
+        throw new Error(
+          `LOCAL_TOKENIZER_CALIBRATION_FAILED:NETWORK:${
+            error instanceof Error
+              ? error.message
+              : String(error)
+          }`
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          `LOCAL_TOKENIZER_CALIBRATION_FAILED:HTTP_${response.status}`
+        );
+      }
+
+      let payload:
+        {
+          tokens?: unknown;
+        };
+      try {
+        payload =
           await response.json() as {
             tokens?: unknown;
           };
-        if (
-          !Array.isArray(
-            payload.tokens
-          ) ||
-          payload.tokens.length <
-            1
-        ) {
-          return null;
-        }
-        ratios.push(
-          sample.length /
-            payload.tokens.length
+      } catch {
+        throw new Error(
+          "LOCAL_TOKENIZER_CALIBRATION_FAILED:INVALID_JSON"
         );
       }
-    } catch {
-      return null;
+
+      if (
+        !Array.isArray(
+          payload.tokens
+        ) ||
+        payload.tokens.length <
+          1 ||
+        payload.tokens.length >
+          sample.length * 4
+      ) {
+        throw new Error(
+          "LOCAL_TOKENIZER_CALIBRATION_FAILED:TOKENS_INVALID"
+        );
+      }
+
+      const ratio =
+        sample.length /
+        payload.tokens.length;
+      if (
+        !Number.isFinite(
+          ratio
+        ) ||
+        ratio < 0.5 ||
+        ratio > 16
+      ) {
+        throw new Error(
+          "LOCAL_TOKENIZER_CALIBRATION_FAILED:RATIO_INVALID"
+        );
+      }
+      ratios.push(
+        ratio
+      );
+    }
+
+    if (
+      ratios.length !==
+        samples.length
+    ) {
+      throw new Error(
+        "LOCAL_TOKENIZER_CALIBRATION_FAILED:INCOMPLETE"
+      );
     }
 
     const observedMin =
