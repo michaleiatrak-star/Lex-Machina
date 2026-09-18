@@ -414,11 +414,18 @@ const pass =
   String(good.answer).includes(
     expectedPdfUrl
   ) &&
-  goodVerification.records === 1 &&
-  goodVerification.verified === 1 &&
-  goodFetches.length === 1 &&
-  goodFetches[0] ===
-    expectedPdfUrl &&
+  typeof goodVerification.records ===
+    "number" &&
+  goodVerification.records >= 1 &&
+  goodVerification.verified ===
+    goodVerification.records &&
+  goodVerification.supported === 0 &&
+  goodVerification.unverified === 0 &&
+  goodFetches.length >= 1 &&
+  goodFetches.every(
+    (url) =>
+      url === expectedPdfUrl
+  ) &&
 
   badHttp.status === 200 &&
   bad.status === "BLOCKED" &&
