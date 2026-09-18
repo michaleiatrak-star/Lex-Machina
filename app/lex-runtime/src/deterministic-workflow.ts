@@ -192,6 +192,14 @@ const CASE_LAW_FINAL_MARKERS = [
   "RAPORT ORZECZEŃ",
   "WSKAŹNIK POKRYCIA PRZESŁANEK",
   "PLAN MINIMUM",
+  "ORZECZENIA WSPIERAJĄCE TEZĘ",
+  "LINIA PRZECIWNA"
+] as const;
+
+const CASE_LAW_FINAL_MARKERS = [
+  "RAPORT ORZECZEŃ",
+  "WSKAŹNIK POKRYCIA PRZESŁANEK",
+  "PLAN MINIMUM",
   "[A] ORZECZENIA WSPIERAJĄCE TEZĘ",
   "[B] LINIA PRZECIWNA"
 ] as const;
@@ -402,6 +410,12 @@ export function deterministicWorkflowPrompt(
       ? [
           "STATUTE_ANALYSIS_V1 may answer a narrow question without forcing a full report.",
           "If you present a full 'RAPORT ANALIZY', the runtime requires the canonical Moduł 4 sections 1-10 in order and the DRZEWO-LIMIT warning inside the risk section."
+        ]
+      : []),
+    ...(plan.id === "CASE_LAW_V1"
+      ? [
+          "CASE_LAW_V1 may answer a narrow verified case-law question without forcing a full research report.",
+          "If you present 'RAPORT ORZECZEŃ', the runtime requires WSKAŹNIK POKRYCIA PRZESŁANEK, PLAN MINIMUM, the supporting-line section and an explicit LINIA PRZECIWNA section in canonical order."
         ]
       : []),
     ...(plan.escalatedFromSimpleLetter
@@ -722,6 +736,81 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "CASE_LAW_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "CASE_LAW_V1"
+  ) {
+    const claimsFullReport =
+      normalized.includes(
+        "RAPORT ORZECZEŃ"
+      );
+
+    if (!claimsFullReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...CASE_LAW_FINAL_MARKERS
+    ];
+    const observed =
+      CASE_LAW_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      CASE_LAW_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      CASE_LAW_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode:
+        "CASE_LAW_FINAL",
       required,
       observed: [
         ...observed
