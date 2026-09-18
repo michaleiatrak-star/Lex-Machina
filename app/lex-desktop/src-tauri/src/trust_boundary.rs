@@ -618,6 +618,14 @@ impl RuntimeBridge {
         }
     }
 
+    pub(crate) fn purge_user_managed_secrets(&self) -> Result<(), String> {
+        self.clear_managed_identity_secret()?;
+        for provider in ["openai", "anthropic", "xai"] {
+            self.delete_provider_credential(provider)?;
+        }
+        Ok(())
+    }
+
     fn replace_service_session(&self, token: String) {
         if let Ok(mut state) = self.state.lock() {
             if let Some(mut previous) =
