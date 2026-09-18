@@ -5406,6 +5406,190 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  app.get(
+    "/api/cases/:caseId/workflow-audits/:artifactId",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options
+          .secureCaseArtifactStore
+      ) {
+        res.status(503).json({
+          error:
+            "WORKFLOW_AUDIT_UNAVAILABLE"
+        });
+        return;
+      }
+
+      const caseId =
+        String(
+          req.params.caseId ??
+            ""
+        );
+      const artifactId =
+        String(
+          req.params
+            .artifactId ??
+            ""
+        );
+      if (
+        !/^case_[a-f0-9]{32}$/.test(
+          caseId
+        ) ||
+        !/^artifact_[a-f0-9]{32}$/.test(
+          artifactId
+        )
+      ) {
+        res.status(400).json({
+          error:
+            "WORKFLOW_AUDIT_ID_INVALID"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const view =
+          options
+            .caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+
+        const result =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) => {
+                const artifacts =
+                  await options
+                    .secureCaseArtifactStore!
+                    .listArtifacts({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion
+                    });
+                const artifact =
+                  artifacts.find(
+                    (item) =>
+                      item.artifactId ===
+                        artifactId &&
+                      item.sensitivity ===
+                        "PROTECTED" &&
+                      item.mediaType ===
+                        "application/vnd.lexmachina.workflow-audit+json"
+                  );
+                if (!artifact) {
+                  throw new Error(
+                    "WORKFLOW_AUDIT_NOT_FOUND"
+                  );
+                }
+
+                const data =
+                  await options
+                    .secureCaseArtifactStore!
+                    .readArtifact({
+                      caseId,
+                      artifactId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion,
+                      maxBytes:
+                        2 *
+                        1024 *
+                        1024
+                    });
+                try {
+                  const digest =
+                    createHash(
+                      "sha256"
+                    )
+                      .update(data)
+                      .digest(
+                        "hex"
+                      );
+                  if (
+                    digest !==
+                    artifact.sha256
+                  ) {
+                    throw new Error(
+                      "WORKFLOW_AUDIT_HASH_MISMATCH"
+                    );
+                  }
+                  const audit =
+                    parseWorkflowAuditArtifact(
+                      data
+                    );
+                  if (
+                    audit.caseId !==
+                      caseId
+                  ) {
+                    throw new Error(
+                      "WORKFLOW_AUDIT_CASE_MISMATCH"
+                    );
+                  }
+                  return {
+                    artifactId,
+                    sha256:
+                      artifact.sha256,
+                    createdAt:
+                      artifact.createdAt,
+                    audit
+                  };
+                } finally {
+                  data.fill(0);
+                }
+              }
+            );
+
+        res.setHeader(
+          "Cache-Control",
+          "no-store"
+        );
+        res.json(result);
+      } catch (error) {
+        if (
+          sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          return;
+        }
+
+        const message =
+          error instanceof Error
+            ? error.message
+            : "WORKFLOW_AUDIT_READ_FAILED";
+        const status =
+          message ===
+            "WORKFLOW_AUDIT_NOT_FOUND"
+            ? 404
+            : message ===
+                "WORKFLOW_AUDIT_HASH_MISMATCH" ||
+              message ===
+                "WORKFLOW_AUDIT_CASE_MISMATCH" ||
+              message ===
+                "WORKFLOW_AUDIT_ARTIFACT_INVALID" ||
+              message ===
+                "WORKFLOW_AUDIT_ARTIFACT_SIZE_INVALID"
+              ? 409
+              : 422;
+        res.status(status).json({
+          error: message
+        });
+      }
+    }
+  );
+
   app.post("/api/sessions/execute", async (req, res) => {
     if (!options.sessionExecutor) {
       res.status(503).json({
