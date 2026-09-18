@@ -21,6 +21,10 @@ import {
   validateCourtAnalysisState,
   type CourtAnalysisState
 } from "./court-analysis-state.js";
+import {
+  validateChronologyState,
+  type ChronologyState
+} from "./chronology-state.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -65,6 +69,7 @@ export type CaseWorkspaceIndex = {
   workflows?: {
     processPleading?: ProcessPleadingState;
     courtAnalysis?: CourtAnalysisState;
+    chronology?: ChronologyState;
   };
 };
 
@@ -288,6 +293,15 @@ export class EncryptedCaseWorkspaceStore {
         const workflow =
           validateCourtAnalysisState(
             index.workflows.courtAnalysis
+          );
+        if (workflow.caseId !== caseId) {
+          throw new Error("WORKSPACE_INDEX_INVALID");
+        }
+      }
+      if (index.workflows.chronology) {
+        const workflow =
+          validateChronologyState(
+            index.workflows.chronology
           );
         if (workflow.caseId !== caseId) {
           throw new Error("WORKSPACE_INDEX_INVALID");
@@ -766,6 +780,110 @@ export class EncryptedCaseWorkspaceStore {
     }
 
     delete workflows.courtAnalysis;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return true;
+  }
+
+  async getChronologyState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<ChronologyState | null> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const state =
+      index.workflows?.chronology;
+    return state
+      ? validateChronologyState(state)
+      : null;
+  }
+
+  async saveChronologyState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    state: ChronologyState;
+    expectedRevision?: number;
+  }): Promise<ChronologyState> {
+    const state =
+      validateChronologyState(
+        args.state
+      );
+    if (state.caseId !== args.caseId) {
+      throw new Error(
+        "CHRONOLOGY_CASE_ID_MISMATCH"
+      );
+    }
+
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const current =
+      index.workflows?.chronology;
+    if (
+      args.expectedRevision !== undefined &&
+      (
+        !current ||
+        current.revision !==
+          args.expectedRevision
+      )
+    ) {
+      throw new Error(
+        "CHRONOLOGY_STATE_CONFLICT"
+      );
+    }
+
+    index.workflows ??= {};
+    index.workflows.chronology =
+      state;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return validateChronologyState(
+      state
+    );
+  }
+
+  async clearChronologyState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    expectedRevision?: number;
+  }): Promise<boolean> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const workflows =
+      index.workflows;
+    const current =
+      workflows?.chronology;
+    if (!workflows || !current) {
+      return false;
+    }
+    if (
+      args.expectedRevision !== undefined &&
+      current.revision !==
+        args.expectedRevision
+    ) {
+      throw new Error(
+        "CHRONOLOGY_STATE_CONFLICT"
+      );
+    }
+
+    delete workflows.chronology;
     await this.write(
       index,
       args.caseDataKey,
