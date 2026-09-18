@@ -82,7 +82,7 @@ if ($StandaloneOfflineExe) {
   throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
 }
 if (-not $InstallRoot) {
-  $InstallRoot = Join-Path $env:RUNNER_TEMP ("LexMachinaInstalled-" + [Guid]::NewGuid().ToString("N"))
+  $InstallRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Installed " + [Guid]::NewGuid().ToString("N"))
 }
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
@@ -249,9 +249,11 @@ try {
   if ($LASTEXITCODE -ne 0 -or -not $nodeVersion) {
     throw "INSTALLER_ACCEPTANCE_PRIVATE_NODE_FAILED"
   }
-  $pythonVersion = & $privatePython --version
-  if ($LASTEXITCODE -ne 0 -or -not $pythonVersion) {
-    throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED"
+  $pythonVersion = (& $privatePython --version 2>&1 | Select-Object -First 1).ToString().Trim()
+  $releaseSource = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot "release-source.json") | ConvertFrom-Json
+  $expectedPythonVersion = "Python $($releaseSource.runtime.python.version)"
+  if ($LASTEXITCODE -ne 0 -or $pythonVersion -ne $expectedPythonVersion) {
+    throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED expected=$expectedPythonVersion actual=$pythonVersion"
   }
 
   $uninstallKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Lex Machina"
