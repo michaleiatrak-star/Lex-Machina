@@ -71,6 +71,12 @@ import {
   type GateIInvariantReport
 } from "./gate-i-invariants.js";
 import {
+  blockGateITurn,
+  createGateITurnState,
+  passGateITurnPhase,
+  type GateITurnState
+} from "./gate-i-turn-state.js";
+import {
   AuxiliaryModelScheduler,
   auxiliaryVerificationCallKey,
   type AuxiliaryRoutingConfig,
@@ -260,6 +266,7 @@ export type SessionExecutionResponse = {
     missingResources: string[];
   };
   gateI?: GateIInvariantReport;
+  gateITurn?: GateITurnState;
   context?: ContextBudgetReport;
   courtWorkflow?: {
     caseId: string;
@@ -908,6 +915,208 @@ export class SafeSessionExecutor implements SessionExecutor {
     const gateIBlocked =
       gateI.result ===
         "BLOCKED";
+
+    let gateITurn =
+      createGateITurnState(
+        execution.workflowPlan.id
+      );
+    const check = (
+      id:
+        GateIInvariantReport["checks"][number]["id"]
+    ) =>
+      gateI.checks.find(
+        (item) =>
+          item.id === id
+      );
+
+    if (
+      check("ROUTER_FIRST")
+        ?.result !== "PASS"
+    ) {
+      gateITurn =
+        blockGateITurn(
+          gateITurn,
+          "ROUTER_FIRST"
+        );
+    } else {
+      gateITurn =
+        passGateITurnPhase(
+          gateITurn,
+          "ROUTER_PREFLIGHT",
+          "prawny-router-v3 first"
+        );
+
+      const workflowPreflight =
+        execution.events.find(
+          (event) =>
+            event.type ===
+              "gate" &&
+            event.target ===
+              "G39H_WORKFLOW_PREFLIGHT"
+        );
+      if (
+        workflowPreflight
+          ?.status !== "OK"
+      ) {
+        gateITurn =
+          blockGateITurn(
+            gateITurn,
+            "SKILL_PREFLIGHT"
+          );
+      } else {
+        gateITurn =
+          passGateITurnPhase(
+            gateITurn,
+            "SKILL_PREFLIGHT",
+            execution.workflowPlan.id
+          );
+
+        if (
+          corpusBlocked ||
+          check("CORE_RESOURCES")
+            ?.result !==
+              "PASS" ||
+          check("WORKFLOW_RESOURCES")
+            ?.result !==
+              "PASS"
+        ) {
+          gateITurn =
+            blockGateITurn(
+              gateITurn,
+              "RESOURCE_READS"
+            );
+        } else {
+          gateITurn =
+            passGateITurnPhase(
+              gateITurn,
+              "RESOURCE_READS",
+              `workflowReads=${workflowReads.observed.length}`
+            );
+
+          const providerComplete =
+            execution.events.find(
+              (event) =>
+                event.type ===
+                  "gate" &&
+                event.target ===
+                  "G39H_WORKFLOW_PROVIDER_COMPLETE"
+            );
+          if (
+            providerComplete
+              ?.status !== "OK"
+          ) {
+            gateITurn =
+              blockGateITurn(
+                gateITurn,
+                "SEMANTIC_EXECUTION"
+              );
+          } else {
+            gateITurn =
+              passGateITurnPhase(
+                gateITurn,
+                "SEMANTIC_EXECUTION"
+              );
+
+            if (
+              check("SOURCE_PROVENANCE")
+                ?.result !==
+                  "PASS"
+            ) {
+              gateITurn =
+                blockGateITurn(
+                  gateITurn,
+                  "SOURCE_VERIFICATION"
+                );
+            } else {
+              gateITurn =
+                passGateITurnPhase(
+                  gateITurn,
+                  "SOURCE_VERIFICATION",
+                  `records=${gateI.verifiedOrSupportedRecords}`
+                );
+
+              if (
+                check("LEGAL_CITATIONS")
+                  ?.result !==
+                    "PASS" ||
+                check("CASE_SIGNATURES")
+                  ?.result !==
+                    "PASS"
+              ) {
+                gateITurn =
+                  blockGateITurn(
+                    gateITurn,
+                    "CITATION_VALIDATION"
+                  );
+              } else {
+                gateITurn =
+                  passGateITurnPhase(
+                    gateITurn,
+                    "CITATION_VALIDATION",
+                    `references=${gateI.legalReferences};cases=${gateI.caseReferences}`
+                  );
+
+                if (
+                  workflowOutputBlocked ||
+                  guideOutputBlocked ||
+                  reportBlueprintBlocked
+                ) {
+                  gateITurn =
+                    blockGateITurn(
+                      gateITurn,
+                      "OUTPUT_VALIDATION"
+                    );
+                } else {
+                  gateITurn =
+                    passGateITurnPhase(
+                      gateITurn,
+                      "OUTPUT_VALIDATION"
+                    );
+
+                  if (
+                    check("FINALIZATION")
+                      ?.result !==
+                        "PASS"
+                  ) {
+                    gateITurn =
+                      blockGateITurn(
+                        gateITurn,
+                        "FINALIZATION"
+                      );
+                  } else {
+                    gateITurn =
+                      passGateITurnPhase(
+                        gateITurn,
+                        "FINALIZATION"
+                      );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    audit.record(
+      "gate",
+      "G39I_TURN_STATE",
+      gateITurn.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      {
+        workflow:
+          gateITurn.workflowId,
+        phase:
+          gateITurn.phase,
+        result:
+          gateITurn.result,
+        events:
+          gateITurn.events.length
+      }
+    );
+
     audit.record(
       "gate",
       gateI.gate,
@@ -956,7 +1165,9 @@ export class SafeSessionExecutor implements SessionExecutor {
       !workflowOutputBlocked &&
       !guideOutputBlocked &&
       !reportBlueprintBlocked &&
-      !gateIBlocked;
+      !gateIBlocked &&
+      gateITurn.result ===
+        "PASS";
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
@@ -1050,7 +1261,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         requiredResources: workflowReads.required,
         missingResources: workflowReads.missing
       },
-      gateI
+      gateI,
+      gateITurn
     };
 
     Object.defineProperty(
