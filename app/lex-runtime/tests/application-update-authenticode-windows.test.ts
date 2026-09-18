@@ -190,7 +190,7 @@ function createTrustedTestSigner(
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
     "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
-    "$stores=@('Root','TrustedPublisher')",
+    "$stores=@('TrustedPeople','TrustedPublisher')",
     "foreach($storeName in $stores){",
     "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
     "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
@@ -320,7 +320,7 @@ function cleanupCertificate(
       [
         "$ErrorActionPreference='SilentlyContinue'",
         `$thumb=${psLiteral(escaped)}`,
-        "$stores=@('My','Root','TrustedPublisher')",
+        "$stores=@('My','Root','TrustedPeople','TrustedPublisher')",
         "foreach($storeName in $stores){",
         "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
         "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
