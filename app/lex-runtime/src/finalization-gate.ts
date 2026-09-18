@@ -148,10 +148,11 @@ export class FinalizationGate {
     const caseSupportFindings: CaseSupportFinding[] = [];
 
     for (const reference of references) {
-      const lineMarkers =
-        reference.lineText.match(
-          VERIFIED_MARKER_TOKEN
-        ) ?? [];
+      const lineMarkers:
+        string[] =
+          reference.lineText.match(
+            VERIFIED_MARKER_TOKEN
+          ) ?? [];
       const allowedLineMarkers =
         new Set(
           references
