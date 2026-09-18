@@ -25,7 +25,7 @@ export const DETERMINISTIC_SKILL_COVERAGE:
   readonly DeterministicSkillCoverageEntry[] = [
   {
     skill: "prawny-router-v3",
-    status: "PARTIAL",
+    status: "ENFORCED",
     migrationClass: "DETERMINISTIC_ROUTER_HYBRID",
     deterministicOwner:
       "router-first bootstrap, core gates, route/dependency validation, source/citation/finalization invariants",
@@ -34,7 +34,7 @@ export const DETERMINISTIC_SKILL_COVERAGE:
   },
   {
     skill: "prawo-polskie-v2",
-    status: "PARTIAL",
+    status: "ENFORCED",
     migrationClass: "DETERMINISTIC_ROUTER_HYBRID",
     deterministicOwner:
       "DR allowlist, routing-map integrity, module/dependency resolution and route validation",
@@ -142,7 +142,7 @@ export const DETERMINISTIC_SKILL_COVERAGE:
   },
   {
     skill: "przewodnik-prawny-v2",
-    status: "PARTIAL",
+    status: "ENFORCED",
     migrationClass: "DETERMINISTIC_ROUTER_HYBRID",
     deterministicOwner:
       "target: session mode, one-question policy, intake state, irreversible-action warnings and route handoff",
