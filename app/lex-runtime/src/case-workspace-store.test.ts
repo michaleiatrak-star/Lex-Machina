@@ -18,6 +18,11 @@ import {
   completeContractCheckpoint,
   createContractAnalysisState
 } from "./contract-analysis-state.js";
+import {
+  completeOrderedCaseExecution,
+  createOrderedCaseWorkflowState,
+  requireOrderedCaseExecutionPermit
+} from "./ordered-case-workflow-state.js";
 
 const roots: string[] = [];
 
@@ -393,6 +398,87 @@ describe("encrypted case workspace", () => {
     expect(
       afterRekey?.revision
     ).toBe(2);
+  });
+
+  it("persists ordered evidence workflow state encrypted with optimistic revision", async () => {
+    const { rootDir, caseId, key, store } = fixture();
+    let state =
+      createOrderedCaseWorkflowState(
+        "EVIDENCE_ANALYSIS_V1",
+        caseId,
+        "2026-09-18T12:00:00.000Z"
+      );
+    const permit =
+      requireOrderedCaseExecutionPermit(
+        state
+      );
+    state =
+      completeOrderedCaseExecution(
+        state,
+        permit,
+        [
+          "artifact://artifact_1234567890abcdef"
+        ],
+        "2026-09-18T12:00:01.000Z"
+      );
+
+    await store.saveOrderedCaseWorkflowState({
+      caseId,
+      workflowId:
+        "EVIDENCE_ANALYSIS_V1",
+      caseDataKey: key,
+      keyVersion: 1,
+      state
+    });
+
+    const loaded =
+      await store.getOrderedCaseWorkflowState({
+        caseId,
+        workflowId:
+          "EVIDENCE_ANALYSIS_V1",
+        caseDataKey: key,
+        keyVersion: 1
+      });
+    expect(
+      loaded?.closedCheckpoints
+    ).toEqual([
+      "AD-KROK0-BLOKADA"
+    ]);
+
+    await expect(
+      store.saveOrderedCaseWorkflowState({
+        caseId,
+        workflowId:
+          "EVIDENCE_ANALYSIS_V1",
+        caseDataKey: key,
+        keyVersion: 1,
+        state,
+        expectedRevision: 1
+      })
+    ).rejects.toThrow(
+      "ORDERED_WORKFLOW_STATE_CONFLICT"
+    );
+
+    const onDisk =
+      fs.readFileSync(
+        path.join(
+          rootDir,
+          "cases",
+          caseId,
+          "secure",
+          "workspace",
+          "index.lmw1"
+        ),
+        "utf8"
+      );
+    expect(onDisk)
+      .not.toContain(
+        "AD-KROK0-BLOKADA"
+      );
+    expect(onDisk)
+      .not.toContain(
+        "EVIDENCE_ANALYSIS_V1"
+      );
   });
 
   it("re-encrypts the workspace when the case key rotates", async () => {
