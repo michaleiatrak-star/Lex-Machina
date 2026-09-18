@@ -23,9 +23,9 @@ function Remove-TreeStrict(
   }
   Remove-Item -LiteralPath $full -Recurse -Force -ErrorAction Stop
   if (Test-Path -LiteralPath $full) {
-    throw "PROFILE_PURGE_PATH_REMAINS:$Label:$full"
+    throw "PROFILE_PURGE_PATH_REMAINS:${Label}:$full"
   }
-  Write-Host "Removed $Label: $full"
+  Write-Host "Removed ${Label}: $full"
 }
 
 function Stop-LexMachinaProcesses([string]$Root) {
