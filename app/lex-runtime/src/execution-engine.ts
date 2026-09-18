@@ -22,6 +22,10 @@ import type {
   ProcessPleadingMode,
   ProcessPleadingStage
 } from "./process-pleading-state.js";
+import type {
+  CourtAnalysisCheckpoint,
+  CourtAnalysisStage
+} from "./court-analysis-state.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -99,6 +103,14 @@ export class LexExecutionEngine {
       stage: ProcessPleadingStage;
       checkpoint: ProcessPleadingCheckpoint;
       mode: ProcessPleadingMode;
+    };
+    courtWorkflowContext?: {
+      stage: Exclude<
+        CourtAnalysisStage,
+        "COMPLETE"
+      >;
+      checkpoint:
+        CourtAnalysisCheckpoint;
     };
     tools?: NormalizedToolSchema[];
     toolSystemPromptAppendix?: string;
@@ -367,6 +379,49 @@ export class LexExecutionEngine {
       );
     }
 
+    if (
+      args.courtWorkflowContext &&
+      workflowPlan.id !==
+        "COURT_ANALYSIS_V1"
+    ) {
+      emit(
+        "gate",
+        "G39I_COURT_STATE_BINDING",
+        "BLOCKED",
+        "COURT_STATE_ON_NON_COURT_WORKFLOW"
+      );
+      throw new LexExecutionError(
+        "Court-analysis state was bound to a non-court workflow.",
+        "G39I_COURT_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      workflowPlan.id ===
+        "COURT_ANALYSIS_V1" &&
+      !args.courtWorkflowContext
+    ) {
+      emit(
+        "gate",
+        "G39I_COURT_STATE_BINDING",
+        "BLOCKED",
+        "COURT_STATE_CONTEXT_MISSING"
+      );
+      throw new LexExecutionError(
+        "Persisted court-analysis context is required.",
+        "G39I_COURT_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (args.courtWorkflowContext) {
+      emit(
+        "gate",
+        "G39I_COURT_STATE_BINDING",
+        "OK",
+        `stage=${args.courtWorkflowContext.stage};checkpoint=${args.courtWorkflowContext.checkpoint}`
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -406,6 +461,18 @@ export class LexExecutionEngine {
               "Do not continue to a later checkpoint or later stage.",
               "In CHECKPOINT mode, end the substantive work for this turn with the checkpoint report required by the skill; the runtime will wait for explicit user confirmation before any later checkpoint.",
               "Conditional checkpoint still requires an explicit applicability assessment. If it is not applicable, state that conclusion and the reason; do not silently skip it."
+            ].join("\n")
+          ]
+        : []),
+      ...(args.courtWorkflowContext
+        ? [
+            [
+              "# ACTIVE COURT ANALYSIS STATE — RUNTIME ENFORCED",
+              `Stage: ${args.courtWorkflowContext.stage}.`,
+              `Active checkpoint: ${args.courtWorkflowContext.checkpoint}.`,
+              "Execute only this court-analysis checkpoint in this turn.",
+              "Do not perform, claim completion of, or present output reserved for a later court-analysis stage.",
+              "The runtime will close this checkpoint only after deterministic workflow, source, citation and finalization gates pass."
             ].join("\n")
           ]
         : []),
