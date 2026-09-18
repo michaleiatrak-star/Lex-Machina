@@ -367,7 +367,7 @@ export function recoverSkillOverlayForStartup(
       action:
         "CURRENT_RUNTIME_VALIDATION",
       version:
-        effectiveCurrentHealth.version
+        currentHealth.version
     };
   }
 
@@ -378,7 +378,7 @@ export function recoverSkillOverlayForStartup(
       ? {
           healthy: false,
           version:
-            effectiveCurrentHealth.version,
+            currentHealth.version,
           issues: [
             "RUNTIME_VALIDATION_INCOMPLETE"
           ]
