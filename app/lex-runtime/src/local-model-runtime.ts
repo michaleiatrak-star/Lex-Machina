@@ -1982,6 +1982,234 @@ export class LocalModelRuntime {
     );
   }
 
+  private inactiveModelUpdateTransactionPath(): string {
+    return path.join(
+      this.rootDir,
+      "inactive-model-update-transaction.json"
+    );
+  }
+
+  private inactiveModelUpdateConfigBackupPath(): string {
+    return `${this.configPath()}.inactive-update-backup`;
+  }
+
+  private inactiveModelUpdateQualificationBackupPath(): string {
+    return `${this.qualificationPath()}.inactive-update-backup`;
+  }
+
+  private beginInactiveModelUpdate(
+    targetModelId: string
+  ): void {
+    const marker =
+      this.inactiveModelUpdateTransactionPath();
+    const configBackup =
+      this.inactiveModelUpdateConfigBackupPath();
+    const qualificationBackup =
+      this.inactiveModelUpdateQualificationBackupPath();
+
+    fs.rmSync(marker, { force: true });
+    fs.rmSync(
+      configBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      qualificationBackup,
+      { force: true }
+    );
+
+    const hadPreviousConfig =
+      fs.existsSync(
+        this.configPath()
+      );
+    const hadPreviousQualification =
+      fs.existsSync(
+        this.qualificationPath()
+      );
+
+    if (hadPreviousConfig) {
+      fs.copyFileSync(
+        this.configPath(),
+        configBackup
+      );
+    }
+    if (
+      hadPreviousQualification
+    ) {
+      fs.copyFileSync(
+        this.qualificationPath(),
+        qualificationBackup
+      );
+    }
+
+    const transaction:
+      InactiveModelUpdateTransaction = {
+        schemaVersion: 1,
+        targetModelId:
+          normalizeModelId(
+            targetModelId
+          ),
+        hadPreviousConfig,
+        hadPreviousQualification,
+        startedAt:
+          new Date().toISOString()
+      };
+
+    const temporary =
+      `${marker}.tmp`;
+    fs.writeFileSync(
+      temporary,
+      `${JSON.stringify(
+        transaction,
+        null,
+        2
+      )}\n`,
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
+    );
+    fs.renameSync(
+      temporary,
+      marker
+    );
+  }
+
+  private restoreInactiveModelUpdate(): void {
+    const marker =
+      this.inactiveModelUpdateTransactionPath();
+    if (
+      !fs.existsSync(marker)
+    ) {
+      return;
+    }
+
+    let transaction:
+      InactiveModelUpdateTransaction;
+    try {
+      transaction =
+        JSON.parse(
+          fs.readFileSync(
+            marker,
+            "utf8"
+          )
+        ) as InactiveModelUpdateTransaction;
+    } catch {
+      throw new Error(
+        "INACTIVE_MODEL_UPDATE_MARKER_INVALID"
+      );
+    }
+
+    if (
+      transaction.schemaVersion !== 1 ||
+      typeof transaction.targetModelId !==
+        "string" ||
+      !transaction.targetModelId.startsWith(
+        "local/"
+      ) ||
+      typeof transaction.hadPreviousConfig !==
+        "boolean" ||
+      typeof transaction.hadPreviousQualification !==
+        "boolean" ||
+      typeof transaction.startedAt !==
+        "string" ||
+      Number.isNaN(
+        Date.parse(
+          transaction.startedAt
+        )
+      )
+    ) {
+      throw new Error(
+        "INACTIVE_MODEL_UPDATE_MARKER_INVALID"
+      );
+    }
+
+    const configBackup =
+      this.inactiveModelUpdateConfigBackupPath();
+    const qualificationBackup =
+      this.inactiveModelUpdateQualificationBackupPath();
+
+    if (
+      transaction.hadPreviousConfig
+    ) {
+      if (
+        !fs.existsSync(
+          configBackup
+        )
+      ) {
+        throw new Error(
+          "INACTIVE_MODEL_UPDATE_CONFIG_BACKUP_MISSING"
+        );
+      }
+      fs.copyFileSync(
+        configBackup,
+        this.configPath()
+      );
+    } else {
+      fs.rmSync(
+        this.configPath(),
+        { force: true }
+      );
+    }
+
+    if (
+      transaction.hadPreviousQualification
+    ) {
+      if (
+        !fs.existsSync(
+          qualificationBackup
+        )
+      ) {
+        throw new Error(
+          "INACTIVE_MODEL_UPDATE_QUALIFICATION_BACKUP_MISSING"
+        );
+      }
+      fs.copyFileSync(
+        qualificationBackup,
+        this.qualificationPath()
+      );
+    } else {
+      fs.rmSync(
+        this.qualificationPath(),
+        { force: true }
+      );
+    }
+
+    fs.rmSync(
+      configBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      qualificationBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      marker,
+      { force: true }
+    );
+    this.hardwareCache = null;
+  }
+
+  private recoverInterruptedInactiveModelUpdate(): void {
+    const marker =
+      this.inactiveModelUpdateTransactionPath();
+    if (
+      !fs.existsSync(marker)
+    ) {
+      return;
+    }
+    try {
+      this.restoreInactiveModelUpdate();
+    } catch (error) {
+      const detail =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      throw new Error(
+        `INACTIVE_MODEL_UPDATE_RECOVERY_FAILED:${detail}`
+      );
+    }
+  }
+
   private configRollbackPath(): string {
     return `${this.configPath()}.lex-rollback`;
   }
