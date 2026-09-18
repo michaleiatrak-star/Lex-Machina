@@ -776,6 +776,88 @@ export class LocalModelRuntime {
     };
   }
 
+  backendSelectionPolicy(): {
+    allowed:
+      LocalBackendPreference[];
+    default:
+      LocalBackendPreference;
+  } {
+    const raw =
+      this.manifest()
+        .localAi
+        ?.backendSelection;
+    const allowed =
+      Array.isArray(
+        raw?.allowed
+      )
+        ? raw!.allowed
+            .filter(
+              isBackendPreference
+            )
+        : [
+            "AUTO",
+            "VULKAN_X64",
+            "CPU_X64_PORTABLE"
+          ] satisfies
+            LocalBackendPreference[];
+    const unique = [
+      ...new Set(
+        allowed
+      )
+    ];
+    const defaultBackend =
+      isBackendPreference(
+        raw?.default
+      ) &&
+      unique.includes(
+        raw.default
+      )
+        ? raw.default
+        : "AUTO";
+    return {
+      allowed:
+        unique.length > 0
+          ? unique
+          : [
+              "AUTO",
+              "CPU_X64_PORTABLE"
+            ],
+      default:
+        defaultBackend
+    };
+  }
+
+  private resolveBackend(
+    preference:
+      LocalBackendPreference
+  ): LocalBackendId {
+    const policy =
+      this.backendSelectionPolicy();
+    if (
+      !policy.allowed.includes(
+        preference
+      )
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_BACKEND_NOT_ALLOWED:" +
+        preference
+      );
+    }
+    if (
+      preference !== "AUTO"
+    ) {
+      return preference;
+    }
+    return this
+      .hardwareProfile()
+      .gpuCandidateDetected &&
+      policy.allowed.includes(
+        "VULKAN_X64"
+      )
+      ? "VULKAN_X64"
+      : "CPU_X64_PORTABLE";
+  }
+
   contextPolicy(): {
     minimum: number;
     maximum: number;
@@ -2313,7 +2395,158 @@ export class LocalModelRuntime {
     if (typeof config.model?.id !== "string") return null;
     if (typeof config.model?.path !== "string") return null;
     if (typeof config.engine?.executable !== "string") return null;
+    if (
+      config.engine.backend !==
+        undefined &&
+      !isBackendId(
+        config.engine.backend
+      )
+    ) {
+      return null;
+    }
+    if (
+      config.engine.selectionMode !==
+        undefined &&
+      !isBackendPreference(
+        config.engine
+          .selectionMode
+      )
+    ) {
+      return null;
+    }
+    if (
+      config.engine.gpuOffload !==
+        undefined &&
+      typeof config.engine
+        .gpuOffload !==
+        "boolean"
+    ) {
+      return null;
+    }
+    if (
+      config.engine.fallbackBackend !==
+        undefined &&
+      config.engine.fallbackBackend !==
+        null &&
+      !isBackendId(
+        config.engine
+          .fallbackBackend
+      )
+    ) {
+      return null;
+    }
+    if (
+      config.engine
+        .fallbackExecutable !==
+        undefined &&
+      config.engine
+        .fallbackExecutable !==
+        null &&
+      typeof config.engine
+        .fallbackExecutable !==
+        "string"
+    ) {
+      return null;
+    }
     return config;
+  }
+
+  private writeConfig(
+    config: LocalAiConfig
+  ): void {
+    const target =
+      this.configPath();
+    const temporary =
+      target + ".tmp";
+    fs.mkdirSync(
+      this.rootDir,
+      { recursive: true }
+    );
+    fs.writeFileSync(
+      temporary,
+      JSON.stringify(
+        config,
+        null,
+        2
+      ) + "\n",
+      "utf8"
+    );
+    fs.renameSync(
+      temporary,
+      target
+    );
+    this.hardwareCache = null;
+  }
+
+  private cpuFallbackConfig(
+    config: LocalAiConfig
+  ): LocalAiConfig | null {
+    if (
+      config.engine
+        .selectionMode !==
+        "AUTO" ||
+      configBackend(config) !==
+        "VULKAN_X64" ||
+      config.engine
+        .fallbackBackend !==
+        "CPU_X64_PORTABLE" ||
+      typeof config.engine
+        .fallbackExecutable !==
+        "string" ||
+      !config.engine
+        .fallbackExecutable ||
+      !fs.existsSync(
+        config.engine
+          .fallbackExecutable
+      )
+    ) {
+      return null;
+    }
+
+    return {
+      ...config,
+      configuredAt:
+        new Date()
+          .toISOString(),
+      engine: {
+        ...config.engine,
+        backend:
+          "CPU_X64_PORTABLE",
+        gpuOffload: false,
+        executable:
+          config.engine
+            .fallbackExecutable
+      }
+    };
+  }
+
+  private async ensureRunningWithAutoFallback(
+    modelId: LocalModelId,
+    config: LocalAiConfig
+  ): Promise<LocalAiConfig> {
+    try {
+      await this.ensureRunning(
+        modelId
+      );
+      return config;
+    } catch (error) {
+      const fallback =
+        this.cpuFallbackConfig(
+          config
+        );
+      if (!fallback) {
+        throw error;
+      }
+
+      await this.stop();
+      this.writeConfig(
+        fallback
+      );
+      await this.ensureRunning(
+        modelId
+      );
+      return fallback;
+    }
   }
 
   private publicDescriptor(
