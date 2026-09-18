@@ -29,6 +29,8 @@ export type AuxiliaryRoutingSummary = {
   tasks: AuxiliaryTask[];
   extractedCandidates: number;
   deterministicVerifications: number;
+  cachedVerifierReuses: number;
+  latencyMs: number;
   error?: string;
 };
 
@@ -408,7 +410,9 @@ function defaultSummary(
     status,
     tasks: [],
     extractedCandidates: 0,
-    deterministicVerifications: 0
+    deterministicVerifications: 0,
+    cachedVerifierReuses: 0,
+    latencyMs: 0
   };
 }
 
@@ -447,6 +451,21 @@ export class AuxiliaryModelScheduler {
       NormalizedToolResult[]
     >;
   }): Promise<AuxiliaryPreflightResult> {
+    const startedAt =
+      Date.now();
+    const timed = (
+      summary:
+        AuxiliaryRoutingSummary
+    ): AuxiliaryRoutingSummary => ({
+      ...summary,
+      latencyMs:
+        Math.max(
+          0,
+          Date.now() -
+            startedAt
+        )
+    });
+
     const empty =
       new Map<
         string,
@@ -456,10 +475,10 @@ export class AuxiliaryModelScheduler {
     if (!args.config.enabled) {
       return {
         summary:
-          defaultSummary(
+          timed(defaultSummary(
             args.config,
             "DISABLED"
-          ),
+          )),
         appendix: "",
         cachedVerificationResults:
           empty
@@ -474,10 +493,10 @@ export class AuxiliaryModelScheduler {
     ) {
       return {
         summary:
-          defaultSummary(
+          timed(defaultSummary(
             args.config,
             "SKIPPED_SAME_AS_PRIMARY"
-          ),
+          )),
         appendix: "",
         cachedVerificationResults:
           empty
@@ -500,10 +519,10 @@ export class AuxiliaryModelScheduler {
     ) {
       return {
         summary:
-          defaultSummary(
+          timed(defaultSummary(
             args.config,
             "SKIPPED_NO_ELIGIBLE_TASK"
-          ),
+          )),
         appendix: "",
         cachedVerificationResults:
           empty
@@ -543,7 +562,7 @@ export class AuxiliaryModelScheduler {
         candidates.length === 0
       ) {
         return {
-          summary: {
+          summary: timed({
             ...defaultSummary(
               args.config,
               "PASS"
@@ -552,7 +571,7 @@ export class AuxiliaryModelScheduler {
               "LEGAL_REFERENCE_PREFLIGHT"
             ],
             extractedCandidates: 0
-          },
+          }),
           appendix: "",
           cachedVerificationResults:
             empty
@@ -607,7 +626,7 @@ export class AuxiliaryModelScheduler {
           : "";
 
       return {
-        summary: {
+        summary: timed({
           ...defaultSummary(
             args.config,
             "PASS"
@@ -619,14 +638,14 @@ export class AuxiliaryModelScheduler {
             candidates.length,
           deterministicVerifications:
             results.length
-        },
+        }),
         appendix,
         cachedVerificationResults:
           cache
       };
     } catch (error) {
       return {
-        summary: {
+        summary: timed({
           ...defaultSummary(
             args.config,
             "FAILED"
@@ -641,7 +660,7 @@ export class AuxiliaryModelScheduler {
                   240
                 )
               : "AUXILIARY_PREFLIGHT_FAILED"
-        },
+        }),
         appendix: "",
         cachedVerificationResults:
           empty
