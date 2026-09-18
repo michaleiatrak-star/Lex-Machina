@@ -27,6 +27,12 @@ const processResources = [
   "pisma-procesowe-v3/references/SELF-CHECK-PISMA.md"
 ];
 
+const courtResources = [
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "analiza-sadowa-v6/references/WERYFIKACJA-DOWODOW.md"
+];
+
 function writeFile(root: string, relative: string): void {
   const target = path.join(root, ...relative.split("/"));
   fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -41,7 +47,8 @@ function fixture(): LexSkillRegistry {
 
   for (const skill of [
     "pisma-proste-v2",
-    "pisma-procesowe-v3"
+    "pisma-procesowe-v3",
+    "analiza-sadowa-v6"
   ]) {
     writeFile(
       root,
@@ -53,7 +60,7 @@ function fixture(): LexSkillRegistry {
         "---",
         `name: ${skill}`,
         'version: "test"',
-        "type: executive-pisma",
+        `type: ${skill === "analiza-sadowa-v6" ? "executive-analiza" : "executive-pisma"}`,
         "---",
         "",
         "# Fixture"
@@ -63,7 +70,8 @@ function fixture(): LexSkillRegistry {
 
   for (const resource of [
     ...simpleResources,
-    ...processResources
+    ...processResources,
+    ...courtResources
   ]) {
     writeFile(root, resource);
   }
@@ -138,6 +146,30 @@ describe("deterministic legal workflow", () => {
     expect(plan.escalatedFromSimpleLetter).toBe(false);
     expect(plan.requiredFreshResources)
       .toEqual(processResources);
+  });
+
+  it("uses the court-analysis workflow and requires fresh evidence/law verification resources", () => {
+    const registry = fixture();
+    const plan = createDeterministicWorkflowPlan(
+      registry,
+      "analiza-sadowa-v6"
+    );
+
+    expect(plan.id).toBe("COURT_ANALYSIS_V1");
+    expect(plan.requiredFreshResources)
+      .toEqual(courtResources);
+
+    const report =
+      evaluateDeterministicWorkflowReads(
+        plan,
+        courtResources.map((target) => ({
+          tool: "read_legal_resource",
+          target,
+          decision: "ALLOW" as const
+        }))
+      );
+    expect(report.result).toBe("PASS");
+    expect(report.missing).toEqual([]);
   });
 
   it("blocks preflight when a required process resource is missing", () => {
