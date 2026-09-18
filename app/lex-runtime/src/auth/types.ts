@@ -10,6 +10,27 @@ export type LocalUserStatus =
   | "ACTIVE"
   | "DISABLED";
 
+export type AssistantModelProvider =
+  | "openai"
+  | "anthropic"
+  | "xai";
+
+export type ModelRoutingPreferences = {
+  auxiliaryEnabled: boolean;
+  auxiliaryProvider: AssistantModelProvider;
+  auxiliaryModel: string;
+  updatedAt?: string;
+};
+
+export const DEFAULT_MODEL_ROUTING_PREFERENCES:
+  ModelRoutingPreferences = {
+    auxiliaryEnabled: false,
+    auxiliaryProvider: "openai",
+    auxiliaryModel:
+      "local/bielik-11b-v3-q4km"
+  };
+
+
 export type AuthKdfPolicy = {
   algorithm: "ARGON2ID";
   memoryKiB: number;
