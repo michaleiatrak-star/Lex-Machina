@@ -93,9 +93,11 @@ Implemented:
 Restart/rollback closure implemented:
 
 - activation keeps the prior healthy overlay in `skills/previous` and marks the new overlay `PENDING_RESTART_VALIDATION`;
-- runtime startup calls `recoverSkillOverlayForStartup()`, re-runs registry/dependency validation and records `ACTIVE_HEALTHY` only after restart validation;
-- an unhealthy current overlay automatically rolls back to retained `previous`; if no valid previous overlay exists it falls back to the bundled corpus; if current/previous/bundled are all unhealthy startup fails closed;
-- tests cover healthy restart, rollback to previous, rollback to bundled and no-healthy-copy failure;
+- first startup changes only that new overlay to `RUNTIME_VALIDATION_IN_PROGRESS`; structural registry/dependency validation alone no longer commits health;
+- `startLocalServer()` commits `ACTIVE_HEALTHY` only from the real HTTP `listening` callback, after the registry and the full runtime/app stack have been constructed;
+- if the next startup still sees `RUNTIME_VALIDATION_IN_PROGRESS`, the prior bootstrap is treated as interrupted/failed and the structurally valid-but-uncommitted current overlay is rolled back to retained `previous`; if no valid previous overlay exists it falls back to the bundled corpus; if current/previous/bundled are all unhealthy startup fails closed;
+- legacy healthy overlays without the new health state are not forced through a synthetic rollback cycle;
+- tests cover explicit runtime-health commit, interrupted-start rollback, corrupt-current rollback to previous, fallback to bundled and no-healthy-copy failure;
 - maintenance-level negative tests prove signed min/max app incompatibility and release/index version mismatch fail before ZIP download; dependency/hash/version mismatch of the extracted candidate is covered by candidate-index validation tests.
 
 Still required for full roadmap PASS:
@@ -237,7 +239,9 @@ New/updated validation:
 - successful stateful workflow nodes persist a privacy-bounded audit artifact in `SecureCaseArtifactStore`; artifacts are encrypted with the case data key, participate in case-key rotation, expose no answer/document body, and are independently retrievable through an `ANALYZE`-guarded `/workflow-audits/:artifactId` endpoint with manifest/payload hash verification;
 - workflow history stores resolvable `artifact://artifact_…` references rather than opaque integrity-only ids;
 - the real-corpus skill↔engine parity suite validates required fresh-resource declarations for all 11 migrated execution workflows; deeper checkpoint semantic parity remains active for process/court/chronology/contract state machines;
-- G16 verification-loop validator has been updated to perform the new statute-workflow fresh reads instead of bypassing the deterministic preflight.
+- G16 verification-loop validator has been updated to perform the new statute-workflow fresh reads instead of bypassing the deterministic preflight;
+- `SIMPLE_LETTER_V1` now has a runtime-enforced M9 output contract in addition to fresh-resource reads: a critical intake gap is accepted only as explicit `DANE DO UZUPEŁNIENIA`, while a purported ready artifact must contain `TREŚĆ PISMA → UWAGI PRAKTYCZNE → CO DALEJ → HYBRID-VALIDATION` in order plus the final `Pismo zawiera ... pól do uzupełnienia` count;
+- the simple-letter output gate is audited as `G39H_WORKFLOW_OUTPUT` and blocks presentation independently of source/citation finalization; unit tests cover intake-only, valid ready artifact and missing/reordered sections, and a session-level integration test proves the gate reaches the execution audit.
 
 Still required before G39H/I PASS:
 
@@ -272,16 +276,16 @@ External / production blockers:
 - configure the production Ed25519 skill signing key and commit its public key to the skill trust root;
 - configure the production Ed25519 model-pack signing key and commit its public key to the model-pack trust root, then execute a real signed model update acceptance;
 - protect `main` / release rules and required status checks in GitHub repository administration. The current GitHub integration cannot read or modify branch-protection settings (403: administration permission unavailable), so this cannot be marked PASS from this session;
-- add/verify a release-level negative acceptance test for a correctly hashed installer signed by an untrusted certificate. Tampered/untrusted model-pack metadata is already covered at verifier level.
+- production trust configuration remains external; the repo-level negative acceptance for a correctly hashed installer signed by an untrusted certificate is implemented on the Windows online-installer workflow using a temporary trusted test signing certificate and an intentionally different pinned thumbprint. It must still pass on the current head. Tampered/untrusted model-pack metadata is already covered at verifier level.
 
 ## Current closure order
 
-1. obtain current-head runtime validation PASS after contract-analysis HTTP integration and case-law fixture updates;
-2. obtain current-head online installer acceptance PASS with G39G2 registered-install-root and Polish maintenance-language gates;
+1. obtain current-head runtime validation PASS including skill-overlay restart rollback and the SIMPLE_LETTER_V1 output gate;
+2. obtain current-head online installer acceptance PASS including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
 3. obtain current-head offline installer acceptance PASS;
 4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
-5. after current-head CI is green, promote the implemented G39C summary-backlink/tokenizer-calibration slices from VERIFYING;
-6. validate the new real-corpus skill↔engine parity suite for process/court/chronology/contract workflows on current-head CI;
+5. after current-head runtime CI is green, promote the implemented G39C context-orchestrator slices from VERIFYING and mark the new G39E restart-health transaction as verified;
+6. validate the expanded real-corpus skill↔engine parity and simple-letter output-contract suites on current-head CI;
 7. execute and review the self-hosted Local AI 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
 8. execute the committed semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
 9. configure production application/skill/model-pack signing and execute signed acceptance;
