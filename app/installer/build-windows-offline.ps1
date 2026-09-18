@@ -109,6 +109,12 @@ $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -P
 if ($install.ExitCode -ne 0) { throw "Private Python install failed: $($install.ExitCode)" }
 $python = Join-Path $pythonDir "python.exe"
 if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { throw "PRIVATE_PYTHON_MISSING" }
+$pythonExpected = "Python $($sourceLock.runtime.python.version)"
+$pythonActual = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
+if ($LASTEXITCODE -ne 0 -or $pythonActual -ne $pythonExpected) {
+  throw "PRIVATE_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActual"
+}
+Write-Host "Verified private Python version: $pythonActual"
 
 Write-Host "[5/10] Pinned Python/ML packages"
 & $python -m pip install --disable-pip-version-check --no-warn-script-location -r (Join-Path $installer "windows-release-requirements.txt")
