@@ -101,6 +101,15 @@ export type LocalModelPackReceipt = {
   installedAt: string;
 };
 
+type LocalProvisionTransaction = {
+  schemaVersion: 1;
+  modelFilename: string;
+  hadPreviousModel: boolean;
+  hadPreviousConfig: boolean;
+  hadPreviousQualification: boolean;
+  startedAt: string;
+};
+
 export type LocalHardwareProfile = {
   platform: NodeJS.Platform;
   arch: string;
@@ -341,6 +350,7 @@ export class LocalModelRuntime {
     if (!Number.isInteger(this.port) || this.port < 1024 || this.port > 65535) {
       throw new Error("LOCAL_MODEL_PORT_INVALID");
     }
+    this.recoverInterruptedProvision();
   }
 
   listModels(): LocalModelDescriptor[] {
@@ -694,6 +704,7 @@ export class LocalModelRuntime {
     this.validateContext(model, contextTokens);
 
     await this.stop();
+    this.recoverInterruptedProvision();
     fs.mkdirSync(this.rootDir, { recursive: true });
     const configPath = this.configPath();
     const previousConfigObject =
@@ -701,6 +712,16 @@ export class LocalModelRuntime {
     const previousConfig = fs.existsSync(configPath)
       ? fs.readFileSync(configPath)
       : null;
+    const qualificationPath =
+      this.qualificationPath();
+    const previousQualification =
+      fs.existsSync(
+        qualificationPath
+      )
+        ? fs.readFileSync(
+            qualificationPath
+          )
+        : null;
     const targetModelPath =
       path.join(
         this.rootDir,
@@ -723,6 +744,25 @@ export class LocalModelRuntime {
           targetModelPath
         )
       );
+
+    this.writeProvisionTransaction(
+      {
+        schemaVersion: 1,
+        modelFilename:
+          model.filename,
+        hadPreviousModel:
+          previousTargetWasActive,
+        hadPreviousConfig:
+          previousConfig !== null,
+        hadPreviousQualification:
+          previousQualification !==
+            null,
+        startedAt:
+          new Date().toISOString()
+      },
+      previousConfig,
+      previousQualification
+    );
 
     if (previousTargetWasActive) {
       fs.rmSync(
@@ -853,6 +893,7 @@ export class LocalModelRuntime {
       }
 
       commitModelFile();
+      this.clearProvisionTransaction();
       return {
         model: this.publicDescriptor(model, config),
         contextTokens: config.context.requestedTokens,
@@ -861,6 +902,18 @@ export class LocalModelRuntime {
     } catch (error) {
       restoreModelFile();
       restorePreviousConfig();
+      if (previousQualification) {
+        fs.writeFileSync(
+          qualificationPath,
+          previousQualification
+        );
+      } else {
+        fs.rmSync(
+          qualificationPath,
+          { force: true }
+        );
+      }
+      this.clearProvisionTransaction();
       this.provisioningProgress = {
         phase: "FAILED",
         label: canonical,
@@ -1438,6 +1491,258 @@ export class LocalModelRuntime {
 
   private configPath(): string {
     return path.join(this.rootDir, "config.json");
+  }
+
+  private provisionTransactionPath(): string {
+    return path.join(
+      this.rootDir,
+      "provision-transaction.json"
+    );
+  }
+
+  private configRollbackPath(): string {
+    return `${this.configPath()}.lex-rollback`;
+  }
+
+  private qualificationRollbackPath(): string {
+    return `${this.qualificationPath()}.lex-rollback`;
+  }
+
+  private writeProvisionTransaction(
+    transaction: LocalProvisionTransaction,
+    previousConfig: Buffer | null,
+    previousQualification: Buffer | null
+  ): void {
+    fs.mkdirSync(
+      this.rootDir,
+      { recursive: true }
+    );
+    const configBackup =
+      this.configRollbackPath();
+    const qualificationBackup =
+      this.qualificationRollbackPath();
+    const marker =
+      this.provisionTransactionPath();
+
+    fs.rmSync(
+      configBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      qualificationBackup,
+      { force: true }
+    );
+    fs.rmSync(
+      marker,
+      { force: true }
+    );
+
+    if (previousConfig) {
+      fs.writeFileSync(
+        configBackup,
+        previousConfig,
+        { flag: "wx" }
+      );
+    }
+    if (previousQualification) {
+      fs.writeFileSync(
+        qualificationBackup,
+        previousQualification,
+        { flag: "wx" }
+      );
+    }
+
+    const temporary =
+      `${marker}.tmp`;
+    fs.writeFileSync(
+      temporary,
+      `${JSON.stringify(
+        transaction,
+        null,
+        2
+      )}\n`,
+      {
+        encoding: "utf8",
+        flag: "wx"
+      }
+    );
+    fs.renameSync(
+      temporary,
+      marker
+    );
+  }
+
+  private clearProvisionTransaction(): void {
+    fs.rmSync(
+      this.configRollbackPath(),
+      { force: true }
+    );
+    fs.rmSync(
+      this.qualificationRollbackPath(),
+      { force: true }
+    );
+    fs.rmSync(
+      this.provisionTransactionPath(),
+      { force: true }
+    );
+  }
+
+  private recoverInterruptedProvision(): void {
+    const marker =
+      this.provisionTransactionPath();
+    if (
+      !fs.existsSync(
+        marker
+      )
+    ) {
+      return;
+    }
+
+    let transaction:
+      LocalProvisionTransaction;
+    try {
+      transaction =
+        JSON.parse(
+          fs.readFileSync(
+            marker,
+            "utf8"
+          )
+        ) as LocalProvisionTransaction;
+    } catch {
+      throw new Error(
+        "LOCAL_MODEL_RECOVERY_MARKER_INVALID"
+      );
+    }
+
+    if (
+      transaction.schemaVersion !== 1 ||
+      typeof transaction.modelFilename !==
+        "string" ||
+      transaction.modelFilename !==
+        path.basename(
+          transaction.modelFilename
+        ) ||
+      !/^[A-Za-z0-9._-]+\.gguf$/i.test(
+        transaction.modelFilename
+      ) ||
+      typeof transaction.hadPreviousModel !==
+        "boolean" ||
+      typeof transaction.hadPreviousConfig !==
+        "boolean" ||
+      typeof transaction.hadPreviousQualification !==
+        "boolean"
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_RECOVERY_MARKER_INVALID"
+      );
+    }
+
+    const target =
+      path.join(
+        this.rootDir,
+        "models",
+        transaction.modelFilename
+      );
+    const rollback =
+      `${target}.lex-rollback`;
+    const configBackup =
+      this.configRollbackPath();
+    const qualificationBackup =
+      this.qualificationRollbackPath();
+
+    try {
+      if (
+        transaction.hadPreviousModel
+      ) {
+        if (
+          fs.existsSync(
+            rollback
+          )
+        ) {
+          fs.rmSync(
+            target,
+            { force: true }
+          );
+          fs.renameSync(
+            rollback,
+            target
+          );
+        } else if (
+          !fs.existsSync(
+            target
+          )
+        ) {
+          throw new Error(
+            "LOCAL_MODEL_RECOVERY_MODEL_BACKUP_MISSING"
+          );
+        }
+      } else {
+        fs.rmSync(
+          target,
+          { force: true }
+        );
+        fs.rmSync(
+          rollback,
+          { force: true }
+        );
+      }
+
+      if (
+        transaction.hadPreviousConfig
+      ) {
+        if (
+          !fs.existsSync(
+            configBackup
+          )
+        ) {
+          throw new Error(
+            "LOCAL_MODEL_RECOVERY_CONFIG_BACKUP_MISSING"
+          );
+        }
+        fs.copyFileSync(
+          configBackup,
+          this.configPath()
+        );
+      } else {
+        fs.rmSync(
+          this.configPath(),
+          { force: true }
+        );
+      }
+
+      if (
+        transaction.hadPreviousQualification
+      ) {
+        if (
+          !fs.existsSync(
+            qualificationBackup
+          )
+        ) {
+          throw new Error(
+            "LOCAL_MODEL_RECOVERY_QUALIFICATION_BACKUP_MISSING"
+          );
+        }
+        fs.copyFileSync(
+          qualificationBackup,
+          this.qualificationPath()
+        );
+      } else {
+        fs.rmSync(
+          this.qualificationPath(),
+          { force: true }
+        );
+      }
+
+      this.clearProvisionTransaction();
+    } catch (error) {
+      const detail =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      throw new Error(
+        `LOCAL_MODEL_RECOVERY_FAILED:${detail}`
+      );
+    }
   }
 
   private modelPackReceiptPath(): string {
