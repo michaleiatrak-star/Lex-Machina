@@ -574,11 +574,25 @@ export class SafeSessionExecutor implements SessionExecutor {
       evaluateDeterministicWorkflowOutput(
         execution.workflowPlan,
         processedDocumentCitations.text,
-        request.processWorkflowContext
+        request.processWorkflowContext ||
+        request.courtWorkflowContext
           ? {
-              processCheckpoint:
-                request.processWorkflowContext
-                  .checkpoint
+              ...(request.processWorkflowContext
+                ? {
+                    processCheckpoint:
+                      request
+                        .processWorkflowContext
+                        .checkpoint
+                  }
+                : {}),
+              ...(request.courtWorkflowContext
+                ? {
+                    courtCheckpoint:
+                      request
+                        .courtWorkflowContext
+                        .checkpoint
+                  }
+                : {})
             }
           : undefined
       );
