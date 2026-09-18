@@ -244,12 +244,26 @@ describe(
           knowledge.chunks[0]
             ?.text
         );
+        const digestParts =
+          (
+            promptChunk?.text ??
+            ""
+          )
+            .split("\n[…]\n")
+            .filter(Boolean);
         expect(
-          knowledge.chunks[0]
-            ?.text.includes(
-              promptChunk?.text ??
-                "__missing__"
-            )
+          digestParts.length
+        ).toBeGreaterThan(0);
+        expect(
+          digestParts.every(
+            (part) =>
+              Boolean(
+                knowledge
+                  .chunks[0]
+                  ?.text
+                  .includes(part)
+              )
+          )
         ).toBe(true);
         expect(
           promptChunk?.text
