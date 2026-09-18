@@ -84,6 +84,7 @@ import {
 } from "./auxiliary-model-scheduler.js";
 import {
   applyAutomaticVerificationMarkers,
+  detectHistoricalAsOf,
   planAutomaticLegalVerification
 } from "./gate-i-auto-verification.js";
 import {
@@ -543,6 +544,11 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     }
 
+    const requestedHistoricalAsOf =
+      detectHistoricalAsOf(
+        protectedQuery
+      );
+
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
     const corpusTools = new LegalCorpusToolRuntime(this.registry);
@@ -904,7 +910,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const automaticVerificationPlan =
       planAutomaticLegalVerification(
         execution.output,
-        ledger
+        ledger,
+        requestedHistoricalAsOf
       );
     let automaticVerificationExecuted = 0;
 
@@ -923,7 +930,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const automaticVerification =
       applyAutomaticVerificationMarkers(
         execution.output,
-        ledger
+        ledger,
+        requestedHistoricalAsOf
       );
 
     audit.record(
