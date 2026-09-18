@@ -62,6 +62,9 @@ import {
   orchestrateDocumentContext,
   type ContextBudgetReport
 } from "./context-orchestrator.js";
+import type {
+  GuideSessionState
+} from "./guide-session-state.js";
 import {
   AuxiliaryModelScheduler,
   auxiliaryVerificationCallKey,
@@ -106,6 +109,16 @@ export type SessionExecutionRequest = {
   tokenCharsPerToken?: number;
   auxiliaryText?: string;
   auxiliaryRouting?: AuxiliaryRoutingConfig;
+  guideContext?: Pick<
+    GuideSessionState,
+    | "revision"
+    | "audience"
+    | "interactionMode"
+    | "rawAnalysis"
+    | "step"
+    | "guidedQuestionIndex"
+    | "pendingIrreversibleAction"
+  >;
   processWorkflowContext?: {
     stage: ProcessPleadingStage;
     checkpoint: ProcessPleadingCheckpoint;
@@ -525,6 +538,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         primarySkill: request.primarySkill,
         mode: request.mode
       },
+      ...(request.guideContext
+        ? {
+            guideContext:
+              request.guideContext
+          }
+        : {}),
       ...(request.processWorkflowContext
         ? {
             processWorkflowContext:
