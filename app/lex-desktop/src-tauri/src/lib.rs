@@ -2,13 +2,124 @@ mod trust_boundary;
 
 use std::{
     env,
+    fs,
     io,
     path::{Path, PathBuf},
     process::Command,
     sync::Arc,
+    thread,
+    time::Duration,
 };
 use tauri::Manager;
 use trust_boundary::RuntimeBridge;
+
+fn remove_state_tree(path: &Path) -> Result<(), String> {
+    for attempt in 0..5 {
+        match fs::remove_dir_all(path) {
+            Ok(()) => return Ok(()),
+            Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(()),
+            Err(error) if attempt < 4 => {
+                let _ = error;
+                thread::sleep(Duration::from_millis(250));
+            }
+            Err(error) => {
+                return Err(format!(
+                    "USER_STATE_REMOVE_FAILED:{}:{error}",
+                    path.display()
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
+fn user_state_roots() -> Vec<PathBuf> {
+    let mut roots = Vec::new();
+    if let Some(home) = env::var_os("USERPROFILE") {
+        roots.push(PathBuf::from(home).join(".lex-machina"));
+    }
+    if let Some(local) = env::var_os("LOCALAPPDATA") {
+        let local = PathBuf::from(local);
+        roots.push(local.join("LexMachina"));
+        roots.push(local.join("pl.lexmachina.desktop"));
+    }
+    if let Some(roaming) = env::var_os("APPDATA") {
+        roots.push(
+            PathBuf::from(roaming)
+                .join("pl.lexmachina.desktop")
+        );
+    }
+    roots.sort();
+    roots.dedup();
+    roots
+}
+
+fn purge_known_temp_state() -> Result<(), String> {
+    let temp = env::temp_dir();
+    for exact in ["LexMachinaOpen", "LexMachinaUpdate"] {
+        remove_state_tree(&temp.join(exact))?;
+    }
+
+    let entries = match fs::read_dir(&temp) {
+        Ok(entries) => entries,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(()),
+        Err(error) => {
+            return Err(format!(
+                "USER_STATE_TEMP_ENUM_FAILED:{}:{error}",
+                temp.display()
+            ));
+        }
+    };
+    for entry in entries.flatten() {
+        let name = entry.file_name();
+        let name = name.to_string_lossy();
+        if name.starts_with("LexMachinaOfflineRuntime-")
+            || name.starts_with("LexMachinaOfflineSelfExtract-")
+        {
+            let path = entry.path();
+            if path.is_dir() {
+                remove_state_tree(&path)?;
+            } else {
+                fs::remove_file(&path).map_err(|error| {
+                    format!(
+                        "USER_STATE_TEMP_FILE_REMOVE_FAILED:{}:{error}",
+                        path.display()
+                    )
+                })?;
+            }
+        }
+    }
+    Ok(())
+}
+
+pub fn purge_user_state() -> Result<(), String> {
+    let mut failures = Vec::new();
+
+    match RuntimeBridge::new()
+        .and_then(|bridge| bridge.purge_user_managed_secrets())
+    {
+        Ok(()) => {}
+        Err(error) => failures.push(error),
+    }
+
+    for root in user_state_roots() {
+        if let Err(error) = remove_state_tree(&root) {
+            failures.push(error);
+        }
+    }
+    if let Err(error) = purge_known_temp_state() {
+        failures.push(error);
+    }
+
+    if failures.is_empty() {
+        Ok(())
+    } else {
+        Err(format!(
+            "USER_STATE_PURGE_INCOMPLETE:{}",
+            failures.join("|")
+        ))
+    }
+}
 
 fn is_allowed_external_url(url: &str) -> bool {
     let normalized = url.trim().to_ascii_lowercase();
@@ -281,9 +392,22 @@ pub fn run() {
 mod tests {
     use super::{
         is_allowed_external_url,
+        user_state_roots,
         valid_update_receipt_token,
         valid_workspace_open_token,
     };
+
+    #[test]
+    fn user_state_roots_never_include_install_root_relative_paths() {
+        for root in user_state_roots() {
+            assert!(root.is_absolute());
+            assert!(
+                root.ends_with(".lex-machina")
+                    || root.ends_with("LexMachina")
+                    || root.ends_with("pl.lexmachina.desktop")
+            );
+        }
+    }
 
     #[test]
     fn external_url_requires_https() {
