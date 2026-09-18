@@ -48,6 +48,7 @@ export type DeterministicWorkflowOutputReport = {
     | "PROCESS_FINAL"
     | "COURT_CHECKPOINT"
     | "COURT_FINAL"
+    | "EVIDENCE_FINAL"
     | "STATUTE_FINAL"
     | "CASE_LAW_FINAL";
   required: string[];
@@ -170,6 +171,18 @@ const COURT_ANALYSIS_FINAL_MARKERS = [
   "§9.",
   "§10.",
   "§11."
+] as const;
+
+const EVIDENCE_ANALYSIS_FINAL_MARKERS = [
+  "RAPORT DOWODOWY",
+  "POZYCJA PROCESOWA",
+  "HIERARCHIA:",
+  "WALIDACJA:",
+  "POKRYCIE:",
+  "DOWODY DO PISMA",
+  "TERMINY:",
+  "SPRZECZNOŚCI",
+  "REKOMENDACJE:"
 ] as const;
 
 const STATUTE_ANALYSIS_FINAL_MARKERS = [
@@ -398,6 +411,12 @@ export function deterministicWorkflowPrompt(
           "The BILANS section remains conditional on the directional Faza 1-D and is therefore not blindly required by this output gate."
         ]
       : []),
+    ...(plan.id === "EVIDENCE_ANALYSIS_V1"
+      ? [
+          "EVIDENCE_ANALYSIS_V1 may return bounded intermediate findings without forcing a final report.",
+          "If you claim a full RAPORT DOWODOWY, the runtime requires the canonical MD6 sections in order: POZYCJA PROCESOWA → HIERARCHIA → WALIDACJA → POKRYCIE → DOWODY DO PISMA → TERMINY → SPRZECZNOŚCI → REKOMENDACJE."
+        ]
+      : []),
     ...(plan.id === "STATUTE_ANALYSIS_V1"
       ? [
           "STATUTE_ANALYSIS_V1 may answer a narrow question without forcing a full report.",
@@ -574,6 +593,80 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "COURT_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "EVIDENCE_ANALYSIS_V1"
+  ) {
+    const claimsFullReport =
+      normalized.includes(
+        "RAPORT DOWODOWY"
+      );
+
+    if (!claimsFullReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...EVIDENCE_ANALYSIS_FINAL_MARKERS
+    ];
+    const observed =
+      EVIDENCE_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      EVIDENCE_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      EVIDENCE_ANALYSIS_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode: "EVIDENCE_FINAL",
       required,
       observed: [
         ...observed
