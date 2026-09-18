@@ -120,8 +120,64 @@ jobs:
           $bundle = Join-Path $bundleDir "LexMachina-Offline-Runtime.zip"
           Remove-Item -LiteralPath $bundle -Force -ErrorAction SilentlyContinue
 
-          & tar.exe -a -c -f $bundle -C $runtime .
-          if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
+          # Do not use Windows bsdtar to CREATE this ZIP. On hosted Windows
+          # runners it can mis-detect ordinary npm files as the output archive
+          # ("Can't add archive to itself"), omit them, and still leave a ZIP behind.
+          # Build the ZIP explicitly from the already-verified component lock.
+          Add-Type -AssemblyName System.IO.Compression
+          $bundleStream = [IO.File]::Open(
+            $bundle,
+            [IO.FileMode]::CreateNew,
+            [IO.FileAccess]::ReadWrite,
+            [IO.FileShare]::None
+          )
+          try {
+            $zip = [IO.Compression.ZipArchive]::new(
+              $bundleStream,
+              [IO.Compression.ZipArchiveMode]::Create,
+              $false
+            )
+            try {
+              $fixedZipTime = [DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
+
+              function Add-LexOfflineZipEntry {
+                param(
+                  [Parameter(Mandatory=$true)][string]$SourcePath,
+                  [Parameter(Mandatory=$true)][string]$EntryPath
+                )
+
+                $normalizedEntry = $EntryPath.Replace('\', '/')
+                $zipEntry = $zip.CreateEntry(
+                  $normalizedEntry,
+                  [IO.Compression.CompressionLevel]::Fastest
+                )
+                $zipEntry.LastWriteTime = $fixedZipTime
+                $sourceStream = [IO.File]::OpenRead($SourcePath)
+                try {
+                  $entryStream = $zipEntry.Open()
+                  try {
+                    $sourceStream.CopyTo($entryStream)
+                  } finally {
+                    $entryStream.Dispose()
+                  }
+                } finally {
+                  $sourceStream.Dispose()
+                }
+              }
+
+              Add-LexOfflineZipEntry -SourcePath $lockPath -EntryPath "component-lock.json"
+              foreach ($entry in $sourceLock.files) {
+                $sourcePath = Join-Path $runtime $entry.path.Replace('/', '\')
+                Add-LexOfflineZipEntry -SourcePath $sourcePath -EntryPath $entry.path
+              }
+            } finally {
+              $zip.Dispose()
+            }
+          } finally {
+            $bundleStream.Dispose()
+          }
+
+          if (-not (Test-Path -LiteralPath $bundle -PathType Leaf)) {
             throw "OFFLINE_RUNTIME_ARCHIVE_FAILED"
           }
 
