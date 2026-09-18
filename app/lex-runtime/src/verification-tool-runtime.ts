@@ -921,6 +921,29 @@ export class LegalVerificationToolRuntime {
           "VERIFIED" | "UNVERIFIED" =
           result.record.status;
 
+        const acceptedFreshnessStatus:
+          | "CURRENT"
+          | "HISTORICAL"
+          | undefined =
+          freshness?.status ===
+            "CURRENT" ||
+          freshness?.status ===
+            "HISTORICAL"
+            ? freshness.status
+            : result.record
+                .sourceFormat ===
+                "PDF" &&
+              freshness?.status ===
+                "CURRENT_TEXT_REQUIRES_PDF"
+              ? "CURRENT"
+              : result.record
+                    .sourceFormat ===
+                    "PDF" &&
+                  freshness?.status ===
+                    "HISTORICAL_TEXT_REQUIRES_PDF"
+                ? "HISTORICAL"
+                : undefined;
+
         const statutoryRecord:
           VerificationRecord = {
             ...result.record,
@@ -928,15 +951,10 @@ export class LegalVerificationToolRuntime {
               statutoryStatus,
             temporalMode,
             ...(freshness &&
-            (
-              freshness.status ===
-                "CURRENT" ||
-              freshness.status ===
-                "HISTORICAL"
-            )
+            acceptedFreshnessStatus
               ? {
                   temporalFreshnessStatus:
-                    freshness.status,
+                    acceptedFreshnessStatus,
                   freshnessCheckedAt:
                     freshness.checkedAt,
                   ...(freshness.currentEli
