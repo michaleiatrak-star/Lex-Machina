@@ -275,7 +275,13 @@ export function registerMaintenanceRoutes(
                   modelId:
                     installed.modelId,
                   sha256:
-                    installed.sha256
+                    installed.sha256,
+                  ...(installed.packVersion
+                    ? {
+                        packVersion:
+                          installed.packVersion
+                      }
+                    : {})
                 }
               : null
           )
@@ -321,7 +327,10 @@ export function registerMaintenanceRoutes(
                   installed.modelId,
                 sha256:
                   result.receipt
-                    .modelSha256
+                    .modelSha256,
+                packVersion:
+                  result.receipt
+                    .packVersion
               })
         });
       } catch (error) {
