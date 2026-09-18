@@ -254,6 +254,79 @@ describe(
     );
 
     it(
+      "tracks signed receipts independently for an installed inactive Mistral model",
+      () => {
+        const {
+          runtime,
+          localRoot
+        } = fixture();
+        const mistralId =
+          "local/mistral-nemo-12b-q4km";
+        const mistralFile =
+          "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf";
+        const mistralHash =
+          "9".repeat(64);
+
+        fs.writeFileSync(
+          path.join(
+            localRoot,
+            "models",
+            mistralFile
+          ),
+          "mistral-fixture",
+          "utf8"
+        );
+        fs.writeFileSync(
+          path.join(
+            localRoot,
+            "models",
+            `${mistralFile}.model-pack.json`
+          ),
+          JSON.stringify(
+            {
+              schemaVersion: 1,
+              kind:
+                "LEX_MACHINA_MODEL_PACK_INSTALL",
+              packVersion:
+                "0.1.6",
+              signerKeyId:
+                "model-release-test",
+              indexSha256:
+                "8".repeat(64),
+              modelId:
+                mistralId,
+              modelSha256:
+                mistralHash,
+              installedAt:
+                "2026-09-18T09:00:00.000Z"
+            },
+            null,
+            2
+          ),
+          "utf8"
+        );
+
+        expect(
+          runtime
+            .installedModelUpdateIdentity(
+              mistralId
+            )
+        ).toMatchObject({
+          modelId:
+            mistralId,
+          sha256:
+            mistralHash,
+          packVersion:
+            "0.1.6",
+          signerKeyId:
+            "model-release-test",
+          active:
+            false
+        });
+      }
+    );
+
+    it(
       "blocks a lower signed pack version before provisioning",
       async () => {
         const { runtime } =
