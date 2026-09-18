@@ -17,7 +17,9 @@ import {
 } from "./skill-update-verifier.js";
 import {
   modelPackTrustReady,
+  modelUpdateFamilyForId,
   verifyModelPackIndex,
+  type LocalModelUpdateFamily,
   type ModelPackEntry,
   type VerifiedModelPackIndex
 } from "./model-pack-verifier.js";
@@ -81,8 +83,12 @@ export type ModelPackUpdateStatus = {
     | "BLOCKED";
   checkedAt: string;
   modelId?: string;
+  modelFamily?: LocalModelUpdateFamily;
   currentSha256?: string;
   latestPackVersion?: string;
+  targetModelId?: string;
+  targetDisplayName?: string;
+  targetBytes?: number;
   targetSha256?: string;
   verificationReady: boolean;
   signerKeyId?: string;
@@ -1011,7 +1017,15 @@ export class MaintenanceService {
         verified.signerKeyId,
       indexSha256:
         verified.indexSha256,
-      model
+      model: {
+        ...model,
+        family:
+          model.family ??
+          modelUpdateFamilyForId(
+            model.id
+          ) ??
+          undefined
+      }
     };
   }
 
@@ -1028,6 +1042,13 @@ export class MaintenanceService {
       await this.discovery.check();
     const verificationReady =
       this.modelPackTrustPolicyReady();
+    const installedFamily =
+      installed
+        ? modelUpdateFamilyForId(
+            installed.modelId
+          ) ??
+          undefined
+        : undefined;
 
     if (!installed) {
       return {
@@ -1052,6 +1073,12 @@ export class MaintenanceService {
           discovery.checkedAt,
         modelId:
           installed.modelId,
+        ...(installedFamily
+          ? {
+              modelFamily:
+                installedFamily
+            }
+          : {}),
         currentSha256:
           installed.sha256,
         verificationReady
@@ -1068,6 +1095,12 @@ export class MaintenanceService {
           discovery.checkedAt,
         modelId:
           installed.modelId,
+        ...(installedFamily
+          ? {
+              modelFamily:
+                installedFamily
+            }
+          : {}),
         currentSha256:
           installed.sha256,
         verificationReady,
@@ -1083,6 +1116,12 @@ export class MaintenanceService {
           discovery.checkedAt,
         modelId:
           installed.modelId,
+        ...(installedFamily
+          ? {
+              modelFamily:
+                installedFamily
+            }
+          : {}),
         currentSha256:
           installed.sha256,
         verificationReady,
@@ -1171,6 +1210,12 @@ export class MaintenanceService {
           discovery.checkedAt,
         modelId:
           installed.modelId,
+        ...(installedFamily
+          ? {
+              modelFamily:
+                installedFamily
+            }
+          : {}),
         currentSha256:
           installed.sha256
             .toLowerCase(),
@@ -1203,6 +1248,12 @@ export class MaintenanceService {
           discovery.checkedAt,
         modelId:
           installed.modelId,
+        ...(installedFamily
+          ? {
+              modelFamily:
+                installedFamily
+            }
+          : {}),
         currentSha256:
           installed.sha256,
         verificationReady:
