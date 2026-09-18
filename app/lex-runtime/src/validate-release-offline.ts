@@ -114,8 +114,13 @@ const checks = {
     workflow.includes(
       "LexMachina-Offline-Runtime.zip"
     ) &&
-    workflow.includes(
-      "System.IO.Compression.ZipArchive"
+    (
+      workflow.includes(
+        "System.IO.Compression.ZipArchive"
+      ) ||
+      workflow.includes(
+        "IO.Compression.ZipArchive"
+      )
     ) &&
     workflow.includes(
       "Add-LexOfflineZipEntry"
