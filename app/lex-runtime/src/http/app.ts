@@ -134,6 +134,20 @@ import {
   requireCourtAnalysisExecutionPermit,
   type CourtAnalysisExecutionPermit
 } from "../court-analysis-execution-gate.js";
+import {
+  createChronologyState,
+  nextChronologyCheckpoint,
+  requireChronologyTemporalGate,
+  type ChronologyState
+} from "../chronology-state.js";
+import {
+  completeChronologyExecution,
+  requireChronologyExecutionPermit,
+  type ChronologyExecutionPermit
+} from "../chronology-execution-gate.js";
+import {
+  chronologyTemporalGateRequired
+} from "../chronology-date-trigger.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -377,6 +391,11 @@ export type LexHttpAppOptions = {
     EncryptedCaseWorkspaceStore,
     | "getCourtAnalysisState"
     | "saveCourtAnalysisState"
+  >;
+  chronologyWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getChronologyState"
+    | "saveChronologyState"
   >;
   documentGenerationState?: Pick<
     DocumentGenerationStateStore,
