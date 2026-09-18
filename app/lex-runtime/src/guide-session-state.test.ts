@@ -6,7 +6,9 @@ import {
 import {
   GuideSessionStateStore,
   applyGuideTransition,
-  createGuideSessionState
+  createGuideSessionState,
+  evaluateGuideOutput,
+  parseGuideTransition
 } from "./guide-session-state.js";
 
 const SESSION =
@@ -212,6 +214,100 @@ describe(
           state
             .pendingIrreversibleAction
         ).toBeNull();
+      }
+    );
+
+    it(
+      "parses only explicit guide transitions",
+      () => {
+        expect(
+          parseGuideTransition({
+            type:
+              "SET_INTERACTION_MODE",
+            mode: "QA"
+          })
+        ).toEqual({
+          type:
+            "SET_INTERACTION_MODE",
+          mode: "QA"
+        });
+        expect(
+          parseGuideTransition({
+            type: "MOVE_STEP",
+            step: "Z"
+          })
+        ).toBeNull();
+        expect(
+          parseGuideTransition({
+            type:
+              "BEGIN_IRREVERSIBLE_ACTION",
+            actionId: "../escape"
+          })
+        ).toBeNull();
+      }
+    );
+
+    it(
+      "blocks multiple user-facing questions in PROWADZENIE but ignores question marks in code and URLs",
+      () => {
+        const state =
+          createGuideSessionState(
+            SESSION,
+            "LAIK"
+          );
+        const pass =
+          evaluateGuideOutput(
+            state,
+            "Co chcesz osiągnąć?\n```js\nconst x = '?'\n```\nŹródło: https://example.test/?q=1"
+          );
+        expect(pass.result)
+          .toBe("PASS");
+        expect(pass.questionCount)
+          .toBe(1);
+
+        const blocked =
+          evaluateGuideOutput(
+            state,
+            "Co chcesz osiągnąć? Czy masz już dokument?"
+          );
+        expect(blocked.result)
+          .toBe("BLOCKED");
+        expect(blocked.violations)
+          .toContain(
+            "GUIDE_ONE_QUESTION_RULE"
+          );
+      }
+    );
+
+    it(
+      "requires an explicit warning while an irreversible action awaits acknowledgement",
+      () => {
+        const state =
+          applyGuideTransition(
+            createGuideSessionState(
+              SESSION
+            ),
+            {
+              type:
+                "BEGIN_IRREVERSIBLE_ACTION",
+              actionId:
+                "submit-court-filing"
+            }
+          );
+
+        expect(
+          evaluateGuideOutput(
+            state,
+            "Można przejść dalej."
+          ).result
+        ).toBe("BLOCKED");
+
+        expect(
+          evaluateGuideOutput(
+            state,
+            "OSTRZEŻENIE: złożenie pisma może wywołać skutek procesowy."
+          ).result
+        ).toBe("PASS");
       }
     );
 
