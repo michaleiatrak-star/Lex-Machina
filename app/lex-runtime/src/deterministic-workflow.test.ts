@@ -327,6 +327,126 @@ describe("deterministic legal workflow", () => {
       .toEqual(processResources);
   });
 
+  it(
+    "allows an intermediate process checkpoint without a final-document contract",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-procesowe-v3"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "RAPORT W1\nAnaliza faktów i dowodów. Pismo pozostaje projektem.",
+          {
+            processCheckpoint:
+              "CP-W1"
+          }
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe(
+          "PROCESS_CHECKPOINT"
+        );
+      expect(report.missing)
+        .toEqual([]);
+    }
+  );
+
+  it(
+    "blocks a premature process-final status before CP-PEER",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-procesowe-v3"
+        );
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "STATUS PISMA: ✅ FINAL — GOTOWE DO ZŁOŻENIA",
+          {
+            processCheckpoint:
+              "CP-AUDYT"
+          }
+        );
+
+      expect(report.result)
+        .toBe("BLOCKED");
+      expect(report.mode)
+        .toBe(
+          "PROCESS_CHECKPOINT"
+        );
+      expect(report.missing)
+        .toContain(
+          "CP-PEER_REQUIRED_FOR_FINAL_STATUS"
+        );
+    }
+  );
+
+  it(
+    "requires the full process-final presentation package at CP-PEER",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "pisma-procesowe-v3"
+        );
+
+      const valid =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "━━━━━━━━ RAPORT W3 ━━━━━━━━",
+            "STATUS PISMA: GOTOWE",
+            "Treść pisma finalnego.",
+            "⚖️ UWAGI REDAKCYJNE PRZED ZŁOŻENIEM:",
+            "Brak kwestii krytycznych.",
+            "REJESTR KROKÓW",
+            "CP-PEER: ✅ WYKONANY"
+          ].join("\n"),
+          {
+            processCheckpoint:
+              "CP-PEER"
+          }
+        );
+      expect(valid.result)
+        .toBe("PASS");
+      expect(valid.mode)
+        .toBe("PROCESS_FINAL");
+      expect(valid.orderValid)
+        .toBe(true);
+
+      const invalid =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          [
+            "REJESTR KROKÓW",
+            "RAPORT W3",
+            "STATUS PISMA: GOTOWE"
+          ].join("\n"),
+          {
+            processCheckpoint:
+              "CP-PEER"
+          }
+        );
+      expect(invalid.result)
+        .toBe("BLOCKED");
+      expect(invalid.missing)
+        .toContain(
+          "UWAGI REDAKCYJNE PRZED ZŁOŻENIEM"
+        );
+      expect(invalid.orderValid)
+        .toBe(false);
+    }
+  );
+
   it("uses the court-analysis workflow and requires fresh evidence/law verification resources", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
