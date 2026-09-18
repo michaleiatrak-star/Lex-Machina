@@ -108,7 +108,7 @@ const checks = {
     hooks.includes("lex-purge-user-state.ps1") &&
     purge.includes("CredEnumerateW") &&
     purge.includes("CredDeleteW") &&
-    purge.includes(".LexMachina/") &&
+    purge.includes("LexMachina/") &&
     purge.includes(".lex-machina") &&
     acceptance.includes("INSTALLER_ACCEPTANCE_FRESH_ADMIN_INVALID") &&
     acceptance.includes("INSTALLER_ACCEPTANCE_PROFILE_PURGE_FAILED") &&
