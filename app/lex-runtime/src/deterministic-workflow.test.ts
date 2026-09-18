@@ -649,6 +649,88 @@ describe("deterministic legal workflow", () => {
     expect(report.result).toBe("PASS");
   });
 
+  it(
+    "keeps bounded evidence findings flexible without forcing the full MD6 report",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-dowodow-v3"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "Wstępna analiza wskazuje trzy luki dowodowe i dwa konflikty wymagające weryfikacji."
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "requires the canonical MD6 structure when a full evidence report is claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "analizator-dowodow-v3"
+        );
+
+      const complete = [
+        "RAPORT DOWODOWY — sprawa testowa",
+        "POZYCJA PROCESOWA: UMIARKOWANA",
+        "HIERARCHIA:",
+        "A (2): D1, D2",
+        "WALIDACJA: Kryt.: 0 | Ostrzeg.: 1",
+        "POKRYCIE: 80% pokrytych | Luki krytyczne: 1",
+        "DOWODY DO PISMA (top 3):",
+        "1. D1 — 9/10",
+        "TERMINY: brak zawitych terminów wynikających z materiału",
+        "SPRZECZNOŚCI (podsumowanie):",
+        "Z prawem: 0 · Między dok.: 1",
+        "REKOMENDACJE:",
+        "1. Uzupełnić D3"
+      ].join("\n");
+
+      const pass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+        );
+      expect(pass.result)
+        .toBe("PASS");
+      expect(pass.mode)
+        .toBe("EVIDENCE_FINAL");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+            .replace(
+              "WALIDACJA: Kryt.: 0 | Ostrzeg.: 1\n",
+              ""
+            )
+            .replace(
+              "TERMINY: brak zawitych terminów wynikających z materiału\nSPRZECZNOŚCI (podsumowanie):",
+              "SPRZECZNOŚCI (podsumowanie):\nTERMINY: brak zawitych terminów wynikających z materiału"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("WALIDACJA:");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
   it("uses the statute-analysis workflow and requires source-hierarchy/freshness gates", () => {
     const registry = fixture();
     const plan = createDeterministicWorkflowPlan(
