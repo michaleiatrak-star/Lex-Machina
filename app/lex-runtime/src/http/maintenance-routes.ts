@@ -318,8 +318,14 @@ export function registerMaintenanceRoutes(
     async (req, res) => {
       if (!requireAdmin(req, res, authService)) return;
       try {
+        const requestedModelId =
+          typeof req.query.modelId === "string"
+            ? req.query.modelId.trim()
+            : "";
         const installed =
-          localModels.installedModelUpdateIdentity();
+          localModels.installedModelUpdateIdentity(
+            requestedModelId || undefined
+          );
         res.json(
           await maintenance.modelPackStatus(
             installed
@@ -349,27 +355,53 @@ export function registerMaintenanceRoutes(
     async (req, res) => {
       if (!requireAdmin(req, res, authService)) return;
       try {
-        const installed =
-          localModels.installedModelUpdateIdentity();
-        if (!installed) {
-          throw new Error(
-            "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
-          );
-        }
         const requestedModelId =
           typeof req.body?.modelId ===
             "string"
             ? req.body.modelId.trim()
             : "";
-        if (
-          requestedModelId &&
-          requestedModelId !==
-            installed.modelId
-        ) {
+        const installed =
+          localModels.installedModelUpdateIdentity(
+            requestedModelId || undefined
+          );
+        if (!installed) {
           throw new Error(
-            "MODEL_PACK_UPDATE_MODEL_MISMATCH"
+            "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
           );
         }
+
+        const runtimeBefore =
+          localModels.status();
+        const requestedContext =
+          Number(req.body?.contextTokens);
+        const contextTokens =
+          Number.isInteger(requestedContext)
+            ? requestedContext
+            : installed.contextTokens;
+        const rawBackend =
+          typeof req.body?.backendPreference ===
+            "string"
+            ? req.body.backendPreference.trim()
+            : "";
+        const backendPreference =
+          (
+            rawBackend ||
+            runtimeBefore.hardware
+              .backendSelectionMode ||
+            runtimeBefore.backendPolicy
+              .default
+          ) as LocalBackendPreference;
+        if (
+          !runtimeBefore.backendPolicy.allowed
+            .includes(backendPreference)
+        ) {
+          res.status(400).json({
+            error:
+              "LOCAL_MODEL_BACKEND_INVALID"
+          });
+          return;
+        }
+
         const target =
           await maintenance
             .verifiedModelPackTarget(
@@ -379,8 +411,8 @@ export function registerMaintenanceRoutes(
           await localModels
             .applyVerifiedModelPack({
               target,
-              contextTokens:
-                installed.contextTokens
+              contextTokens,
+              backendPreference
             });
         res.json({
           ...result,
