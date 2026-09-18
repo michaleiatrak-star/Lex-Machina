@@ -1,6 +1,7 @@
 import {
   createHash
 } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -23,129 +24,140 @@ import type {
 } from "../src/update-discovery.js";
 
 const tempRoots: string[] = [];
-function copyTrustedForeignSignedExecutable(
+const testCertificateThumbprints: string[] = [];
+
+function powershell(
+  script: string,
+  args: string[] = []
+): string {
+  const result = spawnSync(
+    "powershell.exe",
+    [
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-Command",
+      script,
+      ...args
+    ],
+    {
+      encoding: "utf8",
+      windowsHide: true,
+      timeout: 60_000
+    }
+  );
+  if (result.status !== 0) {
+    throw new Error(
+      [
+        "WINDOWS_AUTHENTICODE_TEST_POWERSHELL_FAILED",
+        result.stdout.trim(),
+        result.stderr.trim()
+      ].filter(Boolean).join("|")
+    );
+  }
+  return result.stdout.trim();
+}
+
+function createTrustedForeignSignedExecutable(
   targetRoot: string
 ): string {
-  const systemRoot =
-    process.env.SystemRoot ??
-    "C:\\Windows";
-  const programFiles =
-    process.env.ProgramFiles ??
-    "C:\\Program Files";
-  const programFilesX86 =
-    process.env[
-      "ProgramFiles(x86)"
-    ] ??
-    "C:\\Program Files (x86)";
-  const candidates = [
-    process.execPath,
-    path.join(
-      programFiles,
-      "PowerShell",
-      "7",
-      "pwsh.exe"
-    ),
-    path.join(
-      programFiles,
-      "dotnet",
-      "dotnet.exe"
-    ),
-    path.join(
-      programFiles,
-      "Git",
-      "bin",
-      "git.exe"
-    ),
-    path.join(
-      programFilesX86,
-      "Git",
-      "bin",
-      "git.exe"
-    ),
-    path.join(
-      systemRoot,
-      "System32",
-      "WindowsPowerShell",
-      "v1.0",
-      "powershell.exe"
-    ),
-    path.join(
-      systemRoot,
-      "System32",
-      "msiexec.exe"
-    ),
-    path.join(
-      systemRoot,
-      "System32",
-      "notepad.exe"
-    ),
-    path.join(
-      systemRoot,
-      "System32",
-      "where.exe"
-    )
-  ];
-
+  const source =
+    process.execPath;
   const target =
     path.join(
       targetRoot,
       "LexMachina-Foreign-Signer.exe"
     );
+  fs.copyFileSync(
+    source,
+    target
+  );
+
+  const certFile =
+    path.join(
+      targetRoot,
+      "foreign-signer.cer"
+    );
+  const script = [
+    "$ErrorActionPreference='Stop'",
+    "$target=$args[0]",
+    "$certFile=$args[1]",
+    "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina Foreign Signer Test' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyAlgorithm RSA -KeyLength 2048 -HashAlgorithm SHA256 -KeyExportPolicy Exportable -NotAfter (Get-Date).AddDays(2)",
+    "Export-Certificate -Cert $cert -FilePath $certFile -Force | Out-Null",
+    "Import-Certificate -FilePath $certFile -CertStoreLocation 'Cert:\\CurrentUser\\Root' | Out-Null",
+    "Import-Certificate -FilePath $certFile -CertStoreLocation 'Cert:\\CurrentUser\\TrustedPublisher' | Out-Null",
+    "$signed=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
+    "if ($signed.Status -ne 'Valid') { throw ('SIGNATURE_NOT_VALID:' + $signed.Status) }",
+    "$check=Get-AuthenticodeSignature -LiteralPath $target",
+    "if ($check.Status -ne 'Valid' -or $null -eq $check.SignerCertificate) { throw ('SIGNATURE_RECHECK_FAILED:' + $check.Status) }",
+    "$check.SignerCertificate.Thumbprint"
+  ].join("; ");
+
+  const thumbprint =
+    powershell(
+      script,
+      [target, certFile]
+    )
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .at(-1);
+
+  if (
+    !thumbprint ||
+    !/^[A-Fa-f0-9]{40}$/.test(
+      thumbprint
+    )
+  ) {
+    throw new Error(
+      "WINDOWS_AUTHENTICODE_TEST_CERTIFICATE_INVALID"
+    );
+  }
+
+  testCertificateThumbprints.push(
+    thumbprint.toUpperCase()
+  );
+
   const probe =
     new WindowsAuthenticodeInstallerVerifier(
       ["A".repeat(40)]
     );
-  const failures:
-    string[] = [];
+  expect(() =>
+    probe.verify(target)
+  ).toThrow(
+    "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
+  );
 
-  for (
-    const candidate
-    of candidates
-  ) {
-    if (
-      !fs.existsSync(
-        candidate
-      )
-    ) {
-      continue;
-    }
+  return target;
+}
 
-    fs.copyFileSync(
-      candidate,
-      target
-    );
-    try {
-      probe.verify(target);
-      failures.push(
-        `${path.basename(candidate)}:UNEXPECTED_PIN_MATCH`
-      );
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : String(error);
-      if (
-        message ===
-          "APPLICATION_UPDATE_SIGNER_NOT_TRUSTED"
-      ) {
-        return target;
-      }
-      failures.push(
-        `${path.basename(candidate)}:${message}`
-      );
-    }
-
-    fs.rmSync(
-      target,
-      { force: true }
-    );
-  }
-
-  throw new Error(
+function removeTestCertificate(
+  thumbprint: string
+): void {
+  const script = [
+    "$ErrorActionPreference='SilentlyContinue'",
+    "$thumb=$args[0]",
+    "foreach ($store in @('Cert:\\CurrentUser\\My','Cert:\\CurrentUser\\Root','Cert:\\CurrentUser\\TrustedPublisher')) {",
+    "  Get-ChildItem -LiteralPath $store | Where-Object { $_.Thumbprint -eq $thumb } | Remove-Item -Force",
+    "}"
+  ].join("; ");
+  spawnSync(
+    "powershell.exe",
     [
-      "WINDOWS_AUTHENTICODE_TRUSTED_FOREIGN_EXE_NOT_FOUND",
-      ...failures
-    ].join("|")
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-Command",
+      script,
+      thumbprint
+    ],
+    {
+      encoding: "utf8",
+      windowsHide: true,
+      timeout: 30_000
+    }
   );
 }
 
@@ -167,6 +179,14 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  for (
+    const thumbprint
+    of testCertificateThumbprints.splice(0)
+  ) {
+    removeTestCertificate(
+      thumbprint
+    );
+  }
   for (
     const root
     of tempRoots.splice(0)
@@ -192,7 +212,7 @@ describe.skipIf(
         const root =
           tempRoots.at(-1)!;
         const signed =
-          copyTrustedForeignSignedExecutable(
+          createTrustedForeignSignedExecutable(
             root
           );
 
