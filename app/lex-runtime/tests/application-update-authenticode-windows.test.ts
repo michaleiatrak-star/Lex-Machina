@@ -164,42 +164,23 @@ function findSignTool(): string {
 function createTrustedTestSigner(
   target: string
 ): string {
-  const root =
-    path.dirname(target);
-  const pfx =
-    path.join(
-      root,
-      "foreign-signer.pfx"
-    );
-  const password =
-    "LexMachina-CI-" +
-    Math.random()
-      .toString(16)
-      .slice(2);
   const command = [
     "$ErrorActionPreference='Stop'",
-    `$pfx=${psLiteral(pfx)}`,
-    `$password=${psLiteral(password)}`,
     "$rsa=[System.Security.Cryptography.RSA]::Create(2048)",
     "$dn=[System.Security.Cryptography.X509Certificates.X500DistinguishedName]::new('CN=Lex Machina CI Foreign Signer')",
     "$req=[System.Security.Cryptography.X509Certificates.CertificateRequest]::new($dn,$rsa,[System.Security.Cryptography.HashAlgorithmName]::SHA256,[System.Security.Cryptography.RSASignaturePadding]::Pkcs1)",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
+    "$eku=[System.Security.Cryptography.OidCollection]::new()",
+    "$null=$eku.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($eku,$false))",
     "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509KeyUsageExtension]::new([System.Security.Cryptography.X509Certificates.X509KeyUsageFlags]::DigitalSignature,$true))",
-    "$oids=[System.Security.Cryptography.OidCollection]::new()",
-    "$null=$oids.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
-    "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
-    "$stores=@('Root','TrustedPeople','TrustedPublisher')",
+    "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddMinutes(-5),[DateTimeOffset]::UtcNow.AddDays(2))",
+    "$stores=@('My','Root','TrustedPublisher')",
     "foreach($storeName in $stores){",
     "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
     "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
     "  try { $store.Add($cert) } finally { $store.Close() }",
     "}",
-    "$bytes=$cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
-    "[IO.File]::WriteAllBytes($pfx,$bytes)",
     "$thumb=$cert.Thumbprint",
-    "[Array]::Clear($bytes,0,$bytes.Length)",
     "$cert.Dispose()",
     "$rsa.Dispose()",
     "$thumb"
@@ -234,10 +215,10 @@ function createTrustedTestSigner(
         "sign",
         "/fd",
         "SHA256",
-        "/f",
-        pfx,
-        "/p",
-        password,
+        "/s",
+        "My",
+        "/sha1",
+        output,
         target
       ],
       {
@@ -249,6 +230,9 @@ function createTrustedTestSigner(
   if (
     signed.status !== 0
   ) {
+    cleanupCertificate(
+      output
+    );
     throw new Error(
       [
         "WINDOWS_AUTHENTICODE_TEST_SIGN_FAILED",
@@ -278,6 +262,9 @@ function createTrustedTestSigner(
   if (
     verified.status !== 0
   ) {
+    cleanupCertificate(
+      output
+    );
     throw new Error(
       [
         "WINDOWS_AUTHENTICODE_TEST_VERIFY_FAILED",
@@ -289,10 +276,6 @@ function createTrustedTestSigner(
     );
   }
 
-  fs.rmSync(
-    pfx,
-    { force: true }
-  );
   testThumbprints.push(
     output.toUpperCase()
   );
