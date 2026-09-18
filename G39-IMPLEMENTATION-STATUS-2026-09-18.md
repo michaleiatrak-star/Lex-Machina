@@ -4,6 +4,17 @@ Branch: `feature/g39-execution-2026-09-17`
 PR: #51  
 Scope: deterministic installer, on-demand Local AI, skill/application updates.
 
+## Audyt bieżącej linii — 2026-09-18
+
+- `main` pozostaje nietknięty; audyt, poprawki i release-candidate są prowadzone wyłącznie na gałęziach roboczych/release.
+- F-138 structural audit oraz G39 Installer State Machine są zielone na aktualizowanej linii G39.
+- Audyt wykrył regresję samego walidatora G18 po zaostrzeniu Gate I: test uruchamiał deterministic legal-source resolver bez obowiązkowej kontroli temporal freshness i zakładał historyczną liczbę rekordów ledger/source reads.
+- Walidator G18 został dostosowany do aktualnego kontraktu runtime: używa deterministycznego `TemporalSourceFreshnessChecker`, wymaga wszystkich rekordów zweryfikowanych i akceptuje ponowne odczyty tego samego kanonicznego źródła. Produkcyjne Gate I nie zostało osłabione.
+- Po pierwszej poprawce G18 osiągał już `DRAFT_PRESENTABLE` + `finalization=PASS` + 2/2 VERIFIED; pozostała wyłącznie przestarzała asercja liczby odczytów źródła, która została usunięta.
+- Pełny `Lex Runtime Validation` oraz online/offline Windows acceptance muszą przejść ponownie na finalnym HEAD po tych zmianach. Nie wolno publikować RC z wcześniejszego SHA.
+- Prerelease instalatorów jest dopuszczalny dopiero po PASS: runtime + F-138 + G39 installer state + online installed-copy acceptance + offline clean-machine acceptance dla tego samego źródłowego SHA.
+- Braki produkcyjnych Authenticode/Ed25519 trust roots oraz benchmarków Local AI pozostają blockerami produkcyjnego G39J/stable, ale nie są obchodzone przez prerelease: kanały aktualizacji nadal fail-closed.
+
 ## Status legend
 
 - **PASS** — implementation and relevant CI/acceptance are green on the current head.
@@ -350,16 +361,16 @@ Installer publication policy:
 - online/offline **manual installers may be published as a GitHub pre-release** after runtime + structural + online + offline acceptance all pass;
 - in-app application/skill/model update channels remain disabled by fail-closed trust policy until their production keys are configured.
 
-## Current closure order
+## Current closure order / roadmap
 
-1. obtain current-head runtime validation PASS including G39K dual-model routing tests, skill-overlay restart rollback and the SIMPLE_LETTER_V1 output gate;
-2. obtain current-head online installer acceptance PASS including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
-3. obtain current-head offline installer acceptance PASS;
-4. if installer/update transaction acceptance is green, promote G39G and the current-development G39F path without waiting for production signing;
-5. after current-head runtime CI is green, promote the implemented G39C context-orchestrator slices from VERIFYING and mark the new G39E restart-health transaction as verified;
-6. validate the expanded real-corpus skill↔engine parity and simple-letter output-contract suites on current-head CI;
-7. execute and review the self-hosted Local AI 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
-8. execute the committed semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
-9. configure production application/skill/model-pack signing and execute signed acceptance;
-10. enable protected `main` / release rules outside this GitHub integration;
-11. close G39J only after the external trust controls above are verified.
+1. obtain PASS of `Lex Runtime Validation` on the final non-main HEAD, including the corrected G18 temporal-freshness contract, G39K dual-model routing, skill-overlay restart rollback and SIMPLE_LETTER_V1 output gate;
+2. obtain PASS of F-138 and G39 Installer State Machine on that same final HEAD;
+3. obtain PASS of the exact-head online installed-copy Windows acceptance, including G39G2 registered-install-root / Polish maintenance-language gates and the foreign-signer negative Authenticode acceptance;
+4. obtain PASS of the exact-head standalone offline clean-machine Windows acceptance;
+5. only when steps 1–4 refer to the same source SHA, publish/update the unsigned `v0.1.3-g39-rc1` prerelease from a non-main release branch and attach SHA-256 receipts;
+6. after the RC evidence is green, close the installer integration slice G39G for the prerelease track; keep production update/signing gates separate and fail-closed;
+7. execute and review the self-hosted Local AI CPU/Vulkan 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
+8. execute the semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
+9. configure production Authenticode and Ed25519 application/skill/model-pack trust roots and execute signed update/rollback acceptance;
+10. enable protected `main` / release rules as a repository-admin task; no merge to `main` is part of this audit/release-candidate flow;
+11. close G39C/G39A-B-D/G39E/G39F/G39J only against their own required benchmark/signing evidence; do not infer PASS from prerelease installer success.
