@@ -145,6 +145,7 @@ Write-Host "[2/6] System prerequisites"
 Ensure-VisualCppRuntime
 
 Write-Host "[3/6] Private Python"
+Write-Host "Private Python contract: delivery=$($manifest.runtime.python.delivery) version=$($manifest.runtime.python.version) root=$(Join-Path $runtime \"python\")"
 $privatePythonHelper = Join-Path $bootstrapRoot "install-private-python.ps1"
 if (-not (Test-Path -LiteralPath $privatePythonHelper -PathType Leaf)) {
   throw "BOOTSTRAP_PRIVATE_PYTHON_HELPER_MISSING"
