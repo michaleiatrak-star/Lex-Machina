@@ -356,6 +356,20 @@ export function registerMaintenanceRoutes(
             "MODEL_PACK_UPDATE_MODEL_NOT_INSTALLED"
           );
         }
+        const requestedModelId =
+          typeof req.body?.modelId ===
+            "string"
+            ? req.body.modelId.trim()
+            : "";
+        if (
+          requestedModelId &&
+          requestedModelId !==
+            installed.modelId
+        ) {
+          throw new Error(
+            "MODEL_PACK_UPDATE_MODEL_MISMATCH"
+          );
+        }
         const target =
           await maintenance
             .verifiedModelPackTarget(
