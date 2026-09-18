@@ -78,7 +78,8 @@
     "validate:release-offline": "tsx src/validate-release-offline.ts",
     "build:skill-update-release": "tsx src/build-skill-update-release.ts",
     "build:model-pack-release": "tsx src/build-model-pack-release.ts",
-    "benchmark:local-context": "tsx src/benchmark-local-context.ts"
+    "benchmark:local-context": "tsx src/benchmark-local-context.ts",
+    "benchmark:local-legal-quality": "tsx src/benchmark-local-legal-quality.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.49",
