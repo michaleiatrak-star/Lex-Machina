@@ -1730,6 +1730,14 @@ export default function MatterChatApp({
                 zadanie pomocnicze zostanie oznaczone jako FAILED/DEGRADED,
                 ale model główny nadal może wykonać odpowiedź.
               </small>
+              {modelRouting.auxiliaryEnabled &&
+              !modelRouting.auxiliaryModel.startsWith("local/") ? (
+                <p className="chat-inline-warning">
+                  Uwaga: pomocniczy model nie jest lokalny. Program może wysłać
+                  do wskazanego providera wyłącznie bieżącą wypowiedź użytkownika
+                  potrzebną do dozwolonego zadania pomocniczego.
+                </p>
+              ) : null}
               <button
                 type="button"
                 className="chat-primary-action"
