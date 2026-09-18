@@ -86,6 +86,118 @@ const SESSION_ID =
 const ACTION_ID =
   /^[A-Za-z0-9._:-]{3,96}$/;
 
+export function parseGuideTransition(
+  input: unknown
+): GuideTransition | null {
+  if (
+    !input ||
+    typeof input !== "object" ||
+    Array.isArray(input)
+  ) {
+    return null;
+  }
+  const value =
+    input as Record<string, unknown>;
+  const type =
+    typeof value.type === "string"
+      ? value.type
+      : "";
+
+  if (
+    type === "SET_AUDIENCE" &&
+    (
+      value.audience === "LAIK" ||
+      value.audience === "PRAWNIK"
+    )
+  ) {
+    return {
+      type,
+      audience: value.audience
+    };
+  }
+
+  if (
+    type === "SET_INTERACTION_MODE" &&
+    (
+      value.mode === "PROWADZENIE" ||
+      value.mode === "QA" ||
+      value.mode === "MENU"
+    )
+  ) {
+    return {
+      type,
+      mode: value.mode
+    };
+  }
+
+  if (
+    type === "SET_RAW_ANALYSIS" &&
+    typeof value.enabled ===
+      "boolean"
+  ) {
+    return {
+      type,
+      enabled: value.enabled
+    };
+  }
+
+  if (
+    type === "MOVE_STEP" &&
+    typeof value.step === "string" &&
+    [
+      "FAZA0",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "M",
+      "Q"
+    ].includes(value.step)
+  ) {
+    return {
+      type,
+      step: value.step as
+        GuideStep
+    };
+  }
+
+  if (
+    type ===
+      "ADVANCE_GUIDED_QUESTION"
+  ) {
+    return { type };
+  }
+
+  if (
+    (
+      type ===
+        "BEGIN_IRREVERSIBLE_ACTION" ||
+      type ===
+        "ACKNOWLEDGE_IRREVERSIBLE_WARNING" ||
+      type ===
+        "CLEAR_IRREVERSIBLE_ACTION"
+    ) &&
+    typeof value.actionId ===
+      "string" &&
+    ACTION_ID.test(
+      value.actionId
+    )
+  ) {
+    return {
+      type,
+      actionId:
+        value.actionId
+    } as GuideTransition;
+  }
+
+  return null;
+}
+
 const ALLOWED_STEP_TRANSITIONS:
   Readonly<
     Record<
