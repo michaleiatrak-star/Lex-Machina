@@ -1015,6 +1015,44 @@ export default function MatterChatApp({
             </h1>
           </div>
           <div className="chat-header-actions">
+            {activeTab === "chat" ? (
+              <div className="chat-model-lanes">
+                <label>
+                  <span>Model główny</span>
+                  <select
+                    value={model}
+                    disabled={executing || models.length === 0}
+                    onChange={(event) => setModel(event.target.value)}
+                  >
+                    {models.length === 0 ? (
+                      <option value="">Brak modeli</option>
+                    ) : null}
+                    {models.map((item) => (
+                      <option
+                        key={item.id}
+                        value={item.id}
+                        disabled={!item.selectable}
+                      >
+                        {item.displayName}
+                      </option>
+                    ))}
+                  </select>
+                  <small>{provider}</small>
+                </label>
+                <div className="chat-aux-model-chip">
+                  <span>Pomocniczy</span>
+                  <strong>
+                    {modelRouting.auxiliaryEnabled
+                      ? selectedAuxiliaryModel?.displayName ??
+                        modelRouting.auxiliaryModel
+                      : "wyłączony"}
+                  </strong>
+                  {modelRouting.auxiliaryEnabled ? (
+                    <small>{modelRouting.auxiliaryProvider}</small>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
             <button
               type="button"
               className="chat-secondary-action"
@@ -1604,6 +1642,109 @@ export default function MatterChatApp({
                     ? `Klucz API dla ${providerDefinition.label} — otwórz w przeglądarce ↗`
                     : `Utwórz / pobierz klucz ${providerDefinition.label} — otwórz w przeglądarce ↗`}
                 </button>
+              ) : null}
+            </article>
+
+            <article className="chat-card">
+              <p className="eyebrow">Rozdział pracy modeli</p>
+              <h2>Model pomocniczy</h2>
+              <label className="chat-toggle-row">
+                <input
+                  type="checkbox"
+                  checked={modelRouting.auxiliaryEnabled}
+                  onChange={(event) =>
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryEnabled: event.target.checked
+                    }))
+                  }
+                />
+                <span>
+                  Aktywuj programistyczny lane pomocniczy
+                </span>
+              </label>
+              <p>
+                Helper nie odpowiada na całe pytanie. Program może przekazać mu wyłącznie
+                zamknięte zadania pomocnicze, np. wyłuskanie jawnych referencji do przepisów,
+                Dz.U. lub sygnatur. Weryfikację wykonuje następnie deterministyczny runtime.
+              </p>
+              <label>
+                Provider pomocniczy
+                <select
+                  value={modelRouting.auxiliaryProvider}
+                  onChange={(event) => {
+                    const next = event.target.value as ProviderId;
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryProvider: next,
+                      auxiliaryModel:
+                        next === "openai"
+                          ? "local/bielik-11b-v3-q4km"
+                          : ""
+                    }));
+                    setModelRoutingMessage("");
+                  }}
+                >
+                  {PROVIDERS.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Model pomocniczy
+                <select
+                  value={modelRouting.auxiliaryModel}
+                  disabled={modelRoutingBusy}
+                  onChange={(event) =>
+                    setModelRouting((current) => ({
+                      ...current,
+                      auxiliaryModel: event.target.value
+                    }))
+                  }
+                >
+                  {!auxiliaryModels.some(
+                    (item) => item.id === modelRouting.auxiliaryModel
+                  ) && modelRouting.auxiliaryModel ? (
+                    <option value={modelRouting.auxiliaryModel}>
+                      {modelRouting.auxiliaryModel ===
+                      "local/bielik-11b-v3-q4km"
+                        ? "Bielik 11B v3 · domyślny"
+                        : modelRouting.auxiliaryModel}
+                    </option>
+                  ) : null}
+                  {auxiliaryModels.length === 0 &&
+                  !modelRouting.auxiliaryModel ? (
+                    <option value="">Brak dostępnych modeli</option>
+                  ) : null}
+                  {auxiliaryModels.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.displayName}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <small>
+                Domyślny helper: Bielik. Jeżeli nie jest zainstalowany, aktywne
+                zadanie pomocnicze zostanie oznaczone jako FAILED/DEGRADED,
+                ale model główny nadal może wykonać odpowiedź.
+              </small>
+              <button
+                type="button"
+                className="chat-primary-action"
+                disabled={
+                  modelRoutingBusy ||
+                  !modelRouting.auxiliaryModel.trim()
+                }
+                onClick={() => void saveModelRouting()}
+              >
+                {modelRoutingBusy
+                  ? "Zapisywanie…"
+                  : "Zapisz rozdział modeli"}
+              </button>
+              {modelRoutingMessage ? (
+                <small>{modelRoutingMessage}</small>
               ) : null}
             </article>
 
