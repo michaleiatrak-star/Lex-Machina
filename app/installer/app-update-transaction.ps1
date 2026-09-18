@@ -79,7 +79,15 @@ function Get-TrustedSignerThumbprints([object]$Manifest) {
   $trusted = @(
     $Manifest.applicationUpdate.trustedSignerThumbprints |
       ForEach-Object { Normalize-Thumbprint ([string]$_) } |
-      Where-Object { $_ -match '^[A-F0-9]{40}
+      Where-Object { $_ -match '^[A-F0-9]{40}$' } |
+      Select-Object -Unique
+  )
+  if ($trusted.Count -lt 1) {
+    throw "UPDATE_TRUST_POLICY_EMPTY"
+  }
+  return $trusted
+}
+
 function Assert-Authenticode(
   [string]$Installer,
   [string[]]$Trusted,
@@ -108,7 +116,18 @@ function Assert-InstallerProductVersion(
     throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISSING"
   }
   $normalized = $raw.Trim()
-  if ($normalized -match '^(\d+)\.(\d+)\.(\d+)\.0
+  if ($normalized -match '^(\d+)\.(\d+)\.(\d+)\.0$') {
+    $normalized = "$($matches[1]).$($matches[2]).$($matches[3])"
+  }
+  $actual = try { [Version]$normalized } catch {
+    throw "UPDATE_INSTALLER_PRODUCT_VERSION_INVALID:$raw"
+  }
+  if ($actual -ne $Expected) {
+    throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISMATCH:expected=$Expected actual=$actual"
+  }
+  return $actual.ToString()
+}
+
 function Stop-LexProcesses([string]$ApplicationRoot) {
   $normalizedRoot = (Full-Path $ApplicationRoot).TrimEnd('\') + '\'
   $localAiRoot = if ($env:LOCALAPPDATA) {
