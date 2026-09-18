@@ -48,6 +48,9 @@ import {
 import type {
   OrderedCaseWorkflowId
 } from "./ordered-case-workflow-state.js";
+import type {
+  GateIRuntimePreludeResult
+} from "./gate-i-runtime-prelude.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -179,6 +182,12 @@ export class LexExecutionEngine {
     runTools?: (
       calls: NormalizedToolCall[]
     ) => Promise<NormalizedToolResult[]>;
+    runGateIRuntimePrelude?: (
+      workflowPlan:
+        DeterministicWorkflowPlan
+    ) => Promise<
+      GateIRuntimePreludeResult
+    >;
   }): Promise<VerticalSliceResult> {
     const events: ExecutionEvent[] = [];
     const emit = (
@@ -803,6 +812,48 @@ export class LexExecutionEngine {
       );
     }
 
+    const runtimePrelude =
+      args.runGateIRuntimePrelude
+        ? await args
+            .runGateIRuntimePrelude(
+              workflowPlan
+            )
+        : {
+            gate:
+              "G39I_RUNTIME_PRELUDE" as const,
+            result:
+              "PASS" as const,
+            actions: [],
+            appendix: ""
+          };
+
+    emit(
+      "gate",
+      runtimePrelude.gate,
+      runtimePrelude.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      runtimePrelude.actions
+        .map(
+          (action) =>
+            `${action.kind}:${action.target}=${action.result}${action.detail ? `(${action.detail})` : ""}`
+        )
+        .join(";") ||
+        "no-presemantic-actions"
+    );
+
+    if (
+      runtimePrelude.result ===
+        "BLOCKED"
+    ) {
+      throw new LexExecutionError(
+        "Mandatory Gate I runtime prelude is unavailable.",
+        runtimePrelude.gate,
+        [...events]
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -834,6 +885,11 @@ export class LexExecutionEngine {
       gateIRuntimePlanPrompt(
         gateIPlan
       ),
+      ...(runtimePrelude.appendix
+        ? [
+            runtimePrelude.appendix
+          ]
+        : []),
       ...(semanticWorkflowResources.length > 0
         ? [
             [
