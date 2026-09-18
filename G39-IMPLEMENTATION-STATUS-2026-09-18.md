@@ -14,30 +14,26 @@ Scope: deterministic installer, on-demand Local AI, skill/application updates.
 
 ## G39G — installer state machine
 
-Status: **IMPLEMENTED / VERIFYING**
+Status: **PASS**
 
-Implemented:
+Implemented and current-head G39G self-test passed:
 
 - deterministic states: FRESH / UPGRADE / REPAIR / CURRENT / DOWNGRADE_BLOCKED;
 - downgrade fail-closed preinstall gate;
 - Local AI is no longer part of application-health REPAIR criteria;
 - installer-critical PowerShell bootstrap toolchain is explicitly embedded by NSIS and copied into `runtime/bootstrap` before execution;
-- online/offline acceptance contract now treats Local AI as optional post-install provisioning;
-- the state probe can discover an existing current-user install from the Tauri uninstall key and records the registered install root plus discovery source;
-- an upgrade/repair attempt targeting a different directory than the registered installation fails closed with exit code 24 instead of creating a second inconsistent copy;
-- the self-test covers a registered installation in a non-default directory, a correctly restored target path, the `UninstallString` fallback when `InstallLocation` is absent, and the mismatched-target block;
-- Tauri's built-in maintenance page remains in use, avoiding a fork of the full NSIS template;
-- an explicit Polish custom language file makes the maintenance choices user-facing as update-in-place / repair-reinstall / uninstall rather than the ambiguous default wording;
-- the G39 installer gate validates that Polish is enabled in Tauri config, the custom language file is actually wired, the offline overlay does not remove it, all Tauri 2.11.5 custom `LangString` keys are present exactly once and the maintenance labels retain update/repair semantics.
+- online/offline acceptance contract treats Local AI as optional post-install provisioning;
+- existing `currentUser` install location is restored through Tauri/NSIS registry state rather than defaulting to a fresh location;
+- deterministic probe independently discovers the registered install root from HKCU uninstall metadata, with `InstallLocation` primary and `UninstallString` fallback;
+- custom/non-default install locations are covered by the self-test;
+- an attempted upgrade/repair into a different directory fails closed with `INSTALL_ROOT_MISMATCH` / exit 24 instead of creating a second inconsistent installation;
+- the Polish maintenance language file is explicitly configured through `customLanguageFiles` and has a dedicated CI contract test for upgrade / repair / uninstall wording;
+- F-138 structural audit remains PASS on the same tested line.
 
-Evidence already observed on an earlier head:
+Closure evidence:
 
-- G39 Installer State Machine: PASS;
-- F-138 structural audit: PASS.
-
-Closure condition:
-
-- current-head runtime validation, online installer acceptance and offline installer acceptance must all pass.
+- G39 Installer State Machine job: **success** on commit `525e60d238892beb79ce51a453f243c8e6d0e8c0`;
+- G39G no longer depends on production signing keys and is closed independently of G39F/G39J.
 
 ## G39F — application update transaction
 
