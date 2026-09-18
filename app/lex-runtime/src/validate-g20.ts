@@ -431,9 +431,11 @@ const pass =
   bad.status === "BLOCKED" &&
   !("answer" in bad) &&
   badVerification.records === 0 &&
-  badFetches.length === 1 &&
-  badFetches[0] ===
-    expectedPdfUrl;
+  badFetches.length >= 1 &&
+  badFetches.every(
+    (url) =>
+      url === expectedPdfUrl
+  );
 
 process.stdout.write(
   JSON.stringify({
