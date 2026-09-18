@@ -1,5 +1,6 @@
 import {
-  detectLegalReferences
+  detectLegalReferences,
+  type DetectedLegalReference
 } from "./finalization-gate.js";
 import type {
   NormalizedToolCall
@@ -10,7 +11,11 @@ import {
 } from "./verification-ledger.js";
 
 const ACT_ALIAS =
-  /\b(KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP)\b/iu;
+  /\b(KC|KPC|KK|KPK|KPA|KP|KRO|KSH|KW|KPW|PZP)\b/giu;
+const SUPREME_COURT =
+  /\b(?:SN|SĄD\s+NAJWYŻSZY|SĄDU\s+NAJWYŻSZEGO)\b/iu;
+const CASE_SIGNATURE =
+  /\bsygn\.?\s*(?:akt\s*)?([A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,8}(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ0-9]{1,12}){0,3}\s+\d+\/\d{2,4})\b/iu;
 
 function normalizedClaim(
   value: string
@@ -22,6 +27,56 @@ function normalizedClaim(
     .trim();
 }
 
+function uniqueActAlias(
+  reference: DetectedLegalReference
+): string | null {
+  const candidates = [
+    ...reference.claim.matchAll(
+      ACT_ALIAS
+    ),
+    ...reference.lineText.matchAll(
+      ACT_ALIAS
+    )
+  ]
+    .map(
+      (match) =>
+        match[1]
+          ?.toLocaleUpperCase(
+            "pl"
+          )
+    )
+    .filter(
+      (
+        value
+      ): value is string =>
+        Boolean(value)
+    );
+
+  const unique =
+    [...new Set(candidates)];
+  return unique.length === 1
+    ? unique[0]!
+    : null;
+}
+
+function caseSignature(
+  reference: DetectedLegalReference
+): string | null {
+  if (
+    reference.kind !== "case" ||
+    !SUPREME_COURT.test(
+      reference.lineText
+    )
+  ) {
+    return null;
+  }
+  return reference.claim
+    .match(
+      CASE_SIGNATURE
+    )?.[1]
+    ?.trim() ?? null;
+}
+
 export type GateIAutoVerificationPlan = {
   calls: NormalizedToolCall[];
   skipped: Array<{
@@ -29,7 +84,8 @@ export type GateIAutoVerificationPlan = {
     reason:
       | "ALREADY_IN_LEDGER"
       | "ACT_ALIAS_AMBIGUOUS"
-      | "COURT_FAMILY_AMBIGUOUS"
+      | "CASE_FAMILY_AMBIGUOUS"
+      | "CASE_SIGNATURE_INVALID"
       | "UNSUPPORTED_KIND";
   }>;
 };
@@ -74,46 +130,71 @@ export function planAutomaticLegalVerification(
 
     if (
       reference.kind ===
-        "case"
+        "statute" ||
+      reference.kind ===
+        "journal"
     ) {
-      const line =
-        reference.lineText
-          .normalize("NFKC")
-          .toLocaleUpperCase("pl");
-      const explicitSupremeCourt =
-        /\bSĄD\s+NAJWYŻSZY\b/u.test(
-          line
-        ) ||
-        /(?:^|[\s(])SN(?:[\s),.:;]|$)/u.test(
-          line
+      const alias =
+        uniqueActAlias(
+          reference
         );
-      if (!explicitSupremeCourt) {
+      if (!alias) {
         skipped.push({
           claim:
             reference.claim,
           reason:
-            "COURT_FAMILY_AMBIGUOUS"
+            "ACT_ALIAS_AMBIGUOUS"
         });
         continue;
       }
 
+      calls.push({
+        id:
+          `gate-i-auto-${calls.length + 1}`,
+        name:
+          "verify_legal_reference",
+        input: {
+          claim:
+            reference.claim,
+          kind:
+            reference.kind,
+          act:
+            alias
+        }
+      });
+      continue;
+    }
+
+    if (
+      reference.kind ===
+        "case"
+    ) {
+      if (
+        !SUPREME_COURT.test(
+          reference.lineText
+        )
+      ) {
+        skipped.push({
+          claim:
+            reference.claim,
+          reason:
+            "CASE_FAMILY_AMBIGUOUS"
+        });
+        continue;
+      }
       const signature =
-        reference.claim
-          .replace(
-            /^sygn\.?\s*(?:akt\s*)?/iu,
-            ""
-          )
-          .trim();
+        caseSignature(
+          reference
+        );
       if (!signature) {
         skipped.push({
           claim:
             reference.claim,
           reason:
-            "COURT_FAMILY_AMBIGUOUS"
+            "CASE_SIGNATURE_INVALID"
         });
         continue;
       }
-
       calls.push({
         id:
           `gate-i-auto-${calls.length + 1}`,
@@ -130,50 +211,11 @@ export function planAutomaticLegalVerification(
       continue;
     }
 
-    if (
-      reference.kind !==
-        "statute"
-    ) {
-      skipped.push({
-        claim:
-          reference.claim,
-        reason:
-          "UNSUPPORTED_KIND"
-      });
-      continue;
-    }
-
-    const alias =
-      reference.claim
-        .match(
-          ACT_ALIAS
-        )?.[1]
-        ?.toLocaleUpperCase(
-          "pl"
-        );
-    if (!alias) {
-      skipped.push({
-        claim:
-          reference.claim,
-        reason:
-          "ACT_ALIAS_AMBIGUOUS"
-      });
-      continue;
-    }
-
-    calls.push({
-      id:
-        `gate-i-auto-${calls.length + 1}`,
-      name:
-        "verify_legal_reference",
-      input: {
-        claim:
-          reference.claim,
-        kind:
-          "statute",
-        act:
-          alias
-      }
+    skipped.push({
+      claim:
+        reference.claim,
+      reason:
+        "UNSUPPORTED_KIND"
     });
   }
 
@@ -187,12 +229,6 @@ function marker(
   record:
     VerificationRecord
 ): string | null {
-  if (
-    record.status ===
-      "UNVERIFIED"
-  ) {
-    return "⚠️ [NIEWERYFIKOWANE]";
-  }
   if (
     record.status !==
       "VERIFIED" ||
@@ -244,9 +280,14 @@ export function applyAutomaticVerificationMarkers(
       ledger.latest(
         reference.claim
       );
-    if (!record) {
+    if (
+      !record ||
+      record.status !==
+        "VERIFIED"
+    ) {
       continue;
     }
+
     const current =
       byLine.get(
         reference.line
