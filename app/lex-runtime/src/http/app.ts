@@ -5973,6 +5973,182 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         };
       }
 
+      let chronologyContext:
+        | {
+            caseId: string;
+            permit:
+              ChronologyExecutionPermit;
+            state:
+              ChronologyState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "CHRONOLOGY_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .chronologyWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "CHRONOLOGY_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const chronologyCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!chronologyCaseId) {
+          throw new Error(
+            "CHRONOLOGY_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            chronologyCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              chronologyCaseId
+            );
+
+        const temporalRequired =
+          chronologyTemporalGateRequired([
+            request.query,
+            ...sessionAttachments.flatMap(
+              (attachment) =>
+                attachment.chunks.map(
+                  (chunk) =>
+                    chunk.text
+                )
+            )
+          ]);
+
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              chronologyCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                let current =
+                  await options
+                    .chronologyWorkflowStore!
+                    .getChronologyState({
+                      caseId:
+                        chronologyCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+
+                if (!current) {
+                  current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state:
+                          createChronologyState(
+                            chronologyCaseId
+                          )
+                      });
+                }
+
+                if (
+                  temporalRequired &&
+                  !current
+                    .temporalGateRequired
+                ) {
+                  const next =
+                    requireChronologyTemporalGate(
+                      current,
+                      true
+                    );
+                  current =
+                    await options
+                      .chronologyWorkflowStore!
+                      .saveChronologyState({
+                        caseId:
+                          chronologyCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion,
+                        state: next,
+                        expectedRevision:
+                          current.revision
+                      });
+                }
+                return current;
+              }
+            );
+
+        const permit =
+          requireChronologyExecutionPermit(
+            state
+          );
+        request.chronologyWorkflowContext = {
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint,
+          temporalGateRequired:
+            state
+              .temporalGateRequired
+        };
+        chronologyContext = {
+          caseId:
+            chronologyCaseId,
+          permit,
+          state
+        };
+      }
+
       if (
         processContext?.permit.mode ===
           "AUTO" &&
