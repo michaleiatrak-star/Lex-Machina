@@ -27,6 +27,21 @@ function normalizeThumbprint(value: string): string {
   return value.replaceAll(/\s+/g, "").toUpperCase();
 }
 
+function windowsPowerShellEnvironment(): NodeJS.ProcessEnv {
+  const env: NodeJS.ProcessEnv = {
+    ...process.env
+  };
+  for (const key of Object.keys(env)) {
+    if (
+      key.toLowerCase() ===
+        "psmodulepath"
+    ) {
+      delete env[key];
+    }
+  }
+  return env;
+}
+
 export function normalizeApplicationProductVersion(
   value: string
 ): string {
@@ -159,7 +174,9 @@ implements ApplicationInstallerVerifier {
       {
         encoding: "utf8",
         windowsHide: true,
-        timeout: 30_000
+        timeout: 30_000,
+        env:
+          windowsPowerShellEnvironment()
       }
     );
     if (result.status !== 0) {
