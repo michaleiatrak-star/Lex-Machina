@@ -7,6 +7,7 @@ param(
 $ErrorActionPreference = "Stop"
 # Canonical rule: never install or register Python system-wide.
 # Lex Machina owns an app-local, hash-pinned runtime under runtime\\python.
+# This helper is the only supported private-Python provisioning path.
 $manifestFile = (Resolve-Path -LiteralPath $ManifestPath).Path
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifest = Get-Content -Raw -LiteralPath $manifestFile | ConvertFrom-Json
