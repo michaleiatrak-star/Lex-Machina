@@ -50,8 +50,8 @@
         }
       }
     },
-    "resources": [
-      "runtime/**/*"
-    ]
+    "resources": {
+      "runtime": "runtime"
+    }
   }
 }
