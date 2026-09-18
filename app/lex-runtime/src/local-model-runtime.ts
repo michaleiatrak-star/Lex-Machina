@@ -503,63 +503,126 @@ export class LocalModelRuntime {
     );
   }
 
-  installedModelUpdateIdentity(): {
+  installedModelUpdateIdentity(
+    requestedModelId?: string
+  ): {
     modelId: LocalModelId;
     sha256: string;
     contextTokens: number;
     packVersion?: string;
     signerKeyId?: string;
+    active: boolean;
   } | null {
     const config = this.readConfig();
-    if (
-      !config ||
-      !/^[a-f0-9]{64}$/i.test(
-        config.model.sha256
-      )
-    ) {
+    const modelId =
+      requestedModelId
+        ? normalizeModelId(
+            requestedModelId
+          )
+        : config
+          ? normalizeModelId(
+              config.model.id
+            )
+          : null;
+    if (!modelId) {
       return null;
     }
-    const modelId =
-      normalizeModelId(
-        config.model.id
-      );
+
     const spec =
       this.modelSpec(modelId);
+    if (!spec) {
+      return null;
+    }
+    const modelPath =
+      path.join(
+        this.rootDir,
+        "models",
+        spec.filename
+      );
     if (
-      !spec ||
       !fs.existsSync(
-        config.model.path
+        modelPath
       )
     ) {
       return null;
     }
-    const receipt =
-      this.readModelPackReceipt();
-    if (
-      receipt &&
-      (
+
+    const active =
+      Boolean(
+        config &&
         normalizeModelId(
-          receipt.modelId
-        ) !== modelId ||
+          config.model.id
+        ) === modelId
+      );
+    const receipt =
+      this.readModelPackReceipt(
+        modelId
+      );
+
+    let sha256: string | null =
+      null;
+    let contextTokens =
+      Math.max(
+        spec.minimumContext ??
+          this.contextPolicy()
+            .minimum,
+        this.contextPolicy()
+          .default
+      );
+
+    if (active && config) {
+      if (
+        !/^[a-f0-9]{64}$/i.test(
+          config.model.sha256
+        )
+      ) {
+        throw new Error(
+          "LOCAL_MODEL_CONFIG_HASH_INVALID"
+        );
+      }
+      sha256 =
+        config.model.sha256
+          .toLowerCase();
+      contextTokens =
+        config.context
+          .requestedTokens;
+
+      if (
+        receipt &&
         receipt.modelSha256
           .toLowerCase() !==
-          config.model.sha256
-            .toLowerCase()
+          sha256
+      ) {
+        throw new Error(
+          "MODEL_PACK_RECEIPT_STATE_MISMATCH"
+        );
+      }
+    } else if (receipt) {
+      sha256 =
+        receipt.modelSha256
+          .toLowerCase();
+    } else if (
+      spec.sha256 &&
+      /^[a-f0-9]{64}$/i.test(
+        spec.sha256
       )
     ) {
-      throw new Error(
-        "MODEL_PACK_RECEIPT_STATE_MISMATCH"
-      );
+      // Legacy/on-demand installs are pinned by the signed application
+      // manifest even before they receive an independent model-pack receipt.
+      sha256 =
+        spec.sha256
+          .toLowerCase();
+    }
+
+    if (!sha256) {
+      return null;
     }
 
     return {
       modelId,
-      sha256:
-        config.model.sha256
-          .toLowerCase(),
-      contextTokens:
-        config.context
-          .requestedTokens,
+      sha256,
+      contextTokens,
+      active,
       ...(receipt
         ? {
             packVersion:
@@ -1011,7 +1074,9 @@ export class LocalModelRuntime {
           )
         : null;
     const modelPackReceiptPath =
-      this.modelPackReceiptPath();
+      this.modelPackReceiptPathForFilename(
+        model.filename
+      );
     const previousModelPackReceipt =
       fs.existsSync(
         modelPackReceiptPath
@@ -1220,7 +1285,9 @@ export class LocalModelRuntime {
       }
 
       commitModelFile();
-      this.clearProvisionTransaction();
+      this.clearProvisionTransaction(
+        model.filename
+      );
       return {
         model: this.publicDescriptor(model, config),
         contextTokens: config.context.requestedTokens,
@@ -1251,7 +1318,9 @@ export class LocalModelRuntime {
           { force: true }
         );
       }
-      this.clearProvisionTransaction();
+      this.clearProvisionTransaction(
+        model.filename
+      );
       this.provisioningProgress = {
         phase: "FAILED",
         label: canonical,
@@ -1793,8 +1862,23 @@ export class LocalModelRuntime {
     );
     if (configRemoved) {
       fs.rmSync(this.configPath(), { force: true });
+    }
+    fs.rmSync(
+      this.modelPackReceiptPathForFilename(
+        model.filename
+      ),
+      { force: true }
+    );
+    const legacyReceipt =
+      this.readLegacyModelPackReceipt();
+    if (
+      legacyReceipt &&
+      normalizeModelId(
+        legacyReceipt.modelId
+      ) === canonical
+    ) {
       fs.rmSync(
-        this.modelPackReceiptPath(),
+        this.legacyModelPackReceiptPath(),
         { force: true }
       );
     }
@@ -1897,8 +1981,12 @@ export class LocalModelRuntime {
     return `${this.qualificationPath()}.lex-rollback`;
   }
 
-  private modelPackReceiptRollbackPath(): string {
-    return `${this.modelPackReceiptPath()}.lex-rollback`;
+  private modelPackReceiptRollbackPath(
+    modelFilename: string
+  ): string {
+    return `${this.modelPackReceiptPathForFilename(
+      modelFilename
+    )}.lex-rollback`;
   }
 
   private writeProvisionTransaction(
@@ -1916,7 +2004,9 @@ export class LocalModelRuntime {
     const qualificationBackup =
       this.qualificationRollbackPath();
     const modelPackReceiptBackup =
-      this.modelPackReceiptRollbackPath();
+      this.modelPackReceiptRollbackPath(
+        transaction.modelFilename
+      );
     const marker =
       this.provisionTransactionPath();
 
@@ -1979,7 +2069,9 @@ export class LocalModelRuntime {
     );
   }
 
-  private clearProvisionTransaction(): void {
+  private clearProvisionTransaction(
+    modelFilename: string
+  ): void {
     fs.rmSync(
       this.configRollbackPath(),
       { force: true }
@@ -1989,7 +2081,9 @@ export class LocalModelRuntime {
       { force: true }
     );
     fs.rmSync(
-      this.modelPackReceiptRollbackPath(),
+      this.modelPackReceiptRollbackPath(
+        modelFilename
+      ),
       { force: true }
     );
     fs.rmSync(
@@ -2063,7 +2157,9 @@ export class LocalModelRuntime {
     const qualificationBackup =
       this.qualificationRollbackPath();
     const modelPackReceiptBackup =
-      this.modelPackReceiptRollbackPath();
+      this.modelPackReceiptRollbackPath(
+        transaction.modelFilename
+      );
 
     try {
       if (
@@ -2162,16 +2258,22 @@ export class LocalModelRuntime {
         }
         fs.copyFileSync(
           modelPackReceiptBackup,
-          this.modelPackReceiptPath()
+          this.modelPackReceiptPathForFilename(
+            transaction.modelFilename
+          )
         );
       } else {
         fs.rmSync(
-          this.modelPackReceiptPath(),
+          this.modelPackReceiptPathForFilename(
+            transaction.modelFilename
+          ),
           { force: true }
         );
       }
 
-      this.clearProvisionTransaction();
+      this.clearProvisionTransaction(
+        transaction.modelFilename
+      );
     } catch (error) {
       const detail =
         error instanceof Error
@@ -2183,17 +2285,59 @@ export class LocalModelRuntime {
     }
   }
 
-  private modelPackReceiptPath(): string {
+  private legacyModelPackReceiptPath(): string {
     return path.join(
       this.rootDir,
       "model-pack-install.json"
     );
   }
 
-  private readModelPackReceipt():
-    LocalModelPackReceipt | null {
-    const target =
-      this.modelPackReceiptPath();
+  private modelPackReceiptPathForFilename(
+    modelFilename: string
+  ): string {
+    if (
+      modelFilename !==
+        path.basename(
+          modelFilename
+        ) ||
+      !/^[A-Za-z0-9._-]+\.gguf$/i.test(
+        modelFilename
+      )
+    ) {
+      throw new Error(
+        "MODEL_PACK_RECEIPT_FILENAME_INVALID"
+      );
+    }
+    return path.join(
+      this.rootDir,
+      "models",
+      `${modelFilename}.model-pack.json`
+    );
+  }
+
+  private modelPackReceiptPathForModel(
+    modelId: string
+  ): string {
+    const model =
+      this.modelSpec(
+        normalizeModelId(
+          modelId
+        )
+      );
+    if (!model) {
+      throw new Error(
+        "LOCAL_MODEL_UNKNOWN"
+      );
+    }
+    return this
+      .modelPackReceiptPathForFilename(
+        model.filename
+      );
+  }
+
+  private parseModelPackReceipt(
+    target: string
+  ): LocalModelPackReceipt | null {
     if (
       !fs.existsSync(target)
     ) {
@@ -2261,11 +2405,63 @@ export class LocalModelRuntime {
     };
   }
 
+  private readLegacyModelPackReceipt():
+    LocalModelPackReceipt | null {
+    return this.parseModelPackReceipt(
+      this.legacyModelPackReceiptPath()
+    );
+  }
+
+  private readModelPackReceipt(
+    modelId: string
+  ): LocalModelPackReceipt | null {
+    const canonical =
+      normalizeModelId(
+        modelId
+      );
+    const current =
+      this.parseModelPackReceipt(
+        this.modelPackReceiptPathForModel(
+          canonical
+        )
+      );
+    if (current) {
+      if (
+        normalizeModelId(
+          current.modelId
+        ) !== canonical
+      ) {
+        throw new Error(
+          "MODEL_PACK_RECEIPT_STATE_MISMATCH"
+        );
+      }
+      return current;
+    }
+
+    const legacy =
+      this.readLegacyModelPackReceipt();
+    if (
+      legacy &&
+      normalizeModelId(
+        legacy.modelId
+      ) === canonical
+    ) {
+      return legacy;
+    }
+    return null;
+  }
+
   private writeModelPackReceipt(
     receipt: LocalModelPackReceipt
   ): void {
     const target =
-      this.modelPackReceiptPath();
+      this.modelPackReceiptPathForModel(
+        receipt.modelId
+      );
+    fs.mkdirSync(
+      path.dirname(target),
+      { recursive: true }
+    );
     const temporary =
       `${target}.tmp`;
     fs.writeFileSync(
@@ -2284,6 +2480,23 @@ export class LocalModelRuntime {
       temporary,
       target
     );
+
+    const legacy =
+      this.readLegacyModelPackReceipt();
+    if (
+      legacy &&
+      normalizeModelId(
+        legacy.modelId
+      ) ===
+        normalizeModelId(
+          receipt.modelId
+        )
+    ) {
+      fs.rmSync(
+        this.legacyModelPackReceiptPath(),
+        { force: true }
+      );
+    }
   }
 
   private qualificationPath(): string {
