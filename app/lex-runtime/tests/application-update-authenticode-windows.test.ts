@@ -77,24 +77,30 @@ function createTrustedTestSigner(
 ): string {
   const command = [
     "$ErrorActionPreference='Stop'",
-    "Import-Module Microsoft.PowerShell.Security -ErrorAction Stop",
-    "Import-Module PKI -ErrorAction Stop",
-    "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { New-PSDrive -Name Cert -PSProvider Certificate -Root '\\\\' -Scope Global | Out-Null }",
-    "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { throw 'CERTIFICATE_PROVIDER_UNAVAILABLE' }",
     `$target=${psLiteral(target)}`,
-    "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina CI Foreign Signer' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyExportPolicy Exportable -KeyLength 2048 -HashAlgorithm SHA256 -NotAfter (Get-Date).AddDays(2)",
-    "$root=New-Object System.Security.Cryptography.X509Certificates.X509Store('Root','CurrentUser')",
-    "$root.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
-    "$root.Add($cert)",
-    "$root.Close()",
-    "$publishers=New-Object System.Security.Cryptography.X509Certificates.X509Store('TrustedPublisher','CurrentUser')",
-    "$publishers.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
-    "$publishers.Add($cert)",
-    "$publishers.Close()",
-    "$null=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
+    "$rsa=[System.Security.Cryptography.RSA]::Create(2048)",
+    "$dn=[System.Security.Cryptography.X509Certificates.X500DistinguishedName]::new('CN=Lex Machina CI Foreign Signer')",
+    "$req=[System.Security.Cryptography.X509Certificates.CertificateRequest]::new($dn,$rsa,[System.Security.Cryptography.HashAlgorithmName]::SHA256,[System.Security.Cryptography.RSASignaturePadding]::Pkcs1)",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509KeyUsageExtension]::new([System.Security.Cryptography.X509Certificates.X509KeyUsageFlags]::DigitalSignature,$true))",
+    "$oids=[System.Security.Cryptography.OidCollection]::new()",
+    "$null=$oids.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
+    "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
+    "$stores=@('My','Root','TrustedPublisher')",
+    "foreach($storeName in $stores){",
+    "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
+    "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
+    "  try { $store.Add($cert) } finally { $store.Close() }",
+    "}",
+    "$signed=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
+    "if ($signed.Status -ne 'Valid') { throw ('TEST_SIGNATURE_NOT_VALID:' + $signed.Status) }",
     "$check=Get-AuthenticodeSignature -LiteralPath $target",
-    "if ($check.Status -ne 'Valid') { throw ('TEST_SIGNATURE_NOT_VALID:' + $check.Status) }",
-    "$cert.Thumbprint"
+    "if ($check.Status -ne 'Valid') { throw ('TEST_SIGNATURE_RECHECK_NOT_VALID:' + $check.Status) }",
+    "$thumb=$cert.Thumbprint",
+    "$cert.Dispose()",
+    "$rsa.Dispose()",
+    "$thumb"
   ].join("; ");
 
   const output =
@@ -144,12 +150,14 @@ function cleanupCertificate(
     powershell(
       [
         "$ErrorActionPreference='SilentlyContinue'",
-        "Import-Module Microsoft.PowerShell.Security -ErrorAction SilentlyContinue",
-        "if (-not (Get-PSDrive -Name Cert -ErrorAction SilentlyContinue)) { New-PSDrive -Name Cert -PSProvider Certificate -Root '\\\\' -Scope Global -ErrorAction SilentlyContinue | Out-Null }",
         `$thumb=${psLiteral(escaped)}`,
-        "foreach($store in @('My','Root','TrustedPublisher')) {",
-        "  $item='Cert:\\CurrentUser\\' + $store + '\\' + $thumb",
-        "  if (Test-Path -LiteralPath $item) { Remove-Item -LiteralPath $item -Force }",
+        "$stores=@('My','Root','TrustedPublisher')",
+        "foreach($storeName in $stores){",
+        "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
+        "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
+        "  try {",
+        "    foreach($cert in @($store.Certificates.Find([System.Security.Cryptography.X509Certificates.X509FindType]::FindByThumbprint,$thumb,$false))){ $store.Remove($cert) }",
+        "  } finally { $store.Close() }",
         "}"
       ].join("; ")
     );
