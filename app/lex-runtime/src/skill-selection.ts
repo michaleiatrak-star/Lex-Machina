@@ -14,6 +14,12 @@ const STOP_WORDS = new Set([
   "this", "with"
 ]);
 
+const EXECUTION_SKILL_NAME_OVERRIDES =
+  new Set([
+    "przesluchanie-swiadkow-v2-min90",
+    "raport-klienta-v1"
+  ]);
+
 export type SkillSelectionEnvelope = {
   query: string;
   automatic: boolean;
@@ -137,6 +143,31 @@ const EXPLICIT_EXECUTION_RULES: readonly ExplicitExecutionRule[] = [
     ]
   },
   {
+    skill: "chronologia-sprawy-v1",
+    patterns: [
+      /\bchronologi[a-z]*\b/,
+      /\bos czasu\b/,
+      /\btimeline\b/,
+      /\bkolejnosc zdarzen\b/
+    ]
+  },
+  {
+    skill: "raport-klienta-v1",
+    patterns: [
+      /\braport dla klient[a-z]*\b/,
+      /\bpodsumowani[a-z]* dla klient[a-z]*\b/,
+      /\bstatus dla klient[a-z]*\b/
+    ]
+  },
+  {
+    skill: "raport-sytuacyjny-v2",
+    patterns: [
+      /\braport sytuacyjn[a-z]*\b/,
+      /\bwidok sytuacji\b/,
+      /\bstatus sprawy z ryzykami\b/
+    ]
+  },
+  {
     skill: "analiza-sadowa-v6",
     patterns: [
       /\bjakie mam szanse\b/,
@@ -251,8 +282,18 @@ function scoreSkill(
 
 function isExecutionSkill(skill: LexSkillRecord): boolean {
   return (
-    typeof skill.frontmatter.type === "string" &&
-    skill.frontmatter.type.toLowerCase().startsWith("executive-")
+    EXECUTION_SKILL_NAME_OVERRIDES.has(
+      skill.name
+    ) ||
+    (
+      typeof skill.frontmatter.type ===
+        "string" &&
+      skill.frontmatter.type
+        .toLowerCase()
+        .startsWith(
+          "executive-"
+        )
+    )
   );
 }
 
