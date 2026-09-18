@@ -178,8 +178,8 @@ Lex-Machina/
     ├── shared/                              ← bramki (PRAWO-HARDGATE, SYGNATURY,
     │   │                                      WERYFIKACJA-SLAD), UNIVERSAL-RUNTIME-ADAPTER,
     │   │                                      moduły MOD-*, definicje
-    │   └── tools/                           ← skrypty audytowe + mcp-servers/ (przykłady
-    │                                          konektorów: ISAP/ELI, SAOS, EUR-Lex, KRS…)
+    │   └── tools/                           ← bramka cytowań przed eksportem (opis;
+    │                                          kod uruchamiany po stronie portalu)
     │   (każdy skill: agents/openai.yaml + PORTABILITY-MANIFEST.md — warstwa host-neutralna)
     ├── prawny-router-v3/                    ← orkiestrator
     ├── prawo-polskie-v2/                    ← mapa routingu dziedzin
@@ -198,7 +198,9 @@ Lex-Machina/
     ├── raport-sytuacyjny-v2/                ┘
     ├── *_build/                             ← katalogi robocze buildów — NIE wgrywać
     └── audyt-systemu-v4/                    ← governance: modules/, references/
-                                               (AUDIT-JOURNAL, mapy Dz.U.), scripts/, widgets/
+                                               (AUDIT-JOURNAL, mapy Dz.U., inwentarz
+                                               dostępu maszynowego i konektorów),
+                                               scripts/, widgets/
 ```
 
 Katalog wersji stabilnej ma tę samą strukturę — łącznie z warstwą host-neutralną
@@ -408,7 +410,7 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 | Konektor | Źródło | Status |
 |---|---|---|
 | `mcp-isap` | api.sejm.gov.pl/eli — 96 000+ aktów Dz.U./M.P. | skonfigurowany ([`claude_desktop_config.json`](claude_desktop_config.json)) |
-| SAOS, EUR-Lex/CELLAR, KRS, CEIDG, NBP, SUDOP | przykładowe implementacje | [`shared/tools/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/shared/tools/mcp-servers/) + rekomendacje: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md) |
+| SAOS, EUR-Lex/CELLAR, KRS, CEIDG, NBP, SUDOP | publiczne API źródeł | inwentarz dostępu maszynowego (co i jak da się pobrać, z datą pomiaru): [`audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md) + rekomendacje wdrożeniowe: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md) |
 
 ---
 
