@@ -204,7 +204,7 @@ export function registerMaintenanceRoutes(
       try {
         const repaired =
           localModels
-            .requiresSignedModelPackRepair()
+            .requiresModelPackRepair()
             ? await (async () => {
                 const installed =
                   localModels
