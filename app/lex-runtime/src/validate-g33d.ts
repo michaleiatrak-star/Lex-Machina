@@ -17,6 +17,8 @@ const privatePython = read("app/installer/install-private-python.ps1");
 const onlineBuild = read("app/installer/build-windows-online.ps1");
 const offlineBuild = read("app/installer/build-windows-offline.ps1");
 const branding = read("app/installer/materialize-brand-icon.ps1");
+const purge = read("app/installer/purge-windows-user-state.ps1");
+const profileLifecycle = read("app/installer/profile-lifecycle-selftest.ps1");
 const releaseSource = JSON.parse(
   read("app/installer/windows-release-source.json")
 ) as {
@@ -60,7 +62,7 @@ const checks = {
     acceptance.includes("privateNode") &&
     acceptance.includes("privatePython"),
   firstRunWithoutProviderKey:
-    acceptance.includes("first desktop startup without provider key") &&
+    acceptance.includes("first desktop startup with a clean local admin profile") &&
     acceptance.includes("INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT"),
   actualOcrNerRendererSelftest:
     selftest.includes("SELFTEST_OCR_INFERENCE_FAILED") &&
@@ -99,6 +101,21 @@ const checks = {
     bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') >= 0 &&
     bootstrap.indexOf('Write-Host "[2/6] System prerequisites"') <
       bootstrap.indexOf('Write-Host "[3/6] Private Python"'),
+  cleanAdminLifecycle:
+    hooks.includes("LEX_INSTALL_CLEAN_PROFILE") &&
+    hooks.includes("NOWY CZYSTY profil administratora") &&
+    hooks.includes("NSIS_HOOK_PREUNINSTALL") &&
+    hooks.includes("lex-purge-user-state.ps1") &&
+    purge.includes("CredEnumerateW") &&
+    purge.includes("CredDeleteW") &&
+    purge.includes(".LexMachina/") &&
+    purge.includes(".lex-machina") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_FRESH_ADMIN_INVALID") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_PROFILE_PURGE_FAILED") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_CREDENTIAL_PURGE_FAILED") &&
+    profileLifecycle.includes("PROFILE_LIFECYCLE_SELFTEST_PASS") &&
+    onlineBuild.includes("profile-lifecycle-selftest.ps1") &&
+    offlineBuild.includes("profile-lifecycle-selftest.ps1"),
   postInstallFailClosed:
     hooks.includes("windows-online-bootstrap.ps1") &&
     hooks.includes("--self-test") &&
