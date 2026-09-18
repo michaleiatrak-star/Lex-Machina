@@ -242,6 +242,10 @@ New/updated validation:
 - G16 verification-loop validator has been updated to perform the new statute-workflow fresh reads instead of bypassing the deterministic preflight;
 - `SIMPLE_LETTER_V1` now has a runtime-enforced M9 output contract in addition to fresh-resource reads: a critical intake gap is accepted only as explicit `DANE DO UZUPEŁNIENIA`, while a purported ready artifact must contain `TREŚĆ PISMA → UWAGI PRAKTYCZNE → CO DALEJ → HYBRID-VALIDATION` in order plus the final `Pismo zawiera ... pól do uzupełnienia` count;
 - the simple-letter output gate is audited as `G39H_WORKFLOW_OUTPUT` and blocks presentation independently of source/citation finalization; unit tests cover intake-only, valid ready artifact and missing/reordered sections, and a session-level integration test proves the gate reaches the execution audit.
+- `PROCESS_PLEADING_V1` now has a checkpoint-aware output contract: intermediate checkpoints may present work products but cannot claim `STATUS PISMA: ... GOTOWE`; the final `CP-PEER` turn must expose `RAPORT W3 → STATUS PISMA → UWAGI REDAKCYJNE PRZED ZŁOŻENIEM → REJESTR KROKÓW` in order before presentation can pass;
+- process-output tests cover a valid intermediate checkpoint, premature final-status blocking and valid/invalid `CP-PEER` finalization packages;
+- `COURT_ANALYSIS_V1` now has a checkpoint-aware final-report contract: earlier passes remain unconstrained by the §1–§11 document schema, while `FINAL_REPORT_PRESENTED` requires `RAPORT ANALITYCZNY`, `EXECUTIVE SUMMARY`, summaries of Przejście I–IV and §1–§11 in order;
+- court-output tests cover non-final passes plus complete and incomplete/reordered final reports; later `SITUATIONAL_REPORT` and process-pleading-offer checkpoints remain separate state-machine stages rather than being merged into the final report.
 
 Still required before G39H/I PASS:
 
