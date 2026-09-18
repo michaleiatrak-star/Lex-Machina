@@ -124,6 +124,16 @@ import {
   evidenceInventoryFromUploads,
   type ProcessEvidenceInventory
 } from "../process-pleading-applicability.js";
+import {
+  createCourtAnalysisState,
+  nextCourtAnalysisCheckpoint,
+  type CourtAnalysisState
+} from "../court-analysis-state.js";
+import {
+  completeCourtAnalysisExecution,
+  requireCourtAnalysisExecutionPermit,
+  type CourtAnalysisExecutionPermit
+} from "../court-analysis-execution-gate.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -363,6 +373,11 @@ export type LexHttpAppOptions = {
     | "getProcessPleadingState"
     | "saveProcessPleadingState"
   >;
+  courtAnalysisWorkflowStore?: Pick<
+    EncryptedCaseWorkspaceStore,
+    | "getCourtAnalysisState"
+    | "saveCourtAnalysisState"
+  >;
   documentGenerationState?: Pick<
     DocumentGenerationStateStore,
     "readState"
@@ -496,6 +511,27 @@ function sendProcessWorkflowError(
     !(error instanceof Error) ||
     !error.message.startsWith(
       "PROCESS_PLEADING_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
+function sendCourtWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "COURT_ANALYSIS_"
     )
   ) {
     return false;
