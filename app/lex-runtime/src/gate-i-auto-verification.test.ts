@@ -181,6 +181,93 @@ describe(
     );
 
     it(
+      "plans an SN signature deterministically when the court family is explicit",
+      () => {
+        const plan =
+          planAutomaticLegalVerification(
+            "Sąd Najwyższy, sygn. III CZP 25/11, rozpoznawał to zagadnienie.",
+            new VerificationLedger()
+          );
+
+        expect(plan.calls)
+          .toHaveLength(1);
+        expect(
+          plan.calls[0]?.name
+        ).toBe(
+          "verify_case_reference"
+        );
+        expect(
+          plan.calls[0]?.input
+            .signature
+        ).toBe(
+          "III CZP 25/11"
+        );
+        expect(
+          plan.calls[0]?.input
+            .courtFamily
+        ).toBe("SN");
+      }
+    );
+
+    it(
+      "does not guess the court family for a bare signature",
+      () => {
+        const plan =
+          planAutomaticLegalVerification(
+            "Por. sygn. III CZP 25/11.",
+            new VerificationLedger()
+          );
+
+        expect(plan.calls)
+          .toHaveLength(0);
+        expect(
+          plan.skipped[0]
+            ?.reason
+        ).toBe(
+          "CASE_FAMILY_AMBIGUOUS"
+        );
+      }
+    );
+
+    it(
+      "adds a runtime marker to a verified case signature line",
+      () => {
+        const ledger =
+          new VerificationLedger();
+        ledger.add({
+          claim:
+            "sygn. III CZP 25/11",
+          kind: "case",
+          status:
+            "VERIFIED",
+          sourceUrl:
+            "https://www.sn.pl/example",
+          fetchedAt:
+            "2026-09-18T12:00:00.000Z",
+          verificationMethod:
+            "web_fetch",
+          caseScope:
+            "FULL_TEXT",
+          caseSignature:
+            "III CZP 25/11"
+        });
+
+        const result =
+          applyAutomaticVerificationMarkers(
+            "Sąd Najwyższy, sygn. III CZP 25/11.",
+            ledger
+          );
+
+        expect(result.inserted)
+          .toBe(1);
+        expect(result.text)
+          .toContain(
+            "✅ [VER: https://www.sn.pl/example, 2026-09-18]"
+          );
+      }
+    );
+
+    it(
       "does not plan a duplicate verification already present in the ledger",
       () => {
         const ledger =
