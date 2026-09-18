@@ -10,12 +10,14 @@ import {
 } from "./application-update-verifier.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
+  skillUpdateSignatureMode,
   skillUpdateTrustReady,
   verifySkillUpdateIndex,
   type SkillUpdateIndex,
   type VerifiedSkillIndex
 } from "./skill-update-verifier.js";
 import {
+  modelPackSignatureMode,
   modelPackTrustReady,
   modelUpdateFamilyForId,
   verifyModelPackIndex,
@@ -62,8 +64,12 @@ export type SkillUpdateStatus = {
   bundleReady: boolean;
   verificationReady: boolean;
   blockedReason?:
+    | "INDEX_MISSING"
     | "SIGNED_INDEX_MISSING"
     | "SIGNER_POLICY_MISSING";
+  signatureMode:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
 };
 
 export type SkillUpdateApplyResult = {
@@ -91,6 +97,9 @@ export type ModelPackUpdateStatus = {
   targetBytes?: number;
   targetSha256?: string;
   verificationReady: boolean;
+  signatureMode:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
   signerKeyId?: string;
   blockedReason?:
     | "SIGNED_INDEX_MISSING"
@@ -820,7 +829,17 @@ export class MaintenanceService {
           verifyModelPackIndex(
             indexBytes,
             signatureBytes
-          )
+          ),
+    private readonly skillSignatureMode:
+      () =>
+        | "SIGNED_REQUIRED"
+        | "UNSIGNED_ALLOWED" =
+      skillUpdateSignatureMode,
+    private readonly modelSignatureMode:
+      () =>
+        | "SIGNED_REQUIRED"
+        | "UNSIGNED_ALLOWED" =
+      modelPackSignatureMode
   ) {}
 
   async applicationStatus(): Promise<UpdateDiscoveryResult> {
@@ -901,10 +920,16 @@ export class MaintenanceService {
     const available =
       Boolean(status.skillsBundle && latestVersion) &&
       compareVersions(currentVersion, latestVersion!) < 0;
-    const signedAssetsReady = Boolean(
+    const signatureMode =
+      this.skillSignatureMode();
+    const indexAssetsReady = Boolean(
       status.skillsBundle &&
       status.skillsIndex &&
-      status.skillsSignature
+      (
+        signatureMode ===
+          "UNSIGNED_ALLOWED" ||
+        status.skillsSignature
+      )
     );
     const verificationReady =
       this.skillTrustReady();
@@ -919,13 +944,18 @@ export class MaintenanceService {
       ...(latestVersion ? { latestVersion } : {}),
       checkedAt: status.checkedAt,
       bundleReady:
-        signedAssetsReady &&
+        indexAssetsReady &&
         verificationReady,
       verificationReady,
-      ...(available && !signedAssetsReady
+      signatureMode,
+      ...(available && !indexAssetsReady
         ? {
             blockedReason:
-              "SIGNED_INDEX_MISSING" as const
+              (
+                status.skillsIndex
+                  ? "SIGNED_INDEX_MISSING"
+                  : "INDEX_MISSING"
+              ) as const
           }
         : available && !verificationReady
           ? {
@@ -941,8 +971,16 @@ export class MaintenanceService {
   ): Promise<VerifiedModelPackTarget> {
     const status =
       await this.discovery.check();
+    const signatureMode =
+      this.modelSignatureMode();
+    if (!status.modelPackIndex) {
+      throw new Error(
+        "MODEL_PACK_INDEX_MISSING"
+      );
+    }
     if (
-      !status.modelPackIndex ||
+      signatureMode ===
+        "SIGNED_REQUIRED" &&
       !status.modelPackSignature
     ) {
       throw new Error(
@@ -957,19 +995,18 @@ export class MaintenanceService {
       );
     }
 
-    const [
-      indexBytes,
-      signatureBytes
-    ] = await Promise.all([
-      downloadVerified(
+    const indexBytes =
+      await downloadVerified(
         status.modelPackIndex,
         this.fetchImpl
-      ),
-      downloadVerified(
-        status.modelPackSignature,
-        this.fetchImpl
-      )
-    ]);
+      );
+    const signatureBytes =
+      status.modelPackSignature
+        ? await downloadVerified(
+            status.modelPackSignature,
+            this.fetchImpl
+          )
+        : new Uint8Array();
     const verified =
       this.modelPackIndexVerifier(
         indexBytes,
@@ -1043,8 +1080,19 @@ export class MaintenanceService {
   ): Promise<ModelPackUpdateStatus> {
     const discovery =
       await this.discovery.check();
+    const signatureMode =
+      this.modelSignatureMode();
     const verificationReady =
       this.modelPackTrustPolicyReady();
+    const indexReady =
+      Boolean(
+        discovery.modelPackIndex &&
+        (
+          signatureMode ===
+            "UNSIGNED_ALLOWED" ||
+          discovery.modelPackSignature
+        )
+      );
     const installedFamily =
       installed
         ? modelUpdateFamilyForId(
@@ -1059,7 +1107,8 @@ export class MaintenanceService {
           "NOT_CONFIGURED",
         checkedAt:
           discovery.checkedAt,
-        verificationReady
+        verificationReady,
+        signatureMode
       };
     }
 
@@ -1070,8 +1119,7 @@ export class MaintenanceService {
         discovery.status ===
           "NO_RELEASE" &&
         (
-          !discovery.modelPackIndex ||
-          !discovery.modelPackSignature
+          !indexReady
         )
       )
     ) {
@@ -1090,14 +1138,12 @@ export class MaintenanceService {
           : {}),
         currentSha256:
           installed.sha256,
-        verificationReady
+        verificationReady,
+        signatureMode
       };
     }
 
-    if (
-      !discovery.modelPackIndex ||
-      !discovery.modelPackSignature
-    ) {
+    if (!indexReady) {
       return {
         status: "BLOCKED",
         checkedAt:
@@ -1113,8 +1159,13 @@ export class MaintenanceService {
         currentSha256:
           installed.sha256,
         verificationReady,
+        signatureMode,
         blockedReason:
-          "SIGNED_INDEX_MISSING"
+          (
+            discovery.modelPackIndex
+              ? "SIGNED_INDEX_MISSING"
+              : "INDEX_INVALID"
+          )
       };
     }
 
@@ -1134,6 +1185,7 @@ export class MaintenanceService {
         currentSha256:
           installed.sha256,
         verificationReady,
+        signatureMode,
         blockedReason:
           "SIGNER_POLICY_MISSING"
       };
@@ -1171,6 +1223,7 @@ export class MaintenanceService {
               target.model.sha256,
             verificationReady:
               true,
+            signatureMode,
             signerKeyId:
               target.signerKeyId,
             blockedReason:
@@ -1198,6 +1251,7 @@ export class MaintenanceService {
               target.model.sha256,
             verificationReady:
               true,
+            signatureMode,
             signerKeyId:
               target.signerKeyId,
             blockedReason:
@@ -1244,6 +1298,7 @@ export class MaintenanceService {
           target.model.sha256,
         verificationReady:
           true,
+        signatureMode,
         signerKeyId:
           target.signerKeyId
       };
@@ -1277,6 +1332,7 @@ export class MaintenanceService {
           installed.sha256,
         verificationReady:
           true,
+        signatureMode,
         blockedReason
       };
     }
@@ -1294,8 +1350,16 @@ export class MaintenanceService {
     if (!status.skillsBundle) {
       throw new Error("SKILL_UPDATE_BUNDLE_NOT_VERIFIED");
     }
+    const signatureMode =
+      this.skillSignatureMode();
+    if (!status.skillsIndex) {
+      throw new Error(
+        "SKILL_UPDATE_INDEX_MISSING"
+      );
+    }
     if (
-      !status.skillsIndex ||
+      signatureMode ===
+        "SIGNED_REQUIRED" &&
       !status.skillsSignature
     ) {
       throw new Error(
@@ -1308,19 +1372,18 @@ export class MaintenanceService {
       );
     }
 
-    const [
-      indexBytes,
-      signatureBytes
-    ] = await Promise.all([
-      downloadVerified(
+    const indexBytes =
+      await downloadVerified(
         status.skillsIndex,
         this.fetchImpl
-      ),
-      downloadVerified(
-        status.skillsSignature,
-        this.fetchImpl
-      )
-    ]);
+      );
+    const signatureBytes =
+      status.skillsSignature
+        ? await downloadVerified(
+            status.skillsSignature,
+            this.fetchImpl
+          )
+        : new Uint8Array();
     const verifiedIndex =
       this.skillIndexVerifier(
         indexBytes,
