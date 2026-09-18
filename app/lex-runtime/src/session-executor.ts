@@ -1084,17 +1084,21 @@ export class SafeSessionExecutor implements SessionExecutor {
                 "CONTRACT_ANALYSIS_V1" &&
               request
                 .contractWorkflowContext
+            ) ||
+            (
+              (
+                execution.workflowPlan.id ===
+                  "EVIDENCE_ANALYSIS_V1" ||
+                execution.workflowPlan.id ===
+                  "WITNESS_QUESTIONING_V1"
+              ) &&
+              request
+                .orderedCaseWorkflowContext
             )
           )
           ? "PASS"
           : "BLOCKED"
-        : gateIContract.stateModel ===
-            "CASE_BOUND_WHEN_AVAILABLE"
-          ? request
-              .orderedCaseWorkflowContext
-            ? "PASS"
-            : "NOT_APPLICABLE"
-          : "NOT_APPLICABLE";
+        : "NOT_APPLICABLE";
 
     const gateIWorkflowContractReport =
       evaluateGateIWorkflowContract({
