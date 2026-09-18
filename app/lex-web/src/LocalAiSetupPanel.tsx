@@ -28,6 +28,18 @@ type LocalModel = {
   installed: boolean;
 };
 
+type BackendPreference =
+  | "AUTO"
+  | "VULKAN_X64"
+  | "CPU_X64_PORTABLE";
+
+type BackendPolicy = {
+  allowed:
+    BackendPreference[];
+  default:
+    BackendPreference;
+};
+
 type ContextPolicy = {
   minimum: number;
   maximum: number;
@@ -48,6 +60,7 @@ type LocalRuntimeStatus = {
   state: "STOPPED" | "PROVISIONING" | "STARTING" | "READY";
   endpoint: string;
   contextPolicy: ContextPolicy;
+  backendPolicy: BackendPolicy;
   qualification: {
     schemaVersion: 1;
     result: "PASS";
@@ -57,6 +70,9 @@ type LocalRuntimeStatus = {
       | "NATIVE_OR_REDUCED"
       | "YARN_EXTENDED";
     engine: "llama.cpp";
+    backend?:
+      | "VULKAN_X64"
+      | "CPU_X64_PORTABLE";
     startupMs: number;
     validatedAt: string;
   } | null;
@@ -86,7 +102,14 @@ type LocalRuntimeStatus = {
       driverVersion?: string;
     }>;
     packagedBackend: string;
-    gpuOffloadEnabled: false;
+    configuredBackend:
+      | "VULKAN_X64"
+      | "CPU_X64_PORTABLE"
+      | null;
+    backendSelectionMode:
+      BackendPreference | null;
+    gpuCandidateDetected: boolean;
+    gpuOffloadEnabled: boolean;
     detectedAt: string;
   };
 };
@@ -223,6 +246,19 @@ function contextLabel(
     : `${formatTokens(tokens)} · w granicach natywnych`;
 }
 
+function backendLabel(
+  value: BackendPreference
+): string {
+  switch (value) {
+    case "AUTO":
+      return "Auto · spróbuj Vulkan, w razie błędu użyj CPU";
+    case "VULKAN_X64":
+      return "Vulkan GPU · bez automatycznego fallbacku";
+    case "CPU_X64_PORTABLE":
+      return "CPU · maksymalna zgodność";
+  }
+}
+
 export function LocalAiSetupPanel({
   user
 }: {
@@ -231,6 +267,8 @@ export function LocalAiSetupPanel({
   const [data, setData] = useState<LocalModelsResponse | null>(null);
   const [modelId, setModelId] = useState("");
   const [contextTokens, setContextTokens] = useState(64_000);
+  const [backendPreference, setBackendPreference] =
+    useState<BackendPreference>("AUTO");
   const [busy, setBusy] = useState(false);
   const [modelUpdate, setModelUpdate] =
     useState<ModelPackUpdateStatus | null>(null);
@@ -289,6 +327,12 @@ export function LocalAiSetupPanel({
             )
           : preferredContext
       );
+      setBackendPreference(
+        next.runtime.hardware
+          .backendSelectionMode ??
+        next.runtime.backendPolicy
+          .default
+      );
       setError("");
     } catch (problem) {
       setError(problem instanceof Error ? problem.message : String(problem));
@@ -337,6 +381,13 @@ export function LocalAiSetupPanel({
     contextTokens >= (selected?.minimumContextWindow ?? Number.MAX_SAFE_INTEGER) &&
     contextTokens <= (selected?.maximumContextWindow ?? 0) &&
     Boolean(policy) &&
+    Boolean(
+      data?.runtime
+        .backendPolicy
+        .allowed.includes(
+          backendPreference
+        )
+    ) &&
     ((contextTokens - (policy?.minimum ?? 0)) % (policy?.step ?? 1) === 0);
 
   async function provision(): Promise<void> {
@@ -355,7 +406,8 @@ export function LocalAiSetupPanel({
           method: "POST",
           body: JSON.stringify({
             modelId: selected.id,
-            contextTokens
+            contextTokens,
+            backendPreference
           })
         }
       );
@@ -618,6 +670,25 @@ export function LocalAiSetupPanel({
             {selected && policy ? (
               <>
                 <label>
+                  Backend obliczeniowy
+                  <select
+                    value={backendPreference}
+                    disabled={busy || user.appRole !== "ADMIN"}
+                    onChange={(event) =>
+                      setBackendPreference(
+                        event.target.value as BackendPreference
+                      )
+                    }
+                  >
+                    {data.runtime.backendPolicy.allowed.map((value) => (
+                      <option key={value} value={value}>
+                        {backendLabel(value)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label>
                   Kontekst
                   <select
                     value={contextTokens}
@@ -657,19 +728,22 @@ export function LocalAiSetupPanel({
                       : ""}
                   </span>
                   <span>
-                    Backend inference: {data.runtime.hardware.packagedBackend}
+                    Backend aktywny: {data.runtime.hardware.configuredBackend ?? "nie skonfigurowano"}
+                    {" · "}tryb wyboru: {data.runtime.hardware.backendSelectionMode ?? backendPreference}
                     {data.runtime.hardware.accelerators.length > 0
-                      ? ` · GPU wykryte: ${data.runtime.hardware.accelerators.map((item) => item.name).join(", ")}`
-                      : " · brak wykrytego GPU"}
-                    {!data.runtime.hardware.gpuOffloadEnabled &&
-                    data.runtime.hardware.accelerators.length > 0
-                      ? " · GPU nie jest używane przez obecny pakiet"
-                      : ""}
+                      ? ` · urządzenia graficzne: ${data.runtime.hardware.accelerators.map((item) => item.name).join(", ")}`
+                      : " · brak wykrytego urządzenia graficznego"}
+                    {data.runtime.hardware.gpuOffloadEnabled
+                      ? " · GPU offload potwierdzony"
+                      : data.runtime.hardware.gpuCandidateDetected
+                        ? " · GPU wykryte, ale niepotwierdzone jako aktywne"
+                        : ""}
                   </span>
                   {data.runtime.qualification &&
                   data.runtime.qualification.modelId === selected.id ? (
                     <span>
                       Walidacja sprzętowa: PASS · {formatTokens(data.runtime.qualification.contextTokens)} tokenów
+                      {" · "}backend {data.runtime.qualification.backend ?? data.runtime.hardware.configuredBackend ?? "CPU_X64_PORTABLE"}
                       {" · "}start {data.runtime.qualification.startupMs.toLocaleString("pl-PL")} ms
                       {" · "}{new Date(data.runtime.qualification.validatedAt).toLocaleString("pl-PL")}
                     </span>
@@ -743,7 +817,7 @@ export function LocalAiSetupPanel({
                   {busy || data.runtime.provisioning
                     ? "Operacja w toku…"
                     : configured
-                      ? "Zmień model / kontekst"
+                      ? "Zmień model / kontekst / backend"
                       : "Pobierz i skonfiguruj lokalną AI"}
                 </button>
 
