@@ -39,6 +39,10 @@ import type {
   CourtAnalysisCheckpoint,
   CourtAnalysisStage
 } from "./court-analysis-state.js";
+import type {
+  ChronologyCheckpoint,
+  ChronologyStage
+} from "./chronology-state.js";
 import {
   orchestrateDocumentContext,
   type ContextBudgetReport
@@ -79,6 +83,15 @@ export type SessionExecutionRequest = {
     >;
     checkpoint:
       CourtAnalysisCheckpoint;
+  };
+  chronologyWorkflowContext?: {
+    stage: Exclude<
+      ChronologyStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      ChronologyCheckpoint;
+    temporalGateRequired: boolean;
   };
 };
 
@@ -186,6 +199,16 @@ export type SessionExecutionResponse = {
       CourtAnalysisCheckpoint | null;
     closedCheckpoints:
       CourtAnalysisCheckpoint[];
+  };
+  chronologyWorkflow?: {
+    caseId: string;
+    revision: number;
+    stage: ChronologyStage;
+    temporalGateRequired: boolean;
+    nextCheckpoint:
+      ChronologyCheckpoint | null;
+    closedCheckpoints:
+      ChronologyCheckpoint[];
   };
   processAuto?: {
     maxSteps: number;
@@ -375,6 +398,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         ? {
             courtWorkflowContext:
               request.courtWorkflowContext
+          }
+        : {}),
+      ...(request.chronologyWorkflowContext
+        ? {
+            chronologyWorkflowContext:
+              request.chronologyWorkflowContext
           }
         : {}),
       tools: toolSchemas,
