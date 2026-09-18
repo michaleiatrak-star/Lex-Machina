@@ -176,23 +176,32 @@ function createTrustedTestSigner(
     Math.random()
       .toString(16)
       .slice(2);
-  const cer = path.join(
-    root,
-    "foreign-signer.cer"
-  );
   const command = [
     "$ErrorActionPreference='Stop'",
     `$pfx=${psLiteral(pfx)}`,
-    `$cer=${psLiteral(cer)}`,
-    `$plain=${psLiteral(password)}`,
-    "$secure=ConvertTo-SecureString $plain -AsPlainText -Force",
-    "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina CI Foreign Signer' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyExportPolicy Exportable -KeyLength 2048 -HashAlgorithm SHA256 -NotAfter ([DateTime]::UtcNow.AddDays(2))",
-    "Export-PfxCertificate -Cert $cert -FilePath $pfx -Password $secure -Force | Out-Null",
-    "Export-Certificate -Cert $cert -FilePath $cer -Force | Out-Null",
-    "Import-Certificate -FilePath $cer -CertStoreLocation 'Cert:\\CurrentUser\\Root' | Out-Null",
-    "Import-Certificate -FilePath $cer -CertStoreLocation 'Cert:\\CurrentUser\\TrustedPublisher' | Out-Null",
+    `$password=${psLiteral(password)}`,
+    "$rsa=[System.Security.Cryptography.RSA]::Create(2048)",
+    "$dn=[System.Security.Cryptography.X509Certificates.X500DistinguishedName]::new('CN=Lex Machina CI Foreign Signer')",
+    "$req=[System.Security.Cryptography.X509Certificates.CertificateRequest]::new($dn,$rsa,[System.Security.Cryptography.HashAlgorithmName]::SHA256,[System.Security.Cryptography.RSASignaturePadding]::Pkcs1)",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509KeyUsageExtension]::new([System.Security.Cryptography.X509Certificates.X509KeyUsageFlags]::DigitalSignature,$true))",
+    "$oids=[System.Security.Cryptography.OidCollection]::new()",
+    "$null=$oids.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
+    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
+    "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
+    "$stores=@('Root','TrustedPeople','TrustedPublisher')",
+    "foreach($storeName in $stores){",
+    "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
+    "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
+    "  try { $store.Add($cert) } finally { $store.Close() }",
+    "}",
+    "$bytes=$cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
+    "[IO.File]::WriteAllBytes($pfx,$bytes)",
     "$thumb=$cert.Thumbprint",
-    "$cert.Reset()",
+    "[Array]::Clear($bytes,0,$bytes.Length)",
+    "$cert.Dispose()",
+    "$rsa.Dispose()",
     "$thumb"
   ].join("; ");
 
@@ -282,10 +291,6 @@ function createTrustedTestSigner(
 
   fs.rmSync(
     pfx,
-    { force: true }
-  );
-  fs.rmSync(
-    cer,
     { force: true }
   );
   testThumbprints.push(
