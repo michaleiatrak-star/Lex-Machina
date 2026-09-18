@@ -25,6 +25,10 @@ import {
   validateChronologyState,
   type ChronologyState
 } from "./chronology-state.js";
+import {
+  validateContractAnalysisState,
+  type ContractAnalysisState
+} from "./contract-analysis-state.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -70,6 +74,7 @@ export type CaseWorkspaceIndex = {
     processPleading?: ProcessPleadingState;
     courtAnalysis?: CourtAnalysisState;
     chronology?: ChronologyState;
+    contractAnalysis?: ContractAnalysisState;
   };
 };
 
@@ -302,6 +307,15 @@ export class EncryptedCaseWorkspaceStore {
         const workflow =
           validateChronologyState(
             index.workflows.chronology
+          );
+        if (workflow.caseId !== caseId) {
+          throw new Error("WORKSPACE_INDEX_INVALID");
+        }
+      }
+      if (index.workflows.contractAnalysis) {
+        const workflow =
+          validateContractAnalysisState(
+            index.workflows.contractAnalysis
           );
         if (workflow.caseId !== caseId) {
           throw new Error("WORKSPACE_INDEX_INVALID");
@@ -884,6 +898,122 @@ export class EncryptedCaseWorkspaceStore {
     }
 
     delete workflows.chronology;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return true;
+  }
+
+  async getContractAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<ContractAnalysisState | null> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const state =
+      index.workflows?.contractAnalysis;
+    return state
+      ? validateContractAnalysisState(
+          state
+        )
+      : null;
+  }
+
+  async saveContractAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    state: ContractAnalysisState;
+    expectedRevision?: number;
+  }): Promise<ContractAnalysisState> {
+    const state =
+      validateContractAnalysisState(
+        args.state
+      );
+    if (
+      state.caseId !==
+        args.caseId
+    ) {
+      throw new Error(
+        "CONTRACT_CASE_ID_MISMATCH"
+      );
+    }
+
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const current =
+      index.workflows
+        ?.contractAnalysis;
+    if (
+      args.expectedRevision !==
+        undefined &&
+      (
+        !current ||
+        current.revision !==
+          args.expectedRevision
+      )
+    ) {
+      throw new Error(
+        "CONTRACT_STATE_CONFLICT"
+      );
+    }
+
+    index.workflows ??= {};
+    index.workflows.contractAnalysis =
+      state;
+    await this.write(
+      index,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    return validateContractAnalysisState(
+      state
+    );
+  }
+
+  async clearContractAnalysisState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+    expectedRevision?: number;
+  }): Promise<boolean> {
+    const index = await this.read(
+      args.caseId,
+      args.caseDataKey,
+      args.keyVersion
+    );
+    const workflows =
+      index.workflows;
+    const current =
+      workflows?.contractAnalysis;
+    if (
+      !workflows ||
+      !current
+    ) {
+      return false;
+    }
+    if (
+      args.expectedRevision !==
+        undefined &&
+      current.revision !==
+        args.expectedRevision
+    ) {
+      throw new Error(
+        "CONTRACT_STATE_CONFLICT"
+      );
+    }
+
+    delete workflows
+      .contractAnalysis;
     await this.write(
       index,
       args.caseDataKey,
