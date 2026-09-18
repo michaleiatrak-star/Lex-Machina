@@ -234,7 +234,8 @@ jobs:
 
           $receiptDest = "app/lex-desktop/src-tauri/target/release/bundle/nsis/standalone/signing-receipts"
           New-Item -ItemType Directory -Force -Path $receiptDest | Out-Null
-          Copy-Item -LiteralPath $env:LEX_SIGNING_RECEIPT_DIR -Destination $receiptDest -Recurse -Force
+          Get-ChildItem -LiteralPath $env:LEX_SIGNING_RECEIPT_DIR -File -Filter "*.json" |
+            Copy-Item -Destination $receiptDest -Force
 
       - name: Offline clean-machine standalone EXE acceptance
         shell: pwsh
