@@ -8,6 +8,8 @@ import {
   it
 } from "vitest";
 import {
+  assertApplicationInstallerVersion,
+  normalizeApplicationProductVersion,
   trustedUpdateSignerThumbprints
 } from "./application-update-verifier.js";
 
@@ -46,6 +48,68 @@ afterEach(() => {
     });
   }
 });
+
+describe(
+  "application installer ProductVersion binding",
+  () => {
+    it(
+      "normalizes semver and Windows four-part zero ProductVersion",
+      () => {
+        expect(
+          normalizeApplicationProductVersion(
+            "0.1.4"
+          )
+        ).toBe("0.1.4");
+        expect(
+          normalizeApplicationProductVersion(
+            "0.1.4.0"
+          )
+        ).toBe("0.1.4");
+      }
+    );
+
+    it(
+      "rejects a signed installer whose ProductVersion differs from the discovered release",
+      () => {
+        expect(() =>
+          assertApplicationInstallerVersion(
+            "0.1.3.0",
+            "0.1.4"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_VERSION_MISMATCH:expected=0.1.4:actual=0.1.3"
+        );
+      }
+    );
+
+    it(
+      "rejects non-canonical four-part versions instead of truncating them",
+      () => {
+        expect(() =>
+          normalizeApplicationProductVersion(
+            "0.1.4.7"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_PRODUCT_VERSION_INVALID"
+        );
+      }
+    );
+
+    it(
+      "rejects malformed expected release versions",
+      () => {
+        expect(() =>
+          assertApplicationInstallerVersion(
+            "0.1.4.0",
+            "v0.1.4"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_EXPECTED_VERSION_INVALID"
+        );
+      }
+    );
+  }
+);
 
 describe(
   "application update signer policy",
