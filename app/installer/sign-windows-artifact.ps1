@@ -12,6 +12,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$selfTestAllowMissingTimestamp =
+  [Environment]::GetEnvironmentVariable(
+    "LEX_SIGNING_SELFTEST_ALLOW_MISSING_TIMESTAMP",
+    "Process"
+  ) -eq "1"
+
 
 function Normalize-Thumbprint([string]$Value) {
   return (($Value -replace "\\s+", "").ToUpperInvariant())
@@ -135,13 +141,21 @@ try {
       $pfxBytes
     )
 
-    & $signTool sign `
-      /fd SHA256 `
-      /td SHA256 `
-      /tr $TimestampUrl `
-      /f $temporaryPfx `
-      /p $pfxPassword `
-      $artifact
+    if ($selfTestAllowMissingTimestamp) {
+      & $signTool sign `
+        /fd SHA256 `
+        /f $temporaryPfx `
+        /p $pfxPassword `
+        $artifact
+    } else {
+      & $signTool sign `
+        /fd SHA256 `
+        /td SHA256 `
+        /tr $TimestampUrl `
+        /f $temporaryPfx `
+        /p $pfxPassword `
+        $artifact
+    }
 
     if ($LASTEXITCODE -ne 0) {
       throw "WINDOWS_SIGNTOOL_SIGN_FAILED:$LASTEXITCODE"
@@ -177,8 +191,12 @@ try {
 
   $payload = [ordered]@{
     schemaVersion = 1
-    result = "PASS"
-    verification = "AUTHENTICODE_PINNED_PUBLISHER"
+    result = if ($selfTestAllowMissingTimestamp) { "PASS_SELFTEST" } else { "PASS" }
+    verification = if ($selfTestAllowMissingTimestamp) {
+      "AUTHENTICODE_PINNED_PUBLISHER_SELFTEST_NO_TIMESTAMP"
+    } else {
+      "AUTHENTICODE_PINNED_PUBLISHER"
+    }
     artifact = $artifactInfo.Name
     sha256 = $hash
     bytes = [int64]$artifactInfo.Length
@@ -189,7 +207,8 @@ try {
       notAfter = $signature.SignerCertificate.NotAfter.ToUniversalTime().ToString("o")
     }
     timestamp = [ordered]@{
-      server = $TimestampUrl
+      required = (-not $selfTestAllowMissingTimestamp)
+      server = if ($selfTestAllowMissingTimestamp) { $null } else { $TimestampUrl }
       status = if ($signature.TimeStamperCertificate) { "PRESENT" } else { "MISSING" }
       subject = if ($signature.TimeStamperCertificate) {
         $signature.TimeStamperCertificate.Subject
@@ -207,7 +226,10 @@ try {
     signedAt = [DateTimeOffset]::UtcNow.ToString("o")
   }
 
-  if ($payload.timestamp.status -ne "PRESENT") {
+  if (
+    -not $selfTestAllowMissingTimestamp -and
+    $payload.timestamp.status -ne "PRESENT"
+  ) {
     throw "WINDOWS_AUTHENTICODE_TIMESTAMP_MISSING"
   }
 
