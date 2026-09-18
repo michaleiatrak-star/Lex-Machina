@@ -98,6 +98,11 @@ import {
 import type {
   OrderedCaseWorkflowId
 } from "./ordered-case-workflow-state.js";
+import {
+  LocalPolishPseudonymizer,
+  PseudonymizationVault,
+  type NamedEntityRecognizer
+} from "./privacy/pseudonymizer.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -432,7 +437,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     private readonly registry: LexSkillRegistry,
     private readonly providers: ProviderGateway,
     private readonly finalizer = new AuditedFinalizer(),
-    private readonly verificationToolFactory?: LegalVerificationToolFactory
+    private readonly verificationToolFactory?: LegalVerificationToolFactory,
+    private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer
   ) {
     this.engine = new LexExecutionEngine(
       registry,
@@ -453,6 +459,89 @@ export class SafeSessionExecutor implements SessionExecutor {
       model: request.model,
       mode: request.mode
     });
+
+    const chatPrivacyVault =
+      new PseudonymizationVault();
+    const chatPseudonymizer =
+      new LocalPolishPseudonymizer(
+        chatPrivacyVault,
+        this.chatNamedEntityRecognizer
+      );
+    let protectedQuery:
+      string;
+    let protectedAuxiliaryText:
+      string | undefined;
+    try {
+      const protectedPrimary =
+        await chatPseudonymizer
+          .pseudonymize(
+            request.query
+          );
+      protectedQuery =
+        protectedPrimary.text;
+
+      if (
+        request.auxiliaryText !==
+          undefined &&
+        request.auxiliaryText !==
+          request.query
+      ) {
+        protectedAuxiliaryText =
+          (
+            await chatPseudonymizer
+              .pseudonymize(
+                request.auxiliaryText
+              )
+          ).text;
+      } else if (
+        request.auxiliaryText !==
+          undefined
+      ) {
+        protectedAuxiliaryText =
+          protectedQuery;
+      }
+
+      audit.record(
+        "gate",
+        "G39I_CHAT_PRIVACY",
+        "OK",
+        {
+          pseudonymized:
+            protectedPrimary
+              .findings.length,
+          kinds:
+            Object.keys(
+              protectedPrimary
+                .counts
+            ).sort(),
+          vaultTokens:
+            chatPrivacyVault
+              .size
+        }
+      );
+    } catch (error) {
+      audit.record(
+        "gate",
+        "G39I_CHAT_PRIVACY",
+        "BLOCKED",
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : String(error)
+        }
+      );
+      audit.close(
+        "BLOCKED",
+        {
+          finalization:
+            "PRIVACY_GATE"
+        }
+      );
+      throw new Error(
+        "CHAT_PRIVACY_GATE_FAILED"
+      );
+    }
 
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
@@ -476,8 +565,8 @@ export class SafeSessionExecutor implements SessionExecutor {
               request.model
           },
           currentUserText:
-            request.auxiliaryText ??
-            request.query,
+            protectedAuxiliaryText ??
+            protectedQuery,
           ...(verificationTools
             ? {
                 runVerificationTools:
@@ -602,7 +691,7 @@ export class SafeSessionExecutor implements SessionExecutor {
     ].join("\n\n");
 
     const execution = await this.engine.executePolishLegalQuery({
-      query: request.query,
+      query: protectedQuery,
       ...(documentContext ? { documentContext } : {}),
       provider: request.provider,
       model: request.model,
@@ -655,7 +744,7 @@ export class SafeSessionExecutor implements SessionExecutor {
             workflow:
               workflowPlan.id,
             query:
-              request.query,
+              protectedQuery,
             ledger,
             ...(verificationTools
               ? {
@@ -1505,7 +1594,12 @@ export class SafeSessionExecutor implements SessionExecutor {
       domainSkills: execution.domainSkills,
       ...(safeToPresent
         ? {
-            answer: processedDocumentCitations.text,
+            answer:
+              chatPseudonymizer
+                .deanonymize(
+                  processedDocumentCitations
+                    .text
+                ),
             documentCitations: processedDocumentCitations.citations,
             ...(reportBlueprint
               ? {
