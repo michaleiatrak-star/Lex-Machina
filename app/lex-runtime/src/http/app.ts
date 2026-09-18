@@ -56,6 +56,10 @@ import type {
   CaseRole
 } from "../auth/types.js";
 import {
+  parseGuideTransition,
+  type GuideSessionStateStore
+} from "../guide-session-state.js";
+import {
   CaseAccessError,
   type LocalCaseAccessService
 } from "../case-access.js";
@@ -397,6 +401,13 @@ export type LexHttpAppOptions = {
   credentialManager?: ProviderCredentialManager;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
+  guideSessionStore?: Pick<
+    GuideSessionStateStore,
+    | "get"
+    | "initialize"
+    | "transition"
+    | "revoke"
+  >;
   processWorkflowStore?: Pick<
     EncryptedCaseWorkspaceStore,
     | "getProcessPleadingState"
@@ -1604,6 +1615,155 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.json(
           responseAuthContext(res)
         );
+      }
+    );
+
+    app.get(
+      "/api/guide/state",
+      (_req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const actor =
+          responseAuthContext(res);
+        res.json({
+          state:
+            options.guideSessionStore
+              .get(
+                actor.session
+                  .sessionId
+              )
+        });
+      }
+    );
+
+    app.post(
+      "/api/guide/initialize",
+      (req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const actor =
+          responseAuthContext(res);
+        const audience =
+          req.body?.audience ===
+            "LAIK" ||
+          req.body?.audience ===
+            "PRAWNIK"
+            ? req.body.audience
+            : null;
+        if (!audience) {
+          res.status(400).json({
+            error:
+              "GUIDE_AUDIENCE_INVALID"
+          });
+          return;
+        }
+        res.json({
+          state:
+            options.guideSessionStore
+              .initialize(
+                actor.session
+                  .sessionId,
+                audience
+              )
+        });
+      }
+    );
+
+    app.post(
+      "/api/guide/transition",
+      (req, res) => {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const transition =
+          parseGuideTransition(
+            req.body?.transition
+          );
+        if (
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1 ||
+          !transition
+        ) {
+          res.status(400).json({
+            error:
+              "GUIDE_TRANSITION_REQUEST_INVALID"
+          });
+          return;
+        }
+
+        try {
+          const actor =
+            responseAuthContext(res);
+          res.json({
+            state:
+              options.guideSessionStore
+                .transition({
+                  sessionId:
+                    actor.session
+                      .sessionId,
+                  expectedRevision,
+                  transition
+                })
+          });
+        } catch (error) {
+          const code =
+            error instanceof Error
+              ? error.message
+              : "GUIDE_TRANSITION_FAILED";
+          res.status(
+            code ===
+              "GUIDE_SESSION_STATE_CONFLICT" ||
+            code ===
+              "GUIDE_IRREVERSIBLE_ACTION_PENDING"
+              ? 409
+              : code.includes(
+                    "INVALID"
+                  ) ||
+                  code.includes(
+                    "TRANSITION"
+                  ) ||
+                  code.includes(
+                    "MISMATCH"
+                  ) ||
+                  code.includes(
+                    "CONFIRMATION_REQUIRED"
+                  )
+                ? 422
+                : code ===
+                    "GUIDE_SESSION_STATE_NOT_FOUND"
+                  ? 404
+                  : 500
+          ).json({
+            error: code
+          });
+        }
       }
     );
 
