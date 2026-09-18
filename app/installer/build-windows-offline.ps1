@@ -141,12 +141,16 @@ Write-Host "Visual C++ runtime prerequisite exit code: $($vcInstall.ExitCode)"
 Write-Host "[8/10] Build native runtime sidecar"
 Push-Location $desktop
 try {
-  cargo build --release --bin lex-runtime-sidecar --manifest-path src-tauri/Cargo.toml
+  cargo build --release --bin lex-runtime-sidecar --bin lex-profile-cleanup --manifest-path src-tauri/Cargo.toml
   if ($LASTEXITCODE -ne 0) { throw "Runtime sidecar build failed" }
 } finally { Pop-Location }
 $sidecar = Join-Path $tauri "target\release\lex-runtime-sidecar.exe"
 if (-not (Test-Path $sidecar)) { throw "Built runtime sidecar not found" }
 Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
+$profileCleanup = Join-Path $tauri "target\release\lex-profile-cleanup.exe"
+if (-not (Test-Path $profileCleanup)) { throw "Built profile cleanup helper not found" }
+& $profileCleanup --self-test
+if ($LASTEXITCODE -ne 0) { throw "Profile cleanup helper self-test failed" }
 
 Write-Host "[9/10] Generate immutable component lock"
 $lock = Join-Path $payload "component-lock.json"
