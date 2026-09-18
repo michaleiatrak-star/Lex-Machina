@@ -1203,8 +1203,11 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/update/status"
         | "/api/local-models"
         | "/api/local-models/update/status"
-        | "/api/skills/update/status" => {
-            method == "GET" || (path == "/api/cases" && method == "POST")
+        | "/api/skills/update/status"
+        | "/api/model-routing/preferences" => {
+            method == "GET"
+                || (path == "/api/cases" && method == "POST")
+                || (path == "/api/model-routing/preferences" && method == "PUT")
         }
         "/api/update/download"
         | "/api/local-models/provision"
@@ -1593,6 +1596,9 @@ mod tests {
         assert!(route_allowed("POST", "/api/local-models/start"));
         assert!(route_allowed("POST", "/api/local-models/stop"));
         assert!(route_allowed("GET", "/api/skills/update/status"));
+        assert!(route_allowed("GET", "/api/model-routing/preferences"));
+        assert!(route_allowed("PUT", "/api/model-routing/preferences"));
+        assert!(!route_allowed("POST", "/api/model-routing/preferences"));
         assert!(route_allowed("POST", "/api/skills/update/apply"));
         assert!(!route_allowed("DELETE", "/api/local-models"));
         assert!(!route_allowed("POST", "/api/auth/bootstrap-managed"));
