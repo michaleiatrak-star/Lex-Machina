@@ -321,7 +321,7 @@ export class MaintenanceService {
             indexBytes,
             signatureBytes
           ),
-    private readonly modelPackTrustReady:
+    private readonly modelPackTrustPolicyReady:
       () => boolean =
         modelPackTrustReady,
     private readonly modelPackIndexVerifier:
@@ -459,7 +459,7 @@ export class MaintenanceService {
       );
     }
     if (
-      !this.modelPackTrustReady()
+      !this.modelPackTrustPolicyReady()
     ) {
       throw new Error(
         "MODEL_PACK_SIGNER_POLICY_MISSING"
@@ -541,7 +541,7 @@ export class MaintenanceService {
     const discovery =
       await this.discovery.check();
     const verificationReady =
-      this.modelPackTrustReady();
+      this.modelPackTrustPolicyReady();
 
     if (!installed) {
       return {
