@@ -8,6 +8,10 @@ export type ContextBudgetReport = {
   reservedOutputTokens?: number;
   reservedSystemTokens?: number;
   documentBudgetTokens?: number;
+  tokenEstimation:
+    | "CONSERVATIVE_CHAR_HEURISTIC"
+    | "CALIBRATED_LOCAL_TOKENIZER";
+  charsPerTokenEstimate: number;
   estimatedDocumentTokens: number;
   selectedChunks: number;
   compressedChunks: number;
@@ -59,9 +63,17 @@ const QUERY_STOP_WORDS =
     "ich"
   ]);
 
-function estimateTokens(text: string): number {
-  // Conservative for Polish/legal prose: assume at most ~3 UTF-16 chars/token.
-  return Math.max(1, Math.ceil(text.length / 3));
+function estimateTokens(
+  text: string,
+  charsPerToken: number
+): number {
+  return Math.max(
+    1,
+    Math.ceil(
+      text.length /
+        charsPerToken
+    )
+  );
 }
 function normalizedText(
   value: string
@@ -95,7 +107,8 @@ function queryTerms(
 function extractiveDigest(
   text: string,
   query: string,
-  maxTokens: number
+  maxTokens: number,
+  charsPerToken: number
 ): string | null {
   if (
     maxTokens <
@@ -107,7 +120,10 @@ function extractiveDigest(
   const maxChars =
     Math.max(
       1,
-      maxTokens * 3
+      Math.floor(
+        maxTokens *
+          charsPerToken
+      )
     );
   const terms =
     queryTerms(query);
@@ -258,7 +274,8 @@ function extractiveDigest(
 
 function metadataTokens(
   attachment: SessionDocumentAttachment,
-  chunk: SessionDocumentAttachment["chunks"][number]
+  chunk: SessionDocumentAttachment["chunks"][number],
+  charsPerToken: number
 ): number {
   const scope =
     attachment.sourceScope ?? "MANUAL";
@@ -268,16 +285,25 @@ function metadataTokens(
       ? " EXTRACTIVE_DIGEST BACKLINK ORIGINAL_CHUNK"
       : "";
   return estimateTokens(
-    `[${scope} ${attachment.documentId} CHUNK ${chunk.index} PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`
+    `[${scope} ${attachment.documentId} CHUNK ${chunk.index} PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
+    charsPerToken
   ) + 8;
 }
 
 function chunkTokens(
   attachment: SessionDocumentAttachment,
-  chunk: SessionDocumentAttachment["chunks"][number]
+  chunk: SessionDocumentAttachment["chunks"][number],
+  charsPerToken: number
 ): number {
-  return estimateTokens(chunk.text) +
-    metadataTokens(attachment, chunk);
+  return estimateTokens(
+    chunk.text,
+    charsPerToken
+  ) +
+    metadataTokens(
+      attachment,
+      chunk,
+      charsPerToken
+    );
 }
 
 function cloneWithChunks(
@@ -309,6 +335,7 @@ export function orchestrateDocumentContext(args: {
   query: string;
   systemPrompt?: string;
   modelContextTokens?: number;
+  tokenCharsPerToken?: number;
 }): OrchestratedDocumentContext {
   const attachments =
     args.attachments.map((attachment) =>
@@ -317,6 +344,32 @@ export function orchestrateDocumentContext(args: {
         attachment.chunks
       )
     );
+
+  if (
+    args.tokenCharsPerToken !==
+      undefined &&
+    (
+      !Number.isFinite(
+        args.tokenCharsPerToken
+      ) ||
+      args.tokenCharsPerToken <
+        1 ||
+      args.tokenCharsPerToken >
+        3
+    )
+  ) {
+    throw new Error(
+      "TOKENIZER_CALIBRATION_INVALID"
+    );
+  }
+  const charsPerTokenEstimate =
+    args.tokenCharsPerToken ??
+    3;
+  const tokenEstimation =
+    args.tokenCharsPerToken !==
+      undefined
+      ? "CALIBRATED_LOCAL_TOKENIZER" as const
+      : "CONSERVATIVE_CHAR_HEURISTIC" as const;
 
   if (attachments.length > 4) {
     throw new Error(
@@ -339,6 +392,8 @@ export function orchestrateDocumentContext(args: {
                 args.modelContextTokens
             }
           : {}),
+        tokenEstimation,
+        charsPerTokenEstimate,
         estimatedDocumentTokens: 0,
         selectedChunks: 0,
         compressedChunks: 0,
@@ -379,6 +434,8 @@ export function orchestrateDocumentContext(args: {
         ),
       report: {
         strategy: "LEGACY_CHAR_CAP",
+        tokenEstimation,
+        charsPerTokenEstimate,
         estimatedDocumentTokens:
           attachments.reduce(
             (sum, attachment) =>
@@ -388,7 +445,8 @@ export function orchestrateDocumentContext(args: {
                   chunkSum +
                   chunkTokens(
                     attachment,
-                    chunk
+                    chunk,
+                    charsPerTokenEstimate
                   ),
                 0
               ),
@@ -450,10 +508,12 @@ export function orchestrateDocumentContext(args: {
           Math.min(
             48_000,
             estimateTokens(
-              args.systemPrompt
+              args.systemPrompt,
+              charsPerTokenEstimate
             ) +
               estimateTokens(
-                args.query
+                args.query,
+                charsPerTokenEstimate
               ) +
               2_048
           )
@@ -522,7 +582,8 @@ export function orchestrateDocumentContext(args: {
           sum +
           chunkTokens(
             attachment,
-            chunk
+            chunk,
+            charsPerTokenEstimate
           ),
         0
       );
@@ -560,7 +621,8 @@ export function orchestrateDocumentContext(args: {
       const cost =
         chunkTokens(
           attachment,
-          chunk
+          chunk,
+          charsPerTokenEstimate
         );
       if (
         used + cost <=
@@ -597,7 +659,8 @@ export function orchestrateDocumentContext(args: {
                     "EXTRACTIVE_DIGEST",
                   originalChars:
                     chunk.text.length
-                }
+                },
+                charsPerTokenEstimate
               )
           )
         );
@@ -605,7 +668,8 @@ export function orchestrateDocumentContext(args: {
         extractiveDigest(
           chunk.text,
           args.query,
-          digestBudget
+          digestBudget,
+          charsPerTokenEstimate
         );
       if (digestText) {
         const digestChunk = {
@@ -620,7 +684,8 @@ export function orchestrateDocumentContext(args: {
         const digestCost =
           chunkTokens(
             attachment,
-            digestChunk
+            digestChunk,
+            charsPerTokenEstimate
           );
         if (
           used +
@@ -740,6 +805,8 @@ export function orchestrateDocumentContext(args: {
         safetyReserve,
       documentBudgetTokens:
         documentBudget,
+      tokenEstimation,
+      charsPerTokenEstimate,
       estimatedDocumentTokens:
         used,
       selectedChunks,
