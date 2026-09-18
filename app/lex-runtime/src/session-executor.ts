@@ -87,6 +87,9 @@ import {
   planAutomaticLegalVerification
 } from "./gate-i-auto-verification.js";
 import {
+  runGateIRuntimePrelude
+} from "./gate-i-runtime-prelude.js";
+import {
   evaluateGateIInputCompleteness,
   evaluateGateIWorkflowContract,
   gateIWorkflowContract,
@@ -646,6 +649,25 @@ export class SafeSessionExecutor implements SessionExecutor {
         : {}),
       tools: toolSchemas,
       toolSystemPromptAppendix: toolPrompt,
+      runGateIRuntimePrelude:
+        (workflowPlan) =>
+          runGateIRuntimePrelude({
+            workflow:
+              workflowPlan.id,
+            query:
+              request.query,
+            ledger,
+            ...(verificationTools
+              ? {
+                  runTools:
+                    (calls) =>
+                      verificationTools
+                        .runTools(
+                          calls
+                        )
+                }
+              : {})
+          }),
       runTools: async (calls) => {
         const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
         const reportCalls = calls.filter((call) => reportTools.handles(call.name));
