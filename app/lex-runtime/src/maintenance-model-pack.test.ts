@@ -214,6 +214,10 @@ function service(args?: {
     VerifiedModelPackIndex;
   appReleaseStatus?:
     UpdateDiscoveryResult["status"];
+  signatureMode?:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
+  signaturePresent?: boolean;
 }) {
   const indexBytes =
     new TextEncoder().encode(
@@ -240,6 +244,12 @@ function service(args?: {
       delete result.latestVersion;
     }
   }
+  if (
+    args?.signaturePresent ===
+      false
+  ) {
+    delete result.modelPackSignature;
+  }
   const payloads =
     new Map<
       string,
@@ -250,11 +260,18 @@ function service(args?: {
           .modelPackIndex!.url,
         indexBytes
       ],
-      [
-        result
-          .modelPackSignature!.url,
-        signatureBytes
-      ]
+      ...(
+        result.modelPackSignature
+          ? [[
+              result
+                .modelPackSignature.url,
+              signatureBytes
+            ] as [
+              string,
+              Uint8Array
+            ]]
+          : []
+      )
     ]);
 
   return new MaintenanceService(
@@ -268,7 +285,12 @@ function service(args?: {
       true,
     () =>
       args?.verified ??
-      verifiedIndex()
+      verifiedIndex(),
+    () =>
+      "SIGNED_REQUIRED",
+    () =>
+      args?.signatureMode ??
+      "SIGNED_REQUIRED"
   );
 }
 
@@ -303,6 +325,48 @@ describe(
         expect(
           status.verificationReady
         ).toBe(false);
+      }
+    );
+
+    it(
+      "allows a model-pack index without .sig only in temporary unsigned mode",
+      async () => {
+        const maintenance =
+          service({
+            signatureMode:
+              "UNSIGNED_ALLOWED",
+            signaturePresent:
+              false,
+            verified:
+              {
+                ...verifiedIndex({
+                  sha256:
+                    "b".repeat(64)
+                }),
+                signerKeyId:
+                  "UNSIGNED_ALLOWED"
+              }
+          });
+
+        const status =
+          await maintenance
+            .modelPackStatus({
+              modelId:
+                "local/bielik-11b-v3-q4km",
+              sha256:
+                "a".repeat(64)
+            });
+
+        expect(status.status)
+          .toBe("AVAILABLE");
+        expect(status.signatureMode)
+          .toBe(
+            "UNSIGNED_ALLOWED"
+          );
+        expect(status.signerKeyId)
+          .toBe(
+            "UNSIGNED_ALLOWED"
+          );
       }
     );
 
