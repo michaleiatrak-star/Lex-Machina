@@ -11,10 +11,16 @@
   Pop $0
   Pop $1
   ${If} $0 == 24
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=install-state-mismatch$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
     DetailPrint "Lex Machina: wykryto zmianę katalogu istniejącej instalacji."
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: wykryto istniejącą instalację w innym katalogu niż wybrany cel.$\r$\n$\r$\nW trybie aktualizacji/naprawy zachowaj wykrytą lokalizację programu. Jeżeli chcesz przenieść program, najpierw odinstaluj poprzednią instalację." /SD IDOK
     Abort
   ${ElseIf} $0 != 0
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=install-state$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
     DetailPrint "Lex Machina: preinstall state gate zablokował instalację (exit=$0)."
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja została zatrzymana przez kontrolę stanu.$\r$\n$1$\r$\n$\r$\nJeżeli zainstalowana wersja jest nowsza, użyj nowszego instalatora zamiast wykonywać downgrade." /SD IDOK
     Abort
@@ -29,6 +35,9 @@
   Pop $0
   Pop $1
   ${If} $0 != 0
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=fresh-profile-purge$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
     DetailPrint "Lex Machina: czyszczenie profilu przed nową instalacją nie powiodło się (exit=$0)."
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się przygotować czystego profilu administratora.$\r$\n$1" /SD IDOK
     Abort
