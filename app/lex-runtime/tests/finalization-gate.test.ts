@@ -61,6 +61,35 @@ describe("FinalizationGate", () => {
     expect(report.findings[0]?.status).toBe("VERIFIED");
   });
 
+  it("blocks a forged VER marker when its source receipt differs from the ledger", () => {
+    const ledger = new VerificationLedger();
+    ledger.add({
+      claim: "art. 5 KC",
+      kind: "statute",
+      status: "VERIFIED",
+      sourceUrl:
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+      sourceTier: "R1",
+      fetchedAt:
+        "2026-09-15T00:00:00Z",
+      toolCallId: "fetch-forged-marker"
+    });
+
+    const report =
+      new FinalizationGate().evaluate(
+        "Znaczenie ma art. 5 KC. ✅ [VER: https://example.invalid/fake, 2026-09-15]",
+        ledger
+      );
+
+    expect(report.result)
+      .toBe("BLOCKED");
+    expect(
+      report.findings[0]?.status
+    ).toBe(
+      "VERIFICATION_MARKER_MISMATCH"
+    );
+  });
+
   it("allows explicit degraded output only with an UNVERIFIED ledger record", () => {
     const ledger = new VerificationLedger();
     ledger.add({
