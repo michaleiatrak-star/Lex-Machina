@@ -9,12 +9,14 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
+$verificationHelper = Join-Path $PSScriptRoot "app-update-verification.ps1"
+if (-not (Test-Path -LiteralPath $verificationHelper -PathType Leaf)) {
+  throw "UPDATE_VERIFICATION_HELPER_MISSING:$verificationHelper"
+}
+. $verificationHelper
+
 function Full-Path([string]$Value) {
   return [IO.Path]::GetFullPath($Value)
-}
-
-function Normalize-Thumbprint([string]$Value) {
-  return ($Value -replace '\s+', '').ToUpperInvariant()
 }
 
 function Write-JsonAtomic([string]$Path, [object]$Value) {
@@ -52,89 +54,6 @@ function Assert-SimpleToken([string]$Value, [string]$Code, [string]$Extension) {
   ) {
     throw ($Code + ":" + $Value)
   }
-}
-
-function Get-UpdateVerificationMode([object]$Manifest) {
-  if ($null -eq $Manifest.applicationUpdate) {
-    throw "UPDATE_TRUST_POLICY_INVALID"
-  }
-
-  if (
-    $Manifest.applicationUpdate.verification -eq "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER"
-  ) {
-    return "SIGNED_REQUIRED"
-  }
-
-  if (
-    $Manifest.applicationUpdate.verification -eq "SHA256_REQUIRED_SIGNATURE_OPTIONAL" -and
-    $Manifest.applicationUpdate.temporaryUnsignedAllowed -eq $true
-  ) {
-    return "UNSIGNED_ALLOWED"
-  }
-
-  throw "UPDATE_TRUST_POLICY_INVALID"
-}
-
-function Get-TrustedSignerThumbprints([object]$Manifest) {
-  $mode = Get-UpdateVerificationMode $Manifest
-  $trusted = @(
-    $Manifest.applicationUpdate.trustedSignerThumbprints |
-      ForEach-Object { Normalize-Thumbprint ([string]$_) } |
-      Where-Object { $_ -match '^[A-F0-9]{40}$' } |
-      Select-Object -Unique
-  )
-
-  if ($mode -eq "SIGNED_REQUIRED" -and $trusted.Count -lt 1) {
-    throw "UPDATE_TRUST_POLICY_EMPTY"
-  }
-
-  return $trusted
-}
-
-function Assert-Authenticode(
-  [string]$Installer,
-  [string[]]$Trusted,
-  [string]$ReceiptThumbprint
-) {
-  $signature = Get-AuthenticodeSignature -LiteralPath $Installer
-  if ($signature.Status -ne 'Valid' -or $null -eq $signature.SignerCertificate) {
-    throw "UPDATE_SIGNATURE_INVALID:$($signature.Status)"
-  }
-  $actual = Normalize-Thumbprint $signature.SignerCertificate.Thumbprint
-  if ($Trusted -notcontains $actual) {
-    throw "UPDATE_SIGNER_NOT_TRUSTED:$actual"
-  }
-  if ($actual -ne (Normalize-Thumbprint $ReceiptThumbprint)) {
-    throw "UPDATE_RECEIPT_SIGNER_MISMATCH"
-  }
-  return $actual
-}
-
-function Assert-InstallerProductVersion(
-  [string]$Installer,
-  [Version]$Expected
-) {
-  $raw = [string](Get-Item -LiteralPath $Installer).VersionInfo.ProductVersion
-  if ([string]::IsNullOrWhiteSpace($raw)) {
-    throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISSING"
-  }
-
-  $normalized = $raw.Trim()
-  if ($normalized -match '^(\d+)\.(\d+)\.(\d+)\.0$') {
-    $normalized = "$($matches[1]).$($matches[2]).$($matches[3])"
-  }
-
-  $actual = try {
-    [Version]$normalized
-  } catch {
-    throw "UPDATE_INSTALLER_PRODUCT_VERSION_INVALID:$raw"
-  }
-
-  if ($actual -ne $Expected) {
-    throw "UPDATE_INSTALLER_PRODUCT_VERSION_MISMATCH:expected=$Expected actual=$actual"
-  }
-
-  return $actual.ToString()
 }
 
 function Stop-LexProcesses([string]$ApplicationRoot) {
