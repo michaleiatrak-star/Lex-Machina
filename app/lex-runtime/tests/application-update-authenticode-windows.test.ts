@@ -31,7 +31,10 @@ const testThumbprints:
 
 function powershell(
   command: string,
-  args: string[] = []
+  environment: Record<
+    string,
+    string
+  > = {}
 ): string {
   const result =
     spawnSync(
@@ -42,13 +45,16 @@ function powershell(
         "-ExecutionPolicy",
         "Bypass",
         "-Command",
-        command,
-        ...args
+        command
       ],
       {
         encoding: "utf8",
         windowsHide: true,
-        timeout: 60_000
+        timeout: 60_000,
+        env: {
+          ...process.env,
+          ...environment
+        }
       }
     );
   if (
@@ -79,8 +85,10 @@ function createTrustedTestSigner(
     "$publishers.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
     "$publishers.Add($cert)",
     "$publishers.Close()",
-    "$null=Set-AuthenticodeSignature -LiteralPath $args[0] -Certificate $cert -HashAlgorithm SHA256",
-    "$check=Get-AuthenticodeSignature -LiteralPath $args[0]",
+    "$target=$env:LEX_AUTHENTICODE_TEST_TARGET",
+    "if ([string]::IsNullOrWhiteSpace($target)) { throw 'TEST_TARGET_MISSING' }",
+    "$null=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
+    "$check=Get-AuthenticodeSignature -LiteralPath $target",
     "if ($check.Status -ne 'Valid') { throw ('TEST_SIGNATURE_NOT_VALID:' + $check.Status) }",
     "$cert.Thumbprint"
   ].join("; ");
@@ -88,7 +96,10 @@ function createTrustedTestSigner(
   const output =
     powershell(
       command,
-      [target]
+      {
+        LEX_AUTHENTICODE_TEST_TARGET:
+          target
+      }
     )
       .split(/\r?\n/)
       .map((line) =>
@@ -139,18 +150,22 @@ function cleanupCertificate(
       "-Command",
       [
         "$ErrorActionPreference='SilentlyContinue'",
-        "$thumb=$args[0]",
+        "$thumb=$env:LEX_AUTHENTICODE_TEST_THUMBPRINT",
         "foreach($store in @('My','Root','TrustedPublisher')) {",
         "  $item='Cert:\\CurrentUser\\' + $store + '\\' + $thumb",
         "  if (Test-Path -LiteralPath $item) { Remove-Item -LiteralPath $item -Force }",
         "}"
-      ].join("; "),
-      escaped
+      ].join("; ")
     ],
     {
       encoding: "utf8",
       windowsHide: true,
-      timeout: 30_000
+      timeout: 30_000,
+      env: {
+        ...process.env,
+        LEX_AUTHENTICODE_TEST_THUMBPRINT:
+          escaped
+      }
     }
   );
 }
