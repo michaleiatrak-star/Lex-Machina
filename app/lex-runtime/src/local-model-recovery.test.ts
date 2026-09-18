@@ -319,6 +319,108 @@ describe(
     );
 
     it(
+      "restores the previously active model configuration after an interrupted inactive-model update",
+      () => {
+        const root =
+          temporaryRoot();
+        const runtimeRoot =
+          path.join(
+            root,
+            "runtime"
+          );
+        const localRoot =
+          path.join(
+            root,
+            "local-ai"
+          );
+
+        write(
+          path.join(
+            localRoot,
+            "config.json"
+          ),
+          '{"active":"mistral-temporary"}'
+        );
+        write(
+          path.join(
+            localRoot,
+            "context-qualification.json"
+          ),
+          '{"qualification":"mistral-temporary"}'
+        );
+        write(
+          path.join(
+            localRoot,
+            "config.json.inactive-update-backup"
+          ),
+          '{"active":"bielik"}'
+        );
+        write(
+          path.join(
+            localRoot,
+            "context-qualification.json.inactive-update-backup"
+          ),
+          '{"qualification":"bielik"}'
+        );
+        write(
+          path.join(
+            localRoot,
+            "inactive-model-update-transaction.json"
+          ),
+          JSON.stringify({
+            schemaVersion: 1,
+            targetModelId:
+              "local/mistral-nemo-12b-q4km",
+            hadPreviousConfig:
+              true,
+            hadPreviousQualification:
+              true,
+            startedAt:
+              "2026-09-18T09:00:00.000Z"
+          })
+        );
+
+        new LocalModelRuntime({
+          rootDir:
+            localRoot,
+          runtimeRoot,
+          port: 54_324
+        });
+
+        expect(
+          fs.readFileSync(
+            path.join(
+              localRoot,
+              "config.json"
+            ),
+            "utf8"
+          )
+        ).toBe(
+          '{"active":"bielik"}'
+        );
+        expect(
+          fs.readFileSync(
+            path.join(
+              localRoot,
+              "context-qualification.json"
+            ),
+            "utf8"
+          )
+        ).toBe(
+          '{"qualification":"bielik"}'
+        );
+        expect(
+          fs.existsSync(
+            path.join(
+              localRoot,
+              "inactive-model-update-transaction.json"
+            )
+          )
+        ).toBe(false);
+      }
+    );
+
+    it(
       "fails closed on an invalid recovery marker",
       () => {
         const root =
