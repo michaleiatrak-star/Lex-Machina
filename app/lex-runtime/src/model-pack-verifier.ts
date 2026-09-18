@@ -11,8 +11,35 @@ export type TrustedModelPackKey = {
   publicKeyPem: string;
 };
 
+export type LocalModelUpdateFamily =
+  | "BIELIK"
+  | "MISTRAL";
+
+export function modelUpdateFamilyForId(
+  modelId: string
+): LocalModelUpdateFamily | null {
+  const normalized =
+    modelId.trim().toLowerCase();
+  if (
+    /^local\/bielik-/.test(
+      normalized
+    )
+  ) {
+    return "BIELIK";
+  }
+  if (
+    /^local\/(?:mistral|ministral)-/.test(
+      normalized
+    )
+  ) {
+    return "MISTRAL";
+  }
+  return null;
+}
+
 export type ModelPackEntry = {
   id: string;
+  family?: LocalModelUpdateFamily;
   displayName: string;
   filename: string;
   url: string;
@@ -406,12 +433,33 @@ function parseIndex(
       parseHttpsUrl(
         model.url
       );
+    const inferredFamily =
+      typeof model.id ===
+        "string"
+        ? modelUpdateFamilyForId(
+            model.id
+          )
+        : null;
+    const declaredFamily =
+      model.family ===
+        "BIELIK" ||
+      model.family ===
+        "MISTRAL"
+        ? model.family
+        : null;
 
     if (
       typeof model.id !==
         "string" ||
       !SAFE_MODEL_ID.test(
         model.id
+      ) ||
+      !inferredFamily ||
+      (
+        model.family !==
+          undefined &&
+        declaredFamily !==
+          inferredFamily
       ) ||
       seen.has(model.id) ||
       typeof model.displayName !==
@@ -471,6 +519,8 @@ function parseIndex(
     seen.add(model.id);
     parsed.push({
       id: model.id,
+      family:
+        inferredFamily!,
       displayName:
         model.displayName,
       filename:
