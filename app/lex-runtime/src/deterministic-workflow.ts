@@ -52,7 +52,8 @@ export type DeterministicWorkflowOutputReport = {
     | "CONTRACT_FINAL"
     | "CONTRACT_LITE"
     | "STATUTE_FINAL"
-    | "CASE_LAW_FINAL";
+    | "CASE_LAW_FINAL"
+    | "CHRONOLOGY_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -238,6 +239,20 @@ const CASE_LAW_FINAL_MARKERS = [
   "ORZECZENIA WSPIERAJĄCE TEZĘ",
   "LINIA PRZECIWNA"
 ] as const;
+
+const CHRONOLOGY_FINAL_MARKERS = [
+  "CHRONOLOGIA SPRAWY",
+  "INWENTARYZACJA DOKUMENTÓW",
+  "OŚ CZASU — WĄTEK",
+  "OŚ CZASU — WIDOK ZBIORCZY",
+  "FAKTY BEZSPORNE",
+  "INDEKS SPRZECZNOŚCI",
+  "ZDARZENIA WYDEDUKOWANE — REJESTR",
+  "LUKI CZASOWE",
+  "ZDARZENIA NIEUSTALONE CHRONOLOGICZNIE",
+  "REKOMENDACJE DO PISMA"
+] as const;
+
 
 
 function assertReadableResource(
@@ -439,6 +454,12 @@ export function deterministicWorkflowPrompt(
           "CASE_LAW_V1 keeps short single-reference answers flexible.",
           "If you claim to present a full RAPORT ORZECZEŃ, the runtime requires WSKAŹNIK POKRYCIA PRZESŁANEK → PLAN MINIMUM → [A] ORZECZENIA WSPIERAJĄCE TEZĘ → [B] LINIA PRZECIWNA in that order.",
           "The BILANS section remains conditional on the directional Faza 1-D and is therefore not blindly required by this output gate."
+        ]
+      : []),
+    ...(plan.id === "CHRONOLOGY_V1"
+      ? [
+          "CHRONOLOGY_V1 may return bounded intermediate chronology findings without forcing the full report.",
+          "If you claim a full CHRONOLOGIA SPRAWY report, the runtime requires INWENTARYZACJA DOKUMENTÓW → OŚ CZASU — WĄTEK → OŚ CZASU — WIDOK ZBIORCZY → FAKTY BEZSPORNE → INDEKS SPRZECZNOŚCI → ZDARZENIA WYDEDUKOWANE — REJESTR → LUKI CZASOWE → ZDARZENIA NIEUSTALONE CHRONOLOGICZNIE → REKOMENDACJE DO PISMA in order."
         ]
       : []),
     ...(plan.id === "EVIDENCE_ANALYSIS_V1"
@@ -865,6 +886,81 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "STATUTE_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "CHRONOLOGY_V1"
+  ) {
+    const claimsFullReport =
+      normalized.includes(
+        "CHRONOLOGIA SPRAWY"
+      );
+
+    if (!claimsFullReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "NOT_APPLICABLE",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...CHRONOLOGY_FINAL_MARKERS
+    ];
+    const observed =
+      CHRONOLOGY_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      CHRONOLOGY_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      CHRONOLOGY_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode:
+        "CHRONOLOGY_FINAL",
       required,
       observed: [
         ...observed
