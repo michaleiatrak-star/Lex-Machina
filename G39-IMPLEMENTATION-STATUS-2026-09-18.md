@@ -189,10 +189,11 @@ Companion full-corpus audit: `G39-DETERMINISTIC-SKILL-MIGRATION-AUDIT-2026-09-18
 Coverage is machine-enforced by `app/lex-runtime/src/deterministic-skill-coverage.ts` and its test. Current classification covers every top-level `SKILL.md` directory in the development corpus; a new unclassified skill must fail CI.
 
 
-Status: **PARTIAL / VERIFYING**
+Status: **IMPLEMENTED / VERIFYING CURRENT HEAD**
 
 Implemented:
 
+- canonical Gate I is split into runtime subgates I-A through I-J; source provenance, source hierarchy, temporal freshness, citation ledger, legal citations, case signatures, document citations, input completeness, output contract, finalization and state transitions are evaluated by code rather than remembered by the model;
 - mandatory legal bootstrap is runtime-enforced: `prawny-router-v3` is loaded first, followed by the shared Polish-law hard gate and router detection/anonymization resources;
 - explicit and semantic execution-skill selection is deterministic before provider execution; automatic mode cannot disable the router, privacy, source, citation, audit or finalization gates;
 - deterministic workflow preflight currently covers:
@@ -224,6 +225,14 @@ Implemented:
   - state transition is optimistic-revision guarded and records a privacy-safe audit reference derived from session/checkpoint;
   - blocked court-analysis output cannot advance persisted state;
 - court-analysis lifecycle exposes only GET / initialize / reset to the user; no public checkpoint-completion endpoint exists;
+- evidence analysis and witness questioning now use encrypted per-case ordered workflow state with optimistic revisions and runtime permits;
+- `EVIDENCE_ANALYSIS_V1` follows the canonical AD sequence through `AD-KROK4-DASHBOARD`; optional AD blocks may be marked N/A only where explicitly declared by the state machine;
+- `WITNESS_QUESTIONING_V1` follows `PRE-W1a-SD-VER → ... → CHECKPOINT-W2 → W3-QUESTIONS`, with only declared post-W3/rehearsal stages optional;
+- both workflows auto-initialize only for an authorized case-bound request, advance exactly one permitted checkpoint after full PASS, persist an encrypted audit-artifact reference and do not advance after BLOCKED execution;
+- GET / initialize / guarded reset endpoints expose state lifecycle but no public endpoint can directly complete a checkpoint;
+- every legal chat turn runs deterministic post-draft reference handling: unambiguous statutory references and supported SN signatures are automatically sent to the verifier, verified markers are inserted from the ledger, failed verification gets an explicit unverified marker, and unsupported/ambiguous case families remain fail-closed;
+- mandatory workflow policy resources are pre-read by runtime before provider execution; mechanical policy reads are not repeated as model tool obligations;
+- Gate I separately enforces source tier, temporal freshness proof and exact local-document citation/highlight integrity on every turn;
 - deanonymization/final artifact gates remain dependent on persisted process FINAL state.
 
 New/updated validation:
@@ -233,6 +242,10 @@ New/updated validation:
 - process state, execution permit, applicability and encrypted persistence tests remain active;
 - bounded AUTO has pure runner tests plus HTTP integration across ACL/encrypted workspace;
 - court-analysis state and execution permit tests exist plus HTTP persistence/blocked-node integration;
+- evidence/witness ordered-state unit tests cover canonical ordering, optional N/A rules and stale-permit rejection;
+- dedicated HTTP integration covers both evidence and witness checkpoint binding, encrypted persistence, audit-artifact resolution and no advancement after a blocked turn;
+- Gate I regression tests cover automatic statutory/SN post-draft verification, ambiguous court-family fail-closed behavior and explicit `⚠️ [NIEWERYFIKOWANE]` marking after failed verification;
+- Gate I invariant tests cover provenance, source hierarchy, temporal freshness, citation ledger, case signatures and exact document-citation anchoring;
 - successful stateful workflow nodes persist a privacy-bounded audit artifact in `SecureCaseArtifactStore`; artifacts are encrypted with the case data key, participate in case-key rotation, expose no answer/document body, and are independently retrievable through an `ANALYZE`-guarded `/workflow-audits/:artifactId` endpoint with manifest/payload hash verification;
 - workflow history stores resolvable `artifact://artifact_…` references rather than opaque integrity-only ids;
 - the real-corpus skill↔engine parity suite validates required fresh-resource declarations for all 11 migrated execution workflows; deeper checkpoint semantic parity remains active for process/court/chronology/contract state machines;
@@ -246,9 +259,13 @@ New/updated validation:
 
 Still required before G39H/I PASS:
 
-- current-head CI must be green after the latest AUTO/stateful/audit integration and expanded all-workflow parity matrix;
-- extend stateful deterministic execution beyond process/court/chronology/contract workflows only where multi-turn state materially improves correctness; report skills remain high-determinism schema/output workflows rather than artificial state machines;
-- deepen comparative parity for non-stateful workflows from resource-declaration parity to output-schema/gate semantic parity where it adds regression value;
+- current-head runtime CI must be green with the Gate I I-A…I-J split, automatic post-draft verification and evidence/witness HTTP state tests;
+- online and offline installer acceptance must be green on the same source SHA used for publication.
+
+Non-blocking follow-up after release:
+
+- deepen comparative parity for non-stateful workflows where it adds regression value;
+- add official deterministic verification adapters for additional court families before allowing their signatures to pass automatically; discovery alone must not create VERIFIED status;
 - after two stable releases, shorten duplicated skill instructions that are now runtime-enforced.
 
 Invariant:
