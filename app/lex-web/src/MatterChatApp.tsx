@@ -21,11 +21,13 @@ import {
   executeSession,
   getHealth,
   getModels,
+  getModelRoutingPreferences,
   getProviderStatus,
   getRoutes,
   isDesktopShell,
   listCases,
   renameCase,
+  setModelRoutingPreferences,
   setProviderApiKey,
   unarchiveCase,
   type AuthenticatedUser,
@@ -33,6 +35,7 @@ import {
   type DocumentAttachmentSelection,
   type EvidenceItem,
   type ModelDescriptor,
+  type ModelRoutingPreferences,
   type ProviderId,
   type SessionExecutionResponse
 } from "./api.js";
@@ -236,6 +239,10 @@ function executionMessage(
           : execution.courtWorkflow
             ? ` · analiza sądowa: ${execution.courtWorkflow.stage}${execution.courtWorkflow.nextCheckpoint ? ` · następny: ${execution.courtWorkflow.nextCheckpoint}` : ""}`
             : "";
+    const modelRoutingMeta =
+      execution.modelRouting?.auxiliary
+        ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}]${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}`
+        : ` · główny: ${execution.model}`;
     return {
       id: messageId(),
       role: "assistant",
@@ -249,6 +256,7 @@ function executionMessage(
         contextMeta +
         citationMeta +
         workflowMeta +
+        modelRoutingMeta +
         ` · VERIFIED ${execution.verification.verified}` +
         ` · SUPPORTED ${execution.verification.supported}`
     };
@@ -303,6 +311,19 @@ export default function MatterChatApp({
   const [models, setModels] = useState<ModelDescriptor[]>([]);
   const [model, setModel] = useState("");
   const [modelError, setModelError] = useState("");
+  const [modelRouting, setModelRouting] =
+    useState<ModelRoutingPreferences>({
+      auxiliaryEnabled: false,
+      auxiliaryProvider: "openai",
+      auxiliaryModel:
+        "local/bielik-11b-v3-q4km"
+    });
+  const [auxiliaryModels, setAuxiliaryModels] =
+    useState<ModelDescriptor[]>([]);
+  const [modelRoutingBusy, setModelRoutingBusy] =
+    useState(false);
+  const [modelRoutingMessage, setModelRoutingMessage] =
+    useState("");
 
   const [routes, setRoutes] = useState<string[]>([]);
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
@@ -353,6 +374,12 @@ export default function MatterChatApp({
   const providerDefinition = PROVIDERS.find((item) => item.id === provider);
   const providerConfigured = providerConfiguration[provider];
   const selectedModel = models.find((item) => item.id === model);
+  const selectedAuxiliaryModel =
+    auxiliaryModels.find(
+      (item) =>
+        item.id ===
+          modelRouting.auxiliaryModel
+    );
   const executionSkills = useMemo(
     () => skills
       .filter(isExecutionSkill)
@@ -394,9 +421,10 @@ export default function MatterChatApp({
       getHealth(),
       getRoutes(),
       getProviderStatus(),
-      listCases()
+      listCases(),
+      getModelRoutingPreferences()
     ])
-      .then(([health, routeList, providerStatus, caseList]) => {
+      .then(([health, routeList, providerStatus, caseList, routingPreferences]) => {
         if (cancelled) return;
         setRuntimeOnline(health.status === "ok" && health.localOnly === true);
         setRoutes(routeList.primarySkills);
@@ -411,6 +439,9 @@ export default function MatterChatApp({
           Object.fromEntries(
             providerStatus.providers.map((item) => [item.provider, item.configured])
           ) as Record<ProviderId, boolean>
+        );
+        setModelRouting(
+          routingPreferences
         );
       })
       .catch((error) => {
@@ -468,6 +499,52 @@ export default function MatterChatApp({
       cancelled = true;
     };
   }, [provider, providerConfigured]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setAuxiliaryModels([]);
+
+    const configured =
+      providerConfiguration[
+        modelRouting.auxiliaryProvider
+      ];
+    if (
+      configured !== true &&
+      !modelRouting.auxiliaryModel
+        .startsWith("local/")
+    ) {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    void getModels(
+      modelRouting.auxiliaryProvider
+    )
+      .then((response) => {
+        if (!cancelled) {
+          setAuxiliaryModels(
+            response.models.filter(
+              (item) =>
+                item.selectable
+            )
+          );
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAuxiliaryModels([]);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    modelRouting.auxiliaryProvider,
+    modelRouting.auxiliaryModel,
+    providerConfiguration
+  ]);
 
   useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
@@ -618,6 +695,32 @@ export default function MatterChatApp({
     }
   }
 
+  async function saveModelRouting(): Promise<void> {
+    if (modelRoutingBusy) return;
+    setModelRoutingBusy(true);
+    setModelRoutingMessage("");
+    try {
+      const saved =
+        await setModelRoutingPreferences(
+          modelRouting
+        );
+      setModelRouting(saved);
+      setModelRoutingMessage(
+        saved.auxiliaryEnabled
+          ? "Model pomocniczy aktywny. Program użyje go tylko dla dozwolonych zadań pomocniczych."
+          : "Model pomocniczy wyłączony."
+      );
+    } catch (error) {
+      setModelRoutingMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setModelRoutingBusy(false);
+    }
+  }
+
   async function executeMessage(plain: string): Promise<void> {
     if (
       executing ||
@@ -651,6 +754,8 @@ export default function MatterChatApp({
         ),
         provider,
         model,
+        auxiliaryText:
+          plain.trim(),
         primarySkill: route,
         mode: "PRAWNIK",
         ...(documentAttachments.length > 0
