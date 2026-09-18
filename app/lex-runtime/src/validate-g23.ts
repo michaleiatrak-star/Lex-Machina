@@ -4,6 +4,9 @@ import request from "supertest";
 import {
   SupremeCourtCaseVerifier
 } from "./case-law-verifier.js";
+import {
+  CaseLawSearchService
+} from "./case-law-search.js";
 import { createLexHttpApp } from "./http/app.js";
 import {
   OfficialLegalSourceVerifier
@@ -112,6 +115,68 @@ function json(value: unknown): Response {
           "application/json"
       }
     }
+  );
+}
+
+function caseLawDiscoveryFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+  if (
+    url.includes(
+      "saos.org.pl/api/search/judgments"
+    )
+  ) {
+    return Promise.resolve(
+      json({
+        items: [],
+        info: {
+          totalResults: 0
+        }
+      })
+    );
+  }
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/search"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>Znaleziono 0 orzeczeń</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+  if (
+    url.includes(
+      "orzeczenia.nsa.gov.pl/cbo/query"
+    )
+  ) {
+    return Promise.resolve(
+      new Response(
+        "<html><body>CBOSA</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      )
+    );
+  }
+  return Promise.reject(
+    new Error(
+      "G23_UNEXPECTED_DISCOVERY_URL:" +
+        url
+    )
   );
 }
 
@@ -340,7 +405,10 @@ function appFor(
             statuteVerifier,
             undefined,
             null,
-            caseVerifier
+            caseVerifier,
+            new CaseLawSearchService(
+              caseLawDiscoveryFetcher
+            )
           )
       )
   });
