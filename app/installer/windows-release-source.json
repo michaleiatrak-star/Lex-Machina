@@ -4,11 +4,12 @@
   "applicationVersion": "0.1.3",
   "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
   "applicationUpdate": {
-    "verification": "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+    "verification": "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
     "trustedSignerThumbprints": [],
     "transaction": "EXTERNAL_RUNNER_BACKUP_HEALTHCHECK_ROLLBACK",
     "stagingRoot": "%TEMP%\\LexMachinaUpdate",
-    "policy": "FAIL_CLOSED_UNTIL_RELEASE_SIGNER_IS_CONFIGURED"
+    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
+    "temporaryUnsignedAllowed": true
   },
   "runtime": {
     "node": {
@@ -162,22 +163,26 @@
     "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
-    "applicationUpdateSigning": "Application updates are deliberately blocked until trustedSignerThumbprints contains the production Authenticode certificate thumbprint."
+    "applicationUpdateSigning": "TEMPORARY: unsigned application updates are allowed after SHA-256 and ProductVersion verification. Switch applicationUpdate.verification back to SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER before production trust enforcement.",
+    "skillUpdateSigning": "TEMPORARY: skill index signatures are optional; index schema, compatibility, bundle SHA-256 and structural validation remain mandatory.",
+    "modelPackUpdateSigning": "TEMPORARY: model-pack index signatures are optional; index schema, compatibility and model SHA-256 remain mandatory."
   },
   "modelPackUpdate": {
-    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-ModelPack-Index.json",
     "signatureAsset": "LexMachina-ModelPack-Index.sig",
     "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
-    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED"
+    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
+    "temporaryUnsignedAllowed": true
   },
   "skillUpdate": {
-    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-Skills-Index.json",
     "signatureAsset": "LexMachina-Skills-Index.sig",
     "activation": "VALIDATE_THEN_ATOMIC_SWITCH_WITH_ROLLBACK",
-    "policy": "FAIL_CLOSED_UNTIL_SKILL_SIGNER_IS_CONFIGURED"
+    "policy": "TEMPORARY_UNSIGNED_ALLOWED",
+    "temporaryUnsignedAllowed": true
   }
 }
