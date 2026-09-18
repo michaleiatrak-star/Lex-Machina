@@ -21,6 +21,16 @@ on:
         description: "Trusted Ed25519 model-pack signing key id"
         required: true
         type: string
+      publish_release:
+        description: "Publish model-pack-vX.Y.Z GitHub Release after validation"
+        required: true
+        default: false
+        type: boolean
+      publish_confirmation:
+        description: "When publish_release=true, enter PUBLISH-MODEL-PACK"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -102,3 +112,113 @@ jobs:
             app/installer/windows-release-source.json
           if-no-files-found: error
           retention-days: 14
+
+  publish-model-pack-release:
+    if: ${{ inputs.publish_release }}
+    needs:
+      - build-signed-model-pack-metadata
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Require explicit publication confirmation
+        shell: bash
+        run: |
+          if [ "${{ inputs.publish_confirmation }}" != "PUBLISH-MODEL-PACK" ]; then
+            echo "MODEL_PACK_RELEASE_CONFIRMATION_REQUIRED"
+            exit 1
+          fi
+          if ! printf '%s' "${{ inputs.version }}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "MODEL_PACK_RELEASE_VERSION_INVALID"
+            exit 1
+          fi
+
+      - name: Download signed candidate artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-ModelPack-${{ inputs.version }}-Signed-Candidate
+          path: model-pack-release
+
+      - name: Validate release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "model-pack-release/LexMachina-ModelPack-Index.json"
+          test -f "model-pack-release/LexMachina-ModelPack-Index.sig"
+          test -f "model-pack-release/windows-release-source.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("model-pack-release/LexMachina-ModelPack-Index.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          expected = "${{ inputs.version }}"
+          if data.get("kind") != "LEX_MACHINA_MODEL_PACK_INDEX":
+              raise SystemExit("MODEL_PACK_RELEASE_KIND_INVALID")
+          if data.get("version") != expected:
+              raise SystemExit("MODEL_PACK_RELEASE_VERSION_MISMATCH")
+          models = data.get("models")
+          if not isinstance(models, list) or not models:
+              raise SystemExit("MODEL_PACK_RELEASE_MODELS_MISSING")
+          ids = {item.get("id") for item in models if isinstance(item, dict)}
+          required = {
+              "local/bielik-11b-v3-q4km",
+              "local/mistral-nemo-12b-q4km",
+          }
+          if not required.issubset(ids):
+              raise SystemExit("MODEL_PACK_RELEASE_REQUIRED_MODELS_MISSING")
+          PY
+
+      - name: Refuse duplicate model-pack tag
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="model-pack-v${{ inputs.version }}"
+          if gh release view "$tag" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "MODEL_PACK_RELEASE_TAG_ALREADY_EXISTS"
+            exit 1
+          fi
+
+      - name: Publish signed model-pack release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="model-pack-v${{ inputs.version }}"
+          gh release create "$tag" \
+            "model-pack-release/LexMachina-ModelPack-Index.json" \
+            "model-pack-release/LexMachina-ModelPack-Index.sig" \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "Lex Machina Model Pack ${{ inputs.version }}" \
+            --notes "Signed local-model metadata update for Bielik and Mistral. The application verifies the Ed25519 index signature and each selected GGUF SHA-256 before activation."
+
+      - name: Verify published assets and GitHub digests
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="model-pack-v${{ inputs.version }}"
+          gh api "repos/${{ github.repository }}/releases/tags/$tag" > release.json
+          python - <<'PY'
+          import json, re
+          release = json.load(open("release.json", encoding="utf-8"))
+          assets = {a.get("name"): a for a in release.get("assets", [])}
+          required = [
+              "LexMachina-ModelPack-Index.json",
+              "LexMachina-ModelPack-Index.sig",
+          ]
+          for name in required:
+              asset = assets.get(name)
+              if not asset:
+                  raise SystemExit(f"MODEL_PACK_RELEASE_ASSET_MISSING:{name}")
+              digest = asset.get("digest")
+              if not isinstance(digest, str) or not re.fullmatch(r"sha256:[0-9a-fA-F]{64}", digest):
+                  raise SystemExit(f"MODEL_PACK_RELEASE_ASSET_DIGEST_MISSING:{name}")
+          print("Published model-pack release verification: PASS")
+          PY
+
