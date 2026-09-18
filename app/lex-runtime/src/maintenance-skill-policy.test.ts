@@ -113,7 +113,13 @@ function verifiedIndex(args?: {
 
 function service(
   verified:
-    VerifiedSkillIndex
+    VerifiedSkillIndex,
+  options?: {
+    signatureMode?:
+      | "SIGNED_REQUIRED"
+      | "UNSIGNED_ALLOWED";
+    signaturePresent?: boolean;
+  }
 ) {
   const indexBytes =
     new TextEncoder().encode(
@@ -128,6 +134,12 @@ function service(
       indexBytes,
       signatureBytes
     );
+  if (
+    options?.signaturePresent ===
+      false
+  ) {
+    delete result.skillsSignature;
+  }
   const bundleFetch =
     vi.fn();
 
@@ -154,8 +166,9 @@ function service(
         );
       }
       if (
+        result.skillsSignature &&
         url ===
-          result.skillsSignature!.url
+          result.skillsSignature.url
       ) {
         return new Response(
           signatureBytes,
@@ -207,7 +220,12 @@ function service(
         throw new Error(
           "UNUSED_MODEL_PACK_VERIFIER"
         );
-      }
+      },
+      () =>
+        options?.signatureMode ??
+        "SIGNED_REQUIRED",
+      () =>
+        "SIGNED_REQUIRED"
     );
 
   return {
@@ -219,6 +237,42 @@ function service(
 describe(
   "signed skill update compatibility policy",
   () => {
+    it(
+      "reports an unsigned skill index as ready only in the explicit temporary mode",
+      async () => {
+        const {
+          maintenance
+        } = service(
+          {
+            ...verifiedIndex(),
+            signerKeyId:
+              "UNSIGNED_ALLOWED"
+          },
+          {
+            signatureMode:
+              "UNSIGNED_ALLOWED",
+            signaturePresent:
+              false
+          }
+        );
+
+        const status =
+          await maintenance
+            .skillStatus();
+
+        expect(status.status)
+          .toBe("AVAILABLE");
+        expect(status.bundleReady)
+          .toBe(true);
+        expect(status.signatureMode)
+          .toBe(
+            "UNSIGNED_ALLOWED"
+          );
+        expect(status.blockedReason)
+          .toBeUndefined();
+      }
+    );
+
     it(
       "rejects a signed index incompatible with the installed application before downloading the ZIP",
       async () => {
