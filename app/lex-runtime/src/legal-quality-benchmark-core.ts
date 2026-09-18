@@ -673,20 +673,35 @@ export function scoreLegalQualityCase(
     const issue
     of answer.issues
   ) {
+    const expectedIssue =
+      expectedById.get(
+        issue.id
+      );
+    const allowedForIssue =
+      new Set(
+        expectedIssue
+          ?.requiredSources ??
+          []
+      );
     for (
       const sourceId
       of issue.sources
     ) {
       actualCitations += 1;
       if (
-        knownSources.has(
+        !knownSources.has(
+          sourceId
+        )
+      ) {
+        unknownSourceCount +=
+          1;
+      }
+      if (
+        allowedForIssue.has(
           sourceId
         )
       ) {
         validActualCitations +=
-          1;
-      } else {
-        unknownSourceCount +=
           1;
       }
     }
