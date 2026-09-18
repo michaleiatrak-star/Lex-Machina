@@ -86,7 +86,19 @@ if ($Mode -ne "VerifyPurged") {
 }
 
 if (-not ("LexMachinaCredentialPurge" -as [type])) {
-  Add-Type -TypeDefinition @"
+  # NSIS runs hook scripts from $PLUGINSDIR. That directory contains the native
+  # NSIS System.dll plugin, which Windows PowerShell Add-Type can mistake for
+  # the .NET Framework System.dll when it invokes its compiler. Force a safe
+  # native working directory during compilation, then restore the caller's cwd.
+  $previousNativeCurrentDirectory = [Environment]::CurrentDirectory
+  $safeCompilerWorkingDirectory = if ($env:SystemRoot) {
+    [IO.Path]::GetFullPath($env:SystemRoot)
+  } else {
+    [IO.Path]::GetTempPath()
+  }
+  try {
+    [Environment]::CurrentDirectory = $safeCompilerWorkingDirectory
+    Add-Type -TypeDefinition @"
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -245,6 +257,9 @@ public static class LexMachinaCredentialPurge
     }
 }
 "@
+  } finally {
+    [Environment]::CurrentDirectory = $previousNativeCurrentDirectory
+  }
 }
 
 $paths = [Collections.Generic.List[object]]::new()
