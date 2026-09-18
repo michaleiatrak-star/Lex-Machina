@@ -29,6 +29,7 @@ export type GateIAutoVerificationPlan = {
     reason:
       | "ALREADY_IN_LEDGER"
       | "ACT_ALIAS_AMBIGUOUS"
+      | "COURT_FAMILY_AMBIGUOUS"
       | "UNSUPPORTED_KIND";
   }>;
 };
@@ -67,6 +68,64 @@ export function planAutomaticLegalVerification(
           reference.claim,
         reason:
           "ALREADY_IN_LEDGER"
+      });
+      continue;
+    }
+
+    if (
+      reference.kind ===
+        "case"
+    ) {
+      const line =
+        reference.lineText
+          .normalize("NFKC")
+          .toLocaleUpperCase("pl");
+      const explicitSupremeCourt =
+        /\bSĄD\s+NAJWYŻSZY\b/u.test(
+          line
+        ) ||
+        /(?:^|[\s(])SN(?:[\s),.:;]|$)/u.test(
+          line
+        );
+      if (!explicitSupremeCourt) {
+        skipped.push({
+          claim:
+            reference.claim,
+          reason:
+            "COURT_FAMILY_AMBIGUOUS"
+        });
+        continue;
+      }
+
+      const signature =
+        reference.claim
+          .replace(
+            /^sygn\.?\s*(?:akt\s*)?/iu,
+            ""
+          )
+          .trim();
+      if (!signature) {
+        skipped.push({
+          claim:
+            reference.claim,
+          reason:
+            "COURT_FAMILY_AMBIGUOUS"
+        });
+        continue;
+      }
+
+      calls.push({
+        id:
+          `gate-i-auto-${calls.length + 1}`,
+        name:
+          "verify_case_reference",
+        input: {
+          claim:
+            reference.claim,
+          signature,
+          courtFamily:
+            "SN"
+        }
       });
       continue;
     }
@@ -129,6 +188,12 @@ function marker(
     VerificationRecord
 ): string | null {
   if (
+    record.status ===
+      "UNVERIFIED"
+  ) {
+    return "⚠️ [NIEWERYFIKOWANE]";
+  }
+  if (
     record.status !==
       "VERIFIED" ||
     !record.sourceUrl ||
@@ -175,21 +240,11 @@ export function applyAutomaticVerificationMarkers(
     >();
 
   for (const reference of references) {
-    if (
-      reference.kind !==
-        "statute"
-    ) {
-      continue;
-    }
     const record =
       ledger.latest(
         reference.claim
       );
-    if (
-      !record ||
-      record.status !==
-        "VERIFIED"
-    ) {
+    if (!record) {
       continue;
     }
     const current =
