@@ -6,7 +6,9 @@ import {
 export type StatefulWorkflowAuditId =
   | "COURT_ANALYSIS_V1"
   | "CHRONOLOGY_V1"
-  | "CONTRACT_ANALYSIS_V1";
+  | "CONTRACT_ANALYSIS_V1"
+  | "EVIDENCE_ANALYSIS_V1"
+  | "WITNESS_QUESTIONING_V1";
 
 export type WorkflowAuditCitationAnchor = {
   caseId?: string;
@@ -114,7 +116,9 @@ function validWorkflowId(
   return [
     "COURT_ANALYSIS_V1",
     "CHRONOLOGY_V1",
-    "CONTRACT_ANALYSIS_V1"
+    "CONTRACT_ANALYSIS_V1",
+    "EVIDENCE_ANALYSIS_V1",
+    "WITNESS_QUESTIONING_V1"
   ].includes(
     String(value)
   );
