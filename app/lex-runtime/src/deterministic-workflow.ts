@@ -6,6 +6,7 @@ import type { CourtAnalysisCheckpoint } from "./court-analysis-state.js";
 
 export type DeterministicWorkflowId =
   | "LEGAL_QUERY_V1"
+  | "LEGAL_GUIDE_V1"
   | "SIMPLE_LETTER_V1"
   | "PROCESS_PLEADING_V1"
   | "COURT_ANALYSIS_V1"
@@ -64,6 +65,15 @@ export type DeterministicWorkflowOutputReport = {
   orderValid: boolean;
   result: "PASS" | "BLOCKED";
 };
+
+const LEGAL_GUIDE_RESOURCES = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/DOMAIN-LOCK.md",
+  "shared/RATE-COMPLETENESS.md",
+  "przewodnik-prawny-v2/references/TRYB-SUROWA-ANALIZA.md"
+] as const;
 
 const SIMPLE_LETTER_RESOURCES = [
   "shared/NAZEWNICTWO-STRON.md",
@@ -324,6 +334,8 @@ export function createDeterministicWorkflowPlan(
   registry: LexSkillRegistry,
   workflowExecutionSkill: string | null
 ): DeterministicWorkflowPlan {
+  const hasGuide =
+    workflowExecutionSkill === "przewodnik-prawny-v2";
   const hasProcess =
     workflowExecutionSkill === "pisma-procesowe-v3";
   const hasSimple =
@@ -347,8 +359,10 @@ export function createDeterministicWorkflowPlan(
   const hasSituationReport =
     workflowExecutionSkill === "raport-sytuacyjny-v2";
 
-  const executionSkill = hasProcess
-    ? "pisma-procesowe-v3"
+  const executionSkill = hasGuide
+    ? "przewodnik-prawny-v2"
+    : hasProcess
+      ? "pisma-procesowe-v3"
     : hasSimple
       ? "pisma-proste-v2"
       : hasCourtAnalysis
@@ -371,8 +385,10 @@ export function createDeterministicWorkflowPlan(
                       ? "raport-sytuacyjny-v2"
                       : workflowExecutionSkill;
 
-  const id: DeterministicWorkflowId = hasProcess
-    ? "PROCESS_PLEADING_V1"
+  const id: DeterministicWorkflowId = hasGuide
+    ? "LEGAL_GUIDE_V1"
+    : hasProcess
+      ? "PROCESS_PLEADING_V1"
     : hasSimple
       ? "SIMPLE_LETTER_V1"
       : hasCourtAnalysis
@@ -395,8 +411,10 @@ export function createDeterministicWorkflowPlan(
                         ? "SITUATION_REPORT_V1"
                         : "LEGAL_QUERY_V1";
 
-  const requiredFreshResources = hasProcess
-    ? [...PROCESS_PLEADING_RESOURCES]
+  const requiredFreshResources = hasGuide
+    ? [...LEGAL_GUIDE_RESOURCES]
+    : hasProcess
+      ? [...PROCESS_PLEADING_RESOURCES]
     : hasSimple
       ? [...SIMPLE_LETTER_RESOURCES]
       : hasCourtAnalysis
