@@ -115,7 +115,19 @@ const checks = {
       "LexMachina-Offline-Runtime.zip"
     ) &&
     workflow.includes(
-      "tar.exe -a -c -f"
+      "System.IO.Compression.ZipArchive"
+    ) &&
+    workflow.includes(
+      "Add-LexOfflineZipEntry"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_FILE_MISSING"
+    ) &&
+    workflow.includes(
+      "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH"
+    ) &&
+    workflow.includes(
+      "& tar.exe -xf $bundle -C $verifyDir"
     ) &&
     workflow.includes(
       "Build standalone offline EXE"
