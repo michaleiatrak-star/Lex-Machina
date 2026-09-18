@@ -100,6 +100,64 @@ export type LocalProvisioningProgress = {
   updatedAt: string;
 };
 
+export type LocalTokenCalibration = {
+  modelId: LocalModelId;
+  engine: "llama.cpp";
+  endpoint: "/tokenize";
+  sampleChars: number;
+  sampleTokens: number;
+  measuredCharsPerToken: number;
+  safeCharsPerToken: number;
+  calibratedAt: string;
+};
+
+export function deriveSafeCharsPerToken(
+  sampleChars: number,
+  sampleTokens: number
+): number {
+  if (
+    !Number.isSafeInteger(sampleChars) ||
+    sampleChars < 256 ||
+    !Number.isSafeInteger(sampleTokens) ||
+    sampleTokens < 1 ||
+    sampleTokens > sampleChars * 4
+  ) {
+    throw new Error(
+      "LOCAL_TOKEN_CALIBRATION_SAMPLE_INVALID"
+    );
+  }
+  const measured =
+    sampleChars / sampleTokens;
+  if (
+    !Number.isFinite(measured) ||
+    measured <= 0
+  ) {
+    throw new Error(
+      "LOCAL_TOKEN_CALIBRATION_SAMPLE_INVALID"
+    );
+  }
+  return Number(
+    Math.min(
+      3,
+      Math.max(
+        0.75,
+        measured * 0.85
+      )
+    ).toFixed(6)
+  );
+}
+
+const TOKEN_CALIBRATION_TEXT = [
+  "Sąd rozpoznaje sprawę na podstawie twierdzeń stron, dowodów oraz obowiązujących przepisów.",
+  "Powód wnosi o zapłatę 12 450,75 zł wraz z odsetkami ustawowymi za opóźnienie od dnia 15 stycznia 2026 r.",
+  "Pozwany kwestionuje wymagalność roszczenia i wskazuje na częściowe spełnienie świadczenia.",
+  "Dokumenty obejmują umowę, faktury, korespondencję, potwierdzenia przelewów oraz chronologię zdarzeń.",
+  "Analiza powinna odróżniać ustalone fakty od hipotez, zachować źródła i nie tworzyć nieistniejących cytatów.",
+  "Zażalenie, apelacja, sprzeciw i odpowiedź na pozew wymagają kontroli terminu, właściwości, żądania i załączników.",
+  "Przykład danych: 5 marca 2025 r.; sygn. akt I C 123/25; art. 6 k.c.; art. 232 k.p.c.; 1 234 567,89 zł.",
+  "Znaki języka polskiego: ą ć ę ł ń ó ś ź ż Ą Ć Ę Ł Ń Ó Ś Ź Ż."
+].join(" ");
+
 export type LocalModelPackReceipt = {
   schemaVersion: 1;
   kind: "LEX_MACHINA_MODEL_PACK_INSTALL";
@@ -342,6 +400,11 @@ export class LocalModelRuntime {
   private provisioning: Promise<void> | null = null;
   private provisioningProgress:
     LocalProvisioningProgress | null = null;
+  private tokenCalibrationCache =
+    new Map<
+      LocalModelId,
+      LocalTokenCalibration
+    >();
   private hardwareCache:
     | {
         value:
@@ -704,6 +767,9 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_PROVISIONING_IN_PROGRESS");
     }
     const canonical = normalizeModelId(modelId);
+    this.tokenCalibrationCache.delete(
+      canonical
+    );
     const model =
       sourceOverride?.model ??
       this.modelSpec(canonical);
@@ -1453,6 +1519,9 @@ export class LocalModelRuntime {
       throw new Error("LOCAL_MODEL_PROVISIONING_IN_PROGRESS");
     }
     const canonical = normalizeModelId(modelId);
+    this.tokenCalibrationCache.delete(
+      canonical
+    );
     const model = this.modelSpec(canonical);
     if (!model) {
       throw new Error("LOCAL_MODEL_UNKNOWN");
@@ -1500,6 +1569,125 @@ export class LocalModelRuntime {
       removedModelId: canonical,
       configRemoved
     };
+  }
+
+  async tokenCalibration(
+    id: string
+  ): Promise<LocalTokenCalibration> {
+    const canonical =
+      normalizeModelId(id);
+    const cached =
+      this.tokenCalibrationCache.get(
+        canonical
+      );
+    if (cached) {
+      return { ...cached };
+    }
+
+    await this.ensureRunning(
+      canonical
+    );
+
+    let response: Response;
+    try {
+      response = await fetch(
+        `http://${this.host}:${this.port}/tokenize`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+            Accept:
+              "application/json"
+          },
+          body: JSON.stringify({
+            content:
+              TOKEN_CALIBRATION_TEXT,
+            add_special: false
+          }),
+          signal:
+            AbortSignal.timeout(
+              8_000
+            )
+        }
+      );
+    } catch (error) {
+      throw new Error(
+        `LOCAL_TOKEN_CALIBRATION_FAILED:${
+          error instanceof Error
+            ? error.message
+            : String(error)
+        }`
+      );
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        `LOCAL_TOKEN_CALIBRATION_FAILED:HTTP_${response.status}`
+      );
+    }
+
+    let payload: unknown;
+    try {
+      payload =
+        await response.json();
+    } catch {
+      throw new Error(
+        "LOCAL_TOKEN_CALIBRATION_FAILED:INVALID_JSON"
+      );
+    }
+    if (
+      !payload ||
+      typeof payload !== "object" ||
+      Array.isArray(payload)
+    ) {
+      throw new Error(
+        "LOCAL_TOKEN_CALIBRATION_FAILED:INVALID_RESPONSE"
+      );
+    }
+    const tokens =
+      (
+        payload as Record<
+          string,
+          unknown
+        >
+      ).tokens;
+    if (!Array.isArray(tokens)) {
+      throw new Error(
+        "LOCAL_TOKEN_CALIBRATION_FAILED:TOKENS_MISSING"
+      );
+    }
+
+    const safeCharsPerToken =
+      deriveSafeCharsPerToken(
+        TOKEN_CALIBRATION_TEXT.length,
+        tokens.length
+      );
+    const calibration:
+      LocalTokenCalibration = {
+        modelId: canonical,
+        engine: "llama.cpp",
+        endpoint: "/tokenize",
+        sampleChars:
+          TOKEN_CALIBRATION_TEXT.length,
+        sampleTokens:
+          tokens.length,
+        measuredCharsPerToken:
+          Number(
+            (
+              TOKEN_CALIBRATION_TEXT.length /
+              tokens.length
+            ).toFixed(6)
+          ),
+        safeCharsPerToken,
+        calibratedAt:
+          new Date().toISOString()
+      };
+    this.tokenCalibrationCache.set(
+      canonical,
+      calibration
+    );
+    return { ...calibration };
   }
 
   async ensureRunning(id: string): Promise<LocalModelDescriptor> {
