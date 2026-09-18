@@ -59,7 +59,8 @@ Implemented:
 12. post-install version check and runtime sidecar self-test;
 13. rollback of files and registry on failure;
 14. transaction journal with PREPARED / BACKED_UP / INSTALLING / VERIFYING / COMMITTED / ROLLING_BACK / ROLLED_BACK / ROLLBACK_FAILED states;
-15. maintenance UI: check -> download+verify -> install+restart.
+15. maintenance UI: check -> download+verify -> install+restart;
+16. the staged Authenticode-signed EXE exposes a Windows `ProductVersion` that must normalize exactly to the discovered release version before the receipt is committed or NSIS is launched; a reused older signed installer under a newer GitHub tag therefore fails in staging, while the transaction runner independently re-checks the installed runtime version after NSIS and rolls back on mismatch.
 
 Production blocker:
 
@@ -92,13 +93,19 @@ Implemented:
 - maintenance UI exposes trust readiness and explains missing signer/index states;
 - unit tests cover valid Ed25519 signature, tampered index, unknown signer and invalid schema.
 
+Restart/rollback closure implemented:
+
+- activation keeps the prior healthy overlay in `skills/previous` and marks the new overlay `PENDING_RESTART_VALIDATION`;
+- runtime startup calls `recoverSkillOverlayForStartup()`, re-runs registry/dependency validation and records `ACTIVE_HEALTHY` only after restart validation;
+- an unhealthy current overlay automatically rolls back to retained `previous`; if no valid previous overlay exists it falls back to the bundled corpus; if current/previous/bundled are all unhealthy startup fails closed;
+- tests cover healthy restart, rollback to previous, rollback to bundled and no-healthy-copy failure;
+- maintenance-level negative tests prove signed min/max app incompatibility and release/index version mismatch fail before ZIP download; dependency/hash/version mismatch of the extracted candidate is covered by candidate-index validation tests.
+
 Still required for full roadmap PASS:
 
 - configure the real production Ed25519 public key in the release manifest;
 - publish signed index/signature assets from the release pipeline;
-- acceptance test against a real signed skills release;
-- retained rollback package policy across restarts and post-restart healthcheck;
-- negative integration tests for dependency mismatch and incompatible app version.
+- acceptance test against a real signed skills release.
 
 ## G39A/B/D — Local AI runtime, model provisioning and UI
 
