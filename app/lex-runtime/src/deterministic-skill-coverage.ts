@@ -73,7 +73,7 @@ export const DETERMINISTIC_SKILL_COVERAGE:
     status: "ENFORCED",
     migrationClass: "STATE_MACHINE_HYBRID",
     deterministicOwner:
-      "required gates/resources, evidence inventory/provenance invariants and final output contract",
+      "encrypted per-case ordered state, checkpoint permits, required gates/resources, evidence inventory/provenance invariants and final output contract",
     semanticOwner:
       "evidentiary significance, hypotheses and conflict interpretation"
   },
@@ -118,7 +118,7 @@ export const DETERMINISTIC_SKILL_COVERAGE:
     status: "ENFORCED",
     migrationClass: "STATE_MACHINE_HYBRID",
     deterministicOwner:
-      "ordered stages, required resources, admissibility/coverage invariants and output gates",
+      "encrypted per-case ordered state, checkpoint permits, required resources, admissibility/coverage invariants and output gates",
     semanticOwner:
       "question generation, adaptation and examination strategy"
   },
