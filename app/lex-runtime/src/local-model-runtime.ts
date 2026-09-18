@@ -486,6 +486,37 @@ export class LocalModelRuntime {
       : null;
   }
 
+  qualificationForModel(
+    modelId: string
+  ): LocalContextQualification | null {
+    const canonical =
+      normalizeModelId(
+        modelId
+      );
+    const active =
+      this.readConfig();
+    if (
+      active &&
+      normalizeModelId(
+        active.model.id
+      ) === canonical
+    ) {
+      const current =
+        this.readQualification();
+      if (
+        current &&
+        normalizeModelId(
+          current.modelId
+        ) === canonical
+      ) {
+        return current;
+      }
+    }
+    return this.readProfileQualification(
+      canonical
+    );
+  }
+
   requiresSignedModelPackRepair(): boolean {
     const config = this.readConfig();
     if (!config) return false;
@@ -1960,9 +1991,41 @@ export class LocalModelRuntime {
     const canonical = normalizeModelId(id);
     const spec = this.modelSpec(canonical);
     if (!spec) throw new Error("LOCAL_MODEL_UNKNOWN");
-    const config = this.readConfig();
-    if (!config || normalizeModelId(config.model.id) !== canonical) {
-      throw new Error(`LOCAL_MODEL_NOT_CONFIGURED:${canonical}`);
+    let config = this.readConfig();
+    if (
+      !config ||
+      normalizeModelId(
+        config.model.id
+      ) !== canonical
+    ) {
+      const profile =
+        this.readProfileConfig(
+          canonical
+        );
+      if (!profile) {
+        throw new Error(
+          `LOCAL_MODEL_PROFILE_NOT_CONFIGURED:${canonical}`
+        );
+      }
+      await this.stop();
+      this.writeConfig(
+        profile
+      );
+      const qualification =
+        this.readProfileQualification(
+          canonical
+        );
+      if (qualification) {
+        this.writeQualification(
+          qualification
+        );
+      } else {
+        fs.rmSync(
+          this.qualificationPath(),
+          { force: true }
+        );
+      }
+      config = profile;
     }
 
     if (
@@ -2914,6 +2977,198 @@ export class LocalModelRuntime {
       target
     );
     this.hardwareCache = null;
+  }
+
+  private profilesRoot(): string {
+    return path.join(
+      this.rootDir,
+      "profiles"
+    );
+  }
+
+  private profileConfigPath(
+    modelId: string
+  ): string {
+    const model =
+      this.modelSpec(
+        normalizeModelId(
+          modelId
+        )
+      );
+    if (!model) {
+      throw new Error(
+        "LOCAL_MODEL_UNKNOWN"
+      );
+    }
+    return path.join(
+      this.profilesRoot(),
+      `${model.filename}.config.json`
+    );
+  }
+
+  private profileQualificationPath(
+    modelId: string
+  ): string {
+    const model =
+      this.modelSpec(
+        normalizeModelId(
+          modelId
+        )
+      );
+    if (!model) {
+      throw new Error(
+        "LOCAL_MODEL_UNKNOWN"
+      );
+    }
+    return path.join(
+      this.profilesRoot(),
+      `${model.filename}.qualification.json`
+    );
+  }
+
+  private readProfileConfig(
+    modelId: string
+  ): LocalAiConfig | null {
+    const canonical =
+      normalizeModelId(
+        modelId
+      );
+    const config =
+      readJson<LocalAiConfig>(
+        this.profileConfigPath(
+          canonical
+        )
+      );
+    if (
+      !config ||
+      config.schemaVersion !== 1 ||
+      typeof config.model?.id !==
+        "string" ||
+      normalizeModelId(
+        config.model.id
+      ) !== canonical ||
+      typeof config.model?.path !==
+        "string" ||
+      !fs.existsSync(
+        config.model.path
+      ) ||
+      !finiteInteger(
+        config.context
+          ?.requestedTokens
+      ) ||
+      !finiteInteger(
+        config.model
+          ?.nativeContext
+      ) ||
+      typeof config.engine
+        ?.executable !==
+        "string"
+    ) {
+      return null;
+    }
+    return config;
+  }
+
+  private readProfileQualification(
+    modelId: string
+  ): LocalContextQualification | null {
+    const canonical =
+      normalizeModelId(
+        modelId
+      );
+    const value =
+      readJson<LocalContextQualification>(
+        this.profileQualificationPath(
+          canonical
+        )
+      );
+    if (
+      !value ||
+      value.schemaVersion !== 1 ||
+      value.result !== "PASS" ||
+      typeof value.modelId !==
+        "string" ||
+      normalizeModelId(
+        value.modelId
+      ) !== canonical ||
+      !finiteInteger(
+        value.contextTokens
+      ) ||
+      ![
+        "NATIVE_OR_REDUCED",
+        "YARN_EXTENDED"
+      ].includes(
+        value.contextMode
+      ) ||
+      value.engine !==
+        "llama.cpp" ||
+      typeof value.validatedAt !==
+        "string" ||
+      Number.isNaN(
+        Date.parse(
+          value.validatedAt
+        )
+      )
+    ) {
+      return null;
+    }
+    return value;
+  }
+
+  private writeModelProfile(
+    config: LocalAiConfig,
+    qualification:
+      LocalContextQualification | null
+  ): void {
+    const canonical =
+      normalizeModelId(
+        config.model.id
+      );
+    fs.mkdirSync(
+      this.profilesRoot(),
+      { recursive: true }
+    );
+    const configTarget =
+      this.profileConfigPath(
+        canonical
+      );
+    const configTemporary =
+      `${configTarget}.tmp`;
+    fs.writeFileSync(
+      configTemporary,
+      `${JSON.stringify(
+        config,
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+    fs.renameSync(
+      configTemporary,
+      configTarget
+    );
+
+    const qualificationTarget =
+      this.profileQualificationPath(
+        canonical
+      );
+    if (qualification) {
+      const qualificationTemporary =
+        `${qualificationTarget}.tmp`;
+      fs.writeFileSync(
+        qualificationTemporary,
+        `${JSON.stringify(
+          qualification,
+          null,
+          2
+        )}\n`,
+        "utf8"
+      );
+      fs.renameSync(
+        qualificationTemporary,
+        qualificationTarget
+      );
+    }
   }
 
   private manifest(): ReleaseManifest {
