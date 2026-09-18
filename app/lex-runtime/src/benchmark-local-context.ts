@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
-  LocalModelRuntime
+  LocalModelRuntime,
+  type LocalBackendPreference
 } from "./local-model-runtime.js";
 
 type BenchmarkCase = {
@@ -17,6 +18,7 @@ type BenchmarkCase = {
 type BenchmarkProfile = {
   contextTokens: number;
   result: "PASS" | "FAIL";
+  backend: string | null;
   startupMs: number | null;
   tokenizerCharsPerToken: number | null;
   cases: BenchmarkCase[];
@@ -297,6 +299,17 @@ async function fitPrompt(args: {
       "LOCAL_CONTEXT_BENCHMARK_PROMPT_TOO_LARGE"
     );
   }
+  if (
+    inputTokens <
+      Math.floor(
+        args.targetTokens *
+          0.96
+      )
+  ) {
+    fail(
+      "LOCAL_CONTEXT_BENCHMARK_PROMPT_UNDERFILLED"
+    );
+  }
   return {
     content,
     inputTokens
@@ -413,6 +426,16 @@ async function main(): Promise<void> {
     identity.modelId;
   const originalContext =
     identity.contextTokens;
+  const initialStatus =
+    runtime.status();
+  const originalBackendMode:
+    LocalBackendPreference =
+      initialStatus
+        .hardware
+        .backendSelectionMode ??
+      initialStatus
+        .backendPolicy
+        .default;
   const models =
     runtime.listModels();
   const descriptor =
@@ -461,6 +484,7 @@ async function main(): Promise<void> {
         BenchmarkProfile = {
           contextTokens,
           result: "FAIL",
+          backend: null,
           startupMs: null,
           tokenizerCharsPerToken:
             null,
@@ -470,7 +494,9 @@ async function main(): Promise<void> {
       try {
         await runtime.provision(
           modelId,
-          contextTokens
+          contextTokens,
+          undefined,
+          originalBackendMode
         );
         await runtime.ensureRunning(
           modelId
@@ -493,6 +519,11 @@ async function main(): Promise<void> {
           );
         }
 
+        result.backend =
+          qualification.backend ??
+          status.hardware
+            .configuredBackend ??
+          "CPU_X64_PORTABLE";
         result.startupMs =
           qualification.startupMs;
         const charsPerToken =
@@ -564,7 +595,12 @@ async function main(): Promise<void> {
             output:
               output.slice(0, 200),
             passed:
-              output === passkey,
+              output === passkey &&
+              fitted.inputTokens >=
+                Math.floor(
+                  targetTokens *
+                    0.96
+                ),
             elapsedMs
           });
         }
@@ -598,7 +634,9 @@ async function main(): Promise<void> {
     try {
       await runtime.provision(
         modelId,
-        originalContext
+        originalContext,
+        undefined,
+        originalBackendMode
       );
       await runtime.stop();
     } catch (error) {
@@ -637,8 +675,12 @@ async function main(): Promise<void> {
     hardware:
       runtime.hardwareProfile(),
     acceptance: {
-      promptLoad:
-        "72_PERCENT_OF_REQUESTED_CONTEXT",
+      targetPromptLoadFraction:
+        0.72,
+      minimumTargetFitFraction:
+        0.96,
+      minimumRequestedContextLoadFraction:
+        0.6912,
       positions: [
         0.05,
         0.5,
@@ -650,6 +692,7 @@ async function main(): Promise<void> {
         "CONTEXT_CAPABILITY_ONLY_NOT_GENERAL_LEGAL_QUALITY"
     },
     originalContext,
+    originalBackendMode,
     profiles: results,
     fatalError: fatal,
     generatedAt:
