@@ -20,6 +20,11 @@ function Assert-Sha256([string]$Path, [string]$Expected, [string]$Label) {
 
 if ($env:OS -ne "Windows_NT") { throw "Windows offline payload must be built on Windows." }
 
+Write-Host "[brand] Materialize canonical Lex Machina Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+$brandIcon = Join-Path $tauri "icons\\icon.ico"
+if (-not (Test-Path -LiteralPath $brandIcon -PathType Leaf)) { throw "LEX_BRAND_ICON_MATERIALIZATION_FAILED" }
+
 Write-Host "[0/10] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
@@ -62,6 +67,7 @@ New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
+  "install-private-python.ps1",
   "app-update-transaction.ps1",
   "app-update-verification.ps1",
   "install-local-llm.ps1",
@@ -88,19 +94,19 @@ if (-not $nodeDir) { throw "NODE_ARCHIVE_LAYOUT_INVALID" }
 Copy-Item $nodeDir.FullName (Join-Path $payload "node") -Recurse
 
 Write-Host "[4/10] Private Python"
-$pythonInstaller = Join-Path $cache "python-$($sourceLock.runtime.python.version)-amd64.exe"
-Invoke-WebRequest -UseBasicParsing -Uri $sourceLock.runtime.python.url -OutFile $pythonInstaller
-Assert-Sha256 $pythonInstaller $sourceLock.runtime.python.sha256 "python-runtime-source"
-$pythonDir = Join-Path $payload "python"
-$args = @(
-  "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
-  "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
-  "Include_pip=1", "PrependPath=0", "Shortcuts=0"
-)
-$install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
-if ($install.ExitCode -ne 0) { throw "Private Python install failed: $($install.ExitCode)" }
-$python = Join-Path $pythonDir "python.exe"
+& (Join-Path $installer "install-private-python.ps1") `
+  -ManifestPath (Join-Path $installer "windows-release-source.json") `
+  -RuntimeRoot $payload `
+  -CacheRoot $cache
+if ($LASTEXITCODE -ne 0) { throw "Private Python app-local provisioning failed" }
+$python = Join-Path $payload "python\\python.exe"
 if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { throw "PRIVATE_PYTHON_MISSING" }
+$pythonExpected = "Python $($sourceLock.runtime.python.version)"
+$pythonActual = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
+if ($LASTEXITCODE -ne 0 -or $pythonActual -ne $pythonExpected) {
+  throw "PRIVATE_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActual"
+}
+Write-Host "Verified private Python version: $pythonActual"
 
 Write-Host "[5/10] Pinned Python/ML packages"
 & $python -m pip install --disable-pip-version-check --no-warn-script-location -r (Join-Path $installer "windows-release-requirements.txt")
