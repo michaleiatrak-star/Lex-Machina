@@ -2,6 +2,9 @@ import {
   generateKeyPairSync,
   sign
 } from "node:crypto";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import {
   describe,
   expect,
@@ -144,6 +147,138 @@ describe(
           result.index.models[0]
             ?.family
         ).toBe("BIELIK");
+      }
+    );
+
+
+    it(
+      "allows an unsigned index only under the explicit temporary policy",
+      () => {
+        const {
+          indexBytes
+        } = fixture();
+        const root =
+          fs.mkdtempSync(
+            path.join(
+              os.tmpdir(),
+              "lex-model-unsigned-"
+            )
+          );
+        const manifestPath =
+          path.join(
+            root,
+            "release-source.json"
+          );
+        try {
+          fs.writeFileSync(
+            manifestPath,
+            JSON.stringify({
+              modelPackUpdate: {
+                verification:
+                  "SHA256_AND_OPTIONAL_ED25519_INDEX",
+                trustedEd25519PublicKeys: [],
+                temporaryUnsignedAllowed: true
+              }
+            }),
+            "utf8"
+          );
+
+          const result =
+            verifyModelPackIndex(
+              indexBytes,
+              new Uint8Array(),
+              undefined,
+              manifestPath
+            );
+
+          expect(
+            result.signerKeyId
+          ).toBe(
+            "UNSIGNED_ALLOWED"
+          );
+          expect(
+            result.index
+              .models[0]
+              ?.sha256
+          ).toBe(
+            "a".repeat(64)
+          );
+
+          expect(() =>
+            verifyModelPackIndex(
+              Buffer.from(
+                "{}",
+                "utf8"
+              ),
+              new Uint8Array(),
+              undefined,
+              manifestPath
+            )
+          ).toThrow(
+            "MODEL_PACK_INDEX_INVALID"
+          );
+        } finally {
+          fs.rmSync(
+            root,
+            {
+              recursive: true,
+              force: true
+            }
+          );
+        }
+      }
+    );
+
+    it(
+      "restores fail-closed behavior when signed mode is selected",
+      () => {
+        const {
+          indexBytes
+        } = fixture();
+        const root =
+          fs.mkdtempSync(
+            path.join(
+              os.tmpdir(),
+              "lex-model-signed-"
+            )
+          );
+        const manifestPath =
+          path.join(
+            root,
+            "release-source.json"
+          );
+        try {
+          fs.writeFileSync(
+            manifestPath,
+            JSON.stringify({
+              modelPackUpdate: {
+                verification:
+                  "SHA256_AND_ED25519_SIGNED_INDEX",
+                trustedEd25519PublicKeys: []
+              }
+            }),
+            "utf8"
+          );
+
+          expect(() =>
+            verifyModelPackIndex(
+              indexBytes,
+              new Uint8Array(),
+              undefined,
+              manifestPath
+            )
+          ).toThrow(
+            "MODEL_PACK_SIGNER_POLICY_MISSING"
+          );
+        } finally {
+          fs.rmSync(
+            root,
+            {
+              recursive: true,
+              force: true
+            }
+          );
+        }
       }
     );
 
