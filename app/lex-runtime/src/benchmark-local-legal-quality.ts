@@ -897,6 +897,22 @@ async function main():
       id: modelId,
       sha256:
         identity.sha256,
+      signedModelPack:
+        Boolean(
+          identity.packVersion
+        ),
+      ...(identity.packVersion
+        ? {
+            packVersion:
+              identity.packVersion
+          }
+        : {}),
+      ...(identity.signerKeyId
+        ? {
+            signerKeyId:
+              identity.signerKeyId
+          }
+        : {}),
       displayName:
         descriptor.displayName,
       nativeContextWindow:
