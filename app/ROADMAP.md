@@ -1,6 +1,6 @@
 # Lex Machina — roadmap aplikacji instalacyjnej
 
-Stan na: 2026-09-17
+Stan na: 2026-09-18
 
 Roadmapa obejmuje produkt instalacyjny Windows i jest traktowana jako kontrakt zakresu dla kolejnych bramek CI. Zmiana oznaczona jako `DONE` powinna mieć co najmniej test lub walidator strukturalny/bundle oraz nie może zostać usunięta bez jawnej zmiany roadmapy i audytu regresji.
 
@@ -97,6 +97,42 @@ Kryteria zamknięcia:
 - Windows Online Installer: NSIS + installed-copy acceptance: PASS,
 - Windows Offline Installer: standalone EXE + clean-machine acceptance: PASS,
 - artefakty i SHA-256 opublikowane z finalnego SHA.
+
+## R0.1.3 — G39 release candidate — VERIFYING
+
+Źródłowy kandydat aplikacji: `b159efffec9f607021c282cc9828986fce7e16dc`.
+Publikacja jest prowadzona wyłącznie poza `main`, przez `release/0.1.3-g39-rc1`.
+
+### G39-RC1 — bramka publikacji instalatorów
+
+Warunki publikacji muszą być spełnione **na tym samym source SHA**:
+
+- Lex Runtime Validation: **PASS**;
+- F-138 structural audit: **PASS**;
+- G39 Installer State Machine: **PASS**;
+- Windows Online Installer installed-copy acceptance: **VERIFYING**;
+- Windows Offline Installer standalone clean-machine acceptance: **VERIFYING**;
+- publisher ponownie sprawdza SHA-256 artefaktów i odrzuca brak któregokolwiek z pięciu wymaganych workflow.
+
+### Zakres RC
+
+- deterministyczny stan instalatora: `FRESH / UPGRADE / REPAIR / CURRENT / DOWNGRADE_BLOCKED`;
+- zachowanie zarejestrowanego katalogu instalacji i fail-closed przy próbie maintenance w innym katalogu;
+- Local AI jako opcjonalne provisioning po instalacji, nie jako składnik wymagany do zdrowej instalacji;
+- runtime/source/citation/finalization gates egzekwowane deterministycznie;
+- transakcyjne kanały update aplikacji/skilli/model-packów pozostają fail-closed bez produkcyjnych trust roots;
+- RC może być opublikowany jako ręczny, niesygnowany prerelease dopiero po komplecie pięciu gate'ów powyżej.
+
+### Gate'y pozostające poza zamknięciem RC
+
+Nie są oznaczane PASS na podstawie samego prerelease:
+
+- produkcyjne Authenticode i przypięty publisher trust root;
+- Ed25519 trust roots dla skilli i model-packów;
+- signed update/rollback acceptance;
+- self-hosted Local AI CPU/Vulkan context benchmark 64k–200k;
+- ekspercki benchmark jakości prawnej;
+- branch protection / required checks dla `main`.
 
 ## Kolejny horyzont
 
