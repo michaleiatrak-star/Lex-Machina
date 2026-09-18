@@ -29,12 +29,17 @@ const tempRoots: string[] = [];
 const testThumbprints:
   string[] = [];
 
+function psLiteral(
+  value: string
+): string {
+  return `'${value.replaceAll(
+    "'",
+    "''"
+  )}'`;
+}
+
 function powershell(
-  command: string,
-  environment: Record<
-    string,
-    string
-  > = {}
+  command: string
 ): string {
   const result =
     spawnSync(
@@ -50,11 +55,7 @@ function powershell(
       {
         encoding: "utf8",
         windowsHide: true,
-        timeout: 60_000,
-        env: {
-          ...process.env,
-          ...environment
-        }
+        timeout: 60_000
       }
     );
   if (
@@ -76,6 +77,7 @@ function createTrustedTestSigner(
 ): string {
   const command = [
     "$ErrorActionPreference='Stop'",
+    `$target=${psLiteral(target)}`,
     "$cert=New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=Lex Machina CI Foreign Signer' -CertStoreLocation 'Cert:\\CurrentUser\\My' -KeyExportPolicy Exportable -KeyLength 2048 -HashAlgorithm SHA256 -NotAfter (Get-Date).AddDays(2)",
     "$root=New-Object System.Security.Cryptography.X509Certificates.X509Store('Root','CurrentUser')",
     "$root.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
@@ -85,8 +87,6 @@ function createTrustedTestSigner(
     "$publishers.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
     "$publishers.Add($cert)",
     "$publishers.Close()",
-    "$target=$env:LEX_AUTHENTICODE_TEST_TARGET",
-    "if ([string]::IsNullOrWhiteSpace($target)) { throw 'TEST_TARGET_MISSING' }",
     "$null=Set-AuthenticodeSignature -LiteralPath $target -Certificate $cert -HashAlgorithm SHA256",
     "$check=Get-AuthenticodeSignature -LiteralPath $target",
     "if ($check.Status -ne 'Valid') { throw ('TEST_SIGNATURE_NOT_VALID:' + $check.Status) }",
@@ -95,11 +95,7 @@ function createTrustedTestSigner(
 
   const output =
     powershell(
-      command,
-      {
-        LEX_AUTHENTICODE_TEST_TARGET:
-          target
-      }
+      command
     )
       .split(/\r?\n/)
       .map((line) =>
@@ -140,34 +136,20 @@ function cleanupCertificate(
     return;
   }
 
-  spawnSync(
-    "powershell.exe",
-    [
-      "-NoProfile",
-      "-NonInteractive",
-      "-ExecutionPolicy",
-      "Bypass",
-      "-Command",
+  try {
+    powershell(
       [
         "$ErrorActionPreference='SilentlyContinue'",
-        "$thumb=$env:LEX_AUTHENTICODE_TEST_THUMBPRINT",
+        `$thumb=${psLiteral(escaped)}`,
         "foreach($store in @('My','Root','TrustedPublisher')) {",
         "  $item='Cert:\\CurrentUser\\' + $store + '\\' + $thumb",
         "  if (Test-Path -LiteralPath $item) { Remove-Item -LiteralPath $item -Force }",
         "}"
       ].join("; ")
-    ],
-    {
-      encoding: "utf8",
-      windowsHide: true,
-      timeout: 30_000,
-      env: {
-        ...process.env,
-        LEX_AUTHENTICODE_TEST_THUMBPRINT:
-          escaped
-      }
-    }
-  );
+    );
+  } catch {
+    // Best-effort CI cleanup; never mask the actual test result.
+  }
 }
 
 beforeEach(() => {
