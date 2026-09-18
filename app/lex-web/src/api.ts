@@ -610,6 +610,8 @@ export type SessionExecutionResponse = {
       >;
       extractedCandidates: number;
       deterministicVerifications: number;
+      cachedVerifierReuses: number;
+      latencyMs: number;
       error?: string;
     };
   };
