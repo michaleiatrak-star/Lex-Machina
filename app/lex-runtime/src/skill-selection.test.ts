@@ -64,7 +64,22 @@ function registryWithSkills(): LexSkillRegistry {
     {
       name: "raport-klienta-v1",
       description: "podsumowanie dla klienta rekomendacje ryzyka i działania",
+      type: "ux-raport"
+    },
+    {
+      name: "raport-sytuacyjny-v2",
+      description: "raport sytuacyjny status sprawy ryzyka terminy priorytety",
       type: "executive-raport"
+    },
+    {
+      name: "orzeczenia-sadowe-v2",
+      description: "research orzecznictwa sygnatury linia orzecznicza wyroki",
+      type: "executive-analiza"
+    },
+    {
+      name: "przesluchanie-swiadkow-v2-min90",
+      description: "przesłuchanie świadka pytania kontrolne sprzeczności dowody",
+      type: "legal-skill"
     },
     {
       name: "analizator-umow-v1",
@@ -246,6 +261,54 @@ describe("skill selection", () => {
 
     expect(selected.executionSkills).toContain("pisma-procesowe-v3");
   });
+
+  it.each([
+    [
+      "Zbuduj chronologię sprawy i oś czasu zdarzeń.",
+      "chronologia-sprawy-v1"
+    ],
+    [
+      "Przygotuj raport dla klienta z rekomendacjami.",
+      "raport-klienta-v1"
+    ],
+    [
+      "Przygotuj raport sytuacyjny ze statusem sprawy i ryzykami.",
+      "raport-sytuacyjny-v2"
+    ],
+    [
+      "Przygotuj pytania do świadka i plan przesłuchania.",
+      "przesluchanie-swiadkow-v2-min90"
+    ],
+    [
+      "Znajdź wyrok i sprawdź linię orzeczniczą.",
+      "orzeczenia-sadowe-v2"
+    ]
+  ])(
+    "routes explicit execution request %s to %s",
+    (query, expectedSkill) => {
+      const registry =
+        registryWithSkills();
+      const selected =
+        resolveAdditionalSkills(
+          registry,
+          query,
+          "dr-03-prawo-procesowe",
+          true,
+          []
+        );
+
+      expect(
+        selected.executionSkills
+      ).toContain(
+        expectedSkill
+      );
+      expect(
+        selected.workflowExecutionSkill
+      ).toBe(
+        expectedSkill
+      );
+    }
+  );
 
   it("routes explicit evidence material to the evidence analyzer", () => {
     const registry = registryWithSkills();
