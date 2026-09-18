@@ -14,6 +14,7 @@ const requirements = read("app/installer/windows-release-requirements.txt")
   .filter(Boolean);
 const generator = read("app/installer/generate-component-lock.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
+const privatePython = read("app/installer/install-private-python.ps1");
 
 const exactProd = Object.values(runtime.dependencies ?? {})
   .every((value) =>
@@ -35,15 +36,20 @@ const pinnedSources =
   /^\d+\.\d+\.\d+$/.test(source.runtime?.python?.version ?? "") &&
   /^https:\/\//.test(source.runtime?.python?.url ?? "") &&
   sha256(source.runtime?.python?.sha256) &&
+  source.runtime?.python?.delivery === "APP_LOCAL_ZIP" &&
   /^https:\/\//.test(source.systemPrerequisites?.visualCppRuntime?.url ?? "") &&
   sha256(source.systemPrerequisites?.visualCppRuntime?.sha256) &&
   !JSON.stringify(source).includes("TBD");
 const sourceHashEnforced =
   bootstrap.includes("Get-VerifiedDownload") &&
   bootstrap.includes("manifest.runtime.node.sha256") &&
-  bootstrap.includes("manifest.runtime.python.sha256") &&
   bootstrap.includes("vc.sha256") &&
-  bootstrap.includes("BOOTSTRAP_HASH_MISMATCH");
+  bootstrap.includes("BOOTSTRAP_HASH_MISMATCH") &&
+  bootstrap.includes("install-private-python.ps1") &&
+  privatePython.includes("pythonSource.sha256") &&
+  privatePython.includes("PRIVATE_PYTHON_SOURCE_HASH_MISMATCH") &&
+  privatePython.includes("Expand-Archive") &&
+  !privatePython.includes("TargetDir=");
 const lockContract =
   generator.includes("sha256Manifest") &&
   generator.includes("sourceCommit") &&

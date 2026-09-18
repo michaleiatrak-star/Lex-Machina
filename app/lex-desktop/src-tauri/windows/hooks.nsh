@@ -4,6 +4,7 @@
   SetOutPath "$PLUGINSDIR"
   File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
   File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+  File "/oname=lex-purge-user-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\purge-windows-user-state.ps1"
 
   DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
   nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-get-install-state.ps1" -RuntimeRoot "$INSTDIR\runtime" -TargetManifestPath "$PLUGINSDIR\lex-target-release-source.json" -OutputPath "$PLUGINSDIR\lex-install-state.json" -ProductName "Lex Machina" -DiscoverRegisteredInstall -FailOnInstallRootMismatch -FailOnDowngrade'
@@ -20,6 +21,38 @@
   ${EndIf}
   DetailPrint "Lex Machina: stan instalacji $1"
 
+  ; A normal update preserves the existing profile. Every interactive install
+  ; also offers an explicit destructive reset to a brand-new local admin.
+  ; Silent deployments can opt in with LEX_INSTALL_CLEAN_PROFILE=1.
+  DetailPrint "Lex Machina: sprawdzanie istniejących profili i poświadczeń..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-purge-user-state.ps1" -Mode Probe'
+  Pop $2
+  Pop $3
+  ${If} $2 == 10
+    ReadEnvStr $4 "LEX_INSTALL_CLEAN_PROFILE"
+    ${If} $4 == "1"
+      Goto lex_profile_clean
+    ${EndIf}
+    IfSilent lex_profile_preserve 0
+    MessageBox MB_ICONQUESTION|MB_YESNO "Lex Machina: wykryto istniejący profil lub zapisane poświadczenia.$\r$\n$\r$\nCzy utworzyć NOWY CZYSTY profil administratora?$\r$\n$\r$\nTAK = bezpowrotnie usuń wszystkie profile, hasła, zapisane klucze API, sprawy, dane aplikacji i Local AI. Po pierwszym uruchomieniu zostanie utworzone czyste konto administratora.$\r$\n$\r$\nNIE = zachowaj dane i wykonaj aktualizację/naprawę." /SD IDNO IDYES lex_profile_clean IDNO lex_profile_preserve
+  ${ElseIf} $2 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się sprawdzić stanu profilu.$\r$\n$3$\r$\n$\r$\nInstalacja została zatrzymana, aby nie naruszyć danych użytkownika." /SD IDOK
+    Abort
+  ${EndIf}
+  Goto lex_profile_preserve
+
+lex_profile_clean:
+  DetailPrint "Lex Machina: usuwanie poprzednich profili, haseł i danych..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-purge-user-state.ps1" -Mode Purge'
+  Pop $2
+  Pop $3
+  ${If} $2 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: czyszczenie starego profilu nie powiodło się.$\r$\n$3$\r$\n$\r$\nInstalacja została zatrzymana. Nie utworzono częściowo wyczyszczonego profilu." /SD IDOK
+    Abort
+  ${EndIf}
+  DetailPrint "Lex Machina: stary profil usunięty. Pierwsze uruchomienie utworzy nowe konto administratora."
+
+lex_profile_preserve:
   ; Tauri copies the main executable immediately after PREINSTALL.
   ; Restore the installer output directory after embedding probe files in
   ; $PLUGINSDIR, otherwise the main EXE would be emitted into the temporary
@@ -108,6 +141,28 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  ; The product contract is a full destructive uninstall. Keep Tauri's own
+  ; app-data branch aligned with the mandatory Lex purge below.
+  StrCpy $DeleteAppDataCheckboxState 1
+  SetOutPath "$PLUGINSDIR"
+  File "/oname=lex-purge-user-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\purge-windows-user-state.ps1"
+
+  IfSilent lex_uninstall_purge 0
+  MessageBox MB_ICONEXCLAMATION|MB_OKCANCEL "Odinstalowanie Lex Machina usuwa CAŁOŚĆ danych tego użytkownika: wszystkie profile, hasła, zapisane klucze API, sprawy, dane aplikacji, cache oraz Local AI.$\r$\n$\r$\nTej operacji nie można cofnąć." /SD IDOK IDOK lex_uninstall_purge IDCANCEL lex_uninstall_cancel
+
+lex_uninstall_cancel:
+  Abort
+
+lex_uninstall_purge:
+  DetailPrint "Lex Machina: trwa bezpieczne usuwanie wszystkich profili, haseł i danych..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-purge-user-state.ps1" -Mode Purge'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się usunąć wszystkich danych i poświadczeń.$\r$\n$1$\r$\n$\r$\nDeinstalacja została zatrzymana, aby nie pozostawić pozornie wyczyszczonego profilu." /SD IDOK
+    Abort
+  ${EndIf}
+
+  DetailPrint "Lex Machina: profile, hasła i dane usunięte. Usuwanie prywatnego runtime..."
   RMDir /r "$INSTDIR\runtime"
 !macroend

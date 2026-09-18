@@ -170,10 +170,16 @@ const checks = {
       'Copy-Item $vcRedist (Join-Path $prerequisites "vc_redist.x64.exe")'
     ) &&
     bootstrap.includes(
-      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
+      "vc_redist.x64.exe"
+    ) &&
+    bootstrap.includes(
+      "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled"
     ) &&
     offlineBundleInstall.includes(
-      'Join-Path $runtime "prerequisites\\vc_redist.x64.exe"'
+      "vc_redist.x64.exe"
+    ) &&
+    offlineBundleInstall.includes(
+      "OFFLINE_BUNDLE_VC_RUNTIME_HASH_MISMATCH"
     ),
   installedCopyAcceptance:
     workflow.includes(
@@ -224,10 +230,13 @@ const checks = {
     ),
   firstDesktopStart:
     acceptance.includes(
-      "first desktop startup without provider key"
+      "first desktop startup with a clean local admin profile"
     ) &&
     acceptance.includes(
       "INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT"
+    ) &&
+    acceptance.includes(
+      "INSTALLER_ACCEPTANCE_FRESH_ADMIN_INVALID"
     ),
   immutableArtifactReceipt:
     workflow.includes(
