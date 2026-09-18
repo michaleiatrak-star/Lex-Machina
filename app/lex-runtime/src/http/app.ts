@@ -115,6 +115,11 @@ import {
   requireProcessExecutionPermit,
   type ProcessExecutionPermit
 } from "../process-pleading-execution-gate.js";
+import {
+  applyDeterministicProcessApplicability,
+  evidenceInventoryFromUploads,
+  type ProcessEvidenceInventory
+} from "../process-pleading-applicability.js";
 
 const PROVIDERS = new Set<ProviderId>([
   "openai",
@@ -5633,16 +5638,98 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               actor,
               processCaseId,
               "WRITE",
-              (caseDataKey) =>
-                options
+              async (
+                caseDataKey
+              ) => {
+                const current =
+                  await options
+                    .processWorkflowStore!
+                    .getProcessPleadingState({
+                      caseId:
+                        processCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (!current) {
+                  return null;
+                }
+
+                let inventory:
+                  ProcessEvidenceInventory = {
+                    fileCount: null,
+                    complete: false,
+                    source:
+                      "UNAVAILABLE"
+                  };
+
+                if (
+                  options
+                    .secureCaseUploadStore
+                ) {
+                  const uploads =
+                    await options
+                      .secureCaseUploadStore
+                      .listUploads({
+                        caseId:
+                          processCaseId,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      });
+                  inventory =
+                    evidenceInventoryFromUploads(
+                      uploads,
+                      "ENCRYPTED_CASE_UPLOADS"
+                    );
+                } else if (
+                  options
+                    .caseFileStore
+                    ?.listUploads
+                ) {
+                  const uploads =
+                    await options
+                      .caseFileStore
+                      .listUploads(
+                        processCaseId
+                      );
+                  inventory =
+                    evidenceInventoryFromUploads(
+                      uploads,
+                      "LEGACY_CASE_UPLOADS"
+                    );
+                }
+
+                const applicability =
+                  applyDeterministicProcessApplicability(
+                    current,
+                    inventory
+                  );
+
+                if (
+                  applicability.state
+                    .revision ===
+                  current.revision
+                ) {
+                  return current;
+                }
+
+                return await options
                   .processWorkflowStore!
-                  .getProcessPleadingState({
+                  .saveProcessPleadingState({
                     caseId:
                       processCaseId,
                     caseDataKey,
                     keyVersion:
-                      caseView.keyVersion
-                  })
+                      caseView
+                        .keyVersion,
+                    state:
+                      applicability.state,
+                    expectedRevision:
+                      current.revision
+                  });
+              }
             );
         const permit =
           requireProcessExecutionPermit(
