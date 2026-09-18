@@ -71,6 +71,18 @@ const STAGE_OWNERS:
       FINALIZE:
         "VALIDATION"
     },
+    LEGAL_GUIDE_V1: {
+      SESSION_STATE:
+        "RUNTIME",
+      ACTIVE_GUIDE_STEP:
+        "SEMANTIC",
+      SOURCE_VERIFICATION:
+        "RUNTIME",
+      OUTPUT_GUARD:
+        "VALIDATION",
+      FINALIZE:
+        "VALIDATION"
+    },
     SIMPLE_LETTER_V1: {
       INTAKE: "RUNTIME",
       ESCALATION_CHECK:
@@ -417,6 +429,7 @@ export function gateIRuntimePlanPrompt(
 export const GATE_I_WORKFLOWS:
   readonly DeterministicWorkflowId[] = [
     "LEGAL_QUERY_V1",
+    "LEGAL_GUIDE_V1",
     "SIMPLE_LETTER_V1",
     "PROCESS_PLEADING_V1",
     "COURT_ANALYSIS_V1",
