@@ -10,6 +10,8 @@ on:
       - "app/installer/sign-windows-artifact-selftest.ps1"
       - "app/installer/polish-nsis-language-selftest.ps1"
       - "app/lex-desktop/src-tauri/windows/Polish.nsh"
+      - "app/lex-desktop/src-tauri/tauri.offline.conf.json"
+      - "app/lex-desktop/src-tauri/tauri.conf.json"
       - "app/lex-desktop/src-tauri/windows/hooks.nsh"
       - ".github/workflows/g39-installer-state.yml"
   workflow_dispatch:
