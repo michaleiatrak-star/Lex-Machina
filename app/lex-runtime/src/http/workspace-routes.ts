@@ -39,6 +39,9 @@ import {
 import {
   createCourtAnalysisState
 } from "../court-analysis-state.js";
+import {
+  createChronologyState
+} from "../chronology-state.js";
 
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
@@ -81,6 +84,8 @@ function sendError(res: Response, error: unknown): void {
     code === "PROCESS_PLEADING_STATE_CONFLICT" ||
     code === "COURT_ANALYSIS_STATE_EXISTS" ||
     code === "COURT_ANALYSIS_STATE_CONFLICT" ||
+    code === "CHRONOLOGY_STATE_EXISTS" ||
+    code === "CHRONOLOGY_STATE_CONFLICT" ||
     code.includes("PROCESS_PLEADING_CONFIRMATION") ||
     code.includes("PROCESS_PLEADING_START_TRANSITION")
   ) {
@@ -840,6 +845,191 @@ export function registerWorkspaceRoutes(
         if (!cleared) {
           throw new Error(
             "COURT_ANALYSIS_STATE_NOT_FOUND"
+          );
+        }
+        res.json({
+          caseId,
+          reset: true
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/workflow/chronology",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "READ"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "READ",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .getChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion
+                  })
+            );
+        res.json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/chronology/initialize",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const state =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              async (caseDataKey) => {
+                const existing =
+                  await dependencies
+                    .workspace
+                    .getChronologyState({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (existing) {
+                  throw new Error(
+                    "CHRONOLOGY_STATE_EXISTS"
+                  );
+                }
+                return await dependencies
+                  .workspace
+                  .saveChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    state:
+                      createChronologyState(
+                        caseId
+                      )
+                  });
+              }
+            );
+        res.status(201).json({
+          caseId,
+          state
+        });
+      } catch (error) {
+        sendError(res, error);
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/workflow/chronology/reset",
+    async (req, res) => {
+      try {
+        const actor = actorFor(req);
+        const caseId = caseIdFrom(req);
+        const expectedRevision =
+          Number(
+            req.body
+              ?.expectedRevision
+          );
+        const confirmation =
+          typeof req.body
+            ?.confirmation ===
+            "string"
+            ? req.body
+                .confirmation
+            : "";
+
+        if (
+          confirmation !==
+            "RESET_CHRONOLOGY" ||
+          !Number.isSafeInteger(
+            expectedRevision
+          ) ||
+          expectedRevision < 1
+        ) {
+          throw new Error(
+            "CHRONOLOGY_RESET_REQUEST_INVALID"
+          );
+        }
+
+        dependencies.caseAccessService
+          .assertAccess(
+            actor,
+            caseId,
+            "WRITE"
+          );
+        const caseView =
+          dependencies.caseAccessService
+            .openCase(
+              actor,
+              caseId
+            );
+        const cleared =
+          await dependencies
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              caseId,
+              "WRITE",
+              (caseDataKey) =>
+                dependencies.workspace
+                  .clearChronologyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView.keyVersion,
+                    expectedRevision
+                  })
+            );
+
+        if (!cleared) {
+          throw new Error(
+            "CHRONOLOGY_STATE_NOT_FOUND"
           );
         }
         res.json({
