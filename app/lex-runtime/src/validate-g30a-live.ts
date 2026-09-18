@@ -61,6 +61,11 @@ const checks = {
     )
 };
 
+const saosExternalTransportBlock =
+  saos.status === "OUT_OF_SCOPE" &&
+  saos.reason ===
+    "SAOS_TRANSPORT_FAILED";
+
 const cbosaExternalTransportBlock =
   cbosa.status === "OUT_OF_SCOPE" &&
   [
@@ -73,9 +78,21 @@ const pass =
   Object.values(checks).every(Boolean);
 
 const externalBlocked =
-  checks.saosLiveFound &&
   checks.discoveryOnly &&
-  cbosaExternalTransportBlock;
+  (
+    (
+      checks.saosLiveFound &&
+      cbosaExternalTransportBlock
+    ) ||
+    (
+      checks.cbosaLiveFound &&
+      saosExternalTransportBlock
+    ) ||
+    (
+      saosExternalTransportBlock &&
+      cbosaExternalTransportBlock
+    )
+  );
 
 const result =
   pass

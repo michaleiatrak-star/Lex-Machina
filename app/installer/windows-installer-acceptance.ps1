@@ -87,6 +87,30 @@ if (-not $InstallRoot) {
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
 
+if (
+  [string]::IsNullOrWhiteSpace($env:USERPROFILE) -or
+  [string]::IsNullOrWhiteSpace($env:LOCALAPPDATA) -or
+  [string]::IsNullOrWhiteSpace($env:APPDATA)
+) {
+  throw "INSTALLER_ACCEPTANCE_USER_DATA_ENV_MISSING"
+}
+
+$profileRoot = Join-Path $env:USERPROFILE ".lex-machina"
+$localDataRoot = Join-Path $env:LOCALAPPDATA "LexMachina"
+$roamingShellRoot = Join-Path $env:APPDATA "pl.lexmachina.desktop"
+$staleProfileSentinel = Join-Path $profileRoot "data\stale-profile-sentinel.txt"
+$staleLocalSentinel = Join-Path $localDataRoot "stale-local-sentinel.txt"
+$staleRoamingSentinel = Join-Path $roamingShellRoot "stale-roaming-sentinel.txt"
+
+foreach ($sentinel in @(
+  $staleProfileSentinel,
+  $staleLocalSentinel,
+  $staleRoamingSentinel
+)) {
+  New-Item -ItemType Directory -Force -Path (Split-Path -Parent $sentinel) | Out-Null
+  Set-Content -LiteralPath $sentinel -Value "must-be-removed-by-fresh-install" -Encoding ascii
+}
+
 if (-not $ExpectedNetworkRequiredAtInstall) {
   $offlineBundle = Join-Path $installerInfo.Directory.FullName "LexMachina-Offline-Runtime.zip"
   if ($StandaloneOfflineExe) {
@@ -153,6 +177,8 @@ try {
     Write-Host "Acceptance: forcing verified bundled VC++ fallback branch"
   }
 
+  $preinstallDiagnostic = Join-Path $env:TEMP "LexMachinaPreinstall-error.log"
+  Remove-Item -LiteralPath $preinstallDiagnostic -Force -ErrorAction SilentlyContinue
   Write-Host "G33D: silent install to $InstallRoot"
   $arguments = @("/S", "/D=$InstallRoot")
   $process = Start-Process -FilePath $installer -ArgumentList $arguments -PassThru
@@ -163,6 +189,10 @@ try {
   $process.Refresh()
   if ($process.ExitCode -ne 0) {
     $diagnosticLog = Join-Path $InstallRoot "runtime\bootstrap-install-error.log"
+    if (Test-Path -LiteralPath $preinstallDiagnostic -PathType Leaf) {
+      Write-Host "Installer preinstall diagnostic follows:"
+      Get-Content -LiteralPath $preinstallDiagnostic | Out-Host
+    }
     if (Test-Path -LiteralPath $diagnosticLog -PathType Leaf) {
       Write-Host "Installer bootstrap diagnostic follows:"
       Get-Content -LiteralPath $diagnosticLog | Out-Host
@@ -176,6 +206,16 @@ try {
       }
     }
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
+  }
+
+  foreach ($sentinel in @(
+    $staleProfileSentinel,
+    $staleLocalSentinel,
+    $staleRoamingSentinel
+  )) {
+    if (Test-Path -LiteralPath $sentinel) {
+      throw "INSTALLER_ACCEPTANCE_FRESH_PROFILE_PURGE_FAILED:$sentinel"
+    }
   }
 
   # The desktop trust boundary resolves the runtime from resource_dir\runtime.
@@ -318,6 +358,37 @@ try {
     if ($desktop.HasExited) {
       throw "INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT:$($desktop.ExitCode)"
     }
+    $authDb = Join-Path $profileRoot "data\auth\auth.sqlite"
+    if (-not (Test-Path -LiteralPath $authDb -PathType Leaf)) {
+      throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_NOT_BOOTSTRAPPED:$authDb"
+    }
+
+    $adminProbe = @'
+const { DatabaseSync } = require("node:sqlite");
+const db = new DatabaseSync(process.argv[1], { readOnly: true });
+try {
+  const rows = db.prepare(
+    "SELECT login_name, app_role, status, password_setup_pending FROM users ORDER BY created_at, user_id"
+  ).all();
+  if (
+    rows.length !== 1 ||
+    rows[0].login_name !== "local-admin" ||
+    rows[0].app_role !== "ADMIN" ||
+    rows[0].status !== "ACTIVE" ||
+    rows[0].password_setup_pending !== 1
+  ) {
+    process.stderr.write("CLEAN_ADMIN_INVALID:" + JSON.stringify(rows));
+    process.exit(2);
+  }
+  process.stdout.write("CLEAN_ADMIN_PASS");
+} finally {
+  db.close();
+}
+'@
+    & $privateNode -e $adminProbe $authDb | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+      throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_INVALID"
+    }
   } finally {
     if ($desktop -and -not $desktop.HasExited) {
       Stop-Process -Id $desktop.Id -Force -ErrorAction SilentlyContinue
@@ -330,8 +401,49 @@ try {
       Stop-Process -Force -ErrorAction SilentlyContinue
   }
 
+  Write-Host "G33D: full uninstall profile/password purge acceptance"
+  $uninstallProcess = Start-Process -FilePath $uninstaller -ArgumentList @("/S") -PassThru
+  if (-not $uninstallProcess.WaitForExit(600000)) {
+    Stop-Process -Id $uninstallProcess.Id -Force -ErrorAction SilentlyContinue
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_TIMEOUT"
+  }
+  $uninstallProcess.Refresh()
+  if ($uninstallProcess.ExitCode -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_FAILED:$($uninstallProcess.ExitCode)"
+  }
+  # NSIS may launch the final self-delete/registry cleanup from a temporary
+  # process after the original uninstaller process exits. Require the registry
+  # entry to disappear, but allow that documented hand-off to finish.
+  $uninstallCleanupDeadline = (Get-Date).AddSeconds(60)
+  do {
+    $registeredAfterUninstall = Get-ItemProperty -LiteralPath $uninstallKey -ErrorAction SilentlyContinue
+    if (-not $registeredAfterUninstall) {
+      break
+    }
+    Start-Sleep -Milliseconds 500
+  } while ((Get-Date) -lt $uninstallCleanupDeadline)
+
+  if ($registeredAfterUninstall) {
+    throw "INSTALLER_ACCEPTANCE_UNINSTALL_REGISTRY_REMAINS"
+  }
+
+  & (Join-Path $PSScriptRoot "purge-user-data.ps1") -Mode VerifyPurged -InstallRoot $InstallRoot
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_PURGE_VERIFY_FAILED"
+  }
+  if (Test-Path -LiteralPath $InstallRoot) {
+    $remaining = @(
+      Get-ChildItem -LiteralPath $InstallRoot -Force -ErrorAction SilentlyContinue |
+        ForEach-Object { $_.Name }
+    )
+    if ($remaining.Count -gt 0) {
+      throw "INSTALLER_ACCEPTANCE_INSTALL_ROOT_REMAINS:$($remaining -join ',')"
+    }
+  }
+
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+  Write-Host "Fresh install: clean local-admin bootstrap PASS"
+  Write-Host "Uninstall: profiles, cases, Local AI and OS-keyring credentials purge PASS"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue

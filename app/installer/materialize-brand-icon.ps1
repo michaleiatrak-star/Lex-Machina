@@ -1,6 +1,6 @@
 param(
-  [string]$SourceImagePath = (
-    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/lex-machina-brand-source.png"
+  [string]$SourceChunkDirectory = (
+    Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/brand-source-b64"
   ),
   [string]$OutputIconPath = (
     Join-Path $PSScriptRoot "../lex-desktop/src-tauri/icons/icon.ico"
@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$expectedSourceSha256 = "6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616"
+$expectedSourceSha256 = "9af951fd535e9d77765b3b5893d19a3e5cdb204f9b71d9995305ed91e758b162"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
@@ -29,8 +29,21 @@ function Read-U32BigEndian([byte[]]$Data, [int]$Offset) {
   )
 }
 
-$sourceFile = (Resolve-Path -LiteralPath $SourceImagePath).Path
-$sourceBytes = [IO.File]::ReadAllBytes($sourceFile)
+$chunkRoot = (Resolve-Path -LiteralPath $SourceChunkDirectory).Path
+$chunks = @(Get-ChildItem -LiteralPath $chunkRoot -File -Filter "*.txt" | Sort-Object Name)
+if ($chunks.Count -ne 6) {
+  throw "LEX_BRAND_SOURCE_CHUNK_COUNT_INVALID:$($chunks.Count)"
+}
+$encoded = [string]::Concat(@(
+  $chunks | ForEach-Object {
+    (Get-Content -Raw -LiteralPath $_.FullName).Trim()
+  }
+))
+try {
+  $sourceBytes = [Convert]::FromBase64String($encoded)
+} catch {
+  throw "LEX_BRAND_SOURCE_BASE64_INVALID"
+}
 $actualSourceSha256 = Get-Sha256Hex $sourceBytes
 if ($actualSourceSha256 -ne $expectedSourceSha256) {
   throw "LEX_BRAND_SOURCE_HASH_MISMATCH expected=$expectedSourceSha256 actual=$actualSourceSha256"
@@ -60,10 +73,10 @@ try {
 
   $sourceStream = [IO.MemoryStream]::new($sourceBytes, $false)
   try {
-    $decoder = [Windows.Media.Imaging.PngBitmapDecoder]::new(
+    $decoder = [System.Windows.Media.Imaging.PngBitmapDecoder]::new(
       $sourceStream,
-      [Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
-      [Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+      [System.Windows.Media.Imaging.BitmapCreateOptions]::PreservePixelFormat,
+      [System.Windows.Media.Imaging.BitmapCacheOption]::OnLoad
     )
     if ($decoder.Frames.Count -lt 1) {
       throw "LEX_BRAND_WPF_FRAME_MISSING"
@@ -78,14 +91,14 @@ try {
       $bitmap = if ($size -eq 256) {
         $sourceBitmap
       } else {
-        [Windows.Media.Imaging.TransformedBitmap]::new(
+        [System.Windows.Media.Imaging.TransformedBitmap]::new(
           $sourceBitmap,
-          [Windows.Media.ScaleTransform]::new($scale, $scale)
+          [System.Windows.Media.ScaleTransform]::new($scale, $scale)
         )
       }
 
-      $encoder = [Windows.Media.Imaging.PngBitmapEncoder]::new()
-      $encoder.Frames.Add([Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
+      $encoder = [System.Windows.Media.Imaging.PngBitmapEncoder]::new()
+      $encoder.Frames.Add([System.Windows.Media.Imaging.BitmapFrame]::Create($bitmap))
       $frameStream = [IO.MemoryStream]::new()
       try {
         $encoder.Save($frameStream)
@@ -161,6 +174,7 @@ Move-Item -LiteralPath $temp -Destination $output -Force
 $iconBytes = [IO.File]::ReadAllBytes($output)
 
 Write-Host "LEX_BRAND_ICON_READY:$output"
+Write-Host "LEX_BRAND_SOURCE_MODE:BASE64_CHUNKS"
 Write-Host "LEX_BRAND_SOURCE_SHA256:$actualSourceSha256"
 Write-Host "LEX_BRAND_ICON_SHA256:$(Get-Sha256Hex $iconBytes)"
 Write-Host "LEX_BRAND_ICON_SIZES:$($sizes -join ',')"

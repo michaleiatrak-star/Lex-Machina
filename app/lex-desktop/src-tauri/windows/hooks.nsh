@@ -4,21 +4,44 @@
   SetOutPath "$PLUGINSDIR"
   File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
   File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+  File "/oname=lex-purge-user-data.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\purge-user-data.ps1"
 
   DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
   nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-get-install-state.ps1" -RuntimeRoot "$INSTDIR\runtime" -TargetManifestPath "$PLUGINSDIR\lex-target-release-source.json" -OutputPath "$PLUGINSDIR\lex-install-state.json" -ProductName "Lex Machina" -DiscoverRegisteredInstall -FailOnInstallRootMismatch -FailOnDowngrade'
   Pop $0
   Pop $1
   ${If} $0 == 24
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=install-state-mismatch$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
     DetailPrint "Lex Machina: wykryto zmianę katalogu istniejącej instalacji."
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: wykryto istniejącą instalację w innym katalogu niż wybrany cel.$\r$\n$\r$\nW trybie aktualizacji/naprawy zachowaj wykrytą lokalizację programu. Jeżeli chcesz przenieść program, najpierw odinstaluj poprzednią instalację." /SD IDOK
     Abort
   ${ElseIf} $0 != 0
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=install-state$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
     DetailPrint "Lex Machina: preinstall state gate zablokował instalację (exit=$0)."
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: instalacja została zatrzymana przez kontrolę stanu.$\r$\n$1$\r$\n$\r$\nJeżeli zainstalowana wersja jest nowsza, użyj nowszego instalatora zamiast wykonywać downgrade." /SD IDOK
     Abort
   ${EndIf}
   DetailPrint "Lex Machina: stan instalacji $1"
+
+  ; A truly fresh install starts from an empty local identity boundary. Updates
+  ; and repairs preserve the current profile because purge-user-data.ps1 only
+  ; acts when lex-install-state.json reports FRESH.
+  DetailPrint "Lex Machina: przygotowanie czystego profilu dla nowej instalacji..."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-purge-user-data.ps1" -Mode FreshInstall -InstallStatePath "$PLUGINSDIR\lex-install-state.json" -InstallRoot "$INSTDIR"'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    FileOpen $9 "$TEMP\LexMachinaPreinstall-error.log" w
+    FileWrite $9 "stage=fresh-profile-purge$\r$\nexit=$0$\r$\noutput=$1$\r$\n"
+    FileClose $9
+    DetailPrint "Lex Machina: czyszczenie profilu przed nową instalacją nie powiodło się (exit=$0)."
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się przygotować czystego profilu administratora.$\r$\n$1" /SD IDOK
+    Abort
+  ${EndIf}
 
   ; Tauri copies the main executable immediately after PREINSTALL.
   ; Restore the installer output directory after embedding probe files in
@@ -108,6 +131,18 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  SetOutPath "$PLUGINSDIR"
+  File "/oname=lex-purge-user-data.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\purge-user-data.ps1"
+
+  DetailPrint "Lex Machina: pełna deinstalacja usuwa profile, sprawy, Local AI i zapisane hasła/klucze."
+  nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-purge-user-data.ps1" -Mode Uninstall -InstallRoot "$INSTDIR"'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    DetailPrint "Lex Machina: pełne czyszczenie danych użytkownika nie powiodło się (exit=$0)."
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: deinstalacja została zatrzymana, ponieważ nie udało się usunąć wszystkich profili, danych lub zapisanych poświadczeń.$\r$\n$1" /SD IDOK
+    Abort
+  ${EndIf}
+
   RMDir /r "$INSTDIR\runtime"
 !macroend
