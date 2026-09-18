@@ -124,14 +124,16 @@ export function MaintenancePanel({
     setBusy("app-download");
     setError("");
     setMessage(
-      "Pobieram instalator do stagingu i weryfikuję SHA-256 oraz podpis wydawcy."
+      "Pobieram instalator do stagingu i weryfikuję SHA-256 oraz ProductVersion. Podpis jest obecnie opcjonalny w trybie przejściowym."
     );
     try {
       const result =
         await downloadApplicationUpdate();
       setStaged(result);
       setMessage(
-        `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Podpisany ProductVersion: ${result.publisher.productVersion}. Aktualizacja jest gotowa do instalacji.`
+        result.publisher.verification === "AUTHENTICODE"
+          ? `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Authenticode + ProductVersion ${result.publisher.productVersion}: PASS. Aktualizacja jest gotowa do instalacji.`
+          : `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). SHA-256 + ProductVersion ${result.publisher.productVersion}: PASS. UWAGA: aktualizacja bez podpisu jest tymczasowo dozwolona.`
       );
     } catch (problem) {
       setMessage("");
@@ -229,6 +231,10 @@ export function MaintenancePanel({
             <span>{appStatus?.status ?? "—"}</span>
           </div>
 
+          <small className="maintenance-trust-warning">
+            Tryb przejściowy: instalacja i aktualizacja programu bez podpisu są dozwolone po weryfikacji SHA-256 i wersji. Przed wydaniem produkcyjnym należy ponownie wymusić podpisy.
+          </small>
+
           {user.appRole === "ADMIN" ? (
             <div className="maintenance-actions">
               <button
@@ -284,11 +290,19 @@ export function MaintenancePanel({
             </span>
           </div>
 
+          {skillStatus?.signatureMode === "UNSIGNED_ALLOWED" ? (
+            <small className="maintenance-trust-warning">
+              Tryb przejściowy: podpis Ed25519 skilli jest opcjonalny. Indeks JSON, zgodność wersji, SHA-256 bundla i walidacja strukturalna nadal są wymagane.
+            </small>
+          ) : null}
+
           {skillStatus?.blockedReason ? (
             <small className="maintenance-trust-warning">
               {skillStatus.blockedReason === "SIGNER_POLICY_MISSING"
-                ? "Aktualizacja skilli jest zablokowana do czasu skonfigurowania produkcyjnego klucza Ed25519 wydawcy."
-                : "Release nie zawiera kompletnego podpisanego indeksu skilli (.json + .sig)."}
+                ? "Aktualizacja skilli jest zablokowana przez politykę zaufania."
+                : skillStatus.blockedReason === "INDEX_MISSING"
+                  ? "Release nie zawiera wymaganego indeksu skilli JSON."
+                  : "W trybie wymagającym podpisu release nie zawiera kompletnego indeksu .json + .sig."}
             </small>
           ) : null}
 
