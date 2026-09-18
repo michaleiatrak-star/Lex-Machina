@@ -99,6 +99,18 @@ describe(
             "analizator-umow-v1"
           ).stateModel
         ).toBe("DURABLE_CASE");
+        expect(
+          gateIWorkflowContract(
+            "EVIDENCE_ANALYSIS_V1",
+            "analizator-dowodow-v3"
+          ).stateModel
+        ).toBe("DURABLE_CASE");
+        expect(
+          gateIWorkflowContract(
+            "WITNESS_QUESTIONING_V1",
+            "przesluchanie-swiadkow-v2-min90"
+          ).stateModel
+        ).toBe("DURABLE_CASE");
       }
     );
 
