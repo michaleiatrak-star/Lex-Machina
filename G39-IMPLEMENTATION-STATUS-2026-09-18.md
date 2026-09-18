@@ -4,6 +4,17 @@ Branch: `feature/g39-execution-2026-09-17`
 PR: #51  
 Scope: deterministic installer, on-demand Local AI, skill/application updates.
 
+## RC gate snapshot — source `b159efffec9f607021c282cc9828986fce7e16dc`
+
+- Lex Runtime Validation: **PASS** (runs 35356999256 / 35356999346).
+- F-138 structural audit: **PASS** (runs 35356999223 / 35356999247).
+- G39 Installer State Machine: **PASS** (runs 35356999331 / 35356999249).
+- Windows Online installed-copy acceptance: **VERIFYING**.
+- Windows Offline standalone clean-machine acceptance: **VERIFYING**.
+- `release/0.1.3-g39-rc1` is documentation/release control only; `main` remains untouched.
+- `.release/source-sha.txt` intentionally remains absent until both Windows acceptance gates are green, so the publisher cannot run early.
+
+
 ## Audyt bieżącej linii — 2026-09-18
 
 - `main` pozostaje nietknięty; audyt, poprawki i release-candidate są prowadzone wyłącznie na gałęziach roboczych/release.
