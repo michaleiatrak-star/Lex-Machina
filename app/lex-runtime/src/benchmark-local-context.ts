@@ -507,6 +507,20 @@ async function main(): Promise<void> {
     );
   }
 
+  const signedModelPack =
+    Boolean(
+      identity.packVersion
+    );
+  if (
+    signedModelPack &&
+    benchmarkBackendMode !==
+      originalBackendMode
+  ) {
+    fail(
+      "LOCAL_CONTEXT_BENCHMARK_SIGNED_MODEL_BACKEND_SWITCH_BLOCKED"
+    );
+  }
+
   const results:
     BenchmarkProfile[] = [];
   let fatal:
@@ -529,12 +543,22 @@ async function main(): Promise<void> {
         };
 
       try {
-        await runtime.provision(
-          modelId,
-          contextTokens,
-          undefined,
-          benchmarkBackendMode
-        );
+        if (
+          signedModelPack
+        ) {
+          await runtime
+            .reconfigureContext(
+              modelId,
+              contextTokens
+            );
+        } else {
+          await runtime.provision(
+            modelId,
+            contextTokens,
+            undefined,
+            benchmarkBackendMode
+          );
+        }
         await runtime.ensureRunning(
           modelId
         );
@@ -669,12 +693,22 @@ async function main(): Promise<void> {
         : String(error);
   } finally {
     try {
-      await runtime.provision(
-        modelId,
-        originalContext,
-        undefined,
-        originalBackendMode
-      );
+      if (
+        signedModelPack
+      ) {
+        await runtime
+          .reconfigureContext(
+            modelId,
+            originalContext
+          );
+      } else {
+        await runtime.provision(
+          modelId,
+          originalContext,
+          undefined,
+          originalBackendMode
+        );
+      }
       await runtime.stop();
     } catch (error) {
       fatal =
@@ -694,6 +728,22 @@ async function main(): Promise<void> {
     modelId,
     modelSha256:
       identity.sha256,
+    modelPack: {
+      signed:
+        signedModelPack,
+      ...(identity.packVersion
+        ? {
+            packVersion:
+              identity.packVersion
+          }
+        : {}),
+      ...(identity.signerKeyId
+        ? {
+            signerKeyId:
+              identity.signerKeyId
+          }
+        : {})
+    },
     model: {
       displayName:
         descriptor.displayName,
