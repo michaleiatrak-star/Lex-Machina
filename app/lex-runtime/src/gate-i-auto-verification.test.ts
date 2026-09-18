@@ -105,6 +105,82 @@ describe(
     );
 
     it(
+      "automatically plans explicit Supreme Court signatures without asking the model for a source URL",
+      () => {
+        const plan =
+          planAutomaticLegalVerification(
+            "Sąd Najwyższy, sygn. III CZP 25/11.",
+            new VerificationLedger()
+          );
+
+        expect(plan.calls)
+          .toHaveLength(1);
+        expect(plan.calls[0]?.name)
+          .toBe(
+            "verify_case_reference"
+          );
+        expect(
+          plan.calls[0]?.input
+        ).toEqual({
+          claim:
+            "sygn. III CZP 25/11",
+          signature:
+            "III CZP 25/11",
+          courtFamily: "SN"
+        });
+      }
+    );
+
+    it(
+      "does not guess a court family for a bare signature",
+      () => {
+        const plan =
+          planAutomaticLegalVerification(
+            "Zob. sygn. III CZP 25/11.",
+            new VerificationLedger()
+          );
+
+        expect(plan.calls)
+          .toHaveLength(0);
+        expect(
+          plan.skipped[0]?.reason
+        ).toBe(
+          "COURT_FAMILY_AMBIGUOUS"
+        );
+      }
+    );
+
+    it(
+      "inserts an unverified marker when runtime verification failed",
+      () => {
+        const ledger =
+          new VerificationLedger();
+        ledger.add({
+          claim:
+            "art. 5 KC",
+          kind: "statute",
+          status:
+            "UNVERIFIED",
+          fetchedAt:
+            "2026-09-18T12:00:00.000Z"
+        });
+
+        const result =
+          applyAutomaticVerificationMarkers(
+            "Podstawa: art. 5 KC.",
+            ledger
+          );
+
+        expect(result.inserted)
+          .toBe(1);
+        expect(result.text)
+          .toContain(
+            "⚠️ [NIEWERYFIKOWANE]"
+          );
+      }
+    );
+
+    it(
       "does not plan a duplicate verification already present in the ledger",
       () => {
         const ledger =
