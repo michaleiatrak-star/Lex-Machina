@@ -11,10 +11,46 @@ permissions:
   contents: read
 
 jobs:
+  preflight:
+    name: Deterministic G39 release preflight
+    runs-on: windows-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+
+      - name: Runtime typecheck and unit tests
+        working-directory: app/lex-runtime
+        run: |
+          npm run typecheck
+          npm test
+          npm run validate:g33d
+
+      - name: G39 installer state machine
+        shell: pwsh
+        run: ./app/installer/installer-state-machine-selftest.ps1
+
+      - name: G39J Authenticode fail-closed policy
+        shell: pwsh
+        run: ./app/installer/sign-windows-artifact-selftest.ps1
+
   online:
+    needs: preflight
     uses: ./.github/workflows/lex-installer.yml
 
   offline:
+    needs: preflight
     uses: ./.github/workflows/offline-windows-installer.yml
     with:
       signed: false
