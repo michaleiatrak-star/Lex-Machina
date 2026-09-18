@@ -5,6 +5,8 @@ param(
   [Parameter(Mandatory=$true)][int]$ContextTokens,
   [ValidateSet("CPU_X64_PORTABLE", "VULKAN_X64")]
   [string]$Backend = "CPU_X64_PORTABLE",
+  [ValidateSet("AUTO", "CPU_X64_PORTABLE", "VULKAN_X64")]
+  [string]$BackendMode = "CPU_X64_PORTABLE",
   [string]$LocalAiRoot,
   [string]$CacheRoot
 )
@@ -315,6 +317,7 @@ $config = [ordered]@{
     type = "llama.cpp"
     version = $engine.version
     backend = [string]$selectedBackend.id
+    selectionMode = $BackendMode
     gpuOffload = [bool]$selectedBackend.gpuOffload
     executable = $serverPath
     fallbackBackend = if ($fallbackBackend) { [string]$fallbackBackend.id } else { $null }
@@ -344,6 +347,7 @@ $result = [ordered]@{
   contextTokens = $ContextTokens
   contextMode = $contextMode
   backend = [string]$selectedBackend.id
+  backendMode = $BackendMode
 } | ConvertTo-Json -Compress
 Write-Output $result
 Write-Host "LEX_LOCAL_LLM_INSTALL_PASS:$localRoot"
