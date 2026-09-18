@@ -65,6 +65,10 @@ const offlineBundleInstall =
   read(
     "app/installer/windows-offline-bundle-install.ps1"
   );
+const offlineZipExtractor =
+  read(
+    "app/installer/extract-offline-zip.ps1"
+  );
 const hooks =
   read(
     "app/lex-desktop/src-tauri/windows/hooks.nsh"
@@ -132,7 +136,7 @@ const checks = {
       "OFFLINE_RUNTIME_ARCHIVE_LOCK_HASH_MISMATCH"
     ) &&
     workflow.includes(
-      "& tar.exe -xf $bundle -C $verifyDir"
+      "extract-offline-zip.ps1"
     ) &&
     workflow.includes(
       "Build standalone offline EXE"
@@ -175,6 +179,15 @@ const checks = {
     ) &&
     offlineBundleInstall.includes(
       "OFFLINE_BUNDLE_LOCK_HASH_MISMATCH"
+    ) &&
+    offlineBundleInstall.includes(
+      "extract-offline-zip.ps1"
+    ) &&
+    offlineZipExtractor.includes(
+      "OFFLINE_ZIP_UNSAFE_ENTRY"
+    ) &&
+    offlineZipExtractor.includes(
+      "OFFLINE_ZIP_DUPLICATE_ENTRY"
     ) &&
     hooks.includes(
       "windows-offline-bundle-install.ps1"
