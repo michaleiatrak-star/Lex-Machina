@@ -517,7 +517,7 @@ export class LocalModelRuntime {
     );
   }
 
-  requiresSignedModelPackRepair(): boolean {
+  requiresModelPackRepair(): boolean {
     const config = this.readConfig();
     if (!config) return false;
     const canonical =
@@ -647,7 +647,7 @@ export class LocalModelRuntime {
         spec.sha256
       )
     ) {
-      // Legacy/on-demand installs are pinned by the signed application
+      // Legacy/on-demand installs are pinned by the application release
       // manifest even before they receive an independent model-pack receipt.
       sha256 =
         spec.sha256
