@@ -1124,7 +1124,16 @@ export class SafeSessionExecutor implements SessionExecutor {
           )
           ? "PASS"
           : "BLOCKED"
-        : "NOT_APPLICABLE";
+        : gateIContract.stateModel ===
+            "DURABLE_SESSION"
+          ? (
+              execution.workflowPlan.id ===
+                "LEGAL_GUIDE_V1" &&
+              request.guideContext
+            )
+            ? "PASS"
+            : "BLOCKED"
+          : "NOT_APPLICABLE";
 
     const gateIWorkflowContractReport =
       evaluateGateIWorkflowContract({
