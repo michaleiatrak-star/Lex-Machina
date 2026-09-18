@@ -187,9 +187,15 @@ try {
   if (-not (Test-Path -LiteralPath $selfTest -PathType Leaf)) {
     throw "OFFLINE_BUNDLE_SELFTEST_SCRIPT_MISSING"
   }
-  & $selfTest -PayloadRoot $runtime
+  try {
+    & $selfTest -PayloadRoot $runtime 2>&1 |
+      ForEach-Object { Write-Host $_ }
+  } catch {
+    Write-Host "OFFLINE_BUNDLE_SELFTEST_EXCEPTION:$($_.Exception.Message)"
+    throw
+  }
   if ($LASTEXITCODE -ne 0) {
-    throw "OFFLINE_BUNDLE_SELFTEST_FAILED"
+    throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$LASTEXITCODE"
   }
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
