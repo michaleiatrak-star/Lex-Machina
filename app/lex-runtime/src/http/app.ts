@@ -5822,6 +5822,138 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         };
       }
 
+      let courtContext:
+        | {
+            caseId: string;
+            permit:
+              CourtAnalysisExecutionPermit;
+            state:
+              CourtAnalysisState;
+          }
+        | null = null;
+
+      if (
+        previewPlan.id ===
+          "COURT_ANALYSIS_V1"
+      ) {
+        if (
+          !options.caseAccessService ||
+          !options
+            .courtAnalysisWorkflowStore
+        ) {
+          res.status(503).json({
+            error:
+              "COURT_ANALYSIS_STATE_SERVICE_UNAVAILABLE"
+          });
+          return;
+        }
+
+        const nonFirmCaseIds =
+          new Set(
+            sessionAttachments
+              .filter(
+                (attachment) =>
+                  attachment.sourceScope !==
+                    "FIRM_KNOWLEDGE"
+              )
+              .map(
+                (attachment) =>
+                  attachment.caseId
+              )
+              .filter(
+                (
+                  caseId
+                ): caseId is string =>
+                  Boolean(caseId)
+              )
+          );
+        const courtCaseId =
+          knowledge.caseId ??
+          (
+            nonFirmCaseIds.size === 1
+              ? [
+                  ...nonFirmCaseIds
+                ][0]
+              : undefined
+          );
+        if (!courtCaseId) {
+          throw new Error(
+            "COURT_ANALYSIS_CASE_REQUIRED"
+          );
+        }
+
+        const actor =
+          responseAuthContext(res);
+        options.caseAccessService
+          .assertAccess(
+            actor,
+            courtCaseId,
+            "WRITE"
+          );
+        const caseView =
+          options.caseAccessService
+            .openCase(
+              actor,
+              courtCaseId
+            );
+        const state =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              actor,
+              courtCaseId,
+              "WRITE",
+              async (
+                caseDataKey
+              ) => {
+                const current =
+                  await options
+                    .courtAnalysisWorkflowStore!
+                    .getCourtAnalysisState({
+                      caseId:
+                        courtCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView.keyVersion
+                    });
+                if (current) {
+                  return current;
+                }
+                return await options
+                  .courtAnalysisWorkflowStore!
+                  .saveCourtAnalysisState({
+                    caseId:
+                      courtCaseId,
+                    caseDataKey,
+                    keyVersion:
+                      caseView
+                        .keyVersion,
+                    state:
+                      createCourtAnalysisState(
+                        courtCaseId
+                      )
+                  });
+              }
+            );
+
+        const permit =
+          requireCourtAnalysisExecutionPermit(
+            state
+          );
+        request.courtWorkflowContext = {
+          stage:
+            permit.stage,
+          checkpoint:
+            permit.checkpoint
+        };
+        courtContext = {
+          caseId:
+            courtCaseId,
+          permit,
+          state
+        };
+      }
+
       if (
         processContext?.permit.mode ===
           "AUTO" &&
