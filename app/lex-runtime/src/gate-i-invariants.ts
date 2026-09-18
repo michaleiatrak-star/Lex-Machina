@@ -19,8 +19,12 @@ export type GateICheckId =
   | "CORE_RESOURCES"
   | "WORKFLOW_RESOURCES"
   | "SOURCE_PROVENANCE"
+  | "SOURCE_HIERARCHY"
+  | "TEMPORAL_FRESHNESS"
+  | "CITATION_LEDGER"
   | "LEGAL_CITATIONS"
   | "CASE_SIGNATURES"
+  | "DOCUMENT_CITATIONS"
   | "OUTPUT_CONTRACT"
   | "FINALIZATION";
 
@@ -29,8 +33,12 @@ export type GateISubgate =
   | "I-B_CORE_RESOURCES"
   | "I-C_WORKFLOW_RESOURCES"
   | "I-D_SOURCE_PROVENANCE"
-  | "I-E_LEGAL_CITATIONS"
+  | "I-D1_SOURCE_HIERARCHY"
+  | "I-D2_TEMPORAL_FRESHNESS"
+  | "I-E_CITATION_LEDGER"
+  | "I-E1_LEGAL_CITATIONS"
   | "I-F_CASE_SIGNATURES"
+  | "I-F1_DOCUMENT_CITATIONS"
   | "I-G_OUTPUT_CONTRACT"
   | "I-H_FINALIZATION";
 
@@ -216,6 +224,155 @@ function provenance(
   };
 }
 
+function sourceHierarchy(
+  records:
+    readonly VerificationRecord[]
+): GateICheck {
+  const statutory =
+    records.filter(
+      (record) =>
+        record.status ===
+          "VERIFIED" &&
+        (
+          record.kind ===
+            "statute" ||
+          record.kind ===
+            "journal"
+        )
+    );
+  const invalid =
+    statutory.filter(
+      (record) =>
+        record.sourceTier !==
+          "R1" &&
+        record.sourceTier !==
+          "R2A"
+    );
+
+  return {
+    id:
+      "SOURCE_HIERARCHY",
+    subgate:
+      "I-D1_SOURCE_HIERARCHY",
+    result:
+      invalid.length === 0
+        ? "PASS"
+        : "BLOCKED",
+    detail:
+      invalid.length === 0
+        ? `verifiedStatutory=${statutory.length}`
+        : `invalidTier=${invalid.length}`
+  };
+}
+
+function temporalFreshness(
+  records:
+    readonly VerificationRecord[]
+): GateICheck {
+  const statutory =
+    records.filter(
+      (record) =>
+        record.status ===
+          "VERIFIED" &&
+        (
+          record.kind ===
+            "statute" ||
+          record.kind ===
+            "journal"
+        )
+    );
+  const invalid =
+    statutory.filter(
+      (record) => {
+        const expected =
+          record.temporalMode ??
+          "CURRENT";
+        const checkedAt =
+          record.freshnessCheckedAt;
+        return (
+          record
+            .temporalFreshnessStatus !==
+            expected ||
+          !checkedAt ||
+          Number.isNaN(
+            Date.parse(
+              checkedAt
+            )
+          )
+        );
+      }
+    );
+
+  return {
+    id:
+      "TEMPORAL_FRESHNESS",
+    subgate:
+      "I-D2_TEMPORAL_FRESHNESS",
+    result:
+      invalid.length === 0
+        ? "PASS"
+        : "BLOCKED",
+    detail:
+      invalid.length === 0
+        ? `verifiedStatutory=${statutory.length}`
+        : `missingOrStale=${invalid.length}`
+  };
+}
+
+function citationLedger(
+  finalization:
+    FinalizationReport
+): GateICheck {
+  const invalid =
+    finalization.findings
+      .filter(
+        (finding) =>
+          finding.status !==
+            "VERIFIED"
+      );
+  return {
+    id:
+      "CITATION_LEDGER",
+    subgate:
+      "I-E_CITATION_LEDGER",
+    result:
+      invalid.length === 0
+        ? "PASS"
+        : "BLOCKED",
+    detail:
+      invalid.length === 0
+        ? `references=${finalization.references.length}`
+        : `invalid=${invalid.length}`
+  };
+}
+
+function documentCitations(
+  report: {
+    accepted: number;
+    rejected: number;
+    quotedWithoutExactHighlight: number;
+  }
+): GateICheck {
+  const invalid =
+    report.rejected +
+    report
+      .quotedWithoutExactHighlight;
+  return {
+    id:
+      "DOCUMENT_CITATIONS",
+    subgate:
+      "I-F1_DOCUMENT_CITATIONS",
+    result:
+      invalid === 0
+        ? "PASS"
+        : "BLOCKED",
+    detail:
+      invalid === 0
+        ? `accepted=${report.accepted}`
+        : `rejected=${report.rejected};unanchoredQuotes=${report.quotedWithoutExactHighlight}`
+  };
+}
+
 function citations(
   finalization:
     FinalizationReport
@@ -231,7 +388,7 @@ function citations(
     id:
       "LEGAL_CITATIONS",
     subgate:
-      "I-E_LEGAL_CITATIONS",
+      "I-E1_LEGAL_CITATIONS",
     result:
       invalid.length === 0
         ? "PASS"
@@ -316,6 +473,11 @@ export function evaluateGateIInvariants(
       result: "PASS" | "BLOCKED";
       detail: string;
     };
+    documentCitations: {
+      accepted: number;
+      rejected: number;
+      quotedWithoutExactHighlight: number;
+    };
   }
 ): GateIInvariantReport {
   const checks:
@@ -328,11 +490,23 @@ export function evaluateGateIInvariants(
       provenance(
         args.verificationRecords
       ),
+      sourceHierarchy(
+        args.verificationRecords
+      ),
+      temporalFreshness(
+        args.verificationRecords
+      ),
+      citationLedger(
+        args.finalization
+      ),
       citations(
         args.finalization
       ),
       caseSignatures(
         args.finalization
+      ),
+      documentCitations(
+        args.documentCitations
       ),
       {
         id:
