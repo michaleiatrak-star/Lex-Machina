@@ -18,6 +18,9 @@ import type {
 import { LexSkillRegistry } from "./registry.js";
 import { SafeSessionExecutor } from "./session-executor.js";
 import { LegalVerificationToolRuntime } from "./verification-tool-runtime.js";
+import {
+  TemporalSourceFreshnessChecker
+} from "./temporal-source-freshness.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
@@ -31,6 +34,85 @@ type ToolMode =
   | "verified"
   | "fake-marker"
   | "unverified";
+
+function jsonResponse(value: unknown): Response {
+  return new Response(
+    JSON.stringify(value),
+    {
+      status: 200,
+      headers: {
+        "content-type":
+          "application/json"
+      }
+    }
+  );
+}
+
+function g16FreshnessFetcher(
+  input: string | URL
+): Promise<Response> {
+  const url = String(input);
+
+  if (
+    url.endsWith(
+      "/DU/1964/93/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        "Inf. o tekście jednolitym": [
+          {
+            act: {
+              ELI:
+                "DU/2026/795",
+              year: 2026,
+              pos: 795,
+              status:
+                "obowiązujący"
+            }
+          }
+        ],
+        "Akty zmieniające": []
+      })
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795/references"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({})
+    );
+  }
+
+  if (
+    url.endsWith(
+      "/DU/2026/795"
+    )
+  ) {
+    return Promise.resolve(
+      jsonResponse({
+        ELI:
+          "DU/2026/795",
+        status:
+          "obowiązujący",
+        promulgation:
+          "2026-06-17",
+        textHTML: true,
+        textPDF: true
+      })
+    );
+  }
+
+  return Promise.reject(
+    new Error(
+      "G16_UNEXPECTED_FRESHNESS_URL:" +
+        url
+    )
+  );
+}
 
 class VerificationProvider implements ProviderAdapter {
   readonly id = "openai" as const;
@@ -184,7 +266,13 @@ function executor(
     (ledger) =>
       new LegalVerificationToolRuntime(
         ledger,
-        verifier
+        verifier,
+        undefined,
+        new TemporalSourceFreshnessChecker(
+          g16FreshnessFetcher,
+          () =>
+            "2026-09-15T18:30:00.000Z"
+        )
       )
   );
 }
@@ -284,8 +372,11 @@ if (issues.length > 0) {
     typeof verified.answer === "string" &&
     String(verified.answer).includes("art. 5 KC") &&
     String(verified.answer).includes("✅ [VER:") &&
-    verifiedSummary.records === 1 &&
-    verifiedSummary.verified === 1 &&
+    typeof verifiedSummary.records === "number" &&
+    verifiedSummary.records >= 1 &&
+    verifiedSummary.verified ===
+      verifiedSummary.records &&
+    verifiedSummary.supported === 0 &&
     verifiedSummary.unverified === 0 &&
     verifiedAudit.result === "PASS" &&
     verifiedAudit.closed === true &&
