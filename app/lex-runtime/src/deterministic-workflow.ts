@@ -8,7 +8,13 @@ export type DeterministicWorkflowId =
   | "PROCESS_PLEADING_V1"
   | "COURT_ANALYSIS_V1"
   | "EVIDENCE_ANALYSIS_V1"
-  | "STATUTE_ANALYSIS_V1";
+  | "STATUTE_ANALYSIS_V1"
+  | "CONTRACT_ANALYSIS_V1"
+  | "CHRONOLOGY_V1"
+  | "CASE_LAW_V1"
+  | "WITNESS_QUESTIONING_V1"
+  | "CLIENT_REPORT_V1"
+  | "SITUATION_REPORT_V1";
 
 export type DeterministicWorkflowPlan = {
   id: DeterministicWorkflowId;
@@ -68,6 +74,49 @@ const STATUTE_ANALYSIS_RESOURCES = [
   "shared/SELF-CHECK-ANTY-FASADA.md"
 ] as const;
 
+const CONTRACT_ANALYSIS_RESOURCES = [
+  "shared/UNIVERSAL-RUNTIME-ADAPTER.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-STEP-TRACKER.md"
+] as const;
+
+const CHRONOLOGY_RESOURCES = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "chronologia-sprawy-v1/references/ekstrakcja-zdarzen.md",
+  "chronologia-sprawy-v1/references/sprzecznosci-dat.md",
+  "shared/MOD-OS-CZASU-PRZESLANEK.md"
+] as const;
+
+const CASE_LAW_RESOURCES = [
+  "shared/MCP-INTEGRACJA.md",
+  "shared/SYGNATURY.md",
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md"
+] as const;
+
+const WITNESS_QUESTIONING_RESOURCES = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-SKAN-DOWODOW-KOMPLETNY.md",
+  "shared/MOD-STEP-TRACKER.md",
+  "przesluchanie-swiadkow-v2-min90/references/WITNESS-INTELLIGENCE.md"
+] as const;
+
+const CLIENT_REPORT_RESOURCES = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "raport-klienta-v1/references/jezyk-klienta.md",
+  "raport-klienta-v1/references/BLUEPRINT-SCHEMA.md"
+] as const;
+
+const SITUATION_REPORT_RESOURCES = [
+  "shared/PRAWO-HARDGATE.md",
+  "shared/SELF-CHECK-ANTY-FASADA.md",
+  "shared/MOD-WIDGET-IO.md"
+] as const;
+
 function assertReadableResource(
   registry: LexSkillRegistry,
   skillName: string,
@@ -104,6 +153,18 @@ export function createDeterministicWorkflowPlan(
     workflowExecutionSkill === "analizator-dowodow-v3";
   const hasStatuteAnalysis =
     workflowExecutionSkill === "analizator-przepisow-v2";
+  const hasContractAnalysis =
+    workflowExecutionSkill === "analizator-umow-v1";
+  const hasChronology =
+    workflowExecutionSkill === "chronologia-sprawy-v1";
+  const hasCaseLaw =
+    workflowExecutionSkill === "orzeczenia-sadowe-v2";
+  const hasWitnessQuestioning =
+    workflowExecutionSkill === "przesluchanie-swiadkow-v2-min90";
+  const hasClientReport =
+    workflowExecutionSkill === "raport-klienta-v1";
+  const hasSituationReport =
+    workflowExecutionSkill === "raport-sytuacyjny-v2";
 
   const executionSkill = hasProcess
     ? "pisma-procesowe-v3"
@@ -114,8 +175,20 @@ export function createDeterministicWorkflowPlan(
         : hasEvidenceAnalysis
           ? "analizator-dowodow-v3"
           : hasStatuteAnalysis
-            ? "analizator-przepisow-v2"
-            : workflowExecutionSkill;
+          ? "analizator-przepisow-v2"
+          : hasContractAnalysis
+            ? "analizator-umow-v1"
+            : hasChronology
+              ? "chronologia-sprawy-v1"
+              : hasCaseLaw
+                ? "orzeczenia-sadowe-v2"
+                : hasWitnessQuestioning
+                  ? "przesluchanie-swiadkow-v2-min90"
+                  : hasClientReport
+                    ? "raport-klienta-v1"
+                    : hasSituationReport
+                      ? "raport-sytuacyjny-v2"
+                      : workflowExecutionSkill;
 
   const id: DeterministicWorkflowId = hasProcess
     ? "PROCESS_PLEADING_V1"
@@ -127,7 +200,19 @@ export function createDeterministicWorkflowPlan(
           ? "EVIDENCE_ANALYSIS_V1"
           : hasStatuteAnalysis
             ? "STATUTE_ANALYSIS_V1"
-            : "LEGAL_QUERY_V1";
+            : hasContractAnalysis
+              ? "CONTRACT_ANALYSIS_V1"
+              : hasChronology
+                ? "CHRONOLOGY_V1"
+                : hasCaseLaw
+                  ? "CASE_LAW_V1"
+                  : hasWitnessQuestioning
+                    ? "WITNESS_QUESTIONING_V1"
+                    : hasClientReport
+                      ? "CLIENT_REPORT_V1"
+                      : hasSituationReport
+                        ? "SITUATION_REPORT_V1"
+                        : "LEGAL_QUERY_V1";
 
   const requiredFreshResources = hasProcess
     ? [...PROCESS_PLEADING_RESOURCES]
@@ -139,7 +224,19 @@ export function createDeterministicWorkflowPlan(
           ? [...EVIDENCE_ANALYSIS_RESOURCES]
           : hasStatuteAnalysis
             ? [...STATUTE_ANALYSIS_RESOURCES]
-            : [];
+            : hasContractAnalysis
+              ? [...CONTRACT_ANALYSIS_RESOURCES]
+              : hasChronology
+                ? [...CHRONOLOGY_RESOURCES]
+                : hasCaseLaw
+                  ? [...CASE_LAW_RESOURCES]
+                  : hasWitnessQuestioning
+                    ? [...WITNESS_QUESTIONING_RESOURCES]
+                    : hasClientReport
+                      ? [...CLIENT_REPORT_RESOURCES]
+                      : hasSituationReport
+                        ? [...SITUATION_REPORT_RESOURCES]
+                        : [];
 
   if (executionSkill) {
     const skill = registry.get(executionSkill);
