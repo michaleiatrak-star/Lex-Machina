@@ -14,7 +14,7 @@ Scope: deterministic installer, on-demand Local AI, skill/application updates.
 
 ## G39G — installer state machine
 
-Status: **PASS**
+Status: **PASS — STATE MACHINE / INTEGRATION VERIFYING**
 
 Implemented and current-head G39G self-test passed:
 
@@ -33,7 +33,8 @@ Implemented and current-head G39G self-test passed:
 Closure evidence:
 
 - G39 Installer State Machine job: **success** on commit `525e60d238892beb79ce51a453f243c8e6d0e8c0`;
-- G39G no longer depends on production signing keys and is closed independently of G39F/G39J.
+- the state-machine subgate is independent of production signing keys and therefore closed independently of G39F/G39J;
+- **integration acceptance is still required** on the current head: both the real online installed-copy workflow and the standalone offline clean-machine workflow must pass before the installer track as a whole is treated as closed.
 
 ## G39F — application update transaction
 
