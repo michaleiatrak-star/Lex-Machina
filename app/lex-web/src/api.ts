@@ -500,6 +500,78 @@ export type ModelRoutingPreferences = {
   updatedAt?: string;
 };
 
+export type GuideSessionState = {
+  schemaVersion: 1;
+  sessionId: string;
+  revision: number;
+  audience: "LAIK" | "PRAWNIK";
+  interactionMode:
+    | "PROWADZENIE"
+    | "QA"
+    | "MENU";
+  rawAnalysis: boolean;
+  step:
+    | "FAZA0"
+    | "A"
+    | "B"
+    | "C"
+    | "D"
+    | "E"
+    | "F"
+    | "G"
+    | "H"
+    | "I"
+    | "M"
+    | "Q";
+  guidedQuestionIndex:
+    0 | 1 | 2 | 3;
+  pendingIrreversibleAction:
+    | {
+        actionId: string;
+        warningAcknowledged:
+          boolean;
+      }
+    | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GuideTransition =
+  | {
+      type: "SET_AUDIENCE";
+      audience:
+        "LAIK" | "PRAWNIK";
+    }
+  | {
+      type:
+        "SET_INTERACTION_MODE";
+      mode:
+        | "PROWADZENIE"
+        | "QA"
+        | "MENU";
+    }
+  | {
+      type:
+        "SET_RAW_ANALYSIS";
+      enabled: boolean;
+    }
+  | {
+      type: "MOVE_STEP";
+      step:
+        GuideSessionState["step"];
+    }
+  | {
+      type:
+        "ADVANCE_GUIDED_QUESTION";
+    }
+  | {
+      type:
+        | "BEGIN_IRREVERSIBLE_ACTION"
+        | "ACKNOWLEDGE_IRREVERSIBLE_WARNING"
+        | "CLEAR_IRREVERSIBLE_ACTION";
+      actionId: string;
+    };
+
 export type UpdateStatusResponse = {
   currentVersion: string;
   status:
@@ -1720,6 +1792,53 @@ export function clearProviderApiKey(
     `/api/admin/providers/${provider}/credential`,
     {
       method: "DELETE"
+    }
+  );
+}
+
+export function getGuideState():
+  Promise<{
+    state:
+      GuideSessionState | null;
+  }> {
+  return json(
+    "/api/guide/state"
+  );
+}
+
+export function initializeGuideState(
+  audience:
+    "LAIK" | "PRAWNIK"
+): Promise<{
+  state:
+    GuideSessionState;
+}> {
+  return json(
+    "/api/guide/initialize",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        audience
+      })
+    }
+  );
+}
+
+export function transitionGuideState(
+  expectedRevision: number,
+  transition: GuideTransition
+): Promise<{
+  state:
+    GuideSessionState;
+}> {
+  return json(
+    "/api/guide/transition",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        expectedRevision,
+        transition
+      })
     }
   );
 }
