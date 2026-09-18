@@ -176,13 +176,18 @@ Implemented:
 - Local AI provisioning/repair calibrates the bundled llama.cpp `/tokenize` endpoint on three fixed, non-sensitive Polish/legal samples; the minimum observed chars/token ratio receives an additional safety margin and is persisted in the qualification receipt;
 - the HTTP session path feeds this conservative calibrated ratio into the Context Orchestrator for the selected local model; invalid calibration fails closed and cloud/unknown-tokenizer sessions retain the 3 chars/token fallback;
 - context tests cover calibrated and invalid tokenizer estimates;
-- HTTP tests cover both successful citation refresh and source mutation between execution and presentation.
+- HTTP tests cover both successful citation refresh and source mutation between execution and presentation;
+- a separate semantic/legal-quality benchmark harness is implemented and does not use LLM-as-judge: deterministic scoring checks decision correctness, issue recall, citation recall/precision, invented source IDs and source-to-issue assignment;
+- the committed synthetic corpus contains five fictional LEX-BENCH cases for smoke/regression only and is explicitly not treated as evidence of Polish-law quality;
+- the self-hosted semantic benchmark can consume an external versioned corpus and can enforce `confidentiality=EXPERT_PRIVATE`; reports omit prompts, source text and raw model answers and retain only case IDs, metrics and response SHA-256 values;
+- semantic benchmark prompts are fitted with the bundled tokenizer and spread source blocks through the selected context so the benchmark remains an extended-context semantic test rather than a short-prompt classifier.
 
 Still required before G39C PASS:
 
 - current-head runtime validation must be green;
-- the committed self-hosted 64k / 96k / 128k / 160k / 200k long-context benchmark must be executed and its artifact reviewed on representative supported hardware;
-- separate semantic/legal-quality regression criteria remain required before treating extended context as a quality guarantee.
+- the committed self-hosted 64k / 96k / 128k / 160k / 200k long-context capability benchmark must be executed and its artifact reviewed on representative supported hardware;
+- the semantic/legal-quality workflow must be executed with an expert-curated `EXPERT_PRIVATE` corpus; synthetic smoke results cannot qualify production legal quality;
+- expert owners must review/approve the versioned acceptance thresholds and corpus before treating extended context as a legal-quality guarantee.
 
 A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
@@ -281,7 +286,7 @@ External / production blockers:
 5. after current-head CI is green, promote the implemented G39C summary-backlink/tokenizer-calibration slices from VERIFYING;
 6. validate the new real-corpus skill↔engine parity suite for process/court/chronology/contract workflows on current-head CI;
 7. execute and review the self-hosted Local AI 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
-8. add a separate semantic/legal-quality benchmark for extended-context use;
+8. execute the committed semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
 9. configure production application/skill/model-pack signing and execute signed acceptance;
 10. enable protected `main` / release rules outside this GitHub integration;
 11. close G39J only after the external trust controls above are verified.
