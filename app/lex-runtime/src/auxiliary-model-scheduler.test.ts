@@ -310,6 +310,68 @@ describe(
     );
 
     it(
+      "rejects helper-invented references that are absent from the current user turn",
+      async () => {
+        const { gateway } =
+          gatewayWith(
+            async () =>
+              JSON.stringify({
+                references: [
+                  {
+                    kind: "statute",
+                    claim:
+                      "art. 58 KC",
+                    act: "KC"
+                  }
+                ]
+              })
+          );
+        const scheduler =
+          new AuxiliaryModelScheduler(
+            gateway
+          );
+        let verificationCount = 0;
+
+        const result =
+          await scheduler.preflight({
+            config: {
+              enabled: true,
+              provider: "openai",
+              model:
+                "local/bielik-11b-v3-q4km"
+            },
+            primary: {
+              provider:
+                "anthropic",
+              model:
+                "claude-test"
+            },
+            currentUserText:
+              "Zweryfikuj art. 5 KC.",
+            runVerificationTools:
+              async (items) => {
+                verificationCount +=
+                  items.length;
+                return [];
+              }
+          });
+
+        expect(
+          result.summary
+            .extractedCandidates
+        ).toBe(0);
+        expect(
+          verificationCount
+        ).toBe(0);
+        expect(
+          result
+            .cachedVerificationResults
+            .size
+        ).toBe(0);
+      }
+    );
+
+    it(
       "degrades instead of blocking primary execution when helper fails",
       async () => {
         const { gateway } =
