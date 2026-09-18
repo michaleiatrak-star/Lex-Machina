@@ -158,13 +158,17 @@ Implemented:
 - final local-document citations are re-resolved immediately before HTTP presentation; case-bound citations first restore the current encrypted document through case ACL/key access;
 - changed/unavailable cited chunks fail closed with HTTP 409 before process-workflow state is advanced;
 - UI distinguishes native model context, active runtime context and effective document-context usage;
+- retrieved knowledge may be represented as deterministic extractive digests when full chunks exceed the context budget; every digest keeps its original document/chunk/page backlink while citation validation uses a separate full-original `citationSources` view;
+- digest regression tests prove that excerpts are literal substrings of the original and that the full original chunk remains the citation source;
+- Local AI provisioning/repair calibrates the bundled llama.cpp `/tokenize` endpoint on three fixed, non-sensitive Polish/legal samples; the minimum observed chars/token ratio receives an additional safety margin and is persisted in the qualification receipt;
+- the HTTP session path feeds this conservative calibrated ratio into the Context Orchestrator for the selected local model; invalid calibration fails closed and cloud/unknown-tokenizer sessions retain the 3 chars/token fallback;
+- context tests cover calibrated and invalid tokenizer estimates;
 - HTTP tests cover both successful citation refresh and source mutation between execution and presentation.
 
 Still required before G39C PASS:
 
-- summary backlinks for context compression;
-- quality/regression benchmarks across 64k / 96k / 128k / 160k / 200k;
-- token estimation calibration against the bundled tokenizer/runtime rather than the current conservative character heuristic.
+- current-head runtime validation must be green;
+- quality/regression benchmarks across 64k / 96k / 128k / 160k / 200k.
 
 A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
@@ -258,10 +262,9 @@ External / production blockers:
 2. obtain current-head online installer acceptance PASS with G39G2 registered-install-root and Polish maintenance-language gates;
 3. obtain current-head offline installer acceptance PASS;
 4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
-5. implement G39C summary backlinks/context compression with provenance-preserving re-fetch;
-6. calibrate context token estimation against the bundled llama.cpp tokenizer/runtime;
-7. add comparative skill-only vs engine-controlled regression suites for process/court/chronology/contract workflows;
-8. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
-9. configure production application/skill/model-pack signing and execute signed acceptance;
-10. enable protected `main` / release rules outside this GitHub integration;
-11. close G39J only after the external trust controls above are verified.
+5. after current-head CI is green, promote the implemented G39C summary-backlink and tokenizer-calibration slices from VERIFYING;
+6. add comparative skill-only vs engine-controlled regression suites for process/court/chronology/contract workflows;
+7. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
+8. configure production application/skill/model-pack signing and execute signed acceptance;
+9. enable protected `main` / release rules outside this GitHub integration;
+10. close G39J only after the external trust controls above are verified.
