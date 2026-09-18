@@ -1100,6 +1100,36 @@ export class LocalModelRuntime {
     const configPath = this.configPath();
     const previousConfigObject =
       this.readConfig();
+    const previousQualificationObject =
+      this.readQualification();
+
+    if (
+      previousConfigObject &&
+      normalizeModelId(
+        previousConfigObject
+          .model.id
+      ) !== canonical &&
+      previousQualificationObject &&
+      normalizeModelId(
+        previousQualificationObject
+          .modelId
+      ) ===
+        normalizeModelId(
+          previousConfigObject
+            .model.id
+        ) &&
+      previousQualificationObject
+        .contextTokens ===
+        previousConfigObject
+          .context
+          .requestedTokens
+    ) {
+      this.writeModelProfile(
+        previousConfigObject,
+        previousQualificationObject
+      );
+    }
+
     const previousConfig = fs.existsSync(configPath)
       ? fs.readFileSync(configPath)
       : null;
