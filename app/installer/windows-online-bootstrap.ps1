@@ -103,7 +103,7 @@ function Ensure-VisualCppRuntime {
 
   $forceAcceptanceVc = ($env:CI -eq "true" -and $env:LEX_INSTALLER_ACCEPTANCE_FORCE_VC_RUNTIME -eq "1")
   if (-not $vcInstalled -or $forceAcceptanceVc) {
-    $bundledVc = Join-Path $runtime "prerequisites\\vc_redist.x64.exe"
+    $bundledVc = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
     if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
       $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
       if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
