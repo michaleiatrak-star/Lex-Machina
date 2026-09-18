@@ -282,6 +282,66 @@ describe(
     );
 
     it(
+      "uses bounded local tokenizer calibration instead of the fixed fallback estimate",
+      () => {
+        const knowledge =
+          attachment(
+            "doc_case_6666666666666666",
+            "CASE_KNOWLEDGE",
+            [
+              {
+                index: 0,
+                text:
+                  "Termin płatności wynosi 14 dni. ".repeat(
+                    2_000
+                  )
+              }
+            ]
+          );
+
+        const calibrated =
+          orchestrateDocumentContext({
+            attachments: [
+              knowledge
+            ],
+            query:
+              "Jaki jest termin płatności?",
+            modelContextTokens:
+              64_000,
+            tokenCharsPerToken:
+              2.25
+          });
+
+        expect(
+          calibrated.report
+            .tokenEstimation
+        ).toBe(
+          "CALIBRATED_LOCAL_TOKENIZER"
+        );
+        expect(
+          calibrated.report
+            .charsPerTokenEstimate
+        ).toBe(2.25);
+
+        expect(() =>
+          orchestrateDocumentContext({
+            attachments: [
+              knowledge
+            ],
+            query:
+              "Jaki jest termin płatności?",
+            modelContextTokens:
+              64_000,
+            tokenCharsPerToken:
+              3.01
+          })
+        ).toThrow(
+          "TOKENIZER_CALIBRATION_INVALID"
+        );
+      }
+    );
+
+    it(
       "preserves the legacy hard cap when a model context window is unknown",
       () => {
         const small = attachment(
