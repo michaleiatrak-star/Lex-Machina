@@ -199,7 +199,7 @@ describe(
         for (
           const stageNeedle
           of [
-            "CG-ACCEPTANCE",
+            "CG-GATE",
             "W1",
             "PRE-W2",
             "W2",
