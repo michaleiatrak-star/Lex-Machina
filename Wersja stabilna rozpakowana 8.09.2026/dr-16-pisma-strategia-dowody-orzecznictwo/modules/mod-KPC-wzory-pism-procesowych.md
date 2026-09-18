@@ -32,9 +32,9 @@ Tytuł: P O Z E W
 6. Wartość sporu: __ zł → Opłata: weryfikuj KSCU (5% / stawka stała)
 ```
 
-**Sprzeciw od nakazu zapłaty (art. 503 KPC):**
+**Sprzeciw od nakazu zapłaty (art. 505 § 1 KPC; termin — art. 480² § 2 KPC; art. 503 UCHYLONY):** <!-- T28-OK: cytat opisowy — ostrzeżenie przed uchyloną jednostką -->
 ```
-Termin: 14 dni od doręczenia nakazu (termin zawity — najważniejszy!)
+Termin: 2 tygodnie od doręczenia w kraju; miesiąc przy doręczeniu w innym państwie UE; 3 miesiące poza UE (art. 480² § 2 pkt 1, 2, 4 KPC; ✅ [VER] RZĄD 1 2026-09-16, Dz.U. 2026 poz. 468)
 Treść: Zaskarżam nakaz w całości / części + zarzuty (przedawnienie, zapłata, etc.)
 Sąd: ten sam, który wydał nakaz
 ```

@@ -592,6 +592,34 @@ oddzielny temat).
   sprawie egzekucyjnej.
 ```
 
+## 0T. TERMINY KKW — warstwa proceduralna (odtworzone 2026-09-16, F-189)
+
+✅ [VER] RZĄD 1 2026-09-16 — odczyt treści `Dz.U. 2025 poz. 911`.
+Tabela kanoniczna: `shared/terminy.md`, sekcja „Postępowanie wykonawcze karne (KKW)".
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **7 dni** | skarga skazanego — od dnia, w którym **dowiedział się o zdarzeniu**; po terminie pozostawia się bez rozpoznania, chyba że uchybienie nastąpiło z przyczyn od skazanego niezależnych | art. 6 § 4 KKW |
+| **7 dni** | skarga na decyzję organu — od ogłoszenia lub doręczenia; wnoszona **do organu, który wydał decyzję** | art. 7 § 3 KKW |
+| **14 dni** | rozpoznanie zażalenia na postanowienie w przedmiocie warunkowego zwolnienia | art. 162 § 2 KKW |
+| **6 miesięcy / rok** | ⛔ **KARENCJA** po odmowie warunkowego zwolnienia (kara do 5 lat / ponad 5 lat) | art. 161 § 3–4 KKW |
+| **rok** | ⛔ **KARENCJA** na kolejną przerwę — od ukończenia poprzedniej i powrotu do ZK (wyjątki: choroba psychiczna, inna ciężka choroba, wypadek losowy) | art. 153 § 3 KKW |
+| **do roku / do 3 lat po urodzeniu dziecka** | odroczenie wykonania kary; dłuższy okres wobec kobiety ciężarnej i osoby samotnie sprawującej opiekę nad dzieckiem | art. 151 § 1 KKW |
+| **do roku / do 3 lat** | rozłożenie grzywny na raty (3 lata — wypadki szczególne, zwłaszcza znaczna grzywna) | art. 49 § 1–2 KKW |
+
+⛔ **Karencja to NIE termin zawity.** Wniosek złożony przed upływem okresu z art. 161
+§ 3–4 **nie przepada** — „nie rozpoznaje się go aż do upływu tego okresu".
+Wcześniejsze złożenie niczego nie traci i niczego nie przyspiesza.
+
+⛔ **Art. 152 KKW — uchylony.**
+
+⚠️ **Art. 6 § 2–3 KKW:** skazany ma obowiązek uzasadnić żądanie w stopniu
+umożliwiającym rozpoznanie i dołączyć dokumenty; organ może pozostawić pismo bez
+rozpoznania z czterech powodów (te same podstawy faktyczne, wyrazy wulgarne lub
+obelżywe albo gwara przestępców, brak uzasadnienia, oczywista bezzasadność).
+
+---
+
 ## ROZGRANICZENIE (sekcja 0)
 
 | Temat | Gdzie |

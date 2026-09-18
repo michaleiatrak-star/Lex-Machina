@@ -56,7 +56,7 @@ Postępowanie podatkowe (Op), terminy zawite i przedawnienie, korekta deklaracji
 ### TERMINY ZAWITE — ABSOLUTNY PRIORYTET
 
 ```
-Odwołanie od decyzji US/UCS:       14 dni od doręczenia (art. 223 §1 Op)
+Odwołanie od decyzji US/UCS:       14 dni od doręczenia (art. 223 § 2 Op; § 1 — tylko tryb: za pośrednictwem organu, który wydał decyzję)
 Skarga do WSA:                     30 dni od doręczenia decyzji org. odwoł. (art. 53 §1 PPSA)
 Skarga kasacyjna NSA:              30 dni od doręczenia wyroku WSA
 Korekta deklaracji:                zawieszona po wszczęciu postępowania/kontroli (art. 81b Op)
@@ -100,7 +100,11 @@ ZASADA: 5 lat od końca roku kalendarzowego, w którym upłynął termin płatno
 ZAWIESZENIE (termin nie biegnie) — art. 70 §6:
   → Wniesienie skargi do WSA
   → Wniesienie skargi kasacyjnej do NSA
-  → Inne przesłanki — weryfikuj aktualny art. 70 §6 w ISAP
+  → Wszczęcie postępowania w sprawie o przestępstwo/wykroczenie skarbowe,
+    o którym podatnik został zawiadomiony (art. 70 § 6 pkt 1 — ⛔ W MOCY,
+    ✅ [VER] RZĄD 1 2026-09-16, `Dz.U. 2026 poz. 622`; twierdzenie o jego
+    uchyleniu — patrz zastrzeżenie w sekcji 6)
+  → Inne przesłanki — art. 70 § 6 pkt 2–4 (odczyt treści przed użyciem)
 
 PRZERWANIE (termin biegnie od nowa) — art. 70 §4:
   → Zastosowanie środka egzekucyjnego o którym podatnik był zawiadomiony
@@ -380,7 +384,9 @@ INTERPRETACJA INDYWIDUALNA (art. 14b–14p Op):
   Milczenie organu: interpretacja pozytywna — niezgodna z wnioskiem wymaga uzasadnienia
   Skutek: wiąże organ wyłącznie gdy podatnik ZASTOSOWAŁ SIĘ DO NIEJ przed wydaniem
            decyzji przez organ
-  Zaskarżenie: skarga do WSA — TERMIN 14 DNI (art. 53 §3 PPSA — NIE 30 dni!) — ZAWITY
+  Zaskarżenie: skarga do WSA — **30 DNI** od doręczenia interpretacji (art. 53 § 1 PPSA, który obejmuje wprost akty z art. 3 § 2 pkt 4a — interpretacje indywidualne; od 26.06.2026 także opinie z art. 3 § 2 pkt 4b — `Dz.U. 2026 poz. 846`) — ✅ [VER] RZĄD 1 2026-09-16m
+  ⛔ KOREKTA: poprzednio „14 DNI (art. 53 § 3 PPSA — NIE 30 dni!)" — art. 53 § 3 to 6 miesięcy <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
+  dla prokuratora/RPO/RPD; Ordynacja nie przewiduje terminu szczególnego
   Baza: podatki.gov.pl/eureka (EUREKA — od 04.10.2021) + interpretacje.podatki.gov.pl
 
 INTERPRETACJA OGÓLNA (art. 14a Op):
@@ -438,6 +444,23 @@ tysięcy złotych." ⚠️ PRAKTYCZNA KONSEKWENCJA: NIE ZAKŁADAJ bezpiecznego
 dziś objąć transakcje o WIELE niższej wartości niż dawniej. Dokładna
 data zniesienia limitu NIE ZWERYFIKOWANA w tej sesji — sprawdź na
 ISAP przed cytowaniem konkretnej daty.
+
+⛔⛔ ZASTRZEŻENIE 2026-09-12i / odtworzone 2026-09-16 (F-189) — CZYTAJ PRZED
+PONIŻSZYM BLOKIEM. ✅ [VER] RZĄD 1 2026-09-16: odczyt treści `Dz.U. 2026 poz. 846`
+(ustawa z 29.05.2026, w życie 1.10.2026) — ustawa NIE zawiera żadnej zmiany
+w art. 70 Op, NIE zawiera słowa „ugoda" i NIE przewiduje terminu 7 lat.
+Art. 70 § 6 pkt 1 Op JEST W MOCY w t.j. `Dz.U. 2026 poz. 622`.
+Twierdzenia poniżej o „wydłużeniu przedawnienia do 7 lat", o „uchyleniu
+art. 70 § 6 pkt 1" i o „ugodzie podatkowej" traktuj jako OPIS ZAMIARU
+LEGISLACYJNEGO (projekt / druk), NIE jako stan prawa. Przed powołaniem —
+wskaż pozycję Dz.U. i datę wejścia w życie z odczytu treści; bez tego
+NIE używaj. Pozostałe nowelizacje Op po t.j.: poz. 825 (24.09.2026, art. 14i–14j),
+poz. 1154 (16.09.2026, wyłącznie art. 299 § 3 pkt 17), poz. 875 (1.01.2027,
+wyłącznie art. 67a § 3–15 — milczące umorzenie do kwoty minimalnego wynagrodzenia)
+i poz. 1098 (1.01.2027, OKI — art. 3b, 297–299c, 306; NIE art. 70). Pełny zakres:
+`shared/terminy.md`, sekcja Ordynacja (F-OP-2026-09 zamknięta 2026-09-16).
+⚠️ Od 1.10.2026 art. 213 § 5 (poz. 846): odmowa uzupełnienia/sprostowania decyzji
+— bez zażalenia; termin odwołania biegnie od doręczenia tego postanowienia.
 
 ⭐⭐ DODANE 2026-08-08 (na żądanie użytkownika, zamknięcie flagi F-17)
 — ⚡ NOWELIZACJA z 15.05.2026 (druk 2287, uchwalona jednogłośnie
@@ -791,7 +814,7 @@ Organ podatkowy może wydać decyzję o zabezpieczeniu przed wydaniem decyzji us
 ## 12. ORZECZNICTWO
 
 ```
-web_search: "Ordynacja podatkowa Op Dz.U. 2025 poz. 111 isap.sejm.gov.pl"
+web_search: "Ordynacja podatkowa Op Dz.U. 2026 poz. 622 isap.sejm.gov.pl"
 web_search: "GAAR art 119a Op NSA orzecznictwo przesłanki sztuczność 2025 2026"
 web_search: "odpowiedzialność zarządu art 116 Op NSA termin upadłości 2025"
 web_search: "przedawnienie podatek art 70 Op NSA przerwanie zawiadomienie TK SK 40/12"

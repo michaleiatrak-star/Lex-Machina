@@ -547,7 +547,7 @@ NARUSZENIE OCHRONY DANYCH (art. 4 pkt 12 RODO):
   "Naruszenie bezpieczeństwa prowadzące do przypadkowego lub niezgodnego
   z prawem zniszczenia, utracenia, zmodyfikowania, nieuprawnionego ujawnienia
   lub nieuprawnionego dostępu do danych osobowych."
-  Obowiązek zgłoszenia: 72 godziny do UODO (art. 33 RODO)
+  Obowiązek zgłoszenia: bez zbędnej zwłoki, w miarę możliwości do 72 godzin po STWIERDZENIU naruszenia (art. 33 ust. 1 RODO; brak obowiązku przy mało prawdopodobnym ryzyku) — ✅ RZĄD 1 2026-09-17q
 
 Reguła ORKA-REG-04 (ocena ad casum): każde przetwarzanie oceniać
 indywidualnie; "zbieranie, utrwalanie, organizowanie" — lista jest

@@ -21,7 +21,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 |---|---|---|---|
 | Numer/status/tekst jednolity ustawy, Dz.U./M.P. | MCP server dla Sejm ELI API (Dziennik Ustaw + Monitor Polski) | api.sejm.gov.pl (ELI) | MIT (typowo) |
 | Orzecznictwo sądów powszechnych (SO/SA/SN — szeroka baza) | MCP server dla SAOS | orzeczenia.ms.gov.pl / SAOS | MIT (typowo) |
-| Orzecznictwo NSA + 16 WSA (administracyjne, podatkowe, RODO) | MCP server dla CBOSA | orzeczenia.nsa.gov.pl (CBOSA) | MIT (typowo) |
+| Orzecznictwo NSA + 16 WSA (administracyjne, podatkowe, RODO) | MCP server dla CBOSA **MCP-FIRST**; bez MCP: natywny direct HTML adapter Lex Machina | orzeczenia.nsa.gov.pl (CBOSA, RZĄD 2A) | MIT dla zewnętrznego MCP; adapter LM = część repo |
 | Orzecznictwo KIO (zamówienia publiczne) | MCP server dla bazy KIO | orzeczenia.uzp.gov.pl | Apache-2.0 (typowo) |
 | Prawo UE (rozporządzenia/dyrektywy/CELEX/orzeczenia TSUE) | MCP server dla CELLAR/EUR-Lex | eur-lex.europa.eu | MIT (typowo) |
 | Status podmiotu (spółka/organ) — używane przez PODMIOT-GATE routera | MCP server dla KRS | KRS (dane rejestrowe) | MIT (typowo) |
@@ -67,7 +67,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 |---|---|---|
 | `PRAWO-HARDGATE` REGUŁA AKTUALNOŚCI (łańcuch t.j.) | `mcp-isap` / `pl-law-mcp` / `sejm-mcp` | `web_fetch` na `/eli/acts/.../references` |
 | `PRAWO-HARDGATE` brzmienie jednostki | `legal-cite-pl` / `law-scrapper-mcp` | ręczne cięcie PDF-a t.j. |
-| `SYGNATURY` V-SYG-1…4, kontrakt FOUND/NOT_FOUND/AMBIGUOUS | `mcp-saos` / `mcp-nsa` | portale pojedynczych sądów przy awarii SAOS (F-171) |
+| `SYGNATURY` V-SYG-1…4, kontrakt FOUND/NOT_FOUND/AMBIGUOUS | `mcp-saos` / `mcp-nsa`; dla NSA/WSA bez MCP → V-SYG-0.7 DIRECT-CBOSA | SAOS/API lub ręczne HTML; direct CBOSA nie wymaga zewnętrznego MCP |
 | KROK 0D / `PRE-W2` status podmiotu ⬛ | `mcp-krs` | `api-krs.ms.gov.pl` przez kanał kodu |
 | UP-5 ścieżka międzynarodowa | `mcp-eu-sparql` | `web_fetch` na EUR-Lex |
 
@@ -130,14 +130,16 @@ nich odwołują).
 | KRS (`ekrs.ms.gov.pl` / `prs.ms.gov.pl`) | 4 | ✅ **TAK** | Otwarte API KRS (`api-krs.ms.gov.pl`, RESTful, JSON) od 2022, na podstawie ustawy o otwartych danych — bez logowania. Osobne "Full API" (dane wrażliwe) wymaga decyzji ministra, nieistotne dla weryfikacji prawnej |
 | NBP (`nbp.pl`) | 3 | ✅ **TAK** | `api.nbp.pl` — kursy walut i złota, JSON/XML, bez autoryzacji, od 1.08.2025 wyłącznie HTTPS |
 | CEIDG / biznes.gov.pl | 3 | ✅ **TAK** (z kluczem) | Hurtownia Danych CEIDG i Biznes.gov.pl, API v2, dokumentacja publiczna, wymaga bezpłatnego wniosku o klucz API (`dane.biznes.gov.pl`) |
-| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ **NIE** | Potwierdzone już wcześniej w `orzeczenia-sadowe-v2/SKILL.md` — tylko formularz HTML, captcha po serii zapytań |
+| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `shared/SYGNATURY.md` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
 
 **Wniosek końcowy (research zamknięty 2026-07-13k):** 5 źródeł z potwierdzonym
 publicznym API bez konektora przed tą sesją (EUR-Lex, KRS, NBP, SUDOP, CEIDG)
 — **wszystkie 5 mają teraz serwery referencyjne** (patrz tabela niżej). 5
-źródeł potwierdzone BEZ API (interpretacje podatkowe/EUREKA, KIO, KNF, CBOSA,
-i częściowo ZUS) — dla nich jedyną drogą pozostaje web_fetch/web_search na
-stronie HTML, dokładnie jak już robią odpowiednie skille DR. Żadne inne
+źródeł potwierdzone BEZ publicznego REST API (interpretacje podatkowe/EUREKA,
+KIO, KNF, CBOSA i częściowo ZUS). **Brak REST API nie oznacza automatycznie
+web_search-only**: CBOSA ma od 2026-09-14 kanoniczny direct HTML adapter
+Lex Machina, który odtwarza formularz i czyta `/doc/{ID}`. Dla pozostałych
+źródeł nadal obowiązuje ich indywidualny kontrakt dostępu. Żadne inne
 źródło z pełnej listy 50 domen nie zostało zbadane poza tymi dziewięcioma
 najczęściej używanymi — to świadome ograniczenie zakresu, nie twierdzenie o
 kompletności.

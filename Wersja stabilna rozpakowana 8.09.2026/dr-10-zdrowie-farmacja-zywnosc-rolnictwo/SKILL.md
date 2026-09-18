@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.39"
+version: "3.46"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 ---
 
@@ -119,10 +119,10 @@ FARMACJA:
                2026-06-14: usunięto zduplikowaną CZĘŚĆ IX, wydzielono VI-VIII)
   [✓] NOWY  mod-PrFarm-refundacja-nadzor-sankcje
               (wydzielony 2026-06-14 z mod-PrFarm-szczegolowy >400 linii:
-               refundacja leków Dz.U. 2025 poz. 907, nadzór GIF/WIF i tryb
+               refundacja leków Dz.U. 2026 poz. 253 t.j. (VER RZĄD 1 2026-09-10h), nadzór GIF/WIF i tryb
                odwoławczy, sankcje karne i kary pieniężne art. 124-129/127 PF)
   [✓] OK    mod-wyroby-medyczne
-              (ustawa o wyrobach medycznych Dz.U. 2022 poz. 974, MDR 2017/745,
+              (ustawa o wyrobach medycznych t.j. Dz.U. 2024 poz. 1620 — akt pierwotny 2022/974, MDR 2017/745,
                IVDR 2017/746, EUDAMED — odrębna regulacja od Prawa farmaceutycznego;
                wydzielony 2026-06-12 z mod-PrFarm CZĘŚĆ IX; scalony 2026-06-14
                z mod-ustawa-wyroby-medyczne — NOTA-7, duplikat usunięty)

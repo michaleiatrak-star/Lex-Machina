@@ -1,7 +1,7 @@
 ---
 name: audyt-systemu-v4
 description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości."
-version: "6.55"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.119"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -48,12 +48,26 @@ references:
   - references/WARN-OTWARTE.md   # rejestr żywy TYLKO otwartych flag (WARN + strukturalne) — dodane 2026-07-07, ZASADA 10; ⚡ od 2026-08-15w zaczyna się TABLICĄ STERUJĄCĄ (indeks wszystkich flag + następny krok w jednym zdaniu) — czytaj ją PIERWSZĄ przy pytaniu „co jest do zrobienia"
   - references/SPROSTOWANIE-LM-2026-08-23.md   # dokument do wysłania autorowi raportów TEST1-3 — realizacja F-116 część 3/3, bez treści proceduralnej systemu — dodane 2026-08-23f
   - references/CHECKLIST-DEDUP.md   # mapa pojęć → lokalizacje (5 not, NOTA-6 ORPHAN dodana 06-14g)
-  - references/mapa_dzu_2026-09-09.md   # ⭐ AKTUALNA mapa Dz.U.; generacja F-172 — 11 numerów z T11
+  - references/mapa_dzu_2026-09-10.md      # ⭐ GENERACJA BIEŻĄCA (F-148a) — +5 pozycji, w tym trzy
+                                          # wchodzące jako skutek DWÓCH błędów podmiany aktu
+                                          # (2024/1474 i 2024/1194); KROK 2C dla 2026/815
+  - references/mapa_dzu_2026-09-09.md   # generacja POPRZEDNIA (F-172) — 11 numerów z T11
                                         # zweryfikowanych w RZĘDZIE 1 (ELI), 10 wierszy dodanych, 1 do MONITORING,
                                         # 3 wiersze przestawione na PREV po ujawnieniu nowszych t.j.
   - references/mapa_dzu_2026-08-28.md   # POPRZEDNIA generacja; ponowny audyt F-108, korekty tożsamości i statusów t.j.
   - references/mapa_dzu_2026-08-26.md   # POPRZEDNIA generacja — zachowana historycznie
   - references/mapa_dzu_2026-07-15.md   # POPRZEDNIA generacja (sync 2026-08-13) — zachowana jako materiał historyczny
+  - references/PRZETERMINOWANE-TJ-2026-09-10.md # LISTA ROBOCZA F-181: 29 wygasłych tekstów jednolitych
+                                          # deklarowanych w nagłówkach modułów jako aktualne, w 35 miejscach
+                                          # i 11 skillach. ⛔ Żadna pozycja nie naprawiona — to wynik pomiaru,
+                                          # nie naprawa. Kolumna „aktualny t.j." wymaga ponownego odczytu
+                                          # przed wpisaniem
+  - references/ALIASY-NAZW-AKTOW.md       # rozstrzygnięcia człowieka: nazwa robocza aktu w rejestrze
+                                          # = ten sam akt co tytuł urzędowy w ELI. Kontrakt dla T15;
+                                          # NIE jest listą wyciszeń — wpis bez kolumny „Sprawdzone"
+                                          # jest nieważny (F-148a)
+  - references/SKRYPTY-RECZNE.md          # rejestr skryptów świadomie poza pełnym przebiegiem,
+                                          # z powodem i wskazaniem, kto je uruchamia. Kontrakt dla T23
   - references/PROTOKOL-WYKONAWCZY-F113.md   # warstwa OPERACYJNA protokołu F-113 (F-176, 2026-09-10):
                                           # budowa ramienia kontrolnego, plan minimum 20 przebiegów,
                                           # karta przebiegu, łańcuch wykonania
@@ -85,7 +99,40 @@ references:
                                           # zawiera opis pułapki parsowania (mapa trzyma numer w DWÓCH formatach:
                                           # prozą `poz. N` i w kolumnach tabeli) — dodane 2026-08-21
   - references/raporty-pokrycia-2026-08-13/   # 12 raportów + indeks = 13 plików; licznik potwierdzony ze stanem dysku 2026-08-26
+  - references/F-187-dostep-maszynowy-pomiar-2026-09-13d.md   # pomiar kanałów maszynowych F-187…F-192
+                                          # (sesja 2026-09-13d; adnotacja 2026-09-14: pomiar
+                                          # historyczny) — REJESTROWANE 2026-09-16 (T22, plik-sierota)
 scripts:
+  - scripts/check_wartosci_prawne.py      # T28 — wartości i cytaty (W1 rejestr znanych błędnych cytatów,
+                                          # W2 procent przy odsetkach, W3 kwota bez podstawy). Offline.
+                                          # W orkiestratorze od 2026-09-16 (F-189) — wcześniej SKRYPTY-RECZNE
+                                          # deklarował „wchodzi do orkiestratora", a orkiestrator go nie wołał
+  - scripts/check_oplaty_mapa.py          # T29 — integralność podziału TABELE-OPLAT (rdzeń + satelity).
+                                          # Offline; w orkiestratorze od 2026-09-16 (F-189)
+  - scripts/check_utrata_tresci.py        # T30 — utrata treści BEZ cofnięcia numeru (F-189): tabele
+                                          # „było → jest" z AUDIT-JOURNAL vs dysk + kolizje numerów wersji
+                                          # (deklaracja „LUKA JAWNA"/„KOLIZJA" w CHANGELOG honorowana).
+                                          # Offline, selftest 5/5; w orkiestratorze jako BLOKER od 2026-09-16c
+  - scripts/check_wydanie.py              # T33 — zgodność wydanych paczek (.zip) z drzewem: liczba plików,
+                                          # bajtowa identyczność, sumy WEWNĄTRZ paczki. Realizacja zalecenia
+                                          # z AUDYT-2026-09-17p (zmiana kopii roboczej PO wydaniu).
+                                          # Offline, selftest 4/4; brak katalogu wydań = PASS (pomija)
+  - scripts/check_tabele_satelickie.py    # T32 — rejestr tabel satelickich (shared/TABELE-OPLAT.md §7):
+                                          # plik musi istnieć (FAIL), kwota bez podstawy w wierszu, kolumnie
+                                          # albo nagłówku/zdaniu wprowadzającym = WARN. Offline, selftest 9/9;
+                                          # w orkiestratorze od 2026-09-16e (O-11(b))
+  - scripts/check_podmiana_aktu.py        # T31 — podmiana aktu w ROUTING-MAP i MAPA-AKTOW niezależnie od
+                                          # oznaczenia „t.j." (T15 porównuje tytuły tylko przy t.j.).
+                                          # WYMAGA SIECI (ELI), selftest 3/3; ręczny. Dodany 2026-09-16d
+  - scripts/check_widmowe_pokrycie.py     # T5 — widmowe pokrycie: KANDYDACI do przeglądu ręcznego (wiersz
+                                          # ROUTING-MAP → moduł bez numeru i bez nazwy aktu). Offline, selftest 4/4.
+                                          # Ręczny (wynik wymaga osądu) — SKRYPTY-RECZNE. Dodany 2026-09-16b
+  - scripts/weryfikator_sygnatur.py       # V-SYG-0 — kontrola istnienia sygnatury w kanale maszynowym
+                                          # (shared/SYGNATURY.md, DOSTEP-MASZYNOWY-API.md). WYMAGA SIECI —
+                                          # narzędzie wykonawcze, nie test; poza orkiestratorem (SKRYPTY-RECZNE)
+  - scripts/test_pokrycie_orkiestratora.py # T23 — każdy zarejestrowany skrypt testowy MUSI być albo
+                                          # wywoływany przez orkiestrator, albo jawnie zadeklarowany
+                                          # jako ręczny w references/SKRYPTY-RECZNE.md z powodem (O-4)
   - scripts/test_module_registration.py   # T1 — rejestracja modułów (KRYTYCZNY)
   - scripts/test_module_count.py          # T2 — zgodność liczników (WYSOKI)
   - scripts/test_cross_map_dzu.py         # T3 — spójność Dz.U. między mapami (KRYTYCZNY, heurystyka→WARN)
@@ -132,6 +179,11 @@ scripts:
   - scripts/sync_dzu_eli.py               # pobiera z Sejm ELI API nowe pozycje Dz.U./M.P., produkuje raport różnic — patrz SYNC-DZU-AUTOMATYCZNY.md — REJESTROWANE 2026-08-15
   - scripts/audit_tj_inventory.py         # T15 — sprawdza wszystkie operacyjne deklaracje t.j. względem rocznych indeksów Sejm ELI; tryby maps/operational/all; błąd API = exit 2, dodane 2026-08-26
   - scripts/audit_amendment_scope.py      # T16 — pełny inwentarz dyspozycji nowelizacji i propagacja każdej zmienionej jednostki przez cały korpus; bez ścieżek hosta
+  - scripts/check_status_podstaw.py       # T27 — czy numer Dz.U. podany W PROZIE jako aktualna
+                                          # podstawa prawna opisuje akt obowiązujący (O-9, F-181).
+                                          # ⛔ WYMAGA SIECI. ⛔ Raportuje „DO PRZEGLĄDU", nie FAIL:
+                                          # heurystyka tego badania dwukrotnie zawyżyła wynik,
+                                          # a wygasły numer w kontekście historycznym NIE jest błędem
   - scripts/check_wyjatek_gate_eli.py     # T20 — trzy z czterech zamiatań bramki WYJ-GATE (F-144):
                                           # S1 sąsiedztwo (art. X¹ to osobna jednostka), S2 krawędzie
                                           # jednostki (klauzule zakresowe), S3 rejestr odesłań ELI
@@ -1295,7 +1347,8 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
     ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
     ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
     ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
-    ├── mapa_dzu_2026-09-09.md                  ← mapa Dz.U. AKTUALNA (F-172)
+    ├── mapa_dzu_2026-09-10.md                  ← mapa Dz.U. AKTUALNA (F-148a)
+    ├── mapa_dzu_2026-09-09.md                  ← generacja poprzednia (F-172)
     ├── mapa_dzu_2026-08-28.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-08-26.md                  ← POPRZEDNIA generacja
     ├── mapa_dzu_2026-07-15 / 07-04 / 07-02 / 06-14.md  ← POPRZEDNIE generacje, cytowane w dzienniku
@@ -1304,7 +1357,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.55 | Ostatnia aktualizacja: 2026-09-10b (F-179 ZAMKNIĘTA — korekta FAŁSZYWEJ PRZESŁANKI profilu LEKKIEGO: pomiar „219 kB ścieżki obowiązkowej” sumował zasoby ładowane leniwie; koszt stały systemu to ≈5,9 kB, rdzeń ≈100 kB, korzyść profilu jest AUDYTOWA, nie wydajnościowa; klasa błędu jak F-164, czwarte wystąpienie. O-7 ZAMKNIĘTA — `.github/workflows/regresja.yml`, zestaw regresyjny jako bramka wydania. README: twardy próg minimalnego modelu. Poprzednio: 2026-09-10 (F-175/F-176/F-177/F-178))*
+*Wersja: 6.119 | Ostatnia aktualizacja: 2026-09-17u (⭐⭐ F-135 zamknięta — Cellar; wcześniej 2026-09-17t: F-113 — ramię kontrolne; wcześniej 2026-09-17s: pomiar kanałów: SAOS wrócił; wcześniej 2026-09-17r: T33 — kontrola po wydaniu; wcześniej 2026-09-17q: ⭐ EUR-Lex odblokowany, RODO; wcześniej 2026-09-17p: domknięcie pozycji 17o; niewyjaśniona zmiana kopii roboczej; wcześniej 2026-09-17o: F-135 — prawo pracy, ustawy szczególne; wcześniej 2026-09-17n: F-135 — sprawy rodzinne; wcześniej 2026-09-16m: F-135 — KPA/PPSA; wcześniej 2026-09-16l: F-135 — u.o.d.o.; wcześniej 2026-09-16k: F-135 — KSC/NIS2; wcześniej 2026-09-16j: F-135 — PZP; wcześniej 2026-09-16i: T15 — t.j. ogłoszony w dniu audytu; wcześniej 2026-09-16h: F-135 — postępowanie spadkowe; wcześniej 2026-09-16g: F-135 — terminy KKS; wcześniej 2026-09-16f: F-135 — terminy KC; wcześniej 2026-09-16e: T32, T27 ZASTĄPIONY_TJ — O-11 zamknięta; wcześniej 2026-09-16d: T31 — podmiany aktu, O-11(d); 2026-09-16c: T30 — utrata treści, F-190 zamknięta; 2026-09-16b: T5 skrypt kandydatów, F-190, F-OP-2026-09 zamknięta; wcześniej 2026-09-16: F-189 — regresje dyskowe w 10 skillach, T12/T22/T28/T29. Poprzednio: 2026-09-14 (CBOSA snapshot/retrieval: host post-check, exact-match, provenance≠status; 10/10 prób metryka+sentencja. Poprzednio: 2026-09-14 (CBOSA: direct adapter spięty z RZĄD 2A/shared; F-183a zawężona do live-probe środowiska docelowego; 22/22 regresje adaptera. Poprzednio: 2026-09-13b (weryfikacja luk PPWR/EUDR: polska ustawa opakowaniowa NIE dostosowana do PPWR, który stosuje się od 12.08.2026; trzy luki, trzy różne wyniki, każdy zapisany z zakresem. Poprzednio: 2026-09-13 (PPWR i EUDR — dwa rozporządzenia UE bezpośrednio stosowane, nieobecne w systemie; EUDR jako podręcznikowy przypadek O-12: ten sam CELEX, ten sam status, data stosowania przesunięta o dwa lata. Poprzednio: 2026-09-12r (T13 — ta sama ślepa plamka drugi raz: satelity z podziału 12q wypadły poza zakres testu; zakres naprawiony rekurencyjnie + dodany selftest 5/5, którego T13 nie miał od powstania. Poprzednio: 2026-09-12q (podział TABELE-OPLAT na rdzeń 159 linii i siedem satelitów; nowy test T29 jako WARUNEK dopuszczalności podziału. Poprzednio: 2026-09-12p (T13 miał ślepą plamkę — mierzył tylko modules/mod-*.md, więc shared/TABELE-OPLAT.md urósł do 1472 linii poza zasięgiem testu; nowa kategoria raportowana + spisy treści zamiast podziału. Poprzednio: 2026-09-12o (KC — art. 118 zd. 2 i trzy pułapki art. 442¹; roszczenie posesoryjne WYGASA, nie przedawnia się. Poprzednio: 2026-09-12n (KP — granice dla pracodawcy z art. 52 § 2 i 109 § 1 mieszane z terminami pracownika; milcząca zgoda z art. 112 § 1 zd. 3. Poprzednio: 2026-09-12m (KSH — cztery reżimy zaskarżania uchwał zamiast jednego; RODZINA TERMINY ZAMKNIĘTA co do reżimów: 11 kodeksów, terminy.md 88 → 489 linii. Poprzednio: 2026-09-12l (upadłość — zły adresat zgłoszenia i zły skutek spóźnienia; trzecia kotwica wartości: przeciętne wynagrodzenie w sektorze przedsiębiorstw. Poprzednio: 2026-09-12k (KRO — termin prekluzyjny dziecka zawyżony trzykrotnie; wszystkie terminy biegną od dowiedzenia się, nie od urodzenia. Poprzednio: 2026-09-12j (KKW — moduł na 772 linie bez jednego terminu; karencja jako osobna konstrukcja od terminu zawitego; otwarta flaga F-OP-2026-09 dla pięciu nowelizacji Ordynacji w kolejce. Poprzednio: 2026-09-12i (Ordynacja podatkowa — pięć nowelizacji ogłoszonych po t.j., trzy wchodzą w ciągu trzech tygodni; twierdzenie o uchyleniu art. 70 § 6 pkt 1 niepotwierdzone. Poprzednio: 2026-09-12h (UPEA — termin zarzutu „7 dni od TW" nie istnieje; katalog podstaw sprzed nowelizacji; pierwszy udokumentowany przypadek, w którym RZĄD 2B potwierdził nieprawdę. Poprzednio: 2026-09-12g (terminy KPA i PPSA — dwa reżimy miały po jednym wierszu; obsadzone z odczytu treści. Poprzednio: 2026-09-12f (O-12 — wdrożony T28: kontrola wartości i cytatów, nie aktów; pierwszy przebieg znalazł 8 usterek, których ręczny przegląd nie znalazł; otwarta MON-4. Poprzednio: 2026-09-12e (O-11 ZAMKNIĘTA — trzecia rodzina wartości: odsetki, składki, skala PIT; doktryna „formuła zamiast procentu"; otwarta O-12: kontrola aktualności aktu nie jest kontrolą aktualności wartości. Poprzednio: 2026-09-12d (O-11 — rodzina TERMINY: uchylony art. 503 KPC w pliku kanonicznym, termin zarzutów od nakazu to MIESIĄC z art. 480² § 2 pkt 3, szóste wystąpienie nieistniejącej jednostki „art. 328¹ KPC". Poprzednio: 2026-09-12c (O-11 — domknięcie rodzin opłat poza KSCU: komornicze, skarbowe, notarialne, wieczystoksięgowe, KIO, koszty procesu karnego; wykryta nowa klasa ryzyka — wartość zmieniona przez rozporządzenie UCHYLAJĄCE poprzednie, poza zasięgiem KROK 2C. Poprzednio: 2026-09-12 (O-11 — pomiar rodziny „opłaty sądowe": 4 tabele satelickie naprawione, TABELE-OPLAT 1.5 z rozwodem, pracą, sprawami karnymi, wpisem WSA, zwrotem opłaty z art. 79 i wyłączeniem zwolnień z art. 104a; nowy rejestr tabel satelickich. Poprzednio: 2026-09-10x (O-11 — POWIĄZANIE tabeli opłat z systemem. Dotąd `TABELE-OPLAT` znały tylko dwa moduły; teraz: `required_modules` routera, warstwa odroczona PROFIL-LEKKI z wyzwalaczem „zamierzasz podać kwotę", nowa pozycja **KWOTA-GATE** w SELF-CHECK (trzy pytania przy każdej kwocie) oraz cztery dalsze skille — dr-12 (kanoniczny moduł KSCU), pisma-proste-v2, pisma-procesowe-v3, analiza-sadowa-v6. Poprzednio: 2026-09-10w)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

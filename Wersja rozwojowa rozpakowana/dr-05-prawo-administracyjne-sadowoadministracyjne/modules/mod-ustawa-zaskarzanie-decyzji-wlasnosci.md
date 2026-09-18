@@ -16,7 +16,7 @@ paragrafu we wszystkich 8 wystąpieniach w tym pliku.
 ## 1. CORE
 
 ### Zakres
-Art. 156 §2 KPA — ograniczenie stwierdzenia nieważności decyzji dotyczących nieruchomości po 30 latach; ustawa reprywatyzacyjna (dekret warszawski — komisja ds. reprywatyzacji); odszkodowanie jako alternatywa po upływie terminu nieważności.
+Art. 156 § 2 KPA — nie stwierdza się nieważności z przyczyn wymienionych w § 1, jeżeli upłynęło 10 LAT od doręczenia lub ogłoszenia albo decyzja wywołała nieodwracalne skutki prawne; art. 158 § 3 KPA — po 30 LATACH od doręczenia/ogłoszenia decyzji z art. 156 § 2 nie wszczyna się postępowania (✅ [VER] RZĄD 1 2026-09-16m; ⛔ poprzednio „156 § 2 — nieruchomości po 30 latach" — obie reguły dotyczą wszystkich decyzji, nie tylko nieruchomości); ustawa reprywatyzacyjna (dekret warszawski — komisja ds. reprywatyzacji); odszkodowanie jako alternatywa po upływie terminu nieważności.
 
 ### Akty
 
@@ -74,8 +74,10 @@ Komisja ds. reprywatyzacji nieruchomości warszawskich:
 
 Dawni właściciele / następcy prawni:
   → Po 30 latach od decyzji wywłaszczeniowej: wyłącznie odszkodowanie
-  → Termin na odszkodowanie: 3 lata od stwierdzenia naruszenia prawa (art. 160 KPA
-    — stare) lub art. 4171 §2 KC — weryfikuj aktualną podstawę w orzecznictwie
+  → Odszkodowanie: art. 417¹ § 2 KC (szkoda wyrządzona decyzją — po stwierdzeniu jej
+    nieważności albo wydania z naruszeniem prawa); przedawnienie — art. 442¹ KC
+    ⛔ art. 160 KPA jest UCHYLONY (✅ [VER] RZĄD 1 2026-09-16m) — nie powołuj go jako podstawy ani terminu;
+    dla decyzji sprzed jego uchylenia — przepisy przejściowe, odczyt przy sprawie
 ```
 
 ---

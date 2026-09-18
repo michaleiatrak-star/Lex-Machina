@@ -210,7 +210,7 @@ PATRZ TEŻ: shared/definicje/DEF-PROCEDURA.md — rozróżnienie KATEGORII
   web_search: "nowelizacja Ordynacji podatkowej przedawnienie ugoda podatkowa
     2026 wejście w życie art 70"
 
-Weryfikacja: KC art. 118–125 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 118–125 (Dz.U. 2026 poz. 795 t.j.)
   Ustawa z 13.04.2018 r. (Dz.U. 2018 poz. 1104) — fundamentalna reforma
 
 REFORMA 2018 — KLUCZOWE ZMIANY:
@@ -249,7 +249,7 @@ UWAGA — KONSUMENT (art. 117¹ KC, od 2018):
 
 ### BAS-W33 — Kara umowna — zasady, miarkowanie, zbieg (art. 483–484 KC)
 ```
-Weryfikacja: KC art. 483–484 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 483–484 (Dz.U. 2026 poz. 795 t.j.)
 
 DEFINICJA (art. 483 §1 KC):
   "Można zastrzec w umowie, że naprawienie szkody wynikłej z niewykonania
@@ -286,7 +286,7 @@ REGUŁA: zawsze przy redagowaniu umowy wskazać: czy kara jest zaliczana na
 
 ### BAS-W34 — Odsetki ustawowe, kapitałowe, za opóźnienie — różnice (KC)
 ```
-Weryfikacja: KC art. 359, 481 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 359, 481 (Dz.U. 2026 poz. 795 t.j.)
   + obwieszczenie Ministra Sprawiedliwości ws. odsetek ustawowych
 
 TRZY RODZAJE ODSETEK — RÓŻNICE FUNDAMENTALNE:
@@ -330,8 +330,13 @@ NAKAZ ZAPŁATY W POSTĘPOWANIU UPOMINAWCZYM (art. 4971 KPC):
   Sąd wydaje bez rozprawy — tylko na podstawie pozwu
   Nakaz = tytuł egzekucyjny po uprawomocnieniu
 
-SPRZECIW OD NAKAZU (art. 503 KPC):
-  Termin: 2 TYGODNIE od doręczenia nakazu pozwanemu
+SPRZECIW OD NAKAZU UPOMINAWCZEGO (art. 505 § 1 KPC — dopuszczalność;
+art. 480[3] KPC — tryb; ⛔ art. 503 KPC UCHYLONY):
+  Termin: 2 TYGODNIE od doręczenia, gdy doręczenie w kraju
+          MIESIĄC, gdy doręczenie poza krajem na terytorium UE
+          (art. 480[2] § 2 pkt 1-2 KPC)
+  ⛔ ZARZUTY od nakazu NAKAZOWEGO: MIESIĄC przy doręczeniu na terytorium UE,
+          w tym w Polsce (art. 480[2] § 2 pkt 3 KPC)
   Charakter: TERMIN ZAWITY (wygaśnięcie prawa po upływie)
   Skutek sprzeciwu: nakaz traci moc w CAŁOŚCI (nawet gdy sprzeciw częściowy)
   → Sprawa toczy się dalej jako zwykłe postępowanie procesowe

@@ -722,11 +722,14 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
    wyszukiwania + 6 zgodnych źródeł Rząd 2: infor.pl, inforlex.pl,
    przepisy.gofin.pl, vademecumpodatnika.pl, platformaedukacyjna.eu,
    izbapodatkowa.pl). ⭐ USTALENIE DODATKOWE: rozporządzenie doczekało
-   się TEKSTU JEDNOLITEGO — Dz.U. 2021 poz. 999 z 2.06.2021, z
-   późniejszą zmianą Dz.U. 2020 poz. 289 — ⚠️ ten t.j. NIE był dotąd
-   przywoływany w module, rekomendacja: przy najbliższym audycie
-   Ordynacji/VAT rozważyć aktualizację odesłania z "Dz.U. 2015 poz.
-   2193" na "t.j. Dz.U. 2021 poz. 999" dla precyzji cytowania.
+   się TEKSTU JEDNOLITEGO — **t.j. Dz.U. 2021 poz. 999** (obwieszczenie
+   MFFiPR z 20.05.2021). ✅ [VER] RZĄD 1 2026-09-16e (ELI): `2021/999` —
+   obowiązujący; `2015/2193` — „akt posiada tekst jednolity"; `2020/289`
+   (rozporządzenie zmieniające z 20.02.2020) — „akt objęty tekstem
+   jednolitym", czyli zmiana WCZEŚNIEJSZA niż t.j. i w nim uwzględniona
+   (⛔ poprzedni zapis „późniejszą zmianą 2020 poz. 289" był chronologicznie
+   sprzeczny). **Cytuj: t.j. Dz.U. 2021 poz. 999.** Rekomendacja
+   zamknięta 2026-09-16e (O-11(c)).
 ⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
    rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
    źródle urzędowym]

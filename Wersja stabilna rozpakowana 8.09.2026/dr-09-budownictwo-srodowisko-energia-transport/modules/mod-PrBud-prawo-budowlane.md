@@ -244,8 +244,11 @@ NIE SĄ małą architekturą: wolnostojące reklamy, tymczasowe obiekty
    - Odwołanie od decyzji PINB (I inst.) → **14 dni** do WINB
    - Skarga do WSA → **30 dni** od decyzji WINB
 
-6. **PRZEDAWNIENIE roszczeń z umowy o roboty budowlane:** 3 lata (art. 118 KC — działalność
-   gospodarcza); rękojmia za wady fizyczne: 5 lat dla nieruchomości (art. 568 KC).
+6. **PRZEDAWNIENIE roszczeń z umowy o roboty budowlane:** 3 lata dla roszczeń związanych
+   z prowadzeniem działalności gospodarczej, w pozostałych — 6 lat; koniec terminu na ostatni
+   dzień roku kalendarzowego (art. 118 KC) — ⛔ roszczenie INWESTORA-KONSUMENTA nie jest
+   związane z jego działalnością gospodarczą; rękojmia za wady fizyczne: 5 lat dla
+   nieruchomości (art. 568 § 1 KC). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 
 ---
 

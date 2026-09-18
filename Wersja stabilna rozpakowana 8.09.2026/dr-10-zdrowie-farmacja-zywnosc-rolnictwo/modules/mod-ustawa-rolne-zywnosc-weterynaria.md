@@ -25,7 +25,7 @@ compatibility:
 | Rozp. 853/2004 | żywność pochodzenia zwierzęcego | rozporządzenie UE, stosowane bezpośrednio |
 | Ustawa o bezpieczeństwie żywności i żywienia | sanepid, produkcja, obrót | Dz.U. 2023 poz. 1448 t.j. — ⚠️ TREŚĆ SZCZEGÓŁOWA w dedykowanym module `mod-ustawa-bezpieczenstwo-zywnosci.md`, nie duplikuj tutaj |
 | Ustawa o jakości handlowej artykułów rolno-spożywczych | IJHARS | Dz.U. 2023 poz. 1980 t.j. (obwieszczenie 2.08.2023) |
-| Ustawa o Agencji Restrukturyzacji i Modernizacji Rolnictwa (ARiMR) | struktura, zadania, finansowanie agencji | Dz.U. 2025 poz. 1363 t.j. (obwieszczenie 26.09.2025) |
+| Ustawa o Agencji Restrukturyzacji i Modernizacji Rolnictwa (ARiMR) | struktura, zadania, finansowanie agencji | **Dz.U. 2026 poz. 942 t.j.** ✅ [VER] RZĄD 1 2026-09-10o (poprzednio 2025 poz. 1363 — wygaśnięcie aktu) t.j. (obwieszczenie 26.09.2025) |
 | Ustawa o Planie Strategicznym dla Wspólnej Polityki Rolnej na lata 2023-2027 (WPR/PROW) | dopłaty bezpośrednie, płatności obszarowe, interwencje EFRG/EFRROW, kontrole, zwroty | Dz.U. 2024 poz. 1741 t.j. (obwieszczenie 7.11.2024), zmieniona Dz.U. 2025 poz. 321 |
 
 ⚠️ **KOREKTA F-1 (2026-07-15):** poprzednia wersja tabeli nie zawierała żadnych

@@ -68,7 +68,7 @@ ręcznie — nie ma testu, który by tego pilnował.
 | **3 tygodnie** ⚠️ | Apelacja cywilna, gdy **przedłużono termin** do sporządzenia uzasadnienia; sąd zawiadamia o tym stronę, a przy błędnym pouczeniu apelację uważa się za wniesioną w terminie | **art. 369 § 1¹ KPC** |
 | **14 dni** | Apelacja karna | art. 445 §1 KPK |
 | **14 dni** | **Odwołanie od decyzji** administracyjnej — od doręczenia, a gdy decyzję ogłoszono ustnie — od ogłoszenia; ⚠️ przepisy szczególne mogą przewidywać inne terminy (§ 3) | **art. 129 § 2 KPA** |
-| **14 dni** | Sprzeciw od orzeczenia lekarza orzecznika ZUS do komisji lekarskiej — od **doręczenia** orzeczenia; wnoszony za pośrednictwem jednostki ZUS; po terminie komisja nie rozpatruje (przywrócenie — ust. 2c) | art. 14 ust. 2a–2c ustawy FUS (t.j. `Dz.U. 2025 poz. 1749`, ✅ RZĄD 1 2026-09-16f) |
+| **14 dni** | Sprzeciw od orzeczenia lekarza orzecznika ZUS do komisji lekarskiej — od **doręczenia** orzeczenia; wnoszony za pośrednictwem jednostki ZUS; po terminie komisja nie rozpatruje (przywrócenie — ust. 2c) | art. 14 ust. 2a–2c ustawy FUS (t.j. `Dz.U. 2025 poz. 1749`, ✅ RZĄD 1 2026-09-16f) — ⏳ **do 31.12.2026**; od **1.01.2027** art. 14 ust. 2a–6 FUS uchylone, sprzeciw — **art. 85f ustawy o systemie ubezpieczeń społecznych** (14 dni; ustawa `Dz.U. 2026 poz. 26`, art. 43 pkt 3 — ✅ RZĄD 1 2026-09-17o; korekta: odczyt 16f pominął KROK 2C) |
 | **14 dni** | Odstąpienie od umowy (internet/poza lokalem) | art. 27 ustawy PK |
 | **⚠ 21 dni** | Odwołanie od wypowiedzenia (§ 1); żądanie przywrócenia / odszkodowania po rozwiązaniu bez wypowiedzenia **lub wygaśnięciu** (§ 2); nawiązanie umowy — od doręczenia odmowy (§ 3) | **art. 264 § 1–3 KP** (korekta 2026-09-16f: dyscyplinarka to § 2, nie § 1) |
 | **30 dni** | **Skarga do WSA** na rozstrzygnięcie — od doręczenia skarżącemu | **art. 53 § 1 PPSA** |
@@ -170,6 +170,9 @@ ręcznie — nie ma testu, który by tego pilnował.
 | **7 dni** | wniosek o **przywrócenie terminu** — od ustania przyczyny uchybienia; ⛔ **równocześnie trzeba dopełnić czynności** (§ 2) | art. 58 § 2 KPA |
 | **1 miesiąc** | podanie o **wznowienie postępowania** — od dnia, w którym strona dowiedziała się o okoliczności stanowiącej podstawę wznowienia; przy podstawie z art. 145 § 1 pkt 4 — od dnia, w którym dowiedziała się o decyzji | art. 148 § 1 i § 2 KPA |
 | **14 dni** | wniosek o **ponowne rozpatrzenie sprawy** (decyzje ministra i SKO w I instancji) — stosuje się odpowiednio przepisy o odwołaniu | art. 127 § 3 KPA w zw. z art. 129 § 2 |
+| **10 lat** od doręczenia lub ogłoszenia | ⛔ nie stwierdza się **nieważności** decyzji z przyczyn z art. 156 § 1 (także gdy decyzja wywołała nieodwracalne skutki) — tylko stwierdzenie wydania z naruszeniem prawa (art. 158 § 2) | art. 156 § 2 KPA ✅ RZĄD 1 2026-09-16m |
+| **30 lat** od doręczenia lub ogłoszenia | ⛔ nie **wszczyna się** postępowania w sprawie stwierdzenia nieważności decyzji z art. 156 § 2 | art. 158 § 3 KPA |
+| **5 lat** od naruszenia (albo jego skutków) / od terminu wykonania | administracyjnej kary pieniężnej nie można **nałożyć** / nie podlega **egzekucji** (chyba że przepis odrębny przewiduje termin wszczęcia) | art. 189g § 1–3 KPA |
 
 ### Terminy dla ORGANU — inna kategoria, ta sama tabela
 
@@ -233,12 +236,16 @@ egzekucyjnego; wstrzymanie jest fakultatywne i z urzędu.
 
 | Termin | Czynność | Podstawa |
 |---|---|---|
-| **30 dni** | skarga do WSA — od doręczenia rozstrzygnięcia | art. 53 § 1 PPSA |
+| **30 dni** | skarga do WSA — od doręczenia rozstrzygnięcia **albo** interpretacji / opinii z art. 3 § 2 pkt 4a (⚡ od 26.06.2026 także pkt 4b — opinie z art. 119zzl Op, `Dz.U. 2026 poz. 846`); ⛔ interpretacja podatkowa — także 30 dni, nie „14" | art. 53 § 1 PPSA |
 | **30 dni** | skarga na **akt lub czynność** z art. 3 § 2 pkt 4, gdy ustawa nie przewiduje środków zaskarżenia — od dnia, w którym skarżący **dowiedział się** o akcie; ⚠️ sąd może uznać uchybienie za niezawinione i rozpoznać skargę | art. 53 § 2 PPSA |
 | ⭐ **w każdym czasie** | skarga na **inne akty**, gdy ustawa nie przewiduje środków zaskarżenia i nie stanowi inaczej | art. 53 § 2a PPSA |
 | ⭐ **w każdym czasie** | skarga na **bezczynność lub przewlekłość** — ⛔ **po wniesieniu ponaglenia** do organu | art. 53 § 2b PPSA |
 | **6 miesięcy** | skarga prokuratora, RPO albo RPD | art. 53 § 3 PPSA |
 | **14 dni** | **sprzeciw od decyzji** — od doręczenia skarżącemu decyzji | art. 64c § 1 PPSA |
+| **14 dni** / **14 dni** / **30 dni** | sprzeciw: organ przekazuje z aktami / organ może uwzględnić w całości / sąd rozpoznaje na posiedzeniu niejawnym | art. 64c § 4–5, art. 64d § 1 PPSA ✅ RZĄD 1 2026-09-16m |
+| **30 dni** (60 dni — konsul / MSZ w sprawach cudzoziemców) | organ przekazuje **skargę** z aktami i odpowiedzią; w tym czasie może ją uwzględnić w całości (autokontrola) | art. 54 § 2–3 PPSA |
+| **7 dni** | uzupełnienie braków **skargi kasacyjnej** (innych niż podstawy i ich uzasadnienie) — pod rygorem odrzucenia | art. 177a PPSA |
+| **7 dni** od doręczenia | **sprzeciw** od zarządzeń i postanowień referendarza z art. 258 § 2 pkt 6–8 (prawo pomocy); profesjonalny pełnomocnik — z uzasadnieniem | art. 259 § 1 PPSA |
 | **7 dni** | wniosek o **uzasadnienie wyroku** w sprawie, w której skargę **oddalono** — od ogłoszenia albo doręczenia odpisu sentencji | art. 141 § 2 PPSA |
 | **30 dni** | **skarga kasacyjna** do NSA — od doręczenia odpisu orzeczenia z uzasadnieniem | art. 177 § 1 PPSA |
 | **7 dni** | **zażalenie** do NSA — od doręczenia postanowienia | art. 194 § 2 PPSA |
@@ -669,6 +676,182 @@ sprawy.
 uprawnienia z rękojmi, jeżeli nie zbadał rzeczy i nie zawiadomił sprzedawcy —
 akt staranności, którego nie ma w obrocie konsumenckim.
 
+
+## Akty UE poza RODO — terminy (dodane 2026-09-17u, F-135)
+
+✅ [VER] RZĄD 1 2026-09-17u — **Cellar** (Urząd Publikacji UE), wersje polskie.
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **6 miesięcy** (data ważności wpisana w odpisie; w wyjątkowych, uzasadnionych przypadkach organ może wyznaczyć dłuższy) | ważność **poświadczonego odpisu europejskiego poświadczenia spadkowego**; po upływie — wniosek o przedłużenie albo nowy odpis | art. 70 ust. 3 rozp. (UE) nr 650/2012 |
+| **15 dni** od dowiedzenia się (natychmiast po ustaleniu związku przyczynowego) | zgłoszenie **poważnego incydentu** przez dostawcę systemu AI wysokiego ryzyka organowi nadzoru rynku | art. 73 ust. 1–2 AI Act (rozp. 2024/1689) |
+| **2 dni** | powszechne naruszenie albo poważny incydent z art. 3 pkt 49 lit. b | art. 73 ust. 3 AI Act |
+| **10 dni** | gdy nastąpiła **śmierć** osoby | art. 73 ust. 4 AI Act |
+
+⚠️ Dopuszczalne jest niepełne zgłoszenie wstępne, a następnie kompletne (art. 73 ust. 5 AI Act).
+
+## RODO — terminy (odczyt: EUR-Lex + Cellar) (dodane 2026-09-17q, F-135)
+
+✅ [VER] RZĄD 1 2026-09-17q — tekst skonsolidowany `02016R0679` (EUR-Lex, wersja 04.05.2016;
+sprostowania C1 i C2 uwzględnione). ⚡ **2026-09-17u:** art. 77–79 i 83 odczytane przez **Cellar** (Urząd Publikacji UE,
+`publications.europa.eu/resource/celex/32016R0679`, `Accept: application/xhtml+xml`) —
+cały akt w jednym pliku, bez limitu pobrania. Cała sekcja jest już RZĘDU 1.
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **72 godziny** po **stwierdzeniu** naruszenia (bez zbędnej zwłoki) | zgłoszenie naruszenia organowi nadzorczemu; ⛔ **brak obowiązku**, gdy mało prawdopodobne, by naruszenie skutkowało ryzykiem naruszenia praw lub wolności; po 72 h — z wyjaśnieniem opóźnienia | art. 33 ust. 1 RODO |
+| bez zbędnej zwłoki (bez terminu godzinowego) | podmiot przetwarzający → administrator; administrator → osoba, której dane dotyczą (przy wysokim ryzyku, z wyjątkami z ust. 3) | art. 33 ust. 2, art. 34 |
+| **miesiąc** od żądania; **+2 miesiące** przy skomplikowanym charakterze lub liczbie żądań (z informacją w pierwszym miesiącu) | odpowiedź na żądanie z art. 15–22; także przy odmowie działania | art. 12 ust. 3–4 RODO |
+| **miesiąc** od pozyskania danych (albo przy pierwszej komunikacji / pierwszym ujawnieniu) | obowiązek informacyjny, gdy danych nie zebrano od osoby | art. 14 ust. 3 RODO |
+| **8 tygodni** (+ **6 tygodni** przy złożonym charakterze; zawieszenie na czas uzupełnienia informacji) | pisemne zalecenie organu po uprzednich konsultacjach | art. 36 ust. 2 RODO |
+| **3 lata** / **5 lat** | maksymalny okres certyfikacji / akredytacji podmiotu certyfikującego | art. 42 ust. 7, art. 43 ust. 4 |
+| **3 miesiące** | organ nadzorczy nie rozpatrzył skargi **albo** nie poinformował o postępach lub efektach → środek ochrony prawnej przed sądem (sąd państwa siedziby organu) | art. 78 ust. 2–3 RODO ✅ RZĄD 1 2026-09-17u |
+| **10 mln EUR** albo **2 %** całkowitego rocznego światowego obrotu (kwota wyższa) | naruszenia obowiązków z art. 8, 11, 25–39, 42, 43 | art. 83 ust. 4 RODO ✅ RZĄD 1 2026-09-17u |
+| **20 mln EUR** albo **4 %** (kwota wyższa) | naruszenia zasad z art. 5–7, 9, praw osób z art. 12–22, przekazywania danych; ten sam pułap za nieprzestrzeganie nakazu organu (ust. 6) | art. 83 ust. 5–6 RODO |
+| — | przy kilku naruszeniach w tych samych lub powiązanych operacjach łączna kara **nie przekracza** pułapu za najpoważniejsze naruszenie | art. 83 ust. 3 RODO |
+
+## Ochrona danych osobowych — krajowa ustawa (u.o.d.o.) (dodane 2026-09-16l, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16l — t.j. `Dz.U. 2019 poz. 1781`; zmiany po t.j.: `2026/252` (art. 104),
+`2026/548` (art. 34 ust. 2a, od 23.07.2026), `2026/1003` (art. 59a, od 28.10.2026) — żadna
+nie dotyczy trybu ani terminów. KPA `2025/1691`, PPSA `2026/143`.
+⚠️ Terminy z samego RODO (72 h, miesiąc na odpowiedź, 3 miesiące z art. 78 ust. 2) — akt UE,
+**niezweryfikowany w RZĘDZIE 1** z tego środowiska (EUR-Lex niedostępny maszynowo).
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **14 dni** od wyznaczenia / zmiany / odwołania | zawiadomienie Prezesa UODO o inspektorze ochrony danych | art. 10 ust. 1, 4 u.o.d.o. |
+| **miesiąc** / **dwa miesiące** (sprawa szczególnie skomplikowana) od wszczęcia | załatwienie sprawy wszczętej skargą do Prezesa UODO | art. 35 § 3 KPA w zw. z art. 7 ust. 1 u.o.d.o. |
+| **30 dni** od doręczenia decyzji | ⛔ **skarga do sądu administracyjnego** — postępowanie **jednoinstancyjne**, bez odwołania | art. 7 ust. 2 u.o.d.o., art. 53 § 1 PPSA |
+| — | na postanowienia, na które KPA daje zażalenie — **skarga** do sądu administracyjnego | art. 7 ust. 3–4 u.o.d.o. |
+| do **3 miesięcy** | czas obowiązywania środka tymczasowego (art. 70) | art. 75 ust. 2 u.o.d.o. |
+| **7 dni** – **30 dni** od doręczenia zawiadomienia | przeprowadzenie czynności sprawdzających (po 30 dniach — ponowne zawiadomienie) | art. 24 ust. 3 u.o.d.o. |
+| **7 dni** od przedstawienia protokołu | podpisanie protokołu kontroli albo zastrzeżenia | art. 88 ust. 4 u.o.d.o. |
+| do **30 dni** od okazania upoważnienia | czas trwania kontroli | art. 89 ust. 1 u.o.d.o. |
+| **30 dni** od żądania | dane do wymiaru kary pieniężnej | art. 101a ust. 1 u.o.d.o. |
+| **14 dni** od upływu terminu na skargę albo od uprawomocnienia orzeczenia | zapłata administracyjnej kary pieniężnej | art. 105 ust. 1 u.o.d.o. |
+| do **100 000 zł** / do **10 000 zł** | kara dla jednostek sektora finansów publicznych (art. 9 pkt 1–12, 14 u.f.p., instytuty badawcze, NBP) / dla jednostek z art. 9 pkt 13 u.f.p. | art. 102 ust. 1–2 u.o.d.o. |
+
+⛔ **Art. 237 KPA nie jest podstawą terminu** rozpatrzenia skargi do Prezesa UODO (dotyczy skarg
+i wniosków z działu VIII KPA). ⛔ **„Art. 50 ust. 4 u.o.d.o." nie istnieje.**
+
+## Krajowy system cyberbezpieczeństwa (KSC, po wdrożeniu NIS2) — terminy (dodane 2026-09-16k, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16k — t.j. `Dz.U. 2026 poz. 20` + nowelizacja `Dz.U. 2026 poz. 252`
+(w życie **3.04.2026**; t.j. jej nie obejmuje — czytaj oba akty razem).
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **24 godziny** od wykrycia | **wczesne ostrzeżenie** o incydencie poważnym do CSIRT sektorowego | art. 11 ust. 1 pkt 4 KSC |
+| **72 godziny** od wykrycia | **zgłoszenie** incydentu poważnego | art. 11 ust. 1 pkt 4a KSC |
+| **24 godziny** od wykrycia | zgłoszenie incydentu poważnego przez **dostawcę usług zaufania** | art. 11 ust. 1a KSC |
+| **miesiąc** od zgłoszenia; przy trwającej obsłudze — miesiąc od jej **zakończenia** (wcześniej sprawozdanie z postępu) | sprawozdanie końcowe | art. 11 ust. 1 pkt 4c, art. 12b KSC |
+| do **3.10.2026** | byli operatorzy usług kluczowych — zgłaszanie według nowych art. 11–12b | art. 33 ust. 4 ustawy `2026/252` |
+| do **3.04.2027** | obowiązki z rozdziału 3 KSC dla podmiotów istniejących 3.04.2026 | art. 33 ust. 1 ustawy `2026/252` |
+| do **3.04.2028** | pierwszy audyt podmiotu kluczowego | art. 33 ust. 2 ustawy `2026/252` |
+| harmonogram z komunikatu ministra (poza Dz.U.) | wniosek o wpis do wykazu podmiotów kluczowych i ważnych | art. 33 ust. 3, art. 34 ust. 3 ustawy `2026/252` |
+
+⛔ **Terminy przejściowe stoją w ustawie zmieniającej, nie w KSC.** Powołanie „art. 16 KSC"
+dla terminu 3.04.2027 jest błędne (poprawione w `dr-11` 2026-09-16k).
+
+## Zamówienia publiczne (PZP) — środki ochrony prawnej (dodane 2026-09-16j, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16j — PZP t.j. `Dz.U. 2026 poz. 793` (ogłoszony 16.06.2026; obejmuje
+zmiany z 13.03.2026); KPC `2026/468`; KSCU `2025/1228`. KROK 2C: metryka `DU/2019/2019` —
+brak nowelizacji po t.j.
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **10 dni** (elektronicznie) / **15 dni** (inaczej) | odwołanie ≥ progi UE — od przekazania informacji o czynności | art. 515 ust. 1 pkt 1 PZP |
+| **5 dni** (elektronicznie) / **10 dni** (inaczej) | odwołanie < progi UE — jw. | art. 515 ust. 1 pkt 2 PZP |
+| **10 dni** / **5 dni** | odwołanie na treść ogłoszenia lub dokumentów zamówienia (≥ / < progi) | art. 515 ust. 2 PZP |
+| **10 dni** / **5 dni** od powzięcia wiadomości | pozostałe przypadki (≥ / < progi) | art. 515 ust. 3 PZP |
+| 15 / 30 dni; miesiąc; **6 miesięcy** od zawarcia umowy | brak ogłoszenia lub zawiadomienia — terminy maksymalne | art. 515 ust. 4 PZP |
+| **przed upływem** terminu na odwołanie | przekazanie odwołania (kopii) zamawiającemu; brak → odrzucenie | art. 514 ust. 2, art. 528 pkt 6 PZP |
+| do upływu terminu na odwołanie | **wpis** | art. 517 ust. 2 PZP |
+| **3 dni** od doręczenia wezwania | uzupełnienie braków / dowód wpisu / pełnomocnictwo — pod rygorem zwrotu | art. 518 ust. 1 PZP |
+| **3 dni** od otrzymania odwołania (kopii) | przystąpienie wykonawcy do postępowania odwoławczego | art. 525 ust. 1 PZP |
+| **15 dni** od doręczenia odwołania (instrukcyjny) | rozpoznanie odwołania przez Izbę | art. 544 ust. 1 PZP |
+| **14 dni** od doręczenia orzeczenia KIO | **skarga** do sądu zamówień publicznych (SO Warszawa), za pośrednictwem Prezesa KIO; nadanie pocztowe = wniesienie; opłata = **3× wpis** | art. 580 ust. 2 PZP, art. 34 ust. 1 KSCU |
+| **7 dni** od ustania przyczyny | przywrócenie terminu w postępowaniu skargowym | art. 585 ust. 2 PZP |
+| **2 miesiące** od doręczenia z uzasadnieniem; Prezes UZP — **6 miesięcy** od uprawomocnienia | skarga kasacyjna | art. 590 PZP, art. 398⁵ KPC |
+| min. **35 dni** (≥ 15 dni tylko po wstępnym ogłoszeniu lub przy pilnej potrzebie; −5 dni przy ofertach elektronicznych) | termin składania ofert — przetarg nieograniczony | art. 138 PZP |
+
+⛔ **Zakaz zawarcia umowy po odwołaniu (art. 577) to nie wstrzymanie postępowania.** Umowa
+zawarta wbrew zakazowi **podlega unieważnieniu**, jeżeli uniemożliwiło to KIO uwzględnienie
+odwołania (art. 457 ust. 1 pkt 2).
+⛔ **Równoważność nadania pocztowego PZP przewiduje dla SKARGI (art. 580 ust. 2), nie dla odwołania.**
+
+## Prawo pracy i ubezpieczeń — ustawy szczególne (dodane 2026-09-17o, F-135)
+
+✅ [VER] RZĄD 1 2026-09-17o — ustawa o zwolnieniach grupowych t.j. `Dz.U. 2026 poz. 1195`; ustawa
+o ochronie sygnalistów `Dz.U. 2024 poz. 928`; ustawa o zatrudnianiu pracowników tymczasowych t.j.
+`Dz.U. 2025 poz. 236`; FUS t.j. `2025/1749` + ustawa `2026/26` (etapami); KPC `2026/468`; KSCU `2025/1228`.
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **30 dni** (okres liczenia progu) | grupowe zwolnienie: ≥ 10 / ≥ 10 % / ≥ 30 pracowników u pracodawcy ≥ 20 | art. 1 ust. 1 u.z.g. |
+| do **20 dni** od zawiadomienia z art. 2 ust. 3 | porozumienie z zakładowymi organizacjami związkowymi | art. 3 ust. 1 u.z.g. |
+| nie wcześniej niż **30 dni** od zawiadomienia PUP (art. 4 ust. 1) albo od porozumienia / regulaminu | **rozwiązanie** stosunku pracy (wypowiedzenie — po zawiadomieniu) | art. 6 ust. 1–2 u.z.g. |
+| ≤ **15-krotność** minimalnego wynagrodzenia | limit odprawy (1 / 2 / 3 wynagrodzenia) | art. 8 ust. 1, 4 u.z.g. |
+| **rok** na zgłoszenie / **15 miesięcy** | pierwszeństwo ponownego zatrudnienia | art. 9 ust. 1–2 u.z.g. |
+| **14 dni** od zawiadomienia | sprzeciw zakładowej organizacji związkowej przy indywidualnym zwolnieniu pracownika chronionego | art. 10 ust. 2 u.z.g. |
+| **18 miesięcy** w okresie **36** kolejnych miesięcy | limit pracy tymczasowej u jednego pracodawcy użytkownika | art. 20 ustawy o pracownikach tymczasowych |
+| stan na **1 stycznia** albo **1 lipca** — ≥ 50 osób | obowiązek procedury zgłoszeń wewnętrznych | art. 23 ust. 1 ustawy o sygnalistach |
+| konsultacje **5–10 dni**; wejście w życie **7 dni** po podaniu do wiadomości | procedura zgłoszeń wewnętrznych | art. 24 ust. 4–5 |
+| **7 dni** / **3 miesiące** | potwierdzenie przyjęcia zgłoszenia wewnętrznego / informacja zwrotna | art. 25 ust. 1 pkt 5, 7 |
+| **7 dni**; **14 dni** (RPO); **14 / 30 dni** (organ niewłaściwy); **3**, wyjątkowo **6 miesięcy** | zgłoszenie zewnętrzne: potwierdzenie / przekazanie / informacja zwrotna | art. 37, 32 ust. 2, 34 ust. 1 pkt 4, 41 |
+| **miesiąc** od doręczenia decyzji | odwołanie od decyzji organu rentowego (do organu, który ją wydał); organ przekazuje do sądu w **30 dni** | art. 477⁹ § 1–2 KPC |
+| **30 dni** od wyjaśnienia ostatniej okoliczności | decyzja ZUS o prawie do świadczenia po raz pierwszy | art. 118 ust. 1 FUS |
+| **14 dni** — do 31.12.2026: art. 14 ust. 2a FUS; od **1.01.2027**: art. 85f SUS | sprzeciw od orzeczenia (lekarza orzecznika) | ustawa `2026/26`, art. 43 pkt 3 |
+| **14 dni** — od **13.04.2026** | sprzeciw od orzeczenia **pielęgniarki** (niezdolność do samodzielnej egzystencji) lub **fizjoterapeuty** (rehabilitacja w prewencji rentowej) — do 31.12.2026 odpowiednio przepisy o lekarzach orzecznikach | art. 85a ust. 2 SUS, art. 34 ustawy `2026/26` |
+| **2 tygodnie** (3 tygodnie przy przedłużonym uzasadnieniu) / **2 miesiące** | apelacja / skarga kasacyjna w sprawach pracy i ubezpieczeń (⛔ kasacja — nie „30 dni") | art. 369 § 1–1¹, art. 398⁵ § 1 KPC |
+| **30 zł** | opłata podstawowa od apelacji, zażalenia, kasacji w sprawach z zakresu ubezpieczeń społecznych (odwołanie — bez opłat) | art. 36 ust. 1, art. 14 ust. 3 KSCU |
+
+## Sprawy rodzinne — terminy KRO i KPC poza pochodzeniem dziecka (dodane 2026-09-17n, F-135)
+
+✅ [VER] RZĄD 1 2026-09-17n — KRO t.j. `Dz.U. 2026 poz. 236` (zmiana po t.j. — brak; ostatnia:
+`2025/897`, w życie 8.10.2025, art. 59–60); KPC `Dz.U. 2026 poz. 468` (nowelizacje po t.j. nie dotyczą
+działów rodzinnych).
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **5 dni** od zawarcia małżeństwa, bez dni ustawowo wolnych | duchowny przekazuje zaświadczenia do USC (małżeństwo wyznaniowe); nadanie polecone = przekazanie | art. 8 § 3 KRO |
+| **rok** od uprawomocnienia rozwodu | powrót do nazwiska sprzed małżeństwa — oświadczenie przed kierownikiem USC lub konsulem (⛔ nie „3 miesiące") | art. 59 KRO |
+| **5 lat** od orzeczenia rozwodu | wygaśnięcie alimentów, gdy zobowiązany **nie został uznany za winnego** (sąd może przedłużyć) | art. 60 § 3 KRO |
+| **3 miesiące** od oświadczenia mężczyzny | potwierdzenie ojcostwa przez matkę przy uznaniu | art. 73 § 1 KRO |
+| **3 miesiące** | rachunek końcowy opiekuna | art. 172 § 1 KRO |
+| po **3 miesiącach** / **rok** | podjęcie zawieszonego postępowania o rozwód lub separację na wniosek powoda / umorzenie przy braku wniosku | art. 428 § 2 KPC |
+| **6 miesięcy** od zawieszenia | zgłoszenie przez zstępnych zmarłego dziecka-powoda wniosku o podjęcie (inaczej umorzenie) | art. 456 KPC |
+| do **6 tygodni** (wyjątkowo do **3 miesięcy**) | obserwacja w zakładzie leczniczym w sprawie o ubezwłasnowolnienie | art. 554 § 1 KPC |
+| **24 godziny** od wysłuchania pracownika socjalnego | orzeczenie o umieszczeniu dziecka w pieczy zastępczej po odebraniu (ustawa o przeciwdziałaniu przemocy domowej) | art. 579¹ KPC |
+| **7 dni** od wpływu | wniosek o wyznaczenie reprezentanta dziecka (art. 99 KRO) | art. 583¹ § 1 KPC |
+| **tydzień** od doręczenia postanowienia | wniosek o zwolnienie od obowiązku objęcia opieki | art. 592 KPC |
+| **tydzień** od ogłoszenia lub doręczenia | sprzeciw wobec skierowania do mediacji (milczenie nie blokuje mediacji) | art. 183⁸ § 2 KPC |
+| do **3 miesięcy** | czas trwania mediacji (przedłużenie — zgodny wniosek lub ważne powody) | art. 183¹⁰ § 1 KPC |
+| **2 tygodnie** od uprawomocnienia | termin wydania dziecka w sprawie z konwencji haskiej z 1980 r. (nie dłuższy) | art. 598⁵ KPC |
+
+## Postępowanie spadkowe (KPC) — terminy (dodane 2026-09-16h, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16h — KPC `Dz.U. 2026 poz. 468`. KROK 2C: `2026/473` (art. 63¹–63²),
+`2026/830` (art. 4¹), `2026/1003` (dział IVfa), `2026/1046` (art. 47, 461, 477⁶ᵃ) — **nie dotykają
+art. 627–691**.
+
+| Termin | Czynność | Podstawa |
+|---|---|---|
+| **3 miesiące** od dnia wskazanego w ogłoszeniu | zgłoszenie i udowodnienie nabycia spadku po wezwaniu spadkobierców; inaczej ryzyko pominięcia | art. 673 pkt 4 KPC |
+| po **3 miesiącach** od ogłoszenia | rozprawa; brak zgłoszeń — stwierdzenie nabycia na rzecz ustalonych spadkobierców | art. 675–676 KPC |
+| ⛔ **rok** od uzyskania możności powołania podstawy | wniosek **uczestnika** poprzedniego postępowania o **zmianę** stwierdzenia nabycia — tylko na podstawie, której nie mógł powołać | art. 679 § 1 KPC |
+| nie wcześniej niż **rok** od śmierci kredytobiorcy | wniosek banku (odwrócony kredyt hipoteczny) o upoważnienie kuratora spadku | art. 668¹ KPC |
+| 6 miesięcy (KC) | oświadczenie o przyjęciu / odrzuceniu — przed notariuszem albo w sądzie rejonowym miejsca zamieszkania lub pobytu | art. 1015 KC, art. 640 § 1 KPC |
+
+⛔ **Dział spadku — prekluzja (art. 688 w zw. z art. 618 § 3 KPC):** po prawomocnym
+postanowieniu uczestnik nie może dochodzić roszczeń z art. 618 § 1 (w tym wzajemnych
+roszczeń z tytułu posiadania), **choćby ich nie zgłosił**. Termin „do końca działu" — nie
+kalendarzowy, ale zawity w skutkach.
+
+⛔ **Art. 679 § 1 ogranicza tylko UCZESTNIKA** poprzedniego postępowania. Osoba, która w nim
+nie uczestniczyła, może żądać zmiany bez rocznego terminu i bez warunku „nowej podstawy".
 
 ## Kodeks karny skarbowy (KKS) — terminy i progi (dodane 2026-09-16g, F-135)
 

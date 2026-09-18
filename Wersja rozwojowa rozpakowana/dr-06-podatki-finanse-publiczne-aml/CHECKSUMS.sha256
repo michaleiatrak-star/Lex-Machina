@@ -1,7 +1,7 @@
 14fe0d0f25951992273e1f6c06e869f436ce401ba016628ac84dc4c8076d8077  ./MAPA-AKTOW.md
 09b5b612b258f9798b1777158d3f8cd814a77081741ac9f99e80a9786b10ae4f  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-c2c642f79eff405f10590760282f0d82254a115697b937f65c580e4ff57da444  ./SKILL.md
+829ea4321c70a569de8d1763f70f510a17390d63e4f155fba6365b6c2ccbc482  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 efa42fab8d68971d910177ae2f44586577a709e468223218e5b1b63d44793534  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -10,7 +10,7 @@ f13c52a1ce1580ad256e1a52d22d4ad9aab31855fe32fe42feec0e132ff0d491  ./modules/mod-
 2cd6165d6754bb874fbdb2869e1b5cc130c572f22f014300bf2c74da9d8b0401  ./modules/mod-OP-czynnosci-sprawdzajace-dzial-V.md
 aaaaeb22acb2ae070f3ed720534bcc62dc2936c58e41f876a411f669cd7b2b31  ./modules/mod-OP-dzial-IV-rozdzial-11-dowody.md
 73dfb4695b8bf5ae90fb10327db0844bed796ae9eeb0ef900b807050b4ebe085  ./modules/mod-OP-kontrola-podatkowa-dzial-VI.md
-2e49e7c293fa3cde305d947aa670edfec00fd0a6c3c4d749db0bff0ca35c2af8  ./modules/mod-OP-ordynacja-podatkowa.md
+3bcb6fda9c2284cea88cc68c69fd22a4b876e4b691c87dfec52cd0de56450c23  ./modules/mod-OP-ordynacja-podatkowa.md
 d91f20260802ee9fc0570015cec5ef9d1c52e8f151f0608ca101e3a4db7f5ac1  ./modules/mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md
 b2b3d8a42cd730bd3e87962c8eb868fda81b3b7f9c84383e9d59f1a25f6cd944  ./modules/mod-OP-uzupelnienie-pokrycia-2026.md
 a0b1d9dd600318e946460b27456b3e06e21750515a8d7c9c3b54ca27228976ba  ./modules/mod-PIT-podatek-dochodowy-fizyczne.md
@@ -30,9 +30,9 @@ e721a713ca933094d4f11c215fcadc28dc14ede03601dacae0f9618de166dc8a  ./modules/mod-
 5919ac8e6ccac01f83d5a840deadfbc1275695102aefea528efb25b268193fa3  ./modules/mod-VAT-rejestracja-zaplata-metoda-kasowa-likwidacja.md
 021ce40b9df6627261b29b4a51a41e5844d1b9cb3076f51ac014b923441b7be7  ./modules/mod-VAT-sankcje-bony-odliczenia.md
 84261254489ecd20fcdf9b1537366e00af9e397baed2e80be51ee2c2741bd8ad  ./modules/mod-VAT-transakcje-fakturowanie.md
-25dbf0704b2cdb3c946316cd9bad67ed3b7221ea3979cc45abef669cf55e8d44  ./modules/mod-alkohol-tyton-regulacja-sprzedazy.md
+d8d9af41dc5a44b0a9967bd1b40b2df4ae26941ffc111f1dbd7490d9967d1b26  ./modules/mod-alkohol-tyton-regulacja-sprzedazy.md
 f44a65fa1435b93256f051f27fb4fedca0b3eb3f70e0f54a08f937e4c66ca0f0  ./modules/mod-clo-podroznych-limity-towary-zabronione.md
-91f0d599732e47b698020ce800317e8e205c14a9bde77facdcf6654fa7b601e8  ./modules/mod-interpretacje-definicje-podatkowe.md
+e6079ab09d845c1dee9cb564b18d9dc78a16da1d610dc28f540234e25dd44212  ./modules/mod-interpretacje-definicje-podatkowe.md
 7ef7ff30a0f1d807c60fcfa742c000896e74da9ca0e21a75e0877f0a2ed824ea  ./modules/mod-kasy-rejestrujace-fiskalizacja.md
 a6acf82148af843a61c08ee45a89c489c0d52d54b6dfe86a267ce79f2e6e10b0  ./modules/mod-limit-platnosci-gotowkowych.md
 4e981c574d9832cd871ce69877bf68ef790ddd2e2589e601bfe7e3d8f4cd9dc1  ./modules/mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
@@ -74,4 +74,4 @@ f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 603de20151ed15e91aebfdec8146e4ee0e834d8ead7785c982ed335f72ed99dd  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
 e42c9179292bdde9fc898dd730b4e29340063e269108416d590272a85cb7ee92  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-9e0718a37463cf65143278e393142bff365aea25b38a7aa3651850915e2c6416  ./references/CHANGELOG.md
+63eb6ba2f340cbc7b38222dcc882cd42b68f3d4b93b2a09fb23da9f6118f0c0a  ./references/CHANGELOG.md

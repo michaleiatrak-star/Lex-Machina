@@ -126,6 +126,11 @@ przesłanki [NIEWERYFIKOWANE]).
 
 **Art. 91 — sprzeciw WIERZYCIELA/UCZESTNIKA co do UMIESZCZENIA
 wierzytelności:**
+- ✅ [VER] RZĄD 1 2026-09-12l, ponownie 2026-09-16 — `Dz.U. 2026 poz. 533`,
+  art. 91 ust. 1–2 (podniesione z RZĘDU 2: terminy zawite domyka wyłącznie
+  odczyt treści). ⚠️ Kanał obwieszczenia: moduł wskazuje niżej MSiG —
+  w tych postępowaniach obwieszczenia idą do Krajowego Rejestru Zadłużonych;
+  NIEROZSTRZYGNIĘTE, zweryfikuj przepisy o KRZ przy sprawie.
 - W postępowaniu UKŁADOWYM oraz SANACYJNYM — w terminie **DWÓCH
   TYGODNI (14 dni)** od dnia obwieszczenia (art. 89 ust. 2), uczestnicy
   postępowania mogą złożyć DO SĘDZIEGO-KOMISARZA sprzeciw co do

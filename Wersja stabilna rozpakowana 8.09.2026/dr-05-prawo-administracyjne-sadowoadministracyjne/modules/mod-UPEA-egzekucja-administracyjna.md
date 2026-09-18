@@ -83,13 +83,17 @@ Tytuł wykonawczy administracyjny, upomnienie, zarzuty w postępowaniu egzekucyj
 Powstanie obowiązku (decyzja, przepis ustawy, deklaracja podatkowa)
   ↓
 Wierzytelność wymagalna → wymagane UPOMNIENIE (obowiązki pieniężne)
-  → Termin zapłaty po upomnieniu: 7 dni (weryfikuj art. 15 §1 UPEA w ISAP)
+  → Egzekucja może być wszczęta dopiero po upływie 7 dni od doręczenia upomnienia (art. 15 § 1 zd. 2 UPEA);
+    koszty upomnienia obciążają zobowiązanego i powstają z chwilą doręczenia (art. 15 § 2)
   ↓ [brak zapłaty]
 Wystawienie TYTUŁU WYKONAWCZEGO (TW-1 lub inny wzór)
   ↓
 Wszczęcie egzekucji — zawiadomienie o zajęciu
   ↓
-ZARZUTY zobowiązanego (art. 33 UPEA) — termin 7 dni od doręczenia
+ZARZUT zobowiązanego (art. 33 UPEA) — do wierzyciela za pośrednictwem organu egz.;
+  terminy KOŃCOWE z art. 33 § 5 (NIE „7 dni od TW") — patrz tabela niżej
+SKARGA NA CZYNNOŚĆ EGZEKUCYJNĄ (art. 54 UPEA) — 7 dni od doręczenia odpisu dokumentu
+  stanowiącego podstawę czynności, do organu egzekucyjnego
   ↓ [rozpatrzenie przez wierzyciela i organ egzekucyjny]
 ZAŻALENIE na postanowienie o zarzutach — 7 dni
   ↓
@@ -99,32 +103,44 @@ SKARGA DO WSA na postanowienie ostateczne
 ### Terminy — ABSOLUTNY PRIORYTET
 
 ```
-Zarzuty w egzekucji (art. 33 UPEA):       7 dni od doręczenia odpisu TW lub zajęcia
-                                          (⚠️ POTWIERDZONE 2026-07-27, Rząd 2B: lexlege.pl,
-                                          arslege.pl — reguła podstawowa poprawna;
-                                          UZUPEŁNIENIE: art. 33 §5 UPEA przewiduje
-                                          DODATKOWE, ALTERNATYWNE terminy "nie później
-                                          niż" dla sytuacji szczególnych — np. 30 dni od
-                                          wyegzekwowania obowiązku w całości, 7 dni od
-                                          doręczenia postanowienia o umorzeniu — sprawdź
-                                          §5 gdy standardowe doręczenie TW jest
-                                          niejednoznaczne lub sporne)
+⛔ NAPRAWIONE 2026-09-12h / odtworzone 2026-09-16 (F-189). ✅ [VER] RZĄD 1 2026-09-16
+— UPEA `Dz.U. 2026 poz. 268`; nowelizacje po t.j. poz. 516 i 739 zmieniają art. 3a
+(i przepisy o sprzedaży), NIE art. 15, 33, 54, 80.
+Zarzut w sprawie egzekucji (art. 33 § 5 UPEA) — wnosi się NIE PÓŹNIEJ NIŻ:
+  1) 30 dni od wyegzekwowania w całości obowiązku, kosztów upomnienia
+     i kosztów egzekucyjnych;
+  2) do dnia wykonania w całości obowiązku niepieniężnego albo zapłaty
+     w całości należności z odsetkami, kosztami upomnienia i egzekucyjnymi;
+  3) 7 dni od doręczenia postanowienia o UMORZENIU postępowania.
+  ⛔ Termin „7 dni od doręczenia TW" NIE ISTNIEJE. Dopóki egzekucja trwa
+  i obowiązek nie został wykonany — zarzut jest dopuszczalny.
+  ⛔ Dawna adnotacja „POTWIERDZONE, Rząd 2B" przy regule „7 dni od TW"
+  była błędna: dla terminów zawitych weryfikację domyka wyłącznie RZĄD 1.
 Zażalenie na postanowienie:               7 dni od doręczenia postanowienia (adresat: patrz sekcja wyżej i `shared/ZAZALENIE-ADRESAT-GATE.md` — NIE zakładaj domyślnie sądu)
-Skarga na czynności egzekucyjne:          14 dni od czynności
+Skarga na czynność egzekucyjną:           7 dni od doręczenia zobowiązanemu odpisu dokumentu
+                                          stanowiącego podstawę czynności; do organu egzekucyjnego,
+                                          który jej dokonał (art. 54 § 3 UPEA)
 Skarga do WSA na postanowienie ostateczne: 30 dni od doręczenia
 ⚠️ Terminy ZAWITE — weryfikuj aktualne brzmienie UPEA w ISAP.
 ```
 
-### Podstawy zarzutów (art. 33 UPEA — weryfikuj w ISAP)
+### Podstawy zarzutu (art. 33 § 2 UPEA — katalog ZAMKNIĘTY, ✅ [VER] RZĄD 1 2026-09-16)
 
 ```
-Zarzuty mogą dotyczyć wyłącznie:
-  □ Wykonania lub umorzenia obowiązku w całości lub części
-  □ Niedopuszczalności egzekucji administracyjnej (brak podstawy prawnej)
-  □ Zastosowania zbyt uciążliwego środka egzekucyjnego
-  □ Prowadzenia egzekucji przez niewłaściwy organ
-  □ Niespełnienia wymogów formalnych TW
-  □ Błędu co do osoby zobowiązanego
+Zarzut może opierać się wyłącznie na:
+  □ 1) nieistnieniu obowiązku
+  □ 2) określeniu obowiązku niezgodnie z treścią obowiązku wynikającego
+       z orzeczenia (art. 3–4), dokumentu (art. 3a § 1) lub przepisu prawa
+  □ 3) błędzie co do zobowiązanego
+  □ 4) braku uprzedniego doręczenia upomnienia, jeżeli jest wymagane
+  □ 5) wygaśnięciu obowiązku w całości albo w części
+  □ 6) braku wymagalności (odroczenie terminu, raty, inna przyczyna)
+
+⛔ „Zbyt uciążliwy środek egzekucyjny" NIE jest podstawą zarzutu — to podstawa
+SKARGI NA CZYNNOŚĆ EGZEKUCYJNĄ (art. 54 § 1 pkt 2), obok czynności dokonanej
+z naruszeniem ustawy (pkt 1). Ten sam argument jako zarzut zostanie oddalony.
+(Dawna lista: „zbyt uciążliwy środek", „niewłaściwy organ", „wymogi formalne TW"
+— stan sprzed nowelizacji, nieaktualny.)
 
 UWAGA: Zarzuty NIE służą do ponownego badania zasadności decyzji źródłowej
   → Kwestionowanie decyzji: tryb odwoławczy KPA / skarga do WSA, nie zarzuty w egzekucji
@@ -139,7 +155,7 @@ UWAGA: Zarzuty NIE służą do ponownego badania zasadności decyzji źródłowe
 | Środek | Organ egzekucyjny | Uwagi |
 |---|---|---|
 | Zajęcie wynagrodzenia za pracę | Naczelnik US | Kwoty wolne: weryfikuj UPEA w ISAP |
-| Zajęcie rachunku bankowego | Naczelnik US | Kwota wolna: weryfikuj UPEA w ISAP |
+| Zajęcie rachunku bankowego (art. 80 § 1–2 UPEA) | Naczelnik US | Kwota wolna — NIE w UPEA: art. 54 ust. 1 Prawa bankowego (`Dz.U. 2026 poz. 38`) — 75 % minimalnego wynagrodzenia miesięcznie (formuła, kwota zmienia się co roku — `shared/oplaty/04-wartosci-powtarzalne-kotwice.md` 4f) |
 | Zajęcie wierzytelności pieniężnej | Naczelnik US | |
 | Zajęcie ruchomości | Naczelnik US | Spis i oszacowanie |
 | Zajęcie nieruchomości | Naczelnik US | Wpis do KW, licytacja |
@@ -193,7 +209,7 @@ Koszty egzekucyjne obciążają zobowiązanego:
   → Koszty czynności egzekucyjnych
 
 Zarzut kosztów:
-  → W trybie art. 33 UPEA lub osobna skarga — weryfikuj tryb w UPEA
+  → Weryfikuj tryb w UPEA (odczyt treści) — zarzut z art. 33 § 2 ma katalog zamknięty
 ```
 
 ---
@@ -205,7 +221,7 @@ Zarzut kosztów:
 | Brak doręczenia upomnienia | Brak potwierdzenia odbioru | wnioskodawca | wysoka | spór o doręczenie | awizo / usługa pocztowa |
 | Wygaśnięcie obowiązku | Dowód zapłaty, decyzja uchylająca | bank / organ | wysoka | — | wyciąg bankowy + pokwitowanie |
 | Błąd co do osoby | PESEL, dane z TW vs rzeczywiste | dokumenty tożsamości | wysoka | — | porównanie danych |
-| Zbyt uciążliwy środek | Proporcja środka do kwoty / sytuacja majątkowa | dokumenty finansowe | średnia | — | dowód innych aktywów |
+| Zbyt uciążliwy środek (SKARGA z art. 54 § 1 pkt 2, nie zarzut) | Proporcja środka do kwoty / sytuacja majątkowa | dokumenty finansowe | średnia | — | dowód innych aktywów |
 | Niedopuszczalność egzekucji | Brak podstawy prawnej TW / przedawnienie | akta organu | wysoka | — | oblicz termin przedawnienia |
 
 ---
@@ -215,7 +231,8 @@ Zarzut kosztów:
 ### Perspektywa zobowiązanego
 
 1. Sprawdź czy doręczono upomnienie i tytuł wykonawczy prawidłowo.
-2. Złóż zarzuty w terminie 7 dni — wyłącznie w zakresie art. 33 UPEA.
+2. Zarzut — wyłącznie z podstaw art. 33 § 2 UPEA, w terminach końcowych z art. 33 § 5;
+   uciążliwość środka lub wadliwa czynność — skarga z art. 54 w 7 dni (art. 54 § 3).
 3. Przy kwestionowaniu decyzji źródłowej — tryb odwoławczy KPA, nie zarzuty.
 4. Przy zawieszeniu: wniesienie środka zaskarżenia na decyzję źródłową może zawiesić egzekucję.
 5. Przy nieregularnych dochodach — wnioskuj o rozłożenie na raty (tryb KPA).
@@ -230,7 +247,7 @@ Zarzut kosztów:
 
 | Ryzyko | Opis | Działanie zaradcze |
 |---|---|---|
-| Brak zarzutów w terminie 7 dni | Utrata prawa do zarzutów | Bezwzględny priorytet — złóż natychmiast |
+| Przeoczenie 7 dni na skargę na czynność (art. 54 § 3) albo terminu końcowego zarzutu (art. 33 § 5) | Utrata środka | Ustal datę doręczenia odpisu dokumentu / stan wykonania obowiązku |
 | Zarzuty w złym trybie | WSA odrzuci skargę | Ustal właściwy środek (zarzuty vs KPA) |
 | Egzekucja mimo uchylenia decyzji | Kontynuacja mimo wygaśnięcia obowiązku | Wniosek o umorzenie z dowodem uchylenia |
 
@@ -250,7 +267,7 @@ web_search: "UPEA Dz.U. 2026 poz. 268 isap.sejm.gov.pl tekst jednolity"
 
 - [ ] Rodzaj obowiązku (pieniężny / niepieniężny) ustalony?
 - [ ] Upomnienie i tytuł wykonawczy doręczone prawidłowo?
-- [ ] Termin 7 dni na zarzuty nie upłynął?
+- [ ] Termin końcowy zarzutu (art. 33 § 5) nie upłynął? Skarga na czynność — 7 dni z art. 54 § 3?
 - [ ] Właściwy organ egzekucyjny wskazany?
 - [ ] Aktualny t.j. UPEA (Dz.U. 2026 poz. 268) zweryfikowany?
 - [ ] Tryb (zarzuty vs KPA vs WSA) prawidłowo dobrany?
@@ -259,7 +276,7 @@ web_search: "UPEA Dz.U. 2026 poz. 268 isap.sejm.gov.pl tekst jednolity"
 
 ## 11. OUTPUT
 
-1. Stan faktyczny; 2. Kwalifikacja (pieniężny/niepieniężny, organ egzekucyjny); 3. Stan prawny; 4. Terminy (zarzuty 7 dni); 5. Podstawy zarzutów; 6. Matryca dowodowa; 7. Strategia; 8. Ryzyka; 9. Rekomendacja; 10. Kontrola ISAP/temporalności.
+1. Stan faktyczny; 2. Kwalifikacja (pieniężny/niepieniężny, organ egzekucyjny); 3. Stan prawny; 4. Terminy (zarzut — art. 33 § 5; skarga na czynność — 7 dni, art. 54 § 3); 5. Podstawy zarzutów; 6. Matryca dowodowa; 7. Strategia; 8. Ryzyka; 9. Rekomendacja; 10. Kontrola ISAP/temporalności.
 
 ---
 

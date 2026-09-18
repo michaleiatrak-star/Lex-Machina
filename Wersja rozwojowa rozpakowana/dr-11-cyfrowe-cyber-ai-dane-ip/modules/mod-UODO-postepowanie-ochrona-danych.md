@@ -257,10 +257,32 @@ Przed końcową odpowiedzią sprawdź:
 ### 9.4 Postępowanie i terminy
 
 ```
-□ Skarga INICJUJE postępowanie ADMINISTRACYJNE, prowadzone wg KPA
-□ TERMIN rozpatrzenia: NIEZWŁOCZNIE, NIE PÓŹNIEJ niż w CIĄGU MIESIĄCA
-  od otrzymania (art. 237 §2 KPA) — w SPRAWACH SKOMPLIKOWANYCH może to
-  wynieść do 60 DNI
+✅ [VER] RZĄD 1 2026-09-16l — ustawa o ochronie danych osobowych t.j. `Dz.U. 2019 poz. 1781`
+(zmiany po t.j.: `2026/252` — art. 104; `2026/548` — art. 34 ust. 2a, od 23.07.2026;
+`2026/1003` — art. 59a, od 28.10.2026 — żadna nie dotyczy trybu ani terminów);
+KPA `Dz.U. 2025 poz. 1691`; PPSA `Dz.U. 2026 poz. 143`.
+
+□ Skarga INICJUJE postępowanie ADMINISTRACYJNE (jurysdykcyjne) — w sprawach
+  nieuregulowanych w ustawie stosuje się KPA (art. 7 ust. 1 u.o.d.o.)
+□ TERMIN załatwienia: sprawa wymagająca postępowania wyjaśniającego —
+  MIESIĄC, sprawa szczególnie skomplikowana — DWA MIESIĄCE od wszczęcia
+  (art. 35 § 3 KPA); bezczynność / przewlekłość — art. 36–37 KPA
+  ⛔ KOREKTA: poprzednio „art. 237 § 2 KPA … do 60 dni" — art. 237 dotyczy
+  skarg i wniosków z działu VIII KPA, a § 2 — zawiadamiania posłów,
+  senatorów i radnych
+□ ⛔ POSTĘPOWANIE JEDNOINSTANCYJNE (art. 7 ust. 2 u.o.d.o.) — od decyzji
+  Prezesa UODO: SKARGA do sądu administracyjnego (nie „odwołanie"),
+  30 dni od doręczenia (art. 53 § 1 PPSA); na postanowienia, na które KPA
+  przewiduje zażalenie — zamiast zażalenia skarga do sądu administracyjnego
+  (art. 7 ust. 3–4 u.o.d.o.)
+□ Środek tymczasowy (art. 70) — na czas nie dłuższy niż 3 MIESIĄCE
+  (art. 75 ust. 2); na postanowienie — skarga do sądu administracyjnego (ust. 3)
+□ Kara pieniężna — płatna w 14 DNI od upływu terminu na skargę albo od
+  uprawomocnienia się orzeczenia sądu (art. 105 ust. 1); odroczenie / raty
+  na wniosek (ust. 2); dane do wymiaru kary — 30 DNI od żądania (art. 101a)
+□ Sektor publiczny — kara do 100 000 zł (jednostki z art. 9 pkt 1–12 i 14
+  u.f.p., instytut badawczy, NBP) albo do 10 000 zł (art. 9 pkt 13 u.f.p.)
+  (art. 102 ust. 1–2)
 □ PIERWSZA odpowiedź informuje o PODJĘTYCH krokach (np. wszczęcie
   postępowania, wezwanie administratora do wyjaśnień) — NIE jest to
   jeszcze rozstrzygnięcie merytoryczne

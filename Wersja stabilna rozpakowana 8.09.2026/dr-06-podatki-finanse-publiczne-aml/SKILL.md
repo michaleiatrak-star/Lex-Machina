@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.76"
+version: "3.89"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 ---
 
@@ -96,10 +96,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   (20.03.2026): ≥3 lokale, stawka 0,5%→1,5% wartości. Stan: złożony, brak
   pierwszego czytania (06.2026). MF: brak prac rządowych, ale Sejm pracuje.
 - BAS-W32 ⚠️ Przedawnienie podatkowe — Ordynacja podatkowa ma ODRĘBNY reżim
-  od KC; nowelizacja znosi "wieczne przedawnienie" + wprowadza ugodę
-  podatkową od 01.10.2026 (art. 70 i n. OP)
+  od KC. ⛔ Twierdzenie „nowelizacja znosi «wieczne przedawnienie» + ugoda
+  podatkowa od 01.10.2026" NIEPOTWIERDZONE: `Dz.U. 2026 poz. 846` (w życie
+  1.10.2026) nie zmienia art. 70 i nie zna ugody; art. 70 § 6 pkt 1 w mocy
+  (✅ [VER] RZĄD 1 2026-09-16). Opis zamiaru legislacyjnego, nie stanu prawa —
+  przed powołaniem wskaż pozycję Dz.U. z odczytu treści
 
-## Moduły (45 łącznie — ✓ 45 OK, ☐ 0 STUB)
+## Moduły (47 łącznie — ✓ 47 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
 — zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
@@ -603,6 +606,14 @@ przez cross-reference, bez duplikacji treści).
                NIE kodu PKD. Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-ustawa-PCC-i-podatek-spadkow-darowizn
   [✓] OK    mod-ustawa-podatek-nieruchomosci-i-lokalne
+  [✓] NOWY  mod-ustawa-oplata-skarbowa
+              (dodany 2026-09-16, O-11(d): przedmiot, zobowiązani i solidarność,
+               powstanie obowiązku = termin zapłaty, zwolnienia podmiotowe, zwrot
+               z terminem 5 lat, organ — wójt/burmistrz; t.j. Dz.U. 2025 poz. 1154, RZĄD 1)
+  [✓] NOWY  mod-ustawa-podatek-wydobycie-kopalin
+              (dodany 2026-09-16, F-190: podatek od wydobycia miedzi, srebra,
+               gazu i ropy — t.j. Dz.U. 2026 poz. 454, RZĄD 1; wcześniej widmowe
+               pokrycie w ROUTING-MAP z numerem innego aktu)
   [✓] OK    mod-UFP-finanse-publiczne-NIK-RIO
               (2026-07-21: dodano sekcję 11 — merytoryczna treść
                wystąpienia pokontrolnego NIK [elementy, termin 21 dni

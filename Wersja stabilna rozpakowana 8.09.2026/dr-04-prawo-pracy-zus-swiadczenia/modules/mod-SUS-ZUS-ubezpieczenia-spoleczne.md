@@ -82,7 +82,8 @@ Orzeczenie lekarza orzecznika ZUS / pielęgniarki* / fizjoterapeuty*
   ↓ [14 dni] SPRZECIW DO ZUS (tego samego oddziału) — OBOWIĄZKOWY!
     * od 13.04.2026 — weryfikuj uprawnienia w aktualnej ustawie
 Ponowne rozpatrzenie przez innego lekarza orzecznika
-  (lub 3 lekarzy przy sprawach szczeg. skomplikowanych — od 13.04.2026)
+  (od 1.01.2027: w sprawach szczególnie skomplikowanych główny lekarz orzecznik może skierować
+   sprawę do 3 lekarzy orzeczników orzekających łącznie — art. 85f ust. 8 SUS; ⛔ nie „od 13.04.2026")
   ↓
 Decyzja ZUS
   ↓ [1 miesiąc] ODWOŁANIE DO SĄDU (art. 477⁹ §1 KPC)
@@ -91,8 +92,12 @@ Emerytura / Renta z FUS → Sąd OKRĘGOWY
 Zasiłki / Świadczenie rehab. / Niepełnosprawność → Sąd REJONOWY
 Składki / Podleganie ubezpieczeniom → Sąd OKRĘGOWY (BEZ WZGLĘDU na
   kwotę — usunięto błędny próg "100 000 zł", patrz poprawka wyżej)
-  ↓ [14 dni od wyroku z uzasad.] APELACJA → Sąd Apelacyjny (wpis: 30 zł)
-  ↓ [30 dni od wyroku SA] SKARGA KASACYJNA → SN (przymus adwokacki)
+  ↓ [2 tygodnie od doręczenia wyroku z uzasadnieniem; 3 tygodnie przy przedłużonym
+     terminie uzasadnienia — art. 369 KPC] APELACJA → Sąd Apelacyjny
+     (opłata PODSTAWOWA 30 zł — nie „wpis" — art. 36 ust. 1 w zw. z art. 14 ust. 3 KSCU;
+     ✅ RZĄD 1 2026-09-17o, KSCU Dz.U. 2025 poz. 1228)
+  ↓ [2 MIESIĄCE od doręczenia orzeczenia z uzasadnieniem — art. 398⁵ § 1 KPC;
+     ⛔ nie „30 dni od wyroku SA"] SKARGA KASACYJNA → SN (przymus adwokacki) <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
 ```
 
 > ⚠️ **POMINIĘCIE SPRZECIWU = sąd ODRZUCI odwołanie (art. 477¹⁴a KPC)**
@@ -274,14 +279,22 @@ Przesłanka 3: Niezdolność powstała w OKRESIE SKŁADKOWYM / NIESKŁADKOWYM
 
 | Czynność | Termin |
 |---|---|
-| Sprzeciw od orzeczenia lekarza orzecznika | **14 dni** od doręczenia orzeczenia |
-| Sprzeciw od orzeczenia pielęgniarki/fizjoterapeuty | **14 dni** (od 13.04.2026) |
-| Odwołanie od decyzji ZUS | **1 miesiąc** od doręczenia decyzji |
-| Apelacja od wyroku SO | **14 dni** od doręczenia wyroku z uzasadnieniem |
-| Skarga kasacyjna do SN | **30 dni** od wyroku SA w II instancji |
-| Wniosek o przeliczenie emerytury / kapitału | brak terminu zawitego — można w każdej chwili |
-| Ponaglenie ZUS przy bezczynności | po 2 miesiącach od złożenia wniosku |
-| Ponaglenie przy braku orzeczenia | po 30 dniach od złożenia dokumentacji (od Etapu II) |
+✅ [VER] RZĄD 1 2026-09-17o — FUS t.j. `Dz.U. 2025 poz. 1749` + nowelizacja `Dz.U. 2026 poz. 26`
+(ogłoszona 12.01.2026; wchodzi ETAPAMI — art. 43); KPC `Dz.U. 2026 poz. 468`.
+
+| Czynność | Termin | Podstawa |
+|---|---|---|
+| Sprzeciw od orzeczenia lekarza orzecznika — **do 31.12.2026** | **14 dni** od doręczenia orzeczenia | art. 14 ust. 2a FUS |
+| Sprzeciw od orzeczenia — **od 1.01.2027** | **14 dni** od doręczenia; ZUS nie rozpatruje sprzeciwu po terminie (przywrócenie — przepis szczególny) | art. 85f SUS (dodany ustawą `2026/26`; art. 14 ust. 2a–6 FUS uchylone z tą samą datą) |
+| Ponaglenie w sprawie orzeczenia — **od 1.01.2027** | ZUS rozpatruje w **7 dni**; art. 37 KPA nie stosuje się | art. 85e ust. 7–9 SUS |
+| Sprzeciw od orzeczenia **pielęgniarki / pielęgniarza** (niezdolność do samodzielnej egzystencji) albo **fizjoterapeuty** (rehabilitacja lecznicza w ramach prewencji rentowej) — **od 13.04.2026** | **14 dni** — do 31.12.2026 stosuje się **odpowiednio przepisy o orzekaniu przez lekarzy orzeczników** (w tym sprzeciw z art. 14 ust. 2a FUS); od 1.01.2027 — art. 85f SUS | art. 85a ust. 2 SUS (od 13.04.2026), art. 34 ustawy `2026/26` (✅ RZĄD 1 2026-09-17p; korekta: wpis z 17o oznaczał ten wiersz błędnie jako „bez podstawy") |
+| Odwołanie od decyzji ZUS | **miesiąc** od doręczenia decyzji; wnoszone do organu, który ją wydał | art. 477⁹ § 1 KPC |
+| Przekazanie odwołania do sądu przez ZUS | **30 dni** od otrzymania (ZUS może uwzględnić odwołanie w całości) | art. 477⁹ § 2 KPC |
+| Apelacja od wyroku SO | **2 tygodnie** od doręczenia wyroku z uzasadnieniem; **3 tygodnie**, gdy przedłużono termin uzasadnienia | art. 369 § 1–1¹ KPC |
+| Skarga kasacyjna do SN | **2 miesiące** od doręczenia orzeczenia z uzasadnieniem (⛔ nie „30 dni od wyroku SA") | art. 398⁵ § 1 KPC | <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
+| Wydanie decyzji o prawie do świadczenia po raz pierwszy | **30 dni** od wyjaśnienia ostatniej okoliczności niezbędnej do wydania decyzji | art. 118 ust. 1 FUS |
+| Ponaglenie przy bezczynności ZUS w sprawie decyzji | po upływie terminu z art. 118 ust. 1 (ponaglenie z art. 37 KPA) — ⛔ nie „po 2 miesiącach od wniosku" | art. 118 FUS, art. 37 KPA |
+| Wniosek o przeliczenie emerytury / kapitału | brak terminu zawitego | — |
 
 ---
 

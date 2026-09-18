@@ -156,6 +156,6 @@ REKOMENDACJA: □ Nakaz natychmiastowy  □ Zawiadomienie karne  □ Nakaz sądo
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
 *Art. 207 KK: Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872 t.j. | Art. 190a KK: nowelizacja od 01.10.2023*
-*Ustawa o przec. przemocy w rodzinie: Dz.U. 2021 poz. 1249 t.j. — weryfikuj w isap.sejm.gov.pl*
+*Ustawa o przeciwdziałaniu **przemocy domowej** (⛔ akt PRZEMIANOWANY — dawniej „o przeciwdziałaniu przemocy w rodzinie"): **Dz.U. 2024 poz. 1673 t.j.** ✅ [VER] RZĄD 1 2026-09-10o, ⛔ KROK 2C: 1 nowelizacja po tekście jednolitym; poprzedni zapis `2021 poz. 1249` — wygaśnięcie aktu*
 *KRO: Dz.U. 2026 poz. 236 t.j. | KPC: Dz.U. 2026 poz. 468 t.j.*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

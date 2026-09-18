@@ -1,5 +1,68 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.
+- 3.51 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „Prawo telekomunikacyjne, Dz.U. 2024 poz. 1221 t.j.” skorygowane: 2024/1221 to akt pierwotny Prawa komunikacji elektronicznej (RZĄD 1; T31). Treść routera bez zmian.
+- 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.
+- 3.49 — LUKA JAWNA: numer obecny na dysku 2026-09-16, brak wpisu w changelogu i w AUDIT-JOURNAL; zakresu zmian nie da się odtworzyć — wpis celowo niezmyślony
+- 3.48 (2026-09-10x, O-11): **KWOTA-GATE — kontrola przy każdej podawanej kwocie.**
+
+  Nowa pozycja w `references/SELF-CHECK.md`. Wyzwalacz: odpowiedź podaje kwotę
+  opłaty sądowej, taksy, kosztów zastępstwa albo wyliczenia alimentacyjnego.
+  Trzy pytania, wszystkie muszą mieć odpowiedź TAK:
+
+  1. czy sprawdzono, że strona **nie jest zwolniona** (art. 94–103 KSCU — trzy
+     warstwy: podmiotowe art. 96 ust. 1, przedmiotowe art. 95, na wniosek
+     art. 100–103),
+  2. czy kwota pochodzi z **tabeli ustanawiającej**, nie z bazy katalogującej
+     ani z pamięci,
+  3. czy sprawdzono **przypisy** przy jednostce redakcyjnej.
+
+  ⛔ Punkt 3 istnieje dlatego, że art. 13 ust. 2 KSCU niesie **dwa brzmienia obok
+  siebie** rozróżnione wyłącznie odnośnikami — cap opłaty stosunkowej to
+  100 000 zł od 23.09.2025, nie powszechnie powtarzane 200 000 zł.
+
+  `shared/TABELE-OPLAT.md` dopisany do `required_modules` oraz do warstwy
+  odroczonej w `references/PROFIL-LEKKI.md`, z wyzwalaczem mechanicznym
+  „zamierzasz podać kwotę" i najpóźniejszym momentem odczytu „przed pierwszą
+  liczbą".
+
+- 3.47 (2026-09-10o, F-181): **przemoc domowa — przeterminowana podstawa
+  i przemianowany akt.**
+
+  `references/legacy-material-router/przemoc-domowa.md` podawał ustawę
+  o przeciwdziałaniu przemocy jako `Dz.U. 2021 poz. 1249` — status
+  **wygaśnięcie aktu**. Aktualny tekst jednolity: **Dz.U. 2024 poz. 1673**
+  ✅ [VER] RZĄD 1, ⛔ KROK 2C: jedna nowelizacja po nim.
+
+  ⛔ **Akt został PRZEMIANOWANY.** Tytuł „ustawa o przeciwdziałaniu przemocy
+  **w rodzinie**" jest historyczny; obowiązujący to „ustawa o przeciwdziałaniu
+  przemocy **domowej**". Wpisane wprost, bo sama podmiana numeru zostawiłaby
+  nieaktualną nazwę — a to jest dokładnie sygnał, który w tej serii dwukrotnie
+  okazał się wierzchołkiem podmiany aktu (F-148a, 10j).
+
+  Ta sama poprawka w bliźniaczym module `dr-03`.
+
+- 3.46 (2026-09-10l, F-181): legacy-material-router/tryby-scigania: KPK 2024/37 (wygaśnięcie aktu) → 2026/490 + lista 5 nowelizacji po tekście jednolitym
+- 3.45 (2026-09-10b, O-6 / F-180): **zakaz orzekania o systemie z jednego
+  nośnika; rdzeń mniejszy po wydzieleniu gałęzi HARD GATE.**
+
+  **O-6.** Nowa pozycja `[STAN-ZAŁADOWANY]` w `references/SELF-CHECK.md`:
+  jeśli odpowiedź twierdzi, że w systemie jest luka, błąd, brak pliku lub
+  niedomknięta flaga, wolno to orzec dopiero po zestawieniu wersji **załadowanej
+  przez hosta** z wersją w repozytorium. Alternatywa dopuszczalna: oznaczyć
+  wniosek jako ⚠️ WARUNKOWY z podaniem wersji roboczej.
+
+  Podstawa: 2026-09-09/10 ocena prowadzona na kopii sesyjnej z routerem 3.41
+  zgłosiła jako usterkę systemu lukę historii, która w repozytorium (3.42) nie
+  istniała. ⛔ Klasa błędu jak F-151 — wniosek z jednego nośnika bez sprawdzenia
+  drugiego, tym razem po stronie oceniającego, nie źródła.
+
+  **F-180 (skutek dla routera).** Wydzielenie 236 linii gałęzi warunkowych
+  z `shared/PRAWO-HARDGATE.md` zmniejszyło rdzeń R-1…R-5 z ≈100 kB do ≈88 kB.
+  `references/PROFIL-LEKKI.md` 1.1 → 1.2: skorygowana tabela rdzenia, dwa nowe
+  wpisy w warstwie odroczonej (`PRAWO-HARDGATE-BLOKADA.md`,
+  `PRAWO-HARDGATE-AKT-MIEJSCOWY.md`) z wyzwalaczami mechanicznymi.
+
 - 3.44 (2026-09-10, F-179): **korekta przesłanki profilu LEKKIEGO — pomiar
   z 3.43 był fałszywy w przesłance.**
 

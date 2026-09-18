@@ -57,7 +57,7 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 |---|---|---|
 | Podstawa | Czyn niedozwolony — brak lub niezależność od umowy | Niewykonanie lub nienależyte wykonanie umowy |
 | Ciężar dowodu | **Powód** musi wykazać: winę + szkodę + związek przyczynowy | **Domniemanie winy dłużnika** — dłużnik musi udowodnić brak winy |
-| Przedawnienie ogólne | 3 lata od wiedzy o szkodzie i sprawcy; max 10 lat od zdarzenia | 3 lata (dz. gosp.) / 6 lat (ogólne) |
+| Przedawnienie ogólne | 3 lata od wiedzy o szkodzie i sprawcy; max 10 lat od zdarzenia (art. 442¹ § 1) — ⛔ **szkoda na osobie: granica 10 lat nie obowiązuje** (§ 3) | 3 lata (dz. gosp.) / 6 lat (ogólne), koniec roku kalendarzowego (art. 118) |
 | Przedawnienie — przestępstwo | 20 lat od popełnienia | — |
 | Zakres odszkodowania | Adekwatny związek przyczynowy (art. 361 §1 KC) | j.w. + art. 361 §2 (damnum emergens + lucrum cessans) |
 

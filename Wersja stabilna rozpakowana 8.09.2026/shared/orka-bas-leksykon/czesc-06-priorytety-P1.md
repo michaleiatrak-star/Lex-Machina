@@ -44,7 +44,7 @@ REGUŁA: Ustalenie czy dana czynność = świadczenie zdrowotne ma znaczenie dla
 
 ### BAS-007 — Gospodarstwo rolne (DR-09/10)
 ```
-Weryfikacja: ustawa o podatku rolnym art. 1 (Dz.U. 2020 poz. 333 t.j. — weryfikuj)
+Weryfikacja: ustawa o podatku rolnym art. 1 (**Dz.U. 2025 poz. 1344 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
   + KC art. 553 + ustawa o kształtowaniu ustroju rolnego art. 2
 
 DEFINICJA PODATKOWA (art. 1 ustawy o podatku rolnym):

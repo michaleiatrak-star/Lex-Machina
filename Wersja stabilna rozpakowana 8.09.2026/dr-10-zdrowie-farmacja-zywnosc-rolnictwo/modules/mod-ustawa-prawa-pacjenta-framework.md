@@ -148,7 +148,8 @@ ODPOWIEDZIALNOŚĆ SOLIDARNA: szpital + lekarz (art. 441 KC)
 | Czynność | Termin | Podstawa |
 |---|---|---|
 | Wniosek do FKZM | **1 rok** od dowiedzenia się o zdarzeniu, max **3 lata** od zdarzenia | art. 67t ustawy o pr. pac. |
-| Roszczenia cywilne (delikt) | **3 lata** od dowiedzenia się o szkodzie i sprawcy; max **10 lat** od zdarzenia | art. 442¹ §1 KC |
+| Roszczenia cywilne (delikt) | **3 lata** od dowiedzenia się o szkodzie i sprawcy; max **10 lat** od zdarzenia — ⛔ **nie dotyczy szkody na osobie** | art. 442¹ §1 KC |
+| ⛔ **Szkoda na osobie** (błąd medyczny) | przedawnienie **nie kończy się wcześniej** niż 3 lata od dowiedzenia się — **granica 10 lat nie obowiązuje** | art. 442¹ §3 KC (✅ RZĄD 1 2026-09-16f) |
 | Roszczenia z przestępstwa | **20 lat** od popełnienia przestępstwa | art. 442¹ §2 KC |
 | Szkoda na osobie małoletniego | Nie wcześniej niż **2 lata** po pełnoletności | art. 442¹ §4 KC |
 | Dostęp do dokumentacji medycznej | Na żądanie — bez zbędnej zwłoki | art. 26 ustawy o pr. pac. |

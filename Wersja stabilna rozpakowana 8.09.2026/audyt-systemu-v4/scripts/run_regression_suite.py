@@ -37,6 +37,62 @@ def sekcja(tytul: str):
     print("── " + tytul + " " + "─" * max(3, 66 - len(tytul)))
 
 
+# ---------------------------------------------------------------------------
+# PREFLIGHT — kompletność korzenia (flaga O-5, 2026-09-10b)
+#
+# PO CO ISTNIEJE
+#   Na hoście rozdzielającym skille na kilka punktów montowania (np. część
+#   w `plugins/`, część w `user/`) testy T3 i T11 — oba KRYTYCZNE — kończyły się
+#   `KeyError: 'prawo-polskie-v2'`. Komunikat był NIEODRÓŻNIALNY od realnego
+#   braku skilla w repozytorium, więc czytający dostawał FAIL wyglądający jak
+#   usterka systemu, a będący usterką środowiska. Zmierzone 2026-09-09.
+#
+# ⛔ Preflight NIE zastępuje testów i niczego nie naprawia. Zatrzymuje przebieg
+#   ZANIM zielone/czerwone wyniki zaczną wprowadzać w błąd, i nazywa przyczynę.
+# ---------------------------------------------------------------------------
+SKILLE_OCZEKIWANE = 32
+SKILLE_KRYTYCZNE = ("shared", "prawny-router-v3", "prawo-polskie-v2", "audyt-systemu-v4")
+
+
+def preflight(root: Path) -> bool:
+    """Zwraca True, gdy korzeń nadaje się do przebiegu."""
+    obecne = sorted(d.name for d in root.iterdir()
+                    if d.is_dir() and (d / "SKILL.md").is_file())
+    brakujace = [s for s in SKILLE_KRYTYCZNE if s not in obecne]
+
+    print(f"PREFLIGHT: skilli w korzeniu: {len(obecne)} (oczekiwane: {SKILLE_OCZEKIWANE})")
+    if not brakujace and len(obecne) >= SKILLE_OCZEKIWANE:
+        return True
+
+    # Szukamy skilli krytycznych poza tym korzeniem — to rozstrzyga,
+    # czy mamy do czynienia z brakiem, czy z rozdzieleniem drzewa.
+    gdzie_indziej = {}
+    for kandydat in (root.parent, *[p for p in root.parent.iterdir() if p.is_dir()]):
+        for s in brakujace:
+            if (kandydat / s / "SKILL.md").is_file():
+                gdzie_indziej.setdefault(s, str(kandydat / s))
+
+    print("=" * 72)
+    if gdzie_indziej:
+        print("⛔ KORZEŃ NIEKOMPLETNY — SKILLE SĄ, ALE POZA TYM KATALOGIEM.")
+        print("   To NIE jest usterka systemu. To rozdzielone drzewo.")
+        for s, gdzie in sorted(gdzie_indziej.items()):
+            print(f"     • {s} → {gdzie}")
+        print("\n   Zestaw zakłada JEDEN korzeń. Scal drzewo i uruchom ponownie:")
+        print("     mkdir /tmp/lex && cp -r <korzeń-1>/* <korzeń-2>/* /tmp/lex/")
+        print("     python3 run_regression_suite.py --repo-root /tmp/lex")
+    else:
+        print("⛔ KORZEŃ NIEKOMPLETNY — SKILLI NIE MA NIGDZIE W POBLIŻU.")
+        print("   To wygląda na realny brak, nie na rozdzielone drzewo.")
+        for s in brakujace:
+            print(f"     • brak: {s}")
+        if len(obecne) < SKILLE_OCZEKIWANE:
+            print(f"   Ponadto: {len(obecne)} < {SKILLE_OCZEKIWANE} skilli.")
+    print("=" * 72)
+    print("PRZEBIEG PRZERWANY — wyniki na niekompletnym korzeniu wprowadzałyby w błąd.")
+    return False
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo-root", default=None)
@@ -50,9 +106,13 @@ def main():
     print(f"ROOT: {root}")
     print("=" * 72)
 
+    if not preflight(root):
+        return 2
+
     results = {}
 
     for key, label, script, sargs in [
+        ("T23", "T23 — Pokrycie orkiestratora (O-4)", "test_pokrycie_orkiestratora.py", repo_args),
         ("T1", "T1 KRYTYCZNY — Rejestracja modułów", "test_module_registration.py", repo_args),
         ("T2", "T2 WYSOKI — Zgodność liczników", "test_module_count.py", repo_args),
         ("T3", "T3 KRYTYCZNY/heurystyka — Spójność Dz.U.", "test_cross_map_dzu.py", repo_args),
@@ -87,6 +147,18 @@ def main():
         ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 52/52 COV, 0 FULL i metryki", "test_f108_consistency.py", []),
         ("T19b", "T19b — F-108/46: stawki, rejestr 52/52, propagacja, mutacje", "test_f108_trade.py", repo_args),
         ("T22", "T22 KRYTYCZNY — samo-rejestracja frontmatteru", "check_frontmatter_rejestracja.py", [str(root)]),
+        # F-189 (2026-09-16): T28 i T29 są offline i deterministyczne. SKRYPTY-RECZNE
+        # deklarował T28 jako „wchodzi do orkiestratora", ale nie był wołany — 20 FAIL
+        # nie zmieniało wyniku pełnego przebiegu.
+        ("T28", "T28 KRYTYCZNY — wartości i cytaty (W1/W2 FAIL, W3 WARN)", "check_wartosci_prawne.py", ["--katalog", str(root), "--tylko-fail"]),
+        ("T29", "T29 WYSOKI — integralność podziału TABELE-OPLAT", "check_oplaty_mapa.py", ["--katalog", str(root)]),
+        # F-189 (2026-09-16c): utrata treści bez cofnięcia numeru — T12 tego nie widzi.
+        ("T30", "T30 KRYTYCZNY — utrata treści vs AUDIT-JOURNAL", "check_utrata_tresci.py", ["--repo-root", str(root)]),
+        # O-11(b), 2026-09-16e: FAIL tylko przy pliku z rejestru, którego nie ma; kwota bez podstawy = WARN.
+        ("T32", "T32 WYSOKI — tabele satelickie opłat: kwota bez podstawy", "check_tabele_satelickie.py", ["--repo-root", str(root)]),
+        # 2026-09-17r: kontrola PO wydaniu. Brak katalogu paczek → PASS, więc test nie przeszkadza
+        # w środowiskach bez wydań; rozjazd paczka↔drzewo jest jednak twardym FAIL.
+        ("T33", "T33 WYSOKI — zgodność wydanych paczek z drzewem", "check_wydanie.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -103,7 +175,9 @@ def main():
     # wyciszyć inny test KRYTYCZNY, więc nie może być zwykłym ostrzeżeniem.
     # T14 może być czerwony przejściowo, dopóki kolejne skille nie zostaną skrócone
     # do profilu uniwersalnego; nadal jest jawnie raportowany.
-    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22")
+    # T28 i T29 dołączyły 2026-09-16 (F-189): W1 to nawrót błędu JUŻ naprawionego
+    # po odczycie treści — dokładnie ta klasa, którą regresja ma blokować.
+    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29", "T30")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

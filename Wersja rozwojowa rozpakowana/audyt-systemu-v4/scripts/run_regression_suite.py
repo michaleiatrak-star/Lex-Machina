@@ -156,6 +156,9 @@ def main():
         ("T30", "T30 KRYTYCZNY — utrata treści vs AUDIT-JOURNAL", "check_utrata_tresci.py", ["--repo-root", str(root)]),
         # O-11(b), 2026-09-16e: FAIL tylko przy pliku z rejestru, którego nie ma; kwota bez podstawy = WARN.
         ("T32", "T32 WYSOKI — tabele satelickie opłat: kwota bez podstawy", "check_tabele_satelickie.py", ["--repo-root", str(root)]),
+        # 2026-09-17r: kontrola PO wydaniu. Brak katalogu paczek → PASS, więc test nie przeszkadza
+        # w środowiskach bez wydań; rozjazd paczka↔drzewo jest jednak twardym FAIL.
+        ("T33", "T33 WYSOKI — zgodność wydanych paczek z drzewem", "check_wydanie.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)

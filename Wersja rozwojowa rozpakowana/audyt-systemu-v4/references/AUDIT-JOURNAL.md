@@ -66222,3 +66222,550 @@ T28: `W1-86-KKS-akcyzowy`, `W1-87-KKS-360` (selftest 36/36; na stanie sprzed nap
 **Wersje:** `shared` 3.65 → 3.66, `audyt-systemu-v4` 6.104 → 6.105,
 `dr-03-prawo-karne-wykroczenia-egzekucja` 3.43 → 3.44,
 `dr-06-podatki-finanse-publiczne-aml` 3.86 → 3.87.
+
+
+---
+
+## AUDYT-2026-09-16h — F-135: dziedzina „postępowanie spadkowe (KPC) + terminy spadkowe KC"
+
+**Źródło:** KPC t.j. `Dz.U. 2026 poz. 468` (ogłoszony 7.04.2026). **KROK 2C** (metryka
+`DU/1964/296`): po t.j. — `2026/473` (art. 63¹–63², pdftotext spłaszcza indeks do „631"),
+`2026/830` (art. 4¹), `2026/1003` (dział IVfa — sztuczna inteligencja), `2026/1046` (art. 47,
+461, 477⁶ᵃ). **Żadna nie dotyka art. 627–691.**
+
+Odczyt: cały dział spadkowy (art. 627–680 z indeksami) — przepisy z okresem czasu: art. 668¹,
+673, 675, 676, 679 § 1; ponadto art. 618 § 1–3 (przez art. 688), 637, 640, 641, 643, 646–648, 690.
+
+### Wynik
+
+Korpus **prawie nie podawał** terminów postępowania spadkowego (3 trafienia skanu, żadne
+z liczbą). Luka postaci 4 — uzupełniona:
+- `shared/terminy.md` — nowa sekcja „Postępowanie spadkowe (KPC)" (art. 673, 675–676, 679 § 1,
+  668¹, 640 § 1) + ⛔ prekluzja działu (art. 688 w zw. z 618 § 3) + ostrzeżenie, że art. 679 § 1
+  ogranicza tylko uczestnika poprzedniego postępowania;
+- `dr-02/mod-KC-spadki` — sekcja 2a o tej samej treści.
+
+Usterka: `dr-02/mod-KC-spadki` — „zachowek: 5 lat od ogłoszenia testamentu" bez § 2–4
+(ten sam brak co w 16f w innych plikach — skan 16f go nie złapał, bo linia nie zawierała
+„art. … KC").
+Potwierdzone bez zmian: opis art. 1015 § 1¹–1² i art. 929 w `dr-02`.
+
+### ⚠️ Nieweryfikowalne w tej sesji
+
+„Odpisy europejskiego poświadczenia spadkowego ważne 6 miesięcy" (art. 70 rozporządzenia
+650/2012) — EUR-Lex odpowiada kodem 202 (strona weryfikacyjna) na oba adresy (CELEX, ELI).
+Zgodnie z regułą źródeł wartość **nie została awansowana**; w module oznaczona jako
+niezweryfikowana w RZĘDZIE 1.
+
+**Wersje:** `shared` 3.66 → 3.67, `audyt-systemu-v4` 6.105 → 6.106,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.53 → 3.54.
+
+
+---
+
+## AUDYT-2026-09-16i — T15 wykrył t.j. ogłoszony w dniu audytu
+
+Kontrolny przebieg T15 po wydaniu 16h zgłosił `NEWER_TJ` dla `Dz.U. 2024 poz. 1162` (ustawa
+o ochronie zdrowia przed następstwami używania tytoniu): **nowy t.j. `Dz.U. 2026 poz. 1214`**
+(obwieszczenie z 1.09.2026, **ogłoszone 16.09.2026**; metryka ELI: „Tekst jednolity dla aktu
+DU/1996/55"; `2024/1162` — „wygaśnięcie aktu"). Przebieg 16g dawał 0 — indeks ELI zaktualizowano
+między przebiegami.
+⚠️ Treść obwieszczenia nie była jeszcze udostępniona (brak PDF/HTML, 404) — nie ustalono,
+czy t.j. obejmuje `2025/427` i `2025/799`; zapisane jako nieustalone, bez awansu.
+
+Zmiany: ROUTING-MAP (wiersz alkohol/tytoń), `dr-06/mod-alkohol-tyton-regulacja-sprzedazy`
+(HARDGATE), `mapa_dzu` (nowy wiersz). T15 `maps`/`operational`: 0; T11: OK.
+⭐ Potwierdzenie wartości T15 jako testu okresowego: rejestr starzeje się bez żadnej edycji.
+
+**Wersje:** `audyt-systemu-v4` 6.106 → 6.107, `dr-06-podatki-finanse-publiczne-aml` 3.87 → 3.88,
+`prawo-polskie-v2` 6.25 → 6.26.
+
+
+---
+
+## AUDYT-2026-09-16j — F-135: dziedzina „środki ochrony prawnej w PZP"
+
+**Źródło:** PZP t.j. `Dz.U. 2026 poz. 793` (ogłoszony 16.06.2026; obejmuje zmiany z 13.03.2026
+w art. 514 ust. 3, 518, 525, 528). KROK 2C (metryka `DU/2019/2019`): jedyna nowelizacja z 2026 r.
+(`2026/252`) poprzedza t.j. Uzupełniająco: KPC `2026/468` (art. 398⁵), KSCU `2025/1228` (art. 34),
+rozporządzenie PRM `2020/2437` (wpis — status obowiązujący).
+
+Odczyt: art. 138, 146–149, 457 ust. 1 pkt 2, 505, 508, 509, 513–519, 522, 525, 528, 529, 544,
+577, 578, 579, 580, 584, 585, 590.
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| poniżej progów: „10 dni — od publikacji w BZP (gdy brak powiadomienia)" — ustawa: 10 dni przy informacji przekazanej **inną drogą niż elektroniczna**; brak powiadomienia to art. 515 ust. 4 | `dr-07/mod-PZP-zamowienia-publiczne-KIO` | 2 — błędna konstrukcja |
+| wpis przypisany do „art. 519" (to zwrot odwołania; wpis — art. 517 ust. 2) | jw. | 2 |
+| „skrócenie terminu ofert **poniżej 15 dni** w sytuacjach nadzwyczajnych" — art. 138 ust. 2 wyznacza **minimum 15 dni** | jw. | 1 |
+| brak art. 515 ust. 3–4, art. 514 ust. 2 (przekazanie zamawiającemu → odrzucenie), art. 525 (przystąpienie 3 dni), art. 585 ust. 2, zasady z art. 509 | jw. | 4 |
+| „10 dni e-mail/faks, 15 dni inaczej, **5 dni poniżej progów**" — brak 10 dni < progi; faks zaliczony do komunikacji elektronicznej | `analizator-umow/mod-J7-pzp` | 1/4 |
+| „złożenie odwołania → zamawiający **musi wstrzymać postępowanie**" (art. 577 — zakaz **zawarcia umowy**) i „nieważność umowy" (art. 457 ust. 1 pkt 2 — **unieważnienie**, warunkowe) | jw. | 2 — ⛔ niebezpieczny dla zamawiającego |
+| wpis „według regulaminu KIO" (jest rozporządzenie `2020/2437`) | jw. | 2 |
+
+Potwierdzone: 10/15 i 5 dni (≥ progi, SWZ), skarga 14 dni za pośrednictwem Prezesa KIO,
+3× wpis (art. 34 ust. 1 KSCU), kasacja 2 miesiące / 6 miesięcy dla Prezesa UZP (art. 398⁵ KPC),
+art. 544 (15 dni, instrukcyjny), 35 i 30 dni (art. 138 ust. 1; wnioski — przetarg ograniczony).
+Zapis „nadanie pocztą nie wystarcza" dla odwołania — utrzymany jako wniosek z porównania
+z art. 580 ust. 2 (równoważność tylko dla skargi); opisany wprost jako taki.
+
+### Uzupełnienia
+
+`shared/terminy.md` — nowa sekcja PZP (14 wierszy + dwa ostrzeżenia).
+T28: `W1-PZP-138-ponizej15`, `W1-PZP-odwolanie-wstrzymuje` (selftest 38/38).
+⚠️ Na stanie sprzed napraw trafia tylko druga pozycja — pierwsze zdanie było złamane między
+dwie linie, a T28 czyta linia po linii. Ograniczenie znane (wzorce wielowierszowe poza zasięgiem).
+
+**Wersje:** `shared` 3.67 → 3.68, `audyt-systemu-v4` 6.107 → 6.108,
+`dr-07-zamowienia-publiczne-fundusze-ue` 3.9 → 3.10, `analizator-umow-v1` 1.35 → 1.36.
+
+
+---
+
+## AUDYT-2026-09-16k — F-135: dziedzina „KSC po wdrożeniu NIS2 — terminy i kary"
+
+**Źródło:** t.j. KSC `Dz.U. 2026 poz. 20` (obwieszczenie z 29.12.2025) + nowelizacja
+`Dz.U. 2026 poz. 252` (ogłoszona 2.03.2026, w życie 3.04.2026) — **t.j. nowelizacji nie obejmuje**;
+brak dalszych zmian w wynikach wyszukiwania ELI. Ustawa o certyfikacji `2025/1017` — w życie 28.08.2025.
+
+Odczyt (w brzmieniu nadanym ustawą `2026/252`): art. 5 ust. 1, art. 11 ust. 1 pkt 2–5 i ust. 1a–2,
+art. 12a–12b, art. 73 ust. 1–5; przepisy własne ustawy zmieniającej: art. 33 ust. 1–5, art. 34, art. 37, 38.
+
+### Usterki (`dr-11/mod-KSC-NIS2-cyberbezpieczenstwo-telekom`)
+
+| Usterka | Postać |
+|---|---|
+| terminy 3.04.2027 / 3.04.2028 przypisane „**art. 16 KSC**" — stoją w **art. 33 ustawy zmieniającej** | 2 — błędna jednostka |
+| kary: „2 % / 1,4 % rocznego **obrotu**, wyższe" dla obu kategorii — ustawa: **przychody** z działalności gospodarczej; klauzula „kwota wyższa" wprost tylko w art. 73 ust. 3 (podmiot kluczowy); brak minimów 20 000 / 15 000 zł i podstawy 500 000 EUR (ust. 3a) | 1/4 |
+| **brak terminów zgłaszania incydentów** (24 h / 72 h / miesiąc; art. 12b; dostawca usług zaufania 24 h) w module kanonicznym KSC | 4 — pominięcie |
+| brak art. 33 ust. 4 — byli operatorzy usług kluczowych: nowe zgłaszanie **do 3.10.2026** | 4 — ⛔ termin za 17 dni |
+| brak mechanizmu wpisu (harmonogram w komunikacie ministra — poza Dz.U.) | 4 |
+| ustawa o certyfikacji — „data wejścia: weryfikuj" | 4 |
+
+Potwierdzone: 12 i 24 miesiące (wartości), kary 10 mln / 7 mln EUR, klasyfikacja podmiotów (art. 5).
+Poza zakresem: wartości z samej dyrektywy NIS2, RODO i DORA (EUR-Lex niedostępny maszynowo).
+
+### Uzupełnienia
+
+`shared/terminy.md` — nowa sekcja KSC (8 wierszy). T28: `W1-KSC-art16-terminy` (selftest 39/39;
+na stanie sprzed napraw 1 trafienie).
+
+**Wersje:** `shared` 3.68 → 3.69, `audyt-systemu-v4` 6.108 → 6.109,
+`dr-11-cyfrowe-cyber-ai-dane-ip` 3.14 → 3.15.
+
+
+---
+
+## AUDYT-2026-09-16l — F-135: dziedzina „ustawa o ochronie danych osobowych (krajowa)"
+
+**Źródło:** t.j. `Dz.U. 2019 poz. 1781`. KROK 2C (metryka `DU/2018/1000`): `2026/252` (art. 104),
+`2026/548` (ustawa o zarządzaniu danymi — art. 34 ust. 2a, od 23.07.2026), `2026/1003` (ustawa o systemach
+AI — art. 59a, od 28.10.2026). ⚠️ `2023/1206` to t.j. INNEJ ustawy (dane przetwarzane w związku ze
+zwalczaniem przestępczości) — nie mylić. KPA `2025/1691` (art. 35, 237), PPSA (art. 53 § 1 — z sekcji
+kanonicznej 12g).
+
+Odczyt u.o.d.o.: wszystkie przepisy z okresami czasu w art. 1–110, art. 7, 50, 60, 92, 101a, 102, 105.
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| termin rozpatrzenia skargi do Prezesa UODO z **art. 237 § 2 KPA** „do 60 dni" — art. 237 to skargi z działu VIII KPA (§ 2 — zawiadamianie posłów); właściwy art. 35 § 3 KPA w zw. z art. 7 ust. 1 u.o.d.o. | `dr-11/mod-UODO-postepowanie` | 2 — zły reżim |
+| szablon: art. 237 **§ 1** KPA (wcześniejsza „korekta" z 2026-08-08 zmieniła paragraf, nie reżim) | `pisma-proste/SPK-skarga-do-UODO` | 2 |
+| ⛔ **„art. 50 ust. 4 u.o.d.o."** jako źródło 3 miesięcy — art. 50 ma **dwa** ustępy (sprawozdanie roczne) | jw. | 2 — nieistniejąca jednostka |
+| ⛔ wyrok NSA III OSK 1959/22 opisany jako „**autorytatywny** punkt odniesienia" — **awans snapshotu NSA** wbrew regule; V-SYG-0: OUT_OF_SCOPE (brak trafienia na hoście), istnienie tylko w serwisie wtórnym | jw. | naruszenie reguły źródeł |
+| „odwołanie do WSA" — postępowanie **jednoinstancyjne**, od decyzji **skarga** do sądu administracyjnego (art. 7 ust. 2) | `dr-11/SKILL.md` | 2 — terminologia procesowa |
+| brak: jednoinstancyjność, skarga na postanowienia (art. 7 ust. 3–4), środek tymczasowy ≤ 3 miesiące, zapłata kary 14 dni, dane do kary 30 dni, kary dla sektora publicznego | `dr-11/mod-UODO-postepowanie` | 4 |
+| źródła wtórne oznaczone jako „zweryfikowane" (z nich pochodziła podstawa z art. 237) | `pisma-proste/SPK` | ranga źródła |
+
+⭐ **Wniosek:** korekta z 2026-08-08 („§ 2 → § 1") poprawiła paragraf w niewłaściwym przepisie — przykład
+naprawy objawu, nie przyczyny. Jednocześnie w tym samym miejscu wzmocniono wagę wyroku NSA, którego
+system nie potrafi potwierdzić na hoście źródłowym.
+
+### Uzupełnienia
+
+`shared/terminy.md` — nowa sekcja u.o.d.o. (11 wierszy + ostrzeżenie o terminach z RODO).
+T28: `W1-UODO-art50-ust4`, `W1-UODO-237-KPA` (selftest 41/41; na stanie sprzed napraw 1 trafienie —
+drugie zdanie było złamane między linie).
+
+### Stan F-135 — ustawy szczególne
+
+Kolejka z zapisu 12m (KKS, postępowanie spadkowe, RODO/KSC/PZP) **wyczerpana w części krajowej**.
+Poza zasięgiem środowiska: wartości z aktów UE (RODO, NIS2, DORA, rozp. 650/2012).
+
+**Wersje:** `shared` 3.69 → 3.70, `audyt-systemu-v4` 6.109 → 6.110,
+`dr-11-cyfrowe-cyber-ai-dane-ip` 3.15 → 3.16, `pisma-proste-v2` 2.17 → 2.18.
+
+
+---
+
+## AUDYT-2026-09-16m — F-135: dziedzina „terminy KPA i PPSA poza tabelą kanoniczną"
+
+**Źródła:** KPA t.j. `Dz.U. 2025 poz. 1691` (metryka `DU/1960/168`: po t.j. brak zmian);
+PPSA t.j. `Dz.U. 2026 poz. 143` — ⚡ zmieniona przez `Dz.U. 2026 poz. 846` art. 10, **w życie
+26.06.2026**: art. 53 § 1 obejmuje także akty z art. 3 § 2 pkt 4b (opinie z art. 119zzl Op);
+art. 264 § 2. Ordynacja `2026/622` (art. 14d, 14o — brak terminu szczególnego skargi).
+
+Skan: 76 miejsc w 24 jednostkach. Odczyt: KPA art. 35, 58, 111, 127, 128, 129, 141, 143, 148, 156,
+158, 160 (**uchylony**), 189g, 237; PPSA art. 3 § 2, 52, 53, 54, 64c, 64d, 64e, 87, 141, 177, 177a,
+194, 234, 259, 277, 278.
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| ⛔ skarga na **interpretację podatkową — „14 DNI (art. 53 § 3 PPSA — NIE 30 dni!)"** — § 3 to 6 miesięcy dla prokuratora/RPO/RPD; interpretacja: **30 dni** (art. 53 § 1, akty z art. 3 § 2 pkt 4a) | `dr-06/mod-OP`, `dr-06/mod-interpretacje`, `pisma-proste/SPM` | 1+2 — trzy miejsca, jednolity błąd |
+| „art. 156 § 2 KPA — nieruchomości **po 30 latach**" — § 2: **10 lat** (wszystkie decyzje); 30 lat — art. 158 § 3 | `dr-05/mod-ustawa-zaskarzanie-decyzji` | 1+2 |
+| odszkodowanie „3 lata … **art. 160 KPA**" — przepis **uchylony**; podstawa: art. 417¹ § 2 KC | jw. | 2 — martwa jednostka |
+| organ przekazuje skargę do WSA w „**15 dni**" — art. 54 § 2: **30 dni** (60 — konsul/MSZ) | `dr-05/mod-KPA` | 1 |
+| „30 dni … art. **54** § 1 PPSA" jako termin skargi (art. 54 — tryb wniesienia; termin — art. 53 § 1) | `dr-05/mod-ustawa-cudzoziemcy` | 2 |
+| art. 189g KPA jako przedawnienie „**wszczęcia**" — przepis: nie można **nałożyć** kary / nie podlega **egzekucji** | `dr-03/mod-grzywny` ×2 | 2 |
+| „art. **128** KPA — odwołanie (14 dni)" (termin — art. 129 § 2) i „art. 33 UPEA — zarzuty **7 dni**" (nie istnieje) | `shared/definicje/DEF-PROCEDURA` | 2 + 1 |
+| skarga na bezczynność „**30 dni od odpowiedzi organu lub 60 dni od ponaglenia**" — art. 53 § 2b: **w każdym czasie** po ponagleniu | `analizator-dowodow/MP12` | 1 — nieistniejące terminy |
+| „30 dni od doręczenia rozstrzygnięcia **wraz z uzasadnieniem**" (art. 53 § 1 nie wymaga uzasadnienia) | jw. | 2 |
+| art. 259 PPSA jako sprzeciw od **każdej** czynności referendarza (jest: art. 258 § 2 pkt 6–8); źródło wtórne („rp.pl") jako potwierdzenie | `dr-05/mod-PPSA-terminy` | 2 / ranga źródła |
+
+Potwierdzone bez zmian: 14/7/14 dni (KPA 129, 141, 111, 127 § 3), 7 dni (58), 1 miesiąc (148),
+30 lat (158 § 3), 30 dni (PPSA 53 § 1, 177 § 1), 14/14/30 dni (64c–64d), 7 dni (177a, 259, 234 § 2),
+3 miesiące / 5 lat (277–278).
+
+### Uzupełnienia
+
+`shared/terminy.md`: KPA — art. 156 § 2, 158 § 3, 189g; PPSA — art. 53 § 1 (pkt 4a/4b), 54 § 2–3,
+64c § 4–5 i 64d, 177a, 259. T28: `W1-PPSA-53par3-14dni`, `W1-KPA-160`, `W1-KPA-128-odwolanie-14`
+(selftest 44/44; na stanie sprzed napraw 4 trafienia).
+
+**Wersje:** `shared` 3.70 → 3.71, `audyt-systemu-v4` 6.110 → 6.111,
+`dr-03-prawo-karne-wykroczenia-egzekucja` 3.44 → 3.45,
+`dr-05-prawo-administracyjne-sadowoadministracyjne` 3.27 → 3.28,
+`dr-06-podatki-finanse-publiczne-aml` 3.88 → 3.89, `pisma-proste-v2` 2.18 → 2.19,
+`analizator-dowodow-v3` 5.16.9 → 5.16.10.
+
+
+---
+
+## AUDYT-2026-09-17n — F-135: dziedzina „sprawy rodzinne — KRO i KPC poza pochodzeniem dziecka"
+
+**Źródła:** KRO t.j. `Dz.U. 2026 poz. 236` (metryka `DU/1964/59`: po t.j. brak zmian; ostatnia —
+`2025/897`, w życie 8.10.2025); KPC `2026/468` (działy 425–458, 544–612, 183⁸–183¹⁰ — bez zmian po t.j.);
+ustawa o zmianie imienia i nazwiska t.j. `2021/1988`; u.o.s. `2025/1154` (załącznik); Prawo o a.s.c.
+t.j. `2026/393`.
+
+**Skan wąski (art. KPC 425–458, 544–612 + frazy) — 0 trafień.** Skan szeroki modułów rodzinnych `dr-02`
+ujawnił terminy zapisane bez skrótu lub ze spłaszczonym indeksem („art. 1838").
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| ⛔ kalkulator: „zaprzeczenie — **matka 6 miesięcy**, **dziecko 3 lata** od pełnoletności" — ten sam błąd, który usunięto 16a w `czesc-05`; drugi plik nie został wtedy objęty | `dr-02/kro-rodzinne/czesc-07` | 1 — ⛔ niebezpieczny (dziecko) |
+| powrót do nazwiska: „**3 miesiące**" (brzmienie sprzed 8.10.2025; obecnie **rok**) obok „12 miesięcy" w tym samym pliku; opis sugerował tryb sądowy — to oświadczenie przed USC | jw. | 1 + 2 |
+| art. 60 § 3 KRO: „gdy zobowiązany nie był **wyłącznie** winny" — przepis: **nie został uznany za winnego**; brak możliwości przedłużenia | jw. | 2 |
+| mediacja: „**brak zgody** strony w 7 dni → mediacji się nie prowadzi" — art. 183⁸ § 2: **sprzeciw** w tygodniu (milczenie nie blokuje) | jw. | 2 — odwrócona konstrukcja |
+| zmiana imienia/nazwiska: „decyzja do 30 dni" — ustawa nie ma terminu szczególnego; art. 35 § 3 KPA | jw. | 2 |
+| małżeństwo wyznaniowe: „**5 dni roboczych**, zweryfikuj" — art. 8 § 3 KRO: **5 dni** bez dni ustawowo wolnych (sobota się liczy), obowiązek **duchownego**, nadanie polecone = przekazanie, siła wyższa zawiesza | `dr-02/mod-KRO-zawarcie-malzenstwa` | 1/2 |
+
+⚠️ Błąd własny w tej sesji: przy korekcie art. 8 § 3 wpisałem najpierw „dni kalendarzowe" — sprzeczne
+z dalszą częścią przepisu (wyłączenie dni ustawowo wolnych). Wykryte przy dokończeniu odczytu; poprawione
+przed wydaniem. Podobnie usunięty nieodczytany numer punktu zwolnienia z art. 2 ust. 1 u.o.s.
+
+Potwierdzone: art. 73 § 1 (3 miesiące), art. 172 (3 miesiące), 300 dni (art. 62), 37 zł (załącznik u.o.s.
+cz. I pkt 7), art. 183¹⁰ (do 3 miesięcy), transkrypcja (30 dni — w opisie wyroku).
+
+### Uzupełnienia
+
+`shared/terminy.md` — sekcja „Sprawy rodzinne" (14 wierszy: art. 8 § 3, 59, 60 § 3, 73 § 1, 172 KRO;
+art. 428, 456, 554, 579¹, 583¹, 592, 183⁸, 183¹⁰, 598⁵ KPC). T28: `W1-KRO-69-6mies`,
+`W1-KRO-70-3lata`, `W1-KRO-59-3mies` (selftest 47/47; na stanie sprzed napraw 3 trafienia).
+
+⭐ **Wniosek (powtórzony trzeci raz w tej serii):** naprawa jednego pliku nie oznacza naprawy wartości
+w systemie. Kalkulatory i tabele „szybkie" w innych plikach powielają błąd — dlatego każda korekta
+wartości dostaje odtąd wzorzec W1 i przebieg T28 na całym drzewie.
+
+**Wersje:** `shared` 3.71 → 3.72, `audyt-systemu-v4` 6.111 → 6.112,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.54 → 3.55.
+
+
+---
+
+## AUDYT-2026-09-17o — F-135: dziedzina „prawo pracy i ubezpieczeń — ustawy szczególne"
+
+**Źródła:** ustawa o zwolnieniach grupowych t.j. `Dz.U. 2026 poz. 1195` (metryka `DU/2003/844`: zmiana
+`2025/1661` — przed t.j.); ustawa o ochronie sygnalistów `Dz.U. 2024 poz. 928` (brak zmian); ustawa
+o zatrudnianiu pracowników tymczasowych t.j. `Dz.U. 2025 poz. 236` (brak zmian); FUS t.j. `Dz.U. 2025
+poz. 1749` + **nowelizacja `Dz.U. 2026 poz. 26`** (ogłoszona 12.01.2026, wchodzi etapami: 27.01.2026,
+13.04.2026, 1.10.2026, **1.01.2027** — art. 43); KPC `2026/468`; KSCU `2025/1228`.
+
+### ⛔ Korekta własnego zapisu z 16f
+
+16f podpisało w `shared/terminy.md` „art. 14 ust. 2a–2c FUS — sprzeciw 14 dni" jako RZĄD 1, **bez KROKU 2C**
+(odczyt samego t.j. z 2025 r.). Ustawa `2026/26` art. 2 **uchyla art. 14 ust. 2a–6 FUS z dniem 1.01.2027**,
+a sprzeciw przenosi do **art. 85f ustawy o systemie ubezpieczeń społecznych** (14 dni; ponaglenie w sprawie
+orzeczenia — 7 dni, art. 85e ust. 7–9). Wartość na dziś prawdziwa, **zabrakło daty granicznej** — dopisana.
+Metryka FUS po t.j.: `2026/26`, `2026/425` (14.04.2026) — drugiej nie odczytano (poza zakresem terminów).
+
+### Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| ⛔ „**skarga kasacyjna do SN — 30 dni od wyroku SA**" (2 miejsca) — art. 398⁵ § 1 KPC: **2 miesiące od doręczenia** z uzasadnieniem | `dr-04/mod-SUS-ZUS` | 1 — ⛔ błędny termin |
+| „sprzeciw od orzeczenia pielęgniarki / fizjoterapeuty — 14 dni **od 13.04.2026**" — sprzeciw z art. 85f wchodzi 1.01.2027; od 13.04.2026 obowiązuje tylko definicja (art. 4 pkt 21 SUS) — zakres i data kompetencji **nieustalone** | jw. | 2 — data bez podstawy |
+| „ponaglenie po **2 miesiącach** od wniosku", „po 30 dniach od dokumentacji (Etap II)" — decyzja: 30 dni od wyjaśnienia ostatniej okoliczności (art. 118 ust. 1 FUS) | jw. | 1 |
+| apelacja „14 dni", „**wpis 30 zł**" — 2 tygodnie (3 przy przedłużonym uzasadnieniu, art. 369 § 1¹); 30 zł to **opłata podstawowa** (art. 36 ust. 1 KSCU) | jw. | 2/4 |
+| sygnaliści: terminy 7 dni / 3 miesiące przypisane „**art. 12**" (katalog działań odwetowych) — właściwie art. 25 ust. 1 pkt 5 i 7; obowiązek „**przed zatrudnieniem 50. pracownika**" — art. 23: stan na **1 stycznia / 1 lipca**, liczone osoby także spoza stosunku pracy; 6 wierszy „WYMAGA WERYFIKACJI" | `dr-15/mod-ustawa-sygnalisci` | 2 + 1 |
+| „sprzeciw od orzeczenia ZUS — art. 14 ustawy FUS" bez daty granicznej | `dr-16/kalkulatory` | 4 |
+
+Potwierdzone: zwolnienia grupowe (art. 1, 3, 6, 8, 9 — moduł zgodny, uzupełniony o art. 8 ust. 4 i 10 ust. 2),
+praca tymczasowa (18/36), sygnaliści — mechanizm przekierowania (art. 32, 34), odwołanie od decyzji ZUS
+(art. 477⁹ § 1–2 KPC), kasacja od wyroku WSA — 30 dni (PPSA, `dr-06`).
+
+### Uzupełnienia
+
+`shared/terminy.md` — sekcja „Prawo pracy i ubezpieczeń — ustawy szczególne" (16 wierszy).
+T28: `W1-KPC-kasacja-30dni-SA`, `W1-Sygn-art12-terminy` (selftest 50/50; na stanie sprzed napraw 4 trafienia).
+
+**Wersje:** `shared` 3.72 → 3.73, `audyt-systemu-v4` 6.112 → 6.113,
+`dr-04-prawo-pracy-zus-swiadczenia` 3.35 → 3.36, `dr-15-compliance-iso-governance-audyt` 3.13 → 3.14,
+`dr-16-pisma-strategia-dowody-orzecznictwo` 3.7 → 3.8.
+
+
+---
+
+## AUDYT-2026-09-17p — domknięcie pozycji otwartych po 17o + ⛔ niewyjaśniona zmiana kopii roboczej
+
+### 1. Pozycje otwarte z 17o — zamknięte odczytem
+
+- `Dz.U. 2026 poz. 425` (ogłoszona 30.03.2026, w życie 14.04.2026) — zmiana **punktowa** FUS:
+  art. 50e ust. 2 pkt 3 (emerytura górnicza — zaliczanie zwolnień z tytułu oddawania krwi).
+  **Nie dotyka terminów.**
+- `Dz.U. 2026 poz. 26`, etapy: **art. 85a ust. 2 SUS — od 13.04.2026** (fizjoterapeuta orzeka
+  w sprawach rehabilitacji leczniczej w ramach prewencji rentowej; pielęgniarka lub pielęgniarz —
+  w sprawach niezdolności do samodzielnej egzystencji). Wyjątek z art. 43 pkt 3 obejmuje wyłącznie
+  **art. 85a ust. 1 i art. 85c–85j** (1.01.2027).
+- ⛔ **Korekta hipotezy z tej samej sesji:** zapisałem w trakcie prac, że środek zaskarżenia od
+  orzeczeń tych osób w okresie 13.04–31.12.2026 jest „NIEROZSTRZYGNIĘTY". **Art. 34 ustawy `2026/26`**
+  stanowi wprost, że w okresie przejściowym stosuje się do nich **odpowiednio przepisy o orzekaniu
+  przez lekarzy orzeczników** — sprzeciw 14-dniowy przysługuje. Hipoteza była błędna; wycofana przed wydaniem.
+- Reguła „trzech lekarzy orzeczników orzekających łącznie" — **art. 85f ust. 8 SUS**, od 1.01.2027
+  (⛔ nie „od 13.04.2026").
+
+### 2. ⛔⛔ Zmiana kopii roboczej bez autorstwa sesji
+
+Po wydaniu 17o (spakowanym i zweryfikowanym) kopia robocza różniła się od wydanego stanu w **3 miejscach**
+w 2 plikach (`shared/terminy.md` — 1 wiersz; `dr-04/mod-SUS-ZUS` — 2 fragmenty). Żadnej z tych zmian
+nie wprowadziła ta sesja: skrypt, który miał je nanieść, **przerwał się na asercji przed zapisem**,
+a treść już tam była. Zmiany dotyczyły dokładnie tych wierszy, które sesja zamierzała poprawić, i były
+**merytorycznie trafne** (art. 85a ust. 2 + art. 34; art. 85f ust. 8) — sprawdzone odczytem w tej sesji
+i **pozostawione**.
+
+- **Wykrycie:** `sha256sum -c` / **T21** — 2 rozjazdy (`FAIL`). Zapora zadziałała zgodnie z projektem.
+- **Pochodzenie: NIEUSTALONE.** Zapisane jako obserwacja przy F-189 (mechanizm zmian plików poza
+  kontrolą sesji pozostaje nieznany) — z tą różnicą, że tym razem treść przybyła, a nie zniknęła.
+- **Wniosek operacyjny:** po każdym wydaniu porównywać kopię roboczą z rozpakowanym ZIP-em
+  (`diff -rq`), a nie tylko przed wydaniem; T21 uruchamiać także po pakowaniu.
+
+**Wersje:** `shared` 3.73 → 3.74, `audyt-systemu-v4` 6.113 → 6.114,
+`dr-04-prawo-pracy-zus-swiadczenia` 3.36 → 3.37.
+
+
+---
+
+## AUDYT-2026-09-17q — F-135: akty UE — ⭐ EUR-Lex ODBLOKOWANY
+
+### 1. Zmiana stanu dostępu (ważne dla całego systemu)
+
+Od 2026-09-16h zapisywano, że EUR-Lex jest **niedostępny maszynowo** (odpowiedź 202 na CELEX i ELI,
+próby `curl`). ⭐ **2026-09-17q: pobranie przez kanał wyszukiwarka → fetch UDAJE SIĘ.** Odczytano
+tekst skonsolidowany `02016R0679` (art. 1–47 w jednym pobraniu; dokument ma ok. 88 stron OJ,
+więc dalsze artykuły wymagają kolejnych pobrań). **Wniosek: akty UE są weryfikowalne w RZĘDZIE 1**
+tą drogą — dotychczasowe oznaczenia „EUR-Lex niedostępny" należy traktować jako nieaktualne
+(dotyczy wpisów 16h, 16k, 16l, 17o).
+
+### 2. Odczytane i potwierdzone (RODO)
+
+art. 12 ust. 3–4 (miesiąc + 2 miesiące), art. 14 ust. 3 (miesiąc), art. 33 ust. 1–2 (72 h),
+art. 34, art. 36 ust. 2 (8 + 6 tygodni), art. 42 ust. 7 (3 lata), art. 43 ust. 4 (5 lat).
+
+### 3. Usterki
+
+| Usterka | Plik | Postać |
+|---|---|---|
+| ⛔ „Termin **48 h** od wykrycia incydentu (**jak RODO art. 33**)" — RODO daje 72 h po stwierdzeniu; termin z AI Act nieodczytany | `analizator-umow/mod-shared-ai-act` | 2 — fałszywa analogia |
+| „72 h **od wykrycia** / od powzięcia wiedzy" — przepis: **po stwierdzeniu naruszenia**; pominięty wyjątek („mało prawdopodobne ryzyko") i obowiązek wyjaśnienia opóźnienia; pominięte, że podmiot przetwarzający nie ma terminu godzinowego | `dr-11` ×2, `analizator-umow`, `shared/ORKA-BAS` | 4 — pominięcie warunków |
+| art. 83 ust. 4–5 (10/20 mln EUR, 2/4 %) cytowane jako pewne — **nieodczytane** w tej sesji | `analizator-dowodow/MP11`, `analizator-umow/mod-shared-rodo` | ranga źródła — oznaczone 🟨 |
+
+`shared/terminy.md` — nowa sekcja „RODO — terminy odczytane z EUR-Lex" (8 wierszy, w tym dwa
+oznaczone 🟨 jako nieodczytane). T28: `W1-RODO-48h` (selftest 52/52).
+
+### 4. Pozostaje w aktach UE
+
+art. 77–79 i 83 RODO; NIS2; DORA; art. 70 rozporządzenia 650/2012 (EPS); art. 73 AI Act.
+Wszystkie **wykonalne** tą samą drogą — to już nie jest ograniczenie środowiska, tylko kolejka pracy.
+
+**Wersje:** `shared` 3.74 → 3.75, `audyt-systemu-v4` 6.114 → 6.115,
+`dr-11-cyfrowe-cyber-ai-dane-ip` 3.16 → 3.17, `analizator-umow-v1` 1.36 → 1.37,
+`analizator-dowodow-v3` 5.16.10 → 5.16.11.
+
+
+---
+
+## AUDYT-2026-09-17r — T33: kontrola PO wydaniu (zalecenie z 17p wdrożone); akty UE — rozstrzygnięcie zakresu
+
+### 1. Akty UE — co naprawdę zostało do zrobienia
+
+Po odblokowaniu EUR-Lex (17q) sprawdzono, czy korpus w ogóle powołuje **wartości** z NIS2 i DORA:
+**4 trafienia skanu, żadne nie jest wartością z tych aktów** (dwa to stopka i tekst o dniach oczekiwania
+w sądach, dwa dotyczą KPA/KRO). Moduły wiążą NIS2 przez **KSC** (odczytane 16k), a DORA jest opisana
+bez terminów. ⭐ **Wniosek: pełne pobieranie NIS2 i DORA nie ma uzasadnienia** — kolejka „akty UE"
+zawęża się do pozycji faktycznie cytowanych: art. 77–79 i 83 RODO, art. 70 rozp. 650/2012 (EPS),
+art. 73 AI Act. Ograniczeniem jest to, że pobranie zwraca dokument od początku, a te przepisy leżą
+w połowie aktu — kolejne podejście wymaga pobrania kosztownego albo innego kanału.
+
+### 2. T33 — `scripts/check_wydanie.py` (orkiestrator)
+
+Realizacja zalecenia z AUDYT-2026-09-17p: dotąd zgodność „drzewo ↔ wydana paczka" sprawdzano ręcznie,
+a zmianę po wydaniu wychwycił przypadkowo T21 przy następnym przebiegu. Test porównuje każdą paczkę
+`.zip` z katalogiem skilla: liczba plików, **bajtowa identyczność**, sumy kontrolne WEWNĄTRZ paczki;
+zgłasza też paczki bez skilla. Brak katalogu wydań = PASS (środowiska bez paczek).
+Selftest 4/4. Pierwszy przebieg: 24 skille z paczką, **1 rozbieżność wykryta natychmiast** —
+`scripts/check_wydanie.py` nieobecny w paczce (stan oczekiwany: skrypt powstał po jej spakowaniu).
+
+**Wersje:** `audyt-systemu-v4` 6.115 → 6.116.
+
+
+---
+
+## AUDYT-2026-09-17s — pomiar kanałów (F-171, F-183a, F-184, F-185): SAOS wrócił, CBOSA i UOKiK nadal 503
+
+**Metoda:** T25 grupa `orzecznictwo` (19 sond) + sondy bezpośrednie z powtórzeniami.
+
+| Kanał | Stan 2026-09-09 (F-171) | Pomiar 2026-09-17s | Wniosek |
+|---|---|---|---|
+| SAOS `/api/search/judgments` | 502 | **200** (także `caseNumber=`, filtr działa: 2/2 trafienia mają dokładnie tę sygnaturę) | ✅ regresja ustąpiła |
+| SAOS `/api/judgments/{id}` | 502 | **200** (id 244035 → `III CZP 88/15`, SN, 2015-12-11) | ✅ |
+| SAOS `/api/dump/judgments` | 502 | **200** przy `pageSize ≥ 10`; `pageSize=1` → 400 z komunikatem o parametrze (nie awaria) | ✅ |
+| `decyzje.uokik.gov.pl` | 503 | **503** (3/3 próby) | ⛔ bez zmian |
+| `orzeczenia.nsa.gov.pl` (CBOSA) | 503 | **503** (3/3) | ⛔ F-183a bez zmian |
+| `ipo.trybunal.gov.pl/ipo/Szukaj` (TK) | 200, brak filtra po sygnaturze | **200**, 91 kB — bez zmian konstrukcji | ⛔ F-184 bez zmian |
+| `orzeczenia.uzp.gov.pl/Home/Search` (KIO) | 200, `Sign=` nie filtruje | **200**, 57 625 B — bez zmian | ⛔ F-185 bez zmian |
+
+⛔ **Nowe ustalenie o SAOS: kanał jest NIESTABILNY.** W serii prób `curl` zwracał `000`
+(brak odpowiedzi) w 5 z 8 wywołań, a te same adresy odpowiadały 200 w < 1 s przy kolejnej
+próbie. To ma znaczenie dla V-SYG-0: **pojedynczy brak odpowiedzi nie jest dowodem
+niedostępności** — procedura wymaga powtórzenia (min. 3 próby). Zapisane w
+`shared/DOSTEP-MASZYNOWY-API.md`.
+
+⚠️ Potwierdzenie wcześniejszego wyniku: `III OSK 1959/22` (NSA 2023) i `II SAB/Wa 678/21`
+→ 0 trafień w SAOS przy działającym kanale = **OUT_OF_SCOPE** (poza pokryciem korpusu),
+co potwierdza status nadany 2026-09-16l, a nie podważa istnienia wyroku.
+
+**Skutek dla flag:** F-171 **zawężona** do jednej pozycji (`decyzje.uokik.gov.pl`);
+F-183a, F-184, F-185 bez zmian — mierzone, nie domniemane.
+
+**Wersje:** `shared` 3.75 → 3.76, `audyt-systemu-v4` 6.116 → 6.117.
+
+
+---
+
+## AUDYT-2026-09-17t — F-113: ramię kontrolne ZBUDOWANE; pomiar niewykonalny w tej sesji (nazwana przyczyna)
+
+### 1. Wykonane
+
+`scripts/build_ramie_kontrolne_f113.py --repo-root <drzewo> --out f113-ramie-A` — przebieg czysty:
+
+| Bramka | Działanie |
+|---|---|
+| B1 ANTY-FASADA | usunięty `shared/SELF-CHECK-ANTY-FASADA.md` + kotwica w SELF-CHECK routera |
+| B2 KOTWICA URZĘDOWA 🟨 | wycięta kotwica w SELF-CHECK |
+| B3 DOMAIN-LOCK | usunięty `shared/DOMAIN-LOCK.md` + blok w SELF-CHECK |
+| B4 RATE-COMPLETENESS | usunięty `shared/RATE-COMPLETENESS.md` + blok w SELF-CHECK |
+| B5 ŚLAD ROUTINGU | wycięte bloki w `prawny-router-v3/SKILL.md` i SELF-CHECK |
+
+Sprzątanie odwołań: **36 plików, 55 linii**. `ci_check_shared`: **OK — brak zerwanych
+odwołań**, czyli ramię A nie wejdzie w ⛔ TRYB ZDEGRADOWANY (warunek ważności przebiegu).
+
+**HASH MANIFESTU A:** `b3fd18cf70a13b6b685e494f251a54edc4bd199c40d23e6bc4b454d191761c69` (1258 plików)
+**HASH MANIFESTU B:** `1b12da7e529d48204304cb1742ce8894c61f826db74c75795bd4e18d90bb1679` (1261 plików)
+⛔ Ramię A jest artefaktem testowym poza repozytorium — **nie jest wydawane**.
+
+### 2. ⛔ Dlaczego pomiar NIE został wykonany w tej sesji
+
+Protokół § 3 wymaga promptu, który nie zdradza testu, oraz oceny **ślepej** (§ 4: ramię
+„zakleić przed oceną"). Ta sesja:
+- przez kilkanaście godzin **edytowała dokładnie te bramki** (SELF-CHECK, DOMAIN-LOCK,
+  RATE-COMPLETENESS) i zna ich treść na pamięć,
+- zna przypisanie ramion (sama je zbudowała),
+- byłaby jednocześnie wykonawcą przebiegu i oceniającym.
+
+Przebieg w takich warunkach mierzyłby **pamięć sesji**, nie obecność bramki w drzewie —
+czyli dokładnie ta klasa wady, która unieważniła TEST1–3 i którą protokół wymienia jako
+powód powstania. Wykonanie go „żeby domknąć flagę" byłoby orzeczeniem bez pomiaru.
+
+### 3. Warunki wykonania (przekazanie)
+
+1. Nowa sesja modelu, **bez wcześniejszego kontaktu** z drzewem i z tym wpisem.
+2. Kazusy i pułapki P1–P4 dobrane na świeżo, **nigdy zapisane w repozytorium**
+   (repozytorium jest czytane przez model).
+3. Ten sam prompt słowo w słowo w obu ramionach; jedyną różnicą drzewo (hashe wyżej).
+4. Minimum z § 2 protokołu: 10 przebiegów na ramię w komórkach T1 i T2.
+5. Ocena: `scripts/ocena_transkryptow_f113.py` po zaklejeniu etykiety ramienia; oceniający
+   ≠ wykonawca przebiegu.
+
+⭐ **Status F-113 zmienia się z „narzędzie gotowe, pomiar do wykonania" na „ramię A
+zbudowane i zweryfikowane; pomiar wymaga sesji niezależnej".** To nie jest zamknięcie.
+Ta sama bariera (brak niezależnego oceniającego) blokuje F-167 — obie flagi czekają na
+ten sam warunek, co warto było nazwać wprost, zamiast trzymać je jako dwie osobne zagadki.
+
+**Wersje:** `audyt-systemu-v4` 6.117 → 6.118.
+
+
+---
+
+## AUDYT-2026-09-17u — ⭐⭐ F-135 ZAMKNIĘTA: akty UE odczytane przez CELLAR (obejście blokady EUR-Lex)
+
+### 1. Kanał
+
+⛔ EUR-Lex z kontenera: **HTTP 202, 0 bajtów** — na HTML i PDF, przez CELEX i ELI (potwierdzone
+ponownie 2026-09-17u). Kanał „wyszukiwarka → pobranie strony" zwraca dokument **od początku**
+i ucina długie akty (RODO kończyło się na art. 47).
+
+⭐ **Cellar — repozytorium Urzędu Publikacji UE — odpowiada kontenerowi:**
+`http://publications.europa.eu/resource/celex/<CELEX>` z `Accept: application/xhtml+xml`
+i `Accept-Language: pol`. Pomiar:
+
+| Akt | CELEX | Wynik |
+|---|---|---|
+| RODO (pierwotne) | `32016R0679` | 200, 840 814 B |
+| RODO (skonsolidowane) | `02016R0679-20160504` | 200, 490 137 B |
+| Rozporządzenie spadkowe | `32012R0650` | 200, 296 274 B |
+| AI Act | `32024R1689` | 200, 1 334 371 B |
+| NIS2 | `32022L2555` | 200, 732 726 B |
+| DORA | `32022R2554` | 200, 784 809 B |
+
+`Accept: text/html` i `application/pdf` → 404; `application/xml;notice=object` → metryka (7 kB).
+⭐ Przewaga: **cały akt trafia do pliku**, więc przepisy z końca wycina się lokalnie — limit
+pobrania przestaje ograniczać. Zapisane w `shared/DOSTEP-MASZYNOWY-API.md` (nowa sekcja).
+
+### 2. Odczytane i podniesione z 🟨 do RZĘDU 1
+
+| Przepis | Treść | Gdzie |
+|---|---|---|
+| RODO art. 77 ust. 2, 78 ust. 2–3 | organ informuje o postępach; **3 miesiące** braku rozpatrzenia lub informacji → środek sądowy; sąd państwa siedziby organu | `pisma-proste/SPK`, `shared/terminy.md` |
+| RODO art. 83 ust. 3–6 | 10 mln EUR / **2 %** i 20 mln EUR / **4 %** światowego obrotu — **kwota wyższa**; ten sam pułap za nieprzestrzeganie nakazu (ust. 6); przy kilku naruszeniach łączna kara ≤ pułap za najpoważniejsze (ust. 3) | `analizator-dowodow/MP11`, `analizator-umow/mod-shared-rodo`, `shared` |
+| Rozp. 650/2012 art. 70 | odpis EPS ważny **6 miesięcy**, data ważności wpisana w odpisie; wyjątkowo okres dłuższy; potem przedłużenie albo nowy odpis | `dr-02/mod-KC-spadki-dlugi…` |
+| AI Act art. 73 | **15 dni** (zasada), **2 dni** (powszechne naruszenie / incydent z art. 3 pkt 49 lit. b), **10 dni** (śmierć osoby); dopuszczalne zgłoszenie wstępne niepełne | `analizator-umow/mod-shared-ai-act`, `shared` |
+
+⛔ Wcześniejszy zapis w module AI Act („48 h, jak RODO art. 33") był **podwójnie błędny**:
+zła wartość i zła analogia — właściwy termin podstawowy to 15 dni, a RODO daje 72 h.
+
+### 3. Stan F-135
+
+Kolejka krajowa wyczerpana 17o; kolejka UE zamknięta dziś. **F-135 (część merytoryczna)
+ZAMKNIĘTA.** NIS2 i DORA pozostają nieodczytane świadomie — korpus nie cytuje ich wartości
+(pomiar 17r), a kanał do nich jest już udokumentowany, gdyby zaszła potrzeba.
+
+**Wersje:** `shared` 3.76 → 3.77, `audyt-systemu-v4` 6.118 → 6.119,
+`dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.55 → 3.56, `pisma-proste-v2` 2.19 → 2.20,
+`analizator-umow-v1` 1.37 → 1.38, `analizator-dowodow-v3` 5.16.11 → 5.16.12.

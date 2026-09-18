@@ -1,5 +1,111 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.77 — 2026-09-16 — F-189
+
+- ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Accept: application/xhtml+xml zwraca cały akt (RODO, 650/2012, AI Act, NIS2, DORA — zmierzone). terminy.md — nowa sekcja „Akty UE poza RODO” (EPS art. 70; AI Act art. 73: 15/2/10 dni) oraz podniesione do RZĘDU 1 wiersze RODO art. 78 ust. 2–3 i art. 83 ust. 3–6.
+## 3.76 — 2026-09-16 — F-189
+
+- DOSTEP-MASZYNOWY-API — sekcja SAOS: pomiar dostępności 2026-09-17s (F-171): /api/search/judgments z caseNumber, /api/judgments/{id} i /api/dump/judgments → 200 (regresja 502 z 2026-09-09 ustąpiła); ⛔ kanał NIESTABILNY — 5 z 8 wywołań bez odpowiedzi, wymagane powtórzenie min. 3 prób przed uznaniem sygnatury za niesprawdzalną; potwierdzone OUT_OF_SCOPE dla NSA/WSA 2021–2023.
+## 3.75 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „RODO — terminy odczytane z EUR-Lex” (F-135; RZĄD 1 — tekst skonsolidowany 02016R0679): art. 12 ust. 3–4, 14 ust. 3, 33 ust. 1–2 (72 h po STWIERDZENIU, z wyjątkiem „mało prawdopodobne ryzyko”), 34, 36 ust. 2, 42 ust. 7, 43 ust. 4; art. 78 ust. 2 i 83 oznaczone 🟨 jako nieodczytane. ORKA-BAS — doprecyzowany art. 33 ust. 1.
+## 3.74 — 2026-09-16 — F-189
+
+- terminy.md — wiersz o orzeczeniach pielęgniarki i fizjoterapeuty (od 13.04.2026, art. 85a ust. 2 SUS; w okresie przejściowym odpowiednio przepisy o lekarzach orzecznikach — art. 34 ustawy 2026/26). ⚠️ Fragment pojawił się w kopii roboczej bez autorstwa sesji (wykryty przez T21); zweryfikowany odczytem RZĄD 1 i zachowany — AUDYT-2026-09-17p.
+## 3.73 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Prawo pracy i ubezpieczeń — ustawy szczególne” (F-135; RZĄD 1): zwolnienia grupowe (2026/1195), sygnaliści (2024/928), praca tymczasowa (2025/236), ZUS/KPC/KSCU — 16 wierszy; wiersz „sprzeciw — art. 14 ust. 2a–2c FUS” uzupełniony o datę graniczną 31.12.2026 i art. 85f SUS od 1.01.2027 (korekta 16f — pominięty KROK 2C).
+## 3.72 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Sprawy rodzinne — terminy KRO i KPC poza pochodzeniem dziecka” (F-135; RZĄD 1 — KRO 2026/236, KPC 2026/468): 14 wierszy (art. 8 § 3, 59, 60 § 3, 73 § 1, 172 KRO; art. 428, 456, 554, 579¹, 583¹, 592, 183⁸, 183¹⁰, 598⁵ KPC).
+## 3.71 — 2026-09-16 — F-189
+
+- terminy.md (F-135; RZĄD 1 — KPA 2025/1691, PPSA 2026/143 + 2026/846): KPA — art. 156 § 2 (10 lat), 158 § 3 (30 lat), 189g; PPSA — art. 53 § 1 z pkt 4a/4b (interpretacja: 30 dni, nie 14), 54 § 2–3, 64c § 4–5, 64d, 177a, 259. definicje/DEF-PROCEDURA — ⛔ „art. 128 KPA — odwołanie” → art. 129 § 2; ⛔ „art. 33 UPEA — zarzuty 7 dni” usunięte.
+## 3.70 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Ochrona danych osobowych — krajowa ustawa (u.o.d.o.)” (F-135; RZĄD 1 — t.j. 2019/1781 + KROK 2C; KPA 2025/1691): 11 wierszy (IOD 14 dni, art. 35 § 3 KPA, jednoinstancyjność i skarga 30 dni, środek tymczasowy, czynności sprawdzające, kontrola, kara — zapłata, dane, sektor publiczny); ostrzeżenia: art. 237 KPA nie jest podstawą, art. 50 ust. 4 u.o.d.o. nie istnieje, terminy RODO niezweryfikowane.
+## 3.69 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Krajowy system cyberbezpieczeństwa (KSC, po wdrożeniu NIS2)” (F-135; RZĄD 1 — t.j. 2026/20 + nowelizacja 2026/252): 24 h / 72 h / miesiąc (art. 11 ust. 1 pkt 4–4c, ust. 1a, art. 12b), terminy przejściowe z art. 33 ustawy zmieniającej (3.10.2026, 3.04.2027, 3.04.2028), wpis według harmonogramu ministra.
+## 3.68 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Zamówienia publiczne (PZP) — środki ochrony prawnej” (F-135; RZĄD 1 — PZP 2026/793, KPC 2026/468, KSCU 2025/1228): art. 515 ust. 1–4, 514 ust. 2, 517 ust. 2, 518, 525, 544, 580, 585, 590 + art. 398⁵ KPC, art. 34 KSCU, art. 138; ostrzeżenia o art. 577/457 i o równoważności nadania pocztowego.
+## 3.67 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Postępowanie spadkowe (KPC)” (F-135; RZĄD 1 — KPC 2026/468 + KROK 2C): art. 673 pkt 4, 675–676, 679 § 1 (tylko uczestnik), 668¹, 640 § 1; ⛔ prekluzja w dziale spadku (art. 688 w zw. z art. 618 § 3).
+## 3.66 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Kodeks karny skarbowy (KKS) — terminy i progi” (F-135; RZĄD 1 — KKS 2025/633 + KROK 2C: 2026/347, 421, 846, 901): karalność art. 44 i 51, terminy zapłaty art. 16–16a, dobrowolne poddanie się art. 142–144, grzywna art. 48, progi art. 53, art. 27, mandat karny zaoczny (od 26.12.2026).
+## 3.65 — 2026-09-16 — F-189
+
+- terminy.md (F-135, RZĄD 1 — KC 2026/795): nowa podsekcja „Dalsze terminy KC” (1007 § 1–4, 994 § 1, 819, 817, 812 § 4, 174 § 1, 764⁶, 704, 660) i ostrzeżenie o art. 117; szybka tabela — zachowek z punktami startowymi, art. 1015 § 1¹–§ 2, art. 264 § 1–3 KP (dyscyplinarka to § 2), art. 14 ust. 2a–2c FUS, art. 25 ust. 1a uWŁ. definicje/DEF-ODPOWIEDZIALNOSC-SZKODA — art. 442¹ § 2–4 (⛔ szkoda na osobie: granica 10 lat nie obowiązuje).
+## 3.64 — 2026-09-16 — F-189
+
+- T27 klasa ZASTĄPIONY_TJ (RZĄD 1): ⛔ `2024/1360` (rozporządzenie RM) jako t.j. KC → `2026/795` w 9 miejscach (orka-bas cz. 03, 08; definicje DEF-INTERES-WLASNY, DEF-ODPOWIEDZIALNOSC; mod-niepelnosprawnosc); `2025/1515` (rozporządzenie RM) jako t.j. u.s.g. → `2026/662`; `2024/655` (rozporządzenie MZ) jako t.j. ustawy o obronie Ojczyzny → `2025/825`; ustawa deweloperska `2021/1177` → t.j. `2026/880` (×2). oplaty/03: tabela spraw rodzinnych — kolumna podstawy § 4 ust. 1 pkt 1–9 i trzy pominięte pozycje (T32). TABELE-OPLAT §7: wskaźnik dr-06 → moduł opłaty skarbowej; opis egzekwowania T32.
+## 3.63 — 2026-09-16 — F-189
+
+- terminy.md, sekcja Ordynacja — zakres pięciu nowelizacji po t.j. ustalony z treści (F-OP-2026-09 zamknięta): żadna nie zmienia art. 68, 70, 162, 223, 236, 241; poz. 1098 NIE dotyka art. 70 (korekta 12i); poz. 875 — milczące umorzenie (art. 67a § 3–15, od 1.01.2027); ⚠️ od 1.10.2026 art. 213 § 5 — odmowa uzupełnienia/sprostowania decyzji bez zażalenia, termin odwołania od doręczenia postanowienia.
+## 3.62 — 2026-09-16 — F-189
+
+- terminy.md — (1) KRO: dopisane terminy macierzyństwa art. 61¹¹, 61¹³ § 1–2, 61¹⁴ § 1 (ROK; ✅ RZĄD 1 Dz.U. 2026 poz. 236) i ostrzeżenie o błędzie „6 miesięcy/3 lata”; (2) KP: zakres nowelizacji poz. 1046 poprawiony z odczytu treści (art. 11 nie jest zmieniany). Pole YAML `changelog:` skrócone do odesłania (T12).
+## 3.61 — 2026-09-14 — CBOSA retrieval/snapshot jako jawny kanał provenance
+
+- V-SYG-0.5 ma obowiązkowy POST-CHECK HOSTA przed exact-match; `site:`
+  jest tylko discovery i nie gwarantuje domeny.
+- Snapshot oficjalnego `/doc/{ID}` może mieć zakres `METADATA_SENTENCE`,
+  `...REASONING_PARTIAL` lub `...REASONING_FULL`; nie redukuj go automatycznie
+  do samego snippetu/ISTNIENIA.
+- Pomiar 10 realnych sygnatur: 10/10 metryka+sentencja, 5/10 pełne
+  uzasadnienie, 2/10 uzasadnienie bez pewności kompletności, 3/10 bez
+  potwierdzonego uzasadnienia.
+- `access_mode=CRAWLED_OR_INDEXED` jest provenance, NIE piątym statusem.
+  `WERYFIKACJA-SLAD.md` 1.7 utrzymuje zamknięte statusy ✅/⚠️.
+- Pełna treść snapshotu nie dowodzi `DIRECT_LIVE`; 500/502/503 originu może
+  współistnieć z bogatą kopią crawlera.
+
+
+## 3.60 — 2026-09-14 — kanoniczny direct CBOSA / RZĄD 2A
+
+- Dodano `shared/CBOSA-ADAPTER.md` jako SSOT kontraktu HTTP dla NSA/WSA.
+- `HIERARCHIA-ZRODEL.md` 1.8: CBOSA jawnie RZĄD 2A; routing źródłowy
+  SN / Portal Orzeczeń / CBOSA / SAOS.
+- `SYGNATURY.md` 1.5: V-SYG-0.7 DIRECT-CBOSA przed V-SYG-0.5 fallback.
+- `DOSTEP-MASZYNOWY-API.md` 1.5: fresh-probe, formularz, cookies,
+  paginacja, /doc/{ID}, exact-match i fail-closed.
+- `PRAWO-HARDGATE-ORZECZENIA.md`: override NSA/WSA wymusza direct CBOSA
+  po braku MCP, przed ogólnym web_search.
+- `MCP-INTEGRACJA.md`: brak mcp-nsa nie obniża systemu do luźnego web_search;
+  stosowany jest natywny adapter HTML.
+- `KONEKTORY-REKOMENDOWANE.md`: mcp-nsa = MCP-FIRST, direct adapter = fallback
+  deterministyczny.
+- Implementacja referencyjna `orzeczenia-sadowe-v2` przeszła 22/22 testów
+  regresyjnych po hardeningu.
+- Reguła 7: shared i orzeczenia-sadowe-v2 wydawane jako kompletne paczki ZIP.
+
+
+- 3.59 (2026-09-12q, PODZIAL): **TABELE-OPLAT 2.0 — rdzen i siedem satelitow.** Plik mial 1555 linii (47 % ponad prog CRIT, wykryte w 12p po rozszerzeniu T13). Rdzen `TABELE-OPLAT.md` (159 linii) trzyma wylacznie REGULE KOLEJNOSCI, MAPE WLASNOSCI SEKCJI i rejestry (sekcja 7 - tabele satelickie w innych skillach, sekcja 8 - zakres nieobjety). Materia w `shared/oplaty/`: 01-KSCU-cywilne-rodzinne-pracownicze (sekcje 1, 1a, 1b, 1c), 02-zwolnienia-zwrot-alimenty (2, 2a-2e), 03-koszty-zastepstwa-taksy (3, 3a), 04-wartosci-powtarzalne-kotwice (4, 4a-4g), 05-sprawy-karne (5, 6e), 06-administracyjne-wieczystoksiegowe-KIO (6, 6a), 07-komornicze-skarbowe-notarialne (6b, 6c, 6d). ⛔ ZABEZPIECZENIE ANTYREGRESYJNE: kazda sekcja ma DOKLADNIE JEDNEGO wlasciciela wskazanego w mapie, kazdy satelita niesie stopke "Plik satelicki - NIE JEST ZRODLEM SAMODZIELNYM" z zakazem duplikacji, a calosci pilnuje nowy test T29 (check_oplaty_mapa.py, cztery bramki, selftest 5/5). Kontrola integralnosci podzialu: z 1236 niepustych linii oryginalu w nowym zestawie brakuje 78, z czego 72 to pozycje starego spisu tresci i 6 linii jego ramki - ZERO utraty tresci merytorycznej. Wszystkie 7 satelitow zarejestrowanych w tabeli zasobow SKILL.md
+- 3.58 (2026-09-12p, nawigacja zasobow kanonicznych): TABELE-OPLAT.md (1472 linie, 72 pozycje) i terminy.md (13 rezimow, 22 pozycje) dostaly SPIS TRESCI. Powod: oba pliki sa CELOWO niedzielone - podzial odtworzylby rozproszenie, przed ktorym broni sekcja 7 TABELE-OPLAT - ale przy tej objetosci problemem staje sie odnalezienie sekcji, nie sama dlugosc. We wstepie do spisu terminy.md ostrzezenie, ze ta sama czynnosc (zazalenie, wniosek o uzasadnienie, przywrocenie terminu) ma INNY termin w KPC, KPA, Op i KKW - spis ma sluzyc weryfikacji rezimu, nie tylko skakaniu po pliku. Poprawiony poziom naglowka UPEA (### -> ##): egzekucja administracyjna byla zagniezdzona pod KPA, choc to odrebny rezim z wlasna ustawa
+- 3.57 (2026-09-12o, rodzina TERMINY c.d.): terminy.md - dopisane PRAWO CYWILNE MATERIALNE (KC Dz.U. 2026 poz. 795, odczyt tresci); dotad KC mial w pliku TRZY wiersze. Przedawnienie ogolne art. 118 z pulapka "koniec terminu przypada na OSTATNI DZIEN ROKU KALENDARZOWEGO, chyba ze termin jest krotszy niz dwa lata" - liczenie dzien po dniu daje date wczesniejsza niz rzeczywista. Art. 119 (zakaz modyfikacji czynnoscia prawna) i art. 120 par. 1 zd. 2 (bieg od dnia, w ktorym roszczenie STALOBY SIE wymagalne przy najwczesniejszej mozliwej czynnosci). Pelny art. 442[1]: 3 lata od dowiedzenia sie, 10 lat granica, ⛔ 20 LAT przy zbrodni lub wystepku liczone OD CZYNU niezaleznie od wiedzy, ⛔ przy szkodzie NA OSOBIE granica 10 lat NIE OBOWIAZUJE (par. 3), maloletni +2 lata od pelnoletnosci (par. 4). Terminy zawite: rekojmia 2/5 lat (art. 568 par. 1) i rok od stwierdzenia wady z ochrona konsumenta (par. 2), zawieszenie z par. 4, akt starannosci miedzy przedsiebiorcami (art. 563 par. 1), blad i grozba rok (art. 88 par. 2), ⛔ roszczenie posesoryjne WYGASA po roku, nie przedawnia sie (art. 344 par. 2), umowa przedwstepna rok (art. 390 par. 3), skarga paulianska 5 lat (art. 534), zasiedzenie 20/30 lat (art. 172) z ochrona maloletniego wlasciciela (art. 173)
+- 3.56 (2026-09-12n, rodzina TERMINY c.d.): terminy.md - dopisane PRAWO PRACY (KP Dz.U. 2025 poz. 277, odczyt tresci), 13 pozycji; dotad KP mial w pliku DWA wiersze. Kluczowe: art. 264 par. 1-3 (21 dni, trzy rozne punkty poczatkowe), art. 265 par. 2 (7 dni), przedawnienia z art. 291 par. 1, 2 i 5 (3 lata / rok i 3 lata / 10 lat). ⛔ Dopisane oznaczenie GRANIC DLA PRACODAWCY: art. 52 par. 2 (miesiac od uzyskania wiadomosci) i art. 109 par. 1 (2 tygodnie / 3 miesiace) to zarzuty obrony, nie terminy pracownika. ⭐ art. 112 par. 1 zd. 3 - nieodrzucenie sprzeciwu od kary porzadkowej w 14 dni JEST ROWNOZNACZNE Z UWZGLEDNIENIEM; milczenie pracodawcy konczy sprawe po mysli pracownika. KROK 2C: Dz.U. 2026 poz. 1046 (w zycie 5.11.2026) nie dotyka tych przepisow
+- 3.55 (2026-09-12m, rodzina TERMINY ZAMKNIETA): terminy.md - dopisane ZASKARZANIE UCHWAL SPOLEK (KSH Dz.U. 2024 poz. 18, odczyt tresci): szesc wierszy obejmujacych cztery rezimy - sp. z o.o. uchylenie (art. 251) i niewaznosc (art. 252 par. 3, granica 3 LATA), S.A. niepubliczna uchylenie (art. 424 par. 1) i niewaznosc (art. 425 par. 2, granica 2 LATA), S.A. publiczna uchylenie (art. 424 par. 2, granica 3 MIESIACE) i niewaznosc (art. 425 par. 3, 30 DNI OD OGLOSZENIA / rok). ⭐ Dopisane art. 252 par. 4 i art. 425 par. 4 - uplyw terminow nie wylacza ZARZUTU niewaznosci. KROK 2C: Dz.U. 2026 poz. 176 (w zycie 18.02.2027) nie dotyka tych przepisow. Tym wpisem rodzina TERMINY jest zamknieta co do rezimow: KPC, KPK, KPW, KPA, PPSA, UPEA, Op, KKW, KRO, PrUp/PrRestr, KSH
+- 3.54 (2026-09-12l, rodzina TERMINY c.d.): terminy.md - dopisana UPADLOSC I RESTRUKTURYZACJA (PrUp Dz.U. 2026 poz. 913, PrRestr Dz.U. 2026 poz. 533, odczyt tresci): 30-dniowy OBOWIAZEK dluznika z art. 21 ust. 1 i wariant przy zarzadzie sukcesyjnym (ust. 2a), 30 dni na zgloszenie wierzytelnosci od obwieszczenia w Rejestrze (art. 51 ust. 1 pkt 4 w zw. z art. 236 ust. 1), dwa tygodnie na sprzeciw co do spisu (art. 91 ust. 1-2 PrRestr). ⛔ Dopisane rozroznienie: 3 miesiace z art. 11 ust. 1a i 24 miesiace z art. 11 ust. 2 to NIE TERMINY, tylko domniemanie i samodzielna podstawa niewyplacalnosci - one OTWIERAJA 30-dniowy obowiazek, a nie go zastepuja. ⛔ Adresat zgloszenia to SYNDYK i system teleinformatyczny, nie sedzia-komisarz. TABELE-OPLAT 1.8: nowa sekcja 4g - TRZECIA KOTWICA, przecietne wynagrodzenie w sektorze przedsiebiorstw bez wyplat nagrod z zysku w III kwartale roku poprzedniego (art. 235 ust. 1 PrUp, 15 %); GUS publikuje CZTERY rozne "przecietne wynagrodzenia" i przepis wskazuje jeden konkretny
+- 3.53 (2026-09-12k, rodzina TERMINY c.d.): terminy.md - dopisane POCHODZENIE DZIECKA (KRO, Dz.U. 2026 poz. 236, odczyt tresci): zaprzeczenie ojcostwa - maz matki, matka i dziecko po ROKU od dowiedzenia sie (art. 63, 69 par. 1, 70 par. 1), bezskutecznosc uznania - art. 78 par. 1, 79, 81 par. 2, warianty z art. 64-65 przy ubezwlasnowolnieniu i chorobie psychicznej, granice powodztwa prokuratora z art. 86. ⛔ Odnotowane jako NIEPRAWDZIWE dwa terminy krazace w obiegu: matka "6 miesiecy od urodzenia" i dziecko "3 lata od pelnoletnosci" - ten drugi zawyza trzykrotnie. ⛔ Zasada przewodnia sekcji: wszystkie terminy biegna OD DOWIEDZENIA SIE, nie od urodzenia dziecka (reforma 2019)
+- 3.52 (2026-09-12j, rodzina TERMINY c.d.): terminy.md - dopisane POSTEPOWANIE WYKONAWCZE KARNE (KKW, Dz.U. 2025 poz. 911, odczyt tresci): skarga skazanego 7 dni od dowiedzenia sie o zdarzeniu (art. 6 par. 4), skarga na decyzje 7 dni (art. 7 par. 3), zazalenie ws. warunkowego zwolnienia rozpoznawane w 14 dni (art. 162 par. 2), KARENCJE 6 miesiecy / 1 rok na ponowny wniosek o warunkowe zwolnienie (art. 161 par. 3-4) i 1 rok na kolejna przerwe (art. 153 par. 3), odroczenie do roku i do 3 lat po urodzeniu dziecka (art. 151 par. 1), raty grzywny do roku albo do 3 lat (art. 49). ⛔ Dopisane rozroznienie KARENCJA vs TERMIN ZAWITY: wniosek przedwczesny nie jest odrzucany, tylko nierozpoznawany do uplywu okresu. Odnotowane uchylenie art. 152 KKW
+- 3.51 (2026-09-12i, rodzina TERMINY c.d.): terminy.md - dopisane POSTEPOWANIE PODATKOWE (Ordynacja podatkowa, Dz.U. 2026 poz. 622, odczyt tresci): odwolanie 14 dni (art. 223 par. 2, nie par. 1), zazalenie 7 dni (art. 236 par. 2), przywrocenie terminu 7 dni (art. 162 par. 2) z zakazem z par. 3, wznowienie 1 miesiac w dwoch wariantach (art. 241 par. 2 pkt 1-2), art. 68 par. 1-2 (3/5 lat, NIEPOWSTANIE zobowiazania) i art. 70 par. 1 (5 lat, PRZEDAWNIENIE) z ostrzezeniem, ze to dwie rozne instytucje, oraz zawieszenie i przerwanie z art. 70 par. 2-6. ⛔ Odnotowany KROK 2C: piec ustaw zmieniajacych oglszonych po t.j., trzy wchodza w zycie w ciagu trzech tygodni od sesji
+- 3.50 (2026-09-12h, rodzina TERMINY c.d.): terminy.md - dopisana EGZEKUCJA ADMINISTRACYJNA (UPEA, Dz.U. 2026 poz. 268, odczyt tresci): 7 dni po doreczeniu upomnienia przed wszczeciem (art. 15 par. 1 zd. 2), ⛔ BRAK terminu zarzutu biegnacego od doreczenia TW - art. 33 par. 5 podaje wylacznie terminy koncowe (30 dni od wyegzekwowania, do dnia wykonania obowiazku, 7 dni od postanowienia o umorzeniu), skarga na czynnosc egzekucyjna 7 dni (art. 54 par. 3). Dopisane rozroznienie ZARZUT vs SKARGA: katalog art. 33 par. 2 jest ZAMKNIETY i ma 6 pozycji, a "zbyt uciazliwy srodek egzekucyjny" jest podstawa SKARGI z art. 54 par. 1 pkt 2, nie zarzutu
+- 3.49 (2026-09-12g, rodzina TERMINY c.d.): terminy.md - obsadzone POSTEPOWANIE ADMINISTRACYJNE I SADOWOADMINISTRACYJNE, ktore mialy dotad po JEDNYM wierszu. Z odczytu tresci KPA (Dz.U. 2025 poz. 1691) i PPSA (Dz.U. 2026 poz. 143): KPA - odwolanie 14 dni (art. 129 par. 1-2, wnoszone ZA POSREDNICTWEM organu), zazalenie 7 dni (art. 141 par. 2), uzupelnienie decyzji 14 dni (art. 111 par. 1), przywrocenie terminu 7 dni z obowiazkiem rownoczesnego dopelnienia czynnosci i ZAKAZEM przywracania terminu do samej prosby (art. 58 par. 2-3), wznowienie 1 miesiac (art. 148), wniosek o ponowne rozpatrzenie (art. 127 par. 3), terminy ORGANU z art. 35 par. 2-3a wraz z art. 35 par. 5 (czego NIE wlicza sie do terminu) i art. 130 par. 2 (odwolanie wstrzymuje wykonanie). PPSA - skarga 30 dni (art. 53 par. 1-2), skarga W KAZDYM CZASIE na inne akty (par. 2a) i na bezczynnosc po ponagleniu (par. 2b), 6 miesiecy dla prokuratora/RPO/RPD (par. 3), sprzeciw od decyzji 14 dni (art. 64c par. 1), wniosek o uzasadnienie 7 dni TYLKO przy oddaleniu skargi (art. 141 par. 2 - przy uwzglednieniu uzasadnienie z urzedu, par. 1), skarga kasacyjna 30 dni (art. 177 par. 1), zazalenie 7 dni (art. 194 par. 2), przywrocenie terminu 7 dni z granica roku (art. 87), wznowienie 3 miesiace i granica 5 lat (art. 277-278). ⛔ Odnotowane: art. 52 par. 3 PPSA czyni wniosek o ponowne rozpatrzenie FAKULTATYWNYM, art. 52 par. 4 UCHYLONY, "wezwanie do usuniecia naruszenia prawa" zniknelo z procedury w 2017 r.; prawo pomocy z art. 243-262 PPSA to ODREBNY rezim, nie art. 100-103 KSCU
+- 3.48 (2026-09-12f, O-12): markery <!-- T28-OK: --> na liniach TABELE-OPLAT i terminy.md, ktore CYTUJA bledny zapis w celu ostrzezenia przed nim. Marker dziala w jednej linii i wymaga podania powodu; bez niego nowy test T28 zglaszalby wlasna dokumentacje naprawy. Tresc merytoryczna bez zmian
+- 3.47 (2026-09-12e, O-11 rodzina WARTOSCI POWTARZALNE): TABELE-OPLAT 1.7 - sekcja 4 rozbudowana z 14 do ~190 linii, wszystko z odczytu tresci. 4a odsetki cywilne (art. 359 par. 2 KC: stopa referencyjna NBP + 3,5 p.p.; art. 481 par. 2: + 5,5 p.p.; maksymalne = dwukrotnosc, art. 359 par. 2[1] i 481 par. 2[1]; par. 2[3] - zakaz wylaczenia takze przy wyborze prawa obcego; kwota z OBWIESZCZENIA MS w Monitorze Polskim, art. 359 par. 4 i 481 par. 2[4] - NIE z rozporzadzenia RM, bo Dz.U. 2014 poz. 1858 jest uchylone i delegacja z art. 359 par. 3 tez). 4b transakcje handlowe (t.j. Dz.U. 2023 poz. 1790, nazwa ustawy zmieniona na "o przeciwdzialaniu nadmiernym opoznieniom"): + 10 p.p., a dla publicznego podmiotu leczniczego + 8 p.p. (art. 4 pkt 3); sztywna data odczytu stopy 1 stycznia / 1 lipca (art. 11b); rekompensata 40/70/100 EUR wg progow 5000 i 50 000 zl (art. 10 ust. 1), kurs z ostatniego dnia roboczego miesiaca poprzedzajacego wymagalnosc (ust. 1a), roszczenie NIEZBYWALNE (ust. 4). 4c odsetki za zwloke (art. 56 par. 1 OP: 200 % stopy LOMBARDOWEJ + 2 %, nie mniej niz 8 % - inna kotwica niz KC; 50 % art. 56a z warunkami lacznymi; 150 % art. 56b tylko VAT i akcyza) oraz ⛔ art. 23 ust. 1 SUS WYLACZA art. 56a - obnizona stawka NIE dziala do skladek ZUS; prog bagatelnosci 1 % minimalnego wynagrodzenia (ust. 1a). 4d stopy skladek (art. 22 ust. 1 SUS: 19,52 / 8,00 / 2,45 %, wypadkowa WIDELKOWA 0,40-8,12 %). 4e skala PIT (art. 27 ust. 1: 12 % minus 3600 zl do 120 000 zl, wyzej 10 800 zl + 32 %; kwota wolna 30 000 zl to WYNIK DZIALANIA, nie brzmienie przepisu). 4f minimalne wynagrodzenie jako kotwica innych progow. ⛔ DOKTRYNA SEKCJI: wartosci zakotwiczone w stopach NBP zapisujemy jako formule z przepisem, NIGDY jako procent - RPP zmienia stope bez nowelizacji, wiec kontrola aktualnosci aktu tego nie widzi
+- 3.46 (2026-09-12d, O-11 rodzina TERMINY): terminy.md — CRIT: plik KANONICZNY powoływał **art. 503 § 1 KPC, który jest UCHYLONY** (odczyt treści Dz.U. 2026 poz. 468: art. 500-504 brzmią "(uchylony)"). Dopuszczalność sprzeciwu daje art. 505 § 1, tryb art. 480[3], a TERMIN art. 480[2] § 2 i jest różnicowany miejscem doręczenia: 2 tygodnie (upominawczy w kraju), miesiąc (upominawczy poza krajem w UE), MIESIĄC (NAKAZOWY przy doręczeniu w UE, więc także w Polsce), 3 miesiące (poza UE). Brakowało całego wiersza zarzutów od nakazu nakazowego. Poprawione też: wniosek o uzasadnienie w sprawach o wykroczenia "3 dni, art. 105 § 1 KPW" -> 7 dni zawite z art. 35 § 1 KPW (art. 105 reguluje apelację); apelacja wykroczeniowa art. 105 § 2 -> § 1; sprzeciw od wyroku nakazowego "art. 94 KPSW" -> art. 94 § 1 KPW w zw. z art. 506 § 1 KPK. Dopisane z odczytu: art. 344 § 1, 369 § 1[1] (3 tygodnie przy przedłużonym uzasadnieniu), 169 § 1, 767 § 4, 407 § 1, 398[5] § 1 KPC oraz art. 460, 506 § 1, 524 § 1 KPK. Nowa reguła: podstawa terminu rzadko stoi w przepisie o samej czynności. Propagacja w MOD-TIMING.md i orka-bas-leksykon
+- 3.45 (2026-09-12c, O-11 c.d.): TABELE-OPLAT 1.6: sekcje 6a-6e z odczytu tresci. 6a wieczystoksiegowe (art. 42-48 KSCU: wpis 200 zl, udzial min. 100 zl, dziedziczenie/dzial spadku 150 zl, zalozenie KW 100 zl, wykreslenie polowa oplaty, kumulacja z art. 45, brak oplaty podstawowej z art. 14 ust. 5) i skarga na KIO (art. 34 - TROJKROTNOSC wpisu od odwolania, kwota z PZP nie z KSCU; art. 34a). 6b koszty komornicze (ustawa z 28.02.2018, t.j. Dz.U. 2024 poz. 377, zero nowelizacji po t.j.): 10 %/3 % art. 27, widelki 150-50 000 zl, minima 150/200/300 zl, umorzenie 5 %/10 %/100/150 zl ze zwolnieniami z art. 29 ust. 5, 10 % OD WIERZYCIELA przy niecelowym wszczeciu (art. 30), eksmisja 1500/2000/+1000 zl max 30 000 (art. 34), doreczenie 60 zl (art. 41 ust. 1 - domknieta podstawa wiersza, ktory od dawna nie mial aktu), poszukiwanie majatku 100 zl, obnizenie art. 48, art. 45 vs art. 47. 6c oplata skarbowa (t.j. Dz.U. 2025 poz. 1154): pelnomocnictwo 17 zl OD KAZDEGO STOSUNKU, zaswiadczenia 17/21 zl, art. 2 ust. 1 wylacza cale kategorie spraw. 6d taksa notarialna (t.j. Dz.U. 2024 poz. 1566): stawki MAKSYMALNE - odwrotna logika niz taksy adwokacka i radcowska. 6e koszty procesu karnego (KPK t.j. Dz.U. 2026 poz. 490, art. 616-632a) - ⛔ ZRYCZALTOWANA ROWNOWARTOSC WYDATKOW PRZY OSKARZENIU PRYWATNYM PODNIESIONA Z 300 ZL NA 1000 ZL od 1.07.2025 (Dz.U. 2025 poz. 770, ktore uchylilo akt z 2003 r.)
+- 3.44 (2026-09-12b, O-11 c.d.): TABELE-OPLAT 1.5: sekcja 2c ZWROT OPLATY (art. 79 KSCU - cala/3-4/polowa, w tym zwrot polowy oplaty od pozwu o rozwod przy orzeczeniu bez orzekania o winie na zgodny wniosek i zwrot calosci przy pojednaniu, art. 79 ust. 2; potracenie oplaty minimalnej z ust. 3), sekcja 2d DALSZE ZWOLNIENIA (art. 104 organizacje, art. 105-107 tryb wniosku, art. 106 prekluzja wieczystoksiegowa, art. 107 zakaz ponowienia) oraz ART. 104a - w EPU i w trybie S24 NIE STOSUJE SIE art. 100-103, 104 ust. 2 i 105, czyli nie ma zwolnienia na wniosek; sekcja 2e os ryzyka kosztowego z KPC (art. 98, 100, 101, 102 zasada slusznosci, 103, 105-107, 520) z ostrzezeniem o zbieznosci numeracji art. 102 KPC i art. 102 KSCU
+- 3.43 (2026-09-12, O-11 c.d.): TABELE-OPLAT 1.4: domkniecie centralizacji oplat. Z ODCZYTU TRESCI dopisane: sekcja 1a rejestr oplat cywilnych ogolnych (art. 14 oplata podstawowa 30 zl, art. 15 oplata tymczasowa 30-2000 zl, art. 18 ust. 2 apelacja wg tabeli od pozwu, art. 19-20 ulamki z konsumenckim capem 750 zl przy zarzutach, art. 25 skarga na komornika 50 zl, art. 25b 100/30 zl, art. 68-71, art. 77-78 oplata kancelaryjna 20 zl/10 stron, art. 13a-13f w tym premia mediacyjna z art. 13e), sekcja 1b rozwod i sprawy rodzinne (art. 26 ust. 1 pkt 1 - 600 zl, art. 26 ust. 2 oplata powstajaca dopiero w wyroku, art. 27, art. 37, art. 38), sekcja 1c prawo pracy i ubezpieczenia (art. 35, 36, 96 ust. 1 pkt 4/8/14), sekcja 3a stawki pelnomocnika z par. 9, 10, 11 i 17 obu taks, sekcja 5 oplaty karne (ustawa z 23.06.1973, Dz.U. 2023 poz. 123, art. 1-21) z pulapka dwoch brzmien art. 2 ust. 1 pkt 6, sekcja 6 wpis sadowoadministracyjny (Dz.U. 2021 poz. 535), sekcja 7 REJESTR TABEL SATELICKICH. OBALONE w tresci aktu: "art. 27 pkt 1-6 KSCU" jako podstawa progow WPS (art. 27 to oplata stala 200 zl od enumerowanych pozwow), cap 20 000 zl w sprawach gospodarczych, oplata pracownicza "5% WPS max 1000 zl", oplata od pozwu pracowniczego "5% nadwyzki ponad 50 000 zl" (art. 35 ust. 1 zd. 2 dotyczy APELACJI), wpis WSA 200/500/1000/2000, stawka pracownicza 180 zl (jest 360 zl), apelacja karna 420 zl (jest 840/1200 zl), oplata kancelaryjna cywilna 6 zl za strone (6 zl za strone to art. 19 ustawy karnej)
+- 3.42 (2026-09-10w, O-11): TABELE-OPLAT 1.3: PELNY KATALOG ZWOLNIEN z odczytu tresci KSCU art. 94-103 - 18 kategorii podmiotowych (art. 96 ust. 1), zwolnienia przedmiotowe (art. 95, w tym zazalenia i skargi dotyczace samych kosztow), Skarb Panstwa (art. 94) i zwolnienie na wniosek (art. 100-103, z pulapka art. 102 ust. 4). Do reguly kolejnosci dopisany KROK 0
+- 3.41 (2026-09-10v, O-11): TABELE-OPLAT 1.2: tabele obu taks z ODCZYTU TRESCI - stawki od WPS (par. 2, 90-25 000 zl), odrebna nizsza tabela dla postepowan upominawczych i nakazowych (par. 3), oraz stawki rodzinne niezalezne od WPS (alimenty 240 zl, rozwod 720 zl, ojcostwo 480 zl, podzial majatku od wartosci udzialu)
+- 3.40 (2026-09-10u, O-11): TABELE-OPLAT 1.1: art. 22 KPC (WPS = suma swiadczen za rok) i art. 21 KPC (zliczanie roszczen) zweryfikowane ODCZYTEM TRESCI; nowa sekcja 2a - wysokosc alimentow wg art. 135 KRO par. 1-3 oraz tabela przeslanek art. 128-140
+- 3.39 (2026-09-10t, O-11): nowy TABELE-OPLAT.md: kolejnosc siegania po kwoty (tabela ustanawiajaca -> baza katalogujaca -> RZAD 2A/2B) + zweryfikowane odczytem TRESCI tabele KSCU art. 13/22/96, taksy 2026/215 i 2026/118, minimalne wynagrodzenie
+- 3.38 (2026-09-10s, F-135): orka-bas czesc-05: BLEDNA KWOTA minimalnego wynagrodzenia 2026 (~4 750 zl) skorygowana na 4 806 zl - potwierdzone odczytem tresci rozp. RM Dz.U. 2025 poz. 1242
+- 3.34 (2026-09-10l, F-181): trzy przeterminowane podstawy: ustawa rehabilitacyjna 2024/44 → 2026/884; w orka-bas działalność lecznicza 2024/799 → 2026/156, UFP 2024/1530 → 2025/1483, Ordynacja 2025/111 → 2026/622 (2 miejsca)
 - 3.31 — **KROK 2C: gdzie szukać nowelizacji po t.j. + zakaz przepisywania wyniku**
   (2026-09-01k, flaga F-156). Nowa tabela adresów: sekcja „Nowelizacje po tekście
   jednolitym" w `/references` obwieszczenia, kontrola uzupełniająca aktami
@@ -868,3 +974,345 @@ ZRODEL.md` (oznaczone 📚) oraz DODANO przykładowe wzorce nazw domen
 typowych dla danej branży jako PUNKTY STARTOWE (oznaczone ⚠️ NIE
 testowane) — UCZCIWIE nierozróżniane od faktycznie zweryfikowanych,
 zgodnie z zasadą braku fabrykowania pewności.
+
+---
+
+## PRAWO-HARDGATE — historia wersji
+
+Przeniesiona z korpusu `shared/PRAWO-HARDGATE.md` 2026-09-10b (F-180, ZASADA 15).
+
+⛔ Historia zmian tego pliku NIE mieszka tutaj (ZASADA 15 w
+`audyt-systemu-v4/SKILL.md`). Do 2026-08-23h **88 linii changelogu stało POWYŻEJ
+pierwszej normy** — każdy z 114 plików odsyłających do tej bramki czytał opisy
+wersji 2.0–2.6, zanim dotarł do zakazu. Przeniesione do:
+
+```
+view shared/references/CHANGELOG.md
+```
+
+---
+
+## 3.32 (2026-09-10b, F-180) — PRAWO-HARDGATE: wydzielenie gałęzi warunkowych
+
+`PRAWO-HARDGATE.md` jest jedynym zasobem czytanym **bezwarunkowo w każdej turze
+prawnej** i stanowił 41 kB z ok. 100 kB rdzenia R-1…R-5. Pomiar 2026-09-10b:
+z 704 linii **236 opisywało gałęzie, które w typowej sprawie nie padają ani razu.**
+
+Wydzielone bez zmian merytorycznych:
+
+| Nowy plik | Treść | Wyzwalacz |
+|---|---|---|
+| `PRAWO-HARDGATE-BLOKADA.md` | BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA (201 l.) | B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł |
+| `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | ŚCIEŻKA B-L (35 l.) | przedmiotem sprawy jest akt prawa miejscowego |
+
+Historia wersji przeniesiona do tego pliku (ZASADA 15).
+Wynik: **40,9 kB → 28,7 kB (−30%)**, rdzeń ok. 100 kB → ok. 88 kB.
+
+⛔ **Ryzyko wydzielenia i jak zamknięte.** Wydzielenie bramki, która pilnuje
+przed obejściem procedury, tworzy oczywistą pokusę: pominąć odczyt i od razu
+oznaczyć 🟨. Dlatego w korpusie zostały **twarde zaślepki**, nie odesłania:
+- rozgałęzienie TAK/NIE z jawnym `⛔ STOP` i wywołaniem `view`,
+- zakaz nadania 🟨 oraz ⚠️ przed wykonaniem tego `view` — znacznik nadany
+  wcześniej jest nieważny,
+- przypomnienie, że Reguła 12d (REM-0) wymaga pomiaru dwukanałowego, którego
+  procedura leży w wydzielonym pliku,
+- powiązanie z kontrolą `[PROFIL-ODROCZENIA]`, która traktuje „blokada padła,
+  `view` nie ma" jako bramkę niewykonaną.
+
+⛔ Kolejność wewnątrz `PRAWO-HARDGATE-BLOKADA.md` pozostaje wiążąca: najpierw
+bramka antyfasadowa, potem kotwica. Bramka istnieje po to, żeby kotwica nie
+stała się wygodnym wyjściem awaryjnym.
+
+⚠️ Czego to wydzielenie **nie** rozstrzyga: czy w sytuacji blokady model
+faktycznie wykona `view`, zamiast go zadeklarować. To jest dokładnie pytanie
+z protokołu F-113 i pozostaje niezmierzone.
+
+---
+
+## 3.33 (2026-09-10d, F-160) — odesłania operacyjne rozdzielone od dowodowych
+
+`PRAWO-HARDGATE.md` i `HIERARCHIA-ZRODEL.md` wskazywały
+`audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` jako źródło
+**instrukcji** dostępu maszynowego. ⛔ `audyt-systemu-v4` nie występuje
+w `dependencies.requires` żadnego skilla produkcyjnego, więc były to wskazania
+**nieosiągalne ze ścieżki produkcyjnej** — dokładnie wzorzec, dla którego
+powstała flaga F-160.
+
+Rozdzielone: instrukcja → `shared/DOSTEP-MASZYNOWY-API.md` (w `required_modules`
+routera), plik audytu → materiał dowodowy pomiaru, przywoływany jako dowód
+i opatrzony adnotacją o niedostępności z produkcji.
+
+---
+
+## 3.35 (2026-09-10n, F-181) — 41 wygasłych podstaw prawnych zastąpionych aktualnymi
+
+`shared` niósł **dwie trzecie całej zaległości F-181**: 41 z 61 miejsc, 20 aktów.
+Koncentracja w `orka-bas-leksykon`, który cytuje podstawy **w treści definicji**,
+a nie w nagłówku — przez co omijały go wszystkie dotychczasowe przeglądy.
+
+| Akt | Było | Jest | Miejsc | KROK 2C |
+|---|---|---|---:|---|
+| ustawa o finansach publicznych | 2024/1530 | **2025/1483** | 13 | ⛔ 5 nowelizacji |
+| ustawa o dochodach JST | 2022/2267 | **2024/1572** ⛔ nowa ustawa | 5 | zm. 2025/1659 |
+| ustawa o gospodarce nieruchomościami | 2023/344 | **2026/399** | 2 | ⛔ 1 |
+| Karta Nauczyciela | 2023/984 | **2026/515** | 2 | 0 |
+| ustawa o VAT | 2024/361 | **2025/775** | 2 | ⛔ 5 |
+| KPK | 2024/37 | **2026/490** | 2 | ⛔ 5 |
+| ustawa rehabilitacyjna | 2024/44 | **2026/884** | 2 | 0 |
+| PZP | 2022/1710, 2024/1320 | **2026/793** | 2 | 0 |
+| pozostałe 12 aktów | — | — | po 1 | — |
+
+Pozostałe: podatek rolny `2025/1344`, rozporządzenie MRPiPS `2026/677`,
+zatrudnienie socjalne `2025/1718`, obrona Ojczyzny `2025/825` (⛔ 5),
+prawo autorskie `2025/24`, AML `2025/644` (⛔ 1), KWiH `2026/1066`,
+Prawo energetyczne `2026/43` (⛔ 3), PPSA `2026/143` (⛔ 1),
+pomoc społeczna `2026/639` (⛔ 2), Prawo upadłościowe `2026/913`.
+
+⛔ **Dochody JST — jedyny przypadek, który nie był zwykłym starzeniem.**
+Wskazany przez pomiar „aktualny" tekst jednolity `2024/356` **też ma status
+uchylony**: stara ustawa z 2003 r. została zastąpiona **nową ustawą** z 1.10.2024
+(`Dz.U. 2024 poz. 1572`). Automatyczne podstawienie przesunęłoby błąd o jedno
+ogniwo dalej, zamiast go usunąć.
+
+⛔ Każda z 20 par sprawdzona przez **porównanie tytułów** starego i nowego
+obwieszczenia — po sześciu podmianach aktu w tej serii to element procedury,
+nie formalność.
+
+---
+
+## 3.36 (2026-09-10q, F-135) — reforma antymobbingowa: vacatio legis, nie stan obowiązujący
+
+`definicje/DEF-PRACA.md` opisywał nowe brzmienie art. 94³ KP jako obowiązujące
+„PO REFORMIE (od 30.07.2026)". ⛔ 30.07.2026 to **data podpisu Prezydenta**.
+Odczyt RZĄD 1 (`api.sejm.gov.pl/eli/acts/DU/2026/1046`, 2026-09-10):
+
+```
+ogłoszenie      : 2026-08-04
+WEJŚCIE W ŻYCIE : 2026-11-05
+status          : obowiązujący  (= akt nie został uchylony)
+```
+
+⛔ **To był błąd zakresu czasowego normy** — klasa, której pilnuje OŚ-GATE,
+popełniony w zasobie kanonicznym `shared`. Sprawa o mobbing z sierpnia albo
+września 2026 dostawała przepis, który jeszcze nie obowiązuje: bez wymogu
+rozstroju zdrowia i z minimalnym zadośćuczynieniem, których w tej dacie nie ma.
+
+Dodana reguła czasowa w tabeli: zdarzenia **przed 5.11.2026** → stare brzmienie
+(wymóg rozstroju zdrowia, brak minimum, brak art. 477⁶ᵃ KPC); **od 5.11.2026** →
+nowe.
+
+⚠️ Wpisane wprost: **„status: obowiązujący" w ELI nie znaczy, że przepisy
+działają.** Oznacza, że akt nie został uchylony; o stosowaniu rozstrzyga osobne
+pole `entryIntoForce`. To rozróżnienie nie było dotąd nigdzie zapisane, a jest
+źródłem tej pomyłki.
+
+⚠️ Kwota minimalnego zadośćuczynienia sprowadzona do **mnożnika ustawowego**
+(6 × minimalne wynagrodzenie). Wartość złotowa zależy od minimalnego
+wynagrodzenia w dacie orzekania i wymaga sprawdzenia w aktualnym rozporządzeniu
+Rady Ministrów — poprzedni zapis podawał 28 836 zł jako liczbę do przepisania.
+
+---
+
+## 3.37 (2026-09-10r, O-10) — cezury czasowe dla aktów w vacatio legis
+
+`AKTY-PRAWNE-MASTER.md` i `LEGAL-REGISTRY.md` wymieniały w kolumnie zmian numery
+aktów, które **jeszcze nie weszły w życie**, bez podania daty:
+`Dz.U. 2026 poz. 507` (w życie 14.10.2026), `2026/346` (30.09.2028),
+`2026/176` (18.02.2027), `2026/846` (1.10.2026).
+
+⛔ Model czytający „zmiany Dz.U. 2026 poz. 507" nie ma jak odróżnić zmiany
+**działającej** od tej w vacatio legis — a skutek jest taki sam jak przy
+powołaniu przepisu nieobowiązującego. Dopisane cezury.
+
+⚠️ Sygnał słabszy niż numer podany wprost jako podstawa (tam błąd jest
+bezpośredni), ale realny: rejestr zmian jest czytany właśnie po to, żeby
+ustalić stan na dziś.
+
+---
+
+## 3.38 (2026-09-10s, F-135) — błędna kwota minimalnego wynagrodzenia
+
+`orka-bas-leksykon/czesc-05` podawał minimalne wynagrodzenie 2026 jako
+**„~4 750 zł"**. Odczyt **treści** rozporządzenia RM (`Dz.U. 2025 poz. 1242`,
+`/text.pdf`): „§ 1. Od dnia 1 stycznia 2026 r. ustala się minimalne wynagrodzenie
+za pracę w wysokości **4806 zł**". Skorygowane.
+
+⚠️ Kwota podana „w przybliżeniu" jest w rejestrze prawnym tym samym co kwota
+błędna — służy do przeliczeń (tu: krotność progu 200 000 zł), więc jej
+przybliżenie propaguje się na wynik.
+
+⛔ To jest pierwszy w tej serii błąd **wartości liczbowej**, nie numeru aktu.
+Żaden test tej klasy nie dotyka: T27 pyta o status podstawy, nie o to, czy
+liczba w zdaniu odpowiada treści przepisu. Zweryfikować można wyłącznie
+odczytem tekstu aktu.
+
+---
+
+## 3.39 (2026-09-10t, O-11) — TABELE-OPLAT: kolejność sięgania po kwoty
+
+Nowy zasób kanoniczny. Reguła: **kwotę bierze się z tabeli, która ją ustanawia,
+a nie z bazy, która ją opisuje.**
+
+```
+1. TABELA USTANAWIAJĄCA — KSCU, rozporządzenia MS o taksach, rozporządzenie RM
+                          o minimalnym wynagrodzeniu. Odczyt TREŚCI aktu.
+2. BAZA KATALOGUJĄCA    — MP10-koszty, mapy DR, leksykon. Rozpoznaje RODZAJ
+                          opłaty i to, ZA CO jest pobierana. NIE źródło liczby.
+3. RZĄD 2A/2B           — wyłącznie do rozpoznania problemu, nigdy do kwoty.
+```
+
+⛔ **Ustalenie, dla którego ten plik powstał: art. 13 ust. 2 KSCU.**
+Tekst jednolity `Dz.U. 2025 poz. 1228` zawiera **dwa brzmienia tego przepisu**,
+stojące obok siebie i rozróżnione **wyłącznie odnośnikami**:
+
+| Odnośnik | Cap opłaty stosunkowej | Status |
+|---|---|---|
+| 2) | 200 000 zł | obowiązuje **do wejścia w życie** zmiany z odnośnika 3 |
+| 3) | **100 000 zł** | ustawa z 25.07.2025 (`Dz.U. 2025 poz. 1157`), **w życie 23.09.2025** |
+
+Na dziś obowiązuje **100 000 zł**. Powszechnie powtarzana kwota 200 000 zł jest
+nieaktualna od września 2025 — a jest to jedna z najczęściej cytowanych liczb
+w postępowaniu cywilnym. ⛔ Kto czyta tekst jednolity bez przypisów, przepisze
+brzmienie wygasłe.
+
+⚠️ Klasa błędu: lustrzana wobec O-10. Tam norma jeszcze nie obowiązywała, tu
+w jednym dokumencie stoją obok siebie brzmienie wygasłe i obowiązujące.
+
+**Zweryfikowane odczytem treści i wpisane do tabel:** art. 13 ust. 1 (progi
+opłat stałych 30–1000 zł do WPS 20 000 zł), art. 13 ust. 2 (5%, cap 100 000 zł),
+art. 22 (zażalenia — 100 zł), **art. 96 ust. 1 pkt 2 (zwolnienie strony
+dochodzącej roszczeń alimentacyjnych oraz pozwanej w sprawie o obniżenie
+alimentów)**, taksy `2026/215` i `2026/118` (obie najnowsze, zero nowelizacji
+po tekście jednolitym).
+
+⛔ **W sprawach alimentacyjnych pierwsze pytanie nie brzmi „ile wynosi opłata".**
+Podanie kwoty stronie zwolnionej z mocy ustawy zniechęca do wniesienia pisma,
+które nic nie kosztuje — błąd cięższy niż kwota nieprawidłowa.
+
+⚠️ WPS w alimentach oznaczony jako **[DO WERYFIKACJI U ŹRÓDŁA — art. 22 KPC]**.
+Reguła roszczeń powtarzających się nie została przepisana z pamięci ani z bazy
+katalogującej; wymaga odczytu bieżącego tekstu KPC.
+
+---
+
+## 3.40 (2026-09-10u, O-11) — TABELE-OPLAT 1.1: alimenty od podstaw
+
+Uzupełnienie zgodnie z regułą kolejności: **najpierw przepis, który ustanawia**.
+
+**Art. 22 KPC** (t.j. `Dz.U. 2026 poz. 468`, odczyt treści) — zastąpił
+zostawiony wcześniej znacznik `[DO WERYFIKACJI]`:
+
+> W sprawach o prawo do świadczeń powtarzających się wartość przedmiotu sporu
+> stanowi **suma świadczeń za jeden rok**, a jeżeli świadczenia trwają krócej
+> niż rok – za cały czas ich trwania.
+
+Dodano art. 21 KPC (zliczanie wartości kilku roszczeń) oraz ostrzeżenie, że przy
+żądaniu **podwyższenia** WPS liczy się od różnicy — z jawnym zastrzeżeniem, że
+to nie wynika wprost z art. 22 i przy sprawie granicznej wymaga orzecznictwa.
+
+**Art. 135 KRO** (t.j. `Dz.U. 2026 poz. 236`, odczyt treści) — nowa sekcja 2a:
+
+- **§ 1 — dwie przesłanki, nie jedna**: usprawiedliwione potrzeby uprawnionego
+  ORAZ zarobkowe i majątkowe możliwości zobowiązanego. ⚠️ „Możliwości
+  zarobkowe" ≠ „dochód faktyczny".
+- **§ 2 — osobiste starania są formą wykonania obowiązku**, nie okolicznością
+  łagodzącą. Pominięcie zaniża żądanie strony sprawującej bieżącą pieczę.
+- **§ 3 — świadczeń z pomocy społecznej i funduszu alimentacyjnego NIE ODLICZA
+  SIĘ.** Argument „dziecko dostaje świadczenia, więc alimenty mogą być niższe"
+  jest wprost sprzeczny z przepisem.
+
+Tabela przesłanek art. 128, 129 §1–2, 130, 133 §1–3, 138, 140 §2 — przepisana
+z treści, nie z pamięci. ⛔ Odnotowane, że **art. 133 § 1 nie zna granicy
+wieku**: kryterium to zdolność do samodzielnego utrzymania, a uchylenie się
+wobec dziecka pełnoletniego wymaga wykazania przesłanki z § 3, nie następuje
+z mocy prawa.
+
+---
+
+## 3.41 (2026-09-10v, O-11) — TABELE-OPLAT 1.2: taksy z odczytu treści
+
+Domknięcie warstwy kosztowej. Odczyt treści obu rozporządzeń
+(`Dz.U. 2026 poz. 215` adwokackie, `Dz.U. 2026 poz. 118` radcowskie) —
+**w zbadanym zakresie tabele są identyczne**.
+
+**§ 2 — stawki od wartości przedmiotu sprawy:** 90 zł (do 500 zł), 270, 900,
+1 800, 3 600, 5 400, 10 800, 15 000, **25 000 zł** (powyżej 5 mln).
+
+⚠️ **§ 3 — postępowania upominawcze, elektroniczne upominawcze, nakazowe
+i europejskie nakazowe mają WŁASNĄ, NIŻSZĄ tabelę** (60/180/600 zł…). Nie
+stosować tabeli z § 2 w tych trybach — to osobny, łatwy do przeoczenia przepis.
+
+⛔ **§ 4 — sprawy rodzinne: stawka NIE zależy od WPS.**
+
+| Sprawa | Stawka |
+|---|---|
+| **alimenty** | **240 zł** |
+| rozwód i unieważnienie małżeństwa | 720 zł |
+| rozdzielność majątkowa | 720 zł |
+| ojcostwo (ustalenie/zaprzeczenie), rozwiązanie przysposobienia | 480 zł |
+| istotne sprawy rodziny, zarząd majątkiem wspólnym | 480 zł |
+| podział majątku wspólnego | stawka z §2 od **wartości udziału**; zgodny wniosek — 50% |
+
+⛔ **Najczęstszy błąd w tej materii:** policzenie stawki alimentacyjnej z tabeli
+WPS. Przy rocznej sumie świadczeń 4 800 zł tabela z §2 daje 900 zł, a przepis
+szczególny — **240 zł**. Zawyżenie blisko czterokrotne.
+
+⚠️ Stawka rozwodowa obejmuje roszczenia majątkowe dochodzone łącznie,
+**z wyjątkiem** roszczeń z art. 58 § 2 i 3 KRO.
+
+⚠️ Sprawdzono celowo przypis przy pozycji alimentacyjnej: brzmienie ustalone
+rozporządzeniem MS z 23.12.2024 jest **obowiązujące**, bez wariantu przyszłego.
+⛔ To ta sama konstrukcja redakcyjna, która przy art. 13 ust. 2 KSCU kryła
+brzmienie wygasłe obok obowiązującego — sprawdzenie przypisu przestało być
+opcjonalne.
+
+---
+
+## 3.42 (2026-09-10w, O-11) — TABELE-OPLAT 1.3: pełny katalog zwolnień
+
+⛔ **Luka wykryta na pytanie użytkownika: „czy to wszystkie sytuacje".**
+Nie były. Plik w wersjach 1.0–1.2 wymieniał **wyłącznie art. 96 ust. 1 pkt 2**
+(alimenty) — bo powstał przy pracy nad alimentami i odziedziczył jej zakres.
+To jest ta sama klasa co „niedomknięcie" z AUDYT-2026-09-10g: zapis nie był
+błędny, był **niepełny w sposób niewidoczny**, bo wyglądał na kompletny.
+
+Dopisany katalog z odczytu treści KSCU (`Dz.U. 2025 poz. 1228`), **trzy
+niezależne warstwy**:
+
+**A. Podmiotowe z mocy ustawy (art. 96 ust. 1) — 18 kategorii.** Poza alimentami
+m.in.: ustalenie ojcostwa i macierzyństwa, klauzule niedozwolone, **pracownik**
+i odwołanie do sądu pracy i ubezpieczeń, kurator, prokurator i rzecznicy
+(RPO, Praw Dziecka, Praw Pacjenta, Finansowy, MŚP), inspektor pracy i związki
+zawodowe, ochrona zdrowia psychicznego, **osoba ubezwłasnowolniona**, szkody
+górnicze, kompensata dla ofiar czynów zabronionych, ochrona roszczeń
+pracowniczych, **osoba doznająca przemocy domowej**, renta z art. 444 § 2
+i 446 § 2 KC.
+
+**B. Przedmiotowe (art. 95) — „nie pobiera się opłat od…", niezależnie od tego,
+kto wnosi.** ⛔ Najważniejsze praktycznie: **zażalenia i skargi dotyczące samych
+kosztów** (odmowa lub cofnięcie zwolnienia, wysokość opłaty lub wydatków,
+orzeczenia referendarza). To domyka pętlę — zaskarżenie decyzji o kosztach samo
+nie kosztuje. Ponadto m.in. zażalenie na policyjny nakaz opuszczenia mieszkania
+w sprawach przemocy domowej, pisma nieletniego, wniosek o doręczenie
+uzasadnienia przy zwolnieniu od opłaty od środka zaskarżenia.
+
+**C. Na wniosek (art. 100–103)** — w całości lub w części, z formami
+częściowego zwolnienia. ⛔ **Art. 102 ust. 4 jest pułapką proceduralną:** wniosek
+strony reprezentowanej przez adwokata lub radcę, złożony bez oświadczenia
+majątkowego, przewodniczący **zwraca BEZ WEZWANIA** do uzupełnienia. Dla strony
+działającej samodzielnie stosuje się art. 130 KPC. Termin rozpoznania: 7 dni.
+
+⚠️ Wpisane wprost: **zwolnienie od kosztów sądowych ≠ zwolnienie od kosztów
+przeciwnika.** Strona zwolniona, która przegra, może zostać obciążona kosztami
+zastępstwa procesowego strony przeciwnej.
+
+⚠️ Art. 96 ust. 4: przy **oczywiście bezzasadnym** powództwie o ustalenie
+ojcostwa sąd może obciążyć powoda nieuiszczonymi kosztami — zwolnienie z pkt 1
+nie jest bezwarunkowe.
+
+⚠️ Art. 109 i 111 (cofnięcie zwolnienia, odpowiedzialność za nieprawdziwe
+oświadczenie) **świadomie nieprzepisane** — odczytać przy sprawie, w której
+zwolnienie ma być wnioskowane.
+
+Do reguły kolejności dopisany **KROK 0: czy strona w ogóle płaci** — przed
+sięgnięciem po jakąkolwiek tabelę.

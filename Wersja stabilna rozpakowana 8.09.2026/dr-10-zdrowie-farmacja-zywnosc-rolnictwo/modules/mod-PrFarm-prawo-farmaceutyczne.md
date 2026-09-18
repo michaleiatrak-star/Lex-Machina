@@ -25,7 +25,7 @@ Farmaceutyczna (GIF/WIF), sankcje karne i administracyjne.
 | Nowelizacja PF z 24.06.2025 | Dz.U. 2025 poz. 924 | isap.sejm.gov.pl |
 | Ustawa o refundacji leków z 12.05.2011 | Dz.U. 2026 poz. 253 t.j. | isap.sejm.gov.pl |
 | Nowelizacja ustawy refundacyjnej z 25.07.2025 | Dz.U. 2025 poz. 1192 | isap.sejm.gov.pl |
-| Ustawa o wyrobach medycznych z 7.04.2022 | Dz.U. 2022 poz. 974 | isap.sejm.gov.pl |
+| Ustawa o wyrobach medycznych z 7.04.2022 | t.j. Dz.U. 2024 poz. 1620 (akt pierwotny: 2022 poz. 974) | isap.sejm.gov.pl |
 | Rozporządzenie MDR 2017/745 (UE) | Dz.Urz. UE | eur-lex.europa.eu |
 
 ---
@@ -432,7 +432,7 @@ REKOMENDACJA: □ Odwołanie do GIF  □ Skarga do WSA  □ Wniosek o wstrzymani
 > **Zasada absolutna:** Każdy artykuł weryfikować w isap.sejm.gov.pl.
 > Prawo farmaceutyczne zmieniane jest kilka razy rocznie — NIGDY nie cytuj z pamięci.
 > Aktualne t.j.: Prawo farmaceutyczne **Dz.U. 2026 poz. 612**;
-> Ustawa refundacyjna **Dz.U. 2025 poz. 907**;
+> Ustawa refundacyjna **Dz.U. 2026 poz. 253** ✅ [VER] RZĄD 1 2026-09-10h ⛔ KROK 2C: nowelizacja po tekście jednolitym — Dz.U. 2026 poz. 791 (poprzedni zapis `2025 poz. 907` miał status *wygaśnięcie aktu*);
 > Nowelizacje: PF z 24.06.2025 (Dz.U. 2025 poz. 924), refundacja z 25.07.2025 (Dz.U. 2025 poz. 1192).
 
 ---
@@ -456,7 +456,7 @@ Kategorie:
   • Radiofarmaceutyk
   • Lek recepturowy i apteczny
 
-UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, Dz.U. 2022 poz. 974)
+UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 Suplement diety ≠ produkt leczniczy (ustawa o bezpieczeństwie żywności)
 ```
 
@@ -836,7 +836,7 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 
 ## CZĘŚĆ IX — WYROBY MEDYCZNE — WYDZIELONE
 
-⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, Dz.U. 2022 poz. 974)
+⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 — wydzielona 2026-06-12 do samodzielnego modułu:
 → `view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-wyroby-medyczne.md`
 

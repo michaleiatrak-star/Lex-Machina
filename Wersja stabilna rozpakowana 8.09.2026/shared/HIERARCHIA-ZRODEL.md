@@ -1,7 +1,13 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `shared/HIERARCHIA-ZRODEL.md`
-> **Wersja:** 1.7 (2026-09-04) — REALIA DOSTĘPNOŚCI uzupełnione o wymogi
+> **Wersja:** 1.9 (2026-09-14) — CBOSA: oddzielono provenance kanału (DIRECT_LIVE / CRAWLED_OR_INDEXED) od kanonicznego statusu weryfikacji; snapshot może nieść sentencję/uzasadnienie, ale nie tworzy piątego statusu i nie awansuje sam do ✅ [VER].
+> **Wersja poprzednia:** 1.8 (2026-09-14) — RZĄD 2A orzecznictwa powiązany z kanonicznym
+>              routingiem wykonawczym: SN / Portal Orzeczeń / CBOSA / SAOS.
+>              Dla NSA/WSA direct CBOSA (formularz HTML + /doc/{ID}) jest
+>              preferowany po fresh-probe; fallback indeksowy dopiero przy
+>              niedostępności. Exact-match i fail-closed są obowiązkowe.
+> **Wersja poprzednia:** 1.7 (2026-09-04) — REALIA DOSTĘPNOŚCI uzupełnione o wymogi
 >              kształtu żądania w kanale kodu (F-157); potwierdzone API UODO
 >              jako pierwszy maszynowy kanał orzeczniczy po stronie organu (F-158).
 >              ⛔ Numer skorygowany z 1.6 na 1.7 — 1.6 była już zajęta przez
@@ -181,15 +187,83 @@ uznane portale prawnicze/branżowe (komentarz i interpretacja o niskim
 ryzyku dezaktualizacji, redakcja profesjonalna).
 
 **2A — oficjalne, wykonawcze/orzecznicze (znacznik ✅ [VER: ...]):**
-- Orzecznictwo z oficjalnych baz sądowych: sn.pl, orzeczenia.ms.gov.pl,
-  orzeczenia.nsa.gov.pl, trybunal.gov.pl / ipo.trybunal.gov.pl,
-  saos.org.pl (pomocniczo) — procedura wyłącznie wg `shared/PRAWO-HARDGATE.md`.
+- **Orzecznictwo z oficjalnych baz sądowych — RZĄD 2A dla treści
+  rozstrzygnięcia**: `sn.pl`, `orzeczenia.ms.gov.pl`,
+  `orzeczenia.nsa.gov.pl` (CBOSA), `trybunal.gov.pl` /
+  `ipo.trybunal.gov.pl`; `saos.org.pl` wyłącznie pomocniczo / jako kontrola
+  krzyżowa. Orzeczenie NIE jest źródłem brzmienia przepisu, więc nie awansuje
+  do RZĘDU 1; RZĄD 2A oznacza tu autentyczne źródło rozstrzygnięcia.
+  
+  **Routing wykonawczy jest obowiązkowy i nie wolno zastępować go dowolnym
+  web_search:** 
+  
+  | Rodzina | Źródło rozstrzygające | Kanał / mechanizm |
+  |---|---|---|
+  | SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `shared/SYGNATURY.md`; `snproxy` JSON po świeżym pomiarze runtime |
+  | SR/SO/SA | `orzeczenia.ms.gov.pl` + portal konkretnego sądu | deterministyczny GET po sygnaturze; portal lokalny rozstrzyga AMBIGUOUS |
+  | **NSA/WSA** | **`orzeczenia.nsa.gov.pl` / CBOSA** | **fresh-probe → direct HTML: `POST /cbo/search` → sesyjna paginacja `/cbo/find?p=N` → `/doc/{ID}` → exact-match**; implementacja: `shared/CBOSA-ADAPTER.md` + `tools/cbosa_parser.py`. Gdy direct CBOSA niedostępna → `shared/SYGNATURY.md` V-SYG-0.5 |
+  | SAOS | `saos.org.pl` | discovery / kontrola krzyżowa wg okna pokrycia; nie zastępuje źródła rozstrzygającego |
+  
+  ⛔ **Adapter/konektor nie ma własnego RZĘDU.** RZĄD dziedziczy treść ze
+  źródła docelowego. MCP/HTML/parser to wyłącznie kanał transportowy.
+
+  ### CBOSA — provenance kanału ≠ status weryfikacji
+
+Nie utożsamiaj „mam treść strony” z „origin odpowiedział teraz”. Pole
+`access_mode` opisuje PROVENANCE techniczne i jest niezależne od dwóch
+kanonicznych znaczników śladu (`✅ [VER]` / `⚠️ [NIEWERYFIKOWANE]`).
+
+| access_mode | Znaczenie | Status śladu bez dodatkowego dowodu |
+|---|---|---|
+| `DIRECT_LIVE` | bieżący request do originu zwrócił właściwy dokument | może uzyskać ✅ po exact-match i kontroli treści |
+| `CRAWLED_OR_INDEXED` | kopia/snapshot oficjalnego URL z retrieval/crawlera; brak dowodu bieżącego połączenia | ⚠️ + jawne provenance |
+| `DIRECT_UNAVAILABLE` | 5xx / timeout / connection failure w tym runtime | ⚠️ |
+| `POLICY_BLOCKED` | blokada narzędzia/polityki | ⚠️ |
+
+⛔ **Nie twórz piątego statusu `[SNAPSHOT]`.** Snapshot zapisuj jako pole
+provenance, np. `⚠️ [NIEWERYFIKOWANE] {access_mode=CRAWLED_OR_INDEXED, content_scope=METADATA_SENTENCE}`.
+
+✅ Kanał snapshotowy jest wartościowy badawczo. Jeżeli host retrieval przekazuje
+oficjalny dokument `orzeczenia.nsa.gov.pl/doc/{ID}` po POST-CHECK HOSTA i
+exact-match, wolno odczytać i analizować faktycznie dostępną:
+- metrykę;
+- sentencję;
+- uzasadnienie, jeśli jest obecne; kompletność oznacz osobno.
+
+Pomiar funkcjonalny 2026-09-14 na 10 realnych sygnaturach: wszystkie 10
+dostępnych oficjalnych snapshotów miało co najmniej metrykę + sentencję; 5
+miało potwierdzalnie pełne uzasadnienie, 2 uzasadnienie bez dowodu kompletności,
+3 tylko metrykę + sentencję. To nie jest estymacja pokrycia całej bazy.
+
+⛔ Snapshot nie przechodzi samodzielnie bramki finalnego materiału do pisma
+procesowego jako „zweryfikowany online”. Do ✅ [VER] potrzebny jest
+`DIRECT_LIVE` albo niezależne bieżące potwierdzenie w oficjalnym kanale.
+
+⛔ Operator `site:` nie jest kontrolą domeny. Obowiązkowy POST-CHECK pełnego
+hostname i ścieżki opisuje V-SYG-0.5. Wynik z innego hosta odpada nawet wtedy,
+gdy wyszukiwarka zwróciła go na zapytanie z `site:orzeczenia.nsa.gov.pl`.
+⛔ **CBOSA — granica wnioskowania:** `FOUND` wymaga exact-match po
+  normalizacji. Niepełna paginacja, nierozpoznany licznik, zmiana krytycznej
+  struktury HTML, przerwany transport albo błąd choć jednego kandydata =
+  `OUT_OF_SCOPE`, nigdy `NOT_FOUND`. Gdy dokument jest kompletny, ale
+  portal nie publikuje sekcji uzasadnienia, wolno użyć metryki i sentencji;
+  tezy z uzasadnienia są zakazane (`reasoning_available=False`).
+  
+  Pełny kontrakt statusów: `shared/SYGNATURY.md`; kanały:
+  `shared/DOSTEP-MASZYNOWY-API.md`; hard gate:
+  `shared/PRAWO-HARDGATE-ORZECZENIA.md`.
 - Orzecznictwo i decyzje ORGANÓW (2A, ta sama moc dowodowa co bazy sądowe
   w zakresie ISTNIENIA rozstrzygnięcia): orzeczenia.uodo.gov.pl,
   orzeczenia.uzp.gov.pl (KIO), bip.uke.gov.pl, decyzje.uokik.gov.pl,
   eureka.mf.gov.pl (interpretacje i wiążące informacje KAS).
   ⛔ Stan dostępu maszynowego, ograniczenia i zastrzeżenia każdej z tych baz:
-  `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`. Kilka z nich samo
+  `shared/DOSTEP-MASZYNOWY-API.md` — to jest ŹRÓDŁO OPERACYJNE i leży
+  w `required_modules` routera, więc da się je wczytać z produkcji.
+  ⚠️ `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` niesie surowy
+  materiał dowodowy pomiaru i **nie jest osiągalny ze ścieżki produkcyjnej** —
+  `audyt-systemu-v4` nie występuje w `dependencies.requires` żadnego skilla
+  produkcyjnego (F-160). Odsyła się do niego jako do dowodu, nigdy jako do
+  instrukcji. Kilka z tych baz samo
   zastrzega, że NIE jest zbiorem urzędowym — to nie odbiera im RZĘDU 2A dla
   ustalenia istnienia rozstrzygnięcia, ale zabrania traktowania ich jak
   publikatora.
@@ -208,7 +282,8 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   pod `/api-doc/schemas/openapi.yml`; łańcuch wyszukiwanie → metadane → pełna
   treść XML zmierzony end-to-end 2026-09-04 (baza `/api`, dokument oddany
   jako 118 kB XML). Wywołania: `shared/DOSTEP-MASZYNOWY-API.md` §3;
-  dowód pomiaru: `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` §7.6.
+  dowód pomiaru (materiał audytowy, poza ścieżką produkcyjną — F-160):
+  `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md` §7.6.
   ⛔ Decyzja organu nadzorczego NIE jest źródłem prawa — powołuje się ją jako
   rozstrzygnięcie organu, nie jako brzmienie przepisu.
 - **Rejestry urzędowe i publikatory ogłoszeń** (dodane 2026-09-01f) — RZĄD 2A

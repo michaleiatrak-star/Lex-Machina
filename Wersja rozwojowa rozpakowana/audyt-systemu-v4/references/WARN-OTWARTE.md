@@ -1,12 +1,12 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-16g. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-17u. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 3 | F-135 (część merytoryczna), F-167, **F-189** |
+| Wykonalne sesją audytową | 2 | F-167, **F-189** |
 | Reaktywne | 1 | F-5 |
 | Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
 
@@ -28,7 +28,7 @@
 > library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
 > pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **20** | — |
+| **Razem** | **19** | — |
 
 > **F-189 (2026-09-16, OTWARTA — przyczyna) — nadpisanie skilli dziedzinowych starszym stanem.**
 > Treść 10 skilli odtworzona i wydana (AUDYT-2026-09-16). Pozostaje: (1) ustalić mechanizm
@@ -40,6 +40,11 @@
 > `dr-09` 3.29, kolizja numeru w dwóch sesjach). ✅ 2026-09-16c: ta kontrola jest
 > automatem — **T30** (`check_utrata_tresci.py`, bloker orkiestratora). Otwarte pozostaje
 > wyłącznie ustalenie MECHANIZMU nadpisań (poza repozytorium — proces wgrywania paczek).
+> ⚡ **2026-09-17p — obserwacja odwrotna:** w kopii roboczej pojawiły się 3 fragmenty treści,
+> których sesja nie zapisała (skrypt przerwał się przed zapisem). Wykryte przez T21 (2 rozjazdy);
+> treść zweryfikowana odczytem i zachowana. Pochodzenie nieustalone — ten sam obszar niepewności
+> co nadpisania. ✅ **2026-09-17r: zalecenie wdrożone jako T33** (`check_wydanie.py`, w orkiestratorze)
+> — kontrola „drzewo ↔ wydana paczka" jest odtąd automatyczna, nie ręczna.
 >
 > F-190 ZAMKNIĘTA 2026-09-16c — trzy luki uzupełnione z odczytu treści (AUDYT-2026-09-16c).
 
@@ -290,6 +295,14 @@
 > Ministra Finansów. Spór o liczbę standardów (14 vs 15) wymaga innego kanału
 > niż API ELI — kolejne odczyty nic tu nie wniosą.
 
+> **F-113 — ZMIANA STATUSU 2026-09-17t: ramię A ZBUDOWANE i zweryfikowane**
+> (`ci_check_shared` OK, 36 plików posprzątanych; HASH A
+> `b3fd18cf…1c69`, HASH B `1b12da7e…1679`). ⛔ Pomiar NIEWYKONANY: protokół wymaga
+> promptu bez wiedzy o teście i oceny ślepej, a sesja budująca ramię zna bramki i
+> przypisanie ramion — przebieg mierzyłby pamięć sesji. **Wymaga sesji niezależnej;
+> ta sama bariera co F-167 (brak niezależnego oceniającego).** Szczegóły przekazania:
+> AUDYT-2026-09-17t.
+>
 > **F-113 — ZMIANA STATUSU 2026-09-10 (nie zamknięcie).** Blokada przestała być
 > „brak narzędzia" i jest teraz „pomiar do wykonania". Ustalono, że plan
 > z 2026-08-24 nie ruszył nie z powodu wady projektu badania, tylko dlatego, że
@@ -326,13 +339,12 @@
 > konektorów POZIOM A, warstwa wykonawcza F-113, podbicie `raport-klienta-v1`.
 > Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10.
 
-> **F-171 OTWARTA (2026-09-09) — cztery regresje dostępu do źródeł, kanał
-> kodu.** Pomiar T25 z 2026-09-09: 52 sondy, 40 zgodnych z odniesieniem
-> 2026-09-04. Regresje: SAOS `/api/search`, `/api/dump`, `/api/judgments/{id}`
-> — HTTP 502, 3/3 prób; `decyzje.uokik.gov.pl` — HTTP 503, 3/3.
-> **Skutek operacyjny:** SAOS jest kanałem maszynowym RZĘDU 2A dla orzecznictwa
-> sądów powszechnych i administracyjnych — do powrotu weryfikacja sygnatur idzie
-> przez portale pojedynczych sądów (`orzeczenia.warszawa.so.gov.pl`: 200, RSS).
+> **F-171 ZAWĘŻONA (2026-09-09, pomiar 2026-09-17s) — została JEDNA regresja dostępu.**
+> ✅ SAOS wrócił: `/api/search/judgments` (w tym filtr `caseNumber`), `/api/judgments/{id}`
+> i `/api/dump/judgments` → HTTP 200 (AUDYT-2026-09-17s). ⛔ `decyzje.uokik.gov.pl` — 503,
+> 3/3 próby, bez zmian od 2026-09-09.
+> ⛔ **SAOS jest NIESTABILNY** — 5 z 8 wywołań bez odpowiedzi (`000`), po czym 200 w < 1 s;
+> V-SYG-0 wymaga powtórzenia próby (min. 3) przed uznaniem sygnatury za niesprawdzalną.
 > `sudop.uokik.gov.pl` i `rejestr.uokik.gov.pl` działają, więc awaria UOKiK jest
 > punktowa.
 > ⚠️ **Następny krok:** POWTÓRZYĆ POMIAR w innym dniu przed jakimkolwiek
@@ -543,7 +555,6 @@
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. ⚡ 2026-09-16e: warstwa NUMERÓW aktów domknięta automatem w mapach (T15, T31) i w prozie (T27 z klasą ZASTĄPIONY_TJ) — wszystkie 0 poza jednym znanym kontekstem historycznym; zostaje warstwa WARTOŚCI w modułach — dziedzina po dziedzinie. ✅ 2026-09-16f: **terminy KC przerobione w całości** (25 jednostek, 11 usterek, w tym 2 w kierunku niebezpiecznym). ✅ 2026-09-16g: **terminy i progi KKS** (24 jednostki, 7 usterek). Kolejne kandydatki: prawo spadkowe proceduralne (KPC), terminy z ustaw szczególnych (RODO, KSC, PZP). | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
 

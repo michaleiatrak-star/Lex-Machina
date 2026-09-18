@@ -215,7 +215,7 @@ dla klientów o niskich dochodach
   to istotne dla trybu zaskarżenia, patrz niżej), w tym: przyjmowanie
   wniosków, przesyłanie do właściwego sądu, badanie wniosków
 
-⭐⭐ ART. 259 — SPRZECIW od zarządzeń/postanowień referendarza: strona
+⭐⭐ ART. 259 § 1 — SPRZECIW od zarządzeń/postanowień referendarza wydanych w sprawach z art. 258 § 2 pkt 6–8 (✅ RZĄD 1 2026-09-16m — nie od każdej czynności referendarza): strona
   ALBO jej pełnomocnik (adwokat/radca/doradca podatkowy/rzecznik
   patentowy) MOGĄ wnieść SPRZECIW do właściwego WSA w terminie 7 DNI
   od doręczenia. Sprzeciw wniesiony PRZEZ PEŁNOMOCNIKA WYMAGA
@@ -402,11 +402,14 @@ Art. 64c — TERMIN I TRYB:
      sprzeciwu NADESŁANEGO PRZEZ SKARŻĄCEGO (obejście bezczynności
      organu).
 
-⭐⭐ RÓŻNICE WZGLĘDEM ZWYKŁEJ SKARGI (potwierdzone wprost, rp.pl):
-  - termin 14 dni zamiast 30
-  - BRAK uprzywilejowanych terminów dla prokuratora/RPO/Rzecznika Praw
-    Dziecka (art. 53 §3 PPSA NIE ma tu zastosowania — układ odesłań na
-    to nie pozwala)
+⭐⭐ RÓŻNICE WZGLĘDEM ZWYKŁEJ SKARGI (✅ RZĄD 1 2026-09-16m — PPSA t.j. Dz.U. 2026
+poz. 143; poprzednio „potwierdzone wprost, rp.pl" — źródło wtórne):
+  - termin 14 dni zamiast 30 (art. 64c § 1)
+  - organ przekazuje sprzeciw z aktami w 14 dni i może go uwzględnić w 14 dni
+    (art. 64c § 4–5); sąd rozpoznaje w 30 dni na posiedzeniu niejawnym (art. 64d § 1)
+  - ⚠️ INTERPRETACJA (nie brzmienie): art. 53 § 3 PPSA (6 miesięcy dla prokuratora,
+    RPO, RPD) nie ma zastosowania do sprzeciwu — wniosek z układu odesłań, nie z
+    wyraźnego przepisu; przy sprawie — odczyt art. 64a–64f i orzecznictwa
   - BRAK "odpowiedzi na sprzeciw" jako instytucji procesowej (przy
     zwykłej skardze organ składa odpowiedź na skargę — tu tego kroku
     NIE MA w ogóle)

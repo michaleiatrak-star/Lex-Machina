@@ -1,7 +1,7 @@
 e63088dde2ef8acbcbf696c3ce9f2f35ecbdb5342950dddbd6be87a0223f2412  ./MAPA-AKTOW.md
 211351fa3498f08fe19b2e1baf5fab00bd1063cbc83030069f822bb6d00eb494  ./MAPA-POKRYCIA.md
 8e0e5d369ae15b2cf0cbffcf2f05fd3f5d72c5032b89c3665c892a71fa9017ae  ./PORTABILITY-MANIFEST.md
-62866d3d85253697ae29436e424c169f6e41295b4f08b68efd5f80bfb665b9ae  ./SKILL.md
+aca34fa29cc171eaa675208e351e5f41e92f69533560d8256aebf2c70faae8c9  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 30ab26948e79d1c7b08b828048c750ccf6c53ccb969fb31914b4d25ea3e48c41  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -18,15 +18,15 @@ a911dc5bf06e108a72b3d609c060b72a83ce86b6cbd57bdae21a45abc4a865c6  ./modules/kro-
 150801afdfc51049d95697e9e712c6c49945ef8b0f9c3a67ade95255a971b708  ./modules/kro-rodzinne/czesc-04-alimenty.md
 a943686579b1d715e036026a426a78d62e0fdd93ec08accb67f3a9611a6c5e32  ./modules/kro-rodzinne/czesc-05-pochodzenie-dziecka.md
 f48c7fa6a192d580260d7165e3a8b12268157a17df7139e9c52a52615dffff2f  ./modules/kro-rodzinne/czesc-06-rodzice-dzieci-wladza-ozss.md
-d7940f86dc437c2e9e14d43015c9b42a638a1db3b78cb4763791d8fb91f6c8ba  ./modules/kro-rodzinne/czesc-07-procedura-dowody-zmiana-danych.md
+73bd14ec99e5a5874983f827db870f395293dd0fe50a4143afb3c1442363a000  ./modules/kro-rodzinne/czesc-07-procedura-dowody-zmiana-danych.md
 1305d551b880dc26e2a7965e2c0843e016fbc54a241346b00fb68a5bb0f85e5f  ./modules/kro-rodzinne/czesc-08-referencje-strategia.md
 4757761bf4dd7fd6a0a2b0067a841d9190f8f2d45b50cb4fd14677383a42a761  ./modules/mod-KC-current-state-COV.md
 79a8eff29b5694327d29b8e21ae2b729cc044c5c7d85a8e894f1ffb16811b97f  ./modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
 9f267acb563f7aabf961bf922b59c71cb5f119b5c1107f4bcd16b08bb463265f  ./modules/mod-KC-konsumenckie.md
 b6646312a08cbd6903b913f786de0d35bbc89f50485550363b54d165cd26c81d  ./modules/mod-KC-kredyty-frankowe.md
-05e5cd13daf3e03d903a258cdacae7c37846fc67227afce2109fa9d7ca151149  ./modules/mod-KC-spadki-dlugi-umowy-transgraniczne.md
+1211b4f7905c851ed2644046a94e51c79499401a20fab31186cb1541c6c843ac  ./modules/mod-KC-spadki-dlugi-umowy-transgraniczne.md
 770d03bdc147f5658deb7abbb59a4bd75b1fca2d5a4f79c7069aef7cb1de864a  ./modules/mod-KC-spadki-zachowek-dzial-rozrzadzenia.md
-3cfda914f39fed7ee9d37adf62fa4163f4c634718d248cbc85f9e68716831551  ./modules/mod-KC-spadki.md
+8cc4b36002477cb9b3aa8c1b7f7e96235ce95fb3a7a654fe7c55427bdb79e698  ./modules/mod-KC-spadki.md
 e5b3d7296c312d0df1b718e3ea351a01dd73eedd61ed6513e7a4b876e7e36122  ./modules/mod-KC-ubezpieczenia.md
 51558489bce3c9156a871d5f806e3adf8344ac01f4a444c9ceb6487cd08b2920  ./modules/mod-KP-art943-mobbing-dyskryminacja.md
 70c3ab1f164125d0c2dd1f04c72f566a1605fb213bc4ada81f7ee834d7425913  ./modules/mod-KPC-art162-zastrzezenie-protokol.md
@@ -38,7 +38,7 @@ ec838fe7cacb437eb0b11c20aa6fd142d9b363d6f96d92eb2bb20072b9834e26  ./modules/mod-
 66ddbe8145b8fdc2c5349524e25ac47ed27b80cb7827a12640806d34127d6c5d  ./modules/mod-KRO-opieka-i-kuratela.md
 366676202710bd878a032ead84fb2807ccfe0339be7e6753394c9e82917c62d5  ./modules/mod-KRO-przysposobienie-adopcja-miedzynarodowa.md
 c734bb287eb30213f8153e55324c83acf6ac90547deac37da3bef4059e587ed3  ./modules/mod-KRO-rodzinne.md
-58013d9f5854cbc09ede37c8f2ebecf08438c0e8866fe16b962748d0f5958871  ./modules/mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne.md
+78384c4c60d103521298ff91f906c7c9ba7dedefafbbce13dcd9510a7f6ec26d  ./modules/mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne.md
 196b8af331747cf125c0414135d6449030b7bb1ca5f1e23fbe9e25478cf0ddab  ./modules/mod-KSH-organy-spolki-zoo.md
 a1e1e5e81602b9d014c1217027968e8e89574f3cdf5648a2e156d5b71251ff32  ./modules/mod-KSH-spolki-handlowe.md
 592252cd9f56ce15c3ab0acc1f512511327169515cc3ec98ddd558dd2023826c  ./modules/mod-KSH-spolki-osobowe-rada-nadzorcza.md
@@ -89,4 +89,4 @@ b964da825f36e7db06a74fce20ef7f4b18e16a8245a5173c212a4a0e717d2b88  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 97bcd7a9e0c8dd6cafe8c7fe949eab13ea34e8c54955f0a513256289d6f23285  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-4b9aeee6b8805cf57116f7406d3ed903cf6cc7786c0ff4a3cc3a8a3b65ab2b4f  ./references/CHANGELOG.md
+b830b58132e7f89472c5b410911fdf9718c3924410ea05c3284db55bc02e29b5  ./references/CHANGELOG.md

@@ -10,7 +10,10 @@
   VER: isap.sejm.gov.pl [2026-07-02]
 - Starszy akt (uchylony w większości od 1.01.2025, przepisy wykonawcze
   zachowały moc przejściowo do ok. stycznia 2026 — obecnie NIEAKTUALNE):
-  Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej
+  **Ustawa z 15.09.2022 r. o medycynie laboratoryjnej** — t.j. **Dz.U. 2025 poz. 1295** ✅ [VER] RZĄD 1 2026-09-10j
+  ⛔ Ustawa z 27.07.2001 r. o diagnostyce laboratoryjnej (Dz.U. 2001 nr 100 poz. 1083) jest **UCHYLONA** —
+  uchyliła ją ustawa o medycynie laboratoryjnej. Ostatni t.j. starej ustawy: Dz.U. 2022 poz. 2162 (uchylony).
+  Powoływanie starej ustawy jako podstawy jest błędem podstawy prawnej, nie nieścisłością nazewniczą.
   ⚠️ NIESPÓJNOŚĆ 2026-07-02s: ten moduł cytuje dla starego aktu Dz.U. 2023
   poz. 1517, podczas gdy dr-10/MAPA-AKTOW.md cytowała (przed poprawką)
   Dz.U. 2022 poz. 2162 — obie liczby mogą być różnymi t.j. tego samego

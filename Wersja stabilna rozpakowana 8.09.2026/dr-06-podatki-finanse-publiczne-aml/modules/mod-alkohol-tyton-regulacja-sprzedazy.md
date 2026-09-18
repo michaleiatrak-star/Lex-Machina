@@ -11,6 +11,12 @@ zmian, potwierdzone przy tym audycie.
 > ⛔ HARDGATE — obie ustawy są INTENSYWNIE nowelizowane (tytoniowa: NOWA
 > nowelizacja weszła w życie 5.07.2025 — sprawdź czy nie doszły kolejne
 > zmiany od tej daty).
+>
+> ⚡ **2026-09-16h:** ustawa o ochronie zdrowia przed następstwami używania tytoniu
+> i wyrobów tytoniowych — **nowy t.j. `Dz.U. 2026 poz. 1214`** (obwieszczenie z 1.09.2026,
+> ogłoszone 16.09.2026; ✅ status i metryka z ELI). Poprzedni t.j. `2024 poz. 1162` —
+> wygasły. ⚠️ Tekst obwieszczenia nie był jeszcze dostępny w ELI — zakres włączonych
+> nowelizacji (m.in. `2025/427`, `2025/799`) potwierdź odczytem przy sprawie.
 
 ---
 

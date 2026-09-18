@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.26"
+version: "3.36"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 ---
 
@@ -83,7 +83,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W10 Obiekt liniowy (art. 3 pkt 3a PrBud — kable w kanalizacji ≠ obiekt!)
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
-## Moduły (35 łącznie — ✓ 35 OK, ☐ 0 STUB)
+## Moduły (36 łącznie — ✓ 36 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -153,6 +153,14 @@ BUDOWNICTWO:
                strefy ochronne linii wysokiego napięcia, obszary
                szczególnego zagrożenia powodzią (Prawo wodne art. 77))
   [✓] OK    mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja
+  [✓] OK    mod-UE-PPWR-EUDR-rozporzadzenia-srodowiskowe
+              (dodany 2026-09-13: dwa rozporządzenia UE BEZPOŚREDNIO
+               STOSOWANE — PPWR (UE) 2025/40, opakowania, stosuje się
+               od 12.08.2026 i uchyla dyrektywę 94/62/WE; EUDR
+               (UE) 2023/1115, wylesianie, stosuje się od 30.12.2026
+               [mikro i małe przedsiębiorstwa: 30.06.2027] po DWÓCH
+               przesunięciach. ⛔ Moduł katalogowo-metrykalny: daty
+               i pułapki datowe, treść obowiązków — u źródła)
   [✓] OK    mod-system-kaucyjny-opakowania
               (dodany 2026-07-19: system kaucyjny opakowań po napojach
                [obowiązuje od 1.10.2025 — 3 kategorie: PET do 3l/puszki

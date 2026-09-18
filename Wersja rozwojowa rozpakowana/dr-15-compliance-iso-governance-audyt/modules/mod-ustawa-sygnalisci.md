@@ -384,12 +384,19 @@ Działanie odwetowe →
 
 | Obowiązek | Termin / warunek | Podstawa |
 |---|---|---|
-| Wdrożenie kanału zgłoszeń wewnętrznych | Przed zatrudnieniem 50. pracownika | Art. 23 ustawy [WYMAGA WERYFIKACJI] |
-| Opracowanie procedury zgłoszeń | Konsultacja z pracownikami / ZZ | Art. 24 ustawy [WYMAGA WERYFIKACJI] |
-| Potwierdzenie przyjęcia zgłoszenia | 7 dni od wpływu | Art. 12 ustawy [WYMAGA WERYFIKACJI] |
-| Informacja zwrotna | 3 miesiące od potwierdzenia | Art. 12 ustawy [WYMAGA WERYFIKACJI] |
-| Poufność tożsamości sygnalisty | Bezwzględna, przez cały czas | Art. 8 ustawy [WYMAGA WERYFIKACJI] |
-| Zakaz działań odwetowych | Bezwzględny | Art. 11 ustawy [WYMAGA WERYFIKACJI] |
+| Obowiązek procedury zgłoszeń wewnętrznych | ≥ **50 osób** wykonujących pracę zarobkową **według stanu na 1 stycznia albo 1 lipca** danego roku (pracownicy w pełnych etatach + osoby na innej podstawie, jeśli nie zatrudniają innych do tej pracy); podmioty z sektora usług finansowych — bez progu (ust. 3) (⛔ nie „przed zatrudnieniem 50. pracownika") | art. 23 ust. 1–3 |
+| Ustalenie procedury | po **konsultacjach** z zakładową organizacją związkową albo przedstawicielami osób wykonujących pracę; konsultacje **5–10 dni** od przedstawienia projektu; wejście w życie **7 dni** po podaniu do wiadomości | art. 24 ust. 1, 3–5 |
+| Potwierdzenie przyjęcia zgłoszenia wewnętrznego | **7 dni** od otrzymania (chyba że brak adresu do kontaktu) | art. 25 ust. 1 pkt 5 (⛔ nie art. 12) |
+| Informacja zwrotna | maks. **3 miesiące** od potwierdzenia; bez potwierdzenia — 3 miesiące od upływu 7 dni od zgłoszenia | art. 25 ust. 1 pkt 7 (⛔ nie art. 12) |
+| Zgłoszenie ustne na spotkaniu | spotkanie w **14 dni** od wniosku sygnalisty | art. 26 |
+| Usunięcie zbędnych danych osobowych | **14 dni** od ustalenia, że nie mają znaczenia | art. 8 |
+| Poufność tożsamości sygnalisty | ujawnienie tylko za wyraźną zgodą albo gdy konieczne i proporcjonalne w postępowaniach organów lub sądów (ust. 2) | art. 8 ust. 1–3 |
+| Zakaz działań odwetowych | ogólny — art. 11; katalog w stosunku pracy — art. 12 | art. 11–12 |
+
+✅ [VER] RZĄD 1 2026-09-17o — ustawa o ochronie sygnalistów `Dz.U. 2024 poz. 928` (brak t.j. i nowelizacji
+w metryce ELI). Zgłoszenie zewnętrzne: potwierdzenie **7 dni** (art. 37), przekazanie przez RPO **14 dni**
+(art. 32 ust. 2), przez niewłaściwy organ **14 / 30 dni** (art. 34 ust. 1 pkt 4), informacja zwrotna
+**3 miesiące**, wyjątkowo **6 miesięcy** (art. 41), zaświadczenie o ochronie — **miesiąc** od żądania (art. 38).
 | Rejestr zgłoszeń wewnętrznych | Prowadzony na bieżąco | Art. 29 ustawy [WYMAGA WERYFIKACJI] |
 
 **Uwaga:** Podmioty sektora finansowego — obowiązek kanału zgłoszeń niezależnie od liczby

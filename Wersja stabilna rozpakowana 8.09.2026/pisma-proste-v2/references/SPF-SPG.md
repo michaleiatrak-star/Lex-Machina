@@ -67,7 +67,7 @@ Sygn. akt: [sygnatura sprawy]
 
             WNIOSEK O SPORZĄDZENIE I DORĘCZENIE UZASADNIENIA WYROKU
 
-Na podstawie art. 328¹ §1 KPC wnoszę o sporządzenie uzasadnienia wyroku
+Na podstawie art. 328 § 1 KPC wnoszę o sporządzenie uzasadnienia wyroku
 wydanego przez [Sąd] w dniu [data ogłoszenia] w sprawie sygn. akt [sygnatura]
 oraz o jego doręczenie na wskazany adres.
 
@@ -99,7 +99,11 @@ Załączniki:
 
 *Ładuj gdy: użytkownik chce zabezpieczyć roszczenie przed lub w trakcie
 postępowania sądowego.*
-*Brak terminu zawitego. Opłata: **100 zł** (art. 69 §1 KSCU).*
+*Brak terminu zawitego. Opłata: **100 zł** (art. 68 pkt 1 KSCU); wyjątek — wniosek
+o zabezpieczenie roszczenia **pieniężnego** złożony **przed** wniesieniem pisma
+wszczynającego: **1/4 opłaty od pozwu** (art. 69 ust. 1 KSCU), zaliczana na poczet
+opłaty od pozwu (art. 69 ust. 2).*
+✅ [VER] RZĄD 1 2026-09-16 — KSCU `Dz.U. 2025 poz. 1228`.
 
 ---
 
@@ -110,7 +114,8 @@ postępowania sądowego.*
 - **art. 736 KPC** — wniosek o zabezpieczenie — wymagania formalne
 - **art. 737 KPC** — termin rozpoznania wniosku (1 tydzień)
 - **art. 747 KPC** — sposoby zabezpieczenia roszczeń pieniężnych
-- **art. 69 §1 KSCU** — opłata od wniosku: 100 zł
+- **art. 68 pkt 1 KSCU** — opłata stała od wniosku o udzielenie, zmianę lub uchylenie zabezpieczenia: 100 zł
+- **art. 69 ust. 1–2 KSCU** — zabezpieczenie roszczenia pieniężnego przed wszczęciem: 1/4 opłaty od pozwu, zaliczana na poczet opłaty
 
 > ⚠ Weryfikuj przepisy na isap.sejm.gov.pl.
 

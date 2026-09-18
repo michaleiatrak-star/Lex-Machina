@@ -221,6 +221,36 @@ web_search: "odpowiedzialność odszkodowawcza komornika 2025 orzecznictwo"
 
 ---
 
+## ⛔ KOSZTY I OPŁATY KOMORNICZE — INNY AKT NIŻ TEN MODUŁ
+
+Ten moduł opisuje **ustrój i zawód** komornika (ustawa z 22.03.2018 r.
+o komornikach sądowych). **Wysokości opłat nie ustanawia.**
+
+Akt ustanawiający opłaty: **ustawa z 28.02.2018 r. o kosztach komorniczych**,
+t.j. `Dz.U. 2024 poz. 377` ✅ [VER] RZĄD 1 2026-09-12c (status ELI
+`obowiązujący`, zero nowelizacji po tekście jednolitym).
+
+```text
+view shared/TABELE-OPLAT.md      # sekcja 6b — tabele z odczytu treści
+```
+
+⛔ **Trzy akty regularnie mylone:**
+
+| Pytanie | Akt |
+|---|---|
+| kto może być komornikiem, jakie ma uprawnienia i odpowiedzialność | ustawa o komornikach sądowych (**ten moduł**) |
+| ile wynosi opłata egzekucyjna, stała, minimalna, kiedy się ją obniża lub zwraca | **ustawa o kosztach komorniczych** (`Dz.U. 2024 poz. 377`) |
+| ile kosztuje **skarga na czynności komornika** — 50 zł | **art. 25 ust. 1 KSCU** (opłata sądowa, nie komornicza) |
+
+⚠️ Punkty zapalne przy pierwszej kwocie: 10 % / **3 % przy wpłacie w terminie
+miesiąca** (art. 27), widełki 150–50 000 zł (art. 25 ust. 1), eksmisja
+z lokalu mieszkalnego **1500 zł** vs innego **2000 zł** (art. 34), doręczenie
+pism przez komornika **60 zł** (art. 41 ust. 1), poszukiwanie majątku **100 zł**
+(art. 44), oraz ⛔ **art. 47 — zwolnienie od kosztów komorniczych NIE zwalnia
+z opłaty egzekucyjnej** za egzekucję świadczeń pieniężnych.
+
+---
+
 ## STATUS KANCELARSKI
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03

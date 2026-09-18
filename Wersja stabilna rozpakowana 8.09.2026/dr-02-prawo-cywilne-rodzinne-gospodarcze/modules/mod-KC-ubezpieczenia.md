@@ -60,8 +60,9 @@ Termin na likwidację szkody:
   → 90 dni gdy wyjaśnienie okoliczności niemożliwe w 30 dni
   ⚠️ Weryfikuj aktualne terminy w ustawie o ubezpieczeniach obowiązkowych w ISAP.
 
-Termin przedawnienia roszczeń z OC: 3 lata (od dowiedzenia się o szkodzie i sprawcy)
-  lub 20 lat (gdy szkoda wynikła ze zbrodni / występku)
+Termin przedawnienia roszczeń z OC: jak dla roszczenia wobec sprawcy (art. 819 § 3 KC) —
+  3 lata od dowiedzenia się o szkodzie i sprawcy, max 10 lat od zdarzenia (art. 442¹ § 1)
+  ⛔ szkoda na osobie — granica 10 lat nie obowiązuje (§ 3); 20 lat — zbrodnia lub występek (§ 2)
 ```
 
 ---
@@ -101,10 +102,14 @@ Wniosek o polubowne postępowanie przy RF
 
 | Roszczenie | Termin | Podstawa |
 |---|---|---|
-| Z umowy ubezpieczenia (ogólny) | 3 lata | art. 819 §1 KC — weryfikuj w ISAP |
-| Z OC sprawcy (delikt) | 3 lata od wiedzy / max 10 lat | art. 4421 KC |
-| Gdy szkoda ze zbrodni/występku | 20 lat | art. 4421 §2 KC |
-| Bieg przedawnienia — zgłoszenie do ubezp. | Przerwa — weryfikuj art. 819 §4 KC | — |
+| Z umowy ubezpieczenia (ogólny) | 3 lata | art. 819 § 1 KC |
+| Poszkodowany → ubezpieczyciel OC | termin właściwy dla roszczenia wobec sprawcy (delikt albo kontrakt) | art. 819 § 3 KC |
+| — delikt | 3 lata od wiedzy / max 10 lat od zdarzenia | art. 442¹ § 1 KC |
+| ⛔ — szkoda na osobie | nie kończy się wcześniej niż 3 lata od wiedzy — **granica 10 lat nie obowiązuje** | art. 442¹ § 3 KC |
+| — szkoda ze zbrodni/występku | 20 lat od popełnienia przestępstwa | art. 442¹ § 2 KC |
+| Zgłoszenie roszczenia lub zdarzenia ubezpieczycielowi | **przerywa** bieg; biegnie na nowo od doręczenia **pisemnego** oświadczenia ubezpieczyciela o przyznaniu lub odmowie | art. 819 § 4 KC |
+
+✅ [VER] RZĄD 1 2026-09-16f — art. 819 i 442¹ KC (`Dz.U. 2026 poz. 795`).
 
 ---
 
@@ -347,7 +352,7 @@ STRATEGIA PRAKTYCZNA dla klienta z niedoubezpieczeniem:
 
 | Ryzyko | Opis | Działanie zaradcze |
 |---|---|---|
-| Przedawnienie | 3 lata od decyzji lub zakończenia likwidacji | Pilnuj terminów; przerwij przedawnienie wezwaniem |
+| Przedawnienie | 3 lata (art. 819 § 1); **zgłoszenie** roszczenia lub zdarzenia ubezpieczycielowi przerywa bieg, który rusza na nowo od doręczenia **pisemnej** decyzji (§ 4) | ⛔ Zwykłe wezwanie do zapłaty NIE przerywa biegu (art. 123 § 1 KC: czynność przed sądem/organem albo uznanie). Po odmowie — liczyć od jej doręczenia. ✅ RZĄD 1 2026-09-16f |
 | Wyłączenia OWU | Klauzule wyłączające odpowiedzialność | Analiza OWU przed zawarciem polisy |
 | Zaniżone odszkodowanie | Wycena ubezpieczyciela poniżej rzeczywistej szkody | Własna opinia rzeczoznawcy / biegłego |
 | Brak dokumentacji | Brak dowodów na zakres szkody | Dokumentuj na bieżąco po zdarzeniu |

@@ -40,7 +40,7 @@ web_search: "faktyczne wspólne pożycie art 115 §11 KK SN 2024 2025 para tej s
 
 ### BAS-126 — Zasiedzenie nieruchomości (art. 172 KC)
 ```
-Weryfikacja: KC art. 172–176 (Dz.U. 2024 poz. 1360 t.j. — weryfikuj)
+Weryfikacja: KC art. 172–176 (Dz.U. 2026 poz. 795 t.j. — weryfikuj)
 
 DEFINICJA / PRZESŁANKI (art. 172 §1–3 KC):
   Posiadacz nieruchomości NIEBĘDĄCY właścicielem nabywa własność, jeżeli:
@@ -77,7 +77,7 @@ nieprzerwane posiadanie (rachunki, zeznania świadków, dane o płaceniu podatk�
 ### BAS-127 — Hipoteka (ustawa o ks. wieczystych i hipotece)
 ```
 Weryfikacja: ustawa z 6.07.1982 r. o ks. wieczystych i hipotece art. 65
-  (Dz.U. 2023 poz. 1984 t.j. — weryfikuj)
+  (**Dz.U. 2026 poz. 1066 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
 
 DEFINICJA USTAWOWA (art. 65 ust. 1 u.k.w.h.):
   "W celu zabezpieczenia oznaczonej wierzytelności wynikającej z określonego
@@ -109,7 +109,7 @@ nabywca nieruchomości nabywa ją z hipoteką
 
 ### BAS-128 — Bezpodstawne wzbogacenie (art. 405 KC)
 ```
-Weryfikacja: KC art. 405–414 (Dz.U. 2024 poz. 1360 t.j. — weryfikuj)
+Weryfikacja: KC art. 405–414 (Dz.U. 2026 poz. 795 t.j. — weryfikuj)
 
 DEFINICJA USTAWOWA (art. 405 KC):
   "Kto bez podstawy prawnej uzyskał korzyść majątkową kosztem innej osoby,

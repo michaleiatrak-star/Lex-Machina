@@ -1,7 +1,7 @@
 # Moduł — VAT: przeliczanie walut obcych (art. 31a–31b), rachunek VAT i uwolnienie środków (art. 108b), system zwrotu podatku podróżnym TAX FREE (art. 126–130)
 
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**.
-> ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507, 846.
+> ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026 — do tej daty NIE stosować), 846.
 >
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.**
 >

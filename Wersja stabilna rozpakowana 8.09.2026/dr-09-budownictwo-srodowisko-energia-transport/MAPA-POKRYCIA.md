@@ -11,6 +11,19 @@ Mapa zawiera wyłącznie bieżący stan pokrycia używany przez system. Historia
 - 🔴 — brak realnej treści;
 - ⚪ — zakres techniczny/przejściowy.
 
+
+## Rozporządzenia UE bezpośrednio stosowane (dodane 2026-09-13)
+
+| Zakres | Moduł | Pokrycie |
+|---|---|---|
+| **PPWR** — rozporządzenie (UE) 2025/40, opakowania i odpady opakowaniowe | `mod-UE-PPWR-EUDR-rozporzadzenia-srodowiskowe` | ⚪ katalogowo-metrykalne — metryka, daty stosowania, uchylenie dyrektywy 94/62/WE, styk z prawem polskim. ⛔ **Treść obowiązków materialnych NIEPOKRYTA świadomie** (wymogi projektowe, recyklat, cele ponownego użycia) |
+| **EUDR** — rozporządzenie (UE) 2023/1115, wylesianie | jw. | ⚪ katalogowo-metrykalne — metryka, **dwukrotnie przesunięte daty stosowania**, zakres wg kodów CN z załącznika I. ⛔ Due diligence, system informacyjny i kategorie ryzyka NIEPOKRYTE |
+
+⛔ **Luki jawne w obu:** polskie przepisy wyznaczające organ i sankcje
+(art. 14 i 25 EUDR, art. 68 PPWR) — **niezweryfikowane**; akt wykonawczy
+z art. 12 ust. 6 PPWR, od którego zależy koniec wyjątku dla art. 8 ust. 2
+dyrektywy 94/62/WE — **niesprawdzony**.
+
 ## Prawo budowlane
 
 **Baza operacyjna:** Dz.U. 2026 poz. 524 t.j.; fresh gate przed cytowaniem konkretnej jednostki.

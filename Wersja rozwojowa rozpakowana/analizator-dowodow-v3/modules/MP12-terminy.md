@@ -173,9 +173,11 @@ Wniosek o ponowne rozpatrzenie sprawy (organy I inst. = II inst.):
   art. 127 § 3 KPA — 14 dni od doręczenia decyzji
 
 Skarga do WSA:
-  art. 53 PPSA — 30 dni od doręczenia rozstrzygnięcia wraz z uzasadnieniem
-  Wyjątek: bezczynność organu — 30 dni od dnia doręczenia odpowiedzi organu
-            lub 60 dni od dnia wniesienia ponaglenia
+  art. 53 § 1 PPSA — 30 dni od doręczenia skarżącemu rozstrzygnięcia
+  Bezczynność / przewlekłość — skarga W KAŻDYM CZASIE po wniesieniu ponaglenia
+            (art. 53 § 2b PPSA) — ✅ [VER] RZĄD 1 2026-09-16m
+  ⛔ KOREKTA: poprzednio „30 dni od odpowiedzi organu lub 60 dni od ponaglenia" — takich
+     terminów ustawa nie przewiduje
 
 Skarga kasacyjna do NSA:
   art. 177 PPSA — 30 dni od doręczenia wyroku WSA z uzasadnieniem

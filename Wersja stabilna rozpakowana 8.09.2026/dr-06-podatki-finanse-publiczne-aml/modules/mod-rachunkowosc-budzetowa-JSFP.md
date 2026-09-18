@@ -50,7 +50,7 @@ PODWÓJNA PODSTAWA PRAWNA:
   ISAP i gofin.pl):
   □ AKT pierwotny: Dz.U. 2017 poz. 1911 (WDU20170001911)
   □ Nowelizacje: Dz.U. 2018 poz. 2471
-  □ Tekst jednolity: Dz.U. 2020 poz. 342 (obwieszczenie 3.02.2020)
+  □ Tekst jednolity: **Dz.U. 2026 poz. 909** ✅ [VER] RZĄD 1 2026-09-10o — rozporządzenie MRiF, zero nowelizacji po nim (⛔ poprzedni zapis `2020 poz. 342` — wygaśnięcie aktu)
   □ Nowelizacja: Dz.U. 2025 poz. 347 (rozporządzenie MF z 17.03.2025 r.
     — POTWIERDZONE bezpośrednio na ISAP, WDU20250000347)
   □ ✅ AKTUALNY tekst jednolity: Dz.U. 2026 poz. 909 (obwieszczenie

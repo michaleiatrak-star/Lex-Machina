@@ -6,7 +6,8 @@
 - ⛔ **ZASTĄPIONA 2026-08-21 (F-105/FAZA 3E):** Ustawa o zdrowiu zwierząt z 21.11.2025 —
   Dz.U. 2025 poz. 1795, weszła w życie **18.03.2026**, w przeważającej części
   **uchyliła** poprzednią ustawę o ochronie zdrowia zwierząt oraz zwalczaniu chorób
-  zakaźnych zwierząt (dawniej: Dz.U. 2024 poz. 1284). Implementuje unijne
+  zakaźnych zwierząt (ostatni t.j.: Dz.U. 2023 poz. 1075 — ✅ [VER] RZĄD 1 2026-09-16d; ⛔ poprzedni zapis
+  „dawniej: Dz.U. 2024 poz. 1284" wskazywał rozporządzenie MKiŚ — podmiana aktu). Implementuje unijne
   rozporządzenie 2016/429 ("Animal Health Law"). Zmiana MERYTORYCZNA, nie tylko
   metrykalna — nowa ustawa zmienia m.in. system odszkodowań (elastyczniejszy,
   częściowe obniżki zamiast całkowitej odmowy), wprowadza obowiązek rejestracji

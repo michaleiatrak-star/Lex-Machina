@@ -159,7 +159,7 @@ Odwołanie od decyzji UW:           14 dni od doręczenia (art. 129 §2 KPA)
   → Złożone w terminie = LEGALNY POBYT DO DECYZJI SZUSC (stempel w paszporcie)
   ⚠️ Niepodjęte awizo: doręczenie z mocy prawa po 14 dniach od I awizo — termin biegnie!
 
-Skarga do WSA:                     30 dni od doręczenia decyzji SZUSC (art. 54 §1 PPSA)
+Skarga do WSA:                     30 dni od doręczenia decyzji SZUSC (art. 53 § 1 PPSA; wnoszona za pośrednictwem organu — art. 54 § 1)
   → Wyjątek konsulat/MSZ:          bezpośrednio do WSA bez etapu odwoławczego
   → WSA może wstrzymać wykonanie decyzji (art. 61 §3 PPSA — wniosek!)
 

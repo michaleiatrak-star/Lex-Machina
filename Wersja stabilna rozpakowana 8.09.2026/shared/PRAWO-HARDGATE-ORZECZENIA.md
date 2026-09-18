@@ -58,10 +58,36 @@ KROK 0 (strukturalny — ZAWSZE próbuj pierwszy):
   → OUT_OF_SCOPE / baza nie pokrywa danego sądu (np. NSA/WSA w SAOS) → przejdź do KROK 1
   ⚠️ Zero trafień w bazie WTÓRNEJ ≠ dowód nieistnienia — rozstrzyga baza oficjalna (KROK 1).
 
+KROK 0A — OVERRIDE NSA/WSA (obowiązkowy, gdy repertorium routuje do CBOSA):
+  1. Jeśli jest dostępny connector `mcp-nsa` / `cbosa_search` → MCP-FIRST.
+  2. Jeśli MCP brak / OUT_OF_SCOPE → NIE przechodź od razu do ogólnego
+     web_search. Wykonaj fresh-probe i V-SYG-0.7 DIRECT-CBOSA:
+       POST /cbo/search → kompletna /cbo/find?p=N → /doc/{ID} → exact-match.
+     Kontrakt: shared/SYGNATURY.md; kształt requestu:
+     shared/DOSTEP-MASZYNOWY-API.md; implementacja:
+     shared/CBOSA-ADAPTER.md.
+  3. Dopiero gdy direct CBOSA jest niedostępna w bieżącym runtime →
+     V-SYG-0.5 RETRIEVAL/SNAPSHOT. Obowiązkowo:
+       POST-CHECK HOSTA → exact-match → jawny access_mode/content_scope.
+     Snapshot może zawierać metrykę + sentencję, a czasem pełne uzasadnienie;
+     wykorzystaj faktycznie dostępną treść do researchu, ale NIE oznaczaj jej
+     jako DIRECT_LIVE / ✅ [VER] bez niezależnego bieżącego potwierdzenia.
+     Brak exact-hit w snapshotach = OUT_OF_SCOPE, nigdy NOT_FOUND.
+  4. SAOS dla NSA/WSA jest wyłącznie kontrolą pomocniczą; brak rekordu SAOS
+     nie dowodzi nieistnienia, bo corpus ADMINISTRATIVE może być pusty.
+
+  ⛔ FOUND z direct CBOSA nie daje automatycznie prawa do cytowania uzasadnienia.
+     Gdy `reasoning_available=false`, wolno użyć metryki i zweryfikowanej
+     sentencji, ale NIE tezy/fragmentu uzasadnienia.
+
+  ⛔ Treść z `CRAWLED_OR_INDEXED` może być bogata, lecz jej status śladu
+     pozostaje odrębny od zakresu treści. Nie twórz statusu `[SNAPSHOT]`;
+     stosuj `⚠️ [NIEWERYFIKOWANE]` + pola provenance z WERYFIKACJA-SLAD.md.
+
 KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
   sn.pl           → wyroki i uchwały Sądu Najwyższego
   orzeczenia.ms.gov.pl → sądy powszechne (apelacyjne, okręgowe, rejonowe)
-  nsa.gov.pl      → Naczelny Sąd Administracyjny
+  orzeczenia.nsa.gov.pl (CBOSA) → NSA + wszystkie WSA; wykonanie wg KROK 0A
   trybunal.gov.pl → Trybunał Konstytucyjny
   saos.org.pl     → agregator (pomocniczo, gdy powyższe niedostępne)
 
@@ -101,14 +127,18 @@ KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
     z zastrzeżeniami dot. jawności I/II instancji powyżej.
 
   Metoda wyszukiwania:
-    web_fetch: https://www.sn.pl/orzecznictwo/SitePages/Baza_orzeczen.aspx → szukaj sygnatury
-    lub web_search: "[sygnatura] site:sn.pl" / "[sygnatura] site:orzeczenia.ms.gov.pl"
+    SN / sądy powszechne → kanał deterministyczny wg shared/DOSTEP-MASZYNOWY-API.md.
+    NSA/WSA → KROK 0A DIRECT-CBOSA przed jakimkolwiek fallbackiem indeksowym.
+    web_search `site:` jest fallbackiem discovery, NIE domyślną kontrolą bytu.
 
 KROK 2: Potwierdź że sygnatura istnieje i prowadzi do właściwego orzeczenia
   → Jeśli baza nie zwraca orzeczenia dla tej sygnatury: ⚠️ [NIEWERYFIKOWANE — brak w oficjalnej bazie]
   → NIE próbuj "blisko pasującej" sygnatury — to generuje fałszywe potwierdzenia
 
 KROK 3: Odczytaj tezę ze źródła — nie parafrazuj z pamięci ani z portalu wtórnego
+  Dla CBOSA: tezę z UZASADNIENIA wolno przypisać tylko gdy direct dokument
+  ma `reasoning_available=true`; brak tej sekcji nie jest zgodą na rekonstrukcję
+  tezy z sentencji, snippetu lub pamięci.
   LIMIT CYTATU: maksymalnie 30 słów z treści orzeczenia (dziedzinowy override — wyższy niż
   globalny limit 15 słów, uzasadniony koniecznością dokładnego oddania tezy prawnej;
   dotyczy WYŁĄCZNIE cytatów z orzeczeń sądowych; dla przepisów ustawowych limit 15 słów
@@ -401,7 +431,7 @@ mimo to WPROWADZAĆ W BŁĄD co do tego, KTO faktycznie tak twierdzi.
 Przed wysłaniem odpowiedzi zawierającej sygnaturę orzeczenia odpowiedz na każde pytanie:
 
 ```
-□ Czy sygnatura pochodzi z oficjalnej bazy (sn.pl / orzeczenia.ms.gov.pl / nsa.gov.pl)?
+□ Czy sygnatura pochodzi z oficjalnej bazy (sn.pl / orzeczenia.ms.gov.pl / orzeczenia.nsa.gov.pl / właściwa baza TK)?
     TAK → ✅ [VER: źródło, data] — możesz podać
     NIE → ⚠️ [NIEWERYFIKOWANE] — usuń sygnaturę lub oznacz jako nieweryfikowaną
 

@@ -1,15 +1,20 @@
 # SPB — Zarzuty od Nakazu Zapłaty
 
 *Ładuj gdy: nakaz zapłaty wydany w postępowaniu nakazowym (nie upominawczym).
-Termin zawity: **7 dni** od doręczenia nakazu (art. 493 §1 KPC).
-Opłata: **3/4 opłaty od pozwu** (art. 19 §3 KSCU).*
+Termin zawity: **miesiąc** od doręczenia nakazu na terytorium UE, w tym w Polsce
+(art. 480² § 2 pkt 3 KPC); poza UE — 3 miesiące (pkt 4).
+Opłata: **3/4 opłaty od pozwu**; gdy nakaz wydano przeciwko konsumentowi —
+od pozwanego konsumenta **nie więcej niż 750 zł** (art. 19 ust. 4 KSCU).*
+✅ [VER] RZĄD 1 2026-09-16 — KPC `Dz.U. 2026 poz. 468`, KSCU `Dz.U. 2025 poz. 1228`.
 
 ---
 
 ## PODSTAWA PRAWNA
 
-- **art. 493 §1 KPC** — zarzuty od nakazu zapłaty w postępowaniu nakazowym
-- **art. 19 §3 KSCU** — opłata od zarzutów = 3/4 opłaty stosunkowej od wartości przedmiotu sporu
+- **art. 493 § 1 KPC** — zarzuty od nakazu zapłaty (przepis mówi, ŻE przysługują; terminu NIE zawiera)
+- **art. 480² § 2 pkt 3 KPC** — termin: miesiąc od doręczenia na terytorium UE
+- **art. 480³ KPC** — tryb: do sądu, który wydał nakaz
+- **art. 19 ust. 4 KSCU** — opłata od zarzutów = 3/4 opłaty; od konsumenta max 750 zł (KSCU dzieli się na ustępy, nie paragrafy)
 - **art. 492 §1 KPC** — nakaz zapłaty w postępowaniu nakazowym ma rygor natychmiastowej wykonalności
 
 > ⚠ Weryfikuj przepisy na isap.sejm.gov.pl przed użyciem.
@@ -21,9 +26,10 @@ Opłata: **3/4 opłaty od pozwu** (art. 19 §3 KSCU).*
 | Cecha | Sprzeciw (SPA) | Zarzuty (SPB) |
 |---|---|---|
 | Tryb | Upominawczy / EPU | **Nakazowy** |
-| Termin | 14 dni | **7 dni** |
+| Termin | **2 tygodnie** (kraj) / miesiąc (UE poza krajem) | ⛔ **MIESIĄC** przy doręczeniu na terytorium UE, w tym w Polsce / 3 miesiące poza UE |
 | Opłata | brak | **3/4 wpisu** |
-| Podstawa | art. 503 KPC | **art. 493 KPC** |
+| Podstawa terminu | **art. 480² § 2 pkt 1–2 KPC** | **art. 480² § 2 pkt 3–4 KPC** |
+| Podstawa dopuszczalności | art. 505 § 1 KPC (⛔ art. 503 UCHYLONY) | art. 493 § 1 KPC (nie zawiera terminu) |
 | Skutek | Nakaz traci moc | Nakaz **nie traci** mocy — sprawa toczy się dalej |
 | Rygor | Brak | Nakaz nakazowy = tytuł wykonawczy od razu |
 

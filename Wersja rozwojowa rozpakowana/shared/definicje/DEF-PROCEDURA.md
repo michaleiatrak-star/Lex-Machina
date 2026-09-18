@@ -43,8 +43,10 @@ TRZY FUNDAMENTALNIE RÓŻNE INSTYTUCJE — najczęstszy błąd prawnika:
   → NIE można go zawiesić ani przerwać (wyjątki: wyraźne w ustawie)
   → Nie podlega przywróceniu na zasadach ogólnych KPC
   → Przykłady zawite w KC: art. 568 §1 (rękojmia — 2 lata)
-  → Przykłady zawite w KPA: art. 33 UPEA — zarzuty w postępowaniu egzekucyjnym
-    (7 dni — bezwzględny!), art. 128 KPA — odwołanie (14 dni)
+  → Przykłady w KPA: art. 129 § 2 KPA — odwołanie (14 dni); art. 141 § 2 — zażalenie (7 dni)
+    ⛔ KOREKTA 2026-09-16m: poprzednio „art. 128 KPA — odwołanie" (art. 128 dotyczy treści
+    odwołania) i „art. 33 UPEA — zarzuty 7 dni" (taki termin nie istnieje — terminy
+    końcowe z art. 33 § 5 UPEA; patrz `shared/terminy.md`, UPEA) — ✅ [VER] RZĄD 1 2026-09-16m
   → Przykłady zawite w KPK: zażalenia, apelacje (14 dni od doręczenia)
 
   TERMIN INSTRUKCYJNY (porządkowy):

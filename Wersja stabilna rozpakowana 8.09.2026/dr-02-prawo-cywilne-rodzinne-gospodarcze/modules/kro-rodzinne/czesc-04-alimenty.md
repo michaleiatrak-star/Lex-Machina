@@ -10,13 +10,66 @@
 
 ## ALIMENTY — QUICK CHECK
 
-### Przesłanki (art. 128, 133 KRO — weryfikuj w ISAP)
+### ⛔ WYSOKOŚĆ ALIMENTÓW — art. 135 KRO (odczyt treści, ✅ [VER] RZĄD 1 2026-09-10u)
+
+Akt: KRO t.j. **Dz.U. 2026 poz. 236**. Obliczenia prowadzi
+`shared/TABELE-OPLAT.md` — tam też opłaty i WPS.
+
+> **§ 1.** Zakres świadczeń alimentacyjnych zależy od **usprawiedliwionych
+> potrzeb uprawnionego** oraz od **zarobkowych i majątkowych możliwości
+> zobowiązanego**.
+
+⛔ **DWIE przesłanki, nie jedna.** Wyliczenie oparte tylko na potrzebach dziecka
+jest niekompletne; oparte tylko na dochodach rodzica — również.
+⚠️ „Możliwości zarobkowe" ≠ „dochód faktyczny": przepis obejmuje zdolność
+zarobkowania niewykorzystywaną.
+
+> **§ 2.** Wykonanie obowiązku […] może polegać **w całości lub w części na
+> osobistych staraniach** o utrzymanie lub wychowanie uprawnionego; w takim
+> wypadku świadczenie pozostałych zobowiązanych polega na pokrywaniu kosztów.
+
+⛔ Osobiste starania to **forma wykonania obowiązku**, nie okoliczność
+łagodząca. Pominięcie § 2 zaniża żądanie strony sprawującej bieżącą pieczę.
+
+> **§ 3.** Na zakres świadczeń **nie wpływają** m.in. świadczenia z pomocy
+> społecznej lub funduszu alimentacyjnego podlegające zwrotowi.
+
+⛔ Argument „dziecko dostaje świadczenia, więc alimenty mogą być niższe" jest
+wprost sprzeczny z § 3. ⚠️ Katalog § 3 jest dłuższy — odczytać w całości.
+
+### Przesłanki (odczyt treści KRO, nie z pamięci)
+
 ```
-Na dziecko:    obowiązek rodziców do ukończenia samodzielności przez dziecko
-               → brak górnej granicy wiekowej, liczy się zdolność do utrzymania
-Na małżonka:   po rozwodzie — zależne od winy i sytuacji majątkowej
-               termin przedawnienia alimentów: 3 lata
+art. 128      obowiązek obciąża krewnych w linii prostej ORAZ rodzeństwo
+art. 129 §1   zstępni przed wstępnymi, wstępni przed rodzeństwem;
+              bliżsi stopniem przed dalszymi
+art. 129 §2   krewnych w tym samym stopniu — w częściach odpowiadających
+              ICH możliwościom zarobkowym i majątkowym
+art. 130      obowiązek byłego małżonka WYPRZEDZA obowiązek krewnych
+art. 133 §1   rodzice wobec dziecka niezdolnego do samodzielnego utrzymania
+              — CHYBA ŻE dochody z majątku dziecka wystarczają
+art. 133 §2   poza tym wypadkiem uprawniony jest TYLKO ten, kto jest
+              w niedostatku
+art. 133 §3   uchylenie się wobec dziecka PEŁNOLETNIEGO: nadmierny uszczerbek
+              LUB brak starań dziecka o samodzielność — NIE z mocy prawa
+art. 138      zmiana stosunków → zmiana orzeczenia lub umowy
+art. 140 §2   roszczenie regresowe przedawnia się z upływem 3 lat
 ```
+
+⛔ **Art. 133 § 1 nie zna granicy wieku** — kryterium to zdolność do
+samodzielnego utrzymania, nie 18 ani 26 lat.
+
+⛔ **Opłata: art. 96 ust. 1 pkt 2 KSCU zwalnia** stronę dochodzącą roszczeń
+alimentacyjnych oraz pozwaną w sprawie o **obniżenie** alimentów. Sprawdzić
+PRZED podaniem jakiejkolwiek kwoty opłaty. WPS (art. 22 KPC: suma świadczeń za
+rok) jest mimo to potrzebny — właściwość i koszty zastępstwa.
+
+⛔ **Koszty zastępstwa w sprawie o alimenty: stawka minimalna 240 zł,
+NIEZALEŻNIE OD WPS** — § 4 ust. 1 pkt 9 obu taks (adwokackiej
+`Dz.U. 2026 poz. 215`, radcowskiej `Dz.U. 2026 poz. 118`), ✅ [VER] RZĄD 1
+2026-09-10v z odczytu treści. Tabela stawek od WPS (§ 2) **nie ma tu
+zastosowania** — policzenie z niej zawyża koszty blisko czterokrotnie.
+Pozostałe stawki rodzinne i pełne tabele: `shared/TABELE-OPLAT.md`.
 
 ### Zmiana / uchylenie (art. 138 KRO)
 ```

@@ -1,7 +1,7 @@
 9b1cc2cb28497fbf10056b2ea35e6743c651560badc7e6bb938ddbef90d881e9  ./MAPA-AKTOW.md
 13010fba8fe5772fe76abbd1275bb232d9d1303bc06deec10257e3079292145f  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-81371e160f467af4894eab9ab1a573536ebfc2f64b5ebf1aa48f02d85b002119  ./SKILL.md
+e13a130d3348fbbcbe11060eb17ea1d69d17c6338849cdcf836c9019f54ec550  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -19,7 +19,7 @@ ab07241830b95df0fed59258361a4e23f94383ac19ab849b777ab04895849af5  ./modules/mod-
 2caaa4072bdd963da267224e6b25c84719ea65f4874cd768fc907599d1f59459  ./modules/mod-KP-prawo-pracy.md
 6a39d3cdeefc2ac5c8ab625cfa1f4010fa7ebb3b78f7a8bb1b46b45d2d469470  ./modules/mod-KRUS-rolnicze-ubezpieczenia.md
 2bb361e234934601464ee7ffc8e238cbe37f6b4a4a8b961f7440b75d93229635  ./modules/mod-ROZP-SKLADKOWE-podstawa-wymiaru.md
-adc31c2b9947cb5cc10e831530329e36c625ba8513a44876a26b264f9d484ebc  ./modules/mod-SUS-ZUS-ubezpieczenia-spoleczne.md
+32e6d7675191297e916dd578f13d93ba3e0a6ca587eacc4a9953fc122883c1a4  ./modules/mod-SUS-ZUS-ubezpieczenia-spoleczne.md
 a3771b6d3b4fad39618f697f1461e60d5e49a5ae7c756526ce3fa972d066e52b  ./modules/mod-SUS-current-state-COV.md
 38dff9efb30954484f177ff95f394eebd3cd9e6e41c20bd8474ae7ea7b2b0be9  ./modules/mod-SUS-dzial-2-podleganie-ubezpieczeniom.md
 1367e20c02925ba72d58547292470a4c0977356ee58a3c4a96c63c671aecef0e  ./modules/mod-SUS-uzupelnienie-pokrycia-2026.md
@@ -43,7 +43,7 @@ fe51caf58f9a664b02604ed60109298d81489d495ee2ac665cf1612f8caa88f7  ./modules/mod-
 adc53006e5f262e829965ef987df69b970fd1eb656108d223acb5a9842f3260f  ./modules/mod-ustawa-zasilkowa-choroba-macierzynstwo.md
 4025a485c1890c5c6665fde76c19f5a0e3633569036258a5ee1a336eea9a9c5b  ./modules/mod-ustawa-zasilkowa-current-state-COV.md
 2a10ff2a6670e1ec52a58d60e1c70af1e732130d9db519d27f4ceddff86e46e3  ./modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe.md
-be7df071772ea76c620b9c0667a902a5a3c3e810482cf32c7929db9b5a7768bf  ./modules/mod-ustawa-zwolnienia-grupowe.md
+df218126aeb6d696b95c240cead581d7175c69e17e2f5601bc6e4ac5d8581312  ./modules/mod-ustawa-zwolnienia-grupowe.md
 fe6794f251ec1a2ad8093c7705a41481cc7a6491b462ecfebcc1aa47451ce8af  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-770fde6c66dfe66ef45cb11b8dabd233d3cab723214a957bfb6d8e101b62d4d0  ./references/CHANGELOG.md
+05f98345bc682d08e3d84d6a470a0e838960f7fe272f9b57e3004ea818ae70c8  ./references/CHANGELOG.md

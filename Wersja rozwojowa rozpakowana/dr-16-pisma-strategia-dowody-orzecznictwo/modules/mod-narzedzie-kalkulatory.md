@@ -34,7 +34,7 @@ OSTRZEŻENIA:
 |---|---|---|---|
 | **7 dni** | Sprzeciw od wyroku nakazowego | art. 94 § 1 KPW w zw. z art. 506 § 1 KPK | ZAWITY |
 | **14 dni** | Odwołanie od decyzji adm. | art. 129 §2 KPA | ZAWITY |
-| **14 dni** | Sprzeciw od orzeczenia ZUS | art. 14 ustawy FUS | ZAWITY |
+| **14 dni** | Sprzeciw od orzeczenia ZUS | art. 14 ust. 2a FUS (do 31.12.2026); od 1.01.2027 — art. 85f ustawy o systemie ubezpieczeń społecznych (ustawa `2026/26`) | ZAWITY |
 | **14 dni** | Odstąpienie od umowy (internet) | art. 27 uPK | PREKLUZYJNY |
 | **21 dni** | Odwołanie od wypowiedzenia | art. 264 KP | ZAWITY |
 | **30 dni** | Skarga do WSA | art. 53 §1 PPSA | ZAWITY |

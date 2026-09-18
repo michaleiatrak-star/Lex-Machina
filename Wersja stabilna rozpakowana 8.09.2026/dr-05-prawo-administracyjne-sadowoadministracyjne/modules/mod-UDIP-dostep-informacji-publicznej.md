@@ -68,7 +68,13 @@ Udostępnienie niezwłocznie lub w 14 dniach
 Decyzja administracyjna (art. 16 UDIP) — musi mieć formę decyzji z uzasadnieniem
   ↓ [14 dni] WNIOSEK O PONOWNE ROZPATRZENIE (art. 127 §3 KPA — do tego samego organu)
   LUB bezpośrednio:
-  ↓ [30 dni] SKARGA DO WSA (art. 52 §3 PPSA — gdy podmiot bez wyższego organu)
+  ↓ [30 dni] SKARGA DO WSA — art. 52 § 3 PPSA pozwala wnieść skargę
+     BEZ uprzedniego wniosku o ponowne rozpatrzenie, zawsze gdy taki
+     wniosek przysługuje (nie tylko "gdy brak wyższego organu").
+     ⛔ Wyjątki: decyzje ministra ds. zagranicznych w sprawach z ustawy
+     o cudzoziemcach oraz decyzje konsula.
+     ⚠️ art. 52 § 4 PPSA UCHYLONY; "wezwanie do usunięcia naruszenia
+     prawa" zniknęło z procedury w 2017 r.
 
   ↓ [MILCZENIE / BEZCZYNNOŚĆ]
 Ponaglenie do organu wyższego stopnia (art. 37 KPA)

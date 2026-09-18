@@ -1,16 +1,244 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-10b. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-17u. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
 | Kategoria | Liczba | Pozycje |
 |---|---:|---|
-| Wykonalne sesją audytową | 8 | F-135, F-141, F-148, F-160, F-167, O-4, O-5, O-6 |
+| Wykonalne sesją audytową | 2 | F-167, **F-189** |
 | Reaktywne | 1 | F-5 |
-| Zależne od środowiska/dewelopera | 12 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, F-157, F-158(c), F-171 |
+| Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
+
+> **F-157b (2026-09-13c, ZAWĘŻONA) — braki resztkowe listy dozwolonych.**
+> Pomiar T25 (52 sondy) po zmianie konfiguracji: **odblokowane** —
+> `wl-api.mf.gov.pl` (biała lista VAT, zmierzona end-to-end, zapis
+> „nieosiągalna" usunięty z `DOSTEP-MASZYNOWY-API.md` §4 i z `escalation`
+> routera 3.49), `api.dane.gov.pl`, `op.europa.eu`, `www.gov.pl` (odblokowuje
+> BIP GIP — F-153), `www.pip.gov.pl`. **Pozostaje poza listą:**
+> `api.stat.gov.pl` (REGON/BIR — blokuje F-158c), `orzeczenia.*.so/sa/sr.gov.pl`
+> (sieć lokalna Zasady 5A w kanale kodu), `www.sn.pl`, `www.nsa.gov.pl`,
+> `www.orzeczenia-nsa.pl`, `szukio.pl`. ⚠️ `rdf-przegladarka.ms.gov.pl` jest już
+> na liście, ale oddaje 403 z warstwy ochronnej — to inny problem niż lista.
+> ⛔ Ruch NIE jest otwarty w całości: kontrola neutralna (`example.com`,
+> `www.wikipedia.org`) → `host_not_allowed`.
+>
+> **F-186a ZAMKNIĘTA 2026-09-13c** — ścieżka HUDOC `/app/query/results` zwraca
+> 404 (zapis z v1.0 nieprawdziwy); działa `/app/conversion/docx/html/body?
+> library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
+> pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **22** | — |
+| **Razem** | **19** | — |
+
+> **F-189 (2026-09-16, OTWARTA — przyczyna) — nadpisanie skilli dziedzinowych starszym stanem.**
+> Treść 10 skilli odtworzona i wydana (AUDYT-2026-09-16). Pozostaje: (1) ustalić mechanizm
+> nadpisania — `shared` i `audyt-systemu-v4` z tych samych sesji przetrwały, więc wydanie
+> skilli dziedzinowych szło inną ścieżką; ⛔ **2026-09-16b: co najmniej DWIE fale** (stan
+> `dr-09` z 10.09 zaginął przed 13.09; stan 12f–12n — po 12.09) — mechanizm powtarzalny,
+> nie jednorazowy; (2) przed każdym wydaniem uruchomić T12 na drzewie docelowym ORAZ
+> kontrolę treści „było → jest" (T12 nie widzi utraty bez cofnięcia numeru — przypadek
+> `dr-09` 3.29, kolizja numeru w dwóch sesjach). ✅ 2026-09-16c: ta kontrola jest
+> automatem — **T30** (`check_utrata_tresci.py`, bloker orkiestratora). Otwarte pozostaje
+> wyłącznie ustalenie MECHANIZMU nadpisań (poza repozytorium — proces wgrywania paczek).
+> ⚡ **2026-09-17p — obserwacja odwrotna:** w kopii roboczej pojawiły się 3 fragmenty treści,
+> których sesja nie zapisała (skrypt przerwał się przed zapisem). Wykryte przez T21 (2 rozjazdy);
+> treść zweryfikowana odczytem i zachowana. Pochodzenie nieustalone — ten sam obszar niepewności
+> co nadpisania. ✅ **2026-09-17r: zalecenie wdrożone jako T33** (`check_wydanie.py`, w orkiestratorze)
+> — kontrola „drzewo ↔ wydana paczka" jest odtąd automatyczna, nie ręczna.
+>
+> F-190 ZAMKNIĘTA 2026-09-16c — trzy luki uzupełnione z odczytu treści (AUDYT-2026-09-16c).
+
+> **F-183a (2026-09-14, OTWARTA — WYŁĄCZNIE środowisko docelowe) — direct
+> CBOSA wdrożona strukturalnie; pozostaje pomiar live w docelowym runtime.**
+> Historyczny pomiar 2026-09-13b/c (503 na wszystkich ścieżkach w tamtym
+> środowisku) pozostaje prawdziwym dowodem dla TAMTEJ sesji, ale nie jest już
+> globalnym stanem systemu.
+>
+> **Naprawa strukturalna 2026-09-14:** `shared/CBOSA-ADAPTER.md` +
+> `shared/SYGNATURY.md` V-SYG-0.7 + `shared/DOSTEP-MASZYNOWY-API.md` 1.5
+> wprowadzają: fresh-probe → `POST /cbo/search` → cookies → kompletna
+> `/cbo/find?p=N` → wszystkie `/doc/{ID}` → exact-match. Implementacja
+> referencyjna w `orzeczenia-sadowe-v2/tools/cbosa_parser.py` przeszła
+> **22/22 regresje** (drift HTML, zapętlona/niepełna paginacja, duplikaty,
+> near-match, przerwany transport, zakres uzasadnienia).
+>
+> **Skutek:** gdy direct CBOSA jest dostępna, system osiąga
+> `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE` oraz odczyt metryki,
+> sentencji i — jeśli opublikowane — uzasadnienia. Gdy direct CBOSA w danym
+> runtime nadal nie działa, dopiero wtedy aktywuje się V-SYG-0.5, który
+> pozostaje jednostronny i nigdy nie daje NOT_FOUND.
+>
+> **Co nadal pozostaje do wykonania w F-183a:** kontrolowany live probe w
+> docelowym środowisku wdrożeniowym (nie w fixture ani cudzym repo), zapis
+> request/response i minimum jeden przypadek pozytywny + jeden bez exact-match.
+> Do tego czasu nie wolno reklamować direct CBOSA jako gwarantowanej
+> dostępności każdego hosta; wolno twierdzić, że system ma deterministyczny
+> adapter i fail-closed fallback.
+>
+> ⚡ **ZAWĘŻENIE 2026-09-14a (ZASADA 10) — podzakres pomiarowy WYKONANY,
+> wynik negatywny.** Przeprowadzono kontrolowany probe w tym runtime:
+> 503 na `/`, `/cbo/query`, `/cbo/search`, oba adresy A, porty 80 i 443;
+> ciało 121 B to komunikat Envoy o nieudanym połączeniu upstream, więc 503
+> pochodzi z warstwy egress, nie z originu; brak `x-deny-reason` wyklucza
+> allowlistę; DNS rozwiązuje się poprawnie, co eliminuje DNS jako zmienną;
+> `www.nsa.gov.pl` tą samą trasą zwraca 200, co wyklucza blokadę domeny i
+> awarię resortową. Stan kanału: `DIRECT_UNAVAILABLE`.
+> ⛔ Dodatkowo `web_fetch` na CBOSA → `ROBOTS_DISALLOWED`, a indeks daje
+> wyłącznie fragment nawigacyjny bez treści orzeczeń — w tym środowisku NIE
+> istnieje fallback snapshotowy, którym dysponują inne hosty.
+> **Do wykonania pozostaje wyłącznie przypadek pozytywny** w runtime, w którym
+> origin odpowiada; podzakres negatywny jest zamknięty i nie wymaga powtórzenia.
+> ⚡ **DOPRECYZOWANIE 2026-09-14b — RETRIEVAL/SNAPSHOT ZMIERZONY W INNYM
+> HOŚCIE.** Negatywny pomiar direct powyżej pozostaje prawdziwy dla tamtego
+> runtime. Niezależnie od niego inna warstwa retrieval udostępniała oficjalne
+> reprezentacje `orzeczenia.nsa.gov.pl/doc/{ID}`. Próba 10 realnych sygnatur
+> NSA/WSA: **10/10** snapshotów miało co najmniej metrykę + sentencję, **5/10**
+> miało potwierdzalnie pełne uzasadnienie, **2/10** uzasadnienie widoczne bez
+> dowodu kompletności, **3/10** metrykę + sentencję bez potwierdzonego końca
+> uzasadnienia. To nie jest estymacja pokrycia całego korpusu.
+>
+> Jednocześnie operator `site:orzeczenia.nsa.gov.pl` w dwóch stosach zwracał
+> również obce hosty. Naprawa systemowa: `shared` 3.61 / V-SYG-0.5 wymusza
+> POST-CHECK pełnego hostname i ścieżki PRZED exact-match. Snapshot ma jawne
+> `access_mode=CRAWLED_OR_INDEXED` oraz `content_scope`; bogactwo treści NIE
+> awansuje provenance do `DIRECT_LIVE` ani samo nie daje ✅ [VER]. Brak hitu
+> retrieval nadal = OUT_OF_SCOPE, nigdy NOT_FOUND.
+>
+> **F-183a pozostaje otwarta wyłącznie dla pozytywnego DIRECT_LIVE w runtime
+> docelowym.** Dostępność snapshotu jest zdolnością konkretnego hosta i nie
+> zastępuje tego kryterium zamknięcia.
+>
+> **F-184 (2026-09-13, OTWARTA, środowisko) — TK bez kontroli po sygnaturze.**
+> `ipo.trybunal.gov.pl/ipo/Szukaj` → 200, ale wyszukiwarka to JSF/PrimeFaces
+> z `ViewState`: POST-only, `Sprawa?sygnatura=` nie jest kluczem. Do
+> przemierzenia: endpoint autouzupełniania `sygnaturaComplete`. Dziś dla TK
+> zostaje SAOS w oknie ≤ 2015-12-09, dalej ⚠️ [NIEWERYFIKOWANE].
+>
+> **F-185 (2026-09-13, OTWARTA, środowisko) — KIO: `Sign=` nie filtruje.**
+> `orzeczenia.uzp.gov.pl` `GET /Home/Search` przyjmuje pola `Sign, Phrase, Dt,
+> Fle, SCnt, Art, ThIdx`, ale zmierzone `Sign=KIO 827/18` i `Sign=KIO 99999/18`
+> zwracają tę samą stronę (57 635 / 57 637 B — różnica to echo wartości),
+> 0 odnośników do wyników. ⛔ Teza materiału wejściowego „znalazłem pole
+> sygnatury: Sign" była **znalezieniem pola, nie działającego filtra** —
+> nieprzetestowana i nieprawdziwa. Do przemierzenia: czy wyniki dociąga AJAX.
+
+> **F-180 / O-5 / O-6 ZAMKNIĘTE 2026-09-10c** — skrócenie rdzenia HARD GATE
+> o 30% przez wydzielenie gałęzi warunkowych, preflight kompletności korzenia
+> w zestawie regresyjnym, pozycja `[STAN-ZAŁADOWANY]` w SELF-CHECK routera.
+> Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10c.
+
+> **KANDYDAT (2026-09-10c, bez numeru) — `shared/HIERARCHIA-ZRODEL.md`, 31,6 kB.**
+> Nie należy do rdzenia R-1…R-5, ale wyzwalacz „pierwszy URL w odpowiedzi" pada
+> praktycznie zawsze, więc koszt jest bliski bezwarunkowemu. Kandydat na tę samą
+> operację co F-180. ⚠️ **Warunek podjęcia:** najpierw pomiar, które sekcje są
+> faktycznie warunkowe — bez niego byłaby to czwarta powtórka klasy F-164
+> (decyzja na podstawie niezmierzonej tezy). Nie otwierać jako flagi przed
+> pomiarem.
+
+> **F-141 / F-148 / F-160 / O-4 ZAMKNIĘTE 2026-09-10d.** Szczegóły:
+> AUDYT-2026-09-10d. ⛔ Przy F-148 wykryto **dwa realne błędy podmiany aktu**
+> (`ROUTING-MAP.md:770` i `dr-08/.../mod-ustawa-zarzadzanie-kryzysowe.md`) —
+> oba miały status ✅ OK i przechodziły każdą dotychczasową kontrolę.
+> Do rejestru żywego nie wchodzą (ZASADA 10).
+
+> **O-10 ZAMKNIĘTA 2026-09-10r.** T27 pyta też o normy **przedwczesne** —
+> numer podany jako aktualna podstawa, którego `entryIntoForce` jest
+> w przyszłości. Dwie osobne kategorie w raporcie: „w vacatio legis jako
+> podstawa" i „w wyliczeniu zmian, bez cezury". Korpus: PASS w obu klasach.
+> ⛔ Przy okazji wykryty własny błąd testu — cezura dopasowywana do wycinka
+> 150 znaków, a w wierszach map stoi dalej. Do rejestru żywego nie wchodzi
+> (ZASADA 10). Szczegóły: AUDYT-2026-09-10r.
+
+
+> **F-135 OTWARTA — zakres zmniejszony 2026-09-10d.** Osiem znaczników
+> „NIEWERYFIKOWANE RZĄD 1" w `ROUTING-MAP.md` rozstrzygniętych w ELI, ustalony
+> numer Protokołu nowojorskiego 1967 (Dz.U. 1991 nr 119 poz. 517).
+> ⛔ Zweryfikowano **numery, nie treść merytoryczną** — pozostaje cross-check
+> wartości prawnych w modułach DR i `shared`, czyli właściwy zakres tej flagi.
+> ⚠️ **Następny krok:** wybrać jedną dziedzinę i przejść ją w całości, zamiast
+> próbować wszystkich naraz — poprzednie podejścia rozmyły się na szerokości.
+
+> **KANDYDAT (2026-09-10d, bez numeru) — rejestr `scripts:` niekompletny
+> w drugą stronę.** T23 wykrył 15 skryptów wywoływanych przez orkiestrator,
+> a nieobecnych w polu `scripts:`. T22 tego nie widzi, bo pilnuje kierunku
+> rejestr → dysk. Do rozstrzygnięcia, czy rejestr ma być kompletny obustronnie;
+> dziś raportowane jako ostrzeżenie, nie FAIL.
+
+> **KANDYDAT ZAMKNIĘTY 2026-09-10j — i okazał się czymś innym.** Przemianowanie
+> wiersza „ustawa o diagnostyce laboratoryjnej" ujawniło **dwie podmiany aktu**
+> (`2022/2162` i `2023/1517`), z czego druga powielona w ośmiu generacjach mapy.
+> Alias wycofany. ⚠️ Reguła przeglądu zapisana w `ALIASY-NAZW-AKTOW.md`:
+> adnotacja „nazwa nieaktualna" jest **sygnałem, nie rozstrzygnięciem** — zwykle
+> znaczy, że dopasowano numer do nazwy, a nie nazwę do numeru.
+
+> **KANDYDAT (2026-09-10j) — nazwa pliku modułu niezgodna z podstawą prawną.**
+> `dr-10/modules/mod-ustawa-diagnostyka-laboratoryjna.md` opiera się teraz na
+> ustawie o **medycynie** laboratoryjnej. Przemianowanie pliku dotyka rejestrów
+> `modules:` w kilku miejscach — osobna operacja, nie łatka.
+
+> ✅✅ **O-11 ZAMKNIĘTA W CAŁOŚCI 2026-09-16e** — (b) T32, (c) klasa ZASTĄPIONY_TJ w T27, (d) moduł
+> opłaty skarbowej. Opis historyczny poniżej zostaje do czasu przeglądu rejestru (ZASADA 10).
+>
+> **O-11 (historia, 2026-09-10s) — nikt nie pyta, czy LICZBA odpowiada przepisowi.**
+> Cały aparat (T3, T11, T15, T24, T27) pyta o **akty**: czy numer istnieje, czy
+> opisuje ten akt, czy akt żyje, czy już obowiązuje. ⛔ Żaden nie pyta, czy kwota,
+> termin albo próg podany w module odpowiada **treści przepisu**.
+> Zmierzony przypadek: `orka-bas` podawał minimalne wynagrodzenie 2026 jako
+> „~4 750 zł", a rozporządzenie mówi **4806 zł** — kwota służyła do przeliczenia
+> krotności progu, więc przybliżenie propagowało się na wynik.
+> ⚠️ **Następny krok:** to NIE jest kolejny test tej samej rodziny. Weryfikacja
+> wymaga **odczytu treści aktu** i porównania z liczbą w zdaniu — zadanie innego
+> rzędu niż odczyt metadanych.
+> ✅ **Pomiar dla rodziny „opłaty sądowe" WYKONANY 2026-09-12** (AUDYT-2026-09-12):
+> 4 pliki satelickie, ~72 wiersze kwotowe, trafność poniżej 80 % — 6 kwot
+> błędnych, 4 podstawy niewłaściwe, 3 normy nieistniejące, 1 podstawa fałszywa
+> powtórzona w 3 plikach. Wszystkie naprawione; rejestr tabel satelickich
+> założony w `shared/TABELE-OPLAT.md` sekcja 7.
+> ✅ **Rodzina „opłaty" ZAMKNIĘTA CO DO ZAKRESU 2026-09-12c** (AUDYT-2026-09-12c):
+> komornicze, skarbowe, notarialne, wieczystoksięgowe, KIO i koszty procesu
+> karnego mają akt ustanawiający, jednostkę redakcyjną i datę odczytu.
+> ✅ **Rodzina „terminy procesowe" ZMIERZONA I NAPRAWIONA 2026-09-12d**
+> (AUDYT-2026-09-12d): 6 plików odsyłało do **uchylonego art. 503 KPC**, 3 podawały
+> błędny termin zarzutów od nakazu nakazowego (jest MIESIĄC, art. 480² § 2 pkt 3),
+> 3 błędne jednostki w rodzinie wykroczeniowej, 3 żywe wystąpienia nieistniejącej
+> jednostki „art. 328¹ KPC" (szósty raz w systemie).
+> ✅✅ **RODZINA „WARTOŚCI POWTARZALNE" ZAMKNIĘTA 2026-09-12e** (AUDYT-2026-09-12e):
+> odsetki cywilne i handlowe, odsetki podatkowe i ZUS, stopy składek, skala PIT —
+> wszystko z odczytu treści, z doktryną „formuła zamiast procentu". Korpus nie miał
+> tu błędów, bo **nie miał tych wartości w ogóle** — była to luka, nie usterka.
+>
+> ✅✅ **RODZINA TERMINY ZAMKNIĘTA CO DO REŻIMÓW 2026-09-12m** — jedenaście
+> kodeksów w siedmiu sesjach (12d, 12g–12m), `shared/terminy.md` 88 → 489 linii:
+> KPC, KPK, KPW, KPA, PPSA, UPEA, Ordynacja, KKW, KRO, PrUp/PrRestr, KSH.
+> ⛔ **Zamknięta co do REŻIMÓW, nie co do POZYCJI** — w każdym kodeksie
+> przerobiono terminy najczęściej używane. Otwarte: KC poza art. 118, KP poza
+> art. 264, KKS, prawo spadkowe proceduralne, terminy z ustaw szczególnych
+> (RODO, KSC, PZP).
+>
+> ⭐ **Cztery postacie usterki terminowej** (wniosek z AUDYT-2026-09-12m):
+> (1) błędna liczba przy poprawnym cytacie — ⛔ **niewykrywalna testem**, bo
+> „3 lata" i „6 miesięcy" występują legalnie wszędzie;
+> (2) błędny albo uchylony cytat — **jedyna postać, którą T28 łapie**;
+> (3) poprawna liczba, zła konstrukcja — karencja (KKW), termin końcowy (UPEA),
+> domniemanie i podstawa niewypłacalności (PrUp);
+> (4) usterka przez pominięcie — brak adresata (PrUp), brak trzech z czterech
+> reżimów (KSH), brak całego kodeksu (KKW, KPA, PPSA).
+> ⛔ Przez **cztery ostatnie sesje nie dopisano do rejestru W1 ani jednej
+> pozycji** — usterki były postaci 1, 3 i 4. To trwałe ograniczenie zapory
+> regresyjnej w tej rodzinie; usunęłoby je wyłącznie porównanie cytatu z treścią
+> aktu przez API, czyli zadanie z O-12 bez wykonalnej dziś postaci.
+>
+> ⛔⛔ **O-11 ZAMKNIĘTA 2026-09-12e.** Trzy rodziny zmierzone: opłaty, terminy,
+> wartości powtarzalne. W jej miejsce otwarta **O-12** (niżej).
+> ⛔ **ZOSTAJE z O-11 wyłącznie:** (b) decyzja, czy rejestr tabel
+> satelickich da się egzekwować testem (kandydat: wiersz kwotowy w tabeli bez
+> kolumny podstawy = WARN), czy pozostaje kontrolą ręczną; (c) ⛔ **rozszerzenie
+> T27 o wartości z ROZPORZĄDZEŃ WYKONAWCZYCH** — KROK 2C szuka nowelizacji po
+> t.j. aktu bazowego i jest ślepy na wypadek, w którym nowe rozporządzenie
+> **uchyla** poprzednie, a ustawa pozostaje nietknięta (zmierzony przypadek:
+> zryczałtowana równowartość wydatków z art. 621 § 2 KPK, 300 zł → 1000 zł od
+> 1.07.2025, `Dz.U. 2025 poz. 770`). ✅ (d) moduł opłaty skarbowej — ZAMKNIĘTE
+> 2026-09-16d (`dr-06/mod-ustawa-oplata-skarbowa`).
 
 > **O-8 ODNOTOWANA BEZ DZIAŁANIA (2026-09-10b) — zestaw regresyjny nie sprawdza
 > przesłanek faktycznych.** F-179 (profil LEKKI uzasadniony liczbą, która nie
@@ -28,6 +256,53 @@
 > **O-7 ZAMKNIĘTA 2026-09-10b — `.github/workflows/regresja.yml`.** Zestaw
 > regresyjny jest odtąd bramką wydania. Do rejestru żywego nie wchodzi.
 
+
+> **O-9 i F-181 ZAMKNIĘTE 2026-09-10p.** Test **T27**
+> (`check_status_podstaw.py`) pyta, czy numer Dz.U. podany w prozie jako
+> aktualna podstawa opisuje akt obowiązujący — luka, na którą T3, T11, T15 i T24
+> są ślepe z konstrukcji. F-181: 61/61 miejsc naprawionych **i** automat, który
+> pilnuje, żeby nie wróciły. ⛔ Test raportuje „DO PRZEGLĄDU", nie FAIL, bo
+> heurystyka tego badania dwukrotnie zawyżyła wynik. Do rejestru żywego nie
+> wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10p.
+
+
+> **2 nieprawdziwe** (delegowanie kierowców — 2025/797 jest t.j., nie
+> nowelizacją; Prawo o notariacie — t.j. 2026/614 istnieje, a mapa centralna
+> nawet go miała, podczas gdy dr-12 twierdził, że go nie ma).
+> ⚠️ **Następny krok:** test wg zarysu w AUDYT-2026-09-10i §3. Projekt czułości
+> jest niebanalny — rozpoznać *twierdzenie o stanie*, nie każde wystąpienie
+> słowa „brak". Objąć całą rodzinę fraz, nie jedną.
+> ⛔ Świadomie NIE napisany w sesji 2026-09-10i: to osobna robota, nie łatka.
+
+> **KANDYDAT (2026-09-10h) — nagłówki modułów starzeją się niezauważone.**
+> `mod-PrFarm-refundacja-nadzor-sankcje` podawał w nagłówku wygasły tekst
+> jednolity ustawy refundacyjnej, a we własnej treści poprawny — moduł przeczył
+> sam sobie i żaden test tego nie widział. Nagłówki („aktualne t.j.: …") są
+> cytowane rzadziej niż treść, a jako pierwsze wpadają w oko czytającemu.
+> ⚠️ **Następny krok:** kontrola porównująca numery Dz.U. z nagłówka modułu
+> z numerami w jego treści — rozjazd wewnątrz jednego pliku to trzecia odrębna
+> klasa obok podmiany aktu i niedomknięcia.
+
+> **KANDYDAT (2026-09-10f) — znacznik „weryfikuj" pełni w ROUTING-MAP dwie role.**
+> Część wystąpień to **zaległości** (numer nierozstrzygnięty), część to **stała
+> bramka fresh gate** („re-zweryfikuj przy każdym użyciu"). Bez rozdzielenia
+> każdy przegląd liczy te same ~30 wierszy jako otwarte w nieskończoność.
+> ⚠️ **Następny krok:** osobny znacznik dla stałego fresh gate, np. 🔄, żeby
+> przegląd mógł filtrować wyłącznie zaległości.
+
+> **F-20 (KSR) — potwierdzona jako NIEROZSTRZYGALNA przez ELI (2026-09-10f).**
+> Krajowe Standardy Rachunkowości leżą poza Dz.U., w Dzienniku Urzędowym
+> Ministra Finansów. Spór o liczbę standardów (14 vs 15) wymaga innego kanału
+> niż API ELI — kolejne odczyty nic tu nie wniosą.
+
+> **F-113 — ZMIANA STATUSU 2026-09-17t: ramię A ZBUDOWANE i zweryfikowane**
+> (`ci_check_shared` OK, 36 plików posprzątanych; HASH A
+> `b3fd18cf…1c69`, HASH B `1b12da7e…1679`). ⛔ Pomiar NIEWYKONANY: protokół wymaga
+> promptu bez wiedzy o teście i oceny ślepej, a sesja budująca ramię zna bramki i
+> przypisanie ramion — przebieg mierzyłby pamięć sesji. **Wymaga sesji niezależnej;
+> ta sama bariera co F-167 (brak niezależnego oceniającego).** Szczegóły przekazania:
+> AUDYT-2026-09-17t.
+>
 > **F-113 — ZMIANA STATUSU 2026-09-10 (nie zamknięcie).** Blokada przestała być
 > „brak narzędzia" i jest teraz „pomiar do wykonania". Ustalono, że plan
 > z 2026-08-24 nie ruszył nie z powodu wady projektu badania, tylko dlatego, że
@@ -64,13 +339,12 @@
 > konektorów POZIOM A, warstwa wykonawcza F-113, podbicie `raport-klienta-v1`.
 > Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10.
 
-> **F-171 OTWARTA (2026-09-09) — cztery regresje dostępu do źródeł, kanał
-> kodu.** Pomiar T25 z 2026-09-09: 52 sondy, 40 zgodnych z odniesieniem
-> 2026-09-04. Regresje: SAOS `/api/search`, `/api/dump`, `/api/judgments/{id}`
-> — HTTP 502, 3/3 prób; `decyzje.uokik.gov.pl` — HTTP 503, 3/3.
-> **Skutek operacyjny:** SAOS jest kanałem maszynowym RZĘDU 2A dla orzecznictwa
-> sądów powszechnych i administracyjnych — do powrotu weryfikacja sygnatur idzie
-> przez portale pojedynczych sądów (`orzeczenia.warszawa.so.gov.pl`: 200, RSS).
+> **F-171 ZAWĘŻONA (2026-09-09, pomiar 2026-09-17s) — została JEDNA regresja dostępu.**
+> ✅ SAOS wrócił: `/api/search/judgments` (w tym filtr `caseNumber`), `/api/judgments/{id}`
+> i `/api/dump/judgments` → HTTP 200 (AUDYT-2026-09-17s). ⛔ `decyzje.uokik.gov.pl` — 503,
+> 3/3 próby, bez zmian od 2026-09-09.
+> ⛔ **SAOS jest NIESTABILNY** — 5 z 8 wywołań bez odpowiedzi (`000`), po czym 200 w < 1 s;
+> V-SYG-0 wymaga powtórzenia próby (min. 3) przed uznaniem sygnatury za niesprawdzalną.
 > `sudop.uokik.gov.pl` i `rejestr.uokik.gov.pl` działają, więc awaria UOKiK jest
 > punktowa.
 > ⚠️ **Następny krok:** POWTÓRZYĆ POMIAR w innym dniu przed jakimkolwiek
@@ -281,10 +555,6 @@
 
 | Flaga | Priorytet | Pozostały zakres | Kryterium zamknięcia |
 |---|---|---|---|
-| F-141 | średni | Trzecia oś T11 (lokalne/ROUTING-MAP vs centralna mapa Dz.U.) — 8 pozycji obecnych w mapach dziedzinowych, brakujących w `mapa_dzu_2026-08-28.md`. Lista robocza (klasa F-104): **2026/980** ustawa o wspieraniu rodziny i systemie pieczy zastępczej (dr-02); **2026/731** zmiana ustawy o radcach prawnych (dr-12); **2026/113** ustawa o pomocy publicznej na ratowanie/restrukturyzację (dr-02); **2024/1111** ustawa lombardowa (dr-02); **2023/845** UPNPR (dr-02); **2022/1722** ustawa o radiofonii i telewizji (dr-02); **2023/123** opłaty w sprawach karnych (dr-03); **2026/1123** prospektywna zmiana ustawy o SN od 1.01.2028 (ROUTING-MAP). ⛔ NIE domykać propagacją z map lokalnych: sekcja „Uzupełnienie mapy” wymaga wprost, by każdy tytuł, typ i status sprawdzić odrębnie w API ELI. Pierwsza próba weryfikacji (2026-08-31, poz. 2026/980) NIE potwierdziła numeru — wyszukiwanie zwróciło t.j. 2025/49 dla tej ustawy. Część numerów w mapach lokalnych może więc być błędna, a nie tylko nieprzeniesiona; przy tej fladze trzeba je rozstrzygnąć, nie przepisać. Powiązane: sześć wierszy ROUTING-MAP zsynchronizowanych 2026-08-31 nosi jawny znacznik ⚠️ NIEZWERYFIKOWANY w RZĘDZIE 1 — znacznik zdejmuje się dopiero po weryfikacji w ramach tej flagi. | Wszystkie 8 pozycji rozstrzygnięte w ELI (potwierdzone albo skorygowane), wpisane do bieżącej mapy Dz.U. z tytułem/typem/statusem; znaczniki ⚠️ NIEZWERYFIKOWANY zdjęte z ROUTING-MAP; T11 w pełnym przebiegu bez WARN. |
-| F-148 | średni | Dwie luki czułości testu T15 (`audit_tj_inventory.py`), wykryte 2026-09-01b przy pierwszym przebiegu z ŻYWYM ELI. **(a) Ślepota na podmianę aktu:** test grupuje deklaracje po tytule kanonicznym pobranym z ELI, nie porównuje go z nazwą użytą w rejestrze lokalnym — więc numer, który istnieje, jest obwieszczeniem i jest najnowszy dla SWOJEGO aktu, przechodzi kontrolę nawet wtedy, gdy lokalnie opisano nim inną ustawę. Tak przeszedł błąd F-149(3): `Dz.U. 2026 poz. 884` (t.j. ustawy rehabilitacyjnej) przypisany ustawie o świadczeniu uzupełniającym. Wykrył to człowiek czytający kontekst, nie test. **(b) Dwa trwałe fałszywe trafienia:** `prawo-polskie-v2/ROUTING-MAP.md:219` (parser czyta numer aktu pierwotnego z komórki, która obok podaje poprawny t.j. 2024.1111) oraz `dr-03/modules/mod-KW-art119-131-przeciwko-mieniu.md:220` (świadome odesłanie historyczne; wiersz wyżej cytuje bieżący t.j. 2025.734). ⛔ NIE domykać przez edycję korpusu — modyfikacja treści dla uciszenia testu jest gorsza od szumu; poprawka należy do skryptu, analogicznie do poprawki czułości T11 z F-106. | (a) test porównuje tytuł z ELI z nazwą lokalną i zgłasza rozjazd jako osobną kategorię, z mutacją negatywną na przypadku F-149(3); (b) oba znane trafienia przestają się pojawiać bez zmiany treści korpusu; T15 w trybach `maps`+`operational` bez zgłoszeń nierozstrzygniętych. |
-| O-4 | średni | Rejestracja skryptu w `scripts:` NIE gwarantuje, że jest on wywoływany przez `run_regression_suite.py`. Wykryte 2026-09-01: trzy skrypty żyły poza pełnym przebiegiem (`test_f108_trade.py`, `mock_eli_server_test.py` — oba ZEPSUTE od dni, awaria niewidoczna; oraz świeżo dodany T22). Wpięte ręcznie w tej sesji, ale nic nie pilnuje, żeby następny dodany test też został wpięty. Do rozstrzygnięcia: czy dodać test T23 wymagający, by każdy zarejestrowany skrypt testowy był albo wywoływany przez orkiestrator, albo miał jawnie odnotowany status RĘCZNY (jak T4/T5). ⛔ NIE domykać samym przeglądem wzrokowym listy — to dokładnie ten rodzaj kontroli, który przepuścił F-147. | Każdy skrypt `test_*`/`check_*` z rejestru `scripts:` ma przypisany status: wywoływany przez orkiestrator albo RĘCZNY z uzasadnieniem; rozbieżność wykrywana automatycznie. |
-| F-135 | średni | Dokończyć cross-check wartości prawnych w pozostałych DR, elementów unikalnych oraz `shared`; każdą rozbieżność rozstrzygnąć w źródle urzędowym albo jawnie oznaczyć jako nieweryfikowalną. | Zero nieuzasadnionych rozbieżności albo jawne oznaczenie nieweryfikowalnych pozycji. |
 
 ## Reaktywne
 
@@ -315,3 +585,80 @@
 - mapy runtime nie przechowują baseline/delta ani historii dawnych luk;
 - historia zmian trafia wyłącznie do `AUDIT-JOURNAL.md` / `CHANGELOG.md`;
 - każda konkretna jednostka prawa nadal wymaga fresh gate do źródła urzędowego.
+
+---
+
+> ⛔ **O-12 OTWARTA (2026-09-12e) — kontrola aktualności AKTU nie jest kontrolą
+> aktualności WARTOŚCI.** Trzy kolejne sesje wykryły trzy różne mechanizmy, w których
+> akt wygląda na w pełni aktualny, a wartość w module jest nieprawdziwa:
+>
+> | Mechanizm | Przykład | Co wygląda na aktualne |
+> |---|---|---|
+> | nowe rozporządzenie **uchyla** poprzednie | zryczałtowana równowartość wydatków 300 → **1000 zł** od 1.07.2025 (`Dz.U. 2025 poz. 770`) | ustawa delegująca i jej t.j. |
+> | przepis **uchylony**, materia przeniesiona | art. 503 KPC → art. 480² § 2, 480³, 505 § 1 | cały kodeks |
+> | **decyzja RPP** zmienia wynik wzoru | wszystkie odsetki ustawowe | akt, przepis i jego brzmienie |
+>
+> ⛔ KROK 2C szuka **nowelizacji po tekście jednolitym** — żaden z tych trzech
+> mechanizmów nowelizacją nie jest.
+>
+> ✅ **WDROŻONE 2026-09-12f — test T28** (`scripts/check_wartosci_prawne.py`),
+> trzy bramki: W1 rejestr znanych błędnych cytatów (FAIL), W2 procent utrwalony
+> przy pojęciu odsetek (FAIL), W3 wiersz kwotowy bez podstawy (WARN).
+> Pierwszy przebieg: 410 plików, 31 trafień FAIL, **8 realnych nienaprawionych
+> usterek**, których trzy poprzednie sesje ręcznego przeglądu nie znalazły.
+> Po naprawie — czysto. Opis i ograniczenia: `REGRESSION-TEST-PLAN.md`, sekcja T28.
+>
+> ⚠️ **Odrzucony kandydat, jawnie:** reguła generyczna „indeks górny przy numerze
+> artykułu = FAIL" **nie została wdrożona** — dawałaby fałszywe alarmy na
+> legalnych jednostkach `art. 205¹`, `art. 398⁵`, `art. 477⁹` KPC. Zastąpiona
+> rejestrem konkretnych, zweryfikowanych pozycji.
+>
+> ⛔ **ZOSTAJE z O-12:** rejestr W1 wykrywa **nawrót znanego** błędu, nie nową
+> usterkę tej samej klasy. Domknięcie wymagałoby porównania cytatu z treścią aktu
+> przez API ELI — to zadanie innego rzędu niż test offline i nie ma dziś
+> wykonalnej postaci.
+>
+> ⚠️ **Poprzedni zapis kandydatów, zachowany dla ścieżki decyzyjnej:**
+> (a) wiersz kwotowy w tabeli **bez kolumny podstawy** → WARN;
+> (b) indeks górny przy numerze artykułu tam, gdzie ustawa używa `§`
+> (wzorzec `328¹`) → **FAIL** — ten błąd naprawiano trzykrotnie i sześciokrotnie
+> przetrwał, więc WARN mu nie wystarcza;
+> (c) **procent zapisany obok pojęcia „odsetki ustawowe"** gdziekolwiek w korpusie
+> → FAIL, bo tej wartości z definicji nie da się utrwalić poprawnie.
+>
+> ⚠️ **MON-3 do rozszerzenia:** opisuje rytm **roczny** (obwieszczenia
+> waloryzacyjne), a odsetki zmieniają się w rytmie **posiedzeń RPP**.
+
+---
+
+> ⛔ **MON-4 OTWARTA (2026-09-12f) — monitoring wartości w rytmie NIE-rocznym.**
+> Rozszerzenie zakresu monitoringu, **nie zastąpienie MON-3**. MON-3 zostaje bez
+> zmian i obsługuje rytm **roczny**: obwieszczenia waloryzacyjne, podatki
+> i opłaty lokalne, okno październik–grudzień. Nie obejmuje wartości, które
+> zmieniają się częściej i z innego powodu.
+>
+> | Zakres | Rytm | Metoda |
+> |---|---|---|
+> | **stopa referencyjna NBP** → odsetki ustawowe (art. 359 § 2, 481 § 2 KC), handlowe (art. 4 pkt 3 u.p.n.o.) | **posiedzenia RPP** (ok. 11 w roku) | obwieszczenie MS i ministra gospodarki w **Monitorze Polskim** |
+> | **stopa lombardowa NBP** → odsetki za zwłokę (art. 56 § 1 OP), pośrednio ZUS (art. 23 ust. 1 SUS) | jw. | jw.; ⛔ pamiętać o podłodze 8 % |
+> | **kwoty z rozporządzeń wykonawczych** | bez cyklu — akt uchylający może wejść w dowolnym momencie | sprawdzać status **rozporządzenia**, nie ustawy delegującej |
+>
+> ⛔ **Dlaczego to osobna pozycja, a nie akapit w MON-3.** MON-3 opisuje rytm
+> kalendarzowy i mówi „sprawdzać w oknie X–XII". Dla odsetek to okno jest
+> bezużyteczne — stopa zmienia się w marcu, w maju, kiedykolwiek. Wpisanie tego
+> do MON-3 zepsułoby jego protokół i tak samo nie dałoby pokrycia.
+>
+> ⚠️ **Częściowo zneutralizowane przez doktrynę, nie przez monitoring.**
+> `shared/TABELE-OPLAT.md` sekcja 4 zapisuje te wartości jako **formułę**, nie
+> procent, a T28/W2 tego pilnuje. Dopóki reguła jest trzymana, zmiana stopy NBP
+> **nie dezaktualizuje modułu** — dezaktualizuje odpowiedź, jeżeli ktoś podstawi
+> liczbę z pamięci. MON-4 jest więc zabezpieczeniem drugiej linii.
+>
+> **Co robić przy trafieniu:** zmiana samej stopy → **żadnej flagi F-**, bo moduły
+> nie trzymają wyniku. Flagę otwierać wyłącznie, gdy zmieni się **wzór albo liczba
+> punktów procentowych w ustawie** (to nowelizacja, więc złapie ją MON-1) albo gdy
+> T28/W2 zgłosi utrwalony procent, co oznacza złamanie doktryny sekcji 4.
+
+---
+
+> F-OP-2026-09 ZAMKNIĘTA 2026-09-16 — zakres pięciu nowelizacji Op ustalony z treści; opis: AUDIT-JOURNAL, AUDYT-2026-09-16b.

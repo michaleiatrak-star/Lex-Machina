@@ -72,8 +72,43 @@ OBOWIĄZUJĄCE WYMOGI (WSZYSTKIE ŁĄCZNIE):
   3. Nękanie lub zastraszanie
   4. Skutek: zaniżona ocena przydatności ALBO poniżenie/ośmieszenie ALBO izolacja
 
-⚡⚡ ZNALEZISKO 2026-07-30 (na żądanie użytkownika) — PROJEKT STAŁ SIĘ
-USTAWĄ, PODPISANĄ PRZEZ PREZYDENTA **DZIŚ** (30.07.2026):
+⛔⛔ **STAN NA 2026-09-10: USTAWA JEST W VACATIO LEGIS — NIE OBOWIĄZUJE.**
+
+Odczyt RZĄD 1 (`api.sejm.gov.pl/eli/acts/DU/2026/1046`, 2026-09-10):
+
+```
+Dz.U. 2026 poz. 1046
+  ogłoszenie (promulgation) : 2026-08-04
+  WEJŚCIE W ŻYCIE           : 2026-11-05   ⛔
+  status                    : obowiązujący (= akt istnieje w systemie)
+```
+
+⛔ **„Status: obowiązujący" w ELI NIE znaczy „przepisy już działają".** Oznacza,
+że akt nie został uchylony. Data wejścia w życie jest osobnym polem i to ona
+rozstrzyga, który stan prawny stosuje się do zdarzenia.
+
+⛔ **REGUŁA CZASOWA — stosować bezwzględnie (OŚ-GATE):**
+
+| Zdarzenie (mobbing, roszczenie) | Stan prawny |
+|---|---|
+| **przed 5.11.2026** | ⛔ **STARE** brzmienie art. 94³ KP — wymóg rozstroju zdrowia, brak minimum zadośćuczynienia, brak art. 477⁶ᵃ KPC |
+| **od 5.11.2026** | nowe brzmienie opisane niżej |
+
+⚠️ Data podpisania przez Prezydenta (30.07.2026) **nie jest** datą wejścia
+w życie ani datą ogłoszenia. Wcześniejsza wersja tego zapisu podawała ją jako
+cezurę („PO REFORMIE od 30.07.2026"), co przy sprawie z sierpnia 2026 prowadziło
+do zastosowania przepisu, który jeszcze nie obowiązywał.
+
+⚠️ **Kwota minimalnego zadośćuczynienia** podana niżej (6 × minimalne
+wynagrodzenie) jest ustawowym mnożnikiem; wynik złotowy zależy od minimalnego
+wynagrodzenia **obowiązującego w dacie orzekania** i wymaga sprawdzenia
+w aktualnym rozporządzeniu Rady Ministrów. Nie przepisywać kwoty z tego pliku
+do pisma bez tego sprawdzenia.
+
+---
+
+⚡ ZNALEZISKO 2026-07-30 (na żądanie użytkownika) — PROJEKT STAŁ SIĘ
+USTAWĄ, PODPISANĄ PRZEZ PREZYDENTA 30.07.2026:
 
 ```
 USTAWA z 19.06.2026 o zmianie ustawy — Kodeks pracy oraz ustawy —
@@ -82,7 +117,10 @@ USTAWA z 19.06.2026 o zmianie ustawy — Kodeks pracy oraz ustawy —
   Senat: 8.07.2026 (BEZ POPRAWEK)
   Prezydent Karol Nawrocki: PODPISANA 30.07.2026 (DZIŚ na dzień tej
     weryfikacji) — projekt UD183, druk sejmowy nr 2289
-  Wejście w życie: 3 MIESIĄCE od dnia ogłoszenia w Dz.U. (⚠️ jedno
+  Wejście w życie: **5.11.2026** ✅ [VER] RZĄD 1 2026-09-10 (pole
+    `entryIntoForce` w ELI; ogłoszenie 4.08.2026 — trzy miesiące od
+    ogłoszenia). ⛔ Do 4.11.2026 włącznie stosuje się STARY stan prawny.
+    (⚠️ jedno
     starsze źródło z grudnia 2025 błędnie sugerowało 6 miesięcy/
     "początek 2027" — to była nieaktualna prognoza sprzed
     ostatecznego kształtu ustawy, NIE ufaj jej)
@@ -106,8 +144,10 @@ NOWA DEFINICJA MOBBINGU — POTWIERDZONE OSTATECZNE brzmienie:
     wywołał rozstroju zdrowia (usunięcie tego warunku)
 
 MIN. ZADOŚĆUCZYNIENIE — POTWIERDZONA OSTATECZNA KWOTA:
-  → **6-KROTNOŚĆ minimalnego wynagrodzenia za pracę** = ok. **28 836
-    ZŁ BRUTTO** w 2026 r. (przy min. wynagrodzeniu 4 806 zł) —
+  → **6-KROTNOŚĆ minimalnego wynagrodzenia za pracę** — mnożnik ustawowy.
+    ⛔ Kwota złotowa zależy od minimalnego wynagrodzenia obowiązującego
+    w dacie orzekania i **wymaga sprawdzenia w aktualnym rozporządzeniu
+    Rady Ministrów**; wartość ok. 28 836 zł wyliczono dla 4 806 zł —
     POTWIERDZONE w wielu zgodnych, aktualnych źródłach (dokładnie
     zgodne z WCZEŚNIEJSZĄ PROGNOZĄ tego pliku sprzed uchwalenia —
     "~6 × 4 666 zł = ~28 000 zł" — RÓŻNICA wynika z aktualizacji

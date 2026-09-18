@@ -29,13 +29,17 @@ PODSTAWA (weryfikuj ISAP przed cytowaniem):
                      podlegające rozstrzygnięciu w wyroku rozwodowym.
   art. 1833–1834 KPC — bezstronność mediatora + NIEJAWNOŚĆ (poufność)
                      postępowania mediacyjnego.
-  art. 1838 §2 KPC — brak zgody strony w terminie 7 dni od doręczenia
-                     postanowienia → mediacji się nie prowadzi (dobrowolność).
+  art. 183⁸ § 2 KPC — mediacji się nie prowadzi, jeżeli strona SPRZECIWI SIĘ
+                     jej w terminie TYGODNIA od ogłoszenia lub doręczenia postanowienia,
+                     chyba że wcześniej wyraziła zgodę (⛔ nie „brak zgody" — milczenie
+                     strony nie blokuje mediacji; ✅ RZĄD 1 2026-09-17n, KPC 2026/468)
+  art. 183⁹ § 2 KPC — mediator zapoznaje się z aktami, chyba że strona w tygodniu
+                     nie wyrazi na to zgody
 
 PRZEBIEG:
   □ Skierowanie: na każdym etapie — z urzędu lub na wniosek — do zamknięcia
     1. posiedzenia na rozprawę; za zgodnym wnioskiem stron także później.
-  □ Czas trwania: ≤3 miesiące (przedłużalny na zgodny wniosek); NIE wlicza się
+  □ Czas trwania: do 3 miesięcy (art. 183¹⁰ § 1 KPC; przedłużenie — na zgodny wniosek lub z innych ważnych powodów); NIE wlicza się
     do czasu trwania postępowania sądowego.
   □ Protokół + ewentualna ugoda → sąd zatwierdza, chyba że sprzeczna z prawem/
     ZWS/obejściem prawa/niezrozumiała.
@@ -151,11 +155,17 @@ Podział majątku:
 
 | Czynność | Termin | Podstawa |
 |---|---|---|
-| Zaprzeczenie ojcostwa (mąż) | 1 rok od dowiedzenia się | art. 63 KRO (po nowelizacji 2019) |
-| Zaprzeczenie ojcostwa (matka) | 6 miesięcy | art. 69 KRO |
-| Zaprzeczenie ojcostwa (dziecko) | 3 lata od pełnoletności | art. 70 KRO |
-| Powrót do nazwiska po rozwodzie | **12 miesięcy** od uprawomocnienia | art. 59 KRO (zm. od 08.10.2025) |
-| Wygaśnięcie alimentów między małżonkami | 5 lat (gdy zobowiązany nie był wyłącznie winny) | art. 60 §3 KRO |
+> ✅ [VER] RZĄD 1 2026-09-17n — KRO t.j. `Dz.U. 2026 poz. 236`. ⛔ KOREKTA: wiersze „matka — 6 miesięcy" i „dziecko —
+> 3 lata od pełnoletności" powtarzały błąd usunięty 2026-09-16 w `czesc-05` (ta tabela nie została wtedy objęta).
+> Pełna tabela terminów pochodzenia dziecka: `czesc-05`, sekcja „ZAPRZECZENIE OJCOSTWA".
+
+| Zaprzeczenie ojcostwa (mąż) | **rok** od dowiedzenia się, że dziecko od niego nie pochodzi; nie później niż do pełnoletności dziecka | art. 63 KRO |
+| Zaprzeczenie ojcostwa (matka) | **rok** od dowiedzenia się; nie później niż do pełnoletności dziecka (⛔ nie „6 miesięcy") | art. 69 § 1 KRO |
+| Zaprzeczenie ojcostwa (dziecko) | **rok** od dowiedzenia się — po pełnoletności; gdy wcześniej — od dnia pełnoletności (⛔ nie „3 lata") | art. 70 § 1 KRO |
+| Potwierdzenie ojcostwa przez matkę przy uznaniu | jednocześnie albo w ciągu **3 miesięcy** od oświadczenia mężczyzny | art. 73 § 1 KRO |
+| Powrót do nazwiska po rozwodzie | **rok** od uprawomocnienia rozwodu — oświadczenie przed **kierownikiem USC** lub konsulem | art. 59 KRO (w brzmieniu od 8.10.2025, `Dz.U. 2025 poz. 897`) |
+| Wygaśnięcie alimentów między małżonkami | **5 lat** od orzeczenia rozwodu — gdy zobowiązany **nie został uznany za winnego**; sąd może przedłużyć z uwagi na wyjątkowe okoliczności; zawsze — z nowym małżeństwem uprawnionego | art. 60 § 3 KRO |
+| Rachunek końcowy opiekuna | **3 miesiące** od zwolnienia opiekuna lub ustania opieki | art. 172 § 1 KRO |
 | Zabezpieczenie alimentów | złóż z pismem głównym | art. 753 KPC |
 
 
@@ -185,9 +195,10 @@ z godnością, brzmienie niepolskie/trudne do zapisania, zmiana na
 nazwisko faktycznie UŻYWANE od dawna, powrót do nazwiska sprzed błędnej
 czynności stanu cywilnego.
 
-ROZRÓŻNIENIE: zmiana PRZY ROZWODZIE (art. 59 KRO) jest BEZPŁATNA,
-dostępna TYLKO w ciągu 3 miesięcy od uprawomocnienia rozwodu, WYŁĄCZNIE
-powrót do nazwiska sprzed małżeństwa. Ustawa z 2008 r. jest szerszym
+ROZRÓŻNIENIE: powrót do nazwiska PO ROZWODZIE (art. 59 KRO) — oświadczenie
+przed kierownikiem USC lub konsulem, w ciągu ROKU od uprawomocnienia rozwodu
+(⛔ nie „3 miesięcy" — brzmienie od 8.10.2025), WYŁĄCZNIE powrót do nazwiska
+sprzed małżeństwa; to czynność przed USC, nie postępowanie sądowe. Ustawa z 2008 r. jest szerszym
 mechanizmem, dostępnym zawsze, dla każdego ważnego powodu.
 
 ✅ UZUPEŁNIONE 2026-08-13c (wcześniej: "punkt startowy") — zweryfikowane
@@ -206,15 +217,17 @@ t.j. Dz.U. 2021 poz. 1988 ze zm.:
   cywilnego (⭐ TA przesłanka nakłada się z sytuacją opisaną wcześniej
   w tym module)
 
-⭐⭐ OPŁATA: opłata SKARBOWA za wydanie decyzji — **37 zł** (stan
-  na 2025/2026)
+⭐⭐ OPŁATA: opłata SKARBOWA za wydanie decyzji — **37 zł** (załącznik do
+  ustawy o opłacie skarbowej, cz. I pkt 7 — ✅ RZĄD 1 2026-09-17n, t.j. Dz.U. 2025 poz. 1154;
+  nie podlega opłacie m.in. sprawa o zmianę imienia lub nazwiska BEZPRAWNIE zmienionego
+  (wyłączenie z art. 2 ust. 1 u.o.s. — dokładny punkt: odczyt przy sprawie))
 
-⭐⭐ TERMIN wydania decyzji: DO 30 DNI od złożenia KOMPLETNEGO wniosku;
-  w sprawach BARDZIEJ SKOMPLIKOWANYCH — przedłużenie do 2 MIESIĘCY
+⭐⭐ TERMIN wydania decyzji: ustawa (t.j. Dz.U. 2021 poz. 1988) nie przewiduje
+  terminu szczególnego — stosuje się art. 35 § 3 KPA: MIESIĄC, sprawa szczególnie
+  skomplikowana — DWA MIESIĄCE (✅ RZĄD 1 2026-09-17n)
 
-⭐⭐⭐ ODWOŁANIE (⭐ istotna różnica względem trybu rozwodowego z art. 59
-  KRO — TU odwołanie idzie do ORGANU ADMINISTRACJI, nie do sądu wyższej
-  instancji): od DECYZJI ODMOWNEJ przysługuje odwołanie do WOJEWODY
+⭐⭐⭐ ODWOŁANIE (⭐ art. 59 KRO to oświadczenie przed USC, bez decyzji —
+  tu jest DECYZJA administracyjna i tok instancji z KPA): od DECYZJI ODMOWNEJ przysługuje odwołanie do WOJEWODY
   właściwego dla siedziby USC, w TERMINIE 14 DNI od doręczenia decyzji,
   za POŚREDNICTWEM kierownika USC, który wydał decyzję. Odwołanie jest
   WOLNE OD OPŁAT. Strona może też ZRZEC SIĘ prawa do odwołania (decyzja

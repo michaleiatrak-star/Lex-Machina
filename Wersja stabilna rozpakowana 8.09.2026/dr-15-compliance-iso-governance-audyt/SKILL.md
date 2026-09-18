@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.12"
+version: "3.14"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 ---
 
@@ -107,7 +107,7 @@ PRAWO KRAJOWE — COMPLIANCE I NADZÓR:
                naprawiono niezarejestrowanie zgodnie z Regułą 2)
 
   [✓] OK    mod-PZP-zamowienia-obronne-bezpieczenstwa
-              (Dz.U. 2024 poz. 1320 ze zm.;
+              (t.j. Dz.U. 2026 poz. 793 ze zm. — ✅ [VER] RZĄD 1 2026-09-16e;
                zamówienia sektorowe i obronne, wyłączenia PZP,
                tajemnica przedsiębiorstwa i informacje niejawne, odwołania KIO,
                ryzyka bezpieczeństwa infrastruktury krytycznej)

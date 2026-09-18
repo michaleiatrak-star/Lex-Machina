@@ -15,7 +15,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Interpretacje podatkowe / MDR / objaśnienia MF | OP jw. + właściwe akty wykonawcze | `mod-interpretacje-definicje-podatkowe` | ✅ aktywny; fresh gate |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. ze zm. | `mod-PIT-podatek-dochodowy-fizyczne` | ✅ aktywny |
 | Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. ze zm. | `mod-CIT-podatek-dochodowy-prawne` | ✅ aktywny |
-| Ustawa o VAT | Dz.U. 2025 poz. 775 t.j. ze zm. | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
+| Ustawa o VAT | **Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy tekst jednolity. ⛔ KROK 2C: **5 nowelizacji po tekście jednolitym** — Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811. Materia wyjątkowo ruchliwa: brzmienie każdego powoływanego artykułu czytać u źródła, tekst jednolity NIE oddaje stanu bieżącego | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
 | VAT — import towarów i zwolnienia importowe | jw. + właściwe akty wykonawcze | `mod-VAT-import-towarow-i-zwolnienia-importowe` | ✅ aktywny |
 | VAT — WIS | jw. | `mod-VAT-WIS-tryb-i-ochrona` | ✅ aktywny |
 | VAT — kursy walut / rachunek VAT / TAX FREE | jw. | `mod-VAT-kursy-walut-rachunek-VAT-tax-free` | ✅ aktywny |
@@ -38,6 +38,8 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Unijny kodeks celny (UCC) / taryfa celna | rozporządzenie (UE) nr 952/2013 + właściwa nomenklatura CN | `mod-UCC-clo-taryfa-celna` | ✅ aktywny; EUR-Lex fresh gate |
 | Kontrola środków pieniężnych / prawo dewizowe / podróżni | rozporządzenie (UE) 2018/1672 + Dz.U. 2024 poz. 1131 ze zm. + akty właściwe | `mod-clo-podroznych-limity-towary-zabronione` | ✅ aktywny; fresh gate |
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. ze zm. | `mod-ustawa-podatek-nieruchomosci-i-lokalne` | ✅ aktywny |
+| Ustawa o opłacie skarbowej | Dz.U. 2025 poz. 1154 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-oplata-skarbowa` | ✅ aktywny (od 2026-09-16) |
+| Ustawa o podatku od wydobycia niektórych kopalin | Dz.U. 2026 poz. 454 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-podatek-wydobycie-kopalin` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o ryczałcie od przychodów ewidencjonowanych | Dz.U. 2025 poz. 843 t.j. ze zm. | `mod-ustawa-ryczalt-przychody` | ✅ aktywny |
 | Ustawa o nadzorze nad rynkiem finansowym | Dz.U. 2026 poz. 935 t.j. ze zm. | `mod-prawo-bankowe-KNF-BFG` | ✅ aktywny |
 | Ustawa o obligacjach | Dz.U. 2025 poz. 1667 t.j. ze zm. | `mod-ustawa-rynek-kapitalowy-fundusze` | ✅ aktywny |

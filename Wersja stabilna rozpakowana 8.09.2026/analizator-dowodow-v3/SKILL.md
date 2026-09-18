@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.3"
+version: "5.16.12"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,15 +39,8 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.3. Pełna historia (4.0.0-5.16.3) w
-  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
-  (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
-  następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
-  references/CHANGELOG.md, NIE do tego pola YAML).
-  Skrót ostatniej zmiany: 5.16.3 — F-140, naprawa regresji dyskowej:
-  przywrócono wersję i odtworzono wpisy 5.16.0-5.16.2 z AUDIT-JOURNAL;
-  ponownie naprawiono art. 328 § 1 KPC w MD5-terminy.md (zweryfikowany
-  niezależnie, t.j. Dz.U. 2026 poz. 468).
+  Wersja bieżąca: 5.16.12 (2026-09-16, F-189): MP11-rodo-cyber — art. 83 ust. 5–6 RODO odczytany (RZĄD 1, Cellar): 20 mln EUR albo 4 % światowego obrotu, kwota wyższa; ten sam pułap za nieprzestrzeganie naka…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 # Analizator Dowodów Procesowych v5

@@ -1,5 +1,12 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.38 (2026-09-16, F-189): mod-shared-ai-act — terminy zgłaszania poważnych incydentów z art. 73 AI Act (15 dni; 2 dni przy powszechnym naruszeniu; 10 dni przy śmierci; zgłoszenie wstępne) zamiast błędnego „48 h jak RODO art. 33”. mod-shared-rodo — art. 83 ust. 3–4 według brzmienia (kwota wyższa, limit łącznej kary).
+- 1.37 (2026-09-16, F-189): mod-shared-ai-act — ⛔ usunięta fałszywa analogia „48 h od wykrycia incydentu (jak RODO art. 33)”; termin z AI Act oznaczony jako nieodczytany (art. 73 rozp. 2024/1689). mod-shared-rodo — art. 33 ust. 1 według brzmienia; kary z art. 83 ust. 4 oznaczone 🟨 (przepis nieodczytany).
+- 1.36 (2026-09-16, F-189): mod-J7-pzp — terminy odwołania z art. 515 ust. 1–3 (≥/< progi, elektronicznie/inaczej); przekazanie zamawiającemu (art. 514 ust. 2); wpis — rozporządzenie 2020/2437 i art. 517 ust. 2; ⛔ „odwołanie wstrzymuje postępowanie” → zakaz ZAWARCIA UMOWY (art. 577–578) i unieważnienie z art. 457 ust. 1 pkt 2 (F-135, RZĄD 1).
+- 1.35 (2026-09-16, F-189): mod-J10-ubezpieczenia — IDD: wygasły t.j. `2024/1214` → `2026/12`; mod-J7-pzp — PZP: wygasły t.j. `2024/1320` → `2026/793` (RZĄD 1; T27).
+- 1.34 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 1.33 (F-189), RZĄD 1: Zasady techniki prawodawczej 2016/283 → Dz.U. 2026 poz. 300; UUDE 2024/695 → Dz.U. 2026 poz. 880 (3 miejsca).
+- 1.33 — LUKA JAWNA: wydanie AUDYT-2026-09-10l nieobecne na dysku — odtworzone w 1.34
+- 1.32 (2026-09-10f): mod-J4-finansowanie: wygasły t.j. ustawy o kredycie konsumenckim Dz.U. 2023 poz. 1028 zastąpiony aktualnym Dz.U. 2025 poz. 1362 (✅ RZĄD 1)
 - 1.31 (2026-08-23i, sesja audytowa audyt-systemu-v4, flaga F-115): self-check ANTY-FASADA podłączony jako WYWOŁANIE modułu kanonicznego `shared/SELF-CHECK-ANTY-FASADA.md`, kopia treści zastąpiona wywołaniem. Powód modułu zamiast kopii: gdy F-117 dodała regułę AF-6 i drugą pozycję listy do `shared/PRAWO-HARDGATE.md`, żadna z 7 istniejących kopii nie została zaktualizowana — źródło miało 2 pozycje, kopie 1. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23i.
 
 ## v1.25 (2026-08-02)

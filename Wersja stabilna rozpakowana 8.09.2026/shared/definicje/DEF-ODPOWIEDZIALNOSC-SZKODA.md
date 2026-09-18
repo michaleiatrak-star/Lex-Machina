@@ -16,7 +16,7 @@
 ## C.1 SZKODA — RODZAJE (wersja scalona, źródło: BAS-W26 + DEFINICJE-KLUCZOWE C.1)
 
 ```
-Weryfikacja: KC art. 361 §2 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 361 §2 (Dz.U. 2026 poz. 795 t.j.)
 
 STATUS: BRAK DEFINICJI LEGALNEJ "szkody" w KC — wyłącznie orzecznicza + doktryna
 
@@ -76,8 +76,10 @@ ODPOWIEDZIALNOŚĆ DELIKTOWA (ex delicto):
   Podstawa: art. 415 KC — czyn niedozwolony
   Przesłanki: 1) zdarzenie (czyn/zaniechanie), 2) wina, 3) szkoda, 4) adekwatny związek
   Przedawnienie: art. 442¹ KC — 3 lata od dowiedzenia się o szkodzie i sprawcy;
-    max 10 lat od zdarzenia; 20 lat gdy czyn przestępny
-    ⚠️ Weryfikuj aktualny art. 442¹ KC w ISAP — zmieniane
+    max 10 lat od zdarzenia (§ 1); 20 lat od popełnienia zbrodni lub występku (§ 2);
+    ⛔ szkoda na osobie — nie kończy się wcześniej niż 3 lata od dowiedzenia się,
+    granica 10 lat NIE obowiązuje (§ 3); małoletni — nie wcześniej niż 2 lata od
+    pełnoletności (§ 4). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 
 ODPOWIEDZIALNOŚĆ KONTRAKTOWA (ex contractu):
   Podstawa: art. 471 KC — niewykonanie/nienależyte wykonanie zobowiązania
@@ -152,7 +154,7 @@ SKUTKI PRAWNE:
 
 ### REBUS SIC STANTIBUS — nadzwyczajna zmiana stosunków (art. 357¹ KC)
 ```
-Weryfikacja: KC art. 357¹ (Dz.U. 2024 poz. 1360 t.j.) + SN II CSK 191/14
+Weryfikacja: KC art. 357¹ (Dz.U. 2026 poz. 795 t.j.) + SN II CSK 191/14
   (19.11.2014) + SA Katowice I ACa 644/18 (07.12.2018) + standardyprawa.pl/2936
 
 PRZEPIS (art. 357¹ §1 KC):

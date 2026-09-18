@@ -197,6 +197,33 @@ To nie jest obejście HARD GATE — ELI jest tym samym publikatorem w RZĘDZIE 1
 
 ## 3. ORZECZNICTWO
 
+### Prawo UE — ⭐ CELLAR (Urząd Publikacji UE), obejście blokady EUR-Lex
+
+⛔ **EUR-Lex blokuje dostęp maszynowy z kontenera:** `eur-lex.europa.eu` zwraca
+**HTTP 202 i 0 bajtów** na HTML i na PDF, przez CELEX i przez ELI (zmierzone 2026-09-16h
+i ponownie 2026-09-17u). Kanał „wyszukiwarka → pobranie strony" działa, ale zwraca dokument
+**od początku** i ucina długie akty — RODO zatrzymywało się na art. 47.
+
+⭐ **Kanał, który działa:** repozytorium **Cellar**:
+
+```
+curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol" \
+     -o akt.xhtml "http://publications.europa.eu/resource/celex/32016R0679"
+```
+
+| Nagłówek `Accept` | Wynik (2026-09-17u) |
+|---|---|
+| `application/xhtml+xml` | **200**, 840 814 B — pełny akt, wersja polska |
+| `application/xml;notice=object` | 200, 6 955 B — metryka (notice), bez treści |
+| `text/html`, `application/pdf` | 404 |
+
+⭐ Zaleta wobec pobrania strony: **cały akt trafia do pliku**, więc artykuły z końca
+(np. art. 83 RODO) wycina się lokalnie, bez limitu kontekstu. Adres buduje się z numeru
+CELEX: `resource/celex/<CELEX>`. Język wskazuje `Accept-Language` (`pol`).
+⚠️ Dokument to XHTML z Dz.Urz. UE — przed cięciem usuń znaczniki i scal białe znaki.
+⚠️ Cellar podaje **wersję pierwotną** aktu; wersję skonsolidowaną trzeba wskazać numerem
+CELEX wersji skonsolidowanej (`0` + numer + data, np. `02016R0679-20160504`).
+
 ### SAOS — `www.saos.org.pl` (SN, NSA/WSA, sądy powszechne, TK, KIO)
 
 Dokumentacja: `www.saos.org.pl/help/index.php/dokumentacja-api`. Bez klucza.
@@ -221,6 +248,17 @@ dokładne, wielkość liter bez znaczenia. Zmierzone 2026-09-13: `III CZP 25/11`
 zwraca **67 576 trafień** na fabrykacie. Procedura: `shared/SYGNATURY.md`, V-SYG-0.
 
 ⚠️ `pageSize` **≥ 10** — mniej to HTTP 400. Indeks bywa wolny, nie skracaj timeoutu.
+
+⚡ **Dostępność — pomiar 2026-09-17s (F-171):** wszystkie trzy endpointy **wróciły**:
+`/api/search/judgments` (także z `caseNumber`) → 200, `/api/judgments/{id}` → 200,
+`/api/dump/judgments?pageSize=10` → 200. Regresja z 2026-09-09 (HTTP 502) **ustąpiła**.
+⛔ Kanał jest NIESTABILNY: w serii prób zmierzono `000` (brak odpowiedzi / timeout) w 5 z 8
+wywołań, po czym to samo zapytanie zwracało 200 w < 1 s. **Zawsze powtarzaj próbę
+(min. 3 razy) przed uznaniem sygnatury za niesprawdzalną** — pojedyncze `000` nie jest
+dowodem niedostępności ani nieistnienia orzeczenia.
+⚠️ Pokrycie potwierdzone ponownie: `III CZP 88/15` (SN, 2015) → 1 trafienie;
+`III OSK 1959/22` i `II SAB/Wa 678/21` (NSA/WSA, 2021–2023) → 0 trafień = **OUT_OF_SCOPE**,
+nie „nie istnieje".
 ⛔ SAOS to RZĄD 2A — ustala, że orzeczenie istnieje i co zawiera; **nie
 zastępuje sprawdzenia sygnatury u źródła** przy powołaniu w piśmie.
 

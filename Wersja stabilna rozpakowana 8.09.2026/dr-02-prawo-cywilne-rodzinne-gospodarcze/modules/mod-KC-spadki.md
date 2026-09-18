@@ -139,6 +139,33 @@ Pkt 4 (NOWY): Uporczywe niewykonywanie sądowo/umownie ustalonego obowiązku
 Pkt 5 (NOWY): Porzucenie małoletniego lub osoby niesamodzielnej przez rodzica/opiekuna
 ```
 
+### 2a. Terminy postępowania spadkowego (KPC) — dodane 2026-09-16h, F-135
+
+✅ [VER] RZĄD 1 2026-09-16h — KPC t.j. `Dz.U. 2026 poz. 468`; nowelizacje po t.j. (`2026/473`,
+`830`, `1003`, `1046`) nie zmieniają art. 627–691.
+
+```
+Wezwanie spadkobierców (gdy nie ma pewności, że inni nie istnieją):
+  → ogłoszenie wzywa do zgłoszenia i udowodnienia nabycia w ciągu 3 MIESIĘCY
+    od dnia wskazanego w ogłoszeniu (art. 673 pkt 4)
+  → po 3 miesiącach od ogłoszenia — rozprawa (art. 675)
+  → brak zgłoszeń albo nieudowodnione — stwierdzenie nabycia na rzecz spadkobierców,
+    których prawa ustalono (art. 676)
+Zmiana stwierdzenia nabycia (art. 679 § 1):
+  → uczestnik poprzedniego postępowania — TYLKO na podstawie, której nie mógł powołać,
+    i przed upływem ROKU od dnia, w którym uzyskał tę możność
+  → nieuczestnik — bez tego ograniczenia (art. 679 § 1 zd. 1, § 2: każdy zainteresowany)
+Odwrócony kredyt hipoteczny (art. 668¹):
+  → wniosek banku o upoważnienie kuratora spadku — nie wcześniej niż po ROKU od śmierci
+Oświadczenie o przyjęciu/odrzuceniu — notariusz albo sąd rejonowy miejsca zamieszkania
+  lub pobytu składającego; także sąd spadku w toku postępowania (art. 640 § 1–2)
+Dział spadku — do działu stosuje się art. 618 § 2–3 (art. 688):
+  → od WSZCZĘCIA działu odrębne postępowanie o roszczenia z art. 618 § 1 (w tym wzajemne
+    roszczenia z tytułu posiadania) jest niedopuszczalne (§ 2)
+  → ⛔ PREKLUZJA: po PRAWOMOCNYM postanowieniu uczestnik nie może ich dochodzić,
+    CHOĆBY NIE ZGŁOSIŁ ich w dziale (§ 3) — zgłoś wszystko w toku działu
+```
+
 ### 3. Odrzucenie spadku w imieniu małoletniego (art. 1015 §1¹ i §1² KC — NOWE)
 
 ```
@@ -268,7 +295,8 @@ Wynik pracy modułu:
 2. Sprawdź długi spadkowe PRZED przyjęciem — „z dobrodziejstwem inwentarza" chroni.
 3. Odrzucenie w imieniu małoletniego: złóż wniosek o zezwolenie sądu ZANIM upłynie 6 miesięcy.
 4. Zachowek: sprawdź darowizny za życia spadkodawcy (wchodzą do substratu).
-5. Termin na zachowek: 5 lat od ogłoszenia testamentu — pilnuj.
+5. Termin na zachowek: 5 lat — wobec spadkobierców od ogłoszenia testamentu, wobec obdarowanych,
+   zapisobierców windykacyjnych i fundacji rodzinnej od otwarcia spadku (art. 1007 § 1–4 KC) — pilnuj.
 
 ### Ryzyka
 

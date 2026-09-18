@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.31"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.77"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -44,24 +44,14 @@ limitations:
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (196 plików, ~2,4 MB — stan 2026-08-23) — każda zmiana pliku kanonicznego ma
+  - rozmiar (173 pliki, ~2,0 MB — stan 2026-09-14) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.31 (2026-09-01k, F-156): KROK 2C w PRAWO-HARDGATE.md dostał
-  sekcję „GDZIE SZUKAĆ NOWELIZACJI PO t.j." (adresy, unia dwóch źródeł, dojście
-  od t.j. do aktu bazowego) oraz ZAKAZ przepisywania wyniku do map — także
-  w formie samego znacznika bez liczby.
-  Wersja 3.30 (2026-09-01i, F-155): w
-  mod-niepelnosprawnosc-intelektualna-gluchota.md ustawa o świadczeniu
-  wspierającym cytowana była przez akt pierwotny Dz.U. 2023 poz. 1429 —
-  obowiązuje t.j. Dz.U. 2026 poz. 873; poprawione w dwóch miejscach.
-  ⛔ PEŁNA HISTORIA — WYŁĄCZNIE w references/CHANGELOG.md (standard 2026-08-20z4:
-  jedna lokalizacja; zakaz sekcji changelogu w korpusie SKILL.md i zakaz pełnej
-  listy wpisów w tym polu). Pole przycinane 2026-09-01 (F-147), 2026-09-01f
-  i 2026-09-01i — próg T12 to 15 linii.
+  Wersja bieżąca: 3.77 (2026-09-16, F-189): ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Acce…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
@@ -91,7 +81,17 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | Plik | Rola |
 |------|------|
 | `UNIVERSAL-RUNTIME-ADAPTER.md` | Wspólny kontrakt runtime ChatGPT/Claude/Codex: zasoby, narzędzia, prywatność, fallbacki |
-| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, BRAMKA ANTY-FASADOWA, KROK 2B/2C). Podzielony 2026-08-23h, F-111: 967 → 501 l. |
+| `TABELE-OPLAT.md` | ⛔ **RDZEŃ NAWIGACYJNY od 2.0 (2026-09-12q) — nie zawiera tabel.** Trzyma REGUŁĘ KOLEJNOŚCI (tabela ustanawiająca → baza katalogująca → RZĄD 2A/2B), **MAPĘ WŁASNOŚCI SEKCJI** i rejestry (sekcja 7 — tabele satelickie w innych skillach; sekcja 8 — zakres nieobjęty). Materia w 7 satelitach `oplaty/`. **Wczytać JAKO PIERWSZY**, przed jakąkolwiek kwotą — mapa wskaże właściwy satelita. Integralności podziału pilnuje T29 (`check_oplaty_mapa.py`). |
+| `oplaty/01-KSCU-cywilne-rodzinne-pracownicze.md` | Sekcje 1, 1a, 1b, 1c. Progi WPS (art. 13), opłaty ogólne KSCU (art. 14–25b, 68–78), **rozwód 600 zł** (art. 26) i sprawy rodzinne (art. 27, 37, 38), prawo pracy i ubezpieczenia (art. 35, 36). ⛔ Pułapka dwóch brzmień art. 13 ust. 2: cap **100 000 zł** od 23.09.2025, nie 200 000 zł. |
+| `oplaty/02-zwolnienia-zwrot-alimenty.md` | Sekcje 2, 2a, 2b, 2c, 2d, 2e. ⛔ **KROK 0 — czy strona w ogóle płaci**: art. 95, 96, 100–107. Alimenty. **Zwrot opłaty — art. 79** (m.in. połowa przy rozwodzie bez orzekania o winie). ⛔⛔ **art. 104a: w EPU i S24 NIE MA zwolnienia na wniosek.** Ryzyko kosztowe z KPC (art. 98–103, 520) — art. 102 KPC ≠ art. 102 KSCU. |
+| `oplaty/03-koszty-zastepstwa-taksy.md` | Sekcje 3, 3a. Taksy adwokacka (`Dz.U. 2026 poz. 215`) i radcowska (`Dz.U. 2026 poz. 118`) — § 2, 3, 4, 9, 10, 11, 17; brzmienie porównane między aktami. |
+| `oplaty/04-wartosci-powtarzalne-kotwice.md` | Sekcja 4 z 4a–4g. ⛔ **DOKTRYNA „formuła zamiast procentu"** — wartości zakotwiczonych w stopach NBP NIE WOLNO utrwalać jako procentu. Odsetki cywilne, handlowe, podatkowe i ZUS; stopy składek; skala PIT; **trzy kotwice** (stopy NBP, minimalne wynagrodzenie, przeciętne wynagrodzenie w sektorze przedsiębiorstw). |
+| `oplaty/05-sprawy-karne.md` | Sekcje 5, 6e. Ustawa z 23.06.1973 (`Dz.U. 2023 poz. 123`) — ⛔ pułapka dwóch brzmień art. 2 ust. 1 pkt 6 (od 14.03.2023). Koszty procesu z KPK. ⛔ Zryczałtowana równowartość wydatków: **1000 zł od 1.07.2025** (kwota sprzed tej daty jest NIEAKTUALNA). |
+| `oplaty/06-administracyjne-wieczystoksiegowe-KIO.md` | Sekcje 6, 6a. Wpis do WSA (`Dz.U. 2021 poz. 535`) — procent z podłogą, nie ryczałt. Postępowanie wieczystoksięgowe (art. 42–48 KSCU). Skarga na KIO (art. 34 — trzykrotność wpisu z PZP). |
+| `oplaty/07-komornicze-skarbowe-notarialne.md` | Sekcje 6b, 6c, 6d. Koszty komornicze (`Dz.U. 2024 poz. 377`) — ⛔ art. 47: zwolnienie NIE zwalnia z opłaty egzekucyjnej. Opłata skarbowa (`Dz.U. 2025 poz. 1154`) — 17 zł od KAŻDEGO stosunku pełnomocnictwa. Taksa notarialna (`Dz.U. 2024 poz. 1566`) — stawki MAKSYMALNE, nie minimalne. |
+| `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
+| `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
+| `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |
 | `DOSTEP-MASZYNOWY-API.md` | ⛔ **JAK** wywołać API/serwis, żeby odpowiedział — nagłówki (neutralny UA, `Accept`), ścieżki robocze zamiast rootów, limity tempa, konkretne endpointy ELI/SAOS/KRS/UODO/HUDOC/eZamówienia i ich wymogi (token CEIDG, `pageSize`≥10, anonimizacja odpisu KRS). Wczytaj, gdy weryfikacja idzie kanałem kodu, nie `web_fetch`. ⚠️ NIE rozstrzyga mocy źródła — to `HIERARCHIA-ZRODEL.md`. Dodane 2026-09-04c, F-159: instrukcje istniały wyłącznie w `audyt-systemu-v4`, którego żaden skill produkcyjny nie wczytuje |
 | `PRAWO-HARDGATE-ORZECZENIA.md` | ⛔ ZAŁĄCZNIK orzeczniczy tej samej bramki — wczytaj ZAWSZE, gdy w tekście ma stanąć SYGNATURA (procedura przed orzeczeniem, WTÓRNE-ŹRÓDŁO-STOP, KROK 5A/5B, warstwy uzasadnienia [1]/[2]/[3], self-check orzeczniczy). NIE jest samodzielny — rdzeń obowiązuje równolegle (dodane 2026-08-23h, F-111) |
 | `DOMAIN-LOCK.md` | ⛔ Bramka izolacji dziedzinowej — kontrola na WYJŚCIU, zakaz kwalifikacji spoza PRIMARY bez podstawy faktycznej (dodane 2026-08-23) |

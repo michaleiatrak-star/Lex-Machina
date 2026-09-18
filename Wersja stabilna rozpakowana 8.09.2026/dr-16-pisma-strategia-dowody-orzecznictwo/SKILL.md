@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: "3.5"
+version: "3.8"
 description: "Pisma, strategia, dowody i orzecznictwo: routing narzędzi procesowych, analiza dowodowa, research orzeczeń, kalkulatory i wsparcie budowy strategii sprawy."
 ---
 
@@ -136,7 +136,7 @@ KPC — PROCEDURY SZCZEGÓLNE I NARZĘDZIA PROCESOWE:
   [✓] OK    mod-KPC-wzory-pism-procesowych
               (Dz.U. 2026 poz. 468 t.j. — art. 126–130² KPC;
                wymogi formalne pisma procesowego, pozew o zapłatę art. 187 KPC,
-               sprzeciw od nakazu zapłaty art. 503 KPC, zasady absolutne:
+               sprzeciw od nakazu zapłaty art. 505 § 1 KPC (termin: art. 480² § 2 KPC), zasady absolutne:
                podpis, adres, opłata, pełnomocnictwo, odpisy)
 
 PRAWO MATERIALNE I USTROJOWE — ZASTOSOWANIE PROCESOWE:

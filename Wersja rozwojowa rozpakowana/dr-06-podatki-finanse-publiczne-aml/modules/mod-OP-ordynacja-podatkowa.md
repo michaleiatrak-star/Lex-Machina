@@ -384,7 +384,9 @@ INTERPRETACJA INDYWIDUALNA (art. 14b–14p Op):
   Milczenie organu: interpretacja pozytywna — niezgodna z wnioskiem wymaga uzasadnienia
   Skutek: wiąże organ wyłącznie gdy podatnik ZASTOSOWAŁ SIĘ DO NIEJ przed wydaniem
            decyzji przez organ
-  Zaskarżenie: skarga do WSA — TERMIN 14 DNI (art. 53 §3 PPSA — NIE 30 dni!) — ZAWITY
+  Zaskarżenie: skarga do WSA — **30 DNI** od doręczenia interpretacji (art. 53 § 1 PPSA, który obejmuje wprost akty z art. 3 § 2 pkt 4a — interpretacje indywidualne; od 26.06.2026 także opinie z art. 3 § 2 pkt 4b — `Dz.U. 2026 poz. 846`) — ✅ [VER] RZĄD 1 2026-09-16m
+  ⛔ KOREKTA: poprzednio „14 DNI (art. 53 § 3 PPSA — NIE 30 dni!)" — art. 53 § 3 to 6 miesięcy <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
+  dla prokuratora/RPO/RPD; Ordynacja nie przewiduje terminu szczególnego
   Baza: podatki.gov.pl/eureka (EUREKA — od 04.10.2021) + interpretacje.podatki.gov.pl
 
 INTERPRETACJA OGÓLNA (art. 14a Op):

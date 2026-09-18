@@ -126,7 +126,7 @@ Weryfikacja: ustawa o samorządzie gminnym art. 43 (Dz.U. 2026 poz. 662 t.j.)
   ZWERYFIKOWANO — definicja bez zmian, aktualny t.j. 2025
 Definicja: Własność i inne prawa majątkowe należące do gmin, związków gmin
 oraz innych gminnych osób prawnych.
-Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2025 poz. 1515 t.j.)
+Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2026 poz. 662 t.j.)
 Reguła: Mienie komunalne jest odrębne od mienia Skarbu Państwa. Gmina odpowiada
 za swoje mienie niezależnie od Skarbu Państwa (art. 165 ust. 1 Konstytucji).
 ```
@@ -134,11 +134,11 @@ za swoje mienie niezależnie od Skarbu Państwa (art. 165 ust. 1 Konstytucji).
 ### BAS-009 — Cel publiczny
 ```
 Weryfikacja: ustawa o gospodarce nieruchomościami art. 6
-  (Dz.U. 2023 poz. 344 t.j. — weryfikuj aktualne zmiany 2025 w ISAP)
+  (**Dz.U. 2026 poz. 399 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 1 nowelizacji po tekście jednolitym — weryfikuj aktualne zmiany 2025 w ISAP)
   web_search: "ustawa o gospodarce nieruchomościami art 6 cel publiczny 2025 aktualne"
 Definicja: Kategoria z ustawy o gospodarce nieruchomościami obejmująca ustawowo
 określone zadania i inwestycje służące interesowi publicznemu.
-Podstawa: art. 6 ustawy o gospodarce nieruchomościami (Dz.U. 2023 poz. 344 t.j. — weryfikuj)
+Podstawa: art. 6 ustawy o gospodarce nieruchomościami (**Dz.U. 2026 poz. 399 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 1 nowelizacji po tekście jednolitym — weryfikuj)
 Reguła: Katalog celów publicznych z art. 6 ugn jest ZAMKNIĘTY — nie można
 rozszerzać go analogią. Inwestycja niezaliczona expressis verbis do art. 6 ugn
 nie uprawnia do wywłaszczenia ani przymusu sprzedaży.

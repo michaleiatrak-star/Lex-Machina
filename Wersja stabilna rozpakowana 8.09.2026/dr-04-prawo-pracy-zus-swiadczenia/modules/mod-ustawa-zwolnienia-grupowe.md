@@ -1,7 +1,7 @@
 # mod-ustawa-zwolnienia-grupowe
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o zwolnieniach grupowych — Dz.U. 2025 poz. 570 t.j.
+**Źródło weryfikacji:** Ustawa o zwolnieniach grupowych — **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) t.j.
 **Data weryfikacji online:** 2026-08-27 — RZĄD 1 ELI
 **Zasada:** Każde brzmienie przepisu przed powołaniem → ELI/ISAP. Źródło RZĄD 1: https://eli.gov.pl/eli/DU/2025/570/ogl
 
@@ -16,7 +16,7 @@ Rozwiązywanie stosunków pracy z przyczyn niedotyczących pracowników (ekonomi
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa z 13.03.2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | Dz.U. 2025 poz. 570 t.j. |
+| Ustawa z 13.03.2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) t.j. |
 
 ---
 
@@ -46,7 +46,10 @@ Pracodawca ≥ 20 pracowników + w ciągu 30 dni:
 Przyczyny: niedotyczące pracowników
 ```
 
-### Procedura (art. 2–3 ustawy — weryfikuj w ISAP)
+### Procedura (art. 2–6 ustawy)
+
+✅ [VER] RZĄD 1 2026-09-17o — t.j. `Dz.U. 2026 poz. 1195` (obwieszczenie z 1.09.2026, ogłoszone
+4.09.2026; obejmuje nowelizację `2025/1661`); brak zmian po t.j.
 
 ```
 1. Konsultacja z ZOZ / reprezentantami pracowników:
@@ -95,8 +98,18 @@ Uwaga: Odprawa jest zaliczana na poczet okresu, za który przysługuje zasiłek 
 Pracodawca ma obowiązek ponownego zatrudnienia zwolnionego pracownika:
   → Termin: 15 miesięcy od daty rozwiązania umowy
   → Warunek: pracodawca zatrudnia nowych pracowników na te same stanowiska
-  → Pracownik musi w ciągu 1 roku zgłosić zamiar podjęcia zatrudnienia
-⚠️ Terminy — weryfikuj aktualny art. 9 ustawy w ISAP.
+  → Pracownik musi w ciągu ROKU od rozwiązania stosunku pracy zgłosić zamiar
+    podjęcia zatrudnienia (art. 9 ust. 1); ponowne zatrudnienie — w okresie
+    15 miesięcy (ust. 2) — ✅ RZĄD 1 2026-09-17o
+
+ODPRAWA (art. 8): 1 / 2 / 3-miesięczne wynagrodzenie (< 2 lata / 2–8 lat / > 8 lat);
+  ⛔ nie więcej niż 15-KROTNOŚĆ minimalnego wynagrodzenia z dnia rozwiązania (ust. 4)
+
+ZWOLNIENIA INDYWIDUALNE u pracodawcy ≥ 20 pracowników (art. 10):
+  → odprawa z art. 8 także poza progiem z art. 1, gdy przyczyny niedotyczące
+    pracownika są WYŁĄCZNYM powodem
+  → pracownik szczególnie chroniony — wypowiedzenie tylko przy braku SPRZECIWU
+    zakładowej organizacji związkowej w 14 DNI od otrzymania zawiadomienia (ust. 2)
 ```
 
 ---

@@ -249,7 +249,7 @@ PEŁNOMOCNICTWO A "STRONA UKRYTA" — działanie na rzecz osoby trzeciej:
 ## 5. CZYNNOŚĆ PRAWNA UKRYTA / POZORNA (art. 83 KC) — DR-02/16
 
 ```
-Weryfikacja: KC art. 83 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 83 (Dz.U. 2026 poz. 795 t.j.)
 
 PRZEPIS (art. 83 §1 KC):
   "Nieważne jest oświadczenie woli złożone drugiej stronie za jej zgodą
@@ -309,7 +309,7 @@ REGUŁA PROCESOWA: ciężar dowodu pozorności = na stronie, która się na nią
 ## 6. RZECZYWISTY BENEFICJENT / UBO — "STRONA UKRYTA" W STRUKTURACH WŁASNOŚCIOWYCH — DR-06/15
 
 ```
-Weryfikacja: ustawa AML z 1.03.2018 r. (Dz.U. 2023 poz. 1124 t.j. — weryfikuj)
+Weryfikacja: ustawa AML z 1.03.2018 r. (**Dz.U. 2025 poz. 644 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 1 nowelizacji po tekście jednolitym — weryfikuj)
   art. 2 ust. 2 pkt 1) + Centralny Rejestr Beneficjentów Rzeczywistych (CRBR)
 
 DEFINICJA USTAWOWA (art. 2 ust. 2 pkt 1 ustawy AML):

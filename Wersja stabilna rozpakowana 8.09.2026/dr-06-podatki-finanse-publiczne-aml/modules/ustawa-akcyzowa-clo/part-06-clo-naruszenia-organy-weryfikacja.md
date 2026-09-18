@@ -20,13 +20,22 @@ JEEPA, reguły pochodzenia).
 
 ### Główne przestępstwa i wykroczenia skarbowe (KKS)
 
-| Czyn | Przepis KKS | Sankcja orientacyjna |
+✅ [VER] RZĄD 1 2026-09-16g — KKS t.j. `Dz.U. 2025 poz. 633` (nowelizacje po t.j. `2026/347`,
+`421`, `846`, `901` nie zmieniają art. 27, 54, 65, 86, 87, 91). ⛔ Poprzednia wersja tabeli miała
+trzy błędy na pięć wierszy: art. 86 opisany jako „przemyt akcyzowy", art. 87 jako „do 360 stawek",
+art. 91 jako „niedopełnienie obowiązku celnego".
+
+| Czyn | Przepis KKS | Sankcja (typ podstawowy) |
 |------|-------------|----------------------|
-| Uchylanie się od zapłaty akcyzy | art. 54 KKS | do 720 stawek dziennych / do 5 lat |
-| Przemyt akcyzowy (uszczuplenie > małej wartości) | art. 86 KKS | do 720 stawek / do 5 lat |
-| Podanie fałszywych danych w zgłoszeniu celnym | art. 87 KKS | do 360 stawek |
-| Niedopełnienie obowiązku celnego | art. 91 KKS | grzywna do 720 stawek |
-| Przestępstwo celne przy imporcie VAT | art. 86–87 KKS | do 5 lat |
+| Uchylanie się od opodatkowania (w tym akcyzą) — nieujawnienie przedmiotu/podstawy albo niezłożenie deklaracji | art. 54 § 1 KKS | grzywna do 720 stawek dziennych albo pozbawienie wolności (5 dni – 5 lat, art. 27 § 1), albo obie |
+| **Przemyt celny** — przywóz/wywóz bez przedstawienia organowi celnemu lub zgłoszenia | art. 86 § 1 KKS | jw. |
+| **Oszustwo celne** — wprowadzenie w błąd organu kontroli celnej | art. 87 § 1 KKS | jw. (⛔ nie „do 360 stawek") |
+| **Paserstwo celne** — nabycie, przechowanie, przewóz towaru z czynu z art. 86–90 § 1 | art. 91 § 1 KKS | grzywna do 720 stawek albo pozbawienie wolności **do lat 3**, albo obie |
+| Wyroby akcyzowe: wydanie wbrew przepisom / sprzedaż bez oznaczenia / **paserstwo akcyzowe** / produkcja lub magazynowanie poza składem | art. 63, 63a, **65**, 69a KKS | odczyt przepisu przy sprawie |
+
+⚠️ W każdym z typów: **mała wartość** (≤ 200-krotność minimalnego wynagrodzenia, art. 53 § 14)
+→ tylko grzywna do 720 stawek; **nie przekracza ustawowego progu** (5-krotność, art. 53 § 3 i § 6)
+→ wykroczenie skarbowe.
 
 > **Kwalifikator karny:** Przemyt narkotyków, broni lub substancji REACH/ADR → kumulatywna kwalifikacja KKS + KK (art. 55 KK, art. 163 KK, ustawa o przeciwdziałaniu narkomanii).
 

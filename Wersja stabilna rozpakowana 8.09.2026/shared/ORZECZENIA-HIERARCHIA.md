@@ -17,6 +17,34 @@ Nie wolno tworzyć sygnatur ani cytatów z pamięci. Każde orzeczenie musi być
 | wyrok SR | pomocnicza |
 | komentarz / glosa | pomocnicza, nie jako samodzielna podstawa |
 
+
+### 2A. Routing źródłowy — skąd system ma pobrać orzeczenie
+
+Hierarchia **wartości orzeczenia** nie jest hierarchią **kanałów dostępu**.
+Kanał dobieraj deterministycznie wg rodziny sądu:
+
+| Rodzina | Źródło urzędowe / rozstrzygające | Mechanizm |
+|---|---|---|
+| SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `shared/SYGNATURY.md` |
+| SR/SO/SA | `orzeczenia.ms.gov.pl` + portal właściwego sądu | GET po sygnaturze; portal lokalny przy AMBIGUOUS |
+| **NSA/WSA** | **CBOSA — `orzeczenia.nsa.gov.pl`** | **fresh-probe → POST `/cbo/search` → kompletna paginacja `/cbo/find?p=N` → GET `/doc/{ID}` → exact-match**; wykonanie: `shared/CBOSA-ADAPTER.md` |
+| SAOS | `saos.org.pl` | discovery / kontrola krzyżowa, nie źródło rozstrzygające dla NSA/WSA |
+
+Dla CBOSA:
+- `0 exact-match` po **kompletnym** przeszukaniu → `NOT_FOUND`;
+- `1 exact-match` → `FOUND`;
+- `>=2 exact-match` → `AMBIGUOUS`;
+- drift HTML, nierozpoznany licznik, pętla paginacji, brak jednego dokumentu,
+  przerwany transport → `OUT_OF_SCOPE`;
+- brak opublikowanego uzasadnienia przy kompletnym dokumencie nie unieważnia
+  metryki/sentencji, ale zakazuje przypisywania tezy z uzasadnienia.
+
+Gdy direct CBOSA jest niedostępna w bieżącym runtime, użyj
+`shared/SYGNATURY.md` V-SYG-0.5 RETRIEVAL/SNAPSHOT. Kanał nigdy nie produkuje
+`NOT_FOUND`; po POST-CHECK HOSTA i exact-match zachowuje faktyczny `content_scope`
+(snapshot może zawierać metrykę, sentencję i uzasadnienie). Provenance pozostaje
+`CRAWLED_OR_INDEXED`, więc sama treść snapshotu nie daje ✅ [VER].
+
 ## 3. Test aktualności
 
 Sprawdź:

@@ -76,6 +76,7 @@
 | `LEGAL-LIFECYCLE-MANAGEMENT.md` | ACTIVE | wybrane DR-skille |
 | `PRAWO-HARDGATE.md` | ACTIVE | wszystkie skille z przepisami |
 | `PRAWO-HARDGATE-ORZECZENIA.md` | ACTIVE | skille cytujące ORZECZENIA — załącznik do powyższego, wyzwalacz binarny: sygnatura w tekście (podział F-111, 2026-08-23h) |
+| `CBOSA-ADAPTER.md` | ACTIVE | HIERARCHIA-ZRODEL, SYGNATURY, DOSTEP-MASZYNOWY-API, PRAWO-HARDGATE-ORZECZENIA, MCP-INTEGRACJA; direct NSA/WSA przed fallbackiem indeksowym |
 
 ## Moduły scalone do shared/ 2026-07-12 (audyt komercyjny — ci_check_shared.py)
 

@@ -13,7 +13,7 @@ zgody marketingowe, monitoring pracowników, administrator vs. podmiot przetwarz
    (wyjątki: interes publiczny, obowiązki prawne, roszczenia).
 4. **Monitoring pracowników** → wymaga: podstawy prawnej + poinformowania pracownika + proporcjonalności.
 5. **Zgoda marketingowa** → musi być dobrowolna, konkretna, świadoma i jednoznaczna (art. 7 RODO).
-6. **Naruszenie ochrony danych** → administrator ma 72h na zgłoszenie do UODO (art. 33 RODO).
+6. **Naruszenie ochrony danych** → administrator zgłasza bez zbędnej zwłoki, w miarę możliwości nie później niż w 72 h **po stwierdzeniu** naruszenia (art. 33 ust. 1 RODO); bez zgłoszenia, gdy ryzyko mało prawdopodobne. ✅ [VER] RZĄD 1 2026-09-17q — EUR-Lex, tekst skonsolidowany 02016R0679
 
 ---
 

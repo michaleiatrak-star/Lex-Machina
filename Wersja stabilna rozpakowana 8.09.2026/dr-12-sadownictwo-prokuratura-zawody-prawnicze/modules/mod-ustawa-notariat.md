@@ -176,7 +176,8 @@ Dla każdego orzeczenia wskaż:
 Przed końcową odpowiedzią sprawdź:
 
 ```text
-□ Czy sprawdzono aktualną wersję p.n. w ISAP (brak t.j. — liczne nowelizacje)?
+□ Czy sprawdzono aktualną wersję p.n. u źródła? **t.j. Dz.U. 2026 poz. 614** ✅ [VER] RZĄD 1 2026-09-10i
+  (obwieszczenie z 30.04.2026, zero nowelizacji po tekście jednolitym) — ⛔ wcześniejszy zapis „brak t.j." był nieprawdziwy
 □ Czy taksy NIE podano z pamięci — tylko z aktualnego rozp. MS?
 □ Czy oddzielono nieważność aktu od nieważności czynności prawnej?
 □ Czy zidentyfikowano prawidłowy środek (zaskarżenie odmowy vs powództwo)?
@@ -212,6 +213,30 @@ web_search: "art 777 KPC akt notarialny tytuł egzekucyjny orzecznictwo 2025"
 ---
 
 ## STATUS KANCELARSKI
+
+## ⛔ TAKSA NOTARIALNA — stawki MAKSYMALNE
+
+Wynagrodzenie notariusza ustanawia **rozporządzenie MS z 28.06.2004 r. w sprawie
+maksymalnych stawek taksy notarialnej**, t.j. `Dz.U. 2024 poz. 1566`
+✅ [VER] RZĄD 1 2026-09-12c (status ELI `obowiązujący`).
+
+```text
+view shared/TABELE-OPLAT.md      # sekcja 6d — tabela § 3 z odczytu treści
+```
+
+⛔ **Odwrotna logika niż w taksach adwokackiej i radcowskiej.** Tam § 2 podaje
+stawki **minimalne** (podłoga zasądzenia kosztów). Tu § 3 podaje **maksimum** —
+notariusz może zejść niżej, a kwota jest przedmiotem umowy. Podawanie stawki
+z § 3 jako „ceny należnej" jest błędem kategorii, nie liczby.
+
+⚠️ § 4: przy obliczaniu wartości czynności **nie odlicza się obciążeń ani
+bonifikat**. ⚠️ § 7 ust. 1: projekt aktu oraz akt dokumentujący m.in.
+ustanowienie hipoteki zabezpieczającej kredyt mieszkaniowy lub gospodarczy —
+**1/4** stawki z § 3. ⚠️ Do taksy dochodzą VAT oraz podatki i opłaty sądowe
+pobierane przez notariusza jako **płatnika** (PCC, podatek od spadków i darowizn,
+opłata wieczystoksięgowa z art. 42–46 KSCU) — odrębne tytuły, nie część taksy.
+
+---
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Data weryfikacji:** 2026-06-06

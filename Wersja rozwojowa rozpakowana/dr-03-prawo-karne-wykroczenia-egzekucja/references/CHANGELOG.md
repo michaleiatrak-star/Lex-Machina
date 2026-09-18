@@ -1,5 +1,6 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.45 (2026-09-16, F-189): mod-grzywny-mandaty-szczegolowe — art. 189g KPA według brzmienia: kara nie może być NAŁOŻONA po 5 latach (§ 1), nie podlega EGZEKUCJI po 5 latach (§ 3) — nie „przedawnienie wszczęcia” (F-135, RZĄD 1).
 - 3.44 (2026-09-16, F-189): F-135 (RZĄD 1 — KKS 2025/633): mod-KKS-karny-skarbowy-i-AML — nowa sekcja 1a „Terminy i progi KKS”, poz. 2026/421 i daty szczegółowe 2026/846 (uchylenie art. 16b od 1.10.2026; mandat zaoczny od 26.12.2026); mod-czynny-zal-KK-KKS-samooskarzenie — art. 16 § 4–6 (forma, bezskuteczność, wyłączenia), art. 16a § 3 z odczytu, ⛔ korekta: art. 16 KKS nie odsyła do usiłowania (art. 21 § 3 KKS → art. 15 KK).
 - 3.43 (2026-09-16, F-189): mod-KK-cyberprzestepstwa-szczegolowy — „art. 117 § 1 KC — 6 lat” → art. 118 KC (art. 117 nie podaje terminu; F-135, RZĄD 1).
 - 3.42 (2026-09-16, F-189): mod-ustawa-oplaty-w-sprawach-karnych — podstawy w wierszach tabeli kar (art. 2 ust. 1 pkt 1–5) i art. 2 ust. 2 (ograniczenie wolności) — T32, RZĄD 1 (2023/123); mod-KK-przemoc-domowa-szczegolowy — wygasły t.j. `2021/1249` → ustawa o przeciwdziałaniu przemocy domowej `2024/1673` (T27).

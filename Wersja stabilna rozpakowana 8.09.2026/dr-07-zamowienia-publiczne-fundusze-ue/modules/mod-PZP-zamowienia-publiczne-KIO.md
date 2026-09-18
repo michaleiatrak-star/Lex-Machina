@@ -79,20 +79,40 @@ Postępowanie o udzielenie zamówienia publicznego, odwołanie do KIO, skarga na
 ## 4. TERMINY — ABSOLUTNY PRIORYTET
 
 ```
-⚠️ TERMINY ODWOŁANIA DO KIO SĄ ZAWITE (art. 515 PZP) — brak przywrócenia
-⚠️ Termin liczy się do FAKTYCZNEGO WPŁYWU do Prezesa KIO — data nadania pocztą NIE wystarczy
+✅ [VER] RZĄD 1 2026-09-16j — PZP t.j. `Dz.U. 2026 poz. 793` (ogłoszony 16.06.2026; obejmuje
+zmiany z 13.03.2026 w art. 514, 518, 525, 528); KPC `2026/468` (art. 398⁵); KSCU `2025/1228` (art. 34).
 
-POWYŻEJ PROGÓW UE (art. 515 ust. 1 pkt 1 PZP):
-  10 dni — od przekazania informacji środkami komunikacji elektronicznej
-  15 dni — od przekazania informacji w inny sposób (faks, pismo)
-  Na treść SWZ/ogłoszenia: 10 dni od zamieszczenia w TED/platformie
+⚠️ ODWOŁANIE WNIESIONE PO TERMINIE — Izba ODRZUCA (art. 528 pkt 3 PZP)
+⚠️ PZP nie przewiduje równoważności nadania pocztowego dla ODWOŁANIA (przewiduje ją wprost
+   tylko dla SKARGI — art. 580 ust. 2) — licz termin do wpływu do Prezesa KIO
+⚠️ Terminy liczy się według prawa cywilnego; koniec w sobotę lub dzień wolny → następny dzień
+   roboczy (art. 509)
+⛔ PRZEKAZANIE ZAMAWIAJĄCEMU (art. 514 ust. 2–3): odwołanie (albo kopię) przekazać zamawiającemu
+   PRZED upływem terminu tak, by mógł zapoznać się z treścią; brak = ODRZUCENIE (art. 528 pkt 6)
 
-PONIŻEJ PROGÓW UE (art. 515 ust. 1 pkt 2 PZP):
+POWYŻEJ PROGÓW UE (art. 515 ust. 1 pkt 1, ust. 2 pkt 1, ust. 3 pkt 1 PZP):
+  10 dni — od przekazania informacji o czynności środkami komunikacji elektronicznej
+  15 dni — od przekazania informacji w inny sposób
+  10 dni — na treść ogłoszenia / dokumentów zamówienia: od publikacji w DUUE lub zamieszczenia
+           dokumentów na stronie
+  10 dni — w pozostałych przypadkach: od powzięcia (albo możliwości powzięcia) wiadomości
+
+PONIŻEJ PROGÓW UE (art. 515 ust. 1 pkt 2, ust. 2 pkt 2, ust. 3 pkt 2 PZP):
   5 dni  — od przekazania informacji elektronicznie
-  10 dni — od publikacji w BZP lub zamieszczenia na stronie (gdy brak powiadomienia)
-  Na treść SWZ: 5 dni od zamieszczenia
+  10 dni — od przekazania informacji w INNY SPOSÓB niż elektronicznie
+           (⛔ poprzednio błędnie: „od publikacji w BZP … gdy brak powiadomienia")
+  5 dni  — na treść ogłoszenia / dokumentów: od zamieszczenia ogłoszenia w BZP lub dokumentów
+  5 dni  — w pozostałych przypadkach: od powzięcia (albo możliwości powzięcia) wiadomości
 
-WPIS OD ODWOŁANIA (art. 519 PZP):
+BRAK OGŁOSZENIA / ZAWIADOMIENIA (art. 515 ust. 4) — terminy maksymalne, m.in.:
+  15 dni od ogłoszenia o wyniku w BZP albo 30 dni od ogłoszenia o udzieleniu w DUUE;
+  6 miesięcy od zawarcia umowy (brak ogłoszenia o udzieleniu w DUUE / brak uzasadnienia
+  negocjacji bez ogłoszenia lub wolnej ręki); miesiąc od zawarcia umowy (brak ogłoszenia
+  w BZP) — pełny katalog: odczyt art. 515 ust. 4 przy sprawie
+
+PRZYSTĄPIENIE WYKONAWCY (art. 525 ust. 1): 3 dni od otrzymania odwołania albo jego kopii
+
+WPIS OD ODWOŁANIA (art. 517 ust. 2 PZP; ⛔ poprzednio błędnie „art. 519" — to przepis o zwrocie):
   → Wpłacić najpóźniej do dnia upływu terminu na wniesienie odwołania
   → Kwoty (Dz.U. 2020 poz. 2437 — VER: 2026-06-09, nadal obowiązuje):
      • 7 500 zł  — dostawy/usługi lub konkurs poniżej progów unijnych
@@ -105,14 +125,17 @@ WPIS OD ODWOŁANIA (art. 519 PZP):
      Brak = zwrot odwołania bez rozpoznania meritum
 
 SKARGA NA ORZECZENIE KIO (art. 580 PZP):
-  14 dni — od doręczenia orzeczenia KIO
+  14 dni — od doręczenia orzeczenia KIO (albo postanowienia Prezesa KIO o zwrocie odwołania)
   → Do Sądu Zamówień Publicznych = SO w Warszawie (jeden ogólnopolski sąd)
-  → Za pośrednictwem Prezesa KIO
-  → Opłata: 3× wpis od odwołania — weryfikuj aktualnie
+  → Za pośrednictwem Prezesa KIO, z jednoczesnym przesłaniem odpisu przeciwnikowi
+  → Nadanie w polskiej placówce pocztowej / na adres do doręczeń elektronicznych = wniesienie
+  → Opłata stała: TRZYKROTNOŚĆ wpisu od odwołania (art. 34 ust. 1 KSCU)
+  → Przywrócenie terminu w sądzie: 7 dni od ustania przyczyny (art. 585 ust. 2)
 
-SKARGA KASACYJNA DO SN (art. 590 PZP):
-  2 miesiące — od doręczenia orzeczenia SO z uzasadnieniem
-  Prezes UZP: 6 miesięcy od uprawomocnienia
+SKARGA KASACYJNA DO SN (art. 590 PZP w zw. z art. 398⁵ KPC):
+  2 miesiące — od doręczenia orzeczenia z uzasadnieniem (art. 398⁵ § 1 KPC)
+  Prezes UZP (przepisy o Prokuratorze Generalnym): 6 miesięcy od uprawomocnienia,
+  a gdy strona żądała doręczenia z uzasadnieniem — od doręczenia (art. 398⁵ § 2 KPC)
 ```
 
 ---
@@ -130,9 +153,13 @@ TRYBY PODSTAWOWE:
     zamówień poniżej progów odpowiednikiem jest tryb podstawowy wariant I,
     art. 275 pkt 1, bardzo zbliżony proceduralnie). Podstawowy TERMIN
     składania ofert: min. 35 DNI od dnia przekazania ogłoszenia do
-    Urzędu Publikacji UE (możliwe skrócenie/wydłużenie w okolicznościach
-    ustawowych — skrócenie poniżej 15 dni TYLKO w sytuacjach
-    nadzwyczajnych). NAJCZĘŚCIEJ stosowany tryb w Polsce — najkrótszy
+    Urzędu Publikacji UE (art. 138 ust. 1). Skrócenie do NIE MNIEJ niż
+    15 dni — tylko po wstępnym ogłoszeniu informacyjnym albo przy pilnej
+    potrzebie (ust. 2); o 5 dni krócej przy składaniu ofert w całości
+    elektronicznie (ust. 4); wydłużenie o 5 dni w sytuacjach z art. 133
+    ust. 2–3 (ust. 3). ⛔ Ustawa NIE przewiduje terminu poniżej 15 dni
+    (poprzedni zapis „poniżej 15 dni w sytuacjach nadzwyczajnych" — błędny;
+    ✅ RZĄD 1 2026-09-16j). NAJCZĘŚCIEJ stosowany tryb w Polsce — najkrótszy
     czas trwania postępowania spośród trybów wieloetapowych.
   Przetarg ograniczony (art. 150 PZP)      — zaproszeni po kwalifikacji wstępnej
     ⭐ ROZWINIĘTE 2026-07-18: DWUETAPOWY. ETAP 1 — wszyscy zainteresowani
@@ -261,7 +288,8 @@ ZDALNE ROZPRAWY (od 13.03.2026 — Dz.U. 2025 poz. 769):
   → Możliwe na wniosek strony — złóż wniosek razem z odwołaniem lub przed rozprawą
 
 TERMIN ROZPOZNANIA przez KIO:
-  15 dni od doręczenia odwołania Prezesowi KIO (termin instrukcyjny — art. 544 PZP)
+  15 dni od doręczenia odwołania Prezesowi KIO (termin instrukcyjny — art. 544 ust. 1 PZP);
+  po wezwaniu z art. 518 ust. 1 — liczony od poprawienia / uzupełnienia odwołania
 ```
 
 ### Skarga do Sądu Zamówień Publicznych

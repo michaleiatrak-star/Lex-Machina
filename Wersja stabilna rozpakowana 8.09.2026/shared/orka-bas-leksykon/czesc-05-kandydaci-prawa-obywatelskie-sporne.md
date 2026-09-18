@@ -37,7 +37,7 @@ BAS-116  Dzieło / utwór w regulacjach antykryzysowych (COVID-19)
   web_search: "utwór tarcza antykryzysowa definicja dofinansowanie 2020 2021"
 
 BAS-117  Godziny ponadwymiarowe nauczycieli
-  Kierunek: Karta Nauczyciela art. 35 (Dz.U. 2023 poz. 984 t.j. — weryfikuj)
+  Kierunek: Karta Nauczyciela art. 35 (**Dz.U. 2026 poz. 515 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj)
   web_search: "godziny ponadwymiarowe nauczyciel Karta Nauczyciela art 35 2025"
 
 BAS-119  Przedsiębiorca
@@ -50,7 +50,7 @@ BAS-120  Powierzenie cudzoziemcowi nielegalnego wykonywania pracy
   web_search: "powierzenie pracy cudzoziemcowi nielegalna ustawa definicja sankcje 2025"
 
 BAS-122  Żołnierz (definicja ustawowa)
-  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2022 poz. 2305 t.j. — weryfikuj)
+  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (**Dz.U. 2025 poz. 825 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
   web_search: "żołnierz definicja ustawa o obronie ojczyzny 2025"
 
 BAS-123  Choroba zawodowa
@@ -187,7 +187,7 @@ DEFINICJE USTAWOWE (art. 115 §5–6 KK):
 ⚠️ ALERT — ZAMROŻONE OD 2010 r. — POTWIERDZONE 2026-06-12:
   Kwoty NIEZMIENIONE od nowelizacji KK w 2010 r. (Dz.U. 2010 poz. 625)
   200 000 zł w 2010 = ~152× minimalne wynagrodzenie (1 317 zł)
-  200 000 zł w 2026 = ~42× minimalne wynagrodzenie (~4 750 zł)
+  200 000 zł w 2026 ≈ 41,6× minimalne wynagrodzenie (**4 806 zł**, rozp. RM Dz.U. 2025 poz. 1242 — ⛔ poprzedni zapis „~4 750 zł" był błędny)
   → Realna wartość progów radykalnie spadła; coraz więcej spraw
     kwalifikuje jako "mienie znacznej wartości" mimo mniejszej wagi
 

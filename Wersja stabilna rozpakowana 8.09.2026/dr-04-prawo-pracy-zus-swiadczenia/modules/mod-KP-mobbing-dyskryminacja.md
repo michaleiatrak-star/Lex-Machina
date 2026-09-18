@@ -17,7 +17,26 @@
 
 ## ANEKS A — MOBBING I DYSKRYMINACJA (art. 94³ i art. 18³a-18³e KP)
 
-### ⚡⚡ ZNALEZISKO 2026-07-30 — REFORMA PODPISANA PRZEZ PREZYDENTA DZIŚ
+### ⛔⛔ REFORMA ANTYMOBBINGOWA — W VACATIO LEGIS DO 4.11.2026
+
+Odczyt RZĄD 1 (`api.sejm.gov.pl/eli/acts/DU/2026/1046`, 2026-09-10):
+**ogłoszenie 4.08.2026, WEJŚCIE W ŻYCIE 5.11.2026.**
+
+| Zdarzenie | Stan prawny |
+|---|---|
+| **przed 5.11.2026** | ⛔ **STARE** brzmienie art. 94³ KP: wymóg rozstroju zdrowia, brak minimum zadośćuczynienia, brak art. 477⁶ᵃ KPC |
+| **od 5.11.2026** | nowe brzmienie — wiersze oznaczone „PO REFORMIE" w tabeli niżej |
+
+⛔ **Data 30.07.2026 to podpis Prezydenta, nie wejście w życie.** Wcześniejsza
+wersja tego modułu używała jej jako cezury („PO REFORMIE (od 30.07.2026)"), co
+przy sprawie z sierpnia albo września 2026 prowadziło do zastosowania przepisu,
+który jeszcze nie obowiązuje. To jest błąd zakresu czasowego normy — klasa,
+której pilnuje OŚ-GATE, popełniony w samym module.
+
+⚠️ „Status: obowiązujący" w ELI znaczy tylko tyle, że akt nie został uchylony.
+Data wejścia w życie jest osobnym polem i to ona rozstrzyga.
+
+### ⚡ ZNALEZISKO 2026-07-30 — REFORMA PODPISANA PRZEZ PREZYDENTA
 
 **Ustawa antymobbingowa** (zmiana KP + KPC) PODPISANA przez Prezydenta
 Karola Nawrockiego **30.07.2026** (DZIŚ na dzień tej weryfikacji) —
@@ -25,22 +44,19 @@ wchodzi w życie za 3 miesiące od ogłoszenia. PEŁNA analiza zmian
 (nowa definicja, kwota 6× minimalne wynagrodzenie ≈28 836 zł, próg 9
 pracowników, prawo regresu, nowy art. 477⁶ᵃ KPC) →
 `shared/definicje/DEF-PRACA.md`, sekcja MOBBING — TAM jest KANONICZNA
-treść, NIE duplikuj tutaj. Poniższa tabela w tym module OPISUJE STAN
-SPRZED reformy — WYMAGA AKTUALIZACJI do nowej definicji przy
-najbliższej okazji (odnotowane jako TODO, nie naprawione w całości w
-tej turze z uwagi na architekturę deduplikacji — kwalifikator
-różnicujący poniżej pozostaje częściowo aktualny, ALE wiersz
-"Powtórzalność" i "Min. odszkodowanie" dla mobbingu wymagają
-korekty zgodnie z nową definicją).
+treść, NIE duplikuj tutaj. ✅ **TODO ZAMKNIĘTE 2026-09-10.** Wiersze „Powtarzalność" i „Min. odszkodowanie"
+niosą już oba stany z jawną cezurą czasową. Zdanie „tabela OPISUJE STAN SPRZED
+reformy" było nieaktualne wobec własnej treści tabeli — moduł przeczył sam sobie,
+ta sama klasa co rozjazd nagłówek/treść z AUDYT-2026-09-10h.
 
 ### Rozróżnienie czynów — kwalifikator
 
 | Cecha | Mobbing (art. 94³ KP) | Dyskryminacja (art. 18³a KP) | Molestowanie seksualne (art. 18³a §6 KP) |
 |---|---|---|---|
 | Cecha chroniona | NIE | TAK (płeć, wiek, religia, niepełnosprawność itd.) | TAK |
-| Powtarzalność | ⚠️ PO REFORMIE (od 30.07.2026): "nawracający, powtarzający się lub stały" charakter, BEZ WZGLĘDU na skutki/motywacje (dawniej: uporczywe + długotrwałe, OBA łącznie) — patrz DEF-PRACA.md | NIE — jednorazowe wystarczy | NIE |
+| Powtarzalność | ⚠️ **OD 5.11.2026**: "nawracający, powtarzający się lub stały" charakter, BEZ WZGLĘDU na skutki/motywacje (dawniej: uporczywe + długotrwałe, OBA łącznie) — patrz DEF-PRACA.md | NIE — jednorazowe wystarczy | NIE |
 | Ciężar dowodu | **Pracownik — przez cały proces** | Pracownik uprawdopodabnia → ciężar PRZESUWA SIĘ na pracodawcę | Pracodawca NIE może uzasadnić obiektywnie |
-| Min. odszkodowanie | ⚠️ PO REFORMIE: **6× minimalne wynagrodzenie** (≈28 836 zł, 2026) — dawniej: brak minimum | min. wynagrodzenie za pracę | min. wynagrodzenie za pracę |
+| Min. odszkodowanie | ⚠️ **OD 5.11.2026**: **6× minimalne wynagrodzenie** — ⛔ kwota złotowa zależy od minimalnego wynagrodzenia w dacie orzekania, sprawdzić w rozporządzeniu RM; do 4.11.2026: **brak minimum** | min. wynagrodzenie za pracę | min. wynagrodzenie za pracę |
 
 ### Definicja i przesłanki mobbingu
 

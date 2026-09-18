@@ -1,5 +1,38 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.77 — 2026-09-16 — F-189
+
+- ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Accept: application/xhtml+xml zwraca cały akt (RODO, 650/2012, AI Act, NIS2, DORA — zmierzone). terminy.md — nowa sekcja „Akty UE poza RODO” (EPS art. 70; AI Act art. 73: 15/2/10 dni) oraz podniesione do RZĘDU 1 wiersze RODO art. 78 ust. 2–3 i art. 83 ust. 3–6.
+## 3.76 — 2026-09-16 — F-189
+
+- DOSTEP-MASZYNOWY-API — sekcja SAOS: pomiar dostępności 2026-09-17s (F-171): /api/search/judgments z caseNumber, /api/judgments/{id} i /api/dump/judgments → 200 (regresja 502 z 2026-09-09 ustąpiła); ⛔ kanał NIESTABILNY — 5 z 8 wywołań bez odpowiedzi, wymagane powtórzenie min. 3 prób przed uznaniem sygnatury za niesprawdzalną; potwierdzone OUT_OF_SCOPE dla NSA/WSA 2021–2023.
+## 3.75 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „RODO — terminy odczytane z EUR-Lex” (F-135; RZĄD 1 — tekst skonsolidowany 02016R0679): art. 12 ust. 3–4, 14 ust. 3, 33 ust. 1–2 (72 h po STWIERDZENIU, z wyjątkiem „mało prawdopodobne ryzyko”), 34, 36 ust. 2, 42 ust. 7, 43 ust. 4; art. 78 ust. 2 i 83 oznaczone 🟨 jako nieodczytane. ORKA-BAS — doprecyzowany art. 33 ust. 1.
+## 3.74 — 2026-09-16 — F-189
+
+- terminy.md — wiersz o orzeczeniach pielęgniarki i fizjoterapeuty (od 13.04.2026, art. 85a ust. 2 SUS; w okresie przejściowym odpowiednio przepisy o lekarzach orzecznikach — art. 34 ustawy 2026/26). ⚠️ Fragment pojawił się w kopii roboczej bez autorstwa sesji (wykryty przez T21); zweryfikowany odczytem RZĄD 1 i zachowany — AUDYT-2026-09-17p.
+## 3.73 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Prawo pracy i ubezpieczeń — ustawy szczególne” (F-135; RZĄD 1): zwolnienia grupowe (2026/1195), sygnaliści (2024/928), praca tymczasowa (2025/236), ZUS/KPC/KSCU — 16 wierszy; wiersz „sprzeciw — art. 14 ust. 2a–2c FUS” uzupełniony o datę graniczną 31.12.2026 i art. 85f SUS od 1.01.2027 (korekta 16f — pominięty KROK 2C).
+## 3.72 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Sprawy rodzinne — terminy KRO i KPC poza pochodzeniem dziecka” (F-135; RZĄD 1 — KRO 2026/236, KPC 2026/468): 14 wierszy (art. 8 § 3, 59, 60 § 3, 73 § 1, 172 KRO; art. 428, 456, 554, 579¹, 583¹, 592, 183⁸, 183¹⁰, 598⁵ KPC).
+## 3.71 — 2026-09-16 — F-189
+
+- terminy.md (F-135; RZĄD 1 — KPA 2025/1691, PPSA 2026/143 + 2026/846): KPA — art. 156 § 2 (10 lat), 158 § 3 (30 lat), 189g; PPSA — art. 53 § 1 z pkt 4a/4b (interpretacja: 30 dni, nie 14), 54 § 2–3, 64c § 4–5, 64d, 177a, 259. definicje/DEF-PROCEDURA — ⛔ „art. 128 KPA — odwołanie” → art. 129 § 2; ⛔ „art. 33 UPEA — zarzuty 7 dni” usunięte.
+## 3.70 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Ochrona danych osobowych — krajowa ustawa (u.o.d.o.)” (F-135; RZĄD 1 — t.j. 2019/1781 + KROK 2C; KPA 2025/1691): 11 wierszy (IOD 14 dni, art. 35 § 3 KPA, jednoinstancyjność i skarga 30 dni, środek tymczasowy, czynności sprawdzające, kontrola, kara — zapłata, dane, sektor publiczny); ostrzeżenia: art. 237 KPA nie jest podstawą, art. 50 ust. 4 u.o.d.o. nie istnieje, terminy RODO niezweryfikowane.
+## 3.69 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Krajowy system cyberbezpieczeństwa (KSC, po wdrożeniu NIS2)” (F-135; RZĄD 1 — t.j. 2026/20 + nowelizacja 2026/252): 24 h / 72 h / miesiąc (art. 11 ust. 1 pkt 4–4c, ust. 1a, art. 12b), terminy przejściowe z art. 33 ustawy zmieniającej (3.10.2026, 3.04.2027, 3.04.2028), wpis według harmonogramu ministra.
+## 3.68 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Zamówienia publiczne (PZP) — środki ochrony prawnej” (F-135; RZĄD 1 — PZP 2026/793, KPC 2026/468, KSCU 2025/1228): art. 515 ust. 1–4, 514 ust. 2, 517 ust. 2, 518, 525, 544, 580, 585, 590 + art. 398⁵ KPC, art. 34 KSCU, art. 138; ostrzeżenia o art. 577/457 i o równoważności nadania pocztowego.
+## 3.67 — 2026-09-16 — F-189
+
+- terminy.md — nowa sekcja „Postępowanie spadkowe (KPC)” (F-135; RZĄD 1 — KPC 2026/468 + KROK 2C): art. 673 pkt 4, 675–676, 679 § 1 (tylko uczestnik), 668¹, 640 § 1; ⛔ prekluzja w dziale spadku (art. 688 w zw. z art. 618 § 3).
 ## 3.66 — 2026-09-16 — F-189
 
 - terminy.md — nowa sekcja „Kodeks karny skarbowy (KKS) — terminy i progi” (F-135; RZĄD 1 — KKS 2025/633 + KROK 2C: 2026/347, 421, 846, 901): karalność art. 44 i 51, terminy zapłaty art. 16–16a, dobrowolne poddanie się art. 142–144, grzywna art. 48, progi art. 53, art. 27, mandat karny zaoczny (od 26.12.2026).

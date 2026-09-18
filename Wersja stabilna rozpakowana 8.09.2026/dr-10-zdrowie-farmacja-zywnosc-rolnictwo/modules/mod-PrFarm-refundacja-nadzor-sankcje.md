@@ -5,8 +5,16 @@
 
 > **Zasada absolutna:** Każdy artykuł weryfikować w isap.sejm.gov.pl.
 > Prawo farmaceutyczne zmieniane jest kilka razy rocznie — NIGDY nie cytuj z pamięci.
-> Aktualne t.j.: Prawo farmaceutyczne **Dz.U. 2026 poz. 612**;
-> Ustawa refundacyjna **Dz.U. 2025 poz. 907**.
+> Aktualne t.j. ✅ [VER] RZĄD 1 2026-09-10h (`api.sejm.gov.pl/eli`):
+> Prawo farmaceutyczne **Dz.U. 2026 poz. 612** — ⛔ KROK 2C: trzy nowelizacje po
+> tekście jednolitym (Dz.U. 2026 poz. 791, 1004, 1079);
+> Ustawa refundacyjna **Dz.U. 2026 poz. 253** — ⛔ KROK 2C: jedna nowelizacja po
+> tekście jednolitym (Dz.U. 2026 poz. 791, ustawa z 15.05.2026 o rozwoju usług e-zdrowia).
+>
+> ⛔ **BŁĄD SKORYGOWANY 2026-09-10h:** nagłówek podawał ustawę refundacyjną jako
+> `Dz.U. 2025 poz. 907` — to tekst jednolity o statusie **wygaśnięcie aktu**,
+> zastąpiony przez 2026/253. Sekcja 1 tego samego modułu podawała już numer
+> właściwy, więc moduł **sam sobie przeczył**: nagłówek mówił co innego niż treść.
 
 ---
 
@@ -174,6 +182,58 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 
 ---
 
+## ŹRÓDŁO WYKAZU: KTÓRY LEK, JAKA ODPŁATNOŚĆ, DLA KOGO
+
+⛔ **Ustalone 2026-09-10h. Pomiar dwukanałowy wykonany (Reguła 12d/REM-0).**
+
+Pytanie „czy ten lek jest refundowany, na jakim poziomie i dla kogo" ma **jedno
+źródło rozstrzygające**: obwieszczenie Ministra Zdrowia wydawane na podstawie
+**art. 37 ust. 1 ustawy o refundacji**. Wykaz jest **załącznikiem** do
+obwieszczenia — nie stroną internetową, nie wyszukiwarką.
+
+| Kanał | Co daje | Rząd | Pomiar 2026-09-10h |
+|---|---|---|---|
+| **Dziennik Urzędowy Ministra Zdrowia** `dziennikmz.mz.gov.pl` | miejsce **urzędowego ogłoszenia** obwieszczenia — źródło rozstrzygające | **RZĄD 1** | HTTP 200, ⛔ **aplikacja jednostronicowa** — treść nie wychodzi prostym pobraniem, wymaga przeglądarki |
+| `gov.pl/web/zdrowie/obwieszczenia-ministra-zdrowia-lista-lekow-refundowanych` | hub z **załącznikami XLSX i PDF** każdego obwieszczenia + zestawienia zmian cen i dopłat | RZĄD 2A | HTTP 200, HTML ~33 kB; **XLSX ≈1 MB to jedyny praktycznie przetwarzalny wariant wykazu** (PDF ≈97 MB) |
+| `ezdrowie.gov.pl` — dane refundacyjne | dane dla systemów gabinetowych + komunikaty o korektach wskazań między obwieszczeniami | RZĄD 2A | HTTP 200 |
+| `nfz.gov.pl`, `pacjent.gov.pl` | wyjaśnienie poziomów odpłatności i uprawnień dodatkowych | RZĄD 2A | HTTP 200 |
+| `api.nfz.gov.pl/app-stat-api-ra/` | ⚠️ **statystyka wykonanej refundacji**, nie wykaz | RZĄD 2A | HTTP 200 |
+
+⛔ **`api.nfz.gov.pl` NIE odpowiada na pytanie o refundację leku.** Zwraca dane
+o zrealizowanych receptach i kosztach — czyli co refundowano, nie co podlega
+refundacji. Użycie go jako podstawy odpowiedzi jest błędem kategorii źródła.
+
+⛔ **Komercyjne wyszukiwarki leków refundowanych są RZĘDU 3.** Bywają wygodne
+i bywają aktualne, ale ich zgodność z obwieszczeniem nie jest niczym gwarantowana.
+Nie stanowią podstawy odpowiedzi — najwyżej trop do sprawdzenia w załączniku.
+
+### Trzy elementy odpowiedzi — gdzie który stoi
+
+```
+1. CZY refundowany       → załącznik do obwieszczenia (XLSX), pozycja wykazu
+2. NA JAKIM POZIOMIE     → kolumna poziomu odpłatności przy tej pozycji
+                           (bezpłatny / ryczałt / 30% / 50%) + LIMIT FINANSOWANIA
+3. DLA KOGO              → kolumna wskazań refundacyjnych przy tej pozycji
+                           + oznaczenie uprawnienia dodatkowego (np. 65+, ciąża,
+                             do 18. r.ż.) ⚠️ oznaczenia i progi wiekowe
+                             WERYFIKUJ w załączniku — zmieniały się
+```
+
+⛔ **Poziom odpłatności NIE wystarcza do podania kwoty.** Dopłata pacjenta zależy
+od relacji ceny detalicznej do **limitu finansowania** grupy limitowej: przy cenie
+powyżej limitu pacjent dopłaca nadwyżkę ponad limit. Odpowiedź „lek jest na 50%,
+więc zapłaci połowę" jest fałszywa w typowym przypadku.
+
+⛔ **Wykaz zmienia się cyklicznie**, a między obwieszczeniami wychodzą sprostowania
+i obwieszczenia zmieniające. Data obwieszczenia i data, na którą wykaz ustalono,
+to **dwie różne daty** — w powołaniu podawać obie.
+
+⚠️ Struktura załączników (podział na listy apteczne, programy lekowe, chemioterapię
+i listy dla grup uprawnionych) **nie jest tu odtwarzana z pamięci** — odczytać
+z konkretnego obwieszczenia, bo bywa zmieniana.
+
+---
+
 ## POWIĄZANIA
 
 | Sytuacja | Skill / Moduł |
@@ -191,7 +251,10 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 |---|---|---|
 | ISAP — teksty jednolite | isap.sejm.gov.pl | PF, ustawa refundacyjna |
 | GIF | gif.gov.pl | Decyzje, kontrole, wycofania, wytyczne |
-| Lista leków refundowanych | mz.gov.pl → refundacja | Aktualne obwieszczenia MZ |
+| **Wykaz leków refundowanych — ogłoszenie urzędowe** | `dziennikmz.mz.gov.pl` | **RZĄD 1**; ⛔ SPA — treść wymaga przeglądarki |
+| **Wykaz leków refundowanych — załączniki XLSX/PDF** | `gov.pl/web/zdrowie/obwieszczenia-ministra-zdrowia-lista-lekow-refundowanych` | RZĄD 2A; XLSX ≈1 MB — jedyny przetwarzalny wariant |
+| Dane refundacyjne dla systemów | `ezdrowie.gov.pl` | RZĄD 2A; korekty wskazań między obwieszczeniami |
+| Poziomy odpłatności i uprawnienia | `nfz.gov.pl`, `pacjent.gov.pl` | RZĄD 2A; wyjaśnienia, nie wykaz |
 | NFZ — refundacja | nfz.gov.pl | Umowy, realizacja recept |
 | RPP | gov.pl/web/rpp | Skargi pacjentów |
 | Orzeczenia NSA farm. | orzeczenia.nsa.gov.pl | Wyroki w sprawach farmaceutycznych |

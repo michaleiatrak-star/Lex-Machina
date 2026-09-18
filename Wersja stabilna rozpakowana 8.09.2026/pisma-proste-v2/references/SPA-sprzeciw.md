@@ -1,15 +1,21 @@
 # SPA — Sprzeciw od Nakazu Zapłaty
 
 *Ładuj gdy: użytkownik chce wnieść sprzeciw od nakazu zapłaty (tryb upominawczy
-lub EPU). Termin zawity: **14 dni** od daty doręczenia nakazu (art. 503 §1 KPC).*
+lub EPU). Termin: **2 tygodnie** od doręczenia nakazu przy doręczeniu w kraju,
+**miesiąc** przy doręczeniu poza krajem na terytorium UE — art. 480² § 2 pkt 1–2 KPC.
+⛔ art. 503 KPC jest UCHYLONY (odczyt treści `Dz.U. 2026 poz. 468`, 2026-09-12d).*
 
 ---
 
 ## PODSTAWA PRAWNA
 
-- **art. 503 §1 KPC** — sprzeciw od nakazu zapłaty w postępowaniu upominawczym
+- **art. 505 § 1 KPC** — dopuszczalność sprzeciwu od nakazu w postępowaniu upominawczym
+- **art. 480² § 2 pkt 1–2 KPC** — TERMIN (2 tygodnie w kraju / miesiąc w UE poza krajem)
+- **art. 480³ § 1–3 KPC** — tryb wniesienia i rygor odrzucenia środka spóźnionego,
+  nieopłaconego albo dotkniętego brakami
+- ⛔ **art. 500–504 KPC są UCHYLONE** — powoływanie art. 503 jest błędem
 - **art. 505³ §3 KPC** — sprzeciw od nakazu w EPU (elektroniczne postępowanie upominawcze)
-- Brak opłaty sądowej jeśli sprzeciw wniesiony w terminie (art. 505³ §3 KPC / art. 503 KPC)
+- Sprzeciw nie jest wymieniony wśród pism opłacanych w art. 19 KSCU — brak opłaty
 
 > ⚠ Weryfikuj aktualność przepisów na isap.sejm.gov.pl przed użyciem.
 

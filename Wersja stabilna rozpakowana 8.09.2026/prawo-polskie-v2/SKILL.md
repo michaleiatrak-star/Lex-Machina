@@ -1,18 +1,13 @@
 ---
 name: prawo-polskie-v2
-version: "6.8"
+version: "6.26"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.8 (2026-09-01i, F-155): propagacja trzech korekt t.j. do ROUTING-MAP — świadczenie wspierające Dz.U. 2026 poz. 873, wyroby medyczne Dz.U. 2024 poz. 1620, Aktywny Rodzic Dz.U. 2026 poz. 532 (poz. 2026.532 figurowała błędnie wśród nowelizacji).
-  Wersja 6.7. Historia — references/CHANGELOG.md (plik założony
-  2026-08-23g; wersje sprzed 6.2 nieodtworzone — LUKA JAWNA, ślad wyłącznie
-  w audyt-systemu-v4/references/AUDIT-JOURNAL.md).
-  Skrót: 6.7 — F-108 domknięte 52/52 B+/COV przez current-state KW/SUS/zasiłkową/zwolnienia grupowe; 6.6 — F-108 P1/41, P1/8 i P1/52 + korekta metryki KC/UFG; 6.5 — moduł transakcji handlowych (F-108/46); 6.2 — zapisana decyzja o zakresie shared/PRAWO-HARDGATE.md w tym
-  skillu, rozdzielna dla SKILL.md (nie obowiązuje) i ROUTING-MAP.md
-  (reżim mapy: FAZA 3 + ZASADA 8 + REGUŁA 3) — flaga F-123.
+  Wersja bieżąca: 6.26 (2026-09-16, F-189): ROUTING-MAP — wiersz alkohol/tytoń: t.j. ustawy tytoniowej `2024/1162` → `2026/1214` (ogłoszony 16.09.2026; T15 NEWER_TJ; RZĄD 1).…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

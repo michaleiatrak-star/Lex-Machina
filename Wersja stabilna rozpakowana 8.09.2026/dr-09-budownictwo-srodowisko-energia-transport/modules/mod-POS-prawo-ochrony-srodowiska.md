@@ -46,13 +46,13 @@ odpowiedzialność karna za przestępstwa przeciwko środowisku (KK art. 181–1
 
 | Akt | Sygnatura t.j. / Uwagi |
 |---|---|
-| **Ustawa o udostępnianiu informacji o środowisku (UOOŚiS)** | **Dz.U. 2026 poz. 670 t.j.** (obwieszczenie 14.06.2024) — OOŚ, DŚU, udział społeczeństwa |
-| **Prawo ochrony środowiska (POŚ)** | **Dz.U. 2025 poz. 647 t.j.** (obwieszczenie 9.05.2025) + nowelizacja Dz.U. 2025 poz. 1812 — pozwolenia, emisje, IPPC |
-| **Ustawa o odpadach** | **Dz.U. 2023 poz. 1587 t.j.** + nowelizacje Dz.U. 2024 poz. 1834 i Dz.U. 2024 poz. 1914 — weryfikuj aktualny stan w isap |
-| **Ustawa o ochronie przyrody** | **Dz.U. 2026 poz. 13 t.j. z 08.01.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2024 poz. 1478)** — parki, rezerwaty, Natura 2000, gatunki chronione |
-| **Ustawa o zapobieganiu szkodom w środowisku i ich naprawie** | **t.j. Dz.U. 2020 poz. 2187** ✅ VER 2026-08-24 RZĄD 1 (ISAP WDU20200002187 — obwieszczenie Marszałka Sejmu z 18.11.2020, zastępuje t.j. Dz.U. 2019 poz. 1862) + RZĄD 2B (prawo.pl, infor.pl) + źródło rządowe (pgi.gov.pl). ⚠️ KOREKTA 2026-08-24 (F-125): wcześniej stało „Dz.U.2007.75.493 — **brak nowszego t.j.**” — twierdzenie NIEPRAWDZIWE, sprzeczne z własną mapą centralną, która od dawna oznaczała rocznik 2007 jako `PREV`. Zapis w notacji LEX ukrywał to przed testami T3/T11 (ślepota naprawiona przy F-125). ⚠️ NIEUSTALONE, czy po 2020 r. ogłoszono kolejny t.j. — zweryfikuj w ISAP przed powołaniem |
-| **Kodeks karny art. 181–188a** | **Dz.U. 2025 poz. 383 t.j.** — przestępstwa przeciwko środowisku |
-| **KPA** | Postępowanie przed organami ochrony środowiska |
+| **Ustawa o udostępnianiu informacji o środowisku (UOOŚiS)** | **Dz.U. 2026 poz. 670 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — obwieszczenie z 15.05.2026 (wcześniejszy zapis podawał datę 14.06.2024 — błędna), najnowszy. ⛔ KROK 2C: **1** nowelizacja po nim — Dz.U. 2026 poz. 1097 — OOŚ, DŚU, udział społeczeństwa |
+| **Prawo ochrony środowiska (POŚ)** | **Dz.U. 2025 poz. 647 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy. ⛔ KROK 2C: **9** nowelizacji po tekście jednolitym — Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982 (wcześniejszy zapis wymieniał tylko 2025/1812) — pozwolenia, emisje, IPPC |
+| **Ustawa o odpadach** | **Dz.U. 2023 poz. 1587 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy tekst jednolity. ⛔ KROK 2C: **10** nowelizacji po nim — Dz.U. 2023 poz. 1597, 1688, 1852, 2029; 2024 poz. 1834, 1911, 1914; 2025 poz. 1812; 2026 poz. 174, 815 (wcześniejszy zapis wymieniał dwie). Tekst jednolity z 2023 r. jest tu szczególnie zwodniczy |
+| **Ustawa o ochronie przyrody** | **Dz.U. 2026 poz. 13 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy (poprzedni: Dz.U. 2024 poz. 1478). ⛔ KROK 2C: **3** nowelizacje po nim — Dz.U. 2026 poz. 426, 737, 912 — parki, rezerwaty, Natura 2000, gatunki chronione |
+| **Ustawa o zapobieganiu szkodom w środowisku i ich naprawie** | **t.j. Dz.U. 2020 poz. 2187** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy, **ZERO** nowelizacji po tekście jednolitym (potwierdzone `/references`); poprzednio VER 2026-08-24 (ISAP WDU20200002187 — obwieszczenie Marszałka Sejmu z 18.11.2020, zastępuje t.j. Dz.U. 2019 poz. 1862) + RZĄD 2B (prawo.pl, infor.pl) + źródło rządowe (pgi.gov.pl). ⚠️ KOREKTA 2026-08-24 (F-125): wcześniej stało „Dz.U.2007.75.493 — **brak nowszego t.j.**” — twierdzenie NIEPRAWDZIWE, sprzeczne z własną mapą centralną, która od dawna oznaczała rocznik 2007 jako `PREV`. Zapis w notacji LEX ukrywał to przed testami T3/T11 (ślepota naprawiona przy F-125). ⚠️ NIEUSTALONE, czy po 2020 r. ogłoszono kolejny t.j. — zweryfikuj w ISAP przed powołaniem |
+| **Kodeks karny art. 181–188a** | **Dz.U. 2025 poz. 383 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy. ⛔ KROK 2C: **4** nowelizacje po nim — Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988 |
+| **KPA** | **Dz.U. 2025 poz. 1691 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy, zero nowelizacji po tekście jednolitym. Postępowanie przed organami ochrony środowiska |
 | **Rozporządzenie OOŚ** | Rozporządzenie Rady Ministrów w sprawie przedsięwzięć — weryfikuj aktualny t.j. w isap |
 
 ---

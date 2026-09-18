@@ -61,8 +61,9 @@ TYP B — MANDAT KARNY (KPSW art. 95–102):
 TYP C — ADMINISTRACYJNA KARA PIENIĘŻNA (KPA Dział IVa — art. 189a–189k):
   → Nakładana w trybie administracyjnym decyzją organu administracji
   → Zasady: proporcjonalność, przesłanki wymiaru, dyrektywy (KPA art. 189d — weryfikuj)
-  → Termin przedawnienia WSZCZĘCIA postępowania: 5 lat od naruszenia (art. 189g KPA)
-  → Termin przedawnienia NAŁOŻENIA: weryfikuj art. 189g–h KPA
+  → Kara NIE MOŻE ZOSTAĆ NAŁOŻONA po 5 latach od naruszenia albo wystąpienia jego skutków
+    (art. 189g § 1 KPA) — chyba że przepis odrębny przewiduje termin wszczęcia (§ 2)
+  → Kara nie podlega egzekucji po 5 latach od dnia, w którym powinna być wykonana (§ 3) — ✅ [VER] RZĄD 1 2026-09-16m
   → Tryb: postanowienie/decyzja → odwołanie do organu II stopnia → SKO lub organ wyższy → WSA → NSA
   → Ulgi: odstąpienie, rozłożenie na raty, odroczenie (art. 189k KPA)
   → Weryfikuj: isap.sejm.gov.pl → KPA → Dział IVa (art. 189a–189k)
@@ -171,7 +172,7 @@ ODMÓW NA MIEJSCU gdy:
 
 SKUTEK ODMOWY:
   → Organ sporządza wniosek o ukaranie → SR → tryb nakazowy LUB rozprawa
-  → Wyrok nakazowy: SPRZECIW w 7 dni od doręczenia (ZAWITY — art. 94 KPSW)
+  → Wyrok nakazowy: SPRZECIW w 7 dni od doręczenia (ZAWITY — art. 94 § 1 KPW w zw. z art. 506 § 1 KPK)
   → Po sprzeciwie: rozprawa + obecność, możliwość obrony
 ```
 
@@ -218,8 +219,8 @@ ULGI (art. 189k KPA):
   → Umorzenie kary (art. 189l KPA)
 
 TERMINY PRZEDAWNIENIA:
-  → Wszczęcie postępowania: 5 lat od naruszenia (art. 189g §1 KPA — weryfikuj)
-  → Nałożenie kary: weryfikuj art. 189g–189h KPA
+  → Nałożenie kary: nie po 5 latach od naruszenia lub jego skutków (art. 189g § 1 KPA)
+  → Egzekucja: nie po 5 latach od terminu wykonania (art. 189g § 3 KPA)
   → Egzekucja: 5 lat od dnia, w którym kara stała się wymagalna (weryfikuj)
 
 TRYB ZASKARŻENIA:

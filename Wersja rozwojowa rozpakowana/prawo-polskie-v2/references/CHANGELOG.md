@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.26 (2026-09-16, F-189): ROUTING-MAP — wiersz alkohol/tytoń: t.j. ustawy tytoniowej `2024/1162` → `2026/1214` (ogłoszony 16.09.2026; T15 NEWER_TJ; RZĄD 1).
 - 6.25 (2026-09-16, F-189): ROUTING-MAP — ustawa o przeciwdziałaniu przemocy domowej: wygasły t.j. `2021/1249` → `2024/1673` w dwóch wierszach (KK art. 207; przemoc domowa szczegółowo) — RZĄD 1; T27.
 - 6.24 (2026-09-16, F-189): ROUTING-MAP — T31 (RZĄD 1): PODMIANY AKTU usunięte w 5 wierszach (UOKiK → 2025/1714; Prawo energetyczne → 2026/43; „Prawo gazowe” → Prawo energetyczne 2026/43; charakterystyka energetyczna → 2024/101; rolnictwo ekologiczne → 2023/1235); nazwy wierszy poprawione (ustawa o zapewnianiu dostępności 2024/1411; PUSP + ustawa o kuratorach sądowych 2026/200); nowy wiersz — ustawa o opłacie skarbowej (2025/1154).
 - 6.23 (2026-09-16, F-189): ROUTING-MAP — wiersze F-190: podatek od kopalin → nowy moduł dr-06; poz. 516 → sekcja w dr-09 (pokryte); działalność lecznicza — numer t.j. w modułach dr-10. Znacznik T28-OK przy wierszu dokumentującym podmianę aktu.

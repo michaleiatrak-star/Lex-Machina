@@ -26,8 +26,13 @@ Wysokość:
   ½ wartości udziału spadkowego (co do zasady)
   ⅔ wartości udziału — gdy uprawniony jest trwale niezdolny do pracy lub małoletni
 
-Termin przedawnienia: 5 lat od ogłoszenia testamentu (art. 1007 KC)
-  ⚠️ Weryfikuj aktualne brzmienie w ISAP.
+Termin przedawnienia — 5 lat, ale punkt startowy zależy od zobowiązanego (art. 1007 KC):
+  § 1 — wobec spadkobierców (oraz zmniejszenie zapisów zwykłych i poleceń): od OGŁOSZENIA TESTAMENTU
+  § 2 — wobec obdarowanego / zapisobiercy windykacyjnego: od OTWARCIA SPADKU
+  § 3 — wobec fundacji rodzinnej (fundusz założycielski): od OTWARCIA SPADKU
+  § 4 — wobec osoby, która otrzymała mienie przy rozwiązaniu fundacji rodzinnej: od OTWARCIA SPADKU
+  ⛔ Przy dziedziczeniu ustawowym brak testamentu do ogłoszenia — § 1 nie wyznacza wtedy
+  daty; ustal ją przy sprawie (odczyt treści + orzecznictwo). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 
 Zobowiązani: spadkobiercy (i obdarowani przy darowiznach zaliczanych do substratu)
 

@@ -172,7 +172,7 @@ Ustawa o CBA: Dz.U. 2025 poz. 712 t.j. (obwieszczenie Marszałka Sejmu z 10.04.2
   ✅ VER: isap.sejm.gov.pl (WDU20250000712), infor.pl, lexlege.pl 2026-08-14 (F-57)
 Ustawa o SOP: Dz.U. 2025 poz. 34 t.j. ze zm.
   → Dz.U. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy SOP
-Ustawa o działaniach antyterrorystycznych: Dz.U. 2024 poz. 1474 t.j. — weryfikuj
+Ustawa o działaniach antyterrorystycznych: **Dz.U. 2025 poz. 194 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a; poprzednio błędnie 2024/1474 — obwieszczenie MS o t.j. ROZPORZĄDZENIA, inny akt; ⛔ KROK 2C: nowelizacja po tekście jednolitym, Dz.U. 2026 poz. 815 — akt zmieniający) t.j. — weryfikuj
   ✅ VER: isap.sejm.gov.pl 2026-06-05 (poz. ABW/AW/SOP/antyterrorystyczna nie objęte
     weryfikacją F-57 — dotyczyła wyłącznie CBA)
 

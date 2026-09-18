@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.44"
+version: "3.52"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -65,9 +65,14 @@ escalation:
     shared/DOSTEP-MASZYNOWY-API.md §4: KRS działa bez klucza przez
     api-krs.ms.gov.pl (odpis JSON jest ZANONIMIZOWANY względem PDF),
     a CEIDG zwraca 401 bez tokenu — to nie jest brak dostępu do rejestru"
-  - "weryfikacja rachunku kontrahenta (biała lista VAT) → ⛔ NIEOSIĄGALNA
-    maszynowo w tym środowisku (wl-api.mf.gov.pl poza listą, F-157).
-    Wykonaj ręcznie i oznacz ⚠️ [NIEWERYFIKOWANE MASZYNOWO] — nie pomijaj w ciszy"
+  - "weryfikacja rachunku kontrahenta (biała lista VAT) → ✅ OSIĄGALNA
+    maszynowo od 2026-09-13c (F-157b): wl-api.mf.gov.pl, bez klucza,
+    /api/search/nip/{NIP}?date=RRRR-MM-DD oraz /api/search/nip-bank-account/
+    {NIP}/{26_CYFR}?date=... ⛔ data = dzień transakcji, nie dzisiejszy;
+    requestId z odpowiedzi zapisz do śladu weryfikacji. Parametry:
+    shared/DOSTEP-MASZYNOWY-API.md §4. ⚠️ Poprzedni zapis 'NIEOSIĄGALNA,
+    brak zamiennika' był prawdziwy do 2026-09-04 i przestał być prawdziwy
+    bez zmiany w tym pliku — statusy osiągalności odtwarzaj testem T25"
 limitations:
   - nie zastępuje porady radcy prawnego/adwokata — patrz shared/DISCLAIMER.md (KROK 7, obowiązkowy)
   - jakość i czas odpowiedzi zależą od dostępności i jakości web_search/web_fetch
@@ -92,6 +97,8 @@ required_modules:
   - shared/DISCLAIMER.md
   - references/KROK0A-anonimizer.md
   - references/KROK1-detekcja.md
+  - shared/TABELE-OPLAT.md   # kolejnosc siegania po kwoty; KROK 0 = czy strona
+                            # w ogole placi (art. 94-103 KSCU)
   - references/PROFIL-LEKKI.md
   - references/ZRODLA-AKTOW-FALLBACK.md
   - dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md
@@ -99,20 +106,9 @@ required_modules:
   - shared/MOD-CN-GATE.md
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
-changelog:
-  - '3.44 (2026-09-10, F-179): KOREKTA PRZESLANKI PROFILU LEKKIEGO. Pomiar
-    "219 kB sciezki obowiazkowej" z 3.43 byl FALSZYWY W PRZESLANCE - sumowal
-    zasoby warunkowe, ladowane leniwie (lazy loading), jakby byly bezwarunkowe.
-    Zmierzone poprawnie: koszt staly systemu to name+description 32 skilli,
-    ok. 5,9 kB; rdzen R-1..R-5 ok. 100 kB po wyzwoleniu routera; reszta byla
-    leniwa juz wczesniej. Profil LEKKI NIE zmniejsza rdzenia - jego korzysc
-    jest AUDYTOWA: zamienia uznaniowe leniwe ladowanie na deklarowane
-    i sprawdzalne. Klasa bledu jak F-164. PROFIL-LEKKI.md 1.0 -> 1.1.'
-  - '3.42 (2026-09-09, F-169/F-170/F-171): trzy latki po benchmarku 14 kazusow
-    - AF-7 (rygor formy znacznika VER, Regula 14a), T17 mierzy korpus osobno
-    od frontmatteru, T21 normalizuje prefiks. Pomiar: skille maja znak zalezny
-    od poziomu rozumowania (wysoki +3,6 pkt, sredni -7,5 pkt).'
-  - 'Pelna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).'
+changelog: |
+  Wersja bieżąca: 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 ## ŁADOWANE ZAWSZE — BEZWZGLĘDNIE

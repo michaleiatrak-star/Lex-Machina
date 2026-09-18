@@ -34,6 +34,39 @@ TITLE_STOPWORDS = {
 }
 
 
+PLIK_ALIASOW = "references/ALIASY-NAZW-AKTOW.md"
+
+
+def wczytaj_aliasy(root):
+    """(rok, poz, nazwa_robocza_zfoldowana) — rozstrzygnięcia człowieka.
+
+    F-148(a), 2026-09-10c. Rejestr NIE jest listą wyciszeń: każdy wpis znaczy,
+    że nazwę roboczą porównano z tytułem urzędowym w ELI i uznano za ten sam
+    akt. Zgłoszenie spoza rejestru pozostaje problemem, a zmiana nazwy
+    w rejestrze operacyjnym unieważnia alias i przywraca sygnał — celowo.
+    """
+    import re as _re
+    plik = root / "audyt-systemu-v4" / PLIK_ALIASOW
+    out = set()
+    if not plik.is_file():
+        return out
+    wzor = _re.compile(r"Dz\.U\.\s*(\d{4})\s*poz\.\s*(\d+)")
+    for linia in plik.read_text(encoding="utf-8").split("\n"):
+        if not linia.startswith("| Dz.U."):
+            continue
+        kol = [c.strip() for c in linia.strip().strip("|").split("|")]
+        if len(kol) < 4 or not kol[3]:
+            continue          # pusta kolumna "Sprawdzone" = wpis nieważny
+        m = wzor.search(kol[0])
+        if m:
+            out.add((int(m.group(1)), int(m.group(2)), fold(kol[1])))
+    return out
+
+
+ETYKIETY_AKTU_PIERWOTNEGO = ("akt pierwotny", "akt bazowy", "akt macierzysty")
+OKNO_SASIEDZTWA = 6   # F-148(b) — promień w wierszach; patrz komentarz przy blok_claims
+
+
 def fold(value: str) -> str:
     value = value.translate(str.maketrans({"ł": "l", "Ł": "L"}))
     value = unicodedata.normalize("NFKD", value)
@@ -72,6 +105,22 @@ def expected_act_title(cell: str) -> str:
         "prawo o ", "prawo ochrony ", "prawo upadlosciowe",
         "prawo restrukturyzacyjne", "kodeks cywilny", "kodeks karny",
         "kodeks postepowania ", "kodeks pracy", "kodeks wykroczen",
+        # F-148(a), 2026-09-10c — rozszerzenie zakresu porównania tytułów.
+        #
+        # Do tej pory lista obejmowała wyłącznie kodeksy i „prawo …", więc
+        # nazwa zaczynająca się od „Ustawa o …" NIE była z niczym porównywana.
+        # Skutkiem była ślepota na PODMIANĘ AKTU: numer istnieje, jest
+        # obwieszczeniem i jest najnowszym t.j. SWOJEGO aktu, więc przechodził
+        # kontrolę także wtedy, gdy lokalnie opisano nim inną ustawę.
+        # Tak przeszedł błąd F-149(3): Dz.U. 2026 poz. 884 (t.j. ustawy
+        # rehabilitacyjnej) przypisany ustawie o świadczeniu uzupełniającym.
+        # Wykrył to CZŁOWIEK czytający kontekst, nie test.
+        #
+        # „Ustawa o …" i „Ustawa z …" to nazwy formalne i jednoznaczne, więc
+        # nadają się do porównania tokenowego. Skróty i nazwy warsztatowe
+        # (KPK, „prawo medyczne", „specustawa") nadal pozostają poza automatem —
+        # próg zgodności 0,66 i wymóg ≥2 tokenów bez zmian.
+        "ustawa o ", "ustawa z ", "ustawa - ",
     )
     return base.strip("* ") if normalized.startswith(formal_prefixes) else ""
 
@@ -180,11 +229,35 @@ def main() -> int:
     problems = []
     valid = 0
     row_claims = defaultdict(set)
+    blok_claims = defaultdict(set)   # F-148(b): sąsiedztwo, nie tylko wiersz
+    pokryte_sasiedztwem = 0
+    pierwotne_opisane = 0
+    aliasy = wczytaj_aliasy(args.root)
+    aliasy_uzyte = 0     # F-148(b): numery jawnie opisane jako akt pierwotny
     for path, lineno, _line, year, pos, _expected_title in claims:
         item = metadata[year].get(pos)
         key = canonical_title(item.get("title", "")) if item else ""
         if key:
             row_claims[(path, lineno, key)].add((year, pos))
+            # F-148(b), 2026-09-10c — poszerzenie czułości z WIERSZA na SĄSIEDZTWO.
+            #
+            # Dotychczas sygnał NEWER_TJ tłumiło wyłącznie powołanie nowszego t.j.
+            # w TYM SAMYM wierszu. Dawało to trwałe fałszywe trafienia tam, gdzie
+            # moduł świadomie cytuje starszy t.j. jako odesłanie historyczne,
+            # a bieżący podaje wiersz obok — zmierzony przypadek:
+            # dr-03/.../mod-KW-art119-131-przeciwko-mieniu.md:220 (wiersz 219
+            # cytuje bieżący t.j. 2025/734).
+            #
+            # ⛔ Poprawka NALEŻY DO SKRYPTU, nie do korpusu: edycja treści dla
+            # uciszenia testu jest gorsza od szumu (zapis flagi F-148, ta sama
+            # zasada co przy poprawce czułości T11 w F-106).
+            #
+            # ⚠️ Okno jest heurystyką i ma cenę: powołanie nowszego t.j. tego
+            # samego aktu w promieniu 6 wierszy stłumi sygnał także wtedy, gdy
+            # oba wiersze opisują różne rzeczy. Przyjęte świadomie — 6 wierszy
+            # to typowa lista źródeł w sekcji „LITERATURA", a fałszywy negatyw
+            # na sąsiedztwie jest tańszy niż stały szum, który uczy ignorować test.
+            blok_claims[(path, key)].add((year, pos, lineno))
 
     for path, lineno, line, year, pos, expected_title in claims:
         item = metadata[year].get(pos)
@@ -195,12 +268,26 @@ def main() -> int:
         title = item.get("title", "")
         key = canonical_title(title)
         if not key:
+            # F-148(b), przypadek 1 — 2026-09-10c.
+            # Numer JAWNIE opisany w tym samym wierszu jako akt pierwotny/bazowy
+            # NIE jest deklaracją tekstu jednolitego, więc NOT_TJ jest fałszywy.
+            # Zmierzony przypadek: prawo-polskie-v2/ROUTING-MAP.md:219 —
+            # „akt pierwotny Dz.U. 2023 poz. 1285" obok poprawnego t.j. 2024/1111.
+            # Potwierdzone niezależnie jako fałszywy alarm parsera przy F-172.
+            # ⛔ Warunek jest KONIUNKCJĄ: sama etykieta nie wystarcza — w wierszu
+            # musi też stać powołanie t.j., inaczej tłumilibyśmy realne braki.
+            etykieta = any(t in fold(line) for t in ETYKIETY_AKTU_PIERWOTNEGO)
+            if etykieta and "t.j." in line:
+                pierwotne_opisane += 1
+                continue
             problems.append(("NOT_TJ", year, pos, rel, lineno, title, line))
             continue
         expected_tokens = title_tokens(expected_title)
         actual_tokens = title_tokens(key)
         overlap = len(expected_tokens & actual_tokens) / len(expected_tokens) if expected_tokens else 1.0
-        if len(expected_tokens) >= 2 and overlap < 0.66:
+        if (year, pos, fold(expected_title)) in aliasy:
+            aliasy_uzyte += 1
+        elif len(expected_tokens) >= 2 and overlap < 0.66:
             problems.append((
                 "TITLE_MISMATCH", year, pos, rel, lineno,
                 f"wiersz: {expected_title} — ELI: {title}", line,
@@ -209,6 +296,10 @@ def main() -> int:
         valid += 1
         newer = sorted((y, p, t) for y, p, t in tj_by_title[key] if (y, p) > (year, pos))
         if any(pair > (year, pos) for pair in row_claims[(path, lineno, key)]):
+            continue
+        if any((y2, p2) > (year, pos) and abs(l2 - lineno) <= OKNO_SASIEDZTWA
+               for y2, p2, l2 in blok_claims[(path, key)]):
+            pokryte_sasiedztwem += 1
             continue
         if newer:
             y, p, title_new = newer[-1]
@@ -219,6 +310,9 @@ def main() -> int:
     print(f"CLAIMS={len(claims)}")
     print(f"UNIQUE_CLAIMS={len({(year, pos) for *_, year, pos, _expected in claims})}")
     print(f"VALID_TJ_CLAIMS={valid}")
+    print(f"ALIASY_NAZW={aliasy_uzyte}   # F-148(a): nazwa robocza rozstrzygnięta w references/ALIASY-NAZW-AKTOW.md")
+    print(f"AKT_PIERWOTNY_OPISANY={pierwotne_opisane}   # F-148(b): numer opisany w wierszu jako akt pierwotny obok t.j.")
+    print(f"POKRYTE_SASIEDZTWEM={pokryte_sasiedztwem}   # F-148(b): nowszy t.j. tego samego aktu powołany w promieniu {OKNO_SASIEDZTWA} wierszy")
     print(f"PROBLEMS={len(problems)}")
     for kind, year, pos, path, lineno, detail, line in problems:
         print(f"{kind}\tDz.U. {year} poz. {pos}\t{path}:{lineno}\t{detail}\t{line.strip()}")

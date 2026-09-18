@@ -53,11 +53,43 @@ Nawiązanie i rozwiązanie stosunku pracy, wypowiedzenie (wymogi formalne, przyc
 ### TERMIN 21 DNI — ABSOLUTNY PRIORYTET
 
 ```
-Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma (art. 264 §1 KP)
-Odwołanie od dyscyplinarki:     21 dni od doręczenia pisma (art. 264 §2 KP)
-Żądanie nawiązania umowy:       21 dni od dnia, gdy miała być zawarta
+✅ [VER] RZĄD 1 2026-09-12n, ponownie 2026-09-16 (F-189) — `Dz.U. 2025 poz. 277`.
+KROK 2C (odczyt treści 2026-09-16): `Dz.U. 2026 poz. 1046` (w życie 5.11.2026) zmienia w KP
+art. 18³ᵃ, 18³ᵈ, 18³ᵉ (+ nowe 18³ᶠ–18³ᵍ), 94, 94³ (+ nowy 94³ᵃ), 104¹; w KPC art. 47, 461
+(+ nowy 477⁶ᵃ) — NIE dotyka art. 52, 109, 112, 264, 265, 291.
+
+TERMINY PRACOWNIKA:
+Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma wypowiadającego (art. 264 § 1)
+Przywrócenie / odszkodowanie
+  po rozwiązaniu bez wypowiedzenia
+  LUB po WYGAŚNIĘCIU umowy:     21 dni od doręczenia zawiadomienia o rozwiązaniu
+                                ALBO od dnia wygaśnięcia umowy (art. 264 § 2)
+                                ⛔ przy wygaśnięciu nie ma pisma — termin biegnie od zdarzenia
+Żądanie nawiązania umowy:       21 dni od doręczenia zawiadomienia o ODMOWIE przyjęcia
+                                do pracy (art. 264 § 3)
+Przywrócenie terminu:           7 dni od ustania przyczyny uchybienia; okoliczności
+                                trzeba UPRAWDOPODOBNIĆ (art. 265 § 2)
+Sprzeciw od kary porządkowej:   7 dni od zawiadomienia o ukaraniu (art. 112 § 1 zd. 1)
+  ⭐ MILCZĄCA ZGODA: nieodrzucenie sprzeciwu w 14 dni od wniesienia =
+     UWZGLĘDNIENIE sprzeciwu (art. 112 § 1 zd. 3)
+  Sąd pracy: 14 dni od zawiadomienia o odrzuceniu — TYLKO po sprzeciwie (art. 112 § 2)
 ⚠️ TERMIN ZAWITY — nawet bezprawne zwolnienie staje się skuteczne po upływie!
 ⚠️ Pracodawca często manewruje negocjacjami → pilnuj terminu niezależnie od rozmów
+
+GRANICE DLA PRACODAWCY (⛔ to NIE terminy pracownika — ich upływ to ZARZUT OBRONY):
+art. 52 § 2:  dyscyplinarka nie później niż MIESIĄC od uzyskania wiadomości
+              o okoliczności — po upływie wadliwa niezależnie od zasadności przyczyny
+art. 109 § 1: kara porządkowa — nie po 2 TYGODNIACH od powzięcia wiadomości
+              i nie po 3 MIESIĄCACH od naruszenia
+art. 109 § 3: gdy pracownik nieobecny i nie może być wysłuchany — bieg 2 tygodni
+              nie rozpoczyna się, a rozpoczęty ulega zawieszeniu do stawienia się
+
+PRZEDAWNIENIE (art. 291):
+§ 1: 3 lata od wymagalności
+§ 2: roszczenie PRACODAWCY o szkodę — rok od powzięcia wiadomości, max 3 lata
+     od wyrządzenia; § 3: szkoda UMYŚLNA — przepisy KC
+§ 4: terminów nie można skracać ani przedłużać czynnością prawną
+§ 5: roszczenie stwierdzone prawomocnym orzeczeniem lub ugodą — 10 lat
 ```
 
 ### Wypowiedzenie — wymogi formalne (art. 30 KP)
@@ -163,7 +195,7 @@ URLOP — ekwiwalent za niewykorzystany:
   Wynagrodzenie z 3 m-cy / liczba dni roboczych w kwartale × liczba dni urlopu
   ⚠️ Oblicz dokładnie — pracodawcy często zaniżają
 
-ODPRAWA (ustawa o zwolnieniach grupowych — weryfikuj Dz.U. 2025 poz. 570):
+ODPRAWA (ustawa o zwolnieniach grupowych — weryfikuj **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu)):
   Do 2 lat stażu:   1 miesiąc
   2–8 lat stażu:    2 miesiące
   > 8 lat stażu:    3 miesiące

@@ -3,7 +3,7 @@
 ## Akt prawny
 **Ustawa z 03.10.2008 r. o udostępnianiu informacji o środowisku i jego ochronie,
 udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na środowisko**
-- Tekst jednolity: **Dz.U. 2024 poz. 1112** (ze zm.)
+- Tekst jednolity: **Dz.U. 2026 poz. 670** (ze zm.) — ✅ [VER] RZĄD 1 2026-09-16; poprzedni t.j. 2024 poz. 1112 wygasły (naprawa z AUDYT-2026-09-10l odtworzona, F-189)
   ✅ VER: isap.sejm.gov.pl [2026-05-31]
 - Dyrektywa EIA: 2011/92/UE (zmieniona 2014/52/UE)
 
@@ -54,7 +54,7 @@ DŚU wydana przez RDOŚ:
 
 ## Quality gate
 
-- [ ] Aktualny t.j. UOOŚiS zweryfikowany w ISAP (Dz.U. 2024 poz. 1112)?
+- [ ] Aktualny t.j. UOOŚiS zweryfikowany w ISAP (Dz.U. 2026 poz. 670)?
 - [ ] Czy przedsięwzięcie I czy II grupy? (weryfikuj rozporządzenie RM)
 - [ ] Organ właściwy dla DŚU ustalony?
 - [ ] Termin ważności DŚU sprawdzony (6 lat)?
@@ -63,7 +63,7 @@ DŚU wydana przez RDOŚ:
 ## Weryfikacja online
 
 ```
-web_search: "ustawa oceny oddziaływania środowisko Dz.U. 2024 poz. 1112 isap"
+web_search: "ustawa oceny oddziaływania środowisko Dz.U. 2026 poz. 670 isap"
 web_search: "decyzja środowiskowa OOŚ DŚU procedura 2025 2026"
 ```
 

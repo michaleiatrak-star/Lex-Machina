@@ -73,9 +73,22 @@ orzeczenia):
 ## KROK 3 — Fallback do HARD GATE (bez zmian względem obecnego stanu)
 
 Jeśli MCP niedostępne, zwróciło NOT_FOUND/AMBIGUOUS, lub przekroczyło rozsądny czas
-odpowiedzi → standardowa procedura z `shared/PRAWO-HARDGATE.md`: web_search/web_fetch,
-oznaczenie ⚠️ [NIEWERYFIKOWANE] jeśli i to zawiedzie. Nie ma stanu "system nie
-odpowiada" z powodu braku MCP.
+odpowiedzi → standardowa procedura z `shared/PRAWO-HARDGATE.md`.
+
+**Wyjątek wykonawczy NSA/WSA — zanim użyjesz ogólnego web_search:** jeżeli sprawa
+routuje do CBOSA, uruchom `shared/SYGNATURY.md` V-SYG-0.7 DIRECT-CBOSA
+(`POST /cbo/search` → kompletna paginacja → `/doc/{ID}` → exact-match),
+zgodnie z `shared/DOSTEP-MASZYNOWY-API.md`. Implementacja parsera:
+implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`. Dopiero jeśli direct CBOSA
+jest niedostępna w bieżącym runtime → V-SYG-0.5 RETRIEVAL/SNAPSHOT z obowiązkowym
+POST-CHECK HOSTA, exact-match i jawnym `access_mode/content_scope`.
+
+To jest ważne: brak connectora MCP **nie może obniżać systemu z deterministycznego
+HTML do luźnego wyszukiwania webowego**, jeśli źródło urzędowe ma odtwarzalny
+formularz server-side.
+
+Oznaczenie ⚠️ [NIEWERYFIKOWANE] stosuj dopiero, gdy odpowiedni HARD GATE / kanał
+urzędowy także zawiedzie. Nie ma stanu "system nie odpowiada" z powodu braku MCP.
 
 ## KROK 4 — Rozbieżność źródeł
 
@@ -100,7 +113,8 @@ i reszta tego pliku nie wpływa na dalszy przebieg.
 ## Co NIE jest częścią tego modułu
 
 - Kod źródłowy serwerów MCP (ISAP/SAOS/CBOSA) — to osobne projekty infrastrukturalne
-  po stronie developera/portalu, niepodlegające temu repozytorium skilli. Patrz
-  `KONEKTORY-REKOMENDOWANE.md` po konkretne, istniejące projekty OSS do
-  wykorzystania zamiast pisania własnych od zera.
+  po stronie developera/portalu. **Wyjątek:** Lex Machina utrzymuje własny
+  deterministyczny fallback HTML dla CBOSA w `orzeczenia-sadowe-v2`; nie jest
+  to serwer MCP ani osobna baza, lecz adapter do urzędowego źródła RZĘDU 2A.
+  Patrz `KONEKTORY-REKOMENDOWANE.md` po projekty OSS i priorytet kanałów.
 - Gwarancja dostępności zewnętrznych API rządowych — to poza kontrolą silnika.

@@ -1,6 +1,6 @@
 # Moduł REFERENCYJNY — Tryby Ścigania Przestępstw
 
-**Źródło weryfikacji:** KK Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026) | KPK Dz.U. 2024 poz. 37 t.j.
+**Źródło weryfikacji:** KK Dz.U. 2025 poz. 383 t.j. (wersja od 29.01.2026) | KPK **Dz.U. 2026 poz. 490 t.j.** ✅ [VER] RZĄD 1 2026-09-10l — ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym (Dz.U. 2026 poz. 421, 638, 760, 882, 901); ⛔ poprzedni zapis `2024 poz. 37` — wygaśnięcie aktu
 **Data weryfikacji online:** 21.05.2026 (pełna re-weryfikacja wszystkich przepisów)
 **ZASADA:** Każdy artykuł przed powołaniem → isap.sejm.gov.pl
 

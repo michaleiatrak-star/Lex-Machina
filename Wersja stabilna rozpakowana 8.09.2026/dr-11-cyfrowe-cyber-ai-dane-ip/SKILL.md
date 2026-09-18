@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.12"
+version: "3.17"
 description: "Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act, usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna."
 ---
 
@@ -104,7 +104,7 @@ DANE OSOBOWE:
                [zastąpiony 25.05.2018, nie tylko zmiana nazwy]. Nowy
                wzór SPK w pisma-proste-v2. Odpowiedź na pytanie
                użytkownika o kompletność tematu GIODO/UODO)
-              (postępowanie przed UODO: skarga, decyzja, odwołanie WSA,
+              (postępowanie przed UODO: skarga, decyzja, SKARGA do sądu administracyjnego — postępowanie jednoinstancyjne, art. 7 ust. 2 u.o.d.o.,
                kary administracyjne; Dz.U. 2019 poz. 1781 t.j.)
 
 DANE OSOBOWE — WARSTWA OPERACYJNA (dodano 2026-07-05, AUDYT-2026-07-05a;
@@ -164,7 +164,7 @@ WŁASNOŚĆ INTELEKTUALNA I IP:
 
 USŁUGI CYFROWE I ELEKTRONICZNE:
   [✓] OK    mod-ustawa-uslugi-elektroniczne
-              (usługi drogą elektroniczną Dz.U. 2020 poz. 344 — częściowo deaktywowana przez DSA)
+              (usługi drogą elektroniczną Dz.U. 2024 poz. 1513 — częściowo deaktywowana przez DSA)
   [✓] OK    mod-ustawa-informatyzacja-podmiotow-publicznych
               (informatyzacja: Dz.U. 2025 poz. 1703 t.j.; e-Doręczenia; KSeF)
   [✓] OK    mod-ustawa-podpis-elektroniczny

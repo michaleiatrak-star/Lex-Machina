@@ -171,12 +171,23 @@ Forma:
   Uchwały zwykłe → protokół pisemny (sp. z o.o.) lub notarialny (S.A.)
   Brak formy = bezwzględna nieważność (art. 17 KSH)
 
-Zaskarżenie uchwały (sp. z o.o.):
-  Powództwo o stwierdzenie nieważności: 6 miesięcy od powzięcia wiadomości o uchwale,
-  max 3 lata od podjęcia (art. 252 §3 KSH)
-  Powództwo o uchylenie: 1 miesiąc od otrzymania wiadomości, max 6 miesięcy od podjęcia
-  (art. 251 KSH)
-  ⚠️ Terminy — weryfikuj aktualne brzmienie w ISAP.
+Zaskarżenie uchwały — CZTERY REŻIMY (nie jeden)
+✅ [VER] RZĄD 1 2026-09-12m, ponownie 2026-09-16 (F-189) — `Dz.U. 2024 poz. 18`.
+KROK 2C: `Dz.U. 2026 poz. 176` (w życie 18.02.2027) nie dotyka art. 251, 252, 424, 425.
+
+  Spółka            | Powództwo   | Krótszy termin             | Granica      | Podstawa
+  sp. z o.o.        | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 251
+  sp. z o.o.        | nieważność  | 6 miesięcy od wiadomości   | ⛔ 3 LATA    | art. 252 § 3
+  S.A. niepubliczna | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 424 § 1
+  S.A. publiczna    | uchylenie   | miesiąc od wiadomości      | ⛔ 3 MIESIĄCE| art. 424 § 2
+  S.A. niepubliczna | nieważność  | 6 miesięcy od wiadomości   | ⛔ 2 LATA    | art. 425 § 2
+  S.A. publiczna    | nieważność  | ⛔ 30 dni od OGŁOSZENIA    | ⛔ ROK       | art. 425 § 3
+  (granice liczone od dnia powzięcia uchwały)
+
+  ⛔ Przeniesienie liczby między reżimami kosztuje rok (3 lata sp. z o.o. vs 2 lata S.A.).
+  ⛔ Spółka publiczna, nieważność — termin od OGŁOSZENIA uchwały, nie od wiedzy.
+  ⭐ Art. 252 § 4 i art. 425 § 4: upływ terminów NIE wyłącza podniesienia
+     ZARZUTU nieważności uchwały — powództwo przepada, zarzut nie.
 ```
 
 ---
@@ -846,5 +857,5 @@ Wynik pracy modułu:
 |---|---|---|
 | Termin 30 dni na wniosek o upadłość | Przekroczenie = odpow. osobista zarządu | Monitoring kondycji finansowej spółki |
 | Nieważna uchwała (brak formy) | Art. 17 KSH — nieważność bezwzgl. | Akt notarialny przy zmianach umowy/statutu |
-| Zaskarżenie uchwały | Termin 1/6 m-cy od powzięcia / doręczenia | Prawidłowe doręczenie uchwał wszystkim wspólnikom |
+| Zaskarżenie uchwały | Terminy wg reżimu (art. 251, 252 § 3, 424, 425 KSH — tabela wyżej); biegną od WIADOMOŚCI o uchwale (S.A. publiczna, nieważność — od ogłoszenia) | Prawidłowe doręczenie uchwał wszystkim wspólnikom; zarzut nieważności po terminie (art. 252 § 4, 425 § 4) |
 | Prokurent przekracza umocowanie | Brak skutku wobec spółki | Sprawdzaj wpisy prokury w KRS |

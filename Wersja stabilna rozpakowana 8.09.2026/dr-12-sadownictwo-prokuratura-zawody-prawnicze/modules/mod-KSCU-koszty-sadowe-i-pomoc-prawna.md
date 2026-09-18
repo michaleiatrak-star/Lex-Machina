@@ -13,6 +13,16 @@ ELI oznacza tekst jednolity Dz.U. 2025 poz. 1228 jako obowiązujący. Przed poda
 
 **Zasada runtime:** moduł nie utrwala tabel kwot, które mogą ulec zmianie. Kwota jest wynikiem fresh gate do przepisu, nie stałą wiedzą modułu.
 
+⛔ **KOLEJNOŚĆ — `view shared/TABELE-OPLAT.md` PRZED pierwszą kwotą.** Ten moduł opisuje
+ustawę i jej strukturę; tabele zweryfikowane odczytem treści oraz **pełny katalog
+zwolnień** (art. 94–103) stoją tam. ⛔ KROK 0: **czy strona w ogóle płaci** —
+pytanie przed sięgnięciem po jakąkolwiek tabelę.
+
+⛔ **Pułapka art. 13 ust. 2:** tekst jednolity niesie **dwa brzmienia obok siebie**,
+rozróżnione wyłącznie odnośnikami. Cap opłaty stosunkowej to **100 000 zł**
+od 23.09.2025 (`Dz.U. 2025 poz. 1157`), nie 200 000 zł. Odczyt bez przypisów
+daje brzmienie wygasłe.
+
 ## 2. Zakres ustawy — art. 1–3
 
 Ustawa reguluje koszty sądowe w sprawach cywilnych oraz zasady ich ponoszenia, zwrotu i zwolnienia od kosztów.

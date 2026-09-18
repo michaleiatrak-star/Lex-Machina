@@ -4,7 +4,7 @@
 > w isap.sejm.gov.pl przed każdą analizą.
 
 ## TERMIN 7 DNI NA SPRZECIW — ABSOLUTNY PRIORYTET
-Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 KPSW).
+Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK — art. 94 sam terminu nie podaje, odsyła do KPK). ✅ [VER] RZĄD 1 2026-09-16 — KPW `Dz.U. 2025 poz. 860`, KPK `Dz.U. 2026 poz. 490`.
 Sprawdź JAKO PIERWSZE w każdej sprawie nakazowej.
 
 ## SCHEMAT POSTĘPOWANIA

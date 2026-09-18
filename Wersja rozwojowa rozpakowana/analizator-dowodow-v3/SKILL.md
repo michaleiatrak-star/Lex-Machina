@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.9"
+version: "5.16.12"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,7 +39,7 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.9 (2026-09-16, F-189): T12: pole YAML `changelog:` (20 linii, numer 5.16.5 przy version 5.16.8) skrócone do odesłania — historia wyłącznie w references/CHANGELOG.md (ZASADA 15). Treść…
+  Wersja bieżąca: 5.16.12 (2026-09-16, F-189): MP11-rodo-cyber — art. 83 ust. 5–6 RODO odczytany (RZĄD 1, Cellar): 20 mln EUR albo 4 % światowego obrotu, kwota wyższa; ten sam pułap za nieprzestrzeganie naka…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
