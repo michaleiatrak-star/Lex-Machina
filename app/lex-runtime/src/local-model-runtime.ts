@@ -61,6 +61,14 @@ type ReleaseManifest = {
   };
 };
 
+export type LocalTokenizerCalibration = {
+  endpoint: "/tokenize";
+  sampleCount: number;
+  observedMinCharsPerToken: number;
+  conservativeCharsPerToken: number;
+  calibratedAt: string;
+};
+
 export type LocalContextQualification = {
   schemaVersion: 1;
   result: "PASS";
@@ -71,6 +79,8 @@ export type LocalContextQualification = {
     | "YARN_EXTENDED";
   engine: "llama.cpp";
   startupMs: number;
+  tokenizerCalibration?:
+    LocalTokenizerCalibration;
   validatedAt: string;
 };
 
@@ -865,6 +875,9 @@ export class LocalModelRuntime {
       try {
         const startupStartedAt = Date.now();
         await this.ensureRunning(canonical);
+        const tokenizerCalibration =
+          await this
+            .calibrateTokenizer();
         this.writeQualification({
           schemaVersion: 1,
           result: "PASS",
@@ -880,6 +893,11 @@ export class LocalModelRuntime {
               Date.now() -
                 startupStartedAt
             ),
+          ...(tokenizerCalibration
+            ? {
+                tokenizerCalibration
+              }
+            : {}),
           validatedAt:
             new Date().toISOString()
         });
@@ -1087,6 +1105,9 @@ export class LocalModelRuntime {
       await this.ensureRunning(
         canonical
       );
+      const tokenizerCalibration =
+        await this
+          .calibrateTokenizer();
       this.writeQualification({
         schemaVersion: 1,
         result: "PASS",
@@ -1101,6 +1122,11 @@ export class LocalModelRuntime {
             Date.now() -
               startedAt
           ),
+        ...(tokenizerCalibration
+          ? {
+              tokenizerCalibration
+            }
+          : {}),
         validatedAt:
           new Date()
             .toISOString()
@@ -1908,6 +1934,54 @@ export class LocalModelRuntime {
         receipt.startupMs
       ) ||
       receipt.startupMs < 0 ||
+      (
+        receipt.tokenizerCalibration !==
+          undefined &&
+        (
+          receipt
+            .tokenizerCalibration
+            .endpoint !==
+              "/tokenize" ||
+          !finiteInteger(
+            receipt
+              .tokenizerCalibration
+              .sampleCount
+          ) ||
+          receipt
+            .tokenizerCalibration
+            .sampleCount < 1 ||
+          !Number.isFinite(
+            receipt
+              .tokenizerCalibration
+              .observedMinCharsPerToken
+          ) ||
+          receipt
+            .tokenizerCalibration
+            .observedMinCharsPerToken <= 0 ||
+          !Number.isFinite(
+            receipt
+              .tokenizerCalibration
+              .conservativeCharsPerToken
+          ) ||
+          receipt
+            .tokenizerCalibration
+            .conservativeCharsPerToken < 1 ||
+          receipt
+            .tokenizerCalibration
+            .conservativeCharsPerToken > 3 ||
+          typeof receipt
+            .tokenizerCalibration
+            .calibratedAt !==
+              "string" ||
+          Number.isNaN(
+            Date.parse(
+              receipt
+                .tokenizerCalibration
+                .calibratedAt
+            )
+          )
+        )
+      ) ||
       typeof receipt.validatedAt !==
         "string" ||
       Number.isNaN(
@@ -2251,6 +2325,105 @@ export class LocalModelRuntime {
       ]);
     }
     throw new Error("LOCAL_MODEL_START_TIMEOUT");
+  }
+
+  private async calibrateTokenizer():
+    Promise<
+      LocalTokenizerCalibration |
+      null
+    > {
+    const samples = [
+      "Powód wnosi o zasądzenie kwoty 12 345,67 zł wraz z odsetkami ustawowymi za opóźnienie od dnia 18 września 2026 r.",
+      "§ 4. Wykonawca zobowiązuje się wykonać przedmiot umowy w terminie 14 dni od doręczenia kompletnej dokumentacji.",
+      "Sygn. III CZP 25/11; art. 6 KC; faktura VAT nr FV/09/2026; termin płatności: 30 dni."
+    ];
+
+    const ratios:
+      number[] = [];
+    try {
+      for (
+        const sample
+        of samples
+      ) {
+        const response =
+          await fetch(
+            `http://${this.host}:${this.port}/tokenize`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/json",
+                Accept:
+                  "application/json"
+              },
+              body:
+                JSON.stringify({
+                  content:
+                    sample,
+                  add_special:
+                    false,
+                  parse_special:
+                    true,
+                  with_pieces:
+                    false
+                }),
+              signal:
+                AbortSignal.timeout(
+                  2_500
+                )
+            }
+          );
+        if (!response.ok) {
+          return null;
+        }
+        const payload =
+          await response.json() as {
+            tokens?: unknown;
+          };
+        if (
+          !Array.isArray(
+            payload.tokens
+          ) ||
+          payload.tokens.length <
+            1
+        ) {
+          return null;
+        }
+        ratios.push(
+          sample.length /
+            payload.tokens.length
+        );
+      }
+    } catch {
+      return null;
+    }
+
+    const observedMin =
+      Math.min(...ratios);
+    const conservative =
+      Math.max(
+        1,
+        Math.min(
+          3,
+          observedMin * 0.9
+        )
+      );
+
+    return {
+      endpoint: "/tokenize",
+      sampleCount:
+        samples.length,
+      observedMinCharsPerToken:
+        Number(
+          observedMin.toFixed(4)
+        ),
+      conservativeCharsPerToken:
+        Number(
+          conservative.toFixed(4)
+        ),
+      calibratedAt:
+        new Date().toISOString()
+    };
   }
 
   private async isHealthy(): Promise<boolean> {
