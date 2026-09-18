@@ -728,7 +728,11 @@ export class MaintenanceService {
     try {
       fs.writeFileSync(temporary, bytes, { flag: "wx" });
       fs.renameSync(temporary, target);
-      const publisher = this.installerVerifier.verify(target);
+      const publisher =
+        this.installerVerifier.verify(
+          target,
+          version
+        );
       const stagedAt = new Date().toISOString();
       const receipt: ApplicationUpdateReceipt = {
         schemaVersion: 1,
