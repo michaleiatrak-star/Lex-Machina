@@ -88,6 +88,7 @@ foreach ($required in @(
   "bootstrap\install-local-llm.ps1",
   "bootstrap\get-install-state.ps1",
   "bootstrap\installer-state-machine-selftest.ps1",
+  "bootstrap\prefetch-release-models.py",
   "bootstrap\verify-python-package-set.py",
   "bootstrap\windows-payload-selftest.ps1",
   "bootstrap\windows-payload-python-selftest.py"
