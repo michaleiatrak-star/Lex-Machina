@@ -291,10 +291,12 @@ export function validateClientReportBlueprint(
             .przedzial_ufnosci
         )
       ) ||
+      typeof factors !==
+        "number" ||
       !Number.isSafeInteger(
         factors
       ) ||
-      Number(factors) < 0
+      factors < 0
     ) {
       errors.push(
         "CLIENT_REPORT_BIZ_EVALUATION_INVALID"
