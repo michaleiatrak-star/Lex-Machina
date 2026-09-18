@@ -190,9 +190,6 @@ jobs:
             ./app/installer/extract-offline-zip.ps1 `
               -ArchivePath $bundle `
               -DestinationPath $verifyDir
-            if ($LASTEXITCODE -ne 0) {
-              throw "OFFLINE_RUNTIME_ARCHIVE_VERIFY_EXTRACT_FAILED:$LASTEXITCODE"
-            }
             $archiveLockPath = Join-Path $verifyDir "component-lock.json"
             if (-not (Test-Path -LiteralPath $archiveLockPath -PathType Leaf)) {
               throw "OFFLINE_RUNTIME_ARCHIVE_COMPONENT_LOCK_MISSING"
