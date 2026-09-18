@@ -49,12 +49,14 @@ export type DeterministicWorkflowOutputReport = {
     | "PROCESS_FINAL"
     | "COURT_CHECKPOINT"
     | "COURT_FINAL"
+    | "EVIDENCE_CHECKPOINT"
     | "EVIDENCE_FINAL"
     | "CONTRACT_FINAL"
     | "CONTRACT_LITE"
     | "STATUTE_FINAL"
     | "CASE_LAW_FINAL"
     | "CHRONOLOGY_FINAL"
+    | "WITNESS_CHECKPOINT"
     | "WITNESS_W3_FINAL";
   required: string[];
   observed: string[];
@@ -563,6 +565,7 @@ export function evaluateDeterministicWorkflowOutput(
       ProcessPleadingCheckpoint;
     courtCheckpoint?:
       CourtAnalysisCheckpoint;
+    orderedCheckpoint?: string;
   }
 ): DeterministicWorkflowOutputReport {
   const normalized =
@@ -737,6 +740,41 @@ export function evaluateDeterministicWorkflowOutput(
     plan.id ===
       "EVIDENCE_ANALYSIS_V1"
   ) {
+    if (
+      context?.orderedCheckpoint &&
+      context.orderedCheckpoint !==
+        "AD-KROK4-DASHBOARD"
+    ) {
+      const prematureFinal =
+        normalized.includes(
+          "RAPORT DOWODOWY"
+        );
+      return {
+        workflow: plan.id,
+        mode:
+          "EVIDENCE_CHECKPOINT",
+        required: [],
+        observed:
+          prematureFinal
+            ? [
+                "PREMATURE_FINAL_REPORT"
+              ]
+            : [],
+        missing:
+          prematureFinal
+            ? [
+                "AD-KROK4-DASHBOARD_REQUIRED_FOR_FINAL_REPORT"
+              ]
+            : [],
+        orderValid:
+          !prematureFinal,
+        result:
+          prematureFinal
+            ? "BLOCKED"
+            : "PASS"
+      };
+    }
+
     const claimsFullReport =
       normalized.includes(
         "RAPORT DOWODOWY"
@@ -971,6 +1009,44 @@ export function evaluateDeterministicWorkflowOutput(
     plan.id ===
       "WITNESS_QUESTIONING_V1"
   ) {
+    if (
+      context?.orderedCheckpoint &&
+      context.orderedCheckpoint !==
+        "W3-QUESTIONS"
+    ) {
+      const prematureW3 =
+        normalized.includes(
+          "MACIERZ FINALNA"
+        ) ||
+        normalized.includes(
+          "SCORING FINALNY"
+        );
+      return {
+        workflow: plan.id,
+        mode:
+          "WITNESS_CHECKPOINT",
+        required: [],
+        observed:
+          prematureW3
+            ? [
+                "PREMATURE_W3_FINAL"
+              ]
+            : [],
+        missing:
+          prematureW3
+            ? [
+                "W3-QUESTIONS_REQUIRED_FOR_FINAL_MATRIX"
+              ]
+            : [],
+        orderValid:
+          !prematureW3,
+        result:
+          prematureW3
+            ? "BLOCKED"
+            : "PASS"
+      };
+    }
+
     const claimsFinalW3 =
       normalized.includes(
         "ETAP W3"
