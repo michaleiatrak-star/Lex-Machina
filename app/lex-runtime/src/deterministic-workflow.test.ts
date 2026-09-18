@@ -756,6 +756,83 @@ describe("deterministic legal workflow", () => {
     }
   );
 
+  it(
+    "keeps a narrow case-law answer flexible without forcing the full report",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "orzeczenia-sadowe-v2"
+        );
+
+      const report =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          "Zweryfikowano pojedynczą sygnaturę i podano źródło urzędowe."
+        );
+
+      expect(report.result)
+        .toBe("PASS");
+      expect(report.mode)
+        .toBe("NOT_APPLICABLE");
+    }
+  );
+
+  it(
+    "enforces the core structure when a full case-law report is claimed",
+    () => {
+      const registry = fixture();
+      const plan =
+        createDeterministicWorkflowPlan(
+          registry,
+          "orzeczenia-sadowe-v2"
+        );
+
+      const complete = [
+        "RAPORT ORZECZEŃ: temat",
+        "WSKAŹNIK POKRYCIA PRZESŁANEK",
+        "P1: 80%",
+        "PLAN MINIMUM (Zasada 11)",
+        "[A] ORZECZENIA WSPIERAJĄCE TEZĘ",
+        "1. sygnatura + źródło + przesłanki",
+        "[B] LINIA PRZECIWNA",
+        "nie odnaleziono po wyczerpującym wyszukiwaniu"
+      ].join("\n");
+
+      const pass =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+        );
+      expect(pass.result)
+        .toBe("PASS");
+      expect(pass.mode)
+        .toBe("CASE_LAW_FINAL");
+
+      const blocked =
+        evaluateDeterministicWorkflowOutput(
+          plan,
+          complete
+            .replace(
+              "PLAN MINIMUM (Zasada 11)\n",
+              ""
+            )
+            .replace(
+              "[A] ORZECZENIA WSPIERAJĄCE TEZĘ\n1. sygnatura + źródło + przesłanki\n[B] LINIA PRZECIWNA",
+              "[B] LINIA PRZECIWNA\n[A] ORZECZENIA WSPIERAJĄCE TEZĘ"
+            )
+        );
+
+      expect(blocked.result)
+        .toBe("BLOCKED");
+      expect(blocked.missing)
+        .toContain("PLAN MINIMUM");
+      expect(blocked.orderValid)
+        .toBe(false);
+    }
+  );
+
   it.each([
     ["analizator-umow-v1", "CONTRACT_ANALYSIS_V1", contractResources],
     ["chronologia-sprawy-v1", "CHRONOLOGY_V1", chronologyResources],
