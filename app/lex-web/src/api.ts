@@ -594,12 +594,21 @@ export type ApplicationUpdateDownloadResponse = {
   sha256: string;
   bytes: number;
   stagedAt: string;
-  publisher: {
-    verification: "AUTHENTICODE";
-    subject: string;
-    thumbprint: string;
-    productVersion: string;
-  };
+  publisher:
+    | {
+        verification: "AUTHENTICODE";
+        subject: string;
+        thumbprint: string;
+        productVersion: string;
+      }
+    | {
+        verification: "UNSIGNED_ALLOWED";
+        subject: null;
+        thumbprint: null;
+        productVersion: string;
+        warning:
+          "TEMPORARY_UNSIGNED_UPDATE_ALLOWED";
+      };
 };
 
 export type SkillUpdateStatusResponse = {
@@ -609,7 +618,11 @@ export type SkillUpdateStatusResponse = {
   checkedAt: string;
   bundleReady: boolean;
   verificationReady: boolean;
+  signatureMode:
+    | "SIGNED_REQUIRED"
+    | "UNSIGNED_ALLOWED";
   blockedReason?:
+    | "INDEX_MISSING"
     | "SIGNED_INDEX_MISSING"
     | "SIGNER_POLICY_MISSING";
 };
