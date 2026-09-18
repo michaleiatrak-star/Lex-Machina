@@ -297,28 +297,36 @@ export function LocalAiSetupPanel({
   async function refresh(): Promise<void> {
     if (!available) return;
     try {
-      const [next, update] =
-        await Promise.all([
-          request<LocalModelsResponse>(
-            "/api/local-models"
-          ),
-          user.appRole === "ADMIN"
-            ? request<ModelPackUpdateStatus>(
-                "/api/local-models/update/status"
-              )
-            : Promise.resolve(null)
-        ]);
+      const next =
+        await request<LocalModelsResponse>(
+          "/api/local-models"
+        );
       setData(next);
-      setModelUpdate(update);
       const preferred =
-        next.runtime.selectedModelId ??
-        next.models[0]?.id ??
-        "";
-      setModelId((current) =>
-        current && next.models.some((item) => item.id === current)
-          ? current
-          : preferred
-      );
+        modelId &&
+        next.models.some(
+          (item) =>
+            item.id === modelId
+        )
+          ? modelId
+          : next.runtime.selectedModelId ??
+            next.models[0]?.id ??
+            "";
+      setModelId(preferred);
+      if (
+        user.appRole === "ADMIN" &&
+        preferred
+      ) {
+        setModelUpdate(
+          await request<ModelPackUpdateStatus>(
+            `/api/local-models/update/status?modelId=${encodeURIComponent(
+              preferred
+            )}`
+          )
+        );
+      } else {
+        setModelUpdate(null);
+      }
       const preferredModel = next.models.find((item) => item.id === preferred);
       const preferredContext =
         next.runtime.configuredContextTokens ??
@@ -369,7 +377,30 @@ export function LocalAiSetupPanel({
         Math.max(selected.minimumContextWindow, current)
       )
     );
-  }, [selected?.id]);
+    if (
+      user.appRole === "ADMIN"
+    ) {
+      void request<ModelPackUpdateStatus>(
+        `/api/local-models/update/status?modelId=${encodeURIComponent(
+          selected.id
+        )}`
+      )
+        .then((status) => {
+          setModelUpdate(status);
+        })
+        .catch((problem) => {
+          setModelUpdate(null);
+          setError(
+            problem instanceof Error
+              ? problem.message
+              : String(problem)
+          );
+        });
+    }
+  }, [
+    selected?.id,
+    user.appRole
+  ]);
 
   if (!available) return null;
 
@@ -475,7 +506,9 @@ export function LocalAiSetupPanel({
           body:
             JSON.stringify({
               modelId:
-                selected.id
+                selected.id,
+              contextTokens,
+              backendPreference
             })
         }
       );
@@ -487,8 +520,16 @@ export function LocalAiSetupPanel({
         )
       } : current);
       setModelUpdate(result.update);
+      const preservedOtherActive =
+        Boolean(
+          data?.runtime
+            .selectedModelId &&
+          data.runtime
+            .selectedModelId !==
+            result.model.id
+        );
       setMessage(
-        `Model zaktualizowano z podpisanego pakietu ${result.receipt.packVersion}. Podpis: ${result.receipt.signerKeyId}. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.`
+        `Model ${result.model.displayName} zaktualizowano z podpisanego pakietu ${result.receipt.packVersion}. Podpis: ${result.receipt.signerKeyId}. Profil ${formatTokens(result.contextTokens)} tokenów przeszedł ponowną walidację.${preservedOtherActive ? " Poprzednio aktywny model pozostał aktywny." : ""}`
       );
     } catch (problem) {
       setError(
