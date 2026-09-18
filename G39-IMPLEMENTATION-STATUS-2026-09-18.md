@@ -182,6 +182,12 @@ Implemented:
   - `COURT_ANALYSIS_V1` for `analiza-sadowa-v6`;
   - `EVIDENCE_ANALYSIS_V1` for `analizator-dowodow-v3`;
   - `STATUTE_ANALYSIS_V1` for `analizator-przepisow-v2`;
+  - `CONTRACT_ANALYSIS_V1` for `analizator-umow-v1`;
+  - `CHRONOLOGY_V1` for `chronologia-sprawy-v1`;
+  - `CASE_LAW_V1` for `orzeczenia-sadowe-v2`;
+  - `WITNESS_QUESTIONING_V1` for `przesluchanie-swiadkow-v2-min90`;
+  - `CLIENT_REPORT_V1` for `raport-klienta-v1`;
+  - `SITUATION_REPORT_V1` for `raport-sytuacyjny-v2`;
 - each migrated workflow declares only always-on deterministic resources; semantic legal qualification, evidence significance, MODE A/B/C choices, interpretation and argumentation remain model work;
 - actual `read_legal_resource` audit events must cover every required fresh resource before the result can pass the workflow gate;
 - process pleading uses encrypted per-case persisted state with optimistic revisions and canonical order:
@@ -204,7 +210,7 @@ Implemented:
 New/updated validation:
 
 - deterministic workflow tests cover simple/process/court/evidence/statute workflows and missing required reads;
-- skill-selection tests cover explicit evidence and statute routing;
+- skill-selection tests cover explicit evidence/statute routing plus chronology, case-law, witness-questioning, client-report and situation-report routing, including the real `legal-skill` / `ux-raport` type exceptions;
 - process state, execution permit, applicability and encrypted persistence tests remain active;
 - bounded AUTO has pure runner tests plus HTTP integration across ACL/encrypted workspace;
 - court-analysis state and execution permit tests exist plus HTTP persistence/blocked-node integration;
@@ -215,7 +221,7 @@ Still required before G39H/I PASS:
 - current-head CI must be green after the latest AUTO/court-analysis integration;
 - persist or link a durable per-session audit artifact so court-analysis audit references are independently resolvable, not only integrity-oriented identifiers;
 - extend stateful deterministic execution beyond process/court workflows where a multi-turn state machine materially improves correctness;
-- migrate contract analysis, chronology, case-law, witness-questioning, reports and remaining execution skills according to the migration matrix;
+- add stateful deterministic execution only where multi-turn state materially improves correctness: chronology event inventory/contradiction lifecycle and contract-analysis step registry are the next candidates; report skills remain high-determinism schema/output workflows rather than artificial state machines;
 - comparative regression tests skill-only vs engine-controlled for each migrated workflow;
 - after two stable releases, shorten duplicated skill instructions that are now runtime-enforced.
 
@@ -249,13 +255,14 @@ External / production blockers:
 
 ## Current closure order
 
-1. keep current-head runtime validation green after crash-journal and G39I HTTP integration tests;
-2. obtain current-head online installer acceptance PASS after embedding the OCR/NER prefetch helper;
+1. obtain current-head runtime validation PASS after the remaining execution-skill preflights/routing changes;
+2. obtain current-head online installer acceptance PASS with explicit `runtime → runtime` resource mapping and the registered-install-root G39G2 gate;
 3. obtain current-head offline installer acceptance PASS;
-4. extend process-workflow E2E to final-artifact suppression and design bounded AUTO semantic-node execution;
-5. implement G39C summary backlinks and tokenizer calibration;
-6. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
-7. migrate court/evidence/statute analyzers into the deterministic engine;
-8. configure production application/skill/model-pack signing and execute signed acceptance;
-9. enable protected `main` / release rules outside this GitHub integration;
-10. close G39J only after the external trust controls above are verified.
+4. if installer acceptance is green, promote G39G to PASS and keep G39F blocked only on production Authenticode trust;
+5. implement stateful chronology execution (inventory → extraction → contradiction index → report) with encrypted per-case persistence;
+6. implement contract-analysis deterministic step registry/mode transitions without moving semantic risk assessment/negotiation into code;
+7. implement G39C summary backlinks plus tokenizer calibration;
+8. run Local AI quality/resource benchmark matrix for 64k / 96k / 128k / 160k / 200k on supported hardware profiles;
+9. configure production application/skill/model-pack signing and execute signed acceptance;
+10. enable protected `main` / release rules outside this GitHub integration;
+11. close G39J only after the external trust controls above are verified.
