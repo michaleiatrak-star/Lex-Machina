@@ -23,8 +23,12 @@ const checks = {
   webViewDownloadIfMissing:
     config.bundle?.windows?.webviewInstallMode?.type === "downloadBootstrapper",
   thinBundledRuntime:
-    Array.isArray(config.bundle?.resources) &&
-    config.bundle.resources.includes("runtime/**/*") &&
+    Boolean(
+      config.bundle?.resources &&
+      typeof config.bundle.resources === "object" &&
+      !Array.isArray(config.bundle.resources) &&
+      config.bundle.resources.runtime === "runtime"
+    ) &&
     build.includes("Thin payload contract") &&
     build.includes("windows-online-bootstrap.ps1") &&
     build.includes("verify-python-package-set.py"),
