@@ -432,18 +432,46 @@ export async function runGateIRuntimePrelude(args: {
     }
   }
 
-  const blocked =
+  const runtimeUnavailable =
     actions.some(
       (action) =>
         action.result ===
-          "BLOCKED"
+          "BLOCKED" &&
+        (
+          action.detail ===
+            "VERIFICATION_RUNTIME_UNAVAILABLE" ||
+          action.detail ===
+            "CASE_LAW_DISCOVERY_RUNTIME_UNAVAILABLE"
+        )
     );
+
+  if (
+    actions.some(
+      (action) =>
+        action.result ===
+          "BLOCKED" &&
+        !(
+          action.detail ===
+            "VERIFICATION_RUNTIME_UNAVAILABLE" ||
+          action.detail ===
+            "CASE_LAW_DISCOVERY_RUNTIME_UNAVAILABLE"
+        )
+    )
+  ) {
+    appendix.push(
+      [
+        "# GATE I — RUNTIME TOOL FALLBACK",
+        "At least one mandatory runtime lookup was attempted but did not return a usable verified result.",
+        "Do not invent the missing source, signature or search result. Continue only with claims that can pass the final deterministic ledger/finalization gates."
+      ].join("\n")
+    );
+  }
 
   return {
     gate:
       "G39I_RUNTIME_PRELUDE",
     result:
-      blocked
+      runtimeUnavailable
         ? "BLOCKED"
         : "PASS",
     actions,
