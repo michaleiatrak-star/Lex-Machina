@@ -228,13 +228,15 @@ describe(
             workflowReads:
               reads(),
             verificationRecords: [
-              {
-                ...good,
-                temporalFreshnessStatus:
-                  undefined,
-                freshnessCheckedAt:
-                  undefined
-              }
+              Object.fromEntries(
+                Object.entries(good).filter(
+                  ([key]) =>
+                    key !==
+                      "temporalFreshnessStatus" &&
+                    key !==
+                      "freshnessCheckedAt"
+                )
+              ) as typeof good
             ],
             finalization:
               finalization(),
