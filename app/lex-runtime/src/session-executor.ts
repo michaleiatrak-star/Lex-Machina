@@ -43,6 +43,11 @@ import type {
   ChronologyCheckpoint,
   ChronologyStage
 } from "./chronology-state.js";
+import type {
+  ContractCheckpoint,
+  ContractStage,
+  ContractWorkflowMode
+} from "./contract-analysis-state.js";
 import {
   orchestrateDocumentContext,
   type ContextBudgetReport
@@ -92,6 +97,15 @@ export type SessionExecutionRequest = {
     checkpoint:
       ChronologyCheckpoint;
     temporalGateRequired: boolean;
+  };
+  contractWorkflowContext?: {
+    mode: ContractWorkflowMode;
+    stage: Exclude<
+      ContractStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      ContractCheckpoint;
   };
 };
 
@@ -209,6 +223,16 @@ export type SessionExecutionResponse = {
       ChronologyCheckpoint | null;
     closedCheckpoints:
       ChronologyCheckpoint[];
+  };
+  contractWorkflow?: {
+    caseId: string;
+    revision: number;
+    mode: ContractWorkflowMode;
+    stage: ContractStage;
+    nextCheckpoint:
+      ContractCheckpoint | null;
+    closedCheckpoints:
+      ContractCheckpoint[];
   };
   processAuto?: {
     maxSteps: number;
@@ -404,6 +428,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         ? {
             chronologyWorkflowContext:
               request.chronologyWorkflowContext
+          }
+        : {}),
+      ...(request.contractWorkflowContext
+        ? {
+            contractWorkflowContext:
+              request.contractWorkflowContext
           }
         : {}),
       tools: toolSchemas,
