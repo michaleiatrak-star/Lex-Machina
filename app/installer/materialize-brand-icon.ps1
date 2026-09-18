@@ -8,6 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+# Canonical Lex Machina artwork is hash-pinned.
 $expectedSourceSha256 = "6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
