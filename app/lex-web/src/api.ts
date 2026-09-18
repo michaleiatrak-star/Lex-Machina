@@ -624,7 +624,30 @@ export type SessionExecutionResponse = {
     requiredResources: string[];
     missingResources: string[];
   };
+  processAuto?: {
+    maxSteps: number;
+    stopped:
+      | "FINAL"
+      | "LIMIT_REACHED"
+      | "NODE_BLOCKED";
+    limitReached: boolean;
+    steps: Array<{
+      stage:
+        Exclude<
+          ProcessPleadingStage,
+          "CG_ACCEPTANCE" | "FINAL"
+        >;
+      checkpoint:
+        ProcessPleadingCheckpoint;
+      revisionAfter: number;
+      status:
+        | "DRAFT_PRESENTABLE"
+        | "BLOCKED";
+      answer?: string;
+    }>;
+  };
   processWorkflow?: ProcessPleadingWorkflowView;
+  courtWorkflow?: CourtAnalysisWorkflowView;
 };
 
 export type ProcessPleadingCheckpoint =
@@ -692,6 +715,39 @@ export type ProcessPleadingWorkflowState =
 export type ProcessPleadingWorkflowResponse = {
   caseId: string;
   state: ProcessPleadingWorkflowState | null;
+};
+
+export type CourtAnalysisCheckpoint =
+  | "SD_VER_COMPLETE"
+  | "PASS_I_ISOLATION_CLEAN"
+  | "PASS_II_SOURCES_VERIFIED"
+  | "FIRST_VERIFICATION_COMPLETE"
+  | "FINAL_VERIFICATION_COMPLETE"
+  | "FINAL_GATE_APPROVED"
+  | "FINAL_REPORT_PRESENTED"
+  | "SITUATIONAL_REPORT_PRESENTED"
+  | "PROCESS_PLEADING_OFFER_PRESENTED";
+
+export type CourtAnalysisStage =
+  | "EVIDENCE_SCAN"
+  | "PASS_I_FACTS"
+  | "PASS_II_LAW"
+  | "PASS_III_ADVERSARIAL"
+  | "PASS_IV_FINAL_VERIFICATION"
+  | "FINAL_REPORT"
+  | "SITUATIONAL_REPORT"
+  | "PROCESS_PLEADING_OFFER"
+  | "COMPLETE";
+
+export type CourtAnalysisWorkflowView = {
+  caseId: string;
+  revision: number;
+  stage:
+    CourtAnalysisStage;
+  nextCheckpoint:
+    CourtAnalysisCheckpoint | null;
+  closedCheckpoints:
+    CourtAnalysisCheckpoint[];
 };
 
 export type ApiFailure = {
