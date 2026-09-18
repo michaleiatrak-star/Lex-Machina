@@ -12,7 +12,6 @@ const build = read("app/installer/build-windows-online.ps1");
 const bootstrap = read("app/installer/windows-online-bootstrap.ps1");
 const packageVerifier = read("app/installer/verify-python-package-set.py");
 const privatePython = read("app/installer/install-private-python.ps1");
-const privatePython = read("app/installer/install-private-python.ps1");
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
 const sidecar = read("app/lex-desktop/src-tauri/src/runtime_sidecar.rs");
 const selftest = read("app/installer/windows-payload-selftest.ps1");
