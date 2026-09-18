@@ -47,24 +47,48 @@ The corresponding test scans the actual development corpus and fails CI if any t
 
 Current scope: **32/32 classified**.
 
+
+## Canonical Gate I split
+
+Gate I is runtime-owned and evaluated on every legal chat turn. The model is not responsible for remembering or self-reporting these checks.
+
+| Subgate | Runtime responsibility |
+|---|---|
+| `I-A_ROUTER` | router-first bootstrap |
+| `I-B_CORE_RESOURCES` | mandatory shared/core legal resources |
+| `I-C_WORKFLOW_RESOURCES` | workflow-specific fresh deterministic reads |
+| `I-D_SOURCE_PROVENANCE` | provenance for verified/supported evidence records |
+| `I-D1_SOURCE_HIERARCHY` | admissible source tier for verified statutory material |
+| `I-D2_TEMPORAL_FRESHNESS` | current/historical legal-state freshness proof |
+| `I-E_CITATION_LEDGER` | every detected legal reference must resolve in the verification ledger |
+| `I-E1_LEGAL_CITATIONS` | article/Dz.U. citation verification |
+| `I-F_CASE_SIGNATURES` | case signature, quote and proposition support gates |
+| `I-F1_DOCUMENT_CITATIONS` | local document deep-link, quote and exact-highlight validation |
+| `I-G_OUTPUT_CONTRACT` | deterministic workflow/report output schema |
+| `I-H_FINALIZATION` | hard finalization / fail-closed presentation gate |
+| `I-I_INPUT_COMPLETENESS` | explicit missing-attachment detection and other objective intake gaps |
+| `I-J_STATE_TRANSITION` | optimistic, ordered durable state transition where the workflow is case-bound |
+
+Mandatory workflow policies are pre-read by runtime before provider execution. Post-draft statutory/SN verification and marker application are runtime actions, not prompt obligations. Unsupported case families remain fail-closed rather than being guessed.
+
 ## Executive / orchestration / reporting skills
 
 | Skill | Status | Deterministic target | Semantic remainder | Next migration action |
 |---|---|---|---|---|
-| `prawny-router-v3` | PARTIAL | router-first bootstrap, core gates, dependency/route validation, source/citation/finalization invariants | ambiguous intent/jurisdiction/domain classification | make runtime own strong deterministic DR selection and emit explicit ambiguity instead of accepting an arbitrary PRIMARY |
-| `prawo-polskie-v2` | PARTIAL | versioned DR map/allowlist, map integrity, module resolution | ambiguous multi-domain classification | move routing data from prose substring validation to machine-readable versioned map generated/checked against `ROUTING-MAP.md` |
+| `prawny-router-v3` | ENFORCED | router-first bootstrap, core gates, dependency/route validation, Gate I source/citation/finalization invariants | ambiguous intent/jurisdiction/domain classification | keep ambiguous semantic classification model-owned; runtime remains fail-closed on missing mandatory route/resources |
+| `prawo-polskie-v2` | ENFORCED | DR allowlist, routing-map integrity, module/dependency resolution and route validation | ambiguous multi-domain classification | keep legal-domain interpretation semantic while all mechanical routing invariants stay in code |
 | `pisma-proste-v2` | ENFORCED | intake/output contract, escalation, mandatory resources, validation | facts and argument wording | deepen schema-per-letter-type after release; do not duplicate current gates in prompt |
 | `pisma-procesowe-v3` | ENFORCED | durable per-case state, CP/MRG/order, optimistic concurrency, permits, final status | strategy, argument, counterargument, drafting | keep expanding formal checkpoint predicates only when backed by canonical skill rules |
 | `analiza-sadowa-v6` | ENFORCED | ordered pass/checkpoint state, file completeness, required reads, final report contract | qualification, adversarial interpretation, significance | continue structured pass outputs; keep semantic conclusions model-owned |
-| `analizator-dowodow-v3` | ENFORCED | gates/resources, evidence/provenance invariants, final output contract | significance, hypotheses, conflict interpretation | next: typed evidence×thesis/provenance matrix rather than free-text-only state |
+| `analizator-dowodow-v3` | ENFORCED | encrypted per-case ordered state, checkpoint permits, mandatory resources, attachment/source/provenance gates and final output contract | significance, hypotheses, conflict interpretation | next: typed evidence×thesis/provenance matrix; do not move semantic significance scoring into fixed code |
 | `analizator-przepisow-v2` | ENFORCED | fresh source/status/citation gates and full-report structure | interpretation and conflicts of norms | next: typed statute-version/timeline object and branch selection A–H |
 | `analizator-umow-v1` | ENFORCED | mode/stage/checkpoint state, checklists, report variants | semantic contract risk, negotiation, drafting | next: typed clause inventory/diff while retaining risk interpretation in LLM |
 | `chronologia-sprawy-v1` | ENFORCED | chronology state, date/provenance schema, conflicts, temporal gates | meaning/legal effects | next: typed event/conflict/financial records as canonical runtime objects |
 | `orzeczenia-sadowe-v2` | ENFORCED | source hierarchy/status, citation/provenance fields, final-report contract | similarity, ratio relevance, argumentative use | next: deterministic query/dedup/result ledger |
-| `przesluchanie-swiadkow-v2-min90` | ENFORCED | ordered stages/resources, admissibility/coverage invariants | question wording, adaptation, examination strategy | next: typed witness/question/goal/evidence matrix and formal ban predicates |
+| `przesluchanie-swiadkow-v2-min90` | ENFORCED | encrypted per-case ordered state, checkpoint permits, mandatory resources, admissibility/coverage invariants | question wording, adaptation, examination strategy | next: typed witness/question/goal/evidence matrix and formal ban predicates |
 | `raport-klienta-v1` | ENFORCED | structured blueprint, required source/numeric fields, finalization | plain-language explanation and option framing | keep schema deterministic; no need for a separate monolithic state machine |
 | `raport-sytuacyjny-v2` | ENFORCED | structured blueprint, source/status fields, IO schema | narrative synthesis and prioritization | keep schema deterministic; add versioned risk/status enums where stable |
-| `przewodnik-prawny-v2` | PARTIAL | target: session mode, one-question policy, intake/menu state, irreversible-action gate, route handoff | dialogue, ambiguous intent, lay-language transformation | implement a small durable guide state machine; do not hard-code conversational prose |
+| `przewodnik-prawny-v2` | ENFORCED | session mode, one-question policy, intake/menu state, irreversible-action warning and route handoff | dialogue, ambiguous intent, lay-language transformation | keep dialogue semantic; extend state only when a durable transition is objectively testable |
 | `audyt-systemu-v4` | CODE_FIRST | structural/version/dependency/checksum/map/static checks and release gates | substantive/methodological interpretation of findings | integrate canonical Txx scripts into release gate; avoid recreating them as LLM workflow |
 
 ## DR-01 … DR-16
