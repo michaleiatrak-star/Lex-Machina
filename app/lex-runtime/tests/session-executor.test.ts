@@ -65,6 +65,10 @@ function fixture(
   if (options.reports) {
     skill(
       root,
+      "shared"
+    );
+    skill(
+      root,
       "raport-klienta-v1"
     );
     fs.writeFileSync(
