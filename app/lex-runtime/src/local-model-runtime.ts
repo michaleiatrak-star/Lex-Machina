@@ -678,6 +678,8 @@ export class LocalModelRuntime {
     sourceOverride?: {
       model: ReleaseLocalModel;
       manifestPath: string;
+      beforeCommit?: () =>
+        Promise<void> | void;
     }
   ): Promise<{
     model: LocalModelDescriptor;
@@ -890,6 +892,13 @@ export class LocalModelRuntime {
         );
       } finally {
         await this.stop();
+      }
+
+      if (
+        sourceOverride?.beforeCommit
+      ) {
+        await sourceOverride
+          .beforeCommit();
       }
 
       commitModelFile();
@@ -1291,6 +1300,9 @@ export class LocalModelRuntime {
       }
     );
 
+    let committedReceipt:
+      LocalModelPackReceipt | null =
+        null;
     try {
       const result =
         await this.provision(
@@ -1299,53 +1311,64 @@ export class LocalModelRuntime {
           {
             model:
               trustedModel,
-            manifestPath
+            manifestPath,
+            beforeCommit: () => {
+              const config =
+                this.readConfig();
+              if (
+                !config ||
+                config.model.sha256
+                  .toLowerCase() !==
+                  entry.sha256
+                    .toLowerCase()
+              ) {
+                throw new Error(
+                  "MODEL_PACK_UPDATE_CONFIG_HASH_MISMATCH"
+                );
+              }
+
+              const receipt:
+                LocalModelPackReceipt = {
+                  schemaVersion: 1,
+                  kind:
+                    "LEX_MACHINA_MODEL_PACK_INSTALL",
+                  packVersion:
+                    args.target
+                      .packVersion,
+                  signerKeyId:
+                    args.target
+                      .signerKeyId,
+                  indexSha256:
+                    args.target
+                      .indexSha256,
+                  modelId:
+                    canonical,
+                  modelSha256:
+                    entry.sha256
+                      .toLowerCase(),
+                  installedAt:
+                    new Date()
+                      .toISOString()
+                };
+              this.writeModelPackReceipt(
+                receipt
+              );
+              committedReceipt =
+                receipt;
+            }
           }
         );
 
-      const config =
-        this.readConfig();
-      if (
-        !config ||
-        config.model.sha256
-          .toLowerCase() !==
-          entry.sha256
-            .toLowerCase()
-      ) {
+      if (!committedReceipt) {
         throw new Error(
-          "MODEL_PACK_UPDATE_CONFIG_HASH_MISMATCH"
+          "MODEL_PACK_UPDATE_RECEIPT_MISSING"
         );
       }
 
-      const receipt:
-        LocalModelPackReceipt = {
-          schemaVersion: 1,
-          kind:
-            "LEX_MACHINA_MODEL_PACK_INSTALL",
-          packVersion:
-            args.target
-              .packVersion,
-          signerKeyId:
-            args.target
-              .signerKeyId,
-          indexSha256:
-            args.target
-              .indexSha256,
-          modelId:
-            canonical,
-          modelSha256:
-            entry.sha256
-              .toLowerCase(),
-          installedAt:
-            new Date()
-              .toISOString()
-        };
-      this.writeModelPackReceipt(
-        receipt
-      );
       return {
         ...result,
-        receipt
+        receipt:
+          committedReceipt
       };
     } finally {
       fs.rmSync(
