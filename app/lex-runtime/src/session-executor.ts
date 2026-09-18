@@ -567,6 +567,9 @@ export class SafeSessionExecutor implements SessionExecutor {
                 )
               );
           if (cached) {
+            auxiliary.summary
+              .cachedVerifierReuses +=
+                1;
             cachedVerificationResults.push({
               ...cached,
               tool_use_id:
