@@ -19,6 +19,12 @@
     Abort
   ${EndIf}
   DetailPrint "Lex Machina: stan instalacji $1"
+
+  ; Tauri copies the main executable immediately after PREINSTALL.
+  ; Restore the installer output directory after embedding probe files in
+  ; $PLUGINSDIR, otherwise the main EXE would be emitted into the temporary
+  ; plugin directory and disappear at installer shutdown.
+  SetOutPath "$INSTDIR"
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
