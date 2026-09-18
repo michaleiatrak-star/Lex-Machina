@@ -1927,8 +1927,7 @@ export class LocalModelRuntime {
       ) ||
       receipt.startupMs < 0 ||
       (
-        receipt.tokenizerCalibration !==
-          undefined &&
+        !receipt.tokenizerCalibration ||
         (
           receipt
             .tokenizerCalibration
