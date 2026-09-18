@@ -192,6 +192,11 @@ A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
 ## G39H/I — deterministic execution engine and skill migration
 
+Companion full-corpus audit: `G39-DETERMINISTIC-SKILL-MIGRATION-AUDIT-2026-09-18.md`.
+
+Coverage is machine-enforced by `app/lex-runtime/src/deterministic-skill-coverage.ts` and its test. Current classification covers every top-level `SKILL.md` directory in the development corpus; a new unclassified skill must fail CI.
+
+
 Status: **PARTIAL / VERIFYING**
 
 Implemented:
