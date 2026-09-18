@@ -26,6 +26,10 @@ import type {
   CourtAnalysisCheckpoint,
   CourtAnalysisStage
 } from "./court-analysis-state.js";
+import type {
+  ChronologyCheckpoint,
+  ChronologyStage
+} from "./chronology-state.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -111,6 +115,15 @@ export class LexExecutionEngine {
       >;
       checkpoint:
         CourtAnalysisCheckpoint;
+    };
+    chronologyWorkflowContext?: {
+      stage: Exclude<
+        ChronologyStage,
+        "COMPLETE"
+      >;
+      checkpoint:
+        ChronologyCheckpoint;
+      temporalGateRequired: boolean;
     };
     tools?: NormalizedToolSchema[];
     toolSystemPromptAppendix?: string;
@@ -422,6 +435,49 @@ export class LexExecutionEngine {
       );
     }
 
+    if (
+      args.chronologyWorkflowContext &&
+      workflowPlan.id !==
+        "CHRONOLOGY_V1"
+    ) {
+      emit(
+        "gate",
+        "G39I_CHRONOLOGY_STATE_BINDING",
+        "BLOCKED",
+        "CHRONOLOGY_STATE_ON_NON_CHRONOLOGY_WORKFLOW"
+      );
+      throw new LexExecutionError(
+        "Chronology state was bound to a non-chronology workflow.",
+        "G39I_CHRONOLOGY_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      workflowPlan.id ===
+        "CHRONOLOGY_V1" &&
+      !args.chronologyWorkflowContext
+    ) {
+      emit(
+        "gate",
+        "G39I_CHRONOLOGY_STATE_BINDING",
+        "BLOCKED",
+        "CHRONOLOGY_STATE_CONTEXT_MISSING"
+      );
+      throw new LexExecutionError(
+        "Persisted chronology context is required.",
+        "G39I_CHRONOLOGY_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (args.chronologyWorkflowContext) {
+      emit(
+        "gate",
+        "G39I_CHRONOLOGY_STATE_BINDING",
+        "OK",
+        `stage=${args.chronologyWorkflowContext.stage};checkpoint=${args.chronologyWorkflowContext.checkpoint};temporalGateRequired=${args.chronologyWorkflowContext.temporalGateRequired}`
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -473,6 +529,19 @@ export class LexExecutionEngine {
               "Execute only this court-analysis checkpoint in this turn.",
               "Do not perform, claim completion of, or present output reserved for a later court-analysis stage.",
               "The runtime will close this checkpoint only after deterministic workflow, source, citation and finalization gates pass."
+            ].join("\n")
+          ]
+        : []),
+      ...(args.chronologyWorkflowContext
+        ? [
+            [
+              "# ACTIVE CHRONOLOGY STATE — RUNTIME ENFORCED",
+              `Stage: ${args.chronologyWorkflowContext.stage}.`,
+              `Active checkpoint: ${args.chronologyWorkflowContext.checkpoint}.`,
+              `Temporal OŚ-GATE required: ${args.chronologyWorkflowContext.temporalGateRequired ? "YES" : "NO"}.`,
+              "Execute only this chronology checkpoint in this turn.",
+              "Do not claim completion of inventory, thread identification, extraction, temporal analysis, contradiction indexing or final report stages that are later than the active checkpoint.",
+              "Event meaning, certainty class, provenance and contradiction significance remain semantic work; the runtime controls only stage order and finalization."
             ].join("\n")
           ]
         : []),
