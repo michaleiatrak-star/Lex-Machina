@@ -153,13 +153,59 @@ implements ProviderAdapter {
           candidate.function.name ===
           "verify_case_reference"
       );
+    const readTool =
+      params.tools?.find(
+        (candidate) =>
+          candidate.function.name ===
+          "read_legal_resource"
+      );
 
     if (
       !tool ||
+      !readTool ||
       !params.runTools
     ) {
       throw new Error(
         "G22_CASE_TOOL_MISSING"
+      );
+    }
+
+    const requiredReads = [
+      "shared/MCP-INTEGRACJA.md",
+      "shared/SYGNATURY.md",
+      "shared/PRAWO-HARDGATE.md",
+      "shared/SELF-CHECK-ANTY-FASADA.md"
+    ];
+
+    const readResults =
+      await params.runTools(
+        requiredReads.map(
+          (resource, index) => ({
+            id:
+              `g22-case-resource-${index + 1}`,
+            name:
+              readTool.function.name,
+            input: {
+              skill:
+                "orzeczenia-sadowe-v2",
+              path:
+                resource
+            }
+          })
+        )
+      );
+    if (
+      readResults.length !==
+        requiredReads.length ||
+      readResults.some(
+        (item) =>
+          !item.content.includes(
+            '"status":"OK"'
+          )
+      )
+    ) {
+      throw new Error(
+        "G22_CASE_WORKFLOW_READ_FAILED"
       );
     }
 
