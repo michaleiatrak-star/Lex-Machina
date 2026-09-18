@@ -131,7 +131,7 @@ export function MaintenancePanel({
         await downloadApplicationUpdate();
       setStaged(result);
       setMessage(
-        `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Aktualizacja jest gotowa do instalacji.`
+        `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Podpisany ProductVersion: ${result.publisher.productVersion}. Aktualizacja jest gotowa do instalacji.`
       );
     } catch (problem) {
       setMessage("");
