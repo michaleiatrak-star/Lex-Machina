@@ -24,6 +24,7 @@ import {
 } from "../update-discovery.js";
 import {
   MaintenanceService,
+  commitSkillOverlayRuntimeHealth,
   recoverSkillOverlayForStartup
 } from "../maintenance-service.js";
 import { LocalModelRuntime } from "../local-model-runtime.js";
@@ -256,7 +257,12 @@ export async function startLocalServer(options?: {
 
   assertLoopbackHost(host);
 
-  const registry = new LexSkillRegistry(resolveRuntimeRoot());
+  const runtimeRoot =
+    resolveRuntimeRoot();
+  const registry =
+    new LexSkillRegistry(
+      runtimeRoot
+    );
   const issues = [...registry.scan(), ...registry.validateDeclarations()];
   if (issues.length > 0) {
     throw new Error(
@@ -525,6 +531,23 @@ export async function startLocalServer(options?: {
     const server = app.listen(port, host);
     server.once("error", reject);
     server.once("listening", () => {
+      try {
+        commitSkillOverlayRuntimeHealth(
+          runtimeRoot
+        );
+      } catch (error) {
+        server.close(() => {
+          reject(
+            error instanceof Error
+              ? error
+              : new Error(
+                  String(error)
+                )
+          );
+        });
+        return;
+      }
+
       const address = server.address();
       const actualPort =
         typeof address === "object" && address
