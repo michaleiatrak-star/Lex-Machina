@@ -2,6 +2,7 @@ import fs from "node:fs";
 import type { LegalCorpusAuditEvent } from "./legal-corpus-tool-runtime.js";
 import type { LexSkillRegistry } from "./registry.js";
 import type { ProcessPleadingCheckpoint } from "./process-pleading-state.js";
+import type { CourtAnalysisCheckpoint } from "./court-analysis-state.js";
 
 export type DeterministicWorkflowId =
   | "LEGAL_QUERY_V1"
@@ -44,7 +45,9 @@ export type DeterministicWorkflowOutputReport = {
     | "INTAKE_REQUIRED"
     | "READY_ARTIFACT"
     | "PROCESS_CHECKPOINT"
-    | "PROCESS_FINAL";
+    | "PROCESS_FINAL"
+    | "COURT_CHECKPOINT"
+    | "COURT_FINAL";
   required: string[];
   observed: string[];
   missing: string[];
@@ -145,6 +148,26 @@ const PROCESS_PLEADING_FINAL_MARKERS = [
   "STATUS PISMA",
   "UWAGI REDAKCYJNE PRZED ZŁOŻENIEM",
   "REJESTR KROKÓW"
+] as const;
+
+const COURT_ANALYSIS_FINAL_MARKERS = [
+  "RAPORT ANALITYCZNY",
+  "EXECUTIVE SUMMARY",
+  "PRZEJŚCIE I",
+  "PRZEJŚCIE II",
+  "PRZEJŚCIE III",
+  "PRZEJŚCIE IV",
+  "§1.",
+  "§2.",
+  "§3.",
+  "§4.",
+  "§5.",
+  "§6.",
+  "§7.",
+  "§8.",
+  "§9.",
+  "§10.",
+  "§11."
 ] as const;
 
 
@@ -335,6 +358,13 @@ export function deterministicWorkflowPrompt(
           "At CP-PEER the finalization package must expose RAPORT W3 → STATUS PISMA → UWAGI REDAKCYJNE PRZED ZŁOŻENIEM → REJESTR KROKÓW."
         ]
       : []),
+    ...(plan.id === "COURT_ANALYSIS_V1"
+      ? [
+          "COURT_ANALYSIS_V1 final-report structure is runtime-enforced only at FINAL_REPORT_PRESENTED.",
+          "At that checkpoint present RAPORT ANALITYCZNY, EXECUTIVE SUMMARY, the four pass summaries, and RAPORT §1-§11 in order.",
+          "Do not merge the following situational-report or process-pleading-offer checkpoints into the final-report turn."
+        ]
+      : []),
     ...(plan.escalatedFromSimpleLetter
       ? [
           "Both simple and process pleading skills were selected. The stricter PROCESS_PLEADING_V1 workflow controls this turn."
@@ -349,6 +379,8 @@ export function evaluateDeterministicWorkflowOutput(
   context?: {
     processCheckpoint?:
       ProcessPleadingCheckpoint;
+    courtCheckpoint?:
+      CourtAnalysisCheckpoint;
   }
 ): DeterministicWorkflowOutputReport {
   const normalized =
@@ -430,6 +462,79 @@ export function evaluateDeterministicWorkflowOutput(
     return {
       workflow: plan.id,
       mode: "PROCESS_FINAL",
+      required,
+      observed: [
+        ...observed
+      ],
+      missing: [
+        ...missing
+      ],
+      orderValid,
+      result:
+        missing.length === 0 &&
+        orderValid
+          ? "PASS"
+          : "BLOCKED"
+    };
+  }
+
+  if (
+    plan.id ===
+      "COURT_ANALYSIS_V1"
+  ) {
+    const finalReport =
+      context?.courtCheckpoint ===
+        "FINAL_REPORT_PRESENTED";
+
+    if (!finalReport) {
+      return {
+        workflow: plan.id,
+        mode:
+          "COURT_CHECKPOINT",
+        required: [],
+        observed: [],
+        missing: [],
+        orderValid: true,
+        result: "PASS"
+      };
+    }
+
+    const required = [
+      ...COURT_ANALYSIS_FINAL_MARKERS
+    ];
+    const observed =
+      COURT_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          normalized.includes(
+            marker
+          )
+        );
+    const missing =
+      COURT_ANALYSIS_FINAL_MARKERS
+        .filter((marker) =>
+          !normalized.includes(
+            marker
+          )
+        );
+    const positions =
+      COURT_ANALYSIS_FINAL_MARKERS
+        .map((marker) =>
+          normalized.indexOf(
+            marker
+          )
+        );
+    const orderValid =
+      missing.length === 0 &&
+      positions.every(
+        (position, index) =>
+          index === 0 ||
+          position >
+            positions[index - 1]!
+      );
+
+    return {
+      workflow: plan.id,
+      mode: "COURT_FINAL",
       required,
       observed: [
         ...observed
