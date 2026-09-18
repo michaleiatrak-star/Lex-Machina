@@ -122,6 +122,7 @@ export type SkillOverlayStartupResult = {
   action:
     | "BUNDLED"
     | "CURRENT_HEALTHY"
+    | "CURRENT_RUNTIME_VALIDATION"
     | "ROLLED_BACK_TO_PREVIOUS"
     | "ROLLED_BACK_TO_BUNDLED";
   version: string | null;
@@ -237,6 +238,34 @@ export function validateSkillOverlayRoot(
   };
 }
 
+type SkillHealthMarker = {
+  version?: unknown;
+  health?: unknown;
+  installedAt?: unknown;
+};
+
+function readSkillHealthMarker(
+  root: string
+): SkillHealthMarker | null {
+  try {
+    const parsed = JSON.parse(
+      fs.readFileSync(
+        markerPath(root),
+        "utf8"
+      )
+    ) as unknown;
+    return (
+      parsed &&
+      typeof parsed === "object" &&
+      !Array.isArray(parsed)
+    )
+      ? parsed as SkillHealthMarker
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 function writeSkillHealthMarker(
   root: string,
   patch: Record<string, unknown>
@@ -307,24 +336,64 @@ export function recoverSkillOverlayForStartup(
     validateSkillOverlayRoot(
       current
     );
-  if (
+  const marker =
     currentHealth.healthy
+      ? readSkillHealthMarker(
+          current
+        )
+      : null;
+  const markerHealth =
+    typeof marker?.health ===
+      "string"
+      ? marker.health
+      : null;
+
+  if (
+    currentHealth.healthy &&
+    markerHealth ===
+      "PENDING_RESTART_VALIDATION"
   ) {
     writeSkillHealthMarker(
       current,
       {
         health:
-          "ACTIVE_HEALTHY",
-        validatedAt:
+          "RUNTIME_VALIDATION_IN_PROGRESS",
+        runtimeValidationStartedAt:
           new Date().toISOString()
       }
     );
     return {
       root: current,
       action:
+        "CURRENT_RUNTIME_VALIDATION",
+      version:
+        effectiveCurrentHealth.version
+    };
+  }
+
+  const effectiveCurrentHealth =
+    currentHealth.healthy &&
+    markerHealth ===
+      "RUNTIME_VALIDATION_IN_PROGRESS"
+      ? {
+          healthy: false,
+          version:
+            effectiveCurrentHealth.version,
+          issues: [
+            "RUNTIME_VALIDATION_INCOMPLETE"
+          ]
+        }
+      : currentHealth;
+
+  if (
+    effectiveCurrentHealth.healthy
+  ) {
+    return {
+      root: current,
+      action:
         "CURRENT_HEALTHY",
       version:
-        currentHealth.version
+        effectiveCurrentHealth.version
     };
   }
 
@@ -391,10 +460,10 @@ export function recoverSkillOverlayForStartup(
           "ROLLED_BACK_TO_BUNDLED",
         version:
           bundledHealth.version,
-        ...(currentHealth.version
+        ...(effectiveCurrentHealth.version
           ? {
               rolledBackFromVersion:
-                currentHealth.version
+                effectiveCurrentHealth.version
             }
           : {})
       };
@@ -402,7 +471,7 @@ export function recoverSkillOverlayForStartup(
 
     throw new Error(
       "SKILL_OVERLAY_STARTUP_INVALID_NO_ROLLBACK:current=" +
-      currentHealth.issues.join(",") +
+      effectiveCurrentHealth.issues.join(",") +
       ":previous=" +
       previousHealth.issues.join(",") +
       ":bundled=" +
@@ -445,9 +514,9 @@ export function recoverSkillOverlayForStartup(
         validatedAt:
           new Date().toISOString(),
         rolledBackFromVersion:
-          currentHealth.version,
+          effectiveCurrentHealth.version,
         rollbackReason:
-          currentHealth.issues
+          effectiveCurrentHealth.issues
       }
     );
     fs.rmSync(
@@ -467,13 +536,60 @@ export function recoverSkillOverlayForStartup(
       "ROLLED_BACK_TO_PREVIOUS",
     version:
       previousHealth.version,
-    ...(currentHealth.version
+    ...(effectiveCurrentHealth.version
       ? {
           rolledBackFromVersion:
-            currentHealth.version
+            effectiveCurrentHealth.version
         }
       : {})
   };
+}
+
+export function commitSkillOverlayRuntimeHealth(
+  root: string
+): void {
+  const current =
+    installedSkillOverlayRoot();
+  const resolved =
+    path.resolve(root);
+  if (
+    !fs.existsSync(current) ||
+    resolved !==
+      path.resolve(current)
+  ) {
+    return;
+  }
+
+  const health =
+    validateSkillOverlayRoot(
+      current
+    );
+  if (!health.healthy) {
+    throw new Error(
+      "SKILL_OVERLAY_RUNTIME_COMMIT_INVALID"
+    );
+  }
+
+  const marker =
+    readSkillHealthMarker(
+      current
+    );
+  if (
+    marker?.health !==
+      "RUNTIME_VALIDATION_IN_PROGRESS"
+  ) {
+    return;
+  }
+
+  writeSkillHealthMarker(
+    current,
+    {
+      health:
+        "ACTIVE_HEALTHY",
+      runtimeValidatedAt:
+        new Date().toISOString()
+    }
+  );
 }
 
 export function applicationUpdateStagingRoot(): string {
