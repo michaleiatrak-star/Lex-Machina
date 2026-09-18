@@ -82,9 +82,6 @@ try {
     throw "OFFLINE_BUNDLE_EXTRACTOR_MISSING"
   }
   & $extractor -ArchivePath $bundle -DestinationPath $stage
-  if ($LASTEXITCODE -ne 0) {
-    throw "OFFLINE_BUNDLE_EXTRACT_FAILED:$LASTEXITCODE"
-  }
 
   $lockPath = Join-Path $stage "component-lock.json"
   if (-not (Test-Path -LiteralPath $lockPath -PathType Leaf)) {
