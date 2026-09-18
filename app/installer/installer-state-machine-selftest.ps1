@@ -11,6 +11,31 @@ if (-not (Test-Path -LiteralPath $hooks -PathType Leaf)) {
   throw "INSTALL_STATE_SELFTEST_NSIS_HOOKS_MISSING"
 }
 $hookText = Get-Content -Raw -LiteralPath $hooks
+
+$polish = Join-Path $PSScriptRoot "..\lex-desktop\src-tauri\windows\Polish.nsh"
+$tauriConfig = Join-Path $PSScriptRoot "..\lex-desktop\src-tauri\tauri.conf.json"
+if (
+  -not (Test-Path -LiteralPath $polish -PathType Leaf) -or
+  -not (Test-Path -LiteralPath $tauriConfig -PathType Leaf)
+) {
+  throw "INSTALL_STATE_SELFTEST_MAINTENANCE_LANGUAGE_ASSET_MISSING"
+}
+$polishText = Get-Content -Raw -LiteralPath $polish
+foreach ($requiredText in @(
+  'LangString addOrReinstall ${LANG_POLISH} "Napraw / zainstaluj ponownie składniki"',
+  'LangString dontUninstall ${LANG_POLISH} "Aktualizuj w miejscu (zachowaj dane i katalog)"',
+  'LangString chooseMaintenanceOption ${LANG_POLISH} "Wybierz aktualizację, naprawę albo odinstalowanie."'
+)) {
+  if (-not $polishText.Contains($requiredText)) {
+    throw "INSTALL_STATE_SELFTEST_POLISH_MAINTENANCE_TEXT_MISSING:$requiredText"
+  }
+}
+$tauriConfigObject = Get-Content -Raw -LiteralPath $tauriConfig | ConvertFrom-Json
+$customPolish = [string]$tauriConfigObject.bundle.windows.nsis.customLanguageFiles.Polish
+if ($customPolish -ne "./windows/Polish.nsh") {
+  throw "INSTALL_STATE_SELFTEST_POLISH_CUSTOM_LANGUAGE_NOT_WIRED:$customPolish"
+}
+
 foreach ($required in @(
   'SetOutPath "$INSTDIR\runtime"',
   'File /r "${LEX_HOOK_FILE_DIR}\..\runtime\*"',
