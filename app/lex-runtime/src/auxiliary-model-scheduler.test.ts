@@ -310,6 +310,82 @@ describe(
     );
 
     it(
+      "pins an explicit historical scope even when the helper omits asOf",
+      async () => {
+        const { gateway } =
+          gatewayWith(
+            async () =>
+              JSON.stringify({
+                references: [
+                  {
+                    kind: "statute",
+                    claim: "art. 5 KC",
+                    act: "KC"
+                  }
+                ]
+              })
+          );
+        const scheduler =
+          new AuxiliaryModelScheduler(
+            gateway
+          );
+        const verificationInputs:
+          Array<
+            Record<
+              string,
+              unknown
+            >
+          > = [];
+
+        await scheduler.preflight({
+          config: {
+            enabled: true,
+            provider: "openai",
+            model:
+              "local/bielik-11b-v3-q4km"
+          },
+          primary: {
+            provider: "anthropic",
+            model: "claude-test"
+          },
+          currentUserText:
+            "Według stanu na 2020-06-01 sprawdź art. 5 KC.",
+          runVerificationTools:
+            async (items) => {
+              verificationInputs.push(
+                ...items.map(
+                  (item) => ({
+                    ...item.input
+                  })
+                )
+              );
+              return items.map(
+                (item) => ({
+                  tool_use_id:
+                    item.id,
+                  content:
+                    JSON.stringify({
+                      status:
+                        "VERIFIED"
+                    })
+                })
+              );
+            }
+        });
+
+        expect(
+          verificationInputs
+        ).toEqual([
+          expect.objectContaining({
+            claim: "art. 5 KC",
+            act: "KC",
+            asOf: "2020-06-01"
+          })
+        ]);
+      }
+    );
+
+    it(
       "rejects helper-invented references that are absent from the current user turn",
       async () => {
         const { gateway } =
