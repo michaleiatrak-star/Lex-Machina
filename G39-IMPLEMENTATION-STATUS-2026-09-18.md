@@ -172,56 +172,56 @@ A 200k llama.cpp context is not a substitute for retrieval/provenance gates.
 
 Status: **PARTIAL / VERIFYING**
 
-Implemented deterministic execution foundation:
+Implemented:
 
-- router-first and core legal resources remain runtime-enforced by `LegalSession`;
-- explicit deterministic execution-routing rules are evaluated before semantic scoring;
-- process pleading has priority over simple-letter routing when both rules match;
-- Polish `ł` normalization is deterministic for routing;
-- workflow plans: `LEGAL_QUERY_V1`, `SIMPLE_LETTER_V1`, `PROCESS_PLEADING_V1`;
-- deterministic phase order: PREFLIGHT -> SEMANTIC_EXECUTION -> FINALIZATION;
-- simple-letter preflight requires the always-on M1/M2/M4/M8/M9 + naming + hybrid-validation resources to exist;
-- process-pleading preflight requires AUTOMAT-STANOW, CP-GATE, MOD-STEP-TRACKER and SELF-CHECK-PISMA to exist;
-- runtime checks actual `read_legal_resource` audit events after provider execution;
-- missing mandatory fresh read blocks presentation fail-closed;
-- source/citation/finalization gates remain deterministic and mandatory in every mode.
+- mandatory legal bootstrap is runtime-enforced: `prawny-router-v3` is loaded first, followed by the shared Polish-law hard gate and router detection/anonymization resources;
+- explicit and semantic execution-skill selection is deterministic before provider execution; automatic mode cannot disable the router, privacy, source, citation, audit or finalization gates;
+- deterministic workflow preflight currently covers:
+  - `SIMPLE_LETTER_V1` for `pisma-proste-v2`;
+  - `PROCESS_PLEADING_V1` for `pisma-procesowe-v3`;
+  - `COURT_ANALYSIS_V1` for `analiza-sadowa-v6`;
+  - `EVIDENCE_ANALYSIS_V1` for `analizator-dowodow-v3`;
+  - `STATUTE_ANALYSIS_V1` for `analizator-przepisow-v2`;
+- each migrated workflow declares only always-on deterministic resources; semantic legal qualification, evidence significance, MODE A/B/C choices, interpretation and argumentation remain model work;
+- actual `read_legal_resource` audit events must cover every required fresh resource before the result can pass the workflow gate;
+- process pleading uses encrypted per-case persisted state with optimistic revisions and canonical order:
+  `CG_ACCEPTANCE → W1 → PRE_W2 → W2 → W3 → FINAL`;
+- process checkpoint applicability is auto-resolved only for objective conditions available from persisted evidence inventory; semantic applicability stays fail-closed;
+- CHECKPOINT mode cannot advance without explicit confirmation; conditional user N/A requires a bounded reason and matching revision;
+- no public endpoint can mark a process checkpoint ready; only the verified runtime execution gate can do so;
+- bounded process AUTO is now connected to `/api/sessions/execute`: maximum four semantic nodes per request, each with a separate permit, provider turn, source/citation/finalization checks and optimistic state commit;
+- AUTO stops immediately on a blocked node and does not advance that checkpoint; deterministic applicability is re-evaluated before every node;
+- AUTO response contains an explicit checkpoint trace and combines only successful checkpoint outputs;
+- court-analysis state machine is encrypted per case and now connected to execution:
+  - first court-analysis request may initialize state automatically;
+  - provider receives exactly one runtime-selected court stage/checkpoint;
+  - a checkpoint closes only after `DRAFT_PRESENTABLE`, finalization PASS, audit PASS/closed and deterministic workflow PASS;
+  - state transition is optimistic-revision guarded and records a privacy-safe audit reference derived from session/checkpoint;
+  - blocked court-analysis output cannot advance persisted state;
+- court-analysis lifecycle exposes only GET / initialize / reset to the user; no public checkpoint-completion endpoint exists;
+- deanonymization/final artifact gates remain dependent on persisted process FINAL state.
 
-Implemented multi-turn process-pleading state slice:
+New/updated validation:
 
-- typed main stages: `CG_ACCEPTANCE -> W1 -> PRE_W2 -> W2 -> W3 -> FINAL`;
-- full CP registry is represented in runtime state, including conditional W1 checkpoints and final quality/peer gates;
-- canonical checkpoint order is enforced in code; a later checkpoint cannot be marked ready before the first unresolved checkpoint;
-- every checkpoint has explicit `OPEN / PENDING_CONFIRMATION / CLOSED / NA` status;
-- `FINAL` is invalid unless every checkpoint is `CLOSED` or `NA`, `CP-PEER` is closed and no confirmation is pending;
-- CHECKPOINT mode requires explicit user confirmation before the runtime can permit the next provider execution;
-- AUTO mode removes the user-confirmation stop but does not remove deterministic ordering or other invariant gates;
-- state is persisted per `caseId` inside the existing AES-256-GCM encrypted case workspace;
-- workflow state inherits case ACL and key rotation; tests verify checkpoint identifiers are not visible in the on-disk encrypted envelope and survive rekey;
-- optimistic concurrency uses a monotonically increasing `revision`; stale provider turns cannot overwrite a newer user decision;
-- HTTP execution calculates the same workflow selection as `LexExecutionEngine` before invoking a provider;
-- process execution requires an active case, initialized state, accepted start, no pending confirmation and a non-final state;
-- the runtime injects the exact active stage/checkpoint into the provider system context; it is not accepted from user request JSON;
-- after a successful provider turn the runtime may mark only the exact permitted checkpoint as `PENDING_CONFIRMATION`;
-- a dedicated pure execution gate is unit-tested for missing state, missing start acceptance, pending confirmation and stale revision;
-- the desktop UI has deterministic controls for initialization, start acceptance, current checkpoint confirmation and continuation; it has no control that can directly mark a checkpoint as completed;
-- conditional N/A decisions require an explicit bounded reason and valid optimistic-concurrency revision;
-- workflow reset requires a dedicated confirmation token plus matching revision; stale reset/N/A requests fail with conflict;
-- no public endpoint exists for `checkpoint-ready`; only the verified runtime execution gate can move semantic work into pending confirmation;
-- document generation records a workflow requirement for process pleadings, and final deanonymization/export is guarded by the persisted workflow state: process artifacts requiring finalization cannot become final unless stage/documentStatus are FINAL and no checkpoint confirmation is pending; tokenized DOCX/ODT may exist earlier only as draft-safe artifacts.
+- deterministic workflow tests cover simple/process/court/evidence/statute workflows and missing required reads;
+- skill-selection tests cover explicit evidence and statute routing;
+- process state, execution permit, applicability and encrypted persistence tests remain active;
+- bounded AUTO has pure runner tests plus HTTP integration across ACL/encrypted workspace;
+- court-analysis state and execution permit tests exist plus HTTP persistence/blocked-node integration;
+- G16 verification-loop validator has been updated to perform the new statute-workflow fresh reads instead of bypassing the deterministic preflight.
 
 Still required before G39H/I PASS:
 
-1. extend deterministic checkpoint applicability beyond the implemented persisted-file inventory rules only when the required facts are available as typed runtime state; do not infer semantic conditions from filenames or narrative;
-2. make AUTO mode run a bounded sequence of semantic checkpoint nodes in one requested workflow without requiring repeated user messages, while preserving all deterministic invariant gates;
-3. extend the new end-to-end HTTP coverage (ACL + encrypted workflow store + provider suppression/advance) to explicit final-artifact suppression/finalization;
-4. migrate `analiza-sadowa-v6`;
-5. migrate `analizator-dowodow-v3`;
-6. migrate `analizator-przepisow-v2`;
-7. migrate remaining execution skills.
+- current-head CI must be green after the latest AUTO/court-analysis integration;
+- persist or link a durable per-session audit artifact so court-analysis audit references are independently resolvable, not only integrity-oriented identifiers;
+- extend stateful deterministic execution beyond process/court workflows where a multi-turn state machine materially improves correctness;
+- migrate contract analysis, chronology, case-law, witness-questioning, reports and remaining execution skills according to the migration matrix;
+- comparative regression tests skill-only vs engine-controlled for each migrated workflow;
+- after two stable releases, shorten duplicated skill instructions that are now runtime-enforced.
 
 Invariant:
 
-- automatic mode may choose goals/skills, but security, privacy, source hierarchy, citation registry, provenance, STOP/fail-closed gates and final validation remain deterministic in every mode.
+- automatic mode may choose goals/skills and execute bounded semantic nodes, but security, privacy, source hierarchy, citations, provenance, STOP/fail-closed rules and final validation remain deterministic in every mode.
 
 ## G39J — release / supply-chain hardening
 
