@@ -230,10 +230,13 @@ const checks = {
     ),
   firstDesktopStart:
     acceptance.includes(
-      "first desktop startup without provider key"
+      "first desktop startup with a clean local admin profile"
     ) &&
     acceptance.includes(
       "INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT"
+    ) &&
+    acceptance.includes(
+      "INSTALLER_ACCEPTANCE_FRESH_ADMIN_INVALID"
     ),
   immutableArtifactReceipt:
     workflow.includes(
