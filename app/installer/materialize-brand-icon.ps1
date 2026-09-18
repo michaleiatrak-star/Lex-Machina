@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$expectedSourceSha256 = "b67a1d0eeb9073d96c72097c22c7d57edef2bc4abb4c08f1ae92a3bb320cbb4c"
+$expectedSourceSha256 = "d2dff5cc49b4a8e3e0a9f484f7c14ad80f17e89c28abce44f6ec9c00d7270701"
 $sizes = @(16, 24, 32, 48, 64, 128, 256)
 
 function Get-Sha256Hex([byte[]]$Bytes) {
