@@ -41,6 +41,9 @@ import type {
 import {
   gateISemanticPrompt
 } from "./gate-i-semantic-contract.js";
+import type {
+  OrderedCaseWorkflowId
+} from "./ordered-case-workflow-state.js";
 
 export type RouteDecision = {
   jurisdiction: "PL";
@@ -160,6 +163,12 @@ export class LexExecutionEngine {
       >;
       checkpoint:
         ContractCheckpoint;
+    };
+    orderedCaseWorkflowContext?: {
+      workflowId:
+        OrderedCaseWorkflowId;
+      checkpoint: string;
+      revision: number;
     };
     tools?: NormalizedToolSchema[];
     toolSystemPromptAppendix?: string;
@@ -664,6 +673,56 @@ export class LexExecutionEngine {
       );
     }
 
+    if (
+      args.orderedCaseWorkflowContext &&
+      args.orderedCaseWorkflowContext
+        .workflowId !==
+        workflowPlan.id
+    ) {
+      emit(
+        "gate",
+        "G39I_ORDERED_CASE_STATE_BINDING",
+        "BLOCKED",
+        "ORDERED_CASE_STATE_ON_DIFFERENT_WORKFLOW"
+      );
+      throw new LexExecutionError(
+        "Ordered case workflow state does not match the selected workflow.",
+        "G39I_ORDERED_CASE_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      (
+        workflowPlan.id ===
+          "EVIDENCE_ANALYSIS_V1" ||
+        workflowPlan.id ===
+          "WITNESS_QUESTIONING_V1"
+      ) &&
+      !args.orderedCaseWorkflowContext
+    ) {
+      emit(
+        "gate",
+        "G39I_ORDERED_CASE_STATE_BINDING",
+        "BLOCKED",
+        "ORDERED_CASE_STATE_CONTEXT_MISSING"
+      );
+      throw new LexExecutionError(
+        "Persisted ordered workflow context is required for this execution skill.",
+        "G39I_ORDERED_CASE_STATE_BINDING",
+        [...events]
+      );
+    }
+    if (
+      args.orderedCaseWorkflowContext
+    ) {
+      emit(
+        "gate",
+        "G39I_ORDERED_CASE_STATE_BINDING",
+        "OK",
+        `workflow=${args.orderedCaseWorkflowContext.workflowId};checkpoint=${args.orderedCaseWorkflowContext.checkpoint};revision=${args.orderedCaseWorkflowContext.revision}`
+      );
+    }
+
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -760,6 +819,20 @@ export class LexExecutionEngine {
               "Execute only this chronology checkpoint in this turn.",
               "Do not claim completion of inventory, thread identification, extraction, temporal analysis, contradiction indexing or final report stages that are later than the active checkpoint.",
               "Event meaning, certainty class, provenance and contradiction significance remain semantic work; the runtime controls only stage order and finalization."
+            ].join("\n")
+          ]
+        : []),
+      ...(args.orderedCaseWorkflowContext
+        ? [
+            [
+              "# ACTIVE ORDERED LEGAL WORKFLOW — RUNTIME ENFORCED",
+              `Workflow: ${args.orderedCaseWorkflowContext.workflowId}.`,
+              `Active checkpoint: ${args.orderedCaseWorkflowContext.checkpoint}.`,
+              `Revision: ${args.orderedCaseWorkflowContext.revision}.`,
+              "Execute only this checkpoint in this turn.",
+              "Do not claim completion of any later checkpoint.",
+              "The runtime, not the model, owns checkpoint order, required resources, source verification, citations, provenance and commit.",
+              "Return only the semantic work product needed for the active checkpoint."
             ].join("\n")
           ]
         : []),
