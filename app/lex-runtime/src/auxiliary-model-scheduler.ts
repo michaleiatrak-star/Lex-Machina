@@ -113,7 +113,8 @@ function parseJsonObject(
 }
 
 function parseCandidates(
-  text: string
+  text: string,
+  sourceText: string
 ): Candidate[] {
   const value =
     parseJsonObject(text);
@@ -137,6 +138,11 @@ function parseCandidates(
     Candidate[] = [];
   const seen =
     new Set<string>();
+  const sourceNormalized =
+    normalized(sourceText)
+      .toLocaleLowerCase(
+        "pl"
+      );
 
   for (
     const item
@@ -164,7 +170,15 @@ function parseCandidates(
         record.claim,
         300
       );
-    if (!claim) {
+    if (
+      !claim ||
+      !sourceNormalized
+        .includes(
+          claim.toLocaleLowerCase(
+            "pl"
+          )
+        )
+    ) {
       continue;
     }
 
@@ -187,8 +201,16 @@ function parseCandidates(
         );
       if (
         asOf &&
-        !SAFE_DATE.test(
-          asOf
+        (
+          !SAFE_DATE.test(
+            asOf
+          ) ||
+          !sourceNormalized
+            .includes(
+              asOf.toLocaleLowerCase(
+                "pl"
+              )
+            )
         )
       ) {
         continue;
@@ -229,7 +251,14 @@ function parseCandidates(
         record.courtFamily;
       if (
         !signature ||
-        courtFamily !== "SN"
+        courtFamily !== "SN" ||
+        !sourceNormalized
+          .includes(
+            signature
+              .toLocaleLowerCase(
+                "pl"
+              )
+          )
       ) {
         continue;
       }
@@ -507,7 +536,8 @@ export class AuxiliaryModelScheduler {
           response.fullText.slice(
             0,
             MAX_RESULT_TEXT
-          )
+          ),
+          currentText
         );
       if (
         candidates.length === 0
