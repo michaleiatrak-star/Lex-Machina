@@ -26,69 +26,6 @@ import type {
 } from "../src/update-discovery.js";
 
 const tempRoots: string[] = [];
-const testThumbprints:
-  string[] = [];
-
-function psLiteral(
-  value: string
-): string {
-  return `'${value.replaceAll(
-    "'",
-    "''"
-  )}'`;
-}
-
-function powershell(
-  command: string
-): string {
-  const result =
-    spawnSync(
-      "powershell.exe",
-      [
-        "-NoProfile",
-        "-NonInteractive",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-Command",
-        command
-      ],
-      {
-        encoding: "utf8",
-        windowsHide: true,
-        timeout: 120_000,
-        env: (() => {
-          const env = {
-            ...process.env
-          };
-          for (
-            const key
-            of Object.keys(env)
-          ) {
-            if (
-              key.toLowerCase() ===
-                "psmodulepath"
-            ) {
-              delete env[key];
-            }
-          }
-          return env;
-        })()
-      }
-    );
-  if (
-    result.status !== 0
-  ) {
-    throw new Error(
-      [
-        "WINDOWS_AUTHENTICODE_TEST_POWERSHELL_FAILED",
-        result.stdout.trim(),
-        result.stderr.trim()
-      ].filter(Boolean).join(":")
-    );
-  }
-  return result.stdout.trim();
-}
-
 function findSignTool(): string {
   const where = spawnSync(
     path.join(
@@ -178,178 +115,110 @@ function findSignTool(): string {
   );
 }
 
-function createTrustedTestSigner(
-  target: string
+function copyTrustedForeignSignedExecutable(
+  targetRoot: string
 ): string {
-  const root =
-    path.dirname(target);
-  const pfx =
-    path.join(
-      root,
-      "foreign-signer.pfx"
-    );
-  const password =
-    "LexMachina-CI-" +
-    Math.random()
-      .toString(16)
-      .slice(2);
-  const command = [
-    "$ErrorActionPreference='Stop'",
-    `$pfx=${psLiteral(pfx)}`,
-    `$password=${psLiteral(password)}`,
-    "$rsa=[System.Security.Cryptography.RSA]::Create(2048)",
-    "$dn=[System.Security.Cryptography.X509Certificates.X500DistinguishedName]::new('CN=Lex Machina CI Foreign Signer')",
-    "$req=[System.Security.Cryptography.X509Certificates.CertificateRequest]::new($dn,$rsa,[System.Security.Cryptography.HashAlgorithmName]::SHA256,[System.Security.Cryptography.RSASignaturePadding]::Pkcs1)",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509BasicConstraintsExtension]::new($false,$false,0,$true))",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509KeyUsageExtension]::new([System.Security.Cryptography.X509Certificates.X509KeyUsageFlags]::DigitalSignature,$true))",
-    "$oids=[System.Security.Cryptography.OidCollection]::new()",
-    "$null=$oids.Add([System.Security.Cryptography.Oid]::new('1.3.6.1.5.5.7.3.3'))",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509EnhancedKeyUsageExtension]::new($oids,$true))",
-    "$req.CertificateExtensions.Add([System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierExtension]::new($req.PublicKey,$false))",
-    "$cert=$req.CreateSelfSigned([DateTimeOffset]::UtcNow.AddHours(-1),[DateTimeOffset]::UtcNow.AddDays(2))",
-    "$stores=@('TrustedPeople','TrustedPublisher')",
-    "foreach($storeName in $stores){",
-    "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
-    "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
-    "  try { $store.Add($cert) } finally { $store.Close() }",
-    "}",
-    "$bytes=$cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Pfx,$password)",
-    "[IO.File]::WriteAllBytes($pfx,$bytes)",
-    "$thumb=$cert.Thumbprint",
-    "[Array]::Clear($bytes,0,$bytes.Length)",
-    "$cert.Dispose()",
-    "$rsa.Dispose()",
-    "$thumb"
-  ].join("; ");
-
-  const output =
-    powershell(command)
-      .split(/\r?\n/)
-      .map((line) =>
-        line.trim()
-      )
-      .filter(Boolean)
-      .at(-1);
-
-  if (
-    !output ||
-    !/^[A-F0-9]{40}$/i.test(
-      output
-    )
-  ) {
-    throw new Error(
-      "WINDOWS_AUTHENTICODE_TEST_THUMBPRINT_INVALID"
-    );
-  }
-
   const signTool =
     findSignTool();
-  const signed =
-    spawnSync(
-      signTool,
-      [
-        "sign",
-        "/fd",
-        "SHA256",
-        "/f",
-        pfx,
-        "/p",
-        password,
-        target
-      ],
-      {
-        encoding: "utf8",
-        windowsHide: true,
-        timeout: 30_000
-      }
-    );
-  if (
-    signed.status !== 0
-  ) {
-    throw new Error(
-      [
-        "WINDOWS_AUTHENTICODE_TEST_SIGN_FAILED",
-        signed.stdout.trim(),
-        signed.stderr.trim()
-      ]
-        .filter(Boolean)
-        .join(":")
-    );
-  }
+  const systemRoot =
+    process.env.SystemRoot ??
+    "C:\\Windows";
+  const candidates = [
+    signTool,
+    path.join(
+      systemRoot,
+      "System32",
+      "WindowsPowerShell",
+      "v1.0",
+      "powershell.exe"
+    ),
+    path.join(
+      systemRoot,
+      "System32",
+      "msiexec.exe"
+    ),
+    path.join(
+      systemRoot,
+      "System32",
+      "notepad.exe"
+    ),
+    path.join(
+      systemRoot,
+      "System32",
+      "where.exe"
+    )
+  ];
 
-  const verified =
-    spawnSync(
-      signTool,
-      [
-        "verify",
-        "/pa",
-        "/all",
-        target
-      ],
-      {
-        encoding: "utf8",
-        windowsHide: true,
-        timeout: 30_000
-      }
+  const target =
+    path.join(
+      targetRoot,
+      "LexMachina-Foreign-Signer.exe"
     );
-  if (
-    verified.status !== 0
+  const failures:
+    string[] = [];
+
+  for (
+    const candidate
+    of candidates
   ) {
-    throw new Error(
+    if (
+      !fs.existsSync(
+        candidate
+      )
+    ) {
+      continue;
+    }
+
+    fs.copyFileSync(
+      candidate,
+      target
+    );
+    const verified =
+      spawnSync(
+        signTool,
+        [
+          "verify",
+          "/pa",
+          "/all",
+          target
+        ],
+        {
+          encoding: "utf8",
+          windowsHide: true,
+          timeout: 30_000
+        }
+      );
+
+    if (
+      verified.status === 0
+    ) {
+      return target;
+    }
+
+    failures.push(
       [
-        "WINDOWS_AUTHENTICODE_TEST_VERIFY_FAILED",
+        path.basename(
+          candidate
+        ),
         verified.stdout.trim(),
         verified.stderr.trim()
       ]
         .filter(Boolean)
         .join(":")
+        .slice(0, 2_000)
+    );
+    fs.rmSync(
+      target,
+      { force: true }
     );
   }
 
-  fs.rmSync(
-    pfx,
-    { force: true }
+  throw new Error(
+    [
+      "WINDOWS_AUTHENTICODE_TRUSTED_FOREIGN_EXE_NOT_FOUND",
+      ...failures
+    ].join("|")
   );
-  testThumbprints.push(
-    output.toUpperCase()
-  );
-  return output.toUpperCase();
-}
-
-function cleanupCertificate(
-  thumbprint: string
-): void {
-  const escaped =
-    thumbprint.replace(
-      /[^A-F0-9]/gi,
-      ""
-    );
-  if (
-    !/^[A-F0-9]{40}$/i.test(
-      escaped
-    )
-  ) {
-    return;
-  }
-
-  try {
-    powershell(
-      [
-        "$ErrorActionPreference='SilentlyContinue'",
-        `$thumb=${psLiteral(escaped)}`,
-        "$stores=@('My','Root','TrustedPeople','TrustedPublisher')",
-        "foreach($storeName in $stores){",
-        "  $store=[System.Security.Cryptography.X509Certificates.X509Store]::new($storeName,[System.Security.Cryptography.X509Certificates.StoreLocation]::CurrentUser)",
-        "  $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)",
-        "  try {",
-        "    foreach($cert in @($store.Certificates.Find([System.Security.Cryptography.X509Certificates.X509FindType]::FindByThumbprint,$thumb,$false))){ $store.Remove($cert) }",
-        "  } finally { $store.Close() }",
-        "}"
-      ].join("; ")
-    );
-  } catch {
-    // Best-effort CI cleanup; never mask the actual test result.
-  }
 }
 
 beforeEach(() => {
@@ -370,14 +239,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  for (
-    const thumbprint
-    of testThumbprints.splice(0)
-  ) {
-    cleanupCertificate(
-      thumbprint
-    );
-  }
   for (
     const root
     of tempRoots.splice(0)
@@ -402,35 +263,9 @@ describe.skipIf(
       async () => {
         const root =
           tempRoots.at(-1)!;
-        const source =
-          path.join(
-            process.env.SystemRoot ??
-              "C:\\Windows",
-            "System32",
-            "where.exe"
-          );
-        if (
-          !fs.existsSync(
-            source
-          )
-        ) {
-          throw new Error(
-            "WINDOWS_AUTHENTICODE_TEST_SOURCE_EXE_MISSING"
-          );
-        }
-
         const signed =
-          path.join(
-            root,
-            "LexMachina-Foreign-Signer.exe"
-          );
-        fs.copyFileSync(
-          source,
-          signed
-        );
-        const actualSigner =
-          createTrustedTestSigner(
-            signed
+          copyTrustedForeignSignedExecutable(
+            root
           );
 
         const bytes =
@@ -500,10 +335,7 @@ describe.skipIf(
             typeof fetch;
 
         const deliberatelyDifferent =
-          actualSigner ===
-            "A".repeat(40)
-            ? "B".repeat(40)
-            : "A".repeat(40);
+          "A".repeat(40);
 
         const maintenance =
           new MaintenanceService(
