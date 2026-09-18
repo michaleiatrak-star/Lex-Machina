@@ -564,6 +564,27 @@ function sendCourtWorkflowError(
   return true;
 }
 
+function sendChronologyWorkflowError(
+  res: Response,
+  error: unknown
+): boolean {
+  if (
+    !(error instanceof Error) ||
+    !error.message.startsWith(
+      "CHRONOLOGY_"
+    )
+  ) {
+    return false;
+  }
+
+  res.status(409).json({
+    error:
+      error.message
+        .split(":", 1)[0]
+  });
+  return true;
+}
+
 function sendSupportError(
   res: Response,
   error: unknown
@@ -6899,6 +6920,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       if (
         sendCourtWorkflowError(
+          res,
+          error
+        )
+      ) {
+        return;
+      }
+
+      if (
+        sendChronologyWorkflowError(
           res,
           error
         )
