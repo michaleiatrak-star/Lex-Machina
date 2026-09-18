@@ -1,0 +1,1677 @@
+import {
+  AuditTrail,
+  type AuditEvent
+} from "./audit-trail.js";
+import { AuditedFinalizer } from "./audited-finalizer.js";
+import {
+  LexExecutionEngine,
+  type ExecutionEvent
+} from "./execution-engine.js";
+import { ProviderGateway } from "./providers/gateway.js";
+import type {
+  NormalizedToolCall,
+  NormalizedToolResult,
+  ProviderId
+} from "./providers/types.js";
+import { LexSkillRegistry } from "./registry.js";
+import {
+  VerificationLedger,
+  type VerificationRecord
+} from "./verification-ledger.js";
+import type {
+  LegalVerificationToolFactory
+} from "./verification-tool-runtime.js";
+import {
+  LegalCorpusToolRuntime
+} from "./legal-corpus-tool-runtime.js";
+import {
+  ReportBlueprintToolRuntime,
+  type AcceptedReportBlueprint,
+  type ReportBlueprintKind
+} from "./report-blueprint-tool-runtime.js";
+import {
+  evaluateDeterministicWorkflowOutput,
+  evaluateDeterministicWorkflowReads,
+  type DeterministicWorkflowReadReport
+} from "./deterministic-workflow.js";
+import {
+  documentCitationSystemPrompt,
+  processDocumentCitationMarkers,
+  type PublicDocumentCitation
+} from "./document-citations.js";
+import type {
+  ProcessPleadingCheckpoint,
+  ProcessPleadingCheckpointStatus,
+  ProcessPleadingMode,
+  ProcessPleadingStage
+} from "./process-pleading-state.js";
+import type {
+  CourtAnalysisCheckpoint,
+  CourtAnalysisStage
+} from "./court-analysis-state.js";
+import type {
+  ChronologyCheckpoint,
+  ChronologyStage
+} from "./chronology-state.js";
+import type {
+  ContractCheckpoint,
+  ContractStage,
+  ContractWorkflowMode
+} from "./contract-analysis-state.js";
+import {
+  orchestrateDocumentContext,
+  type ContextBudgetReport
+} from "./context-orchestrator.js";
+import {
+  evaluateGuideOutput,
+  type GuideSessionState
+} from "./guide-session-state.js";
+import {
+  evaluateGateIInvariants,
+  type GateIInvariantReport
+} from "./gate-i-invariants.js";
+import {
+  blockGateITurn,
+  createGateITurnState,
+  passGateITurnPhase,
+  type GateITurnState
+} from "./gate-i-turn-state.js";
+import {
+  AuxiliaryModelScheduler,
+  auxiliaryVerificationCallKey,
+  type AuxiliaryRoutingConfig,
+  type AuxiliaryRoutingSummary
+} from "./auxiliary-model-scheduler.js";
+import {
+  applyAutomaticVerificationMarkers,
+  detectHistoricalAsOf,
+  planAutomaticLegalVerification
+} from "./gate-i-auto-verification.js";
+import {
+  runGateIRuntimePrelude
+} from "./gate-i-runtime-prelude.js";
+import {
+  evaluateGateIInputCompleteness,
+  evaluateGateIWorkflowContract,
+  gateIWorkflowContract,
+  type GateIWorkflowContractReport
+} from "./gate-i-contracts.js";
+import type {
+  OrderedCaseWorkflowId
+} from "./ordered-case-workflow-state.js";
+import {
+  LocalPolishPseudonymizer,
+  PseudonymizationVault,
+  type NamedEntityRecognizer
+} from "./privacy/pseudonymizer.js";
+
+export type SessionDocumentAttachment = {
+  documentId: string;
+  caseId?: string;
+  sourceScope?:
+    | "MANUAL"
+    | "CASE_KNOWLEDGE"
+    | "FIRM_KNOWLEDGE";
+  chunks: Array<{
+    index: number;
+    pageStart: number;
+    pageEnd: number;
+    text: string;
+    representation?:
+      | "FULL"
+      | "EXTRACTIVE_DIGEST";
+    originalChars?: number;
+  }>;
+};
+
+export type SessionExecutionRequest = {
+  query: string;
+  documentAttachments?: SessionDocumentAttachment[];
+  provider: ProviderId;
+  model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: AuxiliaryRoutingSummary;
+  };
+  primarySkill: string;
+  mode: "LAIK" | "PRAWNIK";
+  modelContextTokens?: number;
+  tokenCharsPerToken?: number;
+  auxiliaryText?: string;
+  auxiliaryRouting?: AuxiliaryRoutingConfig;
+  guideContext?: Pick<
+    GuideSessionState,
+    | "revision"
+    | "audience"
+    | "interactionMode"
+    | "rawAnalysis"
+    | "step"
+    | "guidedQuestionIndex"
+    | "pendingIrreversibleAction"
+  >;
+  processWorkflowContext?: {
+    stage: ProcessPleadingStage;
+    checkpoint: ProcessPleadingCheckpoint;
+    mode: ProcessPleadingMode;
+  };
+  courtWorkflowContext?: {
+    stage: Exclude<
+      CourtAnalysisStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      CourtAnalysisCheckpoint;
+  };
+  chronologyWorkflowContext?: {
+    stage: Exclude<
+      ChronologyStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      ChronologyCheckpoint;
+    temporalGateRequired: boolean;
+  };
+  contractWorkflowContext?: {
+    mode: ContractWorkflowMode;
+    stage: Exclude<
+      ContractStage,
+      "COMPLETE"
+    >;
+    checkpoint:
+      ContractCheckpoint;
+  };
+  orderedCaseWorkflowContext?: {
+    workflowId:
+      OrderedCaseWorkflowId;
+    checkpoint: string;
+    revision: number;
+  };
+};
+
+export type PublicBlockedReference = {
+  claim: string;
+  kind: "statute" | "journal" | "case";
+  line: number;
+  status: string;
+};
+
+export type PublicEvidenceItem = {
+  claim: string;
+  kind: VerificationRecord["kind"];
+  status: VerificationRecord["status"];
+  sourceUrl?: string;
+  sourceTier?: VerificationRecord["sourceTier"];
+  fetchedAt: string;
+  verificationMethod?: VerificationRecord["verificationMethod"];
+  temporalMode?: VerificationRecord["temporalMode"];
+  asOf?: string;
+  sourceFormat?: VerificationRecord["sourceFormat"];
+  caseScope?: VerificationRecord["caseScope"];
+  caseSignature?: string;
+  evidenceHash?: string;
+  supportQuoteHash?: string;
+};
+
+export function publicEvidenceBundle(
+  records: VerificationRecord[]
+): PublicEvidenceItem[] {
+  return records.map((record) => ({
+    claim: record.claim,
+    kind: record.kind,
+    status: record.status,
+    ...(record.sourceUrl ? { sourceUrl: record.sourceUrl } : {}),
+    ...(record.sourceTier ? { sourceTier: record.sourceTier } : {}),
+    fetchedAt: record.fetchedAt,
+    ...(record.verificationMethod
+      ? { verificationMethod: record.verificationMethod }
+      : {}),
+    ...(record.temporalMode ? { temporalMode: record.temporalMode } : {}),
+    ...(record.asOf ? { asOf: record.asOf } : {}),
+    ...(record.sourceFormat ? { sourceFormat: record.sourceFormat } : {}),
+    ...(record.caseScope ? { caseScope: record.caseScope } : {}),
+    ...(record.caseSignature ? { caseSignature: record.caseSignature } : {}),
+    ...(record.evidenceHash ? { evidenceHash: record.evidenceHash } : {}),
+    ...(record.supportQuoteHash
+      ? { supportQuoteHash: record.supportQuoteHash }
+      : {})
+  }));
+}
+
+export type SessionExecutionInternalState = {
+  verificationRecords: VerificationRecord[];
+  auditEvents: AuditEvent[];
+};
+
+export const SESSION_EXECUTION_INTERNAL =
+  Symbol("LEX_SESSION_EXECUTION_INTERNAL");
+
+export type SessionExecutionResponse = {
+  sessionId: string;
+  status: "DRAFT_PRESENTABLE" | "BLOCKED";
+  provider: ProviderId;
+  model: string;
+  modelRouting?: {
+    primary: {
+      provider: ProviderId;
+      model: string;
+    };
+    auxiliary?: AuxiliaryRoutingSummary;
+  };
+  primarySkill: string;
+  loadedSkills?: string[];
+  executionSkills?: string[];
+  domainSkills?: string[];
+  answer?: string;
+  documentCitations?: PublicDocumentCitation[];
+  documentCitationFreshness?: {
+    result: "PASS";
+    checked: number;
+  };
+  reportBlueprint?: AcceptedReportBlueprint;
+  finalization: "PASS" | "DEGRADED" | "BLOCKED";
+  blockedReferences: PublicBlockedReference[];
+  verification: {
+    records: number;
+    verified: number;
+    supported: number;
+    unverified: number;
+  };
+  evidence: PublicEvidenceItem[];
+  audit: {
+    result: "PASS" | "BLOCKED";
+    eventCount: number;
+    closed: boolean;
+    missing?: string[];
+    violations?: string[];
+  };
+  workflow?: {
+    id: string;
+    result: "PASS" | "BLOCKED";
+    requiredResources: string[];
+    missingResources: string[];
+  };
+  gateI?: GateIInvariantReport;
+  gateIWorkflowContract?: GateIWorkflowContractReport;
+  gateITurn?: GateITurnState;
+  context?: ContextBudgetReport;
+  courtWorkflow?: {
+    caseId: string;
+    revision: number;
+    stage:
+      CourtAnalysisStage;
+    nextCheckpoint:
+      CourtAnalysisCheckpoint | null;
+    closedCheckpoints:
+      CourtAnalysisCheckpoint[];
+  };
+  chronologyWorkflow?: {
+    caseId: string;
+    revision: number;
+    stage: ChronologyStage;
+    temporalGateRequired: boolean;
+    nextCheckpoint:
+      ChronologyCheckpoint | null;
+    closedCheckpoints:
+      ChronologyCheckpoint[];
+  };
+  contractWorkflow?: {
+    caseId: string;
+    revision: number;
+    mode: ContractWorkflowMode;
+    stage: ContractStage;
+    nextCheckpoint:
+      ContractCheckpoint | null;
+    closedCheckpoints:
+      ContractCheckpoint[];
+  };
+  orderedCaseWorkflow?: {
+    workflowId:
+      OrderedCaseWorkflowId;
+    caseId: string;
+    revision: number;
+    status:
+      | "ACTIVE"
+      | "COMPLETE";
+    nextCheckpoint:
+      string | null;
+    closedCheckpoints:
+      string[];
+  };
+  processAuto?: {
+    maxSteps: number;
+    stopped:
+      | "FINAL"
+      | "LIMIT_REACHED"
+      | "NODE_BLOCKED";
+    limitReached: boolean;
+    steps: Array<{
+      stage: Exclude<
+        ProcessPleadingStage,
+        "CG_ACCEPTANCE" | "FINAL"
+      >;
+      checkpoint:
+        ProcessPleadingCheckpoint;
+      revisionAfter: number;
+      status:
+        "DRAFT_PRESENTABLE" | "BLOCKED";
+      answer?: string;
+    }>;
+  };
+  processWorkflow?: {
+    caseId: string;
+    mode: ProcessPleadingMode;
+    revision: number;
+    stage: ProcessPleadingStage;
+    documentStatus: "DRAFT" | "FINAL";
+    pendingCheckpoint: ProcessPleadingCheckpoint | null;
+    checkpoints: Record<
+      ProcessPleadingCheckpoint,
+      ProcessPleadingCheckpointStatus
+    >;
+  };
+  [SESSION_EXECUTION_INTERNAL]?: SessionExecutionInternalState;
+};
+
+function buildDocumentContext(
+  attachments: SessionDocumentAttachment[]
+): string {
+  const sections = attachments.map((attachment) => {
+    const chunks = attachment.chunks.map((chunk) => {
+      const sourceLabel =
+        attachment.sourceScope === "FIRM_KNOWLEDGE"
+          ? "FIRM KNOWLEDGE"
+          : attachment.sourceScope === "CASE_KNOWLEDGE"
+            ? "CASE KNOWLEDGE"
+            : "DOCUMENT";
+      const representation =
+        chunk.representation ===
+          "EXTRACTIVE_DIGEST"
+          ? " · EXTRACTIVE DIGEST · BACKLINK=ORIGINAL_CHUNK"
+          : "";
+      return [
+        `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
+        chunk.text
+      ].join("\n");
+    });
+    return chunks.join("\n\n");
+  });
+
+  return sections.join("\n\n---\n\n");
+}
+
+function transferExecutionEvents(
+  events: ExecutionEvent[],
+  audit: AuditTrail
+): void {
+  for (const event of events) {
+    if (
+      event.type === "skill_read" ||
+      event.type === "resource_read" ||
+      event.type === "route" ||
+      event.type === "provider_start" ||
+      event.type === "provider_end" ||
+      event.type === "gate"
+    ) {
+      audit.record(
+        event.type,
+        event.target,
+        event.status === "BLOCKED" ? "BLOCKED" : "OK",
+        event.detail ? { detail: event.detail } : undefined
+      );
+    }
+  }
+}
+
+export interface SessionExecutor {
+  execute(request: SessionExecutionRequest): Promise<SessionExecutionResponse>;
+}
+
+export class SafeSessionExecutor implements SessionExecutor {
+  private readonly engine: LexExecutionEngine;
+  private readonly auxiliaryScheduler:
+    AuxiliaryModelScheduler;
+
+  constructor(
+    private readonly registry: LexSkillRegistry,
+    private readonly providers: ProviderGateway,
+    private readonly finalizer = new AuditedFinalizer(),
+    private readonly verificationToolFactory?: LegalVerificationToolFactory,
+    private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer
+  ) {
+    this.engine = new LexExecutionEngine(
+      registry,
+      providers
+    );
+    this.auxiliaryScheduler =
+      new AuxiliaryModelScheduler(
+        providers
+      );
+  }
+
+  async execute(
+    request: SessionExecutionRequest
+  ): Promise<SessionExecutionResponse> {
+    const audit = new AuditTrail();
+    audit.start({
+      provider: request.provider,
+      model: request.model,
+      mode: request.mode
+    });
+
+    const chatPrivacyVault =
+      new PseudonymizationVault();
+    const chatPseudonymizer =
+      new LocalPolishPseudonymizer(
+        chatPrivacyVault,
+        this.chatNamedEntityRecognizer
+      );
+    let protectedQuery:
+      string;
+    let protectedAuxiliaryText:
+      string | undefined;
+    try {
+      const protectedPrimary =
+        await chatPseudonymizer
+          .pseudonymize(
+            request.query
+          );
+      protectedQuery =
+        protectedPrimary.text;
+
+      if (
+        request.auxiliaryText !==
+          undefined &&
+        request.auxiliaryText !==
+          request.query
+      ) {
+        protectedAuxiliaryText =
+          (
+            await chatPseudonymizer
+              .pseudonymize(
+                request.auxiliaryText
+              )
+          ).text;
+      } else if (
+        request.auxiliaryText !==
+          undefined
+      ) {
+        protectedAuxiliaryText =
+          protectedQuery;
+      }
+
+      audit.record(
+        "gate",
+        "G39I_CHAT_PRIVACY",
+        "OK",
+        {
+          pseudonymized:
+            protectedPrimary
+              .findings.length,
+          kinds:
+            Object.keys(
+              protectedPrimary
+                .counts
+            ).sort(),
+          vaultTokens:
+            chatPrivacyVault
+              .size
+        }
+      );
+    } catch (error) {
+      audit.record(
+        "gate",
+        "G39I_CHAT_PRIVACY",
+        "BLOCKED",
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : String(error)
+        }
+      );
+      audit.close(
+        "BLOCKED",
+        {
+          finalization:
+            "PRIVACY_GATE"
+        }
+      );
+      throw new Error(
+        "CHAT_PRIVACY_GATE_FAILED"
+      );
+    }
+
+    const requestedHistoricalAsOf =
+      detectHistoricalAsOf(
+        protectedQuery
+      );
+
+    const ledger = new VerificationLedger();
+    const verificationTools = this.verificationToolFactory?.(ledger);
+    const corpusTools = new LegalCorpusToolRuntime(this.registry);
+    const reportTools = new ReportBlueprintToolRuntime();
+
+    const auxiliary =
+      await this.auxiliaryScheduler
+        .preflight({
+          config:
+            request.auxiliaryRouting ?? {
+              enabled: false,
+              provider: "openai",
+              model:
+                "local/bielik-11b-v3-q4km"
+            },
+          primary: {
+            provider:
+              request.provider,
+            model:
+              request.model
+          },
+          currentUserText:
+            protectedAuxiliaryText ??
+            protectedQuery,
+          ...(verificationTools
+            ? {
+                runVerificationTools:
+                  (calls) =>
+                    verificationTools
+                      .runTools(calls)
+              }
+            : {})
+        });
+
+    audit.record(
+      "gate",
+      "G39K_AUXILIARY_MODEL_ROUTING",
+      auxiliary.summary.status ===
+        "FAILED"
+        ? "DEGRADED"
+        : "OK",
+      {
+        ...auxiliary.summary
+      }
+    );
+
+    const gateIInput =
+      evaluateGateIInputCompleteness(
+        request.query,
+        request.documentAttachments
+          ?.length ?? 0
+      );
+
+    audit.record(
+      "gate",
+      "G39I_INPUT_COMPLETENESS",
+      gateIInput.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      {
+        attachmentAssertion:
+          gateIInput.attachmentAssertion,
+        attachmentCount:
+          gateIInput.attachmentCount,
+        reason:
+          gateIInput.reason
+      }
+    );
+
+    const contextSelection =
+      orchestrateDocumentContext({
+        attachments:
+          request.documentAttachments ?? [],
+        query: request.query,
+        ...(request.modelContextTokens
+          ? {
+              modelContextTokens:
+                request.modelContextTokens
+            }
+          : {}),
+        ...(request.tokenCharsPerToken
+          ? {
+              tokenCharsPerToken:
+                request.tokenCharsPerToken
+            }
+          : {})
+      });
+    const attachments =
+      contextSelection.attachments;
+    const citationSources =
+      contextSelection.citationSources;
+    const documentContext =
+      attachments.length > 0
+        ? buildDocumentContext(
+            attachments
+          )
+        : undefined;
+
+    audit.record(
+      "gate",
+      "G39C_CONTEXT_BUDGET",
+      "OK",
+      {
+        ...contextSelection.report
+      }
+    );
+
+    for (const attachment of attachments) {
+      audit.record(
+        "resource_read",
+        `local-document:${attachment.documentId}`,
+        "OK",
+        {
+          chunks: attachment.chunks.map((chunk) => chunk.index),
+          representations:
+            attachment.chunks.map(
+              (chunk) =>
+                chunk.representation ??
+                "FULL"
+            ),
+          protectedOnly: true,
+          ...(attachment.caseId ? { caseId: attachment.caseId } : {}),
+          ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {})
+        }
+      );
+    }
+
+    const toolSchemas = [
+      ...corpusTools.schemas(),
+      ...reportTools.schemas(),
+      ...(verificationTools ? verificationTools.schemas() : [])
+    ];
+    const toolPrompt = [
+      corpusTools.systemPromptAppendix(),
+      reportTools.systemPromptAppendix(),
+      ...(verificationTools
+        ? [verificationTools.systemPromptAppendix()]
+        : []),
+      ...(auxiliary.appendix
+        ? [auxiliary.appendix]
+        : []),
+      ...(attachments.length > 0
+        ? [documentCitationSystemPrompt(attachments)]
+        : [])
+    ].join("\n\n");
+
+    const execution = await this.engine.executePolishLegalQuery({
+      query: protectedQuery,
+      ...(documentContext ? { documentContext } : {}),
+      provider: request.provider,
+      model: request.model,
+      route: {
+        jurisdiction: "PL",
+        primarySkill: request.primarySkill,
+        mode: request.mode
+      },
+      ...(request.guideContext
+        ? {
+            guideContext:
+              request.guideContext
+          }
+        : {}),
+      ...(request.processWorkflowContext
+        ? {
+            processWorkflowContext:
+              request.processWorkflowContext
+          }
+        : {}),
+      ...(request.courtWorkflowContext
+        ? {
+            courtWorkflowContext:
+              request.courtWorkflowContext
+          }
+        : {}),
+      ...(request.chronologyWorkflowContext
+        ? {
+            chronologyWorkflowContext:
+              request.chronologyWorkflowContext
+          }
+        : {}),
+      ...(request.contractWorkflowContext
+        ? {
+            contractWorkflowContext:
+              request.contractWorkflowContext
+          }
+        : {}),
+      ...(request.orderedCaseWorkflowContext
+        ? {
+            orderedCaseWorkflowContext:
+              request.orderedCaseWorkflowContext
+          }
+        : {}),
+      tools: toolSchemas,
+      toolSystemPromptAppendix: toolPrompt,
+      runGateIRuntimePrelude:
+        (workflowPlan) =>
+          runGateIRuntimePrelude({
+            workflow:
+              workflowPlan.id,
+            query:
+              protectedQuery,
+            ledger,
+            ...(verificationTools
+              ? {
+                  runTools:
+                    (calls) =>
+                      verificationTools
+                        .runTools(
+                          calls
+                        )
+                }
+              : {})
+          }),
+      runTools: async (calls) => {
+        const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
+        const reportCalls = calls.filter((call) => reportTools.handles(call.name));
+        const verificationCalls = calls.filter(
+          (call) =>
+            !corpusTools.handles(call.name) &&
+            !reportTools.handles(call.name)
+        );
+
+        const corpusResults = corpusCalls.length > 0
+          ? await corpusTools.runTools(corpusCalls)
+          : [];
+        const reportResults = reportCalls.length > 0
+          ? await reportTools.runTools(reportCalls)
+          : [];
+        const cachedVerificationResults:
+          NormalizedToolResult[] = [];
+        const uncachedVerificationCalls:
+          NormalizedToolCall[] = [];
+
+        for (
+          const call
+          of verificationCalls
+        ) {
+          const cached =
+            auxiliary
+              .cachedVerificationResults
+              .get(
+                auxiliaryVerificationCallKey(
+                  call
+                )
+              );
+          if (cached) {
+            auxiliary.summary
+              .cachedVerifierReuses +=
+                1;
+            cachedVerificationResults.push({
+              ...cached,
+              tool_use_id:
+                call.id
+            });
+          } else {
+            uncachedVerificationCalls.push(
+              call
+            );
+          }
+        }
+
+        const verificationResults =
+          uncachedVerificationCalls.length > 0 &&
+          verificationTools
+            ? await verificationTools
+                .runTools(
+                  uncachedVerificationCalls
+                )
+            : [];
+
+        const byId = new Map(
+          [
+            ...corpusResults,
+            ...reportResults,
+            ...cachedVerificationResults,
+            ...verificationResults
+          ].map((result) => [
+            result.tool_use_id,
+            result
+          ])
+        );
+
+        return calls.map((call) =>
+          byId.get(call.id) ?? {
+            tool_use_id: call.id,
+            content: JSON.stringify({
+              status: "BLOCKED",
+              error: "UNKNOWN_RUNTIME_TOOL"
+            })
+          }
+        );
+      }
+    });
+
+    transferExecutionEvents(execution.events, audit);
+
+    const corpusAudit = corpusTools.auditEvents();
+    for (const event of corpusAudit) {
+      audit.record(
+        event.tool === "read_legal_resource"
+          ? "resource_read"
+          : "tool_decision",
+        event.target,
+        event.decision === "ALLOW" ? "OK" : "BLOCKED",
+        {
+          tool: event.tool,
+          ...(event.detail ? event.detail : {})
+        }
+      );
+    }
+
+    const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK");
+    audit.record(
+      "gate",
+      "G36_LEGAL_CORPUS_RUNTIME",
+      corpusBlocked ? "BLOCKED" : "OK",
+      { toolEvents: corpusAudit.length }
+    );
+
+    const reportAudit =
+      reportTools.auditEvents();
+    for (const event of reportAudit) {
+      audit.record(
+        "tool_decision",
+        event.target,
+        event.decision === "ALLOW"
+          ? "OK"
+          : "BLOCKED",
+        {
+          tool: event.tool,
+          ...(event.detail
+            ? event.detail
+            : {})
+        }
+      );
+    }
+
+    const workflowReads: DeterministicWorkflowReadReport =
+      evaluateDeterministicWorkflowReads(
+        execution.workflowPlan,
+        corpusAudit,
+        execution.events
+      );
+    const workflowResourcesBlocked =
+      workflowReads.result === "BLOCKED";
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_RESOURCE_READS",
+      workflowResourcesBlocked ? "BLOCKED" : "OK",
+      {
+        workflow: workflowReads.workflow,
+        required: workflowReads.required,
+        observed: workflowReads.observed,
+        missing: workflowReads.missing
+      }
+    );
+
+    const automaticVerificationPlan =
+      planAutomaticLegalVerification(
+        execution.output,
+        ledger,
+        requestedHistoricalAsOf
+      );
+    let automaticVerificationExecuted = 0;
+
+    if (
+      automaticVerificationPlan.calls.length > 0 &&
+      verificationTools
+    ) {
+      const results =
+        await verificationTools.runTools(
+          automaticVerificationPlan.calls
+        );
+      automaticVerificationExecuted =
+        results.length;
+    }
+
+    const automaticVerification =
+      applyAutomaticVerificationMarkers(
+        execution.output,
+        ledger,
+        requestedHistoricalAsOf
+      );
+
+    audit.record(
+      "gate",
+      "G39I_AUTO_POST_DRAFT_VERIFICATION",
+      automaticVerificationPlan.calls.length > 0 &&
+      !verificationTools
+        ? "BLOCKED"
+        : "OK",
+      {
+        planned:
+          automaticVerificationPlan.calls.length,
+        executed:
+          automaticVerificationExecuted,
+        insertedMarkers:
+          automaticVerification.inserted,
+        skipped:
+          automaticVerificationPlan.skipped
+      }
+    );
+
+    if (verificationTools) {
+      for (const toolEvent of verificationTools.auditEvents()) {
+        audit.record(
+          "tool_decision",
+          toolEvent.tool,
+          toolEvent.decision === "ALLOW" ? "OK" : "BLOCKED",
+          {
+            decision: toolEvent.decision,
+            capability: toolEvent.capability ?? null,
+            reason: toolEvent.reason ?? null
+          }
+        );
+      }
+    }
+
+    const processedDocumentCitations =
+      processDocumentCitationMarkers(
+        automaticVerification.text,
+        citationSources
+      );
+    audit.record(
+      "gate",
+      "LOCAL_DOCUMENT_DEEP_LINKS",
+      "OK",
+      {
+        accepted: processedDocumentCitations.citations.length,
+        rejected: processedDocumentCitations.rejectedMarkers,
+        exactHighlights: processedDocumentCitations.citations.filter(
+          (item) => item.highlightStart !== undefined && item.highlightEnd !== undefined
+        ).length
+      }
+    );
+
+    const workflowOutput =
+      evaluateDeterministicWorkflowOutput(
+        execution.workflowPlan,
+        processedDocumentCitations.text,
+        request.processWorkflowContext ||
+        request.courtWorkflowContext ||
+        request.orderedCaseWorkflowContext
+          ? {
+              ...(request.processWorkflowContext
+                ? {
+                    processCheckpoint:
+                      request
+                        .processWorkflowContext
+                        .checkpoint
+                  }
+                : {}),
+              ...(request.courtWorkflowContext
+                ? {
+                    courtCheckpoint:
+                      request
+                        .courtWorkflowContext
+                        .checkpoint
+                  }
+                : {}),
+              ...(request.orderedCaseWorkflowContext
+                ? {
+                    orderedCheckpoint:
+                      request
+                        .orderedCaseWorkflowContext
+                        .checkpoint
+                  }
+                : {})
+            }
+          : undefined
+      );
+    const workflowOutputBlocked =
+      workflowOutput.result ===
+        "BLOCKED";
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_OUTPUT",
+      workflowOutputBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        workflow:
+          workflowOutput.workflow,
+        mode:
+          workflowOutput.mode,
+        required:
+          workflowOutput.required,
+        observed:
+          workflowOutput.observed,
+        missing:
+          workflowOutput.missing,
+        orderValid:
+          workflowOutput.orderValid
+      }
+    );
+
+    const guideOutput =
+      request.guideContext
+        ? evaluateGuideOutput(
+            request.guideContext,
+            processedDocumentCitations.text
+          )
+        : null;
+    const guideOutputBlocked =
+      guideOutput?.result ===
+        "BLOCKED";
+    audit.record(
+      "gate",
+      "G39I_GUIDE_OUTPUT",
+      guideOutputBlocked
+        ? "BLOCKED"
+        : "OK",
+      guideOutput
+        ? {
+            questionCount:
+              guideOutput.questionCount,
+            oneQuestionRuleActive:
+              guideOutput
+                .oneQuestionRuleActive,
+            irreversibleWarningRequired:
+              guideOutput
+                .irreversibleWarningRequired,
+            irreversibleWarningPresent:
+              guideOutput
+                .irreversibleWarningPresent,
+            violations:
+              guideOutput.violations
+          }
+        : {
+            active: false
+          }
+    );
+
+    const requiredReportKind:
+      ReportBlueprintKind | null =
+        execution.workflowPlan.id ===
+          "CLIENT_REPORT_V1"
+          ? "CLIENT_REPORT_V1"
+          : execution.workflowPlan.id ===
+              "SITUATION_REPORT_V1"
+            ? "SITUATION_REPORT_V1"
+            : null;
+    const reportBlueprint =
+      requiredReportKind
+        ? reportTools.acceptedFor(
+            requiredReportKind
+          )
+        : null;
+    const reportBlueprintBlocked =
+      requiredReportKind !== null &&
+      reportBlueprint === null;
+
+    audit.record(
+      "gate",
+      "G39I_REPORT_BLUEPRINT",
+      reportBlueprintBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        required:
+          requiredReportKind,
+        accepted:
+          reportBlueprint?.kind ??
+          null,
+        toolEvents:
+          reportAudit.length
+      }
+    );
+
+    const finalizationText =
+      reportBlueprint
+        ? [
+            processedDocumentCitations.text,
+            "[STRUCTURED_REPORT_BLUEPRINT_DATA]",
+            JSON.stringify(
+              reportBlueprint.blueprint
+            ),
+            "[/STRUCTURED_REPORT_BLUEPRINT_DATA]"
+          ].join("\n")
+        : processedDocumentCitations.text;
+
+    const finalization = this.finalizer.finalize({
+      text: finalizationText,
+      ledger,
+      audit,
+      closeSession: false
+    });
+
+    const verificationRecords =
+      ledger.all();
+    const gateI =
+      evaluateGateIInvariants({
+        events:
+          execution.events,
+        workflowReads,
+        verificationRecords,
+        finalization,
+        outputValidation: {
+          result:
+            workflowOutputBlocked ||
+            guideOutputBlocked ||
+            reportBlueprintBlocked
+              ? "BLOCKED"
+              : "PASS",
+          detail:
+            [
+              `workflow=${workflowOutput.result}`,
+              `guide=${guideOutput?.result ?? "N/A"}`,
+              `reportBlueprint=${reportBlueprintBlocked ? "BLOCKED" : "PASS"}`
+            ].join(";")
+        },
+        documentCitations: {
+          accepted:
+            processedDocumentCitations
+              .citations.length,
+          rejected:
+            processedDocumentCitations
+              .rejectedMarkers,
+          quotedWithoutExactHighlight:
+            processedDocumentCitations
+              .citations
+              .filter(
+                (citation) =>
+                  Boolean(
+                    citation.quote
+                  ) &&
+                  (
+                    citation
+                      .highlightStart ===
+                      undefined ||
+                    citation
+                      .highlightEnd ===
+                      undefined
+                  )
+              )
+              .length
+        }
+      });
+    const gateIBlocked =
+      gateI.result ===
+        "BLOCKED";
+
+    const gateIContract =
+      gateIWorkflowContract(
+        execution.workflowPlan.id,
+        execution.workflowPlan
+          .executionSkill
+      );
+
+    const stateTransition:
+      | "PASS"
+      | "BLOCKED"
+      | "NOT_APPLICABLE" =
+      gateIContract.stateModel ===
+        "DURABLE_CASE"
+        ? (
+            (
+              execution.workflowPlan.id ===
+                "PROCESS_PLEADING_V1" &&
+              request
+                .processWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "COURT_ANALYSIS_V1" &&
+              request
+                .courtWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "CHRONOLOGY_V1" &&
+              request
+                .chronologyWorkflowContext
+            ) ||
+            (
+              execution.workflowPlan.id ===
+                "CONTRACT_ANALYSIS_V1" &&
+              request
+                .contractWorkflowContext
+            ) ||
+            (
+              (
+                execution.workflowPlan.id ===
+                  "EVIDENCE_ANALYSIS_V1" ||
+                execution.workflowPlan.id ===
+                  "WITNESS_QUESTIONING_V1"
+              ) &&
+              request
+                .orderedCaseWorkflowContext
+            )
+          )
+          ? "PASS"
+          : "BLOCKED"
+        : gateIContract.stateModel ===
+            "DURABLE_SESSION"
+          ? (
+              execution.workflowPlan.id ===
+                "LEGAL_GUIDE_V1" &&
+              request.guideContext
+            )
+            ? "PASS"
+            : "BLOCKED"
+          : "NOT_APPLICABLE";
+
+    const gateIWorkflowContractReport =
+      evaluateGateIWorkflowContract({
+        contract:
+          gateIContract,
+        invariants:
+          gateI,
+        input:
+          gateIInput,
+        stateTransition
+      });
+    const gateIWorkflowContractBlocked =
+      gateIWorkflowContractReport.result ===
+        "BLOCKED";
+
+    audit.record(
+      "gate",
+      gateIWorkflowContractReport.gate,
+      gateIWorkflowContractBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        workflow:
+          gateIWorkflowContractReport.workflow,
+        stateModel:
+          gateIWorkflowContractReport.stateModel,
+        commonInvariants:
+          gateIWorkflowContractReport.commonInvariants,
+        checks:
+          gateIWorkflowContractReport.checks
+      }
+    );
+
+    let gateITurn =
+      createGateITurnState(
+        execution.workflowPlan.id
+      );
+    const check = (
+      id:
+        GateIInvariantReport["checks"][number]["id"]
+    ) =>
+      gateI.checks.find(
+        (item) =>
+          item.id === id
+      );
+
+    if (
+      check("ROUTER_FIRST")
+        ?.result !== "PASS"
+    ) {
+      gateITurn =
+        blockGateITurn(
+          gateITurn,
+          "ROUTER_FIRST"
+        );
+    } else {
+      gateITurn =
+        passGateITurnPhase(
+          gateITurn,
+          "ROUTER_PREFLIGHT",
+          "prawny-router-v3 first"
+        );
+
+      const workflowPreflight =
+        execution.events.find(
+          (event) =>
+            event.type ===
+              "gate" &&
+            event.target ===
+              "G39H_WORKFLOW_PREFLIGHT"
+        );
+      if (
+        workflowPreflight
+          ?.status !== "OK"
+      ) {
+        gateITurn =
+          blockGateITurn(
+            gateITurn,
+            "SKILL_PREFLIGHT"
+          );
+      } else {
+        gateITurn =
+          passGateITurnPhase(
+            gateITurn,
+            "SKILL_PREFLIGHT",
+            execution.workflowPlan.id
+          );
+
+        if (
+          corpusBlocked ||
+          check("CORE_RESOURCES")
+            ?.result !==
+              "PASS" ||
+          check("WORKFLOW_RESOURCES")
+            ?.result !==
+              "PASS"
+        ) {
+          gateITurn =
+            blockGateITurn(
+              gateITurn,
+              "RESOURCE_READS"
+            );
+        } else {
+          gateITurn =
+            passGateITurnPhase(
+              gateITurn,
+              "RESOURCE_READS",
+              `workflowReads=${workflowReads.observed.length}`
+            );
+
+          const providerComplete =
+            execution.events.find(
+              (event) =>
+                event.type ===
+                  "gate" &&
+                event.target ===
+                  "G39H_WORKFLOW_PROVIDER_COMPLETE"
+            );
+          if (
+            providerComplete
+              ?.status !== "OK"
+          ) {
+            gateITurn =
+              blockGateITurn(
+                gateITurn,
+                "SEMANTIC_EXECUTION"
+              );
+          } else {
+            gateITurn =
+              passGateITurnPhase(
+                gateITurn,
+                "SEMANTIC_EXECUTION"
+              );
+
+            if (
+              check("SOURCE_PROVENANCE")
+                ?.result !==
+                  "PASS" ||
+              check("SOURCE_HIERARCHY")
+                ?.result !==
+                  "PASS" ||
+              check("TEMPORAL_FRESHNESS")
+                ?.result !==
+                  "PASS"
+            ) {
+              gateITurn =
+                blockGateITurn(
+                  gateITurn,
+                  "SOURCE_VERIFICATION"
+                );
+            } else {
+              gateITurn =
+                passGateITurnPhase(
+                  gateITurn,
+                  "SOURCE_VERIFICATION",
+                  `records=${gateI.verifiedOrSupportedRecords}`
+                );
+
+              if (
+                check("CITATION_LEDGER")
+                  ?.result !==
+                    "PASS" ||
+                check("LEGAL_CITATIONS")
+                  ?.result !==
+                    "PASS" ||
+                check("CASE_SIGNATURES")
+                  ?.result !==
+                    "PASS" ||
+                check("DOCUMENT_CITATIONS")
+                  ?.result !==
+                    "PASS"
+              ) {
+                gateITurn =
+                  blockGateITurn(
+                    gateITurn,
+                    "CITATION_VALIDATION"
+                  );
+              } else {
+                gateITurn =
+                  passGateITurnPhase(
+                    gateITurn,
+                    "CITATION_VALIDATION",
+                    `references=${gateI.legalReferences};cases=${gateI.caseReferences}`
+                  );
+
+                if (
+                  workflowOutputBlocked ||
+                  guideOutputBlocked ||
+                  reportBlueprintBlocked
+                ) {
+                  gateITurn =
+                    blockGateITurn(
+                      gateITurn,
+                      "OUTPUT_VALIDATION"
+                    );
+                } else {
+                  gateITurn =
+                    passGateITurnPhase(
+                      gateITurn,
+                      "OUTPUT_VALIDATION"
+                    );
+
+                  if (
+                    check("FINALIZATION")
+                      ?.result !==
+                        "PASS"
+                  ) {
+                    gateITurn =
+                      blockGateITurn(
+                        gateITurn,
+                        "FINALIZATION"
+                      );
+                  } else {
+                    gateITurn =
+                      passGateITurnPhase(
+                        gateITurn,
+                        "FINALIZATION"
+                      );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    audit.record(
+      "gate",
+      "G39I_TURN_STATE",
+      gateITurn.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      {
+        workflow:
+          gateITurn.workflowId,
+        phase:
+          gateITurn.phase,
+        result:
+          gateITurn.result,
+        events:
+          gateITurn.events.length
+      }
+    );
+
+    audit.record(
+      "gate",
+      gateI.gate,
+      gateIBlocked
+        ? "BLOCKED"
+        : "OK",
+      {
+        checks:
+          gateI.checks,
+        verifiedOrSupportedRecords:
+          gateI.verifiedOrSupportedRecords,
+        legalReferences:
+          gateI.legalReferences,
+        caseReferences:
+          gateI.caseReferences
+      }
+    );
+
+    const workflowFinalizationBlocked =
+      finalization.result !== "PASS" ||
+      corpusBlocked ||
+      workflowResourcesBlocked ||
+      workflowOutputBlocked ||
+      guideOutputBlocked ||
+      reportBlueprintBlocked ||
+      gateIBlocked ||
+      gateIWorkflowContractBlocked;
+    audit.record(
+      "gate",
+      "G39H_WORKFLOW_FINALIZATION",
+      workflowFinalizationBlocked ? "BLOCKED" : "OK",
+      {
+        workflow: execution.workflowPlan.id,
+        finalization: finalization.result,
+        corpusBlocked,
+        workflowResourcesBlocked,
+        workflowOutputBlocked,
+        guideOutputBlocked,
+        reportBlueprintBlocked
+      }
+    );
+
+    const safeToPresent =
+      finalization.result === "PASS" &&
+      !corpusBlocked &&
+      !workflowResourcesBlocked &&
+      !workflowOutputBlocked &&
+      !guideOutputBlocked &&
+      !reportBlueprintBlocked &&
+      !gateIBlocked &&
+      gateITurn.result ===
+        "PASS";
+    audit.record(
+      "gate",
+      "G15_SAFE_SESSION_EXECUTION",
+      safeToPresent ? "OK" : "BLOCKED",
+      { finalization: finalization.result }
+    );
+    audit.close(
+      safeToPresent ? "OK" : "BLOCKED",
+      { finalization: finalization.result }
+    );
+
+    const completeness = audit.validateCompletion({
+      requireVerification: finalization.references.length > 0,
+      requireToolActivity:
+        finalization.references.length > 0 && Boolean(verificationTools),
+      requireDeterministicWorkflow: true
+    });
+    const blockedReferences = finalization.findings
+      .filter((finding) => finding.status !== "VERIFIED")
+      .map((finding) => ({
+        claim: finding.reference.claim,
+        kind: finding.reference.kind,
+        line: finding.reference.line,
+        status: finding.status
+      }));
+
+    const response: SessionExecutionResponse = {
+      sessionId: audit.sessionId,
+      status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
+      provider: request.provider,
+      model: request.model,
+      modelRouting: {
+        primary: {
+          provider:
+            request.provider,
+          model:
+            request.model
+        },
+        ...(request.auxiliaryRouting
+          ? {
+              auxiliary:
+                auxiliary.summary
+            }
+          : {})
+      },
+      primarySkill: request.primarySkill,
+      loadedSkills: execution.loadedSkills,
+      executionSkills: execution.executionSkills,
+      domainSkills: execution.domainSkills,
+      ...(safeToPresent
+        ? {
+            answer:
+              chatPseudonymizer
+                .deanonymize(
+                  processedDocumentCitations
+                    .text
+                ),
+            documentCitations: processedDocumentCitations.citations,
+            ...(reportBlueprint
+              ? {
+                  reportBlueprint
+                }
+              : {})
+          }
+        : {}),
+      finalization: finalization.result,
+      blockedReferences,
+      verification: {
+        records: verificationRecords.length,
+        verified: verificationRecords.filter((record) => record.status === "VERIFIED").length,
+        supported: verificationRecords.filter((record) => record.status === "SUPPORTED").length,
+        unverified: verificationRecords.filter((record) => record.status === "UNVERIFIED").length
+      },
+      evidence: publicEvidenceBundle(verificationRecords),
+      context: {
+        ...contextSelection.report
+      },
+      audit: {
+        result: completeness.result,
+        eventCount: completeness.eventCount,
+        closed: audit.isClosed,
+        missing: [...completeness.missing],
+        violations: [...completeness.violations]
+      },
+      workflow: {
+        id: execution.workflowPlan.id,
+        result:
+          workflowResourcesBlocked ||
+          workflowOutputBlocked ||
+          guideOutputBlocked ||
+          reportBlueprintBlocked ||
+          finalization.result !== "PASS" ||
+          gateIBlocked
+            ? "BLOCKED"
+            : "PASS",
+        requiredResources: workflowReads.required,
+        missingResources: workflowReads.missing
+      },
+      gateI,
+      gateIWorkflowContract:
+        gateIWorkflowContractReport,
+      gateITurn
+    };
+
+    Object.defineProperty(
+      response,
+      SESSION_EXECUTION_INTERNAL,
+      {
+        value: {
+          verificationRecords: verificationRecords.map((record) => ({ ...record })),
+          auditEvents: audit.events.map((event) => ({
+            ...event,
+            ...(event.detail ? { detail: { ...event.detail } } : {})
+          }))
+        } satisfies SessionExecutionInternalState,
+        enumerable: false,
+        configurable: false,
+        writable: false
+      }
+    );
+
+    return response;
+  }
+}

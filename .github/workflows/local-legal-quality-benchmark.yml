@@ -1,0 +1,155 @@
+name: Lex Local AI Legal Quality Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      runtime_root:
+        description: "Installed Lex Machina runtime root containing release-source.json"
+        required: true
+        type: string
+      local_ai_root:
+        description: "Existing %LOCALAPPDATA%\\LexMachina\\local-ai root with a provisioned model"
+        required: true
+        type: string
+      corpus_path:
+        description: "Versioned benchmark corpus JSON. May be an absolute path on the controlled runner."
+        required: true
+        default: "app/lex-runtime/tests/fixtures/legal-quality-synthetic-v1.json"
+        type: string
+      require_expert_private:
+        description: "Require corpus confidentiality=EXPERT_PRIVATE (production legal-quality gate)"
+        required: true
+        default: false
+        type: boolean
+      model_id:
+        description: "Optional exact installed local model id; blank uses the configured model"
+        required: false
+        default: ""
+        type: string
+      profiles:
+        description: "Comma-separated semantic benchmark context profiles"
+        required: true
+        default: "64000,128000,200000"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+      - lex-local-ai-benchmark
+    timeout-minutes: 720
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Resolve and validate benchmark inputs
+        id: corpus
+        shell: pwsh
+        env:
+          LEX_RUNTIME_ROOT: ${{ inputs.runtime_root }}
+          LEX_LOCAL_LLM_ROOT: ${{ inputs.local_ai_root }}
+          REQUESTED_CORPUS: ${{ inputs.corpus_path }}
+          REQUIRE_EXPERT_PRIVATE: ${{ inputs.require_expert_private }}
+        run: |
+          if (-not (Test-Path -LiteralPath (Join-Path $env:LEX_RUNTIME_ROOT "release-source.json") -PathType Leaf)) {
+            throw "LEGAL_QUALITY_BENCHMARK_RUNTIME_MANIFEST_MISSING"
+          }
+          if (-not (Test-Path -LiteralPath (Join-Path $env:LEX_LOCAL_LLM_ROOT "config.json") -PathType Leaf)) {
+            throw "LEGAL_QUALITY_BENCHMARK_MODEL_NOT_CONFIGURED"
+          }
+
+          $candidate = $env:REQUESTED_CORPUS
+          if (-not [IO.Path]::IsPathRooted($candidate)) {
+            $candidate = Join-Path $env:GITHUB_WORKSPACE $candidate
+          }
+          $candidate = [IO.Path]::GetFullPath($candidate)
+          if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+            throw "LEGAL_QUALITY_BENCHMARK_CORPUS_MISSING"
+          }
+
+          $corpus = Get-Content -Raw -LiteralPath $candidate | ConvertFrom-Json
+          if (
+            $env:REQUIRE_EXPERT_PRIVATE -eq "true" -and
+            [string]$corpus.confidentiality -ne "EXPERT_PRIVATE"
+          ) {
+            throw "LEGAL_QUALITY_BENCHMARK_EXPERT_CORPUS_REQUIRED"
+          }
+
+          $corpusHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash.ToLowerInvariant()
+          Write-Host "Corpus: $($corpus.corpusId) $($corpus.corpusVersion)"
+          Write-Host "Confidentiality: $($corpus.confidentiality)"
+          Write-Host "Corpus SHA-256: $corpusHash"
+          "path=$candidate" >> $env:GITHUB_OUTPUT
+
+      - name: Install runtime development dependencies
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+
+      - name: Validate deterministic benchmark evaluator
+        working-directory: app/lex-runtime
+        run: |
+          npm run typecheck
+          npx vitest run tests/legal-quality-benchmark.test.ts
+
+      - name: Run source-bound legal-quality benchmark
+        id: benchmark
+        shell: pwsh
+        continue-on-error: true
+        env:
+          LEX_RUNTIME_ROOT: ${{ inputs.runtime_root }}
+          LEX_LOCAL_LLM_ROOT: ${{ inputs.local_ai_root }}
+        run: |
+          $out = Join-Path $env:RUNNER_TEMP "LexMachina-Local-Legal-Quality-Benchmark.json"
+          $args = @(
+            "run",
+            "benchmark:local-legal-quality",
+            "--",
+            "--output=$out",
+            "--corpus=${{ steps.corpus.outputs.path }}",
+            "--profiles=${{ inputs.profiles }}"
+          )
+          if (-not [string]::IsNullOrWhiteSpace("${{ inputs.model_id }}")) {
+            $args += "--model=${{ inputs.model_id }}"
+          }
+
+          & npm @args
+          $code = $LASTEXITCODE
+          "report=$out" >> $env:GITHUB_OUTPUT
+          "exit_code=$code" >> $env:GITHUB_OUTPUT
+
+          if (-not (Test-Path -LiteralPath $out -PathType Leaf)) {
+            throw "LEGAL_QUALITY_BENCHMARK_REPORT_MISSING"
+          }
+
+      - name: Publish privacy-bounded benchmark report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: LexMachina-Local-Legal-Quality-Benchmark-${{ github.run_id }}
+          path: ${{ steps.benchmark.outputs.report }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Enforce semantic qualification result
+        if: always()
+        shell: pwsh
+        run: |
+          $code = "${{ steps.benchmark.outputs.exit_code }}"
+          if ([string]::IsNullOrWhiteSpace($code)) {
+            throw "LEGAL_QUALITY_BENCHMARK_DID_NOT_RUN"
+          }
+          if ([int]$code -ne 0) {
+            throw "LEGAL_QUALITY_BENCHMARK_QUALIFICATION_FAILED"
+          }
+          Write-Host "Local legal-quality benchmark qualification: PASS"

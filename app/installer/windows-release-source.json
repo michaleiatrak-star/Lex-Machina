@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 4,
+  "target": "windows-x86_64",
+  "applicationVersion": "0.1.3",
+  "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
+  "applicationUpdate": {
+    "verification": "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+    "trustedSignerThumbprints": [],
+    "transaction": "EXTERNAL_RUNNER_BACKUP_HEALTHCHECK_ROLLBACK",
+    "stagingRoot": "%TEMP%\\LexMachinaUpdate",
+    "policy": "FAIL_CLOSED_UNTIL_AUTHENTICODE_TRUST_ROOT_CONFIGURED",
+    "temporaryUnsignedAllowed": false
+  },
+  "runtime": {
+    "node": {
+      "version": "24.21.0",
+      "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip",
+      "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541"
+    },
+    "python": {
+      "version": "3.13.15",
+      "url": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.exe",
+      "sha256": "edec09c4853aeae9ac36efb8c9f95b6b8e2fee65eee56d9767a8b7c69c574403"
+    },
+    "llamaCpp": {
+      "version": "b10964",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+      "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7",
+      "backend": "CPU_X64_PORTABLE",
+      "bind": "127.0.0.1",
+      "delivery": "ON_DEMAND_AFTER_INSTALL",
+      "backends": [
+        {
+          "id": "CPU_X64_PORTABLE",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+          "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7",
+          "bytes": 18427629,
+          "gpuOffload": false
+        },
+        {
+          "id": "VULKAN_X64",
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-vulkan-x64.zip",
+          "sha256": "1ee3ad952f4ba71f438bd6d7bebef19e1c7af04adcaa35d08b4ddabb27d4c642",
+          "bytes": 31674542,
+          "gpuOffload": true,
+          "launch": {
+            "gpuLayers": "AUTO_MAX"
+          }
+        }
+      ],
+      "backendPolicy": "USER_SELECTABLE_AUTO_WITH_CPU_FALLBACK"
+    }
+  },
+  "pythonPackages": {
+    "paddleocr": "3.7.0",
+    "paddlepaddle": "3.3.1",
+    "PyMuPDF": "1.28.2",
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0",
+    "stanza": "1.14.0",
+    "torch": "2.14.0"
+  },
+  "models": {
+    "paddle": [
+      "PP-LCNet_x1_0_doc_ori",
+      "UVDoc",
+      "PP-LCNet_x1_0_textline_ori",
+      "PP-OCRv6_medium_det",
+      "PP-OCRv6_medium_rec"
+    ],
+    "stanza": {
+      "language": "pl",
+      "processors": "tokenize,ner"
+    },
+    "localLlm": [
+      {
+        "id": "local/mistral-nemo-12b-q4km",
+        "updateFamily": "MISTRAL",
+        "displayName": "Mistral NeMo 12B Instruct Q4_K_M",
+        "sourceModel": "mistralai/Mistral-Nemo-Instruct-2407",
+        "ggufRepository": "second-state/Mistral-Nemo-Instruct-2407-GGUF",
+        "filename": "Mistral-Nemo-Instruct-2407-Q4_K_M.gguf",
+        "url": "https://huggingface.co/second-state/Mistral-Nemo-Instruct-2407-GGUF/resolve/main/Mistral-Nemo-Instruct-2407-Q4_K_M.gguf?download=true",
+        "sha256": "186ac886e5cf42a6ca0815e60504f13c7cc95446eb05ac2f1515e388976cebcf",
+        "quantization": "Q4_K_M",
+        "nativeContext": 131072,
+        "minimumContext": 64000,
+        "maximumRuntimeContext": 200000,
+        "contextExtension": {
+          "enabled": true,
+          "mode": "YARN",
+          "requiresExplicitUserChoiceAboveNative": true
+        },
+        "delivery": "ON_DEMAND_AFTER_INSTALL",
+        "license": "Apache-2.0"
+      },
+      {
+        "id": "local/bielik-11b-v3-q4km",
+        "updateFamily": "BIELIK",
+        "displayName": "Bielik 11B v3 Instruct Q4_K_M",
+        "sourceModel": "speakleash/Bielik-11B-v3.0-Instruct",
+        "ggufRepository": "speakleash/Bielik-11B-v3.0-Instruct-GGUF",
+        "filename": "Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
+        "url": "https://huggingface.co/speakleash/Bielik-11B-v3.0-Instruct-GGUF/resolve/main/Bielik-11B-v3.0-Instruct.Q4_K_M.gguf?download=true",
+        "sha256": "c16841621efe93c7c8ebf1b374709a96276f3741e649f83ed90131a7b5ad23a8",
+        "quantization": "Q4_K_M",
+        "nativeContext": 32768,
+        "minimumContext": 64000,
+        "maximumRuntimeContext": 200000,
+        "contextExtension": {
+          "enabled": true,
+          "mode": "YARN",
+          "requiresExplicitUserChoiceAboveNative": true
+        },
+        "delivery": "ON_DEMAND_AFTER_INSTALL",
+        "license": "Apache-2.0"
+      }
+    ]
+  },
+  "localAi": {
+    "delivery": "USER_INITIATED_AFTER_INSTALL",
+    "installRoot": "%LOCALAPPDATA%\\LexMachina\\local-ai",
+    "contextSelection": {
+      "minimum": 64000,
+      "maximum": 200000,
+      "step": 1000,
+      "recommendedProfiles": [
+        64000,
+        96000,
+        128000,
+        160000,
+        200000
+      ],
+      "default": 64000
+    },
+    "networkRequiredOnlyWhenProvisioning": true,
+    "applicationUsableWithoutLocalAi": true,
+    "backendSelection": {
+      "allowed": [
+        "AUTO",
+        "VULKAN_X64",
+        "CPU_X64_PORTABLE"
+      ],
+      "default": "AUTO",
+      "autoPolicy": "TRY_VULKAN_WHEN_ACCELERATOR_IS_DETECTED_THEN_CPU_FALLBACK",
+      "validation": "BACKEND_IS_ACTIVE_ONLY_AFTER_LLAMA_SERVER_HEALTH_AND_TOKENIZER_CALIBRATION"
+    }
+  },
+  "systemPrerequisites": {
+    "webview2": {
+      "delivery": "TAURI_DOWNLOAD_BOOTSTRAPPER_IF_MISSING"
+    },
+    "visualCppRuntime": {
+      "version": "14.51.36247",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/ebdab8e5-1d7b-4d9f-a11b-cbb1720c3b12/843068991DAAA1F73AD9F6239BCE4D0F6A07A51F18C37EA2A867E9BECA71295C/VC_redist.x64.exe",
+      "sha256": "843068991daaa1f73ad9f6239bce4d0f6a07a51f18c37ea2a867e9beca71295c",
+      "delivery": "DOWNLOAD_IF_MISSING"
+    }
+  },
+  "notes": {
+    "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
+    "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
+    "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
+    "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
+    "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
+    "skillUpdateSigning": "Skill self-update is fail-closed until a production Ed25519 public key is committed to the skill trust root and the release index is signed by the matching private key.",
+    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key."
+  },
+  "modelPackUpdate": {
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "trustedEd25519PublicKeys": [],
+    "indexAsset": "LexMachina-ModelPack-Index.json",
+    "signatureAsset": "LexMachina-ModelPack-Index.sig",
+    "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
+    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": false
+  },
+  "skillUpdate": {
+    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "trustedEd25519PublicKeys": [],
+    "indexAsset": "LexMachina-Skills-Index.json",
+    "signatureAsset": "LexMachina-Skills-Index.sig",
+    "activation": "VALIDATE_THEN_ATOMIC_SWITCH_WITH_ROLLBACK",
+    "policy": "FAIL_CLOSED_UNTIL_SKILL_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": false
+  }
+}

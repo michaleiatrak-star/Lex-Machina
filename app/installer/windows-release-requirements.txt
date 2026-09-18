@@ -1,0 +1,7 @@
+paddleocr==3.7.0
+paddlepaddle==3.3.1
+PyMuPDF==1.28.2
+numpy==2.3.5
+Pillow==12.3.0
+stanza==1.14.0
+torch==2.14.0

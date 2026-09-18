@@ -1,0 +1,440 @@
+name: Lex Runtime Validation
+
+on:
+  workflow_call:
+  pull_request:
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - "app/lex-desktop/**"
+      - "app/ocr/**"
+      - "app/privacy/**"
+      - "app/storage/**"
+      - "app/installer/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+      - ".github/workflows/offline-windows-installer.yml"
+  push:
+    branches:
+      - feature/local-runtime
+    paths:
+      - "app/lex-runtime/**"
+      - "app/lex-web/**"
+      - "app/lex-desktop/**"
+      - "app/ocr/**"
+      - "app/privacy/**"
+      - "app/storage/**"
+      - "app/installer/**"
+      - "app/lex-version.yaml"
+      - "Wersja rozwojowa rozpakowana/**"
+      - ".github/workflows/lex-runtime.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  g1-g29-g32:
+    name: G1-G36 + G31C2/D/E + G34F/G34G + G35C + P4B deterministic validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: TypeScript strict typecheck
+        run: npm run typecheck
+
+      - name: Runtime release JS build
+        run: npm run build
+
+      - name: Unit tests — runtime and app contracts
+        run: npm test
+
+      - name: Python worker syntax
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py ../storage/office_extract_worker.py ../storage/spreadsheet_extract_worker.py ../storage/legal_document_worker.py
+
+      - name: G1 — corpus integrity
+        run: npm run validate:corpus
+
+      - name: G3 — router-first bootstrap on full corpus
+        run: npm run validate:g3
+
+      - name: G4 — Tool Broker safety
+        run: npm run validate:g4
+
+      - name: G5 — Provider conformance
+        run: npm run validate:g5
+
+      - name: G6 — Provider credential boundary
+        run: npm run validate:g6
+
+      - name: G7 — deterministic vertical slice
+        run: npm run validate:g7
+
+      - name: G8 — HARD GATE finalization
+        run: npm run validate:g8
+
+      - name: G9 — audit completeness
+        run: npm run validate:g9
+
+      - name: G10 — export gate
+        run: npm run validate:g10
+
+      - name: G11 — skill contract matrix
+        run: npm run validate:g11
+
+      - name: G12 — dynamic model catalog
+        run: npm run validate:g12
+
+      - name: G13 — localhost HTTP API
+        run: npm run validate:g13
+
+      - name: G15 — safe session execution
+        run: npm run validate:g15
+
+      - name: G16 — verified legal source tool loop
+        run: npm run validate:g16
+
+      - name: G18 — deterministic legal source resolver
+        run: npm run validate:g18
+
+      - name: G19 — temporal source freshness
+        run: npm run validate:g19
+
+      - name: G20 — official PDF verification
+        run: npm run validate:g20
+
+      - name: G21 — amendment-aware legal state
+        run: npm run validate:g21
+
+      - name: G22 — official SN case-law verification
+        run: npm run validate:g22
+
+      - name: G23 — exact SN quote evidence
+        run: npm run validate:g23
+
+      - name: G24 — SN proposition evidence link
+        run: npm run validate:g24
+
+      - name: G25 — structured evidence bundle
+        run: npm run validate:g25
+
+      - name: G26 — provider configuration status
+        run: npm run validate:g26
+
+      - name: G27 — complete document OCR and chunking
+        run: npm run validate:g27
+
+      - name: G27A — direct image OCR
+        run: npm run validate:g27a
+
+      - name: G28 — local pseudonymization and deanonymization
+        run: npm run validate:g28
+
+      - name: G28A — user-directed privacy review
+        run: npm run validate:g28a
+
+      - name: G29 — private complete-document pipeline
+        run: npm run validate:g29
+
+      - name: G30A — SAOS + CBOSA case-law discovery
+        run: npm run validate:g30a
+
+      - name: G31A — local case storage foundation
+        run: npm run validate:g31a
+
+      - name: G31B — safe ZIP intake foundation
+        run: npm run validate:g31b
+
+      - name: G32 — protected document attachment session
+        run: npm run validate:g32
+
+      - name: G34A — local account bootstrap
+        run: npm run validate:g34a
+
+      - name: G34B — login/session boundary
+        run: npm run validate:g34b
+
+      - name: G34C — case ACL
+        run: npm run validate:g34c
+
+      - name: G34D — case key envelopes
+        run: npm run validate:g34d
+
+      - name: G35A — case workspace browser
+        run: npm run validate:g35a
+
+      - name: G35B — shared firm template library
+        run: npm run validate:g35b
+
+      - name: G35C — template-assisted safe generation profile
+        run: npm run validate:g35c
+
+      - name: G31C1 — encrypted persistent privacy vault
+        run: npm run validate:g31c1
+
+      - name: G31C2 — typed authoring AST and generation aliases
+        run: npm run validate:g31c2
+
+      - name: G31D — deterministic DOCX generation
+        run: npm run validate:g31d
+
+      - name: G31E — deterministic ODT generation
+        run: npm run validate:g31e
+
+      - name: G34E — recovery and password lifecycle
+        run: npm run validate:g34e
+
+      - name: G34F1 — transaction reauthorization foundation
+        run: npm run validate:g34f1
+
+      - name: G34F — full deanonymization and sensitive export
+        run: npm run validate:g34f
+
+      - name: G34G — Tauri production trust boundary
+        run: npm run validate:g34g
+
+      - name: G33A — installer component manifest
+        run: npm run validate:g33a
+
+      - name: G33B — verified online bootstrap installation
+        run: npm run validate:g33b
+
+      - name: G33C — zero-touch first run
+        run: npm run validate:g33c
+
+      - name: G37B — passwordless bootstrap and later password setup
+        run: npm run validate:g37b
+
+      - name: G37D — signed temporary SERVICE support entitlement
+        run: npm run validate:g37d
+
+      - name: G37C2 — persistent provider credentials in OS keyring
+        run: npm run validate:g37c2
+
+      - name: G37F — multi-file drag/drop queue and accessibility
+        run: npm run validate:g37f
+
+      - name: Phase 13 — self-contained Windows offline installer contract
+        run: npm run validate:release-offline
+
+      - name: G36 — legal skill runtime completeness
+        run: npm run validate:g36
+
+      - name: P4B — case lifecycle
+        run: npm run validate:p4b
+
+      - name: G34H1/H2 — encrypted incoming and ZIP members
+        run: npm run validate:g34h12
+
+      - name: G34H3 — encrypted document persistence
+        run: npm run validate:g34h3
+
+      - name: G34H4 — encrypted artifact persistence
+        run: npm run validate:g34h4
+
+      - name: G34H5 — legacy plaintext migration/removal
+        run: npm run validate:g34h5
+
+  g30a-live-case-law:
+    name: G30A live SAOS and CBOSA discovery probe
+    needs: g1-g29-g32
+    # Probe from the actual Windows release class. Ubuntu has independently
+    # confirmed live SAOS, while CBOSA is documented as egress-sensitive.
+    # Deterministic transport semantics remain covered on the main job.
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G30A — real SAOS and CBOSA discovery
+        run: npm run validate:g30a-live
+
+  g19-live-freshness:
+    name: G19 live temporal freshness probe
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G19 — real ELI temporal freshness
+        run: npm run validate:g19-live
+
+  g20-live-pdf:
+    name: G20 live official PDF probe
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G20 — real ELI PDF verification
+        run: npm run validate:g20-live
+
+  g22-live-sn:
+    name: G22 live SN case-law probe
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G22 — real sn.pl case verification
+        run: npm run validate:g22-live
+
+  g17-live-source:
+    name: G17 live official-source probe
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G17 — real API Sejm/ELI verification
+        run: npm run validate:g17
+
+  g14-g32-web:
+    name: G14-G35 local web UI
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install web dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Web unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: G14-G32 — browser bundle safety
+        run: npm run validate:g14
+
+  g34g-desktop-windows:
+    name: G34G Windows Tauri compile and trust-boundary tests
+    needs:
+      - g1-g29-g32
+      - g14-g32-web
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app/lex-desktop
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Setup Rust
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustc --version
+          cargo --version
+
+      - name: Install web dependencies
+        working-directory: app/lex-web
+        run: npm install --no-audit --no-fund
+
+      - name: Install desktop dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Rust trust-boundary tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Rust strict compile
+        run: cargo check --manifest-path src-tauri/Cargo.toml
+
+      - name: Tauri Windows application build
+        run: npx tauri build --no-bundle
+

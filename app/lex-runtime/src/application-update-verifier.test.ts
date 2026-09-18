@@ -1,0 +1,271 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import {
+  afterEach,
+  describe,
+  expect,
+  it
+} from "vitest";
+import {
+  applicationUpdateSignatureMode,
+  assertApplicationInstallerVersion,
+  normalizeApplicationProductVersion,
+  trustedUpdateSignerThumbprints,
+  WindowsAuthenticodeInstallerVerifier
+} from "./application-update-verifier.js";
+
+const roots: string[] = [];
+
+function manifest(
+  applicationUpdate: unknown
+): string {
+  const root = fs.mkdtempSync(
+    path.join(
+      os.tmpdir(),
+      "lex-app-update-trust-"
+    )
+  );
+  roots.push(root);
+  const target =
+    path.join(
+      root,
+      "release-source.json"
+    );
+  fs.writeFileSync(
+    target,
+    JSON.stringify({
+      applicationUpdate
+    }),
+    "utf8"
+  );
+  return target;
+}
+
+afterEach(() => {
+  for (const root of roots.splice(0)) {
+    fs.rmSync(root, {
+      recursive: true,
+      force: true
+    });
+  }
+});
+
+describe(
+  "application installer ProductVersion binding",
+  () => {
+    it(
+      "normalizes semver and Windows four-part zero ProductVersion",
+      () => {
+        expect(
+          normalizeApplicationProductVersion(
+            "0.1.4"
+          )
+        ).toBe("0.1.4");
+        expect(
+          normalizeApplicationProductVersion(
+            "0.1.4.0"
+          )
+        ).toBe("0.1.4");
+      }
+    );
+
+    it(
+      "rejects a signed installer whose ProductVersion differs from the discovered release",
+      () => {
+        expect(() =>
+          assertApplicationInstallerVersion(
+            "0.1.3.0",
+            "0.1.4"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_VERSION_MISMATCH:expected=0.1.4:actual=0.1.3"
+        );
+      }
+    );
+
+    it(
+      "rejects non-canonical four-part versions instead of truncating them",
+      () => {
+        expect(() =>
+          normalizeApplicationProductVersion(
+            "0.1.4.7"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_PRODUCT_VERSION_INVALID"
+        );
+      }
+    );
+
+    it(
+      "rejects malformed expected release versions",
+      () => {
+        expect(() =>
+          assertApplicationInstallerVersion(
+            "0.1.4.0",
+            "v0.1.4"
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_EXPECTED_VERSION_INVALID"
+        );
+      }
+    );
+  }
+);
+
+describe(
+  "application update signer policy",
+  () => {
+    it(
+      "normalizes and deduplicates trusted SHA-1 certificate thumbprints",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+            trustedSignerThumbprints: [
+              "aa bb cc dd ee ff 00 11 22 33 44 55 66 77 88 99 aa bb cc dd",
+              "AABBCCDDEEFF00112233445566778899AABBCCDD"
+            ]
+          });
+
+        expect(
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toEqual([
+          "AABBCCDDEEFF00112233445566778899AABBCCDD"
+        ]);
+      }
+    );
+
+    it(
+      "fails closed when no production signer is configured",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+            trustedSignerThumbprints: []
+          });
+
+        expect(() =>
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
+        );
+      }
+    );
+
+    it(
+      "allows the explicit temporary unsigned policy while keeping signer lookup fail-closed",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
+            trustedSignerThumbprints: [],
+            temporaryUnsignedAllowed: true
+          });
+
+        expect(
+          applicationUpdateSignatureMode(
+            path
+          )
+        ).toBe("OPTIONAL");
+        expect(() =>
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
+        );
+      }
+    );
+
+    it(
+      "returns an explicit unsigned receipt identity after ProductVersion verification",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_REQUIRED_SIGNATURE_OPTIONAL",
+            trustedSignerThumbprints: [],
+            temporaryUnsignedAllowed: true
+          });
+        const verifier =
+          new WindowsAuthenticodeInstallerVerifier(
+            undefined,
+            path,
+            () => {
+              throw new Error(
+                "AUTHENTICODE_MUST_NOT_BE_REQUIRED"
+              );
+            },
+            () => "0.1.4.0"
+          );
+
+        expect(
+          verifier.verify(
+            "fixture.exe",
+            "0.1.4"
+          )
+        ).toEqual({
+          verification:
+            "UNSIGNED_ALLOWED",
+          subject: null,
+          thumbprint: null,
+          productVersion: "0.1.4",
+          warning:
+            "TEMPORARY_UNSIGNED_UPDATE_ALLOWED"
+        });
+      }
+    );
+
+    it(
+      "rejects malformed thumbprints",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
+            trustedSignerThumbprints: [
+              "not-a-thumbprint"
+            ]
+          });
+
+        expect(() =>
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
+        );
+      }
+    );
+
+    it(
+      "rejects a manifest that weakens the verification policy",
+      () => {
+        const path =
+          manifest({
+            verification:
+              "SHA256_ONLY",
+            trustedSignerThumbprints: [
+              "AABBCCDDEEFF00112233445566778899AABBCCDD"
+            ]
+          });
+
+        expect(() =>
+          trustedUpdateSignerThumbprints(
+            path
+          )
+        ).toThrow(
+          "APPLICATION_UPDATE_SIGNER_POLICY_MISSING"
+        );
+      }
+    );
+  }
+);

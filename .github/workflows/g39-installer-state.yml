@@ -1,0 +1,63 @@
+name: G39 Installer State Machine
+
+on:
+  pull_request:
+    paths:
+      - "app/installer/*.ps1"
+      - "app/installer/get-install-state.ps1"
+      - "app/installer/installer-state-machine-selftest.ps1"
+      - "app/installer/windows-release-source.json"
+      - "app/installer/app-update-transaction.ps1"
+      - "app/installer/app-update-verification.ps1"
+      - "app/installer/app-update-verification-selftest.ps1"
+      - "app/installer/sign-windows-artifact.ps1"
+      - "app/installer/sign-windows-artifact-selftest.ps1"
+      - "app/installer/polish-nsis-language-selftest.ps1"
+      - "app/installer/nsis-hook-contract-selftest.ps1"
+      - "app/lex-desktop/src-tauri/windows/Polish.nsh"
+      - "app/lex-desktop/src-tauri/tauri.offline.conf.json"
+      - "app/lex-desktop/src-tauri/tauri.conf.json"
+      - "app/lex-desktop/src-tauri/windows/hooks.nsh"
+      - ".github/workflows/g39-installer-state.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: g39-installer-state-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  g39g-installer-state-machine:
+    name: G39G installer state machine self-test
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Parse installer PowerShell scripts
+        shell: pwsh
+        run: ./app/installer/powershell-syntax-selftest.ps1
+
+      - name: Exercise Fresh / Upgrade / Repair / Current / DowngradeBlocked
+        shell: pwsh
+        run: ./app/installer/installer-state-machine-selftest.ps1
+
+      - name: G39F application update verification policy
+        shell: pwsh
+        run: ./app/installer/app-update-verification-selftest.ps1
+
+      - name: G39J Authenticode fail-closed policy
+        shell: pwsh
+        run: ./app/installer/sign-windows-artifact-selftest.ps1
+
+      - name: NSIS PREINSTALL output-directory contract
+        shell: pwsh
+        run: ./app/installer/nsis-hook-contract-selftest.ps1
+
+      - name: Polish NSIS maintenance language contract
+        shell: pwsh
+        run: ./app/installer/polish-nsis-language-selftest.ps1
