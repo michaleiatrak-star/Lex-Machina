@@ -1353,20 +1353,8 @@ export class LocalModelRuntime {
         }
       };
 
-    const temporary =
-      `${configPath}.tmp`;
-    fs.writeFileSync(
-      temporary,
-      `${JSON.stringify(
-        updated,
-        null,
-        2
-      )}\n`,
-      "utf8"
-    );
-    fs.renameSync(
-      temporary,
-      configPath
+    this.writeConfig(
+      updated
     );
 
     this.provisioningProgress = {
@@ -1383,9 +1371,12 @@ export class LocalModelRuntime {
     try {
       const startedAt =
         Date.now();
-      await this.ensureRunning(
-        canonical
-      );
+      const validatedConfig =
+        await this
+          .ensureRunningWithAutoFallback(
+            canonical,
+            updated
+          );
       const tokenizerCalibration =
         await this
           .calibrateTokenizer();
@@ -1395,8 +1386,14 @@ export class LocalModelRuntime {
         modelId: canonical,
         contextTokens,
         contextMode:
-          updated.context.mode,
+          validatedConfig
+            .context.mode,
         engine: "llama.cpp",
+        backend:
+          configBackend(
+            validatedConfig
+          ) ??
+          "CPU_X64_PORTABLE",
         startupMs:
           Math.max(
             0,
@@ -1421,7 +1418,8 @@ export class LocalModelRuntime {
         model:
           this.publicDescriptor(
             model,
-            updated
+            this.readConfig() ??
+              updated
           ),
         contextTokens,
         configPath
@@ -1431,6 +1429,7 @@ export class LocalModelRuntime {
         configPath,
         previousConfig
       );
+      this.hardwareCache = null;
       this.provisioningProgress = {
         phase: "FAILED",
         label: canonical,
@@ -1712,7 +1711,10 @@ export class LocalModelRuntime {
               committedReceipt =
                 receipt;
             }
-          }
+          },
+          configSelectionMode(
+            this.readConfig()
+          ) ?? "AUTO"
         );
 
       if (!committedReceipt) {
@@ -1745,7 +1747,11 @@ export class LocalModelRuntime {
     }
     return await this.provision(
       normalizeModelId(config.model.id),
-      config.context.requestedTokens
+      config.context.requestedTokens,
+      undefined,
+      configSelectionMode(
+        config
+      ) ?? "AUTO"
     );
   }
 
@@ -2786,6 +2792,27 @@ export class LocalModelRuntime {
     if (!fs.existsSync(config.engine.executable)) {
       throw new Error("LOCAL_MODEL_ENGINE_MISSING");
     }
+    if (
+      config.engine.selectionMode ===
+        "AUTO" &&
+      configBackend(config) ===
+        "VULKAN_X64" &&
+      (
+        config.engine.fallbackBackend !==
+          "CPU_X64_PORTABLE" ||
+        typeof config.engine
+          .fallbackExecutable !==
+          "string" ||
+        !fs.existsSync(
+          config.engine
+            .fallbackExecutable
+        )
+      )
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_CPU_FALLBACK_MISSING"
+      );
+    }
     if (!fs.existsSync(config.model.path)) {
       throw new Error(`LOCAL_MODEL_FILE_MISSING:${config.model.id}`);
     }
@@ -2814,6 +2841,18 @@ export class LocalModelRuntime {
       "--cache-type-v",
       "q8_0"
     ];
+    if (
+      configBackend(config) ===
+        "VULKAN_X64" &&
+      config.engine.gpuOffload ===
+        true
+    ) {
+      args.push(
+        "--n-gpu-layers",
+        "999"
+      );
+    }
+
     if (config.context.extendedBeyondNative) {
       args.push(
         "--rope-scaling",
