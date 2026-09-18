@@ -180,16 +180,16 @@ const checks = {
       "Offline clean-machine standalone EXE acceptance"
     ) &&
     workflow.includes(
-      "-ExpectedNetworkRequiredAtInstall $false"
+      "ExpectedNetworkRequiredAtInstall = $false"
     ) &&
     workflow.includes(
-      "-BlockNetworkDuringInstall"
+      "BlockNetworkDuringInstall = $true"
     ) &&
     workflow.includes(
-      "-ForceVisualCppRuntimeInstall"
+      "ForceVisualCppRuntimeInstall = $true"
     ) &&
     workflow.includes(
-      "-StandaloneOfflineExe"
+      "StandaloneOfflineExe = $true"
     ) &&
     acceptance.includes(
       "StandaloneOfflineExe"
