@@ -128,6 +128,44 @@ describe(
     );
 
     it(
+      "has no partially migrated executable/orchestration skill left",
+      () => {
+        const executable = [
+          "prawny-router-v3",
+          "prawo-polskie-v2",
+          "pisma-proste-v2",
+          "pisma-procesowe-v3",
+          "analiza-sadowa-v6",
+          "analizator-dowodow-v3",
+          "analizator-przepisow-v2",
+          "analizator-umow-v1",
+          "chronologia-sprawy-v1",
+          "orzeczenia-sadowe-v2",
+          "przesluchanie-swiadkow-v2-min90",
+          "raport-klienta-v1",
+          "raport-sytuacyjny-v2",
+          "przewodnik-prawny-v2"
+        ];
+
+        const bySkill =
+          new Map(
+            DETERMINISTIC_SKILL_COVERAGE
+              .map((entry) => [
+                entry.skill,
+                entry
+              ])
+          );
+
+        for (const skill of executable) {
+          expect(
+            bySkill.get(skill)?.status,
+            skill
+          ).toBe("ENFORCED");
+        }
+      }
+    );
+
+    it(
       "keeps DR content hybrid instead of pretending domain interpretation is deterministic",
       () => {
         const domainEntries =
