@@ -19,8 +19,9 @@
     },
     "python": {
       "version": "3.13.15",
-      "url": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.exe",
-      "sha256": "edec09c4853aeae9ac36efb8c9f95b6b8e2fee65eee56d9767a8b7c69c574403"
+      "url": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.zip",
+      "sha256": "6479223746cdfb79d25865110d6f524ac98de081324e119af1dc3ae36bddc7a5",
+      "delivery": "APP_LOCAL_ZIP"
     },
     "llamaCpp": {
       "version": "b10964",
@@ -165,7 +166,8 @@
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
     "skillUpdateSigning": "Skill self-update is fail-closed until a production Ed25519 public key is committed to the skill trust root and the release index is signed by the matching private key.",
-    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key."
+    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key.",
+    "privatePython": "Python is never installed system-wide. The verified CPython amd64 ZIP is extracted into Lex Machina runtime/python and validated by exact version and pip availability."
   },
   "modelPackUpdate": {
     "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
