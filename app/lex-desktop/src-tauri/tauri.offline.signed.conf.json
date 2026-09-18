@@ -13,7 +13,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-File",
-          "../installer/tauri-sign-command.ps1",
+          "../../installer/tauri-sign-command.ps1",
           "%1"
         ]
       }
