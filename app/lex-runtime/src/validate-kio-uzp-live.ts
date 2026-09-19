@@ -543,8 +543,19 @@ const kioContentPass =
 const kioPdfMagicValid =
   kioPdf.trace.status ===
     200 &&
+  (
+    kioPdf.trace.contentType ??
+    ""
+  )
+    .toLowerCase()
+    .includes(
+      "application/pdf"
+    ) &&
   kioPdfHeaderOffset >= 0 &&
-  kioPdfPayload.length >
+  (
+    kioPdf.trace.bytes ??
+    0
+  ) >
     10_000;
 
 const kioPdfTextPass =
