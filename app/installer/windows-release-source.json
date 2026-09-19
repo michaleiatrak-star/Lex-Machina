@@ -24,7 +24,7 @@
       "delivery": "EMBEDDABLE_APP_LOCAL",
       "embeddable": {
         "url": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-embed-amd64.zip",
-        "sha256": "791ada5e20aba24524f8d939cdeb069976d632a699fe5cb65274b23f4545e68a"
+        "sha256": "d1f04d990aee1253d8569e8e5104e30fa9f5fa830899f14843448872d936a2cf"
       },
       "pipBootstrap": {
         "version": "26.2.1",
