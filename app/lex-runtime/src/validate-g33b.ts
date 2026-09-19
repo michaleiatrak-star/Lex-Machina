@@ -41,8 +41,12 @@ const checks = {
     sidecar.includes('join("node")') &&
     sidecar.includes('join("node.exe")'),
   privatePythonDownloadIfMissing:
-    bootstrap.includes("manifest.runtime.python.url") &&
-    bootstrap.includes("manifest.runtime.python.sha256") &&
+    source.runtime?.python?.delivery === "EMBEDDABLE_APP_LOCAL" &&
+    bootstrap.includes("manifest.runtime.python.embeddable") &&
+    bootstrap.includes("embedded.url") &&
+    bootstrap.includes("embedded.sha256") &&
+    bootstrap.includes("pipBootstrap.url") &&
+    bootstrap.includes("pipBootstrap.sha256") &&
     sidecar.includes('join("python")') &&
     sidecar.includes('join("python.exe")'),
   pinnedPackagesOnlyIfNeeded:
