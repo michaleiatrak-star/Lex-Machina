@@ -14,6 +14,11 @@ stanza_root.mkdir(parents=True, exist_ok=True)
 
 os.environ["PADDLE_PDX_CACHE_HOME"] = str(paddle_root)
 os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
+model_source = os.environ.get("PADDLE_PDX_MODEL_SOURCE", "bos").strip().lower() or "bos"
+if model_source not in {"bos", "huggingface", "modelscope", "aistudio"}:
+    print(f"MODEL_PREFETCH_SOURCE_INVALID:{model_source}", file=sys.stderr)
+    raise SystemExit(2)
+os.environ["PADDLE_PDX_MODEL_SOURCE"] = model_source
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 os.environ.setdefault("TQDM_DISABLE", "1")
 
@@ -69,7 +74,7 @@ finally:
 
 if prefetch_error is not None:
     print(
-        f"MODEL_PREFETCH_FAILED:{type(prefetch_error).__name__}:{prefetch_error}",
+        f"MODEL_PREFETCH_FAILED:source={model_source}:{type(prefetch_error).__name__}:{prefetch_error}",
         file=sys.stderr,
     )
     try:
@@ -106,6 +111,7 @@ print(
             "paddleModels": required,
             "stanza": "pl:tokenize,ner",
             "status": "PASS",
+            "source": model_source,
         },
         ensure_ascii=False,
     )
