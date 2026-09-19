@@ -81,7 +81,8 @@
     "benchmark:local-context": "tsx src/benchmark-local-context.ts",
     "benchmark:local-legal-quality": "tsx src/benchmark-local-legal-quality.ts",
     "validate:r1-live": "tsx src/validate-r1-live.ts",
-    "validate:official-api-live": "tsx src/validate-official-api-live.ts"
+    "validate:official-api-live": "tsx src/validate-official-api-live.ts",
+    "validate:kio-uzp-live": "tsx src/validate-kio-uzp-live.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.49",

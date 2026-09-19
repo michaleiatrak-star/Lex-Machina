@@ -294,6 +294,28 @@ jobs:
       - name: Official APIs — live connectivity and auth boundary
         run: npm run validate:official-api-live
 
+  kio-uzp-live:
+    name: KIO and UZP live source gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: KIO/UZP — HTML, API, download and document mapping
+        run: npm run validate:kio-uzp-live
+
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
