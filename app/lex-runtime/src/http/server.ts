@@ -218,7 +218,7 @@ export function bundledRuntimeRoot(): string {
   return path.resolve(
     path.join(
       repositoryRoot,
-      "Wersja rozwojowa rozpakowana"
+      "Wersja stabilna rozpakowana 8.09.2026"
     )
   );
 }
