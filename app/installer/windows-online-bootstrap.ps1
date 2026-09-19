@@ -125,37 +125,97 @@ Write-Host "[2/6] Private Python"
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonExpected = "Python $($manifest.runtime.python.version)"
+$pythonDelivery = $manifest.runtime.python.delivery
+if (-not $pythonDelivery) {
+  throw "BOOTSTRAP_PYTHON_DELIVERY_MISSING"
+}
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   Remove-Item $pythonDir -Recurse -Force -ErrorAction SilentlyContinue
-  $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
-  Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
-  # Start-Process joins ArgumentList values into one native command line. A bare
-  # TargetDir=<path> therefore breaks when the per-user install root contains
-  # spaces (for example %LOCALAPPDATA%\Lex Machina\runtime). Keep quotes in
-  # the native command line explicitly and exercise this contract in G33D.
-  $pythonInstallArguments = @(
-    "/quiet",
-    "InstallAllUsers=0",
-    ('TargetDir="{0}"' -f $pythonDir),
-    "Include_launcher=0",
-    "Include_test=0",
-    "Include_doc=0",
-    "Include_tcltk=0",
-    "Include_tools=0",
-    "Include_pip=1",
-    "PrependPath=0",
-    "Shortcuts=0"
-  ) -join " "
-  Write-Host "Installing verified Python runtime into: $pythonDir"
-  $install = Start-Process -FilePath $pythonInstaller -ArgumentList $pythonInstallArguments -Wait -PassThru
-  if ($install.ExitCode -ne 0) {
-    throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
+
+  # The registered CPython full installer cannot safely provide an app-private
+  # runtime when the same Python version is already registered on the machine.
+  # In maintenance mode it may return exit code 0 while retaining the previous
+  # install directory. Use CPython's official embeddable distribution instead:
+  # it is application-local, registry-independent and can coexist with any
+  # system/user Python installation.
+  if ($pythonDelivery -ne "EMBEDDABLE_APP_LOCAL") {
+    throw "BOOTSTRAP_PYTHON_DELIVERY_UNSUPPORTED:$pythonDelivery"
   }
+
+  $embedded = $manifest.runtime.python.embeddable
+  if (-not $embedded -or -not $embedded.url -or -not $embedded.sha256) {
+    throw "BOOTSTRAP_PYTHON_EMBEDDED_MANIFEST_INVALID"
+  }
+  $pythonZip = Join-Path $cache "python-$($manifest.runtime.python.version)-embeddable-amd64.zip"
+  Get-VerifiedDownload $embedded.url $embedded.sha256 $pythonZip "python-embeddable-runtime"
+
+  New-Item -ItemType Directory -Force -Path $pythonDir | Out-Null
+  Expand-Archive -LiteralPath $pythonZip -DestinationPath $pythonDir -Force
+
+  $pth = Get-ChildItem -LiteralPath $pythonDir -Filter "python*._pth" -File |
+    Select-Object -First 1
+  if (-not $pth) {
+    throw "BOOTSTRAP_PYTHON_EMBEDDED_PTH_MISSING"
+  }
+
+  # The embeddable distribution intentionally disables site by default.
+  # Enable only the private site-packages directory used by Lex Machina.
+  $newPth = @()
+  $hasSitePackages = $false
+  $hasImportSite = $false
+  foreach ($line in @(Get-Content -LiteralPath $pth.FullName)) {
+    $trimmed = $line.Trim()
+    if ($trimmed -eq "Lib\site-packages") {
+      $hasSitePackages = $true
+    }
+    if ($trimmed -eq "#import site" -or $trimmed -eq "import site") {
+      if (-not $hasSitePackages) {
+        $newPth += "Lib\site-packages"
+        $hasSitePackages = $true
+      }
+      $newPth += "import site"
+      $hasImportSite = $true
+      continue
+    }
+    $newPth += $line
+  }
+  if (-not $hasSitePackages) {
+    $newPth += "Lib\site-packages"
+  }
+  if (-not $hasImportSite) {
+    $newPth += "import site"
+  }
+  [IO.File]::WriteAllLines($pth.FullName, [string[]]$newPth, [Text.Encoding]::ASCII)
+
+  $sitePackages = Join-Path $pythonDir "Lib\site-packages"
+  New-Item -ItemType Directory -Force -Path $sitePackages | Out-Null
+
+  # Bootstrap a pinned pip wheel without invoking any globally installed Python.
+  # A wheel is a ZIP archive; extracting this pure-Python wheel into the private
+  # site-packages directory is sufficient for `python -m pip`.
+  $pipBootstrap = $manifest.runtime.python.pipBootstrap
+  if (-not $pipBootstrap -or -not $pipBootstrap.url -or
+      -not $pipBootstrap.sha256 -or -not $pipBootstrap.version) {
+    throw "BOOTSTRAP_PIP_MANIFEST_INVALID"
+  }
+  $pipWheel = Join-Path $cache "pip-$($pipBootstrap.version)-py3-none-any.whl"
+  Get-VerifiedDownload $pipBootstrap.url $pipBootstrap.sha256 $pipWheel "pip-bootstrap-wheel"
+
+  Add-Type -AssemblyName System.IO.Compression.FileSystem
+  [IO.Compression.ZipFile]::ExtractToDirectory($pipWheel, $sitePackages)
 }
+
 $pythonActual = Get-CommandVersionText $pythonExe @("--version")
 if ($pythonActual -ne $pythonExpected) {
   $pythonActualDisplay = if ($null -eq $pythonActual) { "<missing-or-unreadable>" } else { $pythonActual }
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActualDisplay executable=$pythonExe"
+}
+
+$pipActual = Get-CommandVersionText $pythonExe @("-m", "pip", "--version")
+$pipExpectedPrefix = "pip $($manifest.runtime.python.pipBootstrap.version) "
+if ($null -eq $pipActual -or -not $pipActual.StartsWith($pipExpectedPrefix, [StringComparison]::Ordinal)) {
+  $pipActualDisplay = if ($null -eq $pipActual) { "<missing-or-unreadable>" } else { $pipActual }
+  throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) actual=$pipActualDisplay executable=$pythonExe"
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"
