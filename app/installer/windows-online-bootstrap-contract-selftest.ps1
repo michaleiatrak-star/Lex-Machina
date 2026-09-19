@@ -19,7 +19,10 @@ $checks = [ordered]@{
   )
   freshProcessPerSource = (
     $bootstrap.Contains('$env:PADDLE_PDX_MODEL_SOURCE = $source') -and
-    $bootstrap.Contains('& $pythonExe $prefetchScript $modelRoot | Out-Host')
+    $bootstrap.Contains('Start-Process -FilePath $pythonExe') -and
+    $bootstrap.Contains('-RedirectStandardOutput $prefetchStdout') -and
+    $bootstrap.Contains('-RedirectStandardError $prefetchStderr') -and
+    $bootstrap.Contains('$prefetchProcess.ExitCode')
   )
   failedPartialCachePurged = (
     $bootstrap.Contains('Remove-Item -LiteralPath $candidate -Recurse -Force')
