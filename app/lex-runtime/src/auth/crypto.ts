@@ -80,7 +80,7 @@ export function validateNewPassword(
 ): string {
   const normalized = normalizePassword(value);
   const length = Array.from(normalized).length;
-  if (length < 15 || length > 128) {
+  if (length < 10 || length > 128) {
     throw new Error("PASSWORD_POLICY_LENGTH");
   }
   if (
