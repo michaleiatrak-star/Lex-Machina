@@ -165,32 +165,24 @@ jobs:
           cat > release-out/RELEASE-NOTES.md <<'EOF'
           ## Lex Machina 0.1.4 — G39K RC4
 
-          RC4 replaces the registered CPython installer with the official side-by-side PSF NuGet distribution and adds a release-blocking regression test for machines that already have CPython 3.13.15 installed.
+          RC4 fixes the private-Python bootstrap failure reproduced on Windows
+          when CPython 3.13.15 is already installed for the current user.
 
           Corrections:
-          - Python bootstrap now preserves quotes around TargetDir, so paths containing
-            spaces and Unicode (for example `...\Michał\AppData\Local\Lex Machina\...`)
-            cannot be split by Start-Process native argument joining;
-          - G33D installed-copy acceptance now installs into a path containing both
-            spaces and the Polish character `ł`, reproducing this regression class;
-          - BOOTSTRAP_PYTHON_VERSION_INVALID now reports expected/actual version and
-            the exact executable path when validation genuinely fails;
-          - OCR model prefetch now prefers the official BOS source and falls back, in
-            fresh Python processes, through Hugging Face, ModelScope and AIStudio;
-            incomplete Paddle model cache directories are purged between failed
-            sources and the bootstrap fails closed only after all official sources fail;
-          - the user-approved navy/gold LM artwork is the pinned Windows branding
-            source, materialized as a 32-bit multi-size ICO (16/24/32/48/64/128/256);
-          - the build materializer pins the exact source icon SHA-256 before Tauri,
-            while post-build branding acceptance checks multi-size ICO structure and
-            verifies that both the desktop EXE and NSIS installer contain icon resources;
-          - a fresh runtime now creates the first administrator as login `admin` with
-            temporary password `admin`, marks the account as password-setup-pending,
-            and does not expose the bootstrap session to the UI;
-          - while that flag is set, the UI blocks normal application use and clearly
-            requires replacement of the temporary password; new/recovery passwords
-            require at least 10 characters and the temporary `admin` password is no
-            longer valid after the change.
+          - the Lex private runtime no longer invokes the registered python.org EXE
+            installer; that installer enters maintenance mode for an already-registered
+            same-version Python and may ignore a different TargetDir;
+          - Python 3.13.15 is now provisioned from the official PSF NuGet package,
+            which is intended for side-by-side build/application scenarios;
+          - the NuGet package is pinned before extraction with SHA-256
+            `05357887df50d3153efc681bdf432c321d3e2f9ce5788f99f4515b27e8fda0ac`;
+          - bootstrap validates the NuGet `tools\\python.exe` layout, exact interpreter
+            version and private pip availability before installing pinned OCR/NER packages;
+          - G33D now first registers the same CPython 3.13.15 on the runner and only
+            then installs Lex Machina into a path with spaces and the Polish character
+            `ł`, making this reported regression release-blocking;
+          - RC3 Unicode-path handling, OCR source fallback, branding and first-login
+            admin/admin password-change protections remain in force.
 
           Icon SHA-256:
           `2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc`

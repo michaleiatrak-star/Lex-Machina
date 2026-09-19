@@ -14,6 +14,7 @@ $checks = [ordered]@{
   pythonNugetSideBySide = (
     $release.runtime.python.distribution -eq "NUGET_SIDE_BY_SIDE" -and
     $release.runtime.python.url -match "api\.nuget\.org/.+/python\.3\.13\.15\.nupkg$" -and
+    $release.runtime.python.sha256 -eq "05357887df50d3153efc681bdf432c321d3e2f9ce5788f99f4515b27e8fda0ac" -and
     $bootstrap.Contains("BOOTSTRAP_PYTHON_NUGET_LAYOUT_INVALID") -and
     $bootstrap.Contains('Join-Path $extract "tools"')
   )

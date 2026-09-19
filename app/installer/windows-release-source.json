@@ -21,7 +21,7 @@
       "version": "3.13.15",
       "distribution": "NUGET_SIDE_BY_SIDE",
       "url": "https://api.nuget.org/v3-flatcontainer/python/3.13.15/python.3.13.15.nupkg",
-      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      "sha256": "05357887df50d3153efc681bdf432c321d3e2f9ce5788f99f4515b27e8fda0ac"
     },
     "llamaCpp": {
       "version": "b10964",
