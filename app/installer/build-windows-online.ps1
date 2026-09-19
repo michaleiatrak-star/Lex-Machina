@@ -49,7 +49,7 @@ Write-Host "[2/4] Copy workers, corpus, manifest and bootstrap"
 Copy-Item (Join-Path $repo "app\ocr") (Join-Path $payload "ocr") -Recurse
 Copy-Item (Join-Path $repo "app\privacy") (Join-Path $payload "privacy") -Recurse
 Copy-Item (Join-Path $repo "app\storage") (Join-Path $payload "storage") -Recurse
-Copy-Item (Join-Path $repo "Wersja rozwojowa rozpakowana") (Join-Path $payload "corpus") -Recurse
+Copy-Item (Join-Path $repo "Wersja stabilna rozpakowana 8.09.2026") (Join-Path $payload "corpus") -Recurse
 Copy-Item (Join-Path $installer "windows-release-source.json") (Join-Path $payload "release-source.json")
 Copy-Item (Join-Path $installer "windows-release-requirements.txt") (Join-Path $payload "release-requirements.txt")
 
