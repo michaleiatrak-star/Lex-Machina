@@ -121,7 +121,48 @@ if (-not (Test-CommandVersion $nodeExe @("--version") $nodeExpected)) {
   throw "BOOTSTRAP_NODE_VERSION_INVALID"
 }
 
-Write-Host "[2/6] Private Python"
+Write-Host "[2/6] System prerequisites"
+$vcInstalled = $false
+$vc = $manifest.systemPrerequisites.visualCppRuntime
+try {
+  $installedFlag = Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Installed -ErrorAction Stop
+  $installedVersionText = (Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Version -ErrorAction Stop).ToString().TrimStart("v")
+  $vcInstalled = (
+    $installedFlag -eq 1 -and
+    ([Version]$installedVersionText) -ge ([Version]$vc.version)
+  )
+} catch {
+  $vcInstalled = $false
+}
+if (-not $vcInstalled) {
+  $bundledVc = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
+  if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
+    $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
+    if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
+      throw "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled expected=$($vc.sha256) actual=$bundledHash"
+    }
+    Write-Host "Using verified bundled visual-cpp-runtime"
+    $vcInstaller = $bundledVc
+  } else {
+    $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
+    Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
+  }
+  $startArgs = @{
+    FilePath = $vcInstaller
+    ArgumentList = @("/install", "/quiet", "/norestart")
+    Wait = $true
+    PassThru = $true
+  }
+  if (-not (Test-IsAdministrator)) {
+    $startArgs.Verb = "RunAs"
+  }
+  $vcInstall = Start-Process @startArgs
+  if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
+    throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)"
+  }
+}
+
+Write-Host "[3/6] Private Python"
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonExpected = "Python $($manifest.runtime.python.version)"
@@ -218,7 +259,7 @@ if ($null -eq $pipActual -or -not $pipActual.StartsWith($pipExpectedPrefix, [Str
   throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) actual=$pipActualDisplay executable=$pythonExe"
 }
 
-Write-Host "[3/6] Pinned Python/ML packages"
+Write-Host "[4/6] Pinned Python/ML packages"
 $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
@@ -234,7 +275,7 @@ if ($LASTEXITCODE -ne 0) {
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
 
-Write-Host "[4/6] OCR/NER models"
+Write-Host "[5/6] OCR/NER models"
 $modelRoot = Join-Path $runtime "models"
 $paddleOfficial = Join-Path $modelRoot "paddle\official_models"
 $stanzaPl = Join-Path $modelRoot "stanza\pl"
@@ -324,47 +365,6 @@ if (-not $modelsReady) {
 
   if (-not $prefetchSucceeded) {
     throw "BOOTSTRAP_MODEL_PREFETCH_FAILED_ALL_OFFICIAL_SOURCES"
-  }
-}
-
-Write-Host "[5/6] System prerequisites"
-$vcInstalled = $false
-$vc = $manifest.systemPrerequisites.visualCppRuntime
-try {
-  $installedFlag = Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Installed -ErrorAction Stop
-  $installedVersionText = (Get-ItemPropertyValue -Path "HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" -Name Version -ErrorAction Stop).ToString().TrimStart("v")
-  $vcInstalled = (
-    $installedFlag -eq 1 -and
-    ([Version]$installedVersionText) -ge ([Version]$vc.version)
-  )
-} catch {
-  $vcInstalled = $false
-}
-if (-not $vcInstalled) {
-  $bundledVc = Join-Path $runtime "prerequisites\vc_redist.x64.exe"
-  if (Test-Path -LiteralPath $bundledVc -PathType Leaf) {
-    $bundledHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bundledVc).Hash.ToLowerInvariant()
-    if ($bundledHash -ne $vc.sha256.ToLowerInvariant()) {
-      throw "BOOTSTRAP_HASH_MISMATCH:visual-cpp-runtime-bundled expected=$($vc.sha256) actual=$bundledHash"
-    }
-    Write-Host "Using verified bundled visual-cpp-runtime"
-    $vcInstaller = $bundledVc
-  } else {
-    $vcInstaller = Join-Path $cache "vc_redist.x64-$($vc.version).exe"
-    Get-VerifiedDownload $vc.url $vc.sha256 $vcInstaller "visual-cpp-runtime"
-  }
-  $startArgs = @{
-    FilePath = $vcInstaller
-    ArgumentList = @("/install", "/quiet", "/norestart")
-    Wait = $true
-    PassThru = $true
-  }
-  if (-not (Test-IsAdministrator)) {
-    $startArgs.Verb = "RunAs"
-  }
-  $vcInstall = Start-Process @startArgs
-  if ($vcInstall.ExitCode -notin @(0, 1638, 3010)) {
-    throw "BOOTSTRAP_VC_RUNTIME_FAILED:$($vcInstall.ExitCode)"
   }
 }
 
