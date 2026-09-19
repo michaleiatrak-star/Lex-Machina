@@ -33,6 +33,12 @@ if ($config.bundle.windows.nsis.uninstallerIcon -ne "icons/icon.ico") {
   throw "WINDOWS_BRANDING_UNINSTALLER_ICON_NOT_CONFIGURED"
 }
 
+$expectedIconSha256 = "2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc"
+$actualIconSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $iconFile).Hash.ToLowerInvariant()
+if ($actualIconSha256 -ne $expectedIconSha256) {
+  throw "WINDOWS_BRANDING_ICO_HASH_MISMATCH:expected=$expectedIconSha256 actual=$actualIconSha256"
+}
+
 $bytes = [IO.File]::ReadAllBytes($iconFile)
 if ($bytes.Length -lt 22) {
   throw "WINDOWS_BRANDING_ICO_TOO_SMALL"
@@ -186,4 +192,5 @@ foreach ($target in @(
 }
 
 Write-Host "WINDOWS_BRANDING_ACCEPTANCE_PASS"
+Write-Host "ICO SHA256: $actualIconSha256"
 Write-Host "ICO sizes: $(@($observed | Sort-Object) -join ', ')"
