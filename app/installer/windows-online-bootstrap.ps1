@@ -193,8 +193,52 @@ foreach ($name in $requiredPaddle) {
 }
 if (-not $modelsReady) {
   New-Item -ItemType Directory -Force -Path $modelRoot | Out-Null
-  & $pythonExe (Join-Path $bootstrapRoot "prefetch-release-models.py") $modelRoot
-  if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_MODEL_PREFETCH_FAILED" }
+
+  # PaddleX supports several official hosters. Prefer BOS because it serves
+  # the official inference tarballs directly and avoids the HuggingFace API
+  # response path that can intermittently return an empty JSON document on
+  # clean Windows installs. Each fallback runs in a fresh Python process so
+  # PaddleX re-reads PADDLE_PDX_MODEL_SOURCE. Failed partial model directories
+  # are removed before the next source to avoid treating an incomplete cache
+  # as a valid installed model.
+  $modelSources = @("bos", "huggingface", "modelscope", "aistudio")
+  $prefetchScript = Join-Path $bootstrapRoot "prefetch-release-models.py"
+  if (-not (Test-Path -LiteralPath $prefetchScript -PathType Leaf)) {
+    throw "BOOTSTRAP_MODEL_PREFETCH_SCRIPT_MISSING"
+  }
+
+  $previousModelSource = $env:PADDLE_PDX_MODEL_SOURCE
+  $prefetchSucceeded = $false
+  try {
+    foreach ($source in $modelSources) {
+      $env:PADDLE_PDX_MODEL_SOURCE = $source
+      Write-Host "Model prefetch attempt via official source: $source"
+      & $pythonExe $prefetchScript $modelRoot | Out-Host
+      $prefetchExit = $LASTEXITCODE
+      if ($prefetchExit -eq 0) {
+        $prefetchSucceeded = $true
+        Write-Host "Model prefetch source accepted: $source"
+        break
+      }
+
+      Write-Warning "Model prefetch source failed: $source exit=$prefetchExit"
+      foreach ($name in $requiredPaddle) {
+        $candidate = Join-Path $paddleOfficial $name
+        Remove-Item -LiteralPath $candidate -Recurse -Force -ErrorAction SilentlyContinue
+      }
+      Start-Sleep -Seconds 2
+    }
+  } finally {
+    if ($null -eq $previousModelSource) {
+      Remove-Item Env:PADDLE_PDX_MODEL_SOURCE -ErrorAction SilentlyContinue
+    } else {
+      $env:PADDLE_PDX_MODEL_SOURCE = $previousModelSource
+    }
+  }
+
+  if (-not $prefetchSucceeded) {
+    throw "BOOTSTRAP_MODEL_PREFETCH_FAILED_ALL_OFFICIAL_SOURCES"
+  }
 }
 
 Write-Host "[5/6] System prerequisites"
