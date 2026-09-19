@@ -108,8 +108,7 @@ export function validateModelTaskOwnership():
     }
 
     if (
-      policy.fallbackOwner ===
-        "AUXILIARY" ||
+      policy.fallbackOwner &&
       policy.fallbackOwner ===
         policy.owner
     ) {
