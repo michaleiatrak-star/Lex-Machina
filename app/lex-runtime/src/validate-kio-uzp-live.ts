@@ -43,6 +43,15 @@ function normalize(
     .toLocaleUpperCase("pl");
 }
 
+function compactLegalKey(
+  value: string
+): string {
+  return value
+    .normalize("NFKC")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/gu, "");
+}
+
 async function fetchSafe(
   initialUrl: string,
   allowedHosts: string[],
@@ -438,51 +447,66 @@ const kioSearchHtmlPass =
   /sygnatura/iu
     .test(kioSearch.text);
 
-const kioDetailsNorm =
-  normalize(
+const primaryCompact =
+  compactLegalKey(
+    KIO_PRIMARY_SIGNATURE
+  );
+
+function signatureHits(
+  value: string
+): string[] {
+  const compact =
+    compactLegalKey(
+      value
+    );
+
+  return KIO_SIGNATURES
+    .filter(
+      (signature) =>
+        compact.includes(
+          compactLegalKey(
+            signature
+          )
+        )
+    );
+}
+
+const kioDetailsHits =
+  signatureHits(
     kioDetails.text
   );
-const kioContentNorm =
-  normalize(
+const kioContentHits =
+  signatureHits(
     kioContent.text
   );
-const kioPdfNorm =
-  normalize(
+const kioPdfHits =
+  signatureHits(
     kioPdfText
-  );
-const primaryNorm =
-  normalize(
-    KIO_PRIMARY_SIGNATURE
   );
 
 const kioDetailsPass =
   kioDetails.trace.status ===
     200 &&
-  KIO_SIGNATURES.every(
-    (signature) =>
-      kioDetailsNorm.includes(
-        normalize(signature)
-      )
-  ) &&
-  kioDetailsNorm.includes(
-    normalize(
-      "Krajowa Izba Odwoławcza"
-    )
+  compactLegalKey(
+    kioDetails.text
+  ).includes(
+    primaryCompact
   );
 
 const kioContentPass =
   kioContent.trace.status ===
     200 &&
-  kioContentNorm.includes(
-    primaryNorm
+  compactLegalKey(
+    kioContent.text
+  ).includes(
+    primaryCompact
   ) &&
-  kioContentNorm.includes(
-    normalize(
-      "Krajowa Izba Odwoławcza"
-    )
-  );
+  /Krajowa\s+Izba\s+Odwoławcza|\bKIO\b/iu
+    .test(
+      kioContent.text
+    );
 
-const kioPdfPass =
+const kioPdfMagicValid =
   kioPdf.trace.status ===
     200 &&
   kioPdf.bytes.length >
@@ -492,10 +516,21 @@ const kioPdfPass =
       0,
       4
     )
-  ) === "%PDF" &&
-  kioPdfNorm.includes(
-    primaryNorm
+  ) === "%PDF";
+
+const kioPdfTextPass =
+  kioPdfPages !== null &&
+  kioPdfExtractionError ===
+    null &&
+  compactLegalKey(
+    kioPdfText
+  ).includes(
+    primaryCompact
   );
+
+const kioPdfPass =
+  kioPdfMagicValid &&
+  kioPdfTextPass;
 
 const kioMappingPass =
   kioDetailsPass &&
@@ -505,18 +540,11 @@ const kioMappingPass =
 const kioSignSearchPass =
   kioFilteredSearch.trace
     .status === 200 &&
-  (
-    normalize(
-      kioFilteredSearch.text
-    ).includes(
-      primaryNorm
-    ) ||
-    kioFilteredSearch.text
-      .includes(
-        "/Home/Details/" +
-        KIO_ID
-      )
-  );
+  kioFilteredSearch.text
+    .includes(
+      "/Home/Details/" +
+      KIO_ID
+    );
 
 const kioApi =
   await auditApi(
@@ -674,7 +702,11 @@ process.stdout.write(
             pdf:
               kioPdf.trace,
             pdfMagicValid:
-              kioPdfPass,
+              kioPdfMagicValid,
+            pdfTextMatchesPrimary:
+              kioPdfTextPass,
+            signaturesFound:
+              kioPdfHits,
             pdfPages:
               kioPdfPages,
             pdfExtractionError:
@@ -687,8 +719,16 @@ process.stdout.write(
               KIO_SIGNATURES,
             details:
               kioDetails.trace,
+            detailsPrimarySignatureValid:
+              kioDetailsPass,
+            detailsSignaturesFound:
+              kioDetailsHits,
             contentHtml:
               kioContent.trace,
+            contentPrimarySignatureValid:
+              kioContentPass,
+            contentSignaturesFound:
+              kioContentHits,
             sameDocumentConfirmed:
               kioMappingPass
           }
