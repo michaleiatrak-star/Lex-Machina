@@ -2,9 +2,11 @@ $ErrorActionPreference = "Stop"
 
 $bootstrapPath = Join-Path $PSScriptRoot "windows-online-bootstrap.ps1"
 $prefetchPath = Join-Path $PSScriptRoot "prefetch-release-models.py"
+$ocrWorkerPath = Join-Path (Split-Path -Parent $PSScriptRoot) "ocr\paddle_worker.py"
 
 $bootstrap = Get-Content -Raw -LiteralPath $bootstrapPath
 $prefetch = Get-Content -Raw -LiteralPath $prefetchPath
+$ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath
 
 $checks = [ordered]@{
   pythonTargetDirQuoted = (
@@ -38,6 +40,16 @@ $checks = [ordered]@{
   )
   sourceRecordedInResult = (
     $prefetch.Contains('"source": model_source')
+  )
+  unicodeSafePrefetchPath = (
+    $prefetch.Contains("GetShortPathNameW") -and
+    $prefetch.Contains("PADDLE_ASCII_PATH_UNAVAILABLE") -and
+    $prefetch.Contains("paddle_native_root")
+  )
+  unicodeSafeRuntimeOcrPath = (
+    $ocrWorker.Contains("GetShortPathNameW") -and
+    $ocrWorker.Contains("PADDLE_ASCII_PATH_UNAVAILABLE") -and
+    $ocrWorker.Contains("paddle_native_path(value)")
   )
 }
 
