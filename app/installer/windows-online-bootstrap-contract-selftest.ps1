@@ -43,13 +43,15 @@ $checks = [ordered]@{
   )
   unicodeSafePrefetchPath = (
     $prefetch.Contains("GetShortPathNameW") -and
+    $prefetch.Contains('["subst", drive, resolved]') -and
     $prefetch.Contains("PADDLE_ASCII_PATH_UNAVAILABLE") -and
     $prefetch.Contains("paddle_native_root")
   )
   unicodeSafeRuntimeOcrPath = (
     $ocrWorker.Contains("GetShortPathNameW") -and
+    $ocrWorker.Contains('["subst", drive, resolved]') -and
     $ocrWorker.Contains("PADDLE_ASCII_PATH_UNAVAILABLE") -and
-    $ocrWorker.Contains("paddle_native_path(value)")
+    $ocrWorker.Contains("native_model_root = Path(paddle_native_path(model_root))")
   )
 }
 
