@@ -54,9 +54,9 @@ try {
   authStatus =
     await statusResponse.json();
 
-  const bootstrapResponse =
+  const loginResponse =
     await fetch(
-      `${base}/api/auth/bootstrap`,
+      `${base}/api/auth/login`,
       {
         method: "POST",
         headers: {
@@ -64,33 +64,37 @@ try {
             "application/json"
         },
         body: JSON.stringify({
-          loginName:
-            "g13-validator",
-          displayName:
-            "G13 Validator",
-          password:
-            "G13 walidacyjne bardzo dlugie haslo 2026"
+          loginName: "admin",
+          password: "admin"
         })
       }
     );
 
-  if (!bootstrapResponse.ok) {
+  if (!loginResponse.ok) {
     throw new Error(
-      "G13 auth bootstrap failed."
+      "G13 default-admin login failed."
     );
   }
 
-  const bootstrap = (await bootstrapResponse.json()) as {
+  const login = (await loginResponse.json()) as {
     sessionToken?: string;
+    user?: {
+      loginName?: string;
+      passwordSetupPending?: boolean;
+    };
   };
-  if (!bootstrap.sessionToken) {
+  if (
+    !login.sessionToken ||
+    login.user?.loginName !== "admin" ||
+    login.user?.passwordSetupPending !== true
+  ) {
     throw new Error(
-      "G13 auth bootstrap returned no session."
+      "G13 default-admin bootstrap contract invalid."
     );
   }
 
   const authorization =
-    `Bearer ${bootstrap.sessionToken}`;
+    `Bearer ${login.sessionToken}`;
   const [
     skillsResponse,
     routesResponse
@@ -190,9 +194,9 @@ const serializedSkills =
 const pass =
   healthRecord.status === "ok" &&
   healthRecord.localOnly === true &&
-  authRecord.initialized === false &&
+  authRecord.initialized === true &&
   authRecord.requiresBootstrap ===
-    true &&
+    false &&
   skillList.length >= 28 &&
   primarySkills.length === 16 &&
   !serializedSkills.includes(
@@ -216,6 +220,10 @@ process.stdout.write(
       health:
         healthRecord.status,
       authBoundaryPresent: true,
+      defaultAdminInitialized:
+        authRecord.initialized === true,
+      defaultAdminPasswordSetupPending:
+        true,
       publicSkillCount:
         skillList.length,
       drRouteCount:

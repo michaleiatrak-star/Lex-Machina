@@ -50,7 +50,10 @@ function AuthPanel({
     useState(
       phase === "locked"
         ? lastUser?.loginName ?? ""
-        : ""
+        : phase === "login" &&
+            !lastUser
+          ? "admin"
+          : ""
     );
   const [displayName, setDisplayName] =
     useState("");
@@ -141,7 +144,7 @@ function AuthPanel({
           "INVALID_BOOTSTRAP_REQUEST"
       ) {
         setError(
-          "Sprawdź login, nazwę użytkownika i hasło. Nowe hasło musi mieć co najmniej 15 znaków."
+          "Sprawdź login, nazwę użytkownika i hasło. Nowe hasło musi mieć co najmniej 10 znaków."
         );
       } else {
         setError(
@@ -176,6 +179,13 @@ function AuthPanel({
             ? "Pierwsze konto administruje aplikacją. Dostęp do poszczególnych spraw będzie nadawany osobno w kolejnym etapie."
             : "Sesja oraz odblokowane klucze istnieją wyłącznie w pamięci lokalnego runtime."}
         </p>
+
+        {phase === "login" &&
+          !lastUser && (
+          <div className="alert alert-error auth-alert">
+            Pierwsze logowanie: login <strong>admin</strong>, hasło <strong>admin</strong>. To hasło jest wyłącznie tymczasowe. Po zalogowaniu należy je natychmiast zmienić na hasło mające co najmniej 10 znaków.
+          </div>
+        )}
 
         {phase === "bootstrap" && (
           <label>
@@ -569,6 +579,31 @@ export default function AuthenticatedApp() {
           );
         }}
       />
+    );
+  }
+
+  if (
+    auth.user
+      .passwordSetupPending === true
+  ) {
+    return (
+      <main className="auth-shell">
+        <section className="auth-card">
+          <div className="alert alert-error auth-alert">
+            Używasz początkowego konta admin/admin. Zanim przejdziesz dalej, zmień hasło na własne, mające co najmniej 10 znaków.
+          </div>
+          <AccountSecurityPanel
+            user={auth.user}
+            onAuthUpdated={(value) => {
+              setAuth(value);
+              setLastUser(
+                value.user
+              );
+              setNow(Date.now());
+            }}
+          />
+        </section>
+      </main>
     );
   }
 

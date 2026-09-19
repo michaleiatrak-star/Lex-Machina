@@ -118,4 +118,106 @@ describe("G37B managed first-admin password setup", () => {
       );
     }
   });
+
+  it("allows admin/admin only for first-run bootstrap and requires a 10-character replacement", async () => {
+    const root =
+      fs.mkdtempSync(
+        path.join(
+          os.tmpdir(),
+          "lex-g37b-default-admin-"
+        )
+      );
+    const service =
+      new LocalAuthService(
+        new LocalAuthStore({
+          rootDir: root
+        }),
+        {
+          kdf: {
+            memoryKiB: 1024,
+            iterations: 1,
+            parallelism: 1,
+            keyLength: 32,
+            version: 1
+          }
+        }
+      );
+
+    try {
+      const bootstrap =
+        await service.bootstrap({
+          loginName: "admin",
+          displayName: "Administrator",
+          password: "admin",
+          passwordSetupPending: true
+        });
+
+      expect(
+        bootstrap.user.loginName
+      ).toBe("admin");
+      expect(
+        bootstrap.user
+          .passwordSetupPending
+      ).toBe(true);
+
+      await expect(
+        service.changePassword(
+          bootstrap,
+          {
+            currentPassword: "admin",
+            newPassword: "123456789"
+          }
+        )
+      ).rejects.toMatchObject({
+        code:
+          "INVALID_PASSWORD_CHANGE"
+      });
+
+      const changed =
+        await service.changePassword(
+          bootstrap,
+          {
+            currentPassword: "admin",
+            newPassword: "1234567890"
+          }
+        );
+
+      expect(
+        changed.user
+          .passwordSetupPending
+      ).toBe(false);
+
+      await expect(
+        service.login({
+          loginName: "admin",
+          password: "admin"
+        })
+      ).rejects.toMatchObject({
+        code:
+          "INVALID_CREDENTIALS"
+      });
+
+      await expect(
+        service.login({
+          loginName: "admin",
+          password: "1234567890"
+        })
+      ).resolves.toMatchObject({
+        user: {
+          loginName: "admin",
+          passwordSetupPending: false
+        }
+      });
+    } finally {
+      service.close();
+      fs.rmSync(
+        root,
+        {
+          recursive: true,
+          force: true
+        }
+      );
+    }
+  });
+
 });

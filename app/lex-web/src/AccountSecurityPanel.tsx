@@ -70,10 +70,7 @@ export function AccountSecurityPanel({
   async function updatePassword():
     Promise<void> {
     if (
-      (
-        !user.passwordSetupPending &&
-        !currentPassword
-      ) ||
+      !currentPassword ||
       !newPassword ||
       busy
     ) {
@@ -85,10 +82,7 @@ export function AccountSecurityPanel({
     try {
       const result =
         await changePassword({
-          currentPassword:
-            user.passwordSetupPending
-              ? "__LEX_NATIVE_REAUTH__"
-              : currentPassword,
+          currentPassword,
           newPassword
         });
       setCurrentPassword("");
@@ -105,7 +99,7 @@ export function AccountSecurityPanel({
       }
       setMessage(
         user.passwordSetupPending
-          ? "Hasło zostało ustawione. Sekret bootstrap został wycofany z magazynu systemowego, a nowy kod recovery został wygenerowany."
+          ? "Hasło zostało zmienione. Początkowe hasło admin przestało działać, a nowy kod recovery został wygenerowany."
           : "Hasło zostało zmienione. Pozostałe sesje zostały unieważnione; sprawy zachowały te same klucze danych."
       );
     } catch (failure) {
@@ -117,7 +111,7 @@ export function AccountSecurityPanel({
           "INVALID_PASSWORD_CHANGE"
       ) {
         setError(
-          "Nowe hasło nie spełnia polityki: co najmniej 15 znaków, maksymalnie 128."
+          "Nowe hasło nie spełnia polityki: co najmniej 10 znaków, maksymalnie 128."
         );
       } else if (
         failure instanceof ApiError &&
@@ -145,12 +139,12 @@ export function AccountSecurityPanel({
         </p>
         <h3>
           {user.passwordSetupPending
-            ? "Ustaw hasło właściciela"
+            ? "Zmień początkowe hasło"
             : "Hasło i odzyskiwanie"}
         </h3>
         {user.passwordSetupPending && (
           <div className="alert">
-            Pierwsze uruchomienie zostało odblokowane przez chroniony magazyn systemowy. Ustaw własne hasło, aby wycofać sekret bootstrap.
+            Początkowe dane logowania to admin / admin. Hasło admin jest tymczasowe i musi zostać zmienione przed użyciem aplikacji. Nowe hasło musi mieć co najmniej 10 znaków.
           </div>
         )}
         <p className="field-help">
@@ -223,24 +217,24 @@ export function AccountSecurityPanel({
               ? "Ustaw hasło"
               : "Zmiana hasła"}
           </h4>
-          {!user.passwordSetupPending && (
-            <label>
-              Bieżące hasło
-              <input
-                type="password"
-                autoComplete="current-password"
-                value={
-                  currentPassword
-                }
-                maxLength={128}
-                onChange={(event) =>
-                  setCurrentPassword(
-                    event.target.value
-                  )
-                }
-              />
-            </label>
-          )}
+          <label>
+            {user.passwordSetupPending
+              ? "Początkowe hasło"
+              : "Bieżące hasło"}
+            <input
+              type="password"
+              autoComplete="current-password"
+              value={
+                currentPassword
+              }
+              maxLength={128}
+              onChange={(event) =>
+                setCurrentPassword(
+                  event.target.value
+                )
+              }
+            />
+          </label>
           <label>
             Nowe hasło
             <input
@@ -260,10 +254,7 @@ export function AccountSecurityPanel({
             className="primary-button"
             disabled={
               busy ||
-              (
-                !user.passwordSetupPending &&
-                !currentPassword
-              ) ||
+              !currentPassword ||
               !newPassword
             }
             onClick={() => {

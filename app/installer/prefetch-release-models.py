@@ -6,14 +6,84 @@ from pathlib import Path
 import sys
 
 
+def paddle_native_path(path: Path) -> str:
+    """Return an ASCII alias for Paddle's native Windows filesystem calls."""
+    resolved = str(path.resolve())
+    if os.name != "nt" or resolved.isascii():
+        return resolved
+
+    import atexit
+    import ctypes
+    import string
+    import subprocess
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_short = kernel32.GetShortPathNameW
+    get_short.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+    ]
+    get_short.restype = ctypes.c_uint32
+
+    needed = get_short(resolved, None, 0)
+    if needed:
+        buffer = ctypes.create_unicode_buffer(needed + 1)
+        written = get_short(resolved, buffer, len(buffer))
+        short = buffer.value
+        if written and short and short.isascii():
+            return short
+
+    # 8.3 names may be disabled. A temporary subst drive gives the native
+    # predictor an ASCII alias while files remain in the locked install tree.
+    for letter in reversed(string.ascii_uppercase[3:]):
+        drive = f"{letter}:"
+        drive_root = drive + "\\"
+        if os.path.exists(drive_root):
+            continue
+
+        result = subprocess.run(
+            ["subst", drive, resolved],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        if result.returncode != 0:
+            continue
+
+        def cleanup(mapped_drive: str = drive) -> None:
+            subprocess.run(
+                ["subst", mapped_drive, "/D"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+
+        atexit.register(cleanup)
+        return drive_root
+
+    raise RuntimeError(
+        "PADDLE_ASCII_PATH_UNAVAILABLE:"
+        f"{resolved}:winerr={ctypes.get_last_error()}"
+    )
+
 root = Path(sys.argv[1]).resolve()
 paddle_root = root / "paddle"
 stanza_root = root / "stanza"
 paddle_root.mkdir(parents=True, exist_ok=True)
 stanza_root.mkdir(parents=True, exist_ok=True)
 
-os.environ["PADDLE_PDX_CACHE_HOME"] = str(paddle_root)
+paddle_native_root = paddle_native_path(paddle_root)
+os.environ["PADDLE_PDX_CACHE_HOME"] = paddle_native_root
 os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
+model_source = os.environ.get("PADDLE_PDX_MODEL_SOURCE", "bos").strip().lower() or "bos"
+if model_source not in {"bos", "huggingface", "modelscope", "aistudio"}:
+    print(f"MODEL_PREFETCH_SOURCE_INVALID:{model_source}", file=sys.stderr)
+    raise SystemExit(2)
+os.environ["PADDLE_PDX_MODEL_SOURCE"] = model_source
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 os.environ.setdefault("TQDM_DISABLE", "1")
 
@@ -69,7 +139,7 @@ finally:
 
 if prefetch_error is not None:
     print(
-        f"MODEL_PREFETCH_FAILED:{type(prefetch_error).__name__}:{prefetch_error}",
+        f"MODEL_PREFETCH_FAILED:source={model_source}:{type(prefetch_error).__name__}:{prefetch_error}",
         file=sys.stderr,
     )
     try:
@@ -106,6 +176,8 @@ print(
             "paddleModels": required,
             "stanza": "pl:tokenize,ner",
             "status": "PASS",
+            "source": model_source,
+            "paddleNativePath": paddle_native_root,
         },
         ensure_ascii=False,
     )

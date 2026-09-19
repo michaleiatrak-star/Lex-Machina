@@ -75,7 +75,7 @@ export function RecoveryAuthPanel({
           "INVALID_RECOVERY_REQUEST"
       ) {
         setError(
-          "Sprawdź login oraz nowe hasło. Nowe hasło musi mieć co najmniej 15 znaków."
+          "Sprawdź login oraz nowe hasło. Nowe hasło musi mieć co najmniej 10 znaków."
         );
       } else {
         setError(

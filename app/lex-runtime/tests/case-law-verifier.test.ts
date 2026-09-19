@@ -124,6 +124,107 @@ describe("SupremeCourtCaseVerifier", () => {
     expect(calls).toHaveLength(2);
   });
 
+  it("accepts the current extra nested sn.pl search wrapper without relaxing record identity", async () => {
+    const fetcher = vi.fn(
+      async (input: string | URL) => {
+        const url = String(input);
+
+        if (
+          url.includes(
+            "task=searchOrzeczenia"
+          )
+        ) {
+          return json({
+            success: true,
+            data: [{
+              success: true,
+              data: {
+                data: [{
+                  id: "nested-1",
+                  sygnatura_sprawy:
+                    "II CSK 101/20",
+                  data_wydania:
+                    "2021-03-18",
+                  forma_orzeczenia:
+                    "postanowienie"
+                }]
+              }
+            }]
+          });
+        }
+
+        return fullText(
+          "II CSK 101/20"
+        );
+      }
+    );
+
+    const result =
+      await new SupremeCourtCaseVerifier(
+        fetcher
+      ).verify({
+        claim:
+          "sygn. II CSK 101/20",
+        signature:
+          "II CSK 101/20",
+        toolCallId:
+          "case-tool-nested"
+      });
+
+    expect(result).toMatchObject({
+      status: "FOUND",
+      normalizedSignature:
+        "II CSK 101/20",
+      judgment: {
+        id: "nested-1",
+        date: "2021-03-18",
+        contentScope: "FULL_TEXT"
+      }
+    });
+    expect(fetcher).toHaveBeenCalledTimes(
+      2
+    );
+  });
+
+  it("still fails closed for a nested SN shape without recognizable judgment records", async () => {
+    const fetcher = vi.fn(
+      async () =>
+        json({
+          success: true,
+          data: [{
+            success: true,
+            data: {
+              data: [{
+                unexpected:
+                  "schema"
+              }]
+            }
+          }]
+        })
+    );
+
+    const result =
+      await new SupremeCourtCaseVerifier(
+        fetcher
+      ).verify({
+        claim:
+          "sygn. II CSK 101/20",
+        signature:
+          "II CSK 101/20",
+        toolCallId:
+          "case-tool-drift"
+      });
+
+    expect(result).toMatchObject({
+      status: "OUT_OF_SCOPE",
+      reason:
+        "SN_SEARCH_SCHEMA_DRIFT"
+    });
+    expect(fetcher).toHaveBeenCalledTimes(
+      1
+    );
+  });
+
   it("verifies an exact quote against the already verified official SN full text", async () => {
     const quote =
       "pełny tekst orzeczenia zawiera tę dokładną wypowiedź";

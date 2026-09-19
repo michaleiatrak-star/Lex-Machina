@@ -8,8 +8,11 @@ const read = (p: string) => fs.readFileSync(path.join(repo, p), "utf8");
 
 const config = JSON.parse(read("app/lex-desktop/src-tauri/tauri.conf.json"));
 const hooks = read("app/lex-desktop/src-tauri/windows/hooks.nsh");
-const trust = read("app/lex-desktop/src-tauri/src/trust_boundary.rs");
+const server = read("app/lex-runtime/src/http/server.ts");
+const crypto = read("app/lex-runtime/src/auth/crypto.ts");
 const authUi = read("app/lex-web/src/AuthApp.tsx");
+const securityUi = read("app/lex-web/src/AccountSecurityPanel.tsx");
+const trust = read("app/lex-desktop/src-tauri/src/trust_boundary.rs");
 const authoring = read("app/lex-web/src/DocumentAuthoringPanel.tsx");
 
 const checks = {
@@ -18,19 +21,22 @@ const checks = {
     hooks.includes("lex-runtime-sidecar.exe") &&
     hooks.includes("--self-test") &&
     hooks.includes("Abort"),
-  managedWindowsCredential:
-    trust.includes("MANAGED_KEYRING_SERVICE") &&
-    trust.includes("Entry::new") &&
-    trust.includes("ensure_managed_identity"),
-  automaticBootstrap:
-    trust.includes("/api/auth/bootstrap") &&
-    trust.includes('"loginName": MANAGED_LOGIN'),
-  automaticLogin:
-    trust.includes("/api/auth/login") &&
-    authUi.includes("getAuthMe()") &&
-    authUi.includes("isDesktopShell()"),
-  passwordlessDesktopUnlock:
-    authUi.includes("__LEX_NATIVE_LOGIN__"),
+  firstAdminSeeded:
+    server.includes('loginName: "admin"') &&
+    server.includes('password: "admin"') &&
+    server.includes("passwordSetupPending: true"),
+  bootstrapSessionNotExposed:
+    server.includes("logoutAuthorization(") &&
+    server.includes("bootstrap.sessionToken"),
+  manualFirstLogin:
+    authUi.includes('? "admin"') &&
+    authUi.includes("Pierwsze logowanie: login") &&
+    authUi.includes("<strong>admin</strong>"),
+  forcedPasswordReplacement:
+    authUi.includes("passwordSetupPending === true") &&
+    authUi.includes("Używasz początkowego konta admin/admin") &&
+    securityUi.includes("co najmniej 10 znaków") &&
+    crypto.includes("length < 10"),
   nativeDeanonymizationReauth:
     authoring.includes("isDesktopShell()") &&
     trust.includes("__LEX_NATIVE_REAUTH__"),
@@ -48,9 +54,13 @@ const checks = {
 };
 const pass = Object.values(checks).every(Boolean);
 console.log(JSON.stringify({
-  gate: "G33C_ZERO_TOUCH_FIRST_RUN",
+  gate: "G33C_FIRST_RUN_ADMIN_LOGIN",
   result: pass ? "PASS" : "BLOCKED",
   checks,
+  requiredFirstRunActions: [
+    "LOGIN_WITH_TEMPORARY_ADMIN_CREDENTIAL",
+    "CHANGE_PASSWORD_MIN_10_CHARACTERS"
+  ],
   normalUserActionsAfterSetup: [
     "PROVIDER_API_KEY",
     "OPTIONAL_LOCAL_AI_SETUP"

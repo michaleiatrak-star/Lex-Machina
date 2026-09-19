@@ -10,6 +10,70 @@ from PIL import Image
 from paddleocr import PaddleOCR
 
 
+def paddle_native_path(path: Path) -> str:
+    """Return an ASCII alias for Paddle's native Windows filesystem calls."""
+    resolved = str(path.resolve())
+    if os.name != "nt" or resolved.isascii():
+        return resolved
+
+    import atexit
+    import ctypes
+    import string
+    import subprocess
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_short = kernel32.GetShortPathNameW
+    get_short.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+    ]
+    get_short.restype = ctypes.c_uint32
+
+    needed = get_short(resolved, None, 0)
+    if needed:
+        buffer = ctypes.create_unicode_buffer(needed + 1)
+        written = get_short(resolved, buffer, len(buffer))
+        short = buffer.value
+        if written and short and short.isascii():
+            return short
+
+    # 8.3 names may be disabled. A temporary subst drive gives the native
+    # predictor an ASCII alias while files remain in the locked install tree.
+    for letter in reversed(string.ascii_uppercase[3:]):
+        drive = f"{letter}:"
+        drive_root = drive + "\\"
+        if os.path.exists(drive_root):
+            continue
+
+        result = subprocess.run(
+            ["subst", drive, resolved],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        if result.returncode != 0:
+            continue
+
+        def cleanup(mapped_drive: str = drive) -> None:
+            subprocess.run(
+                ["subst", mapped_drive, "/D"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+
+        atexit.register(cleanup)
+        return drive_root
+
+    raise RuntimeError(
+        "PADDLE_ASCII_PATH_UNAVAILABLE:"
+        f"{resolved}:winerr={ctypes.get_last_error()}"
+    )
+
 def parse_pages(raw: str) -> list[int]:
     pages = sorted({int(value) for value in raw.split(",") if value.strip()})
     if not pages or any(page < 1 for page in pages):
@@ -75,17 +139,18 @@ def main() -> None:
     if not model_root_raw:
         raise RuntimeError("LEX_PADDLE_MODEL_DIR is required; network model downloads are disabled")
     model_root = Path(model_root_raw).resolve()
+    native_model_root = Path(paddle_native_path(model_root))
     required_models = {
         "doc_orientation_classify_model_dir":
-            model_root / "PP-LCNet_x1_0_doc_ori",
+            native_model_root / "PP-LCNet_x1_0_doc_ori",
         "doc_unwarping_model_dir":
-            model_root / "UVDoc",
+            native_model_root / "UVDoc",
         "textline_orientation_model_dir":
-            model_root / "PP-LCNet_x1_0_textline_ori",
+            native_model_root / "PP-LCNet_x1_0_textline_ori",
         "text_detection_model_dir":
-            model_root / "PP-OCRv6_medium_det",
+            native_model_root / "PP-OCRv6_medium_det",
         "text_recognition_model_dir":
-            model_root / "PP-OCRv6_medium_rec",
+            native_model_root / "PP-OCRv6_medium_rec",
     }
     missing = [
         str(path)

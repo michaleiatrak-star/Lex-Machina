@@ -346,6 +346,21 @@ export async function startLocalServer(options?: {
     new LocalAuthService(
       authStore
     );
+  if (
+    authService.status()
+      .requiresBootstrap
+  ) {
+    const bootstrap =
+      await authService.bootstrap({
+        loginName: "admin",
+        displayName: "Administrator",
+        password: "admin",
+        passwordSetupPending: true
+      });
+    authService.logoutAuthorization(
+      `Bearer ${bootstrap.sessionToken}`
+    );
+  }
   const guideSessionStore =
     new GuideSessionStateStore();
   const unsubscribeGuideRevocation =
