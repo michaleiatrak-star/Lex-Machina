@@ -1,5 +1,31 @@
 # G39 implementation status — 2026-09-18
 
+## Latest online/source gate closure — 2026-09-19
+
+Validated source SHA: `05dac1a086c939f31014e0a2ff59dd1ab15f378e`.
+
+Exact-SHA online release gates are **CLOSED**:
+- Lex Runtime Validation: **PASS**;
+- F-138 structural audit: **PASS**;
+- G39 Installer State Machine: **PASS**;
+- Lex Windows Online Installer + installed-copy acceptance: **PASS**;
+- official API connectivity gate: **PASS**;
+- official portals HTML/API matrix: **PASS_WITH_WARNINGS** (external/WAF restrictions are surfaced, not silently accepted);
+- KIO/UZP live source gate: **PASS_WITH_WARNINGS**;
+- dedicated ELI freshness/PDF, SN and SAOS/CBOSA live probes executed; SAOS is live, while CBOSA transport restrictions remain explicitly non-release-blocking.
+
+Expanded machine-source coverage now includes, among others: ELI DU/MP, Sejm API, SAOS, UODO OpenAPI/decisions, EUREKA MF, KRS, CEIDG authenticated boundary, REGON API portal, dane.gov.pl API, e-Zamówienia notice API, NBP, common-court judgments, TK portals, UKE BIP, UOKiK, KRZ, EKW, SUDOP, BZP/UZP, RCL, PIP, ZUS, KNF, CURIA, RPO, RF, NIK, GUNB, URE, Fundusze Europejskie, GIOŚ/GIS and VAT whitelist.
+
+Source classification remains fail-closed: statute-text R1 is not conflated with R2A case-law/interpretive portals or official registers.
+
+Published online prerelease:
+- tag: `v0.1.3-g39-rc1`;
+- release target: `05dac1a086c939f31014e0a2ff59dd1ab15f378e`;
+- asset: `Lex-Machina-0.1.3-G39-Online-x64-Setup.exe`;
+- GitHub asset SHA-256: `7d774512a41e77f8cc1a40ad8d5d78f5ebcfc0857c378ac86946bc8b62f81364`;
+- release updated: 2026-09-19;
+- `main` remains untouched; offline remains a separate deferred acceptance track.
+
 Branch: `feature/g39-execution-2026-09-17`  
 PR: #51  
 Scope: deterministic installer, on-demand Local AI, skill/application updates.
@@ -391,13 +417,15 @@ Publication policy has been split without weakening the full release gate:
 
 ## Current closure order / roadmap
 
-1. keep Runtime + F-138 + G39 Installer State Machine green on the exact source SHA used for publication;
-2. publish the online x64 installer immediately after exact-SHA online installed-copy acceptance PASS and attach SHA-256 receipts;
-3. continue fixing the standalone offline clean-machine path without blocking availability of the already accepted online installer;
-4. add the offline x64 installer to the same `v0.1.3-g39-rc1` prerelease only after its own clean-machine PASS and checksum re-verification;
-5. close the complete installer integration slice G39G only when both online and offline acceptance evidence is green; keep production update/signing gates separate and fail-closed;
-7. execute and review the self-hosted Local AI CPU/Vulkan 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact;
-8. execute the semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds;
-9. configure production Authenticode and Ed25519 application/skill/model-pack trust roots and execute signed update/rollback acceptance;
-10. enable protected `main` / release rules as a repository-admin task; no merge to `main` is part of this audit/release-candidate flow;
-11. close G39C/G39A-B-D/G39E/G39F/G39J only against their own required benchmark/signing evidence; do not infer PASS from prerelease installer success.
+1. **DONE** — keep Runtime + F-138 + G39 Installer State Machine green on the exact source SHA used for online publication.
+2. **DONE** — add and execute live HTML/API coverage for the configured official government/official-portal source matrix; preserve explicit source classes and fail-closed behavior.
+3. **DONE** — publish the online x64 installer from exact accepted SHA `05dac1a086c939f31014e0a2ff59dd1ab15f378e` with checksum receipts.
+4. Continue fixing the standalone offline clean-machine path without blocking the accepted online installer.
+5. Add the offline x64 installer to the same `v0.1.3-g39-rc1` prerelease only after its own clean-machine PASS and checksum re-verification.
+6. Close the complete installer integration slice G39G only when both online and offline acceptance evidence is green; keep production update/signing gates separate and fail-closed.
+7. Execute and review the self-hosted Local AI CPU/Vulkan 64k / 96k / 128k / 160k / 200k context-capability benchmark artifact.
+8. Execute the semantic/legal-quality benchmark with an expert-curated `EXPERT_PRIVATE` corpus and review/approve the versioned acceptance thresholds.
+9. Configure production Authenticode and Ed25519 application/skill/model-pack trust roots and execute signed update/rollback acceptance.
+10. Enable protected `main` / release rules as a repository-admin task; no merge to `main` is part of this audit/release-candidate flow.
+11. Close G39C/G39A-B-D/G39E/G39F/G39J only against their own required benchmark/signing evidence; do not infer PASS from prerelease installer success.
+
