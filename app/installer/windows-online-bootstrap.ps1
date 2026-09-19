@@ -127,35 +127,41 @@ $pythonExe = Join-Path $pythonDir "python.exe"
 $pythonExpected = "Python $($manifest.runtime.python.version)"
 if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   Remove-Item $pythonDir -Recurse -Force -ErrorAction SilentlyContinue
-  $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
-  Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
-  # Start-Process joins ArgumentList values into one native command line. A bare
-  # TargetDir=<path> therefore breaks when the per-user install root contains
-  # spaces (for example %LOCALAPPDATA%\Lex Machina\runtime). Keep quotes in
-  # the native command line explicitly and exercise this contract in G33D.
-  $pythonInstallArguments = @(
-    "/quiet",
-    "InstallAllUsers=0",
-    ('TargetDir="{0}"' -f $pythonDir),
-    "Include_launcher=0",
-    "Include_test=0",
-    "Include_doc=0",
-    "Include_tcltk=0",
-    "Include_tools=0",
-    "Include_pip=1",
-    "PrependPath=0",
-    "Shortcuts=0"
-  ) -join " "
-  Write-Host "Installing verified Python runtime into: $pythonDir"
-  $install = Start-Process -FilePath $pythonInstaller -ArgumentList $pythonInstallArguments -Wait -PassThru
-  if ($install.ExitCode -ne 0) {
-    throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
+  if ($manifest.runtime.python.distribution -ne "NUGET_SIDE_BY_SIDE") {
+    throw "BOOTSTRAP_PYTHON_DISTRIBUTION_INVALID:$($manifest.runtime.python.distribution)"
   }
+  $pythonArchive = Join-Path $cache "python-$($manifest.runtime.python.version)-nuget.zip"
+  Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonArchive "python-runtime"
+  $extract = Join-Path $cache "python-nuget-extract-$($manifest.runtime.python.version)"
+  Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
+  Expand-Archive -LiteralPath $pythonArchive -DestinationPath $extract -Force
+  $source = Join-Path $extract "tools"
+  $sourcePython = Join-Path $source "python.exe"
+  if (-not (Test-Path -LiteralPath $sourcePython -PathType Leaf)) {
+    throw "BOOTSTRAP_PYTHON_NUGET_LAYOUT_INVALID"
+  }
+  New-Item -ItemType Directory -Force -Path $pythonDir | Out-Null
+  Copy-Item (Join-Path $source "*") $pythonDir -Recurse -Force
+  Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
 }
+$env:PYTHONNOUSERSITE = "1"
 $pythonActual = Get-CommandVersionText $pythonExe @("--version")
 if ($pythonActual -ne $pythonExpected) {
   $pythonActualDisplay = if ($null -eq $pythonActual) { "<missing-or-unreadable>" } else { $pythonActual }
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActualDisplay executable=$pythonExe"
+}
+
+& $pythonExe -m pip --version 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+  Write-Host "Bootstrapping pip inside the private Python runtime"
+  & $pythonExe -m ensurepip --upgrade --default-pip | Out-Host
+  if ($LASTEXITCODE -ne 0) {
+    throw "BOOTSTRAP_PYTHON_PIP_UNAVAILABLE"
+  }
+}
+& $pythonExe -m pip --version | Out-Host
+if ($LASTEXITCODE -ne 0) {
+  throw "BOOTSTRAP_PYTHON_PIP_UNAVAILABLE"
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"

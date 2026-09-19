@@ -6,12 +6,22 @@ $ocrWorkerPath = Join-Path (Split-Path -Parent $PSScriptRoot) "ocr\paddle_worker
 
 $bootstrap = Get-Content -Raw -LiteralPath $bootstrapPath
 $prefetch = Get-Content -Raw -LiteralPath $prefetchPath
-$ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath
+$ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath\n$release = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
 
 $checks = [ordered]@{
-  pythonTargetDirQuoted = (
-    $bootstrap.Contains('TargetDir="{0}"') -and
-    $bootstrap.Contains('$pythonInstallArguments')
+  pythonNugetSideBySide = (
+    $release.runtime.python.distribution -eq "NUGET_SIDE_BY_SIDE" -and
+    $release.runtime.python.url -match "api\\.nuget\\.org/.+/python\\.3\\.13\\.15\\.nupkg$" -and
+    $bootstrap.Contains("BOOTSTRAP_PYTHON_NUGET_LAYOUT_INVALID") -and
+    $bootstrap.Contains('Join-Path $extract "tools"')
+  )
+  pythonDoesNotUseRegisteredInstaller = (
+    -not $bootstrap.Contains("TargetDir=") -and
+    -not $bootstrap.Contains("Start-Process -FilePath $pythonInstaller")
+  )
+  pythonPrivatePipGate = (
+    $bootstrap.Contains("BOOTSTRAP_PYTHON_PIP_UNAVAILABLE") -and
+    $bootstrap.Contains("-m ensurepip --upgrade --default-pip")
   )
   pythonVersionDiagnostics = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
