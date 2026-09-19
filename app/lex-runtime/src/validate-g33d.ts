@@ -87,7 +87,7 @@ const checks = {
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
   canonicalWindowsBranding:
-    branding.includes("572eff0901365285cbeee54f822cdb6fd969cd281cdc1099568ba4332cd4f61a") &&
+    branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
     branding.includes("lex-machina-brand-source.png") &&
     onlineBuild.includes("materialize-brand-icon.ps1") &&
     offlineBuild.includes("materialize-brand-icon.ps1"),
