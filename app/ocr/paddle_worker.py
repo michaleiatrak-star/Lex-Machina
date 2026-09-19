@@ -10,6 +10,40 @@ from PIL import Image
 from paddleocr import PaddleOCR
 
 
+def paddle_native_path(path: Path) -> str:
+    """Give Paddle's native Windows predictor an ASCII-safe model path."""
+    resolved = str(path.resolve())
+    if os.name != "nt" or resolved.isascii():
+        return resolved
+
+    import ctypes
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_short = kernel32.GetShortPathNameW
+    get_short.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+    ]
+    get_short.restype = ctypes.c_uint32
+
+    needed = get_short(resolved, None, 0)
+    if needed == 0:
+        raise RuntimeError(
+            "PADDLE_ASCII_PATH_UNAVAILABLE:"
+            f"{resolved}:winerr={ctypes.get_last_error()}"
+        )
+    buffer = ctypes.create_unicode_buffer(needed + 1)
+    written = get_short(resolved, buffer, len(buffer))
+    short = buffer.value
+    if written == 0 or not short or not short.isascii():
+        raise RuntimeError(
+            "PADDLE_ASCII_PATH_UNAVAILABLE:"
+            f"{resolved}:short={short!r}:winerr={ctypes.get_last_error()}"
+        )
+    return short
+
+
 def parse_pages(raw: str) -> list[int]:
     pages = sorted({int(value) for value in raw.split(",") if value.strip()})
     if not pages or any(page < 1 for page in pages):
@@ -109,7 +143,7 @@ def main() -> None:
         # non-oneDNN path until the upstream fix is in a pinned release.
         enable_mkldnn=False,
         **{
-            key: str(value)
+            key: paddle_native_path(value)
             for key, value in required_models.items()
         },
     )
