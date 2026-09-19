@@ -91,6 +91,20 @@ describe(
         expect(
           result.summary.status
         ).toBe("DISABLED");
+        expect(
+          result.summary
+            .ownership
+            .effectiveOwner
+        ).toBe("PRIMARY");
+        expect(
+          result.summary
+            .ownership
+            .fallbackApplied
+        ).toBe(true);
+        expect(result.appendix)
+          .toContain(
+            "PRIMARY FALLBACK"
+          );
         expect(calls)
           .toHaveLength(0);
       }
@@ -170,6 +184,16 @@ describe(
         ).toBe(
           "SKIPPED_SAME_AS_PRIMARY"
         );
+        expect(
+          result.summary
+            .ownership
+            .effectiveOwner
+        ).toBe("PRIMARY");
+        expect(
+          result.summary
+            .ownership
+            .fallbackApplied
+        ).toBe(true);
         expect(calls)
           .toHaveLength(0);
       }
@@ -284,6 +308,16 @@ describe(
         expect(
           result.summary.status
         ).toBe("PASS");
+        expect(
+          result.summary
+            .ownership
+            .effectiveOwner
+        ).toBe("AUXILIARY");
+        expect(
+          result.summary
+            .ownership
+            .fallbackApplied
+        ).toBe(false);
         expect(result.appendix)
           .toContain(
             "deterministic runtime verification"
