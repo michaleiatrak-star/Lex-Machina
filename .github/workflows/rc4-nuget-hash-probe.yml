@@ -62,6 +62,8 @@ jobs:
           Copy-Item (Join-Path $extract "tools\*") $target -Recurse -Force
           $python = Join-Path $target "python.exe"
           $env:PYTHONNOUSERSITE = "1"
+          $env:PYTHONUTF8 = "1"
+          $env:PYTHONIOENCODING = "utf-8"
           $version = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
           if ($version -ne "Python 3.13.15") { throw "PROBE_PRIVATE_VERSION_INVALID:$version" }
           & $python -m pip --version
