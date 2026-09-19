@@ -1,0 +1,24 @@
+name: RC4 NuGet Python hash probe
+
+on:
+  push:
+    branches:
+      - "work/0.1.4-g39k-rc4-nuget-hash"
+
+permissions:
+  contents: read
+
+jobs:
+  hash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download official PSF NuGet Python and print SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://api.nuget.org/v3-flatcontainer/python/3.13.15/python.3.13.15.nupkg"
+          curl --fail --location --retry 3 --output python.3.13.15.nupkg "$url"
+          bytes="$(wc -c < python.3.13.15.nupkg | tr -d ' ')"
+          sha="$(sha256sum python.3.13.15.nupkg | awk '{print $1}')"
+          echo "NUGET_PYTHON_BYTES=$bytes"
+          echo "NUGET_PYTHON_SHA256=$sha"
