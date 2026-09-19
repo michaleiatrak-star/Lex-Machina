@@ -1,0 +1,141 @@
+name: Lex Machina 0.1.4 G39K RC1 Online Release
+
+on:
+  push:
+    branches:
+      - "release/0.1.4-g39k-rc1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lex-release-0.1.4-g39k-rc1
+  cancel-in-progress: false
+
+jobs:
+  runtime:
+    name: Runtime and Gate I audit
+    uses: ./.github/workflows/lex-runtime.yml
+
+  structural:
+    name: Structural corpus audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+
+  online:
+    name: Accepted online installer
+    needs:
+      - runtime
+      - structural
+    uses: ./.github/workflows/lex-installer.yml
+
+  publish:
+    name: Publish exact accepted online installer
+    needs:
+      - runtime
+      - structural
+      - online
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download accepted online installer artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input
+
+      - name: Verify receipt and assemble immutable release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+
+          installer="$(find release-input -type f -name '*.exe' -print -quit)"
+          receipt="$(find release-input -type f -name 'SHA256.txt' -print -quit)"
+
+          if [[ -z "$installer" || ! -f "$installer" ]]; then
+            echo "ONLINE_INSTALLER_MISSING" >&2
+            exit 1
+          fi
+          if [[ -z "$receipt" || ! -f "$receipt" ]]; then
+            echo "ONLINE_INSTALLER_RECEIPT_MISSING" >&2
+            exit 1
+          fi
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$installer" | awk '{print $1}')"
+          if [[ ! "$expected" =~ ^[0-9a-f]{64}$ || "$expected" != "$actual" ]]; then
+            echo "ONLINE_INSTALLER_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          fi
+
+          version="$(node -p "require('./app/lex-runtime/package.json').version")"
+          if [[ "$version" != "0.1.4" ]]; then
+            echo "RELEASE_VERSION_MISMATCH:$version" >&2
+            exit 1
+          fi
+
+          target="release-out/Lex-Machina-0.1.4-G39K-Online-x64-Setup.exe"
+          cp "$installer" "$target"
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          sha256sum "$target" > release-out/SHA256SUMS.txt
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+
+          cat release-out/SHA256SUMS.txt
+          cat release-out/SOURCE-SHA.txt
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.4 — G39K RC1
+
+          Online Windows x64 release candidate accepted only after runtime, Gate I,
+          router required-module coverage, structural audit, installer build and
+          installed-copy acceptance have all passed for the same source commit.
+
+          G39K/G39L changes:
+          - explicit PRIMARY / AUXILIARY / RUNTIME model-task ownership registry;
+          - every auxiliary task must declare a non-auxiliary fallback;
+          - LEGAL_REFERENCE_PREFLIGHT falls back explicitly to PRIMARY when the helper
+            is disabled, unavailable, identical to primary, or fails;
+          - deterministic verification remains RUNTIME-owned;
+          - the legal router's complete required_modules frontmatter is read by runtime
+            before semantic provider execution;
+          - missing, empty or unreadable router-required resources fail closed;
+          - Gate I includes I-B1_ROUTER_REQUIRED_MODULES;
+          - router SELF-CHECK is now an explicit required module;
+          - G39K deterministic audit runs in CI.
+
+          The release tag is bound to the exact source SHA. A rerun may replace assets
+          only when the existing tag still points to that same SHA.
+          EOF
+
+      - name: Create immutable-source prerelease and upload installer
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: v0.1.4-g39k-rc1
+          RELEASE_TITLE: Lex Machina v0.1.4 G39K RC1
+        run: |
+          set -euo pipefail
+          source_sha="$GITHUB_SHA"
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+            if [[ "$tag_sha" != "$source_sha" ]]; then
+              echo "IMMUTABLE_RELEASE_TAG_MISMATCH tag=$tag_sha source=$source_sha" >&2
+              exit 1
+            fi
+            gh release edit "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease
+          else
+            gh release create "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease               --target "$source_sha"
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber             release-out/Lex-Machina-0.1.4-G39K-Online-x64-Setup.exe             release-out/SHA256SUMS.txt             release-out/CI-SHA256-ONLINE.txt             release-out/SOURCE-SHA.txt
+
+          gh release view "$RELEASE_TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
