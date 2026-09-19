@@ -409,23 +409,57 @@ let kioPdfPages:
 let kioPdfExtractionError:
   string | null = null;
 
-if (
+function findPdfHeaderOffset(
+  bytes: Uint8Array
+): number {
+  const limit =
+    Math.min(
+      4096,
+      bytes.length - 3
+    );
+
+  for (
+    let index = 0;
+    index < limit;
+    index += 1
+  ) {
+    if (
+      bytes[index] === 0x25 &&
+      bytes[index + 1] === 0x50 &&
+      bytes[index + 2] === 0x44 &&
+      bytes[index + 3] === 0x46
+    ) {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
+const kioPdfHeaderOffset =
   kioPdf.trace.status ===
-    200 &&
-  kioPdf.bytes.length >
-    4 &&
-  String.fromCharCode(
-    ...kioPdf.bytes.slice(
-      0,
-      4
-    )
-  ) === "%PDF"
+    200
+    ? findPdfHeaderOffset(
+        kioPdf.bytes
+      )
+    : -1;
+
+const kioPdfPayload =
+  kioPdfHeaderOffset >= 0
+    ? kioPdf.bytes.slice(
+        kioPdfHeaderOffset
+      )
+    : new Uint8Array();
+
+if (
+  kioPdfPayload.length >
+    4
 ) {
   try {
     const extracted =
       await new LocalPdfTextExtractor()
         .extract(
-          kioPdf.bytes
+          kioPdfPayload
         );
     kioPdfText =
       extracted.text;
@@ -509,17 +543,9 @@ const kioContentPass =
 const kioPdfMagicValid =
   kioPdf.trace.status ===
     200 &&
-  kioPdf.bytes.length >
-    10_000 &&
-  String.fromCharCode(
-    ...kioPdf.bytes.slice(
-      0,
-      Math.min(
-        1024,
-        kioPdf.bytes.length
-      )
-    )
-  ).includes("%PDF-");
+  kioPdfHeaderOffset >= 0 &&
+  kioPdfPayload.length >
+    10_000;
 
 const kioPdfTextPass =
   kioPdfPages !== null &&
@@ -706,6 +732,8 @@ process.stdout.write(
               kioPdf.trace,
             pdfMagicValid:
               kioPdfMagicValid,
+            pdfHeaderOffset:
+              kioPdfHeaderOffset,
             pdfTextMatchesPrimary:
               kioPdfTextPass,
             signaturesFound:
