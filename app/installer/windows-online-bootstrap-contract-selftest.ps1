@@ -20,7 +20,7 @@ $checks = [ordered]@{
   )
   pythonDoesNotUseRegisteredInstaller = (
     -not $bootstrap.Contains("TargetDir=") -and
-    -not $bootstrap.Contains("Start-Process -FilePath $pythonInstaller")
+    -not $bootstrap.Contains('Start-Process -FilePath $pythonInstaller')
   )
   pythonPrivatePipGate = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_PIP_UNAVAILABLE") -and
