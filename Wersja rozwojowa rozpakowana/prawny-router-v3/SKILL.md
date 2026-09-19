@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.49"
+version: "3.50"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -108,6 +108,10 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog:
+  - '3.50 (2026-09-19, G39K/G39L): SELF-CHECK dodany jawnie do required_modules.
+    Runtime odczytuje całą listę required_modules routera przed modelem i blokuje
+    wykonanie przy braku lub pustym zasobie; model pomocniczy ma jawnego właściciela
+    zadania i fallback do modelu głównego.'
   - '3.49 (2026-09-13c, F-157b): biała lista VAT odblokowana — escalation
     przepisane z NIEOSIĄGALNA na osiągalną, z parametrami wywołania i wymogiem
     zapisu requestId. Zmiana wymuszona pomiarem T25 (52 sondy, 6 hostów
