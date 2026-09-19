@@ -17,6 +17,7 @@ const privatePython = read("app/installer/install-private-python.ps1");
 const onlineBuild = read("app/installer/build-windows-online.ps1");
 const offlineBuild = read("app/installer/build-windows-offline.ps1");
 const branding = read("app/installer/materialize-brand-icon.ps1");
+const server = read("app/lex-runtime/src/http/server.ts");
 const releaseSource = JSON.parse(
   read("app/installer/windows-release-source.json")
 ) as {
@@ -86,6 +87,15 @@ const checks = {
     !bootstrap.includes("TargetDir=") &&
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
+  stableSkillCorpusBundled:
+    server.includes("Wersja stabilna rozpakowana 8.09.2026") &&
+    onlineBuild.includes("Wersja stabilna rozpakowana 8.09.2026") &&
+    offlineBuild.includes("Wersja stabilna rozpakowana 8.09.2026") &&
+    !onlineBuild.includes("Wersja rozwojowa rozpakowana") &&
+    !offlineBuild.includes("Wersja rozwojowa rozpakowana") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_STABLE_CORPUS_PASS") &&
+    acceptance.includes('"orzeczenia-sadowe-v2" = "2.11"') &&
+    acceptance.includes('"pisma-procesowe-v3" = "5.20"'),
   canonicalWindowsBranding:
     branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
     branding.includes("lex-machina-brand-source.png") &&
