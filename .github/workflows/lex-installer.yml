@@ -113,6 +113,52 @@ jobs:
           }
           Write-Host "Acceptance VC++ prerequisite exit code: $($install.ExitCode)"
 
+      - name: Reproduce pre-existing same-version Python registration
+        shell: pwsh
+        run: |
+          # RC3 field failure: the CPython full installer can enter maintenance
+          # mode when the same version is already registered and then return 0
+          # without provisioning Lex Machina's requested private TargetDir.
+          # Register the exact pinned Python first; the product installer must
+          # still succeed because it now uses the application-local embeddable
+          # distribution and never reuses this registered installation.
+          $manifest = Get-Content -Raw "app/installer/windows-release-source.json" | ConvertFrom-Json
+          $python = $manifest.runtime.python
+          $foreignInstaller = Join-Path $env:RUNNER_TEMP "foreign-python-$($python.version)-amd64.exe"
+          Invoke-WebRequest -UseBasicParsing -Uri $python.url -OutFile $foreignInstaller
+          $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignInstaller).Hash.ToLowerInvariant()
+          if ($actualHash -ne $python.sha256.ToLowerInvariant()) {
+            throw "ACCEPTANCE_FOREIGN_PYTHON_HASH_MISMATCH expected=$($python.sha256) actual=$actualHash"
+          }
+
+          $foreignRoot = Join-Path $env:RUNNER_TEMP ("Foreign Python " + $python.version)
+          $foreignArgs = @(
+            "/quiet",
+            "InstallAllUsers=0",
+            ('TargetDir="{0}"' -f $foreignRoot),
+            "Include_launcher=0",
+            "Include_test=0",
+            "Include_doc=0",
+            "Include_tcltk=0",
+            "Include_tools=0",
+            "Include_pip=0",
+            "PrependPath=0",
+            "Shortcuts=0"
+          ) -join " "
+          $proc = Start-Process -FilePath $foreignInstaller -ArgumentList $foreignArgs -Wait -PassThru
+          if ($proc.ExitCode -ne 0) {
+            throw "ACCEPTANCE_FOREIGN_PYTHON_INSTALL_FAILED:$($proc.ExitCode)"
+          }
+          $foreignExe = Join-Path $foreignRoot "python.exe"
+          if (-not (Test-Path -LiteralPath $foreignExe -PathType Leaf)) {
+            throw "ACCEPTANCE_FOREIGN_PYTHON_MISSING:$foreignExe"
+          }
+          $foreignVersion = (& $foreignExe --version 2>&1 | Select-Object -First 1).ToString().Trim()
+          if ($foreignVersion -ne "Python $($python.version)") {
+            throw "ACCEPTANCE_FOREIGN_PYTHON_VERSION_INVALID:$foreignVersion"
+          }
+          Write-Host "Pre-existing registered Python ready: $foreignRoot"
+
       - name: G33D installed-copy online bootstrap acceptance
         shell: pwsh
         run: |
@@ -121,9 +167,10 @@ jobs:
             Select-Object -First 1
           if (-not $installer) { throw "NSIS_INSTALLER_NOT_FOUND" }
 
-          # Regression coverage for the real per-user path reported in RC2:
+          # Regression coverage for the real per-user path reported in RC2/RC3:
           # spaces plus a Polish character must survive NSIS -> PowerShell ->
-          # Python installer native argument handling.
+          # app-local CPython extraction and package provisioning, even while
+          # the same CPython version is already registered elsewhere.
           $installRoot = Join-Path $env:RUNNER_TEMP (
             "Lex Machina Michał Acceptance-" + [Guid]::NewGuid().ToString("N")
           )
