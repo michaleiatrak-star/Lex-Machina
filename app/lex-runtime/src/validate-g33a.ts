@@ -33,15 +33,20 @@ const pinnedSources =
   /^https:\/\//.test(source.runtime?.node?.url ?? "") &&
   sha256(source.runtime?.node?.sha256) &&
   /^\d+\.\d+\.\d+$/.test(source.runtime?.python?.version ?? "") &&
-  /^https:\/\//.test(source.runtime?.python?.url ?? "") &&
-  sha256(source.runtime?.python?.sha256) &&
+  source.runtime?.python?.delivery === "EMBEDDABLE_APP_LOCAL" &&
+  /^https:\/\//.test(source.runtime?.python?.embeddable?.url ?? "") &&
+  sha256(source.runtime?.python?.embeddable?.sha256) &&
+  /^\d+\.\d+\.\d+$/.test(source.runtime?.python?.pipBootstrap?.version ?? "") &&
+  /^https:\/\//.test(source.runtime?.python?.pipBootstrap?.url ?? "") &&
+  sha256(source.runtime?.python?.pipBootstrap?.sha256) &&
   /^https:\/\//.test(source.systemPrerequisites?.visualCppRuntime?.url ?? "") &&
   sha256(source.systemPrerequisites?.visualCppRuntime?.sha256) &&
   !JSON.stringify(source).includes("TBD");
 const sourceHashEnforced =
   bootstrap.includes("Get-VerifiedDownload") &&
   bootstrap.includes("manifest.runtime.node.sha256") &&
-  bootstrap.includes("manifest.runtime.python.sha256") &&
+  bootstrap.includes("embedded.sha256") &&
+  bootstrap.includes("pipBootstrap.sha256") &&
   bootstrap.includes("vc.sha256") &&
   bootstrap.includes("BOOTSTRAP_HASH_MISMATCH");
 const lockContract =
