@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: lex-release-0.1.4-g39k-rc3-hotfix1
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   provenance:
