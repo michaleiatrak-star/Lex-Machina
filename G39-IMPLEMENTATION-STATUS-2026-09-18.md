@@ -1,5 +1,34 @@
 # G39 implementation status — 2026-09-18
 
+## Latest online gate / source-connectivity closure — 2026-09-19
+
+Validated source SHA: `1adb083508268a7b0ac0f2745774b0136a2e2f0f`.
+
+Online release gate is **CLOSED** on that exact SHA:
+- Lex Runtime Validation: **PASS**;
+- F-138 structural audit: **PASS**;
+- G39 Installer State Machine: **PASS**;
+- Windows Online installed-copy acceptance: **PASS**;
+- Publish G39 Online Installer: **PASS**; prerelease target updated to the same source SHA.
+
+Official-source coverage added to the runtime gate:
+- `OFFICIAL_API_LIVE_CONNECTIVITY`: **PASS** — ELI DU/MP, Sejm API, SAOS API, UODO OpenAPI + decisions API, EUREKA, KRS, CEIDG auth boundary, GUS/REGON API portal and NBP;
+- `OFFICIAL_PORTALS_HTML_API_MATRIX`: **PASS_WITH_WARNINGS** — includes common-court judgments, TK/IPO, UKE BIP, UOKiK decisions, KRZ, EKW, SUDOP, eZamówienia, BZP, RCL and VAT whitelist;
+- `KIO_UZP_LIVE_SOURCE_GATE`: **PASS_WITH_WARNINGS** — KIO HTML/details/content/PDF path is healthy; no public REST API was found and the `Sign=` filter remains non-deterministic;
+- `R1_LIVE_OFFICIAL_SOURCE_CONNECTIVITY`: **PASS_WITH_WARNINGS** — authoritative ELI/API, UODO, RCL journals, EUR-Lex and other configured R1 sources are healthy where machine-readable access exists;
+- G17/G19/G20/G22 dedicated live probes: **PASS**;
+- G30A SAOS/CBOSA discovery: SAOS **FOUND**; CBOSA transport remains externally blocked on both Windows and Linux runners and is explicitly classified as non-release-blocking rather than being silently treated as verified.
+
+Source hierarchy was corrected so SAOS / CBOSA / SN and other official case-law channels remain **R2A**, not R1 statute-text sources. External WAF/transport limitations are surfaced as warnings/restricted states and do not weaken the authoritative ELI/EUR-Lex gates.
+
+Published online prerelease:
+- tag: `v0.1.3-g39-rc1`;
+- target: `1adb083508268a7b0ac0f2745774b0136a2e2f0f`;
+- asset: `Lex-Machina-0.1.3-G39-Online-x64-Setup.exe`;
+- SHA-256: `f0c213495ff2861f825a17281c6c80fe2e86665483c064a03840b41166e45733`.
+
+Offline remains a separate deferred acceptance track and is not used to downgrade the already accepted online artifact.
+
 Branch: `feature/g39-execution-2026-09-17`  
 PR: #51  
 Scope: deterministic installer, on-demand Local AI, skill/application updates.
