@@ -352,7 +352,7 @@ skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry ka
 | [isap.sejm.gov.pl](https://isap.sejm.gov.pl) + [api.sejm.gov.pl/eli](https://api.sejm.gov.pl/eli) | Dz.U. i M.P. od 1918 r. — teksty jednolite, łańcuch nowelizacji (deterministyczne API ELI) |
 | [sejm.gov.pl](https://www.sejm.gov.pl) | proces legislacyjny |
 | [eur-lex.europa.eu](https://eur-lex.europa.eu) | prawo UE (CELLAR/CELEX) |
-| [dzienniki.gov.pl](https://dzienniki.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
+| [dziennikiurzedowe.gov.pl](https://dziennikiurzedowe.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
 | [prawakonsumenta.uokik.gov.pl](https://prawakonsumenta.uokik.gov.pl) | UOKiK — prawa konsumenta, gotowe wzory pism (odstąpienie, reklamacja), polubowne spory (DR-02) |
 | [parp.gov.pl](https://www.parp.gov.pl) | PARP — dotacje i dofinansowania dla firm, aktualne nabory (DR-06) |
 | uodo.gov.pl, BIP właściwych organów | rozporządzenia branżowe, ochrona danych |

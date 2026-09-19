@@ -382,30 +382,14 @@ const r1Specs: ProbeSpec[] = [
       "https://www.parp.gov.pl/",
     accept:
       "text/html,*/*;q=0.1",
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36",
     expected:
       /PARP|Polsk[aiej]+ Agencj|przedsiębiorc/iu,
     minBytes: 500,
     allowRedirectHosts: [
       "parp.gov.pl"
     ]
-  },
-  {
-    id: "DZIENNIKI_GOV_ALIAS",
-    tier: "R1",
-    url:
-      "https://dzienniki.gov.pl/",
-    accept:
-      "text/html,*/*;q=0.1",
-    expected:
-      /dziennik|urzędow|urzedow/iu,
-    minBytes: 200,
-    allowRedirectHosts: [
-      "www.dzienniki.gov.pl",
-      "dziennikiurzedowe.gov.pl",
-      "www.dziennikiurzedowe.gov.pl"
-    ],
-    transportFailureState:
-      "DEGRADED"
   },
   {
     id: "BIP_GOV_REPRESENTATIVE",

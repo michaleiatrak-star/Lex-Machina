@@ -320,6 +320,28 @@ jobs:
       - name: G30A — real SAOS and CBOSA discovery
         run: npm run validate:g30a-live
 
+  g30a-live-case-law-linux:
+    name: G30A Linux cross-runner SAOS and CBOSA probe
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G30A — cross-runner real SAOS and CBOSA discovery
+        run: npm run validate:g30a-live
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
