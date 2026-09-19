@@ -213,8 +213,34 @@ if (-not $modelsReady) {
     foreach ($source in $modelSources) {
       $env:PADDLE_PDX_MODEL_SOURCE = $source
       Write-Host "Model prefetch attempt via official source: $source"
-      & $pythonExe $prefetchScript $modelRoot | Out-Host
-      $prefetchExit = $LASTEXITCODE
+
+      # Windows PowerShell 5.1 promotes native stderr records into the
+      # PowerShell error stream. With ErrorActionPreference=Stop that would
+      # terminate this bootstrap before the fallback loop can inspect the
+      # native exit code. Redirect both streams and treat ExitCode as the
+      # authoritative success/failure signal.
+      $prefetchStdout = Join-Path $modelRoot ("prefetch-" + $source + ".stdout.log")
+      $prefetchStderr = Join-Path $modelRoot ("prefetch-" + $source + ".stderr.log")
+      Remove-Item -LiteralPath $prefetchStdout -Force -ErrorAction SilentlyContinue
+      Remove-Item -LiteralPath $prefetchStderr -Force -ErrorAction SilentlyContinue
+
+      $prefetchArguments = ('"{0}" "{1}"' -f $prefetchScript, $modelRoot)
+      $prefetchProcess = Start-Process -FilePath $pythonExe `
+        -ArgumentList $prefetchArguments `
+        -Wait `
+        -PassThru `
+        -NoNewWindow `
+        -RedirectStandardOutput $prefetchStdout `
+        -RedirectStandardError $prefetchStderr
+
+      if (Test-Path -LiteralPath $prefetchStdout -PathType Leaf) {
+        Get-Content -LiteralPath $prefetchStdout | Out-Host
+      }
+      if (Test-Path -LiteralPath $prefetchStderr -PathType Leaf) {
+        Get-Content -LiteralPath $prefetchStderr | Out-Host
+      }
+
+      $prefetchExit = $prefetchProcess.ExitCode
       if ($prefetchExit -eq 0) {
         $prefetchSucceeded = $true
         Write-Host "Model prefetch source accepted: $source"
