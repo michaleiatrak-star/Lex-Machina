@@ -145,6 +145,8 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   Remove-Item $extract -Recurse -Force -ErrorAction SilentlyContinue
 }
 $env:PYTHONNOUSERSITE = "1"
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
 $pythonActual = Get-CommandVersionText $pythonExe @("--version")
 if ($pythonActual -ne $pythonExpected) {
   $pythonActualDisplay = if ($null -eq $pythonActual) { "<missing-or-unreadable>" } else { $pythonActual }

@@ -178,6 +178,8 @@ jobs:
             `05357887df50d3153efc681bdf432c321d3e2f9ce5788f99f4515b27e8fda0ac`;
           - bootstrap validates the NuGet `tools\\python.exe` layout, exact interpreter
             version and private pip availability before installing pinned OCR/NER packages;
+          - bootstrap forces Python UTF-8 stdio so Unicode install paths such as `Michał`
+            cannot make pip fail while formatting its own executable/site-package path;
           - G33D now first registers the same CPython 3.13.15 on the runner and only
             then installs Lex Machina into a path with spaces and the Polish character
             `ł`, making this reported regression release-blocking;

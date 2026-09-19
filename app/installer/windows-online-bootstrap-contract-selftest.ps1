@@ -24,7 +24,9 @@ $checks = [ordered]@{
   )
   pythonPrivatePipGate = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_PIP_UNAVAILABLE") -and
-    $bootstrap.Contains("-m ensurepip --upgrade --default-pip")
+    $bootstrap.Contains("-m ensurepip --upgrade --default-pip") -and
+    $bootstrap.Contains('$env:PYTHONUTF8 = "1"') -and
+    $bootstrap.Contains('$env:PYTHONIOENCODING = "utf-8"')
   )
   pythonVersionDiagnostics = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
