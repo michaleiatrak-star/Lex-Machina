@@ -186,4 +186,5 @@ foreach ($target in @(
 }
 
 Write-Host "WINDOWS_BRANDING_ACCEPTANCE_PASS"
+Write-Host "Post-build ICO SHA256: $((Get-FileHash -Algorithm SHA256 -LiteralPath $iconFile).Hash.ToLowerInvariant())"
 Write-Host "ICO sizes: $(@($observed | Sort-Object) -join ', ')"

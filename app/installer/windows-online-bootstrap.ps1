@@ -78,18 +78,27 @@ function Get-VerifiedDownload(
   }
 }
 
+function Get-CommandVersionText(
+  [string]$Executable,
+  [string[]]$Arguments
+) {
+  if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { return $null }
+  try {
+    $line = & $Executable @Arguments 2>&1 | Select-Object -First 1
+    if ($null -eq $line) { return $null }
+    return $line.ToString().Trim()
+  } catch {
+    return $null
+  }
+}
+
 function Test-CommandVersion(
   [string]$Executable,
   [string[]]$Arguments,
   [string]$Expected
 ) {
-  if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { return $false }
-  try {
-    $value = (& $Executable @Arguments 2>&1 | Select-Object -First 1).ToString().Trim()
-    return $value -eq $Expected
-  } catch {
-    return $false
-  }
+  $value = Get-CommandVersionText $Executable $Arguments
+  return ($null -ne $value -and $value -eq $Expected)
 }
 
 Write-Host "[1/6] Private Node"
@@ -120,18 +129,33 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   Remove-Item $pythonDir -Recurse -Force -ErrorAction SilentlyContinue
   $pythonInstaller = Join-Path $cache "python-$($manifest.runtime.python.version)-amd64.exe"
   Get-VerifiedDownload $manifest.runtime.python.url $manifest.runtime.python.sha256 $pythonInstaller "python-runtime"
-  $args = @(
-    "/quiet", "InstallAllUsers=0", "TargetDir=$pythonDir", "Include_launcher=0",
-    "Include_test=0", "Include_doc=0", "Include_tcltk=0", "Include_tools=0",
-    "Include_pip=1", "PrependPath=0", "Shortcuts=0"
-  )
-  $install = Start-Process -FilePath $pythonInstaller -ArgumentList $args -Wait -PassThru
+  # Start-Process joins ArgumentList values into one native command line. A bare
+  # TargetDir=<path> therefore breaks when the per-user install root contains
+  # spaces (for example %LOCALAPPDATA%\Lex Machina\runtime). Keep quotes in
+  # the native command line explicitly and exercise this contract in G33D.
+  $pythonInstallArguments = @(
+    "/quiet",
+    "InstallAllUsers=0",
+    ('TargetDir="{0}"' -f $pythonDir),
+    "Include_launcher=0",
+    "Include_test=0",
+    "Include_doc=0",
+    "Include_tcltk=0",
+    "Include_tools=0",
+    "Include_pip=1",
+    "PrependPath=0",
+    "Shortcuts=0"
+  ) -join " "
+  Write-Host "Installing verified Python runtime into: $pythonDir"
+  $install = Start-Process -FilePath $pythonInstaller -ArgumentList $pythonInstallArguments -Wait -PassThru
   if ($install.ExitCode -ne 0) {
     throw "BOOTSTRAP_PYTHON_INSTALL_FAILED:$($install.ExitCode)"
   }
 }
-if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
-  throw "BOOTSTRAP_PYTHON_VERSION_INVALID"
+$pythonActual = Get-CommandVersionText $pythonExe @("--version")
+if ($pythonActual -ne $pythonExpected) {
+  $pythonActualDisplay = if ($null -eq $pythonActual) { "<missing-or-unreadable>" } else { $pythonActual }
+  throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActualDisplay executable=$pythonExe"
 }
 
 Write-Host "[3/6] Pinned Python/ML packages"

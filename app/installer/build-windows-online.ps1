@@ -11,6 +11,9 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[brand] Materialize pinned Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+
 Write-Host "[0/4] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
