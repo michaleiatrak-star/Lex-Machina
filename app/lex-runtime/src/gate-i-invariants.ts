@@ -17,6 +17,7 @@ import type {
 export type GateICheckId =
   | "ROUTER_FIRST"
   | "CORE_RESOURCES"
+  | "ROUTER_REQUIRED_MODULES"
   | "WORKFLOW_RESOURCES"
   | "SOURCE_PROVENANCE"
   | "SOURCE_HIERARCHY"
@@ -31,6 +32,7 @@ export type GateICheckId =
 export type GateISubgate =
   | "I-A_ROUTER"
   | "I-B_CORE_RESOURCES"
+  | "I-B1_ROUTER_REQUIRED_MODULES"
   | "I-C_WORKFLOW_RESOURCES"
   | "I-D_SOURCE_PROVENANCE"
   | "I-D1_SOURCE_HIERARCHY"
@@ -119,6 +121,35 @@ function coreResources(
       missing.length === 0
         ? `loaded=${CORE_LEGAL_RESOURCES.length}`
         : `missing=${missing.join(",")}`
+  };
+}
+
+function routerRequiredModules(
+  events:
+    readonly ExecutionEvent[]
+): GateICheck {
+  const gate =
+    events.find(
+      (event) =>
+        event.type ===
+          "gate" &&
+        event.target ===
+          "G39L_ROUTER_REQUIRED_MODULES"
+    );
+
+  return {
+    id:
+      "ROUTER_REQUIRED_MODULES",
+    subgate:
+      "I-B1_ROUTER_REQUIRED_MODULES",
+    result:
+      gate?.status === "OK"
+        ? "PASS"
+        : "BLOCKED",
+    detail:
+      gate
+        ? `status=${gate.status}`
+        : "gate=missing"
   };
 }
 
@@ -484,6 +515,9 @@ export function evaluateGateIInvariants(
     GateICheck[] = [
       routerFirst(args.events),
       coreResources(args.events),
+      routerRequiredModules(
+        args.events
+      ),
       workflowResources(
         args.workflowReads
       ),
