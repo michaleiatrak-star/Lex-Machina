@@ -155,9 +155,9 @@ let result = {
 try {
   const base =
     `http://127.0.0.1:${server.port}`;
-  const bootstrap =
+  const login =
     await fetch(
-      `${base}/api/auth/bootstrap`,
+      `${base}/api/auth/login`,
       {
         method: "POST",
         headers: {
@@ -165,24 +165,31 @@ try {
             "application/json"
         },
         body: JSON.stringify({
-          loginName:
-            "g34h-validator",
-          displayName:
-            "G34H Validator",
-          password:
-            "G34H walidacyjne bardzo dlugie haslo 2026"
+          loginName: "admin",
+          password: "admin"
         })
       }
     );
-  if (!bootstrap.ok) {
+  if (!login.ok) {
     throw new Error(
-      "G34H_BOOTSTRAP_FAILED"
+      "G34H_DEFAULT_ADMIN_LOGIN_FAILED"
     );
   }
   const auth =
-    await bootstrap.json() as {
+    await login.json() as {
       sessionToken: string;
+      user?: {
+        passwordSetupPending?: boolean;
+      };
     };
+  if (
+    !auth.sessionToken ||
+    auth.user?.passwordSetupPending !== true
+  ) {
+    throw new Error(
+      "G34H_DEFAULT_ADMIN_CONTRACT_INVALID"
+    );
+  }
   const headers = {
     Authorization:
       `Bearer ${auth.sessionToken}`
