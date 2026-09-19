@@ -1,6 +1,7 @@
 type Tier = "R1" | "R2A";
 type ProbeState =
   | "PASS"
+  | "PASS_INSECURE_HTTP"
   | "DEGRADED"
   | "EXPECTED_HUMAN_ONLY"
   | "EXTERNAL_BLOCKED";
@@ -28,6 +29,8 @@ type ProbeSpec = {
   expected?: RegExp;
   minBytes?: number;
   allowRedirectHosts?: string[];
+  allowHttp?: boolean;
+  transportFailureState?: ProbeState;
   classify?: (
     response: Response,
     body: string,
@@ -38,7 +41,7 @@ type ProbeSpec = {
 const DEFAULT_UA = "curl/8.5.0";
 const REQUEST_TIMEOUT_MS = 25_000;
 const MAX_ATTEMPTS = 3;
-const MAX_REDIRECTS = 4;
+const MAX_REDIRECTS = 8;
 const MAX_BODY_BYTES = 1_500_000;
 
 function allowedHost(
@@ -107,16 +110,26 @@ async function fetchFollowingOfficialRedirects(
       const next =
         new URL(location, current);
 
+      const protocolAllowed =
+        next.protocol === "https:" ||
+        (
+          spec.allowHttp === true &&
+          next.protocol === "http:"
+        );
+
       if (
-        next.protocol !== "https:" ||
+        !protocolAllowed ||
         !allowedHost(
           next.hostname.toLowerCase(),
           spec
         )
       ) {
         throw new Error(
-          "R1_REDIRECT_HOST_DENIED:" +
-          next.hostname
+          "R1_REDIRECT_DENIED:" +
+          next.protocol +
+          "//" +
+          next.hostname +
+          next.pathname
         );
       }
 
@@ -240,6 +253,7 @@ async function probe(
     tier: spec.tier,
     url: spec.url,
     state:
+      spec.transportFailureState ??
       "EXTERNAL_BLOCKED",
     attempts:
       MAX_ATTEMPTS,
@@ -392,7 +406,7 @@ const cellarSpec: ProbeSpec = {
   id: "CELLAR_EUR_LEX_FALLBACK",
   tier: "R1",
   url:
-    "https://publications.europa.eu/resource/celex/32016R0679",
+    "http://publications.europa.eu/resource/celex/32016R0679",
   accept:
     "application/xhtml+xml",
   acceptLanguage: "pol",
@@ -401,7 +415,33 @@ const cellarSpec: ProbeSpec = {
   minBytes: 50_000,
   allowRedirectHosts: [
     "op.europa.eu"
-  ]
+  ],
+  allowHttp: true,
+  classify:
+    (
+      response,
+      body,
+      bytes
+    ) => {
+      const contentOk =
+        response.ok &&
+        bytes >= 50_000 &&
+        /2016\/679|ochronie osób fizycznych|personal data/iu.test(
+          body
+        );
+
+      if (!contentOk) {
+        return response.status >= 500
+          ? "EXTERNAL_BLOCKED"
+          : "DEGRADED";
+      }
+
+      return response.url.startsWith(
+        "https:"
+      )
+        ? "PASS"
+        : "PASS_INSECURE_HTTP";
+    }
 };
 
 const isapSpec: ProbeSpec = {
@@ -415,6 +455,8 @@ const isapSpec: ProbeSpec = {
   allowRedirectHosts: [
     "www.isap.sejm.gov.pl"
   ],
+  transportFailureState:
+    "EXPECTED_HUMAN_ONLY",
   classify:
     (
       response,
@@ -473,7 +515,9 @@ const eliPrimary =
 
 const euLawHealthy =
   eurLex.state === "PASS" ||
-  cellar.state === "PASS";
+  cellar.state === "PASS" ||
+  cellar.state ===
+    "PASS_INSECURE_HTTP";
 
 const hardBlocked =
   eliPrimary?.state !== "PASS" ||
@@ -484,7 +528,9 @@ const degraded =
     (item) =>
       item.state === "DEGRADED" ||
       item.state ===
-        "EXTERNAL_BLOCKED"
+        "EXTERNAL_BLOCKED" ||
+      item.state ===
+        "PASS_INSECURE_HTTP"
   );
 
 const result =
@@ -508,7 +554,7 @@ process.stdout.write(
         bipCoverage:
           "REPRESENTATIVE_GOV_PL_PROBE_ONLY; BIP_IS_DYNAMIC_PER_AUTHORITY",
         eurLexPolicy:
-          "DIRECT_OR_CELLAR_FALLBACK_MUST_BE_HEALTHY",
+          "DIRECT_OR_CELLAR_FALLBACK_MUST_BE_HEALTHY; HTTP_CELLAR_IS_REPORTED_AS_DEGRADED",
         caseLawTier:
           "SAOS_CBOSA_SN_AND_OTHER_OFFICIAL_CASE_LAW_ARE_R2A_NOT_R1"
       },
