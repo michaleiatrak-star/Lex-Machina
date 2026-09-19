@@ -179,7 +179,14 @@ jobs:
             source, materialized as a 32-bit multi-size ICO (16/24/32/48/64/128/256);
           - the build materializer pins the exact source icon SHA-256 before Tauri,
             while post-build branding acceptance checks multi-size ICO structure and
-            verifies that both the desktop EXE and NSIS installer contain icon resources.
+            verifies that both the desktop EXE and NSIS installer contain icon resources;
+          - a fresh runtime now creates the first administrator as login `admin` with
+            temporary password `admin`, marks the account as password-setup-pending,
+            and does not expose the bootstrap session to the UI;
+          - while that flag is set, the UI blocks normal application use and clearly
+            requires replacement of the temporary password; new/recovery passwords
+            require at least 10 characters and the temporary `admin` password is no
+            longer valid after the change.
 
           Icon SHA-256:
           `2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc`
