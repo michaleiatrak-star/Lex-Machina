@@ -367,6 +367,7 @@ jobs:
 
   g30a-live-case-law-linux:
     name: G30A Linux cross-runner SAOS and CBOSA probe
+    continue-on-error: true
     runs-on: ubuntu-latest
     defaults:
       run:

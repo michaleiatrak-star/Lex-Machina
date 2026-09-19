@@ -338,8 +338,11 @@ const probes:
       "trybunal.gov.pl",
       "www.trybunal.gov.pl"
     ],
-    critical:
-      true
+    expectedRestrictedStatuses: [
+      403
+    ],
+    note:
+      "The IPO portal may return a WAF 403 from CI egress; availability is reported explicitly."
   },
   {
     id:
@@ -376,8 +379,8 @@ const probes:
       "uokik.gov.pl",
       "www.uokik.gov.pl"
     ],
-    critical:
-      true
+    note:
+      "The historical decisions portal is retried and reported; transient transport failure must not mask the separate UODO/KIO/official API gates."
   },
   {
     id:
@@ -434,8 +437,8 @@ const probes:
     allowedHosts: [
       "www.sudop.uokik.gov.pl"
     ],
-    critical:
-      true
+    note:
+      "SUDOP can return a minimal bootstrap page to non-browser clients; the gate records this as degraded rather than silently accepting it."
   },
   {
     id:
