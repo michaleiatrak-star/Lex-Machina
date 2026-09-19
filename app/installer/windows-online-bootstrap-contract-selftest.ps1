@@ -4,14 +4,26 @@ $bootstrapPath = Join-Path $PSScriptRoot "windows-online-bootstrap.ps1"
 $prefetchPath = Join-Path $PSScriptRoot "prefetch-release-models.py"
 $ocrWorkerPath = Join-Path (Split-Path -Parent $PSScriptRoot) "ocr\paddle_worker.py"
 
+$manifestPath = Join-Path $PSScriptRoot "windows-release-source.json"
 $bootstrap = Get-Content -Raw -LiteralPath $bootstrapPath
 $prefetch = Get-Content -Raw -LiteralPath $prefetchPath
 $ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath
+$manifest = Get-Content -Raw -LiteralPath $manifestPath
 
 $checks = [ordered]@{
-  pythonTargetDirQuoted = (
-    $bootstrap.Contains('TargetDir="{0}"') -and
-    $bootstrap.Contains('$pythonInstallArguments')
+  pythonAppLocalEmbedded = (
+    $bootstrap.Contains('EMBEDDABLE_APP_LOCAL') -and
+    $bootstrap.Contains('python*._pth') -and
+    $bootstrap.Contains('Lib\site-packages') -and
+    $bootstrap.Contains('pip-bootstrap-wheel') -and
+    -not $bootstrap.Contains('Start-Process -FilePath $pythonInstaller')
+  )
+  pythonPinnedEmbeddedManifest = (
+    $manifest.Contains('"delivery": "EMBEDDABLE_APP_LOCAL"') -and
+    $manifest.Contains('python-3.13.15-embeddable-amd64.zip') -and
+    $manifest.Contains('d1f04d990aee1253d8569e8e5104e30fa9f5fa830899f14843448872d936a2cf') -and
+    $manifest.Contains('"version": "26.2.1"') -and
+    $manifest.Contains('71138adf1f4ca900cdb7d289c21b7494329f2332b6d85f0e1c42108c0384ed3e')
   )
   pythonVersionDiagnostics = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
