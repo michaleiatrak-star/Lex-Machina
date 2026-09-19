@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - codex/f138-current-state-cleanup-2026-08-28
+      - work/g39-installer-repair-2026-09-18
 
 permissions:
   contents: read

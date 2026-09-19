@@ -6,7 +6,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "../../..");
 const lexRoot = path.resolve(
   process.env.LEX_SKILLS_PATH ??
-    path.join(repositoryRoot, "Wersja rozwojowa rozpakowana")
+    path.join(repositoryRoot, "Wersja stabilna rozpakowana 8.09.2026")
 );
 
 const registry = new LexSkillRegistry(lexRoot);

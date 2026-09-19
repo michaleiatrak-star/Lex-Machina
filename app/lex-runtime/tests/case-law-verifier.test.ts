@@ -106,7 +106,7 @@ describe("SupremeCourtCaseVerifier", () => {
         "sygn. III CZP 25/11",
       kind: "case",
       status: "VERIFIED",
-      sourceTier: "R1",
+      sourceTier: "R2A",
       verificationMethod:
         "web_fetch",
       sourceFormat: "TEXT",

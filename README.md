@@ -352,9 +352,7 @@ skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry ka
 | [isap.sejm.gov.pl](https://isap.sejm.gov.pl) + [api.sejm.gov.pl/eli](https://api.sejm.gov.pl/eli) | Dz.U. i M.P. od 1918 r. — teksty jednolite, łańcuch nowelizacji (deterministyczne API ELI) |
 | [sejm.gov.pl](https://www.sejm.gov.pl) | proces legislacyjny |
 | [eur-lex.europa.eu](https://eur-lex.europa.eu) | prawo UE (CELLAR/CELEX) |
-| [dzienniki.gov.pl](https://dzienniki.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
-| [prawakonsumenta.uokik.gov.pl](https://prawakonsumenta.uokik.gov.pl) | UOKiK — prawa konsumenta, gotowe wzory pism (odstąpienie, reklamacja), polubowne spory (DR-02) |
-| [parp.gov.pl](https://www.parp.gov.pl) | PARP — dotacje i dofinansowania dla firm, aktualne nabory (DR-06) |
+| [dziennikiurzedowe.gov.pl](https://dziennikiurzedowe.gov.pl) | dzienniki urzędowe (m.in. wojewódzkie — prawo miejscowe) |
 | uodo.gov.pl, BIP właściwych organów | rozporządzenia branżowe, ochrona danych |
 
 ### Rząd 2A — oficjalne orzecznictwo i interpretacje
@@ -369,6 +367,8 @@ skatalogowanej bazy źródeł o przypisanym rzędzie wiarygodności. Rejestry ka
 | [saos.org.pl](https://www.saos.org.pl) | SAOS — wyszukiwarka pomocnicza i API weryfikacji sygnatur |
 | [curia.europa.eu](https://curia.europa.eu), [echr.coe.int](https://www.echr.coe.int) | TSUE, ETPC |
 | interpretacje.podatki.gov.pl (Eureka), zus.pl, pip.gov.pl, uokik.gov.pl, uzp.gov.pl i in. | interpretacje urzędowe per dziedzina — rejestr: [`shared/INTERPRETACJE-URZEDOWE.md`](Wersja%20rozwojowa%20rozpakowana/shared/INTERPRETACJE-URZEDOWE.md) |
+| [prawakonsumenta.uokik.gov.pl](https://prawakonsumenta.uokik.gov.pl) | UOKiK — oficjalne materiały i wzory konsumenckie; źródło urzędowe pomocnicze, nie publikator brzmienia przepisu |
+| [parp.gov.pl](https://www.parp.gov.pl) | PARP — oficjalne informacje o programach i naborach; źródło urzędowe pomocnicze, nie publikator brzmienia przepisu |
 
 ### Rząd 2B — uznane portale prawnicze i branżowe (komentarz i kontekst)
 

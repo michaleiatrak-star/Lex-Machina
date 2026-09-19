@@ -18,6 +18,7 @@ on:
   push:
     branches:
       - feature/local-runtime
+      - work/g39-installer-repair-2026-09-18
     paths:
       - "app/lex-runtime/**"
       - "app/lex-web/**"
@@ -227,8 +228,9 @@ jobs:
       - name: G37F — multi-file drag/drop queue and accessibility
         run: npm run validate:g37f
 
-      - name: Phase 13 — self-contained Windows offline installer contract
-        run: npm run validate:release-offline
+      # Offline acceptance is intentionally owned by
+      # .github/workflows/offline-windows-installer.yml.
+      # Online publication must not depend on the deferred offline deliverable.
 
       - name: G36 — legal skill runtime completeness
         run: npm run validate:g36
@@ -248,9 +250,98 @@ jobs:
       - name: G34H5 — legacy plaintext migration/removal
         run: npm run validate:g34h5
 
+  r1-live-connectivity:
+    name: R1 live official-source connectivity audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: R1 — live official-source connectivity matrix
+        run: npm run validate:r1-live
+
+  official-api-live:
+    name: Official APIs live connectivity audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Official APIs — live connectivity and auth boundary
+        run: npm run validate:official-api-live
+
+  official-portals-live:
+    name: Official portals HTML/API connectivity gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Official portals — HTML/API live matrix
+        run: npm run validate:official-portals-live
+
+  kio-uzp-live:
+    name: KIO and UZP live source gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: KIO/UZP — HTML, API, download and document mapping
+        run: npm run validate:kio-uzp-live
+
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     # Probe from the actual Windows release class. Ubuntu has independently
     # confirmed live SAOS, while CBOSA is documented as egress-sensitive.
     # Deterministic transport semantics remain covered on the main job.
@@ -274,9 +365,33 @@ jobs:
       - name: G30A — real SAOS and CBOSA discovery
         run: npm run validate:g30a-live
 
+  g30a-live-case-law-linux:
+    name: G30A Linux cross-runner SAOS and CBOSA probe
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G30A — cross-runner real SAOS and CBOSA discovery
+        run: npm run validate:g30a-live
+
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -300,6 +415,7 @@ jobs:
   g20-live-pdf:
     name: G20 live official PDF probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -323,6 +439,7 @@ jobs:
   g22-live-sn:
     name: G22 live SN case-law probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -346,6 +463,7 @@ jobs:
   g17-live-source:
     name: G17 live official-source probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:

@@ -4,6 +4,7 @@
   SetOutPath "$PLUGINSDIR"
   File "/oname=lex-get-install-state.ps1" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\get-install-state.ps1"
   File "/oname=lex-target-release-source.json" "${LEX_HOOK_FILE_DIR}\..\..\..\installer\windows-release-source.json"
+  File "/oname=lex-profile-cleanup.exe" "${LEX_HOOK_FILE_DIR}\..\target\release\lex-profile-cleanup.exe"
 
   DetailPrint "Lex Machina: rozpoznawanie stanu istniejącej instalacji..."
   nsExec::ExecToStack '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\lex-get-install-state.ps1" -RuntimeRoot "$INSTDIR\runtime" -TargetManifestPath "$PLUGINSDIR\lex-target-release-source.json" -OutputPath "$PLUGINSDIR\lex-install-state.json" -ProductName "Lex Machina" -DiscoverRegisteredInstall -FailOnInstallRootMismatch -FailOnDowngrade'
@@ -19,6 +20,22 @@
     Abort
   ${EndIf}
   DetailPrint "Lex Machina: stan instalacji $1"
+
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Czy chcesz rozpocząć od całkowicie czystego profilu administratora?$\r$\n$\r$\nTAK usuwa wszystkie lokalne profile, sprawy, ustawienia, Local AI oraz zapisane hasła i klucze API Lex Machina. Po instalacji zostanie utworzone nowe czyste konto administratora.$\r$\n$\r$\nNIE zachowuje istniejące dane (zalecane przy aktualizacji/naprawie)." /SD IDNO IDYES lex_clean_profile_yes IDNO lex_clean_profile_done
+
+lex_clean_profile_yes:
+  DetailPrint "Lex Machina: czyszczenie profili, danych i zapisanych sekretów..."
+  nsExec::ExecToLog '"$SYSDIR\taskkill.exe" /IM "lex-machina.exe" /T /F'
+  nsExec::ExecToStack '"$PLUGINSDIR\lex-profile-cleanup.exe" --purge-all'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: nie udało się bezpiecznie usunąć całego poprzedniego profilu.$\r$\n$1$\r$\n$\r$\nInstalacja została przerwana, aby nie pozostawić częściowych danych lub haseł." /SD IDOK
+    Abort
+  ${EndIf}
+  DetailPrint "Lex Machina: poprzedni profil został usunięty. Pierwsze uruchomienie utworzy nowe konto administratora."
+
+lex_clean_profile_done:
 
   ; Tauri copies the main executable immediately after PREINSTALL.
   ; Restore the installer output directory after embedding probe files in
@@ -51,6 +68,7 @@
   SetOutPath "$INSTDIR\runtime"
   File /r "${LEX_HOOK_FILE_DIR}\..\runtime\*"
   SetOutPath "$INSTDIR"
+  File "/oname=lex-profile-cleanup.exe" "${LEX_HOOK_FILE_DIR}\..\target\release\lex-profile-cleanup.exe"
 
   ; Fail before downloading large components if the embedded thin payload is
   ; structurally incomplete.
@@ -108,6 +126,21 @@ lex_runtime_selftest:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  MessageBox MB_ICONEXCLAMATION|MB_YESNO|MB_DEFBUTTON2 "Pełna deinstalacja Lex Machina usunie WSZYSTKIE lokalne profile, sprawy, ustawienia, Local AI oraz zapisane hasła i klucze API. Tej operacji nie można cofnąć.$\r$\n$\r$\nKontynuować?" /SD IDYES IDYES lex_uninstall_purge_yes IDNO lex_uninstall_purge_cancel
+
+lex_uninstall_purge_cancel:
+  Abort
+
+lex_uninstall_purge_yes:
+  DetailPrint "Lex Machina: zamykanie procesów i pełne czyszczenie danych użytkownika..."
+  nsExec::ExecToLog '"$SYSDIR\taskkill.exe" /IM "lex-machina.exe" /T /F'
+  nsExec::ExecToStack '"$INSTDIR\lex-profile-cleanup.exe" --purge-all'
+  Pop $0
+  Pop $1
+  ${If} $0 != 0
+    MessageBox MB_ICONSTOP|MB_OK "Lex Machina: pełne czyszczenie profili i haseł nie powiodło się.$\r$\n$1$\r$\n$\r$\nDeinstalacja została zatrzymana, aby nie zgłaszać fałszywie pełnego usunięcia danych." /SD IDOK
+    Abort
+  ${EndIf}
   RMDir /r "$INSTDIR\runtime"
+  Delete "$INSTDIR\lex-profile-cleanup.exe"
 !macroend

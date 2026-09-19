@@ -19,6 +19,10 @@ path = "src/main.rs"
 name = "lex-runtime-sidecar"
 path = "src/runtime_sidecar.rs"
 
+[[bin]]
+name = "lex-profile-cleanup"
+path = "src/profile_cleanup.rs"
+
 [build-dependencies]
 tauri-build = "=2.6.3"
 

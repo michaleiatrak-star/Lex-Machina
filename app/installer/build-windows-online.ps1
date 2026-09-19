@@ -11,6 +11,11 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[brand] Materialize canonical Lex Machina Windows icon"
+& (Join-Path $installer "materialize-brand-icon.ps1")
+$brandIcon = Join-Path $tauri "icons\\icon.ico"
+if (-not (Test-Path -LiteralPath $brandIcon -PathType Leaf)) { throw "LEX_BRAND_ICON_MATERIALIZATION_FAILED" }
+
 Write-Host "[0/4] Installer state machine self-test"
 & (Join-Path $installer "installer-state-machine-selftest.ps1")
 if ($LASTEXITCODE -ne 0) { throw "Installer state machine self-test failed" }
@@ -44,7 +49,7 @@ Write-Host "[2/4] Copy workers, corpus, manifest and bootstrap"
 Copy-Item (Join-Path $repo "app\ocr") (Join-Path $payload "ocr") -Recurse
 Copy-Item (Join-Path $repo "app\privacy") (Join-Path $payload "privacy") -Recurse
 Copy-Item (Join-Path $repo "app\storage") (Join-Path $payload "storage") -Recurse
-Copy-Item (Join-Path $repo "Wersja rozwojowa rozpakowana") (Join-Path $payload "corpus") -Recurse
+Copy-Item (Join-Path $repo "Wersja stabilna rozpakowana 8.09.2026") (Join-Path $payload "corpus") -Recurse
 Copy-Item (Join-Path $installer "windows-release-source.json") (Join-Path $payload "release-source.json")
 Copy-Item (Join-Path $installer "windows-release-requirements.txt") (Join-Path $payload "release-requirements.txt")
 
@@ -53,6 +58,7 @@ New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
   "windows-offline-bundle-install.ps1",
+  "install-private-python.ps1",
   "app-update-transaction.ps1",
   "app-update-verification.ps1",
   "install-local-llm.ps1",
@@ -70,12 +76,16 @@ foreach ($file in @(
 Write-Host "[3/4] Build native runtime sidecar"
 Push-Location $desktop
 try {
-  cargo build --release --bin lex-runtime-sidecar --manifest-path src-tauri/Cargo.toml
+  cargo build --release --bin lex-runtime-sidecar --bin lex-profile-cleanup --manifest-path src-tauri/Cargo.toml
   if ($LASTEXITCODE -ne 0) { throw "Runtime sidecar build failed" }
 } finally { Pop-Location }
 $sidecar = Join-Path $tauri "target\release\lex-runtime-sidecar.exe"
 if (-not (Test-Path $sidecar)) { throw "Built runtime sidecar not found" }
 Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
+$profileCleanup = Join-Path $tauri "target\release\lex-profile-cleanup.exe"
+if (-not (Test-Path $profileCleanup)) { throw "Built profile cleanup helper not found" }
+& $profileCleanup --self-test
+if ($LASTEXITCODE -ne 0) { throw "Profile cleanup helper self-test failed" }
 
 Write-Host "[4/4] Thin payload contract"
 foreach ($required in @(

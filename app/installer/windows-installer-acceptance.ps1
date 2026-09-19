@@ -82,7 +82,7 @@ if ($StandaloneOfflineExe) {
   throw "INSTALLER_ACCEPTANCE_MONOLITHIC_BUNDLE_TOO_LARGE:$($installerInfo.Length)"
 }
 if (-not $InstallRoot) {
-  $InstallRoot = Join-Path $env:RUNNER_TEMP ("LexMachinaInstalled-" + [Guid]::NewGuid().ToString("N"))
+  $InstallRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Installed " + [Guid]::NewGuid().ToString("N"))
 }
 $InstallRoot = [IO.Path]::GetFullPath($InstallRoot)
 Remove-Item $InstallRoot -Recurse -Force -ErrorAction SilentlyContinue
@@ -127,6 +127,9 @@ $oldAllProxy = $env:ALL_PROXY
 $oldNoProxy = $env:NO_PROXY
 $oldAcceptanceBlockNetwork = $env:LEX_ACCEPTANCE_BLOCK_NETWORK
 $oldForceVcRuntime = $env:LEX_FORCE_VC_RUNTIME_INSTALL
+$oldLexDataDir = $env:LEX_DATA_DIR
+$cleanProfileRoot = $null
+$profileProbePath = $null
 
 try {
   if ($BlockNetworkDuringInstall) {
@@ -182,6 +185,51 @@ try {
   # Validate that exact installed-copy contract rather than whichever duplicate
   # sidecar Get-ChildItem happens to return first.
   $runtimeRoot = Join-Path $InstallRoot "runtime"
+  $corpusRoot = Join-Path $runtimeRoot "corpus"
+  if (-not (Test-Path -LiteralPath $corpusRoot -PathType Container)) {
+    throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_MISSING:$corpusRoot"
+  }
+
+  $skillFiles = @(
+    Get-ChildItem -LiteralPath $corpusRoot -Directory |
+      Where-Object {
+        Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf
+      }
+  )
+  if ($skillFiles.Count -ne 32) {
+    throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_SKILL_COUNT_INVALID:expected=32 actual=$($skillFiles.Count)"
+  }
+
+  foreach ($requiredSkill in @("prawny-router-v3", "prawo-polskie-v2", "shared")) {
+    if (-not (Test-Path -LiteralPath (Join-Path $corpusRoot $requiredSkill) -PathType Container)) {
+      throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_REQUIRED_SKILL_MISSING:$requiredSkill"
+    }
+  }
+
+  $stableVersions = [ordered]@{
+    "analiza-sadowa-v6" = "6.5"
+    "dr-08-samorzad-terytorialny-prawo-lokalne" = "3.10"
+    "orzeczenia-sadowe-v2" = "2.11"
+    "pisma-procesowe-v3" = "5.20"
+    "przewodnik-prawny-v2" = "2.6"
+  }
+  foreach ($entry in $stableVersions.GetEnumerator()) {
+    $skillFile = Join-Path (Join-Path $corpusRoot $entry.Key) "SKILL.md"
+    if (-not (Test-Path -LiteralPath $skillFile -PathType Leaf)) {
+      throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_SKILL_MISSING:$($entry.Key)"
+    }
+    $rawSkill = Get-Content -Raw -LiteralPath $skillFile
+    $versionMatch = [regex]::Match($rawSkill, '(?m)^version:\s*"?([^"\r\n]+)"?\s*$')
+    if (-not $versionMatch.Success) {
+      throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_VERSION_MISSING:$($entry.Key)"
+    }
+    $actualVersion = $versionMatch.Groups[1].Value.Trim()
+    if ($actualVersion -ne $entry.Value) {
+      throw "INSTALLER_ACCEPTANCE_STABLE_CORPUS_VERSION_INVALID:$($entry.Key):expected=$($entry.Value):actual=$actualVersion"
+    }
+  }
+  Write-Host "INSTALLER_ACCEPTANCE_STABLE_CORPUS_PASS:32 skills"
+
   $sidecarPath = Join-Path $runtimeRoot "lex-runtime-sidecar.exe"
   if (-not (Test-Path -LiteralPath $sidecarPath -PathType Leaf)) {
     $sidecarCandidates = @(
@@ -249,9 +297,11 @@ try {
   if ($LASTEXITCODE -ne 0 -or -not $nodeVersion) {
     throw "INSTALLER_ACCEPTANCE_PRIVATE_NODE_FAILED"
   }
-  $pythonVersion = & $privatePython --version
-  if ($LASTEXITCODE -ne 0 -or -not $pythonVersion) {
-    throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED"
+  $pythonVersion = (& $privatePython --version 2>&1 | Select-Object -First 1).ToString().Trim()
+  $releaseSource = Get-Content -Raw -LiteralPath (Join-Path $runtimeRoot "release-source.json") | ConvertFrom-Json
+  $expectedPythonVersion = "Python $($releaseSource.runtime.python.version)"
+  if ($LASTEXITCODE -ne 0 -or $pythonVersion -ne $expectedPythonVersion) {
+    throw "INSTALLER_ACCEPTANCE_PRIVATE_PYTHON_FAILED expected=$expectedPythonVersion actual=$pythonVersion"
   }
 
   $uninstallKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Lex Machina"
@@ -305,11 +355,25 @@ try {
   }
   Assert-PinnedAuthenticode $uninstaller "uninstaller"
 
+  $profileCleanup = Join-Path $registeredInstallRoot "lex-profile-cleanup.exe"
+  if (-not (Test-Path -LiteralPath $profileCleanup -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_CLEANUP_MISSING:$profileCleanup"
+  }
+  Write-Host "G33D: profile cleanup helper self-test"
+  & $profileCleanup --self-test | Out-Host
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_PROFILE_CLEANUP_SELFTEST_FAILED"
+  }
+
   if ($BlockNetworkDuringInstall) {
     Add-AcceptanceFirewallBlock $app.FullName "desktop"
   }
 
-  Write-Host "G33D: first desktop startup without provider key"
+  $cleanProfileRoot = Join-Path $env:RUNNER_TEMP ("LexMachina Clean Admin " + [Guid]::NewGuid().ToString("N"))
+  Remove-Item -LiteralPath $cleanProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  $env:LEX_DATA_DIR = $cleanProfileRoot
+
+  Write-Host "G33D: first desktop startup with a clean admin profile"
   $desktop = Start-Process -FilePath $app.FullName -PassThru
   try {
     Start-Sleep -Seconds 12
@@ -328,20 +392,56 @@ try {
       Stop-Process -Force -ErrorAction SilentlyContinue
   }
 
+  $authDb = Join-Path $cleanProfileRoot "auth\auth.sqlite"
+  if (-not (Test-Path -LiteralPath $authDb -PathType Leaf)) {
+    throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_DB_MISSING:$authDb"
+  }
+  $profileProbePath = Join-Path $env:RUNNER_TEMP ("lex-clean-admin-probe-" + [Guid]::NewGuid().ToString("N") + ".cjs")
+  @'
+const { DatabaseSync } = require("node:sqlite");
+const db = new DatabaseSync(process.argv[2], { readOnly: true });
+const users = db.prepare(
+  "SELECT login_name, app_role, status, password_setup_pending FROM users ORDER BY created_at"
+).all();
+db.close();
+if (
+  users.length !== 1 ||
+  users[0].login_name !== "local-admin" ||
+  users[0].app_role !== "ADMIN" ||
+  users[0].status !== "ACTIVE" ||
+  Number(users[0].password_setup_pending) !== 1
+) {
+  console.error(JSON.stringify(users));
+  process.exit(1);
+}
+console.log("INSTALLER_ACCEPTANCE_CLEAN_ADMIN_PASS");
+'@ | Set-Content -LiteralPath $profileProbePath -Encoding UTF8
+  & $privateNode $profileProbePath $authDb | Out-Host
+  if ($LASTEXITCODE -ne 0) {
+    throw "INSTALLER_ACCEPTANCE_CLEAN_ADMIN_INVALID"
+  }
+
   Write-Host "G33D_INSTALLER_ACCEPTANCE_PASS"
-  Write-Host "User action after installation: PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
+  Write-Host "User action after installation: SET_NEW_ADMIN_PASSWORD_OR_PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"
 } finally {
   foreach ($ruleName in $firewallRules) {
     Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
   }
   $env:PATH = $oldPath
+  if ($profileProbePath) {
+    Remove-Item -LiteralPath $profileProbePath -Force -ErrorAction SilentlyContinue
+  }
+  if ($cleanProfileRoot) {
+    Remove-Item -LiteralPath $cleanProfileRoot -Recurse -Force -ErrorAction SilentlyContinue
+  }
   foreach ($pair in @(
     @{ Name = "HTTP_PROXY"; Value = $oldHttpProxy },
     @{ Name = "HTTPS_PROXY"; Value = $oldHttpsProxy },
     @{ Name = "ALL_PROXY"; Value = $oldAllProxy },
     @{ Name = "NO_PROXY"; Value = $oldNoProxy },
     @{ Name = "LEX_ACCEPTANCE_BLOCK_NETWORK"; Value = $oldAcceptanceBlockNetwork },
-    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime }
+    @{ Name = "LEX_FORCE_VC_RUNTIME_INSTALL"; Value = $oldForceVcRuntime },
+    @{ Name = "LEX_DATA_DIR"; Value = $oldLexDataDir }
   )) {
     if ($null -eq $pair.Value) {
       Remove-Item -Path ("Env:" + $pair.Name) -ErrorAction SilentlyContinue

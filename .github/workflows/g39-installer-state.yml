@@ -1,6 +1,13 @@
 name: G39 Installer State Machine
 
 on:
+  push:
+    branches:
+      - work/g39-installer-repair-2026-09-18
+    paths:
+      - "app/installer/**"
+      - "app/lex-desktop/src-tauri/**"
+      - ".github/workflows/g39-installer-state.yml"
   pull_request:
     paths:
       - "app/installer/*.ps1"
