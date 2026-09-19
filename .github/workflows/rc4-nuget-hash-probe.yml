@@ -23,3 +23,47 @@ jobs:
           echo "NUGET_PYTHON_BYTES=$bytes"
           echo "NUGET_PYTHON_SHA256=$sha"
           unzip -l python.3.13.15.nupkg | grep -E "tools/(python.exe|Lib/ensurepip/__init__.py|Lib/site-packages/pip/__init__.py)" || true
+
+  windows-side-by-side:
+    runs-on: windows-latest
+    steps:
+      - name: Register same CPython 3.13.15
+        shell: pwsh
+        run: |
+          $url = "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.exe"
+          $sha = "edec09c4853aeae9ac36efb8c9f95b6b8e2fee65eee56d9767a8b7c69c574403"
+          $exe = Join-Path $env:RUNNER_TEMP "python-3.13.15.exe"
+          Invoke-WebRequest -UseBasicParsing -Uri $url -OutFile $exe
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $exe).Hash.ToLowerInvariant()
+          if ($actual -ne $sha) { throw "PROBE_INSTALLER_HASH_MISMATCH:$actual" }
+          $p = Start-Process -FilePath $exe -ArgumentList @(
+            "/quiet","InstallAllUsers=0","Include_launcher=0","Include_test=0",
+            "Include_doc=0","Include_tcltk=0","Include_tools=0","Include_pip=1",
+            "PrependPath=0","Shortcuts=0"
+          ) -Wait -PassThru
+          if ($p.ExitCode -notin @(0,3010)) { throw "PROBE_REGISTER_FAILED:$($p.ExitCode)" }
+          $registered = Join-Path $env:LOCALAPPDATA "Programs\Python\Python313\python.exe"
+          if (-not (Test-Path -LiteralPath $registered -PathType Leaf)) { throw "PROBE_REGISTERED_PYTHON_MISSING" }
+          & $registered --version
+
+      - name: Extract official PSF NuGet Python side by side
+        shell: pwsh
+        run: |
+          $url = "https://api.nuget.org/v3-flatcontainer/python/3.13.15/python.3.13.15.nupkg"
+          $sha = "05357887df50d3153efc681bdf432c321d3e2f9ce5788f99f4515b27e8fda0ac"
+          $zip = Join-Path $env:RUNNER_TEMP "python-nuget.zip"
+          Invoke-WebRequest -UseBasicParsing -Uri $url -OutFile $zip
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash.ToLowerInvariant()
+          if ($actual -ne $sha) { throw "PROBE_NUGET_HASH_MISMATCH:$actual" }
+          $extract = Join-Path $env:RUNNER_TEMP "nuget-extract"
+          Expand-Archive -LiteralPath $zip -DestinationPath $extract -Force
+          $target = Join-Path $env:RUNNER_TEMP "Lex Machina Michał\runtime\python"
+          New-Item -ItemType Directory -Force -Path $target | Out-Null
+          Copy-Item (Join-Path $extract "tools\*") $target -Recurse -Force
+          $python = Join-Path $target "python.exe"
+          $env:PYTHONNOUSERSITE = "1"
+          $version = (& $python --version 2>&1 | Select-Object -First 1).ToString().Trim()
+          if ($version -ne "Python 3.13.15") { throw "PROBE_PRIVATE_VERSION_INVALID:$version" }
+          & $python -m pip --version
+          if ($LASTEXITCODE -ne 0) { throw "PROBE_PRIVATE_PIP_INVALID" }
+          Write-Host "WINDOWS_SIDE_BY_SIDE_PYTHON_PASS:$python"
