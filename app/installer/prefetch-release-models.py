@@ -7,19 +7,15 @@ import sys
 
 
 def paddle_native_path(path: Path) -> str:
-    """Return an ASCII filesystem alias for Paddle's native Windows predictor.
-
-    Paddle's C++ inference layer still opens model artifacts through narrow
-    filesystem APIs on Windows. Python itself handles Unicode paths correctly,
-    but the native predictor can fail on a profile/install path containing
-    characters such as ł. Preserve the real files in place and give Paddle the
-    NTFS 8.3 alias only when the resolved path is non-ASCII.
-    """
+    """Return an ASCII alias for Paddle's native Windows filesystem calls."""
     resolved = str(path.resolve())
     if os.name != "nt" or resolved.isascii():
         return resolved
 
+    import atexit
     import ctypes
+    import string
+    import subprocess
 
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
     get_short = kernel32.GetShortPathNameW
@@ -31,22 +27,48 @@ def paddle_native_path(path: Path) -> str:
     get_short.restype = ctypes.c_uint32
 
     needed = get_short(resolved, None, 0)
-    if needed == 0:
-        raise RuntimeError(
-            "PADDLE_ASCII_PATH_UNAVAILABLE:"
-            f"{resolved}:winerr={ctypes.get_last_error()}"
-        )
+    if needed:
+        buffer = ctypes.create_unicode_buffer(needed + 1)
+        written = get_short(resolved, buffer, len(buffer))
+        short = buffer.value
+        if written and short and short.isascii():
+            return short
 
-    buffer = ctypes.create_unicode_buffer(needed + 1)
-    written = get_short(resolved, buffer, len(buffer))
-    short = buffer.value
-    if written == 0 or not short or not short.isascii():
-        raise RuntimeError(
-            "PADDLE_ASCII_PATH_UNAVAILABLE:"
-            f"{resolved}:short={short!r}:winerr={ctypes.get_last_error()}"
-        )
-    return short
+    # 8.3 names may be disabled. A temporary subst drive gives the native
+    # predictor an ASCII alias while files remain in the locked install tree.
+    for letter in reversed(string.ascii_uppercase[3:]):
+        drive = f"{letter}:"
+        drive_root = drive + "\\"
+        if os.path.exists(drive_root):
+            continue
 
+        result = subprocess.run(
+            ["subst", drive, resolved],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        if result.returncode != 0:
+            continue
+
+        def cleanup(mapped_drive: str = drive) -> None:
+            subprocess.run(
+                ["subst", mapped_drive, "/D"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+
+        atexit.register(cleanup)
+        return drive_root
+
+    raise RuntimeError(
+        "PADDLE_ASCII_PATH_UNAVAILABLE:"
+        f"{resolved}:winerr={ctypes.get_last_error()}"
+    )
 
 root = Path(sys.argv[1]).resolve()
 paddle_root = root / "paddle"
