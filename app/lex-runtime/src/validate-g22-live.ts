@@ -230,7 +230,7 @@ const pass =
   result.record?.status ===
     "VERIFIED" &&
   result.record.kind === "case" &&
-  result.record.sourceTier === "R1" &&
+  result.record.sourceTier === "R2A" &&
   result.record.caseScope ===
     "FULL_TEXT" &&
   result.judgment?.contentScope ===

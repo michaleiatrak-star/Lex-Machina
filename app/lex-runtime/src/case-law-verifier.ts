@@ -782,7 +782,7 @@ export class SupremeCourtCaseVerifier {
         kind: "case",
         status: "VERIFIED",
         sourceUrl,
-        sourceTier: "R1",
+        sourceTier: "R2A",
         fetchedAt,
         toolCallId:
           request.toolCallId,
