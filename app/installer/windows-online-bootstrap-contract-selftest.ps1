@@ -8,7 +8,8 @@ $prefetch = Get-Content -Raw -LiteralPath $prefetchPath
 
 $checks = [ordered]@{
   pythonTargetDirQuoted = (
-    $bootstrap.Contains("'TargetDir=\"{0}\"' -f $pythonDir")
+    $bootstrap.Contains('TargetDir="{0}"') -and
+    $bootstrap.Contains('$pythonInstallArguments')
   )
   pythonVersionDiagnostics = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
