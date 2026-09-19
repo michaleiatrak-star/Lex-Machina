@@ -175,6 +175,10 @@ jobs:
             spaces and the Polish character `ł`, reproducing this regression class;
           - BOOTSTRAP_PYTHON_VERSION_INVALID now reports expected/actual version and
             the exact executable path when validation genuinely fails;
+          - OCR model prefetch now prefers the official BOS source and falls back, in
+            fresh Python processes, through Hugging Face, ModelScope and AIStudio;
+            incomplete Paddle model cache directories are purged between failed
+            sources and the bootstrap fails closed only after all official sources fail;
           - the user-approved navy/gold LM artwork is the pinned Windows branding
             source, materialized as a 32-bit multi-size ICO (16/24/32/48/64/128/256);
           - the build materializer pins the exact source icon SHA-256 before Tauri,
