@@ -22,3 +22,4 @@ jobs:
           sha="$(sha256sum python.3.13.15.nupkg | awk '{print $1}')"
           echo "NUGET_PYTHON_BYTES=$bytes"
           echo "NUGET_PYTHON_SHA256=$sha"
+          unzip -l python.3.13.15.nupkg | grep -E "tools/(python.exe|Lib/ensurepip/__init__.py|Lib/site-packages/pip/__init__.py)" || true
