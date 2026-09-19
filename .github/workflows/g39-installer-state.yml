@@ -1,6 +1,7 @@
 name: G39 Installer State Machine
 
 on:
+  workflow_call:
   pull_request:
     paths:
       - "app/installer/*.ps1"
