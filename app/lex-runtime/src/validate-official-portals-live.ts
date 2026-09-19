@@ -501,6 +501,240 @@ const probes:
   },
   {
     id:
+      "TK_OTKZU_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://otkzu.trybunal.gov.pl/",
+    expectedBody:
+      /Trybunał|orzecze|OTK|Zbiór/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "trybunal.gov.pl",
+      "www.trybunal.gov.pl"
+    ],
+    note:
+      "Official TK publication/archive channel; no public REST API is assumed."
+  },
+  {
+    id:
+      "PIP_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.pip.gov.pl/",
+    expectedBody:
+      /Państwowa Inspekcja Pracy|PIP|Inspekcja Pracy/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "pip.gov.pl",
+      "www.gov.pl"
+    ],
+    note:
+      "Official labour-law guidance and GIP materials; interpretive source only."
+  },
+  {
+    id:
+      "ZUS_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.zus.pl/",
+    expectedBody:
+      /Zakład Ubezpieczeń Społecznych|ZUS/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "zus.pl"
+    ],
+    note:
+      "Official ZUS portal; general legal verification remains separate from authenticated PUE services."
+  },
+  {
+    id:
+      "KNF_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.knf.gov.pl/",
+    expectedBody:
+      /Komisja Nadzoru Finansowego|KNF/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "knf.gov.pl"
+    ]
+  },
+  {
+    id:
+      "CURIA_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://curia.europa.eu/",
+    expectedBody:
+      /Court of Justice|Trybunał Sprawiedliwości|CURIA/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "www.curia.europa.eu"
+    ],
+    note:
+      "Official CJEU portal; this probe checks portal reachability, not case semantic matching."
+  },
+  {
+    id:
+      "RPO_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://bip.brpo.gov.pl/",
+    expectedBody:
+      /Rzecznik Praw Obywatelskich|RPO|Biuletyn/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "brpo.gov.pl",
+      "www.brpo.gov.pl",
+      "rpo.gov.pl",
+      "www.rpo.gov.pl"
+    ]
+  },
+  {
+    id:
+      "RF_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://rf.gov.pl/",
+    expectedBody:
+      /Rzecznik Finansowy|Rzecznika Finansowego/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "www.rf.gov.pl"
+    ]
+  },
+  {
+    id:
+      "NIK_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.nik.gov.pl/",
+    expectedBody:
+      /Najwyższa Izba Kontroli|NIK/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "nik.gov.pl"
+    ]
+  },
+  {
+    id:
+      "GUNB_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.gunb.gov.pl/",
+    expectedBody:
+      /Główny Urząd Nadzoru Budowlanego|GUNB/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "gunb.gov.pl"
+    ]
+  },
+  {
+    id:
+      "URE_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.ure.gov.pl/",
+    expectedBody:
+      /Urząd Regulacji Energetyki|URE/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "ure.gov.pl"
+    ]
+  },
+  {
+    id:
+      "FUNDUSZE_EU_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://funduszeeuropejskie.gov.pl/",
+    expectedBody:
+      /Fundusze Europejskie|fundusz/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "www.funduszeeuropejskie.gov.pl"
+    ]
+  },
+  {
+    id:
+      "GIOS_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.gios.gov.pl/",
+    expectedBody:
+      /Główny Inspektorat Ochrony Środowiska|GIOŚ|GIOS/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "gios.gov.pl"
+    ]
+  },
+  {
+    id:
+      "GIS_HTML",
+    kind:
+      "HTML",
+    sourceClass:
+      "R2A",
+    url:
+      "https://www.gov.pl/web/gis",
+    expectedBody:
+      /Główny Inspektorat Sanitarny|GIS/iu,
+    minBytes:
+      200,
+    allowedHosts: [
+      "gov.pl"
+    ]
+  },
+  {
+    id:
       "VAT_WHITE_LIST_API",
     kind:
       "API",

@@ -406,6 +406,34 @@ const probes: ApiProbe[] = [
   },
   {
     id:
+      "DANE_GOV_DATASETS_API",
+    sourceClass:
+      "OFFICIAL_REGISTER",
+    url:
+      "https://api.dane.gov.pl/1.4/datasets?per_page=1",
+    expectedBody:
+      /"data"|"links"|"meta"/iu,
+    minBytes:
+      20,
+    note:
+      "Official open-data catalogue API; source quality still depends on the publishing authority behind each dataset."
+  },
+  {
+    id:
+      "EZAMOWIENIA_NOTICE_API",
+    sourceClass:
+      "OFFICIAL_REGISTER",
+    url:
+      "https://ezamowienia.gov.pl/mo-board/api/v1/Board/Search?NoticeType=ContractNotice&SortingColumnName=PublicationDate&SortingDirection=DESC&PageNumber=1&PageSize=1",
+    expectedBody:
+      /"noticeType"|"publicationDate"|"items"|"data"/iu,
+    minBytes:
+      20,
+    note:
+      "Public e-Zamówienia notice-board REST endpoint; full platform API remains separately regulated."
+  },
+  {
+    id:
       "NBP_EXCHANGE_RATE_API",
     sourceClass:
       "OFFICIAL_REGISTER",
@@ -471,7 +499,11 @@ process.stdout.write(
         tk:
           "NO_DOCUMENTED_PUBLIC_REST_API; official HTML portals are the channel",
         ceidg:
-          "BEARER_JWT_REQUIRED; unauthenticated 401/403 confirms the API boundary"
+          "BEARER_JWT_REQUIRED; unauthenticated 401/403 confirms the API boundary",
+        daneGov:
+          "PUBLIC_JSON_API; catalogue connectivity does not elevate individual datasets above their publisher/source class",
+        ezamowienia:
+          "PUBLIC_NOTICE_BOARD_REST; regulated full-platform API is not assumed"
       },
       results
     },
