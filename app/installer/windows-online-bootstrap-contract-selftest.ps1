@@ -3,15 +3,17 @@ $ErrorActionPreference = "Stop"
 $bootstrapPath = Join-Path $PSScriptRoot "windows-online-bootstrap.ps1"
 $prefetchPath = Join-Path $PSScriptRoot "prefetch-release-models.py"
 $ocrWorkerPath = Join-Path (Split-Path -Parent $PSScriptRoot) "ocr\paddle_worker.py"
+$releasePath = Join-Path $PSScriptRoot "windows-release-source.json"
 
 $bootstrap = Get-Content -Raw -LiteralPath $bootstrapPath
 $prefetch = Get-Content -Raw -LiteralPath $prefetchPath
-$ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath\n$release = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
+$ocrWorker = Get-Content -Raw -LiteralPath $ocrWorkerPath
+$release = Get-Content -Raw -LiteralPath $releasePath | ConvertFrom-Json
 
 $checks = [ordered]@{
   pythonNugetSideBySide = (
     $release.runtime.python.distribution -eq "NUGET_SIDE_BY_SIDE" -and
-    $release.runtime.python.url -match "api\\.nuget\\.org/.+/python\\.3\\.13\\.15\\.nupkg$" -and
+    $release.runtime.python.url -match "api\.nuget\.org/.+/python\.3\.13\.15\.nupkg$" -and
     $bootstrap.Contains("BOOTSTRAP_PYTHON_NUGET_LAYOUT_INVALID") -and
     $bootstrap.Contains('Join-Path $extract "tools"')
   )
