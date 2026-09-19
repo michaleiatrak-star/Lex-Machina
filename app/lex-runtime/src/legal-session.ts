@@ -37,6 +37,8 @@ export class LegalSession {
   readonly events: LegalSessionEvent[] = [];
   readonly loadedResources =
     new Map<string, string>();
+  readonly runtimeRequiredResources =
+    new Map<string, string>();
 
   constructor(
     private readonly registry: LexSkillRegistry,
@@ -124,6 +126,142 @@ export class LegalSession {
     }
 
     this.state = "CORE_GATES_LOADED";
+
+    const hasRequiredModuleContract =
+      Array.isArray(
+        router.frontmatter
+          .required_modules
+      );
+    const routerRequired =
+      router.frontmatter
+        .required_modules ?? [];
+    const seenRequired =
+      new Set<string>();
+
+    for (
+      const rawResource
+      of routerRequired
+    ) {
+      const resource =
+        String(rawResource)
+          .split("#", 1)
+          .at(0)
+          ?.trim() ?? "";
+      if (
+        !resource ||
+        seenRequired.has(resource)
+      ) {
+        continue;
+      }
+      seenRequired.add(resource);
+
+      if (
+        this.loadedResources
+          .has(resource)
+      ) {
+        this.runtimeRequiredResources
+          .set(
+            resource,
+            this.loadedResources
+              .get(resource)!
+          );
+        continue;
+      }
+
+      let resolved:
+        string | null = null;
+      try {
+        resolved =
+          this.registry
+            .resolveResource(
+              this.routerSkill,
+              resource
+            );
+      } catch {
+        resolved = null;
+      }
+
+      if (!resolved) {
+        this.state =
+          "BLOCKED";
+        this.emit(
+          "resource_read",
+          resource,
+          "BLOCKED"
+        );
+        throw new LegalSessionBootstrapError(
+          "A router-declared required module is unavailable; fail-closed.",
+          resource,
+          [...this.events]
+        );
+      }
+
+      try {
+        const content =
+          fs.readFileSync(
+            resolved,
+            "utf8"
+          );
+        if (!content.trim()) {
+          throw new Error(
+            "EMPTY_ROUTER_REQUIRED_RESOURCE"
+          );
+        }
+        this.runtimeRequiredResources
+          .set(
+            resource,
+            content
+          );
+      } catch {
+        this.state =
+          "BLOCKED";
+        this.emit(
+          "resource_read",
+          resource,
+          "BLOCKED"
+        );
+        throw new LegalSessionBootstrapError(
+          "A router-declared required module cannot be read; fail-closed.",
+          resource,
+          [...this.events]
+        );
+      }
+
+      this.emit(
+        "resource_read",
+        resource,
+        "OK"
+      );
+    }
+
+    if (
+      hasRequiredModuleContract &&
+      (
+        seenRequired.size === 0 ||
+        this.runtimeRequiredResources
+          .size !==
+          seenRequired.size
+      )
+    ) {
+      this.state =
+        "BLOCKED";
+      this.emit(
+        "gate",
+        "G39L_ROUTER_REQUIRED_MODULES",
+        "BLOCKED"
+      );
+      throw new LegalSessionBootstrapError(
+        "Router required-module coverage is incomplete.",
+        "G39L_ROUTER_REQUIRED_MODULES",
+        [...this.events]
+      );
+    }
+
+    this.emit(
+      "gate",
+      "G39L_ROUTER_REQUIRED_MODULES",
+      "OK"
+    );
     this.emit("gate", "G3_ROUTER_FIRST_BOOTSTRAP", "OK");
     this.state = "EXECUTION_READY";
 

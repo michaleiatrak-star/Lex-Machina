@@ -166,6 +166,32 @@ export class AuditTrail {
     }
 
     if (options?.requireDeterministicWorkflow) {
+      const ownershipGates = [
+        "G39K_MODEL_TASK_OWNERSHIP",
+        "G39L_ROUTER_REQUIRED_MODULES"
+      ] as const;
+
+      for (
+        const target
+        of ownershipGates
+      ) {
+        if (
+          !events.some(
+            (event) =>
+              event.type ===
+                "gate" &&
+              event.target ===
+                target &&
+              event.status ===
+                "OK"
+          )
+        ) {
+          missing.push(
+            target.toLowerCase()
+          );
+        }
+      }
+
       const gates = [
         "G39H_WORKFLOW_PREFLIGHT",
         "G39H_WORKFLOW_PROVIDER_COMPLETE",

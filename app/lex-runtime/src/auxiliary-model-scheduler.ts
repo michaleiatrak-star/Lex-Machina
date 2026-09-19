@@ -9,6 +9,10 @@ import type {
 import {
   detectHistoricalAsOf
 } from "./gate-i-auto-verification.js";
+import {
+  resolveAuxiliaryTaskOwnership,
+  type ModelTaskResolution
+} from "./model-task-ownership.js";
 
 export type AuxiliaryRoutingConfig = {
   enabled: boolean;
@@ -34,6 +38,8 @@ export type AuxiliaryRoutingSummary = {
   deterministicVerifications: number;
   cachedVerifierReuses: number;
   latencyMs: number;
+  ownership:
+    ModelTaskResolution;
   error?: string;
 };
 
@@ -417,7 +423,9 @@ export function auxiliaryVerificationCallKey(
 function defaultSummary(
   config: AuxiliaryRoutingConfig,
   status:
-    AuxiliaryRoutingSummary["status"]
+    AuxiliaryRoutingSummary["status"],
+  ownership:
+    ModelTaskResolution
 ): AuxiliaryRoutingSummary {
   return {
     enabled:
@@ -431,8 +439,32 @@ function defaultSummary(
     extractedCandidates: 0,
     deterministicVerifications: 0,
     cachedVerifierReuses: 0,
-    latencyMs: 0
+    latencyMs: 0,
+    ownership
   };
+}
+
+function primaryFallbackAppendix(
+  resolution:
+    ModelTaskResolution
+): string {
+  if (
+    !resolution
+      .fallbackApplied ||
+    resolution
+      .effectiveOwner !==
+        "PRIMARY"
+  ) {
+    return "";
+  }
+
+  return [
+    "# MODEL TASK OWNERSHIP — PRIMARY FALLBACK",
+    "The optional auxiliary LEGAL_REFERENCE_PREFLIGHT task could not run.",
+    "The primary model now owns explicit legal-reference extraction for this turn.",
+    "Do not invent article numbers, act names, dates, signatures or courts.",
+    "Deterministic runtime verification remains authoritative; use the available verification tools for explicit references that are not already preverified."
+  ].join("\n");
 }
 
 const SYSTEM_PROMPT = [
@@ -491,14 +523,67 @@ export class AuxiliaryModelScheduler {
         NormalizedToolResult
       >();
 
-    if (!args.config.enabled) {
+    const currentText =
+      normalized(
+        args.currentUserText
+      ).slice(
+        0,
+        MAX_AUX_TEXT
+      );
+    const applicable =
+      Boolean(
+        currentText &&
+        LEGAL_HINT.test(
+          currentText
+        )
+      );
+
+    if (!applicable) {
+      const ownership =
+        resolveAuxiliaryTaskOwnership(
+          "LEGAL_REFERENCE_PREFLIGHT",
+          {
+            applicable: false,
+            auxiliarySucceeded:
+              false
+          }
+        );
       return {
         summary:
           timed(defaultSummary(
             args.config,
-            "DISABLED"
+            "SKIPPED_NO_ELIGIBLE_TASK",
+            ownership
           )),
         appendix: "",
+        cachedVerificationResults:
+          empty
+      };
+    }
+
+    if (!args.config.enabled) {
+      const ownership =
+        resolveAuxiliaryTaskOwnership(
+          "LEGAL_REFERENCE_PREFLIGHT",
+          {
+            applicable: true,
+            auxiliarySucceeded:
+              false,
+            reason:
+              "AUXILIARY_DISABLED"
+          }
+        );
+      return {
+        summary:
+          timed(defaultSummary(
+            args.config,
+            "DISABLED",
+            ownership
+          )),
+        appendix:
+          primaryFallbackAppendix(
+            ownership
+          ),
         cachedVerificationResults:
           empty
       };
@@ -510,39 +595,56 @@ export class AuxiliaryModelScheduler {
       args.config.model ===
         args.primary.model
     ) {
+      const ownership =
+        resolveAuxiliaryTaskOwnership(
+          "LEGAL_REFERENCE_PREFLIGHT",
+          {
+            applicable: true,
+            auxiliarySucceeded:
+              false,
+            reason:
+              "AUXILIARY_EQUALS_PRIMARY"
+          }
+        );
       return {
         summary:
           timed(defaultSummary(
             args.config,
-            "SKIPPED_SAME_AS_PRIMARY"
+            "SKIPPED_SAME_AS_PRIMARY",
+            ownership
           )),
-        appendix: "",
+        appendix:
+          primaryFallbackAppendix(
+            ownership
+          ),
         cachedVerificationResults:
           empty
       };
     }
 
-    const currentText =
-      normalized(
-        args.currentUserText
-      ).slice(
-        0,
-        MAX_AUX_TEXT
-      );
-    if (
-      !currentText ||
-      !LEGAL_HINT.test(
-        currentText
-      ) ||
-      !args.runVerificationTools
-    ) {
+    if (!args.runVerificationTools) {
+      const ownership =
+        resolveAuxiliaryTaskOwnership(
+          "LEGAL_REFERENCE_PREFLIGHT",
+          {
+            applicable: true,
+            auxiliarySucceeded:
+              false,
+            reason:
+              "VERIFICATION_RUNTIME_UNAVAILABLE"
+          }
+        );
       return {
         summary:
           timed(defaultSummary(
             args.config,
-            "SKIPPED_NO_ELIGIBLE_TASK"
+            "SKIPPED_NO_ELIGIBLE_TASK",
+            ownership
           )),
-        appendix: "",
+        appendix:
+          primaryFallbackAppendix(
+            ownership
+          ),
         cachedVerificationResults:
           empty
       };
@@ -584,7 +686,15 @@ export class AuxiliaryModelScheduler {
           summary: timed({
             ...defaultSummary(
               args.config,
-              "PASS"
+              "PASS",
+              resolveAuxiliaryTaskOwnership(
+                "LEGAL_REFERENCE_PREFLIGHT",
+                {
+                  applicable: true,
+                  auxiliarySucceeded:
+                    true
+                }
+              )
             ),
             tasks: [
               "LEGAL_REFERENCE_PREFLIGHT"
@@ -648,7 +758,15 @@ export class AuxiliaryModelScheduler {
         summary: timed({
           ...defaultSummary(
             args.config,
-            "PASS"
+            "PASS",
+            resolveAuxiliaryTaskOwnership(
+              "LEGAL_REFERENCE_PREFLIGHT",
+              {
+                applicable: true,
+                auxiliarySucceeded:
+                  true
+              }
+            )
           ),
           tasks: [
             "LEGAL_REFERENCE_PREFLIGHT"
@@ -667,7 +785,17 @@ export class AuxiliaryModelScheduler {
         summary: timed({
           ...defaultSummary(
             args.config,
-            "FAILED"
+            "FAILED",
+            resolveAuxiliaryTaskOwnership(
+              "LEGAL_REFERENCE_PREFLIGHT",
+              {
+                applicable: true,
+                auxiliarySucceeded:
+                  false,
+                reason:
+                  "AUXILIARY_PREFLIGHT_FAILED"
+              }
+            )
           ),
           tasks: [
             "LEGAL_REFERENCE_PREFLIGHT"
@@ -680,7 +808,19 @@ export class AuxiliaryModelScheduler {
                 )
               : "AUXILIARY_PREFLIGHT_FAILED"
         }),
-        appendix: "",
+        appendix:
+          primaryFallbackAppendix(
+            resolveAuxiliaryTaskOwnership(
+              "LEGAL_REFERENCE_PREFLIGHT",
+              {
+                applicable: true,
+                auxiliarySucceeded:
+                  false,
+                reason:
+                  "AUXILIARY_PREFLIGHT_FAILED"
+              }
+            )
+          ),
         cachedVerificationResults:
           empty
       };

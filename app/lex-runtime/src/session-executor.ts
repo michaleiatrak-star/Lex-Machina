@@ -83,6 +83,9 @@ import {
   type AuxiliaryRoutingSummary
 } from "./auxiliary-model-scheduler.js";
 import {
+  evaluateModelTaskOwnershipGate
+} from "./model-task-ownership.js";
+import {
   applyAutomaticVerificationMarkers,
   detectHistoricalAsOf,
   planAutomaticLegalVerification
@@ -594,6 +597,42 @@ export class SafeSessionExecutor implements SessionExecutor {
         ...auxiliary.summary
       }
     );
+
+    const modelTaskOwnership =
+      evaluateModelTaskOwnershipGate(
+        auxiliary.summary.ownership
+      );
+    audit.record(
+      "gate",
+      modelTaskOwnership.gate,
+      modelTaskOwnership.result ===
+        "PASS"
+        ? "OK"
+        : "BLOCKED",
+      {
+        registry:
+          modelTaskOwnership.registry,
+        resolution:
+          modelTaskOwnership.resolution,
+        errors:
+          modelTaskOwnership.errors
+      }
+    );
+    if (
+      modelTaskOwnership.result !==
+        "PASS"
+    ) {
+      audit.close(
+        "BLOCKED",
+        {
+          finalization:
+            "MODEL_TASK_OWNERSHIP"
+        }
+      );
+      throw new Error(
+        "MODEL_TASK_OWNERSHIP_GATE_FAILED"
+      );
+    }
 
     const gateIInput =
       evaluateGateIInputCompleteness(

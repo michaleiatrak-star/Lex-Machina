@@ -50,6 +50,19 @@ function baseEvents(): ExecutionEvent[] {
       type: "resource_read",
       target: "references/KROK1-detekcja.md",
       status: "OK"
+    },
+    {
+      sequence: 6,
+      type: "resource_read",
+      target: "references/SELF-CHECK.md",
+      status: "OK"
+    },
+    {
+      sequence: 7,
+      type: "gate",
+      target:
+        "G39L_ROUTER_REQUIRED_MODULES",
+      status: "OK"
     }
   ];
 }
@@ -383,6 +396,7 @@ describe(
         ).toEqual([
           "I-A_ROUTER",
           "I-B_CORE_RESOURCES",
+          "I-B1_ROUTER_REQUIRED_MODULES",
           "I-C_WORKFLOW_RESOURCES",
           "I-D_SOURCE_PROVENANCE",
           "I-D1_SOURCE_HIERARCHY",
