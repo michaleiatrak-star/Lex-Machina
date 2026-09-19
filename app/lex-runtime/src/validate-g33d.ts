@@ -60,8 +60,9 @@ const checks = {
     acceptance.includes("privateNode") &&
     acceptance.includes("privatePython"),
   firstRunWithoutProviderKey:
-    acceptance.includes("first desktop startup without provider key") &&
-    acceptance.includes("INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT"),
+    acceptance.includes("first desktop startup with a clean admin profile") &&
+    acceptance.includes("INSTALLER_ACCEPTANCE_DESKTOP_EARLY_EXIT") &&
+    acceptance.includes("SET_NEW_ADMIN_PASSWORD_OR_PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP"),
   actualOcrNerRendererSelftest:
     selftest.includes("SELFTEST_OCR_INFERENCE_FAILED") &&
     selftest.includes("SELFTEST_NER_INFERENCE_FAILED") &&
@@ -86,7 +87,7 @@ const checks = {
     offlineBuild.includes("install-private-python.ps1") &&
     !offlineBuild.includes("pythonInstaller"),
   canonicalWindowsBranding:
-    branding.includes("6693484ed95835e4b51b42e5eea854a02a4670170d9f8c50c8cd209e84026616") &&
+    branding.includes("572eff0901365285cbeee54f822cdb6fd969cd281cdc1099568ba4332cd4f61a") &&
     branding.includes("lex-machina-brand-source.png") &&
     onlineBuild.includes("materialize-brand-icon.ps1") &&
     offlineBuild.includes("materialize-brand-icon.ps1"),

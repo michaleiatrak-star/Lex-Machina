@@ -4,6 +4,7 @@ type ProbeState =
   | "PASS_INSECURE_HTTP"
   | "DEGRADED"
   | "EXPECTED_HUMAN_ONLY"
+  | "EXPECTED_WEB_ONLY"
   | "EXTERNAL_BLOCKED";
 
 type ProbeResult = {
@@ -361,7 +362,7 @@ const r1Specs: ProbeSpec[] = [
   },
   {
     id: "UOKIK_CONSUMER_PORTAL",
-    tier: "R1",
+    tier: "R2A",
     url:
       "https://prawakonsumenta.uokik.gov.pl/",
     accept:
@@ -377,7 +378,7 @@ const r1Specs: ProbeSpec[] = [
   },
   {
     id: "PARP_PORTAL",
-    tier: "R1",
+    tier: "R2A",
     url:
       "https://www.parp.gov.pl/",
     accept:
@@ -390,6 +391,179 @@ const r1Specs: ProbeSpec[] = [
     allowRedirectHosts: [
       "parp.gov.pl"
     ]
+  },
+  {
+    id: "LEGAL_UN_ILC",
+    tier: "R1",
+    url:
+      "https://legal.un.org/ilc/",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /International Law Commission|United Nations/iu,
+    minBytes: 500,
+    allowRedirectHosts: [
+      "www.legal.un.org"
+    ]
+  },
+  {
+    id: "UN_TREATY_COLLECTION",
+    tier: "R1",
+    url:
+      "https://treaties.un.org/Pages/Home.aspx",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /United Nations Treaty|Treaty Collection|treaties/iu,
+    minBytes: 500,
+    allowRedirectHosts: [
+      "www.treaties.un.org"
+    ]
+  },
+  {
+    id: "HUDOC_ECHR_API",
+    tier: "R1",
+    url:
+      "https://hudoc.echr.coe.int/app/query/results?query=%28contentsitename%3DECHR%29&select=itemid&sort=&start=0&length=1",
+    accept:
+      "application/json,text/plain,*/*;q=0.1",
+    expected:
+      /"resultcount"|"results"/iu,
+    minBytes: 20,
+    allowRedirectHosts: [
+      "www.hudoc.echr.coe.int"
+    ]
+  },
+  {
+    id: "HCCH_CONVENTIONS",
+    tier: "R1",
+    url:
+      "https://www.hcch.net/en/instruments/conventions",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /HCCH|Conventions|Hague Conference/iu,
+    minBytes: 500,
+    allowRedirectHosts: [
+      "hcch.net"
+    ]
+  },
+  {
+    id: "ICSID_DEPOSITARY",
+    tier: "R1",
+    url:
+      "https://icsid.worldbank.org/resources/rules-and-regulations/convention/overview",
+    accept:
+      "text/html,*/*;q=0.1",
+    minBytes: 1,
+    allowRedirectHosts: [
+      "www.icsid.worldbank.org"
+    ],
+    transportFailureState:
+      "EXPECTED_WEB_ONLY",
+    classify:
+      (
+        response,
+        body,
+        bytes
+      ) => {
+        if (
+          response.ok &&
+          bytes >= 500 &&
+          /ICSID|Convention|World Bank/iu.test(
+            body
+          )
+        ) {
+          return "PASS";
+        }
+        if (
+          response.status === 401 ||
+          response.status === 403
+        ) {
+          return "EXPECTED_WEB_ONLY";
+        }
+        return response.status >= 500
+          ? "EXTERNAL_BLOCKED"
+          : "DEGRADED";
+      }
+  },
+  {
+    id: "UNOOSA_TREATIES",
+    tier: "R1",
+    url:
+      "https://www.unoosa.org/oosa/en/ourwork/spacelaw/treaties.html",
+    accept:
+      "text/html,*/*;q=0.1",
+    minBytes: 1,
+    allowRedirectHosts: [
+      "unoosa.org"
+    ],
+    transportFailureState:
+      "EXPECTED_WEB_ONLY",
+    classify:
+      (
+        response,
+        body,
+        bytes
+      ) => {
+        if (
+          response.ok &&
+          bytes >= 500 &&
+          /Outer Space|Treaties|UNOOSA/iu.test(
+            body
+          )
+        ) {
+          return "PASS";
+        }
+        if (
+          response.status === 401 ||
+          response.status === 403
+        ) {
+          return "EXPECTED_WEB_ONLY";
+        }
+        return response.status >= 500
+          ? "EXTERNAL_BLOCKED"
+          : "DEGRADED";
+      }
+  },
+  {
+    id: "OHCHR_TREATY_PORTAL",
+    tier: "R1",
+    url:
+      "https://www.ohchr.org/en/instruments-mechanisms/instruments",
+    accept:
+      "text/html,*/*;q=0.1",
+    minBytes: 1,
+    allowRedirectHosts: [
+      "ohchr.org"
+    ],
+    transportFailureState:
+      "EXPECTED_WEB_ONLY",
+    classify:
+      (
+        response,
+        body,
+        bytes
+      ) => {
+        if (
+          response.ok &&
+          bytes >= 500 &&
+          /Human Rights|Instruments|OHCHR/iu.test(
+            body
+          )
+        ) {
+          return "PASS";
+        }
+        if (
+          response.status === 401 ||
+          response.status === 403
+        ) {
+          return "EXPECTED_WEB_ONLY";
+        }
+        return response.status >= 500
+          ? "EXTERNAL_BLOCKED"
+          : "DEGRADED";
+      }
   },
   {
     id: "BIP_GOV_REPRESENTATIVE",
@@ -538,6 +712,47 @@ const results = [
   isap
 ];
 
+const requiredR1CoverageIds =
+  new Set([
+    "ELI_SEJM_METADATA",
+    "ELI_GOV_MIRROR",
+    "SEJM_PRAWO",
+    "UODO_PORTAL",
+    "MONITOR_POLSKI_RCL",
+    "DZIENNIK_USTAW_RCL",
+    "DZIENNIKI_URZEDOWE_INDEX",
+    "BIP_GOV_REPRESENTATIVE",
+    "EUR_LEX_DIRECT",
+    "ISAP_HUMAN_PORTAL",
+    "LEGAL_UN_ILC",
+    "UN_TREATY_COLLECTION",
+    "HUDOC_ECHR_API",
+    "HCCH_CONVENTIONS",
+    "ICSID_DEPOSITARY",
+    "UNOOSA_TREATIES",
+    "OHCHR_TREATY_PORTAL"
+  ]);
+
+const coveredR1Ids =
+  new Set(
+    results
+      .filter(
+        (item) =>
+          item.tier === "R1"
+      )
+      .map(
+        (item) =>
+          item.id
+      )
+  );
+
+const coverageComplete =
+  [...requiredR1CoverageIds]
+    .every(
+      (id) =>
+        coveredR1Ids.has(id)
+    );
+
 const eliPrimary =
   results.find(
     (item) =>
@@ -552,6 +767,7 @@ const euLawHealthy =
     "PASS_INSECURE_HTTP";
 
 const hardBlocked =
+  !coverageComplete ||
   eliPrimary?.state !== "PASS" ||
   !euLawHealthy;
 
@@ -562,7 +778,9 @@ const degraded =
       item.state ===
         "EXTERNAL_BLOCKED" ||
       item.state ===
-        "PASS_INSECURE_HTTP"
+        "PASS_INSECURE_HTTP" ||
+      item.state ===
+        "EXPECTED_WEB_ONLY"
   );
 
 const result =
@@ -580,6 +798,9 @@ process.stdout.write(
       result,
       releaseBlocking:
         result === "BLOCKED",
+      coverageComplete,
+      requiredR1Coverage:
+        [...requiredR1CoverageIds],
       canonicalNotes: {
         isapMachinePolicy:
           "ELI_IS_PRIMARY_MACHINE_CHANNEL; ISAP_MAY_BE_HUMAN_ONLY",
@@ -588,7 +809,9 @@ process.stdout.write(
         eurLexPolicy:
           "DIRECT_OR_CELLAR_FALLBACK_MUST_BE_HEALTHY; HTTP_CELLAR_IS_REPORTED_AS_DEGRADED",
         caseLawTier:
-          "SAOS_CBOSA_SN_AND_OTHER_OFFICIAL_CASE_LAW_ARE_R2A_NOT_R1"
+          "SAOS_CBOSA_SN_AND_OTHER_OFFICIAL_CASE_LAW_ARE_R2A_NOT_R1",
+        internationalPolicy:
+          "LEGAL_UN_TREATIES_UN_HUDOC_HCCH_ICSID_UNOOSA_OHCHR_ARE_PROBED; EXPECTED_WEB_ONLY_IS_EXPLICIT_NOT_SILENT"
       },
       results
     },
