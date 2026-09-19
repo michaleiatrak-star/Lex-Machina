@@ -514,9 +514,12 @@ const kioPdfMagicValid =
   String.fromCharCode(
     ...kioPdf.bytes.slice(
       0,
-      4
+      Math.min(
+        1024,
+        kioPdf.bytes.length
+      )
     )
-  ) === "%PDF";
+  ).includes("%PDF-");
 
 const kioPdfTextPass =
   kioPdfPages !== null &&
