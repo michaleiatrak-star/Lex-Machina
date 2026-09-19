@@ -75,6 +75,9 @@ $stage = Join-Path $env:TEMP ("LexMachinaOfflineRuntime-" + [Guid]::NewGuid().To
 New-Item -ItemType Directory -Path $stage | Out-Null
 $vcFirewallRule = $null
 
+$installSucceeded = $false
+$installFailure = $null
+
 try {
   Write-Host "Extracting verified offline runtime bundle"
   $extractor = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "extract-offline-zip.ps1"
@@ -193,9 +196,28 @@ try {
   }
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
+  $installSucceeded = $true
+} catch {
+  $installFailure = $_
+  Write-Error ("LEX_OFFLINE_BUNDLE_INSTALL_FAILED: " + $_.Exception.Message)
 } finally {
   if ($vcFirewallRule) {
     Remove-NetFirewallRule -DisplayName $vcFirewallRule -ErrorAction SilentlyContinue
   }
   Remove-Item -LiteralPath $stage -Recurse -Force -ErrorAction SilentlyContinue
 }
+
+# NSIS launches this file in a child powershell.exe. Keep the process result
+# deterministic: successful verified installation is exit 0 regardless of a
+# stale native-command $LASTEXITCODE left by robocopy, VC++ setup or payload
+# self-tests; any caught failure is exit 1.
+if ($installSucceeded) {
+  exit 0
+}
+
+if ($installFailure) {
+  exit 1
+}
+
+Write-Error "LEX_OFFLINE_BUNDLE_INSTALL_FAILED:UNKNOWN_STATE"
+exit 1
