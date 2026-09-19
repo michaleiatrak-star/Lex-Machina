@@ -360,6 +360,54 @@ const r1Specs: ProbeSpec[] = [
     ]
   },
   {
+    id: "UOKIK_CONSUMER_PORTAL",
+    tier: "R1",
+    url:
+      "https://prawakonsumenta.uokik.gov.pl/",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /konsument|reklamac|odstąp/iu,
+    minBytes: 500,
+    allowRedirectHosts: [
+      "www.prawakonsumenta.uokik.gov.pl",
+      "uokik.gov.pl",
+      "www.uokik.gov.pl"
+    ]
+  },
+  {
+    id: "PARP_PORTAL",
+    tier: "R1",
+    url:
+      "https://www.parp.gov.pl/",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /PARP|Polsk[aiej]+ Agencj|przedsiębiorc/iu,
+    minBytes: 500,
+    allowRedirectHosts: [
+      "parp.gov.pl"
+    ]
+  },
+  {
+    id: "DZIENNIKI_GOV_ALIAS",
+    tier: "R1",
+    url:
+      "https://dzienniki.gov.pl/",
+    accept:
+      "text/html,*/*;q=0.1",
+    expected:
+      /dziennik|urzędow|urzedow/iu,
+    minBytes: 200,
+    allowRedirectHosts: [
+      "www.dzienniki.gov.pl",
+      "dziennikiurzedowe.gov.pl",
+      "www.dziennikiurzedowe.gov.pl"
+    ],
+    transportFailureState:
+      "DEGRADED"
+  },
+  {
     id: "BIP_GOV_REPRESENTATIVE",
     tier: "R1",
     url:
