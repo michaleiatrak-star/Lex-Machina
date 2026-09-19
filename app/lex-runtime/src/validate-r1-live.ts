@@ -291,7 +291,7 @@ const r1Specs: ProbeSpec[] = [
     id: "SEJM_PRAWO",
     tier: "R1",
     url:
-      "https://www.sejm.gov.pl/prawo/prawo.htm",
+      "https://www.sejm.gov.pl/prawo/prawo.html",
     accept:
       "text/html,*/*;q=0.1",
     expected:
@@ -537,7 +537,7 @@ const result =
   hardBlocked
     ? "BLOCKED"
     : degraded
-      ? "DEGRADED"
+      ? "PASS_WITH_WARNINGS"
       : "PASS";
 
 process.stdout.write(

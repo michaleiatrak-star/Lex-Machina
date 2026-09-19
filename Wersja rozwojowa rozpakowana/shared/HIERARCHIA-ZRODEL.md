@@ -91,7 +91,7 @@
    równorzędny z ISAP co do mocy, często SZYBSZY w indeksacji nowych t.j.
    Wzorzec adresu: `eli.gov.pl/eli/DU/{rok}/{poz}` (metryka),
    `.../text.html`, `.../text.pdf` (treść).
-3. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
+3. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.html
 4. API ELI Sejm — https://api.sejm.gov.pl/eli/... (warstwa strukturalna,
    `shared/PRAWO-HARDGATE.md` POZIOM B)
 5. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
