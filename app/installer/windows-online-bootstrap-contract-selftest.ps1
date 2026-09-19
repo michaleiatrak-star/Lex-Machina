@@ -21,7 +21,7 @@ $checks = [ordered]@{
   pythonPinnedEmbeddedManifest = (
     $manifest.Contains('"delivery": "EMBEDDABLE_APP_LOCAL"') -and
     $manifest.Contains('python-3.13.15-embeddable-amd64.zip') -and
-    $manifest.Contains('d1f04d990aee1253d8569e8e5104e30fa9f5fa830899f14843448872d936a2cf') -and
+    $manifest.Contains('791ada5e20aba24524f8d939cdeb069976d632a699fe5cb65274b23f4545e68a') -and
     $manifest.Contains('"version": "26.2.1"') -and
     $manifest.Contains('71138adf1f4ca900cdb7d289c21b7494329f2332b6d85f0e1c42108c0384ed3e')
   )
