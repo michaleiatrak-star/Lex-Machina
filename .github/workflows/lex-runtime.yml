@@ -274,6 +274,7 @@ jobs:
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     # Probe from the actual Windows release class. Ubuntu has independently
     # confirmed live SAOS, while CBOSA is documented as egress-sensitive.
     # Deterministic transport semantics remain covered on the main job.
@@ -300,6 +301,7 @@ jobs:
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -323,6 +325,7 @@ jobs:
   g20-live-pdf:
     name: G20 live official PDF probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -346,6 +349,7 @@ jobs:
   g22-live-sn:
     name: G22 live SN case-law probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -369,6 +373,7 @@ jobs:
   g17-live-source:
     name: G17 live official-source probe
     needs: g1-g29-g32
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     defaults:
       run:
