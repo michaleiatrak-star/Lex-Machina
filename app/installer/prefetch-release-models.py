@@ -6,13 +6,56 @@ from pathlib import Path
 import sys
 
 
+def paddle_native_path(path: Path) -> str:
+    """Return an ASCII filesystem alias for Paddle's native Windows predictor.
+
+    Paddle's C++ inference layer still opens model artifacts through narrow
+    filesystem APIs on Windows. Python itself handles Unicode paths correctly,
+    but the native predictor can fail on a profile/install path containing
+    characters such as ł. Preserve the real files in place and give Paddle the
+    NTFS 8.3 alias only when the resolved path is non-ASCII.
+    """
+    resolved = str(path.resolve())
+    if os.name != "nt" or resolved.isascii():
+        return resolved
+
+    import ctypes
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_short = kernel32.GetShortPathNameW
+    get_short.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+    ]
+    get_short.restype = ctypes.c_uint32
+
+    needed = get_short(resolved, None, 0)
+    if needed == 0:
+        raise RuntimeError(
+            "PADDLE_ASCII_PATH_UNAVAILABLE:"
+            f"{resolved}:winerr={ctypes.get_last_error()}"
+        )
+
+    buffer = ctypes.create_unicode_buffer(needed + 1)
+    written = get_short(resolved, buffer, len(buffer))
+    short = buffer.value
+    if written == 0 or not short or not short.isascii():
+        raise RuntimeError(
+            "PADDLE_ASCII_PATH_UNAVAILABLE:"
+            f"{resolved}:short={short!r}:winerr={ctypes.get_last_error()}"
+        )
+    return short
+
+
 root = Path(sys.argv[1]).resolve()
 paddle_root = root / "paddle"
 stanza_root = root / "stanza"
 paddle_root.mkdir(parents=True, exist_ok=True)
 stanza_root.mkdir(parents=True, exist_ok=True)
 
-os.environ["PADDLE_PDX_CACHE_HOME"] = str(paddle_root)
+paddle_native_root = paddle_native_path(paddle_root)
+os.environ["PADDLE_PDX_CACHE_HOME"] = paddle_native_root
 os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
 model_source = os.environ.get("PADDLE_PDX_MODEL_SOURCE", "bos").strip().lower() or "bos"
 if model_source not in {"bos", "huggingface", "modelscope", "aistudio"}:
@@ -112,6 +155,7 @@ print(
             "stanza": "pl:tokenize,ner",
             "status": "PASS",
             "source": model_source,
+            "paddleNativePath": paddle_native_root,
         },
         ensure_ascii=False,
     )
