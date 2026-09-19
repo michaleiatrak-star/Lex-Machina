@@ -120,7 +120,17 @@ jobs:
             Sort-Object LastWriteTime -Descending |
             Select-Object -First 1
           if (-not $installer) { throw "NSIS_INSTALLER_NOT_FOUND" }
-          ./app/installer/windows-installer-acceptance.ps1 -InstallerPath $installer.FullName
+
+          # Regression coverage for the real per-user path reported in RC2:
+          # spaces plus a Polish character must survive NSIS -> PowerShell ->
+          # Python installer native argument handling.
+          $installRoot = Join-Path $env:RUNNER_TEMP (
+            "Lex Machina Michał Acceptance-" + [Guid]::NewGuid().ToString("N")
+          )
+          Write-Host "G33D path-with-spaces/unicode acceptance root: $installRoot"
+          ./app/installer/windows-installer-acceptance.ps1 `
+            -InstallerPath $installer.FullName `
+            -InstallRoot $installRoot
 
       - name: Record installer SHA-256
         shell: pwsh
