@@ -127,6 +127,11 @@ export class LegalSession {
 
     this.state = "CORE_GATES_LOADED";
 
+    const hasRequiredModuleContract =
+      Array.isArray(
+        router.frontmatter
+          .required_modules
+      );
     const routerRequired =
       router.frontmatter
         .required_modules ?? [];
@@ -230,10 +235,13 @@ export class LegalSession {
     }
 
     if (
-      seenRequired.size === 0 ||
-      this.runtimeRequiredResources
-        .size !==
-        seenRequired.size
+      hasRequiredModuleContract &&
+      (
+        seenRequired.size === 0 ||
+        this.runtimeRequiredResources
+          .size !==
+          seenRequired.size
+      )
     ) {
       this.state =
         "BLOCKED";
