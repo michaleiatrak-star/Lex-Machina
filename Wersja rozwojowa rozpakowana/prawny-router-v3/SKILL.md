@@ -103,6 +103,7 @@ required_modules:
   - references/ZRODLA-AKTOW-FALLBACK.md
   - dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md
   - references/AUDYT-KLUCZA-ODPOWIEDZI.md
+  - references/SELF-CHECK.md
   - shared/MOD-CN-GATE.md
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
