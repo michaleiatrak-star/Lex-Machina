@@ -362,26 +362,104 @@ function array(
     : [];
 }
 
-function searchRecords(
-  payload: unknown
-): Record<string, unknown>[] | null {
-  const root = object(payload);
-  const wrapper =
-    object(array(root?.data)[0]);
-  const records = wrapper?.data;
+function looksLikeSnSearchRecord(
+  value: Record<string, unknown>
+): boolean {
+  return (
+    "sygnatura_sprawy" in value ||
+    "id" in value ||
+    "data_wydania" in value ||
+    "forma_orzeczenia" in value
+  );
+}
 
-  if (!Array.isArray(records)) {
+function nestedSnSearchRecords(
+  value: unknown,
+  depth = 0
+): Record<string, unknown>[] | null {
+  if (depth > 6) {
     return null;
   }
 
-  return records
-    .map(object)
-    .filter(
-      (
-        item
-      ): item is Record<string, unknown> =>
-        Boolean(item)
-    );
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return [];
+    }
+
+    const objects =
+      value
+        .map(object)
+        .filter(
+          (
+            item
+          ): item is Record<string, unknown> =>
+            Boolean(item)
+        );
+
+    if (
+      objects.length === value.length &&
+      objects.every(
+        looksLikeSnSearchRecord
+      )
+    ) {
+      return objects;
+    }
+
+    for (const item of objects) {
+      const nested =
+        nestedSnSearchRecords(
+          item,
+          depth + 1
+        );
+      if (nested !== null) {
+        return nested;
+      }
+    }
+
+    return null;
+  }
+
+  const current = object(value);
+  if (!current) {
+    return null;
+  }
+
+  // sn.pl has used multiple Joomla/com_ajax wrapper depths over time.
+  // Follow only explicit collection-bearing keys and accept an array only
+  // when its objects look like SN judgment records. Unknown shapes remain
+  // fail-closed as SN_SEARCH_SCHEMA_DRIFT.
+  for (
+    const key
+    of [
+      "data",
+      "items",
+      "records",
+      "results",
+      "orzeczenia"
+    ]
+  ) {
+    if (!(key in current)) {
+      continue;
+    }
+    const nested =
+      nestedSnSearchRecords(
+        current[key],
+        depth + 1
+      );
+    if (nested !== null) {
+      return nested;
+    }
+  }
+
+  return null;
+}
+
+function searchRecords(
+  payload: unknown
+): Record<string, unknown>[] | null {
+  return nestedSnSearchRecords(
+    payload
+  );
 }
 
 function rawFullText(
