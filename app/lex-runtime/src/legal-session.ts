@@ -29,8 +29,7 @@ export class LegalSessionBootstrapError extends Error {
 export const CORE_LEGAL_RESOURCES = [
   "shared/PRAWO-HARDGATE.md",
   "references/KROK0A-anonimizer.md",
-  "references/KROK1-detekcja.md",
-  "references/SELF-CHECK.md"
+  "references/KROK1-detekcja.md"
 ] as const;
 
 export class LegalSession {
