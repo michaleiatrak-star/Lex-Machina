@@ -1340,6 +1340,20 @@ Validation evidence (local, before release CI):
   icon fails all 7 entries with "Unsupported PNG color type: Indexed", the new
   one decodes all 7.
 
+- **G39L7** the auth toolbar, the maintenance panel and the idle warning were
+  each independently `position: fixed` against the top-right corner and hid one
+  another; the maintenance panel disappeared behind the account toolbar. The
+  shell now measures the banner and the toolbar and publishes
+  `--lex-top-inset` / `--lex-overlay-top`, so every fixed overlay stacks under
+  whatever is actually rendered. Verified in a real browser against the running
+  runtime: no overlap in either the banner or the no-banner state.
+- **G39L8** an unclassified session-execution error returned
+  `SESSION_EXECUTION_FAILED` with nothing logged anywhere, so there was no way
+  to diagnose it. The runtime now logs the error name and message for that path
+  only (no request body, no stack), and the fail-closed chat privacy gate is
+  reported as `503 CHAT_PRIVACY_GATE_FAILED` with an actionable message in the
+  UI instead of an anonymous 500. Found by running the app end to end.
+
 Not fixed in this line, tracked in ROADMAP:
 - Python packages pinned by version only, no `--require-hashes`;
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;

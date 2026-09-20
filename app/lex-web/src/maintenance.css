@@ -1,10 +1,14 @@
 .maintenance-panel {
   position: fixed;
   right: 20px;
-  top: 20px;
+  /* stacks under the auth toolbar instead of on top of it */
+  top: var(--lex-overlay-top, 20px);
   z-index: 49;
   width: min(430px, calc(100vw - 40px));
-  max-height: min(70vh, 680px);
+  max-height: min(
+    calc(100vh - var(--lex-overlay-top, 20px) - 20px),
+    680px
+  );
   overflow: auto;
   border: 1px solid rgba(120, 120, 120, 0.28);
   border-radius: 16px;

@@ -158,6 +158,20 @@ Nadal poza zamknięciem:
 - Klatki przekodowane z palety na RGBA (color type 6) bezstratnie: te same wymiary, te same piksele, ta sama grafika.
 - Nowy SHA-256 ikony: `055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76` (51 440 B); przypięcia zaktualizowane w `build.rs`, `materialize-brand-icon.ps1`, `windows-branding-selftest.ps1` i w workflow wydania.
 
+### G39L7 — układ nakładających się paneli w oknie czatu — DONE
+
+- `.auth-toolbar`, `.maintenance-panel` i `.session-warning` były niezależnie `position: fixed` w prawym górnym rogu i zasłaniały się nawzajem; panel Utrzymanie znikał pod paskiem konta.
+- Powłoka publikuje teraz zmierzoną geometrię jako `--lex-top-inset` i `--lex-overlay-top`, a nakładki układają się pod tym, co faktycznie jest wyrenderowane, zamiast zgadywać stałą.
+- `ResizeObserver` przelicza wartości przy zmianie rozmiaru okna i zawijaniu banera.
+- Zweryfikowane w przeglądarce (emulacja powłoki Tauri, 1440x960): z banerem 0-51 / pasek 65-112 / Utrzymanie 124-190; bez banera pasek 14-61 / Utrzymanie 73-139. Zero nakładek.
+
+### G39L8 — diagnostyka i klasyfikacja błędów wykonania sesji — DONE
+
+- Nieskategoryzowany błąd wykonania wracał jako `SESSION_EXECUTION_FAILED` bez żadnego wpisu w logu; nie było z czego diagnozować.
+- Runtime loguje teraz nazwę i komunikat takiego błędu (bez treści żądania i bez stosu).
+- Fail-closed bramka prywatności czatu wraca jako `503 CHAT_PRIVACY_GATE_FAILED` zamiast anonimowego 500, a UI pokazuje komunikat wskazujący lokalny runtime prywatności.
+- Regresja pokryta testem `tests/http-session.test.ts`.
+
 ### Znane, nienaprawione w tej linii
 
 - pakiety Pythona pinowane tylko wersją, bez `--require-hashes` i bez pinu zależności przechodnich;

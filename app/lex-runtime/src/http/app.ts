@@ -8369,6 +8369,22 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      // The chat privacy gate is fail-closed: it blocks the turn when the
+      // local pseudonymization pipeline cannot run. That is a named,
+      // actionable condition, not an unknown server fault, so it must not
+      // reach the client as a generic SESSION_EXECUTION_FAILED.
+      if (
+        error instanceof Error &&
+        error.message ===
+          "CHAT_PRIVACY_GATE_FAILED"
+      ) {
+        res.status(503).json({
+          error:
+            "CHAT_PRIVACY_GATE_FAILED"
+        });
+        return;
+      }
+
       if (
         error instanceof Error &&
         error.message ===
@@ -8381,6 +8397,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      // Every mapped failure above returns a specific code. Reaching here
+      // means an unclassified error, and the client only ever sees
+      // SESSION_EXECUTION_FAILED — without this there is no diagnostic
+      // anywhere for an operator to work from. Name and message only: no
+      // request body, no stack, nothing that could carry a credential.
+      console.error(
+        "SESSION_EXECUTION_FAILED",
+        error instanceof Error
+          ? `${error.name}: ${error.message}`
+          : String(error)
+      );
       res.status(500).json({
         error: "SESSION_EXECUTION_FAILED"
       });

@@ -1000,7 +1000,7 @@ textarea:focus {
   position: fixed;
   z-index: 50;
   right: 18px;
-  top: 14px;
+  top: calc(14px + var(--lex-top-inset, 0px));
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1040,7 +1040,7 @@ textarea:focus {
   position: fixed;
   z-index: 49;
   left: 50%;
-  top: 16px;
+  top: calc(16px + var(--lex-top-inset, 0px));
   transform: translateX(-50%);
   max-width: min(680px, calc(100vw - 420px));
   padding: 10px 14px;
@@ -1864,10 +1864,6 @@ textarea:focus {
   font-weight: 700;
 }
 
-.auth-toolbar.auth-toolbar-offset {
-  top: 60px;
-}
-
-.session-warning.session-warning-offset {
-  top: 62px;
+.authenticated-shell {
+  display: contents;
 }

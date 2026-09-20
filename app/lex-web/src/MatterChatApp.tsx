@@ -799,6 +799,8 @@ export default function MatterChatApp({
       const friendly =
         code === "PROVIDER_NOT_CONFIGURED"
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
+          : code === "CHAT_PRIVACY_GATE_FAILED"
+            ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
           : code === "PROVIDER_EXECUTION_FAILED"
             ? "Provider odrzucił lub przerwał wykonanie."
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"

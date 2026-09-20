@@ -1,7 +1,11 @@
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
-  useState
+  useRef,
+  useState,
+  type ReactElement,
+  type ReactNode
 } from "react";
 import App from "./App.js";
 import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
@@ -587,10 +591,15 @@ export default function AuthenticatedApp() {
       .passwordSetupPending === true;
 
   return (
-    <>
+    <AuthenticatedShell
+      passwordSetupPending={
+        passwordSetupPending
+      }
+    >
       {passwordSetupPending && (
         <div
           className="password-setup-banner"
+          data-lex-banner="true"
           role="alert"
         >
           <span>
@@ -607,13 +616,7 @@ export default function AuthenticatedApp() {
         </div>
       )}
 
-      <div
-        className={
-          passwordSetupPending
-            ? "auth-toolbar auth-toolbar-offset"
-            : "auth-toolbar"
-        }
-      >
+      <div className="auth-toolbar">
         <div>
           <strong>
             {auth.user.displayName}
@@ -695,11 +698,7 @@ export default function AuthenticatedApp() {
 
       {idleRemaining <= 120_000 && (
         <div
-          className={
-            passwordSetupPending
-              ? "session-warning session-warning-offset"
-              : "session-warning"
-          }
+          className="session-warning"
           role="status"
         >
           Sesja zbliża się do blokady z powodu bezczynności. Backend pozostaje źródłem prawdy o czasie wygaśnięcia.
@@ -712,6 +711,108 @@ export default function AuthenticatedApp() {
         }
         user={auth.user}
       />
-    </>
+    </AuthenticatedShell>
+  );
+}
+
+/**
+ * The toolbar, the maintenance panel and the idle warning are all
+ * position: fixed against the top-right corner, so they stacked on top of one
+ * another and hid each other's content. Measure the banner and the toolbar and
+ * publish their geometry, so every fixed overlay can line up below whatever is
+ * actually rendered instead of guessing a constant.
+ */
+function AuthenticatedShell(
+  props: {
+    passwordSetupPending: boolean;
+    children: ReactNode;
+  }
+): ReactElement {
+  const rootRef =
+    useRef<HTMLDivElement | null>(
+      null
+    );
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return;
+    }
+
+    const style =
+      document.documentElement
+        .style;
+
+    const measure = (): void => {
+      const banner =
+        root.querySelector<HTMLElement>(
+          "[data-lex-banner='true']"
+        );
+      const toolbar =
+        root.querySelector<HTMLElement>(
+          ".auth-toolbar"
+        );
+      const bannerHeight =
+        banner
+          ? banner
+              .getBoundingClientRect()
+              .height
+          : 0;
+      const toolbarBottom =
+        toolbar
+          ? toolbar
+              .getBoundingClientRect()
+              .bottom
+          : bannerHeight + 14;
+
+      style.setProperty(
+        "--lex-top-inset",
+        `${Math.round(bannerHeight)}px`
+      );
+      style.setProperty(
+        "--lex-overlay-top",
+        `${Math.round(toolbarBottom) + 12}px`
+      );
+    };
+
+    measure();
+
+    const observer =
+      typeof ResizeObserver ===
+        "undefined"
+        ? null
+        : new ResizeObserver(measure);
+    if (observer) {
+      observer.observe(root);
+    }
+    window.addEventListener(
+      "resize",
+      measure
+    );
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener(
+        "resize",
+        measure
+      );
+      style.removeProperty(
+        "--lex-top-inset"
+      );
+      style.removeProperty(
+        "--lex-overlay-top"
+      );
+    };
+  }, [
+    props.passwordSetupPending
+  ]);
+
+  return (
+    <div
+      ref={rootRef}
+      className="authenticated-shell"
+    >
+      {props.children}
+    </div>
   );
 }

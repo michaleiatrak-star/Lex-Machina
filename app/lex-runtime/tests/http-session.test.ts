@@ -221,4 +221,38 @@ describe("session execution HTTP API", () => {
       provider: "xai"
     });
   });
+
+  it("reports the fail-closed chat privacy gate instead of a generic failure", async () => {
+    const executor: SessionExecutor = {
+      execute: vi.fn(async () => {
+        throw new Error(
+          "CHAT_PRIVACY_GATE_FAILED"
+        );
+      })
+    };
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      sessionExecutor: executor
+    });
+
+    // The gate blocks the turn before anything reaches a provider, which is a
+    // named, actionable condition. Surfacing it as SESSION_EXECUTION_FAILED
+    // left the user with an unexplained error and no way to act on it.
+    await request(app)
+      .post("/api/sessions/execute")
+      .send({
+        query: "Pytanie",
+        provider: "openai",
+        model: "gpt-test",
+        primarySkill: DR,
+        mode: "PRAWNIK"
+      })
+      .expect(503, {
+        error: "CHAT_PRIVACY_GATE_FAILED"
+      });
+
+    expect(executor.execute)
+      .toHaveBeenCalledTimes(1);
+  });
 });
