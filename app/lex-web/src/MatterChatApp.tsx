@@ -146,6 +146,34 @@ const KNOWN_EXECUTION_SKILLS = new Set([
   "raport-sytuacyjny-v2"
 ]);
 
+const DURABLE_CASE_EXECUTION_SKILLS = new Set([
+  "pisma-procesowe-v3",
+  "analiza-sadowa-v6",
+  "analizator-dowodow-v3",
+  "analizator-umow-v1",
+  "chronologia-sprawy-v1",
+  "przesluchanie-swiadkow-v2-min90"
+]);
+
+const SCHEMA_PIPELINE_EXECUTION_SKILLS = new Set([
+  "pisma-proste-v2",
+  "raport-klienta-v1",
+  "raport-sytuacyjny-v2"
+]);
+
+function executionWorkflowLabel(name: string): string {
+  if (DURABLE_CASE_EXECUTION_SKILLS.has(name)) {
+    return "trwały workflow sprawy · checkpointy + HARD GATE";
+  }
+  if (name === "przewodnik-prawny-v2") {
+    return "trwała sesja prowadzenia · Gate I";
+  }
+  if (SCHEMA_PIPELINE_EXECUTION_SKILLS.has(name)) {
+    return "deterministyczny schema pipeline · Gate I";
+  }
+  return "deterministyczny kontrakt tury · Gate I";
+}
+
 function messageId(): string {
   const random = globalThis.crypto?.randomUUID?.().replaceAll("-", "") ??
     `${Date.now().toString(16)}${Math.random().toString(16).slice(2)}`
@@ -413,6 +441,8 @@ export default function MatterChatApp({
       ),
     [skills]
   );
+  const controllingExecutionSkill =
+    caseTypeSkills[0] ?? null;
   const filteredSkills = useMemo(() => {
     const needle = skillFilter.trim().toLowerCase();
     return skills
@@ -1322,7 +1352,11 @@ export default function MatterChatApp({
               <div className="chat-composer-meta">
                 <span>Sprawa: {selectedCase?.displayName || "utworzy się przy pierwszej wiadomości"}</span>
                 <span>Auto skille: {automaticSkills ? "włączone" : "wyłączone"}</span>
-                <span>Priorytety: {caseTypeSkills.length || "auto"}</span>
+                <span>
+                  Workflow: {controllingExecutionSkill
+                    ? labelForSkill(controllingExecutionSkill)
+                    : "AUTO / router prawny"}
+                </span>
                 <span>Załączniki: {documentAttachments.length}</span>
               </div>
               <textarea
@@ -1420,13 +1454,15 @@ export default function MatterChatApp({
                   <p className="eyebrow">Typ sprawy / wykonanie</p>
                   <h2>
                     {caseTypeSkills.length === 0
-                      ? "Automatyczny — dobierz skille wykonawcze"
-                      : `${caseTypeSkills.length} priorytetowych skilli wykonawczych`}
+                      ? "Automatyczny — router wybiera workflow wykonawczy"
+                      : `Deterministyczny — ${labelForSkill(controllingExecutionSkill ?? "")}`}
                   </h2>
                   <p>
-                    Możesz zaznaczyć kilka skilli jednocześnie. Analiza sądowa może
-                    współpracować np. z chronologią, analizą dowodów i raportem klienta.
-                    System może równolegle dobrać kilka dziedzin prawa.
+                    Pierwszy zaznaczony skill jest sterującym workflowem tej tury.
+                    Jego programistyczne checkpointy, wymagane odczyty i HARD GATE
+                    mają pierwszeństwo. Kolejne zaznaczone skille współpracują
+                    semantycznie. Opcja Auto może dobrać dalsze skille i dziedziny,
+                    ale nie zastąpi ręcznie wybranego workflowu sterującego.
                   </p>
                 </div>
                 <label className="chat-switch">
@@ -1441,6 +1477,8 @@ export default function MatterChatApp({
               <div className="chat-skill-grid">
                 {executionSkills.map((skill) => {
                   const checked = caseTypeSkills.includes(skill.name);
+                  const controller =
+                    controllingExecutionSkill === skill.name;
                   return (
                     <label
                       key={skill.name}
@@ -1454,6 +1492,14 @@ export default function MatterChatApp({
                       <span>
                         <strong>{labelForSkill(skill.name)}</strong>
                         <small>{skill.description || skill.type || "skill wykonawczy"}</small>
+                        <small>
+                          {executionWorkflowLabel(skill.name)}
+                          {controller
+                            ? " · STERUJĄCY"
+                            : checked
+                              ? " · współpracujący"
+                              : ""}
+                        </small>
                       </span>
                     </label>
                   );
