@@ -54,6 +54,7 @@ import {
 import {
   AUTO_CASE_TYPE,
   DETERMINISTIC_ACTIONS,
+  DETERMINISTIC_ACTION_META_PREFIX,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
   deterministicActionFromMeta,
@@ -249,6 +250,22 @@ function isExecutionSkill(skill: PublicSkillDescriptor): boolean {
     skill.type?.toLowerCase().startsWith("executive-") === true ||
     KNOWN_EXECUTION_SKILLS.has(skill.name)
   );
+}
+
+function visibleMessageMeta(
+  meta?: string
+): string {
+  if (!meta) return "";
+  return meta
+    .split(/\s*[|;]\s*/)
+    .filter(
+      (item) =>
+        !item.startsWith(
+          DETERMINISTIC_ACTION_META_PREFIX
+        )
+    )
+    .join(" · ")
+    .trim();
 }
 
 async function openExternalUrl(url: string): Promise<void> {
@@ -1742,8 +1759,10 @@ export default function MatterChatApp({
                     content={message.content}
                     citations={message.documentCitations}
                   />
-                  {message.meta ? (
-                    <small className="chat-message-meta">{message.meta}</small>
+                  {visibleMessageMeta(message.meta) ? (
+                    <small className="chat-message-meta">
+                      {visibleMessageMeta(message.meta)}
+                    </small>
                   ) : null}
                   {message.evidence?.length ? (
                     <details className="chat-evidence">
