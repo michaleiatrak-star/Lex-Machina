@@ -690,9 +690,9 @@ export default function MatterChatApp({
 
   function toggleCaseTypeSkill(name: string): void {
     setCaseTypeSkills((current) =>
-      current.includes(name)
-        ? current.filter((item) => item !== name)
-        : [...current, name].slice(-8)
+      current[0] === name
+        ? []
+        : [name]
     );
   }
 
@@ -1321,8 +1321,16 @@ export default function MatterChatApp({
               ) : null}
               <div className="chat-composer-meta">
                 <span>Sprawa: {selectedCase?.displayName || "utworzy się przy pierwszej wiadomości"}</span>
-                <span>Auto skille: {automaticSkills ? "włączone" : "wyłączone"}</span>
-                <span>Priorytety: {caseTypeSkills.length || "auto"}</span>
+                <span>
+                  Tryb: {caseTypeSkills.length === 0
+                    ? "AUTO skillowy"
+                    : "deterministyczny"}
+                </span>
+                <span>
+                  Workflow: {caseTypeSkills[0]
+                    ? labelForSkill(caseTypeSkills[0])
+                    : "router"}
+                </span>
                 <span>Załączniki: {documentAttachments.length}</span>
               </div>
               <textarea
@@ -1417,25 +1425,36 @@ export default function MatterChatApp({
             <article className="chat-card">
               <div className="chat-card-heading">
                 <div>
-                  <p className="eyebrow">Typ sprawy / wykonanie</p>
+                  <p className="eyebrow">Tryb wykonania</p>
                   <h2>
                     {caseTypeSkills.length === 0
-                      ? "Automatyczny — dobierz skille wykonawcze"
-                      : `${caseTypeSkills.length} priorytetowych skilli wykonawczych`}
+                      ? "AUTO — router dobiera skille"
+                      : `Deterministyczny — ${labelForSkill(caseTypeSkills[0] ?? "")}`}
                   </h2>
                   <p>
-                    Możesz zaznaczyć kilka skilli jednocześnie. Analiza sądowa może
-                    współpracować np. z chronologią, analizą dowodów i raportem klienta.
-                    System może równolegle dobrać kilka dziedzin prawa.
+                    AUTO działa skillowo: router prawny może dobrać kilka współpracujących
+                    skilli, ale nie uruchamia ich specjalizowanego state-machine. Nadal
+                    obowiązują wspólne Gate I, weryfikacja źródeł, cytowań i finalizacji.
+                    Wybranie jednego skilla poniżej uruchamia jego workflow deterministyczny:
+                    program narzuca kolejność checkpointów, wymagane kroki i właściwe HARD GATE.
                   </p>
                 </div>
                 <label className="chat-switch">
                   <input
                     type="checkbox"
-                    checked={automaticSkills}
+                    checked={
+                      caseTypeSkills.length === 0
+                        ? true
+                        : automaticSkills
+                    }
+                    disabled={caseTypeSkills.length === 0}
                     onChange={(event) => setAutomaticSkills(event.target.checked)}
                   />
-                  <span>Auto dobór dodatkowych</span>
+                  <span>
+                    {caseTypeSkills.length === 0
+                      ? "Router dobiera skille"
+                      : "Dobieraj skille współpracujące"}
+                  </span>
                 </label>
               </div>
               <div className="chat-skill-grid">
@@ -1447,13 +1466,16 @@ export default function MatterChatApp({
                       className={checked ? "chat-skill-card selected" : "chat-skill-card"}
                     >
                       <input
-                        type="checkbox"
+                        type="radio"
+                        name="deterministic-workflow-skill"
                         checked={checked}
                         onChange={() => toggleCaseTypeSkill(skill.name)}
                       />
                       <span>
                         <strong>{labelForSkill(skill.name)}</strong>
-                        <small>{skill.description || skill.type || "skill wykonawczy"}</small>
+                        <small>
+                          Deterministyczny workflow · {skill.description || skill.type || "skill wykonawczy"}
+                        </small>
                       </span>
                     </label>
                   );
@@ -1465,7 +1487,7 @@ export default function MatterChatApp({
                   className="chat-secondary-action"
                   onClick={() => setCaseTypeSkills([])}
                 >
-                  Wróć do typu Automatyczny
+                  Wróć do AUTO — router + skille
                 </button>
               ) : null}
             </article>
