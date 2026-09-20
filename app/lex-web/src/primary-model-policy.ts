@@ -1,15 +1,39 @@
 import type { ProviderId } from "./api.js";
 
+export type PrimaryModelSource =
+  | ProviderId
+  | "local";
+
+export function runtimeProviderForPrimarySource(
+  source: PrimaryModelSource
+): ProviderId {
+  return source === "local"
+    ? "openai"
+    : source;
+}
+
 export function shouldLoadPrimaryModelCatalog(
-  provider: ProviderId,
+  source: PrimaryModelSource,
   providerConfigured: boolean | undefined
 ): boolean {
-  if (providerConfigured === undefined) {
-    return false;
+  if (source === "local") {
+    return true;
   }
-  return (
-    providerConfigured === true ||
-    provider === "openai"
+  return providerConfigured === true;
+}
+
+export function modelsForPrimarySource<
+  T extends { id: string }
+>(
+  source: PrimaryModelSource,
+  models: T[]
+): T[] {
+  const wantsLocal =
+    source === "local";
+  return models.filter((model) =>
+    wantsLocal
+      ? model.id.startsWith("local/")
+      : !model.id.startsWith("local/")
   );
 }
 
