@@ -881,9 +881,74 @@ export default function MatterChatApp({
     );
   }
 
+  async function refreshProviderAccountStatus(): Promise<void> {
+    const result =
+      await getProviderAccountStatus();
+    setProviderAccounts(
+      Object.fromEntries(
+        result.providers.map(
+          (item) => [
+            item.provider,
+            item
+          ]
+        )
+      ) as Record<
+        ProviderId,
+        ProviderAccountSessionStatus
+      >
+    );
+  }
+
+  async function connectProviderAccount(): Promise<void> {
+    if (
+      !isAccountPrimarySource(
+        provider
+      ) ||
+      user.appRole !== "ADMIN" ||
+      providerAccountBusy
+    ) {
+      return;
+    }
+    setProviderAccountBusy(true);
+    setProviderAccountMessage(
+      "Otwieram oficjalne logowanie dostawcy…"
+    );
+    try {
+      const status =
+        await loginProviderAccount(
+          runtimeProvider
+        );
+      setProviderAccounts(
+        (current) => ({
+          ...current,
+          [runtimeProvider]:
+            status
+        })
+      );
+      setProviderAccountMessage(
+        status.authenticated
+          ? "Konto połączone. Lex Machina użyje sesji oficjalnego klienta."
+          : "Logowanie zakończone, ale klient nie potwierdził aktywnej sesji."
+      );
+    } catch (error) {
+      setProviderAccountMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+      await refreshProviderAccountStatus()
+        .catch(() => {});
+    } finally {
+      setProviderAccountBusy(false);
+    }
+  }
+
   async function saveApiKey(): Promise<void> {
     if (
       provider === "local" ||
+      isAccountPrimarySource(
+        provider
+      ) ||
       user.appRole !== "ADMIN" ||
       !providerApiKey.trim()
     ) return;
@@ -912,6 +977,9 @@ export default function MatterChatApp({
   async function removeApiKey(): Promise<void> {
     if (
       provider === "local" ||
+      isAccountPrimarySource(
+        provider
+      ) ||
       user.appRole !== "ADMIN"
     ) return;
     setProviderKeyBusy(true);
@@ -961,7 +1029,8 @@ export default function MatterChatApp({
       !runtimeOnline ||
       !canExecutePrimaryModel(
         providerConfigured,
-        model
+        model,
+        accountAuthenticated
       ) ||
       !model
     ) return;
@@ -1136,7 +1205,8 @@ export default function MatterChatApp({
     runtimeOnline &&
     canExecutePrimaryModel(
       providerConfigured,
-      model
+      model,
+      accountAuthenticated
     ) &&
     Boolean(model) &&
     Boolean(query.trim()) &&
