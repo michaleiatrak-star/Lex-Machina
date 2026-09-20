@@ -109,7 +109,8 @@ import {
   resolveAdditionalSkills
 } from "../skill-selection.js";
 import {
-  createDeterministicWorkflowPlan
+  createDeterministicWorkflowPlan,
+  supportsDeterministicWorkflow
 } from "../deterministic-workflow.js";
 import type {
   ProcessPleadingState
@@ -829,7 +830,11 @@ function publicSkill(skill: {
       : {}),
     category: /^dr-\d{2}-/.test(skill.name)
       ? "domain"
-      : "execution"
+      : "execution",
+    deterministicWorkflow:
+      supportsDeterministicWorkflow(
+        skill.name
+      )
   };
 }
 
