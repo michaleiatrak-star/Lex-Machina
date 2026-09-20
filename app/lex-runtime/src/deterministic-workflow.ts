@@ -19,6 +19,37 @@ export type DeterministicWorkflowId =
   | "CLIENT_REPORT_V1"
   | "SITUATION_REPORT_V1";
 
+export const DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS = [
+  "przewodnik-prawny-v2",
+  "pisma-procesowe-v3",
+  "pisma-proste-v2",
+  "analiza-sadowa-v6",
+  "analizator-dowodow-v3",
+  "analizator-przepisow-v2",
+  "analizator-umow-v1",
+  "chronologia-sprawy-v1",
+  "orzeczenia-sadowe-v2",
+  "przesluchanie-swiadkow-v2-min90",
+  "raport-klienta-v1",
+  "raport-sytuacyjny-v2"
+] as const;
+
+export type DeterministicWorkflowExecutionSkill =
+  typeof DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS[number];
+
+const DETERMINISTIC_WORKFLOW_EXECUTION_SKILL_SET =
+  new Set<string>(
+    DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS
+  );
+
+export function supportsDeterministicWorkflow(
+  skill: string
+): skill is DeterministicWorkflowExecutionSkill {
+  return DETERMINISTIC_WORKFLOW_EXECUTION_SKILL_SET.has(
+    skill
+  );
+}
+
 export type DeterministicWorkflowPlan = {
   id: DeterministicWorkflowId;
   executionSkill: string | null;
@@ -334,6 +365,17 @@ export function createDeterministicWorkflowPlan(
   registry: LexSkillRegistry,
   workflowExecutionSkill: string | null
 ): DeterministicWorkflowPlan {
+  if (
+    workflowExecutionSkill &&
+    !supportsDeterministicWorkflow(
+      workflowExecutionSkill
+    )
+  ) {
+    throw new Error(
+      `DETERMINISTIC_WORKFLOW_SKILL_UNSUPPORTED:${workflowExecutionSkill}`
+    );
+  }
+
   const hasGuide =
     workflowExecutionSkill === "przewodnik-prawny-v2";
   const hasProcess =
