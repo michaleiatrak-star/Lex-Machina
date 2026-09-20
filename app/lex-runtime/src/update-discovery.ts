@@ -19,6 +19,7 @@ export type UpdateDiscoveryResult = {
   status: UpdateAvailability;
   checkedAt: string;
   latestVersion?: string;
+  latestSkillVersion?: string;
   releaseUrl?: string;
   releaseName?: string;
   publishedAt?: string;
@@ -86,6 +87,23 @@ export function compareVersions(
 function releaseVersion(tag: string): string | null {
   const normalized = tag.startsWith("v") ? tag.slice(1) : tag;
   return parseSemver(normalized) ? normalized : null;
+}
+
+function skillPackReleaseVersion(
+  tag: string
+): string | null {
+  const match =
+    /^(?:skill-pack|skills)-v?(\d+\.\d+\.\d+)$/i.exec(
+      tag
+    );
+  if (!match) {
+    return null;
+  }
+  return parseSemver(
+    match[1]!
+  )
+    ? match[1]!
+    : null;
 }
 
 function modelPackReleaseVersion(
@@ -305,6 +323,43 @@ implements UpdateDiscovery {
           )
         );
 
+      const skillPackCandidates =
+        releases
+          .flatMap((release) => {
+            if (!eligible(release)) {
+              return [];
+            }
+            const version =
+              skillPackReleaseVersion(
+                release.tag_name as string
+              );
+            if (!version) {
+              return [];
+            }
+            const assets =
+              chooseAssets(
+                release,
+                this.repository
+              );
+            if (
+              !assets.skillsBundle ||
+              !assets.skillsIndex
+            ) {
+              return [];
+            }
+            return [{
+              version,
+              release,
+              assets
+            }];
+          })
+          .sort((a, b) =>
+            compareVersions(
+              b.version,
+              a.version
+            )
+          );
+
       const modelPackCandidates =
         releases
           .flatMap((release) => {
@@ -344,6 +399,8 @@ implements UpdateDiscovery {
 
       const latest =
         candidates[0];
+      const dedicatedSkillPack =
+        skillPackCandidates[0];
       const dedicatedModelPack =
         modelPackCandidates[0];
       const applicationAssets =
@@ -353,6 +410,56 @@ implements UpdateDiscovery {
               this.repository
             )
           : {};
+      const skillPackAssets =
+        dedicatedSkillPack
+          ? {
+              latestSkillVersion:
+                dedicatedSkillPack.version,
+              skillsBundle:
+                dedicatedSkillPack
+                  .assets
+                  .skillsBundle!,
+              skillsIndex:
+                dedicatedSkillPack
+                  .assets
+                  .skillsIndex!,
+              ...(dedicatedSkillPack
+                .assets
+                .skillsSignature
+                ? {
+                    skillsSignature:
+                      dedicatedSkillPack
+                        .assets
+                        .skillsSignature
+                  }
+                : {})
+            }
+          : (
+              applicationAssets
+                .skillsBundle &&
+              applicationAssets
+                .skillsIndex &&
+              latest
+                ? {
+                    latestSkillVersion:
+                      latest.version,
+                    skillsBundle:
+                      applicationAssets
+                        .skillsBundle,
+                    skillsIndex:
+                      applicationAssets
+                        .skillsIndex,
+                    ...(applicationAssets
+                      .skillsSignature
+                      ? {
+                          skillsSignature:
+                            applicationAssets
+                              .skillsSignature
+                        }
+                      : {})
+                  }
+                : {}
+            );
       const modelPackAssets =
         dedicatedModelPack
           ? {
@@ -390,6 +497,7 @@ implements UpdateDiscovery {
             this.currentVersion,
           status: "NO_RELEASE",
           checkedAt,
+          ...skillPackAssets,
           ...modelPackAssets
         };
       }
@@ -423,7 +531,14 @@ implements UpdateDiscovery {
                 latest.publishedAt
             }
           : {}),
-        ...applicationAssets,
+        ...(applicationAssets.installer
+          ? {
+              installer:
+                applicationAssets
+                  .installer
+            }
+          : {}),
+        ...skillPackAssets,
         ...modelPackAssets
       };
     } catch {
