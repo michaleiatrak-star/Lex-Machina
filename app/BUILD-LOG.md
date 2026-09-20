@@ -1378,3 +1378,17 @@ Release target:
 - application version remains `0.1.5`;
 - release branch: `release/0.1.5-g39l-rc4`;
 - Windows online installer must pass the existing provenance, runtime/Gate I, structural, installer-state and installed-copy acceptance gates before publication.
+
+### 2026-09-20 — G39L RC4 skill update trust split
+
+Status: **READY FOR RELEASE GATE**
+
+Implemented:
+
+- skill updates may be accepted without Ed25519 only through the official Lex Machina GitHub Releases discovery path;
+- GitHub release asset SHA-256 remains mandatory for the skill index and ZIP;
+- the skill index must still match the release version, application compatibility range, bundle filename, SHA-256 and byte size;
+- the downloaded skill ZIP is re-hashed, structurally validated through `LexSkillRegistry`, and activated atomically with rollback semantics;
+- Ed25519 signatures remain supported when present but are no longer mandatory for the instruction-only skill layer;
+- application updates remain Authenticode fail-closed and model-pack updates remain Ed25519 fail-closed;
+- Maintenance UI wording now reflects the real trust split and no longer claims unsigned application updates are permitted.
