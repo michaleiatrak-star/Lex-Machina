@@ -2,6 +2,7 @@ import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import readline from "node:readline";
 import type {
   NormalizedToolCall,
   ProviderId,
@@ -247,6 +248,488 @@ function normalizeCliFailure(
   );
 }
 
+function runGrokAcp(
+  prompt: string | null,
+  cwd: string,
+  abortSignal?: AbortSignal
+): Promise<{
+  authenticated: boolean;
+  text?: string;
+}> {
+  return new Promise(async (resolve, reject) => {
+    const executable =
+      await resolveCommand(
+        CLI_NAMES.xai
+      );
+    if (!executable) {
+      reject(
+        new Error(
+          "ACCOUNT_SESSION_CLI_NOT_INSTALLED:xai"
+        )
+      );
+      return;
+    }
+
+    const proc = spawnResolved(
+      executable,
+      [
+        "--no-auto-update",
+        "--permission-mode",
+        "dontAsk",
+        "--disallowed-tools",
+        "*",
+        "--sandbox",
+        "strict",
+        "--no-subagents",
+        "--no-memory",
+        "--disable-web-search",
+        "agent",
+        "stdio"
+      ],
+      cwd,
+      accountEnvironment(
+        "xai"
+      )
+    );
+    const rl =
+      readline.createInterface({
+        input: proc.stdout
+      });
+    let nextId = 1;
+    let text = "";
+    let stderr = "";
+    let settled = false;
+    const pending =
+      new Map<
+        number,
+        {
+          resolve: (
+            value: Record<string, unknown>
+          ) => void;
+          reject: (
+            error: Error
+          ) => void;
+          timer: NodeJS.Timeout;
+        }
+      >();
+
+    const cleanup = () => {
+      rl.close();
+      proc.kill();
+      abortSignal
+        ?.removeEventListener(
+          "abort",
+          onAbort
+        );
+      for (
+        const item
+        of pending.values()
+      ) {
+        clearTimeout(
+          item.timer
+        );
+      }
+      pending.clear();
+    };
+
+    const finishReject = (
+      error: Error
+    ) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(error);
+    };
+
+    const finishResolve = (
+      value: {
+        authenticated: boolean;
+        text?: string;
+      }
+    ) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(value);
+    };
+
+    const onAbort = () => {
+      const error =
+        new Error(
+          "ACCOUNT_SESSION_ABORTED"
+        );
+      error.name = "AbortError";
+      finishReject(error);
+    };
+
+    const request = (
+      method: string,
+      params: Record<
+        string,
+        unknown
+      >,
+      timeoutMs =
+        STATUS_TIMEOUT_MS
+    ): Promise<
+      Record<string, unknown>
+    > => {
+      const id =
+        nextId++;
+      return new Promise(
+        (
+          requestResolve,
+          requestReject
+        ) => {
+          const timer =
+            setTimeout(
+              () => {
+                pending.delete(
+                  id
+                );
+                requestReject(
+                  new Error(
+                    `ACCOUNT_SESSION_ACP_TIMEOUT:${method}`
+                  )
+                );
+              },
+              timeoutMs
+            );
+          pending.set(
+            id,
+            {
+              resolve:
+                requestResolve,
+              reject:
+                requestReject,
+              timer
+            }
+          );
+          proc.stdin.write(
+            JSON.stringify({
+              jsonrpc:
+                "2.0",
+              id,
+              method,
+              params
+            }) + "\n"
+          );
+        }
+      );
+    };
+
+    abortSignal
+      ?.addEventListener(
+        "abort",
+        onAbort,
+        {
+          once: true
+        }
+      );
+
+    proc.stderr.on(
+      "data",
+      (chunk) => {
+        stderr =
+          appendCapture(
+            stderr,
+            chunk
+          );
+      }
+    );
+    proc.once(
+      "error",
+      (error) =>
+        finishReject(
+          error instanceof Error
+            ? error
+            : new Error(
+                String(
+                  error
+                )
+              )
+        )
+    );
+    proc.once(
+      "exit",
+      (code) => {
+        if (!settled) {
+          finishReject(
+            new Error(
+              `ACCOUNT_SESSION_CLI_FAILED:xai:${code ?? "signal"}:${stderr
+                .trim()
+                .slice(-800)
+                .replace(/[\r\n]+/g, " ")}`
+            )
+          );
+        }
+      }
+    );
+
+    rl.on(
+      "line",
+      (line) => {
+        let message:
+          Record<
+            string,
+            unknown
+          >;
+        try {
+          message =
+            JSON.parse(
+              line
+            ) as Record<
+              string,
+              unknown
+            >;
+        } catch {
+          return;
+        }
+
+        if (
+          message.method ===
+            "session/update"
+        ) {
+          const params =
+            message.params &&
+            typeof message.params ===
+              "object"
+              ? message.params as
+                  Record<
+                    string,
+                    unknown
+                  >
+              : null;
+          const update =
+            params?.update &&
+            typeof params.update ===
+              "object"
+              ? params.update as
+                  Record<
+                    string,
+                    unknown
+                  >
+              : null;
+          const content =
+            update?.content &&
+            typeof update.content ===
+              "object"
+              ? update.content as
+                  Record<
+                    string,
+                    unknown
+                  >
+              : null;
+          if (
+            update
+              ?.sessionUpdate ===
+              "agent_message_chunk" &&
+            typeof content?.text ===
+              "string"
+          ) {
+            text +=
+              content.text;
+          }
+          return;
+        }
+
+        const id =
+          typeof message.id ===
+            "number"
+            ? message.id
+            : null;
+        if (id === null) {
+          return;
+        }
+        const pendingRequest =
+          pending.get(id);
+        if (!pendingRequest) {
+          return;
+        }
+        pending.delete(id);
+        clearTimeout(
+          pendingRequest.timer
+        );
+        if (
+          message.error &&
+          typeof message.error ===
+            "object"
+        ) {
+          const error =
+            message.error as
+              Record<
+                string,
+                unknown
+              >;
+          pendingRequest.reject(
+            new Error(
+              typeof error.message ===
+                "string"
+                ? error.message
+                : "ACCOUNT_SESSION_ACP_ERROR"
+            )
+          );
+        } else {
+          pendingRequest.resolve(
+            message.result &&
+            typeof message.result ===
+              "object"
+              ? message.result as
+                  Record<
+                    string,
+                    unknown
+                  >
+              : {}
+          );
+        }
+      }
+    );
+
+    try {
+      const init =
+        await request(
+          "initialize",
+          {
+            protocolVersion:
+              1,
+            clientCapabilities:
+              {}
+          }
+        );
+      const authMethods =
+        Array.isArray(
+          init.authMethods
+        )
+          ? init.authMethods
+          : [];
+      const hasCachedToken =
+        authMethods.some(
+          (item) =>
+            item &&
+            typeof item ===
+              "object" &&
+            (
+              item as Record<
+                string,
+                unknown
+              >
+            ).id ===
+              "cached_token"
+        );
+
+      if (!hasCachedToken) {
+        finishResolve({
+          authenticated:
+            false
+        });
+        return;
+      }
+
+      await request(
+        "authenticate",
+        {
+          methodId:
+            "cached_token",
+          _meta: {
+            headless:
+              true
+          }
+        },
+        STATUS_TIMEOUT_MS
+      );
+
+      if (prompt === null) {
+        finishResolve({
+          authenticated:
+            true
+        });
+        return;
+      }
+
+      const session =
+        await request(
+          "session/new",
+          {
+            cwd,
+            mcpServers:
+              []
+          }
+        );
+      const sessionId =
+        typeof session.sessionId ===
+          "string"
+          ? session.sessionId
+          : "";
+      if (!sessionId) {
+        throw new Error(
+          "ACCOUNT_SESSION_ACP_SESSION_INVALID"
+        );
+      }
+
+      await request(
+        "session/prompt",
+        {
+          sessionId,
+          prompt: [
+            {
+              type:
+                "text",
+              text:
+                prompt
+            }
+          ]
+        },
+        COMMAND_TIMEOUT_MS
+      );
+
+      let lastLength = -1;
+      let stableChecks = 0;
+      while (
+        stableChecks < 2
+      ) {
+        await new Promise<void>(
+          (waitResolve) =>
+            setTimeout(
+              waitResolve,
+              150
+            )
+        );
+        if (
+          text.length ===
+            lastLength
+        ) {
+          stableChecks += 1;
+        } else {
+          lastLength =
+            text.length;
+          stableChecks = 0;
+        }
+      }
+
+      const finalText =
+        text.trim();
+      if (!finalText) {
+        throw new Error(
+          "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+        );
+      }
+      finishResolve({
+        authenticated:
+          true,
+        text:
+          finalText
+      });
+    } catch (error) {
+      finishReject(
+        error instanceof Error
+          ? error
+          : new Error(
+              String(error)
+            )
+      );
+    }
+  });
+}
+
 export function accountSessionModelId(
   provider: ProviderId
 ): string {
@@ -411,12 +894,42 @@ export class AccountSessionManager {
           STATUS_TIMEOUT_MS
         );
       } else {
-        result = await runCli(
-          provider,
-          ["models"],
-          undefined,
-          STATUS_TIMEOUT_MS
-        );
+        const workDir =
+          await fsp.mkdtemp(
+            path.join(
+              os.tmpdir(),
+              "lex-grok-auth-"
+            )
+          );
+        try {
+          const probe =
+            await runGrokAcp(
+              null,
+              workDir
+            );
+          result = {
+            code:
+              probe.authenticated
+                ? 0
+                : 1,
+            stdout:
+              "",
+            stderr:
+              ""
+          };
+        } finally {
+          await fsp.rm(
+            workDir,
+            {
+              recursive:
+                true,
+              force:
+                true
+            }
+          ).catch(
+            () => {}
+          );
+        }
       }
     } catch {
       result = {
@@ -532,34 +1045,27 @@ export class AccountSessionManager {
           throw normalizeCliFailure(provider, result);
         }
       } else {
-        result = await runCli(
-          provider,
-          [
-            "--no-auto-update",
-            "-p",
+        const grok =
+          await runGrokAcp(
             prompt,
-            "--output-format",
-            "plain",
-            "--cwd",
             workDir,
-            "--permission-mode",
-            "dontAsk",
-            "--disallowed-tools",
-            "*",
-            "--sandbox",
-            "strict",
-            "--no-subagents",
-            "--no-memory",
-            "--disable-web-search"
-          ],
-          undefined,
-          COMMAND_TIMEOUT_MS,
-          workDir,
-          abortSignal
-        );
-        if (result.code !== 0) {
-          throw normalizeCliFailure(provider, result);
+            abortSignal
+          );
+        if (
+          !grok.authenticated
+        ) {
+          throw new Error(
+            "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
+          );
         }
+        if (
+          !grok.text
+        ) {
+          throw new Error(
+            "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+          );
+        }
+        return grok.text;
       }
 
       const text = result.stdout.trim();
