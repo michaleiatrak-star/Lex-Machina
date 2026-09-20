@@ -2062,19 +2062,86 @@ export class LocalModelRuntime {
           canonical
         );
       if (!profile) {
-        throw new Error(
-          `LOCAL_MODEL_PROFILE_NOT_CONFIGURED:${canonical}`
+        const targetModelPath =
+          path.join(
+            this.rootDir,
+            "models",
+            spec.filename
+          );
+        if (
+          process.platform !== "win32" ||
+          !fs.existsSync(
+            targetModelPath
+          )
+        ) {
+          throw new Error(
+            `LOCAL_MODEL_PROFILE_NOT_CONFIGURED:${canonical}`
+          );
+        }
+
+        const policy =
+          this.contextPolicy();
+        const minimum =
+          Math.max(
+            policy.minimum,
+            spec.minimumContext ??
+              policy.minimum
+          );
+        const maximum =
+          Math.min(
+            policy.maximum,
+            spec.maximumRuntimeContext ??
+              spec.nativeContext
+          );
+        const recoveryContext =
+          Math.min(
+            maximum,
+            Math.max(
+              minimum,
+              policy.default
+            )
+          );
+        const backendPreference =
+          configSelectionMode(
+            config
+          ) ?? "AUTO";
+
+        await this.provision(
+          canonical,
+          recoveryContext,
+          undefined,
+          backendPreference
         );
+        config =
+          this.readConfig();
+        if (
+          !config ||
+          normalizeModelId(
+            config.model.id
+          ) !== canonical
+        ) {
+          throw new Error(
+            `LOCAL_MODEL_PROFILE_RECOVERY_FAILED:${canonical}`
+          );
+        }
       }
+      const recoveredProfile =
+        this.readProfileConfig(
+          canonical
+        );
       const qualification =
         this.readProfileQualification(
           canonical
         );
+      const activeProfile =
+        recoveredProfile ??
+        profile;
       if (
+        !activeProfile ||
         !qualification ||
         qualification
           .contextTokens !==
-          profile.context
+          activeProfile.context
             .requestedTokens
       ) {
         throw new Error(
@@ -2083,12 +2150,12 @@ export class LocalModelRuntime {
       }
       await this.stop();
       this.writeConfig(
-        profile
+        activeProfile
       );
       this.writeQualification(
         qualification
       );
-      config = profile;
+      config = activeProfile;
     }
 
     if (
