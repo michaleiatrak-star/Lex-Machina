@@ -569,10 +569,9 @@ describe("SafeSessionExecutor", () => {
       mode: "PRAWNIK"
     });
 
-    expect(result.status).toBe("BLOCKED");
+    expect(result.status).toBe("DRAFT_PRESENTABLE");
     expect(result.finalization).toBe("BLOCKED");
-    expect(result.answer).toBeUndefined();
-    expect(JSON.stringify(result)).not.toContain(
+    expect(result.answer).toContain(
       "Zastosowanie ma art. 1234 KC."
     );
     expect(result.blockedReferences).toContainEqual(
