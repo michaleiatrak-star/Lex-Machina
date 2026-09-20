@@ -1047,13 +1047,20 @@ export default function MatterChatApp({
     actionId:
       DeterministicActionId | ""
   ): void {
+    const mappedSkills =
+      skillsForDeterministicAction(
+        actionId
+      );
     setDeterministicAction(
       actionId
     );
     setCaseTypeSkills(
-      skillsForDeterministicAction(
-        actionId
-      )
+      mappedSkills
+    );
+    // Keep the non-React routing bridge in sync immediately. This prevents a
+    // click+send race on the first turn before useEffect has a chance to run.
+    setCaseTypeExecutionSkills(
+      mappedSkills
     );
     // No action = full router-controlled AUTO. A selected action pins the
     // execution pipeline programmatically; the router still selects DR domains.
