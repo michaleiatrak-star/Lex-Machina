@@ -70,6 +70,10 @@ jobs:
         working-directory: app/lex-desktop
         run: npm install --no-audit --no-fund
 
+      - name: Local primary model chat selection contract
+        working-directory: app/lex-web
+        run: npx vitest run src/MatterChatApp.primary-model.test.ts
+
       - name: Build thin online bootstrap payload
         shell: pwsh
         run: ./app/installer/build-windows-online.ps1
