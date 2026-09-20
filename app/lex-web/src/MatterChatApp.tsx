@@ -53,12 +53,16 @@ import {
 } from "./document-drop-queue.js";
 import {
   AUTO_CASE_TYPE,
-  DETERMINISTIC_PIPELINE_SKILLS,
+  DETERMINISTIC_ACTIONS,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
+  deterministicActionFromMeta,
+  deterministicActionMeta,
   labelForSkill,
   setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
+  skillsForDeterministicAction,
+  type DeterministicActionId,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
 import {
@@ -418,6 +422,10 @@ export default function MatterChatApp({
   const [routes, setRoutes] = useState<string[]>([]);
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
   const [manualSkills, setManualSkills] = useState<string[]>([]);
+  const [
+    deterministicAction,
+    setDeterministicAction
+  ] = useState<DeterministicActionId | "">("");
   const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
   // null = every DR module is selected. Kept as null rather than a filled list
   // so the default sends no restriction at all and routing stays unchanged
