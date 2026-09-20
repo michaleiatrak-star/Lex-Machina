@@ -1270,7 +1270,7 @@ export default function MatterChatApp({
             ["skills", "Skille"],
             ["case", "Sprawa"],
             ["firm", "Kancelaria"],
-            ["settings", "Model i API"]
+            ["settings", "Model i konto / API"]
           ] as Array<[TabId, string]>).map(([id, label]) => (
             <button
               key={id}
@@ -1320,7 +1320,7 @@ export default function MatterChatApp({
                       ? "Dane sprawy"
                       : activeTab === "firm"
                         ? "Know-how i wzory kancelarii"
-                        : "Model i klucz API"}
+                        : "Model i uwierzytelnianie"}
             </h1>
           </div>
           <div className="chat-header-actions">
