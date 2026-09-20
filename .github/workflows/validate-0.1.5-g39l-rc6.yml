@@ -1,0 +1,80 @@
+name: Lex Machina 0.1.5 G39L RC6 Validation
+
+on:
+  push:
+    branches:
+      - "release/0.1.5-g39l-rc6"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lex-validation-0.1.5-g39l-rc6
+  cancel-in-progress: true
+
+jobs:
+  provenance:
+    name: RC6 provenance contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact validation commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release branch and version coherence
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_branch="release/0.1.5-g39l-rc6"
+          expected_version="0.1.5"
+
+          work_branch="$(awk -F': ' '$1=="work_branch"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          app_version="$(awk -F': ' '$1=="application_version"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          runtime_version="$(node -p "require('./app/lex-runtime/package.json').version")"
+          web_version="$(node -p "require('./app/lex-web/package.json').version")"
+          desktop_version="$(node -p "require('./app/lex-desktop/package.json').version")"
+          installer_version="$(node -p "require('./app/installer/windows-release-source.json').applicationVersion")"
+
+          [[ "$GITHUB_REF_NAME" == "$expected_branch" ]]
+          [[ "$work_branch" == "$expected_branch" ]]
+          for observed in "$app_version" "$runtime_version" "$web_version" "$desktop_version" "$installer_version"; do
+            [[ "$observed" == "$expected_version" ]]
+          done
+
+  runtime:
+    name: Runtime and Gate I audit
+    uses: ./.github/workflows/lex-runtime.yml
+
+  web:
+    name: Web deterministic/local-primary contracts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact validation commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install web dependencies
+        working-directory: app/lex-web
+        run: npm install --no-audit --no-fund
+
+      - name: Run routing and local-primary regression tests
+        working-directory: app/lex-web
+        run: npx vitest run src/chat-routing.test.ts src/MatterChatApp.primary-model.test.ts
+
+      - name: Build web application
+        working-directory: app/lex-web
+        run: npm run build
+
+  structural:
+    name: Structural corpus audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+
+  installer-state:
+    name: Installer state audit
+    uses: ./.github/workflows/g39-installer-state.yml
