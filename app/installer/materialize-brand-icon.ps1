@@ -9,8 +9,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$expectedSha256 = "2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc"
-$expectedBytes = 37978
+$expectedSha256 = "055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"
+$expectedBytes = 51440
 $expectedParts = 7
 
 if (-not (Test-Path -LiteralPath $PartsDirectory -PathType Container)) {

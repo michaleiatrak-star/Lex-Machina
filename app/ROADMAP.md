@@ -1,6 +1,6 @@
 # Lex Machina — roadmap aplikacji instalacyjnej
 
-Stan na: 2026-09-17
+Stan na: 2026-09-20
 
 Roadmapa obejmuje produkt instalacyjny Windows i jest traktowana jako kontrakt zakresu dla kolejnych bramek CI. Zmiana oznaczona jako `DONE` powinna mieć co najmniej test lub walidator strukturalny/bundle oraz nie może zostać usunięta bez jawnej zmiany roadmapy i audytu regresji.
 
@@ -97,6 +97,87 @@ Kryteria zamknięcia:
 - Windows Online Installer: NSIS + installed-copy acceptance: PASS,
 - Windows Offline Installer: standalone EXE + clean-machine acceptance: PASS,
 - artefakty i SHA-256 opublikowane z finalnego SHA.
+
+## R0.1.3 / R0.1.4 — G39/G39K linia instalatora — RELEASED AS PRERELEASE
+
+Wydane wyłącznie poza `main`, jako prereleasy z własnym source SHA:
+`v0.1.3-g39-rc1`, `v0.1.4-g39k-rc1..rc4`, `v0.1.4-g39k-rc3-hotfix1`, `v0.1.4-g39k-rc3-hotfix2`.
+
+Zamknięte na zielonym CI (runtime + F-138 + G39 installer state + G33D installed-copy acceptance):
+
+- deterministyczny stan instalatora `FRESH / UPGRADE / REPAIR / CURRENT / DOWNGRADE_BLOCKED`;
+- fail-closed `INSTALL_ROOT_MISMATCH` (exit 24) i `DOWNGRADE_BLOCKED` (exit 23);
+- Local AI jako opcjonalne provisioning po instalacji;
+- pinowane SHA-256 dla Node/Python/llama.cpp/VC++ i re-weryfikacja cache;
+- side-by-side prywatny CPython i ścieżki Unicode dla Paddle;
+- przypięta ikona marki weryfikowana po stronie buildu.
+
+Nadal poza zamknięciem:
+
+- produkcyjne Authenticode i przypięty publisher trust root;
+- Ed25519 trust roots dla skilli i model-packów;
+- standalone offline EXE: clean-machine acceptance nie jest uruchamiana w pipelinie online.
+
+## R0.1.5 — G39L poprawki bezpieczeństwa i pierwszego uruchomienia — VERIFYING
+
+### G39L1 — praca na koncie admin z trwałym ostrzeżeniem — DONE
+
+- Pierwsze logowanie `admin` / `admin` pozostaje, konto ma `passwordSetupPending`.
+- Aplikacja nie jest blokowana: użytkownik może pracować od razu.
+- U góry okna widoczny jest trwały, niezamykalny pasek ostrzegawczy z przyciskiem przejścia do zmiany hasła; znika dopiero po ustawieniu własnego hasła.
+- Minimalna długość nowego hasła: 10 znaków, spójnie w UI i w `validateNewPassword`.
+- Walidatory G33C/G37B wymagają teraz ostrzeżenia zamiast blokady.
+
+### G39L2 — reautoryzacja deanonimizacji na desktopie — DONE
+
+- `reauthorizeDeanonymization` przekazuje hasło wpisane przez użytkownika zamiast sentinela `__LEX_NATIVE_REAUTH__`.
+- Sentinel pozostaje obsługiwany po stronie mostu Tauri dla ścieżki managed bootstrap, ale nie jest już wysyłany z UI.
+- Regresja pokryta testem `app/lex-web/src/api.test.ts`.
+
+### G39L3 — klucze providerów przeżywają restart — DONE
+
+- Klucze z magazynu systemowego są przywracane po każdym udanym logowaniu, nie tylko na nieosiągalnej już ścieżce managed identity.
+- Żądanie przywrócenia niesie `persistence: OS_KEYRING`, więc nie kasuje wpisu, który właśnie przywraca.
+- Regresja pokryta testem Rust `restoring_a_stored_credential_keeps_it_in_the_os_keyring`.
+
+### G39L4 — podpisywalny instalator offline — DONE
+
+- Self-extractor wyszukuje stopkę `LEXOFF01` wstecz zamiast zakładać, że leży dokładnie na końcu pliku.
+- Dzięki temu doklejona przez Authenticode tablica certyfikatów nie unieważnia wrappera.
+- Weryfikacja SHA-256 payloadu pozostaje bez zmian.
+
+### G39L5 — normalizacja odcisku certyfikatu — DONE
+
+- `sign-windows-artifact.ps1` usuwa białe znaki z odcisku (`'\s+'` zamiast `"\\s+"`).
+- Odcisk skopiowany z okna certyfikatu Windows jest akceptowany; pokryte przypadkiem w `sign-windows-artifact-selftest.ps1`.
+
+### G39L6 — ikona marki dekodowalna przez tauri-codegen — DONE
+
+- Wszystkie 7 klatek przypiętej ikony było PNG w trybie `Indexed` (color type 3), którego crate `ico 0.5` używany przez `tauri-codegen` nie dekoduje: `generate_context!` panikował na Windows i blokował każdy build desktopowy.
+- To był blocker odziedziczony po `release/0.1.4-g39k-rc3-hotfix2` — tamto wydanie nigdy się nie opublikowało z tego samego powodu.
+- Klatki przekodowane z palety na RGBA (color type 6) bezstratnie: te same wymiary, te same piksele, ta sama grafika.
+- Nowy SHA-256 ikony: `055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76` (51 440 B); przypięcia zaktualizowane w `build.rs`, `materialize-brand-icon.ps1`, `windows-branding-selftest.ps1` i w workflow wydania.
+
+### G39L7 — układ nakładających się paneli w oknie czatu — DONE
+
+- `.auth-toolbar`, `.maintenance-panel` i `.session-warning` były niezależnie `position: fixed` w prawym górnym rogu i zasłaniały się nawzajem; panel Utrzymanie znikał pod paskiem konta.
+- Powłoka publikuje teraz zmierzoną geometrię jako `--lex-top-inset` i `--lex-overlay-top`, a nakładki układają się pod tym, co faktycznie jest wyrenderowane, zamiast zgadywać stałą.
+- `ResizeObserver` przelicza wartości przy zmianie rozmiaru okna i zawijaniu banera.
+- Zweryfikowane w przeglądarce (emulacja powłoki Tauri, 1440x960): z banerem 0-51 / pasek 65-112 / Utrzymanie 124-190; bez banera pasek 14-61 / Utrzymanie 73-139. Zero nakładek.
+
+### G39L8 — diagnostyka i klasyfikacja błędów wykonania sesji — DONE
+
+- Nieskategoryzowany błąd wykonania wracał jako `SESSION_EXECUTION_FAILED` bez żadnego wpisu w logu; nie było z czego diagnozować.
+- Runtime loguje teraz nazwę i komunikat takiego błędu (bez treści żądania i bez stosu).
+- Fail-closed bramka prywatności czatu wraca jako `503 CHAT_PRIVACY_GATE_FAILED` zamiast anonimowego 500, a UI pokazuje komunikat wskazujący lokalny runtime prywatności.
+- Regresja pokryta testem `tests/http-session.test.ts`.
+
+### Znane, nienaprawione w tej linii
+
+- pakiety Pythona pinowane tylko wersją, bez `--require-hashes` i bez pinu zależności przechodnich;
+- brak `package-lock.json` i `Cargo.lock`, build payloadu używa `npm install`;
+- martwe strażniki `$LASTEXITCODE` po wywołaniach `& skrypt.ps1`;
+- walidatory `validate-g*.ts` są w większości kontrolą obecności napisów w źródłach, nie testami zachowania.
 
 ## Kolejny horyzont
 

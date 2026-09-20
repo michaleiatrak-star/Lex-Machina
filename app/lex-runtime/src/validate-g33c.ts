@@ -32,11 +32,17 @@ const checks = {
     authUi.includes('? "admin"') &&
     authUi.includes("Pierwsze logowanie: login") &&
     authUi.includes("<strong>admin</strong>"),
-  forcedPasswordReplacement:
+  warnedPasswordReplacement:
     authUi.includes("passwordSetupPending === true") &&
+    authUi.includes("password-setup-banner") &&
+    authUi.includes('role="alert"') &&
     authUi.includes("Używasz początkowego konta admin/admin") &&
     securityUi.includes("co najmniej 10 znaków") &&
     crypto.includes("length < 10"),
+  firstRunIsWarningNotBlockade:
+    !authUi.includes("Zanim przejdziesz dalej") &&
+    !/passwordSetupPending === true\s*\)\s*\{\s*return \(/.test(authUi) &&
+    authUi.includes("<App"),
   nativeDeanonymizationReauth:
     authoring.includes("isDesktopShell()") &&
     trust.includes("__LEX_NATIVE_REAUTH__"),
@@ -59,6 +65,7 @@ console.log(JSON.stringify({
   checks,
   requiredFirstRunActions: [
     "LOGIN_WITH_TEMPORARY_ADMIN_CREDENTIAL",
+    "WORK_IS_ALLOWED_WITH_PERSISTENT_TOP_WARNING",
     "CHANGE_PASSWORD_MIN_10_CHARACTERS"
   ],
   normalUserActionsAfterSetup: [

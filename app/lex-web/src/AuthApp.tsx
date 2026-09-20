@@ -1,7 +1,11 @@
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
-  useState
+  useRef,
+  useState,
+  type ReactElement,
+  type ReactNode
 } from "react";
 import App from "./App.js";
 import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
@@ -582,33 +586,36 @@ export default function AuthenticatedApp() {
     );
   }
 
-  if (
+  const passwordSetupPending =
     auth.user
-      .passwordSetupPending === true
-  ) {
-    return (
-      <main className="auth-shell">
-        <section className="auth-card">
-          <div className="alert alert-error auth-alert">
-            Używasz początkowego konta admin/admin. Zanim przejdziesz dalej, zmień hasło na własne, mające co najmniej 10 znaków.
-          </div>
-          <AccountSecurityPanel
-            user={auth.user}
-            onAuthUpdated={(value) => {
-              setAuth(value);
-              setLastUser(
-                value.user
-              );
-              setNow(Date.now());
-            }}
-          />
-        </section>
-      </main>
-    );
-  }
+      .passwordSetupPending === true;
 
   return (
-    <>
+    <AuthenticatedShell
+      passwordSetupPending={
+        passwordSetupPending
+      }
+    >
+      {passwordSetupPending && (
+        <div
+          className="password-setup-banner"
+          data-lex-banner="true"
+          role="alert"
+        >
+          <span>
+            Używasz początkowego konta admin/admin. Możesz pracować, ale zmień hasło na własne, mające co najmniej 10 znaków.
+          </span>
+          <button
+            type="button"
+            onClick={() =>
+              setShowSecurity(true)
+            }
+          >
+            Zmień hasło
+          </button>
+        </div>
+      )}
+
       <div className="auth-toolbar">
         <div>
           <strong>
@@ -704,6 +711,108 @@ export default function AuthenticatedApp() {
         }
         user={auth.user}
       />
-    </>
+    </AuthenticatedShell>
+  );
+}
+
+/**
+ * The toolbar, the maintenance panel and the idle warning are all
+ * position: fixed against the top-right corner, so they stacked on top of one
+ * another and hid each other's content. Measure the banner and the toolbar and
+ * publish their geometry, so every fixed overlay can line up below whatever is
+ * actually rendered instead of guessing a constant.
+ */
+function AuthenticatedShell(
+  props: {
+    passwordSetupPending: boolean;
+    children: ReactNode;
+  }
+): ReactElement {
+  const rootRef =
+    useRef<HTMLDivElement | null>(
+      null
+    );
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return;
+    }
+
+    const style =
+      document.documentElement
+        .style;
+
+    const measure = (): void => {
+      const banner =
+        root.querySelector<HTMLElement>(
+          "[data-lex-banner='true']"
+        );
+      const toolbar =
+        root.querySelector<HTMLElement>(
+          ".auth-toolbar"
+        );
+      const bannerHeight =
+        banner
+          ? banner
+              .getBoundingClientRect()
+              .height
+          : 0;
+      const toolbarBottom =
+        toolbar
+          ? toolbar
+              .getBoundingClientRect()
+              .bottom
+          : bannerHeight + 14;
+
+      style.setProperty(
+        "--lex-top-inset",
+        `${Math.round(bannerHeight)}px`
+      );
+      style.setProperty(
+        "--lex-overlay-top",
+        `${Math.round(toolbarBottom) + 12}px`
+      );
+    };
+
+    measure();
+
+    const observer =
+      typeof ResizeObserver ===
+        "undefined"
+        ? null
+        : new ResizeObserver(measure);
+    if (observer) {
+      observer.observe(root);
+    }
+    window.addEventListener(
+      "resize",
+      measure
+    );
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener(
+        "resize",
+        measure
+      );
+      style.removeProperty(
+        "--lex-top-inset"
+      );
+      style.removeProperty(
+        "--lex-overlay-top"
+      );
+    };
+  }, [
+    props.passwordSetupPending
+  ]);
+
+  return (
+    <div
+      ref={rootRef}
+      className="authenticated-shell"
+    >
+      {props.children}
+    </div>
   );
 }

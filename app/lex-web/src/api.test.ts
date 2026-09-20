@@ -1337,4 +1337,78 @@ describe("local API client", () => {
       mode: "LAIK"
     })).rejects.toThrow("PROVIDER_EXECUTION_FAILED");
   });
+
+  it("forwards the typed reauthorization password on the desktop shell", async () => {
+    const previousWindow =
+      Object.getOwnPropertyDescriptor(
+        globalThis,
+        "window"
+      );
+    Object.defineProperty(
+      globalThis,
+      "window",
+      {
+        value: {
+          __TAURI_INTERNALS__: {}
+        },
+        configurable: true
+      }
+    );
+
+    const fetchMock =
+      vi.spyOn(
+        globalThis,
+        "fetch"
+      ).mockResolvedValue(
+        new Response(
+          JSON.stringify({
+            grant: {
+              grantId:
+                "grant_0123456789abcdef0123456789abcdef"
+            }
+          }),
+          { status: 200 }
+        )
+      );
+
+    try {
+      await reauthorizeDeanonymization(
+        "intent_0123456789abcdef0123456789abcdef",
+        "Bardzo dlugie haslo autora 2026"
+      );
+
+      const body = JSON.parse(
+        String(
+          fetchMock.mock.calls[0]
+            ?.[1]?.body
+        )
+      ) as {
+        password?: string;
+      };
+
+      // The managed bootstrap secret no longer exists once the runtime seeds
+      // the first admin account, so a sentinel would reach the runtime
+      // literally and fail reauthorization.
+      expect(body.password).toBe(
+        "Bardzo dlugie haslo autora 2026"
+      );
+      expect(body.password).not.toBe(
+        "__LEX_NATIVE_REAUTH__"
+      );
+    } finally {
+      if (previousWindow) {
+        Object.defineProperty(
+          globalThis,
+          "window",
+          previousWindow
+        );
+      } else {
+        delete (
+          globalThis as {
+            window?: unknown;
+          }
+        ).window;
+      }
+    }
+  });
 });

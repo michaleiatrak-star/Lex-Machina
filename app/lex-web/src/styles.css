@@ -1000,7 +1000,7 @@ textarea:focus {
   position: fixed;
   z-index: 50;
   right: 18px;
-  top: 14px;
+  top: calc(14px + var(--lex-top-inset, 0px));
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1040,7 +1040,7 @@ textarea:focus {
   position: fixed;
   z-index: 49;
   left: 50%;
-  top: 16px;
+  top: calc(16px + var(--lex-top-inset, 0px));
   transform: translateX(-50%);
   max-width: min(680px, calc(100vw - 420px));
   padding: 10px 14px;
@@ -1833,4 +1833,37 @@ textarea:focus {
   .document-drop-file-list li {
     grid-template-columns: 1fr;
   }
+}
+
+/* G39L first-run admin warning banner (work is allowed, warning stays) */
+.password-setup-banner {
+  position: sticky;
+  z-index: 60;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid #dab5b0;
+  background: #fff1ef;
+  color: #7a3129;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.password-setup-banner button {
+  padding: 6px 12px;
+  border: 1px solid #c9877d;
+  border-radius: 9px;
+  background: #fff;
+  color: #7a3129;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.authenticated-shell {
+  display: contents;
 }

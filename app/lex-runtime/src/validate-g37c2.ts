@@ -54,12 +54,19 @@ const checks = {
     trust.includes(
       "Entry::new("
     ),
-  restoreOnDesktopStartup:
+  restoreOnEveryAuthenticatedSession:
     desktopLib.includes(
       ".ensure_managed_identity()"
     ) &&
     trust.includes(
       "self.restore_provider_credentials()?;"
+    ) &&
+    trust.includes(
+      "let _ = self.restore_provider_credentials();"
+    ),
+  restoreDoesNotDropTheStoredCredential:
+    trust.includes(
+      '"persistence": "OS_KEYRING"'
     ),
   restoreIntoMemoryOnlyRuntime:
     trust.includes(

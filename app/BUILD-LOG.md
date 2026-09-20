@@ -1289,3 +1289,73 @@ Validation evidence:
 Next:
 - G34G Tauri production trust boundary;
 - G33A-G33D installer.
+
+### 2026-09-20 — Build 0045 (0.1.5 / G39L)
+
+Audit of the 0.1.4 G39K line found four defects that CI did not catch, because
+the affected gates assert on source strings instead of behaviour.
+
+Fixed:
+- **G39L1** first run no longer blocks the application. `admin` / `admin` stays
+  as the seeded credential, the account keeps `passwordSetupPending`, and the
+  user can work immediately. A persistent, non-dismissible banner sits at the
+  top of the window until the password is replaced (min. 10 characters).
+- **G39L2** `reauthorizeDeanonymization` forwarded the literal
+  `__LEX_NATIVE_REAUTH__` on the desktop shell. The managed bootstrap secret no
+  longer exists once the runtime seeds the first admin, so the substitution in
+  the Tauri bridge never ran and controlled deanonymization always failed with
+  `INVALID_CREDENTIALS`. The typed password is now forwarded verbatim.
+- **G39L3** provider API keys stored in the OS keyring were never restored:
+  the only caller of `restore_provider_credentials` sat behind the
+  managed-identity early return. Restore now runs after every successful
+  session, and carries `persistence: OS_KEYRING` so it re-persists the entry
+  instead of deleting it.
+- **G39L4** the offline self-extractor read its `LEXOFF01` trailer from EOF and
+  required an exact file length, so signing the wrapper (Authenticode appends
+  the certificate table) broke it. The trailer is now located by a bounded
+  backward scan.
+- **G39L5** `sign-windows-artifact.ps1` used `"\\s+"` in a double-quoted string,
+  so thumbprint whitespace was never stripped and a thumbprint copied from the
+  Windows certificate dialog was rejected as malformed.
+
+Validation evidence (local, before release CI):
+- runtime typecheck PASS, 121 files / 545 tests PASS on Node 24.21.0;
+- web 3 files / 27 tests PASS including the new desktop reauth regression;
+- web production build + G14 browser bundle safety PASS;
+- Rust `cargo test` 12/12 PASS including the new keyring restore regression,
+  `cargo check` clean of new warnings;
+- G33C / G37B / G37C2 / Phase 13 offline validators PASS;
+- installer PowerShell syntax, NSIS PREINSTALL, Polish.nsh, G39F update policy
+  and online bootstrap contract self-tests PASS.
+
+- **G39L6** every frame of the pinned brand icon was an Indexed-colour PNG,
+  which the `ico` crate used by `tauri-codegen` cannot decode, so
+  `generate_context!` panicked and no desktop build could compile on Windows.
+  This blocker was inherited: `release/0.1.4-g39k-rc3-hotfix2` failed the same
+  job and never published. Frames re-encoded from palette to RGBA losslessly —
+  same dimensions, same pixels — and the icon pin updated to
+  `055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76` (51440 B) in build.rs,
+  materialize-brand-icon.ps1, windows-branding-selftest.ps1 and the release
+  workflow. Reproduced against `ico 0.5.0` before and after the fix: the old
+  icon fails all 7 entries with "Unsupported PNG color type: Indexed", the new
+  one decodes all 7.
+
+- **G39L7** the auth toolbar, the maintenance panel and the idle warning were
+  each independently `position: fixed` against the top-right corner and hid one
+  another; the maintenance panel disappeared behind the account toolbar. The
+  shell now measures the banner and the toolbar and publishes
+  `--lex-top-inset` / `--lex-overlay-top`, so every fixed overlay stacks under
+  whatever is actually rendered. Verified in a real browser against the running
+  runtime: no overlap in either the banner or the no-banner state.
+- **G39L8** an unclassified session-execution error returned
+  `SESSION_EXECUTION_FAILED` with nothing logged anywhere, so there was no way
+  to diagnose it. The runtime now logs the error name and message for that path
+  only (no request body, no stack), and the fail-closed chat privacy gate is
+  reported as `503 CHAT_PRIVACY_GATE_FAILED` with an actionable message in the
+  UI instead of an anonymous 500. Found by running the app end to end.
+
+Not fixed in this line, tracked in ROADMAP:
+- Python packages pinned by version only, no `--require-hashes`;
+- no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;
+- dead `$LASTEXITCODE` guards after `& script.ps1`;
+- string-matching validators that cannot catch behavioural regressions.
