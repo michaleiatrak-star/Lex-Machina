@@ -4,11 +4,12 @@ use std::{
     path::PathBuf,
 };
 
-use ico::{IconDir, IconDirEntry, ResourceType};
+use png::{BitDepth, ColorType, Decoder, Encoder, Transformations};
 
 const EXPECTED_SOURCE_ICON_BYTES: usize = 20_469;
-const EXPECTED_ICON_COUNT: u16 = 7;
+const EXPECTED_ICON_COUNT: usize = 7;
 const EXPECTED_ICON_SIZES: [u32; 7] = [16, 24, 32, 48, 64, 128, 256];
+const PNG_SIGNATURE: [u8; 8] = [137, 80, 78, 71, 13, 10, 26, 10];
 
 const ICON_PARTS: [&str; 7] = [
     include_str!("icons/generated-branding/icon.b64.part01"),
@@ -64,57 +65,158 @@ fn decode_base64(input: &str) -> Vec<u8> {
     output
 }
 
+fn read_u16(data: &[u8], offset: usize) -> u16 {
+    u16::from_le_bytes([data[offset], data[offset + 1]])
+}
+
+fn read_u32(data: &[u8], offset: usize) -> u32 {
+    u32::from_le_bytes([
+        data[offset],
+        data[offset + 1],
+        data[offset + 2],
+        data[offset + 3],
+    ])
+}
+
+fn encode_truecolor_png(frame: &[u8], expected_size: u32) -> Vec<u8> {
+    assert!(
+        frame.starts_with(&PNG_SIGNATURE),
+        "pinned brand icon entry is not PNG"
+    );
+
+    let mut decoder = Decoder::new(Cursor::new(frame));
+    decoder.set_transformations(Transformations::EXPAND | Transformations::STRIP_16);
+    let mut reader = decoder
+        .read_info()
+        .expect("failed to initialize pinned brand PNG decoder");
+
+    let mut decoded = vec![0_u8; reader.output_buffer_size()];
+    let info = reader
+        .next_frame(&mut decoded)
+        .expect("failed to expand indexed brand PNG to truecolor");
+    decoded.truncate(info.buffer_size());
+
+    assert_eq!(
+        (info.width, info.height),
+        (expected_size, expected_size),
+        "decoded brand PNG size does not match ICO directory"
+    );
+    assert_eq!(
+        info.bit_depth,
+        BitDepth::Eight,
+        "brand PNG must decode to 8-bit channels"
+    );
+    assert!(
+        matches!(
+            info.color_type,
+            ColorType::Rgb | ColorType::Rgba | ColorType::Grayscale | ColorType::GrayscaleAlpha
+        ),
+        "brand PNG did not expand to a Tauri-compatible color type"
+    );
+
+    let mut output = Vec::new();
+    {
+        let mut encoder = Encoder::new(&mut output, info.width, info.height);
+        encoder.set_depth(BitDepth::Eight);
+        encoder.set_color(info.color_type);
+        let mut writer = encoder
+            .write_header()
+            .expect("failed to initialize truecolor brand PNG encoder");
+        writer
+            .write_image_data(&decoded)
+            .expect("failed to encode truecolor brand PNG");
+    }
+    output
+}
+
 fn materialize_windows_icon() {
     let mut encoded = String::new();
     for part in ICON_PARTS {
         encoded.push_str(part.trim());
     }
 
-    let source_bytes = decode_base64(&encoded);
+    let source = decode_base64(&encoded);
     assert_eq!(
-        source_bytes.len(),
+        source.len(),
         EXPECTED_SOURCE_ICON_BYTES,
         "pinned Lex Machina brand icon source size changed unexpectedly"
     );
-
-    let source_dir = IconDir::read(Cursor::new(source_bytes))
-        .expect("failed to decode pinned Lex Machina brand ICO");
-    assert_eq!(
-        source_dir.resource_type(),
-        ResourceType::Icon,
-        "pinned Lex Machina brand source is not an icon"
+    assert!(
+        source.len() >= 6
+            && read_u16(&source, 0) == 0
+            && read_u16(&source, 2) == 1,
+        "pinned Lex Machina brand source has an invalid ICO header"
     );
+
+    let count = read_u16(&source, 4) as usize;
     assert_eq!(
-        source_dir.entries().len(),
-        EXPECTED_ICON_COUNT as usize,
+        count,
+        EXPECTED_ICON_COUNT,
         "pinned Lex Machina brand icon image count changed unexpectedly"
     );
 
-    let mut output_dir = IconDir::new(ResourceType::Icon);
-    for (index, entry) in source_dir.entries().iter().enumerate() {
+    let mut frames: Vec<(u32, Vec<u8>)> = Vec::with_capacity(count);
+    for index in 0..count {
+        let directory_offset = 6 + index * 16;
+        let width_byte = source[directory_offset];
+        let height_byte = source[directory_offset + 1];
+        let width = if width_byte == 0 { 256 } else { width_byte as u32 };
+        let height = if height_byte == 0 { 256 } else { height_byte as u32 };
         let expected_size = EXPECTED_ICON_SIZES[index];
+
         assert_eq!(
-            (entry.width(), entry.height()),
+            (width, height),
             (expected_size, expected_size),
             "pinned Lex Machina brand icon size order changed unexpectedly"
         );
 
-        let image = entry
-            .decode()
-            .expect("failed to decode indexed brand icon entry to RGBA");
-        let encoded_entry = IconDirEntry::encode_as_png(&image)
-            .expect("failed to encode RGBA brand icon entry for Tauri");
-        output_dir.add_entry(encoded_entry);
+        let frame_len = read_u32(&source, directory_offset + 8) as usize;
+        let frame_offset = read_u32(&source, directory_offset + 12) as usize;
+        let frame_end = frame_offset
+            .checked_add(frame_len)
+            .expect("brand icon frame bounds overflow");
+        assert!(
+            frame_offset >= 6 + count * 16 && frame_end <= source.len(),
+            "pinned brand icon frame is out of bounds"
+        );
+
+        frames.push((
+            expected_size,
+            encode_truecolor_png(&source[frame_offset..frame_end], expected_size),
+        ));
+    }
+
+    let directory_bytes = 6 + frames.len() * 16;
+    let mut offset = directory_bytes as u32;
+    let mut output = Vec::new();
+    output.extend_from_slice(&0_u16.to_le_bytes());
+    output.extend_from_slice(&1_u16.to_le_bytes());
+    output.extend_from_slice(&(frames.len() as u16).to_le_bytes());
+
+    for (size, frame) in &frames {
+        let dimension = if *size == 256 { 0 } else { *size as u8 };
+        output.push(dimension);
+        output.push(dimension);
+        output.push(0);
+        output.push(0);
+        output.extend_from_slice(&1_u16.to_le_bytes());
+        output.extend_from_slice(&32_u16.to_le_bytes());
+        output.extend_from_slice(&(frame.len() as u32).to_le_bytes());
+        output.extend_from_slice(&offset.to_le_bytes());
+        offset = offset
+            .checked_add(frame.len() as u32)
+            .expect("brand icon output size overflow");
+    }
+
+    for (_, frame) in frames {
+        output.extend_from_slice(&frame);
     }
 
     let icon_dir = PathBuf::from("icons");
     let icon_path = icon_dir.join("icon.ico");
     fs::create_dir_all(&icon_dir).expect("failed to create Tauri icon directory");
-    let file = fs::File::create(&icon_path)
-        .expect("failed to create Tauri-compatible Lex Machina icon");
-    output_dir
-        .write(file)
-        .expect("failed to write Tauri-compatible Lex Machina icon");
+    fs::write(&icon_path, output)
+        .expect("failed to write Tauri-compatible Lex Machina brand icon");
 }
 
 fn main() {
