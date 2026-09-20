@@ -492,7 +492,7 @@ describe(
   "G39I contract-analysis HTTP integration",
   () => {
     it(
-      "requires explicit mode initialization before provider execution",
+      "auto-initializes the inferred contract mode and grants only the first checkpoint",
       async () => {
         const current =
           fixture();
@@ -502,30 +502,46 @@ describe(
         } =
           await bootstrapCase(
             current,
-            "missing"
+            "auto-init"
           );
 
-        await request(
-          current.app
-        )
-          .post(
-            "/api/sessions/execute"
+        const response =
+          await request(
+            current.app
           )
-          .set(
-            "Authorization",
-            authorization
-          )
-          .send(
-            sessionBody(caseId)
-          )
-          .expect(409, {
-            error:
-              "CONTRACT_STATE_REQUIRED"
-          });
+            .post(
+              "/api/sessions/execute"
+            )
+            .set(
+              "Authorization",
+              authorization
+            )
+            .send(
+              sessionBody(caseId)
+            )
+            .expect(200);
 
         expect(
           current.execute
-        ).not.toHaveBeenCalled();
+        ).toHaveBeenCalledTimes(1);
+        expect(
+          current.execute.mock.calls[0]?.[0]
+            .contractWorkflowContext
+        ).toEqual({
+          mode: "DRAFT",
+          stage: "INTAKE",
+          checkpoint: "AU-F0"
+        });
+        expect(
+          response.body
+            .contractWorkflow
+            .nextCheckpoint
+        ).toBe("AU-GAP");
+        expect(
+          response.body
+            .contractWorkflow
+            .closedCheckpoints
+        ).toEqual(["AU-F0"]);
 
         current.auth.close();
       }
