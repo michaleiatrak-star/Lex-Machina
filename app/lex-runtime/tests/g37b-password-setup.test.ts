@@ -127,7 +127,7 @@ describe("G37B managed first-admin password setup", () => {
           "lex-g37b-default-admin-"
         )
       );
-    const service =
+    let service =
       new LocalAuthService(
         new LocalAuthStore({
           rootDir: root
@@ -186,6 +186,23 @@ describe("G37B managed first-admin password setup", () => {
         changed.user
           .passwordSetupPending
       ).toBe(false);
+
+      service.close();
+      service =
+        new LocalAuthService(
+          new LocalAuthStore({
+            rootDir: root
+          }),
+          {
+            kdf: {
+              memoryKiB: 1024,
+              iterations: 1,
+              parallelism: 1,
+              keyLength: 32,
+              version: 1
+            }
+          }
+        );
 
       await expect(
         service.login({
