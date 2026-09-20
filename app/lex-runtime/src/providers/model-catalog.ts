@@ -190,9 +190,7 @@ export class DynamicModelCatalog {
       .listModels()
       .filter(
         (model) =>
-          model.installed &&
-          model.configuredContextWindow !==
-            undefined
+          model.installed
       )
       .map((model) => ({
         provider: "openai" as const,
