@@ -2264,10 +2264,21 @@ export default function MatterChatApp({
                 Model
                 <select
                   value={model}
-                  disabled={models.length === 0}
-                  onChange={(event) => setModel(event.target.value)}
+                  disabled={
+                    modelCatalogLoading ||
+                    models.length === 0
+                  }
+                  onChange={(event) =>
+                    setModel(
+                      event.target.value
+                    )
+                  }
                 >
-                  {models.length === 0 ? (
+                  {modelCatalogLoading ? (
+                    <option value="">
+                      Odświeżam listę modeli…
+                    </option>
+                  ) : models.length === 0 ? (
                     <option value="">
                       {provider === "local"
                         ? "Brak zainstalowanych modeli lokalnych"
@@ -2275,12 +2286,41 @@ export default function MatterChatApp({
                     </option>
                   ) : null}
                   {models.map((item) => (
-                    <option key={item.id} value={item.id} disabled={!item.selectable}>
-                      {item.displayName}{!item.selectable ? " · nieobsługiwany" : ""}
+                    <option
+                      key={item.id}
+                      value={item.id}
+                      disabled={!item.selectable}
+                    >
+                      {item.displayName}
+                      {!item.selectable
+                        ? " · nieobsługiwany"
+                        : ""}
                     </option>
                   ))}
                 </select>
               </label>
+              {provider === "local" ? (
+                <div className="chat-form-row compact">
+                  <small>
+                    Zainstalowane modele lokalne: {models.length}
+                  </small>
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    disabled={modelCatalogLoading}
+                    onClick={() =>
+                      setLocalModelsRefreshToken(
+                        (value) =>
+                          value + 1
+                      )
+                    }
+                  >
+                    {modelCatalogLoading
+                      ? "Odświeżanie…"
+                      : "Odśwież listę"}
+                  </button>
+                </div>
+              ) : null}
               {modelError ? (
                 <p className="chat-inline-error">
                   {modelError === "PROVIDER_NOT_CONFIGURED"
