@@ -72,7 +72,7 @@ jobs:
 
       - name: Chat model and deterministic skill selection contracts
         working-directory: app/lex-web
-        run: npx vitest run src/MatterChatApp.primary-model.test.ts src/chat-routing.test.ts
+        run: npx vitest run src/MatterChatApp.primary-model.test.ts src/MatterChatApp.workflow-selector.test.ts src/chat-routing.test.ts
 
       - name: Local primary credential policy wired into both chat surfaces
         shell: pwsh
