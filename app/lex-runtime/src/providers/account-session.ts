@@ -248,6 +248,96 @@ function normalizeCliFailure(
   );
 }
 
+function openAiChatGptAuthenticated(
+  result: RunResult
+): boolean {
+  if (result.code !== 0) {
+    return false;
+  }
+  const status =
+    (result.stdout + "\n" + result.stderr)
+      .toLowerCase();
+  return status.includes(
+    "logged in using chatgpt"
+  ) || status.includes(
+    "using chatgpt"
+  );
+}
+
+function claudeSubscriptionAuthenticated(
+  result: RunResult
+): boolean {
+  if (result.code !== 0) {
+    return false;
+  }
+  try {
+    const payload =
+      JSON.parse(
+        result.stdout
+      ) as {
+        loggedIn?: unknown;
+        authMethod?: unknown;
+        apiProvider?: unknown;
+      };
+    return (
+      payload.loggedIn === true &&
+      payload.apiProvider ===
+        "firstParty" &&
+      (
+        payload.authMethod ===
+          "claude.ai" ||
+        payload.authMethod ===
+          "oauth_token"
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function assertSubscriptionAccount(
+  provider: "openai" | "anthropic",
+  abortSignal?: AbortSignal
+): Promise<void> {
+  const result =
+    provider === "openai"
+      ? await runCli(
+          provider,
+          [
+            "login",
+            "status"
+          ],
+          undefined,
+          STATUS_TIMEOUT_MS,
+          undefined,
+          abortSignal
+        )
+      : await runCli(
+          provider,
+          [
+            "auth",
+            "status"
+          ],
+          undefined,
+          STATUS_TIMEOUT_MS,
+          undefined,
+          abortSignal
+        );
+  const authenticated =
+    provider === "openai"
+      ? openAiChatGptAuthenticated(
+          result
+        )
+      : claudeSubscriptionAuthenticated(
+          result
+        );
+  if (!authenticated) {
+    throw new Error(
+      `ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH:${provider}`
+    );
+  }
+}
+
 function runGrokAcp(
   prompt: string | null,
   cwd: string,
@@ -939,11 +1029,23 @@ export class AccountSessionManager {
       };
     }
 
+    const authenticated =
+      provider === "openai"
+        ? openAiChatGptAuthenticated(
+            result
+          )
+        : provider ===
+            "anthropic"
+          ? claudeSubscriptionAuthenticated(
+              result
+            )
+          : result.code === 0;
+
     return {
       provider,
       command,
       installed: true,
-      authenticated: result.code === 0,
+      authenticated,
       installHint: installHint(provider)
     };
   }
@@ -986,6 +1088,16 @@ export class AccountSessionManager {
     );
     try {
       let result: RunResult;
+      if (
+        provider === "openai" ||
+        provider === "anthropic"
+      ) {
+        await assertSubscriptionAccount(
+          provider,
+          abortSignal
+        );
+      }
+
       if (provider === "openai") {
         const outputPath =
           path.join(workDir, "last-message.txt");
