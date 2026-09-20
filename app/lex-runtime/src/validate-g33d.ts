@@ -54,7 +54,10 @@ const checks = {
   missingOnlyAndHashChecked:
     bootstrap.includes("Test-CommandVersion") &&
     bootstrap.includes("verify-python-package-set.py") &&
-    bootstrap.includes("& $pythonExe $packageVerifier $manifestPath") &&
+    bootstrap.includes("Invoke-RedirectedNativeProcess") &&
+    bootstrap.includes("$verifierArguments") &&
+    bootstrap.includes("-RedirectStandardOutput $stdoutPath") &&
+    bootstrap.includes("-RedirectStandardError $stderrPath") &&
     packageVerifier.includes("importlib.metadata.version") &&
     packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("Using verified cache") &&
