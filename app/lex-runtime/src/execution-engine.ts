@@ -97,7 +97,8 @@ export class LexExecutionError extends Error {
 
 function combineSkillPrompt(
   registry: LexSkillRegistry,
-  skillNames: string[]
+  skillNames: string[],
+  workflowExecutionSkill: string | null
 ): string {
   return [...new Set(skillNames)]
     .map((name) => {
@@ -109,7 +110,12 @@ function combineSkillPrompt(
       }
       const semantic =
         gateISemanticPrompt(
-          name
+          name,
+          {
+            specializedWorkflowActive:
+              name ===
+              workflowExecutionSkill
+          }
         );
       return semantic
         ? semantic
