@@ -58,6 +58,10 @@ jobs:
         working-directory: app/lex-runtime
         run: npm run validate:g33d
 
+      - name: Embedded Python hidden-stdio smoke test
+        shell: pwsh
+        run: ./app/installer/windows-embedded-python-smoke.ps1
+
       - name: Install web build dependencies
         working-directory: app/lex-web
         run: npm install --no-audit --no-fund
