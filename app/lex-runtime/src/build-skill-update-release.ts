@@ -54,7 +54,7 @@ if (
   !keyId
 ) {
   fail(
-    "USAGE: build-skill-update-release <corpusRoot> <bundleZip> <outputDir> <releaseVersion> <minAppVersion> <maxAppVersion|-> <keyId>"
+    "USAGE: build-skill-update-release <corpusRoot> <bundleZip> <outputDir> <releaseVersion> <minAppVersion> <maxAppVersion|-> <keyId|->"
   );
 }
 if (
@@ -68,7 +68,12 @@ if (
 ) {
   fail("SKILL_RELEASE_VERSION_INVALID");
 }
-if (!SAFE_KEY_ID.test(keyId)) {
+const unsigned =
+  keyId === "-";
+if (
+  !unsigned &&
+  !SAFE_KEY_ID.test(keyId)
+) {
   fail("SKILL_RELEASE_KEY_ID_INVALID");
 }
 
@@ -144,34 +149,43 @@ const indexBytes = Buffer.from(
   "utf8"
 );
 
-const privateKeyPem =
-  process.env.LEX_SKILL_UPDATE_PRIVATE_KEY_PEM;
-if (!privateKeyPem?.trim()) {
-  fail("SKILL_RELEASE_PRIVATE_KEY_MISSING");
-}
-const privateKey = createPrivateKey(privateKeyPem);
-if (privateKey.asymmetricKeyType !== "ed25519") {
-  fail("SKILL_RELEASE_PRIVATE_KEY_TYPE_INVALID");
-}
+let signatureEnvelope:
+  Buffer | null = null;
+if (!unsigned) {
+  const privateKeyPem =
+    process.env.LEX_SKILL_UPDATE_PRIVATE_KEY_PEM;
+  if (!privateKeyPem?.trim()) {
+    fail("SKILL_RELEASE_PRIVATE_KEY_MISSING");
+  }
+  const privateKey =
+    createPrivateKey(privateKeyPem);
+  if (
+    privateKey.asymmetricKeyType !==
+      "ed25519"
+  ) {
+    fail("SKILL_RELEASE_PRIVATE_KEY_TYPE_INVALID");
+  }
 
-const signature = sign(
-  null,
-  indexBytes,
-  privateKey
-);
-const signatureEnvelope = Buffer.from(
-  `${JSON.stringify(
-    {
-      schemaVersion: 1,
-      algorithm: "Ed25519",
-      keyId,
-      signature: signature.toString("base64")
-    },
+  const signature = sign(
     null,
-    2
-  )}\n`,
-  "utf8"
-);
+    indexBytes,
+    privateKey
+  );
+  signatureEnvelope = Buffer.from(
+    `${JSON.stringify(
+      {
+        schemaVersion: 1,
+        algorithm: "Ed25519",
+        keyId,
+        signature:
+          signature.toString("base64")
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+}
 
 const indexPath = path.join(
   outputDir,
@@ -182,7 +196,16 @@ const signaturePath = path.join(
   "LexMachina-Skills-Index.sig"
 );
 atomicWrite(indexPath, indexBytes);
-atomicWrite(signaturePath, signatureEnvelope);
+if (signatureEnvelope) {
+  atomicWrite(
+    signaturePath,
+    signatureEnvelope
+  );
+} else if (
+  fs.existsSync(signaturePath)
+) {
+  fs.rmSync(signaturePath);
+}
 
 console.log(
   JSON.stringify(
@@ -191,13 +214,23 @@ console.log(
       releaseVersion,
       skillCount: skills.length,
       bundle: index.bundle,
-      keyId,
+      signatureMode:
+        unsigned
+          ? "UNSIGNED_OFFICIAL_SOURCE"
+          : "ED25519",
+      keyId:
+        unsigned
+          ? null
+          : keyId,
       indexSha256: createHash("sha256")
         .update(indexBytes)
         .digest("hex"),
       outputs: {
         index: indexPath,
-        signature: signaturePath
+        signature:
+          signatureEnvelope
+            ? signaturePath
+            : null
       }
     },
     null,
