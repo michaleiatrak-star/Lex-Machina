@@ -987,11 +987,17 @@ export default function MatterChatApp({
     });
   }
 
-  function toggleCaseTypeSkill(name: string): void {
-    setCaseTypeSkills((current) =>
-      current.includes(name)
-        ? current.filter((item) => item !== name)
-        : [...current, name].slice(-8)
+  function selectDeterministicAction(
+    actionId:
+      DeterministicActionId | ""
+  ): void {
+    setDeterministicAction(
+      actionId
+    );
+    setCaseTypeSkills(
+      skillsForDeterministicAction(
+        actionId
+      )
     );
   }
 
@@ -1164,7 +1170,15 @@ export default function MatterChatApp({
     const userMessage: CaseChatMessage = {
       id: messageId(),
       role: "user",
-      content: plain.trim()
+      content: plain.trim(),
+      ...(conversationIsNew
+        ? {
+            meta:
+              deterministicActionMeta(
+                deterministicAction
+              )
+          }
+        : {})
     };
     setMessages((current) => [...current, userMessage]);
     setQuery("");
