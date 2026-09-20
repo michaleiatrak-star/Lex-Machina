@@ -1,0 +1,136 @@
+name: Lex Machina Skill Pack Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Skill pack semver (for example 0.1.6)"
+        required: true
+        type: string
+      min_app_version:
+        description: "Minimum compatible Lex Machina app version"
+        required: true
+        default: "0.1.5"
+        type: string
+      max_app_version:
+        description: "Maximum compatible app version or - for no upper bound"
+        required: true
+        default: "-"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lex-skill-pack-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Validate and publish official unsigned skill pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact source commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Install runtime release tooling
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+
+      - name: Validate inputs and package instruction layer
+        shell: bash
+        env:
+          SKILL_VERSION: ${{ inputs.version }}
+          MIN_APP_VERSION: ${{ inputs.min_app_version }}
+          MAX_APP_VERSION: ${{ inputs.max_app_version }}
+        run: |
+          set -euo pipefail
+          semver='^[0-9]+\.[0-9]+\.[0-9]+$'
+          [[ "$SKILL_VERSION" =~ $semver ]] || {
+            echo "SKILL_PACK_VERSION_INVALID" >&2
+            exit 1
+          }
+          [[ "$MIN_APP_VERSION" =~ $semver ]] || {
+            echo "SKILL_PACK_MIN_APP_VERSION_INVALID" >&2
+            exit 1
+          }
+          [[ "$MAX_APP_VERSION" == "-" || "$MAX_APP_VERSION" =~ $semver ]] || {
+            echo "SKILL_PACK_MAX_APP_VERSION_INVALID" >&2
+            exit 1
+          }
+
+          mkdir -p release-skill
+          bundle="LexMachina-Skills-${SKILL_VERSION}.zip"
+          git archive \
+            --format=zip \
+            --output="release-skill/${bundle}" \
+            "HEAD:Wersja rozwojowa rozpakowana"
+
+          (
+            cd app/lex-runtime
+            npm run build:skill-update-release -- \
+              "../../Wersja rozwojowa rozpakowana" \
+              "../../release-skill/${bundle}" \
+              "../../release-skill" \
+              "$SKILL_VERSION" \
+              "$MIN_APP_VERSION" \
+              "$MAX_APP_VERSION" \
+              "-"
+          )
+
+          test -f release-skill/LexMachina-Skills-Index.json
+          test ! -f release-skill/LexMachina-Skills-Index.sig
+          sha256sum "release-skill/${bundle}" release-skill/LexMachina-Skills-Index.json
+
+      - name: Publish immutable official skill-pack release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SKILL_VERSION: ${{ inputs.version }}
+          MIN_APP_VERSION: ${{ inputs.min_app_version }}
+          MAX_APP_VERSION: ${{ inputs.max_app_version }}
+        run: |
+          set -euo pipefail
+          tag="skill-pack-v${SKILL_VERSION}"
+          bundle="release-skill/LexMachina-Skills-${SKILL_VERSION}.zip"
+          index="release-skill/LexMachina-Skills-Index.json"
+
+          cat > release-skill/RELEASE-NOTES.md <<EOF
+          ## Lex Machina Skills ${SKILL_VERSION}
+
+          Instruction-layer update only. This release does not update the Lex Machina executable.
+
+          Trust policy:
+          - official source: ${GITHUB_REPOSITORY} GitHub Releases;
+          - Ed25519 signature: optional for skill packs;
+          - GitHub release-asset SHA-256 digest: mandatory;
+          - index schema/version compatibility, bundle SHA-256/size and full structural validation: mandatory;
+          - activation remains atomic with rollback.
+
+          Compatible application range: ${MIN_APP_VERSION} .. ${MAX_APP_VERSION}
+          Source commit: ${GITHUB_SHA}
+          EOF
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" --jq '.object.sha')"
+            [[ "$tag_sha" == "$GITHUB_SHA" ]] || {
+              echo "IMMUTABLE_SKILL_PACK_TAG_MISMATCH tag=$tag_sha source=$GITHUB_SHA" >&2
+              exit 1
+            }
+            gh release edit "$tag" \
+              --title "Lex Machina Skills ${SKILL_VERSION}" \
+              --notes-file release-skill/RELEASE-NOTES.md
+          else
+            gh release create "$tag" \
+              --target "$GITHUB_SHA" \
+              --title "Lex Machina Skills ${SKILL_VERSION}" \
+              --notes-file release-skill/RELEASE-NOTES.md
+          fi
+
+          gh release upload "$tag" --clobber "$bundle" "$index"
+          gh release view "$tag" --json url,tagName,name,publishedAt,targetCommitish
