@@ -473,6 +473,41 @@ export type ModelsResponse = {
   models: ModelDescriptor[];
 };
 
+export type LocalModelDescriptor = {
+  provider: "local";
+  id: string;
+  displayName: string;
+  selectable: true;
+  contextWindow: number;
+  nativeContextWindow: number;
+  minimumContextWindow: number;
+  maximumContextWindow: number;
+  configuredContextWindow?: number;
+  contextMode:
+    | "NATIVE_OR_REDUCED"
+    | "YARN_EXTENDED";
+  quantization: string;
+  license: string;
+  source: string;
+  localOnly: true;
+  installed: boolean;
+};
+
+export type LocalModelsResponse = {
+  provider: "local";
+  models: LocalModelDescriptor[];
+  runtime: {
+    configured: boolean;
+    selectedModelId: string | null;
+    activeModelId: string | null;
+    state:
+      | "STOPPED"
+      | "PROVISIONING"
+      | "STARTING"
+      | "READY";
+  };
+};
+
 export type ProviderConfigurationStatus = {
   provider: ProviderId;
   configured: boolean;
@@ -1999,6 +2034,13 @@ export function getModels(
   provider: ProviderId
 ): Promise<ModelsResponse> {
   return json<ModelsResponse>(`/api/models/${provider}`);
+}
+
+export function getLocalModels():
+  Promise<LocalModelsResponse> {
+  return json<LocalModelsResponse>(
+    "/api/local-models"
+  );
 }
 
 export function getProcessPleadingWorkflow(
