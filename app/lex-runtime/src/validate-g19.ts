@@ -510,9 +510,9 @@ const pass =
   ) &&
 
   staleHttp.status === 200 &&
-  stale.status === "BLOCKED" &&
+  stale.status === "DRAFT_PRESENTABLE" &&
   stale.finalization === "BLOCKED" &&
-  !("answer" in stale) &&
+  typeof stale.answer === "string" &&
   staleVerification.records === 0 &&
   staleFetches.length === 0 &&
 
@@ -540,8 +540,8 @@ const pass =
   ) &&
 
   afterRepealHttp.status === 200 &&
-  afterRepeal.status === "BLOCKED" &&
-  !("answer" in afterRepeal) &&
+  afterRepeal.status === "DRAFT_PRESENTABLE" &&
+  typeof afterRepeal.answer === "string" &&
   afterRepealVerification.records === 0 &&
   afterRepealFetches.length === 0;
 
