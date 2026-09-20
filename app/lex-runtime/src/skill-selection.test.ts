@@ -399,6 +399,46 @@ describe("skill selection", () => {
       .toBe("chronologia-sprawy-v1");
   });
 
+  it("fails closed when an explicit deterministic workflow skill is unknown", () => {
+    const registry = registryWithSkills();
+
+    expect(() =>
+      resolveAdditionalSkills(
+        registry,
+        "Przygotuj analizę.",
+        "dr-02-prawo-cywilne",
+        true,
+        [],
+        {
+          mode: "DETERMINISTIC",
+          skill: "nie-istnieje-v1"
+        }
+      )
+    ).toThrow(
+      "DETERMINISTIC_WORKFLOW_SKILL_INVALID"
+    );
+  });
+
+  it("fails closed when deterministic workflow points at a non-execution skill", () => {
+    const registry = registryWithSkills();
+
+    expect(() =>
+      resolveAdditionalSkills(
+        registry,
+        "Przygotuj analizę.",
+        "dr-02-prawo-cywilne",
+        true,
+        ["terminy-procesowe"],
+        {
+          mode: "DETERMINISTIC",
+          skill: "terminy-procesowe"
+        }
+      )
+    ).toThrow(
+      "DETERMINISTIC_WORKFLOW_SKILL_INVALID"
+    );
+  });
+
   it("ignores unknown manual skill names when automatic mode is disabled", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
