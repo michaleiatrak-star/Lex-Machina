@@ -1289,3 +1289,47 @@ Validation evidence:
 Next:
 - G34G Tauri production trust boundary;
 - G33A-G33D installer.
+
+### 2026-09-20 — Build 0045 (0.1.5 / G39L)
+
+Audit of the 0.1.4 G39K line found four defects that CI did not catch, because
+the affected gates assert on source strings instead of behaviour.
+
+Fixed:
+- **G39L1** first run no longer blocks the application. `admin` / `admin` stays
+  as the seeded credential, the account keeps `passwordSetupPending`, and the
+  user can work immediately. A persistent, non-dismissible banner sits at the
+  top of the window until the password is replaced (min. 10 characters).
+- **G39L2** `reauthorizeDeanonymization` forwarded the literal
+  `__LEX_NATIVE_REAUTH__` on the desktop shell. The managed bootstrap secret no
+  longer exists once the runtime seeds the first admin, so the substitution in
+  the Tauri bridge never ran and controlled deanonymization always failed with
+  `INVALID_CREDENTIALS`. The typed password is now forwarded verbatim.
+- **G39L3** provider API keys stored in the OS keyring were never restored:
+  the only caller of `restore_provider_credentials` sat behind the
+  managed-identity early return. Restore now runs after every successful
+  session, and carries `persistence: OS_KEYRING` so it re-persists the entry
+  instead of deleting it.
+- **G39L4** the offline self-extractor read its `LEXOFF01` trailer from EOF and
+  required an exact file length, so signing the wrapper (Authenticode appends
+  the certificate table) broke it. The trailer is now located by a bounded
+  backward scan.
+- **G39L5** `sign-windows-artifact.ps1` used `"\\s+"` in a double-quoted string,
+  so thumbprint whitespace was never stripped and a thumbprint copied from the
+  Windows certificate dialog was rejected as malformed.
+
+Validation evidence (local, before release CI):
+- runtime typecheck PASS, 121 files / 545 tests PASS on Node 24.21.0;
+- web 3 files / 27 tests PASS including the new desktop reauth regression;
+- web production build + G14 browser bundle safety PASS;
+- Rust `cargo test` 12/12 PASS including the new keyring restore regression,
+  `cargo check` clean of new warnings;
+- G33C / G37B / G37C2 / Phase 13 offline validators PASS;
+- installer PowerShell syntax, NSIS PREINSTALL, Polish.nsh, G39F update policy
+  and online bootstrap contract self-tests PASS.
+
+Not fixed in this line, tracked in ROADMAP:
+- Python packages pinned by version only, no `--require-hashes`;
+- no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;
+- dead `$LASTEXITCODE` guards after `& script.ps1`;
+- string-matching validators that cannot catch behavioural regressions.

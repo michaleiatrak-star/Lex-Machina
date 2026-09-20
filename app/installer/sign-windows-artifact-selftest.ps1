@@ -78,6 +78,26 @@ try {
 
   Invoke-ExpectedFailure "WINDOWS_SIGNING_SECRET_MISSING"
 
+  # A thumbprint copied from the Windows certificate dialog is space-separated.
+  # It must normalize to the bare 40 hex characters and be accepted by the trust
+  # policy; reaching WINDOWS_SIGNING_SECRET_MISSING proves the policy passed.
+  [IO.File]::WriteAllText(
+    $manifest,
+    (@{
+      schemaVersion = 4
+      applicationVersion = "0.0.0-test"
+      applicationUpdate = @{
+        verification = "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER"
+        trustedSignerThumbprints = @(
+          "11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11"
+        )
+      }
+    } | ConvertTo-Json -Depth 5),
+    [Text.UTF8Encoding]::new($false)
+  )
+
+  Invoke-ExpectedFailure "WINDOWS_SIGNING_SECRET_MISSING"
+
   [IO.File]::WriteAllText(
     $manifest,
     (@{

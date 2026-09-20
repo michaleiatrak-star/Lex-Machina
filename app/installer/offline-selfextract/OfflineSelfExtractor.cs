@@ -77,6 +77,45 @@ internal static class OfflineSelfExtractor
         }
     }
 
+    private static long FindFooterStart(FileStream source)
+    {
+        var magic = Encoding.ASCII.GetBytes(FooterMagic);
+
+        // An Authenticode certificate table is a few KiB; 1 MiB of slack covers
+        // that with room to spare while keeping the scan bounded.
+        var scan = (int)Math.Min(source.Length, 1024L * 1024L);
+        var window = new byte[scan];
+        source.Seek(source.Length - scan, SeekOrigin.Begin);
+
+        var filled = 0;
+        while (filled < scan)
+        {
+            var read = source.Read(window, filled, scan - filled);
+            if (read <= 0)
+                throw new EndOfStreamException("OFFLINE_WRAPPER_FOOTER_UNREADABLE");
+            filled += read;
+        }
+
+        var windowStart = source.Length - scan;
+        for (var i = scan - FooterSize; i >= 0; i--)
+        {
+            var hit = true;
+            for (var j = 0; j < magic.Length; j++)
+            {
+                if (window[i + j] != magic[j])
+                {
+                    hit = false;
+                    break;
+                }
+            }
+
+            if (hit)
+                return windowStart + i;
+        }
+
+        return -1;
+    }
+
     private static void ExtractAndVerifyPayload(string selfPath, string destination)
     {
         long payloadOffset;
@@ -88,19 +127,24 @@ internal static class OfflineSelfExtractor
             if (source.Length <= FooterSize)
                 throw new InvalidDataException("OFFLINE_WRAPPER_FOOTER_MISSING");
 
-            source.Seek(-FooterSize, SeekOrigin.End);
+            // Authenticode appends the certificate table to the end of the
+            // file, so the footer is only the last bytes of an UNSIGNED
+            // wrapper. Locate it by scanning backwards instead of assuming it
+            // sits exactly at EOF, otherwise signing the wrapper breaks it.
+            var footerStart = FindFooterStart(source);
+            if (footerStart < 0)
+                throw new InvalidDataException("OFFLINE_WRAPPER_MAGIC_INVALID");
+
+            source.Seek(footerStart, SeekOrigin.Begin);
             using (var reader = new BinaryReader(source, Encoding.ASCII, true))
             {
-                var magic = Encoding.ASCII.GetString(reader.ReadBytes(8));
-                if (!string.Equals(magic, FooterMagic, StringComparison.Ordinal))
-                    throw new InvalidDataException("OFFLINE_WRAPPER_MAGIC_INVALID");
-
+                reader.ReadBytes(8);
                 payloadOffset = reader.ReadInt64();
                 payloadLength = reader.ReadInt64();
                 expectedHash = reader.ReadBytes(32);
             }
 
-            if (payloadOffset < 1 || payloadLength < 1 || payloadOffset + payloadLength + FooterSize != source.Length)
+            if (payloadOffset < 1 || payloadLength < 1 || payloadOffset + payloadLength != footerStart)
                 throw new InvalidDataException("OFFLINE_WRAPPER_LAYOUT_INVALID");
 
             source.Seek(payloadOffset, SeekOrigin.Begin);

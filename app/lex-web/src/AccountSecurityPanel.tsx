@@ -144,7 +144,7 @@ export function AccountSecurityPanel({
         </h3>
         {user.passwordSetupPending && (
           <div className="alert">
-            Początkowe dane logowania to admin / admin. Hasło admin jest tymczasowe i musi zostać zmienione przed użyciem aplikacji. Nowe hasło musi mieć co najmniej 10 znaków.
+            Początkowe dane logowania to admin / admin. Hasło admin jest tymczasowe i znane publicznie: możesz już pracować, ale do czasu jego zmiany u góry okna pozostaje ostrzeżenie. Nowe hasło musi mieć co najmniej 10 znaków.
           </div>
         )}
         <p className="field-help">

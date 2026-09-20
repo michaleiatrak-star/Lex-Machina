@@ -340,9 +340,7 @@ impl RuntimeBridge {
                 &format!(
                     "/api/admin/providers/{provider}/credential"
                 ),
-                Some(json!({
-                    "apiKey": api_key
-                })),
+                Some(restore_credential_body(&api_key)),
             )?;
             if !response.status().is_success() {
                 return Err(format!(
@@ -553,6 +551,13 @@ impl RuntimeBridge {
             if let Some((token, sanitized)) = extract_and_strip_session_token(&proxied.body)? {
                 self.replace_session(token);
                 proxied.body = sanitized;
+                // The runtime seeds the first admin account itself, so the
+                // managed-identity startup path no longer runs and was the only
+                // caller that pushed keyring-stored provider keys back into the
+                // in-memory runtime. Restore them on every authenticated
+                // session instead. Best effort: a keyring failure must not
+                // break login, the user can re-enter the key.
+                let _ = self.restore_provider_credentials();
             } else {
                 self.clear_session();
                 return Err("DESKTOP_SESSION_TOKEN_MISSING".to_string());
@@ -713,6 +718,17 @@ enum ProviderCredentialOperation {
         persist: bool,
     },
     Delete,
+}
+
+/// Body used when a credential already held in the OS keyring is pushed back
+/// into the in-memory runtime. The `persistence` field is mandatory: an omitted
+/// value means PROCESS_MEMORY, and the success path would then delete the very
+/// entry being restored.
+fn restore_credential_body(api_key: &str) -> Value {
+    json!({
+        "apiKey": api_key,
+        "persistence": "OS_KEYRING"
+    })
 }
 
 fn provider_credential_from_request(
@@ -1670,6 +1686,39 @@ mod tests {
             )
             .is_err()
         );
+    }
+
+    #[test]
+    fn restoring_a_stored_credential_keeps_it_in_the_os_keyring() {
+        let body = serde_json::to_vec(
+            &restore_credential_body("stored-key-123456"),
+        )
+        .expect("restore body");
+
+        let parsed = provider_credential_from_request(
+            "PUT",
+            "/api/admin/providers/openai/credential",
+            &body,
+        )
+        .expect("restore request")
+        .expect("provider operation");
+
+        match parsed.1 {
+            ProviderCredentialOperation::Set {
+                mut api_key,
+                persist,
+            } => {
+                assert!(
+                    persist,
+                    "restoring a keyring credential must re-persist it, not delete it"
+                );
+                assert_eq!(api_key, "stored-key-123456");
+                unsafe_zero_string(&mut api_key);
+            }
+            ProviderCredentialOperation::Delete => {
+                panic!("restore must not be treated as a delete");
+            }
+        }
     }
 
     #[test]

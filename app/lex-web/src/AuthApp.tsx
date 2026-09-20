@@ -582,34 +582,38 @@ export default function AuthenticatedApp() {
     );
   }
 
-  if (
+  const passwordSetupPending =
     auth.user
-      .passwordSetupPending === true
-  ) {
-    return (
-      <main className="auth-shell">
-        <section className="auth-card">
-          <div className="alert alert-error auth-alert">
-            Używasz początkowego konta admin/admin. Zanim przejdziesz dalej, zmień hasło na własne, mające co najmniej 10 znaków.
-          </div>
-          <AccountSecurityPanel
-            user={auth.user}
-            onAuthUpdated={(value) => {
-              setAuth(value);
-              setLastUser(
-                value.user
-              );
-              setNow(Date.now());
-            }}
-          />
-        </section>
-      </main>
-    );
-  }
+      .passwordSetupPending === true;
 
   return (
     <>
-      <div className="auth-toolbar">
+      {passwordSetupPending && (
+        <div
+          className="password-setup-banner"
+          role="alert"
+        >
+          <span>
+            Używasz początkowego konta admin/admin. Możesz pracować, ale zmień hasło na własne, mające co najmniej 10 znaków.
+          </span>
+          <button
+            type="button"
+            onClick={() =>
+              setShowSecurity(true)
+            }
+          >
+            Zmień hasło
+          </button>
+        </div>
+      )}
+
+      <div
+        className={
+          passwordSetupPending
+            ? "auth-toolbar auth-toolbar-offset"
+            : "auth-toolbar"
+        }
+      >
         <div>
           <strong>
             {auth.user.displayName}
@@ -691,7 +695,11 @@ export default function AuthenticatedApp() {
 
       {idleRemaining <= 120_000 && (
         <div
-          className="session-warning"
+          className={
+            passwordSetupPending
+              ? "session-warning session-warning-offset"
+              : "session-warning"
+          }
           role="status"
         >
           Sesja zbliża się do blokady z powodu bezczynności. Backend pozostaje źródłem prawdy o czasie wygaśnięcia.

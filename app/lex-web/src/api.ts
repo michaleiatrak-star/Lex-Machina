@@ -1698,10 +1698,12 @@ export function reauthorizeDeanonymization(
       body:
         JSON.stringify({
           intentId,
-          password:
-            isDesktopShell()
-              ? "__LEX_NATIVE_REAUTH__"
-              : password
+          // The password typed by the user is always forwarded verbatim.
+          // The desktop bridge still substitutes __LEX_NATIVE_REAUTH__ when a
+          // managed bootstrap secret exists, but that secret is absent once the
+          // runtime seeds the first admin account, so a sentinel sent from here
+          // would reach the runtime literally and fail reauthorization.
+          password
         })
     }
   );

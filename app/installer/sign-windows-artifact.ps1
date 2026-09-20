@@ -21,7 +21,7 @@ $selfTestAllowMissingTimestamp = $false
 
 
 function Normalize-Thumbprint([string]$Value) {
-  return (($Value -replace "\\s+", "").ToUpperInvariant())
+  return (($Value -replace '\s+', '').ToUpperInvariant())
 }
 
 function Find-SignTool {

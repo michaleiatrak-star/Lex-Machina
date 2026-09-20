@@ -115,15 +115,23 @@ const checks = {
     store.includes(
       "auth_epoch + 1"
     ),
-  uiForcesPasswordSetup:
+  uiWarnsUntilPasswordChanged:
     authUi.includes(
       "passwordSetupPending === true"
+    ) &&
+    authUi.includes(
+      "password-setup-banner"
     ) &&
     authUi.includes(
       "Używasz początkowego konta admin/admin"
     ) &&
     securityUi.includes(
       "Zmień początkowe hasło"
+    ),
+  uiDoesNotBlockWorkBeforeSetup:
+    authUi.includes("<App") &&
+    !authUi.includes(
+      "Zanim przejdziesz dalej"
     ),
   lifecycleRegression:
     test.includes(
