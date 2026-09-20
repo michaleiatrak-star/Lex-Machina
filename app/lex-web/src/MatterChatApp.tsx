@@ -559,6 +559,40 @@ export default function MatterChatApp({
   }, [caseTypeSkills]);
 
   useEffect(() => {
+    setDeterministicAction("");
+    setCaseTypeSkills([]);
+  }, [caseId]);
+
+  useEffect(() => {
+    if (threadLoading) {
+      return;
+    }
+    const firstUser =
+      messages.find(
+        (message) =>
+          message.role === "user"
+      );
+    if (!firstUser) {
+      return;
+    }
+    const restored =
+      deterministicActionFromMeta(
+        firstUser.meta
+      );
+    setDeterministicAction(
+      restored
+    );
+    setCaseTypeSkills(
+      skillsForDeterministicAction(
+        restored
+      )
+    );
+  }, [
+    messages,
+    threadLoading
+  ]);
+
+  useEffect(() => {
     const restricted =
       allowedDomains !== null &&
       allowedDomains.length < routes.length;
