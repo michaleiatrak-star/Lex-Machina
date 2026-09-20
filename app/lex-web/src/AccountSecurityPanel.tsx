@@ -161,7 +161,9 @@ export function AccountSecurityPanel({
         </h3>
         {user.passwordSetupPending && (
           <div className="alert">
-            Początkowe dane logowania to admin / admin. Aplikacja pozostaje dostępna, ale te dane są domyślne i nie powinny być używane dłużej niż to konieczne. Zalecamy zmianę hasła na własne, mające co najmniej 10 znaków. Ostrzeżenie pozostanie widoczne do czasu skutecznej zmiany hasła.
+            {nativeManagedSetup
+              ? "Konto korzysta jeszcze z początkowego poświadczenia zarządzanego przez Windows. Aplikacja pozostaje dostępna, ale zalecamy ustawienie własnego hasła mającego co najmniej 10 znaków. Ostrzeżenie pozostanie widoczne do czasu skutecznej zmiany hasła."
+              : "Początkowe dane logowania to admin / admin. Aplikacja pozostaje dostępna, ale te dane są domyślne i nie powinny być używane dłużej niż to konieczne. Zalecamy zmianę hasła na własne, mające co najmniej 10 znaków. Ostrzeżenie pozostanie widoczne do czasu skutecznej zmiany hasła."}
           </div>
         )}
         <p className="field-help">
