@@ -64,10 +64,13 @@ const required = [
   "Nazwa sprawy",
   "Sygnatura nie jest wymagana",
   "ID katalogu:",
-  "Automatyczny — dobierz skille wykonawcze",
-  "priorytetowych skilli wykonawczych",
-  "współpracować np. z chronologią",
-  "kilka dziedzin prawa",
+  "Automatyczny — router wybiera workflow wykonawczy",
+  "AUTO · router prawny",
+  "Workflow deterministyczny",
+  "Auto dobór dodatkowych",
+  "Workflow można zmieniać pomiędzy wiadomościami",
+  "współpracujące skille",
+  "dziedziny",
   "prawny-router-v3",
   "shared",
   "Dodatkowe skille i dziedziny",
@@ -134,8 +137,10 @@ process.stdout.write(JSON.stringify({
     content.includes("1 wątek = 1 sprawa") &&
     content.includes("/workspace/thread"),
   multiSkillRoutingPresent:
-    content.includes("współpracować np. z chronologią") &&
-    content.includes("kilka dziedzin prawa"),
+    content.includes("AUTO · router prawny") &&
+    content.includes("Auto dobór dodatkowych") &&
+    content.includes("współpracujące skille") &&
+    content.includes("Dodatkowe skille i dziedziny"),
   workspaceLifecyclePresent:
     content.includes("Struktura katalogów") &&
     content.includes("Otwórz w systemie") &&
