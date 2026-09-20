@@ -152,7 +152,9 @@ describe("skill selection", () => {
     expect(parseSkillSelectionEnvelope(input)).toEqual({
       query: "Czy termin na apelację już upłynął?",
       automatic: false,
-      manualSkills: ["terminy-procesowe"]
+      manualSkills: ["terminy-procesowe"],
+      workflowMode: "DETERMINISTIC",
+      workflowSkill: null
     });
   });
 
@@ -353,6 +355,48 @@ describe("skill selection", () => {
     );
 
     expect(selected.executionSkills).toContain("przewodnik-prawny-v2");
+  });
+
+  it("keeps automatically selected execution skills semantic in SKILL_AUTO mode", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj pozew i przeanalizuj dowody.",
+      "dr-03-prawo-procesowe",
+      true,
+      [],
+      {
+        mode: "SKILL_AUTO",
+        skill: null
+      }
+    );
+
+    expect(selected.executionSkills.length)
+      .toBeGreaterThanOrEqual(1);
+    expect(selected.executionSkills)
+      .toContain("pisma-procesowe-v3");
+    expect(selected.workflowExecutionSkill)
+      .toBeNull();
+  });
+
+  it("lets one explicit deterministic workflow control while auto adds cooperating skills", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Analiza sprawy, chronologia i raport dla klienta.",
+      "dr-03-prawo-procesowe",
+      true,
+      ["chronologia-sprawy-v1", "raport-klienta-v1"],
+      {
+        mode: "DETERMINISTIC",
+        skill: "chronologia-sprawy-v1"
+      }
+    );
+
+    expect(selected.executionSkills)
+      .toContain("chronologia-sprawy-v1");
+    expect(selected.workflowExecutionSkill)
+      .toBe("chronologia-sprawy-v1");
   });
 
   it("ignores unknown manual skill names when automatic mode is disabled", () => {
