@@ -1392,3 +1392,32 @@ Implemented:
 - Ed25519 signatures remain supported when present but are no longer mandatory for the instruction-only skill layer;
 - application updates remain Authenticode fail-closed and model-pack updates remain Ed25519 fail-closed;
 - Maintenance UI wording now reflects the real trust split and no longer claims unsigned application updates are permitted.
+
+### 2026-09-20 — G39L RC6 deterministic execution contract
+
+Status: **VALIDATION IN PROGRESS**
+
+Implemented:
+
+- the chat exposes two execution modes:
+  - `AUTO / SKILL_AUTO`: the legal router may load several cooperating execution skills as semantic modules; their specialized state machines are not claimed as active;
+  - `DETERMINISTIC`: exactly one execution skill owns the specialized workflow for the turn;
+- deterministic selection is fail-closed: an unknown or non-execution `workflowSkill` is rejected and cannot silently fall back to another workflow;
+- runtime exposes `deterministicWorkflow: true` only for execution skills with a coded specialized workflow; the UI lists only those skills in the deterministic selector;
+- a newly updated `executive-*` skill cannot appear as deterministically supported until the application runtime adds its workflow mapping;
+- every advertised deterministic execution skill must map to a specialized workflow rather than `LEGAL_QUERY_V1`, covered by regression tests;
+- common Gate I remains code-owned in both modes: router-first, mandatory resources, source provenance/hierarchy/freshness, citation ledger, legal/case/document citation validation, output validation and fail-closed finalization;
+- state-machine workflows additionally use runtime-owned durable state, revision/permit checks and ordered checkpoints where defined;
+- semantic legal reasoning, drafting, risk interpretation and argumentation remain model responsibilities within the currently permitted stage and cannot close or reorder runtime checkpoints.
+
+Deterministic workflow classes:
+
+- durable case/session state: process pleadings, court analysis, evidence analysis, contract analysis, chronology, witness questioning, legal guide;
+- schema/output pipelines with code-enforced reads/output/finalization: simple letters, statute analysis, case-law analysis, client report and situation report;
+- AUTO mode deliberately does not pretend that every automatically selected skill has its specialized checkpoint machine active.
+
+Release target:
+
+- application version remains `0.1.5`;
+- release branch: `release/0.1.5-g39l-rc6`;
+- the Windows installer gate now runs both local-primary and deterministic skill-selection web regressions before packaging.
