@@ -34,7 +34,7 @@ function safeExecutionSkillNames(names: readonly string[]): string[] {
           /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(name)
         )
     )
-  ].slice(0, 8);
+  ].slice(0, 1);
 }
 
 export function setCaseTypeExecutionSkills(names: readonly string[]): void {
@@ -115,10 +115,7 @@ export function buildSkillSelectionEnvelope(
 ): string {
   const prioritizedExecutionSkills = getCaseTypeExecutionSkills();
   const manual = [
-    ...new Set([
-      ...manualSkills,
-      ...prioritizedExecutionSkills
-    ])
+    ...new Set(manualSkills)
   ]
     .filter((name) =>
       name !== "prawny-router-v3" &&
@@ -139,9 +136,8 @@ export function buildSkillSelectionEnvelope(
     auto: effectiveAutomatic,
     manual,
     caseType:
-      prioritizedExecutionSkills.length > 0
-        ? prioritizedExecutionSkills
-        : AUTO_CASE_TYPE
+      prioritizedExecutionSkills[0] ??
+      AUTO_CASE_TYPE
   })}\n${query}`;
 }
 
