@@ -590,10 +590,22 @@ export default function AuthenticatedApp() {
           role="alert"
         >
           <strong>Ostrzeżenie bezpieczeństwa:</strong>{" "}
-          korzystasz z domyślnych danych logowania
-          <strong> admin / admin</strong>. Możesz używać aplikacji,
-          ale zalecamy natychmiastową zmianę hasła na własne,
-          mające co najmniej 10 znaków.
+          {auth.user.loginName === "admin"
+            ? (
+              <>
+                korzystasz z domyślnych danych logowania
+                <strong> admin / admin</strong>. Możesz używać aplikacji,
+                ale zalecamy natychmiastową zmianę hasła na własne,
+                mające co najmniej 10 znaków.
+              </>
+            )
+            : (
+              <>
+                konto korzysta jeszcze z początkowego poświadczenia.
+                Możesz używać aplikacji, ale zalecamy natychmiastowe
+                ustawienie własnego hasła mającego co najmniej 10 znaków.
+              </>
+            )}
           <button
             type="button"
             onClick={() => setShowSecurity(true)}
