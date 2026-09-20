@@ -1475,7 +1475,7 @@ export default function MatterChatApp({
             ["skills", "Skille"],
             ["case", "Sprawa"],
             ["firm", "Kancelaria"],
-            ["settings", "Model i konto / API"]
+            ["settings", "Modele i konta"]
           ] as Array<[TabId, string]>).map(([id, label]) => (
             <button
               key={id}
@@ -1529,7 +1529,7 @@ export default function MatterChatApp({
                       ? "Dane sprawy"
                       : activeTab === "firm"
                         ? "Know-how i wzory kancelarii"
-                        : "Model i uwierzytelnianie"}
+                        : "Modele i konta"}
             </h1>
           </div>
           <div className="chat-header-actions">
@@ -2202,11 +2202,17 @@ export default function MatterChatApp({
 
         {activeTab === "settings" ? (
           <section className="chat-settings-grid">
-            <article className="chat-card">
-              <p className="eyebrow">Dostawca</p>
-              <h2>Model</h2>
+            <article className="chat-card chat-settings-primary">
+              <p className="eyebrow">Model główny</p>
+              <h2>
+                {selectedModel?.displayName ??
+                  (provider === "local"
+                    ? "Lokalny model główny"
+                    : "Wybierz źródło i model")}
+              </h2>
+              <div className="chat-settings-field-grid">
               <label>
-                Provider
+                Źródło
                 <select
                   value={provider}
                   onChange={(event) => {
@@ -2306,6 +2312,7 @@ export default function MatterChatApp({
                   ))}
                 </select>
               </label>
+              </div>
               {provider === "local" ? (
                 <div className="chat-form-row compact">
                   <small>
@@ -2370,8 +2377,8 @@ export default function MatterChatApp({
               ) : null}
             </article>
 
-            <article className="chat-card">
-              <p className="eyebrow">Rozdział pracy modeli</p>
+            <article className="chat-card chat-settings-advanced">
+              <p className="eyebrow">Ustawienie zaawansowane</p>
               <h2>Model pomocniczy</h2>
               <label className="chat-toggle-row">
                 <input
@@ -2481,7 +2488,7 @@ export default function MatterChatApp({
               ) : null}
             </article>
 
-            <article className="chat-card">
+            <article className="chat-card chat-settings-auth">
               <p className="eyebrow">
                 {provider === "local"
                   ? "Lokalne AI"
@@ -2497,9 +2504,47 @@ export default function MatterChatApp({
                     : "Konfiguracja API"}
               </h2>
               {provider === "local" ? (
-                <p>
-                  Modele lokalne działają przez llama.cpp i nie wymagają klucza API.
-                </p>
+                <>
+                  <p>
+                    Modele lokalne działają przez llama.cpp i nie wymagają klucza API
+                    ani logowania do zewnętrznego konta.
+                  </p>
+                  <div className="chat-local-inventory">
+                    <strong>
+                      {modelCatalogLoading
+                        ? "Odświeżam lokalny katalog…"
+                        : `Zainstalowane modele: ${models.length}`}
+                    </strong>
+                    {models.length > 0 ? (
+                      <div className="chat-model-chip-list">
+                        {models.map((item) => (
+                          <span key={item.id} className="chat-model-chip">
+                            {item.displayName}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <small>
+                        Nie wykryto zainstalowanego GGUF. Po instalacji modelu lista
+                        odświeży się automatycznie; można też wymusić odczyt poniżej.
+                      </small>
+                    )}
+                    <button
+                      type="button"
+                      className="chat-secondary-action"
+                      disabled={modelCatalogLoading}
+                      onClick={() =>
+                        setLocalModelsRefreshToken(
+                          (value) => value + 1
+                        )
+                      }
+                    >
+                      {modelCatalogLoading
+                        ? "Odświeżanie…"
+                        : "Odśwież modele lokalne"}
+                    </button>
+                  </div>
+                </>
               ) : isAccountPrimarySource(provider) ? (
                 <>
                   <p>
