@@ -5,6 +5,7 @@ import {
   ApiError,
   changePassword,
   createRecoveryCode,
+  isDesktopShell,
   type AuthMeResponse,
   type AuthenticatedUser
 } from "./api.js";
@@ -32,6 +33,10 @@ export function AccountSecurityPanel({
     useState("");
   const [busy, setBusy] =
     useState(false);
+  const nativeManagedSetup =
+    isDesktopShell() &&
+    user.loginName === "local-admin" &&
+    user.passwordSetupPending === true;
 
   async function createCode():
     Promise<void> {
@@ -70,7 +75,8 @@ export function AccountSecurityPanel({
   async function updatePassword():
     Promise<void> {
     if (
-      !currentPassword ||
+      (!nativeManagedSetup &&
+        !currentPassword) ||
       !newPassword ||
       busy
     ) {
@@ -82,7 +88,10 @@ export function AccountSecurityPanel({
     try {
       const result =
         await changePassword({
-          currentPassword,
+          currentPassword:
+            nativeManagedSetup
+              ? "__LEX_NATIVE_REAUTH__"
+              : currentPassword,
           newPassword
         });
       setCurrentPassword("");
@@ -144,7 +153,7 @@ export function AccountSecurityPanel({
         </h3>
         {user.passwordSetupPending && (
           <div className="alert">
-            Początkowe dane logowania to admin / admin. Hasło admin jest tymczasowe i musi zostać zmienione przed użyciem aplikacji. Nowe hasło musi mieć co najmniej 10 znaków.
+            Początkowe dane logowania to admin / admin. Aplikacja pozostaje dostępna, ale te dane są domyślne i nie powinny być używane dłużej niż to konieczne. Zalecamy zmianę hasła na własne, mające co najmniej 10 znaków. Ostrzeżenie pozostanie widoczne do czasu skutecznej zmiany hasła.
           </div>
         )}
         <p className="field-help">
@@ -217,24 +226,30 @@ export function AccountSecurityPanel({
               ? "Ustaw hasło"
               : "Zmiana hasła"}
           </h4>
-          <label>
-            {user.passwordSetupPending
-              ? "Początkowe hasło"
-              : "Bieżące hasło"}
-            <input
-              type="password"
-              autoComplete="current-password"
-              value={
-                currentPassword
-              }
-              maxLength={128}
-              onChange={(event) =>
-                setCurrentPassword(
-                  event.target.value
-                )
-              }
-            />
-          </label>
+          {nativeManagedSetup ? (
+            <p className="field-help">
+              Początkowe hasło konta zarządzanego jest przechowywane w magazynie poświadczeń Windows i zostanie potwierdzone przez aplikację bez ujawniania go w interfejsie.
+            </p>
+          ) : (
+            <label>
+              {user.passwordSetupPending
+                ? "Początkowe hasło"
+                : "Bieżące hasło"}
+              <input
+                type="password"
+                autoComplete="current-password"
+                value={
+                  currentPassword
+                }
+                maxLength={128}
+                onChange={(event) =>
+                  setCurrentPassword(
+                    event.target.value
+                  )
+                }
+              />
+            </label>
+          )}
           <label>
             Nowe hasło
             <input
@@ -254,7 +269,8 @@ export function AccountSecurityPanel({
             className="primary-button"
             disabled={
               busy ||
-              !currentPassword ||
+              (!nativeManagedSetup &&
+                !currentPassword) ||
               !newPassword
             }
             onClick={() => {
