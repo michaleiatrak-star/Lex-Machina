@@ -64,10 +64,13 @@ const required = [
   "Nazwa sprawy",
   "Sygnatura nie jest wymagana",
   "ID katalogu:",
-  "Automatyczny — dobierz skille wykonawcze",
-  "priorytetowych skilli wykonawczych",
-  "współpracować np. z chronologią",
-  "kilka dziedzin prawa",
+  "AUTO — router + skille",
+  "AUTO — router dobiera skille",
+  "AUTO działa skillowo",
+  "Workflow deterministyczny",
+  "program narzuca kolejność checkpointów",
+  "właściwe HARD GATE",
+  "deterministicWorkflow=true",
   "prawny-router-v3",
   "shared",
   "Dodatkowe skille i dziedziny",
@@ -133,9 +136,13 @@ process.stdout.write(JSON.stringify({
   oneThreadOneCasePresent:
     content.includes("1 wątek = 1 sprawa") &&
     content.includes("/workspace/thread"),
-  multiSkillRoutingPresent:
-    content.includes("współpracować np. z chronologią") &&
-    content.includes("kilka dziedzin prawa"),
+  workflowModeContractPresent:
+    content.includes("AUTO — router + skille") &&
+    content.includes("AUTO działa skillowo") &&
+    content.includes("Workflow deterministyczny") &&
+    content.includes("program narzuca kolejność checkpointów") &&
+    content.includes("właściwe HARD GATE") &&
+    content.includes("deterministicWorkflow=true"),
   workspaceLifecyclePresent:
     content.includes("Struktura katalogów") &&
     content.includes("Otwórz w systemie") &&
