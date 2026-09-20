@@ -152,8 +152,50 @@ describe("skill selection", () => {
     expect(parseSkillSelectionEnvelope(input)).toEqual({
       query: "Czy termin na apelację już upłynął?",
       automatic: false,
-      manualSkills: ["terminy-procesowe"]
+      manualSkills: ["terminy-procesowe"],
+      caseTypeExecutionSkills: []
     });
+  });
+
+  it("parses an explicit case-type execution controller separately from manual helpers", () => {
+    const input =
+      `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":["terminy-procesowe","analiza-sadowa-v6"],"caseType":["analiza-sadowa-v6","chronologia-sprawy-v1"]}\n` +
+      "Przeanalizuj sprawę.";
+
+    expect(parseSkillSelectionEnvelope(input)).toEqual({
+      query: "Przeanalizuj sprawę.",
+      automatic: true,
+      manualSkills: [
+        "terminy-procesowe",
+        "analiza-sadowa-v6"
+      ],
+      caseTypeExecutionSkills: [
+        "analiza-sadowa-v6",
+        "chronologia-sprawy-v1"
+      ]
+    });
+  });
+
+  it("keeps the explicit case-type skill as deterministic workflow controller while AUTO may add cooperating execution skills", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Przygotuj pozew i przeanalizuj dowody oraz chronologię.",
+      "dr-03-prawo-procesowe",
+      true,
+      ["analiza-sadowa-v6"],
+      [
+        "analiza-sadowa-v6",
+        "chronologia-sprawy-v1"
+      ]
+    );
+
+    expect(selected.workflowExecutionSkill)
+      .toBe("analiza-sadowa-v6");
+    expect(selected.executionSkills)
+      .toContain("chronologia-sprawy-v1");
+    expect(selected.executionSkills)
+      .toContain("pisma-procesowe-v3");
   });
 
   it("can select several cooperating execution skills automatically", () => {
