@@ -20,6 +20,7 @@ import {
   deleteCase,
   executeSession,
   getHealth,
+  getLocalModels,
   getModels,
   getModelRoutingPreferences,
   getProviderAccountStatus,
@@ -699,7 +700,56 @@ export default function MatterChatApp({
         cancelled = true;
       };
     }
-    void getModels(runtimeProvider)
+    const loadModels =
+      provider === "local"
+        ? getLocalModels().then(
+            (response) => ({
+              models:
+                response.models
+                  .filter(
+                    (item) =>
+                      item.installed
+                  )
+                  .map<ModelDescriptor>(
+                    (item) => ({
+                      provider:
+                        "openai",
+                      id:
+                        item.id,
+                      displayName:
+                        `Lokalny · ${item.displayName}`,
+                      selectable:
+                        true,
+                      contextWindow:
+                        item.configuredContextWindow ??
+                        item.contextWindow,
+                      nativeContextWindow:
+                        item.nativeContextWindow,
+                      contextMode:
+                        item.contextMode,
+                      ownedBy:
+                        "local",
+                      inputModalities:
+                        ["text"],
+                      outputModalities:
+                        ["text"],
+                      capabilities: [
+                        "local-only",
+                        "offline-inference",
+                        item.configuredContextWindow !==
+                          undefined
+                          ? "qualified-profile"
+                          : "installed-profile-recovery"
+                      ]
+                    })
+                  )
+            })
+          )
+        : getModels(
+            runtimeProvider
+          );
+
+    void loadModels
       .then((response) => {
         if (cancelled) return;
         const sourceModels =
