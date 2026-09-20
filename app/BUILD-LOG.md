@@ -1369,6 +1369,13 @@ Validation evidence (local, before release CI):
   analysis) instead of relying on Auto inferring them from the wording. The
   choice does not disable Auto.
 
+- **Merge** RC2/RC3 were built on RC1 in parallel with the G39M work, so the
+  lines had diverged. RC3's local primary-model lane and the G39M scope
+  controls both touch MatterChatApp.tsx; they merged cleanly and were verified
+  together in a real browser: the primary-model source lists Lokalne / OpenAI /
+  Anthropic / xAI and the new-conversation picker still offers all five
+  deterministic pipelines.
+
 Not fixed in this line, tracked in ROADMAP:
 - Python packages pinned by version only, no `--require-hashes`;
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;

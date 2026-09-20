@@ -172,7 +172,13 @@ Nadal poza zamknięciem:
 - Fail-closed bramka prywatności czatu wraca jako `503 CHAT_PRIVACY_GATE_FAILED` zamiast anonimowego 500, a UI pokazuje komunikat wskazujący lokalny runtime prywatności.
 - Regresja pokryta testem `tests/http-session.test.ts`.
 
-## R0.1.6 — G39M sterowanie zakresem i lokalne przetwarzanie — IN PROGRESS
+## R0.1.5 — G39L/RC2/RC3 — RELEASED AS PRERELEASE
+
+- `v0.1.5-g39l-rc1` — poprawki audytowe G39L1-L8 (ostrzeżenie zamiast blokady na admin/admin, reautoryzacja deanonimizacji, klucze providerów po restarcie, podpisywalny wrapper offline, normalizacja odcisku, układ nakładek, klasyfikacja błędów wykonania).
+- `v0.1.5-g39l-rc2` / `rc3` — pas „Lokalne" w wyborze modelu głównego: Bielik 11B v3 i Mistral NeMo 12B wybieralne jako PRIMARY bez klucza OpenAI; modele lokalne zniknęły z pasa OpenAI; `executeMessage()` nie blokuje już wykonania lokalnego z powodu braku klucza.
+- RC2/RC3 powstały równolegle na bazie RC1, więc linia G39M została z nimi scalona przed wydaniem 0.1.6.
+
+## R0.1.6 — G39M sterowanie zakresem i lokalne przetwarzanie — VERIFYING
 
 ### G39M1 — zmiana nazwy sprawy — DONE (bez zmian)
 
