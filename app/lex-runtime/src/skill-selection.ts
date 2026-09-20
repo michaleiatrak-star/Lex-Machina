@@ -20,10 +20,16 @@ const EXECUTION_SKILL_NAME_OVERRIDES =
     "raport-klienta-v1"
   ]);
 
+export type SkillWorkflowMode =
+  | "DETERMINISTIC"
+  | "SKILL_AUTO";
+
 export type SkillSelectionEnvelope = {
   query: string;
   automatic: boolean;
   manualSkills: string[];
+  workflowMode: SkillWorkflowMode;
+  workflowSkill: string | null;
 };
 
 export type ResolvedSkillSelection = {
@@ -64,42 +70,65 @@ function safeManualSkillNames(value: unknown): string[] {
   ].slice(0, 16);
 }
 
+function safeWorkflowSkillName(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const name = value.trim();
+  return /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(name)
+    ? name
+    : null;
+}
+
 export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnvelope {
+  const defaultEnvelope = (
+    query: string
+  ): SkillSelectionEnvelope => ({
+    query,
+    automatic: true,
+    manualSkills: [],
+    workflowMode: "DETERMINISTIC",
+    workflowSkill: null
+  });
+
   const firstBreak = rawQuery.indexOf("\n");
   if (firstBreak < 0) {
-    return {
-      query: rawQuery,
-      automatic: true,
-      manualSkills: []
-    };
+    return defaultEnvelope(rawQuery);
   }
 
   const firstLine = rawQuery.slice(0, firstBreak).trim();
   if (!firstLine.startsWith(SKILL_SELECTION_ENVELOPE_PREFIX)) {
-    return {
-      query: rawQuery,
-      automatic: true,
-      manualSkills: []
-    };
+    return defaultEnvelope(rawQuery);
   }
 
   const encoded = firstLine.slice(SKILL_SELECTION_ENVELOPE_PREFIX.length).trim();
   try {
     const parsed = JSON.parse(encoded) as Record<string, unknown>;
+    const workflowMode: SkillWorkflowMode =
+      parsed.workflowMode === "SKILL_AUTO"
+        ? "SKILL_AUTO"
+        : "DETERMINISTIC";
+    const workflowSkill =
+      workflowMode === "DETERMINISTIC"
+        ? (
+            safeWorkflowSkillName(parsed.workflowSkill) ??
+            (
+              Array.isArray(parsed.caseType)
+                ? safeWorkflowSkillName(parsed.caseType[0])
+                : null
+            )
+          )
+        : null;
+
     return {
       query: rawQuery.slice(firstBreak + 1).trimStart(),
       automatic: parsed.auto !== false,
-      manualSkills: safeManualSkillNames(parsed.manual)
+      manualSkills: safeManualSkillNames(parsed.manual),
+      workflowMode,
+      workflowSkill
     };
   } catch {
-    return {
-      query: rawQuery,
-      automatic: true,
-      manualSkills: []
-    };
+    return defaultEnvelope(rawQuery);
   }
 }
-
 type ExplicitExecutionRule = {
   skill: string;
   patterns: RegExp[];
@@ -376,7 +405,14 @@ export function resolveAdditionalSkills(
   query: string,
   primarySkill: string,
   automatic: boolean,
-  manualSkills: readonly string[]
+  manualSkills: readonly string[],
+  workflowControl: {
+    mode: SkillWorkflowMode;
+    skill: string | null;
+  } = {
+    mode: "DETERMINISTIC",
+    skill: null
+  }
 ): ResolvedSkillSelection {
   const core = new Set<string>([
     "prawny-router-v3",
@@ -524,6 +560,23 @@ export function resolveAdditionalSkills(
 
   const additionalSkills = [...selected].slice(0, 12);
   const retained = new Set(additionalSkills);
+  const explicitWorkflowSkill =
+    workflowControl.mode === "DETERMINISTIC" &&
+    workflowControl.skill &&
+    retained.has(workflowControl.skill) &&
+    executionSkills.has(workflowControl.skill)
+      ? workflowControl.skill
+      : null;
+  const effectiveWorkflowExecutionSkill =
+    workflowControl.mode === "SKILL_AUTO"
+      ? null
+      : explicitWorkflowSkill ??
+        (
+          workflowExecutionSkill &&
+          retained.has(workflowExecutionSkill)
+            ? workflowExecutionSkill
+            : null
+        );
 
   return {
     additionalSkills,
@@ -536,9 +589,7 @@ export function resolveAdditionalSkills(
     ],
     executionSkills: [...executionSkills].filter((name) => retained.has(name)),
     workflowExecutionSkill:
-      workflowExecutionSkill && retained.has(workflowExecutionSkill)
-        ? workflowExecutionSkill
-        : null,
+      effectiveWorkflowExecutionSkill,
     domainSkills: [...domainSkills].filter(
       (name) => name === primarySkill || retained.has(name)
     )
