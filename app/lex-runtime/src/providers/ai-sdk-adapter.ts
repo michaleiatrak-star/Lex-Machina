@@ -15,6 +15,11 @@ import type {
   ProviderStreamResult
 } from "./types.js";
 import type { LocalModelRuntime } from "../local-model-runtime.js";
+import {
+  AccountSessionManager,
+  isAccountSessionModel,
+  streamAccountSession
+} from "./account-session.js";
 
 const MAX_OUTPUT_TOKENS = 16_384;
 
@@ -238,7 +243,8 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
   constructor(
     readonly id: ProviderId,
     private readonly credentials: ProviderCredentialResolver,
-    private readonly localModels?: LocalModelRuntime
+    private readonly localModels?: LocalModelRuntime,
+    private readonly accountSessions?: AccountSessionManager
   ) {
     this.label = providerLabel(id);
   }
@@ -246,6 +252,24 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {
+    if (
+      isAccountSessionModel(
+        this.id,
+        params.model
+      )
+    ) {
+      if (!this.accountSessions) {
+        throw new Error(
+          "ACCOUNT_SESSION_RUNTIME_UNAVAILABLE"
+        );
+      }
+      return streamAccountSession(
+        this.accountSessions,
+        this.id,
+        params
+      );
+    }
+
     if (params.model.startsWith("local/")) {
       if (this.id !== "openai" || !this.localModels) {
         throw new Error("LOCAL_MODEL_RUNTIME_UNAVAILABLE");
@@ -285,7 +309,8 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
 
 export function createLiveProviderRegistry(
   credentials: ProviderCredentialResolver,
-  localModels?: LocalModelRuntime
+  localModels?: LocalModelRuntime,
+  accountSessions?: AccountSessionManager
 ): ProviderRegistry {
   const registry = new ProviderRegistry();
   for (const id of ["openai", "anthropic", "xai"] as const) {
@@ -293,7 +318,8 @@ export function createLiveProviderRegistry(
       new AiSdkProviderAdapter(
         id,
         credentials,
-        id === "openai" ? localModels : undefined
+        id === "openai" ? localModels : undefined,
+        accountSessions
       )
     );
   }
