@@ -338,7 +338,7 @@ async function assertSubscriptionAccount(
   }
 }
 
-function runGrokAcp(
+async function runGrokAcp(
   prompt: string | null,
   cwd: string,
   abortSignal?: AbortSignal
@@ -346,20 +346,17 @@ function runGrokAcp(
   authenticated: boolean;
   text?: string;
 }> {
-  return new Promise(async (resolve, reject) => {
-    const executable =
-      await resolveCommand(
-        CLI_NAMES.xai
-      );
-    if (!executable) {
-      reject(
-        new Error(
-          "ACCOUNT_SESSION_CLI_NOT_INSTALLED:xai"
-        )
-      );
-      return;
-    }
+  const executable =
+    await resolveCommand(
+      CLI_NAMES.xai
+    );
+  if (!executable) {
+    throw new Error(
+      "ACCOUNT_SESSION_CLI_NOT_INSTALLED:xai"
+    );
+  }
 
+  return new Promise((resolve, reject) => {
     const proc = spawnResolved(
       executable,
       [
