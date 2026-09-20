@@ -65,7 +65,20 @@ jobs:
 
       - name: Run routing and local-primary regression tests
         working-directory: app/lex-web
-        run: npx vitest run src/chat-routing.test.ts src/MatterChatApp.primary-model.test.ts src/MatterChatApp.workflow-selector.test.ts
+        run: npx vitest run src/chat-routing.test.ts src/MatterChatApp.primary-model.test.ts
+
+      - name: Verify single in-chat deterministic workflow selector
+        working-directory: app/lex-web
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'aria-label="Workflow deterministyczny"' src/MatterChatApp.tsx
+          grep -q 'AUTO — router + skille' src/MatterChatApp.tsx
+          grep -q '!isExecutionSkill(item)' src/MatterChatApp.tsx
+          if grep -q 'name="deterministic-workflow-skill"' src/MatterChatApp.tsx; then
+            echo "DUPLICATE_DETERMINISTIC_WORKFLOW_SELECTOR" >&2
+            exit 1
+          fi
 
       - name: Build web application
         working-directory: app/lex-web
