@@ -1339,6 +1339,7 @@ export default function MatterChatApp({
                         );
                         setProviderApiKeyInput("");
                         setProviderKeyMessage("");
+                        setProviderAccountMessage("");
                       }}
                     >
                       {PRIMARY_MODEL_SOURCES.map((item) => (
@@ -2022,20 +2023,56 @@ export default function MatterChatApp({
                     );
                     setProviderApiKeyInput("");
                     setProviderKeyMessage("");
+                    setProviderAccountMessage("");
                   }}
                 >
-                  {PRIMARY_MODEL_SOURCES.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.label}
-                      {item.id === "local"
+                  {PRIMARY_MODEL_SOURCES.map((item) => {
+                    const accountSource =
+                      isAccountPrimarySource(
+                        item.id
+                      );
+                    const itemProvider =
+                      runtimeProviderForPrimarySource(
+                        item.id
+                      );
+                    const account =
+                      accountSource
+                        ? providerAccounts[
+                            itemProvider
+                          ]
+                        : undefined;
+                    const apiReady =
+                      !accountSource &&
+                      item.id !== "local"
+                        ? providerConfiguration[
+                            itemProvider
+                          ]
+                        : undefined;
+                    const suffix =
+                      item.id === "local"
                         ? " · bez klucza API"
-                        : providerConfiguration[item.id] === true
-                          ? " · API gotowe"
-                          : providerConfiguration[item.id] === false
-                            ? " · brak klucza"
-                            : " · sprawdzanie"}
-                    </option>
-                  ))}
+                        : accountSource
+                          ? account?.authenticated
+                            ? " · połączone"
+                            : account?.installed === false
+                              ? " · brak CLI"
+                              : account
+                                ? " · niezalogowane"
+                                : " · sprawdzanie"
+                          : apiReady === true
+                            ? " · API gotowe"
+                            : apiReady === false
+                              ? " · brak klucza"
+                              : " · sprawdzanie";
+                    return (
+                      <option
+                        key={item.id}
+                        value={item.id}
+                      >
+                        {item.label}{suffix}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
               <label>
@@ -2063,7 +2100,11 @@ export default function MatterChatApp({
                 <p className="chat-inline-error">
                   {modelError === "PROVIDER_NOT_CONFIGURED"
                     ? "Najpierw dodaj klucz API dla tego dostawcy."
-                    : modelError}
+                    : modelError === "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+                      ? "Nie znaleziono oficjalnego klienta tego dostawcy na komputerze."
+                      : modelError === "ACCOUNT_SESSION_NOT_AUTHENTICATED"
+                        ? "Najpierw połącz konto użytkownika."
+                        : modelError}
                 </p>
               ) : null}
               {selectedModel?.contextWindow ? (
@@ -2082,7 +2123,9 @@ export default function MatterChatApp({
                   Model lokalny jest dostępny jako model główny przez llama.cpp i nie wymaga klucza OpenAI.
                 </small>
               ) : null}
-              {providerDefinition && !model.startsWith("local/") ? (
+              {providerDefinition &&
+              !model.startsWith("local/") &&
+              !isAccountPrimarySource(provider) ? (
                 <button
                   type="button"
                   className="chat-link-action"
