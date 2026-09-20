@@ -35,11 +35,14 @@ the silent-install default.
 
 A confirmed reset removes `%USERPROFILE%\.lex-machina\data`. On the first
 runtime start after that reset, the existing application bootstrap creates the
-temporary default administrator account. The application marks that temporary
-credential as requiring a password change before normal use.
+temporary default administrator account `admin` / `admin`. The application
+permits normal use while that temporary credential remains active, but displays
+a persistent security warning and recommends an immediate password change. The
+warning disappears only after a successful password rotation is committed.
 
 If no account exists, the same bootstrap path is used automatically on first
-runtime start.
+runtime start. The default account remains usable until the user changes its
+password; the application does not silently replace or reset that credential.
 
 ## Uninstall policy
 
