@@ -101,6 +101,35 @@ function Test-CommandVersion(
   return ($null -ne $value -and $value -eq $Expected)
 }
 
+function Invoke-RedirectedNativeProcess(
+  [string]$Executable,
+  [string]$ArgumentLine,
+  [string]$LogBase
+) {
+  $stdoutPath = "$LogBase.stdout.log"
+  $stderrPath = "$LogBase.stderr.log"
+  $logParent = Split-Path -Parent $LogBase
+  if ($logParent) {
+    New-Item -ItemType Directory -Force -Path $logParent | Out-Null
+  }
+  Remove-Item -LiteralPath $stdoutPath -Force -ErrorAction SilentlyContinue
+  Remove-Item -LiteralPath $stderrPath -Force -ErrorAction SilentlyContinue
+
+  $process = Start-Process -FilePath $Executable `
+    -ArgumentList $ArgumentLine `
+    -Wait `
+    -PassThru `
+    -NoNewWindow `
+    -RedirectStandardOutput $stdoutPath `
+    -RedirectStandardError $stderrPath
+
+  [pscustomobject]@{
+    ExitCode = $process.ExitCode
+    StdoutPath = $stdoutPath
+    StderrPath = $stderrPath
+  }
+}
+
 Write-Host "[1/6] Private Node"
 $nodeDir = Join-Path $runtime "node"
 $nodeExe = Join-Path $nodeDir "node.exe"
@@ -266,16 +295,17 @@ if ($pythonActual -ne $pythonExpected) {
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActualDisplay executable=$pythonExe"
 }
 
-$previousErrorActionPreference = $ErrorActionPreference
-try {
-  # Windows PowerShell 5.1 can promote native stderr to terminating errors when
-  # ErrorActionPreference=Stop. pip may emit benign diagnostics on stderr, so
-  # capture the native process result explicitly and validate its exit code.
-  $ErrorActionPreference = "Continue"
-  $pipVersionOutput = @(& $pythonExe -m pip --version 2>&1)
-  $pipVersionExit = $LASTEXITCODE
-} finally {
-  $ErrorActionPreference = $previousErrorActionPreference
+$pipLogs = Join-Path $runtime "bootstrap-logs\pip-version"
+$pipVersionProcess = Invoke-RedirectedNativeProcess `
+  -Executable $pythonExe `
+  -ArgumentLine "-m pip --version" `
+  -LogBase $pipLogs
+$pipVersionOutput = @()
+if (Test-Path -LiteralPath $pipVersionProcess.StdoutPath -PathType Leaf) {
+  $pipVersionOutput += @(Get-Content -LiteralPath $pipVersionProcess.StdoutPath)
+}
+if (Test-Path -LiteralPath $pipVersionProcess.StderrPath -PathType Leaf) {
+  $pipVersionOutput += @(Get-Content -LiteralPath $pipVersionProcess.StderrPath)
 }
 $pipActual = @(
   $pipVersionOutput |
@@ -285,7 +315,7 @@ $pipActual = @(
 )
 $pipActual = if ($pipActual.Count -gt 0) { $pipActual[0] } else { $null }
 $pipExpectedPrefix = "pip $($manifest.runtime.python.pipBootstrap.version) "
-if ($pipVersionExit -ne 0 -or $null -eq $pipActual -or
+if ($pipVersionProcess.ExitCode -ne 0 -or $null -eq $pipActual -or
     -not $pipActual.StartsWith($pipExpectedPrefix, [StringComparison]::Ordinal)) {
   $pipActualDisplay = if ($null -eq $pipActual) {
     ($pipVersionOutput | ForEach-Object { $_.ToString().Trim() }) -join " | "
@@ -295,7 +325,7 @@ if ($pipVersionExit -ne 0 -or $null -eq $pipActual -or
   if ([string]::IsNullOrWhiteSpace($pipActualDisplay)) {
     $pipActualDisplay = "<missing-or-unreadable>"
   }
-  throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) exit=$pipVersionExit actual=$pipActualDisplay executable=$pythonExe"
+  throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) exit=$($pipVersionProcess.ExitCode) actual=$pipActualDisplay executable=$pythonExe"
 }
 
 Write-Host "[4/6] Pinned Python/ML packages"
@@ -303,55 +333,65 @@ $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
 }
-$previousErrorActionPreference = $ErrorActionPreference
-try {
-  $ErrorActionPreference = "Continue"
-  & $pythonExe $packageVerifier $manifestPath | Out-Host
-  $verifyExit = $LASTEXITCODE
-} finally {
-  $ErrorActionPreference = $previousErrorActionPreference
+$verifierLogBase = Join-Path $runtime "bootstrap-logs\package-verifier"
+$verifierArguments = ('"{0}" "{1}"' -f $packageVerifier, $manifestPath)
+$verifyProcess = Invoke-RedirectedNativeProcess `
+  -Executable $pythonExe `
+  -ArgumentLine $verifierArguments `
+  -LogBase $verifierLogBase
+if (Test-Path -LiteralPath $verifyProcess.StdoutPath -PathType Leaf) {
+  Get-Content -LiteralPath $verifyProcess.StdoutPath | Out-Host
 }
-if ($verifyExit -ne 0) {
-  $previousErrorActionPreference = $ErrorActionPreference
-  try {
-    $ErrorActionPreference = "Continue"
-    & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
-    $pipInstallExit = $LASTEXITCODE
-  } finally {
-    $ErrorActionPreference = $previousErrorActionPreference
-  }
-  if ($pipInstallExit -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED:$pipInstallExit" }
+if ($verifyProcess.ExitCode -ne 0) {
+  $pipInstallLogBase = Join-Path $runtime "bootstrap-logs\pip-install"
+  $pipInstallArguments = ('-m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r "{0}"' -f $requirements)
+  $pipInstallProcess = Invoke-RedirectedNativeProcess `
+    -Executable $pythonExe `
+    -ArgumentLine $pipInstallArguments `
+    -LogBase $pipInstallLogBase
 
-  $previousErrorActionPreference = $ErrorActionPreference
-  try {
-    $ErrorActionPreference = "Continue"
-    & $pythonExe $packageVerifier $manifestPath | Out-Host
-    $verifyExit = $LASTEXITCODE
-  } finally {
-    $ErrorActionPreference = $previousErrorActionPreference
+  if (Test-Path -LiteralPath $pipInstallProcess.StdoutPath -PathType Leaf) {
+    Get-Content -LiteralPath $pipInstallProcess.StdoutPath | Out-Host
   }
-  if ($verifyExit -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH:$verifyExit" }
+  if (Test-Path -LiteralPath $pipInstallProcess.StderrPath -PathType Leaf) {
+    Get-Content -LiteralPath $pipInstallProcess.StderrPath | Out-Host
+  }
+  if ($pipInstallProcess.ExitCode -ne 0) {
+    throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED:$($pipInstallProcess.ExitCode)"
+  }
+
+  $verifyProcess = Invoke-RedirectedNativeProcess `
+    -Executable $pythonExe `
+    -ArgumentLine $verifierArguments `
+    -LogBase $verifierLogBase
+  if (Test-Path -LiteralPath $verifyProcess.StdoutPath -PathType Leaf) {
+    Get-Content -LiteralPath $verifyProcess.StdoutPath | Out-Host
+  }
+  if (Test-Path -LiteralPath $verifyProcess.StderrPath -PathType Leaf) {
+    Get-Content -LiteralPath $verifyProcess.StderrPath | Out-Host
+  }
+  if ($verifyProcess.ExitCode -ne 0) {
+    throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH:$($verifyProcess.ExitCode)"
+  }
 }
 
-$freezeStderr = Join-Path $runtime "pip-freeze.stderr.log"
-Remove-Item -LiteralPath $freezeStderr -Force -ErrorAction SilentlyContinue
-$previousErrorActionPreference = $ErrorActionPreference
-try {
-  $ErrorActionPreference = "Continue"
-  $freezeLines = @(& $pythonExe -m pip freeze --all 2> $freezeStderr)
-  $freezeExit = $LASTEXITCODE
-} finally {
-  $ErrorActionPreference = $previousErrorActionPreference
-}
-if ($freezeExit -ne 0) {
-  if (Test-Path -LiteralPath $freezeStderr -PathType Leaf) {
-    Get-Content -LiteralPath $freezeStderr | Out-Host
+$pipFreezeLogBase = Join-Path $runtime "bootstrap-logs\pip-freeze"
+$pipFreezeProcess = Invoke-RedirectedNativeProcess `
+  -Executable $pythonExe `
+  -ArgumentLine "-m pip freeze --all" `
+  -LogBase $pipFreezeLogBase
+if ($pipFreezeProcess.ExitCode -ne 0) {
+  if (Test-Path -LiteralPath $pipFreezeProcess.StderrPath -PathType Leaf) {
+    Get-Content -LiteralPath $pipFreezeProcess.StderrPath | Out-Host
   }
-  throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED:$freezeExit"
+  throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED:$($pipFreezeProcess.ExitCode)"
+}
+$freezeLines = @()
+if (Test-Path -LiteralPath $pipFreezeProcess.StdoutPath -PathType Leaf) {
+  $freezeLines = @(Get-Content -LiteralPath $pipFreezeProcess.StdoutPath)
 }
 $freezeLines | Sort-Object |
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
-Remove-Item -LiteralPath $freezeStderr -Force -ErrorAction SilentlyContinue
 
 Write-Host "[5/6] OCR/NER models"
 $modelRoot = Join-Path $runtime "models"
