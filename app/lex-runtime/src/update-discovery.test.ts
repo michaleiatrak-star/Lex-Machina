@@ -124,6 +124,70 @@ describe(
     );
 
     it(
+      "discovers an unsigned official skill-pack release independently from the application",
+      async () => {
+        const releases = [
+          {
+            tag_name:
+              "skill-pack-v0.1.6",
+            html_url:
+              "https://github.com/michaleiatrak-star/Lex-Machina/releases/tag/skill-pack-v0.1.6",
+            name:
+              "Lex Machina Skills 0.1.6",
+            published_at:
+              "2026-09-20T20:00:00Z",
+            draft: false,
+            prerelease: false,
+            assets: [
+              asset(
+                "LexMachina-Skills-0.1.6.zip",
+                "f".repeat(64),
+                "skill-pack-v0.1.6"
+              ),
+              asset(
+                "LexMachina-Skills-Index.json",
+                "1".repeat(64),
+                "skill-pack-v0.1.6"
+              )
+            ]
+          }
+        ];
+
+        const discovery =
+          new GitHubReleaseUpdateDiscovery(
+            "0.1.5",
+            "michaleiatrak-star/Lex-Machina",
+            fakeFetch(releases)
+          );
+
+        const result =
+          await discovery.check();
+
+        expect(result.status)
+          .toBe("NO_RELEASE");
+        expect(
+          result.latestVersion
+        ).toBeUndefined();
+        expect(
+          result.latestSkillVersion
+        ).toBe("0.1.6");
+        expect(
+          result.skillsBundle?.name
+        ).toBe(
+          "LexMachina-Skills-0.1.6.zip"
+        );
+        expect(
+          result.skillsIndex?.name
+        ).toBe(
+          "LexMachina-Skills-Index.json"
+        );
+        expect(
+          result.skillsSignature
+        ).toBeUndefined();
+      }
+    );
+
+    it(
       "returns model-pack assets even when there is no application release",
       async () => {
         const releases = [
