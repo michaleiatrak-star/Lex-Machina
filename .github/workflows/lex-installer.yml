@@ -72,7 +72,24 @@ jobs:
 
       - name: Chat model and deterministic skill selection contracts
         working-directory: app/lex-web
-        run: npx vitest run src/MatterChatApp.primary-model.test.ts src/MatterChatApp.workflow-selector.test.ts src/chat-routing.test.ts
+        run: npx vitest run src/MatterChatApp.primary-model.test.ts src/chat-routing.test.ts
+
+      - name: Deterministic workflow picker source contract
+        shell: pwsh
+        run: |
+          $source = Get-Content -Raw -LiteralPath "app/lex-web/src/MatterChatApp.tsx"
+          foreach ($needle in @(
+            'aria-label="Workflow deterministyczny"',
+            'AUTO — router + skille',
+            '!isExecutionSkill(item)'
+          )) {
+            if (-not $source.Contains($needle)) {
+              throw ("DETERMINISTIC_WORKFLOW_PICKER_CONTRACT_MISSING:{0}" -f $needle)
+            }
+          }
+          if ($source.Contains('name="deterministic-workflow-skill"')) {
+            throw "DUPLICATE_DETERMINISTIC_WORKFLOW_SELECTOR"
+          }
 
       - name: Local primary credential policy wired into both chat surfaces
         shell: pwsh
