@@ -382,17 +382,17 @@ if (issues.length > 0) {
     verifiedAudit.closed === true &&
 
     fakeMarkerHttp.status === 200 &&
-    fake.status === "BLOCKED" &&
+    fake.status === "DRAFT_PRESENTABLE" &&
     fake.finalization === "DEGRADED" &&
-    !("answer" in fake) &&
+    typeof fake.answer === "string" &&
     fakeSummary.records === 1 &&
     fakeSummary.verified === 0 &&
     fakeSummary.unverified === 1 &&
 
     unverifiedHttp.status === 200 &&
-    unverified.status === "BLOCKED" &&
+    unverified.status === "DRAFT_PRESENTABLE" &&
     unverified.finalization === "DEGRADED" &&
-    !("answer" in unverified) &&
+    typeof unverified.answer === "string" &&
     typeof unverifiedSummary.records === "number" &&
     unverifiedSummary.records >= 1 &&
     unverifiedSummary.verified === 0 &&
