@@ -7,6 +7,7 @@ import {
   completeContractCheckpoint,
   contractWorkflowSequence,
   createContractAnalysisState,
+  inferContractWorkflowMode,
   markContractCheckpointNotApplicable,
   nextContractCheckpoint
 } from "./contract-analysis-state.js";
@@ -35,6 +36,20 @@ function close(
 describe(
   "deterministic contract analysis state",
   () => {
+    it.each([
+      ["Przeanalizuj tę umowę i wskaż ryzyka.", "ANALYSIS"],
+      ["Przygotuj projekt umowy B2B.", "DRAFT"],
+      ["Popraw i przeredaguj tę umowę.", "REDACTION"],
+      ["Uzupełnij umowę o klauzulę poufności.", "SUPPLEMENT"]
+    ] as const)(
+      "infers %s intent into %s mode",
+      (query, expected) => {
+        expect(
+          inferContractWorkflowMode(query)
+        ).toBe(expected);
+      }
+    );
+
     it(
       "uses the A-F branch for analysis and enforces finalization afterwards",
       () => {
