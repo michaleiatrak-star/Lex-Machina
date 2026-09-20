@@ -254,12 +254,21 @@ function executionMessage(
         : "";
     const workflowMeta =
       execution.processAuto
-        ? ` · AUTO: ${execution.processAuto.steps.length}/${execution.processAuto.maxSteps} kroków · ${execution.processAuto.stopped}`
+        ? ` · proces AUTO: ${execution.processAuto.steps.length}/${execution.processAuto.maxSteps} kroków · ${execution.processAuto.stopped}`
         : execution.processWorkflow
           ? ` · proces: ${execution.processWorkflow.stage}${execution.processWorkflow.pendingCheckpoint ? ` · czeka: ${execution.processWorkflow.pendingCheckpoint}` : ""}`
           : execution.courtWorkflow
             ? ` · analiza sądowa: ${execution.courtWorkflow.stage}${execution.courtWorkflow.nextCheckpoint ? ` · następny: ${execution.courtWorkflow.nextCheckpoint}` : ""}`
-            : "";
+            : execution.chronologyWorkflow
+              ? ` · chronologia: ${execution.chronologyWorkflow.stage}${execution.chronologyWorkflow.nextCheckpoint ? ` · następny: ${execution.chronologyWorkflow.nextCheckpoint}` : ""}${execution.chronologyWorkflow.temporalGateRequired ? " · OŚ-GATE" : ""}`
+              : execution.contractWorkflow
+                ? ` · umowa [${execution.contractWorkflow.mode}]: ${execution.contractWorkflow.stage}${execution.contractWorkflow.nextCheckpoint ? ` · następny: ${execution.contractWorkflow.nextCheckpoint}` : ""}`
+                : execution.orderedCaseWorkflow
+                  ? ` · ${execution.orderedCaseWorkflow.workflowId === "EVIDENCE_ANALYSIS_V1" ? "dowody" : "przesłuchanie"}: ${execution.orderedCaseWorkflow.status}${execution.orderedCaseWorkflow.nextCheckpoint ? ` · następny: ${execution.orderedCaseWorkflow.nextCheckpoint}` : ""}`
+                  : execution.workflow?.id &&
+                    execution.workflow.id !== "LEGAL_QUERY_V1"
+                    ? ` · workflow: ${execution.workflow.id}`
+                    : "";
     const modelRoutingMeta =
       execution.modelRouting?.auxiliary
         ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}] · helper ${execution.modelRouting.auxiliary.latencyMs} ms${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}${execution.modelRouting.auxiliary.cachedVerifierReuses > 0 ? ` · cache reuse: ${execution.modelRouting.auxiliary.cachedVerifierReuses}` : ""}`
@@ -689,10 +698,14 @@ export default function MatterChatApp({
   }
 
   function toggleCaseTypeSkill(name: string): void {
-    setCaseTypeSkills((current) =>
-      current[0] === name
+    const next =
+      caseTypeSkills[0] === name
         ? []
-        : [name]
+        : [name];
+    setCaseTypeSkills(next);
+    setProcessWorkflowVisible(
+      next[0] ===
+        "pisma-procesowe-v3"
     );
   }
 
@@ -881,7 +894,15 @@ export default function MatterChatApp({
                               ? "Deterministyczna analiza sądowa tej sprawy została już zakończona."
                               : code.startsWith("COURT_ANALYSIS_")
                                 ? `Pipeline analizy sądowej zablokował wykonanie: ${code}`
-                                : `Nie udało się wykonać sesji: ${code}`;
+                                : code.startsWith("CHRONOLOGY_")
+                                  ? `Pipeline chronologii zablokował wykonanie: ${code}`
+                                  : code.startsWith("CONTRACT_")
+                                    ? `Pipeline analizy/redakcji umowy zablokował wykonanie: ${code}`
+                                    : code.startsWith("ORDERED_WORKFLOW_")
+                                      ? `Uporządkowany pipeline dowodów/przesłuchania zablokował wykonanie: ${code}`
+                                      : code.startsWith("GUIDE_")
+                                        ? `Deterministyczny przewodnik prawny zablokował wykonanie: ${code}`
+                                        : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
       setMessages((current) => [
         ...current,
