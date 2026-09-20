@@ -109,6 +109,29 @@ const PROVIDERS: Array<{
   }
 ];
 
+export function shouldLoadPrimaryModelCatalog(
+  provider: ProviderId,
+  providerConfigured: boolean | undefined
+): boolean {
+  if (providerConfigured === undefined) {
+    return false;
+  }
+  return (
+    providerConfigured === true ||
+    provider === "openai"
+  );
+}
+
+export function canExecutePrimaryModel(
+  providerConfigured: boolean | undefined,
+  modelId: string
+): boolean {
+  return (
+    modelId.startsWith("local/") ||
+    providerConfigured === true
+  );
+}
+
 const MANDATORY_SKILLS = ["prawny-router-v3", "shared"] as const;
 const KNOWN_EXECUTION_SKILLS = new Set([
   "analiza-sadowa-v6",
@@ -478,8 +501,18 @@ export default function MatterChatApp({
     setModels([]);
     setModel("");
     setModelError("");
-    if (providerConfigured !== true) {
-      if (providerConfigured === false) setModelError("PROVIDER_NOT_CONFIGURED");
+    if (
+      !shouldLoadPrimaryModelCatalog(
+        provider,
+        providerConfigured
+      )
+    ) {
+      if (
+        providerConfigured === false &&
+        provider !== "openai"
+      ) {
+        setModelError("PROVIDER_NOT_CONFIGURED");
+      }
       return () => {
         cancelled = true;
       };
@@ -900,7 +933,10 @@ export default function MatterChatApp({
 
   const canSend =
     runtimeOnline &&
-    providerConfigured === true &&
+    canExecutePrimaryModel(
+      providerConfigured,
+      model
+    ) &&
     Boolean(model) &&
     Boolean(query.trim()) &&
     !executing &&
@@ -1654,7 +1690,12 @@ export default function MatterChatApp({
                     : ""}
                 </small>
               ) : null}
-              {providerDefinition ? (
+              {model.startsWith("local/") ? (
+                <small>
+                  Model lokalny jest dostępny jako model główny przez llama.cpp i nie wymaga klucza OpenAI.
+                </small>
+              ) : null}
+              {providerDefinition && !model.startsWith("local/") ? (
                 <button
                   type="button"
                   className="chat-link-action"
