@@ -26,7 +26,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: g39-installer-state-${{ github.event.pull_request.number || github.ref }}
+  # Reusable calls from RC validation and RC release run in parallel on the
+  # same ref. Include the caller workflow name so they do not cancel each
+  # other, while a newer run of the same caller/ref still supersedes the old one.
+  group: g39-installer-state-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
