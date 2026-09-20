@@ -179,7 +179,8 @@ jobs:
           - durable workflows keep revision/permit/checkpoint ordering, while schema pipelines keep code-enforced reads/output contracts and finalization;
           - local Bielik and Mistral remain selectable as PRIMARY without an OpenAI API key through the localhost llama.cpp adapter;
           - legacy ChatApp and active MatterChatApp use the same local/cloud primary-model credential policy;
-          - skill updates may use official Lex Machina GitHub Releases without Ed25519, while release-asset SHA-256, index compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory.
+          - skill updates may use official Lex Machina GitHub Releases without Ed25519, while release-asset SHA-256, index compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory;
+          - the instruction layer now has an independent `skill-pack-vX.Y.Z` release channel, so skill updates no longer require a new executable/application release.
 
           Trust boundaries unchanged:
           - application self-update remains Authenticode fail-closed;
