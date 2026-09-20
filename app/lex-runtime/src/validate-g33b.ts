@@ -51,7 +51,9 @@ const checks = {
     sidecar.includes('join("python.exe")'),
   pinnedPackagesOnlyIfNeeded:
     bootstrap.includes("verify-python-package-set.py") &&
-    bootstrap.includes("& $pythonExe $packageVerifier $manifestPath") &&
+    bootstrap.includes('$verifierArguments = (\'-X utf8 "{0}" "{1}"\' -f $packageVerifier, $manifestPath)') &&
+    bootstrap.includes("Invoke-RedirectedNativeProcess") &&
+    bootstrap.includes("-Executable $pythonExe") &&
     packageVerifier.includes("importlib.metadata.version") &&
     packageVerifier.includes('print("PYTHON_PACKAGE_SET_PASS")') &&
     bootstrap.includes("--upgrade-strategy only-if-needed") &&
