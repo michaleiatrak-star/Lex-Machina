@@ -671,7 +671,8 @@ async function runGrokAcp(
       }
     );
 
-    try {
+    void (async () => {
+      try {
       const init =
         await request(
           "initialize",
@@ -805,15 +806,16 @@ async function runGrokAcp(
         text:
           finalText
       });
-    } catch (error) {
-      finishReject(
-        error instanceof Error
-          ? error
-          : new Error(
-              String(error)
-            )
-      );
-    }
+      } catch (error) {
+        finishReject(
+          error instanceof Error
+            ? error
+            : new Error(
+                String(error)
+              )
+        );
+      }
+    })();
   });
 }
 
