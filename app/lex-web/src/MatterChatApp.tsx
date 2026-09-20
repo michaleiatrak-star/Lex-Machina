@@ -22,10 +22,12 @@ import {
   getHealth,
   getModels,
   getModelRoutingPreferences,
+  getProviderAccountStatus,
   getProviderStatus,
   getRoutes,
   isDesktopShell,
   listCases,
+  loginProviderAccount,
   renameCase,
   setModelRoutingPreferences,
   setProviderApiKey,
@@ -36,6 +38,7 @@ import {
   type EvidenceItem,
   type ModelDescriptor,
   type ModelRoutingPreferences,
+  type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse
 } from "./api.js";
@@ -62,7 +65,9 @@ import {
   type CaseChatMessage
 } from "./case-thread.js";
 import {
+  accountModelIdForPrimarySource,
   canExecutePrimaryModel,
+  isAccountPrimarySource,
   modelsForPrimarySource,
   runtimeProviderForPrimarySource,
   shouldLoadPrimaryModelCatalog,
@@ -126,11 +131,43 @@ const PRIMARY_MODEL_SOURCES: Array<{
     id: "local",
     label: "Lokalne"
   },
-  ...PROVIDERS.map(({ id, label }) => ({
-    id,
-    label
-  }))
+  {
+    id: "openai-account",
+    label: "ChatGPT · konto"
+  },
+  {
+    id: "openai",
+    label: "OpenAI · API"
+  },
+  {
+    id: "anthropic-account",
+    label: "Claude · konto"
+  },
+  {
+    id: "anthropic",
+    label: "Anthropic · API"
+  },
+  {
+    id: "xai-account",
+    label: "Grok · konto"
+  },
+  {
+    id: "xai",
+    label: "xAI · API"
+  }
 ];
+
+const ACCOUNT_MODEL_LABELS: Record<
+  ProviderId,
+  string
+> = {
+  openai:
+    "ChatGPT / Codex · model konta",
+  anthropic:
+    "Claude Code · model konta",
+  xai:
+    "Grok · model konta"
+};
 
 const MANDATORY_SKILLS = ["prawny-router-v3", "shared"] as const;
 const KNOWN_EXECUTION_SKILLS = new Set([
@@ -329,6 +366,20 @@ export default function MatterChatApp({
   const [providerConfiguration, setProviderConfiguration] = useState<
     Record<ProviderId, boolean | undefined>
   >({ openai: undefined, anthropic: undefined, xai: undefined });
+  const [providerAccounts, setProviderAccounts] = useState<
+    Record<
+      ProviderId,
+      ProviderAccountSessionStatus | undefined
+    >
+  >({
+    openai: undefined,
+    anthropic: undefined,
+    xai: undefined
+  });
+  const [providerAccountBusy, setProviderAccountBusy] =
+    useState(false);
+  const [providerAccountMessage, setProviderAccountMessage] =
+    useState("");
   const [providerApiKey, setProviderApiKeyInput] = useState("");
   const [providerKeyBusy, setProviderKeyBusy] = useState(false);
   const [providerKeyMessage, setProviderKeyMessage] = useState("");
@@ -405,6 +456,11 @@ export default function MatterChatApp({
     runtimeProviderForPrimarySource(provider);
   const providerConfigured =
     providerConfiguration[runtimeProvider];
+  const accountSession =
+    providerAccounts[runtimeProvider];
+  const accountAuthenticated =
+    isAccountPrimarySource(provider) &&
+    accountSession?.authenticated === true;
   const selectedModel = models.find((item) => item.id === model);
   const selectedAuxiliaryModel =
     auxiliaryModels.find(
@@ -478,10 +534,18 @@ export default function MatterChatApp({
       getHealth(),
       getRoutes(),
       getProviderStatus(),
+      getProviderAccountStatus(),
       listCases(),
       getModelRoutingPreferences()
     ])
-      .then(([health, routeList, providerStatus, caseList, routingPreferences]) => {
+      .then(([
+        health,
+        routeList,
+        providerStatus,
+        accountStatus,
+        caseList,
+        routingPreferences
+      ]) => {
         if (cancelled) return;
         setRuntimeOnline(health.status === "ok" && health.localOnly === true);
         setRoutes(routeList.primarySkills);
@@ -496,6 +560,19 @@ export default function MatterChatApp({
           Object.fromEntries(
             providerStatus.providers.map((item) => [item.provider, item.configured])
           ) as Record<ProviderId, boolean>
+        );
+        setProviderAccounts(
+          Object.fromEntries(
+            accountStatus.providers.map(
+              (item) => [
+                item.provider,
+                item
+              ]
+            )
+          ) as Record<
+            ProviderId,
+            ProviderAccountSessionStatus
+          >
         );
         setModelRouting(
           routingPreferences
@@ -535,6 +612,63 @@ export default function MatterChatApp({
     setModels([]);
     setModel("");
     setModelError("");
+
+    if (
+      isAccountPrimarySource(
+        provider
+      )
+    ) {
+      const accountModelId =
+        accountModelIdForPrimarySource(
+          provider
+        );
+      if (accountModelId) {
+        const authenticated =
+          accountSession
+            ?.authenticated === true;
+        setModels([
+          {
+            provider:
+              runtimeProvider,
+            id:
+              accountModelId,
+            displayName:
+              ACCOUNT_MODEL_LABELS[
+                runtimeProvider
+              ],
+            selectable:
+              authenticated,
+            ownedBy:
+              "account-session",
+            capabilities: [
+              "account-session",
+              "lex-runtime-tools"
+            ]
+          }
+        ]);
+        setModel(
+          accountModelId
+        );
+        if (
+          accountSession &&
+          !accountSession.installed
+        ) {
+          setModelError(
+            "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+          );
+        } else if (
+          !authenticated
+        ) {
+          setModelError(
+            "ACCOUNT_SESSION_NOT_AUTHENTICATED"
+          );
+        }
+      }
+      return () => {
+        cancelled = true;
+      };
+    }
+
     if (
       !shouldLoadPrimaryModelCatalog(
         provider,
@@ -577,7 +711,8 @@ export default function MatterChatApp({
   }, [
     provider,
     providerConfigured,
-    runtimeProvider
+    runtimeProvider,
+    accountSession
   ]);
 
   useEffect(() => {
