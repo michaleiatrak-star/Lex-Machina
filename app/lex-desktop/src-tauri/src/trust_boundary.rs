@@ -23,6 +23,10 @@ use tauri::http::{Request, Response, StatusCode};
 
 const MAX_REQUEST_BYTES: usize = 160 * 1024 * 1024;
 const MAX_RESPONSE_BYTES: usize = 192 * 1024 * 1024;
+const DEFAULT_PROXY_READ_TIMEOUT_SECS: u64 = 120;
+const LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS: u64 = 300;
+const AI_SESSION_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
+const LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS: u64 = 7_200;
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
@@ -1269,6 +1273,34 @@ struct ProxiedResponse {
     body: Vec<u8>,
 }
 
+fn proxy_read_timeout(request: &Request<Vec<u8>>) -> Duration {
+    let method = request.method().as_str();
+    let path = request.uri().path();
+
+    if method == "POST" && path == "/api/sessions/execute" {
+        return Duration::from_secs(AI_SESSION_PROXY_READ_TIMEOUT_SECS);
+    }
+
+    if method == "POST" && path == "/api/local-models/start" {
+        return Duration::from_secs(LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS);
+    }
+
+    if method == "POST"
+        && matches!(
+            path,
+            "/api/local-models/provision"
+                | "/api/local-models/repair"
+                | "/api/local-models/update/apply"
+        )
+    {
+        return Duration::from_secs(
+            LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS,
+        );
+    }
+
+    Duration::from_secs(DEFAULT_PROXY_READ_TIMEOUT_SECS)
+}
+
 fn raw_http_request(
     address: SocketAddr,
     bootstrap_token: &str,
@@ -1278,8 +1310,9 @@ fn raw_http_request(
 ) -> Result<ProxiedResponse, String> {
     let mut stream = TcpStream::connect_timeout(&address, Duration::from_secs(5))
         .map_err(|error| format!("CONNECT:{error}"))?;
+    let read_timeout = proxy_read_timeout(request);
     stream
-        .set_read_timeout(Some(Duration::from_secs(120)))
+        .set_read_timeout(Some(read_timeout))
         .map_err(|error| format!("READ_TIMEOUT:{error}"))?;
     stream
         .set_write_timeout(Some(Duration::from_secs(30)))
@@ -1632,6 +1665,59 @@ mod tests {
         assert!(!route_allowed("DELETE", "/api/support/diagnostics"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
+    }
+
+    #[test]
+    fn long_running_local_ai_routes_have_extended_proxy_timeouts() {
+        let session = Request::builder()
+            .method("POST")
+            .uri("/api/sessions/execute")
+            .body(Vec::new())
+            .expect("session request");
+        assert_eq!(
+            proxy_read_timeout(&session),
+            Duration::from_secs(AI_SESSION_PROXY_READ_TIMEOUT_SECS)
+        );
+
+        let start = Request::builder()
+            .method("POST")
+            .uri("/api/local-models/start")
+            .body(Vec::new())
+            .expect("start request");
+        assert_eq!(
+            proxy_read_timeout(&start),
+            Duration::from_secs(
+                LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS
+            )
+        );
+
+        for path in [
+            "/api/local-models/provision",
+            "/api/local-models/repair",
+            "/api/local-models/update/apply",
+        ] {
+            let request = Request::builder()
+                .method("POST")
+                .uri(path)
+                .body(Vec::new())
+                .expect("maintenance request");
+            assert_eq!(
+                proxy_read_timeout(&request),
+                Duration::from_secs(
+                    LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS
+                )
+            );
+        }
+
+        let ordinary = Request::builder()
+            .method("GET")
+            .uri("/api/cases")
+            .body(Vec::new())
+            .expect("ordinary request");
+        assert_eq!(
+            proxy_read_timeout(&ordinary),
+            Duration::from_secs(DEFAULT_PROXY_READ_TIMEOUT_SECS)
+        );
     }
 
     #[test]
