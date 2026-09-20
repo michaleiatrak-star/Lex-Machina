@@ -108,12 +108,11 @@ const required = [
   "Dokładny cytat zaznaczony w źródle",
   "źródłowego chunka",
   "DRAFT_PRESENTABLE",
-  "HARD GATE",
   "Źródła i weryfikacja",
   "VERIFIED",
   "SUPPORTED",
   "Otwórz źródło w przeglądarce",
-  "Model i klucz API",
+  "Model i konto / API",
   "otwórz w przeglądarce",
   "Konfiguracja lokalna"
 ];
