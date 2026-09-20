@@ -228,6 +228,47 @@ describe("DynamicModelCatalog", () => {
     ).toBeUndefined();
   });
 
+  it("keeps an installed local model selectable even when its saved profile is missing", async () => {
+    const localRuntime = {
+      listModels: () => [
+        {
+          provider: "local" as const,
+          id: "local/mistral-nemo-12b-q4km",
+          displayName: "Mistral NeMo 12B",
+          selectable: true as const,
+          contextWindow: 131_072,
+          nativeContextWindow: 131_072,
+          minimumContextWindow: 64_000,
+          maximumContextWindow: 200_000,
+          contextMode: "NATIVE_OR_REDUCED" as const,
+          quantization: "Q4_K_M",
+          license: "Apache-2.0",
+          source: "mistralai/Mistral-Nemo-Instruct-2407",
+          localOnly: true as const,
+          installed: true
+        }
+      ],
+      qualificationForModel: () => null
+    } as unknown as LocalModelRuntime;
+    const fetcher: FetchLike = vi.fn();
+    const catalog = new DynamicModelCatalog(
+      new StaticCredentialResolver({}),
+      fetcher,
+      localRuntime
+    );
+
+    const models = await catalog.list("openai");
+
+    expect(models).toEqual([
+      expect.objectContaining({
+        id: "local/mistral-nemo-12b-q4km",
+        selectable: true,
+        contextWindow: 131_072
+      })
+    ]);
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
   it("fails before any network request when a provider key is missing", async () => {
     const fetcher: FetchLike = vi.fn();
     const catalog = new DynamicModelCatalog(
