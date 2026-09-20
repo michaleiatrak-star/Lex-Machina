@@ -1,7 +1,14 @@
-use std::{fs, path::PathBuf};
+use std::{
+    fs,
+    io::Cursor,
+    path::PathBuf,
+};
 
-const EXPECTED_ICON_BYTES: usize = 20_469;
+use ico::{IconDir, IconDirEntry, ResourceType};
+
+const EXPECTED_SOURCE_ICON_BYTES: usize = 20_469;
 const EXPECTED_ICON_COUNT: u16 = 7;
+const EXPECTED_ICON_SIZES: [u32; 7] = [16, 24, 32, 48, 64, 128, 256];
 
 const ICON_PARTS: [&str; 7] = [
     include_str!("icons/generated-branding/icon.b64.part01"),
@@ -63,31 +70,51 @@ fn materialize_windows_icon() {
         encoded.push_str(part.trim());
     }
 
-    let bytes = decode_base64(&encoded);
+    let source_bytes = decode_base64(&encoded);
     assert_eq!(
-        bytes.len(),
-        EXPECTED_ICON_BYTES,
-        "pinned Lex Machina brand icon size changed unexpectedly"
+        source_bytes.len(),
+        EXPECTED_SOURCE_ICON_BYTES,
+        "pinned Lex Machina brand icon source size changed unexpectedly"
     );
-    assert!(
-        bytes.len() >= 6
-            && bytes[0] == 0
-            && bytes[1] == 0
-            && bytes[2] == 1
-            && bytes[3] == 0,
-        "pinned Lex Machina brand icon has an invalid ICO header"
-    );
-    let count = u16::from_le_bytes([bytes[4], bytes[5]]);
+
+    let source_dir = IconDir::read(Cursor::new(source_bytes))
+        .expect("failed to decode pinned Lex Machina brand ICO");
     assert_eq!(
-        count,
-        EXPECTED_ICON_COUNT,
+        source_dir.resource_type(),
+        ResourceType::Icon,
+        "pinned Lex Machina brand source is not an icon"
+    );
+    assert_eq!(
+        source_dir.entries().len(),
+        EXPECTED_ICON_COUNT as usize,
         "pinned Lex Machina brand icon image count changed unexpectedly"
     );
+
+    let mut output_dir = IconDir::new(ResourceType::Icon);
+    for (index, entry) in source_dir.entries().iter().enumerate() {
+        let expected_size = EXPECTED_ICON_SIZES[index];
+        assert_eq!(
+            (entry.width(), entry.height()),
+            (expected_size, expected_size),
+            "pinned Lex Machina brand icon size order changed unexpectedly"
+        );
+
+        let image = entry
+            .decode()
+            .expect("failed to decode indexed brand icon entry to RGBA");
+        let encoded_entry = IconDirEntry::encode_as_png(&image)
+            .expect("failed to encode RGBA brand icon entry for Tauri");
+        output_dir.add_entry(encoded_entry);
+    }
 
     let icon_dir = PathBuf::from("icons");
     let icon_path = icon_dir.join("icon.ico");
     fs::create_dir_all(&icon_dir).expect("failed to create Tauri icon directory");
-    fs::write(&icon_path, bytes).expect("failed to materialize pinned Lex Machina brand icon");
+    let file = fs::File::create(&icon_path)
+        .expect("failed to create Tauri-compatible Lex Machina icon");
+    output_dir
+        .write(file)
+        .expect("failed to write Tauri-compatible Lex Machina icon");
 }
 
 fn main() {
