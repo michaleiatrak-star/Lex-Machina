@@ -60,11 +60,46 @@ describe(
         ).toBeGreaterThan(0);
         expect(prompt)
           .toContain(
-            "deterministic Gate I runtime owns"
+            "semantic module only"
           );
         expect(prompt)
           .not.toContain(
             "SKILL.md"
+          );
+      }
+    );
+
+    it(
+      "marks only the controlling execution skill as a specialized deterministic workflow",
+      () => {
+        const active =
+          gateISemanticPrompt(
+            "pisma-procesowe-v3",
+            {
+              specializedWorkflowActive:
+                true
+            }
+          );
+        const cooperating =
+          gateISemanticPrompt(
+            "chronologia-sprawy-v1"
+          );
+
+        expect(active)
+          .toContain(
+            "controls the active specialized deterministic workflow"
+          );
+        expect(active)
+          .toContain(
+            "active runtime checkpoint/stage"
+          );
+        expect(cooperating)
+          .toContain(
+            "semantic module only"
+          );
+        expect(cooperating)
+          .toContain(
+            "Do not simulate, announce, close or skip any skill-specific checkpoint"
           );
       }
     );
