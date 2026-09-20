@@ -2,7 +2,7 @@ schema_version: 1
 repository: michaleiatrak-star/Lex-Machina
 source_root: "Wersja rozwojowa rozpakowana"
 baseline_commit: "d7e9cbb7284bd70e5e9d9f951f04e5dae15daac1"
-work_branch: "release/0.1.5-g39l-rc4"
+work_branch: "release/0.1.5-g39l-rc5"
 runtime_api_version: "0.1"
 application_version: "0.1.5"
 policy:
