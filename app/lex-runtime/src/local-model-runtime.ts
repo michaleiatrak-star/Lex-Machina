@@ -1163,6 +1163,10 @@ export class LocalModelRuntime {
       );
     const rollbackModelPath =
       `${targetModelPath}.lex-rollback`;
+    const previousTargetExisted =
+      fs.existsSync(
+        targetModelPath
+      );
     const previousTargetWasActive =
       Boolean(
         previousConfigObject &&
@@ -1184,7 +1188,7 @@ export class LocalModelRuntime {
         modelFilename:
           model.filename,
         hadPreviousModel:
-          previousTargetWasActive,
+          previousTargetExisted,
         hadPreviousConfig:
           previousConfig !== null,
         hadPreviousQualification:
