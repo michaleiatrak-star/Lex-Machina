@@ -1,12 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
+  accountModelIdForPrimarySource,
   canExecutePrimaryModel,
+  isAccountPrimarySource,
   modelsForPrimarySource,
   runtimeProviderForPrimarySource,
   shouldLoadPrimaryModelCatalog
 } from "./primary-model-policy.js";
 
-describe("primary local model chat policy", () => {
+describe("primary model chat policy", () => {
   it("exposes local models as a separate primary source", () => {
     expect(
       runtimeProviderForPrimarySource("local")
@@ -14,6 +16,36 @@ describe("primary local model chat policy", () => {
     expect(
       runtimeProviderForPrimarySource("anthropic")
     ).toBe("anthropic");
+  });
+
+  it("maps account lanes back to their runtime providers", () => {
+    expect(
+      runtimeProviderForPrimarySource(
+        "openai-account"
+      )
+    ).toBe("openai");
+    expect(
+      runtimeProviderForPrimarySource(
+        "anthropic-account"
+      )
+    ).toBe("anthropic");
+    expect(
+      runtimeProviderForPrimarySource(
+        "xai-account"
+      )
+    ).toBe("xai");
+    expect(
+      isAccountPrimarySource(
+        "anthropic-account"
+      )
+    ).toBe(true);
+    expect(
+      accountModelIdForPrimarySource(
+        "xai-account"
+      )
+    ).toBe(
+      "account/xai/default"
+    );
   });
 
   it("loads the local model catalog without an OpenAI API key", () => {
@@ -25,10 +57,26 @@ describe("primary local model chat policy", () => {
     ).toBe(true);
   });
 
-  it("does not expose local models inside the OpenAI cloud lane", () => {
+  it("does not open cloud model catalogs for account-session lanes", () => {
+    expect(
+      shouldLoadPrimaryModelCatalog(
+        "openai-account",
+        true
+      )
+    ).toBe(false);
+    expect(
+      shouldLoadPrimaryModelCatalog(
+        "anthropic-account",
+        true
+      )
+    ).toBe(false);
+  });
+
+  it("does not expose local or account models inside the OpenAI API lane", () => {
     const catalog = [
       { id: "local/bielik-11b-v3-q4km" },
       { id: "local/mistral-nemo-12b-q4km" },
+      { id: "account/openai/default" },
       { id: "gpt-5" }
     ];
 
@@ -43,6 +91,12 @@ describe("primary local model chat policy", () => {
       modelsForPrimarySource("openai", catalog)
         .map((item) => item.id)
     ).toEqual(["gpt-5"]);
+    expect(
+      modelsForPrimarySource(
+        "openai-account",
+        catalog
+      )
+    ).toEqual([]);
   });
 
   it("requires credentials before opening cloud provider catalogs", () => {
@@ -81,7 +135,24 @@ describe("primary local model chat policy", () => {
     ).toBe(true);
   });
 
-  it("keeps remote primary models credential-gated", () => {
+  it("gates account models on authenticated account sessions", () => {
+    expect(
+      canExecutePrimaryModel(
+        false,
+        "account/openai/default",
+        false
+      )
+    ).toBe(false);
+    expect(
+      canExecutePrimaryModel(
+        false,
+        "account/openai/default",
+        true
+      )
+    ).toBe(true);
+  });
+
+  it("keeps remote API primary models credential-gated", () => {
     expect(
       canExecutePrimaryModel(
         false,
