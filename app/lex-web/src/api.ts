@@ -493,6 +493,18 @@ export type ProviderStatusResponse = {
   providers: ProviderConfigurationStatus[];
 };
 
+export type ProviderAccountSessionStatus = {
+  provider: ProviderId;
+  command: string;
+  installed: boolean;
+  authenticated: boolean;
+  installHint: string;
+};
+
+export type ProviderAccountStatusResponse = {
+  providers: ProviderAccountSessionStatus[];
+};
+
 export type ModelRoutingPreferences = {
   auxiliaryEnabled: boolean;
   auxiliaryProvider: ProviderId;
@@ -1807,6 +1819,24 @@ export function clearProviderApiKey(
     `/api/admin/providers/${provider}/credential`,
     {
       method: "DELETE"
+    }
+  );
+}
+
+export function getProviderAccountStatus():
+  Promise<ProviderAccountStatusResponse> {
+  return json<ProviderAccountStatusResponse>(
+    "/api/provider-accounts"
+  );
+}
+
+export function loginProviderAccount(
+  provider: ProviderId
+): Promise<ProviderAccountSessionStatus> {
+  return json<ProviderAccountSessionStatus>(
+    `/api/provider-accounts/${provider}/login`,
+    {
+      method: "POST"
     }
   );
 }
