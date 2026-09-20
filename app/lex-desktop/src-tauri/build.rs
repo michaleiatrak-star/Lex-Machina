@@ -1,302 +1,109 @@
-use std::{
-    fs,
-    path::PathBuf,
-};
+use std::{fs, path::PathBuf};
 
-const BACKGROUND: [u8; 4] = [0x13, 0x24, 0x1b, 0xff];
-const FOREGROUND: [u8; 4] = [0xf6, 0xf5, 0xed, 0xff];
-const BORDER: [u8; 4] = [0x6e, 0x80, 0x6f, 0xff];
-const TRANSPARENT: [u8; 4] = [0, 0, 0, 0];
+const EXPECTED_ICON_BYTES: usize = 37_978;
+const EXPECTED_ICON_COUNT: u16 = 7;
 
-const GLYPH_L: [&str; 7] = [
-    "10000",
-    "10000",
-    "10000",
-    "10000",
-    "10000",
-    "10000",
-    "11111",
+const ICON_PARTS: [&str; 7] = [
+    include_str!("icons/generated-branding/icon.b64.part01"),
+    include_str!("icons/generated-branding/icon.b64.part02"),
+    include_str!("icons/generated-branding/icon.b64.part03"),
+    include_str!("icons/generated-branding/icon.b64.part04"),
+    include_str!("icons/generated-branding/icon.b64.part05"),
+    include_str!("icons/generated-branding/icon.b64.part06"),
+    include_str!("icons/generated-branding/icon.b64.part07"),
 ];
 
-const GLYPH_M: [&str; 7] = [
-    "10001",
-    "11011",
-    "10101",
-    "10101",
-    "10001",
-    "10001",
-    "10001",
-];
-
-fn rounded_square_contains(
-    x: usize,
-    y: usize,
-    size: usize,
-    radius: usize,
-) -> bool {
-    if x >= radius && x < size - radius {
-        return true;
-    }
-    if y >= radius && y < size - radius {
-        return true;
-    }
-
-    let cx = if x < radius {
-        radius
-    } else {
-        size - radius - 1
-    };
-    let cy = if y < radius {
-        radius
-    } else {
-        size - radius - 1
-    };
-
-    let dx = x as isize - cx as isize;
-    let dy = y as isize - cy as isize;
-    dx * dx + dy * dy
-        <= (radius as isize) * (radius as isize)
-}
-
-fn glyph_pixel(
-    x: usize,
-    y: usize,
-    size: usize,
-) -> bool {
-    let cell = ((size * 64 / 100) / 11).max(1);
-    let width = 11 * cell;
-    let height = 7 * cell;
-    let start_x = size.saturating_sub(width) / 2;
-    let start_y = size.saturating_sub(height) / 2;
-
-    if x < start_x
-        || y < start_y
-        || x >= start_x + width
-        || y >= start_y + height
-    {
-        return false;
-    }
-
-    let gx = (x - start_x) / cell;
-    let gy = (y - start_y) / cell;
-
-    let value = if gx < 5 {
-        GLYPH_L[gy]
-            .as_bytes()
-            .get(gx)
-            .copied()
-    } else if gx == 5 {
-        None
-    } else {
-        GLYPH_M[gy]
-            .as_bytes()
-            .get(gx - 6)
-            .copied()
-    };
-
-    value == Some(b'1')
-}
-
-fn pixel_rgba(
-    x: usize,
-    y: usize,
-    size: usize,
-) -> [u8; 4] {
-    let radius = (size / 5).max(2);
-    if !rounded_square_contains(
-        x,
-        y,
-        size,
-        radius,
-    ) {
-        return TRANSPARENT;
-    }
-
-    let border_width = (size / 32).max(1);
-    let inner_radius =
-        radius.saturating_sub(border_width);
-    let inside_inner = x >= border_width
-        && y >= border_width
-        && x + border_width < size
-        && y + border_width < size
-        && rounded_square_contains(
-            x - border_width,
-            y - border_width,
-            size - border_width * 2,
-            inner_radius,
-        );
-
-    if !inside_inner {
-        return BORDER;
-    }
-
-    if glyph_pixel(x, y, size) {
-        FOREGROUND
-    } else {
-        BACKGROUND
+fn base64_value(byte: u8) -> Option<u8> {
+    match byte {
+        b'A'..=b'Z' => Some(byte - b'A'),
+        b'a'..=b'z' => Some(byte - b'a' + 26),
+        b'0'..=b'9' => Some(byte - b'0' + 52),
+        b'+' => Some(62),
+        b'/' => Some(63),
+        _ => None,
     }
 }
 
-fn dib_image(size: usize) -> Vec<u8> {
-    let mask_stride = ((size + 31) / 32) * 4;
-    let xor_bytes = size * size * 4;
-    let mask_bytes = mask_stride * size;
-    let image_bytes = 40 + xor_bytes + mask_bytes;
+fn decode_base64(input: &str) -> Vec<u8> {
+    let mut output = Vec::with_capacity(input.len() * 3 / 4);
+    let mut quartet = [0_u8; 4];
+    let mut quartet_len = 0_usize;
+    let mut padding = 0_usize;
 
-    let mut bytes =
-        Vec::with_capacity(image_bytes);
-
-    bytes.extend_from_slice(
-        &40_u32.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &(size as i32).to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &((size * 2) as i32).to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &1_u16.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &32_u16.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &0_u32.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &(xor_bytes as u32).to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &0_i32.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &0_i32.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &0_u32.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &0_u32.to_le_bytes(),
-    );
-
-    for row in 0..size {
-        let y = size - 1 - row;
-        for x in 0..size {
-            let [r, g, b, a] =
-                pixel_rgba(x, y, size);
-            bytes.extend_from_slice(
-                &[b, g, r, a],
-            );
+    for byte in input.bytes().filter(|byte| !byte.is_ascii_whitespace()) {
+        if byte == b'=' {
+            quartet[quartet_len] = 0;
+            padding += 1;
+        } else {
+            quartet[quartet_len] =
+                base64_value(byte).expect("invalid base64 byte in pinned brand icon");
         }
-    }
 
-    for row in 0..size {
-        let y = size - 1 - row;
-        let mut mask =
-            vec![0_u8; mask_stride];
-        for x in 0..size {
-            if pixel_rgba(x, y, size)[3]
-                == 0
-            {
-                let byte = x / 8;
-                let bit = 7 - (x % 8);
-                mask[byte] |= 1 << bit;
+        quartet_len += 1;
+        if quartet_len == 4 {
+            output.push((quartet[0] << 2) | (quartet[1] >> 4));
+            if padding < 2 {
+                output.push((quartet[1] << 4) | (quartet[2] >> 2));
             }
+            if padding == 0 {
+                output.push((quartet[2] << 6) | quartet[3]);
+            }
+            quartet_len = 0;
+            padding = 0;
         }
-        bytes.extend_from_slice(&mask);
     }
 
-    bytes
+    assert_eq!(quartet_len, 0, "truncated base64 in pinned brand icon");
+    output
 }
 
-fn ensure_windows_icon() {
-    let icon_dir =
-        PathBuf::from("icons");
-    let icon_path =
-        icon_dir.join("icon.ico");
-
-    let sizes: [usize; 7] =
-        [16, 24, 32, 48, 64, 128, 256];
-    let images: Vec<(usize, Vec<u8>)> =
-        sizes
-            .into_iter()
-            .map(|size| {
-                (size, dib_image(size))
-            })
-            .collect();
-
-    let header_bytes =
-        6 + images.len() * 16;
-    let mut offset =
-        header_bytes as u32;
-    let mut bytes:
-        Vec<u8> = Vec::new();
-
-    bytes.extend_from_slice(
-        &0_u16.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &1_u16.to_le_bytes(),
-    );
-    bytes.extend_from_slice(
-        &(images.len() as u16)
-            .to_le_bytes(),
-    );
-
-    for (size, image) in &images {
-        bytes.push(
-            if *size == 256 {
-                0
-            } else {
-                *size as u8
-            },
-        );
-        bytes.push(
-            if *size == 256 {
-                0
-            } else {
-                *size as u8
-            },
-        );
-        bytes.push(0);
-        bytes.push(0);
-        bytes.extend_from_slice(
-            &1_u16.to_le_bytes(),
-        );
-        bytes.extend_from_slice(
-            &32_u16.to_le_bytes(),
-        );
-        bytes.extend_from_slice(
-            &(image.len() as u32)
-                .to_le_bytes(),
-        );
-        bytes.extend_from_slice(
-            &offset.to_le_bytes(),
-        );
-        offset += image.len() as u32;
+fn materialize_windows_icon() {
+    let mut encoded = String::new();
+    for part in ICON_PARTS {
+        encoded.push_str(part.trim());
     }
 
-    for (_, image) in images {
-        bytes.extend_from_slice(
-            &image,
-        );
-    }
+    let bytes = decode_base64(&encoded);
+    assert_eq!(
+        bytes.len(),
+        EXPECTED_ICON_BYTES,
+        "pinned Lex Machina brand icon size changed unexpectedly"
+    );
+    assert!(
+        bytes.len() >= 6
+            && bytes[0] == 0
+            && bytes[1] == 0
+            && bytes[2] == 1
+            && bytes[3] == 0,
+        "pinned Lex Machina brand icon has an invalid ICO header"
+    );
+    let count = u16::from_le_bytes([bytes[4], bytes[5]]);
+    assert_eq!(
+        count,
+        EXPECTED_ICON_COUNT,
+        "pinned Lex Machina brand icon image count changed unexpectedly"
+    );
 
-    fs::create_dir_all(&icon_dir)
-        .expect(
-            "failed to create Tauri icon directory",
-        );
-    fs::write(&icon_path, bytes)
-        .expect(
-            "failed to write deterministic Lex Machina icon",
-        );
+    let icon_dir = PathBuf::from("icons");
+    let icon_path = icon_dir.join("icon.ico");
+    fs::create_dir_all(&icon_dir).expect("failed to create Tauri icon directory");
+    fs::write(&icon_path, bytes).expect("failed to materialize pinned Lex Machina brand icon");
 }
 
 fn main() {
-    ensure_windows_icon();
-    println!(
-        "cargo:rerun-if-changed=build.rs"
-    );
+    materialize_windows_icon();
+
+    for part in [
+        "icons/generated-branding/icon.b64.part01",
+        "icons/generated-branding/icon.b64.part02",
+        "icons/generated-branding/icon.b64.part03",
+        "icons/generated-branding/icon.b64.part04",
+        "icons/generated-branding/icon.b64.part05",
+        "icons/generated-branding/icon.b64.part06",
+        "icons/generated-branding/icon.b64.part07",
+    ] {
+        println!("cargo:rerun-if-changed={part}");
+    }
+
     tauri_build::build()
 }
