@@ -66,7 +66,7 @@ try {
   $stdout = Join-Path $root "pip.stdout.log"
   $stderr = Join-Path $root "pip.stderr.log"
   $proc = Start-Process -FilePath $pythonExe `
-    -ArgumentList "-m pip --version" `
+    -ArgumentList "-X utf8 -m pip --version" `
     -Wait `
     -PassThru `
     -NoNewWindow `
@@ -85,7 +85,7 @@ try {
   $freezeOut = Join-Path $root "freeze.stdout.log"
   $freezeErr = Join-Path $root "freeze.stderr.log"
   $freeze = Start-Process -FilePath $pythonExe `
-    -ArgumentList "-m pip freeze --all" `
+    -ArgumentList "-X utf8 -m pip freeze --all" `
     -Wait `
     -PassThru `
     -NoNewWindow `
