@@ -1638,32 +1638,34 @@ export default function MatterChatApp({
                 );
               }}
             />
-            {conversationIsNew && availablePipelines.length > 0 ? (
+            {conversationIsNew && availableActions.length > 0 ? (
               <section
                 className="chat-pipeline-picker"
-                aria-label="Pipeline deterministyczny dla nowej rozmowy"
+                aria-label="Typ działania dla pierwszej wiadomości"
               >
                 <div>
-                  <p className="eyebrow">Nowa rozmowa</p>
+                  <p className="eyebrow">Typ działania</p>
                   <h3>
-                    {caseTypeSkills.length === 0
-                      ? "Tryb automatyczny — router dobierze wykonanie"
-                      : `${caseTypeSkills.length} wybranych pipeline'ów`}
+                    {selectedDeterministicAction
+                      ? selectedDeterministicAction.label
+                      : "Automatycznie — prawny router"}
                   </h3>
                   <p>
-                    Możesz od razu wskazać pipeline deterministyczny zamiast
-                    polegać na tym, że Auto rozpozna go z treści pytania.
-                    Wybór nie wyłącza Auto — router nadal może dobrać
-                    współpracujące skille i dziedziny.
+                    Brak wyboru oznacza pełny tryb automatyczny: prawny-router-v3
+                    dobiera dziedziny DR i skille wykonawcze z treści wiadomości.
+                    Wybranie działania uruchamia stałe, programistyczne mapowanie
+                    na właściwy pipeline wykonawczy. Po wysłaniu pierwszej
+                    wiadomości ten wybór znika i zostaje przypięty do wątku.
                   </p>
                 </div>
                 <div className="chat-pipeline-options">
-                  {availablePipelines.map((name) => {
+                  {availableActions.map((action) => {
                     const checked =
-                      caseTypeSkills.includes(name);
+                      deterministicAction ===
+                      action.id;
                     return (
                       <button
-                        key={name}
+                        key={action.id}
                         type="button"
                         className={
                           checked
@@ -1671,19 +1673,32 @@ export default function MatterChatApp({
                             : "chat-pipeline-option"
                         }
                         aria-pressed={checked}
-                        onClick={() => toggleCaseTypeSkill(name)}
+                        onClick={() =>
+                          selectDeterministicAction(
+                            checked
+                              ? ""
+                              : action.id
+                          )
+                        }
                       >
-                        {labelForSkill(name)}
+                        <strong>
+                          {action.label}
+                        </strong>
+                        <small>
+                          {action.description}
+                        </small>
                       </button>
                     );
                   })}
-                  {caseTypeSkills.length > 0 ? (
+                  {deterministicAction ? (
                     <button
                       type="button"
                       className="chat-pipeline-option reset"
-                      onClick={() => setCaseTypeSkills([])}
+                      onClick={() =>
+                        selectDeterministicAction("")
+                      }
                     >
-                      Wróć do Auto
+                      Bez wyboru · AUTO
                     </button>
                   ) : null}
                 </div>
