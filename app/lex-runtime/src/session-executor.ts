@@ -1608,7 +1608,6 @@ export class SafeSessionExecutor implements SessionExecutor {
       workflowOutputBlocked ||
       guideOutputBlocked ||
       reportBlueprintBlocked ||
-      criticalGateIBlocked ||
       workflowContractExtensionBlocked;
     audit.record(
       "gate",
