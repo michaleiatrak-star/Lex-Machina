@@ -298,8 +298,23 @@ if ([bool]$selectedBackend.gpuOffload) {
 }
 
 $cachedModel = Join-Path $cache $model.filename
-Get-VerifiedDownload $model.url $model.sha256 $cachedModel ("model:" + $model.id)
 $target = Join-Path $modelDir $model.filename
+
+# Upgrade/profile-recovery path: an already installed GGUF is itself a valid
+# source for the verified cache. Seed the cache from the installed file when
+# its hash matches the signed/release manifest so requalification does not
+# download a multi-gigabyte model again.
+if (
+  -not (Test-Path -LiteralPath $cachedModel -PathType Leaf) -and
+  (Test-Path -LiteralPath $target -PathType Leaf)
+) {
+  $installedHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
+  if ($installedHash -eq $model.sha256.ToLowerInvariant()) {
+    Copy-Item -LiteralPath $target -Destination $cachedModel -Force
+  }
+}
+
+Get-VerifiedDownload $model.url $model.sha256 $cachedModel ("model:" + $model.id)
 $copyRequired = $true
 if (Test-Path -LiteralPath $target -PathType Leaf) {
   $targetHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $target).Hash.ToLowerInvariant()
