@@ -2314,27 +2314,42 @@ export default function MatterChatApp({
               </label>
               </div>
               {provider === "local" ? (
-                <div className="chat-form-row compact">
-                  <small>
-                    Zainstalowane modele lokalne: {models.length}
-                  </small>
-                  <button
-                    type="button"
-                    className="chat-secondary-action"
-                    disabled={modelCatalogLoading}
-                    onClick={() =>
-                      setLocalModelsRefreshToken(
-                        (value) =>
-                          value + 1
-                      )
+                <div className="chat-settings-status-row">
+                  <span className="chat-settings-status ready">
+                    {modelCatalogLoading
+                      ? "Odświeżam lokalny katalog…"
+                      : `Wykryto modeli lokalnych: ${models.length}`}
+                  </span>
+                </div>
+              ) : isAccountPrimarySource(provider) ? (
+                <div className="chat-settings-status-row">
+                  <span
+                    className={
+                      accountAuthenticated
+                        ? "chat-settings-status ready"
+                        : "chat-settings-status"
                     }
                   >
-                    {modelCatalogLoading
-                      ? "Odświeżanie…"
-                      : "Odśwież listę"}
-                  </button>
+                    {accountAuthenticated
+                      ? "Konto połączone"
+                      : "Konto wymaga połączenia"}
+                  </span>
                 </div>
-              ) : null}
+              ) : (
+                <div className="chat-settings-status-row">
+                  <span
+                    className={
+                      providerConfigured
+                        ? "chat-settings-status ready"
+                        : "chat-settings-status"
+                    }
+                  >
+                    {providerConfigured
+                      ? "Klucz API aktywny"
+                      : "Brak aktywnego klucza API"}
+                  </span>
+                </div>
+              )}
               {modelError ? (
                 <p className="chat-inline-error">
                   {modelError === "PROVIDER_NOT_CONFIGURED"
