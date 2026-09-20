@@ -13,6 +13,9 @@ import { AdminUsersPanel } from "./AdminUsersPanel.js";
 import { AdminSupportPanel } from "./AdminSupportPanel.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import {
+  useFloatingPanelDrag
+} from "./use-floating-panel.js";
+import {
   ApiError,
   bootstrapAdmin,
   clearAuthSession,
@@ -337,6 +340,12 @@ export default function AuthenticatedApp() {
     useState(false);
   const [showUsers, setShowUsers] =
     useState(false);
+  const [
+    authToolbarMinimized,
+    setAuthToolbarMinimized
+  ] = useState(true);
+  const authToolbarDrag =
+    useFloatingPanelDrag();
 
   useEffect(() => {
     let cancelled = false;
@@ -616,58 +625,109 @@ export default function AuthenticatedApp() {
         </div>
       )}
 
-      <div className="auth-toolbar">
-        <div>
-          <strong>
-            {auth.user.displayName}
-          </strong>
-          <span>
-            @{auth.user.loginName}
-          </span>
-        </div>
-        <button
-          type="button"
-          onClick={() =>
-            setShowSecurity(
-              (value) => !value
-            )
-          }
+      <div
+        className={
+          authToolbarMinimized
+            ? "auth-toolbar auth-toolbar-minimized"
+            : "auth-toolbar"
+        }
+        data-floating-panel="true"
+        style={
+          authToolbarDrag.style
+        }
+      >
+        <span
+          className="floating-drag-handle"
+          title="Przeciągnij panel"
+          aria-label="Przeciągnij panel użytkownika"
+          {...authToolbarDrag.handleProps}
         >
-          {showSecurity
-            ? "Ukryj bezpieczeństwo"
-            : "Hasło i recovery"}
-        </button>
-        {auth.user.appRole ===
-          "ADMIN" && (
+          ⋮⋮
+        </span>
+        {authToolbarMinimized ? (
           <button
             type="button"
+            className="floating-icon-button"
+            aria-label="Rozwiń panel użytkownika"
+            title={
+              `${auth.user.displayName} · rozwiń panel użytkownika`
+            }
             onClick={() =>
-              setShowUsers(
-                (value) => !value
+              setAuthToolbarMinimized(
+                false
               )
             }
           >
-            {showUsers
-              ? "Ukryj użytkowników"
-              : "Użytkownicy"}
+            👤
           </button>
+        ) : (
+          <>
+            <div>
+              <strong>
+                {auth.user.displayName}
+              </strong>
+              <span>
+                @{auth.user.loginName}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                setShowSecurity(
+                  (value) => !value
+                )
+              }
+            >
+              {showSecurity
+                ? "Ukryj bezpieczeństwo"
+                : "Hasło i recovery"}
+            </button>
+            {auth.user.appRole ===
+              "ADMIN" && (
+              <button
+                type="button"
+                onClick={() =>
+                  setShowUsers(
+                    (value) => !value
+                  )
+                }
+              >
+                {showUsers
+                  ? "Ukryj użytkowników"
+                  : "Użytkownicy"}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                void lock();
+              }}
+            >
+              Zablokuj
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                void logout();
+              }}
+            >
+              Wyloguj
+            </button>
+            <button
+              type="button"
+              className="floating-minimize-button"
+              aria-label="Zminimalizuj panel użytkownika"
+              title="Zminimalizuj do ikony"
+              onClick={() =>
+                setAuthToolbarMinimized(
+                  true
+                )
+              }
+            >
+              −
+            </button>
+          </>
         )}
-        <button
-          type="button"
-          onClick={() => {
-            void lock();
-          }}
-        >
-          Zablokuj
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            void logout();
-          }}
-        >
-          Wyloguj
-        </button>
       </div>
 
       {showUsers &&
