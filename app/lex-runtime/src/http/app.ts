@@ -8394,6 +8394,23 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
 
       if (
         error instanceof Error &&
+        (
+          error.message ===
+            "DETERMINISTIC_WORKFLOW_SKILL_INVALID" ||
+          error.message.startsWith(
+            "DETERMINISTIC_WORKFLOW_SKILL_UNSUPPORTED:"
+          )
+        )
+      ) {
+        res.status(422).json({
+          error:
+            "DETERMINISTIC_WORKFLOW_SKILL_INVALID"
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
         [
           "DOCUMENT_CITATION_SOURCE_CHANGED",
           "DOCUMENT_CITATION_SOURCE_UNAVAILABLE",
