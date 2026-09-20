@@ -6,6 +6,7 @@ on:
       - "release/0.1.4-g39k-rc3-hotfix1"
     paths:
       - "app/installer/**"
+      - "app/lex-runtime/src/validate-g33d.ts"
       - ".github/workflows/lex-installer.yml"
       - ".github/workflows/rc3-hotfix-installer-acceptance.yml"
   workflow_dispatch:
