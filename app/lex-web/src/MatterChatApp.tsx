@@ -435,7 +435,8 @@ export default function MatterChatApp({
           !MANDATORY_SKILLS.includes(
             item.name as (typeof MANDATORY_SKILLS)[number]
           ) &&
-          item.name !== "prawo-polskie-v2"
+          item.name !== "prawo-polskie-v2" &&
+          !isExecutionSkill(item)
       )
       .filter(
         (item) =>
@@ -702,15 +703,13 @@ export default function MatterChatApp({
     );
   }
 
-  function toggleCaseTypeSkill(name: string): void {
-    const next =
-      caseTypeSkills[0] === name
-        ? []
-        : [name];
+  function selectDeterministicWorkflowSkill(
+    name: string
+  ): void {
+    const next = name ? [name] : [];
     setCaseTypeSkills(next);
     setProcessWorkflowVisible(
-      next[0] ===
-        "pisma-procesowe-v3"
+      name === "pisma-procesowe-v3"
     );
   }
 
@@ -1391,8 +1390,43 @@ export default function MatterChatApp({
                   className="chat-secondary-action"
                   onClick={() => setActiveTab("skills")}
                 >
-                  ⚙ Skille
+                  🧩 Skille
                 </button>
+                <label
+                  className="chat-workflow-picker"
+                  title={
+                    caseTypeSkills[0]
+                      ? `Workflow: ${labelForSkill(caseTypeSkills[0])}`
+                      : "Workflow: AUTO — router + skille"
+                  }
+                >
+                  <span aria-hidden="true">⚙</span>
+                  <select
+                    aria-label="Workflow deterministyczny"
+                    value={caseTypeSkills[0] ?? ""}
+                    disabled={
+                      executing ||
+                      Boolean(selectedCase?.archivedAt)
+                    }
+                    onChange={(event) =>
+                      selectDeterministicWorkflowSkill(
+                        event.target.value
+                      )
+                    }
+                  >
+                    <option value="">
+                      AUTO — router + skille
+                    </option>
+                    {executionSkills.map((skill) => (
+                      <option
+                        key={skill.name}
+                        value={skill.name}
+                      >
+                        {labelForSkill(skill.name)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
                 <span className="chat-composer-spacer" />
                 <button
                   type="button"
@@ -1463,8 +1497,10 @@ export default function MatterChatApp({
                     AUTO działa skillowo: router prawny może dobrać kilka współpracujących
                     skilli, ale nie uruchamia ich specjalizowanego state-machine. Nadal
                     obowiązują wspólne Gate I, weryfikacja źródeł, cytowań i finalizacji.
-                    Wybranie jednego skilla poniżej uruchamia jego workflow deterministyczny:
-                    program narzuca kolejność checkpointów, wymagane kroki i właściwe HARD GATE.
+                    Wybranie skilla ikoną ⚙ przy polu wiadomości uruchamia jego workflow
+                    deterministyczny: program narzuca kolejność checkpointów, wymagane
+                    kroki i właściwe HARD GATE. Zmiana dotyczy kolejnej wiadomości w tej
+                    samej sprawie; stan trwałego workflow pozostaje przypisany do sprawy.
                   </p>
                 </div>
                 <label className="chat-switch">
@@ -1485,39 +1521,11 @@ export default function MatterChatApp({
                   </span>
                 </label>
               </div>
-              <div className="chat-skill-grid">
-                {executionSkills.map((skill) => {
-                  const checked = caseTypeSkills.includes(skill.name);
-                  return (
-                    <label
-                      key={skill.name}
-                      className={checked ? "chat-skill-card selected" : "chat-skill-card"}
-                    >
-                      <input
-                        type="radio"
-                        name="deterministic-workflow-skill"
-                        checked={checked}
-                        onChange={() => toggleCaseTypeSkill(skill.name)}
-                      />
-                      <span>
-                        <strong>{labelForSkill(skill.name)}</strong>
-                        <small>
-                          Deterministyczny workflow · {skill.description || skill.type || "skill wykonawczy"}
-                        </small>
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-              {caseTypeSkills.length > 0 ? (
-                <button
-                  type="button"
-                  className="chat-secondary-action"
-                  onClick={() => setCaseTypeSkills([])}
-                >
-                  Wróć do AUTO — router + skille
-                </button>
-              ) : null}
+              <small>
+                Aktywny workflow zmieniasz bezpośrednio w czacie ikoną ⚙.
+                Lista zawiera wyłącznie skille, dla których runtime deklaruje
+                `deterministicWorkflow=true`.
+              </small>
             </article>
 
             <article className="chat-card">
