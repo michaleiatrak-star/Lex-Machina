@@ -153,6 +153,8 @@ import {
   chronologyTemporalGateRequired
 } from "../chronology-date-trigger.js";
 import {
+  createContractAnalysisState,
+  inferContractWorkflowMode,
   nextContractCheckpoint,
   type ContractAnalysisState
 } from "../contract-analysis-state.js";
@@ -6958,25 +6960,48 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               actor,
               contractCaseId,
               "WRITE",
-              (
+              async (
                 caseDataKey
-              ) =>
-                options
+              ) => {
+                const existing =
+                  await options
+                    .contractWorkflowStore!
+                    .getContractAnalysisState({
+                      caseId:
+                        contractCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion
+                    });
+                if (existing) {
+                  return existing;
+                }
+
+                const cleanQuery =
+                  parseSkillSelectionEnvelope(
+                    request.query
+                  ).query;
+                const initial =
+                  createContractAnalysisState(
+                    contractCaseId,
+                    inferContractWorkflowMode(
+                      cleanQuery
+                    )
+                  );
+                return await options
                   .contractWorkflowStore!
-                  .getContractAnalysisState({
+                  .saveContractAnalysisState({
                     caseId:
                       contractCaseId,
                     caseDataKey,
                     keyVersion:
                       caseView
-                        .keyVersion
-                  })
+                        .keyVersion,
+                    state: initial
+                  });
+              }
             );
-        if (!state) {
-          throw new Error(
-            "CONTRACT_STATE_REQUIRED"
-          );
-        }
 
         const permit =
           requireContractExecutionPermit(
