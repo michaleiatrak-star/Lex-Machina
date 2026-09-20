@@ -582,33 +582,26 @@ export default function AuthenticatedApp() {
     );
   }
 
-  if (
-    auth.user
-      .passwordSetupPending === true
-  ) {
-    return (
-      <main className="auth-shell">
-        <section className="auth-card">
-          <div className="alert alert-error auth-alert">
-            Używasz początkowego konta admin/admin. Zanim przejdziesz dalej, zmień hasło na własne, mające co najmniej 10 znaków.
-          </div>
-          <AccountSecurityPanel
-            user={auth.user}
-            onAuthUpdated={(value) => {
-              setAuth(value);
-              setLastUser(
-                value.user
-              );
-              setNow(Date.now());
-            }}
-          />
-        </section>
-      </main>
-    );
-  }
-
   return (
     <>
+      {auth.user.passwordSetupPending === true && (
+        <div
+          className="session-warning"
+          role="alert"
+        >
+          <strong>Ostrzeżenie bezpieczeństwa:</strong>{" "}
+          korzystasz z domyślnych danych logowania
+          <strong> admin / admin</strong>. Możesz używać aplikacji,
+          ale zalecamy natychmiastową zmianę hasła na własne,
+          mające co najmniej 10 znaków.
+          <button
+            type="button"
+            onClick={() => setShowSecurity(true)}
+          >
+            Zmień hasło
+          </button>
+        </div>
+      )}
       <div className="auth-toolbar">
         <div>
           <strong>
