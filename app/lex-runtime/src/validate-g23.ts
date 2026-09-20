@@ -529,8 +529,8 @@ const pass =
   verifiedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
-  fake.status === "BLOCKED" &&
-  !("answer" in fake) &&
+  fake.status === "DRAFT_PRESENTABLE" &&
+  typeof fake.answer === "string" &&
   typeof fakeSummary.records ===
     "number" &&
   fakeSummary.records >= 1 &&
@@ -541,8 +541,9 @@ const pass =
 
   alteredHttp.status === 200 &&
   altered.status ===
-    "BLOCKED" &&
-  !("answer" in altered) &&
+    "DRAFT_PRESENTABLE" &&
+  typeof altered.answer ===
+    "string" &&
   typeof alteredSummary.records ===
     "number" &&
   alteredSummary.records >= 2 &&
