@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   canExecutePrimaryModel,
   shouldLoadPrimaryModelCatalog
-} from "./MatterChatApp.js";
+} from "./primary-model-policy.js";
 
 describe("primary local model chat policy", () => {
   it("discovers local OpenAI-compatible models even without an OpenAI API key", () => {
