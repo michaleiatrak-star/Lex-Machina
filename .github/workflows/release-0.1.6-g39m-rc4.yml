@@ -1,0 +1,260 @@
+name: Lex Machina 0.1.6 G39M RC4 Online Release
+
+on:
+  push:
+    branches:
+      - "release/0.1.6-g39m-rc4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lex-release-0.1.6-g39m-rc4-${{ github.sha }}-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  provenance:
+    name: Release provenance contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact release commit with history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify G39M provenance metadata and version coherence
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          expected_baseline="dd4b06985ae519417d9dd196ef6daf2542fcd927"
+          expected_branch="release/0.1.6-g39m-rc4"
+          expected_version="0.1.6"
+          expected_icon_sha="055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"
+
+          baseline="$(awk -F': ' '$1=="baseline_commit"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          work_branch="$(awk -F': ' '$1=="work_branch"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          app_version="$(awk -F': ' '$1=="application_version"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          runtime_version="$(node -p "require('./app/lex-runtime/package.json').version")"
+          web_version="$(node -p "require('./app/lex-web/package.json').version")"
+          desktop_version="$(node -p "require('./app/lex-desktop/package.json').version")"
+          tauri_version="$(node -p "require('./app/lex-desktop/src-tauri/tauri.conf.json').version")"
+          installer_version="$(node -p "require('./app/installer/windows-release-source.json').applicationVersion")"
+
+          [[ "$baseline" == "$expected_baseline" ]] || {
+            echo "PROVENANCE_BASELINE_MISMATCH expected=$expected_baseline actual=$baseline" >&2
+            exit 1
+          }
+          [[ "$work_branch" == "$expected_branch" ]] || {
+            echo "PROVENANCE_BRANCH_MISMATCH expected=$expected_branch actual=$work_branch" >&2
+            exit 1
+          }
+          [[ "$GITHUB_REF_NAME" == "$expected_branch" ]] || {
+            echo "PROVENANCE_GITHUB_REF_MISMATCH expected=$expected_branch actual=$GITHUB_REF_NAME" >&2
+            exit 1
+          }
+
+          git merge-base --is-ancestor "$baseline" "$GITHUB_SHA" || {
+            echo "PROVENANCE_BASELINE_NOT_ANCESTOR baseline=$baseline source=$GITHUB_SHA" >&2
+            exit 1
+          }
+
+          for observed in "$app_version" "$runtime_version" "$web_version" "$desktop_version" "$tauri_version" "$installer_version"; do
+            [[ "$observed" == "$expected_version" ]] || {
+              echo "PROVENANCE_VERSION_MISMATCH expected=$expected_version actual=$observed" >&2
+              exit 1
+            }
+          done
+
+          cargo_version="$(awk -F' *= *' '$1=="version"{gsub(/"/,"",$2); print $2; exit}' app/lex-desktop/src-tauri/Cargo.toml)"
+          [[ "$cargo_version" == "$expected_version" ]] || {
+            echo "PROVENANCE_CARGO_VERSION_MISMATCH expected=$expected_version actual=$cargo_version" >&2
+            exit 1
+          }
+
+          grep -q "$expected_icon_sha" app/installer/materialize-brand-icon.ps1 || {
+            echo "PROVENANCE_BRAND_ICON_HASH_NOT_PINNED" >&2
+            exit 1
+          }
+
+          printf 'PROVENANCE_PASS baseline=%s branch=%s source=%s version=%s icon=%s\n'             "$baseline" "$work_branch" "$GITHUB_SHA" "$expected_version" "$expected_icon_sha"
+
+  runtime:
+    name: Runtime and Gate I audit
+    uses: ./.github/workflows/lex-runtime.yml
+
+  structural:
+    name: Structural corpus audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+
+  installer-state:
+    name: Installer state audit
+    uses: ./.github/workflows/g39-installer-state.yml
+
+  online:
+    name: Accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+    uses: ./.github/workflows/lex-installer.yml
+
+  publish:
+    name: Publish exact accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+      - online
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download accepted online installer artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input
+
+      - name: Verify receipt and assemble immutable release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+
+          installer="$(find release-input -type f -name '*.exe' -print -quit)"
+          receipt="$(find release-input -type f -name 'SHA256.txt' -print -quit)"
+
+          [[ -n "$installer" && -f "$installer" ]] || {
+            echo "ONLINE_INSTALLER_MISSING" >&2
+            exit 1
+          }
+          [[ -n "$receipt" && -f "$receipt" ]] || {
+            echo "ONLINE_INSTALLER_RECEIPT_MISSING" >&2
+            exit 1
+          }
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$installer" | awk '{print $1}')"
+          if [[ ! "$expected" =~ ^[0-9a-f]{64}$ || "$expected" != "$actual" ]]; then
+            echo "ONLINE_INSTALLER_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          fi
+
+          target="release-out/Lex-Machina-0.1.6-G39M-RC4-Online-x64-Setup.exe"
+          cp "$installer" "$target"
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          sha256sum "$target" > release-out/SHA256SUMS.txt
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+          printf '%s  %s\n'             "055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"             "app/lex-desktop/src-tauri/icons/icon.ico"             > release-out/BRAND-ICON-SHA256.txt
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+
+          cat release-out/SHA256SUMS.txt
+          cat release-out/SOURCE-SHA.txt
+          cat release-out/BRAND-ICON-SHA256.txt
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.6 — G39M RC4
+
+          Scope control and local processing, on top of 0.1.5 G39L RC3.
+          Online installer only.
+
+          Added:
+          - case files now offer "Uruchom OCR i anonimizację" for stored
+            images and PDFs. The endpoint existed but nothing called it, so
+            OCR and local pseudonymization could only ever run while a file
+            was being uploaded and a stored document could not be reprocessed;
+          - all 16 DR modules are shown selected by default in a dedicated
+            "Dziedziny prawa" card; deselecting narrows the domains the router
+            may use. The allow-list travels in its own `domains` envelope
+            field, because folding it into `manual` would have exhausted the
+            16-name manual budget and the 12-name additional-skill budget and
+            pushed every execution skill out of the envelope. A full selection
+            sends no restriction, so default routing is unchanged;
+          - an empty conversation offers the deterministic pipelines directly
+            (process pleading, chronology, court analysis, contract analysis,
+            evidence analysis) instead of relying on Auto inferring them from
+            the wording. Choosing one does not disable Auto.
+
+          Carried over from 0.1.5 G39L RC3: the Lokalne primary-model lane
+          with Bielik 11B v3 and Mistral NeMo 12B selectable as PRIMARY
+          without an OpenAI key.
+
+          RC2 additionally fixes the desktop runtime proxy timeout for local AI:
+          - /api/sessions/execute now has a dedicated 20-minute read timeout;
+          - local model startup has a 5-minute read timeout, matching the llama.cpp startup budget;
+          - local model provision/repair/update operations use a separate long-running timeout;
+          - ordinary runtime requests remain capped at 120 seconds;
+          - a Rust regression test protects the timeout routing contract.
+
+          RC3 adds user-account authentication lanes alongside API keys:
+          - ChatGPT account sessions use the official Codex CLI login and reject
+            API-key authentication in the account lane;
+          - Claude account sessions use Claude Code subscription / OAuth auth
+            (claude.ai or CLAUDE_CODE_OAUTH_TOKEN), not Console/API-key billing;
+          - Grok account sessions use the official ACP transport and explicitly
+            select cached_token, so an XAI_API_KEY cannot silently take over;
+          - account-session model calls run in isolated temporary workspaces and
+            Lex Machina remains the only executor of legal verification tools;
+          - the desktop bridge exposes only the account status/login routes and
+            gives browser login a dedicated five-minute timeout;
+          - API-key and local llama.cpp paths remain available and unchanged.
+
+          RC3 also separates verification quality from answer presentation:
+          - incomplete HARD GATE / Gate I verification no longer removes the
+            model answer from chat;
+          - such answers remain marked with BLOCKED/DEGRADED verification
+            metadata and a visible warning that source verification is incomplete;
+          - execution/privacy/workflow failures remain blocking, including
+            missing required workflow inputs or resources and invalid output
+            contracts.
+
+          RC4 fixes local-model discovery and floating UI overlays:
+          - the chat's Local lane reads /api/local-models directly and shows
+            every installed GGUF instead of requiring a saved qualified profile;
+          - selecting an installed model with a missing profile triggers safe
+            profile recovery and reuses the existing verified GGUF instead of
+            downloading the model again;
+          - account, maintenance and local-AI floating panels can be minimized
+            to compact icons and dragged within the application viewport;
+          - minimized panels are the default so they no longer obscure the
+            case-chat header or model selector.
+
+          Unchanged and still open: production Authenticode / Ed25519 trust
+          roots, hash-pinned Python packages, dependency lockfiles, and the
+          offline clean-machine acceptance gate.
+
+          EOF
+      - name: Create immutable-source prerelease and upload installer
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: v0.1.6-g39m-rc4
+          RELEASE_TITLE: Lex Machina v0.1.6 G39M RC4
+        run: |
+          set -euo pipefail
+          source_sha="$GITHUB_SHA"
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+            [[ "$tag_sha" == "$source_sha" ]] || {
+              echo "IMMUTABLE_RELEASE_TAG_MISMATCH tag=$tag_sha source=$source_sha" >&2
+              exit 1
+            }
+            gh release edit "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease
+          else
+            gh release create "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease               --target "$source_sha"
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber             release-out/Lex-Machina-0.1.6-G39M-RC4-Online-x64-Setup.exe             release-out/SHA256SUMS.txt             release-out/CI-SHA256-ONLINE.txt             release-out/SOURCE-SHA.txt             release-out/LEX-VERSION.yaml             release-out/BRAND-ICON-SHA256.txt
+
+          gh release view "$RELEASE_TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
