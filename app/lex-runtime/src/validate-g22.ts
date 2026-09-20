@@ -577,13 +577,13 @@ const pass =
   foundVerification.unverified === 0 &&
 
   nearHttp.status === 200 &&
-  near.status === "BLOCKED" &&
-  !("answer" in near) &&
+  near.status === "DRAFT_PRESENTABLE" &&
+  typeof near.answer === "string" &&
   nearVerification.records === 0 &&
 
   fakeHttp.status === 200 &&
-  fake.status === "BLOCKED" &&
-  !("answer" in fake) &&
+  fake.status === "DRAFT_PRESENTABLE" &&
+  typeof fake.answer === "string" &&
   typeof fakeVerification.records ===
     "number" &&
   fakeVerification.records >= 1 &&
