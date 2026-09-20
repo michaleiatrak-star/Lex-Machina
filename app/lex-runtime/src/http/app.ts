@@ -153,8 +153,10 @@ import {
   chronologyTemporalGateRequired
 } from "../chronology-date-trigger.js";
 import {
+  createContractAnalysisState,
   nextContractCheckpoint,
-  type ContractAnalysisState
+  type ContractAnalysisState,
+  type ContractWorkflowMode
 } from "../contract-analysis-state.js";
 import {
   completeContractExecution,
@@ -1046,6 +1048,37 @@ async function assertDocumentWorkflowFinalizationAllowed(
       "PROCESS_PLEADING_FINAL_REQUIRED"
     );
   }
+}
+
+function inferContractWorkflowMode(
+  rawQuery: string
+): ContractWorkflowMode {
+  const query =
+    parseSkillSelectionEnvelope(rawQuery)
+      .query
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replaceAll("ł", "l");
+
+  if (
+    /\b(uzupeln|dopisz|dodaj|aneks)\w*\b/.test(query)
+  ) {
+    return "SUPPLEMENT";
+  }
+  if (
+    /\b(redaguj|przeredaguj|popraw|zmien|negocjuj)\w*\b/.test(query)
+  ) {
+    return "REDACTION";
+  }
+  if (
+    /\b(napisz|sporzadz|przygotuj|stworz)\w*\b[\s\S]{0,80}\b(umow|kontrakt|regulamin|testament)\w*\b/.test(
+      query
+    )
+  ) {
+    return "DRAFT";
+  }
+  return "ANALYSIS";
 }
 
 function previewSessionWorkflow(
@@ -6957,25 +6990,42 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               actor,
               contractCaseId,
               "WRITE",
-              (
+              async (
                 caseDataKey
-              ) =>
-                options
+              ) => {
+                const current =
+                  await options
+                    .contractWorkflowStore!
+                    .getContractAnalysisState({
+                      caseId:
+                        contractCaseId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion
+                    });
+                if (current) {
+                  return current;
+                }
+                return await options
                   .contractWorkflowStore!
-                  .getContractAnalysisState({
+                  .saveContractAnalysisState({
                     caseId:
                       contractCaseId,
                     caseDataKey,
                     keyVersion:
                       caseView
-                        .keyVersion
-                  })
+                        .keyVersion,
+                    state:
+                      createContractAnalysisState(
+                        contractCaseId,
+                        inferContractWorkflowMode(
+                          request.query
+                        )
+                      )
+                  });
+              }
             );
-        if (!state) {
-          throw new Error(
-            "CONTRACT_STATE_REQUIRED"
-          );
-        }
 
         const permit =
           requireContractExecutionPermit(
