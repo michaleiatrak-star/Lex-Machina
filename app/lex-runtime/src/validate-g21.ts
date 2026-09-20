@@ -511,15 +511,17 @@ const pass =
 
   effectiveHttp.status === 200 &&
   effective.status ===
-    "BLOCKED" &&
-  !("answer" in effective) &&
+    "DRAFT_PRESENTABLE" &&
+  typeof effective.answer ===
+    "string" &&
   effectiveVerification.records === 0 &&
   effectiveFetches.length === 0 &&
 
   unknownHttp.status === 200 &&
   unknown.status ===
-    "BLOCKED" &&
-  !("answer" in unknown) &&
+    "DRAFT_PRESENTABLE" &&
+  typeof unknown.answer ===
+    "string" &&
   unknownVerification.records === 0 &&
   unknownFetches.length === 0;
 
@@ -550,7 +552,7 @@ process.stdout.write(
         effectiveVerification,
       contentFetches:
         effectiveFetches.length,
-      blockedBecause:
+      degradedBecause:
         "effective post-t.j. amendment requires deterministic overlay"
     },
     unknownEffectDate: {
@@ -562,7 +564,7 @@ process.stdout.write(
         unknownVerification,
       contentFetches:
         unknownFetches.length,
-      blockedBecause:
+      degradedBecause:
         "official amendment effect date could not be established"
     },
     liveOfficialNetworkCallExecuted:
