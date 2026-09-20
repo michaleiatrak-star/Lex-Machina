@@ -45,6 +45,7 @@ type SkillUpdateTrustManifest = {
     verification?: unknown;
     trustedEd25519PublicKeys?: unknown;
     temporaryUnsignedAllowed?: unknown;
+    officialSourceUnsignedAllowed?: unknown;
   };
 };
 
@@ -180,8 +181,12 @@ function skillUpdateVerificationPolicy(
   if (
     manifest.skillUpdate?.verification ===
       "SHA256_AND_OPTIONAL_ED25519_INDEX" &&
-    manifest.skillUpdate
-      .temporaryUnsignedAllowed === true
+    (
+      manifest.skillUpdate
+        .officialSourceUnsignedAllowed === true ||
+      manifest.skillUpdate
+        .temporaryUnsignedAllowed === true
+    )
   ) {
     let keys:
       TrustedSkillUpdateKey[] = [];
