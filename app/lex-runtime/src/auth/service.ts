@@ -1507,6 +1507,47 @@ implements AuthService {
           "AUTH_USER_MISSING_AFTER_PASSWORD_CHANGE"
         );
       }
+
+      let committedMasterKey:
+        Buffer | undefined;
+      try {
+        committedMasterKey =
+          decryptUserMasterKey(
+            newKey,
+            refreshed
+          );
+        if (
+          !committedMasterKey.equals(
+            userMasterKey
+          ) ||
+          refreshed.umkKeyVersion !==
+            keyVersion ||
+          (
+            completingSetup &&
+            refreshed
+              .passwordSetupPending !==
+              false
+          )
+        ) {
+          throw new Error(
+            "AUTH_PASSWORD_CHANGE_COMMIT_VERIFICATION_FAILED"
+          );
+        }
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          error.message ===
+            "AUTH_PASSWORD_CHANGE_COMMIT_VERIFICATION_FAILED"
+        ) {
+          throw error;
+        }
+        throw new Error(
+          "AUTH_PASSWORD_CHANGE_COMMIT_VERIFICATION_FAILED"
+        );
+      } finally {
+        committedMasterKey?.fill(0);
+      }
+
       this.store
         .recordSecurityEvent({
           eventId:
