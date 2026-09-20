@@ -1,29 +1,57 @@
 import { describe, expect, it } from "vitest";
 import {
   canExecutePrimaryModel,
+  modelsForPrimarySource,
+  runtimeProviderForPrimarySource,
   shouldLoadPrimaryModelCatalog
 } from "./primary-model-policy.js";
 
 describe("primary local model chat policy", () => {
-  it("discovers local OpenAI-compatible models even without an OpenAI API key", () => {
+  it("exposes local models as a separate primary source", () => {
+    expect(
+      runtimeProviderForPrimarySource("local")
+    ).toBe("openai");
+    expect(
+      runtimeProviderForPrimarySource("anthropic")
+    ).toBe("anthropic");
+  });
+
+  it("loads the local model catalog without an OpenAI API key", () => {
     expect(
       shouldLoadPrimaryModelCatalog(
-        "openai",
+        "local",
         false
       )
     ).toBe(true);
   });
 
-  it("waits for provider status before opening the primary model catalog", () => {
+  it("does not expose local models inside the OpenAI cloud lane", () => {
+    const catalog = [
+      { id: "local/bielik-11b-v3-q4km" },
+      { id: "local/mistral-nemo-12b-q4km" },
+      { id: "gpt-5" }
+    ];
+
+    expect(
+      modelsForPrimarySource("local", catalog)
+        .map((item) => item.id)
+    ).toEqual([
+      "local/bielik-11b-v3-q4km",
+      "local/mistral-nemo-12b-q4km"
+    ]);
+    expect(
+      modelsForPrimarySource("openai", catalog)
+        .map((item) => item.id)
+    ).toEqual(["gpt-5"]);
+  });
+
+  it("requires credentials before opening cloud provider catalogs", () => {
     expect(
       shouldLoadPrimaryModelCatalog(
         "openai",
-        undefined
+        false
       )
     ).toBe(false);
-  });
-
-  it("still requires credentials to discover non-local provider catalogs", () => {
     expect(
       shouldLoadPrimaryModelCatalog(
         "anthropic",
