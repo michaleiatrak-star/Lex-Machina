@@ -35,8 +35,9 @@ $checks = [ordered]@{
     $bootstrap.Contains('function Invoke-RedirectedNativeProcess') -and
     $bootstrap.Contains('-RedirectStandardOutput $stdoutPath') -and
     $bootstrap.Contains('-RedirectStandardError $stderrPath') -and
-    $bootstrap.Contains('-ArgumentLine "-m pip --version"') -and
+    $bootstrap.Contains('-ArgumentLine "-X utf8 -m pip --version"') -and
     $bootstrap.Contains('BOOTSTRAP_PIP_VERSION_INVALID expected=') -and
+    $bootstrap.Contains('$prefetchArguments = (''-X utf8 "{0}" "{1}"'' -f $prefetchScript, $modelRoot)') -and
     $bootstrap.Contains('BOOTSTRAP_PYTHON_PACKAGES_FAILED:$($pipInstallProcess.ExitCode)')
   )
   officialSourceFallbackOrder = (
