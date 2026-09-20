@@ -339,10 +339,11 @@ function executionMessage(
     id: messageId(),
     role: "system",
     content:
-      "HARD GATE zatrzymał odpowiedź przed prezentacją, ponieważ wymagany ślad weryfikacji nie był kompletny.",
+      "Nie udało się zaprezentować odpowiedzi z powodu blokady wykonania lub wymaganego workflow. Sama niepełna weryfikacja źródeł nie blokuje już odpowiedzi.",
     evidence: execution.evidence,
     meta:
       `routing: ${labelForSkill(execution.primarySkill || route)}` +
+      ` · finalization ${execution.finalization}` +
       ` · UNVERIFIED ${execution.verification.unverified}`
   };
 }
