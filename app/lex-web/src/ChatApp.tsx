@@ -43,6 +43,13 @@ import {
   labelForSkill,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
+import {
+  canExecutePrimaryModel,
+  modelsForPrimarySource,
+  runtimeProviderForPrimarySource,
+  shouldLoadPrimaryModelCatalog,
+  type PrimaryModelSource
+} from "./primary-model-policy.js";
 import "./chat.css";
 
 type TabId = "chat" | "files" | "skills" | "case" | "settings";
@@ -74,6 +81,20 @@ const PROVIDERS: Array<{
     label: "xAI / Grok",
     apiKeyUrl: "https://console.x.ai/"
   }
+];
+
+const PRIMARY_MODEL_SOURCES: Array<{
+  id: PrimaryModelSource;
+  label: string;
+}> = [
+  {
+    id: "local",
+    label: "Lokalne"
+  },
+  ...PROVIDERS.map(({ id, label }) => ({
+    id,
+    label
+  }))
 ];
 
 const MANDATORY_SKILLS = ["prawny-router-v3", "shared"] as const;
@@ -186,7 +207,8 @@ export default function ChatApp({
   const [caseError, setCaseError] = useState("");
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
 
-  const [provider, setProvider] = useState<ProviderId>("openai");
+  const [provider, setProvider] =
+    useState<PrimaryModelSource>("local");
   const [providerConfiguration, setProviderConfiguration] = useState<
     Record<ProviderId, boolean | undefined>
   >({
@@ -245,7 +267,10 @@ export default function ChatApp({
     [cases, caseId]
   );
   const providerDefinition = PROVIDERS.find((item) => item.id === provider);
-  const providerConfigured = providerConfiguration[provider];
+  const runtimeProvider =
+    runtimeProviderForPrimarySource(provider);
+  const providerConfigured =
+    providerConfiguration[runtimeProvider];
   const selectedModel = models.find((item) => item.id === model);
   const currentPrimaryRoute = useMemo(
     () =>
@@ -367,8 +392,16 @@ export default function ChatApp({
     setModel("");
     setModelError("");
 
-    if (providerConfigured !== true) {
-      if (providerConfigured === false) {
+    if (
+      !shouldLoadPrimaryModelCatalog(
+        provider,
+        providerConfigured
+      )
+    ) {
+      if (
+        providerConfigured === false &&
+        provider !== "local"
+      ) {
         setModelError("PROVIDER_NOT_CONFIGURED");
       }
       return () => {
@@ -376,12 +409,19 @@ export default function ChatApp({
       };
     }
 
-    void getModels(provider)
+    void getModels(runtimeProvider)
       .then((response) => {
         if (cancelled) return;
-        setModels(response.models);
+        const sourceModels =
+          modelsForPrimarySource(
+            provider,
+            response.models
+          );
+        setModels(sourceModels);
         setModel(
-          response.models.find((item) => item.selectable)?.id ?? ""
+          sourceModels.find(
+            (item) => item.selectable
+          )?.id ?? ""
         );
       })
       .catch((error) => {
@@ -394,7 +434,11 @@ export default function ChatApp({
     return () => {
       cancelled = true;
     };
-  }, [provider, providerConfigured]);
+  }, [
+    provider,
+    providerConfigured,
+    runtimeProvider
+  ]);
 
   useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
@@ -508,6 +552,7 @@ export default function ChatApp({
 
   async function saveApiKey(): Promise<void> {
     if (
+      provider === "local" ||
       user.appRole !== "ADMIN" ||
       !providerApiKey.trim()
     ) {
@@ -541,7 +586,10 @@ export default function ChatApp({
   }
 
   async function removeApiKey(): Promise<void> {
-    if (user.appRole !== "ADMIN") return;
+    if (
+      provider === "local" ||
+      user.appRole !== "ADMIN"
+    ) return;
     setProviderKeyBusy(true);
     try {
       await clearProviderApiKey(provider);
@@ -562,7 +610,10 @@ export default function ChatApp({
       executing ||
       !plain ||
       !runtimeOnline ||
-      providerConfigured !== true ||
+      !canExecutePrimaryModel(
+        providerConfigured,
+        model
+      ) ||
       !model ||
       !currentPrimaryRoute
     ) {
@@ -588,7 +639,7 @@ export default function ChatApp({
           automaticSkills,
           manualSkills
         ),
-        provider,
+        provider: runtimeProvider,
         model,
         primarySkill: currentPrimaryRoute,
         mode: "PRAWNIK",
@@ -646,7 +697,10 @@ export default function ChatApp({
 
   const canSend =
     runtimeOnline &&
-    providerConfigured === true &&
+    canExecutePrimaryModel(
+      providerConfigured,
+      model
+    ) &&
     Boolean(model) &&
     Boolean(currentPrimaryRoute) &&
     Boolean(query.trim()) &&
@@ -1197,20 +1251,23 @@ export default function ChatApp({
                 <select
                   value={provider}
                   onChange={(event) => {
-                    setProvider(event.target.value as ProviderId);
+                    setProvider(
+                      event.target.value as PrimaryModelSource
+                    );
                     setProviderApiKeyInput("");
                     setProviderKeyMessage("");
                   }}
                 >
-                  {PROVIDERS.map((item) => (
+                  {PRIMARY_MODEL_SOURCES.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.label}
-                      {" · "}
-                      {providerConfiguration[item.id] === true
-                        ? "API gotowe"
-                        : providerConfiguration[item.id] === false
-                          ? "brak klucza"
-                          : "sprawdzanie"}
+                      {item.id === "local"
+                        ? " · bez klucza API"
+                        : providerConfiguration[item.id] === true
+                          ? " · API gotowe"
+                          : providerConfiguration[item.id] === false
+                            ? " · brak klucza"
+                            : " · sprawdzanie"}
                     </option>
                   ))}
                 </select>
@@ -1223,7 +1280,11 @@ export default function ChatApp({
                   onChange={(event) => setModel(event.target.value)}
                 >
                   {models.length === 0 ? (
-                    <option value="">Brak dostępnych modeli</option>
+                    <option value="">
+                      {provider === "local"
+                        ? "Brak zainstalowanych modeli lokalnych"
+                        : "Brak dostępnych modeli"}
+                    </option>
                   ) : null}
                   {models.map((item) => (
                     <option
@@ -1250,7 +1311,12 @@ export default function ChatApp({
                   {" "}tokenów
                 </small>
               ) : null}
-              {providerDefinition ? (
+              {model.startsWith("local/") ? (
+                <small>
+                  Model lokalny jest dostępny jako model główny przez llama.cpp i nie wymaga klucza OpenAI.
+                </small>
+              ) : null}
+              {providerDefinition && !model.startsWith("local/") ? (
                 <button
                   type="button"
                   className="chat-link-action"
@@ -1268,7 +1334,11 @@ export default function ChatApp({
             <article className="chat-card">
               <p className="eyebrow">Klucz API</p>
               <h2>Konfiguracja lokalna</h2>
-              {user.appRole === "ADMIN" ? (
+              {provider === "local" ? (
+                <p>
+                  Modele lokalne działają przez llama.cpp i nie wymagają klucza API.
+                </p>
+              ) : user.appRole === "ADMIN" ? (
                 <>
                   <input
                     type="password"
