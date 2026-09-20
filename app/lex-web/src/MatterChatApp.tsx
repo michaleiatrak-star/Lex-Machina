@@ -2250,12 +2250,83 @@ export default function MatterChatApp({
             </article>
 
             <article className="chat-card">
-              <p className="eyebrow">Klucz API</p>
-              <h2>Konfiguracja lokalna</h2>
+              <p className="eyebrow">
+                {provider === "local"
+                  ? "Lokalne AI"
+                  : isAccountPrimarySource(provider)
+                    ? "Konto użytkownika"
+                    : "Klucz API"}
+              </p>
+              <h2>
+                {provider === "local"
+                  ? "Konfiguracja lokalna"
+                  : isAccountPrimarySource(provider)
+                    ? "Połączenie z kontem"
+                    : "Konfiguracja API"}
+              </h2>
               {provider === "local" ? (
                 <p>
                   Modele lokalne działają przez llama.cpp i nie wymagają klucza API.
                 </p>
+              ) : isAccountPrimarySource(provider) ? (
+                <>
+                  <p>
+                    Lex Machina używa zalogowanej sesji oficjalnego klienta
+                    {runtimeProvider === "openai"
+                      ? " Codex / ChatGPT"
+                      : runtimeProvider === "anthropic"
+                        ? " Claude Code"
+                        : " Grok Build"}.
+                    Token OAuth nie jest kopiowany do interfejsu aplikacji.
+                  </p>
+                  <small>
+                    {accountSession
+                      ? accountSession.installed
+                        ? accountSession.authenticated
+                          ? "Status: połączone · " + accountSession.command
+                          : "Status: klient zainstalowany, brak aktywnej sesji · " + accountSession.command
+                        : "Status: brak klienta · " + accountSession.command + ". " + accountSession.installHint
+                      : "Sprawdzanie klienta i sesji…"}
+                  </small>
+                  {user.appRole === "ADMIN" ? (
+                    <div className="chat-form-row compact">
+                      <button
+                        type="button"
+                        className="chat-primary-action"
+                        disabled={
+                          providerAccountBusy ||
+                          accountSession?.installed === false
+                        }
+                        onClick={() =>
+                          void connectProviderAccount()
+                        }
+                      >
+                        {providerAccountBusy
+                          ? "Logowanie…"
+                          : accountSession?.authenticated
+                            ? "Odśwież logowanie"
+                            : "Połącz konto"}
+                      </button>
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={providerAccountBusy}
+                        onClick={() =>
+                          void refreshProviderAccountStatus()
+                        }
+                      >
+                        Sprawdź ponownie
+                      </button>
+                    </div>
+                  ) : (
+                    <p>
+                      Konto dostawcy może połączyć administrator aplikacji.
+                    </p>
+                  )}
+                  {providerAccountMessage ? (
+                    <small>{providerAccountMessage}</small>
+                  ) : null}
+                </>
               ) : user.appRole === "ADMIN" ? (
                 <>
                   <input
