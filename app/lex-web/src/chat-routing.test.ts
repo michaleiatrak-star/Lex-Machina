@@ -1,12 +1,16 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
   AUTO_CASE_TYPE,
+  DETERMINISTIC_ACTION_META_PREFIX,
   SKILL_SELECTION_ENVELOPE_PREFIX,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
+  deterministicActionFromMeta,
+  deterministicActionMeta,
   getCaseTypeExecutionSkills,
   setAllowedDomainSkills,
-  setCaseTypeExecutionSkills
+  setCaseTypeExecutionSkills,
+  skillsForDeterministicAction
 } from "./chat-routing.js";
 
 afterEach(() => {
@@ -82,6 +86,45 @@ describe("chat routing", () => {
     expect(getCaseTypeExecutionSkills()).toEqual([]);
     expect(encoded).toContain('\"auto\":true');
     expect(encoded).toContain('\"caseType\":\"AUTO\"');
+  });
+
+  it("maps a deterministic action to a fixed execution skill and persists it in message metadata", () => {
+    const skills =
+      skillsForDeterministicAction(
+        "COURT_ANALYSIS"
+      );
+    expect(skills).toEqual([
+      "analiza-sadowa-v6"
+    ]);
+
+    const meta =
+      deterministicActionMeta(
+        "COURT_ANALYSIS"
+      );
+    expect(meta).toBe(
+      `${DETERMINISTIC_ACTION_META_PREFIX}COURT_ANALYSIS`
+    );
+    expect(
+      deterministicActionFromMeta(
+        meta
+      )
+    ).toBe("COURT_ANALYSIS");
+  });
+
+  it("treats absent deterministic action as full router-controlled AUTO", () => {
+    expect(
+      skillsForDeterministicAction("")
+    ).toEqual([]);
+    expect(
+      deterministicActionMeta("")
+    ).toBe(
+      `${DETERMINISTIC_ACTION_META_PREFIX}AUTO`
+    );
+    expect(
+      deterministicActionFromMeta(
+        deterministicActionMeta("")
+      )
+    ).toBe("");
   });
 
   it("adds several prioritized execution case types to the envelope", () => {
