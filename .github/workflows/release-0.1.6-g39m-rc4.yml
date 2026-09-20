@@ -229,6 +229,19 @@ jobs:
           - minimized panels are the default so they no longer obscure the
             case-chat header or model selector.
 
+          RC4 also cleans up legal-skill selection in the case chat:
+          - DR-01..DR-16 remain domain routing controls only and are no longer
+            duplicated as manual execution skills;
+          - before the first message the chat offers a single deterministic
+            action selector (court analysis, chronology, evidence analysis,
+            contract analysis or process pleading);
+          - no action selected means full AUTO: prawny-router-v3 chooses both
+            DR domains and execution skills from the first user message;
+          - a selected action is mapped programmatically to its execution
+            pipeline, persisted with the first thread message, and the selector
+            disappears immediately after that first message;
+          - the persisted technical action marker is not rendered in chat UI.
+
           Unchanged and still open: production Authenticode / Ed25519 trust
           roots, hash-pinned Python packages, dependency lockfiles, and the
           offline clean-machine acceptance gate.
