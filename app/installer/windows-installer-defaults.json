@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "policy": "FROZEN_INSTALLER_MECHANICS",
+  "description": "Canonical Windows installer mechanics. Future application work may change program payload, versions, URLs and pinned SHA-256 values, but installer behavior stays on these defaults unless an installer change is explicitly approved.",
+  "bundleTarget": "nsis",
+  "installMode": "currentUser",
+  "languages": [
+    "Polish",
+    "English"
+  ],
+  "webviewInstallMode": {
+    "type": "downloadBootstrapper",
+    "silent": true
+  },
+  "installerIcon": "icons/icon.ico",
+  "uninstallerIcon": "icons/icon.ico",
+  "installerHooks": "./windows/hooks.nsh",
+  "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
+  "privatePythonDelivery": "EMBEDDABLE_APP_LOCAL",
+  "visualCppDelivery": "DOWNLOAD_IF_MISSING",
+  "webview2Delivery": "TAURI_DOWNLOAD_BOOTSTRAPPER_IF_MISSING",
+  "localAiDelivery": "USER_INITIATED_AFTER_INSTALL",
+  "localAiInstallRoot": "%LOCALAPPDATA%\\LexMachina\\local-ai",
+  "bootstrapCacheRoot": "%LOCALAPPDATA%\\LexMachina\\bootstrap-cache",
+  "runtimeRoot": "$INSTDIR\\runtime",
+  "pathPolicy": "CURRENT_USER_VARIABLES_ONLY_NO_HARDCODED_PROFILE_NAME",
+  "mutableWithProgramChanges": [
+    "application version",
+    "program payload files",
+    "runtime dependency versions",
+    "download URLs",
+    "pinned SHA-256 values",
+    "model metadata and hashes"
+  ]
+}
