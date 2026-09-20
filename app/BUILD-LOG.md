@@ -1359,3 +1359,22 @@ Not fixed in this line, tracked in ROADMAP:
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;
 - dead `$LASTEXITCODE` guards after `& script.ps1`;
 - string-matching validators that cannot catch behavioural regressions.
+
+### 2026-09-20 — G39L RC4 local-primary UI consistency
+
+Status: **READY FOR RELEASE GATE**
+
+Implemented:
+
+- retained the RC3 dedicated `Lokalne` primary-model lane in the active `MatterChatApp`;
+- aligned legacy `ChatApp` with the shared primary-model policy so installed Bielik/Mistral models can be selected and executed without an OpenAI API key;
+- kept cloud OpenAI, Anthropic and xAI catalogs credential-gated;
+- kept local execution on the existing OpenAI-compatible localhost llama.cpp adapter;
+- hid API-key mutation controls in local mode and preserved them for cloud providers;
+- added an installer CI guard requiring both chat surfaces to use `shouldLoadPrimaryModelCatalog`, `canExecutePrimaryModel` and `runtimeProviderForPrimarySource`, and rejecting a reintroduced direct `providerConfigured !== true` gate.
+
+Release target:
+
+- application version remains `0.1.5`;
+- release branch: `release/0.1.5-g39l-rc4`;
+- Windows online installer must pass the existing provenance, runtime/Gate I, structural, installer-state and installed-copy acceptance gates before publication.
