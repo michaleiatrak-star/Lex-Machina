@@ -22,6 +22,9 @@ import {
 } from "../providers/gateway.js";
 import type { ProviderId } from "../providers/types.js";
 import type {
+  AccountSessionManager
+} from "../providers/account-session.js";
+import type {
   UpdateDiscovery
 } from "../update-discovery.js";
 import type {
@@ -408,6 +411,10 @@ export type LexHttpAppOptions = {
     >;
   credentialResolver?: ProviderCredentialResolver;
   credentialManager?: ProviderCredentialManager;
+  accountSessions?: Pick<
+    AccountSessionManager,
+    "statusAll" | "login"
+  >;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
   guideSessionStore?: Pick<
@@ -4085,6 +4092,92 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           return;
         }
         throw error;
+      }
+    }
+  );
+
+  app.get(
+    "/api/provider-accounts",
+    async (_req, res) => {
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          providers:
+            await options
+              .accountSessions
+              .statusAll()
+        });
+      } catch {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_STATUS_FAILED"
+        });
+      }
+    }
+  );
+
+  app.post(
+    "/api/provider-accounts/:provider/login",
+    async (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      const provider =
+        String(
+          req.params.provider ?? ""
+        ).trim();
+      if (!isProviderId(provider)) {
+        res.status(404).json({
+          error:
+            "UNKNOWN_PROVIDER"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .accountSessions
+            .login(provider)
+        );
+      } catch (error) {
+        const code =
+          error instanceof Error &&
+          error.message.startsWith(
+            "ACCOUNT_SESSION_CLI_NOT_INSTALLED:"
+          )
+            ? "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            : "ACCOUNT_SESSION_LOGIN_FAILED";
+        res.status(
+          code ===
+            "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            ? 503
+            : 422
+        ).json({
+          error: code,
+          provider
+        });
       }
     }
   );
