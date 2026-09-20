@@ -92,7 +92,7 @@ if (issues.length > 0) {
   const unsafeHttp = await request(appWithExecutor(unsafeExecutor))
     .post("/api/sessions/execute")
     .send({
-      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTechniczny test blokady G15.',
+      query: '__LEX_SKILLS_V1__ {"auto":false,"manual":[]}\nTechniczny test zdegradowanej weryfikacji G15.',
       provider: "anthropic",
       model: "g15-unsafe",
       primarySkill: DR02,
@@ -133,9 +133,12 @@ if (issues.length > 0) {
     (safe.workflow as Record<string, unknown> | undefined)?.id ===
       "LEGAL_QUERY_V1" &&
     unsafeHttp.status === 200 &&
-    unsafe.status === "BLOCKED" &&
+    unsafe.status === "DRAFT_PRESENTABLE" &&
     unsafe.finalization === "BLOCKED" &&
-    !("answer" in unsafe) &&
+    typeof unsafe.answer === "string" &&
+    unsafe.answer.includes(
+      "Zastosowanie ma art. 1234 KC."
+    ) &&
     unsafeAudit.closed === true &&
     unsafeReferences.some(
       (reference) =>
@@ -159,7 +162,7 @@ if (issues.length > 0) {
         workflow: safe.workflow ?? null,
         answerReleased: typeof safe.answer === "string"
       },
-      blockedPath: {
+      degradedVerificationPath: {
         http: unsafeHttp.status,
         status: unsafe.status,
         finalization: unsafe.finalization,
