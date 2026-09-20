@@ -18,6 +18,9 @@ import {
   MemoryOverlayCredentialResolver
 } from "../providers/credentials.js";
 import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
+import {
+  AccountSessionManager
+} from "../providers/account-session.js";
 import { ProviderGateway } from "../providers/gateway.js";
 import {
   GitHubReleaseUpdateDiscovery
@@ -426,9 +429,12 @@ export async function startLocalServer(options?: {
     new MemoryOverlayCredentialResolver(
       new EnvironmentCredentialResolver()
     );
+  const accountSessions =
+    new AccountSessionManager();
   const providerRegistry = createLiveProviderRegistry(
     credentials,
-    localModels
+    localModels,
+    accountSessions
   );
   const providerGateway = new ProviderGateway(providerRegistry);
   const modelCatalog =
@@ -485,6 +491,7 @@ export async function startLocalServer(options?: {
     modelCatalog,
     credentialResolver: credentials,
     credentialManager: credentials,
+    accountSessions,
     updateDiscovery,
     guideSessionStore,
     processWorkflowStore:
