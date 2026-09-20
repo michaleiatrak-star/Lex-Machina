@@ -766,6 +766,9 @@ export type SessionExecutionResponse = {
   };
   processWorkflow?: ProcessPleadingWorkflowView;
   courtWorkflow?: CourtAnalysisWorkflowView;
+  chronologyWorkflow?: ChronologyWorkflowView;
+  contractWorkflow?: ContractWorkflowView;
+  orderedCaseWorkflow?: OrderedCaseWorkflowView;
 };
 
 export type ProcessPleadingCheckpoint =
@@ -866,6 +869,41 @@ export type CourtAnalysisWorkflowView = {
     CourtAnalysisCheckpoint | null;
   closedCheckpoints:
     CourtAnalysisCheckpoint[];
+};
+
+export type ChronologyWorkflowView = {
+  caseId: string;
+  revision: number;
+  stage: string;
+  temporalGateRequired: boolean;
+  nextCheckpoint: string | null;
+  closedCheckpoints: string[];
+};
+
+export type ContractWorkflowView = {
+  caseId: string;
+  revision: number;
+  mode:
+    | "ANALYSIS"
+    | "REDACTION"
+    | "DRAFT"
+    | "SUPPLEMENT";
+  stage: string;
+  nextCheckpoint: string | null;
+  closedCheckpoints: string[];
+};
+
+export type OrderedCaseWorkflowView = {
+  workflowId:
+    | "EVIDENCE_ANALYSIS_V1"
+    | "WITNESS_QUESTIONING_V1";
+  caseId: string;
+  revision: number;
+  status:
+    | "ACTIVE"
+    | "COMPLETE";
+  nextCheckpoint: string | null;
+  closedCheckpoints: string[];
 };
 
 export type ApiFailure = {
