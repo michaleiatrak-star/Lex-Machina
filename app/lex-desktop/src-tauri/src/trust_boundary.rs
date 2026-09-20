@@ -25,6 +25,7 @@ const MAX_REQUEST_BYTES: usize = 160 * 1024 * 1024;
 const MAX_RESPONSE_BYTES: usize = 192 * 1024 * 1024;
 const DEFAULT_PROXY_READ_TIMEOUT_SECS: u64 = 120;
 const LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS: u64 = 300;
+const PROVIDER_ACCOUNT_LOGIN_PROXY_READ_TIMEOUT_SECS: u64 = 300;
 const AI_SESSION_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
 const LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS: u64 = 7_200;
 const MANAGED_LOGIN: &str = "local-admin";
@@ -1219,6 +1220,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/routes/validate" => method == "POST",
         "/api/cases"
         | "/api/providers"
+        | "/api/provider-accounts"
         | "/api/routes"
         | "/api/update/status"
         | "/api/local-models"
@@ -1248,6 +1250,11 @@ fn route_allowed(method: &str, path: &str) -> bool {
         }
         _ if path.starts_with("/api/admin/providers/") => {
             matches!(method, "GET" | "PUT" | "DELETE")
+        }
+        _ if path.starts_with("/api/provider-accounts/")
+            && path.ends_with("/login") =>
+        {
+            method == "POST"
         }
         _ if path.starts_with("/api/admin/support") => {
             matches!(method, "GET" | "POST")
@@ -1283,6 +1290,15 @@ fn proxy_read_timeout(request: &Request<Vec<u8>>) -> Duration {
 
     if method == "POST" && path == "/api/local-models/start" {
         return Duration::from_secs(LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS);
+    }
+
+    if method == "POST"
+        && path.starts_with("/api/provider-accounts/")
+        && path.ends_with("/login")
+    {
+        return Duration::from_secs(
+            PROVIDER_ACCOUNT_LOGIN_PROXY_READ_TIMEOUT_SECS,
+        );
     }
 
     if method == "POST"
@@ -1640,6 +1656,15 @@ mod tests {
         assert!(!route_allowed("POST", "/api/update/status"));
         assert!(route_allowed("POST", "/api/update/download"));
         assert!(route_allowed("GET", "/api/local-models"));
+        assert!(route_allowed("GET", "/api/provider-accounts"));
+        assert!(route_allowed(
+            "POST",
+            "/api/provider-accounts/openai/login"
+        ));
+        assert!(!route_allowed(
+            "DELETE",
+            "/api/provider-accounts/openai/login"
+        ));
         assert!(route_allowed("GET", "/api/local-models/update/status"));
         assert!(route_allowed("POST", "/api/local-models/update/apply"));
         assert!(route_allowed("GET", "/api/guide/state"));
@@ -1677,6 +1702,18 @@ mod tests {
         assert_eq!(
             proxy_read_timeout(&session),
             Duration::from_secs(AI_SESSION_PROXY_READ_TIMEOUT_SECS)
+        );
+
+        let login = Request::builder()
+            .method("POST")
+            .uri("/api/provider-accounts/anthropic/login")
+            .body(Vec::new())
+            .expect("account login request");
+        assert_eq!(
+            proxy_read_timeout(&login),
+            Duration::from_secs(
+                PROVIDER_ACCOUNT_LOGIN_PROXY_READ_TIMEOUT_SECS
+            )
         );
 
         let start = Request::builder()
