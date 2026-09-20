@@ -1478,11 +1478,12 @@ export default function MatterChatApp({
                       : `Deterministyczny — ${labelForSkill(controllingExecutionSkill ?? "")}`}
                   </h2>
                   <p>
-                    Pierwszy zaznaczony skill jest sterującym workflowem tej tury.
+                    Wybrany skill jest sterującym workflowem kolejnej tury.
                     Jego programistyczne checkpointy, wymagane odczyty i HARD GATE
-                    mają pierwszeństwo. Kolejne zaznaczone skille współpracują
-                    semantycznie. Opcja Auto może dobrać dalsze skille i dziedziny,
-                    ale nie zastąpi ręcznie wybranego workflowu sterującego.
+                    mają pierwszeństwo. Tryb Auto może dobrać współpracujące skille
+                    i dziedziny, ale nie zastąpi ręcznie wybranego workflowu
+                    sterującego. Workflow można zmieniać pomiędzy wiadomościami
+                    w ramach tej samej sprawy.
                   </p>
                 </div>
                 <label className="chat-switch">
