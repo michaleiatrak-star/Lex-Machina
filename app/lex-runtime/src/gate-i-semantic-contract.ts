@@ -41,12 +41,12 @@ const CONTRACTS:
       "Identify semantic ambiguity in facts; never invent missing party, date, claim or requested relief."
     ],
     "pisma-procesowe-v3": [
-      "Perform strategy, argumentation, counterargument and drafting only for the active runtime checkpoint.",
+      "Perform strategy, argumentation, counterargument and drafting within the current task scope.",
       "Distinguish fact, allegation, inference and legal argument in substantive drafting."
     ],
     "analiza-sadowa-v6": [
-      "Perform legal qualification, adversarial interpretation and significance analysis for the active pass.",
-      "Assess competing explanations without claiming completion of later passes."
+      "Perform legal qualification, adversarial interpretation and significance analysis within the current task scope.",
+      "Assess competing explanations without claiming completion of runtime-controlled stages."
     ],
     "analizator-dowodow-v3": [
       "Assess evidentiary significance, hypotheses, conflicts and alternative explanations.",
@@ -123,7 +123,10 @@ export function gateISemanticContract(
 }
 
 export function gateISemanticPrompt(
-  skill: string
+  skill: string,
+  options: {
+    specializedWorkflowActive?: boolean;
+  } = {}
 ): string | null {
   const contract =
     gateISemanticContract(
@@ -133,9 +136,17 @@ export function gateISemanticPrompt(
     return null;
   }
 
+  const specialized =
+    options.specializedWorkflowActive === true;
+
   return [
     `# SEMANTIC CONTRACT: ${skill}`,
-    "The deterministic Gate I runtime owns all mechanical execution obligations for this skill.",
+    specialized
+      ? "This skill controls the active specialized deterministic workflow. The runtime owns checkpoint order, state transitions and every mechanical gate."
+      : "This skill is active as a semantic module only. No skill-specific state machine is active for it in this turn; the common legal runtime still owns routing, source verification, citations, provenance and finalization.",
+    specialized
+      ? "Work only within the active runtime checkpoint/stage supplied elsewhere in this prompt."
+      : "Do not simulate, announce, close or skip any skill-specific checkpoint or stage.",
     "Your responsibilities:",
     ...contract.semanticResponsibilities
       .map(
