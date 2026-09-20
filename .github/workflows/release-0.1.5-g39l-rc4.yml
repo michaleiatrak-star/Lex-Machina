@@ -1,0 +1,228 @@
+name: Lex Machina 0.1.5 G39L RC4 Online Release
+
+on:
+  push:
+    branches:
+      - "release/0.1.5-g39l-rc4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lex-release-0.1.5-g39l-rc4-${{ github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  provenance:
+    name: Release provenance contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact release commit with history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify G39L provenance metadata and version coherence
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          expected_baseline="d7e9cbb7284bd70e5e9d9f951f04e5dae15daac1"
+          expected_branch="release/0.1.5-g39l-rc4"
+          expected_version="0.1.5"
+          expected_icon_sha="055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"
+
+          baseline="$(awk -F': ' '$1=="baseline_commit"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          work_branch="$(awk -F': ' '$1=="work_branch"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          app_version="$(awk -F': ' '$1=="application_version"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          runtime_version="$(node -p "require('./app/lex-runtime/package.json').version")"
+          web_version="$(node -p "require('./app/lex-web/package.json').version")"
+          desktop_version="$(node -p "require('./app/lex-desktop/package.json').version")"
+          tauri_version="$(node -p "require('./app/lex-desktop/src-tauri/tauri.conf.json').version")"
+          installer_version="$(node -p "require('./app/installer/windows-release-source.json').applicationVersion")"
+
+          [[ "$baseline" == "$expected_baseline" ]] || {
+            echo "PROVENANCE_BASELINE_MISMATCH expected=$expected_baseline actual=$baseline" >&2
+            exit 1
+          }
+          [[ "$work_branch" == "$expected_branch" ]] || {
+            echo "PROVENANCE_BRANCH_MISMATCH expected=$expected_branch actual=$work_branch" >&2
+            exit 1
+          }
+          [[ "$GITHUB_REF_NAME" == "$expected_branch" ]] || {
+            echo "PROVENANCE_GITHUB_REF_MISMATCH expected=$expected_branch actual=$GITHUB_REF_NAME" >&2
+            exit 1
+          }
+
+          git merge-base --is-ancestor "$baseline" "$GITHUB_SHA" || {
+            echo "PROVENANCE_BASELINE_NOT_ANCESTOR baseline=$baseline source=$GITHUB_SHA" >&2
+            exit 1
+          }
+
+          for observed in "$app_version" "$runtime_version" "$web_version" "$desktop_version" "$tauri_version" "$installer_version"; do
+            [[ "$observed" == "$expected_version" ]] || {
+              echo "PROVENANCE_VERSION_MISMATCH expected=$expected_version actual=$observed" >&2
+              exit 1
+            }
+          done
+
+          cargo_version="$(awk -F' *= *' '$1=="version"{gsub(/"/,"",$2); print $2; exit}' app/lex-desktop/src-tauri/Cargo.toml)"
+          [[ "$cargo_version" == "$expected_version" ]] || {
+            echo "PROVENANCE_CARGO_VERSION_MISMATCH expected=$expected_version actual=$cargo_version" >&2
+            exit 1
+          }
+
+          grep -q "$expected_icon_sha" app/installer/materialize-brand-icon.ps1 || {
+            echo "PROVENANCE_BRAND_ICON_HASH_NOT_PINNED" >&2
+            exit 1
+          }
+
+          printf 'PROVENANCE_PASS baseline=%s branch=%s source=%s version=%s icon=%s\n'             "$baseline" "$work_branch" "$GITHUB_SHA" "$expected_version" "$expected_icon_sha"
+
+  runtime:
+    name: Runtime and Gate I audit
+    uses: ./.github/workflows/lex-runtime.yml
+
+  structural:
+    name: Structural corpus audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+
+  installer-state:
+    name: Installer state audit
+    uses: ./.github/workflows/g39-installer-state.yml
+
+  online:
+    name: Accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+    uses: ./.github/workflows/lex-installer.yml
+
+  publish:
+    name: Publish exact accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+      - online
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download accepted online installer artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input
+
+      - name: Verify receipt and assemble immutable release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+
+          installer="$(find release-input -type f -name '*.exe' -print -quit)"
+          receipt="$(find release-input -type f -name 'SHA256.txt' -print -quit)"
+
+          [[ -n "$installer" && -f "$installer" ]] || {
+            echo "ONLINE_INSTALLER_MISSING" >&2
+            exit 1
+          }
+          [[ -n "$receipt" && -f "$receipt" ]] || {
+            echo "ONLINE_INSTALLER_RECEIPT_MISSING" >&2
+            exit 1
+          }
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$installer" | awk '{print $1}')"
+          if [[ ! "$expected" =~ ^[0-9a-f]{64}$ || "$expected" != "$actual" ]]; then
+            echo "ONLINE_INSTALLER_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          fi
+
+          target="release-out/Lex-Machina-0.1.5-G39L-RC4-Online-x64-Setup.exe"
+          cp "$installer" "$target"
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          sha256sum "$target" > release-out/SHA256SUMS.txt
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+          printf '%s  %s\n'             "055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"             "app/lex-desktop/src-tauri/icons/icon.ico"             > release-out/BRAND-ICON-SHA256.txt
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+
+          cat release-out/SHA256SUMS.txt
+          cat release-out/SOURCE-SHA.txt
+          cat release-out/BRAND-ICON-SHA256.txt
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.5 — G39L RC4
+
+          Local-primary UI consistency and API credential-gate regression hotfix. Online installer only.
+
+          Fixed:
+          - the primary-model source selector now exposes a dedicated
+            `Lokalne` entry next to OpenAI, Anthropic / Claude and xAI / Grok;
+          - after selecting `Lokalne`, the model selector shows only locally
+            installed models, including Bielik 11B v3 and Mistral NeMo 12B
+            when they are present;
+          - local models no longer appear under the OpenAI cloud lane;
+          - local primary execution no longer stops inside `executeMessage()`
+            because an OpenAI API key is missing;
+          - the settings model selector uses the same explicit local/cloud
+            source split and does not ask for an API key in local mode;
+          - the legacy ChatApp now uses the same shared local/cloud primary
+            model policy as the active MatterChatApp;
+          - both chat surfaces allow installed Bielik/Mistral local models to
+            execute as PRIMARY without an OpenAI API key;
+          - the local Model/API panel does not expose cloud credential mutation
+            controls, while cloud providers remain credential-gated;
+          - the Windows installer pipeline now statically verifies both chat
+            surfaces are wired through the shared local-primary policy and
+            rejects reintroduction of a direct providerConfigured credential
+            gate before packaging.
+
+          Runtime behavior:
+          - `Lokalne` is a UI source lane only; local inference still uses the
+            existing OpenAI-compatible localhost llama.cpp adapter internally;
+          - remote OpenAI, Anthropic and xAI catalogs remain credential-gated;
+          - only installed local profiles are selectable in the local lane;
+          - Bielik/Mistral provisioning, context qualification and model-pack
+            verification policies are unchanged.
+
+          Unchanged and still open: production Authenticode / Ed25519 trust
+          roots, hash-pinned Python packages, dependency lockfiles, and the
+          offline clean-machine acceptance gate.
+
+          EOF
+      - name: Create immutable-source prerelease and upload installer
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: v0.1.5-g39l-rc4
+          RELEASE_TITLE: Lex Machina v0.1.5 G39L RC4
+        run: |
+          set -euo pipefail
+          source_sha="$GITHUB_SHA"
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+            [[ "$tag_sha" == "$source_sha" ]] || {
+              echo "IMMUTABLE_RELEASE_TAG_MISMATCH tag=$tag_sha source=$source_sha" >&2
+              exit 1
+            }
+            gh release edit "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease
+          else
+            gh release create "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease               --target "$source_sha"
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber             release-out/Lex-Machina-0.1.5-G39L-RC4-Online-x64-Setup.exe             release-out/SHA256SUMS.txt             release-out/CI-SHA256-ONLINE.txt             release-out/SOURCE-SHA.txt             release-out/LEX-VERSION.yaml             release-out/BRAND-ICON-SHA256.txt
+
+          gh release view "$RELEASE_TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
