@@ -451,7 +451,8 @@ export default function MatterChatApp({
           !MANDATORY_SKILLS.includes(
             item.name as (typeof MANDATORY_SKILLS)[number]
           ) &&
-          item.name !== "prawo-polskie-v2"
+          item.name !== "prawo-polskie-v2" &&
+          !isExecutionSkill(item)
       )
       .filter(
         (item) =>
@@ -718,12 +719,8 @@ export default function MatterChatApp({
     );
   }
 
-  function toggleCaseTypeSkill(name: string): void {
-    setCaseTypeSkills((current) =>
-      current.includes(name)
-        ? current.filter((item) => item !== name)
-        : [...current, name].slice(-8)
-    );
+  function selectExecutionWorkflow(name: string): void {
+    setCaseTypeSkills(name ? [name] : []);
   }
 
   async function refreshProviderStatus(): Promise<void> {
@@ -1083,7 +1080,7 @@ export default function MatterChatApp({
         <div className="chat-sidebar-foot">
           <span>prawny-router-v3 ✓</span>
           <span>shared ✓</span>
-          <span>{caseTypeSkills.length === 0 ? AUTO_CASE_TYPE : `${caseTypeSkills.length} typów priorytetowych`}</span>
+          <span>{controllingExecutionSkill ? labelForSkill(controllingExecutionSkill) : AUTO_CASE_TYPE}</span>
         </div>
       </aside>
 
@@ -1110,6 +1107,29 @@ export default function MatterChatApp({
           <div className="chat-header-actions">
             {activeTab === "chat" ? (
               <div className="chat-model-lanes">
+                <label className="chat-workflow-picker">
+                  <span>⚙ Workflow</span>
+                  <select
+                    aria-label="Deterministyczny workflow sprawy"
+                    value={controllingExecutionSkill ?? ""}
+                    disabled={executing || Boolean(selectedCase?.archivedAt)}
+                    onChange={(event) =>
+                      selectExecutionWorkflow(event.target.value)
+                    }
+                  >
+                    <option value="">AUTO · router prawny</option>
+                    {executionSkills.map((skill) => (
+                      <option key={skill.name} value={skill.name}>
+                        {labelForSkill(skill.name)}
+                      </option>
+                    ))}
+                  </select>
+                  <small>
+                    {controllingExecutionSkill
+                      ? executionWorkflowLabel(controllingExecutionSkill)
+                      : "router dobiera workflow na każdą turę"}
+                  </small>
+                </label>
                 <label>
                   <span>Model główny</span>
                   <div className="chat-model-select-row">
@@ -1474,46 +1494,29 @@ export default function MatterChatApp({
                   <span>Auto dobór dodatkowych</span>
                 </label>
               </div>
-              <div className="chat-skill-grid">
-                {executionSkills.map((skill) => {
-                  const checked = caseTypeSkills.includes(skill.name);
-                  const controller =
-                    controllingExecutionSkill === skill.name;
-                  return (
-                    <label
-                      key={skill.name}
-                      className={checked ? "chat-skill-card selected" : "chat-skill-card"}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleCaseTypeSkill(skill.name)}
-                      />
-                      <span>
-                        <strong>{labelForSkill(skill.name)}</strong>
-                        <small>{skill.description || skill.type || "skill wykonawczy"}</small>
-                        <small>
-                          {executionWorkflowLabel(skill.name)}
-                          {controller
-                            ? " · STERUJĄCY"
-                            : checked
-                              ? " · współpracujący"
-                              : ""}
-                        </small>
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-              {caseTypeSkills.length > 0 ? (
-                <button
-                  type="button"
-                  className="chat-secondary-action"
-                  onClick={() => setCaseTypeSkills([])}
+              <label>
+                Workflow deterministyczny
+                <select
+                  aria-label="Workflow deterministyczny"
+                  value={controllingExecutionSkill ?? ""}
+                  disabled={executing || Boolean(selectedCase?.archivedAt)}
+                  onChange={(event) =>
+                    selectExecutionWorkflow(event.target.value)
+                  }
                 >
-                  Wróć do typu Automatyczny
-                </button>
-              ) : null}
+                  <option value="">AUTO · router prawny</option>
+                  {executionSkills.map((skill) => (
+                    <option key={skill.name} value={skill.name}>
+                      {labelForSkill(skill.name)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <small>
+                {controllingExecutionSkill
+                  ? executionWorkflowLabel(controllingExecutionSkill)
+                  : "Tryb AUTO wybiera workflow na podstawie bieżącej wiadomości. Zmiana wyboru dotyczy kolejnej tury w tej samej sprawie."}
+              </small>
             </article>
 
             <article className="chat-card">
