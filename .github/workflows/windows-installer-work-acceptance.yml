@@ -1,0 +1,19 @@
+name: Windows Installer Work Acceptance
+
+on:
+  push:
+    branches:
+      - "work/rc3-hf2-brand-icon"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-installer-work-acceptance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  online:
+    name: Canonical Windows installer acceptance
+    uses: ./.github/workflows/lex-installer.yml
