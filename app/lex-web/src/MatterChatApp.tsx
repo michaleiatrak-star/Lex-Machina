@@ -303,10 +303,20 @@ function executionMessage(
       execution.modelRouting?.auxiliary
         ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}] · helper ${execution.modelRouting.auxiliary.latencyMs} ms${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}${execution.modelRouting.auxiliary.cachedVerifierReuses > 0 ? ` · cache reuse: ${execution.modelRouting.auxiliary.cachedVerifierReuses}` : ""}`
         : ` · główny: ${execution.model}`;
+    const verificationDegraded =
+      execution.finalization !== "PASS" ||
+      execution.gateI?.result === "BLOCKED";
+    const verificationWarning =
+      verificationDegraded
+        ? "⚠️ Weryfikacja źródeł lub śladu Gate I nie jest kompletna. Odpowiedź jest prezentowana roboczo i może wymagać potwierdzenia w źródłach.\n\n"
+        : "";
+
     return {
       id: messageId(),
       role: "assistant",
-      content: execution.answer,
+      content:
+        verificationWarning +
+        execution.answer,
       evidence: execution.evidence,
       documentCitations: execution.documentCitations,
       meta:
@@ -318,7 +328,10 @@ function executionMessage(
         workflowMeta +
         modelRoutingMeta +
         ` · VERIFIED ${execution.verification.verified}` +
-        ` · SUPPORTED ${execution.verification.supported}`
+        ` · SUPPORTED ${execution.verification.supported}` +
+        (verificationDegraded
+          ? ` · WERYFIKACJA NIEPEŁNA · UNVERIFIED ${execution.verification.unverified}`
+          : "")
     };
   }
 
