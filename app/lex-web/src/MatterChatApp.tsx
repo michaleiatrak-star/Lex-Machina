@@ -507,16 +507,33 @@ export default function MatterChatApp({
       ),
     [messages]
   );
-  const availablePipelines = useMemo(
+  const availableActions = useMemo(
     () =>
-      DETERMINISTIC_PIPELINE_SKILLS.filter((name) =>
-        skills.some((skill) => skill.name === name)
+      DETERMINISTIC_ACTIONS.filter(
+        (action) =>
+          action.skills.every(
+            (name) =>
+              skills.some(
+                (skill) =>
+                  skill.name === name
+              )
+          )
       ),
     [skills]
   );
+  const selectedDeterministicAction =
+    useMemo(
+      () =>
+        DETERMINISTIC_ACTIONS.find(
+          (action) =>
+            action.id ===
+            deterministicAction
+        ) ?? null,
+      [deterministicAction]
+    );
   const filteredSkills = useMemo(() => {
     const needle = skillFilter.trim().toLowerCase();
-    return skills
+    return executionSkills
       .filter(
         (item) =>
           !MANDATORY_SKILLS.includes(
@@ -530,7 +547,7 @@ export default function MatterChatApp({
           item.name.toLowerCase().includes(needle) ||
           item.description?.toLowerCase().includes(needle)
       );
-  }, [skills, skillFilter]);
+  }, [executionSkills, skillFilter]);
   const currentPrimaryRoute = useMemo(
     () => choosePrimaryRoute(query, routes, skills, manualSkills),
     [query, routes, skills, manualSkills]
