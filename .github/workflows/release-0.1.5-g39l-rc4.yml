@@ -187,7 +187,17 @@ jobs:
           - the Windows installer pipeline now statically verifies both chat
             surfaces are wired through the shared local-primary policy and
             rejects reintroduction of a direct providerConfigured credential
-            gate before packaging.
+            gate before packaging;
+          - the matter chat exposes one deterministic workflow dropdown:
+            `AUTO · router prawny` or one explicit execution skill; changing it
+            affects the next turn in the same case without creating a new thread;
+          - an explicit workflow controller is carried separately from helper
+            skills and cannot be replaced by AUTO routing in that turn;
+          - execution skills are no longer duplicated as manual helper
+            checkboxes, so there is one unambiguous workflow controller;
+          - the contract-analysis workflow now bootstraps its encrypted durable
+            state on first chat use with deterministic mode inference and resumes
+            the same state when the user returns to that skill.
 
           Runtime behavior:
           - `Lokalne` is a UI source lane only; local inference still uses the
