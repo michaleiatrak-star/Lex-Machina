@@ -238,7 +238,7 @@ describe(
   "signed skill update compatibility policy",
   () => {
     it(
-      "reports an unsigned skill index as ready only in the explicit temporary mode",
+      "reports an unsigned skill index as ready in the explicit official-source mode",
       async () => {
         const {
           maintenance
