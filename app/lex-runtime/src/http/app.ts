@@ -5974,75 +5974,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             .auxiliaryModel
       };
 
-      if (
-        request.primarySkill ===
-          "przewodnik-prawny-v2"
-      ) {
-        if (
-          !options.guideSessionStore
-        ) {
-          res.status(503).json({
-            error:
-              "GUIDE_SESSION_STATE_UNAVAILABLE"
-          });
-          return;
-        }
-        let guide =
-          options.guideSessionStore
-            .get(
-              actor.session
-                .sessionId
-            ) ??
-          options.guideSessionStore
-            .initialize(
-              actor.session
-                .sessionId,
-              request.mode
-            );
-        if (
-          guide.audience !==
-            request.mode
-        ) {
-          guide =
-            options.guideSessionStore
-              .transition({
-                sessionId:
-                  actor.session
-                    .sessionId,
-                expectedRevision:
-                  guide.revision,
-                transition: {
-                  type:
-                    "SET_AUDIENCE",
-                  audience:
-                    request.mode
-                }
-              });
-        }
-        request.guideContext = {
-          revision:
-            guide.revision,
-          audience:
-            guide.audience,
-          interactionMode:
-            guide
-              .interactionMode,
-          rawAnalysis:
-            guide.rawAnalysis,
-          step: guide.step,
-          guidedQuestionIndex:
-            guide
-              .guidedQuestionIndex,
-          pendingIrreversibleAction:
-            guide
-              .pendingIrreversibleAction
-              ? {
-                  ...guide
-                    .pendingIrreversibleAction
-                }
-              : null
-        };
-      }
     }
 
     try {
@@ -6412,6 +6343,77 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           options.registry,
           request
         );
+      if (
+        previewPlan.id ===
+          "LEGAL_GUIDE_V1"
+      ) {
+        if (
+          !options.guideSessionStore
+        ) {
+          res.status(503).json({
+            error:
+              "GUIDE_SESSION_STATE_UNAVAILABLE"
+          });
+          return;
+        }
+        const actor =
+          responseAuthContext(res);
+        let guide =
+          options.guideSessionStore
+            .get(
+              actor.session
+                .sessionId
+            ) ??
+          options.guideSessionStore
+            .initialize(
+              actor.session
+                .sessionId,
+              request.mode
+            );
+        if (
+          guide.audience !==
+            request.mode
+        ) {
+          guide =
+            options.guideSessionStore
+              .transition({
+                sessionId:
+                  actor.session
+                    .sessionId,
+                expectedRevision:
+                  guide.revision,
+                transition: {
+                  type:
+                    "SET_AUDIENCE",
+                  audience:
+                    request.mode
+                }
+              });
+        }
+        request.guideContext = {
+          revision:
+            guide.revision,
+          audience:
+            guide.audience,
+          interactionMode:
+            guide
+              .interactionMode,
+          rawAnalysis:
+            guide.rawAnalysis,
+          step: guide.step,
+          guidedQuestionIndex:
+            guide
+              .guidedQuestionIndex,
+          pendingIrreversibleAction:
+            guide
+              .pendingIrreversibleAction
+              ? {
+                  ...guide
+                    .pendingIrreversibleAction
+                }
+              : null
+        };
+      }
       let processContext:
         | {
             caseId: string;
