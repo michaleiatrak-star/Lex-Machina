@@ -201,18 +201,27 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
 
   # The embeddable distribution intentionally disables site by default.
   # Enable only the private site-packages directory used by Lex Machina.
+  $pipWheelEntry = "pip-bootstrap.whl"
   $newPth = @()
   $hasSitePackages = $false
+  $hasPipWheelEntry = $false
   $hasImportSite = $false
   foreach ($line in @(Get-Content -LiteralPath $pth.FullName)) {
     $trimmed = $line.Trim()
     if ($trimmed -eq "Lib\site-packages") {
       $hasSitePackages = $true
     }
+    if ($trimmed -eq $pipWheelEntry) {
+      $hasPipWheelEntry = $true
+    }
     if ($trimmed -eq "#import site" -or $trimmed -eq "import site") {
       if (-not $hasSitePackages) {
         $newPth += "Lib\site-packages"
         $hasSitePackages = $true
+      }
+      if (-not $hasPipWheelEntry) {
+        $newPth += $pipWheelEntry
+        $hasPipWheelEntry = $true
       }
       $newPth += "import site"
       $hasImportSite = $true
@@ -223,6 +232,9 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   if (-not $hasSitePackages) {
     $newPth += "Lib\site-packages"
   }
+  if (-not $hasPipWheelEntry) {
+    $newPth += $pipWheelEntry
+  }
   if (-not $hasImportSite) {
     $newPth += "import site"
   }
@@ -232,8 +244,10 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   New-Item -ItemType Directory -Force -Path $sitePackages | Out-Null
 
   # Bootstrap a pinned pip wheel without invoking any globally installed Python.
-  # A wheel is a ZIP archive; extracting this pure-Python wheel into the private
-  # site-packages directory is sufficient for `python -m pip`.
+  # CPython's embeddable distribution runs in isolated ._pth mode. Rather than
+  # relying on site-package discovery, place the verified wheel directly on the
+  # explicit ._pth search path. zipimport can load pip from the wheel itself,
+  # while packages installed by pip continue to land in private Lib\site-packages.
   $pipBootstrap = $manifest.runtime.python.pipBootstrap
   if (-not $pipBootstrap -or -not $pipBootstrap.url -or
       -not $pipBootstrap.sha256 -or -not $pipBootstrap.version) {
@@ -242,8 +256,8 @@ if (-not (Test-CommandVersion $pythonExe @("--version") $pythonExpected)) {
   $pipWheel = Join-Path $cache "pip-$($pipBootstrap.version)-py3-none-any.whl"
   Get-VerifiedDownload $pipBootstrap.url $pipBootstrap.sha256 $pipWheel "pip-bootstrap-wheel"
 
-  Add-Type -AssemblyName System.IO.Compression.FileSystem
-  [IO.Compression.ZipFile]::ExtractToDirectory($pipWheel, $sitePackages)
+  $privatePipWheel = Join-Path $pythonDir $pipWheelEntry
+  Copy-Item -LiteralPath $pipWheel -Destination $privatePipWheel -Force
 }
 
 $pythonActual = Get-CommandVersionText $pythonExe @("--version")
@@ -252,11 +266,36 @@ if ($pythonActual -ne $pythonExpected) {
   throw "BOOTSTRAP_PYTHON_VERSION_INVALID expected=$pythonExpected actual=$pythonActualDisplay executable=$pythonExe"
 }
 
-$pipActual = Get-CommandVersionText $pythonExe @("-m", "pip", "--version")
+$previousErrorActionPreference = $ErrorActionPreference
+try {
+  # Windows PowerShell 5.1 can promote native stderr to terminating errors when
+  # ErrorActionPreference=Stop. pip may emit benign diagnostics on stderr, so
+  # capture the native process result explicitly and validate its exit code.
+  $ErrorActionPreference = "Continue"
+  $pipVersionOutput = @(& $pythonExe -m pip --version 2>&1)
+  $pipVersionExit = $LASTEXITCODE
+} finally {
+  $ErrorActionPreference = $previousErrorActionPreference
+}
+$pipActual = @(
+  $pipVersionOutput |
+    ForEach-Object { $_.ToString().Trim() } |
+    Where-Object { $_ -like "pip *" } |
+    Select-Object -First 1
+)
+$pipActual = if ($pipActual.Count -gt 0) { $pipActual[0] } else { $null }
 $pipExpectedPrefix = "pip $($manifest.runtime.python.pipBootstrap.version) "
-if ($null -eq $pipActual -or -not $pipActual.StartsWith($pipExpectedPrefix, [StringComparison]::Ordinal)) {
-  $pipActualDisplay = if ($null -eq $pipActual) { "<missing-or-unreadable>" } else { $pipActual }
-  throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) actual=$pipActualDisplay executable=$pythonExe"
+if ($pipVersionExit -ne 0 -or $null -eq $pipActual -or
+    -not $pipActual.StartsWith($pipExpectedPrefix, [StringComparison]::Ordinal)) {
+  $pipActualDisplay = if ($null -eq $pipActual) {
+    ($pipVersionOutput | ForEach-Object { $_.ToString().Trim() }) -join " | "
+  } else {
+    $pipActual
+  }
+  if ([string]::IsNullOrWhiteSpace($pipActualDisplay)) {
+    $pipActualDisplay = "<missing-or-unreadable>"
+  }
+  throw "BOOTSTRAP_PIP_VERSION_INVALID expected=$($manifest.runtime.python.pipBootstrap.version) exit=$pipVersionExit actual=$pipActualDisplay executable=$pythonExe"
 }
 
 Write-Host "[4/6] Pinned Python/ML packages"
@@ -264,16 +303,55 @@ $packageVerifier = Join-Path $bootstrapRoot "verify-python-package-set.py"
 if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
 }
-& $pythonExe $packageVerifier $manifestPath | Out-Host
-if ($LASTEXITCODE -ne 0) {
-  & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
-  if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED" }
+$previousErrorActionPreference = $ErrorActionPreference
+try {
+  $ErrorActionPreference = "Continue"
   & $pythonExe $packageVerifier $manifestPath | Out-Host
-  if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH" }
+  $verifyExit = $LASTEXITCODE
+} finally {
+  $ErrorActionPreference = $previousErrorActionPreference
 }
-& $pythonExe -m pip freeze --all | Sort-Object |
+if ($verifyExit -ne 0) {
+  $previousErrorActionPreference = $ErrorActionPreference
+  try {
+    $ErrorActionPreference = "Continue"
+    & $pythonExe -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r $requirements
+    $pipInstallExit = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
+  if ($pipInstallExit -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGES_FAILED:$pipInstallExit" }
+
+  $previousErrorActionPreference = $ErrorActionPreference
+  try {
+    $ErrorActionPreference = "Continue"
+    & $pythonExe $packageVerifier $manifestPath | Out-Host
+    $verifyExit = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
+  if ($verifyExit -ne 0) { throw "BOOTSTRAP_PYTHON_PACKAGE_VERSION_MISMATCH:$verifyExit" }
+}
+
+$freezeStderr = Join-Path $runtime "pip-freeze.stderr.log"
+Remove-Item -LiteralPath $freezeStderr -Force -ErrorAction SilentlyContinue
+$previousErrorActionPreference = $ErrorActionPreference
+try {
+  $ErrorActionPreference = "Continue"
+  $freezeLines = @(& $pythonExe -m pip freeze --all 2> $freezeStderr)
+  $freezeExit = $LASTEXITCODE
+} finally {
+  $ErrorActionPreference = $previousErrorActionPreference
+}
+if ($freezeExit -ne 0) {
+  if (Test-Path -LiteralPath $freezeStderr -PathType Leaf) {
+    Get-Content -LiteralPath $freezeStderr | Out-Host
+  }
+  throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED:$freezeExit"
+}
+$freezeLines | Sort-Object |
   Out-File -FilePath (Join-Path $runtime "python-dependency-tree.txt") -Encoding utf8
-if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_PYTHON_PROVENANCE_FAILED" }
+Remove-Item -LiteralPath $freezeStderr -Force -ErrorAction SilentlyContinue
 
 Write-Host "[5/6] OCR/NER models"
 $modelRoot = Join-Path $runtime "models"
