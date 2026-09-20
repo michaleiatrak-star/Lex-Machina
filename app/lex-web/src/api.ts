@@ -2149,6 +2149,23 @@ export async function uploadCaseFile(
   return payload as StoredUploadResponse;
 }
 
+export function processStoredCaseFile(
+  caseId: string,
+  uploadId: string,
+  fileId?: string
+): Promise<DocumentReviewResponse> {
+  const memberPath =
+    fileId
+      ? `/members/${fileId}`
+      : "";
+  return json<DocumentReviewResponse>(
+    `/api/cases/${caseId}/files/${uploadId}${memberPath}/process`,
+    {
+      method: "POST"
+    }
+  );
+}
+
 export async function reviewDocument(
   file: File,
   caseId: string

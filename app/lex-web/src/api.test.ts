@@ -18,6 +18,7 @@ import {
   listCases,
   logoutAuth,
   reauthorizeDeanonymization,
+  processStoredCaseFile,
   listCaseAccess,
   listCaseAccessCandidates,
   grantCaseAccess,
@@ -829,6 +830,42 @@ describe("local API client", () => {
           "X-Lex-Filename":
             encodeURIComponent("akta.zip")
         })
+      })
+    );
+  });
+
+  it("re-runs OCR and privacy review for a file already stored in the case", async () => {
+    const payload = {
+      documentId: "doc_0123456789abcdef01234567",
+      mediaType: "application/pdf",
+      complete: true,
+      totalPages: 2,
+      pages: [{
+        page: 1,
+        text: "Jan Kowalski",
+        source: "OCR"
+      }],
+      suggestions: [{
+        page: 1,
+        start: 0,
+        end: 12,
+        kind: "PERSON"
+      }]
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify(payload), { status: 201 })
+    );
+    const caseId = "case_0123456789abcdef0123456789abcdef";
+    const uploadId = "upload_0123456789abcdef0123456789abcdef";
+
+    await expect(
+      processStoredCaseFile(caseId, uploadId)
+    ).resolves.toEqual(payload);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `http://127.0.0.1:4317/api/cases/${caseId}/files/${uploadId}/process`,
+      expect.objectContaining({
+        method: "POST"
       })
     );
   });

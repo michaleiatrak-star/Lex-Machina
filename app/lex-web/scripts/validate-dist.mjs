@@ -93,6 +93,8 @@ const required = [
   "Know-how kancelarii",
   "Dodaj wiedzę / dokument",
   "OCR automatyczny i anonimizacja per plik",
+  "OCR / prywatność na żądanie",
+  "Po zapisaniu pliku do akt możesz ponownie uruchomić OCR",
   "Zdjęcia są od razu kierowane do lokalnego OCR",
   "Decyzja prywatności dla",
   "Anonimizuj / pseudonimizuj automatycznie",

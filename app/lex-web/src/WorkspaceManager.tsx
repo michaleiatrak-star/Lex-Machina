@@ -13,10 +13,34 @@ import {
   type WorkspaceResponse
 } from "./workspace-client.js";
 
+const PRIVACY_PROCESSABLE_MEDIA_TYPES = new Set([
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/tiff",
+  "text/plain",
+  "text/markdown",
+  "text/csv",
+  "text/tab-separated-values",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.oasis.opendocument.text",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-excel.sheet.macroenabled.12"
+]);
+
 function bytesLabel(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function canProcessPrivacy(item: WorkspaceItem): boolean {
+  return (
+    item.kind === "UPLOAD" &&
+    !item.archive &&
+    PRIVACY_PROCESSABLE_MEDIA_TYPES.has(item.mediaType)
+  );
 }
 
 function folderPath(folder: WorkspaceFolder, all: WorkspaceFolder[]): string {
@@ -52,12 +76,17 @@ export function WorkspaceManager({
   caseId,
   title,
   canWrite,
-  refreshToken = 0
+  refreshToken = 0,
+  onProcessStoredFile
 }: {
   caseId: string;
   title: string;
   canWrite: boolean;
   refreshToken?: number;
+  onProcessStoredFile?: (request: {
+    uploadId: string;
+    fileName: string;
+  }) => void;
 }) {
   const [workspace, setWorkspace] = useState<WorkspaceResponse | null>(null);
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
@@ -307,6 +336,23 @@ export function WorkspaceManager({
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
                         Otwórz w systemie
+                      </button>
+                    ) : null}
+                    {canWrite &&
+                    onProcessStoredFile &&
+                    canProcessPrivacy(item) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Ponownie uruchom OCR i decyzję prywatności dla pliku już zapisanego w aktach"
+                        onClick={() =>
+                          onProcessStoredFile({
+                            uploadId: item.itemId,
+                            fileName: item.filename
+                          })
+                        }
+                      >
+                        OCR / prywatność na żądanie
                       </button>
                     ) : null}
                     {canWrite ? (

@@ -6,6 +6,7 @@ import {
 } from "react";
 import {
   finalizeDocument,
+  processStoredCaseFile,
   reviewDocument,
   uploadCaseFile,
   type DocumentAttachmentSelection,
@@ -38,11 +39,17 @@ export type PrivacyDecisionMode =
   | "KEEP_CLEAR";
 
 export type DocumentPrivacyDraft = {
-  file: File;
+  file?: File;
   fileName: string;
   review: DocumentReviewResponse;
   directives: PagePrivacyDirective[];
   privacyMode: PrivacyDecisionMode;
+};
+
+export type StoredDocumentPrivacyRequest = {
+  uploadId: string;
+  fileName: string;
+  fileId?: string;
 };
 
 export type DocumentProcessingEvent = {
@@ -159,14 +166,20 @@ function finalDecisionForSuggestion(
 export function DocumentPrivacyPanel({
   caseId,
   incomingFile,
+  storedFileRequest,
+  allowFileUpload = true,
   onIncomingFileConsumed,
+  onStoredFileRequestConsumed,
   onAttachmentSelectionChange,
   onCaseFilesChange,
   onProcessingEvent
 }: {
   caseId: string;
   incomingFile?: File | null;
+  storedFileRequest?: StoredDocumentPrivacyRequest | null;
+  allowFileUpload?: boolean;
   onIncomingFileConsumed?: () => void;
+  onStoredFileRequestConsumed?: () => void;
   onAttachmentSelectionChange?: (
     selection: DocumentAttachmentSelection | null
   ) => void;
@@ -221,10 +234,16 @@ export function DocumentPrivacyPanel({
   }, [incomingFile, caseId]);
 
   useEffect(() => {
+    if (!storedFileRequest) return;
+    void openStoredFile(storedFileRequest);
+  }, [storedFileRequest, caseId]);
+
+  useEffect(() => {
     setBatchDrafts([]);
     setFinalizedBatch([]);
     setReview(null);
     setDirectives([]);
+    setActiveFileName("");
     activeFileRef.current = null;
   }, [caseId]);
 
@@ -358,10 +377,76 @@ export function DocumentPrivacyPanel({
     }
   }
 
+  async function openStoredFile(
+    request: StoredDocumentPrivacyRequest
+  ): Promise<void> {
+    setLoading(true);
+    setError("");
+    setActiveFileName(request.fileName);
+    activeFileRef.current = null;
+    setReview(null);
+    setArchiveUpload(null);
+    setPrivacyMode("ASK");
+    setDirectives([]);
+    setSelection(null);
+    if (batchDrafts.length === 0) {
+      setFinalizedBatch([]);
+    }
+    onProcessingEvent?.({
+      fileName: request.fileName,
+      stage: "ANALYZING"
+    });
+
+    try {
+      if (!caseId) {
+        throw new Error("CASE_STORAGE_NOT_READY");
+      }
+      const result =
+        await processStoredCaseFile(
+          caseId,
+          request.uploadId,
+          request.fileId
+        );
+      setReview(result);
+      setPage(
+        result.pages[0]?.page ?? 1
+      );
+      const ocrPages = result.pages.filter(
+        (item) => item.source === "OCR"
+      ).length;
+      if (ocrPages > 0) {
+        onProcessingEvent?.({
+          fileName: request.fileName,
+          stage: "OCR_COMPLETE",
+          documentId: result.documentId,
+          totalPages: result.totalPages,
+          ocrPages
+        });
+      }
+      onProcessingEvent?.({
+        fileName: request.fileName,
+        stage: "PRIVACY_REQUIRED",
+        documentId: result.documentId,
+        totalPages: result.totalPages,
+        ocrPages,
+        suggestions: result.suggestions.length
+      });
+      onStoredFileRequestConsumed?.();
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "STORED_FILE_PROCESSING_FAILED"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function editDraft(
     draft: DocumentPrivacyDraft
   ): void {
-    activeFileRef.current = draft.file;
+    activeFileRef.current = draft.file ?? null;
     setActiveFileName(draft.fileName);
     setReview(draft.review);
     setPage(draft.review.pages[0]?.page ?? 1);
@@ -454,12 +539,14 @@ export function DocumentPrivacyPanel({
     decisions: PagePrivacyDirective[],
     mode: PrivacyDecisionMode
   ): void {
-    if (!review || !activeFileRef.current) return;
+    if (!review) return;
     const draft: DocumentPrivacyDraft = {
-      file: activeFileRef.current,
+      ...(activeFileRef.current
+        ? { file: activeFileRef.current }
+        : {}),
       fileName:
         activeFileName ||
-        activeFileRef.current.name ||
+        activeFileRef.current?.name ||
         review.documentId,
       review,
       directives: decisions,
@@ -632,6 +719,10 @@ export function DocumentPrivacyPanel({
             Dla wielu plików najpierw zbierane są decyzje osobno, a przed ich zastosowaniem zobaczysz
             zbiorczy podgląd: wykrycia automatyczne, ręczne zaznaczenia i końcowy efekt dla każdego pliku.
           </p>
+          <p>
+            Po zapisaniu pliku do akt możesz ponownie uruchomić OCR i decyzję prywatności na żądanie
+            bez ponownego wgrywania dokumentu. Oryginał pozostaje zaszyfrowany w aktach.
+          </p>
           {activeFileName ? (
             <small>
               Aktualny plik: {activeFileName}
@@ -639,28 +730,30 @@ export function DocumentPrivacyPanel({
           ) : null}
         </div>
 
-        <label className="file-button">
-          {loading
-            ? "Przetwarzanie…"
-            : "Wybierz PDF, dokument, arkusz, zdjęcie lub ZIP"}
-          <input
-            type="file"
-            accept=".pdf,.docx,.odt,.xlsx,.xlsm,.csv,.tsv,.txt,.md,.zip,application/pdf,application/zip,text/plain,text/markdown,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroenabled.12,image/jpeg,image/png,image/webp,image/tiff"
-            disabled={loading || batchFinalizing || !caseId}
-            onChange={(event) => {
-              void openFile(
-                event.target.files?.[0]
-              );
-              event.currentTarget.value = "";
-            }}
-          />
-        </label>
+        {allowFileUpload ? (
+          <label className="file-button">
+            {loading
+              ? "Przetwarzanie…"
+              : "Wybierz PDF, dokument, arkusz, zdjęcie lub ZIP"}
+            <input
+              type="file"
+              accept=".pdf,.docx,.odt,.xlsx,.xlsm,.csv,.tsv,.txt,.md,.zip,application/pdf,application/zip,text/plain,text/markdown,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroenabled.12,image/jpeg,image/png,image/webp,image/tiff"
+              disabled={loading || batchFinalizing || !caseId}
+              onChange={(event) => {
+                void openFile(
+                  event.target.files?.[0]
+                );
+                event.currentTarget.value = "";
+              }}
+            />
+          </label>
+        ) : null}
       </div>
 
       {error && (
         <div className="alert alert-error">
           <span>{error}</span>
-          {incomingFile ? (
+          {incomingFile || storedFileRequest ? (
             <button
               type="button"
               onClick={() => {
@@ -671,10 +764,14 @@ export function DocumentPrivacyPanel({
                 activeFileRef.current = null;
                 setActiveFileName("");
                 setError("");
-                onIncomingFileConsumed?.();
+                if (incomingFile) {
+                  onIncomingFileConsumed?.();
+                } else {
+                  onStoredFileRequestConsumed?.();
+                }
               }}
             >
-              Pomiń ten plik
+              {incomingFile ? "Pomiń ten plik" : "Zamknij"}
             </button>
           ) : null}
         </div>

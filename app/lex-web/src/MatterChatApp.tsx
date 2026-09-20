@@ -7,7 +7,10 @@ import {
 } from "react";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { DocumentCitationContent } from "./DocumentCitationContent.js";
-import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
+import {
+  DocumentPrivacyPanel,
+  type StoredDocumentPrivacyRequest
+} from "./DocumentPrivacyPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
 import { WorkspaceManager } from "./WorkspaceManager.js";
 import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
@@ -330,6 +333,8 @@ export default function MatterChatApp({
   const [deletePhrase, setDeletePhrase] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
+  const [storedPrivacyRequest, setStoredPrivacyRequest] =
+    useState<StoredDocumentPrivacyRequest | null>(null);
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -612,6 +617,7 @@ export default function MatterChatApp({
   useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
     setDocumentAttachments([]);
+    setStoredPrivacyRequest(null);
     setIncludeCaseKnowledge(false);
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setDeletePhrase("");
@@ -1459,8 +1465,8 @@ export default function MatterChatApp({
                 <h2>Kliknij lub przeciągnij pliki</h2>
                 <p>
                   Pliki trafiają do zaszyfrowanego magazynu bieżącej sprawy.
-                  OCR i pytanie o prywatność są prowadzone w czacie plik po pliku;
-                  tutaj zarządzasz już zapisanymi aktami i strukturą folderów.
+                  OCR i pytanie o prywatność są prowadzone automatycznie przy pierwszym przetwarzaniu,
+                  a z poziomu akt możesz też uruchomić je ponownie na żądanie dla już zapisanego pliku.
                 </p>
               </div>
               <button
@@ -1478,6 +1484,27 @@ export default function MatterChatApp({
               title={`Akta sprawy${selectedCase?.displayName ? ` — ${selectedCase.displayName}` : ""}`}
               canWrite={canWriteCase(selectedCase)}
               refreshToken={workspaceRefresh}
+              onProcessStoredFile={(request) =>
+                setStoredPrivacyRequest(request)
+              }
+            />
+
+            <DocumentPrivacyPanel
+              caseId={caseId}
+              storedFileRequest={storedPrivacyRequest}
+              allowFileUpload={false}
+              onStoredFileRequestConsumed={() =>
+                setStoredPrivacyRequest(null)
+              }
+              onCaseFilesChange={() =>
+                setWorkspaceRefresh((value) => value + 1)
+              }
+              onAttachmentSelectionChange={(selection) => {
+                if (!selection) return;
+                setDocumentAttachments((current) =>
+                  upsertAttachment(current, selection)
+                );
+              }}
             />
           </section>
         ) : null}
