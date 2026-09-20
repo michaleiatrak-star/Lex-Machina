@@ -195,11 +195,17 @@ jobs:
           - remote OpenAI, Anthropic and xAI catalogs remain credential-gated;
           - only installed local profiles are selectable in the local lane;
           - Bielik/Mistral provisioning, context qualification and model-pack
-            verification policies are unchanged.
+            verification policies are unchanged;
+          - skill updates may use the official Lex Machina GitHub Releases
+            source without Ed25519, but release-asset SHA-256, index/version
+            compatibility, bundle SHA-256/size, structural validation and
+            atomic activation/rollback remain mandatory;
+          - application updates still require the configured Authenticode trust
+            root, and model-pack updates still require their Ed25519 trust root.
 
-          Unchanged and still open: production Authenticode / Ed25519 trust
-          roots, hash-pinned Python packages, dependency lockfiles, and the
-          offline clean-machine acceptance gate.
+          Unchanged and still open: production application Authenticode trust,
+          model-pack Ed25519 trust, hash-pinned Python packages, dependency
+          lockfiles, and the offline clean-machine acceptance gate.
 
           EOF
       - name: Create immutable-source prerelease and upload installer
