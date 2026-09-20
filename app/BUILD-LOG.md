@@ -1421,3 +1421,32 @@ Release target:
 - application version remains `0.1.5`;
 - release branch: `release/0.1.5-g39l-rc6`;
 - the Windows installer gate now runs both local-primary and deterministic skill-selection web regressions before packaging.
+
+### 2026-09-20 — G39L RC7 in-chat deterministic workflow selector
+
+Status: **VALIDATION IN PROGRESS**
+
+Implemented:
+
+- moved deterministic workflow selection into the active matter chat as one compact icon-backed dropdown;
+- the selector offers `AUTO — router + skille` plus only skills advertised by runtime with `deterministicWorkflow=true`;
+- switching the selector changes the specialized workflow controller for the next turn in the same matter conversation and is disabled while a turn is executing;
+- removed the duplicate radio-card workflow selector from the Skills tab;
+- removed execution skills from the generic manual helper/domain checklist, so specialized workflow ownership has one UI control only;
+- retained AUTO/SKILL_AUTO semantics: cooperating execution skills may be loaded as semantic modules, but no specialized state machine is claimed active unless the user explicitly selects a deterministic workflow;
+- retained fail-closed runtime behavior: unsupported execution skills cannot be advertised as deterministic, and explicit unknown/non-execution workflow skills are rejected;
+- installer and RC7 validation gates now run the dedicated workflow-selector regression together with local-primary and routing tests.
+
+Programmatic enforcement confirmed:
+
+- executable/orchestration skills remain `ENFORCED` in deterministic skill coverage;
+- common Gate I policies remain code-owned in both AUTO and deterministic modes;
+- durable case/session workflows retain revision/permit/checkpoint ordering and fail-closed advancement;
+- schema/chat-turn workflows retain code-owned required reads, source/citation checks, output contracts and finalization;
+- semantic reasoning, drafting and legal interpretation remain model work only inside the stage permitted by runtime.
+
+Release target:
+
+- application version remains `0.1.5`;
+- release branch: `release/0.1.5-g39l-rc7`;
+- Windows installer publication follows only after RC7 provenance, runtime/Gate I, web build, structural and installer-state validation pass.
