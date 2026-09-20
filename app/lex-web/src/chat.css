@@ -705,7 +705,7 @@
   }
 }
 
-/* G39M new-conversation deterministic pipeline picker */
+/* New-conversation deterministic legal action picker */
 .chat-pipeline-picker {
   display: grid;
   gap: 12px;
@@ -728,19 +728,34 @@
 }
 
 .chat-pipeline-options {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 8px;
 }
 
 .chat-pipeline-option {
-  padding: 7px 12px;
+  display: grid;
+  gap: 3px;
+  min-height: 58px;
+  padding: 9px 12px;
   border: 1px solid #ccd4ca;
-  border-radius: 999px;
+  border-radius: 11px;
   background: #fff;
   color: #34483a;
+  text-align: left;
   font-size: 12px;
   font-weight: 600;
+}
+
+.chat-pipeline-option strong {
+  font-size: 12px;
+}
+
+.chat-pipeline-option small {
+  color: #6b7a70;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .chat-pipeline-option.selected {
@@ -750,6 +765,8 @@
 }
 
 .chat-pipeline-option.reset {
+  min-height: 0;
   border-style: dashed;
   color: #6b7a70;
+  text-align: center;
 }
