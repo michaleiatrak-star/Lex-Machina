@@ -98,8 +98,19 @@ try {
   Add-Type -AssemblyName System.Drawing -ErrorAction Stop
 }
 
+$drawingReferences = [Collections.Generic.List[string]]::new()
+$drawingReferences.Add([System.Drawing.Icon].Assembly.Location)
+try {
+  $gdiPlusAssembly = [Reflection.Assembly]::Load("System.Private.Windows.GdiPlus")
+  if ($gdiPlusAssembly.Location) {
+    $drawingReferences.Add($gdiPlusAssembly.Location)
+  }
+} catch {
+  throw "WINDOWS_BRANDING_GDIPLUS_ASSEMBLY_MISSING:$($_.Exception.Message)"
+}
+
 if (-not ("LexMachinaBrandingNative" -as [type])) {
-  Add-Type -ReferencedAssemblies "System.Drawing.Common" -TypeDefinition @"
+  Add-Type -ReferencedAssemblies @($drawingReferences | Select-Object -Unique) -TypeDefinition @"
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
