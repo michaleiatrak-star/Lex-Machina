@@ -590,6 +590,9 @@ export default function MatterChatApp({
         restored
       )
     );
+    setAutomaticSkills(
+      restored === ""
+    );
   }, [
     messages,
     threadLoading
@@ -1001,6 +1004,11 @@ export default function MatterChatApp({
       skillsForDeterministicAction(
         actionId
       )
+    );
+    // No action = full router-controlled AUTO. A selected action pins the
+    // execution pipeline programmatically; the router still selects DR domains.
+    setAutomaticSkills(
+      actionId === ""
     );
   }
 
@@ -1439,7 +1447,11 @@ export default function MatterChatApp({
         <div className="chat-sidebar-foot">
           <span>prawny-router-v3 ✓</span>
           <span>shared ✓</span>
-          <span>{caseTypeSkills.length === 0 ? AUTO_CASE_TYPE : `${caseTypeSkills.length} typów priorytetowych`}</span>
+          <span>
+            {selectedDeterministicAction
+              ? selectedDeterministicAction.label
+              : AUTO_CASE_TYPE}
+          </span>
         </div>
       </aside>
 
@@ -1775,8 +1787,11 @@ export default function MatterChatApp({
               ) : null}
               <div className="chat-composer-meta">
                 <span>Sprawa: {selectedCase?.displayName || "utworzy się przy pierwszej wiadomości"}</span>
-                <span>Auto skille: {automaticSkills ? "włączone" : "wyłączone"}</span>
-                <span>Priorytety: {caseTypeSkills.length || "auto"}</span>
+                <span>
+                  Działanie: {selectedDeterministicAction
+                    ? selectedDeterministicAction.label
+                    : "AUTO · prawny router"}
+                </span>
                 <span>Załączniki: {documentAttachments.length}</span>
               </div>
               <textarea
@@ -1869,59 +1884,18 @@ export default function MatterChatApp({
         {activeTab === "skills" ? (
           <section className="chat-card-stack">
             <article className="chat-card">
-              <div className="chat-card-heading">
-                <div>
-                  <p className="eyebrow">Typ sprawy / wykonanie</p>
-                  <h2>
-                    {caseTypeSkills.length === 0
-                      ? "Automatyczny — dobierz skille wykonawcze"
-                      : `${caseTypeSkills.length} priorytetowych skilli wykonawczych`}
-                  </h2>
-                  <p>
-                    Możesz zaznaczyć kilka skilli jednocześnie. Analiza sądowa może
-                    współpracować np. z chronologią, analizą dowodów i raportem klienta.
-                    System może równolegle dobrać kilka dziedzin prawa.
-                  </p>
-                </div>
-                <label className="chat-switch">
-                  <input
-                    type="checkbox"
-                    checked={automaticSkills}
-                    onChange={(event) => setAutomaticSkills(event.target.checked)}
-                  />
-                  <span>Auto dobór dodatkowych</span>
-                </label>
-              </div>
-              <div className="chat-skill-grid">
-                {executionSkills.map((skill) => {
-                  const checked = caseTypeSkills.includes(skill.name);
-                  return (
-                    <label
-                      key={skill.name}
-                      className={checked ? "chat-skill-card selected" : "chat-skill-card"}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleCaseTypeSkill(skill.name)}
-                      />
-                      <span>
-                        <strong>{labelForSkill(skill.name)}</strong>
-                        <small>{skill.description || skill.type || "skill wykonawczy"}</small>
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-              {caseTypeSkills.length > 0 ? (
-                <button
-                  type="button"
-                  className="chat-secondary-action"
-                  onClick={() => setCaseTypeSkills([])}
-                >
-                  Wróć do typu Automatyczny
-                </button>
-              ) : null}
+              <p className="eyebrow">Sterowanie wykonaniem</p>
+              <h2>
+                {selectedDeterministicAction
+                  ? selectedDeterministicAction.label
+                  : "AUTO · prawny-router-v3"}
+              </h2>
+              <p>
+                Typ działania wybiera się wyłącznie nad polem pierwszej wiadomości.
+                Brak wyboru oznacza pełne AUTO: prawny-router-v3 sam dobiera dziedziny
+                DR i skille wykonawcze. Po pierwszej wiadomości tryb jest przypięty do
+                wątku i selektor w czacie znika.
+              </p>
             </article>
 
             <article className="chat-card">
@@ -1991,7 +1965,11 @@ export default function MatterChatApp({
               <div className="chat-card-heading">
                 <div>
                   <p className="eyebrow">Ręczny dobór</p>
-                  <h2>Dodatkowe skille i dziedziny</h2>
+                  <h2>Dodatkowe skille wykonawcze</h2>
+                  <p>
+                    Ta lista nie zawiera modułów DR. Dziedziny prawa są kontrolowane
+                    wyłącznie w sekcji „Dziedziny prawa” powyżej.
+                  </p>
                 </div>
                 <input
                   className="chat-search"
