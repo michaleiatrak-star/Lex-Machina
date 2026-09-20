@@ -183,7 +183,7 @@ function AuthPanel({
         {phase === "login" &&
           !lastUser && (
           <div className="alert alert-error auth-alert">
-            Pierwsze logowanie: login <strong>admin</strong>, hasło <strong>admin</strong>. To hasło jest wyłącznie tymczasowe. Po zalogowaniu należy je natychmiast zmienić na hasło mające co najmniej 10 znaków.
+            Pierwsze logowanie: login <strong>admin</strong>, hasło <strong>admin</strong>. Możesz korzystać z aplikacji z tymi danymi, ale są one domyślne i słabe. Zalecamy natychmiastową zmianę hasła na własne, mające co najmniej 10 znaków.
           </div>
         )}
 
