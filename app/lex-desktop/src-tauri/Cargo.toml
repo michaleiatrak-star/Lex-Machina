@@ -21,6 +21,7 @@ path = "src/runtime_sidecar.rs"
 
 [build-dependencies]
 tauri-build = "=2.6.3"
+ico = "=0.5.0"
 
 [dependencies]
 getrandom = "0.4"
