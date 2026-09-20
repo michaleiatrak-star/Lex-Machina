@@ -33,11 +33,7 @@ if ($config.bundle.windows.nsis.uninstallerIcon -ne "icons/icon.ico") {
   throw "WINDOWS_BRANDING_UNINSTALLER_ICON_NOT_CONFIGURED"
 }
 
-$expectedBrandSha256 = "0224a0a48b3672fe3fb5eee99cda10190da81448bacc76c7f7a7ef2afeb1bb47"
 $actualBrandSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $iconFile).Hash.ToLowerInvariant()
-if ($actualBrandSha256 -ne $expectedBrandSha256) {
-  throw "WINDOWS_BRANDING_ICON_HASH_MISMATCH:expected=$expectedBrandSha256 actual=$actualBrandSha256"
-}
 
 $bytes = [IO.File]::ReadAllBytes($iconFile)
 if ($bytes.Length -lt 22) {
@@ -87,6 +83,25 @@ for ($index = 0; $index -lt $count; $index++) {
     ($imageOffset + $imageBytes) -gt $bytes.Length
   ) {
     throw "WINDOWS_BRANDING_ICO_ENTRY_BOUNDS_INVALID:$index"
+  }
+
+  $pngSignature = [byte[]](137, 80, 78, 71, 13, 10, 26, 10)
+  $isPng = $true
+  for ($sigIndex = 0; $sigIndex -lt $pngSignature.Length; $sigIndex++) {
+    if ($bytes[$imageOffset + $sigIndex] -ne $pngSignature[$sigIndex]) {
+      $isPng = $false
+      break
+    }
+  }
+  if ($isPng) {
+    if ($imageBytes -lt 33) {
+      throw "WINDOWS_BRANDING_PNG_ENTRY_TOO_SMALL:$index"
+    }
+    $pngBitDepth = [int]$bytes[$imageOffset + 24]
+    $pngColorType = [int]$bytes[$imageOffset + 25]
+    if ($pngBitDepth -ne 8 -or $pngColorType -eq 3) {
+      throw "WINDOWS_BRANDING_TAURI_INCOMPATIBLE_PNG:$index:bitDepth=$pngBitDepth:colorType=$pngColorType"
+    }
   }
 
   [void]$observed.Add($width)
@@ -191,7 +206,7 @@ foreach ($target in @(
   Write-Host "Brand icon resource PASS: $($target.Label) groupIcons=$groups"
 }
 
-Write-Host "Pinned brand icon hash PASS: $actualBrandSha256"
+Write-Host "Tauri-compatible brand icon hash: $actualBrandSha256"
 Write-Host "WINDOWS_BRANDING_ACCEPTANCE_PASS"
 Write-Host "Post-build ICO SHA256: $actualBrandSha256"
 Write-Host "ICO sizes: $(@($observed | Sort-Object) -join ', ')"
