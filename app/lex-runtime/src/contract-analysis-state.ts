@@ -69,6 +69,52 @@ const REASON_CONTROL =
   /[\x00-\x1f\x7f]/g;
 const HISTORY_MAX = 128;
 
+function normalizeContractIntent(
+  value: string
+): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replaceAll("ł", "l")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function inferContractWorkflowMode(
+  query: string
+): ContractWorkflowMode {
+  const normalized =
+    normalizeContractIntent(query);
+
+  if (
+    /\b(?:uzupelnij|dopisz|dodaj|rozszerz)\b/.test(
+      normalized
+    )
+  ) {
+    return "SUPPLEMENT";
+  }
+  if (
+    /\b(?:popraw|przeredaguj|zredaguj|zrewiduj|edytuj|zmien)\b/.test(
+      normalized
+    )
+  ) {
+    return "REDACTION";
+  }
+  if (
+    /\b(?:przygotuj|sporzadz|stworz|napisz|wygeneruj|opracuj)\b/.test(
+      normalized
+    ) ||
+    /\bprojekt\s+(?:umowy|kontraktu|porozumienia|regulaminu|aneksu)\b/.test(
+      normalized
+    )
+  ) {
+    return "DRAFT";
+  }
+  return "ANALYSIS";
+}
+
 const COMMON_SEQUENCE:
   readonly ContractCheckpoint[] = [
     "AU-F0",
