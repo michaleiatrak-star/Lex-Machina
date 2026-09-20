@@ -24,6 +24,7 @@ export type SkillSelectionEnvelope = {
   query: string;
   automatic: boolean;
   manualSkills: string[];
+  caseTypeExecutionSkills: string[];
 };
 
 export type ResolvedSkillSelection = {
@@ -64,13 +65,26 @@ function safeManualSkillNames(value: unknown): string[] {
   ].slice(0, 16);
 }
 
+function safeCaseTypeExecutionSkills(
+  value: unknown
+): string[] {
+  if (value === "AUTO" || value === undefined) {
+    return [];
+  }
+  if (typeof value === "string") {
+    return safeManualSkillNames([value]).slice(0, 8);
+  }
+  return safeManualSkillNames(value).slice(0, 8);
+}
+
 export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnvelope {
   const firstBreak = rawQuery.indexOf("\n");
   if (firstBreak < 0) {
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      caseTypeExecutionSkills: []
     };
   }
 
@@ -79,7 +93,8 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      caseTypeExecutionSkills: []
     };
   }
 
@@ -89,13 +104,18 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
     return {
       query: rawQuery.slice(firstBreak + 1).trimStart(),
       automatic: parsed.auto !== false,
-      manualSkills: safeManualSkillNames(parsed.manual)
+      manualSkills: safeManualSkillNames(parsed.manual),
+      caseTypeExecutionSkills:
+        safeCaseTypeExecutionSkills(
+          parsed.caseType
+        )
     };
   } catch {
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      caseTypeExecutionSkills: []
     };
   }
 }
@@ -376,13 +396,34 @@ export function resolveAdditionalSkills(
   query: string,
   primarySkill: string,
   automatic: boolean,
-  manualSkills: readonly string[]
+  manualSkills: readonly string[],
+  prioritizedExecutionSkills:
+    readonly string[] = []
 ): ResolvedSkillSelection {
   const core = new Set<string>([
     "prawny-router-v3",
     "prawo-polskie-v2",
     primarySkill
   ]);
+
+  const prioritized = [
+    ...new Set(
+      prioritizedExecutionSkills
+    )
+  ].filter((name) => {
+    if (
+      core.has(name) ||
+      name === "shared"
+    ) {
+      return false;
+    }
+    const skill =
+      registry.get(name);
+    return Boolean(
+      skill &&
+      isExecutionSkill(skill)
+    );
+  });
 
   const manual = [
     ...new Set(manualSkills)
@@ -392,9 +433,16 @@ export function resolveAdditionalSkills(
     Boolean(registry.get(name))
   );
 
-  const selected = new Set<string>(manual);
+  const selected = new Set<string>([
+    ...prioritized,
+    ...manual
+  ]);
   const executionSkills = new Set<string>();
-  let workflowExecutionSkill: string | null = null;
+  let workflowExecutionSkill:
+    string | null =
+      prioritized[0] ?? null;
+  const workflowLockedByCaseType =
+    workflowExecutionSkill !== null;
   const promoteWorkflowExecutionSkill = (name: string) => {
     if (name === "pisma-procesowe-v3") {
       workflowExecutionSkill = name;
@@ -413,12 +461,21 @@ export function resolveAdditionalSkills(
   };
   const domainSkills = new Set<string>([primarySkill]);
 
+  for (const name of prioritized) {
+    executionSkills.add(name);
+  }
+
   for (const name of manual) {
     const skill = registry.get(name);
     if (!skill) continue;
     if (isExecutionSkill(skill)) {
       executionSkills.add(name);
-      promoteWorkflowExecutionSkill(name);
+      if (
+        !workflowLockedByCaseType &&
+        !automatic
+      ) {
+        promoteWorkflowExecutionSkill(name);
+      }
     }
     if (isDomainSkill(skill)) domainSkills.add(name);
   }
@@ -442,7 +499,9 @@ export function resolveAdditionalSkills(
       if (executionSkills.size >= 4) break;
       executionSkills.add(name);
       selected.add(name);
-      promoteWorkflowExecutionSkill(name);
+      if (!workflowLockedByCaseType) {
+        promoteWorkflowExecutionSkill(name);
+      }
     }
 
     const matchingExecution = rankedExecution
@@ -477,7 +536,10 @@ export function resolveAdditionalSkills(
       for (const item of matchingExecution) {
         executionSkills.add(item.skill.name);
         selected.add(item.skill.name);
-        if (workflowExecutionSkill === null) {
+        if (
+          !workflowLockedByCaseType &&
+          workflowExecutionSkill === null
+        ) {
           promoteWorkflowExecutionSkill(item.skill.name);
         }
       }
