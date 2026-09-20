@@ -8,6 +8,7 @@ export type PublicSkillDescriptor = {
   status?: string;
   description?: string;
   category?: "domain" | "execution" | string;
+  deterministicWorkflow?: boolean;
 };
 
 const STOP_WORDS = new Set([
