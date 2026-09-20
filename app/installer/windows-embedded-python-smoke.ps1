@@ -75,9 +75,11 @@ try {
 
   $out = if (Test-Path -LiteralPath $stdout) { [string](Get-Content -Raw -LiteralPath $stdout) } else { "" }
   $err = if (Test-Path -LiteralPath $stderr) { [string](Get-Content -Raw -LiteralPath $stderr) } else { "" }
+  $outText = [string]$out
+  $errText = [string]$err
   $expectedPrefix = "pip $($python.pipBootstrap.version) "
-  if ($proc.ExitCode -ne 0 -or -not $out.Trim().StartsWith($expectedPrefix, [StringComparison]::Ordinal)) {
-    throw "EMBEDDED_PYTHON_SMOKE_PIP_INVALID exit=$($proc.ExitCode) stdout=$($out.Trim()) stderr=$($err.Trim())"
+  if ($proc.ExitCode -ne 0 -or -not $outText.Trim().StartsWith($expectedPrefix, [StringComparison]::Ordinal)) {
+    throw "EMBEDDED_PYTHON_SMOKE_PIP_INVALID exit=$($proc.ExitCode) stdout=$($outText.Trim()) stderr=$($errText.Trim())"
   }
 
   $freezeOut = Join-Path $root "freeze.stdout.log"
@@ -97,7 +99,7 @@ try {
   }
 
   Write-Host "EMBEDDED_PYTHON_SMOKE_PASS"
-  Write-Host $out.Trim()
+  Write-Host $outText.Trim()
 } finally {
   Remove-Item -LiteralPath $root -Recurse -Force -ErrorAction SilentlyContinue
 }
