@@ -73,8 +73,8 @@ try {
     -RedirectStandardOutput $stdout `
     -RedirectStandardError $stderr
 
-  $out = if (Test-Path -LiteralPath $stdout) { Get-Content -Raw -LiteralPath $stdout } else { "" }
-  $err = if (Test-Path -LiteralPath $stderr) { Get-Content -Raw -LiteralPath $stderr } else { "" }
+  $out = if (Test-Path -LiteralPath $stdout) { [string](Get-Content -Raw -LiteralPath $stdout) } else { "" }
+  $err = if (Test-Path -LiteralPath $stderr) { [string](Get-Content -Raw -LiteralPath $stderr) } else { "" }
   $expectedPrefix = "pip $($python.pipBootstrap.version) "
   if ($proc.ExitCode -ne 0 -or -not $out.Trim().StartsWith($expectedPrefix, [StringComparison]::Ordinal)) {
     throw "EMBEDDED_PYTHON_SMOKE_PIP_INVALID exit=$($proc.ExitCode) stdout=$($out.Trim()) stderr=$($err.Trim())"
@@ -91,7 +91,7 @@ try {
     -RedirectStandardError $freezeErr
   if ($freeze.ExitCode -ne 0) {
     $freezeError = if (Test-Path -LiteralPath $freezeErr) {
-      Get-Content -Raw -LiteralPath $freezeErr
+      [string](Get-Content -Raw -LiteralPath $freezeErr)
     } else { "" }
     throw "EMBEDDED_PYTHON_SMOKE_FREEZE_FAILED:$($freeze.ExitCode):$($freezeError.Trim())"
   }
