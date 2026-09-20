@@ -561,6 +561,9 @@ export default function MatterChatApp({
   useEffect(() => {
     setDeterministicAction("");
     setCaseTypeSkills([]);
+    setManualSkills([]);
+    setAllowedDomains(null);
+    setAutomaticSkills(true);
   }, [caseId]);
 
   useEffect(() => {
