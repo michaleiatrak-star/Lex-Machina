@@ -15,7 +15,10 @@ $checks = [ordered]@{
     $bootstrap.Contains('EMBEDDABLE_APP_LOCAL') -and
     $bootstrap.Contains('python*._pth') -and
     $bootstrap.Contains('Lib\site-packages') -and
-    $bootstrap.Contains('pip-bootstrap-wheel') -and
+    $bootstrap.Contains('$pipWheelEntry = "pip-bootstrap.whl"') -and
+    $bootstrap.Contains('Copy-Item -LiteralPath $pipWheel -Destination $privatePipWheel -Force') -and
+    $bootstrap.Contains('zipimport can load pip from the wheel itself') -and
+    -not $bootstrap.Contains('[IO.Compression.ZipFile]::ExtractToDirectory($pipWheel, $sitePackages)') -and
     -not $bootstrap.Contains('Start-Process -FilePath $pythonInstaller')
   )
   pythonPinnedEmbeddedManifest = (
@@ -27,6 +30,12 @@ $checks = [ordered]@{
   )
   pythonVersionDiagnostics = (
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
+  )
+  pipNativeStderrSafe = (
+    $bootstrap.Contains('$pipVersionOutput = @(& $pythonExe -m pip --version 2>&1)') -and
+    $bootstrap.Contains('$ErrorActionPreference = "Continue"') -and
+    $bootstrap.Contains('BOOTSTRAP_PIP_VERSION_INVALID expected=') -and
+    $bootstrap.Contains('BOOTSTRAP_PYTHON_PACKAGES_FAILED:$pipInstallExit')
   )
   officialSourceFallbackOrder = (
     $bootstrap.Contains('$modelSources = @("bos", "huggingface", "modelscope", "aistudio")')
