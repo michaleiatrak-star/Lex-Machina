@@ -422,6 +422,14 @@ export default function MatterChatApp({
   const [models, setModels] = useState<ModelDescriptor[]>([]);
   const [model, setModel] = useState("");
   const [modelError, setModelError] = useState("");
+  const [
+    modelCatalogLoading,
+    setModelCatalogLoading
+  ] = useState(false);
+  const [
+    localModelsRefreshToken,
+    setLocalModelsRefreshToken
+  ] = useState(0);
   const [modelRouting, setModelRouting] =
     useState<ModelRoutingPreferences>({
       auxiliaryEnabled: false,
@@ -705,10 +713,29 @@ export default function MatterChatApp({
   }, [routes, skills.length]);
 
   useEffect(() => {
+    const refreshLocalModels = () => {
+      setLocalModelsRefreshToken(
+        (value) => value + 1
+      );
+    };
+    window.addEventListener(
+      "lex-local-models-changed",
+      refreshLocalModels
+    );
+    return () => {
+      window.removeEventListener(
+        "lex-local-models-changed",
+        refreshLocalModels
+      );
+    };
+  }, []);
+
+  useEffect(() => {
     let cancelled = false;
     setModels([]);
     setModel("");
     setModelError("");
+    setModelCatalogLoading(true);
 
     if (
       isAccountPrimarySource(
@@ -761,6 +788,7 @@ export default function MatterChatApp({
           );
         }
       }
+      setModelCatalogLoading(false);
       return () => {
         cancelled = true;
       };
@@ -778,6 +806,7 @@ export default function MatterChatApp({
       ) {
         setModelError("PROVIDER_NOT_CONFIGURED");
       }
+      setModelCatalogLoading(false);
       return () => {
         cancelled = true;
       };
@@ -845,10 +874,12 @@ export default function MatterChatApp({
             (item) => item.selectable
           )?.id ?? ""
         );
+        setModelCatalogLoading(false);
       })
       .catch((error) => {
         if (!cancelled) {
           setModelError(error instanceof Error ? error.message : String(error));
+          setModelCatalogLoading(false);
         }
       });
     return () => {
@@ -858,7 +889,8 @@ export default function MatterChatApp({
     provider,
     providerConfigured,
     runtimeProvider,
-    accountSession
+    accountSession,
+    localModelsRefreshToken
   ]);
 
   useEffect(() => {
@@ -904,7 +936,8 @@ export default function MatterChatApp({
   }, [
     modelRouting.auxiliaryProvider,
     modelRouting.auxiliaryModel,
-    providerConfiguration
+    providerConfiguration,
+    localModelsRefreshToken
   ]);
 
   useEffect(() => {
