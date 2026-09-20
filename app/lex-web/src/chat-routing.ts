@@ -14,6 +14,112 @@ export const DETERMINISTIC_PIPELINE_SKILLS = [
   "analizator-dowodow-v3"
 ] as const;
 
+export const DETERMINISTIC_ACTION_META_PREFIX =
+  "LEX_ACTION=";
+
+export const DETERMINISTIC_ACTIONS = [
+  {
+    id: "COURT_ANALYSIS",
+    label: "Analiza sądowa",
+    description:
+      "Deterministyczna analiza akt i problemu procesowego.",
+    skills: [
+      "analiza-sadowa-v6"
+    ]
+  },
+  {
+    id: "CHRONOLOGY",
+    label: "Chronologia sprawy",
+    description:
+      "Porządkuje zdarzenia, daty, terminy i zależności czasowe.",
+    skills: [
+      "chronologia-sprawy-v1"
+    ]
+  },
+  {
+    id: "EVIDENCE_ANALYSIS",
+    label: "Analiza dowodów",
+    description:
+      "Ocena materiału dowodowego, luk, spójności i ryzyk.",
+    skills: [
+      "analizator-dowodow-v3"
+    ]
+  },
+  {
+    id: "CONTRACT_ANALYSIS",
+    label: "Analiza umowy",
+    description:
+      "Deterministyczna analiza postanowień, ryzyk i obowiązków.",
+    skills: [
+      "analizator-umow-v1"
+    ]
+  },
+  {
+    id: "PROCESS_PLEADING",
+    label: "Pismo procesowe",
+    description:
+      "Uruchamia checkpointowany pipeline przygotowania pisma procesowego.",
+    skills: [
+      "pisma-procesowe-v3"
+    ]
+  }
+] as const;
+
+export type DeterministicActionId =
+  (typeof DETERMINISTIC_ACTIONS)[number]["id"];
+
+export function skillsForDeterministicAction(
+  actionId: DeterministicActionId | ""
+): string[] {
+  if (!actionId) return [];
+  const action =
+    DETERMINISTIC_ACTIONS.find(
+      (item) =>
+        item.id === actionId
+    );
+  return action
+    ? [...action.skills]
+    : [];
+}
+
+export function deterministicActionMeta(
+  actionId: DeterministicActionId | ""
+): string {
+  return `${DETERMINISTIC_ACTION_META_PREFIX}${
+    actionId || AUTO_CASE_TYPE
+  }`;
+}
+
+export function deterministicActionFromMeta(
+  meta?: string
+): DeterministicActionId | "" {
+  if (!meta) return "";
+  const token =
+    meta
+      .split(/\s*[|;]\s*/)
+      .find((item) =>
+        item.startsWith(
+          DETERMINISTIC_ACTION_META_PREFIX
+        )
+      );
+  if (!token) return "";
+  const value =
+    token.slice(
+      DETERMINISTIC_ACTION_META_PREFIX.length
+    );
+  if (
+    value === AUTO_CASE_TYPE
+  ) {
+    return "";
+  }
+  return DETERMINISTIC_ACTIONS.some(
+    (item) =>
+      item.id === value
+  )
+    ? value as DeterministicActionId
+    : "";
+}
+
 export type PublicSkillDescriptor = {
   name: string;
   version?: string;
