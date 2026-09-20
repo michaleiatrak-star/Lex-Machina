@@ -16,6 +16,9 @@ import {
   type SkillUpdateStatusResponse,
   type UpdateStatusResponse
 } from "./api.js";
+import {
+  useFloatingPanelDrag
+} from "./use-floating-panel.js";
 import "./maintenance.css";
 
 function formatBytes(bytes: number): string {
@@ -66,6 +69,12 @@ export function MaintenancePanel({
   >(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [
+    minimized,
+    setMinimized
+  ] = useState(true);
+  const floatingDrag =
+    useFloatingPanelDrag();
 
   const desktop = isDesktopShell();
   const appUpdateAvailable =
@@ -197,9 +206,67 @@ export function MaintenancePanel({
 
   if (!desktop) return null;
 
+  if (minimized) {
+    return (
+      <div
+        className="maintenance-panel maintenance-panel-minimized"
+        data-floating-panel="true"
+        style={
+          floatingDrag.style
+        }
+      >
+        <span
+          className="floating-drag-handle"
+          title="Przeciągnij panel"
+          aria-label="Przeciągnij panel utrzymania"
+          {...floatingDrag.handleProps}
+        >
+          ⋮⋮
+        </span>
+        <button
+          type="button"
+          className="floating-icon-button"
+          aria-label="Rozwiń panel utrzymania"
+          title={
+            `Utrzymanie · ${badge.toLowerCase()}`
+          }
+          onClick={() =>
+            setMinimized(false)
+          }
+        >
+          🛠
+        </button>
+        {badge === "AKTUALIZACJA" ? (
+          <span
+            className="floating-update-dot"
+            aria-label="Dostępna aktualizacja"
+          />
+        ) : null}
+      </div>
+    );
+  }
+
   return (
-    <details className="maintenance-panel">
+    <details
+      className="maintenance-panel"
+      data-floating-panel="true"
+      style={
+        floatingDrag.style
+      }
+    >
       <summary>
+        <span
+          className="floating-drag-handle"
+          title="Przeciągnij panel"
+          aria-label="Przeciągnij panel utrzymania"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          }}
+          {...floatingDrag.handleProps}
+        >
+          ⋮⋮
+        </span>
         <span>
           <strong>Utrzymanie</strong>
           <small>
@@ -215,6 +282,19 @@ export function MaintenancePanel({
         >
           {badge}
         </span>
+        <button
+          type="button"
+          className="floating-minimize-button"
+          aria-label="Zminimalizuj panel utrzymania"
+          title="Zminimalizuj do ikony"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setMinimized(true);
+          }}
+        >
+          −
+        </button>
       </summary>
 
       <div className="maintenance-body">
