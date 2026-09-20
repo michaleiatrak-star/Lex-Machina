@@ -32,10 +32,12 @@ $checks = [ordered]@{
     $bootstrap.Contains("BOOTSTRAP_PYTHON_VERSION_INVALID expected=")
   )
   pipNativeStderrSafe = (
-    $bootstrap.Contains('$pipVersionOutput = @(& $pythonExe -m pip --version 2>&1)') -and
-    $bootstrap.Contains('$ErrorActionPreference = "Continue"') -and
+    $bootstrap.Contains('function Invoke-RedirectedNativeProcess') -and
+    $bootstrap.Contains('-RedirectStandardOutput $stdoutPath') -and
+    $bootstrap.Contains('-RedirectStandardError $stderrPath') -and
+    $bootstrap.Contains('-ArgumentLine "-m pip --version"') -and
     $bootstrap.Contains('BOOTSTRAP_PIP_VERSION_INVALID expected=') -and
-    $bootstrap.Contains('BOOTSTRAP_PYTHON_PACKAGES_FAILED:$pipInstallExit')
+    $bootstrap.Contains('BOOTSTRAP_PYTHON_PACKAGES_FAILED:$($pipInstallProcess.ExitCode)')
   )
   officialSourceFallbackOrder = (
     $bootstrap.Contains('$modelSources = @("bos", "huggingface", "modelscope", "aistudio")')
