@@ -105,9 +105,46 @@ lex_runtime_selftest:
     MessageBox MB_ICONSTOP|MB_OK "Lex Machina: lokalny self-test nie powiódł się.$\r$\n$1" /SD IDOK
     Abort
   ${EndIf}
+
+  ; Local application accounts and case data live outside $INSTDIR in the
+  ; current Windows user's profile. Preserve them by default during upgrades
+  ; and silent installs. If an existing account database is detected, an
+  ; interactive installer may explicitly reset the whole local data root.
+  IfFileExists "$PROFILE\.lex-machina\data\auth\auth.sqlite" lex_existing_account_policy lex_no_existing_account
+
+lex_existing_account_policy:
+  MessageBox MB_ICONQUESTION|MB_YESNO "Lex Machina wykryła istniejące konto użytkownika i lokalne dane.$\r$\n$\r$\nCzy zachować istniejące konto, sprawy, dokumenty i ustawienia?$\r$\n$\r$\nTak = zachowaj istniejące dane.$\r$\nNie = utwórz od nowa konto admin/admin po usunięciu lokalnych danych." /SD IDYES IDYES lex_account_policy_done IDNO lex_confirm_account_reset
+
+lex_confirm_account_reset:
+  MessageBox MB_ICONEXCLAMATION|MB_YESNO "UWAGA: utworzenie nowego konta admin/admin wymaga usunięcia bieżącego magazynu użytkownika.$\r$\n$\r$\nZostaną usunięte lokalne konta, sprawy, dokumenty, ustawienia i klucze zapisane w:$\r$\n$PROFILE\.lex-machina\data$\r$\n$\r$\nTej operacji nie można cofnąć. Kontynuować?" /SD IDNO IDYES lex_reset_account_data IDNO lex_account_policy_done
+
+lex_reset_account_data:
+  DetailPrint "Lex Machina: reset lokalnego konta i danych użytkownika na żądanie."
+  RMDir /r "$PROFILE\.lex-machina\data"
+  DetailPrint "Lex Machina: przy pierwszym uruchomieniu zostanie utworzone konto admin/admin z wymuszoną zmianą hasła."
+  Goto lex_account_policy_done
+
+lex_no_existing_account:
+  DetailPrint "Lex Machina: brak istniejącego konta. Przy pierwszym uruchomieniu zostanie utworzone konto admin/admin z wymuszoną zmianą hasła."
+
+lex_account_policy_done:
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  DetailPrint "Usuwanie prywatnego runtime programu. Dane spraw i Local AI pozostają poza katalogiem aplikacji."
+  ; Uninstall keeps user data by default, including in silent mode. Interactive
+  ; uninstall exposes an explicit destructive option for account/case cleanup.
+  MessageBox MB_ICONQUESTION|MB_YESNO "Czy usunąć także konto użytkownika Lex Machina i wszystkie jego lokalne dane?$\r$\n$\r$\nTak = usuń konta, sprawy, dokumenty, ustawienia i klucze z:$\r$\n$PROFILE\.lex-machina\data$\r$\n$\r$\nNie = zachowaj dane do ponownej instalacji.$\r$\n$\r$\nModele Local AI pozostaną na dysku." /SD IDNO IDYES lex_uninstall_delete_user_data IDNO lex_uninstall_keep_user_data
+
+lex_uninstall_delete_user_data:
+  DetailPrint "Lex Machina: usuwanie lokalnego konta i danych użytkownika."
+  RMDir /r "$PROFILE\.lex-machina\data"
+  RMDir "$PROFILE\.lex-machina"
+  Goto lex_uninstall_remove_runtime
+
+lex_uninstall_keep_user_data:
+  DetailPrint "Lex Machina: konto i dane użytkownika pozostają zachowane do ponownej instalacji."
+
+lex_uninstall_remove_runtime:
+  DetailPrint "Lex Machina: usuwanie prywatnego runtime programu. Local AI pozostaje poza katalogiem aplikacji."
   RMDir /r "$INSTDIR\runtime"
 !macroend
