@@ -1069,7 +1069,8 @@ function previewSessionWorkflow(
       effectiveQuery,
       request.primarySkill,
       envelope.automatic,
-      envelope.manualSkills
+      envelope.manualSkills,
+      envelope.caseTypeExecutionSkills
     );
   return createDeterministicWorkflowPlan(
     registry,
