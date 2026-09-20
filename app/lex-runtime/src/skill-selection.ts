@@ -420,8 +420,32 @@ export function resolveAdditionalSkills(
     primarySkill
   ]);
 
+  const requestedWorkflowSkill =
+    workflowControl.mode === "DETERMINISTIC"
+      ? workflowControl.skill
+      : null;
+  if (requestedWorkflowSkill) {
+    const requested =
+      registry.get(
+        requestedWorkflowSkill
+      );
+    if (
+      !requested ||
+      !isExecutionSkill(requested)
+    ) {
+      throw new Error(
+        "DETERMINISTIC_WORKFLOW_SKILL_INVALID"
+      );
+    }
+  }
+
   const manual = [
-    ...new Set(manualSkills)
+    ...new Set([
+      ...(requestedWorkflowSkill
+        ? [requestedWorkflowSkill]
+        : []),
+      ...manualSkills
+    ])
   ].filter((name) =>
     !core.has(name) &&
     name !== "shared" &&
@@ -567,16 +591,27 @@ export function resolveAdditionalSkills(
     executionSkills.has(workflowControl.skill)
       ? workflowControl.skill
       : null;
+  if (
+    requestedWorkflowSkill &&
+    explicitWorkflowSkill !==
+      requestedWorkflowSkill
+  ) {
+    throw new Error(
+      "DETERMINISTIC_WORKFLOW_SKILL_INVALID"
+    );
+  }
+
   const effectiveWorkflowExecutionSkill =
     workflowControl.mode === "SKILL_AUTO"
       ? null
-      : explicitWorkflowSkill ??
-        (
-          workflowExecutionSkill &&
-          retained.has(workflowExecutionSkill)
-            ? workflowExecutionSkill
-            : null
-        );
+      : requestedWorkflowSkill
+        ? explicitWorkflowSkill
+        : (
+            workflowExecutionSkill &&
+            retained.has(workflowExecutionSkill)
+              ? workflowExecutionSkill
+              : null
+          );
 
   return {
     additionalSkills,
