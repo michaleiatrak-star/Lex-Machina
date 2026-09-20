@@ -30,13 +30,58 @@
   display: none;
 }
 
-.maintenance-panel > summary span:first-child {
+.maintenance-title {
   display: grid;
   gap: 2px;
 }
 
 .maintenance-panel small {
   opacity: 0.72;
+}
+
+.maintenance-panel-minimized {
+  top: var(--lex-overlay-top, 20px);
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: auto;
+  max-height: none;
+  overflow: visible;
+  padding: 5px 6px;
+  border-radius: 12px;
+}
+
+.maintenance-panel-minimized .floating-icon-button {
+  border: 1px solid rgba(120, 120, 120, 0.24);
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
+}
+
+.floating-update-dot {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #b87700;
+}
+
+.maintenance-panel > summary > .floating-drag-handle {
+  flex: none;
+}
+
+.maintenance-panel > summary > .floating-minimize-button {
+  flex: none;
+  height: 30px;
+  border: 1px solid rgba(120, 120, 120, 0.22);
+  border-radius: 9px;
+  background: #fff;
+  color: inherit;
+  cursor: pointer;
 }
 
 .maintenance-badge {
