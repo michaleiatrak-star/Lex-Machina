@@ -92,15 +92,20 @@ foreach ($size in $expected) {
   }
 }
 
+Add-Type -AssemblyName System.Drawing
+
 if (-not ("LexMachinaBrandingNative" -as [type])) {
-  Add-Type -TypeDefinition @"
+  Add-Type -ReferencedAssemblies "System.Drawing" -TypeDefinition @"
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 public static class LexMachinaBrandingNative
 {
     private const uint LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
     private const uint LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020;
+    private const uint IMAGE_ICON = 1;
+    private const uint LR_LOADFROMFILE = 0x00000010;
     private static readonly IntPtr RT_GROUP_ICON = new IntPtr(14);
 
     private delegate bool EnumResNameProc(
@@ -127,6 +132,31 @@ public static class LexMachinaBrandingNative
 
     [DllImport("kernel32.dll")]
     private static extern bool FreeLibrary(IntPtr hModule);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern IntPtr LoadImage(
+        IntPtr hInst,
+        string name,
+        uint type,
+        int cx,
+        int cy,
+        uint load
+    );
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern uint PrivateExtractIcons(
+        string file,
+        int iconIndex,
+        int cx,
+        int cy,
+        IntPtr[] icons,
+        uint[] iconIds,
+        uint iconCount,
+        uint flags
+    );
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool DestroyIcon(IntPtr icon);
 
     public static int CountGroupIcons(string path)
     {
@@ -170,9 +200,90 @@ public static class LexMachinaBrandingNative
             FreeLibrary(module);
         }
     }
+
+    public static bool FirstIconPixelsMatch(
+        string sourceIco,
+        string executable,
+        int size
+    )
+    {
+        IntPtr sourceHandle = LoadImage(
+            IntPtr.Zero,
+            sourceIco,
+            IMAGE_ICON,
+            size,
+            size,
+            LR_LOADFROMFILE
+        );
+        if (sourceHandle == IntPtr.Zero)
+        {
+            throw new InvalidOperationException(
+                "LoadImage source icon failed: " + Marshal.GetLastWin32Error()
+            );
+        }
+
+        IntPtr[] targetHandles = new IntPtr[1];
+        uint[] iconIds = new uint[1];
+        uint extracted = PrivateExtractIcons(
+            executable,
+            0,
+            size,
+            size,
+            targetHandles,
+            iconIds,
+            1,
+            0
+        );
+        if (extracted != 1 || targetHandles[0] == IntPtr.Zero)
+        {
+            DestroyIcon(sourceHandle);
+            throw new InvalidOperationException(
+                "PrivateExtractIcons failed for " + executable + " size=" + size
+            );
+        }
+
+        try
+        {
+            using (Icon sourceIcon = Icon.FromHandle(sourceHandle))
+            using (Icon targetIcon = Icon.FromHandle(targetHandles[0]))
+            using (Bitmap sourceBitmap = sourceIcon.ToBitmap())
+            using (Bitmap targetBitmap = targetIcon.ToBitmap())
+            {
+                if (
+                    sourceBitmap.Width != targetBitmap.Width ||
+                    sourceBitmap.Height != targetBitmap.Height
+                )
+                {
+                    return false;
+                }
+
+                for (int y = 0; y < sourceBitmap.Height; y++)
+                {
+                    for (int x = 0; x < sourceBitmap.Width; x++)
+                    {
+                        if (
+                            sourceBitmap.GetPixel(x, y).ToArgb() !=
+                            targetBitmap.GetPixel(x, y).ToArgb()
+                        )
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        finally
+        {
+            DestroyIcon(targetHandles[0]);
+            DestroyIcon(sourceHandle);
+        }
+    }
 }
 "@
 }
+
+$pixelCheckSizes = @(32, 48, 64)
 
 foreach ($target in @(
   @{ Path = $desktopExe; Label = "desktop-exe" },
@@ -182,6 +293,19 @@ foreach ($target in @(
   if ($groups -lt 1) {
     throw "WINDOWS_BRANDING_GROUP_ICON_MISSING:$($target.Label)"
   }
+
+  foreach ($size in $pixelCheckSizes) {
+    $matches = [LexMachinaBrandingNative]::FirstIconPixelsMatch(
+      $iconFile,
+      $target.Path,
+      $size
+    )
+    if (-not $matches) {
+      throw "WINDOWS_BRANDING_EMBEDDED_ICON_MISMATCH:$($target.Label):$size"
+    }
+    Write-Host "Brand icon pixels PASS: $($target.Label) size=$size"
+  }
+
   Write-Host "Brand icon resource PASS: $($target.Label) groupIcons=$groups"
 }
 
