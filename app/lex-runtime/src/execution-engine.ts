@@ -321,7 +321,7 @@ export class LexExecutionEngine {
       "route",
       args.route.primarySkill,
       "OK",
-      `mode=${args.route.mode};jurisdiction=PL;skillMode=${skillEnvelope.automatic ? "AUTO" : "MANUAL"};role=primary-domain`
+      `mode=${args.route.mode};jurisdiction=PL;skillMode=${skillEnvelope.automatic ? "AUTO" : "MANUAL"};workflowMode=${skillEnvelope.workflowMode};workflowSkill=${skillEnvelope.workflowSkill ?? "none"};role=primary-domain`
     );
     emit(
       "skill_read",
@@ -335,7 +335,13 @@ export class LexExecutionEngine {
         effectiveQuery,
         args.route.primarySkill,
         skillEnvelope.automatic,
-        skillEnvelope.manualSkills
+        skillEnvelope.manualSkills,
+        {
+          mode:
+            skillEnvelope.workflowMode,
+          skill:
+            skillEnvelope.workflowSkill
+        }
       );
 
     for (const domainSkill of skillSelection.domainSkills) {
