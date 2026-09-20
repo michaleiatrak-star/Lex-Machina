@@ -1392,3 +1392,25 @@ Implemented:
 - Ed25519 signatures remain supported when present but are no longer mandatory for the instruction-only skill layer;
 - application updates remain Authenticode fail-closed and model-pack updates remain Ed25519 fail-closed;
 - Maintenance UI wording now reflects the real trust split and no longer claims unsigned application updates are permitted.
+
+### 2026-09-20 — G39L RC4 deterministic workflow switching
+
+Status: **READY FOR RELEASE GATE**
+
+Implemented:
+
+- one active deterministic execution workflow per chat turn, selected from a dropdown in the matter-chat header;
+- `AUTO` keeps legal-router selection, while an explicit skill is carried separately as the workflow controller and cannot be replaced by automatic cooperating-skill selection;
+- execution skills are excluded from the generic manual-helper checkbox list, removing the second path that could blur controller ownership;
+- changing the dropdown affects the next message in the same case; existing per-workflow durable state remains case-bound and can be resumed after switching back;
+- runtime preview and execution both consume the same explicit case-type controller before creating the deterministic workflow plan;
+- `analizator-umow-v1` now creates encrypted durable state on first chat use when absent, using deterministic first-message mode inference (ANALYSIS/DRAFT/REDACTION/SUPPLEMENT), then resumes that persisted state on later turns;
+- G14 browser-bundle validation now requires the single-controller dropdown contract instead of the retired multi-priority checkbox wording.
+
+Deterministic enforcement:
+
+- every executable/orchestration skill remains classified `ENFORCED` by `deterministic-skill-coverage.test.ts`;
+- Gate I keeps mandatory policy ownership in code;
+- state-machine workflows keep programmatic checkpoint permits and fail-closed advancement;
+- schema/chat-turn workflows keep code-owned required reads, source/citation gates and output/finalization validation rather than relying only on SKILL.md prose.
+
