@@ -74,6 +74,30 @@ jobs:
         working-directory: app/lex-web
         run: npx vitest run src/MatterChatApp.primary-model.test.ts
 
+      - name: Local primary credential policy wired into both chat surfaces
+        shell: pwsh
+        run: |
+          $paths = @(
+            "app/lex-web/src/MatterChatApp.tsx",
+            "app/lex-web/src/ChatApp.tsx"
+          )
+          $required = @(
+            "shouldLoadPrimaryModelCatalog(",
+            "canExecutePrimaryModel(",
+            "runtimeProviderForPrimarySource("
+          )
+          foreach ($path in $paths) {
+            $source = Get-Content -Raw -LiteralPath $path
+            foreach ($needle in $required) {
+              if (-not $source.Contains($needle)) {
+                throw "LOCAL_PRIMARY_POLICY_NOT_WIRED:$path:$needle"
+              }
+            }
+            if ($source -match 'providerConfigured\s*!==\s*true') {
+              throw "LOCAL_PRIMARY_DIRECT_CREDENTIAL_GATE_REINTRODUCED:$path"
+            }
+          }
+
       - name: Build thin online bootstrap payload
         shell: pwsh
         run: ./app/installer/build-windows-online.ps1
