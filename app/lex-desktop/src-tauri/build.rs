@@ -1,6 +1,6 @@
 use std::{fs, path::PathBuf};
 
-const EXPECTED_ICON_BYTES: usize = 37_978;
+const EXPECTED_ICON_BYTES: usize = 51_440;
 const EXPECTED_ICON_COUNT: u16 = 7;
 
 const ICON_PARTS: [&str; 7] = [

@@ -1328,6 +1328,18 @@ Validation evidence (local, before release CI):
 - installer PowerShell syntax, NSIS PREINSTALL, Polish.nsh, G39F update policy
   and online bootstrap contract self-tests PASS.
 
+- **G39L6** every frame of the pinned brand icon was an Indexed-colour PNG,
+  which the `ico` crate used by `tauri-codegen` cannot decode, so
+  `generate_context!` panicked and no desktop build could compile on Windows.
+  This blocker was inherited: `release/0.1.4-g39k-rc3-hotfix2` failed the same
+  job and never published. Frames re-encoded from palette to RGBA losslessly —
+  same dimensions, same pixels — and the icon pin updated to
+  `055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76` (51440 B) in build.rs,
+  materialize-brand-icon.ps1, windows-branding-selftest.ps1 and the release
+  workflow. Reproduced against `ico 0.5.0` before and after the fix: the old
+  icon fails all 7 entries with "Unsupported PNG color type: Indexed", the new
+  one decodes all 7.
+
 Not fixed in this line, tracked in ROADMAP:
 - Python packages pinned by version only, no `--require-hashes`;
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;

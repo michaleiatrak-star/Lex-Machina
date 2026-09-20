@@ -31,7 +31,7 @@ jobs:
           expected_baseline="d7e9cbb7284bd70e5e9d9f951f04e5dae15daac1"
           expected_branch="release/0.1.5-g39l-rc1"
           expected_version="0.1.5"
-          expected_icon_sha="2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc"
+          expected_icon_sha="055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"
 
           baseline="$(awk -F': ' '$1=="baseline_commit"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
           work_branch="$(awk -F': ' '$1=="work_branch"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
@@ -152,7 +152,7 @@ jobs:
           cp "$receipt" release-out/CI-SHA256-ONLINE.txt
           sha256sum "$target" > release-out/SHA256SUMS.txt
           printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
-          printf '%s  %s\n'             "2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc"             "app/lex-desktop/src-tauri/icons/icon.ico"             > release-out/BRAND-ICON-SHA256.txt
+          printf '%s  %s\n'             "055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"             "app/lex-desktop/src-tauri/icons/icon.ico"             > release-out/BRAND-ICON-SHA256.txt
           cp app/lex-version.yaml release-out/LEX-VERSION.yaml
 
           cat release-out/SHA256SUMS.txt
@@ -186,6 +186,10 @@ jobs:
             because it read its trailer from EOF and required an exact length;
           - sign-windows-artifact.ps1 never stripped whitespace from a
             configured signer thumbprint.
+
+          - the pinned brand icon stored only Indexed-colour PNG frames, which
+            tauri-codegen cannot decode, so no desktop build compiled on
+            Windows; frames re-encoded to RGBA losslessly, artwork unchanged.
 
           Unchanged and still open: production Authenticode / Ed25519 trust
           roots, hash-pinned Python packages, dependency lockfiles, and the

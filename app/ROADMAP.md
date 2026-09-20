@@ -151,6 +151,13 @@ Nadal poza zamknięciem:
 - `sign-windows-artifact.ps1` usuwa białe znaki z odcisku (`'\s+'` zamiast `"\\s+"`).
 - Odcisk skopiowany z okna certyfikatu Windows jest akceptowany; pokryte przypadkiem w `sign-windows-artifact-selftest.ps1`.
 
+### G39L6 — ikona marki dekodowalna przez tauri-codegen — DONE
+
+- Wszystkie 7 klatek przypiętej ikony było PNG w trybie `Indexed` (color type 3), którego crate `ico 0.5` używany przez `tauri-codegen` nie dekoduje: `generate_context!` panikował na Windows i blokował każdy build desktopowy.
+- To był blocker odziedziczony po `release/0.1.4-g39k-rc3-hotfix2` — tamto wydanie nigdy się nie opublikowało z tego samego powodu.
+- Klatki przekodowane z palety na RGBA (color type 6) bezstratnie: te same wymiary, te same piksele, ta sama grafika.
+- Nowy SHA-256 ikony: `055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76` (51 440 B); przypięcia zaktualizowane w `build.rs`, `materialize-brand-icon.ps1`, `windows-branding-selftest.ps1` i w workflow wydania.
+
 ### Znane, nienaprawione w tej linii
 
 - pakiety Pythona pinowane tylko wersją, bez `--require-hashes` i bez pinu zależności przechodnich;

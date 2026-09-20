@@ -33,7 +33,7 @@ if ($config.bundle.windows.nsis.uninstallerIcon -ne "icons/icon.ico") {
   throw "WINDOWS_BRANDING_UNINSTALLER_ICON_NOT_CONFIGURED"
 }
 
-$expectedBrandSha256 = "2312785f7b9f48fe1132cda64b60944350e9a84accc05c732dd11ee5f3e988dc"
+$expectedBrandSha256 = "055686adddaf980c1e2a92bd7957090fdac349529dbf60bc85fd0ef26e367b76"
 $actualBrandSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $iconFile).Hash.ToLowerInvariant()
 if ($actualBrandSha256 -ne $expectedBrandSha256) {
   throw "WINDOWS_BRANDING_ICON_HASH_MISMATCH:expected=$expectedBrandSha256 actual=$actualBrandSha256"
