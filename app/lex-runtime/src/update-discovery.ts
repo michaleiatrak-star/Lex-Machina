@@ -410,56 +410,61 @@ implements UpdateDiscovery {
               this.repository
             )
           : {};
+      const applicationSkillPack =
+        latest &&
+        applicationAssets.skillsBundle &&
+        applicationAssets.skillsIndex
+          ? {
+              version:
+                latest.version,
+              assets:
+                applicationAssets
+            }
+          : undefined;
+      const selectedSkillPack =
+        [
+          dedicatedSkillPack,
+          applicationSkillPack
+        ]
+          .filter(
+            (
+              item
+            ): item is NonNullable<
+              typeof dedicatedSkillPack
+            > =>
+              Boolean(item)
+          )
+          .sort((a, b) =>
+            compareVersions(
+              b.version,
+              a.version
+            )
+          )[0];
       const skillPackAssets =
-        dedicatedSkillPack
+        selectedSkillPack
           ? {
               latestSkillVersion:
-                dedicatedSkillPack.version,
+                selectedSkillPack.version,
               skillsBundle:
-                dedicatedSkillPack
+                selectedSkillPack
                   .assets
                   .skillsBundle!,
               skillsIndex:
-                dedicatedSkillPack
+                selectedSkillPack
                   .assets
                   .skillsIndex!,
-              ...(dedicatedSkillPack
+              ...(selectedSkillPack
                 .assets
                 .skillsSignature
                 ? {
                     skillsSignature:
-                      dedicatedSkillPack
+                      selectedSkillPack
                         .assets
                         .skillsSignature
                   }
                 : {})
             }
-          : (
-              applicationAssets
-                .skillsBundle &&
-              applicationAssets
-                .skillsIndex &&
-              latest
-                ? {
-                    latestSkillVersion:
-                      latest.version,
-                    skillsBundle:
-                      applicationAssets
-                        .skillsBundle,
-                    skillsIndex:
-                      applicationAssets
-                        .skillsIndex,
-                    ...(applicationAssets
-                      .skillsSignature
-                      ? {
-                          skillsSignature:
-                            applicationAssets
-                              .skillsSignature
-                        }
-                      : {})
-                  }
-                : {}
-            );
+          : {};
       const modelPackAssets =
         dedicatedModelPack
           ? {
