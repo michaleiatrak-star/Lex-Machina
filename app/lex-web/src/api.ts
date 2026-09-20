@@ -754,6 +754,13 @@ export type SessionExecutionResponse = {
     requiredResources: string[];
     missingResources: string[];
   };
+  gateI?: {
+    gate: string;
+    result: "PASS" | "BLOCKED";
+    verifiedOrSupportedRecords?: number;
+    legalReferences?: number;
+    caseReferences?: number;
+  };
   processAuto?: {
     maxSteps: number;
     stopped:
