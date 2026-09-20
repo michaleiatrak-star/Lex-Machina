@@ -298,7 +298,7 @@ if ($pythonActual -ne $pythonExpected) {
 $pipLogs = Join-Path $runtime "bootstrap-logs\pip-version"
 $pipVersionProcess = Invoke-RedirectedNativeProcess `
   -Executable $pythonExe `
-  -ArgumentLine "-m pip --version" `
+  -ArgumentLine "-X utf8 -m pip --version" `
   -LogBase $pipLogs
 $pipVersionOutput = @()
 if (Test-Path -LiteralPath $pipVersionProcess.StdoutPath -PathType Leaf) {
@@ -334,7 +334,7 @@ if (-not (Test-Path -LiteralPath $packageVerifier -PathType Leaf)) {
   throw "BOOTSTRAP_PYTHON_PACKAGE_VERIFIER_MISSING"
 }
 $verifierLogBase = Join-Path $runtime "bootstrap-logs\package-verifier"
-$verifierArguments = ('"{0}" "{1}"' -f $packageVerifier, $manifestPath)
+$verifierArguments = ('-X utf8 "{0}" "{1}"' -f $packageVerifier, $manifestPath)
 $verifyProcess = Invoke-RedirectedNativeProcess `
   -Executable $pythonExe `
   -ArgumentLine $verifierArguments `
@@ -344,7 +344,7 @@ if (Test-Path -LiteralPath $verifyProcess.StdoutPath -PathType Leaf) {
 }
 if ($verifyProcess.ExitCode -ne 0) {
   $pipInstallLogBase = Join-Path $runtime "bootstrap-logs\pip-install"
-  $pipInstallArguments = ('-m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r "{0}"' -f $requirements)
+  $pipInstallArguments = ('-X utf8 -m pip install --quiet --disable-pip-version-check --no-warn-script-location --upgrade-strategy only-if-needed -r "{0}"' -f $requirements)
   $pipInstallProcess = Invoke-RedirectedNativeProcess `
     -Executable $pythonExe `
     -ArgumentLine $pipInstallArguments `
@@ -378,7 +378,7 @@ if ($verifyProcess.ExitCode -ne 0) {
 $pipFreezeLogBase = Join-Path $runtime "bootstrap-logs\pip-freeze"
 $pipFreezeProcess = Invoke-RedirectedNativeProcess `
   -Executable $pythonExe `
-  -ArgumentLine "-m pip freeze --all" `
+  -ArgumentLine "-X utf8 -m pip freeze --all" `
   -LogBase $pipFreezeLogBase
 if ($pipFreezeProcess.ExitCode -ne 0) {
   if (Test-Path -LiteralPath $pipFreezeProcess.StderrPath -PathType Leaf) {
@@ -443,7 +443,7 @@ if (-not $modelsReady) {
       Remove-Item -LiteralPath $prefetchStdout -Force -ErrorAction SilentlyContinue
       Remove-Item -LiteralPath $prefetchStderr -Force -ErrorAction SilentlyContinue
 
-      $prefetchArguments = ('"{0}" "{1}"' -f $prefetchScript, $modelRoot)
+      $prefetchArguments = ('-X utf8 "{0}" "{1}"' -f $prefetchScript, $modelRoot)
       $prefetchProcess = Start-Process -FilePath $pythonExe `
         -ArgumentList $prefetchArguments `
         -Wait `
