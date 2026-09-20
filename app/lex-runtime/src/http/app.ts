@@ -1102,7 +1102,13 @@ function previewSessionWorkflow(
       effectiveQuery,
       request.primarySkill,
       envelope.automatic,
-      envelope.manualSkills
+      envelope.manualSkills,
+      {
+        mode:
+          envelope.workflowMode,
+        skill:
+          envelope.workflowSkill
+      }
     );
   return createDeterministicWorkflowPlan(
     registry,
