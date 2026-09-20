@@ -916,7 +916,9 @@ export class MaintenanceService {
     const currentVersion =
       installedSkillOverlayVersion() ??
       CURRENT_APPLICATION_VERSION;
-    const latestVersion = status.latestVersion;
+    const latestVersion =
+      status.latestSkillVersion ??
+      status.latestVersion;
     const available =
       Boolean(status.skillsBundle && latestVersion) &&
       compareVersions(currentVersion, latestVersion!) < 0;
@@ -1347,7 +1349,9 @@ export class MaintenanceService {
 
   async applySkillUpdate(): Promise<SkillUpdateApplyResult> {
     const status = await this.discovery.check();
-    const version = requireLatestVersion(status);
+    const version =
+      status.latestSkillVersion ??
+      requireLatestVersion(status);
     const previousVersion =
       installedSkillOverlayVersion() ??
       CURRENT_APPLICATION_VERSION;
