@@ -8,6 +8,9 @@ import {
   isDesktopShell,
   type AuthenticatedUser
 } from "./api.js";
+import {
+  useFloatingPanelDrag
+} from "./use-floating-panel.js";
 import "./local-ai.css";
 
 type LocalModel = {
@@ -281,6 +284,12 @@ export function LocalAiSetupPanel({
     useState<ModelPackUpdateStatus | null>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [
+    minimized,
+    setMinimized
+  ] = useState(true);
+  const floatingDrag =
+    useFloatingPanelDrag();
 
   const available = isDesktopShell();
   const selected = useMemo(
@@ -689,10 +698,71 @@ export function LocalAiSetupPanel({
     }
   }
 
+  if (minimized) {
+    return (
+      <div
+        className="local-ai-setup local-ai-setup-minimized"
+        data-floating-panel="true"
+        style={
+          floatingDrag.style
+        }
+      >
+        <span
+          className="floating-drag-handle"
+          title="Przeciągnij panel"
+          aria-label="Przeciągnij panel lokalnej AI"
+          {...floatingDrag.handleProps}
+        >
+          ⋮⋮
+        </span>
+        <button
+          type="button"
+          className="floating-icon-button"
+          aria-label="Rozwiń panel lokalnej AI"
+          title={
+            configured
+              ? "Lokalna AI · gotowa"
+              : "Lokalna AI · konfiguracja"
+          }
+          onClick={() =>
+            setMinimized(false)
+          }
+        >
+          🤖
+        </button>
+        {configured ? (
+          <span
+            className="local-ai-ready-dot"
+            aria-label="Lokalna AI gotowa"
+          />
+        ) : null}
+      </div>
+    );
+  }
+
   return (
-    <details className="local-ai-setup" open={!configured}>
+    <details
+      className="local-ai-setup"
+      open={!configured}
+      data-floating-panel="true"
+      style={
+        floatingDrag.style
+      }
+    >
       <summary>
-        <span>
+        <span
+          className="floating-drag-handle"
+          title="Przeciągnij panel"
+          aria-label="Przeciągnij panel lokalnej AI"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          }}
+          {...floatingDrag.handleProps}
+        >
+          ⋮⋮
+        </span>
+        <span className="local-ai-title">
           <strong>Lokalna AI</strong>
           <small>
             {configured
@@ -703,6 +773,19 @@ export function LocalAiSetupPanel({
         <span className={configured ? "local-ai-badge ready" : "local-ai-badge"}>
           {configured ? "GOTOWA" : "NIEZAINSTALOWANA"}
         </span>
+        <button
+          type="button"
+          className="floating-minimize-button"
+          aria-label="Zminimalizuj panel lokalnej AI"
+          title="Zminimalizuj do ikony"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setMinimized(true);
+          }}
+        >
+          −
+        </button>
       </summary>
 
       <div className="local-ai-body">
