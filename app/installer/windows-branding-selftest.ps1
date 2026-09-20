@@ -92,10 +92,14 @@ foreach ($size in $expected) {
   }
 }
 
-Add-Type -AssemblyName System.Drawing
+try {
+  Add-Type -AssemblyName System.Drawing.Common -ErrorAction Stop
+} catch {
+  Add-Type -AssemblyName System.Drawing -ErrorAction Stop
+}
 
 if (-not ("LexMachinaBrandingNative" -as [type])) {
-  Add-Type -ReferencedAssemblies "System.Drawing" -TypeDefinition @"
+  Add-Type -ReferencedAssemblies "System.Drawing.Common" -TypeDefinition @"
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
