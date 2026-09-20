@@ -1,0 +1,23 @@
+name: RC3 Hotfix Installer Acceptance
+
+on:
+  push:
+    branches:
+      - "release/0.1.4-g39k-rc3-hotfix1"
+    paths:
+      - "app/installer/**"
+      - ".github/workflows/lex-installer.yml"
+      - ".github/workflows/rc3-hotfix-installer-acceptance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rc3-hotfix-installer-acceptance
+  cancel-in-progress: true
+
+jobs:
+  online:
+    name: Installer-only acceptance
+    uses: ./.github/workflows/lex-installer.yml
