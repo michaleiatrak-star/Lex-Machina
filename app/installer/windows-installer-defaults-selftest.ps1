@@ -64,6 +64,8 @@ Assert-Equal "visualCppDelivery" $manifest.systemPrerequisites.visualCppRuntime.
 Assert-Equal "webview2Delivery" $manifest.systemPrerequisites.webview2.delivery $defaults.webview2Delivery
 Assert-Equal "localAiDelivery" $manifest.localAi.delivery $defaults.localAiDelivery
 Assert-Equal "localAiInstallRoot" $manifest.localAi.installRoot $defaults.localAiInstallRoot
+Assert-Equal "defaultAdminBootstrapPolicy" $defaults.userData.noExistingAccountBootstrap "TEMPORARY_DEFAULT_ADMIN_WITH_PERSISTENT_CHANGE_PASSWORD_WARNING"
+Assert-Equal "defaultAdminUsePolicy" $defaults.userData.defaultAdminUsePolicy "ALLOW_USE_WHILE_PASSWORD_SETUP_PENDING_WITH_PERSISTENT_WARNING"
 
 $expectedRuntimeRootToken = '-RuntimeRoot "$INSTDIR\runtime"'
 if (-not $hooks.Contains($expectedRuntimeRootToken)) {
