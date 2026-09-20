@@ -172,6 +172,29 @@ Nadal poza zamknięciem:
 - Fail-closed bramka prywatności czatu wraca jako `503 CHAT_PRIVACY_GATE_FAILED` zamiast anonimowego 500, a UI pokazuje komunikat wskazujący lokalny runtime prywatności.
 - Regresja pokryta testem `tests/http-session.test.ts`.
 
+## R0.1.6 — G39M sterowanie zakresem i lokalne przetwarzanie — IN PROGRESS
+
+### G39M1 — zmiana nazwy sprawy — DONE (bez zmian)
+
+- `PATCH /api/cases/:caseId {displayName}` działa; przycisk „Zmień nazwę" w zakładce Sprawa. Zweryfikowane na działającym runtime.
+
+### G39M2 — OCR i pseudonimizacja na żądanie — DONE
+
+- `POST /api/cases/:caseId/files/:uploadId/process` istniał, ale żaden klient go nie wywoływał: pipeline prywatności dało się uruchomić wyłącznie przy wgrywaniu pliku.
+- W Aktach doszedł przycisk „Uruchom OCR i anonimizację" dla wgranych obrazów i PDF, z podsumowaniem: liczba stron, ile przez OCR, ile elementów do decyzji prywatności.
+- Granica zaufania Tauri już przepuszczała `POST /api/cases/...`, więc nie wymagała zmian.
+
+### G39M3 — wszystkie moduły DR zaznaczone na start — DONE
+
+- Nowa karta „Dziedziny prawa" w zakładce Skille pokazuje wszystkie 16 modułów DR zaznaczonych; odznaczenie ogranicza dziedziny dostępne dla routera.
+- Lista domen jedzie w osobnym polu koperty (`domains`), nie w `manual`. Gdyby domeny współdzieliły budżet `manual` (limit 16) i `additionalSkills` (limit 12), pełny zestaw DR wypchnąłby z koperty wszystkie skille wykonawcze.
+- Pełny zestaw nie wysyła żadnego ograniczenia, więc domyślne zachowanie routingu jest identyczne jak wcześniej.
+
+### G39M4 — wybór pipeline'u deterministycznego przy nowej rozmowie — DONE
+
+- Nad transkryptem pustej rozmowy pojawia się wybór: pismo procesowe, chronologia sprawy, analiza sądowa, analiza umów, analiza dowodów.
+- Wybór nie wyłącza trybu Auto — router nadal dobiera współpracujące skille i dziedziny.
+
 ### Znane, nienaprawione w tej linii
 
 - pakiety Pythona pinowane tylko wersją, bez `--require-hashes` i bez pinu zależności przechodnich;

@@ -5,11 +5,13 @@ import {
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
   getCaseTypeExecutionSkills,
+  setAllowedDomainSkills,
   setCaseTypeExecutionSkills
 } from "./chat-routing.js";
 
 afterEach(() => {
   setCaseTypeExecutionSkills([]);
+  setAllowedDomainSkills([]);
 });
 
 describe("chat routing", () => {
@@ -123,5 +125,65 @@ describe("chat routing", () => {
     expect(encoded).toContain("dr-02-prawo-cywilne");
     expect(encoded).toContain("analiza-sadowa-v6");
     expect(encoded).toContain("chronologia-sprawy-v1");
+  });
+
+  it("sends no domain restriction when every DR module stays selected", () => {
+    setAllowedDomainSkills([]);
+    setCaseTypeExecutionSkills([
+      "analiza-sadowa-v6"
+    ]);
+
+    const envelope = buildSkillSelectionEnvelope(
+      "Pytanie",
+      true,
+      []
+    );
+    const decoded = JSON.parse(
+      envelope
+        .split("\n")[0]!
+        .slice(
+          SKILL_SELECTION_ENVELOPE_PREFIX.length
+        )
+        .trim()
+    ) as Record<string, unknown>;
+
+    expect(decoded.domains).toBeUndefined();
+  });
+
+  it("keeps a restricted DR selection out of the manual skill budget", () => {
+    setAllowedDomainSkills([
+      "dr-01-prawo-pracy"
+    ]);
+    setCaseTypeExecutionSkills([
+      "analiza-sadowa-v6",
+      "chronologia-sprawy-v1"
+    ]);
+
+    const envelope = buildSkillSelectionEnvelope(
+      "Pytanie",
+      true,
+      []
+    );
+    const decoded = JSON.parse(
+      envelope
+        .split("\n")[0]!
+        .slice(
+          SKILL_SELECTION_ENVELOPE_PREFIX.length
+        )
+        .trim()
+    ) as {
+      manual: string[];
+      domains: string[];
+    };
+
+    // Domains travel in their own field, so the execution skills keep the
+    // whole manual budget for themselves.
+    expect(decoded.domains).toEqual([
+      "dr-01-prawo-pracy"
+    ]);
+    expect(decoded.manual).toEqual([
+      "analiza-sadowa-v6",
+      "chronologia-sprawy-v1"
+    ]);
   });
 });

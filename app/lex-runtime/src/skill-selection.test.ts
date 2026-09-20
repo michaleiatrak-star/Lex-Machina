@@ -152,8 +152,66 @@ describe("skill selection", () => {
     expect(parseSkillSelectionEnvelope(input)).toEqual({
       query: "Czy termin na apelację już upłynął?",
       automatic: false,
-      manualSkills: ["terminy-procesowe"]
+      manualSkills: ["terminy-procesowe"],
+      domainAllowList: []
     });
+  });
+
+  it("carries a DR domain allow-list separately from manual skills", () => {
+    const input =
+      `${SKILL_SELECTION_ENVELOPE_PREFIX} ` +
+      JSON.stringify({
+        auto: true,
+        manual: ["analiza-sadowa-v6"],
+        domains: [
+          "dr-02-prawo-cywilne",
+          "dr-03-prawo-procesowe",
+          "nie-jest-domena"
+        ]
+      }) +
+      "\nPytanie";
+
+    const parsed = parseSkillSelectionEnvelope(input);
+
+    // Domains must never consume the manual budget: a full DR selection would
+    // otherwise push every execution skill out of the envelope.
+    expect(parsed.manualSkills).toEqual([
+      "analiza-sadowa-v6"
+    ]);
+    expect(parsed.domainAllowList).toEqual([
+      "dr-02-prawo-cywilne",
+      "dr-03-prawo-procesowe"
+    ]);
+  });
+
+  it("keeps every domain available when no allow-list is sent", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Pracownik pozywa pracodawcę; trzeba ocenić wypowiedzenie i przygotować pozew oraz terminy procesowe.",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.domainSkills.length)
+      .toBeGreaterThan(1);
+  });
+
+  it("restricts automatic domain routing to the allow-list", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Pracownik pozywa pracodawcę; trzeba ocenić wypowiedzenie i przygotować pozew oraz terminy procesowe.",
+      "dr-03-prawo-procesowe",
+      true,
+      [],
+      ["dr-03-prawo-procesowe"]
+    );
+
+    expect(selected.domainSkills).toEqual([
+      "dr-03-prawo-procesowe"
+    ]);
   });
 
   it("can select several cooperating execution skills automatically", () => {

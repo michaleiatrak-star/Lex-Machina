@@ -396,3 +396,14 @@
     min-height: 440px;
   }
 }
+
+/* G39M on-demand OCR / pseudonymization feedback */
+.workspace-notice {
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border: 1px solid #b9cfbd;
+  border-radius: 10px;
+  background: #eef6f0;
+  color: #2f4a37;
+  font-size: 12px;
+}

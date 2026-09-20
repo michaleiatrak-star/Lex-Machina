@@ -335,7 +335,8 @@ export class LexExecutionEngine {
         effectiveQuery,
         args.route.primarySkill,
         skillEnvelope.automatic,
-        skillEnvelope.manualSkills
+        skillEnvelope.manualSkills,
+        skillEnvelope.domainAllowList
       );
 
     for (const domainSkill of skillSelection.domainSkills) {

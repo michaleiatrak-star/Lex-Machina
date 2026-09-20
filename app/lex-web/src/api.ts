@@ -2143,6 +2143,26 @@ export async function reviewDocument(
   return payload as DocumentReviewResponse;
 }
 
+/**
+ * Re-run OCR and the local pseudonymizer over a file that is already stored in
+ * the case files. Until now this endpoint existed but nothing called it, so the
+ * privacy pipeline could only ever run at upload time and a document that
+ * failed or arrived before a decision could not be reprocessed.
+ */
+export async function processStoredCaseFile(
+  caseId: string,
+  uploadId: string,
+  fileId?: string
+): Promise<DocumentReviewResponse> {
+  const path = fileId
+    ? `/api/cases/${caseId}/files/${uploadId}/members/${fileId}/process`
+    : `/api/cases/${caseId}/files/${uploadId}/process`;
+  return json<DocumentReviewResponse>(
+    path,
+    { method: "POST" }
+  );
+}
+
 export function finalizeDocument(
   caseId: string,
   documentId: string,

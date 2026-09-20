@@ -1,6 +1,19 @@
 export const SKILL_SELECTION_ENVELOPE_PREFIX = "__LEX_SKILLS_V1__";
 export const AUTO_CASE_TYPE = "AUTO";
 
+/**
+ * Execution skills that run a checkpointed, multi-step pipeline rather than a
+ * single answer. They are offered explicitly when a conversation starts, so a
+ * user does not have to rely on Auto picking them up from the wording.
+ */
+export const DETERMINISTIC_PIPELINE_SKILLS = [
+  "pisma-procesowe-v3",
+  "chronologia-sprawy-v1",
+  "analiza-sadowa-v6",
+  "analizator-umow-v1",
+  "analizator-dowodow-v3"
+] as const;
+
 export type PublicSkillDescriptor = {
   name: string;
   version?: string;
@@ -18,6 +31,7 @@ const STOP_WORDS = new Set([
 ]);
 
 let caseTypeExecutionSkills: string[] = [];
+let allowedDomainSkills: string[] = [];
 
 function safeExecutionSkillNames(names: readonly string[]): string[] {
   return [
@@ -43,6 +57,35 @@ export function setCaseTypeExecutionSkills(names: readonly string[]): void {
 
 export function getCaseTypeExecutionSkills(): string[] {
   return [...caseTypeExecutionSkills];
+}
+
+function safeDomainSkillNames(
+  names: readonly string[]
+): string[] {
+  return [
+    ...new Set(
+      names
+        .map((name) => name.trim())
+        .filter((name) =>
+          /^dr-\d{2}-[a-z0-9-]{1,140}$/i.test(name)
+        )
+    )
+  ].slice(0, 32);
+}
+
+/**
+ * Restrict which DR domains the router may use. An empty list means "no
+ * restriction", which is what a full selection sends: the envelope then stays
+ * exactly as it was before, and the router keeps every domain available.
+ */
+export function setAllowedDomainSkills(
+  names: readonly string[]
+): void {
+  allowedDomainSkills = safeDomainSkillNames(names);
+}
+
+export function getAllowedDomainSkills(): string[] {
+  return [...allowedDomainSkills];
 }
 
 // Compatibility aliases for older callers/tests. New UI uses the plural API.
@@ -135,9 +178,17 @@ export function buildSkillSelectionEnvelope(
       ? true
       : automatic;
 
+  // Domains travel in their own field. Folding them into `manual` would let a
+  // full DR selection exhaust the 16-name manual budget and push every
+  // execution skill out of the envelope.
+  const domains = getAllowedDomainSkills();
+
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
     auto: effectiveAutomatic,
     manual,
+    ...(domains.length > 0
+      ? { domains }
+      : {}),
     caseType:
       prioritizedExecutionSkills.length > 0
         ? prioritizedExecutionSkills

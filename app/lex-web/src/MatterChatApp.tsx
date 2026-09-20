@@ -49,9 +49,11 @@ import {
 } from "./document-drop-queue.js";
 import {
   AUTO_CASE_TYPE,
+  DETERMINISTIC_PIPELINE_SKILLS,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
   labelForSkill,
+  setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
@@ -329,6 +331,11 @@ export default function MatterChatApp({
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
   const [manualSkills, setManualSkills] = useState<string[]>([]);
   const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
+  // null = every DR module is selected. Kept as null rather than a filled list
+  // so the default sends no restriction at all and routing stays unchanged
+  // until the user actually narrows it.
+  const [allowedDomains, setAllowedDomains] =
+    useState<string[] | null>(null);
   const [automaticSkills, setAutomaticSkills] = useState(true);
   const [skillFilter, setSkillFilter] = useState("");
 
@@ -388,6 +395,21 @@ export default function MatterChatApp({
       ),
     [skills]
   );
+  const domainSelection = allowedDomains ?? routes;
+  const conversationIsNew = useMemo(
+    () =>
+      messages.every(
+        (message) => message.role === "system"
+      ),
+    [messages]
+  );
+  const availablePipelines = useMemo(
+    () =>
+      DETERMINISTIC_PIPELINE_SKILLS.filter((name) =>
+        skills.some((skill) => skill.name === name)
+      ),
+    [skills]
+  );
   const filteredSkills = useMemo(() => {
     const needle = skillFilter.trim().toLowerCase();
     return skills
@@ -414,6 +436,16 @@ export default function MatterChatApp({
     setCaseTypeExecutionSkills(caseTypeSkills);
     return () => setCaseTypeExecutionSkills([]);
   }, [caseTypeSkills]);
+
+  useEffect(() => {
+    const restricted =
+      allowedDomains !== null &&
+      allowedDomains.length < routes.length;
+    setAllowedDomainSkills(
+      restricted ? allowedDomains : []
+    );
+    return () => setAllowedDomainSkills([]);
+  }, [allowedDomains, routes.length]);
 
   useEffect(() => {
     let cancelled = false;
@@ -638,6 +670,15 @@ export default function MatterChatApp({
         ? current.filter((item) => item !== name)
         : [...current, name].slice(-16)
     );
+  }
+
+  function toggleDomainSkill(name: string): void {
+    setAllowedDomains((current) => {
+      const selected = current ?? routes;
+      return selected.includes(name)
+        ? selected.filter((item) => item !== name)
+        : [...selected, name];
+    });
   }
 
   function toggleCaseTypeSkill(name: string): void {
@@ -1189,6 +1230,58 @@ export default function MatterChatApp({
                 );
               }}
             />
+            {conversationIsNew && availablePipelines.length > 0 ? (
+              <section
+                className="chat-pipeline-picker"
+                aria-label="Pipeline deterministyczny dla nowej rozmowy"
+              >
+                <div>
+                  <p className="eyebrow">Nowa rozmowa</p>
+                  <h3>
+                    {caseTypeSkills.length === 0
+                      ? "Tryb automatyczny — router dobierze wykonanie"
+                      : `${caseTypeSkills.length} wybranych pipeline'ów`}
+                  </h3>
+                  <p>
+                    Możesz od razu wskazać pipeline deterministyczny zamiast
+                    polegać na tym, że Auto rozpozna go z treści pytania.
+                    Wybór nie wyłącza Auto — router nadal może dobrać
+                    współpracujące skille i dziedziny.
+                  </p>
+                </div>
+                <div className="chat-pipeline-options">
+                  {availablePipelines.map((name) => {
+                    const checked =
+                      caseTypeSkills.includes(name);
+                    return (
+                      <button
+                        key={name}
+                        type="button"
+                        className={
+                          checked
+                            ? "chat-pipeline-option selected"
+                            : "chat-pipeline-option"
+                        }
+                        aria-pressed={checked}
+                        onClick={() => toggleCaseTypeSkill(name)}
+                      >
+                        {labelForSkill(name)}
+                      </button>
+                    );
+                  })}
+                  {caseTypeSkills.length > 0 ? (
+                    <button
+                      type="button"
+                      className="chat-pipeline-option reset"
+                      onClick={() => setCaseTypeSkills([])}
+                    >
+                      Wróć do Auto
+                    </button>
+                  ) : null}
+                </div>
+              </section>
+            ) : null}
+
             <div className="chat-message-list" aria-live="polite">
               {threadLoading ? (
                 <article className="chat-message chat-message-system">
@@ -1416,6 +1509,55 @@ export default function MatterChatApp({
                   <strong>✓ shared</strong>
                   <small>zawsze aktywny</small>
                 </div>
+              </div>
+            </article>
+
+            <article className="chat-card">
+              <div className="chat-card-heading">
+                <div>
+                  <p className="eyebrow">Dziedziny prawa</p>
+                  <h2>
+                    {domainSelection.length === routes.length
+                      ? `Wszystkie moduły DR (${routes.length})`
+                      : `${domainSelection.length} z ${routes.length} modułów DR`}
+                  </h2>
+                  <p>
+                    Wszystkie moduły DR są zaznaczone na start. Odznaczenie
+                    ogranicza dziedziny, z których router może korzystać w tej
+                    rozmowie; pełny zestaw nie nakłada żadnego ograniczenia.
+                  </p>
+                </div>
+                {domainSelection.length < routes.length ? (
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    onClick={() => setAllowedDomains(null)}
+                  >
+                    Zaznacz wszystkie
+                  </button>
+                ) : null}
+              </div>
+              <div className="chat-skill-grid">
+                {routes.map((name) => {
+                  const checked =
+                    domainSelection.includes(name);
+                  return (
+                    <label
+                      key={name}
+                      className={checked ? "chat-skill-card selected" : "chat-skill-card"}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleDomainSkill(name)}
+                      />
+                      <span>
+                        <strong>{labelForSkill(name)}</strong>
+                        <small>dziedzina prawa</small>
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
             </article>
 

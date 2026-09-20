@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { isDesktopShell } from "./api.js";
+import {
+  isDesktopShell,
+  processStoredCaseFile
+} from "./api.js";
 import {
   createWorkspaceFolder,
   deleteWorkspaceFolder,
@@ -12,6 +15,17 @@ import {
   type WorkspaceItem,
   type WorkspaceResponse
 } from "./workspace-client.js";
+
+function canRunPrivacyPipeline(
+  item: WorkspaceItem
+): boolean {
+  return (
+    item.kind === "UPLOAD" &&
+    !item.archive &&
+    (item.mediaType.startsWith("image/") ||
+      item.mediaType === "application/pdf")
+  );
+}
 
 function bytesLabel(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -64,6 +78,7 @@ export function WorkspaceManager({
   const [newFolderName, setNewFolderName] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [preview, setPreview] = useState<{
     item: WorkspaceItem;
     url?: string;
@@ -131,6 +146,7 @@ export function WorkspaceManager({
   async function run(action: () => Promise<void>): Promise<void> {
     setBusy(true);
     setError("");
+    setNotice("");
     try {
       await action();
       await refresh();
@@ -326,6 +342,32 @@ export function WorkspaceManager({
                         ))}
                       </select>
                     ) : null}
+                    {canWrite && canRunPrivacyPipeline(item) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Uruchom lokalny OCR i pseudonimizację dla tego pliku"
+                        onClick={() => void run(async () => {
+                          const result =
+                            await processStoredCaseFile(
+                              caseId,
+                              item.itemId
+                            );
+                          const ocrPages =
+                            result.pages.filter(
+                              (page) =>
+                                page.source === "OCR"
+                            ).length;
+                          setNotice(
+                            `„${item.filename}”: ${result.totalPages} stron, ` +
+                            `${ocrPages} przez OCR, ` +
+                            `${result.suggestions.length} elementów do decyzji prywatności.`
+                          );
+                        })}
+                      >
+                        Uruchom OCR i anonimizację
+                      </button>
+                    ) : null}
                     {canWrite ? (
                       <button
                         type="button"
@@ -374,6 +416,7 @@ export function WorkspaceManager({
         </section>
       ) : null}
 
+      {notice ? <p className="workspace-notice">{notice}</p> : null}
       {error ? <p className="chat-inline-error">{error}</p> : null}
     </article>
   );

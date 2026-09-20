@@ -1354,6 +1354,21 @@ Validation evidence (local, before release CI):
   reported as `503 CHAT_PRIVACY_GATE_FAILED` with an actionable message in the
   UI instead of an anonymous 500. Found by running the app end to end.
 
+- **G39M2** `POST /api/cases/:caseId/files/:uploadId/process` existed but no
+  client ever called it, so OCR and local pseudonymization could only run at
+  upload time and a stored document could never be reprocessed. Added the
+  client and an explicit action in the case files view.
+- **G39M3** all 16 DR modules are now shown selected by default, with
+  deselection narrowing what the router may use. The allow-list travels in its
+  own `domains` envelope field: folding it into `manual` would have let a full
+  DR selection exhaust the 16-name manual budget and the 12-name
+  additional-skill budget and push every execution skill out of both. A full
+  selection sends no restriction at all, so default routing is unchanged.
+- **G39M4** a new conversation offers the deterministic pipelines explicitly
+  (process pleading, chronology, court analysis, contract analysis, evidence
+  analysis) instead of relying on Auto inferring them from the wording. The
+  choice does not disable Auto.
+
 Not fixed in this line, tracked in ROADMAP:
 - Python packages pinned by version only, no `--require-hashes`;
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;

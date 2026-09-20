@@ -704,3 +704,52 @@
     display: none;
   }
 }
+
+/* G39M new-conversation deterministic pipeline picker */
+.chat-pipeline-picker {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  border: 1px solid rgba(120, 140, 125, 0.32);
+  border-radius: 14px;
+  background: rgba(247, 250, 246, 0.9);
+}
+
+.chat-pipeline-picker h3 {
+  margin: 2px 0 6px;
+  font-size: 15px;
+}
+
+.chat-pipeline-picker p {
+  margin: 0;
+  color: #5b6a5f;
+  font-size: 12px;
+}
+
+.chat-pipeline-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chat-pipeline-option {
+  padding: 7px 12px;
+  border: 1px solid #ccd4ca;
+  border-radius: 999px;
+  background: #fff;
+  color: #34483a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chat-pipeline-option.selected {
+  border-color: #3f6b4b;
+  background: #e8f2ea;
+  color: #23412c;
+}
+
+.chat-pipeline-option.reset {
+  border-style: dashed;
+  color: #6b7a70;
+}

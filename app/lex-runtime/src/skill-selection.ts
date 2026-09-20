@@ -24,6 +24,15 @@ export type SkillSelectionEnvelope = {
   query: string;
   automatic: boolean;
   manualSkills: string[];
+  /**
+   * Allow-list of DR domains the router may use. Empty means "no restriction",
+   * which is the historical behaviour and what an envelope without the field
+   * produces. It is deliberately separate from manualSkills: domains selected
+   * there would compete for the 16-name manual budget and the 12-name
+   * additional-skill budget, and a full DR selection would push every
+   * execution skill out of both.
+   */
+  domainAllowList: string[];
 };
 
 export type ResolvedSkillSelection = {
@@ -64,13 +73,26 @@ function safeManualSkillNames(value: unknown): string[] {
   ].slice(0, 16);
 }
 
+function safeDomainAllowList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return [
+    ...new Set(
+      value
+        .filter((item): item is string => typeof item === "string")
+        .map((item) => item.trim())
+        .filter((item) => /^dr-\d{2}-[a-z0-9-]{1,140}$/i.test(item))
+    )
+  ].slice(0, 32);
+}
+
 export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnvelope {
   const firstBreak = rawQuery.indexOf("\n");
   if (firstBreak < 0) {
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      domainAllowList: []
     };
   }
 
@@ -79,7 +101,8 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      domainAllowList: []
     };
   }
 
@@ -89,13 +112,16 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
     return {
       query: rawQuery.slice(firstBreak + 1).trimStart(),
       automatic: parsed.auto !== false,
-      manualSkills: safeManualSkillNames(parsed.manual)
+      manualSkills: safeManualSkillNames(parsed.manual),
+      domainAllowList:
+        safeDomainAllowList(parsed.domains)
     };
   } catch {
     return {
       query: rawQuery,
       automatic: true,
-      manualSkills: []
+      manualSkills: [],
+      domainAllowList: []
     };
   }
 }
@@ -376,8 +402,19 @@ export function resolveAdditionalSkills(
   query: string,
   primarySkill: string,
   automatic: boolean,
-  manualSkills: readonly string[]
+  manualSkills: readonly string[],
+  domainAllowList: readonly string[] = []
 ): ResolvedSkillSelection {
+  // An empty allow-list means every domain stays available, so an older
+  // client that does not send the field keeps today's behaviour exactly.
+  const allowedDomains =
+    domainAllowList.length > 0
+      ? new Set(domainAllowList)
+      : null;
+  const domainAllowed = (name: string): boolean =>
+    allowedDomains === null ||
+    name === primarySkill ||
+    allowedDomains.has(name);
   const core = new Set<string>([
     "prawny-router-v3",
     "prawo-polskie-v2",
@@ -420,7 +457,9 @@ export function resolveAdditionalSkills(
       executionSkills.add(name);
       promoteWorkflowExecutionSkill(name);
     }
-    if (isDomainSkill(skill)) domainSkills.add(name);
+    if (isDomainSkill(skill) && domainAllowed(name)) {
+      domainSkills.add(name);
+    }
   }
 
   if (automatic) {
@@ -495,7 +534,11 @@ export function resolveAdditionalSkills(
     }
 
     const rankedDomains = rankSkills(
-      candidates.filter(isDomainSkill),
+      candidates.filter(
+        (skill) =>
+          isDomainSkill(skill) &&
+          domainAllowed(skill.name)
+      ),
       queryTokens
     )
       .filter((item) => item.score >= 4)
