@@ -112,7 +112,7 @@ const required = [
   "VERIFIED",
   "SUPPORTED",
   "Otwórz źródło w przeglądarce",
-  "Model i konto / API",
+  "Modele i konta",
   "Zainstalowane modele:",
   "Odśwież modele lokalne",
   "Zminimalizuj do ikony",
