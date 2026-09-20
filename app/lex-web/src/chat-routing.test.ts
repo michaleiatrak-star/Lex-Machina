@@ -82,7 +82,7 @@ describe("chat routing", () => {
     expect(encoded).toContain('\"caseType\":\"AUTO\"');
   });
 
-  it("adds several prioritized execution case types to the envelope", () => {
+  it("keeps exactly one explicit deterministic workflow controller", () => {
     setCaseTypeExecutionSkills([
       "analiza-sadowa-v6",
       "chronologia-sprawy-v1",
@@ -95,23 +95,19 @@ describe("chat routing", () => {
     );
 
     expect(getCaseTypeExecutionSkills()).toEqual([
-      "analiza-sadowa-v6",
-      "chronologia-sprawy-v1",
-      "raport-klienta-v1"
+      "analiza-sadowa-v6"
     ]);
     expect(encoded).toContain('\"auto\":true');
-    expect(encoded).toContain("analiza-sadowa-v6");
-    expect(encoded).toContain("chronologia-sprawy-v1");
-    expect(encoded).toContain("raport-klienta-v1");
     expect(encoded).toContain(
-      '\"caseType\":[\"analiza-sadowa-v6\",\"chronologia-sprawy-v1\",\"raport-klienta-v1\"]'
+      '\"caseType\":\"analiza-sadowa-v6\"'
     );
+    expect(encoded).not.toContain("chronologia-sprawy-v1");
+    expect(encoded).not.toContain("raport-klienta-v1");
   });
 
-  it("allows manual domain skills and prioritized execution skills in one turn", () => {
+  it("allows manual domain helpers beside one explicit execution controller", () => {
     setCaseTypeExecutionSkills([
-      "analiza-sadowa-v6",
-      "chronologia-sprawy-v1"
+      "analiza-sadowa-v6"
     ]);
     const encoded = buildSkillSelectionEnvelope(
       "Sprawa z pogranicza prawa pracy i cywilnego",
@@ -121,7 +117,8 @@ describe("chat routing", () => {
 
     expect(encoded).toContain("dr-01-prawo-pracy");
     expect(encoded).toContain("dr-02-prawo-cywilne");
-    expect(encoded).toContain("analiza-sadowa-v6");
-    expect(encoded).toContain("chronologia-sprawy-v1");
+    expect(encoded).toContain(
+      '\"caseType\":\"analiza-sadowa-v6\"'
+    );
   });
 });
