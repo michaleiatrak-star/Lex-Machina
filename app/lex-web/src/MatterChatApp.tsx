@@ -59,6 +59,10 @@ import {
   useCaseThread,
   type CaseChatMessage
 } from "./case-thread.js";
+import {
+  canExecutePrimaryModel,
+  shouldLoadPrimaryModelCatalog
+} from "./primary-model-policy.js";
 import type {
   WorkspaceDocumentCitation
 } from "./workspace-client.js";
@@ -108,29 +112,6 @@ const PROVIDERS: Array<{
     apiKeyUrl: "https://console.x.ai/"
   }
 ];
-
-export function shouldLoadPrimaryModelCatalog(
-  provider: ProviderId,
-  providerConfigured: boolean | undefined
-): boolean {
-  if (providerConfigured === undefined) {
-    return false;
-  }
-  return (
-    providerConfigured === true ||
-    provider === "openai"
-  );
-}
-
-export function canExecutePrimaryModel(
-  providerConfigured: boolean | undefined,
-  modelId: string
-): boolean {
-  return (
-    modelId.startsWith("local/") ||
-    providerConfigured === true
-  );
-}
 
 const MANDATORY_SKILLS = ["prawny-router-v3", "shared"] as const;
 const KNOWN_EXECUTION_SKILLS = new Set([
