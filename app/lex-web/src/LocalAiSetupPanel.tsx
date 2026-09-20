@@ -314,6 +314,11 @@ export function LocalAiSetupPanel({
           "/api/local-models"
         );
       setData(next);
+      window.dispatchEvent(
+        new Event(
+          "lex-local-models-changed"
+        )
+      );
       const preferred =
         modelId &&
         next.models.some(
