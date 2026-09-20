@@ -34,12 +34,22 @@ function friendlyError(error: unknown): string {
         : String(error);
 
   if (
+    code.startsWith("SKILL_UPDATE_") &&
+    (
+      code.includes("SIGNER_POLICY_MISSING") ||
+      code.includes("SIGNER_NOT_TRUSTED") ||
+      code.includes("SIGNATURE_INVALID")
+    )
+  ) {
+    return "Pakiet skilli nie przeszedł polityki zaufania. Dla oficjalnego release Lex Machina podpis Ed25519 jest opcjonalny, ale jeśli podpis jest dostarczony, musi być poprawny i zaufany; SHA-256, zgodność indeksu i walidacja bundla pozostają obowiązkowe.";
+  }
+  if (
     code.includes("SIGNER_POLICY_MISSING") ||
     code.includes("SIGNER_NOT_TRUSTED") ||
     code.includes("SIGNATURE_INVALID") ||
     code.includes("NOT_VERIFIED")
   ) {
-    return "Aktualizacja programu jest zablokowana przez politykę bezpieczeństwa: produkcyjny podpis Authenticode nie został jeszcze poprawnie skonfigurowany albo nie przeszedł weryfikacji.";
+    return "Aktualizacja programu jest zablokowana przez politykę bezpieczeństwa: wymagany Authenticode od skonfigurowanego zaufanego wydawcy nie przeszedł weryfikacji.";
   }
   if (code === "APPLICATION_UPDATE_NOT_AVAILABLE") {
     return "Brak nowszej wersji programu do pobrania.";
@@ -131,9 +141,7 @@ export function MaintenancePanel({
         await downloadApplicationUpdate();
       setStaged(result);
       setMessage(
-        result.publisher.verification === "AUTHENTICODE"
-          ? `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Authenticode + ProductVersion ${result.publisher.productVersion}: PASS. Aktualizacja jest gotowa do instalacji.`
-          : `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). SHA-256 + ProductVersion ${result.publisher.productVersion}: PASS. UWAGA: aktualizacja bez podpisu jest tymczasowo dozwolona.`
+        `Zweryfikowano ${result.filename} (${formatBytes(result.bytes)}). Authenticode + SHA-256 + ProductVersion ${result.publisher.productVersion}: PASS. Aktualizacja jest gotowa do instalacji.`
       );
     } catch (problem) {
       setMessage("");
