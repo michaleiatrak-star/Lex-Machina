@@ -873,7 +873,8 @@ export class LexExecutionEngine {
         "prawo-polskie-v2",
         args.route.primarySkill,
         ...skillSelection.additionalSkills
-      ]
+      ],
+      workflowPlan.executionSkill
     );
 
     const coreResourcePrompt =
