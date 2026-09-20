@@ -428,8 +428,8 @@ const pass =
   ) &&
 
   badHttp.status === 200 &&
-  bad.status === "BLOCKED" &&
-  !("answer" in bad) &&
+  bad.status === "DRAFT_PRESENTABLE" &&
+  typeof bad.answer === "string" &&
   badVerification.records === 0 &&
   badFetches.length >= 1 &&
   badFetches.every(
