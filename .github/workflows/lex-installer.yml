@@ -90,11 +90,11 @@ jobs:
             $source = Get-Content -Raw -LiteralPath $path
             foreach ($needle in $required) {
               if (-not $source.Contains($needle)) {
-                throw "LOCAL_PRIMARY_POLICY_NOT_WIRED:$path:$needle"
+                throw "LOCAL_PRIMARY_POLICY_NOT_WIRED:${path}:${needle}"
               }
             }
             if ($source -match 'providerConfigured\s*!==\s*true') {
-              throw "LOCAL_PRIMARY_DIRECT_CREDENTIAL_GATE_REINTRODUCED:$path"
+              throw "LOCAL_PRIMARY_DIRECT_CREDENTIAL_GATE_REINTRODUCED:${path}"
             }
           }
 
