@@ -209,6 +209,15 @@ jobs:
             gives browser login a dedicated five-minute timeout;
           - API-key and local llama.cpp paths remain available and unchanged.
 
+          RC3 also separates verification quality from answer presentation:
+          - incomplete HARD GATE / Gate I verification no longer removes the
+            model answer from chat;
+          - such answers remain marked with BLOCKED/DEGRADED verification
+            metadata and a visible warning that source verification is incomplete;
+          - execution/privacy/workflow failures remain blocking, including
+            missing required workflow inputs or resources and invalid output
+            contracts.
+
           Unchanged and still open: production Authenticode / Ed25519 trust
           roots, hash-pinned Python packages, dependency lockfiles, and the
           offline clean-machine acceptance gate.
