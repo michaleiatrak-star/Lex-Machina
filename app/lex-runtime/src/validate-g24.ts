@@ -579,8 +579,8 @@ const pass =
   supportedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
-  fake.status === "BLOCKED" &&
-  !("answer" in fake) &&
+  fake.status === "DRAFT_PRESENTABLE" &&
+  typeof fake.answer === "string" &&
   typeof fakeSummary.records ===
     "number" &&
   fakeSummary.records >= 1 &&
@@ -591,8 +591,9 @@ const pass =
 
   alteredHttp.status === 200 &&
   altered.status ===
-    "BLOCKED" &&
-  !("answer" in altered) &&
+    "DRAFT_PRESENTABLE" &&
+  typeof altered.answer ===
+    "string" &&
   typeof alteredSummary.records ===
     "number" &&
   alteredSummary.records >= 3 &&
@@ -603,8 +604,9 @@ const pass =
 
   omittedHttp.status === 200 &&
   omitted.status ===
-    "BLOCKED" &&
-  !("answer" in omitted) &&
+    "DRAFT_PRESENTABLE" &&
+  typeof omitted.answer ===
+    "string" &&
   typeof omittedSummary.records ===
     "number" &&
   omittedSummary.records >= 3 &&
