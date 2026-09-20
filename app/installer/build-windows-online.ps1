@@ -11,6 +11,9 @@ $payload = Join-Path $tauri "runtime"
 
 if ($env:OS -ne "Windows_NT") { throw "Windows online bootstrap payload must be built on Windows." }
 
+Write-Host "[defaults] Verify canonical Windows installer mechanics"
+& (Join-Path $installer "windows-installer-defaults-selftest.ps1")
+
 Write-Host "[brand] Materialize pinned Windows icon"
 & (Join-Path $installer "materialize-brand-icon.ps1")
 
