@@ -1036,6 +1036,52 @@ textarea:focus {
   font-weight: 700;
 }
 
+.auth-toolbar-minimized {
+  gap: 4px;
+  padding: 5px 6px;
+  border-radius: 12px;
+}
+
+.floating-drag-handle {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  min-width: 18px;
+  height: 30px;
+  border-radius: 8px;
+  color: #78857c;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.15em;
+}
+
+.floating-drag-handle:active {
+  cursor: grabbing;
+}
+
+.floating-icon-button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  font-size: 16px !important;
+  line-height: 1;
+}
+
+.floating-minimize-button {
+  width: 30px;
+  min-width: 30px;
+  padding: 0 !important;
+  font-size: 17px !important;
+  line-height: 1;
+}
+
 .session-warning {
   position: fixed;
   z-index: 49;
