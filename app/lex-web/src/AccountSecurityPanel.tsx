@@ -37,6 +37,13 @@ export function AccountSecurityPanel({
     isDesktopShell() &&
     user.loginName === "local-admin" &&
     user.passwordSetupPending === true;
+  const newPasswordLength =
+    Array.from(
+      newPassword.normalize("NFKC")
+    ).length;
+  const newPasswordLengthValid =
+    newPasswordLength >= 10 &&
+    newPasswordLength <= 128;
 
   async function createCode():
     Promise<void> {
@@ -77,7 +84,7 @@ export function AccountSecurityPanel({
     if (
       (!nativeManagedSetup &&
         !currentPassword) ||
-      !newPassword ||
+      !newPasswordLengthValid ||
       busy
     ) {
       return;
@@ -108,12 +115,13 @@ export function AccountSecurityPanel({
       }
       setMessage(
         user.passwordSetupPending
-          ? "Hasło zostało zmienione. Początkowe hasło admin przestało działać, a nowy kod recovery został wygenerowany."
+          ? user.loginName === "admin"
+            ? "Hasło zostało zmienione. Dane admin / admin przestały działać, a nowy kod recovery został wygenerowany."
+            : "Hasło zostało zmienione. Początkowe poświadczenie konta zostało unieważnione, a nowy kod recovery został wygenerowany."
           : "Hasło zostało zmienione. Pozostałe sesje zostały unieważnione; sprawy zachowały te same klucze danych."
       );
     } catch (failure) {
       setCurrentPassword("");
-      setNewPassword("");
       if (
         failure instanceof ApiError &&
         failure.code ===
@@ -264,6 +272,9 @@ export function AccountSecurityPanel({
               }
             />
           </label>
+          <p className="field-help">
+            Hasło musi mieć od 10 do 128 znaków. Zmiana jest zatwierdzana dopiero po zapisaniu nowego klucza konta.
+          </p>
           <button
             type="button"
             className="primary-button"
@@ -271,7 +282,7 @@ export function AccountSecurityPanel({
               busy ||
               (!nativeManagedSetup &&
                 !currentPassword) ||
-              !newPassword
+              !newPasswordLengthValid
             }
             onClick={() => {
               void updatePassword();
