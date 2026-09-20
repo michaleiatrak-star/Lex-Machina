@@ -196,6 +196,7 @@
     "policy": "OFFICIAL_GITHUB_RELEASE_SHA256_REQUIRED_ED25519_OPTIONAL",
     "temporaryUnsignedAllowed": false,
     "officialRepository": "michaleiatrak-star/Lex-Machina",
-    "officialSourceUnsignedAllowed": true
+    "officialSourceUnsignedAllowed": true,
+    "releaseTagPrefix": "skill-pack-v"
   }
 }
