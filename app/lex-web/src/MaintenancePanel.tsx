@@ -267,7 +267,7 @@ export function MaintenancePanel({
         >
           ⋮⋮
         </span>
-        <span>
+        <span className="maintenance-title">
           <strong>Utrzymanie</strong>
           <small>
             program · skille · bezpieczne aktualizacje
