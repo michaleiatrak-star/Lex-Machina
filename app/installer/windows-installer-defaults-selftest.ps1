@@ -70,6 +70,24 @@ if (-not $hooks.Contains($expectedRuntimeRootToken)) {
   throw "WINDOWS_INSTALLER_DEFAULT_RUNTIME_ROOT_MISSING:$($defaults.runtimeRoot)"
 }
 
+$expectedUserDataRootToken = '$PROFILE\.lex-machina\data'
+$expectedAuthDbToken = '$PROFILE\.lex-machina\data\auth\auth.sqlite'
+if (-not $hooks.Contains($expectedUserDataRootToken)) {
+  throw "WINDOWS_INSTALLER_DEFAULT_USER_DATA_ROOT_MISSING:$($defaults.userData.root)"
+}
+if (-not $hooks.Contains($expectedAuthDbToken)) {
+  throw "WINDOWS_INSTALLER_DEFAULT_AUTH_DB_PATH_MISSING:$($defaults.userData.authDatabase)"
+}
+if (-not $hooks.Contains('/SD IDYES IDYES lex_account_policy_done IDNO lex_confirm_account_reset')) {
+  throw "WINDOWS_INSTALLER_DEFAULT_ACCOUNT_PRESERVE_POLICY_MISSING:$($defaults.userData.silentInstallDefault)"
+}
+if (-not $hooks.Contains('/SD IDNO IDYES lex_uninstall_delete_user_data IDNO lex_uninstall_keep_user_data')) {
+  throw "WINDOWS_INSTALLER_DEFAULT_UNINSTALL_DATA_POLICY_MISSING:$($defaults.userData.silentUninstallDefault)"
+}
+if (-not $hooks.Contains('RMDir /r "$PROFILE\.lex-machina\data"')) {
+  throw "WINDOWS_INSTALLER_DEFAULT_ACCOUNT_RESET_DELETE_MISSING"
+}
+
 $expectedCacheToken = 'Join-Path $env:LOCALAPPDATA "LexMachina\bootstrap-cache"'
 if (-not $bootstrap.Contains($expectedCacheToken)) {
   throw "WINDOWS_INSTALLER_DEFAULT_CACHE_ROOT_MISSING:$($defaults.bootstrapCacheRoot)"
