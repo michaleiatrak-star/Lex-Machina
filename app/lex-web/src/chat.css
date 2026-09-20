@@ -420,6 +420,50 @@
   flex: 1 1 auto;
 }
 
+.chat-workflow-picker {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #c9d0c7;
+  border-radius: 11px;
+  background: #f7f8f5;
+  color: #34453a;
+  overflow: hidden;
+}
+
+.chat-workflow-picker > span {
+  pointer-events: none;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.chat-workflow-picker select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chat-workflow-picker:focus-within {
+  outline: 2px solid #77917a;
+  outline-offset: 2px;
+}
+
+.chat-workflow-picker:has(select:disabled) {
+  opacity: 0.55;
+}
+
+.chat-workflow-picker select:disabled {
+  cursor: not-allowed;
+}
+
 .chat-drop-overlay {
   position: absolute;
   inset: -1px;
