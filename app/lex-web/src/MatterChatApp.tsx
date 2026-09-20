@@ -416,7 +416,12 @@ export default function MatterChatApp({
     );
   const executionSkills = useMemo(
     () => skills
-      .filter(isExecutionSkill)
+      .filter(
+        (skill) =>
+          isExecutionSkill(skill) &&
+          skill.deterministicWorkflow ===
+            true
+      )
       .sort((a, b) =>
         labelForSkill(a.name).localeCompare(labelForSkill(b.name), "pl")
       ),
