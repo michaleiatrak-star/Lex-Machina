@@ -34,7 +34,7 @@ function safeExecutionSkillNames(names: readonly string[]): string[] {
           /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(name)
         )
     )
-  ].slice(0, 8);
+  ].slice(0, 1);
 }
 
 export function setCaseTypeExecutionSkills(names: readonly string[]): void {
@@ -116,8 +116,8 @@ export function buildSkillSelectionEnvelope(
   const prioritizedExecutionSkills = getCaseTypeExecutionSkills();
   const manual = [
     ...new Set([
-      ...manualSkills,
-      ...prioritizedExecutionSkills
+      ...prioritizedExecutionSkills,
+      ...manualSkills
     ])
   ]
     .filter((name) =>
@@ -127,21 +127,32 @@ export function buildSkillSelectionEnvelope(
     )
     .slice(0, 16);
 
-  // AUTO is always genuinely automatic. When execution skills are explicitly
-  // prioritized, the user's Auto-skills switch still controls whether the
-  // router may add further cooperating skills and additional DR domains.
+  const deterministicSkill =
+    prioritizedExecutionSkills[0] ?? null;
+  const workflowMode =
+    deterministicSkill
+      ? "DETERMINISTIC"
+      : "SKILL_AUTO";
+
+  // In SKILL_AUTO the router may select cooperating execution skills, but
+  // they remain semantic skill modules under the universal Gate I workflow.
+  // A specialized coded state machine is activated only by an explicit
+  // deterministic execution-skill choice.
   const effectiveAutomatic =
-    prioritizedExecutionSkills.length === 0
-      ? true
-      : automatic;
+    deterministicSkill
+      ? automatic
+      : true;
 
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
     auto: effectiveAutomatic,
     manual,
     caseType:
-      prioritizedExecutionSkills.length > 0
-        ? prioritizedExecutionSkills
-        : AUTO_CASE_TYPE
+      deterministicSkill
+        ? [deterministicSkill]
+        : AUTO_CASE_TYPE,
+    workflowMode,
+    workflowSkill:
+      deterministicSkill
   })}\n${query}`;
 }
 
