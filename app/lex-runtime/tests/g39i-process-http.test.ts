@@ -44,6 +44,9 @@ import {
 import type {
   SessionExecutor
 } from "../src/session-executor.js";
+import {
+  SKILL_SELECTION_ENVELOPE_PREFIX
+} from "../src/skill-selection.js";
 
 const roots: string[] = [];
 const DR =
@@ -414,6 +417,72 @@ afterEach(() => {
 describe(
   "G39I process workflow HTTP integration",
   () => {
+    it(
+      "keeps SKILL_AUTO out of the process state machine even when the query mentions a pleading",
+      async () => {
+        const current =
+          fixture();
+
+        const bootstrap =
+          await request(
+            current.app
+          )
+            .post(
+              "/api/auth/bootstrap"
+            )
+            .send({
+              loginName:
+                "owner-auto",
+              displayName:
+                "Owner Auto",
+              password:
+                "G39I skill auto strong password 2026"
+            })
+            .expect(201);
+        const authorization =
+          `Bearer ${String(
+            bootstrap.body
+              .sessionToken
+          )}`;
+
+        const query =
+          `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[],"caseType":"AUTO","workflowMode":"SKILL_AUTO","workflowSkill":null}\nPrzygotuj pozew i wskaż najważniejsze elementy.`;
+
+        await request(
+          current.app
+        )
+          .post(
+            "/api/sessions/execute"
+          )
+          .set(
+            "Authorization",
+            authorization
+          )
+          .send({
+            query,
+            provider:
+              "openai",
+            model:
+              "gpt-test",
+            primarySkill: DR,
+            mode:
+              "PRAWNIK"
+          })
+          .expect(200);
+
+        expect(
+          current.execute
+        ).toHaveBeenCalledTimes(
+          1
+        );
+        expect(
+          current.execute
+            .mock.calls[0]?.[0]
+            .processWorkflowContext
+        ).toBeUndefined();
+      }
+    );
+
     it(
       "suppresses provider calls before start acceptance and auto-resolves only objective N/A checkpoints",
       async () => {
