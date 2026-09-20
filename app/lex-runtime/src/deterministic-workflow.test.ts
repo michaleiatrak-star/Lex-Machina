@@ -3,9 +3,11 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS,
   createDeterministicWorkflowPlan,
   evaluateDeterministicWorkflowOutput,
-  evaluateDeterministicWorkflowReads
+  evaluateDeterministicWorkflowReads,
+  supportsDeterministicWorkflow
 } from "./deterministic-workflow.js";
 import { LexSkillRegistry } from "./registry.js";
 
@@ -1259,6 +1261,52 @@ describe("deterministic legal workflow", () => {
     ).toThrow(
       "DETERMINISTIC_WORKFLOW_RESOURCE_MISSING:shared/CP-GATE.md"
     );
+  });
+
+  it("fails closed for an execution skill without a coded deterministic workflow", () => {
+    const registry = fixture();
+
+    expect(
+      supportsDeterministicWorkflow(
+        "nowy-executive-skill-v1"
+      )
+    ).toBe(false);
+
+    expect(() =>
+      createDeterministicWorkflowPlan(
+        registry,
+        "nowy-executive-skill-v1"
+      )
+    ).toThrow(
+      "DETERMINISTIC_WORKFLOW_SKILL_UNSUPPORTED:nowy-executive-skill-v1"
+    );
+  });
+
+  it("keeps every advertised deterministic workflow skill mapped to a specialized workflow", () => {
+    const registry = fixture();
+
+    expect(
+      DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS
+    ).toHaveLength(12);
+
+    for (
+      const skill
+      of DETERMINISTIC_WORKFLOW_EXECUTION_SKILLS
+    ) {
+      expect(
+        supportsDeterministicWorkflow(
+          skill
+        )
+      ).toBe(true);
+      expect(
+        createDeterministicWorkflowPlan(
+          registry,
+          skill
+        ).id
+      ).not.toBe(
+        "LEGAL_QUERY_V1"
+      );
+    }
   });
 
   it("keeps ordinary legal analysis compatible with the deterministic lifecycle", () => {
