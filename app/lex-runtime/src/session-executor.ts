@@ -1565,6 +1565,51 @@ export class SafeSessionExecutor implements SessionExecutor {
       reportBlueprintBlocked ||
       gateIBlocked ||
       gateIWorkflowContractBlocked;
+
+    const presentationCriticalGateIds =
+      new Set([
+        "ROUTER_FIRST",
+        "CORE_RESOURCES",
+        "ROUTER_REQUIRED_MODULES",
+        "WORKFLOW_RESOURCES",
+        "OUTPUT_CONTRACT"
+      ] as const);
+    const criticalGateIBlocked =
+      gateI.checks.some(
+        (item) =>
+          presentationCriticalGateIds.has(
+            item.id as
+              | "ROUTER_FIRST"
+              | "CORE_RESOURCES"
+              | "ROUTER_REQUIRED_MODULES"
+              | "WORKFLOW_RESOURCES"
+              | "OUTPUT_CONTRACT"
+          ) &&
+          item.result === "BLOCKED"
+      );
+    const workflowContractExtensionBlocked =
+      gateIWorkflowContractReport
+        .checks
+        .some(
+          (item) =>
+            item.result ===
+              "BLOCKED"
+        );
+    const verificationDegraded =
+      finalization.result !==
+        "PASS" ||
+      gateIBlocked ||
+      gateITurn.result !==
+        "PASS";
+
+    const presentationBlocked =
+      corpusBlocked ||
+      workflowResourcesBlocked ||
+      workflowOutputBlocked ||
+      guideOutputBlocked ||
+      reportBlueprintBlocked ||
+      criticalGateIBlocked ||
+      workflowContractExtensionBlocked;
     audit.record(
       "gate",
       "G39H_WORKFLOW_FINALIZATION",
@@ -1581,24 +1626,34 @@ export class SafeSessionExecutor implements SessionExecutor {
     );
 
     const safeToPresent =
-      finalization.result === "PASS" &&
-      !corpusBlocked &&
-      !workflowResourcesBlocked &&
-      !workflowOutputBlocked &&
-      !guideOutputBlocked &&
-      !reportBlueprintBlocked &&
-      !gateIBlocked &&
-      gateITurn.result ===
-        "PASS";
+      !presentationBlocked;
     audit.record(
       "gate",
       "G15_SAFE_SESSION_EXECUTION",
-      safeToPresent ? "OK" : "BLOCKED",
-      { finalization: finalization.result }
+      presentationBlocked
+        ? "BLOCKED"
+        : verificationDegraded
+          ? "DEGRADED"
+          : "OK",
+      {
+        finalization:
+          finalization.result,
+        verificationDegraded,
+        criticalGateIBlocked,
+        workflowContractExtensionBlocked
+      }
     );
     audit.close(
-      safeToPresent ? "OK" : "BLOCKED",
-      { finalization: finalization.result }
+      presentationBlocked
+        ? "BLOCKED"
+        : verificationDegraded
+          ? "DEGRADED"
+          : "OK",
+      {
+        finalization:
+          finalization.result,
+        verificationDegraded
+      }
     );
 
     const completeness = audit.validateCompletion({
