@@ -156,6 +156,50 @@ describe("signed skill update index", () => {
     }
   });
 
+  it("allows an unsigned index under the permanent official-source policy", () => {
+    const { indexBytes } = fixture();
+    const root = fs.mkdtempSync(
+      path.join(os.tmpdir(), "lex-skill-official-unsigned-")
+    );
+    const manifestPath = path.join(
+      root,
+      "release-source.json"
+    );
+    try {
+      fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+          skillUpdate: {
+            verification:
+              "SHA256_AND_OPTIONAL_ED25519_INDEX",
+            trustedEd25519PublicKeys: [],
+            temporaryUnsignedAllowed: false,
+            officialSourceUnsignedAllowed: true
+          }
+        }),
+        "utf8"
+      );
+
+      const result =
+        verifySkillUpdateIndex(
+          indexBytes,
+          new Uint8Array(),
+          undefined,
+          manifestPath
+        );
+
+      expect(result.signerKeyId)
+        .toBe("UNSIGNED_ALLOWED");
+      expect(result.index.version)
+        .toBe("0.1.4");
+    } finally {
+      fs.rmSync(root, {
+        recursive: true,
+        force: true
+      });
+    }
+  });
+
   it("restores fail-closed behavior when signed mode is selected", () => {
     const { indexBytes } = fixture();
     const root = fs.mkdtempSync(
