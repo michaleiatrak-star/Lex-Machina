@@ -5,6 +5,7 @@ import {
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
   createLiveProviderRegistry,
+  parseLocalSseLine,
   parseLocalToolCalls
 } from "../src/providers/ai-sdk-adapter.js";
 import {
@@ -119,6 +120,22 @@ describe("AiSdkProviderAdapter", () => {
         16_384,
       stream: true
     });
+  });
+
+  it("parses the exact llama.cpp SSE frame pattern used by Mistral NeMo", () => {
+    const frames = [
+      'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"role":"assistant","content":null}}],"object":"chat.completion.chunk"}',
+      'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}],"object":"chat.completion.chunk"}',
+      'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}],"object":"chat.completion.chunk"}',
+      "data: [DONE]"
+    ];
+    expect(
+      frames
+        .map(
+          parseLocalSseLine
+        )
+        .join("")
+    ).toBe("OK");
   });
 
   it("classifies local inference failures into actionable diagnostics", () => {
