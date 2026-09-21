@@ -280,6 +280,10 @@ jobs:
   g19-live-freshness:
     name: G19 live temporal freshness probe
     needs: g1-g29-g32
+    # External ELI metadata availability can be transient. The deterministic
+    # G19 contract above remains release-blocking and production verification
+    # still fails closed when live temporal metadata is unavailable.
+    continue-on-error: true
     runs-on: ubuntu-latest
     defaults:
       run:
