@@ -8,9 +8,9 @@ import {
   type ReactNode
 } from "react";
 import App from "./App.js";
-import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
-import { AdminUsersPanel } from "./AdminUsersPanel.js";
-import { AdminSupportPanel } from "./AdminSupportPanel.js";
+import type {
+  SettingsRequest
+} from "./MatterChatApp.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import { LEX_MACHINA_BRAND_ICON } from "./brand-icon.js";
 import {
@@ -409,10 +409,12 @@ export default function AuthenticatedApp() {
     >();
   const [now, setNow] =
     useState(() => Date.now());
-  const [showSecurity, setShowSecurity] =
-    useState(false);
-  const [showUsers, setShowUsers] =
-    useState(false);
+  const [
+    settingsRequest,
+    setSettingsRequest
+  ] = useState<SettingsRequest | null>(
+    null
+  );
   const [
     temporaryAdminCredentialsActive,
     setTemporaryAdminCredentialsActive
@@ -456,11 +458,6 @@ export default function AuthenticatedApp() {
                 current.user
               );
               setNow(Date.now());
-              setShowSecurity(
-                current.user
-                  .passwordSetupPending ===
-                  true
-              );
               setPhase(
                 "authenticated"
               );
@@ -671,9 +668,6 @@ export default function AuthenticatedApp() {
             value.user
               .passwordSetupPending ===
               true;
-          setShowSecurity(
-            passwordSetupPending
-          );
           if (
             value.user.loginName ===
               "admin" &&
@@ -713,7 +707,10 @@ export default function AuthenticatedApp() {
           <button
             type="button"
             onClick={() =>
-              setShowSecurity(true)
+              setSettingsRequest({
+                section: "security",
+                nonce: Date.now()
+              })
             }
           >
             Zmień hasło
@@ -769,30 +766,16 @@ export default function AuthenticatedApp() {
             <button
               type="button"
               onClick={() =>
-                setShowSecurity(
-                  (value) => !value
-                )
+                setSettingsRequest({
+                  section:
+                    "security",
+                  nonce:
+                    Date.now()
+                })
               }
             >
-              {showSecurity
-                ? "Ukryj bezpieczeństwo"
-                : "Hasło i recovery"}
+              Ustawienia
             </button>
-            {auth.user.appRole ===
-              "ADMIN" && (
-              <button
-                type="button"
-                onClick={() =>
-                  setShowUsers(
-                    (value) => !value
-                  )
-                }
-              >
-                {showUsers
-                  ? "Ukryj użytkowników"
-                  : "Użytkownicy"}
-              </button>
-            )}
             <button
               type="button"
               onClick={() => {
@@ -826,43 +809,6 @@ export default function AuthenticatedApp() {
         )}
       </div>
 
-      {showUsers &&
-        auth.user.appRole ===
-          "ADMIN" && (
-          <>
-            <AdminUsersPanel
-              currentUserId={
-                auth.user.userId
-              }
-            />
-            <AdminSupportPanel />
-          </>
-        )}
-
-      {showSecurity && (
-        <AccountSecurityPanel
-          user={auth.user}
-          onAuthUpdated={(value) => {
-            setAuth(value);
-            setLastUser(
-              value.user
-            );
-            setNow(Date.now());
-            if (
-              value.user.loginName ===
-                "admin" &&
-              value.user
-                .passwordSetupPending !==
-                true
-            ) {
-              setTemporaryAdminCredentialsActive(
-                false
-              );
-            }
-          }}
-        />
-      )}
-
       {idleRemaining <= 120_000 && (
         <div
           className="session-warning"
@@ -877,6 +823,27 @@ export default function AuthenticatedApp() {
           auth.session.sessionId
         }
         user={auth.user}
+        settingsRequest={
+          settingsRequest
+        }
+        onAuthUpdated={(value) => {
+          setAuth(value);
+          setLastUser(
+            value.user
+          );
+          setNow(Date.now());
+          if (
+            value.user.loginName ===
+              "admin" &&
+            value.user
+              .passwordSetupPending !==
+              true
+          ) {
+            setTemporaryAdminCredentialsActive(
+              false
+            );
+          }
+        }}
       />
     </AuthenticatedShell>
   );
