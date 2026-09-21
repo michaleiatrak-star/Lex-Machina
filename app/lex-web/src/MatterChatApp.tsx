@@ -2801,7 +2801,7 @@ export default function MatterChatApp({
                                   void openExternalUrl(item.sourceUrl!);
                                 }}
                               >
-                                Otwórz źródło ↗
+                                Otwórz źródło w przeglądarce ↗
                               </a>
                             ) : null}
                           </li>
