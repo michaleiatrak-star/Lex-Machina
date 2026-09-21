@@ -105,7 +105,8 @@ describe("local auth service", () => {
       service.status()
     ).toEqual({
       initialized: false,
-      requiresBootstrap: true
+      requiresBootstrap: true,
+      temporaryAdminCredentialsActive: false
     });
 
     const password =
