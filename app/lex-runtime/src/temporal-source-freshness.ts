@@ -284,7 +284,10 @@ async function amendmentTouchesArticle(
     unwrapAct(metadata);
   if (
     !act ||
-    act.textHTML !== true
+    (
+      act.textHTML !== true &&
+      act.textPDF !== true
+    )
   ) {
     return null;
   }
