@@ -1836,6 +1836,20 @@ export function getRoutes(): Promise<RouteListResponse> {
   return json<RouteListResponse>("/api/routes");
 }
 
+export function getSkills(): Promise<{
+  count: number;
+  skills: Array<{
+    name: string;
+    version?: string;
+    type?: string;
+    status?: string;
+    description?: string;
+    category?: string;
+  }>;
+}> {
+  return json("/api/skills");
+}
+
 export function setProviderApiKey(
   provider: ProviderId,
   apiKey: string,
