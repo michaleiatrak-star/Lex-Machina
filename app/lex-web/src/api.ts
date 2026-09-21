@@ -534,7 +534,9 @@ export type ProviderAccountSessionStatus = {
   installed: boolean;
   authenticated: boolean;
   installHint: string;
-  resumeMode: "LAST_OR_NEW";
+  resumeMode:
+    | "LAST_OR_NEW"
+    | "LEX_CONTEXT_ONLY";
   oauthTokenConfigured?: boolean;
 };
 
