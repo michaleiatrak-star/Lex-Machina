@@ -345,7 +345,7 @@ describe("skill selection", () => {
     );
   });
 
-  it("lets an active execution skill delegate to referenced execution skills", () => {
+  it("does not activate execution skills merely because another skill mentions them in prose", () => {
     const registry = registryWithSkills();
     const selected = resolveAdditionalSkills(
       registry,
@@ -356,8 +356,8 @@ describe("skill selection", () => {
     );
 
     expect(selected.executionSkills).toContain("analiza-sadowa-v6");
-    expect(selected.executionSkills).toContain("chronologia-sprawy-v1");
-    expect(selected.executionSkills).toContain("raport-klienta-v1");
+    expect(selected.executionSkills).not.toContain("chronologia-sprawy-v1");
+    expect(selected.executionSkills).not.toContain("raport-klienta-v1");
   });
 
   it("can add more than one legal domain to a single turn", () => {
@@ -491,6 +491,37 @@ describe("skill selection", () => {
       .toContain("analizator-dowodow-v3");
     expect(selected.workflowExecutionSkill)
       .toBe("analizator-dowodow-v3");
+  });
+
+  it("keeps a trivial chat command out of stateful legal workflows", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "napisz ok",
+      "dr-01-prawo-pracy",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toEqual([]);
+    expect(selected.workflowExecutionSkill).toBeNull();
+  });
+
+  it("routes a KK article question only to the statute analyzer unless the user asks for another workflow", () => {
+    const registry = registryWithSkills();
+    const selected = resolveAdditionalSkills(
+      registry,
+      "Jaka jest odpowiedzialność karna z art. 276 kk?",
+      "dr-03-prawo-procesowe",
+      true,
+      []
+    );
+
+    expect(selected.executionSkills).toEqual([
+      "analizator-przepisow-v2"
+    ]);
+    expect(selected.workflowExecutionSkill)
+      .toBe("analizator-przepisow-v2");
   });
 
   it("routes a specific statutory interpretation request to the statute analyzer", () => {
