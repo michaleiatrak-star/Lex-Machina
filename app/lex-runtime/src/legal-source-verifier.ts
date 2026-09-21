@@ -86,7 +86,7 @@ function readableText(value: string): string {
     value
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
       .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
-      .replace(/<\s*(?:br\b[^>]*|\/?(?:p|div|li|tr|td|th|h[1-6])\b[^>]*)>/giu, "\n")
+      .replace(/<\s*(?:br\b[^>]*|\/?(?:body|main|section|article|header|footer|title|p|div|li|tr|td|th|h[1-6])\b[^>]*)>/giu, "\n")
       .replace(/<[^>]+>/g, " ")
   )
     .normalize("NFKC")
