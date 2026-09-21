@@ -14,9 +14,6 @@ import type {
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
 import { LEX_MACHINA_BRAND_ICON } from "./brand-icon.js";
 import {
-  useFloatingPanelDrag
-} from "./use-floating-panel.js";
-import {
   ApiError,
   bootstrapAdmin,
   clearAuthSession,
@@ -419,13 +416,6 @@ export default function AuthenticatedApp() {
     temporaryAdminCredentialsActive,
     setTemporaryAdminCredentialsActive
   ] = useState(false);
-  const [
-    authToolbarMinimized,
-    setAuthToolbarMinimized
-  ] = useState(true);
-  const authToolbarDrag =
-    useFloatingPanelDrag();
-
   useEffect(() => {
     let cancelled = false;
 
@@ -702,7 +692,7 @@ export default function AuthenticatedApp() {
           role="alert"
         >
           <span>
-            Używasz początkowego konta admin/admin. Możesz pracować, ale zmień hasło na własne, mające co najmniej 10 znaków.
+            Konto korzysta jeszcze z hasła początkowego. Możesz pracować, ale ustaw własne hasło mające co najmniej 10 znaków.
           </span>
           <button
             type="button"
@@ -717,97 +707,6 @@ export default function AuthenticatedApp() {
           </button>
         </div>
       )}
-
-      <div
-        className={
-          authToolbarMinimized
-            ? "auth-toolbar auth-toolbar-minimized"
-            : "auth-toolbar"
-        }
-        data-floating-panel="true"
-        style={
-          authToolbarDrag.style
-        }
-      >
-        <span
-          className="floating-drag-handle"
-          title="Przeciągnij panel"
-          aria-label="Przeciągnij panel użytkownika"
-          {...authToolbarDrag.handleProps}
-        >
-          ⋮⋮
-        </span>
-        {authToolbarMinimized ? (
-          <button
-            type="button"
-            className="floating-icon-button"
-            aria-label="Rozwiń panel użytkownika"
-            title={
-              `${auth.user.displayName} · rozwiń panel użytkownika`
-            }
-            onClick={() =>
-              setAuthToolbarMinimized(
-                false
-              )
-            }
-          >
-            👤
-          </button>
-        ) : (
-          <>
-            <div>
-              <strong>
-                {auth.user.displayName}
-              </strong>
-              <span>
-                @{auth.user.loginName}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() =>
-                setSettingsRequest({
-                  section:
-                    "security",
-                  nonce:
-                    Date.now()
-                })
-              }
-            >
-              Ustawienia
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                void lock();
-              }}
-            >
-              Zablokuj
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                void logout();
-              }}
-            >
-              Wyloguj
-            </button>
-            <button
-              type="button"
-              className="floating-minimize-button"
-              aria-label="Zminimalizuj panel użytkownika"
-              title="Zminimalizuj do ikony"
-              onClick={() =>
-                setAuthToolbarMinimized(
-                  true
-                )
-              }
-            >
-              −
-            </button>
-          </>
-        )}
-      </div>
 
       {idleRemaining <= 120_000 && (
         <div
@@ -826,6 +725,12 @@ export default function AuthenticatedApp() {
         settingsRequest={
           settingsRequest
         }
+        onLock={() => {
+          void lock();
+        }}
+        onLogout={() => {
+          void logout();
+        }}
         onAuthUpdated={(value) => {
           setAuth(value);
           setLastUser(
@@ -850,11 +755,9 @@ export default function AuthenticatedApp() {
 }
 
 /**
- * The toolbar, the maintenance panel and the idle warning are all
- * position: fixed against the top-right corner, so they stacked on top of one
- * another and hid each other's content. Measure the banner and the toolbar and
- * publish their geometry, so every fixed overlay can line up below whatever is
- * actually rendered instead of guessing a constant.
+ * Publish the height of the optional first-run banner. Sticky application
+ * chrome (including the chat model dock) can then sit directly below it
+ * without relying on a hard-coded offset.
  */
 function AuthenticatedShell(
   props: {
@@ -882,30 +785,16 @@ function AuthenticatedShell(
         root.querySelector<HTMLElement>(
           "[data-lex-banner='true']"
         );
-      const toolbar =
-        root.querySelector<HTMLElement>(
-          ".auth-toolbar"
-        );
       const bannerHeight =
         banner
           ? banner
               .getBoundingClientRect()
               .height
           : 0;
-      const toolbarBottom =
-        toolbar
-          ? toolbar
-              .getBoundingClientRect()
-              .bottom
-          : bannerHeight + 14;
 
       style.setProperty(
         "--lex-top-inset",
         `${Math.round(bannerHeight)}px`
-      );
-      style.setProperty(
-        "--lex-overlay-top",
-        `${Math.round(toolbarBottom) + 12}px`
       );
     };
 
@@ -932,9 +821,6 @@ function AuthenticatedShell(
       );
       style.removeProperty(
         "--lex-top-inset"
-      );
-      style.removeProperty(
-        "--lex-overlay-top"
       );
     };
   }, [
