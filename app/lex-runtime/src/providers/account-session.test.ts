@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   accountSessionModelId,
   accountSessionResumeMode,
+  claudeSubscriptionAuthenticated,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
   isMissingResumableSessionMessage
@@ -75,6 +76,50 @@ describe("provider account-session transport", () => {
       isMissingResumableSessionMessage(
         "network connection failed"
       )
+    ).toBe(false);
+  });
+
+  it("recognizes Claude subscription auth across current JSON and text status formats", () => {
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout: JSON.stringify({
+          loggedIn: true,
+          authMethod: "oauth_token",
+          apiProvider: "firstParty"
+        }),
+        stderr: ""
+      })
+    ).toBe(true);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout:
+          "Login method: Claude Max account\nOrganization: Test\n",
+        stderr: ""
+      })
+    ).toBe(true);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout:
+          "Profile: credentials-file · user_oauth · profile default",
+        stderr: ""
+      })
+    ).toBe(false);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout: JSON.stringify({
+          loggedIn: true,
+          authMethod: "api_key",
+          apiProvider: "firstParty"
+        }),
+        stderr: ""
+      })
     ).toBe(false);
   });
 
