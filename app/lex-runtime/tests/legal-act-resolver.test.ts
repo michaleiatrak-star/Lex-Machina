@@ -23,6 +23,16 @@ describe("DeterministicLegalActResolver", () => {
       resolver.resolve("Kodeks postępowania karnego").id
     ).toBe("KPK");
     expect(
+      resolver.resolve("Kodeks karny")
+    ).toMatchObject({
+      id: "KK",
+      eli: "DU/2025/383",
+      baseEli: "DU/1997/553"
+    });
+    expect(
+      resolver.resolve("k.k.").id
+    ).toBe("KK");
+    expect(
       resolver.resolve(
         "  Kodeks   postępowania   karnego  "
       ).id
@@ -33,7 +43,7 @@ describe("DeterministicLegalActResolver", () => {
     const first = resolver.list();
     const second = resolver.list();
 
-    expect(first).toHaveLength(3);
+    expect(first).toHaveLength(4);
     expect(first).toEqual(second);
     expect(first).not.toBe(second);
   });
