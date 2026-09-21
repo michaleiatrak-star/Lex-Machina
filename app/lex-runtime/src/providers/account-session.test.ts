@@ -7,6 +7,7 @@ import {
   accountLoginLaunchMode,
   accountSessionModelId,
   accountSessionResumeMode,
+  claudeAutomationCredentialMode,
   claudeSubscriptionAuthenticated,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
@@ -175,6 +176,32 @@ describe("provider account-session transport", () => {
         "network connection failed"
       )
     ).toBe(false);
+  });
+
+  it("distinguishes Claude setup-token and refresh-token automation credentials from interactive login", () => {
+    expect(
+      claudeAutomationCredentialMode({
+        CLAUDE_CODE_OAUTH_TOKEN:
+          "oauth-access-token"
+      })
+    ).toBe(
+      "ACCESS_TOKEN"
+    );
+    expect(
+      claudeAutomationCredentialMode({
+        CLAUDE_CODE_OAUTH_REFRESH_TOKEN:
+          "oauth-refresh-token",
+        CLAUDE_CODE_OAUTH_SCOPES:
+          "user:profile user:inference user:sessions:claude_code"
+      })
+    ).toBe(
+      "REFRESH_TOKEN"
+    );
+    expect(
+      claudeAutomationCredentialMode({})
+    ).toBe(
+      "INTERACTIVE"
+    );
   });
 
   it("recognizes Claude subscription auth across current JSON and text status formats", () => {
