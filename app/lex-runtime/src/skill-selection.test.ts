@@ -164,7 +164,10 @@ describe("skill selection", () => {
       domainAllowList: [],
       domainRestrictionActive: false,
       executionAllowList: [],
-      executionRestrictionActive: false
+      executionRestrictionActive: false,
+      modelRouted: false,
+      workflowExecutionSkill:
+        null
     });
   });
 
@@ -222,7 +225,10 @@ describe("skill selection", () => {
         "analizator-umow-v1"
       ],
       executionRestrictionActive:
-        true
+        true,
+      modelRouted: false,
+      workflowExecutionSkill:
+        null
     });
   });
 
