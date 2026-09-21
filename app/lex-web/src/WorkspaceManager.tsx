@@ -107,7 +107,30 @@ export function WorkspaceManager({
   } | null>(null);
 
   async function refresh(): Promise<void> {
-  
+    if (!caseId) {
+      setWorkspace(null);
+      setCaseFiles([]);
+      return;
+    }
+    const [next, files] =
+      await Promise.all([
+        getWorkspace(caseId),
+        listCaseFiles(caseId)
+      ]);
+    setWorkspace(next);
+    setCaseFiles(files.uploads);
+    if (
+      selectedFolder &&
+      !next.folders.some(
+        (item) =>
+          item.folderId ===
+          selectedFolder
+      )
+    ) {
+      setSelectedFolder(null);
+    }
+  }
+
   function processingFor(
     item: WorkspaceItem
   ): StoredUploadResponse["processing"] | undefined {
@@ -124,7 +147,9 @@ export function WorkspaceManager({
     if (
       !files ||
       files.length === 0
-    ) return;
+    ) {
+      return;
+    }
     await run(async () => {
       for (
         const file of
@@ -168,25 +193,6 @@ export function WorkspaceManager({
         `„${item.filename}”: OCR/pseudonimizacja zakończona · ${result.ocrPages} stron OCR · ${result.privacy.findings} anonimizacji · osobny vault/deanonimizator zapisany dla ${result.documentId}.`
       );
     });
-  }
-
-  if (!caseId) {
-      setWorkspace(null);
-      return;
-    }
-    const [next, files] =
-      await Promise.all([
-        getWorkspace(caseId),
-        listCaseFiles(caseId)
-      ]);
-    setWorkspace(next);
-    setCaseFiles(files.uploads);
-    if (
-      selectedFolder &&
-      !next.folders.some((item) => item.folderId === selectedFolder)
-    ) {
-      setSelectedFolder(null);
-    }
   }
 
   useEffect(() => {
