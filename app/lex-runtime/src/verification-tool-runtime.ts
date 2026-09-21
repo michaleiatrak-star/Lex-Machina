@@ -441,6 +441,7 @@ function publicToolResult(
     temporalMode?: "CURRENT" | "HISTORICAL";
     asOf?: string;
     sourceFormat?: "TEXT" | "PDF";
+    evidence?: string;
   },
   act: LegalActDescriptor,
   freshness?: TemporalFreshnessResult
@@ -480,11 +481,12 @@ function publicToolResult(
       : null,
     sourceUrl: record.sourceUrl ?? null,
     sourceFormat: record.sourceFormat ?? null,
+    evidence: record.evidence ?? null,
     fetchedAt: record.fetchedAt,
     marker,
     instruction:
       record.status === "VERIFIED"
-        ? "Copy the marker verbatim onto the same line as this exact legal reference."
+        ? "Copy the marker verbatim onto the same line as this exact legal reference. When the user asks for the wording of a statute provision, use the returned evidence as the official provision text and do not reconstruct it from model memory."
         : "Do not present this reference as verified; if it must be mentioned, use the unverified marker."
   });
 }
@@ -992,6 +994,12 @@ export class LegalVerificationToolRuntime {
               ? {
                   sourceFormat:
                     statutoryRecord.sourceFormat
+                }
+              : {}),
+            ...(statutoryRecord.evidence
+              ? {
+                  evidence:
+                    statutoryRecord.evidence
                 }
               : {})
           },
