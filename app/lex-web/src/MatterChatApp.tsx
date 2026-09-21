@@ -1200,9 +1200,10 @@ export default function MatterChatApp({
         ? selected.filter(
             (item) => item !== name
           )
-        : [...selected, name].slice(
-            -16
-          );
+        : [
+            ...selected,
+            name
+          ];
     });
   }
 
