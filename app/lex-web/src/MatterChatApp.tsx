@@ -117,6 +117,16 @@ type ExtendedExecution = SessionExecutionResponse & {
   domainSkills?: string[];
 };
 
+type ExecutionDiagnostic = {
+  friendly: string;
+  code: string;
+  status?: number;
+  reason?: string;
+  description?: string;
+  stage?: string;
+  trace?: ApiError["trace"];
+};
+
 const WELCOME: CaseChatMessage = {
   id: "welcome",
   role: "system",
@@ -726,6 +736,14 @@ export default function MatterChatApp({
   const [pendingFirstMessage, setPendingFirstMessage] = useState<string | null>(null);
   const [executing, setExecuting] = useState(false);
   const [executionError, setExecutionError] = useState("");
+  const [executionDiagnostic, setExecutionDiagnostic] =
+    useState<ExecutionDiagnostic | null>(null);
+  const [executionStage, setExecutionStage] =
+    useState("Przygotowanie sesji");
+  const [executionElapsedSeconds, setExecutionElapsedSeconds] =
+    useState(0);
+  const [runtimePulse, setRuntimePulse] =
+    useState<"CHECKING" | "OK" | "LOST">("CHECKING");
   const [processWorkflowVisible, setProcessWorkflowVisible] =
     useState(false);
   const [processWorkflowRefresh, setProcessWorkflowRefresh] =
@@ -1293,6 +1311,66 @@ export default function MatterChatApp({
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, executing]);
+
+  useEffect(() => {
+    if (!executing) {
+      setExecutionElapsedSeconds(0);
+      setRuntimePulse("CHECKING");
+      return;
+    }
+
+    let cancelled = false;
+    const startedAt = Date.now();
+
+    const tick = () => {
+      if (!cancelled) {
+        setExecutionElapsedSeconds(
+          Math.max(
+            0,
+            Math.floor(
+              (Date.now() - startedAt) /
+                1000
+            )
+          )
+        );
+      }
+    };
+
+    const probeRuntime = async () => {
+      try {
+        await getHealth();
+        if (!cancelled) {
+          setRuntimePulse("OK");
+        }
+      } catch {
+        if (!cancelled) {
+          setRuntimePulse("LOST");
+        }
+      }
+    };
+
+    tick();
+    void probeRuntime();
+    const clock = window.setInterval(
+      tick,
+      1000
+    );
+    const heartbeat =
+      window.setInterval(
+        () => {
+          void probeRuntime();
+        },
+        4000
+      );
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(clock);
+      window.clearInterval(
+        heartbeat
+      );
+    };
+  }, [executing]);
 
   useEffect(() => {
     if (
@@ -1919,7 +1997,11 @@ export default function MatterChatApp({
 
     setQuery("");
     setExecuting(true);
+    setExecutionStage(
+      "Przygotowanie sesji"
+    );
     setExecutionError("");
+    setExecutionDiagnostic(null);
     setGeneratedDocumentMessage("");
 
     try {
@@ -1931,6 +2013,9 @@ export default function MatterChatApp({
         ) &&
         !readyAccount
       ) {
+        setExecutionStage(
+          "Łączenie konta modelu"
+        );
         const connected =
           await connectProviderAccount();
         if (!connected) {
@@ -1958,6 +2043,11 @@ export default function MatterChatApp({
         );
       }
 
+      setExecutionStage(
+        provider === "local"
+          ? "Przygotowanie modelu lokalnego"
+          : "Sprawdzanie gotowości modelu"
+      );
       const localPreparationError =
         await prepareLocalPrimaryModel();
       if (localPreparationError) {
@@ -1974,6 +2064,9 @@ export default function MatterChatApp({
         documentRequest &&
         caseId
       ) {
+        setExecutionStage(
+          "Tworzenie dokumentu i weryfikacja źródeł"
+        );
         const generated =
           await generateLegalDocument(
             executionCaseId,
@@ -2115,6 +2208,9 @@ export default function MatterChatApp({
         return;
       }
 
+      setExecutionStage(
+        "Analiza prawna, routing i weryfikacja źródeł"
+      );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2144,6 +2240,9 @@ export default function MatterChatApp({
         }
       }) as ExtendedExecution;
 
+      setExecutionStage(
+        "Finalizacja odpowiedzi"
+      );
       if (result.processWorkflow) {
         setProcessWorkflowVisible(true);
         setProcessWorkflowRefresh(
@@ -2252,6 +2351,45 @@ export default function MatterChatApp({
                                   ? code
                                   : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
+      setExecutionDiagnostic({
+        friendly,
+        code,
+        ...(error instanceof ApiError
+          ? {
+              status:
+                error.status,
+              ...(error.reason
+                ? {
+                    reason:
+                      error.reason
+                  }
+                : {}),
+              ...(error.description
+                ? {
+                    description:
+                      error.description
+                  }
+                : {}),
+              ...(error.stage
+                ? {
+                    stage:
+                      error.stage
+                  }
+                : {}),
+              ...(error.trace
+                ? {
+                    trace:
+                      error.trace
+                  }
+                : {})
+            }
+          : {
+              description:
+                error instanceof Error
+                  ? `${error.name}: ${error.message}`
+                  : String(error)
+            })
+      });
       setMessages((current) => [
         ...current,
         {
@@ -2951,10 +3089,38 @@ export default function MatterChatApp({
                 </article>
               ))}
               {executing ? (
-                <article className="chat-message chat-message-assistant chat-thinking">
-                  <div className="chat-message-role">Lex Machina</div>
+                <article
+                  className="chat-message chat-message-assistant chat-thinking chat-working-status"
+                  role="status"
+                  aria-live="polite"
+                >
+                  <div className="chat-message-role">
+                    Lex Machina
+                  </div>
+                  <div className="chat-working-head">
+                    <span
+                      className="chat-working-spinner"
+                      aria-hidden="true"
+                    />
+                    <strong>Pracuję</strong>
+                    <span>
+                      {executionElapsedSeconds}s
+                    </span>
+                  </div>
                   <div className="chat-message-content">
-                    Analizuję, dobieram dziedziny i skille oraz waliduję cytowania…
+                    {executionStage}
+                  </div>
+                  <div className="chat-working-meta">
+                    <span>
+                      {runtimePulse === "OK"
+                        ? "Runtime odpowiada"
+                        : runtimePulse === "LOST"
+                          ? "Brak odpowiedzi z runtime — operacja nadal oczekuje"
+                          : "Sprawdzam runtime…"}
+                    </span>
+                    <span>
+                      To okno aktualizuje się podczas oczekiwania na model i źródła.
+                    </span>
                   </div>
                 </article>
               ) : null}
@@ -3229,7 +3395,102 @@ export default function MatterChatApp({
                 </p>
               ) : null}
               {executionError ? (
-                <p className="chat-inline-error">{executionError}</p>
+                <div className="chat-error-diagnostic">
+                  <p className="chat-inline-error">
+                    {executionError}
+                  </p>
+                  {executionDiagnostic ? (
+                    <details>
+                      <summary>
+                        Pełne informacje diagnostyczne
+                      </summary>
+                      <dl>
+                        <div>
+                          <dt>Kod</dt>
+                          <dd>
+                            <code>
+                              {executionDiagnostic.code}
+                            </code>
+                          </dd>
+                        </div>
+                        {executionDiagnostic.status !== undefined ? (
+                          <div>
+                            <dt>HTTP</dt>
+                            <dd>
+                              {executionDiagnostic.status}
+                            </dd>
+                          </div>
+                        ) : null}
+                        {executionDiagnostic.stage ? (
+                          <div>
+                            <dt>Etap</dt>
+                            <dd>
+                              <code>
+                                {executionDiagnostic.stage}
+                              </code>
+                            </dd>
+                          </div>
+                        ) : null}
+                        {executionDiagnostic.reason ? (
+                          <div>
+                            <dt>Powód</dt>
+                            <dd>
+                              <code>
+                                {executionDiagnostic.reason}
+                              </code>
+                            </dd>
+                          </div>
+                        ) : null}
+                      </dl>
+                      {executionDiagnostic.description ? (
+                        <pre>
+                          {executionDiagnostic.description}
+                        </pre>
+                      ) : null}
+                      {executionDiagnostic.trace &&
+                      executionDiagnostic.trace.length > 0 ? (
+                        <ol className="chat-error-trace">
+                          {executionDiagnostic.trace.map(
+                            (event, index) => (
+                              <li
+                                key={
+                                  String(
+                                    event.sequence ??
+                                      index
+                                  ) +
+                                  ":" +
+                                  String(
+                                    event.target ??
+                                      ""
+                                  )
+                                }
+                              >
+                                <code>
+                                  {event.sequence ??
+                                    index + 1}
+                                  {" · "}
+                                  {event.type ??
+                                    "event"}
+                                  {" · "}
+                                  {event.target ??
+                                    "unknown"}
+                                  {" · "}
+                                  {event.status ??
+                                    "?"}
+                                </code>
+                                {event.detail ? (
+                                  <span>
+                                    {event.detail}
+                                  </span>
+                                ) : null}
+                              </li>
+                            )
+                          )}
+                        </ol>
+                      ) : null}
+                    </details>
+                  ) : null}
+                </div>
               ) : null}
             </div>
           </section>
