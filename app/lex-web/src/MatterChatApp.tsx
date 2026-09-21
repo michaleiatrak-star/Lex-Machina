@@ -2686,12 +2686,18 @@ export default function MatterChatApp({
                             <span>{item.status} · {item.kind}</span>
                             <strong>{item.claim}</strong>
                             {item.sourceUrl ? (
-                              <button
-                                type="button"
-                                onClick={() => void openExternalUrl(item.sourceUrl!)}
+                              <a
+                                className="source-inline-link"
+                                href={item.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => {
+                                  event.preventDefault();
+                                  void openExternalUrl(item.sourceUrl!);
+                                }}
                               >
-                                Otwórz źródło w przeglądarce ↗
-                              </button>
+                                Otwórz źródło ↗
+                              </a>
                             ) : null}
                           </li>
                         ))}
