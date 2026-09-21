@@ -27,8 +27,8 @@ function normalizeLinkMarkup(value: string): string {
       (_match, label: string, _shown: string, target: string) =>
         `[${label}](${target})`
     )
-    .replace(/\\\((?=https:\/\/)/giu, "(")
-    .replace(/(?<=https:\/\/[^\s]{1,2048})\\\)/giu, ")");
+    .replace(/\\\(/gu, "(")
+    .replace(/\\\)/gu, ")");
 }
 
 export function SourceLinkedText({
