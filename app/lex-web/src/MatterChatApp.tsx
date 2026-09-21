@@ -1869,7 +1869,18 @@ export default function MatterChatApp({
           : code === "PROVIDER_EXECUTION_FAILED"
             ? provider === "local"
               ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
-              : "Provider odrzucił lub przerwał wykonanie."
+              : `Provider odrzucił lub przerwał wykonanie${
+                  reason
+                    ? ` (kod: ${reason})`
+                    : ""
+                }.`
+          : code ===
+              "LEGAL_WORKFLOW_EXECUTION_FAILED"
+            ? `Deterministyczny workflow prawny zatrzymał wykonanie${
+                reason
+                  ? ` na etapie: ${reason}`
+                  : ""
+              }.`
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
               ? "Nie udało się bezpiecznie dołączyć wybranych fragmentów dokumentu."
               : code === "PROCESS_PLEADING_STATE_REQUIRED"
