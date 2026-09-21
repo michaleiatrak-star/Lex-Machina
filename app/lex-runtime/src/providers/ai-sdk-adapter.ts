@@ -985,6 +985,13 @@ async function toAiSdkTools(
   );
 }
 
+export function accountSessionBackendAllowed(
+  id: ProviderId
+): boolean {
+  return id !==
+    "anthropic";
+}
+
 function providerLabel(id: ProviderId): string {
   if (id === "openai") return "OpenAI";
   if (id === "anthropic") return "Anthropic";
@@ -1114,8 +1121,9 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
       )
     ) {
       if (
-        this.id ===
-          "anthropic"
+        !accountSessionBackendAllowed(
+          this.id
+        )
       ) {
         throw new Error(
           "ACCOUNT_SESSION_PROVIDER_POLICY_UNSUPPORTED:anthropic"
