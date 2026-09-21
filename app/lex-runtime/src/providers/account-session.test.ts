@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  accountLoginLaunchMode,
   accountSessionModelId,
   accountSessionResumeMode,
   claudeSubscriptionAuthenticated,
@@ -59,6 +60,33 @@ describe("provider account-session transport", () => {
     expect(
       accountSessionResumeMode()
     ).toBe("LAST_OR_NEW");
+  });
+
+  it("launches Claude subscription OAuth in a visible Windows terminal", () => {
+    expect(
+      accountLoginLaunchMode(
+        "anthropic",
+        "win32"
+      )
+    ).toBe(
+      "VISIBLE_TERMINAL"
+    );
+    expect(
+      accountLoginLaunchMode(
+        "anthropic",
+        "linux"
+      )
+    ).toBe(
+      "CAPTURED"
+    );
+    expect(
+      accountLoginLaunchMode(
+        "openai",
+        "win32"
+      )
+    ).toBe(
+      "CAPTURED"
+    );
   });
 
   it("falls back to a new host session only for missing-session failures", () => {
