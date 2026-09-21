@@ -714,13 +714,12 @@ export default function MatterChatApp({
         query,
         routes,
         skills,
-        manualSkillSelection
+        []
       ),
     [
       query,
       routes,
       skills,
-      manualSkillSelection
     ]
   );
 
@@ -1579,7 +1578,7 @@ export default function MatterChatApp({
         trimmed,
         routes,
         skills,
-        manualSkillSelection
+        []
       );
     if (!route) {
       setExecutionError(
@@ -1674,7 +1673,10 @@ export default function MatterChatApp({
             trimmed
           ),
           automaticSkills,
-          manualSkillSelection
+          [],
+          manualSkills === null
+            ? null
+            : manualSkillSelection
         ),
         provider: runtimeProvider,
         model,
