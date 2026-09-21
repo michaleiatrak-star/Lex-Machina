@@ -88,6 +88,90 @@ async function main():
         );
       }
 
+      if (
+        source === "eureka"
+      ) {
+        const [probe] =
+          await runtime.runTools([
+            {
+              id:
+                "g40-eureka-search",
+              name:
+                "search_federated_legal_sources",
+              input: {
+                source:
+                  "eureka",
+                query:
+                  "VAT",
+                limit:
+                  1
+              }
+            }
+          ]);
+        if (
+          !probe ||
+          probe.content.includes(
+            "SOURCE_UNAVAILABLE"
+          )
+        ) {
+          throw new Error(
+            "G40_EUREKA_LIVE_SEARCH_FAILED"
+          );
+        }
+        console.log(
+          "G40_LIVE_QUERY_PASS",
+          "eureka"
+        );
+      }
+
+      if (
+        source === "uodo"
+      ) {
+        const [probe] =
+          await runtime.runTools([
+            {
+              id:
+                "g40-uodo-recent",
+              name:
+                "call_federated_legal_source",
+              input: {
+                source:
+                  "uodo",
+                tool:
+                  "uodo_recent",
+                arguments: {
+                  limit:
+                    1
+                }
+              }
+            }
+          ]);
+        if (
+          !probe ||
+          probe.content.includes(
+            "SOURCE_UNAVAILABLE"
+          ) ||
+          !probe.content.includes(
+            "UODO_OFFICIAL_API"
+          )
+        ) {
+          throw new Error(
+            "G40_UODO_OFFICIAL_FALLBACK_FAILED:" +
+              (
+                probe?.content ??
+                "<missing>"
+              ).slice(
+                0,
+                800
+              )
+          );
+        }
+        console.log(
+          "G40_LIVE_QUERY_PASS",
+          "uodo-official-fallback"
+        );
+      }
+
       console.log(
         "G40_SOURCE_PASS",
         source
