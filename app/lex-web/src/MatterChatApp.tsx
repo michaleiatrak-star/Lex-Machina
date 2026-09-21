@@ -479,7 +479,7 @@ export function localModelFailureMessage(
 }
 
 function providerFailureMessage(
-  provider: PrimaryProviderSource,
+  provider: PrimaryModelSource,
   reason?: string
 ): string {
   switch (reason) {
