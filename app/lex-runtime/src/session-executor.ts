@@ -710,16 +710,10 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
-    const protectedDocumentAttachments =
-      namespaceDocumentAttachmentTokens(
-        request.documentAttachments ??
-          []
-      );
-
     const contextSelection =
       orchestrateDocumentContext({
         attachments:
-          protectedDocumentAttachments,
+          request.documentAttachments ?? [],
         query: request.query,
         ...(request.modelContextTokens
           ? {
@@ -735,7 +729,9 @@ export class SafeSessionExecutor implements SessionExecutor {
           : {})
       });
     const attachments =
-      contextSelection.attachments;
+      namespaceDocumentAttachmentTokens(
+        contextSelection.attachments
+      );
     const citationSources =
       contextSelection.citationSources;
     const documentContext =
