@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  finalizeDocument,
   isDesktopShell,
-  processStoredCaseFile
+  listCaseFiles,
+  processStoredCaseFile,
+  uploadCaseFile,
+  type StoredUploadResponse
 } from "./api.js";
 import {
   createWorkspaceFolder,
@@ -79,6 +83,8 @@ export function WorkspaceManager({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [caseFiles, setCaseFiles] =
+    useState<StoredUploadResponse[]>([]);
   const [preview, setPreview] = useState<{
     item: WorkspaceItem;
     url?: string;
@@ -87,12 +93,80 @@ export function WorkspaceManager({
   } | null>(null);
 
   async function refresh(): Promise<void> {
-    if (!caseId) {
+  
+  function processingFor(
+    item: WorkspaceItem
+  ): StoredUploadResponse["processing"] | undefined {
+    return caseFiles.find(
+      (file) =>
+        file.uploadId ===
+        item.itemId
+    )?.processing;
+  }
+
+  async function addFiles(
+    files: FileList | null
+  ): Promise<void> {
+    if (
+      !files ||
+      files.length === 0
+    ) return;
+    await run(async () => {
+      for (
+        const file of
+        Array.from(files)
+      ) {
+        const stored =
+          await uploadCaseFile(
+            caseId,
+            file
+          );
+        if (selectedFolder) {
+          await moveWorkspaceItem(
+            caseId,
+            stored.uploadId,
+            selectedFolder
+          );
+        }
+      }
+      setNotice(
+        `Dodano ${files.length} plik(ów) do akt sprawy.`
+      );
+    });
+  }
+
+  async function runAutomaticPrivacy(
+    item: WorkspaceItem
+  ): Promise<void> {
+    await run(async () => {
+      const review =
+        await processStoredCaseFile(
+          caseId,
+          item.itemId
+        );
+      const result =
+        await finalizeDocument(
+          caseId,
+          review.documentId,
+          []
+        );
+      setNotice(
+        `„${item.filename}”: OCR/pseudonimizacja zakończona · ${result.ocrPages} stron OCR · ${result.privacy.findings} anonimizacji · osobny vault/deanonimizator zapisany dla ${result.documentId}.`
+      );
+    });
+  }
+
+  if (!caseId) {
       setWorkspace(null);
       return;
     }
-    const next = await getWorkspace(caseId);
+    const [next, files] =
+      await Promise.all([
+        getWorkspace(caseId),
+        listCaseFiles(caseId)
+      ]);
     setWorkspace(next);
+    setCaseFiles(files.uploads);
     if (
       selectedFolder &&
       !next.folders.some((item) => item.folderId === selectedFolder)
@@ -108,9 +182,15 @@ export function WorkspaceManager({
       return;
     }
     setError("");
-    void getWorkspace(caseId)
-      .then((next) => {
-        if (!cancelled) setWorkspace(next);
+    void Promise.all([
+      getWorkspace(caseId),
+      listCaseFiles(caseId)
+    ])
+      .then(([next, files]) => {
+        if (!cancelled) {
+          setWorkspace(next);
+          setCaseFiles(files.uploads);
+        }
       })
       .catch((failure) => {
         if (!cancelled) {
@@ -225,14 +305,33 @@ export function WorkspaceManager({
             w chronionym magazynie sprawy i nie są przenoszone do jawnych ścieżek.
           </p>
         </div>
-        <button
-          type="button"
-          className="chat-secondary-action"
-          disabled={busy}
-          onClick={() => void refresh()}
-        >
-          Odśwież
-        </button>
+        <div className="workspace-header-actions">
+          {canWrite ? (
+            <label className="chat-secondary-action workspace-file-upload">
+              + Dodaj pliki
+              <input
+                type="file"
+                multiple
+                hidden
+                disabled={busy}
+                onChange={(event) => {
+                  void addFiles(
+                    event.currentTarget.files
+                  );
+                  event.currentTarget.value = "";
+                }}
+              />
+            </label>
+          ) : null}
+          <button
+            type="button"
+            className="chat-secondary-action"
+            disabled={busy}
+            onClick={() => void refresh()}
+          >
+            Odśwież
+          </button>
+        </div>
       </div>
 
       <div className="workspace-manager-grid">
@@ -315,6 +414,15 @@ export function WorkspaceManager({
                     <span>
                       {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
                     </span>
+                    {item.kind === "UPLOAD" ? (
+                      <small className="workspace-processing-status">
+                        {processingFor(item)
+                          ? processingFor(item)!.ocrPages > 0
+                            ? `OCR ✓ · anonimizacja ✓ · ${processingFor(item)!.ocrPages}/${processingFor(item)!.totalPages} stron OCR · vault per dokument`
+                            : `Tekst cyfrowy ✓ · anonimizacja ✓ · OCR niewymagany · vault per dokument`
+                          : "Nieprzetworzony · OCR/anonimizacja oczekuje"}
+                      </small>
+                    ) : null}
                   </div>
                   <div className="workspace-item-actions">
                     <button type="button" disabled={busy} onClick={() => void showPreview(item)}>
@@ -348,24 +456,12 @@ export function WorkspaceManager({
                         disabled={busy}
                         title="Uruchom lokalny OCR i pseudonimizację dla tego pliku"
                         onClick={() => void run(async () => {
-                          const result =
-                            await processStoredCaseFile(
-                              caseId,
-                              item.itemId
-                            );
-                          const ocrPages =
-                            result.pages.filter(
-                              (page) =>
-                                page.source === "OCR"
-                            ).length;
-                          setNotice(
-                            `„${item.filename}”: ${result.totalPages} stron, ` +
-                            `${ocrPages} przez OCR, ` +
-                            `${result.suggestions.length} elementów do decyzji prywatności.`
+                          await runAutomaticPrivacy(
+                            item
                           );
                         })}
                       >
-                        Uruchom OCR i anonimizację
+                        OCR + anonimizuj automatycznie
                       </button>
                     ) : null}
                     {canWrite ? (
