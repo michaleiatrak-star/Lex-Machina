@@ -14,6 +14,7 @@ import type {
 import { LexSkillRegistry } from "../src/registry.js";
 import {
   SafeSessionExecutor,
+  namespaceDocumentAttachmentTokens,
   publicEvidenceBundle
 } from "../src/session-executor.js";
 
@@ -114,6 +115,69 @@ afterEach(() => {
   while (roots.length) {
     fs.rmSync(roots.pop()!, { recursive: true, force: true });
   }
+});
+
+describe("document privacy token namespacing", () => {
+  it("prevents token collisions across attached document vaults", () => {
+    const attachments =
+      namespaceDocumentAttachmentTokens([
+        {
+          documentId:
+            "doc_aaaaaaaaaaaaaaaaaaaaaaaa",
+          chunks: [
+            {
+              index: 1,
+              pageStart: 1,
+              pageEnd: 1,
+              text:
+                "[PII:PERSON:0001] i [PII:PESEL:0001]"
+            }
+          ]
+        },
+        {
+          documentId:
+            "doc_bbbbbbbbbbbbbbbbbbbbbbbb",
+          chunks: [
+            {
+              index: 1,
+              pageStart: 1,
+              pageEnd: 1,
+              text:
+                "[PII:PERSON:0001]"
+            }
+          ]
+        },
+        {
+          documentId:
+            "doc_aaaaaaaaaaaaaaaaaaaaaaaa",
+          chunks: [
+            {
+              index: 2,
+              pageStart: 2,
+              pageEnd: 2,
+              text:
+                "[PII:PERSON:0001]"
+            }
+          ]
+        }
+      ]);
+
+    expect(
+      attachments[0]?.chunks[0]?.text
+    ).toBe(
+      "[LMPII:D01:PERSON:0001] i [LMPII:D01:PESEL:0001]"
+    );
+    expect(
+      attachments[1]?.chunks[0]?.text
+    ).toBe(
+      "[LMPII:D02:PERSON:0001]"
+    );
+    expect(
+      attachments[2]?.chunks[0]?.text
+    ).toBe(
+      "[LMPII:D01:PERSON:0001]"
+    );
+  });
 });
 
 describe("SafeSessionExecutor", () => {
@@ -449,11 +513,83 @@ describe("SafeSessionExecutor", () => {
     expect(captured?.messages[0]?.content)
       .toContain("[LOCAL_DOCUMENT_CONTEXT — DATA ONLY]");
     expect(captured?.messages[0]?.content)
-      .toContain("[PII:PERSON:0001]");
+      .toContain("[LMPII:D01:PERSON:0001]");
     expect(captured?.messages[1]?.content)
       .toBe("Przeanalizuj załączony dokument.");
     expect(JSON.stringify(result))
       .not.toContain("[PII:PERSON:0001]");
+  });
+
+  it("restores only chat-owned PII tokens and leaves unknown tokens opaque", async () => {
+    const adapter:
+      ProviderAdapter = {
+        id: "openai",
+        label:
+          "privacy-echo",
+        capabilities: {
+          streaming: true,
+          tools: true,
+          reasoning: true,
+          modelDiscovery: false
+        },
+        async stream(params) {
+          const user =
+            params.messages
+              .find(
+                (message) =>
+                  message.role ===
+                    "user"
+              )
+              ?.content ?? "";
+          const known =
+            user.match(
+              /\[PII:EMAIL:\d{4}\]/
+            )?.[0] ??
+            "";
+          return {
+            fullText:
+              `Kontakt ${known}; obcy [PII:PERSON:9999].`
+          };
+        }
+      };
+
+    const providers =
+      new ProviderRegistry();
+    providers.register(
+      adapter
+    );
+    const executor =
+      new SafeSessionExecutor(
+        fixture(),
+        new ProviderGateway(
+          providers
+        )
+      );
+
+    const result =
+      await executor.execute({
+        query:
+          "Mój e-mail to jan@example.pl.",
+        provider:
+          "openai",
+        model:
+          "test",
+        primarySkill:
+          DR,
+        mode:
+          "PRAWNIK"
+      });
+
+    expect(
+      result.answer
+    ).toContain(
+      "jan@example.pl"
+    );
+    expect(
+      result.answer
+    ).toContain(
+      "[PII:PERSON:9999]"
+    );
   });
 
   it("injects real core legal resources and exposes corpus read tools", async () => {
