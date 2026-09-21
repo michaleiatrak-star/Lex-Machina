@@ -794,10 +794,7 @@ export function accountLoginLaunchMode(
   provider: ProviderId,
   platform = process.platform
 ): "CAPTURED" | "VISIBLE_TERMINAL" {
-  return (
-    provider === "anthropic" &&
-    platform === "win32"
-  )
+  return platform === "win32"
     ? "VISIBLE_TERMINAL"
     : "CAPTURED";
 }
@@ -835,20 +832,26 @@ async function runVisibleWindowsLogin(
     args
       .map(cmdQuote)
       .join(" ");
+  const loginLabel =
+    provider === "openai"
+      ? "Codex / ChatGPT"
+      : provider === "anthropic"
+        ? "Claude Code"
+        : "Grok Build";
 
   await fsp.writeFile(
     scriptPath,
     [
       "@echo off",
       "setlocal",
-      "title Lex Machina - Claude Code login",
-      "echo Lex Machina otworzy logowanie Claude Code.",
-      "echo Dokoncz logowanie w przegladarce i wroc do tego okna, jesli Claude poprosi o kod.",
+      `title Lex Machina - ${loginLabel} login`,
+      `echo Lex Machina otworzy logowanie: ${loginLabel}.`,
+      "echo Dokoncz oficjalne logowanie w przegladarce i wroc do tego okna, jesli klient poprosi o kod.",
       "echo.",
       `call ${cmdQuote(executable)} ${argumentLine}`,
       "set \"LEX_EXIT=%ERRORLEVEL%\"",
       "echo.",
-      "if not \"%LEX_EXIT%\"==\"0\" echo Logowanie Claude Code nie powiodlo sie. Kod: %LEX_EXIT%",
+      `if not "%LEX_EXIT%"=="0" echo Logowanie ${loginLabel} nie powiodlo sie. Kod: %LEX_EXIT%`,
       "exit /b %LEX_EXIT%"
     ].join("\r\n"),
     "utf8"
