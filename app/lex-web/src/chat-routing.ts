@@ -260,9 +260,12 @@ export function choosePrimaryRoute(
 export function buildSkillSelectionEnvelope(
   query: string,
   automatic: boolean,
-  manualSkills: readonly string[]
+  manualSkills: readonly string[],
+  executionAllowList:
+    readonly string[] | null = null
 ): string {
-  const prioritizedExecutionSkills = getCaseTypeExecutionSkills();
+  const prioritizedExecutionSkills =
+    getCaseTypeExecutionSkills();
   const manual = [
     ...new Set([
       ...manualSkills,
@@ -276,24 +279,43 @@ export function buildSkillSelectionEnvelope(
     )
     .slice(0, 16);
 
-  // AUTO is always genuinely automatic. When execution skills are explicitly
-  // prioritized, the user's Auto-skills switch still controls whether the
-  // router may add further cooperating skills and additional DR domains.
+  // AUTO remains semantic routing. Checkbox state is an allow-list and must
+  // never become workflow priority merely because every skill is selected.
   const effectiveAutomatic =
     prioritizedExecutionSkills.length === 0
       ? true
       : automatic;
 
-  // Domains travel in their own field. Folding them into `manual` would let a
-  // full DR selection exhaust the 16-name manual budget and push every
-  // execution skill out of the envelope.
-  const domains = getAllowedDomainSkills();
+  const domains =
+    getAllowedDomainSkills();
+
+  const execution =
+    executionAllowList === null
+      ? null
+      : [
+          ...new Set([
+            ...executionAllowList,
+            // A deterministic action pins its required execution skill even
+            // if the general panel was narrowed independently.
+            ...prioritizedExecutionSkills
+          ])
+        ]
+          .filter((name) =>
+            name !== "prawny-router-v3" &&
+            name !== "shared" &&
+            name !== "prawo-polskie-v2" &&
+            !name.startsWith("dr-")
+          )
+          .slice(0, 16);
 
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
     auto: effectiveAutomatic,
     manual,
     ...(domains.length > 0
       ? { domains }
+      : {}),
+    ...(execution !== null
+      ? { execution }
       : {}),
     caseType:
       prioritizedExecutionSkills.length > 0
