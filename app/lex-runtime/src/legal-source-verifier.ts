@@ -98,9 +98,11 @@ function readableText(value: string): string {
 }
 
 function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^$()|[\]\\{}]/g, "\\const MAX_EVIDENCE_CHARS = 500;");
+  return value.replace(
+    /[.*+?^$()|[\]\\{}]/g,
+    (match) => "\\" + match
+  );
 }
-
 function articleSection(
   claim: string,
   body: string
