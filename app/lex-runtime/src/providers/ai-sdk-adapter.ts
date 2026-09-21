@@ -261,8 +261,229 @@ export function buildLocalToolSystemPrompt(
   ].join("\n");
 }
 
+export function buildLocalChatRequest(
+  modelId: string,
+  systemPrompt: string,
+  messages: ProviderStreamParams["messages"]
+): {
+  model: string;
+  messages: Array<{
+    role: "system" | "user" | "assistant";
+    content: string;
+  }>;
+  max_tokens: number;
+  stream: true;
+} {
+  return {
+    model: modelId,
+    messages: [
+      {
+        role: "system",
+        content: systemPrompt
+      },
+      ...messages
+    ],
+    max_tokens: MAX_OUTPUT_TOKENS,
+    stream: true
+  };
+}
+
+async function streamLocalChatCompletion(
+  endpoint: string,
+  modelId: string,
+  systemPrompt: string,
+  messages: ProviderStreamParams["messages"],
+  abortSignal?: AbortSignal
+): Promise<ProviderStreamResult> {
+  const url =
+    `${endpoint.replace(/\/$/, "")}/chat/completions`;
+  let response: Response;
+  try {
+    response = await fetch(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          Accept:
+            "text/event-stream"
+        },
+        body: JSON.stringify(
+          buildLocalChatRequest(
+            modelId,
+            systemPrompt,
+            messages
+          )
+        ),
+        ...(abortSignal
+          ? {
+              signal:
+                abortSignal
+            }
+          : {})
+      }
+    );
+  } catch (error) {
+    throw new Error(
+      `LOCAL_MODEL_HTTP_NETWORK:${
+        error instanceof Error
+          ? error.message
+          : String(error)
+      }`
+    );
+  }
+
+  if (!response.ok) {
+    const detail =
+      await response.text()
+        .catch(() => "");
+    throw new Error(
+      `HTTP status ${response.status}: ${detail
+        .replace(/[\r\n]+/g, " ")
+        .slice(-1200)}`
+    );
+  }
+
+  if (!response.body) {
+    throw new Error(
+      "LOCAL_MODEL_HTTP_EMPTY_BODY"
+    );
+  }
+
+  const reader =
+    response.body.getReader();
+  const decoder =
+    new TextDecoder();
+  let buffer = "";
+  let fullText = "";
+
+  const consumeLine = (
+    rawLine: string
+  ) => {
+    const line =
+      rawLine.trim();
+    if (
+      !line.startsWith(
+        "data:"
+      )
+    ) {
+      return;
+    }
+    const data =
+      line.slice(5).trim();
+    if (
+      !data ||
+      data === "[DONE]"
+    ) {
+      return;
+    }
+
+    let payload: {
+      choices?: Array<{
+        delta?: {
+          content?: unknown;
+        };
+      }>;
+      error?: {
+        message?: unknown;
+      };
+    };
+    try {
+      payload =
+        JSON.parse(data) as
+          typeof payload;
+    } catch {
+      throw new Error(
+        "LOCAL_MODEL_HTTP_INVALID_SSE_JSON"
+      );
+    }
+
+    if (
+      payload.error
+    ) {
+      throw new Error(
+        `LOCAL_MODEL_HTTP_STREAM_ERROR:${
+          typeof payload.error
+            .message === "string"
+            ? payload.error
+                .message
+            : "unknown"
+        }`
+      );
+    }
+
+    const content =
+      payload.choices?.[0]
+        ?.delta?.content;
+    if (
+      typeof content ===
+        "string"
+    ) {
+      fullText += content;
+    }
+  };
+
+  while (true) {
+    const {
+      done,
+      value
+    } =
+      await reader.read();
+    buffer +=
+      decoder.decode(
+        value,
+        {
+          stream:
+            !done
+        }
+      );
+
+    let newline =
+      buffer.indexOf("\n");
+    while (
+      newline >= 0
+    ) {
+      const line =
+        buffer.slice(
+          0,
+          newline
+        );
+      buffer =
+        buffer.slice(
+          newline + 1
+        );
+      consumeLine(line);
+      newline =
+        buffer.indexOf("\n");
+    }
+
+    if (done) {
+      if (
+        buffer.trim()
+      ) {
+        consumeLine(
+          buffer
+        );
+      }
+      break;
+    }
+  }
+
+  if (!fullText.trim()) {
+    throw new Error(
+      "LOCAL_MODEL_HTTP_EMPTY_RESPONSE"
+    );
+  }
+
+  return {
+    fullText
+  };
+}
+
 async function streamLocalModel(
-  model: LanguageModel,
+  endpoint: string,
+  modelId: string,
   params: ProviderStreamParams
 ): Promise<ProviderStreamResult> {
   const allowedTools =
@@ -304,19 +525,15 @@ async function streamLocalModel(
     } = params;
     try {
       result =
-        await streamModel(
-          model,
-          {
-            ...localParams,
-            systemPrompt:
-              buildLocalToolSystemPrompt(
-                params,
-                toolTranscript
-              ),
-            reasoning:
-              "none"
-          },
-          "Local llama.cpp"
+        await streamLocalChatCompletion(
+          endpoint,
+          modelId,
+          buildLocalToolSystemPrompt(
+            params,
+            toolTranscript
+          ),
+          localParams.messages,
+          localParams.abortSignal
         );
     } catch (error) {
       const detail =
@@ -662,16 +879,16 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
       if (this.id !== "openai" || !this.localModels) {
         throw new Error("LOCAL_MODEL_RUNTIME_UNAVAILABLE");
       }
-      const configuredModel = await this.localModels.ensureRunning(params.model);
-      const { createOpenAI } = await import("@ai-sdk/openai");
-      const local = createOpenAI({
-        apiKey: "lex-machina-local-only",
-        baseURL: this.localModels.status().endpoint
-      });
+      const configuredModel =
+        await this.localModels
+          .ensureRunning(
+            params.model
+          );
       return streamLocalModel(
-        local.chat(
-          configuredModel.id
-        ),
+        this.localModels
+          .status()
+          .endpoint,
+        configuredModel.id,
         {
           ...params,
           model:
