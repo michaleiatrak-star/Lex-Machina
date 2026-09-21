@@ -245,6 +245,52 @@ export function choosePrimaryRoute(
   if (manualRoute) return manualRoute;
   if (routes.length === 0) return "";
 
+  const normalizedQuery =
+    normalize(query)
+      .replace(/\s+/g, " ")
+      .trim();
+  const deterministicRouteHints: Array<{
+    routePrefix: string;
+    patterns: RegExp[];
+  }> = [
+    {
+      routePrefix:
+        "dr-03-prawo-karne",
+      patterns: [
+        /\bk\.?\s*k\.?\b/,
+        /\bkodeks karny\b/,
+        /\bk\.?\s*p\.?\s*k\.?\b/,
+        /\bkodeks postepowania karnego\b/,
+        /\bprzestepstw[a-z]*\b/,
+        /\bodpowiedzialnosc karn[a-z]*\b/
+      ]
+    }
+  ];
+  for (
+    const hint
+    of deterministicRouteHints
+  ) {
+    if (
+      hint.patterns.some(
+        (pattern) =>
+          pattern.test(
+            normalizedQuery
+          )
+      )
+    ) {
+      const hinted =
+        routes.find(
+          (route) =>
+            route.startsWith(
+              hint.routePrefix
+            )
+        );
+      if (hinted) {
+        return hinted;
+      }
+    }
+  }
+
   const byName = new Map(skills.map((skill) => [skill.name, skill]));
   const queryTokens = tokens(query);
   const ranked = routes
