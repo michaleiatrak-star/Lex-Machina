@@ -465,6 +465,9 @@ function cleanEnvironment():
     PRAWO_PL_MCP_CMD_KIO:
       env.PRAWO_PL_MCP_CMD_KIO ??
       "uvx --from kio-orzeczenia-mcp==0.4.3 kio-orzeczenia-mcp",
+    PRAWO_PL_MCP_CMD_UODO:
+      env.PRAWO_PL_MCP_CMD_UODO ??
+      "node dist/uodo-official-mcp-server.js",
     PRAWO_PL_MCP_CMD_EU_SPARQL:
       env.PRAWO_PL_MCP_CMD_EU_SPARQL ??
       "npx -y @matematicsolutions/mcp-eu-sparql@1.2.0",
