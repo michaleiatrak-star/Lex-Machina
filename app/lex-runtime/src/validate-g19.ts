@@ -329,7 +329,7 @@ function appFor(
         );
         return new Response(
           "<html><title>Kodeks cywilny</title>" +
-          "<body>Art. 5. Treść.</body></html>",
+          "<body><h2>Art. 5.</h2><p>Treść.</p></body></html>",
           {
             status: 200,
             headers: {
