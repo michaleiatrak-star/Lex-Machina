@@ -450,6 +450,8 @@ export async function startLocalServer(options?: {
       undefined,
       new LocalPdfTextExtractor()
     );
+  const legalFederationTools =
+    new LegalFederationToolRuntime();
 
   const sessionExecutor =
     new SafeSessionExecutor(
@@ -463,7 +465,8 @@ export async function startLocalServer(options?: {
           undefined,
           new TemporalSourceFreshnessChecker()
         ),
-      new LocalStanzaNamedEntityRecognizer()
+      new LocalStanzaNamedEntityRecognizer(),
+      legalFederationTools
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(
