@@ -189,6 +189,50 @@ function parseCodexThreadId(
   return null;
 }
 
+function parseCodexFinalText(
+  stdout: string
+): string | null {
+  let finalText = "";
+  for (
+    const line
+    of stdout.split(/\r?\n/)
+  ) {
+    try {
+      const event =
+        JSON.parse(line) as {
+          type?: unknown;
+          item?: unknown;
+        };
+      if (
+        event.type !==
+          "item.completed" ||
+        !event.item ||
+        typeof event.item !==
+          "object" ||
+        Array.isArray(event.item)
+      ) {
+        continue;
+      }
+      const item =
+        event.item as
+          Record<string, unknown>;
+      if (
+        item.type ===
+          "agent_message" &&
+        typeof item.text ===
+          "string" &&
+        item.text.trim()
+      ) {
+        finalText =
+          item.text.trim();
+      }
+    } catch {
+      // Non-JSON lines are ignored.
+    }
+  }
+  return finalText || null;
+}
+
 function parseClaudeResult(
   stdout: string
 ): {
@@ -1324,7 +1368,6 @@ export class AccountSessionManager {
       path.join(os.tmpdir(), "lex-account-session-")
     );
     try {
-      let result: RunResult;
       if (
         provider === "openai" ||
         provider === "anthropic"
@@ -1337,93 +1380,308 @@ export class AccountSessionManager {
 
       if (provider === "openai") {
         const outputPath =
-          path.join(workDir, "last-message.txt");
-        result = await runCli(
-          provider,
-          [
-            "exec",
-            "--ephemeral",
-            "--ignore-user-config",
-            "--sandbox",
-            "read-only",
-            "--skip-git-repo-check",
-            "--cd",
+          path.join(
             workDir,
-            "--output-last-message",
-            outputPath,
-            "-"
-          ],
-          prompt,
-          COMMAND_TIMEOUT_MS,
+            "last-message.txt"
+          );
+        const commonArgs = [
+          "exec",
+          "--ignore-user-config",
+          "--ignore-rules",
+          "--config",
+          "mcp_servers={}",
+          "--config",
+          "features.plugins=false",
+          "--sandbox",
+          "read-only",
+          "--skip-git-repo-check",
+          "--cd",
           workDir,
-          abortSignal
-        );
-        if (result.code !== 0) {
-          throw normalizeCliFailure(provider, result);
+          "--json",
+          "--output-last-message",
+          outputPath
+        ];
+        const runCodex = (
+          tail: string[]
+        ) =>
+          runCli(
+            provider,
+            [
+              ...commonArgs,
+              ...tail
+            ],
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            workDir,
+            abortSignal
+          );
+
+        let result:
+          RunResult | null = null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider
+          );
+        if (savedSessionId) {
+          result =
+            await runCodex([
+              "resume",
+              savedSessionId,
+              "-"
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider
+              );
+              result = null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
         }
+
+        if (!result) {
+          const last =
+            await runCodex([
+              "resume",
+              "--last",
+              "-"
+            ]);
+          if (
+            last.code === 0
+          ) {
+            result = last;
+          } else {
+            const detail =
+              last.stderr +
+              "\n" +
+              last.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                last
+              );
+            }
+            result =
+              await runCodex([
+                "-"
+              ]);
+          }
+        }
+
+        if (result.code !== 0) {
+          throw normalizeCliFailure(
+            provider,
+            result
+          );
+        }
+        const threadId =
+          parseCodexThreadId(
+            result.stdout
+          );
+        if (threadId) {
+          await writeAccountSessionId(
+            provider,
+            threadId
+          );
+        }
+
         try {
           const finalText =
-            await fsp.readFile(outputPath, "utf8");
+            await fsp.readFile(
+              outputPath,
+              "utf8"
+            );
           if (finalText.trim()) {
             return finalText.trim();
           }
         } catch {
-          // Fall back to stdout below.
+          // Fall through to JSONL parsing.
         }
-      } else if (provider === "anthropic") {
-        const fixedQuery =
-          "Treat all piped stdin content as the complete Lex Machina request. Follow that request and return only the requested response. Do not access local files or use local tools.";
-        result = await runCli(
-          provider,
-          [
-            "-p",
-            fixedQuery,
-            "--output-format",
-            "text",
-            "--bare",
-            "--disallowedTools",
-            "*",
-            "--no-session-persistence"
-          ],
-          prompt,
-          COMMAND_TIMEOUT_MS,
-          workDir,
-          abortSignal
+        const finalText =
+          parseCodexFinalText(
+            result.stdout
+          );
+        if (finalText) {
+          return finalText;
+        }
+        throw new Error(
+          "ACCOUNT_SESSION_EMPTY_RESPONSE:openai"
         );
-        if (result.code !== 0) {
-          throw normalizeCliFailure(provider, result);
-        }
-      } else {
-        const grok =
-          await runGrokAcp(
-            prompt,
-            workDir,
-            abortSignal
-          );
-        if (
-          !grok.authenticated
-        ) {
-          throw new Error(
-            "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
-          );
-        }
-        if (
-          !grok.text
-        ) {
-          throw new Error(
-            "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
-          );
-        }
-        return grok.text;
       }
 
-      const text = result.stdout.trim();
-      if (!text) {
+      if (
+        provider ===
+          "anthropic"
+      ) {
+        const fixedQuery =
+          "Treat all piped stdin content as the complete Lex Machina request. Current Lex Machina instructions override any prior host-session instructions. Return only the requested response. Do not access local files or use local tools.";
+        const commonArgs = [
+          "-p",
+          fixedQuery,
+          "--output-format",
+          "json",
+          "--bare",
+          "--disallowedTools",
+          "*"
+        ];
+        const hostCwd =
+          process.cwd();
+        const runClaude = (
+          tail: string[]
+        ) =>
+          runCli(
+            provider,
+            [
+              ...commonArgs,
+              ...tail
+            ],
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            hostCwd,
+            abortSignal
+          );
+
+        let result:
+          RunResult | null = null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider
+          );
+        if (savedSessionId) {
+          result =
+            await runClaude([
+              "--resume",
+              savedSessionId
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider
+              );
+              result = null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
+        }
+
+        if (!result) {
+          const last =
+            await runClaude([
+              "--continue"
+            ]);
+          if (
+            last.code === 0
+          ) {
+            result = last;
+          } else {
+            const detail =
+              last.stderr +
+              "\n" +
+              last.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                last
+              );
+            }
+            result =
+              await runClaude([]);
+          }
+        }
+
+        if (result.code !== 0) {
+          throw normalizeCliFailure(
+            provider,
+            result
+          );
+        }
+        const parsed =
+          parseClaudeResult(
+            result.stdout
+          );
+        if (!parsed) {
+          throw new Error(
+            "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
+          );
+        }
+        if (parsed.sessionId) {
+          await writeAccountSessionId(
+            provider,
+            parsed.sessionId
+          );
+        }
+        return parsed.text;
+      }
+
+      const resumeSessionId =
+        await readAccountSessionId(
+          provider
+        );
+      const grok =
+        await runGrokAcp(
+          prompt,
+          workDir,
+          abortSignal,
+          resumeSessionId
+        );
+      if (
+        !grok.authenticated
+      ) {
         throw new Error(
-          `ACCOUNT_SESSION_EMPTY_RESPONSE:${provider}`
+          "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
         );
       }
-      return text;
+      if (
+        !grok.text
+      ) {
+        throw new Error(
+          "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+        );
+      }
+      if (grok.sessionId) {
+        await writeAccountSessionId(
+          provider,
+          grok.sessionId
+        );
+      }
+      return grok.text;
     } finally {
       await fsp.rm(
         workDir,
@@ -1433,6 +1691,7 @@ export class AccountSessionManager {
         }
       ).catch(() => {});
     }
+
   }
 }
 
