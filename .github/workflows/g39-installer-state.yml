@@ -26,8 +26,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: g39-installer-state-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: g39-installer-state-${{ github.event.pull_request.number || github.ref }}-${{ github.run_id }}
+  cancel-in-progress: false
 
 jobs:
   g39g-installer-state-machine:
