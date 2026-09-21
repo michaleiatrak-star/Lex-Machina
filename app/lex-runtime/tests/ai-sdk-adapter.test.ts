@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   AiSdkProviderAdapter,
-  createLiveProviderRegistry
+  buildLocalToolSystemPrompt,
+  createLiveProviderRegistry,
+  parseLocalToolCalls
 } from "../src/providers/ai-sdk-adapter.js";
 import {
   MissingProviderCredentialError,
@@ -22,6 +24,65 @@ describe("AiSdkProviderAdapter", () => {
         messages: [{ role: "user", content: "hello" }]
       })
     ).rejects.toBeInstanceOf(MissingProviderCredentialError);
+  });
+
+  it("uses a runtime-owned text tool protocol for local models", () => {
+    const params = {
+      model:
+        "local/mistral-nemo-12b-q4km",
+      systemPrompt:
+        "system",
+      messages: [
+        {
+          role:
+            "user" as const,
+          content:
+            "Sprawdź źródło."
+        }
+      ],
+      tools: [
+        {
+          type:
+            "function" as const,
+          function: {
+            name:
+              "verify_source",
+            description:
+              "Verify a source",
+            parameters: {
+              type:
+                "object",
+              properties: {}
+            }
+          }
+        }
+      ]
+    };
+
+    const prompt =
+      buildLocalToolSystemPrompt(
+        params,
+        []
+      );
+    expect(prompt).toContain(
+      "LEX MACHINA LOCAL TOOL PROTOCOL"
+    );
+    expect(prompt).toContain(
+      "verify_source"
+    );
+
+    expect(
+      parseLocalToolCalls(
+        'LEX_TOOL_CALLS_JSON:{"calls":[{"id":"call_1","name":"verify_source","input":{}}]}'
+      )
+    ).toEqual([
+      {
+        id: "call_1",
+        name:
+          "verify_source",
+        input: {}
+      }
+    ]);
   });
 
   it("registers all supported live providers", () => {
