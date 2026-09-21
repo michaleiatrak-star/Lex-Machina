@@ -3836,13 +3836,123 @@ export class LocalModelRuntime {
 
     const deadline = Date.now() + 180_000;
     while (Date.now() < deadline) {
-      if (await this.isHealthy()) return;
+      if (await this.isHealthy()) {
+        await this.probeChatCompletion(
+          config.model.id
+        );
+        return;
+      }
       await Promise.race([
         new Promise<void>((resolve) => setTimeout(resolve, 500)),
         exited
       ]);
     }
     throw new Error("LOCAL_MODEL_START_TIMEOUT");
+  }
+
+  private async probeChatCompletion(
+    modelId: string
+  ): Promise<void> {
+    let response: Response;
+    try {
+      response =
+        await fetch(
+          `http://${this.host}:${this.port}/chat/completions`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              Accept:
+                "application/json"
+            },
+            body:
+              JSON.stringify({
+                model:
+                  normalizeModelId(
+                    modelId
+                  ),
+                messages: [
+                  {
+                    role:
+                      "user",
+                    content:
+                      "Odpowiedz wyłącznie: OK"
+                  }
+                ],
+                max_tokens: 8,
+                stream: false
+              }),
+            signal:
+              AbortSignal.timeout(
+                90_000
+              )
+          }
+        );
+    } catch (error) {
+      throw new Error(
+        `LOCAL_MODEL_GENERATION_PROBE_FAILED:NETWORK:${
+          error instanceof Error
+            ? error.message
+            : String(error)
+        }`
+      );
+    }
+
+    if (!response.ok) {
+      const detail =
+        await response.text()
+          .catch(() => "");
+      throw new Error(
+        `LOCAL_MODEL_GENERATION_PROBE_FAILED:HTTP_${response.status}:${detail
+          .replace(/[\r\n]+/g, " ")
+          .slice(-600)}`
+      );
+    }
+
+    let payload: {
+      choices?: Array<{
+        message?: {
+          content?: unknown;
+        };
+      }>;
+      error?: {
+        message?: unknown;
+      };
+    };
+    try {
+      payload =
+        await response.json() as
+          typeof payload;
+    } catch {
+      throw new Error(
+        "LOCAL_MODEL_GENERATION_PROBE_FAILED:INVALID_JSON"
+      );
+    }
+
+    if (payload.error) {
+      throw new Error(
+        `LOCAL_MODEL_GENERATION_PROBE_FAILED:MODEL_ERROR:${
+          typeof payload.error
+            .message === "string"
+            ? payload.error.message
+            : "unknown"
+        }`
+      );
+    }
+
+    const content =
+      payload.choices?.[0]
+        ?.message?.content;
+    if (
+      typeof content !==
+        "string" ||
+      !content.trim()
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_GENERATION_PROBE_FAILED:EMPTY_RESPONSE"
+      );
+    }
   }
 
   private async calibrateTokenizer():
