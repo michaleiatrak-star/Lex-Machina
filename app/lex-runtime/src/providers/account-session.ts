@@ -1297,6 +1297,20 @@ async function assertSubscriptionAccount(
   provider: "openai" | "anthropic",
   abortSignal?: AbortSignal
 ): Promise<void> {
+  if (
+    provider === "anthropic" &&
+    claudeAutomationCredentialMode(
+      accountEnvironment(
+        "anthropic"
+      )
+    ) !== "INTERACTIVE"
+  ) {
+    // Claude Code validates the OAuth credential on the actual invocation.
+    // Do not require a separate interactive-session status when setup-token
+    // or refresh-token provisioning is explicitly configured.
+    return;
+  }
+
   const result =
     provider === "openai"
       ? await runCli(
@@ -2002,8 +2016,8 @@ function buildAccountPrompt(
   return [
     "You are the semantic model inside Lex Machina.",
     "The application, not this CLI, owns privacy gates, legal-source verification and tool execution.",
-    "A resumed host session is continuity context only. Never reuse, reveal or infer facts from earlier host-session turns unless those facts are also present in the current Lex Machina request.",
-    "Current Lex Machina system instructions and conversation override any earlier host-session instructions.",
+    "Lex Machina supplies the complete conversation context for this turn. Do not read or infer context from any separate host-session history.",
+    "Use only the current Lex Machina system instructions and conversation.",
     toolProtocol,
     "",
     "SYSTEM:",
@@ -2173,8 +2187,16 @@ export class AccountSessionManager {
           )
         : provider ===
             "anthropic"
-          ? claudeSubscriptionAuthenticated(
-              result
+          ? (
+              claudeAutomationCredentialMode(
+                accountEnvironment(
+                  "anthropic"
+                )
+              ) !==
+                "INTERACTIVE" ||
+              claudeSubscriptionAuthenticated(
+                result
+              )
             )
           : result.code === 0;
 
@@ -2254,7 +2276,7 @@ export class AccountSessionManager {
     provider: ProviderId,
     prompt: string,
     abortSignal?: AbortSignal,
-    continuityKey?: string
+    _continuityKey?: string
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
@@ -2362,7 +2384,7 @@ export class AccountSessionManager {
         const fixedQuery =
           "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
         const lexSystemPrompt =
-          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
+          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Use only the current Lex Machina instructions and conversation; do not read or infer context from separate host-session history. Do not access local files, external services or tools.";
         const commonArgs = [
           "-p",
           fixedQuery,
