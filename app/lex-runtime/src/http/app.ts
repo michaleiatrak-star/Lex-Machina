@@ -5362,26 +5362,31 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           ];
 
         const aliases =
-          await options
-            .caseAccessService
-            .withCaseDataKey(
-              context,
-              caseId,
-              "ANALYZE",
-              async (
-                caseDataKey
-              ) =>
-                await options
-                  .documentAuthoringService!
-                  .aliasManifest({
-                    caseId,
-                    sourceDocumentIds,
-                    caseDataKey,
-                    keyVersion:
-                      caseView
-                        .keyVersion
-                  })
-            );
+          sourceDocumentIds.length > 0
+            ? await options
+                .caseAccessService
+                .withCaseDataKey(
+                  context,
+                  caseId,
+                  "ANALYZE",
+                  async (
+                    caseDataKey
+                  ) =>
+                    await options
+                      .documentAuthoringService!
+                      .aliasManifest({
+                        caseId,
+                        sourceDocumentIds,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      })
+                )
+            : {
+                schemaVersion: 1 as const,
+                entries: []
+              };
 
         let effectiveStyleProfile =
           styleProfile as
@@ -5454,6 +5459,90 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               aliases
             });
 
+        if (
+          sourceDocumentIds.length ===
+            0
+        ) {
+          const ready =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentAuthoringService!
+                    .createReady({
+                      caseId,
+                      createdByUserId:
+                        context.user
+                          .userId,
+                      format,
+                      ast:
+                        generated.ast,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      validationContext:
+                        generated
+                          .validationContext,
+                      ...(typeof req
+                        .body
+                        ?.filename ===
+                      "string"
+                        ? {
+                            filename:
+                              req.body
+                                .filename
+                          }
+                        : {})
+                    })
+              );
+          const downloadTicket =
+            options
+              .sensitiveDownloadTickets
+              ?.issue(
+                context,
+                {
+                  caseId,
+                  artifactId:
+                    ready.artifact
+                      .artifactId,
+                  finalSha256:
+                    ready.sha256
+                }
+              );
+          res.status(201).json({
+            sessionId:
+              generated
+                .sessionId,
+            artifact:
+              ready.artifact,
+            format:
+              ready.format,
+            sha256:
+              ready.sha256,
+            aliasesUsed: [],
+            readyForDownload:
+              true,
+            ...(downloadTicket
+              ? {
+                  downloadTicket
+                }
+              : {}),
+            ...(templateProfile
+              ? {
+                  templateProfile
+                }
+              : {})
+          });
+          return;
+        }
+
         const tokenized =
           await options
             .caseAccessService
@@ -5514,6 +5603,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           aliasesUsed:
             tokenized
               .aliasesUsed,
+          readyForDownload:
+            false,
           ...(templateProfile
             ? {
                 templateProfile
