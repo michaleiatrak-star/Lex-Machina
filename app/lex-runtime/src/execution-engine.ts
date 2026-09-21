@@ -337,7 +337,10 @@ export class LexExecutionEngine {
         args.route.primarySkill,
         skillEnvelope.automatic,
         skillEnvelope.manualSkills,
-        skillEnvelope.domainAllowList
+        skillEnvelope.domainAllowList,
+        skillEnvelope.domainRestrictionActive,
+        skillEnvelope.executionAllowList,
+        skillEnvelope.executionRestrictionActive
       );
 
     for (const domainSkill of skillSelection.domainSkills) {
