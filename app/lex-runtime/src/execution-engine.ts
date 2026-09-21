@@ -340,7 +340,8 @@ export class LexExecutionEngine {
         skillEnvelope.domainAllowList,
         skillEnvelope.domainRestrictionActive,
         skillEnvelope.executionAllowList,
-        skillEnvelope.executionRestrictionActive
+        skillEnvelope.executionRestrictionActive,
+        skillEnvelope.workflowExecutionSkill
       );
 
     for (const domainSkill of skillSelection.domainSkills) {
@@ -376,9 +377,11 @@ export class LexExecutionEngine {
         "skill_read",
         skillName,
         "OK",
-        `${skillEnvelope.manualSkills.includes(skillName)
-          ? "manual-selection"
-          : "automatic-selection"};role=${role}`
+        `${skillEnvelope.modelRouted
+          ? "model-auto-selection"
+          : skillEnvelope.manualSkills.includes(skillName)
+            ? "manual-selection"
+            : "automatic-selection"};role=${role}`
       );
     }
 
