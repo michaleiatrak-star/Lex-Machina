@@ -132,6 +132,7 @@ fn self_test(root: &Path) -> Result<(), String> {
     required_file(root.join("node").join("node.exe"), "SIDECAR_NODE_MISSING")?;
     required_file(root.join("app").join("dist").join("http").join("server.js"), "SIDECAR_SERVER_MISSING")?;
     required_file(root.join("python").join("python.exe"), "SIDECAR_PYTHON_MISSING")?;
+    required_file(root.join("python").join("Scripts").join("uvx.exe"), "SIDECAR_UVX_MISSING")?;
     required_dir(root.join("corpus"), "SIDECAR_CORPUS_MISSING")?;
     required_dir(root.join("models").join("paddle").join("official_models"), "SIDECAR_PADDLE_MODELS_MISSING")?;
     required_dir(root.join("models").join("stanza").join("pl"), "SIDECAR_STANZA_MODELS_MISSING")?;
@@ -152,6 +153,16 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
     let node = required_file(root.join("node").join("node.exe"), "SIDECAR_NODE_MISSING")?;
     let server = required_file(root.join("app").join("dist").join("http").join("server.js"), "SIDECAR_SERVER_MISSING")?;
     let python = required_file(root.join("python").join("python.exe"), "SIDECAR_PYTHON_MISSING")?;
+    let uvx = required_file(root.join("python").join("Scripts").join("uvx.exe"), "SIDECAR_UVX_MISSING")?;
+    let inherited_path = env::var_os("PATH").unwrap_or_default();
+    let mut runtime_paths = vec![
+        root.join("node"),
+        root.join("python").join("Scripts"),
+        root.join("python"),
+    ];
+    runtime_paths.extend(env::split_paths(&inherited_path));
+    let runtime_path = env::join_paths(runtime_paths)
+        .map_err(|error| format!("SIDECAR_PATH_BUILD_FAILED:{error}"))?;
     let bundled_corpus = required_dir(root.join("corpus"), "SIDECAR_CORPUS_MISSING")?;
     let skills = installed_skill_overlay().unwrap_or(bundled_corpus);
     let paddle = required_dir(root.join("models").join("paddle"), "SIDECAR_PADDLE_MODELS_MISSING")?;
@@ -166,6 +177,8 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
         .env("LEX_OCR_PYTHON", &python)
         .env("LEX_NER_PYTHON", &python)
         .env("LEX_STORAGE_PYTHON", &python)
+        .env("LEX_LEGAL_MCP_UVX", &uvx)
+        .env("PATH", runtime_path)
         .env("PADDLE_PDX_CACHE_HOME", &paddle)
         .env("LEX_PADDLE_MODEL_DIR", &paddle_official)
         .env("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK", "True")
