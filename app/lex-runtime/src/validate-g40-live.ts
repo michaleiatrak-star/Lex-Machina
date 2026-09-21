@@ -178,6 +178,46 @@ async function main():
       );
     }
 
+    const [uodoProbe] =
+      await runtime.runTools([
+        {
+          id:
+            "g40-uodo-live",
+          name:
+            "call_federated_legal_source",
+          input: {
+            source:
+              "uodo",
+            tool:
+              "uodo_stats",
+            arguments: {}
+          }
+        }
+      ]);
+    if (
+      !uodoProbe ||
+      uodoProbe.content.includes(
+        "SOURCE_UNAVAILABLE"
+      ) ||
+      uodoProbe.content.includes(
+        "UODO_HTTP_"
+      )
+    ) {
+      throw new Error(
+        "G40_UODO_LIVE_API_FAILED:" +
+          (
+            uodoProbe?.content ??
+            "NO_RESULT"
+          ).slice(
+            0,
+            1000
+          )
+      );
+    }
+    console.log(
+      "G40_UODO_LIVE_API_PASS"
+    );
+
     console.log(
       "G40_LEGAL_MCP_FLEET_PASS",
       SOURCES.join(",")
