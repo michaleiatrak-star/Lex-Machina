@@ -2099,36 +2099,38 @@ export default function MatterChatApp({
                     </select>
                     {isAccountPrimarySource(provider) &&
                     !accountAuthenticated ? (
-                      <button
-                        type="button"
-                        className="chat-secondary-action"
-                        disabled={
-                          executing ||
-                          providerAccountBusy ||
-                          user.appRole !== "ADMIN"
-                        }
-                        onClick={() =>
-                          accountSession?.installed === false
-                            ? void openAccountClientSetup()
-                            : void connectProviderAccount()
-                        }
-                      >
-                        {providerAccountBusy
-                          ? "Logowanie…"
-                          : accountSession?.installed === false
-                            ? "Zainstaluj klienta ↗"
-                            : "Zaloguj"}
-                      </button>
-                      {accountSession?.installed === false ? (
+                      <>
                         <button
                           type="button"
                           className="chat-secondary-action"
-                          disabled={executing}
-                          onClick={switchAccountToApi}
+                          disabled={
+                            executing ||
+                            providerAccountBusy ||
+                            user.appRole !== "ADMIN"
+                          }
+                          onClick={() =>
+                            accountSession?.installed === false
+                              ? void openAccountClientSetup()
+                              : void connectProviderAccount()
+                          }
                         >
-                          Użyj API
+                          {providerAccountBusy
+                            ? "Logowanie…"
+                            : accountSession?.installed === false
+                              ? "Zainstaluj klienta ↗"
+                              : "Zaloguj"}
                         </button>
-                      ) : null}
+                        {accountSession?.installed === false ? (
+                          <button
+                            type="button"
+                            className="chat-secondary-action"
+                            disabled={executing}
+                            onClick={switchAccountToApi}
+                          >
+                            Użyj API
+                          </button>
+                        ) : null}
+                      </>
                     ) : null}
                   </div>
                 </label>
