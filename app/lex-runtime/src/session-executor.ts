@@ -379,6 +379,57 @@ export type SessionExecutionResponse = {
   [SESSION_EXECUTION_INTERNAL]?: SessionExecutionInternalState;
 };
 
+export function namespaceDocumentAttachmentTokens(
+  attachments: SessionDocumentAttachment[]
+): SessionDocumentAttachment[] {
+  const prefixes =
+    new Map<string, string>();
+
+  const prefixFor = (
+    documentId: string
+  ): string => {
+    const existing =
+      prefixes.get(documentId);
+    if (existing) {
+      return existing;
+    }
+    const prefix =
+      "D" +
+      String(
+        prefixes.size + 1
+      ).padStart(2, "0");
+    prefixes.set(
+      documentId,
+      prefix
+    );
+    return prefix;
+  };
+
+  return attachments.map(
+    (attachment) => {
+      const prefix =
+        prefixFor(
+          attachment.documentId
+        );
+      return {
+        ...attachment,
+        chunks:
+          attachment.chunks.map(
+            (chunk) => ({
+              ...chunk,
+              text:
+                chunk.text.replace(
+                  /\[PII:([A-Z_]+):(\d{4})\]/g,
+                  (_token, kind, sequence) =>
+                    `[LMPII:${prefix}:${kind}:${sequence}]`
+                )
+            })
+          )
+      };
+    }
+  );
+}
+
 function buildDocumentContext(
   attachments: SessionDocumentAttachment[]
 ): string {
@@ -659,10 +710,16 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     );
 
+    const protectedDocumentAttachments =
+      namespaceDocumentAttachmentTokens(
+        request.documentAttachments ??
+          []
+      );
+
     const contextSelection =
       orchestrateDocumentContext({
         attachments:
-          request.documentAttachments ?? [],
+          protectedDocumentAttachments,
         query: request.query,
         ...(request.modelContextTokens
           ? {
@@ -1703,10 +1760,19 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? {
             answer:
-              chatPseudonymizer
-                .deanonymize(
-                  processedDocumentCitations
-                    .text
+              processedDocumentCitations
+                .text.replace(
+                  /\[PII:[A-Z_]+:\d{4}\]/g,
+                  (token) =>
+                    chatPrivacyVault
+                      .hasToken(
+                        token
+                      )
+                      ? chatPrivacyVault
+                          .resolveToken(
+                            token
+                          )
+                      : token
                 ),
             documentCitations: processedDocumentCitations.citations,
             ...(reportBlueprint
