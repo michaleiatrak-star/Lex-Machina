@@ -194,14 +194,19 @@ jobs:
             clients (Codex CLI / Claude Code / Grok Build);
           - when an account client is missing, chat and Settings now link to the
             provider's official installation guide and offer a one-click switch
-            to the corresponding API lane instead of a dead-end login error.
+            to the corresponding API lane instead of a dead-end login error;
+          - Windows account-client detection refreshes the current machine/user
+            PATH before probing Codex, Claude Code or Grok Build, so a client
+            installed while Lex Machina is already open can be detected by
+            "Sprawdź ponownie" without restarting the application.
 
           Regression coverage added for:
           - visible Windows login-launcher contract;
           - local inference failure classification;
           - execution-skill allow-list select-all/deselect-all semantics;
           - continued multi-turn chat context preservation;
-          - account-login missing-client recovery and API fallback UX.
+          - account-login missing-client recovery and API fallback UX;
+          - refreshed Windows PATH detection for newly installed account clients.
 
           Safety boundaries remain unchanged: account authentication remains
           separated from API-key lanes, local models cannot execute host tools,
