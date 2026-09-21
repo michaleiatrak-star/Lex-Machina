@@ -153,7 +153,10 @@ describe("skill selection", () => {
       query: "Czy termin na apelację już upłynął?",
       automatic: false,
       manualSkills: ["terminy-procesowe"],
-      domainAllowList: []
+      domainAllowList: [],
+      domainRestrictionActive: false,
+      executionAllowList: [],
+      executionRestrictionActive: false
     });
   });
 
@@ -181,6 +184,112 @@ describe("skill selection", () => {
     expect(parsed.domainAllowList).toEqual([
       "dr-02-prawo-cywilne",
       "dr-03-prawo-procesowe"
+    ]);
+  });
+
+  it("parses execution and domain checkbox allow-lists independently", () => {
+    const input =
+      `${SKILL_SELECTION_ENVELOPE_PREFIX} ` +
+      JSON.stringify({
+        auto: true,
+        manual: [],
+        domains: [],
+        execution: [
+          "analizator-umow-v1"
+        ]
+      }) +
+      "\nPytanie";
+
+    expect(
+      parseSkillSelectionEnvelope(
+        input
+      )
+    ).toEqual({
+      query: "Pytanie",
+      automatic: true,
+      manualSkills: [],
+      domainAllowList: [],
+      domainRestrictionActive: true,
+      executionAllowList: [
+        "analizator-umow-v1"
+      ],
+      executionRestrictionActive:
+        true
+    });
+  });
+
+  it("lets an explicit empty execution allow-list disable all optional execution skills", () => {
+    const registry =
+      registryWithSkills();
+    const selected =
+      resolveAdditionalSkills(
+        registry,
+        "Przygotuj analizę umowy i raport dla klienta.",
+        "dr-02-prawo-cywilne",
+        true,
+        [],
+        [],
+        false,
+        [],
+        true
+      );
+
+    expect(
+      selected.executionSkills
+    ).toEqual([]);
+    expect(
+      selected.workflowExecutionSkill
+    ).toBeNull();
+  });
+
+  it("limits automatic execution routing to checked skills without forcing their priority", () => {
+    const registry =
+      registryWithSkills();
+    const selected =
+      resolveAdditionalSkills(
+        registry,
+        "Przygotuj analizę umowy i raport dla klienta.",
+        "dr-02-prawo-cywilne",
+        true,
+        [],
+        [],
+        false,
+        [
+          "analizator-umow-v1"
+        ],
+        true
+      );
+
+    expect(
+      selected.executionSkills
+    ).toEqual([
+      "analizator-umow-v1"
+    ]);
+    expect(
+      selected.workflowExecutionSkill
+    ).toBe(
+      "analizator-umow-v1"
+    );
+  });
+
+  it("treats an explicit empty domain allow-list as primary-domain only", () => {
+    const registry =
+      registryWithSkills();
+    const selected =
+      resolveAdditionalSkills(
+        registry,
+        "Pracownik pozywa pracodawcę i pyta o terminy procesowe.",
+        "dr-01-prawo-pracy",
+        true,
+        [],
+        [],
+        true
+      );
+
+    expect(
+      selected.domainSkills
+    ).toEqual([
+      "dr-01-prawo-pracy"
     ]);
   });
 
