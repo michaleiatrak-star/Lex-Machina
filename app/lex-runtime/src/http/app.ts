@@ -8746,9 +8746,52 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
 
       if (error instanceof ProviderGatewayError) {
+        const rawReason =
+          error.causeValue instanceof Error
+            ? error.causeValue.message
+            : "";
+        const parsedReason =
+          rawReason.split(
+            ":",
+            1
+          )[0] ?? "";
         res.status(502).json({
           error: "PROVIDER_EXECUTION_FAILED",
-          provider: error.provider
+          provider: error.provider,
+          ...(/^[A-Z0-9_]+$/.test(
+            parsedReason
+          )
+            ? {
+                reason:
+                  parsedReason
+              }
+            : {})
+        });
+        return;
+      }
+
+      if (
+        error instanceof Error &&
+        error.name ===
+          "LexExecutionError"
+      ) {
+        const target =
+          typeof (
+            error as Error & {
+              target?: unknown;
+            }
+          ).target === "string"
+            ? (
+                error as Error & {
+                  target: string;
+                }
+              ).target
+            : "UNKNOWN_LEGAL_WORKFLOW_GATE";
+        res.status(422).json({
+          error:
+            "LEGAL_WORKFLOW_EXECUTION_FAILED",
+          reason:
+            target
         });
         return;
       }
