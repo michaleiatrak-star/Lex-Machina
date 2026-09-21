@@ -1375,11 +1375,13 @@ export class LegalVerificationToolRuntime {
               ...(asOf
                 ? { asOf }
                 : {}),
-              claim:
-                typeof call.input.claim ===
-                  "string"
-                  ? call.input.claim
-                  : undefined
+              ...(typeof call.input.claim ===
+                "string"
+                ? {
+                    claim:
+                      call.input.claim
+                  }
+                : {})
             }
           );
 
