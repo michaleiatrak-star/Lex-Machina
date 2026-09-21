@@ -606,7 +606,6 @@ export default function AuthenticatedApp() {
             value.user
           );
           setNow(Date.now());
-          setShowSecurity(false);
           setPhase(
             "authenticated"
           );
