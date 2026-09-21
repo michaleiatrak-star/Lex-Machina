@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   AiSdkProviderAdapter,
+  buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
   createLiveProviderRegistry,
@@ -84,6 +85,40 @@ describe("AiSdkProviderAdapter", () => {
         input: {}
       }
     ]);
+  });
+
+  it("uses a minimal llama.cpp-compatible request shape for local chat", () => {
+    expect(
+      buildLocalChatRequest(
+        "local/mistral-nemo-12b-q4km",
+        "system",
+        [
+          {
+            role: "user",
+            content:
+              "Odpowiedz wyłącznie: OK"
+          }
+        ]
+      )
+    ).toEqual({
+      model:
+        "local/mistral-nemo-12b-q4km",
+      messages: [
+        {
+          role: "system",
+          content:
+            "system"
+        },
+        {
+          role: "user",
+          content:
+            "Odpowiedz wyłącznie: OK"
+        }
+      ],
+      max_tokens:
+        16_384,
+      stream: true
+    });
   });
 
   it("classifies local inference failures into actionable diagnostics", () => {
