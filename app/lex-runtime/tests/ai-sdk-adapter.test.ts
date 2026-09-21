@@ -246,6 +246,38 @@ describe("AiSdkProviderAdapter", () => {
     ).toBeNull();
   });
 
+  it("fails a silent local SSE stream instead of hanging forever", async () => {
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start() {
+          // Intentionally emit nothing and keep the stream open.
+        }
+      });
+
+    await expect(
+      readLocalSse(
+        new Response(
+          body,
+          {
+            status: 200,
+            headers: {
+              "content-type":
+                "text/event-stream"
+            }
+          }
+        ),
+        {
+          firstContentMs: 20,
+          idleMs: 20
+        }
+      )
+    ).rejects.toThrow(
+      "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+    );
+  });
+
   it("budgets local output against a 64k qualified context without logging prompt content", () => {
     const budget =
       localChatBudget(
