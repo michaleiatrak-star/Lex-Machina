@@ -819,35 +819,155 @@ function openAiChatGptAuthenticated(
   );
 }
 
-function claudeSubscriptionAuthenticated(
+export function claudeSubscriptionAuthenticated(
   result: RunResult
 ): boolean {
   if (result.code !== 0) {
     return false;
   }
-  try {
-    const payload =
-      JSON.parse(
-        result.stdout
-      ) as {
-        loggedIn?: unknown;
-        authMethod?: unknown;
-        apiProvider?: unknown;
-      };
-    return (
-      payload.loggedIn === true &&
-      payload.apiProvider ===
-        "firstParty" &&
-      (
-        payload.authMethod ===
-          "claude.ai" ||
-        payload.authMethod ===
-          "oauth_token"
-      )
+
+  const combined =
+    (result.stdout + "\n" + result.stderr)
+      .trim();
+  const lower =
+    combined.toLowerCase();
+
+  // Never treat Console/API, credentials-file or cloud-provider auth as the
+  // subscription lane. The account transport must not silently become API
+  // billing just because Claude Code can execute a prompt.
+  const explicitlyNonSubscription =
+    [
+      "credentials-file",
+      "anthropic console",
+      "api key",
+      "api_key",
+      "bedrock",
+      "vertex",
+      "foundry"
+    ].some((needle) =>
+      lower.includes(needle)
     );
-  } catch {
+  if (explicitlyNonSubscription) {
     return false;
   }
+
+  const jsonStart =
+    combined.indexOf("{");
+  const jsonEnd =
+    combined.lastIndexOf("}");
+  if (
+    jsonStart >= 0 &&
+    jsonEnd > jsonStart
+  ) {
+    try {
+      const payload =
+        JSON.parse(
+          combined.slice(
+            jsonStart,
+            jsonEnd + 1
+          )
+        ) as {
+          loggedIn?: unknown;
+          authMethod?: unknown;
+          apiProvider?: unknown;
+          apiKeySource?: unknown;
+          subscriptionType?: unknown;
+        };
+      if (payload.loggedIn !== true) {
+        return false;
+      }
+
+      const provider =
+        typeof payload.apiProvider ===
+          "string"
+          ? payload.apiProvider
+              .toLowerCase()
+          : "";
+      const method =
+        typeof payload.authMethod ===
+          "string"
+          ? payload.authMethod
+              .toLowerCase()
+          : "";
+      const keySource =
+        typeof payload.apiKeySource ===
+          "string"
+          ? payload.apiKeySource
+              .toLowerCase()
+          : "";
+      const subscription =
+        typeof payload.subscriptionType ===
+          "string"
+          ? payload.subscriptionType
+              .toLowerCase()
+          : "";
+
+      if (
+        provider &&
+        provider !== "firstparty" &&
+        provider !== "first_party"
+      ) {
+        return false;
+      }
+      if (
+        [
+          "api_key",
+          "api-key",
+          "bedrock",
+          "vertex",
+          "foundry"
+        ].includes(method)
+      ) {
+        return false;
+      }
+
+      return (
+        method === "claude.ai" ||
+        method === "oauth_token" ||
+        method === "oauth" ||
+        method === "subscription" ||
+        keySource.includes(
+          "/login managed key"
+        ) ||
+        subscription === "pro" ||
+        subscription === "max" ||
+        subscription.includes(
+          "claude"
+        )
+      );
+    } catch {
+      // Some Claude Code versions use human-readable output. Fall through to
+      // the conservative text parser below.
+    }
+  }
+
+  return (
+    lower.includes(
+      "login method: claude max account"
+    ) ||
+    lower.includes(
+      "login method: claude pro account"
+    ) ||
+    lower.includes(
+      "login method: claude.ai"
+    ) ||
+    (
+      lower.includes(
+        "logged in"
+      ) &&
+      (
+        lower.includes(
+          "claude.ai"
+        ) ||
+        lower.includes(
+          "oauth_token"
+        ) ||
+        lower.includes(
+          "oauth token"
+        )
+      )
+    )
+  );
 }
 
 async function assertSubscriptionAccount(
@@ -878,7 +998,8 @@ async function assertSubscriptionAccount(
           undefined,
           abortSignal
         );
-  const authenticated =
+
+  let authenticated =
     provider === "openai"
       ? openAiChatGptAuthenticated(
           result
@@ -886,6 +1007,30 @@ async function assertSubscriptionAccount(
       : claudeSubscriptionAuthenticated(
           result
         );
+
+  if (
+    provider === "anthropic" &&
+    !authenticated
+  ) {
+    const textStatus =
+      await runCli(
+        provider,
+        [
+          "auth",
+          "status",
+          "--text"
+        ],
+        undefined,
+        STATUS_TIMEOUT_MS,
+        undefined,
+        abortSignal
+      );
+    authenticated =
+      claudeSubscriptionAuthenticated(
+        textStatus
+      );
+  }
+
   if (!authenticated) {
     throw new Error(
       `ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH:${provider}`
@@ -1588,6 +1733,31 @@ export class AccountSessionManager {
           undefined,
           STATUS_TIMEOUT_MS
         );
+        if (
+          !claudeSubscriptionAuthenticated(
+            result
+          )
+        ) {
+          const textStatus =
+            await runCli(
+              provider,
+              [
+                "auth",
+                "status",
+                "--text"
+              ],
+              undefined,
+              STATUS_TIMEOUT_MS
+            );
+          if (
+            claudeSubscriptionAuthenticated(
+              textStatus
+            )
+          ) {
+            result =
+              textStatus;
+          }
+        }
       } else {
         const workDir =
           await fsp.mkdtemp(
@@ -1666,11 +1836,26 @@ export class AccountSessionManager {
   async login(
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
+    const current =
+      await this.status(
+        provider
+      );
+    if (
+      current.installed &&
+      current.authenticated
+    ) {
+      return current;
+    }
+
     const args =
       provider === "openai"
         ? ["login"]
         : provider === "anthropic"
-          ? ["auth", "login"]
+          ? [
+              "auth",
+              "login",
+              "--claudeai"
+            ]
           : ["login"];
     const result = await runCli(
       provider,
@@ -1681,7 +1866,16 @@ export class AccountSessionManager {
     if (result.code !== 0) {
       throw normalizeCliFailure(provider, result);
     }
-    return this.status(provider);
+    const status =
+      await this.status(
+        provider
+      );
+    if (!status.authenticated) {
+      throw new Error(
+        `ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH:${provider}`
+      );
+    }
+    return status;
   }
 
   async runText(
