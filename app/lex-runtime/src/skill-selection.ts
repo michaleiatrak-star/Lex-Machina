@@ -540,6 +540,7 @@ export function resolveAdditionalSkills(
     }
   };
   const domainSkills = new Set<string>([primarySkill]);
+  let usedFallbackExecution = false;
 
   for (const name of manual) {
     const skill = registry.get(name);
@@ -625,15 +626,17 @@ export function resolveAdditionalSkills(
               "przewodnik-prawny-v2"
           );
         if (fallback) {
+          usedFallbackExecution =
+            true;
           executionSkills.add(
             fallback.name
           );
           selected.add(
             fallback.name
           );
-          promoteWorkflowExecutionSkill(
-            fallback.name
-          );
+          // The general guide is conversational fallback only. It must not
+          // pin a deterministic workflow or fan out through references merely
+          // because its SKILL.md documents optional next-step integrations.
         }
       }
     } else {
@@ -646,11 +649,16 @@ export function resolveAdditionalSkills(
       }
     }
 
-    const delegatedExecution = referencedExecutionSkills(
-      registry,
-      [...executionSkills],
-      executionCandidates
-    );
+    const delegatedExecution =
+      usedFallbackExecution
+        ? []
+        : referencedExecutionSkills(
+            registry,
+            [
+              ...executionSkills
+            ],
+            executionCandidates
+          );
     for (const name of delegatedExecution) {
       if (executionSkills.size >= 6) break;
       executionSkills.add(name);
