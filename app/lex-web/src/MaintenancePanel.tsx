@@ -133,7 +133,7 @@ export function MaintenancePanel({
     setBusy("app-download");
     setError("");
     setMessage(
-      "Pobieram instalator do stagingu i weryfikuję SHA-256 oraz ProductVersion. Podpis jest obecnie opcjonalny w trybie przejściowym."
+      "Pobieram instalator do stagingu i weryfikuję SHA-256, ProductVersion oraz wymaganą politykę Authenticode."
     );
     try {
       const result =
@@ -312,7 +312,7 @@ export function MaintenancePanel({
           </div>
 
           <small className="maintenance-trust-warning">
-            Tryb przejściowy: instalacja i aktualizacja programu bez podpisu są dozwolone po weryfikacji SHA-256 i wersji. Przed wydaniem produkcyjnym należy ponownie wymusić podpisy.
+            Aktualizacja programu wymaga weryfikacji SHA-256, wersji oraz zaufanego podpisu Authenticode zgodnie z polityką runtime.
           </small>
 
           {user.appRole === "ADMIN" ? (
@@ -372,7 +372,7 @@ export function MaintenancePanel({
 
           {skillStatus?.signatureMode === "UNSIGNED_ALLOWED" ? (
             <small className="maintenance-trust-warning">
-              Tryb przejściowy: podpis Ed25519 skilli jest opcjonalny. Indeks JSON, zgodność wersji, SHA-256 bundla i walidacja strukturalna nadal są wymagane.
+              Skille mogą być aktualizowane bez Ed25519 wyłącznie z oficjalnego GitHub Releases Lex Machina. Indeks JSON, zgodność wersji, SHA-256 assetu i bundla, rozmiar oraz walidacja strukturalna nadal są obowiązkowe.
             </small>
           ) : null}
 
