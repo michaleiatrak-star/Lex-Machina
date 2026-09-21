@@ -2139,7 +2139,8 @@ export async function streamAccountSession(
         params,
         toolTranscript
       ),
-      params.abortSignal
+      params.abortSignal,
+      params.continuityKey
     );
     const calls =
       parseToolCalls(output);
