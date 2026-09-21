@@ -1973,7 +1973,25 @@ export default function MatterChatApp({
               attachments:
                 documentAttachments,
               filename:
-                "LexMachina-dokument." +
+                (
+                  documentRequest.documentType ===
+                    "letter"
+                    ? "LexMachina-pismo"
+                    : documentRequest.documentType ===
+                        "pleading"
+                      ? "LexMachina-pismo-procesowe"
+                      : documentRequest.documentType ===
+                          "contract"
+                        ? "LexMachina-umowa"
+                        : documentRequest.documentType ===
+                            "opinion"
+                          ? "LexMachina-opinia"
+                          : documentRequest.documentType ===
+                              "report"
+                            ? "LexMachina-raport"
+                            : "LexMachina-dokument"
+                ) +
+                "." +
                 documentRequest.format
             }
           );
