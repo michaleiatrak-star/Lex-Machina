@@ -26,6 +26,14 @@ const LOCAL_DEFAULT_OUTPUT_TOKENS =
   4_096;
 const LOCAL_CONTEXT_SAFETY_TOKENS =
   1_024;
+const LOCAL_HTTP_RESPONSE_TIMEOUT_MS =
+  60_000;
+const LOCAL_FIRST_CONTENT_TIMEOUT_MS =
+  90_000;
+const LOCAL_STREAM_IDLE_TIMEOUT_MS =
+  45_000;
+const LOCAL_JSON_BODY_TIMEOUT_MS =
+  180_000;
 
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
@@ -359,6 +367,48 @@ export function buildLocalChatRequest(
   };
 }
 
+export function isLocalSseTerminalLine(
+  rawLine: string
+): boolean {
+  const line =
+    rawLine.trim();
+  if (
+    !line.startsWith(
+      "data:"
+    )
+  ) {
+    return false;
+  }
+  const data =
+    line.slice(5).trim();
+  if (
+    data === "[DONE]"
+  ) {
+    return true;
+  }
+  if (!data) {
+    return false;
+  }
+  try {
+    const payload =
+      JSON.parse(data) as {
+        choices?: Array<{
+          finish_reason?: unknown;
+        }>;
+      };
+    return payload.choices?.some(
+      (choice) =>
+        typeof choice
+          .finish_reason ===
+          "string" &&
+        choice.finish_reason
+          .trim().length > 0
+    ) === true;
+  } catch {
+    return false;
+  }
+}
+
 export function parseLocalSseLine(
   rawLine: string
 ): string {
@@ -423,6 +473,87 @@ export function parseLocalSseLine(
     : "";
 }
 
+function timeoutError(
+  code: string
+): Error {
+  return new Error(code);
+}
+
+async function withTimeout<T>(
+  operation: Promise<T>,
+  timeoutMs: number,
+  code: string,
+  onTimeout?: () => void | Promise<void>
+): Promise<T> {
+  let timer:
+    ReturnType<typeof setTimeout> |
+    undefined;
+  try {
+    return await Promise.race([
+      operation,
+      new Promise<T>(
+        (_, reject) => {
+          timer =
+            setTimeout(
+              () => {
+                reject(
+                  timeoutError(
+                    code
+                  )
+                );
+                try {
+                  void onTimeout?.();
+                } catch {
+                  // Timeout remains authoritative even if cleanup fails.
+                }
+              },
+              timeoutMs
+            );
+        }
+      )
+    ]);
+  } finally {
+    if (timer) {
+      clearTimeout(timer);
+    }
+  }
+}
+
+function linkedAbortController(
+  external?: AbortSignal
+): {
+  controller:
+    AbortController;
+  cleanup:
+    () => void;
+} {
+  const controller =
+    new AbortController();
+  const onAbort = () =>
+    controller.abort(
+      external?.reason
+    );
+  if (external) {
+    if (external.aborted) {
+      onAbort();
+    } else {
+      external.addEventListener(
+        "abort",
+        onAbort,
+        { once: true }
+      );
+    }
+  }
+  return {
+    controller,
+    cleanup: () =>
+      external?.removeEventListener(
+        "abort",
+        onAbort
+      )
+  };
+}
+
 async function fetchLocalChatResponse(
   endpoint: string,
   body: ReturnType<
@@ -430,31 +561,54 @@ async function fetchLocalChatResponse(
   >,
   abortSignal?: AbortSignal
 ): Promise<Response> {
+  const {
+    controller,
+    cleanup
+  } =
+    linkedAbortController(
+      abortSignal
+    );
   try {
-    return await fetch(
-      `${endpoint.replace(/\/$/, "")}/chat/completions`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-          Accept:
-            body.stream
-              ? "text/event-stream"
-              : "application/json"
-        },
-        body: JSON.stringify(
-          body
-        ),
-        ...(abortSignal
-          ? {
-              signal:
-                abortSignal
-            }
-          : {})
-      }
+    return await withTimeout(
+      fetch(
+        `${endpoint.replace(/\/$/, "")}/chat/completions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+            Accept:
+              body.stream
+                ? "text/event-stream"
+                : "application/json"
+          },
+          body: JSON.stringify(
+            body
+          ),
+          signal:
+            controller.signal
+        }
+      ),
+      LOCAL_HTTP_RESPONSE_TIMEOUT_MS,
+      "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT",
+      () =>
+        controller.abort(
+          "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT"
+        )
     );
   } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message ===
+        "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT"
+    ) {
+      throw error;
+    }
+    if (
+      abortSignal?.aborted
+    ) {
+      throw error;
+    }
     throw new Error(
       `LOCAL_MODEL_HTTP_NETWORK:${
         error instanceof Error
@@ -462,6 +616,8 @@ async function fetchLocalChatResponse(
           : String(error)
       }`
     );
+  } finally {
+    cleanup();
   }
 }
 
@@ -478,8 +634,12 @@ async function localHttpFailure(
   );
 }
 
-async function readLocalSse(
-  response: Response
+export async function readLocalSse(
+  response: Response,
+  timeouts?: {
+    firstContentMs?: number;
+    idleMs?: number;
+  }
 ): Promise<string> {
   if (!response.body) {
     throw new Error(
@@ -494,6 +654,22 @@ async function readLocalSse(
   let buffer = "";
   let fullText = "";
 
+  let terminalSeen =
+    false;
+  const firstContentDeadline =
+    Date.now() +
+    Math.max(
+      1,
+      timeouts?.firstContentMs ??
+        LOCAL_FIRST_CONTENT_TIMEOUT_MS
+    );
+  const idleTimeoutMs =
+    Math.max(
+      1,
+      timeouts?.idleMs ??
+        LOCAL_STREAM_IDLE_TIMEOUT_MS
+    );
+
   const consumeLine = (
     rawLine: string
   ) => {
@@ -501,6 +677,13 @@ async function readLocalSse(
       parseLocalSseLine(
         rawLine
       );
+    if (
+      isLocalSseTerminalLine(
+        rawLine
+      )
+    ) {
+      terminalSeen = true;
+    }
   };
 
   try {
@@ -509,7 +692,21 @@ async function readLocalSse(
         done,
         value
       } =
-        await reader.read();
+        await withTimeout(
+          reader.read(),
+          fullText.trim()
+            ? idleTimeoutMs
+            : Math.max(
+                1,
+                firstContentDeadline -
+                  Date.now()
+              ),
+          fullText.trim()
+            ? "LOCAL_MODEL_SSE_IDLE_TIMEOUT"
+            : "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT",
+          () =>
+            reader.cancel()
+        );
       buffer +=
         decoder.decode(
           value,
@@ -536,6 +733,23 @@ async function readLocalSse(
           );
         newline =
           buffer.indexOf("\n");
+        if (
+          terminalSeen
+        ) {
+          break;
+        }
+      }
+
+      if (
+        terminalSeen
+      ) {
+        try {
+          await reader.cancel();
+        } catch {
+          // The server may already have closed the stream. The terminal
+          // SSE frame is authoritative and the generated text is complete.
+        }
+        break;
       }
 
       if (done) {
@@ -588,8 +802,16 @@ async function readLocalJson(
     };
   };
   try {
+    const raw =
+      await withTimeout(
+        response.text(),
+        LOCAL_JSON_BODY_TIMEOUT_MS,
+        "LOCAL_MODEL_JSON_BODY_TIMEOUT",
+        () =>
+          response.body?.cancel()
+      );
     payload =
-      await response.json() as
+      JSON.parse(raw) as
         typeof payload;
   } catch (error) {
     throw new Error(

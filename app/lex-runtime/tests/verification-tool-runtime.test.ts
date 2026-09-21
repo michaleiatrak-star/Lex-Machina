@@ -41,7 +41,7 @@ describe("LegalVerificationToolRuntime", () => {
         "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html"
       );
       return new Response(
-        "<html><title>Kodeks cywilny</title><body>Art. 5. Treść.</body></html>",
+        "<html><title>Kodeks cywilny</title><body><h2>Art. 5.</h2><p>Treść.</p></body></html>",
         {
           status: 200,
           headers: { "content-type": "text/html" }

@@ -5,10 +5,12 @@ import {
   buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
+  isLocalSseTerminalLine,
   localChatBudget,
   createLiveProviderRegistry,
   parseLocalSseLine,
-  parseLocalToolCalls
+  parseLocalToolCalls,
+  readLocalSse
 } from "../src/providers/ai-sdk-adapter.js";
 import {
   MissingProviderCredentialError,
@@ -156,6 +158,177 @@ describe("AiSdkProviderAdapter", () => {
         )
         .join("")
     ).toBe("OK");
+  });
+
+  it("detects Mistral/llama.cpp terminal SSE frames without waiting for socket close", () => {
+    expect(
+      isLocalSseTerminalLine(
+        'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}]}'
+      )
+    ).toBe(true);
+    expect(
+      isLocalSseTerminalLine(
+        "data: [DONE]"
+      )
+    ).toBe(true);
+    expect(
+      isLocalSseTerminalLine(
+        'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}'
+      )
+    ).toBe(false);
+  });
+
+  it("finishes a Mistral SSE response even when the HTTP stream stays open after stop", async () => {
+    const encoder =
+      new TextEncoder();
+    let controllerRef:
+      ReadableStreamDefaultController<
+        Uint8Array
+      > | null = null;
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          controllerRef =
+            controller;
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}\n\n'
+            )
+          );
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}]}\n\n'
+            )
+          );
+          // Intentionally do not close the stream. This reproduces a local
+          // llama.cpp/Mistral keep-alive connection after the terminal frame.
+        },
+        cancel() {
+          controllerRef =
+            null;
+        }
+      });
+
+    const result =
+      await Promise.race([
+        readLocalSse(
+          new Response(
+            body,
+            {
+              status: 200,
+              headers: {
+                "content-type":
+                  "text/event-stream"
+              }
+            }
+          )
+        ),
+        new Promise<string>(
+          (_, reject) => {
+            setTimeout(
+              () =>
+                reject(
+                  new Error(
+                    "MISTRAL_SSE_DID_NOT_FINISH"
+                  )
+                ),
+              500
+            );
+          }
+        )
+      ]);
+
+    expect(result).toBe("OK");
+    expect(
+      controllerRef
+    ).toBeNull();
+  });
+
+  it("fails a silent local SSE stream instead of hanging forever", async () => {
+    let controllerRef:
+      ReadableStreamDefaultController<
+        Uint8Array
+      > | null = null;
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          // Retain the controller so Node cannot treat the synthetic stream as
+          // exhausted while we reproduce a server that keeps the socket open.
+          controllerRef =
+            controller;
+        },
+        cancel() {
+          controllerRef =
+            null;
+        }
+      });
+
+    await expect(
+      readLocalSse(
+        new Response(
+          body,
+          {
+            status: 200,
+            headers: {
+              "content-type":
+                "text/event-stream"
+            }
+          }
+        ),
+        {
+          firstContentMs: 20,
+          idleMs: 20
+        }
+      )
+    ).rejects.toThrow(
+      "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+    );
+    expect(
+      controllerRef
+    ).toBeNull();
+  });
+
+  it("fails a stalled local SSE stream after content instead of hanging forever", async () => {
+    const encoder =
+      new TextEncoder();
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"O"}}]}\n\n'
+            )
+          );
+          // Keep the stream open after one content token.
+        }
+      });
+
+    await expect(
+      readLocalSse(
+        new Response(
+          body,
+          {
+            status: 200,
+            headers: {
+              "content-type":
+                "text/event-stream"
+            }
+          }
+        ),
+        {
+          firstContentMs: 50,
+          idleMs: 20
+        }
+      )
+    ).rejects.toThrow(
+      "LOCAL_MODEL_SSE_IDLE_TIMEOUT"
+    );
   });
 
   it("budgets local output against a 64k qualified context without logging prompt content", () => {

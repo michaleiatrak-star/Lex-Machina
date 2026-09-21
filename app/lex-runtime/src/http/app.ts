@@ -502,6 +502,7 @@ export type LexHttpAppOptions = {
     LocalDocumentAuthoringService,
     | "aliasManifest"
     | "createTokenized"
+    | "createReady"
     | "deanonymizeConsumed"
   >;
   documentAstGenerator?: Pick<
@@ -3442,9 +3443,129 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 caseId
               );
         }
+        let enrichedUploads:
+          Array<
+            StoredUpload & {
+              processing?: {
+                documentId: string;
+                complete: true;
+                totalPages: number;
+                digitalPages: number;
+                ocrPages: number;
+                blankPages: number;
+                chunkIndices: number[];
+              };
+            }
+          > =
+          uploads.map(
+            (item) => ({
+              ...item
+            })
+          );
+
+        if (
+          options.documentService
+            ?.restoreDocument &&
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+
+          enrichedUploads =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "READ",
+                async (
+                  caseDataKey
+                ) =>
+                  await Promise.all(
+                    uploads.map(
+                      async (
+                        item
+                      ) => {
+                        if (
+                          item.archive
+                        ) {
+                          return {
+                            ...item
+                          };
+                        }
+
+                        const documentId =
+                          "doc_" +
+                          item.sha256
+                            .slice(
+                              0,
+                              24
+                            );
+                        try {
+                          const restored =
+                            await options
+                              .documentService!
+                              .restoreDocument!({
+                                caseId,
+                                documentId,
+                                caseDataKey,
+                                keyVersion:
+                                  caseView
+                                    .keyVersion
+                              });
+                          return {
+                            ...item,
+                            processing: {
+                              documentId:
+                                restored
+                                  .documentId,
+                              complete:
+                                true as const,
+                              totalPages:
+                                restored
+                                  .totalPages,
+                              digitalPages:
+                                restored
+                                  .digitalPages,
+                              ocrPages:
+                                restored
+                                  .ocrPages,
+                              blankPages:
+                                restored
+                                  .blankPages,
+                              chunkIndices:
+                                restored
+                                  .chunks
+                                  .slice(0, 32)
+                                  .map(
+                                    (chunk) =>
+                                      chunk.index
+                                  )
+                            }
+                          };
+                        } catch {
+                          return {
+                            ...item
+                          };
+                        }
+                      }
+                    )
+                  )
+              );
+        }
+
         res.json({
           caseId,
-          uploads
+          uploads:
+            enrichedUploads
         });
       } catch (error) {
         if (
@@ -5207,7 +5328,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       if (
         !sessionRequest ||
         attachments === null ||
-        attachments.length < 1 ||
         (
           format !== "docx" &&
           format !== "odt"
@@ -5363,26 +5483,31 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           ];
 
         const aliases =
-          await options
-            .caseAccessService
-            .withCaseDataKey(
-              context,
-              caseId,
-              "ANALYZE",
-              async (
-                caseDataKey
-              ) =>
-                await options
-                  .documentAuthoringService!
-                  .aliasManifest({
-                    caseId,
-                    sourceDocumentIds,
-                    caseDataKey,
-                    keyVersion:
-                      caseView
-                        .keyVersion
-                  })
-            );
+          sourceDocumentIds.length > 0
+            ? await options
+                .caseAccessService
+                .withCaseDataKey(
+                  context,
+                  caseId,
+                  "ANALYZE",
+                  async (
+                    caseDataKey
+                  ) =>
+                    await options
+                      .documentAuthoringService!
+                      .aliasManifest({
+                        caseId,
+                        sourceDocumentIds,
+                        caseDataKey,
+                        keyVersion:
+                          caseView
+                            .keyVersion
+                      })
+                )
+            : {
+                schemaVersion: 1 as const,
+                entries: []
+              };
 
         let effectiveStyleProfile =
           styleProfile as
@@ -5455,6 +5580,71 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               aliases
             });
 
+        if (
+          sourceDocumentIds.length ===
+            0
+        ) {
+          const ready =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "WRITE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentAuthoringService!
+                    .createReady({
+                      caseId,
+                      createdByUserId:
+                        context.user
+                          .userId,
+                      format,
+                      ast:
+                        generated.ast,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion,
+                      validationContext:
+                        generated
+                          .validationContext,
+                      ...(typeof req
+                        .body
+                        ?.filename ===
+                      "string"
+                        ? {
+                            filename:
+                              req.body
+                                .filename
+                          }
+                        : {})
+                    })
+              );
+          res.status(201).json({
+            sessionId:
+              generated
+                .sessionId,
+            artifact:
+              ready.artifact,
+            format:
+              ready.format,
+            sha256:
+              ready.sha256,
+            aliasesUsed: [],
+            readyForDownload:
+              true,
+            ...(templateProfile
+              ? {
+                  templateProfile
+                }
+              : {})
+          });
+          return;
+        }
+
         const tokenized =
           await options
             .caseAccessService
@@ -5515,6 +5705,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           aliasesUsed:
             tokenized
               .aliasesUsed,
+          readyForDownload:
+            false,
           ...(templateProfile
             ? {
                 templateProfile
@@ -5548,6 +5740,149 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "PROVIDER_NOT_CONFIGURED",
             provider:
               error.provider
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/artifacts/:artifactId/download",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.secureCaseArtifactStore
+      ) {
+        res.status(503).json({
+          error:
+            "ARTIFACT_DOWNLOAD_UNAVAILABLE"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const caseId =
+          String(
+            req.params.caseId ??
+              ""
+          );
+        const artifactId =
+          String(
+            req.params.artifactId ??
+              ""
+          );
+
+        const view =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        options
+          .caseAccessService
+          .assertAccess(
+            context,
+            caseId,
+            "READ"
+          );
+
+        const result =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) => {
+                const artifacts =
+                  await options
+                    .secureCaseArtifactStore!
+                    .listArtifacts({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion
+                    });
+                const artifact =
+                  artifacts.find(
+                    (item) =>
+                      item.artifactId ===
+                        artifactId
+                  );
+
+                if (
+                  !artifact ||
+                  artifact.sensitivity !==
+                    "PROTECTED" ||
+                  (
+                    !artifact.filename
+                      .toLowerCase()
+                      .endsWith(".docx") &&
+                    !artifact.filename
+                      .toLowerCase()
+                      .endsWith(".odt")
+                  )
+                ) {
+                  throw new Error(
+                    "GENERATED_ARTIFACT_NOT_DOWNLOADABLE"
+                  );
+                }
+
+                const data =
+                  await options
+                    .secureCaseArtifactStore!
+                    .readArtifact({
+                      caseId,
+                      artifactId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion,
+                      maxBytes:
+                        64 *
+                        1024 *
+                        1024
+                    });
+
+                return {
+                  artifact,
+                  data
+                };
+              }
+            );
+
+        res.setHeader(
+          "Content-Type",
+          result.artifact.mediaType
+        );
+        res.setHeader(
+          "Content-Length",
+          String(
+            result.data.byteLength
+          )
+        );
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${result.artifact.filename.replace(/"/g, "")}"`
+        );
+        res.status(200).send(
+          result.data
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof Error
+                ? error.message
+                : "ARTIFACT_DOWNLOAD_FAILED"
           });
         }
       }

@@ -19,7 +19,9 @@ import {
   clearProviderApiKey,
   createCase,
   deleteCase,
+  downloadGeneratedArtifact,
   executeSession,
+  generateLegalDocument,
   getHealth,
   getLocalModels,
   getModels,
@@ -28,6 +30,7 @@ import {
   getProviderStatus,
   getRoutes,
   isDesktopShell,
+  listCaseFiles,
   listCases,
   loginProviderAccount,
   provisionLocalModel,
@@ -46,7 +49,8 @@ import {
   type ModelRoutingPreferences,
   type ProviderAccountSessionStatus,
   type ProviderId,
-  type SessionExecutionResponse
+  type SessionExecutionResponse,
+  type StoredUploadResponse
 } from "./api.js";
 import {
   DOCUMENT_FILE_ACCEPT,
@@ -314,6 +318,99 @@ function suggestedCaseName(input: string): string {
   return clean.length >= 8 ? clean : "Nowa sprawa";
 }
 
+type DirectDocumentRequest = {
+  format: "docx" | "odt";
+  documentType:
+    | "pleading"
+    | "contract"
+    | "opinion"
+    | "letter"
+    | "report"
+    | "other";
+};
+
+function directDocumentRequest(
+  input: string
+): DirectDocumentRequest | null {
+  const normalized =
+    input
+      .normalize("NFKC")
+      .toLocaleLowerCase("pl");
+
+  const explicitFormat =
+    /\bodt\b/u.test(normalized)
+      ? "odt" as const
+      : /\bdocx\b|\bword\b/u.test(normalized)
+        ? "docx" as const
+        : null;
+
+  const documentNoun =
+    /\b(?:pismo|wezwanie|pozew|wniosek|apelacj[ęa]|sprzeciw|zażalenie|umow[ęa]|opini[ęa]|raport|oświadczenie|reklamacj[ęa]|odpowiedź na pozew|pełnomocnictwo|dokument|wzór)\b/u
+      .test(normalized);
+  const generationVerb =
+    /\b(?:wygeneruj|przygotuj|stwórz|utwórz|sporządź|napisz|daj|opracuj)\b/u
+      .test(normalized);
+
+  if (
+    !explicitFormat &&
+    !(documentNoun && generationVerb)
+  ) {
+    return null;
+  }
+
+  const documentType =
+    /\b(?:pozew|apelacj|sprzeciw|zażalen|pismo procesowe)\b/u
+      .test(normalized)
+      ? "pleading" as const
+      : /\bumow/u.test(normalized)
+        ? "contract" as const
+        : /\bopini/u.test(normalized)
+          ? "opinion" as const
+          : /\braport/u.test(normalized)
+            ? "report" as const
+            : /\b(?:wezwanie|reklamacj|oświadczen|pełnomocnictw|list)\b/u
+                .test(normalized)
+              ? "letter" as const
+              : "other" as const;
+
+  return {
+    format:
+      explicitFormat ??
+      "docx",
+    documentType
+  };
+}
+
+function downloadBlob(
+  blob: Blob,
+  filename: string
+): void {
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+  try {
+    const anchor =
+      document.createElement(
+        "a"
+      );
+    anchor.href = url;
+    anchor.download =
+      filename;
+    anchor.rel =
+      "noreferrer";
+    document.body.appendChild(
+      anchor
+    );
+    anchor.click();
+    anchor.remove();
+  } finally {
+    URL.revokeObjectURL(
+      url
+    );
+  }
+}
+
 function upsertAttachment(
   current: DocumentAttachmentSelection[],
   selection: DocumentAttachmentSelection
@@ -504,6 +601,14 @@ export default function MatterChatApp({
   const [deletePhrase, setDeletePhrase] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
+  const [caseFiles, setCaseFiles] =
+    useState<StoredUploadResponse[]>([]);
+  const [caseFilePickerOpen, setCaseFilePickerOpen] =
+    useState(false);
+  const [caseFilePickerError, setCaseFilePickerError] =
+    useState("");
+  const [generatedDocumentMessage, setGeneratedDocumentMessage] =
+    useState("");
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -610,6 +715,8 @@ export default function MatterChatApp({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const dragDepth = useRef(0);
+  const activeCaseIdRef =
+    useRef(caseId);
 
   const matterCases = useMemo(
     () => cases.filter((item) => item.caseKind === "MATTER"),
@@ -1107,6 +1214,44 @@ export default function MatterChatApp({
   }, [caseId, selectedCase?.displayName]);
 
   useEffect(() => {
+    activeCaseIdRef.current =
+      caseId;
+  }, [caseId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setCaseFilePickerOpen(false);
+    setCaseFilePickerError("");
+    if (!caseId) {
+      setCaseFiles([]);
+      return;
+    }
+
+    void listCaseFiles(caseId)
+      .then((result) => {
+        if (!cancelled) {
+          setCaseFiles(
+            result.uploads
+          );
+        }
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          setCaseFiles([]);
+          setCaseFilePickerError(
+            error instanceof Error
+              ? error.message
+              : String(error)
+          );
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [caseId, workspaceRefresh]);
+
+  useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, executing]);
 
@@ -1122,6 +1267,24 @@ export default function MatterChatApp({
       void executeMessage(pending);
     }
   }, [pendingFirstMessage, caseId, threadLoading, executing]);
+
+  function switchToCase(
+    nextCaseId: string
+  ): void {
+    if (
+      caseBusy ||
+      !nextCaseId ||
+      nextCaseId === caseId
+    ) {
+      return;
+    }
+    setPendingFirstMessage(null);
+    setExecutionError("");
+    setGeneratedDocumentMessage("");
+    setCaseFilePickerOpen(false);
+    setCaseId(nextCaseId);
+    setActiveTab("chat");
+  }
 
   async function refreshCases(preferredCaseId?: string): Promise<void> {
     const response = await listCases();
@@ -1710,9 +1873,13 @@ export default function MatterChatApp({
       ...current,
       userMessage
     ]);
+    const executionCaseId =
+      caseId;
+
     setQuery("");
     setExecuting(true);
     setExecutionError("");
+    setGeneratedDocumentMessage("");
 
     try {
       let readyAccount =
@@ -1758,6 +1925,136 @@ export default function MatterChatApp({
         );
       }
 
+      const documentRequest =
+        directDocumentRequest(
+          trimmed
+        );
+      if (
+        documentRequest &&
+        caseId
+      ) {
+        const generated =
+          await generateLegalDocument(
+            executionCaseId,
+            {
+              query:
+                buildSkillSelectionEnvelope(
+                  conversationForProvider(
+                    priorMessages,
+                    trimmed
+                  ),
+                  automaticSkills,
+                  [],
+                  manualSkills === null
+                    ? null
+                    : manualSkillSelection
+                ),
+              provider:
+                runtimeProvider,
+              model,
+              primarySkill:
+                route,
+              mode:
+                "PRAWNIK",
+              format:
+                documentRequest
+                  .format,
+              documentType:
+                documentRequest
+                  .documentType,
+              styleProfile:
+                "lex-classic-clean-v1",
+              attachments:
+                documentAttachments,
+              filename:
+                (
+                  documentRequest.documentType ===
+                    "letter"
+                    ? "LexMachina-pismo"
+                    : documentRequest.documentType ===
+                        "pleading"
+                      ? "LexMachina-pismo-procesowe"
+                      : documentRequest.documentType ===
+                          "contract"
+                        ? "LexMachina-umowa"
+                        : documentRequest.documentType ===
+                            "opinion"
+                          ? "LexMachina-opinia"
+                          : documentRequest.documentType ===
+                              "report"
+                            ? "LexMachina-raport"
+                            : "LexMachina-dokument"
+                ) +
+                "." +
+                documentRequest.format
+            }
+          );
+
+        const blob =
+          await downloadGeneratedArtifact(
+            executionCaseId,
+            generated
+              .artifact
+              .artifactId
+          );
+        downloadBlob(
+          blob,
+          generated
+            .artifact
+            .filename
+        );
+        const downloadedFinal =
+          generated
+            .readyForDownload ===
+            true;
+
+        if (
+          activeCaseIdRef.current ===
+            executionCaseId
+        ) {
+          setMessages(
+            (
+              current
+            ) => [
+              ...current,
+              {
+                id:
+                  messageId(),
+                role:
+                  "assistant",
+                content:
+                  downloadedFinal
+                    ? "Gotowy dokument został przygotowany w profesjonalnym układzie i pobrany jako " +
+                      documentRequest
+                        .format
+                        .toUpperCase() +
+                      "."
+                    : "Dokument został przygotowany jako bezpieczna wersja tokenizowana " +
+                      documentRequest
+                        .format
+                        .toUpperCase() +
+                      ". Finalny plik z przywróconymi danymi wymaga reautoryzacji.",
+                meta:
+                  "dokument: " +
+                  generated
+                    .artifact
+                    .filename
+              }
+            ]
+          );
+          setGeneratedDocumentMessage(
+            downloadedFinal
+              ? "Dokument gotowy i pobrany."
+              : "Dokument tokenizowany pobrany; finalizacja wymaga reautoryzacji."
+          );
+          setWorkspaceRefresh(
+            (value) =>
+              value + 1
+          );
+        }
+        return;
+      }
+
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -1793,13 +2090,18 @@ export default function MatterChatApp({
           (value) => value + 1
         );
       }
-      setMessages((current) => [
-        ...current,
-        executionMessage(
-          result,
-          route
-        )
-      ]);
+      if (
+        activeCaseIdRef.current ===
+          executionCaseId
+      ) {
+        setMessages((current) => [
+          ...current,
+          executionMessage(
+            result,
+            route
+          )
+        ]);
+      }
     } catch (error) {
       const code =
         error instanceof ApiError
@@ -2013,7 +2315,7 @@ export default function MatterChatApp({
             <strong>Sprawy</strong>
             <button
               type="button"
-              disabled={caseBusy || executing}
+              disabled={caseBusy}
               onClick={() => void createLocalCase(newCaseName.trim() || "Nowa sprawa")}
             >
               + Nowa sprawa
@@ -2030,9 +2332,11 @@ export default function MatterChatApp({
               <button
                 key={item.caseId}
                 type="button"
-                disabled={executing}
+                disabled={caseBusy}
                 className={item.caseId === caseId ? "matter-thread active" : "matter-thread"}
                 onClick={() => {
+                  setPendingFirstMessage(null);
+                  setExecutionError("");
                   setCaseId(item.caseId);
                   setActiveTab("chat");
                 }}
@@ -2111,6 +2415,59 @@ export default function MatterChatApp({
             </h1>
           </div>
           <div className="chat-header-actions">
+            <div className="chat-case-switcher">
+              <label>
+                <span>Sprawa</span>
+                <select
+                  aria-label="Wybierz sprawę"
+                  value={caseId}
+                  disabled={
+                    caseBusy
+                  }
+                  onChange={(event) =>
+                    switchToCase(
+                      event.target
+                        .value
+                    )
+                  }
+                >
+                  {matterCases.map(
+                    (item) => (
+                      <option
+                        key={
+                          item.caseId
+                        }
+                        value={
+                          item.caseId
+                        }
+                      >
+                        {item.displayName ||
+                          "Sprawa bez nazwy"}
+                        {item.archivedAt
+                          ? " · archiwalna"
+                          : ""}
+                      </option>
+                    )
+                  )}
+                </select>
+              </label>
+              <button
+                type="button"
+                className="chat-secondary-action"
+                disabled={
+                  caseBusy
+                }
+                onClick={() =>
+                  void createLocalCase(
+                    newCaseName
+                      .trim() ||
+                      "Nowa sprawa"
+                  )
+                }
+              >
+                + Nowa sprawa
+              </button>
+            </div>
             {activeTab === "chat" ? (
               <div className="chat-model-lanes">
                 <label>
@@ -2418,6 +2775,7 @@ export default function MatterChatApp({
                   <DocumentCitationContent
                     content={message.content}
                     citations={message.documentCitations}
+                    onOpenUrl={openExternalUrl}
                   />
                   {visibleMessageMeta(message.meta) ? (
                     <small className="chat-message-meta">
@@ -2433,12 +2791,18 @@ export default function MatterChatApp({
                             <span>{item.status} · {item.kind}</span>
                             <strong>{item.claim}</strong>
                             {item.sourceUrl ? (
-                              <button
-                                type="button"
-                                onClick={() => void openExternalUrl(item.sourceUrl!)}
+                              <a
+                                className="source-inline-link"
+                                href={item.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => {
+                                  event.preventDefault();
+                                  void openExternalUrl(item.sourceUrl!);
+                                }}
                               >
                                 Otwórz źródło w przeglądarce ↗
-                              </button>
+                              </a>
                             ) : null}
                           </li>
                         ))}
@@ -2501,6 +2865,21 @@ export default function MatterChatApp({
                 <button
                   type="button"
                   className="chat-secondary-action"
+                  aria-expanded={
+                    caseFilePickerOpen
+                  }
+                  onClick={() =>
+                    setCaseFilePickerOpen(
+                      (value) =>
+                        !value
+                    )
+                  }
+                >
+                  🗂 Akta
+                </button>
+                <button
+                  type="button"
+                  className="chat-secondary-action"
                   onClick={() => setActiveTab("skills")}
                 >
                   ⚙ Skille
@@ -2515,6 +2894,133 @@ export default function MatterChatApp({
                   {executing || pendingFirstMessage ? "Wysyłanie…" : "Wyślij"}
                 </button>
               </div>
+              {caseFilePickerOpen ? (
+                <div
+                  className="chat-case-file-picker"
+                  aria-label="Dokumenty sprawy do dołączenia"
+                >
+                  <div className="chat-case-file-picker-head">
+                    <strong>
+                      Dokumenty sprawy
+                    </strong>
+                    <small>
+                      Zaznacz dowolną liczbę gotowych plików. Status OCR pokazuje, które strony wymagały rozpoznawania tekstu.
+                    </small>
+                  </div>
+                  {caseFilePickerError ? (
+                    <p className="chat-inline-error">
+                      Nie udało się odczytać dokumentów sprawy: {caseFilePickerError}
+                    </p>
+                  ) : null}
+                  {caseFiles.length === 0 ? (
+                    <small>
+                      Brak zapisanych plików w tej sprawie.
+                    </small>
+                  ) : (
+                    <ul className="chat-case-file-picker-list">
+                      {caseFiles.map(
+                        (item) => {
+                          const ready =
+                            Boolean(
+                              item.processing &&
+                              item.processing.chunkIndices.length > 0
+                            );
+                          const selected =
+                            Boolean(
+                              item.processing &&
+                              documentAttachments.some(
+                                (attachment) =>
+                                  attachment.documentId ===
+                                    item.processing!.documentId
+                              )
+                            );
+                          return (
+                            <li
+                              key={
+                                item.uploadId
+                              }
+                            >
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  disabled={
+                                    !ready
+                                  }
+                                  checked={
+                                    selected
+                                  }
+                                  onChange={(
+                                    event
+                                  ) => {
+                                    const processing =
+                                      item.processing;
+                                    if (
+                                      !processing
+                                    ) {
+                                      return;
+                                    }
+                                    if (
+                                      event
+                                        .target
+                                        .checked
+                                    ) {
+                                      setDocumentAttachments(
+                                        (
+                                          current
+                                        ) =>
+                                          upsertAttachment(
+                                            current,
+                                            {
+                                              caseId,
+                                              documentId:
+                                                processing.documentId,
+                                              chunkIndices:
+                                                processing.chunkIndices
+                                            }
+                                          )
+                                      );
+                                    } else {
+                                      setDocumentAttachments(
+                                        (
+                                          current
+                                        ) =>
+                                          current.filter(
+                                            (
+                                              attachment
+                                            ) =>
+                                              attachment.documentId !==
+                                                processing.documentId
+                                          )
+                                      );
+                                    }
+                                  }}
+                                />
+                                <span>
+                                  <strong>
+                                    {item.filename}
+                                  </strong>
+                                  <small>
+                                    {item.processing
+                                      ? item.processing.ocrPages > 0
+                                        ? `OCR ✓ · ${item.processing.ocrPages}/${item.processing.totalPages} stron`
+                                        : `Tekst cyfrowy ✓ · OCR niewymagany · ${item.processing.totalPages} stron`
+                                      : "Nieprzetworzony · uruchom OCR/prywatność w zakładce Pliki"}
+                                  </small>
+                                </span>
+                              </label>
+                            </li>
+                          );
+                        }
+                      )}
+                    </ul>
+                  )}
+                </div>
+              ) : null}
+              {generatedDocumentMessage ? (
+                <p className="chat-inline-success">
+                  {generatedDocumentMessage}
+                </p>
+              ) : null}
               {executionError ? (
                 <p className="chat-inline-error">{executionError}</p>
               ) : null}

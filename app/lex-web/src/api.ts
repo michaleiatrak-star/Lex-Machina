@@ -230,6 +230,15 @@ export type StoredUploadResponse = {
   storedAt: string;
   archive: boolean;
   extracted: StoredArchiveEntry[];
+  processing?: {
+    documentId: string;
+    complete: true;
+    totalPages: number;
+    digitalPages: number;
+    ocrPages: number;
+    blankPages: number;
+    chunkIndices: number[];
+  };
 };
 
 export type CaseFilesResponse = {
@@ -295,9 +304,20 @@ export type GeneratedDocumentResponse = {
     StoredCaseArtifact;
   format:
     LegalDocumentFormat;
-  tokenizedSha256: string;
-  vaultGeneration: number;
+  tokenizedSha256?: string;
+  vaultGeneration?: number;
+  sha256?: string;
   aliasesUsed: string[];
+  readyForDownload?: boolean;
+  downloadTicket?: {
+    ticketId: string;
+    caseId: string;
+    artifactId: string;
+    finalSha256: string;
+    expiresAt: string;
+    remainingUses:
+      0 | 1;
+  };
   templateProfile?: {
     templateId: string;
     sourceFormat:
@@ -1706,7 +1726,7 @@ export function generateLegalDocument(
     styleProfile?:
       LegalStyleProfile;
     templateId?: string;
-    attachments:
+    attachments?:
       DocumentAttachmentSelection[];
     filename?: string;
   }
@@ -1725,6 +1745,44 @@ export function generateLegalDocument(
         )
     }
   );
+}
+
+export async function downloadGeneratedArtifact(
+  caseId: string,
+  artifactId: string
+): Promise<Blob> {
+  const response =
+    await fetch(
+      `${apiBase()}/api/cases/${caseId}/artifacts/${artifactId}/download`,
+      {
+        headers: {
+          ...authorizationHeaders()
+        },
+        cache: "no-store"
+      }
+    );
+
+  if (!response.ok) {
+    let code =
+      `HTTP_${response.status}`;
+    try {
+      const failure =
+        await response
+          .json() as
+            ApiFailure;
+      code =
+        failure.error ||
+        code;
+    } catch {
+      // no JSON body
+    }
+    throw new ApiError(
+      code,
+      response.status
+    );
+  }
+
+  return await response.blob();
 }
 
 export function createDeanonymizationIntent(

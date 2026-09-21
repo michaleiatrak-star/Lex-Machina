@@ -26,8 +26,9 @@
 }
 
 .matter-thread-heading button {
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0 9px;
   font-weight: 800;
   cursor: pointer;
 }

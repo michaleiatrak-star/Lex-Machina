@@ -45,7 +45,103 @@ const OFFICIAL_SOURCE_HOSTS = new Set<string>([
 ]);
 
 const MAX_SOURCE_CHARS = 2_000_000;
-const MAX_EVIDENCE_CHARS = 500;
+const MAX_EVIDENCE_CHARS = 12_000;
+
+function decodeHtmlEntities(
+  value: string
+): string {
+  const named: Record<string, string> = {
+    nbsp: " ",
+    sect: "§",
+    amp: "&",
+    quot: '"',
+    apos: "'",
+    lt: "<",
+    gt: ">"
+  };
+
+  return value.replace(
+    /&(#x[0-9a-f]+|#\d+|[a-z]+);/giu,
+    (match, token: string) => {
+      const lower = token.toLocaleLowerCase("en");
+      if (lower.startsWith("#x")) {
+        const code = Number.parseInt(lower.slice(2), 16);
+        return Number.isFinite(code)
+          ? String.fromCodePoint(code)
+          : match;
+      }
+      if (lower.startsWith("#")) {
+        const code = Number.parseInt(lower.slice(1), 10);
+        return Number.isFinite(code)
+          ? String.fromCodePoint(code)
+          : match;
+      }
+      return named[lower] ?? match;
+    }
+  );
+}
+
+function readableText(value: string): string {
+  return decodeHtmlEntities(
+    value
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
+      .replace(/<\s*(?:br\b[^>]*|\/?(?:body|main|section|article|header|footer|title|p|div|li|tr|td|th|h[1-6])\b[^>]*)>/giu, "\n")
+      .replace(/<[^>]+>/g, " ")
+  )
+    .normalize("NFKC")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[ \t\f\v]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(
+    /[.*+?^$()|[\]\\{}]/g,
+    (match) => "\\" + match
+  );
+}
+function articleSection(
+  claim: string,
+  body: string
+): string | null {
+  const article = articleToken(claim);
+  if (!article) return null;
+
+  const readable = readableText(body);
+  const strictHeading = new RegExp(
+    "(?:^|\\n)\\s*Art\\.?\\s+" +
+      escapeRegExp(article) +
+      "(?=\\s*(?:\\.|§|$))",
+    "u"
+  );
+  const fallbackHeading = new RegExp(
+    "\\bArt\\.?\\s+" +
+      escapeRegExp(article) +
+      "(?=\\s*(?:\\.|§|$))",
+    "u"
+  );
+  const match =
+    strictHeading.exec(readable) ??
+    fallbackHeading.exec(readable);
+  if (!match) return null;
+
+  const start =
+    match.index +
+    (match[0].startsWith("\n") ? 1 : 0);
+  const afterHeading =
+    match.index + match[0].length;
+  const nextHeading = /\n\s*Art\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?=\s*(?:\.|§|$))/u.exec(
+    readable.slice(afterHeading)
+  );
+  const end = nextHeading
+    ? afterHeading + nextHeading.index
+    : readable.length;
+  const section = readable.slice(start, end).trim();
+  return section ? section.slice(0, MAX_EVIDENCE_CHARS) : null;
+}
 
 function normalize(value: string): string {
   return value
@@ -108,11 +204,11 @@ function matchesClaim(
   if (!haystack) return false;
 
   if (kind === "statute") {
-    const article = articleToken(claim);
-    if (!article) return false;
-    return (
-      haystack.includes("art " + article) ||
-      haystack.includes("artykuł " + article)
+    return Boolean(
+      articleSection(
+        claim,
+        body
+      )
     );
   }
 
@@ -136,16 +232,18 @@ function evidenceSnippet(
   kind: VerificationKind,
   body: string
 ): string | undefined {
+  if (kind === "statute") {
+    return articleSection(
+      claim,
+      body
+    ) ?? undefined;
+  }
+
   const normalizedBody = normalize(body);
-  const article = articleToken(claim);
   const needle =
-    kind === "statute"
-      ? article
-        ? "art " + article
-        : normalize(claim)
-      : kind === "case"
-        ? caseSignature(claim) ?? normalize(claim)
-        : normalize(claim);
+    kind === "case"
+      ? caseSignature(claim) ?? normalize(claim)
+      : normalize(claim);
 
   if (!needle) return undefined;
   const index = normalizedBody.indexOf(needle);
@@ -155,7 +253,6 @@ function evidenceSnippet(
     .slice(start, start + MAX_EVIDENCE_CHARS)
     .trim();
 }
-
 function sourceTier(host: string): "R1" | "R2A" {
   return host === "eli.gov.pl" ||
     host === "isap.sejm.gov.pl" ||

@@ -1034,6 +1034,101 @@ export class TemporalSourceFreshnessChecker {
       );
 
     if (effectiveAmendments.length > 0) {
+      // A published consolidated text (tekst jednolity) can legitimately have
+      // later effective amendments. ELI also exposes the official current
+      // unified text (tekst ujednolicony) on the base act endpoint. Prefer that
+      // official current text instead of blocking the whole act merely because
+      // post-t.j. amendments exist.
+      const baseEli =
+        normalizeEli(
+          descriptor.baseEli
+        );
+      const baseMetadataUrl =
+        apiUrl(
+          descriptor.baseEli
+        );
+      let baseAct:
+        EliAct | null = null;
+
+      if (
+        baseEli &&
+        baseMetadataUrl
+      ) {
+        try {
+          baseAct =
+            unwrapAct(
+              await json(
+                this.fetcher,
+                baseMetadataUrl
+              )
+            );
+        } catch {
+          // Keep the previous fail-closed behavior when the official unified
+          // text cannot be proven available.
+        }
+      }
+
+      if (
+        baseAct &&
+        !repealedStatus(
+          baseAct.status
+        )
+      ) {
+        if (
+          baseAct.textHTML ===
+            true
+        ) {
+          const unifiedHtmlUrl =
+            apiUrl(
+              baseEli,
+              "/text.html"
+            );
+          if (unifiedHtmlUrl) {
+            return {
+              status: "CURRENT",
+              mode: "CURRENT",
+              checkedAt,
+              baseEli:
+                descriptor.baseEli,
+              pinnedEli:
+                descriptor.eli,
+              currentEli:
+                current.eli,
+              currentPromulgation:
+                promulgation,
+              sourceUrl:
+                unifiedHtmlUrl,
+              amendmentsAfter,
+              amendmentApplicability,
+              reason:
+                "OFFICIAL_UNIFIED_BASE_TEXT_COVERS_POST_TJ_AMENDMENTS"
+            };
+          }
+        }
+
+        if (
+          baseAct.textPDF ===
+            true
+        ) {
+          const unifiedPdfUrl =
+            apiUrl(
+              baseEli,
+              "/text.pdf"
+            );
+          if (unifiedPdfUrl) {
+            return fail(
+              "CURRENT_TEXT_REQUIRES_PDF",
+              "OFFICIAL_UNIFIED_BASE_TEXT_REQUIRES_PDF",
+              {
+                ...common,
+                sourceUrl:
+                  unifiedPdfUrl
+              }
+            );
+          }
+        }
+      }
+
       return fail(
         "POST_TJ_AMENDMENTS",
         "EFFECTIVE_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",

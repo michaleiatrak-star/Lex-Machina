@@ -66,6 +66,15 @@ export type FinalDocumentResult = {
   replacements: number;
 };
 
+export type ReadyDocumentResult = {
+  artifact:
+    StoredCaseArtifact;
+  format:
+    LegalDocumentFormat;
+  sha256: string;
+  text: string;
+};
+
 export class LocalDocumentAuthoringService {
   constructor(
     private readonly vaults:
@@ -111,7 +120,6 @@ export class LocalDocumentAuthoringService {
         )
       ];
     if (
-      unique.length < 1 ||
       unique.length > 99 ||
       unique.some(
         (documentId) =>
@@ -334,6 +342,178 @@ export class LocalDocumentAuthoringService {
             .aliasesUsed,
         text:
           rendered.text
+      };
+    } finally {
+      rendered.data.fill(0);
+    }
+  }
+
+  async createReady(args: {
+    caseId: string;
+    createdByUserId:
+      string;
+    format:
+      LegalDocumentFormat;
+    ast: unknown;
+    caseDataKey:
+      Buffer;
+    keyVersion:
+      number;
+    validationContext:
+      DocumentGenerationValidationContext;
+    filename?: string;
+  }): Promise<
+    ReadyDocumentResult
+  > {
+    const validated =
+      validateLegalDocumentAst(
+        args.ast,
+        []
+      );
+    if (
+      validated
+        .aliasesUsed
+        .length > 0
+    ) {
+      throw new Error(
+        "READY_DOCUMENT_PII_ALIAS_FORBIDDEN"
+      );
+    }
+
+    const rendered =
+      await this.renderer
+        .render(
+          args.format,
+          validated.ast
+        );
+    try {
+      const validation =
+        await this.renderer
+          .validate(
+            args.format,
+            rendered.data
+          );
+      const astText =
+        legalDocumentPlainText(
+          validated.ast
+        );
+      if (
+        validation.aliases !==
+          0 ||
+        validation.text
+          .replace(/\s+/g, " ")
+          .trim() !==
+        rendered.text
+          .replace(/\s+/g, " ")
+          .trim() ||
+        !astText
+      ) {
+        throw new Error(
+          "READY_DOCUMENT_VALIDATION_FAILED"
+        );
+      }
+
+      const hybrid =
+        validateLocalHybridDocument(
+          validation.text,
+          args.validationContext
+        );
+      if (
+        hybrid.result !==
+          "PASS"
+      ) {
+        throw new Error(
+          "READY_DOCUMENT_HYBRID_BLOCKED:" +
+          hybrid.reasons
+            .join(",")
+        );
+      }
+
+      const exportState =
+        rebuildGenerationExportState(
+          args.validationContext
+        );
+      const exportReport =
+        new ExportGate()
+          .evaluate({
+            documentContent:
+              rendered.data,
+            documentText:
+              validation.text,
+            documentKind:
+              args.format,
+            documentSkill:
+              args.validationContext
+                .primarySkill,
+            ledger:
+              exportState.ledger,
+            audit:
+              exportState.audit,
+            hybridValidation:
+              "PASS"
+          });
+      if (
+        exportReport.result !==
+          "PASS" ||
+        !exportReport
+          .documentHash
+      ) {
+        throw new Error(
+          "READY_DOCUMENT_EXPORT_GATE_BLOCKED:" +
+          exportReport.reasons
+            .join(",")
+        );
+      }
+
+      const sha256 =
+        createHash("sha256")
+          .update(
+            rendered.data
+          )
+          .digest("hex");
+      if (
+        sha256 !==
+          exportReport
+            .documentHash
+      ) {
+        throw new Error(
+          "READY_DOCUMENT_EXPORT_HASH_MISMATCH"
+        );
+      }
+
+      const artifact =
+        await this.artifacts
+          .saveArtifact({
+            caseId:
+              args.caseId,
+            filename:
+              args.filename ??
+              `LexMachina-document.${args.format}`,
+            mediaType:
+              args.format ===
+                "docx"
+                ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                : "application/vnd.oasis.opendocument.text",
+            data:
+              rendered.data,
+            caseDataKey:
+              args.caseDataKey,
+            keyVersion:
+              args.keyVersion,
+            sensitivity:
+              "PROTECTED",
+            createdByUserId:
+              args
+                .createdByUserId
+          });
+
+      return {
+        artifact,
+        format:
+          args.format,
+        sha256,
+        text:
+          validation.text
       };
     } finally {
       rendered.data.fill(0);
