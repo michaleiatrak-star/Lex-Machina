@@ -1437,12 +1437,22 @@ export default function MatterChatApp({
     }
   }
 
+  const accountCanLoginInline =
+    isAccountPrimarySource(
+      provider
+    ) &&
+    user.appRole === "ADMIN" &&
+    accountSession?.installed !== false;
+
   const canSend =
     runtimeOnline &&
-    canExecutePrimaryModel(
-      providerConfigured,
-      model,
-      accountAuthenticated
+    (
+      canExecutePrimaryModel(
+        providerConfigured,
+        model,
+        accountAuthenticated
+      ) ||
+      accountCanLoginInline
     ) &&
     Boolean(model) &&
     Boolean(query.trim()) &&
