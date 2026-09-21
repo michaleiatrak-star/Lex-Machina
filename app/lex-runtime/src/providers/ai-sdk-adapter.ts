@@ -359,6 +359,48 @@ export function buildLocalChatRequest(
   };
 }
 
+export function isLocalSseTerminalLine(
+  rawLine: string
+): boolean {
+  const line =
+    rawLine.trim();
+  if (
+    !line.startsWith(
+      "data:"
+    )
+  ) {
+    return false;
+  }
+  const data =
+    line.slice(5).trim();
+  if (
+    data === "[DONE]"
+  ) {
+    return true;
+  }
+  if (!data) {
+    return false;
+  }
+  try {
+    const payload =
+      JSON.parse(data) as {
+        choices?: Array<{
+          finish_reason?: unknown;
+        }>;
+      };
+    return payload.choices?.some(
+      (choice) =>
+        typeof choice
+          .finish_reason ===
+          "string" &&
+        choice.finish_reason
+          .trim().length > 0
+    ) === true;
+  } catch {
+    return false;
+  }
+}
+
 export function parseLocalSseLine(
   rawLine: string
 ): string {
@@ -494,6 +536,9 @@ async function readLocalSse(
   let buffer = "";
   let fullText = "";
 
+  let terminalSeen =
+    false;
+
   const consumeLine = (
     rawLine: string
   ) => {
@@ -501,6 +546,13 @@ async function readLocalSse(
       parseLocalSseLine(
         rawLine
       );
+    if (
+      isLocalSseTerminalLine(
+        rawLine
+      )
+    ) {
+      terminalSeen = true;
+    }
   };
 
   try {
@@ -536,6 +588,23 @@ async function readLocalSse(
           );
         newline =
           buffer.indexOf("\n");
+        if (
+          terminalSeen
+        ) {
+          break;
+        }
+      }
+
+      if (
+        terminalSeen
+      ) {
+        try {
+          await reader.cancel();
+        } catch {
+          // The server may already have closed the stream. The terminal
+          // SSE frame is authoritative and the generated text is complete.
+        }
+        break;
       }
 
       if (done) {
