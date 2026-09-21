@@ -1206,6 +1206,16 @@ export default function MatterChatApp({
     setAllowedDomains([]);
   }
 
+  function selectAllSkills(): void {
+    selectAllDomainSkills();
+    selectAllManualSkills();
+  }
+
+  function clearAllSkills(): void {
+    clearDomainSkills();
+    clearManualSkills();
+  }
+
   function toggleDomainSkill(name: string): void {
     setAllowedDomains((current) => {
       const selected = current ?? routes;
@@ -2437,6 +2447,35 @@ export default function MatterChatApp({
                 DR i skille wykonawcze. Po pierwszej wiadomości tryb jest przypięty do
                 wątku i selektor w czacie znika.
               </p>
+              <div className="chat-model-select-row">
+                <button
+                  type="button"
+                  className="chat-secondary-action"
+                  disabled={
+                    domainSelection.length === routes.length &&
+                    manualSkillSelection.length ===
+                      selectableExecutionSkills.length
+                  }
+                  onClick={
+                    selectAllSkills
+                  }
+                >
+                  Zaznacz wszystkie skille
+                </button>
+                <button
+                  type="button"
+                  className="chat-secondary-action"
+                  disabled={
+                    domainSelection.length === 0 &&
+                    manualSkillSelection.length === 0
+                  }
+                  onClick={
+                    clearAllSkills
+                  }
+                >
+                  Odznacz wszystkie opcjonalne
+                </button>
+              </div>
             </article>
 
             <article className="chat-card">
@@ -2449,6 +2488,10 @@ export default function MatterChatApp({
                 <div>
                   <strong>✓ shared</strong>
                   <small>zawsze aktywny</small>
+                </div>
+                <div>
+                  <strong>✓ prawo-polskie-v2</strong>
+                  <small>zawsze aktywny dla zapytań prawnych PL</small>
                 </div>
               </div>
             </article>
