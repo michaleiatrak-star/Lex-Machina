@@ -240,6 +240,61 @@
   font-size: 10px;
 }
 
+.chat-account-card {
+  display: grid;
+  gap: 8px;
+  padding: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.chat-account-identity {
+  display: grid;
+  min-width: 0;
+}
+
+.chat-account-identity strong,
+.chat-account-identity small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-account-identity strong {
+  color: #f5f7f3;
+  font-size: 12px;
+}
+
+.chat-account-identity small {
+  color: #92a097;
+  font-size: 10px;
+}
+
+.chat-account-card > button,
+.chat-account-actions button {
+  min-height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #e9eee9;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.chat-account-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.chat-account-card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .chat-main {
   min-width: 0;
   padding: 26px clamp(18px, 3vw, 44px) 40px;
@@ -1107,6 +1162,20 @@
     display: none;
   }
 
+  .chat-account-card {
+    grid-template-columns: minmax(160px, 1fr) auto auto;
+    align-items: center;
+  }
+
+  .chat-account-actions {
+    grid-template-columns: auto auto;
+  }
+
+  .chat-account-card > button,
+  .chat-account-actions button {
+    padding: 0 10px;
+  }
+
   .chat-settings-field-grid {
     grid-template-columns: 1fr;
   }
@@ -1123,6 +1192,14 @@
 }
 
 @media (max-width: 680px) {
+  .chat-account-card {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-account-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .chat-main {
     padding: 18px 12px 28px;
   }
