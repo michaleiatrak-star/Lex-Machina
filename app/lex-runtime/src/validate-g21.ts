@@ -203,6 +203,25 @@ function freshnessFetcher(
 
     if (
       url.endsWith(
+        "/" +
+          amendment.eli +
+          "/text.html"
+      )
+    ) {
+      return new Response(
+        "<html><body><p>Art. 1. W art. 6 Kodeksu cywilnego wprowadza się zmianę.</p></body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      );
+    }
+
+    if (
+      url.endsWith(
         "/" + amendment.eli
       )
     ) {
@@ -210,6 +229,8 @@ function freshnessFetcher(
         ELI: amendment.eli,
         promulgation:
           amendment.promulgation,
+        textHTML: true,
+        textPDF: true,
         ...(amendment.entryIntoForce
           ? {
               entryIntoForce:
@@ -539,7 +560,7 @@ const pass =
   effectiveFetches.every(
     (url) =>
       url ===
-        "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html"
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html"
   ) &&
 
   unknownHttp.status === 200 &&
@@ -578,7 +599,7 @@ process.stdout.write(
       contentFetches:
         effectiveFetches.length,
       allowedBecause:
-        "official unified base text incorporates effective post-t.j. amendments"
+        "official amendment text proves the requested article is untouched; verification uses the latest consolidated text"
     },
     unknownEffectDate: {
       http: unknownHttp.status,
