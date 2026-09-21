@@ -31,6 +31,7 @@ const LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS: u64 = 7_200;
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
+const ACCOUNT_OAUTH_KEYRING_SERVICE: &str = "LexMachina/AccountOAuthCredential";
 const SUPPORT_KEYRING_SERVICE: &str = "LexMachina/SupportIdentity";
 const SUPPORT_INSTALLATION_ACCOUNT: &str = "installation-id";
 const SUPPORT_SIGNING_KEY_ACCOUNT: &str = "challenge-signing-key";
@@ -354,7 +355,72 @@ impl RuntimeBridge {
                 ));
             }
         }
+
+        let oauth_entry = Entry::new(
+            ACCOUNT_OAUTH_KEYRING_SERVICE,
+            "anthropic",
+        )
+        .map_err(|error| format!(
+            "DESKTOP_ACCOUNT_OAUTH_KEYRING_OPEN_FAILED:{error}"
+        ))?;
+        match oauth_entry.get_password() {
+            Ok(mut token) => {
+                let response = self.internal_json_request(
+                    "PUT",
+                    "/api/admin/provider-accounts/anthropic/oauth-token",
+                    Some(restore_account_oauth_body(&token)),
+                )?;
+                unsafe_zero_string(&mut token);
+                if !response.status().is_success() {
+                    return Err(format!(
+                        "DESKTOP_ACCOUNT_OAUTH_RESTORE_FAILED:{}",
+                        response.status()
+                    ));
+                }
+            }
+            Err(KeyringError::NoEntry) => {}
+            Err(error) => {
+                return Err(format!(
+                    "DESKTOP_ACCOUNT_OAUTH_KEYRING_READ_FAILED:{error}"
+                ));
+            }
+        }
         Ok(())
+    }
+
+    fn persist_account_oauth_credential(
+        &self,
+        token: &str,
+    ) -> Result<(), String> {
+        Entry::new(
+            ACCOUNT_OAUTH_KEYRING_SERVICE,
+            "anthropic",
+        )
+        .map_err(|error| format!(
+            "DESKTOP_ACCOUNT_OAUTH_KEYRING_OPEN_FAILED:{error}"
+        ))?
+        .set_password(token)
+        .map_err(|error| format!(
+            "DESKTOP_ACCOUNT_OAUTH_KEYRING_WRITE_FAILED:{error}"
+        ))
+    }
+
+    fn delete_account_oauth_credential(
+        &self,
+    ) -> Result<(), String> {
+        let entry = Entry::new(
+            ACCOUNT_OAUTH_KEYRING_SERVICE,
+            "anthropic",
+        )
+        .map_err(|error| format!(
+            "DESKTOP_ACCOUNT_OAUTH_KEYRING_OPEN_FAILED:{error}"
+        ))?;
+        match entry.delete_credential() {
+            Ok(()) | Err(KeyringError::NoEntry) => Ok(()),
+            Err(error) => Err(format!(
+                "DESKTOP_ACCOUNT_OAUTH_KEYRING_DELETE_FAILED:{error}"
+            )),
+        }
     }
 
     fn persist_provider_credential(
@@ -446,6 +512,12 @@ impl RuntimeBridge {
         let method = request.method().as_str().to_string();
         let provider_credential_input =
             provider_credential_from_request(
+                &method,
+                &path,
+                request.body(),
+            )?;
+        let account_oauth_credential_input =
+            account_oauth_credential_from_request(
                 &method,
                 &path,
                 request.body(),
@@ -577,6 +649,31 @@ impl RuntimeBridge {
         }
 
         if status.is_success() {
+            if let Some(operation) =
+                account_oauth_credential_input
+            {
+                match operation {
+                    ProviderCredentialOperation::Set {
+                        mut api_key,
+                        persist,
+                    } => {
+                        let result =
+                            if persist {
+                                self.persist_account_oauth_credential(
+                                    &api_key,
+                                )
+                            } else {
+                                self.delete_account_oauth_credential()
+                            };
+                        unsafe_zero_string(&mut api_key);
+                        result?;
+                    }
+                    ProviderCredentialOperation::Delete => {
+                        self.delete_account_oauth_credential()?;
+                    }
+                }
+            }
+
             if let Some((provider, operation)) =
                 provider_credential_input
             {
@@ -734,6 +831,73 @@ fn restore_credential_body(api_key: &str) -> Value {
         "apiKey": api_key,
         "persistence": "OS_KEYRING"
     })
+}
+
+fn restore_account_oauth_body(token: &str) -> Value {
+    json!({
+        "token": token,
+        "persistence": "OS_KEYRING"
+    })
+}
+
+fn account_oauth_credential_from_request(
+    method: &str,
+    path: &str,
+    body: &[u8],
+) -> Result<Option<ProviderCredentialOperation>, String> {
+    if path !=
+        "/api/admin/provider-accounts/anthropic/oauth-token"
+    {
+        return Ok(None);
+    }
+    if method == "DELETE" {
+        return Ok(Some(
+            ProviderCredentialOperation::Delete
+        ));
+    }
+    if method != "PUT" {
+        return Ok(None);
+    }
+
+    let value: Value =
+        serde_json::from_slice(body)
+            .map_err(|_|
+                "DESKTOP_ACCOUNT_OAUTH_REQUEST_INVALID"
+                    .to_string()
+            )?;
+    let mut token = value
+        .get("token")
+        .and_then(Value::as_str)
+        .filter(|value| {
+            !value.trim().is_empty()
+                && value.len() <= 16_384
+        })
+        .ok_or_else(||
+            "DESKTOP_ACCOUNT_OAUTH_REQUEST_INVALID"
+                .to_string()
+        )?
+        .to_string();
+    let persist = match value
+        .get("persistence")
+        .and_then(Value::as_str)
+    {
+        Some("OS_KEYRING") => true,
+        Some("PROCESS_MEMORY") | None => false,
+        _ => {
+            unsafe_zero_string(&mut token);
+            return Err(
+                "DESKTOP_ACCOUNT_OAUTH_PERSISTENCE_INVALID"
+                    .to_string()
+            );
+        }
+    };
+
+    Ok(Some(
+        ProviderCredentialOperation::Set {
+            api_key: token,
+            persist,
+        }
+    ))
 }
 
 fn provider_credential_from_request(
@@ -1248,6 +1412,9 @@ fn route_allowed(method: &str, path: &str) -> bool {
         }
         _ if path.starts_with("/api/admin/users") => {
             matches!(method, "GET" | "POST" | "PATCH" | "DELETE")
+        }
+        "/api/admin/provider-accounts/anthropic/oauth-token" => {
+            matches!(method, "PUT" | "DELETE")
         }
         _ if path.starts_with("/api/admin/providers/") => {
             matches!(method, "GET" | "PUT" | "DELETE")
@@ -1842,6 +2009,50 @@ mod tests {
             }
             ProviderCredentialOperation::Delete => {
                 panic!("restore must not be treated as a delete");
+            }
+        }
+    }
+
+    #[test]
+    fn account_oauth_credentials_require_explicit_keyring_opt_in() {
+        let memory = account_oauth_credential_from_request(
+            "PUT",
+            "/api/admin/provider-accounts/anthropic/oauth-token",
+            br#"{"token":"oauth-token-abcdefghijklmnopqrstuvwxyz","persistence":"PROCESS_MEMORY"}"#,
+        )
+        .expect("oauth memory request")
+        .expect("oauth operation");
+        match memory {
+            ProviderCredentialOperation::Set {
+                mut api_key,
+                persist,
+            } => {
+                assert!(!persist);
+                assert!(api_key.starts_with("oauth-token-"));
+                unsafe_zero_string(&mut api_key);
+            }
+            ProviderCredentialOperation::Delete => {
+                panic!("unexpected delete");
+            }
+        }
+
+        let persistent = account_oauth_credential_from_request(
+            "PUT",
+            "/api/admin/provider-accounts/anthropic/oauth-token",
+            br#"{"token":"oauth-token-abcdefghijklmnopqrstuvwxyz","persistence":"OS_KEYRING"}"#,
+        )
+        .expect("oauth persistent request")
+        .expect("oauth operation");
+        match persistent {
+            ProviderCredentialOperation::Set {
+                mut api_key,
+                persist,
+            } => {
+                assert!(persist);
+                unsafe_zero_string(&mut api_key);
+            }
+            ProviderCredentialOperation::Delete => {
+                panic!("unexpected delete");
             }
         }
     }
