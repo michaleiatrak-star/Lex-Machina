@@ -1113,6 +1113,14 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
         params.model
       )
     ) {
+      if (
+        this.id ===
+          "anthropic"
+      ) {
+        throw new Error(
+          "ACCOUNT_SESSION_PROVIDER_POLICY_UNSUPPORTED:anthropic"
+        );
+      }
       if (!this.accountSessions) {
         throw new Error(
           "ACCOUNT_SESSION_RUNTIME_UNAVAILABLE"
