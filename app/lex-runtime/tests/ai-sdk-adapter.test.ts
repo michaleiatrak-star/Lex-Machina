@@ -278,6 +278,45 @@ describe("AiSdkProviderAdapter", () => {
     );
   });
 
+  it("fails a stalled local SSE stream after content instead of hanging forever", async () => {
+    const encoder =
+      new TextEncoder();
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"O"}}]}\n\n'
+            )
+          );
+          // Keep the stream open after one content token.
+        }
+      });
+
+    await expect(
+      readLocalSse(
+        new Response(
+          body,
+          {
+            status: 200,
+            headers: {
+              "content-type":
+                "text/event-stream"
+            }
+          }
+        ),
+        {
+          firstContentMs: 50,
+          idleMs: 20
+        }
+      )
+    ).rejects.toThrow(
+      "LOCAL_MODEL_SSE_IDLE_TIMEOUT"
+    );
+  });
+
   it("budgets local output against a 64k qualified context without logging prompt content", () => {
     const budget =
       localChatBudget(
