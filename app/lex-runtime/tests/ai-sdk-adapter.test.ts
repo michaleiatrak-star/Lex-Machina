@@ -90,12 +90,12 @@ describe("AiSdkProviderAdapter", () => {
     ]);
   });
 
-  it("keeps Claude account sessions out of Lex Machina model backends", () => {
+  it("allows documented account and OAuth automation backends without conflating them with API keys", () => {
     expect(
       accountSessionBackendAllowed(
         "anthropic"
       )
-    ).toBe(false);
+    ).toBe(true);
     expect(
       accountSessionBackendAllowed(
         "openai"
