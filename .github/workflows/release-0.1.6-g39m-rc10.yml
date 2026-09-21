@@ -188,13 +188,20 @@ jobs:
           - a sent chat message is appended to the visible thread immediately,
             before provider login/local-model startup or repair work begins;
           - follow-up messages continue the same matter thread using the newest
-            conversation context up to a safe 28k-character runtime budget.
+            conversation context up to a safe 28k-character runtime budget;
+          - external-model setup now exposes two explicit lanes: API credentials
+            (with desktop OS-keyring persistence) and optional official account
+            clients (Codex CLI / Claude Code / Grok Build);
+          - when an account client is missing, chat and Settings now link to the
+            provider's official installation guide and offer a one-click switch
+            to the corresponding API lane instead of a dead-end login error.
 
           Regression coverage added for:
           - visible Windows login-launcher contract;
           - local inference failure classification;
           - execution-skill allow-list select-all/deselect-all semantics;
-          - continued multi-turn chat context preservation.
+          - continued multi-turn chat context preservation;
+          - account-login missing-client recovery and API fallback UX.
 
           Safety boundaries remain unchanged: account authentication remains
           separated from API-key lanes, local models cannot execute host tools,
