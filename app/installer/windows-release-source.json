@@ -220,5 +220,14 @@
     "firstUseNetworkRequired": true,
     "networkPolicy": "CORE_RUNTIME_REMAINS_NETWORK_INDEPENDENT_AFTER_BOOTSTRAP; LIVE_MCP_SOURCE_CALLS_REQUIRE_NETWORK_WHEN_USER_OR_MODEL_INVOKES_LEGAL_RESEARCH",
     "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE"
+  },
+  "accountSessionClients": {
+    "codex": {
+      "package": "@openai/codex",
+      "version": "0.154.0",
+      "model": "gpt-5.6-luna",
+      "delivery": "BUNDLED_APP_PRIVATE",
+      "auth": "CHATGPT_ACCOUNT"
+    }
   }
 }
