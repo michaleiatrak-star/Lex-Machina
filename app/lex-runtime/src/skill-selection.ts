@@ -76,6 +76,33 @@ function safeManualSkillNames(value: unknown): string[] {
   ].slice(0, 16);
 }
 
+function safeExecutionAllowList(
+  value: unknown
+): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return [
+    ...new Set(
+      value
+        .filter(
+          (item): item is string =>
+            typeof item === "string"
+        )
+        .map(
+          (item) =>
+            item.trim()
+        )
+        .filter(
+          (item) =>
+            /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(
+              item
+            )
+        )
+    )
+  ].slice(0, 64);
+}
+
 function safeDomainAllowList(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return [
@@ -142,7 +169,7 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
         safeDomainAllowList(parsed.domains),
       domainRestrictionActive,
       executionAllowList:
-        safeManualSkillNames(
+        safeExecutionAllowList(
           parsed.execution
         ),
       executionRestrictionActive
