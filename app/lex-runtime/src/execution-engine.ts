@@ -129,6 +129,7 @@ export class LexExecutionEngine {
     documentContext?: string;
     provider: ProviderId;
     model: string;
+    continuityKey?: string;
     route: RouteDecision;
     guideContext?: Pick<
       GuideSessionState,
@@ -1030,6 +1031,12 @@ export class LexExecutionEngine {
       {
         model: args.model,
         systemPrompt,
+        ...(args.continuityKey
+          ? {
+              continuityKey:
+                args.continuityKey
+            }
+          : {}),
         messages: [
           ...(args.documentContext
             ? [{
