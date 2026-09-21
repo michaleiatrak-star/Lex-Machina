@@ -173,6 +173,8 @@ jobs:
             is launched in an explicitly visible user console via Start-Process
             -WindowStyle Normal, instead of depending on a hidden parent shell;
           - settings now tell the user that a visible login window should open;
+          - local Mistral/Bielik requests now bypass the full OpenAI provider
+            and use a minimal llama.cpp-compatible /v1/chat/completions transport;
           - local Mistral/Bielik failures are classified into actionable causes:
             server unreachable, request rejected, server error, context overflow,
             resource exhaustion, or generic inference failure;
