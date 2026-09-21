@@ -5207,7 +5207,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       if (
         !sessionRequest ||
         attachments === null ||
-        attachments.length < 1 ||
         (
           format !== "docx" &&
           format !== "odt"
@@ -5548,6 +5547,149 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "PROVIDER_NOT_CONFIGURED",
             provider:
               error.provider
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/artifacts/:artifactId/download",
+    async (req, res) => {
+      if (
+        !options.caseAccessService ||
+        !options.secureCaseArtifactStore
+      ) {
+        res.status(503).json({
+          error:
+            "ARTIFACT_DOWNLOAD_UNAVAILABLE"
+        });
+        return;
+      }
+
+      try {
+        const context =
+          responseAuthContext(res);
+        const caseId =
+          String(
+            req.params.caseId ??
+              ""
+          );
+        const artifactId =
+          String(
+            req.params.artifactId ??
+              ""
+          );
+
+        const view =
+          options.caseAccessService
+            .openCase(
+              context,
+              caseId
+            );
+        options
+          .caseAccessService
+          .assertAccess(
+            context,
+            caseId,
+            "READ"
+          );
+
+        const result =
+          await options
+            .caseAccessService
+            .withCaseDataKey(
+              context,
+              caseId,
+              "ANALYZE",
+              async (
+                caseDataKey
+              ) => {
+                const artifacts =
+                  await options
+                    .secureCaseArtifactStore!
+                    .listArtifacts({
+                      caseId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion
+                    });
+                const artifact =
+                  artifacts.find(
+                    (item) =>
+                      item.artifactId ===
+                        artifactId
+                  );
+
+                if (
+                  !artifact ||
+                  artifact.sensitivity !==
+                    "PROTECTED" ||
+                  (
+                    !artifact.filename
+                      .toLowerCase()
+                      .endsWith(".docx") &&
+                    !artifact.filename
+                      .toLowerCase()
+                      .endsWith(".odt")
+                  )
+                ) {
+                  throw new Error(
+                    "GENERATED_ARTIFACT_NOT_DOWNLOADABLE"
+                  );
+                }
+
+                const data =
+                  await options
+                    .secureCaseArtifactStore!
+                    .readArtifact({
+                      caseId,
+                      artifactId,
+                      caseDataKey,
+                      keyVersion:
+                        view.keyVersion,
+                      maxBytes:
+                        64 *
+                        1024 *
+                        1024
+                    });
+
+                return {
+                  artifact,
+                  data
+                };
+              }
+            );
+
+        res.setHeader(
+          "Content-Type",
+          result.artifact.mediaType
+        );
+        res.setHeader(
+          "Content-Length",
+          String(
+            result.data.byteLength
+          )
+        );
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${result.artifact.filename.replace(/"/g, "")}"`
+        );
+        res.status(200).send(
+          result.data
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof Error
+                ? error.message
+                : "ARTIFACT_DOWNLOAD_FAILED"
           });
         }
       }
