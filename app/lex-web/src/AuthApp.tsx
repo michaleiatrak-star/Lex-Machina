@@ -439,6 +439,11 @@ export default function AuthenticatedApp() {
             return;
           }
 
+          setTemporaryAdminCredentialsActive(
+            status.temporaryAdminCredentialsActive ===
+              true
+          );
+
           if (isDesktopShell()) {
             try {
               const current =
@@ -465,10 +470,6 @@ export default function AuthenticatedApp() {
             }
           }
 
-          setTemporaryAdminCredentialsActive(
-            status.temporaryAdminCredentialsActive ===
-              true
-          );
           setPhase(
             status.requiresBootstrap
               ? "bootstrap"
