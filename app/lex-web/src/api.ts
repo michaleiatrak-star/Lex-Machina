@@ -986,7 +986,7 @@ function setAuthSessionToken(
     token ?? null;
 }
 
-function authorizationHeaders():
+export function authorizationHeaders():
   Record<string, string> {
   if (isDesktopShell()) {
     return {};
