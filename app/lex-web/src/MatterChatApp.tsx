@@ -642,11 +642,15 @@ function canWriteCase(item: CaseListItem | undefined): boolean {
 export default function MatterChatApp({
   user,
   settingsPanels,
-  settingsRequest
+  settingsRequest,
+  onLock,
+  onLogout
 }: {
   user: AuthenticatedUser;
   settingsPanels?: SettingsPanels;
   settingsRequest?: SettingsRequest | null;
+  onLock?: () => void;
+  onLogout?: () => void;
 }) {
   const [activeTab, setActiveTab] = useState<TabId>("chat");
   const [settingsSection, setSettingsSection] =
@@ -2748,6 +2752,44 @@ export default function MatterChatApp({
               ? selectedDeterministicAction.label
               : AUTO_CASE_TYPE}
           </span>
+        </div>
+
+        <div className="chat-account-card">
+          <div className="chat-account-identity">
+            <strong>
+              {user.displayName}
+            </strong>
+            <small>
+              @{user.loginName} · {user.appRole}
+            </small>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab("settings");
+              setSettingsSection(
+                "security"
+              );
+            }}
+          >
+            Ustawienia
+          </button>
+          <div className="chat-account-actions">
+            <button
+              type="button"
+              onClick={onLock}
+              disabled={!onLock}
+            >
+              Zablokuj
+            </button>
+            <button
+              type="button"
+              onClick={onLogout}
+              disabled={!onLogout}
+            >
+              Wyloguj
+            </button>
+          </div>
         </div>
       </aside>
 
