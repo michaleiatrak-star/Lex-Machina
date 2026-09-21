@@ -236,7 +236,7 @@ function fixture() {
             160_000,
             200_000
           ],
-          default: 64_000
+          default: 128_000
         },
         backendSelection: {
           allowed: [
