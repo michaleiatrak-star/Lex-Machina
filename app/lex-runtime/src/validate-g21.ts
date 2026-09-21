@@ -188,6 +188,21 @@ function freshnessFetcher(
 
     if (
       url.endsWith(
+        "/DU/1964/93"
+      )
+    ) {
+      return jsonResponse({
+        ELI: "DU/1964/93",
+        status: "akt posiada tekst jednolity",
+        promulgation:
+          "1964-05-18",
+        textHTML: true,
+        textPDF: true
+      });
+    }
+
+    if (
+      url.endsWith(
         "/" + amendment.eli
       )
     ) {
@@ -514,8 +529,18 @@ const pass =
     "DRAFT_PRESENTABLE" &&
   typeof effective.answer ===
     "string" &&
-  effectiveVerification.records === 0 &&
-  effectiveFetches.length === 0 &&
+  typeof effectiveVerification.records ===
+    "number" &&
+  effectiveVerification.records >= 1 &&
+  effectiveVerification.verified ===
+    effectiveVerification.records &&
+  effectiveVerification.unverified === 0 &&
+  effectiveFetches.length >= 1 &&
+  effectiveFetches.every(
+    (url) =>
+      url ===
+        "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html"
+  ) &&
 
   unknownHttp.status === 200 &&
   unknown.status ===
@@ -552,8 +577,8 @@ process.stdout.write(
         effectiveVerification,
       contentFetches:
         effectiveFetches.length,
-      degradedBecause:
-        "effective post-t.j. amendment requires deterministic overlay"
+      allowedBecause:
+        "official unified base text incorporates effective post-t.j. amendments"
     },
     unknownEffectDate: {
       http: unknownHttp.status,
