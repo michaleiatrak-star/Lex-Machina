@@ -298,13 +298,12 @@ function suggestedCaseName(input: string): string {
   return clean.length >= 8 ? clean : "Nowa sprawa";
 }
 
-function conversationForProvider(
+export function conversationForProvider(
   messages: CaseChatMessage[],
   next: string
 ): string {
   const history = messages
     .filter((item) => item.role !== "system")
-    .slice(-10)
     .map((item) =>
       `${item.role === "user" ? "Użytkownik" : "Asystent"}: ${item.content}`
     )
@@ -559,7 +558,11 @@ export default function MatterChatApp({
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>(
     FALLBACK_EXECUTION_SKILLS
   );
-  const [manualSkills, setManualSkills] = useState<string[]>([]);
+  // null = every optional execution skill is selected. This mirrors the DR
+  // domain selector and makes newly discovered execution skills selected by
+  // default without a second initialization race.
+  const [manualSkills, setManualSkills] =
+    useState<string[] | null>(null);
   const [
     deterministicAction,
     setDeterministicAction
@@ -669,26 +672,54 @@ export default function MatterChatApp({
         ) ?? null,
       [deterministicAction]
     );
-  const filteredSkills = useMemo(() => {
-    const needle = skillFilter.trim().toLowerCase();
-    return executionSkills
-      .filter(
+  const selectableExecutionSkills = useMemo(
+    () =>
+      executionSkills.filter(
         (item) =>
           !MANDATORY_SKILLS.includes(
             item.name as (typeof MANDATORY_SKILLS)[number]
           ) &&
           item.name !== "prawo-polskie-v2"
-      )
-      .filter(
-        (item) =>
-          !needle ||
-          item.name.toLowerCase().includes(needle) ||
-          item.description?.toLowerCase().includes(needle)
-      );
-  }, [executionSkills, skillFilter]);
+      ),
+    [executionSkills]
+  );
+  const manualSkillSelection = useMemo(
+    () =>
+      manualSkills ??
+      selectableExecutionSkills.map(
+        (item) => item.name
+      ),
+    [
+      manualSkills,
+      selectableExecutionSkills
+    ]
+  );
+  const filteredSkills = useMemo(() => {
+    const needle = skillFilter.trim().toLowerCase();
+    return selectableExecutionSkills.filter(
+      (item) =>
+        !needle ||
+        item.name.toLowerCase().includes(needle) ||
+        item.description?.toLowerCase().includes(needle)
+    );
+  }, [
+    selectableExecutionSkills,
+    skillFilter
+  ]);
   const currentPrimaryRoute = useMemo(
-    () => choosePrimaryRoute(query, routes, skills, manualSkills),
-    [query, routes, skills, manualSkills]
+    () =>
+      choosePrimaryRoute(
+        query,
+        routes,
+        skills,
+        manualSkillSelection
+      ),
+    [
+      query,
+      routes,
+      skills,
+      manualSkillSelection
+    ]
   );
 
   useEffect(() => {
@@ -699,7 +730,7 @@ export default function MatterChatApp({
   useEffect(() => {
     setDeterministicAction("");
     setCaseTypeSkills([]);
-    setManualSkills([]);
+    setManualSkills(null);
     setAllowedDomains(null);
     setAutomaticSkills(true);
   }, [caseId]);
@@ -1158,11 +1189,36 @@ export default function MatterChatApp({
         name as (typeof MANDATORY_SKILLS)[number]
       )
     ) return;
-    setManualSkills((current) =>
-      current.includes(name)
-        ? current.filter((item) => item !== name)
-        : [...current, name].slice(-16)
-    );
+    setManualSkills((current) => {
+      const selected =
+        current ??
+        selectableExecutionSkills.map(
+          (item) => item.name
+        );
+      return selected.includes(name)
+        ? selected.filter(
+            (item) => item !== name
+          )
+        : [...selected, name].slice(
+            -16
+          );
+    });
+  }
+
+  function selectAllManualSkills(): void {
+    setManualSkills(null);
+  }
+
+  function clearManualSkills(): void {
+    setManualSkills([]);
+  }
+
+  function selectAllDomainSkills(): void {
+    setAllowedDomains(null);
+  }
+
+  function clearDomainSkills(): void {
+    setAllowedDomains([]);
   }
 
   function toggleDomainSkill(name: string): void {
@@ -1505,99 +1561,123 @@ export default function MatterChatApp({
   }
 
   async function executeMessage(plain: string): Promise<void> {
+    const trimmed =
+      plain.trim();
     if (
       executing ||
-      !plain.trim() ||
+      !trimmed ||
       !caseId ||
       selectedCase?.archivedAt ||
       !runtimeOnline ||
       !model
     ) return;
 
-    let readyAccount =
-      accountAuthenticated;
-    if (
-      isAccountPrimarySource(
-        provider
-      ) &&
-      !readyAccount
-    ) {
-      const connected =
-        await connectProviderAccount();
-      if (!connected) {
-        setExecutionError(
-          user.appRole === "ADMIN"
-            ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie dostawcy i spróbuj ponownie."
-            : "Wybrane konto dostawcy nie jest zalogowane. Połączenie konta wymaga administratora aplikacji."
-        );
-        return;
-      }
-      readyAccount = true;
-    }
-
-    if (
-      !canExecutePrimaryModel(
-        providerConfigured,
-        model,
-        readyAccount
-      )
-    ) {
+    const route =
+      choosePrimaryRoute(
+        trimmed,
+        routes,
+        skills,
+        manualSkillSelection
+      );
+    if (!route) {
       setExecutionError(
-        "Wybrany model nie jest jeszcze gotowy do użycia."
+        "Nie udało się wybrać dziedziny głównej dla tej wiadomości."
       );
       return;
     }
 
-    const localPreparationError =
-      await prepareLocalPrimaryModel();
-    if (localPreparationError) {
-      setExecutionError(
-        localPreparationError
-      );
-      setMessages((current) => [
-        ...current,
-        {
-          id: messageId(),
-          role: "system",
-          content:
-            localPreparationError
-        }
-      ]);
-      return;
-    }
+    const priorMessages =
+      messages;
+    const userMessage:
+      CaseChatMessage = {
+        id: messageId(),
+        role: "user",
+        content: trimmed,
+        ...(conversationIsNew
+          ? {
+              meta:
+                deterministicActionMeta(
+                  deterministicAction
+                )
+            }
+          : {})
+      };
 
-    const route = choosePrimaryRoute(plain, routes, skills, manualSkills);
-    if (!route) return;
-
-    const userMessage: CaseChatMessage = {
-      id: messageId(),
-      role: "user",
-      content: plain.trim(),
-      ...(conversationIsNew
-        ? {
-            meta:
-              deterministicActionMeta(
-                deterministicAction
-              )
-          }
-        : {})
-    };
-    setMessages((current) => [...current, userMessage]);
+    // Optimistic UI: move the message into the thread immediately. Provider
+    // login/model startup/repair happens only after the user sees what was sent.
+    setMessages((current) => [
+      ...current,
+      userMessage
+    ]);
     setQuery("");
     setExecuting(true);
     setExecutionError("");
 
     try {
+      let readyAccount =
+        accountAuthenticated;
+      if (
+        isAccountPrimarySource(
+          provider
+        ) &&
+        !readyAccount
+      ) {
+        const connected =
+          await connectProviderAccount();
+        if (!connected) {
+          throw new Error(
+            user.appRole === "ADMIN"
+              ? "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
+              : "ACCOUNT_SESSION_LOGIN_ADMIN_REQUIRED"
+          );
+        }
+        readyAccount = true;
+      }
+
+      if (
+        !canExecutePrimaryModel(
+          providerConfigured,
+          model,
+          readyAccount
+        )
+      ) {
+        throw new Error(
+          "PRIMARY_MODEL_NOT_READY"
+        );
+      }
+
+      const localPreparationError =
+        await prepareLocalPrimaryModel();
+      if (localPreparationError) {
+        throw new Error(
+          localPreparationError
+        );
+      }
+
+      // An empty DR selection means: do not add secondary domains. A legal
+      // session still requires its one primary domain, selected above.
+      if (
+        allowedDomains !== null &&
+        allowedDomains.length === 0
+      ) {
+        setAllowedDomainSkills([
+          route
+        ]);
+      }
+
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
-          conversationForProvider(messages, plain.trim()),
+          conversationForProvider(
+            priorMessages,
+            trimmed
+          ),
           automaticSkills,
-          manualSkills
+          manualSkillSelection
         ),
         provider: runtimeProvider,
         model,
         auxiliaryText:
-          plain.trim(),
+          trimmed,
         primarySkill: route,
         mode: "PRAWNIK",
         ...(documentAttachments.length > 0
@@ -1619,7 +1699,10 @@ export default function MatterChatApp({
       }
       setMessages((current) => [
         ...current,
-        executionMessage(result, route)
+        executionMessage(
+          result,
+          route
+        )
       ]);
     } catch (error) {
       const code =
@@ -1643,7 +1726,16 @@ export default function MatterChatApp({
         );
       }
       const friendly =
-        code === "PROVIDER_NOT_CONFIGURED"
+        code ===
+          "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
+          ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie dostawcy i spróbuj ponownie."
+        : code ===
+            "ACCOUNT_SESSION_LOGIN_ADMIN_REQUIRED"
+          ? "Wybrane konto dostawcy nie jest zalogowane. Połączenie konta wymaga administratora aplikacji."
+        : code ===
+            "PRIMARY_MODEL_NOT_READY"
+          ? "Wybrany model nie jest jeszcze gotowy do użycia."
+        : code === "PROVIDER_NOT_CONFIGURED"
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
           : code === "CHAT_PRIVACY_GATE_FAILED"
             ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
@@ -1675,13 +1767,32 @@ export default function MatterChatApp({
                               ? "Deterministyczna analiza sądowa tej sprawy została już zakończona."
                               : code.startsWith("COURT_ANALYSIS_")
                                 ? `Pipeline analizy sądowej zablokował wykonanie: ${code}`
-                                : `Nie udało się wykonać sesji: ${code}`;
+                                : code.startsWith(
+                                    "Nie udało się uruchomić lokalnego modelu"
+                                  ) ||
+                                  code.startsWith(
+                                    "Lokalny model wymaga naprawy profilu"
+                                  )
+                                  ? code
+                                  : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
       setMessages((current) => [
         ...current,
-        { id: messageId(), role: "system", content: friendly }
+        {
+          id: messageId(),
+          role: "system",
+          content:
+            friendly
+        }
       ]);
     } finally {
+      // Restore the persistent DR bridge after a zero-selection turn.
+      if (
+        allowedDomains !== null &&
+        allowedDomains.length === 0
+      ) {
+        setAllowedDomainSkills([]);
+      }
       setExecuting(false);
     }
   }
@@ -2369,15 +2480,33 @@ export default function MatterChatApp({
                     rozmowie; pełny zestaw nie nakłada żadnego ograniczenia.
                   </p>
                 </div>
-                {domainSelection.length < routes.length ? (
+                <div className="chat-model-select-row">
                   <button
                     type="button"
                     className="chat-secondary-action"
-                    onClick={() => setAllowedDomains(null)}
+                    disabled={
+                      domainSelection.length ===
+                      routes.length
+                    }
+                    onClick={
+                      selectAllDomainSkills
+                    }
                   >
                     Zaznacz wszystkie
                   </button>
-                ) : null}
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    disabled={
+                      domainSelection.length === 0
+                    }
+                    onClick={
+                      clearDomainSkills
+                    }
+                  >
+                    Odznacz wszystkie
+                  </button>
+                </div>
               </div>
               <div className="chat-skill-grid">
                 {routes.map((name) => {
@@ -2406,23 +2535,60 @@ export default function MatterChatApp({
             <article className="chat-card">
               <div className="chat-card-heading">
                 <div>
-                  <p className="eyebrow">Ręczny dobór</p>
-                  <h2>Dodatkowe skille wykonawcze</h2>
+                  <p className="eyebrow">Skille wykonawcze</p>
+                  <h2>
+                    {manualSkillSelection.length} z {selectableExecutionSkills.length} zaznaczonych
+                  </h2>
                   <p>
-                    Ta lista nie zawiera modułów DR. Dziedziny prawa są kontrolowane
-                    wyłącznie w sekcji „Dziedziny prawa” powyżej.
+                    Wszystkie dostępne skille wykonawcze są zaznaczone domyślnie.
+                    Ta lista nie zawiera modułów DR; dziedziny prawa są kontrolowane
+                    w sekcji powyżej.
                   </p>
                 </div>
-                <input
-                  className="chat-search"
-                  value={skillFilter}
-                  placeholder="Filtruj skille…"
-                  onChange={(event) => setSkillFilter(event.target.value)}
-                />
+                <div className="chat-model-select-row">
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    disabled={
+                      manualSkillSelection.length ===
+                      selectableExecutionSkills.length
+                    }
+                    onClick={
+                      selectAllManualSkills
+                    }
+                  >
+                    Zaznacz wszystkie
+                  </button>
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    disabled={
+                      manualSkillSelection.length === 0
+                    }
+                    onClick={
+                      clearManualSkills
+                    }
+                  >
+                    Odznacz wszystkie
+                  </button>
+                  <input
+                    className="chat-search"
+                    value={skillFilter}
+                    placeholder="Filtruj skille…"
+                    onChange={(event) =>
+                      setSkillFilter(
+                        event.target.value
+                      )
+                    }
+                  />
+                </div>
               </div>
               <div className="chat-skill-grid">
                 {filteredSkills.map((skill) => {
-                  const checked = manualSkills.includes(skill.name);
+                  const checked =
+                    manualSkillSelection.includes(
+                      skill.name
+                    );
                   return (
                     <label
                       key={skill.name}
