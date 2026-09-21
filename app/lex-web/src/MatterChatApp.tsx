@@ -601,6 +601,14 @@ export default function MatterChatApp({
   const [deletePhrase, setDeletePhrase] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
+  const [caseFiles, setCaseFiles] =
+    useState<StoredUploadResponse[]>([]);
+  const [caseFilePickerOpen, setCaseFilePickerOpen] =
+    useState(false);
+  const [caseFilePickerError, setCaseFilePickerError] =
+    useState("");
+  const [generatedDocumentMessage, setGeneratedDocumentMessage] =
+    useState("");
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
