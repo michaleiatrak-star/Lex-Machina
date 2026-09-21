@@ -515,7 +515,7 @@ function providerFailureMessage(
     case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
       return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
     case "ACCOUNT_SESSION_AUTH_EXPIRED":
-      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i konta i ponownie połącz konto.";
+      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.";
     case "ACCOUNT_SESSION_CAPACITY":
       return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
     case "ACCOUNT_SESSION_PROMPT_REJECTED":
@@ -1346,6 +1346,7 @@ export default function MatterChatApp({
       return;
     }
     setActiveTab("settings");
+    setSettingsSection("models");
     setSettingsSection(
       settingsRequest.section
     );
@@ -2364,7 +2365,7 @@ export default function MatterChatApp({
       const friendly =
         code ===
           "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
-          ? "Tryb konta wymaga oficjalnego klienta dostawcy zainstalowanego osobno. Otwórz Ustawienia → Modele i konta, zainstaluj klienta albo przełącz źródło na API."
+          ? "Tryb konta wymaga oficjalnego klienta dostawcy zainstalowanego osobno. Otwórz Ustawienia → Modele i AI, zainstaluj klienta albo przełącz źródło na API."
         : code ===
             "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
           ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie w widocznym terminalu lub przeglądarce i spróbuj ponownie."
@@ -3958,11 +3959,6 @@ export default function MatterChatApp({
               </div>
             </article>
 
-            <CaseCollaborationPanel
-              caseId={caseId}
-              caseRole={selectedCase?.role}
-            />
-
             {selectedCase ? (
               <article className="chat-card">
                 <p className="eyebrow">Cykl życia</p>
@@ -4045,18 +4041,12 @@ export default function MatterChatApp({
             >
               {([
                 ["models", "Modele i AI"],
-                ["users", "Użytkownicy i role"],
+                ["users", "Użytkownicy i uprawnienia"],
                 ["security", "Hasło i bezpieczeństwo"],
                 ["maintenance", "Aplikacja i utrzymanie"]
               ] as Array<
                 [SettingsSection, string]
               >)
-                .filter(
-                  ([section]) =>
-                    section !== "users" ||
-                    user.appRole ===
-                      "ADMIN"
-                )
                 .map(
                   ([section, label]) => (
                     <button
@@ -4655,11 +4645,40 @@ export default function MatterChatApp({
                 </div>
               ) : settingsSection === "users" ? (
                 <div className="chat-settings-section-stack">
-                  {settingsPanels?.users ?? (
-                    <article className="chat-card">
-                      <h2>Brak uprawnień administracyjnych</h2>
+                  {user.appRole === "ADMIN"
+                    ? settingsPanels?.users
+                    : (
+                      <article className="chat-card">
+                        <p className="eyebrow">
+                          Konto aplikacji
+                        </p>
+                        <h2>
+                          Użytkownicy globalni
+                        </h2>
+                        <p>
+                          Tworzenie, wyłączanie i usuwanie kont aplikacji jest dostępne dla administratora. Uprawnienia do bieżącej sprawy są zarządzane poniżej zgodnie z rolą w tej sprawie.
+                        </p>
+                      </article>
+                    )}
+                  {caseId ? (
+                    <article className="chat-card chat-settings-case-access">
+                      <p className="eyebrow">
+                        Bieżąca sprawa
+                      </p>
+                      <h2>
+                        Uprawnienia do sprawy
+                      </h2>
+                      <p>
+                        Role OWNER, EDITOR, ANALYST i VIEWER dotyczą wyłącznie wybranej sprawy.
+                      </p>
+                      <CaseCollaborationPanel
+                        caseId={caseId}
+                        caseRole={
+                          selectedCase?.role
+                        }
+                      />
                     </article>
-                  )}
+                  ) : null}
                 </div>
               ) : settingsSection === "security" ? (
                 <div className="chat-settings-section-stack">
