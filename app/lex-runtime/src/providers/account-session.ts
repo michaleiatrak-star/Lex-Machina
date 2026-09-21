@@ -1228,9 +1228,24 @@ async function runGrokAcp(
         return;
       }
 
+      const agentCapabilities =
+        init.agentCapabilities &&
+        typeof init.agentCapabilities ===
+          "object" &&
+        !Array.isArray(
+          init.agentCapabilities
+        )
+          ? init.agentCapabilities as
+              Record<string, unknown>
+          : null;
+      const supportsSessionLoad =
+        agentCapabilities
+          ?.loadSession === true;
+
       let sessionId = "";
       if (
-        resumeSessionId
+        resumeSessionId &&
+        supportsSessionLoad
       ) {
         try {
           await request(
