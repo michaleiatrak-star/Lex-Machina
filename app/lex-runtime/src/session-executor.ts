@@ -111,6 +111,9 @@ import {
   ModelAutoRouter,
   type ModelAutoRoutingResult
 } from "./model-auto-routing.js";
+import {
+  parseSkillSelectionEnvelope
+} from "./skill-selection.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -559,10 +562,6 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     // Keep the user's original text for the actual execution. Only the
     // model-selected routing envelope is copied from the protected prepass.
-    const protectedEnvelope =
-      parseSkillSelectionEnvelope(
-        routed.query
-      );
     const originalEnvelope =
       parseSkillSelectionEnvelope(
         request.query
