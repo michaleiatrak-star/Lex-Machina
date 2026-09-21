@@ -247,12 +247,23 @@ describe("AiSdkProviderAdapter", () => {
   });
 
   it("fails a silent local SSE stream instead of hanging forever", async () => {
+    let controllerRef:
+      ReadableStreamDefaultController<
+        Uint8Array
+      > | null = null;
     const body =
       new ReadableStream<
         Uint8Array
       >({
-        start() {
-          // Intentionally emit nothing and keep the stream open.
+        start(controller) {
+          // Retain the controller so Node cannot treat the synthetic stream as
+          // exhausted while we reproduce a server that keeps the socket open.
+          controllerRef =
+            controller;
+        },
+        cancel() {
+          controllerRef =
+            null;
         }
       });
 
@@ -276,6 +287,9 @@ describe("AiSdkProviderAdapter", () => {
     ).rejects.toThrow(
       "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
     );
+    expect(
+      controllerRef
+    ).toBeNull();
   });
 
   it("fails a stalled local SSE stream after content instead of hanging forever", async () => {
