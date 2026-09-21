@@ -43,8 +43,66 @@ describe("OfficialLegalSourceVerifier", () => {
       sourceUrl:
         "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html",
       toolCallId: "tool-1",
-      verificationMethod: "web_fetch"
+      verificationMethod: "web_fetch",
+      evidence: "Art. 5. Treść przepisu."
     });
+  });
+
+  it("extracts only the requested article section from the official text", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response(
+          "<html><title>Kodeks karny</title><body>" +
+          "<h2>Art. 275.</h2><p>Poprzedni.</p>" +
+          "<h2>Art. 276.</h2><p>Kto niszczy, uszkadza, czyni bezużytecznym, ukrywa lub usuwa dokument.</p>" +
+          "<h2>Art. 277.</h2><p>Następny.</p>" +
+          "</body></html>",
+          {
+            status: 200,
+            headers: { "content-type": "text/html" }
+          }
+        ),
+      () => "2026-09-21T15:00:00.000Z"
+    );
+
+    const result = await verifier.verify({
+      claim: "art. 276 KK",
+      kind: "statute",
+      url: "https://api.sejm.gov.pl/eli/acts/DU/1997/553/text.html",
+      expectedTitle: "Kodeks karny",
+      toolCallId: "tool-art-276"
+    });
+
+    expect(result.matched).toBe(true);
+    expect(result.record.evidence).toContain("Art. 276.");
+    expect(result.record.evidence).toContain("Kto niszczy");
+    expect(result.record.evidence).not.toContain("Art. 277.");
+  });
+
+  it("does not verify a statute article from a mere cross-reference", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response(
+          "<html><title>Kodeks karny</title><body>" +
+          "<h2>Art. 10.</h2><p>Stosuje się odpowiednio art. 276.</p>" +
+          "</body></html>",
+          {
+            status: 200,
+            headers: { "content-type": "text/html" }
+          }
+        )
+    );
+
+    const result = await verifier.verify({
+      claim: "art. 276 KK",
+      kind: "statute",
+      url: "https://api.sejm.gov.pl/eli/acts/DU/1997/553/text.html",
+      expectedTitle: "Kodeks karny",
+      toolCallId: "tool-cross-ref"
+    });
+
+    expect(result.matched).toBe(false);
+    expect(result.record.status).toBe("UNVERIFIED");
   });
 
   it("rejects a wrong act even when the same article number exists", async () => {
