@@ -174,7 +174,7 @@
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
-    "skillUpdateSigning": "Skill self-update is fail-closed until a production Ed25519 public key is committed to the skill trust root and the release index is signed by the matching private key.",
+    "skillUpdateSigning": "Skill self-update may use the official michaleiatrak-star/Lex-Machina GitHub Releases source without Ed25519. GitHub release asset SHA-256, index schema/version compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory. Ed25519 is accepted when present.",
     "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key.",
     "pythonRuntime": "Official CPython embeddable x64 distribution is used for the app-private runtime to avoid Windows Installer registration/maintenance-mode collisions with an existing Python of the same version. pip is bootstrapped from a pinned verified wheel into the private site-packages directory."
   },
@@ -188,12 +188,14 @@
     "temporaryUnsignedAllowed": false
   },
   "skillUpdate": {
-    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-Skills-Index.json",
     "signatureAsset": "LexMachina-Skills-Index.sig",
     "activation": "VALIDATE_THEN_ATOMIC_SWITCH_WITH_ROLLBACK",
-    "policy": "FAIL_CLOSED_UNTIL_SKILL_SIGNER_IS_CONFIGURED",
-    "temporaryUnsignedAllowed": false
+    "policy": "OFFICIAL_GITHUB_RELEASE_SHA256_REQUIRED_ED25519_OPTIONAL",
+    "temporaryUnsignedAllowed": false,
+    "officialRepository": "michaleiatrak-star/Lex-Machina",
+    "officialSourceUnsignedAllowed": true
   }
 }
