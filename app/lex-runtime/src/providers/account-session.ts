@@ -625,6 +625,26 @@ type RunResult = {
   stderr: string;
 };
 
+export function claudeAutomationCredentialMode(
+  env: NodeJS.ProcessEnv = process.env
+): "ACCESS_TOKEN" | "REFRESH_TOKEN" | "INTERACTIVE" {
+  if (
+    env.CLAUDE_CODE_OAUTH_TOKEN
+      ?.trim()
+  ) {
+    return "ACCESS_TOKEN";
+  }
+  if (
+    env.CLAUDE_CODE_OAUTH_REFRESH_TOKEN
+      ?.trim() &&
+    env.CLAUDE_CODE_OAUTH_SCOPES
+      ?.trim()
+  ) {
+    return "REFRESH_TOKEN";
+  }
+  return "INTERACTIVE";
+}
+
 function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = {
     ...process.env
