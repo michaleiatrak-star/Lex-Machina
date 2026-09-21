@@ -237,6 +237,7 @@ export type StoredUploadResponse = {
     digitalPages: number;
     ocrPages: number;
     blankPages: number;
+    chunkIndices: number[];
   };
 };
 
