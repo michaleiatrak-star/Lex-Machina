@@ -251,6 +251,36 @@ jobs:
       - name: G34H5 — legacy plaintext migration/removal
         run: npm run validate:g34h5
 
+  g40-live-legal-federation:
+    name: G40 live legal MCP federation
+    needs: g1-g29-g32
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app/lex-runtime
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Setup Python uv/uvx
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check "uv==0.12.17"
+          uvx --version
+
+      - name: Install runtime dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: G40 — start aggregator and all ten connector families
+        run: npm run validate:g40-live
+
   g30a-live-case-law:
     name: G30A live SAOS and CBOSA discovery probe
     needs: g1-g29-g32
