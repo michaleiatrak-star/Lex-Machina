@@ -61,15 +61,23 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 > identyfikator aktu/orzeczenia i dostajemy odpowiedź deterministyczną.
 > Dlatego API/MCP są ZAWSZE pierwszym wyborem, a web_search — fallbackiem.
 
-**Hierarchia narzędzi weryfikacji (od najsilniejszego):**
+**Hierarchia kanałów retrieval i autoryzacji cytowania:**
 
 ```
-POZIOM A — konektor MCP (gdy skonfigurowany w środowisku):
-  get_act / verify_article        (mcp-isap, legal-cite-pl)  → akty Dz.U./M.P.
-  verify_signature / search_judgments (sententim)            → sygnatury (kontrakt FOUND/NOT_FOUND/AMBIGUOUS)
-  narzędzia SAOS / KIO / EUR-Lex  (prawo-pl-saos, kio-orzeczenia-mcp, prawo-eu-eurlex)
+POZIOM A-R — MCP / federacja (gdy skonfigurowana):
+  prawo-pl-mcp → ISAP/ELI, SAOS, CBOSA, KRS, EUREKA, KIO, UODO,
+                  EUR-Lex/CJEU, EU-Compliance, Legalize
+  ROLA: discovery / retrieval / materiał źródłowy.
+  ⛔ Wynik MCP sam NIE tworzy ✅ [VER] i nie nadpisuje ledgeru Lex Machina.
 
-POZIOM B — bezpośredni web_fetch na strukturalne API (działa bez MCP):
+POZIOM A-V — natywny verifier Lex Machina:
+  verify_legal_reference                                  → akty Dz.U./M.P. i temporal freshness
+  verify_case_reference / verify_case_quote /
+  verify_case_proposition                                 → SN
+  natywne official-source resolvery                       → fallback i rozstrzyganie konfliktów
+  ROLA: jedyna autoryzacja finalnego znacznika ✅ [VER].
+
+POZIOM B — bezpośredni kanał urzędowy / structured fetch (działa bez MCP):
   Akty PL (ELI Sejm):  https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}            → metadane (status, wejście w życie, pola textHTML/textPDF)
                        https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/references → nowelizacje, TEKST JEDNOLITY
                        https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.pdf   → TREŚĆ tekstu jednolitego (patrz ⛔ niżej)
