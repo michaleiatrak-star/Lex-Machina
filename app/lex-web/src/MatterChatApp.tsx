@@ -2418,6 +2418,7 @@ export default function MatterChatApp({
                   <DocumentCitationContent
                     content={message.content}
                     citations={message.documentCitations}
+                    onOpenUrl={openExternalUrl}
                   />
                   {visibleMessageMeta(message.meta) ? (
                     <small className="chat-message-meta">
