@@ -3,6 +3,7 @@ export type ProviderId = "openai" | "anthropic" | "xai";
 export type AuthStatusResponse = {
   initialized: boolean;
   requiresBootstrap: boolean;
+  temporaryAdminCredentialsActive: boolean;
 };
 
 export type AuthenticatedUser = {
