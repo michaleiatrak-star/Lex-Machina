@@ -20,6 +20,7 @@ import {
   createCase,
   deleteCase,
   downloadGeneratedArtifact,
+  downloadSensitiveArtifact,
   executeSession,
   generateLegalDocument,
   getHealth,
@@ -1221,6 +1222,7 @@ export default function MatterChatApp({
   useEffect(() => {
     let cancelled = false;
     setCaseFilePickerOpen(false);
+    setCaseFilePickerError("");
     if (!caseId) {
       setCaseFiles([]);
       return;
@@ -1234,9 +1236,14 @@ export default function MatterChatApp({
           );
         }
       })
-      .catch(() => {
+      .catch((error) => {
         if (!cancelled) {
           setCaseFiles([]);
+          setCaseFilePickerError(
+            error instanceof Error
+              ? error.message
+              : String(error)
+          );
         }
       });
 
@@ -1261,6 +1268,25 @@ export default function MatterChatApp({
       void executeMessage(pending);
     }
   }, [pendingFirstMessage, caseId, threadLoading, executing]);
+
+  function switchToCase(
+    nextCaseId: string
+  ): void {
+    if (
+      executing ||
+      caseBusy ||
+      !nextCaseId ||
+      nextCaseId === caseId
+    ) {
+      return;
+    }
+    setPendingFirstMessage(null);
+    setExecutionError("");
+    setGeneratedDocumentMessage("");
+    setCaseFilePickerOpen(false);
+    setCaseId(nextCaseId);
+    setActiveTab("chat");
+  }
 
   async function refreshCases(preferredCaseId?: string): Promise<void> {
     const response = await listCases();
@@ -1953,19 +1979,43 @@ export default function MatterChatApp({
             }
           );
 
-        const blob =
-          await downloadGeneratedArtifact(
-            executionCaseId,
+        let downloadedFinal =
+          false;
+        if (
+          generated
+            .readyForDownload &&
+          generated
+            .downloadTicket
+        ) {
+          const blob =
+            await downloadSensitiveArtifact(
+              generated
+                .downloadTicket
+                .ticketId
+            );
+          downloadBlob(
+            blob,
             generated
               .artifact
-              .artifactId
+              .filename
           );
-        downloadBlob(
-          blob,
-          generated
-            .artifact
-            .filename
-        );
+          downloadedFinal =
+            true;
+        } else {
+          const blob =
+            await downloadGeneratedArtifact(
+              executionCaseId,
+              generated
+                .artifact
+                .artifactId
+            );
+          downloadBlob(
+            blob,
+            generated
+              .artifact
+              .filename
+          );
+        }
 
         if (
           activeCaseIdRef.current ===
@@ -1982,11 +2032,17 @@ export default function MatterChatApp({
                 role:
                   "assistant",
                 content:
-                  "Gotowy dokument został przygotowany w profesjonalnym układzie i pobrany jako " +
-                  documentRequest
-                    .format
-                    .toUpperCase() +
-                  ".",
+                  downloadedFinal
+                    ? "Gotowy dokument został przygotowany w profesjonalnym układzie i pobrany jako " +
+                      documentRequest
+                        .format
+                        .toUpperCase() +
+                      "."
+                    : "Dokument został przygotowany jako bezpieczna wersja tokenizowana " +
+                      documentRequest
+                        .format
+                        .toUpperCase() +
+                      ". Finalny plik z przywróconymi danymi wymaga reautoryzacji.",
                 meta:
                   "dokument: " +
                   generated
@@ -1994,6 +2050,11 @@ export default function MatterChatApp({
                     .filename
               }
             ]
+          );
+          setGeneratedDocumentMessage(
+            downloadedFinal
+              ? "Dokument gotowy i pobrany."
+              : "Dokument tokenizowany pobrany; finalizacja wymaga reautoryzacji."
           );
           setWorkspaceRefresh(
             (value) =>
