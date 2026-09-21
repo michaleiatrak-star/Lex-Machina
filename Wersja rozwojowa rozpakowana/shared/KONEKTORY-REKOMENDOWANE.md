@@ -50,6 +50,12 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 
 | Projekt | Zakres | Narzędzia / uwagi | Źródło danych (RZĄD) |
 |---|---|---|---|
+| `matematicsolutions/prawo-pl-mcp` | **Agregator domyślny Lex Machina**: SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/TSUE, EU-Compliance, Legalize | jeden broker wysokiego poziomu; konektory potomne uruchamiane leniwie i izolowane per źródło | dziedziczy RZĄD każdego źródła; sam agregator = RZĄD 3 |
+| `matematicsolutions/mcp-eureka` | interpretacje KIS/MF i inne materiały EUREKA | `search`, `get_interpretation`, `search_by_signature`, `list_categories`; **praktyka organów, nie źródło prawa** | EUREKA MF/KIS (RZĄD 2A dla praktyki organu) |
+| `matematicsolutions/kio-orzeczenia-mcp` | orzecznictwo KIO | wyszukiwanie, pełny dokument, ostatnie orzeczenia, filtr po artykule PZP | UZP/KIO (RZĄD 2A) |
+| `matematicsolutions/uodo-orzeczenia-mcp` | decyzje Prezesa UODO | wyszukiwanie, decyzje, filtry po artykułach RODO, statystyki | UODO (RZĄD 2A) |
+| `matematicsolutions/mcp-eu-compliance` | lokalny korpus regulacji UE | szybki lookup/FTS/porównanie; do aktualnego prawa kontrola live EUR-Lex ma pierwszeństwo | korpus pochodny EUR-Lex |
+| `matematicsolutions/legalize-mcp` | law-as-git dla wielu jurysdykcji | wersje historyczne, reformy, porównania; finalny stan bieżący sprawdzaj w źródle urzędowym jurysdykcji | legalize-dev (RZĄD 3 / research) |
 | `matematicsolutions/mcp-isap` | Dz.U. + M.P., Sejm ELI | `search_acts`, `get_act`, `get_act_text`; każde cytowanie niesie identyfikator ELI | api.sejm.gov.pl (RZĄD 1) |
 | `matematicsolutions/mcp-saos` | sądy powszechne, SN, TK, KIO | `search`, `get_judgment`, `search_by_case` | SAOS (RZĄD 2A) |
 | `matematicsolutions/mcp-nsa` | NSA + 16 WSA | `search`, `get_judgment`, `search_by_case` | CBOSA (RZĄD 2A) |
@@ -83,9 +89,13 @@ stwierdza się pomiarem dwukanałowym z zapisem kodu, nie założeniem.
 
 ## Zasady podłączenia (dla developera portalu)
 
-1. **Każdy connector osobno, nie jeden monolit** — jeśli jeden serwer padnie
-   (np. CBOSA niedostępne), reszta ma działać. KROK 1 tego skilla wykrywa
-   dostępność per narzędzie, nie per "cała warstwa MCP".
+1. **Jedna federacja na wejściu, izolacja per źródło pod spodem.** Lex Machina
+   wystawia modelowi jeden broker nad `prawo-pl-mcp`, aby uniknąć kolizji nazw,
+   duplikowania schematów i kosztu kilkudziesięciu narzędzi. Sam agregator nie
+   może być pojedynczym punktem prawdy: konektory potomne są uruchamiane leniwie,
+   a awaria jednego źródła degraduje wyłącznie ten kanał. Natywne resolvery
+   urzędowe Lex Machina pozostają niezależnym fallbackiem i autorytetem
+   weryfikacyjnym dla finalnych cytowań.
 2. **Read-only** — żaden z tych connectorów nie powinien mieć uprawnień zapisu do
    źródeł rządowych (nie dotyczy — to i tak bazy tylko-do-odczytu publicznie), ale
    zasada dotyczy też ew. cache'a: connector może cache'ować odpowiedzi, ale musi
@@ -97,10 +107,24 @@ stwierdza się pomiarem dwukanałowym z zapisem kodu, nie założeniem.
    SLA — connector musi mieć własną obsługę timeoutów/retry, żeby KROK 1/3 tego
    skilla mogły poprawnie zakwalifikować "MCP niedostępne" zamiast zawieszać
    rozmowę.
-5. **Zgodność z tajemnicą zawodową** — dane samej sprawy klienta (fakty, dokumenty)
-   nigdy nie powinny być wysyłane do tych connectorów jako parametr zapytania —
-   connectory służą wyłącznie do weryfikacji STANU PRAWNEGO (numer aktu, treść
-   przepisu, istnienie orzeczenia), nie do przetwarzania danych sprawy.
+5. **Zgodność z tajemnicą zawodową** — dane samej sprawy klienta (fakty, dokumenty),
+   sekcje akt, tokeny anonimizera i surowe PII nigdy nie są parametrem wywołania
+   zewnętrznej federacji. Runtime RC14 ma dodatkową bramkę blokującą payload
+   zawierający znaczniki dokumentów/PII oraz nadmiernie duże argumenty.
+   Connectory dostają wyłącznie publiczne identyfikatory, nazwy aktów, sygnatury
+   i neutralne frazy prawne.
+
+## Zakres „całej rodziny” MateMatic w Lex Machina
+
+Domyślna federacja obejmuje wszystkie **10 rodzin** wystawianych przez
+`prawo-pl-mcp`. Organizacja MateMatic utrzymuje ponadto osobne konektory ELI
+dla wielu obcych jurysdykcji. Nie są one ładowane wszystkie równocześnie do
+polskiego runtime: spowodowałoby to dublowanie `legalize`, zwiększenie powierzchni
+łańcucha dostaw i niepotrzebne schematy w każdej sprawie. Dla prawa obcego router
+może użyć `legalize` jako discovery/history, a finalną weryfikację prowadzi
+źródło urzędowe właściwe dla jurysdykcji. Dedykowany country-ELI MCP można
+dołączyć jako adapter jurysdykcyjny wtedy, gdy dana jurysdykcja jest rzeczywiście
+aktywna — bez zmiany kontraktu federacji i bez osłabienia UP-5.
 
 ## Uwaga o utrzymaniu
 
