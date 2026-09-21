@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   AiSdkProviderAdapter,
+  accountSessionBackendAllowed,
   buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
@@ -87,6 +88,24 @@ describe("AiSdkProviderAdapter", () => {
         input: {}
       }
     ]);
+  });
+
+  it("keeps Claude account sessions out of Lex Machina model backends", () => {
+    expect(
+      accountSessionBackendAllowed(
+        "anthropic"
+      )
+    ).toBe(false);
+    expect(
+      accountSessionBackendAllowed(
+        "openai"
+      )
+    ).toBe(true);
+    expect(
+      accountSessionBackendAllowed(
+        "xai"
+      )
+    ).toBe(true);
   });
 
   it("uses a minimal llama.cpp-compatible request shape for local chat", () => {
