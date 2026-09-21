@@ -1219,6 +1219,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/sessions/execute"
         | "/api/routes/validate" => method == "POST",
         "/api/cases"
+        | "/api/skills"
         | "/api/providers"
         | "/api/provider-accounts"
         | "/api/routes"
@@ -1676,6 +1677,7 @@ mod tests {
         assert!(route_allowed("POST", "/api/local-models/remove"));
         assert!(route_allowed("POST", "/api/local-models/start"));
         assert!(route_allowed("POST", "/api/local-models/stop"));
+        assert!(route_allowed("GET", "/api/skills"));
         assert!(route_allowed("GET", "/api/skills/update/status"));
         assert!(route_allowed("GET", "/api/model-routing/preferences"));
         assert!(route_allowed("PUT", "/api/model-routing/preferences"));
