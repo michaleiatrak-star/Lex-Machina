@@ -31,6 +31,7 @@ function fixtureFetcher(options?: {
     entryIntoForce?: string;
   }>;
   amendmentTexts?: Record<string, string>;
+  amendmentTextHTML?: boolean;
 }) {
   const currentEli =
     options?.currentEli ?? "DU/2026/795";
@@ -109,6 +110,30 @@ function fixtureFetcher(options?: {
       );
     }
 
+    const amendmentPdf =
+      amendments.find((item) =>
+        url.endsWith(
+          "/" +
+            item.eli +
+            "/text.pdf"
+        )
+      );
+
+    if (amendmentPdf) {
+      return new Response(
+        new Uint8Array(
+          [37, 80, 68, 70]
+        ),
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "application/pdf"
+          }
+        }
+      );
+    }
+
     const amendment =
       amendments.find((item) =>
         url.endsWith("/" + item.eli)
@@ -120,7 +145,9 @@ function fixtureFetcher(options?: {
         promulgation:
           amendment.promulgation ??
           amendment.relationDate,
-        textHTML: true,
+        textHTML:
+          options?.amendmentTextHTML ??
+          true,
         textPDF: true,
         ...(amendment.entryIntoForce
           ? {
@@ -312,6 +339,46 @@ describe("TemporalSourceFreshnessChecker", () => {
         "DU/2026/795",
       sourceUrl:
         "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+      reason:
+        "POST_TJ_AMENDMENTS_DO_NOT_TOUCH_REQUESTED_ARTICLE"
+    });
+  });
+
+  it("inspects a PDF-only effective amendment before keeping an exact article current", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        amendments: [{
+          eli: "DU/2026/999",
+          relationDate: "2026-07-01",
+          promulgation: "2026-06-20",
+          entryIntoForce: "2026-07-01"
+        }],
+        amendmentTextHTML: false
+      }),
+      () => "2026-09-15T20:00:00.000Z",
+      undefined,
+      {
+        async extract(data) {
+          expect(
+            data.byteLength
+          ).toBeGreaterThan(0);
+          return {
+            text:
+              "USTAWA zmieniająca\nArt. 1. W art. 191 § 1 wyrazy X zastępuje się wyrazami Y.",
+            pages: 1,
+            bytes:
+              data.byteLength
+          };
+        }
+      }
+    ).check(kc, {
+      claim: "art. 190a KK"
+    });
+
+    expect(result).toMatchObject({
+      status: "CURRENT",
+      currentEli:
+        "DU/2026/795",
       reason:
         "POST_TJ_AMENDMENTS_DO_NOT_TOUCH_REQUESTED_ARTICLE"
     });
