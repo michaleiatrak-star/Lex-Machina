@@ -703,10 +703,6 @@ export default function MatterChatApp({
   const [documentAttachments, setDocumentAttachments] = useState<
     DocumentAttachmentSelection[]
   >([]);
-  const [caseFiles, setCaseFiles] =
-    useState<StoredUploadResponse[]>([]);
-  const [caseFilePickerOpen, setCaseFilePickerOpen] =
-    useState(false);
   const [firmKnowledgeWorkspace, setFirmKnowledgeWorkspace] =
     useState<CaseListItem | null>(null);
   const [includeCaseKnowledge, setIncludeCaseKnowledge] = useState(false);
@@ -1497,6 +1493,12 @@ export default function MatterChatApp({
       );
       return status.authenticated;
     } catch (error) {
+      if (
+        activeCaseIdRef.current !==
+          executionCaseId
+      ) {
+        return;
+      }
       const code =
         error instanceof ApiError
           ? error.code
@@ -1853,6 +1855,9 @@ export default function MatterChatApp({
       ...current,
       userMessage
     ]);
+    const executionCaseId =
+      caseId;
+
     setQuery("");
     setExecuting(true);
     setExecutionError("");
@@ -1909,8 +1914,6 @@ export default function MatterChatApp({
         documentRequest &&
         caseId
       ) {
-        const executionCaseId =
-          caseId;
         const generated =
           await generateLegalDocument(
             executionCaseId,
@@ -2000,8 +2003,6 @@ export default function MatterChatApp({
         return;
       }
 
-      const executionCaseId =
-        caseId;
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2279,9 +2280,11 @@ export default function MatterChatApp({
               <button
                 key={item.caseId}
                 type="button"
-                disabled={executing}
+                disabled={caseBusy}
                 className={item.caseId === caseId ? "matter-thread active" : "matter-thread"}
                 onClick={() => {
+                  setPendingFirstMessage(null);
+                  setExecutionError("");
                   setCaseId(item.caseId);
                   setActiveTab("chat");
                 }}
