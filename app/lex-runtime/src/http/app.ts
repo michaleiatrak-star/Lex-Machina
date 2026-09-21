@@ -5622,20 +5622,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                         : {})
                     })
               );
-          const downloadTicket =
-            options
-              .sensitiveDownloadTickets
-              ?.issue(
-                context,
-                {
-                  caseId,
-                  artifactId:
-                    ready.artifact
-                      .artifactId,
-                  finalSha256:
-                    ready.sha256
-                }
-              );
           res.status(201).json({
             sessionId:
               generated
@@ -5649,11 +5635,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             aliasesUsed: [],
             readyForDownload:
               true,
-            ...(downloadTicket
-              ? {
-                  downloadTicket
-                }
-              : {}),
             ...(templateProfile
               ? {
                   templateProfile
