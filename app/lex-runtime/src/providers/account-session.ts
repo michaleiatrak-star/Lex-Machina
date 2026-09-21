@@ -881,20 +881,39 @@ async function runVisibleWindowsLogin(
     "utf8"
   );
 
-  const comspec =
-    process.env.ComSpec ||
-    "cmd.exe";
-  const launchLine =
-    `start \"\" /wait cmd.exe /d /s /c ${cmdQuote(scriptPath)}`;
+  const launcherPath =
+    path.join(
+      root,
+      "launcher.ps1"
+    );
+  const escapedScriptPath =
+    scriptPath.replace(
+      /'/g,
+      "''"
+    );
+  await fsp.writeFile(
+    launcherPath,
+    [
+      "$ErrorActionPreference = 'Stop'",
+      "$cmd = $env:ComSpec",
+      `$script = '${escapedScriptPath}'`,
+      "$argLine = '/d /s /c ' + [char]34 + $script + [char]34",
+      "$process = Start-Process -FilePath $cmd -ArgumentList $argLine -WindowStyle Normal -PassThru -Wait",
+      "exit $process.ExitCode"
+    ].join("\r\n"),
+    "utf8"
+  );
 
   try {
     return await runDirect(
-      comspec,
+      "powershell.exe",
       [
-        "/d",
-        "/s",
-        "/c",
-        launchLine
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        launcherPath
       ],
       undefined,
       accountEnvironment(
