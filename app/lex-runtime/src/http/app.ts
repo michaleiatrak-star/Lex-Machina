@@ -1084,7 +1084,8 @@ function previewSessionWorkflow(
       envelope.domainAllowList,
       envelope.domainRestrictionActive,
       envelope.executionAllowList,
-      envelope.executionRestrictionActive
+      envelope.executionRestrictionActive,
+      envelope.workflowExecutionSkill
     );
   return createDeterministicWorkflowPlan(
     registry,
@@ -6244,6 +6245,135 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     ) {
       request.accountSessionKey =
         knowledge.caseId;
+    }
+
+    if (
+      request.primarySkill ===
+        "AUTO"
+    ) {
+      if (
+        !options
+          .sessionExecutor
+          .resolveAutoRouting
+      ) {
+        res.status(503).json({
+          error:
+            "AUTO_ROUTING_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        const routed =
+          await options
+            .sessionExecutor
+            .resolveAutoRouting(
+              request
+            );
+        request.primarySkill =
+          routed.decision
+            .primarySkill;
+        request.query =
+          routed.query;
+      } catch (error) {
+        if (
+          error instanceof Error &&
+          error.message ===
+            "CHAT_PRIVACY_GATE_FAILED"
+        ) {
+          res.status(503).json({
+            error:
+              "CHAT_PRIVACY_GATE_FAILED"
+          });
+          return;
+        }
+
+        const localFailureMessage =
+          request.model.startsWith(
+            "local/"
+          )
+            ? (
+                error instanceof
+                  ProviderGatewayError &&
+                error.causeValue instanceof
+                  Error
+                  ? error.causeValue
+                      .message
+                  : error instanceof Error
+                    ? error.message
+                    : ""
+              )
+            : "";
+        const parsedLocalReason =
+          localFailureMessage
+            .split(
+              ":",
+              1
+            )[0] ?? "";
+        if (
+          request.model.startsWith(
+            "local/"
+          ) &&
+          /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
+            parsedLocalReason
+          )
+        ) {
+          res.status(503).json({
+            error:
+              "LOCAL_MODEL_EXECUTION_FAILED",
+            reason:
+              parsedLocalReason
+          });
+          return;
+        }
+
+        if (
+          error instanceof
+            ProviderGatewayError
+        ) {
+          const rawReason =
+            error.causeValue instanceof
+              Error
+              ? error.causeValue
+                  .message
+              : "";
+          const parsedReason =
+            rawReason.split(
+              ":",
+              1
+            )[0] ?? "";
+          res.status(502).json({
+            error:
+              "PROVIDER_EXECUTION_FAILED",
+            provider:
+              error.provider,
+            ...(
+              /^[A-Z0-9_]+$/.test(
+                parsedReason
+              )
+                ? {
+                    reason:
+                      parsedReason
+                  }
+                : {}
+            )
+          });
+          return;
+        }
+
+        const reason =
+          error instanceof Error &&
+          /^AUTO_ROUTING_[A-Z0-9_]+$/.test(
+            error.message
+          )
+            ? error.message
+            : "AUTO_ROUTING_FAILED";
+        res.status(422).json({
+          error:
+            "AUTO_ROUTING_FAILED",
+          reason
+        });
+        return;
+      }
     }
 
     const route = routing.validate(request.primarySkill);
