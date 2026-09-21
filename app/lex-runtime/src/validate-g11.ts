@@ -9,6 +9,7 @@ import {
 import { ProviderGateway, ProviderRegistry } from "./providers/gateway.js";
 import { ScriptedProviderAdapter } from "./providers/scripted-provider.js";
 import {
+  SKILL_SELECTION_ENVELOPE_PREFIX,
   parseSkillSelectionEnvelope,
   resolveAdditionalSkills
 } from "./skill-selection.js";
@@ -54,8 +55,17 @@ if (declarationIssues.length === 0 && matrix.result === "PASS") {
 
   for (const skill of EXPECTED_DR_SKILLS) {
     try {
-      const query =
+      const effectiveQuery =
         `G11 technical routing contract for ${skill}; no legal analysis.`;
+      // G11 validates DR routing only. Explicitly disable optional execution
+      // workflows so a semantic match cannot turn this routing probe into a
+      // stateful court/process workflow that requires unrelated persisted state.
+      const query =
+        `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
+          auto: true,
+          manual: [],
+          execution: []
+        })}\n${effectiveQuery}`;
       const envelope =
         parseSkillSelectionEnvelope(query);
       const selection =
@@ -64,7 +74,11 @@ if (declarationIssues.length === 0 && matrix.result === "PASS") {
           envelope.query.trim(),
           skill,
           envelope.automatic,
-          envelope.manualSkills
+          envelope.manualSkills,
+          envelope.domainAllowList,
+          envelope.domainRestrictionActive,
+          envelope.executionAllowList,
+          envelope.executionRestrictionActive
         );
       const workflow =
         createDeterministicWorkflowPlan(
