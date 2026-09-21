@@ -947,11 +947,22 @@ export type CourtAnalysisWorkflowView = {
     CourtAnalysisCheckpoint[];
 };
 
+export type ApiFailureTraceEvent = {
+  sequence?: number;
+  type?: string;
+  target?: string;
+  status?: string;
+  detail?: string;
+};
+
 export type ApiFailure = {
   error: string;
   provider?: ProviderId;
   reason?: string;
   retryAfter?: string;
+  description?: string;
+  stage?: string;
+  trace?: ApiFailureTraceEvent[];
 };
 
 export class ApiError extends Error {
@@ -959,7 +970,10 @@ export class ApiError extends Error {
     readonly code: string,
     readonly status: number,
     readonly retryAfter?: string,
-    readonly reason?: string
+    readonly reason?: string,
+    readonly description?: string,
+    readonly stage?: string,
+    readonly trace?: ApiFailureTraceEvent[]
   ) {
     super(code);
     this.name = "ApiError";
@@ -1082,7 +1096,10 @@ async function json<T>(
         `HTTP_${response.status}`,
       response.status,
       failure.retryAfter,
-      failure.reason
+      failure.reason,
+      failure.description,
+      failure.stage,
+      failure.trace
     );
   }
   return payload as T;
