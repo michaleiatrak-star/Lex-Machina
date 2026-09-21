@@ -8,6 +8,9 @@ import {
   MissingProviderCredentialError,
   StaticCredentialResolver
 } from "../src/providers/credentials.js";
+import {
+  ProviderGatewayError
+} from "../src/providers/gateway.js";
 import { LexSkillRegistry } from "../src/registry.js";
 import type { SessionExecutor } from "../src/session-executor.js";
 
@@ -220,6 +223,45 @@ describe("session execution HTTP API", () => {
       error: "PROVIDER_NOT_CONFIGURED",
       provider: "xai"
     });
+  });
+
+  it("surfaces local runtime startup failures instead of SESSION_EXECUTION_FAILED", async () => {
+    const executor: SessionExecutor = {
+      execute: vi.fn(async () => {
+        throw new ProviderGatewayError(
+          "PROVIDER_ERROR",
+          "local provider failed",
+          "openai",
+          new Error(
+            "LOCAL_MODEL_SERVER_EXIT:1:insufficient memory"
+          )
+        );
+      })
+    };
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: {
+        list: vi.fn(async () => [])
+      },
+      sessionExecutor: executor
+    });
+
+    await request(app)
+      .post("/api/sessions/execute")
+      .send({
+        query: "Czy używasz lokalnego modelu językowego?",
+        provider: "openai",
+        model:
+          "local/mistral-nemo-12b-q4km",
+        primarySkill: DR,
+        mode: "PRAWNIK"
+      })
+      .expect(503, {
+        error:
+          "LOCAL_MODEL_EXECUTION_FAILED",
+        reason:
+          "LOCAL_MODEL_SERVER_EXIT"
+      });
   });
 
   it("reports the fail-closed chat privacy gate instead of a generic failure", async () => {
