@@ -12,6 +12,7 @@ import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
 import { AdminUsersPanel } from "./AdminUsersPanel.js";
 import { AdminSupportPanel } from "./AdminSupportPanel.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
+import { LEX_MACHINA_BRAND_ICON } from "./brand-icon.js";
 import {
   useFloatingPanelDrag
 } from "./use-floating-panel.js";
@@ -43,7 +44,8 @@ function AuthPanel({
   lastUser,
   onAuthenticated,
   onChangeUser,
-  onRecover
+  onRecover,
+  temporaryAdminCredentialsActive
 }: {
   phase: "bootstrap" | "login" | "locked";
   lastUser?: AuthMeResponse["user"];
@@ -52,13 +54,15 @@ function AuthPanel({
   ) => void;
   onChangeUser: () => void;
   onRecover: () => void;
+  temporaryAdminCredentialsActive: boolean;
 }) {
   const [loginName, setLoginName] =
     useState(
       phase === "locked"
         ? lastUser?.loginName ?? ""
         : phase === "login" &&
-            !lastUser
+            !lastUser &&
+            temporaryAdminCredentialsActive
           ? "admin"
           : ""
     );
@@ -167,13 +171,74 @@ function AuthPanel({
 
   return (
     <main className="auth-shell">
-      <section className="auth-card">
-        <div className="brand-mark auth-brand">
-          LM
-        </div>
-        <p className="eyebrow">
-          Lex Machina · lokalnie
-        </p>
+      <div className="auth-login-layout">
+        <section
+          className="auth-visual"
+          aria-hidden="true"
+        >
+          <div className="auth-visual-copy">
+            <span className="auth-visual-kicker">
+              LEX MACHINA
+            </span>
+            <h2>
+              Od akt do zweryfikowanej odpowiedzi.
+            </h2>
+            <p>
+              Dokumenty, źródła prawa i kontrolowany proces analizy w jednym lokalnym środowisku.
+            </p>
+          </div>
+
+          <div className="auth-visual-art">
+            <div className="auth-document auth-document-back">
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="auth-document auth-document-front">
+              <div className="auth-document-head">
+                <span>AKTA · ŹRÓDŁA</span>
+                <strong>✓</strong>
+              </div>
+              <i />
+              <i />
+              <i className="short" />
+              <div className="auth-citation-row">
+                <span>ELI</span>
+                <span>SN</span>
+                <span>SAOS</span>
+              </div>
+            </div>
+            <div className="auth-verification-path">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+
+          <div className="auth-visual-foot">
+            <span>lokalny runtime</span>
+            <span>szyfrowane akta</span>
+            <span>weryfikacja źródeł</span>
+          </div>
+        </section>
+
+        <section className="auth-card">
+          <div className="auth-brand-lockup">
+            <img
+              className="auth-brand-icon"
+              src={LEX_MACHINA_BRAND_ICON}
+              alt=""
+              aria-hidden="true"
+            />
+            <div>
+              <strong>Lex Machina</strong>
+              <span>Lokalny warsztat prawny</span>
+            </div>
+          </div>
+          <p className="eyebrow">
+            Bezpieczny dostęp
+          </p>
         <h1>
           {phase === "bootstrap"
             ? "Utwórz konto właściciela"
@@ -188,9 +253,16 @@ function AuthPanel({
         </p>
 
         {phase === "login" &&
-          !lastUser && (
-          <div className="alert alert-error auth-alert">
-            Pierwsze logowanie: login <strong>admin</strong>, hasło <strong>admin</strong>. To hasło jest wyłącznie tymczasowe. Po zalogowaniu należy je natychmiast zmienić na hasło mające co najmniej 10 znaków.
+          !lastUser &&
+          temporaryAdminCredentialsActive && (
+          <div
+            className="auth-onboarding-note"
+            role="status"
+          >
+            <strong>Pierwsze logowanie</strong>
+            <span>
+              Login <b>admin</b>, hasło <b>admin</b>. Dane są tymczasowe i znikną z tego ekranu po ustawieniu własnego hasła.
+            </span>
           </div>
         )}
 
@@ -316,7 +388,8 @@ function AuthPanel({
         <p className="auth-footnote">
           Hasło nie jest zapisywane. Zamknięcie procesu aplikacji unieważnia wszystkie sesje.
         </p>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
@@ -340,6 +413,10 @@ export default function AuthenticatedApp() {
     useState(false);
   const [showUsers, setShowUsers] =
     useState(false);
+  const [
+    temporaryAdminCredentialsActive,
+    setTemporaryAdminCredentialsActive
+  ] = useState(false);
   const [
     authToolbarMinimized,
     setAuthToolbarMinimized
@@ -388,6 +465,10 @@ export default function AuthenticatedApp() {
             }
           }
 
+          setTemporaryAdminCredentialsActive(
+            status.temporaryAdminCredentialsActive ===
+              true
+          );
           setPhase(
             status.requiresBootstrap
               ? "bootstrap"
@@ -578,15 +659,29 @@ export default function AuthenticatedApp() {
           clearAuthSession();
           setPhase("recover");
         }}
+        temporaryAdminCredentialsActive={
+          temporaryAdminCredentialsActive
+        }
         onAuthenticated={(value) => {
           setAuth(value);
           setLastUser(value.user);
           setNow(Date.now());
-          setShowSecurity(
+          const passwordSetupPending =
             value.user
               .passwordSetupPending ===
-              true
+              true;
+          setShowSecurity(
+            passwordSetupPending
           );
+          if (
+            value.user.loginName ===
+              "admin" &&
+            !passwordSetupPending
+          ) {
+            setTemporaryAdminCredentialsActive(
+              false
+            );
+          }
           setPhase(
             "authenticated"
           );
@@ -752,6 +847,17 @@ export default function AuthenticatedApp() {
               value.user
             );
             setNow(Date.now());
+            if (
+              value.user.loginName ===
+                "admin" &&
+              value.user
+                .passwordSetupPending !==
+                true
+            ) {
+              setTemporaryAdminCredentialsActive(
+                false
+              );
+            }
           }}
         />
       )}
