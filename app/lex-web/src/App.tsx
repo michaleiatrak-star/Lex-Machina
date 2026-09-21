@@ -14,18 +14,24 @@ import type {
 export default function App({
   user,
   onAuthUpdated,
-  settingsRequest
+  settingsRequest,
+  onLock,
+  onLogout
 }: {
   user: AuthenticatedUser;
   onAuthUpdated: (
     value: AuthMeResponse
   ) => void;
   settingsRequest?: SettingsRequest | null;
+  onLock: () => void;
+  onLogout: () => void;
 }) {
   return (
     <MatterChatApp
       user={user}
       settingsRequest={settingsRequest}
+      onLock={onLock}
+      onLogout={onLogout}
       settingsPanels={{
         localAi: (
           <LocalAiSetupPanel
