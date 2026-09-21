@@ -11,6 +11,7 @@ import {
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
   isMissingResumableSessionMessage,
+  mergeWindowsCommandPath,
   visibleWindowsLoginLauncher
 } from "./account-session.js";
 
@@ -121,6 +122,18 @@ describe("provider account-session transport", () => {
       )
     ).toBe(
       "CAPTURED"
+    );
+  });
+
+  it("merges refreshed Windows PATH entries without losing the running process path", () => {
+    expect(
+      mergeWindowsCommandPath(
+        "C:\\Lex\\Runtime;C:\\Windows\\System32",
+        "C:\\Windows\\System32;C:\\Program Files\\Node",
+        "C:\\Users\\Tester\\.local\\bin;C:\\Users\\Tester\\AppData\\Roaming\\npm"
+      )
+    ).toBe(
+      "C:\\Lex\\Runtime;C:\\Windows\\System32;C:\\Program Files\\Node;C:\\Users\\Tester\\.local\\bin;C:\\Users\\Tester\\AppData\\Roaming\\npm"
     );
   });
 
