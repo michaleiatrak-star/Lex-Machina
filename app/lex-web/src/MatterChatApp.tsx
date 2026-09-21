@@ -1239,10 +1239,20 @@ export default function MatterChatApp({
       );
       return status.authenticated;
     } catch (error) {
+      const code =
+        error instanceof ApiError
+          ? error.code
+          : error instanceof Error
+            ? error.message
+            : String(error);
       setProviderAccountMessage(
-        error instanceof Error
-          ? error.message
-          : String(error)
+        code ===
+          "ACCOUNT_SESSION_SUBSCRIPTION_LOGIN_REQUIRED"
+          ? "Claude Code nie potwierdził aktywnego logowania do subskrypcji Claude. Program używa wyłącznie sesji Claude.ai/Pro/Max i nie przełącza tego kanału na rozliczane API."
+          : code ===
+              "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            ? "Nie znaleziono oficjalnego klienta tego dostawcy."
+            : code
       );
       await refreshProviderAccountStatus()
         .catch(() => {});
@@ -2641,7 +2651,9 @@ export default function MatterChatApp({
                     >
                       {item.displayName}
                       {!item.selectable
-                        ? " · nieobsługiwany"
+                        ? isAccountPrimarySource(provider)
+                          ? " · wymaga logowania"
+                          : " · nieobsługiwany"
                         : ""}
                     </option>
                   ))}
