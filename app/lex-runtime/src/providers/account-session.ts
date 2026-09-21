@@ -817,6 +817,24 @@ export function accountLoginArgs(
   return ["login"];
 }
 
+export function visibleWindowsLoginLauncher(
+  scriptPath: string
+): string {
+  const escapedScriptPath =
+    scriptPath.replace(
+      /'/g,
+      "''"
+    );
+  return [
+    "$ErrorActionPreference = 'Stop'",
+    "$cmd = $env:ComSpec",
+    `$script = '${escapedScriptPath}'`,
+    "$argLine = '/d /s /c ' + [char]34 + $script + [char]34",
+    "$process = Start-Process -FilePath $cmd -ArgumentList $argLine -WindowStyle Normal -PassThru -Wait",
+    "exit $process.ExitCode"
+  ].join("\r\n");
+}
+
 async function runVisibleWindowsLogin(
   provider: ProviderId,
   args: string[],
@@ -886,21 +904,11 @@ async function runVisibleWindowsLogin(
       root,
       "launcher.ps1"
     );
-  const escapedScriptPath =
-    scriptPath.replace(
-      /'/g,
-      "''"
-    );
   await fsp.writeFile(
     launcherPath,
-    [
-      "$ErrorActionPreference = 'Stop'",
-      "$cmd = $env:ComSpec",
-      `$script = '${escapedScriptPath}'`,
-      "$argLine = '/d /s /c ' + [char]34 + $script + [char]34",
-      "$process = Start-Process -FilePath $cmd -ArgumentList $argLine -WindowStyle Normal -PassThru -Wait",
-      "exit $process.ExitCode"
-    ].join("\r\n"),
+    visibleWindowsLoginLauncher(
+      scriptPath
+    ),
     "utf8"
   );
 
