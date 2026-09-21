@@ -3442,9 +3442,120 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 caseId
               );
         }
+        let enrichedUploads:
+          Array<
+            StoredUpload & {
+              processing?: {
+                documentId: string;
+                complete: true;
+                totalPages: number;
+                digitalPages: number;
+                ocrPages: number;
+                blankPages: number;
+              };
+            }
+          > =
+          uploads.map(
+            (item) => ({
+              ...item
+            })
+          );
+
+        if (
+          options.documentService
+            ?.restoreDocument &&
+          options.caseAccessService
+        ) {
+          const context =
+            responseAuthContext(
+              res
+            );
+          const caseView =
+            options.caseAccessService
+              .openCase(
+                context,
+                caseId
+              );
+
+          enrichedUploads =
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "READ",
+                async (
+                  caseDataKey
+                ) =>
+                  await Promise.all(
+                    uploads.map(
+                      async (
+                        item
+                      ) => {
+                        if (
+                          item.archive
+                        ) {
+                          return {
+                            ...item
+                          };
+                        }
+
+                        const documentId =
+                          "doc_" +
+                          item.sha256
+                            .slice(
+                              0,
+                              24
+                            );
+                        try {
+                          const restored =
+                            await options
+                              .documentService!
+                              .restoreDocument!({
+                                caseId,
+                                documentId,
+                                caseDataKey,
+                                keyVersion:
+                                  caseView
+                                    .keyVersion
+                              });
+                          return {
+                            ...item,
+                            processing: {
+                              documentId:
+                                restored
+                                  .documentId,
+                              complete:
+                                true as const,
+                              totalPages:
+                                restored
+                                  .totalPages,
+                              digitalPages:
+                                restored
+                                  .digitalPages,
+                              ocrPages:
+                                restored
+                                  .ocrPages,
+                              blankPages:
+                                restored
+                                  .blankPages
+                            }
+                          };
+                        } catch {
+                          return {
+                            ...item
+                          };
+                        }
+                      }
+                    )
+                  )
+              );
+        }
+
         res.json({
           caseId,
-          uploads
+          uploads:
+            enrichedUploads
         });
       } catch (error) {
         if (
