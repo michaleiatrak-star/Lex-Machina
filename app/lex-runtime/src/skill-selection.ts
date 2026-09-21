@@ -33,6 +33,9 @@ export type SkillSelectionEnvelope = {
    * execution skill out of both.
    */
   domainAllowList: string[];
+  domainRestrictionActive: boolean;
+  executionAllowList: string[];
+  executionRestrictionActive: boolean;
 };
 
 export type ResolvedSkillSelection = {
@@ -92,7 +95,10 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
       query: rawQuery,
       automatic: true,
       manualSkills: [],
-      domainAllowList: []
+      domainAllowList: [],
+      domainRestrictionActive: false,
+      executionAllowList: [],
+      executionRestrictionActive: false
     };
   }
 
@@ -102,26 +108,54 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
       query: rawQuery,
       automatic: true,
       manualSkills: [],
-      domainAllowList: []
+      domainAllowList: [],
+      domainRestrictionActive: false,
+      executionAllowList: [],
+      executionRestrictionActive: false
     };
   }
 
   const encoded = firstLine.slice(SKILL_SELECTION_ENVELOPE_PREFIX.length).trim();
   try {
     const parsed = JSON.parse(encoded) as Record<string, unknown>;
+    const domainRestrictionActive =
+      Object.prototype.hasOwnProperty.call(
+        parsed,
+        "domains"
+      ) &&
+      Array.isArray(
+        parsed.domains
+      );
+    const executionRestrictionActive =
+      Object.prototype.hasOwnProperty.call(
+        parsed,
+        "execution"
+      ) &&
+      Array.isArray(
+        parsed.execution
+      );
     return {
       query: rawQuery.slice(firstBreak + 1).trimStart(),
       automatic: parsed.auto !== false,
       manualSkills: safeManualSkillNames(parsed.manual),
       domainAllowList:
-        safeDomainAllowList(parsed.domains)
+        safeDomainAllowList(parsed.domains),
+      domainRestrictionActive,
+      executionAllowList:
+        safeManualSkillNames(
+          parsed.execution
+        ),
+      executionRestrictionActive
     };
   } catch {
     return {
       query: rawQuery,
       automatic: true,
       manualSkills: [],
-      domainAllowList: []
+      domainAllowList: [],
+      domainRestrictionActive: false,
+      executionAllowList: [],
+      executionRestrictionActive: false
     };
   }
 }
@@ -403,18 +437,31 @@ export function resolveAdditionalSkills(
   primarySkill: string,
   automatic: boolean,
   manualSkills: readonly string[],
-  domainAllowList: readonly string[] = []
+  domainAllowList: readonly string[] = [],
+  domainRestrictionActive =
+    domainAllowList.length > 0,
+  executionAllowList: readonly string[] = [],
+  executionRestrictionActive = false
 ): ResolvedSkillSelection {
   // An empty allow-list means every domain stays available, so an older
   // client that does not send the field keeps today's behaviour exactly.
   const allowedDomains =
-    domainAllowList.length > 0
+    domainRestrictionActive
       ? new Set(domainAllowList)
       : null;
   const domainAllowed = (name: string): boolean =>
     allowedDomains === null ||
     name === primarySkill ||
     allowedDomains.has(name);
+  const allowedExecution =
+    executionRestrictionActive
+      ? new Set(executionAllowList)
+      : null;
+  const executionAllowed = (
+    name: string
+  ): boolean =>
+    allowedExecution === null ||
+    allowedExecution.has(name);
   const core = new Set<string>([
     "prawny-router-v3",
     "prawo-polskie-v2",
@@ -423,11 +470,23 @@ export function resolveAdditionalSkills(
 
   const manual = [
     ...new Set(manualSkills)
-  ].filter((name) =>
-    !core.has(name) &&
-    name !== "shared" &&
-    Boolean(registry.get(name))
-  );
+  ].filter((name) => {
+    if (
+      core.has(name) ||
+      name === "shared"
+    ) {
+      return false;
+    }
+    const skill =
+      registry.get(name);
+    if (!skill) {
+      return false;
+    }
+    return (
+      !isExecutionSkill(skill) ||
+      executionAllowed(name)
+    );
+  });
 
   const selected = new Set<string>(manual);
   const executionSkills = new Set<string>();
@@ -465,16 +524,28 @@ export function resolveAdditionalSkills(
   if (automatic) {
     const queryTokens = tokens(query);
     const candidates = [...registry.skills.values()]
-      .filter((skill) => !core.has(skill.name) && skill.name !== "shared");
+      .filter(
+        (skill) =>
+          !core.has(skill.name) &&
+          skill.name !== "shared"
+      );
+    const executionCandidates =
+      candidates.filter(
+        (skill) =>
+          isExecutionSkill(skill) &&
+          executionAllowed(
+            skill.name
+          )
+      );
 
     const rankedExecution = rankSkills(
-      candidates.filter(isExecutionSkill),
+      executionCandidates,
       queryTokens
     );
     const explicitExecution =
       explicitExecutionSkillHints(
         query,
-        candidates
+        executionCandidates
       );
 
     for (const name of explicitExecution) {
@@ -505,7 +576,11 @@ export function resolveAdditionalSkills(
       executionSkills.size === 0
     ) {
       const fallback =
-        candidates.find((skill) => skill.name === "przewodnik-prawny-v2") ??
+        executionCandidates.find(
+          (skill) =>
+            skill.name ===
+            "przewodnik-prawny-v2"
+        ) ??
         rankedExecution[0]?.skill;
       if (fallback) {
         executionSkills.add(fallback.name);
@@ -525,7 +600,7 @@ export function resolveAdditionalSkills(
     const delegatedExecution = referencedExecutionSkills(
       registry,
       [...executionSkills],
-      candidates
+      executionCandidates
     );
     for (const name of delegatedExecution) {
       if (executionSkills.size >= 6) break;
