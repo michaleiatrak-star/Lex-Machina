@@ -5,6 +5,7 @@ import {
   useState
 } from "react";
 import type { WorkspaceDocumentCitation } from "./workspace-client.js";
+import { SourceLinkedText } from "./SourceLinkedText.js";
 
 function HighlightedContext({
   citation
@@ -35,10 +36,12 @@ function HighlightedContext({
 
 export function DocumentCitationContent({
   content,
-  citations = []
+  citations = [],
+  onOpenUrl
 }: {
   content: string;
   citations?: WorkspaceDocumentCitation[];
+  onOpenUrl?: (url: string) => Promise<void> | void;
 }) {
   const [selected, setSelected] = useState<WorkspaceDocumentCitation | null>(null);
   const viewerRef = useRef<HTMLElement>(null);
@@ -62,7 +65,16 @@ export function DocumentCitationContent({
       <div className="chat-message-content">
         {parts.map((part, index) => {
           const citation = byMarker.get(part);
-          if (!citation) return <span key={index}>{part}</span>;
+          if (!citation) {
+            return (
+              <span key={index}>
+                <SourceLinkedText
+                  content={part}
+                  onOpenUrl={onOpenUrl}
+                />
+              </span>
+            );
+          }
           return (
             <button
               key={`${citation.citationId}-${index}`}
