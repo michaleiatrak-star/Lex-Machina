@@ -433,53 +433,6 @@ function cleanEnvironment():
       (env.PATH ?? "");
   }
 
-  const uodoShim =
-    path.resolve(
-      process.cwd(),
-      "dist",
-      "uodo-mcp-shim.js"
-    );
-  if (
-    !env.PRAWO_PL_MCP_CMD_UODO &&
-    fs.existsSync(
-      uodoShim
-    )
-  ) {
-    const nodeCommand =
-      privateCommand(
-        [
-          "node",
-          process.platform ===
-            "win32"
-            ? "node.exe"
-            : "node"
-        ],
-        process.execPath ||
-          "node"
-      );
-    const quote =
-      (value: string) =>
-        '"' +
-        value
-          .replaceAll(
-            '"',
-            ""
-          )
-          .replaceAll(
-            "\\",
-            "/"
-          ) +
-        '"';
-    env.PRAWO_PL_MCP_CMD_UODO =
-      quote(
-        nodeCommand
-      ) +
-      " " +
-      quote(
-        uodoShim
-      );
-  }
-
   return {
     ...env,
     PRAWO_PL_MCP_INIT_TIMEOUT:
@@ -490,8 +443,9 @@ function cleanEnvironment():
       "90",
 
     // Pin the connector fleet where the upstream package version is
-    // published in the canonical repository. UODO remains delegated to the
-    // aggregator because its registry/package is the current source of truth.
+    // published in the canonical repository. UODO is intentionally handled
+    // by a local read-only MCP sibling over the official UODO API because the
+    // upstream uodo-orzeczenia-mcp package currently closes during startup.
     PRAWO_PL_MCP_CMD_SAOS:
       env.PRAWO_PL_MCP_CMD_SAOS ??
       "npx -y @matematicsolutions/mcp-saos@1.2.0",
@@ -747,9 +701,180 @@ class PrawoPlMcpClient {
   }
 }
 
+class LocalUodoMcpClient {
+  private client:
+    Client | null = null;
+  private connecting:
+    Promise<Client> | null =
+      null;
+
+  private shimPath():
+    string {
+    const modulePath =
+      new URL(
+        import.meta.url
+      ).pathname;
+    const moduleDir =
+      path.dirname(
+        process.platform ===
+          "win32" &&
+        modulePath.startsWith(
+          "/"
+        )
+          ? modulePath.slice(
+              1
+            )
+          : modulePath
+      );
+    const sibling =
+      path.join(
+        moduleDir,
+        "uodo-mcp-shim.js"
+      );
+    if (
+      fs.existsSync(
+        sibling
+      )
+    ) {
+      return sibling;
+    }
+    const built =
+      path.resolve(
+        moduleDir,
+        "..",
+        "dist",
+        "uodo-mcp-shim.js"
+      );
+    if (
+      fs.existsSync(
+        built
+      )
+    ) {
+      return built;
+    }
+    throw new Error(
+      "UODO_LOCAL_MCP_SHIM_MISSING"
+    );
+  }
+
+  private async ensureClient():
+    Promise<Client> {
+    if (this.client) {
+      return this.client;
+    }
+    if (this.connecting) {
+      return this.connecting;
+    }
+
+    this.connecting =
+      (async () => {
+        const command =
+          privateCommand(
+            [
+              "node",
+              process.platform ===
+                "win32"
+                ? "node.exe"
+                : "node"
+            ],
+            process.execPath ||
+              "node"
+          );
+        const transport =
+          new StdioClientTransport({
+            command,
+            args: [
+              this.shimPath()
+            ],
+            env:
+              cleanEnvironment(),
+            stderr: "pipe"
+          });
+        const client =
+          new Client({
+            name:
+              "lex-machina-uodo-fallback-client",
+            version:
+              "0.1.6"
+          });
+        await client.connect(
+          transport
+        );
+        this.client =
+          client;
+        return client;
+      })();
+
+    try {
+      return await this
+        .connecting;
+    } finally {
+      this.connecting =
+        null;
+    }
+  }
+
+  async listTools():
+    Promise<string> {
+    const client =
+      await this.ensureClient();
+    const result =
+      await client.listTools();
+    return JSON.stringify({
+      status:
+        "OK",
+      source:
+        "uodo",
+      transport:
+        "LOCAL_MCP_STDIO",
+      authority:
+        "https://orzeczenia.uodo.gov.pl/api",
+      tools:
+        result.tools
+    });
+  }
+
+  async call(
+    name: string,
+    args:
+      Record<string, unknown>
+  ): Promise<string> {
+    const client =
+      await this.ensureClient();
+    const result =
+      await client.callTool({
+        name,
+        arguments:
+          guardOutboundPayload(
+            args
+          )
+      });
+    return extractToolText(
+      result
+    );
+  }
+
+  async close():
+    Promise<void> {
+    const client =
+      this.client;
+    this.client = null;
+    this.connecting = null;
+    if (client) {
+      try {
+        await client.close();
+      } catch {
+        // Best-effort shutdown.
+      }
+    }
+  }
+}
+
 export class LegalFederationToolRuntime {
   private readonly client =
     new PrawoPlMcpClient();
+  private readonly uodoClient =
+    new LocalUodoMcpClient();
   private readonly events:
     LegalFederationAuditEvent[] =
       [];
@@ -800,7 +925,10 @@ export class LegalFederationToolRuntime {
 
   async close():
     Promise<void> {
-    await this.client.close();
+    await Promise.all([
+      this.client.close(),
+      this.uodoClient.close()
+    ]);
   }
 
   auditEvents():
@@ -918,6 +1046,13 @@ export class LegalFederationToolRuntime {
           "string"
           ? call.input.group
           : undefined;
+      if (
+        source ===
+          "uodo"
+      ) {
+        return this.uodoClient
+          .listTools();
+      }
       return this.client.call(
         "pl_list_sources",
         {
@@ -951,7 +1086,12 @@ export class LegalFederationToolRuntime {
               source,
               ...LOCAL_COVERAGE[
                 source
-              ]
+              ],
+              transport:
+                source ===
+                  "uodo"
+                  ? "LOCAL_MCP_STDIO_OFFICIAL_API_FALLBACK"
+                  : "PRAWO_PL_MCP_CHILD_CONNECTOR"
             })
           ),
         policy: {
@@ -981,6 +1121,62 @@ export class LegalFederationToolRuntime {
       call.name ===
         SEARCH_TOOL
     ) {
+      if (
+        source ===
+          "uodo"
+      ) {
+        return this.uodoClient
+          .call(
+            "uodo_search",
+            {
+              ...(typeof call.input
+                .query ===
+                "string"
+                ? {
+                    keyword:
+                      call.input
+                        .query
+                  }
+                : {}),
+              ...(typeof call.input
+                .dateFrom ===
+                "string"
+                ? {
+                    date_from:
+                      call.input
+                        .dateFrom
+                  }
+                : {}),
+              ...(typeof call.input
+                .dateTo ===
+                "string"
+                ? {
+                    date_to:
+                      call.input
+                        .dateTo
+                  }
+                : {}),
+              ...(Number.isInteger(
+                call.input.page
+              )
+                ? {
+                    page:
+                      call.input
+                        .page
+                  }
+                : {}),
+              ...(Number.isInteger(
+                call.input.limit
+              )
+                ? {
+                    size:
+                      call.input
+                        .limit
+                  }
+                : {})
+            }
+          );
+      }
       return this.client.call(
         "pl_search",
         {
@@ -1061,6 +1257,19 @@ export class LegalFederationToolRuntime {
           "FEDERATED_DOCUMENT_ID_REQUIRED"
         );
       }
+      if (
+        source ===
+          "uodo"
+      ) {
+        return this.uodoClient
+          .call(
+            "uodo_get_decision",
+            {
+              urn_or_signature:
+                documentId
+            }
+          );
+      }
       return this.client.call(
         "pl_get_document",
         {
@@ -1124,6 +1333,16 @@ export class LegalFederationToolRuntime {
                 unknown
               >
           : {};
+      if (
+        source ===
+          "uodo"
+      ) {
+        return this.uodoClient
+          .call(
+            tool,
+            args
+          );
+      }
       return this.client.call(
         "pl_call",
         {
