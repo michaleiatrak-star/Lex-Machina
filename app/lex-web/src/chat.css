@@ -232,6 +232,11 @@
   background: #dba29b;
 }
 
+.chat-dot.starting {
+  background: #d9b25e;
+  box-shadow: 0 0 0 3px rgba(217, 178, 94, 0.14);
+}
+
 .chat-sidebar-foot {
   display: grid;
   gap: 5px;
