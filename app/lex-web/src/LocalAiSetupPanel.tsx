@@ -272,9 +272,11 @@ function backendLabel(
 }
 
 export function LocalAiSetupPanel({
-  user
+  user,
+  embedded = false
 }: {
   user: AuthenticatedUser;
+  embedded?: boolean;
 }) {
   const [data, setData] = useState<LocalModelsResponse | null>(null);
   const [modelId, setModelId] = useState("");
@@ -289,7 +291,7 @@ export function LocalAiSetupPanel({
   const [
     minimized,
     setMinimized
-  ] = useState(true);
+  ] = useState(!embedded);
   const floatingDrag =
     useFloatingPanelDrag();
 
@@ -705,7 +707,7 @@ export function LocalAiSetupPanel({
     }
   }
 
-  if (minimized) {
+  if (minimized && !embedded) {
     return (
       <div
         className="local-ai-setup local-ai-setup-minimized"
@@ -749,26 +751,40 @@ export function LocalAiSetupPanel({
 
   return (
     <details
-      className="local-ai-setup"
-      open={!configured}
-      data-floating-panel="true"
+      className={
+        embedded
+          ? "local-ai-setup local-ai-setup-embedded"
+          : "local-ai-setup"
+      }
+      open={
+        embedded
+          ? true
+          : !configured
+      }
+      data-floating-panel={
+        embedded ? undefined : "true"
+      }
       style={
-        floatingDrag.style
+        embedded
+          ? undefined
+          : floatingDrag.style
       }
     >
       <summary>
-        <span
-          className="floating-drag-handle"
-          title="Przeciągnij panel"
-          aria-label="Przeciągnij panel lokalnej AI"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-          }}
-          {...floatingDrag.handleProps}
-        >
-          ⋮⋮
-        </span>
+        {!embedded ? (
+          <span
+            className="floating-drag-handle"
+            title="Przeciągnij panel"
+            aria-label="Przeciągnij panel lokalnej AI"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+            {...floatingDrag.handleProps}
+          >
+            ⋮⋮
+          </span>
+        ) : null}
         <span className="local-ai-title">
           <strong>Lokalna AI</strong>
           <small>
@@ -780,19 +796,21 @@ export function LocalAiSetupPanel({
         <span className={configured ? "local-ai-badge ready" : "local-ai-badge"}>
           {configured ? "GOTOWA" : "NIEZAINSTALOWANA"}
         </span>
-        <button
-          type="button"
-          className="floating-minimize-button"
-          aria-label="Zminimalizuj panel lokalnej AI"
-          title="Zminimalizuj do ikony"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            setMinimized(true);
-          }}
-        >
-          −
-        </button>
+        {!embedded ? (
+          <button
+            type="button"
+            className="floating-minimize-button"
+            aria-label="Zminimalizuj panel lokalnej AI"
+            title="Zminimalizuj do ikony"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setMinimized(true);
+            }}
+          >
+            −
+          </button>
+        ) : null}
       </summary>
 
       <div className="local-ai-body">
