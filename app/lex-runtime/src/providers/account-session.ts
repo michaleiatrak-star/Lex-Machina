@@ -1660,15 +1660,24 @@ export class AccountSessionManager {
           "anthropic"
       ) {
         const fixedQuery =
-          "Treat all piped stdin content as the complete Lex Machina request. Current Lex Machina instructions override any prior host-session instructions. Earlier host-session facts are continuity context only: do not reuse, reveal or infer them unless they are also present in the current Lex Machina request. Return only the requested response. Do not access local files or use local tools.";
+          "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
+        const lexSystemPrompt =
+          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
         const commonArgs = [
           "-p",
           fixedQuery,
           "--output-format",
           "json",
           "--bare",
+          "--restricted",
+          "--tools",
+          "",
           "--disallowedTools",
-          "*"
+          "mcp__*",
+          "--system-prompt",
+          lexSystemPrompt,
+          "--system-prompt-snapshot",
+          "off"
         ];
         const hostCwd =
           process.cwd();
@@ -1835,8 +1844,8 @@ export class AccountSessionManager {
         promptPath,
         "--sandbox",
         "strict",
-        "--disallowed-tools",
-        "*",
+        "--tools",
+        "__LEX_NO_HOST_TOOLS__",
         "--no-subagents",
         "--no-memory",
         "--disable-web-search",
