@@ -501,7 +501,7 @@ export class LocalDocumentAuthoringService {
             keyVersion:
               args.keyVersion,
             sensitivity:
-              "CLEAR_PII",
+              "PROTECTED",
             createdByUserId:
               args
                 .createdByUserId
