@@ -117,21 +117,32 @@ const PROVIDERS: Array<{
   id: ProviderId;
   label: string;
   apiKeyUrl: string;
+  accountClientLabel: string;
+  accountInstallUrl: string;
 }> = [
   {
     id: "openai",
     label: "OpenAI",
-    apiKeyUrl: "https://platform.openai.com/api-keys"
+    apiKeyUrl: "https://platform.openai.com/api-keys",
+    accountClientLabel: "Codex CLI",
+    accountInstallUrl:
+      "https://developers.openai.com/codex/cli"
   },
   {
     id: "anthropic",
     label: "Anthropic / Claude",
-    apiKeyUrl: "https://platform.claude.com/settings/keys"
+    apiKeyUrl: "https://platform.claude.com/settings/keys",
+    accountClientLabel: "Claude Code",
+    accountInstallUrl:
+      "https://support.claude.com/en/articles/14552382-your-first-day-in-claude-code"
   },
   {
     id: "xai",
     label: "xAI / Grok",
-    apiKeyUrl: "https://console.x.ai/"
+    apiKeyUrl: "https://console.x.ai/",
+    accountClientLabel: "Grok Build",
+    accountInstallUrl:
+      "https://docs.x.ai/build/overview"
   }
 ];
 
@@ -600,9 +611,14 @@ export default function MatterChatApp({
     () => matterCases.find((item) => item.caseId === caseId),
     [matterCases, caseId]
   );
-  const providerDefinition = PROVIDERS.find((item) => item.id === provider);
   const runtimeProvider =
     runtimeProviderForPrimarySource(provider);
+  const providerDefinition =
+    PROVIDERS.find(
+      (item) =>
+        item.id ===
+        runtimeProvider
+    );
   const providerConfigured =
     providerConfiguration[runtimeProvider];
   const accountSession =
@@ -1278,6 +1294,38 @@ export default function MatterChatApp({
     );
   }
 
+  function switchAccountToApi(): void {
+    setProvider(
+      runtimeProvider
+    );
+    setProviderApiKeyInput("");
+    setProviderKeyMessage("");
+    setProviderAccountMessage(
+      "Przełączono na kanał API. Wklej klucz dostawcy; w aplikacji desktopowej możesz zapisać go w systemowym magazynie poświadczeń."
+    );
+    setActiveTab("settings");
+  }
+
+  async function openAccountClientSetup(): Promise<void> {
+    if (
+      !providerDefinition
+    ) {
+      return;
+    }
+    try {
+      await openExternalUrl(
+        providerDefinition
+          .accountInstallUrl
+      );
+    } catch (error) {
+      setProviderAccountMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    }
+  }
+
   async function connectProviderAccount(): Promise<boolean> {
     if (
       !isAccountPrimarySource(
@@ -1325,7 +1373,7 @@ export default function MatterChatApp({
           ? "Claude Code nie potwierdził aktywnego logowania do subskrypcji Claude. Program używa wyłącznie sesji Claude.ai/Pro/Max i nie przełącza tego kanału na rozliczane API."
           : code ===
               "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
-            ? "Nie znaleziono oficjalnego klienta tego dostawcy."
+            ? "Nie znaleziono oficjalnego klienta tego dostawcy. Zainstaluj klienta z oficjalnej instrukcji albo przełącz źródło na API."
             : code
       );
       await refreshProviderAccountStatus()
@@ -1621,9 +1669,12 @@ export default function MatterChatApp({
           await connectProviderAccount();
         if (!connected) {
           throw new Error(
-            user.appRole === "ADMIN"
-              ? "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
-              : "ACCOUNT_SESSION_LOGIN_ADMIN_REQUIRED"
+            accountSession?.installed ===
+              false
+              ? "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+              : user.appRole === "ADMIN"
+                ? "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
+                : "ACCOUNT_SESSION_LOGIN_ADMIN_REQUIRED"
           );
         }
         readyAccount = true;
@@ -1725,8 +1776,11 @@ export default function MatterChatApp({
       }
       const friendly =
         code ===
-          "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
-          ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie dostawcy i spróbuj ponownie."
+          "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+          ? "Tryb konta wymaga oficjalnego klienta dostawcy zainstalowanego osobno. Otwórz Ustawienia → Modele i konta, zainstaluj klienta albo przełącz źródło na API."
+        : code ===
+            "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
+          ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie w widocznym terminalu lub przeglądarce i spróbuj ponownie."
         : code ===
             "ACCOUNT_SESSION_LOGIN_ADMIN_REQUIRED"
           ? "Wybrane konto dostawcy nie jest zalogowane. Połączenie konta wymaga administratora aplikacji."
@@ -2051,19 +2105,30 @@ export default function MatterChatApp({
                         disabled={
                           executing ||
                           providerAccountBusy ||
-                          user.appRole !== "ADMIN" ||
-                          accountSession?.installed === false
+                          user.appRole !== "ADMIN"
                         }
                         onClick={() =>
-                          void connectProviderAccount()
+                          accountSession?.installed === false
+                            ? void openAccountClientSetup()
+                            : void connectProviderAccount()
                         }
                       >
                         {providerAccountBusy
                           ? "Logowanie…"
                           : accountSession?.installed === false
-                            ? "Brak klienta"
+                            ? "Zainstaluj klienta ↗"
                             : "Zaloguj"}
                       </button>
+                      {accountSession?.installed === false ? (
+                        <button
+                          type="button"
+                          className="chat-secondary-action"
+                          disabled={executing}
+                          onClick={switchAccountToApi}
+                        >
+                          Użyj API
+                        </button>
+                      ) : null}
                     ) : null}
                   </div>
                 </label>
@@ -2937,7 +3002,7 @@ export default function MatterChatApp({
                   {modelError === "PROVIDER_NOT_CONFIGURED"
                     ? "Najpierw dodaj klucz API dla tego dostawcy."
                     : modelError === "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
-                      ? "Nie znaleziono oficjalnego klienta tego dostawcy na komputerze."
+                      ? "Nie znaleziono oficjalnego klienta tego dostawcy. Zainstaluj go z instrukcji poniżej albo wybierz kanał API."
                       : modelError === "ACCOUNT_SESSION_NOT_AUTHENTICATED"
                         ? "Najpierw połącz konto użytkownika."
                         : modelError}
@@ -3145,15 +3210,21 @@ export default function MatterChatApp({
               ) : isAccountPrimarySource(provider) ? (
                 <>
                   <p>
-                    Lex Machina używa zalogowanej sesji oficjalnego klienta
+                    Kanał konta jest opcjonalną integracją z oficjalnym klientem
                     {runtimeProvider === "openai"
-                      ? " Codex / ChatGPT"
+                      ? " Codex CLI"
                       : runtimeProvider === "anthropic"
                         ? " Claude Code"
                         : " Grok Build"}.
-                    Jeżeli sesja istnieje, program wznawia ją automatycznie; jeżeli nie,
-                    tworzy nową. Token OAuth nie jest kopiowany do interfejsu aplikacji,
-                    a narzędzia hosta pozostają wyłączone.
+                    Na Windows Lex Machina otwiera widoczny terminal, a klient prowadzi
+                    dalej przez swój oficjalny login w przeglądarce lub flow kodu urządzenia.
+                    Token OAuth pozostaje po stronie klienta i nie jest kopiowany do UI Lex Machina.
+                  </p>
+                  <p>
+                    Do zwykłej integracji Lex Machina z zewnętrznym modelem możesz
+                    zamiast tego wybrać kanał API — nie wymaga instalowania klienta CLI,
+                    udostępnia katalog modeli providera, a w aplikacji desktopowej klucz
+                    może być zapisany w systemowym magazynie poświadczeń.
                   </p>
                   <small>
                     {accountSession
@@ -3166,23 +3237,32 @@ export default function MatterChatApp({
                   </small>
                   {user.appRole === "ADMIN" ? (
                     <div className="chat-form-row compact">
-                      <button
-                        type="button"
-                        className="chat-primary-action"
-                        disabled={
-                          providerAccountBusy ||
-                          accountSession?.installed === false
-                        }
-                        onClick={() =>
-                          void connectProviderAccount()
-                        }
-                      >
-                        {providerAccountBusy
-                          ? "Logowanie…"
-                          : accountSession?.authenticated
-                            ? "Odśwież logowanie"
-                            : "Połącz konto"}
-                      </button>
+                      {accountSession?.installed === false ? (
+                        <button
+                          type="button"
+                          className="chat-primary-action"
+                          onClick={() =>
+                            void openAccountClientSetup()
+                          }
+                        >
+                          Instalacja {providerDefinition?.accountClientLabel ?? "klienta"} ↗
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="chat-primary-action"
+                          disabled={providerAccountBusy}
+                          onClick={() =>
+                            void connectProviderAccount()
+                          }
+                        >
+                          {providerAccountBusy
+                            ? "Logowanie…"
+                            : accountSession?.authenticated
+                              ? "Odśwież logowanie"
+                              : "Połącz konto"}
+                        </button>
+                      )}
                       <button
                         type="button"
                         className="chat-secondary-action"
@@ -3192,6 +3272,14 @@ export default function MatterChatApp({
                         }
                       >
                         Sprawdź ponownie
+                      </button>
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={providerAccountBusy}
+                        onClick={switchAccountToApi}
+                      >
+                        Przejdź na API
                       </button>
                     </div>
                   ) : (
