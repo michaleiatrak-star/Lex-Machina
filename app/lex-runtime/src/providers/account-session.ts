@@ -18,6 +18,33 @@ const STATUS_TIMEOUT_MS = 15_000;
 const MAX_CAPTURE_BYTES = 8 * 1024 * 1024;
 const TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
 
+let anthropicOAuthToken:
+  Buffer | null = null;
+
+function currentAnthropicOAuthToken():
+  string | null {
+  return anthropicOAuthToken
+    ?.toString("utf8") ??
+    process.env
+      .CLAUDE_CODE_OAUTH_TOKEN
+      ?.trim() ??
+    null;
+}
+
+function replaceAnthropicOAuthToken(
+  token: string | null
+): void {
+  anthropicOAuthToken
+    ?.fill(0);
+  anthropicOAuthToken =
+    token
+      ? Buffer.from(
+          token,
+          "utf8"
+        )
+      : null;
+}
+
 const ACCOUNT_MODEL_IDS: Record<ProviderId, string> = {
   openai: "account/openai/default",
   anthropic: "account/anthropic/default",
@@ -589,6 +616,7 @@ export type ProviderAccountSessionStatus = {
   authenticated: boolean;
   installHint: string;
   resumeMode: typeof ACCOUNT_SESSION_RESUME_MODE;
+  oauthTokenConfigured?: boolean;
 };
 
 type RunResult = {
@@ -606,6 +634,14 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
   } else if (provider === "anthropic") {
     delete env.ANTHROPIC_API_KEY;
     delete env.ANTHROPIC_AUTH_TOKEN;
+    const token =
+      currentAnthropicOAuthToken();
+    if (token) {
+      env.CLAUDE_CODE_OAUTH_TOKEN =
+        token;
+    } else {
+      delete env.CLAUDE_CODE_OAUTH_TOKEN;
+    }
   } else {
     delete env.XAI_API_KEY;
   }
@@ -1964,6 +2000,39 @@ function buildAccountPrompt(
 }
 
 export class AccountSessionManager {
+  setAnthropicOAuthToken(
+    token: string
+  ): void {
+    const normalized =
+      token.trim();
+    if (
+      normalized.length < 32 ||
+      normalized.length > 16_384 ||
+      /[\r\n]/.test(
+        normalized
+      )
+    ) {
+      throw new Error(
+        "INVALID_CLAUDE_OAUTH_TOKEN"
+      );
+    }
+    replaceAnthropicOAuthToken(
+      normalized
+    );
+  }
+
+  clearAnthropicOAuthToken(): void {
+    replaceAnthropicOAuthToken(
+      null
+    );
+  }
+
+  hasAnthropicOAuthToken(): boolean {
+    return Boolean(
+      currentAnthropicOAuthToken()
+    );
+  }
+
   async status(
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
@@ -1976,7 +2045,13 @@ export class AccountSessionManager {
         installed: false,
         authenticated: false,
         installHint: installHint(provider),
-        resumeMode: accountSessionResumeMode()
+        resumeMode: accountSessionResumeMode(),
+        ...(provider === "anthropic"
+          ? {
+              oauthTokenConfigured:
+                this.hasAnthropicOAuthToken()
+            }
+          : {})
       };
     }
 
@@ -2085,7 +2160,13 @@ export class AccountSessionManager {
       installed: true,
       authenticated,
       installHint: installHint(provider),
-      resumeMode: accountSessionResumeMode()
+      resumeMode: accountSessionResumeMode(),
+      ...(provider === "anthropic"
+        ? {
+            oauthTokenConfigured:
+              this.hasAnthropicOAuthToken()
+          }
+        : {})
     };
   }
 
@@ -2358,7 +2439,6 @@ export class AccountSessionManager {
           fixedQuery,
           "--output-format",
           "json",
-          "--bare",
           "--restricted",
           "--tools",
           "",
