@@ -535,6 +535,7 @@ export type ProviderAccountSessionStatus = {
   authenticated: boolean;
   installHint: string;
   resumeMode: "LAST_OR_NEW";
+  oauthTokenConfigured?: boolean;
 };
 
 export type ProviderAccountStatusResponse = {
@@ -1876,6 +1877,34 @@ export function clearProviderApiKey(
 ): Promise<ProviderCredentialMutationResponse> {
   return json<ProviderCredentialMutationResponse>(
     `/api/admin/providers/${provider}/credential`,
+    {
+      method: "DELETE"
+    }
+  );
+}
+
+export function setClaudeOAuthToken(
+  token: string,
+  persistence:
+    ProviderCredentialPersistence =
+      "PROCESS_MEMORY"
+): Promise<ProviderCredentialMutationResponse> {
+  return json<ProviderCredentialMutationResponse>(
+    "/api/admin/provider-accounts/anthropic/oauth-token",
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        token,
+        persistence
+      })
+    }
+  );
+}
+
+export function clearClaudeOAuthToken():
+  Promise<ProviderCredentialMutationResponse> {
+  return json<ProviderCredentialMutationResponse>(
+    "/api/admin/provider-accounts/anthropic/oauth-token",
     {
       method: "DELETE"
     }
