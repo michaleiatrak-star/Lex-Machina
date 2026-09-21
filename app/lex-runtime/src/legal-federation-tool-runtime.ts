@@ -433,6 +433,53 @@ function cleanEnvironment():
       (env.PATH ?? "");
   }
 
+  const uodoShim =
+    path.resolve(
+      process.cwd(),
+      "dist",
+      "uodo-mcp-shim.js"
+    );
+  if (
+    !env.PRAWO_PL_MCP_CMD_UODO &&
+    fs.existsSync(
+      uodoShim
+    )
+  ) {
+    const nodeCommand =
+      privateCommand(
+        [
+          "node",
+          process.platform ===
+            "win32"
+            ? "node.exe"
+            : "node"
+        ],
+        process.execPath ||
+          "node"
+      );
+    const quote =
+      (value: string) =>
+        '"' +
+        value
+          .replaceAll(
+            '"',
+            ""
+          )
+          .replaceAll(
+            "\\",
+            "/"
+          ) +
+        '"';
+    env.PRAWO_PL_MCP_CMD_UODO =
+      quote(
+        nodeCommand
+      ) +
+      " " +
+      quote(
+        uodoShim
+      );
+  }
+
   return {
     ...env,
     PRAWO_PL_MCP_INIT_TIMEOUT:
