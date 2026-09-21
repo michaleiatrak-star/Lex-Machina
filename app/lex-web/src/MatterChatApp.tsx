@@ -3251,7 +3251,10 @@ export default function MatterChatApp({
                         <button
                           type="button"
                           className="chat-primary-action"
-                          disabled={providerAccountBusy}
+                          disabled={
+                            providerAccountBusy ||
+                            accountSession?.authenticated === true
+                          }
                           onClick={() =>
                             void connectProviderAccount()
                           }
@@ -3259,7 +3262,7 @@ export default function MatterChatApp({
                           {providerAccountBusy
                             ? "Logowanie…"
                             : accountSession?.authenticated
-                              ? "Odśwież logowanie"
+                              ? "Połączone"
                               : "Połącz konto"}
                         </button>
                       )}
@@ -3287,6 +3290,12 @@ export default function MatterChatApp({
                       Konto dostawcy może połączyć administrator aplikacji.
                     </p>
                   )}
+                  {accountSession?.authenticated ? (
+                    <small>
+                      Aby zmienić konto, wyloguj lub przełącz konto w oficjalnym
+                      kliencie dostawcy, a następnie kliknij „Sprawdź ponownie”.
+                    </small>
+                  ) : null}
                   {providerAccountMessage ? (
                     <small>{providerAccountMessage}</small>
                   ) : null}
