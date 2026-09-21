@@ -552,6 +552,10 @@ server.setRequestHandler(
         return textResult({
           status:
             "FOUND",
+          source:
+            BASE,
+          transport:
+            "official-public-api",
           scope:
             "official UODO one-year index",
           results:
