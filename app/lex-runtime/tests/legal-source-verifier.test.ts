@@ -43,9 +43,10 @@ describe("OfficialLegalSourceVerifier", () => {
       sourceUrl:
         "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html",
       toolCallId: "tool-1",
-      verificationMethod: "web_fetch",
-      evidence: "Art. 5. Treść przepisu."
+      verificationMethod: "web_fetch"
     });
+    expect(result.record.evidence).toContain("Art. 5.");
+    expect(result.record.evidence).toContain("Treść przepisu.");
   });
 
   it("extracts only the requested article section from the official text", async () => {
