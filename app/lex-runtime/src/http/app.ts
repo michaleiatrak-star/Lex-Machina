@@ -8485,18 +8485,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   : ""
             )
           : "";
-      const localFailureReason =
+      const parsedLocalFailureReason =
         localFailureMessage
           .split(
             ":",
             1
           )[0] ?? "";
+      const localFailureReason =
+        /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
+          parsedLocalFailureReason
+        )
+          ? parsedLocalFailureReason
+          : "LOCAL_MODEL_INFERENCE_FAILED";
       if (
         request.model.startsWith(
           "local/"
-        ) &&
-        /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
-          localFailureReason
         )
       ) {
         res.status(503).json({
