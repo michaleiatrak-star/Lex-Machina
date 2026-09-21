@@ -57,10 +57,16 @@ const CLI_NAMES: Record<ProviderId, string> = {
   xai: "grok"
 };
 
-const ACCOUNT_SESSION_RESUME_MODE = "LAST_OR_NEW" as const;
+export type AccountSessionResumeMode =
+  | "LAST_OR_NEW"
+  | "LEX_CONTEXT_ONLY";
 
-export function accountSessionResumeMode(): typeof ACCOUNT_SESSION_RESUME_MODE {
-  return ACCOUNT_SESSION_RESUME_MODE;
+export function accountSessionResumeMode(
+  provider?: ProviderId
+): AccountSessionResumeMode {
+  return provider === "openai"
+    ? "LEX_CONTEXT_ONLY"
+    : "LAST_OR_NEW";
 }
 
 export function isMissingResumableSessionMessage(
@@ -615,7 +621,7 @@ export type ProviderAccountSessionStatus = {
   installed: boolean;
   authenticated: boolean;
   installHint: string;
-  resumeMode: typeof ACCOUNT_SESSION_RESUME_MODE;
+  resumeMode: AccountSessionResumeMode;
   oauthTokenConfigured?: boolean;
 };
 
@@ -2065,7 +2071,7 @@ export class AccountSessionManager {
         installed: false,
         authenticated: false,
         installHint: installHint(provider),
-        resumeMode: accountSessionResumeMode(),
+        resumeMode: accountSessionResumeMode(provider),
         ...(provider === "anthropic"
           ? {
               oauthTokenConfigured:
@@ -2077,200 +2083,6 @@ export class AccountSessionManager {
 
     let result: RunResult;
     try {
-      if (provider === "openai") {
-        result = await runCli(
-          provider,
-          ["login", "status"],
-          undefined,
-          STATUS_TIMEOUT_MS
-        );
-      } else if (provider === "anthropic") {
-        result = await runCli(
-          provider,
-          ["auth", "status"],
-          undefined,
-          STATUS_TIMEOUT_MS
-        );
-        if (
-          !claudeSubscriptionAuthenticated(
-            result
-          )
-        ) {
-          const textStatus =
-            await runCli(
-              provider,
-              [
-                "auth",
-                "status",
-                "--text"
-              ],
-              undefined,
-              STATUS_TIMEOUT_MS
-            );
-          if (
-            claudeSubscriptionAuthenticated(
-              textStatus
-            )
-          ) {
-            result =
-              textStatus;
-          }
-        }
-      } else {
-        const workDir =
-          await fsp.mkdtemp(
-            path.join(
-              os.tmpdir(),
-              "lex-grok-auth-"
-            )
-          );
-        try {
-          const probe =
-            await runGrokAcp(
-              null,
-              workDir
-            );
-          result = {
-            code:
-              probe.authenticated
-                ? 0
-                : 1,
-            stdout:
-              "",
-            stderr:
-              ""
-          };
-        } finally {
-          await fsp.rm(
-            workDir,
-            {
-              recursive:
-                true,
-              force:
-                true
-            }
-          ).catch(
-            () => {}
-          );
-        }
-      }
-    } catch {
-      result = {
-        code: 1,
-        stdout: "",
-        stderr: ""
-      };
-    }
-
-    const authenticated =
-      provider === "openai"
-        ? openAiChatGptAuthenticated(
-            result
-          )
-        : provider ===
-            "anthropic"
-          ? claudeSubscriptionAuthenticated(
-              result
-            )
-          : result.code === 0;
-
-    return {
-      provider,
-      command,
-      installed: true,
-      authenticated,
-      installHint: installHint(provider),
-      resumeMode: accountSessionResumeMode(),
-      ...(provider === "anthropic"
-        ? {
-            oauthTokenConfigured:
-              this.hasAnthropicOAuthToken()
-          }
-        : {})
-    };
-  }
-
-  async statusAll(): Promise<ProviderAccountSessionStatus[]> {
-    return Promise.all(
-      (["openai", "anthropic", "xai"] as const)
-        .map((provider) => this.status(provider))
-    );
-  }
-
-  async login(
-    provider: ProviderId
-  ): Promise<ProviderAccountSessionStatus> {
-    const current =
-      await this.status(
-        provider
-      );
-    if (
-      current.installed &&
-      current.authenticated
-    ) {
-      return current;
-    }
-
-    const args =
-      accountLoginArgs(
-        provider
-      );
-    const result =
-      accountLoginLaunchMode(
-        provider
-      ) ===
-        "VISIBLE_TERMINAL"
-        ? await runVisibleWindowsLogin(
-            provider,
-            args,
-            AUTH_TIMEOUT_MS
-          )
-        : await runCli(
-            provider,
-            args,
-            undefined,
-            AUTH_TIMEOUT_MS
-          );
-    if (result.code !== 0) {
-      throw normalizeCliFailure(provider, result);
-    }
-    const status =
-      await this.status(
-        provider
-      );
-    if (!status.authenticated) {
-      throw new Error(
-        `ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH:${provider}`
-      );
-    }
-    return status;
-  }
-
-  async runText(
-    provider: ProviderId,
-    prompt: string,
-    abortSignal?: AbortSignal,
-    continuityKey?: string
-  ): Promise<string> {
-    const workDir = await fsp.mkdtemp(
-      path.join(os.tmpdir(), "lex-account-session-")
-    );
-    const allowExternalTakeover =
-      !continuityKey ||
-      !await hasPinnedAccountSession(
-        provider
-      );
-    try {
-      if (
-        provider === "openai" ||
-        provider === "anthropic"
-      ) {
-        await assertSubscriptionAccount(
-          provider,
-          abortSignal
-        );
-      }
-
       if (provider === "openai") {
         const outputPath =
           path.join(
@@ -2310,14 +2122,12 @@ export class AccountSessionManager {
           "--output-last-message",
           outputPath
         ];
-        const runCodex = (
-          tail: string[]
-        ) =>
-          runCli(
+        const result =
+          await runCli(
             provider,
             [
               ...commonArgs,
-              ...tail
+              "-"
             ],
             prompt,
             COMMAND_TIMEOUT_MS,
@@ -2325,103 +2135,17 @@ export class AccountSessionManager {
             abortSignal
           );
 
-        let result:
-          RunResult | null = null;
-        const savedSessionId =
-          await readAccountSessionId(
-            provider,
-            continuityKey
-          );
-        if (savedSessionId) {
-          result =
-            await runCodex([
-              "resume",
-              savedSessionId,
-              "-"
-            ]);
-          if (
-            result.code !== 0
-          ) {
-            const detail =
-              result.stderr +
-              "\n" +
-              result.stdout;
-            if (
-              isMissingResumableSessionMessage(
-                detail
-              )
-            ) {
-              await clearAccountSessionId(
-                provider,
-                continuityKey
-              );
-              result = null;
-            } else {
-              throw normalizeCliFailure(
-                provider,
-                result
-              );
-            }
-          }
-        }
-
-        if (
-          !result &&
-          allowExternalTakeover
-        ) {
-          const last =
-            await runCodex([
-              "resume",
-              "--last",
-              "--all",
-              "-"
-            ]);
-          if (
-            last.code === 0
-          ) {
-            result = last;
-          } else {
-            const detail =
-              last.stderr +
-              "\n" +
-              last.stdout;
-            if (
-              !isMissingResumableSessionMessage(
-                detail
-              )
-            ) {
-              throw normalizeCliFailure(
-                provider,
-                last
-              );
-            }
-          }
-        }
-        if (!result) {
-          result =
-            await runCodex([
-              "-"
-            ]);
-        }
-
         if (result.code !== 0) {
           throw normalizeCliFailure(
             provider,
             result
           );
         }
-        const threadId =
-          parseCodexThreadId(
-            result.stdout
-          );
-        if (threadId) {
-          await writeAccountSessionId(
-            provider,
-            threadId,
-            continuityKey
-          );
-        }
 
+        // Lex Machina already sends the complete matter-thread context in the
+        // current prompt. Do not resume a Codex host thread here: doing both
+        // duplicates conversation/system context and can make later turns
+        // much larger than the first one.
         try {
           const finalText =
             await fsp.readFile(
