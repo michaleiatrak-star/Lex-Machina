@@ -838,6 +838,12 @@ async function runVisibleWindowsLogin(
       : provider === "anthropic"
         ? "Claude Code"
         : "Grok Build";
+  const loginCommand =
+    /\.(cmd|bat)$/i.test(
+      executable
+    )
+      ? `call ${cmdQuote(executable)} ${argumentLine}`
+      : `${cmdQuote(executable)} ${argumentLine}`;
 
   await fsp.writeFile(
     scriptPath,
@@ -848,7 +854,7 @@ async function runVisibleWindowsLogin(
       `echo Lex Machina otworzy logowanie: ${loginLabel}.`,
       "echo Dokoncz oficjalne logowanie w przegladarce i wroc do tego okna, jesli klient poprosi o kod.",
       "echo.",
-      `call ${cmdQuote(executable)} ${argumentLine}`,
+      loginCommand,
       "set \"LEX_EXIT=%ERRORLEVEL%\"",
       "echo.",
       `if not "%LEX_EXIT%"=="0" echo Logowanie ${loginLabel} nie powiodlo sie. Kod: %LEX_EXIT%`,
