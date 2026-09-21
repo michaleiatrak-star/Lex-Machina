@@ -1,4 +1,8 @@
 import {
+  LocalPdfTextExtractor,
+  type PdfTextExtractor
+} from "./pdf-text-extractor.js";
+import {
   AmendmentApplicabilityResolver,
   type AmendmentApplicabilityDecision
 } from "./amendment-applicability.js";
@@ -248,6 +252,7 @@ function articleTokenFromClaim(
 
 async function amendmentTouchesArticle(
   fetcher: EliFetch,
+  pdfTextExtractor: PdfTextExtractor,
   eli: string,
   article: string
 ): Promise<boolean | null> {
@@ -284,29 +289,80 @@ async function amendmentTouchesArticle(
     return null;
   }
 
-  let response: Response;
-  try {
-    response =
-      await fetcher(
-        htmlUrl,
-        {
-          method: "GET",
-          redirect: "error",
-          headers: {
-            Accept:
-              "text/html,application/xhtml+xml,text/plain"
+  let rawText = "";
+
+  if (act.textHTML === true) {
+    let response: Response;
+    try {
+      response =
+        await fetcher(
+          htmlUrl,
+          {
+            method: "GET",
+            redirect: "error",
+            headers: {
+              Accept:
+                "text/html,application/xhtml+xml,text/plain"
+            }
           }
-        }
+        );
+    } catch {
+      return null;
+    }
+    if (!response.ok) {
+      return null;
+    }
+    rawText =
+      await response.text();
+  } else if (
+    act.textPDF === true
+  ) {
+    const pdfUrl =
+      apiUrl(
+        eli,
+        "/text.pdf"
       );
-  } catch {
-    return null;
-  }
-  if (!response.ok) {
+    if (!pdfUrl) {
+      return null;
+    }
+    let response: Response;
+    try {
+      response =
+        await fetcher(
+          pdfUrl,
+          {
+            method: "GET",
+            redirect: "error",
+            headers: {
+              Accept:
+                "application/pdf"
+            }
+          }
+        );
+    } catch {
+      return null;
+    }
+    if (!response.ok) {
+      return null;
+    }
+    try {
+      const extracted =
+        await pdfTextExtractor.extract(
+          new Uint8Array(
+            await response.arrayBuffer()
+          )
+        );
+      rawText =
+        extracted.text;
+    } catch {
+      return null;
+    }
+  } else {
     return null;
   }
 
   const body =
-    (await response.text())
+    rawText
       .normalize("NFKC")
       .replace(/<[^>]+>/gu, " ")
       .replace(/&nbsp;|&#160;/giu, " ")
@@ -329,6 +385,7 @@ async function amendmentTouchesArticle(
 
 async function effectiveAmendmentsTouchArticle(
   fetcher: EliFetch,
+  pdfTextExtractor: PdfTextExtractor,
   decisions: AmendmentApplicabilityDecision[],
   claim?: string
 ): Promise<
@@ -371,6 +428,7 @@ async function effectiveAmendmentsTouchArticle(
           touches:
             await amendmentTouchesArticle(
               fetcher,
+              pdfTextExtractor,
               decision.eli,
               article
             )
@@ -634,7 +692,10 @@ export class TemporalSourceFreshnessChecker {
     private readonly now: () => string =
       () => new Date().toISOString(),
     amendmentResolver?:
-      AmendmentApplicabilityResolver
+      AmendmentApplicabilityResolver,
+    private readonly pdfTextExtractor:
+      PdfTextExtractor =
+      new LocalPdfTextExtractor()
   ) {
     this.amendmentResolver =
       amendmentResolver ??
@@ -1209,6 +1270,7 @@ export class TemporalSourceFreshnessChecker {
       const impact =
         await effectiveAmendmentsTouchArticle(
           this.fetcher,
+          this.pdfTextExtractor,
           amendmentApplicability,
           claim
         );
