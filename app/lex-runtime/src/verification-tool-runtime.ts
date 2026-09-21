@@ -1371,7 +1371,16 @@ export class LegalVerificationToolRuntime {
         freshness =
           await this.freshnessChecker.check(
             resolvedAct,
-            asOf ? { asOf } : {}
+            {
+              ...(asOf
+                ? { asOf }
+                : {}),
+              claim:
+                typeof call.input.claim ===
+                  "string"
+                  ? call.input.claim
+                  : undefined
+            }
           );
 
         const directTextStatus =
