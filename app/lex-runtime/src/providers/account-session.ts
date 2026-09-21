@@ -1,4 +1,5 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { createHash } from "node:crypto";
 import type { Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
@@ -320,22 +321,74 @@ export async function discoverLatestGrokSessionId(): Promise<string | null> {
   return resolved?.id ?? null;
 }
 
-function accountSessionStatePath(
-  provider: ProviderId
+function continuityFingerprint(
+  continuityKey: string
 ): string {
+  return createHash("sha256")
+    .update(
+      continuityKey,
+      "utf8"
+    )
+    .digest("hex")
+    .slice(0, 24);
+}
+
+function accountSessionStatePath(
+  provider: ProviderId,
+  continuityKey?: string
+): string {
+  const suffix =
+    continuityKey
+      ? "-" +
+        continuityFingerprint(
+          continuityKey
+        )
+      : "";
   return path.join(
     accountSessionStateRoot(),
-    provider + ".json"
+    provider +
+      suffix +
+      ".json"
   );
 }
 
-async function readAccountSessionId(
+async function hasPinnedAccountSession(
   provider: ProviderId
+): Promise<boolean> {
+  try {
+    const entries =
+      await fsp.readdir(
+        accountSessionStateRoot(),
+        {
+          withFileTypes: true
+        }
+      );
+    return entries.some(
+      (entry) =>
+        entry.isFile() &&
+        entry.name.startsWith(
+          provider + "-"
+        ) &&
+        entry.name.endsWith(
+          ".json"
+        )
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function readAccountSessionId(
+  provider: ProviderId,
+  continuityKey?: string
 ): Promise<string | null> {
   try {
     const raw =
       await fsp.readFile(
-        accountSessionStatePath(provider),
+        accountSessionStatePath(
+          provider,
+          continuityKey
+        ),
         "utf8"
       );
     const parsed =
@@ -359,7 +412,8 @@ async function readAccountSessionId(
 
 async function writeAccountSessionId(
   provider: ProviderId,
-  sessionId: string
+  sessionId: string,
+  continuityKey?: string
 ): Promise<void> {
   if (
     !/^[A-Za-z0-9_.:-]{8,256}$/.test(
@@ -378,13 +432,22 @@ async function writeAccountSessionId(
   );
   await fsp.writeFile(
     accountSessionStatePath(
-      provider
+      provider,
+      continuityKey
     ),
     JSON.stringify(
       {
-        schemaVersion: 1,
+        schemaVersion: 2,
         provider,
         sessionId,
+        ...(continuityKey
+          ? {
+              continuityHash:
+                continuityFingerprint(
+                  continuityKey
+                )
+            }
+          : {}),
         updatedAt:
           new Date().toISOString()
       },
@@ -399,11 +462,13 @@ async function writeAccountSessionId(
 }
 
 async function clearAccountSessionId(
-  provider: ProviderId
+  provider: ProviderId,
+  continuityKey?: string
 ): Promise<void> {
   await fsp.rm(
     accountSessionStatePath(
-      provider
+      provider,
+      continuityKey
     ),
     {
       force: true
