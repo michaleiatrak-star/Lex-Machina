@@ -84,6 +84,7 @@ Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
 Write-Host "[4/4] Thin payload contract"
 foreach ($required in @(
   "app\dist\http\server.js",
+  "app\node_modules\.bin\codex.cmd",
   "lex-runtime-sidecar.exe",
   "release-source.json",
   "release-requirements.txt",
