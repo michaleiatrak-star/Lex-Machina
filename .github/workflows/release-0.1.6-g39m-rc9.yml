@@ -165,24 +165,32 @@ jobs:
           cat > release-out/RELEASE-NOTES.md <<'EOF'
           ## Lex Machina 0.1.6 — G39M RC9
 
-          Claude Code account-login hotfix on top of RC8.
+          Account-login and local-model interoperability hotfix on top of RC8.
           Online installer only.
 
           Fixed:
-          - on Windows, Claude subscription OAuth is launched in a visible terminal
-            instead of a hidden process with closed stdin;
-          - the user can complete the official Claude Code browser/code flow from
-            the Lex Machina “Połącz konto” action;
-          - after the interactive login exits, Lex Machina re-checks
-            `claude auth status` and only accepts a Claude Pro/Max/claude.ai
-            subscription session.
+          - Windows account login for Codex/ChatGPT, Claude Code and Grok Build
+            now opens a visible terminal for the provider's official interactive
+            browser/device authentication flow instead of running with hidden,
+            closed standard input;
+          - after login completes, Lex Machina re-checks the provider session and
+            only enables the account lane after authentication is confirmed;
+          - local Mistral/Bielik execution no longer depends on GGUF-native
+            OpenAI tool-calling/Jinja compatibility: tool requests use a
+            Lex-Machina-owned text protocol and deterministic runtime execution;
+          - local inference failures are always returned as
+            LOCAL_MODEL_EXECUTION_FAILED with a sanitized LOCAL_MODEL_* reason
+            instead of collapsing to SESSION_EXECUTION_FAILED.
 
           Regression coverage added for:
-          - Windows Claude account-login launch mode.
+          - interactive Windows login mode for all account providers;
+          - local runtime text tool protocol;
+          - preservation of diagnostics for unclassified local inference errors.
 
-          Safety boundaries remain unchanged: API-key/Console credentials are not
-          accepted as the Claude subscription account lane, host tools stay disabled,
-          and legal verification remains fail-closed.
+          Safety boundaries remain unchanged: API-key credentials cannot silently
+          replace account authentication, local models cannot execute host tools,
+          tool names remain allow-listed by Lex Machina, and legal verification
+          stays fail-closed.
 
           EOF
       - name: Create immutable-source prerelease and upload installer
