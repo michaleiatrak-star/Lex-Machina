@@ -502,6 +502,7 @@ export type LexHttpAppOptions = {
     LocalDocumentAuthoringService,
     | "aliasManifest"
     | "createTokenized"
+    | "createReady"
     | "deanonymizeConsumed"
   >;
   documentAstGenerator?: Pick<
