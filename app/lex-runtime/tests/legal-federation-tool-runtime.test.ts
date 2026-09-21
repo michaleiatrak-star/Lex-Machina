@@ -98,6 +98,12 @@ describe(
               verificationAuthority: string;
               emptySearch: string;
               privacy: string;
+              sourceTierCoverage: {
+                tier1: string;
+                tier2A: string;
+                tier2B: string;
+                tier3: string;
+              };
             };
           };
 
@@ -137,6 +143,20 @@ describe(
             .privacy
         ).toContain(
           "NO_CASE_FACTS"
+        );
+        expect(
+          payload.policy
+            .sourceTierCoverage
+            .tier2B
+        ).toBe(
+          "POLICY_DEFINED_GENERIC_RETRIEVER_NOT_IMPLEMENTED"
+        );
+        expect(
+          payload.policy
+            .sourceTierCoverage
+            .tier3
+        ).toContain(
+          "PARTIAL_RESEARCH_COVERAGE"
         );
       }
     );
