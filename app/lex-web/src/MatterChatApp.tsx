@@ -15,6 +15,7 @@ import {
   ApiError,
   getSkills,
   archiveCase,
+  clearClaudeOAuthToken,
   clearProviderApiKey,
   createCase,
   deleteCase,
@@ -32,6 +33,7 @@ import {
   provisionLocalModel,
   repairLocalModel,
   renameCase,
+  setClaudeOAuthToken,
   setModelRoutingPreferences,
   setProviderApiKey,
   startLocalModel,
@@ -521,6 +523,12 @@ export default function MatterChatApp({
   const [providerAccountBusy, setProviderAccountBusy] =
     useState(false);
   const [providerAccountMessage, setProviderAccountMessage] =
+    useState("");
+  const [claudeOAuthToken, setClaudeOAuthTokenInput] =
+    useState("");
+  const [claudeOAuthBusy, setClaudeOAuthBusy] =
+    useState(false);
+  const [claudeOAuthMessage, setClaudeOAuthMessage] =
     useState("");
   const [providerApiKey, setProviderApiKeyInput] = useState("");
   const [providerKeyBusy, setProviderKeyBusy] = useState(false);
@@ -1381,6 +1389,69 @@ export default function MatterChatApp({
       return false;
     } finally {
       setProviderAccountBusy(false);
+    }
+  }
+
+  async function saveClaudeOAuthToken(): Promise<void> {
+    if (
+      provider !==
+        "anthropic-account" ||
+      user.appRole !==
+        "ADMIN" ||
+      !claudeOAuthToken.trim()
+    ) {
+      return;
+    }
+    setClaudeOAuthBusy(true);
+    setClaudeOAuthMessage("");
+    try {
+      await setClaudeOAuthToken(
+        claudeOAuthToken,
+        isDesktopShell()
+          ? "OS_KEYRING"
+          : "PROCESS_MEMORY"
+      );
+      setClaudeOAuthTokenInput("");
+      await refreshProviderAccountStatus();
+      setClaudeOAuthMessage(
+        isDesktopShell()
+          ? "Token OAuth Claude zapisano w systemowym magazynie poświadczeń."
+          : "Token OAuth Claude jest aktywny w pamięci procesu."
+      );
+    } catch (error) {
+      setClaudeOAuthMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setClaudeOAuthBusy(false);
+    }
+  }
+
+  async function removeClaudeOAuthToken(): Promise<void> {
+    if (
+      user.appRole !==
+        "ADMIN"
+    ) {
+      return;
+    }
+    setClaudeOAuthBusy(true);
+    setClaudeOAuthMessage("");
+    try {
+      await clearClaudeOAuthToken();
+      await refreshProviderAccountStatus();
+      setClaudeOAuthMessage(
+        "Token OAuth Claude został usunięty."
+      );
+    } catch (error) {
+      setClaudeOAuthMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setClaudeOAuthBusy(false);
     }
   }
 
@@ -3223,14 +3294,76 @@ export default function MatterChatApp({
                     Token OAuth pozostaje po stronie klienta i nie jest kopiowany do UI Lex Machina.
                   </p>
                   {runtimeProvider === "anthropic" ? (
-                    <p>
-                      Claude Code wspiera również oficjalny tryb automatyzacji:
-                      uruchom <code>claude setup-token</code>, ustaw otrzymany token
-                      jako <code>CLAUDE_CODE_OAUTH_TOKEN</code>, a następnie kliknij
-                      „Sprawdź ponownie”. Obsługiwany jest też provisionowany
-                      <code> CLAUDE_CODE_OAUTH_REFRESH_TOKEN</code> wraz z
-                      <code> CLAUDE_CODE_OAUTH_SCOPES</code>.
-                    </p>
+                    <>
+                      <p>
+                        Claude Code wspiera również oficjalny tryb automatyzacji:
+                        uruchom <code>claude setup-token</code>. Otrzymany
+                        długowieczny token OAuth możesz wkleić poniżej; Lex Machina
+                        przekaże go do Claude Code jako
+                        <code> CLAUDE_CODE_OAUTH_TOKEN</code>. W aplikacji desktopowej
+                        token jest przechowywany w systemowym magazynie poświadczeń.
+                      </p>
+                      <small>
+                        {accountSession?.oauthTokenConfigured
+                          ? "OAuth setup-token: skonfigurowany"
+                          : "OAuth setup-token: nie skonfigurowany"}
+                      </small>
+                      {user.appRole === "ADMIN" ? (
+                        <>
+                          <input
+                            type="password"
+                            autoComplete="off"
+                            value={claudeOAuthToken}
+                            placeholder="Wklej token z: claude setup-token"
+                            onChange={(event) =>
+                              setClaudeOAuthTokenInput(
+                                event.target.value
+                              )
+                            }
+                          />
+                          <div className="chat-form-row compact">
+                            <button
+                              type="button"
+                              className="chat-primary-action"
+                              disabled={
+                                claudeOAuthBusy ||
+                                !claudeOAuthToken.trim()
+                              }
+                              onClick={() =>
+                                void saveClaudeOAuthToken()
+                              }
+                            >
+                              {claudeOAuthBusy
+                                ? "Zapisywanie…"
+                                : isDesktopShell()
+                                  ? "Zapisz token w systemie"
+                                  : "Użyj tokenu w sesji"}
+                            </button>
+                            <button
+                              type="button"
+                              className="chat-secondary-action"
+                              disabled={claudeOAuthBusy}
+                              onClick={() =>
+                                void removeClaudeOAuthToken()
+                              }
+                            >
+                              Usuń token OAuth
+                            </button>
+                          </div>
+                          {claudeOAuthMessage ? (
+                            <small>
+                              {claudeOAuthMessage}
+                            </small>
+                          ) : null}
+                        </>
+                      ) : null}
+                      <p>
+                        Alternatywnie możesz użyć provisionowanego
+                        <code> CLAUDE_CODE_OAUTH_REFRESH_TOKEN</code> wraz z
+                        <code> CLAUDE_CODE_OAUTH_SCOPES</code> w środowisku
+                        zarządzanym.
+                      </p>
+                    </>
                   ) : null}
                   <p>
                     Do zwykłej integracji Lex Machina z zewnętrznym modelem możesz
