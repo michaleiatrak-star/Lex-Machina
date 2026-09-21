@@ -1605,6 +1605,10 @@ export default function MatterChatApp({
           : error instanceof Error
             ? error.message
             : String(error);
+      const reason =
+        error instanceof ApiError
+          ? error.reason
+          : undefined;
       if (
         code.startsWith(
           "PROCESS_PLEADING_"
@@ -1620,6 +1624,8 @@ export default function MatterChatApp({
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
           : code === "CHAT_PRIVACY_GATE_FAILED"
             ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
+          : code === "LOCAL_MODEL_EXECUTION_FAILED"
+            ? `Lokalny model nie mógł wykonać odpowiedzi. Program spróbuje ponownie przygotować profil przy następnej wiadomości.${reason ? ` Kod: ${reason}` : ""}`
           : code === "PROVIDER_EXECUTION_FAILED"
             ? provider === "local"
               ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
