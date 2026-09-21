@@ -534,6 +534,11 @@ export type ProviderAccountSessionStatus = {
   installed: boolean;
   authenticated: boolean;
   installHint: string;
+  takeoverSupported: boolean;
+  takeoverActive: boolean;
+  takeoverMode?: "LAST" | "EXPLICIT";
+  takeoverReference?: string;
+  takeoverHint: string;
 };
 
 export type ProviderAccountStatusResponse = {
@@ -1879,6 +1884,41 @@ export function loginProviderAccount(
     `/api/provider-accounts/${provider}/login`,
     {
       method: "POST"
+    }
+  );
+}
+
+export function takeoverProviderAccountSession(
+  provider: ProviderId,
+  sessionRef?: string
+): Promise<ProviderAccountSessionStatus> {
+  return json<ProviderAccountSessionStatus>(
+    `/api/provider-accounts/${provider}/takeover`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type":
+          "application/json"
+      },
+      body: JSON.stringify({
+        ...(sessionRef?.trim()
+          ? {
+              sessionRef:
+                sessionRef.trim()
+            }
+          : {})
+      })
+    }
+  );
+}
+
+export function releaseProviderAccountSession(
+  provider: ProviderId
+): Promise<ProviderAccountSessionStatus> {
+  return json<ProviderAccountSessionStatus>(
+    `/api/provider-accounts/${provider}/takeover`,
+    {
+      method: "DELETE"
     }
   );
 }
