@@ -54,9 +54,11 @@ function friendlyError(error: unknown): string {
 }
 
 export function MaintenancePanel({
-  user
+  user,
+  embedded = false
 }: {
   user: AuthenticatedUser;
+  embedded?: boolean;
 }) {
   const [appStatus, setAppStatus] =
     useState<UpdateStatusResponse | null>(null);
@@ -72,7 +74,7 @@ export function MaintenancePanel({
   const [
     minimized,
     setMinimized
-  ] = useState(true);
+  ] = useState(!embedded);
   const floatingDrag =
     useFloatingPanelDrag();
 
@@ -206,7 +208,7 @@ export function MaintenancePanel({
 
   if (!desktop) return null;
 
-  if (minimized) {
+  if (minimized && !embedded) {
     return (
       <div
         className="maintenance-panel maintenance-panel-minimized"
@@ -248,25 +250,36 @@ export function MaintenancePanel({
 
   return (
     <details
-      className="maintenance-panel"
-      data-floating-panel="true"
+      className={
+        embedded
+          ? "maintenance-panel maintenance-panel-embedded"
+          : "maintenance-panel"
+      }
+      open={embedded ? true : undefined}
+      data-floating-panel={
+        embedded ? undefined : "true"
+      }
       style={
-        floatingDrag.style
+        embedded
+          ? undefined
+          : floatingDrag.style
       }
     >
       <summary>
-        <span
-          className="floating-drag-handle"
-          title="Przeciągnij panel"
-          aria-label="Przeciągnij panel utrzymania"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-          }}
-          {...floatingDrag.handleProps}
-        >
-          ⋮⋮
-        </span>
+        {!embedded ? (
+          <span
+            className="floating-drag-handle"
+            title="Przeciągnij panel"
+            aria-label="Przeciągnij panel utrzymania"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+            {...floatingDrag.handleProps}
+          >
+            ⋮⋮
+          </span>
+        ) : null}
         <span className="maintenance-title">
           <strong>Utrzymanie</strong>
           <small>
@@ -282,19 +295,21 @@ export function MaintenancePanel({
         >
           {badge}
         </span>
-        <button
-          type="button"
-          className="floating-minimize-button"
-          aria-label="Zminimalizuj panel utrzymania"
-          title="Zminimalizuj do ikony"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            setMinimized(true);
-          }}
-        >
-          −
-        </button>
+        {!embedded ? (
+          <button
+            type="button"
+            className="floating-minimize-button"
+            aria-label="Zminimalizuj panel utrzymania"
+            title="Zminimalizuj do ikony"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setMinimized(true);
+            }}
+          >
+            −
+          </button>
+        ) : null}
       </summary>
 
       <div className="maintenance-body">
