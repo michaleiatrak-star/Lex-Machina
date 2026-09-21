@@ -73,16 +73,24 @@ describe("provider account-session transport", () => {
     );
     expect(
       accountLoginLaunchMode(
-        "anthropic",
-        "linux"
+        "openai",
+        "win32"
       )
     ).toBe(
-      "CAPTURED"
+      "VISIBLE_TERMINAL"
     );
     expect(
       accountLoginLaunchMode(
-        "openai",
+        "xai",
         "win32"
+      )
+    ).toBe(
+      "VISIBLE_TERMINAL"
+    );
+    expect(
+      accountLoginLaunchMode(
+        "anthropic",
+        "linux"
       )
     ).toBe(
       "CAPTURED"
