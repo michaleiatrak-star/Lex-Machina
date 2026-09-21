@@ -306,7 +306,7 @@ export function buildSkillSelectionEnvelope(
             name !== "prawo-polskie-v2" &&
             !name.startsWith("dr-")
           )
-          .slice(0, 16);
+          .slice(0, 64);
 
   return `${SKILL_SELECTION_ENVELOPE_PREFIX} ${JSON.stringify({
     auto: effectiveAutomatic,
