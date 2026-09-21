@@ -102,7 +102,7 @@ describe("signed skill update index", () => {
   });
 
 
-  it("allows an unsigned index only under the explicit temporary policy", () => {
+  it("allows an unsigned index under the official-source SHA-256 policy", () => {
     const { indexBytes } = fixture();
     const root = fs.mkdtempSync(
       path.join(os.tmpdir(), "lex-skill-unsigned-")
@@ -119,7 +119,8 @@ describe("signed skill update index", () => {
             verification:
               "SHA256_AND_OPTIONAL_ED25519_INDEX",
             trustedEd25519PublicKeys: [],
-            temporaryUnsignedAllowed: true
+            officialSourceUnsignedAllowed: true,
+            temporaryUnsignedAllowed: false
           }
         }),
         "utf8"
