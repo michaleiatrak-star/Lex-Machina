@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   Client
 } from "@modelcontextprotocol/sdk/client/index.js";
@@ -710,21 +711,11 @@ class LocalUodoMcpClient {
 
   private shimPath():
     string {
-    const modulePath =
-      new URL(
-        import.meta.url
-      ).pathname;
     const moduleDir =
       path.dirname(
-        process.platform ===
-          "win32" &&
-        modulePath.startsWith(
-          "/"
+        fileURLToPath(
+          import.meta.url
         )
-          ? modulePath.slice(
-              1
-            )
-          : modulePath
       );
     const sibling =
       path.join(
