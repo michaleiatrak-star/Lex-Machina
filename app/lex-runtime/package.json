@@ -90,7 +90,8 @@
     "express": "5.2.1",
     "helmet": "8.1.0",
     "pdfjs-dist": "6.3.289",
-    "yaml": "2.8.1"
+    "yaml": "2.8.1",
+    "@modelcontextprotocol/sdk": "1.12.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
