@@ -1,4 +1,5 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import type { Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -137,12 +138,7 @@ async function latestClaudeTranscript(): Promise<string | null> {
   ) {
     const current =
       pending.pop()!;
-    let entries:
-      Awaited<
-        ReturnType<
-          typeof fsp.readdir
-        >
-      >;
+    let entries: Dirent[];
     try {
       entries =
         await fsp.readdir(
