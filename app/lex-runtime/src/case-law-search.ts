@@ -687,6 +687,29 @@ export class CaseLawSearchService {
       };
     }
 
+    const contentType =
+      response.headers
+        .get(
+          "content-type"
+        )
+        ?.toLowerCase() ??
+      "";
+    if (
+      !contentType.includes(
+        "application/json"
+      )
+    ) {
+      return {
+        source: "SAOS",
+        status:
+          "OUT_OF_SCOPE",
+        query,
+        candidates: [],
+        reason:
+          "SAOS_NON_JSON_RESPONSE"
+      };
+    }
+
     let payload: unknown;
     try {
       payload =
