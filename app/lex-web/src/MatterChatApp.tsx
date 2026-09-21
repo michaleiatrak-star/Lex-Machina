@@ -2568,7 +2568,7 @@ export default function MatterChatApp({
                 <div>
                   <p className="eyebrow">Skille wykonawcze</p>
                   <h2>
-                    {manualSkillSelection.length} z {selectableExecutionSkills.length} zaznaczonych
+                    Dodatkowe skille wykonawcze · {manualSkillSelection.length} z {selectableExecutionSkills.length} zaznaczonych
                   </h2>
                   <p>
                     Wszystkie dostępne skille wykonawcze są zaznaczone domyślnie.
