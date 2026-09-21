@@ -446,11 +446,16 @@ function referencedExecutionSkills(
 
     for (const target of executionCandidates) {
       if (target.name === sourceName) continue;
+      // Delegation must be an explicit dependency declaration. Merely
+      // mentioning another skill in prose is not authority to activate it.
       if (
-        declared.includes(target.name) ||
-        source.body.includes(target.name)
+        declared.includes(
+          target.name
+        )
       ) {
-        referenced.push(target.name);
+        referenced.push(
+          target.name
+        );
       }
     }
   }
@@ -582,37 +587,54 @@ export function resolveAdditionalSkills(
       promoteWorkflowExecutionSkill(name);
     }
 
-    const matchingExecution = rankedExecution
-      .filter(
-        (item) =>
-          item.score >= 2 &&
-          !executionSkills.has(item.skill.name) &&
-          !(
-            explicitExecution.includes("pisma-procesowe-v3") &&
-            item.skill.name === "pisma-proste-v2"
-          )
-      )
-      .slice(
-        0,
-        Math.max(0, 4 - executionSkills.size)
-      );
+    const matchingExecution =
+      explicitExecution.length > 0
+        ? []
+        : rankedExecution
+            .filter(
+              (item) =>
+                item.score >= 4 &&
+                !executionSkills.has(
+                  item.skill.name
+                )
+            )
+            .slice(
+              0,
+              Math.max(
+                0,
+                4 -
+                  executionSkills.size
+              )
+            );
 
     if (
       explicitExecution.length === 0 &&
       matchingExecution.length === 0 &&
       executionSkills.size === 0
     ) {
-      const fallback =
-        executionCandidates.find(
-          (skill) =>
-            skill.name ===
-            "przewodnik-prawny-v2"
-        ) ??
-        rankedExecution[0]?.skill;
-      if (fallback) {
-        executionSkills.add(fallback.name);
-        selected.add(fallback.name);
-        promoteWorkflowExecutionSkill(fallback.name);
+      // Keep trivial/non-semantic chat turns free of stateful legal workflows.
+      // A genuinely vague legal question can still use the general guide, but
+      // a command such as "napisz ok" has too little legal signal to do so.
+      if (
+        queryTokens.size >= 2
+      ) {
+        const fallback =
+          executionCandidates.find(
+            (skill) =>
+              skill.name ===
+              "przewodnik-prawny-v2"
+          );
+        if (fallback) {
+          executionSkills.add(
+            fallback.name
+          );
+          selected.add(
+            fallback.name
+          );
+          promoteWorkflowExecutionSkill(
+            fallback.name
+          );
+        }
       }
     } else {
       for (const item of matchingExecution) {
