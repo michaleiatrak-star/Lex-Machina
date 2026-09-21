@@ -3452,6 +3452,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 digitalPages: number;
                 ocrPages: number;
                 blankPages: number;
+                chunkIndices: number[];
               };
             }
           > =
@@ -3538,7 +3539,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                                   .ocrPages,
                               blankPages:
                                 restored
-                                  .blankPages
+                                  .blankPages,
+                              chunkIndices:
+                                restored
+                                  .chunks
+                                  .slice(0, 32)
+                                  .map(
+                                    (chunk) =>
+                                      chunk.index
+                                  )
                             }
                           };
                         } catch {
