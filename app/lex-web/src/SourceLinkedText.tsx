@@ -37,7 +37,7 @@ export function SourceLinkedText({
 }: SourceLinkedTextProps) {
   const normalized = normalizeLinkMarkup(content);
   const pattern =
-    /\[([^\]\n]+)\]\((https:\/\/[^)\s]+)\)|(https:\/\/[^\s<>\[\]{}]+)/giu;
+    /\[([^\]\n]+)\]\((https:\/\/[^)\s]+)\)|(https:\/\/[^\s<>\[\]{}()]+)/giu;
   const nodes: ReactNode[] = [];
   let cursor = 0;
   let match: RegExpExecArray | null;
