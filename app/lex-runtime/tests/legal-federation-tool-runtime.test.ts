@@ -41,16 +41,17 @@ describe(
           );
         const params =
           search?.function
-            .parameters as {
-              properties?: {
-                source?: {
-                  enum?: string[];
-                };
-              };
-            };
+            .parameters as
+            Record<string, unknown>;
+        const properties =
+          params["properties"] as
+            Record<string, unknown>;
+        const source =
+          properties["source"] as {
+            enum?: string[];
+          };
         expect(
-          params.properties
-            ?.source?.enum
+          source.enum
         ).toEqual([
           "saos",
           "nsa",
