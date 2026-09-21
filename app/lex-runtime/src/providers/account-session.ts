@@ -28,12 +28,207 @@ const CLI_NAMES: Record<ProviderId, string> = {
   xai: "grok"
 };
 
+const ACCOUNT_SESSION_RESUME_MODE = "LAST_OR_NEW" as const;
+
+export function accountSessionResumeMode(): typeof ACCOUNT_SESSION_RESUME_MODE {
+  return ACCOUNT_SESSION_RESUME_MODE;
+}
+
+export function isMissingResumableSessionMessage(
+  value: string
+): boolean {
+  const normalized = value
+    .toLocaleLowerCase("en")
+    .replace(/[\r\n]+/g, " ");
+  return [
+    "no session",
+    "no saved session",
+    "no previous session",
+    "no resumable session",
+    "no conversation",
+    "no previous conversation",
+    "unknown session",
+    "session not found",
+    "conversation not found"
+  ].some((needle) =>
+    normalized.includes(needle)
+  );
+}
+
+function accountSessionStateRoot(): string {
+  const configured =
+    process.env
+      .LEX_ACCOUNT_SESSION_STATE_ROOT
+      ?.trim();
+  return configured
+    ? path.resolve(configured)
+    : path.resolve(
+        os.homedir(),
+        ".lex-machina",
+        "account-sessions"
+      );
+}
+
+function accountSessionStatePath(
+  provider: ProviderId
+): string {
+  return path.join(
+    accountSessionStateRoot(),
+    provider + ".json"
+  );
+}
+
+async function readAccountSessionId(
+  provider: ProviderId
+): Promise<string | null> {
+  try {
+    const raw =
+      await fsp.readFile(
+        accountSessionStatePath(provider),
+        "utf8"
+      );
+    const parsed =
+      JSON.parse(raw) as {
+        sessionId?: unknown;
+      };
+    if (
+      typeof parsed.sessionId ===
+        "string" &&
+      /^[A-Za-z0-9_.:-]{8,256}$/.test(
+        parsed.sessionId
+      )
+    ) {
+      return parsed.sessionId;
+    }
+  } catch {
+    // Missing or stale local continuity metadata is equivalent to no session.
+  }
+  return null;
+}
+
+async function writeAccountSessionId(
+  provider: ProviderId,
+  sessionId: string
+): Promise<void> {
+  if (
+    !/^[A-Za-z0-9_.:-]{8,256}$/.test(
+      sessionId
+    )
+  ) {
+    return;
+  }
+  const root =
+    accountSessionStateRoot();
+  await fsp.mkdir(
+    root,
+    {
+      recursive: true
+    }
+  );
+  await fsp.writeFile(
+    accountSessionStatePath(
+      provider
+    ),
+    JSON.stringify(
+      {
+        schemaVersion: 1,
+        provider,
+        sessionId,
+        updatedAt:
+          new Date().toISOString()
+      },
+      null,
+      2
+    ) + "\n",
+    {
+      encoding: "utf8",
+      mode: 0o600
+    }
+  );
+}
+
+async function clearAccountSessionId(
+  provider: ProviderId
+): Promise<void> {
+  await fsp.rm(
+    accountSessionStatePath(
+      provider
+    ),
+    {
+      force: true
+    }
+  ).catch(() => {});
+}
+
+function parseCodexThreadId(
+  stdout: string
+): string | null {
+  for (
+    const line
+    of stdout.split(/\r?\n/)
+  ) {
+    try {
+      const event =
+        JSON.parse(line) as {
+          type?: unknown;
+          thread_id?: unknown;
+        };
+      if (
+        event.type ===
+          "thread.started" &&
+        typeof event.thread_id ===
+          "string" &&
+        event.thread_id
+      ) {
+        return event.thread_id;
+      }
+    } catch {
+      // Non-JSON lines are ignored.
+    }
+  }
+  return null;
+}
+
+function parseClaudeResult(
+  stdout: string
+): {
+  text: string;
+  sessionId: string | null;
+} | null {
+  try {
+    const payload =
+      JSON.parse(stdout) as {
+        result?: unknown;
+        session_id?: unknown;
+      };
+    const text =
+      typeof payload.result ===
+        "string"
+        ? payload.result.trim()
+        : "";
+    if (!text) return null;
+    const sessionId =
+      typeof payload.session_id ===
+        "string" &&
+      payload.session_id
+        ? payload.session_id
+        : null;
+    return {
+      text,
+      sessionId
+    };
+  } catch {
+    return null;
+  }
+}
+
 export type ProviderAccountSessionStatus = {
   provider: ProviderId;
   command: string;
   installed: boolean;
   authenticated: boolean;
   installHint: string;
+  resumeMode: typeof ACCOUNT_SESSION_RESUME_MODE;
 };
 
 type RunResult = {
@@ -962,7 +1157,8 @@ export class AccountSessionManager {
         command,
         installed: false,
         authenticated: false,
-        installHint: installHint(provider)
+        installHint: installHint(provider),
+        resumeMode: accountSessionResumeMode()
       };
     }
 
@@ -1045,7 +1241,8 @@ export class AccountSessionManager {
       command,
       installed: true,
       authenticated,
-      installHint: installHint(provider)
+      installHint: installHint(provider),
+      resumeMode: accountSessionResumeMode()
     };
   }
 
