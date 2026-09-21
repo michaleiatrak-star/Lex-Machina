@@ -13,7 +13,7 @@ import { WorkspaceManager } from "./WorkspaceManager.js";
 import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
   ApiError,
-  apiBase,
+  getSkills,
   archiveCase,
   clearProviderApiKey,
   createCase,
@@ -778,13 +778,7 @@ export default function MatterChatApp({
         setRuntimeError(error instanceof Error ? error.message : String(error));
       });
 
-    void fetch(`${apiBase()}/api/skills`, {
-      headers: { Accept: "application/json" }
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`HTTP_${response.status}`);
-        return await response.json() as { skills?: PublicSkillDescriptor[] };
-      })
+    void getSkills()
       .then((payload) => {
         if (
           !cancelled &&
