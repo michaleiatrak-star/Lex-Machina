@@ -883,8 +883,6 @@ export function codexExecArgs(
     "shell_tool",
     "--disable",
     "unified_exec",
-    "--disable",
-    "node_repl",
     "--config",
     "mcp_servers={}",
     "--sandbox",
