@@ -129,6 +129,45 @@ describe(
     );
 
     it(
+      "classifies a successful non-JSON SAOS edge response as external transport drift",
+      async () => {
+        const fetcher =
+          vi.fn(
+            async () =>
+              new Response(
+                "<html><body>edge challenge</body></html>",
+                {
+                  status: 200,
+                  headers: {
+                    "content-type":
+                      "text/html; charset=utf-8"
+                  }
+                }
+              )
+          );
+
+        const result =
+          await new CaseLawSearchService(
+            fetcher
+          ).search({
+            source: "SAOS",
+            query:
+              "bezpodstawne wzbogacenie",
+            limit: 1
+          });
+
+        expect(
+          result
+        ).toMatchObject({
+          status:
+            "OUT_OF_SCOPE",
+          reason:
+            "SAOS_NON_JSON_RESPONSE"
+        });
+      }
+    );
+
+    it(
       "searches CBOSA through POST and resolves candidate documents",
       async () => {
         const fetcher =
