@@ -316,21 +316,8 @@ async function amendmentTouchesArticle(
   const escaped =
     article.replace(
       /[.*+?^$()|[\]\\{}]/g,
-      "\\async function json(
-  fetcher: EliFetch,
-  url: string
-): Promise<unknown> {
-  const response = await fetcher(url, {
-    method: "GET",
-    redirect: "error",
-    headers: { Accept: "application/json" }
-  });
-  if (!response.ok) {
-    throw new Error("ELI_HTTP_" + response.status);
-  }
-  return response.json();
-}
-"
+      (match) =>
+        "\\" + match
     );
   return new RegExp(
     "\\bart\\.?\\s*" +
