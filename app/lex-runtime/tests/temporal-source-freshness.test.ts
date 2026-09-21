@@ -30,6 +30,7 @@ function fixtureFetcher(options?: {
     promulgation?: string;
     entryIntoForce?: string;
   }>;
+  amendmentTexts?: Record<string, string>;
 }) {
   const currentEli =
     options?.currentEli ?? "DU/2026/795";
@@ -83,6 +84,31 @@ function fixtureFetcher(options?: {
       });
     }
 
+    const amendmentText =
+      amendments.find((item) =>
+        url.endsWith(
+          "/" +
+            item.eli +
+            "/text.html"
+        )
+      );
+
+    if (amendmentText) {
+      return new Response(
+        options?.amendmentTexts?.[
+          amendmentText.eli
+        ] ??
+          "<html><body>Art. 1. Zmiana innej jednostki.</body></html>",
+        {
+          status: 200,
+          headers: {
+            "content-type":
+              "text/html; charset=utf-8"
+          }
+        }
+      );
+    }
+
     const amendment =
       amendments.find((item) =>
         url.endsWith("/" + item.eli)
@@ -94,6 +120,8 @@ function fixtureFetcher(options?: {
         promulgation:
           amendment.promulgation ??
           amendment.relationDate,
+        textHTML: true,
+        textPDF: true,
         ...(amendment.entryIntoForce
           ? {
               entryIntoForce:
@@ -239,7 +267,7 @@ describe("TemporalSourceFreshnessChecker", () => {
     });
   });
 
-  it("uses the official unified base text when an effective amendment follows the t.j.", async () => {
+  it("does not treat the base-act text.html as a current unified text after post-t.j. amendments", async () => {
     const result = await new TemporalSourceFreshnessChecker(
       fixtureFetcher({
         amendments: [{
@@ -251,26 +279,68 @@ describe("TemporalSourceFreshnessChecker", () => {
       })
     ).check(kc);
 
-    expect(result.status).toBe("CURRENT");
-    expect(result.sourceUrl).toBe(
-      "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html"
-    );
-    expect(result.reason).toBe(
-      "OFFICIAL_UNIFIED_BASE_TEXT_COVERS_POST_TJ_AMENDMENTS"
-    );
-    expect(result.amendmentApplicability).toEqual([
-      expect.objectContaining({
-        eli: "DU/2026/999",
-        status: "EFFECTIVE",
-        effectiveFrom: "2026-07-01"
+    expect(result).toMatchObject({
+      status:
+        "POST_TJ_AMENDMENTS",
+      reason:
+        "EFFECTIVE_AMENDMENTS_AFTER_CONSOLIDATED_TEXT"
+    });
+    expect(result.sourceUrl).toBeUndefined();
+  });
+
+  it("keeps an exact article current when every effective post-t.j. amendment provably leaves it untouched", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        amendments: [{
+          eli: "DU/2026/999",
+          relationDate: "2026-07-01",
+          promulgation: "2026-06-20",
+          entryIntoForce: "2026-07-01"
+        }],
+        amendmentTexts: {
+          "DU/2026/999":
+            "<html><body>Art. 1. W art. 191 § 1 wyrazy X zastępuje się wyrazami Y.</body></html>"
+        }
       })
-    ]);
-    expect(result.amendmentsAfter).toEqual([
-      expect.objectContaining({
-        eli: "DU/2026/999",
-        provenance: "DATE+API"
+    ).check(kc, {
+      claim: "art. 190a KK"
+    });
+
+    expect(result).toMatchObject({
+      status: "CURRENT",
+      currentEli:
+        "DU/2026/795",
+      sourceUrl:
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+      reason:
+        "POST_TJ_AMENDMENTS_DO_NOT_TOUCH_REQUESTED_ARTICLE"
+    });
+  });
+
+  it("fails closed when an effective post-t.j. amendment touches the requested article", async () => {
+    const result = await new TemporalSourceFreshnessChecker(
+      fixtureFetcher({
+        amendments: [{
+          eli: "DU/2026/999",
+          relationDate: "2026-07-01",
+          promulgation: "2026-06-20",
+          entryIntoForce: "2026-07-01"
+        }],
+        amendmentTexts: {
+          "DU/2026/999":
+            "<html><body>Art. 1. W art. 190a § 1 wyrazy X zastępuje się wyrazami Y.</body></html>"
+        }
       })
-    ]);
+    ).check(kc, {
+      claim: "art. 190a KK"
+    });
+
+    expect(result).toMatchObject({
+      status:
+        "POST_TJ_AMENDMENTS",
+      reason:
+        "POST_TJ_AMENDMENT_TOUCHES_REQUESTED_ARTICLE"
+    });
   });
 
   it("does not block current law solely for a future amendment", async () => {
@@ -416,7 +486,7 @@ describe("TemporalSourceFreshnessChecker", () => {
     });
   });
 
-  it("reports PDF-only current text instead of pretending it is verifiable HTML", async () => {
+  it("treats an official PDF-only current text as a normal current source", async () => {
     const result = await new TemporalSourceFreshnessChecker(
       fixtureFetcher({
         textHTML: false,
@@ -425,7 +495,7 @@ describe("TemporalSourceFreshnessChecker", () => {
     ).check(kc);
 
     expect(result).toMatchObject({
-      status: "CURRENT_TEXT_REQUIRES_PDF",
+      status: "CURRENT",
       mode: "CURRENT",
       currentEli: "DU/2026/795",
       sourceUrl:
