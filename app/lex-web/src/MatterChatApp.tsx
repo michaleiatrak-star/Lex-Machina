@@ -163,6 +163,10 @@ const PRIMARY_MODEL_SOURCES: Array<{
     label: "OpenAI · API"
   },
   {
+    id: "anthropic-account",
+    label: "Claude · konto / OAuth"
+  },
+  {
     id: "anthropic",
     label: "Anthropic · API"
   },
@@ -3218,6 +3222,16 @@ export default function MatterChatApp({
                     dalej przez swój oficjalny login w przeglądarce lub flow kodu urządzenia.
                     Token OAuth pozostaje po stronie klienta i nie jest kopiowany do UI Lex Machina.
                   </p>
+                  {runtimeProvider === "anthropic" ? (
+                    <p>
+                      Claude Code wspiera również oficjalny tryb automatyzacji:
+                      uruchom <code>claude setup-token</code>, ustaw otrzymany token
+                      jako <code>CLAUDE_CODE_OAUTH_TOKEN</code>, a następnie kliknij
+                      „Sprawdź ponownie”. Obsługiwany jest też provisionowany
+                      <code> CLAUDE_CODE_OAUTH_REFRESH_TOKEN</code> wraz z
+                      <code> CLAUDE_CODE_OAUTH_SCOPES</code>.
+                    </p>
+                  ) : null}
                   <p>
                     Do zwykłej integracji Lex Machina z zewnętrznym modelem możesz
                     zamiast tego wybrać kanał API — nie wymaga instalowania klienta CLI,
@@ -3302,9 +3316,9 @@ export default function MatterChatApp({
                 <>
                   {runtimeProvider === "anthropic" ? (
                     <p className="chat-inline-warning">
-                      Lex Machina używa Claude przez oficjalny Anthropic API.
-                      Logowanie Claude Code pozostaje sesją oficjalnego klienta
-                      Anthropic i nie jest używane jako backend Lex Machina.
+                      Ten kanał używa oficjalnego Anthropic API i klucza API.
+                      Jeżeli chcesz użyć uwierzytelnienia Claude Code/OAuth,
+                      wybierz „Claude · konto / OAuth”.
                     </p>
                   ) : null}
                   <input
