@@ -50,6 +50,7 @@ export type TemporalFreshnessResult = {
 
 export type TemporalFreshnessOptions = {
   asOf?: string;
+  claim?: string;
 };
 
 export type EliFetch = (
@@ -231,6 +232,211 @@ async function json(
     throw new Error("ELI_HTTP_" + response.status);
   }
   return response.json();
+}
+
+function articleTokenFromClaim(
+  claim?: string
+): string | null {
+  const match =
+    claim?.match(
+      /\bart\.?\s+(\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*)/iu
+    );
+  return match?.[1]
+    ?.toLocaleLowerCase("pl") ??
+    null;
+}
+
+async function amendmentTouchesArticle(
+  fetcher: EliFetch,
+  eli: string,
+  article: string
+): Promise<boolean | null> {
+  const metadataUrl =
+    apiUrl(eli);
+  const htmlUrl =
+    apiUrl(
+      eli,
+      "/text.html"
+    );
+  if (
+    !metadataUrl ||
+    !htmlUrl
+  ) {
+    return null;
+  }
+
+  let metadata: unknown;
+  try {
+    metadata =
+      await json(
+        fetcher,
+        metadataUrl
+      );
+  } catch {
+    return null;
+  }
+  const act =
+    unwrapAct(metadata);
+  if (
+    !act ||
+    act.textHTML !== true
+  ) {
+    return null;
+  }
+
+  let response: Response;
+  try {
+    response =
+      await fetcher(
+        htmlUrl,
+        {
+          method: "GET",
+          redirect: "error",
+          headers: {
+            Accept:
+              "text/html,application/xhtml+xml,text/plain"
+          }
+        }
+      );
+  } catch {
+    return null;
+  }
+  if (!response.ok) {
+    return null;
+  }
+
+  const body =
+    (await response.text())
+      .normalize("NFKC")
+      .replace(/<[^>]+>/gu, " ")
+      .replace(/&nbsp;|&#160;/giu, " ")
+      .replace(/\s+/gu, " ")
+      .toLocaleLowerCase("pl");
+
+  const escaped =
+    article.replace(
+      /[.*+?^$()|[\]\\{}]/g,
+      "\\async function json(
+  fetcher: EliFetch,
+  url: string
+): Promise<unknown> {
+  const response = await fetcher(url, {
+    method: "GET",
+    redirect: "error",
+    headers: { Accept: "application/json" }
+  });
+  if (!response.ok) {
+    throw new Error("ELI_HTTP_" + response.status);
+  }
+  return response.json();
+}
+"
+    );
+  return new RegExp(
+    "\\bart\\.?\\s*" +
+      escaped +
+      "(?=\\s|[.§,;:()])",
+    "iu"
+  ).test(body);
+}
+
+async function effectiveAmendmentsTouchArticle(
+  fetcher: EliFetch,
+  decisions: AmendmentApplicabilityDecision[],
+  claim?: string
+): Promise<
+  | {
+      status: "UNAFFECTED";
+      checked: string[];
+    }
+  | {
+      status: "AFFECTED";
+      checked: string[];
+      affected: string[];
+    }
+  | {
+      status: "UNKNOWN";
+      checked: string[];
+      unknown: string[];
+    }
+  | null
+> {
+  const article =
+    articleTokenFromClaim(
+      claim
+    );
+  if (!article) {
+    return null;
+  }
+
+  const effective =
+    decisions.filter(
+      (decision) =>
+        decision.status ===
+          "EFFECTIVE"
+    );
+  const checks =
+    await Promise.all(
+      effective.map(
+        async (decision) => ({
+          eli:
+            decision.eli,
+          touches:
+            await amendmentTouchesArticle(
+              fetcher,
+              decision.eli,
+              article
+            )
+        })
+      )
+    );
+  const checked =
+    checks.map(
+      (item) =>
+        item.eli
+    );
+  const affected =
+    checks
+      .filter(
+        (item) =>
+          item.touches === true
+      )
+      .map(
+        (item) =>
+          item.eli
+      );
+  if (
+    affected.length > 0
+  ) {
+    return {
+      status: "AFFECTED",
+      checked,
+      affected
+    };
+  }
+  const unknown =
+    checks
+      .filter(
+        (item) =>
+          item.touches === null
+      )
+      .map(
+        (item) =>
+          item.eli
+      );
+  if (
+    unknown.length > 0
+  ) {
+    return {
+      status: "UNKNOWN",
+      checked,
+      unknown
+    };
+  }
+  return {
+    status: "UNAFFECTED",
+    checked
+  };
 }
 
 function pickCurrentConsolidated(
@@ -465,7 +671,8 @@ export class TemporalSourceFreshnessChecker {
         )
       : this.checkCurrent(
           descriptor,
-          checkedAt
+          checkedAt,
+          options.claim
         );
   }
 
@@ -772,34 +979,6 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    if (
-      selected.metadata.textHTML !== true &&
-      selected.metadata.textPDF === true
-    ) {
-      return fail(
-        "HISTORICAL_TEXT_REQUIRES_PDF",
-        "HISTORICAL_TEXT_HAS_NO_HTML",
-        {
-          currentEli: selected.eli,
-          currentPromulgation:
-            selected.stateDate,
-          sourceUrl,
-          ...(baseInterval.validFrom
-            ? {
-                actValidFrom:
-                  baseInterval.validFrom
-              }
-            : {}),
-          ...(baseInterval.validTo
-            ? {
-                actValidTo:
-                  baseInterval.validTo
-              }
-            : {})
-        }
-      );
-    }
-
     return {
       status: "HISTORICAL",
       mode: "HISTORICAL",
@@ -832,7 +1011,8 @@ export class TemporalSourceFreshnessChecker {
 
   private async checkCurrent(
     descriptor: LegalActDescriptor,
-    checkedAt: string
+    checkedAt: string,
+    claim?: string
   ): Promise<TemporalFreshnessResult> {
     const fail = (
       status: TemporalFreshnessStatus,
@@ -1034,126 +1214,78 @@ export class TemporalSourceFreshnessChecker {
       );
 
     if (effectiveAmendments.length > 0) {
-      // A published consolidated text (tekst jednolity) can legitimately have
-      // later effective amendments. ELI also exposes the official current
-      // unified text (tekst ujednolicony) on the base act endpoint. Prefer that
-      // official current text instead of blocking the whole act merely because
-      // post-t.j. amendments exist.
-      const baseEli =
-        normalizeEli(
-          descriptor.baseEli
+      // Never treat the base act /text.html as an automatically unified text:
+      // for ELI it may be the promulgated/original wording. For an exact
+      // article claim, prove that every effective post-t.j. amendment leaves
+      // that article untouched. Only then may the latest official consolidated
+      // text verify the requested article.
+      const impact =
+        await effectiveAmendmentsTouchArticle(
+          this.fetcher,
+          amendmentApplicability,
+          claim
         );
-      const baseMetadataUrl =
-        apiUrl(
-          descriptor.baseEli
-        );
-      let baseAct:
-        EliAct | null = null;
 
       if (
-        baseEli &&
-        baseMetadataUrl
+        impact?.status ===
+          "UNAFFECTED"
       ) {
-        try {
-          baseAct =
-            unwrapAct(
-              await json(
-                this.fetcher,
-                baseMetadataUrl
-              )
-            );
-        } catch {
-          // Keep the previous fail-closed behavior when the official unified
-          // text cannot be proven available.
-        }
-      }
-
-      if (
-        baseAct &&
-        !repealedStatus(
-          baseAct.status
-        )
-      ) {
-        if (
-          baseAct.textHTML ===
-            true
-        ) {
-          const unifiedHtmlUrl =
-            apiUrl(
-              baseEli,
-              "/text.html"
-            );
-          if (unifiedHtmlUrl) {
-            return {
-              status: "CURRENT",
-              mode: "CURRENT",
-              checkedAt,
-              baseEli:
-                descriptor.baseEli,
-              pinnedEli:
-                descriptor.eli,
-              currentEli:
+        const sourceUrl =
+          act.textHTML === true
+            ? apiUrl(
                 current.eli,
-              currentPromulgation:
-                promulgation,
-              sourceUrl:
-                unifiedHtmlUrl,
-              amendmentsAfter,
-              amendmentApplicability,
-              reason:
-                "OFFICIAL_UNIFIED_BASE_TEXT_COVERS_POST_TJ_AMENDMENTS"
-            };
-          }
+                "/text.html"
+              )
+            : act.textPDF === true
+              ? apiUrl(
+                  current.eli,
+                  "/text.pdf"
+                )
+              : null;
+        if (!sourceUrl) {
+          return fail(
+            "SOURCE_METADATA_UNAVAILABLE",
+            "CURRENT_TEXT_FORMAT_UNAVAILABLE",
+            common
+          );
         }
-
-        if (
-          baseAct.textPDF ===
-            true
-        ) {
-          const unifiedPdfUrl =
-            apiUrl(
-              baseEli,
-              "/text.pdf"
-            );
-          if (unifiedPdfUrl) {
-            return fail(
-              "CURRENT_TEXT_REQUIRES_PDF",
-              "OFFICIAL_UNIFIED_BASE_TEXT_REQUIRES_PDF",
-              {
-                ...common,
-                sourceUrl:
-                  unifiedPdfUrl
-              }
-            );
-          }
-        }
+        return {
+          status: "CURRENT",
+          mode: "CURRENT",
+          checkedAt,
+          baseEli:
+            descriptor.baseEli,
+          pinnedEli:
+            descriptor.eli,
+          currentEli:
+            current.eli,
+          currentPromulgation:
+            promulgation,
+          sourceUrl,
+          amendmentsAfter,
+          amendmentApplicability,
+          reason:
+            "POST_TJ_AMENDMENTS_DO_NOT_TOUCH_REQUESTED_ARTICLE"
+        };
       }
 
       return fail(
         "POST_TJ_AMENDMENTS",
-        "EFFECTIVE_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
+        impact?.status ===
+          "AFFECTED"
+          ? "POST_TJ_AMENDMENT_TOUCHES_REQUESTED_ARTICLE"
+          : impact?.status ===
+              "UNKNOWN"
+            ? "POST_TJ_AMENDMENT_ARTICLE_IMPACT_UNKNOWN"
+            : "EFFECTIVE_AMENDMENTS_AFTER_CONSOLIDATED_TEXT",
         common
       );
     }
 
-    if (act.textHTML !== true) {
-      if (act.textPDF === true) {
-        const pdfUrl = apiUrl(
-          current.eli,
-          "/text.pdf"
-        );
-        return fail(
-          "CURRENT_TEXT_REQUIRES_PDF",
-          "CURRENT_TEXT_HAS_NO_HTML",
-          {
-            ...common,
-            ...(pdfUrl
-              ? { sourceUrl: pdfUrl }
-              : {})
-          }
-        );
-      }
-
+    if (
+      act.textHTML !== true &&
+      act.textPDF !== true
+    ) {
       return fail(
         "SOURCE_METADATA_UNAVAILABLE",
         "CURRENT_TEXT_FORMAT_UNAVAILABLE",
@@ -1161,10 +1293,16 @@ export class TemporalSourceFreshnessChecker {
       );
     }
 
-    const sourceUrl = apiUrl(
-      current.eli,
-      "/text.html"
-    );
+    const sourceUrl =
+      act.textHTML === true
+        ? apiUrl(
+            current.eli,
+            "/text.html"
+          )
+        : apiUrl(
+            current.eli,
+            "/text.pdf"
+          );
     if (!sourceUrl) {
       return fail(
         "SOURCE_METADATA_UNAVAILABLE",
