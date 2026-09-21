@@ -413,7 +413,10 @@ export type LexHttpAppOptions = {
   credentialManager?: ProviderCredentialManager;
   accountSessions?: Pick<
     AccountSessionManager,
-    "statusAll" | "login"
+    | "statusAll"
+    | "login"
+    | "takeover"
+    | "releaseTakeover"
   >;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
@@ -4179,6 +4182,140 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           provider
         });
       }
+    }
+  );
+
+
+  app.post(
+    "/api/provider-accounts/:provider/takeover",
+    async (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      const provider =
+        String(
+          req.params.provider ?? ""
+        ).trim();
+      if (!isProviderId(provider)) {
+        res.status(404).json({
+          error:
+            "UNKNOWN_PROVIDER"
+        });
+        return;
+      }
+      const sessionRef =
+        typeof req.body?.sessionRef ===
+          "string"
+          ? req.body.sessionRef
+          : undefined;
+      try {
+        res.json(
+          await options
+            .accountSessions
+            .takeover(
+              provider,
+              sessionRef
+            )
+        );
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "";
+        const code =
+          message.startsWith(
+            "ACCOUNT_SESSION_CLI_NOT_INSTALLED:"
+          )
+            ? "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            : message.startsWith(
+                "ACCOUNT_SESSION_NOT_AUTHENTICATED:"
+              )
+              ? "ACCOUNT_SESSION_NOT_AUTHENTICATED"
+              : message.startsWith(
+                  "ACCOUNT_SESSION_NO_RESUMABLE_SESSION:"
+                )
+                ? "ACCOUNT_SESSION_NO_RESUMABLE_SESSION"
+                : message.startsWith(
+                    "ACCOUNT_SESSION_REFERENCE_REQUIRED:"
+                  )
+                  ? "ACCOUNT_SESSION_REFERENCE_REQUIRED"
+                  : message.startsWith(
+                      "ACCOUNT_SESSION_TAKEOVER_UNSUPPORTED:"
+                    )
+                    ? "ACCOUNT_SESSION_TAKEOVER_UNSUPPORTED"
+                    : message ===
+                        "ACCOUNT_SESSION_REFERENCE_INVALID"
+                      ? "ACCOUNT_SESSION_REFERENCE_INVALID"
+                      : "ACCOUNT_SESSION_TAKEOVER_FAILED";
+        res.status(
+          code ===
+            "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            ? 503
+            : 422
+        ).json({
+          error: code,
+          provider
+        });
+      }
+    }
+  );
+
+  app.delete(
+    "/api/provider-accounts/:provider/takeover",
+    async (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      const provider =
+        String(
+          req.params.provider ?? ""
+        ).trim();
+      if (!isProviderId(provider)) {
+        res.status(404).json({
+          error:
+            "UNKNOWN_PROVIDER"
+        });
+        return;
+      }
+      res.json(
+        await options
+          .accountSessions
+          .releaseTakeover(
+            provider
+          )
+      );
     }
   );
 
