@@ -26,6 +26,74 @@ const MAX_OUTPUT_TOKENS = 16_384;
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
 
+export function classifyLocalInferenceFailure(
+  detail: string
+):
+  | "LOCAL_MODEL_SERVER_UNREACHABLE"
+  | "LOCAL_MODEL_REQUEST_REJECTED"
+  | "LOCAL_MODEL_SERVER_ERROR"
+  | "LOCAL_MODEL_CONTEXT_OVERFLOW"
+  | "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+  | "LOCAL_MODEL_INFERENCE_FAILED" {
+  const lower =
+    detail.toLowerCase();
+
+  if (
+    /context.{0,40}(exceed|overflow|too (large|long)|window)/i.test(
+      detail
+    ) ||
+    /too many tokens|prompt is too long|maximum context/i.test(
+      detail
+    )
+  ) {
+    return "LOCAL_MODEL_CONTEXT_OVERFLOW";
+  }
+
+  if (
+    /out of memory|\boom\b|bad_alloc|failed to allocate|insufficient memory|device memory/i.test(
+      detail
+    )
+  ) {
+    return "LOCAL_MODEL_RESOURCE_EXHAUSTED";
+  }
+
+  if (
+    /econnrefused|und_err_connect|connection refused|fetch failed|socket hang up|socket closed|network error|failed to connect/i.test(
+      lower
+    )
+  ) {
+    return "LOCAL_MODEL_SERVER_UNREACHABLE";
+  }
+
+  const statusMatch =
+    detail.match(
+      /(?:http(?: status)?|status(?: code)?)[^0-9]{0,8}([45]\d\d)/i
+    ) ??
+    detail.match(
+      /\b([45]\d\d)\s+(?:bad request|unauthorized|forbidden|not found|request|internal|server|service|gateway)/i
+    );
+  if (statusMatch) {
+    const status =
+      Number(
+        statusMatch[1]
+      );
+    if (
+      status >= 400 &&
+      status < 500
+    ) {
+      return "LOCAL_MODEL_REQUEST_REJECTED";
+    }
+    if (
+      status >= 500 &&
+      status < 600
+    ) {
+      return "LOCAL_MODEL_SERVER_ERROR";
+    }
+  }
+
+  return "LOCAL_MODEL_INFERENCE_FAILED";
+}
+
 export function parseLocalToolCalls(
   text: string
 ): NormalizedToolCall[] | null {
@@ -255,8 +323,12 @@ async function streamLocalModel(
         error instanceof Error
           ? error.message
           : String(error);
+      const reason =
+        classifyLocalInferenceFailure(
+          detail
+        );
       throw new Error(
-        `LOCAL_MODEL_INFERENCE_FAILED:${detail
+        `${reason}:${detail
           .replace(/[\r\n]+/g, " ")
           .slice(-800)}`
       );
