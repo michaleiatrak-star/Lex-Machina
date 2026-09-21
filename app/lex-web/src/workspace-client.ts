@@ -1,4 +1,8 @@
-import { apiBase, isDesktopShell } from "./api.js";
+import {
+  apiBase,
+  authorizationHeaders,
+  isDesktopShell
+} from "./api.js";
 
 export type WorkspaceFolder = {
   folderId: string;
@@ -58,6 +62,7 @@ async function workspaceJson<T>(
     headers: {
       Accept: "application/json",
       ...(init?.body ? { "Content-Type": "application/json" } : {}),
+      ...authorizationHeaders(),
       ...init?.headers
     },
     cache: "no-store"
@@ -126,7 +131,12 @@ export async function previewWorkspaceItem(
 ): Promise<{ blob: Blob; mediaType: string }> {
   const response = await fetch(
     `${apiBase()}/api/cases/${caseId}/workspace/items/${itemId}/preview`,
-    { cache: "no-store" }
+    {
+      cache: "no-store",
+      headers: {
+        ...authorizationHeaders()
+      }
+    }
   );
   if (!response.ok) {
     throw new Error(`WORKSPACE_PREVIEW_HTTP_${response.status}`);

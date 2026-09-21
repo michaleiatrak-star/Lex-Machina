@@ -13,7 +13,7 @@ import { WorkspaceManager } from "./WorkspaceManager.js";
 import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
   ApiError,
-  apiBase,
+  getSkills,
   archiveCase,
   clearProviderApiKey,
   createCase,
@@ -29,9 +29,12 @@ import {
   isDesktopShell,
   listCases,
   loginProviderAccount,
+  provisionLocalModel,
+  repairLocalModel,
   renameCase,
   setModelRoutingPreferences,
   setProviderApiKey,
+  startLocalModel,
   unarchiveCase,
   type AuthenticatedUser,
   type CaseListItem,
@@ -190,6 +193,93 @@ const KNOWN_EXECUTION_SKILLS = new Set([
   "raport-klienta-v1",
   "raport-sytuacyjny-v2"
 ]);
+
+const FALLBACK_EXECUTION_SKILLS: PublicSkillDescriptor[] = [
+  {
+    name: "analiza-sadowa-v6",
+    category: "execution",
+    description: "Analiza sądowa i procesowa akt sprawy."
+  },
+  {
+    name: "analizator-dowodow-v3",
+    category: "execution",
+    description: "Analiza materiału dowodowego, luk i ryzyk."
+  },
+  {
+    name: "analizator-przepisow-v2",
+    category: "execution",
+    description: "Analiza i zestawienie przepisów istotnych dla sprawy."
+  },
+  {
+    name: "analizator-umow-v1",
+    category: "execution",
+    description: "Analiza postanowień umowy, obowiązków i ryzyk."
+  },
+  {
+    name: "chronologia-sprawy-v1",
+    category: "execution",
+    description: "Chronologia zdarzeń, terminów i zależności czasowych."
+  },
+  {
+    name: "orzeczenia-sadowe-v2",
+    category: "execution",
+    description: "Praca z orzecznictwem i tezami judykatury."
+  },
+  {
+    name: "pisma-procesowe-v3",
+    category: "execution",
+    description: "Przygotowanie pisma procesowego w checkpointowanym workflow."
+  },
+  {
+    name: "pisma-proste-v2",
+    category: "execution",
+    description: "Przygotowanie prostego pisma prawnego lub procesowego."
+  },
+  {
+    name: "przesluchanie-swiadkow-v2-min90",
+    category: "execution",
+    description: "Plan przesłuchania świadków i zestaw pytań."
+  },
+  {
+    name: "przewodnik-prawny-v2",
+    category: "execution",
+    description: "Przewodnik po dalszych krokach i ścieżkach działania."
+  },
+  {
+    name: "raport-klienta-v1",
+    category: "execution",
+    description: "Raport dla klienta."
+  },
+  {
+    name: "raport-sytuacyjny-v2",
+    category: "execution",
+    description: "Raport sytuacyjny sprawy, ryzyk i kolejnych działań."
+  }
+];
+
+function mergeSkillCatalog(
+  ...catalogs: readonly PublicSkillDescriptor[][]
+): PublicSkillDescriptor[] {
+  const byName = new Map<string, PublicSkillDescriptor>();
+  for (const catalog of catalogs) {
+    for (const skill of catalog) {
+      const existing = byName.get(skill.name);
+      byName.set(
+        skill.name,
+        existing
+          ? {
+              ...existing,
+              ...skill,
+              category:
+                skill.category ??
+                existing.category
+            }
+          : skill
+      );
+    }
+  }
+  return [...byName.values()];
+}
 
 function messageId(): string {
   const random = globalThis.crypto?.randomUUID?.().replaceAll("-", "") ??
@@ -445,7 +535,9 @@ export default function MatterChatApp({
     useState("");
 
   const [routes, setRoutes] = useState<string[]>([]);
-  const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
+  const [skills, setSkills] = useState<PublicSkillDescriptor[]>(
+    FALLBACK_EXECUTION_SKILLS
+  );
   const [manualSkills, setManualSkills] = useState<string[]>([]);
   const [
     deterministicAction,
@@ -689,17 +781,25 @@ export default function MatterChatApp({
         setRuntimeError(error instanceof Error ? error.message : String(error));
       });
 
-    void fetch(`${apiBase()}/api/skills`, {
-      headers: { Accept: "application/json" }
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`HTTP_${response.status}`);
-        return await response.json() as { skills?: PublicSkillDescriptor[] };
-      })
+    void getSkills()
       .then((payload) => {
-        if (!cancelled && Array.isArray(payload.skills)) setSkills(payload.skills);
+        if (
+          !cancelled &&
+          Array.isArray(payload.skills)
+        ) {
+          setSkills((current) =>
+            mergeSkillCatalog(
+              FALLBACK_EXECUTION_SKILLS,
+              current,
+              payload.skills
+            )
+          );
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        // The built-in execution catalog stays visible even when the runtime
+        // skill registry is temporarily unavailable.
+      });
 
     return () => {
       cancelled = true;
@@ -707,10 +807,20 @@ export default function MatterChatApp({
   }, []);
 
   useEffect(() => {
-    if (skills.length === 0 && routes.length > 0) {
-      setSkills(routes.map((name) => ({ name, category: "domain" })));
+    if (routes.length === 0) {
+      return;
     }
-  }, [routes, skills.length]);
+    setSkills((current) =>
+      mergeSkillCatalog(
+        FALLBACK_EXECUTION_SKILLS,
+        current,
+        routes.map((name) => ({
+          name,
+          category: "domain"
+        }))
+      )
+    );
+  }, [routes]);
 
   useEffect(() => {
     const refreshLocalModels = () => {
@@ -1129,10 +1239,20 @@ export default function MatterChatApp({
       );
       return status.authenticated;
     } catch (error) {
+      const code =
+        error instanceof ApiError
+          ? error.code
+          : error instanceof Error
+            ? error.message
+            : String(error);
       setProviderAccountMessage(
-        error instanceof Error
-          ? error.message
-          : String(error)
+        code ===
+          "ACCOUNT_SESSION_SUBSCRIPTION_LOGIN_REQUIRED"
+          ? "Claude Code nie potwierdził aktywnego logowania do subskrypcji Claude. Program używa wyłącznie sesji Claude.ai/Pro/Max i nie przełącza tego kanału na rozliczane API."
+          : code ===
+              "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
+            ? "Nie znaleziono oficjalnego klienta tego dostawcy."
+            : code
       );
       await refreshProviderAccountStatus()
         .catch(() => {});
@@ -1219,6 +1339,148 @@ export default function MatterChatApp({
     }
   }
 
+  async function prepareLocalPrimaryModel():
+    Promise<string | null> {
+    if (
+      provider !== "local" ||
+      !model.startsWith("local/")
+    ) {
+      return null;
+    }
+
+    const codeOf = (
+      error: unknown
+    ): string =>
+      error instanceof ApiError
+        ? error.code
+        : error instanceof Error
+          ? error.message
+          : String(error);
+
+    try {
+      await startLocalModel(
+        model
+      );
+      setModelError("");
+      return null;
+    } catch (initialError) {
+      if (
+        user.appRole !==
+          "ADMIN"
+      ) {
+        return (
+          "Lokalny model wymaga naprawy profilu. " +
+          "Poproś administratora aplikacji o uruchomienie naprawy lokalnej AI. " +
+          `Kod: ${codeOf(initialError)}`
+        );
+      }
+
+      setModelError(
+        "Przygotowuję i weryfikuję lokalny model…"
+      );
+
+      try {
+        let snapshot =
+          await getLocalModels();
+        let local =
+          snapshot.models.find(
+            (item) =>
+              item.id === model
+          );
+        if (!local) {
+          throw new Error(
+            "LOCAL_MODEL_NOT_FOUND"
+          );
+        }
+
+        const preferredContext =
+          local
+            .configuredContextWindow ??
+          local.contextWindow;
+
+        if (
+          snapshot.runtime
+            .configured &&
+          snapshot.runtime
+            .selectedModelId ===
+            model
+        ) {
+          try {
+            await repairLocalModel();
+          } catch {
+            await provisionLocalModel(
+              model,
+              preferredContext
+            );
+          }
+        } else {
+          await provisionLocalModel(
+            model,
+            preferredContext
+          );
+        }
+
+        try {
+          await startLocalModel(
+            model
+          );
+        } catch (startError) {
+          snapshot =
+            await getLocalModels();
+          local =
+            snapshot.models.find(
+              (item) =>
+                item.id === model
+            );
+          if (!local) {
+            throw startError;
+          }
+
+          const activeContext =
+            local
+              .configuredContextWindow ??
+            local.contextWindow;
+          const fallbackContext =
+            local
+              .minimumContextWindow;
+
+          if (
+            fallbackContext >=
+              activeContext
+          ) {
+            throw startError;
+          }
+
+          // 128k remains the preferred default. This fallback is used only
+          // after the qualified profile cannot start on the current machine.
+          await provisionLocalModel(
+            model,
+            fallbackContext
+          );
+          await startLocalModel(
+            model
+          );
+        }
+
+        setLocalModelsRefreshToken(
+          (value) => value + 1
+        );
+        setModelError("");
+        return null;
+      } catch (recoveryError) {
+        const code =
+          codeOf(
+            recoveryError
+          );
+        setModelError(code);
+        return (
+          "Nie udało się uruchomić lokalnego modelu nawet po automatycznej naprawie profilu. " +
+          `Kod: ${code}`
+        );
+      }
+    }
+  }
+
   async function executeMessage(plain: string): Promise<void> {
     if (
       executing ||
@@ -1260,6 +1522,24 @@ export default function MatterChatApp({
       setExecutionError(
         "Wybrany model nie jest jeszcze gotowy do użycia."
       );
+      return;
+    }
+
+    const localPreparationError =
+      await prepareLocalPrimaryModel();
+    if (localPreparationError) {
+      setExecutionError(
+        localPreparationError
+      );
+      setMessages((current) => [
+        ...current,
+        {
+          id: messageId(),
+          role: "system",
+          content:
+            localPreparationError
+        }
+      ]);
       return;
     }
 
@@ -1325,6 +1605,10 @@ export default function MatterChatApp({
           : error instanceof Error
             ? error.message
             : String(error);
+      const reason =
+        error instanceof ApiError
+          ? error.reason
+          : undefined;
       if (
         code.startsWith(
           "PROCESS_PLEADING_"
@@ -1340,8 +1624,12 @@ export default function MatterChatApp({
           ? "Brak lokalnego klucza API dla wybranego dostawcy."
           : code === "CHAT_PRIVACY_GATE_FAILED"
             ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
+          : code === "LOCAL_MODEL_EXECUTION_FAILED"
+            ? `Lokalny model nie mógł wykonać odpowiedzi. Program spróbuje ponownie przygotować profil przy następnej wiadomości.${reason ? ` Kod: ${reason}` : ""}`
           : code === "PROVIDER_EXECUTION_FAILED"
-            ? "Provider odrzucił lub przerwał wykonanie."
+            ? provider === "local"
+              ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
+              : "Provider odrzucił lub przerwał wykonanie."
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
               ? "Nie udało się bezpiecznie dołączyć wybranych fragmentów dokumentu."
               : code === "PROCESS_PLEADING_STATE_REQUIRED"
@@ -1473,13 +1761,13 @@ export default function MatterChatApp({
 
         <div className="matter-thread-list" aria-label="Wątki spraw">
           <div className="matter-thread-heading">
-            <strong>Wątki / sprawy</strong>
+            <strong>Sprawy</strong>
             <button
               type="button"
               disabled={caseBusy || executing}
               onClick={() => void createLocalCase(newCaseName.trim() || "Nowa sprawa")}
             >
-              +
+              + Nowa sprawa
             </button>
           </div>
           <input
@@ -1681,9 +1969,16 @@ export default function MatterChatApp({
           </div>
         </header>
 
-        {[runtimeError, caseError, threadError].filter(Boolean).map((error, index) => (
-          <div key={`${error}-${index}`} className="chat-alert chat-alert-error">
-            {error}
+        {Array.from(
+          new Set(
+            [runtimeError, caseError, threadError]
+              .filter(Boolean)
+          )
+        ).map((error) => (
+          <div key={error} className="chat-alert chat-alert-error">
+            {error === "CASE_ACCESS_DENIED"
+              ? "Nie udało się otworzyć tej sprawy w bieżącej sesji. Wybierz inną sprawę albo utwórz nową."
+              : error}
           </div>
         ))}
 
@@ -2369,7 +2664,9 @@ export default function MatterChatApp({
                     >
                       {item.displayName}
                       {!item.selectable
-                        ? " · nieobsługiwany"
+                        ? isAccountPrimarySource(provider)
+                          ? " · wymaga logowania"
+                          : " · nieobsługiwany"
                         : ""}
                     </option>
                   ))}

@@ -934,7 +934,8 @@ export class ApiError extends Error {
   constructor(
     readonly code: string,
     readonly status: number,
-    readonly retryAfter?: string
+    readonly retryAfter?: string,
+    readonly reason?: string
   ) {
     super(code);
     this.name = "ApiError";
@@ -986,7 +987,7 @@ function setAuthSessionToken(
     token ?? null;
 }
 
-function authorizationHeaders():
+export function authorizationHeaders():
   Record<string, string> {
   if (isDesktopShell()) {
     return {};
@@ -1056,7 +1057,8 @@ async function json<T>(
       failure.error ||
         `HTTP_${response.status}`,
       response.status,
-      failure.retryAfter
+      failure.retryAfter,
+      failure.reason
     );
   }
   return payload as T;
@@ -1836,6 +1838,20 @@ export function getRoutes(): Promise<RouteListResponse> {
   return json<RouteListResponse>("/api/routes");
 }
 
+export function getSkills(): Promise<{
+  count: number;
+  skills: Array<{
+    name: string;
+    version?: string;
+    type?: string;
+    status?: string;
+    description?: string;
+    category?: string;
+  }>;
+}> {
+  return json("/api/skills");
+}
+
 export function setProviderApiKey(
   provider: ProviderId,
   apiKey: string,
@@ -2041,6 +2057,58 @@ export function getLocalModels():
   Promise<LocalModelsResponse> {
   return json<LocalModelsResponse>(
     "/api/local-models"
+  );
+}
+
+export function startLocalModel(
+  modelId: string
+): Promise<{
+  model: LocalModelDescriptor;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/start",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        modelId
+      })
+    }
+  );
+}
+
+export function repairLocalModel(): Promise<{
+  model: LocalModelDescriptor;
+  contextTokens: number;
+  configPath: string;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/repair",
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function provisionLocalModel(
+  modelId: string,
+  contextTokens: number
+): Promise<{
+  model: LocalModelDescriptor;
+  contextTokens: number;
+  configPath: string;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/provision",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        modelId,
+        contextTokens
+      })
+    }
   );
 }
 

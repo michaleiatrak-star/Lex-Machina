@@ -5,6 +5,7 @@ import {
 } from "react";
 import {
   apiBase,
+  authorizationHeaders,
   isDesktopShell,
   type AuthenticatedUser
 } from "./api.js";
@@ -170,6 +171,7 @@ async function request<T>(
     headers: {
       Accept: "application/json",
       ...(init?.body ? { "Content-Type": "application/json" } : {}),
+      ...authorizationHeaders(),
       ...init?.headers
     }
   });
