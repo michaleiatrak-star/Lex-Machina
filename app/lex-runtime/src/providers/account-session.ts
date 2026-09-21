@@ -49,6 +49,8 @@ export function isMissingResumableSessionMessage(
     "no previous conversation",
     "unknown session",
     "session not found",
+    "session does not exist",
+    "no matching session",
     "conversation not found"
   ].some((needle) =>
     normalized.includes(needle)
@@ -231,6 +233,39 @@ function parseCodexFinalText(
     }
   }
   return finalText || null;
+}
+
+function parseGrokResult(
+  stdout: string
+): {
+  text: string;
+  sessionId: string | null;
+} | null {
+  try {
+    const payload =
+      JSON.parse(stdout) as {
+        text?: unknown;
+        sessionId?: unknown;
+      };
+    const text =
+      typeof payload.text ===
+        "string"
+        ? payload.text.trim()
+        : "";
+    if (!text) return null;
+    const sessionId =
+      typeof payload.sessionId ===
+        "string" &&
+      payload.sessionId
+        ? payload.sessionId
+        : null;
+    return {
+      text,
+      sessionId
+    };
+  } catch {
+    return null;
+  }
 }
 
 function parseClaudeResult(
@@ -1652,27 +1687,129 @@ export class AccountSessionManager {
         return parsed.text;
       }
 
-      const resumeSessionId =
+      const promptPath =
+        path.join(
+          workDir,
+          "grok-prompt.txt"
+        );
+      await fsp.writeFile(
+        promptPath,
+        prompt,
+        {
+          encoding: "utf8",
+          mode: 0o600
+        }
+      );
+      const hostCwd =
+        process.cwd();
+      const commonArgs = [
+        "--no-auto-update",
+        "--output-format",
+        "json",
+        "--prompt-file",
+        promptPath,
+        "--sandbox",
+        "strict",
+        "--disallowed-tools",
+        "*",
+        "--no-subagents",
+        "--no-memory",
+        "--disable-web-search",
+        "--system-prompt-override",
+        "You are the semantic model inside Lex Machina. Lex Machina owns privacy, legal verification and tool execution. Current Lex Machina instructions override prior host-session instructions. Never reveal or reuse facts from earlier host turns unless they are present in the current Lex Machina request."
+      ];
+      const runGrok = (
+        tail: string[]
+      ) =>
+        runCli(
+          provider,
+          [
+            ...commonArgs,
+            ...tail
+          ],
+          undefined,
+          COMMAND_TIMEOUT_MS,
+          hostCwd,
+          abortSignal
+        );
+
+      let result:
+        RunResult | null = null;
+      const savedSessionId =
         await readAccountSessionId(
           provider
         );
-      const grok =
-        await runGrokAcp(
-          prompt,
-          workDir,
-          abortSignal,
-          resumeSessionId
-        );
-      if (
-        !grok.authenticated
-      ) {
-        throw new Error(
-          "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
+      if (savedSessionId) {
+        result =
+          await runGrok([
+            "--resume",
+            savedSessionId
+          ]);
+        if (
+          result.code !== 0
+        ) {
+          const detail =
+            result.stderr +
+            "\n" +
+            result.stdout;
+          if (
+            isMissingResumableSessionMessage(
+              detail
+            )
+          ) {
+            await clearAccountSessionId(
+              provider
+            );
+            result = null;
+          } else {
+            throw normalizeCliFailure(
+              provider,
+              result
+            );
+          }
+        }
+      }
+
+      if (!result) {
+        const last =
+          await runGrok([
+            "--continue"
+          ]);
+        if (
+          last.code === 0
+        ) {
+          result = last;
+        } else {
+          const detail =
+            last.stderr +
+            "\n" +
+            last.stdout;
+          if (
+            !isMissingResumableSessionMessage(
+              detail
+            )
+          ) {
+            throw normalizeCliFailure(
+              provider,
+              last
+            );
+          }
+          result =
+            await runGrok([]);
+        }
+      }
+
+      if (result.code !== 0) {
+        throw normalizeCliFailure(
+          provider,
+          result
         );
       }
-      if (
-        !grok.text
-      ) {
+      const grok =
+        parseGrokResult(
+          result.stdout
+        );
+      if (!grok) {
         throw new Error(
           "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
         );
