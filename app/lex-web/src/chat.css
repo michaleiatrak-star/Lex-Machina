@@ -263,6 +263,8 @@
 .chat-header-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -1097,7 +1099,7 @@
   }
 
   .chat-tabs {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .chat-sidebar-card,
