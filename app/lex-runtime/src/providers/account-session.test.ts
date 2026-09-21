@@ -60,28 +60,23 @@ describe("provider account-session transport", () => {
   });
 
 
-  it("lets Lex own Codex continuity while other account hosts may resume", () => {
-    expect(
-      accountSessionResumeMode(
-        "openai"
-      )
-    ).toBe(
-      "LEX_CONTEXT_ONLY"
-    );
-    expect(
-      accountSessionResumeMode(
-        "anthropic"
-      )
-    ).toBe(
-      "LAST_OR_NEW"
-    );
-    expect(
-      accountSessionResumeMode(
+  it("keeps Lex conversation context authoritative for every account provider", () => {
+    for (
+      const provider
+      of [
+        "openai",
+        "anthropic",
         "xai"
-      )
-    ).toBe(
-      "LAST_OR_NEW"
-    );
+      ] as const
+    ) {
+      expect(
+        accountSessionResumeMode(
+          provider
+        )
+      ).toBe(
+        "LEX_CONTEXT_ONLY"
+      );
+    }
   });
 
   it("uses current interactive login commands for account providers", () => {
