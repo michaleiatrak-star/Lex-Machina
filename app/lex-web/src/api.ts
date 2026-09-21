@@ -230,6 +230,14 @@ export type StoredUploadResponse = {
   storedAt: string;
   archive: boolean;
   extracted: StoredArchiveEntry[];
+  processing?: {
+    documentId: string;
+    complete: true;
+    totalPages: number;
+    digitalPages: number;
+    ocrPages: number;
+    blankPages: number;
+  };
 };
 
 export type CaseFilesResponse = {
