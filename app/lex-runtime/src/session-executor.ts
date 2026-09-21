@@ -25,6 +25,9 @@ import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
 import {
+  LegalFederationToolRuntime
+} from "./legal-federation-tool-runtime.js";
+import {
   ReportBlueprintToolRuntime,
   type AcceptedReportBlueprint,
   type ReportBlueprintKind
@@ -507,7 +510,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     private readonly providers: ProviderGateway,
     private readonly finalizer = new AuditedFinalizer(),
     private readonly verificationToolFactory?: LegalVerificationToolFactory,
-    private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer
+    private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer,
+    private readonly legalFederationTools?: LegalFederationToolRuntime
   ) {
     this.engine = new LexExecutionEngine(
       registry,
@@ -690,6 +694,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     const verificationTools = this.verificationToolFactory?.(ledger);
     const corpusTools = new LegalCorpusToolRuntime(this.registry);
     const reportTools = new ReportBlueprintToolRuntime();
+    const federationTools =
+      this.legalFederationTools;
 
     const auxiliary =
       await this.auxiliaryScheduler
@@ -855,11 +861,17 @@ export class SafeSessionExecutor implements SessionExecutor {
     const toolSchemas = [
       ...corpusTools.schemas(),
       ...reportTools.schemas(),
+      ...(federationTools
+        ? federationTools.schemas()
+        : []),
       ...(verificationTools ? verificationTools.schemas() : [])
     ];
     const toolPrompt = [
       corpusTools.systemPromptAppendix(),
       reportTools.systemPromptAppendix(),
+      ...(federationTools
+        ? [federationTools.systemPromptAppendix()]
+        : []),
       ...(verificationTools
         ? [verificationTools.systemPromptAppendix()]
         : []),
@@ -947,10 +959,17 @@ export class SafeSessionExecutor implements SessionExecutor {
       runTools: async (calls) => {
         const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
         const reportCalls = calls.filter((call) => reportTools.handles(call.name));
+        const federationCalls = calls.filter(
+          (call) =>
+            federationTools?.handles(
+              call.name
+            ) ?? false
+        );
         const verificationCalls = calls.filter(
           (call) =>
             !corpusTools.handles(call.name) &&
-            !reportTools.handles(call.name)
+            !reportTools.handles(call.name) &&
+            !(federationTools?.handles(call.name) ?? false)
         );
 
         const corpusResults = corpusCalls.length > 0
@@ -959,6 +978,14 @@ export class SafeSessionExecutor implements SessionExecutor {
         const reportResults = reportCalls.length > 0
           ? await reportTools.runTools(reportCalls)
           : [];
+        const federationResults =
+          federationTools &&
+          federationCalls.length > 0
+            ? await federationTools
+                .runTools(
+                  federationCalls
+                )
+            : [];
         const cachedVerificationResults:
           NormalizedToolResult[] = [];
         const uncachedVerificationCalls:
@@ -1005,6 +1032,7 @@ export class SafeSessionExecutor implements SessionExecutor {
           [
             ...corpusResults,
             ...reportResults,
+            ...federationResults,
             ...cachedVerificationResults,
             ...verificationResults
           ].map((result) => [
@@ -1064,6 +1092,51 @@ export class SafeSessionExecutor implements SessionExecutor {
           ...(event.detail
             ? event.detail
             : {})
+        }
+      );
+    }
+
+    if (federationTools) {
+      const federationAudit =
+        federationTools.auditEvents();
+      for (
+        const event
+        of federationAudit
+      ) {
+        audit.record(
+          "tool_decision",
+          event.source
+            ? "federated-legal:" +
+              event.source
+            : "federated-legal",
+          event.decision ===
+            "ALLOW"
+            ? "OK"
+            : "BLOCKED",
+          {
+            tool:
+              event.tool,
+            ...(event.detail
+              ? event.detail
+              : {})
+          }
+        );
+      }
+      audit.record(
+        "gate",
+        "G40_FEDERATED_LEGAL_RESEARCH",
+        federationAudit.some(
+          (event) =>
+            event.decision ===
+              "BLOCK"
+        )
+          ? "DEGRADED"
+          : "OK",
+        {
+          toolEvents:
+            federationAudit.length,
+          verificationAuthority:
+            "LEX_NATIVE_ONLY"
         }
       );
     }
