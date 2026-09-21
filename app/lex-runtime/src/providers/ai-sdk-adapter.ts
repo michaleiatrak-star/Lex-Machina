@@ -520,7 +520,7 @@ async function localHttpFailure(
   );
 }
 
-async function readLocalSse(
+export async function readLocalSse(
   response: Response
 ): Promise<string> {
   if (!response.body) {
