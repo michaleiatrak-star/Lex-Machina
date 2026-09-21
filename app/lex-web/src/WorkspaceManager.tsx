@@ -26,8 +26,22 @@ function canRunPrivacyPipeline(
   return (
     item.kind === "UPLOAD" &&
     !item.archive &&
-    (item.mediaType.startsWith("image/") ||
-      item.mediaType === "application/pdf")
+    (
+      item.mediaType.startsWith("image/") ||
+      item.mediaType === "application/pdf" ||
+      item.mediaType === "text/plain" ||
+      item.mediaType === "text/markdown" ||
+      item.mediaType === "text/csv" ||
+      item.mediaType === "text/tab-separated-values" ||
+      item.mediaType ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+      item.mediaType ===
+        "application/vnd.oasis.opendocument.text" ||
+      item.mediaType ===
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+      item.mediaType ===
+        "application/vnd.ms-excel.sheet.macroenabled.12"
+    )
   );
 }
 
@@ -454,12 +468,12 @@ export function WorkspaceManager({
                       <button
                         type="button"
                         disabled={busy}
-                        title="Uruchom lokalny OCR i pseudonimizację dla tego pliku"
-                        onClick={() => void run(async () => {
-                          await runAutomaticPrivacy(
+                        title="Uruchom lokalne wydobycie tekstu/OCR i pseudonimizację; powstanie osobny zaszyfrowany vault oraz odwracalny deanonimizator tego dokumentu"
+                        onClick={() =>
+                          void runAutomaticPrivacy(
                             item
-                          );
-                        })}
+                          )
+                        }
                       >
                         OCR + anonimizuj automatycznie
                       </button>
