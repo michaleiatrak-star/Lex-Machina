@@ -311,8 +311,10 @@ export function conversationForProvider(
   const combined = history
     ? `${history}\n\nUżytkownik: ${next}`
     : next;
-  return combined.length > 32_000
-    ? combined.slice(-32_000)
+  // Runtime accepts at most 30k query characters. Reserve space for the
+  // internal skill-selection envelope while preserving the newest context.
+  return combined.length > 28_000
+    ? combined.slice(-28_000)
     : combined;
 }
 
