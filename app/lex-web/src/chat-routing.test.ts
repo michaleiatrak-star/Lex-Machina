@@ -45,6 +45,33 @@ describe("chat routing", () => {
     ).toBe("dr-01-prawo-pracy");
   });
 
+  it.each([
+    "Jaka jest odpowiedzialność karna z art. 276 kk?",
+    "Co grozi za art. 286 k.k.?",
+    "Wyjaśnij Kodeks karny art. 276"
+  ])("routes criminal-code references deterministically to DR-03: %s", (query) => {
+    const criminalRoutes = [
+      "dr-01-ustroj-konstytucyjny-i-zrodla-prawa",
+      "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+      "dr-03-prawo-karne-wykroczenia-egzekucja"
+    ];
+    const criminalSkills = criminalRoutes.map((name) => ({
+      name,
+      description: name
+    }));
+
+    expect(
+      choosePrimaryRoute(
+        query,
+        criminalRoutes,
+        criminalSkills,
+        []
+      )
+    ).toBe(
+      "dr-03-prawo-karne-wykroczenia-egzekucja"
+    );
+  });
+
   it("lets a manually selected DR route take precedence", () => {
     expect(
       choosePrimaryRoute(
