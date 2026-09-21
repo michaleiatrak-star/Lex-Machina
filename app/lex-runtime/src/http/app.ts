@@ -414,7 +414,10 @@ export type LexHttpAppOptions = {
   credentialManager?: ProviderCredentialManager;
   accountSessions?: Pick<
     AccountSessionManager,
-    "statusAll" | "login"
+    | "statusAll"
+    | "login"
+    | "setAnthropicOAuthToken"
+    | "clearAnthropicOAuthToken"
   >;
   updateDiscovery?: UpdateDiscovery;
   sessionExecutor?: SessionExecutor;
@@ -4262,6 +4265,86 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             "PROVIDER_ACCOUNT_STATUS_FAILED"
         });
       }
+    }
+  );
+
+  app.put(
+    "/api/admin/provider-accounts/anthropic/oauth-token",
+    (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      const token =
+        typeof req.body?.token ===
+          "string"
+          ? req.body.token
+          : "";
+      try {
+        options.accountSessions
+          .setAnthropicOAuthToken(
+            token
+          );
+        res.json({
+          provider: "anthropic",
+          configured: true,
+          storage:
+            "PROCESS_MEMORY"
+        });
+      } catch {
+        res.status(400).json({
+          error:
+            "INVALID_CLAUDE_OAUTH_TOKEN"
+        });
+      }
+    }
+  );
+
+  app.delete(
+    "/api/admin/provider-accounts/anthropic/oauth-token",
+    (req, res) => {
+      const context =
+        responseAuthContext(res);
+      if (
+        context.user.appRole !==
+          "ADMIN"
+      ) {
+        res.status(403).json({
+          error:
+            "AUTHORIZATION_DENIED"
+        });
+        return;
+      }
+      if (!options.accountSessions) {
+        res.status(503).json({
+          error:
+            "PROVIDER_ACCOUNT_SESSION_UNAVAILABLE"
+        });
+        return;
+      }
+      options.accountSessions
+        .clearAnthropicOAuthToken();
+      res.json({
+        provider: "anthropic",
+        cleared: true,
+        storage:
+          "PROCESS_MEMORY"
+      });
     }
   );
 
