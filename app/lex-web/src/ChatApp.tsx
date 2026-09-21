@@ -43,6 +43,7 @@ import {
   labelForSkill,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
+import { SourceLinkedText } from "./SourceLinkedText.js";
 import "./chat.css";
 
 type TabId = "chat" | "files" | "skills" | "case" | "settings";
@@ -814,7 +815,10 @@ export default function ChatApp({
                         : "System"}
                   </div>
                   <div className="chat-message-content">
-                    {message.content}
+                    <SourceLinkedText
+                      content={message.content}
+                      onOpenUrl={openExternalUrl}
+                    />
                   </div>
                   {message.meta ? (
                     <small className="chat-message-meta">
