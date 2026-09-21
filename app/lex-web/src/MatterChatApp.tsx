@@ -358,6 +358,27 @@ function visibleMessageMeta(
     .trim();
 }
 
+export function localModelFailureMessage(
+  reason?: string
+): string {
+  switch (reason) {
+    case "LOCAL_MODEL_SERVER_UNREACHABLE":
+      return "Profil lokalnego modelu przeszedł przygotowanie, ale serwer llama.cpp przestał odpowiadać przed lub w trakcie generowania. Program uruchomi go ponownie przy następnej wiadomości. Kod: LOCAL_MODEL_SERVER_UNREACHABLE";
+    case "LOCAL_MODEL_REQUEST_REJECTED":
+      return "Połączenie z lokalnym serwerem działało, ale llama.cpp odrzucił żądanie inferencji. Kod: LOCAL_MODEL_REQUEST_REJECTED";
+    case "LOCAL_MODEL_SERVER_ERROR":
+      return "Połączenie z lokalnym serwerem działało, ale llama.cpp zwrócił błąd podczas generowania. Kod: LOCAL_MODEL_SERVER_ERROR";
+    case "LOCAL_MODEL_CONTEXT_OVERFLOW":
+      return "Lokalny model działa, ale żądanie przekroczyło dostępny kontekst. Zmniejsz zakres rozmowy lub kontekst załączników. Kod: LOCAL_MODEL_CONTEXT_OVERFLOW";
+    case "LOCAL_MODEL_RESOURCE_EXHAUSTED":
+      return "Lokalny model został uruchomiony, ale zabrakło pamięci RAM/VRAM podczas inferencji. Zmniejsz kontekst albo wybierz profil CPU/mniejszy model. Kod: LOCAL_MODEL_RESOURCE_EXHAUSTED";
+    case "LOCAL_MODEL_INFERENCE_FAILED":
+      return "Połączenie z lokalnym llama.cpp zostało wcześniej potwierdzone przez health-check, ale sama generacja odpowiedzi nie zakończyła się poprawnie. Kod: LOCAL_MODEL_INFERENCE_FAILED";
+    default:
+      return `Lokalny model nie mógł wykonać odpowiedzi.${reason ? ` Kod: ${reason}` : ""}`;
+  }
+}
+
 async function openExternalUrl(url: string): Promise<void> {
   if (isDesktopShell()) {
     const internals = (
@@ -1218,7 +1239,9 @@ export default function MatterChatApp({
     }
     setProviderAccountBusy(true);
     setProviderAccountMessage(
-      "Otwieram oficjalne logowanie dostawcy…"
+      isDesktopShell()
+        ? "Otwieram widoczne okno oficjalnego logowania dostawcy. Dokończ logowanie w tym oknie lub w uruchomionej przez nie przeglądarce…"
+        : "Otwieram oficjalne logowanie dostawcy…"
     );
     try {
       const status =
@@ -1625,7 +1648,9 @@ export default function MatterChatApp({
           : code === "CHAT_PRIVACY_GATE_FAILED"
             ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
           : code === "LOCAL_MODEL_EXECUTION_FAILED"
-            ? `Lokalny model nie mógł wykonać odpowiedzi. Program spróbuje ponownie przygotować profil przy następnej wiadomości.${reason ? ` Kod: ${reason}` : ""}`
+            ? localModelFailureMessage(
+                reason
+              )
           : code === "PROVIDER_EXECUTION_FAILED"
             ? provider === "local"
               ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
