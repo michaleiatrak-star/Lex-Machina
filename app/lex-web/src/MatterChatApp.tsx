@@ -478,6 +478,28 @@ export function localModelFailureMessage(
   }
 }
 
+function providerFailureMessage(
+  provider: PrimaryProviderSource,
+  reason?: string
+): string {
+  switch (reason) {
+    case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
+      return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
+    case "ACCOUNT_SESSION_AUTH_EXPIRED":
+      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i konta i ponownie połącz konto.";
+    case "ACCOUNT_SESSION_CAPACITY":
+      return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
+    case "ACCOUNT_SESSION_PROMPT_REJECTED":
+      return "ChatGPT/Codex odrzucił bieżące żądanie po stronie usługi. Kod: ACCOUNT_SESSION_PROMPT_REJECTED";
+    case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
+      return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
+    case "ACCOUNT_SESSION_CLI_FAILED":
+      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Wersja RC15 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
+    default:
+      return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
+  }
+}
+
 async function openExternalUrl(url: string): Promise<void> {
   if (isDesktopShell()) {
     const internals = (
@@ -2184,12 +2206,13 @@ export default function MatterChatApp({
               )
           : code === "PROVIDER_EXECUTION_FAILED"
             ? provider === "local"
-              ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
-              : `Provider odrzucił lub przerwał wykonanie${
+              ? localModelFailureMessage(
                   reason
-                    ? ` (kod: ${reason})`
-                    : ""
-                }.`
+                )
+              : providerFailureMessage(
+                  provider,
+                  reason
+                )
           : code ===
               "AUTO_ROUTING_FAILED"
             ? `Model nie zwrócił poprawnego wyboru domeny i skilli w trybie AUTO${reason ? ` (kod: ${reason})` : ""}. Lex Machina nie zgaduje routingu zastępczego.`
