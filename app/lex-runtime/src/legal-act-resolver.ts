@@ -1,4 +1,4 @@
-export type LegalActId = "KC" | "KPC" | "KPK";
+export type LegalActId = "KC" | "KPC" | "KPK" | "KK";
 
 export type LegalActDescriptor = {
   id: LegalActId;
@@ -60,6 +60,22 @@ const ACTS: LegalActEntry[] = [
       "KPK",
       "k.p.k.",
       "kodeks postępowania karnego"
+    ]
+  },
+  {
+    id: "KK",
+    title: "Kodeks karny",
+    eli: "DU/2025/383",
+    baseEli: "DU/1997/553",
+    sourceUrl:
+      "https://api.sejm.gov.pl/eli/acts/DU/2025/383/text.html",
+    sourceKind: "consolidated_text",
+    registryAsOf: REGISTRY_AS_OF,
+    aliases: [
+      "KK",
+      "k.k.",
+      "kodeks karny",
+      "ustawa kodeks karny"
     ]
   }
 ];
