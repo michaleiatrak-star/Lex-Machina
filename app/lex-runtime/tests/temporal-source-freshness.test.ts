@@ -239,7 +239,7 @@ describe("TemporalSourceFreshnessChecker", () => {
     });
   });
 
-  it("blocks when an amendment was promulgated after the t.j.", async () => {
+  it("uses the official unified base text when an effective amendment follows the t.j.", async () => {
     const result = await new TemporalSourceFreshnessChecker(
       fixtureFetcher({
         amendments: [{
@@ -251,7 +251,13 @@ describe("TemporalSourceFreshnessChecker", () => {
       })
     ).check(kc);
 
-    expect(result.status).toBe("POST_TJ_AMENDMENTS");
+    expect(result.status).toBe("CURRENT");
+    expect(result.sourceUrl).toBe(
+      "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.html"
+    );
+    expect(result.reason).toBe(
+      "OFFICIAL_UNIFIED_BASE_TEXT_COVERS_POST_TJ_AMENDMENTS"
+    );
     expect(result.amendmentApplicability).toEqual([
       expect.objectContaining({
         eli: "DU/2026/999",
