@@ -1078,7 +1078,10 @@ function previewSessionWorkflow(
       request.primarySkill,
       envelope.automatic,
       envelope.manualSkills,
-      envelope.domainAllowList
+      envelope.domainAllowList,
+      envelope.domainRestrictionActive,
+      envelope.executionAllowList,
+      envelope.executionRestrictionActive
     );
   return createDeterministicWorkflowPlan(
     registry,
