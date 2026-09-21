@@ -5,9 +5,11 @@ import {
   buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
+  compactLocalToolSchemas,
   isLocalSseTerminalLine,
   localChatBudget,
   createLiveProviderRegistry,
+  parseLocalSseErrorLine,
   parseLocalSseLine,
   parseLocalToolCalls,
   readLocalSse
@@ -158,6 +160,120 @@ describe("AiSdkProviderAdapter", () => {
         )
         .join("")
     ).toBe("OK");
+  });
+
+  it("recognizes llama.cpp legacy SSE error fields and preserves the real reason", () => {
+    expect(
+      parseLocalSseErrorLine(
+        'error: {"code":400,"message":"the request exceeds the available context size","type":"invalid_request_error"}'
+      )
+    ).toBe(
+      "400:the request exceeds the available context size"
+    );
+
+    expect(
+      classifyLocalInferenceFailure(
+        "LOCAL_MODEL_HTTP_STREAM_ERROR:400:the request exceeds the available context size"
+      )
+    ).toBe(
+      "LOCAL_MODEL_CONTEXT_OVERFLOW"
+    );
+  });
+
+  it("fails immediately on llama.cpp SSE error fields instead of misreporting an empty response", async () => {
+    const encoder =
+      new TextEncoder();
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          controller.enqueue(
+            encoder.encode(
+              'error: {"code":400,"message":"the request exceeds the available context size","type":"invalid_request_error"}\n\n'
+            )
+          );
+          controller.enqueue(
+            encoder.encode(
+              "data: [DONE]\n\n"
+            )
+          );
+          controller.close();
+        }
+      });
+
+    await expect(
+      readLocalSse(
+        new Response(
+          body,
+          {
+            status: 200,
+            headers: {
+              "content-type":
+                "text/event-stream"
+            }
+          }
+        )
+      )
+    ).rejects.toThrow(
+      "LOCAL_MODEL_HTTP_STREAM_ERROR:400:the request exceeds the available context size"
+    );
+  });
+
+  it("compacts verbose runtime tool schemas before putting them into a local-model prompt", () => {
+    const verbose =
+      "Opis parametru ".repeat(
+        100
+      );
+    const compact =
+      compactLocalToolSchemas([
+        {
+          type:
+            "function",
+          function: {
+            name:
+              "verify_source",
+            description:
+              verbose,
+            parameters: {
+              type:
+                "object",
+              properties: {
+                query: {
+                  type:
+                    "string",
+                  description:
+                    verbose,
+                  examples: [
+                    verbose
+                  ]
+                }
+              },
+              required: [
+                "query"
+              ],
+              additionalProperties:
+                false
+            }
+          }
+        }
+      ]);
+    const serialized =
+      JSON.stringify(
+        compact
+      );
+
+    expect(
+      serialized.length
+    ).toBeLessThan(
+      verbose.length
+    );
+    expect(serialized).toContain(
+      '"query"'
+    );
+    expect(serialized).not.toContain(
+      '"examples"'
+    );
   });
 
   it("detects Mistral/llama.cpp terminal SSE frames without waiting for socket close", () => {
@@ -412,6 +528,13 @@ describe("AiSdkProviderAdapter", () => {
     expect(
       classifyLocalInferenceFailure(
         "prompt exceeds maximum context window"
+      )
+    ).toBe(
+      "LOCAL_MODEL_CONTEXT_OVERFLOW"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "the request exceeds the available context size"
       )
     ).toBe(
       "LOCAL_MODEL_CONTEXT_OVERFLOW"
