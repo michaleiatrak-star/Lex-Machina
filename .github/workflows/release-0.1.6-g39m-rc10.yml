@@ -198,7 +198,10 @@ jobs:
           - Windows account-client detection refreshes the current machine/user
             PATH before probing Codex, Claude Code or Grok Build, so a client
             installed while Lex Machina is already open can be detected by
-            "Sprawdź ponownie" without restarting the application.
+            "Sprawdź ponownie" without restarting the application;
+          - an authenticated account is now shown as a stable "Połączone" state;
+            account switching remains owned by the official provider client and
+            Lex Machina refreshes that state on demand.
 
           Regression coverage added for:
           - visible Windows login-launcher contract;
