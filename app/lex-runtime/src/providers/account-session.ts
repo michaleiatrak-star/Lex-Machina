@@ -71,6 +71,119 @@ function accountSessionStateRoot(): string {
       );
 }
 
+function claudeSessionsRoot(): string {
+  const configured =
+    process.env
+      .LEX_CLAUDE_SESSIONS_ROOT
+      ?.trim();
+  return configured
+    ? path.resolve(configured)
+    : path.resolve(
+        os.homedir(),
+        ".claude",
+        "projects"
+      );
+}
+
+export async function discoverLatestClaudeSessionId(): Promise<string | null> {
+  let projects;
+  try {
+    projects =
+      await fsp.readdir(
+        claudeSessionsRoot(),
+        {
+          withFileTypes: true
+        }
+      );
+  } catch {
+    return null;
+  }
+
+  let best:
+    | {
+        id: string;
+        mtimeMs: number;
+      }
+    | null = null;
+
+  for (
+    const project
+    of projects
+      .filter(
+        (entry) =>
+          entry.isDirectory()
+      )
+      .slice(0, 2_000)
+  ) {
+    const projectRoot =
+      path.join(
+        claudeSessionsRoot(),
+        project.name
+      );
+    let entries;
+    try {
+      entries =
+        await fsp.readdir(
+          projectRoot,
+          {
+            withFileTypes: true
+          }
+        );
+    } catch {
+      continue;
+    }
+
+    for (
+      const entry
+      of entries.slice(0, 10_000)
+    ) {
+      if (
+        !entry.isFile() ||
+        !entry.name.endsWith(
+          ".jsonl"
+        )
+      ) {
+        continue;
+      }
+      const id =
+        entry.name.slice(
+          0,
+          -".jsonl".length
+        );
+      if (
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+          id
+        )
+      ) {
+        continue;
+      }
+      try {
+        const stat =
+          await fsp.stat(
+            path.join(
+              projectRoot,
+              entry.name
+            )
+          );
+        if (
+          !best ||
+          stat.mtimeMs >
+            best.mtimeMs
+        ) {
+          best = {
+            id,
+            mtimeMs:
+              stat.mtimeMs
+          };
+        }
+      } catch {
+        // A session may disappear during cleanup; skip it.
+      }
+    }
+  }
+  return best?.id ?? null;
+}
+
 function accountSessionStatePath(
   provider: ProviderId
 ): string {
@@ -1429,6 +1542,22 @@ export class AccountSessionManager {
           "mcp_servers={}",
           "--config",
           "features.plugins=false",
+          "--config",
+          "features.shell_tool=false",
+          "--config",
+          "features.unified_exec=false",
+          "--config",
+          "features.multi_agent=false",
+          "--config",
+          "features.apps=false",
+          "--config",
+          "features.hooks=false",
+          "--config",
+          "features.remote_plugin=false",
+          "--config",
+          "web_search=\"disabled\"",
+          "--config",
+          "tools.view_image=false",
           "--sandbox",
           "read-only",
           "--skip-git-repo-check",
@@ -1496,6 +1625,7 @@ export class AccountSessionManager {
             await runCodex([
               "resume",
               "--last",
+              "--all",
               "-"
             ]);
           if (
@@ -1658,8 +1788,43 @@ export class AccountSessionManager {
                 last
               );
             }
-            result =
-              await runClaude([]);
+            const discoveredSessionId =
+              await discoverLatestClaudeSessionId();
+            if (
+              discoveredSessionId
+            ) {
+              const discovered =
+                await runClaude([
+                  "--resume",
+                  discoveredSessionId
+                ]);
+              if (
+                discovered.code === 0
+              ) {
+                result =
+                  discovered;
+              } else {
+                const discoveredDetail =
+                  discovered.stderr +
+                  "\n" +
+                  discovered.stdout;
+                if (
+                  !isMissingResumableSessionMessage(
+                    discoveredDetail
+                  )
+                ) {
+                  throw normalizeCliFailure(
+                    provider,
+                    discovered
+                  );
+                }
+                result =
+                  await runClaude([]);
+              }
+            } else {
+              result =
+                await runClaude([]);
+            }
           }
         }
 
@@ -1773,7 +1938,7 @@ export class AccountSessionManager {
       if (!result) {
         const last =
           await runGrok([
-            "--continue"
+            "--resume"
           ]);
         if (
           last.code === 0
