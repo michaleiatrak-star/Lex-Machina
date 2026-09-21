@@ -56,7 +56,8 @@ import {
   type ProviderId,
   type SessionExecutionResponse,
   type StoredUploadResponse,
-  type LegalDocumentFormat
+  type LegalDocumentFormat,
+  type LocalModelsResponse
 } from "./api.js";
 import {
   DOCUMENT_FILE_ACCEPT,
@@ -729,6 +730,12 @@ export default function MatterChatApp({
     localModelsRefreshToken,
     setLocalModelsRefreshToken
   ] = useState(0);
+  const [
+    localRuntimeStatus,
+    setLocalRuntimeStatus
+  ] = useState<
+    LocalModelsResponse["runtime"] | null
+  >(null);
   const [modelRouting, setModelRouting] =
     useState<ModelRoutingPreferences>({
       auxiliaryEnabled: false,
@@ -830,6 +837,20 @@ export default function MatterChatApp({
     isAccountPrimarySource(provider) &&
     accountSession?.authenticated === true;
   const selectedModel = models.find((item) => item.id === model);
+  const localModelReady =
+    provider === "local" &&
+    localRuntimeStatus?.state ===
+      "READY" &&
+    localRuntimeStatus
+      .activeModelId === model;
+  const localModelStarting =
+    provider === "local" &&
+    (
+      localRuntimeStatus?.state ===
+        "STARTING" ||
+      localRuntimeStatus?.state ===
+        "PROVISIONING"
+    );
   const selectedAuxiliaryModel =
     auxiliaryModels.find(
       (item) =>
@@ -1164,7 +1185,13 @@ export default function MatterChatApp({
     const loadModels =
       provider === "local"
         ? getLocalModels().then(
-            (response) => ({
+            (response) => {
+              if (!cancelled) {
+                setLocalRuntimeStatus(
+                  response.runtime
+                );
+              }
+              return {
               models:
                 response.models
                   .filter(
@@ -1204,7 +1231,8 @@ export default function MatterChatApp({
                       ]
                     })
                   )
-            })
+              };
+            }
           )
         : getModels(
             runtimeProvider
@@ -1865,8 +1893,12 @@ export default function MatterChatApp({
           : String(error);
 
     try {
-      await startLocalModel(
-        model
+      const started =
+        await startLocalModel(
+          model
+        );
+      setLocalRuntimeStatus(
+        started.runtime
       );
       setModelError("");
       return null;
@@ -1928,8 +1960,12 @@ export default function MatterChatApp({
         }
 
         try {
-          await startLocalModel(
-            model
+          const started =
+            await startLocalModel(
+              model
+            );
+          setLocalRuntimeStatus(
+            started.runtime
           );
         } catch (startError) {
           snapshot =
@@ -1964,8 +2000,12 @@ export default function MatterChatApp({
             model,
             fallbackContext
           );
-          await startLocalModel(
-            model
+          const started =
+            await startLocalModel(
+              model
+            );
+          setLocalRuntimeStatus(
+            started.runtime
           );
         }
 
@@ -2011,8 +2051,18 @@ export default function MatterChatApp({
         );
         return;
       }
+      const snapshot =
+        await getLocalModels();
+      setLocalRuntimeStatus(
+        snapshot.runtime
+      );
       setLocalStartMessage(
-        "Lokalny model działa."
+        snapshot.runtime.state ===
+            "READY" &&
+          snapshot.runtime
+            .activeModelId === model
+          ? "Lokalny model działa."
+          : "Runtime odpowiedział, ale model nie osiągnął stanu READY."
       );
     } catch (error) {
       setLocalStartMessage(
@@ -2802,9 +2852,15 @@ export default function MatterChatApp({
             <div className="chat-model-dock-status">
               <span
                 className={
-                  runtimeOnline
-                    ? "chat-dot online"
-                    : "chat-dot offline"
+                  provider === "local"
+                    ? localModelReady
+                      ? "chat-dot online"
+                      : localModelStarting
+                        ? "chat-dot starting"
+                        : "chat-dot offline"
+                    : runtimeOnline
+                      ? "chat-dot online"
+                      : "chat-dot offline"
                 }
               />
               <div>
@@ -2816,7 +2872,13 @@ export default function MatterChatApp({
                 </strong>
                 <small>
                   {provider === "local"
-                    ? "lokalny runtime"
+                    ? localModelReady
+                      ? "lokalny model · działa"
+                      : localModelStarting
+                        ? "lokalny model · uruchamianie"
+                        : localRuntimeStatus
+                          ? "lokalny model · zatrzymany"
+                          : "lokalny model · sprawdzanie stanu"
                     : PRIMARY_MODEL_SOURCES.find(
                         (item) =>
                           item.id ===
@@ -2897,6 +2959,7 @@ export default function MatterChatApp({
                   disabled={
                     executing ||
                     localStartBusy ||
+                    localModelReady ||
                     !model.startsWith(
                       "local/"
                     )
@@ -2905,9 +2968,12 @@ export default function MatterChatApp({
                     void startSelectedLocalModel()
                   }
                 >
-                  {localStartBusy
+                  {localStartBusy ||
+                  localModelStarting
                     ? "Uruchamianie…"
-                    : "Uruchom lokalny model"}
+                    : localModelReady
+                      ? "Model uruchomiony"
+                      : "Uruchom lokalny model"}
                 </button>
               ) : isAccountPrimarySource(
                   provider
