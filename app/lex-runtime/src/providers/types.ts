@@ -51,6 +51,7 @@ export type ProviderStreamParams = {
   model: string;
   systemPrompt: string;
   messages: LlmMessage[];
+  continuityKey?: string;
   tools?: NormalizedToolSchema[];
   maxIterations?: number;
   callbacks?: StreamCallbacks;
