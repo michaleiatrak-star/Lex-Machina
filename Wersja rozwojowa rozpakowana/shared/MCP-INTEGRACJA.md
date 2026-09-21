@@ -40,35 +40,49 @@ oznaczeniem, że weryfikacja była promptowa, a nie deterministyczna.**
 
 ## KROK 1 — Wykrycie dostępnych narzędzi MCP
 
-Na początku obsługi każdej sprawy (po FAZIE routingu w prawny-router-v3, przed
-KROKIEM 1-detekcja), sprawdź listę dostępnych narzędzi w tej rozmowie pod kątem
-narzędzi oznaczonych jako `[third_party_mcp_app]` lub jawnie nazwanych wg wzorca
-z `KONEKTORY-REKOMENDOWANE.md` (np. `isap_lookup`, `saos_search`,
-`cbosa_search`, `krs_lookup`, `eurlex_lookup`).
+W aplikacji Lex Machina preferowanym wejściem jest **jedna federacja runtime**
+(`legal-federation`) oparta na agregatorze `matematicsolutions/prawo-pl-mcp`.
+Federacja normalizuje dziesięć rodzin źródeł bez wystawiania modelowi kilkudziesięciu
+konkurujących schematów:
 
-- Znaleziono ≥1 pasujący konektor → tryb **MCP-FIRST** dla tej dziedziny zapytania.
-- Nie znaleziono żadnego → tryb **FALLBACK-HARDGATE** (obecny stan systemu, bez zmian).
+`saos · nsa · isap · krs · eureka · kio · uodo · eu-sparql · eu-compliance · legalize`.
 
-Nie proponuj instalacji tych connectorów przez `suggest_connectors` przy każdej sprawie —
-to infrastruktura developerska, konfigurowana raz przy wdrożeniu portalu, nie wybór
-użytkownika końcowego per rozmowa.
+Rozpoznaj narzędzia `list_federated_legal_sources`,
+`search_federated_legal_sources`, `get_federated_legal_document`,
+`call_federated_legal_source` i `federated_legal_coverage`.
 
-## KROK 2 — Zapytanie do MCP zamiast/przed web_search
+- Federacja dostępna → tryb **MCP-FEDERATION-FIRST** dla discovery/retrieval.
+- Federacja niedostępna, ale host ma indywidualny connector MCP → użyj go jako
+  warstwy discovery/retrieval zgodnie z tym samym kontraktem bezpieczeństwa.
+- Brak MCP → **FALLBACK-HARDGATE**; natywne resolvery Lex Machina działają bez MCP.
 
-Gdy tryb MCP-FIRST aktywny, dla każdego powołania (akt prawny, artykuł, sygnatura
-orzeczenia):
+⛔ MCP nie otrzymuje danych klienta, treści akt sprawy ani tokenów anonimizera.
+Do zewnętrznej federacji przekazuj wyłącznie publiczne identyfikatory, nazwy aktów,
+sygnatury oraz neutralne frazy prawne.
 
-1. Wywołaj odpowiedni konektor MCP z jak najbardziej precyzyjnym zapytaniem
-   (numer aktu jeśli znany, nazwa ustawy, sygnatura sądu).
-2. Sklasyfikuj wynik:
-   - **FOUND / potwierdzone, z numerem Dz.U. i statusem obowiązywania** → oznacz
-     ✅ [MCP-VERIFIED: <źródło>, <data odpowiedzi>] i użyj tego wyniku.
-   - **NOT_FOUND** → nie zgaduj. Przejdź do KROK 3 (fallback HARD GATE) — może to
-     akt spoza zakresu danego connectora, nie dowód nieistnienia.
-   - **AMBIGUOUS** (kilka trafień) → przejdź do KROK 3, doprecyzuj przez web_search.
-3. **Nigdy nie łącz wyniku MCP z pamięcią modelu** — jeśli MCP zwraca częściowy
-   wynik (np. sam numer bez treści artykułu), treść merytoryczna nadal wymaga
-   HARD GATE (web_fetch pełnego tekstu), MCP daje tylko identyfikację/status aktu.
+Nie proponuj instalacji connectorów użytkownikowi końcowemu przy każdej sprawie —
+to infrastruktura aplikacji, a nie wybór per rozmowa.
+
+## KROK 2 — MCP jako discovery/retrieval, nie drugi system prawdy
+
+Gdy federacja jest aktywna:
+
+1. Użyj właściwego źródła z federacji z możliwie precyzyjnym publicznym
+   identyfikatorem albo neutralną frazą prawną.
+2. **FOUND nie tworzy znacznika ✅ [VER].** Wynik MCP jest materiałem źródłowym
+   do dalszej walidacji, nie wpisem do ledgeru weryfikacyjnego.
+3. Dla przepisu / Dz.U. / aktualnego brzmienia prawa polskiego po retrieval
+   uruchom natywne `verify_legal_reference` Lex Machina. Dopiero ono wraz z
+   kontrolą temporalną może utworzyć ważny ✅ [VER].
+4. Dla SN discovery może iść przez SAOS, lecz finalna sygnatura/cytat/teza
+   przechodzi odpowiednio `verify_case_reference`, `verify_case_quote`,
+   `verify_case_proposition`.
+5. EUREKA, KIO i UODO zachowują swój rzeczywisty charakter: interpretacje /
+   orzeczenia / decyzje organów. **Nigdy** nie zamykają same bramki brzmienia
+   przepisu.
+6. **NOT_FOUND / pusty wynik / source_unavailable ≠ nieistnienie.** Odczytaj
+   `federated_legal_coverage` i uruchom natywny fallback urzędowy.
+7. Nigdy nie łącz częściowego wyniku MCP z pamięcią modelu.
 
 ## KROK 3 — Fallback do HARD GATE (bez zmian względem obecnego stanu)
 
@@ -92,23 +106,23 @@ urzędowy także zawiedzie. Nie ma stanu "system nie odpowiada" z powodu braku M
 
 ## KROK 4 — Rozbieżność źródeł
 
-Jeśli w tej samej sprawie MCP i web_search dały **różne** odpowiedzi na to samo
-pytanie (np. różny aktualny t.j.) → to sytuacja o wyższym priorytecie niż zwykłe
-[NIEWERYFIKOWANE]. Oznacz ⛔ [SPRZECZNOŚĆ ŹRÓDEŁ: MCP=<X> vs web=<Y>], zatrzymaj
-generowanie treści opartej na tym powołaniu, poinformuj użytkownika wprost i —
-jeśli dotyczy mapy centralnej — zgłoś to jako flagę do `audyt-systemu-v4/
-references/WARN-OTWARTE.md` przy najbliższej sesji audytowej.
+Jeśli MCP i natywna ścieżka urzędowa Lex Machina dały **różne** odpowiedzi na
+to samo pytanie (np. różny aktualny t.j.), nie rozstrzygaj przez głosowanie źródeł.
+Natywna ścieżka urzędowa + temporal freshness jest **autorytetem weryfikacyjnym**;
+wykonaj ją ponownie i zatrzymaj publikację spornego powołania aż do wyjaśnienia.
+Jeśli sprzeczność pozostaje, oznacz ⛔ [SPRZECZNOŚĆ ŹRÓDEŁ] i zgłoś flagę audytową.
+Federacja nigdy nie nadpisuje wpisu ledgeru Lex Machina.
 
 ---
 
 ## Integracja z prawny-router-v3
 
-Router ładuje ten plik jako `required_modules` **opcjonalnie** — tzn. `view` tego
-pliku jest tani (sam protokół), a faktyczne wywołanie narzędzia MCP następuje
-tylko, gdy narzędzie jest realnie dostępne (patrz KROK 1). To nie zwiększa
-kosztu tokenowego rozmów, w których developer nie podłączył żadnego connectora
-— w takim wypadku KROK 1 kończy się natychmiast konkluzją FALLBACK-HARDGATE
-i reszta tego pliku nie wpływa na dalszy przebieg.
+Router ładuje ten plik jako `required_modules`. W desktopowym runtime RC14
+federacja jest wystawiana jako pięć narzędzi wysokiego poziomu nad dziesięcioma
+rodzinami źródeł, natomiast natywne narzędzia weryfikacyjne pozostają osobno.
+Ten rozdział odpowiedzialności jest celowy: **MCP = research/retrieval,
+Lex verifier = autoryzacja cytowania**. Awaria federacji degraduje tylko research;
+nie wyłącza HARD GATE ani natywnych resolverów.
 
 ## Co NIE jest częścią tego modułu
 
