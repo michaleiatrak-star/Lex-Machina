@@ -4,6 +4,15 @@ import {
 import {
   LocalPdfTextExtractor
 } from "./pdf-text-extractor.js";
+import {
+  TemporalSourceFreshnessChecker
+} from "./temporal-source-freshness.js";
+import {
+  LegalVerificationToolRuntime
+} from "./verification-tool-runtime.js";
+import {
+  VerificationLedger
+} from "./verification-ledger.js";
 
 const sourceUrl =
   "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf";
@@ -67,6 +76,59 @@ for (
   }
 }
 
+const ledger =
+  new VerificationLedger();
+const runtime =
+  new LegalVerificationToolRuntime(
+    ledger,
+    verifier,
+    undefined,
+    new TemporalSourceFreshnessChecker(
+      fetchWithTimeout
+    )
+  );
+
+const [kkToolResult] =
+  await runtime.runTools([{
+    id:
+      "g20-live-kk-190a",
+    name:
+      "verify_legal_reference",
+    input: {
+      claim:
+        "art. 190a KK",
+      kind:
+        "statute",
+      act:
+        "KK"
+    }
+  }]);
+
+let kkPayload:
+  Record<string, unknown> =
+    {};
+try {
+  kkPayload =
+    JSON.parse(
+      kkToolResult?.content ??
+        "{}"
+    ) as
+      Record<string, unknown>;
+} catch {
+  kkPayload = {};
+}
+
+const kkEvidence =
+  typeof kkPayload.evidence ===
+    "string"
+    ? kkPayload.evidence
+    : "";
+const kkSourceUrl =
+  typeof kkPayload.sourceUrl ===
+    "string"
+    ? kkPayload.sourceUrl
+    : "";
+
 const pass =
   result?.matched === true &&
   result.record.status ===
@@ -77,7 +139,15 @@ const pass =
     "web_fetch_pdf" &&
   result.record.sourceFormat ===
     "PDF" &&
-  Boolean(result.record.evidence);
+  Boolean(result.record.evidence) &&
+  kkPayload.status ===
+    "VERIFIED" &&
+  /\bArt\.?\s+190a\b/iu.test(
+    kkEvidence
+  ) &&
+  kkSourceUrl.includes(
+    "/DU/2025/383/"
+  );
 
 process.stdout.write(
   JSON.stringify({
@@ -102,6 +172,25 @@ process.stdout.write(
         .sourceTier ?? null,
     evidencePresent:
       Boolean(result?.record.evidence),
+    kk190a: {
+      status:
+        kkPayload.status ??
+        null,
+      sourceUrl:
+        kkSourceUrl ||
+        null,
+      sourceFormat:
+        kkPayload.sourceFormat ??
+        null,
+      evidencePresent:
+        Boolean(
+          kkEvidence
+        ),
+      exactArticlePresent:
+        /\bArt\.?\s+190a\b/iu.test(
+          kkEvidence
+        )
+    },
     modelProviderCallExecuted:
       false,
     ...(lastError && !result
