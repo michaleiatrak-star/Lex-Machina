@@ -60,10 +60,28 @@ describe("provider account-session transport", () => {
   });
 
 
-  it("uses last-or-new continuity for account hosts", () => {
+  it("lets Lex own Codex continuity while other account hosts may resume", () => {
     expect(
-      accountSessionResumeMode()
-    ).toBe("LAST_OR_NEW");
+      accountSessionResumeMode(
+        "openai"
+      )
+    ).toBe(
+      "LEX_CONTEXT_ONLY"
+    );
+    expect(
+      accountSessionResumeMode(
+        "anthropic"
+      )
+    ).toBe(
+      "LAST_OR_NEW"
+    );
+    expect(
+      accountSessionResumeMode(
+        "xai"
+      )
+    ).toBe(
+      "LAST_OR_NEW"
+    );
   });
 
   it("uses current interactive login commands for account providers", () => {
