@@ -177,6 +177,9 @@ jobs:
           - local transport failures now classify undici/socket termination and
             SSE-read failures explicitly instead of collapsing them into a generic
             LOCAL_MODEL_INFERENCE_FAILED;
+          - Claude is exposed to Lex Machina through the official Anthropic API
+            lane only; Claude Code may remain installed/logged in for the user's
+            own use but its subscription session is not consumed as a Lex backend;
           - Windows account login for Codex/ChatGPT, Claude Code and Grok Build
             is launched in an explicitly visible user console via Start-Process
             -WindowStyle Normal, instead of depending on a hidden parent shell;
@@ -212,6 +215,7 @@ jobs:
             Lex Machina refreshes that state on demand.
 
           Regression coverage added for:
+          - Claude account-session backend policy (Anthropic API only);
           - visible Windows login-launcher contract;
           - local inference failure classification;
           - execution-skill allow-list select-all/deselect-all semantics;
