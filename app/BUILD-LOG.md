@@ -1381,3 +1381,21 @@ Not fixed in this line, tracked in ROADMAP:
 - no `package-lock.json` / `Cargo.lock`, payload built with `npm install`;
 - dead `$LASTEXITCODE` guards after `& script.ps1`;
 - string-matching validators that cannot catch behavioural regressions.
+
+### 2026-09-21 — G39M RC6 official-source skill updates
+
+Status: **READY FOR RELEASE GATE**
+
+Implemented:
+
+- application version remains `0.1.6`;
+- deterministic action selection and Gate I runtime/semantic/validation ownership from G39M RC5 remain unchanged;
+- skill updates may omit Ed25519 only when discovered from the official `michaleiatrak-star/Lex-Machina` GitHub Releases source;
+- GitHub asset SHA-256, skill index schema/version compatibility, bundle filename/size/SHA-256, full structural registry validation and atomic activation/rollback remain mandatory;
+- application updates remain Authenticode-gated;
+- model-pack updates remain Ed25519-gated.
+
+Release target:
+
+- branch: `release/0.1.6-g39m-rc6`;
+- online Windows installer must pass provenance, runtime/Gate I, structural, installer-state and installed-copy acceptance gates before publication.
