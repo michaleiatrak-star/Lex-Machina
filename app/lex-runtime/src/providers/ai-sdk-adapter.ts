@@ -38,6 +38,105 @@ const LOCAL_JSON_BODY_TIMEOUT_MS =
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
 
+function compactLocalSchema(
+  value: unknown,
+  depth = 0
+): unknown {
+  if (
+    depth > 6 ||
+    value === null ||
+    typeof value !== "object"
+  ) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return value
+      .slice(0, 64)
+      .map(
+        (item) =>
+          compactLocalSchema(
+            item,
+            depth + 1
+          )
+      );
+  }
+
+  const source =
+    value as
+      Record<string, unknown>;
+  const result:
+    Record<string, unknown> = {};
+  const keys = [
+    "type",
+    "required",
+    "enum",
+    "properties",
+    "items",
+    "additionalProperties"
+  ];
+  for (const key of keys) {
+    if (
+      source[key] !==
+        undefined
+    ) {
+      result[key] =
+        compactLocalSchema(
+          source[key],
+          depth + 1
+        );
+    }
+  }
+  if (
+    typeof source.description ===
+      "string" &&
+    source.description.trim()
+  ) {
+    result.description =
+      source.description
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim()
+        .slice(0, 180);
+  }
+  return result;
+}
+
+export function compactLocalToolSchemas(
+  tools:
+    NonNullable<
+      ProviderStreamParams[
+        "tools"
+      ]
+    >
+): Array<{
+  name: string;
+  description: string;
+  parameters: unknown;
+}> {
+  return tools.map(
+    (tool) => ({
+      name:
+        tool.function.name,
+      description:
+        tool.function
+          .description
+          .replace(
+            /\s+/g,
+            " "
+          )
+          .trim()
+          .slice(0, 240),
+      parameters:
+        compactLocalSchema(
+          tool.function
+            .parameters
+        )
+    })
+  );
+}
+
 export function classifyLocalInferenceFailure(
   detail: string
 ):
@@ -51,10 +150,13 @@ export function classifyLocalInferenceFailure(
     detail.toLowerCase();
 
   if (
-    /context.{0,40}(exceed|overflow|too (large|long)|window)/i.test(
+    /context.{0,60}(exceed|overflow|too (large|long)|window)/i.test(
       detail
     ) ||
-    /too many tokens|prompt is too long|maximum context/i.test(
+    /(exceed|overflow|too (large|long)).{0,60}context/i.test(
+      detail
+    ) ||
+    /available context size|context size has been exceeded|too many tokens|prompt is too long|maximum context|n_prompt_tokens|\bn_ctx\b/i.test(
       detail
     )
   ) {
@@ -225,17 +327,8 @@ export function buildLocalToolSystemPrompt(
   const toolSchemas =
     params.tools?.length
       ? JSON.stringify(
-          params.tools.map(
-            (tool) => ({
-              name:
-                tool.function.name,
-              description:
-                tool.function
-                  .description,
-              parameters:
-                tool.function
-                  .parameters
-            })
+          compactLocalToolSchemas(
+            params.tools
           )
         )
       : "[]";
@@ -406,6 +499,85 @@ export function isLocalSseTerminalLine(
     ) === true;
   } catch {
     return false;
+  }
+}
+
+export function parseLocalSseErrorLine(
+  rawLine: string
+): string | null {
+  const line =
+    rawLine.trim();
+  const prefix =
+    line.startsWith(
+      "error:"
+    )
+      ? "error:"
+      : line.startsWith(
+          "data:"
+        )
+        ? "data:"
+        : null;
+  if (!prefix) {
+    return null;
+  }
+  const raw =
+    line.slice(
+      prefix.length
+    ).trim();
+  if (
+    !raw ||
+    raw === "[DONE]"
+  ) {
+    return null;
+  }
+  try {
+    const payload =
+      JSON.parse(raw) as {
+        code?: unknown;
+        message?: unknown;
+        error?: {
+          code?: unknown;
+          message?: unknown;
+        };
+      };
+    const error =
+      payload.error ??
+      (
+        prefix ===
+          "error:"
+          ? payload
+          : null
+      );
+    if (!error) {
+      return null;
+    }
+    const message =
+      typeof error.message ===
+        "string"
+        ? error.message
+        : "llama.cpp stream error";
+    const code =
+      typeof error.code ===
+        "number" ||
+      typeof error.code ===
+        "string"
+        ? String(
+            error.code
+          )
+        : "";
+    return [
+      code,
+      message
+    ].filter(Boolean)
+      .join(":");
+  } catch {
+    return prefix ===
+      "error:"
+      ? raw.slice(
+          0,
+          1200
+        )
+      : null;
   }
 }
 
@@ -673,6 +845,15 @@ export async function readLocalSse(
   const consumeLine = (
     rawLine: string
   ) => {
+    const streamError =
+      parseLocalSseErrorLine(
+        rawLine
+      );
+    if (streamError) {
+      throw new Error(
+        `LOCAL_MODEL_HTTP_STREAM_ERROR:${streamError}`
+      );
+    }
     fullText +=
       parseLocalSseLine(
         rawLine
@@ -850,6 +1031,110 @@ async function readLocalJson(
   return content;
 }
 
+async function exactLocalInputTokens(
+  endpoint: string,
+  body: ReturnType<
+    typeof buildLocalChatRequest
+  >,
+  abortSignal?: AbortSignal
+): Promise<number | null> {
+  const {
+    controller,
+    cleanup
+  } =
+    linkedAbortController(
+      abortSignal
+    );
+  try {
+    const response =
+      await withTimeout(
+        fetch(
+          `${endpoint.replace(/\/$/, "")}/v1/chat/completions/input_tokens`,
+          {
+            method:
+              "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              Accept:
+                "application/json"
+            },
+            body:
+              JSON.stringify({
+                model:
+                  body.model,
+                messages:
+                  body.messages
+              }),
+            signal:
+              controller.signal
+          }
+        ),
+        30_000,
+        "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT",
+        () =>
+          controller.abort(
+            "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT"
+          )
+      );
+    if (
+      response.status ===
+        404
+    ) {
+      return null;
+    }
+    if (!response.ok) {
+      const detail =
+        await response
+          .text()
+          .catch(
+            () => ""
+          );
+      throw new Error(
+        `LOCAL_MODEL_TOKEN_COUNT_FAILED:HTTP_${response.status}:${detail
+          .replace(/[\r\n]+/g, " ")
+          .slice(-800)}`
+      );
+    }
+    const payload =
+      await response.json() as {
+        input_tokens?:
+          unknown;
+      };
+    return typeof payload
+      .input_tokens ===
+        "number" &&
+      Number.isInteger(
+        payload.input_tokens
+      ) &&
+      payload.input_tokens >=
+        0
+      ? payload.input_tokens
+      : null;
+  } catch (error) {
+    if (
+      abortSignal?.aborted
+    ) {
+      throw error;
+    }
+    if (
+      error instanceof Error &&
+      (
+        error.message.startsWith(
+          "LOCAL_MODEL_TOKEN_COUNT_FAILED:"
+        ) ||
+        error.message ===
+          "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT"
+      )
+    ) {
+      throw error;
+    }
+    return null;
+  } finally {
+    cleanup();
+  }
+}
+
 async function streamLocalChatCompletion(
   endpoint: string,
   modelId: string,
@@ -866,12 +1151,51 @@ async function streamLocalChatCompletion(
       messages,
       conservativeCharsPerToken
     );
-  const streamingBody =
+  const countBody =
     buildLocalChatRequest(
       modelId,
       systemPrompt,
       messages,
       budget.maxOutputTokens,
+      false
+    );
+  const exactPromptTokens =
+    await exactLocalInputTokens(
+      endpoint,
+      countBody,
+      abortSignal
+    );
+  const exactAvailable =
+    exactPromptTokens ===
+      null
+      ? null
+      : contextTokens -
+        exactPromptTokens -
+        LOCAL_CONTEXT_SAFETY_TOKENS;
+  if (
+    exactAvailable !== null &&
+    exactAvailable < 64
+  ) {
+    throw new Error(
+      `LOCAL_MODEL_CONTEXT_OVERFLOW:context=${contextTokens}:exact_prompt=${exactPromptTokens}:prompt_chars=${budget.promptChars}`
+    );
+  }
+  const maxOutputTokens =
+    exactAvailable === null
+      ? budget.maxOutputTokens
+      : Math.max(
+          64,
+          Math.min(
+            budget.maxOutputTokens,
+            exactAvailable
+          )
+        );
+  const streamingBody =
+    buildLocalChatRequest(
+      modelId,
+      systemPrompt,
+      messages,
+      maxOutputTokens,
       true
     );
   const response =
@@ -913,7 +1237,7 @@ async function streamLocalChatCompletion(
           modelId,
           systemPrompt,
           messages,
-          budget.maxOutputTokens,
+          maxOutputTokens,
           false
         ),
         abortSignal
@@ -943,7 +1267,7 @@ async function streamLocalChatCompletion(
               fallbackError
             );
       throw new Error(
-        `LOCAL_MODEL_STREAM_AND_JSON_FAILED:stream=${first}:json=${second}:context=${budget.contextTokens}:estimated_prompt=${budget.estimatedPromptTokens}:prompt_chars=${budget.promptChars}:max_output=${budget.maxOutputTokens}`
+        `LOCAL_MODEL_STREAM_AND_JSON_FAILED:stream=${first}:json=${second}:context=${budget.contextTokens}:estimated_prompt=${budget.estimatedPromptTokens}:prompt_chars=${budget.promptChars}:exact_prompt=${exactPromptTokens ?? "unavailable"}:max_output=${maxOutputTokens}`
       );
     }
   }
