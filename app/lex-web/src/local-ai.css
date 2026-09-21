@@ -219,3 +219,19 @@
   border-color: rgba(180, 35, 24, 0.35);
   color: #b42318;
 }
+
+.local-ai-setup-embedded {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  border-color: #d5ddd3;
+  background: #fafbf8;
+  box-shadow: none;
+}
+
+.local-ai-setup-embedded > summary {
+  cursor: default;
+}
