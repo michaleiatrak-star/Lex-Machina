@@ -2058,6 +2058,58 @@ export function getLocalModels():
   );
 }
 
+export function startLocalModel(
+  modelId: string
+): Promise<{
+  model: LocalModelDescriptor;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/start",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        modelId
+      })
+    }
+  );
+}
+
+export function repairLocalModel(): Promise<{
+  model: LocalModelDescriptor;
+  contextTokens: number;
+  configPath: string;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/repair",
+    {
+      method: "POST"
+    }
+  );
+}
+
+export function provisionLocalModel(
+  modelId: string,
+  contextTokens: number
+): Promise<{
+  model: LocalModelDescriptor;
+  contextTokens: number;
+  configPath: string;
+  runtime: LocalModelsResponse["runtime"];
+}> {
+  return json(
+    "/api/local-models/provision",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        modelId,
+        contextTokens
+      })
+    }
+  );
+}
+
 export function getProcessPleadingWorkflow(
   caseId: string
 ): Promise<ProcessPleadingWorkflowResponse> {
