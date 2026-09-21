@@ -111,7 +111,6 @@ export class LocalDocumentAuthoringService {
         )
       ];
     if (
-      unique.length < 1 ||
       unique.length > 99 ||
       unique.some(
         (documentId) =>
