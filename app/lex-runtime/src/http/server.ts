@@ -32,7 +32,8 @@ import {
 } from "../maintenance-service.js";
 import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
-import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";\nimport { LegalFederationToolRuntime } from "../legal-federation-tool-runtime.js";
+import { LegalVerificationToolRuntime } from "../verification-tool-runtime.js";
+import { LegalFederationToolRuntime } from "../legal-federation-tool-runtime.js";
 import { TemporalSourceFreshnessChecker } from "../temporal-source-freshness.js";
 import { OfficialLegalSourceVerifier } from "../legal-source-verifier.js";
 import { LocalPdfTextExtractor } from "../pdf-text-extractor.js";
