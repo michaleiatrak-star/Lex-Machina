@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import {
   Client
 } from "@modelcontextprotocol/sdk/client/index.js";
@@ -10,8 +12,12 @@ import type {
   NormalizedToolSchema
 } from "./providers/types.js";
 
+// 0.1.4 is the latest published PyPI build currently usable by uvx.
+ // The upstream main branch is newer, but installers must not depend on an
+ // unpublished package version. Lex supplies the newer coverage contract
+ // locally, while the four published unified proxy tools remain upstream.
 const AGGREGATOR_PACKAGE =
-  "prawo-pl-mcp==0.2.3";
+  "prawo-pl-mcp==0.1.4";
 
 const SOURCE_IDS = [
   "saos",
@@ -32,6 +38,117 @@ const SOURCE_ENUM = [
 
 type SourceId =
   (typeof SOURCE_IDS)[number];
+
+const LOCAL_COVERAGE: Record<
+  SourceId,
+  {
+    family: string;
+    authority: string;
+    role: string;
+    fallback: string;
+  }
+> = {
+  saos: {
+    family:
+      "case-law",
+    authority:
+      "SAOS",
+    role:
+      "discovery/support",
+    fallback:
+      "Native Lex SAOS discovery; SN citations still require the official SN verifier."
+  },
+  nsa: {
+    family:
+      "administrative-case-law",
+    authority:
+      "CBOSA",
+    role:
+      "discovery/retrieval",
+    fallback:
+      "Native Lex direct-CBOSA adapter and its fail-closed indexed fallback."
+  },
+  isap: {
+    family:
+      "polish-legislation",
+    authority:
+      "Sejm ELI",
+    role:
+      "retrieval",
+    fallback:
+      "Native Lex legal-act resolver, temporal freshness gate and verify_legal_reference."
+  },
+  krs: {
+    family:
+      "company-register",
+    authority:
+      "KRS Ministry of Justice API",
+    role:
+      "registry lookup",
+    fallback:
+      "Native official KRS API path used by the entity verification gate."
+  },
+  eureka: {
+    family:
+      "tax-interpretations",
+    authority:
+      "EUREKA MF/KIS",
+    role:
+      "interpretive practice",
+    fallback:
+      "EUREKA web/source lookup; statutory propositions still require ELI verification."
+  },
+  kio: {
+    family:
+      "public-procurement-case-law",
+    authority:
+      "KIO/UZP",
+    role:
+      "decisional practice",
+    fallback:
+      "Native official-source research path; do not infer non-existence from connector failure."
+  },
+  uodo: {
+    family:
+      "data-protection-decisions",
+    authority:
+      "UODO",
+    role:
+      "decisional practice",
+    fallback:
+      "Native Lex official UODO API path."
+  },
+  "eu-sparql": {
+    family:
+      "eu-law-and-cjeu",
+    authority:
+      "EUR-Lex/CELLAR/CJEU",
+    role:
+      "live official retrieval",
+    fallback:
+      "Native EUR-Lex/CELLAR official-source verification path."
+  },
+  "eu-compliance": {
+    family:
+      "eu-compliance-offline-corpus",
+    authority:
+      "local corpus derived from EUR-Lex",
+    role:
+      "fast offline research",
+    fallback:
+      "Live EUR-Lex/CELLAR takes precedence for current-law verification."
+  },
+  legalize: {
+    family:
+      "multi-jurisdiction-law-as-git",
+    authority:
+      "legalize-dev corpus",
+    role:
+      "historical/comparative research",
+    fallback:
+      "Use the official source for the relevant jurisdiction for final current-law verification."
+  }
+};
 
 export type LegalFederationAuditEvent = {
   tool: string;
@@ -216,6 +333,63 @@ const COVERAGE_SCHEMA:
     }
   };
 
+function privateCommand(
+  relative: string[],
+  fallback: string
+): string {
+  const root =
+    process.env
+      .LEX_RUNTIME_ROOT;
+  if (root) {
+    const candidate =
+      path.join(
+        root,
+        ...relative
+      );
+    if (
+      fs.existsSync(
+        candidate
+      )
+    ) {
+      return candidate;
+    }
+  }
+  return fallback;
+}
+
+function guardOutboundPayload(
+  value:
+    Record<string, unknown>
+): Record<string, unknown> {
+  const serialized =
+    JSON.stringify(
+      value
+    );
+  if (
+    serialized.length >
+      20_000
+  ) {
+    throw new Error(
+      "FEDERATED_PAYLOAD_TOO_LARGE"
+    );
+  }
+  if (
+    /\[(?:DOCUMENT|CASE KNOWLEDGE|FIRM KNOWLEDGE)\s/i
+      .test(
+        serialized
+      ) ||
+    /\[(?:LM)?PII:/i
+      .test(
+        serialized
+      )
+  ) {
+    throw new Error(
+      "FEDERATED_CASE_DATA_FORBIDDEN"
+    );
+  }
+  return value;
+}
+
 function cleanEnvironment():
   Record<string, string> {
   const env:
@@ -235,6 +409,28 @@ function cleanEnvironment():
     ) {
       env[key] = value;
     }
+  }
+
+  const runtimeRoot =
+    env.LEX_RUNTIME_ROOT;
+  if (runtimeRoot) {
+    const privatePaths = [
+      path.join(
+        runtimeRoot,
+        "node"
+      ),
+      path.join(
+        runtimeRoot,
+        "python",
+        "Scripts"
+      )
+    ];
+    env.PATH =
+      privatePaths.join(
+        path.delimiter
+      ) +
+      path.delimiter +
+      (env.PATH ?? "");
   }
 
   return {
@@ -404,7 +600,20 @@ class PrawoPlMcpClient {
         const command =
           process.env
             .LEX_LEGAL_MCP_UVX ??
-          "uvx";
+          privateCommand(
+            [
+              "python",
+              "Scripts",
+              process.platform ===
+                "win32"
+                ? "uvx.exe"
+                : "uvx"
+            ],
+            process.platform ===
+              "win32"
+              ? "uvx.exe"
+              : "uvx"
+          );
         const transport =
           new StdioClientTransport({
             command,
@@ -455,12 +664,19 @@ class PrawoPlMcpClient {
         await client.callTool({
           name,
           arguments:
-            args
+            guardOutboundPayload(
+              args
+            )
         });
       return extractToolText(
         result
       );
     } catch (error) {
+      try {
+        await client.close();
+      } catch {
+        // Best effort: the next call creates a fresh MCP transport.
+      }
       this.client = null;
       throw error;
     }
@@ -510,6 +726,8 @@ export class LegalFederationToolRuntime {
       "SAOS, NSA and ISAP federation results can broaden discovery or retrieve source material, but they do not replace the native Lex verification path.",
       "EUREKA interpretations, KIO rulings, UODO decisions and other administrative/case materials must be described with their actual legal status; do not present them as generally binding statutory law.",
       "After an empty federated search, call federated_legal_coverage before concluding that material is absent.",
+      "Never send case facts, uploaded-document text, secrets, PII tokens or client-specific narrative to the external MCP fleet. Restrict calls to public legal concepts, act/case identifiers, citations and neutral search phrases.",
+      "If a federated result conflicts with a native official-source verifier, the native official verification path is authoritative; fail closed until the conflict is resolved.",
       "Do not expose connector implementation details or treat a source_unavailable error as absence of law."
     ].join(
       "\n"
@@ -653,10 +871,31 @@ export class LegalFederationToolRuntime {
       call.name ===
         COVERAGE_TOOL
     ) {
-      return this.client.call(
-        "pl_coverage",
-        {}
-      );
+      return JSON.stringify({
+        status:
+          "OK",
+        aggregatorPackage:
+          AGGREGATOR_PACKAGE,
+        sources:
+          SOURCE_IDS.map(
+            (source) => ({
+              source,
+              ...LOCAL_COVERAGE[
+                source
+              ]
+            })
+          ),
+        policy: {
+          verificationAuthority:
+            "LEX_NATIVE_ONLY",
+          emptySearch:
+            "OUT_OF_SCOPE_UNTIL_FALLBACK_CHECKED",
+          conflict:
+            "REVERIFY_WITH_OFFICIAL_NATIVE_PATH_AND_FAIL_CLOSED",
+          privacy:
+            "NO_CASE_FACTS_DOCUMENT_TEXT_OR_PII_TOKENS_TO_EXTERNAL_MCP"
+        }
+      });
     }
 
     const source =
