@@ -496,18 +496,16 @@ async function withTimeout<T>(
           timer =
             setTimeout(
               () => {
-                void Promise
-                  .resolve(
-                    onTimeout?.()
+                try {
+                  void onTimeout?.();
+                } catch {
+                  // Timeout remains authoritative even if cleanup fails.
+                }
+                reject(
+                  timeoutError(
+                    code
                   )
-                  .finally(
-                    () =>
-                      reject(
-                        timeoutError(
-                          code
-                        )
-                      )
-                  );
+                );
               },
               timeoutMs
             );
@@ -637,7 +635,11 @@ async function localHttpFailure(
 }
 
 export async function readLocalSse(
-  response: Response
+  response: Response,
+  timeouts?: {
+    firstContentMs?: number;
+    idleMs?: number;
+  }
 ): Promise<string> {
   if (!response.body) {
     throw new Error(
@@ -654,6 +656,19 @@ export async function readLocalSse(
 
   let terminalSeen =
     false;
+  const firstContentDeadline =
+    Date.now() +
+    Math.max(
+      1,
+      timeouts?.firstContentMs ??
+        LOCAL_FIRST_CONTENT_TIMEOUT_MS
+    );
+  const idleTimeoutMs =
+    Math.max(
+      1,
+      timeouts?.idleMs ??
+        LOCAL_STREAM_IDLE_TIMEOUT_MS
+    );
 
   const consumeLine = (
     rawLine: string
@@ -680,8 +695,12 @@ export async function readLocalSse(
         await withTimeout(
           reader.read(),
           fullText.trim()
-            ? LOCAL_STREAM_IDLE_TIMEOUT_MS
-            : LOCAL_FIRST_CONTENT_TIMEOUT_MS,
+            ? idleTimeoutMs
+            : Math.max(
+                1,
+                firstContentDeadline -
+                  Date.now()
+              ),
           fullText.trim()
             ? "LOCAL_MODEL_SSE_IDLE_TIMEOUT"
             : "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT",
