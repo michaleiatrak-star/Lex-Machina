@@ -1887,6 +1887,7 @@ export default function MatterChatApp({
     setQuery("");
     setExecuting(true);
     setExecutionError("");
+    setGeneratedDocumentMessage("");
 
     try {
       let readyAccount =
@@ -2424,6 +2425,61 @@ export default function MatterChatApp({
             </h1>
           </div>
           <div className="chat-header-actions">
+            <div className="chat-case-switcher">
+              <label>
+                <span>Sprawa</span>
+                <select
+                  aria-label="Wybierz sprawę"
+                  value={caseId}
+                  disabled={
+                    executing ||
+                    caseBusy
+                  }
+                  onChange={(event) =>
+                    switchToCase(
+                      event.target
+                        .value
+                    )
+                  }
+                >
+                  {matterCases.map(
+                    (item) => (
+                      <option
+                        key={
+                          item.caseId
+                        }
+                        value={
+                          item.caseId
+                        }
+                      >
+                        {item.displayName ||
+                          "Sprawa bez nazwy"}
+                        {item.archivedAt
+                          ? " · archiwalna"
+                          : ""}
+                      </option>
+                    )
+                  )}
+                </select>
+              </label>
+              <button
+                type="button"
+                className="chat-secondary-action"
+                disabled={
+                  caseBusy ||
+                  executing
+                }
+                onClick={() =>
+                  void createLocalCase(
+                    newCaseName
+                      .trim() ||
+                      "Nowa sprawa"
+                  )
+                }
+              >
+                + Nowa sprawa
+              </button>
+            </div>
             {activeTab === "chat" ? (
               <div className="chat-model-lanes">
                 <label>
@@ -2863,6 +2919,11 @@ export default function MatterChatApp({
                       Zaznacz dowolną liczbę gotowych plików. Status OCR pokazuje, które strony wymagały rozpoznawania tekstu.
                     </small>
                   </div>
+                  {caseFilePickerError ? (
+                    <p className="chat-inline-error">
+                      Nie udało się odczytać dokumentów sprawy: {caseFilePickerError}
+                    </p>
+                  ) : null}
                   {caseFiles.length === 0 ? (
                     <small>
                       Brak zapisanych plików w tej sprawie.
@@ -2966,6 +3027,11 @@ export default function MatterChatApp({
                     </ul>
                   )}
                 </div>
+              ) : null}
+              {generatedDocumentMessage ? (
+                <p className="chat-inline-success">
+                  {generatedDocumentMessage}
+                </p>
               ) : null}
               {executionError ? (
                 <p className="chat-inline-error">{executionError}</p>
