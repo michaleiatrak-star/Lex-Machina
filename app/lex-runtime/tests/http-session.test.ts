@@ -12,7 +12,11 @@ import {
   ProviderGatewayError
 } from "../src/providers/gateway.js";
 import { LexSkillRegistry } from "../src/registry.js";
-import type { SessionExecutor } from "../src/session-executor.js";
+import {
+  SESSION_EXECUTION_INTERNAL,
+  type SessionExecutor,
+  type SessionExecutionResponse
+} from "../src/session-executor.js";
 
 const roots: string[] = [];
 const DR = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
@@ -145,6 +149,150 @@ describe("session execution HTTP API", () => {
       answer: "safe draft",
       finalization: "PASS"
     });
+  });
+
+  it("restores document aliases only at the local HTTP presentation boundary", async () => {
+    const result:
+      SessionExecutionResponse = {
+        sessionId:
+          "session-pii-1",
+        status:
+          "DRAFT_PRESENTABLE",
+        provider:
+          "openai",
+        model:
+          "gpt-test",
+        primarySkill:
+          DR,
+        answer:
+          "Powód [LMPII:D01:PERSON:0001], pozwany [LMPII:D02:PERSON:0001].",
+        finalization:
+          "PASS",
+        blockedReferences: [],
+        verification: {
+          records: 0,
+          verified: 0,
+          supported: 0,
+          unverified: 0
+        },
+        evidence: [],
+        audit: {
+          result: "PASS",
+          eventCount: 1,
+          closed: true
+        }
+      };
+    Object.defineProperty(
+      result,
+      SESSION_EXECUTION_INTERNAL,
+      {
+        value: {
+          verificationRecords: [],
+          auditEvents: [],
+          documentAliasDocumentIds: [
+            "doc_aaaaaaaaaaaaaaaaaaaaaaaa",
+            "doc_bbbbbbbbbbbbbbbbbbbbbbbb"
+          ]
+        },
+        enumerable: false
+      }
+    );
+
+    const executor:
+      SessionExecutor = {
+        execute:
+          vi.fn(
+            async () =>
+              result
+          )
+      };
+    const documentService = {
+      ingestPdf:
+        vi.fn(),
+      ingestImage:
+        vi.fn(),
+      review:
+        vi.fn(),
+      finalizeReview:
+        vi.fn(),
+      resolveProtectedChunks:
+        vi.fn(),
+      deanonymize:
+        vi.fn(
+          (
+            documentId:
+              string,
+            text: string
+          ) => {
+            if (
+              documentId ===
+                "doc_aaaaaaaaaaaaaaaaaaaaaaaa" &&
+              text ===
+                "[PII:PERSON:0001]"
+            ) {
+              return "Jan Kowalski";
+            }
+            if (
+              documentId ===
+                "doc_bbbbbbbbbbbbbbbbbbbbbbbb" &&
+              text ===
+                "[PII:PERSON:0001]"
+            ) {
+              return "Anna Nowak";
+            }
+            throw new Error(
+              "Unknown token"
+            );
+          }
+        )
+    };
+
+    const app =
+      createLexHttpApp({
+        registry:
+          registry(),
+        modelCatalog: {
+          list:
+            vi.fn(
+              async () => []
+            )
+        },
+        sessionExecutor:
+          executor,
+        documentService
+      });
+
+    const response =
+      await request(app)
+        .post(
+          "/api/sessions/execute"
+        )
+        .send({
+          query:
+            "Pytanie",
+          provider:
+            "openai",
+          model:
+            "gpt-test",
+          primarySkill:
+            DR,
+          mode:
+            "PRAWNIK"
+        })
+        .expect(200);
+
+    expect(
+      response.body.answer
+    ).toBe(
+      "Powód Jan Kowalski, pozwany Anna Nowak."
+    );
+    expect(
+      JSON.stringify(
+        response.body
+      )
+    ).not.toContain(
+      "LMPII"
+    );
   });
 
   it("rejects malformed requests before provider execution", async () => {
