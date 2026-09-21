@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   AiSdkProviderAdapter,
   buildLocalToolSystemPrompt,
+  classifyLocalInferenceFailure,
   createLiveProviderRegistry,
   parseLocalToolCalls
 } from "../src/providers/ai-sdk-adapter.js";
@@ -83,6 +84,51 @@ describe("AiSdkProviderAdapter", () => {
         input: {}
       }
     ]);
+  });
+
+  it("classifies local inference failures into actionable diagnostics", () => {
+    expect(
+      classifyLocalInferenceFailure(
+        "TypeError: fetch failed cause ECONNREFUSED 127.0.0.1"
+      )
+    ).toBe(
+      "LOCAL_MODEL_SERVER_UNREACHABLE"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "HTTP status 400: Bad Request"
+      )
+    ).toBe(
+      "LOCAL_MODEL_REQUEST_REJECTED"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "HTTP status 503: Service Unavailable"
+      )
+    ).toBe(
+      "LOCAL_MODEL_SERVER_ERROR"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "prompt exceeds maximum context window"
+      )
+    ).toBe(
+      "LOCAL_MODEL_CONTEXT_OVERFLOW"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "failed to allocate device memory"
+      )
+    ).toBe(
+      "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "generation stopped unexpectedly"
+      )
+    ).toBe(
+      "LOCAL_MODEL_INFERENCE_FAILED"
+    );
   });
 
   it("registers all supported live providers", () => {
