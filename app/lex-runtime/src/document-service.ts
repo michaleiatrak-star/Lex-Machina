@@ -161,6 +161,10 @@ export interface DocumentService {
     caseDataKey: Buffer;
     keyVersion: number;
   }): Promise<PublicDocumentIngestion>;
+  deanonymize?(
+    documentId: string,
+    text: string
+  ): string;
 }
 
 type PrivateDocumentRecord = {
