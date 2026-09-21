@@ -170,6 +170,87 @@ describe("chat routing", () => {
     expect(encoded).toContain("chronologia-sprawy-v1");
   });
 
+  it("omits execution restriction when every execution skill is selected", () => {
+    const envelope =
+      buildSkillSelectionEnvelope(
+        "Pytanie",
+        true,
+        [],
+        null
+      );
+    const decoded = JSON.parse(
+      envelope
+        .split("\n")[0]!
+        .slice(
+          SKILL_SELECTION_ENVELOPE_PREFIX.length
+        )
+        .trim()
+    ) as Record<string, unknown>;
+
+    expect(
+      decoded.execution
+    ).toBeUndefined();
+  });
+
+  it("encodes deselect-all as an explicit empty execution allow-list", () => {
+    const envelope =
+      buildSkillSelectionEnvelope(
+        "Pytanie",
+        true,
+        [],
+        []
+      );
+    const decoded = JSON.parse(
+      envelope
+        .split("\n")[0]!
+        .slice(
+          SKILL_SELECTION_ENVELOPE_PREFIX.length
+        )
+        .trim()
+    ) as {
+      execution?: string[];
+    };
+
+    expect(
+      decoded.execution
+    ).toEqual([]);
+  });
+
+  it("keeps a deterministic action available when the general execution allow-list is narrowed", () => {
+    setCaseTypeExecutionSkills([
+      "analiza-sadowa-v6"
+    ]);
+    const envelope =
+      buildSkillSelectionEnvelope(
+        "Pytanie",
+        false,
+        [],
+        []
+      );
+    const decoded = JSON.parse(
+      envelope
+        .split("\n")[0]!
+        .slice(
+          SKILL_SELECTION_ENVELOPE_PREFIX.length
+        )
+        .trim()
+    ) as {
+      manual: string[];
+      execution: string[];
+    };
+
+    expect(
+      decoded.manual
+    ).toContain(
+      "analiza-sadowa-v6"
+    );
+    expect(
+      decoded.execution
+    ).toContain(
+      "analiza-sadowa-v6"
+    );
+  });
+
   it("sends no domain restriction when every DR module stays selected", () => {
     setAllowedDomainSkills([]);
     setCaseTypeExecutionSkills([
