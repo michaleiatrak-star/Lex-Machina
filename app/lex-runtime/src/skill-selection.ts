@@ -36,6 +36,9 @@ export type SkillSelectionEnvelope = {
   domainRestrictionActive: boolean;
   executionAllowList: string[];
   executionRestrictionActive: boolean;
+  modelRouted: boolean;
+  workflowExecutionSkill:
+    string | null;
 };
 
 export type ResolvedSkillSelection = {
@@ -125,7 +128,10 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
       domainAllowList: [],
       domainRestrictionActive: false,
       executionAllowList: [],
-      executionRestrictionActive: false
+      executionRestrictionActive: false,
+      modelRouted: false,
+      workflowExecutionSkill:
+        null
     };
   }
 
@@ -138,7 +144,10 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
       domainAllowList: [],
       domainRestrictionActive: false,
       executionAllowList: [],
-      executionRestrictionActive: false
+      executionRestrictionActive: false,
+      modelRouted: false,
+      workflowExecutionSkill:
+        null
     };
   }
 
@@ -172,7 +181,18 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
         safeExecutionAllowList(
           parsed.execution
         ),
-      executionRestrictionActive
+      executionRestrictionActive,
+      modelRouted:
+        parsed.modelRouted ===
+          true,
+      workflowExecutionSkill:
+        typeof parsed.workflow ===
+          "string" &&
+        /^[a-z0-9][a-z0-9._-]{1,159}$/i.test(
+          parsed.workflow
+        )
+          ? parsed.workflow
+          : null
     };
   } catch {
     return {
@@ -182,7 +202,10 @@ export function parseSkillSelectionEnvelope(rawQuery: string): SkillSelectionEnv
       domainAllowList: [],
       domainRestrictionActive: false,
       executionAllowList: [],
-      executionRestrictionActive: false
+      executionRestrictionActive: false,
+      modelRouted: false,
+      workflowExecutionSkill:
+        null
     };
   }
 }
@@ -473,7 +496,9 @@ export function resolveAdditionalSkills(
   domainRestrictionActive =
     domainAllowList.length > 0,
   executionAllowList: readonly string[] = [],
-  executionRestrictionActive = false
+  executionRestrictionActive = false,
+  workflowExecutionSkillOverride:
+    string | null = null
 ): ResolvedSkillSelection {
   // An empty allow-list means every domain stays available, so an older
   // client that does not send the field keeps today's behaviour exactly.
@@ -699,6 +724,19 @@ export function resolveAdditionalSkills(
 
   const additionalSkills = [...selected].slice(0, 12);
   const retained = new Set(additionalSkills);
+
+  if (
+    workflowExecutionSkillOverride &&
+    executionSkills.has(
+      workflowExecutionSkillOverride
+    ) &&
+    retained.has(
+      workflowExecutionSkillOverride
+    )
+  ) {
+    workflowExecutionSkill =
+      workflowExecutionSkillOverride;
+  }
 
   return {
     additionalSkills,
