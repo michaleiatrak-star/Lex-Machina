@@ -12,10 +12,10 @@ import type {
   NormalizedToolSchema
 } from "./providers/types.js";
 
-// 0.1.4 is the latest published PyPI build currently usable by uvx.
+// 0.1.4 is the published build used by the release runtime.
  // The upstream main branch is newer, but installers must not depend on an
- // unpublished package version. Lex supplies the newer coverage contract
- // locally, while the four published unified proxy tools remain upstream.
+ // unpublished package version. Lex supplies the coverage contract locally,
+ // while the four published unified proxy tools remain upstream.
 const AGGREGATOR_PACKAGE =
   "prawo-pl-mcp==0.1.4";
 
@@ -654,6 +654,21 @@ class PrawoPlMcpClient {
     }
   }
 
+  async close():
+    Promise<void> {
+    const client =
+      this.client;
+    this.client = null;
+    this.connecting = null;
+    if (client) {
+      try {
+        await client.close();
+      } catch {
+        // Best-effort shutdown.
+      }
+    }
+  }
+
   async call(
     name: string,
     args:
@@ -734,6 +749,11 @@ export class LegalFederationToolRuntime {
     ].join(
       "\n"
     );
+  }
+
+  async close():
+    Promise<void> {
+    await this.client.close();
   }
 
   auditEvents():
