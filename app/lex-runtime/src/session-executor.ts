@@ -247,7 +247,7 @@ export function publicEvidenceBundle(
 export type SessionExecutionInternalState = {
   verificationRecords: VerificationRecord[];
   auditEvents: AuditEvent[];
-  documentAliasDocumentIds: string[];
+  documentAliasDocumentIds?: string[];
 };
 
 export const SESSION_EXECUTION_INTERNAL =
