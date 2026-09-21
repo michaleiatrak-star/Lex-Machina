@@ -1096,7 +1096,7 @@ export default function MatterChatApp({
     );
   }
 
-  async function connectProviderAccount(): Promise<void> {
+  async function connectProviderAccount(): Promise<boolean> {
     if (
       !isAccountPrimarySource(
         provider
@@ -1104,7 +1104,7 @@ export default function MatterChatApp({
       user.appRole !== "ADMIN" ||
       providerAccountBusy
     ) {
-      return;
+      return false;
     }
     setProviderAccountBusy(true);
     setProviderAccountMessage(
@@ -1124,9 +1124,10 @@ export default function MatterChatApp({
       );
       setProviderAccountMessage(
         status.authenticated
-          ? "Konto połączone. Lex Machina użyje sesji oficjalnego klienta."
+          ? "Konto połączone. Lex Machina automatycznie wznowi zapamiętaną lub ostatnią sesję hosta; jeśli jej nie ma, utworzy nową."
           : "Logowanie zakończone, ale klient nie potwierdził aktywnej sesji."
       );
+      return status.authenticated;
     } catch (error) {
       setProviderAccountMessage(
         error instanceof Error
@@ -1135,6 +1136,7 @@ export default function MatterChatApp({
       );
       await refreshProviderAccountStatus()
         .catch(() => {});
+      return false;
     } finally {
       setProviderAccountBusy(false);
     }
@@ -1224,13 +1226,42 @@ export default function MatterChatApp({
       !caseId ||
       selectedCase?.archivedAt ||
       !runtimeOnline ||
+      !model
+    ) return;
+
+    let readyAccount =
+      accountAuthenticated;
+    if (
+      isAccountPrimarySource(
+        provider
+      ) &&
+      !readyAccount
+    ) {
+      const connected =
+        await connectProviderAccount();
+      if (!connected) {
+        setExecutionError(
+          user.appRole === "ADMIN"
+            ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie dostawcy i spróbuj ponownie."
+            : "Wybrane konto dostawcy nie jest zalogowane. Połączenie konta wymaga administratora aplikacji."
+        );
+        return;
+      }
+      readyAccount = true;
+    }
+
+    if (
       !canExecutePrimaryModel(
         providerConfigured,
         model,
-        accountAuthenticated
-      ) ||
-      !model
-    ) return;
+        readyAccount
+      )
+    ) {
+      setExecutionError(
+        "Wybrany model nie jest jeszcze gotowy do użycia."
+      );
+      return;
+    }
 
     const route = choosePrimaryRoute(plain, routes, skills, manualSkills);
     if (!route) return;
@@ -1406,12 +1437,22 @@ export default function MatterChatApp({
     }
   }
 
+  const accountCanLoginInline =
+    isAccountPrimarySource(
+      provider
+    ) &&
+    user.appRole === "ADMIN" &&
+    accountSession?.installed !== false;
+
   const canSend =
     runtimeOnline &&
-    canExecutePrimaryModel(
-      providerConfigured,
-      model,
-      accountAuthenticated
+    (
+      canExecutePrimaryModel(
+        providerConfigured,
+        model,
+        accountAuthenticated
+      ) ||
+      accountCanLoginInline
     ) &&
     Boolean(model) &&
     Boolean(query.trim()) &&
@@ -1580,6 +1621,28 @@ export default function MatterChatApp({
                         </option>
                       ))}
                     </select>
+                    {isAccountPrimarySource(provider) &&
+                    !accountAuthenticated ? (
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={
+                          executing ||
+                          providerAccountBusy ||
+                          user.appRole !== "ADMIN" ||
+                          accountSession?.installed === false
+                        }
+                        onClick={() =>
+                          void connectProviderAccount()
+                        }
+                      >
+                        {providerAccountBusy
+                          ? "Logowanie…"
+                          : accountSession?.installed === false
+                            ? "Brak klienta"
+                            : "Zaloguj"}
+                      </button>
+                    ) : null}
                   </div>
                 </label>
                 <div className="chat-aux-model-chip">
@@ -2569,7 +2632,9 @@ export default function MatterChatApp({
                       : runtimeProvider === "anthropic"
                         ? " Claude Code"
                         : " Grok Build"}.
-                    Token OAuth nie jest kopiowany do interfejsu aplikacji.
+                    Jeżeli sesja istnieje, program wznawia ją automatycznie; jeżeli nie,
+                    tworzy nową. Token OAuth nie jest kopiowany do interfejsu aplikacji,
+                    a narzędzia hosta pozostają wyłączone.
                   </p>
                   <small>
                     {accountSession

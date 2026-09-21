@@ -975,9 +975,23 @@ export class LocalModelRuntime {
     const recommendedProfiles = Array.isArray(policy?.recommendedProfiles)
       ? policy.recommendedProfiles.filter(finiteInteger)
       : [64_000, 96_000, 128_000, 160_000, 200_000];
+    const fallbackDefault =
+      Math.min(
+        maximum,
+        Math.max(
+          minimum,
+          128_000
+        )
+      );
     const defaultContext = finiteInteger(policy?.default)
-      ? policy.default
-      : minimum;
+      ? Math.min(
+          maximum,
+          Math.max(
+            minimum,
+            policy.default
+          )
+        )
+      : fallbackDefault;
     return {
       minimum,
       maximum,
@@ -3510,9 +3524,23 @@ export class LocalModelRuntime {
           ? savedProfile
           : null
       );
-    const minimum = model.minimumContext ?? this.contextPolicy().minimum;
-    const maximum = model.maximumRuntimeContext ?? model.nativeContext;
-    const contextWindow = profile?.context.requestedTokens ?? Math.max(minimum, model.nativeContext);
+    const contextPolicy =
+      this.contextPolicy();
+    const minimum =
+      model.minimumContext ??
+      contextPolicy.minimum;
+    const maximum =
+      model.maximumRuntimeContext ??
+      model.nativeContext;
+    const contextWindow =
+      profile?.context.requestedTokens ??
+      Math.min(
+        maximum,
+        Math.max(
+          minimum,
+          contextPolicy.default
+        )
+      );
     return {
       provider: "local",
       id: canonical,

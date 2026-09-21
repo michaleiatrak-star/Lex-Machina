@@ -132,6 +132,7 @@ export type SessionExecutionRequest = {
   documentAttachments?: SessionDocumentAttachment[];
   provider: ProviderId;
   model: string;
+  accountSessionKey?: string;
   modelRouting?: {
     primary: {
       provider: ProviderId;
@@ -740,6 +741,12 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(documentContext ? { documentContext } : {}),
       provider: request.provider,
       model: request.model,
+      ...(request.accountSessionKey
+        ? {
+            continuityKey:
+              request.accountSessionKey
+          }
+        : {}),
       route: {
         jurisdiction: "PL",
         primarySkill: request.primarySkill,

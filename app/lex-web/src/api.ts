@@ -534,6 +534,7 @@ export type ProviderAccountSessionStatus = {
   installed: boolean;
   authenticated: boolean;
   installHint: string;
+  resumeMode: "LAST_OR_NEW";
 };
 
 export type ProviderAccountStatusResponse = {

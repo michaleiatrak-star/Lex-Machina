@@ -1,4 +1,6 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { createHash } from "node:crypto";
+import type { Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -28,12 +30,565 @@ const CLI_NAMES: Record<ProviderId, string> = {
   xai: "grok"
 };
 
+const ACCOUNT_SESSION_RESUME_MODE = "LAST_OR_NEW" as const;
+
+export function accountSessionResumeMode(): typeof ACCOUNT_SESSION_RESUME_MODE {
+  return ACCOUNT_SESSION_RESUME_MODE;
+}
+
+export function isMissingResumableSessionMessage(
+  value: string
+): boolean {
+  const normalized = value
+    .toLocaleLowerCase("en")
+    .replace(/[\r\n]+/g, " ");
+  return [
+    "no session",
+    "no saved session",
+    "no previous session",
+    "no resumable session",
+    "no conversation",
+    "no previous conversation",
+    "unknown session",
+    "session not found",
+    "session does not exist",
+    "no matching session",
+    "conversation not found"
+  ].some((needle) =>
+    normalized.includes(needle)
+  );
+}
+
+function accountSessionStateRoot(): string {
+  const configured =
+    process.env
+      .LEX_ACCOUNT_SESSION_STATE_ROOT
+      ?.trim();
+  return configured
+    ? path.resolve(configured)
+    : path.resolve(
+        os.homedir(),
+        ".lex-machina",
+        "account-sessions"
+      );
+}
+
+function claudeSessionsRoot(): string {
+  const configured =
+    process.env
+      .LEX_CLAUDE_SESSIONS_ROOT
+      ?.trim();
+  return configured
+    ? path.resolve(configured)
+    : path.resolve(
+        os.homedir(),
+        ".claude",
+        "projects"
+      );
+}
+
+export async function discoverLatestClaudeSessionId(): Promise<string | null> {
+  let projects: Dirent[];
+  try {
+    projects =
+      await fsp.readdir(
+        claudeSessionsRoot(),
+        {
+          withFileTypes: true
+        }
+      );
+  } catch {
+    return null;
+  }
+
+  let best:
+    | {
+        id: string;
+        mtimeMs: number;
+      }
+    | null = null;
+
+  for (
+    const project
+    of projects
+      .filter(
+        (entry) =>
+          entry.isDirectory()
+      )
+      .slice(0, 2_000)
+  ) {
+    const projectRoot =
+      path.join(
+        claudeSessionsRoot(),
+        project.name
+      );
+    let entries: Dirent[];
+    try {
+      entries =
+        await fsp.readdir(
+          projectRoot,
+          {
+            withFileTypes: true
+          }
+        );
+    } catch {
+      continue;
+    }
+
+    for (
+      const entry
+      of entries.slice(0, 10_000)
+    ) {
+      if (
+        !entry.isFile() ||
+        !entry.name.endsWith(
+          ".jsonl"
+        )
+      ) {
+        continue;
+      }
+      const id =
+        entry.name.slice(
+          0,
+          -".jsonl".length
+        );
+      if (
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+          id
+        )
+      ) {
+        continue;
+      }
+      try {
+        const stat =
+          await fsp.stat(
+            path.join(
+              projectRoot,
+              entry.name
+            )
+          );
+        if (
+          !best ||
+          stat.mtimeMs >
+            best.mtimeMs
+        ) {
+          best = {
+            id,
+            mtimeMs:
+              stat.mtimeMs
+          };
+        }
+      } catch {
+        // A session may disappear during cleanup; skip it.
+      }
+    }
+  }
+  return best?.id ?? null;
+}
+
+function grokSessionsRoot(): string {
+  const configured =
+    process.env
+      .LEX_GROK_SESSIONS_ROOT
+      ?.trim();
+  if (configured) {
+    return path.resolve(
+      configured
+    );
+  }
+  const grokHome =
+    process.env
+      .GROK_HOME
+      ?.trim();
+  return grokHome
+    ? path.resolve(
+        grokHome,
+        "sessions"
+      )
+    : path.resolve(
+        os.homedir(),
+        ".grok",
+        "sessions"
+      );
+}
+
+function uuidFromName(
+  value: string
+): string | null {
+  const match =
+    value.match(
+      /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i
+    );
+  return match?.[0] ?? null;
+}
+
+export async function discoverLatestGrokSessionId(): Promise<string | null> {
+  const root =
+    grokSessionsRoot();
+  let best:
+    | {
+        id: string;
+        mtimeMs: number;
+      }
+    | null = null;
+  let visited = 0;
+
+  const walk = async (
+    current: string,
+    depth: number
+  ): Promise<void> => {
+    if (
+      depth > 4 ||
+      visited >= 20_000
+    ) {
+      return;
+    }
+    let entries: Dirent[];
+    try {
+      entries =
+        await fsp.readdir(
+          current,
+          {
+            withFileTypes: true
+          }
+        );
+    } catch {
+      return;
+    }
+
+    for (
+      const entry
+      of entries
+    ) {
+      if (
+        visited >= 20_000
+      ) {
+        return;
+      }
+      visited += 1;
+      const fullPath =
+        path.join(
+          current,
+          entry.name
+        );
+      const id =
+        uuidFromName(
+          entry.name
+        );
+      if (id) {
+        try {
+          const stat =
+            await fsp.stat(
+              fullPath
+            );
+          if (
+            !best ||
+            stat.mtimeMs >
+              best.mtimeMs
+          ) {
+            best = {
+              id,
+              mtimeMs:
+                stat.mtimeMs
+            };
+          }
+        } catch {
+          // Session entry can disappear during cleanup.
+        }
+      }
+      if (
+        entry.isDirectory()
+      ) {
+        await walk(
+          fullPath,
+          depth + 1
+        );
+      }
+    }
+  };
+
+  await walk(
+    root,
+    0
+  );
+  const resolved =
+    best as
+      | {
+          id: string;
+          mtimeMs: number;
+        }
+      | null;
+  return resolved?.id ?? null;
+}
+
+function continuityFingerprint(
+  continuityKey: string
+): string {
+  return createHash("sha256")
+    .update(
+      continuityKey,
+      "utf8"
+    )
+    .digest("hex")
+    .slice(0, 24);
+}
+
+function accountSessionStatePath(
+  provider: ProviderId,
+  continuityKey?: string
+): string {
+  const suffix =
+    continuityKey
+      ? "-" +
+        continuityFingerprint(
+          continuityKey
+        )
+      : "";
+  return path.join(
+    accountSessionStateRoot(),
+    provider +
+      suffix +
+      ".json"
+  );
+}
+
+async function hasPinnedAccountSession(
+  provider: ProviderId
+): Promise<boolean> {
+  try {
+    const entries =
+      await fsp.readdir(
+        accountSessionStateRoot(),
+        {
+          withFileTypes: true
+        }
+      );
+    return entries.some(
+      (entry) =>
+        entry.isFile() &&
+        entry.name.startsWith(
+          provider + "-"
+        ) &&
+        entry.name.endsWith(
+          ".json"
+        )
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function readAccountSessionId(
+  provider: ProviderId,
+  continuityKey?: string
+): Promise<string | null> {
+  try {
+    const raw =
+      await fsp.readFile(
+        accountSessionStatePath(
+          provider,
+          continuityKey
+        ),
+        "utf8"
+      );
+    const parsed =
+      JSON.parse(raw) as {
+        sessionId?: unknown;
+      };
+    if (
+      typeof parsed.sessionId ===
+        "string" &&
+      /^[A-Za-z0-9_.:-]{8,256}$/.test(
+        parsed.sessionId
+      )
+    ) {
+      return parsed.sessionId;
+    }
+  } catch {
+    // Missing or stale local continuity metadata is equivalent to no session.
+  }
+  return null;
+}
+
+async function writeAccountSessionId(
+  provider: ProviderId,
+  sessionId: string,
+  continuityKey?: string
+): Promise<void> {
+  if (
+    !/^[A-Za-z0-9_.:-]{8,256}$/.test(
+      sessionId
+    )
+  ) {
+    return;
+  }
+  const root =
+    accountSessionStateRoot();
+  await fsp.mkdir(
+    root,
+    {
+      recursive: true
+    }
+  );
+  await fsp.writeFile(
+    accountSessionStatePath(
+      provider,
+      continuityKey
+    ),
+    JSON.stringify(
+      {
+        schemaVersion: 2,
+        provider,
+        sessionId,
+        ...(continuityKey
+          ? {
+              continuityHash:
+                continuityFingerprint(
+                  continuityKey
+                )
+            }
+          : {}),
+        updatedAt:
+          new Date().toISOString()
+      },
+      null,
+      2
+    ) + "\n",
+    {
+      encoding: "utf8",
+      mode: 0o600
+    }
+  );
+}
+
+async function clearAccountSessionId(
+  provider: ProviderId,
+  continuityKey?: string
+): Promise<void> {
+  await fsp.rm(
+    accountSessionStatePath(
+      provider,
+      continuityKey
+    ),
+    {
+      force: true
+    }
+  ).catch(() => {});
+}
+
+function parseCodexThreadId(
+  stdout: string
+): string | null {
+  for (
+    const line
+    of stdout.split(/\r?\n/)
+  ) {
+    try {
+      const event =
+        JSON.parse(line) as {
+          type?: unknown;
+          thread_id?: unknown;
+        };
+      if (
+        event.type ===
+          "thread.started" &&
+        typeof event.thread_id ===
+          "string" &&
+        event.thread_id
+      ) {
+        return event.thread_id;
+      }
+    } catch {
+      // Non-JSON lines are ignored.
+    }
+  }
+  return null;
+}
+
+function parseCodexFinalText(
+  stdout: string
+): string | null {
+  let finalText = "";
+  for (
+    const line
+    of stdout.split(/\r?\n/)
+  ) {
+    try {
+      const event =
+        JSON.parse(line) as {
+          type?: unknown;
+          item?: unknown;
+        };
+      if (
+        event.type !==
+          "item.completed" ||
+        !event.item ||
+        typeof event.item !==
+          "object" ||
+        Array.isArray(event.item)
+      ) {
+        continue;
+      }
+      const item =
+        event.item as
+          Record<string, unknown>;
+      if (
+        item.type ===
+          "agent_message" &&
+        typeof item.text ===
+          "string" &&
+        item.text.trim()
+      ) {
+        finalText =
+          item.text.trim();
+      }
+    } catch {
+      // Non-JSON lines are ignored.
+    }
+  }
+  return finalText || null;
+}
+
+function parseClaudeResult(
+  stdout: string
+): {
+  text: string;
+  sessionId: string | null;
+} | null {
+  try {
+    const payload =
+      JSON.parse(stdout) as {
+        result?: unknown;
+        session_id?: unknown;
+      };
+    const text =
+      typeof payload.result ===
+        "string"
+        ? payload.result.trim()
+        : "";
+    if (!text) return null;
+    const sessionId =
+      typeof payload.session_id ===
+        "string" &&
+      payload.session_id
+        ? payload.session_id
+        : null;
+    return {
+      text,
+      sessionId
+    };
+  } catch {
+    return null;
+  }
+}
+
 export type ProviderAccountSessionStatus = {
   provider: ProviderId;
   command: string;
   installed: boolean;
   authenticated: boolean;
   installHint: string;
+  resumeMode: typeof ACCOUNT_SESSION_RESUME_MODE;
 };
 
 type RunResult = {
@@ -341,10 +896,12 @@ async function assertSubscriptionAccount(
 async function runGrokAcp(
   prompt: string | null,
   cwd: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  resumeSessionId?: string | null
 ): Promise<{
   authenticated: boolean;
   text?: string;
+  sessionId?: string;
 }> {
   const executable =
     await resolveCommand(
@@ -370,6 +927,8 @@ async function runGrokAcp(
         "--no-subagents",
         "--no-memory",
         "--disable-web-search",
+        "--system-prompt-override",
+        "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. Do not access local files, external services or host tools.",
         "agent",
         "stdio"
       ],
@@ -432,6 +991,7 @@ async function runGrokAcp(
       value: {
         authenticated: boolean;
         text?: string;
+        sessionId?: string;
       }
     ) => {
       if (settled) return;
@@ -733,20 +1293,62 @@ async function runGrokAcp(
         return;
       }
 
-      const session =
-        await request(
-          "session/new",
-          {
-            cwd,
-            mcpServers:
-              []
-          }
-        );
-      const sessionId =
-        typeof session.sessionId ===
-          "string"
-          ? session.sessionId
-          : "";
+      const agentCapabilities =
+        init.agentCapabilities &&
+        typeof init.agentCapabilities ===
+          "object" &&
+        !Array.isArray(
+          init.agentCapabilities
+        )
+          ? init.agentCapabilities as
+              Record<string, unknown>
+          : null;
+      const supportsSessionLoad =
+        agentCapabilities
+          ?.loadSession === true;
+
+      let sessionId = "";
+      if (
+        resumeSessionId &&
+        supportsSessionLoad
+      ) {
+        try {
+          await request(
+            "session/load",
+            {
+              sessionId:
+                resumeSessionId,
+              cwd,
+              mcpServers:
+                []
+            },
+            STATUS_TIMEOUT_MS
+          );
+          sessionId =
+            resumeSessionId;
+          text = "";
+        } catch {
+          // Older ACP builds or stale IDs fall back to a fresh session.
+          sessionId = "";
+        }
+      }
+
+      if (!sessionId) {
+        const session =
+          await request(
+            "session/new",
+            {
+              cwd,
+              mcpServers:
+                []
+            }
+          );
+        sessionId =
+          typeof session.sessionId ===
+            "string"
+            ? session.sessionId
+            : "";
+      }
       if (!sessionId) {
         throw new Error(
           "ACCOUNT_SESSION_ACP_SESSION_INVALID"
@@ -804,7 +1406,8 @@ async function runGrokAcp(
         authenticated:
           true,
         text:
-          finalText
+          finalText,
+        sessionId
       });
       } catch (error) {
         finishReject(
@@ -931,6 +1534,8 @@ function buildAccountPrompt(
   return [
     "You are the semantic model inside Lex Machina.",
     "The application, not this CLI, owns privacy gates, legal-source verification and tool execution.",
+    "A resumed host session is continuity context only. Never reuse, reveal or infer facts from earlier host-session turns unless those facts are also present in the current Lex Machina request.",
+    "Current Lex Machina system instructions and conversation override any earlier host-session instructions.",
     toolProtocol,
     "",
     "SYSTEM:",
@@ -962,7 +1567,8 @@ export class AccountSessionManager {
         command,
         installed: false,
         authenticated: false,
-        installHint: installHint(provider)
+        installHint: installHint(provider),
+        resumeMode: accountSessionResumeMode()
       };
     }
 
@@ -1045,7 +1651,8 @@ export class AccountSessionManager {
       command,
       installed: true,
       authenticated,
-      installHint: installHint(provider)
+      installHint: installHint(provider),
+      resumeMode: accountSessionResumeMode()
     };
   }
 
@@ -1080,13 +1687,18 @@ export class AccountSessionManager {
   async runText(
     provider: ProviderId,
     prompt: string,
-    abortSignal?: AbortSignal
+    abortSignal?: AbortSignal,
+    continuityKey?: string
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
     );
+    const allowExternalTakeover =
+      !continuityKey ||
+      !await hasPinnedAccountSession(
+        provider
+      );
     try {
-      let result: RunResult;
       if (
         provider === "openai" ||
         provider === "anthropic"
@@ -1099,93 +1711,391 @@ export class AccountSessionManager {
 
       if (provider === "openai") {
         const outputPath =
-          path.join(workDir, "last-message.txt");
-        result = await runCli(
-          provider,
-          [
-            "exec",
-            "--ephemeral",
-            "--ignore-user-config",
-            "--sandbox",
-            "read-only",
-            "--skip-git-repo-check",
-            "--cd",
+          path.join(
             workDir,
-            "--output-last-message",
-            outputPath,
-            "-"
-          ],
-          prompt,
-          COMMAND_TIMEOUT_MS,
+            "last-message.txt"
+          );
+        const commonArgs = [
+          "exec",
+          "--ignore-user-config",
+          "--ignore-rules",
+          "--config",
+          "mcp_servers={}",
+          "--config",
+          "features.plugins=false",
+          "--config",
+          "features.shell_tool=false",
+          "--config",
+          "features.unified_exec=false",
+          "--config",
+          "features.multi_agent=false",
+          "--config",
+          "features.apps=false",
+          "--config",
+          "features.hooks=false",
+          "--config",
+          "features.remote_plugin=false",
+          "--config",
+          "web_search=\"disabled\"",
+          "--config",
+          "tools.view_image=false",
+          "--sandbox",
+          "read-only",
+          "--skip-git-repo-check",
+          "--cd",
           workDir,
-          abortSignal
-        );
-        if (result.code !== 0) {
-          throw normalizeCliFailure(provider, result);
+          "--json",
+          "--output-last-message",
+          outputPath
+        ];
+        const runCodex = (
+          tail: string[]
+        ) =>
+          runCli(
+            provider,
+            [
+              ...commonArgs,
+              ...tail
+            ],
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            workDir,
+            abortSignal
+          );
+
+        let result:
+          RunResult | null = null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+        if (savedSessionId) {
+          result =
+            await runCodex([
+              "resume",
+              savedSessionId,
+              "-"
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider,
+                continuityKey
+              );
+              result = null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
         }
+
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
+          const last =
+            await runCodex([
+              "resume",
+              "--last",
+              "--all",
+              "-"
+            ]);
+          if (
+            last.code === 0
+          ) {
+            result = last;
+          } else {
+            const detail =
+              last.stderr +
+              "\n" +
+              last.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                last
+              );
+            }
+          }
+        }
+        if (!result) {
+          result =
+            await runCodex([
+              "-"
+            ]);
+        }
+
+        if (result.code !== 0) {
+          throw normalizeCliFailure(
+            provider,
+            result
+          );
+        }
+        const threadId =
+          parseCodexThreadId(
+            result.stdout
+          );
+        if (threadId) {
+          await writeAccountSessionId(
+            provider,
+            threadId,
+            continuityKey
+          );
+        }
+
         try {
           const finalText =
-            await fsp.readFile(outputPath, "utf8");
+            await fsp.readFile(
+              outputPath,
+              "utf8"
+            );
           if (finalText.trim()) {
             return finalText.trim();
           }
         } catch {
-          // Fall back to stdout below.
+          // Fall through to JSONL parsing.
         }
-      } else if (provider === "anthropic") {
-        const fixedQuery =
-          "Treat all piped stdin content as the complete Lex Machina request. Follow that request and return only the requested response. Do not access local files or use local tools.";
-        result = await runCli(
-          provider,
-          [
-            "-p",
-            fixedQuery,
-            "--output-format",
-            "text",
-            "--bare",
-            "--disallowedTools",
-            "*",
-            "--no-session-persistence"
-          ],
-          prompt,
-          COMMAND_TIMEOUT_MS,
-          workDir,
-          abortSignal
+        const finalText =
+          parseCodexFinalText(
+            result.stdout
+          );
+        if (finalText) {
+          return finalText;
+        }
+        throw new Error(
+          "ACCOUNT_SESSION_EMPTY_RESPONSE:openai"
         );
-        if (result.code !== 0) {
-          throw normalizeCliFailure(provider, result);
-        }
-      } else {
-        const grok =
-          await runGrokAcp(
-            prompt,
-            workDir,
-            abortSignal
-          );
-        if (
-          !grok.authenticated
-        ) {
-          throw new Error(
-            "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
-          );
-        }
-        if (
-          !grok.text
-        ) {
-          throw new Error(
-            "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
-          );
-        }
-        return grok.text;
       }
 
-      const text = result.stdout.trim();
-      if (!text) {
+      if (
+        provider ===
+          "anthropic"
+      ) {
+        const fixedQuery =
+          "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
+        const lexSystemPrompt =
+          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
+        const commonArgs = [
+          "-p",
+          fixedQuery,
+          "--output-format",
+          "json",
+          "--bare",
+          "--restricted",
+          "--tools",
+          "",
+          "--disallowedTools",
+          "mcp__*",
+          "--system-prompt",
+          lexSystemPrompt,
+          "--system-prompt-snapshot",
+          "off"
+        ];
+        const hostCwd =
+          process.cwd();
+        const runClaude = (
+          tail: string[]
+        ) =>
+          runCli(
+            provider,
+            [
+              ...commonArgs,
+              ...tail
+            ],
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            hostCwd,
+            abortSignal
+          );
+
+        let result:
+          RunResult | null = null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+        if (savedSessionId) {
+          result =
+            await runClaude([
+              "--resume",
+              savedSessionId
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider,
+                continuityKey
+              );
+              result = null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
+        }
+
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
+          const last =
+            await runClaude([
+              "--continue"
+            ]);
+          if (
+            last.code === 0
+          ) {
+            result = last;
+          } else {
+            const detail =
+              last.stderr +
+              "\n" +
+              last.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                last
+              );
+            }
+            const discoveredSessionId =
+              await discoverLatestClaudeSessionId();
+            if (
+              discoveredSessionId
+            ) {
+              const discovered =
+                await runClaude([
+                  "--resume",
+                  discoveredSessionId
+                ]);
+              if (
+                discovered.code === 0
+              ) {
+                result =
+                  discovered;
+              } else {
+                const discoveredDetail =
+                  discovered.stderr +
+                  "\n" +
+                  discovered.stdout;
+                if (
+                  !isMissingResumableSessionMessage(
+                    discoveredDetail
+                  )
+                ) {
+                  throw normalizeCliFailure(
+                    provider,
+                    discovered
+                  );
+                }
+              }
+            }
+          }
+        }
+        if (!result) {
+          result =
+            await runClaude([]);
+        }
+
+        if (result.code !== 0) {
+          throw normalizeCliFailure(
+            provider,
+            result
+          );
+        }
+        const parsed =
+          parseClaudeResult(
+            result.stdout
+          );
+        if (!parsed) {
+          throw new Error(
+            "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
+          );
+        }
+        if (parsed.sessionId) {
+          await writeAccountSessionId(
+            provider,
+            parsed.sessionId,
+            continuityKey
+          );
+        }
+        return parsed.text;
+      }
+
+      const savedSessionId =
+        await readAccountSessionId(
+          provider,
+          continuityKey
+        );
+      const resumeSessionId =
+        savedSessionId ??
+        (
+          allowExternalTakeover
+            ? await discoverLatestGrokSessionId()
+            : null
+        );
+      const grok =
+        await runGrokAcp(
+          prompt,
+          workDir,
+          abortSignal,
+          resumeSessionId
+        );
+      if (
+        !grok.authenticated
+      ) {
         throw new Error(
-          `ACCOUNT_SESSION_EMPTY_RESPONSE:${provider}`
+          "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
         );
       }
-      return text;
+      if (
+        !grok.text
+      ) {
+        throw new Error(
+          "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+        );
+      }
+      if (grok.sessionId) {
+        await writeAccountSessionId(
+          provider,
+          grok.sessionId,
+          continuityKey
+        );
+      }
+      return grok.text;
     } finally {
       await fsp.rm(
         workDir,
@@ -1195,6 +2105,7 @@ export class AccountSessionManager {
         }
       ).catch(() => {});
     }
+
   }
 }
 
@@ -1228,7 +2139,8 @@ export async function streamAccountSession(
         params,
         toolTranscript
       ),
-      params.abortSignal
+      params.abortSignal,
+      params.continuityKey
     );
     const calls =
       parseToolCalls(output);

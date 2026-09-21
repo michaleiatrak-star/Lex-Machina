@@ -6006,6 +6006,13 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       return;
     }
 
+    if (
+      knowledge.caseId
+    ) {
+      request.accountSessionKey =
+        knowledge.caseId;
+    }
+
     const route = routing.validate(request.primarySkill);
     if (!route.valid) {
       res.status(422).json({
