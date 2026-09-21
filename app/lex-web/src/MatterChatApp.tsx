@@ -163,10 +163,6 @@ const PRIMARY_MODEL_SOURCES: Array<{
     label: "OpenAI · API"
   },
   {
-    id: "anthropic-account",
-    label: "Claude · konto"
-  },
-  {
     id: "anthropic",
     label: "Anthropic · API"
   },
@@ -3304,6 +3300,13 @@ export default function MatterChatApp({
                 </>
               ) : user.appRole === "ADMIN" ? (
                 <>
+                  {runtimeProvider === "anthropic" ? (
+                    <p className="chat-inline-warning">
+                      Lex Machina używa Claude przez oficjalny Anthropic API.
+                      Logowanie Claude Code pozostaje sesją oficjalnego klienta
+                      Anthropic i nie jest używane jako backend Lex Machina.
+                    </p>
+                  ) : null}
                   <input
                     type="password"
                     autoComplete="off"
