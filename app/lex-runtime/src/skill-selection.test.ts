@@ -117,6 +117,14 @@ function registryWithSkills(): LexSkillRegistry {
       "Integracje między-skillowe:",
       "- chronologia-sprawy-v1",
       "- raport-klienta-v1"
+    ].join("\n"),
+    "przewodnik-prawny-v2": [
+      "Opcjonalne kolejne kroki:",
+      "- analiza-sadowa-v6",
+      "- analizator-dowodow-v3",
+      "- pisma-procesowe-v3",
+      "- pisma-proste-v2",
+      "- raport-sytuacyjny-v2"
     ].join("\n")
   };
 
@@ -550,7 +558,14 @@ describe("skill selection", () => {
       []
     );
 
-    expect(selected.executionSkills).toContain("przewodnik-prawny-v2");
+    expect(
+      selected.executionSkills
+    ).toEqual([
+      "przewodnik-prawny-v2"
+    ]);
+    expect(
+      selected.workflowExecutionSkill
+    ).toBeNull();
   });
 
   it("ignores unknown manual skill names when automatic mode is disabled", () => {
