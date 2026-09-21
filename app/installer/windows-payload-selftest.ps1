@@ -23,6 +23,7 @@ function Require-Dir([string]$Relative) {
 $node = Require-File "node\node.exe"
 $python = Require-File "python\python.exe"
 $server = Require-File "app\dist\http\server.js"
+$codex = Require-File "app\node_modules\.bin\codex.cmd"
 $sidecar = Require-File "lex-runtime-sidecar.exe"
 $lockPath = Require-File "component-lock.json"
 $appUpdateTransaction = Require-File "bootstrap\app-update-transaction.ps1"
@@ -45,6 +46,13 @@ if ($LASTEXITCODE -ne 0) {
 
 & $node --version | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_NODE_FAILED" }
+
+$codexVersion = (& $codex --version 2>&1 | Out-String).Trim()
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_CODEX_CLI_FAILED" }
+if ($codexVersion -notmatch '0\.154\.0') {
+  throw "SELFTEST_CODEX_CLI_VERSION_MISMATCH:$codexVersion"
+}
+Write-Host "SELFTEST_CODEX_CLI_PASS:$codexVersion"
 
 & $python $pythonSelftest core | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_CORE_IMPORT_FAILED" }
