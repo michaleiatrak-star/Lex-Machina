@@ -52,6 +52,9 @@ const checks = {
       'const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential"'
     ) &&
     trust.includes(
+      'const ACCOUNT_OAUTH_KEYRING_SERVICE: &str = "LexMachina/AccountOAuthCredential"'
+    ) &&
+    trust.includes(
       "Entry::new("
     ),
   restoreOnEveryAuthenticatedSession:
@@ -74,6 +77,19 @@ const checks = {
     ) &&
     runtimeCredentials.includes(
       "class MemoryOverlayCredentialResolver"
+    ),
+  claudeOAuthRestoredSeparately:
+    trust.includes(
+      '"/api/admin/provider-accounts/anthropic/oauth-token"'
+    ) &&
+    trust.includes(
+      "restore_account_oauth_body"
+    ) &&
+    trust.includes(
+      "persist_account_oauth_credential"
+    ) &&
+    trust.includes(
+      "delete_account_oauth_credential"
     ),
   persistOnlyAfterRuntimeSuccess:
     trust.includes(
