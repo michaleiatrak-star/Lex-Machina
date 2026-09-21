@@ -637,6 +637,29 @@ async function persistWorkflowAuditArtifact(
 }
 
 
+function safeDiagnosticText(
+  value: unknown
+): string {
+  const raw =
+    value instanceof Error
+      ? `${value.name}: ${value.message}`
+      : String(value);
+  return raw
+    .replace(
+      /Bearer\s+[A-Za-z0-9._~+\/-]+=*/gi,
+      "Bearer [REDACTED]"
+    )
+    .replace(
+      /\bsk-[A-Za-z0-9_-]{8,}\b/g,
+      "sk-[REDACTED]"
+    )
+    .replace(
+      /(api[_-]?key\s*[:=]\s*)[^\s,;]+/gi,
+      "$1[REDACTED]"
+    )
+    .slice(0, 2000);
+}
+
 function sendReauthorizationError(
   res: Response,
   error: unknown
@@ -9252,11 +9275,52 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 }
               ).target
             : "UNKNOWN_LEGAL_WORKFLOW_GATE";
+        const executionError =
+          error as Error & {
+            events?: Array<{
+              sequence?: number;
+              type?: string;
+              target?: string;
+              status?: string;
+              detail?: string;
+            }>;
+          };
         res.status(422).json({
           error:
             "LEGAL_WORKFLOW_EXECUTION_FAILED",
           reason:
-            target
+            target,
+          stage:
+            target,
+          description:
+            safeDiagnosticText(
+              error
+            ),
+          trace:
+            Array.isArray(
+              executionError.events
+            )
+              ? executionError.events
+                  .slice(-24)
+                  .map((event) => ({
+                    sequence:
+                      event.sequence,
+                    type:
+                      event.type,
+                    target:
+                      event.target,
+                    status:
+                      event.status,
+                    ...(event.detail
+                      ? {
+                          detail:
+                            safeDiagnosticText(
+                              event.detail
+                            )
+                        }
+                      : {})
+                  }))
+              : []
         });
         return;
       }
@@ -9301,7 +9365,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           : String(error)
       );
       res.status(500).json({
-        error: "SESSION_EXECUTION_FAILED"
+        error: "SESSION_EXECUTION_FAILED",
+        description:
+          safeDiagnosticText(
+            error
+          )
       });
     }
   });
