@@ -977,7 +977,10 @@ export class LocalModelRuntime {
       : [64_000, 96_000, 128_000, 160_000, 200_000];
     const defaultContext = finiteInteger(policy?.default)
       ? policy.default
-      : minimum;
+      : Math.min(
+          maximum,
+          Math.max(minimum, 128_000)
+        );
     return {
       minimum,
       maximum,
