@@ -9,7 +9,8 @@ import {
   localChatBudget,
   createLiveProviderRegistry,
   parseLocalSseLine,
-  parseLocalToolCalls
+  parseLocalToolCalls,
+  readLocalSse
 } from "../src/providers/ai-sdk-adapter.js";
 import {
   MissingProviderCredentialError,
@@ -175,6 +176,74 @@ describe("AiSdkProviderAdapter", () => {
         'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}'
       )
     ).toBe(false);
+  });
+
+  it("finishes a Mistral SSE response even when the HTTP stream stays open after stop", async () => {
+    const encoder =
+      new TextEncoder();
+    let controllerRef:
+      ReadableStreamDefaultController<
+        Uint8Array
+      > | null = null;
+    const body =
+      new ReadableStream<
+        Uint8Array
+      >({
+        start(controller) {
+          controllerRef =
+            controller;
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}\n\n'
+            )
+          );
+          controller.enqueue(
+            encoder.encode(
+              'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}]}\n\n'
+            )
+          );
+          // Intentionally do not close the stream. This reproduces a local
+          // llama.cpp/Mistral keep-alive connection after the terminal frame.
+        },
+        cancel() {
+          controllerRef =
+            null;
+        }
+      });
+
+    const result =
+      await Promise.race([
+        readLocalSse(
+          new Response(
+            body,
+            {
+              status: 200,
+              headers: {
+                "content-type":
+                  "text/event-stream"
+              }
+            }
+          )
+        ),
+        new Promise<string>(
+          (_, reject) => {
+            setTimeout(
+              () =>
+                reject(
+                  new Error(
+                    "MISTRAL_SSE_DID_NOT_FINISH"
+                  )
+                ),
+              500
+            );
+          }
+        )
+      ]);
+
+    expect(result).toBe("OK");
+    expect(
+      controllerRef
+    ).toBeNull();
   });
 
   it("budgets local output against a 64k qualified context without logging prompt content", () => {
