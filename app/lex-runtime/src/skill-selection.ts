@@ -264,6 +264,7 @@ const EXPLICIT_EXECUTION_RULES: readonly ExplicitExecutionRule[] = [
   {
     skill: "raport-klienta-v1",
     patterns: [
+      /\braport klient[a-z]*\b/,
       /\braport dla klient[a-z]*\b/,
       /\bpodsumowani[a-z]* dla klient[a-z]*\b/,
       /\bstatus dla klient[a-z]*\b/
@@ -280,6 +281,7 @@ const EXPLICIT_EXECUTION_RULES: readonly ExplicitExecutionRule[] = [
   {
     skill: "analiza-sadowa-v6",
     patterns: [
+      /\banaliza sadow[a-z]*\b/,
       /\bjakie mam szanse\b/,
       /\banaliza pozycji\b/,
       /\bpismo przeciwnika\b/,
