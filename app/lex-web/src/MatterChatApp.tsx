@@ -18,9 +18,12 @@ import {
   clearClaudeOAuthToken,
   clearProviderApiKey,
   createCase,
+  createDeanonymizationIntent,
   deleteCase,
   downloadGeneratedArtifact,
+  downloadSensitiveArtifact,
   executeSession,
+  finalizeDeanonymization,
   generateLegalDocument,
   getHealth,
   getLocalModels,
@@ -35,6 +38,7 @@ import {
   loginProviderAccount,
   provisionLocalModel,
   repairLocalModel,
+  reauthorizeDeanonymization,
   renameCase,
   setClaudeOAuthToken,
   setModelRoutingPreferences,
@@ -50,7 +54,8 @@ import {
   type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse,
-  type StoredUploadResponse
+  type StoredUploadResponse,
+  type LegalDocumentFormat
 } from "./api.js";
 import {
   DOCUMENT_FILE_ACCEPT,
@@ -609,6 +614,16 @@ export default function MatterChatApp({
     useState("");
   const [generatedDocumentMessage, setGeneratedDocumentMessage] =
     useState("");
+  const [pendingFinalDocument, setPendingFinalDocument] =
+    useState<{
+      caseId: string;
+      artifactId: string;
+      format: LegalDocumentFormat;
+    } | null>(null);
+  const [finalDocumentPassword, setFinalDocumentPassword] =
+    useState("");
+  const [finalDocumentBusy, setFinalDocumentBusy] =
+    useState(false);
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -1209,6 +1224,8 @@ export default function MatterChatApp({
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setDeletePhrase("");
     setDeletePassword("");
+    setPendingFinalDocument(null);
+    setFinalDocumentPassword("");
     setProcessWorkflowVisible(false);
     setProcessWorkflowRefresh((value) => value + 1);
   }, [caseId, selectedCase?.displayName]);
@@ -1281,6 +1298,8 @@ export default function MatterChatApp({
     setPendingFirstMessage(null);
     setExecutionError("");
     setGeneratedDocumentMessage("");
+    setPendingFinalDocument(null);
+    setFinalDocumentPassword("");
     setCaseFilePickerOpen(false);
     setCaseId(nextCaseId);
     setActiveTab("chat");
@@ -1990,28 +2009,47 @@ export default function MatterChatApp({
             }
           );
 
-        const blob =
-          await downloadGeneratedArtifact(
-            executionCaseId,
-            generated
-              .artifact
-              .artifactId
-          );
-        downloadBlob(
-          blob,
-          generated
-            .artifact
-            .filename
-        );
         const downloadedFinal =
           generated
             .readyForDownload ===
             true;
 
+        if (downloadedFinal) {
+          const blob =
+            await downloadGeneratedArtifact(
+              executionCaseId,
+              generated
+                .artifact
+                .artifactId
+            );
+          downloadBlob(
+            blob,
+            generated
+              .artifact
+              .filename
+          );
+        }
+
         if (
           activeCaseIdRef.current ===
             executionCaseId
         ) {
+          setPendingFinalDocument(
+            downloadedFinal
+              ? null
+              : {
+                  caseId:
+                    executionCaseId,
+                  artifactId:
+                    generated
+                      .artifact
+                      .artifactId,
+                  format:
+                    generated
+                      .format
+                }
+          );
+          setFinalDocumentPassword("");
           setMessages(
             (
               current
@@ -2033,7 +2071,7 @@ export default function MatterChatApp({
                       documentRequest
                         .format
                         .toUpperCase() +
-                      ". Finalny plik z przywróconymi danymi wymaga reautoryzacji.",
+                      ". Aby utworzyć finalny plik, użyj poniżej jednorazowej reautoryzacji. Lex Machina odwróci wyłącznie aliasy z vaultów dokumentów użytych do tego pisma.",
                 meta:
                   "dokument: " +
                   generated
@@ -2045,7 +2083,7 @@ export default function MatterChatApp({
           setGeneratedDocumentMessage(
             downloadedFinal
               ? "Dokument gotowy i pobrany."
-              : "Dokument tokenizowany pobrany; finalizacja wymaga reautoryzacji."
+              : "Wersja tokenizowana jest zapisana w aktach. Finalizacja czeka na jednorazową reautoryzację."
           );
           setWorkspaceRefresh(
             (value) =>
@@ -2209,6 +2247,84 @@ export default function MatterChatApp({
         setAllowedDomainSkills([]);
       }
       setExecuting(false);
+    }
+  }
+
+  async function finalizePendingDocument(): Promise<void> {
+    if (
+      !pendingFinalDocument ||
+      finalDocumentBusy ||
+      !finalDocumentPassword
+        .trim()
+    ) {
+      return;
+    }
+
+    setFinalDocumentBusy(true);
+    setExecutionError("");
+    try {
+      const intent =
+        await createDeanonymizationIntent(
+          pendingFinalDocument
+            .caseId,
+          pendingFinalDocument
+            .artifactId
+        );
+      const authorized =
+        await reauthorizeDeanonymization(
+          intent.intent
+            .intentId,
+          finalDocumentPassword
+        );
+      const final =
+        await finalizeDeanonymization(
+          authorized.grant
+            .grantId,
+          "LexMachina-final." +
+            pendingFinalDocument
+              .format
+        );
+      if (
+        !final.downloadTicket
+      ) {
+        throw new Error(
+          "SENSITIVE_DOWNLOAD_TICKET_MISSING"
+        );
+      }
+      const blob =
+        await downloadSensitiveArtifact(
+          final.downloadTicket
+            .ticketId
+        );
+      downloadBlob(
+        blob,
+        final.artifact
+          .filename
+      );
+      setPendingFinalDocument(
+        null
+      );
+      setFinalDocumentPassword(
+        ""
+      );
+      setGeneratedDocumentMessage(
+        "Finalny dokument z przywróconymi danymi został utworzony i pobrany."
+      );
+      setWorkspaceRefresh(
+        (value) =>
+          value + 1
+      );
+    } catch (error) {
+      setExecutionError(
+        error instanceof Error
+          ? "Nie udało się przywrócić danych do finalnego dokumentu: " +
+            error.message
+          : "Nie udało się przywrócić danych do finalnego dokumentu."
+      );
+    } finally {
+      setFinalDocumentBusy(
+        false
+      );
     }
   }
 
@@ -3014,6 +3130,74 @@ export default function MatterChatApp({
                       )}
                     </ul>
                   )}
+                </div>
+              ) : null}
+              {pendingFinalDocument ? (
+                <div className="chat-final-document">
+                  <div>
+                    <strong>Finalny dokument z przywróconymi danymi</strong>
+                    <small>
+                      Każdy dokument źródłowy ma własny vault. Alias D01/D02/… jest odwracany wyłącznie przez deanonimizator przypisany do tego dokumentu.
+                    </small>
+                  </div>
+                  <input
+                    type="password"
+                    autoComplete="current-password"
+                    value={finalDocumentPassword}
+                    disabled={finalDocumentBusy}
+                    placeholder="Bieżące hasło — jednorazowa reautoryzacja"
+                    onChange={(event) =>
+                      setFinalDocumentPassword(
+                        event.target
+                          .value
+                      )
+                    }
+                  />
+                  <div className="chat-form-row compact">
+                    <button
+                      type="button"
+                      className="chat-primary-action"
+                      disabled={
+                        finalDocumentBusy ||
+                        !finalDocumentPassword
+                          .trim()
+                      }
+                      onClick={() =>
+                        void finalizePendingDocument()
+                      }
+                    >
+                      {finalDocumentBusy
+                        ? "Przywracam dane…"
+                        : "Przywróć dane i pobierz finalny plik"}
+                    </button>
+                    <button
+                      type="button"
+                      className="chat-secondary-action"
+                      disabled={finalDocumentBusy}
+                      onClick={async () => {
+                        try {
+                          const blob =
+                            await downloadGeneratedArtifact(
+                              pendingFinalDocument.caseId,
+                              pendingFinalDocument.artifactId
+                            );
+                          downloadBlob(
+                            blob,
+                            "LexMachina-tokenized." +
+                              pendingFinalDocument.format
+                          );
+                        } catch (error) {
+                          setExecutionError(
+                            error instanceof Error
+                              ? error.message
+                              : String(error)
+                          );
+                        }
+                      }}
+                    >
+                      Pobierz wersję tokenizowaną
+                    </button>
+                  </div>
                 </div>
               ) : null}
               {generatedDocumentMessage ? (
