@@ -185,6 +185,134 @@ export async function discoverLatestClaudeSessionId(): Promise<string | null> {
   return best?.id ?? null;
 }
 
+function grokSessionsRoot(): string {
+  const configured =
+    process.env
+      .LEX_GROK_SESSIONS_ROOT
+      ?.trim();
+  if (configured) {
+    return path.resolve(
+      configured
+    );
+  }
+  const grokHome =
+    process.env
+      .GROK_HOME
+      ?.trim();
+  return grokHome
+    ? path.resolve(
+        grokHome,
+        "sessions"
+      )
+    : path.resolve(
+        os.homedir(),
+        ".grok",
+        "sessions"
+      );
+}
+
+function uuidFromName(
+  value: string
+): string | null {
+  const match =
+    value.match(
+      /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i
+    );
+  return match?.[0] ?? null;
+}
+
+export async function discoverLatestGrokSessionId(): Promise<string | null> {
+  const root =
+    grokSessionsRoot();
+  let best:
+    | {
+        id: string;
+        mtimeMs: number;
+      }
+    | null = null;
+  let visited = 0;
+
+  const walk = async (
+    current: string,
+    depth: number
+  ): Promise<void> => {
+    if (
+      depth > 4 ||
+      visited >= 20_000
+    ) {
+      return;
+    }
+    let entries: Dirent[];
+    try {
+      entries =
+        await fsp.readdir(
+          current,
+          {
+            withFileTypes: true
+          }
+        );
+    } catch {
+      return;
+    }
+
+    for (
+      const entry
+      of entries
+    ) {
+      if (
+        visited >= 20_000
+      ) {
+        return;
+      }
+      visited += 1;
+      const fullPath =
+        path.join(
+          current,
+          entry.name
+        );
+      const id =
+        uuidFromName(
+          entry.name
+        );
+      if (id) {
+        try {
+          const stat =
+            await fsp.stat(
+              fullPath
+            );
+          if (
+            !best ||
+            stat.mtimeMs >
+              best.mtimeMs
+          ) {
+            best = {
+              id,
+              mtimeMs:
+                stat.mtimeMs
+            };
+          }
+        } catch {
+          // Session entry can disappear during cleanup.
+        }
+      }
+      if (
+        entry.isDirectory()
+      ) {
+        await walk(
+          fullPath,
+          depth + 1
+        );
+      }
+    }
+  };
+
+  await walk(
+    root,
+    0
+  );
+  return best?.id ?? null;
+}
+
 function accountSessionStatePath(
   provider: ProviderId
 ): string {
@@ -347,39 +475,6 @@ function parseCodexFinalText(
     }
   }
   return finalText || null;
-}
-
-function parseGrokResult(
-  stdout: string
-): {
-  text: string;
-  sessionId: string | null;
-} | null {
-  try {
-    const payload =
-      JSON.parse(stdout) as {
-        text?: unknown;
-        sessionId?: unknown;
-      };
-    const text =
-      typeof payload.text ===
-        "string"
-        ? payload.text.trim()
-        : "";
-    if (!text) return null;
-    const sessionId =
-      typeof payload.sessionId ===
-        "string" &&
-      payload.sessionId
-        ? payload.sessionId
-        : null;
-    return {
-      text,
-      sessionId
-    };
-  } catch {
-    return null;
-  }
 }
 
 function parseClaudeResult(
@@ -758,6 +853,8 @@ async function runGrokAcp(
         "--no-subagents",
         "--no-memory",
         "--disable-web-search",
+        "--system-prompt-override",
+        "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. Do not access local files, external services or host tools.",
         "agent",
         "stdio"
       ],
@@ -1517,7 +1614,7 @@ export class AccountSessionManager {
           "--config",
           "web_search=\"disabled\"",
           "--config",
-          "features.view_image=false",
+          "tools.view_image=false",
           "--sandbox",
           "read-only",
           "--skip-git-repo-check",
@@ -1821,129 +1918,30 @@ export class AccountSessionManager {
         return parsed.text;
       }
 
-      const promptPath =
-        path.join(
-          workDir,
-          "grok-prompt.txt"
-        );
-      await fsp.writeFile(
-        promptPath,
-        prompt,
-        {
-          encoding: "utf8",
-          mode: 0o600
-        }
-      );
-      const hostCwd =
-        process.cwd();
-      const commonArgs = [
-        "--no-auto-update",
-        "--output-format",
-        "json",
-        "--prompt-file",
-        promptPath,
-        "--sandbox",
-        "strict",
-        "--tools",
-        "__LEX_NO_HOST_TOOLS__",
-        "--no-subagents",
-        "--no-memory",
-        "--disable-web-search",
-        "--system-prompt-override",
-        "You are the semantic model inside Lex Machina. Lex Machina owns privacy, legal verification and tool execution. Current Lex Machina instructions override prior host-session instructions. Never reveal or reuse facts from earlier host turns unless they are present in the current Lex Machina request."
-      ];
-      const runGrok = (
-        tail: string[]
-      ) =>
-        runCli(
-          provider,
-          [
-            ...commonArgs,
-            ...tail
-          ],
-          undefined,
-          COMMAND_TIMEOUT_MS,
-          hostCwd,
-          abortSignal
-        );
-
-      let result:
-        RunResult | null = null;
       const savedSessionId =
         await readAccountSessionId(
           provider
         );
-      if (savedSessionId) {
-        result =
-          await runGrok([
-            "--resume",
-            savedSessionId
-          ]);
-        if (
-          result.code !== 0
-        ) {
-          const detail =
-            result.stderr +
-            "\n" +
-            result.stdout;
-          if (
-            isMissingResumableSessionMessage(
-              detail
-            )
-          ) {
-            await clearAccountSessionId(
-              provider
-            );
-            result = null;
-          } else {
-            throw normalizeCliFailure(
-              provider,
-              result
-            );
-          }
-        }
-      }
-
-      if (!result) {
-        const last =
-          await runGrok([
-            "--resume"
-          ]);
-        if (
-          last.code === 0
-        ) {
-          result = last;
-        } else {
-          const detail =
-            last.stderr +
-            "\n" +
-            last.stdout;
-          if (
-            !isMissingResumableSessionMessage(
-              detail
-            )
-          ) {
-            throw normalizeCliFailure(
-              provider,
-              last
-            );
-          }
-          result =
-            await runGrok([]);
-        }
-      }
-
-      if (result.code !== 0) {
-        throw normalizeCliFailure(
-          provider,
-          result
-        );
-      }
+      const resumeSessionId =
+        savedSessionId ??
+        await discoverLatestGrokSessionId();
       const grok =
-        parseGrokResult(
-          result.stdout
+        await runGrokAcp(
+          prompt,
+          workDir,
+          abortSignal,
+          resumeSessionId
         );
-      if (!grok) {
+      if (
+        !grok.authenticated
+      ) {
+        throw new Error(
+          "ACCOUNT_SESSION_NOT_AUTHENTICATED:xai"
+        );
+      }
+      if (
+        !grok.text
+      ) {
         throw new Error(
           "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
         );
