@@ -1687,11 +1687,17 @@ export class AccountSessionManager {
   async runText(
     provider: ProviderId,
     prompt: string,
-    abortSignal?: AbortSignal
+    abortSignal?: AbortSignal,
+    continuityKey?: string
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
     );
+    const allowExternalTakeover =
+      !continuityKey ||
+      !await hasPinnedAccountSession(
+        provider
+      );
     try {
       if (
         provider === "openai" ||
@@ -1761,7 +1767,8 @@ export class AccountSessionManager {
           RunResult | null = null;
         const savedSessionId =
           await readAccountSessionId(
-            provider
+            provider,
+            continuityKey
           );
         if (savedSessionId) {
           result =
@@ -1783,7 +1790,8 @@ export class AccountSessionManager {
               )
             ) {
               await clearAccountSessionId(
-                provider
+                provider,
+                continuityKey
               );
               result = null;
             } else {
@@ -1795,7 +1803,10 @@ export class AccountSessionManager {
           }
         }
 
-        if (!result) {
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
           const last =
             await runCodex([
               "resume",
@@ -1822,11 +1833,13 @@ export class AccountSessionManager {
                 last
               );
             }
-            result =
-              await runCodex([
-                "-"
-              ]);
           }
+        }
+        if (!result) {
+          result =
+            await runCodex([
+              "-"
+            ]);
         }
 
         if (result.code !== 0) {
@@ -1842,7 +1855,8 @@ export class AccountSessionManager {
         if (threadId) {
           await writeAccountSessionId(
             provider,
-            threadId
+            threadId,
+            continuityKey
           );
         }
 
@@ -1915,7 +1929,8 @@ export class AccountSessionManager {
           RunResult | null = null;
         const savedSessionId =
           await readAccountSessionId(
-            provider
+            provider,
+            continuityKey
           );
         if (savedSessionId) {
           result =
@@ -1936,7 +1951,8 @@ export class AccountSessionManager {
               )
             ) {
               await clearAccountSessionId(
-                provider
+                provider,
+                continuityKey
               );
               result = null;
             } else {
@@ -1948,7 +1964,10 @@ export class AccountSessionManager {
           }
         }
 
-        if (!result) {
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
           const last =
             await runClaude([
               "--continue"
@@ -2002,14 +2021,13 @@ export class AccountSessionManager {
                     discovered
                   );
                 }
-                result =
-                  await runClaude([]);
               }
-            } else {
-              result =
-                await runClaude([]);
             }
           }
+        }
+        if (!result) {
+          result =
+            await runClaude([]);
         }
 
         if (result.code !== 0) {
@@ -2030,7 +2048,8 @@ export class AccountSessionManager {
         if (parsed.sessionId) {
           await writeAccountSessionId(
             provider,
-            parsed.sessionId
+            parsed.sessionId,
+            continuityKey
           );
         }
         return parsed.text;
@@ -2038,11 +2057,16 @@ export class AccountSessionManager {
 
       const savedSessionId =
         await readAccountSessionId(
-          provider
+          provider,
+          continuityKey
         );
       const resumeSessionId =
         savedSessionId ??
-        await discoverLatestGrokSessionId();
+        (
+          allowExternalTakeover
+            ? await discoverLatestGrokSessionId()
+            : null
+        );
       const grok =
         await runGrokAcp(
           prompt,
@@ -2067,7 +2091,8 @@ export class AccountSessionManager {
       if (grok.sessionId) {
         await writeAccountSessionId(
           provider,
-          grok.sessionId
+          grok.sessionId,
+          continuityKey
         );
       }
       return grok.text;
