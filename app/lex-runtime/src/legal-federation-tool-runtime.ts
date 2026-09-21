@@ -462,7 +462,7 @@ function cleanEnvironment():
       "npx -y @matematicsolutions/mcp-eureka@0.2.0",
     PRAWO_PL_MCP_CMD_KIO:
       env.PRAWO_PL_MCP_CMD_KIO ??
-      "uvx kio-orzeczenia-mcp==0.4.3",
+      "uvx --from kio-orzeczenia-mcp==0.4.3 kio-orzeczenia-mcp",
     PRAWO_PL_MCP_CMD_EU_SPARQL:
       env.PRAWO_PL_MCP_CMD_EU_SPARQL ??
       "npx -y @matematicsolutions/mcp-eu-sparql@1.2.0",
@@ -471,7 +471,7 @@ function cleanEnvironment():
       "npx -y @matematicsolutions/mcp-eu-compliance@0.4.0",
     PRAWO_PL_MCP_CMD_LEGALIZE:
       env.PRAWO_PL_MCP_CMD_LEGALIZE ??
-      "uvx legalize-mcp==0.2.4"
+      "uvx --from legalize-mcp==0.2.4 legalize-mcp"
   };
 }
 
@@ -618,7 +618,9 @@ class PrawoPlMcpClient {
           new StdioClientTransport({
             command,
             args: [
-              AGGREGATOR_PACKAGE
+              "--from",
+              AGGREGATOR_PACKAGE,
+              "prawo-pl-mcp"
             ],
             env:
               cleanEnvironment(),
