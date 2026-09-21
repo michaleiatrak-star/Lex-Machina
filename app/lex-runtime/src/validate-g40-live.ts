@@ -152,7 +152,7 @@ async function main():
             "SOURCE_UNAVAILABLE"
           ) ||
           !probe.content.includes(
-            "UODO_OFFICIAL_API"
+            "orzeczenia.uodo.gov.pl"
           )
         ) {
           throw new Error(
