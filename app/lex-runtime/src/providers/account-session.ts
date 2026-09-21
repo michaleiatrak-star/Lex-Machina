@@ -799,6 +799,24 @@ export function accountLoginLaunchMode(
     : "CAPTURED";
 }
 
+export function accountLoginArgs(
+  provider: ProviderId
+): string[] {
+  if (provider === "openai") {
+    return ["login"];
+  }
+  if (provider === "anthropic") {
+    // Current Claude Code treats the default auth login as the subscription
+    // lane. --console is the explicit API-billing opt-in. Avoid relying on
+    // historical --claudeai flag availability across client versions.
+    return [
+      "auth",
+      "login"
+    ];
+  }
+  return ["login"];
+}
+
 async function runVisibleWindowsLogin(
   provider: ProviderId,
   args: string[],
@@ -1953,15 +1971,9 @@ export class AccountSessionManager {
     }
 
     const args =
-      provider === "openai"
-        ? ["login"]
-        : provider === "anthropic"
-          ? [
-              "auth",
-              "login",
-              "--claudeai"
-            ]
-          : ["login"];
+      accountLoginArgs(
+        provider
+      );
     const result =
       accountLoginLaunchMode(
         provider
