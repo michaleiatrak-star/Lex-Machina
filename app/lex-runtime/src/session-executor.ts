@@ -247,6 +247,7 @@ export function publicEvidenceBundle(
 export type SessionExecutionInternalState = {
   verificationRecords: VerificationRecord[];
   auditEvents: AuditEvent[];
+  documentAliasDocumentIds: string[];
 };
 
 export const SESSION_EXECUTION_INTERNAL =
@@ -1826,7 +1827,15 @@ export class SafeSessionExecutor implements SessionExecutor {
           auditEvents: audit.events.map((event) => ({
             ...event,
             ...(event.detail ? { detail: { ...event.detail } } : {})
-          }))
+          })),
+          documentAliasDocumentIds: [
+            ...new Set(
+              attachments.map(
+                (attachment) =>
+                  attachment.documentId
+              )
+            )
+          ]
         } satisfies SessionExecutionInternalState,
         enumerable: false,
         configurable: false,
