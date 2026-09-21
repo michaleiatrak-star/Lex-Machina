@@ -288,69 +288,6 @@ export function buildLocalChatRequest(
   };
 }
 
-async function streamLocalChatCompletion(
-  endpoint: string,
-  modelId: string,
-  systemPrompt: string,
-  messages: ProviderStreamParams["messages"],
-  abortSignal?: AbortSignal
-): Promise<ProviderStreamResult> {
-  const url =
-    `${endpoint.replace(/\/$/, "")}/chat/completions`;
-  let response: Response;
-  try {
-    response = await fetch(
-      url,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/json",
-          Accept:
-            "text/event-stream"
-        },
-        body: JSON.stringify(
-          buildLocalChatRequest(
-            modelId,
-            systemPrompt,
-            messages
-          )
-        ),
-        ...(abortSignal
-          ? {
-              signal:
-                abortSignal
-            }
-          : {})
-      }
-    );
-  } catch (error) {
-    throw new Error(
-      `LOCAL_MODEL_HTTP_NETWORK:${
-        error instanceof Error
-          ? error.message
-          : String(error)
-      }`
-    );
-  }
-
-  if (!response.ok) {
-    const detail =
-      await response.text()
-        .catch(() => "");
-    throw new Error(
-      `HTTP status ${response.status}: ${detail
-        .replace(/[\r\n]+/g, " ")
-        .slice(-1200)}`
-    );
-  }
-
-  if (!response.body) {
-    throw new Error(
-      "LOCAL_MODEL_HTTP_EMPTY_BODY"
-    );
-  }
-
 export function parseLocalSseLine(
   rawLine: string
 ): string {
@@ -414,6 +351,69 @@ export function parseLocalSseLine(
     ? content
     : "";
 }
+
+async function streamLocalChatCompletion(
+  endpoint: string,
+  modelId: string,
+  systemPrompt: string,
+  messages: ProviderStreamParams["messages"],
+  abortSignal?: AbortSignal
+): Promise<ProviderStreamResult> {
+  const url =
+    `${endpoint.replace(/\/$/, "")}/chat/completions`;
+  let response: Response;
+  try {
+    response = await fetch(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          Accept:
+            "text/event-stream"
+        },
+        body: JSON.stringify(
+          buildLocalChatRequest(
+            modelId,
+            systemPrompt,
+            messages
+          )
+        ),
+        ...(abortSignal
+          ? {
+              signal:
+                abortSignal
+            }
+          : {})
+      }
+    );
+  } catch (error) {
+    throw new Error(
+      `LOCAL_MODEL_HTTP_NETWORK:${
+        error instanceof Error
+          ? error.message
+          : String(error)
+      }`
+    );
+  }
+
+  if (!response.ok) {
+    const detail =
+      await response.text()
+        .catch(() => "");
+    throw new Error(
+      `HTTP status ${response.status}: ${detail
+        .replace(/[\r\n]+/g, " ")
+        .slice(-1200)}`
+    );
+  }
+
+  if (!response.body) {
+    throw new Error(
+      "LOCAL_MODEL_HTTP_EMPTY_BODY"
+    );
+  }
 
   const reader =
     response.body.getReader();
