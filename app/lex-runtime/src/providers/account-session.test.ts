@@ -10,7 +10,8 @@ import {
   claudeSubscriptionAuthenticated,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
-  isMissingResumableSessionMessage
+  isMissingResumableSessionMessage,
+  visibleWindowsLoginLauncher
 } from "./account-session.js";
 
 const cleanupRoots: string[] = [];
@@ -120,6 +121,28 @@ describe("provider account-session transport", () => {
       )
     ).toBe(
       "CAPTURED"
+    );
+  });
+
+  it("creates a normal visible Windows console for interactive account login", () => {
+    const launcher =
+      visibleWindowsLoginLauncher(
+        "C:\\Users\\Tester\\login.cmd"
+      );
+    expect(
+      launcher
+    ).toContain(
+      "Start-Process"
+    );
+    expect(
+      launcher
+    ).toContain(
+      "-WindowStyle Normal"
+    );
+    expect(
+      launcher
+    ).toContain(
+      "-PassThru -Wait"
     );
   });
 
