@@ -986,10 +986,9 @@ async function toAiSdkTools(
 }
 
 export function accountSessionBackendAllowed(
-  id: ProviderId
+  _id: ProviderId
 ): boolean {
-  return id !==
-    "anthropic";
+  return true;
 }
 
 function providerLabel(id: ProviderId): string {
