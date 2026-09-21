@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: lex-release-0.1.6-g39m-rc14-${{ github.sha }}
+  group: lex-release-0.1.6-g39m-rc14
   cancel-in-progress: true
 
 jobs:
@@ -193,9 +193,12 @@ jobs:
             generating, and late results cannot overwrite the newly selected case;
           - Mistral NeMo and Bielik local inference now has bounded HTTP response,
             first-content and stream-idle deadlines plus controlled JSON fallback;
-          - prawo-pl-mcp 0.2.3 is integrated behind a compact five-tool research
-            surface covering SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA/KIS, KIO,
-            UODO, EUR-Lex/CJEU, EU Compliance and Legalize;
+          - the published prawo-pl-mcp 0.1.4 aggregator is integrated behind a
+            compact five-tool research surface covering SAOS, NSA/CBOSA, ISAP/ELI,
+            KRS, EUREKA/KIS, KIO, UODO, EUR-Lex/CJEU, EU Compliance and Legalize;
+          - G40 release validation starts the aggregator and performs a live
+            MCP tools/list handshake with all ten connector families before the
+            Windows installer may be published;
           - federated MCP retrieval cannot mint Lex VERIFIED markers or replace the
             native current-law/SN verification path; EUREKA/KIO/UODO material is
             explicitly treated as interpretive or decisional material;
