@@ -29,9 +29,12 @@ import {
   isDesktopShell,
   listCases,
   loginProviderAccount,
+  provisionLocalModel,
+  repairLocalModel,
   renameCase,
   setModelRoutingPreferences,
   setProviderApiKey,
+  startLocalModel,
   unarchiveCase,
   type AuthenticatedUser,
   type CaseListItem,
@@ -1326,6 +1329,148 @@ export default function MatterChatApp({
     }
   }
 
+  async function prepareLocalPrimaryModel():
+    Promise<string | null> {
+    if (
+      provider !== "local" ||
+      !model.startsWith("local/")
+    ) {
+      return null;
+    }
+
+    const codeOf = (
+      error: unknown
+    ): string =>
+      error instanceof ApiError
+        ? error.code
+        : error instanceof Error
+          ? error.message
+          : String(error);
+
+    try {
+      await startLocalModel(
+        model
+      );
+      setModelError("");
+      return null;
+    } catch (initialError) {
+      if (
+        user.appRole !==
+          "ADMIN"
+      ) {
+        return (
+          "Lokalny model wymaga naprawy profilu. " +
+          "Poproś administratora aplikacji o uruchomienie naprawy lokalnej AI. " +
+          `Kod: ${codeOf(initialError)}`
+        );
+      }
+
+      setModelError(
+        "Przygotowuję i weryfikuję lokalny model…"
+      );
+
+      try {
+        let snapshot =
+          await getLocalModels();
+        let local =
+          snapshot.models.find(
+            (item) =>
+              item.id === model
+          );
+        if (!local) {
+          throw new Error(
+            "LOCAL_MODEL_NOT_FOUND"
+          );
+        }
+
+        const preferredContext =
+          local
+            .configuredContextWindow ??
+          local.contextWindow;
+
+        if (
+          snapshot.runtime
+            .configured &&
+          snapshot.runtime
+            .selectedModelId ===
+            model
+        ) {
+          try {
+            await repairLocalModel();
+          } catch {
+            await provisionLocalModel(
+              model,
+              preferredContext
+            );
+          }
+        } else {
+          await provisionLocalModel(
+            model,
+            preferredContext
+          );
+        }
+
+        try {
+          await startLocalModel(
+            model
+          );
+        } catch (startError) {
+          snapshot =
+            await getLocalModels();
+          local =
+            snapshot.models.find(
+              (item) =>
+                item.id === model
+            );
+          if (!local) {
+            throw startError;
+          }
+
+          const activeContext =
+            local
+              .configuredContextWindow ??
+            local.contextWindow;
+          const fallbackContext =
+            local
+              .minimumContextWindow;
+
+          if (
+            fallbackContext >=
+              activeContext
+          ) {
+            throw startError;
+          }
+
+          // 128k remains the preferred default. This fallback is used only
+          // after the qualified profile cannot start on the current machine.
+          await provisionLocalModel(
+            model,
+            fallbackContext
+          );
+          await startLocalModel(
+            model
+          );
+        }
+
+        setLocalModelsRefreshToken(
+          (value) => value + 1
+        );
+        setModelError("");
+        return null;
+      } catch (recoveryError) {
+        const code =
+          codeOf(
+            recoveryError
+          );
+        setModelError(code);
+        return (
+          "Nie udało się uruchomić lokalnego modelu nawet po automatycznej naprawie profilu. " +
+          `Kod: ${code}`
+        );
+      }
+    }
+  }
+
   async function executeMessage(plain: string): Promise<void> {
     if (
       executing ||
@@ -1367,6 +1512,24 @@ export default function MatterChatApp({
       setExecutionError(
         "Wybrany model nie jest jeszcze gotowy do użycia."
       );
+      return;
+    }
+
+    const localPreparationError =
+      await prepareLocalPrimaryModel();
+    if (localPreparationError) {
+      setExecutionError(
+        localPreparationError
+      );
+      setMessages((current) => [
+        ...current,
+        {
+          id: messageId(),
+          role: "system",
+          content:
+            localPreparationError
+        }
+      ]);
       return;
     }
 
@@ -1448,7 +1611,9 @@ export default function MatterChatApp({
           : code === "CHAT_PRIVACY_GATE_FAILED"
             ? "Lokalna pseudonimizacja nie mogła się wykonać, więc zapytanie zostało zatrzymane przed wysłaniem do modelu. Sprawdź lokalny runtime prywatności w panelu Utrzymanie."
           : code === "PROVIDER_EXECUTION_FAILED"
-            ? "Provider odrzucił lub przerwał wykonanie."
+            ? provider === "local"
+              ? "Lokalny model przerwał wykonanie po starcie. Program sprawdzi jego profil przy kolejnej próbie."
+              : "Provider odrzucił lub przerwał wykonanie."
             : code === "DOCUMENT_ATTACHMENT_RESOLUTION_FAILED"
               ? "Nie udało się bezpiecznie dołączyć wybranych fragmentów dokumentu."
               : code === "PROCESS_PLEADING_STATE_REQUIRED"
