@@ -179,11 +179,22 @@ jobs:
             server unreachable, request rejected, server error, context overflow,
             resource exhaustion, or generic inference failure;
           - LOCAL_MODEL_INFERENCE_FAILED now explicitly means the local server
-            passed the preflight health check but generation still failed.
+            passed the preflight health check but generation still failed;
+          - the Skills panel now defaults every optional DR/execution skill to
+            selected and provides global plus per-section Select all / Deselect all
+            controls; mandatory legal core skills remain always active;
+          - execution-skill checkboxes are an availability allow-list, not forced
+            workflow priority, so selecting all preserves semantic AUTO routing;
+          - a sent chat message is appended to the visible thread immediately,
+            before provider login/local-model startup or repair work begins;
+          - follow-up messages continue the same matter thread using the newest
+            conversation context up to a safe 28k-character runtime budget.
 
           Regression coverage added for:
           - visible Windows login-launcher contract;
-          - local inference failure classification.
+          - local inference failure classification;
+          - execution-skill allow-list select-all/deselect-all semantics;
+          - continued multi-turn chat context preservation.
 
           Safety boundaries remain unchanged: account authentication remains
           separated from API-key lanes, local models cannot execute host tools,
