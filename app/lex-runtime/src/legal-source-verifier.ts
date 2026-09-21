@@ -111,17 +111,28 @@ function articleSection(
   if (!article) return null;
 
   const readable = readableText(body);
-  const heading = new RegExp(
+  const strictHeading = new RegExp(
     "(?:^|\\n)\\s*Art\\.?\\s+" +
       escapeRegExp(article) +
       "(?=\\s*(?:\\.|§|$))",
-    "iu"
+    "u"
   );
-  const match = heading.exec(readable);
+  const fallbackHeading = new RegExp(
+    "\\bArt\\.?\\s+" +
+      escapeRegExp(article) +
+      "(?=\\s*(?:\\.|§|$))",
+    "u"
+  );
+  const match =
+    strictHeading.exec(readable) ??
+    fallbackHeading.exec(readable);
   if (!match) return null;
 
-  const start = match.index + (match[0].startsWith("\n") ? 1 : 0);
-  const afterHeading = match.index + match[0].length;
+  const start =
+    match.index +
+    (match[0].startsWith("\n") ? 1 : 0);
+  const afterHeading =
+    match.index + match[0].length;
   const nextHeading = /\n\s*Art\.?\s+\d+[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*(?=\s*(?:\.|§|$))/u.exec(
     readable.slice(afterHeading)
   );
