@@ -3,7 +3,8 @@ import {
   useMemo,
   useRef,
   useState,
-  type DragEvent
+  type DragEvent,
+  type ReactNode
 } from "react";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { DocumentCitationContent } from "./DocumentCitationContent.js";
@@ -109,6 +110,24 @@ type TabId =
   | "case"
   | "firm"
   | "settings";
+
+export type SettingsSection =
+  | "models"
+  | "users"
+  | "security"
+  | "maintenance";
+
+export type SettingsRequest = {
+  section: SettingsSection;
+  nonce: number;
+};
+
+type SettingsPanels = {
+  localAi?: ReactNode;
+  users?: ReactNode;
+  security?: ReactNode;
+  maintenance?: ReactNode;
+};
 
 type ExtendedExecution = SessionExecutionResponse & {
   documentCitations?: WorkspaceDocumentCitation[];
@@ -621,11 +640,17 @@ function canWriteCase(item: CaseListItem | undefined): boolean {
 }
 
 export default function MatterChatApp({
-  user
+  user,
+  settingsPanels,
+  settingsRequest
 }: {
   user: AuthenticatedUser;
+  settingsPanels?: SettingsPanels;
+  settingsRequest?: SettingsRequest | null;
 }) {
   const [activeTab, setActiveTab] = useState<TabId>("chat");
+  const [settingsSection, setSettingsSection] =
+    useState<SettingsSection>("models");
   const [runtimeOnline, setRuntimeOnline] = useState(false);
   const [runtimeError, setRuntimeError] = useState("");
 
@@ -674,6 +699,10 @@ export default function MatterChatApp({
   });
   const [providerAccountBusy, setProviderAccountBusy] =
     useState(false);
+  const [localStartBusy, setLocalStartBusy] =
+    useState(false);
+  const [localStartMessage, setLocalStartMessage] =
+    useState("");
   const [providerAccountMessage, setProviderAccountMessage] =
     useState("");
   const [claudeOAuthToken, setClaudeOAuthTokenInput] =
@@ -1313,6 +1342,19 @@ export default function MatterChatApp({
   }, [messages, executing]);
 
   useEffect(() => {
+    if (!settingsRequest) {
+      return;
+    }
+    setActiveTab("settings");
+    setSettingsSection(
+      settingsRequest.section
+    );
+  }, [
+    settingsRequest?.nonce,
+    settingsRequest?.section
+  ]);
+
+  useEffect(() => {
     if (!executing) {
       setExecutionElapsedSeconds(0);
       setRuntimePulse("CHECKING");
@@ -1938,6 +1980,43 @@ export default function MatterChatApp({
           `Kod: ${code}`
         );
       }
+    }
+  }
+
+  async function startSelectedLocalModel():
+    Promise<void> {
+    if (
+      provider !== "local" ||
+      !model.startsWith("local/") ||
+      localStartBusy ||
+      executing
+    ) {
+      return;
+    }
+    setLocalStartBusy(true);
+    setLocalStartMessage(
+      "Uruchamiam lokalny model…"
+    );
+    try {
+      const failure =
+        await prepareLocalPrimaryModel();
+      if (failure) {
+        setLocalStartMessage(
+          failure
+        );
+        return;
+      }
+      setLocalStartMessage(
+        "Lokalny model działa."
+      );
+    } catch (error) {
+      setLocalStartMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setLocalStartBusy(false);
     }
   }
 
@@ -2634,7 +2713,7 @@ export default function MatterChatApp({
             ["skills", "Skille"],
             ["case", "Sprawa"],
             ["firm", "Kancelaria"],
-            ["settings", "Modele i konta"]
+            ["settings", "Ustawienia"]
           ] as Array<[TabId, string]>).map(([id, label]) => (
             <button
               key={id}
@@ -2672,6 +2751,180 @@ export default function MatterChatApp({
       </aside>
 
       <main className="chat-main">
+        {activeTab === "chat" ? (
+          <section
+            className="chat-model-dock"
+            aria-label="Aktywny model rozmowy"
+          >
+            <div className="chat-model-dock-status">
+              <span
+                className={
+                  runtimeOnline
+                    ? "chat-dot online"
+                    : "chat-dot offline"
+                }
+              />
+              <div>
+                <strong>
+                  {selectedModel?.displayName ??
+                    (provider === "local"
+                      ? "Model lokalny"
+                      : "Wybierz model")}
+                </strong>
+                <small>
+                  {provider === "local"
+                    ? "lokalny runtime"
+                    : PRIMARY_MODEL_SOURCES.find(
+                        (item) =>
+                          item.id ===
+                          provider
+                      )?.label ??
+                      provider}
+                </small>
+              </div>
+            </div>
+            <div className="chat-model-dock-controls">
+              <select
+                aria-label="Źródło modelu głównego"
+                value={provider}
+                disabled={executing}
+                onChange={(event) => {
+                  setProvider(
+                    event.target.value as PrimaryModelSource
+                  );
+                  setProviderApiKeyInput("");
+                  setProviderKeyMessage("");
+                  setProviderAccountMessage("");
+                  setLocalStartMessage("");
+                }}
+              >
+                {PRIMARY_MODEL_SOURCES.map(
+                  (item) => (
+                    <option
+                      key={item.id}
+                      value={item.id}
+                    >
+                      {item.label}
+                    </option>
+                  )
+                )}
+              </select>
+              <select
+                aria-label="Model główny"
+                value={model}
+                disabled={
+                  executing ||
+                  modelCatalogLoading ||
+                  models.length === 0
+                }
+                onChange={(event) => {
+                  setModel(
+                    event.target.value
+                  );
+                  setLocalStartMessage("");
+                }}
+              >
+                {modelCatalogLoading ? (
+                  <option value="">
+                    Odświeżam modele…
+                  </option>
+                ) : models.length === 0 ? (
+                  <option value="">
+                    {provider === "local"
+                      ? "Brak zainstalowanego modelu"
+                      : "Brak modeli"}
+                  </option>
+                ) : null}
+                {models.map((item) => (
+                  <option
+                    key={item.id}
+                    value={item.id}
+                    disabled={
+                      !item.selectable
+                    }
+                  >
+                    {item.displayName}
+                  </option>
+                ))}
+              </select>
+              {provider === "local" ? (
+                <button
+                  type="button"
+                  className="chat-primary-action chat-model-start"
+                  disabled={
+                    executing ||
+                    localStartBusy ||
+                    !model.startsWith(
+                      "local/"
+                    )
+                  }
+                  onClick={() =>
+                    void startSelectedLocalModel()
+                  }
+                >
+                  {localStartBusy
+                    ? "Uruchamianie…"
+                    : "Uruchom lokalny model"}
+                </button>
+              ) : isAccountPrimarySource(
+                  provider
+                ) &&
+                !accountAuthenticated ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action"
+                  disabled={
+                    executing ||
+                    providerAccountBusy ||
+                    user.appRole !==
+                      "ADMIN"
+                  }
+                  onClick={() =>
+                    accountSession
+                      ?.installed ===
+                    false
+                      ? void openAccountClientSetup()
+                      : void connectProviderAccount()
+                  }
+                >
+                  {providerAccountBusy
+                    ? "Logowanie…"
+                    : accountSession
+                        ?.installed ===
+                      false
+                      ? "Zainstaluj klienta ↗"
+                      : "Połącz konto"}
+                </button>
+              ) : null}
+              <button
+                type="button"
+                className="chat-secondary-action"
+                onClick={() => {
+                  setActiveTab(
+                    "settings"
+                  );
+                  setSettingsSection(
+                    "models"
+                  );
+                }}
+              >
+                Zarządzaj modelami
+              </button>
+            </div>
+            {localStartMessage ? (
+              <small
+                className={
+                  localStartMessage ===
+                  "Lokalny model działa."
+                    ? "chat-model-dock-message ready"
+                    : "chat-model-dock-message"
+                }
+              >
+                {localStartMessage}
+              </small>
+            ) : null}
+          </section>
+        ) : null}
         <header className="chat-page-header">
           <div>
             <p className="eyebrow">
@@ -2688,7 +2941,7 @@ export default function MatterChatApp({
                       ? "Dane sprawy"
                       : activeTab === "firm"
                         ? "Know-how i wzory kancelarii"
-                        : "Modele i konta"}
+                        : "Ustawienia"}
             </h1>
           </div>
           <div className="chat-header-actions">
@@ -2745,104 +2998,6 @@ export default function MatterChatApp({
                 + Nowa sprawa
               </button>
             </div>
-            {activeTab === "chat" ? (
-              <div className="chat-model-lanes">
-                <label>
-                  <span>Model główny</span>
-                  <div className="chat-model-select-row">
-                    <select
-                      aria-label="Provider modelu głównego"
-                      value={provider}
-                      disabled={executing}
-                      onChange={(event) => {
-                        setProvider(
-                          event.target.value as PrimaryModelSource
-                        );
-                        setProviderApiKeyInput("");
-                        setProviderKeyMessage("");
-                        setProviderAccountMessage("");
-                      }}
-                    >
-                      {PRIMARY_MODEL_SOURCES.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      aria-label="Model główny"
-                      value={model}
-                      disabled={executing || models.length === 0}
-                      onChange={(event) => setModel(event.target.value)}
-                    >
-                      {models.length === 0 ? (
-                        <option value="">
-                          {provider === "local"
-                            ? "Brak zainstalowanych modeli lokalnych"
-                            : "Brak modeli"}
-                        </option>
-                      ) : null}
-                      {models.map((item) => (
-                        <option
-                          key={item.id}
-                          value={item.id}
-                          disabled={!item.selectable}
-                        >
-                          {item.displayName}
-                        </option>
-                      ))}
-                    </select>
-                    {isAccountPrimarySource(provider) &&
-                    !accountAuthenticated ? (
-                      <>
-                        <button
-                          type="button"
-                          className="chat-secondary-action"
-                          disabled={
-                            executing ||
-                            providerAccountBusy ||
-                            user.appRole !== "ADMIN"
-                          }
-                          onClick={() =>
-                            accountSession?.installed === false
-                              ? void openAccountClientSetup()
-                              : void connectProviderAccount()
-                          }
-                        >
-                          {providerAccountBusy
-                            ? "Logowanie…"
-                            : accountSession?.installed === false
-                              ? "Zainstaluj klienta ↗"
-                              : "Zaloguj"}
-                        </button>
-                        {accountSession?.installed === false ? (
-                          <button
-                            type="button"
-                            className="chat-secondary-action"
-                            disabled={executing}
-                            onClick={switchAccountToApi}
-                          >
-                            Użyj API
-                          </button>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </div>
-                </label>
-                <div className="chat-aux-model-chip">
-                  <span>Pomocniczy</span>
-                  <strong>
-                    {modelRouting.auxiliaryEnabled
-                      ? selectedAuxiliaryModel?.displayName ??
-                        modelRouting.auxiliaryModel
-                      : "wyłączony"}
-                  </strong>
-                  {modelRouting.auxiliaryEnabled ? (
-                    <small>{modelRouting.auxiliaryProvider}</small>
-                  ) : null}
-                </div>
-              </div>
-            ) : null}
             <button
               type="button"
               className="chat-secondary-action"
@@ -3883,7 +4038,50 @@ export default function MatterChatApp({
         ) : null}
 
         {activeTab === "settings" ? (
-          <section className="chat-settings-grid">
+          <section className="chat-settings-hub">
+            <nav
+              className="chat-settings-nav"
+              aria-label="Sekcje ustawień"
+            >
+              {([
+                ["models", "Modele i AI"],
+                ["users", "Użytkownicy i role"],
+                ["security", "Hasło i bezpieczeństwo"],
+                ["maintenance", "Aplikacja i utrzymanie"]
+              ] as Array<
+                [SettingsSection, string]
+              >)
+                .filter(
+                  ([section]) =>
+                    section !== "users" ||
+                    user.appRole ===
+                      "ADMIN"
+                )
+                .map(
+                  ([section, label]) => (
+                    <button
+                      key={section}
+                      type="button"
+                      className={
+                        settingsSection ===
+                        section
+                          ? "active"
+                          : ""
+                      }
+                      onClick={() =>
+                        setSettingsSection(
+                          section
+                        )
+                      }
+                    >
+                      {label}
+                    </button>
+                  )
+                )}
+            </nav>
+            <div className="chat-settings-content">
+              {settingsSection === "models" ? (
+                <div className="chat-settings-grid">
             <article className="chat-card chat-settings-primary">
               <p className="eyebrow">Model główny</p>
               <h2>
@@ -4449,6 +4647,30 @@ export default function MatterChatApp({
                 <p>Klucz API może zmieniać administrator aplikacji.</p>
               )}
             </article>
+                {settingsPanels?.localAi ? (
+                  <div className="chat-settings-embedded-wide">
+                    {settingsPanels.localAi}
+                  </div>
+                ) : null}
+                </div>
+              ) : settingsSection === "users" ? (
+                <div className="chat-settings-section-stack">
+                  {settingsPanels?.users ?? (
+                    <article className="chat-card">
+                      <h2>Brak uprawnień administracyjnych</h2>
+                    </article>
+                  )}
+                </div>
+              ) : settingsSection === "security" ? (
+                <div className="chat-settings-section-stack">
+                  {settingsPanels?.security}
+                </div>
+              ) : (
+                <div className="chat-settings-section-stack">
+                  {settingsPanels?.maintenance}
+                </div>
+              )}
+            </div>
           </section>
         ) : null}
       </main>
