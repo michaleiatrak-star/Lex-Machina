@@ -8469,6 +8469,45 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      const localFailureMessage =
+        request.model.startsWith(
+          "local/"
+        )
+          ? (
+              error instanceof
+                ProviderGatewayError &&
+              error.causeValue instanceof
+                Error
+                ? error.causeValue
+                    .message
+                : error instanceof Error
+                  ? error.message
+                  : ""
+            )
+          : "";
+      const localFailureReason =
+        localFailureMessage
+          .split(
+            ":",
+            1
+          )[0] ?? "";
+      if (
+        request.model.startsWith(
+          "local/"
+        ) &&
+        /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
+          localFailureReason
+        )
+      ) {
+        res.status(503).json({
+          error:
+            "LOCAL_MODEL_EXECUTION_FAILED",
+          reason:
+            localFailureReason
+        });
+        return;
+      }
+
       if (error instanceof ProviderGatewayError) {
         res.status(502).json({
           error: "PROVIDER_EXECUTION_FAILED",
