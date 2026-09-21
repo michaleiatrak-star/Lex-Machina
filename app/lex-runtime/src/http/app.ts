@@ -27,11 +27,12 @@ import type {
 import type {
   UpdateDiscovery
 } from "../update-discovery.js";
-import type {
-  SessionDocumentAttachment,
-  SessionExecutor,
-  SessionExecutionRequest,
-  SessionExecutionResponse
+import {
+  SESSION_EXECUTION_INTERNAL,
+  type SessionDocumentAttachment,
+  type SessionExecutor,
+  type SessionExecutionRequest,
+  type SessionExecutionResponse
 } from "../session-executor.js";
 import type {
   DocumentChunkSelection,
@@ -1144,6 +1145,145 @@ function parseSessionRequest(
       ? { auxiliaryText }
       : {})
   };
+}
+
+function restoreSessionDocumentAliases(
+  result: SessionExecutionResponse,
+  documentService:
+    DocumentService | undefined
+): void {
+  if (
+    !documentService
+      ?.deanonymize
+  ) {
+    return;
+  }
+
+  const documentIds =
+    result[
+      SESSION_EXECUTION_INTERNAL
+    ]?.documentAliasDocumentIds ??
+    [];
+  if (
+    documentIds.length === 0
+  ) {
+    return;
+  }
+
+  const restoreText = (
+    text: string
+  ): string =>
+    text.replace(
+      /\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})\]/g,
+      (
+        token,
+        documentNumber,
+        kind,
+        sequence
+      ) => {
+        const index =
+          Number(
+            documentNumber
+          ) - 1;
+        const documentId =
+          documentIds[index];
+        if (!documentId) {
+          return token;
+        }
+        const sourceToken =
+          `[PII:${kind}:${sequence}]`;
+        try {
+          return documentService
+            .deanonymize!(
+              documentId,
+              sourceToken
+            );
+        } catch {
+          // Keep the opaque alias when the matching local vault is unavailable.
+          // Never guess or substitute PII from another document.
+          return token;
+        }
+      }
+    );
+
+  if (
+    typeof result.answer ===
+      "string"
+  ) {
+    result.answer =
+      restoreText(
+        result.answer
+      );
+  }
+
+  if (
+    result.processAuto
+  ) {
+    for (
+      const step
+      of result.processAuto.steps
+    ) {
+      if (
+        typeof step.answer ===
+          "string"
+      ) {
+        step.answer =
+          restoreText(
+            step.answer
+          );
+      }
+    }
+  }
+
+  if (
+    result.reportBlueprint
+  ) {
+    const visit = (
+      value: unknown
+    ): unknown => {
+      if (
+        typeof value ===
+          "string"
+      ) {
+        return restoreText(
+          value
+        );
+      }
+      if (
+        Array.isArray(value)
+      ) {
+        return value.map(
+          visit
+        );
+      }
+      if (
+        value &&
+        typeof value ===
+          "object"
+      ) {
+        return Object.fromEntries(
+          Object.entries(
+            value as
+              Record<
+                string,
+                unknown
+              >
+          ).map(
+            ([key, item]) => [
+              key,
+              visit(item)
+            ]
+          )
+        );
+      }
+      return value;
+    };
+    result.reportBlueprint =
+      visit(
+        result.reportBlueprint
+      ) as
+        typeof result.reportBlueprint;
+  }
 }
 
 async function refreshDocumentCitations(args: {
@@ -7606,6 +7746,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           }
         };
 
+        restoreSessionDocumentAliases(
+          response,
+          options.documentService
+        );
         res.json(response);
         return;
       }
@@ -8382,6 +8526,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         };
       }
 
+      restoreSessionDocumentAliases(
+        result,
+        options.documentService
+      );
       res.json(result);
     } catch (error) {
       if (
