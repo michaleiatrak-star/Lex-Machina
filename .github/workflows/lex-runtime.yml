@@ -278,6 +278,9 @@ jobs:
       - name: Install runtime dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Build runtime for local MCP fallback shims
+        run: npm run build
+
       - name: G40 — start aggregator and all ten connector families
         run: npm run validate:g40-live
 
