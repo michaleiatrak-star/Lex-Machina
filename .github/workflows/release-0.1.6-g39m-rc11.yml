@@ -169,6 +169,13 @@ jobs:
           Online installer only.
 
           Fixed:
+          - Claude Code account/OAuth transport supports interactive login and
+            the documented long-lived CLAUDE_CODE_OAUTH_TOKEN from
+            `claude setup-token`;
+          - Claude headless execution does not use `--bare`, because bare mode
+            does not read CLAUDE_CODE_OAUTH_TOKEN;
+          - the Claude OAuth token can be kept in a dedicated desktop OS keyring
+            entry separate from Anthropic API credentials;
           - local requests now budget output tokens against the actually configured
             context window and conservative tokenizer calibration;
           - if llama.cpp SSE streaming is interrupted after a successful HTTP
@@ -218,6 +225,7 @@ jobs:
             Lex Machina refreshes that state on demand.
 
           Regression coverage added for:
+          - Claude OAuth access/refresh credential detection and dedicated OS-keyring persistence;
           - Claude account/OAuth authentication modes versus Anthropic API-key billing;
           - visible Windows login-launcher contract;
           - local inference failure classification;
