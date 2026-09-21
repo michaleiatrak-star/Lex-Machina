@@ -9,6 +9,8 @@ import {
   accountSessionResumeMode,
   claudeAutomationCredentialMode,
   claudeSubscriptionAuthenticated,
+  classifyAccountCliFailureDetail,
+  codexExecArgs,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
   isMissingResumableSessionMessage,
@@ -77,6 +79,59 @@ describe("provider account-session transport", () => {
         "LEX_CONTEXT_ONLY"
       );
     }
+  });
+
+  it("pins Codex account execution to a ChatGPT-compatible model and isolated ephemeral config", () => {
+    const args =
+      codexExecArgs(
+        "C:\\Lex Work",
+        "C:\\Lex Work\\last.txt"
+      );
+
+    expect(args).toContain(
+      "--ephemeral"
+    );
+    expect(args).toContain(
+      "gpt-5.6-luna"
+    );
+    expect(args).toContain(
+      "--ignore-user-config"
+    );
+    expect(args).toContain(
+      "mcp_servers={}"
+    );
+    expect(
+      args.some(
+        (value) =>
+          value.startsWith(
+            "features."
+          )
+      )
+    ).toBe(false);
+  });
+
+  it("maps Codex CLI failures to actionable account-session reasons", () => {
+    expect(
+      classifyAccountCliFailureDetail(
+        "The 'gpt-6-astra' model is not supported when using Codex with a ChatGPT account."
+      )
+    ).toBe(
+      "ACCOUNT_SESSION_MODEL_UNSUPPORTED"
+    );
+    expect(
+      classifyAccountCliFailureDetail(
+        "HTTP 401 unauthorized; login required"
+      )
+    ).toBe(
+      "ACCOUNT_SESSION_AUTH_EXPIRED"
+    );
+    expect(
+      classifyAccountCliFailureDetail(
+        "error: unrecognized option '--legacy-flag'"
+      )
+    ).toBe(
+      "ACCOUNT_SESSION_CLI_INCOMPATIBLE"
+    );
   });
 
   it("uses current interactive login commands for account providers", () => {
