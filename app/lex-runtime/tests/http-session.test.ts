@@ -264,6 +264,54 @@ describe("session execution HTTP API", () => {
       });
   });
 
+  it("maps unclassified local inference failures to a local diagnostic", async () => {
+    const executor: SessionExecutor = {
+      execute: vi.fn(
+        async () => {
+          throw new Error(
+            "fetch failed"
+          );
+        }
+      )
+    };
+    const app =
+      createLexHttpApp({
+        registry:
+          registry(),
+        modelCatalog: {
+          list:
+            vi.fn(
+              async () => []
+            )
+        },
+        sessionExecutor:
+          executor
+      });
+
+    await request(app)
+      .post(
+        "/api/sessions/execute"
+      )
+      .send({
+        query:
+          "Czy używasz lokalnego modelu językowego?",
+        provider:
+          "openai",
+        model:
+          "local/mistral-nemo-12b-q4km",
+        primarySkill:
+          DR,
+        mode:
+          "PRAWNIK"
+      })
+      .expect(503, {
+        error:
+          "LOCAL_MODEL_EXECUTION_FAILED",
+        reason:
+          "LOCAL_MODEL_INFERENCE_FAILED"
+      });
+  });
+
   it("reports the fail-closed chat privacy gate instead of a generic failure", async () => {
     const executor: SessionExecutor = {
       execute: vi.fn(async () => {
