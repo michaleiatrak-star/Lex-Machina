@@ -62,11 +62,9 @@ export type AccountSessionResumeMode =
   | "LEX_CONTEXT_ONLY";
 
 export function accountSessionResumeMode(
-  provider?: ProviderId
+  _provider?: ProviderId
 ): AccountSessionResumeMode {
-  return provider === "openai"
-    ? "LEX_CONTEXT_ONLY"
-    : "LAST_OR_NEW";
+  return "LEX_CONTEXT_ONLY";
 }
 
 export function isMissingResumableSessionMessage(
@@ -2261,11 +2259,6 @@ export class AccountSessionManager {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
     );
-    const allowExternalTakeover =
-      !continuityKey ||
-      !await hasPinnedAccountSession(
-        provider
-      );
     try {
       if (
         provider === "openai" ||
@@ -2402,110 +2395,8 @@ export class AccountSessionManager {
             abortSignal
           );
 
-        let result:
-          RunResult | null = null;
-        const savedSessionId =
-          await readAccountSessionId(
-            provider,
-            continuityKey
-          );
-        if (savedSessionId) {
-          result =
-            await runClaude([
-              "--resume",
-              savedSessionId
-            ]);
-          if (
-            result.code !== 0
-          ) {
-            const detail =
-              result.stderr +
-              "\n" +
-              result.stdout;
-            if (
-              isMissingResumableSessionMessage(
-                detail
-              )
-            ) {
-              await clearAccountSessionId(
-                provider,
-                continuityKey
-              );
-              result = null;
-            } else {
-              throw normalizeCliFailure(
-                provider,
-                result
-              );
-            }
-          }
-        }
-
-        if (
-          !result &&
-          allowExternalTakeover
-        ) {
-          const last =
-            await runClaude([
-              "--continue"
-            ]);
-          if (
-            last.code === 0
-          ) {
-            result = last;
-          } else {
-            const detail =
-              last.stderr +
-              "\n" +
-              last.stdout;
-            if (
-              !isMissingResumableSessionMessage(
-                detail
-              )
-            ) {
-              throw normalizeCliFailure(
-                provider,
-                last
-              );
-            }
-            const discoveredSessionId =
-              await discoverLatestClaudeSessionId();
-            if (
-              discoveredSessionId
-            ) {
-              const discovered =
-                await runClaude([
-                  "--resume",
-                  discoveredSessionId
-                ]);
-              if (
-                discovered.code === 0
-              ) {
-                result =
-                  discovered;
-              } else {
-                const discoveredDetail =
-                  discovered.stderr +
-                  "\n" +
-                  discovered.stdout;
-                if (
-                  !isMissingResumableSessionMessage(
-                    discoveredDetail
-                  )
-                ) {
-                  throw normalizeCliFailure(
-                    provider,
-                    discovered
-                  );
-                }
-              }
-            }
-          }
-        }
-        if (!result) {
-          result =
-            await runClaude([]);
-        }
+        const result =
+          await runClaude([]);
 
         if (result.code !== 0) {
           throw normalizeCliFailure(
@@ -2522,34 +2413,15 @@ export class AccountSessionManager {
             "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
           );
         }
-        if (parsed.sessionId) {
-          await writeAccountSessionId(
-            provider,
-            parsed.sessionId,
-            continuityKey
-          );
-        }
         return parsed.text;
       }
 
-      const savedSessionId =
-        await readAccountSessionId(
-          provider,
-          continuityKey
-        );
-      const resumeSessionId =
-        savedSessionId ??
-        (
-          allowExternalTakeover
-            ? await discoverLatestGrokSessionId()
-            : null
-        );
       const grok =
         await runGrokAcp(
           prompt,
           workDir,
           abortSignal,
-          resumeSessionId
+          null
         );
       if (
         !grok.authenticated
@@ -2563,13 +2435,6 @@ export class AccountSessionManager {
       ) {
         throw new Error(
           "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
-        );
-      }
-      if (grok.sessionId) {
-        await writeAccountSessionId(
-          provider,
-          grok.sessionId,
-          continuityKey
         );
       }
       return grok.text;
