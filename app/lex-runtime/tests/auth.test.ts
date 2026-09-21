@@ -131,7 +131,8 @@ describe("local auth service", () => {
       service.status()
     ).toEqual({
       initialized: true,
-      requiresBootstrap: false
+      requiresBootstrap: false,
+      temporaryAdminCredentialsActive: false
     });
 
     await expect(
