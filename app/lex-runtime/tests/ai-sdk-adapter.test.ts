@@ -5,6 +5,7 @@ import {
   buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
+  isLocalSseTerminalLine,
   localChatBudget,
   createLiveProviderRegistry,
   parseLocalSseLine,
@@ -156,6 +157,24 @@ describe("AiSdkProviderAdapter", () => {
         )
         .join("")
     ).toBe("OK");
+  });
+
+  it("detects Mistral/llama.cpp terminal SSE frames without waiting for socket close", () => {
+    expect(
+      isLocalSseTerminalLine(
+        'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}]}'
+      )
+    ).toBe(true);
+    expect(
+      isLocalSseTerminalLine(
+        "data: [DONE]"
+      )
+    ).toBe(true);
+    expect(
+      isLocalSseTerminalLine(
+        'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}'
+      )
+    ).toBe(false);
   });
 
   it("budgets local output against a 64k qualified context without logging prompt content", () => {
