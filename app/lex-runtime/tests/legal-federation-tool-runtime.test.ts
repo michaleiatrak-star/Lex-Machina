@@ -39,10 +39,18 @@ describe(
               schema.function.name ===
               "search_federated_legal_sources"
           );
+        const params =
+          search?.function
+            .parameters as {
+              properties?: {
+                source?: {
+                  enum?: string[];
+                };
+              };
+            };
         expect(
-          search?.function.parameters
-            .properties?.source
-            .enum
+          params.properties
+            ?.source?.enum
         ).toEqual([
           "saos",
           "nsa",
