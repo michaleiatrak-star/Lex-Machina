@@ -191,6 +191,93 @@ const KNOWN_EXECUTION_SKILLS = new Set([
   "raport-sytuacyjny-v2"
 ]);
 
+const FALLBACK_EXECUTION_SKILLS: PublicSkillDescriptor[] = [
+  {
+    name: "analiza-sadowa-v6",
+    category: "execution",
+    description: "Analiza sądowa i procesowa akt sprawy."
+  },
+  {
+    name: "analizator-dowodow-v3",
+    category: "execution",
+    description: "Analiza materiału dowodowego, luk i ryzyk."
+  },
+  {
+    name: "analizator-przepisow-v2",
+    category: "execution",
+    description: "Analiza i zestawienie przepisów istotnych dla sprawy."
+  },
+  {
+    name: "analizator-umow-v1",
+    category: "execution",
+    description: "Analiza postanowień umowy, obowiązków i ryzyk."
+  },
+  {
+    name: "chronologia-sprawy-v1",
+    category: "execution",
+    description: "Chronologia zdarzeń, terminów i zależności czasowych."
+  },
+  {
+    name: "orzeczenia-sadowe-v2",
+    category: "execution",
+    description: "Praca z orzecznictwem i tezami judykatury."
+  },
+  {
+    name: "pisma-procesowe-v3",
+    category: "execution",
+    description: "Przygotowanie pisma procesowego w checkpointowanym workflow."
+  },
+  {
+    name: "pisma-proste-v2",
+    category: "execution",
+    description: "Przygotowanie prostego pisma prawnego lub procesowego."
+  },
+  {
+    name: "przesluchanie-swiadkow-v2-min90",
+    category: "execution",
+    description: "Plan przesłuchania świadków i zestaw pytań."
+  },
+  {
+    name: "przewodnik-prawny-v2",
+    category: "execution",
+    description: "Przewodnik po dalszych krokach i ścieżkach działania."
+  },
+  {
+    name: "raport-klienta-v1",
+    category: "execution",
+    description: "Raport dla klienta."
+  },
+  {
+    name: "raport-sytuacyjny-v2",
+    category: "execution",
+    description: "Raport sytuacyjny sprawy, ryzyk i kolejnych działań."
+  }
+];
+
+function mergeSkillCatalog(
+  ...catalogs: readonly PublicSkillDescriptor[][]
+): PublicSkillDescriptor[] {
+  const byName = new Map<string, PublicSkillDescriptor>();
+  for (const catalog of catalogs) {
+    for (const skill of catalog) {
+      const existing = byName.get(skill.name);
+      byName.set(
+        skill.name,
+        existing
+          ? {
+              ...existing,
+              ...skill,
+              category:
+                skill.category ??
+                existing.category
+            }
+          : skill
+      );
+    }
+  }
+  return [...byName.values()];
+}
+
 function messageId(): string {
   const random = globalThis.crypto?.randomUUID?.().replaceAll("-", "") ??
     `${Date.now().toString(16)}${Math.random().toString(16).slice(2)}`
@@ -445,7 +532,9 @@ export default function MatterChatApp({
     useState("");
 
   const [routes, setRoutes] = useState<string[]>([]);
-  const [skills, setSkills] = useState<PublicSkillDescriptor[]>([]);
+  const [skills, setSkills] = useState<PublicSkillDescriptor[]>(
+    FALLBACK_EXECUTION_SKILLS
+  );
   const [manualSkills, setManualSkills] = useState<string[]>([]);
   const [
     deterministicAction,
@@ -697,9 +786,23 @@ export default function MatterChatApp({
         return await response.json() as { skills?: PublicSkillDescriptor[] };
       })
       .then((payload) => {
-        if (!cancelled && Array.isArray(payload.skills)) setSkills(payload.skills);
+        if (
+          !cancelled &&
+          Array.isArray(payload.skills)
+        ) {
+          setSkills((current) =>
+            mergeSkillCatalog(
+              FALLBACK_EXECUTION_SKILLS,
+              current,
+              payload.skills
+            )
+          );
+        }
       })
-      .catch(() => {});
+      .catch(() => {
+        // The built-in execution catalog stays visible even when the runtime
+        // skill registry is temporarily unavailable.
+      });
 
     return () => {
       cancelled = true;
@@ -707,10 +810,20 @@ export default function MatterChatApp({
   }, []);
 
   useEffect(() => {
-    if (skills.length === 0 && routes.length > 0) {
-      setSkills(routes.map((name) => ({ name, category: "domain" })));
+    if (routes.length === 0) {
+      return;
     }
-  }, [routes, skills.length]);
+    setSkills((current) =>
+      mergeSkillCatalog(
+        FALLBACK_EXECUTION_SKILLS,
+        current,
+        routes.map((name) => ({
+          name,
+          category: "domain"
+        }))
+      )
+    );
+  }, [routes]);
 
   useEffect(() => {
     const refreshLocalModels = () => {
