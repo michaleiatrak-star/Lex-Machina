@@ -171,7 +171,7 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES; LEGAL_SOURCE_FEDERATION_REQUIRES_NETWORK_FOR_LIVE_SOURCE_ACCESS_AND MAY DOWNLOAD PINNED CONNECTORS ON FIRST USE",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
@@ -217,6 +217,8 @@
       "legalize"
     ],
     "statutoryVerificationAuthority": "LEX_NATIVE_OFFICIAL_VERIFIER",
-    "firstUseNetworkRequired": true
+    "firstUseNetworkRequired": true,
+    "networkPolicy": "CORE_RUNTIME_REMAINS_NETWORK_INDEPENDENT_AFTER_BOOTSTRAP; LIVE_MCP_SOURCE_CALLS_REQUIRE_NETWORK_WHEN_USER_OR_MODEL_INVOKES_LEGAL_RESEARCH",
+    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE"
   }
 }
