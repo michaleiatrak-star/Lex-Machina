@@ -1421,7 +1421,7 @@ textarea:focus {
   left: 50%;
   top: calc(16px + var(--lex-top-inset, 0px));
   transform: translateX(-50%);
-  max-width: min(680px, calc(100vw - 420px));
+  max-width: min(680px, calc(100vw - 40px));
   padding: 10px 14px;
   border: 1px solid #d8c594;
   border-radius: 11px;
