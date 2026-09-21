@@ -1273,7 +1273,6 @@ export default function MatterChatApp({
     nextCaseId: string
   ): void {
     if (
-      executing ||
       caseBusy ||
       !nextCaseId ||
       nextCaseId === caseId
@@ -2432,7 +2431,6 @@ export default function MatterChatApp({
                   aria-label="Wybierz sprawę"
                   value={caseId}
                   disabled={
-                    executing ||
                     caseBusy
                   }
                   onChange={(event) =>
@@ -2466,8 +2464,7 @@ export default function MatterChatApp({
                 type="button"
                 className="chat-secondary-action"
                 disabled={
-                  caseBusy ||
-                  executing
+                  caseBusy
                 }
                 onClick={() =>
                   void createLocalCase(
