@@ -1,4 +1,5 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import type { Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -86,7 +87,7 @@ function claudeSessionsRoot(): string {
 }
 
 export async function discoverLatestClaudeSessionId(): Promise<string | null> {
-  let projects;
+  let projects: Dirent[];
   try {
     projects =
       await fsp.readdir(
@@ -120,7 +121,7 @@ export async function discoverLatestClaudeSessionId(): Promise<string | null> {
         claudeSessionsRoot(),
         project.name
       );
-    let entries;
+    let entries: Dirent[];
     try {
       entries =
         await fsp.readdir(
@@ -1516,7 +1517,7 @@ export class AccountSessionManager {
           "--config",
           "web_search=\"disabled\"",
           "--config",
-          "tools.view_image=false",
+          "features.view_image=false",
           "--sandbox",
           "read-only",
           "--skip-git-repo-check",
