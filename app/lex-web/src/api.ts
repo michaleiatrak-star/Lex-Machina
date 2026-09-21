@@ -1727,6 +1727,44 @@ export function generateLegalDocument(
   );
 }
 
+export async function downloadGeneratedArtifact(
+  caseId: string,
+  artifactId: string
+): Promise<Blob> {
+  const response =
+    await fetch(
+      `${apiBase()}/api/cases/${caseId}/artifacts/${artifactId}/download`,
+      {
+        headers: {
+          ...authorizationHeaders()
+        },
+        cache: "no-store"
+      }
+    );
+
+  if (!response.ok) {
+    let code =
+      `HTTP_${response.status}`;
+    try {
+      const failure =
+        await response
+          .json() as
+            ApiFailure;
+      code =
+        failure.error ||
+        code;
+    } catch {
+      // no JSON body
+    }
+    throw new ApiError(
+      code,
+      response.status
+    );
+  }
+
+  return await response.blob();
+}
+
 export function createDeanonymizationIntent(
   caseId: string,
   artifactId: string
