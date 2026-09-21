@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  accountLoginArgs,
   accountLoginLaunchMode,
   accountSessionModelId,
   accountSessionResumeMode,
@@ -60,6 +61,31 @@ describe("provider account-session transport", () => {
     expect(
       accountSessionResumeMode()
     ).toBe("LAST_OR_NEW");
+  });
+
+  it("uses current interactive login commands for account providers", () => {
+    expect(
+      accountLoginArgs(
+        "openai"
+      )
+    ).toEqual([
+      "login"
+    ]);
+    expect(
+      accountLoginArgs(
+        "anthropic"
+      )
+    ).toEqual([
+      "auth",
+      "login"
+    ]);
+    expect(
+      accountLoginArgs(
+        "xai"
+      )
+    ).toEqual([
+      "login"
+    ]);
   });
 
   it("launches Claude subscription OAuth in a visible Windows terminal", () => {
