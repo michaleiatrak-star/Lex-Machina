@@ -523,7 +523,7 @@ function providerFailureMessage(
     case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
       return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
     case "ACCOUNT_SESSION_CLI_FAILED":
-      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Wersja RC15 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
+      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Lex Machina 0.1.7 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
     default:
       return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
   }
@@ -1346,7 +1346,6 @@ export default function MatterChatApp({
       return;
     }
     setActiveTab("settings");
-    setSettingsSection("models");
     setSettingsSection(
       settingsRequest.section
     );
@@ -1622,6 +1621,7 @@ export default function MatterChatApp({
       "Przełączono na kanał API. Wklej klucz dostawcy; w aplikacji desktopowej możesz zapisać go w systemowym magazynie poświadczeń."
     );
     setActiveTab("settings");
+    setSettingsSection("models");
   }
 
   async function openAccountClientSetup(): Promise<void> {
