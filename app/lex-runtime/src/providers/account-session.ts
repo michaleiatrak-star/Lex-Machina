@@ -629,13 +629,126 @@ function cmdQuote(value: string): string {
   return `"${escaped}"`;
 }
 
+export function mergeWindowsCommandPath(
+  currentPath: string | undefined,
+  machinePath: string | undefined,
+  userPath: string | undefined
+): string {
+  const seen =
+    new Set<string>();
+  const parts: string[] = [];
+  for (
+    const raw
+    of [
+      currentPath,
+      machinePath,
+      userPath
+    ]
+  ) {
+    for (
+      const item
+      of (raw ?? "")
+        .split(";")
+        .map(
+          (value) =>
+            value.trim()
+        )
+        .filter(Boolean)
+    ) {
+      const key =
+        item.toLocaleLowerCase(
+          "en"
+        );
+      if (
+        seen.has(key)
+      ) {
+        continue;
+      }
+      seen.add(key);
+      parts.push(item);
+    }
+  }
+  return parts.join(";");
+}
+
+async function commandLookupEnvironment():
+  Promise<NodeJS.ProcessEnv> {
+  if (
+    process.platform !==
+      "win32"
+  ) {
+    return process.env;
+  }
+
+  const command = [
+    "$machine=[Environment]::GetEnvironmentVariable('Path','Machine')",
+    "$user=[Environment]::GetEnvironmentVariable('Path','User')",
+    "[Console]::Out.Write(($machine + [Environment]::NewLine + $user))"
+  ].join(";");
+
+  const result =
+    await runDirect(
+      "powershell.exe",
+      [
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        command
+      ],
+      undefined,
+      process.env,
+      5_000
+    ).catch(
+      () => null
+    );
+  if (
+    !result ||
+    result.code !== 0
+  ) {
+    return process.env;
+  }
+
+  const [
+    machinePath = "",
+    userPath = ""
+  ] =
+    result.stdout.split(
+      /\r?\n/,
+      2
+    );
+  const pathKey =
+    Object.keys(
+      process.env
+    ).find(
+      (key) =>
+        key.toLocaleLowerCase(
+          "en"
+        ) === "path"
+    ) ?? "Path";
+  const refreshedPath =
+    mergeWindowsCommandPath(
+      process.env[pathKey],
+      machinePath,
+      userPath
+    );
+
+  return {
+    ...process.env,
+    [pathKey]:
+      refreshedPath
+  };
+}
+
 async function resolveCommand(command: string): Promise<string | null> {
   const probe = process.platform === "win32" ? "where.exe" : "which";
+  const env =
+    await commandLookupEnvironment();
   const result = await runDirect(
     probe,
     [command],
     undefined,
-    process.env,
+    env,
     5_000
   ).catch(() => null);
   if (!result || result.code !== 0) return null;
