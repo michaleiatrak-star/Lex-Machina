@@ -107,6 +107,10 @@ import {
   PseudonymizationVault,
   type NamedEntityRecognizer
 } from "./privacy/pseudonymizer.js";
+import {
+  ModelAutoRouter,
+  type ModelAutoRoutingResult
+} from "./model-auto-routing.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
@@ -482,11 +486,16 @@ function transferExecutionEvents(
 }
 
 export interface SessionExecutor {
+  resolveAutoRouting?(
+    request: SessionExecutionRequest
+  ): Promise<ModelAutoRoutingResult>;
   execute(request: SessionExecutionRequest): Promise<SessionExecutionResponse>;
 }
 
 export class SafeSessionExecutor implements SessionExecutor {
   private readonly engine: LexExecutionEngine;
+  private readonly autoRouter:
+    ModelAutoRouter;
   private readonly auxiliaryScheduler:
     AuxiliaryModelScheduler;
 
@@ -501,10 +510,83 @@ export class SafeSessionExecutor implements SessionExecutor {
       registry,
       providers
     );
+    this.autoRouter =
+      new ModelAutoRouter(
+        registry,
+        providers
+      );
     this.auxiliaryScheduler =
       new AuxiliaryModelScheduler(
         providers
       );
+  }
+
+  async resolveAutoRouting(
+    request: SessionExecutionRequest
+  ): Promise<ModelAutoRoutingResult> {
+    const vault =
+      new PseudonymizationVault();
+    const pseudonymizer =
+      new LocalPolishPseudonymizer(
+        vault,
+        this.chatNamedEntityRecognizer
+      );
+    let protectedQuery: string;
+    try {
+      protectedQuery =
+        (
+          await pseudonymizer
+            .pseudonymize(
+              request.query
+            )
+        ).text;
+    } catch {
+      throw new Error(
+        "CHAT_PRIVACY_GATE_FAILED"
+      );
+    }
+
+    const routed =
+      await this.autoRouter
+        .resolve({
+          query:
+            protectedQuery,
+          provider:
+            request.provider,
+          model:
+            request.model
+        });
+
+    // Keep the user's original text for the actual execution. Only the
+    // model-selected routing envelope is copied from the protected prepass.
+    const protectedEnvelope =
+      parseSkillSelectionEnvelope(
+        routed.query
+      );
+    const originalEnvelope =
+      parseSkillSelectionEnvelope(
+        request.query
+      );
+    const firstBreak =
+      routed.query.indexOf(
+        "\n"
+      );
+    const routingHeader =
+      firstBreak >= 0
+        ? routed.query.slice(
+            0,
+            firstBreak
+          )
+        : routed.query;
+
+    return {
+      decision:
+        routed.decision,
+      query:
+        routingHeader +
+        "\n" +
+        originalEnvelope.query
+    };
   }
 
   async execute(
@@ -1750,7 +1832,7 @@ export class SafeSessionExecutor implements SessionExecutor {
             }
           : {})
       },
-      primarySkill: request.primarySkill,
+      primarySkill: execution.primarySkill,
       loadedSkills: execution.loadedSkills,
       executionSkills: execution.executionSkills,
       domainSkills: execution.domainSkills,
