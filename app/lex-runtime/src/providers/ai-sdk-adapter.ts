@@ -225,22 +225,26 @@ async function streamLocalModel(
   ) {
     let result:
       ProviderStreamResult;
+    const {
+      tools:
+        _nativeTools,
+      runTools:
+        _nativeRunTools,
+      callbacks:
+        _nativeCallbacks,
+      ...localParams
+    } = params;
     try {
       result =
         await streamModel(
           model,
           {
-            ...params,
+            ...localParams,
             systemPrompt:
               buildLocalToolSystemPrompt(
                 params,
                 toolTranscript
               ),
-            tools: [],
-            runTools:
-              undefined,
-            callbacks:
-              undefined,
             reasoning:
               "none"
           },
