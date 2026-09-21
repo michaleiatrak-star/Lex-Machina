@@ -1,6 +1,6 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createHash } from "node:crypto";
-import type { Dirent } from "node:fs";
+import { existsSync, type Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -800,6 +800,159 @@ async function commandLookupEnvironment():
   };
 }
 
+function codexAccountModel(): string {
+  return process.env
+    .LEX_CODEX_ACCOUNT_MODEL
+    ?.trim() ||
+    "gpt-5.6-luna";
+}
+
+function privateCodexExecutable(): string | null {
+  const override =
+    process.env
+      .LEX_CODEX_CLI
+      ?.trim();
+  if (
+    override &&
+    existsSync(
+      override
+    )
+  ) {
+    return override;
+  }
+
+  const suffix =
+    process.platform ===
+      "win32"
+      ? "codex.cmd"
+      : "codex";
+  const candidates:
+    string[] = [];
+  const runtimeRoot =
+    process.env
+      .LEX_RUNTIME_ROOT
+      ?.trim();
+  if (runtimeRoot) {
+    candidates.push(
+      path.join(
+        runtimeRoot,
+        "app",
+        "node_modules",
+        ".bin",
+        suffix
+      )
+    );
+  }
+  candidates.push(
+    path.resolve(
+      process.cwd(),
+      "node_modules",
+      ".bin",
+      suffix
+    )
+  );
+
+  return candidates.find(
+    (candidate) =>
+      existsSync(
+        candidate
+      )
+  ) ?? null;
+}
+
+export function codexExecArgs(
+  workDir: string,
+  outputPath: string,
+  model =
+    codexAccountModel()
+): string[] {
+  return [
+    "exec",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--ephemeral",
+    "--disable",
+    "plugins",
+    "--disable",
+    "apps",
+    "--disable",
+    "multi_agent",
+    "--disable",
+    "remote_plugin",
+    "--disable",
+    "shell_tool",
+    "--disable",
+    "unified_exec",
+    "--disable",
+    "node_repl",
+    "--config",
+    "mcp_servers={}",
+    "--sandbox",
+    "read-only",
+    "--skip-git-repo-check",
+    "--color",
+    "never",
+    "--model",
+    model,
+    "--cd",
+    workDir,
+    "--json",
+    "--output-last-message",
+    outputPath,
+    "-"
+  ];
+}
+
+export function classifyAccountCliFailureDetail(
+  detail: string
+):
+  | "ACCOUNT_SESSION_MODEL_UNSUPPORTED"
+  | "ACCOUNT_SESSION_AUTH_EXPIRED"
+  | "ACCOUNT_SESSION_CAPACITY"
+  | "ACCOUNT_SESSION_PROMPT_REJECTED"
+  | "ACCOUNT_SESSION_CLI_INCOMPATIBLE"
+  | "ACCOUNT_SESSION_CLI_FAILED" {
+  const lower =
+    detail.toLowerCase();
+
+  if (
+    /model.{0,80}(not supported|unsupported|not available)|not supported when using codex with a chatgpt account|model metadata.*not found/.test(
+      lower
+    )
+  ) {
+    return "ACCOUNT_SESSION_MODEL_UNSUPPORTED";
+  }
+  if (
+    /401|unauthorized|not logged in|login required|authentication.*failed|credentials.*missing/.test(
+      lower
+    )
+  ) {
+    return "ACCOUNT_SESSION_AUTH_EXPIRED";
+  }
+  if (
+    /rate limit|too many requests|at capacity|capacity|quota exceeded|usage limit/.test(
+      lower
+    )
+  ) {
+    return "ACCOUNT_SESSION_CAPACITY";
+  }
+  if (
+    /usage policy|prompt was flagged|invalid prompt/.test(
+      lower
+    )
+  ) {
+    return "ACCOUNT_SESSION_PROMPT_REJECTED";
+  }
+  if (
+    /unknown (?:option|argument|feature|config)|unrecognized (?:option|argument)|invalid value.*features\.|failed to parse.*config/.test(
+      lower
+    )
+  ) {
+    return "ACCOUNT_SESSION_CLI_INCOMPATIBLE";
+  }
+  return "ACCOUNT_SESSION_CLI_FAILED";
+}
+
 async function resolveCommand(command: string): Promise<string | null> {
   const probe = process.platform === "win32" ? "where.exe" : "which";
   const env =
@@ -948,7 +1101,11 @@ async function runCli(
   abortSignal?: AbortSignal
 ): Promise<RunResult> {
   const command = CLI_NAMES[provider];
-  const executable = await resolveCommand(command);
+  const executable =
+    provider === "openai"
+      ? privateCodexExecutable() ??
+        await resolveCommand(command)
+      : await resolveCommand(command);
   if (!executable) {
     throw new Error(`ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`);
   }
@@ -1016,9 +1173,14 @@ async function runVisibleWindowsLogin(
   const command =
     CLI_NAMES[provider];
   const executable =
-    await resolveCommand(
-      command
-    );
+    provider === "openai"
+      ? privateCodexExecutable() ??
+        await resolveCommand(
+          command
+        )
+      : await resolveCommand(
+          command
+        );
   if (!executable) {
     throw new Error(
       `ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`
@@ -1117,12 +1279,17 @@ function normalizeCliFailure(
   provider: ProviderId,
   result: RunResult
 ): Error {
-  const detail = (result.stderr || result.stdout)
-    .trim()
-    .slice(-1200)
-    .replace(/[\r\n]+/g, " ");
+  const detail =
+    (result.stderr || result.stdout)
+      .trim()
+      .slice(-1200)
+      .replace(/[\r\n]+/g, " ");
+  const code =
+    classifyAccountCliFailureDetail(
+      detail
+    );
   return new Error(
-    `ACCOUNT_SESSION_CLI_FAILED:${provider}:${result.code}${detail ? `:${detail}` : ""}`
+    `${code}:${provider}:${result.code}`
   );
 }
 
@@ -2298,56 +2465,81 @@ export class AccountSessionManager {
             workDir,
             "last-message.txt"
           );
-        const commonArgs = [
-          "exec",
-          "--ignore-user-config",
-          "--ignore-rules",
-          "--config",
-          "mcp_servers={}",
-          "--config",
-          "features.plugins=false",
-          "--config",
-          "features.shell_tool=false",
-          "--config",
-          "features.unified_exec=false",
-          "--config",
-          "features.multi_agent=false",
-          "--config",
-          "features.apps=false",
-          "--config",
-          "features.hooks=false",
-          "--config",
-          "features.remote_plugin=false",
-          "--config",
-          "web_search=\"disabled\"",
-          "--config",
-          "tools.view_image=false",
-          "--sandbox",
-          "read-only",
-          "--skip-git-repo-check",
-          "--cd",
-          workDir,
-          "--json",
-          "--output-last-message",
-          outputPath
-        ];
-        const result =
-          await runCli(
-            provider,
-            [
-              ...commonArgs,
-              "-"
-            ],
-            prompt,
-            COMMAND_TIMEOUT_MS,
-            workDir,
-            abortSignal
+        const preferredModel =
+          codexAccountModel();
+        const candidateModels =
+          [
+            preferredModel,
+            "gpt-5.6-luna",
+            "gpt-5.5",
+            "gpt-5.4-mini"
+          ].filter(
+            (
+              value,
+              index,
+              all
+            ) =>
+              all.indexOf(
+                value
+              ) === index
           );
 
-        if (result.code !== 0) {
-          throw normalizeCliFailure(
-            provider,
-            result
+        let result:
+          RunResult | null =
+            null;
+        let lastFailure:
+          Error | null =
+            null;
+
+        for (
+          const candidateModel
+          of candidateModels
+        ) {
+          const attempt =
+            await runCli(
+              provider,
+              codexExecArgs(
+                workDir,
+                outputPath,
+                candidateModel
+              ),
+              prompt,
+              COMMAND_TIMEOUT_MS,
+              workDir,
+              abortSignal
+            );
+
+          if (
+            attempt.code === 0
+          ) {
+            result =
+              attempt;
+            break;
+          }
+
+          const failure =
+            normalizeCliFailure(
+              provider,
+              attempt
+            );
+          lastFailure =
+            failure;
+          if (
+            !failure.message
+              .startsWith(
+                "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+              )
+          ) {
+            throw failure;
+          }
+        }
+
+        if (!result) {
+          throw (
+            lastFailure ??
+            new Error(
+              "ACCOUNT_SESSION_CLI_FAILED:openai:1"
+            )
           );
         }
 
