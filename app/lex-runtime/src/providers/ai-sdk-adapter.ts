@@ -23,6 +23,318 @@ import {
 
 const MAX_OUTPUT_TOKENS = 16_384;
 
+const LOCAL_TOOL_SENTINEL =
+  "LEX_TOOL_CALLS_JSON:";
+
+export function parseLocalToolCalls(
+  text: string
+): NormalizedToolCall[] | null {
+  let normalized =
+    text.trim();
+  if (
+    normalized.startsWith("~~~") &&
+    normalized.endsWith("~~~")
+  ) {
+    normalized = normalized
+      .replace(/^~~~(?:json)?\s*/i, "")
+      .replace(/\s*~~~$/, "")
+      .trim();
+  }
+  if (
+    normalized.startsWith("```") &&
+    normalized.endsWith("```")
+  ) {
+    normalized = normalized
+      .replace(/^```(?:json)?\s*/i, "")
+      .replace(/\s*```$/, "")
+      .trim();
+  }
+  if (
+    !normalized.startsWith(
+      LOCAL_TOOL_SENTINEL
+    )
+  ) {
+    return null;
+  }
+
+  let parsed: {
+    calls?: unknown;
+  };
+  try {
+    parsed =
+      JSON.parse(
+        normalized
+          .slice(
+            LOCAL_TOOL_SENTINEL.length
+          )
+          .trim()
+      ) as {
+        calls?: unknown;
+      };
+  } catch {
+    throw new Error(
+      "LOCAL_MODEL_TOOL_PROTOCOL_INVALID"
+    );
+  }
+  if (
+    !Array.isArray(
+      parsed.calls
+    )
+  ) {
+    throw new Error(
+      "LOCAL_MODEL_TOOL_PROTOCOL_INVALID"
+    );
+  }
+
+  return parsed.calls.map(
+    (item, index) => {
+      if (
+        !item ||
+        typeof item !== "object" ||
+        Array.isArray(item)
+      ) {
+        throw new Error(
+          "LOCAL_MODEL_TOOL_PROTOCOL_INVALID"
+        );
+      }
+      const record =
+        item as
+          Record<string, unknown>;
+      const name =
+        typeof record.name ===
+          "string"
+          ? record.name
+          : "";
+      const id =
+        typeof record.id ===
+          "string" &&
+        record.id
+          ? record.id
+          : `local_tool_${index + 1}`;
+      const input =
+        record.input &&
+        typeof record.input ===
+          "object" &&
+        !Array.isArray(
+          record.input
+        )
+          ? record.input as
+              Record<
+                string,
+                unknown
+              >
+          : {};
+      if (!name) {
+        throw new Error(
+          "LOCAL_MODEL_TOOL_PROTOCOL_INVALID"
+        );
+      }
+      return {
+        id,
+        name,
+        input
+      };
+    }
+  );
+}
+
+export function buildLocalToolSystemPrompt(
+  params: ProviderStreamParams,
+  toolTranscript: string[]
+): string {
+  const toolSchemas =
+    params.tools?.length
+      ? JSON.stringify(
+          params.tools.map(
+            (tool) => ({
+              name:
+                tool.function.name,
+              description:
+                tool.function
+                  .description,
+              parameters:
+                tool.function
+                  .parameters
+            })
+          )
+        )
+      : "[]";
+
+  const protocol =
+    params.tools?.length
+      ? [
+          "LEX MACHINA LOCAL TOOL PROTOCOL:",
+          "Tool execution belongs exclusively to Lex Machina runtime.",
+          "Never invent a tool result and never claim that a tool ran unless its result appears in LEX_RUNTIME_TOOL_TRANSCRIPT.",
+          "When a runtime tool is required, output ONLY one line beginning with:",
+          `${LOCAL_TOOL_SENTINEL}{"calls":[{"id":"call_1","name":"tool_name","input":{}}]}`,
+          "Use only names listed in LEX_RUNTIME_TOOLS.",
+          "After tool results are supplied, continue the task. When no more tools are required, return the final answer normally.",
+          `LEX_RUNTIME_TOOLS=${toolSchemas}`
+        ]
+      : [
+          "LEX MACHINA LOCAL TOOL PROTOCOL:",
+          "No runtime tools are available for this turn."
+        ];
+
+  return [
+    params.systemPrompt,
+    "",
+    ...protocol,
+    ...(toolTranscript.length
+      ? [
+          "",
+          "LEX_RUNTIME_TOOL_TRANSCRIPT:",
+          toolTranscript.join(
+            "\n\n"
+          )
+        ]
+      : [])
+  ].join("\n");
+}
+
+async function streamLocalModel(
+  model: LanguageModel,
+  params: ProviderStreamParams
+): Promise<ProviderStreamResult> {
+  const allowedTools =
+    new Set(
+      (params.tools ?? [])
+        .map(
+          (tool) =>
+            tool.function.name
+        )
+    );
+  const toolTranscript:
+    string[] = [];
+  const maxIterations =
+    Math.max(
+      1,
+      Math.min(
+        params.maxIterations ??
+          10,
+        12
+      )
+    );
+
+  for (
+    let iteration = 0;
+    iteration <
+      maxIterations;
+    iteration += 1
+  ) {
+    let result:
+      ProviderStreamResult;
+    try {
+      result =
+        await streamModel(
+          model,
+          {
+            ...params,
+            systemPrompt:
+              buildLocalToolSystemPrompt(
+                params,
+                toolTranscript
+              ),
+            tools: [],
+            runTools:
+              undefined,
+            callbacks:
+              undefined,
+            reasoning:
+              "none"
+          },
+          "Local llama.cpp"
+        );
+    } catch (error) {
+      const detail =
+        error instanceof Error
+          ? error.message
+          : String(error);
+      throw new Error(
+        `LOCAL_MODEL_INFERENCE_FAILED:${detail
+          .replace(/[\r\n]+/g, " ")
+          .slice(-800)}`
+      );
+    }
+
+    const calls =
+      parseLocalToolCalls(
+        result.fullText
+      );
+    if (!calls) {
+      params.callbacks
+        ?.onContentDelta?.(
+          result.fullText
+        );
+      return result;
+    }
+
+    if (
+      calls.length === 0 ||
+      !params.runTools
+    ) {
+      throw new Error(
+        "LOCAL_MODEL_TOOL_PROTOCOL_UNAVAILABLE"
+      );
+    }
+
+    for (
+      const call
+      of calls
+    ) {
+      if (
+        !allowedTools.has(
+          call.name
+        )
+      ) {
+        throw new Error(
+          `LOCAL_MODEL_UNKNOWN_TOOL:${call.name}`
+        );
+      }
+      params.callbacks
+        ?.onToolCallStart?.(
+          call
+        );
+    }
+
+    const results =
+      await params.runTools(
+        calls
+      );
+    for (
+      const call
+      of calls
+    ) {
+      const toolResult =
+        results.find(
+          (item) =>
+            item.tool_use_id ===
+              call.id
+        );
+      if (!toolResult) {
+        throw new Error(
+          `LOCAL_MODEL_TOOL_RESULT_MISSING:${call.id}`
+        );
+      }
+      toolTranscript.push(
+        [
+          `TOOL_CALL ${call.id} ${call.name}`,
+          JSON.stringify(
+            call.input
+          ),
+          `TOOL_RESULT ${call.id}`,
+          toolResult.content
+        ].join("\n")
+      );
+    }
+  }
+
+  throw new Error(
+    "LOCAL_MODEL_MAX_TOOL_ITERATIONS"
+  );
+}
+
 type PendingToolExecution = {
   call: NormalizedToolCall;
   resolve: (content: string) => void;
@@ -280,14 +592,16 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
         apiKey: "lex-machina-local-only",
         baseURL: this.localModels.status().endpoint
       });
-      return streamModel(
-        local.chat(configuredModel.id),
+      return streamLocalModel(
+        local.chat(
+          configuredModel.id
+        ),
         {
           ...params,
-          model: configuredModel.id,
+          model:
+            configuredModel.id,
           reasoning: "none"
-        },
-        "Local llama.cpp"
+        }
       );
     }
 
