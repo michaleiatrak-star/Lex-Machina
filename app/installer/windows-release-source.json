@@ -202,7 +202,7 @@
   "legalSourceFederation": {
     "transport": "MCP_STDIO_VIA_UVX",
     "aggregator": "prawo-pl-mcp",
-    "aggregatorVersion": "0.2.3",
+    "aggregatorVersion": "0.1.4",
     "role": "DISCOVERY_RESEARCH_ONLY",
     "sources": [
       "saos",
