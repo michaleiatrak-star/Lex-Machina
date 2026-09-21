@@ -28,12 +28,27 @@ const CLI_NAMES: Record<ProviderId, string> = {
   xai: "grok"
 };
 
+export type ProviderAccountSessionTakeoverMode =
+  | "LAST"
+  | "EXPLICIT";
+
 export type ProviderAccountSessionStatus = {
   provider: ProviderId;
   command: string;
   installed: boolean;
   authenticated: boolean;
   installHint: string;
+  takeoverSupported: boolean;
+  takeoverActive: boolean;
+  takeoverMode?: ProviderAccountSessionTakeoverMode;
+  takeoverReference?: string;
+  takeoverHint: string;
+};
+
+type AccountSessionTakeover = {
+  reference: string;
+  displayReference: string;
+  mode: ProviderAccountSessionTakeoverMode;
 };
 
 type RunResult = {
@@ -65,6 +80,125 @@ function installHint(provider: ProviderId): string {
     return "Zainstaluj Claude Code i wykonaj: claude auth login";
   }
   return "Zainstaluj Grok Build CLI i wykonaj: grok login";
+}
+
+function takeoverHint(provider: ProviderId): string {
+  if (provider === "openai") {
+    return "Puste pole przejmuje ostatnią sesję Codex; można też podać ID sesji.";
+  }
+  if (provider === "anthropic") {
+    return "Puste pole przejmuje najnowszą lokalną sesję Claude Code; można też podać ID, nazwę lub ścieżkę transkryptu .jsonl.";
+  }
+  return "Dla Grok/ACP podaj ID istniejącej sesji.";
+}
+
+function normalizeTakeoverReference(
+  value: string | undefined
+): string | null {
+  const trimmed = value?.trim() ?? "";
+  if (!trimmed) return null;
+  if (
+    trimmed.length > 4096 ||
+    trimmed.includes("\0")
+  ) {
+    throw new Error(
+      "ACCOUNT_SESSION_REFERENCE_INVALID"
+    );
+  }
+  return trimmed;
+}
+
+async function latestClaudeTranscript(): Promise<string | null> {
+  const configured =
+    process.env.CLAUDE_CONFIG_DIR?.trim();
+  const root = configured
+    ? path.join(
+        path.resolve(configured),
+        "projects"
+      )
+    : path.join(
+        os.homedir(),
+        ".claude",
+        "projects"
+      );
+
+  let entriesSeen = 0;
+  let latest:
+    | {
+        file: string;
+        mtimeMs: number;
+      }
+    | null = null;
+  const pending = [root];
+
+  while (
+    pending.length > 0 &&
+    entriesSeen < 20_000
+  ) {
+    const current =
+      pending.pop()!;
+    let entries:
+      Awaited<
+        ReturnType<
+          typeof fsp.readdir
+        >
+      >;
+    try {
+      entries =
+        await fsp.readdir(
+          current,
+          {
+            withFileTypes:
+              true
+          }
+        );
+    } catch {
+      continue;
+    }
+
+    for (const entry of entries) {
+      entriesSeen += 1;
+      if (entriesSeen >= 20_000) {
+        break;
+      }
+      const full =
+        path.join(
+          current,
+          entry.name
+        );
+      if (entry.isDirectory()) {
+        pending.push(full);
+        continue;
+      }
+      if (
+        !entry.isFile() ||
+        !entry.name
+          .toLowerCase()
+          .endsWith(".jsonl")
+      ) {
+        continue;
+      }
+      try {
+        const stat =
+          await fsp.stat(full);
+        if (
+          !latest ||
+          stat.mtimeMs >
+            latest.mtimeMs
+        ) {
+          latest = {
+            file: full,
+            mtimeMs:
+              stat.mtimeMs
+          };
+        }
+      } catch {
+        // A session may disappear while Claude Code rotates local state.
+      }
+    }
+  }
+
+  return latest?.file ?? null;
 }
 
 function cmdQuote(value: string): string {
@@ -341,7 +475,8 @@ async function assertSubscriptionAccount(
 async function runGrokAcp(
   prompt: string | null,
   cwd: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  sessionRef?: string
 ): Promise<{
   authenticated: boolean;
   text?: string;
@@ -733,24 +868,66 @@ async function runGrokAcp(
         return;
       }
 
-      const session =
+      let sessionId = "";
+      if (sessionRef) {
+        const capabilities =
+          init.agentCapabilities &&
+          typeof init.agentCapabilities ===
+            "object"
+            ? init.agentCapabilities as
+                Record<
+                  string,
+                  unknown
+                >
+            : null;
+        const loadSession =
+          capabilities?.loadSession;
+        if (
+          !(
+            loadSession === true ||
+            (
+              loadSession &&
+              typeof loadSession ===
+                "object"
+            )
+          )
+        ) {
+          throw new Error(
+            "ACCOUNT_SESSION_TAKEOVER_UNSUPPORTED:xai"
+          );
+        }
         await request(
-          "session/new",
+          "session/load",
           {
+            sessionId:
+              sessionRef,
             cwd,
             mcpServers:
               []
           }
         );
-      const sessionId =
-        typeof session.sessionId ===
-          "string"
-          ? session.sessionId
-          : "";
-      if (!sessionId) {
-        throw new Error(
-          "ACCOUNT_SESSION_ACP_SESSION_INVALID"
-        );
+        sessionId =
+          sessionRef;
+      } else {
+        const session =
+          await request(
+            "session/new",
+            {
+              cwd,
+              mcpServers:
+                []
+            }
+          );
+        sessionId =
+          typeof session.sessionId ===
+            "string"
+            ? session.sessionId
+            : "";
+        if (!sessionId) {
+          throw new Error(
+            "ACCOUNT_SESSION_ACP_SESSION_INVALID"
+          );
+        }
       }
 
       await request(
@@ -951,19 +1128,62 @@ function buildAccountPrompt(
 }
 
 export class AccountSessionManager {
+  private readonly takeovers =
+    new Map<
+      ProviderId,
+      AccountSessionTakeover
+    >();
+
+  private withTakeover(
+    status: Omit<
+      ProviderAccountSessionStatus,
+      | "takeoverSupported"
+      | "takeoverActive"
+      | "takeoverMode"
+      | "takeoverReference"
+      | "takeoverHint"
+    >
+  ): ProviderAccountSessionStatus {
+    const takeover =
+      this.takeovers.get(
+        status.provider
+      );
+    return {
+      ...status,
+      takeoverSupported:
+        true,
+      takeoverActive:
+        status.authenticated &&
+        Boolean(takeover),
+      ...(status.authenticated &&
+      takeover
+        ? {
+            takeoverMode:
+              takeover.mode,
+            takeoverReference:
+              takeover.displayReference
+          }
+        : {}),
+      takeoverHint:
+        takeoverHint(
+          status.provider
+        )
+    };
+  }
+
   async status(
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
     const command = CLI_NAMES[provider];
     const executable = await resolveCommand(command);
     if (!executable) {
-      return {
+      return this.withTakeover({
         provider,
         command,
         installed: false,
         authenticated: false,
         installHint: installHint(provider)
-      };
+      });
     }
 
     let result: RunResult;
@@ -1040,13 +1260,13 @@ export class AccountSessionManager {
             )
           : result.code === 0;
 
-    return {
+    return this.withTakeover({
       provider,
       command,
       installed: true,
       authenticated,
       installHint: installHint(provider)
-    };
+    });
   }
 
   async statusAll(): Promise<ProviderAccountSessionStatus[]> {
@@ -1059,6 +1279,9 @@ export class AccountSessionManager {
   async login(
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
+    this.takeovers.delete(
+      provider
+    );
     const args =
       provider === "openai"
         ? ["login"]
@@ -1075,6 +1298,105 @@ export class AccountSessionManager {
       throw normalizeCliFailure(provider, result);
     }
     return this.status(provider);
+  }
+
+  async takeover(
+    provider: ProviderId,
+    sessionRef?: string
+  ): Promise<ProviderAccountSessionStatus> {
+    const status =
+      await this.status(
+        provider
+      );
+    if (!status.installed) {
+      throw new Error(
+        `ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`
+      );
+    }
+    if (!status.authenticated) {
+      throw new Error(
+        `ACCOUNT_SESSION_NOT_AUTHENTICATED:${provider}`
+      );
+    }
+
+    const requested =
+      normalizeTakeoverReference(
+        sessionRef
+      );
+    let reference:
+      string;
+    let displayReference:
+      string;
+    let mode:
+      ProviderAccountSessionTakeoverMode;
+
+    if (requested) {
+      reference =
+        requested;
+      displayReference =
+        requested.length > 96
+          ? requested.slice(
+              0,
+              93
+            ) + "..."
+          : requested;
+      mode =
+        "EXPLICIT";
+    } else if (
+      provider ===
+        "openai"
+    ) {
+      reference =
+        "__LAST__";
+      displayReference =
+        "ostatnia sesja Codex";
+      mode =
+        "LAST";
+    } else if (
+      provider ===
+        "anthropic"
+    ) {
+      const latest =
+        await latestClaudeTranscript();
+      if (!latest) {
+        throw new Error(
+          "ACCOUNT_SESSION_NO_RESUMABLE_SESSION:anthropic"
+        );
+      }
+      reference =
+        latest;
+      displayReference =
+        "najnowsza sesja Claude Code";
+      mode =
+        "LAST";
+    } else {
+      throw new Error(
+        "ACCOUNT_SESSION_REFERENCE_REQUIRED:xai"
+      );
+    }
+
+    this.takeovers.set(
+      provider,
+      {
+        reference,
+        displayReference,
+        mode
+      }
+    );
+    return this.status(
+      provider
+    );
+  }
+
+  async releaseTakeover(
+    provider: ProviderId
+  ): Promise<ProviderAccountSessionStatus> {
+    this.takeovers.delete(
+      provider
+    );
+    return this.status(
+      provider
+    );
   }
 
   async runText(
@@ -1097,29 +1419,76 @@ export class AccountSessionManager {
         );
       }
 
+      const takeover =
+        this.takeovers.get(
+          provider
+        );
+
       if (provider === "openai") {
         const outputPath =
           path.join(workDir, "last-message.txt");
+        const baseArgs = [
+          "exec",
+          "--ignore-user-config",
+          "--sandbox",
+          "read-only",
+          "--skip-git-repo-check",
+          "--cd",
+          workDir,
+          "--output-last-message",
+          outputPath
+        ];
+        const takeoverArgs =
+          takeover
+            ? [
+                ...baseArgs,
+                "resume",
+                ...(takeover.reference ===
+                "__LAST__"
+                  ? ["--last"]
+                  : [
+                      takeover.reference
+                    ]),
+                "-"
+              ]
+            : [
+                ...baseArgs,
+                "--ephemeral",
+                "-"
+              ];
+
         result = await runCli(
           provider,
-          [
-            "exec",
-            "--ephemeral",
-            "--ignore-user-config",
-            "--sandbox",
-            "read-only",
-            "--skip-git-repo-check",
-            "--cd",
-            workDir,
-            "--output-last-message",
-            outputPath,
-            "-"
-          ],
+          takeoverArgs,
           prompt,
           COMMAND_TIMEOUT_MS,
           workDir,
           abortSignal
         );
+
+        if (
+          result.code !== 0 &&
+          takeover?.mode ===
+            "LAST"
+        ) {
+          this.takeovers.delete(
+            provider
+          );
+          result =
+            await runCli(
+              provider,
+              [
+                ...baseArgs,
+                "--ephemeral",
+                "-"
+              ],
+              prompt,
+              COMMAND_TIMEOUT_MS,
+              workDir,
+              abortSignal
+            );
+        }
+
         if (result.code !== 0) {
           throw normalizeCliFailure(provider, result);
         }
@@ -1135,23 +1504,59 @@ export class AccountSessionManager {
       } else if (provider === "anthropic") {
         const fixedQuery =
           "Treat all piped stdin content as the complete Lex Machina request. Follow that request and return only the requested response. Do not access local files or use local tools.";
+        const freshArgs = [
+          "-p",
+          fixedQuery,
+          "--output-format",
+          "text",
+          "--bare",
+          "--disallowedTools",
+          "*",
+          "--no-session-persistence"
+        ];
+        const takeoverArgs =
+          takeover
+            ? [
+                "--resume",
+                takeover.reference,
+                "-p",
+                fixedQuery,
+                "--output-format",
+                "text",
+                "--bare",
+                "--disallowedTools",
+                "*"
+              ]
+            : freshArgs;
+
         result = await runCli(
           provider,
-          [
-            "-p",
-            fixedQuery,
-            "--output-format",
-            "text",
-            "--bare",
-            "--disallowedTools",
-            "*",
-            "--no-session-persistence"
-          ],
+          takeoverArgs,
           prompt,
           COMMAND_TIMEOUT_MS,
           workDir,
           abortSignal
         );
+
+        if (
+          result.code !== 0 &&
+          takeover?.mode ===
+            "LAST"
+        ) {
+          this.takeovers.delete(
+            provider
+          );
+          result =
+            await runCli(
+              provider,
+              freshArgs,
+              prompt,
+              COMMAND_TIMEOUT_MS,
+              workDir,
+              abortSignal
+            );
+        }
+
         if (result.code !== 0) {
           throw normalizeCliFailure(provider, result);
         }
@@ -1160,7 +1565,8 @@ export class AccountSessionManager {
           await runGrokAcp(
             prompt,
             workDir,
-            abortSignal
+            abortSignal,
+            takeover?.reference
           );
         if (
           !grok.authenticated
