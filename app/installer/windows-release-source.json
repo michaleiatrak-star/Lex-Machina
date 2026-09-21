@@ -171,7 +171,7 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES; LEGAL_SOURCE_FEDERATION_REQUIRES_NETWORK_FOR_LIVE_SOURCE_ACCESS_AND MAY DOWNLOAD PINNED CONNECTORS ON FIRST USE",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
@@ -198,5 +198,25 @@
     "temporaryUnsignedAllowed": false,
     "officialRepository": "michaleiatrak-star/Lex-Machina",
     "officialSourceUnsignedAllowed": true
+  },
+  "legalSourceFederation": {
+    "transport": "MCP_STDIO_VIA_UVX",
+    "aggregator": "prawo-pl-mcp",
+    "aggregatorVersion": "0.2.3",
+    "role": "DISCOVERY_RESEARCH_ONLY",
+    "sources": [
+      "saos",
+      "nsa",
+      "isap",
+      "krs",
+      "eureka",
+      "kio",
+      "uodo",
+      "eu-sparql",
+      "eu-compliance",
+      "legalize"
+    ],
+    "statutoryVerificationAuthority": "LEX_NATIVE_OFFICIAL_VERIFIER",
+    "firstUseNetworkRequired": true
   }
 }
