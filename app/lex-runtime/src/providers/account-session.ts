@@ -310,7 +310,14 @@ export async function discoverLatestGrokSessionId(): Promise<string | null> {
     root,
     0
   );
-  return best?.id ?? null;
+  const resolved =
+    best as
+      | {
+          id: string;
+          mtimeMs: number;
+        }
+      | null;
+  return resolved?.id ?? null;
 }
 
 function accountSessionStatePath(
@@ -824,10 +831,12 @@ async function assertSubscriptionAccount(
 async function runGrokAcp(
   prompt: string | null,
   cwd: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  resumeSessionId?: string | null
 ): Promise<{
   authenticated: boolean;
   text?: string;
+  sessionId?: string;
 }> {
   const executable =
     await resolveCommand(
@@ -917,6 +926,7 @@ async function runGrokAcp(
       value: {
         authenticated: boolean;
         text?: string;
+        sessionId?: string;
       }
     ) => {
       if (settled) return;
@@ -1218,20 +1228,47 @@ async function runGrokAcp(
         return;
       }
 
-      const session =
-        await request(
-          "session/new",
-          {
-            cwd,
-            mcpServers:
-              []
-          }
-        );
-      const sessionId =
-        typeof session.sessionId ===
-          "string"
-          ? session.sessionId
-          : "";
+      let sessionId = "";
+      if (
+        resumeSessionId
+      ) {
+        try {
+          await request(
+            "session/load",
+            {
+              sessionId:
+                resumeSessionId,
+              cwd,
+              mcpServers:
+                []
+            },
+            STATUS_TIMEOUT_MS
+          );
+          sessionId =
+            resumeSessionId;
+          text = "";
+        } catch {
+          // Older ACP builds or stale IDs fall back to a fresh session.
+          sessionId = "";
+        }
+      }
+
+      if (!sessionId) {
+        const session =
+          await request(
+            "session/new",
+            {
+              cwd,
+              mcpServers:
+                []
+            }
+          );
+        sessionId =
+          typeof session.sessionId ===
+            "string"
+            ? session.sessionId
+            : "";
+      }
       if (!sessionId) {
         throw new Error(
           "ACCOUNT_SESSION_ACP_SESSION_INVALID"
@@ -1289,7 +1326,8 @@ async function runGrokAcp(
         authenticated:
           true,
         text:
-          finalText
+          finalText,
+        sessionId
       });
       } catch (error) {
         finishReject(
