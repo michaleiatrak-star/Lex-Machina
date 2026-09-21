@@ -924,7 +924,17 @@ export class LegalFederationToolRuntime {
           conflict:
             "REVERIFY_WITH_OFFICIAL_NATIVE_PATH_AND_FAIL_CLOSED",
           privacy:
-            "NO_CASE_FACTS_DOCUMENT_TEXT_OR_PII_TOKENS_TO_EXTERNAL_MCP"
+            "NO_CASE_FACTS_DOCUMENT_TEXT_OR_PII_TOKENS_TO_EXTERNAL_MCP",
+          sourceTierCoverage: {
+            tier1:
+              "IMPLEMENTED_OFFICIAL_RETRIEVAL_WITH_NATIVE_VERIFICATION",
+            tier2A:
+              "IMPLEMENTED_OFFICIAL_AND_AUTHORITY_RETRIEVAL_WITH_NATIVE_VERIFICATION_WHERE_SUPPORTED",
+            tier2B:
+              "POLICY_DEFINED_GENERIC_RETRIEVER_NOT_IMPLEMENTED",
+            tier3:
+              "PARTIAL_RESEARCH_COVERAGE_LEGALIZE_AND_DERIVED_CORPORA_GENERIC_WEB_RETRIEVER_NOT_IMPLEMENTED"
+          }
         }
       });
     }
