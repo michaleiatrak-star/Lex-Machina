@@ -1517,12 +1517,6 @@ export default function MatterChatApp({
       );
       return status.authenticated;
     } catch (error) {
-      if (
-        activeCaseIdRef.current !==
-          executionCaseId
-      ) {
-        return;
-      }
       const code =
         error instanceof ApiError
           ? error.code
