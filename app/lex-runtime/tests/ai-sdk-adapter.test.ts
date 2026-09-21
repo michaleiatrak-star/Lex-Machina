@@ -4,6 +4,7 @@ import {
   buildLocalChatRequest,
   buildLocalToolSystemPrompt,
   classifyLocalInferenceFailure,
+  localChatBudget,
   createLiveProviderRegistry,
   parseLocalSseLine,
   parseLocalToolCalls
@@ -117,7 +118,7 @@ describe("AiSdkProviderAdapter", () => {
         }
       ],
       max_tokens:
-        16_384,
+        4_096,
       stream: true
     });
   });
@@ -136,6 +137,62 @@ describe("AiSdkProviderAdapter", () => {
         )
         .join("")
     ).toBe("OK");
+  });
+
+  it("budgets local output against a 64k qualified context without logging prompt content", () => {
+    const budget =
+      localChatBudget(
+        64_000,
+        "S".repeat(
+          20_000
+        ),
+        [
+          {
+            role: "user",
+            content:
+              "napisz ok, nic więcej"
+          }
+        ],
+        2
+      );
+
+    expect(
+      budget.contextTokens
+    ).toBe(64_000);
+    expect(
+      budget.promptChars
+    ).toBeGreaterThan(
+      20_000
+    );
+    expect(
+      budget.estimatedPromptTokens
+    ).toBeLessThan(
+      64_000
+    );
+    expect(
+      budget.maxOutputTokens
+    ).toBe(4_096);
+  });
+
+  it("rejects a generated system prompt that would exhaust the configured local context", () => {
+    expect(() =>
+      localChatBudget(
+        64_000,
+        "S".repeat(
+          130_000
+        ),
+        [
+          {
+            role: "user",
+            content:
+              "napisz ok, nic więcej"
+          }
+        ],
+        2
+      )
+    ).toThrow(
+      /LOCAL_MODEL_CONTEXT_OVERFLOW/
+    );
   });
 
   it("classifies local inference failures into actionable diagnostics", () => {
