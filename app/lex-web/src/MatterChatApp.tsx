@@ -1755,13 +1755,13 @@ export default function MatterChatApp({
 
         <div className="matter-thread-list" aria-label="Wątki spraw">
           <div className="matter-thread-heading">
-            <strong>Wątki / sprawy</strong>
+            <strong>Sprawy</strong>
             <button
               type="button"
               disabled={caseBusy || executing}
               onClick={() => void createLocalCase(newCaseName.trim() || "Nowa sprawa")}
             >
-              +
+              + Nowa sprawa
             </button>
           </div>
           <input
@@ -1963,9 +1963,16 @@ export default function MatterChatApp({
           </div>
         </header>
 
-        {[runtimeError, caseError, threadError].filter(Boolean).map((error, index) => (
-          <div key={`${error}-${index}`} className="chat-alert chat-alert-error">
-            {error}
+        {Array.from(
+          new Set(
+            [runtimeError, caseError, threadError]
+              .filter(Boolean)
+          )
+        ).map((error) => (
+          <div key={error} className="chat-alert chat-alert-error">
+            {error === "CASE_ACCESS_DENIED"
+              ? "Nie udało się otworzyć tej sprawy w bieżącej sesji. Wybierz inną sprawę albo utwórz nową."
+              : error}
           </div>
         ))}
 
