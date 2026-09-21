@@ -790,6 +790,102 @@ async function runCli(
   );
 }
 
+export function accountLoginLaunchMode(
+  provider: ProviderId,
+  platform = process.platform
+): "CAPTURED" | "VISIBLE_TERMINAL" {
+  return (
+    provider === "anthropic" &&
+    platform === "win32"
+  )
+    ? "VISIBLE_TERMINAL"
+    : "CAPTURED";
+}
+
+async function runVisibleWindowsLogin(
+  provider: ProviderId,
+  args: string[],
+  timeoutMs: number
+): Promise<RunResult> {
+  const command =
+    CLI_NAMES[provider];
+  const executable =
+    await resolveCommand(
+      command
+    );
+  if (!executable) {
+    throw new Error(
+      `ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`
+    );
+  }
+
+  const root =
+    await fsp.mkdtemp(
+      path.join(
+        os.tmpdir(),
+        "lex-account-login-"
+      )
+    );
+  const scriptPath =
+    path.join(
+      root,
+      "login.cmd"
+    );
+  const argumentLine =
+    args
+      .map(cmdQuote)
+      .join(" ");
+
+  await fsp.writeFile(
+    scriptPath,
+    [
+      "@echo off",
+      "setlocal",
+      "title Lex Machina - Claude Code login",
+      "echo Lex Machina otworzy logowanie Claude Code.",
+      "echo Dokoncz logowanie w przegladarce i wroc do tego okna, jesli Claude poprosi o kod.",
+      "echo.",
+      `call ${cmdQuote(executable)} ${argumentLine}`,
+      "set \"LEX_EXIT=%ERRORLEVEL%\"",
+      "echo.",
+      "if not \"%LEX_EXIT%\"==\"0\" echo Logowanie Claude Code nie powiodlo sie. Kod: %LEX_EXIT%",
+      "exit /b %LEX_EXIT%"
+    ].join("\r\n"),
+    "utf8"
+  );
+
+  const comspec =
+    process.env.ComSpec ||
+    "cmd.exe";
+  const launchLine =
+    `start \"\" /wait cmd.exe /d /s /c ${cmdQuote(scriptPath)}`;
+
+  try {
+    return await runDirect(
+      comspec,
+      [
+        "/d",
+        "/s",
+        "/c",
+        launchLine
+      ],
+      undefined,
+      accountEnvironment(
+        provider
+      ),
+      timeoutMs
+    );
+  } finally {
+    await fsp.rm(
+      root,
+      {
+        recursive: true,
+        force: true
+      }
+    ).catch(() => {});
+  }
+}
+
 function normalizeCliFailure(
   provider: ProviderId,
   result: RunResult
@@ -1857,12 +1953,22 @@ export class AccountSessionManager {
               "--claudeai"
             ]
           : ["login"];
-    const result = await runCli(
-      provider,
-      args,
-      undefined,
-      AUTH_TIMEOUT_MS
-    );
+    const result =
+      accountLoginLaunchMode(
+        provider
+      ) ===
+        "VISIBLE_TERMINAL"
+        ? await runVisibleWindowsLogin(
+            provider,
+            args,
+            AUTH_TIMEOUT_MS
+          )
+        : await runCli(
+            provider,
+            args,
+            undefined,
+            AUTH_TIMEOUT_MS
+          );
     if (result.code !== 0) {
       throw normalizeCliFailure(provider, result);
     }
