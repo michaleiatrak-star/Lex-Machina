@@ -20,7 +20,6 @@ import {
   createCase,
   deleteCase,
   downloadGeneratedArtifact,
-  downloadSensitiveArtifact,
   executeSession,
   generateLegalDocument,
   getHealth,
@@ -1979,43 +1978,23 @@ export default function MatterChatApp({
             }
           );
 
-        let downloadedFinal =
-          false;
-        if (
-          generated
-            .readyForDownload &&
-          generated
-            .downloadTicket
-        ) {
-          const blob =
-            await downloadSensitiveArtifact(
-              generated
-                .downloadTicket
-                .ticketId
-            );
-          downloadBlob(
-            blob,
+        const blob =
+          await downloadGeneratedArtifact(
+            executionCaseId,
             generated
               .artifact
-              .filename
+              .artifactId
           );
-          downloadedFinal =
+        downloadBlob(
+          blob,
+          generated
+            .artifact
+            .filename
+        );
+        const downloadedFinal =
+          generated
+            .readyForDownload ===
             true;
-        } else {
-          const blob =
-            await downloadGeneratedArtifact(
-              executionCaseId,
-              generated
-                .artifact
-                .artifactId
-            );
-          downloadBlob(
-            blob,
-            generated
-              .artifact
-              .filename
-          );
-        }
 
         if (
           activeCaseIdRef.current ===
