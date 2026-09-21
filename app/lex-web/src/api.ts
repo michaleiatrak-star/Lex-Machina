@@ -304,9 +304,20 @@ export type GeneratedDocumentResponse = {
     StoredCaseArtifact;
   format:
     LegalDocumentFormat;
-  tokenizedSha256: string;
-  vaultGeneration: number;
+  tokenizedSha256?: string;
+  vaultGeneration?: number;
+  sha256?: string;
   aliasesUsed: string[];
+  readyForDownload?: boolean;
+  downloadTicket?: {
+    ticketId: string;
+    caseId: string;
+    artifactId: string;
+    finalSha256: string;
+    expiresAt: string;
+    remainingUses:
+      0 | 1;
+  };
   templateProfile?: {
     templateId: string;
     sourceFormat:
@@ -1715,7 +1726,7 @@ export function generateLegalDocument(
     styleProfile?:
       LegalStyleProfile;
     templateId?: string;
-    attachments:
+    attachments?:
       DocumentAttachmentSelection[];
     filename?: string;
   }
