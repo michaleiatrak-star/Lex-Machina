@@ -29,14 +29,16 @@ const checks = {
     server.includes("logoutAuthorization(") &&
     server.includes("bootstrap.sessionToken"),
   manualFirstLogin:
+    authUi.includes("temporaryAdminCredentialsActive") &&
     authUi.includes('? "admin"') &&
-    authUi.includes("Pierwsze logowanie: login") &&
-    authUi.includes("<strong>admin</strong>"),
+    authUi.includes("<strong>Pierwsze logowanie</strong>") &&
+    authUi.includes("Login <b>admin</b>, hasło <b>admin</b>."),
   warnedPasswordReplacement:
     authUi.includes("passwordSetupPending === true") &&
     authUi.includes("password-setup-banner") &&
     authUi.includes('role="alert"') &&
-    authUi.includes("Używasz początkowego konta admin/admin") &&
+    authUi.includes("Konto korzysta jeszcze z hasła początkowego") &&
+    authUi.includes('section: "security"') &&
     securityUi.includes("co najmniej 10 znaków") &&
     crypto.includes("length < 10"),
   firstRunIsWarningNotBlockade:
