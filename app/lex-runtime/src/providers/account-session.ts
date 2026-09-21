@@ -536,10 +536,12 @@ async function assertSubscriptionAccount(
 async function runGrokAcp(
   prompt: string | null,
   cwd: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  resumeSessionId?: string | null
 ): Promise<{
   authenticated: boolean;
   text?: string;
+  sessionId?: string;
 }> {
   const executable =
     await resolveCommand(
@@ -928,20 +930,58 @@ async function runGrokAcp(
         return;
       }
 
-      const session =
-        await request(
-          "session/new",
-          {
-            cwd,
-            mcpServers:
-              []
-          }
-        );
-      const sessionId =
-        typeof session.sessionId ===
-          "string"
-          ? session.sessionId
-          : "";
+      let sessionId = "";
+      const capabilities =
+        init.agentCapabilities &&
+        typeof init.agentCapabilities ===
+          "object" &&
+        !Array.isArray(
+          init.agentCapabilities
+        )
+          ? init.agentCapabilities as
+              Record<string, unknown>
+          : null;
+      if (
+        resumeSessionId &&
+        capabilities?.loadSession ===
+          true
+      ) {
+        try {
+          await request(
+            "session/load",
+            {
+              sessionId:
+                resumeSessionId,
+              cwd,
+              mcpServers:
+                []
+            },
+            STATUS_TIMEOUT_MS
+          );
+          sessionId =
+            resumeSessionId;
+          text = "";
+        } catch {
+          sessionId = "";
+        }
+      }
+
+      if (!sessionId) {
+        const session =
+          await request(
+            "session/new",
+            {
+              cwd,
+              mcpServers:
+                []
+            }
+          );
+        sessionId =
+          typeof session.sessionId ===
+            "string"
+            ? session.sessionId
+            : "";
+      }
       if (!sessionId) {
         throw new Error(
           "ACCOUNT_SESSION_ACP_SESSION_INVALID"
@@ -999,7 +1039,8 @@ async function runGrokAcp(
         authenticated:
           true,
         text:
-          finalText
+          finalText,
+        sessionId
       });
       } catch (error) {
         finishReject(
