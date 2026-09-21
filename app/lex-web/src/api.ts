@@ -934,7 +934,8 @@ export class ApiError extends Error {
   constructor(
     readonly code: string,
     readonly status: number,
-    readonly retryAfter?: string
+    readonly retryAfter?: string,
+    readonly reason?: string
   ) {
     super(code);
     this.name = "ApiError";
@@ -1056,7 +1057,8 @@ async function json<T>(
       failure.error ||
         `HTTP_${response.status}`,
       response.status,
-      failure.retryAfter
+      failure.retryAfter,
+      failure.reason
     );
   }
   return payload as T;
