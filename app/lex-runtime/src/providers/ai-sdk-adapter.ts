@@ -351,6 +351,70 @@ async function streamLocalChatCompletion(
     );
   }
 
+export function parseLocalSseLine(
+  rawLine: string
+): string {
+  const line =
+    rawLine.trim();
+  if (
+    !line.startsWith(
+      "data:"
+    )
+  ) {
+    return "";
+  }
+  const data =
+    line.slice(5).trim();
+  if (
+    !data ||
+    data === "[DONE]"
+  ) {
+    return "";
+  }
+
+  let payload: {
+    choices?: Array<{
+      delta?: {
+        content?: unknown;
+      };
+    }>;
+    error?: {
+      message?: unknown;
+    };
+  };
+  try {
+    payload =
+      JSON.parse(data) as
+        typeof payload;
+  } catch {
+    throw new Error(
+      "LOCAL_MODEL_HTTP_INVALID_SSE_JSON"
+    );
+  }
+
+  if (
+    payload.error
+  ) {
+    throw new Error(
+      `LOCAL_MODEL_HTTP_STREAM_ERROR:${
+        typeof payload.error
+          .message === "string"
+          ? payload.error
+              .message
+          : "unknown"
+      }`
+    );
+  }
+
+  const content =
+    payload.choices?.[0]
+      ?.delta?.content;
+  return typeof content ===
+    "string"
+    ? content
+    : "";
+}
+
   const reader =
     response.body.getReader();
   const decoder =
@@ -361,67 +425,10 @@ async function streamLocalChatCompletion(
   const consumeLine = (
     rawLine: string
   ) => {
-    const line =
-      rawLine.trim();
-    if (
-      !line.startsWith(
-        "data:"
-      )
-    ) {
-      return;
-    }
-    const data =
-      line.slice(5).trim();
-    if (
-      !data ||
-      data === "[DONE]"
-    ) {
-      return;
-    }
-
-    let payload: {
-      choices?: Array<{
-        delta?: {
-          content?: unknown;
-        };
-      }>;
-      error?: {
-        message?: unknown;
-      };
-    };
-    try {
-      payload =
-        JSON.parse(data) as
-          typeof payload;
-    } catch {
-      throw new Error(
-        "LOCAL_MODEL_HTTP_INVALID_SSE_JSON"
+    fullText +=
+      parseLocalSseLine(
+        rawLine
       );
-    }
-
-    if (
-      payload.error
-    ) {
-      throw new Error(
-        `LOCAL_MODEL_HTTP_STREAM_ERROR:${
-          typeof payload.error
-            .message === "string"
-            ? payload.error
-                .message
-            : "unknown"
-        }`
-      );
-    }
-
-    const content =
-      payload.choices?.[0]
-        ?.delta?.content;
-    if (
-      typeof content ===
-        "string"
-    ) {
-      fullText += content;
-    }
   };
 
   while (true) {
