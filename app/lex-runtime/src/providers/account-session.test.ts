@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   accountSessionModelId,
-  isAccountSessionModel
+  accountSessionResumeMode,
+  isAccountSessionModel,
+  isMissingResumableSessionMessage
 } from "./account-session.js";
 
 describe("provider account-session transport", () => {
@@ -27,6 +29,31 @@ describe("provider account-session transport", () => {
     ).toBe(
       "account/xai/default"
     );
+  });
+
+
+  it("uses last-or-new continuity for account hosts", () => {
+    expect(
+      accountSessionResumeMode()
+    ).toBe("LAST_OR_NEW");
+  });
+
+  it("falls back to a new host session only for missing-session failures", () => {
+    expect(
+      isMissingResumableSessionMessage(
+        "No saved session found"
+      )
+    ).toBe(true);
+    expect(
+      isMissingResumableSessionMessage(
+        "conversation not found"
+      )
+    ).toBe(true);
+    expect(
+      isMissingResumableSessionMessage(
+        "network connection failed"
+      )
+    ).toBe(false);
   });
 
   it("does not confuse API or local models with account-session models", () => {
