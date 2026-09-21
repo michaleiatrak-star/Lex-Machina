@@ -496,16 +496,16 @@ async function withTimeout<T>(
           timer =
             setTimeout(
               () => {
-                try {
-                  void onTimeout?.();
-                } catch {
-                  // Timeout remains authoritative even if cleanup fails.
-                }
                 reject(
                   timeoutError(
                     code
                   )
                 );
+                try {
+                  void onTimeout?.();
+                } catch {
+                  // Timeout remains authoritative even if cleanup fails.
+                }
               },
               timeoutMs
             );
