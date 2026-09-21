@@ -4162,13 +4162,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             .login(provider)
         );
       } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "";
         const code =
-          error instanceof Error &&
-          error.message.startsWith(
+          message.startsWith(
             "ACCOUNT_SESSION_CLI_NOT_INSTALLED:"
           )
             ? "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
-            : "ACCOUNT_SESSION_LOGIN_FAILED";
+            : message.startsWith(
+                "ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH:"
+              )
+              ? "ACCOUNT_SESSION_SUBSCRIPTION_LOGIN_REQUIRED"
+              : "ACCOUNT_SESSION_LOGIN_FAILED";
         res.status(
           code ===
             "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
