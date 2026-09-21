@@ -674,7 +674,7 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
 
 function installHint(provider: ProviderId): string {
   if (provider === "openai") {
-    return "Zainstaluj Codex CLI i wykonaj: codex login";
+    return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Codex CLI. Następnie użyj przycisku połączenia konta ChatGPT.";
   }
   if (provider === "anthropic") {
     return "Zainstaluj Claude Code i wykonaj: claude auth login";
