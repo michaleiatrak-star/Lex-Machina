@@ -5,3 +5,4 @@ numpy==2.3.5
 Pillow==12.3.0
 stanza==1.14.0
 torch==2.14.0
+uv==0.12.17
