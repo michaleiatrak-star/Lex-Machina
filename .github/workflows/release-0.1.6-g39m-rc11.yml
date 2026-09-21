@@ -169,6 +169,18 @@ jobs:
           Online installer only.
 
           Fixed:
+          - Codex account turns are stateless at the host level: Lex Machina
+            owns conversation continuity and sends the complete matter-thread
+            context, avoiding duplicated context from `codex exec resume`;
+          - Kodeks karny aliases (KK / k.k. / full title) route deterministically
+            to DR-03 and resolve to the official ELI consolidated text registry;
+          - low-signal AUTO turns such as "napisz ok" no longer activate stateful
+            court-analysis, pleading or report workflows merely because those
+            skills are available;
+          - explicit statute questions such as art. 276/286 KK prioritize the
+            statute analyzer without fuzzy activation of unrelated workflows;
+          - provider and deterministic-workflow failures now surface a bounded
+            diagnostic reason instead of collapsing into SESSION_EXECUTION_FAILED;
           - Claude Code account/OAuth transport supports interactive login and
             the documented long-lived CLAUDE_CODE_OAUTH_TOKEN from
             `claude setup-token`;
@@ -225,6 +237,9 @@ jobs:
             Lex Machina refreshes that state on demand.
 
           Regression coverage added for:
+          - KK article routing to DR-03 and deterministic KK legal-act aliases;
+          - trivial-chat AUTO routing with no stateful workflow activation;
+          - Lex-owned Codex continuity mode;
           - Claude OAuth access/refresh credential detection and dedicated OS-keyring persistence;
           - Claude account/OAuth authentication modes versus Anthropic API-key billing;
           - visible Windows login-launcher contract;
