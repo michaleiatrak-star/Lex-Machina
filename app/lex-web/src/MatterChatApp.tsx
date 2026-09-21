@@ -715,21 +715,6 @@ export default function MatterChatApp({
     selectableExecutionSkills,
     skillFilter
   ]);
-  const currentPrimaryRoute = useMemo(
-    () =>
-      choosePrimaryRoute(
-        query,
-        routes,
-        skills,
-        []
-      ),
-    [
-      query,
-      routes,
-      skills,
-    ]
-  );
-
   useEffect(() => {
     setCaseTypeExecutionSkills(caseTypeSkills);
     return () => setCaseTypeExecutionSkills([]);
@@ -1687,12 +1672,14 @@ export default function MatterChatApp({
     ) return;
 
     const route =
-      choosePrimaryRoute(
-        trimmed,
-        routes,
-        skills,
-        []
-      );
+      automaticSkills
+        ? "AUTO"
+        : choosePrimaryRoute(
+            trimmed,
+            routes,
+            skills,
+            []
+          );
     if (!route) {
       setExecutionError(
         "Nie udało się wybrać dziedziny głównej dla tej wiadomości."
@@ -1769,17 +1756,6 @@ export default function MatterChatApp({
         throw new Error(
           localPreparationError
         );
-      }
-
-      // An empty DR selection means: do not add secondary domains. A legal
-      // session still requires its one primary domain, selected above.
-      if (
-        allowedDomains !== null &&
-        allowedDomains.length === 0
-      ) {
-        setAllowedDomainSkills([
-          route
-        ]);
       }
 
       const result = await executeSession({
@@ -1874,6 +1850,9 @@ export default function MatterChatApp({
                     ? ` (kod: ${reason})`
                     : ""
                 }.`
+          : code ===
+              "AUTO_ROUTING_FAILED"
+            ? `Model nie zwrócił poprawnego wyboru domeny i skilli w trybie AUTO${reason ? ` (kod: ${reason})` : ""}. Lex Machina nie zgaduje routingu zastępczego.`
           : code ===
               "LEGAL_WORKFLOW_EXECUTION_FAILED"
             ? `Deterministyczny workflow prawny zatrzymał wykonanie${
