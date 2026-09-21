@@ -524,9 +524,11 @@ export function DocumentAuthoringPanel({
               generated.format
                 .toUpperCase()
             } jest gotowy. Hash: {
-              generated
-                .tokenizedSha256
-                .slice(0, 16)
+              (
+                generated.tokenizedSha256 ??
+                generated.sha256 ??
+                generated.artifact.sha256
+              ).slice(0, 16)
             }…
           </p>
           {currentCase
