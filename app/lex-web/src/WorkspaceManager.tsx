@@ -504,9 +504,10 @@ export function WorkspaceManager({
           <p className="eyebrow">Struktura katalogów</p>
           <h2>{title}</h2>
           <p>
-            Folder główny ma tę samą nazwę co sprawa: <strong>{rootFolderName}</strong>.
-            Struktura pozostaje szyfrowana, a techniczny identyfikator caseId jest
-            używany wyłącznie wewnętrznie do kluczy i integralności magazynu.
+            Foldery są logiczną, szyfrowaną strukturą workspace. Dotychczasowy
+            „Główny katalog” jest wyświetlany pod nazwą sprawy:
+            {" "}<strong>{rootFolderName}</strong>. Techniczny identyfikator caseId
+            pozostaje używany wyłącznie wewnętrznie do kluczy i integralności magazynu.
           </p>
         </div>
         <div className="workspace-header-actions">
