@@ -11,6 +11,9 @@ import type {
   NormalizedToolResult,
   NormalizedToolSchema
 } from "./providers/types.js";
+import {
+  federatedSourcePolicy
+} from "./legal-source-policy.js";
 
 // 0.1.4 is the published build used by the release runtime.
  // The upstream main branch is newer, but installers must not depend on an
@@ -583,6 +586,57 @@ function extractToolText(
   );
 }
 
+export function annotateFederatedLegalContent(
+  source:
+    string,
+  content:
+    string
+): string {
+  const sourcePolicy =
+    federatedSourcePolicy(
+      source
+    );
+
+  try {
+    const parsed =
+      JSON.parse(
+        content
+      ) as unknown;
+
+    if (
+      parsed &&
+      typeof parsed ===
+        "object" &&
+      !Array.isArray(
+        parsed
+      )
+    ) {
+      return JSON.stringify({
+        ...parsed as
+          Record<
+            string,
+            unknown
+          >,
+        _lexSourcePolicy:
+          sourcePolicy
+      });
+    }
+
+    return JSON.stringify({
+      _lexSourcePolicy:
+        sourcePolicy,
+      results:
+        parsed
+    });
+  } catch {
+    return JSON.stringify({
+      _lexSourcePolicy:
+        sourcePolicy,
+      content
+    });
+  }
+}
+
 class PrawoPlMcpClient {
   private client:
     Client | null = null;
@@ -635,7 +689,7 @@ class PrawoPlMcpClient {
             name:
               "lex-machina-legal-federation",
             version:
-              "0.1.6"
+              "0.1.7"
           });
 
         await client.connect(
@@ -743,6 +797,9 @@ export class LegalFederationToolRuntime {
       "Lex Machina has an optional read-only prawo-pl-mcp federation with ten source families: SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA/KIS, KIO, UODO, EUR-Lex/CJEU, EU compliance and Legalize.",
       "Use list_federated_legal_sources when you need source capabilities or a native schema. Search first, then fetch the actual document before relying on its contents.",
       "This federation is DISCOVERY/RESEARCH ONLY. It never creates a Lex Machina VERIFIED ledger entry and never bypasses Gate I.",
+      "Every federated search/get/call result carries _lexSourcePolicy with sourceTier, provenance and verificationAuthority=LEX_NATIVE_ONLY. Preserve that metadata when reasoning about the result.",
+      "R2B and R3 material is auxiliary only: it can never create VERIFIED or formal SUPPORTED status and can never be the sole legal basis. Cross-check the proposition against R1/R2A before using it.",
+      "For R3 material, check publication/update date. Missing date or material older than 24 months requires an explicit staleness warning.",
       "For Polish statutory citations and current legal wording, verify_legal_reference remains authoritative. For Sąd Najwyższy signatures/quotes/propositions, use verify_case_reference / verify_case_quote / verify_case_proposition.",
       "SAOS, NSA and ISAP federation results can broaden discovery or retrieve source material, but they do not replace the native Lex verification path.",
       "EUREKA interpretations, KIO rulings, UODO decisions and other administrative/case materials must be described with their actual legal status; do not present them as generally binding statutory law.",
@@ -913,7 +970,11 @@ export class LegalFederationToolRuntime {
                 source ===
                   "uodo"
                   ? "PRAWO_PL_MCP_LOCAL_OFFICIAL_MCP_OVERRIDE"
-                  : "PRAWO_PL_MCP_CHILD_CONNECTOR"
+                  : "PRAWO_PL_MCP_CHILD_CONNECTOR",
+              sourcePolicy:
+                federatedSourcePolicy(
+                  source
+                )
             })
           ),
         policy: {
@@ -931,9 +992,9 @@ export class LegalFederationToolRuntime {
             tier2A:
               "IMPLEMENTED_OFFICIAL_AND_AUTHORITY_RETRIEVAL_WITH_NATIVE_VERIFICATION_WHERE_SUPPORTED",
             tier2B:
-              "POLICY_DEFINED_GENERIC_RETRIEVER_NOT_IMPLEMENTED",
+              "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED_GENERIC_RETRIEVER_NOT_IMPLEMENTED",
             tier3:
-              "PARTIAL_RESEARCH_COVERAGE_LEGALIZE_AND_DERIVED_CORPORA_GENERIC_WEB_RETRIEVER_NOT_IMPLEMENTED"
+              "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED_PARTIAL_RESEARCH_COVERAGE_GENERIC_WEB_RETRIEVER_NOT_IMPLEMENTED"
           }
         }
       });
@@ -953,9 +1014,10 @@ export class LegalFederationToolRuntime {
       call.name ===
         SEARCH_TOOL
     ) {
-      return this.client.call(
-        "pl_search",
-        {
+      const content =
+        await this.client.call(
+          "pl_search",
+          {
           source,
           ...(typeof call.input
             .query === "string"
@@ -1012,7 +1074,11 @@ export class LegalFederationToolRuntime {
                     .extra
               }
             : {})
-        }
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
@@ -1033,9 +1099,10 @@ export class LegalFederationToolRuntime {
           "FEDERATED_DOCUMENT_ID_REQUIRED"
         );
       }
-      return this.client.call(
-        "pl_get_document",
-        {
+      const content =
+        await this.client.call(
+          "pl_get_document",
+          {
           source,
           document_id:
             documentId,
@@ -1061,7 +1128,11 @@ export class LegalFederationToolRuntime {
                     .extra
               }
             : {})
-        }
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
@@ -1096,14 +1167,19 @@ export class LegalFederationToolRuntime {
                 unknown
               >
           : {};
-      return this.client.call(
-        "pl_call",
-        {
-          source,
-          tool,
-          arguments:
-            args
-        }
+      const content =
+        await this.client.call(
+          "pl_call",
+          {
+            source,
+            tool,
+            arguments:
+              args
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
