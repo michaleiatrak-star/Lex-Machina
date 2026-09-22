@@ -13,14 +13,29 @@ $localRoot = if ($LocalAiRoot) {
 
 $bootstrapRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sourceMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
+$sourceLegalMcp = Join-Path $bootstrapRoot "llama-legal-skills-mcp.py"
 $sourceTemplate = Join-Path $bootstrapRoot "mistral-nemo-web-grounded.jinja"
 $pythonExe = Join-Path $runtime "python\python.exe"
+$skillsRoot = Join-Path $runtime "corpus"
 
 if (-not (Test-Path -LiteralPath $pythonExe -PathType Leaf)) {
   throw "LLAMA_NATIVE_WEB_PYTHON_MISSING:$pythonExe"
 }
 if (-not (Test-Path -LiteralPath $sourceMcp -PathType Leaf)) {
   throw "LLAMA_NATIVE_WEB_MCP_SOURCE_MISSING:$sourceMcp"
+}
+if (-not (Test-Path -LiteralPath $sourceLegalMcp -PathType Leaf)) {
+  throw "LLAMA_NATIVE_LEGAL_MCP_SOURCE_MISSING:$sourceLegalMcp"
+}
+if (-not (Test-Path -LiteralPath $skillsRoot -PathType Container)) {
+  throw "LLAMA_NATIVE_LEGAL_SKILLS_ROOT_MISSING:$skillsRoot"
+}
+$skillCount = @(
+  Get-ChildItem -LiteralPath $skillsRoot -Directory |
+    Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf }
+).Count
+if ($skillCount -ne 32) {
+  throw "LLAMA_NATIVE_LEGAL_SKILL_COUNT_INVALID:expected=32:actual=$skillCount"
 }
 if (-not (Test-Path -LiteralPath $sourceTemplate -PathType Leaf)) {
   throw "LLAMA_NATIVE_WEB_TEMPLATE_SOURCE_MISSING:$sourceTemplate"
@@ -30,8 +45,10 @@ $mcpRoot = Join-Path $localRoot "mcp"
 New-Item -ItemType Directory -Force -Path $mcpRoot | Out-Null
 
 $mcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
+$legalMcpScript = Join-Path $mcpRoot "llama-legal-skills-mcp.py"
 $templatePath = Join-Path $localRoot "mistral-nemo-web-grounded.jinja"
 Copy-Item -LiteralPath $sourceMcp -Destination $mcpScript -Force
+Copy-Item -LiteralPath $sourceLegalMcp -Destination $legalMcpScript -Force
 Copy-Item -LiteralPath $sourceTemplate -Destination $templatePath -Force
 
 $mcpConfigPath = Join-Path $localRoot "mcp-servers.json"
@@ -44,6 +61,14 @@ $mcpConfig = [ordered]@{
       env = [ordered]@{
         PYTHONUTF8 = "1"
         LLAMA_WEB_SEARCH_PROVIDER = "auto"
+      }
+    }
+    legal = [ordered]@{
+      command = $pythonExe
+      args = @("-X", "utf8", $legalMcpScript, "--skills-root", $skillsRoot)
+      timeout_ms = 30000
+      env = [ordered]@{
+        PYTHONUTF8 = "1"
       }
     }
   }
@@ -71,6 +96,15 @@ Dla pytań wymagających faktów z internetu, aktualności, źródeł, wskazania
 10. Dla prawa i przepisów preferuj źródła urzędowe oraz tekst aktu pobrany przez web_fetch. Nie podawaj treści konkretnego artykułu wyłącznie z pamięci.
 11. Dla informacji bieżących preferuj źródła aktualne i sprawdzaj datę publikacji oraz datę zdarzenia.
 12. Odpowiadaj w języku użytkownika.
+
+LEX_LEGAL_SKILLS_AUTO_POLICY_V1
+13. Każde pytanie prawne uruchamia tryb AUTO skilli: zanim odpowiesz merytorycznie, wykonaj rzeczywiste wywołanie legal_auto_route z pełnym pytaniem użytkownika.
+14. Następnie wykonaj legal_skill_read dla wszystkich MANDATORY_SKILLS oraz wszystkich relewantnych SELECTED_SKILLS zwróconych przez router. Jeśli skill wskazuje wymagany plik references/workflows/shared, odczytaj go również przez legal_skill_read.
+15. Dostępny katalog ma dokładnie 32 skille prawne. Nie udawaj wczytania skilla i nie rekonstruuj jego treści z pamięci.
+16. Dla prawa polskiego obowiązkowo użyj prawny-router-v3, prawo-polskie-v2, shared oraz właściwego modułu DR wskazanego przez legal_auto_route.
+17. Dla prawa zagranicznego użyj prawny-router-v3 i odpowiednich skilli dziedzinowych; prawo-polskie-v2 dodawaj tylko gdy sprawa obejmuje również prawo polskie.
+18. Po routingu nadal obowiązuje weryfikacja internetowa: treść przepisów, status aktu, Dz.U., daty, progi, kwoty i sygnatury sprawdzaj przez web_research/web_fetch w tej samej turze.
+19. Jeżeli legal_auto_route, obowiązkowy legal_skill_read albo wymagana weryfikacja źródłowa nie powiedzie się, zastosuj fail-closed: wskaż brak i nie zastępuj go pamięcią modelu.
 '@
 
 $uiConfigPath = Join-Path $localRoot "llama-ui-config.json"
@@ -110,8 +144,19 @@ $result = [ordered]@{
   mcpConfig = $mcpConfigPath
   uiConfig = $uiConfigPath
   mcpScript = $mcpScript
+  legalMcpScript = $legalMcpScript
+  legalSkillsRoot = $skillsRoot
+  legalSkillCount = $skillCount
   mistralChatTemplate = $templatePath
-  exposedTools = @("web_search", "web_fetch", "web_research")
+  exposedTools = @(
+    "web_search",
+    "web_fetch",
+    "web_research",
+    "legal_auto_route",
+    "legal_skill_read",
+    "legal_skill_search",
+    "legal_skills_list"
+  )
 } | ConvertTo-Json -Compress
 
 Write-Output $result
