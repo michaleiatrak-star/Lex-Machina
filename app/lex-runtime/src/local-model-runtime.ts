@@ -3857,7 +3857,7 @@ export class LocalModelRuntime {
     try {
       response =
         await fetch(
-          `http://${this.host}:${this.port}/chat/completions`,
+          `http://${this.host}:${this.port}/v1/chat/completions`,
           {
             method: "POST",
             headers: {
