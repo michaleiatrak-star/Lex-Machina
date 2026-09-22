@@ -264,6 +264,10 @@ function forbiddenHostname(
       .replace(/\.$/u, "");
 
   return (
+    (
+      lower.startsWith("[") &&
+      lower.endsWith("]")
+    ) ||
     lower === "localhost" ||
     lower.endsWith(
       ".localhost"
