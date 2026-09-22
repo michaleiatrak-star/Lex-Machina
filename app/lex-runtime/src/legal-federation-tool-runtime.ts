@@ -612,11 +612,13 @@ export function annotateFederatedLegalContent(
       )
     ) {
       return JSON.stringify({
-        ...parsed as
-          Record<
-            string,
-            unknown
-          >,
+        ...(
+          parsed as
+            Record<
+              string,
+              unknown
+            >
+        ),
         _lexSourcePolicy:
           sourcePolicy
       });
