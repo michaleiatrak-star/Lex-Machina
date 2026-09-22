@@ -9,7 +9,7 @@ import {
 } from "./legal-federation-tool-runtime.js";
 
 describe("LegalFederationToolRuntime", () => {
-  it("exposes one compact five-tool research surface", () => {
+  it("exposes the compact federation surface plus the local source assessor", () => {
     const runtime =
       new LegalFederationToolRuntime();
     const names =
@@ -24,6 +24,7 @@ describe("LegalFederationToolRuntime", () => {
       "search_federated_legal_sources",
       "get_federated_legal_document",
       "call_federated_legal_source",
+      "assess_legal_source",
       "federated_legal_coverage"
     ]);
     expect(
