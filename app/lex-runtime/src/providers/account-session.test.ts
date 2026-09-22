@@ -165,7 +165,8 @@ describe("provider account-session transport", () => {
       )
     ).toEqual([
       "auth",
-      "login"
+      "login",
+      "--claudeai"
     ]);
     expect(
       accountLoginFallbackArgs(
