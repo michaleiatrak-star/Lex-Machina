@@ -3,6 +3,22 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+# Persist broad llama.cpp-native agent mode for this Windows user. The
+# llama-server process reads these variables directly; Lex Runtime does not
+# inject or broker the agent tools.
+[Environment]::SetEnvironmentVariable(
+  "LLAMA_ARG_AGENT",
+  "true",
+  [EnvironmentVariableTarget]::User
+)
+[Environment]::SetEnvironmentVariable(
+  "LLAMA_ARG_CORS_ORIGINS",
+  "localhost",
+  [EnvironmentVariableTarget]::User
+)
+$env:LLAMA_ARG_AGENT = "true"
+$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifestPath = Join-Path $runtime "release-source.json"
 $requirements = Join-Path $runtime "release-requirements.txt"
