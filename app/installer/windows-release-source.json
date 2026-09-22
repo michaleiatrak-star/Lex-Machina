@@ -142,7 +142,7 @@
         160000,
         200000
       ],
-      "default": 128000
+      "default": 64000
     },
     "networkRequiredOnlyWhenProvisioning": true,
     "applicationUsableWithoutLocalAi": true,
