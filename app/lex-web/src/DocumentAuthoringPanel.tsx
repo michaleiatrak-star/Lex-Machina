@@ -211,11 +211,23 @@ export function DocumentAuthoringPanel({
               format
           }
         );
+      if (
+        result.aliasesUsed.length > 0 &&
+        result
+          .deanonymizationKeyBound !==
+          true
+      ) {
+        throw new Error(
+          "DEANONYMIZATION_KEY_BINDING_MISSING"
+        );
+      }
       setGenerated(
         result
       );
       setMessage(
-        "Tokenizowany dokument przeszedł lokalny renderer i został zapisany w zaszyfrowanym magazynie sprawy."
+        result.aliasesUsed.length > 0
+          ? "Dokument został przygotowany z oznaczeniami zastępczymi i kryptograficznie związany z kluczem anonimizacja↔deanonimizacja. Oryginalne dane zostaną wstawione mechanicznie dopiero przy finalnym eksporcie."
+          : "Dokument został przygotowany lokalnie i jest gotowy do eksportu."
       );
     } catch (value) {
       setError(
@@ -266,6 +278,19 @@ export function DocumentAuthoringPanel({
         );
 
       if (
+        final
+          .deanonymizationBasis !==
+          "PRIVACY_VAULT_KEY" ||
+        final
+          .keyBindingVerified !==
+          true
+      ) {
+        throw new Error(
+          "DEANONYMIZATION_KEY_BINDING_NOT_VERIFIED"
+        );
+      }
+
+      if (
         !final.downloadTicket
       ) {
         throw new Error(
@@ -306,7 +331,7 @@ export function DocumentAuthoringPanel({
 
       setGenerated(null);
       setMessage(
-        "Finalny dokument przeszedł HYBRID, G8 i G10. Jednorazowy ticket pobrania został zużyty."
+        `Finalny dokument zawiera oryginalne dane przywrócone mechanicznie z klucza anonimizacja↔deanonimizacja (${final.replacements} zamian). Model nie uczestniczył w reidentyfikacji. Dokument przeszedł HYBRID, G8 i G10.`
       );
     } catch (value) {
       setPassword("");
@@ -328,10 +353,10 @@ export function DocumentAuthoringPanel({
             Dokument końcowy
           </p>
           <h3>
-            DOCX / ODT z lokalną deanonymizacją
+            DOCX / ODT z kluczową deanonimizacją
           </h3>
           <p>
-            Model zwraca wyłącznie semantyczny AST i aliasy PII. Pakiet Office powstaje lokalnie, a jawne dane są przywracane dopiero po ponownym podaniu hasła.
+            Model pracuje wyłącznie na aliasach PII. Pakiet Office powstaje lokalnie, a oryginalne dane są wstawiane mechanicznie z zaszyfrowanego klucza anonimizacja↔deanonimizacja po reautoryzacji. Model nie otrzymuje ani nie odtwarza danych jawnych.
           </p>
         </div>
         <span className="security-pill">
@@ -514,13 +539,13 @@ export function DocumentAuthoringPanel({
       >
         {busy
           ? "Przetwarzanie…"
-          : "Wygeneruj tokenizowany dokument"}
+          : "Przygotuj dokument do finalnego eksportu"}
       </button>
 
       {generated && (
         <div className="authoring-finalize">
           <p>
-            Tokenizowany {
+            Wewnętrzna wersja chroniona {
               generated.format
                 .toUpperCase()
             } jest gotowy. Hash: {
@@ -570,7 +595,7 @@ export function DocumentAuthoringPanel({
                   void finalizeAndDownload();
                 }}
               >
-                Przywróć dane i pobierz finalny plik
+                Wstaw oryginalne dane z klucza i pobierz
               </button>
             </>
           ) : (
