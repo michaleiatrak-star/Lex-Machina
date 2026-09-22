@@ -79,6 +79,9 @@ import {
   EncryptedCaseWorkspaceStore
 } from "../case-workspace-store.js";
 import {
+  EncryptedCaseScheduleStore
+} from "../case-schedule-store.js";
+import {
   LegacyCaseStorageMigrator
 } from "../legacy-case-migration.js";
 import {
@@ -319,6 +322,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const caseScheduleStore =
+    new EncryptedCaseScheduleStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const documentGenerationState =
     new DocumentGenerationStateStore({
       rootDir:
@@ -342,7 +350,8 @@ export async function startLocalServer(options?: {
       secureCaseUploadStore,
       secureCaseDocumentStore,
       secureCaseArtifactStore,
-      workspaceStore
+      workspaceStore,
+      caseScheduleStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
@@ -398,7 +407,8 @@ export async function startLocalServer(options?: {
       authStore,
       authService,
       caseFileStore,
-      caseSecurityRotation
+      caseSecurityRotation,
+      caseScheduleStore
     );
   const documentAuthoringService =
     new LocalDocumentAuthoringService(
@@ -525,6 +535,8 @@ export async function startLocalServer(options?: {
     authService,
     supportService,
     caseAccessService,
+    caseScheduleService:
+      caseAccessService,
     caseKnowledgeSearch,
     documentAuthoringService,
     documentAstGenerator,
