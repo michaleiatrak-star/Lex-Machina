@@ -175,7 +175,8 @@
       "defaultSearchProvider": "DUCKDUCKGO_HTML",
       "optionalSearchProvider": "BRAVE_SEARCH_API",
       "citationPolicy": "FETCH_BEFORE_CITE_NO_INVENTED_URLS",
-      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED"
+      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED",
+      "bielikDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED"
     },
     "legalSkills": {
       "mode": "AUTO",
@@ -240,6 +241,16 @@
         "legal",
         "documents",
         "prawo",
+        "saos",
+        "nsa",
+        "isap",
+        "krs",
+        "eureka",
+        "kio",
+        "uodo",
+        "eu_sparql",
+        "eu_compliance",
+        "legalize",
         "uodo_official"
       ],
       "legalFederation": {
@@ -257,9 +268,22 @@
           "eu-compliance",
           "legalize"
         ],
-        "firstUseNetworkRequired": true
+        "firstUseNetworkRequired": true,
+        "directConnectorServers": [
+          "saos",
+          "nsa",
+          "isap",
+          "krs",
+          "eureka",
+          "kio",
+          "uodo",
+          "eu_sparql",
+          "eu_compliance",
+          "legalize"
+        ]
       },
-      "uodoOfficialFallback": true
+      "uodoOfficialFallback": true,
+      "directSourceTools": true
     }
   },
   "systemPrerequisites": {
