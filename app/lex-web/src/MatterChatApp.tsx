@@ -15,12 +15,14 @@ import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js"
 import {
   ApiError,
   getSkills,
+  addCaseScheduleEvent,
   archiveCase,
   clearClaudeOAuthToken,
   clearProviderApiKey,
   createCase,
   createDeanonymizationIntent,
   deleteCase,
+  deleteCaseScheduleEvent,
   downloadGeneratedArtifact,
   downloadSensitiveArtifact,
   executeSession,
@@ -35,6 +37,7 @@ import {
   getRoutes,
   isDesktopShell,
   listCaseFiles,
+  listCaseSchedule,
   listCases,
   loginProviderAccount,
   provisionLocalModel,
@@ -48,6 +51,8 @@ import {
   unarchiveCase,
   type AuthenticatedUser,
   type CaseListItem,
+  type CaseScheduleEvent,
+  type CaseScheduleKind,
   type DocumentAttachmentSelection,
   type EvidenceItem,
   type ModelDescriptor,
@@ -649,6 +654,32 @@ function executionMessage(
   };
 }
 
+function caseScheduleKindLabel(
+  kind: CaseScheduleKind
+): string {
+  switch (kind) {
+    case "CLIENT_MEETING":
+      return "Spotkanie z klientem";
+    case "COURT_HEARING":
+      return "Posiedzenie sądu";
+    case "DEADLINE":
+      return "Termin";
+    default:
+      return "Inne";
+  }
+}
+
+function caseScheduleStartLabel(
+  value: string
+): string {
+  const parts =
+    value.split("T");
+  return parts.length === 2
+    ? parts[0] + " · " +
+        parts[1]
+    : value;
+}
+
 function canWriteCase(item: CaseListItem | undefined): boolean {
   return Boolean(
     item &&
@@ -689,6 +720,24 @@ export default function MatterChatApp({
   const [caseNameDraft, setCaseNameDraft] = useState("");
   const [caseBusy, setCaseBusy] = useState(false);
   const [caseError, setCaseError] = useState("");
+  const [caseSchedule, setCaseSchedule] =
+    useState<CaseScheduleEvent[]>([]);
+  const [caseScheduleLoading, setCaseScheduleLoading] =
+    useState(false);
+  const [caseScheduleBusy, setCaseScheduleBusy] =
+    useState(false);
+  const [caseScheduleError, setCaseScheduleError] =
+    useState("");
+  const [scheduleKind, setScheduleKind] =
+    useState<CaseScheduleKind>("CLIENT_MEETING");
+  const [scheduleTitle, setScheduleTitle] =
+    useState("");
+  const [scheduleStartsAt, setScheduleStartsAt] =
+    useState("");
+  const [scheduleLocation, setScheduleLocation] =
+    useState("");
+  const [scheduleNotes, setScheduleNotes] =
+    useState("");
   const [deletePhrase, setDeletePhrase] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
@@ -1378,6 +1427,11 @@ export default function MatterChatApp({
     setDocumentAttachments([]);
     setIncludeCaseKnowledge(false);
     setCaseNameDraft(selectedCase?.displayName ?? "");
+    setCaseScheduleError("");
+    setScheduleTitle("");
+    setScheduleStartsAt("");
+    setScheduleLocation("");
+    setScheduleNotes("");
     setDeletePhrase("");
     setDeletePassword("");
     setPendingFinalDocument(null);
@@ -1385,6 +1439,49 @@ export default function MatterChatApp({
     setProcessWorkflowVisible(false);
     setProcessWorkflowRefresh((value) => value + 1);
   }, [caseId, selectedCase?.displayName]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setCaseScheduleError("");
+    if (!caseId) {
+      setCaseSchedule([]);
+      setCaseScheduleLoading(false);
+      return;
+    }
+
+    setCaseScheduleLoading(true);
+    void listCaseSchedule(
+      caseId
+    )
+      .then((result) => {
+        if (!cancelled) {
+          setCaseSchedule(
+            result.events
+          );
+        }
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          setCaseSchedule([]);
+          setCaseScheduleError(
+            error instanceof Error
+              ? error.message
+              : String(error)
+          );
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setCaseScheduleLoading(
+            false
+          );
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [caseId]);
 
   useEffect(() => {
     activeCaseIdRef.current =
@@ -2704,6 +2801,121 @@ export default function MatterChatApp({
       setCaseError(error instanceof Error ? error.message : String(error));
     } finally {
       setCaseBusy(false);
+    }
+  }
+
+  async function saveCaseScheduleEvent(): Promise<void> {
+    if (
+      !selectedCase ||
+      !canWriteCase(
+        selectedCase
+      ) ||
+      !scheduleTitle.trim() ||
+      !scheduleStartsAt ||
+      caseScheduleBusy
+    ) {
+      return;
+    }
+
+    setCaseScheduleBusy(true);
+    setCaseScheduleError("");
+    try {
+      const created =
+        await addCaseScheduleEvent(
+          selectedCase.caseId,
+          {
+            kind:
+              scheduleKind,
+            title:
+              scheduleTitle.trim(),
+            startsAt:
+              scheduleStartsAt,
+            ...(scheduleLocation
+              .trim()
+              ? {
+                  location:
+                    scheduleLocation
+                      .trim()
+                }
+              : {}),
+            ...(scheduleNotes
+              .trim()
+              ? {
+                  notes:
+                    scheduleNotes
+                      .trim()
+                }
+              : {})
+          }
+        );
+      setCaseSchedule(
+        (current) =>
+          [...current, created]
+            .sort(
+              (
+                left,
+                right
+              ) =>
+                left.startsAt
+                  .localeCompare(
+                    right.startsAt
+                  ) ||
+                left.createdAt
+                  .localeCompare(
+                    right.createdAt
+                  )
+            )
+      );
+      setScheduleTitle("");
+      setScheduleLocation("");
+      setScheduleNotes("");
+    } catch (error) {
+      setCaseScheduleError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseScheduleBusy(false);
+    }
+  }
+
+  async function removeCaseScheduleEvent(
+    eventId: string
+  ): Promise<void> {
+    if (
+      !selectedCase ||
+      !canWriteCase(
+        selectedCase
+      ) ||
+      caseScheduleBusy
+    ) {
+      return;
+    }
+
+    setCaseScheduleBusy(true);
+    setCaseScheduleError("");
+    try {
+      await deleteCaseScheduleEvent(
+        selectedCase.caseId,
+        eventId
+      );
+      setCaseSchedule(
+        (current) =>
+          current.filter(
+            (event) =>
+              event.eventId !==
+                eventId
+          )
+      );
+    } catch (error) {
+      setCaseScheduleError(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setCaseScheduleBusy(false);
     }
   }
 
@@ -4264,6 +4476,199 @@ export default function MatterChatApp({
                   <span>{selectedCase.archivedAt ? "ARCHIWALNA (tylko odczyt)" : "AKTYWNA"}</span>
                 </div>
               ) : null}
+            </article>
+
+            <article className="chat-card matter-schedule-card">
+              <p className="eyebrow">Terminarz sprawy</p>
+              <h2>Spotkania, posiedzenia i terminy</h2>
+              <p>
+                Terminy są przypisane do bieżącej sprawy i przechowywane w jej
+                zaszyfrowanych danych. OWNER i EDITOR mogą dopisywać oraz usuwać wpisy.
+              </p>
+
+              <div className="matter-schedule-form">
+                <div className="chat-form-row">
+                  <select
+                    aria-label="Rodzaj terminu"
+                    value={scheduleKind}
+                    disabled={
+                      !canWriteCase(
+                        selectedCase
+                      ) ||
+                      caseScheduleBusy
+                    }
+                    onChange={(event) =>
+                      setScheduleKind(
+                        event.target.value as CaseScheduleKind
+                      )
+                    }
+                  >
+                    <option value="CLIENT_MEETING">
+                      Spotkanie z klientem
+                    </option>
+                    <option value="COURT_HEARING">
+                      Posiedzenie sądu
+                    </option>
+                    <option value="DEADLINE">
+                      Termin
+                    </option>
+                    <option value="OTHER">
+                      Inne
+                    </option>
+                  </select>
+                  <input
+                    type="datetime-local"
+                    aria-label="Data i godzina terminu"
+                    value={scheduleStartsAt}
+                    disabled={
+                      !canWriteCase(
+                        selectedCase
+                      ) ||
+                      caseScheduleBusy
+                    }
+                    onChange={(event) =>
+                      setScheduleStartsAt(
+                        event.target.value
+                      )
+                    }
+                  />
+                </div>
+
+                <input
+                  value={scheduleTitle}
+                  maxLength={180}
+                  disabled={
+                    !canWriteCase(
+                      selectedCase
+                    ) ||
+                    caseScheduleBusy
+                  }
+                  placeholder="Opis, np. rozprawa apelacyjna"
+                  onChange={(event) =>
+                    setScheduleTitle(
+                      event.target.value
+                    )
+                  }
+                />
+
+                <div className="chat-form-row">
+                  <input
+                    value={scheduleLocation}
+                    maxLength={180}
+                    disabled={
+                      !canWriteCase(
+                        selectedCase
+                      ) ||
+                      caseScheduleBusy
+                    }
+                    placeholder="Miejsce / sala / adres (opcjonalnie)"
+                    onChange={(event) =>
+                      setScheduleLocation(
+                        event.target.value
+                      )
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="chat-primary-action"
+                    disabled={
+                      !canWriteCase(
+                        selectedCase
+                      ) ||
+                      caseScheduleBusy ||
+                      !scheduleTitle.trim() ||
+                      !scheduleStartsAt
+                    }
+                    onClick={() =>
+                      void saveCaseScheduleEvent()
+                    }
+                  >
+                    Dodaj termin
+                  </button>
+                </div>
+
+                <textarea
+                  value={scheduleNotes}
+                  maxLength={2000}
+                  disabled={
+                    !canWriteCase(
+                      selectedCase
+                    ) ||
+                    caseScheduleBusy
+                  }
+                  placeholder="Notatka do terminu (opcjonalnie)"
+                  onChange={(event) =>
+                    setScheduleNotes(
+                      event.target.value
+                    )
+                  }
+                />
+              </div>
+
+              {caseScheduleError ? (
+                <p className="chat-error">
+                  {caseScheduleError}
+                </p>
+              ) : null}
+
+              <div className="matter-schedule-list">
+                {caseScheduleLoading ? (
+                  <p>Ładuję terminarz…</p>
+                ) : caseSchedule.length === 0 ? (
+                  <p>Brak zapisanych terminów dla tej sprawy.</p>
+                ) : (
+                  caseSchedule.map(
+                    (event) => (
+                      <div
+                        className="matter-schedule-item"
+                        key={event.eventId}
+                      >
+                        <div className="matter-schedule-item-main">
+                          <span className="matter-schedule-kind">
+                            {caseScheduleKindLabel(
+                              event.kind
+                            )}
+                          </span>
+                          <strong>
+                            {event.title}
+                          </strong>
+                          <small>
+                            {caseScheduleStartLabel(
+                              event.startsAt
+                            )}
+                            {event.location
+                              ? " · " +
+                                event.location
+                              : ""}
+                          </small>
+                          {event.notes ? (
+                            <p>
+                              {event.notes}
+                            </p>
+                          ) : null}
+                        </div>
+                        <button
+                          type="button"
+                          className="workspace-delete"
+                          disabled={
+                            !canWriteCase(
+                              selectedCase
+                            ) ||
+                            caseScheduleBusy
+                          }
+                          onClick={() =>
+                            void removeCaseScheduleEvent(
+                              event.eventId
+                            )
+                          }
+                        >
+                          Usuń
+                        </button>
+                      </div>
+                    )
+                  )
+                )}
+              </div>
             </article>
 
             <article
