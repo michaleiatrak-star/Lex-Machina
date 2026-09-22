@@ -55,8 +55,6 @@ $bootstrap = Join-Path $payload "bootstrap"
 New-Item $bootstrap -ItemType Directory | Out-Null
 foreach ($file in @(
   "windows-online-bootstrap.ps1",
-  "windows-offline-bundle-install.ps1",
-  "extract-offline-zip.ps1",
   "app-update-transaction.ps1",
   "app-update-verification.ps1",
   "install-local-llm.ps1",
@@ -90,13 +88,10 @@ Copy-Item $sidecar (Join-Path $payload "lex-runtime-sidecar.exe")
 Write-Host "[4/4] Thin payload contract"
 foreach ($required in @(
   "app\dist\http\server.js",
-  "app\node_modules\.bin\codex.cmd",
-  "app\node_modules\.bin\claude.cmd",
   "lex-runtime-sidecar.exe",
   "release-source.json",
   "release-requirements.txt",
   "bootstrap\windows-online-bootstrap.ps1",
-  "bootstrap\windows-offline-bundle-install.ps1",
   "bootstrap\app-update-transaction.ps1",
   "bootstrap\install-local-llm.ps1",
   "bootstrap\configure-llama-native-web.ps1",
@@ -114,6 +109,19 @@ foreach ($required in @(
 )) {
   if (-not (Test-Path -LiteralPath (Join-Path $payload $required) -PathType Leaf)) {
     throw "ONLINE_PAYLOAD_REQUIRED_FILE_MISSING:$required"
+  }
+}
+
+foreach ($forbidden in @(
+  "app\node_modules\.bin\codex.cmd",
+  "app\node_modules\.bin\claude.cmd",
+  "app\node_modules\@openai\codex",
+  "app\node_modules\@anthropic-ai\claude-code",
+  "bootstrap\windows-offline-bundle-install.ps1",
+  "bootstrap\extract-offline-zip.ps1"
+)) {
+  if (Test-Path -LiteralPath (Join-Path $payload $forbidden)) {
+    throw "ONLINE_PAYLOAD_FORBIDDEN_OPTIONAL_COMPONENT_PRESENT:$forbidden"
   }
 }
 
