@@ -872,13 +872,32 @@ export class LexExecutionEngine {
       ]
     );
 
+    const localModel =
+      args.model.startsWith(
+        "local/"
+      );
     const coreResourcePrompt =
-      [...session.loadedResources.entries()]
-        .map(
-          ([resource, content]) =>
-            `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
-        )
-        .join("\n\n---\n\n");
+      localModel
+        ? [
+            "# CORE LEGAL RUNTIME CONTRACT",
+            "Lex Machina runtime has already loaded, validated and enforces the mandatory core legal resources listed below.",
+            ...[
+              ...session
+                .loadedResources
+                .keys()
+            ].map(
+              (resource) =>
+                `- ${resource}: runtime-enforced`
+            ),
+            "Treat runtime privacy, routing, source-verification and finalization gates as authoritative.",
+            "Do not invent a gate result, verified source, citation, tool result or deanonymized personal data."
+          ].join("\n")
+        : [...session.loadedResources.entries()]
+            .map(
+              ([resource, content]) =>
+                `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
+            )
+            .join("\n\n---\n\n");
 
     const promptParts = [
       baseSystemPrompt,
