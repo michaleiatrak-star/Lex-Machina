@@ -31,6 +31,7 @@ $appUpdateVerification = Require-File "bootstrap\app-update-verification.ps1"
 $llamaWebConfigurator = Require-File "bootstrap\configure-llama-native-web.ps1"
 $llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
 $llamaLegalMcp = Require-File "bootstrap\llama-legal-skills-mcp.py"
+$llamaDocumentsMcp = Require-File "bootstrap\llama-local-documents-mcp.py"
 $llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
@@ -94,6 +95,10 @@ Write-Host "SELFTEST_STAGE:llama-native-legal-skills-mcp"
 & $python $llamaLegalMcp --skills-root $corpus --self-test | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_LEGAL_SKILLS_MCP_FAILED" }
 
+Write-Host "SELFTEST_STAGE:llama-native-local-documents-mcp"
+& $python $llamaDocumentsMcp --runtime-root $root --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_LOCAL_DOCUMENTS_MCP_FAILED" }
+
 $skillFiles = @(Get-ChildItem -LiteralPath $corpus -Directory | Where-Object {
   Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf
 })
@@ -105,7 +110,10 @@ $templateText = Get-Content -Raw -LiteralPath $llamaMistralTemplate
 if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
     $templateText -notmatch "web_research" -or
     $templateText -notmatch "LEX_LEGAL_SKILLS_AUTO_POLICY_V1" -or
-    $templateText -notmatch "legal_auto_route") {
+    $templateText -notmatch "legal_auto_route" -or
+    $templateText -notmatch "LEX_LOCAL_DOCUMENT_PRIVACY_POLICY_V1" -or
+    $templateText -notmatch "privacy_deanonymize_text" -or
+    $templateText -notmatch "LEX_LEGAL_MCP_FEDERATION_POLICY_V1") {
   throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
 }
 
