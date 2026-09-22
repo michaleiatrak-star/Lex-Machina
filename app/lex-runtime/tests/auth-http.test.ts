@@ -137,7 +137,8 @@ describe("authenticated localhost HTTP API", () => {
       .get("/api/auth/status")
       .expect(200, {
         initialized: false,
-        requiresBootstrap: true
+        requiresBootstrap: true,
+        temporaryAdminCredentialsActive: false
       });
 
     const bootstrap =

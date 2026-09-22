@@ -175,6 +175,11 @@ try {
         Write-Host "Installer bootstrap diagnostic file not found: $diagnosticLog"
       }
     }
+    $payloadSelfTestLog = Join-Path $InstallRoot "runtime\bootstrap\offline-payload-selftest.log"
+    if (Test-Path -LiteralPath $payloadSelfTestLog -PathType Leaf) {
+      Write-Host "Offline payload self-test diagnostic tail follows:"
+      Get-Content -LiteralPath $payloadSelfTestLog -Tail 120 | Out-Host
+    }
     throw "INSTALLER_ACCEPTANCE_INSTALL_FAILED:$($process.ExitCode)"
   }
 

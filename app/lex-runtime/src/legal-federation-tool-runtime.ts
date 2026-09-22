@@ -11,6 +11,15 @@ import type {
   NormalizedToolResult,
   NormalizedToolSchema
 } from "./providers/types.js";
+import {
+  assessLegalSourceCandidate,
+  classifyKnownLegalSourceUrl,
+  federatedSourcePolicy
+} from "./legal-source-policy.js";
+import {
+  AuxiliarySourceFetchError,
+  SafeAuxiliarySourceFetcher
+} from "./auxiliary-source-fetcher.js";
 
 // 0.1.4 is the published build used by the release runtime.
  // The upstream main branch is newer, but installers must not depend on an
@@ -170,6 +179,10 @@ const CALL_TOOL =
   "call_federated_legal_source";
 const COVERAGE_TOOL =
   "federated_legal_coverage";
+const ASSESS_SOURCE_TOOL =
+  "assess_legal_source";
+const FETCH_AUXILIARY_SOURCE_TOOL =
+  "fetch_auxiliary_legal_source";
 
 const LIST_SCHEMA:
   NormalizedToolSchema = {
@@ -312,6 +325,73 @@ const CALL_SCHEMA:
           },
           arguments: {
             type: "object"
+          }
+        }
+      }
+    }
+  };
+
+const ASSESS_SOURCE_SCHEMA:
+  NormalizedToolSchema = {
+    type: "function",
+    function: {
+      name:
+        ASSESS_SOURCE_TOOL,
+      description:
+        "Classify and assess a public legal/research URL under Lex Machina source hierarchy without fetching it. " +
+        "Known R1/R2A/R2B domains are classified deterministically; unknown domains are conservatively R3 until editorial criteria are independently established. " +
+        "This tool never creates VERIFIED/SUPPORTED status and never replaces native verification.",
+      parameters: {
+        type: "object",
+        additionalProperties:
+          false,
+        required: [
+          "url"
+        ],
+        properties: {
+          url: {
+            type: "string",
+            description:
+              "Public HTTP(S) source URL to classify."
+          },
+          claim: {
+            type: "string",
+            description:
+              "Optional exact proposition for which this source is being assessed."
+          },
+
+        }
+      }
+    }
+  };
+
+const FETCH_AUXILIARY_SOURCE_SCHEMA:
+  NormalizedToolSchema = {
+    type: "function",
+    function: {
+      name:
+        FETCH_AUXILIARY_SOURCE_TOOL,
+      description:
+        "Safely fetch one public R2B/R3 auxiliary legal-research page through Lex Machina's SSRF-protected HTTPS retriever. " +
+        "Use only after you have a specific public URL. The runtime classifies the final URL, extracts source-owned publication dates and records a content hash. " +
+        "This tool never creates VERIFIED/SUPPORTED status and R2B/R3 can never be the sole legal basis.",
+      parameters: {
+        type: "object",
+        additionalProperties:
+          false,
+        required: [
+          "url"
+        ],
+        properties: {
+          url: {
+            type: "string",
+            description:
+              "Specific public HTTPS URL for an auxiliary legal/research page. Never include case facts, PII tokens or protected document context."
+          },
+          claim: {
+            type: "string",
+            description:
+              "Optional exact public legal proposition being researched. Do not include client-specific facts."
           }
         }
       }
@@ -583,6 +663,59 @@ function extractToolText(
   );
 }
 
+export function annotateFederatedLegalContent(
+  source:
+    string,
+  content:
+    string
+): string {
+  const sourcePolicy =
+    federatedSourcePolicy(
+      source
+    );
+
+  try {
+    const parsed =
+      JSON.parse(
+        content
+      ) as unknown;
+
+    if (
+      parsed &&
+      typeof parsed ===
+        "object" &&
+      !Array.isArray(
+        parsed
+      )
+    ) {
+      return JSON.stringify({
+        ...(
+          parsed as
+            Record<
+              string,
+              unknown
+            >
+        ),
+        _lexSourcePolicy:
+          sourcePolicy
+      });
+    }
+
+    return JSON.stringify({
+      _lexSourcePolicy:
+        sourcePolicy,
+      results:
+        parsed
+    });
+  } catch {
+    return JSON.stringify({
+      _lexSourcePolicy:
+        sourcePolicy,
+      content
+    });
+  }
+}
+
 class PrawoPlMcpClient {
   private client:
     Client | null = null;
@@ -635,7 +768,7 @@ class PrawoPlMcpClient {
             name:
               "lex-machina-legal-federation",
             version:
-              "0.1.6"
+              "0.1.7"
           });
 
         await client.connect(
@@ -704,9 +837,21 @@ class PrawoPlMcpClient {
   }
 }
 
+type AuxiliarySourceFetcher =
+  Pick<
+    SafeAuxiliarySourceFetcher,
+    "fetch"
+  >;
+
 export class LegalFederationToolRuntime {
   private readonly client =
     new PrawoPlMcpClient();
+
+  constructor(
+    private readonly auxiliarySourceFetcher:
+      AuxiliarySourceFetcher =
+        new SafeAuxiliarySourceFetcher()
+  ) {}
   private readonly events:
     LegalFederationAuditEvent[] =
       [];
@@ -718,6 +863,8 @@ export class LegalFederationToolRuntime {
       SEARCH_SCHEMA,
       GET_SCHEMA,
       CALL_SCHEMA,
+      ASSESS_SOURCE_SCHEMA,
+      FETCH_AUXILIARY_SOURCE_SCHEMA,
       COVERAGE_SCHEMA
     ];
   }
@@ -730,6 +877,8 @@ export class LegalFederationToolRuntime {
       SEARCH_TOOL,
       GET_TOOL,
       CALL_TOOL,
+      ASSESS_SOURCE_TOOL,
+      FETCH_AUXILIARY_SOURCE_TOOL,
       COVERAGE_TOOL
     ].includes(
       name
@@ -743,6 +892,10 @@ export class LegalFederationToolRuntime {
       "Lex Machina has an optional read-only prawo-pl-mcp federation with ten source families: SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA/KIS, KIO, UODO, EUR-Lex/CJEU, EU compliance and Legalize.",
       "Use list_federated_legal_sources when you need source capabilities or a native schema. Search first, then fetch the actual document before relying on its contents.",
       "This federation is DISCOVERY/RESEARCH ONLY. It never creates a Lex Machina VERIFIED ledger entry and never bypasses Gate I.",
+      "Every federated search/get/call result carries _lexSourcePolicy with sourceTier, provenance and verificationAuthority=LEX_NATIVE_ONLY. Preserve that metadata when reasoning about the result.",
+      "Use assess_legal_source for classification only. Use fetch_auxiliary_legal_source to retrieve a specific public R2B/R3 page through the SSRF-protected HTTPS channel; the fetched page remains auxiliary evidence.",
+      "R2B and R3 material is auxiliary only: it can never create VERIFIED or formal SUPPORTED status and can never be the sole legal basis. Cross-check the proposition against R1/R2A before using it.",
+      "For R3 material, check publication/update date. Missing date or material older than 24 months requires an explicit staleness warning.",
       "For Polish statutory citations and current legal wording, verify_legal_reference remains authoritative. For Sąd Najwyższy signatures/quotes/propositions, use verify_case_reference / verify_case_quote / verify_case_proposition.",
       "SAOS, NSA and ISAP federation results can broaden discovery or retrieve source material, but they do not replace the native Lex verification path.",
       "EUREKA interpretations, KIO rulings, UODO decisions and other administrative/case materials must be described with their actual legal status; do not present them as generally binding statutory law.",
@@ -838,17 +991,45 @@ export class LegalFederationToolRuntime {
               message
           }
         });
+        const policyBlocked =
+          call.name ===
+            ASSESS_SOURCE_TOOL ||
+          (
+            call.name ===
+              FETCH_AUXILIARY_SOURCE_TOOL &&
+            (
+              message ===
+                "AUX_SOURCE_REQUIRES_R2B_R3" ||
+              message ===
+                "AUX_SOURCE_CASE_DATA_FORBIDDEN" ||
+              (
+                error instanceof
+                  AuxiliarySourceFetchError &&
+                [
+                  "AUX_SOURCE_URL_INVALID",
+                  "AUX_SOURCE_HOST_FORBIDDEN",
+                  "AUX_SOURCE_DNS_PRIVATE"
+                ].includes(
+                  error.code
+                )
+              )
+            )
+          );
         results.push({
           tool_use_id:
             call.id,
           content:
             JSON.stringify({
               status:
-                "SOURCE_UNAVAILABLE",
+                policyBlocked
+                  ? "POLICY_BLOCKED"
+                  : "SOURCE_UNAVAILABLE",
               error:
                 message,
               instruction:
-                "Do not infer absence of law from this failure. Use another verified source path or report the source as temporarily unavailable."
+                policyBlocked
+                  ? "Source assessment was rejected by Lex source policy. Correct the URL/cross-check evidence; do not treat this as a source outage."
+                  : "Do not infer absence of law from this failure. Use another verified source path or report the source as temporarily unavailable."
             })
         });
       }
@@ -895,6 +1076,276 @@ export class LegalFederationToolRuntime {
 
     if (
       call.name ===
+        ASSESS_SOURCE_TOOL
+    ) {
+      const rawUrl =
+        typeof call.input
+          .url === "string"
+          ? call.input.url
+              .trim()
+          : "";
+      let url: URL;
+      try {
+        url =
+          new URL(rawUrl);
+      } catch {
+        throw new Error(
+          "LEGAL_SOURCE_URL_INVALID"
+        );
+      }
+      if (
+        (
+          url.protocol !==
+            "https:" &&
+          url.protocol !==
+            "http:"
+        ) ||
+        url.username ||
+        url.password
+      ) {
+        throw new Error(
+          "LEGAL_SOURCE_URL_INVALID"
+        );
+      }
+
+      const knownTier =
+        classifyKnownLegalSourceUrl(
+          url.toString()
+        );
+      const tier =
+        knownTier ??
+        "R3";
+      const crossCheckStatus =
+        tier === "R2B" ||
+        tier === "R3"
+          ? "PENDING" as const
+          : "NOT_REQUIRED" as const;
+
+      const candidate = {
+        ...(typeof call.input
+          .claim ===
+          "string" &&
+        call.input
+          .claim
+          .trim()
+          ? {
+              claim:
+                call.input
+                  .claim
+                  .trim()
+            }
+          : {}),
+        url:
+          url.toString(),
+        tier,
+        provenance: {
+          sourceUrl:
+            url.toString(),
+          retrievedVia:
+            "WEB_RESEARCH" as const,
+          accessMode:
+            "UNKNOWN" as const,
+          classificationBasis:
+            knownTier
+              ? "KNOWN_CANONICAL_DOMAIN"
+              : "UNKNOWN_DOMAIN_CONSERVATIVE_R3_UNTIL_EDITORIAL_CRITERIA_VERIFIED",
+        },
+        crossCheckStatus
+      };
+
+      return JSON.stringify({
+        status: "OK",
+        candidate,
+        assessment:
+          assessLegalSourceCandidate(
+            candidate
+          ),
+        classification:
+          knownTier
+            ? "KNOWN_DOMAIN"
+            : "CONSERVATIVE_R3",
+        instruction:
+          knownTier
+            ? "Preserve the tier and assessment. R2B/R3 remains auxiliary only. A higher-tier cross-check can be confirmed only by the session runtime from a real VerificationLedger record; model input cannot attest it."
+            : "Unknown domain was conservatively classified as R3. It may be reconsidered as R2B only after independent evidence of professional editorial board, recognized publisher/brand and systematic updating. A higher-tier cross-check can be confirmed only by the session runtime."
+      });
+    }
+
+    if (
+      call.name ===
+        FETCH_AUXILIARY_SOURCE_TOOL
+    ) {
+      const rawUrl =
+        typeof call.input
+          .url === "string"
+          ? call.input.url
+              .trim()
+          : "";
+      const publicClaim =
+        typeof call.input
+          .claim === "string"
+          ? call.input.claim
+              .trim()
+          : "";
+
+      if (
+        /\[(?:DOCUMENT|CASE KNOWLEDGE|FIRM KNOWLEDGE)\s/iu
+          .test(
+            rawUrl +
+              " " +
+              publicClaim
+          ) ||
+        /\[(?:LM)?PII:/iu
+          .test(
+            rawUrl +
+              " " +
+              publicClaim
+          )
+      ) {
+        throw new Error(
+          "AUX_SOURCE_CASE_DATA_FORBIDDEN"
+        );
+      }
+
+      const requestedTier =
+        classifyKnownLegalSourceUrl(
+          rawUrl
+        );
+      if (
+        requestedTier === "R1" ||
+        requestedTier === "R2A"
+      ) {
+        throw new Error(
+          "AUX_SOURCE_REQUIRES_R2B_R3"
+        );
+      }
+
+      const fetched =
+        await this
+          .auxiliarySourceFetcher
+          .fetch(
+            rawUrl
+          );
+      const finalKnownTier =
+        classifyKnownLegalSourceUrl(
+          fetched.finalUrl
+        );
+      if (
+        finalKnownTier === "R1" ||
+        finalKnownTier === "R2A"
+      ) {
+        throw new Error(
+          "AUX_SOURCE_REQUIRES_R2B_R3"
+        );
+      }
+      const tier =
+        finalKnownTier ??
+        "R3";
+      const candidate = {
+        ...(publicClaim
+          ? {
+              claim:
+                publicClaim
+            }
+          : {}),
+        url:
+          fetched.finalUrl,
+        tier,
+        provenance: {
+          sourceUrl:
+            fetched.finalUrl,
+          retrievedVia:
+            "WEB_RESEARCH" as const,
+          accessMode:
+            "DIRECT_LIVE" as const,
+          classificationBasis:
+            finalKnownTier
+              ? "KNOWN_CANONICAL_DOMAIN_AFTER_SAFE_FETCH"
+              : "UNKNOWN_DOMAIN_CONSERVATIVE_R3_AFTER_SAFE_FETCH",
+          ...(fetched
+            .publishedAt
+            ? {
+                publishedAt:
+                  fetched
+                    .publishedAt
+              }
+            : {}),
+          ...(fetched
+            .updatedAt
+            ? {
+                updatedAt:
+                  fetched
+                    .updatedAt
+              }
+            : {})
+        },
+        crossCheckStatus:
+          "PENDING" as const
+      };
+      const textLimit =
+        80_000;
+      return JSON.stringify({
+        status:
+          "OK",
+        classification:
+          finalKnownTier
+            ? "KNOWN_DOMAIN"
+            : "CONSERVATIVE_R3",
+        candidate,
+        assessment:
+          assessLegalSourceCandidate(
+            candidate
+          ),
+        retrieval: {
+          requestedUrl:
+            fetched.requestedUrl,
+          finalUrl:
+            fetched.finalUrl,
+          fetchedAt:
+            fetched.fetchedAt,
+          contentType:
+            fetched.contentType,
+          bytes:
+            fetched.bytes,
+          sha256:
+            fetched.sha256,
+          redirectCount:
+            fetched
+              .redirectCount,
+          ...(fetched
+            .publishedAt
+            ? {
+                publishedAt:
+                  fetched
+                    .publishedAt
+              }
+            : {}),
+          ...(fetched
+            .updatedAt
+            ? {
+                updatedAt:
+                  fetched
+                    .updatedAt
+              }
+            : {}),
+          text:
+            fetched.text
+              .slice(
+                0,
+                textLimit
+              ),
+          textTruncated:
+            fetched.text
+              .length >
+            textLimit
+        },
+        instruction:
+          "This is auxiliary R2B/R3 research material. Do not create VERIFIED/SUPPORTED from it and do not use it as the sole legal basis. For a legal proposition, obtain a real R1/R2A verification record for the same claim."
+      });
+    }
+
+    if (
+      call.name ===
         COVERAGE_TOOL
     ) {
       return JSON.stringify({
@@ -913,7 +1364,11 @@ export class LegalFederationToolRuntime {
                 source ===
                   "uodo"
                   ? "PRAWO_PL_MCP_LOCAL_OFFICIAL_MCP_OVERRIDE"
-                  : "PRAWO_PL_MCP_CHILD_CONNECTOR"
+                  : "PRAWO_PL_MCP_CHILD_CONNECTOR",
+              sourcePolicy:
+                federatedSourcePolicy(
+                  source
+                )
             })
           ),
         policy: {
@@ -924,7 +1379,17 @@ export class LegalFederationToolRuntime {
           conflict:
             "REVERIFY_WITH_OFFICIAL_NATIVE_PATH_AND_FAIL_CLOSED",
           privacy:
-            "NO_CASE_FACTS_DOCUMENT_TEXT_OR_PII_TOKENS_TO_EXTERNAL_MCP"
+            "NO_CASE_FACTS_DOCUMENT_TEXT_OR_PII_TOKENS_TO_EXTERNAL_MCP",
+          sourceTierCoverage: {
+            tier1:
+              "IMPLEMENTED_OFFICIAL_RETRIEVAL_WITH_NATIVE_VERIFICATION",
+            tier2A:
+              "IMPLEMENTED_OFFICIAL_AND_AUTHORITY_RETRIEVAL_WITH_NATIVE_VERIFICATION_WHERE_SUPPORTED",
+            tier2B:
+              "SAFE_AUXILIARY_HTTPS_RETRIEVER_AND_RUNTIME_HARD_GATE_IMPLEMENTED",
+            tier3:
+              "SAFE_AUXILIARY_HTTPS_RETRIEVER_AND_RUNTIME_HARD_GATE_IMPLEMENTED_WITH_CONSERVATIVE_UNKNOWN_DOMAIN_CLASSIFICATION"
+          }
         }
       });
     }
@@ -943,9 +1408,10 @@ export class LegalFederationToolRuntime {
       call.name ===
         SEARCH_TOOL
     ) {
-      return this.client.call(
-        "pl_search",
-        {
+      const content =
+        await this.client.call(
+          "pl_search",
+          {
           source,
           ...(typeof call.input
             .query === "string"
@@ -1002,7 +1468,11 @@ export class LegalFederationToolRuntime {
                     .extra
               }
             : {})
-        }
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
@@ -1023,9 +1493,10 @@ export class LegalFederationToolRuntime {
           "FEDERATED_DOCUMENT_ID_REQUIRED"
         );
       }
-      return this.client.call(
-        "pl_get_document",
-        {
+      const content =
+        await this.client.call(
+          "pl_get_document",
+          {
           source,
           document_id:
             documentId,
@@ -1051,7 +1522,11 @@ export class LegalFederationToolRuntime {
                     .extra
               }
             : {})
-        }
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
@@ -1086,14 +1561,19 @@ export class LegalFederationToolRuntime {
                 unknown
               >
           : {};
-      return this.client.call(
-        "pl_call",
-        {
-          source,
-          tool,
-          arguments:
-            args
-        }
+      const content =
+        await this.client.call(
+          "pl_call",
+          {
+            source,
+            tool,
+            arguments:
+              args
+          }
+        );
+      return annotateFederatedLegalContent(
+        source,
+        content
       );
     }
 
@@ -1109,5 +1589,7 @@ export const FEDERATED_LEGAL_TOOL_NAMES =
     SEARCH_TOOL,
     GET_TOOL,
     CALL_TOOL,
+    ASSESS_SOURCE_TOOL,
+    FETCH_AUXILIARY_SOURCE_TOOL,
     COVERAGE_TOOL
   ]);

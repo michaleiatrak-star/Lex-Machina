@@ -1,3 +1,10 @@
+import {
+  assertVerificationTierPolicy,
+  type LegalSourceCrossCheckStatus,
+  type LegalSourceProvenance,
+  type LegalSourceTier
+} from "./legal-source-policy.js";
+
 export type VerificationKind =
   | "statute"
   | "journal"
@@ -23,7 +30,11 @@ export type VerificationRecord = {
   kind: VerificationKind;
   status: VerificationStatus;
   sourceUrl?: string;
-  sourceTier?: "R1" | "R2A" | "R2B" | "R3";
+  sourceTier?: LegalSourceTier;
+  sourceProvenance?: LegalSourceProvenance;
+  crossCheckStatus?: LegalSourceCrossCheckStatus;
+  crossCheckUrl?: string;
+  crossCheckTier?: "R1" | "R2A";
   fetchedAt: string;
   toolCallId?: string;
   verificationMethod?: VerificationMethod;
@@ -59,6 +70,35 @@ export class VerificationLedger {
   add(record: VerificationRecord): void {
     if (!record.claim.trim()) {
       throw new Error("Verification claim cannot be empty.");
+    }
+
+    assertVerificationTierPolicy({
+      status:
+        record.status,
+      ...(record.sourceTier
+        ? {
+            sourceTier:
+              record.sourceTier
+          }
+        : {})
+    });
+
+    if (
+      record.crossCheckStatus ===
+        "CONFIRMED_R1_R2A" &&
+      (
+        !record.crossCheckUrl?.trim() ||
+        (
+          record.crossCheckTier !==
+            "R1" &&
+          record.crossCheckTier !==
+            "R2A"
+        )
+      )
+    ) {
+      throw new Error(
+        "Confirmed higher-tier cross-check requires R1/R2A tier and source URL."
+      );
     }
     if (
       (record.status === "VERIFIED" ||

@@ -123,7 +123,10 @@ const checks = {
       "password-setup-banner"
     ) &&
     authUi.includes(
-      "Używasz początkowego konta admin/admin"
+      "Konto korzysta jeszcze z hasła początkowego"
+    ) &&
+    authUi.includes(
+      'section: "security"'
     ) &&
     securityUi.includes(
       "Zmień początkowe hasło"

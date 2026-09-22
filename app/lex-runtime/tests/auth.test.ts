@@ -105,7 +105,8 @@ describe("local auth service", () => {
       service.status()
     ).toEqual({
       initialized: false,
-      requiresBootstrap: true
+      requiresBootstrap: true,
+      temporaryAdminCredentialsActive: false
     });
 
     const password =
@@ -130,7 +131,8 @@ describe("local auth service", () => {
       service.status()
     ).toEqual({
       initialized: true,
-      requiresBootstrap: false
+      requiresBootstrap: false,
+      temporaryAdminCredentialsActive: false
     });
 
     await expect(

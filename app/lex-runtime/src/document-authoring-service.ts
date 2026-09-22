@@ -25,8 +25,9 @@ import {
 import type {
   DocumentGenerationStateStore
 } from "./document-generation-state.js";
-import type {
-  EncryptedPrivacyVaultStore
+import {
+  privacyVaultDeanonymizationKeyBinding,
+  type EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
 import type {
   DocumentGenerationValidationContext
@@ -54,6 +55,8 @@ export type TokenizedDocumentResult = {
     string[];
   text:
     string;
+  deanonymizationKeyBound:
+    true;
 };
 
 export type FinalDocumentResult = {
@@ -64,6 +67,10 @@ export type FinalDocumentResult = {
   sha256: string;
   text: string;
   replacements: number;
+  deanonymizationBasis:
+    "PRIVACY_VAULT_KEY";
+  keyBindingVerified:
+    boolean;
 };
 
 export type ReadyDocumentResult = {
@@ -312,6 +319,15 @@ export class LocalDocumentAuthoringService {
             vaultGeneration,
             caseKeyVersion:
               args.keyVersion,
+            deanonymizationKeyBinding:
+              privacyVaultDeanonymizationKeyBinding({
+                caseId:
+                  args.caseId,
+                caseDataKey:
+                  args.caseDataKey,
+                keyVersion:
+                  args.keyVersion
+              }),
             ...(validated.ast.documentType ===
               "pleading"
               ? {
@@ -341,7 +357,9 @@ export class LocalDocumentAuthoringService {
           validated
             .aliasesUsed,
         text:
-          rendered.text
+          rendered.text,
+        deanonymizationKeyBound:
+          true
       };
     } finally {
       rendered.data.fill(0);
@@ -544,6 +562,37 @@ export class LocalDocumentAuthoringService {
         "GENERATION_CASE_KEY_CHANGED"
       );
     }
+    if (
+      !args.target
+        .deanonymizationKeyBinding
+    ) {
+      throw new Error(
+        "GENERATION_DEANONYMIZATION_KEY_BINDING_MISSING"
+      );
+    }
+
+    const currentKeyBinding =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          args.target
+            .caseId,
+        caseDataKey:
+          args.caseDataKey,
+        keyVersion:
+          args.keyVersion
+      });
+    const keyBindingVerified =
+      currentKeyBinding ===
+        args.target
+          .deanonymizationKeyBinding;
+    if (
+      !keyBindingVerified
+    ) {
+      throw new Error(
+        "GENERATION_DEANONYMIZATION_KEY_CHANGED"
+      );
+    }
+
     const currentGeneration =
       await this.vaults
         .getGeneration({
@@ -819,7 +868,10 @@ export class LocalDocumentAuthoringService {
             validation.text,
           replacements:
             finalPackage
-              .replaced ?? 0
+              .replaced ?? 0,
+          deanonymizationBasis:
+            "PRIVACY_VAULT_KEY",
+          keyBindingVerified
         };
       } finally {
         finalPackage

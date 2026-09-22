@@ -3,7 +3,8 @@ import {
   useMemo,
   useRef,
   useState,
-  type DragEvent
+  type DragEvent,
+  type ReactNode
 } from "react";
 import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { DocumentCitationContent } from "./DocumentCitationContent.js";
@@ -55,7 +56,8 @@ import {
   type ProviderId,
   type SessionExecutionResponse,
   type StoredUploadResponse,
-  type LegalDocumentFormat
+  type LegalDocumentFormat,
+  type LocalModelsResponse
 } from "./api.js";
 import {
   DOCUMENT_FILE_ACCEPT,
@@ -88,6 +90,12 @@ import {
   conversationForProvider
 } from "./conversation-context.js";
 import {
+  filterMatterCases,
+  type MatterRoleFilter,
+  type MatterSort,
+  type MatterStatusFilter
+} from "./search-filters.js";
+import {
   accountModelIdForPrimarySource,
   canExecutePrimaryModel,
   isAccountPrimarySource,
@@ -110,11 +118,39 @@ type TabId =
   | "firm"
   | "settings";
 
+export type SettingsSection =
+  | "models"
+  | "users"
+  | "security"
+  | "maintenance";
+
+export type SettingsRequest = {
+  section: SettingsSection;
+  nonce: number;
+};
+
+type SettingsPanels = {
+  localAi?: ReactNode;
+  users?: ReactNode;
+  security?: ReactNode;
+  maintenance?: ReactNode;
+};
+
 type ExtendedExecution = SessionExecutionResponse & {
   documentCitations?: WorkspaceDocumentCitation[];
   loadedSkills?: string[];
   executionSkills?: string[];
   domainSkills?: string[];
+};
+
+type ExecutionDiagnostic = {
+  friendly: string;
+  code: string;
+  status?: number;
+  reason?: string;
+  description?: string;
+  stage?: string;
+  trace?: ApiError["trace"];
 };
 
 const WELCOME: CaseChatMessage = {
@@ -486,7 +522,7 @@ function providerFailureMessage(
     case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
       return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
     case "ACCOUNT_SESSION_AUTH_EXPIRED":
-      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i konta i ponownie połącz konto.";
+      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.";
     case "ACCOUNT_SESSION_CAPACITY":
       return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
     case "ACCOUNT_SESSION_PROMPT_REJECTED":
@@ -494,7 +530,7 @@ function providerFailureMessage(
     case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
       return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
     case "ACCOUNT_SESSION_CLI_FAILED":
-      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Wersja RC15 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
+      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Lex Machina 0.1.7 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
     default:
       return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
   }
@@ -572,6 +608,12 @@ function executionMessage(
         verificationWarning +
         execution.answer,
       evidence: execution.evidence,
+      ...(execution.auxiliarySources?.length
+        ? {
+            auxiliarySources:
+              execution.auxiliarySources
+          }
+        : {}),
       documentCitations: execution.documentCitations,
       meta:
         `routing: ${labelForSkill(execution.primarySkill || route)}` +
@@ -595,6 +637,12 @@ function executionMessage(
     content:
       "Nie udało się zaprezentować odpowiedzi z powodu blokady wykonania lub wymaganego workflow. Sama niepełna weryfikacja źródeł nie blokuje już odpowiedzi.",
     evidence: execution.evidence,
+    ...(execution.auxiliarySources?.length
+      ? {
+          auxiliarySources:
+            execution.auxiliarySources
+        }
+      : {}),
     meta:
       `routing: ${labelForSkill(execution.primarySkill || route)}` +
       ` · finalization ${execution.finalization}` +
@@ -611,16 +659,33 @@ function canWriteCase(item: CaseListItem | undefined): boolean {
 }
 
 export default function MatterChatApp({
-  user
+  user,
+  settingsPanels,
+  settingsRequest,
+  onLock,
+  onLogout
 }: {
   user: AuthenticatedUser;
+  settingsPanels?: SettingsPanels;
+  settingsRequest?: SettingsRequest | null;
+  onLock?: () => void;
+  onLogout?: () => void;
 }) {
   const [activeTab, setActiveTab] = useState<TabId>("chat");
+  const [settingsSection, setSettingsSection] =
+    useState<SettingsSection>("models");
   const [runtimeOnline, setRuntimeOnline] = useState(false);
   const [runtimeError, setRuntimeError] = useState("");
 
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [caseId, setCaseId] = useState("");
+  const [caseSearch, setCaseSearch] = useState("");
+  const [caseStatusFilter, setCaseStatusFilter] =
+    useState<MatterStatusFilter>("ALL");
+  const [caseRoleFilter, setCaseRoleFilter] =
+    useState<MatterRoleFilter>("ALL");
+  const [caseSort, setCaseSort] =
+    useState<MatterSort>("UPDATED_DESC");
   const [newCaseName, setNewCaseName] = useState("");
   const [caseNameDraft, setCaseNameDraft] = useState("");
   const [caseBusy, setCaseBusy] = useState(false);
@@ -664,6 +729,10 @@ export default function MatterChatApp({
   });
   const [providerAccountBusy, setProviderAccountBusy] =
     useState(false);
+  const [localStartBusy, setLocalStartBusy] =
+    useState(false);
+  const [localStartMessage, setLocalStartMessage] =
+    useState("");
   const [providerAccountMessage, setProviderAccountMessage] =
     useState("");
   const [claudeOAuthToken, setClaudeOAuthTokenInput] =
@@ -686,6 +755,12 @@ export default function MatterChatApp({
     localModelsRefreshToken,
     setLocalModelsRefreshToken
   ] = useState(0);
+  const [
+    localRuntimeStatus,
+    setLocalRuntimeStatus
+  ] = useState<
+    LocalModelsResponse["runtime"] | null
+  >(null);
   const [modelRouting, setModelRouting] =
     useState<ModelRoutingPreferences>({
       auxiliaryEnabled: false,
@@ -726,6 +801,14 @@ export default function MatterChatApp({
   const [pendingFirstMessage, setPendingFirstMessage] = useState<string | null>(null);
   const [executing, setExecuting] = useState(false);
   const [executionError, setExecutionError] = useState("");
+  const [executionDiagnostic, setExecutionDiagnostic] =
+    useState<ExecutionDiagnostic | null>(null);
+  const [executionStage, setExecutionStage] =
+    useState("Przygotowanie sesji");
+  const [executionElapsedSeconds, setExecutionElapsedSeconds] =
+    useState(0);
+  const [runtimePulse, setRuntimePulse] =
+    useState<"CHECKING" | "OK" | "LOST">("CHECKING");
   const [processWorkflowVisible, setProcessWorkflowVisible] =
     useState(false);
   const [processWorkflowRefresh, setProcessWorkflowRefresh] =
@@ -759,6 +842,37 @@ export default function MatterChatApp({
     () => cases.filter((item) => item.caseKind === "MATTER"),
     [cases]
   );
+  const matterSearchResult =
+    useMemo(
+      () =>
+        filterMatterCases(
+          cases,
+          {
+            query:
+              caseSearch,
+            status:
+              caseStatusFilter,
+            role:
+              caseRoleFilter,
+            sort:
+              caseSort,
+            currentCaseId:
+              caseId
+          }
+        ),
+      [
+        cases,
+        caseSearch,
+        caseStatusFilter,
+        caseRoleFilter,
+        caseSort,
+        caseId
+      ]
+    );
+  const filteredMatterCases =
+    matterSearchResult.items;
+  const caseSearchMatchCount =
+    matterSearchResult.matchCount;
   const selectedCase = useMemo(
     () => matterCases.find((item) => item.caseId === caseId),
     [matterCases, caseId]
@@ -779,6 +893,20 @@ export default function MatterChatApp({
     isAccountPrimarySource(provider) &&
     accountSession?.authenticated === true;
   const selectedModel = models.find((item) => item.id === model);
+  const localModelReady =
+    provider === "local" &&
+    localRuntimeStatus?.state ===
+      "READY" &&
+    localRuntimeStatus
+      .activeModelId === model;
+  const localModelStarting =
+    provider === "local" &&
+    (
+      localRuntimeStatus?.state ===
+        "STARTING" ||
+      localRuntimeStatus?.state ===
+        "PROVISIONING"
+    );
   const selectedAuxiliaryModel =
     auxiliaryModels.find(
       (item) =>
@@ -1113,7 +1241,13 @@ export default function MatterChatApp({
     const loadModels =
       provider === "local"
         ? getLocalModels().then(
-            (response) => ({
+            (response) => {
+              if (!cancelled) {
+                setLocalRuntimeStatus(
+                  response.runtime
+                );
+              }
+              return {
               models:
                 response.models
                   .filter(
@@ -1153,7 +1287,8 @@ export default function MatterChatApp({
                       ]
                     })
                   )
-            })
+              };
+            }
           )
         : getModels(
             runtimeProvider
@@ -1293,6 +1428,79 @@ export default function MatterChatApp({
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, executing]);
+
+  useEffect(() => {
+    if (!settingsRequest) {
+      return;
+    }
+    setActiveTab("settings");
+    setSettingsSection(
+      settingsRequest.section
+    );
+  }, [
+    settingsRequest?.nonce,
+    settingsRequest?.section
+  ]);
+
+  useEffect(() => {
+    if (!executing) {
+      setExecutionElapsedSeconds(0);
+      setRuntimePulse("CHECKING");
+      return;
+    }
+
+    let cancelled = false;
+    const startedAt = Date.now();
+
+    const tick = () => {
+      if (!cancelled) {
+        setExecutionElapsedSeconds(
+          Math.max(
+            0,
+            Math.floor(
+              (Date.now() - startedAt) /
+                1000
+            )
+          )
+        );
+      }
+    };
+
+    const probeRuntime = async () => {
+      try {
+        await getHealth();
+        if (!cancelled) {
+          setRuntimePulse("OK");
+        }
+      } catch {
+        if (!cancelled) {
+          setRuntimePulse("LOST");
+        }
+      }
+    };
+
+    tick();
+    void probeRuntime();
+    const clock = window.setInterval(
+      tick,
+      1000
+    );
+    const heartbeat =
+      window.setInterval(
+        () => {
+          void probeRuntime();
+        },
+        4000
+      );
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(clock);
+      window.clearInterval(
+        heartbeat
+      );
+    };
+  }, [executing]);
 
   useEffect(() => {
     if (
@@ -1501,6 +1709,7 @@ export default function MatterChatApp({
       "Przełączono na kanał API. Wklej klucz dostawcy; w aplikacji desktopowej możesz zapisać go w systemowym magazynie poświadczeń."
     );
     setActiveTab("settings");
+    setSettingsSection("models");
   }
 
   async function openAccountClientSetup(): Promise<void> {
@@ -1740,8 +1949,12 @@ export default function MatterChatApp({
           : String(error);
 
     try {
-      await startLocalModel(
-        model
+      const started =
+        await startLocalModel(
+          model
+        );
+      setLocalRuntimeStatus(
+        started.runtime
       );
       setModelError("");
       return null;
@@ -1803,8 +2016,12 @@ export default function MatterChatApp({
         }
 
         try {
-          await startLocalModel(
-            model
+          const started =
+            await startLocalModel(
+              model
+            );
+          setLocalRuntimeStatus(
+            started.runtime
           );
         } catch (startError) {
           snapshot =
@@ -1839,8 +2056,12 @@ export default function MatterChatApp({
             model,
             fallbackContext
           );
-          await startLocalModel(
-            model
+          const started =
+            await startLocalModel(
+              model
+            );
+          setLocalRuntimeStatus(
+            started.runtime
           );
         }
 
@@ -1860,6 +2081,53 @@ export default function MatterChatApp({
           `Kod: ${code}`
         );
       }
+    }
+  }
+
+  async function startSelectedLocalModel():
+    Promise<void> {
+    if (
+      provider !== "local" ||
+      !model.startsWith("local/") ||
+      localStartBusy ||
+      executing
+    ) {
+      return;
+    }
+    setLocalStartBusy(true);
+    setLocalStartMessage(
+      "Uruchamiam lokalny model…"
+    );
+    try {
+      const failure =
+        await prepareLocalPrimaryModel();
+      if (failure) {
+        setLocalStartMessage(
+          failure
+        );
+        return;
+      }
+      const snapshot =
+        await getLocalModels();
+      setLocalRuntimeStatus(
+        snapshot.runtime
+      );
+      setLocalStartMessage(
+        snapshot.runtime.state ===
+            "READY" &&
+          snapshot.runtime
+            .activeModelId === model
+          ? "Lokalny model działa."
+          : "Runtime odpowiedział, ale model nie osiągnął stanu READY."
+      );
+    } catch (error) {
+      setLocalStartMessage(
+        error instanceof Error
+          ? error.message
+          : String(error)
+      );
+    } finally {
+      setLocalStartBusy(false);
     }
   }
 
@@ -1919,7 +2187,11 @@ export default function MatterChatApp({
 
     setQuery("");
     setExecuting(true);
+    setExecutionStage(
+      "Przygotowanie sesji"
+    );
     setExecutionError("");
+    setExecutionDiagnostic(null);
     setGeneratedDocumentMessage("");
 
     try {
@@ -1931,6 +2203,9 @@ export default function MatterChatApp({
         ) &&
         !readyAccount
       ) {
+        setExecutionStage(
+          "Łączenie konta modelu"
+        );
         const connected =
           await connectProviderAccount();
         if (!connected) {
@@ -1958,6 +2233,11 @@ export default function MatterChatApp({
         );
       }
 
+      setExecutionStage(
+        provider === "local"
+          ? "Przygotowanie modelu lokalnego"
+          : "Sprawdzanie gotowości modelu"
+      );
       const localPreparationError =
         await prepareLocalPrimaryModel();
       if (localPreparationError) {
@@ -1974,6 +2254,9 @@ export default function MatterChatApp({
         documentRequest &&
         caseId
       ) {
+        setExecutionStage(
+          "Tworzenie dokumentu i weryfikacja źródeł"
+        );
         const generated =
           await generateLegalDocument(
             executionCaseId,
@@ -2115,6 +2398,9 @@ export default function MatterChatApp({
         return;
       }
 
+      setExecutionStage(
+        "Analiza prawna, routing i weryfikacja źródeł"
+      );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2144,6 +2430,9 @@ export default function MatterChatApp({
         }
       }) as ExtendedExecution;
 
+      setExecutionStage(
+        "Finalizacja odpowiedzi"
+      );
       if (result.processWorkflow) {
         setProcessWorkflowVisible(true);
         setProcessWorkflowRefresh(
@@ -2186,7 +2475,7 @@ export default function MatterChatApp({
       const friendly =
         code ===
           "ACCOUNT_SESSION_CLI_NOT_INSTALLED"
-          ? "Tryb konta wymaga oficjalnego klienta dostawcy zainstalowanego osobno. Otwórz Ustawienia → Modele i konta, zainstaluj klienta albo przełącz źródło na API."
+          ? "Tryb konta wymaga oficjalnego klienta dostawcy zainstalowanego osobno. Otwórz Ustawienia → Modele i AI, zainstaluj klienta albo przełącz źródło na API."
         : code ===
             "ACCOUNT_SESSION_LOGIN_NOT_CONFIRMED"
           ? "Nie udało się potwierdzić logowania do wybranego konta. Zakończ oficjalne logowanie w widocznym terminalu lub przeglądarce i spróbuj ponownie."
@@ -2252,6 +2541,45 @@ export default function MatterChatApp({
                                   ? code
                                   : `Nie udało się wykonać sesji: ${code}`;
       setExecutionError(friendly);
+      setExecutionDiagnostic({
+        friendly,
+        code,
+        ...(error instanceof ApiError
+          ? {
+              status:
+                error.status,
+              ...(error.reason
+                ? {
+                    reason:
+                      error.reason
+                  }
+                : {}),
+              ...(error.description
+                ? {
+                    description:
+                      error.description
+                  }
+                : {}),
+              ...(error.stage
+                ? {
+                    stage:
+                      error.stage
+                  }
+                : {}),
+              ...(error.trace
+                ? {
+                    trace:
+                      error.trace
+                  }
+                : {})
+            }
+          : {
+              description:
+                error instanceof Error
+                  ? `${error.name}: ${error.message}`
+                  : String(error)
+            })
+      });
       setMessages((current) => [
         ...current,
         {
@@ -2496,7 +2824,7 @@ export default function MatterChatApp({
             ["skills", "Skille"],
             ["case", "Sprawa"],
             ["firm", "Kancelaria"],
-            ["settings", "Modele i konta"]
+            ["settings", "Ustawienia"]
           ] as Array<[TabId, string]>).map(([id, label]) => (
             <button
               key={id}
@@ -2531,9 +2859,237 @@ export default function MatterChatApp({
               : AUTO_CASE_TYPE}
           </span>
         </div>
+
+        <div className="chat-account-card">
+          <div className="chat-account-identity">
+            <strong>
+              {user.displayName}
+            </strong>
+            <small>
+              @{user.loginName} · {user.appRole}
+            </small>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab("settings");
+              setSettingsSection(
+                "security"
+              );
+            }}
+          >
+            Ustawienia
+          </button>
+          <div className="chat-account-actions">
+            <button
+              type="button"
+              onClick={onLock}
+              disabled={!onLock}
+            >
+              Zablokuj
+            </button>
+            <button
+              type="button"
+              onClick={onLogout}
+              disabled={!onLogout}
+            >
+              Wyloguj
+            </button>
+          </div>
+        </div>
       </aside>
 
       <main className="chat-main">
+        {activeTab === "chat" ? (
+          <section
+            className="chat-model-dock"
+            aria-label="Aktywny model rozmowy"
+          >
+            <div className="chat-model-dock-status">
+              <span
+                className={
+                  provider === "local"
+                    ? localModelReady
+                      ? "chat-dot online"
+                      : localModelStarting
+                        ? "chat-dot starting"
+                        : "chat-dot offline"
+                    : runtimeOnline
+                      ? "chat-dot online"
+                      : "chat-dot offline"
+                }
+              />
+              <div>
+                <strong>
+                  {selectedModel?.displayName ??
+                    (provider === "local"
+                      ? "Model lokalny"
+                      : "Wybierz model")}
+                </strong>
+                <small>
+                  {provider === "local"
+                    ? localModelReady
+                      ? "lokalny model · działa"
+                      : localModelStarting
+                        ? "lokalny model · uruchamianie"
+                        : localRuntimeStatus
+                          ? "lokalny model · zatrzymany"
+                          : "lokalny model · sprawdzanie stanu"
+                    : PRIMARY_MODEL_SOURCES.find(
+                        (item) =>
+                          item.id ===
+                          provider
+                      )?.label ??
+                      provider}
+                </small>
+              </div>
+            </div>
+            <div className="chat-model-dock-controls">
+              <select
+                aria-label="Źródło modelu głównego"
+                value={provider}
+                disabled={executing}
+                onChange={(event) => {
+                  setProvider(
+                    event.target.value as PrimaryModelSource
+                  );
+                  setProviderApiKeyInput("");
+                  setProviderKeyMessage("");
+                  setProviderAccountMessage("");
+                  setLocalStartMessage("");
+                }}
+              >
+                {PRIMARY_MODEL_SOURCES.map(
+                  (item) => (
+                    <option
+                      key={item.id}
+                      value={item.id}
+                    >
+                      {item.label}
+                    </option>
+                  )
+                )}
+              </select>
+              <select
+                aria-label="Model główny"
+                value={model}
+                disabled={
+                  executing ||
+                  modelCatalogLoading ||
+                  models.length === 0
+                }
+                onChange={(event) => {
+                  setModel(
+                    event.target.value
+                  );
+                  setLocalStartMessage("");
+                }}
+              >
+                {modelCatalogLoading ? (
+                  <option value="">
+                    Odświeżam modele…
+                  </option>
+                ) : models.length === 0 ? (
+                  <option value="">
+                    {provider === "local"
+                      ? "Brak zainstalowanego modelu"
+                      : "Brak modeli"}
+                  </option>
+                ) : null}
+                {models.map((item) => (
+                  <option
+                    key={item.id}
+                    value={item.id}
+                    disabled={
+                      !item.selectable
+                    }
+                  >
+                    {item.displayName}
+                  </option>
+                ))}
+              </select>
+              {provider === "local" ? (
+                <button
+                  type="button"
+                  className="chat-primary-action chat-model-start"
+                  disabled={
+                    executing ||
+                    localStartBusy ||
+                    localModelReady ||
+                    !model.startsWith(
+                      "local/"
+                    )
+                  }
+                  onClick={() =>
+                    void startSelectedLocalModel()
+                  }
+                >
+                  {localStartBusy ||
+                  localModelStarting
+                    ? "Uruchamianie…"
+                    : localModelReady
+                      ? "Model uruchomiony"
+                      : "Uruchom lokalny model"}
+                </button>
+              ) : isAccountPrimarySource(
+                  provider
+                ) &&
+                !accountAuthenticated ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action"
+                  disabled={
+                    executing ||
+                    providerAccountBusy ||
+                    user.appRole !==
+                      "ADMIN"
+                  }
+                  onClick={() =>
+                    accountSession
+                      ?.installed ===
+                    false
+                      ? void openAccountClientSetup()
+                      : void connectProviderAccount()
+                  }
+                >
+                  {providerAccountBusy
+                    ? "Logowanie…"
+                    : accountSession
+                        ?.installed ===
+                      false
+                      ? "Zainstaluj klienta ↗"
+                      : "Połącz konto"}
+                </button>
+              ) : null}
+              <button
+                type="button"
+                className="chat-secondary-action"
+                onClick={() => {
+                  setActiveTab(
+                    "settings"
+                  );
+                  setSettingsSection(
+                    "models"
+                  );
+                }}
+              >
+                Zarządzaj modelami
+              </button>
+            </div>
+            {localStartMessage ? (
+              <small
+                className={
+                  localStartMessage ===
+                  "Lokalny model działa."
+                    ? "chat-model-dock-message ready"
+                    : "chat-model-dock-message"
+                }
+              >
+                {localStartMessage}
+              </small>
+            ) : null}
+          </section>
+        ) : null}
         <header className="chat-page-header">
           <div>
             <p className="eyebrow">
@@ -2550,11 +3106,100 @@ export default function MatterChatApp({
                       ? "Dane sprawy"
                       : activeTab === "firm"
                         ? "Know-how i wzory kancelarii"
-                        : "Modele i konta"}
+                        : "Ustawienia"}
             </h1>
           </div>
           <div className="chat-header-actions">
             <div className="chat-case-switcher">
+              <label className="chat-case-search">
+                <span>Szukaj spraw</span>
+                <input
+                  type="search"
+                  value={caseSearch}
+                  placeholder="Nazwa lub ID sprawy"
+                  aria-label="Szukaj spraw"
+                  onChange={(event) =>
+                    setCaseSearch(
+                      event.target.value
+                    )
+                  }
+                />
+              </label>
+              <label className="chat-case-filter">
+                <span>Status</span>
+                <select
+                  aria-label="Filtr statusu spraw"
+                  value={caseStatusFilter}
+                  onChange={(event) =>
+                    setCaseStatusFilter(
+                      event.target
+                        .value as MatterStatusFilter
+                    )
+                  }
+                >
+                  <option value="ALL">
+                    Wszystkie
+                  </option>
+                  <option value="ACTIVE">
+                    Aktywne
+                  </option>
+                  <option value="ARCHIVED">
+                    Archiwalne
+                  </option>
+                </select>
+              </label>
+              <label className="chat-case-filter">
+                <span>Rola</span>
+                <select
+                  aria-label="Filtr roli w sprawie"
+                  value={caseRoleFilter}
+                  onChange={(event) =>
+                    setCaseRoleFilter(
+                      event.target
+                        .value as MatterRoleFilter
+                    )
+                  }
+                >
+                  <option value="ALL">
+                    Wszystkie
+                  </option>
+                  <option value="OWNER">
+                    Owner
+                  </option>
+                  <option value="EDITOR">
+                    Editor
+                  </option>
+                  <option value="ANALYST">
+                    Analyst
+                  </option>
+                  <option value="VIEWER">
+                    Viewer
+                  </option>
+                </select>
+              </label>
+              <label className="chat-case-filter">
+                <span>Sortuj</span>
+                <select
+                  aria-label="Sortowanie spraw"
+                  value={caseSort}
+                  onChange={(event) =>
+                    setCaseSort(
+                      event.target
+                        .value as MatterSort
+                    )
+                  }
+                >
+                  <option value="UPDATED_DESC">
+                    Ostatnio zmieniane
+                  </option>
+                  <option value="CREATED_DESC">
+                    Najnowsze
+                  </option>
+                  <option value="NAME_ASC">
+                    Nazwa A–Z
+                  </option>
+                </select>
+              </label>
               <label>
                 <span>Sprawa</span>
                 <select
@@ -2570,7 +3215,7 @@ export default function MatterChatApp({
                     )
                   }
                 >
-                  {matterCases.map(
+                  {filteredMatterCases.map(
                     (item) => (
                       <option
                         key={
@@ -2589,7 +3234,40 @@ export default function MatterChatApp({
                     )
                   )}
                 </select>
+                {caseSearch.trim() ||
+                caseStatusFilter !== "ALL" ||
+                caseRoleFilter !== "ALL" ? (
+                  <small className="chat-case-search-count">
+                    {caseSearchMatchCount} wyników
+                    {matterSearchResult.currentPreserved
+                      ? " · bieżąca sprawa pokazana dodatkowo"
+                      : ""}
+                  </small>
+                ) : null}
               </label>
+              {caseSearch.trim() ||
+              caseStatusFilter !== "ALL" ||
+              caseRoleFilter !== "ALL" ||
+              caseSort !== "UPDATED_DESC" ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action chat-case-filter-reset"
+                  onClick={() => {
+                    setCaseSearch("");
+                    setCaseStatusFilter(
+                      "ALL"
+                    );
+                    setCaseRoleFilter(
+                      "ALL"
+                    );
+                    setCaseSort(
+                      "UPDATED_DESC"
+                    );
+                  }}
+                >
+                  Wyczyść filtry
+                </button>
+              ) : null}
               <button
                 type="button"
                 className="chat-secondary-action"
@@ -2607,104 +3285,6 @@ export default function MatterChatApp({
                 + Nowa sprawa
               </button>
             </div>
-            {activeTab === "chat" ? (
-              <div className="chat-model-lanes">
-                <label>
-                  <span>Model główny</span>
-                  <div className="chat-model-select-row">
-                    <select
-                      aria-label="Provider modelu głównego"
-                      value={provider}
-                      disabled={executing}
-                      onChange={(event) => {
-                        setProvider(
-                          event.target.value as PrimaryModelSource
-                        );
-                        setProviderApiKeyInput("");
-                        setProviderKeyMessage("");
-                        setProviderAccountMessage("");
-                      }}
-                    >
-                      {PRIMARY_MODEL_SOURCES.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.label}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      aria-label="Model główny"
-                      value={model}
-                      disabled={executing || models.length === 0}
-                      onChange={(event) => setModel(event.target.value)}
-                    >
-                      {models.length === 0 ? (
-                        <option value="">
-                          {provider === "local"
-                            ? "Brak zainstalowanych modeli lokalnych"
-                            : "Brak modeli"}
-                        </option>
-                      ) : null}
-                      {models.map((item) => (
-                        <option
-                          key={item.id}
-                          value={item.id}
-                          disabled={!item.selectable}
-                        >
-                          {item.displayName}
-                        </option>
-                      ))}
-                    </select>
-                    {isAccountPrimarySource(provider) &&
-                    !accountAuthenticated ? (
-                      <>
-                        <button
-                          type="button"
-                          className="chat-secondary-action"
-                          disabled={
-                            executing ||
-                            providerAccountBusy ||
-                            user.appRole !== "ADMIN"
-                          }
-                          onClick={() =>
-                            accountSession?.installed === false
-                              ? void openAccountClientSetup()
-                              : void connectProviderAccount()
-                          }
-                        >
-                          {providerAccountBusy
-                            ? "Logowanie…"
-                            : accountSession?.installed === false
-                              ? "Zainstaluj klienta ↗"
-                              : "Zaloguj"}
-                        </button>
-                        {accountSession?.installed === false ? (
-                          <button
-                            type="button"
-                            className="chat-secondary-action"
-                            disabled={executing}
-                            onClick={switchAccountToApi}
-                          >
-                            Użyj API
-                          </button>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </div>
-                </label>
-                <div className="chat-aux-model-chip">
-                  <span>Pomocniczy</span>
-                  <strong>
-                    {modelRouting.auxiliaryEnabled
-                      ? selectedAuxiliaryModel?.displayName ??
-                        modelRouting.auxiliaryModel
-                      : "wyłączony"}
-                  </strong>
-                  {modelRouting.auxiliaryEnabled ? (
-                    <small>{modelRouting.auxiliaryProvider}</small>
-                  ) : null}
-                </div>
-              </div>
-            ) : null}
             <button
               type="button"
               className="chat-secondary-action"
@@ -2927,7 +3507,15 @@ export default function MatterChatApp({
                       <ul>
                         {message.evidence.map((item: EvidenceItem, index: number) => (
                           <li key={`${item.claim}-${index}`}>
-                            <span>{item.status} · {item.kind}</span>
+                            <span className="chat-evidence-meta">
+                              <b>{item.status}</b>
+                              <span>· {item.kind}</span>
+                              {item.sourceTier ? (
+                                <span className={`chat-source-tier chat-source-tier-${item.sourceTier.toLocaleLowerCase("en")}`}>
+                                  {item.sourceTier}
+                                </span>
+                              ) : null}
+                            </span>
                             <strong>{item.claim}</strong>
                             {item.sourceUrl ? (
                               <a
@@ -2948,13 +3536,117 @@ export default function MatterChatApp({
                       </ul>
                     </details>
                   ) : null}
+                  {message.auxiliarySources?.length ? (
+                    <details className="chat-auxiliary-sources">
+                      <summary>
+                        Źródła pomocnicze R2B/R3 ({message.auxiliarySources.length})
+                      </summary>
+                      <p className="chat-auxiliary-intro">
+                        Materiały pomocnicze nie tworzą znacznika VERIFIED ani samodzielnej podstawy prawnej.
+                      </p>
+                      <ul>
+                        {message.auxiliarySources.map((item, index) => (
+                          <li
+                            key={`${item.sourceUrl}-${item.claim ?? ""}-${index}`}
+                            className={item.conflict ? "conflict" : ""}
+                          >
+                            <div className="chat-auxiliary-source-head">
+                              <span className={`chat-source-tier chat-source-tier-${item.sourceTier.toLocaleLowerCase("en")}`}>
+                                {item.sourceTier}
+                              </span>
+                              <strong>
+                                {item.claim || "Materiał pomocniczy"}
+                              </strong>
+                            </div>
+                            <small>
+                              Cross-check: {
+                                item.crossCheckStatus === "CONFIRMED_R1_R2A"
+                                  ? `potwierdzony w ${item.crossCheckTier ?? "R1/2A"}`
+                                  : item.crossCheckStatus === "CONFLICT"
+                                    ? "konflikt ze źródłem wyższego rzędu"
+                                    : item.crossCheckStatus === "UNAVAILABLE"
+                                      ? "niedostępny"
+                                      : "wymagany / oczekuje"
+                              }
+                            </small>
+                            {item.staleOrUndatedWarning ? (
+                              <small className="chat-source-warning">
+                                ⚠️ Brak aktualnej daty albo materiał starszy niż 24 miesiące.
+                              </small>
+                            ) : null}
+                            {item.conflict ? (
+                              <small className="chat-source-warning">
+                                ⚠️ Nie buduj wniosku na tym materiale; pierwszeństwo ma R1/2A.
+                              </small>
+                            ) : null}
+                            <div className="chat-auxiliary-source-links">
+                              <a
+                                className="source-inline-link"
+                                href={item.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => {
+                                  event.preventDefault();
+                                  void openExternalUrl(item.sourceUrl);
+                                }}
+                              >
+                                Otwórz źródło pomocnicze ↗
+                              </a>
+                              {item.crossCheckUrl ? (
+                                <a
+                                  className="source-inline-link"
+                                  href={item.crossCheckUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(event) => {
+                                    event.preventDefault();
+                                    void openExternalUrl(item.crossCheckUrl!);
+                                  }}
+                                >
+                                  Otwórz cross-check {item.crossCheckTier ?? "R1/2A"} ↗
+                                </a>
+                              ) : null}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : null}
                 </article>
               ))}
               {executing ? (
-                <article className="chat-message chat-message-assistant chat-thinking">
-                  <div className="chat-message-role">Lex Machina</div>
+                <article
+                  className="chat-message chat-message-assistant chat-thinking chat-working-status"
+                  role="status"
+                  aria-live="polite"
+                >
+                  <div className="chat-message-role">
+                    Lex Machina
+                  </div>
+                  <div className="chat-working-head">
+                    <span
+                      className="chat-working-spinner"
+                      aria-hidden="true"
+                    />
+                    <strong>Pracuję</strong>
+                    <span>
+                      {executionElapsedSeconds}s
+                    </span>
+                  </div>
                   <div className="chat-message-content">
-                    Analizuję, dobieram dziedziny i skille oraz waliduję cytowania…
+                    {executionStage}
+                  </div>
+                  <div className="chat-working-meta">
+                    <span>
+                      {runtimePulse === "OK"
+                        ? "Runtime odpowiada"
+                        : runtimePulse === "LOST"
+                          ? "Brak odpowiedzi z runtime — operacja nadal oczekuje"
+                          : "Sprawdzam runtime…"}
+                    </span>
+                    <span>
+                      To okno aktualizuje się podczas oczekiwania na model i źródła.
+                    </span>
                   </div>
                 </article>
               ) : null}
@@ -3229,7 +3921,102 @@ export default function MatterChatApp({
                 </p>
               ) : null}
               {executionError ? (
-                <p className="chat-inline-error">{executionError}</p>
+                <div className="chat-error-diagnostic">
+                  <p className="chat-inline-error">
+                    {executionError}
+                  </p>
+                  {executionDiagnostic ? (
+                    <details>
+                      <summary>
+                        Pełne informacje diagnostyczne
+                      </summary>
+                      <dl>
+                        <div>
+                          <dt>Kod</dt>
+                          <dd>
+                            <code>
+                              {executionDiagnostic.code}
+                            </code>
+                          </dd>
+                        </div>
+                        {executionDiagnostic.status !== undefined ? (
+                          <div>
+                            <dt>HTTP</dt>
+                            <dd>
+                              {executionDiagnostic.status}
+                            </dd>
+                          </div>
+                        ) : null}
+                        {executionDiagnostic.stage ? (
+                          <div>
+                            <dt>Etap</dt>
+                            <dd>
+                              <code>
+                                {executionDiagnostic.stage}
+                              </code>
+                            </dd>
+                          </div>
+                        ) : null}
+                        {executionDiagnostic.reason ? (
+                          <div>
+                            <dt>Powód</dt>
+                            <dd>
+                              <code>
+                                {executionDiagnostic.reason}
+                              </code>
+                            </dd>
+                          </div>
+                        ) : null}
+                      </dl>
+                      {executionDiagnostic.description ? (
+                        <pre>
+                          {executionDiagnostic.description}
+                        </pre>
+                      ) : null}
+                      {executionDiagnostic.trace &&
+                      executionDiagnostic.trace.length > 0 ? (
+                        <ol className="chat-error-trace">
+                          {executionDiagnostic.trace.map(
+                            (event, index) => (
+                              <li
+                                key={
+                                  String(
+                                    event.sequence ??
+                                      index
+                                  ) +
+                                  ":" +
+                                  String(
+                                    event.target ??
+                                      ""
+                                  )
+                                }
+                              >
+                                <code>
+                                  {event.sequence ??
+                                    index + 1}
+                                  {" · "}
+                                  {event.type ??
+                                    "event"}
+                                  {" · "}
+                                  {event.target ??
+                                    "unknown"}
+                                  {" · "}
+                                  {event.status ??
+                                    "?"}
+                                </code>
+                                {event.detail ? (
+                                  <span>
+                                    {event.detail}
+                                  </span>
+                                ) : null}
+                              </li>
+                            )
+                          )}
+                        </ol>
+                      ) : null}
+                    </details>
+                  ) : null}
+                </div>
               ) : null}
             </div>
           </section>
@@ -3542,11 +4329,6 @@ export default function MatterChatApp({
               </div>
             </article>
 
-            <CaseCollaborationPanel
-              caseId={caseId}
-              caseRole={selectedCase?.role}
-            />
-
             {selectedCase ? (
               <article className="chat-card">
                 <p className="eyebrow">Cykl życia</p>
@@ -3622,7 +4404,44 @@ export default function MatterChatApp({
         ) : null}
 
         {activeTab === "settings" ? (
-          <section className="chat-settings-grid">
+          <section className="chat-settings-hub">
+            <nav
+              className="chat-settings-nav"
+              aria-label="Sekcje ustawień"
+            >
+              {([
+                ["models", "Modele i AI"],
+                ["users", "Użytkownicy i uprawnienia"],
+                ["security", "Hasło i bezpieczeństwo"],
+                ["maintenance", "Aplikacja i utrzymanie"]
+              ] as Array<
+                [SettingsSection, string]
+              >)
+                .map(
+                  ([section, label]) => (
+                    <button
+                      key={section}
+                      type="button"
+                      className={
+                        settingsSection ===
+                        section
+                          ? "active"
+                          : ""
+                      }
+                      onClick={() =>
+                        setSettingsSection(
+                          section
+                        )
+                      }
+                    >
+                      {label}
+                    </button>
+                  )
+                )}
+            </nav>
+            <div className="chat-settings-content">
+              {settingsSection === "models" ? (
+                <div className="chat-settings-grid">
             <article className="chat-card chat-settings-primary">
               <p className="eyebrow">Model główny</p>
               <h2>
@@ -4188,6 +5007,59 @@ export default function MatterChatApp({
                 <p>Klucz API może zmieniać administrator aplikacji.</p>
               )}
             </article>
+                {settingsPanels?.localAi ? (
+                  <div className="chat-settings-embedded-wide">
+                    {settingsPanels.localAi}
+                  </div>
+                ) : null}
+                </div>
+              ) : settingsSection === "users" ? (
+                <div className="chat-settings-section-stack">
+                  {user.appRole === "ADMIN"
+                    ? settingsPanels?.users
+                    : (
+                      <article className="chat-card">
+                        <p className="eyebrow">
+                          Konto aplikacji
+                        </p>
+                        <h2>
+                          Użytkownicy globalni
+                        </h2>
+                        <p>
+                          Tworzenie, wyłączanie i usuwanie kont aplikacji jest dostępne dla administratora. Uprawnienia do bieżącej sprawy są zarządzane poniżej zgodnie z rolą w tej sprawie.
+                        </p>
+                      </article>
+                    )}
+                  {caseId ? (
+                    <article className="chat-card chat-settings-case-access">
+                      <p className="eyebrow">
+                        Bieżąca sprawa
+                      </p>
+                      <h2>
+                        Uprawnienia do sprawy
+                      </h2>
+                      <p>
+                        Role OWNER, EDITOR, ANALYST i VIEWER dotyczą wyłącznie wybranej sprawy.
+                      </p>
+                      <CaseCollaborationPanel
+                        caseId={caseId}
+                        caseRole={
+                          selectedCase?.role
+                        }
+                      />
+                    </article>
+                  ) : null}
+                </div>
+              ) : settingsSection === "security" ? (
+                <div className="chat-settings-section-stack">
+                  {settingsPanels?.security}
+                </div>
+              ) : (
+                <div className="chat-settings-section-stack">
+                  {settingsPanels?.maintenance}
+                </div>
+              )}
+            </div>
           </section>
         ) : null}
       </main>

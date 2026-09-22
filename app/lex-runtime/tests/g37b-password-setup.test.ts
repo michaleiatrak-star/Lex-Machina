@@ -159,6 +159,10 @@ describe("G37B managed first-admin password setup", () => {
         bootstrap.user
           .passwordSetupPending
       ).toBe(true);
+      expect(
+        service.status()
+          .temporaryAdminCredentialsActive
+      ).toBe(true);
 
       await expect(
         service.changePassword(
@@ -185,6 +189,10 @@ describe("G37B managed first-admin password setup", () => {
       expect(
         changed.user
           .passwordSetupPending
+      ).toBe(false);
+      expect(
+        service.status()
+          .temporaryAdminCredentialsActive
       ).toBe(false);
 
       await expect(

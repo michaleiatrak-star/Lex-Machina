@@ -369,10 +369,22 @@ implements AuthService {
   status(): AuthStatus {
     const initialized =
       this.store.countUsers() > 0;
+    const temporaryAdminCredentialsActive =
+      initialized &&
+      this.store
+        .listUsers()
+        .some(
+          (user) =>
+            user.normalizedLoginName ===
+              "admin" &&
+            user.passwordSetupPending ===
+              true
+        );
     return {
       initialized,
       requiresBootstrap:
-        !initialized
+        !initialized,
+      temporaryAdminCredentialsActive
     };
   }
 

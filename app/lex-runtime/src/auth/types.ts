@@ -91,6 +91,7 @@ export type AuthSuccess = AuthenticatedContext & {
 export type AuthStatus = {
   initialized: boolean;
   requiresBootstrap: boolean;
+  temporaryAdminCredentialsActive: boolean;
 };
 
 export type AuthClock = {

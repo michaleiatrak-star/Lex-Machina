@@ -2,6 +2,7 @@ import {
   createCipheriv,
   createDecipheriv,
   createHash,
+  createHmac,
   hkdfSync,
   randomBytes
 } from "node:crypto";
@@ -108,6 +109,64 @@ function derivePrivacyVaultKey(
       32
     )
   );
+}
+
+export function privacyVaultDeanonymizationKeyBinding(
+  args: {
+    caseId: string;
+    caseDataKey:
+      Buffer;
+    keyVersion:
+      number;
+  }
+): string {
+  if (
+    !validCaseId(
+      args.caseId
+    )
+  ) {
+    throw new Error(
+      "INVALID_CASE_ID"
+    );
+  }
+  if (
+    !Number.isInteger(
+      args.keyVersion
+    ) ||
+    args.keyVersion < 1
+  ) {
+    throw new Error(
+      "INVALID_VAULT_KEY_VERSION"
+    );
+  }
+
+  const key =
+    derivePrivacyVaultKey(
+      args.caseDataKey,
+      args.caseId
+    );
+  try {
+    return createHmac(
+      "sha256",
+      key
+    )
+      .update(
+        JSON.stringify({
+          purpose:
+            "lex/privacy-vault/deanonymization-binding/v1",
+          caseId:
+            args.caseId,
+          keyVersion:
+            args.keyVersion
+        }),
+        "utf8"
+      )
+      .digest(
+        "hex"
+      );
+  } finally {
+    key.fill(0);
+  }
 }
 
 function canonicalSnapshot(

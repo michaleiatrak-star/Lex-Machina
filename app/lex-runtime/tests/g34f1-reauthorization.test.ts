@@ -172,7 +172,9 @@ describe("G34F1 transaction reauthorization foundation", () => {
             .digest("hex"),
         vaultGeneration: 7,
         caseKeyVersion:
-          legalCase.keyVersion
+          legalCase.keyVersion,
+        deanonymizationKeyBinding:
+          "b".repeat(64)
     };
     const resolver =
       new MutableResolver(
@@ -227,6 +229,13 @@ describe("G34F1 transaction reauthorization foundation", () => {
       authorized.intent.status
     ).toBe("AUTHORIZED");
     expect(
+      authorized.grant
+        .deanonymizationKeyBinding
+    ).toBe(
+      target
+        .deanonymizationKeyBinding
+    );
+    expect(
       Date.parse(
         authorized.session
           .lastFullAuthenticationAt
@@ -236,6 +245,26 @@ describe("G34F1 transaction reauthorization foundation", () => {
     resolver.target = {
       ...resolver.target,
       vaultGeneration: 8
+    };
+    await expect(
+      manager.consumeGrant(
+        {
+          user:
+            actor.user,
+          session:
+            authorized.session
+        },
+        authorized.grant.grantId
+      )
+    ).rejects.toMatchObject({
+      code:
+        "REAUTH_TARGET_CHANGED"
+    });
+
+    resolver.target = {
+      ...target,
+      deanonymizationKeyBinding:
+        "c".repeat(64)
     };
     await expect(
       manager.consumeGrant(
@@ -287,6 +316,80 @@ describe("G34F1 transaction reauthorization foundation", () => {
     current.auth.close();
   });
 
+  it("rejects a tokenized artifact that has no deanonymization-key binding", async () => {
+    const now = {
+      value: Date.parse(
+        "2026-09-16T10:30:00.000Z"
+      )
+    };
+    const current =
+      fixture(now);
+    const password =
+      "G34F1 brak bindingu 2026";
+    const owner =
+      await current.auth.bootstrap({
+        loginName:
+          "owner-no-binding",
+        displayName:
+          "Owner no binding",
+        password
+      });
+    const actor = {
+      user: owner.user,
+      session: owner.session
+    };
+    const legalCase =
+      await current.cases
+        .createCase(
+          actor,
+          "Reauth no binding"
+        );
+    const resolver =
+      new MutableResolver({
+        caseId:
+          legalCase.caseId,
+        artifactId:
+          "artifact_" +
+          "3".repeat(32),
+        artifactFormat:
+          "docx",
+        state:
+          "TOKENIZED_VALIDATED",
+        tokenizedSha256:
+          "e".repeat(64),
+        vaultGeneration: 1,
+        caseKeyVersion:
+          legalCase.keyVersion
+      });
+    const manager =
+      new DeanonymizationReauthorizationManager(
+        current.auth,
+        current.cases,
+        current.store,
+        resolver,
+        {
+          clock: {
+            now: () =>
+              now.value
+          }
+        }
+      );
+
+    await expect(
+      manager.createIntent(
+        actor,
+        legalCase.caseId,
+        resolver.target
+          .artifactId
+      )
+    ).rejects.toMatchObject({
+      code:
+        "REAUTH_TARGET_NOT_READY"
+    });
+
+    current.auth.close();
+  });
+
   it("expires grants and revokes them automatically with the session", async () => {
     const now = {
       value: Date.parse(
@@ -328,7 +431,9 @@ describe("G34F1 transaction reauthorization foundation", () => {
           "a".repeat(64),
         vaultGeneration: 3,
         caseKeyVersion:
-          legalCase.keyVersion
+          legalCase.keyVersion,
+        deanonymizationKeyBinding:
+          "d".repeat(64)
     };
     const resolver =
       new MutableResolver(

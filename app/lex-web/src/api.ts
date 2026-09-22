@@ -3,6 +3,7 @@ export type ProviderId = "openai" | "anthropic" | "xai";
 export type AuthStatusResponse = {
   initialized: boolean;
   requiresBootstrap: boolean;
+  temporaryAdminCredentialsActive: boolean;
 };
 
 export type AuthenticatedUser = {
@@ -308,6 +309,7 @@ export type GeneratedDocumentResponse = {
   vaultGeneration?: number;
   sha256?: string;
   aliasesUsed: string[];
+  deanonymizationKeyBound?: boolean;
   readyForDownload?: boolean;
   downloadTicket?: {
     ticketId: string;
@@ -366,6 +368,10 @@ export type FinalizedDocumentResponse = {
     LegalDocumentFormat;
   sha256: string;
   replacements: number;
+  deanonymizationBasis:
+    "PRIVACY_VAULT_KEY";
+  keyBindingVerified:
+    boolean;
   downloadTicket?: {
     ticketId: string;
     caseId: string;
@@ -715,6 +721,36 @@ export type BlockedReference = {
   status: string;
 };
 
+export type AuxiliarySourceItem = {
+  claim?: string;
+  sourceUrl: string;
+  sourceTier:
+    | "R2B"
+    | "R3";
+  classification:
+    | "KNOWN_DOMAIN"
+    | "CONSERVATIVE_R3";
+  classificationBasis: string;
+  crossCheckStatus:
+    | "NOT_REQUIRED"
+    | "PENDING"
+    | "CONFIRMED_R1_R2A"
+    | "CONFLICT"
+    | "UNAVAILABLE";
+  crossCheckUrl?: string;
+  crossCheckTier?:
+    | "R1"
+    | "R2A";
+  publishedAt?: string;
+  updatedAt?: string;
+  staleOrUndatedWarning:
+    boolean;
+  higherTierCrossCheckSatisfied:
+    boolean;
+  conflict: boolean;
+  instruction: string;
+};
+
 export type EvidenceItem = {
   claim: string;
   kind: "statute" | "journal" | "case" | "deadline" | "amount";
@@ -800,6 +836,8 @@ export type SessionExecutionResponse = {
     unverified: number;
   };
   evidence: EvidenceItem[];
+  auxiliarySources?:
+    AuxiliarySourceItem[];
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
@@ -946,11 +984,22 @@ export type CourtAnalysisWorkflowView = {
     CourtAnalysisCheckpoint[];
 };
 
+export type ApiFailureTraceEvent = {
+  sequence?: number;
+  type?: string;
+  target?: string;
+  status?: string;
+  detail?: string;
+};
+
 export type ApiFailure = {
   error: string;
   provider?: ProviderId;
   reason?: string;
   retryAfter?: string;
+  description?: string;
+  stage?: string;
+  trace?: ApiFailureTraceEvent[];
 };
 
 export class ApiError extends Error {
@@ -958,7 +1007,10 @@ export class ApiError extends Error {
     readonly code: string,
     readonly status: number,
     readonly retryAfter?: string,
-    readonly reason?: string
+    readonly reason?: string,
+    readonly description?: string,
+    readonly stage?: string,
+    readonly trace?: ApiFailureTraceEvent[]
   ) {
     super(code);
     this.name = "ApiError";
@@ -1081,7 +1133,10 @@ async function json<T>(
         `HTTP_${response.status}`,
       response.status,
       failure.retryAfter,
-      failure.reason
+      failure.reason,
+      failure.description,
+      failure.stage,
+      failure.trace
     );
   }
   return payload as T;

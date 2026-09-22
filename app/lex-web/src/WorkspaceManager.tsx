@@ -4,9 +4,16 @@ import {
   isDesktopShell,
   listCaseFiles,
   processStoredCaseFile,
+  searchCaseKnowledge,
   uploadCaseFile,
+  type CaseKnowledgeHit,
   type StoredUploadResponse
 } from "./api.js";
+import {
+  filterWorkspaceItems,
+  type DocumentScopeFilter,
+  type DocumentTypeFilter
+} from "./search-filters.js";
 import {
   createWorkspaceFolder,
   deleteWorkspaceFolder,
@@ -94,6 +101,32 @@ export function WorkspaceManager({
   const [workspace, setWorkspace] = useState<WorkspaceResponse | null>(null);
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
   const [newFolderName, setNewFolderName] = useState("");
+  const [documentSearch, setDocumentSearch] =
+    useState("");
+  const [
+    documentScope,
+    setDocumentScope
+  ] =
+    useState<DocumentScopeFilter>(
+      "ALL_CASE"
+    );
+  const [
+    documentType,
+    setDocumentType
+  ] =
+    useState<DocumentTypeFilter>(
+      "ALL"
+    );
+  const [knowledgeHits, setKnowledgeHits] =
+    useState<CaseKnowledgeHit[]>([]);
+  const [
+    knowledgeSearchBusy,
+    setKnowledgeSearchBusy
+  ] = useState(false);
+  const [
+    knowledgeSearchError,
+    setKnowledgeSearchError
+  ] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -103,6 +136,7 @@ export function WorkspaceManager({
     item: WorkspaceItem;
     url?: string;
     text?: string;
+    page?: number;
     supported: boolean;
   } | null>(null);
 
@@ -226,6 +260,69 @@ export function WorkspaceManager({
     if (preview?.url) URL.revokeObjectURL(preview.url);
   }, [preview?.url]);
 
+  useEffect(() => {
+    const query =
+      documentSearch.trim();
+    if (
+      !caseId ||
+      query.length < 2
+    ) {
+      setKnowledgeHits([]);
+      setKnowledgeSearchError("");
+      setKnowledgeSearchBusy(false);
+      return;
+    }
+
+    let cancelled = false;
+    setKnowledgeSearchBusy(true);
+    setKnowledgeSearchError("");
+    const timer =
+      window.setTimeout(
+        () => {
+          void searchCaseKnowledge(
+            caseId,
+            query,
+            24
+          )
+            .then((result) => {
+              if (!cancelled) {
+                setKnowledgeHits(
+                  result.hits
+                );
+              }
+            })
+            .catch((failure) => {
+              if (!cancelled) {
+                setKnowledgeHits([]);
+                setKnowledgeSearchError(
+                  failure instanceof Error
+                    ? failure.message
+                    : String(
+                        failure
+                      )
+                );
+              }
+            })
+            .finally(() => {
+              if (!cancelled) {
+                setKnowledgeSearchBusy(
+                  false
+                );
+              }
+            });
+        },
+        250
+      );
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [
+    caseId,
+    documentSearch
+  ]);
+
   const folders = useMemo(
     () => [...(workspace?.folders ?? [])].sort((a, b) =>
       folderPath(a, workspace?.folders ?? []).localeCompare(
@@ -236,12 +333,84 @@ export function WorkspaceManager({
     [workspace]
   );
 
-  const visibleItems = useMemo(() => {
-    if (!workspace) return [];
-    return workspace.items
-      .filter((item) => (workspace.itemLocations[item.itemId] ?? null) === selectedFolder)
-      .sort((a, b) => a.filename.localeCompare(b.filename, "pl"));
-  }, [workspace, selectedFolder]);
+  const visibleItems =
+    useMemo(() => {
+      if (!workspace) {
+        return [];
+      }
+      return filterWorkspaceItems(
+        workspace,
+        {
+          query:
+            documentSearch,
+          selectedFolder,
+          scope:
+            documentScope,
+          type:
+            documentType,
+          caseFiles,
+          knowledgeHits
+        }
+      ).map(
+        (entry) =>
+          entry.item
+      );
+    }, [
+      workspace,
+      selectedFolder,
+      documentSearch,
+      documentScope,
+      documentType,
+      caseFiles,
+      knowledgeHits
+    ]);
+
+  function knowledgeHitFor(
+    item: WorkspaceItem
+  ): CaseKnowledgeHit | undefined {
+    const documentId =
+      caseFiles.find(
+        (file) =>
+          file.uploadId ===
+          item.itemId
+      )?.processing
+        ?.documentId;
+    if (!documentId) {
+      return undefined;
+    }
+    return knowledgeHits.find(
+      (hit) =>
+        hit.documentId ===
+        documentId
+    );
+  }
+
+  function itemFolderLabel(
+    item: WorkspaceItem
+  ): string {
+    if (!workspace) {
+      return "Główny katalog";
+    }
+    const folderId =
+      workspace.itemLocations[
+        item.itemId
+      ] ?? null;
+    if (!folderId) {
+      return "Główny katalog";
+    }
+    const folder =
+      folders.find(
+        (entry) =>
+          entry.folderId ===
+          folderId
+      );
+    return folder
+      ? folderPath(
+          folder,
+          folders
+        )
+      : "Główny katalog";
+  }
 
   async function run(action: () => Promise<void>): Promise<void> {
     setBusy(true);
@@ -257,7 +426,10 @@ export function WorkspaceManager({
     }
   }
 
-  async function showPreview(item: WorkspaceItem): Promise<void> {
+  async function showPreview(
+    item: WorkspaceItem,
+    page?: number
+  ): Promise<void> {
     setBusy(true);
     setError("");
     try {
@@ -270,6 +442,9 @@ export function WorkspaceManager({
         setPreview({
           item,
           text: await result.blob.text(),
+          ...(page
+            ? { page }
+            : {}),
           supported: true
         });
         return;
@@ -281,6 +456,9 @@ export function WorkspaceManager({
         setPreview({
           item,
           url: URL.createObjectURL(result.blob),
+          ...(page
+            ? { page }
+            : {}),
           supported: true
         });
         return;
@@ -326,6 +504,97 @@ export function WorkspaceManager({
           </p>
         </div>
         <div className="workspace-header-actions">
+          <label className="workspace-search">
+            <span>Szukaj dokumentów</span>
+            <input
+              type="search"
+              value={documentSearch}
+              placeholder="Nazwa, treść, typ lub ID dokumentu"
+              aria-label="Szukaj dokumentów w sprawie"
+              onChange={(event) =>
+                setDocumentSearch(
+                  event.target.value
+                )
+              }
+            />
+          </label>
+          <label className="workspace-filter">
+            <span>Zakres</span>
+            <select
+              value={documentScope}
+              disabled={
+                !documentSearch.trim()
+              }
+              aria-label="Zakres wyszukiwania dokumentów"
+              onChange={(event) =>
+                setDocumentScope(
+                  event.target
+                    .value as DocumentScopeFilter
+                )
+              }
+            >
+              <option value="ALL_CASE">
+                Cała sprawa
+              </option>
+              <option value="CURRENT_FOLDER">
+                Bieżący folder
+              </option>
+            </select>
+          </label>
+          <label className="workspace-filter">
+            <span>Typ</span>
+            <select
+              value={documentType}
+              aria-label="Typ dokumentu"
+              onChange={(event) =>
+                setDocumentType(
+                  event.target
+                    .value as DocumentTypeFilter
+                )
+              }
+            >
+              <option value="ALL">
+                Wszystkie
+              </option>
+              <option value="PDF">
+                PDF
+              </option>
+              <option value="OFFICE">
+                Office / ODT
+              </option>
+              <option value="IMAGE">
+                Obrazy
+              </option>
+              <option value="TEXT">
+                Tekst
+              </option>
+              <option value="ARCHIVE">
+                Archiwa
+              </option>
+              <option value="TEMPLATE">
+                Wzory
+              </option>
+            </select>
+          </label>
+          {documentSearch.trim() ||
+          documentType !== "ALL" ||
+          documentScope !== "ALL_CASE" ? (
+            <button
+              type="button"
+              className="chat-secondary-action"
+              onClick={() => {
+                setDocumentSearch("");
+                setDocumentScope(
+                  "ALL_CASE"
+                );
+                setDocumentType(
+                  "ALL"
+                );
+              }}
+            >
+              Wyczyść filtry
+            </button>
+          ) : null}
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">
               + Dodaj pliki
@@ -416,15 +685,32 @@ export function WorkspaceManager({
         <section className="workspace-items" aria-label="Pliki workspace">
           <div className="workspace-location-line">
             <strong>
-              {selectedFolder
-                ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
-                : "Główny katalog"}
+              {documentSearch.trim()
+                ? documentScope ===
+                    "ALL_CASE"
+                  ? "Wyniki w całej sprawie"
+                  : "Wyniki w bieżącym folderze"
+                : selectedFolder
+                  ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
+                  : "Główny katalog"}
             </strong>
-            <span>{visibleItems.length} plików</span>
+            <span>
+              {visibleItems.length}
+              {documentSearch.trim()
+                ? " wyników"
+                : " plików"}
+              {knowledgeSearchBusy
+                ? " · szukam w treści…"
+                : ""}
+            </span>
           </div>
 
           {visibleItems.length === 0 ? (
-            <p className="workspace-empty">Ten folder jest pusty.</p>
+            <p className="workspace-empty">
+              {documentSearch.trim()
+                ? "Nie znaleziono dokumentów pasujących do wyszukiwania."
+                : "Ten folder jest pusty."}
+            </p>
           ) : (
             <ul className="workspace-file-list workspace-file-actions-list">
               {visibleItems.map((item) => (
@@ -434,6 +720,28 @@ export function WorkspaceManager({
                     <span>
                       {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
                     </span>
+                    {documentSearch.trim() ? (
+                      <>
+                        <small className="workspace-search-path">
+                          {itemFolderLabel(
+                            item
+                          )}
+                        </small>
+                        {knowledgeHitFor(
+                          item
+                        ) ? (
+                          <small className="workspace-search-snippet">
+                            s. {knowledgeHitFor(item)!.pageStart}
+                            {knowledgeHitFor(item)!.pageEnd !==
+                            knowledgeHitFor(item)!.pageStart
+                              ? `–${knowledgeHitFor(item)!.pageEnd}`
+                              : ""}
+                            {" · "}
+                            {knowledgeHitFor(item)!.text}
+                          </small>
+                        ) : null}
+                      </>
+                    ) : null}
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
                         {processingFor(item)
@@ -445,8 +753,21 @@ export function WorkspaceManager({
                     ) : null}
                   </div>
                   <div className="workspace-item-actions">
-                    <button type="button" disabled={busy} onClick={() => void showPreview(item)}>
-                      Podgląd
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() =>
+                        void showPreview(
+                          item,
+                          knowledgeHitFor(
+                            item
+                          )?.pageStart
+                        )
+                      }
+                    >
+                      {knowledgeHitFor(item)
+                        ? `Podgląd s. ${knowledgeHitFor(item)!.pageStart}`
+                        : "Podgląd"}
                     </button>
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
@@ -511,7 +832,12 @@ export function WorkspaceManager({
           <div className="workspace-preview-head">
             <div>
               <strong>{preview.item.filename}</strong>
-              <small>{preview.item.mediaType}</small>
+              <small>
+                {preview.item.mediaType}
+                {preview.page
+                  ? ` · trafienie na s. ${preview.page}`
+                  : ""}
+              </small>
             </div>
             <button type="button" onClick={() => setPreview(null)}>Zamknij</button>
           </div>
@@ -521,7 +847,14 @@ export function WorkspaceManager({
             preview.item.mediaType.startsWith("image/") ? (
               <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
             ) : (
-              <iframe src={preview.url} title={`Podgląd ${preview.item.filename}`} />
+              <iframe
+                src={
+                  preview.page
+                    ? `${preview.url}#page=${preview.page}`
+                    : preview.url
+                }
+                title={`Podgląd ${preview.item.filename}`}
+              />
             )
           ) : (
             <p>
@@ -532,6 +865,12 @@ export function WorkspaceManager({
         </section>
       ) : null}
 
+      {knowledgeSearchError &&
+      documentSearch.trim().length >= 2 ? (
+        <p className="workspace-search-note">
+          Wyszukiwanie po nazwie działa. Indeks treści dokumentów jest chwilowo niedostępny: {knowledgeSearchError}
+        </p>
+      ) : null}
       {notice ? <p className="workspace-notice">{notice}</p> : null}
       {error ? <p className="chat-inline-error">{error}</p> : null}
     </article>

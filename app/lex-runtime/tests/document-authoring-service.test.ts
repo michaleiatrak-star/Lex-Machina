@@ -333,6 +333,10 @@ describe("document authoring lifecycle", () => {
       ).toContain(
         "[LMPII:D01:PERSON:0001]"
       );
+      expect(
+        tokenized
+          .deanonymizationKeyBound
+      ).toBe(true);
 
       const restartedState =
         new DocumentGenerationStateStore({
@@ -354,7 +358,11 @@ describe("document authoring lifecycle", () => {
           vaultGeneration: 1,
           caseKeyVersion: 1,
           artifactFormat:
-            format
+            format,
+          deanonymizationKeyBinding:
+            expect.stringMatching(
+              /^[a-f0-9]{64}$/
+            )
         });
 
       const restartedService =
@@ -398,6 +406,19 @@ describe("document authoring lifecycle", () => {
         "LMPII"
       );
       expect(
+        final
+          .deanonymizationBasis
+      ).toBe(
+        "PRIVACY_VAULT_KEY"
+      );
+      expect(
+        final
+          .keyBindingVerified
+      ).toBe(true);
+      expect(
+        final.replacements
+      ).toBeGreaterThan(0);
+      expect(
         await restartedState
           .resolve(
             current.caseId,
@@ -412,4 +433,99 @@ describe("document authoring lifecycle", () => {
         .fill(0);
     });
   }
+
+  it("fails closed when the tokenized generation state is rebound to a different deanonymization key", async () => {
+    const current =
+      fixture();
+    const vault =
+      new PseudonymizationVault();
+    vault.getOrCreate(
+      "PERSON",
+      "Anna Nowak"
+    );
+    await current
+      .vaultStore
+      .saveDocumentVault({
+        caseId:
+          current.caseId,
+        documentId:
+          current.documentId,
+        vault,
+        caseDataKey:
+          current.caseDataKey,
+        keyVersion: 1
+      });
+
+    const tokenized =
+      await current
+        .service
+        .createTokenized({
+          caseId:
+            current.caseId,
+          createdByUserId:
+            current.userId,
+          format: "docx",
+          sourceDocumentIds: [
+            current.documentId
+          ],
+          caseDataKey:
+            current.caseDataKey,
+          keyVersion: 1,
+          validationContext:
+            validationContext(
+              current.documentId
+            ),
+          ast: {
+            schemaVersion:
+              "1",
+            documentType:
+              "letter",
+            locale: "pl-PL",
+            styleProfile:
+              "lex-classic-clean-v1",
+            blocks: [{
+              type:
+                "paragraph",
+              content: [{
+                type:
+                  "pii_ref",
+                alias:
+                  "[LMPII:D01:PERSON:0001]"
+              }]
+            }]
+          }
+        });
+
+    const target =
+      await current.states
+        .resolve(
+          current.caseId,
+          tokenized.artifact
+            .artifactId
+        );
+    expect(target)
+      .not.toBeNull();
+
+    await expect(
+      current.service
+        .deanonymizeConsumed({
+          target: {
+            ...target!,
+            deanonymizationKeyBinding:
+              "f".repeat(64)
+          },
+          createdByUserId:
+            current.userId,
+          caseDataKey:
+            current.caseDataKey,
+          keyVersion: 1
+        })
+    ).rejects.toThrow(
+      "GENERATION_DEANONYMIZATION_KEY_CHANGED"
+    );
+
+    current
+      .caseDataKey
+      .fill(0);
+  });
 });

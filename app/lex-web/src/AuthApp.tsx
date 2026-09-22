@@ -8,13 +8,11 @@ import {
   type ReactNode
 } from "react";
 import App from "./App.js";
-import { AccountSecurityPanel } from "./AccountSecurityPanel.js";
-import { AdminUsersPanel } from "./AdminUsersPanel.js";
-import { AdminSupportPanel } from "./AdminSupportPanel.js";
+import type {
+  SettingsRequest
+} from "./MatterChatApp.js";
 import { RecoveryAuthPanel } from "./RecoveryAuthPanel.js";
-import {
-  useFloatingPanelDrag
-} from "./use-floating-panel.js";
+import { LEX_MACHINA_BRAND_ICON } from "./brand-icon.js";
 import {
   ApiError,
   bootstrapAdmin,
@@ -43,7 +41,8 @@ function AuthPanel({
   lastUser,
   onAuthenticated,
   onChangeUser,
-  onRecover
+  onRecover,
+  temporaryAdminCredentialsActive
 }: {
   phase: "bootstrap" | "login" | "locked";
   lastUser?: AuthMeResponse["user"];
@@ -52,13 +51,15 @@ function AuthPanel({
   ) => void;
   onChangeUser: () => void;
   onRecover: () => void;
+  temporaryAdminCredentialsActive: boolean;
 }) {
   const [loginName, setLoginName] =
     useState(
       phase === "locked"
         ? lastUser?.loginName ?? ""
         : phase === "login" &&
-            !lastUser
+            !lastUser &&
+            temporaryAdminCredentialsActive
           ? "admin"
           : ""
     );
@@ -167,13 +168,74 @@ function AuthPanel({
 
   return (
     <main className="auth-shell">
-      <section className="auth-card">
-        <div className="brand-mark auth-brand">
-          LM
-        </div>
-        <p className="eyebrow">
-          Lex Machina · lokalnie
-        </p>
+      <div className="auth-login-layout">
+        <section
+          className="auth-visual"
+          aria-hidden="true"
+        >
+          <div className="auth-visual-copy">
+            <span className="auth-visual-kicker">
+              LEX MACHINA
+            </span>
+            <h2>
+              Od akt do zweryfikowanej odpowiedzi.
+            </h2>
+            <p>
+              Dokumenty, źródła prawa i kontrolowany proces analizy w jednym lokalnym środowisku.
+            </p>
+          </div>
+
+          <div className="auth-visual-art">
+            <div className="auth-document auth-document-back">
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="auth-document auth-document-front">
+              <div className="auth-document-head">
+                <span>AKTA · ŹRÓDŁA</span>
+                <strong>✓</strong>
+              </div>
+              <i />
+              <i />
+              <i className="short" />
+              <div className="auth-citation-row">
+                <span>ELI</span>
+                <span>SN</span>
+                <span>SAOS</span>
+              </div>
+            </div>
+            <div className="auth-verification-path">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+
+          <div className="auth-visual-foot">
+            <span>lokalny runtime</span>
+            <span>szyfrowane akta</span>
+            <span>weryfikacja źródeł</span>
+          </div>
+        </section>
+
+        <section className="auth-card">
+          <div className="auth-brand-lockup">
+            <img
+              className="auth-brand-icon"
+              src={LEX_MACHINA_BRAND_ICON}
+              alt=""
+              aria-hidden="true"
+            />
+            <div>
+              <strong>Lex Machina</strong>
+              <span>Lokalny warsztat prawny</span>
+            </div>
+          </div>
+          <p className="eyebrow">
+            Bezpieczny dostęp
+          </p>
         <h1>
           {phase === "bootstrap"
             ? "Utwórz konto właściciela"
@@ -188,9 +250,16 @@ function AuthPanel({
         </p>
 
         {phase === "login" &&
-          !lastUser && (
-          <div className="alert alert-error auth-alert">
-            Pierwsze logowanie: login <strong>admin</strong>, hasło <strong>admin</strong>. To hasło jest wyłącznie tymczasowe. Po zalogowaniu należy je natychmiast zmienić na hasło mające co najmniej 10 znaków.
+          !lastUser &&
+          temporaryAdminCredentialsActive && (
+          <div
+            className="auth-onboarding-note"
+            role="status"
+          >
+            <strong>Pierwsze logowanie</strong>
+            <span>
+              Login <b>admin</b>, hasło <b>admin</b>. Dane są tymczasowe i znikną z tego ekranu po ustawieniu własnego hasła.
+            </span>
           </div>
         )}
 
@@ -316,7 +385,8 @@ function AuthPanel({
         <p className="auth-footnote">
           Hasło nie jest zapisywane. Zamknięcie procesu aplikacji unieważnia wszystkie sesje.
         </p>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
@@ -336,17 +406,16 @@ export default function AuthenticatedApp() {
     >();
   const [now, setNow] =
     useState(() => Date.now());
-  const [showSecurity, setShowSecurity] =
-    useState(false);
-  const [showUsers, setShowUsers] =
-    useState(false);
   const [
-    authToolbarMinimized,
-    setAuthToolbarMinimized
-  ] = useState(true);
-  const authToolbarDrag =
-    useFloatingPanelDrag();
-
+    settingsRequest,
+    setSettingsRequest
+  ] = useState<SettingsRequest | null>(
+    null
+  );
+  const [
+    temporaryAdminCredentialsActive,
+    setTemporaryAdminCredentialsActive
+  ] = useState(false);
   useEffect(() => {
     let cancelled = false;
 
@@ -362,6 +431,11 @@ export default function AuthenticatedApp() {
             return;
           }
 
+          setTemporaryAdminCredentialsActive(
+            status.temporaryAdminCredentialsActive ===
+              true
+          );
+
           if (isDesktopShell()) {
             try {
               const current =
@@ -374,11 +448,6 @@ export default function AuthenticatedApp() {
                 current.user
               );
               setNow(Date.now());
-              setShowSecurity(
-                current.user
-                  .passwordSetupPending ===
-                  true
-              );
               setPhase(
                 "authenticated"
               );
@@ -537,7 +606,6 @@ export default function AuthenticatedApp() {
             value.user
           );
           setNow(Date.now());
-          setShowSecurity(false);
           setPhase(
             "authenticated"
           );
@@ -578,15 +646,26 @@ export default function AuthenticatedApp() {
           clearAuthSession();
           setPhase("recover");
         }}
+        temporaryAdminCredentialsActive={
+          temporaryAdminCredentialsActive
+        }
         onAuthenticated={(value) => {
           setAuth(value);
           setLastUser(value.user);
           setNow(Date.now());
-          setShowSecurity(
+          const passwordSetupPending =
             value.user
               .passwordSetupPending ===
-              true
-          );
+              true;
+          if (
+            value.user.loginName ===
+              "admin" &&
+            !passwordSetupPending
+          ) {
+            setTemporaryAdminCredentialsActive(
+              false
+            );
+          }
           setPhase(
             "authenticated"
           );
@@ -612,148 +691,20 @@ export default function AuthenticatedApp() {
           role="alert"
         >
           <span>
-            Używasz początkowego konta admin/admin. Możesz pracować, ale zmień hasło na własne, mające co najmniej 10 znaków.
+            Konto korzysta jeszcze z hasła początkowego. Możesz pracować, ale ustaw własne hasło mające co najmniej 10 znaków.
           </span>
           <button
             type="button"
             onClick={() =>
-              setShowSecurity(true)
+              setSettingsRequest({
+                section: "security",
+                nonce: Date.now()
+              })
             }
           >
             Zmień hasło
           </button>
         </div>
-      )}
-
-      <div
-        className={
-          authToolbarMinimized
-            ? "auth-toolbar auth-toolbar-minimized"
-            : "auth-toolbar"
-        }
-        data-floating-panel="true"
-        style={
-          authToolbarDrag.style
-        }
-      >
-        <span
-          className="floating-drag-handle"
-          title="Przeciągnij panel"
-          aria-label="Przeciągnij panel użytkownika"
-          {...authToolbarDrag.handleProps}
-        >
-          ⋮⋮
-        </span>
-        {authToolbarMinimized ? (
-          <button
-            type="button"
-            className="floating-icon-button"
-            aria-label="Rozwiń panel użytkownika"
-            title={
-              `${auth.user.displayName} · rozwiń panel użytkownika`
-            }
-            onClick={() =>
-              setAuthToolbarMinimized(
-                false
-              )
-            }
-          >
-            👤
-          </button>
-        ) : (
-          <>
-            <div>
-              <strong>
-                {auth.user.displayName}
-              </strong>
-              <span>
-                @{auth.user.loginName}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() =>
-                setShowSecurity(
-                  (value) => !value
-                )
-              }
-            >
-              {showSecurity
-                ? "Ukryj bezpieczeństwo"
-                : "Hasło i recovery"}
-            </button>
-            {auth.user.appRole ===
-              "ADMIN" && (
-              <button
-                type="button"
-                onClick={() =>
-                  setShowUsers(
-                    (value) => !value
-                  )
-                }
-              >
-                {showUsers
-                  ? "Ukryj użytkowników"
-                  : "Użytkownicy"}
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => {
-                void lock();
-              }}
-            >
-              Zablokuj
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                void logout();
-              }}
-            >
-              Wyloguj
-            </button>
-            <button
-              type="button"
-              className="floating-minimize-button"
-              aria-label="Zminimalizuj panel użytkownika"
-              title="Zminimalizuj do ikony"
-              onClick={() =>
-                setAuthToolbarMinimized(
-                  true
-                )
-              }
-            >
-              −
-            </button>
-          </>
-        )}
-      </div>
-
-      {showUsers &&
-        auth.user.appRole ===
-          "ADMIN" && (
-          <>
-            <AdminUsersPanel
-              currentUserId={
-                auth.user.userId
-              }
-            />
-            <AdminSupportPanel />
-          </>
-        )}
-
-      {showSecurity && (
-        <AccountSecurityPanel
-          user={auth.user}
-          onAuthUpdated={(value) => {
-            setAuth(value);
-            setLastUser(
-              value.user
-            );
-            setNow(Date.now());
-          }}
-        />
       )}
 
       {idleRemaining <= 120_000 && (
@@ -770,17 +721,42 @@ export default function AuthenticatedApp() {
           auth.session.sessionId
         }
         user={auth.user}
+        settingsRequest={
+          settingsRequest
+        }
+        onLock={() => {
+          void lock();
+        }}
+        onLogout={() => {
+          void logout();
+        }}
+        onAuthUpdated={(value) => {
+          setAuth(value);
+          setLastUser(
+            value.user
+          );
+          setNow(Date.now());
+          if (
+            value.user.loginName ===
+              "admin" &&
+            value.user
+              .passwordSetupPending !==
+              true
+          ) {
+            setTemporaryAdminCredentialsActive(
+              false
+            );
+          }
+        }}
       />
     </AuthenticatedShell>
   );
 }
 
 /**
- * The toolbar, the maintenance panel and the idle warning are all
- * position: fixed against the top-right corner, so they stacked on top of one
- * another and hid each other's content. Measure the banner and the toolbar and
- * publish their geometry, so every fixed overlay can line up below whatever is
- * actually rendered instead of guessing a constant.
+ * Publish the height of the optional first-run banner. Sticky application
+ * chrome (including the chat model dock) can then sit directly below it
+ * without relying on a hard-coded offset.
  */
 function AuthenticatedShell(
   props: {
@@ -808,30 +784,16 @@ function AuthenticatedShell(
         root.querySelector<HTMLElement>(
           "[data-lex-banner='true']"
         );
-      const toolbar =
-        root.querySelector<HTMLElement>(
-          ".auth-toolbar"
-        );
       const bannerHeight =
         banner
           ? banner
               .getBoundingClientRect()
               .height
           : 0;
-      const toolbarBottom =
-        toolbar
-          ? toolbar
-              .getBoundingClientRect()
-              .bottom
-          : bannerHeight + 14;
 
       style.setProperty(
         "--lex-top-inset",
         `${Math.round(bannerHeight)}px`
-      );
-      style.setProperty(
-        "--lex-overlay-top",
-        `${Math.round(toolbarBottom) + 12}px`
       );
     };
 
@@ -858,9 +820,6 @@ function AuthenticatedShell(
       );
       style.removeProperty(
         "--lex-top-inset"
-      );
-      style.removeProperty(
-        "--lex-overlay-top"
       );
     };
   }, [
