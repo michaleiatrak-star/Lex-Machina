@@ -608,6 +608,12 @@ function executionMessage(
         verificationWarning +
         execution.answer,
       evidence: execution.evidence,
+      ...(execution.auxiliarySources?.length
+        ? {
+            auxiliarySources:
+              execution.auxiliarySources
+          }
+        : {}),
       documentCitations: execution.documentCitations,
       meta:
         `routing: ${labelForSkill(execution.primarySkill || route)}` +
@@ -631,6 +637,12 @@ function executionMessage(
     content:
       "Nie udało się zaprezentować odpowiedzi z powodu blokady wykonania lub wymaganego workflow. Sama niepełna weryfikacja źródeł nie blokuje już odpowiedzi.",
     evidence: execution.evidence,
+    ...(execution.auxiliarySources?.length
+      ? {
+          auxiliarySources:
+            execution.auxiliarySources
+        }
+      : {}),
     meta:
       `routing: ${labelForSkill(execution.primarySkill || route)}` +
       ` · finalization ${execution.finalization}` +
@@ -3495,7 +3507,15 @@ export default function MatterChatApp({
                       <ul>
                         {message.evidence.map((item: EvidenceItem, index: number) => (
                           <li key={`${item.claim}-${index}`}>
-                            <span>{item.status} · {item.kind}</span>
+                            <span className="chat-evidence-meta">
+                              <b>{item.status}</b>
+                              <span>· {item.kind}</span>
+                              {item.sourceTier ? (
+                                <span className={`chat-source-tier chat-source-tier-${item.sourceTier.toLocaleLowerCase("en")}`}>
+                                  {item.sourceTier}
+                                </span>
+                              ) : null}
+                            </span>
                             <strong>{item.claim}</strong>
                             {item.sourceUrl ? (
                               <a
@@ -3511,6 +3531,82 @@ export default function MatterChatApp({
                                 Otwórz źródło w przeglądarce ↗
                               </a>
                             ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : null}
+                  {message.auxiliarySources?.length ? (
+                    <details className="chat-auxiliary-sources">
+                      <summary>
+                        Źródła pomocnicze R2B/R3 ({message.auxiliarySources.length})
+                      </summary>
+                      <p className="chat-auxiliary-intro">
+                        Materiały pomocnicze nie tworzą znacznika VERIFIED ani samodzielnej podstawy prawnej.
+                      </p>
+                      <ul>
+                        {message.auxiliarySources.map((item, index) => (
+                          <li
+                            key={`${item.sourceUrl}-${item.claim ?? ""}-${index}`}
+                            className={item.conflict ? "conflict" : ""}
+                          >
+                            <div className="chat-auxiliary-source-head">
+                              <span className={`chat-source-tier chat-source-tier-${item.sourceTier.toLocaleLowerCase("en")}`}>
+                                {item.sourceTier}
+                              </span>
+                              <strong>
+                                {item.claim || "Materiał pomocniczy"}
+                              </strong>
+                            </div>
+                            <small>
+                              Cross-check: {
+                                item.crossCheckStatus === "CONFIRMED_R1_R2A"
+                                  ? `potwierdzony w ${item.crossCheckTier ?? "R1/2A"}`
+                                  : item.crossCheckStatus === "CONFLICT"
+                                    ? "konflikt ze źródłem wyższego rzędu"
+                                    : item.crossCheckStatus === "UNAVAILABLE"
+                                      ? "niedostępny"
+                                      : "wymagany / oczekuje"
+                              }
+                            </small>
+                            {item.staleOrUndatedWarning ? (
+                              <small className="chat-source-warning">
+                                ⚠️ Brak aktualnej daty albo materiał starszy niż 24 miesiące.
+                              </small>
+                            ) : null}
+                            {item.conflict ? (
+                              <small className="chat-source-warning">
+                                ⚠️ Nie buduj wniosku na tym materiale; pierwszeństwo ma R1/2A.
+                              </small>
+                            ) : null}
+                            <div className="chat-auxiliary-source-links">
+                              <a
+                                className="source-inline-link"
+                                href={item.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => {
+                                  event.preventDefault();
+                                  void openExternalUrl(item.sourceUrl);
+                                }}
+                              >
+                                Otwórz źródło pomocnicze ↗
+                              </a>
+                              {item.crossCheckUrl ? (
+                                <a
+                                  className="source-inline-link"
+                                  href={item.crossCheckUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(event) => {
+                                    event.preventDefault();
+                                    void openExternalUrl(item.crossCheckUrl!);
+                                  }}
+                                >
+                                  Otwórz cross-check {item.crossCheckTier ?? "R1/2A"} ↗
+                                </a>
+                              ) : null}
+                            </div>
                           </li>
                         ))}
                       </ul>
