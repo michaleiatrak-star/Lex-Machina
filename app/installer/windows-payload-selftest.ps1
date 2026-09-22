@@ -200,6 +200,9 @@ if ($null -eq $lock.localAi -or $lock.localAi.requiredForApplicationHealth -ne $
 if (@($lock.optionalNetworkActionsAfterInstall) -notcontains "LOCAL_AI_PROVISIONING") {
   throw "SELFTEST_LOCK_LOCAL_AI_PROVISIONING_POLICY_MISSING"
 }
+if (@($lock.optionalNetworkActionsAfterInstall) -notcontains "ACCOUNT_SESSION_CLIENT_PROVISIONING") {
+  throw "SELFTEST_LOCK_ACCOUNT_CLIENT_PROVISIONING_POLICY_MISSING"
+}
 foreach ($entry in $lock.files) {
   $path = Join-Path $root ($entry.path -replace '/','\')
   if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
