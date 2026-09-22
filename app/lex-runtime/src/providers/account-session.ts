@@ -1143,18 +1143,40 @@ export function accountLoginArgs(
   provider: ProviderId
 ): string[] {
   if (provider === "openai") {
-    return ["login"];
+    return [
+      "-c",
+      'forced_login_method="chatgpt"',
+      "login"
+    ];
   }
   if (provider === "anthropic") {
-    // Current Claude Code treats the default auth login as the subscription
-    // lane. --console is the explicit API-billing opt-in. Avoid relying on
-    // historical --claudeai flag availability across client versions.
+    return [
+      "auth",
+      "login",
+      "--claudeai"
+    ];
+  }
+  return ["login"];
+}
+
+export function accountLoginFallbackArgs(
+  provider: ProviderId
+): string[] | null {
+  if (provider === "openai") {
+    return [
+      "-c",
+      'forced_login_method="chatgpt"',
+      "login",
+      "--device-auth"
+    ];
+  }
+  if (provider === "anthropic") {
     return [
       "auth",
       "login"
     ];
   }
-  return ["login"];
+  return null;
 }
 
 export function visibleWindowsLoginLauncher(
@@ -1296,7 +1318,7 @@ function normalizeCliFailure(
   );
 }
 
-function openAiChatGptAuthenticated(
+export function openAiChatGptAuthenticated(
   result: RunResult
 ): boolean {
   if (result.code !== 0) {
@@ -1305,10 +1327,19 @@ function openAiChatGptAuthenticated(
   const status =
     (result.stdout + "\n" + result.stderr)
       .toLowerCase();
-  return status.includes(
-    "logged in using chatgpt"
-  ) || status.includes(
-    "using chatgpt"
+  if (
+    status.includes("api key") ||
+    status.includes("apikey")
+  ) {
+    return false;
+  }
+  return (
+    status.includes("chatgpt") &&
+    (
+      status.includes("logged in") ||
+      status.includes("signed in") ||
+      status.includes("authenticated")
+    )
   );
 }
 
@@ -2414,22 +2445,39 @@ export class AccountSessionManager {
       accountLoginArgs(
         provider
       );
-    const result =
+    const runLogin = (
+      loginArgs: string[]
+    ) =>
       accountLoginLaunchMode(
         provider
       ) ===
         "VISIBLE_TERMINAL"
-        ? await runVisibleWindowsLogin(
+        ? runVisibleWindowsLogin(
             provider,
-            args,
+            loginArgs,
             AUTH_TIMEOUT_MS
           )
-        : await runCli(
+        : runCli(
             provider,
-            args,
+            loginArgs,
             undefined,
             AUTH_TIMEOUT_MS
           );
+
+    let result =
+      await runLogin(args);
+    if (result.code !== 0) {
+      const fallbackArgs =
+        accountLoginFallbackArgs(
+          provider
+        );
+      if (fallbackArgs) {
+        result =
+          await runLogin(
+            fallbackArgs
+          );
+      }
+    }
     if (result.code !== 0) {
       throw normalizeCliFailure(provider, result);
     }
