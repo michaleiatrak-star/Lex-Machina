@@ -14,8 +14,7 @@ import type {
 import {
   assessLegalSourceCandidate,
   classifyKnownLegalSourceUrl,
-  federatedSourcePolicy,
-  type LegalSourceCrossCheckStatus
+  federatedSourcePolicy
 } from "./legal-source-policy.js";
 
 // 0.1.4 is the published build used by the release runtime.
@@ -364,20 +363,7 @@ const ASSESS_SOURCE_SCHEMA:
             description:
               "Optional last-update date in YYYY-MM-DD when known from the source."
           },
-          crossCheckStatus: {
-            type: "string",
-            enum: [
-              "PENDING",
-              "CONFIRMED_R1_R2A",
-              "CONFLICT",
-              "UNAVAILABLE"
-            ]
-          },
-          crossCheckUrl: {
-            type: "string",
-            description:
-              "Optional R1/R2A URL used to cross-check the proposition. Required for CONFIRMED_R1_R2A."
-          }
+
         }
       }
     }
@@ -1065,63 +1051,11 @@ export class LegalFederationToolRuntime {
       const tier =
         knownTier ??
         "R3";
-      const requestedCrossCheck =
-        typeof call.input
-          .crossCheckStatus ===
-          "string"
-          ? call.input
-              .crossCheckStatus as
-              LegalSourceCrossCheckStatus
-          : tier === "R2B" ||
-              tier === "R3"
-            ? "PENDING"
-            : "NOT_REQUIRED";
-
-      let crossCheckTier:
-        | "R1"
-        | "R2A"
-        | undefined;
-      let crossCheckUrl:
-        string | undefined;
-      if (
-        typeof call.input
-          .crossCheckUrl ===
-          "string" &&
-        call.input
-          .crossCheckUrl
-          .trim()
-      ) {
-        crossCheckUrl =
-          call.input
-            .crossCheckUrl
-            .trim();
-        const classified =
-          classifyKnownLegalSourceUrl(
-            crossCheckUrl
-          );
-        if (
-          classified ===
-            "R1" ||
-          classified ===
-            "R2A"
-        ) {
-          crossCheckTier =
-            classified;
-        }
-      }
-
-      if (
-        requestedCrossCheck ===
-          "CONFIRMED_R1_R2A" &&
-        (
-          !crossCheckUrl ||
-          !crossCheckTier
-        )
-      ) {
-        throw new Error(
-          "LEGAL_SOURCE_CROSSCHECK_REQUIRES_KNOWN_R1_R2A_URL"
-        );
-      }
+      const crossCheckStatus =
+        tier === "R2B" ||
+        tier === "R3"
+          ? "PENDING" as const
+          : "NOT_REQUIRED" as const;
 
       const candidate = {
         ...(typeof call.input
@@ -1170,18 +1104,7 @@ export class LegalFederationToolRuntime {
               }
             : {})
         },
-        crossCheckStatus:
-          requestedCrossCheck,
-        ...(crossCheckUrl
-          ? {
-              crossCheckUrl
-            }
-          : {}),
-        ...(crossCheckTier
-          ? {
-              crossCheckTier
-            }
-          : {})
+        crossCheckStatus
       };
 
       return JSON.stringify({
@@ -1197,8 +1120,8 @@ export class LegalFederationToolRuntime {
             : "CONSERVATIVE_R3",
         instruction:
           knownTier
-            ? "Preserve the tier and assessment. R2B/R3 remains auxiliary only."
-            : "Unknown domain was conservatively classified as R3. It may be reconsidered as R2B only after independent evidence of professional editorial board, recognized publisher/brand and systematic updating."
+            ? "Preserve the tier and assessment. R2B/R3 remains auxiliary only. A higher-tier cross-check can be confirmed only by the session runtime from a real VerificationLedger record; model input cannot attest it."
+            : "Unknown domain was conservatively classified as R3. It may be reconsidered as R2B only after independent evidence of professional editorial board, recognized publisher/brand and systematic updating. A higher-tier cross-check can be confirmed only by the session runtime."
       });
     }
 
