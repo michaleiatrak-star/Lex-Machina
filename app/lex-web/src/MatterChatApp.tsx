@@ -90,6 +90,12 @@ import {
   conversationForProvider
 } from "./conversation-context.js";
 import {
+  filterMatterCases,
+  type MatterRoleFilter,
+  type MatterSort,
+  type MatterStatusFilter
+} from "./search-filters.js";
+import {
   accountModelIdForPrimarySource,
   canExecutePrimaryModel,
   isAccountPrimarySource,
@@ -662,6 +668,12 @@ export default function MatterChatApp({
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [caseId, setCaseId] = useState("");
   const [caseSearch, setCaseSearch] = useState("");
+  const [caseStatusFilter, setCaseStatusFilter] =
+    useState<MatterStatusFilter>("ALL");
+  const [caseRoleFilter, setCaseRoleFilter] =
+    useState<MatterRoleFilter>("ALL");
+  const [caseSort, setCaseSort] =
+    useState<MatterSort>("UPDATED_DESC");
   const [newCaseName, setNewCaseName] = useState("");
   const [caseNameDraft, setCaseNameDraft] = useState("");
   const [caseBusy, setCaseBusy] = useState(false);
@@ -818,77 +830,37 @@ export default function MatterChatApp({
     () => cases.filter((item) => item.caseKind === "MATTER"),
     [cases]
   );
-  const filteredMatterCases = useMemo(() => {
-    const query =
-      caseSearch
-        .trim()
-        .toLocaleLowerCase("pl");
-    if (!query) {
-      return matterCases;
-    }
-    const matches =
-      matterCases.filter(
-        (item) =>
-          (
-            item.displayName ||
-            "Sprawa bez nazwy"
-          )
-            .toLocaleLowerCase("pl")
-            .includes(query) ||
-          item.caseId
-            .toLocaleLowerCase("pl")
-            .includes(query)
-      );
-    const selected =
-      matterCases.find(
-        (item) =>
-          item.caseId ===
-          caseId
-      );
-    if (
-      selected &&
-      !matches.some(
-        (item) =>
-          item.caseId ===
-          selected.caseId
-      )
-    ) {
-      return [
-        selected,
-        ...matches
-      ];
-    }
-    return matches;
-  }, [
-    matterCases,
-    caseSearch,
-    caseId
-  ]);
+  const matterSearchResult =
+    useMemo(
+      () =>
+        filterMatterCases(
+          cases,
+          {
+            query:
+              caseSearch,
+            status:
+              caseStatusFilter,
+            role:
+              caseRoleFilter,
+            sort:
+              caseSort,
+            currentCaseId:
+              caseId
+          }
+        ),
+      [
+        cases,
+        caseSearch,
+        caseStatusFilter,
+        caseRoleFilter,
+        caseSort,
+        caseId
+      ]
+    );
+  const filteredMatterCases =
+    matterSearchResult.items;
   const caseSearchMatchCount =
-    useMemo(() => {
-      const query =
-        caseSearch
-          .trim()
-          .toLocaleLowerCase("pl");
-      if (!query) {
-        return matterCases.length;
-      }
-      return matterCases.filter(
-        (item) =>
-          (
-            item.displayName ||
-            "Sprawa bez nazwy"
-          )
-            .toLocaleLowerCase("pl")
-            .includes(query) ||
-          item.caseId
-            .toLocaleLowerCase("pl")
-            .includes(query)
-      ).length;
-    }, [
-      matterCases,
-      caseSearch
-    ]);
+    matterSearchResult.matchCount;
   const selectedCase = useMemo(
     () => matterCases.find((item) => item.caseId === caseId),
     [matterCases, caseId]
@@ -3141,6 +3113,81 @@ export default function MatterChatApp({
                   }
                 />
               </label>
+              <label className="chat-case-filter">
+                <span>Status</span>
+                <select
+                  aria-label="Filtr statusu spraw"
+                  value={caseStatusFilter}
+                  onChange={(event) =>
+                    setCaseStatusFilter(
+                      event.target
+                        .value as MatterStatusFilter
+                    )
+                  }
+                >
+                  <option value="ALL">
+                    Wszystkie
+                  </option>
+                  <option value="ACTIVE">
+                    Aktywne
+                  </option>
+                  <option value="ARCHIVED">
+                    Archiwalne
+                  </option>
+                </select>
+              </label>
+              <label className="chat-case-filter">
+                <span>Rola</span>
+                <select
+                  aria-label="Filtr roli w sprawie"
+                  value={caseRoleFilter}
+                  onChange={(event) =>
+                    setCaseRoleFilter(
+                      event.target
+                        .value as MatterRoleFilter
+                    )
+                  }
+                >
+                  <option value="ALL">
+                    Wszystkie
+                  </option>
+                  <option value="OWNER">
+                    Owner
+                  </option>
+                  <option value="EDITOR">
+                    Editor
+                  </option>
+                  <option value="ANALYST">
+                    Analyst
+                  </option>
+                  <option value="VIEWER">
+                    Viewer
+                  </option>
+                </select>
+              </label>
+              <label className="chat-case-filter">
+                <span>Sortuj</span>
+                <select
+                  aria-label="Sortowanie spraw"
+                  value={caseSort}
+                  onChange={(event) =>
+                    setCaseSort(
+                      event.target
+                        .value as MatterSort
+                    )
+                  }
+                >
+                  <option value="UPDATED_DESC">
+                    Ostatnio zmieniane
+                  </option>
+                  <option value="CREATED_DESC">
+                    Najnowsze
+                  </option>
+                  <option value="NAME_ASC">
+                    Nazwa A–Z
+                  </option>
+                </select>
+              </label>
               <label>
                 <span>Sprawa</span>
                 <select
@@ -3175,12 +3222,40 @@ export default function MatterChatApp({
                     )
                   )}
                 </select>
-                {caseSearch.trim() ? (
+                {caseSearch.trim() ||
+                caseStatusFilter !== "ALL" ||
+                caseRoleFilter !== "ALL" ? (
                   <small className="chat-case-search-count">
                     {caseSearchMatchCount} wyników
+                    {matterSearchResult.currentPreserved
+                      ? " · bieżąca sprawa pokazana dodatkowo"
+                      : ""}
                   </small>
                 ) : null}
               </label>
+              {caseSearch.trim() ||
+              caseStatusFilter !== "ALL" ||
+              caseRoleFilter !== "ALL" ||
+              caseSort !== "UPDATED_DESC" ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action chat-case-filter-reset"
+                  onClick={() => {
+                    setCaseSearch("");
+                    setCaseStatusFilter(
+                      "ALL"
+                    );
+                    setCaseRoleFilter(
+                      "ALL"
+                    );
+                    setCaseSort(
+                      "UPDATED_DESC"
+                    );
+                  }}
+                >
+                  Wyczyść filtry
+                </button>
+              ) : null}
               <button
                 type="button"
                 className="chat-secondary-action"
