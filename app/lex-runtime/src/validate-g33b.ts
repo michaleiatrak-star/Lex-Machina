@@ -86,8 +86,10 @@ const checks = {
     source.localAi?.applicationUsableWithoutLocalAi === true &&
     source.notes?.networkAtInstall ===
       "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL" &&
+    source.localAi?.networkRequiredForCoreInference === false &&
+    source.localAi?.networkRequiredForWebResearch === true &&
     source.notes?.networkAfterBootstrapBeforeProviderUse ===
-      "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES" &&
+      "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, AND UPDATES" &&
     selftest.includes("runtimeNetworkRequiredAfterBootstrap") &&
     selftest.includes("LOCAL_AI_PROVISIONING") &&
     paddle.includes("LEX_PADDLE_MODEL_DIR is required") &&

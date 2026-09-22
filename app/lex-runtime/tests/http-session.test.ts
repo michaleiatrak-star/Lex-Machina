@@ -408,7 +408,9 @@ describe("session execution HTTP API", () => {
         error:
           "LOCAL_MODEL_EXECUTION_FAILED",
         reason:
-          "LOCAL_MODEL_SERVER_EXIT"
+          "LOCAL_MODEL_SERVER_EXIT",
+        description:
+          "LOCAL_MODEL_SERVER_EXIT:1:insufficient memory"
       });
   });
 
@@ -456,7 +458,9 @@ describe("session execution HTTP API", () => {
         error:
           "LOCAL_MODEL_EXECUTION_FAILED",
         reason:
-          "LOCAL_MODEL_INFERENCE_FAILED"
+          "LOCAL_MODEL_INFERENCE_FAILED",
+        description:
+          "fetch failed"
       });
   });
 

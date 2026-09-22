@@ -27,13 +27,13 @@ const LOCAL_DEFAULT_OUTPUT_TOKENS =
 const LOCAL_CONTEXT_SAFETY_TOKENS =
   1_024;
 const LOCAL_HTTP_RESPONSE_TIMEOUT_MS =
-  60_000;
+  300_000;
 const LOCAL_FIRST_CONTENT_TIMEOUT_MS =
-  90_000;
+  300_000;
 const LOCAL_STREAM_IDLE_TIMEOUT_MS =
-  45_000;
+  120_000;
 const LOCAL_JSON_BODY_TIMEOUT_MS =
-  180_000;
+  300_000;
 
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
@@ -145,6 +145,7 @@ export function classifyLocalInferenceFailure(
   | "LOCAL_MODEL_SERVER_ERROR"
   | "LOCAL_MODEL_CONTEXT_OVERFLOW"
   | "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+  | "LOCAL_MODEL_RESPONSE_TIMEOUT"
   | "LOCAL_MODEL_INFERENCE_FAILED" {
   const lower =
     detail.toLowerCase();
@@ -172,7 +173,15 @@ export function classifyLocalInferenceFailure(
   }
 
   if (
-    /econnrefused|und_err_connect|und_err_socket|terminated|connection refused|fetch failed|socket hang up|socket closed|network error|failed to connect|sse_read_failed/i.test(
+    /local_model_(?:http_response|sse_first_content|sse_idle|json_body)_timeout|headers timeout|body timeout/i.test(
+      lower
+    )
+  ) {
+    return "LOCAL_MODEL_RESPONSE_TIMEOUT";
+  }
+
+  if (
+    /econnrefused|und_err_connect|und_err_socket|terminated|connection refused|fetch failed|socket hang up|socket closed|network error|failed to connect/i.test(
       lower
     )
   ) {
@@ -1031,6 +1040,45 @@ async function readLocalJson(
   return content;
 }
 
+async function directLocalJsonCompletion(
+  endpoint: string,
+  modelId: string,
+  systemPrompt: string,
+  messages: ProviderStreamParams["messages"],
+  maxOutputTokens: number,
+  abortSignal?: AbortSignal
+): Promise<ProviderStreamResult> {
+  const response =
+    await fetchLocalChatResponse(
+      endpoint,
+      buildLocalChatRequest(
+        modelId,
+        systemPrompt,
+        messages,
+        Math.max(
+          16,
+          Math.min(
+            1_024,
+            maxOutputTokens
+          )
+        ),
+        false
+      ),
+      abortSignal
+    );
+  if (!response.ok) {
+    await localHttpFailure(
+      response
+    );
+  }
+  return {
+    fullText:
+      await readLocalJson(
+        response
+      )
+  };
+}
+
 async function exactLocalInputTokens(
   endpoint: string,
   body: ReturnType<
@@ -1049,7 +1097,7 @@ async function exactLocalInputTokens(
     const response =
       await withTimeout(
         fetch(
-          `${endpoint.replace(/\/$/, "")}/v1/chat/completions/input_tokens`,
+          `${endpoint.replace(/\/$/, "")}/chat/completions/input_tokens`,
           {
             method:
               "POST",
@@ -1117,18 +1165,12 @@ async function exactLocalInputTokens(
     ) {
       throw error;
     }
-    if (
-      error instanceof Error &&
-      (
-        error.message.startsWith(
-          "LOCAL_MODEL_TOKEN_COUNT_FAILED:"
-        ) ||
-        error.message ===
-          "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT"
-      )
-    ) {
-      throw error;
-    }
+
+    // Exact token counting is a guardrail optimization, not a prerequisite
+    // for inference. Some llama.cpp builds or chat templates can reject or
+    // time out on the auxiliary input_tokens request even though the actual
+    // chat completion endpoint is healthy. Fall back to the conservative
+    // localChatBudget estimate and attempt the real generation.
     return null;
   } finally {
     cleanup();
@@ -1224,6 +1266,21 @@ async function streamLocalChatCompletion(
       streamError.name ===
         "AbortError"
     ) {
+      throw streamError;
+    }
+
+    const streamDetail =
+      streamError instanceof Error
+        ? streamError.message
+        : String(streamError);
+    if (
+      /LOCAL_MODEL_SSE_(?:FIRST_CONTENT|IDLE)_TIMEOUT/.test(
+        streamDetail
+      )
+    ) {
+      // A timeout on CPU may mean the model is still evaluating a large
+      // prompt. Starting a second full generation would compete for the same
+      // RAM/CPU and make recovery less likely, so surface the timeout directly.
       throw streamError;
     }
 
@@ -1643,6 +1700,26 @@ async function streamModel(
   return { fullText };
 }
 
+export function shouldRetryLocalAtMinimumContext(
+  error: unknown,
+  currentContextTokens: number,
+  minimumContextTokens: number
+): boolean {
+  if (
+    currentContextTokens <=
+      minimumContextTokens
+  ) {
+    return false;
+  }
+  const detail =
+    error instanceof Error
+      ? error.message
+      : String(error);
+  return /LOCAL_MODEL_(?:RESPONSE|HTTP_RESPONSE|SSE_FIRST_CONTENT|SSE_IDLE|JSON_BODY)_TIMEOUT/.test(
+    detail
+  );
+}
+
 export class AiSdkProviderAdapter implements ProviderAdapter {
   readonly label: string;
   readonly capabilities = providerCapabilities();
@@ -1708,18 +1785,107 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
           ?.tokenizerCalibration
           ?.conservativeCharsPerToken ??
         2;
-      return streamLocalModel(
-        localStatus.endpoint,
-        configuredModel.id,
-        contextTokens,
-        conservativeCharsPerToken,
-        {
-          ...params,
-          model:
-            configuredModel.id,
-          reasoning: "none"
+      const localParams = {
+        ...params,
+        model:
+          configuredModel.id,
+        reasoning: "none" as const
+      };
+
+      if (
+        params.localTransport ===
+          "json"
+      ) {
+        try {
+          const direct =
+            await directLocalJsonCompletion(
+              localStatus.endpoint,
+              configuredModel.id,
+              params.systemPrompt,
+              params.messages,
+              params.localMaxOutputTokens ??
+                128,
+              params.abortSignal
+            );
+          params.callbacks
+            ?.onContentDelta?.(
+              direct.fullText
+            );
+          return direct;
+        } catch (error) {
+          const detail =
+            error instanceof Error
+              ? error.message
+              : String(error);
+          throw new Error(
+            `${classifyLocalInferenceFailure(
+              detail
+            )}:${detail
+              .replace(/[\r\n]+/g, " ")
+              .slice(-800)}`
+          );
         }
-      );
+      }
+
+      try {
+        return await streamLocalModel(
+          localStatus.endpoint,
+          configuredModel.id,
+          contextTokens,
+          conservativeCharsPerToken,
+          localParams
+        );
+      } catch (error) {
+        const minimumContextTokens =
+          configuredModel
+            .minimumContextWindow;
+        if (
+          !shouldRetryLocalAtMinimumContext(
+            error,
+            contextTokens,
+            minimumContextTokens
+          )
+        ) {
+          throw error;
+        }
+
+        await this.localModels
+          .reconfigureContext(
+            configuredModel.id,
+            minimumContextTokens
+          );
+        const recoveredModel =
+          await this.localModels
+            .ensureRunning(
+              configuredModel.id
+            );
+        const recoveredStatus =
+          this.localModels
+            .status();
+        const recoveredContextTokens =
+          recoveredStatus
+            .configuredContextTokens ??
+          recoveredModel
+            .contextWindow;
+        const recoveredCharsPerToken =
+          recoveredStatus
+            .qualification
+            ?.tokenizerCalibration
+            ?.conservativeCharsPerToken ??
+          conservativeCharsPerToken;
+
+        return await streamLocalModel(
+          recoveredStatus.endpoint,
+          recoveredModel.id,
+          recoveredContextTokens,
+          recoveredCharsPerToken,
+          {
+            ...localParams,
+            model:
+              recoveredModel.id
+          }
+        );
+      }
     }
 
     const apiKey = await this.credentials.getApiKey(this.id);

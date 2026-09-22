@@ -29,6 +29,14 @@ $cache = if ($CacheRoot) {
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
 New-Item -ItemType Directory -Force -Path $localRoot | Out-Null
 
+# Configure llama.cpp-native agent, MCP web tools and Web UI defaults.
+# This runs outside Lex Runtime and the Lex Tool Broker.
+$nativeWebConfigurator = Join-Path $runtime "bootstrap\configure-llama-native-web.ps1"
+if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+  throw "LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING:$nativeWebConfigurator"
+}
+& $nativeWebConfigurator -RuntimeRoot $runtime -LocalAiRoot $localRoot | Out-Host
+
 if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
   function Get-FileHash {
     param(
@@ -400,10 +408,97 @@ $configTemp = $configPath + ".tmp"
 )
 Move-Item -LiteralPath $configTemp -Destination $configPath -Force
 
+# Direct llama.cpp launcher. This path does not call Lex Runtime or Lex Tool
+# Broker; llama-server reads its own LLAMA_ARG_* settings and exposes the
+# built-in agent tools directly in its Web UI/API.
+$nativeAgentLauncher = Join-Path $localRoot "start-llama-native-agent.ps1"
+$nativeAgentLauncherContent = @'
+param(
+  [ValidateRange(1024, 65535)]
+  [int]$Port = 4318
+)
+
+$ErrorActionPreference = "Stop"
+$configPath = Join-Path $PSScriptRoot "config.json"
+if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) {
+  throw "LLAMA_NATIVE_CONFIG_MISSING:$configPath"
+}
+
+$config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+if (-not $config.engine.executable -or -not (Test-Path -LiteralPath $config.engine.executable -PathType Leaf)) {
+  throw "LLAMA_NATIVE_ENGINE_MISSING"
+}
+if (-not $config.model.path -or -not (Test-Path -LiteralPath $config.model.path -PathType Leaf)) {
+  throw "LLAMA_NATIVE_MODEL_MISSING"
+}
+
+# Native llama.cpp configuration. No Lex broker is involved.
+$env:LLAMA_ARG_AGENT = "true"
+$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
+$env:LLAMA_ARG_MCP_SERVERS_CONFIG = Join-Path $PSScriptRoot "mcp-servers.json"
+$env:LLAMA_ARG_UI_CONFIG_FILE = Join-Path $PSScriptRoot "llama-ui-config.json"
+
+$llamaArgs = @(
+  "--model", [string]$config.model.path,
+  "--alias", [string]$config.model.id,
+  "--host", "127.0.0.1",
+  "--port", $Port.ToString(),
+  "--ctx-size", ([int]$config.context.requestedTokens).ToString(),
+  "--parallel", "1",
+  "--jinja",
+  "--flash-attn", "auto",
+  "--cache-type-k", "q8_0",
+  "--cache-type-v", "q8_0"
+)
+
+if ($config.engine.gpuOffload -eq $true) {
+  $llamaArgs += @("--n-gpu-layers", "999")
+}
+
+if ([string]$config.model.id -eq "local/mistral-nemo-12b-q4km") {
+  $groundedTemplate = Join-Path $PSScriptRoot "mistral-nemo-web-grounded.jinja"
+  if (-not (Test-Path -LiteralPath $groundedTemplate -PathType Leaf)) {
+    throw "LLAMA_NATIVE_MISTRAL_GROUNDED_TEMPLATE_MISSING:$groundedTemplate"
+  }
+  $llamaArgs += @(
+    "--chat-template-file", $groundedTemplate,
+    "--temp", "0.2"
+  )
+}
+
+if ([string]$config.model.id -eq "local/bielik-11b-v3-q4km") {
+  $groundedTemplate = Join-Path $PSScriptRoot "bielik-web-grounded.jinja"
+  if (-not (Test-Path -LiteralPath $groundedTemplate -PathType Leaf)) {
+    throw "LLAMA_NATIVE_BIELIK_GROUNDED_TEMPLATE_MISSING:$groundedTemplate"
+  }
+  $llamaArgs += @(
+    "--chat-template-file", $groundedTemplate,
+    "--temp", "0.2"
+  )
+}
+
+if ($config.context.extendedBeyondNative -eq $true) {
+  $llamaArgs += @(
+    "--rope-scaling", "yarn",
+    "--rope-scale", ([double]$config.context.ropeScale).ToString([Globalization.CultureInfo]::InvariantCulture),
+    "--yarn-orig-ctx", ([int]$config.model.nativeContext).ToString()
+  )
+}
+
+& ([string]$config.engine.executable) @llamaArgs
+exit $LASTEXITCODE
+'@
+[IO.File]::WriteAllText(
+  $nativeAgentLauncher,
+  $nativeAgentLauncherContent + [Environment]::NewLine,
+  [Text.UTF8Encoding]::new($false)
+)
+
 $result = [ordered]@{
   status = "READY"
   root = $localRoot
   configPath = $configPath
+  nativeAgentLauncher = $nativeAgentLauncher
   modelId = $model.id
   contextTokens = $ContextTokens
   contextMode = $contextMode

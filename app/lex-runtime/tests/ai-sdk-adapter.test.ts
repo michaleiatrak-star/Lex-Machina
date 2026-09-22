@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   AiSdkProviderAdapter,
   accountSessionBackendAllowed,
@@ -12,8 +12,10 @@ import {
   parseLocalSseErrorLine,
   parseLocalSseLine,
   parseLocalToolCalls,
-  readLocalSse
+  readLocalSse,
+  shouldRetryLocalAtMinimumContext
 } from "../src/providers/ai-sdk-adapter.js";
+import type { LocalModelRuntime } from "../src/local-model-runtime.js";
 import {
   MissingProviderCredentialError,
   StaticCredentialResolver
@@ -503,6 +505,292 @@ describe("AiSdkProviderAdapter", () => {
     );
   });
 
+  it("continues local generation when the auxiliary input-token endpoint fails", async () => {
+    const fetchMock =
+      vi.fn(
+        async (
+          input: string | URL | Request
+        ) => {
+          const url =
+            typeof input === "string"
+              ? input
+              : input instanceof URL
+                ? input.toString()
+                : input.url;
+
+          if (
+            url.endsWith(
+              "/v1/chat/completions/input_tokens"
+            )
+          ) {
+            return new Response(
+              "token counter unavailable",
+              { status: 500 }
+            );
+          }
+
+          if (
+            url.endsWith(
+              "/v1/chat/completions"
+            )
+          ) {
+            const encoder =
+              new TextEncoder();
+            return new Response(
+              new ReadableStream<
+                Uint8Array
+              >({
+                start(controller) {
+                  controller.enqueue(
+                    encoder.encode(
+                      'data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"OK"}}]}\n\n'
+                    )
+                  );
+                  controller.enqueue(
+                    encoder.encode(
+                      'data: {"choices":[{"finish_reason":"stop","index":0,"delta":{}}]}\n\n'
+                    )
+                  );
+                  controller.close();
+                }
+              }),
+              {
+                status: 200,
+                headers: {
+                  "content-type":
+                    "text/event-stream"
+                }
+              }
+            );
+          }
+
+          throw new Error(
+            `unexpected fetch: ${url}`
+          );
+        }
+      );
+    vi.stubGlobal(
+      "fetch",
+      fetchMock
+    );
+
+    const localModels = {
+      ensureRunning:
+        vi.fn(
+          async () => ({
+            id:
+              "local/mistral-nemo-12b-q4km",
+            contextWindow:
+              64_000
+          })
+        ),
+      status: () => ({
+        endpoint:
+          "http://127.0.0.1:43190/v1",
+        configuredContextTokens:
+          64_000,
+        qualification:
+          null
+      })
+    } as unknown as
+      LocalModelRuntime;
+
+    try {
+      const adapter =
+        new AiSdkProviderAdapter(
+          "openai",
+          new StaticCredentialResolver(
+            {}
+          ),
+          localModels
+        );
+
+      await expect(
+        adapter.stream({
+          model:
+            "local/mistral-nemo-12b-q4km",
+          systemPrompt:
+            "system",
+          messages: [
+            {
+              role:
+                "user",
+              content:
+                "Odpowiedz: OK"
+            }
+          ]
+        })
+      ).resolves.toEqual({
+        fullText:
+          "OK"
+      });
+      expect(
+        fetchMock
+      ).toHaveBeenCalledTimes(
+        2
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("uses one non-streaming llama.cpp request for trivial local chat", async () => {
+    const fetchMock =
+      vi.fn(
+        async (
+          input: string | URL | Request,
+          init?: RequestInit
+        ) => {
+          const url =
+            typeof input === "string"
+              ? input
+              : input instanceof URL
+                ? input.toString()
+                : input.url;
+
+          expect(url).toBe(
+            "http://127.0.0.1:4318/v1/chat/completions"
+          );
+          const body =
+            JSON.parse(
+              String(
+                init?.body ??
+                  "{}"
+              )
+            ) as {
+              stream?: unknown;
+              max_tokens?: unknown;
+            };
+          expect(
+            body.stream
+          ).toBe(false);
+          expect(
+            body.max_tokens
+          ).toBe(128);
+
+          return new Response(
+            JSON.stringify({
+              choices: [
+                {
+                  message: {
+                    content:
+                      "OK"
+                  }
+                }
+              ]
+            }),
+            {
+              status: 200,
+              headers: {
+                "content-type":
+                  "application/json"
+              }
+            }
+          );
+        }
+      );
+    vi.stubGlobal(
+      "fetch",
+      fetchMock
+    );
+
+    const localModels = {
+      ensureRunning:
+        vi.fn(
+          async () => ({
+            id:
+              "local/bielik-11b-v3-q4km",
+            contextWindow:
+              32_000,
+            minimumContextWindow:
+              32_000
+          })
+        ),
+      status: () => ({
+        endpoint:
+          "http://127.0.0.1:4318/v1",
+        configuredContextTokens:
+          32_000,
+        qualification:
+          null
+      })
+    } as unknown as
+      LocalModelRuntime;
+
+    try {
+      const adapter =
+        new AiSdkProviderAdapter(
+          "openai",
+          new StaticCredentialResolver(
+            {}
+          ),
+          localModels
+        );
+
+      await expect(
+        adapter.stream({
+          model:
+            "local/bielik-11b-v3-q4km",
+          systemPrompt:
+            "Odpowiedz krótko.",
+          messages: [
+            {
+              role:
+                "user",
+              content:
+                "napisz ok"
+            }
+          ],
+          localTransport:
+            "json",
+          localMaxOutputTokens:
+            128
+        })
+      ).resolves.toEqual({
+        fullText:
+          "OK"
+      });
+
+      expect(
+        fetchMock
+      ).toHaveBeenCalledTimes(
+        1
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("retries local response timeouts once at the minimum qualified context", () => {
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+        ),
+        64_000,
+        32_000
+      )
+    ).toBe(true);
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT"
+        ),
+        32_000,
+        32_000
+      )
+    ).toBe(false);
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_CONTEXT_OVERFLOW"
+        ),
+        64_000,
+        32_000
+      )
+    ).toBe(false);
+  });
+
   it("classifies local inference failures into actionable diagnostics", () => {
     expect(
       classifyLocalInferenceFailure(
@@ -545,6 +833,13 @@ describe("AiSdkProviderAdapter", () => {
       )
     ).toBe(
       "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "LOCAL_MODEL_SSE_READ_FAILED:LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+      )
+    ).toBe(
+      "LOCAL_MODEL_RESPONSE_TIMEOUT"
     );
     expect(
       classifyLocalInferenceFailure(

@@ -1187,6 +1187,64 @@
   margin-top: 12px;
 }
 
+.matter-schedule-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.matter-schedule-form > input,
+.matter-schedule-form > textarea {
+  width: 100%;
+}
+
+.matter-schedule-form > textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
+.matter-schedule-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.matter-schedule-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #d9dfd6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.matter-schedule-item-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.matter-schedule-item-main small {
+  color: #66736a;
+}
+
+.matter-schedule-item-main p {
+  margin: 4px 0 0;
+  white-space: pre-wrap;
+}
+
+.matter-schedule-kind {
+  width: fit-content;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #edf4ea;
+  color: #285132;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .chat-check-row {
   align-items: flex-start;
   flex-wrap: wrap;

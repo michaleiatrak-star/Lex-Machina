@@ -59,6 +59,13 @@ export type ProviderStreamParams = {
     calls: NormalizedToolCall[]
   ) => Promise<NormalizedToolResult[]>;
   reasoning?: ReasoningLevel;
+  /**
+   * Internal Lex local-runtime transport preference. Cloud/account adapters
+   * ignore this field. "json" intentionally bypasses SSE for tiny local
+   * smoke/conversation requests.
+   */
+  localTransport?: "stream" | "json";
+  localMaxOutputTokens?: number;
   abortSignal?: AbortSignal;
 };
 

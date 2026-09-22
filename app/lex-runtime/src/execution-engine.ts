@@ -95,6 +95,47 @@ export class LexExecutionError extends Error {
   }
 }
 
+export function isLocalLightweightConversation(
+  model: string,
+  query: string,
+  hasBoundContext: boolean
+): boolean {
+  if (
+    !model.startsWith(
+      "local/"
+    )
+  ) {
+    return false;
+  }
+
+  // Exact trivial chat commands are user intent in their own right. They must
+  // not become expensive legal-workflow requests merely because a case has a
+  // durable workflow/session state attached. The lexical allow-list below is
+  // intentionally narrow; substantive legal requests still use all gates.
+  void hasBoundContext;
+
+  const normalized =
+    query
+      .normalize("NFKC")
+      .trim()
+      .toLowerCase()
+      .replace(
+        /[„”"'']/g,
+        ""
+      )
+      .replace(
+        /\s+/g,
+        " "
+      );
+
+  return (
+    /^(?:napisz|odpowiedz|powiedz)(?: tylko)?[: ]+ok[.!?]*$/
+      .test(normalized) ||
+    /^(?:ok|test|hej|cześć|czesc|dzień dobry|dzien dobry|dzięki|dzieki)[.!?]*$/
+      .test(normalized)
+  );
+}
+
 function combineSkillPrompt(
   registry: LexSkillRegistry,
   skillNames: string[]
@@ -115,6 +156,36 @@ function combineSkillPrompt(
         ? semantic
         : `# SKILL: ${name}\n\n${skill.body}`;
     })
+    .join("\n\n---\n\n");
+}
+
+export function buildCoreLegalResourcePrompt(
+  resources: ReadonlyMap<
+    string,
+    string
+  >,
+  localModel: boolean
+): string {
+  if (localModel) {
+    return [
+      "# CORE LEGAL RUNTIME CONTRACT",
+      "Lex Machina runtime has already loaded, validated and enforces the mandatory core legal resources listed below.",
+      ...[
+        ...resources.keys()
+      ].map(
+        (resource) =>
+          `- ${resource}: runtime-enforced`
+      ),
+      "Treat runtime privacy, routing, source-verification and finalization gates as authoritative.",
+      "Do not invent a gate result, verified source, citation, tool result or deanonymized personal data."
+    ].join("\n");
+  }
+
+  return [...resources.entries()]
+    .map(
+      ([resource, content]) =>
+        `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
+    )
     .join("\n\n---\n\n");
 }
 
@@ -447,6 +518,99 @@ export class LexExecutionEngine {
         `validation=${gateIPlan.validationStages.join("|")}`
       ].join(";")
     );
+
+    const lightweightLocal =
+      isLocalLightweightConversation(
+        args.model,
+        effectiveQuery,
+        Boolean(
+          args.documentContext ||
+          args.guideContext ||
+          args.processWorkflowContext ||
+          args.courtWorkflowContext ||
+          args.chronologyWorkflowContext ||
+          args.contractWorkflowContext ||
+          args.orderedCaseWorkflowContext ||
+          !skillEnvelope.automatic
+        )
+      );
+
+    if (lightweightLocal) {
+      emit(
+        "provider_start",
+        args.provider,
+        "OK",
+        args.model
+      );
+      const response =
+        await this.providers.stream(
+          args.provider,
+          {
+            model:
+              args.model,
+            systemPrompt:
+              "Jesteś lokalnym modelem Lex Machina. To jest proste polecenie konwersacyjne bez zadania prawnego, dokumentów i narzędzi. Odpowiedz krótko i dokładnie na polecenie użytkownika.",
+            ...(args.continuityKey
+              ? {
+                  continuityKey:
+                    args.continuityKey
+                }
+              : {}),
+            messages: [
+              {
+                role:
+                  "user",
+                content:
+                  effectiveQuery
+              }
+            ],
+            reasoning:
+              "none",
+            localTransport:
+              "json",
+            localMaxOutputTokens:
+              128
+          }
+        );
+      emit(
+        "provider_end",
+        args.provider,
+        "OK",
+        args.model
+      );
+      if (
+        !response.fullText
+          .trim()
+      ) {
+        throw new LexExecutionError(
+          "Provider returned an empty lightweight local response.",
+          "LOCAL_LIGHTWEIGHT_PROVIDER",
+          [...events]
+        );
+      }
+      emit(
+        "gate",
+        "G7_VERTICAL_SLICE",
+        "OK",
+        "local-lightweight"
+      );
+      return {
+        provider:
+          args.provider,
+        primarySkill:
+          args.route.primarySkill,
+        loadedSkills:
+          skillSelection.loadedSkills,
+        executionSkills:
+          skillSelection.executionSkills,
+        domainSkills:
+          skillSelection.domainSkills,
+        workflowPlan,
+        output:
+          response.fullText,
+        events
+      };
+    }
 
     const semanticWorkflowResources:
       string[] = [];
@@ -872,13 +1036,15 @@ export class LexExecutionEngine {
       ]
     );
 
+    const localModel =
+      args.model.startsWith(
+        "local/"
+      );
     const coreResourcePrompt =
-      [...session.loadedResources.entries()]
-        .map(
-          ([resource, content]) =>
-            `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
-        )
-        .join("\n\n---\n\n");
+      buildCoreLegalResourcePrompt(
+        session.loadedResources,
+        localModel
+      );
 
     const promptParts = [
       baseSystemPrompt,

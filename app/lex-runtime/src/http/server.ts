@@ -43,6 +43,7 @@ import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
 import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import { LocalLlmPrivacyNamedEntityRecognizer } from "../privacy/local-llm-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
 import { LocalAuthStore } from "../auth/store.js";
@@ -77,6 +78,9 @@ import {
 import {
   EncryptedCaseWorkspaceStore
 } from "../case-workspace-store.js";
+import {
+  EncryptedCaseScheduleStore
+} from "../case-schedule-store.js";
 import {
   LegacyCaseStorageMigrator
 } from "../legacy-case-migration.js";
@@ -318,6 +322,11 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const caseScheduleStore =
+    new EncryptedCaseScheduleStore({
+      rootDir:
+        caseFileStore.rootDir
+    });
   const documentGenerationState =
     new DocumentGenerationStateStore({
       rootDir:
@@ -341,7 +350,8 @@ export async function startLocalServer(options?: {
       secureCaseUploadStore,
       secureCaseDocumentStore,
       secureCaseArtifactStore,
-      workspaceStore
+      workspaceStore,
+      caseScheduleStore
     );
   await secureCaseUploadStore
     .cleanupOrphanedWorkdirs();
@@ -397,7 +407,8 @@ export async function startLocalServer(options?: {
       authStore,
       authService,
       caseFileStore,
-      caseSecurityRotation
+      caseSecurityRotation,
+      caseScheduleStore
     );
   const documentAuthoringService =
     new LocalDocumentAuthoringService(
@@ -438,6 +449,14 @@ export async function startLocalServer(options?: {
     accountSessions
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  const stanzaNamedEntities =
+    new LocalStanzaNamedEntityRecognizer();
+  const privacyNamedEntities =
+    new LocalLlmPrivacyNamedEntityRecognizer(
+      providerGateway,
+      localModels,
+      stanzaNamedEntities
+    );
   const modelCatalog =
     new DynamicModelCatalog(
       credentials,
@@ -466,7 +485,7 @@ export async function startLocalServer(options?: {
           undefined,
           new TemporalSourceFreshnessChecker()
         ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       legalFederationTools
     );
   const documentAstGenerator =
@@ -479,7 +498,7 @@ export async function startLocalServer(options?: {
         new PdfJsDocumentPageSource(),
         new LocalPaddleOcrEngine()
       ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       24_000,
       new CompleteImageIngestor(
         new LocalPaddleImageOcrEngine()
@@ -516,6 +535,8 @@ export async function startLocalServer(options?: {
     authService,
     supportService,
     caseAccessService,
+    caseScheduleService:
+      caseAccessService,
     caseKnowledgeSearch,
     documentAuthoringService,
     documentAstGenerator,

@@ -329,7 +329,7 @@ const FALLBACK_MODELS: readonly ReleaseLocalModel[] = [
     sha256: "",
     quantization: "Q4_K_M",
     nativeContext: 131_072,
-    minimumContext: 64_000,
+    minimumContext: 32_000,
     maximumRuntimeContext: 200_000,
     license: "Apache-2.0"
   },
@@ -341,7 +341,7 @@ const FALLBACK_MODELS: readonly ReleaseLocalModel[] = [
     sha256: "",
     quantization: "Q4_K_M",
     nativeContext: 32_768,
-    minimumContext: 64_000,
+    minimumContext: 32_000,
     maximumRuntimeContext: 200_000,
     license: "Apache-2.0"
   }
@@ -435,6 +435,55 @@ function usableAcceleratorName(
 
 function normalizeModelId(id: string): string {
   return LEGACY_MODEL_ALIASES[id] ?? id;
+}
+
+export function localModelListContainsAlias(
+  payload: unknown,
+  expectedModelId: string
+): boolean {
+  if (
+    !payload ||
+    typeof payload !==
+      "object" ||
+    Array.isArray(payload)
+  ) {
+    return false;
+  }
+  const data =
+    (payload as {
+      data?: unknown;
+    }).data;
+  if (!Array.isArray(data)) {
+    return false;
+  }
+  const expected =
+    normalizeModelId(
+      expectedModelId
+    );
+  return data.some(
+    (item) =>
+      Boolean(
+        item &&
+        typeof item ===
+          "object" &&
+        !Array.isArray(item) &&
+        typeof (
+          item as {
+            id?: unknown;
+          }
+        ).id ===
+          "string" &&
+        normalizeModelId(
+          String(
+            (
+              item as {
+                id: string;
+              }
+            ).id
+          )
+        ) === expected
+      )
+  );
 }
 
 export class LocalModelRuntime {
@@ -969,20 +1018,14 @@ export class LocalModelRuntime {
     default: number;
   } {
     const policy = this.manifest().localAi?.contextSelection;
-    const minimum = finiteInteger(policy?.minimum) ? policy.minimum : 64_000;
+    const minimum = finiteInteger(policy?.minimum) ? policy.minimum : 32_000;
     const maximum = finiteInteger(policy?.maximum) ? policy.maximum : 200_000;
     const step = finiteInteger(policy?.step) ? policy.step : 1_000;
     const recommendedProfiles = Array.isArray(policy?.recommendedProfiles)
       ? policy.recommendedProfiles.filter(finiteInteger)
-      : [64_000, 96_000, 128_000, 160_000, 200_000];
+      : [32_000, 64_000, 96_000, 128_000, 160_000, 200_000];
     const fallbackDefault =
-      Math.min(
-        maximum,
-        Math.max(
-          minimum,
-          128_000
-        )
-      );
+      minimum;
     const defaultContext = finiteInteger(policy?.default)
       ? Math.min(
           maximum,
@@ -2180,7 +2223,10 @@ export class LocalModelRuntime {
       this.child &&
       this.activeModelId === canonical &&
       !this.startup &&
-      await this.isHealthy()
+      await this.isHealthy() &&
+      await this.isServingModel(
+        canonical
+      )
     ) {
       return this.publicDescriptor(spec, config);
     }
@@ -3836,7 +3882,12 @@ export class LocalModelRuntime {
 
     const deadline = Date.now() + 180_000;
     while (Date.now() < deadline) {
-      if (await this.isHealthy()) {
+      if (
+        await this.isHealthy() &&
+        await this.isServingModel(
+          canonical
+        )
+      ) {
         await this.probeChatCompletion(
           config.model.id
         );
@@ -3857,7 +3908,7 @@ export class LocalModelRuntime {
     try {
       response =
         await fetch(
-          `http://${this.host}:${this.port}/chat/completions`,
+          `http://${this.host}:${this.port}/v1/chat/completions`,
           {
             method: "POST",
             headers: {
@@ -4099,6 +4150,36 @@ export class LocalModelRuntime {
       calibratedAt:
         new Date().toISOString()
     };
+  }
+
+  private async isServingModel(
+    expectedModelId: string
+  ): Promise<boolean> {
+    try {
+      const response =
+        await fetch(
+          `http://${this.host}:${this.port}/v1/models`,
+          {
+            headers: {
+              Accept:
+                "application/json"
+            },
+            signal:
+              AbortSignal.timeout(
+                1_500
+              )
+          }
+        );
+      if (!response.ok) {
+        return false;
+      }
+      return localModelListContainsAlias(
+        await response.json(),
+        expectedModelId
+      );
+    } catch {
+      return false;
+    }
   }
 
   private async isHealthy(): Promise<boolean> {

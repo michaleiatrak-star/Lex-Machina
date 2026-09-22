@@ -30,6 +30,11 @@ import {
   LocalCaseFileStore,
   type StoredCaseMetadata
 } from "./case-file-store.js";
+import type {
+  CaseScheduleEvent,
+  CaseScheduleKind,
+  EncryptedCaseScheduleStore
+} from "./case-schedule-store.js";
 
 export type CaseCapability =
   | "READ"
@@ -49,6 +54,7 @@ export type CaseAccessErrorCode =
   | "LEGACY_CASE_ALREADY_IMPORTED"
   | "CASE_KEY_UNAVAILABLE"
   | "CASE_ARCHIVED"
+  | "CASE_SCHEDULE_EVENT_NOT_FOUND"
   | "FIRM_KNOWLEDGE_ALREADY_EXISTS";
 
 export class CaseAccessError extends Error {
@@ -111,6 +117,48 @@ function cleanDisplayName(
   return cleaned || undefined;
 }
 
+function cleanScheduleText(
+  value: unknown,
+  maxLength: number
+): string | undefined {
+  if (
+    typeof value !== "string"
+  ) {
+    return undefined;
+  }
+  const cleaned =
+    value
+      .normalize("NFKC")
+      .trim()
+      .slice(
+        0,
+        maxLength
+      );
+  return cleaned || undefined;
+}
+
+function cleanScheduleStart(
+  value: unknown
+): string | null {
+  if (
+    typeof value !== "string"
+  ) {
+    return null;
+  }
+  const cleaned =
+    value.trim();
+  if (
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/
+      .test(cleaned) ||
+    Number.isNaN(
+      Date.parse(cleaned)
+    )
+  ) {
+    return null;
+  }
+  return cleaned;
+}
+
 export interface CaseKeyRotationParticipant {
   rekeyCaseVault(args: {
     caseId: string;
@@ -151,7 +199,9 @@ export class LocalCaseAccessService {
     private readonly files:
       LocalCaseFileStore,
     private readonly keyRotationParticipant?:
-      CaseKeyRotationParticipant
+      CaseKeyRotationParticipant,
+    private readonly schedule?:
+      EncryptedCaseScheduleStore
   ) {}
 
   async createCase(
@@ -389,6 +439,290 @@ export class LocalCaseAccessService {
       canReidentify:
         access.canReidentify
     };
+  }
+
+  async listCaseSchedule(
+    context:
+      AuthenticatedContext,
+    caseId: string
+  ): Promise<
+    CaseScheduleEvent[]
+  > {
+    if (!this.schedule) {
+      throw new Error(
+        "CASE_SCHEDULE_UNAVAILABLE"
+      );
+    }
+    return await this.withCaseDataKey(
+      context,
+      caseId,
+      "READ",
+      async (caseDataKey) => {
+        const record =
+          this.store.getCase(
+            caseId
+          );
+        if (!record) {
+          throw new CaseAccessError(
+            "CASE_NOT_FOUND",
+            404
+          );
+        }
+        return await this.schedule!
+          .list({
+            caseId,
+            caseDataKey,
+            keyVersion:
+              record.keyVersion
+          });
+      }
+    );
+  }
+
+  async addCaseScheduleEvent(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    input: {
+      kind?: unknown;
+      title?: unknown;
+      startsAt?: unknown;
+      location?: unknown;
+      notes?: unknown;
+    }
+  ): Promise<
+    CaseScheduleEvent
+  > {
+    if (!this.schedule) {
+      throw new Error(
+        "CASE_SCHEDULE_UNAVAILABLE"
+      );
+    }
+
+    const kind =
+      typeof input.kind ===
+        "string" &&
+      [
+        "CLIENT_MEETING",
+        "COURT_HEARING",
+        "DEADLINE",
+        "OTHER"
+      ].includes(
+        input.kind
+      )
+        ? input.kind as
+            CaseScheduleKind
+        : null;
+    const title =
+      cleanScheduleText(
+        input.title,
+        180
+      );
+    const startsAt =
+      cleanScheduleStart(
+        input.startsAt
+      );
+    const location =
+      cleanScheduleText(
+        input.location,
+        180
+      );
+    const notes =
+      cleanScheduleText(
+        input.notes,
+        2000
+      );
+
+    if (
+      !kind ||
+      !title ||
+      !startsAt
+    ) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+
+    return await this.withCaseDataKey(
+      context,
+      caseId,
+      "WRITE",
+      async (caseDataKey) => {
+        const record =
+          this.store.getCase(
+            caseId
+          );
+        if (!record) {
+          throw new CaseAccessError(
+            "CASE_NOT_FOUND",
+            404
+          );
+        }
+
+        const events =
+          await this.schedule!
+            .list({
+              caseId,
+              caseDataKey,
+              keyVersion:
+                record.keyVersion
+            });
+        const createdAt =
+          new Date()
+            .toISOString();
+        const event:
+          CaseScheduleEvent = {
+            eventId:
+              "scheduleevent_" +
+              randomBytes(16)
+                .toString("hex"),
+            kind,
+            title,
+            startsAt,
+            ...(location
+              ? { location }
+              : {}),
+            ...(notes
+              ? { notes }
+              : {}),
+            createdAt,
+            createdByUserId:
+              context.user.userId
+          };
+
+        await this.schedule!
+          .save({
+            caseId,
+            caseDataKey,
+            keyVersion:
+              record.keyVersion,
+            events:
+              [...events, event]
+                .sort(
+                  (
+                    left,
+                    right
+                  ) =>
+                    left.startsAt
+                      .localeCompare(
+                        right.startsAt
+                      ) ||
+                    left.createdAt
+                      .localeCompare(
+                        right.createdAt
+                      )
+                )
+          });
+
+        this.audit(
+          context.user.userId,
+          "case_schedule_event_added",
+          createdAt,
+          {
+            caseId,
+            eventId:
+              event.eventId,
+            kind:
+              event.kind,
+            startsAt:
+              event.startsAt
+          }
+        );
+        return event;
+      }
+    );
+  }
+
+  async deleteCaseScheduleEvent(
+    context:
+      AuthenticatedContext,
+    caseId: string,
+    eventId: string
+  ): Promise<{
+    eventId: string;
+    deletedAt: string;
+  }> {
+    if (!this.schedule) {
+      throw new Error(
+        "CASE_SCHEDULE_UNAVAILABLE"
+      );
+    }
+    if (
+      !/^scheduleevent_[a-f0-9]{32}$/
+        .test(eventId)
+    ) {
+      throw new CaseAccessError(
+        "INVALID_CASE_ACCESS_REQUEST",
+        400
+      );
+    }
+
+    return await this.withCaseDataKey(
+      context,
+      caseId,
+      "WRITE",
+      async (caseDataKey) => {
+        const record =
+          this.store.getCase(
+            caseId
+          );
+        if (!record) {
+          throw new CaseAccessError(
+            "CASE_NOT_FOUND",
+            404
+          );
+        }
+        const events =
+          await this.schedule!
+            .list({
+              caseId,
+              caseDataKey,
+              keyVersion:
+                record.keyVersion
+            });
+        const next =
+          events.filter(
+            (event) =>
+              event.eventId !==
+                eventId
+          );
+        if (
+          next.length ===
+            events.length
+        ) {
+          throw new CaseAccessError(
+            "CASE_SCHEDULE_EVENT_NOT_FOUND",
+            404
+          );
+        }
+
+        await this.schedule!
+          .save({
+            caseId,
+            caseDataKey,
+            keyVersion:
+              record.keyVersion,
+            events: next
+          });
+        const deletedAt =
+          new Date()
+            .toISOString();
+        this.audit(
+          context.user.userId,
+          "case_schedule_event_deleted",
+          deletedAt,
+          {
+            caseId,
+            eventId
+          }
+        );
+        return {
+          eventId,
+          deletedAt
+        };
+      }
+    );
   }
 
   async listLegacyCases(

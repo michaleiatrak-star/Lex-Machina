@@ -554,8 +554,10 @@ export class LocalPolishPseudonymizer {
         await this.namedEntities.recognize(text);
       for (const span of named) {
         if (
-          span.kind === "PERSON" &&
-          text.slice(span.start, span.end) === span.value
+          text.slice(
+            span.start,
+            span.end
+          ) === span.value
         ) {
           autoSpans.push({
             ...span,

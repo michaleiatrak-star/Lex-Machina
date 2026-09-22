@@ -4,6 +4,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $bundle = (Resolve-Path -LiteralPath $BundlePath).Path
 $receiptPath = Join-Path $runtime "offline-runtime.json"
@@ -202,6 +203,12 @@ try {
     Get-Content -LiteralPath $selfTestLog -Tail 120 -ErrorAction SilentlyContinue | Out-Host
     throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$($_.Exception.Message)"
   }
+
+  $nativeWebConfigurator = Join-Path $runtime "bootstrap\configure-llama-native-web.ps1"
+  if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+    throw "OFFLINE_BUNDLE_LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING"
+  }
+  & $nativeWebConfigurator -RuntimeRoot $runtime | Out-Host
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
 } finally {

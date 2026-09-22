@@ -10,7 +10,7 @@ from xml.sax.saxutils import escape
 
 FIXED_DATE = (1980, 1, 1, 0, 0, 0)
 MAX_PACKAGE_BYTES = 64 * 1024 * 1024
-ALIAS_RE = re.compile(r"\[LMPII:D\d{2}:[A-Z_]+:\d{4}\]")
+ALIAS_RE = re.compile(r"(?:\[LMPII:D\d{2}:[A-Z_]+:\d{4}(?:\|(?:nom|gen|dat|acc|inst|loc|voc))?\]|\[PII:[A-Z_]+:\d{4}(?:\|(?:nom|gen|dat|acc|inst|loc|voc))?\])")
 
 DOCX_CT = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">

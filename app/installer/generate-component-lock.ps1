@@ -69,6 +69,7 @@ $lock = [ordered]@{
   runtimeNetworkRequiredAfterBootstrap = $false
   optionalNetworkActionsAfterInstall = @(
     "LOCAL_AI_PROVISIONING",
+    "LOCAL_AI_WEB_RESEARCH",
     "APPLICATION_UPDATE",
     "SKILL_UPDATE"
   )

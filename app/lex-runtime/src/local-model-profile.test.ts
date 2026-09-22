@@ -8,6 +8,7 @@ import {
   it
 } from "vitest";
 import {
+  localModelListContainsAlias,
   LocalModelRuntime
 } from "./local-model-runtime.js";
 import {
@@ -183,7 +184,7 @@ function fixture() {
       quantization:
         "Q4_K_M",
       nativeContext: 32_768,
-      minimumContext: 64_000,
+      minimumContext: 32_000,
       maximumRuntimeContext:
         200_000,
       license: "Apache-2.0",
@@ -226,10 +227,11 @@ function fixture() {
       },
       localAi: {
         contextSelection: {
-          minimum: 64_000,
+          minimum: 32_000,
           maximum: 200_000,
           step: 1_000,
           recommendedProfiles: [
+            32_000,
             64_000,
             96_000,
             128_000,
@@ -338,6 +340,38 @@ afterEach(() => {
       }
     );
   }
+});
+
+describe("llama.cpp loaded-model identity", () => {
+  it("accepts only the requested REST alias", () => {
+    expect(
+      localModelListContainsAlias(
+        {
+          data: [
+            {
+              id:
+                "local/mistral-nemo-12b-q4km"
+            }
+          ]
+        },
+        "local/mistral-nemo-12b-q4km"
+      )
+    ).toBe(true);
+
+    expect(
+      localModelListContainsAlias(
+        {
+          data: [
+            {
+              id:
+                "local/bielik-11b-v3-q4km"
+            }
+          ]
+        },
+        "local/mistral-nemo-12b-q4km"
+      )
+    ).toBe(false);
+  });
 });
 
 describe(

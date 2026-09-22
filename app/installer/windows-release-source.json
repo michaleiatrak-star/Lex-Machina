@@ -69,7 +69,8 @@
     "Pillow": "12.3.0",
     "stanza": "1.14.0",
     "torch": "2.14.0",
-    "uv": "0.12.17"
+    "uv": "0.12.17",
+    "morfeusz2": "1.99.15"
   },
   "models": {
     "paddle": [
@@ -95,7 +96,7 @@
         "sha256": "186ac886e5cf42a6ca0815e60504f13c7cc95446eb05ac2f1515e388976cebcf",
         "quantization": "Q4_K_M",
         "nativeContext": 131072,
-        "minimumContext": 64000,
+        "minimumContext": 32000,
         "maximumRuntimeContext": 200000,
         "contextExtension": {
           "enabled": true,
@@ -116,7 +117,7 @@
         "sha256": "c16841621efe93c7c8ebf1b374709a96276f3741e649f83ed90131a7b5ad23a8",
         "quantization": "Q4_K_M",
         "nativeContext": 32768,
-        "minimumContext": 64000,
+        "minimumContext": 32000,
         "maximumRuntimeContext": 200000,
         "contextExtension": {
           "enabled": true,
@@ -132,19 +133,20 @@
     "delivery": "USER_INITIATED_AFTER_INSTALL",
     "installRoot": "%LOCALAPPDATA%\\LexMachina\\local-ai",
     "contextSelection": {
-      "minimum": 64000,
+      "minimum": 32000,
       "maximum": 200000,
       "step": 1000,
       "recommendedProfiles": [
+        32000,
         64000,
         96000,
         128000,
         160000,
         200000
       ],
-      "default": 128000
+      "default": 32000
     },
-    "networkRequiredOnlyWhenProvisioning": true,
+    "networkRequiredOnlyWhenProvisioning": false,
     "applicationUsableWithoutLocalAi": true,
     "backendSelection": {
       "allowed": [
@@ -155,6 +157,107 @@
       "default": "AUTO",
       "autoPolicy": "TRY_VULKAN_WHEN_ACCELERATOR_IS_DETECTED_THEN_CPU_FALLBACK",
       "validation": "BACKEND_IS_ACTIVE_ONLY_AFTER_LLAMA_SERVER_HEALTH_AND_TOKENIZER_CALIBRATION"
+    },
+    "networkRequiredForCoreInference": false,
+    "networkRequiredForWebResearch": true,
+    "webResearch": {
+      "transport": "LLAMA_CPP_MCP_STDIO",
+      "tools": [
+        "web_search",
+        "web_fetch",
+        "web_research"
+      ],
+      "defaultSearchProvider": "DUCKDUCKGO_HTML",
+      "optionalSearchProvider": "BRAVE_SEARCH_API",
+      "citationPolicy": "FETCH_BEFORE_CITE_NO_INVENTED_URLS",
+      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED",
+      "directLaunchPolicy": {
+        "mistral": "SERVER_CHAT_TEMPLATE_GROUNDED",
+        "bielik": "SERVER_CHATML_TEMPLATE_GROUNDED",
+        "ui": "SYSTEM_MESSAGE_GROUNDED_FOR_ALL_LOCAL_MODELS"
+      }
+    },
+    "legalSkills": {
+      "mode": "AUTO",
+      "transport": "LLAMA_CPP_MCP_STDIO",
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "sourceRoot": "runtime/corpus",
+      "skillCount": 32,
+      "requiredRouter": "prawny-router-v3",
+      "polishBaseline": [
+        "prawny-router-v3",
+        "prawo-polskie-v2",
+        "shared"
+      ],
+      "tools": [
+        "legal_auto_route",
+        "legal_skill_read",
+        "legal_skill_search",
+        "legal_skills_list"
+      ],
+      "policy": "ROUTER_FIRST_FAIL_CLOSED_THEN_WEB_VERIFY"
+    },
+    "privateDocuments": {
+      "mode": "DIRECT_LLAMA_MCP",
+      "mediation": "NO_LEX_TOOL_BROKER",
+      "ocr": "LOCAL_PADDLE_OCR_PP_OCRV6",
+      "ner": "LOCAL_STANZA_PL",
+      "vault": "PROCESS_MEMORY_ONLY",
+      "morphology": "MORFEUSZ2_SGJP",
+      "inflectionCases": [
+        "nom",
+        "gen",
+        "dat",
+        "acc",
+        "inst",
+        "loc",
+        "voc"
+      ],
+      "clearPiiToolResultPolicy": "WRITE_FINAL_ARTIFACT_NO_CLEAR_PII_ECHO",
+      "tools": [
+        "private_ocr",
+        "private_ocr_anonymize",
+        "private_anonymize",
+        "private_inflection_contract",
+        "private_finalize_text",
+        "private_finalize_document",
+        "private_vault_status",
+        "private_clear_session"
+      ]
+    },
+    "directMcpFleet": {
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "servers": [
+        "web",
+        "legal",
+        "private",
+        "prawo",
+        "saos",
+        "nsa",
+        "isap",
+        "krs",
+        "eureka",
+        "kio",
+        "uodo",
+        "eu_sparql",
+        "eu_compliance",
+        "legalize"
+      ],
+      "sourceConnectors": {
+        "prawo": "prawo-pl-mcp==0.1.4",
+        "saos": "@matematicsolutions/mcp-saos@1.2.0",
+        "nsa": "@matematicsolutions/mcp-nsa@1.3.0",
+        "isap": "@matematicsolutions/mcp-isap@1.3.0",
+        "krs": "@matematicsolutions/mcp-krs@1.1.1",
+        "eureka": "@matematicsolutions/mcp-eureka@0.2.0",
+        "kio": "kio-orzeczenia-mcp==0.4.3",
+        "uodo": "bundled local official UODO MCP",
+        "eu_sparql": "@matematicsolutions/mcp-eu-sparql@1.2.0",
+        "eu_compliance": "@matematicsolutions/mcp-eu-compliance@0.4.0",
+        "legalize": "legalize-mcp==0.2.4"
+      },
+      "externalConnectorProvisioning": "PINNED_LAZY_FIRST_USE_REQUIRES_NETWORK",
+      "externalPiiPolicy": "PUBLIC_LEGAL_TERMS_AND_IDENTIFIERS_ONLY_NO_CASE_FACTS_OR_PII"
     }
   },
   "systemPrerequisites": {
@@ -171,22 +274,22 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, AND UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
     "skillUpdateSigning": "Skill self-update may use the official michaleiatrak-star/Lex-Machina GitHub Releases source without Ed25519. GitHub release asset SHA-256, index schema/version compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory. Ed25519 is accepted when present.",
-    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key.",
+    "modelPackUpdateSigning": "Temporary unsigned model-pack mode is enabled for 0.1.7: the official model-pack index may be accepted without Ed25519 while SHA-256 verification of downloaded model artifacts remains mandatory. Re-enable signed-index enforcement when the production trust root is configured.",
     "pythonRuntime": "Official CPython embeddable x64 distribution is used for the app-private runtime to avoid Windows Installer registration/maintenance-mode collisions with an existing Python of the same version. pip is bootstrapped from a pinned verified wheel into the private site-packages directory."
   },
   "modelPackUpdate": {
-    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-ModelPack-Index.json",
     "signatureAsset": "LexMachina-ModelPack-Index.sig",
     "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
-    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
-    "temporaryUnsignedAllowed": false
+    "policy": "TEMPORARY_SHA256_ONLY_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": true
   },
   "skillUpdate": {
     "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
@@ -200,7 +303,7 @@
     "officialSourceUnsignedAllowed": true
   },
   "legalSourceFederation": {
-    "transport": "MCP_STDIO_VIA_UVX",
+    "transport": "DIRECT_LLAMA_CPP_MCP_STDIO_AND_PRAWO_PL_MCP",
     "aggregator": "prawo-pl-mcp",
     "aggregatorVersion": "0.1.4",
     "role": "DISCOVERY_RESEARCH_ONLY",
@@ -219,7 +322,21 @@
     "statutoryVerificationAuthority": "LEX_NATIVE_OFFICIAL_VERIFIER",
     "firstUseNetworkRequired": true,
     "networkPolicy": "CORE_RUNTIME_REMAINS_NETWORK_INDEPENDENT_AFTER_BOOTSTRAP; LIVE_MCP_SOURCE_CALLS_REQUIRE_NETWORK_WHEN_USER_OR_MODEL_INVOKES_LEGAL_RESEARCH",
-    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE"
+    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE",
+    "mediation": "NO_LEX_TOOL_BROKER",
+    "directServers": [
+      "prawo",
+      "saos",
+      "nsa",
+      "isap",
+      "krs",
+      "eureka",
+      "kio",
+      "uodo",
+      "eu_sparql",
+      "eu_compliance",
+      "legalize"
+    ]
   },
   "accountSessionClients": {
     "codex": {
@@ -228,6 +345,12 @@
       "model": "gpt-5.6-luna",
       "delivery": "BUNDLED_APP_PRIVATE",
       "auth": "CHATGPT_ACCOUNT"
+    },
+    "claude": {
+      "package": "@anthropic-ai/claude-code",
+      "version": "2.1.274",
+      "delivery": "BUNDLED_APP_PRIVATE",
+      "auth": "CLAUDE_AI_SUBSCRIPTION"
     }
   }
 }

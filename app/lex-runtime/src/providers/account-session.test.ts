@@ -4,6 +4,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   accountLoginArgs,
+  accountLoginFallbackArgs,
   accountLoginLaunchMode,
   accountSessionModelId,
   accountSessionResumeMode,
@@ -11,10 +12,12 @@ import {
   claudeSubscriptionAuthenticated,
   classifyAccountCliFailureDetail,
   codexExecArgs,
+  codexStoredAuthIsChatGpt,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
   isMissingResumableSessionMessage,
   mergeWindowsCommandPath,
+  openAiChatGptAuthenticated,
   visibleWindowsLoginLauncher
 } from "./account-session.js";
 
@@ -62,7 +65,7 @@ describe("provider account-session transport", () => {
   });
 
 
-  it("keeps Lex conversation context authoritative for every account provider", () => {
+  it("keeps Lex context authoritative while restoring host-session continuity", () => {
     for (
       const provider
       of [
@@ -76,19 +79,19 @@ describe("provider account-session transport", () => {
           provider
         )
       ).toBe(
-        "LEX_CONTEXT_ONLY"
+        "LAST_OR_NEW"
       );
     }
   });
 
-  it("pins Codex account execution to a ChatGPT-compatible model and isolated ephemeral config", () => {
+  it("pins Codex account execution to a ChatGPT-compatible model and isolated persistent config", () => {
     const args =
       codexExecArgs(
         "C:\\Lex Work",
         "C:\\Lex Work\\last.txt"
       );
 
-    expect(args).toContain(
+    expect(args).not.toContain(
       "--ephemeral"
     );
     expect(args).toContain(
@@ -98,7 +101,13 @@ describe("provider account-session transport", () => {
       "--ignore-user-config"
     );
     expect(args).toContain(
+      "--ignore-rules"
+    );
+    expect(args).toContain(
       "mcp_servers={}"
+    );
+    expect(args).toContain(
+      "read-only"
     );
     expect(
       args.some(
@@ -143,12 +152,29 @@ describe("provider account-session transport", () => {
       "login"
     ]);
     expect(
+      accountLoginFallbackArgs(
+        "openai"
+      )
+    ).toEqual([
+      "login",
+      "--device-auth"
+    ]);
+    expect(
       accountLoginArgs(
         "anthropic"
       )
     ).toEqual([
       "auth",
       "login"
+    ]);
+    expect(
+      accountLoginFallbackArgs(
+        "anthropic"
+      )
+    ).toEqual([
+      "auth",
+      "login",
+      "--claudeai"
     ]);
     expect(
       accountLoginArgs(
@@ -272,7 +298,64 @@ describe("provider account-session transport", () => {
     );
   });
 
-  it("recognizes Claude subscription auth across current JSON and text status formats", () => {
+  it("recognizes persisted ChatGPT auth metadata without reading token values", () => {
+    expect(
+      codexStoredAuthIsChatGpt(
+        JSON.stringify({
+          auth_mode:
+            "chatgpt",
+          tokens: {
+            access_token:
+              "redacted"
+          }
+        })
+      )
+    ).toBe(true);
+    expect(
+      codexStoredAuthIsChatGpt(
+        JSON.stringify({
+          auth_mode:
+            "api",
+          OPENAI_API_KEY:
+            "redacted"
+        })
+      )
+    ).toBe(false);
+    expect(
+      codexStoredAuthIsChatGpt(
+        "not-json"
+      )
+    ).toBe(false);
+  });
+
+  it("recognizes ChatGPT auth status without accepting API-key login", () => {
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in using ChatGPT",
+        stderr: ""
+      })
+    ).toBe(true);
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Signed in with ChatGPT",
+        stderr: ""
+      })
+    ).toBe(true);
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in using API key",
+        stderr: ""
+      })
+    ).toBe(false);
+  });
+
+  it("trusts the official Claude auth status exit code across status formats", () => {
     expect(
       claudeSubscriptionAuthenticated({
         code: 0,
@@ -301,7 +384,38 @@ describe("provider account-session transport", () => {
           "Profile: credentials-file · user_oauth · profile default",
         stderr: ""
       })
+    ).toBe(true);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout: JSON.stringify({
+          loggedIn: true,
+          authMethod: "none",
+          apiProvider: "firstParty"
+        }),
+        stderr: ""
+      })
+    ).toBe(true);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 1,
+        stdout: JSON.stringify({
+          loggedIn: false
+        }),
+        stderr: ""
+      })
     ).toBe(false);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in via Anthropic Console",
+        stderr: ""
+      })
+    ).toBe(true);
 
     expect(
       claudeSubscriptionAuthenticated({
@@ -313,7 +427,7 @@ describe("provider account-session transport", () => {
         }),
         stderr: ""
       })
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("discovers the newest Claude Code session id without reading transcript content", async () => {

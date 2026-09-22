@@ -3,6 +3,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifestPath = Join-Path $runtime "release-source.json"
 $requirements = Join-Path $runtime "release-requirements.txt"
@@ -496,5 +497,11 @@ if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_COMPONENT_LOCK_FAILED" }
 
 & (Join-Path $bootstrapRoot "windows-payload-selftest.ps1") -PayloadRoot $runtime
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_RUNTIME_SELFTEST_FAILED" }
+
+$nativeWebConfigurator = Join-Path $bootstrapRoot "configure-llama-native-web.ps1"
+if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+  throw "BOOTSTRAP_LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING"
+}
+& $nativeWebConfigurator -RuntimeRoot $runtime | Out-Host
 
 Write-Host "LEX_ONLINE_BOOTSTRAP_PASS:LOCAL_AI_OPTIONAL"

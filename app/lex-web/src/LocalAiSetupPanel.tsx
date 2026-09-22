@@ -615,7 +615,7 @@ export function LocalAiSetupPanel({
   }
 
   async function startLocal(): Promise<void> {
-    if (!configured || busy || !data?.runtime.selectedModelId) return;
+    if (!configured || busy || !modelId) return;
     setBusy(true);
     setError("");
     try {
@@ -626,7 +626,9 @@ export function LocalAiSetupPanel({
         {
           method: "POST",
           body: JSON.stringify({
-            modelId: data.runtime.selectedModelId
+            // Start exactly what the user selected in the dropdown. Do not
+            // silently fall back to the previously configured model.
+            modelId
           })
         }
       );

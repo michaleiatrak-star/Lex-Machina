@@ -48,6 +48,7 @@ export type WorkspaceThreadMessage = {
 export type WorkspaceResponse = {
   caseId: string;
   caseKind: "MATTER" | "FIRM_KNOWLEDGE";
+  caseDisplayName: string;
   folders: WorkspaceFolder[];
   itemLocations: Record<string, string | null>;
   items: WorkspaceItem[];
