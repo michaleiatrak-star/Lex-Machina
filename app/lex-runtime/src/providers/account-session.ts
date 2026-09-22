@@ -1203,11 +1203,10 @@ export function accountLoginArgs(
   provider: ProviderId
 ): string[] {
   if (provider === "openai") {
-    return [
-      "-c",
-      'forced_login_method="chatgpt"',
-      "login"
-    ];
+    // Keep the browser OAuth flow compatible with the proven RC14 behavior.
+    // The private Codex binary is still used; only the login invocation is
+    // intentionally left to the client's native ChatGPT flow.
+    return ["login"];
   }
   if (provider === "anthropic") {
     return [
@@ -1224,8 +1223,6 @@ export function accountLoginFallbackArgs(
 ): string[] | null {
   if (provider === "openai") {
     return [
-      "-c",
-      'forced_login_method="chatgpt"',
       "login",
       "--device-auth"
     ];
@@ -1393,13 +1390,14 @@ export function openAiChatGptAuthenticated(
   ) {
     return false;
   }
-  return (
-    status.includes("chatgpt") &&
-    (
-      status.includes("logged in") ||
-      status.includes("signed in") ||
-      status.includes("authenticated")
-    )
+
+  // Codex versions used by the RC14 line can report the successful browser
+  // login simply as "Using ChatGPT", without an additional "logged in" token.
+  // Preserve that proven contract while still excluding API-key auth above.
+  return status.includes(
+    "logged in using chatgpt"
+  ) || status.includes(
+    "using chatgpt"
   );
 }
 
