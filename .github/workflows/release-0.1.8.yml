@@ -181,13 +181,13 @@ jobs:
 
           Windows release containing the accepted Online and standalone Offline installers.
 
-### Local llama.cpp direct integrations
-- native web_search/web_fetch/web_research with source-grounded citation policy;
-- AUTO routing over all 32 legal skills without Lex Tool Broker mediation;
-- direct local PaddleOCR + Stanza anonymization + DPAPI privacy vault;
-- Morfeusz2 grammatical deanonymization for final Polish documents;
-- direct prawo-pl-mcp federation: SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/CELLAR, EU-compliance and Legalize;
-- independent official UODO MCP fallback.
+          ### Local llama.cpp direct integrations
+          - native web_search/web_fetch/web_research with source-grounded citation policy;
+          - AUTO routing over all 32 legal skills without Lex Tool Broker mediation;
+          - direct local PaddleOCR + Stanza anonymization + DPAPI privacy vault;
+          - Morfeusz2 grammatical deanonymization for final Polish documents;
+          - direct prawo-pl-mcp federation: SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/CELLAR, EU-compliance and Legalize;
+          - independent official UODO MCP fallback.
 
           Key changes:
           - redesigned login and application navigation;
