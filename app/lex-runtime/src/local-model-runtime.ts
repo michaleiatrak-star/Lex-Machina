@@ -437,6 +437,18 @@ function normalizeModelId(id: string): string {
   return LEGACY_MODEL_ALIASES[id] ?? id;
 }
 
+export function localLlamaAgentArgs(): string[] {
+  // Native llama.cpp agent mode. This is deliberately configured at the
+  // llama-server layer, not through Lex Machina's tool broker. In the native
+  // Web UI it exposes llama.cpp's own tools, including exec_shell_command,
+  // which can use curl.exe / PowerShell networking on Windows.
+  return [
+    "--agent",
+    "--cors-origins",
+    "localhost"
+  ];
+}
+
 export function localModelListContainsAlias(
   payload: unknown,
   expectedModelId: string
@@ -3831,7 +3843,8 @@ export class LocalModelRuntime {
       "--cache-type-k",
       "q8_0",
       "--cache-type-v",
-      "q8_0"
+      "q8_0",
+      ...localLlamaAgentArgs()
     ];
     if (
       configBackend(config) ===
