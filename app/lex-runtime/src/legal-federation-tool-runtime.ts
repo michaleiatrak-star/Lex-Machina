@@ -349,6 +349,11 @@ const ASSESS_SOURCE_SCHEMA:
             description:
               "Public HTTP(S) source URL to classify."
           },
+          claim: {
+            type: "string",
+            description:
+              "Optional exact proposition for which this source is being assessed."
+          },
           publishedAt: {
             type: "string",
             description:
@@ -1119,6 +1124,19 @@ export class LegalFederationToolRuntime {
       }
 
       const candidate = {
+        ...(typeof call.input
+          .claim ===
+          "string" &&
+        call.input
+          .claim
+          .trim()
+          ? {
+              claim:
+                call.input
+                  .claim
+                  .trim()
+            }
+          : {}),
         url:
           url.toString(),
         tier,
