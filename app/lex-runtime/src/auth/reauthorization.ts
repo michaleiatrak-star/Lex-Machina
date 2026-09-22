@@ -28,6 +28,7 @@ export type DeanonymizationTargetState = {
   tokenizedSha256: string;
   vaultGeneration: number;
   caseKeyVersion: number;
+  deanonymizationKeyBinding?: string;
 };
 
 export interface DeanonymizationTargetResolver {
@@ -57,6 +58,7 @@ export type DeanonymizationIntent = {
   tokenizedSha256: string;
   vaultGeneration: number;
   caseKeyVersion: number;
+  deanonymizationKeyBinding?: string;
   purpose:
     "DEANONYMIZE_AND_EXPORT";
   createdAt: string;
@@ -77,6 +79,7 @@ export type DeanonymizationGrant = {
   tokenizedSha256: string;
   vaultGeneration: number;
   caseKeyVersion: number;
+  deanonymizationKeyBinding?: string;
   purpose:
     "DEANONYMIZE_AND_EXPORT";
   issuedAt: string;
@@ -142,6 +145,7 @@ function exactTarget(
       | "tokenizedSha256"
       | "vaultGeneration"
       | "caseKeyVersion"
+      | "deanonymizationKeyBinding"
     >,
   current:
     DeanonymizationTargetState
@@ -160,7 +164,17 @@ function exactTarget(
     current.vaultGeneration ===
       intent.vaultGeneration &&
     current.caseKeyVersion ===
-      intent.caseKeyVersion
+      intent.caseKeyVersion &&
+    (
+      current
+        .deanonymizationKeyBinding ??
+        null
+    ) ===
+      (
+        intent
+          .deanonymizationKeyBinding ??
+        null
+      )
   );
 }
 
@@ -274,7 +288,16 @@ export class DeanonymizationReauthorizationManager {
       !Number.isInteger(
         target.caseKeyVersion
       ) ||
-      target.caseKeyVersion < 1
+      target.caseKeyVersion < 1 ||
+      (
+        target
+          .deanonymizationKeyBinding !==
+          undefined &&
+        !validSha256(
+          target
+            .deanonymizationKeyBinding
+        )
+      )
     ) {
       throw new ReauthorizationError(
         "REAUTH_TARGET_NOT_READY"
@@ -303,6 +326,14 @@ export class DeanonymizationReauthorizationManager {
           target.vaultGeneration,
         caseKeyVersion:
           target.caseKeyVersion,
+        ...(target
+          .deanonymizationKeyBinding
+          ? {
+              deanonymizationKeyBinding:
+                target
+                  .deanonymizationKeyBinding
+            }
+          : {}),
         purpose:
           "DEANONYMIZE_AND_EXPORT",
         createdAt:
@@ -410,6 +441,14 @@ export class DeanonymizationReauthorizationManager {
           intent.vaultGeneration,
         caseKeyVersion:
           intent.caseKeyVersion,
+        ...(intent
+          .deanonymizationKeyBinding
+          ? {
+              deanonymizationKeyBinding:
+                intent
+                  .deanonymizationKeyBinding
+            }
+          : {}),
         purpose:
           "DEANONYMIZE_AND_EXPORT",
         issuedAt:
