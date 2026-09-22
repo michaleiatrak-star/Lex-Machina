@@ -231,7 +231,7 @@
     },
     "claude": {
       "package": "@anthropic-ai/claude-code",
-      "version": "2.1.236",
+      "version": "2.1.274",
       "delivery": "BUNDLED_APP_PRIVATE",
       "auth": "CLAUDE_AI_SUBSCRIPTION"
     }
