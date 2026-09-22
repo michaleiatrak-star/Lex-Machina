@@ -976,13 +976,7 @@ export class LocalModelRuntime {
       ? policy.recommendedProfiles.filter(finiteInteger)
       : [64_000, 96_000, 128_000, 160_000, 200_000];
     const fallbackDefault =
-      Math.min(
-        maximum,
-        Math.max(
-          minimum,
-          128_000
-        )
-      );
+      minimum;
     const defaultContext = finiteInteger(policy?.default)
       ? Math.min(
           maximum,
