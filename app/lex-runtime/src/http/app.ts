@@ -552,6 +552,12 @@ export type LexHttpAppOptions = {
     | "rotateCaseKey"
     | "withCaseDataKey"
   >;
+  caseScheduleService?: Pick<
+    LocalCaseAccessService,
+    | "listCaseSchedule"
+    | "addCaseScheduleEvent"
+    | "deleteCaseScheduleEvent"
+  >;
 };
 
 async function persistWorkflowAuditArtifact(
@@ -2799,6 +2805,149 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           res.status(500).json({
             error:
               "CASE_RENAME_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.get(
+    "/api/cases/:caseId/schedule",
+    async (req, res) => {
+      if (
+        !options.caseScheduleService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_SCHEDULE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json({
+          events:
+            await options
+              .caseScheduleService
+              .listCaseSchedule(
+                responseAuthContext(
+                  res
+                ),
+                String(
+                  req.params.caseId ??
+                    ""
+                )
+              )
+        });
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_SCHEDULE_LIST_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.post(
+    "/api/cases/:caseId/schedule",
+    async (req, res) => {
+      if (
+        !options.caseScheduleService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_SCHEDULE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.status(201).json(
+          await options
+            .caseScheduleService
+            .addCaseScheduleEvent(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                  ""
+              ),
+              {
+                kind:
+                  req.body?.kind,
+                title:
+                  req.body?.title,
+                startsAt:
+                  req.body?.startsAt,
+                location:
+                  req.body?.location,
+                notes:
+                  req.body?.notes
+              }
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_SCHEDULE_CREATE_FAILED"
+          });
+        }
+      }
+    }
+  );
+
+  app.delete(
+    "/api/cases/:caseId/schedule/:eventId",
+    async (req, res) => {
+      if (
+        !options.caseScheduleService
+      ) {
+        res.status(503).json({
+          error:
+            "CASE_SCHEDULE_UNAVAILABLE"
+        });
+        return;
+      }
+      try {
+        res.json(
+          await options
+            .caseScheduleService
+            .deleteCaseScheduleEvent(
+              responseAuthContext(
+                res
+              ),
+              String(
+                req.params.caseId ??
+                  ""
+              ),
+              String(
+                req.params.eventId ??
+                  ""
+              )
+            )
+        );
+      } catch (error) {
+        if (
+          !sendCaseAccessError(
+            res,
+            error
+          )
+        ) {
+          res.status(500).json({
+            error:
+              "CASE_SCHEDULE_DELETE_FAILED"
           });
         }
       }
