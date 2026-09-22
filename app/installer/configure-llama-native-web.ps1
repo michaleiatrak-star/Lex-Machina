@@ -16,6 +16,7 @@ $sourceMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
 $sourceLegalMcp = Join-Path $bootstrapRoot "llama-legal-skills-mcp.py"
 $sourceDocumentsMcp = Join-Path $bootstrapRoot "llama-local-documents-mcp.py"
 $sourceTemplate = Join-Path $bootstrapRoot "mistral-nemo-web-grounded.jinja"
+$sourceBielikTemplate = Join-Path $bootstrapRoot "bielik-web-grounded.jinja"
 $pythonExe = Join-Path $runtime "python\python.exe"
 $pythonScripts = Join-Path $runtime "python\Scripts"
 $uvxExe = Join-Path $pythonScripts "uvx.exe"
@@ -56,6 +57,9 @@ if ($skillCount -ne 32) {
 if (-not (Test-Path -LiteralPath $sourceTemplate -PathType Leaf)) {
   throw "LLAMA_NATIVE_WEB_TEMPLATE_SOURCE_MISSING:$sourceTemplate"
 }
+if (-not (Test-Path -LiteralPath $sourceBielikTemplate -PathType Leaf)) {
+  throw "LLAMA_NATIVE_BIELIK_TEMPLATE_SOURCE_MISSING:$sourceBielikTemplate"
+}
 
 $mcpRoot = Join-Path $localRoot "mcp"
 New-Item -ItemType Directory -Force -Path $mcpRoot | Out-Null
@@ -64,10 +68,12 @@ $mcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
 $legalMcpScript = Join-Path $mcpRoot "llama-legal-skills-mcp.py"
 $documentsMcpScript = Join-Path $mcpRoot "llama-local-documents-mcp.py"
 $templatePath = Join-Path $localRoot "mistral-nemo-web-grounded.jinja"
+$bielikTemplatePath = Join-Path $localRoot "bielik-web-grounded.jinja"
 Copy-Item -LiteralPath $sourceMcp -Destination $mcpScript -Force
 Copy-Item -LiteralPath $sourceLegalMcp -Destination $legalMcpScript -Force
 Copy-Item -LiteralPath $sourceDocumentsMcp -Destination $documentsMcpScript -Force
 Copy-Item -LiteralPath $sourceTemplate -Destination $templatePath -Force
+Copy-Item -LiteralPath $sourceBielikTemplate -Destination $bielikTemplatePath -Force
 New-Item -ItemType Directory -Force -Path $privacyVaultRoot | Out-Null
 
 $mcpConfigPath = Join-Path $localRoot "mcp-servers.json"
@@ -126,6 +132,66 @@ $mcpConfig = [ordered]@{
         PRAWO_PL_MCP_CMD_EU_COMPLIANCE = ('"{0}" -y @matematicsolutions/mcp-eu-compliance@0.4.0' -f $npxCmd)
         PRAWO_PL_MCP_CMD_LEGALIZE = ('"{0}" --from legalize-mcp==0.2.4 legalize-mcp' -f $uvxExe)
       }
+    }
+    saos = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-saos@1.2.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    nsa = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-nsa@1.3.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    isap = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-isap@1.3.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    krs = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-krs@1.1.1")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    eureka = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eureka@0.2.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    kio = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "kio-orzeczenia-mcp==0.4.3", "kio-orzeczenia-mcp")
+      timeout_ms = 120000
+      env = [ordered]@{ PATH = $connectorPath; PYTHONUTF8 = "1" }
+    }
+    uodo = [ordered]@{
+      command = $nodeExe
+      args = @($uodoServer)
+      timeout_ms = 45000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    eu_sparql = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eu-sparql@1.2.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    eu_compliance = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eu-compliance@0.4.0")
+      timeout_ms = 90000
+      env = [ordered]@{ PATH = $connectorPath }
+    }
+    legalize = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "legalize-mcp==0.2.4", "legalize-mcp")
+      timeout_ms = 120000
+      env = [ordered]@{ PATH = $connectorPath; PYTHONUTF8 = "1" }
     }
     uodo_official = [ordered]@{
       command = $nodeExe
@@ -228,6 +294,7 @@ $result = [ordered]@{
   legalSkillsRoot = $skillsRoot
   legalSkillCount = $skillCount
   mistralChatTemplate = $templatePath
+  bielikChatTemplate = $bielikTemplatePath
   exposedTools = @(
     "web_search",
     "web_fetch",
@@ -243,6 +310,16 @@ $result = [ordered]@{
     "documents_privacy_deanonymize_text",
     "documents_privacy_finalize_document_file",
     "prawo-pl-mcp federation",
+    "saos_*",
+    "nsa_*",
+    "isap_*",
+    "krs_*",
+    "eureka_*",
+    "kio_*",
+    "uodo_*",
+    "eu_sparql_*",
+    "eu_compliance_*",
+    "legalize_*",
     "uodo_official"
   )
 } | ConvertTo-Json -Compress
