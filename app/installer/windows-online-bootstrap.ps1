@@ -4,21 +4,6 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# Persist broad llama.cpp-native agent mode for this Windows user. The
-# llama-server process reads these variables directly; Lex Runtime does not
-# inject or broker the agent tools.
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_AGENT",
-  "true",
-  [EnvironmentVariableTarget]::User
-)
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_CORS_ORIGINS",
-  "localhost",
-  [EnvironmentVariableTarget]::User
-)
-$env:LLAMA_ARG_AGENT = "true"
-$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $manifestPath = Join-Path $runtime "release-source.json"
 $requirements = Join-Path $runtime "release-requirements.txt"
@@ -512,5 +497,11 @@ if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_COMPONENT_LOCK_FAILED" }
 
 & (Join-Path $bootstrapRoot "windows-payload-selftest.ps1") -PayloadRoot $runtime
 if ($LASTEXITCODE -ne 0) { throw "BOOTSTRAP_RUNTIME_SELFTEST_FAILED" }
+
+$nativeWebConfigurator = Join-Path $bootstrapRoot "configure-llama-native-web.ps1"
+if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+  throw "BOOTSTRAP_LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING"
+}
+& $nativeWebConfigurator -RuntimeRoot $runtime | Out-Host
 
 Write-Host "LEX_ONLINE_BOOTSTRAP_PASS:LOCAL_AI_OPTIONAL"
