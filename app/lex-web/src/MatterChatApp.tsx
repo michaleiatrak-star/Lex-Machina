@@ -661,6 +661,7 @@ export default function MatterChatApp({
 
   const [cases, setCases] = useState<CaseListItem[]>([]);
   const [caseId, setCaseId] = useState("");
+  const [caseSearch, setCaseSearch] = useState("");
   const [newCaseName, setNewCaseName] = useState("");
   const [caseNameDraft, setCaseNameDraft] = useState("");
   const [caseBusy, setCaseBusy] = useState(false);
@@ -817,6 +818,52 @@ export default function MatterChatApp({
     () => cases.filter((item) => item.caseKind === "MATTER"),
     [cases]
   );
+  const filteredMatterCases = useMemo(() => {
+    const query =
+      caseSearch
+        .trim()
+        .toLocaleLowerCase("pl");
+    if (!query) {
+      return matterCases;
+    }
+    const matches =
+      matterCases.filter(
+        (item) =>
+          (
+            item.displayName ||
+            "Sprawa bez nazwy"
+          )
+            .toLocaleLowerCase("pl")
+            .includes(query) ||
+          item.caseId
+            .toLocaleLowerCase("pl")
+            .includes(query)
+      );
+    const selected =
+      matterCases.find(
+        (item) =>
+          item.caseId ===
+          caseId
+      );
+    if (
+      selected &&
+      !matches.some(
+        (item) =>
+          item.caseId ===
+          selected.caseId
+      )
+    ) {
+      return [
+        selected,
+        ...matches
+      ];
+    }
+    return matches;
+  }, [
+    matterCases,
+    caseSearch,
+    caseId
+  ]);
   const selectedCase = useMemo(
     () => matterCases.find((item) => item.caseId === caseId),
     [matterCases, caseId]
@@ -3055,6 +3102,20 @@ export default function MatterChatApp({
           </div>
           <div className="chat-header-actions">
             <div className="chat-case-switcher">
+              <label className="chat-case-search">
+                <span>Szukaj spraw</span>
+                <input
+                  type="search"
+                  value={caseSearch}
+                  placeholder="Nazwa lub ID sprawy"
+                  aria-label="Szukaj spraw"
+                  onChange={(event) =>
+                    setCaseSearch(
+                      event.target.value
+                    )
+                  }
+                />
+              </label>
               <label>
                 <span>Sprawa</span>
                 <select
@@ -3070,7 +3131,7 @@ export default function MatterChatApp({
                     )
                   }
                 >
-                  {matterCases.map(
+                  {filteredMatterCases.map(
                     (item) => (
                       <option
                         key={
@@ -3089,6 +3150,35 @@ export default function MatterChatApp({
                     )
                   )}
                 </select>
+                {caseSearch.trim() ? (
+                  <small className="chat-case-search-count">
+                    {Math.max(
+                      0,
+                      filteredMatterCases.length -
+                        (
+                          filteredMatterCases.some(
+                            (item) =>
+                              item.caseId ===
+                                caseId &&
+                              !(item.displayName ||
+                                "Sprawa bez nazwy")
+                                .toLocaleLowerCase(
+                                  "pl"
+                                )
+                                .includes(
+                                  caseSearch
+                                    .trim()
+                                    .toLocaleLowerCase(
+                                      "pl"
+                                    )
+                                )
+                          )
+                            ? 1
+                            : 0
+                        )
+                    )} wyników
+                  </small>
+                ) : null}
               </label>
               <button
                 type="button"
