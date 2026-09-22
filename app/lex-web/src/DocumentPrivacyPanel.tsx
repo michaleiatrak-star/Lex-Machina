@@ -630,11 +630,15 @@ export function DocumentPrivacyPanel({
           <p>
             Zdjęcia są od razu kierowane do lokalnego OCR. PDF jest analizowany strona po stronie:
             jeśli ma użyteczną warstwę tekstową, OCR nie jest potrzebny, a strony skanowane są OCR-owane
-            automatycznie. Każdy plik otrzymuje osobny documentId i osobną zaszyfrowaną mapę reidentyfikacji.
+            automatycznie. Gdy lokalny model AI jest skonfigurowany, analizuje wydobyty tekst i uzupełnia
+            wykrywanie danych do anonimizacji — m.in. odmienionych imion i nazwisk, adresów oraz innych
+            identyfikatorów. Do anonimizacji trafiają wyłącznie dokładne fragmenty obecne w tekście źródłowym.
           </p>
           <p>
-            Dla wielu plików najpierw zbierane są decyzje osobno, a przed ich zastosowaniem zobaczysz
-            zbiorczy podgląd: wykrycia automatyczne, ręczne zaznaczenia i końcowy efekt dla każdego pliku.
+            Każdy plik otrzymuje osobny documentId i osobną zaszyfrowaną mapę reidentyfikacji. Model AI
+            nie modyfikuje OCR, offsetów ani vaultu: proponuje wykrycia, a tokenizacja i odwracalne
+            mapowanie pozostają deterministyczne i lokalne. Dla wielu plików przed zastosowaniem zmian
+            zobaczysz zbiorczy podgląd wykryć automatycznych, ręcznych zaznaczeń i końcowego efektu.
           </p>
           {activeFileName ? (
             <small>
