@@ -8,6 +8,9 @@ import https from "node:https";
 import {
   isIP
 } from "node:net";
+import {
+  checkServerIdentity
+} from "node:tls";
 
 const DEFAULT_TIMEOUT_MS =
   12_000;
@@ -293,6 +296,22 @@ export function parseAuxiliarySourceUrl(
   }
 
   if (
+    raw.length >
+      4096 ||
+    /\[(?:LM)?PII:/iu.test(
+      raw
+    ) ||
+    /\[(?:DOCUMENT|CASE KNOWLEDGE|FIRM KNOWLEDGE)\s/iu.test(
+      raw
+    )
+  ) {
+    throw new AuxiliarySourceFetchError(
+      "Auxiliary source URL contains protected context or exceeds the allowed length.",
+      "AUX_SOURCE_URL_INVALID"
+    );
+  }
+
+  if (
     url.protocol !==
       "https:" ||
     url.username ||
@@ -489,6 +508,16 @@ const defaultTransport:
                     .hostname,
                 rejectUnauthorized:
                   true,
+                checkServerIdentity:
+                  (
+                    _hostname,
+                    certificate
+                  ) =>
+                    checkServerIdentity(
+                      target.url
+                        .hostname,
+                      certificate
+                    ),
                 headers: {
                   Host:
                     target.url
