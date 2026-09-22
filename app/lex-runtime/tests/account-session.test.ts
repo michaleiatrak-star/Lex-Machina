@@ -82,14 +82,17 @@ describe(
           )
         ).toEqual([
           "auth",
-          "login",
-          "--claudeai"
+          "login"
         ]);
         expect(
           accountLoginFallbackArgs(
             "anthropic"
           )
-        ).toBeNull();
+        ).toEqual([
+          "auth",
+          "login",
+          "--claudeai"
+        ]);
       }
     );
 
