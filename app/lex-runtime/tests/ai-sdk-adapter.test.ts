@@ -640,8 +640,8 @@ describe("AiSdkProviderAdapter", () => {
         new Error(
           "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
         ),
-        128_000,
-        64_000
+        64_000,
+        32_000
       )
     ).toBe(true);
     expect(
@@ -649,8 +649,8 @@ describe("AiSdkProviderAdapter", () => {
         new Error(
           "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT"
         ),
-        64_000,
-        64_000
+        32_000,
+        32_000
       )
     ).toBe(false);
     expect(
@@ -658,8 +658,8 @@ describe("AiSdkProviderAdapter", () => {
         new Error(
           "LOCAL_MODEL_CONTEXT_OVERFLOW"
         ),
-        128_000,
-        64_000
+        64_000,
+        32_000
       )
     ).toBe(false);
   });
