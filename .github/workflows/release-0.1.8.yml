@@ -1,4 +1,4 @@
-name: Lex Machina 0.1.8 Windows Release
+name: Lex Machina 0.1.8 Windows Online Release
 
 on:
   push:
@@ -152,7 +152,7 @@ jobs:
           cat > release-out/RELEASE-NOTES.md <<'EOF'
           ## Lex Machina 0.1.8
 
-          Windows release containing the accepted Online installer.
+          Windows release containing only the accepted Online installer.
 
           ### Local llama.cpp direct integrations
           - native web_search/web_fetch/web_research with source-grounded citation policy for Mistral NeMo and Bielik;
@@ -161,6 +161,7 @@ jobs:
           - Morfeusz2 grammatical deanonymization for final Polish documents;
           - direct prawo-pl-mcp federation plus individually exposed SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/CELLAR, EU-compliance and Legalize MCP servers;
           - independent official UODO MCP fallback.
+          - Codex CLI and Claude Code are not bundled; exact pinned clients are provisioned only when the user chooses ChatGPT/Claude account login.
 
           Key changes:
           - redesigned login and application navigation;
