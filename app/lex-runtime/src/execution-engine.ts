@@ -118,6 +118,36 @@ function combineSkillPrompt(
     .join("\n\n---\n\n");
 }
 
+export function buildCoreLegalResourcePrompt(
+  resources: ReadonlyMap<
+    string,
+    string
+  >,
+  localModel: boolean
+): string {
+  if (localModel) {
+    return [
+      "# CORE LEGAL RUNTIME CONTRACT",
+      "Lex Machina runtime has already loaded, validated and enforces the mandatory core legal resources listed below.",
+      ...[
+        ...resources.keys()
+      ].map(
+        (resource) =>
+          `- ${resource}: runtime-enforced`
+      ),
+      "Treat runtime privacy, routing, source-verification and finalization gates as authoritative.",
+      "Do not invent a gate result, verified source, citation, tool result or deanonymized personal data."
+    ].join("\n");
+  }
+
+  return [...resources.entries()]
+    .map(
+      ([resource, content]) =>
+        `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
+    )
+    .join("\n\n---\n\n");
+}
+
 export class LexExecutionEngine {
   constructor(
     private readonly registry: LexSkillRegistry,
@@ -877,27 +907,10 @@ export class LexExecutionEngine {
         "local/"
       );
     const coreResourcePrompt =
-      localModel
-        ? [
-            "# CORE LEGAL RUNTIME CONTRACT",
-            "Lex Machina runtime has already loaded, validated and enforces the mandatory core legal resources listed below.",
-            ...[
-              ...session
-                .loadedResources
-                .keys()
-            ].map(
-              (resource) =>
-                `- ${resource}: runtime-enforced`
-            ),
-            "Treat runtime privacy, routing, source-verification and finalization gates as authoritative.",
-            "Do not invent a gate result, verified source, citation, tool result or deanonymized personal data."
-          ].join("\n")
-        : [...session.loadedResources.entries()]
-            .map(
-              ([resource, content]) =>
-                `# CORE LEGAL RESOURCE: ${resource}\n\n${content}`
-            )
-            .join("\n\n---\n\n");
+      buildCoreLegalResourcePrompt(
+        session.loadedResources,
+        localModel
+      );
 
     const promptParts = [
       baseSystemPrompt,
