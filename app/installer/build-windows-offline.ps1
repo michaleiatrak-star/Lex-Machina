@@ -69,6 +69,7 @@ foreach ($file in @(
   "configure-llama-native-web.ps1",
   "llama-web-mcp.py",
   "llama-legal-skills-mcp.py",
+  "llama-local-documents-mcp.py",
   "mistral-nemo-web-grounded.jinja",
   "get-install-state.ps1",
   "installer-state-machine-selftest.ps1",
