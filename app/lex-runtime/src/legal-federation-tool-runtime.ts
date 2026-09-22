@@ -353,16 +353,6 @@ const ASSESS_SOURCE_SCHEMA:
             description:
               "Optional exact proposition for which this source is being assessed."
           },
-          publishedAt: {
-            type: "string",
-            description:
-              "Optional publication date in YYYY-MM-DD when known from the source."
-          },
-          updatedAt: {
-            type: "string",
-            description:
-              "Optional last-update date in YYYY-MM-DD when known from the source."
-          },
 
         }
       }
@@ -1085,24 +1075,6 @@ export class LegalFederationToolRuntime {
             knownTier
               ? "KNOWN_CANONICAL_DOMAIN"
               : "UNKNOWN_DOMAIN_CONSERVATIVE_R3_UNTIL_EDITORIAL_CRITERIA_VERIFIED",
-          ...(typeof call.input
-            .publishedAt ===
-            "string"
-            ? {
-                publishedAt:
-                  call.input
-                    .publishedAt
-              }
-            : {}),
-          ...(typeof call.input
-            .updatedAt ===
-            "string"
-            ? {
-                updatedAt:
-                  call.input
-                    .updatedAt
-              }
-            : {})
         },
         crossCheckStatus
       };
