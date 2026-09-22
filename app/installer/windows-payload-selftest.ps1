@@ -135,6 +135,34 @@ if ($bielikTemplateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
   throw "SELFTEST_LLAMA_BIELIK_GROUNDED_TEMPLATE_INVALID"
 }
 
+$configuratorText = Get-Content -Raw -LiteralPath $llamaWebConfigurator
+[ScriptBlock]::Create($configuratorText) | Out-Null
+foreach ($serverName in @(
+  "web", "legal", "private", "prawo", "saos", "nsa", "isap", "krs",
+  "eureka", "kio", "uodo", "eu_sparql", "eu_compliance", "legalize"
+)) {
+  $pattern = [regex]::Escape($serverName) + "\\s*=\\s*\\[ordered\\]@\\{"
+  if ($configuratorText -notmatch $pattern) {
+    throw "SELFTEST_LLAMA_DIRECT_MCP_SERVER_MISSING:$serverName"
+  }
+}
+foreach ($pin in @(
+  "prawo-pl-mcp==0.1.4",
+  "@matematicsolutions/mcp-saos@1.2.0",
+  "@matematicsolutions/mcp-nsa@1.3.0",
+  "@matematicsolutions/mcp-isap@1.3.0",
+  "@matematicsolutions/mcp-krs@1.1.1",
+  "@matematicsolutions/mcp-eureka@0.2.0",
+  "kio-orzeczenia-mcp==0.4.3",
+  "@matematicsolutions/mcp-eu-sparql@1.2.0",
+  "@matematicsolutions/mcp-eu-compliance@0.4.0",
+  "legalize-mcp==0.2.4"
+)) {
+  if (-not $configuratorText.Contains($pin, [StringComparison]::Ordinal)) {
+    throw "SELFTEST_LLAMA_DIRECT_MCP_PIN_MISSING:$pin"
+  }
+}
+
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
 # Torch load independent native DLL graphs on Windows; production OCR and NER
 # workers are separate processes as well.
