@@ -75,8 +75,12 @@ export class VerificationLedger {
     assertVerificationTierPolicy({
       status:
         record.status,
-      sourceTier:
-        record.sourceTier
+      ...(record.sourceTier
+        ? {
+            sourceTier:
+              record.sourceTier
+          }
+        : {})
     });
 
     if (
