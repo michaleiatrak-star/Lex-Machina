@@ -69,7 +69,8 @@
     "Pillow": "12.3.0",
     "stanza": "1.14.0",
     "torch": "2.14.0",
-    "uv": "0.12.17"
+    "uv": "0.12.17",
+    "morfeusz2": "1.99.15"
   },
   "models": {
     "paddle": [
@@ -190,6 +191,34 @@
         "legal_skills_list"
       ],
       "policy": "ROUTER_FIRST_FAIL_CLOSED_THEN_WEB_VERIFY"
+    },
+    "privateDocuments": {
+      "mode": "DIRECT_LLAMA_MCP",
+      "mediation": "NO_LEX_TOOL_BROKER",
+      "ocr": "LOCAL_PADDLE_OCR_PP_OCRV6",
+      "ner": "LOCAL_STANZA_PL",
+      "vault": "PROCESS_MEMORY_ONLY",
+      "morphology": "MORFEUSZ2_SGJP",
+      "inflectionCases": [
+        "nom",
+        "gen",
+        "dat",
+        "acc",
+        "inst",
+        "loc",
+        "voc"
+      ],
+      "clearPiiToolResultPolicy": "WRITE_FINAL_ARTIFACT_NO_CLEAR_PII_ECHO",
+      "tools": [
+        "private_ocr",
+        "private_ocr_anonymize",
+        "private_anonymize",
+        "private_inflection_contract",
+        "private_finalize_text",
+        "private_finalize_document",
+        "private_vault_status",
+        "private_clear_session"
+      ]
     }
   },
   "systemPrerequisites": {
