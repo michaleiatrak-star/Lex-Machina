@@ -94,6 +94,8 @@ export function WorkspaceManager({
   const [workspace, setWorkspace] = useState<WorkspaceResponse | null>(null);
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
   const [newFolderName, setNewFolderName] = useState("");
+  const [documentSearch, setDocumentSearch] =
+    useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -238,10 +240,69 @@ export function WorkspaceManager({
 
   const visibleItems = useMemo(() => {
     if (!workspace) return [];
+    const query =
+      documentSearch
+        .trim()
+        .toLocaleLowerCase("pl");
     return workspace.items
-      .filter((item) => (workspace.itemLocations[item.itemId] ?? null) === selectedFolder)
-      .sort((a, b) => a.filename.localeCompare(b.filename, "pl"));
-  }, [workspace, selectedFolder]);
+      .filter((item) => {
+        if (query) {
+          return (
+            item.filename
+              .toLocaleLowerCase("pl")
+              .includes(query) ||
+            item.mediaType
+              .toLocaleLowerCase("pl")
+              .includes(query) ||
+            item.itemId
+              .toLocaleLowerCase("pl")
+              .includes(query)
+          );
+        }
+        return (
+          workspace.itemLocations[
+            item.itemId
+          ] ?? null
+        ) === selectedFolder;
+      })
+      .sort((a, b) =>
+        a.filename.localeCompare(
+          b.filename,
+          "pl"
+        )
+      );
+  }, [
+    workspace,
+    selectedFolder,
+    documentSearch
+  ]);
+
+  function itemFolderLabel(
+    item: WorkspaceItem
+  ): string {
+    if (!workspace) {
+      return "Główny katalog";
+    }
+    const folderId =
+      workspace.itemLocations[
+        item.itemId
+      ] ?? null;
+    if (!folderId) {
+      return "Główny katalog";
+    }
+    const folder =
+      folders.find(
+        (entry) =>
+          entry.folderId ===
+          folderId
+      );
+    return folder
+      ? folderPath(
+          folder,
+          folders
+        )
+      : "Główny katalog";
+  }
 
   async function run(action: () => Promise<void>): Promise<void> {
     setBusy(true);
@@ -326,6 +387,20 @@ export function WorkspaceManager({
           </p>
         </div>
         <div className="workspace-header-actions">
+          <label className="workspace-search">
+            <span>Szukaj dokumentów</span>
+            <input
+              type="search"
+              value={documentSearch}
+              placeholder="Nazwa, typ lub ID dokumentu"
+              aria-label="Szukaj dokumentów w sprawie"
+              onChange={(event) =>
+                setDocumentSearch(
+                  event.target.value
+                )
+              }
+            />
+          </label>
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">
               + Dodaj pliki
@@ -416,15 +491,26 @@ export function WorkspaceManager({
         <section className="workspace-items" aria-label="Pliki workspace">
           <div className="workspace-location-line">
             <strong>
-              {selectedFolder
-                ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
-                : "Główny katalog"}
+              {documentSearch.trim()
+                ? "Wyniki w całej sprawie"
+                : selectedFolder
+                  ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
+                  : "Główny katalog"}
             </strong>
-            <span>{visibleItems.length} plików</span>
+            <span>
+              {visibleItems.length}
+              {documentSearch.trim()
+                ? " wyników"
+                : " plików"}
+            </span>
           </div>
 
           {visibleItems.length === 0 ? (
-            <p className="workspace-empty">Ten folder jest pusty.</p>
+            <p className="workspace-empty">
+              {documentSearch.trim()
+                ? "Nie znaleziono dokumentów pasujących do wyszukiwania."
+                : "Ten folder jest pusty."}
+            </p>
           ) : (
             <ul className="workspace-file-list workspace-file-actions-list">
               {visibleItems.map((item) => (
@@ -434,6 +520,13 @@ export function WorkspaceManager({
                     <span>
                       {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
                     </span>
+                    {documentSearch.trim() ? (
+                      <small className="workspace-search-path">
+                        {itemFolderLabel(
+                          item
+                        )}
+                      </small>
+                    ) : null}
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
                         {processingFor(item)
