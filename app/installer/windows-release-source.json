@@ -95,7 +95,7 @@
         "sha256": "186ac886e5cf42a6ca0815e60504f13c7cc95446eb05ac2f1515e388976cebcf",
         "quantization": "Q4_K_M",
         "nativeContext": 131072,
-        "minimumContext": 64000,
+        "minimumContext": 32000,
         "maximumRuntimeContext": 200000,
         "contextExtension": {
           "enabled": true,
@@ -116,7 +116,7 @@
         "sha256": "c16841621efe93c7c8ebf1b374709a96276f3741e649f83ed90131a7b5ad23a8",
         "quantization": "Q4_K_M",
         "nativeContext": 32768,
-        "minimumContext": 64000,
+        "minimumContext": 32000,
         "maximumRuntimeContext": 200000,
         "contextExtension": {
           "enabled": true,
@@ -132,17 +132,18 @@
     "delivery": "USER_INITIATED_AFTER_INSTALL",
     "installRoot": "%LOCALAPPDATA%\\LexMachina\\local-ai",
     "contextSelection": {
-      "minimum": 64000,
+      "minimum": 32000,
       "maximum": 200000,
       "step": 1000,
       "recommendedProfiles": [
+        32000,
         64000,
         96000,
         128000,
         160000,
         200000
       ],
-      "default": 64000
+      "default": 32000
     },
     "networkRequiredOnlyWhenProvisioning": true,
     "applicationUsableWithoutLocalAi": true,
