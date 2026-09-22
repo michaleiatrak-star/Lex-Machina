@@ -8,6 +8,7 @@ import {
   it
 } from "vitest";
 import {
+  localModelListContainsAlias,
   LocalModelRuntime
 } from "./local-model-runtime.js";
 import {
@@ -339,6 +340,38 @@ afterEach(() => {
       }
     );
   }
+});
+
+describe("llama.cpp loaded-model identity", () => {
+  it("accepts only the requested REST alias", () => {
+    expect(
+      localModelListContainsAlias(
+        {
+          data: [
+            {
+              id:
+                "local/mistral-nemo-12b-q4km"
+            }
+          ]
+        },
+        "local/mistral-nemo-12b-q4km"
+      )
+    ).toBe(true);
+
+    expect(
+      localModelListContainsAlias(
+        {
+          data: [
+            {
+              id:
+                "local/bielik-11b-v3-q4km"
+            }
+          ]
+        },
+        "local/mistral-nemo-12b-q4km"
+      )
+    ).toBe(false);
+  });
 });
 
 describe(
