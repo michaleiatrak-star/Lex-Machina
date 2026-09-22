@@ -64,7 +64,7 @@ export type AccountSessionResumeMode =
 export function accountSessionResumeMode(
   _provider?: ProviderId
 ): AccountSessionResumeMode {
-  return "LEX_CONTEXT_ONLY";
+  return "LAST_OR_NEW";
 }
 
 export function isMissingResumableSessionMessage(
@@ -864,13 +864,13 @@ export function codexExecArgs(
   workDir: string,
   outputPath: string,
   model =
-    codexAccountModel()
+    codexAccountModel(),
+  tail: string[] = ["-"]
 ): string[] {
   return [
     "exec",
     "--ignore-user-config",
     "--ignore-rules",
-    "--ephemeral",
     "--disable",
     "plugins",
     "--disable",
@@ -897,7 +897,7 @@ export function codexExecArgs(
     "--json",
     "--output-last-message",
     outputPath,
-    "-"
+    ...tail
   ];
 }
 
@@ -968,6 +968,20 @@ async function resolveCommand(command: string): Promise<string | null> {
     .map((line) => line.trim())
     .find(Boolean);
   return candidate || null;
+}
+
+async function resolveAccountExecutable(
+  provider: ProviderId
+): Promise<string | null> {
+  const command =
+    CLI_NAMES[provider];
+  if (provider === "openai") {
+    return (
+      privateCodexExecutable() ??
+      await resolveCommand(command)
+    );
+  }
+  return resolveCommand(command);
 }
 
 function spawnResolved(
@@ -1098,12 +1112,10 @@ async function runCli(
   cwd?: string,
   abortSignal?: AbortSignal
 ): Promise<RunResult> {
-  const command = CLI_NAMES[provider];
   const executable =
-    provider === "openai"
-      ? privateCodexExecutable() ??
-        await resolveCommand(command)
-      : await resolveCommand(command);
+    await resolveAccountExecutable(
+      provider
+    );
   if (!executable) {
     throw new Error(`ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`);
   }
@@ -1168,17 +1180,10 @@ async function runVisibleWindowsLogin(
   args: string[],
   timeoutMs: number
 ): Promise<RunResult> {
-  const command =
-    CLI_NAMES[provider];
   const executable =
-    provider === "openai"
-      ? privateCodexExecutable() ??
-        await resolveCommand(
-          command
-        )
-      : await resolveCommand(
-          command
-        );
+    await resolveAccountExecutable(
+      provider
+    );
   if (!executable) {
     throw new Error(
       `ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`
@@ -2240,7 +2245,10 @@ export class AccountSessionManager {
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
     const command = CLI_NAMES[provider];
-    const executable = await resolveCommand(command);
+    const executable =
+      await resolveAccountExecutable(
+        provider
+      );
     if (!executable) {
       return {
         provider,
@@ -2441,11 +2449,16 @@ export class AccountSessionManager {
     provider: ProviderId,
     prompt: string,
     abortSignal?: AbortSignal,
-    _continuityKey?: string
+    continuityKey?: string
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
     );
+    const allowExternalTakeover =
+      !continuityKey ||
+      !await hasPinnedAccountSession(
+        provider
+      );
     try {
       if (
         provider === "openai" ||
@@ -2488,48 +2501,178 @@ export class AccountSessionManager {
         let lastFailure:
           Error | null =
             null;
+        let savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+
+        const runCodex = async (
+          candidateModel: string,
+          tail: string[]
+        ): Promise<RunResult> => {
+          await fsp.rm(
+            outputPath,
+            {
+              force: true
+            }
+          ).catch(() => {});
+          return runCli(
+            provider,
+            codexExecArgs(
+              workDir,
+              outputPath,
+              candidateModel,
+              tail
+            ),
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            workDir,
+            abortSignal
+          );
+        };
 
         for (
           const candidateModel
           of candidateModels
         ) {
-          const attempt =
-            await runCli(
-              provider,
-              codexExecArgs(
-                workDir,
-                outputPath,
-                candidateModel
-              ),
-              prompt,
-              COMMAND_TIMEOUT_MS,
-              workDir,
-              abortSignal
-            );
+          let attempt:
+            RunResult | null =
+              null;
 
-          if (
-            attempt.code === 0
-          ) {
-            result =
-              attempt;
-            break;
+          if (savedSessionId) {
+            const resumed =
+              await runCodex(
+                candidateModel,
+                [
+                  "resume",
+                  savedSessionId,
+                  "-"
+                ]
+              );
+            if (
+              resumed.code === 0
+            ) {
+              attempt =
+                resumed;
+            } else {
+              const detail =
+                resumed.stderr +
+                "\n" +
+                resumed.stdout;
+              if (
+                isMissingResumableSessionMessage(
+                  detail
+                )
+              ) {
+                await clearAccountSessionId(
+                  provider,
+                  continuityKey
+                );
+                savedSessionId =
+                  null;
+              } else {
+                const failure =
+                  normalizeCliFailure(
+                    provider,
+                    resumed
+                  );
+                lastFailure =
+                  failure;
+                if (
+                  failure.message
+                    .startsWith(
+                      "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                    )
+                ) {
+                  continue;
+                }
+                throw failure;
+              }
+            }
           }
 
-          const failure =
-            normalizeCliFailure(
-              provider,
-              attempt
-            );
-          lastFailure =
-            failure;
           if (
-            !failure.message
-              .startsWith(
-                "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
-              )
+            !attempt &&
+            allowExternalTakeover
           ) {
+            const latest =
+              await runCodex(
+                candidateModel,
+                [
+                  "resume",
+                  "--last",
+                  "--all",
+                  "-"
+                ]
+              );
+            if (
+              latest.code === 0
+            ) {
+              attempt =
+                latest;
+            } else {
+              const detail =
+                latest.stderr +
+                "\n" +
+                latest.stdout;
+              if (
+                !isMissingResumableSessionMessage(
+                  detail
+                )
+              ) {
+                const failure =
+                  normalizeCliFailure(
+                    provider,
+                    latest
+                  );
+                lastFailure =
+                  failure;
+                if (
+                  failure.message
+                    .startsWith(
+                      "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                    )
+                ) {
+                  continue;
+                }
+                throw failure;
+              }
+            }
+          }
+
+          if (!attempt) {
+            attempt =
+              await runCodex(
+                candidateModel,
+                ["-"]
+              );
+          }
+
+          if (
+            attempt.code !== 0
+          ) {
+            const failure =
+              normalizeCliFailure(
+                provider,
+                attempt
+              );
+            lastFailure =
+              failure;
+            if (
+              failure.message
+                .startsWith(
+                  "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                )
+            ) {
+              continue;
+            }
             throw failure;
           }
+
+          result =
+            attempt;
+          break;
         }
 
         if (!result) {
@@ -2541,8 +2684,18 @@ export class AccountSessionManager {
           );
         }
 
-        // Lex Machina already carries complete conversation history in the
-        // current request. Do not additionally resume a Codex host thread.
+        const threadId =
+          parseCodexThreadId(
+            result.stdout
+          );
+        if (threadId) {
+          await writeAccountSessionId(
+            provider,
+            threadId,
+            continuityKey
+          );
+        }
+
         try {
           const finalText =
             await fsp.readFile(
@@ -2574,7 +2727,7 @@ export class AccountSessionManager {
         const fixedQuery =
           "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
         const lexSystemPrompt =
-          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Use only the current Lex Machina instructions and conversation; do not read or infer context from separate host-session history. Do not access local files, external services or tools.";
+          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
         const commonArgs = [
           "-p",
           fixedQuery,
@@ -2607,8 +2760,115 @@ export class AccountSessionManager {
             abortSignal
           );
 
-        const result =
-          await runClaude([]);
+        let result:
+          RunResult | null =
+            null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+        if (savedSessionId) {
+          result =
+            await runClaude([
+              "--resume",
+              savedSessionId
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider,
+                continuityKey
+              );
+              result =
+                null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
+        }
+
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
+          const latest =
+            await runClaude([
+              "--continue"
+            ]);
+          if (
+            latest.code === 0
+          ) {
+            result =
+              latest;
+          } else {
+            const detail =
+              latest.stderr +
+              "\n" +
+              latest.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                latest
+              );
+            }
+
+            const discoveredSessionId =
+              await discoverLatestClaudeSessionId();
+            if (
+              discoveredSessionId
+            ) {
+              const discovered =
+                await runClaude([
+                  "--resume",
+                  discoveredSessionId
+                ]);
+              if (
+                discovered.code === 0
+              ) {
+                result =
+                  discovered;
+              } else {
+                const discoveredDetail =
+                  discovered.stderr +
+                  "\n" +
+                  discovered.stdout;
+                if (
+                  !isMissingResumableSessionMessage(
+                    discoveredDetail
+                  )
+                ) {
+                  throw normalizeCliFailure(
+                    provider,
+                    discovered
+                  );
+                }
+              }
+            }
+          }
+        }
+
+        if (!result) {
+          result =
+            await runClaude([]);
+        }
 
         if (result.code !== 0) {
           throw normalizeCliFailure(
@@ -2625,15 +2885,34 @@ export class AccountSessionManager {
             "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
           );
         }
+        if (parsed.sessionId) {
+          await writeAccountSessionId(
+            provider,
+            parsed.sessionId,
+            continuityKey
+          );
+        }
         return parsed.text;
       }
 
+      const savedSessionId =
+        await readAccountSessionId(
+          provider,
+          continuityKey
+        );
+      const resumeSessionId =
+        savedSessionId ??
+        (
+          allowExternalTakeover
+            ? await discoverLatestGrokSessionId()
+            : null
+        );
       const grok =
         await runGrokAcp(
           prompt,
           workDir,
           abortSignal,
-          null
+          resumeSessionId
         );
       if (
         !grok.authenticated
@@ -2647,6 +2926,13 @@ export class AccountSessionManager {
       ) {
         throw new Error(
           "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+        );
+      }
+      if (grok.sessionId) {
+        await writeAccountSessionId(
+          provider,
+          grok.sessionId,
+          continuityKey
         );
       }
       return grok.text;
