@@ -1030,17 +1030,9 @@ async function resolveAccountExecutable(
   const command =
     CLI_NAMES[provider];
 
-  if (provider === "anthropic") {
-    // Claude auth is pinned to the bundled client so the subscription-only
-    // --claudeai flow is available and does not depend on a user's older CLI.
-    return (
-      privateClaudeExecutable() ??
-      await resolveCommand(
-        command
-      )
-    );
-  }
-
+  // Match the proven ChatGPT behavior for both account providers:
+  // prefer the user's normally installed official CLI, then fall back to
+  // the private client bundled with Lex Machina on clean machines.
   const systemExecutable =
     await resolveCommand(
       command
@@ -1051,6 +1043,9 @@ async function resolveAccountExecutable(
 
   if (provider === "openai") {
     return privateCodexExecutable();
+  }
+  if (provider === "anthropic") {
+    return privateClaudeExecutable();
   }
   return null;
 }
