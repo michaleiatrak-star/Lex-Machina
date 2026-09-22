@@ -462,7 +462,18 @@ if ([string]$config.model.id -eq "local/mistral-nemo-12b-q4km") {
   }
   $llamaArgs += @(
     "--chat-template-file", $groundedTemplate,
-    "--temp", "0.3"
+    "--temp", "0.2"
+  )
+}
+
+if ([string]$config.model.id -eq "local/bielik-11b-v3-q4km") {
+  $groundedTemplate = Join-Path $PSScriptRoot "bielik-web-grounded.jinja"
+  if (-not (Test-Path -LiteralPath $groundedTemplate -PathType Leaf)) {
+    throw "LLAMA_NATIVE_BIELIK_GROUNDED_TEMPLATE_MISSING:$groundedTemplate"
+  }
+  $llamaArgs += @(
+    "--chat-template-file", $groundedTemplate,
+    "--temp", "0.2"
   )
 }
 
