@@ -1234,11 +1234,7 @@ export function accountLoginFallbackArgs(
     ];
   }
   if (provider === "anthropic") {
-    return [
-      "auth",
-      "login",
-      "--claudeai"
-    ];
+    return null;
   }
   return null;
 }
@@ -1483,177 +1479,36 @@ export function claudeSubscriptionAuthenticated(
     return false;
   }
 
-  const combined =
-    (result.stdout + "\n" + result.stderr)
-      .trim();
   const lower =
-    combined.toLowerCase();
+    (result.stdout + "\n" + result.stderr)
+      .toLowerCase();
 
-  // Never treat Console/API, credentials-file or cloud-provider auth as the
-  // subscription lane. The account transport must not silently become API
-  // billing just because Claude Code can execute a prompt.
-  const explicitlyNonSubscription =
-    [
-      "credentials-file",
-      "anthropic console",
-      "api key",
-      "api_key",
-      "bedrock",
-      "vertex",
-      "foundry"
-    ].some((needle) =>
-      lower.includes(needle)
-    );
-  if (explicitlyNonSubscription) {
-    return false;
-  }
-
-  const jsonStart =
-    combined.indexOf("{");
-  const jsonEnd =
-    combined.lastIndexOf("}");
-  if (
-    jsonStart >= 0 &&
-    jsonEnd > jsonStart
-  ) {
-    try {
-      const payload =
-        JSON.parse(
-          combined.slice(
-            jsonStart,
-            jsonEnd + 1
-          )
-        ) as {
-          loggedIn?: unknown;
-          authMethod?: unknown;
-          apiProvider?: unknown;
-          apiKeySource?: unknown;
-          subscriptionType?: unknown;
-        };
-      if (payload.loggedIn !== true) {
-        return false;
-      }
-
-      const provider =
-        typeof payload.apiProvider ===
-          "string"
-          ? payload.apiProvider
-              .toLowerCase()
-          : "";
-      const method =
-        typeof payload.authMethod ===
-          "string"
-          ? payload.authMethod
-              .toLowerCase()
-          : "";
-      const keySource =
-        typeof payload.apiKeySource ===
-          "string"
-          ? payload.apiKeySource
-              .toLowerCase()
-          : "";
-      const subscription =
-        typeof payload.subscriptionType ===
-          "string"
-          ? payload.subscriptionType
-              .toLowerCase()
-          : "";
-
-      if (
-        provider &&
-        provider !== "firstparty" &&
-        provider !== "first_party"
-      ) {
-        return false;
-      }
-      if (
-        [
-          "api_key",
-          "api-key",
-          "bedrock",
-          "vertex",
-          "foundry"
-        ].includes(method)
-      ) {
-        return false;
-      }
-
-      return (
-        method === "claude.ai" ||
-        method === "oauth_token" ||
-        method === "oauth" ||
-        method === "subscription" ||
-        keySource.includes(
-          "/login managed key"
-        ) ||
-        subscription === "pro" ||
-        subscription === "max" ||
-        subscription.includes(
-          "claude"
-        ) ||
-        (
-          payload.loggedIn === true &&
-          (
-            !provider ||
-            provider === "firstparty" ||
-            provider === "first_party"
-          ) &&
-          (
-            !method ||
-            method === "none"
-          )
-        )
-      );
-    } catch {
-      // Some Claude Code versions use human-readable output. Fall through to
-      // the conservative text parser below.
-    }
-  }
-
-  return (
-    lower.includes(
-      "login method: claude max account"
-    ) ||
-    lower.includes(
-      "login method: claude pro account"
-    ) ||
-    lower.includes(
-      "login method: claude.ai"
-    ) ||
-    (
-      lower.includes(
-        "logged in"
-      ) &&
-      (
-        lower.includes(
-          "claude.ai"
-        ) ||
-        lower.includes(
-          "oauth_token"
-        ) ||
-        lower.includes(
-          "oauth token"
-        )
-      )
-    )
+  // Current Claude Code defines "auth status" by its exit code:
+  // 0 = logged in, 1 = not logged in. Keep only a small fail-closed guard
+  // against explicit non-subscription lanes. The app's login command never
+  // passes --console, so the normal browser flow remains the Claude account
+  // subscription path.
+  return ![
+    "credentials-file",
+    "anthropic console",
+    "\"authmethod\":\"api_key\"",
+    "\"authmethod\": \"api_key\"",
+    "api key",
+    "bedrock",
+    "vertex",
+    "foundry"
+  ].some((needle) =>
+    lower.includes(needle)
   );
 }
-
 async function assertSubscriptionAccount(
   provider: "openai" | "anthropic",
   abortSignal?: AbortSignal
 ): Promise<void> {
-  if (
-    provider === "anthropic" &&
-    claudeAutomationCredentialMode(
-      accountEnvironment(
-        "anthropic"
-      )
-    ) !== "INTERACTIVE"
-  ) {
-    // Claude Code validates the OAuth credential on the actual invocation.
-    // Do not require a separate interactive-session status when setup-token
-    // or refresh-token provisioning is explicitly configured.
+  if (provider === "anthropic") {
+    // The official Claude Code login/status process already owns auth state.
+    // Do not add another custom authentication gate here; the actual Claude
+    // invocation below is the authoritative end-to-end check.
     return;
   }
 
@@ -1682,43 +1537,14 @@ async function assertSubscriptionAccount(
           abortSignal
         );
 
-  let authenticated =
-    provider === "openai"
-      ? (
-          openAiChatGptAuthenticated(
-            result
-          ) ||
-          (
-            result.code === 0 &&
-            await storedCodexChatGptAuthPresent()
-          )
-        )
-      : claudeSubscriptionAuthenticated(
-          result
-        );
-
-  if (
-    provider === "anthropic" &&
-    !authenticated
-  ) {
-    const textStatus =
-      await runCli(
-        provider,
-        [
-          "auth",
-          "status",
-          "--text"
-        ],
-        undefined,
-        STATUS_TIMEOUT_MS,
-        undefined,
-        abortSignal
-      );
-    authenticated =
-      claudeSubscriptionAuthenticated(
-        textStatus
-      );
-  }
+  const authenticated =
+    openAiChatGptAuthenticated(
+      result
+    ) ||
+    (
+      result.code === 0 &&
+      await storedCodexChatGptAuthPresent()
+    );
 
   if (!authenticated) {
     throw new Error(
@@ -2464,31 +2290,6 @@ export class AccountSessionManager {
           undefined,
           STATUS_TIMEOUT_MS
         );
-        if (
-          !claudeSubscriptionAuthenticated(
-            result
-          )
-        ) {
-          const textStatus =
-            await runCli(
-              provider,
-              [
-                "auth",
-                "status",
-                "--text"
-              ],
-              undefined,
-              STATUS_TIMEOUT_MS
-            );
-          if (
-            claudeSubscriptionAuthenticated(
-              textStatus
-            )
-          ) {
-            result =
-              textStatus;
-          }
-        }
       } else {
         const workDir =
           await fsp.mkdtemp(
