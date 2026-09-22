@@ -42,6 +42,7 @@ export type LegalSourceProvenance = {
 };
 
 export type LegalSourceCandidate = {
+  claim?: string;
   title?: string;
   url?: string;
   tier: LegalSourceTier;
