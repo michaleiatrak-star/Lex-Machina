@@ -28,6 +28,9 @@ $sidecar = Require-File "lex-runtime-sidecar.exe"
 $lockPath = Require-File "component-lock.json"
 $appUpdateTransaction = Require-File "bootstrap\app-update-transaction.ps1"
 $appUpdateVerification = Require-File "bootstrap\app-update-verification.ps1"
+$llamaWebConfigurator = Require-File "bootstrap\configure-llama-native-web.ps1"
+$llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
+$llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
 $documentWorker = Require-File "storage\legal_document_worker.py"
@@ -81,6 +84,16 @@ Write-Host "SELFTEST_CODEX_CLI_PASS:$codexVersion"
 Write-Host "SELFTEST_STAGE:python-core"
 & $python $pythonSelftest core | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_CORE_IMPORT_FAILED" }
+
+Write-Host "SELFTEST_STAGE:llama-native-web-mcp"
+& $python $llamaWebMcp --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_WEB_MCP_FAILED" }
+
+$templateText = Get-Content -Raw -LiteralPath $llamaMistralTemplate
+if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
+    $templateText -notmatch "web_research") {
+  throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
+}
 
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
 # Torch load independent native DLL graphs on Windows; production OCR and NER
