@@ -333,6 +333,11 @@ export function WorkspaceManager({
     [workspace]
   );
 
+  const rootFolderName =
+    workspace?.caseDisplayName
+      ?.trim() ||
+    "Sprawa bez nazwy";
+
   const visibleItems =
     useMemo(() => {
       if (!workspace) {
@@ -389,14 +394,14 @@ export function WorkspaceManager({
     item: WorkspaceItem
   ): string {
     if (!workspace) {
-      return "Główny katalog";
+      return rootFolderName;
     }
     const folderId =
       workspace.itemLocations[
         item.itemId
       ] ?? null;
     if (!folderId) {
-      return "Główny katalog";
+      return rootFolderName;
     }
     const folder =
       folders.find(
@@ -405,11 +410,11 @@ export function WorkspaceManager({
           folderId
       );
     return folder
-      ? folderPath(
+      ? `${rootFolderName} / ${folderPath(
           folder,
           folders
-        )
-      : "Główny katalog";
+        )}`
+      : rootFolderName;
   }
 
   async function run(action: () => Promise<void>): Promise<void> {
@@ -499,8 +504,9 @@ export function WorkspaceManager({
           <p className="eyebrow">Struktura katalogów</p>
           <h2>{title}</h2>
           <p>
-            Foldery są logiczną, szyfrowaną strukturą workspace. Pliki pozostają
-            w chronionym magazynie sprawy i nie są przenoszone do jawnych ścieżek.
+            Folder główny ma tę samą nazwę co sprawa: <strong>{rootFolderName}</strong>.
+            Struktura pozostaje szyfrowana, a techniczny identyfikator caseId jest
+            używany wyłącznie wewnętrznie do kluczy i integralności magazynu.
           </p>
         </div>
         <div className="workspace-header-actions">
@@ -630,7 +636,7 @@ export function WorkspaceManager({
             className={selectedFolder === null ? "workspace-folder active" : "workspace-folder"}
             onClick={() => setSelectedFolder(null)}
           >
-            📁 Główny katalog
+            📁 {rootFolderName}
           </button>
           {folders.map((folder) => (
             <div key={folder.folderId} className="workspace-folder-row">
@@ -692,7 +698,7 @@ export function WorkspaceManager({
                   : "Wyniki w bieżącym folderze"
                 : selectedFolder
                   ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
-                  : "Główny katalog"}
+                  : rootFolderName}
             </strong>
             <span>
               {visibleItems.length}
@@ -783,7 +789,7 @@ export function WorkspaceManager({
                           await moveWorkspaceItem(caseId, item.itemId, event.target.value || null);
                         })}
                       >
-                        <option value="">Główny katalog</option>
+                        <option value="">{rootFolderName}</option>
                         {folders.map((folder) => (
                           <option key={folder.folderId} value={folder.folderId}>
                             {folderPath(folder, folders)}
