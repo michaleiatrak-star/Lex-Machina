@@ -329,7 +329,7 @@ const FALLBACK_MODELS: readonly ReleaseLocalModel[] = [
     sha256: "",
     quantization: "Q4_K_M",
     nativeContext: 131_072,
-    minimumContext: 64_000,
+    minimumContext: 32_000,
     maximumRuntimeContext: 200_000,
     license: "Apache-2.0"
   },
@@ -341,7 +341,7 @@ const FALLBACK_MODELS: readonly ReleaseLocalModel[] = [
     sha256: "",
     quantization: "Q4_K_M",
     nativeContext: 32_768,
-    minimumContext: 64_000,
+    minimumContext: 32_000,
     maximumRuntimeContext: 200_000,
     license: "Apache-2.0"
   }
@@ -969,12 +969,12 @@ export class LocalModelRuntime {
     default: number;
   } {
     const policy = this.manifest().localAi?.contextSelection;
-    const minimum = finiteInteger(policy?.minimum) ? policy.minimum : 64_000;
+    const minimum = finiteInteger(policy?.minimum) ? policy.minimum : 32_000;
     const maximum = finiteInteger(policy?.maximum) ? policy.maximum : 200_000;
     const step = finiteInteger(policy?.step) ? policy.step : 1_000;
     const recommendedProfiles = Array.isArray(policy?.recommendedProfiles)
       ? policy.recommendedProfiles.filter(finiteInteger)
-      : [64_000, 96_000, 128_000, 160_000, 200_000];
+      : [32_000, 64_000, 96_000, 128_000, 160_000, 200_000];
     const fallbackDefault =
       minimum;
     const defaultContext = finiteInteger(policy?.default)
