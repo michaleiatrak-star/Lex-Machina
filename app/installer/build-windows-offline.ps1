@@ -71,6 +71,7 @@ foreach ($file in @(
   "llama-legal-skills-mcp.py",
   "llama-private-docs-mcp.py",
   "mistral-nemo-web-grounded.jinja",
+  "bielik-web-grounded.jinja",
   "get-install-state.ps1",
   "installer-state-machine-selftest.ps1",
   "prefetch-release-models.py",
