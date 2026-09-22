@@ -29,6 +29,7 @@ describe(
           "get_federated_legal_document",
           "call_federated_legal_source",
           "assess_legal_source",
+          "fetch_auxiliary_legal_source",
           "federated_legal_coverage"
         ]);
         expect(
@@ -158,14 +159,14 @@ describe(
             .sourceTierCoverage
             .tier2B
         ).toBe(
-          "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED_GENERIC_RETRIEVER_NOT_IMPLEMENTED"
+          "SAFE_AUXILIARY_HTTPS_RETRIEVER_AND_RUNTIME_HARD_GATE_IMPLEMENTED"
         );
         expect(
           payload.policy
             .sourceTierCoverage
             .tier3
         ).toContain(
-          "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED"
+          "SAFE_AUXILIARY_HTTPS_RETRIEVER_AND_RUNTIME_HARD_GATE_IMPLEMENTED"
         );
         expect(
           payload.sources.find(
@@ -304,6 +305,169 @@ describe(
         ).not.toHaveProperty(
           "crossCheckUrl"
         );
+      }
+    );
+
+    it(
+      "fetches an R2B page through the safe auxiliary retriever without upgrading it to verified evidence",
+      async () => {
+        const runtime =
+          new LegalFederationToolRuntime({
+            async fetch(
+              url: string
+            ) {
+              expect(url).toBe(
+                "https://prawo.pl/prawo/example"
+              );
+              return {
+                requestedUrl:
+                  url,
+                finalUrl:
+                  url,
+                contentType:
+                  "text/html; charset=utf-8",
+                bytes: 321,
+                sha256:
+                  "a".repeat(64),
+                fetchedAt:
+                  "2026-09-22T07:30:00.000Z",
+                text:
+                  "Komentarz pomocniczy do art. 5 KC.",
+                publishedAt:
+                  "2026-08-01",
+                updatedAt:
+                  "2026-09-20",
+                redirectCount: 0
+              };
+            }
+          });
+
+        const [result] =
+          await runtime.runTools([
+            {
+              id:
+                "fetch-aux-1",
+              name:
+                "fetch_auxiliary_legal_source",
+              input: {
+                url:
+                  "https://prawo.pl/prawo/example",
+                claim:
+                  "art. 5 KC"
+              }
+            }
+          ]);
+
+        expect(
+          JSON.parse(
+            result?.content ??
+              "{}"
+          )
+        ).toMatchObject({
+          status: "OK",
+          classification:
+            "KNOWN_DOMAIN",
+          candidate: {
+            claim:
+              "art. 5 KC",
+            sourceTier:
+              undefined,
+            tier: "R2B",
+            crossCheckStatus:
+              "PENDING",
+            provenance: {
+              accessMode:
+                "DIRECT_LIVE",
+              updatedAt:
+                "2026-09-20"
+            }
+          },
+          assessment: {
+            auxiliaryOnly:
+              true,
+            canBeSoleLegalBasis:
+              false,
+            canCreateVerifiedMarker:
+              false,
+            higherTierCrossCheckSatisfied:
+              false
+          },
+          retrieval: {
+            sha256:
+              "a".repeat(64),
+            text:
+              "Komentarz pomocniczy do art. 5 KC.",
+            textTruncated:
+              false
+          }
+        });
+      }
+    );
+
+    it(
+      "refuses to use the auxiliary retriever for known R1/R2A URLs or protected case tokens",
+      async () => {
+        const runtime =
+          new LegalFederationToolRuntime({
+            async fetch() {
+              throw new Error(
+                "NETWORK_SHOULD_NOT_RUN"
+              );
+            }
+          });
+
+        const [official] =
+          await runtime.runTools([
+            {
+              id:
+                "fetch-official",
+              name:
+                "fetch_auxiliary_legal_source",
+              input: {
+                url:
+                  "https://eli.gov.pl/eli/DU/2026/1"
+              }
+            }
+          ]);
+        expect(
+          JSON.parse(
+            official?.content ??
+              "{}"
+          )
+        ).toMatchObject({
+          status:
+            "POLICY_BLOCKED",
+          error:
+            "AUX_SOURCE_REQUIRES_R2B_R3"
+        });
+
+        const [protectedInput] =
+          await runtime.runTools([
+            {
+              id:
+                "fetch-protected",
+              name:
+                "fetch_auxiliary_legal_source",
+              input: {
+                url:
+                  "https://prawo.pl/example",
+                claim:
+                  "[PII:PERSON:0001]"
+              }
+            }
+          ]);
+        expect(
+          JSON.parse(
+            protectedInput
+              ?.content ??
+              "{}"
+          )
+        ).toMatchObject({
+          status:
+            "POLICY_BLOCKED",
+          error:
+            "AUX_SOURCE_CASE_DATA_FORBIDDEN"
+        });
       }
     );
 
