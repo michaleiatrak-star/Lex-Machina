@@ -5078,7 +5078,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           )
         ) {
           res.status(422).json({
-            error: "DOCUMENT_REVIEW_FAILED"
+            error: "DOCUMENT_REVIEW_FAILED",
+            description:
+              safeDiagnosticText(
+                error
+              )
           });
         }
       }
