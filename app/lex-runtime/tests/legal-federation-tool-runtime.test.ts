@@ -323,7 +323,7 @@ describe(
           )
         ).toMatchObject({
           status:
-            "SOURCE_UNAVAILABLE",
+            "POLICY_BLOCKED",
           error:
             "LEGAL_SOURCE_CROSSCHECK_REQUIRES_KNOWN_R1_R2A_URL"
         });
