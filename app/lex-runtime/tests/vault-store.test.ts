@@ -14,7 +14,8 @@ import {
   PseudonymizationVault
 } from "../src/privacy/pseudonymizer.js";
 import {
-  EncryptedPrivacyVaultStore
+  EncryptedPrivacyVaultStore,
+  privacyVaultDeanonymizationKeyBinding
 } from "../src/privacy/vault-store.js";
 
 const roots: string[] = [];
@@ -49,6 +50,62 @@ afterEach(() => {
 });
 
 describe("encrypted privacy vault store", () => {
+  it("derives a stable non-secret deanonymization binding from the same privacy key context", () => {
+    const key =
+      Buffer.alloc(
+        32,
+        7
+      );
+    const same =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          CASE_ID,
+        caseDataKey:
+          key,
+        keyVersion: 1
+      });
+    const repeated =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          CASE_ID,
+        caseDataKey:
+          key,
+        keyVersion: 1
+      });
+    const nextVersion =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          CASE_ID,
+        caseDataKey:
+          key,
+        keyVersion: 2
+      });
+    const otherKey =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          CASE_ID,
+        caseDataKey:
+          Buffer.alloc(
+            32,
+            8
+          ),
+        keyVersion: 1
+      });
+
+    expect(same)
+      .toMatch(
+        /^[a-f0-9]{64}$/
+      );
+    expect(repeated)
+      .toBe(same);
+    expect(nextVersion)
+      .not.toBe(same);
+    expect(otherKey)
+      .not.toBe(same);
+
+    key.fill(0);
+  });
+
   it("persists reversible mapping encrypted and restores it after restart", async () => {
     const dir = root();
     const key =
