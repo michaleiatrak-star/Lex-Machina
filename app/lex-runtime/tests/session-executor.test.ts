@@ -16,7 +16,8 @@ import {
   SafeSessionExecutor,
   namespaceDocumentAttachmentTokens,
   publicAuxiliarySourceFromToolResult,
-  publicEvidenceBundle
+  publicEvidenceBundle,
+  reconcileAuxiliarySourcesWithVerification
 } from "../src/session-executor.js";
 
 const roots: string[] = [];
@@ -720,6 +721,111 @@ describe("SafeSessionExecutor", () => {
     expect(result.audit).toMatchObject({
       result: "BLOCKED",
       closed: true
+    });
+  });
+
+  it("confirms auxiliary cross-checks only from actual R1/R2A verification records", () => {
+    const sources = [
+      {
+        claim:
+          "art. 5 KC",
+        sourceUrl:
+          "https://prawo.pl/prawo/example",
+        sourceTier:
+          "R2B" as const,
+        classification:
+          "KNOWN_DOMAIN" as const,
+        classificationBasis:
+          "KNOWN_CANONICAL_DOMAIN",
+        crossCheckStatus:
+          "PENDING" as const,
+        staleOrUndatedWarning:
+          false,
+        higherTierCrossCheckSatisfied:
+          false,
+        conflict:
+          false,
+        instruction:
+          "Auxiliary only."
+      }
+    ];
+
+    const confirmed =
+      reconcileAuxiliarySourcesWithVerification(
+        sources,
+        [
+          {
+            claim:
+              "art. 5 KC",
+            kind:
+              "statute",
+            status:
+              "VERIFIED",
+            sourceUrl:
+              "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+            sourceTier:
+              "R1",
+            fetchedAt:
+              "2026-09-22T06:00:00.000Z"
+          }
+        ]
+      );
+
+    expect(
+      confirmed[0]
+    ).toMatchObject({
+      crossCheckStatus:
+        "CONFIRMED_R1_R2A",
+      crossCheckTier:
+        "R1",
+      crossCheckUrl:
+        "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+      higherTierCrossCheckSatisfied:
+        true
+    });
+
+    const notConfirmed =
+      reconcileAuxiliarySourcesWithVerification(
+        sources,
+        [
+          {
+            claim:
+              "art. 5 KC",
+            kind:
+              "statute",
+            status:
+              "UNVERIFIED",
+            sourceUrl:
+              "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html",
+            sourceTier:
+              "R1",
+            fetchedAt:
+              "2026-09-22T06:00:00.000Z"
+          },
+          {
+            claim:
+              "art. 5 KC",
+            kind:
+              "statute",
+            status:
+              "UNVERIFIED",
+            sourceUrl:
+              "https://prawo.pl/prawo/example",
+            sourceTier:
+              "R2B",
+            fetchedAt:
+              "2026-09-22T06:00:00.000Z"
+          }
+        ]
+      );
+
+    expect(
+      notConfirmed[0]
+    ).toMatchObject({
+      crossCheckStatus:
+        "PENDING",
+      higherTierCrossCheckSatisfied:
+        false
     });
   });
 
