@@ -12,7 +12,8 @@ import {
   parseLocalSseErrorLine,
   parseLocalSseLine,
   parseLocalToolCalls,
-  readLocalSse
+  readLocalSse,
+  shouldRetryLocalAtMinimumContext
 } from "../src/providers/ai-sdk-adapter.js";
 import type { LocalModelRuntime } from "../src/local-model-runtime.js";
 import {
@@ -631,6 +632,36 @@ describe("AiSdkProviderAdapter", () => {
     } finally {
       vi.unstubAllGlobals();
     }
+  });
+
+  it("retries local response timeouts once at the minimum qualified context", () => {
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+        ),
+        128_000,
+        64_000
+      )
+    ).toBe(true);
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_HTTP_RESPONSE_TIMEOUT"
+        ),
+        64_000,
+        64_000
+      )
+    ).toBe(false);
+    expect(
+      shouldRetryLocalAtMinimumContext(
+        new Error(
+          "LOCAL_MODEL_CONTEXT_OVERFLOW"
+        ),
+        128_000,
+        64_000
+      )
+    ).toBe(false);
   });
 
   it("classifies local inference failures into actionable diagnostics", () => {
