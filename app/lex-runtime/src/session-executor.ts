@@ -451,6 +451,100 @@ export function publicAuxiliarySourceFromToolResult(
   };
 }
 
+function normalizedAuxiliaryClaim(
+  value: string
+): string {
+  return value
+    .normalize("NFKC")
+    .toLocaleLowerCase("pl")
+    .replace(/\s+/gu, " ")
+    .trim();
+}
+
+export function reconcileAuxiliarySourcesWithVerification(
+  sources:
+    PublicAuxiliarySourceItem[],
+  records:
+    VerificationRecord[]
+): PublicAuxiliarySourceItem[] {
+  return sources.map(
+    (source) => {
+      if (
+        !source.claim ||
+        source.conflict
+      ) {
+        return {
+          ...source
+        };
+      }
+
+      const claim =
+        normalizedAuxiliaryClaim(
+          source.claim
+        );
+      const verified =
+        [...records]
+          .reverse()
+          .find(
+            (record) =>
+              normalizedAuxiliaryClaim(
+                record.claim
+              ) === claim &&
+              (
+                record.status ===
+                  "VERIFIED" ||
+                record.status ===
+                  "SUPPORTED"
+              ) &&
+              (
+                record.sourceTier ===
+                  "R1" ||
+                record.sourceTier ===
+                  "R2A"
+              ) &&
+              Boolean(
+                record.sourceUrl
+                  ?.trim()
+              )
+          );
+
+      if (
+        !verified ||
+        !verified.sourceUrl ||
+        (
+          verified.sourceTier !==
+            "R1" &&
+          verified.sourceTier !==
+            "R2A"
+        )
+      ) {
+        return {
+          ...source,
+          crossCheckStatus:
+            source.crossCheckStatus ===
+              "NOT_REQUIRED"
+              ? "NOT_REQUIRED"
+              : "PENDING",
+          higherTierCrossCheckSatisfied:
+            false
+        };
+      }
+
+      return {
+        ...source,
+        crossCheckStatus:
+          "CONFIRMED_R1_R2A",
+        crossCheckUrl:
+          verified.sourceUrl,
+        crossCheckTier:
+          verified.sourceTier,
+        higherTierCrossCheckSatisfied:
+          true
+      };
+    }
+  );
+}
+
 export function publicEvidenceBundle(
   records: VerificationRecord[]
 ): PublicEvidenceItem[] {
@@ -1656,6 +1750,11 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     const verificationRecords =
       ledger.all();
+    const publicAuxiliarySources =
+      reconcileAuxiliarySourcesWithVerification(
+        auxiliarySources,
+        verificationRecords
+      );
     const gateI =
       evaluateGateIInvariants({
         events:
@@ -2204,14 +2303,10 @@ export class SafeSessionExecutor implements SessionExecutor {
         unverified: verificationRecords.filter((record) => record.status === "UNVERIFIED").length
       },
       evidence: publicEvidenceBundle(verificationRecords),
-      ...(auxiliarySources.length > 0
+      ...(publicAuxiliarySources.length > 0
         ? {
             auxiliarySources:
-              auxiliarySources.map(
-                (source) => ({
-                  ...source
-                })
-              )
+              publicAuxiliarySources
           }
         : {}),
       context: {
