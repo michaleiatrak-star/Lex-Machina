@@ -171,10 +171,10 @@ LEX_LEGAL_SKILLS_AUTO_POLICY_V1
 19. Jeżeli legal_auto_route, obowiązkowy legal_skill_read albo wymagana weryfikacja źródłowa nie powiedzie się, zastosuj fail-closed: wskaż brak i nie zastępuj go pamięcią modelu.
 
 LEX_LOCAL_DOCUMENT_PRIVACY_POLICY_V1
-20. Dla zeskanowanych dokumentów używaj ocr_local_file albo privacy_ocr_anonymize_file; nie opisuj OCR zamiast wykonać narzędzie.
-21. Dane klienta anonimizuj lokalnie przez privacy_anonymize_text przed użyciem ich w dalszym rozumowaniu, gdy użytkownik żąda anonimizacji albo router wymaga KROK 0A. Surowe wartości pozostają w sejfie DPAPI.
+20. Dla zeskanowanych dokumentów używaj documents_ocr_local_file albo documents_privacy_ocr_anonymize_file; nie opisuj OCR zamiast wykonać narzędzie.
+21. Dane klienta anonimizuj lokalnie przez documents_privacy_anonymize_text przed użyciem ich w dalszym rozumowaniu, gdy użytkownik żąda anonimizacji albo router wymaga KROK 0A. Surowe wartości pozostają w sejfie DPAPI.
 22. W treści roboczej zachowuj tokeny [PII:...]. Gdy gotowy dokument wymaga odmienionej osoby, używaj dokładnie składni {{[PII:PERSON:0001]|case=gen}} z case=nom|gen|dat|acc|inst|loc|voc. Nie zgaduj surowej tożsamości.
-23. Odtworzenie danych wykonuj dopiero na końcu przez privacy_deanonymize_text albo privacy_finalize_document_file. Jeśli resolver fleksji zgłosi błąd w trybie strict, nie publikuj dokumentu jako finalnego.
+23. Odtworzenie danych wykonuj dopiero na końcu przez documents_privacy_deanonymize_text albo documents_privacy_finalize_document_file. Jeśli resolver fleksji zgłosi błąd w trybie strict, nie publikuj dokumentu jako finalnego.
 
 LEX_LEGAL_MCP_FEDERATION_POLICY_V1
 24. Do polskiego i unijnego researchu prawnego preferuj bezpośrednią federację MCP "prawo" przed ogólnym web_search, gdy właściwe źródło jest dostępne.
@@ -236,12 +236,12 @@ $result = [ordered]@{
     "legal_skill_read",
     "legal_skill_search",
     "legal_skills_list",
-    "ocr_local_file",
-    "privacy_anonymize_text",
-    "privacy_ocr_anonymize_file",
-    "privacy_inflect_token",
-    "privacy_deanonymize_text",
-    "privacy_finalize_document_file",
+    "documents_ocr_local_file",
+    "documents_privacy_anonymize_text",
+    "documents_privacy_ocr_anonymize_file",
+    "documents_privacy_inflect_token",
+    "documents_privacy_deanonymize_text",
+    "documents_privacy_finalize_document_file",
     "prawo-pl-mcp federation",
     "uodo_official"
   )
