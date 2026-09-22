@@ -131,8 +131,6 @@ fn installed_skill_overlay() -> Option<PathBuf> {
 fn self_test(root: &Path) -> Result<(), String> {
     required_file(root.join("node").join("node.exe"), "SIDECAR_NODE_MISSING")?;
     required_file(root.join("app").join("dist").join("http").join("server.js"), "SIDECAR_SERVER_MISSING")?;
-    required_file(root.join("app").join("node_modules").join(".bin").join("codex.cmd"), "SIDECAR_CODEX_MISSING")?;
-    required_file(root.join("app").join("node_modules").join(".bin").join("claude.cmd"), "SIDECAR_CLAUDE_MISSING")?;
     required_file(root.join("python").join("python.exe"), "SIDECAR_PYTHON_MISSING")?;
     required_file(root.join("python").join("Scripts").join("uvx.exe"), "SIDECAR_UVX_MISSING")?;
     required_dir(root.join("corpus"), "SIDECAR_CORPUS_MISSING")?;
@@ -146,7 +144,8 @@ fn self_test(root: &Path) -> Result<(), String> {
         "verifiedFiles": verified_files,
         "runtimeNetworkRequiredAfterBootstrap": false,
         "expectedUserActionAfterInstall": "PROVIDER_API_KEY_OR_OPTIONAL_LOCAL_AI_SETUP",
-        "localAiRequiredForApplicationHealth": false
+        "localAiRequiredForApplicationHealth": false,
+        "accountSessionClientsBundled": false
     }));
     Ok(())
 }
