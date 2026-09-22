@@ -15,6 +15,7 @@ import { LexSkillRegistry } from "../src/registry.js";
 import {
   SafeSessionExecutor,
   namespaceDocumentAttachmentTokens,
+  publicAuxiliarySourceFromToolResult,
   publicEvidenceBundle
 } from "../src/session-executor.js";
 
@@ -720,6 +721,103 @@ describe("SafeSessionExecutor", () => {
       result: "BLOCKED",
       closed: true
     });
+  });
+
+  it("exposes only validated auxiliary source assessments to the public response", () => {
+    const source =
+      publicAuxiliarySourceFromToolResult({
+        tool_use_id:
+          "assess-1",
+        content:
+          JSON.stringify({
+            status: "OK",
+            classification:
+              "KNOWN_DOMAIN",
+            candidate: {
+              claim:
+                "Komentarz praktyczny",
+              url:
+                "https://prawo.pl/prawo/example",
+              tier:
+                "R2B",
+              provenance: {
+                classificationBasis:
+                  "KNOWN_CANONICAL_DOMAIN",
+                updatedAt:
+                  "2026-09-01"
+              },
+              crossCheckStatus:
+                "CONFIRMED_R1_R2A",
+              crossCheckUrl:
+                "https://eli.gov.pl/eli/DU/2026/1",
+              crossCheckTier:
+                "R1"
+            },
+            assessment: {
+              auxiliaryOnly:
+                true,
+              staleOrUndatedWarning:
+                false,
+              higherTierCrossCheckSatisfied:
+                true,
+              conflict:
+                false,
+              instruction:
+                "Use only as auxiliary context."
+            }
+          })
+      });
+
+    expect(source).toEqual({
+      claim:
+        "Komentarz praktyczny",
+      sourceUrl:
+        "https://prawo.pl/prawo/example",
+      sourceTier:
+        "R2B",
+      classification:
+        "KNOWN_DOMAIN",
+      classificationBasis:
+        "KNOWN_CANONICAL_DOMAIN",
+      crossCheckStatus:
+        "CONFIRMED_R1_R2A",
+      crossCheckUrl:
+        "https://eli.gov.pl/eli/DU/2026/1",
+      crossCheckTier:
+        "R1",
+      updatedAt:
+        "2026-09-01",
+      staleOrUndatedWarning:
+        false,
+      higherTierCrossCheckSatisfied:
+        true,
+      conflict:
+        false,
+      instruction:
+        "Use only as auxiliary context."
+    });
+
+    expect(
+      publicAuxiliarySourceFromToolResult({
+        tool_use_id:
+          "malformed",
+        content:
+          JSON.stringify({
+            status: "OK",
+            classification:
+              "KNOWN_DOMAIN",
+            candidate: {
+              url:
+                "https://prawo.pl/example",
+              tier: "R1"
+            },
+            assessment: {
+              auxiliaryOnly:
+                false
+            }
+          })
+      })
+    ).toBeNull();
   });
 
   it("sanitizes public evidence metadata without backend evidence bodies", () => {
