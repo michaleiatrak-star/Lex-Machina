@@ -103,11 +103,16 @@ export function isLocalLightweightConversation(
   if (
     !model.startsWith(
       "local/"
-    ) ||
-    hasBoundContext
+    )
   ) {
     return false;
   }
+
+  // Exact trivial chat commands are user intent in their own right. They must
+  // not become expensive legal-workflow requests merely because a case has a
+  // durable workflow/session state attached. The lexical allow-list below is
+  // intentionally narrow; substantive legal requests still use all gates.
+  void hasBoundContext;
 
   const normalized =
     query
@@ -560,7 +565,11 @@ export class LexExecutionEngine {
               }
             ],
             reasoning:
-              "none"
+              "none",
+            localTransport:
+              "json",
+            localMaxOutputTokens:
+              128
           }
         );
       emit(
