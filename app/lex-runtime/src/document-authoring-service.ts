@@ -55,6 +55,8 @@ export type TokenizedDocumentResult = {
     string[];
   text:
     string;
+  deanonymizationKeyBound:
+    true;
 };
 
 export type FinalDocumentResult = {
@@ -355,7 +357,9 @@ export class LocalDocumentAuthoringService {
           validated
             .aliasesUsed,
         text:
-          rendered.text
+          rendered.text,
+        deanonymizationKeyBound:
+          true
       };
     } finally {
       rendered.data.fill(0);
@@ -558,6 +562,15 @@ export class LocalDocumentAuthoringService {
         "GENERATION_CASE_KEY_CHANGED"
       );
     }
+    if (
+      !args.target
+        .deanonymizationKeyBinding
+    ) {
+      throw new Error(
+        "GENERATION_DEANONYMIZATION_KEY_BINDING_MISSING"
+      );
+    }
+
     const currentKeyBinding =
       privacyVaultDeanonymizationKeyBinding({
         caseId:
@@ -569,12 +582,9 @@ export class LocalDocumentAuthoringService {
           args.keyVersion
       });
     const keyBindingVerified =
-      args.target
-        .deanonymizationKeyBinding
-        ? currentKeyBinding ===
-          args.target
-            .deanonymizationKeyBinding
-        : true;
+      currentKeyBinding ===
+        args.target
+          .deanonymizationKeyBinding;
     if (
       !keyBindingVerified
     ) {
@@ -861,12 +871,7 @@ export class LocalDocumentAuthoringService {
               .replaced ?? 0,
           deanonymizationBasis:
             "PRIVACY_VAULT_KEY",
-          keyBindingVerified:
-            Boolean(
-              args.target
-                .deanonymizationKeyBinding
-            ) &&
-            keyBindingVerified
+          keyBindingVerified
         };
       } finally {
         finalPackage
