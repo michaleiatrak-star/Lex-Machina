@@ -172,7 +172,9 @@ describe("G34F1 transaction reauthorization foundation", () => {
             .digest("hex"),
         vaultGeneration: 7,
         caseKeyVersion:
-          legalCase.keyVersion
+          legalCase.keyVersion,
+        deanonymizationKeyBinding:
+          "b".repeat(64)
     };
     const resolver =
       new MutableResolver(
@@ -227,6 +229,13 @@ describe("G34F1 transaction reauthorization foundation", () => {
       authorized.intent.status
     ).toBe("AUTHORIZED");
     expect(
+      authorized.grant
+        .deanonymizationKeyBinding
+    ).toBe(
+      target
+        .deanonymizationKeyBinding
+    );
+    expect(
       Date.parse(
         authorized.session
           .lastFullAuthenticationAt
@@ -236,6 +245,26 @@ describe("G34F1 transaction reauthorization foundation", () => {
     resolver.target = {
       ...resolver.target,
       vaultGeneration: 8
+    };
+    await expect(
+      manager.consumeGrant(
+        {
+          user:
+            actor.user,
+          session:
+            authorized.session
+        },
+        authorized.grant.grantId
+      )
+    ).rejects.toMatchObject({
+      code:
+        "REAUTH_TARGET_CHANGED"
+    });
+
+    resolver.target = {
+      ...target,
+      deanonymizationKeyBinding:
+        "c".repeat(64)
     };
     await expect(
       manager.consumeGrant(
@@ -328,7 +357,9 @@ describe("G34F1 transaction reauthorization foundation", () => {
           "a".repeat(64),
         vaultGeneration: 3,
         caseKeyVersion:
-          legalCase.keyVersion
+          legalCase.keyVersion,
+        deanonymizationKeyBinding:
+          "d".repeat(64)
     };
     const resolver =
       new MutableResolver(
