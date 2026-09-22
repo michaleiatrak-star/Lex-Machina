@@ -5978,7 +5978,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               artifactId
             );
         res.status(201).json({
-          intent
+          intent: {
+            intentId:
+              intent.intentId,
+            caseId:
+              intent.caseId,
+            artifactId:
+              intent.artifactId,
+            artifactFormat:
+              intent
+                .artifactFormat,
+            expiresAt:
+              intent.expiresAt,
+            status:
+              intent.status
+          }
         });
       } catch (error) {
         if (
@@ -6042,8 +6056,26 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               req.body.password
             );
         res.json({
-          grant:
-            result.grant,
+          grant: {
+            grantId:
+              result.grant
+                .grantId,
+            intentId:
+              result.grant
+                .intentId,
+            caseId:
+              result.grant
+                .caseId,
+            artifactId:
+              result.grant
+                .artifactId,
+            artifactFormat:
+              result.grant
+                .artifactFormat,
+            expiresAt:
+              result.grant
+                .expiresAt
+          },
           session:
             result.session
         });
