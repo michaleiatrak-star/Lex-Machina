@@ -88,11 +88,7 @@ describe(
           accountLoginFallbackArgs(
             "anthropic"
           )
-        ).toEqual([
-          "auth",
-          "login",
-          "--claudeai"
-        ]);
+        ).toBeNull();
       }
     );
 
