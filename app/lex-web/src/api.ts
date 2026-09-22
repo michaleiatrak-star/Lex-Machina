@@ -716,6 +716,36 @@ export type BlockedReference = {
   status: string;
 };
 
+export type AuxiliarySourceItem = {
+  claim?: string;
+  sourceUrl: string;
+  sourceTier:
+    | "R2B"
+    | "R3";
+  classification:
+    | "KNOWN_DOMAIN"
+    | "CONSERVATIVE_R3";
+  classificationBasis: string;
+  crossCheckStatus:
+    | "NOT_REQUIRED"
+    | "PENDING"
+    | "CONFIRMED_R1_R2A"
+    | "CONFLICT"
+    | "UNAVAILABLE";
+  crossCheckUrl?: string;
+  crossCheckTier?:
+    | "R1"
+    | "R2A";
+  publishedAt?: string;
+  updatedAt?: string;
+  staleOrUndatedWarning:
+    boolean;
+  higherTierCrossCheckSatisfied:
+    boolean;
+  conflict: boolean;
+  instruction: string;
+};
+
 export type EvidenceItem = {
   claim: string;
   kind: "statute" | "journal" | "case" | "deadline" | "amount";
@@ -801,6 +831,8 @@ export type SessionExecutionResponse = {
     unverified: number;
   };
   evidence: EvidenceItem[];
+  auxiliarySources?:
+    AuxiliarySourceItem[];
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
