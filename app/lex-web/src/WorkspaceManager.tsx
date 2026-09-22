@@ -10,6 +10,11 @@ import {
   type StoredUploadResponse
 } from "./api.js";
 import {
+  filterWorkspaceItems,
+  type DocumentScopeFilter,
+  type DocumentTypeFilter
+} from "./search-filters.js";
+import {
   createWorkspaceFolder,
   deleteWorkspaceFolder,
   deleteWorkspaceItem,
@@ -98,6 +103,20 @@ export function WorkspaceManager({
   const [newFolderName, setNewFolderName] = useState("");
   const [documentSearch, setDocumentSearch] =
     useState("");
+  const [
+    documentScope,
+    setDocumentScope
+  ] =
+    useState<DocumentScopeFilter>(
+      "ALL_CASE"
+    );
+  const [
+    documentType,
+    setDocumentType
+  ] =
+    useState<DocumentTypeFilter>(
+      "ALL"
+    );
   const [knowledgeHits, setKnowledgeHits] =
     useState<CaseKnowledgeHit[]>([]);
   const [
@@ -313,62 +332,37 @@ export function WorkspaceManager({
     [workspace]
   );
 
-  const visibleItems = useMemo(() => {
-    if (!workspace) return [];
-    const query =
-      documentSearch
-        .trim()
-        .toLocaleLowerCase("pl");
-    return workspace.items
-      .filter((item) => {
-        if (query) {
-          const documentId =
-            caseFiles.find(
-              (file) =>
-                file.uploadId ===
-                item.itemId
-            )?.processing
-              ?.documentId;
-          const contentMatch =
-            documentId
-              ? knowledgeHits.some(
-                  (hit) =>
-                    hit.documentId ===
-                    documentId
-                )
-              : false;
-          return (
-            item.filename
-              .toLocaleLowerCase("pl")
-              .includes(query) ||
-            item.mediaType
-              .toLocaleLowerCase("pl")
-              .includes(query) ||
-            item.itemId
-              .toLocaleLowerCase("pl")
-              .includes(query) ||
-            contentMatch
-          );
+  const visibleItems =
+    useMemo(() => {
+      if (!workspace) {
+        return [];
+      }
+      return filterWorkspaceItems(
+        workspace,
+        {
+          query:
+            documentSearch,
+          selectedFolder,
+          scope:
+            documentScope,
+          type:
+            documentType,
+          caseFiles,
+          knowledgeHits
         }
-        return (
-          workspace.itemLocations[
-            item.itemId
-          ] ?? null
-        ) === selectedFolder;
-      })
-      .sort((a, b) =>
-        a.filename.localeCompare(
-          b.filename,
-          "pl"
-        )
+      ).map(
+        (entry) =>
+          entry.item
       );
-  }, [
-    workspace,
-    selectedFolder,
-    documentSearch,
-    caseFiles,
-    knowledgeHits
-  ]);
+    }, [
+      workspace,
+      selectedFolder,
+      documentSearch,
+      documentScope,
+      documentType,
+      caseFiles,
+      knowledgeHits
+    ]);
 
   function knowledgeHitFor(
     item: WorkspaceItem
@@ -505,7 +499,7 @@ export function WorkspaceManager({
             <input
               type="search"
               value={documentSearch}
-              placeholder="Nazwa, typ lub ID dokumentu"
+              placeholder="Nazwa, treść, typ lub ID dokumentu"
               aria-label="Szukaj dokumentów w sprawie"
               onChange={(event) =>
                 setDocumentSearch(
@@ -514,6 +508,83 @@ export function WorkspaceManager({
               }
             />
           </label>
+          <label className="workspace-filter">
+            <span>Zakres</span>
+            <select
+              value={documentScope}
+              disabled={
+                !documentSearch.trim()
+              }
+              aria-label="Zakres wyszukiwania dokumentów"
+              onChange={(event) =>
+                setDocumentScope(
+                  event.target
+                    .value as DocumentScopeFilter
+                )
+              }
+            >
+              <option value="ALL_CASE">
+                Cała sprawa
+              </option>
+              <option value="CURRENT_FOLDER">
+                Bieżący folder
+              </option>
+            </select>
+          </label>
+          <label className="workspace-filter">
+            <span>Typ</span>
+            <select
+              value={documentType}
+              aria-label="Typ dokumentu"
+              onChange={(event) =>
+                setDocumentType(
+                  event.target
+                    .value as DocumentTypeFilter
+                )
+              }
+            >
+              <option value="ALL">
+                Wszystkie
+              </option>
+              <option value="PDF">
+                PDF
+              </option>
+              <option value="OFFICE">
+                Office / ODT
+              </option>
+              <option value="IMAGE">
+                Obrazy
+              </option>
+              <option value="TEXT">
+                Tekst
+              </option>
+              <option value="ARCHIVE">
+                Archiwa
+              </option>
+              <option value="TEMPLATE">
+                Wzory
+              </option>
+            </select>
+          </label>
+          {documentSearch.trim() ||
+          documentType !== "ALL" ||
+          documentScope !== "ALL_CASE" ? (
+            <button
+              type="button"
+              className="chat-secondary-action"
+              onClick={() => {
+                setDocumentSearch("");
+                setDocumentScope(
+                  "ALL_CASE"
+                );
+                setDocumentType(
+                  "ALL"
+                );
+              }}
+            >
+              Wyczyść filtry
+            </button>
+          ) : null}
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">
               + Dodaj pliki
@@ -605,7 +676,10 @@ export function WorkspaceManager({
           <div className="workspace-location-line">
             <strong>
               {documentSearch.trim()
-                ? "Wyniki w całej sprawie"
+                ? documentScope ===
+                    "ALL_CASE"
+                  ? "Wyniki w całej sprawie"
+                  : "Wyniki w bieżącym folderze"
                 : selectedFolder
                   ? folderPath(folders.find((item) => item.folderId === selectedFolder)!, folders)
                   : "Główny katalog"}
