@@ -14,9 +14,17 @@ $localRoot = if ($LocalAiRoot) {
 $bootstrapRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sourceMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
 $sourceLegalMcp = Join-Path $bootstrapRoot "llama-legal-skills-mcp.py"
+$sourceDocumentsMcp = Join-Path $bootstrapRoot "llama-local-documents-mcp.py"
 $sourceTemplate = Join-Path $bootstrapRoot "mistral-nemo-web-grounded.jinja"
 $pythonExe = Join-Path $runtime "python\python.exe"
+$pythonScripts = Join-Path $runtime "python\Scripts"
+$uvxExe = Join-Path $pythonScripts "uvx.exe"
+$nodeDir = Join-Path $runtime "node"
+$nodeExe = Join-Path $nodeDir "node.exe"
+$npxCmd = Join-Path $nodeDir "npx.cmd"
+$uodoServer = Join-Path $runtime "app\dist\uodo-official-mcp-server.js"
 $skillsRoot = Join-Path $runtime "corpus"
+$privacyVaultRoot = Join-Path $localRoot "privacy-vaults"
 
 if (-not (Test-Path -LiteralPath $pythonExe -PathType Leaf)) {
   throw "LLAMA_NATIVE_WEB_PYTHON_MISSING:$pythonExe"
@@ -26,6 +34,14 @@ if (-not (Test-Path -LiteralPath $sourceMcp -PathType Leaf)) {
 }
 if (-not (Test-Path -LiteralPath $sourceLegalMcp -PathType Leaf)) {
   throw "LLAMA_NATIVE_LEGAL_MCP_SOURCE_MISSING:$sourceLegalMcp"
+}
+if (-not (Test-Path -LiteralPath $sourceDocumentsMcp -PathType Leaf)) {
+  throw "LLAMA_NATIVE_DOCUMENTS_MCP_SOURCE_MISSING:$sourceDocumentsMcp"
+}
+foreach ($requiredRuntimeTool in @($uvxExe, $nodeExe, $npxCmd, $uodoServer)) {
+  if (-not (Test-Path -LiteralPath $requiredRuntimeTool -PathType Leaf)) {
+    throw "LLAMA_NATIVE_MCP_RUNTIME_TOOL_MISSING:$requiredRuntimeTool"
+  }
 }
 if (-not (Test-Path -LiteralPath $skillsRoot -PathType Container)) {
   throw "LLAMA_NATIVE_LEGAL_SKILLS_ROOT_MISSING:$skillsRoot"
@@ -46,12 +62,16 @@ New-Item -ItemType Directory -Force -Path $mcpRoot | Out-Null
 
 $mcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
 $legalMcpScript = Join-Path $mcpRoot "llama-legal-skills-mcp.py"
+$documentsMcpScript = Join-Path $mcpRoot "llama-local-documents-mcp.py"
 $templatePath = Join-Path $localRoot "mistral-nemo-web-grounded.jinja"
 Copy-Item -LiteralPath $sourceMcp -Destination $mcpScript -Force
 Copy-Item -LiteralPath $sourceLegalMcp -Destination $legalMcpScript -Force
+Copy-Item -LiteralPath $sourceDocumentsMcp -Destination $documentsMcpScript -Force
 Copy-Item -LiteralPath $sourceTemplate -Destination $templatePath -Force
+New-Item -ItemType Directory -Force -Path $privacyVaultRoot | Out-Null
 
 $mcpConfigPath = Join-Path $localRoot "mcp-servers.json"
+$connectorPath = ($nodeDir + ";" + $pythonScripts + ";" + $env:PATH)
 $mcpConfig = [ordered]@{
   mcpServers = [ordered]@{
     web = [ordered]@{
@@ -69,6 +89,50 @@ $mcpConfig = [ordered]@{
       timeout_ms = 30000
       env = [ordered]@{
         PYTHONUTF8 = "1"
+      }
+    }
+    documents = [ordered]@{
+      command = $pythonExe
+      args = @(
+        "-X", "utf8", $documentsMcpScript,
+        "--runtime-root", $runtime,
+        "--vault-root", $privacyVaultRoot
+      )
+      timeout_ms = 900000
+      env = [ordered]@{
+        PYTHONUTF8 = "1"
+        LEX_PADDLE_MODEL_DIR = (Join-Path $runtime "models\paddle\official_models")
+        STANZA_RESOURCES_DIR = (Join-Path $runtime "models\stanza")
+        PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
+      }
+    }
+    prawo = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "prawo-pl-mcp==0.1.4", "prawo-pl-mcp")
+      timeout_ms = 180000
+      env = [ordered]@{
+        PATH = $connectorPath
+        PYTHONUTF8 = "1"
+        PRAWO_PL_MCP_INIT_TIMEOUT = "180"
+        PRAWO_PL_MCP_TIMEOUT = "90"
+        PRAWO_PL_MCP_CMD_SAOS = ('"{0}" -y @matematicsolutions/mcp-saos@1.2.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_NSA = ('"{0}" -y @matematicsolutions/mcp-nsa@1.3.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_ISAP = ('"{0}" -y @matematicsolutions/mcp-isap@1.3.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_KRS = ('"{0}" -y @matematicsolutions/mcp-krs@1.1.1' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_EUREKA = ('"{0}" -y @matematicsolutions/mcp-eureka@0.2.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_KIO = ('"{0}" --from kio-orzeczenia-mcp==0.4.3 kio-orzeczenia-mcp' -f $uvxExe)
+        PRAWO_PL_MCP_CMD_UODO = ('"{0}" "{1}"' -f $nodeExe, $uodoServer)
+        PRAWO_PL_MCP_CMD_EU_SPARQL = ('"{0}" -y @matematicsolutions/mcp-eu-sparql@1.2.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_EU_COMPLIANCE = ('"{0}" -y @matematicsolutions/mcp-eu-compliance@0.4.0' -f $npxCmd)
+        PRAWO_PL_MCP_CMD_LEGALIZE = ('"{0}" --from legalize-mcp==0.2.4 legalize-mcp' -f $uvxExe)
+      }
+    }
+    uodo_official = [ordered]@{
+      command = $nodeExe
+      args = @($uodoServer)
+      timeout_ms = 45000
+      env = [ordered]@{
+        PATH = $connectorPath
       }
     }
   }
@@ -105,6 +169,18 @@ LEX_LEGAL_SKILLS_AUTO_POLICY_V1
 17. Dla prawa zagranicznego użyj prawny-router-v3 i odpowiednich skilli dziedzinowych; prawo-polskie-v2 dodawaj tylko gdy sprawa obejmuje również prawo polskie.
 18. Po routingu nadal obowiązuje weryfikacja internetowa: treść przepisów, status aktu, Dz.U., daty, progi, kwoty i sygnatury sprawdzaj przez web_research/web_fetch w tej samej turze.
 19. Jeżeli legal_auto_route, obowiązkowy legal_skill_read albo wymagana weryfikacja źródłowa nie powiedzie się, zastosuj fail-closed: wskaż brak i nie zastępuj go pamięcią modelu.
+
+LEX_LOCAL_DOCUMENT_PRIVACY_POLICY_V1
+20. Dla zeskanowanych dokumentów używaj ocr_local_file albo privacy_ocr_anonymize_file; nie opisuj OCR zamiast wykonać narzędzie.
+21. Dane klienta anonimizuj lokalnie przez privacy_anonymize_text przed użyciem ich w dalszym rozumowaniu, gdy użytkownik żąda anonimizacji albo router wymaga KROK 0A. Surowe wartości pozostają w sejfie DPAPI.
+22. W treści roboczej zachowuj tokeny [PII:...]. Gdy gotowy dokument wymaga odmienionej osoby, używaj dokładnie składni {{[PII:PERSON:0001]|case=gen}} z case=nom|gen|dat|acc|inst|loc|voc. Nie zgaduj surowej tożsamości.
+23. Odtworzenie danych wykonuj dopiero na końcu przez privacy_deanonymize_text albo privacy_finalize_document_file. Jeśli resolver fleksji zgłosi błąd w trybie strict, nie publikuj dokumentu jako finalnego.
+
+LEX_LEGAL_MCP_FEDERATION_POLICY_V1
+24. Do polskiego i unijnego researchu prawnego preferuj bezpośrednią federację MCP "prawo" przed ogólnym web_search, gdy właściwe źródło jest dostępne.
+25. Federacja obejmuje SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/CELLAR, EU-compliance i Legalize. Wynik discovery nie zastępuje odczytu dokumentu ani weryfikacji źródła.
+26. Dla UODO dostępny jest również niezależny uodo_official jako fallback do oficjalnego API. Pusty wynik albo awaria MCP nie oznacza nieistnienia dokumentu.
+27. Do zewnętrznych MCP prawnych nie wysyłaj danych klienta, treści akt ani tokenów PII; przekazuj wyłącznie publiczne identyfikatory, sygnatury i neutralne frazy prawne.
 '@
 
 $uiConfigPath = Join-Path $localRoot "llama-ui-config.json"
@@ -145,6 +221,10 @@ $result = [ordered]@{
   uiConfig = $uiConfigPath
   mcpScript = $mcpScript
   legalMcpScript = $legalMcpScript
+  documentsMcpScript = $documentsMcpScript
+  privacyVaultRoot = $privacyVaultRoot
+  legalFederation = "prawo-pl-mcp==0.1.4"
+  legalFederationSources = @("saos","nsa","isap","krs","eureka","kio","uodo","eu-sparql","eu-compliance","legalize")
   legalSkillsRoot = $skillsRoot
   legalSkillCount = $skillCount
   mistralChatTemplate = $templatePath
@@ -155,7 +235,15 @@ $result = [ordered]@{
     "legal_auto_route",
     "legal_skill_read",
     "legal_skill_search",
-    "legal_skills_list"
+    "legal_skills_list",
+    "ocr_local_file",
+    "privacy_anonymize_text",
+    "privacy_ocr_anonymize_file",
+    "privacy_inflect_token",
+    "privacy_deanonymize_text",
+    "privacy_finalize_document_file",
+    "prawo-pl-mcp federation",
+    "uodo_official"
   )
 } | ConvertTo-Json -Compress
 
