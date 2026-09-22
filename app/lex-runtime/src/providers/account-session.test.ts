@@ -148,8 +148,6 @@ describe("provider account-session transport", () => {
         "openai"
       )
     ).toEqual([
-      "-c",
-      'forced_login_method="chatgpt"',
       "login"
     ]);
     expect(
@@ -157,8 +155,6 @@ describe("provider account-session transport", () => {
         "openai"
       )
     ).toEqual([
-      "-c",
-      'forced_login_method="chatgpt"',
       "login",
       "--device-auth"
     ]);
@@ -168,8 +164,7 @@ describe("provider account-session transport", () => {
       )
     ).toEqual([
       "auth",
-      "login",
-      "--claudeai"
+      "login"
     ]);
     expect(
       accountLoginFallbackArgs(
@@ -177,7 +172,8 @@ describe("provider account-session transport", () => {
       )
     ).toEqual([
       "auth",
-      "login"
+      "login",
+      "--claudeai"
     ]);
     expect(
       accountLoginArgs(
