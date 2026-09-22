@@ -1,0 +1,205 @@
+name: Publish Lex Machina 0.1.7 Online Installer
+
+on:
+  push:
+    branches:
+      - "release/0.1.7"
+    paths:
+      - ".release/online-source-sha.txt"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: publish-lex-0.1.7-online
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      RELEASE_TAG: v0.1.7
+      RELEASE_TITLE: Lex Machina v0.1.7
+      ONLINE_ARTIFACT: LexMachina-Windows-Online-Installer
+
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Resolve exact validated source SHA
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_sha="$(tr -d '\r\n ' < .release/online-source-sha.txt)"
+          if [[ ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "ONLINE_RELEASE_SOURCE_SHA_INVALID:$source_sha" >&2
+            exit 1
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/commits/$source_sha" >/dev/null
+          echo "sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "Validated source: $source_sha"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Locate required successful workflow runs for exact source
+        id: runs
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+        run: |
+          set -euo pipefail
+          json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SOURCE_SHA&status=success&per_page=100")"
+
+          find_run() {
+            local path="$1"
+            jq -r --arg path "$path" '
+              [.workflow_runs[]
+                | select(.path == $path)
+                | select(.conclusion == "success")]
+              | sort_by(.run_number)
+              | last
+              | .id // empty
+            ' <<<"$json"
+          }
+
+          runtime_run="$(find_run ".github/workflows/lex-runtime.yml")"
+          structural_run="$(find_run ".github/workflows/f138-structural-audit.yml")"
+          state_run="$(find_run ".github/workflows/g39-installer-state.yml")"
+          online_run="$(find_run ".github/workflows/lex-installer.yml")"
+
+          for item in             "runtime:$runtime_run"             "structural:$structural_run"             "state:$state_run"             "online:$online_run"; do
+            label="${item%%:*}"
+            value="${item#*:}"
+            if [[ -z "$value" ]]; then
+              echo "ONLINE_RELEASE_REQUIRED_GREEN_RUN_MISSING:$label source=$SOURCE_SHA" >&2
+              exit 1
+            fi
+          done
+
+          echo "online=$online_run" >> "$GITHUB_OUTPUT"
+          echo "runtime=$runtime_run" >> "$GITHUB_OUTPUT"
+          echo "structural=$structural_run" >> "$GITHUB_OUTPUT"
+          echo "state=$state_run" >> "$GITHUB_OUTPUT"
+
+      - name: Download exact accepted online installer artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ONLINE_RUN: ${{ steps.runs.outputs.online }}
+        run: |
+          set -euo pipefail
+          mkdir -p release-input release-out
+
+          artifacts="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$ONLINE_RUN/artifacts?per_page=100")"
+          artifact_id="$(jq -r --arg name "$ONLINE_ARTIFACT" '
+            [.artifacts[]
+              | select(.name == $name)
+              | select(.expired == false)]
+            | first
+            | .id // empty
+          ' <<<"$artifacts")"
+
+          if [[ -z "$artifact_id" ]]; then
+            echo "ONLINE_RELEASE_ARTIFACT_NOT_FOUND run=$ONLINE_RUN name=$ONLINE_ARTIFACT" >&2
+            exit 1
+          fi
+
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > release-input/artifact.zip
+          unzip -q release-input/artifact.zip -d release-input/files
+
+      - name: Verify installer receipt and normalize immutable asset
+        shell: bash
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+        run: |
+          set -euo pipefail
+          receipt="$(find release-input/files -type f -name 'SHA256.txt' -print -quit)"
+          installer="$(find release-input/files -type f -iname '*.exe' -print -quit)"
+
+          if [[ -z "$receipt" || ! -f "$receipt" ]]; then
+            echo "ONLINE_RELEASE_RECEIPT_MISSING" >&2
+            exit 1
+          fi
+          if [[ -z "$installer" || ! -f "$installer" ]]; then
+            echo "ONLINE_RELEASE_INSTALLER_MISSING" >&2
+            exit 1
+          fi
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$installer" | awk '{print $1}')"
+          if [[ "$expected" != "$actual" ]]; then
+            echo "ONLINE_RELEASE_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          fi
+
+          cp "$installer" release-out/Lex-Machina-0.1.7-Online-x64-Setup.exe
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          printf '%s\n' "$SOURCE_SHA" > release-out/SOURCE-SHA.txt
+          (
+            cd release-out
+            sha256sum Lex-Machina-0.1.7-Online-x64-Setup.exe > SHA256SUMS-ONLINE.txt
+          )
+
+          echo "ONLINE_RELEASE_ACCEPTED source=$SOURCE_SHA sha256=$actual"
+          cat release-out/SHA256SUMS-ONLINE.txt
+
+      - name: Write online release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES-ONLINE.md <<'EOF'
+          ## Lex Machina 0.1.7 — instalator Online
+
+          To wydanie zawiera zaakceptowany przez CI instalator Windows Online.
+
+          Instalator:
+          - przechodzi build NSIS i kontrolę brandingu;
+          - jest testowany w ścieżce z odstępami i polskim znakiem;
+          - przechodzi scenariusz z istniejącą rejestracją tej samej wersji Pythona;
+          - przechodzi installed-copy online bootstrap acceptance;
+          - jest publikowany wyłącznie po zielonych gate'ach Runtime Validation, F-138, G39 Installer State Machine i Windows Online Installer;
+          - jest publikowany wraz z SHA-256 i dokładnym source SHA.
+
+          Lokalny model AI nie jest instalowany automatycznie. Użytkownik może go uruchomić/provisionować z aplikacji po instalacji.
+
+          Status: prerelease. Produkcyjny Authenticode trust root nie jest skonfigurowany, dlatego instalator nie jest przedstawiany jako produkcyjnie podpisany.
+          EOF
+
+      - name: Create or update immutable-source prerelease
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+        run: |
+          set -euo pipefail
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            ref_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+            if [[ "$ref_sha" != "$SOURCE_SHA" ]]; then
+              echo "ONLINE_RELEASE_TAG_SOURCE_MISMATCH tag=$ref_sha source=$SOURCE_SHA" >&2
+              exit 1
+            fi
+            gh release edit "$RELEASE_TAG"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES-ONLINE.md               --prerelease
+          else
+            gh release create "$RELEASE_TAG"               --target "$SOURCE_SHA"               --title "$RELEASE_TITLE"               --notes-file release-out/RELEASE-NOTES-ONLINE.md               --prerelease
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber             release-out/Lex-Machina-0.1.7-Online-x64-Setup.exe             release-out/CI-SHA256-ONLINE.txt             release-out/SHA256SUMS-ONLINE.txt             release-out/SOURCE-SHA.txt
+
+          gh release view "$RELEASE_TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
+
+      - name: Publish release receipts as CI artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: LexMachina-0.1.7-Online-Published-Receipts
+          path: |
+            release-out/CI-SHA256-ONLINE.txt
+            release-out/SHA256SUMS-ONLINE.txt
+            release-out/SOURCE-SHA.txt
+            release-out/RELEASE-NOTES-ONLINE.md
+          if-no-files-found: error
+          retention-days: 30
