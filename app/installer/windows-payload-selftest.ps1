@@ -33,6 +33,7 @@ $llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
 $llamaLegalMcp = Require-File "bootstrap\llama-legal-skills-mcp.py"
 $llamaPrivateMcp = Require-File "bootstrap\llama-private-docs-mcp.py"
 $llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
+$llamaBielikTemplate = Require-File "bootstrap\bielik-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
 $documentWorker = Require-File "storage\legal_document_worker.py"
@@ -122,6 +123,16 @@ if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
     $templateText -notmatch "private_ocr_anonymize" -or
     $templateText -notmatch "private_finalize_document") {
   throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
+}
+
+$bielikTemplateText = Get-Content -Raw -LiteralPath $llamaBielikTemplate
+if ($bielikTemplateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
+    $bielikTemplateText -notmatch "LEX_LEGAL_SKILLS_AUTO_POLICY_V1" -or
+    $bielikTemplateText -notmatch "LEX_DIRECT_LEGAL_MCP_POLICY_V1" -or
+    $bielikTemplateText -notmatch "LEX_PRIVATE_DOCUMENT_POLICY_V1" -or
+    $bielikTemplateText -notmatch "<tool_call>" -or
+    $bielikTemplateText -notmatch "private_ocr_anonymize") {
+  throw "SELFTEST_LLAMA_BIELIK_GROUNDED_TEMPLATE_INVALID"
 }
 
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
