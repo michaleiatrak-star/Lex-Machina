@@ -136,6 +136,7 @@ export function WorkspaceManager({
     item: WorkspaceItem;
     url?: string;
     text?: string;
+    page?: number;
     supported: boolean;
   } | null>(null);
 
@@ -425,7 +426,10 @@ export function WorkspaceManager({
     }
   }
 
-  async function showPreview(item: WorkspaceItem): Promise<void> {
+  async function showPreview(
+    item: WorkspaceItem,
+    page?: number
+  ): Promise<void> {
     setBusy(true);
     setError("");
     try {
@@ -438,6 +442,9 @@ export function WorkspaceManager({
         setPreview({
           item,
           text: await result.blob.text(),
+          ...(page
+            ? { page }
+            : {}),
           supported: true
         });
         return;
@@ -449,6 +456,9 @@ export function WorkspaceManager({
         setPreview({
           item,
           url: URL.createObjectURL(result.blob),
+          ...(page
+            ? { page }
+            : {}),
           supported: true
         });
         return;
@@ -743,8 +753,21 @@ export function WorkspaceManager({
                     ) : null}
                   </div>
                   <div className="workspace-item-actions">
-                    <button type="button" disabled={busy} onClick={() => void showPreview(item)}>
-                      Podgląd
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() =>
+                        void showPreview(
+                          item,
+                          knowledgeHitFor(
+                            item
+                          )?.pageStart
+                        )
+                      }
+                    >
+                      {knowledgeHitFor(item)
+                        ? `Podgląd s. ${knowledgeHitFor(item)!.pageStart}`
+                        : "Podgląd"}
                     </button>
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
@@ -809,7 +832,12 @@ export function WorkspaceManager({
           <div className="workspace-preview-head">
             <div>
               <strong>{preview.item.filename}</strong>
-              <small>{preview.item.mediaType}</small>
+              <small>
+                {preview.item.mediaType}
+                {preview.page
+                  ? ` · trafienie na s. ${preview.page}`
+                  : ""}
+              </small>
             </div>
             <button type="button" onClick={() => setPreview(null)}>Zamknij</button>
           </div>
@@ -819,7 +847,14 @@ export function WorkspaceManager({
             preview.item.mediaType.startsWith("image/") ? (
               <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
             ) : (
-              <iframe src={preview.url} title={`Podgląd ${preview.item.filename}`} />
+              <iframe
+                src={
+                  preview.page
+                    ? `${preview.url}#page=${preview.page}`
+                    : preview.url
+                }
+                title={`Podgląd ${preview.item.filename}`}
+              />
             )
           ) : (
             <p>
