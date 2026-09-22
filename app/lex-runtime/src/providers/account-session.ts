@@ -1215,12 +1215,11 @@ export function accountLoginArgs(
     return ["login"];
   }
   if (provider === "anthropic") {
-    // Force the Claude.ai subscription OAuth lane. The bundled client is
-    // pinned and supports this flag; do not fall back to API/Console auth.
+    // Match ChatGPT's proven browser-login shape: let the official client
+    // open its native interactive OAuth flow first.
     return [
       "auth",
-      "login",
-      "--claudeai"
+      "login"
     ];
   }
   return ["login"];
@@ -1236,7 +1235,11 @@ export function accountLoginFallbackArgs(
     ];
   }
   if (provider === "anthropic") {
-    return null;
+    return [
+      "auth",
+      "login",
+      "--claudeai"
+    ];
   }
   return null;
 }
