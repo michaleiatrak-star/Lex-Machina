@@ -82,7 +82,8 @@ describe(
           )
         ).toEqual([
           "auth",
-          "login"
+          "login",
+          "--claudeai"
         ]);
         expect(
           accountLoginFallbackArgs(
