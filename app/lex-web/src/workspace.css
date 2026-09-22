@@ -259,6 +259,26 @@
   font-size: 10px;
 }
 
+.workspace-search-snippet {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #52645a;
+  font-size: 10px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.workspace-search-note {
+  margin: 10px 0 0;
+  padding: 9px 12px;
+  border: 1px solid #dfd3ae;
+  border-radius: 10px;
+  background: #fff9e9;
+  color: #705c27;
+  font-size: 11px;
+}
+
 .workspace-item-actions {
   display: flex;
   align-items: center;
