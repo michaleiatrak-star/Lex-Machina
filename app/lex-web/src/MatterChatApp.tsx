@@ -864,6 +864,31 @@ export default function MatterChatApp({
     caseSearch,
     caseId
   ]);
+  const caseSearchMatchCount =
+    useMemo(() => {
+      const query =
+        caseSearch
+          .trim()
+          .toLocaleLowerCase("pl");
+      if (!query) {
+        return matterCases.length;
+      }
+      return matterCases.filter(
+        (item) =>
+          (
+            item.displayName ||
+            "Sprawa bez nazwy"
+          )
+            .toLocaleLowerCase("pl")
+            .includes(query) ||
+          item.caseId
+            .toLocaleLowerCase("pl")
+            .includes(query)
+      ).length;
+    }, [
+      matterCases,
+      caseSearch
+    ]);
   const selectedCase = useMemo(
     () => matterCases.find((item) => item.caseId === caseId),
     [matterCases, caseId]
@@ -3152,31 +3177,7 @@ export default function MatterChatApp({
                 </select>
                 {caseSearch.trim() ? (
                   <small className="chat-case-search-count">
-                    {Math.max(
-                      0,
-                      filteredMatterCases.length -
-                        (
-                          filteredMatterCases.some(
-                            (item) =>
-                              item.caseId ===
-                                caseId &&
-                              !(item.displayName ||
-                                "Sprawa bez nazwy")
-                                .toLocaleLowerCase(
-                                  "pl"
-                                )
-                                .includes(
-                                  caseSearch
-                                    .trim()
-                                    .toLocaleLowerCase(
-                                      "pl"
-                                    )
-                                )
-                          )
-                            ? 1
-                            : 0
-                        )
-                    )} wyników
+                    {caseSearchMatchCount} wyników
                   </small>
                 ) : null}
               </label>
