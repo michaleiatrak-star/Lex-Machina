@@ -35,7 +35,7 @@ describe(
     );
 
     it(
-      "keeps the proven RC14 ChatGPT browser login contract",
+      "keeps the proven RC14 browser login contracts for ChatGPT and Claude",
       () => {
         expect(
           accountLoginArgs(
@@ -76,6 +76,23 @@ describe(
             stderr: ""
           })
         ).toBe(false);
+        expect(
+          accountLoginArgs(
+            "anthropic"
+          )
+        ).toEqual([
+          "auth",
+          "login"
+        ]);
+        expect(
+          accountLoginFallbackArgs(
+            "anthropic"
+          )
+        ).toEqual([
+          "auth",
+          "login",
+          "--claudeai"
+        ]);
       }
     );
 
