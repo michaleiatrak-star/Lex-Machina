@@ -112,7 +112,6 @@ import "./workspace.css";
 
 type TabId =
   | "chat"
-  | "files"
   | "skills"
   | "case"
   | "firm"
@@ -2823,7 +2822,6 @@ export default function MatterChatApp({
         <nav className="chat-tabs" aria-label="Sekcje aplikacji">
           {([
             ["chat", "Czat"],
-            ["files", "Akta"],
             ["skills", "Skille"],
             ["case", "Sprawa"],
             ["firm", "Kancelaria"],
@@ -2836,7 +2834,7 @@ export default function MatterChatApp({
               onClick={() => setActiveTab(id)}
             >
               {label}
-              {id === "files" && documentDropQueue.total > 0 ? (
+              {id === "case" && documentDropQueue.total > 0 ? (
                 <span>{documentDropQueue.total}</span>
               ) : null}
             </button>
@@ -3101,15 +3099,13 @@ export default function MatterChatApp({
             <h1>
               {activeTab === "chat"
                 ? "Czat sprawy"
-                : activeTab === "files"
-                  ? "Akta i foldery sprawy"
-                  : activeTab === "skills"
-                    ? "Routing i skille"
-                    : activeTab === "case"
-                      ? "Dane sprawy"
-                      : activeTab === "firm"
-                        ? "Know-how i wzory kancelarii"
-                        : "Ustawienia"}
+                : activeTab === "skills"
+                  ? "Routing i skille"
+                  : activeTab === "case"
+                    ? "Sprawa i dokumenty"
+                    : activeTab === "firm"
+                      ? "Know-how i wzory kancelarii"
+                      : "Ustawienia"}
             </h1>
           </div>
           <div className="chat-header-actions">
@@ -3709,7 +3705,7 @@ export default function MatterChatApp({
                     )
                   }
                 >
-                  🗂 Akta
+                  🗂 Dokumenty
                 </button>
                 <button
                   type="button"
@@ -4025,44 +4021,6 @@ export default function MatterChatApp({
           </section>
         ) : null}
 
-        {activeTab === "files" ? (
-          <section className="chat-card-stack">
-            <article
-              className="chat-card chat-file-drop-card"
-              onDragOver={(event) => {
-                event.preventDefault();
-                event.dataTransfer.dropEffect = "copy";
-              }}
-              onDrop={handleDrop}
-            >
-              <div>
-                <p className="eyebrow">Dodawanie do akt</p>
-                <h2>Kliknij lub przeciągnij pliki</h2>
-                <p>
-                  Pliki trafiają do zaszyfrowanego magazynu bieżącej sprawy.
-                  OCR i pytanie o prywatność są prowadzone w czacie plik po pliku;
-                  tutaj zarządzasz już zapisanymi aktami i strukturą folderów.
-                </p>
-              </div>
-              <button
-                type="button"
-                className="chat-primary-action"
-                disabled={Boolean(selectedCase?.archivedAt)}
-                onClick={() => fileInputRef.current?.click()}
-              >
-                Otwórz eksplorator
-              </button>
-            </article>
-
-            <WorkspaceManager
-              caseId={caseId}
-              title={`Akta sprawy${selectedCase?.displayName ? ` — ${selectedCase.displayName}` : ""}`}
-              canWrite={canWriteCase(selectedCase)}
-              refreshToken={workspaceRefresh}
-            />
-          </section>
-        ) : null}
-
         {activeTab === "skills" ? (
           <section className="chat-card-stack">
             <article className="chat-card">
@@ -4308,6 +4266,33 @@ export default function MatterChatApp({
               ) : null}
             </article>
 
+            <article
+              className="chat-card chat-file-drop-card"
+              onDragOver={(event) => {
+                event.preventDefault();
+                event.dataTransfer.dropEffect = "copy";
+              }}
+              onDrop={handleDrop}
+            >
+              <div>
+                <p className="eyebrow">Dokumenty sprawy</p>
+                <h2>Kliknij lub przeciągnij pliki</h2>
+                <p>
+                  Pliki trafiają do zaszyfrowanego magazynu bieżącej sprawy.
+                  OCR i pytanie o prywatność są prowadzone w czacie plik po pliku;
+                  w tej samej sekcji zarządzasz zapisanymi dokumentami i folderami.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="chat-primary-action"
+                disabled={Boolean(selectedCase?.archivedAt)}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Otwórz eksplorator
+              </button>
+            </article>
+
             <article className="chat-card">
               <p className="eyebrow">Wiedza w sesji</p>
               <div className="chat-check-row">
@@ -4337,15 +4322,6 @@ export default function MatterChatApp({
                 caseId={caseId}
                 title={`Dokumenty sprawy — ${selectedCase.displayName || "Sprawa bez nazwy"}`}
                 canWrite={canWriteCase(selectedCase)}
-                refreshToken={workspaceRefresh}
-              />
-            ) : null}
-
-            {selectedCase ? (
-              <WorkspaceManager
-                caseId={selectedCase.caseId}
-                title={`Dokumenty sprawy — ${selectedCase.displayName || "Sprawa bez nazwy"}`}
-                canWrite={false}
                 refreshToken={workspaceRefresh}
               />
             ) : null}
