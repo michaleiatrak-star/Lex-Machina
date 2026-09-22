@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: lex-release-0.1.7-online
+  group: lex-release-0.1.7-online-${{ github.sha }}
   cancel-in-progress: false
 
 jobs:
