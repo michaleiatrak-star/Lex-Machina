@@ -316,6 +316,80 @@ describe("G34F1 transaction reauthorization foundation", () => {
     current.auth.close();
   });
 
+  it("rejects a tokenized artifact that has no deanonymization-key binding", async () => {
+    const now = {
+      value: Date.parse(
+        "2026-09-16T10:30:00.000Z"
+      )
+    };
+    const current =
+      fixture(now);
+    const password =
+      "G34F1 brak bindingu 2026";
+    const owner =
+      await current.auth.bootstrap({
+        loginName:
+          "owner-no-binding",
+        displayName:
+          "Owner no binding",
+        password
+      });
+    const actor = {
+      user: owner.user,
+      session: owner.session
+    };
+    const legalCase =
+      await current.cases
+        .createCase(
+          actor,
+          "Reauth no binding"
+        );
+    const resolver =
+      new MutableResolver({
+        caseId:
+          legalCase.caseId,
+        artifactId:
+          "artifact_" +
+          "3".repeat(32),
+        artifactFormat:
+          "docx",
+        state:
+          "TOKENIZED_VALIDATED",
+        tokenizedSha256:
+          "e".repeat(64),
+        vaultGeneration: 1,
+        caseKeyVersion:
+          legalCase.keyVersion
+      });
+    const manager =
+      new DeanonymizationReauthorizationManager(
+        current.auth,
+        current.cases,
+        current.store,
+        resolver,
+        {
+          clock: {
+            now: () =>
+              now.value
+          }
+        }
+      );
+
+    await expect(
+      manager.createIntent(
+        actor,
+        legalCase.caseId,
+        resolver.target
+          .artifactId
+      )
+    ).rejects.toMatchObject({
+      code:
+        "REAUTH_TARGET_NOT_READY"
+    });
+
+    current.auth.close();
+  });
+
   it("expires grants and revokes them automatically with the session", async () => {
     const now = {
       value: Date.parse(
