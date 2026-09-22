@@ -4,6 +4,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   buildCoreLegalResourcePrompt,
+  isLocalLightweightConversation,
   LexExecutionEngine
 } from "../src/execution-engine.js";
 import { LexSkillRegistry } from "../src/registry.js";
@@ -128,6 +129,46 @@ describe("local core resource prompt", () => {
     ).toBeGreaterThan(
       180_000
     );
+  });
+});
+
+describe("local lightweight conversation", () => {
+  it("bypasses the heavy legal prompt only for explicit trivial local chat", () => {
+    expect(
+      isLocalLightweightConversation(
+        "local/mistral-nemo-12b-q4km",
+        "napisz ok",
+        false
+      )
+    ).toBe(true);
+    expect(
+      isLocalLightweightConversation(
+        "local/bielik-11b-v3-q4km",
+        "Cześć!",
+        false
+      )
+    ).toBe(true);
+    expect(
+      isLocalLightweightConversation(
+        "local/mistral-nemo-12b-q4km",
+        "przeanalizuj art. 471 k.c.",
+        false
+      )
+    ).toBe(false);
+    expect(
+      isLocalLightweightConversation(
+        "local/mistral-nemo-12b-q4km",
+        "napisz ok",
+        true
+      )
+    ).toBe(false);
+    expect(
+      isLocalLightweightConversation(
+        "gpt-5.6-luna",
+        "napisz ok",
+        false
+      )
+    ).toBe(false);
   });
 });
 
