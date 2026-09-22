@@ -57,10 +57,22 @@ $componentRows = foreach ($component in $components) {
   }
 }
 
+$releaseSourcePath = Join-Path $root "release-source.json"
+$releaseSource = if (Test-Path -LiteralPath $releaseSourcePath -PathType Leaf) {
+  Get-Content -Raw -LiteralPath $releaseSourcePath | ConvertFrom-Json
+} else {
+  $null
+}
+$applicationVersion = if ($releaseSource -and $releaseSource.applicationVersion) {
+  [string]$releaseSource.applicationVersion
+} else {
+  "UNKNOWN"
+}
+
 $lock = [ordered]@{
   schemaVersion = 4
   status = "RELEASE_CANDIDATE_LOCK"
-  applicationVersion = "0.1.3"
+  applicationVersion = $applicationVersion
   target = "windows-x86_64"
   generatedAt = (Get-Date).ToUniversalTime().ToString("o")
   sourceCommit = if ($env:GITHUB_SHA) { $env:GITHUB_SHA } else { "LOCAL_BUILD" }
@@ -70,6 +82,7 @@ $lock = [ordered]@{
   optionalNetworkActionsAfterInstall = @(
     "LOCAL_AI_PROVISIONING",
     "LOCAL_AI_WEB_RESEARCH",
+    "ACCOUNT_SESSION_CLIENT_PROVISIONING",
     "APPLICATION_UPDATE",
     "SKILL_UPDATE"
   )
