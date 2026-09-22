@@ -27,6 +27,10 @@ import {
 import {
   LegalFederationToolRuntime
 } from "./legal-federation-tool-runtime.js";
+import type {
+  LegalSourceCrossCheckStatus,
+  LegalSourceTier
+} from "./legal-source-policy.js";
 import {
   ReportBlueprintToolRuntime,
   type AcceptedReportBlueprint,
@@ -212,6 +216,32 @@ export type PublicBlockedReference = {
   status: string;
 };
 
+export type PublicAuxiliarySourceItem = {
+  claim?: string;
+  sourceUrl: string;
+  sourceTier:
+    LegalSourceTier;
+  classification:
+    "KNOWN_DOMAIN" |
+    "CONSERVATIVE_R3";
+  classificationBasis:
+    string;
+  crossCheckStatus:
+    LegalSourceCrossCheckStatus;
+  crossCheckUrl?: string;
+  crossCheckTier?:
+    | "R1"
+    | "R2A";
+  publishedAt?: string;
+  updatedAt?: string;
+  staleOrUndatedWarning:
+    boolean;
+  higherTierCrossCheckSatisfied:
+    boolean;
+  conflict: boolean;
+  instruction: string;
+};
+
 export type PublicEvidenceItem = {
   claim: string;
   kind: VerificationRecord["kind"];
@@ -228,6 +258,198 @@ export type PublicEvidenceItem = {
   evidenceHash?: string;
   supportQuoteHash?: string;
 };
+
+export function publicAuxiliarySourceFromToolResult(
+  result:
+    NormalizedToolResult
+): PublicAuxiliarySourceItem | null {
+  let payload:
+    unknown;
+  try {
+    payload =
+      JSON.parse(
+        result.content
+      );
+  } catch {
+    return null;
+  }
+
+  if (
+    !payload ||
+    typeof payload !==
+      "object"
+  ) {
+    return null;
+  }
+
+  const value =
+    payload as {
+      status?: unknown;
+      classification?: unknown;
+      candidate?: {
+        claim?: unknown;
+        url?: unknown;
+        tier?: unknown;
+        provenance?: {
+          classificationBasis?: unknown;
+          publishedAt?: unknown;
+          updatedAt?: unknown;
+        };
+        crossCheckStatus?: unknown;
+        crossCheckUrl?: unknown;
+        crossCheckTier?: unknown;
+      };
+      assessment?: {
+        auxiliaryOnly?: unknown;
+        staleOrUndatedWarning?: unknown;
+        higherTierCrossCheckSatisfied?: unknown;
+        conflict?: unknown;
+        instruction?: unknown;
+      };
+    };
+
+  const candidate =
+    value.candidate;
+  const assessment =
+    value.assessment;
+  const tier =
+    candidate?.tier;
+
+  if (
+    value.status !== "OK" ||
+    assessment
+      ?.auxiliaryOnly !==
+      true ||
+    typeof candidate
+      ?.url !== "string" ||
+    (
+      tier !== "R2B" &&
+      tier !== "R3"
+    ) ||
+    (
+      value.classification !==
+        "KNOWN_DOMAIN" &&
+      value.classification !==
+        "CONSERVATIVE_R3"
+    ) ||
+    typeof candidate
+      .provenance
+      ?.classificationBasis !==
+      "string" ||
+    typeof candidate
+      .crossCheckStatus !==
+      "string" ||
+    typeof assessment
+      .staleOrUndatedWarning !==
+      "boolean" ||
+    typeof assessment
+      .higherTierCrossCheckSatisfied !==
+      "boolean" ||
+    typeof assessment
+      .conflict !==
+      "boolean" ||
+    typeof assessment
+      .instruction !==
+      "string"
+  ) {
+    return null;
+  }
+
+  const crossCheckStatus =
+    candidate
+      .crossCheckStatus;
+  if (
+    crossCheckStatus !==
+      "NOT_REQUIRED" &&
+    crossCheckStatus !==
+      "PENDING" &&
+    crossCheckStatus !==
+      "CONFIRMED_R1_R2A" &&
+    crossCheckStatus !==
+      "CONFLICT" &&
+    crossCheckStatus !==
+      "UNAVAILABLE"
+  ) {
+    return null;
+  }
+
+  return {
+    ...(typeof candidate
+      .claim === "string" &&
+    candidate.claim.trim()
+      ? {
+          claim:
+            candidate.claim
+              .trim()
+        }
+      : {}),
+    sourceUrl:
+      candidate.url,
+    sourceTier:
+      tier,
+    classification:
+      value
+        .classification,
+    classificationBasis:
+      candidate
+        .provenance
+        .classificationBasis,
+    crossCheckStatus,
+    ...(typeof candidate
+      .crossCheckUrl ===
+      "string"
+      ? {
+          crossCheckUrl:
+            candidate
+              .crossCheckUrl
+        }
+      : {}),
+    ...(candidate
+      .crossCheckTier ===
+        "R1" ||
+    candidate
+      .crossCheckTier ===
+        "R2A"
+      ? {
+          crossCheckTier:
+            candidate
+              .crossCheckTier
+        }
+      : {}),
+    ...(typeof candidate
+      .provenance
+      .publishedAt ===
+      "string"
+      ? {
+          publishedAt:
+            candidate
+              .provenance
+              .publishedAt
+        }
+      : {}),
+    ...(typeof candidate
+      .provenance
+      .updatedAt ===
+      "string"
+      ? {
+          updatedAt:
+            candidate
+              .provenance
+              .updatedAt
+        }
+      : {}),
+    staleOrUndatedWarning:
+      assessment
+        .staleOrUndatedWarning,
+    higherTierCrossCheckSatisfied:
+      assessment
+        .higherTierCrossCheckSatisfied,
+    conflict:
+      assessment.conflict,
+    instruction:
+      assessment.instruction
+  };
+}
 
 export function publicEvidenceBundle(
   records: VerificationRecord[]
@@ -295,6 +517,8 @@ export type SessionExecutionResponse = {
     unverified: number;
   };
   evidence: PublicEvidenceItem[];
+  auxiliarySources?:
+    PublicAuxiliarySourceItem[];
   audit: {
     result: "PASS" | "BLOCKED";
     eventCount: number;
@@ -696,6 +920,9 @@ export class SafeSessionExecutor implements SessionExecutor {
     const reportTools = new ReportBlueprintToolRuntime();
     const federationTools =
       this.legalFederationTools;
+    const auxiliarySources:
+      PublicAuxiliarySourceItem[] =
+      [];
 
     const auxiliary =
       await this.auxiliaryScheduler
@@ -986,6 +1213,41 @@ export class SafeSessionExecutor implements SessionExecutor {
                   federationCalls
                 )
             : [];
+
+        for (
+          const result
+          of federationResults
+        ) {
+          const source =
+            publicAuxiliarySourceFromToolResult(
+              result
+            );
+          if (!source) {
+            continue;
+          }
+          const key =
+            [
+              source.sourceUrl,
+              source.claim ?? "",
+              source.crossCheckStatus
+            ].join("|");
+          const exists =
+            auxiliarySources.some(
+              (item) =>
+                [
+                  item.sourceUrl,
+                  item.claim ?? "",
+                  item.crossCheckStatus
+                ].join("|") ===
+                key
+            );
+          if (!exists) {
+            auxiliarySources.push(
+              source
+            );
+          }
+        }
+
         const cachedVerificationResults:
           NormalizedToolResult[] = [];
         const uncachedVerificationCalls:
@@ -1942,6 +2204,16 @@ export class SafeSessionExecutor implements SessionExecutor {
         unverified: verificationRecords.filter((record) => record.status === "UNVERIFIED").length
       },
       evidence: publicEvidenceBundle(verificationRecords),
+      ...(auxiliarySources.length > 0
+        ? {
+            auxiliarySources:
+              auxiliarySources.map(
+                (source) => ({
+                  ...source
+                })
+              )
+          }
+        : {}),
       context: {
         ...contextSelection.report
       },
