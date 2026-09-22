@@ -25,6 +25,7 @@ describe("LegalFederationToolRuntime", () => {
       "get_federated_legal_document",
       "call_federated_legal_source",
       "assess_legal_source",
+      "fetch_auxiliary_legal_source",
       "federated_legal_coverage"
     ]);
     expect(
