@@ -8,7 +8,6 @@ import {
   it
 } from "vitest";
 import {
-  localLlamaAgentArgs,
   localModelListContainsAlias,
   LocalModelRuntime
 } from "./local-model-runtime.js";
@@ -17,18 +16,6 @@ import {
 } from "./providers/model-catalog.js";
 
 const roots: string[] = [];
-
-describe("standalone llama.cpp agent configuration", () => {
-  it("enables native llama-server tools without routing them through Lex", () => {
-    expect(
-      localLlamaAgentArgs()
-    ).toEqual([
-      "--agent",
-      "--cors-origins",
-      "localhost"
-    ]);
-  });
-});
 
 function makeConfig(args: {
   id: string;
