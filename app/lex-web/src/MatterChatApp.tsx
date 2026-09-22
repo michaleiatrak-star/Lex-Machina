@@ -4330,6 +4330,15 @@ export default function MatterChatApp({
             </article>
 
             {selectedCase ? (
+              <WorkspaceManager
+                caseId={caseId}
+                title={`Dokumenty sprawy — ${selectedCase.displayName || "Sprawa bez nazwy"}`}
+                canWrite={canWriteCase(selectedCase)}
+                refreshToken={workspaceRefresh}
+              />
+            ) : null}
+
+            {selectedCase ? (
               <article className="chat-card">
                 <p className="eyebrow">Cykl życia</p>
                 <h2>Zarządzanie sprawą</h2>
