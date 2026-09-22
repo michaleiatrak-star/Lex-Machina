@@ -228,6 +228,9 @@ export function registerWorkspaceRoutes(
       res.json({
         caseId,
         caseKind: data.caseView.caseKind,
+        caseDisplayName:
+          data.caseView.displayName ??
+          "Sprawa bez nazwy",
         folders: data.workspace.folders,
         itemLocations: data.workspace.itemLocations,
         items: [
