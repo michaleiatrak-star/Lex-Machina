@@ -145,7 +145,7 @@
       ],
       "default": 32000
     },
-    "networkRequiredOnlyWhenProvisioning": true,
+    "networkRequiredOnlyWhenProvisioning": false,
     "applicationUsableWithoutLocalAi": true,
     "backendSelection": {
       "allowed": [
@@ -156,6 +156,20 @@
       "default": "AUTO",
       "autoPolicy": "TRY_VULKAN_WHEN_ACCELERATOR_IS_DETECTED_THEN_CPU_FALLBACK",
       "validation": "BACKEND_IS_ACTIVE_ONLY_AFTER_LLAMA_SERVER_HEALTH_AND_TOKENIZER_CALIBRATION"
+    },
+    "networkRequiredForCoreInference": false,
+    "networkRequiredForWebResearch": true,
+    "webResearch": {
+      "transport": "LLAMA_CPP_MCP_STDIO",
+      "tools": [
+        "web_search",
+        "web_fetch",
+        "web_research"
+      ],
+      "defaultSearchProvider": "DUCKDUCKGO_HTML",
+      "optionalSearchProvider": "BRAVE_SEARCH_API",
+      "citationPolicy": "FETCH_BEFORE_CITE_NO_INVENTED_URLS",
+      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED"
     }
   },
   "systemPrerequisites": {
@@ -172,7 +186,7 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_ONLY_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING_AND_UPDATES",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, AND UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
