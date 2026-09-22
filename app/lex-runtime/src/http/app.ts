@@ -5728,6 +5728,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           aliasesUsed:
             tokenized
               .aliasesUsed,
+          deanonymizationKeyBound:
+            tokenized
+              .deanonymizationKeyBound,
           readyForDownload:
             false,
           ...(templateProfile
@@ -6180,6 +6183,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             final.sha256,
           replacements:
             final.replacements,
+          deanonymizationBasis:
+            final
+              .deanonymizationBasis,
+          keyBindingVerified:
+            final
+              .keyBindingVerified,
           ...(downloadTicket
             ? {
                 downloadTicket
