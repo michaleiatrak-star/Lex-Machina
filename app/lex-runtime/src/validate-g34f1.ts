@@ -99,7 +99,9 @@ try {
         "b".repeat(64),
       vaultGeneration: 9,
       caseKeyVersion:
-        legalCase.keyVersion
+        legalCase.keyVersion,
+      deanonymizationKeyBinding:
+        "d".repeat(64)
     };
   let target = {
     ...original
