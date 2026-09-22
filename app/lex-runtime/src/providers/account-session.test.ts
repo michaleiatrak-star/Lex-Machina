@@ -171,11 +171,7 @@ describe("provider account-session transport", () => {
       accountLoginFallbackArgs(
         "anthropic"
       )
-    ).toEqual([
-      "auth",
-      "login",
-      "--claudeai"
-    ]);
+    ).toBeNull();
     expect(
       accountLoginArgs(
         "xai"
@@ -397,6 +393,25 @@ describe("provider account-session transport", () => {
         stderr: ""
       })
     ).toBe(true);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 1,
+        stdout: JSON.stringify({
+          loggedIn: false
+        }),
+        stderr: ""
+      })
+    ).toBe(false);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in via Anthropic Console",
+        stderr: ""
+      })
+    ).toBe(false);
 
     expect(
       claudeSubscriptionAuthenticated({
