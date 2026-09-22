@@ -258,6 +258,7 @@ LEX_PRIVATE_DOCUMENT_POLICY_V1
 28. Gotowy tokenizowany tekst finalizuj przez private_finalize_text, a DOCX/ODT przez private_finalize_document. Jawne PII są wstawiane lokalnie przez Morfeusz/SGJP i nie są zwracane do modelu.
 29. Jeśli Morfeusz nie potrafi wiarygodnie wygenerować wymaganej formy, finalizacja ma się zatrzymać. Przeredaguj zdanie tak, aby token PERSON pozostał w mianowniku, zamiast zgadywać formę.
 30. Po zakończeniu i zapisaniu finalnego artefaktu wyczyść sesję przez private_clear_session, jeżeli nie będzie już potrzebna.
+31. Po private_finalize_text/private_finalize_document nie odczytuj gotowego jawnego artefaktu przez read_file, exec_shell_command ani inne narzędzie. Zwróć użytkownikowi wyłącznie ścieżkę/hash otrzymane z finalizera.
 '@
 
 $uiConfigPath = Join-Path $localRoot "llama-ui-config.json"
