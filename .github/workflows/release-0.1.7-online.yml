@@ -1,0 +1,173 @@
+name: Lex Machina 0.1.7 Online Windows Release
+
+on:
+  push:
+    branches:
+      - "release/0.1.7"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lex-release-0.1.7-online
+  cancel-in-progress: false
+
+jobs:
+  provenance:
+    name: Release provenance contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify 0.1.7 release metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_branch="release/0.1.7"
+          expected_version="0.1.7"
+
+          branch_meta="$(awk -F': ' '$1=="work_branch"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          app_version="$(awk -F': ' '$1=="application_version"{gsub(/"/,"",$2); print $2}' app/lex-version.yaml)"
+          runtime_version="$(node -p "require('./app/lex-runtime/package.json').version")"
+          web_version="$(node -p "require('./app/lex-web/package.json').version")"
+          desktop_version="$(node -p "require('./app/lex-desktop/package.json').version")"
+          tauri_version="$(node -p "require('./app/lex-desktop/src-tauri/tauri.conf.json').version")"
+          installer_version="$(node -p "require('./app/installer/windows-release-source.json').applicationVersion")"
+          cargo_version="$(awk -F' *= *' '$1=="version"{gsub(/"/,"",$2); print $2; exit}' app/lex-desktop/src-tauri/Cargo.toml)"
+
+          [[ "$GITHUB_REF_NAME" == "$expected_branch" ]]
+          [[ "$branch_meta" == "$expected_branch" ]]
+
+          for observed in "$app_version" "$runtime_version" "$web_version" "$desktop_version" "$tauri_version" "$installer_version" "$cargo_version"; do
+            [[ "$observed" == "$expected_version" ]] || {
+              echo "VERSION_MISMATCH expected=$expected_version actual=$observed" >&2
+              exit 1
+            }
+          done
+
+          echo "PROVENANCE_PASS source=$GITHUB_SHA version=$expected_version"
+
+  runtime:
+    name: Runtime validation
+    uses: ./.github/workflows/lex-runtime.yml
+    secrets: inherit
+
+  structural:
+    name: Structural audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+    secrets: inherit
+
+  installer-state:
+    name: Installer state audit
+    uses: ./.github/workflows/g39-installer-state.yml
+    secrets: inherit
+
+  online:
+    name: Accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+    uses: ./.github/workflows/lex-installer.yml
+    secrets: inherit
+
+  publish:
+    name: Publish accepted online installer
+    needs:
+      - provenance
+      - runtime
+      - structural
+      - installer-state
+      - online
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Download accepted online installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input/online
+
+      - name: Verify and stage release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+
+          online_exe="$(find release-input/online -type f -iname '*.exe' -print -quit)"
+          receipt="$(find release-input/online -type f -name 'SHA256.txt' -print -quit)"
+
+          [[ -n "$online_exe" && -f "$online_exe" ]]
+          [[ -n "$receipt" && -f "$receipt" ]]
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$online_exe" | awk '{print $1}')"
+          [[ "$expected" == "$actual" ]] || {
+            echo "ONLINE_RELEASE_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          }
+
+          cp "$online_exe" release-out/Lex-Machina-0.1.7-Online-x64-Setup.exe
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          cp app/installer/windows-release-source.json release-out/windows-release-source.json
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+
+          (
+            cd release-out
+            sha256sum               Lex-Machina-0.1.7-Online-x64-Setup.exe               windows-release-source.json               LEX-VERSION.yaml > SHA256SUMS.txt
+          )
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.7 — Online Windows Installer
+
+          Accepted online Windows installer for Lex Machina 0.1.7.
+
+          Highlights:
+          - redesigned login, navigation and centralized Settings;
+          - sticky model selector and local-model start control in Chat;
+          - searchable matters and documents with content-index search;
+          - execution heartbeat and sanitized diagnostics;
+          - explicit R1/R2A/R2B/R3 source hierarchy enforcement;
+          - SSRF-protected auxiliary R2B/R3 retrieval;
+          - key-bound mechanical deanonymization of final DOCX/ODT from the encrypted privacy vault.
+
+          The model never reconstructs clear PII during final document export. Original values are restored locally and deterministically only after reauthorization and privacy-key binding validation.
+
+          This release is published as a pre-release because production Authenticode trust roots are not configured in the repository.
+          EOF
+
+      - name: Publish v0.1.7 online prerelease
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v0.1.7
+          TITLE: Lex Machina v0.1.7
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
+            [[ "$tag_sha" == "$GITHUB_SHA" ]] || {
+              echo "IMMUTABLE_RELEASE_TAG_MISMATCH tag=$tag_sha source=$GITHUB_SHA" >&2
+              exit 1
+            }
+            gh release edit "$TAG" --title "$TITLE" --notes-file release-out/RELEASE-NOTES.md --prerelease
+          else
+            gh release create "$TAG"               --title "$TITLE"               --notes-file release-out/RELEASE-NOTES.md               --prerelease               --target "$GITHUB_SHA"
+          fi
+
+          gh release upload "$TAG" --clobber             release-out/Lex-Machina-0.1.7-Online-x64-Setup.exe             release-out/SHA256SUMS.txt             release-out/CI-SHA256-ONLINE.txt             release-out/SOURCE-SHA.txt             release-out/LEX-VERSION.yaml             release-out/windows-release-source.json
+
+          gh release view "$TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
