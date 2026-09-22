@@ -1208,7 +1208,9 @@ export default function MatterChatApp({
   useEffect(() => {
     let cancelled = false;
     setModels([]);
-    setModel("");
+    // Keep the user's explicit model choice while the catalog refreshes.
+    // Execution is disabled by modelCatalogLoading, so there is no need to
+    // blank the selection and accidentally fall back to the first model.
     setModelError("");
     setModelCatalogLoading(true);
 
@@ -1352,9 +1354,17 @@ export default function MatterChatApp({
           );
         setModels(sourceModels);
         setModel(
-          sourceModels.find(
-            (item) => item.selectable
-          )?.id ?? ""
+          (current) =>
+            sourceModels.some(
+              (item) =>
+                item.id === current &&
+                item.selectable
+            )
+              ? current
+              : sourceModels.find(
+                  (item) =>
+                    item.selectable
+                )?.id ?? ""
         );
         setModelCatalogLoading(false);
       })
