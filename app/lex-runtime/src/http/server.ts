@@ -474,7 +474,7 @@ export async function startLocalServer(options?: {
           undefined,
           new TemporalSourceFreshnessChecker()
         ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       legalFederationTools
     );
   const documentAstGenerator =
@@ -487,7 +487,7 @@ export async function startLocalServer(options?: {
         new PdfJsDocumentPageSource(),
         new LocalPaddleOcrEngine()
       ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       24_000,
       new CompleteImageIngestor(
         new LocalPaddleImageOcrEngine()
