@@ -69,7 +69,8 @@
     "Pillow": "12.3.0",
     "stanza": "1.14.0",
     "torch": "2.14.0",
-    "uv": "0.12.17"
+    "uv": "0.12.17",
+    "morfeusz2": "1.99.15"
   },
   "models": {
     "paddle": [
@@ -126,7 +127,12 @@
         "delivery": "ON_DEMAND_AFTER_INSTALL",
         "license": "Apache-2.0"
       }
-    ]
+    ],
+    "morphology": {
+      "engine": "Morfeusz2",
+      "version": "1.99.15",
+      "role": "LOCAL_POLISH_INFLECTION_FOR_PRIVATE_DEANONYMIZATION"
+    }
   },
   "localAi": {
     "delivery": "USER_INITIATED_AFTER_INSTALL",
