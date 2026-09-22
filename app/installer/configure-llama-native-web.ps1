@@ -12,24 +12,51 @@ $localRoot = if ($LocalAiRoot) {
 }
 
 $bootstrapRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sourceMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
+$sourceWebMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
 $sourceLegalMcp = Join-Path $bootstrapRoot "llama-legal-skills-mcp.py"
+$sourcePrivateMcp = Join-Path $bootstrapRoot "llama-private-docs-mcp.py"
 $sourceTemplate = Join-Path $bootstrapRoot "mistral-nemo-web-grounded.jinja"
-$pythonExe = Join-Path $runtime "python\python.exe"
-$skillsRoot = Join-Path $runtime "corpus"
 
-if (-not (Test-Path -LiteralPath $pythonExe -PathType Leaf)) {
-  throw "LLAMA_NATIVE_WEB_PYTHON_MISSING:$pythonExe"
+$pythonDir = Join-Path $runtime "python"
+$pythonExe = Join-Path $pythonDir "python.exe"
+$pythonScripts = Join-Path $pythonDir "Scripts"
+$uvxExe = Join-Path $pythonScripts "uvx.exe"
+$nodeDir = Join-Path $runtime "node"
+$nodeExe = Join-Path $nodeDir "node.exe"
+$npxCmd = Join-Path $nodeDir "npx.cmd"
+
+$skillsRoot = Join-Path $runtime "corpus"
+$ocrWorker = Join-Path $runtime "ocr\paddle_worker.py"
+$nerWorker = Join-Path $runtime "privacy\stanza_ner_worker.py"
+$documentWorker = Join-Path $runtime "storage\legal_document_worker.py"
+$paddleModels = Join-Path $runtime "models\paddle\official_models"
+$stanzaModels = Join-Path $runtime "models\stanza"
+$uodoServer = Join-Path $runtime "app\dist\uodo-official-mcp-server.js"
+
+foreach ($required in @(
+  $pythonExe,
+  $sourceWebMcp,
+  $sourceLegalMcp,
+  $sourcePrivateMcp,
+  $sourceTemplate,
+  $ocrWorker,
+  $nerWorker,
+  $documentWorker,
+  $nodeExe,
+  $npxCmd,
+  $uvxExe,
+  $uodoServer
+)) {
+  if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
+    throw "LLAMA_NATIVE_REQUIRED_FILE_MISSING:$required"
+  }
 }
-if (-not (Test-Path -LiteralPath $sourceMcp -PathType Leaf)) {
-  throw "LLAMA_NATIVE_WEB_MCP_SOURCE_MISSING:$sourceMcp"
+foreach ($requiredDir in @($skillsRoot, $paddleModels, $stanzaModels)) {
+  if (-not (Test-Path -LiteralPath $requiredDir -PathType Container)) {
+    throw "LLAMA_NATIVE_REQUIRED_DIR_MISSING:$requiredDir"
+  }
 }
-if (-not (Test-Path -LiteralPath $sourceLegalMcp -PathType Leaf)) {
-  throw "LLAMA_NATIVE_LEGAL_MCP_SOURCE_MISSING:$sourceLegalMcp"
-}
-if (-not (Test-Path -LiteralPath $skillsRoot -PathType Container)) {
-  throw "LLAMA_NATIVE_LEGAL_SKILLS_ROOT_MISSING:$skillsRoot"
-}
+
 $skillCount = @(
   Get-ChildItem -LiteralPath $skillsRoot -Directory |
     Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf }
@@ -37,26 +64,49 @@ $skillCount = @(
 if ($skillCount -ne 32) {
   throw "LLAMA_NATIVE_LEGAL_SKILL_COUNT_INVALID:expected=32:actual=$skillCount"
 }
-if (-not (Test-Path -LiteralPath $sourceTemplate -PathType Leaf)) {
-  throw "LLAMA_NATIVE_WEB_TEMPLATE_SOURCE_MISSING:$sourceTemplate"
-}
 
 $mcpRoot = Join-Path $localRoot "mcp"
+$privateExportRoot = Join-Path $localRoot "private-exports"
 New-Item -ItemType Directory -Force -Path $mcpRoot | Out-Null
+New-Item -ItemType Directory -Force -Path $privateExportRoot | Out-Null
 
-$mcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
+$webMcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
 $legalMcpScript = Join-Path $mcpRoot "llama-legal-skills-mcp.py"
+$privateMcpScript = Join-Path $mcpRoot "llama-private-docs-mcp.py"
 $templatePath = Join-Path $localRoot "mistral-nemo-web-grounded.jinja"
-Copy-Item -LiteralPath $sourceMcp -Destination $mcpScript -Force
+Copy-Item -LiteralPath $sourceWebMcp -Destination $webMcpScript -Force
 Copy-Item -LiteralPath $sourceLegalMcp -Destination $legalMcpScript -Force
+Copy-Item -LiteralPath $sourcePrivateMcp -Destination $privateMcpScript -Force
 Copy-Item -LiteralPath $sourceTemplate -Destination $templatePath -Force
+
+$sharedPath = "$nodeDir;$pythonScripts;$env:PATH"
+$externalEnv = [ordered]@{
+  PATH = $sharedPath
+  PYTHONUTF8 = "1"
+  NO_COLOR = "1"
+}
+$prawoEnv = [ordered]@{
+  PATH = $sharedPath
+  PYTHONUTF8 = "1"
+  NO_COLOR = "1"
+  PRAWO_PL_MCP_CMD_SAOS = ('"{0}" -y @matematicsolutions/mcp-saos@1.2.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_NSA = ('"{0}" -y @matematicsolutions/mcp-nsa@1.3.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_ISAP = ('"{0}" -y @matematicsolutions/mcp-isap@1.3.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_KRS = ('"{0}" -y @matematicsolutions/mcp-krs@1.1.1' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_EUREKA = ('"{0}" -y @matematicsolutions/mcp-eureka@0.2.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_KIO = ('"{0}" --from kio-orzeczenia-mcp==0.4.3 kio-orzeczenia-mcp' -f $uvxExe)
+  PRAWO_PL_MCP_CMD_UODO = ('"{0}" "{1}"' -f $nodeExe, $uodoServer)
+  PRAWO_PL_MCP_CMD_EU_SPARQL = ('"{0}" -y @matematicsolutions/mcp-eu-sparql@1.2.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_EU_COMPLIANCE = ('"{0}" -y @matematicsolutions/mcp-eu-compliance@0.4.0' -f $npxCmd)
+  PRAWO_PL_MCP_CMD_LEGALIZE = ('"{0}" --from legalize-mcp==0.2.4 legalize-mcp' -f $uvxExe)
+}
 
 $mcpConfigPath = Join-Path $localRoot "mcp-servers.json"
 $mcpConfig = [ordered]@{
   mcpServers = [ordered]@{
     web = [ordered]@{
       command = $pythonExe
-      args = @("-X", "utf8", $mcpScript)
+      args = @("-X", "utf8", $webMcpScript)
       timeout_ms = 45000
       env = [ordered]@{
         PYTHONUTF8 = "1"
@@ -71,11 +121,95 @@ $mcpConfig = [ordered]@{
         PYTHONUTF8 = "1"
       }
     }
+    private = [ordered]@{
+      command = $pythonExe
+      args = @("-X", "utf8", $privateMcpScript)
+      timeout_ms = 300000
+      env = [ordered]@{
+        PYTHONUTF8 = "1"
+        LEX_PRIVATE_OCR_WORKER = $ocrWorker
+        LEX_PRIVATE_NER_WORKER = $nerWorker
+        LEX_PRIVATE_DOC_WORKER = $documentWorker
+        LEX_PRIVATE_EXPORT_DIR = $privateExportRoot
+        LEX_PADDLE_MODEL_DIR = $paddleModels
+        STANZA_RESOURCES_DIR = $stanzaModels
+      }
+    }
+
+    # Complete direct legal-source MCP fleet. These processes are children of
+    # llama-server itself. Lex Runtime / Lex Tool Broker is not in the path.
+    prawo = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "prawo-pl-mcp==0.1.4", "prawo-pl-mcp")
+      timeout_ms = 120000
+      env = $prawoEnv
+    }
+    saos = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-saos@1.2.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    nsa = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-nsa@1.3.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    isap = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-isap@1.3.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    krs = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-krs@1.1.1")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    eureka = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eureka@0.2.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    kio = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "kio-orzeczenia-mcp==0.4.3", "kio-orzeczenia-mcp")
+      timeout_ms = 120000
+      env = $externalEnv
+    }
+    uodo = [ordered]@{
+      command = $nodeExe
+      args = @($uodoServer)
+      timeout_ms = 90000
+      cwd = (Join-Path $runtime "app")
+      env = $externalEnv
+    }
+    eu_sparql = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eu-sparql@1.2.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    eu_compliance = [ordered]@{
+      command = $npxCmd
+      args = @("-y", "@matematicsolutions/mcp-eu-compliance@0.4.0")
+      timeout_ms = 90000
+      env = $externalEnv
+    }
+    legalize = [ordered]@{
+      command = $uvxExe
+      args = @("--from", "legalize-mcp==0.2.4", "legalize-mcp")
+      timeout_ms = 120000
+      env = $externalEnv
+    }
   }
 }
 [IO.File]::WriteAllText(
   $mcpConfigPath,
-  (($mcpConfig | ConvertTo-Json -Depth 10) + [Environment]::NewLine),
+  (($mcpConfig | ConvertTo-Json -Depth 20) + [Environment]::NewLine),
   [Text.UTF8Encoding]::new($false)
 )
 
@@ -103,17 +237,32 @@ LEX_LEGAL_SKILLS_AUTO_POLICY_V1
 15. Dostępny katalog ma dokładnie 32 skille prawne. Nie udawaj wczytania skilla i nie rekonstruuj jego treści z pamięci.
 16. Dla prawa polskiego obowiązkowo użyj prawny-router-v3, prawo-polskie-v2, shared oraz właściwego modułu DR wskazanego przez legal_auto_route.
 17. Dla prawa zagranicznego użyj prawny-router-v3 i odpowiednich skilli dziedzinowych; prawo-polskie-v2 dodawaj tylko gdy sprawa obejmuje również prawo polskie.
-18. Po routingu nadal obowiązuje weryfikacja internetowa: treść przepisów, status aktu, Dz.U., daty, progi, kwoty i sygnatury sprawdzaj przez web_research/web_fetch w tej samej turze.
+18. Po routingu nadal obowiązuje weryfikacja źródłowa: treść przepisów, status aktu, Dz.U., daty, progi, kwoty i sygnatury sprawdzaj w tej samej turze.
 19. Jeżeli legal_auto_route, obowiązkowy legal_skill_read albo wymagana weryfikacja źródłowa nie powiedzie się, zastosuj fail-closed: wskaż brak i nie zastępuj go pamięcią modelu.
+
+LEX_DIRECT_LEGAL_MCP_POLICY_V1
+20. Dla polskich i unijnych źródeł prawnych używaj bezpośrednich MCP llama-server, gdy odpowiadają tematowi: prawo_*, saos_*, nsa_*, isap_*, krs_*, eureka_*, kio_*, uodo_*, eu_sparql_*, eu_compliance_* i legalize_*.
+21. Dla treści polskich ustaw i rozporządzeń preferuj oficjalny ISAP/ELI; dla orzeczeń używaj właściwego źródła (SAOS/NSA/KIO/UODO itd.). Pobierz rzeczywisty dokument/rekord przed przytoczeniem jego treści.
+22. MCP źródłowe są dodatkiem do routingu skilli, nie jego zamiennikiem. Nie omijaj legal_auto_route.
+23. Do zewnętrznych MCP nigdy nie wysyłaj faktów konkretnej sprawy, tekstu dokumentów użytkownika, sekretów, jawnych danych osobowych ani tokenów PII. Wysyłaj tylko publiczne pojęcia prawne, identyfikatory aktów/orzeczeń, sygnatury i neutralne frazy wyszukiwawcze.
+24. Jeżeli źródło MCP zwraca URL lub identyfikator oficjalnego dokumentu, cytuj dokładnie ten wynik. Nie wymyślaj brakujących URL-i ani sygnatur.
+
+LEX_PRIVATE_DOCUMENT_POLICY_V1
+25. Dla skanów i dokumentów zawierających dane osobowe preferuj private_ocr_anonymize zamiast private_ocr, aby jawny OCR nie trafiał do kontekstu modelu.
+26. Dla tekstu z PII użyj private_anonymize. W dalszym rozumowaniu i redagowaniu zachowuj tokeny PII, nie próbuj odgadywać ich wartości.
+27. Gdy dokument wymaga odmiany imienia/nazwiska, używaj kontraktu private_inflection_contract. Składnia [PII:PERSON:0001|gen], |dat, |acc, |inst, |loc, |voc określa przypadek. Nie zgaduj odmiany samodzielnie.
+28. Gotowy tokenizowany tekst finalizuj przez private_finalize_text, a DOCX/ODT przez private_finalize_document. Jawne PII są wstawiane lokalnie przez Morfeusz/SGJP i nie są zwracane do modelu.
+29. Jeśli Morfeusz nie potrafi wiarygodnie wygenerować wymaganej formy, finalizacja ma się zatrzymać. Przeredaguj zdanie tak, aby token PERSON pozostał w mianowniku, zamiast zgadywać formę.
+30. Po zakończeniu i zapisaniu finalnego artefaktu wyczyść sesję przez private_clear_session, jeżeli nie będzie już potrzebna.
 '@
 
 $uiConfigPath = Join-Path $localRoot "llama-ui-config.json"
 $uiConfig = [ordered]@{
   systemMessage = $systemMessage.Trim()
-  agenticMaxTurns = 12
+  agenticMaxTurns = 20
   alwaysShowToolCallContent = $true
   showSystemMessage = $true
-  temperature = 0.3
+  temperature = 0.2
   top_p = 0.9
 }
 [IO.File]::WriteAllText(
@@ -143,19 +292,44 @@ $result = [ordered]@{
   localAiRoot = $localRoot
   mcpConfig = $mcpConfigPath
   uiConfig = $uiConfigPath
-  mcpScript = $mcpScript
+  webMcpScript = $webMcpScript
   legalMcpScript = $legalMcpScript
+  privateMcpScript = $privateMcpScript
   legalSkillsRoot = $skillsRoot
   legalSkillCount = $skillCount
+  privateExportRoot = $privateExportRoot
   mistralChatTemplate = $templatePath
-  exposedTools = @(
-    "web_search",
-    "web_fetch",
-    "web_research",
-    "legal_auto_route",
-    "legal_skill_read",
-    "legal_skill_search",
-    "legal_skills_list"
+  mcpServers = @(
+    "web",
+    "legal",
+    "private",
+    "prawo",
+    "saos",
+    "nsa",
+    "isap",
+    "krs",
+    "eureka",
+    "kio",
+    "uodo",
+    "eu_sparql",
+    "eu_compliance",
+    "legalize"
+  )
+  exposedToolPrefixes = @(
+    "web_",
+    "legal_",
+    "private_",
+    "prawo_",
+    "saos_",
+    "nsa_",
+    "isap_",
+    "krs_",
+    "eureka_",
+    "kio_",
+    "uodo_",
+    "eu_sparql_",
+    "eu_compliance_",
+    "legalize_"
   )
 } | ConvertTo-Json -Compress
 
