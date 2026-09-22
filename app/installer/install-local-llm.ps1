@@ -29,22 +29,13 @@ $cache = if ($CacheRoot) {
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
 New-Item -ItemType Directory -Force -Path $localRoot | Out-Null
 
-# Broad native llama.cpp agent mode for local testing.
-# These are llama.cpp's own environment parameters. They are intentionally
-# configured outside the Lex tool broker so direct llama-server launches use
-# the same agent/tool capability.
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_AGENT",
-  "true",
-  [EnvironmentVariableTarget]::User
-)
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_CORS_ORIGINS",
-  "localhost",
-  [EnvironmentVariableTarget]::User
-)
-$env:LLAMA_ARG_AGENT = "true"
-$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
+# Configure llama.cpp-native agent, MCP web tools and Web UI defaults.
+# This runs outside Lex Runtime and the Lex Tool Broker.
+$nativeWebConfigurator = Join-Path $runtime "bootstrap\configure-llama-native-web.ps1"
+if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+  throw "LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING:$nativeWebConfigurator"
+}
+& $nativeWebConfigurator -RuntimeRoot $runtime -LocalAiRoot $localRoot | Out-Host
 
 if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
   function Get-FileHash {
@@ -444,6 +435,8 @@ if (-not $config.model.path -or -not (Test-Path -LiteralPath $config.model.path 
 # Native llama.cpp configuration. No Lex broker is involved.
 $env:LLAMA_ARG_AGENT = "true"
 $env:LLAMA_ARG_CORS_ORIGINS = "localhost"
+$env:LLAMA_ARG_MCP_SERVERS_CONFIG = Join-Path $PSScriptRoot "mcp-servers.json"
+$env:LLAMA_ARG_UI_CONFIG_FILE = Join-Path $PSScriptRoot "llama-ui-config.json"
 
 $llamaArgs = @(
   "--model", [string]$config.model.path,
@@ -460,6 +453,17 @@ $llamaArgs = @(
 
 if ($config.engine.gpuOffload -eq $true) {
   $llamaArgs += @("--n-gpu-layers", "999")
+}
+
+if ([string]$config.model.id -eq "local/mistral-nemo-12b-q4km") {
+  $groundedTemplate = Join-Path $PSScriptRoot "mistral-nemo-web-grounded.jinja"
+  if (-not (Test-Path -LiteralPath $groundedTemplate -PathType Leaf)) {
+    throw "LLAMA_NATIVE_MISTRAL_GROUNDED_TEMPLATE_MISSING:$groundedTemplate"
+  }
+  $llamaArgs += @(
+    "--chat-template-file", $groundedTemplate,
+    "--temp", "0.3"
+  )
 }
 
 if ($config.context.extendedBeyondNative -eq $true) {
