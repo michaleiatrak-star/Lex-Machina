@@ -176,6 +176,27 @@ export type CaseListResponse = {
   cases: CaseListItem[];
 };
 
+export type CaseScheduleKind =
+  | "CLIENT_MEETING"
+  | "COURT_HEARING"
+  | "DEADLINE"
+  | "OTHER";
+
+export type CaseScheduleEvent = {
+  eventId: string;
+  kind: CaseScheduleKind;
+  title: string;
+  startsAt: string;
+  location?: string;
+  notes?: string;
+  createdAt: string;
+  createdByUserId: string;
+};
+
+export type CaseScheduleResponse = {
+  events: CaseScheduleEvent[];
+};
+
 export type CaseAccessEntry = {
   user: AuthenticatedUser;
   role: CaseRole;
@@ -1535,6 +1556,49 @@ export function renameCase(
       body: JSON.stringify({
         displayName
       })
+    }
+  );
+}
+
+export function listCaseSchedule(
+  caseId: string
+): Promise<CaseScheduleResponse> {
+  return json<CaseScheduleResponse>(
+    `/api/cases/${caseId}/schedule`
+  );
+}
+
+export function addCaseScheduleEvent(
+  caseId: string,
+  input: {
+    kind: CaseScheduleKind;
+    title: string;
+    startsAt: string;
+    location?: string;
+    notes?: string;
+  }
+): Promise<CaseScheduleEvent> {
+  return json<CaseScheduleEvent>(
+    `/api/cases/${caseId}/schedule`,
+    {
+      method: "POST",
+      body:
+        JSON.stringify(input)
+    }
+  );
+}
+
+export function deleteCaseScheduleEvent(
+  caseId: string,
+  eventId: string
+): Promise<{
+  eventId: string;
+  deletedAt: string;
+}> {
+  return json(
+    `/api/cases/${caseId}/schedule/${eventId}`,
+    {
+      method: "DELETE"
     }
   );
 }
