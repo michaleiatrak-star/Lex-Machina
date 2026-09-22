@@ -1030,9 +1030,17 @@ async function resolveAccountExecutable(
   const command =
     CLI_NAMES[provider];
 
-  // RC14 used the user's normally installed account client. Preserve that
-  // proven behavior whenever one is available, while keeping the bundled
-  // client as a clean-machine fallback for the online installer.
+  if (provider === "anthropic") {
+    // Claude auth is pinned to the bundled client so the subscription-only
+    // --claudeai flow is available and does not depend on a user's older CLI.
+    return (
+      privateClaudeExecutable() ??
+      await resolveCommand(
+        command
+      )
+    );
+  }
+
   const systemExecutable =
     await resolveCommand(
       command
@@ -1043,9 +1051,6 @@ async function resolveAccountExecutable(
 
   if (provider === "openai") {
     return privateCodexExecutable();
-  }
-  if (provider === "anthropic") {
-    return privateClaudeExecutable();
   }
   return null;
 }
@@ -1215,10 +1220,12 @@ export function accountLoginArgs(
     return ["login"];
   }
   if (provider === "anthropic") {
-    // Keep the proven RC14 browser OAuth flow as the primary path.
+    // Force the Claude.ai subscription OAuth lane. The bundled client is
+    // pinned and supports this flag; do not fall back to API/Console auth.
     return [
       "auth",
-      "login"
+      "login",
+      "--claudeai"
     ];
   }
   return ["login"];
