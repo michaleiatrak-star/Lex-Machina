@@ -2698,6 +2698,9 @@ export default function MatterChatApp({
     try {
       await renameCase(selectedCase.caseId, caseNameDraft.trim());
       await refreshCases(selectedCase.caseId);
+      setWorkspaceRefresh(
+        (value) => value + 1
+      );
     } catch (error) {
       setCaseError(error instanceof Error ? error.message : String(error));
     } finally {
@@ -4334,6 +4337,15 @@ export default function MatterChatApp({
                 caseId={caseId}
                 title={`Dokumenty sprawy — ${selectedCase.displayName || "Sprawa bez nazwy"}`}
                 canWrite={canWriteCase(selectedCase)}
+                refreshToken={workspaceRefresh}
+              />
+            ) : null}
+
+            {selectedCase ? (
+              <WorkspaceManager
+                caseId={selectedCase.caseId}
+                title={`Dokumenty sprawy — ${selectedCase.displayName || "Sprawa bez nazwy"}`}
+                canWrite={false}
                 refreshToken={workspaceRefresh}
               />
             ) : null}
