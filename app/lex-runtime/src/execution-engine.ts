@@ -95,6 +95,42 @@ export class LexExecutionError extends Error {
   }
 }
 
+export function isLocalLightweightConversation(
+  model: string,
+  query: string,
+  hasBoundContext: boolean
+): boolean {
+  if (
+    !model.startsWith(
+      "local/"
+    ) ||
+    hasBoundContext
+  ) {
+    return false;
+  }
+
+  const normalized =
+    query
+      .normalize("NFKC")
+      .trim()
+      .toLowerCase()
+      .replace(
+        /[„”"'']/g,
+        ""
+      )
+      .replace(
+        /\s+/g,
+        " "
+      );
+
+  return (
+    /^(?:napisz|odpowiedz|powiedz)(?: tylko)?[: ]+ok[.!?]*$/
+      .test(normalized) ||
+    /^(?:ok|test|hej|cześć|czesc|dzień dobry|dzien dobry|dzięki|dzieki)[.!?]*$/
+      .test(normalized)
+  );
+}
+
 function combineSkillPrompt(
   registry: LexSkillRegistry,
   skillNames: string[]
@@ -477,6 +513,95 @@ export class LexExecutionEngine {
         `validation=${gateIPlan.validationStages.join("|")}`
       ].join(";")
     );
+
+    const lightweightLocal =
+      isLocalLightweightConversation(
+        args.model,
+        effectiveQuery,
+        Boolean(
+          args.documentContext ||
+          args.guideContext ||
+          args.processWorkflowContext ||
+          args.courtWorkflowContext ||
+          args.chronologyWorkflowContext ||
+          args.contractWorkflowContext ||
+          args.orderedCaseWorkflowContext ||
+          !skillEnvelope.automatic
+        )
+      );
+
+    if (lightweightLocal) {
+      emit(
+        "provider_start",
+        args.provider,
+        "OK",
+        args.model
+      );
+      const response =
+        await this.providers.stream(
+          args.provider,
+          {
+            model:
+              args.model,
+            systemPrompt:
+              "Jesteś lokalnym modelem Lex Machina. To jest proste polecenie konwersacyjne bez zadania prawnego, dokumentów i narzędzi. Odpowiedz krótko i dokładnie na polecenie użytkownika.",
+            ...(args.continuityKey
+              ? {
+                  continuityKey:
+                    args.continuityKey
+                }
+              : {}),
+            messages: [
+              {
+                role:
+                  "user",
+                content:
+                  effectiveQuery
+              }
+            ],
+            reasoning:
+              "none"
+          }
+        );
+      emit(
+        "provider_end",
+        args.provider,
+        "OK",
+        args.model
+      );
+      if (
+        !response.fullText
+          .trim()
+      ) {
+        throw new LexExecutionError(
+          "Provider returned an empty lightweight local response.",
+          "LOCAL_LIGHTWEIGHT_PROVIDER",
+          [...events]
+        );
+      }
+      emit(
+        "gate",
+        "G7_VERTICAL_SLICE",
+        "OK",
+        "local-lightweight"
+      );
+      return {
+        provider:
+          args.provider,
+        primarySkill:
+          args.route.primarySkill,
+        loadedSkills:
+          skillSelection.loadedSkills,
+        executionSkills:
+          skillSelection.executionSkills,
+        domainSkills:
+          skillSelection.domainSkills,
+        workflowPlan,
+        output:
+          response.fullText,
+        events
+      };
+    }
 
     const semanticWorkflowResources:
       string[] = [];
