@@ -200,6 +200,60 @@ describe(
     );
 
     it(
+      "does not swap a selected local primary for a different local helper",
+      async () => {
+        const { gateway, calls } =
+          gatewayWith(
+            async () =>
+              "SHOULD_NOT_RUN"
+          );
+        const scheduler =
+          new AuxiliaryModelScheduler(
+            gateway
+          );
+
+        const result =
+          await scheduler.preflight({
+            config: {
+              enabled: true,
+              provider: "openai",
+              model:
+                "local/bielik-11b-v3-q4km"
+            },
+            primary: {
+              provider: "openai",
+              model:
+                "local/mistral-nemo-12b-q4km"
+            },
+            currentUserText:
+              "Sprawdź art. 5 KC.",
+            runVerificationTools:
+              async () => []
+          });
+
+        expect(
+          result.summary.status
+        ).toBe(
+          "SKIPPED_LOCAL_RUNTIME_CONFLICT"
+        );
+        expect(
+          result.summary
+            .ownership
+            .effectiveOwner
+        ).toBe("PRIMARY");
+        expect(
+          result.summary
+            .ownership
+            .fallbackReason
+        ).toBe(
+          "AUXILIARY_LOCAL_RUNTIME_CONFLICT"
+        );
+        expect(calls)
+          .toHaveLength(0);
+      }
+    );
+
+    it(
       "uses helper only for extraction and sends candidates to deterministic verifier",
       async () => {
         const { gateway, calls } =
