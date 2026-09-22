@@ -1408,6 +1408,68 @@ export function openAiChatGptAuthenticated(
   );
 }
 
+export function codexStoredAuthIsChatGpt(
+  raw: string
+): boolean {
+  try {
+    const payload =
+      JSON.parse(raw) as {
+        auth_mode?: unknown;
+        OPENAI_API_KEY?: unknown;
+      };
+    const mode =
+      typeof payload.auth_mode ===
+        "string"
+        ? payload.auth_mode
+            .trim()
+            .toLowerCase()
+        : "";
+    const storedApiKey =
+      typeof payload.OPENAI_API_KEY ===
+        "string" &&
+      payload.OPENAI_API_KEY
+        .trim().length > 0;
+    return (
+      !storedApiKey &&
+      (
+        mode === "chatgpt" ||
+        mode === "chatgpt_oauth" ||
+        mode === "chatgpt-oauth"
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function storedCodexChatGptAuthPresent():
+  Promise<boolean> {
+  const env =
+    accountEnvironment(
+      "openai"
+    );
+  const codexHome =
+    env.CODEX_HOME
+      ?.trim() ||
+    path.join(
+      os.homedir(),
+      ".codex"
+    );
+  try {
+    return codexStoredAuthIsChatGpt(
+      await fsp.readFile(
+        path.join(
+          codexHome,
+          "auth.json"
+        ),
+        "utf8"
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function claudeSubscriptionAuthenticated(
   result: RunResult
 ): boolean {
@@ -1525,7 +1587,15 @@ export function claudeSubscriptionAuthenticated(
         ) ||
         (
           payload.loggedIn === true &&
-          !provider
+          (
+            !provider ||
+            provider === "firstparty" ||
+            provider === "first_party"
+          ) &&
+          (
+            !method ||
+            method === "none"
+          )
         )
       );
     } catch {
@@ -1608,8 +1678,14 @@ async function assertSubscriptionAccount(
 
   let authenticated =
     provider === "openai"
-      ? openAiChatGptAuthenticated(
-          result
+      ? (
+          openAiChatGptAuthenticated(
+            result
+          ) ||
+          (
+            result.code === 0 &&
+            await storedCodexChatGptAuthPresent()
+          )
         )
       : claudeSubscriptionAuthenticated(
           result
@@ -2455,8 +2531,14 @@ export class AccountSessionManager {
 
     const authenticated =
       provider === "openai"
-        ? openAiChatGptAuthenticated(
-            result
+        ? (
+            openAiChatGptAuthenticated(
+              result
+            ) ||
+            (
+              result.code === 0 &&
+              await storedCodexChatGptAuthPresent()
+            )
           )
         : provider ===
             "anthropic"
