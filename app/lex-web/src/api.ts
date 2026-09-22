@@ -309,6 +309,7 @@ export type GeneratedDocumentResponse = {
   vaultGeneration?: number;
   sha256?: string;
   aliasesUsed: string[];
+  deanonymizationKeyBound?: boolean;
   readyForDownload?: boolean;
   downloadTicket?: {
     ticketId: string;
@@ -367,6 +368,10 @@ export type FinalizedDocumentResponse = {
     LegalDocumentFormat;
   sha256: string;
   replacements: number;
+  deanonymizationBasis:
+    "PRIVACY_VAULT_KEY";
+  keyBindingVerified:
+    boolean;
   downloadTicket?: {
     ticketId: string;
     caseId: string;
