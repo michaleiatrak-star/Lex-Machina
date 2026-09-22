@@ -1040,6 +1040,45 @@ async function readLocalJson(
   return content;
 }
 
+async function directLocalJsonCompletion(
+  endpoint: string,
+  modelId: string,
+  systemPrompt: string,
+  messages: ProviderStreamParams["messages"],
+  maxOutputTokens: number,
+  abortSignal?: AbortSignal
+): Promise<ProviderStreamResult> {
+  const response =
+    await fetchLocalChatResponse(
+      endpoint,
+      buildLocalChatRequest(
+        modelId,
+        systemPrompt,
+        messages,
+        Math.max(
+          16,
+          Math.min(
+            1_024,
+            maxOutputTokens
+          )
+        ),
+        false
+      ),
+      abortSignal
+    );
+  if (!response.ok) {
+    await localHttpFailure(
+      response
+    );
+  }
+  return {
+    fullText:
+      await readLocalJson(
+        response
+      )
+  };
+}
+
 async function exactLocalInputTokens(
   endpoint: string,
   body: ReturnType<
@@ -1752,6 +1791,42 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
           configuredModel.id,
         reasoning: "none" as const
       };
+
+      if (
+        params.localTransport ===
+          "json"
+      ) {
+        try {
+          const direct =
+            await directLocalJsonCompletion(
+              localStatus.endpoint,
+              configuredModel.id,
+              params.systemPrompt,
+              params.messages,
+              params.localMaxOutputTokens ??
+                128,
+              params.abortSignal
+            );
+          params.callbacks
+            ?.onContentDelta?.(
+              direct.fullText
+            );
+          return direct;
+        } catch (error) {
+          const detail =
+            error instanceof Error
+              ? error.message
+              : String(error);
+          throw new Error(
+            `${classifyLocalInferenceFailure(
+              detail
+            )}:${detail
+              .replace(/[\r\n]+/g, " ")
+              .slice(-800)}`
+          );
+        }
+      }
+
       try {
         return await streamLocalModel(
           localStatus.endpoint,
