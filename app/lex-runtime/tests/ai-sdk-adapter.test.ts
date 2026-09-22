@@ -530,7 +530,7 @@ describe("AiSdkProviderAdapter", () => {
 
           if (
             url.endsWith(
-              "/chat/completions"
+              "/v1/chat/completions"
             )
           ) {
             const encoder =
@@ -585,7 +585,7 @@ describe("AiSdkProviderAdapter", () => {
         ),
       status: () => ({
         endpoint:
-          "http://127.0.0.1:43190",
+          "http://127.0.0.1:43190/v1",
         configuredContextTokens:
           64_000,
         qualification:
@@ -675,6 +675,13 @@ describe("AiSdkProviderAdapter", () => {
       )
     ).toBe(
       "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+    );
+    expect(
+      classifyLocalInferenceFailure(
+        "LOCAL_MODEL_SSE_READ_FAILED:LOCAL_MODEL_SSE_FIRST_CONTENT_TIMEOUT"
+      )
+    ).toBe(
+      "LOCAL_MODEL_RESPONSE_TIMEOUT"
     );
     expect(
       classifyLocalInferenceFailure(
