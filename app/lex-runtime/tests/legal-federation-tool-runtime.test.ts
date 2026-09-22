@@ -5,7 +5,8 @@ import {
 } from "vitest";
 import {
   FEDERATED_LEGAL_TOOL_NAMES,
-  LegalFederationToolRuntime
+  LegalFederationToolRuntime,
+  annotateFederatedLegalContent
 } from "../src/legal-federation-tool-runtime.js";
 
 describe(
@@ -93,6 +94,13 @@ describe(
             sources: Array<{
               source: string;
               fallback: string;
+              sourcePolicy: {
+                sourceTier: string;
+                provenance: string;
+                verificationAuthority: string;
+                verificationEligible: boolean;
+                crossCheckRequired: boolean;
+              };
             }>;
             policy: {
               verificationAuthority: string;
@@ -149,15 +157,110 @@ describe(
             .sourceTierCoverage
             .tier2B
         ).toBe(
-          "POLICY_DEFINED_GENERIC_RETRIEVER_NOT_IMPLEMENTED"
+          "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED_GENERIC_RETRIEVER_NOT_IMPLEMENTED"
         );
         expect(
           payload.policy
             .sourceTierCoverage
             .tier3
         ).toContain(
-          "PARTIAL_RESEARCH_COVERAGE"
+          "POLICY_AND_RUNTIME_HARD_GATE_IMPLEMENTED"
         );
+        expect(
+          payload.sources.find(
+            (source) =>
+              source.source ===
+              "isap"
+          )?.sourcePolicy
+        ).toMatchObject({
+          sourceTier: "R1",
+          verificationAuthority:
+            "LEX_NATIVE_ONLY",
+          verificationEligible:
+            false
+        });
+        expect(
+          payload.sources.find(
+            (source) =>
+              source.source ===
+              "legalize"
+          )?.sourcePolicy
+        ).toMatchObject({
+          sourceTier: "R3",
+          crossCheckRequired:
+            true
+        });
+      }
+    );
+
+    it(
+      "annotates federated payloads with immutable Lex source policy metadata",
+      () => {
+        const objectPayload =
+          JSON.parse(
+            annotateFederatedLegalContent(
+              "isap",
+              JSON.stringify({
+                status: "OK",
+                items: [
+                  {
+                    id: "DU/2026/1"
+                  }
+                ]
+              })
+            )
+          ) as {
+            status: string;
+            _lexSourcePolicy: {
+              sourceTier: string;
+              verificationAuthority: string;
+              verificationEligible: boolean;
+            };
+          };
+
+        expect(
+          objectPayload.status
+        ).toBe("OK");
+        expect(
+          objectPayload
+            ._lexSourcePolicy
+        ).toMatchObject({
+          sourceTier: "R1",
+          verificationAuthority:
+            "LEX_NATIVE_ONLY",
+          verificationEligible:
+            false
+        });
+
+        const arrayPayload =
+          JSON.parse(
+            annotateFederatedLegalContent(
+              "legalize",
+              JSON.stringify([
+                {
+                  id: "x"
+                }
+              ])
+            )
+          ) as {
+            results: unknown[];
+            _lexSourcePolicy: {
+              sourceTier: string;
+              crossCheckRequired: boolean;
+            };
+          };
+
+        expect(
+          arrayPayload.results
+        ).toHaveLength(1);
+        expect(
+          arrayPayload
+            ._lexSourcePolicy
+        ).toMatchObject({
+          sourceTier: "R3",
+          crossCheckRequired:
+            true
+        });
       }
     );
   }
