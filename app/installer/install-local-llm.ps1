@@ -29,6 +29,23 @@ $cache = if ($CacheRoot) {
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
 New-Item -ItemType Directory -Force -Path $localRoot | Out-Null
 
+# Broad native llama.cpp agent mode for local testing.
+# These are llama.cpp's own environment parameters. They are intentionally
+# configured outside the Lex tool broker so direct llama-server launches use
+# the same agent/tool capability.
+[Environment]::SetEnvironmentVariable(
+  "LLAMA_ARG_AGENT",
+  "true",
+  [EnvironmentVariableTarget]::User
+)
+[Environment]::SetEnvironmentVariable(
+  "LLAMA_ARG_CORS_ORIGINS",
+  "localhost",
+  [EnvironmentVariableTarget]::User
+)
+$env:LLAMA_ARG_AGENT = "true"
+$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
+
 if (-not (Get-Command Get-FileHash -ErrorAction SilentlyContinue)) {
   function Get-FileHash {
     param(
@@ -400,10 +417,73 @@ $configTemp = $configPath + ".tmp"
 )
 Move-Item -LiteralPath $configTemp -Destination $configPath -Force
 
+# Direct llama.cpp launcher. This path does not call Lex Runtime or Lex Tool
+# Broker; llama-server reads its own LLAMA_ARG_* settings and exposes the
+# built-in agent tools directly in its Web UI/API.
+$nativeAgentLauncher = Join-Path $localRoot "start-llama-native-agent.ps1"
+$nativeAgentLauncherContent = @'
+param(
+  [ValidateRange(1024, 65535)]
+  [int]$Port = 4318
+)
+
+$ErrorActionPreference = "Stop"
+$configPath = Join-Path $PSScriptRoot "config.json"
+if (-not (Test-Path -LiteralPath $configPath -PathType Leaf)) {
+  throw "LLAMA_NATIVE_CONFIG_MISSING:$configPath"
+}
+
+$config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+if (-not $config.engine.executable -or -not (Test-Path -LiteralPath $config.engine.executable -PathType Leaf)) {
+  throw "LLAMA_NATIVE_ENGINE_MISSING"
+}
+if (-not $config.model.path -or -not (Test-Path -LiteralPath $config.model.path -PathType Leaf)) {
+  throw "LLAMA_NATIVE_MODEL_MISSING"
+}
+
+# Native llama.cpp configuration. No Lex broker is involved.
+$env:LLAMA_ARG_AGENT = "true"
+$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
+
+$llamaArgs = @(
+  "--model", [string]$config.model.path,
+  "--alias", [string]$config.model.id,
+  "--host", "127.0.0.1",
+  "--port", $Port.ToString(),
+  "--ctx-size", ([int]$config.context.requestedTokens).ToString(),
+  "--parallel", "1",
+  "--jinja",
+  "--flash-attn", "auto",
+  "--cache-type-k", "q8_0",
+  "--cache-type-v", "q8_0"
+)
+
+if ($config.engine.gpuOffload -eq $true) {
+  $llamaArgs += @("--n-gpu-layers", "999")
+}
+
+if ($config.context.extendedBeyondNative -eq $true) {
+  $llamaArgs += @(
+    "--rope-scaling", "yarn",
+    "--rope-scale", ([double]$config.context.ropeScale).ToString([Globalization.CultureInfo]::InvariantCulture),
+    "--yarn-orig-ctx", ([int]$config.model.nativeContext).ToString()
+  )
+}
+
+& ([string]$config.engine.executable) @llamaArgs
+exit $LASTEXITCODE
+'@
+[IO.File]::WriteAllText(
+  $nativeAgentLauncher,
+  $nativeAgentLauncherContent + [Environment]::NewLine,
+  [Text.UTF8Encoding]::new($false)
+)
+
 $result = [ordered]@{
   status = "READY"
   root = $localRoot
   configPath = $configPath
+  nativeAgentLauncher = $nativeAgentLauncher
   modelId = $model.id
   contextTokens = $ContextTokens
   contextMode = $contextMode
