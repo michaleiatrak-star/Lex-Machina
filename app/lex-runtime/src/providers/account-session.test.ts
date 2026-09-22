@@ -355,7 +355,7 @@ describe("provider account-session transport", () => {
     ).toBe(false);
   });
 
-  it("recognizes Claude subscription auth across current JSON and text status formats", () => {
+  it("trusts the official Claude auth status exit code across status formats", () => {
     expect(
       claudeSubscriptionAuthenticated({
         code: 0,
@@ -384,7 +384,7 @@ describe("provider account-session transport", () => {
           "Profile: credentials-file · user_oauth · profile default",
         stderr: ""
       })
-    ).toBe(false);
+    ).toBe(true);
 
     expect(
       claudeSubscriptionAuthenticated({
@@ -415,7 +415,7 @@ describe("provider account-session transport", () => {
           "Logged in via Anthropic Console",
         stderr: ""
       })
-    ).toBe(false);
+    ).toBe(true);
 
     expect(
       claudeSubscriptionAuthenticated({
@@ -427,7 +427,7 @@ describe("provider account-session transport", () => {
         }),
         stderr: ""
       })
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("discovers the newest Claude Code session id without reading transcript content", async () => {
