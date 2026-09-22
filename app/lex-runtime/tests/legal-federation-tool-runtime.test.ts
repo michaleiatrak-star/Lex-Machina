@@ -212,9 +212,7 @@ describe(
                 claim:
                   "art. 5 KC",
                 url:
-                  "https://prawo.pl/prawo/example",
-                updatedAt:
-                  "2026-09-01"
+                  "https://prawo.pl/prawo/example"
               }
             }
           ]);
@@ -370,8 +368,6 @@ describe(
           candidate: {
             claim:
               "art. 5 KC",
-            sourceTier:
-              undefined,
             tier: "R2B",
             crossCheckStatus:
               "PENDING",
