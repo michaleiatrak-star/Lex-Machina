@@ -196,6 +196,70 @@
         "legal_skills_list"
       ],
       "policy": "ROUTER_FIRST_FAIL_CLOSED_THEN_WEB_VERIFY"
+    },
+    "privateDocuments": {
+      "transport": "LLAMA_CPP_MCP_STDIO",
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "ocr": {
+        "engine": "PaddleOCR PP-OCRv6_medium",
+        "execution": "LOCAL_ISOLATED_WORKER",
+        "tool": "ocr_local_file"
+      },
+      "anonymization": {
+        "ner": "Stanza pl LOCAL",
+        "structuredIdentifiers": true,
+        "vault": "WINDOWS_DPAPI_USER_BOUND",
+        "tools": [
+          "privacy_anonymize_text",
+          "privacy_ocr_anonymize_file"
+        ]
+      },
+      "deanonymization": {
+        "morphology": "Morfeusz2 1.99.15",
+        "grammarCases": [
+          "nom",
+          "gen",
+          "dat",
+          "acc",
+          "inst",
+          "loc",
+          "voc"
+        ],
+        "tools": [
+          "privacy_inflect_token",
+          "privacy_deanonymize_text",
+          "privacy_finalize_document_file"
+        ],
+        "policy": "FINAL_LOCAL_STEP_FAIL_CLOSED_IN_STRICT_MODE"
+      }
+    },
+    "directMcp": {
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "servers": [
+        "web",
+        "legal",
+        "documents",
+        "prawo",
+        "uodo_official"
+      ],
+      "legalFederation": {
+        "aggregator": "prawo-pl-mcp",
+        "version": "0.1.4",
+        "sources": [
+          "saos",
+          "nsa",
+          "isap",
+          "krs",
+          "eureka",
+          "kio",
+          "uodo",
+          "eu-sparql",
+          "eu-compliance",
+          "legalize"
+        ],
+        "firstUseNetworkRequired": true
+      },
+      "uodoOfficialFallback": true
     }
   },
   "systemPrerequisites": {
@@ -212,7 +276,7 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, AND UPDATES",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, DIRECT_LEGAL_MCP_FIRST_USE, AND UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
@@ -260,7 +324,9 @@
     "statutoryVerificationAuthority": "LEX_NATIVE_OFFICIAL_VERIFIER",
     "firstUseNetworkRequired": true,
     "networkPolicy": "CORE_RUNTIME_REMAINS_NETWORK_INDEPENDENT_AFTER_BOOTSTRAP; LIVE_MCP_SOURCE_CALLS_REQUIRE_NETWORK_WHEN_USER_OR_MODEL_INVOKES_LEGAL_RESEARCH",
-    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE"
+    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE",
+    "mediation": "DIRECT_LLAMA_SERVER_MCP",
+    "llamaServerConfigured": true
   },
   "accountSessionClients": {
     "codex": {
