@@ -15,6 +15,7 @@ import type {
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000;
 const AUTH_TIMEOUT_MS = 5 * 60 * 1000;
 const STATUS_TIMEOUT_MS = 15_000;
+const OPTIONAL_ACCOUNT_CLIENT_INSTALL_TIMEOUT_MS = 10 * 60 * 1000;
 const MAX_CAPTURE_BYTES = 8 * 1024 * 1024;
 const TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
 
@@ -55,6 +56,26 @@ const CLI_NAMES: Record<ProviderId, string> = {
   openai: "codex",
   anthropic: "claude",
   xai: "grok"
+};
+
+const OPTIONAL_ACCOUNT_CLIENTS: Partial<Record<
+  ProviderId,
+  {
+    packageName: string;
+    version: string;
+    binary: string;
+  }
+>> = {
+  openai: {
+    packageName: "@openai/codex",
+    version: "0.154.0",
+    binary: "codex"
+  },
+  anthropic: {
+    packageName: "@anthropic-ai/claude-code",
+    version: "2.1.274",
+    binary: "claude"
+  }
 };
 
 export type AccountSessionResumeMode =
@@ -674,10 +695,10 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
 
 function installHint(provider: ProviderId): string {
   if (provider === "openai") {
-    return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Codex CLI. Następnie użyj przycisku połączenia konta ChatGPT.";
+    return "Codex CLI nie jest częścią instalatora. Po wybraniu połączenia konta ChatGPT Lex Machina pobierze przypiętą wersję klienta do prywatnego katalogu użytkownika.";
   }
   if (provider === "anthropic") {
-    return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Claude Code. Następnie użyj przycisku połączenia konta Claude.";
+    return "Claude Code nie jest częścią instalatora. Po wybraniu połączenia konta Claude Lex Machina pobierze przypiętą wersję klienta do prywatnego katalogu użytkownika.";
   }
   return "Zainstaluj Grok Build CLI i wykonaj: grok login";
 }
@@ -807,6 +828,60 @@ function codexAccountModel(): string {
     "gpt-5.6-luna";
 }
 
+function optionalAccountClientsRoot(): string {
+  const override =
+    process.env
+      .LEX_OPTIONAL_ACCOUNT_CLIENTS_ROOT
+      ?.trim();
+  if (override) {
+    return path.resolve(override);
+  }
+  const localAppData =
+    process.env
+      .LOCALAPPDATA
+      ?.trim();
+  return localAppData
+    ? path.join(
+        localAppData,
+        "LexMachina",
+        "optional-tools",
+        "account-clients"
+      )
+    : path.join(
+        os.homedir(),
+        ".lex-machina",
+        "optional-tools",
+        "account-clients"
+      );
+}
+
+function optionalAccountClientExecutable(
+  provider: "openai" | "anthropic"
+): string | null {
+  const spec =
+    OPTIONAL_ACCOUNT_CLIENTS[
+      provider
+    ];
+  if (!spec) {
+    return null;
+  }
+  const suffix =
+    process.platform === "win32"
+      ? `${spec.binary}.cmd`
+      : spec.binary;
+  const candidate =
+    path.join(
+      optionalAccountClientsRoot(),
+      provider,
+      "node_modules",
+      ".bin",
+      suffix
+    );
+  return existsSync(candidate)
+    ? candidate
+    : null;
+}
+
 function privateCodexExecutable(): string | null {
   const override =
     process.env
@@ -821,43 +896,32 @@ function privateCodexExecutable(): string | null {
     return override;
   }
 
-  const suffix =
-    process.platform ===
-      "win32"
-      ? "codex.cmd"
-      : "codex";
-  const candidates:
-    string[] = [];
-  const runtimeRoot =
-    process.env
-      .LEX_RUNTIME_ROOT
-      ?.trim();
-  if (runtimeRoot) {
-    candidates.push(
-      path.join(
-        runtimeRoot,
-        "app",
-        "node_modules",
-        ".bin",
-        suffix
+  return (
+    optionalAccountClientExecutable(
+      "openai"
+    ) ??
+    (
+      existsSync(
+        path.resolve(
+          process.cwd(),
+          "node_modules",
+          ".bin",
+          process.platform === "win32"
+            ? "codex.cmd"
+            : "codex"
+        )
       )
-    );
-  }
-  candidates.push(
-    path.resolve(
-      process.cwd(),
-      "node_modules",
-      ".bin",
-      suffix
+        ? path.resolve(
+            process.cwd(),
+            "node_modules",
+            ".bin",
+            process.platform === "win32"
+              ? "codex.cmd"
+              : "codex"
+          )
+        : null
     )
   );
-
-  return candidates.find(
-    (candidate) =>
-      existsSync(
-        candidate
-      )
-  ) ?? null;
 }
 
 function privateClaudeExecutable(): string | null {
@@ -874,43 +938,32 @@ function privateClaudeExecutable(): string | null {
     return override;
   }
 
-  const suffix =
-    process.platform ===
-      "win32"
-      ? "claude.cmd"
-      : "claude";
-  const candidates:
-    string[] = [];
-  const runtimeRoot =
-    process.env
-      .LEX_RUNTIME_ROOT
-      ?.trim();
-  if (runtimeRoot) {
-    candidates.push(
-      path.join(
-        runtimeRoot,
-        "app",
-        "node_modules",
-        ".bin",
-        suffix
+  return (
+    optionalAccountClientExecutable(
+      "anthropic"
+    ) ??
+    (
+      existsSync(
+        path.resolve(
+          process.cwd(),
+          "node_modules",
+          ".bin",
+          process.platform === "win32"
+            ? "claude.cmd"
+            : "claude"
+        )
       )
-    );
-  }
-  candidates.push(
-    path.resolve(
-      process.cwd(),
-      "node_modules",
-      ".bin",
-      suffix
+        ? path.resolve(
+            process.cwd(),
+            "node_modules",
+            ".bin",
+            process.platform === "win32"
+              ? "claude.cmd"
+              : "claude"
+          )
+        : null
     )
   );
-
-  return candidates.find(
-    (candidate) =>
-      existsSync(
-        candidate
-      )
-  ) ?? null;
 }
 
 
@@ -1170,6 +1223,115 @@ function runDirect(
   });
 }
 
+async function ensureAccountExecutable(
+  provider: ProviderId
+): Promise<string | null> {
+  const existing =
+    await resolveAccountExecutable(
+      provider
+    );
+  if (existing) {
+    return existing;
+  }
+
+  const spec =
+    OPTIONAL_ACCOUNT_CLIENTS[
+      provider
+    ];
+  if (!spec) {
+    return null;
+  }
+
+  const runtimeRoot =
+    process.env
+      .LEX_RUNTIME_ROOT
+      ?.trim();
+  const npmOverride =
+    process.env
+      .LEX_NPM_CLI
+      ?.trim();
+  const runtimeNpm =
+    runtimeRoot
+      ? path.join(
+          runtimeRoot,
+          "node",
+          process.platform === "win32"
+            ? "npm.cmd"
+            : "bin/npm"
+        )
+      : null;
+  const npmExecutable =
+    (
+      npmOverride &&
+      existsSync(npmOverride)
+    )
+      ? npmOverride
+      : (
+          runtimeNpm &&
+          existsSync(runtimeNpm)
+        )
+        ? runtimeNpm
+        : await resolveCommand("npm");
+
+  if (!npmExecutable) {
+    throw new Error(
+      `ACCOUNT_SESSION_CLI_PROVISIONER_NOT_AVAILABLE:${provider}`
+    );
+  }
+
+  const installRoot =
+    path.join(
+      optionalAccountClientsRoot(),
+      provider
+    );
+  await fsp.mkdir(
+    installRoot,
+    {
+      recursive: true
+    }
+  );
+
+  const packageSpec =
+    `${spec.packageName}@${spec.version}`;
+  const result =
+    await runDirect(
+      npmExecutable,
+      [
+        "install",
+        "--prefix",
+        installRoot,
+        "--no-audit",
+        "--no-fund",
+        "--save-exact",
+        packageSpec
+      ],
+      undefined,
+      {
+        ...process.env,
+        npm_config_update_notifier:
+          "false"
+      },
+      OPTIONAL_ACCOUNT_CLIENT_INSTALL_TIMEOUT_MS
+    );
+
+  if (result.code !== 0) {
+    throw new Error(
+      `ACCOUNT_SESSION_CLI_PROVISION_FAILED:${provider}:${result.code}:${result.stderr.trim().slice(-1200)}`
+    );
+  }
+
+  const installed =
+    provider === "openai"
+      ? privateCodexExecutable()
+      : privateClaudeExecutable();
+  if (!installed) {
+    throw new Error(
+      `ACCOUNT_SESSION_CLI_PROVISION_MISSING_BINARY:${provider}`
+    );
+  }
+  return installed;
+}
+
 async function runCli(
   provider: ProviderId,
   args: string[],
@@ -1179,7 +1341,7 @@ async function runCli(
   abortSignal?: AbortSignal
 ): Promise<RunResult> {
   const executable =
-    await resolveAccountExecutable(
+    await ensureAccountExecutable(
       provider
     );
   if (!executable) {
@@ -1268,7 +1430,7 @@ async function runVisibleWindowsLogin(
   timeoutMs: number
 ): Promise<RunResult> {
   const executable =
-    await resolveAccountExecutable(
+    await ensureAccountExecutable(
       provider
     );
   if (!executable) {
