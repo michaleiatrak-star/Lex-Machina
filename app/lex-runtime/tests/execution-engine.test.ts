@@ -2,7 +2,10 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { LexExecutionEngine } from "../src/execution-engine.js";
+import {
+  buildCoreLegalResourcePrompt,
+  LexExecutionEngine
+} from "../src/execution-engine.js";
 import { LexSkillRegistry } from "../src/registry.js";
 import { ProviderGateway, ProviderRegistry } from "../src/providers/gateway.js";
 import { ScriptedProviderAdapter } from "../src/providers/scripted-provider.js";
@@ -75,6 +78,57 @@ afterEach(() => {
   while (roots.length) {
     fs.rmSync(roots.pop()!, { recursive: true, force: true });
   }
+});
+
+describe("local core resource prompt", () => {
+  it("keeps runtime-enforced local hard gates compact", () => {
+    const huge =
+      "x".repeat(
+        60_000
+      );
+    const resources =
+      new Map([
+        [
+          "shared/PRAWO-HARDGATE.md",
+          huge
+        ],
+        [
+          "references/KROK0A-anonimizer.md",
+          huge
+        ],
+        [
+          "references/KROK1-detekcja.md",
+          huge
+        ]
+      ]);
+
+    const local =
+      buildCoreLegalResourcePrompt(
+        resources,
+        true
+      );
+    const cloud =
+      buildCoreLegalResourcePrompt(
+        resources,
+        false
+      );
+
+    expect(
+      local.length
+    ).toBeLessThan(
+      2_000
+    );
+    expect(
+      local
+    ).not.toContain(
+      huge
+    );
+    expect(
+      cloud.length
+    ).toBeGreaterThan(
+      180_000
+    );
+  });
 });
 
 describe("LexExecutionEngine", () => {
