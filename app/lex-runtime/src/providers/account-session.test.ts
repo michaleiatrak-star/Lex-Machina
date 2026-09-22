@@ -4,6 +4,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   accountLoginArgs,
+  accountLoginFallbackArgs,
   accountLoginLaunchMode,
   accountSessionModelId,
   accountSessionResumeMode,
@@ -15,6 +16,7 @@ import {
   isAccountSessionModel,
   isMissingResumableSessionMessage,
   mergeWindowsCommandPath,
+  openAiChatGptAuthenticated,
   visibleWindowsLoginLauncher
 } from "./account-session.js";
 
@@ -146,10 +148,31 @@ describe("provider account-session transport", () => {
         "openai"
       )
     ).toEqual([
+      "-c",
+      'forced_login_method="chatgpt"',
       "login"
     ]);
     expect(
+      accountLoginFallbackArgs(
+        "openai"
+      )
+    ).toEqual([
+      "-c",
+      'forced_login_method="chatgpt"',
+      "login",
+      "--device-auth"
+    ]);
+    expect(
       accountLoginArgs(
+        "anthropic"
+      )
+    ).toEqual([
+      "auth",
+      "login",
+      "--claudeai"
+    ]);
+    expect(
+      accountLoginFallbackArgs(
         "anthropic"
       )
     ).toEqual([
@@ -276,6 +299,33 @@ describe("provider account-session transport", () => {
     ).toBe(
       "INTERACTIVE"
     );
+  });
+
+  it("recognizes ChatGPT auth status without accepting API-key login", () => {
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in using ChatGPT",
+        stderr: ""
+      })
+    ).toBe(true);
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Signed in with ChatGPT",
+        stderr: ""
+      })
+    ).toBe(true);
+    expect(
+      openAiChatGptAuthenticated({
+        code: 0,
+        stdout:
+          "Logged in using API key",
+        stderr: ""
+      })
+    ).toBe(false);
   });
 
   it("recognizes Claude subscription auth across current JSON and text status formats", () => {
