@@ -87,10 +87,13 @@ const checks = {
     source.notes?.networkAtInstall ===
       "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL" &&
     source.notes?.networkAfterBootstrapBeforeProviderUse ===
-      "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, DIRECT_LEGAL_MCP_FIRST_USE, AND UPDATES" &&
+      "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, DIRECT_LEGAL_MCP_FIRST_USE, ACCOUNT_SESSION_CLIENT_PROVISIONING, AND UPDATES" &&
     source.localAi?.networkRequiredForCoreInference === false &&
     source.localAi?.networkRequiredForWebResearch === true &&
     source.localAi?.directMcp?.legalFederation?.firstUseNetworkRequired === true &&
+    source.accountSessionClients?.bundledInInstaller === false &&
+    source.accountSessionClients?.codex?.delivery === "ON_DEMAND_AFTER_USER_SELECTS_CHATGPT_ACCOUNT" &&
+    source.accountSessionClients?.claude?.delivery === "ON_DEMAND_AFTER_USER_SELECTS_CLAUDE_ACCOUNT" &&
     selftest.includes("runtimeNetworkRequiredAfterBootstrap") &&
     selftest.includes("LOCAL_AI_PROVISIONING") &&
     paddle.includes("LEX_PADDLE_MODEL_DIR is required") &&
