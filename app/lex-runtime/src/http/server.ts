@@ -42,7 +42,7 @@ import { PdfJsDocumentPageSource } from "../pdf-document-page-source.js";
 import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
 import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
-import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";\nimport { LocalLlmPrivacyNamedEntityRecognizer } from "../privacy/local-llm-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
 import { LocalAuthStore } from "../auth/store.js";
