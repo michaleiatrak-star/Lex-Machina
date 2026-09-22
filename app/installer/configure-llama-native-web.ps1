@@ -16,6 +16,7 @@ $sourceWebMcp = Join-Path $bootstrapRoot "llama-web-mcp.py"
 $sourceLegalMcp = Join-Path $bootstrapRoot "llama-legal-skills-mcp.py"
 $sourcePrivateMcp = Join-Path $bootstrapRoot "llama-private-docs-mcp.py"
 $sourceTemplate = Join-Path $bootstrapRoot "mistral-nemo-web-grounded.jinja"
+$sourceBielikTemplate = Join-Path $bootstrapRoot "bielik-web-grounded.jinja"
 
 $pythonDir = Join-Path $runtime "python"
 $pythonExe = Join-Path $pythonDir "python.exe"
@@ -39,6 +40,7 @@ foreach ($required in @(
   $sourceLegalMcp,
   $sourcePrivateMcp,
   $sourceTemplate,
+  $sourceBielikTemplate,
   $ocrWorker,
   $nerWorker,
   $documentWorker,
@@ -74,10 +76,12 @@ $webMcpScript = Join-Path $mcpRoot "llama-web-mcp.py"
 $legalMcpScript = Join-Path $mcpRoot "llama-legal-skills-mcp.py"
 $privateMcpScript = Join-Path $mcpRoot "llama-private-docs-mcp.py"
 $templatePath = Join-Path $localRoot "mistral-nemo-web-grounded.jinja"
+$bielikTemplatePath = Join-Path $localRoot "bielik-web-grounded.jinja"
 Copy-Item -LiteralPath $sourceWebMcp -Destination $webMcpScript -Force
 Copy-Item -LiteralPath $sourceLegalMcp -Destination $legalMcpScript -Force
 Copy-Item -LiteralPath $sourcePrivateMcp -Destination $privateMcpScript -Force
 Copy-Item -LiteralPath $sourceTemplate -Destination $templatePath -Force
+Copy-Item -LiteralPath $sourceBielikTemplate -Destination $bielikTemplatePath -Force
 
 $sharedPath = "$nodeDir;$pythonScripts;$env:PATH"
 $externalEnv = [ordered]@{
@@ -299,6 +303,7 @@ $result = [ordered]@{
   legalSkillCount = $skillCount
   privateExportRoot = $privateExportRoot
   mistralChatTemplate = $templatePath
+  bielikChatTemplate = $bielikTemplatePath
   mcpServers = @(
     "web",
     "legal",
