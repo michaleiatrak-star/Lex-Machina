@@ -187,9 +187,20 @@ try {
   if (-not (Test-Path -LiteralPath $selfTest -PathType Leaf)) {
     throw "OFFLINE_BUNDLE_SELFTEST_SCRIPT_MISSING"
   }
-  & $selfTest -PayloadRoot $runtime
-  if ($LASTEXITCODE -ne 0) {
-    throw "OFFLINE_BUNDLE_SELFTEST_FAILED"
+  $selfTestLog = Join-Path $runtime "bootstrap\offline-payload-selftest.log"
+  Remove-Item -LiteralPath $selfTestLog -Force -ErrorAction SilentlyContinue
+  try {
+    & $selfTest -PayloadRoot $runtime *>&1 |
+      Tee-Object -FilePath $selfTestLog |
+      Out-Host
+    if ($LASTEXITCODE -ne 0) {
+      throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$LASTEXITCODE"
+    }
+  } catch {
+    Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8
+    Write-Host "OFFLINE_BUNDLE_SELFTEST_LOG_TAIL"
+    Get-Content -LiteralPath $selfTestLog -Tail 120 -ErrorAction SilentlyContinue | Out-Host
+    throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$($_.Exception.Message)"
   }
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
