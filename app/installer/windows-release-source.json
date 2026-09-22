@@ -300,13 +300,14 @@
   "notes": {
     "libreOffice": "Not a runtime prerequisite. DOCX/ODT generation and validation are implemented by the deterministic Lex renderer; LibreOffice remains optional release QA only.",
     "networkAtInstall": "REQUIRED_FOR_MISSING_CORE_COMPONENTS_ONLY; LOCAL_LLM_IS_NOT_INSTALLED_DURING_APPLICATION_INSTALL",
-    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, DIRECT_LEGAL_MCP_FIRST_USE, AND UPDATES",
+    "networkAfterBootstrapBeforeProviderUse": "OPTIONAL_FOR_USER_INITIATED_LOCAL_AI_PROVISIONING, LOCAL_AI_WEB_RESEARCH, DIRECT_LEGAL_MCP_FIRST_USE, ACCOUNT_SESSION_CLIENT_PROVISIONING, AND UPDATES",
     "cachePolicy": "REUSE_ONLY_AFTER_SHA256_VERIFICATION",
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
     "skillUpdateSigning": "Skill self-update may use the official michaleiatrak-star/Lex-Machina GitHub Releases source without Ed25519. GitHub release asset SHA-256, index schema/version compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory. Ed25519 is accepted when present.",
     "modelPackUpdateSigning": "Temporary unsigned model-pack mode is enabled for 0.1.7: the official model-pack index may be accepted without Ed25519 while SHA-256 verification of downloaded model artifacts remains mandatory. Re-enable signed-index enforcement when the production trust root is configured.",
-    "pythonRuntime": "Official CPython embeddable x64 distribution is used for the app-private runtime to avoid Windows Installer registration/maintenance-mode collisions with an existing Python of the same version. pip is bootstrapped from a pinned verified wheel into the private site-packages directory."
+    "pythonRuntime": "Official CPython embeddable x64 distribution is used for the app-private runtime to avoid Windows Installer registration/maintenance-mode collisions with an existing Python of the same version. pip is bootstrapped from a pinned verified wheel into the private site-packages directory.",
+    "accountSessionClients": "Codex CLI and Claude Code are not bundled. Exact pinned clients are downloaded only when the user selects ChatGPT/Claude account-session login."
   },
   "modelPackUpdate": {
     "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
@@ -357,14 +358,20 @@
       "package": "@openai/codex",
       "version": "0.154.0",
       "model": "gpt-5.6-luna",
-      "delivery": "BUNDLED_APP_PRIVATE",
-      "auth": "CHATGPT_ACCOUNT"
+      "delivery": "ON_DEMAND_AFTER_USER_SELECTS_CHATGPT_ACCOUNT",
+      "auth": "CHATGPT_ACCOUNT",
+      "installRoot": "%LOCALAPPDATA%\\LexMachina\\optional-tools\\account-clients\\openai",
+      "provisioner": "APP_PRIVATE_NPM_PINNED_VERSION"
     },
     "claude": {
       "package": "@anthropic-ai/claude-code",
       "version": "2.1.274",
-      "delivery": "BUNDLED_APP_PRIVATE",
-      "auth": "CLAUDE_AI_SUBSCRIPTION"
-    }
+      "delivery": "ON_DEMAND_AFTER_USER_SELECTS_CLAUDE_ACCOUNT",
+      "auth": "CLAUDE_AI_SUBSCRIPTION",
+      "installRoot": "%LOCALAPPDATA%\\LexMachina\\optional-tools\\account-clients\\anthropic",
+      "provisioner": "APP_PRIVATE_NPM_PINNED_VERSION"
+    },
+    "bundledInInstaller": false,
+    "apiKeyProvidersNeedCli": false
   }
 }
