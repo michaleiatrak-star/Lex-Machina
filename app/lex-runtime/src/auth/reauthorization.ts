@@ -289,14 +289,12 @@ export class DeanonymizationReauthorizationManager {
         target.caseKeyVersion
       ) ||
       target.caseKeyVersion < 1 ||
-      (
+      typeof target
+        .deanonymizationKeyBinding !==
+        "string" ||
+      !validSha256(
         target
-          .deanonymizationKeyBinding !==
-          undefined &&
-        !validSha256(
-          target
-            .deanonymizationKeyBinding
-        )
+          .deanonymizationKeyBinding
       )
     ) {
       throw new ReauthorizationError(
