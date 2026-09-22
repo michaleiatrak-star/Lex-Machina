@@ -1084,8 +1084,8 @@ async function resolveAccountExecutable(
     CLI_NAMES[provider];
 
   // Match the proven ChatGPT behavior for both account providers:
-  // prefer the user's normally installed official CLI, then fall back to
-  // the private client bundled with Lex Machina on clean machines.
+  // prefer the user's normally installed official CLI, then use the
+  // optional private client provisioned on demand by Lex Machina.
   const systemExecutable =
     await resolveCommand(
       command
@@ -1372,8 +1372,8 @@ export function accountLoginArgs(
 ): string[] {
   if (provider === "openai") {
     // Keep the browser OAuth flow compatible with the proven RC14 behavior.
-    // The private Codex binary is still used; only the login invocation is
-    // intentionally left to the client's native ChatGPT flow.
+    // The official Codex client is resolved from the system or provisioned
+    // on demand; the login invocation stays in its native ChatGPT flow.
     return ["login"];
   }
   if (provider === "anthropic") {
