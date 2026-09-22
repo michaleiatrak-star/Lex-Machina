@@ -2427,9 +2427,17 @@ export async function reviewDocument(
       | DocumentReviewResponse
       | ApiFailure;
   if (!response.ok) {
-    throw new Error(
-      (payload as ApiFailure).error ||
-      `HTTP_${response.status}`
+    const failure =
+      payload as ApiFailure;
+    throw new ApiError(
+      failure.error ||
+        `HTTP_${response.status}`,
+      response.status,
+      failure.retryAfter,
+      failure.reason,
+      failure.description,
+      failure.stage,
+      failure.trace
     );
   }
   return payload as DocumentReviewResponse;
