@@ -30,6 +30,7 @@ $appUpdateTransaction = Require-File "bootstrap\app-update-transaction.ps1"
 $appUpdateVerification = Require-File "bootstrap\app-update-verification.ps1"
 $llamaWebConfigurator = Require-File "bootstrap\configure-llama-native-web.ps1"
 $llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
+$llamaLegalMcp = Require-File "bootstrap\llama-legal-skills-mcp.py"
 $llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
@@ -89,9 +90,22 @@ Write-Host "SELFTEST_STAGE:llama-native-web-mcp"
 & $python $llamaWebMcp --self-test | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_WEB_MCP_FAILED" }
 
+Write-Host "SELFTEST_STAGE:llama-native-legal-skills-mcp"
+& $python $llamaLegalMcp --skills-root $corpus --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_LEGAL_SKILLS_MCP_FAILED" }
+
+$skillFiles = @(Get-ChildItem -LiteralPath $corpus -Directory | Where-Object {
+  Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf
+})
+if ($skillFiles.Count -ne 32) {
+  throw "SELFTEST_LLAMA_LEGAL_SKILL_COUNT_INVALID:expected=32:actual=$($skillFiles.Count)"
+}
+
 $templateText = Get-Content -Raw -LiteralPath $llamaMistralTemplate
 if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
-    $templateText -notmatch "web_research") {
+    $templateText -notmatch "web_research" -or
+    $templateText -notmatch "LEX_LEGAL_SKILLS_AUTO_POLICY_V1" -or
+    $templateText -notmatch "legal_auto_route") {
   throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
 }
 
