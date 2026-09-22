@@ -225,6 +225,31 @@
   font: inherit;
 }
 
+.workspace-filter {
+  display: grid;
+  gap: 4px;
+  min-width: 132px;
+}
+
+.workspace-filter span {
+  color: #6d7a72;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.workspace-filter select {
+  min-height: 38px;
+  width: 100%;
+  padding: 0 8px;
+  border: 1px solid #cbd4c9;
+  border-radius: 9px;
+  background: #fff;
+  color: #26372c;
+  font: inherit;
+}
+
 .workspace-location-line {
   display: flex;
   align-items: center;
@@ -440,11 +465,13 @@
   }
 
   .workspace-item-actions > *,
-  .workspace-search {
+  .workspace-search,
+  .workspace-filter {
     width: 100%;
   }
 
-  .workspace-search {
+  .workspace-search,
+  .workspace-filter {
     min-width: 0;
   }
 
