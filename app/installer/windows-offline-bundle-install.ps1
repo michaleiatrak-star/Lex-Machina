@@ -5,21 +5,6 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# Persist broad llama.cpp-native agent mode for this Windows user. The
-# llama-server process reads these variables directly; Lex Runtime does not
-# inject or broker the agent tools.
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_AGENT",
-  "true",
-  [EnvironmentVariableTarget]::User
-)
-[Environment]::SetEnvironmentVariable(
-  "LLAMA_ARG_CORS_ORIGINS",
-  "localhost",
-  [EnvironmentVariableTarget]::User
-)
-$env:LLAMA_ARG_AGENT = "true"
-$env:LLAMA_ARG_CORS_ORIGINS = "localhost"
 $runtime = [IO.Path]::GetFullPath($RuntimeRoot)
 $bundle = (Resolve-Path -LiteralPath $BundlePath).Path
 $receiptPath = Join-Path $runtime "offline-runtime.json"
@@ -218,6 +203,12 @@ try {
     Get-Content -LiteralPath $selfTestLog -Tail 120 -ErrorAction SilentlyContinue | Out-Host
     throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$($_.Exception.Message)"
   }
+
+  $nativeWebConfigurator = Join-Path $runtime "bootstrap\configure-llama-native-web.ps1"
+  if (-not (Test-Path -LiteralPath $nativeWebConfigurator -PathType Leaf)) {
+    throw "OFFLINE_BUNDLE_LLAMA_NATIVE_WEB_CONFIGURATOR_MISSING"
+  }
+  & $nativeWebConfigurator -RuntimeRoot $runtime | Out-Host
 
   Write-Host "LEX_OFFLINE_BUNDLE_INSTALL_PASS"
 } finally {
