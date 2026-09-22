@@ -195,7 +195,7 @@ describe(
     );
 
     it(
-      "classifies auxiliary URLs locally and requires a real known R1/R2A cross-check before marking it confirmed",
+      "classifies auxiliary URLs locally but leaves higher-tier cross-check attestation to the session ledger",
       async () => {
         const runtime =
           new LegalFederationToolRuntime();
@@ -208,59 +208,41 @@ describe(
               name:
                 "assess_legal_source",
               input: {
+                claim:
+                  "art. 5 KC",
                 url:
                   "https://prawo.pl/prawo/example",
                 updatedAt:
-                  "2026-09-01",
-                crossCheckStatus:
-                  "CONFIRMED_R1_R2A",
-                crossCheckUrl:
-                  "https://eli.gov.pl/eli/DU/2026/1"
+                  "2026-09-01"
               }
             }
           ]);
 
-        const knownPayload =
+        expect(
           JSON.parse(
             known?.content ??
               "{}"
-          ) as {
-            candidate: {
-              tier: string;
-              crossCheckTier?: string;
-            };
-            assessment: {
-              canBeSoleLegalBasis: boolean;
-              canCreateVerifiedMarker: boolean;
-              higherTierCrossCheckSatisfied: boolean;
-            };
-          };
-
-        expect(
-          knownPayload
-            .candidate
-            .tier
-        ).toBe("R2B");
-        expect(
-          knownPayload
-            .candidate
-            .crossCheckTier
-        ).toBe("R1");
-        expect(
-          knownPayload
-            .assessment
-            .higherTierCrossCheckSatisfied
-        ).toBe(true);
-        expect(
-          knownPayload
-            .assessment
-            .canBeSoleLegalBasis
-        ).toBe(false);
-        expect(
-          knownPayload
-            .assessment
-            .canCreateVerifiedMarker
-        ).toBe(false);
+          )
+        ).toMatchObject({
+          classification:
+            "KNOWN_DOMAIN",
+          candidate: {
+            claim:
+              "art. 5 KC",
+            tier:
+              "R2B",
+            crossCheckStatus:
+              "PENDING"
+          },
+          assessment: {
+            higherTierCrossCheckSatisfied:
+              false,
+            canBeSoleLegalBasis:
+              false,
+            canCreateVerifiedMarker:
+              false
+          }
+        });
 
         const [unknown] =
           await runtime.runTools([
@@ -297,36 +279,31 @@ describe(
           }
         });
 
-        const [invalidCrossCheck] =
-          await runtime.runTools([
-            {
-              id:
-                "assess-bad-crosscheck",
-              name:
-                "assess_legal_source",
-              input: {
-                url:
-                  "https://prawo.pl/prawo/example",
-                crossCheckStatus:
-                  "CONFIRMED_R1_R2A",
-                crossCheckUrl:
-                  "https://example.com/not-authoritative"
-              }
-            }
-          ]);
+        const assessSchema =
+          runtime.schemas().find(
+            (schema) =>
+              schema.function.name ===
+              "assess_legal_source"
+          );
+        const params =
+          assessSchema?.function
+            .parameters as {
+              properties?: Record<
+                string,
+                unknown
+              >;
+            };
 
         expect(
-          JSON.parse(
-            invalidCrossCheck
-              ?.content ??
-              "{}"
-          )
-        ).toMatchObject({
-          status:
-            "POLICY_BLOCKED",
-          error:
-            "LEGAL_SOURCE_CROSSCHECK_REQUIRES_KNOWN_R1_R2A_URL"
-        });
+          params.properties
+        ).not.toHaveProperty(
+          "crossCheckStatus"
+        );
+        expect(
+          params.properties
+        ).not.toHaveProperty(
+          "crossCheckUrl"
+        );
       }
     );
 
