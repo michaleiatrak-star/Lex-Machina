@@ -1488,26 +1488,29 @@ export function claudeSubscriptionAuthenticated(
 
   const lower =
     (result.stdout + "\n" + result.stderr)
+      .trim()
       .toLowerCase();
 
-  // Current Claude Code defines "auth status" by its exit code:
-  // 0 = logged in, 1 = not logged in. Keep only a small fail-closed guard
-  // against explicit non-subscription lanes. The app's login command never
-  // passes --console, so the normal browser flow remains the Claude account
-  // subscription path.
-  return ![
-    "credentials-file",
-    "anthropic console",
-    "\"authmethod\":\"api_key\"",
-    "\"authmethod\": \"api_key\"",
-    "api key",
-    "bedrock",
-    "vertex",
-    "foundry"
-  ].some((needle) =>
-    lower.includes(needle)
-  );
+  // The account lane launches the official interactive Claude Code login.
+  // Once that CLI reports auth status success, treat it as authenticated.
+  // Keep only explicit non-subscription/cloud/API lanes blocked so this
+  // account source cannot silently become an API-billed provider.
+  const explicitlyNonSubscription =
+    [
+      "credentials-file",
+      "anthropic console",
+      "api key",
+      "api_key",
+      "bedrock",
+      "vertex",
+      "foundry"
+    ].some((needle) =>
+      lower.includes(needle)
+    );
+
+  return !explicitlyNonSubscription;
 }
+
 async function assertSubscriptionAccount(
   provider: "openai" | "anthropic",
   abortSignal?: AbortSignal
