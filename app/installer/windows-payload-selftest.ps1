@@ -39,14 +39,38 @@ if (-not (Test-Path -LiteralPath $pythonSelftest -PathType Leaf)) {
   throw "SELFTEST_PYTHON_HELPER_MISSING"
 }
 
+$oldEnv = @{
+  LEX_PADDLE_MODEL_DIR = $env:LEX_PADDLE_MODEL_DIR
+  PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK
+  STANZA_RESOURCES_DIR = $env:STANZA_RESOURCES_DIR
+  PYTHONNOUSERSITE = $env:PYTHONNOUSERSITE
+  PYTHONUTF8 = $env:PYTHONUTF8
+  HTTP_PROXY = $env:HTTP_PROXY
+  HTTPS_PROXY = $env:HTTPS_PROXY
+  ALL_PROXY = $env:ALL_PROXY
+  NO_PROXY = $env:NO_PROXY
+}
+$env:LEX_PADDLE_MODEL_DIR = $paddle
+$env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
+$env:STANZA_RESOURCES_DIR = $stanza
+$env:PYTHONNOUSERSITE = "1"
+$env:PYTHONUTF8 = "1"
+$env:HTTP_PROXY = "http://127.0.0.1:9"
+$env:HTTPS_PROXY = "http://127.0.0.1:9"
+$env:ALL_PROXY = "http://127.0.0.1:9"
+$env:NO_PROXY = "127.0.0.1,localhost"
+
+Write-Host "SELFTEST_STAGE:native-component-lock"
 & $sidecar --self-test | Out-Host
 if ($LASTEXITCODE -ne 0) {
   throw "SELFTEST_NATIVE_COMPONENT_LOCK_FAILED"
 }
 
+Write-Host "SELFTEST_STAGE:node"
 & $node --version | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_NODE_FAILED" }
 
+Write-Host "SELFTEST_STAGE:codex"
 $codexVersion = (& $codex --version 2>&1 | Out-String).Trim()
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_CODEX_CLI_FAILED" }
 if ($codexVersion -notmatch '0\.154\.0') {
@@ -54,15 +78,18 @@ if ($codexVersion -notmatch '0\.154\.0') {
 }
 Write-Host "SELFTEST_CODEX_CLI_PASS:$codexVersion"
 
+Write-Host "SELFTEST_STAGE:python-core"
 & $python $pythonSelftest core | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_CORE_IMPORT_FAILED" }
 
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
 # Torch load independent native DLL graphs on Windows; production OCR and NER
 # workers are separate processes as well.
+Write-Host "SELFTEST_STAGE:python-ocr-import"
 & $python $pythonSelftest ocr-import | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_OCR_IMPORT_FAILED" }
 
+Write-Host "SELFTEST_STAGE:python-ner-import"
 & $python $pythonSelftest ner-import | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_PYTHON_NER_IMPORT_FAILED" }
 
@@ -114,26 +141,6 @@ foreach ($entry in $lock.files) {
 
 $temp = Join-Path $env:TEMP ("lex-installer-selftest-" + [Guid]::NewGuid().ToString("N"))
 New-Item $temp -ItemType Directory | Out-Null
-$oldEnv = @{
-  LEX_PADDLE_MODEL_DIR = $env:LEX_PADDLE_MODEL_DIR
-  PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK
-  STANZA_RESOURCES_DIR = $env:STANZA_RESOURCES_DIR
-  PYTHONNOUSERSITE = $env:PYTHONNOUSERSITE
-  PYTHONUTF8 = $env:PYTHONUTF8
-  HTTP_PROXY = $env:HTTP_PROXY
-  HTTPS_PROXY = $env:HTTPS_PROXY
-  ALL_PROXY = $env:ALL_PROXY
-  NO_PROXY = $env:NO_PROXY
-}
-$env:LEX_PADDLE_MODEL_DIR = $paddle
-$env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
-$env:STANZA_RESOURCES_DIR = $stanza
-$env:PYTHONNOUSERSITE = "1"
-$env:PYTHONUTF8 = "1"
-$env:HTTP_PROXY = "http://127.0.0.1:9"
-$env:HTTPS_PROXY = "http://127.0.0.1:9"
-$env:ALL_PROXY = "http://127.0.0.1:9"
-$env:NO_PROXY = "127.0.0.1,localhost"
 
 try {
   Write-Host "Self-test: actual local OCR inference"
