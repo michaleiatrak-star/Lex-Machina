@@ -1,6 +1,9 @@
 name: Lex Machina 0.1.8 Windows Release
 
 on:
+  push:
+    branches:
+      - "release/0.1.8"
   workflow_dispatch:
 
 permissions:
