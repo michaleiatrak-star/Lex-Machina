@@ -33,6 +33,7 @@ $llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
 $llamaLegalMcp = Require-File "bootstrap\llama-legal-skills-mcp.py"
 $llamaDocumentsMcp = Require-File "bootstrap\llama-local-documents-mcp.py"
 $llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
+$llamaBielikTemplate = Require-File "bootstrap\bielik-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
 $documentWorker = Require-File "storage\legal_document_worker.py"
@@ -115,6 +116,38 @@ if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
     $templateText -notmatch "privacy_deanonymize_text" -or
     $templateText -notmatch "LEX_LEGAL_MCP_FEDERATION_POLICY_V1") {
   throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
+}
+
+$bielikTemplateText = Get-Content -Raw -LiteralPath $llamaBielikTemplate
+if ($bielikTemplateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
+    $bielikTemplateText -notmatch "LEX_LEGAL_SKILLS_AUTO_POLICY_V1" -or
+    $bielikTemplateText -notmatch "LEX_DIRECT_LEGAL_MCP_POLICY_V1" -or
+    $bielikTemplateText -notmatch "documents_privacy_ocr_anonymize_file" -or
+    $bielikTemplateText -notmatch "<tool_call>") {
+  throw "SELFTEST_LLAMA_BIELIK_GROUNDED_TEMPLATE_INVALID"
+}
+
+$llamaConfiguratorText = Get-Content -Raw -LiteralPath $llamaWebConfigurator
+foreach ($pin in @(
+  "@matematicsolutions/mcp-saos@1.2.0",
+  "@matematicsolutions/mcp-nsa@1.3.0",
+  "@matematicsolutions/mcp-isap@1.3.0",
+  "@matematicsolutions/mcp-krs@1.1.1",
+  "@matematicsolutions/mcp-eureka@0.2.0",
+  "kio-orzeczenia-mcp==0.4.3",
+  "@matematicsolutions/mcp-eu-sparql@1.2.0",
+  "@matematicsolutions/mcp-eu-compliance@0.4.0",
+  "legalize-mcp==0.2.4",
+  "prawo-pl-mcp==0.1.4"
+)) {
+  if ($llamaConfiguratorText -notmatch [Regex]::Escape($pin)) {
+    throw "SELFTEST_LLAMA_DIRECT_MCP_PIN_MISSING:$pin"
+  }
+}
+foreach ($server in @("saos","nsa","isap","krs","eureka","kio","uodo","eu_sparql","eu_compliance","legalize")) {
+  if ($llamaConfiguratorText -notmatch ("(?m)^\s{4}" + [Regex]::Escape($server) + "\s*=\s*\[ordered\]@\{")) {
+    throw "SELFTEST_LLAMA_DIRECT_MCP_SERVER_MISSING:$server"
+  }
 }
 
 # Keep native ML stacks in separate interpreter processes. Paddle/PaddleX and
