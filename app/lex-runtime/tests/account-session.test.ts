@@ -4,8 +4,11 @@ import {
   it
 } from "vitest";
 import {
+  accountLoginArgs,
+  accountLoginFallbackArgs,
   accountSessionResumeMode,
-  codexExecArgs
+  codexExecArgs,
+  openAiChatGptAuthenticated
 } from "../src/providers/account-session.js";
 
 describe(
@@ -28,6 +31,51 @@ describe(
         ).toBe(
           "LAST_OR_NEW"
         );
+      }
+    );
+
+    it(
+      "keeps the proven RC14 ChatGPT browser login contract",
+      () => {
+        expect(
+          accountLoginArgs(
+            "openai"
+          )
+        ).toEqual([
+          "login"
+        ]);
+        expect(
+          accountLoginFallbackArgs(
+            "openai"
+          )
+        ).toEqual([
+          "login",
+          "--device-auth"
+        ]);
+        expect(
+          openAiChatGptAuthenticated({
+            code: 0,
+            stdout:
+              "Using ChatGPT",
+            stderr: ""
+          })
+        ).toBe(true);
+        expect(
+          openAiChatGptAuthenticated({
+            code: 0,
+            stdout:
+              "Logged in using ChatGPT",
+            stderr: ""
+          })
+        ).toBe(true);
+        expect(
+          openAiChatGptAuthenticated({
+            code: 0,
+            stdout:
+              "Authenticated with API key",
+            stderr: ""
+          })
+        ).toBe(false);
       }
     );
 
