@@ -438,6 +438,14 @@ export async function startLocalServer(options?: {
     accountSessions
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  const stanzaNamedEntities =
+    new LocalStanzaNamedEntityRecognizer();
+  const privacyNamedEntities =
+    new LocalLlmPrivacyNamedEntityRecognizer(
+      providerGateway,
+      localModels,
+      stanzaNamedEntities
+    );
   const modelCatalog =
     new DynamicModelCatalog(
       credentials,
