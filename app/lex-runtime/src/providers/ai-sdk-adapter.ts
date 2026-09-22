@@ -1661,6 +1661,26 @@ async function streamModel(
   return { fullText };
 }
 
+export function shouldRetryLocalAtMinimumContext(
+  error: unknown,
+  currentContextTokens: number,
+  minimumContextTokens: number
+): boolean {
+  if (
+    currentContextTokens <=
+      minimumContextTokens
+  ) {
+    return false;
+  }
+  const detail =
+    error instanceof Error
+      ? error.message
+      : String(error);
+  return /LOCAL_MODEL_(?:RESPONSE|HTTP_RESPONSE|SSE_FIRST_CONTENT|SSE_IDLE|JSON_BODY)_TIMEOUT/.test(
+    detail
+  );
+}
+
 export class AiSdkProviderAdapter implements ProviderAdapter {
   readonly label: string;
   readonly capabilities = providerCapabilities();
@@ -1726,18 +1746,71 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
           ?.tokenizerCalibration
           ?.conservativeCharsPerToken ??
         2;
-      return streamLocalModel(
-        localStatus.endpoint,
-        configuredModel.id,
-        contextTokens,
-        conservativeCharsPerToken,
-        {
-          ...params,
-          model:
-            configuredModel.id,
-          reasoning: "none"
+      const localParams = {
+        ...params,
+        model:
+          configuredModel.id,
+        reasoning: "none" as const
+      };
+      try {
+        return await streamLocalModel(
+          localStatus.endpoint,
+          configuredModel.id,
+          contextTokens,
+          conservativeCharsPerToken,
+          localParams
+        );
+      } catch (error) {
+        const minimumContextTokens =
+          configuredModel
+            .minimumContextWindow;
+        if (
+          !shouldRetryLocalAtMinimumContext(
+            error,
+            contextTokens,
+            minimumContextTokens
+          )
+        ) {
+          throw error;
         }
-      );
+
+        await this.localModels
+          .reconfigureContext(
+            configuredModel.id,
+            minimumContextTokens
+          );
+        const recoveredModel =
+          await this.localModels
+            .ensureRunning(
+              configuredModel.id
+            );
+        const recoveredStatus =
+          this.localModels
+            .status();
+        const recoveredContextTokens =
+          recoveredStatus
+            .configuredContextTokens ??
+          recoveredModel
+            .contextWindow;
+        const recoveredCharsPerToken =
+          recoveredStatus
+            .qualification
+            ?.tokenizerCalibration
+            ?.conservativeCharsPerToken ??
+          conservativeCharsPerToken;
+
+        return await streamLocalModel(
+          recoveredStatus.endpoint,
+          recoveredModel.id,
+          recoveredContextTokens,
+          recoveredCharsPerToken,
+          {
+            ...localParams,
+            model:
+              recoveredModel.id
+          }
+        );
+      }
     }
 
     const apiKey = await this.credentials.getApiKey(this.id);
