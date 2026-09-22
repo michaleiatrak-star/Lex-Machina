@@ -23,7 +23,6 @@ function Require-Dir([string]$Relative) {
 $node = Require-File "node\node.exe"
 $python = Require-File "python\python.exe"
 $server = Require-File "app\dist\http\server.js"
-$codex = Require-File "app\node_modules\.bin\codex.cmd"
 $sidecar = Require-File "lex-runtime-sidecar.exe"
 $lockPath = Require-File "component-lock.json"
 $appUpdateTransaction = Require-File "bootstrap\app-update-transaction.ps1"
@@ -76,13 +75,18 @@ Write-Host "SELFTEST_STAGE:node"
 & $node --version | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_NODE_FAILED" }
 
-Write-Host "SELFTEST_STAGE:codex"
-$codexVersion = (& $codex --version 2>&1 | Out-String).Trim()
-if ($LASTEXITCODE -ne 0) { throw "SELFTEST_CODEX_CLI_FAILED" }
-if ($codexVersion -notmatch '0\.154\.0') {
-  throw "SELFTEST_CODEX_CLI_VERSION_MISMATCH:$codexVersion"
+Write-Host "SELFTEST_STAGE:optional-account-clients-not-bundled"
+foreach ($forbidden in @(
+  "app\node_modules\.bin\codex.cmd",
+  "app\node_modules\.bin\claude.cmd",
+  "app\node_modules\@openai\codex",
+  "app\node_modules\@anthropic-ai\claude-code"
+)) {
+  if (Test-Path -LiteralPath (Join-Path $root $forbidden)) {
+    throw "SELFTEST_OPTIONAL_ACCOUNT_CLIENT_BUNDLED:$forbidden"
+  }
 }
-Write-Host "SELFTEST_CODEX_CLI_PASS:$codexVersion"
+Write-Host "SELFTEST_OPTIONAL_ACCOUNT_CLIENTS_ON_DEMAND_PASS"
 
 Write-Host "SELFTEST_STAGE:python-core"
 & $python $pythonSelftest core | Out-Host
