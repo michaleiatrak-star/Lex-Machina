@@ -6,7 +6,10 @@ import {
   type Dispatch,
   type SetStateAction
 } from "react";
-import type { EvidenceItem } from "./api.js";
+import type {
+  AuxiliarySourceItem,
+  EvidenceItem
+} from "./api.js";
 import {
   appendCaseThreadMessage,
   getCaseThread,
@@ -19,6 +22,8 @@ export type CaseChatMessage = {
   role: "user" | "assistant" | "system";
   content: string;
   evidence?: EvidenceItem[];
+  auxiliarySources?:
+    AuxiliarySourceItem[];
   meta?: string;
   documentCitations?: WorkspaceDocumentCitation[];
 };
