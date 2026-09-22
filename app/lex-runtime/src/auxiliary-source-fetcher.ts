@@ -670,7 +670,7 @@ function decodeEntities(
     )
     .replace(
       /&quot;/giu,
-      """
+      "\""
     )
     .replace(
       /&#39;|&apos;/giu,
