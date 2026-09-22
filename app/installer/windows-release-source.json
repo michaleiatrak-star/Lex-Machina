@@ -170,7 +170,12 @@
       "defaultSearchProvider": "DUCKDUCKGO_HTML",
       "optionalSearchProvider": "BRAVE_SEARCH_API",
       "citationPolicy": "FETCH_BEFORE_CITE_NO_INVENTED_URLS",
-      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED"
+      "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED",
+      "directLaunchPolicy": {
+        "mistral": "SERVER_CHAT_TEMPLATE_GROUNDED",
+        "bielik": "SERVER_CHATML_TEMPLATE_GROUNDED",
+        "ui": "SYSTEM_MESSAGE_GROUNDED_FOR_ALL_LOCAL_MODELS"
+      }
     },
     "legalSkills": {
       "mode": "AUTO",
@@ -219,6 +224,40 @@
         "private_vault_status",
         "private_clear_session"
       ]
+    },
+    "directMcpFleet": {
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "servers": [
+        "web",
+        "legal",
+        "private",
+        "prawo",
+        "saos",
+        "nsa",
+        "isap",
+        "krs",
+        "eureka",
+        "kio",
+        "uodo",
+        "eu_sparql",
+        "eu_compliance",
+        "legalize"
+      ],
+      "sourceConnectors": {
+        "prawo": "prawo-pl-mcp==0.1.4",
+        "saos": "@matematicsolutions/mcp-saos@1.2.0",
+        "nsa": "@matematicsolutions/mcp-nsa@1.3.0",
+        "isap": "@matematicsolutions/mcp-isap@1.3.0",
+        "krs": "@matematicsolutions/mcp-krs@1.1.1",
+        "eureka": "@matematicsolutions/mcp-eureka@0.2.0",
+        "kio": "kio-orzeczenia-mcp==0.4.3",
+        "uodo": "bundled local official UODO MCP",
+        "eu_sparql": "@matematicsolutions/mcp-eu-sparql@1.2.0",
+        "eu_compliance": "@matematicsolutions/mcp-eu-compliance@0.4.0",
+        "legalize": "legalize-mcp==0.2.4"
+      },
+      "externalConnectorProvisioning": "PINNED_LAZY_FIRST_USE_REQUIRES_NETWORK",
+      "externalPiiPolicy": "PUBLIC_LEGAL_TERMS_AND_IDENTIFIERS_ONLY_NO_CASE_FACTS_OR_PII"
     }
   },
   "systemPrerequisites": {
@@ -264,7 +303,7 @@
     "officialSourceUnsignedAllowed": true
   },
   "legalSourceFederation": {
-    "transport": "MCP_STDIO_VIA_UVX",
+    "transport": "DIRECT_LLAMA_CPP_MCP_STDIO_AND_PRAWO_PL_MCP",
     "aggregator": "prawo-pl-mcp",
     "aggregatorVersion": "0.1.4",
     "role": "DISCOVERY_RESEARCH_ONLY",
@@ -283,7 +322,21 @@
     "statutoryVerificationAuthority": "LEX_NATIVE_OFFICIAL_VERIFIER",
     "firstUseNetworkRequired": true,
     "networkPolicy": "CORE_RUNTIME_REMAINS_NETWORK_INDEPENDENT_AFTER_BOOTSTRAP; LIVE_MCP_SOURCE_CALLS_REQUIRE_NETWORK_WHEN_USER_OR_MODEL_INVOKES_LEGAL_RESEARCH",
-    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE"
+    "firstUseConnectorProvisioning": "PINNED_CONNECTORS_MAY_BE_DOWNLOADED_LAZILY_ON_FIRST_USE",
+    "mediation": "NO_LEX_TOOL_BROKER",
+    "directServers": [
+      "prawo",
+      "saos",
+      "nsa",
+      "isap",
+      "krs",
+      "eureka",
+      "kio",
+      "uodo",
+      "eu_sparql",
+      "eu_compliance",
+      "legalize"
+    ]
   },
   "accountSessionClients": {
     "codex": {
