@@ -12,7 +12,10 @@ import type {
   NormalizedToolSchema
 } from "./providers/types.js";
 import {
-  federatedSourcePolicy
+  assessLegalSourceCandidate,
+  classifyKnownLegalSourceUrl,
+  federatedSourcePolicy,
+  type LegalSourceCrossCheckStatus
 } from "./legal-source-policy.js";
 
 // 0.1.4 is the published build used by the release runtime.
@@ -173,6 +176,8 @@ const CALL_TOOL =
   "call_federated_legal_source";
 const COVERAGE_TOOL =
   "federated_legal_coverage";
+const ASSESS_SOURCE_TOOL =
+  "assess_legal_source";
 
 const LIST_SCHEMA:
   NormalizedToolSchema = {
@@ -315,6 +320,58 @@ const CALL_SCHEMA:
           },
           arguments: {
             type: "object"
+          }
+        }
+      }
+    }
+  };
+
+const ASSESS_SOURCE_SCHEMA:
+  NormalizedToolSchema = {
+    type: "function",
+    function: {
+      name:
+        ASSESS_SOURCE_TOOL,
+      description:
+        "Classify and assess a public legal/research URL under Lex Machina source hierarchy without fetching it. " +
+        "Known R1/R2A/R2B domains are classified deterministically; unknown domains are conservatively R3 until editorial criteria are independently established. " +
+        "This tool never creates VERIFIED/SUPPORTED status and never replaces native verification.",
+      parameters: {
+        type: "object",
+        additionalProperties:
+          false,
+        required: [
+          "url"
+        ],
+        properties: {
+          url: {
+            type: "string",
+            description:
+              "Public HTTP(S) source URL to classify."
+          },
+          publishedAt: {
+            type: "string",
+            description:
+              "Optional publication date in YYYY-MM-DD when known from the source."
+          },
+          updatedAt: {
+            type: "string",
+            description:
+              "Optional last-update date in YYYY-MM-DD when known from the source."
+          },
+          crossCheckStatus: {
+            type: "string",
+            enum: [
+              "PENDING",
+              "CONFIRMED_R1_R2A",
+              "CONFLICT",
+              "UNAVAILABLE"
+            ]
+          },
+          crossCheckUrl: {
+            type: "string",
+            description:
+              "Optional R1/R2A URL used to cross-check the proposition. Required for CONFIRMED_R1_R2A."
           }
         }
       }
@@ -774,6 +831,7 @@ export class LegalFederationToolRuntime {
       SEARCH_SCHEMA,
       GET_SCHEMA,
       CALL_SCHEMA,
+      ASSESS_SOURCE_SCHEMA,
       COVERAGE_SCHEMA
     ];
   }
@@ -786,6 +844,7 @@ export class LegalFederationToolRuntime {
       SEARCH_TOOL,
       GET_TOOL,
       CALL_TOOL,
+      ASSESS_SOURCE_TOOL,
       COVERAGE_TOOL
     ].includes(
       name
@@ -800,6 +859,7 @@ export class LegalFederationToolRuntime {
       "Use list_federated_legal_sources when you need source capabilities or a native schema. Search first, then fetch the actual document before relying on its contents.",
       "This federation is DISCOVERY/RESEARCH ONLY. It never creates a Lex Machina VERIFIED ledger entry and never bypasses Gate I.",
       "Every federated search/get/call result carries _lexSourcePolicy with sourceTier, provenance and verificationAuthority=LEX_NATIVE_ONLY. Preserve that metadata when reasoning about the result.",
+      "Use assess_legal_source for any external legal/research URL whose hierarchy level matters. Unknown domains are conservatively R3 until their professional-editorial criteria are independently established.",
       "R2B and R3 material is auxiliary only: it can never create VERIFIED or formal SUPPORTED status and can never be the sole legal basis. Cross-check the proposition against R1/R2A before using it.",
       "For R3 material, check publication/update date. Missing date or material older than 24 months requires an explicit staleness warning.",
       "For Polish statutory citations and current legal wording, verify_legal_reference remains authoritative. For Sąd Najwyższy signatures/quotes/propositions, use verify_case_reference / verify_case_quote / verify_case_proposition.",
@@ -950,6 +1010,171 @@ export class LegalFederationToolRuntime {
             : {})
         }
       );
+    }
+
+    if (
+      call.name ===
+        ASSESS_SOURCE_TOOL
+    ) {
+      const rawUrl =
+        typeof call.input
+          .url === "string"
+          ? call.input.url
+              .trim()
+          : "";
+      let url: URL;
+      try {
+        url =
+          new URL(rawUrl);
+      } catch {
+        throw new Error(
+          "LEGAL_SOURCE_URL_INVALID"
+        );
+      }
+      if (
+        (
+          url.protocol !==
+            "https:" &&
+          url.protocol !==
+            "http:"
+        ) ||
+        url.username ||
+        url.password
+      ) {
+        throw new Error(
+          "LEGAL_SOURCE_URL_INVALID"
+        );
+      }
+
+      const knownTier =
+        classifyKnownLegalSourceUrl(
+          url.toString()
+        );
+      const tier =
+        knownTier ??
+        "R3";
+      const requestedCrossCheck =
+        typeof call.input
+          .crossCheckStatus ===
+          "string"
+          ? call.input
+              .crossCheckStatus as
+              LegalSourceCrossCheckStatus
+          : tier === "R2B" ||
+              tier === "R3"
+            ? "PENDING"
+            : "NOT_REQUIRED";
+
+      let crossCheckTier:
+        | "R1"
+        | "R2A"
+        | undefined;
+      let crossCheckUrl:
+        string | undefined;
+      if (
+        typeof call.input
+          .crossCheckUrl ===
+          "string" &&
+        call.input
+          .crossCheckUrl
+          .trim()
+      ) {
+        crossCheckUrl =
+          call.input
+            .crossCheckUrl
+            .trim();
+        const classified =
+          classifyKnownLegalSourceUrl(
+            crossCheckUrl
+          );
+        if (
+          classified ===
+            "R1" ||
+          classified ===
+            "R2A"
+        ) {
+          crossCheckTier =
+            classified;
+        }
+      }
+
+      if (
+        requestedCrossCheck ===
+          "CONFIRMED_R1_R2A" &&
+        (
+          !crossCheckUrl ||
+          !crossCheckTier
+        )
+      ) {
+        throw new Error(
+          "LEGAL_SOURCE_CROSSCHECK_REQUIRES_KNOWN_R1_R2A_URL"
+        );
+      }
+
+      const candidate = {
+        url:
+          url.toString(),
+        tier,
+        provenance: {
+          sourceUrl:
+            url.toString(),
+          retrievedVia:
+            "WEB_RESEARCH" as const,
+          accessMode:
+            "UNKNOWN" as const,
+          classificationBasis:
+            knownTier
+              ? "KNOWN_CANONICAL_DOMAIN"
+              : "UNKNOWN_DOMAIN_CONSERVATIVE_R3_UNTIL_EDITORIAL_CRITERIA_VERIFIED",
+          ...(typeof call.input
+            .publishedAt ===
+            "string"
+            ? {
+                publishedAt:
+                  call.input
+                    .publishedAt
+              }
+            : {}),
+          ...(typeof call.input
+            .updatedAt ===
+            "string"
+            ? {
+                updatedAt:
+                  call.input
+                    .updatedAt
+              }
+            : {})
+        },
+        crossCheckStatus:
+          requestedCrossCheck,
+        ...(crossCheckUrl
+          ? {
+              crossCheckUrl
+            }
+          : {}),
+        ...(crossCheckTier
+          ? {
+              crossCheckTier
+            }
+          : {})
+      };
+
+      return JSON.stringify({
+        status: "OK",
+        candidate,
+        assessment:
+          assessLegalSourceCandidate(
+            candidate
+          ),
+        classification:
+          knownTier
+            ? "KNOWN_DOMAIN"
+            : "CONSERVATIVE_R3",
+        instruction:
+          knownTier
+            ? "Preserve the tier and assessment. R2B/R3 remains auxiliary only."
+            : "Unknown domain was conservatively classified as R3. It may be reconsidered as R2B only after independent evidence of professional editorial board, recognized publisher/brand and systematic updating."
+      });
     }
 
     if (
@@ -1197,5 +1422,6 @@ export const FEDERATED_LEGAL_TOOL_NAMES =
     SEARCH_TOOL,
     GET_TOOL,
     CALL_TOOL,
+    ASSESS_SOURCE_TOOL,
     COVERAGE_TOOL
   ]);
