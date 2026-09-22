@@ -437,6 +437,55 @@ function normalizeModelId(id: string): string {
   return LEGACY_MODEL_ALIASES[id] ?? id;
 }
 
+export function localModelListContainsAlias(
+  payload: unknown,
+  expectedModelId: string
+): boolean {
+  if (
+    !payload ||
+    typeof payload !==
+      "object" ||
+    Array.isArray(payload)
+  ) {
+    return false;
+  }
+  const data =
+    (payload as {
+      data?: unknown;
+    }).data;
+  if (!Array.isArray(data)) {
+    return false;
+  }
+  const expected =
+    normalizeModelId(
+      expectedModelId
+    );
+  return data.some(
+    (item) =>
+      Boolean(
+        item &&
+        typeof item ===
+          "object" &&
+        !Array.isArray(item) &&
+        typeof (
+          item as {
+            id?: unknown;
+          }
+        ).id ===
+          "string" &&
+        normalizeModelId(
+          String(
+            (
+              item as {
+                id: string;
+              }
+            ).id
+          )
+        ) === expected
+      )
+  );
+}
+
 export class LocalModelRuntime {
   readonly rootDir: string;
   readonly runtimeRoot: string;
@@ -2174,7 +2223,10 @@ export class LocalModelRuntime {
       this.child &&
       this.activeModelId === canonical &&
       !this.startup &&
-      await this.isHealthy()
+      await this.isHealthy() &&
+      await this.isServingModel(
+        canonical
+      )
     ) {
       return this.publicDescriptor(spec, config);
     }
@@ -3830,7 +3882,12 @@ export class LocalModelRuntime {
 
     const deadline = Date.now() + 180_000;
     while (Date.now() < deadline) {
-      if (await this.isHealthy()) {
+      if (
+        await this.isHealthy() &&
+        await this.isServingModel(
+          canonical
+        )
+      ) {
         await this.probeChatCompletion(
           config.model.id
         );
@@ -4093,6 +4150,36 @@ export class LocalModelRuntime {
       calibratedAt:
         new Date().toISOString()
     };
+  }
+
+  private async isServingModel(
+    expectedModelId: string
+  ): Promise<boolean> {
+    try {
+      const response =
+        await fetch(
+          `http://${this.host}:${this.port}/v1/models`,
+          {
+            headers: {
+              Accept:
+                "application/json"
+            },
+            signal:
+              AbortSignal.timeout(
+                1_500
+              )
+          }
+        );
+      if (!response.ok) {
+        return false;
+      }
+      return localModelListContainsAlias(
+        await response.json(),
+        expectedModelId
+      );
+    } catch {
+      return false;
+    }
   }
 
   private async isHealthy(): Promise<boolean> {
