@@ -1480,33 +1480,11 @@ async function storedCodexChatGptAuthPresent():
 export function claudeSubscriptionAuthenticated(
   result: RunResult
 ): boolean {
-  if (result.code !== 0) {
-    return false;
-  }
-
-  const lower =
-    (result.stdout + "\n" + result.stderr)
-      .trim()
-      .toLowerCase();
-
-  // The account lane launches the official interactive Claude Code login.
-  // Once that CLI reports auth status success, treat it as authenticated.
-  // Keep only explicit non-subscription/cloud/API lanes blocked so this
-  // account source cannot silently become an API-billed provider.
-  const explicitlyNonSubscription =
-    [
-      "credentials-file",
-      "anthropic console",
-      "api key",
-      "api_key",
-      "bedrock",
-      "vertex",
-      "foundry"
-    ].some((needle) =>
-      lower.includes(needle)
-    );
-
-  return !explicitlyNonSubscription;
+  // Claude Code's official auth status contract is its exit code:
+  // 0 = authenticated, non-zero = not authenticated / unsupported status.
+  // Do not parse human-readable status text; different Claude Code releases
+  // mention Console/API configuration fields even for a valid Claude account.
+  return result.code === 0;
 }
 
 async function assertSubscriptionAccount(
@@ -2224,6 +2202,9 @@ function buildAccountPrompt(
 }
 
 export class AccountSessionManager {
+  private anthropicInteractiveLoginConfirmed =
+    false;
+
   setAnthropicOAuthToken(
     token: string
   ): void {
@@ -2364,6 +2345,8 @@ export class AccountSessionManager {
                 )
               ) !==
                 "INTERACTIVE" ||
+              this
+                .anthropicInteractiveLoginConfirmed ||
               claudeSubscriptionAuthenticated(
                 result
               )
@@ -2446,6 +2429,18 @@ export class AccountSessionManager {
     }
     if (result.code !== 0) {
       throw normalizeCliFailure(provider, result);
+    }
+    if (
+      provider ===
+        "anthropic"
+    ) {
+      // The visible official Claude Code login process is authoritative.
+      // Some releases do not expose a compatible `auth status` command or
+      // emit status text that cannot be parsed reliably. The real Claude
+      // invocation remains the end-to-end authentication check.
+      this
+        .anthropicInteractiveLoginConfirmed =
+        true;
     }
     const status =
       await this.status(
