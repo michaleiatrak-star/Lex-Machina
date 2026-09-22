@@ -165,14 +165,17 @@ describe("provider account-session transport", () => {
       )
     ).toEqual([
       "auth",
-      "login",
-      "--claudeai"
+      "login"
     ]);
     expect(
       accountLoginFallbackArgs(
         "anthropic"
       )
-    ).toBeNull();
+    ).toEqual([
+      "auth",
+      "login",
+      "--claudeai"
+    ]);
     expect(
       accountLoginArgs(
         "xai"
