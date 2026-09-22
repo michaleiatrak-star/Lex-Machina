@@ -228,6 +228,12 @@
       "model": "gpt-5.6-luna",
       "delivery": "BUNDLED_APP_PRIVATE",
       "auth": "CHATGPT_ACCOUNT"
+    },
+    "claude": {
+      "package": "@anthropic-ai/claude-code",
+      "version": "2.1.236",
+      "delivery": "BUNDLED_APP_PRIVATE",
+      "auth": "CLAUDE_AI_SUBSCRIPTION"
     }
   }
 }
