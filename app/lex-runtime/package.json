@@ -93,7 +93,8 @@
     "pdfjs-dist": "6.3.289",
     "yaml": "2.8.1",
     "@modelcontextprotocol/sdk": "1.19.1",
-    "@openai/codex": "0.154.0"
+    "@openai/codex": "0.154.0",
+    "@anthropic-ai/claude-code": "2.1.236"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
