@@ -16,6 +16,9 @@ import type {
 import type {
   EncryptedCaseWorkspaceStore
 } from "./case-workspace-store.js";
+import type {
+  EncryptedCaseScheduleStore
+} from "./case-schedule-store.js";
 
 type RotationArgs =
   Parameters<
@@ -51,6 +54,11 @@ implements CaseKeyRotationParticipant {
       Pick<
         EncryptedCaseWorkspaceStore,
         "rekeyCaseWorkspace"
+      >,
+    private readonly schedule?:
+      Pick<
+        EncryptedCaseScheduleStore,
+        "rekeyCaseSchedule"
       >
   ) {}
 
@@ -62,6 +70,7 @@ implements CaseKeyRotationParticipant {
     let documentsChanged = false;
     let artifactsChanged = false;
     let workspaceChanged = false;
+    let scheduleChanged = false;
 
     const reverse = {
       caseId:
@@ -114,15 +123,34 @@ implements CaseKeyRotationParticipant {
               args
             );
       }
+      if (
+        this.schedule
+      ) {
+        scheduleChanged =
+          await this.schedule
+            .rekeyCaseSchedule(
+              args
+            );
+      }
       return (
         vaultChanged ||
         uploadsChanged ||
         documentsChanged ||
         artifactsChanged ||
-        workspaceChanged
+        workspaceChanged ||
+        scheduleChanged
       );
     } catch (error) {
       try {
+        if (
+          scheduleChanged &&
+          this.schedule
+        ) {
+          await this.schedule
+            .rekeyCaseSchedule(
+              reverse
+            );
+        }
         if (
           workspaceChanged &&
           this.workspace
