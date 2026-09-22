@@ -338,6 +338,10 @@ function marker(
   if (
     record.status !==
       "VERIFIED" ||
+    record.sourceTier ===
+      "R2B" ||
+    record.sourceTier ===
+      "R3" ||
     !record.sourceUrl ||
     !record.fetchedAt
   ) {
