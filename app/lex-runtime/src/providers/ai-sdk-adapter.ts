@@ -27,13 +27,13 @@ const LOCAL_DEFAULT_OUTPUT_TOKENS =
 const LOCAL_CONTEXT_SAFETY_TOKENS =
   1_024;
 const LOCAL_HTTP_RESPONSE_TIMEOUT_MS =
-  60_000;
+  120_000;
 const LOCAL_FIRST_CONTENT_TIMEOUT_MS =
-  90_000;
+  300_000;
 const LOCAL_STREAM_IDLE_TIMEOUT_MS =
-  45_000;
+  120_000;
 const LOCAL_JSON_BODY_TIMEOUT_MS =
-  180_000;
+  300_000;
 
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
@@ -145,6 +145,7 @@ export function classifyLocalInferenceFailure(
   | "LOCAL_MODEL_SERVER_ERROR"
   | "LOCAL_MODEL_CONTEXT_OVERFLOW"
   | "LOCAL_MODEL_RESOURCE_EXHAUSTED"
+  | "LOCAL_MODEL_RESPONSE_TIMEOUT"
   | "LOCAL_MODEL_INFERENCE_FAILED" {
   const lower =
     detail.toLowerCase();
@@ -172,7 +173,15 @@ export function classifyLocalInferenceFailure(
   }
 
   if (
-    /econnrefused|und_err_connect|und_err_socket|terminated|connection refused|fetch failed|socket hang up|socket closed|network error|failed to connect|sse_read_failed/i.test(
+    /local_model_(?:http_response|sse_first_content|sse_idle|json_body)_timeout|headers timeout|body timeout/i.test(
+      lower
+    )
+  ) {
+    return "LOCAL_MODEL_RESPONSE_TIMEOUT";
+  }
+
+  if (
+    /econnrefused|und_err_connect|und_err_socket|terminated|connection refused|fetch failed|socket hang up|socket closed|network error|failed to connect/i.test(
       lower
     )
   ) {
@@ -1049,7 +1058,7 @@ async function exactLocalInputTokens(
     const response =
       await withTimeout(
         fetch(
-          `${endpoint.replace(/\/$/, "")}/v1/chat/completions/input_tokens`,
+          `${endpoint.replace(/\/$/, "")}/chat/completions/input_tokens`,
           {
             method:
               "POST",
@@ -1117,18 +1126,12 @@ async function exactLocalInputTokens(
     ) {
       throw error;
     }
-    if (
-      error instanceof Error &&
-      (
-        error.message.startsWith(
-          "LOCAL_MODEL_TOKEN_COUNT_FAILED:"
-        ) ||
-        error.message ===
-          "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT"
-      )
-    ) {
-      throw error;
-    }
+
+    // Exact token counting is a guardrail optimization, not a prerequisite
+    // for inference. Some llama.cpp builds or chat templates can reject or
+    // time out on the auxiliary input_tokens request even though the actual
+    // chat completion endpoint is healthy. Fall back to the conservative
+    // localChatBudget estimate and attempt the real generation.
     return null;
   } finally {
     cleanup();
@@ -1224,6 +1227,21 @@ async function streamLocalChatCompletion(
       streamError.name ===
         "AbortError"
     ) {
+      throw streamError;
+    }
+
+    const streamDetail =
+      streamError instanceof Error
+        ? streamError.message
+        : String(streamError);
+    if (
+      /LOCAL_MODEL_SSE_(?:FIRST_CONTENT|IDLE)_TIMEOUT/.test(
+        streamDetail
+      )
+    ) {
+      // A timeout on CPU may mean the model is still evaluating a large
+      // prompt. Starting a second full generation would compete for the same
+      // RAM/CPU and make recovery less likely, so surface the timeout directly.
       throw streamError;
     }
 

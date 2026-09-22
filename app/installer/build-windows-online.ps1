@@ -85,6 +85,7 @@ Write-Host "[4/4] Thin payload contract"
 foreach ($required in @(
   "app\dist\http\server.js",
   "app\node_modules\.bin\codex.cmd",
+  "app\node_modules\.bin\claude.cmd",
   "lex-runtime-sidecar.exe",
   "release-source.json",
   "release-requirements.txt",

@@ -133,6 +133,8 @@ const workspace:
   WorkspaceResponse = {
     caseId: "case-alpha",
     caseKind: "MATTER",
+    caseDisplayName:
+      "Alpha sp. z o.o.",
     folders: [
       {
         folderId: "f-1",

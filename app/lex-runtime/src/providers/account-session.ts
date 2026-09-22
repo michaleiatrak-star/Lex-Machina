@@ -64,7 +64,7 @@ export type AccountSessionResumeMode =
 export function accountSessionResumeMode(
   _provider?: ProviderId
 ): AccountSessionResumeMode {
-  return "LEX_CONTEXT_ONLY";
+  return "LAST_OR_NEW";
 }
 
 export function isMissingResumableSessionMessage(
@@ -677,7 +677,7 @@ function installHint(provider: ProviderId): string {
     return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Codex CLI. Następnie użyj przycisku połączenia konta ChatGPT.";
   }
   if (provider === "anthropic") {
-    return "Zainstaluj Claude Code i wykonaj: claude auth login";
+    return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Claude Code. Następnie użyj przycisku połączenia konta Claude.";
   }
   return "Zainstaluj Grok Build CLI i wykonaj: grok login";
 }
@@ -860,17 +860,71 @@ function privateCodexExecutable(): string | null {
   ) ?? null;
 }
 
+function privateClaudeExecutable(): string | null {
+  const override =
+    process.env
+      .LEX_CLAUDE_CLI
+      ?.trim();
+  if (
+    override &&
+    existsSync(
+      override
+    )
+  ) {
+    return override;
+  }
+
+  const suffix =
+    process.platform ===
+      "win32"
+      ? "claude.cmd"
+      : "claude";
+  const candidates:
+    string[] = [];
+  const runtimeRoot =
+    process.env
+      .LEX_RUNTIME_ROOT
+      ?.trim();
+  if (runtimeRoot) {
+    candidates.push(
+      path.join(
+        runtimeRoot,
+        "app",
+        "node_modules",
+        ".bin",
+        suffix
+      )
+    );
+  }
+  candidates.push(
+    path.resolve(
+      process.cwd(),
+      "node_modules",
+      ".bin",
+      suffix
+    )
+  );
+
+  return candidates.find(
+    (candidate) =>
+      existsSync(
+        candidate
+      )
+  ) ?? null;
+}
+
+
 export function codexExecArgs(
   workDir: string,
   outputPath: string,
   model =
-    codexAccountModel()
+    codexAccountModel(),
+  tail: string[] = ["-"]
 ): string[] {
   return [
     "exec",
     "--ignore-user-config",
     "--ignore-rules",
-    "--ephemeral",
     "--disable",
     "plugins",
     "--disable",
@@ -897,7 +951,7 @@ export function codexExecArgs(
     "--json",
     "--output-last-message",
     outputPath,
-    "-"
+    ...tail
   ];
 }
 
@@ -968,6 +1022,32 @@ async function resolveCommand(command: string): Promise<string | null> {
     .map((line) => line.trim())
     .find(Boolean);
   return candidate || null;
+}
+
+async function resolveAccountExecutable(
+  provider: ProviderId
+): Promise<string | null> {
+  const command =
+    CLI_NAMES[provider];
+
+  // RC14 used the user's normally installed account client. Preserve that
+  // proven behavior whenever one is available, while keeping the bundled
+  // client as a clean-machine fallback for the online installer.
+  const systemExecutable =
+    await resolveCommand(
+      command
+    );
+  if (systemExecutable) {
+    return systemExecutable;
+  }
+
+  if (provider === "openai") {
+    return privateCodexExecutable();
+  }
+  if (provider === "anthropic") {
+    return privateClaudeExecutable();
+  }
+  return null;
 }
 
 function spawnResolved(
@@ -1098,12 +1178,10 @@ async function runCli(
   cwd?: string,
   abortSignal?: AbortSignal
 ): Promise<RunResult> {
-  const command = CLI_NAMES[provider];
   const executable =
-    provider === "openai"
-      ? privateCodexExecutable() ??
-        await resolveCommand(command)
-      : await resolveCommand(command);
+    await resolveAccountExecutable(
+      provider
+    );
   if (!executable) {
     throw new Error(`ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`);
   }
@@ -1131,18 +1209,34 @@ export function accountLoginArgs(
   provider: ProviderId
 ): string[] {
   if (provider === "openai") {
+    // Keep the browser OAuth flow compatible with the proven RC14 behavior.
+    // The private Codex binary is still used; only the login invocation is
+    // intentionally left to the client's native ChatGPT flow.
     return ["login"];
   }
   if (provider === "anthropic") {
-    // Current Claude Code treats the default auth login as the subscription
-    // lane. --console is the explicit API-billing opt-in. Avoid relying on
-    // historical --claudeai flag availability across client versions.
+    // Keep the proven RC14 browser OAuth flow as the primary path.
     return [
       "auth",
       "login"
     ];
   }
   return ["login"];
+}
+
+export function accountLoginFallbackArgs(
+  provider: ProviderId
+): string[] | null {
+  if (provider === "openai") {
+    return [
+      "login",
+      "--device-auth"
+    ];
+  }
+  if (provider === "anthropic") {
+    return null;
+  }
+  return null;
 }
 
 export function visibleWindowsLoginLauncher(
@@ -1168,17 +1262,10 @@ async function runVisibleWindowsLogin(
   args: string[],
   timeoutMs: number
 ): Promise<RunResult> {
-  const command =
-    CLI_NAMES[provider];
   const executable =
-    provider === "openai"
-      ? privateCodexExecutable() ??
-        await resolveCommand(
-          command
-        )
-      : await resolveCommand(
-          command
-        );
+    await resolveAccountExecutable(
+      provider
+    );
   if (!executable) {
     throw new Error(
       `ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`
@@ -1291,7 +1378,7 @@ function normalizeCliFailure(
   );
 }
 
-function openAiChatGptAuthenticated(
+export function openAiChatGptAuthenticated(
   result: RunResult
 ): boolean {
   if (result.code !== 0) {
@@ -1300,11 +1387,89 @@ function openAiChatGptAuthenticated(
   const status =
     (result.stdout + "\n" + result.stderr)
       .toLowerCase();
-  return status.includes(
-    "logged in using chatgpt"
-  ) || status.includes(
-    "using chatgpt"
+  if (
+    status.includes("api key") ||
+    status.includes("apikey")
+  ) {
+    return false;
+  }
+
+  // Codex versions used by the RC14 line can report the successful browser
+  // login simply as "Using ChatGPT", without an additional "logged in" token.
+  // Preserve that proven contract while still excluding API-key auth above.
+  return (
+    status.includes("using chatgpt") ||
+    (
+      status.includes("chatgpt") &&
+      (
+        status.includes("logged in") ||
+        status.includes("signed in") ||
+        status.includes("authenticated")
+      )
+    )
   );
+}
+
+export function codexStoredAuthIsChatGpt(
+  raw: string
+): boolean {
+  try {
+    const payload =
+      JSON.parse(raw) as {
+        auth_mode?: unknown;
+        OPENAI_API_KEY?: unknown;
+      };
+    const mode =
+      typeof payload.auth_mode ===
+        "string"
+        ? payload.auth_mode
+            .trim()
+            .toLowerCase()
+        : "";
+    const storedApiKey =
+      typeof payload.OPENAI_API_KEY ===
+        "string" &&
+      payload.OPENAI_API_KEY
+        .trim().length > 0;
+    return (
+      !storedApiKey &&
+      (
+        mode === "chatgpt" ||
+        mode === "chatgpt_oauth" ||
+        mode === "chatgpt-oauth"
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function storedCodexChatGptAuthPresent():
+  Promise<boolean> {
+  const env =
+    accountEnvironment(
+      "openai"
+    );
+  const codexHome =
+    env.CODEX_HOME
+      ?.trim() ||
+    path.join(
+      os.homedir(),
+      ".codex"
+    );
+  try {
+    return codexStoredAuthIsChatGpt(
+      await fsp.readFile(
+        path.join(
+          codexHome,
+          "auth.json"
+        ),
+        "utf8"
+      )
+    );
+  } catch {
+    return false;
+  }
 }
 
 export function claudeSubscriptionAuthenticated(
@@ -1314,165 +1479,36 @@ export function claudeSubscriptionAuthenticated(
     return false;
   }
 
-  const combined =
-    (result.stdout + "\n" + result.stderr)
-      .trim();
   const lower =
-    combined.toLowerCase();
+    (result.stdout + "\n" + result.stderr)
+      .toLowerCase();
 
-  // Never treat Console/API, credentials-file or cloud-provider auth as the
-  // subscription lane. The account transport must not silently become API
-  // billing just because Claude Code can execute a prompt.
-  const explicitlyNonSubscription =
-    [
-      "credentials-file",
-      "anthropic console",
-      "api key",
-      "api_key",
-      "bedrock",
-      "vertex",
-      "foundry"
-    ].some((needle) =>
-      lower.includes(needle)
-    );
-  if (explicitlyNonSubscription) {
-    return false;
-  }
-
-  const jsonStart =
-    combined.indexOf("{");
-  const jsonEnd =
-    combined.lastIndexOf("}");
-  if (
-    jsonStart >= 0 &&
-    jsonEnd > jsonStart
-  ) {
-    try {
-      const payload =
-        JSON.parse(
-          combined.slice(
-            jsonStart,
-            jsonEnd + 1
-          )
-        ) as {
-          loggedIn?: unknown;
-          authMethod?: unknown;
-          apiProvider?: unknown;
-          apiKeySource?: unknown;
-          subscriptionType?: unknown;
-        };
-      if (payload.loggedIn !== true) {
-        return false;
-      }
-
-      const provider =
-        typeof payload.apiProvider ===
-          "string"
-          ? payload.apiProvider
-              .toLowerCase()
-          : "";
-      const method =
-        typeof payload.authMethod ===
-          "string"
-          ? payload.authMethod
-              .toLowerCase()
-          : "";
-      const keySource =
-        typeof payload.apiKeySource ===
-          "string"
-          ? payload.apiKeySource
-              .toLowerCase()
-          : "";
-      const subscription =
-        typeof payload.subscriptionType ===
-          "string"
-          ? payload.subscriptionType
-              .toLowerCase()
-          : "";
-
-      if (
-        provider &&
-        provider !== "firstparty" &&
-        provider !== "first_party"
-      ) {
-        return false;
-      }
-      if (
-        [
-          "api_key",
-          "api-key",
-          "bedrock",
-          "vertex",
-          "foundry"
-        ].includes(method)
-      ) {
-        return false;
-      }
-
-      return (
-        method === "claude.ai" ||
-        method === "oauth_token" ||
-        method === "oauth" ||
-        method === "subscription" ||
-        keySource.includes(
-          "/login managed key"
-        ) ||
-        subscription === "pro" ||
-        subscription === "max" ||
-        subscription.includes(
-          "claude"
-        )
-      );
-    } catch {
-      // Some Claude Code versions use human-readable output. Fall through to
-      // the conservative text parser below.
-    }
-  }
-
-  return (
-    lower.includes(
-      "login method: claude max account"
-    ) ||
-    lower.includes(
-      "login method: claude pro account"
-    ) ||
-    lower.includes(
-      "login method: claude.ai"
-    ) ||
-    (
-      lower.includes(
-        "logged in"
-      ) &&
-      (
-        lower.includes(
-          "claude.ai"
-        ) ||
-        lower.includes(
-          "oauth_token"
-        ) ||
-        lower.includes(
-          "oauth token"
-        )
-      )
-    )
+  // Current Claude Code defines "auth status" by its exit code:
+  // 0 = logged in, 1 = not logged in. Keep only a small fail-closed guard
+  // against explicit non-subscription lanes. The app's login command never
+  // passes --console, so the normal browser flow remains the Claude account
+  // subscription path.
+  return ![
+    "credentials-file",
+    "anthropic console",
+    "\"authmethod\":\"api_key\"",
+    "\"authmethod\": \"api_key\"",
+    "api key",
+    "bedrock",
+    "vertex",
+    "foundry"
+  ].some((needle) =>
+    lower.includes(needle)
   );
 }
-
 async function assertSubscriptionAccount(
   provider: "openai" | "anthropic",
   abortSignal?: AbortSignal
 ): Promise<void> {
-  if (
-    provider === "anthropic" &&
-    claudeAutomationCredentialMode(
-      accountEnvironment(
-        "anthropic"
-      )
-    ) !== "INTERACTIVE"
-  ) {
-    // Claude Code validates the OAuth credential on the actual invocation.
-    // Do not require a separate interactive-session status when setup-token
-    // or refresh-token provisioning is explicitly configured.
+  if (provider === "anthropic") {
+    // The official Claude Code login/status process already owns auth state.
+    // Do not add another custom authentication gate here; the actual Claude
+    // invocation below is the authoritative end-to-end check.
     return;
   }
 
@@ -1501,37 +1537,14 @@ async function assertSubscriptionAccount(
           abortSignal
         );
 
-  let authenticated =
-    provider === "openai"
-      ? openAiChatGptAuthenticated(
-          result
-        )
-      : claudeSubscriptionAuthenticated(
-          result
-        );
-
-  if (
-    provider === "anthropic" &&
-    !authenticated
-  ) {
-    const textStatus =
-      await runCli(
-        provider,
-        [
-          "auth",
-          "status",
-          "--text"
-        ],
-        undefined,
-        STATUS_TIMEOUT_MS,
-        undefined,
-        abortSignal
-      );
-    authenticated =
-      claudeSubscriptionAuthenticated(
-        textStatus
-      );
-  }
+  const authenticated =
+    openAiChatGptAuthenticated(
+      result
+    ) ||
+    (
+      result.code === 0 &&
+      await storedCodexChatGptAuthPresent()
+    );
 
   if (!authenticated) {
     throw new Error(
@@ -2240,7 +2253,10 @@ export class AccountSessionManager {
     provider: ProviderId
   ): Promise<ProviderAccountSessionStatus> {
     const command = CLI_NAMES[provider];
-    const executable = await resolveCommand(command);
+    const executable =
+      await resolveAccountExecutable(
+        provider
+      );
     if (!executable) {
       return {
         provider,
@@ -2274,31 +2290,6 @@ export class AccountSessionManager {
           undefined,
           STATUS_TIMEOUT_MS
         );
-        if (
-          !claudeSubscriptionAuthenticated(
-            result
-          )
-        ) {
-          const textStatus =
-            await runCli(
-              provider,
-              [
-                "auth",
-                "status",
-                "--text"
-              ],
-              undefined,
-              STATUS_TIMEOUT_MS
-            );
-          if (
-            claudeSubscriptionAuthenticated(
-              textStatus
-            )
-          ) {
-            result =
-              textStatus;
-          }
-        }
       } else {
         const workDir =
           await fsp.mkdtemp(
@@ -2347,8 +2338,14 @@ export class AccountSessionManager {
 
     const authenticated =
       provider === "openai"
-        ? openAiChatGptAuthenticated(
-            result
+        ? (
+            openAiChatGptAuthenticated(
+              result
+            ) ||
+            (
+              result.code === 0 &&
+              await storedCodexChatGptAuthPresent()
+            )
           )
         : provider ===
             "anthropic"
@@ -2406,22 +2403,39 @@ export class AccountSessionManager {
       accountLoginArgs(
         provider
       );
-    const result =
+    const runLogin = (
+      loginArgs: string[]
+    ) =>
       accountLoginLaunchMode(
         provider
       ) ===
         "VISIBLE_TERMINAL"
-        ? await runVisibleWindowsLogin(
+        ? runVisibleWindowsLogin(
             provider,
-            args,
+            loginArgs,
             AUTH_TIMEOUT_MS
           )
-        : await runCli(
+        : runCli(
             provider,
-            args,
+            loginArgs,
             undefined,
             AUTH_TIMEOUT_MS
           );
+
+    let result =
+      await runLogin(args);
+    if (result.code !== 0) {
+      const fallbackArgs =
+        accountLoginFallbackArgs(
+          provider
+        );
+      if (fallbackArgs) {
+        result =
+          await runLogin(
+            fallbackArgs
+          );
+      }
+    }
     if (result.code !== 0) {
       throw normalizeCliFailure(provider, result);
     }
@@ -2441,11 +2455,16 @@ export class AccountSessionManager {
     provider: ProviderId,
     prompt: string,
     abortSignal?: AbortSignal,
-    _continuityKey?: string
+    continuityKey?: string
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
     );
+    const allowExternalTakeover =
+      !continuityKey ||
+      !await hasPinnedAccountSession(
+        provider
+      );
     try {
       if (
         provider === "openai" ||
@@ -2488,48 +2507,178 @@ export class AccountSessionManager {
         let lastFailure:
           Error | null =
             null;
+        let savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+
+        const runCodex = async (
+          candidateModel: string,
+          tail: string[]
+        ): Promise<RunResult> => {
+          await fsp.rm(
+            outputPath,
+            {
+              force: true
+            }
+          ).catch(() => {});
+          return runCli(
+            provider,
+            codexExecArgs(
+              workDir,
+              outputPath,
+              candidateModel,
+              tail
+            ),
+            prompt,
+            COMMAND_TIMEOUT_MS,
+            workDir,
+            abortSignal
+          );
+        };
 
         for (
           const candidateModel
           of candidateModels
         ) {
-          const attempt =
-            await runCli(
-              provider,
-              codexExecArgs(
-                workDir,
-                outputPath,
-                candidateModel
-              ),
-              prompt,
-              COMMAND_TIMEOUT_MS,
-              workDir,
-              abortSignal
-            );
+          let attempt:
+            RunResult | null =
+              null;
 
-          if (
-            attempt.code === 0
-          ) {
-            result =
-              attempt;
-            break;
+          if (savedSessionId) {
+            const resumed =
+              await runCodex(
+                candidateModel,
+                [
+                  "resume",
+                  savedSessionId,
+                  "-"
+                ]
+              );
+            if (
+              resumed.code === 0
+            ) {
+              attempt =
+                resumed;
+            } else {
+              const detail =
+                resumed.stderr +
+                "\n" +
+                resumed.stdout;
+              if (
+                isMissingResumableSessionMessage(
+                  detail
+                )
+              ) {
+                await clearAccountSessionId(
+                  provider,
+                  continuityKey
+                );
+                savedSessionId =
+                  null;
+              } else {
+                const failure =
+                  normalizeCliFailure(
+                    provider,
+                    resumed
+                  );
+                lastFailure =
+                  failure;
+                if (
+                  failure.message
+                    .startsWith(
+                      "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                    )
+                ) {
+                  continue;
+                }
+                throw failure;
+              }
+            }
           }
 
-          const failure =
-            normalizeCliFailure(
-              provider,
-              attempt
-            );
-          lastFailure =
-            failure;
           if (
-            !failure.message
-              .startsWith(
-                "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
-              )
+            !attempt &&
+            allowExternalTakeover
           ) {
+            const latest =
+              await runCodex(
+                candidateModel,
+                [
+                  "resume",
+                  "--last",
+                  "--all",
+                  "-"
+                ]
+              );
+            if (
+              latest.code === 0
+            ) {
+              attempt =
+                latest;
+            } else {
+              const detail =
+                latest.stderr +
+                "\n" +
+                latest.stdout;
+              if (
+                !isMissingResumableSessionMessage(
+                  detail
+                )
+              ) {
+                const failure =
+                  normalizeCliFailure(
+                    provider,
+                    latest
+                  );
+                lastFailure =
+                  failure;
+                if (
+                  failure.message
+                    .startsWith(
+                      "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                    )
+                ) {
+                  continue;
+                }
+                throw failure;
+              }
+            }
+          }
+
+          if (!attempt) {
+            attempt =
+              await runCodex(
+                candidateModel,
+                ["-"]
+              );
+          }
+
+          if (
+            attempt.code !== 0
+          ) {
+            const failure =
+              normalizeCliFailure(
+                provider,
+                attempt
+              );
+            lastFailure =
+              failure;
+            if (
+              failure.message
+                .startsWith(
+                  "ACCOUNT_SESSION_MODEL_UNSUPPORTED:"
+                )
+            ) {
+              continue;
+            }
             throw failure;
           }
+
+          result =
+            attempt;
+          break;
         }
 
         if (!result) {
@@ -2541,8 +2690,18 @@ export class AccountSessionManager {
           );
         }
 
-        // Lex Machina already carries complete conversation history in the
-        // current request. Do not additionally resume a Codex host thread.
+        const threadId =
+          parseCodexThreadId(
+            result.stdout
+          );
+        if (threadId) {
+          await writeAccountSessionId(
+            provider,
+            threadId,
+            continuityKey
+          );
+        }
+
         try {
           const finalText =
             await fsp.readFile(
@@ -2574,7 +2733,7 @@ export class AccountSessionManager {
         const fixedQuery =
           "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
         const lexSystemPrompt =
-          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Use only the current Lex Machina instructions and conversation; do not read or infer context from separate host-session history. Do not access local files, external services or tools.";
+          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
         const commonArgs = [
           "-p",
           fixedQuery,
@@ -2607,8 +2766,115 @@ export class AccountSessionManager {
             abortSignal
           );
 
-        const result =
-          await runClaude([]);
+        let result:
+          RunResult | null =
+            null;
+        const savedSessionId =
+          await readAccountSessionId(
+            provider,
+            continuityKey
+          );
+        if (savedSessionId) {
+          result =
+            await runClaude([
+              "--resume",
+              savedSessionId
+            ]);
+          if (
+            result.code !== 0
+          ) {
+            const detail =
+              result.stderr +
+              "\n" +
+              result.stdout;
+            if (
+              isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              await clearAccountSessionId(
+                provider,
+                continuityKey
+              );
+              result =
+                null;
+            } else {
+              throw normalizeCliFailure(
+                provider,
+                result
+              );
+            }
+          }
+        }
+
+        if (
+          !result &&
+          allowExternalTakeover
+        ) {
+          const latest =
+            await runClaude([
+              "--continue"
+            ]);
+          if (
+            latest.code === 0
+          ) {
+            result =
+              latest;
+          } else {
+            const detail =
+              latest.stderr +
+              "\n" +
+              latest.stdout;
+            if (
+              !isMissingResumableSessionMessage(
+                detail
+              )
+            ) {
+              throw normalizeCliFailure(
+                provider,
+                latest
+              );
+            }
+
+            const discoveredSessionId =
+              await discoverLatestClaudeSessionId();
+            if (
+              discoveredSessionId
+            ) {
+              const discovered =
+                await runClaude([
+                  "--resume",
+                  discoveredSessionId
+                ]);
+              if (
+                discovered.code === 0
+              ) {
+                result =
+                  discovered;
+              } else {
+                const discoveredDetail =
+                  discovered.stderr +
+                  "\n" +
+                  discovered.stdout;
+                if (
+                  !isMissingResumableSessionMessage(
+                    discoveredDetail
+                  )
+                ) {
+                  throw normalizeCliFailure(
+                    provider,
+                    discovered
+                  );
+                }
+              }
+            }
+          }
+        }
+
+        if (!result) {
+          result =
+            await runClaude([]);
+        }
 
         if (result.code !== 0) {
           throw normalizeCliFailure(
@@ -2625,15 +2891,34 @@ export class AccountSessionManager {
             "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
           );
         }
+        if (parsed.sessionId) {
+          await writeAccountSessionId(
+            provider,
+            parsed.sessionId,
+            continuityKey
+          );
+        }
         return parsed.text;
       }
 
+      const savedSessionId =
+        await readAccountSessionId(
+          provider,
+          continuityKey
+        );
+      const resumeSessionId =
+        savedSessionId ??
+        (
+          allowExternalTakeover
+            ? await discoverLatestGrokSessionId()
+            : null
+        );
       const grok =
         await runGrokAcp(
           prompt,
           workDir,
           abortSignal,
-          null
+          resumeSessionId
         );
       if (
         !grok.authenticated
@@ -2647,6 +2932,13 @@ export class AccountSessionManager {
       ) {
         throw new Error(
           "ACCOUNT_SESSION_EMPTY_RESPONSE:xai"
+        );
+      }
+      if (grok.sessionId) {
+        await writeAccountSessionId(
+          provider,
+          grok.sessionId,
+          continuityKey
         );
       }
       return grok.text;

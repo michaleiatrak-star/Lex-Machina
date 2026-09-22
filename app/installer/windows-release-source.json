@@ -176,17 +176,17 @@
     "localAiContext": "The user chooses 64k-200k. Requests above a model's native context are explicit context extension, not native capability, and must pass runtime resource validation.",
     "applicationUpdateSigning": "Application self-update is fail-closed until a production Authenticode signer thumbprint is committed and the release artifact is signed by that trusted publisher.",
     "skillUpdateSigning": "Skill self-update may use the official michaleiatrak-star/Lex-Machina GitHub Releases source without Ed25519. GitHub release asset SHA-256, index schema/version compatibility, bundle SHA-256/size, structural validation and atomic activation/rollback remain mandatory. Ed25519 is accepted when present.",
-    "modelPackUpdateSigning": "Model-pack self-update is fail-closed until a production Ed25519 public key is committed to the model-pack trust root and the model-pack index is signed by the matching private key.",
+    "modelPackUpdateSigning": "Temporary unsigned model-pack mode is enabled for 0.1.7: the official model-pack index may be accepted without Ed25519 while SHA-256 verification of downloaded model artifacts remains mandatory. Re-enable signed-index enforcement when the production trust root is configured.",
     "pythonRuntime": "Official CPython embeddable x64 distribution is used for the app-private runtime to avoid Windows Installer registration/maintenance-mode collisions with an existing Python of the same version. pip is bootstrapped from a pinned verified wheel into the private site-packages directory."
   },
   "modelPackUpdate": {
-    "verification": "SHA256_AND_ED25519_SIGNED_INDEX",
+    "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
     "trustedEd25519PublicKeys": [],
     "indexAsset": "LexMachina-ModelPack-Index.json",
     "signatureAsset": "LexMachina-ModelPack-Index.sig",
     "activation": "VERIFY_INDEX_THEN_DOWNLOAD_SELECTED_MODEL_TO_STAGING",
-    "policy": "FAIL_CLOSED_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
-    "temporaryUnsignedAllowed": false
+    "policy": "TEMPORARY_SHA256_ONLY_UNTIL_MODEL_PACK_SIGNER_IS_CONFIGURED",
+    "temporaryUnsignedAllowed": true
   },
   "skillUpdate": {
     "verification": "SHA256_AND_OPTIONAL_ED25519_INDEX",
@@ -228,6 +228,12 @@
       "model": "gpt-5.6-luna",
       "delivery": "BUNDLED_APP_PRIVATE",
       "auth": "CHATGPT_ACCOUNT"
+    },
+    "claude": {
+      "package": "@anthropic-ai/claude-code",
+      "version": "2.1.236",
+      "delivery": "BUNDLED_APP_PRIVATE",
+      "auth": "CLAUDE_AI_SUBSCRIPTION"
     }
   }
 }

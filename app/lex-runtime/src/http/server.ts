@@ -43,6 +43,7 @@ import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
 import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import { LocalLlmPrivacyNamedEntityRecognizer } from "../privacy/local-llm-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
 import { LocalAuthStore } from "../auth/store.js";
@@ -438,6 +439,14 @@ export async function startLocalServer(options?: {
     accountSessions
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  const stanzaNamedEntities =
+    new LocalStanzaNamedEntityRecognizer();
+  const privacyNamedEntities =
+    new LocalLlmPrivacyNamedEntityRecognizer(
+      providerGateway,
+      localModels,
+      stanzaNamedEntities
+    );
   const modelCatalog =
     new DynamicModelCatalog(
       credentials,
@@ -466,7 +475,7 @@ export async function startLocalServer(options?: {
           undefined,
           new TemporalSourceFreshnessChecker()
         ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       legalFederationTools
     );
   const documentAstGenerator =
@@ -479,7 +488,7 @@ export async function startLocalServer(options?: {
         new PdfJsDocumentPageSource(),
         new LocalPaddleOcrEngine()
       ),
-      new LocalStanzaNamedEntityRecognizer(),
+      privacyNamedEntities,
       24_000,
       new CompleteImageIngestor(
         new LocalPaddleImageOcrEngine()
