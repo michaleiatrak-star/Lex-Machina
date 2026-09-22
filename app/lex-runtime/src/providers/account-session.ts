@@ -677,7 +677,7 @@ function installHint(provider: ProviderId): string {
     return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Codex CLI. Następnie użyj przycisku połączenia konta ChatGPT.";
   }
   if (provider === "anthropic") {
-    return "Zainstaluj Claude Code i wykonaj: claude auth login";
+    return "Napraw lub zaktualizuj Lex Machina; aplikacja zawiera prywatny Claude Code. Następnie użyj przycisku połączenia konta Claude.";
   }
   return "Zainstaluj Grok Build CLI i wykonaj: grok login";
 }
@@ -860,6 +860,60 @@ function privateCodexExecutable(): string | null {
   ) ?? null;
 }
 
+function privateClaudeExecutable(): string | null {
+  const override =
+    process.env
+      .LEX_CLAUDE_CLI
+      ?.trim();
+  if (
+    override &&
+    existsSync(
+      override
+    )
+  ) {
+    return override;
+  }
+
+  const suffix =
+    process.platform ===
+      "win32"
+      ? "claude.cmd"
+      : "claude";
+  const candidates:
+    string[] = [];
+  const runtimeRoot =
+    process.env
+      .LEX_RUNTIME_ROOT
+      ?.trim();
+  if (runtimeRoot) {
+    candidates.push(
+      path.join(
+        runtimeRoot,
+        "app",
+        "node_modules",
+        ".bin",
+        suffix
+      )
+    );
+  }
+  candidates.push(
+    path.resolve(
+      process.cwd(),
+      "node_modules",
+      ".bin",
+      suffix
+    )
+  );
+
+  return candidates.find(
+    (candidate) =>
+      existsSync(
+        candidate
+      )
+  ) ?? null;
+}
+
+
 export function codexExecArgs(
   workDir: string,
   outputPath: string,
@@ -978,6 +1032,12 @@ async function resolveAccountExecutable(
   if (provider === "openai") {
     return (
       privateCodexExecutable() ??
+      await resolveCommand(command)
+    );
+  }
+  if (provider === "anthropic") {
+    return (
+      privateClaudeExecutable() ??
       await resolveCommand(command)
     );
   }
@@ -1457,6 +1517,10 @@ export function claudeSubscriptionAuthenticated(
         subscription === "max" ||
         subscription.includes(
           "claude"
+        ) ||
+        (
+          payload.loggedIn === true &&
+          !provider
         )
       );
     } catch {
