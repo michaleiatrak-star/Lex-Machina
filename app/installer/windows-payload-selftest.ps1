@@ -31,6 +31,7 @@ $appUpdateVerification = Require-File "bootstrap\app-update-verification.ps1"
 $llamaWebConfigurator = Require-File "bootstrap\configure-llama-native-web.ps1"
 $llamaWebMcp = Require-File "bootstrap\llama-web-mcp.py"
 $llamaLegalMcp = Require-File "bootstrap\llama-legal-skills-mcp.py"
+$llamaPrivateMcp = Require-File "bootstrap\llama-private-docs-mcp.py"
 $llamaMistralTemplate = Require-File "bootstrap\mistral-nemo-web-grounded.jinja"
 $ocrWorker = Require-File "ocr\paddle_worker.py"
 $nerWorker = Require-File "privacy\stanza_ner_worker.py"
@@ -47,6 +48,9 @@ $oldEnv = @{
   LEX_PADDLE_MODEL_DIR = $env:LEX_PADDLE_MODEL_DIR
   PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK
   STANZA_RESOURCES_DIR = $env:STANZA_RESOURCES_DIR
+  LEX_PRIVATE_NER_WORKER = $env:LEX_PRIVATE_NER_WORKER
+  LEX_PRIVATE_OCR_WORKER = $env:LEX_PRIVATE_OCR_WORKER
+  LEX_PRIVATE_DOC_WORKER = $env:LEX_PRIVATE_DOC_WORKER
   PYTHONNOUSERSITE = $env:PYTHONNOUSERSITE
   PYTHONUTF8 = $env:PYTHONUTF8
   HTTP_PROXY = $env:HTTP_PROXY
@@ -57,6 +61,9 @@ $oldEnv = @{
 $env:LEX_PADDLE_MODEL_DIR = $paddle
 $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
 $env:STANZA_RESOURCES_DIR = $stanza
+$env:LEX_PRIVATE_NER_WORKER = $nerWorker
+$env:LEX_PRIVATE_OCR_WORKER = $ocrWorker
+$env:LEX_PRIVATE_DOC_WORKER = $documentWorker
 $env:PYTHONNOUSERSITE = "1"
 $env:PYTHONUTF8 = "1"
 $env:HTTP_PROXY = "http://127.0.0.1:9"
@@ -94,6 +101,10 @@ Write-Host "SELFTEST_STAGE:llama-native-legal-skills-mcp"
 & $python $llamaLegalMcp --skills-root $corpus --self-test | Out-Host
 if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_LEGAL_SKILLS_MCP_FAILED" }
 
+Write-Host "SELFTEST_STAGE:llama-native-private-docs-mcp"
+& $python $llamaPrivateMcp --self-test | Out-Host
+if ($LASTEXITCODE -ne 0) { throw "SELFTEST_LLAMA_NATIVE_PRIVATE_DOCS_MCP_FAILED" }
+
 $skillFiles = @(Get-ChildItem -LiteralPath $corpus -Directory | Where-Object {
   Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf
 })
@@ -105,7 +116,11 @@ $templateText = Get-Content -Raw -LiteralPath $llamaMistralTemplate
 if ($templateText -notmatch "LEX_WEB_GROUNDED_POLICY_V1" -or
     $templateText -notmatch "web_research" -or
     $templateText -notmatch "LEX_LEGAL_SKILLS_AUTO_POLICY_V1" -or
-    $templateText -notmatch "legal_auto_route") {
+    $templateText -notmatch "legal_auto_route" -or
+    $templateText -notmatch "LEX_DIRECT_LEGAL_MCP_POLICY_V1" -or
+    $templateText -notmatch "LEX_PRIVATE_DOCUMENT_POLICY_V1" -or
+    $templateText -notmatch "private_ocr_anonymize" -or
+    $templateText -notmatch "private_finalize_document") {
   throw "SELFTEST_LLAMA_GROUNDED_TEMPLATE_INVALID"
 }
 
