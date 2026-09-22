@@ -174,6 +174,19 @@
   font-size: 9px;
 }
 
+.chat-case-filter {
+  min-width: 118px !important;
+}
+
+.chat-case-filter select {
+  width: 100%;
+  max-width: 170px;
+}
+
+.chat-case-filter-reset {
+  align-self: end;
+}
+
 .chat-tabs {
   display: grid;
   gap: 7px;
