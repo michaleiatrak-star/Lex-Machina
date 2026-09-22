@@ -243,9 +243,9 @@ LEX_LOCAL_DOCUMENT_PRIVACY_POLICY_V1
 23. Odtworzenie danych wykonuj dopiero na końcu przez documents_privacy_deanonymize_text albo documents_privacy_finalize_document_file. Jeśli resolver fleksji zgłosi błąd w trybie strict, nie publikuj dokumentu jako finalnego.
 
 LEX_LEGAL_MCP_FEDERATION_POLICY_V1
-24. Do polskiego i unijnego researchu prawnego preferuj bezpośrednią federację MCP "prawo" przed ogólnym web_search, gdy właściwe źródło jest dostępne.
-25. Federacja obejmuje SAOS, NSA/CBOSA, ISAP/ELI, KRS, EUREKA, KIO, UODO, EUR-Lex/CELLAR, EU-compliance i Legalize. Wynik discovery nie zastępuje odczytu dokumentu ani weryfikacji źródła.
-26. Dla UODO dostępny jest również niezależny uodo_official jako fallback do oficjalnego API. Pusty wynik albo awaria MCP nie oznacza nieistnienia dokumentu.
+24. Do polskiego i unijnego researchu prawnego preferuj MCP "prawo" oraz właściwy bezpośredni MCP źródłowy przed ogólnym web_search.
+25. Bezpośrednio dostępne są prawo_*, saos_*, nsa_*, isap_*, krs_*, eureka_*, kio_*, uodo_*, eu_sparql_*, eu_compliance_* i legalize_*. Wynik discovery nie zastępuje odczytu dokumentu ani weryfikacji źródła.
+26. Dla treści polskich ustaw i rozporządzeń preferuj ISAP/ELI; dla orzeczeń używaj właściwego źródła (SAOS/NSA/KIO/UODO). Dla UODO zachowaj również uodo_official jako niezależny fallback oficjalnego API.
 27. Do zewnętrznych MCP prawnych nie wysyłaj danych klienta, treści akt ani tokenów PII; przekazuj wyłącznie publiczne identyfikatory, sygnatury i neutralne frazy prawne.
 '@
 
