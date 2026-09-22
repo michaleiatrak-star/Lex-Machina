@@ -1029,19 +1029,25 @@ async function resolveAccountExecutable(
 ): Promise<string | null> {
   const command =
     CLI_NAMES[provider];
-  if (provider === "openai") {
-    return (
-      privateCodexExecutable() ??
-      await resolveCommand(command)
+
+  // RC14 used the user's normally installed account client. Preserve that
+  // proven behavior whenever one is available, while keeping the bundled
+  // client as a clean-machine fallback for the online installer.
+  const systemExecutable =
+    await resolveCommand(
+      command
     );
+  if (systemExecutable) {
+    return systemExecutable;
+  }
+
+  if (provider === "openai") {
+    return privateCodexExecutable();
   }
   if (provider === "anthropic") {
-    return (
-      privateClaudeExecutable() ??
-      await resolveCommand(command)
-    );
+    return privateClaudeExecutable();
   }
-  return resolveCommand(command);
+  return null;
 }
 
 function spawnResolved(
