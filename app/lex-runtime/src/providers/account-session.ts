@@ -1209,10 +1209,10 @@ export function accountLoginArgs(
     return ["login"];
   }
   if (provider === "anthropic") {
+    // Keep the proven RC14 browser OAuth flow as the primary path.
     return [
       "auth",
-      "login",
-      "--claudeai"
+      "login"
     ];
   }
   return ["login"];
@@ -1230,7 +1230,8 @@ export function accountLoginFallbackArgs(
   if (provider === "anthropic") {
     return [
       "auth",
-      "login"
+      "login",
+      "--claudeai"
     ];
   }
   return null;
@@ -1394,10 +1395,16 @@ export function openAiChatGptAuthenticated(
   // Codex versions used by the RC14 line can report the successful browser
   // login simply as "Using ChatGPT", without an additional "logged in" token.
   // Preserve that proven contract while still excluding API-key auth above.
-  return status.includes(
-    "logged in using chatgpt"
-  ) || status.includes(
-    "using chatgpt"
+  return (
+    status.includes("using chatgpt") ||
+    (
+      status.includes("chatgpt") &&
+      (
+        status.includes("logged in") ||
+        status.includes("signed in") ||
+        status.includes("authenticated")
+      )
+    )
   );
 }
 
