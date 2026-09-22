@@ -957,17 +957,24 @@ export class LegalFederationToolRuntime {
               message
           }
         });
+        const policyBlocked =
+          call.name ===
+            ASSESS_SOURCE_TOOL;
         results.push({
           tool_use_id:
             call.id,
           content:
             JSON.stringify({
               status:
-                "SOURCE_UNAVAILABLE",
+                policyBlocked
+                  ? "POLICY_BLOCKED"
+                  : "SOURCE_UNAVAILABLE",
               error:
                 message,
               instruction:
-                "Do not infer absence of law from this failure. Use another verified source path or report the source as temporarily unavailable."
+                policyBlocked
+                  ? "Source assessment was rejected by Lex source policy. Correct the URL/cross-check evidence; do not treat this as a source outage."
+                  : "Do not infer absence of law from this failure. Use another verified source path or report the source as temporarily unavailable."
             })
         });
       }
