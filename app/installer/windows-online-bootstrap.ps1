@@ -12,6 +12,20 @@ $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
 $cache = Join-Path $env:LOCALAPPDATA "LexMachina\bootstrap-cache"
 New-Item -ItemType Directory -Force -Path $cache | Out-Null
 
+# Account-session CLIs are optional and provisioned lazily after the user
+# selects ChatGPT/Claude account login. Remove stale bundled copies from
+# upgrades so the online runtime remains thin.
+foreach ($staleOptionalClient in @(
+  (Join-Path $runtime "app\node_modules\@openai\codex"),
+  (Join-Path $runtime "app\node_modules\@anthropic-ai\claude-code"),
+  (Join-Path $runtime "app\node_modules\.bin\codex"),
+  (Join-Path $runtime "app\node_modules\.bin\codex.cmd"),
+  (Join-Path $runtime "app\node_modules\.bin\claude"),
+  (Join-Path $runtime "app\node_modules\.bin\claude.cmd")
+)) {
+  Remove-Item -LiteralPath $staleOptionalClient -Recurse -Force -ErrorAction SilentlyContinue
+}
+
 # NSIS invokes Windows PowerShell directly. On some clean-machine/CI hosts its
 # inherited module path does not expose the built-in Get-FileHash cmdlet.
 # Provide a SHA-256-compatible fallback so this bootstrap and the child
