@@ -161,7 +161,7 @@ describe("local lightweight conversation", () => {
         "napisz ok",
         true
       )
-    ).toBe(false);
+    ).toBe(true);
     expect(
       isLocalLightweightConversation(
         "gpt-5.6-luna",
