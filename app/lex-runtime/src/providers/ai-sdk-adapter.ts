@@ -1117,18 +1117,12 @@ async function exactLocalInputTokens(
     ) {
       throw error;
     }
-    if (
-      error instanceof Error &&
-      (
-        error.message.startsWith(
-          "LOCAL_MODEL_TOKEN_COUNT_FAILED:"
-        ) ||
-        error.message ===
-          "LOCAL_MODEL_TOKEN_COUNT_TIMEOUT"
-      )
-    ) {
-      throw error;
-    }
+
+    // Exact token counting is a guardrail optimization, not a prerequisite
+    // for inference. Some llama.cpp builds or chat templates can reject or
+    // time out on the auxiliary input_tokens request even though the actual
+    // chat completion endpoint is healthy. Fall back to the conservative
+    // localChatBudget estimate and attempt the real generation.
     return null;
   } finally {
     cleanup();
