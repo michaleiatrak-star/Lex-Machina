@@ -12,6 +12,7 @@ import {
   claudeSubscriptionAuthenticated,
   classifyAccountCliFailureDetail,
   codexExecArgs,
+  codexStoredAuthIsChatGpt,
   discoverLatestClaudeSessionId,
   isAccountSessionModel,
   isMissingResumableSessionMessage,
@@ -297,6 +298,36 @@ describe("provider account-session transport", () => {
     );
   });
 
+  it("recognizes persisted ChatGPT auth metadata without reading token values", () => {
+    expect(
+      codexStoredAuthIsChatGpt(
+        JSON.stringify({
+          auth_mode:
+            "chatgpt",
+          tokens: {
+            access_token:
+              "redacted"
+          }
+        })
+      )
+    ).toBe(true);
+    expect(
+      codexStoredAuthIsChatGpt(
+        JSON.stringify({
+          auth_mode:
+            "api",
+          OPENAI_API_KEY:
+            "redacted"
+        })
+      )
+    ).toBe(false);
+    expect(
+      codexStoredAuthIsChatGpt(
+        "not-json"
+      )
+    ).toBe(false);
+  });
+
   it("recognizes ChatGPT auth status without accepting API-key login", () => {
     expect(
       openAiChatGptAuthenticated({
@@ -354,6 +385,18 @@ describe("provider account-session transport", () => {
         stderr: ""
       })
     ).toBe(false);
+
+    expect(
+      claudeSubscriptionAuthenticated({
+        code: 0,
+        stdout: JSON.stringify({
+          loggedIn: true,
+          authMethod: "none",
+          apiProvider: "firstParty"
+        }),
+        stderr: ""
+      })
+    ).toBe(true);
 
     expect(
       claudeSubscriptionAuthenticated({
