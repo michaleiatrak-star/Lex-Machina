@@ -62,7 +62,7 @@ describe("provider account-session transport", () => {
   });
 
 
-  it("keeps Lex conversation context authoritative for every account provider", () => {
+  it("keeps Lex context authoritative while restoring host-session continuity", () => {
     for (
       const provider
       of [
@@ -76,19 +76,19 @@ describe("provider account-session transport", () => {
           provider
         )
       ).toBe(
-        "LEX_CONTEXT_ONLY"
+        "LAST_OR_NEW"
       );
     }
   });
 
-  it("pins Codex account execution to a ChatGPT-compatible model and isolated ephemeral config", () => {
+  it("pins Codex account execution to a ChatGPT-compatible model and isolated persistent config", () => {
     const args =
       codexExecArgs(
         "C:\\Lex Work",
         "C:\\Lex Work\\last.txt"
       );
 
-    expect(args).toContain(
+    expect(args).not.toContain(
       "--ephemeral"
     );
     expect(args).toContain(
@@ -98,7 +98,13 @@ describe("provider account-session transport", () => {
       "--ignore-user-config"
     );
     expect(args).toContain(
+      "--ignore-rules"
+    );
+    expect(args).toContain(
       "mcp_servers={}"
+    );
+    expect(args).toContain(
+      "read-only"
     );
     expect(
       args.some(
