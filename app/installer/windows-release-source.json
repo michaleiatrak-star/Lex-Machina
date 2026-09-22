@@ -170,6 +170,26 @@
       "optionalSearchProvider": "BRAVE_SEARCH_API",
       "citationPolicy": "FETCH_BEFORE_CITE_NO_INVENTED_URLS",
       "mistralDirectLaunchPolicy": "SERVER_CHAT_TEMPLATE_GROUNDED"
+    },
+    "legalSkills": {
+      "mode": "AUTO",
+      "transport": "LLAMA_CPP_MCP_STDIO",
+      "mediation": "DIRECT_LLAMA_SERVER_NO_LEX_TOOL_BROKER",
+      "sourceRoot": "runtime/corpus",
+      "skillCount": 32,
+      "requiredRouter": "prawny-router-v3",
+      "polishBaseline": [
+        "prawny-router-v3",
+        "prawo-polskie-v2",
+        "shared"
+      ],
+      "tools": [
+        "legal_auto_route",
+        "legal_skill_read",
+        "legal_skill_search",
+        "legal_skills_list"
+      ],
+      "policy": "ROUTER_FIRST_FAIL_CLOSED_THEN_WEB_VERIFY"
     }
   },
   "systemPrerequisites": {
