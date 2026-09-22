@@ -25,8 +25,9 @@ import {
 import type {
   DocumentGenerationStateStore
 } from "./document-generation-state.js";
-import type {
-  EncryptedPrivacyVaultStore
+import {
+  privacyVaultDeanonymizationKeyBinding,
+  type EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
 import type {
   DocumentGenerationValidationContext
@@ -64,6 +65,10 @@ export type FinalDocumentResult = {
   sha256: string;
   text: string;
   replacements: number;
+  deanonymizationBasis:
+    "PRIVACY_VAULT_KEY";
+  keyBindingVerified:
+    boolean;
 };
 
 export type ReadyDocumentResult = {
@@ -312,6 +317,15 @@ export class LocalDocumentAuthoringService {
             vaultGeneration,
             caseKeyVersion:
               args.keyVersion,
+            deanonymizationKeyBinding:
+              privacyVaultDeanonymizationKeyBinding({
+                caseId:
+                  args.caseId,
+                caseDataKey:
+                  args.caseDataKey,
+                keyVersion:
+                  args.keyVersion
+              }),
             ...(validated.ast.documentType ===
               "pleading"
               ? {
@@ -544,6 +558,31 @@ export class LocalDocumentAuthoringService {
         "GENERATION_CASE_KEY_CHANGED"
       );
     }
+    const currentKeyBinding =
+      privacyVaultDeanonymizationKeyBinding({
+        caseId:
+          args.target
+            .caseId,
+        caseDataKey:
+          args.caseDataKey,
+        keyVersion:
+          args.keyVersion
+      });
+    const keyBindingVerified =
+      args.target
+        .deanonymizationKeyBinding
+        ? currentKeyBinding ===
+          args.target
+            .deanonymizationKeyBinding
+        : true;
+    if (
+      !keyBindingVerified
+    ) {
+      throw new Error(
+        "GENERATION_DEANONYMIZATION_KEY_CHANGED"
+      );
+    }
+
     const currentGeneration =
       await this.vaults
         .getGeneration({
@@ -819,7 +858,15 @@ export class LocalDocumentAuthoringService {
             validation.text,
           replacements:
             finalPackage
-              .replaced ?? 0
+              .replaced ?? 0,
+          deanonymizationBasis:
+            "PRIVACY_VAULT_KEY",
+          keyBindingVerified:
+            Boolean(
+              args.target
+                .deanonymizationKeyBinding
+            ) &&
+            keyBindingVerified
         };
       } finally {
         finalPackage
