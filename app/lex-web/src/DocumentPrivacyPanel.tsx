@@ -5,6 +5,7 @@ import {
   useState
 } from "react";
 import {
+  ApiError,
   finalizeDocument,
   reviewDocument,
   uploadCaseFile,
@@ -349,9 +350,12 @@ export function DocumentPrivacyPanel({
       });
     } catch (cause) {
       setError(
-        cause instanceof Error
-          ? cause.message
-          : "DOCUMENT_REVIEW_FAILED"
+        cause instanceof ApiError &&
+        cause.description
+          ? `${cause.code}: ${cause.description}`
+          : cause instanceof Error
+            ? cause.message
+            : "DOCUMENT_REVIEW_FAILED"
       );
     } finally {
       setLoading(false);
