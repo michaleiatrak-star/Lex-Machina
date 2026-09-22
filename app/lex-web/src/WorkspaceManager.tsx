@@ -4,7 +4,9 @@ import {
   isDesktopShell,
   listCaseFiles,
   processStoredCaseFile,
+  searchCaseKnowledge,
   uploadCaseFile,
+  type CaseKnowledgeHit,
   type StoredUploadResponse
 } from "./api.js";
 import {
@@ -96,6 +98,16 @@ export function WorkspaceManager({
   const [newFolderName, setNewFolderName] = useState("");
   const [documentSearch, setDocumentSearch] =
     useState("");
+  const [knowledgeHits, setKnowledgeHits] =
+    useState<CaseKnowledgeHit[]>([]);
+  const [
+    knowledgeSearchBusy,
+    setKnowledgeSearchBusy
+  ] = useState(false);
+  const [
+    knowledgeSearchError,
+    setKnowledgeSearchError
+  ] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -228,6 +240,69 @@ export function WorkspaceManager({
     if (preview?.url) URL.revokeObjectURL(preview.url);
   }, [preview?.url]);
 
+  useEffect(() => {
+    const query =
+      documentSearch.trim();
+    if (
+      !caseId ||
+      query.length < 2
+    ) {
+      setKnowledgeHits([]);
+      setKnowledgeSearchError("");
+      setKnowledgeSearchBusy(false);
+      return;
+    }
+
+    let cancelled = false;
+    setKnowledgeSearchBusy(true);
+    setKnowledgeSearchError("");
+    const timer =
+      window.setTimeout(
+        () => {
+          void searchCaseKnowledge(
+            caseId,
+            query,
+            24
+          )
+            .then((result) => {
+              if (!cancelled) {
+                setKnowledgeHits(
+                  result.hits
+                );
+              }
+            })
+            .catch((failure) => {
+              if (!cancelled) {
+                setKnowledgeHits([]);
+                setKnowledgeSearchError(
+                  failure instanceof Error
+                    ? failure.message
+                    : String(
+                        failure
+                      )
+                );
+              }
+            })
+            .finally(() => {
+              if (!cancelled) {
+                setKnowledgeSearchBusy(
+                  false
+                );
+              }
+            });
+        },
+        250
+      );
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [
+    caseId,
+    documentSearch
+  ]);
+
   const folders = useMemo(
     () => [...(workspace?.folders ?? [])].sort((a, b) =>
       folderPath(a, workspace?.folders ?? []).localeCompare(
@@ -247,6 +322,21 @@ export function WorkspaceManager({
     return workspace.items
       .filter((item) => {
         if (query) {
+          const documentId =
+            caseFiles.find(
+              (file) =>
+                file.uploadId ===
+                item.itemId
+            )?.processing
+              ?.documentId;
+          const contentMatch =
+            documentId
+              ? knowledgeHits.some(
+                  (hit) =>
+                    hit.documentId ===
+                    documentId
+                )
+              : false;
           return (
             item.filename
               .toLocaleLowerCase("pl")
@@ -256,7 +346,8 @@ export function WorkspaceManager({
               .includes(query) ||
             item.itemId
               .toLocaleLowerCase("pl")
-              .includes(query)
+              .includes(query) ||
+            contentMatch
           );
         }
         return (
@@ -274,8 +365,30 @@ export function WorkspaceManager({
   }, [
     workspace,
     selectedFolder,
-    documentSearch
+    documentSearch,
+    caseFiles,
+    knowledgeHits
   ]);
+
+  function knowledgeHitFor(
+    item: WorkspaceItem
+  ): CaseKnowledgeHit | undefined {
+    const documentId =
+      caseFiles.find(
+        (file) =>
+          file.uploadId ===
+          item.itemId
+      )?.processing
+        ?.documentId;
+    if (!documentId) {
+      return undefined;
+    }
+    return knowledgeHits.find(
+      (hit) =>
+        hit.documentId ===
+        documentId
+    );
+  }
 
   function itemFolderLabel(
     item: WorkspaceItem
@@ -502,6 +615,9 @@ export function WorkspaceManager({
               {documentSearch.trim()
                 ? " wyników"
                 : " plików"}
+              {knowledgeSearchBusy
+                ? " · szukam w treści…"
+                : ""}
             </span>
           </div>
 
@@ -521,11 +637,26 @@ export function WorkspaceManager({
                       {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
                     </span>
                     {documentSearch.trim() ? (
-                      <small className="workspace-search-path">
-                        {itemFolderLabel(
+                      <>
+                        <small className="workspace-search-path">
+                          {itemFolderLabel(
+                            item
+                          )}
+                        </small>
+                        {knowledgeHitFor(
                           item
-                        )}
-                      </small>
+                        ) ? (
+                          <small className="workspace-search-snippet">
+                            s. {knowledgeHitFor(item)!.pageStart}
+                            {knowledgeHitFor(item)!.pageEnd !==
+                            knowledgeHitFor(item)!.pageStart
+                              ? `–${knowledgeHitFor(item)!.pageEnd}`
+                              : ""}
+                            {" · "}
+                            {knowledgeHitFor(item)!.text}
+                          </small>
+                        ) : null}
+                      </>
                     ) : null}
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
@@ -625,6 +756,12 @@ export function WorkspaceManager({
         </section>
       ) : null}
 
+      {knowledgeSearchError &&
+      documentSearch.trim().length >= 2 ? (
+        <p className="workspace-search-note">
+          Wyszukiwanie po nazwie działa. Indeks treści dokumentów jest chwilowo niedostępny: {knowledgeSearchError}
+        </p>
+      ) : null}
       {notice ? <p className="workspace-notice">{notice}</p> : null}
       {error ? <p className="chat-inline-error">{error}</p> : null}
     </article>
