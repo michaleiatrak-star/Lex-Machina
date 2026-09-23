@@ -22,8 +22,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SOURCE_SHA: f7c0df2754a8354479b80c7e80f3051401dc60ec
-  INSTALLER_RUN_ID: "35880379899"
+  SOURCE_SHA: 6df9b33d71567563de6e1b36bab7c069a451ed7e
+  INSTALLER_RUN_ID: "35881442333"
   RELEASE_TAG: v0.1.10-hotfix1
   RELEASE_TITLE: Lex Machina v0.1.10 hotfix 1
   ASSET_NAME: Lex-Machina-0.1.10-hotfix1-Online-x64-Setup.exe
