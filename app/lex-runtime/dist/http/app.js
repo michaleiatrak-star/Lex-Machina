@@ -3842,9 +3842,12 @@ export function createLexHttpApp(options) {
                     res.status(502).json({
                         error: "PROVIDER_EXECUTION_FAILED",
                         provider: error.provider,
-                        ...(/^[A-Z0-9_]+$/.test(parsedReason)
+                        reason: /^[A-Z0-9_]+$/.test(parsedReason)
+                            ? parsedReason
+                            : "PROVIDER_UNCODED_FAILURE",
+                        ...(rawReason
                             ? {
-                                reason: parsedReason
+                                description: safeDiagnosticText(rawReason)
                             }
                             : {})
                     });
@@ -5288,9 +5291,12 @@ export function createLexHttpApp(options) {
                 res.status(502).json({
                     error: "PROVIDER_EXECUTION_FAILED",
                     provider: error.provider,
-                    ...(/^[A-Z0-9_]+$/.test(parsedReason)
+                    reason: /^[A-Z0-9_]+$/.test(parsedReason)
+                        ? parsedReason
+                        : "PROVIDER_UNCODED_FAILURE",
+                    ...(rawReason
                         ? {
-                            reason: parsedReason
+                            description: safeDiagnosticText(rawReason)
                         }
                         : {})
                 });

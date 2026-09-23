@@ -520,26 +520,59 @@ export function localModelFailureMessage(
   }
 }
 
-function providerFailureMessage(
+export function providerFailureMessage(
   provider: PrimaryModelSource,
-  reason?: string
+  reason?: string,
+  description?: string
 ): string {
-  switch (reason) {
-    case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
-      return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
-    case "ACCOUNT_SESSION_AUTH_EXPIRED":
-      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.";
-    case "ACCOUNT_SESSION_CAPACITY":
-      return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
-    case "ACCOUNT_SESSION_PROMPT_REJECTED":
-      return "ChatGPT/Codex odrzucił bieżące żądanie po stronie usługi. Kod: ACCOUNT_SESSION_PROMPT_REJECTED";
-    case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
-      return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
-    case "ACCOUNT_SESSION_CLI_FAILED":
-      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Lex Machina 0.1.7 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
-    default:
-      return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
-  }
+  const name =
+    provider.startsWith("anthropic")
+      ? "Claude"
+      : provider.startsWith("xai")
+        ? "Grok"
+        : "ChatGPT/Codex";
+  const client =
+    provider.startsWith("anthropic")
+      ? "Claude Code"
+      : provider.startsWith("xai")
+        ? "Grok Build"
+        : "Codex";
+  const base = (() => {
+    switch (reason) {
+      case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
+        return `${name} odrzucił model domyślny dla tej sesji. Zaktualizuj aplikację i ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_AUTH_EXPIRED":
+      case "ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH":
+        return `Sesja ${name} wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.`;
+      case "ACCOUNT_SESSION_CAPACITY":
+        return `${name} chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta.`;
+      case "ACCOUNT_SESSION_PROMPT_REJECTED":
+        return `${name} odrzucił bieżące żądanie po stronie usługi.`;
+      case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
+        return `Klient ${client} jest niezgodny z kontraktem Lex Machina. Lex Machina używa przypiętej wersji prywatnego klienta; ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_CLI_SPAWN_FAILED":
+        return `Nie udało się uruchomić klienta ${client}. Ponów połączenie konta w Ustawieniach, aby Lex Machina przygotowała przypiętą wersję klienta.`;
+      case "ACCOUNT_SESSION_CLI_STALLED":
+        return `Klient ${client} nie rozpoczął pracy w ciągu 120 s (brak żadnej odpowiedzi procesu).`;
+      case "ACCOUNT_SESSION_COMMAND_TIMEOUT":
+        return `Klient ${client} przekroczył limit czasu wykonania.`;
+      case "ACCOUNT_SESSION_EMPTY_RESPONSE":
+        return `${name} zakończył wykonanie bez treści odpowiedzi.`;
+      case "ACCOUNT_SESSION_CLI_FAILED":
+        return `Klient ${client} zakończył wykonanie błędem.`;
+      default:
+        return `${name} odrzucił lub przerwał wykonanie.`;
+    }
+  })();
+  const code =
+    reason
+      ? ` Kod: ${reason}.`
+      : "";
+  const detail =
+    description?.trim()
+      ? ` Szczegóły: ${description.trim().slice(0, 600)}`
+      : "";
+  return `${base}${code}${detail}`;
 }
 
 async function openExternalUrl(url: string): Promise<void> {
@@ -2632,7 +2665,10 @@ export default function MatterChatApp({
                 )
               : providerFailureMessage(
                   provider,
-                  reason
+                  reason,
+                  error instanceof ApiError
+                    ? error.description
+                    : undefined
                 )
           : code ===
               "AUTO_ROUTING_FAILED"

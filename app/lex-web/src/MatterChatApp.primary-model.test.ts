@@ -167,3 +167,21 @@ describe("primary model chat policy", () => {
     ).toBe(true);
   });
 });
+
+describe("provider failure message", () => {
+  it("names Claude, always shows the code and the sanitized detail", async () => {
+    const { providerFailureMessage } = await import("./MatterChatApp.js");
+    const message = providerFailureMessage(
+      "anthropic-account",
+      "ACCOUNT_SESSION_CLI_SPAWN_FAILED",
+      "ACCOUNT_SESSION_CLI_SPAWN_FAILED:ENOENT:claude"
+    );
+    expect(message).toContain("Claude Code");
+    expect(message).not.toContain("ChatGPT");
+    expect(message).toContain("Kod: ACCOUNT_SESSION_CLI_SPAWN_FAILED");
+    expect(message).toContain("Szczegóły:");
+    expect(
+      providerFailureMessage("openai-account", "ACCOUNT_SESSION_CLI_FAILED")
+    ).toContain("Codex");
+  });
+});

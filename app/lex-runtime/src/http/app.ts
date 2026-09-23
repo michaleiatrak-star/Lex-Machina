@@ -6906,16 +6906,20 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               "PROVIDER_EXECUTION_FAILED",
             provider:
               error.provider,
-            ...(
+            reason:
               /^[A-Z0-9_]+$/.test(
                 parsedReason
               )
-                ? {
-                    reason:
-                      parsedReason
-                  }
-                : {}
-            )
+                ? parsedReason
+                : "PROVIDER_UNCODED_FAILURE",
+            ...(rawReason
+              ? {
+                  description:
+                    safeDiagnosticText(
+                      rawReason
+                    )
+                }
+              : {})
           });
           return;
         }
@@ -9456,12 +9460,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(502).json({
           error: "PROVIDER_EXECUTION_FAILED",
           provider: error.provider,
-          ...(/^[A-Z0-9_]+$/.test(
-            parsedReason
-          )
+          reason:
+            /^[A-Z0-9_]+$/.test(
+              parsedReason
+            )
+              ? parsedReason
+              : "PROVIDER_UNCODED_FAILURE",
+          ...(rawReason
             ? {
-                reason:
-                  parsedReason
+                description:
+                  safeDiagnosticText(
+                    rawReason
+                  )
               }
             : {})
         });

@@ -677,14 +677,38 @@ async function resolveCommand(command) {
     const result = await runDirect(probe, [command], undefined, env, 5_000).catch(() => null);
     if (!result || result.code !== 0)
         return null;
-    const candidate = result.stdout
+    return pickResolvedCommand(result.stdout);
+}
+/**
+ * `where.exe claude` lists the extensionless POSIX shim of an npm global
+ * install first (e.g. %APPDATA%\npm\claude). Node cannot spawn it, which
+ * surfaced as an uncoded "Provider odrzucił" failure. Only runnable Windows
+ * candidates are accepted, .exe first.
+ */
+export function pickResolvedCommand(whereOutput, platform = process.platform) {
+    const candidates = whereOutput
         .split(/\r?\n/)
         .map((line) => line.trim())
-        .find(Boolean);
-    return candidate || null;
+        .filter(Boolean);
+    if (platform !== "win32") {
+        return candidates[0] ?? null;
+    }
+    for (const extension of [".exe", ".cmd", ".bat", ".com"]) {
+        const match = candidates.find((candidate) => candidate.toLowerCase().endsWith(extension));
+        if (match)
+            return match;
+    }
+    return null;
 }
 async function resolveAccountExecutable(provider) {
     const command = CLI_NAMES[provider];
+    // Status must probe the same client that executes requests.
+    if (provider === "anthropic") {
+        const pinned = privateClaudeExecutable();
+        if (pinned) {
+            return pinned;
+        }
+    }
     // Match the proven ChatGPT behavior for both account providers:
     // prefer the user's normally installed official CLI, then use the
     // optional private client provisioned on demand by Lex Machina.
@@ -811,7 +835,9 @@ function runDirect(executable, args, stdinText, env, timeoutMs, cwd, abortSignal
             // The client may exit before consuming stdin; the exit handler reports it.
         });
         child.once("error", (error) => {
-            finish(() => reject(error));
+            const errno = error.code ??
+                "UNKNOWN";
+            finish(() => reject(new Error(`ACCOUNT_SESSION_CLI_SPAWN_FAILED:${errno}:${sanitizeAccountCliFailureDetail(`${executable}: ${error.message}`)}`)));
         });
         child.once("exit", (code) => {
             finish(() => resolve({
@@ -837,7 +863,12 @@ async function ensureAccountExecutable(provider) {
             await optionalAccountClientMatchesPinnedVersion(provider)) {
             return privateExecutable;
         }
-        if (!privateExecutable) {
+        // Claude: always run the pinned client, like the working ChatGPT/Codex
+        // path. A system-wide Claude Code of another version may reject Lex's
+        // headless flags; it shares the same login (~/.claude), so it is only a
+        // fallback when provisioning the pinned client fails.
+        if (!privateExecutable &&
+            provider === "openai") {
             const systemExecutable = await resolveCommand(CLI_NAMES[provider]);
             if (systemExecutable) {
                 return systemExecutable;
@@ -850,6 +881,20 @@ async function ensureAccountExecutable(provider) {
             return existing;
         }
     }
+    try {
+        return await provisionPinnedAccountClient(provider);
+    }
+    catch (error) {
+        if (provider === "anthropic") {
+            const systemExecutable = await resolveCommand(CLI_NAMES[provider]);
+            if (systemExecutable) {
+                return systemExecutable;
+            }
+        }
+        throw error;
+    }
+}
+async function provisionPinnedAccountClient(provider) {
     const spec = OPTIONAL_ACCOUNT_CLIENTS[provider];
     if (!spec) {
         return null;
@@ -914,15 +959,23 @@ export function nativeClaudeExecutable(executable, platform = process.platform) 
         !/[\\/]claude\.cmd$/i.test(executable)) {
         return executable;
     }
-    const candidate = path.join(path.dirname(executable), "..", "@anthropic-ai", "claude-code", "bin", "claude.exe");
-    try {
-        // The unpopulated postinstall placeholder is a tiny stub.
-        if (statSync(candidate).size > 1024 * 1024) {
-            return candidate;
+    const shimDir = path.dirname(executable);
+    // node_modules/.bin/claude.cmd (private install) or
+    // %APPDATA%/npm/claude.cmd (npm global install).
+    for (const packageRoot of [
+        path.join(shimDir, ".."),
+        path.join(shimDir, "node_modules")
+    ]) {
+        const candidate = path.join(packageRoot, "@anthropic-ai", "claude-code", "bin", "claude.exe");
+        try {
+            // The unpopulated postinstall placeholder is a tiny stub.
+            if (statSync(candidate).size > 1024 * 1024) {
+                return candidate;
+            }
         }
-    }
-    catch {
-        // Keep the shim when the native binary is not present.
+        catch {
+            // Try the next layout; keep the shim when none is present.
+        }
     }
     return executable;
 }
@@ -1542,7 +1595,9 @@ export class AccountSessionManager {
                 result = await runCli(provider, ["login", "status"], undefined, STATUS_TIMEOUT_MS);
             }
             else if (provider === "anthropic") {
-                result = await runCli(provider, ["auth", "status"], undefined, STATUS_TIMEOUT_MS);
+                // Probe the resolved client directly: a status poll must never
+                // trigger the (minutes-long) pinned-client provisioning.
+                result = await runDirect(nativeClaudeExecutable(executable), ["auth", "status"], undefined, accountEnvironment(provider), STATUS_TIMEOUT_MS);
             }
             else {
                 const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-grok-auth-"));
