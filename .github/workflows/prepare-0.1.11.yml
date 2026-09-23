@@ -1,0 +1,135 @@
+name: Prepare Lex Machina 0.1.11
+
+on:
+  push:
+    branches:
+      - "release/0.1.11"
+    paths:
+      - ".github/workflows/prepare-0.1.11.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Materialize development skills and normalize version
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          from zipfile import ZipFile
+          import json, re, shutil, tempfile
+
+          VERSION = "0.1.11"
+          BRANCH = "release/0.1.11"
+          archives = Path("WERSJA ROZWOJOWA")
+          target = Path("Wersja rozwojowa rozpakowana")
+
+          zips = sorted(archives.glob("*.zip"))
+          if not zips:
+              raise SystemExit("NO_DEVELOPMENT_SKILL_ARCHIVES")
+
+          with tempfile.TemporaryDirectory() as td:
+              stage = Path(td) / "corpus"
+              stage.mkdir()
+              roots = set()
+              for archive in zips:
+                  with ZipFile(archive) as z:
+                      infos = [i for i in z.infolist() if not i.is_dir()]
+                      names = [i.filename for i in infos]
+                      if len(names) != len(set(names)):
+                          raise SystemExit(f"DUPLICATE_PATH:{archive.name}")
+                      for name in names:
+                          p = PurePosixPath(name)
+                          if p.is_absolute() or ".." in p.parts or "\\" in name:
+                              raise SystemExit(f"UNSAFE_PATH:{archive.name}:{name}")
+                      entrypoints = [n for n in names if len(PurePosixPath(n).parts) == 2 and n.endswith("/SKILL.md")]
+                      if len(entrypoints) != 1:
+                          raise SystemExit(f"INVALID_ENTRYPOINT:{archive.name}")
+                      root = PurePosixPath(entrypoints[0]).parts[0]
+                      if root in roots:
+                          raise SystemExit(f"DUPLICATE_SKILL_ROOT:{root}")
+                      roots.add(root)
+                      if any(not n.startswith(root + "/") for n in names):
+                          raise SystemExit(f"AMBIGUOUS_PACKAGE_ROOT:{archive.name}")
+                      z.extractall(stage)
+              if target.exists():
+                  shutil.rmtree(target)
+              shutil.copytree(stage, target)
+
+          lex = Path("app/lex-version.yaml")
+          raw = lex.read_text(encoding="utf-8")
+          raw = re.sub(r'^work_branch: ".*"$', f'work_branch: "{BRANCH}"', raw, flags=re.M)
+          raw = re.sub(r'^application_version: ".*"$', f'application_version: "{VERSION}"', raw, flags=re.M)
+          lex.write_text(raw, encoding="utf-8")
+
+          for name in [
+              "app/lex-runtime/package.json",
+              "app/lex-web/package.json",
+              "app/lex-desktop/package.json",
+              "app/lex-desktop/src-tauri/tauri.conf.json",
+          ]:
+              p = Path(name)
+              data = json.loads(p.read_text(encoding="utf-8"))
+              data["version"] = VERSION
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          installer = Path("app/installer/windows-release-source.json")
+          raw = installer.read_text(encoding="utf-8")
+          raw, count = re.subn(r'("applicationVersion"\s*:\s*")[^"]+("\s*,)', rf'\g<1>{VERSION}\g<2>', raw, count=1)
+          if count != 1:
+              raise SystemExit("APPLICATION_VERSION_MARKER_NOT_FOUND")
+          installer.write_text(raw, encoding="utf-8")
+
+          cargo = Path("app/lex-desktop/src-tauri/Cargo.toml")
+          raw = cargo.read_text(encoding="utf-8")
+          raw, count = re.subn(r'(?ms)(\[package\].*?^version\s*=\s*")[^"]+("\s*$)', rf'\g<1>{VERSION}\g<2>', raw, count=1)
+          if count != 1:
+              raise SystemExit("CARGO_VERSION_MARKER_NOT_FOUND")
+          cargo.write_text(raw, encoding="utf-8")
+
+          for name in [
+              "app/lex-runtime/package-lock.json",
+              "app/lex-web/package-lock.json",
+              "app/lex-desktop/package-lock.json",
+          ]:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              data = json.loads(p.read_text(encoding="utf-8"))
+              data["version"] = VERSION
+              packages = data.get("packages")
+              if isinstance(packages, dict) and isinstance(packages.get(""), dict):
+                  packages[""]["version"] = VERSION
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          lock = Path("app/lex-desktop/src-tauri/Cargo.lock")
+          if lock.exists():
+              raw = lock.read_text(encoding="utf-8")
+              raw = re.sub(r'(?ms)(name = "lex-machina-desktop"\nversion = ")[^"]+("\n)', rf'\g<1>{VERSION}\g<2>', raw, count=1)
+              lock.write_text(raw, encoding="utf-8")
+          PY
+
+          python scripts/verify_development_archives.py
+
+      - name: Commit prepared release source
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "Release source already prepared."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(release): materialize development skills for 0.1.11"
+          git push origin HEAD:release/0.1.11
