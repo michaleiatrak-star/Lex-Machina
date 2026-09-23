@@ -1,0 +1,137 @@
+from pathlib import Path
+
+ACCOUNT = Path("app/lex-runtime/src/providers/account-session.ts")
+TEST = Path("app/lex-runtime/src/providers/account-session.test.ts")
+
+s = ACCOUNT.read_text(encoding="utf-8")
+
+
+def replace_once(old: str, new: str, label: str) -> None:
+    global s
+    count = s.count(old)
+    if count != 1:
+        raise SystemExit(f"{label}: expected exactly one match, got {count}")
+    s = s.replace(old, new, 1)
+
+
+replace_once(
+    '    version: "2.1.274",\n    binary: "claude"',
+    '    version: "2.1.278",\n    binary: "claude"',
+    "claude pinned version",
+)
+
+replace_once(
+    '''export function accountSessionResumeMode(\n  _provider?: ProviderId\n): AccountSessionResumeMode {\n  return "LAST_OR_NEW";\n}''',
+    '''export function accountSessionResumeMode(\n  provider?: ProviderId\n): AccountSessionResumeMode {\n  return provider === "anthropic"\n    ? "LEX_CONTEXT_ONLY"\n    : "LAST_OR_NEW";\n}''',
+    "resume mode",
+)
+
+replace_once(
+    '''  } else if (provider === "anthropic") {\n    delete env.ANTHROPIC_API_KEY;\n    delete env.ANTHROPIC_AUTH_TOKEN;\n    const token =''',
+    '''  } else if (provider === "anthropic") {\n    delete env.ANTHROPIC_API_KEY;\n    delete env.ANTHROPIC_AUTH_TOKEN;\n    env.CLAUDE_CODE_MCP_STARTUP_WAIT_MS = "0";\n    env.MCP_CONNECTION_NONBLOCKING = "true";\n    const token =''',
+    "anthropic headless environment",
+)
+
+classifier_marker = '''export function classifyAccountCliFailureDetail(\n  detail: string\n):'''
+if s.count(classifier_marker) != 1:
+    raise SystemExit("classifier marker mismatch")
+helpers = '''export function claudeHeadlessArgs(\n  systemPrompt: string,\n  tail: string[] = []\n): string[] {\n  return [\n    "-p",\n    "--output-format",\n    "json",\n    "--restricted",\n    "--tools",\n    "",\n    "--disallowedTools",\n    "mcp__*",\n    "--system-prompt",\n    systemPrompt,\n    "--system-prompt-snapshot",\n    "off",\n    ...tail\n  ];\n}\n\nexport function sanitizeAccountCliFailureDetail(\n  value: string\n): string {\n  return value\n    .replace(/sk-ant-[A-Za-z0-9_-]+/gi, "[REDACTED_TOKEN]")\n    .replace(/\\bBearer\\s+[A-Za-z0-9._~+\\/=-]{20,}\\b/gi, "Bearer [REDACTED_TOKEN]")\n    .replace(/[\\r\\n]+/g, " ")\n    .trim()\n    .slice(-1200);\n}\n\n'''
+s = s.replace(classifier_marker, helpers + classifier_marker, 1)
+
+replace_once(
+    '''    /401|unauthorized|not logged in|login required|authentication.*failed|credentials.*missing/.test(\n      lower\n    )''',
+    '''    /401|unauthorized|not logged in|login required|authentication.*failed|credentials.*missing|oauth.{0,80}expired|token.{0,80}expired|invalid bearer token|could not be refreshed/.test(\n      lower\n    )''',
+    "auth failure classifier",
+)
+
+replace_once(
+    '''function normalizeCliFailure(\n  provider: ProviderId,\n  result: RunResult\n): Error {\n  const detail =\n    (result.stderr || result.stdout)\n      .trim()\n      .slice(-1200)\n      .replace(/[\\r\\n]+/g, " ");\n  const code =\n    classifyAccountCliFailureDetail(\n      detail\n    );\n  return new Error(\n    `${code}:${provider}:${result.code}`\n  );\n}''',
+    '''function normalizeCliFailure(\n  provider: ProviderId,\n  result: RunResult\n): Error {\n  const detail =\n    sanitizeAccountCliFailureDetail(\n      result.stderr || result.stdout\n    );\n  const code =\n    classifyAccountCliFailureDetail(\n      detail\n    );\n  return new Error(\n    `${code}:${provider}:${result.code}${detail ? `:${detail}` : ""}`\n  );\n}''',
+    "normalized CLI failure detail",
+)
+
+replace_once(
+    '''        const fixedQuery =\n          "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";\n        const lexSystemPrompt =\n          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";\n        const commonArgs = [\n          "-p",\n          fixedQuery,\n          "--output-format",\n          "json",\n          "--restricted",\n          "--tools",\n          "",\n          "--disallowedTools",\n          "mcp__*",\n          "--system-prompt",\n          lexSystemPrompt,\n          "--system-prompt-snapshot",\n          "off"\n        ];\n        const hostCwd =\n          process.cwd();''',
+    '''        const lexSystemPrompt =\n          "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";\n        const commonArgs =\n          claudeHeadlessArgs(\n            lexSystemPrompt\n          );\n        const hostCwd =\n          workDir;''',
+    "Claude stdin invocation",
+)
+
+anthropic_start = s.index('''      if (\n        provider ===\n          "anthropic"\n      ) {''')
+takeover_start = s.index(
+    '''        if (\n          !result &&\n          allowExternalTakeover\n        ) {''',
+    anthropic_start,
+)
+fresh_marker = '''        if (!result) {\n          result =\n            await runClaude([]);\n        }'''
+fresh_pos = s.index(fresh_marker, takeover_start)
+s = s[:takeover_start] + s[fresh_pos:]
+
+optional_marker = '''function privateCodexExecutable(): string | null {'''
+if s.count(optional_marker) != 1:
+    raise SystemExit("optional client marker mismatch")
+pin_helper = '''async function optionalAccountClientMatchesPinnedVersion(\n  provider: "openai" | "anthropic"\n): Promise<boolean> {\n  const spec = OPTIONAL_ACCOUNT_CLIENTS[provider];\n  if (!spec) return false;\n  try {\n    const packagePath = path.join(\n      optionalAccountClientsRoot(),\n      provider,\n      "node_modules",\n      ...spec.packageName.split("/"),\n      "package.json"\n    );\n    const parsed = JSON.parse(\n      await fsp.readFile(packagePath, "utf8")\n    ) as { version?: unknown };\n    return parsed.version === spec.version;\n  } catch {\n    return false;\n  }\n}\n\n'''
+s = s.replace(optional_marker, pin_helper + optional_marker, 1)
+
+replace_once(
+    '''async function ensureAccountExecutable(\n  provider: ProviderId\n): Promise<string | null> {\n  const existing =\n    await resolveAccountExecutable(\n      provider\n    );\n  if (existing) {\n    return existing;\n  }\n\n  const spec =''',
+    '''async function ensureAccountExecutable(\n  provider: ProviderId\n): Promise<string | null> {\n  if (provider === "openai" || provider === "anthropic") {\n    const privateExecutable =\n      provider === "openai"\n        ? privateCodexExecutable()\n        : privateClaudeExecutable();\n    if (\n      privateExecutable &&\n      await optionalAccountClientMatchesPinnedVersion(provider)\n    ) {\n      return privateExecutable;\n    }\n    if (!privateExecutable) {\n      const systemExecutable =\n        await resolveCommand(CLI_NAMES[provider]);\n      if (systemExecutable) {\n        return systemExecutable;\n      }\n    }\n  } else {\n    const existing =\n      await resolveAccountExecutable(provider);\n    if (existing) {\n      return existing;\n    }\n  }\n\n  const spec =''',
+    "pinned optional client upgrade",
+)
+
+ACCOUNT.write_text(s, encoding="utf-8")
+
+t = TEST.read_text(encoding="utf-8")
+t = t.replace(
+    '  claudeAutomationCredentialMode,\n  claudeSubscriptionAuthenticated,',
+    '  claudeAutomationCredentialMode,\n  claudeHeadlessArgs,\n  claudeSubscriptionAuthenticated,',
+    1,
+)
+t = t.replace(
+    '  openAiChatGptAuthenticated,\n  visibleWindowsLoginLauncher',
+    '  openAiChatGptAuthenticated,\n  sanitizeAccountCliFailureDetail,\n  visibleWindowsLoginLauncher',
+    1,
+)
+old_resume = '''  it("keeps Lex context authoritative while restoring host-session continuity", () => {\n    for (\n      const provider\n      of [\n        "openai",\n        "anthropic",\n        "xai"\n      ] as const\n    ) {\n      expect(\n        accountSessionResumeMode(\n          provider\n        )\n      ).toBe(\n        "LAST_OR_NEW"\n      );\n    }\n  });'''
+new_resume = '''  it("keeps Claude continuity inside Lex while preserving legacy resume for other account lanes", () => {\n    expect(accountSessionResumeMode("anthropic")).toBe("LEX_CONTEXT_ONLY");\n    expect(accountSessionResumeMode("openai")).toBe("LAST_OR_NEW");\n    expect(accountSessionResumeMode("xai")).toBe("LAST_OR_NEW");\n  });'''
+if old_resume not in t:
+    raise SystemExit("resume test block mismatch")
+t = t.replace(old_resume, new_resume, 1)
+insert_before = '''  it("uses current interactive login commands for account providers", () => {'''
+extra_tests = '''  it("uses stdin as the complete Claude headless prompt and keeps tools disabled", () => {\n    const args = claudeHeadlessArgs("lex-system");\n    expect(args[0]).toBe("-p");\n    expect(args[1]).toBe("--output-format");\n    expect(args).toContain("--restricted");\n    expect(args).toContain("mcp__*");\n    expect(args).toContain("lex-system");\n  });\n\n  it("classifies common Claude OAuth failures and redacts secrets from diagnostics", () => {\n    expect(\n      classifyAccountCliFailureDetail(\n        "OAuth session expired and could not be refreshed"\n      )\n    ).toBe("ACCOUNT_SESSION_AUTH_EXPIRED");\n    const sanitized = sanitizeAccountCliFailureDetail(\n      "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123456789 token sk-ant-oat01-supersecret"\n    );\n    expect(sanitized).not.toContain("supersecret");\n    expect(sanitized).toContain("[REDACTED_TOKEN]");\n  });\n\n'''
+if insert_before not in t:
+    raise SystemExit("test insertion marker mismatch")
+t = t.replace(insert_before, extra_tests + insert_before, 1)
+TEST.write_text(t, encoding="utf-8")
+
+version_files = [
+    "app/lex-version.yaml",
+    "app/lex-runtime/package.json",
+    "app/lex-web/package.json",
+    "app/lex-desktop/package.json",
+    "app/lex-desktop/src-tauri/tauri.conf.json",
+    "app/lex-desktop/src-tauri/Cargo.toml",
+    "app/installer/windows-release-source.json",
+]
+for name in version_files:
+    p = Path(name)
+    raw = p.read_text(encoding="utf-8").replace("0.1.8", "0.1.9")
+    if name == "app/installer/windows-release-source.json":
+        raw = raw.replace("2.1.274", "2.1.278")
+    p.write_text(raw, encoding="utf-8")
+
+for name in [
+    "app/lex-runtime/package-lock.json",
+    "app/lex-web/package-lock.json",
+    "app/lex-desktop/package-lock.json",
+]:
+    p = Path(name)
+    if p.exists():
+        p.write_text(p.read_text(encoding="utf-8").replace("0.1.8", "0.1.9"), encoding="utf-8")
+
+source_workflow = Path(".github/workflows/release-0.1.8.yml")
+target_workflow = Path(".github/workflows/release-0.1.9.yml")
+target_workflow.write_text(
+    source_workflow.read_text(encoding="utf-8").replace("0.1.8", "0.1.9"),
+    encoding="utf-8",
+)
+
+print("HOTFIX_PATCH_APPLIED")
