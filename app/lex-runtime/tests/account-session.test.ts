@@ -15,7 +15,7 @@ describe(
   "account session continuity",
   () => {
     it(
-      "keeps host-session continuity enabled for subscription providers",
+      "keeps host continuity for ChatGPT while scoping Claude continuity to Lex-owned context",
       () => {
         expect(
           accountSessionResumeMode(
@@ -29,7 +29,7 @@ describe(
             "anthropic"
           )
         ).toBe(
-          "LAST_OR_NEW"
+          "LEX_CONTEXT_ONLY"
         );
       }
     );
