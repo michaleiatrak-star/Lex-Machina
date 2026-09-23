@@ -48,7 +48,7 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 >
 > ⛔ ZAKAZ formatu: "Dz.U. 2022 poz. XYZ" gdy istnieje t.j. 2025 lub 2026.
 > ⛔ ZAKAZ używania t.j. starszego niż najnowszy dostępny — nawet gdy moduł podaje inny rok.
-> Jeśli t.j. w module jest starszy niż najnowszy na ISAP: użyj najnowszego z ISAP.
+> Jeśli t.j. w module jest starszy niż najnowszy w ELI: użyj najnowszego z ELI (RZĄD 1, E-1).
 
 ## ⚙️ WARSTWA STRUKTURALNA (ŹRÓDŁO-0) — API zamiast wyszukiwarki
 
@@ -266,7 +266,9 @@ jako bramkę niewykonaną.
 ```
 KROK 1: Zidentyfikuj akt prawny (nazwa ustawy / kodeksu)
 
-KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym działającym):
+KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym działającym).
+        Kolejność nadrzędna: KANON E-1…E-5, shared/HIERARCHIA-ZRODEL.md
+        (ELI → ISAP jako adres dla człowieka → LEX/Legalis → ArsLege → ⚠️).
 
   ŹRÓDŁO-0 (strukturalne, deterministyczne — ZAWSZE próbuj przed wszystkimi):
     ⛔ OD v2.5: NIE web_fetch na skonstruowany URL — narzędzie odrzuca takie
@@ -280,32 +282,39 @@ KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym 
     → Nie znasz roku/pozycji aktu → ustal je (ŹRÓDŁO-1/3), potem WRÓĆ do ŹRÓDŁO-0 po treść.
     → Szczegóły i reguły: sekcja "WARSTWA STRUKTURALNA (ŹRÓDŁO-0)" powyżej.
 
-  ŹRÓDŁO-1 (autorytatywne, bezpłatne — gdy ŹRÓDŁO-0 niedostępne):
+  ŹRÓDŁO-1 (ISAP — E-2: adres dla człowieka + pomocnicza identyfikacja):
     web_search: "art. X [nazwa ustawy] isap.sejm.gov.pl tekst jednolity"
-    lub web_fetch: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=[Dz.U.]
-    → Wynik ✅ ISAP: użyj. Znacznik: ✅ [VER: ISAP, data]
+    → cel: link dla czytelnika i ustalenie roku/pozycji, gdy ŹRÓDŁO-0 ich nie dało;
+      potem WRÓĆ do ŹRÓDŁO-0 po treść.
+    → Przy awarii ELI spróbuj odczytać treść z ISAP / dziennikustaw.gov.pl;
+      odczyt udany: ✅ [VER: ISAP, data] (RZĄD 1).
+    ⛔ ŹRÓDŁO-2 uruchamia BRAK-AKTU: aktu nie da się pobrać z RZĘDU 1 (ELI
+      żadnym dostępnym kanałem ani ISAP) — awaria serwera, timeout, blokada,
+      brak kanału. Zapisz wynik prób. Sama niedostępność ISAP przy działającym
+      ELI NIE uruchamia ŹRÓDŁA-2 (akt jest pobrany). Przy BRAKU-AKTU ŹRÓDŁO-2
+      jest obowiązkowe — to jedyna droga do weryfikacji.
 
-  ŹRÓDŁO-2 (komercyjne — gdy ISAP niedostępny i kancelaria posiada dostęp):
+  ŹRÓDŁO-2 (komercyjne, E-3 — przy BRAKU-AKTU w RZĘDZIE 1, gdy kancelaria posiada dostęp):
     web_fetch: https://sip.lex.pl (Wolters Kluwer LEX)
     lub web_fetch: https://sip.legalis.pl (C.H.Beck Legalis)
     → Wynik ✅ LEX/Legalis: użyj. Znacznik: ✅ [VER: LEX/Legalis, data]
     ⚠️ UWAGA: LEX/Legalis wymagają aktywnej licencji kancelarii.
-    Dla trybu PRAWNIK: stosuj równoważnie do ISAP.
+    Dla trybu PRAWNIK: status RZĄD 2A (nie RZĄD 1) — wskaż to w znaczniku.
     Dla trybu LAIK (pro se): poinformuj że weryfikacja pochodzi z bazy komercyjnej
-      i zalecaj samodzielną weryfikację na isap.sejm.gov.pl (bezpłatny dostęp).
+      i zalecaj samodzielną weryfikację na eli.gov.pl lub isap.sejm.gov.pl (bezpłatny dostęp).
 
-  ŹRÓDŁO-3 (szerokie — ostateczny fallback sieciowy):
+  ŹRÓDŁO-3 (szerokie, E-4 — ArsLege i inne serwisy tekstów; ostateczny fallback sieciowy):
     web_search: "art. X [ustawa] [rok bieżący] tekst obowiązujący"
     lub web_fetch: https://www.saos.org.pl (jeśli kontekst orzeczniczy)
     → Wynik ✅: użyj TYLKO tekstu z oficjalnego fragmentu (gov.pl, lex.pl, legalis.pl).
-    Znacznik: ✅ [VER: web-fallback, data] + dopisz ⚠️ [ZALECANA WERYFIKACJA ISAP]
+    Znacznik: ✅ [VER: web-fallback, data] + dopisz ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 
   WSZYSTKIE ŹRÓDŁA NIEDOSTĘPNE:
     → ⛔ BLOKADA TWARDA — NIE podawaj przepisu z pamięci
     → Oznacz: ⚠️ [NIEWERYFIKOWANE — wszystkie źródła niedostępne]
     → Komunikat do użytkownika:
        "Nie mogę zweryfikować art. X [ustawy] — źródła online chwilowo niedostępne.
-        Proszę sprawdzić samodzielnie na isap.sejm.gov.pl lub w LEX/Legalis
+        Proszę sprawdzić samodzielnie na eli.gov.pl / isap.sejm.gov.pl lub w LEX/Legalis
         przed podpisaniem pisma / podjęciem działania prawnego."
     → Kontynuuj analizę BEZ podawania treści przepisu — użyj opisu funkcjonalnego.
     → NIE blokuj całej sesji — oznaczaj każdy niesprawdzony artykuł z osobna.
@@ -313,7 +322,7 @@ KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym 
 KROK 3: Znajdź artykuł → odczytaj AKTUALNE brzmienie ze źródła
 KROK 4: Sprawdź datę "stan na dzień" — czy obowiązuje w dacie zdarzenia?
 KROK 5: Zapisz pełne oznaczenie: art. X §Y ustawy z dnia [...] (t.j. Dz.U. z [...] r. poz. [...])
-KROK 5A: Dołącz URL źródła (ISAP text.html/text.pdf, ELI) + gdy to PDF —
+KROK 5A: Dołącz URL źródła (ELI text.pdf/text.html; obok link ISAP dla człowieka) + gdy to PDF —
   kotwica #page=N do konkretnej strony z tym przepisem, jeśli znana z
   faktycznie przeczytanej treści (nie zgadnięta). Ten sam wymóg linku i
   lokalizacji co dla orzeczeń (patrz "PROCEDURA OBOWIĄZKOWA PRZED KAŻDYM
@@ -338,7 +347,7 @@ Przed użyciem jakiegokolwiek "Dz.U. RRRR poz. NNN" jako podstawy KONKRETNEJ
 tezy (kwoty, taryfikatora, stawki, terminu, instytucji prawnej):
 
 ```
-KROK 2B-1: Po znalezieniu Dz.U. RRRR poz. NNN na ISAP — odczytaj TYTUŁ aktu
+KROK 2B-1: Po znalezieniu Dz.U. RRRR poz. NNN w ELI (metryka) — odczytaj TYTUŁ aktu
            (pełną nazwę: "Rozporządzenie [organ] z dnia [...] w sprawie [...]"
            lub "Ustawa z dnia [...] o [...]").
 
@@ -414,7 +423,7 @@ Mapa wskazuje AKT; czy sam t.j. wystarczy, rozstrzyga się tutaj, w momencie
 użycia.
 
 
-⛔ ZAKAZ: oznaczania ✅ [VER: ISAP, data] na podstawie samego potwierdzenia,
+⛔ ZAKAZ: oznaczania ✅ [VER: ELI/ISAP, data] na podstawie samego potwierdzenia,
 że numer Dz.U. istnieje. Znacznik ✅ [VER] wymaga potwierdzenia ISTNIENIA
 ORAZ PRZEDMIOTU (tytułu) aktu zgodnego z tezą.
 

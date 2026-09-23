@@ -19,10 +19,10 @@
 
 ---
 
-## J8.1 KIM JEST KONSUMENT — DEFINICJA (weryfikuj w ISAP)
+## J8.1 KIM JEST KONSUMENT — DEFINICJA (weryfikuj w ELI (RZĄD 1))
 
 ```
-KONSUMENT (art. 22¹ KC — weryfikuj: isap.sejm.gov.pl → KC):
+KONSUMENT (art. 22¹ KC — weryfikuj: ELI (RZĄD 1) → KC):
   Osoba fizyczna dokonująca czynności prawnej z przedsiębiorcą
   NIEZWIĄZANEJ bezpośrednio z jej działalnością gospodarczą lub zawodową.
 
@@ -291,7 +291,7 @@ SKALA RYZYKA KLAUZULI:
 FORMAT OCENY KLAUZULI (B2C):
   §[X]: "[cytat]"
   KWALIFIKACJA: [abuzywna / sprzeczna z PK / korzystna / neutralna]
-  PODSTAWA: [art. X ustawy — po weryfikacji w ISAP] ✅ [VER: źródło]
+  PODSTAWA: [art. X ustawy — po weryfikacji w ELI (RZĄD 1)] ✅ [VER: źródło]
   SKUTEK: [nie wiąże / nieważna / ryzyko UOKiK]
   ZMIANA: "[proponowane brzmienie]"
 ```
@@ -315,5 +315,5 @@ FORMAT OCENY KLAUZULI (B2C):
 *Moduł J8 — Umowy Konsumenckie (B2C)*
 *Podstawa: ustawa o prawach konsumenta (Dz.U. 2024 poz. 1796), KC art. 22¹, 385¹–385³*
 *Dyrektywy UE: 93/13/EWG, 2019/771 (SGD — towarowa), 2019/770 (DCD — cyfrowa)*
-*Weryfikacja: isap.sejm.gov.pl · rejestr.uokik.gov.pl · orzeczenia.ms.gov.pl · uokik.gov.pl*
+*Weryfikacja: ELI (RZĄD 1) · rejestr.uokik.gov.pl · orzeczenia.ms.gov.pl · uokik.gov.pl*
 *Wersja: 1.0 (2026-06-03) — weryfikacja online przeprowadzona przy tworzeniu*

@@ -32,7 +32,7 @@ Ubezpieczenia społeczne (emerytalne, rentowe, chorobowe, wypadkowe), odwołanie
 |---|---|
 | Ustawa SUS (system ubezpieczeń społecznych) | Dz.U. 2026 poz. 199 t.j. |
 | Ustawa FUS (świadczenia z Funduszu Ubezpieczeń Społecznych) | Dz.U. 2025 poz. 1749 t.j. |
-| Ustawa zasiłkowa (świadczenia pieniężne w razie choroby i macierzyństwa) | weryfikuj aktualny t.j. w ISAP |
+| Ustawa zasiłkowa (świadczenia pieniężne w razie choroby i macierzyństwa) | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | Ustawa orzecznicza (reforma orzecznictwa ZUS) | Dz.U. 2026 poz. 26 |
 | KPC (postępowanie w sprawach ZUS) | Dz.U. 2026 poz. 468 — art. 477⁸–477¹⁴ |
 
@@ -269,7 +269,7 @@ web_search: "renta niezdolność do pracy biegły sądowy orzecznictwo SN sn.pl"
 
 ## ANEKS A — RENTA Z TYTUŁU NIEZDOLNOŚCI DO PRACY — TRZY PRZESŁANKI
 
-> **Podstawa:** art. 57 ustawy FUS — Dz.U. 2025 poz. 1749 t.j. | weryfikuj w ISAP.
+> **Podstawa:** art. 57 ustawy FUS — Dz.U. 2025 poz. 1749 t.j. | weryfikuj w ELI (RZĄD 1).
 
 ```
 Przesłanka 1: Całkowita lub częściowa niezdolność do pracy

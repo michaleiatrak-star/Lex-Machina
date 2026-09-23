@@ -55,7 +55,7 @@ ostatniej nowelizacji).
    zależy, czy w grę wchodzi właściwość WYŁĄCZNA (nadrzędna nad
    wszystkim innym).
 2. Jeśli sprawa majątkowa bez właściwości wyłącznej — oblicz WPS i
-   sprawdź AKTUALNY próg SR/SO na isap.sejm.gov.pl (NIE ufaj pierwszemu
+   sprawdź AKTUALNY próg SR/SO na ELI (RZĄD 1) (NIE ufaj pierwszemu
    wynikowi wyszukiwania bez sprawdzenia daty nowelizacji — ZASADA 14).
 3. Ustal właściwość miejscową: ogólna, czy dostępna przemienna
    (i czy strona pozwana jest konsumentem — wtedy przemienna

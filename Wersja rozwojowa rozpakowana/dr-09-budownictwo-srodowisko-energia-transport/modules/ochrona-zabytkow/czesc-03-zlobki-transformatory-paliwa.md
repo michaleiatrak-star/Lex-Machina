@@ -33,7 +33,7 @@ POWIERZCHNIA: minimalna zależna od LICZBY DZIECI:
   → Dla 3-5 dzieci: min. **16 M²**
   → Powyżej: powierzchnia WZRASTA proporcjonalnie wg wzoru z
     rozporządzenia (dokładny przelicznik na dziecko ponad 5 — WYMAGA
-    weryfikacji dokładnej wartości na ISAP przed cytowaniem, nie
+    weryfikacji dokładnej wartości w ELI (RZĄD 1) przed cytowaniem, nie
     ustalono precyzyjnie w tej sesji)
 
 WYMOGI PRZECIWPOŻAROWE (szczegółowe, WYŻSZE niż przeciętny lokal
@@ -186,7 +186,7 @@ ODMIERZACZE PALIW PŁYNNYCH (benzyna/olej napędowy) — § 98 rozp.:
 
 ✅ ZAKTUALIZOWANY t.j.: aktualny tekst jednolity rozporządzenia to
   **Dz.U. 2023 poz. 1707** (nowszy niż poprzednio wskazany 2014.1853,
-  poprawiono przy tej weryfikacji) — sprawdź na ISAP, czy nie ma
+  poprawiono przy tej weryfikacji) — sprawdź w ELI (RZĄD 1), czy nie ma
   jeszcze nowszego przed cytowaniem w piśmie
 
 DODATKOWE WYMOGI OPERACYJNE:

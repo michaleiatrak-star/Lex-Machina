@@ -77,7 +77,7 @@ CO SIĘ ZMIENIA:
   tłumacz przysięgły i in.).
 
 WEJŚCIE W ŻYCIE: powiązane z wejściem w życie ustawy o zawodzie psychologa
-  — sprawdź aktualny stan w ISAP przed powołaniem (ustawa główna miała
+  — sprawdź aktualny stan w ELI (RZĄD 1) przed powołaniem (ustawa główna miała
   różne terminy wejścia w życie dla różnych przepisów, w tym część
   przepisów odroczona o 2 lata i 3 miesiące od ogłoszenia).
 
@@ -86,7 +86,7 @@ PRAKTYCZNE ZASTOSOWANIE:
     psychoterapeutyczna/diagnostyczna) → od wejścia w życie tego przepisu
     jest to prawnie dopuszczalne na tych samych zasadach co inne wolne
     zawody w art. 88 KSH.
-  → Sprawdź w ISAP, czy przepis już obowiązuje w dacie zdarzenia w sprawie
+  → Sprawdź w ELI (RZĄD 1), czy przepis już obowiązuje w dacie zdarzenia w sprawie
     klienta (możliwe długie vacatio legis głównej ustawy o zawodzie
     psychologa).
 ```
@@ -127,7 +127,7 @@ PRAKTYCZNE ZASTOSOWANIE:
 
 ## ODPOWIEDZIALNOŚĆ ZARZĄDU SP. Z O.O. (art. 299 KSH)
 
-> ⚠️ Brzmienie art. 299 KSH — weryfikuj w aktualnym tekście KSH w ISAP.
+> ⚠️ Brzmienie art. 299 KSH — weryfikuj w aktualnym tekście KSH w ELI (RZĄD 1).
 
 ```
 ZASADA: Członek zarządu odpowiada osobiście za zobowiązania sp. z o.o.
@@ -141,7 +141,7 @@ PRZESŁANKA UWOLNIENIA SIĘ (ciężar na zarządzie):
 
 TERMIN ZŁOŻENIA WNIOSKU O UPADŁOŚĆ:
   30 dni od dnia zaistnienia podstawy upadłości (art. 21 PrUp — Dz.U. 2026 poz. 913)
-  ⚠️ Termin — weryfikuj aktualny art. 21 PrUp w ISAP.
+  ⚠️ Termin — weryfikuj aktualny art. 21 PrUp w ELI (RZĄD 1).
 
 PRZEDAWNIENIE roszczenia z art. 299 KSH: 3 lata — weryfikuj orzecznictwo SN.
 ```
@@ -448,14 +448,14 @@ PSA, S.A. — spółki cywilnej tam NIE MA).
 
 ### 3. Spółki handlowe (KSH) — kapitały minimalne (orientacyjne)
 
-> ⚠️ Kwoty minimalne — weryfikuj aktualne przepisy KSH w ISAP przed każdą sprawą.
+> ⚠️ Kwoty minimalne — weryfikuj aktualne przepisy KSH w ELI (RZĄD 1) przed każdą sprawą.
 
 | Forma | Minimalny kapitał zakładowy |
 |---|---|
 | Spółki osobowe (jawna, partnerska, komandytowa, S.K.A. — wkład komplementariusza) | brak wymogu kapitałowego |
-| Sp. z o.o. | 5 000 zł (art. 154 §1 KSH — weryfikuj w ISAP) |
-| Prosta spółka akcyjna (PSA) | 1 zł (kapitał akcyjny, art. 300² §2 KSH — weryfikuj w ISAP; brak tradycyjnego "kapitału zakładowego") |
-| S.A. (i S.K.A. — kapitał zakładowy akcjonariuszy) | 100 000 zł (art. 308 §1 KSH — weryfikuj w ISAP) |
+| Sp. z o.o. | 5 000 zł (art. 154 §1 KSH — weryfikuj w ELI (RZĄD 1)) |
+| Prosta spółka akcyjna (PSA) | 1 zł (kapitał akcyjny, art. 300² §2 KSH — weryfikuj w ELI (RZĄD 1); brak tradycyjnego "kapitału zakładowego") |
+| S.A. (i S.K.A. — kapitał zakładowy akcjonariuszy) | 100 000 zł (art. 308 §1 KSH — weryfikuj w ELI (RZĄD 1)) |
 
 ### PODSUMOWANIE — DROGA "OD NAJPROSTSZEJ DO NAJBARDZIEJ ZŁOŻONEJ"
 

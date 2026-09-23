@@ -205,7 +205,7 @@ Bezskuteczne na wniosek syndyka (art. 128):
   → Czynności z osobami bliskimi — 6 miesięcy przed złożeniem wniosku
   → Inne czynności — gdy kontrahent wiedział o podstawie upadłości
 
-⚠️ Terminy i przesłanki — weryfikuj aktualne przepisy PrUp w ISAP.
+⚠️ Terminy i przesłanki — weryfikuj aktualne przepisy PrUp w ELI (RZĄD 1).
 ```
 
 ---
@@ -276,7 +276,7 @@ TERMINY PREKLUZYJNE (art. 377) — ⚠️ NAJWYŻSZE ryzyko praktyczne:
 > szukającego dźwigni wobec nierzetelnego zarządu: złożenie wniosku o
 > zakaz (art. 376) nie wymaga odrębnego procesu cywilnego jak przy
 > art. 299 KSH.
-> ⚠️ Weryfikuj aktualne brzmienie i terminy w ISAP przed powołaniem w
+> ⚠️ Weryfikuj aktualne brzmienie i terminy w ELI (RZĄD 1) przed powołaniem w
 > piśmie — termin roczny z art. 377 bywa łatwo przeoczony.
 
 ---
@@ -402,7 +402,7 @@ PROCEDURA I SKUTKI:
 > zidentyfikowanego inwestora i celem jest ZACHOWANIE przedsiębiorstwa
 > (miejsca pracy, kontrakty) zamiast klasycznej likwidacji — istotnie
 > szybsze niż standardowa ścieżka.
-> ⚠️ Weryfikuj aktualne brzmienie w ISAP przed powołaniem w piśmie.
+> ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1) przed powołaniem w piśmie.
 
 ---
 
@@ -442,7 +442,7 @@ PROCEDURA I SKUTKI:
 > WNIOSEK O ZABEZPIECZENIE równolegle z wnioskiem o ogłoszenie upadłości
 > — bez tego majątek dłużnika pozostaje niechroniony do czasu
 > rozstrzygnięcia wniosku głównego, co może trwać tygodnie.
-> ⚠️ Weryfikuj aktualne brzmienie w ISAP przed powołaniem w piśmie.
+> ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1) przed powołaniem w piśmie.
 
 ---
 
@@ -555,7 +555,7 @@ Zaliczki do 75% wynagrodzenia wstępnego w 4 ratach (art. 164):
 ## ELEMENTY POZWU / WNIOSKU — ZGŁOSZENIE WIERZYTELNOŚCI
 
 ```
-Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ISAP):
+Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ELI (RZĄD 1)):
   □ Imię i nazwisko / firma wierzyciela
   □ Oznaczenie wierzytelności (tytuł, kwota, waluta)
   □ Dowody uzasadniające zgłoszenie (umowa, faktury, wezwania)
@@ -581,7 +581,7 @@ TERMIN: oznaczony w postanowieniu o ogłoszeniu upadłości.
 
 ## KATEGORIE ZASPOKOJENIA WIERZYCIELI (PrUp)
 
-> ⚠️ Weryfikuj aktualną kolejność w PrUp w ISAP.
+> ⚠️ Weryfikuj aktualną kolejność w PrUp w ELI (RZĄD 1).
 
 ```
 Wierzytelności zaspokajane z masy w kolejności:

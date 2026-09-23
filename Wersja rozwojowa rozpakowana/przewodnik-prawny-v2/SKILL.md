@@ -1,12 +1,12 @@
 ---
 name: przewodnik-prawny-v2
-version: "2.7"
+version: "2.9"
 type: ux-guide
 status: production
 description: "Przewodnik prawny i fallback routera: pomaga zidentyfikować problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny skill."
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
 changelog: |
-  Wersja bieżąca: 2.7 (2026-09-16, F-189): KROK-F: przykład wyniku powoływał uchylony art. 503 KPC jako „POPRAWNY” — zastąpiony art. 505 § 1 KPC z odesłaniem do terminu z art. 480² § 2 (RZĄD 1, Dz.U. 202…
+  Wersja bieżąca: 2.9 (2026-09-23, AUDYT-2026-09-23c): Zasada 3 i procedura Q&A: E-3/E-4 przy BRAKU-AKTU w RZĘDZIE 1 (awaria, timeout, blokada).
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -41,7 +41,7 @@ Użytkownik nigdy nie "trafia" do innego skilla — zostaje z przewodnikiem.
 
 Trzy tryby pracy w jednym skillu:
 - **PROWADZENIE** — przewodnik zadaje pytania, prowadzi krok po kroku
-- **Q&A** — użytkownik pyta, przewodnik odpowiada z weryfikacją ISAP
+- **Q&A** — użytkownik pyta, przewodnik odpowiada z weryfikacją w RZĘDZIE 1 (ELI)
 - **MENU** — użytkownik pyta co system potrafi, przewodnik wyjaśnia i wywołuje
 
 Jeden skill, jeden gospodarz, pełna weryfikacja online przy każdej odpowiedzi.
@@ -99,10 +99,10 @@ Format: **[Termin]** — czyli [wyjaśnienie po ludzku] + przykład z życia.
 terminu jako pojęcia, Zasada 0 dotyczy każdej kolejnej wiadomości.)
 
 **Zasada 3 — Weryfikacja zawsze online + HARDGATE**
-Każdy przepis, artykuł, termin → web_search/web_fetch ISAP przed podaniem.
+Każdy przepis, artykuł, termin → odczyt z ELI (RZĄD 1, kanon E-1…E-5 `shared/HIERARCHIA-ZRODEL.md`) przed podaniem.
 ⛔ PRZED pierwszym przytoczeniem przepisu lub sygnatury w sesji:
 `view shared/PRAWO-HARDGATE.md`
-Brak dostępu do ISAP → oznacz ⚠ NIEWERYFIKOWANE i wskaż isap.sejm.gov.pl.
+Brak dostępu do ISAP to stan normalny. Aktu nie da się pobrać z RZĘDU 1 (ELI ani ISAP — awaria, timeout, blokada) → E-3 LEX/Legalis → E-4 ArsLege; gdy i te zawiodą → ⚠ NIEWERYFIKOWANE i wskaż czytelnikowi eli.gov.pl / isap.sejm.gov.pl.
 Zakaz podawania sygnatur orzeczeń z pamięci — zawsze oznacz [PRZYKŁADOWA] lub weryfikuj online.
 
 **Zasada 4 — Ostrzegaj przed nieodwracalnym**
@@ -217,7 +217,7 @@ i sprawdzę każdą odpowiedź w aktualnych przepisach zanim ją dam.
 Kiedy skończymy, pomogę Ci zdecydować co zrobić."
 
 PRAWNIK:
-"Tryb Q&A — pytaj. Każda odpowiedź weryfikowana online (ISAP/orzecznictwo).
+"Tryb Q&A — pytaj. Każda odpowiedź weryfikowana online (ELI/orzecznictwo).
 Historia pytań zachowana w sesji. Po zakończeniu mogę wygenerować
 analizę lub pismo na podstawie omówionych zagadnień."
 ```
@@ -242,7 +242,7 @@ FORMAT KAŻDEJ ODPOWIEDZI:
 
 [Odpowiedź techniczna]
 Podstawa: art. X §Y [ustawa] ✅ [VER: isap.sejm.gov.pl, data]
-          lub ⚠ [NIEWERYFIKOWANE — sprawdź isap.sejm.gov.pl]
+          lub ⚠ [NIEWERYFIKOWANE — sprawdź ELI (RZĄD 1)]
 Orzecznictwo: [sygnatura] ✅ [VER: źródło] (jeśli relevantne)
 Implikacja procesowa: [co to oznacza praktycznie dla sprawy]
 
@@ -257,8 +257,9 @@ view shared/PRAWO-HARDGATE.md
 
 OBOWIĄZKOWO przed każdą odpowiedzią zawierającą przepis/termin/kwotę:
 
-1. web_search: "art. X [ustawa] isap.sejm.gov.pl tekst jednolity [rok]"
-   lub web_fetch: bezpośredni URL ISAP jeśli znany
+1. ELI (E-1): api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/text.pdf kanałem kodu;
+   host bez kanału kodu → B-1 web_search "eli.gov.pl DU {rok} {poz}" → B-2 web_fetch.
+   Link ISAP podaj czytelnikowi (E-2). Aktu nie da się pobrać z RZĘDU 1 → E-3/E-4.
 
 2. Jeśli wynik: → podaj z ✅ [VER: źródło, data]
    Jeśli brak dostępu: → podaj z ⚠ [NIEWERYFIKOWANE]
@@ -774,8 +775,8 @@ Q&A / pytania użytkownika
 2. **Jeden krok = jedno pytanie** (tryb PROWADZENIE)
 3. **Termin zawity = zawsze pierwszy** — przed treścią, przed analizą
 4. **Tłumacz KAŻDY raport** — nie pokazuj surowego laiku
-5. **Weryfikacja prawa zawsze online** — ISAP, nie z pamięci
-6. **Q&A = weryfikacja ISAP przy każdej odpowiedzi** — nie generuj z pamięci
+5. **Weryfikacja prawa zawsze online** — ELI (RZĄD 1), nie z pamięci
+6. **Q&A = weryfikacja w ELI (RZĄD 1) przy każdej odpowiedzi** — nie generuj z pamięci
 7. **Menu = wyjaśnij mechanizm przed wywołaniem** — view skill → wyjaśnij → pytaj czy uruchomić
 8. **Ostrzegaj przed nieodwracalnym** — zanim do tego dojdzie
 9. **Opcje z konsekwencjami zawsze** — nie "możesz A lub B", ale "A = [co + ryzyko]"

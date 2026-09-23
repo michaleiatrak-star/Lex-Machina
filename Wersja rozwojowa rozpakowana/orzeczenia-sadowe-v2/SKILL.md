@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.18"
+version: "2.19"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -819,11 +819,11 @@ Wyrok/postanowienie KIO z [data], sygn. [KIO NNN/RR] ([sposób rozstrzygnięcia]
 — [URL Home/Details/{id}]
 ```
 
-### 1-K.4 — Powiązanie z przepisem (ISAP)
+### 1-K.4 — Powiązanie z przepisem (RZĄD 1 — ELI)
 
 Strona szczegółów linkuje "Kluczowe przepisy ustawy Pzp" — to potwierdza
 TYLKO, że KIO powołało dany artykuł, NIE zwalnia z odrębnej weryfikacji
-brzmienia przepisu w ISAP (ustawa z 11.09.2019 r. — Prawo zamówień
+brzmienia przepisu w ELI — kanon E-1…E-5 (ustawa z 11.09.2019 r. — Prawo zamówień
 publicznych, t.j. — sprawdź aktualny numer Dz.U. przed cytowaniem, zmienia
 się często). Dwa źródła, dwa kroki — nigdy nie wyprowadzaj brzmienia
 przepisu z tego, jak cytuje go orzeczenie.

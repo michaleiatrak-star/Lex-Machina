@@ -258,7 +258,7 @@ Generuj po przeskanowaniu umowy pod kątem MCD:
 ## MCD.10 ŹRÓDŁA ONLINE
 
 ```
-isap.sejm.gov.pl → KC, ustawa o prawach konsumenta, KP (weryfikuj art.)
+ELI (RZĄD 1) → KC, ustawa o prawach konsumenta, KP (weryfikuj art.)
 eur-lex.europa.eu → dyrektywy: 2019/770, 2019/2161, 93/13
                      rozporządzenia: RODO 2016/679, Data Act 2023/2854,
                      DSA 2022/2065, CRA 2024/2847

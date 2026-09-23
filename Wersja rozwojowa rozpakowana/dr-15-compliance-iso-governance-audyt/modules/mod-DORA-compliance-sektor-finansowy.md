@@ -3,7 +3,7 @@
 Status: moduł regulacji UE klasy wzorcowej. Stan metodyczny: 2026-06-07.
 Rozporządzenia UE i standardy techniczne (RTS/ITS) muszą być każdorazowo weryfikowane
 w eur-lex.europa.eu oraz na stronach ESAs (EBA, ESMA, EIOPA) przed każdym cytowaniem.
-Powiązane akty krajowe weryfikuj w isap.sejm.gov.pl.
+Powiązane akty krajowe weryfikuj w ELI (RZĄD 1).
 
 ## 1. Akty i źródła do weryfikacji
 
@@ -13,9 +13,9 @@ Powiązane akty krajowe weryfikuj w isap.sejm.gov.pl.
 - Rozporządzenia delegowane KE (RTS) — Dz.Urz. UE L 2024 i 2025
   [VER: eba.europa.eu, esma.europa.eu, eiopa.europa.eu — aktualne RTS/ITS]
 - Ustawa o krajowym systemie cyberbezpieczeństwa (KSC) — Dz.U. 2024 poz. 1226 ze zm.
-  [WYMAGA WERYFIKACJI ISAP: isap.sejm.gov.pl — nakładanie DORA/NIS2/KSC]
+  [WYMAGA WERYFIKACJI RZĄD 1: isap.sejm.gov.pl — nakładanie DORA/NIS2/KSC]
 - Ustawa o nadzorze nad rynkiem finansowym — Dz.U. 2024 poz. 724 ze zm.
-  [WYMAGA WERYFIKACJI ISAP]
+  [WYMAGA WERYFIKACJI RZĄD 1]
 - Dyrektywa NIS2 — Dyrektywa (UE) 2022/2555 — powiązana, ale nie tożsama z DORA
   [VER: eur-lex.europa.eu]
 

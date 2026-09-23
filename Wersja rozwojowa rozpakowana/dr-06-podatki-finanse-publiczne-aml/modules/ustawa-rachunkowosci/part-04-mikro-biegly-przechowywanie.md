@@ -91,7 +91,7 @@ DOTYCZY WIĘKSZOŚCI małych spółek z o.o. w Polsce)
   DOPUSZCZONYCH DO obrotu (LUB ZAMIERZAJĄCY się UBIEGAĆ/UBIEGAJĄCY
   się O DOPUSZCZENIE) NA RYNKU regulowanym EOG (Europejskiego
   Obszaru Gospodarczego) — ⚠️ PEŁNY katalog wyłączeń art. 3 ust. 1h
-  WYMAGA weryfikacji na ISAP PRZY KONKRETNEJ sprawie, TU podane
+  WYMAGA weryfikacji w ELI (RZĄD 1) PRZY KONKRETNEJ sprawie, TU podane
   TYLKO przykłady
 
 Potwierdzone w 7+ zgodnych źródeł, w tym BEZPOŚREDNIO dosłowny

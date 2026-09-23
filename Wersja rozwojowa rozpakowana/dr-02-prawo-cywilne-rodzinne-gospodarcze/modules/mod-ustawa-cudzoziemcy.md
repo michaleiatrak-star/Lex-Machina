@@ -25,7 +25,7 @@
 
 ---
 
-## TYPY ZEZWOLEŃ NA POBYT (Dz.U. 2025 poz. 1079 — weryfikuj przesłanki w ISAP)
+## TYPY ZEZWOLEŃ NA POBYT (Dz.U. 2025 poz. 1079 — weryfikuj przesłanki w ELI (RZĄD 1))
 
 | Typ | Okres | Praca | Podstawowe warunki (orientacyjne) |
 |---|---|---|---|
@@ -41,7 +41,7 @@
 | Status uchodźcy / ochron. uzupeł. | do 2 lat (przedłuż.) | TAK bez zezwoleń | Konwencja Genewska / ryzyko krzywdy |
 | PESEL UKR (ochrona tymczasowa) | do 4.03.2027 (dotychczasowi beneficjenci) | TAK (powiadomienie PUP w 7 dni, praca.gov.pl) | ⛔ POPRAWKA 2026-07-02 (WARN-27): OD 5.03.2026 reżim przeniesiony do ustawy o udzielaniu cudzoziemcom ochrony na terytorium RP + ustawy o warunkach dopuszczalności powierzania pracy cudzoziemcom (Dz.U. 2025 poz. 621) — dawna specustawa 2022.583 w istotnym zakresie wygaszona ustawą z 23.01.2026 (Dz.U. 2026 poz. 203). Pełny opis: DR-05/mod-ustawa-cudzoziemcy.md ANEKS A |
 
-> ⚠️ Warunki orientacyjne — weryfikuj dokładne przesłanki w aktualnej ustawie w ISAP.
+> ⚠️ Warunki orientacyjne — weryfikuj dokładne przesłanki w aktualnej ustawie w ELI (RZĄD 1).
 > Pełny wykaz celów wizy D (art. 60 u.c.) i matryca dokument → uprawnienie do pracy:
 > ```
 > view dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-cudzoziemcy.md
@@ -67,7 +67,7 @@ Zwolnienie z zezwolenia na pracę:
   → Obywatele UE/EOG/Szwajcarii
   → Absolwenci polskich uczelni (dziennych studiów)
   → Posiadacze Karty Polaka
-  → inne zwolnienia — weryfikuj aktualny art. 3 ustawy Dz.U. 2025 poz. 621 w ISAP
+  → inne zwolnienia — weryfikuj aktualny art. 3 ustawy Dz.U. 2025 poz. 621 w ELI (RZĄD 1)
 ```
 
 ---

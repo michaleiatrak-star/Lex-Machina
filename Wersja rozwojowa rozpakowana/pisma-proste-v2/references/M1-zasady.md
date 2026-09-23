@@ -18,7 +18,7 @@ Sygnały wielowątkowości → natychmiastowa eskalacja do `pisma-procesowe-v3`:
 
 ## ZASADA 2 — Weryfikacja przepisu przed użyciem
 
-Każdy przywołany artykuł **weryfikuj** na `isap.sejm.gov.pl` lub `prawo.sejm.gov.pl`.
+Każdy przywołany artykuł **weryfikuj** na `ELI (RZĄD 1)` lub `prawo.sejm.gov.pl`.
 
 - Podaj **pełne oznaczenie** przy pierwszym użyciu: ustawa, artykuł, ustęp, punkt.
 - Cytuj brzmienie obowiązujące **na datę zdarzenia** (nie na dzień analizy).

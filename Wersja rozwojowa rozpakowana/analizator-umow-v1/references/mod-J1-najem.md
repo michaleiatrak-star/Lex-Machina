@@ -6,7 +6,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KC, OPL, terminów wypowiedzenia weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KC, OPL, terminów wypowiedzenia weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → KC → art. 659–692 (najem)
 > isap.sejm.gov.pl → ustawa z 21.06.2001 r. o ochronie praw lokatorów (OPL) — tekst jedn.
 > isap.sejm.gov.pl → ustawa z 20.07.2017 r. o Krajowym Zasobie Nieruchomości (najem instytucjonalny)
@@ -41,7 +41,7 @@ WALORYZACJA: kaucja PODLEGA obowiązkowej waloryzacji (art. 6 ust. 3)
   — zwrot w kwocie odpowiadającej AKTUALNEJ (na dzień zwrotu) stawce
   czynszu × krotność przyjęta przy pobieraniu, NIE MNIEJ niż kwota
   pobrana
-WERYFIKUJ: isap.sejm.gov.pl → OPL → art. 6 (aktualne brzmienie!)
+WERYFIKUJ: ELI (RZĄD 1) → OPL → art. 6 (aktualne brzmienie!)
 
 REKOMENDACJA:
   „§X. Kaucja w wysokości [X] zł (max 12-krotność czynszu) zostanie zwrócona

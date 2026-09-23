@@ -15,7 +15,7 @@
 ---
 
 > ⛔ HARD GATE — przed podaniem JAKIEGOKOLWIEK artykułu PrAut, terminu, formy
-> weryfikuj w ISAP. Zakaz cytowania z pamięci. Znacznik ✅ [VER: źródło, data] obowiązkowy.
+> weryfikuj w ELI (RZĄD 1). Zakaz cytowania z pamięci. Znacznik ✅ [VER: źródło, data] obowiązkowy.
 >
 > ```
 > isap.sejm.gov.pl → ustawa z 4.02.1994 o prawie autorskim i prawach pokrewnych
@@ -62,7 +62,7 @@ Zanim ocenisz klauzulę IP — ustal, co umowa NAPRAWDĘ robi:
 
 **IP-1 — Pola eksploatacji niewymienione lub wymienione ogólnikowo (CRITICAL)**
 ```
-PRAWO (art. 41 ust. 2 PrAut — weryfikuj w ISAP):
+PRAWO (art. 41 ust. 2 PrAut — weryfikuj w ELI (RZĄD 1)):
   Umowa obejmuje TYLKO pola eksploatacji WYRAŹNIE w niej wymienione.
   → Brak pola = brak nabycia na tym polu, mimo zapłaty pełnej ceny.
 
@@ -202,7 +202,7 @@ WNIOSEK dla LICENCJOBIORCY: jeśli potrzebujesz trwałości > 5 lat — rozważ 
 
 ```
 Gdy przedmiotem są ZNAKI TOWAROWE / PATENTY / WZORY → to NIE PrAut, lecz
-ustawa Prawo własności przemysłowej (p.w.p.) — weryfikuj w ISAP, rejestry: uprp.gov.pl.
+ustawa Prawo własności przemysłowej (p.w.p.) — weryfikuj w ELI (RZĄD 1), rejestry: uprp.gov.pl.
 
 □ Znak towarowy: przeniesienie/licencja → wpis do rejestru UPRP/EUIPO dla skuteczności
   wobec osób trzecich. Sprawdź, kto jest uprawnionym w rejestrze (nie wierz oświadczeniu).
@@ -250,5 +250,5 @@ ustawa Prawo własności przemysłowej (p.w.p.) — weryfikuj w ISAP, rejestry: 
 ---
 
 *Moduł J9 / analizator-umow-v1 · IP nie-software (art. 41–68 PrAut) · dla software → J6*
-*HARD GATE: każdy art. PrAut weryfikuj w isap.sejm.gov.pl (uwzględnij nowelizację 26.07.2024)*
+*HARD GATE: każdy art. PrAut weryfikuj w ELI (RZĄD 1) (uwzględnij nowelizację 26.07.2024)*
 *← Powrót do routingu: `view references/mod-J0-routing.md`*

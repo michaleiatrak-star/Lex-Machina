@@ -125,7 +125,7 @@ KR1: Kto wywodzi skutki z tego faktu?
      → ta strona ma ciężar dowodu (art. 6 KC)
 
 KR2: Czy istnieje przepis szczególny odwracający ciężar?
-     → sprawdź kategorie OD-1..OD-6; sprawdź w ISAP per dziedzina
+     → sprawdź kategorie OD-1..OD-6; sprawdź w ELI (RZĄD 1) per dziedzina
 
 KR3: Czy fakt jest negatywny (twierdzenie że czegoś NIE MA)?
      → jeśli TAK: może być probatio diabolica → rozważ art. 231 KPC
@@ -529,7 +529,7 @@ Analog polskie prawo: art. 276 KPC (kary za utrudnianie postępowania);
                       art. 233 §2 KPC (ocena odmowy).
 ⚠️ HARDGATE: brak polskiego kodeksowego odpowiednika FRCP 37(e) adverse
    inference instruction — podstawa to art. 231 + 233 §2 KPC kombinacja.
-   Weryfikuj aktualną linię SN w ISAP przed powołaniem.
+   Weryfikuj aktualną linię SN w ELI (RZĄD 1) przed powołaniem.
 ```
 
 ---

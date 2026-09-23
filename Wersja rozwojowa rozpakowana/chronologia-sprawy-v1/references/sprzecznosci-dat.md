@@ -297,7 +297,7 @@ Odnotowano w chronologii dla pełności."
 
 ## POLSKIE TERMINY ZAWITE — PROGI KRYTYCZNE
 
-> UWAGA: Wszystkie terminy weryfikuj w ISAP przed podaniem. Tabela poglądowa.
+> UWAGA: Wszystkie terminy weryfikuj w ELI (RZĄD 1) przed podaniem. Tabela poglądowa.
 
 | Zdarzenie | Termin | Podstawa (do weryfikacji) |
 |-----------|--------|--------------------------|
@@ -309,5 +309,5 @@ Odnotowano w chronologii dla pełności."
 | Pozew o przywrócenie do pracy | 21 dni od doręczenia wypowiedzenia | art. 264 KP |
 | Zażalenie | 7 dni od doręczenia postanowienia | art. 394 KPC |
 
-> KAŻDĄ z tych liczb WERYFIKUJ w ISAP przed podaniem użytkownikowi.
+> KAŻDĄ z tych liczb WERYFIKUJ w ELI (RZĄD 1) przed podaniem użytkownikowi.
 > Tabela służy tylko do identyfikacji — nie do cytowania.

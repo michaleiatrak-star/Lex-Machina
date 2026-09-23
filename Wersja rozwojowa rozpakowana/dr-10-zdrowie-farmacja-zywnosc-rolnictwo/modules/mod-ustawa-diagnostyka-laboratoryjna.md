@@ -24,7 +24,7 @@
   mierze nieaktualny, ale wymaga domknięcia przy najbliższej pełnej rewizji
   tego modułu.
 
-**Weryfikacja ISAP przed kazdy cytowaniem - zmiana prawa w toku!**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem - zmiana prawa w toku!**
 ```
 web_search: "ustawa medycyna laboratoryjna diagnostyka 2022 2025 isap tekst jednolity"
 ```

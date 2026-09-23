@@ -121,7 +121,7 @@ HORYZONT:
 STATUS:
   Implementacja PL: Ustawa o KSC nowelizacja Dz.U. 2026 poz. 252 ✅ W ŻYCIE 03.04.2026
   Obowiązki podmiotów kluczowych i ważnych: od 03.04.2027
-  → Weryfikuj: isap.sejm.gov.pl + web_search "KSC NIS2 Polska 2026 wejście w życie"
+  → Weryfikuj: ELI (RZĄD 1) + web_search "KSC NIS2 Polska 2026 wejście w życie"
 
 KLAUZULE RYZYKA W UMOWACH:
   ⚠️ Brak klauzuli incident notification (72h) w umowach z dostawcami ICT

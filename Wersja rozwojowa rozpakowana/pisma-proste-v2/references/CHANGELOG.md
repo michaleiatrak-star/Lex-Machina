@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-proste-v2
 
+- 2.21 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (12 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 2.20 (2026-09-16, F-189): SPK-skarga-do-UODO — art. 78 ust. 2–3 i art. 77 ust. 2 RODO odczytane (RZĄD 1, Cellar): 3 miesiące jako przesłanka środka sądowego, sąd państwa siedziby organu; usunięte oznaczenie 🟨.
 - 2.19 (2026-09-16, F-189): SPM-interpretacja-podatkowa — ⛔ sekcja „Zaskarżenie”: termin 30 dni (art. 53 § 1 PPSA), nie „14 dni z art. 53 § 3”; wniesienie za pośrednictwem organu (art. 54 § 1) (F-135, RZĄD 1).
 - 2.18 (2026-09-16, F-189): SPK-skarga-do-UODO (F-135): podstawa terminu — art. 35 § 3 KPA w zw. z art. 7 u.o.d.o. (⛔ art. 237 § 1/§ 2 KPA — zły reżim); ⛔ „art. 50 ust. 4 u.o.d.o.” nie istnieje; art. 78 ust. 2 RODO — 🟨 niezweryfikowany; NSA III OSK 1959/22 — 🟨 snapshot bez awansu (V-SYG-0: OUT_OF_SCOPE), usunięte polecenie traktowania go jako „autorytatywnego”; źródła wtórne oznaczone jako RZĄD 3.

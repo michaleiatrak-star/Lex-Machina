@@ -6,7 +6,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KC dot. agencji, franczyzy, dystrybucji weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KC dot. agencji, franczyzy, dystrybucji weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → KC → art. 758–764⁹ (agencja), art. 353¹ (swoboda umów)
 > eur-lex.europa.eu → Dyrektywa 86/653/EWG (agenci handlowi) — jeśli dot. UE
 > Orzecznictwo: sn.pl / orzeczenia.ms.gov.pl — nie cytuj z pamięci.

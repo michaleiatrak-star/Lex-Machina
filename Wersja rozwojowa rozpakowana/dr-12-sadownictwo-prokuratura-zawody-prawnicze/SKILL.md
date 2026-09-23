@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: "4.17"
+version: "4.18"
 description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 ---
 
@@ -29,10 +29,10 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 PRZED każdym powołaniem:
   □ przepisu ustawy → isap.sejm.gov.pl (tekst jednolity + nowelizacje)
   □ sygnatury orzeczenia → orzeczenia.ms.gov.pl / sn.pl / cbosa.nsa.gov.pl
-  □ stawki taksy notarialnej → aktualne rozp. MS w ISAP
-  □ opłaty egzekucyjne komornika → aktualne rozp. MS w ISAP
-  □ wynagrodzenie pełnomocnika z urzędu → aktualne rozp. MS w ISAP
-  □ stawek OC zawodów → aktualne rozp. MS w ISAP
+  □ stawki taksy notarialnej → aktualne rozp. MS w ELI (RZĄD 1)
+  □ opłaty egzekucyjne komornika → aktualne rozp. MS w ELI (RZĄD 1)
+  □ wynagrodzenie pełnomocnika z urzędu → aktualne rozp. MS w ELI (RZĄD 1)
+  □ stawek OC zawodów → aktualne rozp. MS w ELI (RZĄD 1)
 
 Naruszenie HARD GATE = błąd kwalifikowany. Nie ma wyjątków.
 ```
@@ -53,14 +53,14 @@ Naruszenie HARD GATE = błąd kwalifikowany. Nie ma wyjątków.
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ## Zasada architektoniczna
 
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów, sygnatur i stawek z pamięci — weryfikuj w ISAP**
+- **Zakaz cytowania przepisów, sygnatur i stawek z pamięci — weryfikuj w ELI (RZĄD 1)**
 
 ## ⚠️ Ostrzeżenia systemowe
 
@@ -78,7 +78,7 @@ EPPO: Od 2025 r. — Prokuratura Europejska działa w Polsce na podstawie
       nadużycia funduszy UE > 10 000 EUR) → właściwa EPPO, nie prokuratura krajowa.
 
 NOTARIAT: Prawo o notariacie nie ma nowego tekstu jednolitego (ostatni: 1991).
-          Każda nowelizacja osobno w ISAP. Weryfikuj przed każdym cytowaniem.
+          Każda nowelizacja osobno w ELI (`/references` aktu). Weryfikuj przed każdym cytowaniem.
 
 RADCOWIE-ORZECZENIA (2026-07-16): `wsd.kirp.pl`, opisywany dotąd w
 mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md jako "portal centralny

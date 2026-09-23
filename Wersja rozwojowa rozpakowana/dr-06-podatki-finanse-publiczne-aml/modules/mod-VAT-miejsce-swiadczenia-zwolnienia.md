@@ -230,7 +230,7 @@ Checklist praktyczny:
   czy ROZWAŻONO rejestrację W OSS zamiast rejestracji LOKALNEJ W
   każdym kraju nabywcy
 
-⚠️ Weryfikuj aktualne brzmienie art. 28a–28o w ISAP oraz NAJNOWSZE
+⚠️ Weryfikuj aktualne brzmienie art. 28a–28o w ELI (RZĄD 1) oraz NAJNOWSZE
   orzecznictwo TSUE dot. FE — TO OBSZAR o WYSOKIEJ dynamice
   interpretacyjnej, SZCZEGÓLNIE przy transakcjach TRANSGRANICZNYCH
   z udziałem PODMIOTÓW powiązanych/podwykonawców.

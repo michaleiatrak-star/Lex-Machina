@@ -24,7 +24,7 @@ zaniechanie) w toku postępowania egzekucyjnego. Termin zawity: **tydzień
   wpływu (informacyjnie, nie wpływa na termin składania).
 - Opłata: **100 zł** (ustawa o kosztach sądowych w sprawach cywilnych).
 
-> ⚠ Weryfikuj aktualność przepisów na isap.sejm.gov.pl przed użyciem —
+> ⚠ Weryfikuj aktualność przepisów na ELI (RZĄD 1) przed użyciem —
 > art. 767 był wielokrotnie nowelizowany (m.in. formularz urzędowy 2019).
 
 ---

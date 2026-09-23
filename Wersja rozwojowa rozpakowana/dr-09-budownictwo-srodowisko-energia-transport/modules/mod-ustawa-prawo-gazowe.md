@@ -8,7 +8,7 @@
   ⚠️ Nowelizacja `Dz.U. 2026 poz. 516` — patrz mod-PrEnergetyczne-URE-OZE
   UWAGA: Ta sama ustawa reguluje ene. elektryczna, cieplo i gaz (patrz tez PrEnergetyczne-URE-OZE)
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Regulacja rynku gazu
 ```

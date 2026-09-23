@@ -1,5 +1,6 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.39 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (32 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 1.38 (2026-09-16, F-189): mod-shared-ai-act — terminy zgłaszania poważnych incydentów z art. 73 AI Act (15 dni; 2 dni przy powszechnym naruszeniu; 10 dni przy śmierci; zgłoszenie wstępne) zamiast błędnego „48 h jak RODO art. 33”. mod-shared-rodo — art. 83 ust. 3–4 według brzmienia (kwota wyższa, limit łącznej kary).
 - 1.37 (2026-09-16, F-189): mod-shared-ai-act — ⛔ usunięta fałszywa analogia „48 h od wykrycia incydentu (jak RODO art. 33)”; termin z AI Act oznaczony jako nieodczytany (art. 73 rozp. 2024/1689). mod-shared-rodo — art. 33 ust. 1 według brzmienia; kary z art. 83 ust. 4 oznaczone 🟨 (przepis nieodczytany).
 - 1.36 (2026-09-16, F-189): mod-J7-pzp — terminy odwołania z art. 515 ust. 1–3 (≥/< progi, elektronicznie/inaczej); przekazanie zamawiającemu (art. 514 ust. 2); wpis — rozporządzenie 2020/2437 i art. 517 ust. 2; ⛔ „odwołanie wstrzymuje postępowanie” → zakaz ZAWARCIA UMOWY (art. 577–578) i unieważnienie z art. 457 ust. 1 pkt 2 (F-135, RZĄD 1).

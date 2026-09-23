@@ -17,7 +17,7 @@ od pozwanego konsumenta **nie więcej niż 750 zł** (art. 19 ust. 4 KSCU).*
 - **art. 19 ust. 4 KSCU** — opłata od zarzutów = 3/4 opłaty; od konsumenta max 750 zł (KSCU dzieli się na ustępy, nie paragrafy)
 - **art. 492 §1 KPC** — nakaz zapłaty w postępowaniu nakazowym ma rygor natychmiastowej wykonalności
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl przed użyciem.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1) przed użyciem.
 
 ---
 
@@ -68,7 +68,7 @@ Opłata podstawowa wg art. 27 KSCU:
   > 20 000 zł  → 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27: było błędnie "200 000 zł", obniżone reformą z 25.07.2025)
 
 Opłata od zarzutów = 3/4 × opłata podstawowa
-Weryfikuj w aktualnej wersji KSCU na isap.sejm.gov.pl.
+Weryfikuj w aktualnej wersji KSCU na ELI (RZĄD 1).
 ```
 
 ---

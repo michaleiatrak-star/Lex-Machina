@@ -109,7 +109,7 @@ Co Cię interesuje najbardziej?"
 
 [6] ANALIZA PRZEPISU (analizator-przepisow-v2)
     Wejście: artykuł + kontekst sprawy
-    Mechanizm: weryfikacja ISAP, przesłanki, wykładnia,
+    Mechanizm: weryfikacja w ELI (RZĄD 1), przesłanki, wykładnia,
     zbieg norm, orzecznictwo SN/SA do przepisu.
     Wyjście: analiza przesłankowa + pokrycie + orzecznictwo.
     → Wywołaj: "przeanalizuj art. X [ustawa]"

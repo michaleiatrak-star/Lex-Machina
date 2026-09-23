@@ -9,7 +9,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -124,7 +124,7 @@ web_search: "UD183 nowelizacja kodeks pracy mobbing Sejm 2026 status pierwsze cz
 ```
 Roszczenia ze stosunku pracy: 3 lata (art. 291 KP)
 Termin biegnie od dnia wymagalności roszczenia
-⚠️ Weryfikuj aktualne brzmienie art. 291 KP w ISAP.
+⚠️ Weryfikuj aktualne brzmienie art. 291 KP w ELI (RZĄD 1).
 ```
 
 ---

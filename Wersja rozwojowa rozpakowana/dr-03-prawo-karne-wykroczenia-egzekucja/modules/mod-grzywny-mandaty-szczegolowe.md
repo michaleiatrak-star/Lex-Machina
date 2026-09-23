@@ -4,7 +4,7 @@
 **Zakres:** Grzywny sądowe (KW), mandaty karne, grzywny administracyjne (KPA/UPEA),
 kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 
-**Źródła (weryfikuj w ISAP przed powołaniem):**
+**Źródła (weryfikuj w ELI (RZĄD 1) przed powołaniem):**
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
@@ -22,8 +22,8 @@ kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 ```
 TYP A — GRZYWNA SĄDOWA (KW art. 24–37):
   → Orzekana przez sąd (SR) w postępowaniu o wykroczenie
-  → Max: 5 000 zł (art. 24 §1 KW — weryfikuj aktualne brzmienie w ISAP)
-  ⚠️ UWAGA: od 2022 r. przepis zmieniony — weryfikuj isap.sejm.gov.pl → KW art. 24
+  → Max: 5 000 zł (art. 24 §1 KW — weryfikuj aktualne brzmienie w ELI (RZĄD 1))
+  ⚠️ UWAGA: od 2022 r. przepis zmieniony — weryfikuj ELI (RZĄD 1) → KW art. 24
   → Możliwa zamiana na pracę społecznie użyteczną (art. 25 KW) lub areszt (art. 26 KW)
   → Tryb: wniosek o ukaranie → rozprawa SR → wyrok → apelacja do SO
 
@@ -66,7 +66,7 @@ TYP C — ADMINISTRACYJNA KARA PIENIĘŻNA (KPA Dział IVa — art. 189a–189k)
   → Kara nie podlega egzekucji po 5 latach od dnia, w którym powinna być wykonana (§ 3) — ✅ [VER] RZĄD 1 2026-09-16m
   → Tryb: postanowienie/decyzja → odwołanie do organu II stopnia → SKO lub organ wyższy → WSA → NSA
   → Ulgi: odstąpienie, rozłożenie na raty, odroczenie (art. 189k KPA)
-  → Weryfikuj: isap.sejm.gov.pl → KPA → Dział IVa (art. 189a–189k)
+  → Weryfikuj: ELI (RZĄD 1) → KPA → Dział IVa (art. 189a–189k)
 
 TYP D — GRZYWNA PORZĄDKOWA (KPA art. 88):
   → Za bezzasadną odmowę zeznań, niestawiennictwo jako świadek/biegły
@@ -103,7 +103,7 @@ szkoleniu — max raz na 6 miesięcy, tylko dla kierowców z prawem jazdy
    źródła: jazda.io, mubi.pl, gazetaprawna.pl — marzec/maj 2026):
 Rozporządzenie Prezesa Rady Ministrów z 30.12.2021 r. w sprawie wysokości
 grzywien nakładanych w drodze mandatów karnych za wybrane rodzaje wykroczeń
-(Dz.U. 2021 poz. 2484 — weryfikuj t.j. w ISAP)
+(Dz.U. 2021 poz. 2484 — weryfikuj t.j. w ELI (RZĄD 1))
   → STAN NA 03.2026: "te same kwoty co w 2022 r." — BRAK podwyżek,
     BRAK planów podwyżki (jazda.io, marzec 2026)
   → web_search: "rozporządzenie wysokość grzywien mandaty karne 2026
@@ -149,7 +149,7 @@ STAWKI ORIENTACYJNE — DROGOWE (weryfikuj aktualne przed powołaniem):
 │ 94 §1  │ Jazda bez uprawnień           │ 1 500 zł   │ 5 000 zł      │
 │ 96 §3  │ Nieujawnienie kierowcy        │ 2 500 zł   │ 5 000 zł      │
 └────────┴───────────────────────────────┴────────────┴───────────────┘
-⚠️ Max grzywna sądowa: weryfikuj aktualny art. 24 §1 KW w ISAP
+⚠️ Max grzywna sądowa: weryfikuj aktualny art. 24 §1 KW w ELI (RZĄD 1)
 ⚠️ Minimalne kwoty 2026 (gazetaprawna.pl 05.2026, dla "nieujawnienie
    kierującego" art.96§3): postępowanie o przestępstwo → min 4000 zł,
    zagrożenie bezpieczeństwa → min 2000 zł, przekroczenie prędkości →
@@ -228,7 +228,7 @@ TRYB ZASKARŻENIA:
   → skarga do WSA (30 dni od decyzji SKO) → kasacja NSA (30 dni od wyroku WSA)
   ⚠️ WSTRZYMANIE: złóż wniosek o wstrzymanie wykonania decyzji (art. 61 §3 PPSA)!
 
-WERYFIKUJ: isap.sejm.gov.pl → KPA → Dział IVa art. 189a–189k
+WERYFIKUJ: ELI (RZĄD 1) → KPA → Dział IVa art. 189a–189k
 ```
 
 ---
@@ -264,7 +264,7 @@ UPRAWNIENIA ZOBOWIĄZANEGO:
 ```
 W POSTĘPOWANIU ADMINISTRACYJNYM (KPA):
   Art. 88 KPA — świadek/biegły (50 zł / 200 zł) — zażalenie
-  Art. 88a KPA — strona / uczestnik postępowania — weryfikuj w ISAP
+  Art. 88a KPA — strona / uczestnik postępowania — weryfikuj w ELI (RZĄD 1)
   Art. 57 §4 KPA — wezwanie do usunięcia braków formalnych — weryfikuj
   
 W POSTĘPOWANIU SĄDOWYM:
@@ -274,7 +274,7 @@ W POSTĘPOWANIU SĄDOWYM:
 
 W POSTĘPOWANIU WYKROCZENIOWYM:
   → Grzywna za niestawiennictwo świadka: KPSW art. 38
-  → Weryfikuj aktualną kwotę w ISAP
+  → Weryfikuj aktualną kwotę w ELI (RZĄD 1)
 
 Wniosek o uchylenie / umorzenie:
   → Składa się do organu nakładającego w terminie 7 dni od zawiadomienia
@@ -346,7 +346,7 @@ NSA (linia):
 □ Czy to kara adm. (KPA Dz. IVa) → sprawdź termin przedawnienia 5 lat
 □ Czy opłata parkingowa → obrona TYLKO w egzekucji
 □ Taryfikator mandatów zweryfikowany online (Dz.U. 2026 poz. 724)?
-□ Kwota grzywny sądowej — weryfikuj art. 24 KW w ISAP (zmieniane)
+□ Kwota grzywny sądowej — weryfikuj art. 24 KW w ELI (RZĄD 1) (zmieniane)
 ```
 
 ---

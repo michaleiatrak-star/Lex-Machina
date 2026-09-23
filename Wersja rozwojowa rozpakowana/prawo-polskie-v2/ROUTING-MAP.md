@@ -446,7 +446,7 @@ ORKA-REG-01–07 + ORKA-META-01–02: metareguły wykładni — stosuj przy KAŻ
 | Ustawa o Rzeczniku Praw Dziecka | Dz.U. 2023 poz. 292 t.j. — dodane 2026-07-27, na żądanie użytkownika | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-RPD.md | ✅ NOWY 2026-07-27 |
 | Ustawa o samorządowych kolegiach odwoławczych (SKO) | Dz.U. 2018 poz. 570 t.j. ✅ VER 2026-07-04 (POPRAWKA — było błędnie 2023.825) | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-SKO.md | ✅ OK |
 | Ustawa o kontroli w administracji rządowej | Dz.U. 2026 poz. 158 t.j. (sync 2026-07-02 z dr-05) | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-kontrola-administracji.md | ✅ OK |
-| Ustawa o petycjach | Dz.U. 2018 poz. 870 — weryfikuj t.j. w ISAP | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-petycje.md | ✅ OK |
+| Ustawa o petycjach | Dz.U. 2018 poz. 870 — weryfikuj t.j. w ELI (RZĄD 1) | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-petycje.md | ✅ OK |
 | Ustawa o sygnalistach | Dz.U. 2024 poz. 928 ze zm. | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-sygnalisci.md | ✅ OK |
 | Zaskarzanie decyzji / reprywatyzacja | Dz.U. 2025 poz. 1691 (KPA art. 156) + Dz.U. 2021 poz. 795 | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md | ✅ OK |
 | Ustawa o dostępności — osoby ze szczególnymi potrzebami | Dz.U. 2024 poz. 1411 t.j. (sync 2026-07-02 z dr-05/dr-10) | dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-dostepnosc-niepelnosprawni.md | ✅ OK |

@@ -33,7 +33,7 @@
   lekarza weterynarii) oraz zmiany konsekwencyjne z ustawy o zdrowiu zwierząt
   (Dz.U. 2025 poz. 1795, odesłania terminologiczne)
 
-**Weryfikacja:** isap.sejm.gov.pl + GIW.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) + GIW.gov.pl przed każdym cytowaniem.
 
 ## Zakres
 Inspekcja Weterynaryjna (GIW/WIJHARS):

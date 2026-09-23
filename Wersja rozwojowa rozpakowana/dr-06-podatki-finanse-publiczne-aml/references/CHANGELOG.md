@@ -1,5 +1,7 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.92 (2026-09-23, AUDYT-2026-09-23c): SKILL.md: „Źródło podstawowe” — LEX/Legalis → ArsLege gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada); korekta użytkownika do warunku E-3.
+- 3.91 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (28 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 3.90 (2026-09-22, F-195): mod-OP-uzupelnienie-pokrycia 1.0→1.1 — tabela sześciu nowelizacji Ordynacji po t.j. 2026/622 z terminami z artykułów końcowych (RZĄD 1 ELI); ⛔ 2026/875 (art. 13, 67a — 1.01.2027), 2026/1098 (OKI — 1.01.2027) i 2026/1206 (art. 119zg — 11.01.2027) były nieśledzone; art. 67a — trzy wersje czasowe.
 - 3.89 (2026-09-16, F-189): mod-OP-ordynacja-podatkowa i mod-interpretacje-definicje-podatkowe — ⛔ skarga na interpretację indywidualną: 30 dni (art. 53 § 1 PPSA, akty z art. 3 § 2 pkt 4a; od 26.06.2026 także pkt 4b), nie „14 dni z art. 53 § 3” (F-135, RZĄD 1).
 - 3.88 (2026-09-16, F-189): mod-alkohol-tyton-regulacja-sprzedazy — ustawa tytoniowa: nowy t.j. `Dz.U. 2026 poz. 1214` (ogłoszony 16.09.2026; RZĄD 1 — status i metryka ELI); poprzedni `2024/1162` wygasły; zakres włączonych nowelizacji nieustalony (tekst jeszcze niedostępny).

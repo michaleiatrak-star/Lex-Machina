@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.27"
+version: "5.28"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -290,7 +290,7 @@ W2 — PROJEKT PISMA
      → STOP po W2 — nie pytaj użytkownika, przejdź do W3 automatycznie
 
 W3 — WERYFIKACJA ZE ŹRÓDEŁ + WALIDACJA
-     web_fetch dla każdego ⚠️ → zamknięcie przez zweryfikowane cytaty z ISAP
+     web_fetch dla każdego ⚠️ → zamknięcie przez zweryfikowane cytaty z ELI (RZĄD 1, kanon E-1…E-5)
      web_fetch dla każdego [ORZECZENIE] → sygnatura + teza + URL ze źródła
      MOD-WALIDACJA (bloki A–I) → raport formalny
      Pismo finalne z pełnymi oznaczeniami Dz.U.
@@ -430,7 +430,7 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
   view shared/MOD-ELIMINACJA-TEZ.md
 
   Per każde żądanie z petitum:
-  → ET-Q1: Czy istnieje przepis który to żądanie PRZEWIDUJE? (ISAP)
+  → ET-Q1: Czy istnieje przepis który to żądanie PRZEWIDUJE? (ELI — RZĄD 1)
   → ET-Q2: Czy PRZESŁANKI przepisu są spełnione przez fakty F-nn?
            (subsumpcja — per każda przesłanka osobno)
   → ET-Q3: Czy przepisy z materiału dowodowego są PRAWIDŁOWE?
@@ -800,7 +800,7 @@ view shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZKOWE — zawsze p
 
 ### W3.1–W3.7 + Finalizacja
 
-> Szczegóły kroków W3.1 (ISAP), W3.2 (orzeczenia + ZAKRES-STOSOWANIA),
+> Szczegóły kroków W3.1 (ELI — RZĄD 1), W3.2 (orzeczenia + ZAKRES-STOSOWANIA),
 > W3.3 (MOD-FAKTY), W3.4 (MOD-WALIDACJA bloki A–J + moduły warunkowe),
 > W3.5 (HYBRID-VALIDATION), W3.6 (raport W3), W3.6a (AUDYT-KOŃCOWY +
 > COURT-SIMULATION + LEGAL-QUALITY-GATE), W3.7 (PEER-REVIEW + POST-VALIDATION

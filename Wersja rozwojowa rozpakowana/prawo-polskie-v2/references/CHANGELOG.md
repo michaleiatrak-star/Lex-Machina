@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.30 (2026-09-23, AUDYT-2026-09-23b): Zasady workflow i sekcja Weryfikacja: ISAP → kanon E-1…E-5; ROUTING-MAP: instrukcje „weryfikuj w ISAP” → ELI (RZĄD 1); wpisy historyczne bez zmian.
 - 6.29 (2026-09-22, F-195): ROUTING-MAP — wiersz MONITORING Ordynacji podatkowej: zamiast ⬛ sześć nowelizacji po t.j. 2026/622 z terminami z artykułów końcowych (RZĄD 1 ELI): 825 — 24.09.2026, 846 — 1.10.2026, 1154 — 16.09.2026 (w mocy), 875 i 1098 — 1.01.2027, 1206 — 11.01.2027. ⛔ 875, 1098, 1206 nie występowały wcześniej w żadnym rejestrze systemu.
 - 6.28 (2026-09-22, F-195): ROUTING-MAP — tabela MONITORING przejrzana przez artykuły końcowe w ELI (RZĄD 1): KPK 2026/638 (w mocy 28.05.2026) i PrBud 2025/1847 art. 1 pkt 1 i 3 (w mocy 20.09.2026) usunięte; wiersz DR-03 KPK 2026.638 uzupełniony o stan; 2026/516 — reszta ustawy od 30.04.2026 (nie 16.04.2026); OP 2026/622 oznaczona ⬛ (t.j., nie nowelizacja; terminy bez źródła). Licznik zbiorczy nieprzeliczany — adnotacja pod licznikiem.
 - 6.27 (2026-09-22, F-193): ROUTING-MAP — wiersz ustawy zasiłkowej (t.j. 2026/854): dopisana cezura 1.01.2027 dla art. 17 ust. 1d–1e (L4 z jednego tytułu) i art. 9 ust. 4 wprowadzonych Dz.U. 2026 poz. 26; art. 17 ust. 1–1c od 13.04.2026 (RZĄD 1 ELI, art. 43 ustawy). Kolejność wg reguły użytkownika: mapa zbiorcza przed modułami DR.

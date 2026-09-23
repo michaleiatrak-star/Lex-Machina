@@ -23,7 +23,7 @@
 
 ## KLAUZULE ABUZYWNE (art. 385¹–385³ KC)
 
-> ⚠️ Brzmienie — weryfikuj w aktualnym KC w ISAP.
+> ⚠️ Brzmienie — weryfikuj w aktualnym KC w ELI (RZĄD 1).
 
 ```
 Przesłanki abuzywności (art. 385¹ §1 KC):
@@ -35,7 +35,7 @@ Skutek: postanowienie nie wiąże konsumenta — umowa w pozostałym zakresie ob
 
 Szara lista (art. 385³ KC):
   → Katalog postanowień domniemanych jako abuzywne
-  → Weryfikuj aktualny art. 385³ KC w ISAP — lista może być rozszerzana
+  → Weryfikuj aktualny art. 385³ KC w ELI (RZĄD 1) — lista może być rozszerzana
 
 Rejestr klauzul niedozwolonych UOKiK:
   → https://rejestr.uokik.gov.pl
@@ -45,7 +45,7 @@ Rejestr klauzul niedozwolonych UOKiK:
 
 ## PRAWO ODSTĄPIENIA OD UMOWY (Ustawa o prawach konsumenta)
 
-> ⚠️ Weryfikuj aktualne przepisy ustawy o prawach konsumenta w ISAP.
+> ⚠️ Weryfikuj aktualne przepisy ustawy o prawach konsumenta w ELI (RZĄD 1).
 
 ```
 UMOWY NA ODLEGŁOŚĆ / POZA LOKALEM PRZEDSIĘBIORCY:
@@ -59,7 +59,7 @@ WYJĄTKI (brak prawa odstąpienia) — weryfikuj aktualny katalog w ustawie:
   → Usługi w pełni wykonane za zgodą konsumenta
   → Produkty szybko psujące się
   → Produkty indywidualnie dopasowane
-  → i inne — weryfikuj w ISAP
+  → i inne — weryfikuj w ELI (RZĄD 1)
 ```
 
 ---
@@ -77,7 +77,7 @@ KONSUMENCI (od 01.01.2023 — nowe przepisy):
 
 PRZEDSIĘBIORCY (kodeksowa rękojmia — art. 556 i n. KC):
   Termin: 2 lata od wydania (5 lat — nieruchomości)
-  Terminy na zawiadomienie: weryfikuj aktualny art. 563 KC w ISAP
+  Terminy na zawiadomienie: weryfikuj aktualny art. 563 KC w ELI (RZĄD 1)
 ```
 
 ---

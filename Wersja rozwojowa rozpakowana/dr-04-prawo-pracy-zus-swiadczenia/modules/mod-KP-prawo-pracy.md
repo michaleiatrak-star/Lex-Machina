@@ -15,7 +15,7 @@
 | **Jawność wynagrodzeń** (art. 183ca KP — nowy) | **OBOWIĄZUJE** — pracodawca musi ujawnić widełki wynagrodzenia w ogłoszeniu o pracę | Dz.U. 2025 poz. 807 |
 | Minimalne wynagrodzenie 2026 | **4 806 zł brutto/mies. od 01.01.2026 | stawka godz.: 31,40 zł** | Dz.U. 2025 poz. 1242 |
 | ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
-| Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj isap.sejm.gov.pl | — |
+| Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj ELI (RZĄD 1) | — |
 
 ---
 
@@ -108,7 +108,7 @@ Przy umowie na czas OKREŚLONY:
     ⚠️ Wyjątek: gdy pracodawca podaje przyczynę → musi być prawdziwa
 ```
 
-### Okresy wypowiedzenia (art. 36 KP — weryfikuj w ISAP po reformie stażu)
+### Okresy wypowiedzenia (art. 36 KP — weryfikuj w ELI (RZĄD 1) po reformie stażu)
 
 | Staż u danego pracodawcy | Okres |
 |---|---|
@@ -163,7 +163,7 @@ PRZYWRÓCENIE DO PRACY + wynagrodzenie za czas procesu (art. 47 KP):
 ```
 SEKTOR PUBLICZNY: od 01.01.2026
 SEKTOR PRYWATNY: od pierwszego dnia miesiąca po 6 miesiącach od ogłoszenia
-  → orientacyjnie ok. 01.04.2026 — WERYFIKUJ aktualną datę w isap.sejm.gov.pl
+  → orientacyjnie ok. 01.04.2026 — WERYFIKUJ aktualną datę w ELI (RZĄD 1)
 
 DO STAŻU WLICZA SIĘ OD TEJ DATY:
   □ Okresy pracy na umowach zlecenia i o świadczenie usług
@@ -187,7 +187,7 @@ WPŁYW NA ROSZCZENIA:
 ## 5. KALKULATOR ROSZCZEŃ FINANSOWYCH
 
 ```
-NADGODZINY (art. 151¹ KP — weryfikuj w ISAP):
+NADGODZINY (art. 151¹ KP — weryfikuj w ELI (RZĄD 1)):
   +50%: pn–pt, w porze dziennej
   +100%: pora nocna, niedziele, święta, dobowy odpoczynek
 
@@ -217,7 +217,7 @@ MINIMALNE WYNAGRODZENIE 2026: 4 806 zł brutto | stawka godzinowa: 31,40 zł
 
 Właściwość przemienna (wybór pracownika): siedziba pracodawcy / zakład pracy / miejsce zamieszkania pracownika.
 Opłata: pracownik zwolniony od kosztów do 75 000 zł.
-> ⚠️ Weryfikuj art. 461 KPC w ISAP.
+> ⚠️ Weryfikuj art. 461 KPC w ELI (RZĄD 1).
 
 ---
 

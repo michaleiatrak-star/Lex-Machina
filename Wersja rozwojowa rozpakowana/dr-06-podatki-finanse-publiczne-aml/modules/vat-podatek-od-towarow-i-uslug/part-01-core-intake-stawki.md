@@ -233,7 +233,7 @@ używać jako podstawy rozliczenia ani wpisywać do pisma:
    (pełne teksty); ISZTAR4 (adresy, funkcja daty symulacji, zawartość
    informacji dodatkowych) — ext-isztar4.mf.gov.pl [Rząd 1]; EUREKA —
    eureka.mf.gov.pl [Rząd 1]. Weryfikacja 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny tekst
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — w szczególności aktualny tekst
    ujednolicony rozporządzenia i status przepisów epizodycznych art. 146x]
 
 ---

@@ -6,7 +6,7 @@
 > rozwiązanie umowy i rozliczenie końcowe. Szczególnie: SLA, umowy deweloperskie,
 > franczyza, najem, umowy dystrybucyjne, B2B wieloletnie.
 
-> ⛔ HARD GATE — terminy wypowiedzenia, okresy gwarancji weryfikuj w ISAP.
+> ⛔ HARD GATE — terminy wypowiedzenia, okresy gwarancji weryfikuj w ELI (RZĄD 1).
 
 ---
 
@@ -144,7 +144,7 @@ ETAP 4 — ESKALACJA:
        zobowiązania kara umowna należy się wierzycielowi"
     □ KC art. 484 §1 zd. 2: odszkodowanie ponad karę — TYLKO gdy umowa
        to przewiduje lub gdy brak klauzuli (wtedy pełne odszkodowanie)
-    Weryfikuj: isap.sejm.gov.pl → KC → art. 484
+    Weryfikuj: ELI (RZĄD 1) → KC → art. 484
   
   ŚCIEŻKA C: Rozwiązanie umowy
     □ Czy naruszenie jest wystarczająco istotne by uzasadniać rozwiązanie?
@@ -177,7 +177,7 @@ CHECKLIST ROZWIĄZANIA UMOWY:
   [ ] Wypowiedzenie z ważnych przyczyn (bez okresu, umowa na czas określony)
   [ ] Porozumienie stron (natychmiastowe, każdy czas)
   [ ] Odstąpienie (gdy przewidziane w umowie lub art. 491–493 KC)
-  Weryfikuj: isap.sejm.gov.pl → KC → art. 491 (zwłoka, odstąpienie)
+  Weryfikuj: ELI (RZĄD 1) → KC → art. 491 (zwłoka, odstąpienie)
 
 □ OBOWIĄZKI POST-CONTRACTUAL (przeżywające rozwiązanie):
   [ ] Poufność: do kiedy trwa po rozwiązaniu?
@@ -219,7 +219,7 @@ PROTOKÓŁ ZAKOŃCZENIA UMOWY (rekomendowany):
 W umowach wieloletnich (>2 lata lub >12 miesięcy o podwyższonym ryzyku inflacji):
 
 KLAUZULA WALORYZACYJNA:
-  Podstawa: KC art. 358¹ — weryfikuj: isap.sejm.gov.pl → KC → art. 358¹
+  Podstawa: KC art. 358¹ — weryfikuj: ELI (RZĄD 1) → KC → art. 358¹
   
   TYPY:
   □ Indeksacja do wskaźnika (GUS, NBP):
@@ -245,5 +245,5 @@ KLAUZULA WALORYZACYJNA:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: KC art. 123, 391, 471, 484, 491–493, 358¹ — weryfikuj: isap.sejm.gov.pl*
+*Podstawa prawna: KC art. 123, 391, 471, 484, 491–493, 358¹ — weryfikuj: ELI (RZĄD 1)*
 *Powiązane: mod-shared-ryzyko-kwant.md (kwantyfikacja kar), mod-shared-fm-hardship.md*

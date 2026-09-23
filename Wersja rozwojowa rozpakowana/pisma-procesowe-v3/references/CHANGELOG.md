@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.28 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (4 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 5.27 (2026-09-22, F-194): contradiction-intelligence-engine-v10 — ETAP 4A „audyt powołań orzeczniczych przeciwnika": tabela statusów (SYGNATURY) + gradient TREŚĆ i GRAD-3b-SYM (WERYFIKACJA-SLAD 1.8); KALIBRACJA-PRZECIWNIK — wadliwe powołanie maks. S3, nigdy zamiast odpowiedzi na istotę; pozycja w HARD GATE. Wzorzec: NSA I OSK 590/26 (🟨).
 - 5.26 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 5.25 (F-189): markery T28-OK na dwóch liniach opisujących naprawy w modules/MOD-OPLATY.md. Treść merytoryczna bez zmian.
 - 5.25 — LUKA JAWNA: wydanie AUDYT-2026-09-12f nieobecne na dysku — odtworzone w 5.26

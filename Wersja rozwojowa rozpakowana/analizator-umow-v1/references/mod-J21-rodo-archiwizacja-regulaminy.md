@@ -51,10 +51,10 @@
 > KLUCZOWE AKTY — ZWERYFIKOWANE 2026-06-15:
 > RODO (Rozporządzenie UE 2016/679) — eur-lex.europa.eu
 > Ustawa o ochronie danych osobowych (wdrażająca RODO, z 10.05.2018) —
->   weryfikuj aktualny t.j. w ISAP
+>   weryfikuj aktualny t.j. w ELI (RZĄD 1)
 > Kodeks pracy — t.j. Dz.U. 2025 poz. 277 ze zm.
 >   ✅ VER: nowelizacja Dz.U. 2026 poz. 25 (ustawa z 4.12.2025, w życie
->   26/27.01.2026 — sprawdź dokładną datę w ISAP) — KLUCZOWA dla regulaminu
+>   26/27.01.2026 — sprawdź dokładną datę w ELI (RZĄD 1)) — KLUCZOWA dla regulaminu
 >   pracy/wynagradzania, patrz J21.4
 > Ustawa o ZFŚS — t.j. Dz.U. 2024 poz. 288 ze zm.
 >   ✅ VER: zmieniona RÓWNIEŻ przez Dz.U. 2026 poz. 25 (reprezentacja
@@ -297,7 +297,7 @@ ELEMENTY PROCEDURY WEWNĘTRZNEJ:
 
 Ustawa z 4.12.2025 r. o zmianie ustawy – Kodeks pracy oraz ustawy o
 zakładowym funduszu świadczeń socjalnych, Dz.U. 2026 poz. 25, w życie
-26/27.01.2026 (sprawdź dokładną datę publikacji vs wejścia w życie w ISAP —
+26/27.01.2026 (sprawdź dokładną datę publikacji vs wejścia w życie w ELI (RZĄD 1) —
 źródła podają 26.01 i 27.01, rozbieżność do wyjaśnienia przed cytowaniem)
 
 PRZED zmianą (do 25/26.01.2026):
@@ -649,5 +649,5 @@ web_search: "regulamin ZFŚS uzgodnienie przedstawiciele załogi 2026 Dz.U. poz.
 *MODUŁ J21 / analizator-umow-v1 · utworzony 2026-06-15*
 *⚡ Sekcje J21.4 i J21.5 dotyczą zmian Dz.U. 2026 poz. 25 (w życie
 26/27.01.2026) — BARDZO ŚWIEŻA nowelizacja, dokładną datę wejścia w życie i
-finalną numerację artykułów ZAWSZE weryfikuj w ISAP przed cytowaniem.*
-*Prawo weryfikuj ZAWSZE w ISAP/EUR-LEX/UODO.*
+finalną numerację artykułów ZAWSZE weryfikuj w ELI (RZĄD 1) przed cytowaniem.*
+*Prawo weryfikuj ZAWSZE w ELI (RZĄD 1)/EUR-LEX/UODO.*

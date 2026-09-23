@@ -3,6 +3,7 @@
 **2.18 (2026-09-22, F-194) — Zasada 2B:** odwołanie do `GRAD-3b-SYM` (symbol CBOSA jako flaga wymuszająca odczyt przedmiotu) i `KALIBRACJA-PRZECIWNIK` z `shared/WERYFIKACJA-SLAD.md` 1.8; precedens NSA I OSK 590/26 jako 🟨 bez awansu (CBOSA 503, 2026-09-22).
 
 **2.17 (2026-09-14) — retrieval/snapshot CBOSA jako materiał badawczy z jawnym provenance:**
+- 2.19 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (1 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - fallback V-SYG-0.5 nie jest już redukowany do samego ISTNIENIA, gdy host
   faktycznie zwraca oficjalny snapshot `/doc/{ID}`;
 - obowiązkowe: POST-CHECK HOSTA → exact-match → content_scope;

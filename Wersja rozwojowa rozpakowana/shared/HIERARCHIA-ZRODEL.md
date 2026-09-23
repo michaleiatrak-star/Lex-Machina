@@ -1,7 +1,9 @@
 # HIERARCHIA-ZRODEL.md — Kanoniczna Kategoryzacja Źródeł (RZĄD 1/2/3)
 
 > **Plik:** `shared/HIERARCHIA-ZRODEL.md`
-> **Wersja:** 1.9 (2026-09-14) — CBOSA: oddzielono provenance kanału (DIRECT_LIVE / CRAWLED_OR_INDEXED) od kanonicznego statusu weryfikacji; snapshot może nieść sentencję/uzasadnienie, ale nie tworzy piątego statusu i nie awansuje sam do ✅ [VER].
+> **Wersja:** 1.11 (2026-09-23c) — E-3 uruchamia BRAK-AKTU (akt niepobieralny z RZĘDU 1: awaria serwera, timeout, blokada) — wtedy obowiązkowo; przy awarii ELI próba odczytu z ISAP.
+> **Wersja poprzednia:** 1.10 (2026-09-23) — ⭐ KANON KOLEJNOŚCI E-1…E-5 dla aktów polskich: ELI pierwszy, ISAP wyłącznie adres dla człowieka, LEX/Legalis → ArsLege dopiero po porażce ELI w obu kanałach; reguła interpretacyjna „ISAP” w pozostałych plikach; RZĄD 1 przeuporządkowany.
+> **Wersja poprzednia:** 1.9 (2026-09-14) — CBOSA: oddzielono provenance kanału (DIRECT_LIVE / CRAWLED_OR_INDEXED) od kanonicznego statusu weryfikacji; snapshot może nieść sentencję/uzasadnienie, ale nie tworzy piątego statusu i nie awansuje sam do ✅ [VER].
 > **Wersja poprzednia:** 1.8 (2026-09-14) — RZĄD 2A orzecznictwa powiązany z kanonicznym
 >              routingiem wykonawczym: SN / Portal Orzeczeń / CBOSA / SAOS.
 >              Dla NSA/WSA direct CBOSA (formularz HTML + /doc/{ID}) jest
@@ -83,17 +85,73 @@
 
 ---
 
+## ⭐ KANON KOLEJNOŚCI — AKTY POLSKIE (od v1.10, 2026-09-23) — NADRZĘDNY
+
+To jest **jedyne** miejsce, które ustala kolejność źródeł dla brzmienia i stanu
+aktów polskich. Każdy inny plik systemu (router, fasada, DR-01…DR-16, pisma,
+analizy, audyt) odsyła tutaj. Przy sprzeczności wygrywa ten kanon.
+
+```
+E-1  ELI — RZĄD 1, KANAŁ PODSTAWOWY
+     api.sejm.gov.pl/eli (kanał kodu: curl/skrypt, neutralny UA — shared/DOSTEP-MASZYNOWY-API.md §1)
+       /eli/acts/search?title=…        → rok i pozycja aktualnego t.j.
+       /eli/acts/DU/{rok}/{poz}        → metryka, status, daty
+       /eli/acts/DU/{rok}/{poz}/text.pdf → BRZMIENIE (t.j.; pułapka /text.html — B-T1…B-T3 PRAWO-HARDGATE)
+       /eli/acts/DU/{rok}/{poz}/references → zmiany po t.j.
+     → eli.gov.pl → dziennikustaw.gov.pl / monitorpolski.gov.pl (ten sam publikator)
+     Host bez kanału kodu: sekwencja B-1 → B-2 (PRAWO-HARDGATE).
+     Znacznik: ✅ [VER: ELI DU/RRRR/NNN, data]
+
+E-2  ISAP — ADRES DLA CZŁOWIEKA
+     isap.sejm.gov.pl: link podawany czytelnikowi obok ELI, pomocnicza
+     identyfikacja aktu; przy awarii ELI — próba odczytu treści z ISAP.
+     Sama niedostępność ISAP przy działającym ELI nie uruchamia E-3
+     (akt został pobrany).
+
+E-3  LEX / Legalis — RZĄD 2A (tekst przy uprawnionym dostępie)
+     Uruchamia go BRAK-AKTU: aktu nie da się pobrać z RZĘDU 1 — ani z ELI
+     (każdym kanałem dostępnym w hoście), ani z ISAP / dziennikustaw.gov.pl —
+     z jakiejkolwiek przyczyny: awaria lub przeciążenie serwera, timeout,
+     blokada, brak kanału w hoście. Wynik prób zapisz w śladzie. Bez tej
+     ścieżki nie byłoby żadnej weryfikacji — dlatego jest obowiązkowa, a nie
+     opcjonalna. Nie zakładaj, że użytkownik ma licencję.
+
+E-4  ArsLege i inne serwisy tekstów — RZĄD 2B
+     Gdy E-3 niedostępne. Status wyłącznie 🟨 [KOTWICA-URZĘDOWA] na warunkach
+     K-1…K-4 z PRAWO-HARDGATE; bez nich jawny zakres nieweryfikowany.
+
+E-5  Wszystko zawiodło → ⚠️ [NIEWERYFIKOWANE]; zakaz cytowania z pamięci.
+```
+
+⛔ 🟨 i RZĄD 2B są **niedopuszczalne**, gdy E-1 dał treść. Zejście do E-3/E-4
+bez zapisanego BRAKU-AKTU w RZĘDZIE 1 = naruszenie HARD GATE.
+⛔ Odwrotnie: przy BRAKU-AKTU pominięcie E-3/E-4 i od razu ⚠️ też jest błędem —
+najpierw wyczerp źródła zastępcze.
+
+⛔ **REGUŁA INTERPRETACYJNA „ISAP”.** W każdym pliku systemu zwroty typu
+„weryfikuj w ISAP”, „ISAP każdy przepis”, „weryfikacja ISAP”, „pobierz z ISAP”,
+„✅ [VER: ISAP, …]” w **instrukcjach** oznaczają: „zweryfikuj w RZĘDZIE 1 według
+E-1…E-5”, czyli najpierw ELI. Wpisy **historyczne** („zweryfikowano w ISAP
+2026-06-05”) opisują przeszłość i nie są instrukcją — nie przepisuj ich.
+
+---
+
 ## RZĄD 1 — PIERWSZORZĘDNE (wiążące, wyłączne dla BRZMIENIA przepisu)
 
-1. ISAP — https://isap.sejm.gov.pl — PRIORYTET (tekst jednolity)
+Kolejność użycia — KANON E-1…E-5 wyżej. Lista mocy źródeł:
+
+1. **API ELI Sejm — https://api.sejm.gov.pl/eli/...** — PRIORYTET: brzmienie
+   (`text.pdf` t.j.), metryka, status, zmiany (warstwa strukturalna,
+   `shared/PRAWO-HARDGATE.md` POZIOM B).
 2. **ELI / Dziennik Ustaw — https://eli.gov.pl** (dodane 2026-08-23, v1.4) —
    urzędowy portal European Legislation Identifier prowadzony dla Dz.U.;
-   równorzędny z ISAP co do mocy, często SZYBSZY w indeksacji nowych t.j.
+   często SZYBSZY w indeksacji nowych t.j. niż ISAP.
    Wzorzec adresu: `eli.gov.pl/eli/DU/{rok}/{poz}` (metryka),
    `.../text.html`, `.../text.pdf` (treść).
-3. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
-4. API ELI Sejm — https://api.sejm.gov.pl/eli/... (warstwa strukturalna,
-   `shared/PRAWO-HARDGATE.md` POZIOM B)
+3. ISAP — https://isap.sejm.gov.pl — ta sama moc co ELI, ale rola od v1.10:
+   **adres dla człowieka** i pomocnicza identyfikacja (E-2). Nie jest kanałem
+   odczytu treści dla modelu.
+4. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
 5. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
 6. UODO — https://uodo.gov.pl — przepisy o ochronie danych
 7. BIP właściwego organu — dla rozporządzeń branżowych
@@ -302,8 +360,8 @@ gdy wyszukiwarka zwróciła go na zapytanie z `site:orzeczenia.nsa.gov.pl`.
   nie jest aktem. Dopuszczalna rola: wykładnia celowościowa i ustalenie, czy
   zmiana jest w toku. Powołanie zawsze z jawnym słowem „projekt".
 - LEX (sip.lex.pl) i Legalis (sip.legalis.pl) jako ŹRÓDŁO-2 dla BRZMIENIA
-  przepisu, gdy ISAP niedostępny i kancelaria posiada aktywną licencję —
-  równoważne ISAP wyłącznie w tej roli, zgodnie z `shared/PRAWO-HARDGATE.md`.
+  przepisu (E-3), przy BRAKU-AKTU w RZĘDZIE 1 i gdy kancelaria posiada aktywną
+  licencję — nie staje się przez to RZĘDEM 1, zgodnie z `shared/PRAWO-HARDGATE.md`.
 
 **2B — duże, uznane portale prawnicze/branżowe (komentarz/interpretacja,
 znacznik 📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: ...], NIGDY brzmienie przepisu ani
@@ -471,7 +529,7 @@ od tego, który wydawca:
 4. ⚠️ AKTUALNOŚĆ WYDANIA — w odróżnieniu od portalu (2B, aktualizowany
    na bieżąco), książka jest zamrożona na dacie wydania. Sprawdź rok
    wydania/numer edycji widoczny w próbce i skrzyżuj z ewentualnymi
-   nowelizacjami przepisu od tej daty (np. przez ISAP/historię aktu) —
+   nowelizacjami przepisu od tej daty (np. przez ELI `/references` / historię aktu) —
    jeśli przepis był nowelizowany po dacie wydania, komentarz może być
    nieaktualny mimo renomy wydawnictwa; oznacz to wprost.
 5. Odróżnij WYRAŹNIE od F-12: jeśli podczas przeglądania próbki
@@ -551,7 +609,7 @@ Każdy fragment/link pochodzący z Rzędu 2B lub Rzędu 3 oznacz:
 Nie myl ze znacznikami HARDGATE / WERYFIKACJA-ŚLAD:
 
 ```
-✅ [VER: ISAP / api.sejm.gov.pl, data]              → Rząd 1, tekst przepisu, wiążący
+✅ [VER: ELI DU/RRRR/NNN, data]                     → Rząd 1, tekst przepisu, wiążący
 ✅ [VER: sn.pl / orzeczenia.ms.gov.pl / ..., data]   → Rząd 2A, orzeczenie zweryfikowane oficjalnie
 ✅ [VER: LEX/Legalis, data]                          → Rząd 2A, tekst przepisu (tylko przy licencji)
 📚 [ŹRÓDŁO POMOCNICZE — RZĄD 2: portal, data]        → Rząd 2B, duży portal, komentarz/informacja
@@ -567,7 +625,7 @@ wobec tego źródła. Przykład łączony:
 art. 281 KK — kradzież rozbójnicza wobec osoby trzeciej
   📚 [ŹRÓDŁO POMOCNICZE — RZĄD 3: kdkadwokat.pl, 2020-12-13]
   🟢 [VER-TREŚĆ: kdkadwokat.pl, 2026-07-15] — teza skrzyżowana z brzmieniem
-     art. 281 KK (Rząd 1, ISAP) — zgodna co do istoty
+     art. 281 KK (Rząd 1, ELI) — zgodna co do istoty
   🔗 [KOTWICA-TEKSTOWA: kdkadwokat.pl/.../#:~:text=Jako%20kradzie%C5%BC...]
 ```
 

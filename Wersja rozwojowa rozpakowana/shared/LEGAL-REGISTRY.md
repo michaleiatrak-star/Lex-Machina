@@ -5,7 +5,7 @@ Stan rejestru: 2026-08-28. Źródło metryk: wyłącznie ISAP / Dziennik Ustaw. 
 ## Zasada bezwzględna
 
 1. Nie cytuj przepisu, tytułu aktu, Dz.U., statusu aktu, daty wejścia w życie ani przepisu przejściowego z pamięci.
-2. Przed użyciem przepisu sprawdź aktualny status w ISAP.
+2. Przed użyciem przepisu sprawdź aktualny status w ELI (RZĄD 1).
 3. Jeżeli ISAP pokazuje tekst jednolity i późniejszą ustawę zmieniającą — oznacz akt jako `po t.j. są zmiany` i sprawdź ich wejście w życie.
 4. Jeżeli nie da się potwierdzić danych w ISAP w danej sesji — użyj statusu `WYMAGA-KONTROLI-ISAP`.
 

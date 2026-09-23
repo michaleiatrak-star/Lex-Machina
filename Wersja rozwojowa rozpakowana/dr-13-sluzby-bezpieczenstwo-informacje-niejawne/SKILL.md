@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.11"
+version: "3.12"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, uprawnienia, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, kompetencji, kary ani terminu wyłącznie z pamięci modelu.
 
@@ -50,15 +50,15 @@ Ustawa o obronie Ojczyzny — t.j. Dz.U. 2025 poz. 825 (✅ [VER] RZĄD 1 2026-0
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
 ## Zasada architektoniczna
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci — każde brzmienie weryfikuj w ISAP**
+- **Zakaz cytowania przepisów z pamięci — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - **Prawo służb mundurowych zmieniane wielokrotnie w 2024–2025 — weryfikuj ZAWSZE**
 
 ---
@@ -196,7 +196,7 @@ view dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW.md
   `mod-PPSA-terminy-kasacja-prawo-pomocy`
 - Zamówienia obronne (PZP obronna) → `dr-07`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | orzeczenia.ms.gov.pl | nsa.gov.pl | sn.pl
+- Weryfikacja: ELI (RZĄD 1) | orzeczenia.ms.gov.pl | nsa.gov.pl | sn.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

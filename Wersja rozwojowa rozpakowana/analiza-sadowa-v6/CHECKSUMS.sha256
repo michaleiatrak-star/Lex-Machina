@@ -1,9 +1,9 @@
 edfb5f1b223f65c1137167bcbb9a19d4097273dd9a8a90f7ff03b55d7143dcd6  ./PORTABILITY-MANIFEST.md
-0dec08fcc04f306dd490843f9adb1cff4bbd4a44fd076452bb2467a9c87de995  ./SKILL.md
+0e370df91730fbf62f07c0053e4ec286771ee974f9dc29f8a0abff6972430d99  ./SKILL.md
 6cd157d80e361a91cedd7ae637ff98224e7f763f8b08b244bc02e47f078a21c7  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 58899a5db1c155293520a27e129f201853c41fc66550304e580a2c3cdd392b8d  ./references/BLUEPRINT-SCHEMA.md
-d559dd61fdac500ab9a118fe8d783259849732cacba06573eb9ad9c376a4fe23  ./references/CHANGELOG.md
+d28c74f3a3fc778b86ff05b6cff9a6a4c941567c0f3719ccc5b794086b2d9493  ./references/CHANGELOG.md
 4b7597c688d7cb0f3247e97e1fdf145bbf76cb143b175dbf6642bf0253500182  ./references/MOD-A.md
 99362af6929387646fe86c10d3461f2742b656ca053a9c2e11c827fb3101ce6e  ./references/MOD-B.md
 f62382b224b4c5bfb9b859bff8709e8427676b027ef6a31d4b9d710d36ff3af0  ./references/MOD-C.md
@@ -12,7 +12,7 @@ f68160702bb50d57e8014fc6418ab0bf5eba089059cced4fdd5d40ed3899dc7a  ./references/M
 aa59d175c45e8c576b5103d3f76911118081085a47bd6861c2c76a3d6640b7f0  ./references/MOD-F.md
 9decf498acdc64ed720aed44d3fd0deff0d36094ef2279010f49568d764d45c5  ./references/PRZEBIEG-1-ekstrakcja.md
 16717b3404df585161b9188f372e9e3db39680a1ccf3d9e2381c51f73373399d  ./references/PRZEBIEG-2-strukturalna.md
-afd3aeb4630e26e7bb38d2fc79c0104495b410bad953099b501c8ec6b3a77f0e  ./references/PRZEBIEG-3-predykcja.md
+dd689a7e1bd0bce85a94ddf553f10982665e51f56b41a71786f51aea86f4a874  ./references/PRZEBIEG-3-predykcja.md
 b8ce91ffef6f8df24dee721872ead86b0c52487d5c6441345a59f710f55b5cac  ./references/WERYFIKACJA-DOWODOW.md
 5280de07347672892b7cfdc18e276bba2c194a42d1f5585c6468afb5500f7439  ./references/engines/adversarial-litigation-analysis-v9.md
 decd8d01eda868c67ee327fd168c454f6d06c3933094939a28bd5ab812adab6c  ./references/engines/contradiction-case-analysis-v10.md

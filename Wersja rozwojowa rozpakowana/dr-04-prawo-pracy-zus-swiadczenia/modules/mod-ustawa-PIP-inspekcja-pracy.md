@@ -46,7 +46,7 @@ PIP = organ nadzoru i kontroli przestrzegania prawa pracy (BHP, czas pracy, wyna
 □ Kontrola pracodawców (BHP, czas pracy, wynagrodzenia, umowy, ZZ)
 □ Nakaz: wstrzymanie pracy (zagrożenie życia/zdrowia), usunięcie uchybień
 □ Mandat karny do 2 000 zł / wniosek o ukaranie do sądu grodzkiego
-   (art. 108–112 ustawy o PIP — weryfikuj aktualne kwoty w ISAP)
+   (art. 108–112 ustawy o PIP — weryfikuj aktualne kwoty w ELI (RZĄD 1))
 □ Skarga pracownika: przyjmowana w trybie art. 44 — POUFNOŚĆ DANYCH SKARŻĄCEGO
 □ Pseudosamozatrudnienie: PIP może kwalifikować umowę B2B jako stosunek pracy
    i nakazać zawarcie umowy o pracę
@@ -61,7 +61,7 @@ Pracodawca:
 
 Godziny kontroli:
   → BHP: o każdej porze dnia i nocy
-  → Inne kontrole: w godzinach 6:00–22:00 (weryfikuj aktualny art. w ISAP)
+  → Inne kontrole: w godzinach 6:00–22:00 (weryfikuj aktualny art. w ELI (RZĄD 1))
 
 Prawa pracodawcy:
   → Sprzeciw od nakazów inspektora do okręgowego inspektora pracy
@@ -84,7 +84,7 @@ Prawa pracodawcy:
 
 **Akt:** Ustawa z dnia 11 marca 2026 r. o zmianie ustawy o Państwowej Inspekcji Pracy oraz niektórych innych
 ustaw — Dz.U. 2026 poz. 473 (ogłoszona 07.04.2026). **Wejście w życie: 08.07.2026** (z wyjątkami dot.
-poszczególnych przepisów — sprawdź art. przejściowe w ISAP przy konkretnej sprawie).
+poszczególnych przepisów — sprawdź art. przejściowe w ELI (RZĄD 1) przy konkretnej sprawie).
 
 > ✅ AKTUALIZACJA 2026-07-17: ustawa JUŻ WESZŁA W ŻYCIE (08.07.2026 — od
 > tej daty minęło już ok. 10 dni). Poniższe przepisy sekcji 6.1–6.5
@@ -204,7 +204,7 @@ jak wskazywała poprzednia wersja)
   górna granica 30 000 zł → 60 000 zł.
 □ W niektórych przypadkach (art. 281–283 KP łącznie) górna granica grzywny → do 90 000 zł.
 □ Postępowanie mandatowe PIP: inspektor może nałożyć mandat do 5000 zł,
-  w razie recydywy — do 10 000 zł (weryfikuj aktualne rozporządzenie taryfikatora w ISAP).
+  w razie recydywy — do 10 000 zł (weryfikuj aktualne rozporządzenie taryfikatora w ELI (RZĄD 1)).
 □ Nowy obowiązek: pracodawca musi odnotować w świadectwie pracy informację o zajęciu
   wynagrodzenia (egzekucja, w tym alimentacyjna) — sankcja do 90 000 zł za brak/obejście.
 ```

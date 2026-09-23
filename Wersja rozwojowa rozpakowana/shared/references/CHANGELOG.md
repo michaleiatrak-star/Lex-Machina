@@ -1,5 +1,13 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.81 — 2026-09-23 — AUDYT-2026-09-23b
+
+- HIERARCHIA-ZRODEL 1.11 i PRAWO-HARDGATE: E-3 uruchamia BRAK-AKTU (obowiązkowo), przy awarii ELI próba ISAP; ISAP-AUDIT-PROTOCOL analogicznie. DOSTEP-MASZYNOWY-API 1.9: §0 ZASADA INNEJ DROGI zamiast zakazu obchodzenia blokad.
+
+## 3.80 — 2026-09-23 — AUDYT-2026-09-23b
+
+- ⭐ HIERARCHIA-ZRODEL 1.10: KANON KOLEJNOŚCI E-1…E-5 (nadrzędny) + reguła interpretacyjna „ISAP”; RZĄD 1 przeuporządkowany (API ELI → eli.gov.pl → ISAP jako adres dla człowieka). PRAWO-HARDGATE: sekwencja ŹRÓDEŁ zgodna z kanonem (ISAP nie uruchamia ŹRÓDŁA-2; LEX = 2A, nie RZĄD 1). ISAP-AUDIT-PROTOCOL 1.2. DOSTEP-MASZYNOWY-API 1.8: §0 granice dostępu. Instrukcje weryfikacji „w ISAP”/„isap.sejm.gov.pl →” → ELI (RZĄD 1) w modułach; wpisy historyczne bez zmian.
+
 ## 3.79 — 2026-09-22 — F-195
 
 - ISAP-METRYKI-AKTOW — dwa wiersze Prawa budowlanego: adnotacja „art. 1 pkt 1 lit. c wchodzi 20.09.2026" zastąpiona stanem „w mocy od 20.09.2026" (art. 1 pkt 1 lit. a i c oraz pkt 3 ustawy 2025/1847 — art. 13 pkt 1; RZĄD 1 ELI). ⚠️ Kopia tego pliku w `prawny-router-v3/references/` NIEZMIENIONA — router ma regresję dyskową T12 (host 3.49, dziennik 3.52), wydanie z tej kopii groziłoby nadpisaniem nowszego stanu.

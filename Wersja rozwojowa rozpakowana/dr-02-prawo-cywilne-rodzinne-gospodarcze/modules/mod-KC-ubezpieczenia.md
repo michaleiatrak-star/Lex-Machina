@@ -24,7 +24,7 @@
 
 ## UMOWA UBEZPIECZENIA — PODSTAWY (art. 805 KC)
 
-> ⚠️ Brzmienie — weryfikuj w aktualnym KC w ISAP.
+> ⚠️ Brzmienie — weryfikuj w aktualnym KC w ELI (RZĄD 1).
 
 ```
 Obowiązki ubezpieczyciela: zapłata świadczenia (odszkodowanie / suma ubezpieczenia)
@@ -41,7 +41,7 @@ ZASADA INDEMNIZACJI: odszkodowanie nie może przekroczyć szkody (nie źródło 
 ## OC KOMUNIKACYJNE — QUICK CHECK
 
 > **Podstawa:** Ustawa o ubezpieczeniach obowiązkowych — Dz.U. 2026 poz. 783 t.j.
-> ⚠️ Weryfikuj aktualne przepisy w ISAP przed każdą sprawą.
+> ⚠️ Weryfikuj aktualne przepisy w ELI (RZĄD 1) przed każdą sprawą.
 
 ```
 Ubezpieczenie obowiązkowe: każdy posiadacz pojazdu
@@ -58,7 +58,7 @@ Szkoda osobowa (OC komunikacyjne):
 Termin na likwidację szkody:
   → 30 dni od zgłoszenia (podstawowy)
   → 90 dni gdy wyjaśnienie okoliczności niemożliwe w 30 dni
-  ⚠️ Weryfikuj aktualne terminy w ustawie o ubezpieczeniach obowiązkowych w ISAP.
+  ⚠️ Weryfikuj aktualne terminy w ustawie o ubezpieczeniach obowiązkowych w ELI (RZĄD 1).
 
 Termin przedawnienia roszczeń z OC: jak dla roszczenia wobec sprawcy (art. 819 § 3 KC) —
   3 lata od dowiedzenia się o szkodzie i sprawcy, max 10 lat od zdarzenia (art. 442¹ § 1)
@@ -158,7 +158,7 @@ REGRES UBEZPIECZYCIELA (art. 43 ustawy o ubezpieczeniach obowiązkowych):
   → Był w stanie po użyciu alkoholu/środków odurzających
   → Zbiegł z miejsca zdarzenia
   → Nie posiadał uprawnień do prowadzenia pojazdu
-  ⚠️ Weryfikuj aktualny katalog w ustawie o ubezpieczeniach obowiązkowych w ISAP.
+  ⚠️ Weryfikuj aktualny katalog w ustawie o ubezpieczeniach obowiązkowych w ELI (RZĄD 1).
 ```
 
 ---

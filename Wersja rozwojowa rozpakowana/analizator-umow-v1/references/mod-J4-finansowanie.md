@@ -7,7 +7,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KC, stóp odsetek, progów konsumenckich weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KC, stóp odsetek, progów konsumenckich weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → KC → art. 720–724 (pożyczka), art. 359 §2¹ (odsetki maksymalne — AKTUALNA wartość)
 > isap.sejm.gov.pl → ustawa o kredycie konsumenckim (**Dz.U. 2025 poz. 1362 t.j.** ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie z 26.09.2025, akt bazowy 2011/715, najnowszy t.j., zero nowelizacji po tekście jednolitym; poprzedni zapis `2023 poz. 1028` to t.j. WYGASŁY)
 > isap.sejm.gov.pl → ustawa o leasingu (w KC: art. 709¹–709¹⁸)
@@ -36,7 +36,7 @@ PRAWO: Ustawa o kredycie konsumenckim → RRSO musi być podane przed zawarciem
   → Brak RRSO → konsument może odstąpić w ciągu 14 dni
   → RRSO > maksymalne odsetki (KC art. 359 §2¹) → postanowienie nieważne
 
-WERYFIKUJ: isap.sejm.gov.pl → KC art. 359 §2¹ → AKTUALNA maksymalna stopa odsetek
+WERYFIKUJ: ELI (RZĄD 1) → KC art. 359 §2¹ → AKTUALNA maksymalna stopa odsetek
   (zmienia się z stopą referencyjną NBP!)
 ```
 

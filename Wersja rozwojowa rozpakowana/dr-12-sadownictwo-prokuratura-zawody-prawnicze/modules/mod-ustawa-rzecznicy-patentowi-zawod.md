@@ -9,7 +9,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
 - metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
 - jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
-- ⛔ ZAKAZ podawania artykułów, terminów, sygnatur z pamięci — weryfikuj w isap.sejm.gov.pl.
+- ⛔ ZAKAZ podawania artykułów, terminów, sygnatur z pamięci — weryfikuj w ELI (RZĄD 1).
 ---
 
 ## KLUCZOWE AKTY PRAWNE — ZWERYFIKOWANE 2026-06-14
@@ -61,7 +61,7 @@ Nowelizacja: ustawa z 17.10.2025 o zmianie ustawy o rzecznikach patentowych
    znaków towarowych, wzorów przemysłowych i oznaczeń geograficznych — to NIE
    jest wyłączny monopol rzeczników patentowych. Rzecznicy patentowi z kolei
    mogą występować we wszystkich sprawach własności intelektualnej (nie tylko
-   przemysłowej) od 2020 r. — weryfikuj aktualny zakres w ISAP.
+   przemysłowej) od 2020 r. — weryfikuj aktualny zakres w ELI (RZĄD 1).
 
 5. Odpowiedzialność dyscyplinarna: sądy dyscyplinarne samorządu (Polska Izba
    Rzeczników Patentowych) — weryfikuj aktualną procedurę w ustawie.

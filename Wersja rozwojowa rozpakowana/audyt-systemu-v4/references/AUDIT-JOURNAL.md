@@ -1,5 +1,438 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+## AUDYT-2026-09-23c — korekty użytkownika do 23b: warunek E-3, zasada innej drogi, skala 0–10
+
+**Wyzwalacz:** trzy korekty użytkownika po wydaniu 23b.
+
+1. **Warunek LEX/Legalis (E-3).** Sformułowanie 23b („dopiero po porażce ELI w obu kanałach”; „niedostępność ISAP nie uruchamia”) czytane było jako blokada ścieżki zastępczej. Nowy warunek BRAK-AKTU: aktu nie da się pobrać z RZĘDU 1 (ELI żadnym dostępnym kanałem ani ISAP) — awaria serwera, timeout, blokada, brak kanału → E-3/E-4 **obowiązkowo**; pominięcie ich i od razu ⚠️ = błąd. Przy awarii ELI dochodzi próba odczytu treści z ISAP. Status LEX/Legalis bez zmian: RZĄD 2A.
+2. **Blokady.** §0 DOSTEP-MASZYNOWY-API 1.9 = ZASADA INNEJ DROGI: robots.txt i blokada jednego narzędzia nie przesądzają o pobraniu pojedynczego publicznego dokumentu; kolejność: inny kanał → inny host publikatora → przeglądarka → źródło zastępcze → plik od użytkownika. Granice pozostawione: logowanie, cudze dane dostępowe, licencja/paywall, CAPTCHA, zabezpieczenia techniczne, masowe pobieranie; obowiązek wskazania kanału w śladzie.
+3. **Samoocena.** SELF-CHECK OC-1: skala 0–10 dozwolona (zakaz z 23b cofnięty); lista słabości obok oceny pozostaje.
+
+Pliki: HIERARCHIA-ZRODEL 1.11, PRAWO-HARDGATE, ISAP-AUDIT-PROTOCOL, DOSTEP-MASZYNOWY-API 1.9, router (UP-2, FALLBACK, HARD-GATES-ORZECZNICTWO, SELF-CHECK), analizator-przepisow-v2, przewodnik-prawny-v2, audyt (FAZA 3E, TRYB DZU, PAMIEC-TRWALA-ROUTER), SKILL.md DR-01/02/04/05/06. Wydanie wg ZASADY 7.
+
+## AUDYT-2026-09-23b — kanon kolejności źródeł E-1…E-5 (ELI pierwszy) + przeniesienie napraw z sesji produkcyjnej
+
+**Wyzwalacz:** polecenie użytkownika — „ELI powinno być najważniejsze, ISAP to znaczenie dla człowieka, a później LEX/Legalis/ArsLege”; baza: paczka 32 skilli (router 3.53, audyt 6.124, shared 3.79).
+
+**Przyczyna (CRIT-spójność):** trzy sprzeczne reguły kolejności — nagłówek routera i PRAWO-HARDGATE (ELI = RZĄD 1, kanał kodu) vs UP-2 routera i ZRODLA-AKTOW-FALLBACK (ISAP → LEX/Legalis/ArsLege, ELI „dopuszczalne”) vs `analizator-przepisow-v2` (brak ISAP → sejm.gov.pl → EUR-Lex → BIP, z pominięciem ELI). Skutek w sesji produkcyjnej: brzmienia z ArsLege (RZĄD 2B, 🟨) przy działającym API ELI.
+
+**Naprawa:** jeden kanon nadrzędny w `shared/HIERARCHIA-ZRODEL.md` 1.10 (E-1 ELI → E-2 ISAP jako adres dla człowieka → E-3 LEX/Legalis → E-4 ArsLege → E-5 ⚠️) + reguła interpretacyjna „ISAP” dla instrukcji; wpisy historyczne nietknięte. Ręcznie: router 3.54 (UP-2, FALLBACK, SELF-CHECK blok E), PRAWO-HARDGATE, ISAP-AUDIT-PROTOCOL 1.2, analizator-przepisow-v2 2.7, prawo-polskie-v2 6.30, audyt 6.125 (FAZA 3E, TRYB DZU). Mechanicznie: 541 instrukcji „w ISAP” (262 pliki) i 252 dyrektywy „isap.sejm.gov.pl →” (135 plików) → „ELI (RZĄD 1)”; wyłączone linie z datami, [VER], korektami i opisem blokad.
+
+**Przeniesione naprawy z sesji produkcyjnej:** DOSTEP-MASZYNOWY-API 1.8 §0 (zakaz obchodzenia blokad), HARD-GATES-ORZECZNICTWO (standard istnienia orzeczenia), KROK0A (ścieżka FOLDER/DYSK), SELF-CHECK OC (zakaz ocen liczbowych), R-3.54-a/b (DR-xx przed weryfikacją; wezwanie czytane przed routingiem), FAZA 0D bez zapisu do pamięci trwałej.
+
+**Kontrola:** 30 skilli, 355 plików (+ CHECKSUMS). Suita regresyjna: wynik identyczny z bazą (PASS STRUKTURALNY; T4/T5 ręczne jak w bazie). T12: brak rozbieżności. T21: PASS. ci_check_shared: brak zerwanych odwołań. Wydanie wg ZASADY 7: osobny pełny ZIP na każdy skill, weryfikacja rozpakowania bajtowo.
+
+## AUDYT-2026-09-23 — przegląd rejestru żywego: przeniesienie flag zamkniętych do dziennika
+
+**Wyzwalacz:** polecenie użytkownika — przenieść zamknięte flagi F do dziennika audytu. Operacja przewidziana wprost przez ZASADĘ 10 i przez nagłówek samego rejestru („zawiera wyłącznie zakres pozostający do wykonania"), a odroczona w `WARN-OTWARTE.md` zapisem przy O-11 („opis historyczny zostaje do czasu przeglądu rejestru").
+
+**Metoda.** Przegląd całego `WARN-OTWARTE.md` (665 linii) blok po bloku; klasyfikacja na zamknięte, częściowo zamknięte i otwarte. Przeniesiono wyłącznie bloki, które **same siebie deklarują jako zamknięte**. Pozycje zawężone (F-157b, F-171, F-183a, F-166→F-167, F-189) oraz częściowo zamknięte (F-157, F-158, F-160 w tabeli sekcyjnej) **zostają w rejestrze**, bo mają niewykonany zakres. Treść przeniesiono w całości, verbatim — archiwum na końcu wpisu. Nic nie zostało skasowane bez przeniesienia.
+
+**Wynik ilościowy:** `WARN-OTWARTE.md` 665 → 382 linie (−42%), 25 bloków przeniesionych, 294 linie treści zarchiwizowanej w tym wpisie.
+
+### Przeniesione pozycje
+
+| Flaga | Data zamknięcia | Czym zamknięta |
+|---|---|---|
+| F-186a | 2026-09-13c | HUDOC: ścieżka `/app/query/results` 404; działa konwersja `/app/conversion/…` → pełny tekst |
+| F-190 | 2026-09-16c | trzy luki reżimu UA uzupełnione z odczytu treści |
+| F-180 | 2026-09-10c | rdzeń HARD GATE skrócony o 30% przez wydzielenie gałęzi warunkowych |
+| O-5 | 2026-09-10c | preflight kompletności korzenia w zestawie regresyjnym |
+| O-6 | 2026-09-10c | pozycja `[STAN-ZAŁADOWANY]` w SELF-CHECK routera |
+| F-141 / F-148 / F-160 / O-4 | 2026-09-10d | przy F-148 wykryto dwa realne błędy podmiany aktu ze statusem ✅ OK |
+| O-10 | 2026-09-10r | T27 rozpoznaje normy przedwczesne (`entryIntoForce` w przyszłości) |
+| KANDYDAT 2026-09-10j | 2026-09-10j | alias wycofany; reguła „nazwa nieaktualna = sygnał, nie rozstrzygnięcie" w `ALIASY-NAZW-AKTOW.md` |
+| O-11 | 2026-09-16e | zamknięta w całości: (b) T32, (c) klasa ZASTĄPIONY_TJ w T27, (d) moduł opłaty skarbowej; następczyni O-12 pozostaje otwarta |
+| F-179 | 2026-09-10b | korekta fałszywej przesłanki profilu LEKKIEGO (czwarte wystąpienie klasy F-164) |
+| O-7 | 2026-09-10b | `.github/workflows/regresja.yml` — zestaw regresyjny jako bramka wydania |
+| O-9 / F-181 | 2026-09-10p | T27 `check_status_podstaw.py`; 61/61 miejsc naprawionych plus automat |
+| F-175 / F-176 / F-177 / F-178 | 2026-09-10 | profil LEKKI, rejestr konektorów POZIOM A, warstwa wykonawcza F-113 |
+| F-172 | 2026-09-09b | 20 pozycji T11 zweryfikowanych w RZĘDZIE 1 i wprowadzonych do mapy |
+| F-169 | 2026-09-09 | router 3.42: historia w lokalizacji kanonicznej |
+| F-170 | 2026-09-09 | T21 normalizuje prefiks `./` — 307 z 308 zgłoszeń było artefaktem |
+| F-168 | 2026-09-05e | przykłady wzorcowe zastąpione klasami wzorców strukturalnych (przeciek kazusu testowego do bramki) |
+| F-159 | 2026-09-04c | T26 `check_frontmatter_yaml.py` — bramka na przyczynę, nie na objaw |
+| F-152 | 2026-09-04 | T25 `check_domeny_allowlist.py`, 40 sond, 0 regresji |
+| F-146 / F-149 | 2026-09-01b | 202 rozjazdy sum rozliczone; trzy błędne numery Dz.U. skorygowane |
+| F-156 | 2026-09-01j | T24 `check_nowelizacje_po_tj.py` — test zamiast ręcznego oznaczania |
+| F-155 | 2026-09-01i | unia sekcji ELI i metody datowej z jawną proweniencją |
+| F-153 / F-154 | 2026-09-01g | STOP zamiast scalania w `check_wyjatek_gate_eli.py`; publikator aktów prawa miejscowego |
+| F-150 / F-151 | 2026-09-01c | cztery usterki gałęzi sieciowej; korekta zapisu ROBOTS_DISALLOWED |
+| F-147 | 2026-09-01 | pięć usterek naprawionych, przyczyna źródłowa objęta testem T22 |
+| F-OP-2026-09 | 2026-09-16 | zakres pięciu nowelizacji Ordynacji podatkowej ustalony z treści |
+
+### Ustalenia przeglądu — pięć usterek samego rejestru
+
+**1. Rejestr żywy zawierał 25 bloków zamkniętych, z czego 14 miało wprost dopisek „Do rejestru żywego nie wchodzą (ZASADA 10)".** Reguła była zapisana i jednocześnie niewykonywana przez siedem tygodni. Klasa błędu jak przy bramkach wykonywanych przez deklarację: zapis reguły nie jest jej egzekwowaniem.
+
+**2. Sprzeczność statusów O-5, O-6 i O-7.** Wszystkie trzy występowały w pliku dwa razy: jako ZAMKNIĘTE 2026-09-10b/c (linie 125–128, 256–257) i niżej jako OTWARTA z datą 2026-09-10 (linie 317–336). Wpisy „OTWARTA" są wcześniejsze i zostały zastąpione tego samego dnia, ale nigdy nie usunięte — czytający rejestr od dołu dostawał stan nieprawdziwy. Przeniesione jako nieaktualne.
+
+**3. F-156 wpisana dwukrotnie** (linie 487–496 i 498–511), dwa niezależne opisy tego samego zamknięcia z tej samej sesji 2026-09-01j, różniące się liczbami przebiegu (10 pozycji z 21 vs 251 numerów / 139 WARN — pierwsze dotyczy DR-08, drugie całego korpusu). Oba zachowane w archiwum, żeby nie zgubić żadnej z dwóch liczb.
+
+**4. Blok F-157b był wstawiony w środek tablicy sterującej** — między wiersz „zależne od środowiska" a wiersz „Odnotowane bez działania", przez co tabela rozpadała się na dwie i dwa ostatnie wiersze nie renderowały się jako tabela. Blok przesunięty pod tablicę; treść bez zmian.
+
+**5. Pięć niespójności pozostawionych jako otwarte** (rozbieżność tablicy sterującej z tabelami sekcyjnymi, pusta tabela „wykonalne sesją audytową", osierocony akapit „2 nieprawdziwe…", brak kategorii dla F-20, brak kryteriów zamknięcia przy pozycjach zależnych). Zapisane na końcu `WARN-OTWARTE.md` bez nadawania numerów F- — nadanie numeru jest decyzją dewelopera, nie sesji porządkowej.
+
+### Czego ta operacja NIE robi
+
+Przeniesienie jest operacją porządkową na rejestrze. **Nie weryfikuje, czy zamknięcia były zasadne** — żadnego z 25 bloków nie odtwarzano pomiarem. Jeżeli któreś zamknięcie oparto na pomiarze jednorazowym (klasa F-151/F-162/F-164), ta wada została przeniesiona razem z wpisem.
+
+### Propagacja
+
+| Plik | Zmiana |
+|---|---|
+| `references/WARN-OTWARTE.md` | 665 → 382 linie; nagłówek „Stan" 2026-09-22 → 2026-09-23; blok F-157b przesunięty pod tablicę; nowa sekcja niespójności |
+| `references/AUDIT-JOURNAL.md` | ten wpis wraz z archiwum treści |
+| `CHECKSUMS.sha256` | ⛔ wymaga przeliczenia po zapisie obu plików (T21) |
+| `references/CHANGELOG.md` | ⛔ wpis o przeglądzie rejestru — do dopisania przy wydaniu |
+
+⛔ **Do wykonania przed wydaniem:** `check_checksums.py` oraz T21; wpis nie jest kompletny, dopóki sumy nie zostaną przeliczone.
+
+### Archiwum — treść przeniesiona verbatim
+
+> Poniżej pełna treść 25 bloków usuniętych z `WARN-OTWARTE.md` 2026-09-23, w kolejności występowania w pliku źródłowym, z numerami linii oryginału.
+
+#### [przeniesione] F-186a — oryginał `WARN-OTWARTE.md` linie 25–29
+
+>
+> **F-186a ZAMKNIĘTA 2026-09-13c** — ścieżka HUDOC `/app/query/results` zwraca
+> 404 (zapis z v1.0 nieprawdziwy); działa `/app/conversion/docx/html/body?
+> library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
+> pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
+
+#### [przeniesione] F-190 — oryginał `WARN-OTWARTE.md` linie 48–49
+
+>
+> F-190 ZAMKNIĘTA 2026-09-16c — trzy luki uzupełnione z odczytu treści (AUDYT-2026-09-16c).
+
+#### [przeniesione] F-180 / O-5 / O-6 — oryginał `WARN-OTWARTE.md` linie 125–129
+
+> **F-180 / O-5 / O-6 ZAMKNIĘTE 2026-09-10c** — skrócenie rdzenia HARD GATE
+> o 30% przez wydzielenie gałęzi warunkowych, preflight kompletności korzenia
+> w zestawie regresyjnym, pozycja `[STAN-ZAŁADOWANY]` w SELF-CHECK routera.
+> Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10c.
+
+#### [przeniesione] F-141 / F-148 / F-160 / O-4 — oryginał `WARN-OTWARTE.md` linie 138–143
+
+> **F-141 / F-148 / F-160 / O-4 ZAMKNIĘTE 2026-09-10d.** Szczegóły:
+> AUDYT-2026-09-10d. ⛔ Przy F-148 wykryto **dwa realne błędy podmiany aktu**
+> (`ROUTING-MAP.md:770` i `dr-08/.../mod-ustawa-zarzadzanie-kryzysowe.md`) —
+> oba miały status ✅ OK i przechodziły każdą dotychczasową kontrolę.
+> Do rejestru żywego nie wchodzą (ZASADA 10).
+
+#### [przeniesione] O-10 — oryginał `WARN-OTWARTE.md` linie 144–151
+
+> **O-10 ZAMKNIĘTA 2026-09-10r.** T27 pyta też o normy **przedwczesne** —
+> numer podany jako aktualna podstawa, którego `entryIntoForce` jest
+> w przyszłości. Dwie osobne kategorie w raporcie: „w vacatio legis jako
+> podstawa" i „w wyliczeniu zmian, bez cezury". Korpus: PASS w obu klasach.
+> ⛔ Przy okazji wykryty własny błąd testu — cezura dopasowywana do wycinka
+> 150 znaków, a w wierszach map stoi dalej. Do rejestru żywego nie wchodzi
+> (ZASADA 10). Szczegóły: AUDYT-2026-09-10r.
+
+#### [przeniesione] KANDYDAT 2026-09-10j — oryginał `WARN-OTWARTE.md` linie 167–173
+
+> **KANDYDAT ZAMKNIĘTY 2026-09-10j — i okazał się czymś innym.** Przemianowanie
+> wiersza „ustawa o diagnostyce laboratoryjnej" ujawniło **dwie podmiany aktu**
+> (`2022/2162` i `2023/1517`), z czego druga powielona w ośmiu generacjach mapy.
+> Alias wycofany. ⚠️ Reguła przeglądu zapisana w `ALIASY-NAZW-AKTOW.md`:
+> adnotacja „nazwa nieaktualna" jest **sygnałem, nie rozstrzygnięciem** — zwykle
+> znaczy, że dopasowano numer do nazwy, a nie nazwę do numeru.
+
+#### [przeniesione] O-11 (całość, z historią rodzin opłaty/terminy/wartości) — oryginał `WARN-OTWARTE.md` linie 179–242
+
+> ✅✅ **O-11 ZAMKNIĘTA W CAŁOŚCI 2026-09-16e** — (b) T32, (c) klasa ZASTĄPIONY_TJ w T27, (d) moduł
+> opłaty skarbowej. Opis historyczny poniżej zostaje do czasu przeglądu rejestru (ZASADA 10).
+>
+> **O-11 (historia, 2026-09-10s) — nikt nie pyta, czy LICZBA odpowiada przepisowi.**
+> Cały aparat (T3, T11, T15, T24, T27) pyta o **akty**: czy numer istnieje, czy
+> opisuje ten akt, czy akt żyje, czy już obowiązuje. ⛔ Żaden nie pyta, czy kwota,
+> termin albo próg podany w module odpowiada **treści przepisu**.
+> Zmierzony przypadek: `orka-bas` podawał minimalne wynagrodzenie 2026 jako
+> „~4 750 zł", a rozporządzenie mówi **4806 zł** — kwota służyła do przeliczenia
+> krotności progu, więc przybliżenie propagowało się na wynik.
+> ⚠️ **Następny krok:** to NIE jest kolejny test tej samej rodziny. Weryfikacja
+> wymaga **odczytu treści aktu** i porównania z liczbą w zdaniu — zadanie innego
+> rzędu niż odczyt metadanych.
+> ✅ **Pomiar dla rodziny „opłaty sądowe" WYKONANY 2026-09-12** (AUDYT-2026-09-12):
+> 4 pliki satelickie, ~72 wiersze kwotowe, trafność poniżej 80 % — 6 kwot
+> błędnych, 4 podstawy niewłaściwe, 3 normy nieistniejące, 1 podstawa fałszywa
+> powtórzona w 3 plikach. Wszystkie naprawione; rejestr tabel satelickich
+> założony w `shared/TABELE-OPLAT.md` sekcja 7.
+> ✅ **Rodzina „opłaty" ZAMKNIĘTA CO DO ZAKRESU 2026-09-12c** (AUDYT-2026-09-12c):
+> komornicze, skarbowe, notarialne, wieczystoksięgowe, KIO i koszty procesu
+> karnego mają akt ustanawiający, jednostkę redakcyjną i datę odczytu.
+> ✅ **Rodzina „terminy procesowe" ZMIERZONA I NAPRAWIONA 2026-09-12d**
+> (AUDYT-2026-09-12d): 6 plików odsyłało do **uchylonego art. 503 KPC**, 3 podawały
+> błędny termin zarzutów od nakazu nakazowego (jest MIESIĄC, art. 480² § 2 pkt 3),
+> 3 błędne jednostki w rodzinie wykroczeniowej, 3 żywe wystąpienia nieistniejącej
+> jednostki „art. 328¹ KPC" (szósty raz w systemie).
+> ✅✅ **RODZINA „WARTOŚCI POWTARZALNE" ZAMKNIĘTA 2026-09-12e** (AUDYT-2026-09-12e):
+> odsetki cywilne i handlowe, odsetki podatkowe i ZUS, stopy składek, skala PIT —
+> wszystko z odczytu treści, z doktryną „formuła zamiast procentu". Korpus nie miał
+> tu błędów, bo **nie miał tych wartości w ogóle** — była to luka, nie usterka.
+>
+> ✅✅ **RODZINA TERMINY ZAMKNIĘTA CO DO REŻIMÓW 2026-09-12m** — jedenaście
+> kodeksów w siedmiu sesjach (12d, 12g–12m), `shared/terminy.md` 88 → 489 linii:
+> KPC, KPK, KPW, KPA, PPSA, UPEA, Ordynacja, KKW, KRO, PrUp/PrRestr, KSH.
+> ⛔ **Zamknięta co do REŻIMÓW, nie co do POZYCJI** — w każdym kodeksie
+> przerobiono terminy najczęściej używane. Otwarte: KC poza art. 118, KP poza
+> art. 264, KKS, prawo spadkowe proceduralne, terminy z ustaw szczególnych
+> (RODO, KSC, PZP).
+>
+> ⭐ **Cztery postacie usterki terminowej** (wniosek z AUDYT-2026-09-12m):
+> (1) błędna liczba przy poprawnym cytacie — ⛔ **niewykrywalna testem**, bo
+> „3 lata" i „6 miesięcy" występują legalnie wszędzie;
+> (2) błędny albo uchylony cytat — **jedyna postać, którą T28 łapie**;
+> (3) poprawna liczba, zła konstrukcja — karencja (KKW), termin końcowy (UPEA),
+> domniemanie i podstawa niewypłacalności (PrUp);
+> (4) usterka przez pominięcie — brak adresata (PrUp), brak trzech z czterech
+> reżimów (KSH), brak całego kodeksu (KKW, KPA, PPSA).
+> ⛔ Przez **cztery ostatnie sesje nie dopisano do rejestru W1 ani jednej
+> pozycji** — usterki były postaci 1, 3 i 4. To trwałe ograniczenie zapory
+> regresyjnej w tej rodzinie; usunęłoby je wyłącznie porównanie cytatu z treścią
+> aktu przez API, czyli zadanie z O-12 bez wykonalnej dziś postaci.
+>
+> ⛔⛔ **O-11 ZAMKNIĘTA 2026-09-12e.** Trzy rodziny zmierzone: opłaty, terminy,
+> wartości powtarzalne. W jej miejsce otwarta **O-12** (niżej).
+> ⛔ **ZOSTAJE z O-11 wyłącznie:** (b) decyzja, czy rejestr tabel
+> satelickich da się egzekwować testem (kandydat: wiersz kwotowy w tabeli bez
+> kolumny podstawy = WARN), czy pozostaje kontrolą ręczną; (c) ⛔ **rozszerzenie
+> T27 o wartości z ROZPORZĄDZEŃ WYKONAWCZYCH** — KROK 2C szuka nowelizacji po
+> t.j. aktu bazowego i jest ślepy na wypadek, w którym nowe rozporządzenie
+> **uchyla** poprzednie, a ustawa pozostaje nietknięta (zmierzony przypadek:
+> zryczałtowana równowartość wydatków z art. 621 § 2 KPK, 300 zł → 1000 zł od
+> 1.07.2025, `Dz.U. 2025 poz. 770`). ✅ (d) moduł opłaty skarbowej — ZAMKNIĘTE
+> 2026-09-16d (`dr-06/mod-ustawa-oplata-skarbowa`).
+
+#### [przeniesione] F-179 — oryginał `WARN-OTWARTE.md` linie 252–255
+
+> **F-179 ZAMKNIĘTA 2026-09-10b — korekta fałszywej przesłanki profilu LEKKIEGO.**
+> Czwarte wystąpienie klasy F-164. Do rejestru żywego nie wchodzi (ZASADA 10).
+> Szczegóły: AUDYT-2026-09-10b.
+
+#### [przeniesione] O-7 (zamknięcie) — oryginał `WARN-OTWARTE.md` linie 256–259
+
+> **O-7 ZAMKNIĘTA 2026-09-10b — `.github/workflows/regresja.yml`.** Zestaw
+> regresyjny jest odtąd bramką wydania. Do rejestru żywego nie wchodzi.
+
+#### [przeniesione] O-9 / F-181 — oryginał `WARN-OTWARTE.md` linie 260–268
+
+> **O-9 i F-181 ZAMKNIĘTE 2026-09-10p.** Test **T27**
+> (`check_status_podstaw.py`) pyta, czy numer Dz.U. podany w prozie jako
+> aktualna podstawa opisuje akt obowiązujący — luka, na którą T3, T11, T15 i T24
+> są ślepe z konstrukcji. F-181: 61/61 miejsc naprawionych **i** automat, który
+> pilnuje, żeby nie wróciły. ⛔ Test raportuje „DO PRZEGLĄDU", nie FAIL, bo
+> heurystyka tego badania dwukrotnie zawyżyła wynik. Do rejestru żywego nie
+> wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10p.
+
+#### [przeniesione] O-5 / O-6 / O-7 — wpisy OTWARTA nieaktualne — oryginał `WARN-OTWARTE.md` linie 317–337
+
+> **O-5 OTWARTA (2026-09-10) — zestaw regresyjny zakłada jeden korzeń.**
+> Na hoście rozdzielającym skille na dwa punkty montowania T3 i T11 (oba
+> KRYTYCZNE) dają FAIL z `KeyError: 'prawo-polskie-v2'`, nieodróżnialny
+> w wyjściu od realnego braku skilla. ⚠️ **Następny krok:** `--repo-root`
+> wielokrotny albo komunikat rozróżniający „brak skilla" od „skill poza tym
+> korzeniem".
+> **O-6 OTWARTA (2026-09-10) — stan hosta może być starszy niż repozytorium.**
+> Zewnętrzna ocena z 2026-09-09/10 prowadzona na kopii sesyjnej z routerem 3.41
+> zgłosiła jako usterkę systemu lukę, która w repozytorium (3.42) nie istniała.
+> Klasa błędu jak F-151: wniosek z jednego nośnika bez sprawdzenia drugiego.
+> ⚠️ **Następny krok:** kontrola wejściowa porównująca `version:` routera
+> wczytanego przez hosta z wersją w repozytorium, przed przyjęciem wniosku
+> o „luce w systemie". Kandydat na pozycję w SELF-CHECK albo na test T-nowy.
+> **O-7 OTWARTA (2026-09-10) — zestaw regresyjny nie jest warunkiem wydania.**
+> F-178 (router 3.42 wydany z T17 na FAIL) powstała nie dlatego, że testu
+> zabrakło, tylko dlatego, że jego wynik nie został odczytany przed wydaniem.
+> ⚠️ **Następny krok:** `run_regression_suite.py` jako GitHub Action na push
+> do kanału rozwojowego — orkiestrator jest gotowy, brakuje ~20 linii YAML.
+
+#### [przeniesione] F-175 / F-176 / F-177 / F-178 — oryginał `WARN-OTWARTE.md` linie 338–341
+
+> **F-175 / F-176 / F-177 / F-178 ZAMKNIĘTE 2026-09-10** — profil LEKKI + rejestr
+> konektorów POZIOM A, warstwa wykonawcza F-113, podbicie `raport-klienta-v1`.
+> Do rejestru żywego nie wchodzą (ZASADA 10). Szczegóły: AUDYT-2026-09-10.
+
+#### [przeniesione] F-172 — oryginał `WARN-OTWARTE.md` linie 355–366
+
+> **F-172 ZAMKNIĘTA 2026-09-09b — 20 pozycji T11 zweryfikowanych w RZĘDZIE 1
+> i wprowadzonych do mapy.** 11 numerów unikalnych sprawdzonych w API ELI:
+> 10 wierszy w tabeli głównej nowej generacji `mapa_dzu_2026-09-09.md`,
+> 1 (2026/1123, wejście 1.01.2028) w MONITORING, 3 wiersze dotychczasowe
+> przestawione na `PREV` po ujawnieniu nowszych t.j. Sygnał T15 o 2023/1285
+> potwierdzony jako fałszywy alarm parsera. T11 zielony.
+> Do rejestru żywego nie wchodzi (ZASADA 10).
+> ⚠️ **Pozostawiony ślad do przyszłej sesji:** heurystyka T15 czyta akt
+> pierwotny wymieniony obok t.j. jako deklarację t.j. — kandydat na zawężenie
+> przy najbliższej edycji tego testu, nie usterka mapy.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09b.
+
+#### [przeniesione] F-169 — oryginał `WARN-OTWARTE.md` linie 367–370
+
+> **F-169 ZAMKNIĘTA 2026-09-09 — router 3.42: historia w lokalizacji
+> kanonicznej, T17 mierzy korpus.** Do rejestru żywego nie wchodzi (ZASADA 10).
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09.
+
+#### [przeniesione] F-170 — oryginał `WARN-OTWARTE.md` linie 371–375
+
+> **F-170 ZAMKNIĘTA 2026-09-09 — T21 normalizuje prefiks `./`.** 307 z 308
+> zgłoszeń było artefaktem konwencji generowania sum; szum ukrywał jedyny realny
+> rozjazd (`AUDIT-JOURNAL.md` bez przeliczonej sumy). Do rejestru żywego nie
+> wchodzi (ZASADA 10). Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-09.
+
+#### [przeniesione] F-168 — oryginał `WARN-OTWARTE.md` linie 376–404
+
+> **F-168 ZAMKNIĘTA 2026-09-05e — przykłady wzorcowe zastąpione regułami
+> uniwersalnymi.** Wyzwalacz: użytkownik zażądał wprost, po tym jak test
+> F-166/F-167 wykazał, że `shared/MOD-CN-GATE.md` cytował kazus testowy jako
+> przykład wzorcowy, dając rozwiązanie wpisane w treść narzędzia. Przepisano
+> `shared/MOD-CN-GATE.md` (1.0→2.0), `shared/MOD-REM-GATE.md` (1.1→1.2),
+> `shared/MIEDZYNARODOWE-GATES.md` (1.0→1.1) oraz poprawiono indeks
+> `shared/SKILL.md` i własny changelog routera (3.39→3.41) — wszystkie
+> zawierały tę samą klasę przecieku. Wszystkie pary akt+artykuł+rozstrzygnięcie
+> odpowiadające fabule siedmiu kazusów testowych zastąpiono klasami wzorców
+> strukturalnych (np. „nowelizacja o ograniczonym skutku podmiotowym",
+> „przepisy-bliźniaki o różnym reżimie dla różnego miejsca/przedmiotu",
+> „definicja czasu teraźniejszego wykluczająca przedmiot, który już nie
+> istnieje", „wyłączenie definicyjne in fine") — bez wskazania, który akt,
+> artykuł i która strona sporu akurat pasuje.
+> **Rozróżnienie zastosowane:** doktryna ogólna (KWPT art. 31–33 jako metoda
+> wykładni, trzystopniowy test atrybucji państwa, zasada względnej
+> skuteczności traktatów) POZOSTAŁA nazwana wprost — to są narzędzia pracy
+> możliwe do zastosowania w dowolnej sprawie, nie odpowiedzi na pytanie
+> egzaminacyjne. Usunięto wyłącznie te fragmenty, które łączyły KONKRETNY
+> akt i artykuł z KONKRETNYM rozstrzygnięciem pasującym do jednego z siedmiu
+> kazusów w bazie.
+> ⚠️ **Test regresji nieprzeprowadzony w tej turze.** Nie sprawdzono, czy
+> wersja 2.0/1.2/1.1 nadal skutecznie wymusza wykrycie tych samych klas
+> błędów (np. mylenie reżimu odpowiedzialności bliźniaczych przepisów) przy
+> braku nazwanego przykładu — to jest właściwy, czysty test na przyszłość dla
+> F-167 (kazus kontrolny nieobecny w treści żadnej bramki).
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-05e.
+> Do rejestru żywego nie wchodzi (ZASADA 10).
+
+#### [przeniesione] F-159 — oryginał `WARN-OTWARTE.md` linie 452–465
+
+> **F-159 ZAMKNIĘTA 2026-09-04c — bramka dodana, nie tylko objaw naprawiony.**
+> `prawny-router-v3` **dwa razy pod rząd** nie ładował się na hoście przez zły
+> YAML we własnym frontmatterze: 3.37/F-146 (niesparowany cudzysłów w polu
+> `changelog`) i 3.38 (element `escalation` z `": "` w linii kontynuacji →
+> `ScannerError`, linia 50). Za każdym razem naprawiano OBJAW. ⛔ Przyczyna
+> wspólna, przeoczona dwukrotnie: **żaden skrypt w pakiecie nie używał PyYAML** —
+> T22 jawnie deklaruje „bez PyYAML" i sprawdza, czy frontmatter da się
+> WYODRĘBNIĆ, nie czy da się PRZECZYTAĆ. Ta sama klasa ślepoty co F-130, F-145
+> i F-147: bramka istnieje, ale mierzy sąsiedni fakt.
+> Dodany **T26** (`check_frontmatter_yaml.py`, selftest 10/10); przebieg na
+> 32 zainstalowanych skillach: **31 czystych**, jedyna usterka to naprawiany
+> router. Wykrywa też ciche zniekształcenie typu — `- opcjonalnie: X` parsuje
+> się bez błędu jako MAPA, nie tekst. Do rejestru żywego nie wchodzi (ZASADA 10).
+
+#### [przeniesione] F-152 — oryginał `WARN-OTWARTE.md` linie 466–478
+
+> **F-152 ZAMKNIĘTA 2026-09-04.** Deweloper wdrożył rekomendację z
+> `PORTALE-ORZECZNICZE-API.md` §6 — domeny warstwy orzeczniczej, rejestrowej
+> i zamówieniowej są na liście dozwolonych. Pomiar odtwarzalny (**T25**,
+> `scripts/check_domeny_allowlist.py`, 40 sond): **32 ✅ · 4 ⛔ · 3 ✖ · 1 ⚠️**,
+> 40/40 zgodnych ze stanem odniesienia, 0 regresji, selftest 15/15.
+> ⛔ **Ustalenie ważniejsze od samego zamknięcia:** dwie pozycje raportowały się
+> jako awaria portalu, będąc awarią NASZEGO żądania — `orzeczenia.ms.gov.pl`
+> (200 pod `curl/8.5.0`, 502 pod UA przeglądarkowym, 5/5) i SAOS (200 z JSON-em
+> vs 200 ze stroną „Przerwa techniczna", ten sam podział). Reszta zakresu
+> rozdzielona na F-157 (kształt żądania + braki resztkowe listy) i F-158
+> (źródła niepotwierdzone). Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-04.
+> Do rejestru żywego nie wchodzi (ZASADA 10).
+
+#### [przeniesione] F-146 / F-149 — oryginał `WARN-OTWARTE.md` linie 479–486
+
+> **F-146 i F-149 ZAMKNIĘTE 2026-09-01b.** F-146: 202 rozjazdy sum rozliczone
+> (93 wpisy uzupełnione, 4 wpisy bez pliku rozstrzygnięte jako martwe po
+> udokumentowanych przeniesieniach, 105 sum odświeżonych po kontroli
+> integralności 198 plików bez śladów utraty); T21 na całym repo PASS. F-149:
+> trzy błędne numery Dz.U. wykryte testem T15 na żywym ELI, skorygowane
+> i rozpropagowane przez 12 lokalizacji. Szczegóły: `AUDIT-JOURNAL.md`,
+> wpis AUDYT-2026-09-01b. Do rejestru żywego nie wchodzą (ZASADA 10).
+
+#### [przeniesione] F-156 (dwa duplikaty) — oryginał `WARN-OTWARTE.md` linie 487–512
+
+> **F-156 ZAMKNIĘTA 2026-09-01j.** Rozstrzygnięto spór „oznaczać ręcznie
+> vs test" na rzecz **testu** — nowy `scripts/check_nowelizacje_po_tj.py` (T24)
+> liczy pozycje map, których t.j. nie zawiera już ogłoszonych nowelizacji,
+> jako unię sekcji ELI i metody datowej (F-155), importując logikę z
+> `check_wyjatek_gate_eli.py`. Argument rozstrzygający zmierzono, nie założono:
+> liczby wpisane do DR-08 dzień wcześniej JUŻ się rozjechały (planowanie
+> przestrzenne 2→3, zabytki 3→5, drogi 1→2). Adnotacje liczbowe usunięto
+> z mapy DR-08 na rzecz bezliczbowego „⚠️ nowelizacje po t.j. → T24".
+> Selftest 7/7 offline z mutacją negatywną; przebieg sieciowy na DR-08:
+> 10 pozycji z 21. Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-01j.
+> **F-156 ZAMKNIĘTA 2026-09-01j.** Rozstrzygnięcie: **test, nie oznaczanie
+> ręczne.** Wpisanie liczby nowelizacji do 15 map odrzucone — liczba rośnie
+> z każdą publikacją Dz.U., więc zestarzałaby się w tygodniach i mapa
+> kłamałaby z większą pewnością siebie niż dziś, gdy nic nie twierdzi (klasa
+> błędu F-82). Wdrożono **T24** (`scripts/check_nowelizacje_po_tj.py`): liczy
+> pozycje przy każdym uruchomieniu, źródłem jest unia sekcji ELI i metody
+> datowej (F-155), logika IMPORTOWANA z `check_wyjatek_gate_eli.py`, nie
+> kopiowana. Przebieg 2026-09-01j: 251 numerów, **139 pozycji WARN**,
+> 0 problemów statusu. Selftest 9/9 offline. Test stoi poza orkiestratorem,
+> bo wymaga sieci — tak jak T15 i sieciowe warianty T20/T21.
+> ⛔ Przy pierwszym pełnym przebiegu T24 zgłosił trzy fałszywe alarmy na
+> adnotacji „(akt pierwotny: Dz.U. …)", którą sam wprowadziłem dzień wcześniej
+> przy naprawie F-155 — poprawione, z dwoma przypadkami w selfteście.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-01j.
+
+#### [przeniesione] F-155 — oryginał `WARN-OTWARTE.md` linie 513–525
+
+> **F-155 ZAMKNIĘTA 2026-09-01i.** Pierwszy zakres: sekcja „Nowelizacje po
+> tekście jednolitym" z ELI porównana z metodą datową na 19 aktach — 16 zgodnych,
+> 3 przypadki, w których sekcja jest WŁAŚCIWYM PODZBIOREM (brak czterech ustaw
+> zmieniających, wszystkich obowiązujących, w tym jednej od ośmiu miesięcy),
+> 0 rozbieżności odwrotnych. Wniosek: sekcja NIE zastępuje metody datowej —
+> `check_wyjatek_gate_eli.py` bierze unię obu źródeł z jawną proweniencją
+> (`DATA+API` / `DATA` / `API`), selftest 23/23 → 27/27 z mutacją negatywną.
+> Drugi zakres: przegląd wszystkich 16 map w żywym ELI — 251 numerów, 248
+> obowiązujących, **zero nieaktualnych t.j.**, trzy pozycje wskazujące akt bazowy
+> zamiast t.j. (dr-04 ×2, dr-10 ×1) POPRAWIONE. Pozostałość — 139 pozycji
+> z nowelizacjami po t.j. — wydzielona jako **F-156**.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-01i.
+
+#### [przeniesione] F-153 / F-154 — oryginał `WARN-OTWARTE.md` linie 526–538
+
+> **F-153 i F-154 ZAMKNIĘTE 2026-09-01g.** F-153: rozstrzygnięto spór
+> scalanie-vs-STOP na rzecz **STOP** — `check_wyjatek_gate_eli.py` przerywa
+> zamiatanie (kod 6), gdy rejestr ELI pokazuje nowelizacje ogłoszone po dacie
+> t.j., i wskazuje dwa świadome wyjścia (`--mimo-nowelizacji` albo zamiatanie
+> tekstu aktu zmieniającego). Scalanie odrzucono: wytworzyłoby brzmienie,
+> którego żaden publikator nie ogłasza. Trzy przypadki selftestu z mutacją
+> negatywną; zweryfikowane na żywym ELI (ustawa o PIP — 6 nowelizacji po t.j.,
+> STOP; KC — brak, przebieg bez zmian). F-154: publikator aktów prawa
+> miejscowego wpięty w DR-08 i DR-09, ścieżka odczytu opisana jako B-L
+> w `PRAWO-HARDGATE.md`. Przy okazji naprawiono błąd adresu: DR-08 w sześciu
+> plikach wskazywał `dzienniki.gov.pl` zamiast `dziennikiurzedowe.gov.pl`.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-01g.
+
+#### [przeniesione] F-150 / F-151 — oryginał `WARN-OTWARTE.md` linie 539–548
+
+> **F-150 i F-151 ZAMKNIĘTE 2026-09-01c** w sesji, w której powstały. F-150:
+> cztery usterki gałęzi sieciowej `check_wyjatek_gate_eli.py` (odczyt tekstu
+> ogłoszonego zamiast t.j., mylący komunikat przy `textHTML: false`, parser S3
+> niezgodny z kształtem żywego ELI, fałszywe nagłówki z prozy) naprawione
+> i pokryte pięcioma nowymi przypadkami selftestu (17/17 PASS) oraz przebiegiem
+> na żywym API. F-151: rozjazd między zapisem „ROBOTS_DISALLOWED" a stanem
+> faktycznym skorygowany w `PRAWO-HARDGATE.md` i `HIERARCHIA-ZRODEL.md`.
+> Szczegóły: `AUDIT-JOURNAL.md`, wpis AUDYT-2026-09-01c. Do rejestru żywego
+> nie wchodzą (ZASADA 10).
+
+#### [przeniesione] F-147 — oryginał `WARN-OTWARTE.md` linie 549–553
+
+> **F-147 ZAMKNIĘTA 2026-09-01** w sesji, w której powstała — pięć usterek
+> naprawionych i zweryfikowanych ponownym przebiegiem, przyczyna źródłowa objęta
+> nowym testem T22 z mutacją negatywną. Szczegóły: `AUDIT-JOURNAL.md`,
+> wpis AUDYT-2026-09-01. Do rejestru żywego nie wchodzi (ZASADA 10 — tylko otwarte).
+
+#### [przeniesione] F-OP-2026-09 — oryginał `WARN-OTWARTE.md` linie 663–665
+
+---
+> F-OP-2026-09 ZAMKNIĘTA 2026-09-16 — zakres pięciu nowelizacji Op ustalony z treści; opis: AUDIT-JOURNAL, AUDYT-2026-09-16b.
+
 ## AUDYT-2026-09-14b — CBOSA retrieval/snapshot: host post-check i zakres treści
 
 **Wyzwalacz:** użytkownik wskazał praktyczną wartość snapshotów CBOSA przy dużym korpusie orzeczeń i polecił wprowadzić korekty, o ile pomiar to potwierdza.

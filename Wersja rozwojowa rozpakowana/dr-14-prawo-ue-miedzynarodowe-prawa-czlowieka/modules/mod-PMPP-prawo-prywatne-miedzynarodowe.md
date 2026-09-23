@@ -119,7 +119,7 @@ Wynik pracy modułu powinien mieć strukturę: stan faktyczny → kwalifikacja p
 
 ```
 Ustawa Prawo prywatne międzynarodowe:
-  Dz.U. 2023 poz. 503 t.j. — weryfikuj w ISAP
+  Dz.U. 2023 poz. 503 t.j. — weryfikuj w ELI (RZĄD 1)
   ✅ VER: isap.sejm.gov.pl 2026-06-07
 
 Rozporządzenia UE kolizyjne — eur-lex.europa.eu:

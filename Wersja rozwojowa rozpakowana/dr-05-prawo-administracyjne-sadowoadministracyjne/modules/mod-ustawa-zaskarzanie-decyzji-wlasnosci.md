@@ -61,7 +61,7 @@ PO 30 LATACH od doręczenia decyzji:
   → Postępowania wszczęte po 30 latach umarza się z mocy prawa
   → Możliwe wyłącznie: odszkodowanie z KC
 
-⚠️ Weryfikuj aktualne brzmienie art. 156 §2 i art. 158 §3 KPA w ISAP.
+⚠️ Weryfikuj aktualne brzmienie art. 156 §2 i art. 158 §3 KPA w ELI (RZĄD 1).
 ```
 
 ### Ustawa reprywatyzacyjna (nieruchomości warszawskie)

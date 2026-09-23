@@ -97,7 +97,7 @@ towarów na cele osobiste, świadczenia dla pracowników)
 
 ✅ [VER: lexlege.pl — pełny tekst art. 7 i art. 8 ustawy o VAT,
    Dz.U. 2025 poz. 775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -272,7 +272,7 @@ ok. 220 linii, miejsce dostawy TOWARÓW — zero)
 ✅ [VER: art. 22 ust. 1 pkt 2–5 oraz ust. 3–4 — przepisy.gofin.pl;
    art. 22 ust. 2, 2a, 2b, 2c, 2d — zgodnie w 4 niezależnych źródłach
    (gofin.pl, pit.pl, infor.pl, ksiegowego.pl), 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności dosłowne brzmienie
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — w szczególności dosłowne brzmienie
    art. 22 ust. 1 pkt 1 oraz art. 135–138]
 ```
 
@@ -324,7 +324,7 @@ istnienia DR-08)
 
 ✅ [VER: lexlege.pl oraz przepisy.gofin.pl — zgodne, dosłowne brzmienie
    art. 15 ust. 6, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -407,7 +407,7 @@ istnienia DR-08)
     ⚠️⚠️ [TERMIN KOŃCOWY WYMAGA SPRAWDZENIA PRZY KAŻDEJ SPRAWIE — to
        przepis epizodyczny, przedłużany kolejnymi nowelizacjami;
        web_search: „czasowe odwrotne obciążenie gaz energia uprawnienia
-       do emisji przedłużone termin" + weryfikacja w ISAP]
+       do emisji przedłużone termin" + weryfikacja w ELI (RZĄD 1)]
 
 □ POWIĄZANIA: sekcja 4 (split payment, zał. 15) | sekcja o WNT/imporcie
   usług | sekcja o miejscu świadczenia usług (FE) | sekcja 4o niżej
@@ -417,7 +417,7 @@ istnienia DR-08)
    uchylenie art. 17 ust. 1 pkt 7-8 i zał. 11/14 + likwidacja VAT-27 —
    poradnikprzedsiebiorcy.pl; art. 145e-145i — przepisy.gofin.pl;
    przedłużenie do 31.12.2026 — gov.pl/web/finanse (Rząd 1). 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -546,7 +546,7 @@ i korekty w kontekście art. 29a, bez podstaw fakturowania jako takich
    art. 106k ust. 1-3 — zgodnie w 4 źródłach (przepisy.gofin.pl,
    ksiegowosc.infor.pl, sip.lex.pl, poradnikprzedsiebiorcy.pl),
    Dz.U. 2025 poz. 775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP — część źródeł to wersje archiwalne
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — część źródeł to wersje archiwalne
    artykułów; przy powoływaniu w piśmie sprawdź brzmienie NA DATĘ
    CZYNNOŚCI, zwłaszcza dla przepisów zmienianych pakietem KSeF]
 ```
@@ -617,7 +617,7 @@ RYCZAŁTOWY (art. 115–118) — dodane 2026-08-12 (iteracja III)
   □ ⭐ art. 116 ust. 3a — faktura VAT RR MOŻE, ZA ZGODĄ DOSTAWCY, być
     wystawiana, podpisywana i przesyłana W FORMIE ELEKTRONICZNEJ
   □ art. 117 — obowiązki rolnika ryczałtowego ⚠️ [treść NIEZWERYFIKOWANA
-    — sprawdź w ISAP]
+    — sprawdź w ELI (RZĄD 1)]
   □ art. 118 — przepisy art. 115, art. 116 ust. 1–3a i 5–10 oraz art. 117
     stosuje się ODPOWIEDNIO do wykonywania przez rolnika ryczałtowego
     USŁUG ROLNICZYCH na rzecz podatników rozliczających podatek

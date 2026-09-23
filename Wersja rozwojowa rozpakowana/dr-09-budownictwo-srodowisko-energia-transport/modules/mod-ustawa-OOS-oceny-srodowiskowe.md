@@ -7,7 +7,7 @@ udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na 
   ✅ VER: isap.sejm.gov.pl [2026-05-31]
 - Dyrektywa EIA: 2011/92/UE (zmieniona 2014/52/UE)
 
-**Weryfikacja ISAP i EUR-Lex przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) i EUR-Lex przed każdym cytowaniem.**
 
 ## Rodzaje ocen
 
@@ -77,4 +77,4 @@ web_search: "decyzja środowiskowa OOŚ DŚU procedura 2025 2026"
 | Orzecznictwo NSA (środowiskowe) | `orzeczenia-sadowe-v2` |
 
 *Weryfikacja: 2026-06-05 | UOOŚiS: Dz.U. 2026 poz. 670 t.j.*
-*Zakaz cytowania przepisów z pamięci — weryfikuj w isap.sejm.gov.pl*
+*Zakaz cytowania przepisów z pamięci — weryfikuj w ELI (RZĄD 1)*

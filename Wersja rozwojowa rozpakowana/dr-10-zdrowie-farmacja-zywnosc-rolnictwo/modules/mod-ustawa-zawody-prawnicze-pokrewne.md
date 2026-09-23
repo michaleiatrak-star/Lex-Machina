@@ -10,7 +10,7 @@
 > były pokrywane przez ten plik. Nazwa pliku skorygowana na
 > `mod-ustawa-zawody-prawnicze-pokrewne.md`, zgodnie z rzeczywistą treścią.
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 > ℹ️ AKTUALIZACJA 2026-06-14/15: dla RZECZNIKÓW PATENTOWYCH, DORADCÓW
 > PODATKOWYCH i SYNDYKÓW/DORADCÓW RESTRUKTURYZACYJNYCH istnieją teraz

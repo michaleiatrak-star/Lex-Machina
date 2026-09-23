@@ -3,7 +3,7 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie Marszałka Sejmu z 27.05.2026, publ. 16.06.2026) | Progi UE 2026–2027: M.P. 2025 poz. 1247 / UZP | Wpisy KIO: Dz.U. 2020 poz. 2437, § 2; art. 517–519 PZP — re-ver 2026-08-28
 **Data weryfikacji online:** 2026-08-15 (FAZA 3E — audyt-systemu-v4, korekta numeru t.j. + treść art. 226 pkt 17/19)
-**Zasada:** Każde brzmienie przepisu i kwota wpisu → weryfikuj w ISAP / uzp.gov.pl przed powołaniem
+**Zasada:** Każde brzmienie przepisu i kwota wpisu → weryfikuj w ELI (RZĄD 1) / uzp.gov.pl przed powołaniem
 
 ---
 
@@ -272,7 +272,7 @@ OBRONA PRZY ODRZUCENIU:
 ```
 ZAKRES (art. 513 PZP):
   Powyżej progów UE: każda czynność lub zaniechanie niezgodne z PZP
-  Poniżej progów UE: ograniczony katalog — weryfikuj aktualny art. 513 pkt 2 w ISAP
+  Poniżej progów UE: ograniczony katalog — weryfikuj aktualny art. 513 pkt 2 w ELI (RZĄD 1)
 
 OBLIGATORYJNA TREŚĆ ODWOŁANIA (art. 516 PZP):
   □ Oznaczenie zamawiającego i postępowania (nr ogłoszenia)

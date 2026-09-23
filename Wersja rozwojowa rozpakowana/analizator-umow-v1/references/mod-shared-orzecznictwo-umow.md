@@ -48,7 +48,7 @@ Katalog triggerów (wykryj słowo kluczowe w klauzuli):
 
 ## ORP.2 KARA UMOWNA
 
-> Weryfikuj przed powołaniem: isap.sejm.gov.pl → KC → art. 484 + art. 483
+> Weryfikuj przed powołaniem: ELI (RZĄD 1) → KC → art. 484 + art. 483
 
 ### Linia dominująca SN
 ```
@@ -92,7 +92,7 @@ AUTOMATYCZNY KALKULATOR EKONOMICZNY:
 
 ## ORP.3 ODPOWIEDZIALNOŚĆ UMOWNA
 
-> Weryfikuj: isap.sejm.gov.pl → KC → art. 471, 473, 474, 484, 361
+> Weryfikuj: ELI (RZĄD 1) → KC → art. 471, 473, 474, 484, 361
 
 ```
 LINIA SN:
@@ -136,7 +136,7 @@ RYZYKA:
 
 ## ORP.5 ZAKAZ KONKURENCJI
 
-> Weryfikuj: isap.sejm.gov.pl → KP art. 101¹–101⁴ (pracowniczy) + KC art. 353¹ (B2B)
+> Weryfikuj: ELI (RZĄD 1) → KP art. 101¹–101⁴ (pracowniczy) + KC art. 353¹ (B2B)
 
 ```
 LINIA SN — zakaz konkurencji B2B:
@@ -162,7 +162,7 @@ RYZYKA:
 
 ## ORP.6 SIŁA WYŻSZA I HARDSHIP
 
-> Weryfikuj: isap.sejm.gov.pl → KC → art. 471 + art. 357¹
+> Weryfikuj: ELI (RZĄD 1) → KC → art. 471 + art. 357¹
 
 ```
 LINIA SN — siła wyższa:
@@ -214,7 +214,7 @@ ORP.8 WYNAGRODZENIE/CENA:
 ORP.9 PRAWA AUTORSKIE/IP:
   Ryzyka: przeniesienie praw na nieznane pola eksploatacji → nieważne (art. 41 §4 PrAut)
   Wynagrodzenie oddzielne dla każdego pola → art. 45 PrAut
-  Weryfikuj: isap.sejm.gov.pl → PrAut → art. 41–45
+  Weryfikuj: ELI (RZĄD 1) → PrAut → art. 41–45
 
 ORP.10 RODO/DPA:
   Ryzyka: brak DPA mimo powierzenia przetwarzania (art. 28 RODO) → naruszenie
@@ -224,12 +224,12 @@ ORP.10 RODO/DPA:
 ORP.11 GWARANCJA/RĘKOJMIA:
   Wyłączenie rękojmi B2C → nieważne (art. 558 §2 KC — weryfikuj)
   Skrócenie terminów rękojmi B2C → nieważne
-  Weryfikuj: isap.sejm.gov.pl → KC → art. 556–576
+  Weryfikuj: ELI (RZĄD 1) → KC → art. 556–576
 
 ORP.12 ZABEZPIECZENIA:
   Weksel In blanco: wymogi formalne, zakaz weksla w obrocie konsumenckim
   Poręczenie: art. 876 KC — akcesoryjność
-  Weryfikuj: isap.sejm.gov.pl → KC + Prawo wekslowe
+  Weryfikuj: ELI (RZĄD 1) → KC + Prawo wekslowe
 
 ORP.13 KLAUZULE ABUZYWNE:
   → Rozwinięcie pełne w mod-shared-abusive-clauses.md

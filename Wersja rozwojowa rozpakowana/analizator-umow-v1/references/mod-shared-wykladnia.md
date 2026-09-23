@@ -5,8 +5,8 @@
 > użytkownik pyta "co to znaczy", "jak to rozumieć", "czy ta klauzula dotyczy X";
 > przygotowujesz argumentację interpretacyjną do sporu lub negocjacji.
 
-> ⛔ HARD GATE — przed przywołaniem art. 65 KC lub orzeczeń SN weryfikuj w ISAP/sn.pl.
-> Weryfikacja: isap.sejm.gov.pl → Kodeks cywilny → art. 65
+> ⛔ HARD GATE — przed przywołaniem art. 65 KC lub orzeczeń SN weryfikuj w ELI (RZĄD 1)/sn.pl.
+> Weryfikacja: ELI (RZĄD 1) → Kodeks cywilny → art. 65
 > Orzecznictwo SN: sn.pl → fraza "wykładnia umowy art. 65"
 
 ---
@@ -14,7 +14,7 @@
 ## W.1 PODSTAWA PRAWNA — ART. 65 KC
 
 ```
-Weryfikuj aktualne brzmienie: isap.sejm.gov.pl → KC → art. 65
+Weryfikuj aktualne brzmienie: ELI (RZĄD 1) → KC → art. 65
 
 Art. 65 §1 KC:
   "Oświadczenie woli należy tak tłumaczyć, jak tego wymagają
@@ -95,7 +95,7 @@ ZASADA: "W razie wątpliwości — na niekorzyść tego, kto klauzulę sformuło
 PODSTAWA PRAWNA:
   B2C: art. 385 §2 KC — wprost: "niejednoznaczne postanowienia wzorca
        tłumaczy się na korzyść konsumenta"
-  Weryfikuj: isap.sejm.gov.pl → KC → art. 385 §2
+  Weryfikuj: ELI (RZĄD 1) → KC → art. 385 §2
   
   B2B: wynika z art. 65 KC przez orzecznictwo SN
   Weryfikuj: sn.pl → "in dubio contra proferentem" lub "wykładnia umowy 
@@ -255,5 +255,5 @@ REKOMENDACJA:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: art. 65 KC — weryfikuj: isap.sejm.gov.pl → KC → art. 65*
+*Podstawa prawna: art. 65 KC — weryfikuj: ELI (RZĄD 1) → KC → art. 65*
 *Orzecznictwo SN: sn.pl → "kombinowana metoda wykładni" · "in dubio contra proferentem"*

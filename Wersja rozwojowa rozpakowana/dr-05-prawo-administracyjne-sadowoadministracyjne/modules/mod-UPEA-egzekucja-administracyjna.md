@@ -121,7 +121,7 @@ Skarga na czynność egzekucyjną:           7 dni od doręczenia zobowiązanemu
                                           stanowiącego podstawę czynności; do organu egzekucyjnego,
                                           który jej dokonał (art. 54 § 3 UPEA)
 Skarga do WSA na postanowienie ostateczne: 30 dni od doręczenia
-⚠️ Terminy ZAWITE — weryfikuj aktualne brzmienie UPEA w ISAP.
+⚠️ Terminy ZAWITE — weryfikuj aktualne brzmienie UPEA w ELI (RZĄD 1).
 ```
 
 ### Podstawy zarzutu (art. 33 § 2 UPEA — katalog ZAMKNIĘTY, ✅ [VER] RZĄD 1 2026-09-16)
@@ -154,7 +154,7 @@ UWAGA: Zarzuty NIE służą do ponownego badania zasadności decyzji źródłowe
 
 | Środek | Organ egzekucyjny | Uwagi |
 |---|---|---|
-| Zajęcie wynagrodzenia za pracę | Naczelnik US | Kwoty wolne: weryfikuj UPEA w ISAP |
+| Zajęcie wynagrodzenia za pracę | Naczelnik US | Kwoty wolne: weryfikuj UPEA w ELI (RZĄD 1) |
 | Zajęcie rachunku bankowego (art. 80 § 1–2 UPEA) | Naczelnik US | Kwota wolna — NIE w UPEA: art. 54 ust. 1 Prawa bankowego (`Dz.U. 2026 poz. 38`) — 75 % minimalnego wynagrodzenia miesięcznie (formuła, kwota zmienia się co roku — `shared/oplaty/04-wartosci-powtarzalne-kotwice.md` 4f) |
 | Zajęcie wierzytelności pieniężnej | Naczelnik US | |
 | Zajęcie ruchomości | Naczelnik US | Spis i oszacowanie |
@@ -166,7 +166,7 @@ UWAGA: Zarzuty NIE służą do ponownego badania zasadności decyzji źródłowe
 ```
 Grzywna w celu przymuszenia:
   → Nakładana wielokrotnie do wykonania obowiązku
-  → Max łączna kwota: weryfikuj art. 121 UPEA w ISAP
+  → Max łączna kwota: weryfikuj art. 121 UPEA w ELI (RZĄD 1)
   
 Wykonanie zastępcze:
   → Organ wykonuje obowiązek na koszt zobowiązanego
@@ -183,13 +183,13 @@ Przymus bezpośredni:
 ## 5. ZAWIESZENIE I UMORZENIE EGZEKUCJI
 
 ```
-ZAWIESZENIE (art. 56 UPEA — weryfikuj w ISAP):
+ZAWIESZENIE (art. 56 UPEA — weryfikuj w ELI (RZĄD 1)):
   → Na wniosek wierzyciela
   → Śmierć zobowiązanego (postępowanie spadkowe)
   → Wniesienie przez zobowiązanego środka zaskarżenia na decyzję źródłową
     (tylko gdy środek ma skutek zawieszający)
 
-UMORZENIE (art. 59 UPEA — weryfikuj w ISAP):
+UMORZENIE (art. 59 UPEA — weryfikuj w ELI (RZĄD 1)):
   □ Obowiązek wygasł (spłata, przedawnienie, uchylenie decyzji)
   □ Zobowiązany nie posiada majątku i brak perspektyw uzyskania
   □ Egzekucja jest niedopuszczalna
@@ -200,7 +200,7 @@ UMORZENIE (art. 59 UPEA — weryfikuj w ISAP):
 
 ## 6. KOSZTY EGZEKUCYJNE
 
-> ⚠️ Stawki opłat egzekucyjnych — weryfikuj aktualne przepisy UPEA i rozporządzeń w ISAP.
+> ⚠️ Stawki opłat egzekucyjnych — weryfikuj aktualne przepisy UPEA i rozporządzeń w ELI (RZĄD 1).
 
 ```
 Koszty egzekucyjne obciążają zobowiązanego:

@@ -52,7 +52,7 @@ SKALA RYZYKA:
 
 ## AB.2 PODSTAWA PL — KC ART. 385¹–385³
 
-> Weryfikuj: isap.sejm.gov.pl → KC Dz.U. 2026 poz. 795 t.j. ze zm.
+> Weryfikuj: ELI (RZĄD 1) → KC Dz.U. 2026 poz. 795 t.j. ze zm.
 
 ### Definicja klauzuli abuzywnej (art. 385¹ §1 KC)
 ```
@@ -68,7 +68,7 @@ WYJĄTKI od oceny abuzywności (art. 385¹ §1 KC):
      gdy sposób ustalania ceny jest niejasny (klauzule indeksacyjne — linia frankowa)
 
 SZARA LISTA (art. 385³ KC — 23 typy klauzul domniemanie abuzywnych):
-  Weryfikuj aktualną listę w isap.sejm.gov.pl → KC → art. 385³
+  Weryfikuj aktualną listę w ELI (RZĄD 1) → KC → art. 385³
 
 Najczęstsze w SaaS/marketplace/e-commerce:
   pkt 2  → prawo zmiany regulaminu bez prawa wypowiedzenia
@@ -111,7 +111,7 @@ Kluczowe wyroki TSUE — weryfikuj na curia.europa.eu:
 Dyrektywa 2019/2161 z 27.11.2019 r.
   → eur-lex.europa.eu → CELEX:32019L2161
   → Implementacja PL: ustawa z 1.12.2022, wejście w życie 01.01.2023
-  → Dz.U. 2022 poz. 2581 (weryfikuj aktualny stan w isap.sejm.gov.pl)
+  → Dz.U. 2022 poz. 2581 (weryfikuj aktualny stan w ELI (RZĄD 1))
 
 NOWE OBOWIĄZKI INFORMACYJNE (klauzule ryzyka):
   □ Obowiązek podania NAJNIŻSZEJ CENY z ostatnich 30 dni przed obniżką
@@ -284,7 +284,7 @@ Umowy starsze: od 12.09.2027 (gdy zawarte na czas nieokreślony lub po 11.01.203
 ```
 Dyrektywa 2019/770 (treść cyfrowa i usługi cyfrowe) + 2019/771 (towary):
   → Implementacja PL: ustawa z 4.11.2022, wejście w życie 01.01.2023
-  → Dz.U. 2022 poz. 2581 (weryfikuj: isap.sejm.gov.pl)
+  → Dz.U. 2022 poz. 2581 (weryfikuj: ELI (RZĄD 1))
 
 KLAUZULE RYZYKA (treść cyfrowa / SaaS B2C):
   ⚠️ Brak informacji o aktualizacjach oprogramowania i ich czasie trwania

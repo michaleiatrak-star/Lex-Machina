@@ -48,8 +48,8 @@ o przestępstwie, zakaz zbliżania (środek zapobiegawczy i nakazowy).
 
 ## KLUCZOWE AKTY PRAWNE
 
-- KK art. 190a → isap.sejm.gov.pl (**Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872** t.j.) — **weryfikuj online**
-- KPK → isap.sejm.gov.pl (**Dz.U. 2026 poz. 490; sprawdź Dz.U. 2026 poz. 638 i przepisy przejściowe** t.j.) — **weryfikuj online**
+- KK art. 190a → ELI (RZĄD 1) (**Dz.U. 2025 poz. 383; sprawdź zmiany Dz.U. 2025 poz. 1818 i 1872** t.j.) — **weryfikuj online**
+- KPK → ELI (RZĄD 1) (**Dz.U. 2026 poz. 490; sprawdź Dz.U. 2026 poz. 638 i przepisy przejściowe** t.j.) — **weryfikuj online**
 
 ---
 

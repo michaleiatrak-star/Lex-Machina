@@ -231,7 +231,7 @@ przywrócenia stanu poprzedniego.
 **Art. 161 — bezprawny wjazd pojazdem do cudzego lasu:** kto bez
 uprawnienia/zgody właściciela wjeżdża pojazdem silnikowym, zaprzęgowym
 lub motorowerem do nienależącego mu lasu w miejscu niedozwolonym —
-sprawdź pełne brzmienie sankcji na ISAP przy konkretnej sprawie. ⭐
+sprawdź pełne brzmienie sankcji w ELI (RZĄD 1) przy konkretnej sprawie. ⭐
 Przepis SZCZEGÓLNY wobec art. 151, gdy naruszenie polega na wjeździe
 POJAZDEM — stosuj 161 zamiast 151 w takim przypadku.
 

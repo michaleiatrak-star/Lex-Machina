@@ -61,7 +61,7 @@ KIEDY ODRADZAĆ (ograniczenie):
   ⛔ skuteczność maleje po eskalacji sporu (silna narracja "walki",
     zaangażowanie licznych świadków po obu stronach) — proponuj wcześnie
 
-WNIOSEK PROCESOWY (wzór do pisma — weryfikuj art. w ISAP przed użyciem):
+WNIOSEK PROCESOWY (wzór do pisma — weryfikuj art. w ELI (RZĄD 1) przed użyciem):
   "Wnoszę o skierowanie stron do mediacji na podstawie art. 436 §1 k.p.c.
    celem [pojednania małżonków / uregulowania kwestii władzy rodzicielskiej,
    kontaktów i spraw majątkowych — art. 445² k.p.c.], wskazując, że istnieją
@@ -134,7 +134,7 @@ S4 — INTEGRACJA Z FAZĄ 0 (SW-DETECT) shared/MOD-ATAK-NA-SWIADKA.md:
 
 ## OPŁATY SĄDOWE
 
-> ⚠️ Weryfikuj aktualne opłaty w KSCU (Dz.U. 2025 poz. 1228) w ISAP.
+> ⚠️ Weryfikuj aktualne opłaty w KSCU (Dz.U. 2025 poz. 1228) w ELI (RZĄD 1).
 
 ```
 Pozew o rozwód: 600 zł

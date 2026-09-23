@@ -1,7 +1,7 @@
 # mod-ustawa-skargi-przewleklosc-dostep-sadu
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o skardze na przewlekłość — weryfikuj aktualny t.j. w ISAP | PPSA — Dz.U. 2026 poz. 143 | KPA — Dz.U. 2025 poz. 1691
+**Źródło weryfikacji:** Ustawa o skardze na przewlekłość — weryfikuj aktualny t.j. w ELI (RZĄD 1) | PPSA — Dz.U. 2026 poz. 143 | KPA — Dz.U. 2025 poz. 1691
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -17,7 +17,7 @@ Skarga na przewlekłość postępowania administracyjnego (art. 36–38 KPA + sk
 | Akt | Dz.U. |
 |---|---|
 | KPA art. 36–38 (bezczynność i przewlekłość organu) | Dz.U. 2025 poz. 1691 t.j. |
-| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | weryfikuj aktualny t.j. w ISAP |
+| Ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | PPSA art. 3 §2 pkt 8 (skarga do WSA na bezczynność) | Dz.U. 2026 poz. 143 t.j. |
 
 ---
@@ -71,14 +71,14 @@ KROK 2: Skarga do WSA na bezczynność / przewlekłość (art. 3 §2 pkt 8 PPSA)
 ### Skarga na przewlekłość postępowania sądowego
 
 ```
-WARUNKI (ustawa o skardze na przewlekłość — weryfikuj w ISAP):
+WARUNKI (ustawa o skardze na przewlekłość — weryfikuj w ELI (RZĄD 1)):
   □ Postępowanie sądowe (cywilne, karne, sądowoadministracyjne)
   □ Nieuzasadniona zwłoka w działaniu sądu
 
 Właściwy sąd: sąd przełożony nad sądem prowadzącym sprawę
-Opłata: weryfikuj aktualną kwotę w ustawie w ISAP
+Opłata: weryfikuj aktualną kwotę w ustawie w ELI (RZĄD 1)
 Żądania: stwierdzenie przewlekłości + zalecenie + suma pieniężna (100–20 000 zł)
-  Minimalna suma: 2 000 zł za każdy rok przewlekłości — weryfikuj w ISAP
+  Minimalna suma: 2 000 zł za każdy rok przewlekłości — weryfikuj w ELI (RZĄD 1)
 Ponowna skarga: nie wcześniej niż po 12 miesiącach od poprzedniej
 ```
 
@@ -117,7 +117,7 @@ Ponowna skarga: nie wcześniej niż po 12 miesiącach od poprzedniej
 ```
 Stała opłata: 200 zł (art. 17 ustawy — Dz.U. 2023 poz. 1725)
   → Każda ze stron wnoszących skargę uiszcza osobno
-⚠️ Weryfikuj aktualne brzmienie art. 17 w ISAP przed złożeniem skargi.
+⚠️ Weryfikuj aktualne brzmienie art. 17 w ELI (RZĄD 1) przed złożeniem skargi.
 ```
 
 ### Skarga na przewlekłość — tryb złożenia
@@ -125,14 +125,14 @@ Stała opłata: 200 zł (art. 17 ustawy — Dz.U. 2023 poz. 1725)
 ```
 Skargę składa się do sądu, przed którym toczy się postępowanie
   (art. 5 ust. 2 ustawy — sąd przekazuje do sądu przełożonego)
-  ⚠️ Weryfikuj aktualny art. 5 w ISAP
+  ⚠️ Weryfikuj aktualny art. 5 w ELI (RZĄD 1)
 ```
 
 ### Dostępność postępowania dla osób z niepełnosprawnościami
 
 ```
 Prawo do sądu (art. 45 Konstytucji) obejmuje dostępność proceduralną:
-  → Tłumacz migowy na rozprawie (art. 5 KPC — weryfikuj w ISAP)
+  → Tłumacz migowy na rozprawie (art. 5 KPC — weryfikuj w ELI (RZĄD 1))
   → Przesłuchanie w miejscu zamieszkania
   → Elektroniczne składanie pism (e-sąd, portal informacyjny)
   → WCAG na stronach sądów: ustawa o dostępności (Dz.U. 2022 poz. 2240)

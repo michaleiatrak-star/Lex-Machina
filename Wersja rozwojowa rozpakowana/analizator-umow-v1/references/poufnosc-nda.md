@@ -13,7 +13,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KC/UZNK dotyczących poufności weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KC/UZNK dotyczących poufności weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → Kodeks cywilny → art. 353¹ (swoboda umów), art. 483–484 (kary umowne)
 > isap.sejm.gov.pl → ustawa o zwalczaniu nieuczciwej konkurencji → art. 11 (tajemnica przedsiębiorstwa)
 > Orzecznictwo dot. tajemnicy przedsiębiorstwa i poufności: sn.pl — nie cytuj z pamięci.
@@ -344,7 +344,7 @@ WYNIK OGÓLNY:
 *Dla kalkulacji ekonomicznej kar/limitów → references/mod-shared-economic.md (OEK.3, OEK.3a, OEK.5, OEK.5a)*
 *Dla RODO/DPA przy danych osobowych → references/mod-shared-rodo.md (Moduł RODO)*
 *Dla routingu typów umów → references/mod-J0-routing.md (Moduł J — nawigacja)*
-*Prawo weryfikuj w ISAP · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
+*Prawo weryfikuj w ELI (RZĄD 1) · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
 
 ---
 

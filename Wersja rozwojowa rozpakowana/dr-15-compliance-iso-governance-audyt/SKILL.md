@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.14"
+version: "3.15"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, klauzuli normy, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj rozporządzenia UE w `eur-lex.europa.eu`
 3. Zweryfikuj status normy ISO w `iso.org` lub PKN (pkn.pl)
 4. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
@@ -54,8 +54,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -181,7 +181,7 @@ view dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md
 - Prawo bankowe / finanse sektorowe → `dr-06`
 - Zarządzanie kryzysowe / bezpieczeństwo państwa → `dr-13`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | eur-lex.europa.eu | iso.org | pkn.pl | orzeczenia.ms.gov.pl | nsa.gov.pl | sn.pl
+- Weryfikacja: ELI (RZĄD 1) | eur-lex.europa.eu | iso.org | pkn.pl | orzeczenia.ms.gov.pl | nsa.gov.pl | sn.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

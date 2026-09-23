@@ -25,7 +25,7 @@ https://www.nbp.pl/home.aspx?f=/dzienne/stopy_procentowe.htm
 - Odsetki ustawowe za opóźnienie w transakcjach handlowych = stopa ref. NBP + 10 pp
 
 ### Opłaty sądowe (KSCU)
-Weryfikuj aktualną wersję KSCU na isap.sejm.gov.pl.
+Weryfikuj aktualną wersję KSCU na ELI (RZĄD 1).
 Tabela orientacyjna → M6-oplaty.md (może być nieaktualna — zawsze sprawdź).
 
 ---

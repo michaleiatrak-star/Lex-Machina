@@ -96,7 +96,7 @@ roszczenia procesowe → `shared/TERM-CALC.md`, `shared/ROSZCZENIA.md`.
 | Nowelizacja | Zakres |
 |---|---|
 | Dz.U. 2025 poz. 924 | Zm. art. 36z ust. 2 pkt 4 — brak wymogu wskazania miejsca dostawy |
-| Dz.U. 2025 poz. 1416 | Zmiany PF — weryfikuj pełny zakres w isap.sejm.gov.pl |
+| Dz.U. 2025 poz. 1416 | Zmiany PF — weryfikuj pełny zakres w ELI (RZĄD 1) |
 | Dz.U. 2025 poz. 1537 | Zmiany podstawowych warunków prowadzenia apteki (rozp. MZ) |
 
 ### Reklama aptek (art. 94a PF) — PRZEŁOMOWA ZMIANA
@@ -108,7 +108,7 @@ roszczenia procesowe → `shared/TERM-CALC.md`, `shared/ROSZCZENIA.md`.
 - Zmiany dotyczące aptek, kar GIF, badań jakościowych, przedłużania pozwoleń na dopuszczenie, wymagań wobec Osób Wykwalifikowanych.
 - Planowane przyjęcie przez RM: III kwartał 2026 r. — weryfikuj aktualny status w legislacja.rcl.gov.pl
 
-*Weryfikacja: 22.05.2026 | Źródła: isap.sejm.gov.pl, alertmedyczny.pl, gov.pl (projekt UDER114), TSUE C-200/2024*
+*Weryfikacja: 22.05.2026 | Źródła: ELI (RZĄD 1), alertmedyczny.pl, gov.pl (projekt UDER114), TSUE C-200/2024*
 
 ---
 
@@ -497,7 +497,7 @@ Procedura:
   → Prezes Urzędu wydaje zgodę (lub odmawia)
   → Produkt może być wydany wyłącznie na receptę lekarza wnioskującego
 
-Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ISAP
+Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ELI (RZĄD 1)
 ```
 
 ---

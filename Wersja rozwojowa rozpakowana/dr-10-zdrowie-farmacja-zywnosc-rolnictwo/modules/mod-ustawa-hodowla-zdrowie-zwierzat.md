@@ -9,7 +9,7 @@
 ## Akt prawny / źródło (odesłanie)
 Podstawowe akty: ustawa o zdrowiu zwierząt z 21.11.2025 (Dz.U. 2025 poz.
 1795), ustawa o ochronie zwierząt, rozporządzenia MRiRW ws. ASF —
-WERYFIKUJ każdorazowo aktualny stan na ISAP, temat SKRAJNIE dynamiczny.
+WERYFIKUJ każdorazowo aktualny stan w ELI (RZĄD 1), temat SKRAJNIE dynamiczny.
 
 ---
 
@@ -533,7 +533,7 @@ szczepieniem" opisanego wyżej, TO INNA, znacznie SZERSZA regulacja)
 ```
 PODSTAWA: Ustawa z 15.05.2026 o Krajowym Rejestrze Oznakowanych
   Psów i Kotów (druk sejmowy nieustalony w tej sesji z pewnością —
-  sprawdź na ISAP) — Sejm 245 za/22 przeciw/171 wstrzymało się —
+  sprawdź w ELI (RZĄD 1)) — Sejm 245 za/22 przeciw/171 wstrzymało się —
   PODPISANA przez Prezydenta Karola Nawrockiego **2.06.2026**
 
 ⭐⭐ KLUCZOWA RÓŻNICA względem sekcji wyżej: TA ustawa tworzy
@@ -642,7 +642,7 @@ METRYKA AKTU
   byłoby błędem procesowym. Ustawa ma znaczenie DORADCZE (klient
   planujący budowę kojca/wybiegu) i PREWENCYJNE, nie sankcyjne.
 
-  ⚠️ [ZALECANA WERYFIKACJA ISAP] — numer pozycji potwierdzony
+  ⚠️ [ZALECANA WERYFIKACJA RZĄD 1] — numer pozycji potwierdzony
   źródłem Rzędu 2 (prawo.pl) i spójny z sekwencją ustaw podpisanych
   tego samego dnia (ustawa o systemach AI — poz. 1003), ale NIE
   odczytany bezpośrednio z ISAP. Przed powołaniem w piśmie
@@ -727,7 +727,7 @@ dobrostanu w hodowlach i zwiększenie nadzoru nad schroniskami —
 sygnalizowane jako element tej samej nowelizacji, ale
 NIEPOTWIERDZONE w wystarczającej liczbie źródeł. Jeżeli sprawa
 dotyczy WYMIARU KARY z art. 35 ustawy o ochronie zwierząt,
-sprawdź brzmienie w ISAP — nie opieraj się na tym akapicie.
+sprawdź brzmienie w ELI (RZĄD 1) — nie opieraj się na tym akapicie.
 ```
 
 **Weryfikacja (ZASADA 12):** Rząd 2 — prawo.pl, rp.pl (numer Dz.U.,

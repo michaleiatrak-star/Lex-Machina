@@ -2,7 +2,7 @@
 
 **Status:** moduł współdzielony, obowiązkowy dla generatorów pism.  
 **Zakres:** pisma cywilne, pracownicze, gospodarcze, karne, administracyjne, sądowoadministracyjne, egzekucyjne i przedsądowe.  
-**Zasada:** ten moduł nie zastępuje weryfikacji aktualnego tekstu ustawy. Przed wskazaniem przepisu, terminu albo opłaty sprawdź aktualny tekst aktu prawnego w ISAP / prawo.sejm.gov.pl lub innym oficjalnym źródle.
+**Zasada:** ten moduł nie zastępuje weryfikacji aktualnego tekstu ustawy. Przed wskazaniem przepisu, terminu albo opłaty sprawdź aktualny tekst aktu prawnego w ELI (RZĄD 1) / prawo.sejm.gov.pl lub innym oficjalnym źródle.
 
 ## 1. Bramka wejściowa
 

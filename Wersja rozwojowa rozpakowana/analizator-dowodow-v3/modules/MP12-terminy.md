@@ -33,7 +33,7 @@ potrzebę weryfikacji gdy zachodzi ryzyko nowelizacji.
 [TERM-001]
 Nazwa terminu:
 Typ: zawity / przedawnienie / procesowy / urzędowy / umowny
-Podstawa prawna (weryfikacja ISAP):
+Podstawa prawna (weryfikacja w ELI (RZĄD 1)):
 Data zdarzenia rozpoczynającego bieg:
 Długość terminu:
 Data upływu:
@@ -157,7 +157,7 @@ Kasacja:
   art. 524 § 1 KPK — 30 dni od doręczenia orzeczenia z uzasadnieniem
 
 Przedawnienie karalności — typy:
-  art. 101 § 1 KK — zależy od zagrożenia ustawowego; weryfikacja w ISAP
+  art. 101 § 1 KK — zależy od zagrożenia ustawowego; weryfikacja w ELI (RZĄD 1)
 ```
 
 ### Prawo administracyjne (KPA / PPSA)

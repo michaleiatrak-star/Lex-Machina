@@ -115,7 +115,7 @@ KROK 2: Zakwalifikuj:
          □ Klauzula niedozwolona → rejestr.uokik.gov.pl
          □ Sprzeczna z bezwzględnie wiążącym przepisem → nieważna
          □ Obchodzi prawo (art. 58 §1 KC)
-KROK 3: Wskaż podstawę prawną (weryfikowaną w ISAP)
+KROK 3: Wskaż podstawę prawną (weryfikowaną w ELI (RZĄD 1))
 KROK 4: Oceń ryzyko: Krytyczne / Wysokie / Średnie / Niskie
 KROK 5: Zaproponuj zmianę (gotowe brzmienie alternatywne)
 KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
@@ -377,7 +377,7 @@ TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
 ### E.2 Zasady redakcji
 
 ```
-□ Każda klauzula: weryfikacja podstawy prawnej w ISAP przed wpisaniem
+□ Każda klauzula: weryfikacja podstawy prawnej w ELI (RZĄD 1) przed wpisaniem
 □ Klauzule obowiązkowe zawsze obecne:
     - Oznaczenie stron (pełna identyfikacja + KRS/CEiDG/PESEL)
     - Przedmiot umowy (jednoznaczny opis)

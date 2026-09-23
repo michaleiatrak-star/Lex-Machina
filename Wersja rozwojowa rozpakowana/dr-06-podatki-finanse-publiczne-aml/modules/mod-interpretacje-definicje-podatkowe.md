@@ -5,7 +5,7 @@
 podatkowe, uchwały NSA, interpretacje ogólne MF 2024–2025, PKWiU 2025, schematy MDR,
 ulgi innowacyjne, estoński CIT — definicje precyzowane przez KIS/MF/NSA.
 
-**Źródła (weryfikuj w ISAP/bazach przed powołaniem):**
+**Źródła (weryfikuj w ELI (RZĄD 1)/bazach przed powołaniem):**
 
 | Akt | Dz.U./źródło | Uwaga |
 |---|---|---|
@@ -126,7 +126,7 @@ państwami) — patrz mod-PIT-podatek-dochodowy-fizyczne.md, sekcja 1a
 CIT). PONIŻSZA treść to SKRÓCONY punkt wyjścia.
 
 ```
-PODSTAWA (art. 3 ust. 1a ustawy o PIT — weryfikuj Dz.U. 2025 w ISAP):
+PODSTAWA (art. 3 ust. 1a ustawy o PIT — weryfikuj Dz.U. 2025 w ELI (RZĄD 1)):
   Rezydent = osoba mająca miejsce zamieszkania w Polsce:
   KRYTERIUM 1: Centrum interesów osobistych lub gospodarczych (ośrodek interesów życiowych) LUB
   KRYTERIUM 2: Pobyt w Polsce > 183 dni w roku podatkowym

@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -86,7 +86,7 @@ ODPOWIEDZIALNOŚĆ KONTRAKTOWA (ex contractu):
   Przesłanki: 1) niewykonanie/nienależyte wyk., 2) wina dłużnika (domniemanie!),
     3) szkoda, 4) adekwatny związek
   Przedawnienie: ogólne art. 118 KC — 6 lat (ogólny) / 3 lata (roszc. związane z DG)
-    ⚠️ Weryfikuj aktualny art. 118 KC w ISAP
+    ⚠️ Weryfikuj aktualny art. 118 KC w ELI (RZĄD 1)
 
 ADEKWATNY ZWIĄZEK PRZYCZYNOWY (art. 361 §1 KC):
   "Zobowiązany do odszkodowania ponosi odpowiedzialność tylko za normalne następstwa

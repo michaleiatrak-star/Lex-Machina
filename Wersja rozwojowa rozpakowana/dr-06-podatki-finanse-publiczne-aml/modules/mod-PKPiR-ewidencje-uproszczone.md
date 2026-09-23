@@ -45,7 +45,7 @@ USTAWA: art. 24a ustawy z 26.07.1991 r. o podatku dochodowym od osób
     i rozchodów". ✅ VER 2026-08-15x: podatki.gov.pl (podstawa prawna
     PIT/ryczałt), prawo.pl (tekst aktu Dz.U. 2026 poz. 779),
     przepisy.gofin.pl (rejestr wersji czasowych art. 24a).
-    ⚠️ [ZALECANA WERYFIKACJA ISAP przed powołaniem w piśmie]
+    ⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) przed powołaniem w piśmie]
 
 ROZPORZĄDZENIE WYKONAWCZE — ZMIANA OD 1.01.2026 R.:
   □ DO 31.12.2025 r.: rozporządzenie Ministra Finansów z 23.12.2019 r.

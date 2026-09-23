@@ -65,7 +65,7 @@ REJESTR = {
   "W2-DRAFT":    { name: "Projekt pisma W2 [CP-W2]",             status: "○ OCZEKUJE" },
   "W2-ATAK":     { name: "MOD-ATAK-NA-DRAFT [CP-W2-atak]",       status: "○ OCZEKUJE" },
   "W3-PODMIOT":  { name: "PODMIOT-GATE W3.0 [CP-W3-podmiot]",    status: "○ OCZEKUJE" },
-  "W3-ISAP":     { name: "Weryfikacja ISAP W3.1-3.3",            status: "○ OCZEKUJE" },
+  "W3-ISAP":     { name: "Weryfikacja w ELI (RZĄD 1) W3.1-3.3",            status: "○ OCZEKUJE" },
   "W3-BLOKJ":    { name: "Blok J MOD-WALIDACJA [CP-W3-blokj]",   status: "○ OCZEKUJE" },
   "W3-LQG":      { name: "LEGAL-QUALITY-GATE [CP-W3-lqg]",       status: "○ OCZEKUJE" },
   "W3-AUDYT":    { name: "AUDYT-KOŃCOWY + COURT-SIMULATION",      status: "○ OCZEKUJE" },

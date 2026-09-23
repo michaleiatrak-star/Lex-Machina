@@ -5,7 +5,7 @@
 > zamówienia (SWZ), kontrakt FIDIC, odwołanie do KIO, zmiana umowy PZP,
 > waloryzacja wynagrodzenia, podwykonawstwo w zamówieniach.
 
-> ⛔ HARD GATE — przed podaniem art. PZP weryfikuj w ISAP.
+> ⛔ HARD GATE — przed podaniem art. PZP weryfikuj w ELI (RZĄD 1).
 > isap.sejm.gov.pl → Prawo zamówień publicznych z 11.09.2019 → tekst ujednolicony Kancelarii Sejmu.
 > Nie opieraj się na samej metryce „t.j.” bez sprawdzenia tekstu ujednoliconego, bo ISAP może zawierać późniejsze zmiany w wersji ujednoliconej.
 > Dla stanu na 03.06.2026 weryfikacja bazowa: PZP — tekst ujednolicony Kancelarii Sejmu, oprac. 2026-05-27.
@@ -18,7 +18,7 @@
 ```
 KLUCZOWE AKTY (weryfikuj aktualne teksty):
   ustawa z 11.09.2019 Prawo zamówień publicznych (PZP)
-  Tekst ujednolicony Kancelarii Sejmu — weryfikuj: isap.sejm.gov.pl.
+  Tekst ujednolicony Kancelarii Sejmu — weryfikuj: ELI (RZĄD 1).
   Dla stanu na 03.06.2026: plik ujednolicony PZP oprac. 2026-05-27.
   → ZAWSZE sprawdź metrykę aktu i tekst ujednolicony; nie kopiuj nieaktualnych list nowelizacji.
   → Pomocniczo: uzp.gov.pl → „Prawo zamówień publicznych" → aktualna wersja/komunikaty.
@@ -30,7 +30,7 @@ KLUCZOWE AKTY (weryfikuj aktualne teksty):
   → art. 439 PZP: obowiązkowa klauzula waloryzacyjna dla robót budowlanych, dostaw i usług, gdy umowa przekracza 6 miesięcy
   → art. 443 PZP: płatności częściowe/zaliczki przy umowach >12 mies.
   → art. 455 PZP: dopuszczalne zmiany umowy
-  → art. 462–465 PZP: podwykonawstwo i bezpośrednia zapłata podwykonawcom (weryfikuj zakres w ISAP)
+  → art. 462–465 PZP: podwykonawstwo i bezpośrednia zapłata podwykonawcom (weryfikuj zakres w ELI (RZĄD 1))
   → art. 466 PZP: Prezes UZP jako centralny organ administracji rządowej — NIE podwykonawstwo
   
   FIDIC (dla robotów budowlanych):
@@ -46,7 +46,7 @@ KLUCZOWE AKTY (weryfikuj aktualne teksty):
 
 ```
 ZAKAZ BEZWZGLĘDNY — następujące postanowienia są NIEDOPUSZCZALNE w umowach PZP:
-Weryfikuj aktualne brzmienie: isap.sejm.gov.pl → PZP → art. 433
+Weryfikuj aktualne brzmienie: ELI (RZĄD 1) → PZP → art. 433
 
 ART. 433 PZP pkt 1–4 zakazuje projektowania postanowień przewidujących:
   □ pkt 1: odpowiedzialność wykonawcy za opóźnienie, chyba że jest to uzasadnione
@@ -69,7 +69,7 @@ UWAGA SYSTEMOWA:
 ## J7.3 OBLIGATORYJNE ELEMENTY UMOWY (ART. 436 PZP)
 
 ```
-Weryfikuj: isap.sejm.gov.pl → PZP → art. 436
+Weryfikuj: ELI (RZĄD 1) → PZP → art. 436
 
 Każda umowa PZP MUSI zawierać:
 □ art. 436 pkt 1 — termin wykonania:
@@ -179,7 +179,7 @@ BŁĄD: Waloryzacja nie działa automatycznie — wymaga aktywnego wniosku wykon
 ### PZP-4 — Podwykonawstwo w zamówieniach publicznych
 
 ```
-PRAWO (art. 462–465 PZP — weryfikuj w ISAP):
+PRAWO (art. 462–465 PZP — weryfikuj w ELI (RZĄD 1)):
 
   □ Wykonawca może powierzyć podwykonawcy część zamówienia
   □ OBOWIĄZEK: wskazanie w ofercie zakresu robót dla podwykonawców
@@ -257,7 +257,7 @@ FIDIC-4 — Podstawowe dokumenty hierarchii:
 ## J7.6 ODWOŁANIE DO KIO — PROCEDURA
 
 ```
-PRAWO (art. 513–598 PZP — weryfikuj w ISAP):
+PRAWO (art. 513–598 PZP — weryfikuj w ELI (RZĄD 1)):
   Środki ochrony prawnej: odwołanie do KIO, skarga do sądu.
 
 TERMINY ODWOŁANIA (art. 515 PZP) — ✅ RZĄD 1 2026-09-16j:

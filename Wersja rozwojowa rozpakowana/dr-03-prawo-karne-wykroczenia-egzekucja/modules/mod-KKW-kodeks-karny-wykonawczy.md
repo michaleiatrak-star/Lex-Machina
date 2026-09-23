@@ -12,7 +12,7 @@ KKW wskazanych przez raport.
 
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28
 (sekcje 1-12), 2026-08-14 (sekcja 0, nowa). Źródła prawa muszą być
-każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis
+każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis
 dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo
 dla komentarza.
 

@@ -223,5 +223,5 @@ Gdy spór dotyczy nie treści polisy, lecz SPOSOBU jej zaproponowania:
 ---
 
 *Moduł J10 / analizator-umow-v1 · Ubezpieczenia majątkowe i życiowe poza B2C*
-*HARD GATE: KC art. 805–834 + ustawa o dystrybucji (2017) + DUiR (2015) — weryfikuj w ISAP*
+*HARD GATE: KC art. 805–834 + ustawa o dystrybucji (2017) + DUiR (2015) — weryfikuj w ELI (RZĄD 1)*
 *← Powrót do routingu: `view references/mod-J0-routing.md`*

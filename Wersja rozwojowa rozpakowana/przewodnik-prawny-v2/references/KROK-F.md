@@ -72,7 +72,7 @@ Jeśli pismo dotyczy kilku roszczeń/zarzutów → osobna teza per wątek.
 ```
 PROCEDURA:
 1. Zidentyfikuj wszystkie "art. X" / "§ Y" / "ustawa z dnia..."
-2. web_fetch isap.sejm.gov.pl → sprawdź istnienie i brzmienie
+2. web_fetch ELI (RZĄD 1) → sprawdź istnienie i brzmienie
 3. Sprawdź nowelizacje po dacie zdarzenia
 
 WYNIK DLA LAIKA:

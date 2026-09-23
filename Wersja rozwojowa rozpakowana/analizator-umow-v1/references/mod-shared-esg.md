@@ -173,7 +173,7 @@ PUŁAPKA ESG-3: Wymagania danych ESG bez wynagrodzenia / czasu na przygotowanie
 ```
 PRAWO POLSKIE:
   → Ustawa o CBA (9.06.2006): isap.sejm.gov.pl
-  → Kodeks karny: art. 228–230a (łapownictwo bierne/czynne) — weryfikuj w ISAP
+  → Kodeks karny: art. 228–230a (łapownictwo bierne/czynne) — weryfikuj w ELI (RZĄD 1)
   → FCPA (US): dotyczy podmiotów z operacjami w USA lub USD
   → UK Bribery Act 2010: dotyczy podmiotów z operacjami w UK
 

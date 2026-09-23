@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.20"
+version: "2.21"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -56,7 +56,7 @@ Pismo ma jeden przedmiot i jedną podstawę prawną. Jeśli sprawa ma więcej w�
 → przełącz na `pisma-procesowe-v3`.
 
 **Zasada 2 — Weryfikacja przepisu przed użyciem:**
-Każdy przywołany artykuł weryfikuj na `isap.sejm.gov.pl` lub `prawo.sejm.gov.pl`.
+Każdy przywołany artykuł weryfikuj na `ELI (RZĄD 1)` lub `prawo.sejm.gov.pl`.
 Podaj pełne oznaczenie przy pierwszym użyciu.
 
 **Zasada 3 — Opłata sądowa zawsze:**

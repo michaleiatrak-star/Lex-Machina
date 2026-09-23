@@ -146,7 +146,7 @@ Checklist praktyczny:
 
 ```
 Wniosek: do Dyrektora KIS
-Termin na wydanie: 3 miesiące (art. 42b ust. 1 VAT — weryfikuj w ISAP)
+Termin na wydanie: 3 miesiące (art. 42b ust. 1 VAT — weryfikuj w ELI (RZĄD 1))
 Wiążąca: dla organu i podatnika (przez 5 lat — weryfikuj aktualne przepisy)
 ```
 
@@ -309,7 +309,7 @@ Checklist praktyczny:
 □ Czy termin 30 DNI przed wygaśnięciem umowy NA jej PRZEDŁUŻENIE jest
   PILNOWANY w kalendarzu sprawy
 
-⚠️ Weryfikuj aktualne brzmienie art. 8c–8e i 15a w ISAP — instytucja
+⚠️ Weryfikuj aktualne brzmienie art. 8c–8e i 15a w ELI (RZĄD 1) — instytucja
   relatywnie MŁODA (od 2023 r.), praktyka INTERPRETACYJNA (KIS, TSUE
   ws. Skandia) NADAL się kształtuje.
 ```

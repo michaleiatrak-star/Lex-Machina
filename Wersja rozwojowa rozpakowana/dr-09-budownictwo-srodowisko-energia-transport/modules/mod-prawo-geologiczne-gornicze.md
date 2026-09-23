@@ -13,7 +13,7 @@
   eksploatacyjna, art. 168 sankcja). Treść modułu POTWIERDZONA jako
   aktualna mimo zmiany numeru t.j.
 
-**Weryfikacja:** isap.sejm.gov.pl + MŚ przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) + MŚ przed każdym cytowaniem.
 
 ## Zakres
 Reguluje poszukiwanie, rozpoznawanie i wydobywanie kopalin ze złóż, podziemne

@@ -3,11 +3,11 @@
 **Status:** nowy moduł 2026-06-09 (weryfikacja online)
 **Zakres:** SPP, ŚSPP — opłaty, opłaty dodatkowe, tryb obrony, egzekucja, orzecznictwo NSA
 
-**Źródła (weryfikuj w ISAP przed powołaniem):**
+**Źródła (weryfikuj w ELI (RZĄD 1) przed powołaniem):**
 
 | Akt | Dz.U. | Art. | Uwaga |
 |---|---|---|---|
-| Ustawa o drogach publicznych (UDP) | **Dz.U. 2025 poz. 889 t.j.** | art. 13, 13b, 13f | Aktualny t.j. — weryfikuj isap.sejm.gov.pl |
+| Ustawa o drogach publicznych (UDP) | **Dz.U. 2025 poz. 889 t.j.** | art. 13, 13b, 13f | Aktualny t.j. — weryfikuj ELI (RZĄD 1) |
 | Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 268 t.j. | art. 33 (zarzuty) | Obrona w egzekucji |
 | KW | Dz.U. 2025 poz. 734 | art. 92 §1 | Wykroczenie — brak biletu |
 | KPA | Dz.U. 2025 poz. 1691 | art. 189a i n. | Nie dotyczy bezpośrednio opł. park. |
@@ -195,7 +195,7 @@ POPULARNE SCHEMATY PRYWATNYCH PARKINGOW:
 ## 4. KARTA PARKINGOWA
 
 ```
-Podstawa: art. 8 ust. 1–1b Prawo o ruchu drogowym (weryfikuj w ISAP — Dz.U. 2024 poz. 1251)
+Podstawa: art. 8 ust. 1–1b Prawo o ruchu drogowym (weryfikuj w ELI (RZĄD 1) — Dz.U. 2024 poz. 1251)
 Organ wydający: starosta (PCPR)
 
 UPRAWNIENIA Z KARTY PARKINGOWEJ:

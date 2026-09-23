@@ -6,7 +6,7 @@
 >
 > ⛔ HARD GATE: jeśli metoda odwołuje się do standardu/normy/publikacji
 > eksperckiej z nazwy (np. cytat metodologii), nazwa metody jako *kategoria
-> analityczna* nie wymaga weryfikacji ISAP (to nie przepis prawa) — ale każdy
+> analityczna* nie wymaga weryfikacji w ELI (RZĄD 1) (to nie przepis prawa) — ale każdy
 > WNIOSEK z zastosowania metody, który powołuje się na przepis, orzeczenie lub
 > normę, podlega PRAWO-HARDGATE bez wyjątku.
 
@@ -607,7 +607,7 @@ system stosuje `metody_sugerowane` z `auto: true`.
 ## 7. Walidacja
 
 - Każda metoda z §3/§3a/§3b/§3c jest KATEGORIĄ ANALITYCZNĄ — jej nazwa i opis
-  NIE wymagają weryfikacji ISAP.
+  NIE wymagają weryfikacji w ELI (RZĄD 1).
 - Każdy WNIOSEK wygenerowany przy użyciu metody, który zawiera powołanie na
   przepis, orzeczenie, termin ustawowy lub normę — podlega PRAWO-HARDGATE
   (web_search/web_fetch przed podaniem). Dla MET-COMP dotyczy to w

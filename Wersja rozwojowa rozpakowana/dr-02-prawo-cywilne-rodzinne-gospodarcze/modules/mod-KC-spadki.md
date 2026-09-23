@@ -27,7 +27,7 @@
 
 ## DZIEDZICZENIE USTAWOWE — KOLEJNOŚĆ GRUP (art. 931–940 KC)
 
-> ⚠️ Weryfikuj aktualne brzmienie przepisów w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie przepisów w ELI (RZĄD 1).
 
 ```
 GRUPA I:    Dzieci + małżonek (w równych częściach; małżonek min. ¼)
@@ -247,14 +247,14 @@ kancelaria-praga.pl [maj 2026, NAJŚWIEŻSZE], kancelariaszkil.pl.
 
 ## OPŁATY SĄDOWE — STWIERDZENIE NABYCIA SPADKU
 
-> ⚠️ Weryfikuj aktualne opłaty w KSCU (Dz.U. 2025 poz. 1228) w ISAP.
+> ⚠️ Weryfikuj aktualne opłaty w KSCU (Dz.U. 2025 poz. 1228) w ELI (RZĄD 1).
 
 ```
 Wniosek o stwierdzenie nabycia spadku: 100 zł (KSCU — weryfikuj)
 Dział spadku (sądowy): opłata od wartości majątku
   Zgodny wniosek podziału: 300 zł
   Sporny: 1000 zł
-  (weryfikuj aktualne kwoty w KSCU w ISAP)
+  (weryfikuj aktualne kwoty w KSCU w ELI (RZĄD 1))
 ```
 
 

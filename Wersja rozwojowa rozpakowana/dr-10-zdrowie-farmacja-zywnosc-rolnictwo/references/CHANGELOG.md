@@ -1,5 +1,6 @@
 # CHANGELOG — dr-10-zdrowie-farmacja-zywnosc-rolnictwo
 
+- 3.47 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (21 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 3.46 (2026-09-16, F-189): F-135 (RZĄD 1): mod-ustawa-medyczne-szczegolowy — ⛔ „max 20 lat dla szkód na osobie — § 3” i „małoletni: 3 lata” skorygowane (§ 3: brak granicy 10 lat; § 2: 20 lat przy przestępstwie; § 4: 2 lata); FKZM — art. 67t ust. 3 u.p.p. (było „ust. 8”); mod-ustawa-prawa-pacjenta-framework — wiersz art. 442¹ § 3.
 - 3.45 (2026-09-16, F-189): Ustawa o wyrobach medycznych: akt pierwotny `2022/974` jako aktualna podstawa → t.j. `2024/1620` w SKILL.md, mod-PrFarm-prawo-farmaceutyczne (×3), mod-PrFarm-szczegolowy (×2), mod-wyroby-medyczne (RZĄD 1; T27 ZASTĄPIONY_TJ).
 - 3.44 (2026-09-16, F-189): mod-ustawa-inspekcja-weterynaryjna — „dawniej: Dz.U. 2024 poz. 1284” (rozporządzenie MKiŚ, podmiana aktu) → ostatni t.j. ustawy o ochronie zdrowia zwierząt `2023/1075` (RZĄD 1; T31).

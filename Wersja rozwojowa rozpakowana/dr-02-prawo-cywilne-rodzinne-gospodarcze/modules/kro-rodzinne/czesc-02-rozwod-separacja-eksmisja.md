@@ -10,7 +10,7 @@
 
 ## ROZWÓD — QUICK CHECK
 
-### Przesłanki (art. 56 KRO — weryfikuj w ISAP)
+### Przesłanki (art. 56 KRO — weryfikuj w ELI (RZĄD 1))
 ```
 POZYTYWNA: Trwały i zupełny rozkład pożycia małżeńskiego
   (brak więzi uczuciowej, fizycznej i gospodarczej)
@@ -117,7 +117,7 @@ Na zgodny wniosek: sąd zaniecha orzekania o winie
 Skutki orzeczenia o winie:
   → wyłącznie winny NIE ma prawa do alimentów od drugiego małżonka
   → niewinny może żądać alimentów niezależnie od pogorszenia sytuacji majątkowej
-    (art. 60 §2 KRO — weryfikuj w ISAP)
+    (art. 60 §2 KRO — weryfikuj w ELI (RZĄD 1))
 ```
 
 ---
@@ -179,7 +179,7 @@ T7 — PRÓBA ZMIANY SYSTEMOWEJ — ZAWETOWANA (VER 2026-07-13, TRYB DZU):
   w 2026 r. i nadal WYŁĄCZNIE przed sądem okręgowym, KRO t.j. 2026.236 bez
   zmian w tym zakresie. ⚠️ Jeśli w przyszłości pojawi się nowy/podobny projekt
   (np. po ew. ponownym uchwaleniu przez Sejm większością odrzucającą weto, lub
-  nowa inicjatywa), status WYMAGA odrębnej weryfikacji w ISAP przed użyciem —
+  nowa inicjatywa), status WYMAGA odrębnej weryfikacji w ELI (RZĄD 1) przed użyciem —
   nie zakładać automatycznie powrotu tego samego kształtu projektu.
 ```
 

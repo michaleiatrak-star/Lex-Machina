@@ -7,7 +7,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KP, aktualnych kwot, terminów weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KP, aktualnych kwot, terminów weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → Kodeks pracy (t.j. aktualny) — ZAWSZE aktualny tekst ujednolicony
 > isap.sejm.gov.pl → ustawa o minimalnym wynagrodzeniu → aktualne stawki
 > isap.sejm.gov.pl → ustawa o szczególnych zasadach rozwiązywania stosunków pracy
@@ -15,7 +15,7 @@
 
 ## H.1 FUNDAMENTY PRAWNE — WERYFIKACJA ONLINE
 
-Przed każdą analizą umowy o pracę weryfikuj w isap.sejm.gov.pl:
+Przed każdą analizą umowy o pracę weryfikuj w ELI (RZĄD 1):
 
 ```
 AKTY PRAWNE DO SPRAWDZENIA:
@@ -43,7 +43,7 @@ PARAMETRY WYMAGAJĄCE WERYFIKACJI ONLINE (zmieniają się co roku!):
 > zwróceniu na to uwagi. Poniższa wersja została skonfrontowana ze źródłem.
 
 ```
-TREŚĆ OBOWIĄZKOWA (art. 29 §1 KP — weryfikuj aktualne brzmienie w isap.sejm.gov.pl
+TREŚĆ OBOWIĄZKOWA (art. 29 §1 KP — weryfikuj aktualne brzmienie w ELI (RZĄD 1)
 przed każdym powołaniem, mimo że przepis jest stabilny od lat):
 □ Strony umowy
 □ Adres siedziby pracodawcy — a gdy pracodawca jest osobą fizyczną
@@ -107,7 +107,7 @@ PROBLEM: UoP "wynagrodzenie zasadnicze = minimalne wynagrodzenie za pracę"
          → Pracodawca może nie wypłacać premii, obniżać prowizje
          → Pracownik zostaje z minimalną kwotą
 
-WERYFIKUJ: isap.sejm.gov.pl → ustawa o minimalnym wynagrodzeniu
+WERYFIKUJ: ELI (RZĄD 1) → ustawa o minimalnym wynagrodzeniu
            Czy premia jest składnikiem wynagrodzenia czy świadczeniem uznaniowym?
 
 RÓŻNICA KLUCZOWA:
@@ -130,7 +130,7 @@ PROBLEM: "Pracownik zobowiązuje się do niepodejmowania działalności konkuren
          → PUŁAPKA: zbyt szeroka definicja "działalności konkurencyjnej"
          → może objąć: wolny zawód, hobby, współpracę niezwiązaną z pracodawcą
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 101¹ i 101²
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 101¹ i 101²
 
 WYMAGANIA ART. 101¹ KP (forma i treść):
 □ Forma pisemna pod rygorem nieważności
@@ -152,7 +152,7 @@ PROBLEM: Pracodawca wprowadza zakaz konkurencji po ustaniu stosunku pracy
          → Pracownik nie wie, czy zakaz go wiąże — prawna niepewność
          → Art. 101² §2 KP: zakaz = OBOWIĄZKOWE odszkodowanie min. 25% wynagrodzenia
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 101² §2 i §3
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 101² §2 i §3
 
 BEZWZGLĘDNE WYMOGI ART. 101² KP:
 □ Forma pisemna pod rygorem nieważności
@@ -170,7 +170,7 @@ PROBLEM: "Pracownik odpowiada finansowo za wszelkie szkody wyrządzone Pracodawc
          → naruszenie art. 119 KP: limit 3-miesięcznych wynagrodzeń (wina nieumyślna)
          → naruszenie art. 122 KP: nieograniczona odpowiedzialność TYLKO przy winie umyślnej
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 114–122 (mienie powierzone, szkoda)
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 114–122 (mienie powierzone, szkoda)
 
 HIERARCHIA ODPOWIEDZIALNOŚCI KP:
   Wina nieumyślna → max 3 wynagrodzenia miesięczne (art. 119 KP)
@@ -193,7 +193,7 @@ PROBLEM: "Pracownik pracuje w systemie zadaniowym" → pracodawca myśli: brak n
            zadania obiektywnie wymagają więcej czasu niż norma
          → art. 140 KP: system zadaniowy ≠ nieograniczony czas pracy
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 129, 135, 140, 151
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 129, 135, 140, 151
 
 PUŁAPKA DLA PRACODAWCY:
   "Zryczałtowane wynagrodzenie za godziny nadliczbowe" → dozwolone, ale:
@@ -236,7 +236,7 @@ PROBLEM: "Strony potwierdzają, że wszelkie roszczenia wynikające ze stosunku 
           → Zrzeczenie roszczeń = wyłączenie prawa do dochodzenia:
             nadgodzin, premii, urlopów, mobbingu, dyskryminacji
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 84 (zakaz zrzeczenia się wynagrodzenia)
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 84 (zakaz zrzeczenia się wynagrodzenia)
            isap.sejm.gov.pl → KC art. 917-919 (ugoda)
 
 GRANICA LEGALNA:
@@ -266,7 +266,7 @@ RÓŻNICA KLUCZOWA:
   → Pracownik traci te gwarancje
   → Brak możliwości "odmowy" — już się zgodził
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 42 (wypowiedzenie zmieniające)
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 42 (wypowiedzenie zmieniające)
 
 REKOMENDACJA: Jeśli pracodawca proponuje gorsze warunki:
   → Nie podpisuj aneksu
@@ -281,7 +281,7 @@ PROBLEM: Pracodawca wręcza "dyscyplinarkę" (art. 52 KP) bez zachowania procedu
          → Konsultacja ze związkami zawodowymi (jeśli pracownik jest członkiem)
          → Forma pisemna z podaniem przyczyny (konkretnej i prawdziwej)
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 52 (przyczyny), art. 53, art. 55
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 52 (przyczyny), art. 53, art. 55
 
 CZĘSTE UCHYBIENIA PRACODAWCY:
 □ Ogólnikowa przyczyna ("utrata zaufania" bez wskazania konkretnego zdarzenia)
@@ -291,7 +291,7 @@ CZĘSTE UCHYBIENIA PRACODAWCY:
 
 OCHRONA PRACOWNIKA:
   → 21 dni od doręczenia na złożenie odwołania do Sądu Pracy (art. 264 §1 KP)
-  → Weryfikuj: isap.sejm.gov.pl → KP art. 264 → AKTUALNY termin (zmieniał się!)
+  → Weryfikuj: ELI (RZĄD 1) → KP art. 264 → AKTUALNY termin (zmieniał się!)
   → Sąd Pracy: przywrócenie do pracy lub odszkodowanie (max 3/6/12 miesięcy)
 ```
 
@@ -300,7 +300,7 @@ OCHRONA PRACOWNIKA:
 PROBLEM: Wielokrotne umowy na czas określony lub jedna długa
          → Naruszenie art. 25¹ KP: limity umów terminowych
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 25¹ → AKTUALNE brzmienie
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 25¹ → AKTUALNE brzmienie
 
 OBOWIĄZUJĄCE LIMITY (weryfikuj online — ulegały zmianom!):
   □ Max 3 umowy terminowe LUB
@@ -344,7 +344,7 @@ PROBLEM: "W przypadku rozwiązania umowy w ciągu 3 lat pracownik zwróci
           pełne koszty szkolenia"
           → Powiązane z art. 103¹–103⁶ KP (podnoszenie kwalifikacji)
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 103¹ do 103⁶
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 103¹ do 103⁶
 
 LIMITY OBOWIĄZKU ZWROTU:
 □ Max proporcjonalny zwrot (nie pełny koszt po 2 latach z 3-letniego zobowiązania)
@@ -370,7 +370,7 @@ REKOMENDACJA:
 ### Katalog ochrony szczególnej (weryfikuj w KP online)
 
 ```
-WERYFIKUJ: isap.sejm.gov.pl → KP (tekst jednolity, aktualny rok)
+WERYFIKUJ: ELI (RZĄD 1) → KP (tekst jednolity, aktualny rok)
 
 OCHRONA BEZWZGLĘDNA (zakaz wypowiedzenia i rozwiązania):
 □ Ciąża i urlop macierzyński — art. 177 KP
@@ -402,7 +402,7 @@ PUŁAPKA PRACODAWCY: Wypowiedzenie pracownikowi w ciąży = nieważne
 □ Czy BRAK klauzuli o "braku wzajemnych roszczeń" lub jest ograniczona?
 □ Czy wypłacono wszystkie zaległe: wynagrodzenie, ekwiwalent za urlop, premia?
 
-WERYFIKUJ: isap.sejm.gov.pl → KP art. 171 (ekwiwalent za urlop)
+WERYFIKUJ: ELI (RZĄD 1) → KP art. 171 (ekwiwalent za urlop)
            → obowiązek wypłaty w dniu rozwiązania UoP lub następnym roboczym
 ```
 
@@ -567,5 +567,5 @@ SCORING → Balans H/UoP:
 *Moduł H / analizator-umow-v1 · Dla umów B2B → references/b2b-podwykonawcze.md*
 *Zakaz konkurencji (pełna analiza) → references/zakaz-konkurencji.md (Moduł I)*
 *Poufność / NDA (pełna analiza) → references/poufnosc-nda.md (Moduł K)*
-*Prawo weryfikuj ZAWSZE w ISAP (zmieniało się!) · Orzeczenia: sn.pl, orzeczenia.ms.gov.pl*
+*Prawo weryfikuj ZAWSZE w ELI (RZĄD 1) (zmieniało się!) · Orzeczenia: sn.pl, orzeczenia.ms.gov.pl*
 *Nigdy nie podawaj kwot minimalnych z pamięci — weryfikuj online przed każdą odpowiedzią*

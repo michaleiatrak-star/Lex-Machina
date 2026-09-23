@@ -8,7 +8,7 @@ elektronicznej lub inne aspekty cyfrowe. Moduł łączy analizę prawną z anali
 techniczną dowodów cyfrowych.
 
 **Reguła:** przy każdym przepisie z rozporządzenia (UE) 2016/679 (RODO),
-dyrektywy, ustawy o ochronie danych lub KK weryfikuj aktualną treść w ISAP
+dyrektywy, ustawy o ochronie danych lub KK weryfikuj aktualną treść w ELI (RZĄD 1)
 lub EUR-Lex. Interpretacje organu nadzorczego (UODO) sprawdzaj na uodo.gov.pl.
 
 ---
@@ -264,7 +264,7 @@ Tryb skargi do UODO:
 
 | Kiedy | Działanie |
 |-------|-----------|
-| Każda podstawa prawna RODO / KK | Weryfikacja w ISAP + EUR-Lex |
+| Każda podstawa prawna RODO / KK | Weryfikacja w ELI (RZĄD 1) + EUR-Lex |
 | Kara UODO lub orzeczenie TSUE | `orzeczenia-sadowe-v2` + orzeczenia.uodo.gov.pl |
 | Nagranie jako dowód | Patrz sekcja 11.6 + analiza admissibility M8 |
 | Monitoring pracowniczy | Sekcja 11.3 + `analizator-umow-v1` (klauzule) |

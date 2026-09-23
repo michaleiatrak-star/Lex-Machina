@@ -13,7 +13,7 @@
 > agreement → SHA (np. czy vesting z FA jest odzwierciedlony w mechanizmach
 > transferu udziałów w SHA) — wczytaj OBA moduły.
 
-> ⛔ HARD GATE — przed podaniem numeru art. KSH, KC, ksh weryfikuj w ISAP.
+> ⛔ HARD GATE — przed podaniem numeru art. KSH, KC, ksh weryfikuj w ELI (RZĄD 1).
 > isap.sejm.gov.pl → "Kodeks spółek handlowych" → aktualny tekst jednolity
 > ⚠ Sygnatura KSH zmienia się z każdym nowym t.j. — ZAWSZE sprawdź aktualną:
 >   isap.sejm.gov.pl → wpisz "Kodeks spółek handlowych" → wybierz ostatni t.j.
@@ -25,7 +25,7 @@
 ## MA.1 PODSTAWY PRAWNE — SYSTEM PRAWNY TRANSAKCJI
 
 ```
-KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty w ISAP):
+KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty w ELI (RZĄD 1)):
 
 1. Kodeks spółek handlowych (KSH) — isap.sejm.gov.pl:
    ⚠ Weryfikuj aktualny tekst jednolity przed podaniem artykułu!
@@ -51,7 +51,7 @@ KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty w ISAP):
    → Representations & Warranties = instytucja prawa common law
    → Stosowane w Polsce przez art. 353¹ KC (swoboda umów)
    → Odpowiedzialność za naruszenie R&W: art. 471 KC lub klauzule indemnifikacyjne
-   → Weryfikuj: isap.sejm.gov.pl → KC → art. 471, 473, 484
+   → Weryfikuj: ELI (RZĄD 1) → KC → art. 471, 473, 484
 
 FORMA UMOWY SPRZEDAŻY UDZIAŁÓW (SP. Z O.O.):
   Art. 180 §1 KSH: pisemna z podpisami notarialnie poświadczonymi (RYGOR NIEWAŻNOŚCI)
@@ -384,7 +384,7 @@ KOMPATYBILNOŚĆ Z KSH:
   → SHA musi być spójna z umową spółki — rozbieżność → SHA jest bezskuteczne w zakresie
     praw korporacyjnych
   → PEŁNA SKUTECZNOŚĆ: SHA + odpowiednie zapisy w umowie spółki + pełnomocnictwa
-  Weryfikuj: isap.sejm.gov.pl → KSH → art. 182–183
+  Weryfikuj: ELI (RZĄD 1) → KSH → art. 182–183
 ```
 
 ### MA.4.2 Prawa i ochrona mniejszości
@@ -512,7 +512,7 @@ PO CLOSINGU:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: KSH art. 180, 182, 183, 337–339 — isap.sejm.gov.pl → weryfikuj aktualny t.j.*
+*Podstawa prawna: KSH art. 180, 182, 183, 337–339 — ELI (RZĄD 1) → weryfikuj aktualny t.j.*
 *KC art. 353¹, 471, 535 — isap.sejm.gov.pl*
 *Weryfikacja KRS spółki: krs.ms.gov.pl · Notariusze: krs.ms.gov.pl*
 *Kontrola koncentracji (UOKiK): uokik.gov.pl/kontrola_koncentracji.php*

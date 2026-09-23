@@ -10,7 +10,7 @@
   jedyne wyłączenie z t.j. dotyczy niezwiązanego z tym modułem art. 5 ustawy zmieniającej
   Ordynację podatkową (Dz.U. 2025 poz. 497)
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres podmiotowy
 Odpowiada: kierownik jednostki sektora finansow publicznych, glowny ksiegowy,

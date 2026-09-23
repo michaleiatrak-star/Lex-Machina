@@ -25,7 +25,7 @@ Licencje i zezwolenia transportu drogowego, kary ITD/Inspekcji Transportu Drogow
 ### Akty i organy
 
 ```
-Ustawa o transporcie drogowym (Dz.U. 2025 poz. 1490 t.j. ze zm. — weryfikuj w ISAP)
+Ustawa o transporcie drogowym (Dz.U. 2025 poz. 1490 t.j. ze zm. — weryfikuj w ELI (RZĄD 1))
 Organ kontrolny: ITD (Inspekcja Transportu Drogowego)
 Organ licencyjny: starosta (licencja taxi, przewóz osób) / Główny Inspektor Transportu Drogowego
 
@@ -35,7 +35,7 @@ Licencje:
   → ADR: zezwolenie na przewóz materiałów niebezpiecznych
 ```
 
-### Kary ITD (weryfikuj aktualne stawki w ustawie i rozporządzeniach w ISAP)
+### Kary ITD (weryfikuj aktualne stawki w ustawie i rozporządzeniach w ELI (RZĄD 1))
 
 ```
 Kara administracyjna: decyzja → odwołanie do GITD (14 dni) → WSA (30 dni)
@@ -67,7 +67,7 @@ specustawa-drogowa-ZRID.md` (dodany 2026-07-21), NIE duplikowany tutaj.
 ```
 Pas drogowy: grunt + droga + pobocze + rowy + urządzenia
 Zajęcie pasa: decyzja zarządcy drogi + opłata (zezwolenie indywidualne lub kategoryzowane)
-Reklama w pasie: zakaz dla autostrad; ograniczenia dla innych — weryfikuj art. 43 w ISAP
+Reklama w pasie: zakaz dla autostrad; ograniczenia dla innych — weryfikuj art. 43 w ELI (RZĄD 1)
 
 Odpowiedzialność zarządcy za szkodę z nieutrzymania drogi:
   → Art. 20 ustawy o drogach + art. 415 KC / 429 KC
@@ -111,7 +111,7 @@ Odszkodowanie:
   → Starosta ustala w terminie 30 dni od ZRID
   → Podstawa: 105% wartości rynkowej nieruchomości (premia za szybkość)
   → Wszczęcie postępowania o wyższe odszkodowanie: sąd cywilny
-  → Termin na wniesienie pozwu o wyższe odszkodowanie: weryfikuj przepisy w ISAP
+  → Termin na wniesienie pozwu o wyższe odszkodowanie: weryfikuj przepisy w ELI (RZĄD 1)
 
 Prawo wejścia na teren: natychmiast po rygorzę natychmiastowej wykonalności
 ```
@@ -191,7 +191,7 @@ Rozporządzenie UE 261/2004 (odszkodowania za opóźnienia/odwołania):
 Tworzy: Rada gminy (na wniosek wójta/burmistrza/prezydenta)
 Wjazd tylko: pojazdy elektryczne, wodorowe, CNG/LNG, hybrydowe (warunki)
 Wyłączenia: pojazdy niepełnosprawnych, służby ratunkowe, mieszkańcy na wniosek
-Opłaty: gmina może pobierać opłaty za wjazd (weryfikuj przepisy w ISAP)
+Opłaty: gmina może pobierać opłaty za wjazd (weryfikuj przepisy w ELI (RZĄD 1))
 ```
 
 ### Infrastruktura ładowania — AFIR
@@ -215,7 +215,7 @@ Operatorzy OC-P: wymagana rejestracja w URE + interoperacyjność
 > **Dz.U. 2023 poz. 1309**. ✅ [VER 2026-08-15n — 4 niezależne źródła: dwa PDF-y
 > ISAP cytujące ten numer, tekst ustawy z 11.06.2026 na orka.sejm.gov.pl,
 > infor.pl dla identyfikacji poz. 1523]. ⚠️ Przed powołaniem w piśmie —
-> potwierdzić w ISAP, czy nie ma nowszego t.j. (weryfikacja objęła numer, nie
+> potwierdzić w ELI (RZĄD 1), czy nie ma nowszego t.j. (weryfikacja objęła numer, nie
 > aktualność wobec nowelizacji z 2026 r.).
 
 ```

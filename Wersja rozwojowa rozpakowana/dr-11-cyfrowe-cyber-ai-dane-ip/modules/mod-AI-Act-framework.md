@@ -280,7 +280,7 @@ Polska ustawa o systemach AI:
       piśmie potwierdź ją w ISAP, rozbieżność nierozstrzygnięta)
     • **Wejście w życie: 11 sierpnia 2026 r.** (zasadniczo — ustawa
       zawiera przepisy o odrębnych terminach; przy terminie
-      procesowym zawsze sprawdź przepis końcowy w ISAP)
+      procesowym zawsze sprawdź przepis końcowy w ELI (RZĄD 1))
     ŹRÓDŁA (ZASADA 12): Rząd 1 — isap.sejm.gov.pl (WDU20260001003),
     eli.gov.pl/eli/DU/2026/1003/ogl, gov.pl/web/cyfryzacja;
     Rząd 3 (potwierdzenie zbieżności, nie samodzielna podstawa) —

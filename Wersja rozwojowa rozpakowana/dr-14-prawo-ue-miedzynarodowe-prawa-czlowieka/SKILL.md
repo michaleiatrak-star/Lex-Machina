@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: "3.7"
+version: "3.8"
 description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, numeru rozporządzenia, artykułu traktatu, daty stosowania lub sygnatury:**
-1. Zweryfikuj akty krajowe w `isap.sejm.gov.pl`
+1. Zweryfikuj akty krajowe w `ELI (RZĄD 1)`
 2. Zweryfikuj prawo UE i traktaty w `eur-lex.europa.eu`
 3. Zweryfikuj orzeczenia ETPC w `hudoc.echr.coe.int`
 4. Zweryfikuj orzeczenia TSUE w `curia.europa.eu`
@@ -78,15 +78,15 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
 ## Zasada architektoniczna
 - Jeden moduł = jeden akt / obszar prawa UE lub prawa międzynarodowego
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci — weryfikuj w ISAP i EUR-Lex**
+- **Zakaz cytowania przepisów z pamięci — weryfikuj w ELI (RZĄD 1) i EUR-Lex**
 - **Prawo UE zmienia się dynamicznie — etapy stosowania weryfikuj online**
 
 ---
@@ -220,7 +220,7 @@ PRAWO DYPLOMATYCZNE I KONSULARNE:
 
 NARZĘDZIE METODYCZNE:
   [✓] OK    mod-rejestr-zrodla-prawa-lifecycle
-              (workflow kancelaryjny aktualności prawa: ISAP audit, stan prawny
+              (workflow kancelaryjny aktualności prawa: audyt RZĘDU 1 (ELI), stan prawny
                na dzień zdarzenia / pisma / orzekania; przepisy przejściowe;
                integruje: shared/ISAP-AUDIT-PROTOCOL + shared/TEMPORAL-LAW-CHECK +
                shared/LEGAL-LIFECYCLE-MANAGEMENT + shared/LEGAL-QUALITY-GATE)
@@ -252,7 +252,7 @@ view dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md
 - Obrona narodowa / NATO → `dr-13` → `mod-ustawa-obrona-ojczyzny-mobilizacja`
 - Weryfikacja orzecznictwa TSUE/ETPC → `orzeczenia-sadowe-v2`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | eur-lex.europa.eu | echr.coe.int | curia.europa.eu | hcch.net
+- Weryfikacja: ELI (RZĄD 1) | eur-lex.europa.eu | echr.coe.int | curia.europa.eu | hcch.net
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

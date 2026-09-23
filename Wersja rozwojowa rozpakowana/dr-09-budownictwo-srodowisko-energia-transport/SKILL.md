@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.36"
+version: "3.37"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, kary, terminu ani sygnatury wyłącznie z pamięci modelu.
 
@@ -49,8 +49,8 @@ tekst sprzed 6 miesięcy może być już nieaktualny. Zawsze pobieraj aktualny t
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -58,7 +58,7 @@ tekst sprzed 6 miesięcy może być już nieaktualny. Zawsze pobieraj aktualny t
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci — każde brzmienie weryfikuj w ISAP**
+- **Zakaz cytowania przepisów z pamięci — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - **Dz.U. DR-09 zmieniają się bardzo często — przed każdym powołaniem weryfikuj t.j.**
 
 ---
@@ -449,7 +449,7 @@ BUDOWNICTWO:
                wobec rozbieżnych starszych metryk cytowanych przez różne
                źródła Rządu 2B. 5 punktów ⚠️ NIEWERYFIKOWANE, w tym możliwa
                rozbieżność brzmienia art. 22 ust. 1 pkt 2 względem wcześniej
-               ustalonej formuły w module Rozdz. 7 — do weryfikacji w ISAP.
+               ustalonej formuły w module Rozdz. 7 — do weryfikacji w ELI (RZĄD 1).
                Rozdz. 11 wciąż BEZ POKRYCIA — F-91 pozostaje otwarta, dalej
                zawężona)
   [✓] NOWY  mod-lowieckie-przepisy-przejsciowe-koncowe-derogacja
@@ -542,7 +542,7 @@ view dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md
 - Zamówienia publiczne (budowlane) → `dr-07`
 - Samorząd terytorialny (MPZP, gospodarka komunalna) → `dr-08`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | orzeczenia.nsa.gov.pl | sn.pl | kio.gov.pl (zamówienia budowlane)
+- Weryfikacja: ELI (RZĄD 1) | orzeczenia.nsa.gov.pl | sn.pl | kio.gov.pl (zamówienia budowlane)
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

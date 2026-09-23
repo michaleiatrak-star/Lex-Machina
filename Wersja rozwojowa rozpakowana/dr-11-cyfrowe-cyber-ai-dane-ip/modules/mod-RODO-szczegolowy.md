@@ -11,7 +11,7 @@
    godzinowego. ✅ [VER] RZĄD 1 2026-09-17q — EUR-Lex, tekst skonsolidowany 02016R0679
 3. Skarga do UODO → decyzja adm. → skarga do WSA (NIE do SO!)
 4. Pozew cywilny (art. 82 RODO) niezależny od skargi do UODO — można łączyć
-5. Zakaz cytowania przepisów z pamięci — weryfikuj w EUR-LEX i isap.sejm.gov.pl
+5. Zakaz cytowania przepisów z pamięci — weryfikuj w EUR-LEX i ELI (RZĄD 1)
 ```
 
 ## FAZA 0 — INTAKE
@@ -189,6 +189,6 @@ REKOMENDACJA: □ Skarga UODO  □ Pozew cywilny  □ Oba  □ Wezwanie przedsą
 | Redakcja/audyt: polityka prywatności, RCP/RCO, IOD, naruszenia (procedura wewnętrzna), archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS/monitoringu | `analizator-umow-v1` → `mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
 
 *RODO (UE) 2016/679 → eur-lex.europa.eu*
-*Ustawa o ODO (Dz.U. 2019 poz. 1781 — weryfikuj aktualny t.j. w isap.sejm.gov.pl)*
+*Ustawa o ODO (Dz.U. 2019 poz. 1781 — weryfikuj aktualny t.j. w ELI (RZĄD 1))*
 *KP art. 22²–22³ (Dz.U. 2025 poz. 277 t.j.) | Wytyczne EROD: edpb.europa.eu*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*
