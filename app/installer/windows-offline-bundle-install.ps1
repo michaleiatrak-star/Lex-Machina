@@ -190,12 +190,34 @@ try {
   }
   $selfTestLog = Join-Path $runtime "bootstrap\offline-payload-selftest.log"
   Remove-Item -LiteralPath $selfTestLog -Force -ErrorAction SilentlyContinue
+  $selfTestErrLog = $selfTestLog + ".stderr"
+  Remove-Item -LiteralPath $selfTestErrLog -Force -ErrorAction SilentlyContinue
   try {
-    & $selfTest -PayloadRoot $runtime *>&1 |
-      Tee-Object -FilePath $selfTestLog |
-      Out-Host
-    if ($LASTEXITCODE -ne 0) {
-      throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$LASTEXITCODE"
+    # Run the self-test as a separate process with file redirection. Piping
+    # it through *>&1 turned harmless native stderr lines (e.g. PaddleOCR
+    # UserWarning) into terminating errors under Windows PowerShell 5.1.
+    $selfTestShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+    $selfTestProcess = Start-Process `
+      -FilePath $selfTestShell `
+      -ArgumentList @(
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy", "Bypass",
+        "-File", ('"' + $selfTest + '"'),
+        "-PayloadRoot", ('"' + $runtime + '"')
+      ) `
+      -RedirectStandardOutput $selfTestLog `
+      -RedirectStandardError $selfTestErrLog `
+      -NoNewWindow `
+      -Wait `
+      -PassThru
+    if (Test-Path -LiteralPath $selfTestErrLog -PathType Leaf) {
+      Get-Content -LiteralPath $selfTestErrLog -ErrorAction SilentlyContinue |
+        Add-Content -LiteralPath $selfTestLog -Encoding UTF8
+    }
+    Get-Content -LiteralPath $selfTestLog -ErrorAction SilentlyContinue | Out-Host
+    if ($selfTestProcess.ExitCode -ne 0) {
+      throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$($selfTestProcess.ExitCode)"
     }
   } catch {
     Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8
