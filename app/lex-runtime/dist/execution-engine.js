@@ -34,6 +34,8 @@ export function isLocalLightweightConversation(model, query, hasBoundContext) {
         /^(?:ok|test|hej|cześć|czesc|dzień dobry|dzien dobry|dzięki|dzieki)[.!?]*$/
             .test(normalized));
 }
+const CRIMINAL_DOMAIN_PREFIX = "dr-03-";
+const CRIMINAL_QUALIFIER_INDEX = "modules/mod-KK-kwalifikator-karnomaterialny.md";
 function combineSkillPrompt(registry, skillNames) {
     return [...new Set(skillNames)]
         .map((name) => {
@@ -171,7 +173,20 @@ export class LexExecutionEngine {
             `semantic=${gateIPlan.semanticStages.join("|")}`,
             `validation=${gateIPlan.validationStages.join("|")}`
         ].join(";"));
-        const lightweightLocal = isLocalLightweightConversation(args.model, effectiveQuery, Boolean(args.documentContext ||
+        const boundContext = Boolean(args.documentContext ||
+            args.guideContext ||
+            args.processWorkflowContext ||
+            args.courtWorkflowContext ||
+            args.chronologyWorkflowContext ||
+            args.contractWorkflowContext ||
+            args.orderedCaseWorkflowContext ||
+            skillSelection.workflowExecutionSkill);
+        // Router-classified non-legal message: like a legal assistant that loads
+        // skills only for legal matters. Documents or an active workflow always
+        // keep the full legal path.
+        const conversationalOnly = args.conversationalOnly === true &&
+            !boundContext;
+        const trivialLocal = isLocalLightweightConversation(args.model, effectiveQuery, Boolean(args.documentContext ||
             args.guideContext ||
             args.processWorkflowContext ||
             args.courtWorkflowContext ||
@@ -179,11 +194,16 @@ export class LexExecutionEngine {
             args.contractWorkflowContext ||
             args.orderedCaseWorkflowContext ||
             !skillEnvelope.automatic));
+        const lightweightLocal = trivialLocal ||
+            conversationalOnly;
         if (lightweightLocal) {
             emit("provider_start", args.provider, "OK", args.model);
             const response = await this.providers.stream(args.provider, {
                 model: args.model,
-                systemPrompt: "Jesteś lokalnym modelem Lex Machina. To jest proste polecenie konwersacyjne bez zadania prawnego, dokumentów i narzędzi. Odpowiedz krótko i dokładnie na polecenie użytkownika.",
+                systemPrompt: conversationalOnly &&
+                    !trivialLocal
+                    ? "Jesteś asystentem Lex Machina. Router uznał tę wiadomość za niezwiązaną z prawem, więc skille prawne nie zostały załadowane. Odpowiedz rzeczowo, w języku użytkownika. Nie powołuj przepisów, sygnatur ani terminów prawnych; jeśli pytanie jednak dotyczy sprawy prawnej, powiedz to wprost i poproś o doprecyzowanie, aby uruchomić pełną analizę prawną."
+                    : "Jesteś lokalnym modelem Lex Machina. To jest proste polecenie konwersacyjne bez zadania prawnego, dokumentów i narzędzi. Odpowiedz krótko i dokładnie na polecenie użytkownika.",
                 ...(args.continuityKey
                     ? {
                         continuityKey: args.continuityKey
@@ -196,21 +216,33 @@ export class LexExecutionEngine {
                     }
                 ],
                 reasoning: "none",
-                localTransport: "json",
-                localMaxOutputTokens: 128
+                ...(trivialLocal
+                    ? {
+                        localTransport: "json",
+                        localMaxOutputTokens: 128
+                    }
+                    : {})
             });
             emit("provider_end", args.provider, "OK", args.model);
             if (!response.fullText
                 .trim()) {
                 throw new LexExecutionError("Provider returned an empty lightweight local response.", "LOCAL_LIGHTWEIGHT_PROVIDER", [...events]);
             }
-            emit("gate", "G7_VERTICAL_SLICE", "OK", "local-lightweight");
+            emit("gate", "G7_VERTICAL_SLICE", "OK", trivialLocal
+                ? "local-lightweight"
+                : "conversational-non-legal");
             return {
                 provider: args.provider,
                 primarySkill: args.route.primarySkill,
-                loadedSkills: skillSelection.loadedSkills,
-                executionSkills: skillSelection.executionSkills,
-                domainSkills: skillSelection.domainSkills,
+                loadedSkills: trivialLocal
+                    ? skillSelection.loadedSkills
+                    : ["prawny-router-v3"],
+                executionSkills: trivialLocal
+                    ? skillSelection.executionSkills
+                    : [],
+                domainSkills: trivialLocal
+                    ? skillSelection.domainSkills
+                    : [],
                 workflowPlan,
                 output: response.fullText,
                 events
@@ -258,6 +290,37 @@ export class LexExecutionEngine {
                     clipped
                 ].join("\n\n"));
             }
+        }
+        // User preference "Karne: +kwalifikator": every criminal/misdemeanour
+        // matter goes through the qualification decision tree. The runtime
+        // preloads its index; the model then reads only the matching part file.
+        const criminalDomain = [
+            args.route.primarySkill,
+            ...skillSelection.domainSkills
+        ].find((name) => name.startsWith(CRIMINAL_DOMAIN_PREFIX));
+        if (criminalDomain) {
+            const resource = `${criminalDomain}/${CRIMINAL_QUALIFIER_INDEX}`;
+            const resolved = this.registry.resolveResource(criminalDomain, CRIMINAL_QUALIFIER_INDEX);
+            let content = "";
+            try {
+                content =
+                    resolved
+                        ? fs.readFileSync(resolved, "utf8")
+                        : "";
+            }
+            catch {
+                content = "";
+            }
+            if (!content.trim()) {
+                emit("resource_read", resource, "BLOCKED", "CRIMINAL_QUALIFIER_MISSING");
+                throw new LexExecutionError("The mandatory criminal-law qualifier module is unavailable.", resource, [...events]);
+            }
+            emit("resource_read", resource, "OK", "runtime-preload;criminal-qualifier");
+            semanticWorkflowResources.push([
+                `# RUNTIME-PRELOADED SEMANTIC CONTEXT: ${resource}`,
+                "Mandatory for this criminal/misdemeanour matter: follow this decision tree before any qualification, analysis or pleading, and read the matching part file under modules/kwalifikator-karnomaterialny/ with the legal corpus tools.",
+                content
+            ].join("\n\n"));
         }
         if (args.guideContext &&
             workflowPlan.id !==

@@ -10,6 +10,11 @@ import {
 import { LexSkillRegistry } from "../src/registry.js";
 import { ProviderGateway, ProviderRegistry } from "../src/providers/gateway.js";
 import { ScriptedProviderAdapter } from "../src/providers/scripted-provider.js";
+import type {
+  ProviderAdapter,
+  ProviderStreamParams,
+  ProviderStreamResult
+} from "../src/providers/types.js";
 
 const roots: string[] = [];
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
@@ -287,5 +292,131 @@ describe("LexExecutionEngine", () => {
     ).rejects.toMatchObject({
       target: "prawo-polskie-v2"
     });
+  });
+});
+
+
+const DR03 = "dr-03-prawo-karne-wykroczenia-egzekucja";
+
+class CapturingAdapter implements ProviderAdapter {
+  readonly id = "openai" as const;
+  readonly label = "capture";
+  readonly capabilities = {
+    streaming: true,
+    tools: true,
+    reasoning: true,
+    modelDiscovery: false
+  };
+  readonly calls: ProviderStreamParams[] = [];
+
+  async stream(
+    params: ProviderStreamParams
+  ): Promise<ProviderStreamResult> {
+    this.calls.push(params);
+    return { fullText: "Odpowiedź." };
+  }
+}
+
+function capturingEngine(
+  registry: LexSkillRegistry
+): { engine: LexExecutionEngine; adapter: CapturingAdapter } {
+  const providers = new ProviderRegistry();
+  const adapter = new CapturingAdapter();
+  providers.register(adapter);
+  return {
+    engine: new LexExecutionEngine(registry, new ProviderGateway(providers)),
+    adapter
+  };
+}
+
+function criminalFixture(withQualifier: boolean): LexSkillRegistry {
+  const registry = fixture();
+  const root = path.dirname(registry.get("shared")!.directory);
+  createSkill(root, DR03);
+  fs.appendFileSync(
+    path.join(root, "prawo-polskie-v2", "ROUTING-MAP.md"),
+    `- ${DR03}\n`
+  );
+  if (withQualifier) {
+    fs.mkdirSync(path.join(root, DR03, "modules"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, DR03, "modules", "mod-KK-kwalifikator-karnomaterialny.md"),
+      "# KWALIFIKATOR INDEX\n"
+    );
+  }
+  const rescanned = new LexSkillRegistry(root);
+  rescanned.scan();
+  return rescanned;
+}
+
+describe("legal skill loading scope", () => {
+  it("answers a router-classified non-legal message without loading legal skills", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    const result = await lex.executePolishLegalQuery({
+      query: "Cześć, jak się masz?",
+      conversationalOnly: true,
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+
+    expect(adapter.calls).toHaveLength(1);
+    expect(adapter.calls[0]?.systemPrompt).toContain("niezwiązaną z prawem");
+    expect(adapter.calls[0]?.systemPrompt).not.toContain("# SKILL:");
+    expect(adapter.calls[0]?.tools ?? []).toEqual([]);
+    expect(result.domainSkills).toEqual([]);
+    expect(result.executionSkills).toEqual([]);
+    expect(result.events.at(-1)).toMatchObject({
+      target: "G7_VERTICAL_SLICE",
+      detail: "conversational-non-legal"
+    });
+  });
+
+  it("keeps the full legal path when documents are attached", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    await lex.executePolishLegalQuery({
+      query: "Co o tym sądzisz?",
+      documentContext: "[DOCUMENT doc-1] umowa najmu",
+      conversationalOnly: true,
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+
+    expect(adapter.calls[0]?.systemPrompt).toContain("# SKILL:");
+    expect(adapter.calls[0]?.systemPrompt).not.toContain("niezwiązaną z prawem");
+  });
+
+  it("preloads the criminal qualifier index for every DR-03 matter", async () => {
+    const { engine: lex, adapter } = capturingEngine(criminalFixture(true));
+    const result = await lex.executePolishLegalQuery({
+      query: "Kolega zabrał mi telefon.",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" }
+    });
+
+    expect(adapter.calls[0]?.systemPrompt).toContain("# KWALIFIKATOR INDEX");
+    expect(
+      result.events.some(
+        (event) =>
+          event.type === "resource_read" &&
+          event.target ===
+            `${DR03}/modules/mod-KK-kwalifikator-karnomaterialny.md` &&
+          event.status === "OK"
+      )
+    ).toBe(true);
+  });
+
+  it("fails closed when the criminal qualifier module is missing", async () => {
+    const { engine: lex } = capturingEngine(criminalFixture(false));
+    await expect(
+      lex.executePolishLegalQuery({
+        query: "Kolega zabrał mi telefon.",
+        provider: "openai",
+        model: "account/openai/default",
+        route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" }
+      })
+    ).rejects.toThrow("criminal-law qualifier");
   });
 });

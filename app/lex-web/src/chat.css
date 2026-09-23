@@ -1467,6 +1467,17 @@
   gap: 8px;
 }
 
+.chat-work-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.chat-pipeline-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .chat-pipeline-option {
   display: grid;
   gap: 3px;

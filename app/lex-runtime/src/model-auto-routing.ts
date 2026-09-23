@@ -15,6 +15,9 @@ import {
 } from "./skill-selection.js";
 
 export type ModelAutoRoutingDecision = {
+  // false: the message has no legal matter (greeting, test, general
+  // non-legal question). Legal skills, modules and gates are then not loaded.
+  legal: boolean;
   primarySkill: string;
   domainSkills: string[];
   executionSkills: string[];
@@ -215,6 +218,22 @@ function validateDecision(
   if (!parsed) {
     return null;
   }
+  if (
+    parsed.legal === false
+  ) {
+    return {
+      legal: false,
+      primarySkill:
+        domainCandidates[0] ?? "",
+      domainSkills:
+        domainCandidates[0]
+          ? [domainCandidates[0]]
+          : [],
+      executionSkills: [],
+      workflowExecutionSkill:
+        null
+    };
+  }
   const primarySkill =
     typeof parsed
       .primarySkill ===
@@ -299,6 +318,7 @@ function validateDecision(
   }
 
   return {
+    legal: true,
     primarySkill,
     domainSkills:
       normalizedDomains,
@@ -428,10 +448,13 @@ export class ModelAutoRouter {
         : "domainSkills: primarySkill oraz tylko rzeczywiście potrzebne domeny wtórne; maksymalnie 3.",
       "executionSkills: tylko skille rzeczywiście potrzebne do wykonania bieżącego zadania; maksymalnie 6; może być [].",
       "workflowExecutionSkill: jeden z executionSkills, jeśli bieżące zadanie wymaga konkretnego workflow; w przeciwnym razie null.",
+      "legal: false TYLKO gdy wiadomość nie zawiera żadnej kwestii prawnej (powitanie, test, podziękowanie, pytanie ogólne niezwiązane z prawem). Wtedy zwróć wyłącznie {\"legal\":false}. Wtedy Lex Machina nie ładuje skilli prawnych.",
+      "legal: true dla każdej sprawy lub pytania z elementem prawnym, także pośrednim (fakty sprawy, pismo, umowa, termin, przepis, urząd, sąd, dokumenty). W razie wątpliwości legal: true.",
       "Dla krótkiej komendy konwersacyjnej bez zadania prawnego executionSkills powinno być [].",
       "Dla pytania o konkretny przepis wybierz właściwą domenę kodeksu i analizator przepisu, jeśli jest dostępny.",
       "Zwróć TYLKO jeden obiekt JSON bez markdownu i bez komentarza:",
-      '{"primarySkill":"dr-...","domainSkills":["dr-..."],"executionSkills":[],"workflowExecutionSkill":null}',
+      '{"legal":true,"primarySkill":"dr-...","domainSkills":["dr-..."],"executionSkills":[],"workflowExecutionSkill":null}',
+      'albo dla wiadomości bez kwestii prawnej: {"legal":false}',
       "",
       "# DOZWOLONE DOMENY",
       ...domainCatalog.map(

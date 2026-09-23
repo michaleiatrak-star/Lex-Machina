@@ -237,6 +237,48 @@ describe(
   "ModelAutoRouter",
   () => {
     it(
+      "classifies a message without a legal matter so no legal skills are loaded",
+      async () => {
+        const registry =
+          fixture();
+        const setup =
+          router(
+            registry,
+            [
+              '{"legal":false}'
+            ]
+          );
+
+        const result =
+          await setup.router
+            .resolve({
+              query:
+                `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[]}\nCześć, jak się masz?`,
+              provider:
+                "openai",
+              model:
+                "account/openai/default"
+            });
+
+        expect(
+          result.decision.legal
+        ).toBe(false);
+        expect(
+          result.decision.executionSkills
+        ).toEqual([]);
+        expect(
+          result.decision.workflowExecutionSkill
+        ).toBeNull();
+        expect(
+          setup.adapter.calls[0]
+            ?.systemPrompt
+        ).toContain(
+          '{"legal":false}'
+        );
+      }
+    );
+
+    it(
       "uses the model decision as the AUTO route and exact skill selection",
       async () => {
         const registry =
@@ -274,6 +316,7 @@ describe(
         expect(
           result.decision
         ).toEqual({
+          legal: true,
           primarySkill:
             DR03,
           domainSkills: [

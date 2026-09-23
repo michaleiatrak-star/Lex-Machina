@@ -501,6 +501,11 @@ export class SafeSessionExecutor {
         const execution = await this.engine.executePolishLegalQuery({
             query: protectedQuery,
             ...(documentContext ? { documentContext } : {}),
+            ...(request.conversationalOnly
+                ? {
+                    conversationalOnly: true
+                }
+                : {}),
             provider: request.provider,
             model: request.model,
             ...(request.accountSessionKey

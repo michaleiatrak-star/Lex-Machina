@@ -84,6 +84,8 @@ import {
   setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
   skillsForDeterministicAction,
+  workModeForAction,
+  type ChatWorkMode,
   type DeterministicActionId,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
@@ -836,6 +838,10 @@ export default function MatterChatApp({
     deterministicAction,
     setDeterministicAction
   ] = useState<DeterministicActionId | "">("");
+  const [
+    workMode,
+    setWorkMode
+  ] = useState<ChatWorkMode>("AUTO");
   const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
   // null = every DR module is selected. Kept as null rather than a filled list
   // so the default sends no restriction at all and routing stays unchanged
@@ -1042,6 +1048,7 @@ export default function MatterChatApp({
 
   useEffect(() => {
     setDeterministicAction("");
+    setWorkMode("AUTO");
     setCaseTypeSkills([]);
     setManualSkills(null);
     setAllowedDomains(null);
@@ -1066,6 +1073,11 @@ export default function MatterChatApp({
       );
     setDeterministicAction(
       restored
+    );
+    setWorkMode(
+      workModeForAction(
+        restored
+      )
     );
     setCaseTypeSkills(
       skillsForDeterministicAction(
@@ -1763,6 +1775,9 @@ export default function MatterChatApp({
     setDeterministicAction(
       actionId
     );
+    if (actionId) {
+      setWorkMode("MECHANICAL");
+    }
     setCaseTypeSkills(
       mappedSkills
     );
@@ -2248,6 +2263,17 @@ export default function MatterChatApp({
       !runtimeOnline ||
       !model
     ) return;
+
+    if (
+      conversationIsNew &&
+      workMode === "MECHANICAL" &&
+      !deterministicAction
+    ) {
+      setExecutionError(
+        "Tryb mechaniczny: wybierz skill wykonawczy albo przełącz na tryb automatyczny."
+      );
+      return;
+    }
 
     const route =
       automaticSkills
@@ -3627,70 +3653,101 @@ export default function MatterChatApp({
                 );
               }}
             />
-            {conversationIsNew && availableActions.length > 0 ? (
+            {conversationIsNew ? (
               <section
                 className="chat-pipeline-picker"
-                aria-label="Typ działania dla pierwszej wiadomości"
+                aria-label="Tryb pracy dla nowej rozmowy"
               >
                 <div>
-                  <p className="eyebrow">Typ działania</p>
+                  <p className="eyebrow">Tryb pracy</p>
                   <h3>
-                    {selectedDeterministicAction
-                      ? selectedDeterministicAction.label
-                      : "Automatycznie — prawny router"}
+                    {workMode === "AUTO"
+                      ? "Automatyczny — prawny router"
+                      : selectedDeterministicAction
+                        ? `Mechaniczny — ${selectedDeterministicAction.label}`
+                        : "Mechaniczny — wybierz skill wykonawczy"}
                   </h3>
                   <p>
-                    Brak wyboru oznacza pełny tryb automatyczny: prawny-router-v3
-                    dobiera dziedziny DR i skille wykonawcze z treści wiadomości.
-                    Wybranie działania uruchamia stałe, programistyczne mapowanie
-                    na właściwy pipeline wykonawczy. Po wysłaniu pierwszej
-                    wiadomości ten wybór znika i zostaje przypięty do wątku.
+                    {workMode === "AUTO"
+                      ? "prawny-router-v3 dobiera dziedziny DR, skille wykonawcze i moduły z treści wiadomości. Pytania bez kwestii prawnej nie ładują skilli prawnych."
+                      : "Wybrany skill wykonawczy uruchamia stały, deterministyczny pipeline z jego modułami. Router nadal dobiera dziedzinę DR. Po wysłaniu pierwszej wiadomości wybór zostaje przypięty do wątku."}
                   </p>
                 </div>
-                <div className="chat-pipeline-options">
-                  {availableActions.map((action) => {
-                    const checked =
-                      deterministicAction ===
-                      action.id;
-                    return (
-                      <button
-                        key={action.id}
-                        type="button"
-                        className={
-                          checked
-                            ? "chat-pipeline-option selected"
-                            : "chat-pipeline-option"
-                        }
-                        aria-pressed={checked}
-                        onClick={() =>
-                          selectDeterministicAction(
-                            checked
-                              ? ""
-                              : action.id
-                          )
-                        }
-                      >
-                        <strong>
-                          {action.label}
-                        </strong>
-                        <small>
-                          {action.description}
-                        </small>
-                      </button>
-                    );
-                  })}
-                  {deterministicAction ? (
-                    <button
-                      type="button"
-                      className="chat-pipeline-option reset"
-                      onClick={() =>
-                        selectDeterministicAction("")
-                      }
-                    >
-                      Bez wyboru · AUTO
-                    </button>
-                  ) : null}
+                <div
+                  className="chat-work-mode"
+                  role="radiogroup"
+                  aria-label="Tryb pracy"
+                >
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "AUTO"}
+                    className={
+                      workMode === "AUTO"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => {
+                      selectDeterministicAction("");
+                      setWorkMode("AUTO");
+                    }}
+                  >
+                    <strong>Automatyczny</strong>
+                    <small>Router sam dobiera skille i moduły.</small>
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "MECHANICAL"}
+                    disabled={availableActions.length === 0}
+                    className={
+                      workMode === "MECHANICAL"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => setWorkMode("MECHANICAL")}
+                  >
+                    <strong>Mechaniczny</strong>
+                    <small>
+                      {availableActions.length > 0
+                        ? "Ty wybierasz skill wykonawczy i jego pipeline."
+                        : "Brak skilli wykonawczych w korpusie."}
+                    </small>
+                  </button>
                 </div>
+                {workMode === "MECHANICAL" ? (
+                  <div className="chat-pipeline-options">
+                    {availableActions.map((action) => {
+                      const checked =
+                        deterministicAction ===
+                        action.id;
+                      return (
+                        <button
+                          key={action.id}
+                          type="button"
+                          className={
+                            checked
+                              ? "chat-pipeline-option selected"
+                              : "chat-pipeline-option"
+                          }
+                          aria-pressed={checked}
+                          onClick={() =>
+                            selectDeterministicAction(
+                              action.id
+                            )
+                          }
+                        >
+                          <strong>
+                            {action.label}
+                          </strong>
+                          <small>
+                            {action.description}
+                          </small>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </section>
             ) : null}
 

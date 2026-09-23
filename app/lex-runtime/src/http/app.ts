@@ -6826,6 +6826,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             .primarySkill;
         request.query =
           routed.query;
+        if (
+          routed.decision.legal ===
+            false &&
+          attachments.length === 0
+        ) {
+          request.conversationalOnly =
+            true;
+        }
       } catch (error) {
         if (
           error instanceof Error &&

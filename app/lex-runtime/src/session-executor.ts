@@ -156,6 +156,9 @@ export type SessionExecutionRequest = {
   };
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
+  // Set only by the AUTO router (decision.legal === false): answer without
+  // loading legal skills, modules or legal tools.
+  conversationalOnly?: boolean;
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
   auxiliaryText?: string;
@@ -1207,6 +1210,11 @@ export class SafeSessionExecutor implements SessionExecutor {
     const execution = await this.engine.executePolishLegalQuery({
       query: protectedQuery,
       ...(documentContext ? { documentContext } : {}),
+      ...(request.conversationalOnly
+        ? {
+            conversationalOnly: true
+          }
+        : {}),
       provider: request.provider,
       model: request.model,
       ...(request.accountSessionKey

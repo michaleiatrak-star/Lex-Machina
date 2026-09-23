@@ -926,14 +926,18 @@ export class CaseLawSearchService {
       };
     }
 
+    // NSA/WSA (CBOSA) policy: no hits is OUT_OF_SCOPE, never evidence that
+    // no judgment exists.
     if (total === 0) {
       return {
         source: "CBOSA",
         status:
-          "NOT_FOUND",
+          "OUT_OF_SCOPE",
         query,
         candidates: [],
-        total: 0
+        total: 0,
+        reason:
+          "CBOSA_NO_HITS"
       };
     }
 
@@ -1155,10 +1159,16 @@ export class CaseLawSearchService {
       status:
         candidates.length
           ? "FOUND"
-          : "NOT_FOUND",
+          : "OUT_OF_SCOPE",
       query,
       candidates,
-      total
+      total,
+      ...(candidates.length
+        ? {}
+        : {
+            reason:
+              "CBOSA_NO_HITS"
+          })
     };
   }
 }
