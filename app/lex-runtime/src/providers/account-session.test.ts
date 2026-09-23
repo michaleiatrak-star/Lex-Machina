@@ -9,6 +9,7 @@ import {
   accountSessionModelId,
   accountSessionResumeMode,
   claudeAutomationCredentialMode,
+  claudeHeadlessArgs,
   claudeSubscriptionAuthenticated,
   classifyAccountCliFailureDetail,
   codexExecArgs,
@@ -18,6 +19,7 @@ import {
   isMissingResumableSessionMessage,
   mergeWindowsCommandPath,
   openAiChatGptAuthenticated,
+  sanitizeAccountCliFailureDetail,
   visibleWindowsLoginLauncher
 } from "./account-session.js";
 
@@ -65,23 +67,10 @@ describe("provider account-session transport", () => {
   });
 
 
-  it("keeps Lex context authoritative while restoring host-session continuity", () => {
-    for (
-      const provider
-      of [
-        "openai",
-        "anthropic",
-        "xai"
-      ] as const
-    ) {
-      expect(
-        accountSessionResumeMode(
-          provider
-        )
-      ).toBe(
-        "LAST_OR_NEW"
-      );
-    }
+  it("keeps Claude continuity inside Lex while preserving legacy resume for other account lanes", () => {
+    expect(accountSessionResumeMode("anthropic")).toBe("LEX_CONTEXT_ONLY");
+    expect(accountSessionResumeMode("openai")).toBe("LAST_OR_NEW");
+    expect(accountSessionResumeMode("xai")).toBe("LAST_OR_NEW");
   });
 
   it("pins Codex account execution to a ChatGPT-compatible model and isolated persistent config", () => {
@@ -141,6 +130,28 @@ describe("provider account-session transport", () => {
     ).toBe(
       "ACCOUNT_SESSION_CLI_INCOMPATIBLE"
     );
+  });
+
+  it("uses stdin as the complete Claude headless prompt and keeps tools disabled", () => {
+    const args = claudeHeadlessArgs("lex-system");
+    expect(args[0]).toBe("-p");
+    expect(args[1]).toBe("--output-format");
+    expect(args).toContain("--restricted");
+    expect(args).toContain("mcp__*");
+    expect(args).toContain("lex-system");
+  });
+
+  it("classifies common Claude OAuth failures and redacts secrets from diagnostics", () => {
+    expect(
+      classifyAccountCliFailureDetail(
+        "OAuth session expired and could not be refreshed"
+      )
+    ).toBe("ACCOUNT_SESSION_AUTH_EXPIRED");
+    const sanitized = sanitizeAccountCliFailureDetail(
+      "Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123456789 token sk-ant-oat01-supersecret"
+    );
+    expect(sanitized).not.toContain("supersecret");
+    expect(sanitized).toContain("[REDACTED_TOKEN]");
   });
 
   it("uses current interactive login commands for account providers", () => {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 4,
   "target": "windows-x86_64",
-  "applicationVersion": "0.1.8",
+  "applicationVersion": "0.1.9",
   "installerMode": "ONLINE_BOOTSTRAP_DEFAULT",
   "applicationUpdate": {
     "verification": "SHA256_AND_AUTHENTICODE_PINNED_PUBLISHER",
@@ -365,7 +365,7 @@
     },
     "claude": {
       "package": "@anthropic-ai/claude-code",
-      "version": "2.1.274",
+      "version": "2.1.278",
       "delivery": "ON_DEMAND_AFTER_USER_SELECTS_CLAUDE_ACCOUNT",
       "auth": "CLAUDE_AI_SUBSCRIPTION",
       "installRoot": "%LOCALAPPDATA%\\LexMachina\\optional-tools\\account-clients\\anthropic",

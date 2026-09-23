@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+"use strict";var r=require("../../register-B1c7OH6V.cjs"),e=require("../../require-CVaYn9z3.cjs");require("node:module"),require("node:path"),require("node:url"),require("node:fs"),require("fs"),require("os"),require("path"),require("esbuild"),require("node:crypto"),require("node:os"),require("../../client-XItNFmsq.cjs"),require("node:net"),require("node:util"),exports.register=r.register,exports.require=e.tsxRequire;

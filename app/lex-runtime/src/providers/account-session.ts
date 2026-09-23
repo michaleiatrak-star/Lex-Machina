@@ -73,7 +73,7 @@ const OPTIONAL_ACCOUNT_CLIENTS: Partial<Record<
   },
   anthropic: {
     packageName: "@anthropic-ai/claude-code",
-    version: "2.1.274",
+    version: "2.1.278",
     binary: "claude"
   }
 };
@@ -83,9 +83,11 @@ export type AccountSessionResumeMode =
   | "LEX_CONTEXT_ONLY";
 
 export function accountSessionResumeMode(
-  _provider?: ProviderId
+  provider?: ProviderId
 ): AccountSessionResumeMode {
-  return "LAST_OR_NEW";
+  return provider === "anthropic"
+    ? "LEX_CONTEXT_ONLY"
+    : "LAST_OR_NEW";
 }
 
 export function isMissingResumableSessionMessage(
@@ -679,6 +681,8 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
   } else if (provider === "anthropic") {
     delete env.ANTHROPIC_API_KEY;
     delete env.ANTHROPIC_AUTH_TOKEN;
+    env.CLAUDE_CODE_MCP_STARTUP_WAIT_MS = "0";
+    env.MCP_CONNECTION_NONBLOCKING = "true";
     const token =
       currentAnthropicOAuthToken();
     if (token) {
@@ -882,6 +886,28 @@ function optionalAccountClientExecutable(
     : null;
 }
 
+async function optionalAccountClientMatchesPinnedVersion(
+  provider: "openai" | "anthropic"
+): Promise<boolean> {
+  const spec = OPTIONAL_ACCOUNT_CLIENTS[provider];
+  if (!spec) return false;
+  try {
+    const packagePath = path.join(
+      optionalAccountClientsRoot(),
+      provider,
+      "node_modules",
+      ...spec.packageName.split("/"),
+      "package.json"
+    );
+    const parsed = JSON.parse(
+      await fsp.readFile(packagePath, "utf8")
+    ) as { version?: unknown };
+    return parsed.version === spec.version;
+  } catch {
+    return false;
+  }
+}
+
 function privateCodexExecutable(): string | null {
   const override =
     process.env
@@ -1008,6 +1034,38 @@ export function codexExecArgs(
   ];
 }
 
+export function claudeHeadlessArgs(
+  systemPrompt: string,
+  tail: string[] = []
+): string[] {
+  return [
+    "-p",
+    "--output-format",
+    "json",
+    "--restricted",
+    "--tools",
+    "",
+    "--disallowedTools",
+    "mcp__*",
+    "--system-prompt",
+    systemPrompt,
+    "--system-prompt-snapshot",
+    "off",
+    ...tail
+  ];
+}
+
+export function sanitizeAccountCliFailureDetail(
+  value: string
+): string {
+  return value
+    .replace(/sk-ant-[A-Za-z0-9_-]+/gi, "[REDACTED_TOKEN]")
+    .replace(/\bBearer\s+[A-Za-z0-9._~+\/=-]{20,}\b/gi, "Bearer [REDACTED_TOKEN]")
+    .replace(/[\r\n]+/g, " ")
+    .trim()
+    .slice(-1200);
+}
+
 export function classifyAccountCliFailureDetail(
   detail: string
 ):
@@ -1028,7 +1086,7 @@ export function classifyAccountCliFailureDetail(
     return "ACCOUNT_SESSION_MODEL_UNSUPPORTED";
   }
   if (
-    /401|unauthorized|not logged in|login required|authentication.*failed|credentials.*missing/.test(
+    /401|unauthorized|not logged in|login required|authentication.*failed|credentials.*missing|oauth.{0,80}expired|token.{0,80}expired|invalid bearer token|could not be refreshed/.test(
       lower
     )
   ) {
@@ -1226,12 +1284,30 @@ function runDirect(
 async function ensureAccountExecutable(
   provider: ProviderId
 ): Promise<string | null> {
-  const existing =
-    await resolveAccountExecutable(
-      provider
-    );
-  if (existing) {
-    return existing;
+  if (provider === "openai" || provider === "anthropic") {
+    const privateExecutable =
+      provider === "openai"
+        ? privateCodexExecutable()
+        : privateClaudeExecutable();
+    if (
+      privateExecutable &&
+      await optionalAccountClientMatchesPinnedVersion(provider)
+    ) {
+      return privateExecutable;
+    }
+    if (!privateExecutable) {
+      const systemExecutable =
+        await resolveCommand(CLI_NAMES[provider]);
+      if (systemExecutable) {
+        return systemExecutable;
+      }
+    }
+  } else {
+    const existing =
+      await resolveAccountExecutable(provider);
+    if (existing) {
+      return existing;
+    }
   }
 
   const spec =
@@ -1532,16 +1608,15 @@ function normalizeCliFailure(
   result: RunResult
 ): Error {
   const detail =
-    (result.stderr || result.stdout)
-      .trim()
-      .slice(-1200)
-      .replace(/[\r\n]+/g, " ");
+    sanitizeAccountCliFailureDetail(
+      result.stderr || result.stdout
+    );
   const code =
     classifyAccountCliFailureDetail(
       detail
     );
   return new Error(
-    `${code}:${provider}:${result.code}`
+    `${code}:${provider}:${result.code}${detail ? `:${detail}` : ""}`
   );
 }
 
@@ -2895,27 +2970,14 @@ export class AccountSessionManager {
         provider ===
           "anthropic"
       ) {
-        const fixedQuery =
-          "Treat all piped stdin content as the complete Lex Machina request and return only the requested response.";
         const lexSystemPrompt =
           "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
-        const commonArgs = [
-          "-p",
-          fixedQuery,
-          "--output-format",
-          "json",
-          "--restricted",
-          "--tools",
-          "",
-          "--disallowedTools",
-          "mcp__*",
-          "--system-prompt",
-          lexSystemPrompt,
-          "--system-prompt-snapshot",
-          "off"
-        ];
+        const commonArgs =
+          claudeHeadlessArgs(
+            lexSystemPrompt
+          );
         const hostCwd =
-          process.cwd();
+          workDir;
         const runClaude = (
           tail: string[]
         ) =>
@@ -2968,70 +3030,6 @@ export class AccountSessionManager {
                 provider,
                 result
               );
-            }
-          }
-        }
-
-        if (
-          !result &&
-          allowExternalTakeover
-        ) {
-          const latest =
-            await runClaude([
-              "--continue"
-            ]);
-          if (
-            latest.code === 0
-          ) {
-            result =
-              latest;
-          } else {
-            const detail =
-              latest.stderr +
-              "\n" +
-              latest.stdout;
-            if (
-              !isMissingResumableSessionMessage(
-                detail
-              )
-            ) {
-              throw normalizeCliFailure(
-                provider,
-                latest
-              );
-            }
-
-            const discoveredSessionId =
-              await discoverLatestClaudeSessionId();
-            if (
-              discoveredSessionId
-            ) {
-              const discovered =
-                await runClaude([
-                  "--resume",
-                  discoveredSessionId
-                ]);
-              if (
-                discovered.code === 0
-              ) {
-                result =
-                  discovered;
-              } else {
-                const discoveredDetail =
-                  discovered.stderr +
-                  "\n" +
-                  discovered.stdout;
-                if (
-                  !isMissingResumableSessionMessage(
-                    discoveredDetail
-                  )
-                ) {
-                  throw normalizeCliFailure(
-                    provider,
-                    discovered
-                  );
-                }
-              }
             }
           }
         }

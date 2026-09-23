@@ -1,0 +1,397 @@
+import { createHash } from "node:crypto";
+import { chunkDocumentPages } from "./document-ingestion.js";
+import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
+import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
+export class LocalPrivateDocumentService {
+    pdfIngestor;
+    namedEntities;
+    maxChunkChars;
+    imageIngestor;
+    privacyVaultStore;
+    secureDocumentStore;
+    officeExtractor;
+    spreadsheetExtractor;
+    documents = new Map();
+    constructor(pdfIngestor, namedEntities, maxChunkChars = 24_000, imageIngestor, privacyVaultStore, secureDocumentStore, officeExtractor, spreadsheetExtractor) {
+        this.pdfIngestor = pdfIngestor;
+        this.namedEntities = namedEntities;
+        this.maxChunkChars = maxChunkChars;
+        this.imageIngestor = imageIngestor;
+        this.privacyVaultStore = privacyVaultStore;
+        this.secureDocumentStore = secureDocumentStore;
+        this.officeExtractor = officeExtractor;
+        this.spreadsheetExtractor = spreadsheetExtractor;
+    }
+    digitalTextResult(data, text) {
+        if (data.byteLength >
+            64 * 1024 * 1024 ||
+            text.length >
+                100_000_000) {
+            throw new Error("DOCUMENT_TEXT_LIMIT_EXCEEDED");
+        }
+        const page = {
+            page: 1,
+            text,
+            source: text.trim()
+                ? "DIGITAL"
+                : "BLANK"
+        };
+        const pages = [
+            page
+        ];
+        return {
+            complete: true,
+            sha256: createHash("sha256")
+                .update(data)
+                .digest("hex"),
+            bytes: data.byteLength,
+            totalPages: 1,
+            digitalPages: page.source ===
+                "DIGITAL"
+                ? 1
+                : 0,
+            ocrPages: 0,
+            blankPages: page.source ===
+                "BLANK"
+                ? 1
+                : 0,
+            sourceChars: text.length,
+            pages,
+            chunks: chunkDocumentPages(pages, this.maxChunkChars)
+        };
+    }
+    async extract(data, mediaType) {
+        if (mediaType === "application/pdf") {
+            return this.pdfIngestor.ingest(data);
+        }
+        if (mediaType ===
+            "text/plain" ||
+            mediaType ===
+                "text/markdown") {
+            return this.digitalTextResult(data, new TextDecoder("utf-8", {
+                fatal: false
+            }).decode(data));
+        }
+        if (mediaType ===
+            XLSX_MEDIA_TYPE ||
+            mediaType ===
+                XLSM_MEDIA_TYPE ||
+            mediaType ===
+                CSV_MEDIA_TYPE ||
+            mediaType ===
+                TSV_MEDIA_TYPE) {
+            if (!this.spreadsheetExtractor) {
+                throw new Error("SPREADSHEET_EXTRACTOR_UNAVAILABLE");
+            }
+            return this.digitalTextResult(data, await this.spreadsheetExtractor
+                .extract(data, mediaType));
+        }
+        if (mediaType ===
+            DOCX_MEDIA_TYPE ||
+            mediaType ===
+                ODT_MEDIA_TYPE) {
+            if (!this.officeExtractor) {
+                throw new Error("OFFICE_DOCUMENT_EXTRACTOR_UNAVAILABLE");
+            }
+            return this.digitalTextResult(data, await this.officeExtractor
+                .extract(data, mediaType));
+        }
+        if (!this.imageIngestor) {
+            throw new Error("IMAGE_OCR_UNAVAILABLE");
+        }
+        return this.imageIngestor.ingest(data, mediaType);
+    }
+    async review(data, mediaType, security) {
+        const source = await this.extract(data, mediaType);
+        const documentId = `doc_${source.sha256.slice(0, 24)}`;
+        const persistentDocument = Boolean(this.secureDocumentStore &&
+            security?.caseId);
+        if (persistentDocument) {
+            if (!security?.caseDataKey ||
+                !Number.isInteger(security.keyVersion) ||
+                (security.keyVersion ?? 0) <
+                    1) {
+                throw new Error("DOCUMENT_STORAGE_CONTEXT_REQUIRED");
+            }
+            await this
+                .secureDocumentStore
+                .saveSource({
+                caseId: security.caseId,
+                documentId,
+                mediaType,
+                source,
+                caseDataKey: security.caseDataKey,
+                keyVersion: security.keyVersion
+            });
+        }
+        const vault = new PseudonymizationVault();
+        this.documents.set(documentId, {
+            mediaType,
+            ...(security?.caseId
+                ? {
+                    caseId: security.caseId
+                }
+                : {}),
+            vault,
+            source
+        });
+        const suggestionVault = new PseudonymizationVault();
+        const suggestionEngine = new LocalPolishPseudonymizer(suggestionVault, this.namedEntities);
+        const suggestions = [];
+        for (const page of source.pages) {
+            const preview = await suggestionEngine.pseudonymize(page.text);
+            for (const finding of preview.findings) {
+                suggestions.push({
+                    page: page.page,
+                    start: finding.start,
+                    end: finding.end,
+                    kind: finding.kind
+                });
+            }
+        }
+        return {
+            documentId,
+            mediaType,
+            complete: true,
+            totalPages: source.totalPages,
+            pages: source.pages.map((page) => ({
+                page: page.page,
+                text: page.text,
+                source: page.source,
+                ...(page.confidence !== undefined
+                    ? { confidence: page.confidence }
+                    : {}),
+                ...(page.engine
+                    ? { engine: page.engine }
+                    : {})
+            })),
+            suggestions
+        };
+    }
+    async finalizeReview(documentId, directives, security) {
+        const record = this.documents.get(documentId);
+        if (!record) {
+            throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+        }
+        for (const directive of directives) {
+            if (!Number.isInteger(directive.page) ||
+                directive.page < 1 ||
+                directive.page > record.source.totalPages) {
+                throw new Error("INVALID_PRIVACY_DIRECTIVE_PAGE");
+            }
+        }
+        const persistentVault = Boolean(this.privacyVaultStore &&
+            record.caseId);
+        if (persistentVault) {
+            if (!security ||
+                security.caseId !==
+                    record.caseId ||
+                !security.caseDataKey ||
+                !Number.isInteger(security.keyVersion) ||
+                (security.keyVersion ?? 0) <
+                    1) {
+                throw new Error("DOCUMENT_VAULT_CONTEXT_REQUIRED");
+            }
+            record.vault =
+                await this
+                    .privacyVaultStore
+                    .loadDocumentVault({
+                    caseId: record.caseId,
+                    documentId,
+                    caseDataKey: security.caseDataKey,
+                    keyVersion: security.keyVersion
+                });
+        }
+        const pseudonymizer = new LocalPolishPseudonymizer(record.vault, this.namedEntities);
+        const pages = [];
+        const counts = {};
+        const annotations = [];
+        let findings = 0;
+        let manualPseudonymizations = 0;
+        let keptRanges = 0;
+        for (const page of record.source.pages) {
+            const pageDirectives = directives
+                .filter((directive) => directive.page === page.page)
+                .map(({ page: _page, ...directive }) => directive);
+            const protectedPage = await pseudonymizer.pseudonymize(page.text, pageDirectives);
+            findings += protectedPage.findings.length;
+            manualPseudonymizations +=
+                protectedPage.findings.filter((item) => item.source === "USER").length;
+            keptRanges +=
+                protectedPage.keptRanges.length;
+            for (const [kind, count] of Object.entries(protectedPage.counts)) {
+                counts[kind] = (counts[kind] ?? 0) + count;
+            }
+            for (const annotation of protectedPage.annotations) {
+                annotations.push({
+                    page: page.page,
+                    ...annotation
+                });
+            }
+            pages.push({
+                ...page,
+                text: protectedPage.text
+            });
+        }
+        const chunks = chunkDocumentPages(pages, this.maxChunkChars);
+        const pseudonymizedChars = pages.reduce((sum, page) => sum + page.text.length, 0);
+        const publicChunks = chunks.map((chunk) => ({
+            index: chunk.index,
+            pageStart: chunk.pageStart,
+            pageEnd: chunk.pageEnd,
+            text: chunk.text
+        }));
+        record.protectedChunks = publicChunks;
+        if (persistentVault &&
+            security?.caseDataKey &&
+            security.keyVersion &&
+            record.caseId) {
+            await this
+                .privacyVaultStore
+                .saveDocumentVault({
+                caseId: record.caseId,
+                documentId,
+                vault: record.vault,
+                caseDataKey: security.caseDataKey,
+                keyVersion: security.keyVersion
+            });
+        }
+        const result = {
+            documentId,
+            mediaType: record.mediaType,
+            complete: true,
+            totalPages: record.source.totalPages,
+            digitalPages: record.source.digitalPages,
+            ocrPages: record.source.ocrPages,
+            blankPages: record.source.blankPages,
+            sourceChars: record.source.sourceChars,
+            pseudonymizedChars,
+            chunks: publicChunks.map((chunk) => ({
+                ...chunk
+            })),
+            privacy: {
+                findings,
+                counts,
+                manualPseudonymizations,
+                keptRanges,
+                annotations,
+                reversibleLocally: true
+            }
+        };
+        if (this.secureDocumentStore &&
+            record.caseId) {
+            if (!security ||
+                security.caseId !==
+                    record.caseId ||
+                !security.caseDataKey ||
+                !Number.isInteger(security.keyVersion) ||
+                (security.keyVersion ?? 0) <
+                    1) {
+                throw new Error("DOCUMENT_STORAGE_CONTEXT_REQUIRED");
+            }
+            await this
+                .secureDocumentStore
+                .saveProtected({
+                caseId: record.caseId,
+                documentId,
+                ingestion: result,
+                caseDataKey: security.caseDataKey,
+                keyVersion: security.keyVersion
+            });
+        }
+        return result;
+    }
+    async ingestPdf(data, security) {
+        const review = await this.review(data, "application/pdf", security);
+        return this.finalizeReview(review.documentId, [], security);
+    }
+    async ingestImage(data, mediaType, security) {
+        const review = await this.review(data, mediaType, security);
+        return this.finalizeReview(review.documentId, [], security);
+    }
+    async resolveProtectedChunks(selection) {
+        const record = this.documents.get(selection.documentId);
+        if (!record) {
+            throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+        }
+        if (!record.protectedChunks) {
+            throw new Error("DOCUMENT_NOT_FINALIZED");
+        }
+        const unique = [
+            ...new Set(selection.chunkIndices)
+        ].sort((a, b) => a - b);
+        if (unique.length === 0 ||
+            unique.length > 32 ||
+            unique.some((index) => !Number.isInteger(index) ||
+                index < 1)) {
+            throw new Error("INVALID_DOCUMENT_CHUNK_SELECTION");
+        }
+        const byIndex = new Map(record.protectedChunks.map((chunk) => [chunk.index, chunk]));
+        const chunks = unique.map((index) => {
+            const chunk = byIndex.get(index);
+            if (!chunk) {
+                throw new Error("UNKNOWN_DOCUMENT_CHUNK");
+            }
+            return { ...chunk };
+        });
+        const totalChars = chunks.reduce((sum, chunk) => sum + chunk.text.length, 0);
+        if (totalChars > 160_000) {
+            throw new Error("DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE");
+        }
+        return {
+            documentId: selection.documentId,
+            chunks,
+            totalChars
+        };
+    }
+    async restoreDocument(args) {
+        if (!this.secureDocumentStore) {
+            throw new Error("DOCUMENT_STORAGE_UNAVAILABLE");
+        }
+        const source = await this
+            .secureDocumentStore
+            .loadSource(args);
+        const protectedResult = await this
+            .secureDocumentStore
+            .loadProtected(args);
+        if (protectedResult.mediaType !==
+            source.mediaType) {
+            throw new Error("DOCUMENT_STORAGE_MEDIA_TYPE_MISMATCH");
+        }
+        let vault = new PseudonymizationVault();
+        if (this.privacyVaultStore) {
+            vault =
+                await this
+                    .privacyVaultStore
+                    .loadDocumentVault({
+                    caseId: args.caseId,
+                    documentId: args.documentId,
+                    caseDataKey: args.caseDataKey,
+                    keyVersion: args.keyVersion
+                });
+        }
+        this.documents.set(args.documentId, {
+            mediaType: source.mediaType,
+            caseId: args.caseId,
+            vault,
+            source: source.source,
+            protectedChunks: protectedResult
+                .chunks
+                .map((chunk) => ({
+                ...chunk
+            }))
+        });
+        return protectedResult;
+    }
+    deanonymize(documentId, text) {
+        const record = this.documents.get(documentId);
+        if (!record) {
+            throw new Error("Unknown local document.");
+        }
+        return record.vault.deanonymize(text);
+    }
+    forget(documentId) {
+        return this.documents.delete(documentId);
+    }
+}

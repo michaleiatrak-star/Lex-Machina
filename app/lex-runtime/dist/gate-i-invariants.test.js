@@ -1,0 +1,312 @@
+import { describe, expect, it } from "vitest";
+import { evaluateGateIInvariants } from "./gate-i-invariants.js";
+function baseEvents() {
+    return [
+        {
+            sequence: 1,
+            type: "session",
+            target: "legal-query",
+            status: "OK"
+        },
+        {
+            sequence: 2,
+            type: "skill_read",
+            target: "prawny-router-v3",
+            status: "OK"
+        },
+        {
+            sequence: 3,
+            type: "resource_read",
+            target: "shared/PRAWO-HARDGATE.md",
+            status: "OK"
+        },
+        {
+            sequence: 4,
+            type: "resource_read",
+            target: "references/KROK0A-anonimizer.md",
+            status: "OK"
+        },
+        {
+            sequence: 5,
+            type: "resource_read",
+            target: "references/KROK1-detekcja.md",
+            status: "OK"
+        },
+        {
+            sequence: 6,
+            type: "resource_read",
+            target: "references/SELF-CHECK.md",
+            status: "OK"
+        },
+        {
+            sequence: 7,
+            type: "gate",
+            target: "G39L_ROUTER_REQUIRED_MODULES",
+            status: "OK"
+        }
+    ];
+}
+function reads() {
+    return {
+        workflow: "LEGAL_QUERY_V1",
+        required: [],
+        observed: [],
+        missing: [],
+        result: "PASS"
+    };
+}
+function finalization() {
+    return {
+        gate: "G8_HARD_GATE_FINALIZATION",
+        result: "PASS",
+        references: [],
+        findings: [],
+        caseQuoteFindings: [],
+        caseSupportFindings: []
+    };
+}
+describe("Gate I common legal invariants", () => {
+    it("passes a source-free legal chat only when router/core/finalization invariants are present", () => {
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.result)
+            .toBe("PASS");
+        expect(report.checks
+            .map((check) => check.result)).not.toContain("BLOCKED");
+    });
+    it("blocks verified statutory evidence without full provenance", () => {
+        const records = [
+            {
+                claim: "art. 5 KC",
+                kind: "statute",
+                status: "VERIFIED",
+                sourceUrl: "https://eli.gov.pl/",
+                fetchedAt: "2026-09-18T10:00:00.000Z",
+                verificationMethod: "web_fetch"
+            }
+        ];
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: records,
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.checks.find((check) => check.id ===
+            "SOURCE_PROVENANCE")?.result).toBe("BLOCKED");
+    });
+    it("requires official source tier and explicit temporal freshness proof for verified statutes", () => {
+        const good = {
+            claim: "art. 5 KC",
+            kind: "statute",
+            status: "VERIFIED",
+            sourceUrl: "https://eli.gov.pl/",
+            sourceTier: "R1",
+            fetchedAt: "2026-09-18T10:00:00.000Z",
+            verificationMethod: "web_fetch",
+            temporalMode: "CURRENT",
+            temporalFreshnessStatus: "CURRENT",
+            freshnessCheckedAt: "2026-09-18T09:59:59.000Z"
+        };
+        const pass = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [
+                good
+            ],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(pass.checks.find((check) => check.id ===
+            "SOURCE_HIERARCHY")?.result).toBe("PASS");
+        expect(pass.checks.find((check) => check.id ===
+            "TEMPORAL_FRESHNESS")?.result).toBe("PASS");
+        const stale = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [
+                Object.fromEntries(Object.entries(good).filter(([key]) => key !==
+                    "temporalFreshnessStatus" &&
+                    key !==
+                        "freshnessCheckedAt"))
+            ],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(stale.checks.find((check) => check.id ===
+            "TEMPORAL_FRESHNESS")?.result).toBe("BLOCKED");
+    });
+    it("blocks rejected or unanchored local document citations", () => {
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS"
+            },
+            documentCitations: {
+                accepted: 1,
+                rejected: 1,
+                quotedWithoutExactHighlight: 1
+            }
+        });
+        expect(report.checks.find((check) => check.id ===
+            "DOCUMENT_CITATIONS")?.result).toBe("BLOCKED");
+    });
+    it("blocks a case citation if finalization reports a missing signature verification marker", () => {
+        const final = finalization();
+        final.result =
+            "BLOCKED";
+        final.references = [
+            {
+                claim: "sygn. III CZP 25/11",
+                kind: "case",
+                line: 1,
+                lineText: "sygn. III CZP 25/11"
+            }
+        ];
+        final.findings = [
+            {
+                reference: final.references[0],
+                status: "MISSING_LEDGER_RECORD"
+            }
+        ];
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: final,
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.result)
+            .toBe("BLOCKED");
+        expect(report.checks.find((check) => check.id ===
+            "CASE_SIGNATURES")?.result).toBe("BLOCKED");
+    });
+    it("assigns every mechanical invariant to a stable Gate I subgate", () => {
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.checks.map((item) => item.subgate)).toEqual([
+            "I-A_ROUTER",
+            "I-B_CORE_RESOURCES",
+            "I-B1_ROUTER_REQUIRED_MODULES",
+            "I-C_WORKFLOW_RESOURCES",
+            "I-D_SOURCE_PROVENANCE",
+            "I-D1_SOURCE_HIERARCHY",
+            "I-D2_TEMPORAL_FRESHNESS",
+            "I-E_CITATION_LEDGER",
+            "I-E1_LEGAL_CITATIONS",
+            "I-F_CASE_SIGNATURES",
+            "I-F1_DOCUMENT_CITATIONS",
+            "I-G_OUTPUT_CONTRACT",
+            "I-H_FINALIZATION"
+        ]);
+    });
+    it("blocks I-G when a skill-specific output contract fails", () => {
+        const report = evaluateGateIInvariants({
+            events: baseEvents(),
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: finalization(),
+            outputValidation: {
+                result: "BLOCKED",
+                detail: "workflow=BLOCKED"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.checks.find((item) => item.subgate ===
+            "I-G_OUTPUT_CONTRACT")?.result).toBe("BLOCKED");
+        expect(report.result)
+            .toBe("BLOCKED");
+    });
+    it("blocks when router is not the first skill read", () => {
+        const events = baseEvents();
+        events.splice(1, 0, {
+            sequence: 2,
+            type: "skill_read",
+            target: "analizator-przepisow-v2",
+            status: "OK"
+        });
+        const report = evaluateGateIInvariants({
+            events,
+            workflowReads: reads(),
+            verificationRecords: [],
+            finalization: finalization(),
+            outputValidation: {
+                result: "PASS",
+                detail: "workflow=PASS;guide=N/A;reportBlueprint=PASS"
+            },
+            documentCitations: {
+                accepted: 0,
+                rejected: 0,
+                quotedWithoutExactHighlight: 0
+            }
+        });
+        expect(report.checks.find((check) => check.id ===
+            "ROUTER_FIRST")?.result).toBe("BLOCKED");
+    });
+});

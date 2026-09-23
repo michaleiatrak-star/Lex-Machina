@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+import{createRequire as r}from"node:module";const o=r(import.meta.url);import{r as _,t as b}from"../../require-CBjy4Foe.mjs";import"node:module";import"node:path";import"node:url";import"node:fs";import"fs";import"os";import"path";import"../../index-DE3OBZuV.mjs";import"esbuild";import"node:crypto";import"../../temporary-directory-Du7LpLp9.mjs";import"node:os";import"node:net";import"../../index-Bqjv9TxC.mjs";import"node:util";export{_ as register,b as require};
