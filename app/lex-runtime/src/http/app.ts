@@ -1427,6 +1427,207 @@ async function refreshDocumentCitations(args: {
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
   const app = express();
   const routing = new RoutingCatalog(options.registry);
+
+  // Resolves primarySkill "AUTO" for a session request. Returns false when an
+  // error response has already been sent.
+  async function resolveAutoPrimarySkill(
+    request: SessionExecutionRequest,
+    res: Response,
+    attachmentCount: number,
+    {
+      allowModelSelection,
+      allowConversational
+    }: {
+      allowModelSelection: boolean;
+      allowConversational: boolean;
+    }
+  ): Promise<boolean> {
+      // AUTO with an account or API model: the model picks the skills itself
+      // (router-v3 first, enforced by the corpus tools) instead of a separate
+      // routing pass. Local models keep the compact routing pass.
+      const autoEnvelope =
+        request.primarySkill === "AUTO"
+          ? parseSkillSelectionEnvelope(
+              request.query
+            )
+          : null;
+      const modelSelectsSkills =
+        allowModelSelection &&
+        autoEnvelope !== null &&
+        autoEnvelope.automatic &&
+        autoEnvelope.manualSkills.length === 0 &&
+        autoEnvelope.workflowExecutionSkill === null &&
+        !request.model.startsWith("local/");
+      if (modelSelectsSkills) {
+        const placeholder =
+          [...options.registry.skills.keys()]
+            .filter((name) =>
+              name.startsWith("dr-") &&
+              (
+                !autoEnvelope.domainRestrictionActive ||
+                autoEnvelope.domainAllowList.includes(name)
+              )
+            )
+            .sort()[0];
+        if (!placeholder) {
+          res.status(422).json({
+            error:
+              "AUTO_ROUTING_FAILED",
+            reason:
+              "AUTO_ROUTING_NO_DOMAIN_CANDIDATES"
+          });
+          return false;
+        }
+        request.primarySkill =
+          placeholder;
+        request.modelSelectsSkills =
+          true;
+      }
+
+      if (
+        request.primarySkill ===
+          "AUTO"
+      ) {
+        const resolveAutoRouting =
+          options.sessionExecutor
+            ?.resolveAutoRouting
+            ?.bind(
+              options.sessionExecutor
+            );
+        if (!resolveAutoRouting) {
+          res.status(503).json({
+            error:
+              "AUTO_ROUTING_UNAVAILABLE"
+          });
+          return false;
+        }
+        try {
+          const routed =
+            await resolveAutoRouting(
+              request
+            );
+          request.primarySkill =
+            routed.decision
+              .primarySkill;
+          request.query =
+            routed.query;
+          if (
+            routed.decision.legal ===
+              false &&
+            attachmentCount === 0 &&
+            allowConversational
+          ) {
+            request.conversationalOnly =
+              true;
+          }
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            error.message ===
+              "CHAT_PRIVACY_GATE_FAILED"
+          ) {
+            res.status(503).json({
+              error:
+                "CHAT_PRIVACY_GATE_FAILED"
+            });
+            return false;
+          }
+
+          const localFailureMessage =
+            request.model.startsWith(
+              "local/"
+            )
+              ? (
+                  error instanceof
+                    ProviderGatewayError &&
+                  error.causeValue instanceof
+                    Error
+                    ? error.causeValue
+                        .message
+                    : error instanceof Error
+                      ? error.message
+                      : ""
+                )
+              : "";
+          const parsedLocalReason =
+            localFailureMessage
+              .split(
+                ":",
+                1
+              )[0] ?? "";
+          if (
+            request.model.startsWith(
+              "local/"
+            ) &&
+            /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
+              parsedLocalReason
+            )
+          ) {
+            res.status(503).json({
+              error:
+                "LOCAL_MODEL_EXECUTION_FAILED",
+              reason:
+                parsedLocalReason
+            });
+            return false;
+          }
+
+          if (
+            error instanceof
+              ProviderGatewayError
+          ) {
+            const rawReason =
+              error.causeValue instanceof
+                Error
+                ? error.causeValue
+                    .message
+                : "";
+            const parsedReason =
+              rawReason.split(
+                ":",
+                1
+              )[0] ?? "";
+            res.status(502).json({
+              error:
+                "PROVIDER_EXECUTION_FAILED",
+              provider:
+                error.provider,
+              reason:
+                /^[A-Z0-9_]+$/.test(
+                  parsedReason
+                )
+                  ? parsedReason
+                  : "PROVIDER_UNCODED_FAILURE",
+              ...(rawReason
+                ? {
+                    description:
+                      safeDiagnosticText(
+                        rawReason
+                      )
+                  }
+                : {})
+            });
+            return false;
+          }
+
+          const reason =
+            error instanceof Error &&
+            /^AUTO_ROUTING_[A-Z0-9_]+$/.test(
+              error.message
+            )
+              ? error.message
+              : "AUTO_ROUTING_FAILED";
+          res.status(422).json({
+            error:
+              "AUTO_ROUTING_FAILED",
+            reason
+          });
+          return false;
+        }
+      }
+    return true;
+  }
+
   const documentCaseIds =
     new Map<string, string>();
 
@@ -5605,6 +5806,23 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      // A document request in AUTO mode is routed like a chat turn. The
+      // document pipeline (workflow, HYBRID-VAL before the file) needs its
+      // domain and workflow before it starts, so it keeps the routing pass.
+      if (
+        !(await resolveAutoPrimarySkill(
+          sessionRequest,
+          res,
+          attachments.length,
+          {
+            allowModelSelection: false,
+            allowConversational: false
+          }
+        ))
+      ) {
+        return;
+      }
+
       const route =
         routing.validate(
           sessionRequest
@@ -6950,186 +7168,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
 
-    // AUTO with an account or API model: the model picks the skills itself
-    // (router-v3 first, enforced by the corpus tools) instead of a separate
-    // routing pass. Local models keep the compact routing pass.
-    const autoEnvelope =
-      request.primarySkill === "AUTO"
-        ? parseSkillSelectionEnvelope(
-            request.query
-          )
-        : null;
-    const modelSelectsSkills =
-      autoEnvelope !== null &&
-      autoEnvelope.automatic &&
-      autoEnvelope.manualSkills.length === 0 &&
-      autoEnvelope.workflowExecutionSkill === null &&
-      !request.model.startsWith("local/");
-    if (modelSelectsSkills) {
-      const placeholder =
-        [...options.registry.skills.keys()]
-          .filter((name) =>
-            name.startsWith("dr-") &&
-            (
-              !autoEnvelope.domainRestrictionActive ||
-              autoEnvelope.domainAllowList.includes(name)
-            )
-          )
-          .sort()[0];
-      if (!placeholder) {
-        res.status(422).json({
-          error:
-            "AUTO_ROUTING_FAILED",
-          reason:
-            "AUTO_ROUTING_NO_DOMAIN_CANDIDATES"
-        });
-        return;
-      }
-      request.primarySkill =
-        placeholder;
-      request.modelSelectsSkills =
-        true;
-    }
-
     if (
-      request.primarySkill ===
-        "AUTO"
+      !(await resolveAutoPrimarySkill(
+        request,
+        res,
+        attachments.length,
+        {
+          allowModelSelection: true,
+          allowConversational: true
+        }
+      ))
     ) {
-      if (
-        !options
-          .sessionExecutor
-          .resolveAutoRouting
-      ) {
-        res.status(503).json({
-          error:
-            "AUTO_ROUTING_UNAVAILABLE"
-        });
-        return;
-      }
-      try {
-        const routed =
-          await options
-            .sessionExecutor
-            .resolveAutoRouting(
-              request
-            );
-        request.primarySkill =
-          routed.decision
-            .primarySkill;
-        request.query =
-          routed.query;
-        if (
-          routed.decision.legal ===
-            false &&
-          attachments.length === 0
-        ) {
-          request.conversationalOnly =
-            true;
-        }
-      } catch (error) {
-        if (
-          error instanceof Error &&
-          error.message ===
-            "CHAT_PRIVACY_GATE_FAILED"
-        ) {
-          res.status(503).json({
-            error:
-              "CHAT_PRIVACY_GATE_FAILED"
-          });
-          return;
-        }
-
-        const localFailureMessage =
-          request.model.startsWith(
-            "local/"
-          )
-            ? (
-                error instanceof
-                  ProviderGatewayError &&
-                error.causeValue instanceof
-                  Error
-                  ? error.causeValue
-                      .message
-                  : error instanceof Error
-                    ? error.message
-                    : ""
-              )
-            : "";
-        const parsedLocalReason =
-          localFailureMessage
-            .split(
-              ":",
-              1
-            )[0] ?? "";
-        if (
-          request.model.startsWith(
-            "local/"
-          ) &&
-          /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
-            parsedLocalReason
-          )
-        ) {
-          res.status(503).json({
-            error:
-              "LOCAL_MODEL_EXECUTION_FAILED",
-            reason:
-              parsedLocalReason
-          });
-          return;
-        }
-
-        if (
-          error instanceof
-            ProviderGatewayError
-        ) {
-          const rawReason =
-            error.causeValue instanceof
-              Error
-              ? error.causeValue
-                  .message
-              : "";
-          const parsedReason =
-            rawReason.split(
-              ":",
-              1
-            )[0] ?? "";
-          res.status(502).json({
-            error:
-              "PROVIDER_EXECUTION_FAILED",
-            provider:
-              error.provider,
-            reason:
-              /^[A-Z0-9_]+$/.test(
-                parsedReason
-              )
-                ? parsedReason
-                : "PROVIDER_UNCODED_FAILURE",
-            ...(rawReason
-              ? {
-                  description:
-                    safeDiagnosticText(
-                      rawReason
-                    )
-                }
-              : {})
-          });
-          return;
-        }
-
-        const reason =
-          error instanceof Error &&
-          /^AUTO_ROUTING_[A-Z0-9_]+$/.test(
-            error.message
-          )
-            ? error.message
-            : "AUTO_ROUTING_FAILED";
-        res.status(422).json({
-          error:
-            "AUTO_ROUTING_FAILED",
-          reason
-        });
-        return;
-      }
+      return;
     }
 
     const route = routing.validate(request.primarySkill);

@@ -612,6 +612,39 @@ describe("AUTO skill selection", () => {
     );
   });
 
+  it("routes an AUTO document request instead of rejecting it as INVALID_ROUTE", async () => {
+    const setup = app();
+    const documentApp = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      sessionExecutor: {
+        execute: setup.execute,
+        resolveAutoRouting: setup.resolveAutoRouting
+      },
+      caseAccessService: {} as never,
+      documentAuthoringService: {} as never,
+      documentAstGenerator: {} as never,
+      documentService: {} as never
+    });
+    const response = await request(documentApp)
+      .post("/api/cases/case_abc/artifacts/generate")
+      .send({
+        query: envelope("Zrób wzór wezwania do zapłaty"),
+        provider: "anthropic",
+        model: "account/claude",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK",
+        format: "docx",
+        documentType: "letter",
+        styleProfile: "lex-classic-clean-v1"
+      });
+    // Past routing: without a signed-in user the request stops at the
+    // authentication context, not at route validation.
+    expect(response.body.error).toBe("AUTH_CONTEXT_MISSING");
+    // The document pipeline needs its domain before it starts.
+    expect(setup.resolveAutoRouting).toHaveBeenCalledTimes(1);
+  });
+
   it("keeps the routing pass for local models", async () => {
     const setup = app();
     await request(setup.app)
