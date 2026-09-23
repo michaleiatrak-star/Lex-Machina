@@ -1,0 +1,201 @@
+name: Release Lex Machina 0.1.11 Online
+
+on:
+  push:
+    branches:
+      - "release/0.1.11"
+    paths:
+      - ".github/workflows/release-0.1.11.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-0.1.11-online
+  cancel-in-progress: false
+
+jobs:
+  skill-source:
+    name: Verify development skill source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Verify ZIP source equals materialized corpus
+        run: python scripts/verify_development_archives.py
+      - name: Record development skill tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d "WERSJA ROZWOJOWA"
+          test -d "Wersja rozwojowa rozpakowana"
+          count="$(find 'WERSJA ROZWOJOWA' -maxdepth 1 -type f -name '*.zip' | wc -l | tr -d ' ')"
+          test "$count" -gt 0
+          echo "Development skill archives: $count"
+
+  regression:
+    name: Local providers and Claude regression
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.7.0'
+      - name: Install runtime dependencies
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+      - name: Run focused regressions
+        working-directory: app/lex-runtime
+        run: npx vitest run src/local-model-runtime-startup.test.ts src/providers/account-session.test.ts
+      - name: Start deterministic localhost fixture
+        shell: bash
+        run: |
+          cat > /tmp/lex-local-fixture.mjs <<'JS'
+          import http from 'node:http';
+          const models = ['local/mistral-nemo-12b-q4km','local/bielik-11b-v3-q4km'];
+          const server = http.createServer((req,res) => {
+            res.setHeader('content-type','application/json');
+            if (req.method === 'GET' && req.url === '/v1/models') {
+              res.end(JSON.stringify({data: models.map(id => ({id}))}));
+              return;
+            }
+            if (req.method === 'POST' && req.url === '/v1/chat/completions') {
+              let body=''; req.on('data', c => body += c); req.on('end', () => {
+                const payload = JSON.parse(body || '{}');
+                if (!models.includes(payload.model)) { res.statusCode=404; res.end(JSON.stringify({error:'model'})); return; }
+                res.end(JSON.stringify({choices:[{message:{role:'assistant',content:'OK'}}]}));
+              });
+              return;
+            }
+            res.statusCode=404; res.end('{}');
+          });
+          server.listen(4318, '127.0.0.1');
+          JS
+          node /tmp/lex-local-fixture.mjs >/tmp/lex-local-fixture.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4318/v1/models >/dev/null && exit 0; sleep 0.25; done
+          exit 1
+      - name: Mistral localhost smoke
+        env:
+          LEX_LOCAL_MODEL_ID: local/mistral-nemo-12b-q4km
+        run: node scripts/local-provider-smoke.mjs
+      - name: Bielik localhost smoke
+        env:
+          LEX_LOCAL_MODEL_ID: local/bielik-11b-v3-q4km
+        run: node scripts/local-provider-smoke.mjs
+
+  runtime:
+    name: Runtime and Gate I audit
+    uses: ./.github/workflows/lex-runtime.yml
+    secrets: inherit
+
+  structural:
+    name: Structural corpus audit
+    uses: ./.github/workflows/f138-structural-audit.yml
+    secrets: inherit
+
+  installer-state:
+    name: Installer state audit
+    uses: ./.github/workflows/g39-installer-state.yml
+    secrets: inherit
+
+  online:
+    name: Build and accept 0.1.11 online installer
+    needs:
+      - skill-source
+      - regression
+      - runtime
+      - structural
+      - installer-state
+    uses: ./.github/workflows/lex-installer.yml
+    secrets: inherit
+
+  publish:
+    name: Publish v0.1.11 online installer
+    needs:
+      - skill-source
+      - regression
+      - runtime
+      - structural
+      - installer-state
+      - online
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Download accepted installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input/online
+      - name: Assemble release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+          exe="$(find release-input/online -type f -iname '*.exe' -print -quit)"
+          receipt="$(find release-input/online -type f -name 'SHA256.txt' -print -quit)"
+          [[ -n "$exe" && -f "$exe" && -n "$receipt" && -f "$receipt" ]]
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$exe" | awk '{print $1}')"
+          [[ "$expected" == "$actual" ]]
+          cp "$exe" release-out/Lex-Machina-0.1.11-Online-x64-Setup.exe
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          cp app/installer/windows-release-source.json release-out/windows-release-source.json
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+          cat > release-out/DEVELOPMENT-SKILLS-SOURCE.txt <<'EOF'
+          source_branch=main
+          source_head_at_release_preparation=0ce703fd8a91f275ec958b7b379f5ed75dd1d383
+          development_archives_tree=e8759aaf579ab12bdc1e9b10cf93dcd85f662aa1
+          latest_development_archives_commit=9c4088f23ae54088578f6dac852e0ca3b8dcddb4
+          materialization=generated_from_WERSJA_ROZWOJOWA_zip_archives_and_byte_verified
+          EOF
+          (cd release-out && sha256sum Lex-Machina-0.1.11-Online-x64-Setup.exe windows-release-source.json LEX-VERSION.yaml DEVELOPMENT-SKILLS-SOURCE.txt > SHA256SUMS.txt)
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.11 — development skills refresh
+
+          Online installer rebuilt from the corrected 0.1.10 runtime with the current development skill archives from `WERSJA ROZWOJOWA` on `main`.
+
+          ### Skill corpus
+          - source: `WERSJA ROZWOJOWA` from the current `main` snapshot used for release preparation;
+          - the runtime corpus is regenerated directly from those ZIP archives before release;
+          - archive structure and unpacked bytes are verified before the installer is built;
+          - includes the latest development legal-skill updates present in the source snapshot, including the 2026-09-23 source hierarchy updates.
+
+          ### Runtime retained from corrected 0.1.10
+          - local Bielik and Mistral startup regressions remain covered;
+          - Claude account-session regression remains covered;
+          - runtime, structural, installer-state and real Windows online-installer acceptance gates must all pass before publication.
+
+          This release remains a prerelease because production Authenticode trust roots are not configured in the repository. Manual installer distribution is supported; in-app application self-update remains fail-closed by design.
+          EOF
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v0.1.11
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; refusing to overwrite it."
+            exit 1
+          fi
+          gh release create "$TAG" \
+            --title "Lex Machina v0.1.11" \
+            --notes-file release-out/RELEASE-NOTES.md \
+            --prerelease \
+            --target "$GITHUB_SHA"
+          gh release upload "$TAG" \
+            release-out/Lex-Machina-0.1.11-Online-x64-Setup.exe \
+            release-out/SHA256SUMS.txt \
+            release-out/CI-SHA256-ONLINE.txt \
+            release-out/SOURCE-SHA.txt \
+            release-out/LEX-VERSION.yaml \
+            release-out/windows-release-source.json \
+            release-out/DEVELOPMENT-SKILLS-SOURCE.txt
+          gh release view "$TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
