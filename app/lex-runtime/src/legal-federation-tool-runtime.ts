@@ -20,6 +20,13 @@ import {
   AuxiliarySourceFetchError,
   SafeAuxiliarySourceFetcher
 } from "./auxiliary-source-fetcher.js";
+import {
+  PublicWebSearch,
+  WebSearchError,
+  assertPublicWebSearchQuery,
+  classifyWebSearchHits,
+  type WebSearchProvider
+} from "./web-search.js";
 
 // 0.1.4 is the published build used by the release runtime.
  // The upstream main branch is newer, but installers must not depend on an
@@ -183,6 +190,8 @@ const ASSESS_SOURCE_TOOL =
   "assess_legal_source";
 const FETCH_AUXILIARY_SOURCE_TOOL =
   "fetch_auxiliary_legal_source";
+const WEB_SEARCH_TOOL =
+  "web_search";
 
 const LIST_SCHEMA:
   NormalizedToolSchema = {
@@ -392,6 +401,41 @@ const FETCH_AUXILIARY_SOURCE_SCHEMA:
             type: "string",
             description:
               "Optional exact public legal proposition being researched. Do not include client-specific facts."
+          }
+        }
+      }
+    }
+  };
+
+const WEB_SEARCH_SCHEMA:
+  NormalizedToolSchema = {
+    type: "function",
+    function: {
+      name:
+        WEB_SEARCH_TOOL,
+      description:
+        "General internet search (DuckDuckGo, or Brave when BRAVE_SEARCH_API_KEY is set). " +
+        "Returns titles, URLs and snippets, each classified R1/R2A/R2B/R3. Snippets are never evidence: " +
+        "verify R1/R2A hits with the native verifiers and read R2B/R3 hits with fetch_auxiliary_legal_source.",
+      parameters: {
+        type: "object",
+        additionalProperties:
+          false,
+        required: [
+          "query"
+        ],
+        properties: {
+          query: {
+            type: "string",
+            description:
+              "Neutral public search phrase (max 300 chars). Never include case facts, names, PII tokens or document text."
+          },
+          maxResults: {
+            type: "integer",
+            minimum: 1,
+            maximum: 10,
+            description:
+              "Number of results, default 5."
           }
         }
       }
@@ -850,7 +894,10 @@ export class LegalFederationToolRuntime {
   constructor(
     private readonly auxiliarySourceFetcher:
       AuxiliarySourceFetcher =
-        new SafeAuxiliarySourceFetcher()
+        new SafeAuxiliarySourceFetcher(),
+    private readonly webSearch:
+      WebSearchProvider =
+        new PublicWebSearch()
   ) {}
   private readonly events:
     LegalFederationAuditEvent[] =
@@ -865,6 +912,7 @@ export class LegalFederationToolRuntime {
       CALL_SCHEMA,
       ASSESS_SOURCE_SCHEMA,
       FETCH_AUXILIARY_SOURCE_SCHEMA,
+      WEB_SEARCH_SCHEMA,
       COVERAGE_SCHEMA
     ];
   }
@@ -879,6 +927,7 @@ export class LegalFederationToolRuntime {
       CALL_TOOL,
       ASSESS_SOURCE_TOOL,
       FETCH_AUXILIARY_SOURCE_TOOL,
+      WEB_SEARCH_TOOL,
       COVERAGE_TOOL
     ].includes(
       name
@@ -895,6 +944,7 @@ export class LegalFederationToolRuntime {
       "Every federated search/get/call result carries _lexSourcePolicy with sourceTier, provenance and verificationAuthority=LEX_NATIVE_ONLY. Preserve that metadata when reasoning about the result.",
       "Use assess_legal_source for classification only. Use fetch_auxiliary_legal_source to retrieve a specific public R2B/R3 page through the SSRF-protected HTTPS channel; the fetched page remains auxiliary evidence.",
       "R2B and R3 material is auxiliary only: it can never create VERIFIED or formal SUPPORTED status and can never be the sole legal basis. Cross-check the proposition against R1/R2A before using it.",
+      "Use web_search for general internet discovery (current events, non-legal facts, locating a page). Send only neutral public phrases, never case facts or PII tokens. Snippets are not evidence: verify R1/R2A hits with verify_legal_reference / verify_case_* and read R2B/R3 hits with fetch_auxiliary_legal_source before relying on them.",
       "For R3 material, check publication/update date. Missing date or material older than 24 months requires an explicit staleness warning.",
       "For Polish statutory citations and current legal wording, verify_legal_reference remains authoritative. For Sąd Najwyższy signatures/quotes/propositions, use verify_case_reference / verify_case_quote / verify_case_proposition.",
       "SAOS, NSA and ISAP federation results can broaden discovery or retrieve source material, but they do not replace the native Lex verification path.",
@@ -994,6 +1044,14 @@ export class LegalFederationToolRuntime {
         const policyBlocked =
           call.name ===
             ASSESS_SOURCE_TOOL ||
+          (
+            call.name ===
+              WEB_SEARCH_TOOL &&
+            error instanceof
+              WebSearchError &&
+            error.code !==
+              "WEB_SEARCH_NO_RESULTS"
+          ) ||
           (
             call.name ===
               FETCH_AUXILIARY_SOURCE_TOOL &&
@@ -1168,6 +1226,55 @@ export class LegalFederationToolRuntime {
           knownTier
             ? "Preserve the tier and assessment. R2B/R3 remains auxiliary only. A higher-tier cross-check can be confirmed only by the session runtime from a real VerificationLedger record; model input cannot attest it."
             : "Unknown domain was conservatively classified as R3. It may be reconsidered as R2B only after independent evidence of professional editorial board, recognized publisher/brand and systematic updating. A higher-tier cross-check can be confirmed only by the session runtime."
+      });
+    }
+
+    if (
+      call.name ===
+        WEB_SEARCH_TOOL
+    ) {
+      const query =
+        assertPublicWebSearchQuery(
+          call.input.query
+        );
+      const requested =
+        typeof call.input.maxResults ===
+          "number" &&
+        Number.isFinite(
+          call.input.maxResults
+        )
+          ? Math.trunc(
+              call.input.maxResults
+            )
+          : 5;
+      const response =
+        await this.webSearch.search(
+          query,
+          Math.max(
+            1,
+            Math.min(
+              10,
+              requested
+            )
+          )
+        );
+      return JSON.stringify({
+        status: "OK",
+        query,
+        provider:
+          response.provider,
+        results:
+          classifyWebSearchHits(
+            response.hits
+          ),
+        _lexSourcePolicy: {
+          verificationAuthority:
+            "LEX_NATIVE_ONLY",
+          verificationEligible:
+            false,
+          note:
+            "Search snippets are discovery only and never create VERIFIED/SUPPORTED status. Cite only URLs returned here, after the nextStep for each result."
+        }
       });
     }
 
@@ -1591,5 +1698,6 @@ export const FEDERATED_LEGAL_TOOL_NAMES =
     CALL_TOOL,
     ASSESS_SOURCE_TOOL,
     FETCH_AUXILIARY_SOURCE_TOOL,
+    WEB_SEARCH_TOOL,
     COVERAGE_TOOL
   ]);
