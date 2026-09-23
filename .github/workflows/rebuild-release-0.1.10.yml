@@ -1,0 +1,320 @@
+name: Rebuild corrected Lex Machina 0.1.10
+
+on:
+  push:
+    branches:
+      - "rebuild/0.1.10"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-corrected-0.1.10
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Prepare corrected 0.1.10 source
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.version.outputs.ready }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Normalize release version metadata
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          VERSION = "0.1.10"
+
+          lex = Path("app/lex-version.yaml")
+          raw = lex.read_text(encoding="utf-8")
+          raw = re.sub(r'^work_branch: ".*"$', 'work_branch: "release/0.1.10"', raw, flags=re.M)
+          raw = re.sub(r'^application_version: ".*"$', f'application_version: "{VERSION}"', raw, flags=re.M)
+          lex.write_text(raw, encoding="utf-8")
+
+          for name in [
+              "app/lex-runtime/package.json",
+              "app/lex-web/package.json",
+              "app/lex-desktop/package.json",
+              "app/lex-desktop/src-tauri/tauri.conf.json",
+          ]:
+              p = Path(name)
+              data = json.loads(p.read_text(encoding="utf-8"))
+              data["version"] = VERSION
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          installer = Path("app/installer/windows-release-source.json")
+          raw = installer.read_text(encoding="utf-8")
+          raw, count = re.subn(
+              r'("applicationVersion"\s*:\s*")[^"]+("\s*,)',
+              rf'\g<1>{VERSION}\g<2>',
+              raw,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit("applicationVersion marker not found")
+          installer.write_text(raw, encoding="utf-8")
+
+          cargo = Path("app/lex-desktop/src-tauri/Cargo.toml")
+          raw = cargo.read_text(encoding="utf-8")
+          raw, count = re.subn(
+              r'(?ms)(\[package\].*?^version\s*=\s*")[^"]+("\s*$)',
+              rf'\g<1>{VERSION}\g<2>',
+              raw,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit("Cargo package version marker not found")
+          cargo.write_text(raw, encoding="utf-8")
+
+          # Keep lockfile root package metadata coherent when lockfiles exist.
+          for name in [
+              "app/lex-runtime/package-lock.json",
+              "app/lex-web/package-lock.json",
+              "app/lex-desktop/package-lock.json",
+          ]:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              data = json.loads(p.read_text(encoding="utf-8"))
+              if isinstance(data, dict):
+                  data["version"] = VERSION
+                  packages = data.get("packages")
+                  if isinstance(packages, dict) and isinstance(packages.get(""), dict):
+                      packages[""]["version"] = VERSION
+              p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+          lock = Path("app/lex-desktop/src-tauri/Cargo.lock")
+          if lock.exists():
+              raw = lock.read_text(encoding="utf-8")
+              raw = re.sub(
+                  r'(?ms)(name = "lex-machina-desktop"\nversion = ")[^"]+("\n)',
+                  rf'\g<1>{VERSION}\g<2>',
+                  raw,
+                  count=1,
+              )
+              lock.write_text(raw, encoding="utf-8")
+          PY
+
+          if git diff --quiet; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/lex-version.yaml \
+            app/lex-runtime/package.json \
+            app/lex-web/package.json \
+            app/lex-desktop/package.json \
+            app/lex-desktop/src-tauri/tauri.conf.json \
+            app/lex-desktop/src-tauri/Cargo.toml \
+            app/installer/windows-release-source.json
+          git add -f app/lex-runtime/package-lock.json app/lex-web/package-lock.json app/lex-desktop/package-lock.json app/lex-desktop/src-tauri/Cargo.lock 2>/dev/null || true
+          git commit -m "chore(release): prepare corrected 0.1.10"
+          git push origin HEAD:rebuild/0.1.10
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+
+  regression:
+    name: Local providers and Claude regression
+    needs: prepare
+    if: needs.prepare.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24.7.0'
+      - name: Install runtime dependencies
+        working-directory: app/lex-runtime
+        run: npm install --no-audit --no-fund
+      - name: Run focused regressions
+        working-directory: app/lex-runtime
+        run: npx vitest run src/local-model-runtime-startup.test.ts src/providers/account-session.test.ts
+      - name: Start deterministic localhost fixture
+        shell: bash
+        run: |
+          cat > /tmp/lex-local-fixture.mjs <<'JS'
+          import http from 'node:http';
+          const models = ['local/mistral-nemo-12b-q4km','local/bielik-11b-v3-q4km'];
+          const server = http.createServer((req,res) => {
+            res.setHeader('content-type','application/json');
+            if (req.method === 'GET' && req.url === '/v1/models') {
+              res.end(JSON.stringify({data: models.map(id => ({id}))}));
+              return;
+            }
+            if (req.method === 'POST' && req.url === '/v1/chat/completions') {
+              let body=''; req.on('data', c => body += c); req.on('end', () => {
+                const payload = JSON.parse(body || '{}');
+                if (!models.includes(payload.model)) { res.statusCode=404; res.end(JSON.stringify({error:'model'})); return; }
+                res.end(JSON.stringify({choices:[{message:{role:'assistant',content:'OK'}}]}));
+              });
+              return;
+            }
+            res.statusCode=404; res.end('{}');
+          });
+          server.listen(4318, '127.0.0.1');
+          JS
+          node /tmp/lex-local-fixture.mjs >/tmp/lex-local-fixture.log 2>&1 &
+          echo $! > /tmp/lex-local-fixture.pid
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4318/v1/models >/dev/null && exit 0; sleep 0.25; done
+          exit 1
+      - name: Mistral localhost smoke
+        env:
+          LEX_LOCAL_MODEL_ID: local/mistral-nemo-12b-q4km
+        run: node scripts/local-provider-smoke.mjs
+      - name: Bielik localhost smoke
+        env:
+          LEX_LOCAL_MODEL_ID: local/bielik-11b-v3-q4km
+        run: node scripts/local-provider-smoke.mjs
+
+  runtime:
+    name: Runtime and Gate I audit
+    needs: prepare
+    if: needs.prepare.outputs.ready == 'true'
+    uses: ./.github/workflows/lex-runtime.yml
+    secrets: inherit
+
+  structural:
+    name: Structural corpus audit
+    needs: prepare
+    if: needs.prepare.outputs.ready == 'true'
+    uses: ./.github/workflows/f138-structural-audit.yml
+    secrets: inherit
+
+  installer-state:
+    name: Installer state audit
+    needs: prepare
+    if: needs.prepare.outputs.ready == 'true'
+    uses: ./.github/workflows/g39-installer-state.yml
+    secrets: inherit
+
+  online:
+    name: Build and accept corrected online installer
+    needs:
+      - prepare
+      - regression
+      - runtime
+      - structural
+      - installer-state
+    if: needs.prepare.outputs.ready == 'true'
+    uses: ./.github/workflows/lex-installer.yml
+    secrets: inherit
+
+  publish:
+    name: Replace withdrawn v0.1.10 with corrected installer
+    needs:
+      - prepare
+      - regression
+      - runtime
+      - structural
+      - installer-state
+      - online
+    if: needs.prepare.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Download accepted installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input/online
+      - name: Assemble corrected release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+          exe="$(find release-input/online -type f -iname '*.exe' -print -quit)"
+          receipt="$(find release-input/online -type f -name 'SHA256.txt' -print -quit)"
+          [[ -n "$exe" && -f "$exe" && -n "$receipt" && -f "$receipt" ]]
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$exe" | awk '{print $1}')"
+          [[ "$expected" == "$actual" ]]
+          cp "$exe" release-out/Lex-Machina-0.1.10-Online-x64-Setup.exe
+          cp "$receipt" release-out/CI-SHA256-ONLINE.txt
+          cp app/installer/windows-release-source.json release-out/windows-release-source.json
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+          printf '%s\n' "$GITHUB_SHA" > release-out/SOURCE-SHA.txt
+          (cd release-out && sha256sum Lex-Machina-0.1.10-Online-x64-Setup.exe windows-release-source.json LEX-VERSION.yaml > SHA256SUMS.txt)
+      - name: Write corrected release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.10 — corrected rebuild
+
+          This build replaces the withdrawn earlier 0.1.10 prerelease.
+
+          ### Local Bielik and Mistral
+          - restores localhost startup for `local/bielik-11b-v3-q4km` and `local/mistral-nemo-12b-q4km`;
+          - `mcp-servers.json`, `llama-ui-config.json` and grounded chat templates are optional enhancements, not startup prerequisites;
+          - stale inherited native-agent environment variables are removed when optional files are absent;
+          - grounded templates are applied only when the corresponding file exists;
+          - includes regression coverage for both local model IDs and OpenAI-compatible `/v1/models` + `/v1/chat/completions` smoke checks.
+
+          ### Claude
+          - retains the Claude Code 2.1.278 account-session hotfix;
+          - Claude runs in Lex-owned context mode with MCP/tools disabled in headless execution;
+          - improves OAuth expiry classification and redacts token material from diagnostics.
+
+          This remains a prerelease because production Authenticode trust roots are not configured in the repository. Manual installer distribution is supported; in-app application self-update remains fail-closed by design.
+          EOF
+      - name: Withdraw old v0.1.10 and publish corrected replacement
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v0.1.10
+        run: |
+          set -euo pipefail
+          source_sha="$GITHUB_SHA"
+
+          # Only withdraw the old release after every gate and the new installer have passed.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release delete "$TAG" --yes || true
+          fi
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1; then
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$TAG"
+          fi
+
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/release/0.1.10" >/dev/null 2>&1; then
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/git/refs/heads/release/0.1.10" \
+              -f sha="$source_sha" -F force=true >/dev/null
+          else
+            gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+              -f ref="refs/heads/release/0.1.10" -f sha="$source_sha" >/dev/null
+          fi
+
+          gh release create "$TAG" \
+            --title "Lex Machina v0.1.10" \
+            --notes-file release-out/RELEASE-NOTES.md \
+            --prerelease \
+            --target "$source_sha"
+          gh release upload "$TAG" \
+            release-out/Lex-Machina-0.1.10-Online-x64-Setup.exe \
+            release-out/SHA256SUMS.txt \
+            release-out/CI-SHA256-ONLINE.txt \
+            release-out/SOURCE-SHA.txt \
+            release-out/LEX-VERSION.yaml \
+            release-out/windows-release-source.json
+          gh release view "$TAG" --json url,tagName,name,isPrerelease,publishedAt,targetCommitish
+      - name: Remove temporary rebuild workflow from rebuild branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/rebuild-release-0.1.10.yml
+          git commit -m "ci: remove temporary 0.1.10 rebuild workflow"
+          git push origin HEAD:rebuild/0.1.10
