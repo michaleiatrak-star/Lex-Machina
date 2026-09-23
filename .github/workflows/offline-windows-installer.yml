@@ -257,7 +257,7 @@ jobs:
             throw "OFFLINE_FULL_RUNTIME_RETIRE_FAILED"
           }
 
-          ./app/installer/build-windows-online.ps1
+          ./app/installer/build-windows-online.ps1 -IncludeOfflineHelpers
 
           $receipt = [ordered]@{
             schemaVersion = 1
