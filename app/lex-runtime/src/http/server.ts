@@ -29,6 +29,9 @@ import {
   applyAccountSkills
 } from "../account-skills.js";
 import {
+  CoreLawIndex
+} from "../core-law-index.js";
+import {
   MaintenanceService,
   commitSkillOverlayRuntimeHealth,
   recoverSkillOverlayForStartup
@@ -512,6 +515,33 @@ export async function startLocalServer(options?: {
   const legalFederationTools =
     new LegalFederationToolRuntime();
 
+  // Official ELI texts of every act named in the domain act maps; refreshed
+  // in the background, kept locally for offline and local-model use.
+  const coreLawIndex =
+    new CoreLawIndex();
+  try {
+    coreLawIndex.load(
+      runtimeRoot
+    );
+    if (
+      !/^(off|0|false)$/i.test(
+        process.env.LEX_CORE_LAW_REFRESH?.trim() ?? ""
+      )
+    ) {
+      void coreLawIndex
+        .refresh()
+        .catch((error) => {
+          process.stderr.write(
+            `LEX_CORE_LAW_REFRESH_FAILED:${error instanceof Error ? error.message : String(error)}\n`
+          );
+        });
+    }
+  } catch (error) {
+    process.stderr.write(
+      `LEX_CORE_LAW_UNAVAILABLE:${error instanceof Error ? error.message : String(error)}\n`
+    );
+  }
+
   const sessionExecutor =
     new SafeSessionExecutor(
       registry,
@@ -525,7 +555,8 @@ export async function startLocalServer(options?: {
           new TemporalSourceFreshnessChecker()
         ),
       privacyNamedEntities,
-      legalFederationTools
+      legalFederationTools,
+      coreLawIndex
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(

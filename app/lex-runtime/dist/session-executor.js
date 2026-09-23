@@ -2,6 +2,7 @@ import { AuditTrail } from "./audit-trail.js";
 import { AuditedFinalizer } from "./audited-finalizer.js";
 import { LexExecutionEngine } from "./execution-engine.js";
 import { VerificationLedger } from "./verification-ledger.js";
+import { CoreLawToolRuntime } from "./core-law-tool-runtime.js";
 import { LegalCorpusToolRuntime } from "./legal-corpus-tool-runtime.js";
 import { ReportBlueprintToolRuntime } from "./report-blueprint-tool-runtime.js";
 import { evaluateDeterministicWorkflowOutput, evaluateDeterministicWorkflowReads } from "./deterministic-workflow.js";
@@ -311,16 +312,18 @@ export class SafeSessionExecutor {
     verificationToolFactory;
     chatNamedEntityRecognizer;
     legalFederationTools;
+    coreLawIndex;
     engine;
     autoRouter;
     auxiliaryScheduler;
-    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools) {
+    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools, coreLawIndex) {
         this.registry = registry;
         this.providers = providers;
         this.finalizer = finalizer;
         this.verificationToolFactory = verificationToolFactory;
         this.chatNamedEntityRecognizer = chatNamedEntityRecognizer;
         this.legalFederationTools = legalFederationTools;
+        this.coreLawIndex = coreLawIndex;
         this.engine = new LexExecutionEngine(registry, providers);
         this.autoRouter =
             new ModelAutoRouter(registry, providers);
@@ -508,8 +511,14 @@ export class SafeSessionExecutor {
                 ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {})
             });
         }
+        const coreLawTools = this.coreLawIndex
+            ? new CoreLawToolRuntime(this.coreLawIndex)
+            : undefined;
         const toolSchemas = [
             ...corpusTools.schemas(),
+            ...(coreLawTools
+                ? coreLawTools.schemas()
+                : []),
             ...reportTools.schemas(),
             ...(federationTools
                 ? federationTools.schemas()
@@ -518,6 +527,9 @@ export class SafeSessionExecutor {
         ];
         const toolPrompt = [
             corpusTools.systemPromptAppendix(),
+            ...(coreLawTools
+                ? [coreLawTools.systemPromptAppendix()]
+                : []),
             reportTools.systemPromptAppendix(),
             ...(federationTools
                 ? [federationTools.systemPromptAppendix()]
@@ -612,11 +624,17 @@ export class SafeSessionExecutor {
                 const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
                 const reportCalls = calls.filter((call) => reportTools.handles(call.name));
                 const federationCalls = calls.filter((call) => federationTools?.handles(call.name) ?? false);
-                const verificationCalls = calls.filter((call) => !corpusTools.handles(call.name) &&
+                const coreLawCalls = calls.filter((call) => coreLawTools?.handles(call.name) ?? false);
+                const verificationCalls = calls.filter((call) => !(coreLawTools?.handles(call.name) ?? false) &&
+                    !corpusTools.handles(call.name) &&
                     !reportTools.handles(call.name) &&
                     !(federationTools?.handles(call.name) ?? false));
                 const corpusResults = corpusCalls.length > 0
                     ? await corpusTools.runTools(corpusCalls)
+                    : [];
+                const coreLawResults = coreLawTools &&
+                    coreLawCalls.length > 0
+                    ? await coreLawTools.runTools(coreLawCalls)
                     : [];
                 const reportResults = reportCalls.length > 0
                     ? await reportTools.runTools(reportCalls)
@@ -672,6 +690,7 @@ export class SafeSessionExecutor {
                     : [];
                 const byId = new Map([
                     ...corpusResults,
+                    ...coreLawResults,
                     ...reportResults,
                     ...federationResults,
                     ...cachedVerificationResults,
@@ -706,6 +725,14 @@ export class SafeSessionExecutor {
                 execution.primarySkill =
                     selection.primarySkill;
             }
+        }
+        for (const event of coreLawTools?.auditEvents() ?? []) {
+            audit.record(event.tool === "read_core_law_article"
+                ? "resource_read"
+                : "tool_decision", `core-law:${event.target}`, event.decision === "ALLOW" ? "OK" : "BLOCKED", {
+                tool: event.tool,
+                ...(event.detail ? event.detail : {})
+            });
         }
         const corpusAudit = corpusTools.auditEvents();
         for (const event of corpusAudit) {
