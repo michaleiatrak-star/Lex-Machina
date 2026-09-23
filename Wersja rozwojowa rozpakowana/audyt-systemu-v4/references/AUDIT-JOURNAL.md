@@ -66769,3 +66769,238 @@ ZAMKNIĘTA.** NIS2 i DORA pozostają nieodczytane świadomie — korpus nie cytu
 **Wersje:** `shared` 3.76 → 3.77, `audyt-systemu-v4` 6.118 → 6.119,
 `dr-02-prawo-cywilne-rodzinne-gospodarcze` 3.55 → 3.56, `pisma-proste-v2` 2.19 → 2.20,
 `analizator-umow-v1` 1.37 → 1.38, `analizator-dowodow-v3` 5.16.11 → 5.16.12.
+
+
+---
+
+## AUDYT-2026-09-22 — F-193 (L4: Dz.U. 2026 poz. 26 poza MONITORING, błędne etapy w dr-04) + F-194 (NSA I OSK 590/26)
+
+**Tryb:** TARGETED, na polecenie użytkownika po analizie artykułu prawo.pl (22.09.2026)
+o wyroku NSA I OSK 590/26 i pytaniu, czy system monitoruje zmiany „praca na L4".
+Nie jest to pełny przebieg DZU (FAZA 3A–3C nie wykonane).
+
+### 1. Źródła (RZĄD 1, odczyt 2026-09-22, kanał kodu `api.sejm.gov.pl/eli`)
+
+| Identyfikator | Co odczytano |
+|---|---|
+| `DU/2026/26` metadane + `text.pdf` | ustawa z 18.12.2025, ogł. 12.01.2026; art. 13 (ustawa zasiłkowa), art. 12 (FUS), art. 85c–85j SUS, art. 38–39 (przejściowe), **art. 43** (cztery terminy) |
+| `DU/2026/854` `text.pdf` | t.j. ustawy zasiłkowej (obwieszczenie 19.06.2026, ogł. 29.06.2026) — art. 17 ust. 1–4 z przypisami 5–9; art. 9 ust. 4 |
+| `/eli/acts/search?publisher=DU&year=2026&title=…` | wyszukanie aktu po tytule — działa bez klucza |
+
+Terminy z art. 43 ustawy 2026/26: **27.01.2026** (14 dni: m.in. art. 56, 59, 60 ustawy
+zasiłkowej — kontrola orzekania), **13.04.2026** (termin główny: m.in. art. 17 ust. 1–1c, 4),
+**1.10.2026** (art. 12 pkt 4–5 — FUS art. 50c ust. 1), **1.01.2027** (m.in. art. 17
+ust. 1d–1e, art. 9 ust. 4 ustawy zasiłkowej; art. 85a ust. 1, 85c–85j SUS; art. 14 FUS).
+
+⛔ **Pomiar:** pole `entryIntoForce` w metadanych ELI dla `DU/2026/26` zwraca wyłącznie
+`2026-04-13`. Trzy pozostałe terminy są widoczne tylko w art. 43. Zapisane w
+`shared/DOSTEP-MASZYNOWY-API.md` 1.7 §2.
+
+### 2. F-193 — usterki i naprawy (ZAMKNIĘTA w sesji)
+
+| # | Plik | Było | Jest |
+|---|---|---|---|
+| a | `dr-04/mod-SUS-ZUS` — alerty + §5 | Etap I (27.01.2026) obejmuje „nowe def. pracy zarobkowej" | 27.01.2026 = kontrola (art. 56, 59, 60); definicje art. 17 ust. 1a–1b od **13.04.2026** (osobny wiersz) |
+| b | `dr-04/mod-SUS-ZUS` — alerty + §5 | Etap III „PLANOWANY — WERYFIKUJ STATUS" | „OGŁOSZONY, 1.01.2027" + treść art. 85f (sprzeciw, inny lekarz, trzech lekarzy w sprawach szczególnie skomplikowanych, brak sprzeciwu od ponownego orzeczenia, wyłączenie kontroli z art. 59), art. 85e ust. 12, art. 38 ust. 1 |
+| c | `dr-04/mod-SUS-ZUS` | brak zmiany „L4 z jednego tytułu" | nowy wiersz: art. 17 ust. 1d–1e + art. 9 ust. 4 — 1.01.2027 |
+| d | `dr-04/mod-ustawa-zasilkowa` 1.0 → 1.1 | art. 17 nieomówiony | §4a: tabela ust. 1–4 z datami, art. 39 przejściowy, pułapka przypisu w t.j. |
+| e | `dr-04/MAPA-AKTOW`, `prawo-polskie-v2/ROUTING-MAP` | brak cezury | cezura 1.01.2027 w wierszu ustawy zasiłkowej |
+| f | `mapa_dzu` — tabela główna, wiersz 2026/26 | „Ustawa SUS — zmiana", uwagi puste | pełny tytuł, zakres zmienianych ustaw, cztery etapy |
+| g | `mapa_dzu` — MONITORING | **brak ustawy 2026/26** | wiersz z etapami 1.10.2026 (⚡ WCHODZI-90DNI) i 1.01.2027 (⏳ OCZEKUJE) |
+
+**Przyczyna (klasa MOD-PROPAGACJA-NOWELIZACJI):** sesja 17p zweryfikowała etapy
+2026/26 i poprawiła `shared/terminy.md`, ale nie przeniosła ich do tabeli alertów
+`mod-SUS-ZUS` ani do MONITORING. Etap 2027 ustawy zasiłkowej nigdzie nie był śledzony.
+
+⛔ **Korekty wniosków z tej samej rozmowy (przed naprawą):**
+(1) teza „t.j. 2026/854 nie może zawierać ust. 1d–1e" była NIEPRAWDZIWA — t.j. je
+zawiera z przypisem „wejdzie w życie z dniem 1 stycznia 2027 r."; ryzyko jest
+odwrotne (zastosowanie przed terminem) i tak je opisano w §4a;
+(2) `shared/AKTY-PRAWNE-MASTER.md` wskazano jako rejestr z luką — plik jest
+DEPRECATED od 2026-06-14, celowo NIEEDYTOWANY;
+(3) teza o braku rejestru przepisów oczekujących — nieprawdziwa: istnieje FAZA 3D
+(MONITORING); luką był brak wiersza, nie brak mechanizmu.
+
+### 3. F-194 — NSA I OSK 590/26 (OTWARTA)
+
+Status **🟨 snapshot bez awansu**: istnienie z dwóch źródeł RZĘDU 2B (prawo.pl,
+inforfk.pl — wykaz orzeczeń), CBOSA w kanale kodu HTTP 503 (`/cbo/search`,
+`/cbo/find`, 2026-09-22); web_fetch nie mógł otworzyć dokumentu (brak URL w wynikach).
+Wdrożone w `shared/WERYFIKACJA-SLAD.md` 1.8: wpis precedensu (🟨), **GRAD-3b-SYM**
+(flaga symbolu CBOSA — wymusza odczyt przedmiotu, nie blokuje), **KALIBRACJA-PRZECIWNIK**
+(wadliwe powołania przeciwnika = argument o wiarygodności, nie co do istoty).
+Pozostaje: wpięcie w V10 (`pisma-procesowe-v3`) i `orzeczenia-sadowe-v2`; odczyt z CBOSA.
+
+⚠️ **Obserwacja przy okazji:** system już zawierał naprawę po I FZ 104/26 (2026-07-05b)
+obejmującą rozbieżne daty i inny przedmiot — I OSK 590/26 potwierdza ten projekt,
+nie odsłania nowej dziury w warstwie TREŚĆ.
+
+### 4. Nowa flaga F-195
+
+FAZA 3D: wiersze MONITORING nieprzeglądane od 2026-07-02, w tym z datą już minioną
+(PrBud 2026/524 — 20.09.2026). Poza zakresem tej sesji.
+
+### 5. Testy (`run_regression_suite.py`, drzewo 33 skilli)
+
+Stan WEJŚCIOWY (kopia hosta, przed zmianami): ❌ FAIL — T2 (dr-09 licznik 35/36),
+T3, T11, T12 (10 regresji dyskowych: analiza-sadowa-v6, dr-01, dr-09, dr-10, dr-12,
+dr-13, pisma-procesowe-v3, prawny-router-v3, przewodnik-prawny-v2 + luka historii
+routera 3.49), T28 (5 znanych błędnych cytatów), T30 (dr-09). **Żadna z tych pozycji
+nie dotyczy czterech skilli tej sesji** i żadna nie została tu naprawiona.
+Po zmianach: podsumowanie T-testów identyczne z wejściowym; jedyne nowe ryzyko
+utajone T12 (stopka `audyt-systemu-v4` 6.119 przy `version:` 6.120) — usunięte.
+T21 (sumy kontrolne): PASS, 32 skille, 0 rozjazdów.
+
+⚠️ **STAN-ZAŁADOWANY:** edycje wykonano na kopii hosta. T12 pokazuje, że dla 9 skilli
+host jest STARSZY niż dziennik — dla czterech wydawanych skilli takiej regresji nie ma,
+ale zestawienia z repozytorium nie wykonano. Przed commitem sprawdzić, czy w repozytorium
+nie istnieją już numery dr-04 3.38, shared 3.78, prawo-polskie-v2 6.27, audyt 6.120
+(kolizja numeru = wzorzec F-189).
+
+### 6. Wydanie (ZASADA 7 — OUTPUT-COMPLETENESS)
+
+Cztery osobne, kompletne paczki przez `scripts/dostarcz_skill.sh`:
+`prawo-polskie-v2` 6.27, `dr-04-prawo-pracy-zus-swiadczenia` 3.38, `shared` 3.78,
+`audyt-systemu-v4` 6.120. Liczniki plików i wynik T33 — w raporcie sesji.
+
+**Wersje:** `prawo-polskie-v2` 6.26 → 6.27, `dr-04-prawo-pracy-zus-swiadczenia` 3.37 → 3.38,
+`shared` 3.77 → 3.78, `audyt-systemu-v4` 6.119 → 6.120.
+
+
+---
+
+## AUDYT-2026-09-22b — F-195 (przegląd MONITORING przez artykuły końcowe) + F-194 (częściowo)
+
+**Tryb:** TARGETED, polecenie użytkownika „dokonaj wskazanych napraw" po AUDYT-2026-09-22.
+
+### 1. F-195 — MONITORING, każdy wiersz odczytany w RZĘDZIE 1 (ELI, metadane + artykuł końcowy z `text.pdf`, 2026-09-22)
+
+| Wiersz mapy | Ustalenie | Działanie |
+|---|---|---|
+| PrBud „zmiana art. 1 pkt 1 lit. c — 2026/524" | 2026/524 to t.j.; źródłem zmiany jest **2025/1847** art. 1 pkt 1 lit. a i c oraz pkt 3 — art. 13 pkt 1: **20.09.2026** | wszedł → usunięty; wiersz główny 2025/1847 uzupełniony o trzy terminy |
+| PrBud „zmiana 2025 (oczekująca)" 2025/1847 | duplikat powyższego; termin główny 7.01.2026, część 1.01.2026 | usunięty |
+| OP „część przepisów nowelizacji" 2026/622 | 2026/622 to **t.j.**, nie nowelizacja; przypisy przyszłe tylko do 12.07.2026; „~IX.2026" bez źródła | ⬛ KROK 2C — pozostaje w F-195 |
+| KPK 2026/638 | art. 3: 14 dni od ogłoszenia 13.05.2026 → **28.05.2026** | wszedł → usunięty; ROUTING-MAP DR-03 uzupełniony |
+| ⛔ KPK „zmiana (vacatio 2026)" 2025/1390 | **PODMIANA AKTU** — rozporządzenie MFiG z 12.10.2025 o CIT, w życie 31.12.2025 | usunięty; wiersz główny przepisany (ORG, brak modułu) |
+| zakwaterowanie funkcjonariuszy 2025/1366 | art. 23: 14.10.2025 (z mocą od 1.07.2025, z wyjątkami) | wszedł → usunięty |
+| Prawo energetyczne 2026/516 | art. 38: główny **30.04.2026**, część 16.04.2026, art. 9, 11, 13, 14 — **16.10.2026** | ⚡ WCHODZI-90DNI z precyzyjnym zakresem; ROUTING-MAP: „reszta od 16.04.2026" poprawione na 30.04.2026 |
+| obrona cywilna 2026/646 | wiersz był już ZAMKNIĘTY 2026-07-04, a nie usunięty | usunięty |
+| rozwód rejestrowy (USC) | w ELI brak ogłoszonego aktu (wyszukiwanie tytułów 2025–2026); 2025/897 to art. 59 KRO — nazwisko po rozwodzie | usunięty — MONITORING obejmuje tylko akty ogłoszone |
+| narkomania „NIEOPUBLIKOWANA" | ogłoszona jako **2026/1004** (27.07.2026), w życie 27.08.2026 (art. 12: 30 dni) | usunięty (akt w tabeli głównej) |
+| opieka nad dziećmi do lat 3 — 2026/1123 | potwierdzone 1.01.2028; dodatkowo część od **1.01.2032** | uzupełniony |
+
+**Przyczyna (klasa MOD-PROPAGACJA):** korekty wykonane w ROUTING-MAP (2025/1390 — 2026-07-13;
+konsolidacja PrBud) nie trafiły do `mapa_dzu`; tabela MONITORING mapy nieaktualizowana od 2026-07-02.
+Metadane `entryIntoForce` NIE były podstawą żadnego ustalenia (lekcja F-193).
+
+Pliki: `mapa_dzu_2026-09-22.md` (ta sama generacja, zaktualizowana), `prawo-polskie-v2/ROUTING-MAP.md`,
+`shared/ISAP-METRYKI-AKTOW.md` (2 wiersze PrBud). ⛔ Kopia `prawny-router-v3/references/ISAP-METRYKI-AKTOW.md`
+celowo NIEEDYTOWANA (regresja dyskowa routera w T12).
+
+### 2. F-194 — częściowo
+
+✅ `orzeczenia-sadowe-v2` 2.17 → 2.18: Zasada 2B (odwołania do `GRAD-3b-SYM` i `KALIBRACJA-PRZECIWNIK`).
+⛔ V10 w `pisma-procesowe-v3` NIE edytowany: T12 — dysk 5.24, dziennik 5.26; wydanie z kopii hosta
+nadpisałoby nowszy stan (wzorzec F-189). CBOSA: ponownie HTTP 503 (kanał kodu: `/cbo/query`,
+`/cbo/search`); web_search bez adresu `/doc/{ID}` — web_fetch niewykonalny. Reguła 12d spełniona
+(porażka w obu kanałach, zapisana z kodem). I OSK 590/26 pozostaje 🟨.
+Flaga przeniesiona do kategorii „zależne od środowiska/dewelopera".
+
+### 3. Testy i wydanie
+
+Wynik suity regresji, T21 i T33 — w raporcie sesji (wykonane po tym wpisie, na drzewie z tym wpisem).
+
+**Wersje:** `prawo-polskie-v2` 6.27 → 6.28, `shared` 3.78 → 3.79, `orzeczenia-sadowe-v2` 2.17 → 2.18,
+`audyt-systemu-v4` 6.120 → 6.121. `dr-04` bez zmian (3.38, wydane w AUDYT-2026-09-22).
+
+
+---
+
+## AUDYT-2026-09-22c — F-195: Ordynacja podatkowa (KROK 2C) + domknięcie pozostałości wykonalnych
+
+**Tryb:** TARGETED — „czy wszystko jest zrobione, jeśli nie, to zrób".
+
+### 1. Ordynacja podatkowa — nowelizacje po t.j. 2026/622 (RZĄD 1)
+
+Metoda: `DU/1997/926` → `references` → „Akty zmieniające" z 2026 r.; dla każdego aktu po t.j.
+odczytany artykuł zmieniający OP i artykuł końcowy z `text.pdf` (2026-09-22).
+
+| Akt | Jednostki OP | Wejście w życie | Stan w systemie przed sesją |
+|---|---|---|---|
+| 2026/825 | art. 14i, 14j | 24.09.2026 | śledzony (terminy, dr-06, ROUTING-MAP) |
+| 2026/846 art. 1 | szeroka nowelizacja (m.in. art. 12–21, 52–86i, 119g, 165) | 1.10.2026; pkt 9 od 26.06.2026 | śledzony |
+| 2026/1154 art. 2 | art. 39k, 299 § 3 | 16.09.2026 | tylko `shared/terminy.md` |
+| 2026/875 art. 6 | art. 13, 67a | 1.01.2027 | ⛔ jedynie wzmianka w PRZEGLAD-MAP-ELI |
+| 2026/1098 art. 35 | m.in. art. 2, 3b, 13, 182, 297–299c, 306 | 1.01.2027 | ⛔ nieobecny |
+| 2026/1206 art. 3 | art. 119zg pkt 1 | 11.01.2027 | ⛔ nieobecny |
+
+Dawny zapis MONITORING („~IX.2026 część; do 16 mies. od ogłoszenia część") nie odpowiadał
+żadnemu z tych aktów — zastąpiony. Art. 67a i art. 13 zmieniane przez dwie różne ustawy
+w różnych terminach (trzy wersje czasowe) — ostrzeżenie w module dr-06.
+
+Pliki: `mapa_dzu_2026-09-22.md` (4 nowe wiersze główne: 875, 1098, 1154, 1206; wiersz MONITORING),
+`prawo-polskie-v2/ROUTING-MAP.md`, `dr-06/modules/mod-OP-uzupelnienie-pokrycia-2026.md` 1.0 → 1.1.
+
+### 2. Pozostałe
+
+- FAZA 3D (SKILL.md): przykładowy wiersz PrBud oznaczony jako historyczny i skorygowany (źródło 2025/1847).
+- F-194: CBOSA ponownie HTTP 503 (`/cbo/query`, 2026-09-22c) — I OSK 590/26 nadal 🟨.
+- F-195 zawężona do kopii routera (ISAP-METRYKI) — ⛔ zablokowana regresją dyskową T12.
+
+### 3. Czego NIE naprawiono i dlaczego (stan wyjściowy drzewa)
+
+Każda pozostała czerwień suity dotyczy skilli z REGRESJĄ DYSKOWĄ T12 (host starszy niż
+dziennik): T2 i T30 — dr-09; T28 — dr-10, analiza-sadowa-v6, przewodnik-prawny-v2,
+pisma-procesowe-v3; T12 — 9 skilli. Edycja i wydanie z kopii hosta nadpisałyby nowszy
+stan repozytorium (wzorzec F-189). Naprawa wymaga drzewa z repozytorium.
+
+**Wersje:** `prawo-polskie-v2` 6.28 → 6.29, `dr-06-podatki-finanse-publiczne-aml` 3.89 → 3.90,
+`audyt-systemu-v4` 6.121 → 6.122.
+
+
+---
+
+## AUDYT-2026-09-22d — drzewo z repozytorium; F-195 ZAMKNIĘTA; F-194 zawężona do CBOSA
+
+**Tryb:** TARGETED — „kontynuuj".
+
+### 1. Źródło drzewa — zmiana zasadnicza
+
+Sesje 22–22c pracowały na kopii zainstalowanej na hoście. Do tej sesji pobrano publiczne
+repozytorium `michaleiatrak-star/Lex-Machina` (commit `4194a1a`, 18.09.2026), katalog
+„Wersja rozwojowa rozpakowana" (32 skille), bez poświadczeń i bez zapisu do repozytorium.
+
+- Sześć skilli wydanych w 22–22c: bazy hosta **bajtowo identyczne** z repozytorium
+  (dr-04 3.37, shared 3.77, prawo-polskie-v2 6.26, audyt 6.119, orzeczenia-sadowe-v2 2.17,
+  dr-06 3.89) — wydania nie zgubiły treści; numery wersji nie kolidują.
+- Drzewo = repozytorium + nałożone zmiany 22–22c → **suita regresji: ✅ PASS STRUKTURALNY**
+  (T1–T3, T8–T33, MOCK — wszystkie PASS).
+- ⛔ **Sprostowanie 22c:** czerwone wyniki (T2, T3, T11, T12, T28, T30) NIE istnieją w
+  repozytorium — były artefaktem nieaktualnej kopii hosta (router 3.49 vs 3.52,
+  pisma-procesowe-v3 5.24 vs 5.26, dr-09 3.30 vs 3.36 itd.). Zapis „wymaga naprawy na
+  drzewie z repozytorium" był trafny co do blokady, ale zakładał usterki, których w
+  repozytorium nie ma. Brak czego naprawiać.
+- Obserwacja środowiskowa: host ładuje starsze wydania 9 skilli niż repozytorium — to
+  mechanizm z F-189 widoczny od strony instalacji, nie repozytorium.
+
+### 2. F-195 — ZAMKNIĘTA
+
+`prawny-router-v3/references/ISAP-METRYKI-AKTOW.md` w repozytorium był osieroconą kopią
+(stan 2026-06-07; 49 linii rozbieżnych z `shared/`; Prawo budowlane z t.j. `2025/418`
+zamiast `2026/524`). Nikt go nie wczytuje (`KROK1-detekcja.md` → `shared/`). Zastąpiony
+odesłaniem do kanonu — nie usunięty, by nie zmieniać rejestracji plików. Router 3.52 → 3.53.
+
+### 3. F-194 — zawężona do CBOSA
+
+`pisma-procesowe-v3` 5.26 → 5.27: silnik V10, ETAP 4A — audyt powołań orzeczniczych
+przeciwnika (tabela statusów + GRAD-3b-SYM) i KALIBRACJA-PRZECIWNIK (maks. S3, nigdy zamiast
+odpowiedzi na istotę); pozycja w HARD GATE. Pozostaje wyłącznie odczyt I OSK 590/26 z CBOSA.
+
+### 4. Wydanie
+
+Z drzewa repozytorium: `prawny-router-v3` 3.53, `pisma-procesowe-v3` 5.27,
+`audyt-systemu-v4` 6.123. Paczki 22–22c (dr-04, dr-06, shared, prawo-polskie-v2,
+orzeczenia-sadowe-v2) zgodne z tym drzewem — T33.
+
+**Wersje:** `prawny-router-v3` 3.52 → 3.53, `pisma-procesowe-v3` 5.26 → 5.27,
+`audyt-systemu-v4` 6.122 → 6.123.

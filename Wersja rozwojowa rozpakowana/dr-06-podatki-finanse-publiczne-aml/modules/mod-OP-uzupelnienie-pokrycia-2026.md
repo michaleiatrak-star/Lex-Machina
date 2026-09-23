@@ -1,7 +1,7 @@
 ---
 module: OP-uzupelnienie-pokrycia-2026
-version: "1.0"
-verified_on: "2026-08-27"
+version: "1.1"
+verified_on: "2026-09-22"
 coverage: "B — operacyjna mapa działów Ordynacji dotąd bez treści"
 source_policy: "RZĄD 1 only"
 ---
@@ -14,6 +14,24 @@ Aktualny tekst jednolity: **Dz.U. 2026 poz. 622**, stan prawny 21.04.2026.
 Na dzień 27.08.2026 są już ogłoszone zmiany z późniejszym wejściem w życie,
 w tym Dz.U. 2026 poz. 825 i 846. Nie stosuj przyszłego brzmienia przed
 jego datą wejścia w życie.
+
+**Nowelizacje po t.j. — stan na 2026-09-22 (F-195)** ✅ [VER: api.sejm.gov.pl/eli,
+DU/1997/926 references + art. końcowe DU/2026/825, 846, 875, 1098, 1154, 1206, 2026-09-22]:
+
+| Akt | Zmienione jednostki OP | Wejście w życie |
+|---|---|---|
+| 2026/825 | art. 14i, 14j | 24.09.2026 |
+| 2026/846 art. 1 | m.in. art. 12, 14b, 17, 17a, 18c, 21, 52, 59–63, 67a, 67d, 73–81b, 86a–86i, 119g, 165 (szeroka nowelizacja) | 1.10.2026; art. 1 pkt 9 — od 26.06.2026 |
+| 2026/1154 art. 2 | art. 39k, 299 § 3 | 16.09.2026 (w mocy) |
+| 2026/875 art. 6 | art. 13, 67a | ⏳ 1.01.2027 |
+| 2026/1098 art. 35 | m.in. art. 2, 3b, 13, 182, 297–299c, 306 (osobiste konta inwestycyjne) | ⏳ 1.01.2027 |
+| 2026/1206 art. 3 | art. 119zg pkt 1 | ⏳ 11.01.2027 |
+
+⛔ Lista jednostek to inwentarz dyspozycji nowelizującej, NIE treść. Przed
+powołaniem któregokolwiek z tych przepisów odczytaj brzmienie z aktu
+zmieniającego i sprawdź datę zdarzenia względem kolumny „Wejście w życie".
+Art. 67a jest zmieniany DWUKROTNIE (846 od 1.10.2026, 875 od 1.01.2027) —
+trzy wersje czasowe.
 
 - https://eli.gov.pl/eli/DU/2026/622/ogl
 

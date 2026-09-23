@@ -1,5 +1,15 @@
 # CHANGELOG — Biblioteka shared
 
+## 3.79 — 2026-09-22 — F-195
+
+- ISAP-METRYKI-AKTOW — dwa wiersze Prawa budowlanego: adnotacja „art. 1 pkt 1 lit. c wchodzi 20.09.2026" zastąpiona stanem „w mocy od 20.09.2026" (art. 1 pkt 1 lit. a i c oraz pkt 3 ustawy 2025/1847 — art. 13 pkt 1; RZĄD 1 ELI). ⚠️ Kopia tego pliku w `prawny-router-v3/references/` NIEZMIENIONA — router ma regresję dyskową T12 (host 3.49, dziennik 3.52), wydanie z tej kopii groziłoby nadpisaniem nowszego stanu.
+
+## 3.78 — 2026-09-22 — F-193, F-194
+
+- WERYFIKACJA-SLAD 1.7 → 1.8: drugi precedens NSA I OSK 590/26 jako 🟨 snapshot bez awansu (CBOSA 503 w dniu dodania; istnienie z dwóch źródeł RZĘDU 2B); nowa kontrola GRAD-3b-SYM (symbol CBOSA — flaga wymuszająca odczyt przedmiotu, nie blokada); nowa reguła KALIBRACJA-PRZECIWNIK (wadliwe powołania przeciwnika to argument o wiarygodności, nie co do istoty).
+- DOSTEP-MASZYNOWY-API 1.6 → 1.7: §2 — `entryIntoForce` w ELI podaje wyłącznie termin główny (DU/2026/26: 2026-04-13 przy czterech terminach w art. 43); wzorzec zapytania `/eli/acts/search`.
+- ⚠️ AKTY-PRAWNE-MASTER celowo NIEEDYTOWANY: plik DEPRECATED od 2026-06-14 (operacyjny rejestr: mapa_dzu w audyt-systemu-v4).
+
 ## 3.77 — 2026-09-16 — F-189
 
 - ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Accept: application/xhtml+xml zwraca cały akt (RODO, 650/2012, AI Act, NIS2, DORA — zmierzone). terminy.md — nowa sekcja „Akty UE poza RODO” (EPS art. 70; AI Act art. 73: 15/2/10 dni) oraz podniesione do RZĘDU 1 wiersze RODO art. 78 ust. 2–3 i art. 83 ust. 3–6.

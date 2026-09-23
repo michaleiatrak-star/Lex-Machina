@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.17"
+version: "2.18"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -120,6 +120,15 @@ elementy + niedopasowany przedmiot = wynik nadal niecytowalny na poparcie tezy.
 Ten sam mechanizm łapie również cytaty z KROK 1-T.1/1-T.2 (SAOS/CBOSA
 pełnotekstowe) — one dają KANDYDATÓW, gradient TREŚĆ jest krokiem PO nich,
 nie zamiast (patrz 1-T.3).
+
+**Zasada 2B — symbol CBOSA i powołania przeciwnika (dodano 2026-09-22, F-194,
+po NSA I OSK 590/26 — 🟨 snapshot bez awansu).** (a) Przy orzeczeniu NSA/WSA
+powoływanym na poparcie tezy wykonaj `GRAD-3b-SYM` z `shared/WERYFIKACJA-SLAD.md`:
+odczytaj pole „Symbol z opisem" z `/doc/{ID}` i porównaj z symbolem sprawy;
+różny symbol = obowiązkowy odczyt przedmiotu (GRAD-3b) przed użyciem, nie
+automatyczne odrzucenie. (b) Gdy weryfikujesz orzecznictwo powołane przez
+PRZECIWNIKA — stosuj `KALIBRACJA-PRZECIWNIK` (tamże): wadliwe powołanie to
+argument o wiarygodności pisma, nigdy zamiennik odpowiedzi na istotę zarzutu.
 
 **Zasada 2B — KOTWICA/PINPOINT do konkretnego miejsca w źródle (dodano
 2026-07-15, na wyraźne polecenie użytkownika — analogia do wskazywania

@@ -11,9 +11,11 @@
 
 | Zmiana | Status | Podstawa |
 |---|---|---|
-| **Reforma orzecznictwa ZUS — Etap I** | **OBOWIĄZUJE od 27.01.2026** — nowe def. pracy zarobkowej, rozszerzone uprawnienia kontrolerów L4 | Dz.U. 2026 poz. 26 |
+| **Reforma orzecznictwa ZUS — Etap I** | **OBOWIĄZUJE od 27.01.2026** — kontrola prawidłowości orzekania o czasowej niezdolności do pracy i o konieczności opieki (art. 56, 59, 60 ustawy zasiłkowej; art. 43 pkt 1 ustawy 2026/26). ⛔ KOREKTA 2026-09-22 (F-193): definicje pracy zarobkowej i aktywności niezgodnej z celem zwolnienia NIE należą do tego etapu — obowiązują od **13.04.2026** (art. 17 ust. 1a–1b, art. 13 pkt 2 ustawy 2026/26; wiersz niżej) | Dz.U. 2026 poz. 26 ✅ [VER: api.sejm.gov.pl/eli DU/2026/26 text.pdf, art. 43, 2026-09-22] |
+| **L4 — utrata zasiłku, definicje** | **OBOWIĄZUJE od 13.04.2026** — art. 17 ust. 1–1c i 4 ustawy zasiłkowej: utrata zasiłku za cały okres zwolnienia przy pracy zarobkowej lub aktywności niezgodnej z celem; definicje w ust. 1a–1b; kilka tytułów → niezdolność dotyczy każdego (ust. 1c). Szczegóły: `mod-ustawa-zasilkowa-choroba-macierzynstwo.md` §4a | Dz.U. 2026 poz. 26, art. 13 pkt 2 ✅ [VER: api.sejm.gov.pl/eli DU/2026/26 + DU/2026/854, 2026-09-22] |
 | **Reforma orzecznictwa ZUS — Etap II** | **OBOWIĄZUJE od 13.04.2026** — pielęgniarki/fizjoterapeuci wydają orzeczenia, badania zdalne, max 30 dni na orzeczenie | Dz.U. 2026 poz. 26 |
-| **Reforma orzecznictwa ZUS — Etap III** | **PLANOWANY od 01.01.2027** — jednoosobowe orzekanie I i II inst., komisje lekarskie zastąpione — WERYFIKUJ STATUS | Dz.U. 2026 poz. 26 |
+| **Reforma orzecznictwa ZUS — Etap III** | **OGŁOSZONY — wchodzi 01.01.2027** (art. 43 pkt 3 ustawy 2026/26; ⛔ KOREKTA 2026-09-22, F-193: to NIE projekt — dawna etykieta „PLANOWANY / WERYFIKUJ STATUS" była błędna) — art. 85c–85j SUS: sprzeciw 14 dni do ZUS (art. 85f ust. 1), ponowne rozpatrzenie przez INNEGO lekarza orzecznika, w sprawach szczególnie skomplikowanych — trzech lekarzy łącznie (art. 85f ust. 5, 7, 8); od orzeczenia po ponownym rozpatrzeniu sprzeciw nie przysługuje (ust. 9); orzeczenie w postaci elektronicznej (art. 85e ust. 12). Sprzeciw NIE przysługuje od orzeczeń w kontroli z art. 59 ustawy zasiłkowej | Dz.U. 2026 poz. 26 ✅ [VER: api.sejm.gov.pl/eli DU/2026/26 text.pdf, 2026-09-22] |
+| **L4 z jednego tytułu (praca u drugiego płatnika)** | **OGŁOSZONY — wchodzi 01.01.2027** — art. 17 ust. 1d–1e i art. 9 ust. 4 ustawy zasiłkowej. ⛔ Tekst jest JUŻ w t.j. 2026/854 z przypisem „wejdzie w życie z dniem 1 stycznia 2027 r." — NIE stosować do zwolnień przed tą datą | Dz.U. 2026 poz. 26, art. 13 pkt 1 i 2 lit. b, art. 43 pkt 3 ✅ [VER: api.sejm.gov.pl/eli DU/2026/854 text.pdf, przypis 7, 2026-09-22] |
 | **Emerytury czerwcowe 2009–2019** | **PRZELICZONE Z URZĘDU** przez ZUS, zakończone marzec 2026; średnia podwyżka ~163 zł/mies., wyrównanie od 01.01.2026 | Dz.U. 2025 poz. 1169 |
 | **Wyrok TK SK 140/20 z 4.06.2024** | ZUS odmawia przeliczenia (wyrok niepublikowany w Dz.U.) → sądy masowo nakazują przeliczenie | — |
 
@@ -153,8 +155,15 @@ Tryb: wniosek o wznowienie postępowania (art. 190 ust. 4 Konstytucji)
 
 ```
 ETAP I (27.01.2026) — OBOWIĄZUJE:
-  → Nowe definicje aktywności niezgodnej z celem L4
-  → Rozszerzone uprawnienia kontrolerów ZUS
+  → Kontrola prawidłowości orzekania o czasowej niezdolności do pracy
+    i o konieczności opieki (art. 56, 59, 60 ustawy zasiłkowej)
+  ⛔ KOREKTA 2026-09-22 (F-193): definicje pracy zarobkowej / aktywności
+    niezgodnej z celem L4 były tu błędnie przypisane — to 13.04.2026
+
+ETAP L4 (13.04.2026) — OBOWIĄZUJE:
+  → art. 17 ust. 1–1c, 4 ustawy zasiłkowej (definicje, kilka tytułów)
+  → postępowania wszczęte przed 13.04.2026 — przepisy dotychczasowe
+    (art. 39 ustawy 2026/26)
 
 ETAP II (13.04.2026) — OBOWIĄZUJE:
   → Pielęgniarki i fizjoterapeuci uprawnieni do wydawania orzeczeń
@@ -163,9 +172,16 @@ ETAP II (13.04.2026) — OBOWIĄZUJE:
   → Badania orzecznicze zdalnie (wideorozmowa)
   → Max 30 dni na wydanie orzeczenia; przekroczenie → prawo ponaglenia strony
 
-ETAP III (01.01.2027) — PLANOWANY (weryfikuj status!):
-  → Komisje lekarskie zastąpione jednoosobowym orzekaniem I i II inst.
-  → Orzeczenia w formie elektronicznej
+ETAP III (01.01.2027) — OGŁOSZONY, data ustawowa (art. 43 pkt 3):
+  → art. 85c–85j SUS: sprzeciw → ponowne rozpatrzenie przez innego
+    lekarza orzecznika; sprawy szczególnie skomplikowane — trzech
+    lekarzy łącznie (art. 85f); orzeczenie elektroniczne (art. 85e ust. 12)
+  → sprawy wszczęte i niezakończone przed 1.01.2027 — już NOWE art.
+    85c–85j (art. 38 ust. 1 ustawy 2026/26 — odwrotnie niż zwykle!)
+  → art. 17 ust. 1d–1e + art. 9 ust. 4 ustawy zasiłkowej: L4 z jednego
+    tytułu na żądanie ubezpieczonego, obowiązek poinformowania płatnika,
+    jeden okres zasiłkowy niezależnie od liczby tytułów
+  ✅ [VER: api.sejm.gov.pl/eli DU/2026/26 text.pdf, 2026-09-22]
 ```
 
 ---

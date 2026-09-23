@@ -34,7 +34,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | SUS — pozostałe rozdziały | jw. | `mod-SUS-uzupelnienie-pokrycia-2026` | 🟡 B |
 | SUS — podleganie ubezpieczeniom | jw. | `mod-SUS-dzial-2-podleganie-ubezpieczeniom` | ✅ aktywny |
 | Ubezpieczenie społeczne rolników (KRUS) | Dz.U. 2025 poz. 1770 t.j. ze zm. | `mod-KRUS-rolnicze-ubezpieczenia` | ✅ aktywny |
-| Ustawa o świadczeniach pieniężnych z ubezpieczenia społecznego w razie choroby i macierzyństwa — current-state | Dz.U. 2026 poz. 854 t.j. ze zm. | `mod-ustawa-zasilkowa-current-state-COV.md` + `mod-ustawa-zasilkowa-choroba-macierzynstwo` | 🟢 B+/COV; fresh/temporal gate |
+| Ustawa o świadczeniach pieniężnych z ubezpieczenia społecznego w razie choroby i macierzyństwa — current-state | Dz.U. 2026 poz. 854 t.j. ze zm. | `mod-ustawa-zasilkowa-current-state-COV.md` + `mod-ustawa-zasilkowa-choroba-macierzynstwo` | 🟢 B+/COV; fresh/temporal gate; ⏳ art. 17 ust. 1d–1e i art. 9 ust. 4 (zm. Dz.U. 2026 poz. 26) wchodzą **1.01.2027** — w t.j. oznaczone przypisem (F-193) |
 | Ustawa o emeryturach i rentach z FUS | Dz.U. 2025 poz. 1749 t.j. ze zm. | rodzina modułów FUS | 🟢/🟡 aktywny; fresh gate |
 | FUS — renta rodzinna / zasiłek pogrzebowy / waloryzacja | jw. | `mod-FUS-zasilek-pogrzebowy-renta-rodzinna-waloryzacja` | ✅ aktywny |
 | FUS — pozostałe działy | jw. | `mod-FUS-uzupelnienie-pokrycia-2026` | 🟡 B |

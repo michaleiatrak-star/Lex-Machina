@@ -1,12 +1,12 @@
 ---
 name: prawo-polskie-v2
-version: "6.26"
+version: "6.29"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.26 (2026-09-16, F-189): ROUTING-MAP — wiersz alkohol/tytoń: t.j. ustawy tytoniowej `2024/1162` → `2026/1214` (ogłoszony 16.09.2026; T15 NEWER_TJ; RZĄD 1).…
+  Wersja bieżąca: 6.29 (2026-09-22, F-195): ROUTING-MAP — MONITORING Ordynacji: sześć nowelizacji po t.j. 2026/622 z terminami z art. końcowych (875, 1098, 1206 dotąd nieśledzone).…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

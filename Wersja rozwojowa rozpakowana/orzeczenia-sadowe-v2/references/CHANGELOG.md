@@ -1,5 +1,7 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+**2.18 (2026-09-22, F-194) — Zasada 2B:** odwołanie do `GRAD-3b-SYM` (symbol CBOSA jako flaga wymuszająca odczyt przedmiotu) i `KALIBRACJA-PRZECIWNIK` z `shared/WERYFIKACJA-SLAD.md` 1.8; precedens NSA I OSK 590/26 jako 🟨 bez awansu (CBOSA 503, 2026-09-22).
+
 **2.17 (2026-09-14) — retrieval/snapshot CBOSA jako materiał badawczy z jawnym provenance:**
 - fallback V-SYG-0.5 nie jest już redukowany do samego ISTNIENIA, gdy host
   faktycznie zwraca oficjalny snapshot `/doc/{ID}`;

@@ -1,5 +1,5 @@
 789013820fcc56822f435daedb3b28dcdeb18cd0b867b54c198dcbac0a9c3894  ./PORTABILITY-MANIFEST.md
-1f1a7e57adac036fbe0dbd32a9ec7e3388227e611527bb67756a39b0679df56d  ./SKILL.md
+04fb95d1c2e7457bf4aac90708bde501a08f64270b3356b0f273eb108e0f03ec  ./SKILL.md
 77bd8aa3589ce547a73e788411f728ca29eeaf434ba184afa457d4121a718b39  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
 24aeef45d1ac550fcc48717deed6ac3904192dc3635519731430d48709ead40e  ./modules/MOD-ADMIN.md
@@ -16,7 +16,7 @@ da8c118bccc46f472e2683ee93069bb30b563145c2e89b5d5d810e673f121b3c  ./modules/MOD-
 e0e98d636dfd6d33f41fa14391d48ef5353e9bc6cd9ef8e4a12480d3cfba02ca  ./modules/MOD-SZABLONY.md
 1435bcc30a499db09df488fbc7088e52220ae6a740063f2f468af4cf31c8f89b  ./modules/MOD-WALIDACJA.md
 13421d74fecc2df940d46174c96bf9b5863b1c112447640e0b0ecfa2c11906fa  ./references/AUTOMAT-STANOW.md
-9bee804010712aa0bf79eea27016f23002782d6a47cb8b487b5fb0e6c751df91  ./references/CHANGELOG.md
+cd80dd25bd29940a8139516300da0b383bbcacd1706439bc733654badad3f0ca  ./references/CHANGELOG.md
 3c3bc87292e646ce9ff137fecd989e7130ef3fae93ceca1d0090ebfd427e5d93  ./references/DODATKI.md
 0956591f0542b8d663aa817a029bbcbe2f4b0c070981317b62fd8cb63b23ef08  ./references/MODULY-MAPA.md
 41b4c010ae76ccfbf537c74b173175a63659cca796cd74b57467fe9bde0b255e  ./references/SELF-CHECK-PISMA.md
@@ -28,7 +28,7 @@ da6da78df4a366875593ffaa51d7683dd7f49027c7974971d1655df7bde179c2  ./references/W
 1403cea37494e5ac11092b993277ec5e3689c59f3d58c0a6e20269cf4049604c  ./references/checklists/opponent-pleading-audit-checklist-v9.md
 bcb15aa4cfcbf227a834601816a5b4c83860588e451085cebcef7dfa8f9876e1  ./references/engines/admin-pleading-engine-v8.md
 40157411f3f0209a3b2f94d4f8155a37ffbce1c6a7e379d770faffc7dd7b8b4d  ./references/engines/appellate-engine-v8.md
-9e0378646dbd519f2cabb683a60c5247aa1c32e2b7607ac3630c7302accc4ccc  ./references/engines/contradiction-intelligence-engine-v10.md
+7a0fbe4d157384149a770591b0ba7fa9639cdf2edd312fc9c2fcfad954e80a76  ./references/engines/contradiction-intelligence-engine-v10.md
 c1a4b62195f317c173e5aae5d631784b1548a915b9fae4a980b0e18538abd3df  ./references/engines/court-simulation-engine.md
 ce52b97e34750d0fbe594dad1171b0e281d726901afc43911823e9a509b6beb2  ./references/engines/cross-pleading-consistency-engine-v10.md
 0b73512d3a3f65ca9950216db6d4a2bfa80f11a30716e5d9600dfdcc410a4da8  ./references/engines/judicial-credibility-simulation-engine-v10.md

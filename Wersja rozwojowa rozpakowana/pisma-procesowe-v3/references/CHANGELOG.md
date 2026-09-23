@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.27 (2026-09-22, F-194): contradiction-intelligence-engine-v10 — ETAP 4A „audyt powołań orzeczniczych przeciwnika": tabela statusów (SYGNATURY) + gradient TREŚĆ i GRAD-3b-SYM (WERYFIKACJA-SLAD 1.8); KALIBRACJA-PRZECIWNIK — wadliwe powołanie maks. S3, nigdy zamiast odpowiedzi na istotę; pozycja w HARD GATE. Wzorzec: NSA I OSK 590/26 (🟨).
 - 5.26 (2026-09-16, F-189): ODTWORZENIE utraconego wydania 5.25 (F-189): markery T28-OK na dwóch liniach opisujących naprawy w modules/MOD-OPLATY.md. Treść merytoryczna bez zmian.
 - 5.25 — LUKA JAWNA: wydanie AUDYT-2026-09-12f nieobecne na dysku — odtworzone w 5.26
 - 5.24 (2026-09-12d, O-11 rodzina TERMINY): MOD-SZABLONY — szablon sprzeciwu opierał termin na UCHYLONYM art. 503 § 1 KPC; teraz art. 480[2] § 2 pkt 1-2 KPC z rozróżnieniem miejsca doręczenia, dopuszczalność art. 505 § 1, skutek art. 505 § 2. ⛔ SZÓSTE wystąpienie "art. 328[1] KPC" — poprawione na art. 328 § 1 i § 2 KPC. SKILL.md: katalog pism prostych powoływał art. 503 KPC oraz art. 328[1] KPC — oba poprawione

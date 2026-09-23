@@ -1,7 +1,8 @@
 # DOSTĘP MASZYNOWY DO ŹRÓDEŁ — jak wywołać API, żeby odpowiedziało
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
-> **Wersja:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
+> **Wersja:** 1.7 (2026-09-22) — §2: pole `entryIntoForce` w metadanych ELI podaje tylko termin GŁÓWNY; terminy etapowe wyłącznie z przepisu o wejściu w życie (F-193).
+> **Wersja poprzednia:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
 > **Wersja poprzednia:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
 > od bieżącej reguły wykonawczej; dodano fresh-probe + deterministyczny
 > formularz HTML (/cbo/search, /cbo/find, /doc/{ID}) i exact-match.
@@ -187,6 +188,14 @@ Tempo nadal ograniczaj, ale samo odczekanie 60 s NIE jest procedurą naprawczą.
 | ✅ **ELI Sejmu** | `api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}` | JSON; `/text.pdf`, `/references`. Bez klucza |
 | ✅ **ELI (mirror)** | `eli.gov.pl/api/acts/DU/{rok}/{poz}` | ten sam korpus |
 | ⛔ **ISAP** | — | **kanał maszynowy MARTWY**: Imperva odbija pętlą 302 na ten sam adres, także pod neutralnym UA |
+
+⛔ **`entryIntoForce` ≠ wszystkie daty wejścia w życie (zmierzone 2026-09-22,
+F-193).** Dla `DU/2026/26` metadane zwracają wyłącznie `2026-04-13`, podczas gdy
+art. 43 ustawy ustanawia jeszcze 27.01.2026, 1.10.2026 i 1.01.2027. Monitoring
+oparty na samym polu przegapiłby etap z 2027 r. Po każdym trafieniu odczytaj
+artykuł końcowy z `/text.pdf`; w t.j. dodatkowo przypisy „wejdzie w życie z dniem…".
+Wyszukiwanie po tytule: `/eli/acts/search?publisher=DU&year={rok}&title={fraza}`
+(bez klucza, JSON, zmierzone 2026-09-22).
 
 ⛔ **Skutek praktyczny dla reguły „ISAP każdy przepis":** brzmienie
 **weryfikuj przez ELI**, a **ISAP powołuj jako adres dla człowieka** w piśmie.

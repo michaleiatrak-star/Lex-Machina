@@ -1,6 +1,6 @@
 # WARN-OTWARTE — rejestr żywy otwartych flag audytowych
 
-**Stan:** 2026-09-17u. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
+**Stan:** 2026-09-22. Ten plik zawiera wyłącznie zakres pozostający do wykonania. Historia zamknięć i napraw znajduje się w `AUDIT-JOURNAL.md` / `CHANGELOG.md`.
 
 ## Tablica sterująca
 
@@ -8,7 +8,7 @@
 |---|---:|---|
 | Wykonalne sesją audytową | 2 | F-167, **F-189** |
 | Reaktywne | 1 | F-5 |
-| Zależne od środowiska/dewelopera | 15 | F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
+| Zależne od środowiska/dewelopera | 16 | **F-194** (tylko CBOSA), F-8, F-9, F-11, F-94, F-113, F-133, F-137, F-143, F-144, **F-157b**, F-158(c), F-171, **F-183a**, **F-184**, **F-185** |
 
 > **F-157b (2026-09-13c, ZAWĘŻONA) — braki resztkowe listy dozwolonych.**
 > Pomiar T25 (52 sondy) po zmianie konfiguracji: **odblokowane** —
@@ -28,7 +28,7 @@
 > library=ECHR&id={itemid}` → pełny tekst. Wyszukiwanie po frazie w HUDOC
 > pozostaje nierozstrzygnięte, ale nie jako otwarta flaga — jako znany brak.
 | Odnotowane bez działania | 1 | O-8 (ograniczenie strukturalne aparatu) |
-| **Razem** | **19** | — |
+| **Razem** | **20** | — |
 
 > **F-189 (2026-09-16, OTWARTA — przyczyna) — nadpisanie skilli dziedzinowych starszym stanem.**
 > Treść 10 skilli odtworzona i wydana (AUDYT-2026-09-16). Pozostaje: (1) ustalić mechanizm
@@ -566,6 +566,7 @@
 
 | Flaga | Pozostały zakres |
 |---|---|
+| F-194 | Wyłącznie odczyt NSA I OSK 590/26 z CBOSA (`/doc/{ID}`, V-SYG-0.7) → awans z 🟨 do ✅. Stan 2026-09-22: kanał kodu HTTP 503, web_search bez adresu `/doc/{ID}`. ✅ Wykonane: Zasada 2B `orzeczenia-sadowe-v2` 2.18; ETAP 4A V10 `pisma-procesowe-v3` 5.27 (na drzewie repozytorium). |
 | F-8 | Wdrożyć realny connector MCP do ELI/ISAP i zweryfikować protokół w środowisku docelowym. |
 | F-9 | Wdrożyć znacznik `AUDIT_EVENT`, parser i politykę retencji w portalu. |
 | F-11 | Uruchomić `extract_api_verification_log.py` na prawdziwej odpowiedzi API zawierającej wywołania narzędzi. |

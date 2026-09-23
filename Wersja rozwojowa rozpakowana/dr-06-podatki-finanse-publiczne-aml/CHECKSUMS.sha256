@@ -1,7 +1,7 @@
 14fe0d0f25951992273e1f6c06e869f436ce401ba016628ac84dc4c8076d8077  ./MAPA-AKTOW.md
 09b5b612b258f9798b1777158d3f8cd814a77081741ac9f99e80a9786b10ae4f  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-829ea4321c70a569de8d1763f70f510a17390d63e4f155fba6365b6c2ccbc482  ./SKILL.md
+2024095cd70fea71320618e4e1785f27e671ec00392280d8d041f85201fc68fc  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 efa42fab8d68971d910177ae2f44586577a709e468223218e5b1b63d44793534  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -12,7 +12,7 @@ aaaaeb22acb2ae070f3ed720534bcc62dc2936c58e41f876a411f669cd7b2b31  ./modules/mod-
 73dfb4695b8bf5ae90fb10327db0844bed796ae9eeb0ef900b807050b4ebe085  ./modules/mod-OP-kontrola-podatkowa-dzial-VI.md
 3bcb6fda9c2284cea88cc68c69fd22a4b876e4b691c87dfec52cd0de56450c23  ./modules/mod-OP-ordynacja-podatkowa.md
 d91f20260802ee9fc0570015cec5ef9d1c52e8f151f0608ca101e3a4db7f5ac1  ./modules/mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a.md
-b2b3d8a42cd730bd3e87962c8eb868fda81b3b7f9c84383e9d59f1a25f6cd944  ./modules/mod-OP-uzupelnienie-pokrycia-2026.md
+332d342ca9077c66cd5a1107f18e87572d464ac703329d38872059ed93cdd008  ./modules/mod-OP-uzupelnienie-pokrycia-2026.md
 a0b1d9dd600318e946460b27456b3e06e21750515a8d7c9c3b54ca27228976ba  ./modules/mod-PIT-podatek-dochodowy-fizyczne.md
 3e007cd86ab4f121e39677a9af61c3b8f7390b878f796d163f888448d256d382  ./modules/mod-PKPiR-ewidencje-uproszczone.md
 51eecc815a561dc3d8977c8a095492c0edb0397d6686405e790aa43588e85233  ./modules/mod-PKWiU-klasyfikacje-statystyczne.md
@@ -74,4 +74,4 @@ f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 603de20151ed15e91aebfdec8146e4ee0e834d8ead7785c982ed335f72ed99dd  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
 e42c9179292bdde9fc898dd730b4e29340063e269108416d590272a85cb7ee92  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-63eb6ba2f340cbc7b38222dcc882cd42b68f3d4b93b2a09fb23da9f6118f0c0a  ./references/CHANGELOG.md
+7f4550aa6866b8a47557f904ddadfa2cc93651c7ff2dc362ae731366dd4ec954  ./references/CHANGELOG.md

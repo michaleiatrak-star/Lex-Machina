@@ -1,5 +1,6 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.53 (2026-09-22, F-195): references/ISAP-METRYKI-AKTOW.md — osierocona kopia (stan 2026-06-07; 49 linii rozbieżnych z kanonem shared; PrBud t.j. 2025/418 zamiast 2026/524) zastąpiona odesłaniem do `shared/ISAP-METRYKI-AKTOW.md`. Żaden plik jej nie wczytywał (KROK1-detekcja odsyła do shared). Treść routera bez zmian.
 - 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.
 - 3.51 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „Prawo telekomunikacyjne, Dz.U. 2024 poz. 1221 t.j.” skorygowane: 2024/1221 to akt pierwotny Prawa komunikacji elektronicznej (RZĄD 1; T31). Treść routera bez zmian.
 - 3.50 (2026-09-16, F-189): T12: pole YAML `changelog:` skrócone do odesłania; wersja 3.49 bez opisu oznaczona jako LUKA JAWNA. Treść bez zmian.
