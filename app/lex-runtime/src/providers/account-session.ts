@@ -1,6 +1,6 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, type Dirent } from "node:fs";
+import { existsSync, statSync, type Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -15,6 +15,9 @@ import type {
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000;
 const AUTH_TIMEOUT_MS = 5 * 60 * 1000;
 const STATUS_TIMEOUT_MS = 15_000;
+// stream-json prints its init event before the API request; silence past this
+// window means the client is stuck before inference (not a slow answer).
+const CLAUDE_FIRST_OUTPUT_TIMEOUT_MS = 120_000;
 const OPTIONAL_ACCOUNT_CLIENT_INSTALL_TIMEOUT_MS = 10 * 60 * 1000;
 const MAX_CAPTURE_BYTES = 8 * 1024 * 1024;
 const TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
@@ -603,37 +606,106 @@ function parseCodexFinalText(
   return finalText || null;
 }
 
-function parseClaudeResult(
+type ClaudeResultPayload = {
+  type?: unknown;
+  subtype?: unknown;
+  is_error?: unknown;
+  result?: unknown;
+  errors?: unknown;
+  session_id?: unknown;
+};
+
+function claudeResultPayload(
+  stdout: string
+): ClaudeResultPayload | null {
+  const candidates = [
+    stdout.trim(),
+    ...stdout
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .reverse()
+  ];
+  for (const candidate of candidates) {
+    if (!candidate.startsWith("{")) continue;
+    try {
+      const payload =
+        JSON.parse(candidate) as ClaudeResultPayload;
+      if (
+        payload &&
+        typeof payload === "object" &&
+        (
+          payload.type === "result" ||
+          (
+            payload.type === undefined &&
+            "result" in payload
+          )
+        )
+      ) {
+        return payload;
+      }
+    } catch {
+      // Partial or non-JSON lines are ignored.
+    }
+  }
+  return null;
+}
+
+export function claudeResultReady(
+  stdout: string
+): boolean {
+  return claudeResultPayload(stdout) !== null;
+}
+
+export function parseClaudeResult(
   stdout: string
 ): {
   text: string;
   sessionId: string | null;
+  isError: boolean;
 } | null {
-  try {
-    const payload =
-      JSON.parse(stdout) as {
-        result?: unknown;
-        session_id?: unknown;
-      };
-    const text =
-      typeof payload.result ===
-        "string"
-        ? payload.result.trim()
-        : "";
-    if (!text) return null;
-    const sessionId =
-      typeof payload.session_id ===
-        "string" &&
-      payload.session_id
-        ? payload.session_id
-        : null;
-    return {
-      text,
-      sessionId
-    };
-  } catch {
-    return null;
-  }
+  const payload =
+    claudeResultPayload(stdout);
+  if (!payload) return null;
+  const isError =
+    payload.is_error === true ||
+    (
+      typeof payload.subtype === "string" &&
+      payload.subtype.startsWith("error")
+    );
+  const errors =
+    Array.isArray(payload.errors)
+      ? payload.errors
+          .filter(
+            (item): item is string =>
+              typeof item === "string"
+          )
+          .join(" ")
+      : "";
+  const resultText =
+    typeof payload.result ===
+      "string"
+      ? payload.result.trim()
+      : "";
+  const text =
+    isError
+      ? [resultText, errors]
+          .filter(Boolean)
+          .join(" ")
+          .trim()
+      : resultText;
+  if (!text && !isError) return null;
+  const sessionId =
+    typeof payload.session_id ===
+      "string" &&
+    payload.session_id
+      ? payload.session_id
+      : null;
+  return {
+    text,
+    sessionId,
+    isError
+  };
 }
 
 export type ProviderAccountSessionStatus = {
@@ -681,6 +753,9 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
   } else if (provider === "anthropic") {
     delete env.ANTHROPIC_API_KEY;
     delete env.ANTHROPIC_AUTH_TOKEN;
+    // A runtime started from inside a Claude Code shell must not make the
+    // provider subprocess believe it is a nested Claude Code session.
+    delete env.CLAUDECODE;
     env.CLAUDE_CODE_MCP_STARTUP_WAIT_MS = "0";
     env.MCP_CONNECTION_NONBLOCKING = "true";
     const token =
@@ -1038,11 +1113,18 @@ export function claudeHeadlessArgs(
   systemPrompt: string,
   tail: string[] = []
 ): string[] {
+  // stream-json + --verbose emits an init event before the API request and a
+  // final `result` line; Lex settles on that line instead of waiting for the
+  // process to exit (Windows child processes can keep claude.exe alive).
+  // --strict-mcp-config without --mcp-config starts no MCP servers at all:
+  // --restricted alone still launches user/project MCP servers.
   return [
     "-p",
     "--output-format",
-    "json",
+    "stream-json",
+    "--verbose",
     "--restricted",
+    "--strict-mcp-config",
     "--tools",
     "",
     "--disallowedTools",
@@ -1211,6 +1293,41 @@ function appendCapture(
   return next.slice(-MAX_CAPTURE_BYTES);
 }
 
+type RunSettleOptions = {
+  // Resolve with exit code 0 as soon as stdout carries a complete answer,
+  // then terminate the process tree instead of waiting for it to exit.
+  settleOnStdout?: (stdout: string) => boolean;
+  // Fail fast when the client prints nothing at all within this window.
+  firstOutputTimeoutMs?: number;
+};
+
+function killProcessTree(
+  child: ChildProcessWithoutNullStreams
+): void {
+  if (
+    process.platform === "win32" &&
+    typeof child.pid === "number"
+  ) {
+    // child.kill() on Windows ends only the direct child (e.g. cmd.exe),
+    // leaving claude.exe/codex.exe running and holding the pipes open.
+    try {
+      const killer = spawn(
+        "taskkill",
+        ["/pid", String(child.pid), "/T", "/F"],
+        {
+          windowsHide: true,
+          stdio: "ignore"
+        }
+      );
+      killer.once("error", () => child.kill());
+      return;
+    } catch {
+      // Fall back to the direct kill below.
+    }
+  }
+  child.kill();
+}
+
 function runDirect(
   executable: string,
   args: string[],
@@ -1218,13 +1335,16 @@ function runDirect(
   env: NodeJS.ProcessEnv,
   timeoutMs: number,
   cwd?: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  settleOptions: RunSettleOptions = {}
 ): Promise<RunResult> {
   return new Promise((resolve, reject) => {
     const child = spawnResolved(executable, args, cwd, env);
     let stdout = "";
     let stderr = "";
     let settled = false;
+    let firstOutputTimer:
+      NodeJS.Timeout | null = null;
 
     const finish = (
       callback: () => void
@@ -1232,12 +1352,15 @@ function runDirect(
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      if (firstOutputTimer) {
+        clearTimeout(firstOutputTimer);
+      }
       abortSignal?.removeEventListener("abort", onAbort);
       callback();
     };
 
     const onAbort = () => {
-      child.kill();
+      killProcessTree(child);
       finish(() => {
         const error = new Error("ACCOUNT_SESSION_ABORTED");
         error.name = "AbortError";
@@ -1246,19 +1369,62 @@ function runDirect(
     };
 
     const timer = setTimeout(() => {
-      child.kill();
+      killProcessTree(child);
       finish(() =>
-        reject(new Error("ACCOUNT_SESSION_COMMAND_TIMEOUT"))
+        reject(
+          new Error(
+            `ACCOUNT_SESSION_COMMAND_TIMEOUT${
+              stderr.trim()
+                ? `:${sanitizeAccountCliFailureDetail(stderr)}`
+                : ""
+            }`
+          )
+        )
       );
     }, timeoutMs);
+
+    if (settleOptions.firstOutputTimeoutMs) {
+      firstOutputTimer = setTimeout(() => {
+        if (stdout) return;
+        killProcessTree(child);
+        finish(() =>
+          reject(
+            new Error(
+              `ACCOUNT_SESSION_CLI_STALLED${
+                stderr.trim()
+                  ? `:${sanitizeAccountCliFailureDetail(stderr)}`
+                  : ""
+              }`
+            )
+          )
+        );
+      }, settleOptions.firstOutputTimeoutMs);
+    }
 
     abortSignal?.addEventListener("abort", onAbort, { once: true });
 
     child.stdout.on("data", (chunk) => {
       stdout = appendCapture(stdout, chunk);
+      if (
+        !settled &&
+        settleOptions.settleOnStdout?.(stdout)
+      ) {
+        const captured = stdout;
+        finish(() =>
+          resolve({
+            code: 0,
+            stdout: captured,
+            stderr
+          })
+        );
+        killProcessTree(child);
+      }
     });
     child.stderr.on("data", (chunk) => {
       stderr = appendCapture(stderr, chunk);
+    });
+    child.stdin.on("error", () => {
+      // The client may exit before consuming stdin; the exit handler reports it.
     });
     child.once("error", (error) => {
       finish(() => reject(error));
@@ -1408,13 +1574,50 @@ async function ensureAccountExecutable(
   return installed;
 }
 
+/**
+ * On Windows npm exposes Claude Code as a claude.cmd shim that only forwards
+ * to the native bin/claude.exe. Spawning the shim goes through cmd.exe, which
+ * re-quotes arguments, and kill() then ends only cmd.exe. Run the native
+ * executable directly when the package has already placed it.
+ */
+export function nativeClaudeExecutable(
+  executable: string,
+  platform = process.platform
+): string {
+  if (
+    platform !== "win32" ||
+    !/[\\/]claude\.cmd$/i.test(executable)
+  ) {
+    return executable;
+  }
+  const candidate =
+    path.join(
+      path.dirname(executable),
+      "..",
+      "@anthropic-ai",
+      "claude-code",
+      "bin",
+      "claude.exe"
+    );
+  try {
+    // The unpopulated postinstall placeholder is a tiny stub.
+    if (statSync(candidate).size > 1024 * 1024) {
+      return candidate;
+    }
+  } catch {
+    // Keep the shim when the native binary is not present.
+  }
+  return executable;
+}
+
 async function runCli(
   provider: ProviderId,
   args: string[],
   stdinText: string | undefined,
   timeoutMs: number,
   cwd?: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  settleOptions?: RunSettleOptions
 ): Promise<RunResult> {
   const executable =
     await ensureAccountExecutable(
@@ -1424,13 +1627,16 @@ async function runCli(
     throw new Error(`ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`);
   }
   return runDirect(
-    executable,
+    provider === "anthropic"
+      ? nativeClaudeExecutable(executable)
+      : executable,
     args,
     stdinText,
     accountEnvironment(provider),
     timeoutMs,
     cwd,
-    abortSignal
+    abortSignal,
+    settleOptions
   );
 }
 
@@ -2978,10 +3184,10 @@ export class AccountSessionManager {
           );
         const hostCwd =
           workDir;
-        const runClaude = (
+        const runClaude = async (
           tail: string[]
-        ) =>
-          runCli(
+        ): Promise<RunResult> => {
+          const run = await runCli(
             provider,
             [
               ...commonArgs,
@@ -2990,8 +3196,37 @@ export class AccountSessionManager {
             prompt,
             COMMAND_TIMEOUT_MS,
             hostCwd,
-            abortSignal
+            abortSignal,
+            {
+              settleOnStdout:
+                claudeResultReady,
+              firstOutputTimeoutMs:
+                CLAUDE_FIRST_OUTPUT_TIMEOUT_MS
+            }
           );
+          // An early-settled error result must still take the failure path
+          // (e.g. stale --resume id falls back to a fresh Lex session).
+          const outcome =
+            parseClaudeResult(
+              run.stdout
+            );
+          if (outcome?.isError) {
+            return {
+              code:
+                run.code === 0
+                  ? 1
+                  : run.code,
+              stdout: "",
+              stderr: [
+                run.stderr.trim(),
+                outcome.text
+              ]
+                .filter(Boolean)
+                .join("\n")
+            };
+          }
+          return run;
+        };
 
         let result:
           RunResult | null =
@@ -3054,6 +3289,7 @@ export class AccountSessionManager {
             "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
           );
         }
+
         if (parsed.sessionId) {
           await writeAccountSessionId(
             provider,

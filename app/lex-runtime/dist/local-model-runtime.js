@@ -157,6 +157,61 @@ function usableAcceleratorName(name) {
 function normalizeModelId(id) {
     return LEGACY_MODEL_ALIASES[id] ?? id;
 }
+const NATIVE_AGENT_ENV_KEYS = [
+    "LLAMA_ARG_AGENT",
+    "LLAMA_ARG_MCP_SERVERS_CONFIG",
+    "LLAMA_ARG_UI_CONFIG_FILE"
+];
+export function lexNativeLocalAgentEnabled(env = process.env) {
+    return /^(?:1|true|yes)$/i.test(env.LEX_LOCAL_LLAMA_NATIVE_AGENT?.trim() ?? "");
+}
+/**
+ * The llama-server owned by Lex Machina is driven by Lex's own prompt and
+ * LEX_TOOL_CALLS_JSON protocol. The native agent mode (server-side MCP tool
+ * loops) and the web-grounded chat templates belong to the standalone
+ * start-llama-native-agent.ps1 launcher: applied to Lex requests they prepend
+ * a tool-forcing policy, run server-side tool loops and reject non-alternating
+ * roles, so Lex never receives a response (LOCAL_MODEL_RESPONSE_TIMEOUT).
+ *
+ * configure-llama-native-web.ps1 also persists LLAMA_ARG_* as user-level
+ * environment variables, so they are stripped here unless explicitly enabled
+ * with LEX_LOCAL_LLAMA_NATIVE_AGENT=1 (and all assets exist).
+ */
+export function buildOptionalLocalLaunchSpec(rootDir, modelId, baseArgs, baseEnv = process.env) {
+    const canonical = normalizeModelId(modelId);
+    const args = [...baseArgs];
+    const env = { ...baseEnv };
+    for (const key of NATIVE_AGENT_ENV_KEYS) {
+        delete env[key];
+    }
+    if (!lexNativeLocalAgentEnabled(baseEnv)) {
+        return { args, env };
+    }
+    const mcpConfigPath = path.join(rootDir, "mcp-servers.json");
+    const uiConfigPath = path.join(rootDir, "llama-ui-config.json");
+    if (fs.existsSync(mcpConfigPath) &&
+        fs.existsSync(uiConfigPath)) {
+        env.LLAMA_ARG_AGENT = "true";
+        env.LLAMA_ARG_CORS_ORIGINS =
+            "localhost";
+        env.LLAMA_ARG_MCP_SERVERS_CONFIG =
+            mcpConfigPath;
+        env.LLAMA_ARG_UI_CONFIG_FILE =
+            uiConfigPath;
+    }
+    const groundedTemplatePath = canonical ===
+        "local/mistral-nemo-12b-q4km"
+        ? path.join(rootDir, "mistral-nemo-web-grounded.jinja")
+        : canonical ===
+            "local/bielik-11b-v3-q4km"
+            ? path.join(rootDir, "bielik-web-grounded.jinja")
+            : null;
+    if (groundedTemplatePath &&
+        fs.existsSync(groundedTemplatePath)) {
+        args.push("--chat-template-file", groundedTemplatePath, "--temp", "0.3");
+    }
+    return { args, env };
+}
 export function localModelListContainsAlias(payload, expectedModelId) {
     if (!payload ||
         typeof payload !==
@@ -1956,10 +2011,12 @@ export class LocalModelRuntime {
         if (config.context.extendedBeyondNative) {
             args.push("--rope-scaling", "yarn", "--rope-scale", String(config.context.ropeScale), "--yarn-orig-ctx", String(config.model.nativeContext));
         }
-        const child = spawn(config.engine.executable, args, {
+        const launchSpec = buildOptionalLocalLaunchSpec(this.rootDir, canonical, args, process.env);
+        const child = spawn(config.engine.executable, launchSpec.args, {
             cwd: this.rootDir,
             windowsHide: true,
-            stdio: ["ignore", "pipe", "pipe"]
+            stdio: ["ignore", "pipe", "pipe"],
+            env: launchSpec.env
         });
         this.child = child;
         let stderrTail = "";

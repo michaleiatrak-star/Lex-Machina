@@ -10,6 +10,7 @@ import {
   accountSessionResumeMode,
   claudeAutomationCredentialMode,
   claudeHeadlessArgs,
+  claudeResultReady,
   claudeSubscriptionAuthenticated,
   classifyAccountCliFailureDetail,
   codexExecArgs,
@@ -18,7 +19,9 @@ import {
   isAccountSessionModel,
   isMissingResumableSessionMessage,
   mergeWindowsCommandPath,
+  nativeClaudeExecutable,
   openAiChatGptAuthenticated,
+  parseClaudeResult,
   sanitizeAccountCliFailureDetail,
   visibleWindowsLoginLauncher
 } from "./account-session.js";
@@ -136,9 +139,81 @@ describe("provider account-session transport", () => {
     const args = claudeHeadlessArgs("lex-system");
     expect(args[0]).toBe("-p");
     expect(args[1]).toBe("--output-format");
+    expect(args[2]).toBe("stream-json");
+    expect(args).toContain("--verbose");
     expect(args).toContain("--restricted");
+    expect(args).toContain("--strict-mcp-config");
+    expect(args).not.toContain("--mcp-config");
     expect(args).toContain("mcp__*");
     expect(args).toContain("lex-system");
+  });
+
+  it("settles on the Claude stream-json result line before the process exits", () => {
+    const init =
+      '{"type":"system","subtype":"init","session_id":"s-1"}\n';
+    expect(claudeResultReady(init)).toBe(false);
+    const done =
+      init +
+      '{"type":"result","subtype":"success","is_error":false,"result":" OK ","session_id":"s-1"}\n';
+    expect(claudeResultReady(done)).toBe(true);
+    expect(parseClaudeResult(done)).toEqual({
+      text: "OK",
+      sessionId: "s-1",
+      isError: false
+    });
+  });
+
+  it("keeps the legacy single-object Claude json result readable", () => {
+    expect(
+      parseClaudeResult(
+        '{"result":"OK","session_id":"s-2"}'
+      )
+    ).toEqual({
+      text: "OK",
+      sessionId: "s-2",
+      isError: false
+    });
+  });
+
+  it("surfaces Claude error results so a stale resume can fall back", () => {
+    const parsed = parseClaudeResult(
+      '{"type":"result","subtype":"error_during_execution","is_error":true,"errors":["No conversation found with session ID: x"],"session_id":"x"}\n'
+    );
+    expect(parsed?.isError).toBe(true);
+    expect(
+      isMissingResumableSessionMessage(
+        parsed?.text ?? ""
+      )
+    ).toBe(true);
+  });
+
+  it("runs the native claude.exe instead of the npm cmd shim on Windows", () => {
+    const root = fs.mkdtempSync(
+      path.join(os.tmpdir(), "lex-claude-native-")
+    );
+    cleanupRoots.push(root);
+    const binDir = path.join(root, "node_modules", ".bin");
+    const nativeDir = path.join(
+      root,
+      "node_modules",
+      "@anthropic-ai",
+      "claude-code",
+      "bin"
+    );
+    fs.mkdirSync(binDir, { recursive: true });
+    fs.mkdirSync(nativeDir, { recursive: true });
+    const shim = path.join(binDir, "claude.cmd");
+    fs.writeFileSync(shim, "@echo off\r\n");
+    const native = path.join(nativeDir, "claude.exe");
+
+    fs.writeFileSync(native, "stub");
+    expect(nativeClaudeExecutable(shim, "win32")).toBe(shim);
+
+    fs.writeFileSync(native, Buffer.alloc(2 * 1024 * 1024));
+    expect(
+      path.resolve(nativeClaudeExecutable(shim, "win32"))
+    ).toBe(path.resolve(native));
+    expect(nativeClaudeExecutable(shim, "linux")).toBe(shim);
   });
 
   it("classifies common Claude OAuth failures and redacts secrets from diagnostics", () => {
