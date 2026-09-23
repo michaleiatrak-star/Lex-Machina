@@ -21,8 +21,6 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24.7.0'
-          cache: npm
-          cache-dependency-path: app/lex-runtime/package-lock.json
 
       - name: Make native local-agent assets optional
         shell: bash
@@ -324,10 +322,6 @@ jobs:
           );
           ''', encoding='utf-8')
           PY
-
-      - name: Install runtime dependencies
-        working-directory: app/lex-runtime
-        run: npm ci
 
       - name: Local startup regression
         working-directory: app/lex-runtime
