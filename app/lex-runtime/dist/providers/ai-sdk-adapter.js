@@ -216,6 +216,9 @@ export function localChatBudget(contextTokens, systemPrompt, messages, conservat
 }
 export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true) {
     return {
+        // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
+        // prompt + earlier turns) instead of re-reading it on every request.
+        cache_prompt: true,
         model: modelId,
         messages: [
             {

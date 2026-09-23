@@ -119,6 +119,9 @@ import {
   type ModelAutoRoutingResult
 } from "./model-auto-routing.js";
 import {
+  privacyRecognizerFor
+} from "./privacy/local-llm-ner.js";
+import {
   parseSkillSelectionEnvelope
 } from "./skill-selection.js";
 
@@ -849,6 +852,19 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
   }
 
+  // A local primary model keeps the text on this machine, so the chat does
+  // not also wait for local-model PII detection before answering.
+  private chatRecognizerFor(
+    model: string
+  ): NamedEntityRecognizer | undefined {
+    return this.chatNamedEntityRecognizer
+      ? privacyRecognizerFor(
+          this.chatNamedEntityRecognizer,
+          !model.startsWith("local/")
+        )
+      : undefined;
+  }
+
   async resolveAutoRouting(
     request: SessionExecutionRequest
   ): Promise<ModelAutoRoutingResult> {
@@ -857,7 +873,9 @@ export class SafeSessionExecutor implements SessionExecutor {
     const pseudonymizer =
       new LocalPolishPseudonymizer(
         vault,
-        this.chatNamedEntityRecognizer
+        this.chatRecognizerFor(
+          request.model
+        )
       );
     let protectedQuery: string;
     try {
@@ -928,7 +946,9 @@ export class SafeSessionExecutor implements SessionExecutor {
     const chatPseudonymizer =
       new LocalPolishPseudonymizer(
         chatPrivacyVault,
-        this.chatNamedEntityRecognizer
+        this.chatRecognizerFor(
+          request.model
+        )
       );
     let protectedQuery:
       string;

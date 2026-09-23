@@ -17,6 +17,7 @@ import { runGateIRuntimePrelude } from "./gate-i-runtime-prelude.js";
 import { evaluateGateIInputCompleteness, evaluateGateIWorkflowContract, gateIWorkflowContract } from "./gate-i-contracts.js";
 import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { ModelAutoRouter } from "./model-auto-routing.js";
+import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { parseSkillSelectionEnvelope } from "./skill-selection.js";
 export function publicAuxiliarySourceFromToolResult(result) {
     let payload;
@@ -302,9 +303,16 @@ export class SafeSessionExecutor {
         this.auxiliaryScheduler =
             new AuxiliaryModelScheduler(providers);
     }
+    // A local primary model keeps the text on this machine, so the chat does
+    // not also wait for local-model PII detection before answering.
+    chatRecognizerFor(model) {
+        return this.chatNamedEntityRecognizer
+            ? privacyRecognizerFor(this.chatNamedEntityRecognizer, !model.startsWith("local/"))
+            : undefined;
+    }
     async resolveAutoRouting(request) {
         const vault = new PseudonymizationVault();
-        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatNamedEntityRecognizer);
+        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatRecognizerFor(request.model));
         let protectedQuery;
         try {
             protectedQuery =
@@ -342,7 +350,7 @@ export class SafeSessionExecutor {
             mode: request.mode
         });
         const chatPrivacyVault = new PseudonymizationVault();
-        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatNamedEntityRecognizer);
+        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatRecognizerFor(request.model));
         let protectedQuery;
         let protectedAuxiliaryText;
         try {

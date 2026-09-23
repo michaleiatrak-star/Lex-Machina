@@ -453,8 +453,12 @@ export function buildLocalChatRequest(
   }>;
   max_tokens: number;
   stream: boolean;
+  cache_prompt: boolean;
 } {
   return {
+    // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
+    // prompt + earlier turns) instead of re-reading it on every request.
+    cache_prompt: true,
     model: modelId,
     messages: [
       {

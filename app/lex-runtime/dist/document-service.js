@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { chunkDocumentPages } from "./document-ingestion.js";
 import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
 import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
 export class LocalPrivateDocumentService {
@@ -137,10 +138,9 @@ export class LocalPrivateDocumentService {
             source
         });
         const suggestionVault = new PseudonymizationVault();
-        const suggestionEngine = new LocalPolishPseudonymizer(suggestionVault, this.namedEntities);
         const suggestions = [];
         for (const page of source.pages) {
-            const preview = await suggestionEngine.pseudonymize(page.text);
+            const preview = await new LocalPolishPseudonymizer(suggestionVault, privacyRecognizerFor(this.namedEntities, page.source === "OCR")).pseudonymize(page.text);
             for (const finding of preview.findings) {
                 suggestions.push({
                     page: page.page,
@@ -203,7 +203,6 @@ export class LocalPrivateDocumentService {
                     keyVersion: security.keyVersion
                 });
         }
-        const pseudonymizer = new LocalPolishPseudonymizer(record.vault, this.namedEntities);
         const pages = [];
         const counts = {};
         const annotations = [];
@@ -214,7 +213,7 @@ export class LocalPrivateDocumentService {
             const pageDirectives = directives
                 .filter((directive) => directive.page === page.page)
                 .map(({ page: _page, ...directive }) => directive);
-            const protectedPage = await pseudonymizer.pseudonymize(page.text, pageDirectives);
+            const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR")).pseudonymize(page.text, pageDirectives);
             findings += protectedPage.findings.length;
             manualPseudonymizations +=
                 protectedPage.findings.filter((item) => item.source === "USER").length;

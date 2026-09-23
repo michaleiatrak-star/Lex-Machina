@@ -318,8 +318,40 @@ function diagnostic(
     );
 }
 
+/**
+ * Local-model PII detection is conditional: it adds value on noisy OCR text
+ * (scans, images) but not on digital text layers, and it is unnecessary when
+ * the primary model is local (the text never leaves the machine).
+ */
+export function privacyRecognizerFor(
+  recognizer: NamedEntityRecognizer,
+  useLocalModel: boolean
+): NamedEntityRecognizer {
+  if (
+    !useLocalModel &&
+    recognizer instanceof
+      LocalLlmPrivacyNamedEntityRecognizer
+  ) {
+    return recognizer.withoutLocalModel();
+  }
+  return recognizer;
+}
+
 export class LocalLlmPrivacyNamedEntityRecognizer
 implements NamedEntityRecognizer {
+  withoutLocalModel(): NamedEntityRecognizer {
+    const fallback =
+      this.fallback;
+    return {
+      recognize: async (
+        text: string
+      ) =>
+        fallback
+          ? fallback.recognize(text)
+          : []
+    };
+  }
+
   constructor(
     private readonly gateway:
       LocalPrivacyGateway,
@@ -356,12 +388,16 @@ implements NamedEntityRecognizer {
     let configured =
       false;
     try {
+      const status =
+        this.localModels
+          .status();
+      // Conditional support only: use the local model when it is already
+      // running. PII detection must never start (or wait for) a model.
       configured =
         Boolean(
-          this.localModels
-            .status()
-            .configured
-        );
+          status.configured
+        ) &&
+        status.state === "READY";
     } catch {
       configured =
         false;

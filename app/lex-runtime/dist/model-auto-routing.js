@@ -1,3 +1,4 @@
+import { isLocalLightweightConversation } from "./execution-engine.js";
 import { MANDATORY_SESSION_SKILLS, SKILL_SELECTION_ENVELOPE_PREFIX, parseSkillSelectionEnvelope } from "./skill-selection.js";
 const EXECUTION_SKILL_NAME_OVERRIDES = new Set([
     "przesluchanie-swiadkow-v2-min90",
@@ -145,11 +146,16 @@ function validateDecision(value, domainCandidates, executionCandidates, primaryO
         workflowExecutionSkill: workflow
     };
 }
-function catalogLine(skill) {
+const LOCAL_CATALOG_DESCRIPTION_CHARS = 220;
+function catalogLine(skill, maxDescriptionChars) {
+    const text = description(skill) ||
+        "(brak opisu)";
     return [
         skill.name,
-        description(skill) ||
-            "(brak opisu)"
+        maxDescriptionChars &&
+            text.length > maxDescriptionChars
+            ? text.slice(0, maxDescriptionChars) + "…"
+            : text
     ].join(" :: ");
 }
 export class ModelAutoRouter {
@@ -176,19 +182,53 @@ export class ModelAutoRouter {
             envelope
                 .domainAllowList
                 .length === 0;
-        const routingMap = this.registry
-            .resolveResource("prawo-polskie-v2", "prawo-polskie-v2/ROUTING-MAP.md");
+        // Local models run on the user's CPU/GPU: a trivial chat command must not
+        // pay for a semantic routing pass at all.
+        if (isLocalLightweightConversation(args.model, envelope.query, false)) {
+            return {
+                decision: {
+                    legal: false,
+                    primarySkill: domains[0],
+                    domainSkills: [
+                        domains[0]
+                    ],
+                    executionSkills: [],
+                    workflowExecutionSkill: null
+                },
+                query: SKILL_SELECTION_ENVELOPE_PREFIX +
+                    " " +
+                    JSON.stringify({
+                        auto: false,
+                        manual: [],
+                        modelRouted: true,
+                        workflow: null
+                    }) +
+                    "\n" +
+                    envelope.query
+            };
+        }
+        // The central routing map alone is ~24k characters (~8k tokens); a local
+        // 11-12B model spends minutes just reading it before the first token.
+        // Local models route from the compact catalog below instead.
+        const localModel = args.model.startsWith("local/");
+        const routingMap = localModel
+            ? null
+            : this.registry
+                .resolveResource("prawo-polskie-v2", "prawo-polskie-v2/ROUTING-MAP.md");
         const routingMapText = routingMap
             ? (await import("node:fs/promises")).readFile(routingMap, "utf8")
             : Promise.resolve("");
         const mapText = await routingMapText;
+        const catalogLimit = localModel
+            ? LOCAL_CATALOG_DESCRIPTION_CHARS
+            : undefined;
         const domainCatalog = domains.map((name) => {
             const skill = this.registry.get(name);
             return skill
-                ? catalogLine(skill)
+                ? catalogLine(skill, catalogLimit)
                 : name;
         });
-        const executionCatalog = executions.map(catalogLine);
+        const executionCatalog = executions.map((skill) => catalogLine(skill, catalogLimit));
         const executionNames = executions.map((skill) => skill.name);
         const systemPrompt = [
             "# LEX MACHINA — MODEL ROUTER AUTO",
@@ -216,9 +256,13 @@ export class ModelAutoRouter {
             ...(executionCatalog.length
                 ? executionCatalog.map((line) => "- " + line)
                 : ["- (brak)"]),
-            "",
-            "# CENTRALNA MAPA ROUTINGU",
-            mapText.slice(0, 24_000)
+            ...(mapText
+                ? [
+                    "",
+                    "# CENTRALNA MAPA ROUTINGU",
+                    mapText.slice(0, 24_000)
+                ]
+                : [])
         ].join("\n");
         const routeOnce = async (repair) => {
             const response = await this.providers

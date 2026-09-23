@@ -128,6 +128,7 @@ describe("AiSdkProviderAdapter", () => {
         ]
       )
     ).toEqual({
+      cache_prompt: true,
       model:
         "local/mistral-nemo-12b-q4km",
       messages: [
