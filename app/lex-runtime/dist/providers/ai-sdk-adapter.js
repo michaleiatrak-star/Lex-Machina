@@ -5,6 +5,11 @@ import { isAccountSessionModel, streamAccountSession } from "./account-session.j
 const MAX_OUTPUT_TOKENS = 16_384;
 const LOCAL_DEFAULT_OUTPUT_TOKENS = 4_096;
 const LOCAL_CONTEXT_SAFETY_TOKENS = 1_024;
+// llama-server samples at 0.8 unless told otherwise; 11-12B instruct models
+// (Mistral NeMo recommends 0.3) then drift off the instruction or out of
+// Polish. Short commands are answered deterministically.
+const LOCAL_TEMPERATURE = 0.3;
+const LOCAL_TRIVIAL_TEMPERATURE = 0;
 // A local model on CPU may read a legal prompt for several minutes before
 // the first token; the UI shows a live draft meanwhile. Both limits stay below
 // the 1200 s desktop proxy limit for session execution.
@@ -263,7 +268,7 @@ export function localChatBudget(contextTokens, systemPrompt, messages, conservat
         maxOutputTokens: Math.max(64, Math.min(MAX_OUTPUT_TOKENS, LOCAL_DEFAULT_OUTPUT_TOKENS, available))
     };
 }
-export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true) {
+export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true, temperature = LOCAL_TEMPERATURE) {
     return {
         // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
         // prompt + earlier turns) instead of re-reading it on every request.
@@ -277,6 +282,7 @@ export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutput
             ...messages
         ],
         max_tokens: maxOutputTokens,
+        temperature,
         stream
     };
 }
@@ -580,7 +586,7 @@ async function readLocalJson(response) {
     return content;
 }
 async function directLocalJsonCompletion(endpoint, modelId, systemPrompt, messages, maxOutputTokens, abortSignal) {
-    const response = await fetchLocalChatResponse(endpoint, buildLocalChatRequest(modelId, systemPrompt, messages, Math.max(16, Math.min(1_024, maxOutputTokens)), false), abortSignal);
+    const response = await fetchLocalChatResponse(endpoint, buildLocalChatRequest(modelId, systemPrompt, messages, Math.max(16, Math.min(1_024, maxOutputTokens)), false, LOCAL_TRIVIAL_TEMPERATURE), abortSignal);
     if (!response.ok) {
         await localHttpFailure(response);
     }

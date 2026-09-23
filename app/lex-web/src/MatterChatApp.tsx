@@ -645,6 +645,20 @@ async function openExternalUrl(url: string): Promise<void> {
   window.open(url, "_blank", "noopener,noreferrer");
 }
 
+// A conversational answer loads no legal skills; the routing label would
+// suggest a legal domain that was never used.
+export function routingMeta(
+  execution: Pick<
+    ExtendedExecution,
+    "primarySkill" | "loadedSkills"
+  >,
+  route: string
+): string {
+  return execution.loadedSkills?.length === 0
+    ? "rozmowa bez skilli prawnych"
+    : `routing: ${labelForSkill(execution.primarySkill || route)}`;
+}
+
 function executionMessage(
   execution: ExtendedExecution,
   route: string
@@ -704,7 +718,10 @@ function executionMessage(
         : {}),
       documentCitations: execution.documentCitations,
       meta:
-        `routing: ${labelForSkill(execution.primarySkill || route)}` +
+        routingMeta(
+          execution,
+          route
+        ) +
         skillMeta +
         domainMeta +
         contextMeta +

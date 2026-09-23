@@ -254,7 +254,7 @@ export class LexExecutionEngine {
                 systemPrompt: conversationalOnly &&
                     !trivialLocal
                     ? "Jesteś asystentem Lex Machina. Router uznał tę wiadomość za niezwiązaną z prawem, więc skille prawne nie zostały załadowane. Odpowiedz rzeczowo, w języku użytkownika. Nie powołuj przepisów, sygnatur ani terminów prawnych; jeśli pytanie jednak dotyczy sprawy prawnej, powiedz to wprost i poproś o doprecyzowanie, aby uruchomić pełną analizę prawną."
-                    : "Jesteś lokalnym modelem Lex Machina. To jest proste polecenie konwersacyjne bez zadania prawnego, dokumentów i narzędzi. Odpowiedz krótko i dokładnie na polecenie użytkownika.",
+                    : "Jesteś asystentem Lex Machina. Wykonaj dosłownie krótkie polecenie użytkownika. Jeśli prosi o napisanie konkretnego słowa lub zdania, odpowiedz wyłącznie tym tekstem, bez powitań i komentarzy. Na powitanie odpowiedz jednym krótkim zdaniem. Odpowiadaj po polsku.",
                 ...(args.continuityKey
                     ? {
                         continuityKey: args.continuityKey
@@ -292,15 +292,11 @@ export class LexExecutionEngine {
             return {
                 provider: args.provider,
                 primarySkill: args.route.primarySkill,
-                loadedSkills: trivialLocal
-                    ? skillSelection.loadedSkills
-                    : ["prawny-router-v3"],
-                executionSkills: trivialLocal
-                    ? skillSelection.executionSkills
-                    : [],
-                domainSkills: trivialLocal
-                    ? skillSelection.domainSkills
-                    : [],
+                // Nothing was loaded for this answer; report that instead of the
+                // routing placeholder.
+                loadedSkills: [],
+                executionSkills: [],
+                domainSkills: [],
                 workflowPlan,
                 output: response.fullText,
                 events

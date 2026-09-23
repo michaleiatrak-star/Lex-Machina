@@ -26,6 +26,11 @@ const LOCAL_DEFAULT_OUTPUT_TOKENS =
   4_096;
 const LOCAL_CONTEXT_SAFETY_TOKENS =
   1_024;
+// llama-server samples at 0.8 unless told otherwise; 11-12B instruct models
+// (Mistral NeMo recommends 0.3) then drift off the instruction or out of
+// Polish. Short commands are answered deterministically.
+const LOCAL_TEMPERATURE = 0.3;
+const LOCAL_TRIVIAL_TEMPERATURE = 0;
 // A local model on CPU may read a legal prompt for several minutes before
 // the first token; the UI shows a live draft meanwhile. Both limits stay below
 // the 1200 s desktop proxy limit for session execution.
@@ -499,7 +504,8 @@ export function buildLocalChatRequest(
   messages: ProviderStreamParams["messages"],
   maxOutputTokens:
     number = LOCAL_DEFAULT_OUTPUT_TOKENS,
-  stream = true
+  stream = true,
+  temperature = LOCAL_TEMPERATURE
 ): {
   model: string;
   messages: Array<{
@@ -507,6 +513,7 @@ export function buildLocalChatRequest(
     content: string;
   }>;
   max_tokens: number;
+  temperature: number;
   stream: boolean;
   cache_prompt: boolean;
 } {
@@ -524,6 +531,7 @@ export function buildLocalChatRequest(
     ],
     max_tokens:
       maxOutputTokens,
+    temperature,
     stream
   };
 }
@@ -1126,7 +1134,8 @@ async function directLocalJsonCompletion(
             maxOutputTokens
           )
         ),
-        false
+        false,
+        LOCAL_TRIVIAL_TEMPERATURE
       ),
       abortSignal
     );
