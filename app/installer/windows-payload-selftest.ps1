@@ -50,6 +50,7 @@ $oldEnv = @{
   STANZA_RESOURCES_DIR = $env:STANZA_RESOURCES_DIR
   PYTHONNOUSERSITE = $env:PYTHONNOUSERSITE
   PYTHONUTF8 = $env:PYTHONUTF8
+  PYTHONDONTWRITEBYTECODE = $env:PYTHONDONTWRITEBYTECODE
   HTTP_PROXY = $env:HTTP_PROXY
   HTTPS_PROXY = $env:HTTPS_PROXY
   ALL_PROXY = $env:ALL_PROXY
@@ -60,6 +61,9 @@ $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
 $env:STANZA_RESOURCES_DIR = $stanza
 $env:PYTHONNOUSERSITE = "1"
 $env:PYTHONUTF8 = "1"
+# Locked runtime files must stay byte-identical: offline extraction resets
+# source mtimes, so Python would otherwise rewrite locked __pycache__ files.
+$env:PYTHONDONTWRITEBYTECODE = "1"
 $env:HTTP_PROXY = "http://127.0.0.1:9"
 $env:HTTPS_PROXY = "http://127.0.0.1:9"
 $env:ALL_PROXY = "http://127.0.0.1:9"
