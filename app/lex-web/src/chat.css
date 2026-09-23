@@ -1705,3 +1705,26 @@
     max-width: none;
   }
 }
+
+/* Live draft of a running answer (polled from the runtime) */
+.chat-draft {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px dashed #b9c4b5;
+  border-radius: 10px;
+  background: rgba(250, 252, 249, 0.9);
+}
+
+.chat-draft-label {
+  margin-bottom: 6px;
+  color: #6b7a70;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chat-draft-text {
+  white-space: pre-wrap;
+  color: #34483a;
+  font-size: 13px;
+  line-height: 1.5;
+}

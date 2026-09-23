@@ -6,7 +6,8 @@ import type {
   NormalizedToolCall,
   NormalizedToolResult,
   NormalizedToolSchema,
-  ProviderId
+  ProviderId,
+  StreamCallbacks
 } from "./providers/types.js";
 import {
   parseSkillSelectionEnvelope,
@@ -141,9 +142,52 @@ const CRIMINAL_DOMAIN_PREFIX =
 const CRIMINAL_QUALIFIER_INDEX =
   "modules/mod-KK-kwalifikator-karnomaterialny.md";
 
+const LOCAL_SKILL_DIGEST_CHARS = 2_400;
+const LOCAL_SKILL_RULE =
+  /(⛔|HARD GATE|NIGDY|ZAKAZ|OBOWI[ĄA]ZKOW|ZAWSZE|MUSI|FAIL[- ]CLOSED)/iu;
+
+/**
+ * Local 11-12B models read the prompt on the user's CPU/GPU: a full skill
+ * body (up to ~42k characters) costs minutes before the first token. They get
+ * a digest instead - description, section map and the mandatory rules - and
+ * read the full skill and its modules on demand with the corpus tools, the
+ * same way the skill is loaded in an interactive assistant.
+ */
+export function localSkillDigest(
+  name: string,
+  description: string,
+  body: string,
+  maxChars = LOCAL_SKILL_DIGEST_CHARS
+): string {
+  const lines: string[] = [];
+  let used = 0;
+  for (const raw of body.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line) continue;
+    const keep =
+      /^#{1,3}\s/.test(line) ||
+      LOCAL_SKILL_RULE.test(line);
+    if (!keep) continue;
+    const clipped =
+      line.length > 240
+        ? line.slice(0, 240) + "…"
+        : line;
+    if (used + clipped.length + 1 > maxChars) break;
+    lines.push(clipped);
+    used += clipped.length + 1;
+  }
+  return [
+    `# SKILL (DIGEST): ${name}`,
+    ...(description ? [description] : []),
+    ...lines,
+    `Full text and modules: read_legal_resource "${name}/SKILL.md" (and list_legal_resources "${name}") before relying on a rule that is not shown above.`
+  ].join("\n");
+}
+
 function combineSkillPrompt(
   registry: LexSkillRegistry,
-  skillNames: string[]
+  skillNames: string[],
+  localModel = false
 ): string {
   return [...new Set(skillNames)]
     .map((name) => {
@@ -157,9 +201,19 @@ function combineSkillPrompt(
         gateISemanticPrompt(
           name
         );
-      return semantic
-        ? semantic
-        : `# SKILL: ${name}\n\n${skill.body}`;
+      if (semantic) {
+        return semantic;
+      }
+      if (localModel) {
+        return localSkillDigest(
+          name,
+          typeof skill.frontmatter.description === "string"
+            ? skill.frontmatter.description.trim()
+            : "",
+          skill.body
+        );
+      }
+      return `# SKILL: ${name}\n\n${skill.body}`;
     })
     .join("\n\n---\n\n");
 }
@@ -204,6 +258,8 @@ export class LexExecutionEngine {
     query: string;
     documentContext?: string;
     conversationalOnly?: boolean;
+    // Live draft of the model output (shown while gates are still pending).
+    draftCallbacks?: StreamCallbacks;
     provider: ProviderId;
     model: string;
     continuityKey?: string;
@@ -596,6 +652,12 @@ export class LexExecutionEngine {
             ],
             reasoning:
               "none",
+            ...(args.draftCallbacks
+              ? {
+                  callbacks:
+                    args.draftCallbacks
+                }
+              : {}),
             ...(trivialLocal
               ? {
                   localTransport:
@@ -1128,6 +1190,10 @@ export class LexExecutionEngine {
       );
     }
 
+    const localModel =
+      args.model.startsWith(
+        "local/"
+      );
     const baseSystemPrompt = combineSkillPrompt(
       this.registry,
       [
@@ -1135,13 +1201,9 @@ export class LexExecutionEngine {
         "prawo-polskie-v2",
         args.route.primarySkill,
         ...skillSelection.additionalSkills
-      ]
+      ],
+      localModel
     );
-
-    const localModel =
-      args.model.startsWith(
-        "local/"
-      );
     const coreResourcePrompt =
       buildCoreLegalResourcePrompt(
         session.loadedResources,
@@ -1331,6 +1393,9 @@ export class LexExecutionEngine {
           : {}),
         ...(args.runTools
           ? { runTools: args.runTools }
+          : {}),
+        ...(args.draftCallbacks
+          ? { callbacks: args.draftCallbacks }
           : {}),
         reasoning: "none"
       }

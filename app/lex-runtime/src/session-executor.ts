@@ -11,7 +11,8 @@ import { ProviderGateway } from "./providers/gateway.js";
 import type {
   NormalizedToolCall,
   NormalizedToolResult,
-  ProviderId
+  ProviderId,
+  StreamCallbacks
 } from "./providers/types.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
@@ -162,6 +163,9 @@ export type SessionExecutionRequest = {
   // Set only by the AUTO router (decision.legal === false): answer without
   // loading legal skills, modules or legal tools.
   conversationalOnly?: boolean;
+  // Runtime-only (never parsed from HTTP): receives the live draft text of
+  // the model answer with the chat pseudonyms already restored.
+  onDraft?: (text: string) => void;
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
   auxiliaryText?: string;
@@ -815,6 +819,47 @@ function transferExecutionEvents(
   }
 }
 
+const DRAFT_PII_TOKEN =
+  /\[PII:[A-Z_]+:\d{4}\]/g;
+// An incomplete token at the end of the stream is held back until complete.
+const DRAFT_PARTIAL_TOKEN_TAIL =
+  /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4})?)?)?)?)?$/;
+
+export function createDraftCallbacks(
+  vault: PseudonymizationVault,
+  onDraft: (text: string) => void
+): StreamCallbacks {
+  let raw = "";
+  const publish = () => {
+    const visible =
+      raw.replace(
+        DRAFT_PARTIAL_TOKEN_TAIL,
+        ""
+      );
+    onDraft(
+      visible.replace(
+        DRAFT_PII_TOKEN,
+        (token) =>
+          vault.hasToken(token)
+            ? vault.resolveToken(token)
+            : token
+      )
+    );
+  };
+  return {
+    onContentDelta: (text: string) => {
+      raw += text;
+      publish();
+    },
+    // A tool round starts a new model turn; the previous partial text was
+    // only a preamble to the tool call.
+    onToolCallStart: () => {
+      raw = "";
+      publish();
+    }
+  };
+}
+
 export interface SessionExecutor {
   resolveAutoRouting?(
     request: SessionExecutionRequest
@@ -1227,8 +1272,20 @@ export class SafeSessionExecutor implements SessionExecutor {
         : [])
     ].join("\n\n");
 
+    const draftCallbacks =
+      request.onDraft
+        ? createDraftCallbacks(
+            chatPrivacyVault,
+            request.onDraft
+          )
+        : undefined;
     const execution = await this.engine.executePolishLegalQuery({
       query: protectedQuery,
+      ...(draftCallbacks
+        ? {
+            draftCallbacks
+          }
+        : {}),
       ...(documentContext ? { documentContext } : {}),
       ...(request.conversationalOnly
         ? {

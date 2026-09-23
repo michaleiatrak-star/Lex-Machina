@@ -36,7 +36,42 @@ export function isLocalLightweightConversation(model, query, hasBoundContext) {
 }
 const CRIMINAL_DOMAIN_PREFIX = "dr-03-";
 const CRIMINAL_QUALIFIER_INDEX = "modules/mod-KK-kwalifikator-karnomaterialny.md";
-function combineSkillPrompt(registry, skillNames) {
+const LOCAL_SKILL_DIGEST_CHARS = 2_400;
+const LOCAL_SKILL_RULE = /(⛔|HARD GATE|NIGDY|ZAKAZ|OBOWI[ĄA]ZKOW|ZAWSZE|MUSI|FAIL[- ]CLOSED)/iu;
+/**
+ * Local 11-12B models read the prompt on the user's CPU/GPU: a full skill
+ * body (up to ~42k characters) costs minutes before the first token. They get
+ * a digest instead - description, section map and the mandatory rules - and
+ * read the full skill and its modules on demand with the corpus tools, the
+ * same way the skill is loaded in an interactive assistant.
+ */
+export function localSkillDigest(name, description, body, maxChars = LOCAL_SKILL_DIGEST_CHARS) {
+    const lines = [];
+    let used = 0;
+    for (const raw of body.split(/\r?\n/)) {
+        const line = raw.trim();
+        if (!line)
+            continue;
+        const keep = /^#{1,3}\s/.test(line) ||
+            LOCAL_SKILL_RULE.test(line);
+        if (!keep)
+            continue;
+        const clipped = line.length > 240
+            ? line.slice(0, 240) + "…"
+            : line;
+        if (used + clipped.length + 1 > maxChars)
+            break;
+        lines.push(clipped);
+        used += clipped.length + 1;
+    }
+    return [
+        `# SKILL (DIGEST): ${name}`,
+        ...(description ? [description] : []),
+        ...lines,
+        `Full text and modules: read_legal_resource "${name}/SKILL.md" (and list_legal_resources "${name}") before relying on a rule that is not shown above.`
+    ].join("\n");
+}
+function combineSkillPrompt(registry, skillNames, localModel = false) {
     return [...new Set(skillNames)]
         .map((name) => {
         const skill = registry.get(name);
@@ -44,9 +79,15 @@ function combineSkillPrompt(registry, skillNames) {
             throw new Error(`Missing skill while building prompt: ${name}`);
         }
         const semantic = gateISemanticPrompt(name);
-        return semantic
-            ? semantic
-            : `# SKILL: ${name}\n\n${skill.body}`;
+        if (semantic) {
+            return semantic;
+        }
+        if (localModel) {
+            return localSkillDigest(name, typeof skill.frontmatter.description === "string"
+                ? skill.frontmatter.description.trim()
+                : "", skill.body);
+        }
+        return `# SKILL: ${name}\n\n${skill.body}`;
     })
         .join("\n\n---\n\n");
 }
@@ -216,6 +257,11 @@ export class LexExecutionEngine {
                     }
                 ],
                 reasoning: "none",
+                ...(args.draftCallbacks
+                    ? {
+                        callbacks: args.draftCallbacks
+                    }
+                    : {}),
                 ...(trivialLocal
                     ? {
                         localTransport: "json",
@@ -435,13 +481,13 @@ export class LexExecutionEngine {
             "BLOCKED") {
             throw new LexExecutionError("Mandatory Gate I runtime prelude is unavailable.", runtimePrelude.gate, [...events]);
         }
+        const localModel = args.model.startsWith("local/");
         const baseSystemPrompt = combineSkillPrompt(this.registry, [
             "prawny-router-v3",
             "prawo-polskie-v2",
             args.route.primarySkill,
             ...skillSelection.additionalSkills
-        ]);
-        const localModel = args.model.startsWith("local/");
+        ], localModel);
         const coreResourcePrompt = buildCoreLegalResourcePrompt(session.loadedResources, localModel);
         const promptParts = [
             baseSystemPrompt,
@@ -611,6 +657,9 @@ export class LexExecutionEngine {
                 : {}),
             ...(args.runTools
                 ? { runTools: args.runTools }
+                : {}),
+            ...(args.draftCallbacks
+                ? { callbacks: args.draftCallbacks }
                 : {}),
             reasoning: "none"
         });

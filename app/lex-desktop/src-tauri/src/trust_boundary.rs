@@ -1440,6 +1440,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
             matches!(method, "GET" | "POST")
         }
         _ if path.starts_with("/api/models/") => method == "GET",
+        _ if is_execution_progress_route(path) => method == "GET",
         _ if path.starts_with("/api/sensitive-download/") => method == "GET",
         _ => false,
     }
@@ -1449,6 +1450,16 @@ struct ProxiedResponse {
     status: StatusCode,
     headers: Vec<(String, String)>,
     body: Vec<u8>,
+}
+
+fn is_execution_progress_route(path: &str) -> bool {
+    match path.strip_prefix("/api/sessions/progress/") {
+        Some(id) => {
+            (16..=64).contains(&id.len())
+                && id.bytes().all(|b| b.is_ascii_alphanumeric() || b == b'-')
+        }
+        None => false,
+    }
 }
 
 fn is_document_processing_route(path: &str) -> bool {
@@ -1883,6 +1894,16 @@ mod tests {
         assert!(route_allowed("GET", "/api/support/diagnostics"));
         assert!(route_allowed("POST", "/api/support/logout"));
         assert!(!route_allowed("DELETE", "/api/support/diagnostics"));
+        assert!(route_allowed(
+            "GET",
+            "/api/sessions/progress/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
+        ));
+        assert!(!route_allowed(
+            "POST",
+            "/api/sessions/progress/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
+        ));
+        assert!(!route_allowed("GET", "/api/sessions/progress/short"));
+        assert!(!route_allowed("GET", "/api/sessions/progress/../../auth/me"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
     }

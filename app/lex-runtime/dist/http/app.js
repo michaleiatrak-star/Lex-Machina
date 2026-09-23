@@ -301,6 +301,10 @@ function sendCaseAccessError(res, error) {
     });
     return true;
 }
+const EXECUTION_ID_PATTERN = /^[A-Za-z0-9-]{16,64}$/;
+const EXECUTION_DRAFT_TTL_MS = 15 * 60_000;
+const EXECUTION_DRAFT_MAX_ENTRIES = 64;
+const EXECUTION_DRAFT_MAX_CHARS = 200_000;
 function responseAuthContext(res) {
     const context = res.locals.lexAuth;
     if (!context) {
@@ -3767,6 +3771,42 @@ export function createLexHttpApp(options) {
             });
         }
     });
+    // Live drafts of running executions, polled by the UI so the answer appears
+    // while it is generated. Owner-bound, in memory only, short-lived.
+    const executionDrafts = new Map();
+    const draftOwner = (res) => options.authService
+        ? responseAuthContext(res)
+            .session.sessionId
+        : "local";
+    const pruneExecutionDrafts = () => {
+        const now = Date.now();
+        for (const [id, entry] of executionDrafts) {
+            if (now - entry.updatedAt > EXECUTION_DRAFT_TTL_MS) {
+                executionDrafts.delete(id);
+            }
+        }
+        while (executionDrafts.size > EXECUTION_DRAFT_MAX_ENTRIES) {
+            const oldest = executionDrafts.keys().next().value;
+            if (oldest === undefined)
+                break;
+            executionDrafts.delete(oldest);
+        }
+    };
+    app.get("/api/sessions/progress/:executionId", (req, res) => {
+        const entry = executionDrafts.get(String(req.params.executionId ?? ""));
+        if (!entry ||
+            entry.owner !== draftOwner(res)) {
+            res.status(404).json({
+                error: "EXECUTION_PROGRESS_NOT_FOUND"
+            });
+            return;
+        }
+        res.set("Cache-Control", "no-store");
+        res.json({
+            text: entry.text,
+            updatedAt: new Date(entry.updatedAt).toISOString()
+        });
+    });
     app.post("/api/sessions/execute", async (req, res) => {
         if (!options.sessionExecutor) {
             res.status(503).json({
@@ -3788,6 +3828,27 @@ export function createLexHttpApp(options) {
         if (knowledge.caseId) {
             request.accountSessionKey =
                 knowledge.caseId;
+        }
+        const executionId = String(req.get("x-lex-execution-id") ?? "");
+        if (EXECUTION_ID_PATTERN.test(executionId)) {
+            const owner = draftOwner(res);
+            pruneExecutionDrafts();
+            executionDrafts.set(executionId, {
+                owner,
+                text: "",
+                updatedAt: Date.now()
+            });
+            request.onDraft = (text) => {
+                const entry = executionDrafts.get(executionId);
+                if (entry && entry.owner === owner) {
+                    entry.text =
+                        text.slice(-EXECUTION_DRAFT_MAX_CHARS);
+                    entry.updatedAt = Date.now();
+                }
+            };
+            res.on("finish", () => {
+                executionDrafts.delete(executionId);
+            });
         }
         if (request.primarySkill ===
             "AUTO") {

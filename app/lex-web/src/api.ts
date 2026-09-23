@@ -2388,14 +2388,46 @@ export function executeSession(input: {
     includeFirm?: boolean;
     limit?: number;
   };
-}): Promise<SessionExecutionResponse> {
+}, executionId?: string): Promise<SessionExecutionResponse> {
   return json<SessionExecutionResponse>("/api/sessions/execute", {
     method: "POST",
+    ...(executionId
+      ? {
+          headers: {
+            "X-Lex-Execution-Id":
+              executionId
+          }
+        }
+      : {}),
     body: JSON.stringify({
       ...input,
       mode: input.mode ?? "PRAWNIK"
     })
   });
+}
+
+export type SessionExecutionProgress = {
+  text: string;
+  updatedAt: string;
+};
+
+/** Live draft of a running execution (null when not available). */
+export async function getSessionProgress(
+  executionId: string
+): Promise<SessionExecutionProgress | null> {
+  try {
+    return await json<SessionExecutionProgress>(
+      `/api/sessions/progress/${encodeURIComponent(executionId)}`
+    );
+  } catch (error) {
+    if (
+      error instanceof ApiError &&
+      error.status === 404
+    ) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 function uploadMediaType(file: File): string {

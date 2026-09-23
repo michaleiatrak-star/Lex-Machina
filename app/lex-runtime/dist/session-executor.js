@@ -280,6 +280,30 @@ function transferExecutionEvents(events, audit) {
         }
     }
 }
+const DRAFT_PII_TOKEN = /\[PII:[A-Z_]+:\d{4}\]/g;
+// An incomplete token at the end of the stream is held back until complete.
+const DRAFT_PARTIAL_TOKEN_TAIL = /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4})?)?)?)?)?$/;
+export function createDraftCallbacks(vault, onDraft) {
+    let raw = "";
+    const publish = () => {
+        const visible = raw.replace(DRAFT_PARTIAL_TOKEN_TAIL, "");
+        onDraft(visible.replace(DRAFT_PII_TOKEN, (token) => vault.hasToken(token)
+            ? vault.resolveToken(token)
+            : token));
+    };
+    return {
+        onContentDelta: (text) => {
+            raw += text;
+            publish();
+        },
+        // A tool round starts a new model turn; the previous partial text was
+        // only a preamble to the tool call.
+        onToolCallStart: () => {
+            raw = "";
+            publish();
+        }
+    };
+}
 export class SafeSessionExecutor {
     registry;
     providers;
@@ -506,8 +530,16 @@ export class SafeSessionExecutor {
                 ? [documentCitationSystemPrompt(attachments)]
                 : [])
         ].join("\n\n");
+        const draftCallbacks = request.onDraft
+            ? createDraftCallbacks(chatPrivacyVault, request.onDraft)
+            : undefined;
         const execution = await this.engine.executePolishLegalQuery({
             query: protectedQuery,
+            ...(draftCallbacks
+                ? {
+                    draftCallbacks
+                }
+                : {}),
             ...(documentContext ? { documentContext } : {}),
             ...(request.conversationalOnly
                 ? {

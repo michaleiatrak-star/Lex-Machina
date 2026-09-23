@@ -26,6 +26,7 @@ import {
   downloadGeneratedArtifact,
   downloadSensitiveArtifact,
   executeSession,
+  getSessionProgress,
   finalizeDeanonymization,
   generateLegalDocument,
   getHealth,
@@ -575,6 +576,54 @@ export function providerFailureMessage(
   return `${base}${code}${detail}`;
 }
 
+export function newExecutionId(): string {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return crypto.randomUUID();
+  }
+  return Array.from(
+    { length: 32 },
+    () => Math.floor(Math.random() * 16).toString(16)
+  ).join("");
+}
+
+/**
+ * Polls the runtime for the live draft of a running execution. Returns a
+ * stop function; the draft is cleared when polling stops.
+ */
+export function startDraftPolling(
+  executionId: string,
+  onDraft: (text: string) => void,
+  intervalMs = 1000,
+  fetchProgress: typeof getSessionProgress = getSessionProgress
+): () => void {
+  let stopped = false;
+  let inFlight = false;
+  const timer = setInterval(() => {
+    if (stopped || inFlight) return;
+    inFlight = true;
+    void fetchProgress(executionId)
+      .then((progress) => {
+        if (!stopped && progress?.text) {
+          onDraft(progress.text);
+        }
+      })
+      .catch(() => {
+        // A missed poll is harmless; the final answer still arrives.
+      })
+      .finally(() => {
+        inFlight = false;
+      });
+  }, intervalMs);
+  return () => {
+    stopped = true;
+    clearInterval(timer);
+    onDraft("");
+  };
+}
+
 async function openExternalUrl(url: string): Promise<void> {
   if (isDesktopShell()) {
     const internals = (
@@ -892,6 +941,8 @@ export default function MatterChatApp({
     useState<ExecutionDiagnostic | null>(null);
   const [executionStage, setExecutionStage] =
     useState("Przygotowanie sesji");
+  const [draftText, setDraftText] =
+    useState("");
   const [executionElapsedSeconds, setExecutionElapsedSeconds] =
     useState(0);
   const [runtimePulse, setRuntimePulse] =
@@ -2566,6 +2617,13 @@ export default function MatterChatApp({
       setExecutionStage(
         "Analiza prawna, routing i weryfikacja źródeł"
       );
+      const executionId =
+        newExecutionId();
+      const stopDraftPolling =
+        startDraftPolling(
+          executionId,
+          setDraftText
+        );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2593,7 +2651,9 @@ export default function MatterChatApp({
           includeFirm: includeFirmKnowledge,
           limit: 8
         }
-      }) as ExtendedExecution;
+      }, executionId).finally(
+        stopDraftPolling
+      ) as ExtendedExecution;
 
       setExecutionStage(
         "Finalizacja odpowiedzi"
@@ -3950,6 +4010,16 @@ export default function MatterChatApp({
                   <div className="chat-message-content">
                     {executionStage}
                   </div>
+                  {draftText ? (
+                    <div className="chat-draft">
+                      <div className="chat-draft-label">
+                        Wersja robocza — odpowiedź powstaje, weryfikacja źródeł jeszcze trwa
+                      </div>
+                      <div className="chat-draft-text">
+                        {draftText}
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="chat-working-meta">
                     <span>
                       {runtimePulse === "OK"

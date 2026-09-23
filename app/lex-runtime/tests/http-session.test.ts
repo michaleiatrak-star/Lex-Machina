@@ -151,6 +151,70 @@ describe("session execution HTTP API", () => {
     });
   });
 
+  it("exposes the live draft of a running execution and removes it when done", async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let draftSeen!: () => void;
+    const drafted = new Promise<void>((resolve) => {
+      draftSeen = resolve;
+    });
+    const executor: SessionExecutor = {
+      execute: vi.fn(async (input) => {
+        input.onDraft?.("Częściowa odpowiedź");
+        draftSeen();
+        await gate;
+        return {
+          sessionId: "session-draft",
+          status: "DRAFT_PRESENTABLE" as const,
+          provider: input.provider,
+          model: input.model,
+          primarySkill: input.primarySkill,
+          answer: "Pełna odpowiedź",
+          finalization: "PASS" as const,
+          blockedReferences: [],
+          verification: { records: 0, verified: 0, supported: 0, unverified: 0 },
+          evidence: [],
+          audit: { result: "PASS" as const, eventCount: 1, closed: true }
+        };
+      })
+    };
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      sessionExecutor: executor
+    });
+    const executionId = "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0";
+
+    const running = request(app)
+      .post("/api/sessions/execute")
+      .set("X-Lex-Execution-Id", executionId)
+      .send({
+        query: "Pytanie",
+        provider: "openai",
+        model: "gpt-test",
+        primarySkill: DR,
+        mode: "PRAWNIK"
+      })
+      .then((response) => response);
+
+    await drafted;
+    const progress = await request(app)
+      .get(`/api/sessions/progress/${executionId}`)
+      .expect(200);
+    expect(progress.body.text).toBe("Częściowa odpowiedź");
+
+    release();
+    const final = await running;
+    expect(final.status).toBe(200);
+    expect(final.body.answer).toBe("Pełna odpowiedź");
+
+    await request(app)
+      .get(`/api/sessions/progress/${executionId}`)
+      .expect(404);
+  });
+
   it("restores document aliases only at the local HTTP presentation boundary", async () => {
     const result:
       SessionExecutionResponse = {
