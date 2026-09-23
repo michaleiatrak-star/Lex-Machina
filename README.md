@@ -475,13 +475,10 @@ Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Kar
 
 **Allowlista domen (wymagana dla oficjalnych źródeł prawa):**
 
-Claude AI → **Settings** → **Capabilities** → **Additional allowed domains** → dodaj:
+Claude AI → **Settings** → **Capabilities** → **Additional allowed domains** → zmień:
 
 ```text
-api.sejm.gov.pl
-eli.gov.pl
-isap.sejm.gov.pl
-gov.pl
+All Domains
 ```
 
 Bez tej allowlisty Claude może blokować bezpośredni dostęp do źródeł urzędowych
@@ -520,13 +517,13 @@ ChatGPT → **Ustawienia** → **Personalizacja** → **Instrukcje niestandardow
 powinien wiedzieć?"*) → wklej:
 
 ```
-Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
+Prawo PL: router→v3 pierwszy, ELI każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
 ```
 
 | Fragment | Znaczenie |
 |---|---|
 | `router→v3 pierwszy` | router wczytywany jako pierwszy w każdej sprawie |
-| `ISAP każdy przepis` | weryfikacja każdego przepisu w isap.sejm.gov.pl |
+| `ELI każdy przepis` | weryfikacja każdego przepisu w isap.sejm.gov.pl |
 | `HYBRID-VAL przed .docx` | walidacja hybrydowa przed generowaniem dokumentu |
 | `Karne: +kwalifikator` | w sprawach karnych moduł kwalifikatora karnomaterialnego |
 
@@ -558,7 +555,7 @@ repozytorium**. Wystarczy:
    reguła co w Claude i ChatGPT:
 
    ```
-   Prawo PL: router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
+   Prawo PL: router→v3 pierwszy, ELI każdy przepis, HYBRID-VAL przed .docx. Karne: +kwalifikator.
    ```
 
 > Bramki jakości (HARD GATE, weryfikacja online, ZASADA 7) obowiązują identycznie.
