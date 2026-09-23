@@ -4310,7 +4310,7 @@ export default function MatterChatApp({
                   : "AUTO · prawny-router-v3"}
               </h2>
               <p>
-                Typ działania wybiera się wyłącznie nad polem pierwszej wiadomości.
+                Tryb pracy (automatyczny lub mechaniczny) wybiera się wyłącznie nad polem pierwszej wiadomości.
                 Brak wyboru oznacza pełne AUTO: prawny-router-v3 sam dobiera dziedziny
                 DR i skille wykonawcze. Po pierwszej wiadomości tryb jest przypięty do
                 wątku i selektor w czacie znika.
