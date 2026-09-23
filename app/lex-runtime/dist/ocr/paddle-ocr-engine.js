@@ -64,7 +64,7 @@ export class LocalPaddleOcrEngine {
                 let stderr = "";
                 const timer = setTimeout(() => {
                     child.kill("SIGKILL");
-                    reject(new Error("Local PaddleOCR worker exceeded the configured timeout."));
+                    reject(new Error("OCR_ENGINE_TIMEOUT: Local PaddleOCR worker exceeded the configured timeout."));
                 }, this.timeoutMs);
                 child.stderr.on("data", (chunk) => {
                     stderr += chunk.toString("utf8");
@@ -74,14 +74,14 @@ export class LocalPaddleOcrEngine {
                 });
                 child.once("error", (error) => {
                     clearTimeout(timer);
-                    reject(error);
+                    reject(new Error(`OCR_ENGINE_START_FAILED: ${error.message}`));
                 });
                 child.once("exit", (code) => {
                     clearTimeout(timer);
                     if (code === 0)
                         resolve();
                     else {
-                        reject(new Error(`Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
+                        reject(new Error(`OCR_ENGINE_FAILED: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
                     }
                 });
             });
@@ -92,12 +92,12 @@ export class LocalPaddleOcrEngine {
                 if (!Number.isInteger(result.page) ||
                     !requested.has(result.page) ||
                     seen.has(result.page)) {
-                    throw new Error("Local PaddleOCR worker returned an invalid page set.");
+                    throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker returned an invalid page set.");
                 }
                 seen.add(result.page);
             }
             if (seen.size !== requested.size) {
-                throw new Error("Local PaddleOCR worker did not account for every requested page.");
+                throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker did not account for every requested page.");
             }
             return parsed.sort((a, b) => a.page - b.page);
         }

@@ -99,7 +99,7 @@ implements OcrEngine {
           child.kill("SIGKILL");
           reject(
             new Error(
-              "Local PaddleOCR worker exceeded the configured timeout."
+              "OCR_ENGINE_TIMEOUT: Local PaddleOCR worker exceeded the configured timeout."
             )
           );
         }, this.timeoutMs);
@@ -112,7 +112,11 @@ implements OcrEngine {
         });
         child.once("error", (error) => {
           clearTimeout(timer);
-          reject(error);
+          reject(
+            new Error(
+              `OCR_ENGINE_START_FAILED: ${error.message}`
+            )
+          );
         });
         child.once("exit", (code) => {
           clearTimeout(timer);
@@ -120,7 +124,7 @@ implements OcrEngine {
           else {
             reject(
               new Error(
-                `Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`
+                `OCR_ENGINE_FAILED: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`
               )
             );
           }
@@ -140,7 +144,7 @@ implements OcrEngine {
           seen.has(result.page)
         ) {
           throw new Error(
-            "Local PaddleOCR worker returned an invalid page set."
+            "OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker returned an invalid page set."
           );
         }
         seen.add(result.page);
@@ -148,7 +152,7 @@ implements OcrEngine {
 
       if (seen.size !== requested.size) {
         throw new Error(
-          "Local PaddleOCR worker did not account for every requested page."
+          "OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker did not account for every requested page."
         );
       }
 

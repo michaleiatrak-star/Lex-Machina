@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  ApiError,
   finalizeDocument,
   isDesktopShell,
   listCaseFiles,
@@ -26,6 +27,39 @@ import {
   type WorkspaceItem,
   type WorkspaceResponse
 } from "./workspace-client.js";
+
+export function documentProcessingFailureMessage(
+  failure: unknown
+): string {
+  if (!(failure instanceof Error)) {
+    return String(failure);
+  }
+  const code =
+    failure instanceof ApiError
+      ? failure.code
+      : failure.message;
+  const reason =
+    failure instanceof ApiError
+      ? failure.reason ?? ""
+      : "";
+  if (code.startsWith("DESKTOP_RUNTIME_PROXY_FAILED")) {
+    return `Przetwarzanie dokumentu nie zakończyło się w limicie czasu połączenia z lokalnym runtime. Kod: ${code}`;
+  }
+  if (code !== "STORED_FILE_PROCESSING_FAILED") {
+    return code;
+  }
+  const cause =
+    reason === "OCR_REQUIRED"
+      ? "dokument wymaga OCR, ale lokalny silnik OCR nie jest dostępny"
+      : reason.startsWith("OCR_")
+        ? "lokalny OCR nie przetworzył stron wymagających rozpoznania tekstu"
+        : reason.startsWith("DOCUMENT_")
+          ? "dokument przekracza limity bezpieczeństwa przetwarzania"
+          : reason
+            ? "błąd lokalnego przetwarzania dokumentu"
+            : "nieokreślony błąd lokalnego przetwarzania dokumentu";
+  return `Nie udało się przetworzyć dokumentu: ${cause}.${reason ? ` Kod: ${reason}` : ""}`;
+}
 
 function canRunPrivacyPipeline(
   item: WorkspaceItem
@@ -248,7 +282,7 @@ export function WorkspaceManager({
       })
       .catch((failure) => {
         if (!cancelled) {
-          setError(failure instanceof Error ? failure.message : String(failure));
+          setError(documentProcessingFailureMessage(failure));
         }
       });
     return () => {
@@ -425,7 +459,7 @@ export function WorkspaceManager({
       await action();
       await refresh();
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }
@@ -470,7 +504,7 @@ export function WorkspaceManager({
       }
       setPreview({ item, supported: false });
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }
@@ -482,7 +516,7 @@ export function WorkspaceManager({
     try {
       await openWorkspaceItemInSystem(caseId, item.itemId);
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }

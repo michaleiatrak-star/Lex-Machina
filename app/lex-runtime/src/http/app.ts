@@ -4040,9 +4040,25 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         });
         return;
       }
+      // A coded cause (never document content) so the UI can tell an OCR
+      // failure from a privacy/NER or extraction failure.
+      const errorCode =
+        error instanceof Error &&
+        typeof (error as { code?: unknown }).code === "string"
+          ? String((error as { code?: unknown }).code)
+          : "";
+      const reason =
+        /^[A-Z][A-Z0-9_]{2,80}$/.test(errorCode)
+          ? errorCode
+          : /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(code)?.[0];
       res.status(422).json({
         error:
-          "STORED_FILE_PROCESSING_FAILED"
+          "STORED_FILE_PROCESSING_FAILED",
+        ...(reason
+          ? {
+              reason
+            }
+          : {})
       });
     }
   }
