@@ -437,6 +437,88 @@ function normalizeModelId(id: string): string {
   return LEGACY_MODEL_ALIASES[id] ?? id;
 }
 
+export type OptionalLocalLaunchSpec = {
+  args: string[];
+  env: NodeJS.ProcessEnv;
+};
+
+/**
+ * Native llama.cpp agent configuration and grounded templates are
+ * enhancements, not prerequisites for local inference. Existing
+ * v0.1.9 installations must remain startable without re-provisioning.
+ */
+export function buildOptionalLocalLaunchSpec(
+  rootDir: string,
+  modelId: string,
+  baseArgs: readonly string[],
+  baseEnv: NodeJS.ProcessEnv = process.env
+): OptionalLocalLaunchSpec {
+  const canonical =
+    normalizeModelId(modelId);
+  const args = [...baseArgs];
+  const env = { ...baseEnv };
+  const mcpConfigPath =
+    path.join(
+      rootDir,
+      "mcp-servers.json"
+    );
+  const uiConfigPath =
+    path.join(
+      rootDir,
+      "llama-ui-config.json"
+    );
+
+  if (
+    fs.existsSync(mcpConfigPath) &&
+    fs.existsSync(uiConfigPath)
+  ) {
+    env.LLAMA_ARG_AGENT = "true";
+    env.LLAMA_ARG_CORS_ORIGINS =
+      "localhost";
+    env.LLAMA_ARG_MCP_SERVERS_CONFIG =
+      mcpConfigPath;
+    env.LLAMA_ARG_UI_CONFIG_FILE =
+      uiConfigPath;
+  } else {
+    // Do not inherit a partially configured native-agent setup from
+    // the parent process: missing files must never block localhost.
+    delete env.LLAMA_ARG_AGENT;
+    delete env.LLAMA_ARG_MCP_SERVERS_CONFIG;
+    delete env.LLAMA_ARG_UI_CONFIG_FILE;
+  }
+
+  const groundedTemplatePath =
+    canonical ===
+      "local/mistral-nemo-12b-q4km"
+      ? path.join(
+          rootDir,
+          "mistral-nemo-web-grounded.jinja"
+        )
+      : canonical ===
+          "local/bielik-11b-v3-q4km"
+        ? path.join(
+            rootDir,
+            "bielik-web-grounded.jinja"
+          )
+        : null;
+
+  if (
+    groundedTemplatePath &&
+    fs.existsSync(
+      groundedTemplatePath
+    )
+  ) {
+    args.push(
+      "--chat-template-file",
+      groundedTemplatePath,
+      "--temp",
+      "0.3"
+    );
+  }
+
+  return { args, env };
+}
+
 export function localModelListContainsAlias(
   payload: unknown,
   expectedModelId: string
@@ -3856,11 +3938,23 @@ export class LocalModelRuntime {
       );
     }
 
-    const child = spawn(config.engine.executable, args, {
-      cwd: this.rootDir,
-      windowsHide: true,
-      stdio: ["ignore", "pipe", "pipe"]
-    });
+    const launchSpec =
+      buildOptionalLocalLaunchSpec(
+        this.rootDir,
+        canonical,
+        args,
+        process.env
+      );
+    const child = spawn(
+      config.engine.executable,
+      launchSpec.args,
+      {
+        cwd: this.rootDir,
+        windowsHide: true,
+        stdio: ["ignore", "pipe", "pipe"],
+        env: launchSpec.env
+      }
+    );
     this.child = child;
 
     let stderrTail = "";
