@@ -31,6 +31,10 @@ const LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS: u64 = 7_200;
 // OCR, text extraction and local-model PII detection run inside these calls;
 // with a local model on CPU they routinely exceed the 120 s default.
 const DOCUMENT_PROCESSING_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
+// Every non-safelisted header the web UI sends must be listed here, otherwise
+// the webview preflight fails and fetch() rejects with "Failed to fetch".
+const CORS_ALLOWED_REQUEST_HEADERS: &str =
+    "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id, X-Lex-Execution-Id";
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
@@ -1820,7 +1824,7 @@ fn cors_response(
         )
         .header(
             "Access-Control-Allow-Headers",
-            "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id",
+            CORS_ALLOWED_REQUEST_HEADERS,
         )
         .header(
             "Access-Control-Expose-Headers",
@@ -1852,6 +1856,31 @@ fn unsafe_zero_string(value: &mut String) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn preflight_allows_every_custom_header_sent_by_the_web_ui() {
+        let preflight = cors_response(StatusCode::NO_CONTENT, Vec::new(), None);
+        let allowed = preflight
+            .headers()
+            .get("Access-Control-Allow-Headers")
+            .and_then(|value| value.to_str().ok())
+            .unwrap_or_default()
+            .to_ascii_lowercase();
+        let web_api = include_str!("../../../lex-web/src/api.ts");
+        let mut checked = 0;
+        for (index, _) in web_api.match_indices("\"X-Lex-") {
+            let name: String = web_api[index + 1..]
+                .chars()
+                .take_while(|c| c.is_ascii_alphanumeric() || *c == '-')
+                .collect();
+            assert!(
+                allowed.split(", ").any(|item| item == name.to_ascii_lowercase()),
+                "{name} missing from Access-Control-Allow-Headers"
+            );
+            checked += 1;
+        }
+        assert!(checked >= 3);
+    }
 
     #[test]
     fn allowlist_rejects_unknown_routes_and_methods() {
