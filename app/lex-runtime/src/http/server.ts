@@ -26,6 +26,9 @@ import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
 import {
+  applyAccountSkills
+} from "../account-skills.js";
+import {
   MaintenanceService,
   commitSkillOverlayRuntimeHealth,
   recoverSkillOverlayForStartup
@@ -252,6 +255,38 @@ export function resolveRuntimeRoot(): string {
     bundled;
 }
 
+// Newer legal skills from the model accounts, unless the corpus path is
+// pinned explicitly (development, validation).
+function resolveAccountSkillRoot(
+  baseRoot: string
+): string {
+  if (process.env.LEX_SKILLS_PATH?.trim()) {
+    return baseRoot;
+  }
+  try {
+    const result =
+      applyAccountSkills(
+        baseRoot
+      );
+    for (const skill of result.applied) {
+      process.stderr.write(
+        `LEX_ACCOUNT_SKILL_APPLIED:${skill.name}:${skill.source}:${skill.bundledVersion ?? "none"}->${skill.version}\n`
+      );
+    }
+    for (const skill of result.rejected) {
+      process.stderr.write(
+        `LEX_ACCOUNT_SKILL_REJECTED:${skill.name}:${skill.source}:${skill.reason}\n`
+      );
+    }
+    return result.root;
+  } catch (error) {
+    process.stderr.write(
+      `LEX_ACCOUNT_SKILLS_UNAVAILABLE:${error instanceof Error ? error.message : String(error)}\n`
+    );
+    return baseRoot;
+  }
+}
+
 export async function startLocalServer(options?: {
   host?: string;
   port?: number;
@@ -268,8 +303,12 @@ export async function startLocalServer(options?: {
 
   assertLoopbackHost(host);
 
-  const runtimeRoot =
+  const baseRuntimeRoot =
     resolveRuntimeRoot();
+  const runtimeRoot =
+    resolveAccountSkillRoot(
+      baseRuntimeRoot
+    );
   const registry =
     new LexSkillRegistry(
       runtimeRoot
@@ -597,7 +636,7 @@ export async function startLocalServer(options?: {
     server.once("listening", () => {
       try {
         commitSkillOverlayRuntimeHealth(
-          runtimeRoot
+          baseRuntimeRoot
         );
       } catch (error) {
         server.close(() => {

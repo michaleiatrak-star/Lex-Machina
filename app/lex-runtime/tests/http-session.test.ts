@@ -562,3 +562,72 @@ describe("session execution HTTP API", () => {
       .toHaveBeenCalledTimes(1);
   });
 });
+
+describe("AUTO skill selection", () => {
+  const envelope = (query: string) =>
+    `__LEX_SKILLS_V1__ ${JSON.stringify({ auto: true, manual: [], caseType: "AUTO" })}\n${query}`;
+
+  function app() {
+    const execute = vi.fn(async () => {
+      throw new Error("STOP");
+    });
+    const resolveAutoRouting = vi.fn(async () => ({
+      decision: {
+        legal: true,
+        primarySkill: DR,
+        domainSkills: [DR],
+        executionSkills: [],
+        workflowExecutionSkill: null
+      },
+      query: envelope("Pytanie")
+    }));
+    return {
+      execute,
+      resolveAutoRouting,
+      app: createLexHttpApp({
+        registry: registry(),
+        modelCatalog: { list: vi.fn(async () => []) },
+        sessionExecutor: { execute, resolveAutoRouting }
+      })
+    };
+  }
+
+  it("lets an account or API model pick the skills itself", async () => {
+    const setup = app();
+    await request(setup.app)
+      .post("/api/sessions/execute")
+      .send({
+        query: envelope("Sąsiad nie oddaje pożyczki."),
+        provider: "anthropic",
+        model: "account/claude",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK"
+      });
+    expect(setup.resolveAutoRouting).not.toHaveBeenCalled();
+    expect(setup.execute).toHaveBeenCalledWith(
+      expect.objectContaining({
+        modelSelectsSkills: true,
+        primarySkill: expect.stringMatching(/^dr-/)
+      })
+    );
+  });
+
+  it("keeps the routing pass for local models", async () => {
+    const setup = app();
+    await request(setup.app)
+      .post("/api/sessions/execute")
+      .send({
+        query: envelope("Sąsiad nie oddaje pożyczki."),
+        provider: "openai",
+        model: "local/bielik-11b-v3-q4km",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK"
+      });
+    expect(setup.resolveAutoRouting).toHaveBeenCalledTimes(1);
+    expect(setup.execute).toHaveBeenCalledWith(
+      expect.not.objectContaining({
+        modelSelectsSkills: true
+      })
+    );
+  });
+});

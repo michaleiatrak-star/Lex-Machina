@@ -1,5 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { CRIMINAL_DOMAIN_PREFIX, CRIMINAL_QUALIFIER_INDEX } from "./execution-engine.js";
+const ROUTER_SKILL = "prawny-router-v3";
+// Loaded by the router itself; they are not a legal domain or workflow.
+const INFRASTRUCTURE_SKILLS = new Set([
+    ROUTER_SKILL,
+    "shared",
+    "prawo-polskie-v2"
+]);
 const LIST_SKILLS = "list_legal_skills";
 const LIST_RESOURCES = "list_legal_resources";
 const READ_RESOURCE = "read_legal_resource";
@@ -151,9 +159,29 @@ function collectFiles(root, prefix) {
 }
 export class LegalCorpusToolRuntime {
     registry;
+    options;
     events = [];
-    constructor(registry) {
+    // Skills whose SKILL.md the model read, in order.
+    readSkills = [];
+    qualifierDelivered = false;
+    constructor(registry, 
+    // AUTO for account/API models: the model picks skills itself; the runtime
+    // still enforces router-v3 first and the criminal qualifier.
+    options = {}) {
         this.registry = registry;
+        this.options = options;
+    }
+    modelSkillSelection() {
+        const domainSkills = this.readSkills.filter((name) => name.startsWith("dr-"));
+        const executionSkills = this.readSkills.filter((name) => !name.startsWith("dr-") &&
+            !INFRASTRUCTURE_SKILLS.has(name));
+        return {
+            primarySkill: domainSkills[0] ??
+                (this.readSkills.length > 0 ? ROUTER_SKILL : null),
+            loadedSkills: [...this.readSkills],
+            domainSkills,
+            executionSkills
+        };
     }
     schemas() {
         return [
@@ -347,6 +375,14 @@ export class LegalCorpusToolRuntime {
             if (!fs.statSync(resolved).isFile()) {
                 throw new Error("LEGAL_RESOURCE_NOT_FILE");
             }
+            const resolvedPath = path.relative(this.registry.root, resolved)
+                .replaceAll(path.sep, "/");
+            const targetSkill = this.skillForPath(resolvedPath);
+            if (this.options.modelSelectsSkills &&
+                targetSkill !== ROUTER_SKILL &&
+                !this.readSkills.includes(ROUTER_SKILL)) {
+                throw new Error("ROUTER_V3_REQUIRED_FIRST: read skill=prawny-router-v3 path=SKILL.md before any other legal resource");
+            }
             const text = textFile(resolved);
             const offset = Number.isInteger(call.input.offset)
                 ? Number(call.input.offset)
@@ -371,6 +407,38 @@ export class LegalCorpusToolRuntime {
                 : null;
             const canonicalPath = path.relative(this.registry.root, resolved)
                 .replaceAll(path.sep, "/");
+            const isSkillEntry = targetSkill !== null &&
+                resolvedPath.split("/").length === 2 &&
+                resolvedPath.endsWith("/SKILL.md");
+            if (isSkillEntry &&
+                !this.readSkills.includes(targetSkill)) {
+                this.readSkills.push(targetSkill);
+            }
+            // A criminal-law matter always goes through the qualifier: it is
+            // delivered with the first DR-03 skill entry, not left to the model.
+            let requiredModule;
+            if (this.options.modelSelectsSkills &&
+                isSkillEntry &&
+                targetSkill.startsWith(CRIMINAL_DOMAIN_PREFIX) &&
+                !this.qualifierDelivered) {
+                const qualifier = this.registry.resolveResource(targetSkill, CRIMINAL_QUALIFIER_INDEX);
+                if (!qualifier) {
+                    throw new Error("CRIMINAL_QUALIFIER_MISSING");
+                }
+                requiredModule = {
+                    path: `${targetSkill}/${CRIMINAL_QUALIFIER_INDEX}`,
+                    content: textFile(qualifier).slice(0, MAX_READ_CHARS)
+                };
+                this.qualifierDelivered = true;
+                this.events.push({
+                    tool: call.name,
+                    target: requiredModule.path,
+                    decision: "ALLOW",
+                    detail: {
+                        deliveredWith: resolvedPath
+                    }
+                });
+            }
             this.events.push({
                 tool: call.name,
                 target: canonicalPath,
@@ -389,10 +457,27 @@ export class LegalCorpusToolRuntime {
                 returnedChars: content.length,
                 totalChars: text.length,
                 nextOffset,
-                content
+                content,
+                ...(requiredModule
+                    ? {
+                        requiredModule: {
+                            ...requiredModule,
+                            instruction: "Mandatory criminal-law qualifier. Apply it before any criminal-law qualification."
+                        }
+                    }
+                    : {})
             });
         }
         throw new Error("UNKNOWN_LEGAL_CORPUS_TOOL");
+    }
+    skillForPath(relativePath) {
+        const directory = relativePath.split("/", 1)[0];
+        for (const skill of this.registry.skills.values()) {
+            if (path.basename(skill.directory) === directory) {
+                return skill.name;
+            }
+        }
+        return null;
     }
     targetFor(call) {
         const skill = typeof call.input

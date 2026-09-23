@@ -6950,6 +6950,47 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
 
+    // AUTO with an account or API model: the model picks the skills itself
+    // (router-v3 first, enforced by the corpus tools) instead of a separate
+    // routing pass. Local models keep the compact routing pass.
+    const autoEnvelope =
+      request.primarySkill === "AUTO"
+        ? parseSkillSelectionEnvelope(
+            request.query
+          )
+        : null;
+    const modelSelectsSkills =
+      autoEnvelope !== null &&
+      autoEnvelope.automatic &&
+      autoEnvelope.manualSkills.length === 0 &&
+      autoEnvelope.workflowExecutionSkill === null &&
+      !request.model.startsWith("local/");
+    if (modelSelectsSkills) {
+      const placeholder =
+        [...options.registry.skills.keys()]
+          .filter((name) =>
+            name.startsWith("dr-") &&
+            (
+              !autoEnvelope.domainRestrictionActive ||
+              autoEnvelope.domainAllowList.includes(name)
+            )
+          )
+          .sort()[0];
+      if (!placeholder) {
+        res.status(422).json({
+          error:
+            "AUTO_ROUTING_FAILED",
+          reason:
+            "AUTO_ROUTING_NO_DOMAIN_CANDIDATES"
+        });
+        return;
+      }
+      request.primarySkill =
+        placeholder;
+      request.modelSelectsSkills =
+        true;
+    }
+
     if (
       request.primarySkill ===
         "AUTO"

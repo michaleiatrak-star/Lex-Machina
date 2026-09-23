@@ -163,6 +163,8 @@ export type SessionExecutionRequest = {
   // Set only by the AUTO router (decision.legal === false): answer without
   // loading legal skills, modules or legal tools.
   conversationalOnly?: boolean;
+  // AUTO for account/API models: the model picks skills itself.
+  modelSelectsSkills?: boolean;
   // Runtime-only (never parsed from HTTP): receives the live draft text of
   // the model answer with the chat pseudonyms already restored.
   onDraft?: (text: string) => void;
@@ -1078,7 +1080,13 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
-    const corpusTools = new LegalCorpusToolRuntime(this.registry);
+    const corpusTools = new LegalCorpusToolRuntime(
+      this.registry,
+      {
+        modelSelectsSkills:
+          request.modelSelectsSkills === true
+      }
+    );
     const reportTools = new ReportBlueprintToolRuntime();
     const federationTools =
       this.legalFederationTools;
@@ -1292,6 +1300,11 @@ export class SafeSessionExecutor implements SessionExecutor {
             conversationalOnly: true
           }
         : {}),
+      ...(request.modelSelectsSkills
+        ? {
+            modelSelectsSkills: true
+          }
+        : {}),
       provider: request.provider,
       model: request.model,
       ...(request.accountSessionKey
@@ -1496,6 +1509,29 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     transferExecutionEvents(execution.events, audit);
 
+    const modelSelectedSkills =
+      execution.events.some(
+        (event) =>
+          event.target ===
+            "MODEL_SKILL_SELECTION" &&
+          event.status === "OK"
+      );
+    if (modelSelectedSkills) {
+      // Report what the model actually loaded (audited corpus reads).
+      const selection =
+        corpusTools.modelSkillSelection();
+      execution.loadedSkills =
+        selection.loadedSkills;
+      execution.domainSkills =
+        selection.domainSkills;
+      execution.executionSkills =
+        selection.executionSkills;
+      if (selection.primarySkill) {
+        execution.primarySkill =
+          selection.primarySkill;
+      }
+    }
+
     const corpusAudit = corpusTools.auditEvents();
     for (const event of corpusAudit) {
       audit.record(
@@ -1511,7 +1547,21 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     }
 
-    const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK");
+    // When the model picks skills itself, a refused read it can correct
+    // (router-v3 not read yet, a guessed file name) is guidance, not a failed
+    // turn. Path escapes and other refusals still block.
+    const correctableCorpusRefusal =
+      /^(ROUTER_V3_REQUIRED_FIRST|LEGAL_RESOURCE_NOT_FOUND|LEGAL_SKILL_NOT_FOUND|LEGAL_RESOURCE_NOT_FILE|INVALID_RESOURCE_OFFSET)/;
+    const corpusBlocked = corpusAudit.some(
+      (event) =>
+        event.decision === "BLOCK" &&
+        !(
+          modelSelectedSkills &&
+          correctableCorpusRefusal.test(
+            String(event.detail?.error ?? "")
+          )
+        )
+    );
     audit.record(
       "gate",
       "G36_LEGAL_CORPUS_RUNTIME",

@@ -14,6 +14,7 @@ import { createLiveProviderRegistry } from "../providers/ai-sdk-adapter.js";
 import { AccountSessionManager } from "../providers/account-session.js";
 import { ProviderGateway } from "../providers/gateway.js";
 import { GitHubReleaseUpdateDiscovery } from "../update-discovery.js";
+import { applyAccountSkills } from "../account-skills.js";
 import { MaintenanceService, commitSkillOverlayRuntimeHealth, recoverSkillOverlayForStartup } from "../maintenance-service.js";
 import { LocalModelRuntime } from "../local-model-runtime.js";
 import { SafeSessionExecutor } from "../session-executor.js";
@@ -131,6 +132,27 @@ export function resolveRuntimeRoot() {
     return recovered.root ??
         bundled;
 }
+// Newer legal skills from the model accounts, unless the corpus path is
+// pinned explicitly (development, validation).
+function resolveAccountSkillRoot(baseRoot) {
+    if (process.env.LEX_SKILLS_PATH?.trim()) {
+        return baseRoot;
+    }
+    try {
+        const result = applyAccountSkills(baseRoot);
+        for (const skill of result.applied) {
+            process.stderr.write(`LEX_ACCOUNT_SKILL_APPLIED:${skill.name}:${skill.source}:${skill.bundledVersion ?? "none"}->${skill.version}\n`);
+        }
+        for (const skill of result.rejected) {
+            process.stderr.write(`LEX_ACCOUNT_SKILL_REJECTED:${skill.name}:${skill.source}:${skill.reason}\n`);
+        }
+        return result.root;
+    }
+    catch (error) {
+        process.stderr.write(`LEX_ACCOUNT_SKILLS_UNAVAILABLE:${error instanceof Error ? error.message : String(error)}\n`);
+        return baseRoot;
+    }
+}
 export async function startLocalServer(options) {
     const host = options?.host ?? process.env.LEX_HOST ?? DEFAULT_HOST;
     const rawPort = options?.port ?? Number(process.env.LEX_PORT ?? DEFAULT_PORT);
@@ -138,7 +160,8 @@ export async function startLocalServer(options) {
         ? rawPort
         : DEFAULT_PORT;
     assertLoopbackHost(host);
-    const runtimeRoot = resolveRuntimeRoot();
+    const baseRuntimeRoot = resolveRuntimeRoot();
+    const runtimeRoot = resolveAccountSkillRoot(baseRuntimeRoot);
     const registry = new LexSkillRegistry(runtimeRoot);
     const issues = [...registry.scan(), ...registry.validateDeclarations()];
     if (issues.length > 0) {
@@ -289,7 +312,7 @@ export async function startLocalServer(options) {
         server.once("error", reject);
         server.once("listening", () => {
             try {
-                commitSkillOverlayRuntimeHealth(runtimeRoot);
+                commitSkillOverlayRuntimeHealth(baseRuntimeRoot);
             }
             catch (error) {
                 server.close(() => {
