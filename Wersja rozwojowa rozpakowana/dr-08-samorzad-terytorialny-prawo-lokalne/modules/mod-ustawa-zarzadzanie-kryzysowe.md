@@ -1,7 +1,7 @@
 # mod-ustawa-zarzadzanie-kryzysowe
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o zarządzaniu kryzysowym — **Dz.U. 2026 poz. 574 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a) | Ustawa o ochronie ludności i obronie cywilnej — weryfikuj aktualny t.j. w ISAP
+**Źródło weryfikacji:** Ustawa o zarządzaniu kryzysowym — **Dz.U. 2026 poz. 574 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a) | Ustawa o ochronie ludności i obronie cywilnej — weryfikuj aktualny t.j. w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -17,7 +17,7 @@ Zarządzanie kryzysowe na szczeblu gminnym, powiatowym i wojewódzkim: centrum z
 | Akt | Dz.U. |
 |---|---|
 | Ustawa o zarządzaniu kryzysowym | **Dz.U. 2026 poz. 574 t.j.** ✅ [VER] RZĄD 1 2026-09-10c — obwieszczenie Marszałka Sejmu z 21.04.2026. ⛔ KROK 2C: jedna nowelizacja po tekście jednolitym — ustawa z 29.05.2026 (Dz.U. 2026 poz. 815), więc tekst jednolity NIE oddaje stanu bieżącego. ⛔ **BŁĄD SKORYGOWANY:** dotychczasowy `Dz.U. 2024 poz. 1194` to obwieszczenie o tekście jednolitym ustawy o **dozorze technicznym** — inny akt (klasa F-149/3) |
-| Ustawa o ochronie ludności i obronie cywilnej | weryfikuj aktualny t.j. w ISAP (ustawa z 2022 r.) |
+| Ustawa o ochronie ludności i obronie cywilnej | weryfikuj aktualny t.j. w ELI (RZĄD 1) (ustawa z 2022 r.) |
 
 ---
 
@@ -39,7 +39,7 @@ Zarządzanie kryzysowe na szczeblu gminnym, powiatowym i wojewódzkim: centrum z
 Obowiązki osób fizycznych i podmiotów:
   → Świadczenia osobiste i rzeczowe na potrzeby obrony (rekwizycja)
   → Decyzja wójta / burmistrza / starosty / Wojewody
-  → Odszkodowanie za rekwizycję: weryfikuj przepisy w ISAP
+  → Odszkodowanie za rekwizycję: weryfikuj przepisy w ELI (RZĄD 1)
   → Zaskarżenie: KPA → SKO → WSA
 ```
 

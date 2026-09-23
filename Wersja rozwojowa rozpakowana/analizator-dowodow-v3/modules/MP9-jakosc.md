@@ -28,7 +28,7 @@ Każde twierdzenie w raporcie oznacz:
 □ Czy wskazano słabe punkty użytkownika?
 □ Czy oceniono ciężar dowodu?
 □ Czy wskazano braki dowodowe?
-□ Czy przepisy wymagające aktualności oznaczono do weryfikacji w ISAP?
+□ Czy przepisy wymagające aktualności oznaczono do weryfikacji w ELI (RZĄD 1)?
 □ Czy orzeczenia nie zostały wymyślone (weryfikacja przez orzeczenia-sadowe-v2)?
 □ Czy każdy cytat z orzeczenia/interpretacji ma lokalizację (s./teza/pkt) i kotwicę gdy możliwa (Zasada 2B, orzeczenia-sadowe-v2)?
 □ Czy końcowa rekomendacja jest operacyjna?

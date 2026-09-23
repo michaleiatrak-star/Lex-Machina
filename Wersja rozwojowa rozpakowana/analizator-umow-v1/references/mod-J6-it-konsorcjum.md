@@ -8,7 +8,7 @@
 
 > ⛔ HARD GATE — PrAut: art. 41–65 (pola eksploatacji, przeniesienie/licencja),
 > art. 53 (forma pisemna przeniesienia praw), art. 67 ust. 5 (forma pisemna licencji wyłącznej),
-> art. 74–77² (programy komputerowe) — weryfikuj: isap.sejm.gov.pl → ustawa z 4.02.1994 r.
+> art. 74–77² (programy komputerowe) — weryfikuj: ELI (RZĄD 1) → ustawa z 4.02.1994 r.
 >
 > ⚠ RODO — GATE OBOWIĄZKOWY:
 > Każda umowa IT/SaaS gdzie kontrahent przetwarza dane osobowe → WYMAGA DPA (art. 28 RODO)
@@ -39,7 +39,7 @@ Weryfikuj aktualne brzmienie:
 ### SD-1 — Własność IP: brak przeniesienia praw lub wadliwe brzmienie (CRITICAL)
 
 ```
-PRAWO (art. 41 ust. 2 PrAut — weryfikuj w ISAP):
+PRAWO (art. 41 ust. 2 PrAut — weryfikuj w ELI (RZĄD 1)):
   Umowa o przeniesienie praw autorskich lub licencja obejmuje tylko pola eksploatacji
   wyraźnie w niej wymienione. Brak pola = brak skutecznego nabycia/licencji w tym zakresie;
   dodatkowo przeniesienie praw wymaga formy pisemnej pod rygorem nieważności (art. 53 PrAut),

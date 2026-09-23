@@ -227,4 +227,4 @@ NIE WYSTARCZA do stwierdzenia naruszenia — kluczowy jest test obiektywnego
 uzasadnienia/intencji, nie tylko skutek. Dodano checklist analityczny
 i katalog dowodów praktycznych stosowanych przed KIO. Odnotowano
 niepewność: dokładna treść art. 99 ust. 6 (obowiązki przy zastosowaniu
-wyjątku) — oznaczona do weryfikacji na ISAP.
+wyjątku) — oznaczona do weryfikacji w ELI (RZĄD 1).

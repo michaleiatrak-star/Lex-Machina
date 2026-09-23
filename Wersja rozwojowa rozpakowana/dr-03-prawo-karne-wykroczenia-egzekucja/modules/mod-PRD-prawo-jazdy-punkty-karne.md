@@ -5,7 +5,7 @@
 
 | Akt | Dz.U. | Status | Uwaga |
 |---|---|---|---|
-| Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1676, 1734, 1843, Dz.U. 2026 poz. 180 | Weryfikuj aktualny t.j. — isap.sejm.gov.pl |
+| Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1676, 1734, 1843, Dz.U. 2026 poz. 180 | Weryfikuj aktualny t.j. — ELI (RZĄD 1) |
 | Ustawa o kierujących pojazdami (u.k.p.) | Dz.U. 2025 poz. 1226 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1676 | Aktualny t.j. — weryfikuj ISAP |
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat, cofnięcie za jazdę po zatrzymaniu |
 | Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
@@ -28,7 +28,7 @@ Przed każdym powołaniem:
 ### A. Ustawa BRD I (Dz.U. 2025 poz. 1676) — wejście w życie etapami
 
 ```
-OD 2026-01-XX (weryfikuj konkretną datę w ISAP):
+OD 2026-01-XX (weryfikuj konkretną datę w ELI (RZĄD 1)):
   → Cofnięcie uprawnień za jazdę mimo zatrzymania prawa jazdy
     (nowa przesłanka cofnięcia — art. 103 u.k.p. zmieniony)
   → Zmiany art. 135 PRD — nowe podstawy zatrzymania pj
@@ -79,7 +79,7 @@ KLUCZOWA ZMIANA: OGRANICZENIE REDUKCJI PUNKTÓW PO SZKOLENIU
   → Za najpoważniejsze naruszenia: punkty NIE kasują się automatycznie po roku
   → Weryfikuj aktualną listę: web_search "automatyczne kasowanie punktów 2026 nowe zasady"
 
-WERYFIKUJ AKTUALNE KODY: isap.sejm.gov.pl → Dz.U. 2026 poz. 724 → załącznik nr 1
+WERYFIKUJ AKTUALNE KODY: ELI (RZĄD 1) → Dz.U. 2026 poz. 724 → załącznik nr 1
 ```
 
 ---
@@ -219,7 +219,7 @@ Celowy drift (art. 86c KW — od 29.01.2026): ??? pkt + grzywna min. 1 500 zł
 ### A. Przez policjanta na miejscu (art. 135 PRD — WERYFIKUJ aktualne brzmienie)
 
 ```
-PODSTAWY ZATRZYMANIA — najważniejsze (weryfikuj aktualną listę w ISAP):
+PODSTAWY ZATRZYMANIA — najważniejsze (weryfikuj aktualną listę w ELI (RZĄD 1)):
   □ Stan po alkoholu lub w stanie nietrzeźwości / narkotyki
   □ Uzasadnione podejrzenie przestępstwa/wykroczenia zagrożonego zakazem prowadzenia pj
   □ Przekroczenie prędkości o >50 km/h w terenie zabudowanym
@@ -233,16 +233,16 @@ SKUTEK: pokwitowanie → zakaz prowadzenia
   Prowadzenie mimo zatrzymania → art. 103 u.k.p. → cofnięcie uprawnień (nowa przesłanka)
   Prowadzenie mimo cofnięcia → art. 180a KK (do 2 lat poz. wolności)
 
-Weryfikuj: isap.sejm.gov.pl → PRD → art. 135 (aktualne brzmienie)
+Weryfikuj: ELI (RZĄD 1) → PRD → art. 135 (aktualne brzmienie)
 ```
 
 ### B. Przez starostę — decyzja administracyjna (art. 102 u.k.p.)
 
 ```
-PODSTAWY (art. 102 ust. 1 u.k.p. — weryfikuj w ISAP):
+PODSTAWY (art. 102 ust. 1 u.k.p. — weryfikuj w ELI (RZĄD 1)):
   → Przekroczenie limitu 24/20 pkt → starosta MUSI wydać decyzję
   → Niezdolność medyczna (lekarz lub psycholog)
-  → Inne — weryfikuj aktualną listę w ISAP
+  → Inne — weryfikuj aktualną listę w ELI (RZĄD 1)
 
 TRYB i ODWOŁANIE:
   → Policja/CEPiK → starosta → postępowanie KPA → decyzja

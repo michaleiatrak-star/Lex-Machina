@@ -15,7 +15,7 @@
 >   Wydawnictwo Sejmowe 2004 — polskie standardy redakcji aktów normatywnych,
 >   stosowane tu analogicznie do umów.
 > - Rozporządzenie Prezesa Rady Ministrów z 20.06.2002 r. w sprawie „Zasad
->   techniki prawodawczej" (t.j. Dz.U. 2016 poz. 283) [VER przy użyciu w
+>   techniki prawodawczej" (t.j. Dz.U. 2026 poz. 300; wcześniejszy t.j. 2016 poz. 283 — wygasły, ✅ [VER] RZĄD 1 2026-09-16) [VER przy użyciu w
 >   konkretnej sprawie, R1].
 
 Ten plik uzupełnia — nie zastępuje — Twoją ZASADĘ 7 z SKILL.md (ścisły język

@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 

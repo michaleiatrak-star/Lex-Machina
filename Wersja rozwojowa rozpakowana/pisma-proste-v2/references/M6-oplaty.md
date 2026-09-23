@@ -35,7 +35,7 @@ przepis; ta tabela jest kopią roboczą i ustępuje `shared/TABELE-OPLAT.md`.
 ### Progi wartości przedmiotu sporu — art. 13 ust. 1 KSCU
 
 ⛔ **Naprawa 2026-09-12.** Poprzednia wersja tej tabeli przypisywała progi do
-**art. 27 pkt 1–6 KSCU**. Art. 27 ustanawia opłatę stałą 200 zł od enumerowanych
+**art. 27 pkt 1–6 KSCU**. Art. 27 ustanawia opłatę stałą 200 zł od enumerowanych <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->
 pozwów (rozwiązanie przysposobienia, zaprzeczenie ojcostwa, naruszenie posiadania
 i in.) i **nie zna progów wartościowych**. Odesłanie było nieprawdziwe, a dwa
 progi były dodatkowo przesunięte o jeden wiersz.

@@ -7,7 +7,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KP, KC, uSUS weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KP, KC, uSUS weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → Kodeks pracy (t.j. aktualny) → art. 22 §1, §1¹ (test stosunku pracy)
 > isap.sejm.gov.pl → Kodeks cywilny → art. 353¹, 734–751 (zlecenie), 627–646 (dzieło)
 > isap.sejm.gov.pl → ustawa o systemie ubezpieczeń społecznych → art. 8 ust. 2a (zbieg tytułów)
@@ -17,7 +17,7 @@
 
 ### Test kwalifikacji — wykonaj ZAWSZE dla każdej umowy B2B
 
-Weryfikuj w isap.sejm.gov.pl: art. 22 §1 i §1¹ KP (tekst jednolity).
+Weryfikuj w ELI (RZĄD 1): art. 22 §1 i §1¹ KP (tekst jednolity).
 
 ```
 CECHY STOSUNKU PRACY (art. 22 §1 KP):
@@ -70,8 +70,8 @@ BEZ POŚREDNICTWA sądu. Kluczowe dla OCENY RYZYKA w tym module:
 
 **Weryfikacja online obowiązkowa:**
 ```
-1. isap.sejm.gov.pl → Kodeks pracy → art. 22
-2. isap.sejm.gov.pl → ustawa z 13.10.1998 o systemie ubezpieczeń społecznych → art. 8 ust. 2a
+1. ELI (RZĄD 1) → Kodeks pracy → art. 22
+2. ELI (RZĄD 1) → ustawa z 13.10.1998 o systemie ubezpieczeń społecznych → art. 8 ust. 2a
 3. Oficjalnie: pip.gov.pl → aktualne stanowiska/komunikaty kontrolne; ISAP → art. 22 KP
 ```
 
@@ -258,7 +258,7 @@ PROBLEM: "Wykonawca przenosi na Zamawiającego wszelkie majątkowe prawa autorsk
           → brak wynagrodzenia za przeniesienie → art. 43 PrAut: jeśli umowa o przeniesienie nie
             określa wynagrodzenia, twórcy należy się "wynagrodzenie odpowiednie"
 
-WERYFIKUJ: isap.sejm.gov.pl → ustawa z 4.02.1994 o prawie autorskim → art. 41, 43, 45, 65
+WERYFIKUJ: ELI (RZĄD 1) → ustawa z 4.02.1994 o prawie autorskim → art. 41, 43, 45, 65
 
 REKOMENDACJA:
   „§X ust. Y. Wykonawca przenosi na Zamawiającego autorskie prawa majątkowe
@@ -276,7 +276,7 @@ PUŁAPKA: przeniesienie praw do "przyszłych utworów" nieznanych w chwili zawar
 ```
 PROBLEM: Termin płatności powyżej 60 dni w transakcjach handlowych
          → naruszenie ustawy z 8.03.2013 o przeciwdziałaniu nadmiernym opóźnieniom
-           w transakcjach handlowych (weryfikuj: isap.sejm.gov.pl, t.j. Dz.U. 2023 poz. 1790)
+           w transakcjach handlowych (weryfikuj: ELI (RZĄD 1), t.j. Dz.U. 2023 poz. 1790)
          → TWARDY LIMIT 60 dni (bez wyjątku) gdy dłużnikiem jest DUŻE PRZEDSIĘBIORSTWO,
            a wierzycielem jest MŚP (art. 7 ust. 2a ustawy)
          → Strony B2B symetryczne mogą umówić >60 dni jeśli nie jest rażąco nieuczciwe
@@ -326,7 +326,7 @@ PROBLEM: "Kara umowna w wysokości 50% wartości umowy za każde naruszenie"
          → kara umowna może przekroczyć wynagrodzenie → de facto praca za darmo lub dopłata
          → kara umowna za zwłokę bez limitu → może narastać bez górnego pułapu
 
-WERYFIKUJ: isap.sejm.gov.pl → KC → art. 483, 484 (miarkowanie)
+WERYFIKUJ: ELI (RZĄD 1) → KC → art. 483, 484 (miarkowanie)
 
 REKOMENDACJA:
   „§X. Kary umowne nie mogą przekroczyć łącznie [20/30]% wynagrodzenia
@@ -390,7 +390,7 @@ PROBLEM: "Zamawiający może rozwiązać Umowę ze skutkiem natychmiastowym
           → "jakiekolwiek naruszenie" = nawet formalne, nieistotne
           → Wykonawca traci wynagrodzenie za bieżący okres + może ponieść kary
 
-WERYFIKUJ: isap.sejm.gov.pl → KC → art. 746 (umowa zlecenia) lub art. 644 (dzieło)
+WERYFIKUJ: ELI (RZĄD 1) → KC → art. 746 (umowa zlecenia) lub art. 644 (dzieło)
            Czy klauzula nie wyłącza prawa do wynagrodzenia za częściowe wykonanie?
 
 REKOMENDACJA:
@@ -428,7 +428,7 @@ REKOMENDACJA:
 ```
 PROCEDURA:
 1. Oficjalnie: ISAP → KC art. 647¹ w aktualnym tekście ujednoliconym; orzeczenia wyłącznie z sn.pl/orzeczenia.ms.gov.pl
-2. isap.sejm.gov.pl → KC art. 647¹ — sprawdź aktualne brzmienie
+2. ELI (RZĄD 1) → KC art. 647¹ — sprawdź aktualne brzmienie
 3. Ustal: czy inwestor wyraził zgodę na podwykonawcę? (pisemnie / milcząco?)
 4. Ustal: czy umowa podwykonawcza zawiera wynagrodzenie i zakres?
 
@@ -453,7 +453,7 @@ MECHANIZM (art. 647¹ KC — aktualne brzmienie po nowelizacji 2017):
   → Formularz sprzeciwu i zgłoszenia: wyłącznie forma pisemna!
 → ZAWSZE wymagaj pisemnego zgłoszenia podwykonawcy inwestorowi przed rozpoczęciem robót
 → Dokumentuj brak sprzeciwu (brak odpowiedzi w 30 dniach = odpowiedzialność inwestora)
-→ Weryfikuj: isap.sejm.gov.pl → KC art. 647¹ (t.j. Dz.U. 2026 poz. 795)
+→ Weryfikuj: ELI (RZĄD 1) → KC art. 647¹ (t.j. Dz.U. 2026 poz. 795)
 ```
 
 **Pułapka B-2 — Wynagrodzenie podwykonawcy > wynagrodzenie GW:**
@@ -496,7 +496,7 @@ REKOMENDACJA:
 **Pułapka B-5 — Rozszerzony zakres rękojmi:**
 ```
 PROBLEM: Umowa wydłuża rękojmię do 5-10 lat dla robót budowlanych
-WERYFIKUJ: isap.sejm.gov.pl → KC art. 568 (rękojmia nieruchomości = 5 lat)
+WERYFIKUJ: ELI (RZĄD 1) → KC art. 568 (rękojmia nieruchomości = 5 lat)
            Strony mogą skrócić lub wydłużyć ten termin w B2B (art. 558 §1 KC)
 
 ALERT: Rękojmia B2B może być ograniczona lub wyłączona — sprawdź klauzulę
@@ -723,4 +723,4 @@ DODANE PO KONFRONTACJI Z PRAKTYKĄ KANCELARYJNĄ (2026-07-13n):
 *Moduł G / analizator-umow-v1 · Dla umów o pracę → references/umowy-o-prace.md (Moduł H)*
 *Zakaz konkurencji (pełna analiza) → references/zakaz-konkurencji.md (Moduł I)*
 *Poufność / NDA (pełna analiza) → references/poufnosc-nda.md (Moduł K)*
-*Prawo weryfikuj w ISAP · Klauzule w rejestrze UOKiK · Zawsze aktualny tekst jednolity*
+*Prawo weryfikuj w ELI (RZĄD 1) · Klauzule w rejestrze UOKiK · Zawsze aktualny tekst jednolity*

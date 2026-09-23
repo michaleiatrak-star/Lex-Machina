@@ -191,17 +191,47 @@ Kluczowe zmiany wdrażające NIS2 (Dyrektywa 2022/2555):
   → Mechanizm SAMOIDENTYFIKACJI: podmioty rejestrują się samodzielnie (nie decyzja)
   → CSIRT sektorowe: dla każdego sektora/podsektora
   
-Terminy obowiązków dla podmiotów (art. 16 KSC):
-  → 12 miesięcy na realizację obowiązków rozdziału 3 (środki bezpieczeństwa):
-    do 03.04.2027 dla podmiotów istniejących na 03.04.2026
-  → 24 miesiące na pierwszy audyt dla podmiotów kluczowych: do 03.04.2028
+✅ [VER] RZĄD 1 2026-09-16k — odczyt treści `Dz.U. 2026 poz. 252` (ogłoszona 2.03.2026,
+w życie 3.04.2026) na tle t.j. `Dz.U. 2026 poz. 20`. Brak dalszych nowelizacji w metryce ELI.
 
-Kary za naruszenia (weryfikuj aktualne stawki w ustawie w ISAP):
-  → Podmioty kluczowe: do 10 mln EUR lub 2% rocznego obrotu (wyższe)
-  → Podmioty ważne: do 7 mln EUR lub 1,4% rocznego obrotu
+ZGŁASZANIE INCYDENTU POWAŻNEGO (art. 11 ust. 1 pkt 4–4c KSC w brzmieniu od 3.04.2026):
+  → WCZESNE OSTRZEŻENIE — niezwłocznie, nie później niż w ciągu 24 GODZIN od wykrycia
+    (pkt 4), do właściwego CSIRT sektorowego
+  → ZGŁOSZENIE incydentu poważnego — niezwłocznie, nie później niż w ciągu 72 GODZIN od
+    wykrycia (pkt 4a)
+  → sprawozdanie OKRESOWE — na wniosek CSIRT sektorowego (pkt 4b)
+  → sprawozdanie KOŃCOWE — nie później niż w ciągu MIESIĄCA od dnia ZGŁOSZENIA z pkt 4a
+    (pkt 4c); gdy obsługa trwa dłużej: sprawozdanie z POSTĘPU, a końcowe — w ciągu
+    miesiąca od ZAKOŃCZENIA obsługi (art. 12b ust. 1–2)
+  → DOSTAWCA USŁUG ZAUFANIA — zgłoszenie incydentu poważnego w ciągu 24 GODZIN (art. 11 ust. 1a)
+  ⚠️ Terminy godzinowe biegną od WYKRYCIA — liczyć z godziną (jak zegar 72 h w RODO),
+     równoległe zgłoszenie do UODO przy danych osobowych — odrębny reżim (art. 33 RODO)
+
+TERMINY PRZEJŚCIOWE (⛔ art. 33 USTAWY ZMIENIAJĄCEJ 2026/252 — nie „art. 16 KSC",
+jak podawała poprzednia wersja):
+  → obowiązki z rozdziału 3 KSC — 12 miesięcy: do 3.04.2027 (art. 33 ust. 1)
+  → pierwszy audyt podmiotu KLUCZOWEGO (art. 15 ust. 1 KSC) — 24 miesiące: do 3.04.2028
+    (art. 33 ust. 2)
+  → wniosek o wpis do wykazu — według HARMONOGRAMU w komunikacie ministra ds. informatyzacji
+    (art. 33 ust. 3 w zw. z art. 34 ust. 3 pkt 1) — komunikat w dzienniku urzędowym ministra,
+    NIE w Dz.U.: odczytać przy sprawie
+  → ⛔ byli OPERATORZY USŁUG KLUCZOWYCH zgłaszają incydenty według art. 11–12b w nowym
+    brzmieniu w terminie 6 miesięcy: do 3.10.2026 (art. 33 ust. 4); z urzędu wpisani do
+    wykazu (art. 34 ust. 2)
+
+KARY PIENIĘŻNE (art. 73 KSC w brzmieniu od 3.04.2026):
+  → podmiot KLUCZOWY: do 10 000 000 EUR lub 2 % PRZYCHODÓW z działalności gospodarczej
+    w roku obrotowym poprzedzającym — stosuje się kwotę WYŻSZĄ; nie mniej niż 20 000 zł (ust. 3)
+  → podmiot WAŻNY: do 7 000 000 EUR lub 1,4 % przychodów jw.; nie mniej niż 15 000 zł (ust. 4)
+    ⚠️ ust. 4 NIE zawiera wprost klauzuli „kwota wyższa" z ust. 3 — nie przenosić jej
+    automatycznie; odczyt przy sprawie
+  → działalność krótsza niż 12 miesięcy albo brak przychodu — podstawa 500 000 EUR (ust. 3a)
+  → kurs średni NBP z 31 grudnia roku poprzedzającego wydanie decyzji
+  (⛔ poprzednio: „2 % / 1,4 % rocznego OBROTU, wyższe" dla obu kategorii)
 
 Nowa ustawa o certyfikacji cyberbezpieczeństwa: Dz.U. 2025 poz. 1017
-  → Weszła w życie: weryfikuj datę w ISAP
+  → Weszła w życie 28.08.2025 (✅ ELI 2026-09-16k — data ogólna; przepisy z odrębnymi
+    terminami — odczyt przy sprawie)
   → Krajowy system certyfikacji (EUCS — European Cybersecurity Certification Scheme)
 
 web_search: "nowelizacja KSC NIS2 Dz.U. 2026 poz. 252 obowiązki 2026 2027"

@@ -138,7 +138,7 @@ zastrzeżenia jest samodzielną, odrębną luką od samej wysokości kary.
 ODSETKI UMOWNE vs. USTAWOWE:
   Ustawowe za opóźnienie 2024/2025: weryfikuj NBP → stopa referencyjna + 5,5 p.p.
   Maksymalne odsetki umowne: 2× ustawowe za opóźnienie (art. 481 §2¹ KC)
-  → Weryfikuj: isap.sejm.gov.pl + web_search "odsetki ustawowe NBP [rok]"
+  → Weryfikuj: ELI (RZĄD 1) + web_search "odsetki ustawowe NBP [rok]"
 
 Dla odsetek X% rocznie (P.A.) lub Y% miesięcznie:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

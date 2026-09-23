@@ -5,8 +5,8 @@
 > użytkownik pyta o epidemię, wojnę, sankcje, kryzys surowcowy, inflację;
 > jedna strona chce powołać się na FM lub żądać renegocjacji; umowa wieloletnia.
 
-> ⛔ HARD GATE — przed przywołaniem art. 471, 473, 357¹, 58 KC weryfikuj w ISAP.
-> Weryfikacja: isap.sejm.gov.pl → KC → art. 357¹ (hardship), art. 471 (FM),
+> ⛔ HARD GATE — przed przywołaniem art. 471, 473, 357¹, 58 KC weryfikuj w ELI (RZĄD 1).
+> Weryfikacja: ELI (RZĄD 1) → KC → art. 357¹ (hardship), art. 471 (FM),
 > art. 473 (rozszerzenie odpowiedzialności na FM), art. 58 (nieważność klauzuli
 > asymetrycznej naruszającej zasady współżycia społecznego)
 
@@ -33,7 +33,7 @@
 ## FM.1 PODSTAWY PRAWNE — TRZY MECHANIZMY
 
 ```
-Weryfikuj aktualne brzmienie: isap.sejm.gov.pl → Kodeks cywilny
+Weryfikuj aktualne brzmienie: ELI (RZĄD 1) → Kodeks cywilny
 
 MECHANIZM 1 — SIŁA WYŻSZA (vis maior / force majeure):
   Podstawa ustawowa: KC art. 471 (egzoneracja z odpowiedzialności)
@@ -330,7 +330,7 @@ BRZMIENIE REKOMENDOWANE:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: KC art. 357¹, 471, 473, 475, 495, 58 — weryfikuj: isap.sejm.gov.pl*
+*Podstawa prawna: KC art. 357¹, 471, 473, 475, 495, 58 — weryfikuj: ELI (RZĄD 1)*
 *Orzecznictwo: sn.pl → "siła wyższa" · "rebus sic stantibus" · "nadzwyczajna zmiana"*
 *Wzorzec międzynarodowy (benchmark redakcyjny, nie podstawa prawna): ICC Force*
 *Majeure Clause 2020, ICC Hardship Clause 2020 (iccwbo.org) · UNIDROIT Principles*

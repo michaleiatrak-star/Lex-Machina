@@ -1,7 +1,7 @@
 # mod-PrNotariat-notariat-rejestry
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Prawo o notariacie — Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny stan w ISAP
+**Źródło weryfikacji:** Prawo o notariacie — Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny stan w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -16,7 +16,7 @@ Czynności notarialne (akt notarialny, poświadczenie, depozyt notarialny, proto
 
 | Akt | Dz.U. |
 |---|---|
-| Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny w ISAP |
+| Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. ze zm. — weryfikuj aktualny w ELI (RZĄD 1) |
 | KPC | Dz.U. 2026 poz. 468 t.j. — zaskarżenie odmowy czynności |
 | KC | Dz.U. 2026 poz. 795 t.j. — forma aktów notarialnych |
 
@@ -53,7 +53,7 @@ POŚWIADCZENIE:
   Daty dokumentu (data pewna — art. 81 KC)
   Pozostawania osoby przy życiu
 
-DEPOZYT NOTARIALNY (art. 108 PrNot — weryfikuj w ISAP):
+DEPOZYT NOTARIALNY (art. 108 PrNot — weryfikuj w ELI (RZĄD 1)):
   Złożenie pieniędzy lub papierów wartościowych na przechowanie
   Znaczenie przy transakcjach nieruchomości (bezpieczna płatność)
   Protokół: dokumentuje złożenie i warunki wydania
@@ -71,7 +71,7 @@ Podstawa: notariusz odmawia gdy czynność byłaby sprzeczna z prawem (art. 81 P
 Forma odmowy: pisemna, z uzasadnieniem — na żądanie strony
 Zaskarżenie:
   → Wniosek do sądu rejonowego właściwego dla kancelarii notarialnej
-  → Termin: 7 dni od doręczenia odmowy pisemnej (weryfikuj art. 83 PrNot w ISAP)
+  → Termin: 7 dni od doręczenia odmowy pisemnej (weryfikuj art. 83 PrNot w ELI (RZĄD 1))
   → Sąd rozpoznaje w trybie nieprocesowym
 ```
 

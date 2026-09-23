@@ -61,6 +61,13 @@ macierzyństwa, nie umowy o macierzyństwo zastępcze). Zweryfikowane w
 aktualnym t.j. Dz.U. 2026 poz. 236 (arslege.pl, lexlege.pl — pełna zgodna
 treść wszystkich 7 artykułów).
 
+⛔ **KOREKTA 2026-09-16 (F-189) — ✅ [VER] RZĄD 1, odczyt treści `Dz.U. 2026 poz. 236`.**
+Powyższa adnotacja RZĘDU 2B była NIEPRAWDZIWA co do terminów art. 61¹³ i 61¹⁴
+(moduł podawał „6 miesięcy" i „3 lata od pełnoletności"; ustawa: ROK, a dla
+dziecka — rok od dowiedzenia się). Drugi udokumentowany przypadek po UPEA
+(AUDYT-2026-09-12h), w którym zgodność źródeł RZĘDU 2B zalegitymizowała błąd
+terminu zawitego.
+
 ```
 Art. 619 — Zasada podstawowa (mater semper certa est):
   MATKĄ dziecka jest KOBIETA, która je URODZIŁA. Definicja czysto
@@ -79,26 +86,32 @@ Art. 6110 — Ustalenie macierzyństwa:
 Art. 6111 — Ograniczenie czasowe dla matki:
   MATKA NIE MOŻE wytoczyć powództwa o ustalenie macierzyństwa PO
   osiągnięciu przez dziecko PEŁNOLETNOŚCI. ⭐ Asymetria: dziecko takiego
-  ograniczenia nie ma (patrz art. 6114 niżej — termin inny, dłuższy).
+  ograniczenia nie ma. Jeżeli dziecko zmarło przed pełnoletnością — matka
+  może wytoczyć powództwo do dnia, w którym dziecko osiągnęłoby pełnoletność.
 
 Art. 6112 — Zaprzeczenie macierzyństwa — przesłanka:
   §1: Jeżeli w akcie urodzenia wpisana jest jako matka kobieta, KTÓRA
       dziecka NIE URODZIŁA — można żądać ZAPRZECZENIA macierzyństwa.
 
-Art. 6113 — Termin dla matki/kobiety wpisanej jako matka:
-  §1: 6 MIESIĘCY od dnia sporządzenia aktu urodzenia dziecka — termin
-      ZAWITY dla wytoczenia powództwa o zaprzeczenie.
+Art. 61¹³ — Terminy dla matki / kobiety wpisanej jako matka / mężczyzny:
+  §1: ROK od dnia sporządzenia aktu urodzenia dziecka — matka albo kobieta
+      wpisana w akcie jako matka (⛔ NIE „6 miesięcy").
+  §2: mężczyzna, którego ojcostwo ustalono z uwzględnieniem macierzyństwa
+      kobiety wpisanej w akcie — ROK od dowiedzenia się, że nie jest ona
+      matką, nie później niż do pełnoletności dziecka.
+  §3: art. 64 i 65 stosuje się odpowiednio (ubezwłasnowolnienie, choroba).
 
-Art. 6114 — Termin dla dziecka:
-  §1: DZIECKO może wytoczyć powództwo o zaprzeczenie macierzyństwa w
-      ciągu 3 LAT OD OSIĄGNIĘCIA PEŁNOLETNOŚCI.
+Art. 61¹⁴ — Termin dla dziecka:
+  §1: DZIECKO po osiągnięciu pełnoletności — ROK od dowiedzenia się, że nie
+      pochodzi od kobiety wpisanej w akcie; gdy dowiedziało się przed
+      pełnoletnością — rok od dnia pełnoletności (⛔ NIE „3 lata").
+  §2: art. 64 i 65 stosuje się odpowiednio.
 
-Art. 6115 — Ograniczenie po śmierci dziecka:
-  Ustalenie i zaprzeczenie macierzyństwa NIE jest dopuszczalne PO
-  śmierci dziecka (⚠️ z WYJĄTKIEM uprawnienia zstępnych z art. 6110 §2
-  zd. 2 przy ustaleniu, oraz z wyjątkiem legitymacji prokuratora z
-  art. 6116 niżej — te dwa wyjątki wymagają odrębnego odczytania
-  łącznie z art. 6115, nie w oderwaniu).
+Art. 61¹⁵ — Ograniczenie po śmierci dziecka:
+  §1: ZAPRZECZENIE macierzyństwa NIE jest dopuszczalne po śmierci dziecka,
+      chyba że dziecko zmarło po wszczęciu postępowania.
+  §2: w razie śmierci dziecka, które wytoczyło powództwo — zaprzeczenia
+      mogą dochodzić jego zstępni. (Prokurator — art. 61¹⁶ niżej.)
 
 Art. 6116 — Legitymacja prokuratora:
   Powództwo o ustalenie LUB zaprzeczenie macierzyństwa może wytoczyć
@@ -220,68 +233,49 @@ stanu prawnego, zweryfikuj status legislacyjny PRZED każdym użyciem.**
 
 ## ZAPRZECZENIE OJCOSTWA — TERMINY ZAWITE
 
-✅ [VER] RZĄD 1 2026-09-12k — odczyt treści KRO `Dz.U. 2026 poz. 236`
-(tekst jednolity obejmuje nowelizację `Dz.U. 2025 poz. 897`).
-
-⛔⛔ **NAPRAWA 2026-09-12k — DWA TERMINY BYŁY NIEPRAWDZIWE.**
-Poprzednia wersja podawała: matka — „6 miesięcy od urodzenia dziecka lub
-dowiedzenia się", dziecko — „3 lata od osiągnięcia pełnoletności". **Oba są
-błędne co do długości, a pierwszy także co do punktu początkowego.**
-⛔ Termin dziecka był **zawyżony trzykrotnie** — to kierunek niebezpieczny:
-dziecko poinformowane o „trzech latach" traci powództwo.
+> ✅ [VER] RZĄD 1 2026-09-12k, ponownie 2026-09-16 (F-189) — odczyt treści
+> `Dz.U. 2026 poz. 236`. Tabela kanoniczna: `shared/terminy.md` (KRO).
+> ⛔ NAPRAWIONE: poprzednio „matka — 6 miesięcy od urodzenia", „dziecko —
+> 3 lata od pełnoletności" (termin dziecka zawyżony TRZYKROTNIE — kierunek
+> niebezpieczny), „prokurator — brak terminu" (połowa normy).
 
 ```
 Domniemanie ojcostwa (art. 62 KRO):
   Mąż matki = domniemany ojciec gdy dziecko urodziło się w czasie trwania małżeństwa
   LUB przed upływem 300 dni od ustania/unieważnienia/separacji
 
-⛔ WSZYSTKIE TERMINY BIEGNĄ OD DOWIEDZENIA SIĘ, NIE OD URODZENIA DZIECKA
-   (reforma 2019 r. przestawiła punkt początkowy)
+WSZYSTKIE TERMINY BIEGNĄ OD DOWIEDZENIA SIĘ — NIE OD URODZENIA.
 
-TERMINY NA ZAPRZECZENIE OJCOSTWA:
-  Mąż matki (art. 63 KRO):
-    → 1 ROK od dnia, w którym dowiedział się, że dziecko od niego NIE POCHODZI
-    → nie później niż do dnia osiągnięcia przez dziecko PEŁNOLETNOŚCI
-
-  Matka (art. 69 §1 KRO):
-    → 1 ROK od dnia, w którym dowiedziała się, że dziecko nie pochodzi od męża
-    → nie później niż do dnia osiągnięcia przez dziecko PEŁNOLETNOŚCI
-    ⛔ NIE "6 miesięcy od urodzenia" — to zapis sprzed reformy
-
-  Dziecko (art. 70 §1 KRO):
-    → 1 ROK od dnia, w którym dowiedziało się, że nie pochodzi od męża matki
-    → jeżeli dowiedziało się PRZED pełnoletnością — termin biegnie
-      OD DNIA OSIĄGNIĘCIA PEŁNOLETNOŚCI
-    ⛔ NIE "3 lata od pełnoletności"
-
-  Mąż ubezwłasnowolniony / chory psychicznie (art. 64-65 KRO):
-    → 1 rok od ustanowienia przedstawiciela ustawowego albo od dowiedzenia się
-      przez niego (art. 64 §1)
-    → 1 rok od uchylenia ubezwłasnowolnienia albo od dowiedzenia się (art. 64 §2)
-    → 1 rok od ustania choroby lub zaburzeń (art. 65)
-    → stosuje się ODPOWIEDNIO także do matki (art. 69 §3) i dziecka (art. 70 §3)
+TERMINY NA ZAPRZECZENIE:
+  Mąż matki (art. 63): ROK od dowiedzenia się, że dziecko od niego nie
+    pochodzi; nie później niż do pełnoletności dziecka.
+    (Granica pełnoletności JEST w t.j. — dawna adnotacja „TK zakwestionował"
+    była nieaktualna. Realny ślad TK: art. 71 KRO „utracił moc".)
+  Mąż ubezwłasnowolniony / chory (art. 64–65): rok od ustanowienia
+    przedstawiciela ustawowego (albo od jego dowiedzenia się), od uchylenia
+    ubezwłasnowolnienia, od ustania choroby lub zaburzeń.
+  Matka (art. 69 § 1): ROK od dowiedzenia się, że dziecko nie pochodzi od
+    męża; nie później niż do pełnoletności dziecka. Art. 64–65 odpowiednio (§ 3).
+  Dziecko (art. 70 § 1): po pełnoletności — ROK od dowiedzenia się; gdy
+    dowiedziało się wcześniej — rok od dnia pełnoletności.
+    Art. 64–65 odpowiednio (§ 3).
+  Po śmierci dziecka (art. 70¹): zaprzeczenie niedopuszczalne, chyba że
+    dziecko zmarło po wszczęciu postępowania; zstępni dziecka, które
+    wytoczyło powództwo, mogą go dochodzić.
+  Prokurator (art. 86): bez terminu liczonego od dowiedzenia się, ALE:
+    dziecko zmarło PRZED pełnoletnością → do dnia, w którym osiągnęłoby
+    pełnoletność; zmarło PO pełnoletności → powództwo NIEDOPUSZCZALNE.
 
 BEZSKUTECZNOŚĆ UZNANIA OJCOSTWA:
-  Mężczyzna, który uznał (art. 78 §1):  1 rok od dowiedzenia się; przy uznaniu
-                                        przed urodzeniem bieg nie zaczyna się
-                                        przed urodzeniem dziecka
-  Matka, która potwierdziła (art. 79):  odpowiednio jak wyżej
-  Dziecko (art. 81 §2):                 1 rok od dowiedzenia się, po osiągnięciu
-                                        pełnoletności; gdy dowiedziało się
-                                        wcześniej — od dnia pełnoletności
-
-  ⛔ art. 81[1] KRO: przy uznaniu na podstawie art. 75[1] (medycznie wspomagana
-     prokreacja) ustalenie bezskuteczności jest dopuszczalne TYLKO wtedy, gdy
-     dziecko NIE urodziło się w następstwie tej procedury
-
-  Prokurator (art. 86 KRO): brak terminu liczonego od dowiedzenia się, ALE
-    ⛔ gdy dziecko zmarło PRZED pełnoletnością — do dnia, w którym osiągnęłoby
-       pełnoletność
-    ⛔ gdy dziecko zmarło PO pełnoletności — powództwo NIEDOPUSZCZALNE
-
-  ⚠️ art. 70[1] KRO: zaprzeczenie niedopuszczalne po śmierci dziecka, chyba że
-     zmarło po wszczęciu postępowania — wtedy dochodzą go ZSTĘPNI
-  ⚠️ art. 71 KRO "UTRACIŁ MOC" — starsze opracowania mogą się na nim opierać
+  Mężczyzna (art. 78 § 1): ROK od dowiedzenia się, że dziecko od niego nie
+    pochodzi; przy uznaniu dziecka poczętego — bieg nie wcześniej niż od
+    urodzenia. Art. 64–65 odpowiednio.
+  Matka, która potwierdziła (art. 79): odpowiednio jak mężczyzna.
+  Po pełnoletności dziecka — ani matka, ani uznający (art. 80).
+  Dziecko (art. 81 § 2): po pełnoletności — ROK od dowiedzenia się; gdy
+    wcześniej — rok od pełnoletności.
+  Procedura medycznie wspomaganej prokreacji (art. 81¹): bezskuteczność
+    dopuszczalna tylko, gdy dziecko NIE urodziło się w następstwie procedury.
 ```
 
 ---

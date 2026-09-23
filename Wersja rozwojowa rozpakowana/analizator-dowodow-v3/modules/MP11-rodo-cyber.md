@@ -8,7 +8,7 @@ elektronicznej lub inne aspekty cyfrowe. Moduł łączy analizę prawną z anali
 techniczną dowodów cyfrowych.
 
 **Reguła:** przy każdym przepisie z rozporządzenia (UE) 2016/679 (RODO),
-dyrektywy, ustawy o ochronie danych lub KK weryfikuj aktualną treść w ISAP
+dyrektywy, ustawy o ochronie danych lub KK weryfikuj aktualną treść w ELI (RZĄD 1)
 lub EUR-Lex. Interpretacje organu nadzorczego (UODO) sprawdzaj na uodo.gov.pl.
 
 ---
@@ -232,7 +232,7 @@ Obowiązek zawiadomienia osób (art. 34 RODO):
   Czy zawiadomiono osoby: tak / nie
 
 Odpowiedzialność administratora:
-  Kara UODO: do 20 mln EUR lub 4% obrotu (art. 83 ust. 5 RODO)
+  Kara: do 20 000 000 EUR, a w przypadku przedsiębiorstwa do 4 % całkowitego rocznego ŚWIATOWEGO obrotu z poprzedniego roku obrotowego — **zastosowanie ma kwota WYŻSZA** (art. 83 ust. 5 RODO; naruszenia m.in. zasad z art. 5–7 i 9 oraz praw osób z art. 12–22). Kara za nieprzestrzeganie nakazu organu — ten sam pułap (ust. 6). ✅ [VER] RZĄD 1 2026-09-17u — Cellar (Urząd Publikacji UE), polska wersja CELEX 32016R0679
   Odszkodowanie (art. 82 RODO): majątkowe + niemajątkowe
   Odpowiedzialność karna (ustawa z 10.05.2018 o ochronie danych): [weryfikacja]
 ```
@@ -264,7 +264,7 @@ Tryb skargi do UODO:
 
 | Kiedy | Działanie |
 |-------|-----------|
-| Każda podstawa prawna RODO / KK | Weryfikacja w ISAP + EUR-Lex |
+| Każda podstawa prawna RODO / KK | Weryfikacja w ELI (RZĄD 1) + EUR-Lex |
 | Kara UODO lub orzeczenie TSUE | `orzeczenia-sadowe-v2` + orzeczenia.uodo.gov.pl |
 | Nagranie jako dowód | Patrz sekcja 11.6 + analiza admissibility M8 |
 | Monitoring pracowniczy | Sekcja 11.3 + `analizator-umow-v1` (klauzule) |

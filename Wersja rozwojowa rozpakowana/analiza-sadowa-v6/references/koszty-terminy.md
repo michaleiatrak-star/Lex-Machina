@@ -105,7 +105,7 @@ o 2/3 (max 400 zł) przy udziale w mediacji przed wytoczeniem powództwa.
 ### ⛔ Sprawy gospodarcze — obalone
 
 **W KSCU nie ma odrębnej opłaty „5 % WPS, max 20 000 zł" dla spraw
-gospodarczych.** Wiersz o takiej treści z odesłaniem do „art. 13 ust. 1a KSCU"
+gospodarczych.** Wiersz o takiej treści z odesłaniem do „art. 13 ust. 1a KSCU" <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->
 figurował tu do 2026-09-12; jednostka redakcyjna **art. 13 ust. 1a nie istnieje**,
 a odczyt treści aktu nie ujawnił żadnego przepisu o takim capie. Sprawy
 gospodarcze podlegają art. 13 na zasadach ogólnych, chyba że wchodzi przepis

@@ -67,13 +67,16 @@ Aktualne stawki po wejściu w życie zmiany z 14.03.2023:
 
 | Kara | Opłata |
 |---|---:|
-| do 3 miesięcy | 60 zł |
-| do 6 miesięcy | 120 zł |
-| do 1 roku | 180 zł |
-| do 2 lat | 300 zł |
-| do 5 lat | 400 zł |
+| do 3 miesięcy | 60 zł (art. 2 ust. 1 pkt 1) |
+| do 6 miesięcy | 120 zł (art. 2 ust. 1 pkt 2) |
+| do 1 roku | 180 zł (art. 2 ust. 1 pkt 3) |
+| do 2 lat | 300 zł (art. 2 ust. 1 pkt 4) |
+| do 5 lat | 400 zł (art. 2 ust. 1 pkt 5) |
 | do 15 lat | 600 zł (art. 2 ust. 1 pkt 6, brzmienie z odnośnika 3) |
 | powyżej 15 lat | 1000 zł (art. 2 ust. 1 pkt 7, dodany tą samą nowelizacją) |
+
+Kara **ograniczenia wolności** — stawki z pkt 1–4 **odpowiednio** (art. 2 ust. 2).
+✅ [VER] RZĄD 1 2026-09-16e — podstawy w wierszach dopisane po T32 (`Dz.U. 2023 poz. 123`).
 
 Art. 2 ust. 2 odsyła odpowiednio do progów pkt 1–4 przy karze ograniczenia
 wolności. Przed użyciem sprawdź aktualny tekst i kwalifikację kary.

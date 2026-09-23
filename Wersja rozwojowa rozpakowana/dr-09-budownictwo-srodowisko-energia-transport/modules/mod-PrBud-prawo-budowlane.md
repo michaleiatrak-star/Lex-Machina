@@ -244,8 +244,11 @@ NIE SĄ małą architekturą: wolnostojące reklamy, tymczasowe obiekty
    - Odwołanie od decyzji PINB (I inst.) → **14 dni** do WINB
    - Skarga do WSA → **30 dni** od decyzji WINB
 
-6. **PRZEDAWNIENIE roszczeń z umowy o roboty budowlane:** 3 lata (art. 118 KC — działalność
-   gospodarcza); rękojmia za wady fizyczne: 5 lat dla nieruchomości (art. 568 KC).
+6. **PRZEDAWNIENIE roszczeń z umowy o roboty budowlane:** 3 lata dla roszczeń związanych
+   z prowadzeniem działalności gospodarczej, w pozostałych — 6 lat; koniec terminu na ostatni
+   dzień roku kalendarzowego (art. 118 KC) — ⛔ roszczenie INWESTORA-KONSUMENTA nie jest
+   związane z jego działalnością gospodarczą; rękojmia za wady fizyczne: 5 lat dla
+   nieruchomości (art. 568 § 1 KC). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 
 ---
 
@@ -253,8 +256,8 @@ NIE SĄ małą architekturą: wolnostojące reklamy, tymczasowe obiekty
 
 | Akt | Aktualna sygnatura | Uwagi |
 |---|---|---|
-| **Prawo budowlane (PrBud)** | **Dz.U. 2026 poz. 524 t.j.** (obwieszczenie Marszałka Sejmu z 27.03.2026 r.) | Weryfikuj w isap.sejm.gov.pl przed każdym cytowaniem — kluczowy akt |
-| Ustawa o planowaniu i zagospodarowaniu przestrzennym | **Dz.U. 2026 poz. 538 t.j.** + zmiany (poz. 1907, 1940; Dz.U. 2025 poz. 527, 680) — zawsze weryfikuj aktualny t.j. w ISAP | MPZP, WZ, decyzje lokalizacyjne |
+| **Prawo budowlane (PrBud)** | **Dz.U. 2026 poz. 524 t.j.** (obwieszczenie Marszałka Sejmu z 27.03.2026 r.) | Weryfikuj w ELI (RZĄD 1) przed każdym cytowaniem — kluczowy akt |
+| Ustawa o planowaniu i zagospodarowaniu przestrzennym | **Dz.U. 2026 poz. 538 t.j.** + zmiany (poz. 1907, 1940; Dz.U. 2025 poz. 527, 680) — zawsze weryfikuj aktualny t.j. w ELI (RZĄD 1) | MPZP, WZ, decyzje lokalizacyjne |
 | Kodeks cywilny art. 647–658 | **Dz.U. 2026 poz. 795 t.j.; późniejsze zmiany — fresh gate** | Umowa o roboty budowlane |
 | Rozporządzenie w sprawie warunków technicznych (WT) | Weryfikuj aktualną wersję w isap | Wymagania techniczne obiektów |
 | KPA | **Dz.U. 2025 poz. 1691** | Postępowanie adm. przed PINB/WINB |
@@ -629,7 +632,7 @@ Sprawdź stan postępowań PRZED złożeniem wniosku o uproszczoną legalizację
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji
 online w ISAP / orzeczenia.nsa.gov.pl / sn.pl przed powołaniem.*
 *Weryfikacja: 22.05.2026 | PrBud: Dz.U. 2026 poz. 524 t.j. (obwieszczenie 27.03.2026)*
-*Zakaz cytowania przepisów z pamięci — każdy artykuł weryfikuj w isap.sejm.gov.pl*
+*Zakaz cytowania przepisów z pamięci — każdy artykuł weryfikuj w ELI (RZĄD 1)*
 
 ---
 

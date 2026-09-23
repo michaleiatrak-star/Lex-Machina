@@ -1,6 +1,6 @@
 # mod-BY-straz-graniczna-procedury.md — Straż Graniczna — czynności, cudzoziemcy, granica i dyscyplinarki
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa o Straży Granicznej
@@ -183,7 +183,7 @@ Ustawa o Straży Granicznej:
   ✅ VER: isap.sejm.gov.pl 2026-07-21 (poprzednia weryfikacja 2026-06-05
     była NIEAKTUALNA co do numeru t.j.)
 
-Ustawa o cudzoziemcach — Dz.U. 2025 poz. 1079 t.j. — weryfikuj w ISAP
+Ustawa o cudzoziemcach — Dz.U. 2025 poz. 1079 t.j. — weryfikuj w ELI (RZĄD 1)
 Ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546 t.j. — weryfikuj
 
 Kluczowe sprawy SG:

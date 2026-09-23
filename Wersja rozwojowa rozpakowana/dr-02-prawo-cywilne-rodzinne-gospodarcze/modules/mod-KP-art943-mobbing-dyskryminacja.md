@@ -23,7 +23,7 @@
 
 ## MOBBING vs DYSKRYMINACJA vs MOLESTOWANIE — KWALIFIKATOR
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 94³ i art. 18³a–18³e KP w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie art. 94³ i art. 18³a–18³e KP w ELI (RZĄD 1).
 
 | Cecha | Mobbing (art. 94³ KP) | Dyskryminacja (art. 18³a KP) | Molestowanie seksualne (art. 18³a §6 KP) |
 |---|---|---|---|
@@ -35,7 +35,7 @@
 
 ## PIĘĆ PRZESŁANEK MOBBINGU — WSZYSTKIE ŁĄCZNIE (art. 94³ §2 KP)
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 94³ §2 KP w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie art. 94³ §2 KP w ELI (RZĄD 1).
 
 ```
 WSZYSTKIE PIĘĆ muszą być spełnione łącznie:

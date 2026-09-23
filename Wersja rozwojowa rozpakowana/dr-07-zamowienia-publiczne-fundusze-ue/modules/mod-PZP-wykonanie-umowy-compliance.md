@@ -3,7 +3,7 @@
 **Status:** moduł uzupełniający do `mod-PZP-zamowienia-publiczne-KIO.md`
 **Wydzielony:** 2026-06-14 (audyt — moduł nadrzędny >400 linii, podział tematyczny)
 **Źródło weryfikacji:** PZP — Dz.U. 2026 poz. 793 t.j. (obwieszczenie 27.05.2026; zastępuje t.j. 2024.1320) ✅ VER: 2026-08-15
-**Zasada:** Każde brzmienie przepisu i kwota → weryfikuj w ISAP / uzp.gov.pl przed powołaniem
+**Zasada:** Każde brzmienie przepisu i kwota → weryfikuj w ELI (RZĄD 1) / uzp.gov.pl przed powołaniem
 
 ---
 
@@ -26,7 +26,7 @@ umowy (art. 454–455), certyfikację wykonawców.
 
 *Stosuj gdy: SWZ dostarczona do weryfikacji / pytanie o art. 99 ust. 4–5 PZP / parametry techniczne / zarzut preferowania produktu*
 
-### Podstawa prawna (weryfikuj w ISAP)
+### Podstawa prawna (weryfikuj w ELI (RZĄD 1))
 
 | Przepis | Treść (skrót) |
 |---|---|
@@ -96,7 +96,7 @@ UDOSTĘPNIENIE ZASOBÓW przez podmioty trzecie (art. 118–123 PZP):
   → Wymaga: pisemnego zobowiązania podmiotu trzeciego
   → Podmiot trzeci odpowiada solidarnie za wykonanie gdy udostępnia zasoby
     niezbędne do realizacji zamówienia
-  ⚠️ Weryfikuj aktualne przepisy art. 462–475 PZP w ISAP
+  ⚠️ Weryfikuj aktualne przepisy art. 462–475 PZP w ELI (RZĄD 1)
 ```
 
 ---
@@ -107,7 +107,7 @@ UDOSTĘPNIENIE ZASOBÓW przez podmioty trzecie (art. 118–123 PZP):
 OBOWIĄZEK ZAMAWIAJĄCEGO: wymaganie zabezpieczenia przy zamówieniach
   ≥ progów UE dla robót budowlanych (mogą wymagać poniżej)
 
-WYSOKOŚĆ (art. 450 PZP — weryfikuj w ISAP):
+WYSOKOŚĆ (art. 450 PZP — weryfikuj w ELI (RZĄD 1)):
   → Od 5% do 10% ceny brutto z oferty
 
 FORMY ZABEZPIECZENIA:
@@ -125,7 +125,7 @@ ZWROT ZABEZPIECZENIA:
 GWARANCJA JAKOŚCI (różna od zabezpieczenia!):
   → Część oferty — wykonawca określa warunki gwarancji
   → Komisja KIO orzeka o sporach w trakcie realizacji dotyczących gwarancji
-  ⚠️ Weryfikuj aktualne art. 449–453 PZP w ISAP
+  ⚠️ Weryfikuj aktualne art. 449–453 PZP w ELI (RZĄD 1)
 ```
 
 ---

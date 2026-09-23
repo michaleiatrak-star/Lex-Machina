@@ -2,7 +2,7 @@
 
 Status: moduł norm ISO klasy wzorcowej. Stan metodyczny: 2026-06-07.
 Normy ISO są standardami dobrowolnymi — nie aktami prawnymi. Weryfikuj ich aktualność
-na iso.org lub PKN (pkn.pl). Powiązane akty prawne (KSC, RODO) weryfikuj w isap.sejm.gov.pl.
+na iso.org lub PKN (pkn.pl). Powiązane akty prawne (KSC, RODO) weryfikuj w ELI (RZĄD 1).
 
 ## 1. Akty i źródła do weryfikacji
 
@@ -16,7 +16,7 @@ na iso.org lub PKN (pkn.pl). Powiązane akty prawne (KSC, RODO) weryfikuj w isap
 - ISO 31000:2018 — Risk management. Guidelines
   [VER: iso.org/standard/65694.html — niecertyfikowalna, wytyczne]
 - Ustawa o krajowym systemie cyberbezpieczeństwa (KSC) — Dz.U. 2024 poz. 1226 ze zm.
-  [WYMAGA WERYFIKACJI ISAP — wdrożenie NIS2 w toku; sprawdź aktualny stan]
+  [WYMAGA WERYFIKACJI RZĄD 1 — wdrożenie NIS2 w toku; sprawdź aktualny stan]
 - Rozporządzenie RODO — Rozp. (UE) 2016/679
   [VER: eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32016R0679]
 - Rozporządzenie DORA — Rozp. (UE) 2022/2554 (dla sektora finansowego)
@@ -124,7 +124,7 @@ Wykrycie incydentu → Klasyfikacja (czy incydent istotny wg KSC?) →
     CSIRT GOV: organy administracji rządowej, operatorzy infrastruktury krytycznej
     CSIRT MON: podmioty sektora obronnego
     CSIRT NASK: pozostałe podmioty
-    Termin: [WYMAGA WERYFIKACJI ISAP — sprawdź aktualny art. KSC]
+    Termin: [WYMAGA WERYFIKACJI RZĄD 1 — sprawdź aktualny art. KSC]
 → Obsługa incydentu (containment, eradication, recovery) →
 → Raport końcowy do CSIRT →
 → [jeśli dane osobowe] Równoległa notyfikacja do UODO (art. 33 RODO: 72h)

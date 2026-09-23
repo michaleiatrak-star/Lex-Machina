@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.81"
+version: "3.92"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu podatkowego, stawki, progu, kwoty, terminu, sankcji, interpretacji, objaśnienia, WIS/WIA/WIP albo sygnatury orzeczenia:**
-1. Zweryfikuj aktualne brzmienie aktu, tekst jednolity i nowelizacje w `isap.sejm.gov.pl`.
+1. Zweryfikuj aktualne brzmienie aktu, tekst jednolity i nowelizacje w `ELI (RZĄD 1)`.
 2. Zweryfikuj interpretacje, objaśnienia podatkowe oraz informacje MF/KIS w oficjalnym serwisie `podatki.gov.pl`, w szczególności w systemie **EUREKA**: `podatki.gov.pl/narzedzia/eureka/`.
 3. Zweryfikuj orzecznictwo podatkowe w `orzeczenia.nsa.gov.pl`; dla spraw powszechnych pomocniczo także `orzeczenia.ms.gov.pl` / `sn.pl`.
 4. **NIGDY** nie podawaj artykułu, stawki, progu, kwoty, terminu, sankcji, interpretacji ani tezy orzeczenia wyłącznie z pamięci modelu.
@@ -50,8 +50,8 @@ W sprawach podatkowych sama treść modułu lokalnego jest tylko punktem startu;
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -59,9 +59,9 @@ W sprawach podatkowych sama treść modułu lokalnego jest tylko punktem startu;
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ISAP**
+- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - **Stawki podatkowe, kwoty wolne, progi — ZAWSZE weryfikuj przed podaniem (zmieniane co roku!)**
-- Źródło podstawowe: ISAP; LEX/Legalis dopuszczalne wyłącznie pomocniczo
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
 
 ## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
 
@@ -95,15 +95,14 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W08 ⚠️⚠️ Podatek katastralny — NOWY projekt poselski Lewicy w Sejmie
   (20.03.2026): ≥3 lokale, stawka 0,5%→1,5% wartości. Stan: złożony, brak
   pierwszego czytania (06.2026). MF: brak prac rządowych, ale Sejm pracuje.
-- BAS-W32 ⛔ Przedawnienie podatkowe — Ordynacja podatkowa ma ODRĘBNY reżim
-  od KC. ⛔ **CZĘŚĆ TEGO WPISU NIEPOTWIERDZONA (weryfikacja 2026-09-12i):**
-  art. 70 §6 pkt 1 OP **jest w mocy** w t.j. `Dz.U. 2026 poz. 622`, a ustawy
-  `Dz.U. 2026 poz. 825` (24.09.2026) i `poz. 846` (1.10.2026) **nie zmieniają
-  art. 70** ani nie wprowadzają "ugody podatkowej". Data 01.10.2026 pochodzi
-  z wejścia w życie poz. 846, której zakres jest inny. Przed powołaniem —
-  wskaż konkretną ustawę i datę.
+- BAS-W32 ⚠️ Przedawnienie podatkowe — Ordynacja podatkowa ma ODRĘBNY reżim
+  od KC. ⛔ Twierdzenie „nowelizacja znosi «wieczne przedawnienie» + ugoda
+  podatkowa od 01.10.2026" NIEPOTWIERDZONE: `Dz.U. 2026 poz. 846` (w życie
+  1.10.2026) nie zmienia art. 70 i nie zna ugody; art. 70 § 6 pkt 1 w mocy
+  (✅ [VER] RZĄD 1 2026-09-16). Opis zamiaru legislacyjnego, nie stanu prawa —
+  przed powołaniem wskaż pozycję Dz.U. z odczytu treści
 
-## Moduły (45 łącznie — ✓ 45 OK, ☐ 0 STUB)
+## Moduły (47 łącznie — ✓ 47 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`
 — zamyka rdzeń F-70: dowody w postępowaniu podatkowym (180-200),
@@ -607,6 +606,14 @@ przez cross-reference, bez duplikacji treści).
                NIE kodu PKD. Odpowiedź na pytanie użytkownika)
   [✓] OK    mod-ustawa-PCC-i-podatek-spadkow-darowizn
   [✓] OK    mod-ustawa-podatek-nieruchomosci-i-lokalne
+  [✓] NOWY  mod-ustawa-oplata-skarbowa
+              (dodany 2026-09-16, O-11(d): przedmiot, zobowiązani i solidarność,
+               powstanie obowiązku = termin zapłaty, zwolnienia podmiotowe, zwrot
+               z terminem 5 lat, organ — wójt/burmistrz; t.j. Dz.U. 2025 poz. 1154, RZĄD 1)
+  [✓] NOWY  mod-ustawa-podatek-wydobycie-kopalin
+              (dodany 2026-09-16, F-190: podatek od wydobycia miedzi, srebra,
+               gazu i ropy — t.j. Dz.U. 2026 poz. 454, RZĄD 1; wcześniej widmowe
+               pokrycie w ROUTING-MAP z numerem innego aktu)
   [✓] OK    mod-UFP-finanse-publiczne-NIK-RIO
               (2026-07-21: dodano sekcję 11 — merytoryczna treść
                wystąpienia pokontrolnego NIK [elementy, termin 21 dni
@@ -748,7 +755,7 @@ view dr-06-podatki-finanse-publiczne-aml/MAPA-POKRYCIA.md
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - KPA (postępowanie adm.): `dr-05` → `mod-KPA-postepowanie-administracyjne`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja prawa: isap.sejm.gov.pl
+- Weryfikacja prawa: ELI (RZĄD 1)
 - Interpretacje / objaśnienia / WIS-WIA-WIP: podatki.gov.pl/narzedzia/eureka/ oraz interpretacje.podatki.gov.pl
 - Orzecznictwo NSA: orzeczenia.nsa.gov.pl
 

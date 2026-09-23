@@ -29,7 +29,7 @@
 ---
 
 > ⛔ HARD GATE — przed podaniem JAKIEGOKOLWIEK artykułu KSH/KC, terminu,
-> wymogu formy weryfikuj w ISAP. Zakaz cytowania z pamięci. Znacznik
+> wymogu formy weryfikuj w ELI (RZĄD 1). Zakaz cytowania z pamięci. Znacznik
 > ✅ [VER: źródło, data] obowiązkowy.
 >
 > ```
@@ -246,7 +246,7 @@ dokładną treść art. 25 KSH dla sp. jawnej, analogicznie dla innych):
 
 SPECYFIKA SP. PARTNERSKIEJ:
 □ określenie WOLNEGO ZAWODU partnerów (art. 87 KSH — katalog zawodów,
-  weryfikuj aktualną listę w ISAP)
+  weryfikuj aktualną listę w ELI (RZĄD 1))
 □ czy umowa przewiduje, że niektórzy partnerzy odpowiadają jak wspólnicy
   spółki jawnej za zobowiązania niezwiązane z wykonywaniem wolnego zawodu
   (art. 95 §2 KSH — weryfikuj)?
@@ -413,6 +413,6 @@ web_search: "przekształcenie spółki cywilnej w jawną obowiązek przychód ar
 
 ---
 *MODUŁ J20 / analizator-umow-v1 · utworzony 2026-06-15*
-*Prawo weryfikuj ZAWSZE w ISAP · Wzory branżowe (founders' agreement) nie
+*Prawo weryfikuj ZAWSZE w ELI (RZĄD 1) · Wzory branżowe (founders' agreement) nie
 mają statusu ustawowego — traktuj jako punkt wyjścia, nie wzorzec
 normatywny.*

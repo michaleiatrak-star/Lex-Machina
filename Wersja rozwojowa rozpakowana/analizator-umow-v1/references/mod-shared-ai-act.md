@@ -229,7 +229,7 @@ KLAUZULA:
 | AI-P2 | Brak logów i audit trail | Logi min. 6 mies., format XML/JSON, dostęp Wdrażającego |
 | AI-P3 | Niedostateczna dokumentacja techniczna | Wymóg zgodności z Załącznikiem IV AI Act |
 | AI-P4 | Brak mechanizmu wyłączenia/override | Klauzula "human override and stop" obowiązkowa dla WR |
-| AI-P5 | Dostawca nie informuje o incydentach | Termin 48h od wykrycia incydentu (jak RODO art. 33) |
+| AI-P5 | Dostawca nie informuje o incydentach | Zgłoszenie poważnego incydentu organom nadzoru rynku: **natychmiast**, nie później niż **15 dni** od dowiedzenia się (art. 73 ust. 2); **2 dni** — powszechne naruszenie albo incydent z art. 3 pkt 49 lit. b (ust. 3); **10 dni** — gdy nastąpiła **śmierć** osoby (ust. 4); dopuszczalne zgłoszenie wstępne niepełne, potem kompletne (ust. 5). ⛔ nie „48 h jak RODO art. 33" — RODO daje 72 h po stwierdzeniu naruszenia. ✅ [VER] RZĄD 1 2026-09-17u — Cellar, polska wersja (CELEX 32024R1689) | <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
 | AI-P6 | Umowa licencyjna AI z wyłączeniem odpowiedzialności za bias | Bias systemowy może = dyskryminacja → odpowiedzialność cywilna |
 | AI-P7 | Brak procesu aktualizacji modelu | Po aktualizacji modelu = możliwa zmiana klasyfikacji → powiadamiaj |
 | AI-P8 | Dane treningowe z naruszeniem RODO | Połącz z mod-shared-rodo.md → DPA dla danych treningowych |

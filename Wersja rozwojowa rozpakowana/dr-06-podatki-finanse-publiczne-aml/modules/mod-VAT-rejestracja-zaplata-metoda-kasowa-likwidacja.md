@@ -132,7 +132,7 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
   tańszy i nie wyklucza drogi sądowej.
 
 ⭐ Zmiana od SLIM VAT 3: organ ma obowiązek NIEZWŁOCZNEGO zawiadomienia
-  o wykreśleniu — weryfikuj aktualną redakcję ust. 9a i n. w ISAP,
+  o wykreśleniu — weryfikuj aktualną redakcję ust. 9a i n. w ELI (RZĄD 1),
   bo praktyka przed nowelizacją była niejednolita.
 ```
 

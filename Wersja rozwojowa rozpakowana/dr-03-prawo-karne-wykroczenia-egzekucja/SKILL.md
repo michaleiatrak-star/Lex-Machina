@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.37"
+version: "3.46"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 ---
 
@@ -41,7 +41,7 @@ view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnoma
 
 Zasada naczelna modułu (skrót): nigdy nie kwalifikuj czynu bez przejścia
 przez drzewo; kwalifikacja oparta na chronologii faktów, nie na pierwszym
-pasującym przepisie; każdy przepis weryfikowany w ISAP przed użyciem
+pasującym przepisie; każdy przepis weryfikowany w ELI (RZĄD 1) przed użyciem
 (zgodnie z zasadą 2 `prawo-polskie-v2/SKILL.md` / UP-2 routera). Jeśli czyn
 wyczerpuje znamiona więcej niż jednego przepisu — kwalifikacja kumulatywna
 (art. 11 § 2 KK), nie wybór arbitralny.
@@ -55,7 +55,7 @@ najpierw indeks, potem WYŁĄCZNIE właściwy plik części wg tabeli. Ścieżka
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -75,8 +75,8 @@ najpierw indeks, potem WYŁĄCZNIE właściwy plik części wg tabeli. Ścieżka
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -537,7 +537,7 @@ view dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-POKRYCIA.md
 ## Powiązania zewnętrzne
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja prawa: isap.sejm.gov.pl
+- Weryfikacja prawa: ELI (RZĄD 1)
 - Orzecznictwo: orzeczenia.ms.gov.pl, sn.pl, nsa.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)

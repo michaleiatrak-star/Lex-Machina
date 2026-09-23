@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.25"
+version: "3.26"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -63,7 +63,7 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog: |
-  Wersja bieżąca: 3.25. Pełna historia (19 wpisów, 3.1-3.25) w
+  Wersja bieżąca: 3.26. Pełna historia (19 wpisów, 3.1-3.26) w
   references/CHANGELOG.md — wczytuj na żądanie, NIE dopisuj wpisów tutaj
   (ZASADA 15; to pole było już dwukrotnie porządkowane: 2026-07-12 i F-78).
   Skrót ostatnich 3 zmian: 3.25 — naprawa wstawki F-115 wstawionej wewnątrz
@@ -332,7 +332,7 @@ WYNIK:
 >   analizy, nie jedną łączną ocenę).
 >
 > KROK 2 — Zweryfikuj ustawowe znamiona/przesłanki KAŻDEJ podstawy
->   przez ISAP lub zweryfikowane orzecznictwo — zgodnie z PRAWO-HARDGATE,
+>   przez ELI (RZĄD 1) lub zweryfikowane orzecznictwo — zgodnie z PRAWO-HARDGATE,
 >   zakaz cytowania znamion z pamięci bez weryfikacji. ⚠️ DODANE 2026-07-15:
 >   każdy cytat z orzeczenia lub interpretacji online użyty w tej analizie
 >   (np. do przygotowania pytania konfrontacyjnego opartego na tezie prawnej)
@@ -1067,7 +1067,7 @@ Przy wątkach niepowiązanych chronologicznie: porządek według wagi dowodowej.
 ### Scoring W2 (wstępny)
 
 > ⚙️ **Uwaga FPW:** Dla każdej tezy wskaż wstępnie przepis kandydujący ⚠️ [kandydat]
-> i oczekiwany wniosek procesowy. Pełna weryfikacja ISAP → W3 FPW-2.
+> i oczekiwany wniosek procesowy. Pełna weryfikacja w ELI (RZĄD 1) → W3 FPW-2.
 
 Oceń na skali 0–10 na podstawie:
 
@@ -1307,7 +1307,7 @@ Każde pytanie musi zawierać:
 
 ```
 FPW-1 FAKT:   [fakt procesowy + źródło: dok_id/strona/zeznanie/domniemanie]
-FPW-2 PRAWO:  [przepis → weryfikacja ISAP → ✅ [VER: ISAP, data] lub ⚠️ BRAK]
+FPW-2 PRAWO:  [przepis → weryfikacja w ELI (RZĄD 1) → ✅ [VER: ELI DU/RRRR/NNN, data] lub ⚠️ BRAK]
 FPW-3 WNIOSEK:→ TAK: [skutek dla tezy] | → NIE: [skutek dla tezy]
               Ryzyko FPW: BEZPIECZNE / RYZYKO-ODPOWIEDŹ / RYZYKO-KONTROLA / RYZYKO-KUMULACJA
 
@@ -1358,7 +1358,7 @@ Podstawy wymagające weryfikacji online (przykłady — nie wyczerpująca lista)
   KPW: odpowiednie stosowanie KPK (art. 39, 41)
   KPA: zeznania w postępowaniu administracyjnym (art. 83, 86)
 
-Dla każdej powołanej podstawy → web_search ISAP → oznacz ✅ [VER: ISAP, data]
+Dla każdej powołanej podstawy → odczyt z ELI (RZĄD 1) → oznacz ✅ [VER: ELI DU/RRRR/NNN, data]
 ```
 
 **Pełna logika klasyfikacji pytań:**

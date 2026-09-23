@@ -141,7 +141,7 @@ EWIDENCYJNE — art. 109, 109a, 110 ustawy VAT
 
 ✅ [VER: lexlege.pl — pełny tekst art. 109, 109a, 109b i 110 ustawy o VAT,
    Dz.U. 2025 poz. 775 t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ✅ [LUKA ZAMKNIĘTA 2026-08-12 (iteracja II): deklaracje (art. 99) i
    informacje podsumowujące (art. 100) opracowano w sekcji **5a** niżej.
    Niniejsza sekcja opisuje EWIDENCJĘ, sekcja 5a — DEKLARACJE.
@@ -276,7 +276,7 @@ dnia
    wyjaśniona (forma papierowa vs elektroniczna), próg kwartalny
    250 000/50 000 zł potwierdzony jako aktualny, nie historyczny —
    8 zgodnych źródeł, patrz adnotacja wyżej. Znacznik zamknięty]
-⚠️ [ZALECANA WERYFIKACJA ISAP — pozostaje wyłącznie dla art. 101–102
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — pozostaje wyłącznie dla art. 101–102
    (korekty informacji podsumowujących i delegacje) — NIEOPRACOWANE w
    tym module]
 ```
@@ -340,7 +340,7 @@ OBRONA NABYWCY:
   □ Zapłata na rachunek z białej listy podatników VAT
   □ Zastosowanie split payment (MPP) — zwalnia z odpowiedzialności
   □ Należyta staranność (weryfikacja sprzedawcy, cena rynkowa)
-  ⚠️ Weryfikuj aktualne przepisy art. 105a VAT w ISAP.
+  ⚠️ Weryfikuj aktualne przepisy art. 105a VAT w ELI (RZĄD 1).
 ```
 
 

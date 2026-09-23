@@ -261,4 +261,4 @@ ochronne), reformę 2022 r. (Dz.U. 2022 poz. 1726), mechanizm czynnego żalu
 (naprawienie szkody). Odnotowano NIEPEWNOŚCI: dokładna treść art. 187,
 188, 188a, dokładny wymiar kary art. 183 §1 i art. 184, oraz dokładny
 numer artykułu regulującego czynny żal (sekcja 8) — wszystkie oznaczone
-wprost do weryfikacji na ISAP przed użyciem w piśmie, zgodnie z ZASADA 13.
+wprost do weryfikacji w ELI (RZĄD 1) przed użyciem w piśmie, zgodnie z ZASADA 13.

@@ -15,7 +15,46 @@ Tekst jednolity ogłoszony w Dz.U. 2025 poz. 633 odzwierciedla stan prawny na 4.
 - Dz.U. 2026 poz. 901 — ustawa z 11.06.2026 r. zmieniająca KPK i KKS; obowiązuje od 21.07.2026;
 - Dz.U. 2026 poz. 846 — ustawa z 29.05.2026 r.; zasadnicza data wejścia w życie 1.10.2026, z wyjątkami wskazanymi w jej przepisie końcowym.
 
+- Dz.U. 2026 poz. 421 — ustawa z 13.02.2026 r. (KRK); obowiązuje od 14.04.2026; w KKS wyłącznie odesłanie w art. 113 § 3 pkt 2.
+
+⚠️ **Daty z `2026/846` (ogłoszona 25.06.2026, ✅ RZĄD 1 2026-09-16g):** art. 8 pkt 1–3 i 6 lit. b
+(uchylenie **art. 16b**, art. 80f, art. 133 § 1 pkt 1, art. 140 § 1b–1c) — **1.10.2026**; art. 8 pkt 4, 5
+i 6 lit. a (**mandat karny zaoczny** — art. 137, 138, 140 § 1 zd. 1) — **6 miesięcy od ogłoszenia,
+tj. 26.12.2026**.
+
 **Reguła temporalna:** nie stosuj zmian z datą przyszłą przed ich wejściem w życie. Przy stanie faktycznym rozciągniętym w czasie zawsze sprawdź art. 2 KKS i właściwe przepisy przejściowe.
+
+## 1a. TERMINY I PROGI KKS (dodane 2026-09-16g, F-135)
+
+✅ [VER] RZĄD 1 2026-09-16g — odczyt treści `Dz.U. 2025 poz. 633`; zmiany po t.j. sprawdzone.
+Tabela kanoniczna: `shared/terminy.md`, sekcja KKS.
+
+| Termin / wartość | Instytucja | Podstawa |
+|---|---|---|
+| **5 lat** od popełnienia | karalność przestępstwa skarbowego zagrożonego grzywną, ograniczeniem wolności albo pozbawieniem wolności **do 3 lat** | art. 44 § 1 pkt 1 KKS |
+| **10 lat** od popełnienia | karalność przestępstwa skarbowego zagrożonego pozbawieniem wolności **ponad 3 lata** | art. 44 § 1 pkt 2 KKS |
+| ⛔ bieg od **końca roku**, w którym upłynął termin płatności | przestępstwo polegające na uszczupleniu lub narażeniu na uszczuplenie należności (cło — od powstania długu celnego) | art. 44 § 3 KKS |
+| ⛔ karalność ustaje także z **przedawnieniem należności** | przestępstwo „uszczupleniowe" | art. 44 § 2 KKS |
+| **+5 lat** / **+10 lat** po upływie terminu z § 1 | gdy w okresie z § 1 lub § 2 **wszczęto postępowanie przeciwko sprawcy** | art. 44 § 5 KKS |
+| **rok** od popełnienia; **+2 lata** po wszczęciu postępowania | karalność **wykroczenia** skarbowego | art. 51 § 1–2 KKS |
+| **3 lata** od uprawomocnienia | niewykonanie kary za wykroczenie skarbowe | art. 51 § 3 KKS |
+| niezwłocznie, **najpóźniej w terminie wyznaczonym** przez finansowy organ postępowania przygotowawczego | zapłata należności przy **korekcie** (art. 16a); przy **czynnym żalu** (art. 16) — w terminie wyznaczonym przez uprawniony organ | art. 16 § 2, art. 16a § 2 KKS |
+| ⛔ do **wniesienia aktu oskarżenia** | wniosek o **dobrowolne poddanie się odpowiedzialności** (w postępowaniu finansowego organu) | art. 142 § 1 KKS |
+| ⛔ **nie przed upływem miesiąca** od złożenia; ponowny wniosek — niedopuszczalny | cofnięcie wniosku o dobrowolne poddanie się | art. 144 § 1–2 KKS |
+| ≥ **1/3** minimalnego wynagrodzenia (wykroczenie: ≥ **1/10**) | kwota tytułem grzywny przy wniosku o dobrowolne poddanie się | art. 143 § 1 pkt 2 KKS |
+| od **1/10** do **20-krotności** minimalnego wynagrodzenia; mandat ≤ **5-krotności**; wyrok nakazowy ≤ **10-krotności** | kara grzywny za wykroczenie skarbowe | art. 48 § 1–3 KKS |
+| ≤ **5-krotność** minimalnego wynagrodzenia | **ustawowy próg** — granica wykroczenia skarbowego | art. 53 § 3, § 6 KKS |
+| ≤ **200-krotność** / > **500-krotności** / > **1000-krotności** | **mała** / **duża** / **wielka** wartość (w czasie czynu) | art. 53 § 14–16 KKS |
+| **5 dni – 5 lat** | kara pozbawienia wolności, jeżeli kodeks nie stanowi inaczej | art. 27 § 1 KKS |
+| ⏳ **14 dni** od doręczenia mandatu | **mandat karny zaoczny** — zapłata; prawomocność z chwilą zapłaty w terminie; wpłata po terminie — zabezpieczenie, jeżeli postępowanie wszczęto w 14 dni od wpłaty, inaczej zwrot | art. 138 § 1 pkt 3, § 4 pkt 3, § 5a–5b KKS **w brzmieniu od 26.12.2026** (`Dz.U. 2026 poz. 846`) |
+
+⛔ **Kwoty „krotności" liczy się według minimalnego wynagrodzenia z CZASU CZYNU**
+(art. 53 § 3, § 14–16) — nie z dnia orzekania. Kotwica kwotowa: `shared/oplaty/04-wartosci-powtarzalne-kotwice.md`.
+⛔ **Art. 16 § 5:** czynny żal jest bezskuteczny po rozpoczęciu przeszukania, **czynności
+sprawdzającej** lub kontroli zmierzającej do ujawnienia czynu (chyba że nie dała podstaw do
+wszczęcia postępowania). **Art. 16a § 3:** korekta nie działa po wszczęciu postępowania
+przygotowawczego albo ujawnieniu czynu w jego toku.
+⚠️ **Od 1.10.2026** (`2026/846`): uchylony art. 16b; zmienione art. 80f i 133 § 1 pkt 1.
 
 ## 2. Mapa kodeksu
 

@@ -5,7 +5,7 @@
 > użytkownik pyta "co zmienić", "co jest ważne", "od czego zacząć negocjacje",
 > "jak przekonać drugą stronę", "co możemy odpuścić".
 
-> ⛔ HARD GATE — weryfikuj aktualne przepisy przez ISAP przed podaniem podstaw prawnych.
+> ⛔ HARD GATE — weryfikuj aktualne przepisy przez ELI (RZĄD 1) przed podaniem podstaw prawnych.
 >
 > **v1.17 — przed finalizacją strategii/wysłaniem kontrpropozycji:** uruchom
 > systematyczną ocenę adwersarialną zamiast polegać wyłącznie na intuicji co
@@ -298,4 +298,4 @@ MINIMUM AKCEPTOWALNE (bez podpisania):
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
 *Powiązane: Moduł D.3 (rekomendacje zmian), Moduł F (raport końcowy)*
-*Weryfikacja przepisów: isap.sejm.gov.pl · orzeczenia.ms.gov.pl*
+*Weryfikacja przepisów: ELI (RZĄD 1) · orzeczenia.ms.gov.pl*

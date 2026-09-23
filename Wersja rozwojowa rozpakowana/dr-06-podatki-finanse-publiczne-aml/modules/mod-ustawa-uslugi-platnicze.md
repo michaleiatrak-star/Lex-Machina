@@ -6,7 +6,7 @@
   VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001572 [2026-05-31]
 - Implementacja Dyrektywy PSD2 (UE 2015/2366)
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## ⭐⭐⭐ PSD3/PSR — POPRAWIONY STATUS 2026-08-11 (na żądanie
 użytkownika, kontynuacja badania pokrycia)

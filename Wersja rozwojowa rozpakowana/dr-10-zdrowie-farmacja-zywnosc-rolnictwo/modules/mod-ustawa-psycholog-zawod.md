@@ -109,7 +109,7 @@ przejściowych dot. nauczycieli-psychologów):
     zakresu czynności
   → art. 94 ust. 1: katalog kar dyscyplinarnych, w tym pkt 4 (ograniczenie
     zakresu czynności) i pkt 5 (zawieszenie prawa wykonywania zawodu)
-  → WERYFIKUJ pełny katalog i procedurę w ISAP przed powołaniem — powyżej
+  → WERYFIKUJ pełny katalog i procedurę w ELI (RZĄD 1) przed powołaniem — powyżej
     tylko fragmenty potwierdzone przez cytowania w przepisach przejściowych
     Karty Nauczyciela
 

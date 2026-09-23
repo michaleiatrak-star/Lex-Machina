@@ -13,7 +13,7 @@
   eksploatacyjna, art. 168 sankcja). Treść modułu POTWIERDZONA jako
   aktualna mimo zmiany numeru t.j.
 
-**Weryfikacja:** isap.sejm.gov.pl + MŚ przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) + MŚ przed każdym cytowaniem.
 
 ## Zakres
 Reguluje poszukiwanie, rozpoznawanie i wydobywanie kopalin ze złóż, podziemne
@@ -38,5 +38,5 @@ Organ nadzoru:   Wyższy Urząd Górniczy (WUG) — nadzór nad bezpieczeństwem
 
 ## Weryfikacja online
 ```
-web_search: "prawo geologiczne górnicze Dz.U. 2024 poz. 1290 isap tekst jednolity"
+web_search: "prawo geologiczne górnicze Dz.U. 2026 poz. 69 isap tekst jednolity"
 ```

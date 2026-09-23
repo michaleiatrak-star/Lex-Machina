@@ -39,7 +39,7 @@ KLUCZOWY PRZEPIS — Art. 28 ust. 3 RODO:
   □ Usunięcie lub zwrot danych po zakończeniu przetwarzania
   □ Udostępnienie wszelkich niezbędnych informacji + prawo do audytu
   
-  SANKCJA za brak DPA: art. 83 ust. 4 RODO → kara do 10 mln EUR lub 2% obrotu
+  SANKCJA za brak DPA: art. 83 ust. 4 RODO → do 10 000 000 EUR, a w przypadku przedsiębiorstwa do 2 % całkowitego rocznego światowego obrotu z poprzedniego roku obrotowego, **kwota wyższa** (obowiązki z art. 8, 11, 25–39, 42 i 43). ⚠️ Przy kilku naruszeniach w tych samych lub powiązanych operacjach — łączna kara nie przekracza pułapu za najpoważniejsze naruszenie (ust. 3). ✅ [VER] RZĄD 1 2026-09-17u — Cellar (Urząd Publikacji UE), polska wersja CELEX 32016R0679
   Przykłady kar UODO za brak/wadliwą umowę powierzenia — zweryfikuj aktualne decyzje: uodo.gov.pl/pl/decyzje-prezesa-uodo
 ```
 
@@ -162,7 +162,7 @@ PUŁAPKA RO-2 — Brak klauzuli podpowierzenia (HIGH RISK)
 
 PUŁAPKA RO-3 — Termin powiadomienia o naruszeniu dłuższy niż 72h (CRITICAL)
   PROBLEM: "Procesor powiadomi Administratora o naruszeniu w terminie 7 dni."
-  → Art. 33 RODO: Administrator ma 72h na zgłoszenie UODO od powzięcia wiedzy
+  → Art. 33 ust. 1 RODO: zgłoszenie bez zbędnej zwłoki, w miarę możliwości nie później niż 72 h po STWIERDZENIU naruszenia; brak obowiązku przy mało prawdopodobnym ryzyku (✅ [VER] RZĄD 1 2026-09-17q — EUR-Lex, tekst skonsolidowany 02016R0679)
   → Jeśli Procesor powiadamia po 7 dniach → Administrator nie zdąży z notyfikacją
   REKOMENDACJA:
     "§X. Procesor zgłasza Administratorowi każde naruszenie bezpieczeństwa

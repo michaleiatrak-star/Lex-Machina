@@ -16,9 +16,13 @@ compatibility:
 
 | Akt | Zakres |
 |---|---|
-| Ustawa o prawach pacjenta i RPP | prawa pacjenta, dokumentacja, RPP |
-| Ustawa o działalności leczniczej | podmioty lecznicze |
-| Kodeks cywilny | szkoda, zadośćuczynienie, odpowiedzialność |
+| Ustawa o prawach pacjenta i RPP — t.j. `Dz.U. 2024 poz. 581` | prawa pacjenta, dokumentacja, RPP |
+| Ustawa o działalności leczniczej — t.j. `Dz.U. 2026 poz. 156` | podmioty lecznicze |
+| Kodeks cywilny — t.j. `Dz.U. 2026 poz. 795` | szkoda, zadośćuczynienie, odpowiedzialność |
+
+✅ [VER] RZĄD 1 2026-09-16 — statusy trzech t.j. (ELI: obowiązujące). Numery dopisane po T5
+(F-190): ROUTING-MAP wskazywał ten moduł, ale żaden moduł dr-10 nie cytował numeru t.j.
+ustawy o działalności leczniczej. KROK 2C (nowelizacje po t.j.) — przy sprawie.
 | Kodeks karny | narażenie, uszczerbek, nieumyślne spowodowanie śmierci |
 
 ## ANALIZA BŁĘDU MEDYCZNEGO

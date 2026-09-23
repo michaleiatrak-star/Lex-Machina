@@ -127,4 +127,4 @@ references/mod-FA-founders-dokumenty-zalozycielskie.md (J20)*
 *Dla polityki prywatności / RCP / RODO wewnętrzne / archiwizacja / regulamin
 pracy-wynagradzania-ZFŚS-monitoringu → references/mod-J21-rodo-archiwizacja-
 regulaminy.md (J21)*
-*Prawo weryfikuj ZAWSZE w ISAP · Parametry (kwoty, stawki) weryfikuj online — zmieniają się!*
+*Prawo weryfikuj ZAWSZE w ELI (RZĄD 1) · Parametry (kwoty, stawki) weryfikuj online — zmieniają się!*

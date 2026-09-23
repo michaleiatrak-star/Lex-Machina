@@ -6,7 +6,7 @@
   VER: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20250000644 [2026-05-31]
 - Strategia RM: uchwala Nr 75 RM z 26.02.2026 (M.P. poz. 247)
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Instytucje obowiazane (art. 2 ust. 1) - wyb.
 ```

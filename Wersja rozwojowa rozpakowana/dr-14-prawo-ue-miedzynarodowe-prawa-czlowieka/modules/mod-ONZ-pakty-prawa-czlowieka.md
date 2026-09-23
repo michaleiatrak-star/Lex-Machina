@@ -9,7 +9,7 @@
 - Protokół fakultatywny do MPPOiP (skarga indywidualna do KPCz ONZ)
   Dz.U. 1994 nr 23 poz. 80
 
-**Weryfikacja:** isap.sejm.gov.pl + ohchr.org przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) + ohchr.org przed każdym cytowaniem.
 
 ## Zakres
 MPPOiP: prawo do życia, zakaz tortur, wolność od niewolnictwa, prawo do sądu,

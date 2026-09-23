@@ -17,7 +17,7 @@ Partie polityczne (rejestracja, finanse, subwencja, sprawozdania, delegalizacja)
 |---|---|
 | Ustawa o partiach politycznych z dnia 27 czerwca 1997 r. | Dz.U. 2023 poz. 1215 t.j. |
 | Ustawa o referendum ogólnokrajowym z dnia 14 marca 2003 r. | Dz.U. 2025 poz. 300 t.j. ze zm. |
-| Ustawa o referendum lokalnym | weryfikuj aktualny t.j. w ISAP |
+| Ustawa o referendum lokalnym | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | Ustawa o wykonywaniu inicjatywy ustawodawczej przez obywateli | weryfikuj aktualny t.j. w ISAP |
 | Konstytucja RP — art. 11, 13, 62, 118 ust. 2, 125 | Dz.U. 1997 nr 78 poz. 483 |
 
@@ -41,18 +41,18 @@ Partie polityczne (rejestracja, finanse, subwencja, sprawozdania, delegalizacja)
 |---|---|
 | Organ rejestrowy | Sąd Okręgowy w Warszawie (Wydział ds. Partii Politycznych) |
 | Minimum założycieli | Weryfikuj aktualny art. 11 ustawy o partiach w ISAP |
-| Forma zgłoszenia | Weryfikuj aktualne wymogi formalne w ISAP |
+| Forma zgłoszenia | Weryfikuj aktualne wymogi formalne w ELI (RZĄD 1) |
 | Nabycie praw | Z chwilą wpisu do ewidencji partii politycznych |
 | Ewidencja | Prowadzi Sąd Okręgowy w Warszawie — jawna |
 
 ### Finanse partii — zasady absolutne
 
-> ⚠️ Kwoty, progi i terminy — weryfikuj aktualną ustawę o partiach w ISAP.
+> ⚠️ Kwoty, progi i terminy — weryfikuj aktualną ustawę o partiach w ELI (RZĄD 1).
 
 ```
 DOPUSZCZALNE ŹRÓDŁA FINANSOWANIA:
   □ Składki członkowskie
-  □ Darowizny od osób fizycznych (limit roczny — weryfikuj w ISAP)
+  □ Darowizny od osób fizycznych (limit roczny — weryfikuj w ELI (RZĄD 1))
   □ Dotacje z budżetu państwa (na działalność statutową)
   □ Subwencje wyborcze z budżetu państwa
   □ Kredyty bankowe na cele statutowe
@@ -68,21 +68,21 @@ BEZWZGLĘDNY ZAKAZ:
 
 ### Subwencja z budżetu państwa — progi
 
-> ⚠️ Progi procentowe i kwoty subwencji — weryfikuj aktualne przepisy ustawy w ISAP oraz PKW przed każdą sprawą.
+> ⚠️ Progi procentowe i kwoty subwencji — weryfikuj aktualne przepisy ustawy w ELI (RZĄD 1) oraz PKW przed każdą sprawą.
 
 ```
 Partia samodzielna: co do zasady wynik ≥ 3% głosów ważnych
 Koalicja:           co do zasady wynik ≥ 6% głosów ważnych
-⚠️ Progi mogą być zmienione ustawą — ZAWSZE weryfikuj aktualne brzmienie w ISAP.
+⚠️ Progi mogą być zmienione ustawą — ZAWSZE weryfikuj aktualne brzmienie w ELI (RZĄD 1).
 ```
 
 ### Sprawozdania finansowe partii
 
 ```
 Obowiązek: partia składa coroczne sprawozdanie finansowe do PKW
-Termin: weryfikuj aktualny termin w ustawie o partiach w ISAP
+Termin: weryfikuj aktualny termin w ustawie o partiach w ELI (RZĄD 1)
 Kontrola PKW: PKW może przyjąć, odrzucić lub zmniejszyć subwencję
-Odwołanie od decyzji PKW: weryfikuj tryb w ustawie o partiach w ISAP
+Odwołanie od decyzji PKW: weryfikuj tryb w ustawie o partiach w ELI (RZĄD 1)
 Skutek odrzucenia: utrata prawa do subwencji lub dotacji
 ```
 
@@ -94,7 +94,7 @@ Skutek odrzucenia: utrata prawa do subwencji lub dotacji
 | Dobrowolna likwidacja | Organy partii zgodnie ze statutem | statut partii |
 | Wykreślenie przez SO | Sąd Okręgowy w Warszawie | nespełnianie warunków ustawowych |
 
-**Art. 13 Konstytucji — zakaz (weryfikuj brzmienie w ISAP):**
+**Art. 13 Konstytucji — zakaz (weryfikuj brzmienie w ELI (RZĄD 1)):**
 Partie odwołujące się w swoich programach do totalitarnych metod i praktyk działania nazizmu, faszyzmu i komunizmu, a także te, których program lub działalność zakłada lub dopuszcza nienawiść rasową i narodowościową, stosowanie przemocy w celu zdobycia władzy lub wpływu na politykę państwa albo przewiduje utajnienie struktur lub członkostwa.
 
 ---
@@ -102,7 +102,7 @@ Partie odwołujące się w swoich programach do totalitarnych metod i praktyk dz
 ## 4. REFERENDUM OGÓLNOKRAJOWE
 
 > **Podstawa:** art. 125 Konstytucji + Ustawa o referendum — Dz.U. 2025 poz. 300 t.j. ze zm.
-> ⚠️ Weryfikuj aktualne przepisy w ISAP.
+> ⚠️ Weryfikuj aktualne przepisy w ELI (RZĄD 1).
 
 ### Rodzaje i zarządzenie
 
@@ -132,7 +132,7 @@ SKUTEK WYNIKU WIĄŻĄCEGO:
 
 ## 5. REFERENDUM LOKALNE
 
-> **Podstawa:** Ustawa o referendum lokalnym — weryfikuj aktualny t.j. w ISAP.
+> **Podstawa:** Ustawa o referendum lokalnym — weryfikuj aktualny t.j. w ELI (RZĄD 1).
 
 ```
 Przedmiot: sprawy dotyczące wspólnoty samorządowej
@@ -143,9 +143,9 @@ Zarządzenie:
   → Mieszkańcy — inicjatywa obywatelska (próg podpisów: weryfikuj w ustawie)
 
 Wynik wiążący: udział > 30% uprawnionych do głosowania
-  Odwołanie organu: > 3/5 głosów ZA (weryfikuj aktualne przepisy w ISAP)
+  Odwołanie organu: > 3/5 głosów ZA (weryfikuj aktualne przepisy w ELI (RZĄD 1))
 
-⚠️ Progi i warunki mogą ulec zmianie — weryfikuj aktualny t.j. w ISAP.
+⚠️ Progi i warunki mogą ulec zmianie — weryfikuj aktualny t.j. w ELI (RZĄD 1).
 ```
 
 ---
@@ -155,7 +155,7 @@ Wynik wiążący: udział > 30% uprawnionych do głosowania
 ```
 Liczba podpisów: 100 000 obywateli uprawnionych do głosowania
 Procedura: Ustawa o wykonywaniu inicjatywy ustawodawczej przez obywateli
-  → weryfikuj aktualny t.j. w ISAP
+  → weryfikuj aktualny t.j. w ELI (RZĄD 1)
 Termin na zebranie podpisów: weryfikuj w ustawie
 Złożenie: Marszałek Sejmu → projekt traci moc po kadencji
   (zasada dyskontynuacji — wyjątek dla inicjatyw obywatelskich: weryfikuj)

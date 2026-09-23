@@ -139,7 +139,7 @@ WEKSEL WŁASNY (art. 101) — analogiczne elementy, BEZ trasata (bo
 
 ```
 ⚠️ Terminy przedawnienia z prawa wekslowego są ZNACZĄCO KRÓTSZE niż
-ogólne terminy cywilne — ZAWSZE weryfikuj dokładne terminy na ISAP
+ogólne terminy cywilne — ZAWSZE weryfikuj dokładne terminy w ELI (RZĄD 1)
 przy konkretnej sprawie (orientacyjnie: roszczenia przeciw akceptantowi
 — 3 lata; przeciw indosantom/wystawcy — 1 rok; regres między
 indosantami — 6 miesięcy — ⚠️ dokładne terminy niepotwierdzone
@@ -467,4 +467,4 @@ i doktrynalnym sporem co do charakteru prawnego wpisu do rejestru
 dokładne limity czasu trwania kontroli wg wielkości przedsiębiorcy
 (art. 54-56 Prawa przedsiębiorców), dokładne terminy przedawnienia
 wekslowego, dokładna podstawa prawna odszkodowania za nieprawidłową
-kontrolę — oznaczone do dalszej weryfikacji na ISAP.
+kontrolę — oznaczone do dalszej weryfikacji w ELI (RZĄD 1).

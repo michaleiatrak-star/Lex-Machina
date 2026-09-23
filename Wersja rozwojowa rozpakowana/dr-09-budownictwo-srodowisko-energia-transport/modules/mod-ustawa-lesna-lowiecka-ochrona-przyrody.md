@@ -1,6 +1,6 @@
 # mod-CP-lesne-lowieckie-przyroda.md — Prawo leśne, łowieckie i ochrona przyrody
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ⭐ Merytoryczna treść 10 form ochrony przyrody (art. 6 ustawy) z podziałem
 na typy i zróżnicowane reżimy ograniczeń → `mod-formy-ochrony-przyrody-

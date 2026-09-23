@@ -1,12 +1,13 @@
 # Moduł — Charakterystyka energetyczna budynków i certyfikaty energetyczne
 
 ## Akt prawny / źródło
-- Ustawa o charakterystyce energetycznej budynków — Dz.U. 2024 poz. 544 ze zm.
+- Ustawa o charakterystyce energetycznej budynków — t.j. **Dz.U. 2024 poz. 101** ze zm. — ✅ [VER] RZĄD 1 2026-09-16d
+  (⛔ poprzedni zapis `2024 poz. 544` to rozporządzenie MON — podmiana aktu)
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
 - Dyrektywa EPBD (2010/31/UE + rewizja 2024/1275/UE — EPBD recast)
   ✅ [VER: EUR-Lex, 2026-05-31]
 
-**Weryfikacja:** isap.sejm.gov.pl i EUR-Lex przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) i EUR-Lex przed każdym cytowaniem.
 
 ## Zakres
 Certyfikat energetyczny: obowiązkowy przy sprzedaży lub najmie budynku/lokalu
@@ -34,6 +35,6 @@ Kluczowe: Klasy A-G na europejskiej skali; plan renowacji budynków; MEPS (min. 
 
 ## Weryfikacja online
 ```
-web_search: "ustawa charakterystyka energetyczna budynków certyfikat Dz.U. 2024 poz. 544"
+web_search: "ustawa charakterystyka energetyczna budynków certyfikat Dz.U. 2024 poz. 101"
 web_search: "dyrektywa EPBD recast 2024 Polska transpozycja 2026"
 ```

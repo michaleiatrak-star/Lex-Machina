@@ -179,7 +179,7 @@ Checklist praktyczny:
   kryteria MIARKOWANIA z ust. 2b oraz NA linię TSUE Grupa Warzywna,
   JEŚLI okoliczności wskazują NA brak celowego DZIAŁANIA
 
-⚠️ Weryfikuj aktualne brzmienie art. 112b-112c w ISAP — TO obszar Z
+⚠️ Weryfikuj aktualne brzmienie art. 112b-112c w ELI (RZĄD 1) — TO obszar Z
   ISTOTNĄ, DOŚĆ ŚWIEŻĄ reformą (2023) — STARSZE orzecznictwo/
   komentarze SPRZED tej daty WYMAGAJĄ ostrożnego STOSOWANIA (część
   argumentacji, np. CO do samej ZASADY proporcjonalności, POZOSTAJE
@@ -475,7 +475,7 @@ z zarzutem karnoskarbowym)
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
    art. 108 ust. 1–3, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -568,7 +568,7 @@ występował w całym DR-06)
 ✅ [VER: lexlege.pl — pełny tekst art. 88 ustawy o VAT, Dz.U. 2025 poz. 775
    t.j., stan prawny na 12.08.2026; pobrane 2026-08-12; brzmienie
    potwierdzone dodatkowo w arslege.pl i eureka.mf.gov.pl]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -722,12 +722,15 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
    wyszukiwania + 6 zgodnych źródeł Rząd 2: infor.pl, inforlex.pl,
    przepisy.gofin.pl, vademecumpodatnika.pl, platformaedukacyjna.eu,
    izbapodatkowa.pl). ⭐ USTALENIE DODATKOWE: rozporządzenie doczekało
-   się TEKSTU JEDNOLITEGO — Dz.U. 2021 poz. 999 z 2.06.2021, z
-   późniejszą zmianą Dz.U. 2020 poz. 289 — ⚠️ ten t.j. NIE był dotąd
-   przywoływany w module, rekomendacja: przy najbliższym audycie
-   Ordynacji/VAT rozważyć aktualizację odesłania z "Dz.U. 2015 poz.
-   2193" na "t.j. Dz.U. 2021 poz. 999" dla precyzji cytowania.
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
+   się TEKSTU JEDNOLITEGO — **t.j. Dz.U. 2021 poz. 999** (obwieszczenie
+   MFFiPR z 20.05.2021). ✅ [VER] RZĄD 1 2026-09-16e (ELI): `2021/999` —
+   obowiązujący; `2015/2193` — „akt posiada tekst jednolity"; `2020/289`
+   (rozporządzenie zmieniające z 20.02.2020) — „akt objęty tekstem
+   jednolitym", czyli zmiana WCZEŚNIEJSZA niż t.j. i w nim uwzględniona
+   (⛔ poprzedni zapis „późniejszą zmianą 2020 poz. 289" był chronologicznie
+   sprzeczny). **Cytuj: t.j. Dz.U. 2021 poz. 999.** Rekomendacja
+   zamknięta 2026-09-16e (O-11(c)).
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — w szczególności aktualny status i tekst
    rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
    źródle urzędowym]
 ✅ [POZYCJA ZAMKNIĘTA 2026-08-20 (F-18) — znacznik wyżej był NIEAKTUALNY,

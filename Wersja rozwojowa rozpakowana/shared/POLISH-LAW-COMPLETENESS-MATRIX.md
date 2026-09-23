@@ -1,7 +1,7 @@
 # POLISH-LAW-COMPLETENESS-MATRIX — mapa kompletności prawa polskiego
 
 ## Status
-Ten plik jest rejestrem jakościowym. Nie jest źródłem brzmienia prawa. Brzmienie prawa i Dz.U. weryfikuj w ISAP.
+Ten plik jest rejestrem jakościowym. Nie jest źródłem brzmienia prawa. Brzmienie prawa i Dz.U. weryfikuj w ELI (RZĄD 1).
 
 ## Poziomy dojrzałości modułu
 

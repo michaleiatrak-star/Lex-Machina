@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.32"
+version: "1.39"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -537,5 +537,5 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 *SHARED systemowe (shared/): INTAKE-GAP · HYBRID-VALIDATION · POST-VALIDATION*
 *             MOD-WALIDACJA_v2 · FAKTY_v2 · terminy · raport-sytuacyjny-integracja*
 *             DISCLAIMER · SYGNATURY · WERYFIKACJA-SLAD*
-*Weryfikacja: isap.sejm.gov.pl · rejestr.uokik.gov.pl · uokik.gov.pl · eur-lex.europa.eu*
+*Weryfikacja: ELI (RZĄD 1) · rejestr.uokik.gov.pl · uokik.gov.pl · eur-lex.europa.eu*
 *             sn.pl · orzeczenia.ms.gov.pl · curia.europa.eu · saos.org.pl · uodo.gov.pl · nbp.pl*

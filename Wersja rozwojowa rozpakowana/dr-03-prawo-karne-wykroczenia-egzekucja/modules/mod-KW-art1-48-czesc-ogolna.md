@@ -111,7 +111,7 @@ a orzeczenie łagodniejszego nie stoi na przeszkodzie wykonaniu surowszego
 
 ### Art. 10a — wykonywanie kary/środka przy zbiegu kar
 Reguły techniczne wykonawcze przy zbiegu kar lub środków karnych z różnych
-rozstrzygnięć — weryfikuj szczegółowo w ISAP przy konkretnym stanie
+rozstrzygnięć — weryfikuj szczegółowo w ELI (RZĄD 1) przy konkretnym stanie
 faktycznym zbiegu (przepis techniczny, rzadko samodzielnie decydujący).
 
 ### Art. 11 — usiłowanie
@@ -287,7 +287,7 @@ Nie stosować — przepis formalnie usunięty z systemu.
 
 ### Art. 38 — recydywa wielokrotna (nadzwyczajne zaostrzenie)
 Podstawa nadzwyczajnego ZAOSTRZENIA kary przy wielokrotnym powrocie do
-podobnego wykroczenia — sprawdź szczegółowe przesłanki w ISAP przy
+podobnego wykroczenia — sprawdź szczegółowe przesłanki w ELI (RZĄD 1) przy
 konkretnym stanie faktycznym (przepis techniczny o wysokiej zmienności
 interpretacyjnej).
 
@@ -363,7 +363,7 @@ efektywnie okres do zatarcia ponad podstawowe 2 lata.
 
 ### Art. 47 — słowniczek ustawowy
 Definicje pojęć używanych w KW (np. "mienie znacznej wartości",
-"korzyść majątkowa" itp.) — sprawdź konkretną definicję w ISAP przy
+"korzyść majątkowa" itp.) — sprawdź konkretną definicję w ELI (RZĄD 1) przy
 kwalifikacji czynu z części szczególnej, gdzie dane pojęcie występuje.
 
 ### Art. 48 — stosunek do ustaw szczególnych (przepis "łącznikowy")

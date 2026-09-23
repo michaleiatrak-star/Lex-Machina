@@ -75,7 +75,7 @@ nawet jeśli nowe prawo już obowiązuje.
 ### Krok VL-1 — Identyfikacja struktury czasowej
 
 ```
-Dla analizowanego aktu na ISAP sprawdź:
+Dla analizowanego aktu w ELI (RZĄD 1) sprawdź:
   1. Data ogłoszenia w Dz.U. (kolumna "Ogłoszono")
   2. Data wejścia w życie (kolumna "Obowiązuje od")
   3. Czy są przepisy końcowe z różnymi datami? → wczytaj art. końcowy ustawy

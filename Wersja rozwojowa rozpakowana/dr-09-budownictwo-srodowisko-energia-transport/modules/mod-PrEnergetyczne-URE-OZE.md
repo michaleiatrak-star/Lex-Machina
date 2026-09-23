@@ -83,6 +83,61 @@ DUŻE FARMY OZE ≥10 MW: od LIPCA 2026 R. obowiązek sprzedaży min. 80%
 w konkretnej sprawie, zwłaszcza próg mocy dla małej instalacji, który
 był PODNOSZONY WIELOKROTNIE.
 
+## ⛔ NOWELIZACJA `Dz.U. 2026 poz. 516` — REFORMA PRZYŁĄCZEŃ (dodano 2026-09-16, F-190)
+
+✅ [VER] RZĄD 1 2026-09-16 — odczyt treści `Dz.U. 2026 poz. 516` (ustawa z 13.03.2026
+o zmianie ustawy – Prawo energetyczne oraz niektórych innych ustaw; ogłoszona 15.04.2026).
+Zmienia w PE (t.j. `Dz.U. 2026 poz. 43`) m.in. art. 3, 4j, 5, 5ad, 5ga, 5gb, 6g, **7**, 16,
+33a, 33c, 43g, 50b, 56 oraz ustawę o OZE, UPEA (art. 3a), giełdach towarowych i innych.
+
+**Wejście w życie (art. 38):** zasada — 14 dni od ogłoszenia (**30.04.2026**, zgodnie z ELI);
+część przepisów (art. 1 pkt 14 lit. a tiret pierwsze i lit. d, pkt 20, art. 34) — dzień po
+ogłoszeniu; **art. 9 ust. 1, 3, 4 pkt 1, ust. 5, art. 11 ust. 1, 3, 4 pkt 1 i 3, art. 13 i 14
+ustawy zmieniającej — po 6 miesiącach od ogłoszenia (16.10.2026)**.
+⚠️ „Art. 9, 11, 13, 14" to artykuły USTAWY ZMIENIAJĄCEJ (przepisy przejściowe), nie PE.
+
+### ⛔⛔ Wygaśnięcie umów o przyłączenie Z MOCY PRAWA (art. 13–14 ustawy zmieniającej)
+
+Dotyczy umów z art. 7 ust. 1 PE dla instalacji lub sieci przyłączanej do sieci
+**powyżej 1 kV**. Umowa wygasa, jeżeli podmiot **nie zawiadomi operatora** o uzyskaniu
+**ostatecznej decyzji o pozwoleniu na budowę** (gdy prawo budowlane jej wymaga) w terminie:
+
+| Umowa zawarta | Instalacja | Termin zawiadomienia | Podstawa |
+|---|---|---|---|
+| nie wcześniej niż 48 mies. przed wejściem ustawy w życie | PV + przekształtniki (≥ 80 % mocy); magazyn bateryjny (≥ 80 % mocy i pojemności); urządzenia odbiorcze (≥ 50 % mocy) | **30 miesięcy** | art. 13 ust. 1 pkt 1 |
+| jw. | turbina wiatrowa (≥ 80 %); biogaz / biogaz rolniczy (≥ 80 %); transformatory i rozdzielnie | **42 miesiące** | art. 13 ust. 1 pkt 2 |
+| jw. | zasilanie kolejowej sieci trakcyjnej / sterowanie ruchem kolejowym | **60 miesięcy** | art. 13 ust. 1 pkt 3 |
+| **wcześniej** niż 48 mies. przed wejściem ustawy w życie | turbina wiatrowa (≥ 80 %) | **6 miesięcy** | art. 14 ust. 1 pkt 1 |
+| jw. | pozostałe instalacje z art. 13 ust. 1 pkt 1 i pkt 2 lit. b–c | **3 miesiące** | art. 14 ust. 1 pkt 2 |
+
+Terminy liczone „od dnia wejścia w życie niniejszej ustawy". Art. 14 **nie stosuje się**
+do przyłączeń kolejowych ani do umów, na podstawie których przed wejściem ustawy w życie
+przyłączono co najmniej część instalacji (art. 14 ust. 2). Do umów z art. 13–14 stosuje się
+art. 7 ust. 2b–2j (art. 14: 2h–2j) PE, a **dodatkowe zabezpieczenie z art. 7 ust. 2i pkt 2 —
+w połowie kwoty** (art. 13 ust. 2, art. 14 ust. 3).
+
+⛔ **NIEROZSTRZYGNIĘTE — punkt startowy biegu terminów.** Art. 13–14 wchodzą w życie
+16.10.2026, a liczą terminy „od dnia wejścia w życie niniejszej ustawy" — ustawa jako całość
+weszła 30.04.2026. Przy odczycie „od 30.04.2026" 3-miesięczny termin z art. 14 ust. 1 pkt 2
+upłynąłby **przed** wejściem w życie samego przepisu (30.07.2026 < 16.10.2026), a 6-miesięczny
+z pkt 1 — dwa tygodnie po nim. Przy odczycie „od 16.10.2026" terminy biegną od daty wejścia
+art. 13–14. **Nie rozstrzygaj za klienta:** przyjmij datę WCZEŚNIEJSZĄ jako graniczną dla
+zawiadomienia, sprawdź stanowisko URE / operatora i orzecznictwo przy sprawie, a spór
+o wygaśnięcie umowy traktuj jako realne ryzyko. Zawiadomienie — pisemnie, z dowodem
+doręczenia i kopią ostatecznej decyzji.
+
+**Pozostałe przepisy przejściowe (odczyt przy sprawie):** art. 9 — zaliczka z art. 7 ust. 8a
+przy warunkach przyłączenia wydanych przed wejściem ustawy i ważnych co najmniej 6 miesięcy
+dłużej (m.in. 60 miesięcy dla kolei); art. 11 — podmiot z art. 7 ust. 8c1, który przed
+wejściem ustawy otrzymał warunki przyłączenia, ale nie zawarł umowy, składa zabezpieczenie
+w wysokości **1/4** kwoty z art. 7 ust. 8c1, w terminie z art. 7 ust. 8c9 (zaliczane na poczet
+opłaty przyłączeniowej); art. 15 — sprawy sporne o odmowę zawarcia umowy (art. 8 ust. 1 PE)
+wszczęte przed wejściem ustawy — **przepisy dotychczasowe**; art. 22 — przyłączenia
+kolejowe zwolnione z opłaty za wniosek (art. 7 ust. 8b1–8b2) przez 60 miesięcy; art. 23 —
+ograniczenie zmian warunków przyłączenia (art. 7 ust. 8i3) — zakres czasowy: odczyt przy sprawie.
+
+---
+
 ## PROSUMENT / PV
 
 Sprawdzaj: data zgłoszenia, system rozliczeń, moc instalacji, umowa kompleksowa, reklamacje faktur, błędy licznika, niedotrzymanie terminów.

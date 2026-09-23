@@ -5,8 +5,8 @@
 > nieruchomości, umowa rezerwacyjna, umowa sprzedaży lokalu/domu, umowa
 > o roboty budowlane (od strony nabywcy), umowa z deweloperem remontu.
 
-> ⛔ HARD GATE — wszystkie przepisy UUDE, KC art. 389–396 weryfikuj w ISAP.
-> Weryfikacja: isap.sejm.gov.pl → Dz.U. 2024 poz. 695 (UUDE t.j.)
+> ⛔ HARD GATE — wszystkie przepisy UUDE, KC art. 389–396 weryfikuj w ELI (RZĄD 1).
+> Weryfikacja: isap.sejm.gov.pl → Dz.U. 2026 poz. 880 (UUDE t.j.; poprzedni t.j. 2024 poz. 695 — wygasły, ✅ [VER] RZĄD 1 2026-09-16)
 > Rejestr deweloperów: oficjalny rejestr/wykaz inwestycji deweloperskich prowadzony przez właściwy organ — wyszukaj przez gov.pl; odpis KW: ekw.ms.gov.pl (zweryfikuj aktualny adres rejestru)
 
 ---
@@ -19,7 +19,7 @@ KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty):
 1. Ustawa z 20.05.2021 o ochronie praw nabywcy lokalu mieszkalnego lub domu
    jednorodzinnego oraz Deweloperskim Funduszu Gwarancyjnym (UUDE)
    Obowiązuje: od 01.07.2022 r. dla nowych inwestycji
-   isap.sejm.gov.pl → Dz.U. 2024 poz. 695 t.j.
+   isap.sejm.gov.pl → Dz.U. 2026 poz. 880 t.j.
    
 2. Kodeks cywilny:
    Art. 389–390: umowa przedwstępna (słaby/silny skutek)
@@ -29,7 +29,7 @@ KLUCZOWE AKTY PRAWNE (weryfikuj aktualne teksty):
    Art. 556–576: rękojmia za wady
    
 3. Ustawa o własności lokali: Dz.U. 2000 poz. 903 (sygnatura pierwotna)
-   ⚠ Weryfikuj aktualny tekst jednolity: isap.sejm.gov.pl → "ustawa o własności lokali"
+   ⚠ Weryfikuj aktualny tekst jednolity: ELI (RZĄD 1) → "ustawa o własności lokali"
 
 UWAGA PRZEJŚCIOWA: Inwestycje z rachunkiem powierniczym otwartym przed 01.07.2022
   mogą podlegać starej ustawie deweloperskiej z 2011 r.
@@ -68,7 +68,7 @@ ALERT: Brak któregokolwiek z elementów → umowa może być nieważna lub naby
 ### DW-1 — Brak lub wadliwy Mieszkaniowy Rachunek Powierniczy (CRITICAL)
 
 ```
-PRAWO (art. 7–9 UUDE — weryfikuj: isap.sejm.gov.pl → UUDE):
+PRAWO (art. 7–9 UUDE — weryfikuj: ELI (RZĄD 1) → UUDE):
   OBOWIĄZKOWY MRP dla każdej inwestycji od 01.07.2022
   Rachunki powiernicze:
   □ OTWARTY MRP: Bank wypłaca deweloperowi po zakończeniu etapów budowy
@@ -93,7 +93,7 @@ SPRAWDŹ:
 ### DW-2 — Klauzule odstąpienia od umowy (CRITICAL)
 
 ```
-PRAWO (art. 43 UUDE — weryfikuj w ISAP):
+PRAWO (art. 43 UUDE — weryfikuj w ELI (RZĄD 1)):
   Nabywca może odstąpić od umowy deweloperskiej gdy:
   1. Prospekt informacyjny zawiera informacje niezgodne z umową (14 dni)
   2. Brak w umowie obligatoryjnych elementów (art. 26 UUDE)
@@ -150,7 +150,7 @@ REKOMENDACJA:
 ### DW-4 — Odbiór lokalu i protokół wad (HIGH RISK)
 
 ```
-PRAWO (art. 41–42 UUDE — weryfikuj w ISAP):
+PRAWO (art. 41–42 UUDE — weryfikuj w ELI (RZĄD 1)):
   → Odbiór musi być przeprowadzony z udziałem nabywcy
   → Nabywca może wskazać wady w protokole odbioru
   → Deweloper ma [30] dni na uznanie wad lub odmowę z uzasadnieniem
@@ -159,13 +159,13 @@ PRAWO (art. 41–42 UUDE — weryfikuj w ISAP):
   → Wada istotna nieusunięta → nabywca może odstąpić od umowy (art. 43 ust. 1 pkt 4)
   → Wady nieistotne → nabywca odbiera lokal z adnotacją i żąda usunięcia
 
-RĘKOJMIA ZA WADY (KC art. 556–576 — weryfikuj w ISAP):
+RĘKOJMIA ZA WADY (KC art. 556–576 — weryfikuj w ELI (RZĄD 1)):
   Termin rękojmi: 5 lat od wydania rzeczy (dla nieruchomości)
   Termin na zawiadomienie o wadzie: przed upływem roku od jej wykrycia
   
 PUŁAPKA: Umowa skraca termin rękojmi lub ją wyłącza
   → B2C: wyłączenie/ograniczenie rękojmi wobec konsumenta → BEZSKUTECZNE (KC art. 558)
-  → Sprawdź: art. 558 §2 KC — weryfikuj w ISAP
+  → Sprawdź: art. 558 §2 KC — weryfikuj w ELI (RZĄD 1)
 
 PUŁAPKA: Brak procedury odbioru z rzeczoznawcą
   REKOMENDACJA: zawsze przed odbiorem skorzystaj z usług rzeczoznawcy budowlanego
@@ -179,7 +179,7 @@ PUŁAPKA: "Brak zastrzeżeń w protokole = akceptacja stanu lokalu"
 ### DW-5 — Prospekt informacyjny — obowiązek weryfikacji (MEDIUM RISK)
 
 ```
-PRAWO (art. 24–25 UUDE — weryfikuj w ISAP):
+PRAWO (art. 24–25 UUDE — weryfikuj w ELI (RZĄD 1)):
   Deweloper OBOWIĄZKOWO udostępnia prospekt informacyjny PRZED zawarciem umowy.
   Prospekt zawiera:
   □ Stan prawny nieruchomości (KW, hipoteki, obciążenia)
@@ -205,7 +205,7 @@ PUŁAPKA: Rozbieżność prospektu i umowy
 ## J2.4 UMOWA PRZEDWSTĘPNA — SILNY I SŁABY SKUTEK
 
 ```
-PRAWO (KC art. 389–390 — weryfikuj w ISAP):
+PRAWO (KC art. 389–390 — weryfikuj w ELI (RZĄD 1)):
 
 SKUTEK SŁABY (gdy umowa przedwstępna nie spełnia wymogów umowy przyrzeczonej):
   → W razie uchylenia się od zawarcia: tylko odszkodowanie za szkodę (damnum emergens)
@@ -229,9 +229,9 @@ JAK OSIĄGNĄĆ SILNY SKUTEK:
 TERMIN DOCHODZENIA (art. 390 §3 KC):
   → Roszczenia z umowy przedwstępnej przedawniają się po 1 roku od dnia,
     w którym umowa przyrzeczona miała być zawarta
-  → Weryfikuj: isap.sejm.gov.pl → KC → art. 390 §3
+  → Weryfikuj: ELI (RZĄD 1) → KC → art. 390 §3
 
-ZADATEK vs ZALICZKA (art. 394–396 KC — weryfikuj w ISAP):
+ZADATEK vs ZALICZKA (art. 394–396 KC — weryfikuj w ELI (RZĄD 1)):
   □ ZADATEK: w razie niewykonania przez drugą stronę → zwrot dwukrotny
              w razie niewykonania przez wpłacającego → przepada
   □ ZALICZKA: zawsze zwrotna (nie ma charakteru kary)
@@ -267,6 +267,6 @@ PO ODBIORZE:
 ---
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
-*Podstawa prawna: UUDE Dz.U. 2024 poz. 695 t.j. · KC art. 158, 389–396, 556–576*
-*Weryfikacja: isap.sejm.gov.pl · ekw.ms.gov.pl · oficjalny rejestr inwestycji deweloperskich (gov.pl — zweryfikuj adres)*
+*Podstawa prawna: UUDE Dz.U. 2026 poz. 880 t.j. · KC art. 158, 389–396, 556–576*
+*Weryfikacja: ELI (RZĄD 1) · ekw.ms.gov.pl · oficjalny rejestr inwestycji deweloperskich (gov.pl — zweryfikuj adres)*
 *Rejestr decyzji UOKiK ws. deweloperów: uokik.gov.pl/decyzje*

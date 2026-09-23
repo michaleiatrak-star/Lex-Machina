@@ -5,7 +5,7 @@
 > główny moduł HARDGATE przed każdym przepisem.
 
 **Przeznaczenie:** Katalog obszarów, w których skill przesłuchania może powołać
-przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji ISAP przed podaniem artykułu.
+przepisy lub orzeczenia. Każdy obszar wymaga weryfikacji w ELI (RZĄD 1) przed podaniem artykułu.
 
 ---
 
@@ -98,7 +98,7 @@ PRÓBA REFORMY (przywrócenie ZAKAZU "owoców zatrutego drzewa" — wersja
 ⚠️ WNIOSEK PRAKTYCZNY: art. 168a KPK w BRZMIENIU PERMISYWNYM (z 2016
   r., z wąskim wyjątkiem) NAJPRAWDOPODOBNIEJ WCIĄŻ OBOWIĄZUJE na
   dzień tej weryfikacji, ALE temat jest AKTYWNY POLITYCZNIE i
-  legislacyjnie — SPRAWDŹ BEZWZGLĘDNIE aktualny status na ISAP
+  legislacyjnie — SPRAWDŹ BEZWZGLĘDNIE aktualny status w ELI (RZĄD 1)
   PRZED każdym użyciem tego przepisu w konkretnej sprawie, ZWŁASZCZA
   jeśli sprawa dotyczy dowodów zdobytych z naruszeniem prawa przez
   funkcjonariusza publicznego
@@ -171,7 +171,7 @@ Gdy w pytaniu lub jego uzasadnieniu pojawia się:
 → ZATRZYMAJ generowanie pytania
 → view shared/PRAWO-HARDGATE.md
 → Wykonaj weryfikację ISAP dla danego przepisu
-→ Oznacz ✅ [VER: ISAP, data] w polu DOPUSZCZ. bramki pytania
+→ Oznacz ✅ [VER: ELI DU/RRRR/NNN, data] w polu DOPUSZCZ. bramki pytania
 → Kontynuuj generowanie
 ```
 

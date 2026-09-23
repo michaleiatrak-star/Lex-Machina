@@ -6,7 +6,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KC dot. dzieła, zlecenia, ugody weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KC dot. dzieła, zlecenia, ugody weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → KC → art. 627–646 (dzieło), art. 734–751 (zlecenie), art. 917–918 (ugoda)
 > isap.sejm.gov.pl → KC → art. 647¹ (podwykonawstwo w robotach budowlanych,
 >                    ⚠️ POPRAWIONE 2026-08-05: POPRZEDNIA wersja błędnie

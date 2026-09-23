@@ -8,7 +8,7 @@
 
 Wykrywa, klasyfikuje i ocenia błędy popełniane przez autora pisma procesowego — z uwzględnieniem intencji autora, kontekstu reprezentowanej strony i skutku procesowego. Stosuje się do każdego pisma procesowego, wezwania, pozwu, odpowiedzi lub korespondencji prawnej gdy znany jest autor i reprezentowana strona.
 
-> ⛔ HARD GATE: przepisy prawne powołane w ocenie błędów [LA-LEGAL] i [LA-KWALIFIKACJA-PRAWNA] wymagają weryfikacji w ISAP przed powołaniem w piśmie procesowym.
+> ⛔ HARD GATE: przepisy prawne powołane w ocenie błędów [LA-LEGAL] i [LA-KWALIFIKACJA-PRAWNA] wymagają weryfikacji w ELI (RZĄD 1) przed powołaniem w piśmie procesowym.
 
 ---
 
@@ -122,7 +122,7 @@ Przykład: "zaliczka" (art. 91 KP) i "nienależnie pobrane" (art. 405 KC) dla te
 [LA-KWALIFIKACJA-PRAWNA]
 Wzorzec: użyte sformułowanie osłabia ustawowe znamię na które się powołuje
 Test: czy słowa użyte przez autora odpowiadają językowi ustawy lub są od niego słabsze?
-Weryfikacja: sprawdź dosłowne brzmienie znamion przepisu w ISAP ⚠️ HARDGATE
+Weryfikacja: sprawdź dosłowne brzmienie znamion przepisu w ELI (RZĄD 1) ⚠️ HARDGATE
 Przykład: "wywołują wrażenie nękania" zamiast "wzbudza uzasadnione poczucie zagrożenia"
           (art. 190a §1 KK) — "wrażenie" to kategoria subiektywna, znamię wymaga obiektywności
 
@@ -136,7 +136,7 @@ Przykład: "podpisano profilem zaufanym na komputerze służbowym" — profil za
 [LA-LEGAL]
 Wzorzec: powołanie przepisu o zakresie węższym niż teza wniosku
 Test: czy zakres normy art. X obejmuje skutek Y który autor wywodzi?
-Weryfikacja: treść przepisu w ISAP ⚠️ HARDGATE
+Weryfikacja: treść przepisu w ELI (RZĄD 1) ⚠️ HARDGATE
 Przykład: art. 3 u.r.p. chroni informacje z pomocy prawnej → nie wyłącza świadka in toto
           z przesłuchania co do faktów nieobjętych tajemnicą
 

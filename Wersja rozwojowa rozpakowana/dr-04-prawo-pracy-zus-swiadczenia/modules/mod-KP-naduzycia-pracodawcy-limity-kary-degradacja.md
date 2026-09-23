@@ -405,4 +405,4 @@ od degradacji w trybie wypowiedzenia zmieniającego (legalnej, art. 42).
 Odnotowano niepewności: dokładna wzajemna relacja terminów 2 tygodnie/
 3 miesiące (art. 109), dokładny termin zatarcia kary porządkowej,
 dokładny limit łączny kar pieniężnych w miesiącu — wszystkie oznaczone
-do weryfikacji na ISAP.
+do weryfikacji w ELI (RZĄD 1).

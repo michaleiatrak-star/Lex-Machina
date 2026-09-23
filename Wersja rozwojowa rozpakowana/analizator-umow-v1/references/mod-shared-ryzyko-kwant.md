@@ -6,7 +6,7 @@
 > wymaga oceny wartości ryzyka. Stosuj zawsze przy umowach >100 000 PLN.
 
 > ⛔ HARD GATE — kary umowne, stopy odsetek, limity z KC zawsze weryfikuj
-> w ISAP przed podaniem kwot. Weryfikacja: isap.sejm.gov.pl → KC → art. 484.
+> w ELI (RZĄD 1) przed podaniem kwot. Weryfikacja: isap.sejm.gov.pl → KC → art. 484.
 
 > **v1.18 — źródła metodologiczne (zastępuje wcześniejszą heurystykę
 > „Likely × 2" bez podstawy):**
@@ -123,7 +123,7 @@ KARY DZIENNE (weryfikuj zawsze w aktualnej umowie):
   Naruszenie poufności:             jednorazowe 10–50 000 PLN lub % przychodu
   Naruszenie zakazu konkurencji:    3–12 × miesięczne wynagrodzenie/fee
 
-  LIMITY KARY UMOWNEJ (weryfikuj: isap.sejm.gov.pl → KC → art. 484):
+  LIMITY KARY UMOWNEJ (weryfikuj: ELI (RZĄD 1) → KC → art. 484):
   KC nie ustala maksimum → strony mogą ustalić dowolną stawkę
   MIARKOWANIE (art. 484 §2 KC): sąd może obniżyć gdy:
     (a) zobowiązanie wykonane w znacznej części LUB
@@ -139,7 +139,7 @@ KARY DZIENNE (weryfikuj zawsze w aktualnej umowie):
 ```
 PROBLEM: Umowa nie zawiera limitu odpowiedzialności (cap liability).
 → Odpowiedzialność = rzeczywista szkoda + utracone korzyści (art. 361 §2 KC)
-  Weryfikuj: isap.sejm.gov.pl → KC → art. 361
+  Weryfikuj: ELI (RZĄD 1) → KC → art. 361
 
 SZACOWANIE WORST CASE dla nieograniczonej odpowiedzialności:
 
@@ -178,7 +178,7 @@ REKOMENDACJA LIMITU (cap liability):
 
 ```
 ODSETKI USTAWOWE (weryfikuj ZAWSZE aktualne stawki w NBP/ISAP):
-  Podstawa: KC art. 359 — weryfikuj: isap.sejm.gov.pl
+  Podstawa: KC art. 359 — weryfikuj: ELI (RZĄD 1)
   Stawka ustawowa = stopa referencyjna NBP + 3,5 pp
   Stawka ustawowa za opóźnienie = stopa referencyjna NBP + 5,5 pp
   Stawka maksymalna = dwukrotność odsetek ustawowych za opóźnienie
@@ -188,7 +188,7 @@ ODSETKI USTAWOWE (weryfikuj ZAWSZE aktualne stawki w NBP/ISAP):
   
   Odsetki w transakcjach handlowych (B2B):
   Ustawa o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych
-  Weryfikuj: isap.sejm.gov.pl → t.j. Dz.U. 2023 poz. 1790
+  Weryfikuj: ELI (RZĄD 1) → t.j. Dz.U. 2023 poz. 1790
 
 KALKULATOR ODSETEK:
   Kwota zaległa: [X] PLN
@@ -238,5 +238,5 @@ Wartość umowy: [X] PLN
 
 *← Powrót do routingu: `view references/mod-J0-routing.md`*
 *Powiązane: Moduł D.2 (scoring balansu), Moduł F (raport końcowy)*
-*Weryfikacja przepisów: isap.sejm.gov.pl → KC art. 361, 471, 484*
+*Weryfikacja przepisów: ELI (RZĄD 1) → KC art. 361, 471, 484*
 *Stawki NBP: web_search "stopa referencyjna NBP [rok]"*

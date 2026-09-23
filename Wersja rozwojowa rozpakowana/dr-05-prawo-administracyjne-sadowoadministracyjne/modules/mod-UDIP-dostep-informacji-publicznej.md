@@ -16,11 +16,11 @@ Wniosek o udostępnienie informacji publicznej, odmowa udostępnienia (decyzja a
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o dostępie do informacji publicznej (UDIP) | Dz.U. 2022 poz. 902 t.j. ze zm. — weryfikuj w ISAP |
+| Ustawa o dostępie do informacji publicznej (UDIP) | Dz.U. 2022 poz. 902 t.j. ze zm. — weryfikuj w ELI (RZĄD 1) |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 | RODO (Rozp. UE 2016/679) | stosowane bezpośrednio |
-| Ustawa o re-use (ponowne wykorzystywanie informacji sektora publicznego) | weryfikuj aktualny t.j. w ISAP |
+| Ustawa o re-use (ponowne wykorzystywanie informacji sektora publicznego) | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 
 ---
 
@@ -46,7 +46,7 @@ Wniosek o udostępnienie informacji publicznej, odmowa udostępnienia (decyzja a
 
 ```
 Udostępnienie informacji:        niezwłocznie, nie później niż w 14 dniach
-                                  (art. 13 ust. 1 UDIP — weryfikuj w ISAP)
+                                  (art. 13 ust. 1 UDIP — weryfikuj w ELI (RZĄD 1))
 Przedłużenie do 2 miesięcy:      gdy informacja wymaga przetworzenia / wyszukania
                                   → organ musi powiadomić w terminie 14 dni
 Wniosek o ponowne rozpatrzenie:  14 dni od doręczenia decyzji odmownej
@@ -274,5 +274,5 @@ Wniosek o re-use:
 Ostatni t.j. UDIP: Dz.U. 2022 poz. 902 (obwieszczenie z 23.03.2022)
   ✅ VER: isap.sejm.gov.pl 2026-06-05
 Nowszy t.j. NIE ZOSTAŁ ogłoszony — Dz.U. 2022 poz. 902 jest aktualnym t.j.
-  → Sprawdź zmiany po t.j. bezpośrednio w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220000902
+  → Sprawdź zmiany po t.j. bezpośrednio w ELI (RZĄD 1): isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220000902
 ```

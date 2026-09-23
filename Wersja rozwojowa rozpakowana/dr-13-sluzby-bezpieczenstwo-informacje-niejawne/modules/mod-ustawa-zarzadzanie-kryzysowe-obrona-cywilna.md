@@ -73,7 +73,7 @@ Zwróć:
 
 - stan faktyczny,
 - właściwy tryb,
-- podstawy prawne po weryfikacji ISAP,
+- podstawy prawne po weryfikacji w ELI (RZĄD 1),
 - terminy,
 - dowody,
 - ryzyka formalne,

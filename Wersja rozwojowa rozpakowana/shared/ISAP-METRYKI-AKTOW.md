@@ -64,7 +64,7 @@
 | Akt | Metryka ISAP zweryfikowana | Status roboczy systemu | Uwagi wdrożeniowe |
 |---|---:|---|---|
 | Ustawa o planowaniu i zagospodarowaniu przestrzennym | Dz.U. 2026 poz. 538; tekst ujednolicony ISAP `D20030717Lj.pdf` | aktualny na dzień audytu | plan ogólny, MPZP, WZ, procedura partycypacyjna |
-| Prawo budowlane | Dz.U. 2026 poz. 524 t.j. ⚠️ MONITORING: art. 1 pkt 1 lit. c wchodzi 20.09.2026 | aktualny z adnotacją vacatio legis | pozwolenie, zgłoszenie, samowola, PINB/WINB |
+| Prawo budowlane | Dz.U. 2026 poz. 524 t.j. — zmiany z Dz.U. 2025 poz. 1847 (art. 1 pkt 1 lit. a i c, pkt 3) W MOCY od 20.09.2026 (F-195, RZĄD 1 ELI 2026-09-22) | aktualny z adnotacją vacatio legis | pozwolenie, zgłoszenie, samowola, PINB/WINB |
 | Prawo ochrony środowiska | Dz.U. 2025 poz. 647 t.j. — ⚠️ POPRAWIONE 2026-08-09 (FAZA 3E/ZASADA 14): poprzednia wersja BŁĘDNIE wskazywała "Dz.U. 2026 poz. 670" — TA pozycja jest tekstem jednolitym ZUPEŁNIE INNEJ ustawy (o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na środowisko — tzw. "ustawa OOŚ", akt Z 2008 R., ODRĘBNY od Prawa ochrony środowiska z 2001 r.) — potwierdzone bezpośrednio przez ISAP (obwieszczenie z 9.05.2025, WDU20250000647) | aktualny na dzień aktualizacji (VER 2026-08-09) | decyzje środowiskowe, emisje, kary administracyjne |
 | Ustawa o udostępnianiu informacji o środowisku (OOŚ) — ODRĘBNY akt od Prawa ochrony środowiska, dodane 2026-08-09 | Dz.U. 2026 poz. 670 t.j. (obwieszczenie z 15.05.2026) | aktualny na dzień aktualizacji | decyzje środowiskowe (udział społeczeństwa, oceny oddziaływania — OOŚ/EIA), NIE MYLIĆ z Prawem ochrony środowiska (wiersz wyżej) |
 | Ustawa o ochronie przyrody | Dz.U. 2026 poz. 13 | aktualny na dzień audytu | drzewa, formy ochrony, RDOŚ/GDOŚ |
@@ -105,7 +105,7 @@
 | Prawo restrukturyzacyjne | Dz.U. 2026 poz. 533 | AKTUALNY-ISAP |
 | Prawo upadłościowe | Dz.U. 2026 poz. 913 t.j. | aktualny t.j.; późniejsze zmiany fresh gate |
 | Koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 | PO-TJ-ZMIANY |
-| Prawo budowlane | Dz.U. 2026 poz. 524 ⚠️ art. 1 pkt 1 lit. c → 20.09.2026 | AKTUALNY-ISAP |
+| Prawo budowlane | Dz.U. 2026 poz. 524 — art. 1 pkt 1 lit. a i c, pkt 3 zm. 2025/1847 w mocy od 20.09.2026 (F-195) | AKTUALNY-ISAP |
 | Planowanie i zagospodarowanie przestrzenne | Dz.U. 2026 poz. 538 | AKTUALNY-ISAP |
 | Prawo ochrony środowiska | Dz.U. 2026 poz. 670 | AKTUALNY-ISAP |
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 + zmiana Dz.U. 2025 poz. 1794 | PO-TJ-ZMIANY |

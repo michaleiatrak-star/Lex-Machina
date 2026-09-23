@@ -34,7 +34,7 @@ Jeśli zeznania świadka mogą podlegać zakazowi dowodowemu lub ograniczeniu
 → HARDGATE → view shared/PRAWO-HARDGATE.md
 → Zweryfikuj przepis online
 → Zmniejsz scoring o 1–3 punkty jeśli zakaz potwierdzony
-→ Odnotuj w uzasadnieniu: "Ryzyko: [przepis] ✅ [VER: ISAP, data]"
+→ Odnotuj w uzasadnieniu: "Ryzyko: [przepis] ✅ [VER: ELI DU/RRRR/NNN, data]"
 ```
 
 ## Scoring finalny — format

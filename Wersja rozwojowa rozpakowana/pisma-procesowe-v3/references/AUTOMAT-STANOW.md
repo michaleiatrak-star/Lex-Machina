@@ -363,7 +363,7 @@ STAN 3: W3 — Weryfikacja + walidacja
 ⛔ ZAKAZ-3: NIE generuj pisma finalnego (.docx) bez ukończonego W3.
 ⛔ ZAKAZ-4: NIE łącz dwóch wiadomości w jednej odpowiedzi (np. W1+W2 w jednym kroku).
 ⛔ ZAKAZ-5: NIE cytuj przepisów ani orzeczeń z pamięci na żadnym etapie.
-            Każdy artykuł KPK/KK/KPC/KC/KP/KPA — weryfikacja ISAP w W3.
+            Każdy artykuł KPK/KK/KPC/KC/KP/KPA — weryfikacja w ELI (RZĄD 1) w W3.
 ⛔ ZAKAZ-6: NIE używaj orzeczenia gdy zakres stanów faktycznych nie obejmuje pisma
             (patrz KROK 3a ZAKRES-STOSOWANIA w W3.2).
 ⛔ ZAKAZ-7: NIE wpisuj danych rejestrowych podmiotów (NIP, KRS, REGON, adres siedziby,

@@ -58,7 +58,7 @@ Reguła: zawsze wskazuj którą ustawę stosujemy i jaką definicję przyjmuje.
 
 ### BAS-122 — Żołnierz (DR-13)
 ```
-Weryfikacja: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2024 poz. 655 t.j. — weryfikuj)
+Weryfikacja: ustawa o obronie Ojczyzny art. 4 pkt 1 (Dz.U. 2025 poz. 825 t.j. — weryfikuj)
 
 DEFINICJA USTAWOWA:
   Żołnierzem jest osoba wchodząca w skład Sił Zbrojnych RP:
@@ -76,7 +76,7 @@ PRAWA PROCESOWE:
   → Prawa pracownicze: ustawa pragmatyczna MON (nie KP co do zasady)
   → Zakaz rozwiązania stosunku służbowego w czasie służby bez zgody przełożonego
 
-WERYFIKUJ: isap.sejm.gov.pl → ustawa o obronie Ojczyzny — wielokrotnie nowelizowana
+WERYFIKUJ: ELI (RZĄD 1) → ustawa o obronie Ojczyzny — wielokrotnie nowelizowana
   web_search: "żołnierz definicja ustawa obrona ojczyzny 2025 2026 aktualny"
 ```
 

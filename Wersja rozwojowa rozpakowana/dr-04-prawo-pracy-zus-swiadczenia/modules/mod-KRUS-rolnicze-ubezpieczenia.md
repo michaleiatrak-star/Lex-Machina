@@ -47,7 +47,7 @@ Ubezpieczenie społeczne rolników (emerytalno-rentowe, wypadkowe, chorobowe i m
 
 ## 3. PROCEDURA
 
-### Warunki podlegania KRUS (art. 7 ustawy KRUS — weryfikuj w ISAP)
+### Warunki podlegania KRUS (art. 7 ustawy KRUS — weryfikuj w ELI (RZĄD 1))
 
 ```
 Podlega KRUS:
@@ -57,7 +57,7 @@ Podlega KRUS:
 
 NIE podlega KRUS (lub podlega warunkowo):
   □ Rolnik z działalnością gosp. (ubezpieczenie zdrowotne ZUS + możliwe podwójne ubezp.)
-  → Weryfikuj aktualne przepisy ustawy KRUS w ISAP
+  → Weryfikuj aktualne przepisy ustawy KRUS w ELI (RZĄD 1)
 ```
 
 ### Odwołanie od decyzji KRUS
@@ -74,7 +74,7 @@ Tryb: KPC art. 477⁸–477¹⁴ — NIE tryb WSA
 ## 4. WYPADEK PRZY PRACY ROLNICZEJ
 
 ```
-Definicja (weryfikuj art. 11 ustawy KRUS w ISAP):
+Definicja (weryfikuj art. 11 ustawy KRUS w ELI (RZĄD 1)):
   → Nagłe zdarzenie wywołane przyczyną zewnętrzną
   → W związku z pracą w gospodarstwie rolnym
   → Skutkujące uszczerbkiem na zdrowiu lub śmiercią
@@ -84,7 +84,7 @@ Definicja (weryfikuj art. 11 ustawy KRUS w ISAP):
   → Renta rolnicza z tytułu niezdolności do pracy
   → Renta rodzinna dla rodziny po śmierci rolnika
 
-⚠️ Stawki jednorazowego odszkodowania: weryfikuj obwieszczenie Prezesa KRUS w ISAP/krus.gov.pl
+⚠️ Stawki jednorazowego odszkodowania: weryfikuj obwieszczenie Prezesa KRUS w ELI (RZĄD 1)/krus.gov.pl
 ```
 
 ---

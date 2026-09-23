@@ -96,7 +96,7 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
 □ REŻIM ŁAGODNIEJSZY niż rezerwat/park narodowy — DOPUSZCZALNA
   działalność gospodarcza/rolnicza/leśna w SPOSÓB nienaruszający
   szczególnych wartości (⚠️ dokładny katalog zakazów niepotwierdzony w
-  pełni w tej sesji — sprawdź art. odpowiedni na ISAP przy konkretnej
+  pełni w tej sesji — sprawdź art. odpowiedni w ELI (RZĄD 1) przy konkretnej
   sprawie)
 ```
 

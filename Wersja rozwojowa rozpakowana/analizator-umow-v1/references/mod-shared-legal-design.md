@@ -112,7 +112,7 @@ OMNIBUS (2019/2161): wymóg przejrzystości algorytmów, opinii, cen
   → Opisy cenowe muszą być zrozumiałe dla przeciętnego konsumenta
 
 KC art. 385 §2: niejednoznaczne postanowienia wzorca → na korzyść konsumenta
-  → Weryfikuj: isap.sejm.gov.pl → KC art. 385
+  → Weryfikuj: ELI (RZĄD 1) → KC art. 385
 
 RODO art. 12: informacja dla osoby, której dane dotyczą: "w zwięzłej, przejrzystej,
   zrozumiałej i łatwo dostępnej formie, jasnym i prostym językiem"

@@ -223,4 +223,4 @@ traktowane jak cała broń), zasadę "jednego czynu" dla długotrwałego
 posiadania, obligatoryjną karę finansową (min. 5000/10000 zł),
 orzecznictwo SN IV KK 420/19 (amunicja niezależnie od broni). Odnotowano
 niepewność co do dokładnej podstawy prawnej obligatoryjnej grzywny —
-oznaczoną do weryfikacji na ISAP.
+oznaczoną do weryfikacji w ELI (RZĄD 1).

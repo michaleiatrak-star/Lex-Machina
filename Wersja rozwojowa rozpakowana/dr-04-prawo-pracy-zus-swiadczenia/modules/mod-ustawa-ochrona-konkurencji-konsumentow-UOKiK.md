@@ -1,7 +1,7 @@
 # mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o ochronie konkurencji i konsumentów (UOKIK) — Dz.U. 2025 poz. 1714 t.j. ze zm. | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym — weryfikuj t.j. w ISAP
+**Źródło weryfikacji:** Ustawa o ochronie konkurencji i konsumentów (UOKIK) — Dz.U. 2025 poz. 1714 t.j. ze zm. | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym — weryfikuj t.j. w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -18,7 +18,7 @@ UOKiK (Urząd Ochrony Konkurencji i Konsumentów), praktyki naruszające zbiorow
 |---|---|
 | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2025 poz. 1714 t.j. ze zm. |
 | Ustawa o prawach konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. |
-| Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym | weryfikuj aktualny t.j. w ISAP |
+| Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | KC art. 385¹–385³ | klauzule abuzywne | Dz.U. 2026 poz. 795 t.j. |
 | Dyrektywa Omnibus (2019/2161) | ceny promocyjne, opinie | wdrożona do prawa polskiego |
 | DSA (Rozp. UE 2022/2065) | platformy cyfrowe | bezpośrednio stosowane |
@@ -86,7 +86,7 @@ K6. Wybierz ścieżkę procesową (patrz niżej)
 
 ## 5. KLAUZULE ABUZYWNE — QUICK CHECK
 
-> **Podstawa:** art. 385¹–385³ KC (Dz.U. 2026 poz. 795) | weryfikuj w ISAP.
+> **Podstawa:** art. 385¹–385³ KC (Dz.U. 2026 poz. 795) | weryfikuj w ELI (RZĄD 1).
 
 ```
 Przesłanki abuzywności (art. 385¹ §1 KC):
@@ -96,7 +96,7 @@ Przesłanki abuzywności (art. 385¹ §1 KC):
 Skutek: postanowienie nie wiąże ex lege — umowa wiąże w pozostałej części
 
 Szara lista (art. 385³ KC): katalog postanowień domniemanych jako abuzywne
-  → weryfikuj aktualny art. 385³ KC w ISAP
+  → weryfikuj aktualny art. 385³ KC w ELI (RZĄD 1)
 
 Rejestr klauzul niedozwolonych UOKiK:
   → https://rejestr.uokik.gov.pl
@@ -109,7 +109,7 @@ Rejestr klauzul niedozwolonych UOKiK:
 ```
 Obowiązek: przy promocji podawać najniższą cenę z 30 dni poprzedzających obniżkę
   → art. 4a ustawy o prawach konsumenta (Dz.U. 2024 poz. 1796 t.j.)
-  ⚠️ Weryfikuj aktualne brzmienie w ISAP
+  ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1)
 
 Naruszenie: kara UOKiK + roszczenie cywilne konsumenta
   Brak najniższej ceny z 30 dni → informacja wprowadzająca w błąd
@@ -130,7 +130,7 @@ UOKiK wszczyna postępowanie w sprawach zbiorowych (nie indywidualnych)
 Kary:
   → Do 10% obrotu w roku poprzednim (naruszenia zbiorowych interesów)
   → Do 10 000 EUR dziennie (naruszenia DSA — platformy)
-  ⚠️ Aktualne stawki — weryfikuj UOKIK w ISAP
+  ⚠️ Aktualne stawki — weryfikuj UOKIK w ELI (RZĄD 1)
 
 Decyzja UOKiK:
   → Zaskarżalna do SOKiK (Sąd Okręgowy w Warszawie — wydział antymonopolowy)
@@ -156,7 +156,7 @@ Decyzja UOKiK:
 
 1. Dokumentuj naruszenie natychmiast (screenshoty z datą, archiwum www).
 2. Złóż reklamację pisemnie — zachowaj dowód doręczenia.
-3. Brak odpowiedzi w 14 dniach = reklamacja uznana (art. 7a ustawy o PK — weryfikuj w ISAP).
+3. Brak odpowiedzi w 14 dniach = reklamacja uznana (art. 7a ustawy o PK — weryfikuj w ELI (RZĄD 1)).
 4. Powiatowy Rzecznik Konsumentów — bezpłatna pomoc; warto użyć przed sądem.
 5. UOKiK nie rozstrzyga sporów indywidualnych — tylko zbiorowe.
 

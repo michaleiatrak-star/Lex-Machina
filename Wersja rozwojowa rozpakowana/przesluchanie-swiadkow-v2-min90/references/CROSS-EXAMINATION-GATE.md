@@ -20,7 +20,7 @@ wartość), ale nie pytań obraźliwych, irrelewantnych ani czysto presyjnych.
 | Warunki obserwacji | Kwestionowanie zdolności percepcji (odległość, oświetlenie, stan) | Ocena dowodów |
 | Looping | Powrót do przyznanego faktu jako pewnika | Technika procesowa |
 
-Przed powołaniem konkretnego przepisu → PRAWO-HARDGATE → weryfikacja ISAP.
+Przed powołaniem konkretnego przepisu → PRAWO-HARDGATE → weryfikacja w ELI (RZĄD 1).
 
 ---
 

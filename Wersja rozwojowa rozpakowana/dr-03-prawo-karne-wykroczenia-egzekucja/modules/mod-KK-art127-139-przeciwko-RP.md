@@ -262,4 +262,4 @@ istotne w obecnym kontekście geopolitycznym), art. 129 (zdrada
 dyplomatyczna, pełne przesłanki). Odnotowano niepewność: dokładny wymiar
 kar dla art. 130 §3 i §6 po reformie, oraz istnienie §7-9 sugerowane
 przez odesłanie w art. 40 §3 (nie ustalone w tej sesji, oznaczone wprost
-do weryfikacji na ISAP przed użyciem).
+do weryfikacji w ELI (RZĄD 1) przed użyciem).

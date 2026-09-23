@@ -19,7 +19,7 @@ Skład majątku wspólnego:
   + dochody z majątku wspólnego i osobistego
   + inne nabyte w trakcie małżeństwa
 
-Majątek osobisty (art. 33 KRO — weryfikuj w ISAP):
+Majątek osobisty (art. 33 KRO — weryfikuj w ELI (RZĄD 1)):
   + nabyty przed małżeństwem
   + darowizny i spadki (jeśli darczyńca/spadkodawca nie postanowił inaczej)
   + prawa niezbywalne

@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -21,11 +21,11 @@
 OSOBA FIZYCZNA: każdy człowiek od urodzenia do śmierci (art. 8 KC)
   Zdolność prawna: od urodzenia
   Zdolność do czynności prawnych: pełna po ukończeniu 18 lat (art. 11 KC)
-  → isap.sejm.gov.pl: KC Dz.U. 2026 poz. 795 art. 8–24
+  → ELI (RZĄD 1): KC Dz.U. 2026 poz. 795 art. 8–24
 
 OSOBA PRAWNA: Skarb Państwa + jednostki, którym przepisy przyznają osobowość prawną
   (art. 33 KC) — m.in.: spółki kapitałowe (sp. z o.o., SA), fundacje, stowarzyszenia
-  → isap.sejm.gov.pl: KC art. 33–43
+  → ELI (RZĄD 1): KC art. 33–43
 
 JEDNOSTKA ORGANIZACYJNA NIE POSIADAJĄCA OSOBOWOŚCI PRAWNEJ (JONIOPO):
   art. 331 KC — "ułomna osoba prawna"; spółka jawna, partnerska, komandytowa,
@@ -40,7 +40,7 @@ DEFINICJA USTAWOWA (art. 4 ust. 1 Prawa przedsiębiorców):
   niebędąca osobą prawną, której odrębna ustawa przyznaje zdolność prawną,
   wykonująca działalność gospodarczą."
   Wspólnicy spółki cywilnej = przedsiębiorcy w zakresie działalności (art. 4 ust. 2)
-  → Prawo przedsiębiorców Dz.U. 2025 poz. 1480 t.j. (weryfikuj w ISAP)
+  → Prawo przedsiębiorców Dz.U. 2025 poz. 1480 t.j. (weryfikuj w ELI (RZĄD 1))
 
 DZIAŁALNOŚĆ NIEEWIDENCJONOWANA (art. 5 Prawa przedsiębiorców):
   Nie jest działalnością gosp. gdy przychód ≤ 225% min. wynagrodzenia w kwartale
@@ -51,7 +51,7 @@ MIKRO/MAŁY/ŚREDNI PRZEDSIĘBIORCA (art. 7 Prawa przedsiębiorców):
   mikro:   < 10 pracowników + roczny obrót / suma bilansowa ≤ 2 mln EUR
   mały:    < 50 pracowników + obrót / bilans ≤ 10 mln EUR
   średni:  < 250 pracowników + obrót ≤ 50 mln EUR lub bilans ≤ 43 mln EUR
-  → weryfikuj: isap.sejm.gov.pl → Prawo przedsiębiorców art. 7
+  → weryfikuj: ELI (RZĄD 1) → Prawo przedsiębiorców art. 7
 ```
 
 ### A.3 KONSUMENT
@@ -68,7 +68,7 @@ ROZSZERZONA OCHRONA: "PRZEDSIĘBIORCA NA PRAWACH KONSUMENTA" (art. 385⁵ KC):
   NIE ma charakteru zawodowego dla tej osoby
   → charakter zawodowy oceniany wg kodów PKD w CEIDG
   → wystawienie faktury "na firmę" ≠ automatyczna utrata ochrony konsumenckiej
-  → weryfikuj: KC art. 385⁵ w isap.sejm.gov.pl + web_search "przedsiębiorca prawa konsumenta 2025"
+  → weryfikuj: KC art. 385⁵ w ELI (RZĄD 1) + web_search "przedsiębiorca prawa konsumenta 2025"
 ```
 
 

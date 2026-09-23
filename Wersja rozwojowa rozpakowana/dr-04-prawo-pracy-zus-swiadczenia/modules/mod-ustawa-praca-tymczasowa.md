@@ -8,7 +8,7 @@
   ✅ VER: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20250001682 [2026-05-31]
 - Poprzedni t.j.: Dz.U. 2022 poz. 1472
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Zakres
 Trójstronny stosunek pracy: agencja pracy tymczasowej (APT) — pracownik tymczasowy —

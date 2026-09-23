@@ -8,7 +8,7 @@
 **Ustawa AML — karny wymiar:**
 → DR-03/mod-KKS-karny-skarbowy-i-AML
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Paserstwo (art. 291–293 KK)
 ```

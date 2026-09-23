@@ -16,11 +16,11 @@ KROK FPW-1 — FAKT:
   Źródło: dokument (dok_id + strona) / zeznanie (protokół + data) / domniemanie.
   Jeśli fakt nie wynika z żadnego źródła → pytanie niedopuszczalne (spekulacja).
 
-KROK FPW-2 — PODSTAWA PRAWNA (weryfikacja ISAP):
+KROK FPW-2 — PODSTAWA PRAWNA (weryfikacja w ELI (RZĄD 1)):
   ⛔ HARDGATE → view shared/PRAWO-HARDGATE.md
   Wskaż przepis regulujący obowiązek/uprawnienie będące przedmiotem pytania LUB
   decydujący o skutku prawnym odpowiedzi.
-  Weryfikacja: web_search przepisu w ISAP → oznacz ✅ [VER: ISAP, data].
+  Weryfikacja: web_search przepisu w ELI (RZĄD 1) → oznacz ✅ [VER: ELI DU/RRRR/NNN, data].
   Jeśli brak podstawy prawnej → pytanie może być procesowo irrelewantne.
   ⛔ NIE oznaczaj ✅ bez faktycznego wywołania web_search/web_fetch = CRIT.
 

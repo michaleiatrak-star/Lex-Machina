@@ -1,7 +1,7 @@
 # mod-dzienniki-urzedowe-BIP-publikacja
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o ogłaszaniu aktów normatywnych — weryfikuj aktualny t.j. w ISAP
+**Źródło weryfikacji:** Ustawa o ogłaszaniu aktów normatywnych — weryfikuj aktualny t.j. w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05
 
 ---
@@ -12,7 +12,7 @@
 Publikacja aktów prawa miejscowego w dziennikach urzędowych województw (dziennikiurzedowe.gov.pl), BIP jako kanał publikacji wewnętrznych uchwał JST, termin wejścia w życie, vacatio legis, prostowanie błędów, błędy publikacyjne a ważność aktu.
 
 ### Akty
-Ustawa z 20.07.2000 r. o ogłaszaniu aktów normatywnych i niektórych innych aktów prawnych — weryfikuj aktualny t.j. w ISAP.
+Ustawa z 20.07.2000 r. o ogłaszaniu aktów normatywnych i niektórych innych aktów prawnych — weryfikuj aktualny t.j. w ELI (RZĄD 1).
 
 ---
 

@@ -4,10 +4,10 @@
 **Ustawa z 27.03.2003 r. o planowaniu i zagospodarowaniu przestrzennym**
 - Tekst jednolity: **Dz.U. 2026 poz. 538 t.j.** (obwieszczenie z 03.07.2024)
   Zmiany po t.j.: Dz.U. 2024 poz. 1907, poz. 1940; Dz.U. 2025 poz. 527, poz. 680
-  ✅ VER: isap.sejm.gov.pl [2026-06-05] — zawsze weryfikuj aktualny stan w ISAP
+  ✅ VER: isap.sejm.gov.pl [2026-06-05] — zawsze weryfikuj aktualny stan w ELI (RZĄD 1)
   REFORMA 2023: Ustawa z 07.07.2023 o zmianie u.p.z.p. — gruntowna reforma narzędzi
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Nowe narzędzia planistyczne (po reformie 2023)
 ```

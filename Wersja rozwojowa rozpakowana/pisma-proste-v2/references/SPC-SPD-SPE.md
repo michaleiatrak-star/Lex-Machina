@@ -29,7 +29,7 @@ i chce uzyskać klauzulę wykonalności, aby przekazać sprawę komornikowi.*
 - **art. 71 pkt 1 KSCU** — opłata 6 zł (tytuł z sądu)
 - **art. 71 pkt 2 KSCU** — opłata 50 zł (akt notarialny z klauzulą wykonalności)
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1).
 
 ## DANE WYMAGANE
 
@@ -110,7 +110,7 @@ pobiera komornik zgodnie z ustawą o kosztach komorniczych.*
 - **art. 8 ust. 1 ustawy o kosztach komorniczych** — zaliczka na koszty egzekucji
   (10% egzekwowanego świadczenia, nie mniej niż 200 zł i nie więcej niż 2 000 zł)
 
-> ⚠ Weryfikuj przepisy i stawki komornicze na isap.sejm.gov.pl.
+> ⚠ Weryfikuj przepisy i stawki komornicze na ELI (RZĄD 1).
 
 ## DANE WYMAGANE
 
@@ -209,7 +209,7 @@ wezwaniem dłużnika.*
 - **art. 187 §1 pkt 3 KPC** — obowiązek informacji o próbie ugodowej
   (od 03.05.2012; weryfikuj aktualną wersję)
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1).
 
 ## DANE WYMAGANE
 

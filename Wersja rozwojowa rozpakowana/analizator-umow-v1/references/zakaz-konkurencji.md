@@ -10,7 +10,7 @@
 
 ---
 
-> ⛔ HARD GATE — przed podaniem art. KP lub KC dotyczących zakazu weryfikuj w ISAP:
+> ⛔ HARD GATE — przed podaniem art. KP lub KC dotyczących zakazu weryfikuj w ELI (RZĄD 1):
 > isap.sejm.gov.pl → Kodeks pracy (t.j. aktualny) → art. 101¹ i 101²
 > isap.sejm.gov.pl → Kodeks cywilny → art. 353¹, 483–484 (kary umowne), art. 5
 > Orzecznictwo SN dot. zakazu konkurencji: sn.pl — nie cytuj z pamięci.
@@ -199,7 +199,7 @@ MECHANIZM:
   Pracodawca czeka miesiąc, zwalnia z zakazu, przestaje płacić odszkodowanie
   Pracownik przez ten miesiąc odmówił ofert pracy = realna strata
 
-STAN PRAWNY (weryfikuj najpierw KP w ISAP, a orzecznictwo wyłącznie w oficjalnych bazach SN/sądów):
+STAN PRAWNY (weryfikuj najpierw KP w ELI (RZĄD 1), a orzecznictwo wyłącznie w oficjalnych bazach SN/sądów):
   Zwolnienie z zakazu = pracodawca traci prawo do egzekwowania zakazu od dnia zwolnienia
   ALE: Pracownik zachowuje prawo do odszkodowania za okres, w którym rzeczywiście
   przestrzegał zakazu i poniósł straty (utracone szanse)
@@ -273,7 +273,7 @@ REKOMENDACJA:
 
 ### PUŁAPKA ZK-5 — Zakaz agencyjny z błędnie skonstruowanym wynagrodzeniem lub zakresem (HIGH RISK)
 ```
-PODSTAWA: art. 764⁶ KC — ZAWSZE weryfikuj w isap.sejm.gov.pl
+PODSTAWA: art. 764⁶ KC — ZAWSZE weryfikuj w ELI (RZĄD 1)
 
 WYMOGI USTAWOWE (zakaz po ustaniu umowy agencyjnej):
 □ Forma pisemna pod rygorem nieważności (art. 764⁶ §1 KC)
@@ -751,7 +751,7 @@ WYNIK OGÓLNY:
 1. Brak odszkodowania = brak zakazu (dla zakazu post-kontraktowego UoP) —
    to nie jest "ryzyko", to automatyczny skutek ustawowy (art. 101² §3 KP:
    min. 25% wynagrodzenia sprzed ustania stosunku pracy, za okres
-   odpowiadający okresowi zakazu — weryfikuj aktualne brzmienie w ISAP),
+   odpowiadający okresowi zakazu — weryfikuj aktualne brzmienie w ELI (RZĄD 1)),
    wskaż go wprost, nie jako punkt do negocjacji.
 2. Nieograniczony zakres (przedmiotowy, terytorialny, czasowy) = zakaz
    nieważny lub bezskuteczny przy kontroli sądowej (art. 58 KC/art. 353¹
@@ -777,7 +777,7 @@ WYNIK OGÓLNY:
 *Moduł I / analizator-umow-v1 · Dla UoP → references/umowy-o-prace.md (Moduł H)*
 *Dla umów B2B → references/b2b-podwykonawcze.md (Moduł G)*
 *Dla routingu typów umów → references/mod-J0-routing.md (Moduł J — nawigacja)*
-*Prawo weryfikuj w ISAP · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
+*Prawo weryfikuj w ELI (RZĄD 1) · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
 
 ---
 

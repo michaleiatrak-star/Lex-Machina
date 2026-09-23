@@ -76,7 +76,7 @@ Zamawiający:
 Wyjątek: Zamawiający może odstąpić od akceptacji gdy:
   → Certyfikat stracił ważność
   → Zamawiający ma uzasadnione wątpliwości co do aktualności danych
-  → Weryfikuj aktualny art. ustawy w ISAP — przepisy szczegółowe
+  → Weryfikuj aktualny art. ustawy w ELI (RZĄD 1) — przepisy szczegółowe
 ```
 
 ---
