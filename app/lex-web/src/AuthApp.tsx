@@ -24,9 +24,13 @@ import {
   login,
   logoutAuth,
   isDesktopShell,
+  reportUserActivity,
   setAuthenticationFailureHandler,
   type AuthMeResponse
 } from "./api.js";
+
+const USER_ACTIVITY_REPORT_INTERVAL_MS =
+  60_000;
 
 type AuthPhase =
   | "checking"
@@ -530,6 +534,54 @@ export default function AuthenticatedApp() {
       window.clearInterval(
         interval
       );
+    };
+  }, [
+    phase,
+    auth?.user.userId
+  ]);
+
+  // Typing, clicking or scrolling in the window is user activity: extend the
+  // idle deadline at most once per minute instead of locking a working user.
+  useEffect(() => {
+    if (
+      phase !== "authenticated" ||
+      !auth
+    ) {
+      return;
+    }
+
+    let lastReported = 0;
+    const onActivity = () => {
+      const current = Date.now();
+      if (
+        current - lastReported <
+        USER_ACTIVITY_REPORT_INTERVAL_MS
+      ) {
+        return;
+      }
+      lastReported = current;
+      void reportUserActivity();
+    };
+    const events = [
+      "keydown",
+      "pointerdown",
+      "wheel",
+      "touchstart"
+    ] as const;
+    for (const name of events) {
+      window.addEventListener(
+        name,
+        onActivity,
+        { passive: true }
+      );
+    }
+    return () => {
+      for (const name of events) {
+        window.removeEventListener(
+          name,
+          onActivity
+        );
+      }
     };
   }, [
     phase,

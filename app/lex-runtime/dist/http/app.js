@@ -305,6 +305,8 @@ const EXECUTION_ID_PATTERN = /^[A-Za-z0-9-]{16,64}$/;
 const EXECUTION_DRAFT_TTL_MS = 15 * 60_000;
 const EXECUTION_DRAFT_MAX_ENTRIES = 64;
 const EXECUTION_DRAFT_MAX_CHARS = 200_000;
+// While a request is still running, refresh the idle deadline this often.
+const IN_FLIGHT_ACTIVITY_INTERVAL_MS = 60_000;
 function responseAuthContext(res) {
     const context = res.locals.lexAuth;
     if (!context) {
@@ -857,9 +859,21 @@ export function createLexHttpApp(options) {
                 if (req.method !== "GET" &&
                     req.path !==
                         "/auth/lock") {
+                    const sessionId = context.session
+                        .sessionId;
                     options.authService
-                        .touchSession(context.session
-                        .sessionId);
+                        .touchSession(sessionId);
+                    // A request the user is still waiting for (a long local-model
+                    // answer, OCR) is activity: keep the session from idling out
+                    // while it runs.
+                    const keepAlive = setInterval(() => {
+                        options.authService
+                            .touchSession(sessionId);
+                    }, IN_FLIGHT_ACTIVITY_INTERVAL_MS);
+                    keepAlive.unref();
+                    const stop = () => clearInterval(keepAlive);
+                    res.once("finish", stop);
+                    res.once("close", stop);
                 }
                 next();
             }
@@ -965,6 +979,12 @@ export function createLexHttpApp(options) {
                     error: code
                 });
             }
+        });
+        // User input in the window (typing, reading with scroll/mouse) counts as
+        // activity; the authentication middleware above already refreshed the
+        // idle deadline for this non-GET request.
+        app.post("/api/auth/activity", (_req, res) => {
+            res.status(204).end();
         });
         app.post("/api/auth/lock", (_req, res) => {
             const context = responseAuthContext(res);

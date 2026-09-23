@@ -1384,6 +1384,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/auth/password"
         | "/api/auth/recovery-code"
         | "/api/auth/lock"
+        | "/api/auth/activity"
         | "/api/auth/logout"
         | "/api/deanonymization/reauthorize"
         | "/api/deanonymization/finalize"
@@ -1884,6 +1885,8 @@ mod tests {
 
     #[test]
     fn allowlist_rejects_unknown_routes_and_methods() {
+        assert!(route_allowed("POST", "/api/auth/activity"));
+        assert!(!route_allowed("GET", "/api/auth/activity"));
         assert!(route_allowed("GET", "/api/cases"));
         assert!(route_allowed("POST", "/api/cases/case_abc/files"));
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));

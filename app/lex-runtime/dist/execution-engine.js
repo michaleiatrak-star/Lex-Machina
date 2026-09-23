@@ -14,6 +14,16 @@ export class LexExecutionError extends Error {
         this.name = "LexExecutionError";
     }
 }
+const USER_TURN_MARKER = "\n\nUżytkownik: ";
+// The web UI sends earlier turns as "Użytkownik: ..."/"Asystent: ..."
+// history; only the newest user turn decides whether it is trivial chat.
+export function latestUserTurn(query) {
+    const index = query.lastIndexOf(USER_TURN_MARKER);
+    return index >= 0
+        ? query.slice(index +
+            USER_TURN_MARKER.length)
+        : query;
+}
 export function isLocalLightweightConversation(model, query, hasBoundContext) {
     if (!model.startsWith("local/")) {
         return false;
@@ -23,7 +33,7 @@ export function isLocalLightweightConversation(model, query, hasBoundContext) {
     // durable workflow/session state attached. The lexical allow-list below is
     // intentionally narrow; substantive legal requests still use all gates.
     void hasBoundContext;
-    const normalized = query
+    const normalized = latestUserTurn(query)
         .normalize("NFKC")
         .trim()
         .toLowerCase()
@@ -253,7 +263,9 @@ export class LexExecutionEngine {
                 messages: [
                     {
                         role: "user",
-                        content: effectiveQuery
+                        content: trivialLocal
+                            ? latestUserTurn(effectiveQuery)
+                            : effectiveQuery
                     }
                 ],
                 reasoning: "none",

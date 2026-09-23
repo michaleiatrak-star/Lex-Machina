@@ -96,6 +96,26 @@ export class LexExecutionError extends Error {
   }
 }
 
+const USER_TURN_MARKER =
+  "\n\nUżytkownik: ";
+
+// The web UI sends earlier turns as "Użytkownik: ..."/"Asystent: ..."
+// history; only the newest user turn decides whether it is trivial chat.
+export function latestUserTurn(
+  query: string
+): string {
+  const index =
+    query.lastIndexOf(
+      USER_TURN_MARKER
+    );
+  return index >= 0
+    ? query.slice(
+        index +
+          USER_TURN_MARKER.length
+      )
+    : query;
+}
+
 export function isLocalLightweightConversation(
   model: string,
   query: string,
@@ -116,7 +136,7 @@ export function isLocalLightweightConversation(
   void hasBoundContext;
 
   const normalized =
-    query
+    latestUserTurn(query)
       .normalize("NFKC")
       .trim()
       .toLowerCase()
@@ -647,7 +667,11 @@ export class LexExecutionEngine {
                 role:
                   "user",
                 content:
-                  effectiveQuery
+                  trivialLocal
+                    ? latestUserTurn(
+                        effectiveQuery
+                      )
+                    : effectiveQuery
               }
             ],
             reasoning:

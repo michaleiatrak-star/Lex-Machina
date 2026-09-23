@@ -1448,6 +1448,28 @@ export function getAuthMe():
   );
 }
 
+/**
+ * Tells the runtime the user is active in the window. Best effort: an expired
+ * session is detected by the regular /api/auth/me check.
+ */
+export async function reportUserActivity():
+  Promise<void> {
+  try {
+    await fetch(
+      `${apiBase()}/api/auth/activity`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          ...authorizationHeaders()
+        }
+      }
+    );
+  } catch {
+    // Offline runtime: nothing to extend.
+  }
+}
+
 export async function lockAuth():
   Promise<void> {
   const headers =

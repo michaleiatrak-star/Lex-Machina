@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   buildCoreLegalResourcePrompt,
   isLocalLightweightConversation,
+  latestUserTurn,
   LexExecutionEngine
 } from "../src/execution-engine.js";
 import { LexSkillRegistry } from "../src/registry.js";
@@ -167,6 +168,26 @@ describe("local lightweight conversation", () => {
         true
       )
     ).toBe(true);
+    // Earlier turns of the conversation must not hide a trivial command.
+    expect(
+      isLocalLightweightConversation(
+        "local/bielik-11b-v3-q4km",
+        "Użytkownik: napisz ok\n\nAsystent: Nie udało się.\n\nUżytkownik: Napisz ok",
+        false
+      )
+    ).toBe(true);
+    expect(
+      isLocalLightweightConversation(
+        "local/bielik-11b-v3-q4km",
+        "Użytkownik: napisz ok\n\nAsystent: ok\n\nUżytkownik: przeanalizuj art. 471 k.c.",
+        false
+      )
+    ).toBe(false);
+    expect(
+      latestUserTurn(
+        "Użytkownik: a\n\nAsystent: b\n\nUżytkownik: c"
+      )
+    ).toBe("c");
     expect(
       isLocalLightweightConversation(
         "gpt-5.6-luna",
