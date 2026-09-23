@@ -1,0 +1,170 @@
+name: Publish Lex Machina 0.1.10 hotfix 1 online installer
+
+# Publishes the online installer already built and accepted by the
+# "Lex Windows Online Installer" run for SOURCE_SHA (PR #78). The installer is
+# not rebuilt: the exact accepted artifact is downloaded, its CI SHA-256
+# receipt is verified and it is attached to a pre-release tagged at SOURCE_SHA.
+
+on:
+  push:
+    branches:
+      - "claude/lex-machina-claude-timeout-pralq8"
+    paths:
+      - ".github/workflows/publish-0.1.10-hotfix1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: lex-publish-0.1.10-hotfix1
+  cancel-in-progress: false
+
+env:
+  SOURCE_SHA: f7c0df2754a8354479b80c7e80f3051401dc60ec
+  INSTALLER_RUN_ID: "35880379899"
+  RELEASE_TAG: v0.1.10-hotfix1
+  RELEASE_TITLE: Lex Machina v0.1.10 hotfix 1
+  ASSET_NAME: Lex-Machina-0.1.10-hotfix1-Online-x64-Setup.exe
+
+jobs:
+  publish:
+    name: Publish accepted online installer
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+
+      - name: Wait for the accepted installer run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 80); do
+            read -r status conclusion head_sha < <(
+              gh api "repos/$GITHUB_REPOSITORY/actions/runs/$INSTALLER_RUN_ID" \
+                --jq '[.status, (.conclusion // "none"), .head_sha] | @tsv'
+            )
+            echo "installer run status=$status conclusion=$conclusion head=$head_sha"
+            [[ "$head_sha" == "$SOURCE_SHA" ]] || {
+              echo "INSTALLER_RUN_SOURCE_MISMATCH expected=$SOURCE_SHA actual=$head_sha" >&2
+              exit 1
+            }
+            if [[ "$status" == "completed" ]]; then
+              [[ "$conclusion" == "success" ]] || {
+                echo "INSTALLER_RUN_NOT_ACCEPTED conclusion=$conclusion" >&2
+                exit 1
+              }
+              exit 0
+            fi
+            sleep 60
+          done
+          echo "INSTALLER_RUN_WAIT_TIMEOUT" >&2
+          exit 1
+
+      - name: Download accepted online installer
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: LexMachina-Windows-Online-Installer
+          path: release-input/online
+          run-id: ${{ env.INSTALLER_RUN_ID }}
+          github-token: ${{ github.token }}
+
+      - name: Verify receipt and assemble release payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-out
+
+          online_exe="$(find release-input/online -type f -iname '*.exe' -print -quit)"
+          online_receipt="$(find release-input/online -type f -name 'SHA256.txt' -print -quit)"
+          for required in "$online_exe" "$online_receipt"; do
+            [[ -n "$required" && -f "$required" ]] || {
+              echo "RELEASE_ACCEPTED_ASSET_MISSING:$required" >&2
+              exit 1
+            }
+          done
+
+          expected="$(awk -F= '$1=="sha256"{print $2}' "$online_receipt" | tr -d '\r\n ')"
+          actual="$(sha256sum "$online_exe" | awk '{print $1}')"
+          [[ "$expected" == "$actual" ]] || {
+            echo "ONLINE_RELEASE_HASH_MISMATCH expected=$expected actual=$actual" >&2
+            exit 1
+          }
+
+          cp "$online_exe" "release-out/$ASSET_NAME"
+          cp "$online_receipt" release-out/CI-SHA256-ONLINE.txt
+          cp app/lex-version.yaml release-out/LEX-VERSION.yaml
+          printf '%s\n' "$SOURCE_SHA" > release-out/SOURCE-SHA.txt
+          (
+            cd release-out
+            sha256sum "$ASSET_NAME" LEX-VERSION.yaml > SHA256SUMS.txt
+          )
+          cat release-out/SHA256SUMS.txt
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-out/RELEASE-NOTES.md <<'EOF'
+          ## Lex Machina 0.1.10 hotfix 1
+
+          Windows online installer built from PR #78 and accepted by the G33D online installer build and acceptance run.
+
+          ### Claude (account session)
+          - always runs the pinned Claude Code 2.1.278 client, provisioned on demand like the ChatGPT/Codex path;
+          - never selects the extensionless npm shim that `where.exe` lists first;
+          - returns the answer from the stream-json `result` line instead of waiting for the process to exit, and ends the whole process tree on Windows;
+          - no user MCP servers are started (`--strict-mcp-config`); a client that prints nothing for 120 s reports `ACCOUNT_SESSION_CLI_STALLED`;
+          - failures always show a code and a sanitized description.
+
+          ### Local Bielik / Mistral
+          - the llama-server started by Lex no longer inherits llama.cpp native agent mode or the web-grounded templates, which prevented Lex from receiving answers.
+
+          ### Tools and legal loading
+          - `web_search` is available to every model, with R1/R2A/R2B/R3 classification of the results;
+          - legal skills and modules are loaded only for legal matters;
+          - DR-03 matters always go through the criminal qualifier;
+          - NSA/WSA material stays a snapshot and is never promoted to verified; CBOSA with no hits is `OUT_OF_SCOPE`;
+          - a new conversation offers the work mode: automatic, or mechanical with any of the 11 execution skills.
+
+          Pre-release: production Authenticode trust roots are not configured, so Windows SmartScreen may warn. Verify the installer against SHA256SUMS.txt.
+          EOF
+
+      - name: Create pre-release and upload installer
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            tag_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+            [[ "$tag_sha" == "$SOURCE_SHA" ]] || {
+              echo "IMMUTABLE_RELEASE_TAG_MISMATCH tag=$tag_sha source=$SOURCE_SHA" >&2
+              exit 1
+            }
+            gh release edit "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-out/RELEASE-NOTES.md \
+              --prerelease
+          else
+            gh release create "$RELEASE_TAG" \
+              --title "$RELEASE_TITLE" \
+              --notes-file release-out/RELEASE-NOTES.md \
+              --prerelease \
+              --target "$SOURCE_SHA"
+          fi
+
+          gh release upload "$RELEASE_TAG" --clobber \
+            "release-out/$ASSET_NAME" \
+            release-out/SHA256SUMS.txt \
+            release-out/CI-SHA256-ONLINE.txt \
+            release-out/SOURCE-SHA.txt \
+            release-out/LEX-VERSION.yaml
+
+          gh release view "$RELEASE_TAG" --json url,tagName,isPrerelease,assets \
+            --jq '{url, tagName, isPrerelease, assets: [.assets[] | {name, url}]}'
