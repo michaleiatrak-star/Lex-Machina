@@ -217,11 +217,28 @@ try {
       -RedirectStandardOutput $selfTestLog `
       -RedirectStandardError $selfTestErrLog `
       -NoNewWindow `
-      -Wait `
       -PassThru
     } finally {
       $env:PSModulePath = $savedModulePath
     }
+    # Reading Handle keeps ExitCode available after WaitForExit.
+    $null = $selfTestProcess.Handle
+    # A hung stage must fail with its log, not stall the whole install.
+    if (-not $selfTestProcess.WaitForExit(45 * 60 * 1000)) {
+      Add-Content -LiteralPath $selfTestLog -Value "SELFTEST_TIMEOUT_45_MIN" -Encoding UTF8
+      $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+      Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+        try {
+          if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_TIMEOUT_PROCESS:" + $_.ProcessName + ":" + $_.Id) -Encoding UTF8
+            Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+          }
+        } catch {}
+      }
+      Stop-Process -Id $selfTestProcess.Id -Force -ErrorAction SilentlyContinue
+      throw "OFFLINE_BUNDLE_SELFTEST_TIMEOUT"
+    }
+    $selfTestProcess.Refresh()
     if (Test-Path -LiteralPath $selfTestErrLog -PathType Leaf) {
       Get-Content -LiteralPath $selfTestErrLog -ErrorAction SilentlyContinue |
         Add-Content -LiteralPath $selfTestLog -Encoding UTF8
