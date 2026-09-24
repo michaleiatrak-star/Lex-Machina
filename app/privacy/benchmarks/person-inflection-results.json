@@ -1,0 +1,162 @@
+{
+ "trackA": {
+  "persons": 300,
+  "genderAccuracy": 0.9967,
+  "sameEntityAcrossTwoForms": 0.9933,
+  "flaggedForReview": 2,
+  "wrongButNotFlagged": 1,
+  "formAccuracy": 0.9967,
+  "formAccuracyByCase": {
+   "nom": 0.9933,
+   "gen": 0.9967,
+   "dat": 0.9967,
+   "acc": 0.9967,
+   "inst": 0.9967,
+   "loc": 1.0,
+   "voc": 0.9967
+  },
+  "literalRestoreBaseline": 0.2057,
+  "literalRestoreByCase": {
+   "nom": 0.1567,
+   "gen": 0.25,
+   "dat": 0.2533,
+   "acc": 0.22,
+   "inst": 0.0933,
+   "loc": 0.2767,
+   "voc": 0.19
+  },
+  "sampleFailures": [
+   "Macieju Wojtyło [voc] -> Maciej Wojtyło (ok)",
+   "Martynie Hołdzie [loc] -> Martyn Hołda (gender_ambiguous)"
+  ],
+  "surnamesSkippedNotInSgjp": 10
+ },
+ "trackB": {
+  "persons": 15,
+  "genderAccuracy": 0.9333,
+  "formAccuracy": 0.68,
+  "flaggedForReview": 8,
+  "wrongButNotFlagged": 0,
+  "rows": [
+   {
+    "name": "Hans Müller",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 0.75
+   },
+   {
+    "name": "Emma Müller",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 0.9
+   },
+   {
+    "name": "Klaus Schmidt",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 1.0
+   },
+   {
+    "name": "Jerzy de Vries",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 0.75
+   },
+   {
+    "name": "Olga Petrenko",
+    "status": "needs_review",
+    "wrongCases": [],
+    "confidence": 0.3
+   },
+   {
+    "name": "Oksana Kowalenko",
+    "status": "needs_review",
+    "wrongCases": [],
+    "confidence": 0.5
+   },
+   {
+    "name": "Mark Taylor",
+    "status": "needs_review",
+    "wrongCases": [],
+    "confidence": 0.75
+   },
+   {
+    "name": "Sarah Brown",
+    "status": "needs_review",
+    "wrongCases": [
+     "gen",
+     "dat",
+     "acc",
+     "inst",
+     "loc"
+    ],
+    "confidence": 0.75
+   },
+   {
+    "name": "Ahmed Hassan",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 0.75
+   },
+   {
+    "name": "Viktor Orbanek",
+    "status": "needs_review",
+    "wrongCases": [
+     "gen",
+     "dat",
+     "acc",
+     "inst",
+     "loc"
+    ],
+    "confidence": 0.75
+   },
+   {
+    "name": "Lukas Novotny",
+    "status": "needs_review",
+    "wrongCases": [
+     "gen",
+     "dat",
+     "acc",
+     "inst",
+     "loc"
+    ],
+    "confidence": 0.3
+   },
+   {
+    "name": "Anna Novotna",
+    "status": "needs_review",
+    "wrongCases": [
+     "gen",
+     "dat",
+     "acc",
+     "loc"
+    ],
+    "confidence": 0.5
+   },
+   {
+    "name": "Tomasz Kowalczuk-Brandt",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 1.0
+   },
+   {
+    "name": "Pierre Dubois",
+    "status": "ok",
+    "wrongCases": [],
+    "confidence": 1.0
+   },
+   {
+    "name": "Giovanni Rossi",
+    "status": "needs_review",
+    "wrongCases": [
+     "gen",
+     "dat",
+     "acc",
+     "inst",
+     "loc"
+    ],
+    "confidence": 0.3
+   }
+  ]
+ }
+}
