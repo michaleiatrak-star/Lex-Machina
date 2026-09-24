@@ -93,8 +93,10 @@ export function documentProcessingFailureMessage(
     return code;
   }
   const cause =
-    reason === "OCR_REQUIRED"
-      ? "dokument wymaga OCR, ale lokalny silnik OCR nie jest dostępny"
+    reason === "OCR_REQUIRED" || reason === "OCR_ENGINE_MISSING"
+      ? "dokument wymaga OCR, ale lokalny silnik OCR nie jest zainstalowany lub jest niekompletny"
+      : reason === "OCR_ENGINE_START_FAILED"
+        ? "nie udało się uruchomić lokalnego silnika OCR (Python)"
       : reason.startsWith("OCR_")
         ? "lokalny OCR nie przetworzył stron wymagających rozpoznania tekstu"
         : reason.startsWith("DOCUMENT_")

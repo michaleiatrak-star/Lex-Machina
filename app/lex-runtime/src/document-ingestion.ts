@@ -8,6 +8,8 @@ export type DocumentPageSourceName =
 export type ExtractedDigitalPage = {
   page: number;
   text: string;
+  // false: the page draws no image, so OCR has nothing to read.
+  hasImages?: boolean;
 };
 
 export type DocumentSourceExtraction = {
@@ -219,7 +221,8 @@ export class CompleteDocumentIngestor {
       .filter(
         (page) =>
           page.text.trim().length <
-          this.limits.minDigitalCharsPerPage
+            this.limits.minDigitalCharsPerPage &&
+          page.hasImages !== false
       )
       .map((page) => page.page);
 

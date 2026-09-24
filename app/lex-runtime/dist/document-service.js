@@ -4,6 +4,15 @@ import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseud
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
 import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
+/** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
+export function decodePlainText(data) {
+    try {
+        return new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(data);
+    }
+    catch {
+        return new TextDecoder("windows-1250").decode(data);
+    }
+}
 export class LocalPrivateDocumentService {
     pdfIngestor;
     namedEntities;
@@ -74,9 +83,7 @@ export class LocalPrivateDocumentService {
             "text/plain" ||
             mediaType ===
                 "text/markdown") {
-            return this.digitalTextResult(data, new TextDecoder("utf-8", {
-                fatal: false
-            }).decode(data));
+            return this.digitalTextResult(data, decodePlainText(data));
         }
         if (mediaType ===
             XLSX_MEDIA_TYPE ||

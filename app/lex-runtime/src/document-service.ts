@@ -53,6 +53,15 @@ export type DocumentSecurityContext = {
   keyVersion?: number;
 };
 
+/** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
+export function decodePlainText(data: Uint8Array): string {
+  try {
+    return new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(data);
+  } catch {
+    return new TextDecoder("windows-1250").decode(data);
+  }
+}
+
 export type SupportedDocumentMediaType =
   | "application/pdf"
   | SupportedImageMediaType
@@ -284,12 +293,7 @@ implements DocumentService {
     ) {
       return this.digitalTextResult(
         data,
-        new TextDecoder(
-          "utf-8",
-          {
-            fatal: false
-          }
-        ).decode(data)
+        decodePlainText(data)
       );
     }
     if (

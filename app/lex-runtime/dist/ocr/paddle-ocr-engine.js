@@ -81,7 +81,7 @@ export class LocalPaddleOcrEngine {
                     if (code === 0)
                         resolve();
                     else {
-                        reject(new Error(`OCR_ENGINE_FAILED: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
+                        reject(new Error(`${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
                     }
                 });
             });

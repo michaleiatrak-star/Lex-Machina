@@ -124,7 +124,7 @@ implements OcrEngine {
           else {
             reject(
               new Error(
-                `OCR_ENGINE_FAILED: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`
+                `${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`
               )
             );
           }

@@ -52,9 +52,11 @@ from legal_document_worker import (  # noqa: E402
 )
 from spreadsheet_extract_worker import (  # noqa: E402
     NS_MAIN,
+    decode_delimited,
     parse_xml,
     read_member,
     shared_strings,
+    sniff_delimiter,
     validate_archive,
     workbook_sheets,
 )
@@ -389,12 +391,8 @@ def xlsx_read(data: bytes) -> dict:
 
 
 def delimited_read(data: bytes, delimiter: str) -> dict:
-    try:
-        text = data.decode("utf-8-sig")
-    except UnicodeDecodeError:
-        text = data.decode("cp1250", errors="replace")
-    if delimiter == "," and text.count(";") > text.count(","):
-        delimiter = ";"  # Polish Excel exports
+    text = decode_delimited(data)
+    delimiter = sniff_delimiter(text, delimiter)
     rows = []
     truncated = False
     for index, row in enumerate(csv.reader(io.StringIO(text), delimiter=delimiter)):

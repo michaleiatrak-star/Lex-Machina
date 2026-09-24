@@ -103,7 +103,8 @@ export class CompleteDocumentIngestor {
         assertPageSequence(extracted.pages);
         const ocrCandidates = extracted.pages
             .filter((page) => page.text.trim().length <
-            this.limits.minDigitalCharsPerPage)
+            this.limits.minDigitalCharsPerPage &&
+            page.hasImages !== false)
             .map((page) => page.page);
         if (ocrCandidates.length > 0 && !this.ocr) {
             throw new DocumentIngestionError(`OCR is required for ${ocrCandidates.length} page(s), but no local OCR engine is configured.`, "OCR_REQUIRED");

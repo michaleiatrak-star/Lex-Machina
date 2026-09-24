@@ -2312,9 +2312,15 @@ export function createLexHttpApp(options) {
                 typeof error.code === "string"
                 ? String(error.code)
                 : "";
+            const errorName = error instanceof Error && /^[A-Za-z]{3,60}$/.test(error.name) && error.name !== "Error"
+                ? error.name.replace(/([a-z])([A-Z])/g, "$1_$2").toUpperCase()
+                : "";
             const reason = /^[A-Z][A-Z0-9_]{2,80}$/.test(errorCode)
                 ? errorCode
-                : /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(code)?.[0];
+                : /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(code)?.[0] ??
+                    (errorName ? `INTERNAL_${errorName}` : undefined);
+            // Code and error type only: the message may quote document content.
+            console.error(`STORED_FILE_PROCESSING_FAILED:${reason ?? "UNKNOWN"}`);
             res.status(422).json({
                 error: "STORED_FILE_PROCESSING_FAILED",
                 ...(reason

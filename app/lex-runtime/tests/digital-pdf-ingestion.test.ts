@@ -60,3 +60,57 @@ describe("digital PDF ingestion", () => {
     );
   });
 });
+
+// Two pages with a short text line and no images (like a signature page).
+const SHORT_TEXT_PDF = "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUiA0IDAgUl0gL0NvdW50IDIgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvQ29udGVudHMgNSAwIFIgL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgNyAwIFIgPj4gPj4gPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvQ29udGVudHMgNiAwIFIgL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgNyAwIFIgPj4gPj4gPj4KZW5kb2JqCjUgMCBvYmoKPDwgL0xlbmd0aCA4NiA+PgpzdHJlYW0KQlQgL0YxIDI0IFRmIDcyIDcwMCBUZCAoU3Ryb25hIDEgLSBQb3pldyBvIHphcGxhdGUpIFRqIEVUIDAgMCAxIHJnIDcyIDUwMCAyMDAgMTAwIHJlIGYKZW5kc3RyZWFtCmVuZG9iago2IDAgb2JqCjw8IC9MZW5ndGggODYgPj4Kc3RyZWFtCkJUIC9GMSAyNCBUZiA3MiA3MDAgVGQgKFN0cm9uYSAyIC0gUG96ZXcgbyB6YXBsYXRlKSBUaiBFVCAwIDAgMSByZyA3MiA1MDAgMjAwIDEwMCByZSBmCmVuZHN0cmVhbQplbmRvYmoKNyAwIG9iago8PCAvVHlwZSAvRm9udCAvU3VidHlwZSAvVHlwZTEgL0Jhc2VGb250IC9IZWx2ZXRpY2EgPj4KZW5kb2JqCnhyZWYKMCA4CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMjEgMDAwMDAgbiAKMDAwMDAwMDI0NyAwMDAwMCBuIAowMDAwMDAwMzczIDAwMDAwIG4gCjAwMDAwMDA1MDkgMDAwMDAgbiAKMDAwMDAwMDY0NSAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDggL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjcxNQolJUVPRgo=";
+
+describe("stored PDF bytes", () => {
+  it("accepts a Node Buffer, keeps it intact and skips OCR on pages without images", async () => {
+    const data = Buffer.from(SHORT_TEXT_PDF, "base64");
+    const before = Buffer.from(data);
+    let ocrPages: number[] = [];
+    const ocr: OcrEngine = {
+      async recognizePages(bytes, pages) {
+        ocrPages = pages;
+        expect(Buffer.from(bytes).equals(before)).toBe(true);
+        return pages.map((page) => ({ page, text: "" }));
+      }
+    };
+    const result = await new CompleteDocumentIngestor(new PdfJsDocumentPageSource(), ocr).ingest(data);
+    expect(result.totalPages).toBe(2);
+    expect(result.ocrPages).toBe(0);
+    expect(result.digitalPages).toBe(2);
+    expect(ocrPages).toEqual([]);
+    expect(data.equals(before)).toBe(true);
+  });
+});
+
+describe("OCR candidates", () => {
+  it("sends short pages with images or unknown content to OCR, never image-free ones", async () => {
+    let requested: number[] = [];
+    const ingestor = new CompleteDocumentIngestor(
+      {
+        async extract() {
+          return {
+            bytes: 1,
+            pages: [
+              { page: 1, text: "", hasImages: true },
+              { page: 2, text: "", hasImages: false },
+              { page: 3, text: "" },
+              { page: 4, text: "x".repeat(80) }
+            ]
+          };
+        }
+      },
+      {
+        async recognizePages(_data, pages) {
+          requested = pages;
+          return pages.map((page) => ({ page, text: "tekst ze skanu" }));
+        }
+      }
+    );
+    const result = await ingestor.ingest(new Uint8Array([1]));
+    expect(requested).toEqual([1, 3]);
+    expect(result.pages.map((page) => page.source)).toEqual(["OCR", "BLANK", "OCR", "DIGITAL"]);
+  });
+});
