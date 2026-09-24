@@ -289,6 +289,8 @@ export class LexExecutionEngine {
     // AUTO for account/API models: no separate router pass; the model reads
     // prawny-router-v3 and the skills it needs through the corpus tools.
     modelSelectsSkills?: boolean;
+    // Every audit event as it happens (the chat's stage list).
+    onEvent?: (event: ExecutionEvent) => void;
     // Model reads the skill corpus with its own confined file tools (Claude account).
     nativeCorpus?: {
       root: string;
@@ -367,13 +369,15 @@ export class LexExecutionEngine {
       status: ExecutionEvent["status"],
       detail?: string
     ) => {
-      events.push({
+      const event: ExecutionEvent = {
         sequence: events.length + 1,
         type,
         target,
         status,
         ...(detail ? { detail } : {})
-      });
+      };
+      events.push(event);
+      args.onEvent?.(event);
     };
 
     const skillEnvelope =

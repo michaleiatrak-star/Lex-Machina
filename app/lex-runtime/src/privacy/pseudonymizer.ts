@@ -1,3 +1,4 @@
+import { personPart } from "./generic-words.js";
 import { detectIdentifiers } from "./identifiers.js";
 import {
   PERSON_CASES,
@@ -32,6 +33,8 @@ export type PiiSpan = {
   confidence?: number;
   source?: "AUTO" | "USER";
   label?: string;
+  // A person match a local model should confirm from its sentence.
+  ambiguous?: boolean;
 };
 
 export type PrivacyDirectiveAction =
@@ -788,8 +791,11 @@ export class LocalPolishPseudonymizer {
     if (this.namedEntities) {
       const named =
         await this.namedEntities.recognize(text);
-      for (const span of named) {
+      for (const found of named) {
+        // "Bank", "Rada Gminy": an institution; "Najemca Jan Kowalski": the name only.
+        const span = found.kind === "PERSON" ? personPart(text, found) : found;
         if (
+          span &&
           text.slice(
             span.start,
             span.end

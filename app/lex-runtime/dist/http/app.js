@@ -16,6 +16,7 @@ import { SupportError } from "../support-service.js";
 import { parseGuideTransition } from "../guide-session-state.js";
 import { CaseAccessError } from "../case-access.js";
 import { ReauthorizationError } from "../auth/reauthorization.js";
+import { ExecutionSteps } from "../execution-steps.js";
 import { ContextBudgetError, estimateDocumentFit, HOSTED_CONTEXT_TOKENS, LOCAL_MAX_DOCUMENT_ATTACHMENTS, MAX_DOCUMENT_ATTACHMENTS } from "../context-orchestrator.js";
 import { MAX_FIRM_TEMPLATES, templateChunks, templateText } from "../firm-template-text.js";
 import { assertStoredDocumentSignature, storedDocumentMediaType } from "../stored-document-source.js";
@@ -2273,7 +2274,8 @@ export function createLexHttpApp(options) {
                         caseId,
                         caseDataKey,
                         keyVersion: caseView.keyVersion,
-                        ...(onProgress ? { onProgress } : {})
+                        ...(onProgress ? { onProgress } : {}),
+                        ...(req.body?.localAi === true ? { localAi: true } : {})
                     });
                 }
                 finally {
@@ -4380,7 +4382,8 @@ export function createLexHttpApp(options) {
         res.set("Cache-Control", "no-store");
         res.json({
             text: entry.text,
-            updatedAt: new Date(entry.updatedAt).toISOString()
+            updatedAt: new Date(entry.updatedAt).toISOString(),
+            steps: entry.steps.snapshot()
         });
     });
     // Documents the user picked for a message (case files, firm files, firm
@@ -4603,8 +4606,17 @@ export function createLexHttpApp(options) {
             executionDrafts.set(executionId, {
                 owner,
                 text: "",
-                updatedAt: Date.now()
+                updatedAt: Date.now(),
+                steps: new ExecutionSteps()
             });
+            request.onStep = (phase, detail) => {
+                const entry = executionDrafts.get(executionId);
+                if (entry && entry.owner === owner) {
+                    entry.steps.report(phase, detail);
+                    entry.updatedAt = Date.now();
+                }
+            };
+            request.onStep("PREPARE", "przygotowanie wiadomości");
             request.onDraft = (text) => {
                 const entry = executionDrafts.get(executionId);
                 if (entry && entry.owner === owner) {
@@ -4617,6 +4629,7 @@ export function createLexHttpApp(options) {
                 executionDrafts.delete(executionId);
             });
         }
+        request.onStep?.("ROUTING", request.primarySkill === "AUTO" ? "prawny-router-v3: wybór dziedziny" : `wybrany skill ${request.primarySkill}`);
         if (!(await resolveAutoPrimarySkill(request, res, attachments.length, {
             allowModelSelection: true,
             allowConversational: true

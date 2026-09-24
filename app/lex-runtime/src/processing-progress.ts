@@ -2,12 +2,14 @@
  * Progress of a long document operation (OCR, detection, pseudonymization),
  * so the case view can show a bar while the request runs. The client picks a
  * random id, sends it as X-Lex-Progress and polls it within the same case.
- * Only stage names and counts are kept - never document text.
+ * Only stage names and counts are kept, plus the words the local AI is
+ * checking (in memory, readable only within the same case).
  */
 export type ProcessingStage =
   | "READING"
   | "OCR"
   | "DETECTING"
+  | "AI_CHECK"
   | "PSEUDONYMIZING"
   | "SAVING";
 
@@ -15,6 +17,8 @@ export type ProcessingProgress = {
   stage: ProcessingStage;
   done?: number;
   total?: number;
+  // AI_CHECK: the words the local model is checking now (shown only in this case).
+  item?: string;
 };
 
 export type ProgressReporter = (progress: ProcessingProgress) => void;

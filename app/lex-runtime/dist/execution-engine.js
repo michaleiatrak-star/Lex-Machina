@@ -130,13 +130,15 @@ export class LexExecutionEngine {
     async executePolishLegalQuery(args) {
         const events = [];
         const emit = (type, target, status, detail) => {
-            events.push({
+            const event = {
                 sequence: events.length + 1,
                 type,
                 target,
                 status,
                 ...(detail ? { detail } : {})
-            });
+            };
+            events.push(event);
+            args.onEvent?.(event);
         };
         const skillEnvelope = parseSkillSelectionEnvelope(args.query);
         const effectiveQuery = skillEnvelope.query.trim();

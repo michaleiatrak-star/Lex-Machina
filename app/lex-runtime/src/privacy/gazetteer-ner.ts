@@ -64,6 +64,7 @@ export class LocalGazetteerRecognizer implements NamedEntityRecognizer {
         end: number;
         kind: string;
         value: string;
+        ambiguous?: boolean;
       }>;
       return raw
         .filter(
@@ -79,7 +80,8 @@ export class LocalGazetteerRecognizer implements NamedEntityRecognizer {
           kind: item.kind as PiiKind,
           value: item.value,
           confidence: 0.9,
-          source: "AUTO" as const
+          source: "AUTO" as const,
+          ...(item.ambiguous ? { ambiguous: true } : {})
         }));
     } finally {
       await rm(tempRoot, { recursive: true, force: true });

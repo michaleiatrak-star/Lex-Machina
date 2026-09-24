@@ -1,3 +1,4 @@
+import { personPart } from "./generic-words.js";
 import { detectIdentifiers } from "./identifiers.js";
 import { PERSON_CASES } from "./person-morphology.js";
 /** [PII:PERSON:0001] or, with the grammatical case a model asked for, [PII:PERSON:0001|INS]. */
@@ -433,8 +434,11 @@ export class LocalPolishPseudonymizer {
         }
         if (this.namedEntities) {
             const named = await this.namedEntities.recognize(text);
-            for (const span of named) {
-                if (text.slice(span.start, span.end) === span.value) {
+            for (const found of named) {
+                // "Bank", "Rada Gminy": an institution; "Najemca Jan Kowalski": the name only.
+                const span = found.kind === "PERSON" ? personPart(text, found) : found;
+                if (span &&
+                    text.slice(span.start, span.end) === span.value) {
                     autoSpans.push({
                         ...span,
                         source: "AUTO"

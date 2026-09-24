@@ -49,6 +49,20 @@ TRIGGERS = {
     "syn", "córka", "żona", "mąż", "ojciec", "matka", "brat", "siostra",
 }
 
+# Nouns that head an institution name or name a party role, in every case form
+# (generate_generic_words.py). Several are also SGJP surnames ("Bank", "Rada",
+# "Skarb"): such a word starting a span is an institution or a role, not a
+# person, unless a person-only word precedes it ("pani Rada").
+_GENERIC = json.loads(Path(__file__).with_name("generic_words.json").read_text(encoding="utf-8"))
+GENERIC_WORDS = frozenset(_GENERIC["institutions"]) | frozenset(_GENERIC["partyRoles"])
+PARTY_ROLES = frozenset(_GENERIC["partyRoles"])
+PERSON_ONLY_TRIGGERS = frozenset(_GENERIC["personOnlyTriggers"])
+
+
+def is_generic(word: str) -> bool:
+    return word.lower() in GENERIC_WORDS
+
+
 STREET_MARKER = (
     r"(?i:ul\.|ulic(?:a|ą|ę|y|i)|al\.|alej(?:a|ą|ę|i)|alei|pl\.|plac(?:u|em)?|"
     r"os\.|osiedl(?:e|a|u|em)|rond(?:o|a|zie|em)|skwer(?:u|ze|em)?|"
@@ -236,6 +250,7 @@ def find_persons(text: str, blocked: list[tuple[int, int]]) -> list[tuple[int, i
             g, s, u, c, geo, _ = cls(index)
             if (
                 s and not geo and cls(index + 1)[0]
+                and not is_generic(words[index][2])
                 and not ROMAN_AFTER.match(text, words[index + 1][1])
             ):
                 take(index, index + 1)
@@ -254,13 +269,17 @@ def find_persons(text: str, blocked: list[tuple[int, int]]) -> list[tuple[int, i
     # 4. Role or title before a surname ("pozwany Kowalski", "pani Nowak").
     for index in range(len(words) - 1):
         trigger = words[index][2].lower()
-        if trigger not in TRIGGERS:
+        # Party roles of contracts ("Najemca Kowalski") point at a person too.
+        if trigger not in TRIGGERS and trigger not in PARTY_ROLES:
             continue
         gap = text[words[index][1]:words[index + 1][0]]
         if gap.strip() not in {"", "."}:
             continue
         first = index + 1
         if not cap(first):
+            continue
+        # "pozwany Bank", "Wierzyciel Skarb Państwa": an institution, not a person.
+        if is_generic(words[first][2]) and trigger not in PERSON_ONLY_TRIGGERS:
             continue
         last = first
         while last - first < 2 and cap(last + 1) and linked(last, last + 1):
@@ -284,10 +303,28 @@ def find_persons(text: str, blocked: list[tuple[int, int]]) -> list[tuple[int, i
                 known |= surname_keys(word)
     if known:
         for index in range(len(words)):
+            # "Bank Pekao" after "Jan Bank": the institution name, not the person.
+            if (
+                is_generic(words[index][2])
+                and index + 1 < len(words)
+                and linked(index, index + 1)
+                and is_capitalized(words[index + 1][2])
+            ):
+                continue
             if cap(index) and surname_keys(words[index][2], in_surname_position=True) & known:
                 take(index, index)
 
     return spans
+
+
+def is_ambiguous(value: str) -> bool:
+    """A person span a local model should confirm from the sentence: one word,
+    a generic noun in it, or only words that are also common nouns."""
+    words = [word for _s, _e, word in tokens(value)]
+    if len(words) <= 1 or any(is_generic(word) for word in words):
+        return True
+    classes = [word_class(word) for word in words]
+    return all(c and not g for g, _s, _u, c, _geo, _l in classes)
 
 
 def recognize(text: str) -> list[dict]:
@@ -296,7 +333,8 @@ def recognize(text: str) -> list[dict]:
     result = [
         {"start": s, "end": e, "kind": "ADDRESS", "value": text[s:e]} for s, e in addresses
     ] + [
-        {"start": s, "end": e, "kind": "PERSON", "value": text[s:e]} for s, e in persons
+        {"start": s, "end": e, "kind": "PERSON", "value": text[s:e], "ambiguous": is_ambiguous(text[s:e])}
+        for s, e in persons
     ]
     return sorted(result, key=lambda item: item["start"])
 

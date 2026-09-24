@@ -84,6 +84,22 @@ export function highlightProtected(protectedText, source, surfaces, fallback) {
     }
     return { text, marks };
 }
+function withAiMemory(recognizer, memory) {
+    return memory ? rememberingRecognizer(recognizer, memory) : recognizer;
+}
+/** Reuses the local-AI findings of a page already checked during the review. */
+function rememberingRecognizer(inner, memory) {
+    return {
+        recognize: async (text) => {
+            const known = memory.get(text);
+            if (known)
+                return known.map((span) => ({ ...span }));
+            const found = await inner.recognize(text);
+            memory.set(text, found.map((span) => ({ ...span })));
+            return found;
+        }
+    };
+}
 export class LocalPrivateDocumentService {
     pdfIngestor;
     namedEntities;
@@ -216,6 +232,7 @@ export class LocalPrivateDocumentService {
         const vault = new PseudonymizationVault();
         this.documents.set(documentId, {
             mediaType,
+            ...(security?.localAi ? { localAi: true, aiFindings: new Map() } : {}),
             ...(security?.caseId
                 ? {
                     caseId: security.caseId
@@ -228,7 +245,11 @@ export class LocalPrivateDocumentService {
         const suggestions = [];
         for (const [index, page] of source.pages.entries()) {
             onProgress?.({ stage: "DETECTING", done: index, total: source.pages.length });
-            const preview = await new LocalPolishPseudonymizer(suggestionVault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text);
+            const preview = await new LocalPolishPseudonymizer(suggestionVault, withAiMemory(privacyRecognizerFor(this.namedEntities, page.source === "OCR", security?.localAi
+                ? {
+                    onCheck: (item, done, total) => onProgress?.({ stage: "AI_CHECK", done, total, item: `s. ${page.page}: ${item}`.slice(0, 160) })
+                }
+                : undefined), this.documents.get(documentId)?.aiFindings), this.personMorphology).pseudonymize(page.text);
             for (const finding of preview.findings) {
                 suggestions.push({
                     page: page.page,
@@ -295,7 +316,11 @@ export class LocalPrivateDocumentService {
                 const pageDirectives = directives
                     .filter((directive) => directive.page === page.page)
                     .map(({ page: _page, ...directive }) => directive);
-                const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text, pageDirectives);
+                const protectedPage = await new LocalPolishPseudonymizer(record.vault, withAiMemory(privacyRecognizerFor(this.namedEntities, page.source === "OCR", record.localAi
+                    ? {
+                        onCheck: (item, done, total) => onProgress?.({ stage: "AI_CHECK", done, total, item: `s. ${page.page}: ${item}`.slice(0, 160) })
+                    }
+                    : undefined), record.aiFindings), this.personMorphology).pseudonymize(page.text, pageDirectives);
                 findings += protectedPage.findings.length;
                 manualPseudonymizations +=
                     protectedPage.findings.filter((item) => item.source === "USER").length;

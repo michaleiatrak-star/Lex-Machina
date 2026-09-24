@@ -64,7 +64,8 @@ export class LocalGazetteerRecognizer {
                 kind: item.kind,
                 value: item.value,
                 confidence: 0.9,
-                source: "AUTO"
+                source: "AUTO",
+                ...(item.ambiguous ? { ambiguous: true } : {})
             }));
         }
         finally {

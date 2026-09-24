@@ -421,6 +421,11 @@ export class SafeSessionExecutor {
         };
     }
     async execute(request) {
+        const step = request.onStep ?? (() => undefined);
+        step("PREPARE", "anonimizacja wiadomości");
+        if (request.documentAttachments?.length) {
+            step("PREPARE", `pliki w kontekście: ${request.documentAttachments.length}`);
+        }
         const audit = new AuditTrail();
         audit.start({
             provider: request.provider,
@@ -624,6 +629,20 @@ export class SafeSessionExecutor {
             ? createDraftCallbacks(chatPrivacyVault, request.onDraft)
             : undefined;
         const execution = await this.engine.executePolishLegalQuery({
+            onEvent: (event) => {
+                if (event.status !== "OK")
+                    return;
+                if (event.type === "route")
+                    step("ROUTING", event.target);
+                else if (event.target === "MODEL_SKILL_SELECTION")
+                    step("ROUTING", "model dobiera skille według routera v3");
+                else if (event.type === "skill_read")
+                    step("SKILLS", `skill ${event.target}`);
+                else if (event.type === "resource_read")
+                    step("SKILLS", event.target);
+                else if (event.type === "provider_start")
+                    step("MODEL", `model ${event.detail ?? event.target}`);
+            },
             query: protectedQuery,
             ...(draftCallbacks
                 ? {
@@ -646,7 +665,10 @@ export class SafeSessionExecutor {
                 ? {
                     nativeCorpus: {
                         root: this.registry.root,
-                        onRead: (relativePath) => corpusTools.recordNativeRead(relativePath),
+                        onRead: (relativePath) => {
+                            corpusTools.recordNativeRead(relativePath);
+                            step("SKILLS", relativePath);
+                        },
                         missingQualifier: () => corpusTools.missingCriminalQualifier()
                     }
                 }
@@ -707,6 +729,15 @@ export class SafeSessionExecutor {
                     : {})
             }),
             runTools: async (calls) => {
+                for (const call of calls) {
+                    if (corpusTools.handles(call.name)) {
+                        const target = [call.input.skill, call.input.path].filter((part) => typeof part === "string").join("/");
+                        step("SKILLS", target || call.name);
+                    }
+                    else {
+                        step("MODEL", `narzędzie ${call.name}`);
+                    }
+                }
                 const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
                 const reportCalls = calls.filter((call) => reportTools.handles(call.name));
                 const federationCalls = calls.filter((call) => federationTools?.handles(call.name) ?? false);
@@ -1001,6 +1032,7 @@ export class SafeSessionExecutor {
                 "[/STRUCTURED_REPORT_BLUEPRINT_DATA]"
             ].join("\n")
             : processedDocumentCitations.text;
+        step("VERIFY", "przepisy, orzeczenia i cytaty w odpowiedzi");
         const finalization = this.finalizer.finalize({
             text: finalizationText,
             ledger,
@@ -1293,6 +1325,7 @@ export class SafeSessionExecutor {
             line: finding.reference.line,
             status: finding.status
         }));
+        step("RESTORE", "symbole zastępcze → dane z lokalnego klucza");
         // Every restored value is reported so the UI can mark it for review.
         const restoredAnswer = restoreWithReport(processedDocumentCitations.text, chatPrivacyVault);
         const response = {

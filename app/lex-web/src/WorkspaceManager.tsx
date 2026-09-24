@@ -16,7 +16,8 @@ import {
   type CaseArtifact,
   type CaseKnowledgeHit,
   type ProcessingProgress,
-  type StoredUploadResponse
+  type StoredUploadResponse,
+  getLocalModels
 } from "./api.js";
 import {
   filterWorkspaceItems,
@@ -102,6 +103,12 @@ export function documentProcessingFailureMessage(
   }
   if (code !== "STORED_FILE_PROCESSING_FAILED") {
     return code;
+  }
+  if (reason === "LOCAL_PRIVACY_MODEL_NOT_READY") {
+    return "Nie udało się przetworzyć dokumentu: opcja „z lokalnym AI” wymaga uruchomionego modelu lokalnego (Ustawienia → Modele). Uruchom model albo odznacz opcję.";
+  }
+  if (reason === "LOCAL_PRIVACY_MODEL_FAILED") {
+    return "Nie udało się przetworzyć dokumentu: lokalny model nie odpowiedział podczas sprawdzania danych osobowych. Spróbuj ponownie albo odznacz „z lokalnym AI”.";
   }
   const cause =
     reason === "OCR_REQUIRED" || reason === "OCR_ENGINE_MISSING"
@@ -227,6 +234,22 @@ export function WorkspaceManager({
     setKnowledgeSearchError
   ] = useState("");
   const [busy, setBusy] = useState(false);
+  // "z lokalnym AI": the running local model (e.g. Bielik) checks each document too.
+  const [localAi, setLocalAi] = useState(false);
+  const [localAiReady, setLocalAiReady] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    getLocalModels()
+      .then((models) => {
+        if (!cancelled) setLocalAiReady(models.runtime.configured && models.runtime.state === "READY");
+      })
+      .catch(() => {
+        if (!cancelled) setLocalAiReady(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshToken]);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [artifacts, setArtifacts] = useState<CaseArtifact[]>([]);
@@ -403,7 +426,8 @@ export function WorkspaceManager({
           caseId,
           item.itemId,
           undefined,
-          progressId
+          progressId,
+          localAi && localAiReady && !keepClear ? { localAi: true } : undefined
         );
       // OCR only: every page kept as written, no anonymization key.
       const result =
@@ -849,6 +873,24 @@ export function WorkspaceManager({
             >
               Wyczyść filtry
             </button>
+          ) : null}
+          {canWrite ? (
+            <label
+              className="workspace-local-ai"
+              title={
+                localAiReady
+                  ? "Uruchomiony model lokalny dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite."
+                  : "Uruchom model lokalny (Ustawienia → Modele), aby anonimizować z lokalnym AI."
+              }
+            >
+              <input
+                type="checkbox"
+                checked={localAi && localAiReady}
+                disabled={!localAiReady || busy}
+                onChange={(event) => setLocalAi(event.target.checked)}
+              />
+              z lokalnym AI
+            </label>
           ) : null}
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">

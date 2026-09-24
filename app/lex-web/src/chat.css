@@ -2088,3 +2088,48 @@ mark.restored {
   color: #9b2c2c;
   font-weight: 600;
 }
+
+.chat-steps {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.chat-steps-summary {
+  color: #5d6a61;
+  font-weight: 600;
+}
+
+.chat-step {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 2px 8px;
+  align-items: baseline;
+}
+
+.chat-step small {
+  grid-column: 2;
+  color: #748078;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.chat-step-status {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chat-step-done .chat-step-status {
+  color: #2f6b3a;
+}
+
+.chat-step-active .chat-step-status {
+  color: #9a5b00;
+}
+
+.chat-step-pending {
+  opacity: 0.55;
+}

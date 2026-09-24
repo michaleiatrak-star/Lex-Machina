@@ -1022,3 +1022,17 @@
   font-size: 13px;
   white-space: nowrap;
 }
+
+.workspace-header-actions .workspace-local-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.workspace-header-actions .workspace-local-ai:has(input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

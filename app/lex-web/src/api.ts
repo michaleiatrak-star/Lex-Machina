@@ -2560,9 +2560,22 @@ export function executeSession(input: {
   });
 }
 
+export type ExecutionStepsSnapshot = {
+  current: number;
+  total: number;
+  phases: Array<{
+    key: string;
+    label: string;
+    status: "done" | "active" | "pending";
+    details: string[];
+  }>;
+};
+
 export type SessionExecutionProgress = {
   text: string;
   updatedAt: string;
+  // Stages of the turn: done, running, pending, with skills and tools used.
+  steps?: ExecutionStepsSnapshot;
 };
 
 /** Live draft of a running execution (null when not available). */
@@ -2703,7 +2716,9 @@ export async function processStoredCaseFile(
   caseId: string,
   uploadId: string,
   fileId?: string,
-  progressId?: string
+  progressId?: string,
+  // "z lokalnym AI": the running local model also checks the document.
+  options?: { localAi?: boolean }
 ): Promise<DocumentReviewResponse> {
   const path = fileId
     ? `/api/cases/${caseId}/files/${uploadId}/members/${fileId}/process`
@@ -2712,7 +2727,8 @@ export async function processStoredCaseFile(
     path,
     {
       method: "POST",
-      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {})
+      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
+      ...(options?.localAi ? { body: JSON.stringify({ localAi: true }) } : {})
     }
   );
 }
@@ -2737,9 +2753,11 @@ export function finalizeDocument(
 }
 
 export type ProcessingProgress = {
-  stage: "READING" | "OCR" | "DETECTING" | "PSEUDONYMIZING" | "SAVING";
+  stage: "READING" | "OCR" | "DETECTING" | "AI_CHECK" | "PSEUDONYMIZING" | "SAVING";
   done?: number;
   total?: number;
+  // AI_CHECK: the words the local model is checking now.
+  item?: string;
   updatedAt: string;
 };
 

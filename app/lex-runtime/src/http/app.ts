@@ -101,6 +101,7 @@ import type {
 import type {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
+import { ExecutionSteps } from "../execution-steps.js";
 import {
   ContextBudgetError,
   estimateDocumentFit,
@@ -4316,7 +4317,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       caseDataKey,
                       keyVersion:
                         caseView.keyVersion,
-                      ...(onProgress ? { onProgress } : {})
+                      ...(onProgress ? { onProgress } : {}),
+                      ...(req.body?.localAi === true ? { localAi: true } : {})
                     }
                   );
               } finally {
@@ -7629,6 +7631,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       owner: string;
       text: string;
       updatedAt: number;
+      steps: ExecutionSteps;
     }>();
   const draftOwner = (
     res: Response
@@ -7673,7 +7676,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       res.json({
         text: entry.text,
         updatedAt:
-          new Date(entry.updatedAt).toISOString()
+          new Date(entry.updatedAt).toISOString(),
+        steps: entry.steps.snapshot()
       });
     }
   );
@@ -8001,9 +8005,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         {
           owner,
           text: "",
-          updatedAt: Date.now()
+          updatedAt: Date.now(),
+          steps: new ExecutionSteps()
         }
       );
+      request.onStep = (phase, detail) => {
+        const entry = executionDrafts.get(executionId);
+        if (entry && entry.owner === owner) {
+          entry.steps.report(phase, detail);
+          entry.updatedAt = Date.now();
+        }
+      };
+      request.onStep("PREPARE", "przygotowanie wiadomości");
       request.onDraft = (text) => {
         const entry =
           executionDrafts.get(
@@ -8022,6 +8035,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
 
+    request.onStep?.("ROUTING", request.primarySkill === "AUTO" ? "prawny-router-v3: wybór dziedziny" : `wybrany skill ${request.primarySkill}`);
     if (
       !(await resolveAutoPrimarySkill(
         request,

@@ -66,6 +66,7 @@ import {
   type DocumentAttachmentSelection,
   type DocumentDelivery,
   type DocumentFitResponse,
+  type ExecutionStepsSnapshot,
   type EvidenceItem,
   type ModelDescriptor,
   type ModelRoutingPreferences,
@@ -621,7 +622,8 @@ export function startDraftPolling(
   executionId: string,
   onDraft: (text: string) => void,
   intervalMs = 1000,
-  fetchProgress: typeof getSessionProgress = getSessionProgress
+  fetchProgress: typeof getSessionProgress = getSessionProgress,
+  onSteps?: (steps: ExecutionStepsSnapshot | null) => void
 ): () => void {
   let stopped = false;
   let inFlight = false;
@@ -632,6 +634,9 @@ export function startDraftPolling(
       .then((progress) => {
         if (!stopped && progress?.text) {
           onDraft(progress.text);
+        }
+        if (!stopped && progress?.steps) {
+          onSteps?.(progress.steps);
         }
       })
       .catch(() => {
@@ -645,6 +650,7 @@ export function startDraftPolling(
     stopped = true;
     clearInterval(timer);
     onDraft("");
+    onSteps?.(null);
   };
 }
 
@@ -1000,6 +1006,7 @@ export default function MatterChatApp({
   const [executionError, setExecutionError] = useState("");
   const [executionDiagnostic, setExecutionDiagnostic] =
     useState<ExecutionDiagnostic | null>(null);
+  const [executionSteps, setExecutionSteps] = useState<ExecutionStepsSnapshot | null>(null);
   const [executionStage, setExecutionStage] =
     useState("Przygotowanie sesji");
   const [draftText, setDraftText] =
@@ -2809,7 +2816,10 @@ export default function MatterChatApp({
       const stopDraftPolling =
         startDraftPolling(
           executionId,
-          setDraftText
+          setDraftText,
+          1000,
+          getSessionProgress,
+          setExecutionSteps
         );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
@@ -4256,6 +4266,26 @@ export default function MatterChatApp({
                   <div className="chat-message-content">
                     {executionStage}
                   </div>
+                  {executionSteps ? (
+                    <ol className="chat-steps" aria-label="Etapy pracy">
+                      <li className="chat-steps-summary">
+                        Etap {executionSteps.current} z {executionSteps.total} · zakończone:{" "}
+                        {executionSteps.phases.filter((phase) => phase.status === "done").length} · pozostało:{" "}
+                        {executionSteps.phases.filter((phase) => phase.status !== "done").length}
+                      </li>
+                      {executionSteps.phases.map((phase) => (
+                        <li key={phase.key} className={`chat-step chat-step-${phase.status}`}>
+                          <span className="chat-step-status">
+                            {phase.status === "done" ? "zakończono" : phase.status === "active" ? "w toku" : "oczekuje"}
+                          </span>
+                          <strong>{phase.label}</strong>
+                          {phase.details.length ? (
+                            <small>{phase.details.slice(-6).join(" · ")}</small>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
                   {draftText ? (
                     <div className="chat-draft">
                       <div className="chat-draft-label">

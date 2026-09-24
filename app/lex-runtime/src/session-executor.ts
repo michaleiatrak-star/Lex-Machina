@@ -22,6 +22,7 @@ import {
   type ExecutionEvent
 } from "./execution-engine.js";
 import { ProviderGateway } from "./providers/gateway.js";
+import type { ExecutionStepReporter } from "./execution-steps.js";
 import type {
   NormalizedToolCall,
   NormalizedToolResult,
@@ -199,6 +200,8 @@ export type SessionExecutionRequest = {
   // Runtime-only (never parsed from HTTP): receives the live draft text of
   // the model answer with the chat pseudonyms already restored.
   onDraft?: (text: string) => void;
+  // Runtime-only: the stage of the turn and what was done in it (skills, tools).
+  onStep?: ExecutionStepReporter;
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
   auxiliaryText?: string;
@@ -1074,6 +1077,11 @@ export class SafeSessionExecutor implements SessionExecutor {
   async execute(
     request: SessionExecutionRequest
   ): Promise<SessionExecutionResponse> {
+    const step: ExecutionStepReporter = request.onStep ?? (() => undefined);
+    step("PREPARE", "anonimizacja wiadomości");
+    if (request.documentAttachments?.length) {
+      step("PREPARE", `pliki w kontekście: ${request.documentAttachments.length}`);
+    }
     const audit = new AuditTrail();
     audit.start({
       provider: request.provider,
@@ -1425,6 +1433,14 @@ export class SafeSessionExecutor implements SessionExecutor {
           )
         : undefined;
     const execution = await this.engine.executePolishLegalQuery({
+      onEvent: (event) => {
+        if (event.status !== "OK") return;
+        if (event.type === "route") step("ROUTING", event.target);
+        else if (event.target === "MODEL_SKILL_SELECTION") step("ROUTING", "model dobiera skille według routera v3");
+        else if (event.type === "skill_read") step("SKILLS", `skill ${event.target}`);
+        else if (event.type === "resource_read") step("SKILLS", event.target);
+        else if (event.type === "provider_start") step("MODEL", `model ${event.detail ?? event.target}`);
+      },
       query: protectedQuery,
       ...(draftCallbacks
         ? {
@@ -1447,7 +1463,10 @@ export class SafeSessionExecutor implements SessionExecutor {
         ? {
             nativeCorpus: {
               root: this.registry.root,
-              onRead: (relativePath: string) => corpusTools.recordNativeRead(relativePath),
+              onRead: (relativePath: string) => {
+                corpusTools.recordNativeRead(relativePath);
+                step("SKILLS", relativePath);
+              },
               missingQualifier: () => corpusTools.missingCriminalQualifier()
             }
           }
@@ -1523,6 +1542,14 @@ export class SafeSessionExecutor implements SessionExecutor {
               : {})
           }),
       runTools: async (calls) => {
+        for (const call of calls) {
+          if (corpusTools.handles(call.name)) {
+            const target = [call.input.skill, call.input.path].filter((part) => typeof part === "string").join("/");
+            step("SKILLS", target || call.name);
+          } else {
+            step("MODEL", `narzędzie ${call.name}`);
+          }
+        }
         const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
         const reportCalls = calls.filter((call) => reportTools.handles(call.name));
         const federationCalls = calls.filter(
@@ -2052,6 +2079,7 @@ export class SafeSessionExecutor implements SessionExecutor {
           ].join("\n")
         : processedDocumentCitations.text;
 
+    step("VERIFY", "przepisy, orzeczenia i cytaty w odpowiedzi");
     const finalization = this.finalizer.finalize({
       text: finalizationText,
       ledger,
@@ -2557,6 +2585,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         status: finding.status
       }));
 
+    step("RESTORE", "symbole zastępcze → dane z lokalnego klucza");
     // Every restored value is reported so the UI can mark it for review.
     const restoredAnswer = restoreWithReport(
       processedDocumentCitations.text,

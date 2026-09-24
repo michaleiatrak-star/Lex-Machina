@@ -22,6 +22,7 @@ import {
   type PseudonymizationVaultSnapshot,
   type ManualPrivacyDirective,
   type NamedEntityRecognizer,
+  type PiiSpan,
   type PiiKind
 } from "./privacy/pseudonymizer.js";
 import {
@@ -66,6 +67,8 @@ export type DocumentSecurityContext = {
   keyVersion?: number;
   // Stage and page counts for the case view's progress bar.
   onProgress?: ProgressReporter;
+  // "z lokalnym AI": the running local model checks every page.
+  localAi?: boolean;
 };
 
 /** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
@@ -349,7 +352,34 @@ type PrivateDocumentRecord = {
   protectedIngestion?: PublicDocumentIngestion;
   // Uses the case's shared key (one symbol per entity across the case).
   sharedKey?: boolean;
+  // "z lokalnym AI": the local model's findings per page text, from the
+  // review, so saving the document does not run the model a second time.
+  localAi?: boolean;
+  aiFindings?: Map<string, PiiSpan[]>;
 };
+
+function withAiMemory(
+  recognizer: NamedEntityRecognizer,
+  memory: Map<string, PiiSpan[]> | undefined
+): NamedEntityRecognizer {
+  return memory ? rememberingRecognizer(recognizer, memory) : recognizer;
+}
+
+/** Reuses the local-AI findings of a page already checked during the review. */
+function rememberingRecognizer(
+  inner: NamedEntityRecognizer,
+  memory: Map<string, PiiSpan[]>
+): NamedEntityRecognizer {
+  return {
+    recognize: async (text: string) => {
+      const known = memory.get(text);
+      if (known) return known.map((span) => ({ ...span }));
+      const found = await inner.recognize(text);
+      memory.set(text, found.map((span) => ({ ...span })));
+      return found;
+    }
+  };
+}
 
 export class LocalPrivateDocumentService
 implements DocumentService {
@@ -568,6 +598,7 @@ implements DocumentService {
     const vault = new PseudonymizationVault();
     this.documents.set(documentId, {
       mediaType,
+      ...(security?.localAi ? { localAi: true, aiFindings: new Map<string, PiiSpan[]>() } : {}),
       ...(security?.caseId
         ? {
             caseId:
@@ -587,10 +618,16 @@ implements DocumentService {
       const preview =
         await new LocalPolishPseudonymizer(
           suggestionVault,
-          privacyRecognizerFor(
+          withAiMemory(privacyRecognizerFor(
             this.namedEntities,
-            page.source === "OCR"
-          ),
+            page.source === "OCR",
+            security?.localAi
+              ? {
+                  onCheck: (item, done, total) =>
+                    onProgress?.({ stage: "AI_CHECK", done, total, item: `s. ${page.page}: ${item}`.slice(0, 160) })
+                }
+              : undefined
+          ), this.documents.get(documentId)?.aiFindings),
           this.personMorphology
         ).pseudonymize(
           page.text
@@ -692,10 +729,16 @@ implements DocumentService {
       const protectedPage =
         await new LocalPolishPseudonymizer(
           record.vault,
-          privacyRecognizerFor(
+          withAiMemory(privacyRecognizerFor(
             this.namedEntities,
-            page.source === "OCR"
-          ),
+            page.source === "OCR",
+            record.localAi
+              ? {
+                  onCheck: (item, done, total) =>
+                    onProgress?.({ stage: "AI_CHECK", done, total, item: `s. ${page.page}: ${item}`.slice(0, 160) })
+                }
+              : undefined
+          ), record.aiFindings),
           this.personMorphology
         ).pseudonymize(
           page.text,
