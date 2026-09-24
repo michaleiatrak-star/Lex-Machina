@@ -271,8 +271,10 @@ class PersonMorphology:
         alternatives = []
         if not gender_hint:
             for other in GENDERS:
+                # Small preferences (common name, inflected surname) choose a
+                # default, but a near-equal reading of the other gender is flagged.
                 if other != gender and any(
-                    abs(reading(other, case)[0] - score) < 1e-9 for case in CASES
+                    reading(other, case)[0] - score < 0.25 for case in CASES
                 ):
                     alternatives.append(other)
 

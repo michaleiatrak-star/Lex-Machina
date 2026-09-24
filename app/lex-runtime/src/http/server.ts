@@ -32,6 +32,9 @@ import {
   CoreLawIndex
 } from "../core-law-index.js";
 import {
+  LocalPersonMorphology
+} from "../privacy/person-morphology.js";
+import {
   MaintenanceService,
   commitSkillOverlayRuntimeHealth,
   recoverSkillOverlayForStartup
@@ -515,6 +518,10 @@ export async function startLocalServer(options?: {
   const legalFederationTools =
     new LegalFederationToolRuntime();
 
+  // Morfeusz2/SGJP person-name morphology in the payload Python.
+  const personMorphology =
+    new LocalPersonMorphology();
+
   // Official ELI texts of every act named in the domain act maps; refreshed
   // in the background, kept locally for offline and local-model use.
   const coreLawIndex =
@@ -556,7 +563,8 @@ export async function startLocalServer(options?: {
         ),
       privacyNamedEntities,
       legalFederationTools,
-      coreLawIndex
+      coreLawIndex,
+      personMorphology
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(
@@ -576,7 +584,8 @@ export async function startLocalServer(options?: {
       privacyVaultStore,
       secureCaseDocumentStore,
       new LocalOfficeDocumentTextExtractor(),
-      new LocalSpreadsheetTextExtractor()
+      new LocalSpreadsheetTextExtractor(),
+      personMorphology
     );
 
   const coreApp = createLexHttpApp({

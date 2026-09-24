@@ -1,3 +1,6 @@
+import type {
+  PersonMorphology
+} from "./privacy/person-morphology.js";
 import {
   AuditTrail,
   type AuditEvent
@@ -118,6 +121,7 @@ import type {
 } from "./ordered-case-workflow-state.js";
 import {
   LocalPolishPseudonymizer,
+  PII_TOKEN_WITH_CASE,
   PseudonymizationVault,
   type NamedEntityRecognizer
 } from "./privacy/pseudonymizer.js";
@@ -828,10 +832,10 @@ function transferExecutionEvents(
 }
 
 const DRAFT_PII_TOKEN =
-  /\[PII:[A-Z_]+:\d{4}\]/g;
+  /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
 // An incomplete token at the end of the stream is held back until complete.
 const DRAFT_PARTIAL_TOKEN_TAIL =
-  /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4})?)?)?)?)?$/;
+  /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4}(?:\|[A-Z]{0,4})?)?)?)?)?)?$/;
 
 export function createDraftCallbacks(
   vault: PseudonymizationVault,
@@ -847,10 +851,12 @@ export function createDraftCallbacks(
     onDraft(
       visible.replace(
         DRAFT_PII_TOKEN,
-        (token) =>
-          vault.hasToken(token)
-            ? vault.resolveToken(token)
-            : token
+        (token, kind: string, sequence: string, requestedCase?: string) => {
+          const base = `[PII:${kind}:${sequence}]`;
+          return vault.hasToken(base)
+            ? vault.restore(base, requestedCase ?? null).text
+            : token;
+        }
       )
     );
   };
@@ -889,7 +895,8 @@ export class SafeSessionExecutor implements SessionExecutor {
     private readonly verificationToolFactory?: LegalVerificationToolFactory,
     private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer,
     private readonly legalFederationTools?: LegalFederationToolRuntime,
-    private readonly coreLawIndex?: CoreLawIndex
+    private readonly coreLawIndex?: CoreLawIndex,
+    private readonly personMorphology?: PersonMorphology
   ) {
     this.engine = new LexExecutionEngine(
       registry,
@@ -929,7 +936,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         vault,
         this.chatRecognizerFor(
           request.model
-        )
+        ),
+        this.personMorphology
       );
     let protectedQuery: string;
     try {
@@ -1002,7 +1010,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         chatPrivacyVault,
         this.chatRecognizerFor(
           request.model
-        )
+        ),
+        this.personMorphology
       );
     let protectedQuery:
       string;
@@ -2457,17 +2466,13 @@ export class SafeSessionExecutor implements SessionExecutor {
             answer:
               processedDocumentCitations
                 .text.replace(
-                  /\[PII:[A-Z_]+:\d{4}\]/g,
-                  (token) =>
-                    chatPrivacyVault
-                      .hasToken(
-                        token
-                      )
-                      ? chatPrivacyVault
-                          .resolveToken(
-                            token
-                          )
-                      : token
+                  PII_TOKEN_WITH_CASE,
+                  (token, kind: string, sequence: string, requestedCase?: string) => {
+                    const base = `[PII:${kind}:${sequence}]`;
+                    return chatPrivacyVault.hasToken(base)
+                      ? chatPrivacyVault.restore(base, requestedCase ?? null).text
+                      : token;
+                  }
                 ),
             documentCitations: processedDocumentCitations.citations,
             ...(reportBlueprint

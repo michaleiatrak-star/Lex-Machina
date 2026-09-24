@@ -526,13 +526,16 @@ function restoreSessionDocumentAliases(result, documentService) {
     if (documentIds.length === 0) {
         return;
     }
-    const restoreText = (text) => text.replace(/\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})\]/g, (token, documentNumber, kind, sequence) => {
+    const restoreText = (text) => text.replace(/\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g, (token, documentNumber, kind, sequence, requestedCase) => {
         const index = Number(documentNumber) - 1;
         const documentId = documentIds[index];
         if (!documentId) {
             return token;
         }
-        const sourceToken = `[PII:${kind}:${sequence}]`;
+        // The case a model asked for travels with the token to the local vault.
+        const sourceToken = requestedCase
+            ? `[PII:${kind}:${sequence}|${requestedCase}]`
+            : `[PII:${kind}:${sequence}]`;
         try {
             return documentService
                 .deanonymize(documentId, sourceToken);

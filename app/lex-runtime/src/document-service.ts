@@ -1,3 +1,6 @@
+import type {
+  PersonMorphology
+} from "./privacy/person-morphology.js";
 import {
   createHash
 } from "node:crypto";
@@ -203,7 +206,10 @@ implements DocumentService {
     private readonly officeExtractor?:
       OfficeDocumentTextExtractor,
     private readonly spreadsheetExtractor?:
-      SpreadsheetTextExtractor
+      SpreadsheetTextExtractor,
+    // One token per person and inflected restore ([PII:PERSON:0001|GEN]).
+    private readonly personMorphology?:
+      PersonMorphology
   ) {}
 
   private digitalTextResult(
@@ -410,7 +416,8 @@ implements DocumentService {
           privacyRecognizerFor(
             this.namedEntities,
             page.source === "OCR"
-          )
+          ),
+          this.personMorphology
         ).pseudonymize(
           page.text
         );
@@ -523,7 +530,8 @@ implements DocumentService {
           privacyRecognizerFor(
             this.namedEntities,
             page.source === "OCR"
-          )
+          ),
+          this.personMorphology
         ).pseudonymize(
           page.text,
           pageDirectives

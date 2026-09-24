@@ -3,7 +3,7 @@
   "persons": 300,
   "genderAccuracy": 0.9967,
   "sameEntityAcrossTwoForms": 0.9933,
-  "flaggedForReview": 2,
+  "flaggedForReview": 7,
   "wrongButNotFlagged": 1,
   "formAccuracy": 0.9967,
   "formAccuracyByCase": {

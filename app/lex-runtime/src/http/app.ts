@@ -1220,12 +1220,13 @@ function restoreSessionDocumentAliases(
     text: string
   ): string =>
     text.replace(
-      /\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})\]/g,
+      /\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g,
       (
         token,
         documentNumber,
         kind,
-        sequence
+        sequence,
+        requestedCase?: string
       ) => {
         const index =
           Number(
@@ -1236,8 +1237,11 @@ function restoreSessionDocumentAliases(
         if (!documentId) {
           return token;
         }
+        // The case a model asked for travels with the token to the local vault.
         const sourceToken =
-          `[PII:${kind}:${sequence}]`;
+          requestedCase
+            ? `[PII:${kind}:${sequence}|${requestedCase}]`
+            : `[PII:${kind}:${sequence}]`;
         try {
           return documentService
             .deanonymize!(

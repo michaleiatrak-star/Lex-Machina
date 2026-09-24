@@ -1,3 +1,9 @@
+import { PERSON_CASES } from "./person-morphology.js";
+/** [PII:PERSON:0001] or, with the grammatical case a model asked for, [PII:PERSON:0001|INS]. */
+export const PII_TOKEN_WITH_CASE = /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
+function personEntityKey(entity) {
+    return `PERSON\u0000entity\u0000${entity.canonical.toLocaleLowerCase("pl")}\u0000${entity.gender}`;
+}
 function digits(value) {
     return value.replace(/\D/g, "");
 }
@@ -101,6 +107,7 @@ export class PseudonymizationVault {
     keyToToken = new Map();
     counters = new Map();
     tokenMetadata = new Map();
+    tokenEntities = new Map();
     constructor(snapshot) {
         if (snapshot) {
             this.hydrate(snapshot);
@@ -142,13 +149,29 @@ export class PseudonymizationVault {
                 kind: item.kind,
                 createdAt: item.createdAt
             });
+            if (item.entity) {
+                this.tokenEntities.set(item.token, item.entity);
+                this.keyToToken.set(personEntityKey(item.entity), item.token);
+            }
         }
     }
-    getOrCreate(kind, value) {
+    getOrCreate(kind, value, entity) {
         const key = `${kind}\u0000${value}`;
         const existing = this.keyToToken.get(key);
         if (existing) {
             return existing;
+        }
+        // One person, one token: "Jana Kowalskiego" and "Janem Kowalskim" are the
+        // same Jan Kowalski.
+        const entityKey = kind === "PERSON" && entity
+            ? personEntityKey(entity)
+            : null;
+        const sameEntity = entityKey
+            ? this.keyToToken.get(entityKey)
+            : undefined;
+        if (sameEntity) {
+            this.keyToToken.set(key, sameEntity);
+            return sameEntity;
         }
         const next = (this.counters.get(kind) ?? 0) + 1;
         this.counters.set(kind, next);
@@ -160,7 +183,56 @@ export class PseudonymizationVault {
             createdAt: new Date()
                 .toISOString()
         });
+        if (entity && entityKey) {
+            this.tokenEntities.set(token, entity);
+            this.keyToToken.set(entityKey, token);
+        }
         return token;
+    }
+    entity(token) {
+        return this.tokenEntities.get(token);
+    }
+    /**
+     * Value for a token in a model's output. A person token with a case
+     * ([PII:PERSON:0001|INS]) gets that inflected form; a bare person token gets
+     * the nominative. Other kinds return the stored value.
+     */
+    restore(token, requestedCase) {
+        const value = this.tokenToValue.get(token);
+        const metadata = this.tokenMetadata.get(token);
+        if (value === undefined || !metadata) {
+            throw new Error(`Unknown pseudonymization token: ${token}`);
+        }
+        const entity = this.tokenEntities.get(token);
+        const validCase = requestedCase &&
+            PERSON_CASES.includes(requestedCase)
+            ? requestedCase
+            : null;
+        if (!entity) {
+            return {
+                token,
+                requestedCase: validCase,
+                text: value,
+                kind: metadata.kind,
+                source: "stored",
+                confidence: 1,
+                status: metadata.kind === "PERSON" && requestedCase
+                    ? "no_forms"
+                    : "ok"
+            };
+        }
+        const form = entity.forms[validCase ?? "NOM"];
+        return {
+            token,
+            requestedCase: validCase,
+            text: form.text,
+            kind: metadata.kind,
+            source: form.source,
+            confidence: form.confidence,
+            status: requestedCase && !validCase
+                ? "invalid_case"
+                : "ok"
+        };
     }
     hasToken(token) {
         return this.tokenToValue
@@ -186,11 +258,15 @@ export class PseudonymizationVault {
             if (!metadata) {
                 throw new Error("PRIVACY_VAULT_METADATA_MISSING");
             }
+            const entity = this.tokenEntities.get(token);
             return {
                 token,
                 kind: metadata.kind,
                 value,
-                createdAt: metadata.createdAt
+                createdAt: metadata.createdAt,
+                ...(entity
+                    ? { entity }
+                    : {})
             };
         })
             .sort((a, b) => a.token.localeCompare(b.token, "en"));
@@ -200,7 +276,7 @@ export class PseudonymizationVault {
         };
     }
     deanonymize(text) {
-        return text.replace(/\[PII:[A-Z_]+:\d{4}\]/g, (token) => this.resolveToken(token));
+        return text.replace(PII_TOKEN_WITH_CASE, (_match, kind, sequence, requestedCase) => this.restore(`[PII:${kind}:${sequence}]`, requestedCase ?? null).text);
     }
     get size() {
         return this.tokenToValue
@@ -210,9 +286,11 @@ export class PseudonymizationVault {
 export class LocalPolishPseudonymizer {
     vault;
     namedEntities;
-    constructor(vault, namedEntities) {
+    morphology;
+    constructor(vault, namedEntities, morphology) {
         this.vault = vault;
         this.namedEntities = namedEntities;
+        this.morphology = morphology;
     }
     async pseudonymize(text, directives = []) {
         const manual = normalizeDirectives(text, directives);
@@ -261,9 +339,35 @@ export class LocalPolishPseudonymizer {
         ]);
         let output = text;
         const publicFindings = [];
+        // Canonical identity and paradigm of every person mention. Without the
+        // morphology engine tokens fall back to exact-surface identity.
+        const personEntities = new Map();
+        if (this.morphology) {
+            const persons = [
+                ...new Set(findings
+                    .filter((finding) => finding.kind === "PERSON")
+                    .map((finding) => finding.value))
+            ];
+            if (persons.length > 0) {
+                try {
+                    const analysed = await this.morphology.analyze(persons);
+                    persons.forEach((surface, index) => {
+                        const entity = analysed[index];
+                        if (entity) {
+                            personEntities.set(surface, entity);
+                        }
+                    });
+                }
+                catch (error) {
+                    process.stderr.write(`PERSON_MORPHOLOGY_DEGRADED:${error instanceof Error ? error.message : String(error)}\n`);
+                }
+            }
+        }
         for (let index = findings.length - 1; index >= 0; index -= 1) {
             const finding = findings[index];
-            const token = this.vault.getOrCreate(finding.kind, finding.value);
+            const token = this.vault.getOrCreate(finding.kind, finding.value, finding.kind === "PERSON"
+                ? personEntities.get(finding.value)
+                : undefined);
             output =
                 output.slice(0, finding.start) +
                     token +

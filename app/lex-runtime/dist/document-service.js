@@ -13,8 +13,11 @@ export class LocalPrivateDocumentService {
     secureDocumentStore;
     officeExtractor;
     spreadsheetExtractor;
+    personMorphology;
     documents = new Map();
-    constructor(pdfIngestor, namedEntities, maxChunkChars = 24_000, imageIngestor, privacyVaultStore, secureDocumentStore, officeExtractor, spreadsheetExtractor) {
+    constructor(pdfIngestor, namedEntities, maxChunkChars = 24_000, imageIngestor, privacyVaultStore, secureDocumentStore, officeExtractor, spreadsheetExtractor, 
+    // One token per person and inflected restore ([PII:PERSON:0001|GEN]).
+    personMorphology) {
         this.pdfIngestor = pdfIngestor;
         this.namedEntities = namedEntities;
         this.maxChunkChars = maxChunkChars;
@@ -23,6 +26,7 @@ export class LocalPrivateDocumentService {
         this.secureDocumentStore = secureDocumentStore;
         this.officeExtractor = officeExtractor;
         this.spreadsheetExtractor = spreadsheetExtractor;
+        this.personMorphology = personMorphology;
     }
     digitalTextResult(data, text) {
         if (data.byteLength >
@@ -140,7 +144,7 @@ export class LocalPrivateDocumentService {
         const suggestionVault = new PseudonymizationVault();
         const suggestions = [];
         for (const page of source.pages) {
-            const preview = await new LocalPolishPseudonymizer(suggestionVault, privacyRecognizerFor(this.namedEntities, page.source === "OCR")).pseudonymize(page.text);
+            const preview = await new LocalPolishPseudonymizer(suggestionVault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text);
             for (const finding of preview.findings) {
                 suggestions.push({
                     page: page.page,
@@ -213,7 +217,7 @@ export class LocalPrivateDocumentService {
             const pageDirectives = directives
                 .filter((directive) => directive.page === page.page)
                 .map(({ page: _page, ...directive }) => directive);
-            const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR")).pseudonymize(page.text, pageDirectives);
+            const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text, pageDirectives);
             findings += protectedPage.findings.length;
             manualPseudonymizations +=
                 protectedPage.findings.filter((item) => item.source === "USER").length;

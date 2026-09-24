@@ -16,7 +16,7 @@ import { evaluateModelTaskOwnershipGate } from "./model-task-ownership.js";
 import { applyAutomaticVerificationMarkers, detectHistoricalAsOf, planAutomaticLegalVerification } from "./gate-i-auto-verification.js";
 import { runGateIRuntimePrelude } from "./gate-i-runtime-prelude.js";
 import { evaluateGateIInputCompleteness, evaluateGateIWorkflowContract, gateIWorkflowContract } from "./gate-i-contracts.js";
-import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { LocalPolishPseudonymizer, PII_TOKEN_WITH_CASE, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { ModelAutoRouter } from "./model-auto-routing.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { parseSkillSelectionEnvelope } from "./skill-selection.js";
@@ -281,16 +281,19 @@ function transferExecutionEvents(events, audit) {
         }
     }
 }
-const DRAFT_PII_TOKEN = /\[PII:[A-Z_]+:\d{4}\]/g;
+const DRAFT_PII_TOKEN = /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
 // An incomplete token at the end of the stream is held back until complete.
-const DRAFT_PARTIAL_TOKEN_TAIL = /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4})?)?)?)?)?$/;
+const DRAFT_PARTIAL_TOKEN_TAIL = /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4}(?:\|[A-Z]{0,4})?)?)?)?)?)?$/;
 export function createDraftCallbacks(vault, onDraft) {
     let raw = "";
     const publish = () => {
         const visible = raw.replace(DRAFT_PARTIAL_TOKEN_TAIL, "");
-        onDraft(visible.replace(DRAFT_PII_TOKEN, (token) => vault.hasToken(token)
-            ? vault.resolveToken(token)
-            : token));
+        onDraft(visible.replace(DRAFT_PII_TOKEN, (token, kind, sequence, requestedCase) => {
+            const base = `[PII:${kind}:${sequence}]`;
+            return vault.hasToken(base)
+                ? vault.restore(base, requestedCase ?? null).text
+                : token;
+        }));
     };
     return {
         onContentDelta: (text) => {
@@ -313,10 +316,11 @@ export class SafeSessionExecutor {
     chatNamedEntityRecognizer;
     legalFederationTools;
     coreLawIndex;
+    personMorphology;
     engine;
     autoRouter;
     auxiliaryScheduler;
-    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools, coreLawIndex) {
+    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools, coreLawIndex, personMorphology) {
         this.registry = registry;
         this.providers = providers;
         this.finalizer = finalizer;
@@ -324,6 +328,7 @@ export class SafeSessionExecutor {
         this.chatNamedEntityRecognizer = chatNamedEntityRecognizer;
         this.legalFederationTools = legalFederationTools;
         this.coreLawIndex = coreLawIndex;
+        this.personMorphology = personMorphology;
         this.engine = new LexExecutionEngine(registry, providers);
         this.autoRouter =
             new ModelAutoRouter(registry, providers);
@@ -339,7 +344,7 @@ export class SafeSessionExecutor {
     }
     async resolveAutoRouting(request) {
         const vault = new PseudonymizationVault();
-        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatRecognizerFor(request.model));
+        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         try {
             protectedQuery =
@@ -377,7 +382,7 @@ export class SafeSessionExecutor {
             mode: request.mode
         });
         const chatPrivacyVault = new PseudonymizationVault();
-        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatRecognizerFor(request.model));
+        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         let protectedAuxiliaryText;
         try {
@@ -1230,11 +1235,12 @@ export class SafeSessionExecutor {
             ...(safeToPresent
                 ? {
                     answer: processedDocumentCitations
-                        .text.replace(/\[PII:[A-Z_]+:\d{4}\]/g, (token) => chatPrivacyVault
-                        .hasToken(token)
-                        ? chatPrivacyVault
-                            .resolveToken(token)
-                        : token),
+                        .text.replace(PII_TOKEN_WITH_CASE, (token, kind, sequence, requestedCase) => {
+                        const base = `[PII:${kind}:${sequence}]`;
+                        return chatPrivacyVault.hasToken(base)
+                            ? chatPrivacyVault.restore(base, requestedCase ?? null).text
+                            : token;
+                    }),
                     documentCitations: processedDocumentCitations.citations,
                     ...(reportBlueprint
                         ? {

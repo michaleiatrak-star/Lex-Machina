@@ -1,3 +1,10 @@
+import {
+  PERSON_CASES,
+  type PersonCase,
+  type PersonEntity,
+  type PersonMorphology
+} from "./person-morphology.js";
+
 export type PiiKind =
   | "PESEL"
   | "NIP"
@@ -56,6 +63,27 @@ export type PseudonymizationVaultToken = {
   kind: PiiKind;
   value: string;
   createdAt: string;
+  // PERSON: canonical identity and the inflected forms used on restore.
+  entity?: PersonEntity;
+};
+
+/** [PII:PERSON:0001] or, with the grammatical case a model asked for, [PII:PERSON:0001|INS]. */
+export const PII_TOKEN_WITH_CASE =
+  /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
+
+function personEntityKey(entity: PersonEntity): string {
+  return `PERSON\u0000entity\u0000${entity.canonical.toLocaleLowerCase("pl")}\u0000${entity.gender}`;
+}
+
+export type RestoredToken = {
+  token: string;
+  requestedCase: PersonCase | null;
+  text: string;
+  kind: PiiKind;
+  source: string;
+  confidence: number;
+  // ok, invalid_case (unknown case suffix, nominative used), no_forms, unknown_token
+  status: "ok" | "invalid_case" | "no_forms" | "unknown_token";
 };
 
 export type PseudonymizationVaultSnapshot = {
@@ -230,6 +258,8 @@ export class PseudonymizationVault {
         createdAt: string;
       }
     >();
+  private readonly tokenEntities =
+    new Map<string, PersonEntity>();
 
   constructor(
     snapshot?:
@@ -339,12 +369,23 @@ export class PseudonymizationVault {
             item.createdAt
         }
       );
+      if (item.entity) {
+        this.tokenEntities.set(
+          item.token,
+          item.entity
+        );
+        this.keyToToken.set(
+          personEntityKey(item.entity),
+          item.token
+        );
+      }
     }
   }
 
   getOrCreate(
     kind: PiiKind,
-    value: string
+    value: string,
+    entity?: PersonEntity
   ): string {
     const key =
       `${kind}\u0000${value}`;
@@ -352,6 +393,23 @@ export class PseudonymizationVault {
       this.keyToToken.get(key);
     if (existing) {
       return existing;
+    }
+    // One person, one token: "Jana Kowalskiego" and "Janem Kowalskim" are the
+    // same Jan Kowalski.
+    const entityKey =
+      kind === "PERSON" && entity
+        ? personEntityKey(entity)
+        : null;
+    const sameEntity =
+      entityKey
+        ? this.keyToToken.get(entityKey)
+        : undefined;
+    if (sameEntity) {
+      this.keyToToken.set(
+        key,
+        sameEntity
+      );
+      return sameEntity;
     }
 
     const next =
@@ -385,7 +443,90 @@ export class PseudonymizationVault {
             .toISOString()
       }
     );
+    if (entity && entityKey) {
+      this.tokenEntities.set(
+        token,
+        entity
+      );
+      this.keyToToken.set(
+        entityKey,
+        token
+      );
+    }
     return token;
+  }
+
+  entity(
+    token: string
+  ): PersonEntity | undefined {
+    return this.tokenEntities.get(
+      token
+    );
+  }
+
+  /**
+   * Value for a token in a model's output. A person token with a case
+   * ([PII:PERSON:0001|INS]) gets that inflected form; a bare person token gets
+   * the nominative. Other kinds return the stored value.
+   */
+  restore(
+    token: string,
+    requestedCase: string | null
+  ): RestoredToken {
+    const value =
+      this.tokenToValue.get(
+        token
+      );
+    const metadata =
+      this.tokenMetadata.get(
+        token
+      );
+    if (value === undefined || !metadata) {
+      throw new Error(
+        `Unknown pseudonymization token: ${token}`
+      );
+    }
+    const entity =
+      this.tokenEntities.get(
+        token
+      );
+    const validCase =
+      requestedCase &&
+      (PERSON_CASES as readonly string[]).includes(
+        requestedCase
+      )
+        ? requestedCase as PersonCase
+        : null;
+    if (!entity) {
+      return {
+        token,
+        requestedCase: validCase,
+        text: value,
+        kind: metadata.kind,
+        source: "stored",
+        confidence: 1,
+        status:
+          metadata.kind === "PERSON" && requestedCase
+            ? "no_forms"
+            : "ok"
+      };
+    }
+    const form =
+      entity.forms[
+        validCase ?? "NOM"
+      ];
+    return {
+      token,
+      requestedCase: validCase,
+      text: form.text,
+      kind: metadata.kind,
+      source: form.source,
+      confidence: form.confidence,
+      status:
+        requestedCase && !validCase
+          ? "invalid_case"
+          : "ok"
+    };
   }
 
   hasToken(
@@ -436,13 +577,20 @@ export class PseudonymizationVault {
                 "PRIVACY_VAULT_METADATA_MISSING"
               );
             }
+            const entity =
+              this.tokenEntities.get(
+                token
+              );
             return {
               token,
               kind:
                 metadata.kind,
               value,
               createdAt:
-                metadata.createdAt
+                metadata.createdAt,
+              ...(entity
+                ? { entity }
+                : {})
             };
           }
         )
@@ -463,11 +611,12 @@ export class PseudonymizationVault {
     text: string
   ): string {
     return text.replace(
-      /\[PII:[A-Z_]+:\d{4}\]/g,
-      (token) =>
-        this.resolveToken(
-          token
-        )
+      PII_TOKEN_WITH_CASE,
+      (_match, kind: string, sequence: string, requestedCase?: string) =>
+        this.restore(
+          `[PII:${kind}:${sequence}]`,
+          requestedCase ?? null
+        ).text
     );
   }
 
@@ -480,7 +629,8 @@ export class PseudonymizationVault {
 export class LocalPolishPseudonymizer {
   constructor(
     private readonly vault: PseudonymizationVault,
-    private readonly namedEntities?: NamedEntityRecognizer
+    private readonly namedEntities?: NamedEntityRecognizer,
+    private readonly morphology?: PersonMorphology
   ) {}
 
   async pseudonymize(
@@ -585,6 +735,41 @@ export class LocalPolishPseudonymizer {
     let output = text;
     const publicFindings: PseudonymizationFinding[] = [];
 
+    // Canonical identity and paradigm of every person mention. Without the
+    // morphology engine tokens fall back to exact-surface identity.
+    const personEntities =
+      new Map<string, PersonEntity>();
+    if (this.morphology) {
+      const persons = [
+        ...new Set(
+          findings
+            .filter((finding) => finding.kind === "PERSON")
+            .map((finding) => finding.value)
+        )
+      ];
+      if (persons.length > 0) {
+        try {
+          const analysed =
+            await this.morphology.analyze(
+              persons
+            );
+          persons.forEach((surface, index) => {
+            const entity = analysed[index];
+            if (entity) {
+              personEntities.set(
+                surface,
+                entity
+              );
+            }
+          });
+        } catch (error) {
+          process.stderr.write(
+            `PERSON_MORPHOLOGY_DEGRADED:${error instanceof Error ? error.message : String(error)}\n`
+          );
+        }
+      }
+    }
+
     for (
       let index = findings.length - 1;
       index >= 0;
@@ -593,7 +778,10 @@ export class LocalPolishPseudonymizer {
       const finding = findings[index]!;
       const token = this.vault.getOrCreate(
         finding.kind,
-        finding.value
+        finding.value,
+        finding.kind === "PERSON"
+          ? personEntities.get(finding.value)
+          : undefined
       );
       output =
         output.slice(0, finding.start) +

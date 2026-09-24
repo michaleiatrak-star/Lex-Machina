@@ -1,3 +1,4 @@
+import { PERSON_CASES } from "./privacy/person-morphology.js";
 const DOCUMENT_TYPES = new Set([
     "pleading",
     "contract",
@@ -54,9 +55,16 @@ function parseInline(value, aliases, used) {
             throw new Error("AST_UNKNOWN_PII_ALIAS");
         }
         used.add(alias);
+        if (record.case !== undefined &&
+            !PERSON_CASES.includes(record.case)) {
+            throw new Error("AST_PII_CASE_INVALID");
+        }
         return {
             type: "pii_ref",
-            alias
+            alias,
+            ...(record.case !== undefined
+                ? { case: record.case }
+                : {})
         };
     }
     if (record.type === "xref") {
@@ -273,7 +281,9 @@ export function legalDocumentPlainText(ast) {
         ? node.text
         : node.type ===
             "pii_ref"
-            ? node.alias
+            ? node.case
+                ? node.alias.slice(0, -1) + "|" + node.case + "]"
+                : node.alias
             : node.label)
         .join("");
     const output = [];

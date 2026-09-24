@@ -40,6 +40,7 @@ function generationInstruction(request) {
         "Never emit raw OOXML, ODF, HTML, scripts, macros, URLs as package relationships, or executable content.",
         "Never place token-looking syntax inside a text node.",
         "When protected source context contains a source PII token listed below, use its generation alias only as a typed pii_ref node.",
+        "For a PERSON alias add the grammatical case of that occurrence as \"case\": NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. {\"type\":\"pii_ref\",\"alias\":\"[LMPII:D01:PERSON:0001]\",\"case\":\"GEN\"} after \"wobec\" or \"od\". The name is inflected locally; never write the name yourself.",
         "Do not invent aliases. Do not attempt to infer the underlying clear value.",
         "",
         "# PROVIDER-SAFE PII ALIAS MAP",

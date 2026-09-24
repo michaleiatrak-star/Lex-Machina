@@ -1,3 +1,4 @@
+import { PERSON_CASES } from "./privacy/person-morphology.js";
 export function buildGenerationAliases(documents) {
     if (documents.length > 99) {
         throw new Error("GENERATION_DOCUMENT_LIMIT");
@@ -42,11 +43,17 @@ export function resolveGenerationAliases(manifest, vaults) {
         if (!vault) {
             throw new Error("GENERATION_VAULT_MISSING");
         }
-        const value = vault.resolveToken(entry.sourceToken);
+        const value = vault.restore(entry.sourceToken, null).text;
         if (result.has(entry.alias)) {
             throw new Error("GENERATION_ALIAS_DUPLICATE");
         }
         result.set(entry.alias, value);
+        // A person alias may be written with its case ([LMPII:D01:PERSON:0001|GEN]).
+        if (vault.entity(entry.sourceToken)) {
+            for (const personCase of PERSON_CASES) {
+                result.set(entry.alias.slice(0, -1) + "|" + personCase + "]", vault.restore(entry.sourceToken, personCase).text);
+            }
+        }
     }
     return result;
 }
