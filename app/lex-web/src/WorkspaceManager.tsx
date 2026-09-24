@@ -754,8 +754,8 @@ export function WorkspaceManager({
           <p className="eyebrow">Struktura katalogów</p>
           <h2>{title}</h2>
           <p>
-            Foldery porządkują pliki sprawy; folder główny nosi nazwę sprawy
-            ({rootFolderName}). Wszystko jest przechowywane w zaszyfrowanym magazynie sprawy.
+            Foldery są logiczną, szyfrowaną strukturą workspace. „Główny katalog” jest
+            wyświetlany pod nazwą sprawy: <strong>{rootFolderName}</strong>.
           </p>
         </div>
         <div className="workspace-header-actions">
