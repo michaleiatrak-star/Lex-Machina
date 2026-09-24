@@ -482,11 +482,12 @@ describe("SafeSessionExecutor", () => {
           { token: "[PII:PERSON:0001]", kind: "PERSON", gender: "f" },
           { token: "[PII:ADDRESS:0001]", kind: "ADDRESS" }
         ],
+        totalPages: 3,
         chunks: [{
           index: 1,
           pageStart: 1,
-          pageEnd: 1,
-          text: "[PII:PERSON:0001] zamieszkała przy [PII:ADDRESS:0001]."
+          pageEnd: 2,
+          text: "[STRONA 1 · DIGITAL]\n[PII:PERSON:0001] zamieszkała przy [PII:ADDRESS:0001].\n[STRONA 2 · CZĘŚĆ 2/2 · OCR]\nciąg dalszy"
         }]
       }],
       provider: "openai",
@@ -498,6 +499,11 @@ describe("SafeSessionExecutor", () => {
     expect(captured?.systemPrompt).toContain("[LMPII:D01:PERSON:0001]: osoba, rodzaj żeński");
     expect(captured?.systemPrompt).toContain("[LMPII:D01:ADDRESS:0001]: adres");
     expect(captured?.systemPrompt).toContain("MUST append the grammatical case");
+    const context = String(captured?.messages[0]?.content);
+    expect(context).toContain("STRON: 3");
+    expect(context).toContain("=== STRONA 1/3 ===");
+    expect(context).toContain("=== STRONA 2/3 (ciąg dalszy, część 2/2) · tekst z OCR ===");
+    expect(context).not.toContain("[STRONA 1 · DIGITAL]");
   });
 
   it("sends finalized protected chunks as untrusted document context", async () => {

@@ -259,6 +259,17 @@ export function namespaceDocumentAttachmentTokens(attachments) {
         };
     });
 }
+/**
+ * Stored page headers ("[STRONA 3 · CZĘŚĆ 1/2 · OCR]") as an explicit page
+ * boundary with the page count, so a model knows how long the document is
+ * and where each page starts.
+ */
+export function markPages(text, totalPages) {
+    return text.replace(/^\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · ([A-Z]+)\]$/gm, (_header, page, part, parts, source) => `=== STRONA ${page}${totalPages ? `/${totalPages}` : ""}` +
+        (part && part !== "1" ? ` (ciąg dalszy, część ${part}/${parts})` : part ? ` (część ${part}/${parts})` : "") +
+        (source === "OCR" ? " · tekst z OCR" : source === "BLANK" ? " · pusta" : "") +
+        " ===");
+}
 function buildDocumentContext(attachments) {
     const sections = attachments.map((attachment) => {
         const chunks = attachment.chunks.map((chunk) => {
@@ -273,10 +284,17 @@ function buildDocumentContext(attachments) {
                 : "";
             return [
                 `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
-                chunk.text
+                markPages(chunk.text, attachment.totalPages)
             ].join("\n");
         });
-        return chunks.join("\n\n");
+        return [
+            ...(attachment.totalPages
+                ? [
+                    `[${attachment.documentId} · STRON: ${attachment.totalPages} · każda strona zaczyna się znacznikiem "=== STRONA n/${attachment.totalPages} ==="]`
+                ]
+                : []),
+            ...chunks
+        ].join("\n\n");
     });
     return sections.join("\n\n---\n\n");
 }

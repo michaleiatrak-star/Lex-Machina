@@ -3934,6 +3934,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 ocrPages: number;
                 blankPages: number;
                 chunkIndices: number[];
+                // false: OCR/text only, sent in clear (no anonymization key).
+                anonymized: boolean;
               };
             }
           > =
@@ -4028,7 +4030,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                                   .map(
                                     (chunk) =>
                                       chunk.index
-                                  )
+                                  ),
+                              anonymized:
+                                restored.privacy.findings > 0
                             }
                           };
                         } catch {
@@ -6299,6 +6303,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             ...(resolved.grammar
               ? { grammar: resolved.grammar }
               : {}),
+            ...(resolved.totalPages
+              ? { totalPages: resolved.totalPages }
+              : {}),
             chunks:
               resolved.chunks.map(
                 (chunk) => ({
@@ -7856,6 +7863,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               ...(resolved.grammar
                 ? { grammar: resolved.grammar }
                 : {}),
+              ...(resolved.totalPages
+                ? { totalPages: resolved.totalPages }
+                : {}),
               chunks:
                 resolved.chunks.map(
                   (chunk) => ({
@@ -7890,6 +7900,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   "MANUAL" as const,
                 ...(attachment.grammar
                   ? { grammar: attachment.grammar }
+                  : {}),
+                ...(attachment.totalPages
+                  ? { totalPages: attachment.totalPages }
                   : {}),
                 chunks:
                   attachment.chunks.map(

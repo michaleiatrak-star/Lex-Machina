@@ -269,8 +269,17 @@ export type StoredUploadResponse = {
     ocrPages: number;
     blankPages: number;
     chunkIndices: number[];
+    // false: processed without anonymization (plain text, no key).
+    anonymized?: boolean;
   };
 };
+
+/** Directives that keep every page as written: OCR/text only, no key. */
+export function keepAllDirectives(review: DocumentReviewResponse): PagePrivacyDirective[] {
+  return review.pages
+    .filter((page) => page.text.length > 0)
+    .map((page) => ({ page: page.page, start: 0, end: page.text.length, action: "KEEP" as const }));
+}
 
 export type CaseFilesResponse = {
   caseId: string;
@@ -2711,6 +2720,7 @@ export type PrivacyKeyEntry = {
 
 export type AnonymizedVersion = {
   documentId: string;
+  totalPages: number;
   chunks: Array<{ index: number; pageStart: number; pageEnd: number; text: string }>;
   highlighted: Array<{
     index: number;

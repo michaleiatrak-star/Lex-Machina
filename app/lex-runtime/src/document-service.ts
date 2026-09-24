@@ -106,10 +106,13 @@ export type ResolvedDocumentAttachment = {
   totalChars: number;
   // Kind and gender of the person/address placeholders in the chunks.
   grammar?: PlaceholderGrammar[];
+  // Page count of the whole document, so a model knows where it is.
+  totalPages?: number;
 };
 
 export type AnonymizedVersion = {
   documentId: string;
+  totalPages: number;
   chunks: PublicDocumentChunk[];
   highlighted: HighlightedChunk[];
   entries: PrivacyKeyEntry[];
@@ -930,7 +933,8 @@ implements DocumentService {
       grammar: placeholderGrammar(
         chunks.map((chunk) => chunk.text).join("\n"),
         record.vault
-      )
+      ),
+      totalPages: record.source.totalPages
     };
   }
 
@@ -1097,6 +1101,7 @@ implements DocumentService {
     const chunks = record.protectedIngestion.chunks;
     return {
       documentId,
+      totalPages: record.source.totalPages,
       chunks: chunks.map((chunk) => ({ ...chunk })),
       highlighted: chunks.map((chunk) => {
         const source = record.source.pages

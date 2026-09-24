@@ -2106,7 +2106,8 @@ export function createLexHttpApp(options) {
                                     chunkIndices: restored
                                         .chunks
                                         .slice(0, 32)
-                                        .map((chunk) => chunk.index)
+                                        .map((chunk) => chunk.index),
+                                    anonymized: restored.privacy.findings > 0
                                 }
                             };
                         }
@@ -3576,6 +3577,9 @@ export function createLexHttpApp(options) {
                     ...(resolved.grammar
                         ? { grammar: resolved.grammar }
                         : {}),
+                    ...(resolved.totalPages
+                        ? { totalPages: resolved.totalPages }
+                        : {}),
                     chunks: resolved.chunks.map((chunk) => ({
                         ...chunk
                     }))
@@ -4483,6 +4487,9 @@ export function createLexHttpApp(options) {
                             ...(resolved.grammar
                                 ? { grammar: resolved.grammar }
                                 : {}),
+                            ...(resolved.totalPages
+                                ? { totalPages: resolved.totalPages }
+                                : {}),
                             chunks: resolved.chunks.map((chunk) => ({
                                 ...chunk
                             }))
@@ -4503,6 +4510,9 @@ export function createLexHttpApp(options) {
                         sourceScope: "MANUAL",
                         ...(attachment.grammar
                             ? { grammar: attachment.grammar }
+                            : {}),
+                        ...(attachment.totalPages
+                            ? { totalPages: attachment.totalPages }
                             : {}),
                         chunks: attachment.chunks.map((chunk) => ({
                             ...chunk

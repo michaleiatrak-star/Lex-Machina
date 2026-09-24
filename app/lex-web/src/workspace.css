@@ -920,3 +920,19 @@
 .anonymized-custom {
   background: #e3dcf3;
 }
+
+.anonymized-page {
+  display: block;
+  margin: 10px 0 4px;
+  padding: 2px 8px;
+  border-left: 3px solid #7fa46b;
+  background: #f1f4ee;
+  color: #4d574f;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.clear-text-badge {
+  background: #f6d5d0;
+  color: #7a2419;
+}

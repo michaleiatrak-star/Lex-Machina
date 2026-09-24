@@ -11,8 +11,27 @@ import {
 import { KIND_LABEL, PrivacyKeyTable } from "./PrivacyKeyTable.js";
 
 const TOKEN = /(\[PII:[A-Z_]+:\d{4}(?:\|[A-Z]{2,4})?\])/;
+const PAGE_HEADER = /\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · [A-Z]+\]\n?/g;
 
-function renderProtected(text: string, onToken: (token: string) => void): ReactNode[] {
+/** Stored page headers as visible page boundaries ("Strona 3 z 12"). */
+function withPages(text: string, totalPages: number, key: string): ReactNode[] {
+  const out: ReactNode[] = [];
+  let cursor = 0;
+  for (const match of text.matchAll(PAGE_HEADER)) {
+    if (match.index! > cursor) out.push(<span key={`${key}-${cursor}`}>{text.slice(cursor, match.index)}</span>);
+    const part = match[2] && match[2] !== "1" ? " (ciąg dalszy)" : "";
+    out.push(
+      <span key={`${key}-p${match.index}`} className="anonymized-page">
+        Strona {match[1]} z {totalPages}{part}
+      </span>
+    );
+    cursor = match.index! + match[0].length;
+  }
+  if (cursor < text.length) out.push(<span key={`${key}-${cursor}`}>{text.slice(cursor)}</span>);
+  return out;
+}
+
+function renderProtected(text: string, totalPages: number, onToken: (token: string) => void): ReactNode[] {
   return text.split(TOKEN).map((part, index) =>
     index % 2 === 1 ? (
       <button
@@ -25,7 +44,7 @@ function renderProtected(text: string, onToken: (token: string) => void): ReactN
         {part}
       </button>
     ) : (
-      <span key={index}>{part}</span>
+      <span key={index}>{withPages(part, totalPages, `s${index}`)}</span>
     )
   );
 }
@@ -33,12 +52,15 @@ function renderProtected(text: string, onToken: (token: string) => void): ReactN
 function renderMarked(
   text: string,
   marks: Array<{ start: number; end: number; token: string; kind: string }>,
+  totalPages: number,
   onToken: (token: string) => void
 ): ReactNode[] {
   const out: ReactNode[] = [];
   let cursor = 0;
   marks.forEach((mark, index) => {
-    if (mark.start > cursor) out.push(<span key={`t${index}`}>{text.slice(cursor, mark.start)}</span>);
+    if (mark.start > cursor) {
+      out.push(<span key={`t${index}`}>{withPages(text.slice(cursor, mark.start), totalPages, `t${index}`)}</span>);
+    }
     out.push(
       <mark
         key={`m${index}`}
@@ -56,7 +78,7 @@ function renderMarked(
     );
     cursor = mark.end;
   });
-  out.push(<span key="tail">{text.slice(cursor)}</span>);
+  out.push(<span key="tail">{withPages(text.slice(cursor), totalPages, "tail")}</span>);
   return out;
 }
 
@@ -215,7 +237,7 @@ export function AnonymizedDocumentView(props: {
                       s. {chunk.pageStart}
                       {chunk.pageEnd !== chunk.pageStart ? `–${chunk.pageEnd}` : ""}
                     </small>
-                    <p>{renderMarked(chunk.text, chunk.marks, (token) => {
+                    <p>{renderMarked(chunk.text, chunk.marks, version.totalPages, (token) => {
                       setHighlight(token);
                       setTab("key");
                     })}</p>
@@ -229,7 +251,7 @@ export function AnonymizedDocumentView(props: {
                   {chunk.pageEnd !== chunk.pageStart ? `–${chunk.pageEnd}` : ""}
                 </small>
                 <p>
-                  {renderProtected(chunk.text, (token) => {
+                  {renderProtected(chunk.text, version.totalPages, (token) => {
                     setHighlight(token);
                     setTab("key");
                   })}

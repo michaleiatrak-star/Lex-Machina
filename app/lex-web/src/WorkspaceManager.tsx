@@ -4,6 +4,7 @@ import {
   deanonymizeUpload,
   finalizeDocument,
   getProcessingProgress,
+  keepAllDirectives,
   listCaseArtifacts,
   isDesktopShell,
   newProgressId,
@@ -322,7 +323,8 @@ export function WorkspaceManager({
   }
 
   async function runAutomaticPrivacy(
-    item: WorkspaceItem
+    item: WorkspaceItem,
+    keepClear = false
   ): Promise<void> {
     const progressId = newProgressId();
     setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
@@ -339,7 +341,7 @@ export function WorkspaceManager({
         .catch(() => undefined);
     }, 500);
     try {
-      await runAutomaticPrivacySteps(item, progressId);
+      await runAutomaticPrivacySteps(item, progressId, keepClear);
     } finally {
       window.clearInterval(timer);
       setProgressByItem((current) => {
@@ -358,7 +360,8 @@ export function WorkspaceManager({
 
   async function runAutomaticPrivacySteps(
     item: WorkspaceItem,
-    progressId: string
+    progressId: string,
+    keepClear: boolean
   ): Promise<void> {
     await run(async () => {
       const review =
@@ -368,11 +371,12 @@ export function WorkspaceManager({
           undefined,
           progressId
         );
+      // OCR only: every page kept as written, no anonymization key.
       const result =
         await finalizeDocument(
           caseId,
           review.documentId,
-          [],
+          keepClear ? keepAllDirectives(review) : [],
           progressId
         );
       setNotice(
@@ -964,9 +968,15 @@ export function WorkspaceManager({
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
                         {processingFor(item) ? (
-                          <span className="anonymized-badge" title="Dokument ma wersję zanonimizowaną i klucz anonimizacji">
-                            Zanonimizowany
-                          </span>
+                          processingFor(item)!.anonymized === false ? (
+                            <span className="anonymized-badge clear-text-badge" title="Przetworzony bez anonimizacji: tekst trafia do modeli w jawnej postaci">
+                              Tekst jawny (bez anonimizacji)
+                            </span>
+                          ) : (
+                            <span className="anonymized-badge" title="Dokument ma wersję zanonimizowaną i klucz anonimizacji">
+                              Zanonimizowany
+                            </span>
+                          )
                         ) : null}
                         {processingFor(item)
                           ? processingFor(item)!.ocrPages > 0
@@ -1069,6 +1079,24 @@ export function WorkspaceManager({
                         }
                       >
                         OCR + anonimizuj automatycznie
+                      </button>
+                    ) : null}
+                    {canWrite && canRunPrivacyPipeline(item) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Tylko wydobycie tekstu/OCR, bez anonimizacji: plik będzie wysyłany do modeli jako tekst jawny"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              `„${item.filename}” zostanie przetworzony bez anonimizacji. Wybrany do czatu trafi do modelu z danymi osobowymi w jawnej postaci. Kontynuować?`
+                            )
+                          ) {
+                            void runAutomaticPrivacy(item, true);
+                          }
+                        }}
+                      >
+                        Tylko OCR (bez anonimizacji)
                       </button>
                     ) : null}
                     {canWrite ? (

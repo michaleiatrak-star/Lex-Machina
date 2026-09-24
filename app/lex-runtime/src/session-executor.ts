@@ -149,6 +149,7 @@ export type SessionDocumentAttachment = {
   documentId: string;
   caseId?: string;
   grammar?: PlaceholderGrammar[];
+  totalPages?: number;
   sourceScope?:
     | "MANUAL"
     | "CASE_KNOWLEDGE"
@@ -804,6 +805,22 @@ export function namespaceDocumentAttachmentTokens(
   );
 }
 
+/**
+ * Stored page headers ("[STRONA 3 · CZĘŚĆ 1/2 · OCR]") as an explicit page
+ * boundary with the page count, so a model knows how long the document is
+ * and where each page starts.
+ */
+export function markPages(text: string, totalPages?: number): string {
+  return text.replace(
+    /^\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · ([A-Z]+)\]$/gm,
+    (_header, page: string, part?: string, parts?: string, source?: string) =>
+      `=== STRONA ${page}${totalPages ? `/${totalPages}` : ""}` +
+      (part && part !== "1" ? ` (ciąg dalszy, część ${part}/${parts})` : part ? ` (część ${part}/${parts})` : "") +
+      (source === "OCR" ? " · tekst z OCR" : source === "BLANK" ? " · pusta" : "") +
+      " ==="
+  );
+}
+
 function buildDocumentContext(
   attachments: SessionDocumentAttachment[]
 ): string {
@@ -822,10 +839,17 @@ function buildDocumentContext(
           : "";
       return [
         `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
-        chunk.text
+        markPages(chunk.text, attachment.totalPages)
       ].join("\n");
     });
-    return chunks.join("\n\n");
+    return [
+      ...(attachment.totalPages
+        ? [
+            `[${attachment.documentId} · STRON: ${attachment.totalPages} · każda strona zaczyna się znacznikiem "=== STRONA n/${attachment.totalPages} ==="]`
+          ]
+        : []),
+      ...chunks
+    ].join("\n\n");
   });
 
   return sections.join("\n\n---\n\n");

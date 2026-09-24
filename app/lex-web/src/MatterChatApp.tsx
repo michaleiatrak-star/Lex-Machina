@@ -37,7 +37,10 @@ import {
   getProviderStatus,
   getRoutes,
   isDesktopShell,
+  finalizeDocument as finalizeCaseDocument,
+  keepAllDirectives,
   listCaseFiles,
+  processStoredCaseFile,
   listCaseSchedule,
   listCases,
   loginProviderAccount,
@@ -867,6 +870,7 @@ export default function MatterChatApp({
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
   const [caseFiles, setCaseFiles] =
     useState<StoredUploadResponse[]>([]);
+  const [pickerAnonymizing, setPickerAnonymizing] = useState<string | null>(null);
   const [caseFilePickerOpen, setCaseFilePickerOpen] =
     useState(false);
   const [caseFilePickerError, setCaseFilePickerError] =
@@ -1645,9 +1649,13 @@ export default function MatterChatApp({
       caseId;
   }, [caseId]);
 
+  // A different case closes the file list; a refresh within one case keeps it open.
+  useEffect(() => {
+    setCaseFilePickerOpen(false);
+  }, [caseId]);
+
   useEffect(() => {
     let cancelled = false;
-    setCaseFilePickerOpen(false);
     setCaseFilePickerError("");
     if (!caseId) {
       setCaseFiles([]);
@@ -4144,6 +4152,15 @@ export default function MatterChatApp({
                     : "AUTO · prawny router"}
                 </span>
                 <span>Załączniki: {documentAttachments.length}</span>
+                {documentAttachments.some((attachment) =>
+                  caseFiles.some(
+                    (file) =>
+                      file.processing?.documentId === attachment.documentId &&
+                      file.processing.anonymized === false
+                  )
+                ) ? (
+                  <span className="chat-clear-text-warning">Uwaga: część załączników to tekst jawny</span>
+                ) : null}
               </div>
               <textarea
                 value={query}
@@ -4166,24 +4183,24 @@ export default function MatterChatApp({
                 <button
                   type="button"
                   className="chat-secondary-action"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  📎 Pliki
-                </button>
-                <button
-                  type="button"
-                  className="chat-secondary-action"
                   aria-expanded={
                     caseFilePickerOpen
                   }
-                  onClick={() =>
-                    setCaseFilePickerOpen(
-                      (value) =>
-                        !value
-                    )
-                  }
+                  title="Wybierz pliki sprawy do wysłania z wiadomością"
+                  onClick={() => {
+                    const opening = !caseFilePickerOpen;
+                    setCaseFilePickerOpen(opening);
+                    // Files added in the Sprawa tab since the list was read.
+                    if (opening && caseId) {
+                      void listCaseFiles(caseId)
+                        .then((result) => setCaseFiles(result.uploads))
+                        .catch((error) =>
+                          setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                        );
+                    }
+                  }}
                 >
-                  🗂 Dokumenty
+                  Pliki{documentAttachments.length ? ` (${documentAttachments.length})` : ""}
                 </button>
                 <button
                   type="button"
@@ -4212,8 +4229,17 @@ export default function MatterChatApp({
                       Dokumenty sprawy
                     </strong>
                     <small>
-                      Zaznacz dowolną liczbę gotowych plików. Status OCR pokazuje, które strony wymagały rozpoznawania tekstu.
+                      Zaznaczone pliki zostaną wysłane z wiadomością, z oznaczeniem każdej strony. Plik
+                      zanonimizowany trafia do modelu wyłącznie w wersji z symbolami; plik przetworzony bez
+                      anonimizacji - jako tekst jawny.
                     </small>
+                    <button
+                      type="button"
+                      className="chat-secondary-action"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      Dodaj pliki do sprawy
+                    </button>
                   </div>
                   {caseFilePickerError ? (
                     <p className="chat-inline-error">
@@ -4309,13 +4335,83 @@ export default function MatterChatApp({
                                   </strong>
                                   <small>
                                     {item.processing
-                                      ? item.processing.ocrPages > 0
-                                        ? `OCR ✓ · ${item.processing.ocrPages}/${item.processing.totalPages} stron`
-                                        : `Tekst cyfrowy ✓ · OCR niewymagany · ${item.processing.totalPages} stron`
-                                      : "Nieprzetworzony · uruchom OCR/prywatność w zakładce Pliki"}
+                                      ? (item.processing.anonymized === false
+                                          ? "Wysyłany tekst jawny (bez anonimizacji)"
+                                          : "Wysyłana wersja zanonimizowana") +
+                                        ` · ${item.processing.totalPages} stron` +
+                                        (item.processing.ocrPages > 0 ? ` · OCR ${item.processing.ocrPages}` : "")
+                                      : "Nieprzetworzony - wybierz anonimizację albo samo OCR"}
                                   </small>
                                 </span>
                               </label>
+                              {!item.processing && canWriteCase(selectedCase) ? (
+                                <>
+                                <button
+                                  type="button"
+                                  className="chat-secondary-action"
+                                  disabled={pickerAnonymizing !== null}
+                                  onClick={() => {
+                                    setPickerAnonymizing(item.uploadId);
+                                    setCaseFilePickerError("");
+                                    void processStoredCaseFile(caseId, item.uploadId)
+                                      .then((review) => finalizeCaseDocument(caseId, review.documentId, []))
+                                      .then((result) => {
+                                        setDocumentAttachments((current) =>
+                                          upsertAttachment(current, {
+                                            caseId,
+                                            documentId: result.documentId,
+                                            chunkIndices: result.chunks.map((chunk) => chunk.index)
+                                          })
+                                        );
+                                        setWorkspaceRefresh((value) => value + 1);
+                                      })
+                                      .catch((error) =>
+                                        setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                                      )
+                                      .finally(() => setPickerAnonymizing(null));
+                                  }}
+                                >
+                                  {pickerAnonymizing === item.uploadId ? "Przetwarzam…" : "Anonimizuj i zaznacz"}
+                                </button>
+                                <button
+                                  type="button"
+                                  className="chat-secondary-action"
+                                  disabled={pickerAnonymizing !== null}
+                                  title="Tylko OCR/tekst, bez anonimizacji - plik trafi do modelu z jawnymi danymi"
+                                  onClick={() => {
+                                    if (
+                                      !window.confirm(
+                                        `„${item.filename}” trafi do modelu bez anonimizacji, z danymi osobowymi w jawnej postaci. Kontynuować?`
+                                      )
+                                    ) {
+                                      return;
+                                    }
+                                    setPickerAnonymizing(item.uploadId);
+                                    setCaseFilePickerError("");
+                                    void processStoredCaseFile(caseId, item.uploadId)
+                                      .then((review) =>
+                                        finalizeCaseDocument(caseId, review.documentId, keepAllDirectives(review))
+                                      )
+                                      .then((result) => {
+                                        setDocumentAttachments((current) =>
+                                          upsertAttachment(current, {
+                                            caseId,
+                                            documentId: result.documentId,
+                                            chunkIndices: result.chunks.map((chunk) => chunk.index)
+                                          })
+                                        );
+                                        setWorkspaceRefresh((value) => value + 1);
+                                      })
+                                      .catch((error) =>
+                                        setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                                      )
+                                      .finally(() => setPickerAnonymizing(null));
+                                  }}
+                                >
+                                  Tylko OCR i zaznacz
+                                </button>
+                                </>
+                              ) : null}
                             </li>
                           );
                         }

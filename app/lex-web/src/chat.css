@@ -1873,3 +1873,8 @@ mark.restored {
 .substitution-key .substitution-review td {
   background: #fbf1dc;
 }
+
+.chat-clear-text-warning {
+  color: #9b2c2c;
+  font-weight: 600;
+}

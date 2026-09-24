@@ -434,7 +434,8 @@ export class LocalPrivateDocumentService {
             documentId: selection.documentId,
             chunks,
             totalChars,
-            grammar: placeholderGrammar(chunks.map((chunk) => chunk.text).join("\n"), record.vault)
+            grammar: placeholderGrammar(chunks.map((chunk) => chunk.text).join("\n"), record.vault),
+            totalPages: record.source.totalPages
         };
     }
     async restoreDocument(args) {
@@ -552,6 +553,7 @@ export class LocalPrivateDocumentService {
         const chunks = record.protectedIngestion.chunks;
         return {
             documentId,
+            totalPages: record.source.totalPages,
             chunks: chunks.map((chunk) => ({ ...chunk })),
             highlighted: chunks.map((chunk) => {
                 const source = record.source.pages
