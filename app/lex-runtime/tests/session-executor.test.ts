@@ -459,6 +459,47 @@ describe("SafeSessionExecutor", () => {
     }
   );
 
+  it("sends the placeholder key with gender to the model, never the name", async () => {
+    let captured:
+      ProviderStreamParams | undefined;
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "capture",
+      capabilities: { streaming: true, tools: true, reasoning: true, modelDiscovery: false },
+      async stream(params) {
+        captured = params;
+        return { fullText: "Gotowe." };
+      }
+    };
+    const providers = new ProviderRegistry();
+    providers.register(adapter);
+    const executor = new SafeSessionExecutor(fixture(), new ProviderGateway(providers));
+    await executor.execute({
+      query: "Przeanalizuj załączony dokument.",
+      documentAttachments: [{
+        documentId: "doc_0123456789abcdef01234567",
+        grammar: [
+          { token: "[PII:PERSON:0001]", kind: "PERSON", gender: "f" },
+          { token: "[PII:ADDRESS:0001]", kind: "ADDRESS" }
+        ],
+        chunks: [{
+          index: 1,
+          pageStart: 1,
+          pageEnd: 1,
+          text: "[PII:PERSON:0001] zamieszkała przy [PII:ADDRESS:0001]."
+        }]
+      }],
+      provider: "openai",
+      model: "test",
+      primarySkill: DR,
+      mode: "PRAWNIK"
+    });
+    expect(captured?.systemPrompt).toContain("KLUCZ SYMBOLI ZASTĘPCZYCH (HARD GATE)");
+    expect(captured?.systemPrompt).toContain("[LMPII:D01:PERSON:0001]: osoba, rodzaj żeński");
+    expect(captured?.systemPrompt).toContain("[LMPII:D01:ADDRESS:0001]: adres");
+    expect(captured?.systemPrompt).toContain("MUST append the grammatical case");
+  });
+
   it("sends finalized protected chunks as untrusted document context", async () => {
     let captured:
       ProviderStreamParams | undefined;

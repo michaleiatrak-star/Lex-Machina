@@ -1,6 +1,7 @@
 import {
   PERSON_CASES
 } from "./privacy/person-morphology.js";
+import { genderOf } from "./privacy/token-legend.js";
 import type {
   GenerationAliasEntry
 } from "./legal-document-ast.js";
@@ -96,7 +97,10 @@ export function buildGenerationAliases(
           sourceToken:
             item.token,
           kind:
-            item.kind
+            item.kind,
+          ...(item.kind === "PERSON"
+            ? { gender: genderOf(document.vault, item.token) }
+            : {})
         });
       }
     }
@@ -177,6 +181,8 @@ export type DocumentRestoration = {
   status: "ok" | "invalid_case" | "no_forms" | "needs_review" | "gender_ambiguous" | "unresolved";
   canonical?: string;
   gender?: "m1" | "f";
+  // The model gave no case for a person/address alias; NOM was assumed.
+  caseMissing?: boolean;
   occurrences: number;
 };
 
@@ -219,7 +225,7 @@ export function describeGenerationAliases(
     return {
       alias,
       kind: entry.kind,
-      ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM" } : {}),
+      ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM", caseMissing: true } : {}),
       text: restored.text,
       source: entity ? restored.source : "vault",
       confidence: restored.confidence,
@@ -228,7 +234,10 @@ export function describeGenerationAliases(
           ? entity.status
           : restored.status === "unknown_token"
             ? "unresolved"
-            : restored.status,
+            : restored.status === "ok" && entity && !requestedCase
+              // The model gave no case: the nominative is a guess (hard gate).
+              ? "needs_review"
+              : restored.status,
       ...(entity ? { canonical: entity.canonical } : {}),
       // Gender matters for remembering a person's name form, not for addresses.
       ...(entity && (entity.gender === "m1" || entity.gender === "f") ? { gender: entity.gender } : {}),

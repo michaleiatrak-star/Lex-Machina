@@ -29,7 +29,7 @@ export class LocalPaddleOcrEngine {
         this.timeoutMs =
             options.timeoutMs ?? 30 * 60 * 1000;
     }
-    async recognizePages(data, pages) {
+    async recognizePages(data, pages, onPage) {
         if (pages.length === 0)
             return [];
         const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-paddle-ocr-"));
@@ -66,8 +66,15 @@ export class LocalPaddleOcrEngine {
                     child.kill("SIGKILL");
                     reject(new Error("OCR_ENGINE_TIMEOUT: Local PaddleOCR worker exceeded the configured timeout."));
                 }, this.timeoutMs);
+                let pagesDone = 0;
                 child.stderr.on("data", (chunk) => {
-                    stderr += chunk.toString("utf8");
+                    const text = chunk.toString("utf8");
+                    const finished = text.match(/^LEX_OCR_PAGE \d+$/gm)?.length ?? 0;
+                    if (finished && onPage) {
+                        pagesDone += finished;
+                        onPage(Math.min(pagesDone, pages.length));
+                    }
+                    stderr += text;
                     if (stderr.length > 32_000) {
                         stderr = stderr.slice(-32_000);
                     }

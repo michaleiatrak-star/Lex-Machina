@@ -1,3 +1,4 @@
+import { placeholderGrammar, placeholderKeyPrompt } from "./privacy/token-legend.js";
 import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import { AuditTrail } from "./audit-trail.js";
@@ -243,6 +244,14 @@ export function namespaceDocumentAttachmentTokens(attachments) {
         const prefix = prefixFor(attachment.documentId);
         return {
             ...attachment,
+            ...(attachment.grammar
+                ? {
+                    grammar: attachment.grammar.map((entry) => ({
+                        ...entry,
+                        token: entry.token.replace(/^\[PII:/, `[LMPII:${prefix}:`)
+                    }))
+                }
+                : {}),
             chunks: attachment.chunks.map((chunk) => ({
                 ...chunk,
                 text: chunk.text.replace(/\[PII:([A-Z_]+):(\d{4})\]/g, (_token, kind, sequence) => `[LMPII:${prefix}:${kind}:${sequence}]`)
@@ -557,6 +566,12 @@ export class SafeSessionExecutor {
                 : []),
             ...(coreLawRag ? [coreLawRag] : [])
         ].join("\n\n");
+        // Kind and gender of every placeholder the model will see: it inflects
+        // around them without ever seeing a name.
+        const placeholderKey = placeholderKeyPrompt([
+            ...placeholderGrammar([protectedQuery, protectedAuxiliaryText ?? ""].join("\n"), chatPrivacyVault),
+            ...attachments.flatMap((attachment) => attachment.grammar ?? [])
+        ]);
         const draftCallbacks = request.onDraft
             ? createDraftCallbacks(chatPrivacyVault, request.onDraft)
             : undefined;
@@ -568,6 +583,7 @@ export class SafeSessionExecutor {
                 }
                 : {}),
             ...(documentContext ? { documentContext } : {}),
+            ...(placeholderKey ? { placeholderKey } : {}),
             ...(request.conversationalOnly
                 ? {
                     conversationalOnly: true

@@ -93,7 +93,8 @@ function safeMessage(input) {
             item.status.length > 32 ||
             (item.canonical !== undefined &&
                 (typeof item.canonical !== "string" || item.canonical.length > 200)) ||
-            (item.gender !== undefined && item.gender !== "m1" && item.gender !== "f")) {
+            (item.gender !== undefined && item.gender !== "m1" && item.gender !== "f") ||
+            (item.caseMissing !== undefined && typeof item.caseMissing !== "boolean")) {
             throw new Error("WORKSPACE_RESTORATION_INVALID");
         }
         return {
@@ -106,7 +107,8 @@ function safeMessage(input) {
             confidence: item.confidence,
             status: item.status,
             ...(item.canonical ? { canonical: item.canonical } : {}),
-            ...(item.gender ? { gender: item.gender } : {})
+            ...(item.gender ? { gender: item.gender } : {}),
+            ...(item.caseMissing ? { caseMissing: true } : {})
         };
     });
     const { restorations: _dropped, ...rest } = input;

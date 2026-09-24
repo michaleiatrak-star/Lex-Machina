@@ -741,3 +741,48 @@
   gap: 10px;
   padding: 6px;
 }
+
+.workspace-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.workspace-progress progress {
+  flex: 1;
+  max-width: 260px;
+  height: 8px;
+  accent-color: #5f8a4c;
+}
+
+.workspace-progress small {
+  color: #4d574f;
+}
+
+.privacy-key-wrap {
+  max-height: 520px;
+  overflow: auto;
+}
+
+.privacy-key table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.privacy-key th,
+.privacy-key td {
+  padding: 4px 8px;
+  border-bottom: 1px solid #e3e7df;
+  text-align: left;
+  vertical-align: top;
+}
+
+.privacy-key code {
+  font-size: 12px;
+}
+
+.privacy-key-empty {
+  padding: 12px 16px;
+}

@@ -92,7 +92,7 @@ export class CompleteDocumentIngestor {
         this.ocr = ocr;
         this.limits = limits;
     }
-    async ingest(data) {
+    async ingest(data, onProgress) {
         if (data.byteLength > this.limits.maxBytes) {
             throw new DocumentIngestionError("Document exceeds the configured byte safety limit.", "DOCUMENT_TOO_LARGE");
         }
@@ -109,8 +109,13 @@ export class CompleteDocumentIngestor {
         if (ocrCandidates.length > 0 && !this.ocr) {
             throw new DocumentIngestionError(`OCR is required for ${ocrCandidates.length} page(s), but no local OCR engine is configured.`, "OCR_REQUIRED");
         }
+        if (ocrCandidates.length) {
+            onProgress?.({ stage: "OCR", done: 0, total: ocrCandidates.length });
+        }
         const ocrResults = this.ocr && ocrCandidates.length
-            ? await this.ocr.recognizePages(data, ocrCandidates)
+            ? await this.ocr.recognizePages(data, ocrCandidates, onProgress
+                ? (done) => onProgress({ stage: "OCR", done, total: ocrCandidates.length })
+                : undefined)
             : [];
         const ocrByPage = new Map(ocrResults.map((result) => [result.page, result]));
         for (const page of ocrCandidates) {

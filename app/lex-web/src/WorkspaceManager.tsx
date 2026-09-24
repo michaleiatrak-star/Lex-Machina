@@ -2,12 +2,17 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ApiError,
   finalizeDocument,
+  getPrivacyKey,
+  getProcessingProgress,
   isDesktopShell,
+  newProgressId,
   listCaseFiles,
   processStoredCaseFile,
   searchCaseKnowledge,
   uploadCaseFile,
   type CaseKnowledgeHit,
+  type PrivacyKeyEntry,
+  type ProcessingProgress,
   type StoredUploadResponse
 } from "./api.js";
 import {
@@ -38,6 +43,8 @@ import { TextFileEditor } from "./TextFileEditor.js";
 import { DocumentEditor } from "./DocumentEditor.js";
 import { SheetEditor } from "./SheetEditor.js";
 import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
+import { progressLabel, progressPercent } from "./processing-progress.js";
+import { PrivacyKeyTable } from "./PrivacyKeyTable.js";
 import { decodeTextFile } from "./text-editing.js";
 
 const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
@@ -212,7 +219,13 @@ export function WorkspaceManager({
   const [notice, setNotice] = useState("");
   const [caseFiles, setCaseFiles] =
     useState<StoredUploadResponse[]>([]);
-  const [preview, setPreview] = useState<{
+  const [progressByItem, setProgressByItem] =
+    useState<Record<string, Pick<ProcessingProgress, "stage" | "done" | "total">>>({});
+  const [privacyKey, setPrivacyKey] = useState<{
+    item: WorkspaceItem;
+    entries: PrivacyKeyEntry[];
+  } | null>(null);
+    const [preview, setPreview] = useState<{
     item: WorkspaceItem;
     url?: string;
     pdf?: Blob;
@@ -295,17 +308,63 @@ export function WorkspaceManager({
   async function runAutomaticPrivacy(
     item: WorkspaceItem
   ): Promise<void> {
+    const progressId = newProgressId();
+    setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
+    // Stage and page counts while the request runs; text never leaves the runtime.
+    const timer = window.setInterval(() => {
+      void getProcessingProgress(caseId, progressId)
+        .then((progress) => {
+          if (progress) {
+            setProgressByItem((current) =>
+              current[item.itemId] ? { ...current, [item.itemId]: progress } : current
+            );
+          }
+        })
+        .catch(() => undefined);
+    }, 500);
+    try {
+      await runAutomaticPrivacySteps(item, progressId);
+    } finally {
+      window.clearInterval(timer);
+      setProgressByItem((current) => {
+        const { [item.itemId]: _done, ...rest } = current;
+        return rest;
+      });
+    }
+  }
+
+  async function showPrivacyKey(item: WorkspaceItem): Promise<void> {
+    const documentId = processingFor(item)?.documentId;
+    if (!documentId) return;
+    setBusy(true);
+    setError("");
+    try {
+      setPrivacyKey({ item, entries: await getPrivacyKey(caseId, documentId) });
+    } catch (failure) {
+      setError(documentProcessingFailureMessage(failure));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function runAutomaticPrivacySteps(
+    item: WorkspaceItem,
+    progressId: string
+  ): Promise<void> {
     await run(async () => {
       const review =
         await processStoredCaseFile(
           caseId,
-          item.itemId
+          item.itemId,
+          undefined,
+          progressId
         );
       const result =
         await finalizeDocument(
           caseId,
           review.documentId,
-          []
+          [],
+          progressId
         );
       setNotice(
         `„${item.filename}”: OCR/pseudonimizacja zakończona · ${result.ocrPages} stron OCR · ${result.privacy.findings} anonimizacji · osobny vault/deanonimizator zapisany dla ${result.documentId}.`
@@ -897,6 +956,12 @@ export function WorkspaceManager({
                           : "Nieprzetworzony · OCR/anonimizacja oczekuje"}
                       </small>
                     ) : null}
+                    {progressByItem[item.itemId] ? (
+                      <div className="workspace-progress" role="status" aria-live="polite">
+                        <progress max={100} value={progressPercent(progressByItem[item.itemId]!)} />
+                        <small>{progressLabel(progressByItem[item.itemId]!)}</small>
+                      </div>
+                    ) : null}
                   </div>
                   <div className="workspace-item-actions">
                     <button
@@ -915,6 +980,16 @@ export function WorkspaceManager({
                         ? `Podgląd s. ${knowledgeHitFor(item)!.pageStart}`
                         : "Podgląd"}
                     </button>
+                    {processingFor(item) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Symbole zastępcze tego dokumentu i dane, które zastępują (tylko na tym komputerze)"
+                        onClick={() => void showPrivacyKey(item)}
+                      >
+                        Klucz anonimizacji
+                      </button>
+                    ) : null}
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
                         Otwórz w systemie
@@ -972,6 +1047,14 @@ export function WorkspaceManager({
           )}
         </section>
       </div>
+
+      {privacyKey ? (
+        <PrivacyKeyTable
+          filename={privacyKey.item.filename}
+          entries={privacyKey.entries}
+          onClose={() => setPrivacyKey(null)}
+        />
+      ) : null}
 
       {preview ? (
         <section className="workspace-preview" aria-label="Podgląd pliku">

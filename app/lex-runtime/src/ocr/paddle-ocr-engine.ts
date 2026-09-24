@@ -53,7 +53,8 @@ implements OcrEngine {
 
   async recognizePages(
     data: Uint8Array,
-    pages: number[]
+    pages: number[],
+    onPage?: (done: number) => void
   ): Promise<OcrPageResult[]> {
     if (pages.length === 0) return [];
 
@@ -104,8 +105,15 @@ implements OcrEngine {
           );
         }, this.timeoutMs);
 
+        let pagesDone = 0;
         child.stderr.on("data", (chunk: Buffer) => {
-          stderr += chunk.toString("utf8");
+          const text = chunk.toString("utf8");
+          const finished = text.match(/^LEX_OCR_PAGE \d+$/gm)?.length ?? 0;
+          if (finished && onPage) {
+            pagesDone += finished;
+            onPage(Math.min(pagesDone, pages.length));
+          }
+          stderr += text;
           if (stderr.length > 32_000) {
             stderr = stderr.slice(-32_000);
           }

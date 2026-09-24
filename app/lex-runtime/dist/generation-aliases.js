@@ -1,4 +1,5 @@
 import { PERSON_CASES } from "./privacy/person-morphology.js";
+import { genderOf } from "./privacy/token-legend.js";
 export function buildGenerationAliases(documents) {
     if (documents.length > 99) {
         throw new Error("GENERATION_DOCUMENT_LIMIT");
@@ -27,7 +28,10 @@ export function buildGenerationAliases(documents) {
                 alias: `[LMPII:${prefix}:${match[1]}:${match[2]}]`,
                 documentId: document.documentId,
                 sourceToken: item.token,
-                kind: item.kind
+                kind: item.kind,
+                ...(item.kind === "PERSON"
+                    ? { gender: genderOf(document.vault, item.token) }
+                    : {})
             });
         }
     });
@@ -83,7 +87,7 @@ export function describeGenerationAliases(tokenizedText, manifest, vaults) {
         return {
             alias,
             kind: entry.kind,
-            ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM" } : {}),
+            ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM", caseMissing: true } : {}),
             text: restored.text,
             source: entity ? restored.source : "vault",
             confidence: restored.confidence,
@@ -91,7 +95,10 @@ export function describeGenerationAliases(tokenizedText, manifest, vaults) {
                 ? entity.status
                 : restored.status === "unknown_token"
                     ? "unresolved"
-                    : restored.status,
+                    : restored.status === "ok" && entity && !requestedCase
+                        // The model gave no case: the nominative is a guess (hard gate).
+                        ? "needs_review"
+                        : restored.status,
             ...(entity ? { canonical: entity.canonical } : {}),
             // Gender matters for remembering a person's name form, not for addresses.
             ...(entity && (entity.gender === "m1" || entity.gender === "f") ? { gender: entity.gender } : {}),

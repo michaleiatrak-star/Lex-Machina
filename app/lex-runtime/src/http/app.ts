@@ -2,6 +2,10 @@ import type {
   NameFormCorrection,
   PersonMorphology
 } from "../privacy/person-morphology.js";
+import {
+  ProcessingProgressRegistry,
+  progressIdFrom
+} from "../processing-progress.js";
 import { createHash } from "node:crypto";
 import express, {
   type Express,
@@ -1657,6 +1661,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     return true;
   }
 
+  const processingProgress =
+    new ProcessingProgressRegistry();
   const documentCaseIds =
     new Map<string, string>();
 
@@ -4248,6 +4254,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   data,
                   mediaType
                 );
+                const onProgress =
+                  processingProgress.reporter(
+                    caseId,
+                    progressIdFrom(req.get("x-lex-progress"))
+                  );
                 return await options
                   .documentService!
                   .review(
@@ -4257,7 +4268,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       caseId,
                       caseDataKey,
                       keyVersion:
-                        caseView.keyVersion
+                        caseView.keyVersion,
+                      ...(onProgress ? { onProgress } : {})
                     }
                   );
               } finally {
@@ -4366,6 +4378,80 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
   }
+
+  // Stage and page counts of a running OCR/anonymization request.
+  app.get(
+    "/api/cases/:caseId/progress/:progressId",
+    (req, res) => {
+      const caseId = String(req.params.caseId ?? "").trim();
+      const progressId = progressIdFrom(req.params.progressId);
+      if (!options.caseAccessService || !/^case_[a-f0-9]{32}$/.test(caseId) || !progressId) {
+        res.status(400).json({ error: "INVALID_PROGRESS_REQUEST" });
+        return;
+      }
+      try {
+        options.caseAccessService.assertAccess(responseAuthContext(res), caseId, "ANALYZE");
+      } catch (error) {
+        if (!sendCaseAccessError(res, error)) res.status(403).json({ error: "CASE_ACCESS_DENIED" });
+        return;
+      }
+      res.setHeader("Cache-Control", "no-store");
+      res.json({ progress: processingProgress.get(caseId, progressId) ?? null });
+    }
+  );
+
+  // The anonymization key of one processed case document, for the user on
+  // this computer only (never part of a model request).
+  app.get(
+    "/api/cases/:caseId/documents/:documentId/privacy-key",
+    async (req, res) => {
+      const caseId = String(req.params.caseId ?? "").trim();
+      const documentId = String(req.params.documentId ?? "").trim();
+      if (
+        !options.documentService?.restoreDocument ||
+        !options.documentService.privacyKey ||
+        !options.caseAccessService
+      ) {
+        res.status(503).json({ error: "PRIVACY_KEY_UNAVAILABLE" });
+        return;
+      }
+      if (!/^case_[a-f0-9]{32}$/.test(caseId) || !/^doc_[a-f0-9]{24}$/.test(documentId)) {
+        res.status(400).json({ error: "INVALID_PRIVACY_KEY_REQUEST" });
+        return;
+      }
+      try {
+        const context = responseAuthContext(res);
+        options.caseAccessService.assertAccess(context, caseId, "ANALYZE");
+        const caseView = options.caseAccessService.openCase(context, caseId);
+        await options.caseAccessService.withCaseDataKey(
+          context,
+          caseId,
+          "ANALYZE",
+          (caseDataKey) =>
+            options.documentService!.restoreDocument!({
+              caseId,
+              documentId,
+              caseDataKey,
+              keyVersion: caseView.keyVersion
+            })
+        );
+        res.setHeader("Cache-Control", "no-store");
+        res.json({
+          documentId,
+          entries: options.documentService.privacyKey(documentId)
+        });
+      } catch (error) {
+        if (sendCaseAccessError(res, error)) return;
+        const code = error instanceof Error ? error.message : "";
+        if (code === "ENOENT" || code.includes("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+          res.status(404).json({ error: "PRIVACY_KEY_NOT_FOUND" });
+          return;
+        }
+        console.error(`PRIVACY_KEY_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+        res.status(500).json({ error: "PRIVACY_KEY_FAILED" });
+      }
+    }
+  );
 
   app.post(
     "/api/cases/:caseId/files/:uploadId/process",
@@ -5643,7 +5729,15 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                         caseId,
                         caseDataKey,
                         keyVersion:
-                          caseView.keyVersion
+                          caseView.keyVersion,
+                        ...(progressIdFrom(req.get("x-lex-progress"))
+                          ? {
+                              onProgress: processingProgress.reporter(
+                                caseId,
+                                progressIdFrom(req.get("x-lex-progress"))
+                              )!
+                            }
+                          : {})
                       }
                     )
               );
@@ -5975,6 +6069,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 .documentId,
             sourceScope:
               "MANUAL",
+            ...(resolved.grammar
+              ? { grammar: resolved.grammar }
+              : {}),
             chunks:
               resolved.chunks.map(
                 (chunk) => ({
@@ -7529,6 +7626,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 resolved.documentId,
               sourceScope:
                 "MANUAL",
+              ...(resolved.grammar
+                ? { grammar: resolved.grammar }
+                : {}),
               chunks:
                 resolved.chunks.map(
                   (chunk) => ({
@@ -7561,6 +7661,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                   attachment.documentId,
                 sourceScope:
                   "MANUAL" as const,
+                ...(attachment.grammar
+                  ? { grammar: attachment.grammar }
+                  : {}),
                 chunks:
                   attachment.chunks.map(
                     (chunk) => ({

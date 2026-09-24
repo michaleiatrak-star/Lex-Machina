@@ -160,7 +160,7 @@ export function isLocalLightweightConversation(
 
 // Protected person names are inflected locally: the model only names the case.
 export const PERSON_CASE_PROTOCOL =
-  "Person and address tokens ([PII:PERSON:0001], [LMPII:D01:PERSON:0001], [PII:ADDRESS:0001]) stand for one person or one address each, whatever case the document used. When you write such a token in a sentence, append the grammatical case of that position inside the brackets: NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. \"rozmawiał z [PII:PERSON:0001|INS]\", \"wezwanie wobec [LMPII:D01:PERSON:0002|GEN]\", \"zamieszkały przy [PII:ADDRESS:0001|LOC]\". Never write, inflect or guess the name or address yourself.";
+  "Person and address tokens ([PII:PERSON:0001], [LMPII:D01:PERSON:0001], [PII:ADDRESS:0001]) stand for one person or one address each, whatever case the document used. When you write such a token in a sentence, you MUST append the grammatical case of that position inside the brackets (HARD GATE: a person or address token without a case is an error): NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. \"rozmawiał z [PII:PERSON:0001|INS]\", \"wezwanie wobec [LMPII:D01:PERSON:0002|GEN]\", \"zamieszkały przy [PII:ADDRESS:0001|LOC]\". Never write, inflect or guess the name or address yourself.";
 
 export const CRIMINAL_DOMAIN_PREFIX =
   "dr-03-";
@@ -282,6 +282,8 @@ export class LexExecutionEngine {
   async executePolishLegalQuery(args: {
     query: string;
     documentContext?: string;
+    // Placeholder kinds and genders (privacy/token-legend.ts).
+    placeholderKey?: string;
     conversationalOnly?: boolean;
     // AUTO for account/API models: no separate router pass; the model reads
     // prawny-router-v3 and the skills it needs through the corpus tools.
@@ -1400,6 +1402,9 @@ export class LexExecutionEngine {
     ) {
       promptParts.push(PERSON_CASE_PROTOCOL);
     }
+    if (args.placeholderKey) {
+      promptParts.push(args.placeholderKey);
+    }
     if (args.tools?.length && args.toolSystemPromptAppendix) {
       promptParts.push(args.toolSystemPromptAppendix);
     }
@@ -1593,6 +1598,9 @@ export class LexExecutionEngine {
       /\[PII:(?:PERSON|ADDRESS):/.test(effectiveQuery)
     ) {
       promptParts.push(PERSON_CASE_PROTOCOL);
+    }
+    if (args.placeholderKey) {
+      promptParts.push(args.placeholderKey);
     }
     if (args.toolSystemPromptAppendix) {
       promptParts.push(args.toolSystemPromptAppendix);

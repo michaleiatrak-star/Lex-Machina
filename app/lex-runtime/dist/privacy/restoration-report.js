@@ -25,7 +25,7 @@ export function restoreWithReport(text, vault) {
             end: output.length,
             token: base,
             kind: restored.kind,
-            ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM" } : {}),
+            ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM", caseMissing: true } : {}),
             text: restored.text,
             source: entity ? restored.source : "vault",
             confidence: restored.confidence,
@@ -33,7 +33,10 @@ export function restoreWithReport(text, vault) {
                 ? entity.status
                 : restored.status === "unknown_token"
                     ? "no_forms"
-                    : restored.status,
+                    : restored.status === "ok" && entity && !requestedCase
+                        // The model gave no case: the nominative is a guess (hard gate).
+                        ? "needs_review"
+                        : restored.status,
             ...(entity ? { canonical: entity.canonical } : {}),
             // Gender matters for remembering a person's name form, not for addresses.
             ...(entity && (entity.gender === "m1" || entity.gender === "f") ? { gender: entity.gender } : {})

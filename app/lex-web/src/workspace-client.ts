@@ -58,6 +58,7 @@ export type RestorationMark = {
   status: string;
   canonical?: string;
   gender?: "m1" | "f";
+  caseMissing?: boolean;
 };
 
 export type WorkspaceResponse = {

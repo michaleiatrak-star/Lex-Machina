@@ -34,7 +34,7 @@ const DOCUMENT_PROCESSING_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
 // Every non-safelisted header the web UI sends must be listed here, otherwise
 // the webview preflight fails and fetch() rejects with "Failed to fetch".
 const CORS_ALLOWED_REQUEST_HEADERS: &str =
-    "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id, X-Lex-Execution-Id";
+    "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id, X-Lex-Execution-Id, X-Lex-Progress";
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";

@@ -90,6 +90,8 @@ export type GenerationAliasEntry = {
   documentId: string;
   sourceToken: string;
   kind: string;
+  // Persons only: grammatical gender for agreement, never the name.
+  gender?: "m" | "f" | "unknown";
 };
 
 export type LegalDocumentAstValidation = {

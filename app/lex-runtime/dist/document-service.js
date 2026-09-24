@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 import { chunkDocumentPages } from "./document-ingestion.js";
 import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
+import { genderOf, placeholderGrammar } from "./privacy/token-legend.js";
+import { PERSON_CASES } from "./privacy/person-morphology.js";
 import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
 import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
 /** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
@@ -75,9 +77,9 @@ export class LocalPrivateDocumentService {
             chunks: chunkDocumentPages(pages, this.maxChunkChars)
         };
     }
-    async extract(data, mediaType) {
+    async extract(data, mediaType, onProgress) {
         if (mediaType === "application/pdf") {
-            return this.pdfIngestor.ingest(data);
+            return this.pdfIngestor.ingest(data, onProgress);
         }
         if (mediaType ===
             "text/plain" ||
@@ -112,10 +114,15 @@ export class LocalPrivateDocumentService {
         if (!this.imageIngestor) {
             throw new Error("IMAGE_OCR_UNAVAILABLE");
         }
-        return this.imageIngestor.ingest(data, mediaType);
+        onProgress?.({ stage: "OCR", done: 0, total: 1 });
+        const image = await this.imageIngestor.ingest(data, mediaType);
+        onProgress?.({ stage: "OCR", done: 1, total: 1 });
+        return image;
     }
     async review(data, mediaType, security) {
-        const source = await this.extract(data, mediaType);
+        const onProgress = security?.onProgress;
+        onProgress?.({ stage: "READING" });
+        const source = await this.extract(data, mediaType, onProgress);
         const documentId = `doc_${source.sha256.slice(0, 24)}`;
         const persistentDocument = Boolean(this.secureDocumentStore &&
             security?.caseId);
@@ -150,7 +157,8 @@ export class LocalPrivateDocumentService {
         });
         const suggestionVault = new PseudonymizationVault();
         const suggestions = [];
-        for (const page of source.pages) {
+        for (const [index, page] of source.pages.entries()) {
+            onProgress?.({ stage: "DETECTING", done: index, total: source.pages.length });
             const preview = await new LocalPolishPseudonymizer(suggestionVault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text);
             for (const finding of preview.findings) {
                 suggestions.push({
@@ -220,7 +228,9 @@ export class LocalPrivateDocumentService {
         let findings = 0;
         let manualPseudonymizations = 0;
         let keptRanges = 0;
-        for (const page of record.source.pages) {
+        const onProgress = security?.onProgress;
+        for (const [pageIndex, page] of record.source.pages.entries()) {
+            onProgress?.({ stage: "PSEUDONYMIZING", done: pageIndex, total: record.source.pages.length });
             const pageDirectives = directives
                 .filter((directive) => directive.page === page.page)
                 .map(({ page: _page, ...directive }) => directive);
@@ -253,6 +263,7 @@ export class LocalPrivateDocumentService {
             text: chunk.text
         }));
         record.protectedChunks = publicChunks;
+        onProgress?.({ stage: "SAVING" });
         if (persistentVault &&
             security?.caseDataKey &&
             security.keyVersion &&
@@ -352,7 +363,8 @@ export class LocalPrivateDocumentService {
         return {
             documentId: selection.documentId,
             chunks,
-            totalChars
+            totalChars,
+            grammar: placeholderGrammar(chunks.map((chunk) => chunk.text).join("\n"), record.vault)
         };
     }
     async restoreDocument(args) {
@@ -400,6 +412,41 @@ export class LocalPrivateDocumentService {
             throw new Error("Unknown local document.");
         }
         return record.vault.deanonymize(text);
+    }
+    /**
+     * The document's anonymization key: every token, the value it hides and
+     * its case forms, with how often it occurs in the protected text. Needs
+     * the document restored (restoreDocument) with the case key first.
+     */
+    privacyKey(documentId) {
+        const record = this.documents.get(documentId);
+        if (!record || !record.protectedChunks) {
+            throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+        }
+        const counts = new Map();
+        for (const chunk of record.protectedChunks) {
+            for (const match of chunk.text.matchAll(/\[PII:([A-Z_]+):(\d{4})(?:\|[A-Z]{2,4})?\]/g)) {
+                const token = `[PII:${match[1]}:${match[2]}]`;
+                counts.set(token, (counts.get(token) ?? 0) + 1);
+            }
+        }
+        return record.vault
+            .snapshot()
+            .tokens.sort((a, b) => a.token.localeCompare(b.token, "en"))
+            .map((item) => {
+            const entity = item.entity;
+            const forms = entity
+                ? PERSON_CASES.map((personCase) => ({ case: personCase, text: entity.forms[personCase].text }))
+                : undefined;
+            return {
+                token: item.token,
+                kind: item.kind,
+                value: entity?.canonical ?? item.value,
+                ...(forms ? { forms } : {}),
+                ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
+                occurrences: counts.get(item.token) ?? 0
+            };
+        });
     }
     forget(documentId) {
         return this.documents.delete(documentId);

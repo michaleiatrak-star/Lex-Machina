@@ -49,7 +49,9 @@ export function DeanonymizationReview(props: {
     return {
       start: mark.start,
       end: mark.end,
+      token: mark.alias,
       kind: item.kind,
+      ...(item.caseMissing ? { caseMissing: true } : {}),
       ...(item.case ? { case: item.case } : {}),
       source: item.source,
       confidence: item.confidence,

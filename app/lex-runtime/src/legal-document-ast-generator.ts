@@ -48,7 +48,15 @@ function generationInstruction(
 ): string {
   const aliasRows = request.aliases.entries
     .map((entry) =>
-      entry.sourceToken + " -> " + entry.alias + " (" + entry.kind + ")"
+      entry.sourceToken + " -> " + entry.alias + " (" + entry.kind +
+        (entry.gender === "f"
+          ? ", rodzaj żeński"
+          : entry.gender === "m"
+            ? ", rodzaj męski"
+            : entry.gender === "unknown"
+              ? ", rodzaj nieustalony - formy neutralne"
+              : "") +
+        ")"
     )
     .join("\n");
 
@@ -72,7 +80,8 @@ function generationInstruction(
     "Never emit raw OOXML, ODF, HTML, scripts, macros, URLs as package relationships, or executable content.",
     "Never place token-looking syntax inside a text node.",
     "When protected source context contains a source PII token listed below, use its generation alias only as a typed pii_ref node.",
-    "For a PERSON or ADDRESS alias add the grammatical case of that occurrence as \"case\": NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. {\"type\":\"pii_ref\",\"alias\":\"[LMPII:D01:PERSON:0001]\",\"case\":\"GEN\"} after \"wobec\" or \"od\", or \"LOC\" for an ADDRESS after \"przy\". The value is inflected locally; never write the name or address yourself.",
+    "HARD GATE: every PERSON or ADDRESS pii_ref MUST carry the grammatical case of that occurrence as \"case\" (a pii_ref without it is an error): NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. {\"type\":\"pii_ref\",\"alias\":\"[LMPII:D01:PERSON:0001]\",\"case\":\"GEN\"} after \"wobec\" or \"od\", or \"LOC\" for an ADDRESS after \"przy\". The value is inflected locally; never write the name or address yourself.",
+    "Agree verbs, adjectives and participles with the gender given for a PERSON alias in the map below (e.g. \"wniosła\"/\"wniósł\", \"pozwana\"/\"pozwany\"); for an undetermined gender use neutral wording.",
     "Do not invent aliases. Do not attempt to infer the underlying clear value.",
     "",
     "# PROVIDER-SAFE PII ALIAS MAP",

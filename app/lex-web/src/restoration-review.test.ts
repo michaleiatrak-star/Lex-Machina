@@ -77,3 +77,22 @@ describe("restoration review", () => {
     expect(next.restorations[0]).toMatchObject({ source: "manual", status: "ok" });
   });
 });
+
+describe("substitution key", () => {
+  it("groups placeholder, case and restored words and flags a missing case", async () => {
+    const { substitutionKey } = await import("./restoration-review.js");
+    const content = "Jan Kowalski wezwał Annę Nowak. Annę Nowak powiadomiono. Anna Nowak";
+    const base = { source: "sgjp", status: "ok", confidence: 1 };
+    const rows = substitutionKey(content, [
+      { start: 0, end: 12, token: "[PII:PERSON:0001]", kind: "PERSON", case: "NOM", ...base },
+      { start: 20, end: 30, token: "[PII:PERSON:0002]", kind: "PERSON", case: "ACC", ...base },
+      { start: 32, end: 42, token: "[PII:PERSON:0002]", kind: "PERSON", case: "ACC", ...base },
+      { start: 57, end: 67, token: "[PII:PERSON:0002]", kind: "PERSON", case: "NOM", caseMissing: true, ...base, status: "needs_review" }
+    ]);
+    expect(rows.map((row) => [row.placeholder, row.text, row.occurrences, row.caseMissing, row.tone])).toEqual([
+      ["[PII:PERSON:0001|NOM]", "Jan Kowalski", 1, false, "certain"],
+      ["[PII:PERSON:0002]", "Anna Nowak", 1, true, "review"],
+      ["[PII:PERSON:0002|ACC]", "Annę Nowak", 2, false, "certain"]
+    ]);
+  });
+});

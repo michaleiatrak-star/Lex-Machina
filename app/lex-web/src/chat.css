@@ -1840,3 +1840,36 @@ mark.restored {
   display: grid;
   gap: 8px;
 }
+
+.substitution-key {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.substitution-key summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.substitution-key table {
+  width: 100%;
+  margin-top: 6px;
+  border-collapse: collapse;
+}
+
+.substitution-key th,
+.substitution-key td {
+  padding: 3px 6px;
+  border-bottom: 1px solid #e3e7df;
+  text-align: left;
+  vertical-align: top;
+}
+
+.substitution-key code {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.substitution-key .substitution-review td {
+  background: #fbf1dc;
+}

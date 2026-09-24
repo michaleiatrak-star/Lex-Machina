@@ -32,6 +32,13 @@ import type {
 import type {
   SecureCaseDocumentStore
 } from "./case-document-store.js";
+import type { ProgressReporter } from "./processing-progress.js";
+import {
+  genderOf,
+  placeholderGrammar,
+  type PlaceholderGrammar
+} from "./privacy/token-legend.js";
+import { PERSON_CASES } from "./privacy/person-morphology.js";
 import {
   DOCX_MEDIA_TYPE,
   ODT_MEDIA_TYPE,
@@ -51,6 +58,8 @@ export type DocumentSecurityContext = {
   caseId: string;
   caseDataKey?: Buffer;
   keyVersion?: number;
+  // Stage and page counts for the case view's progress bar.
+  onProgress?: ProgressReporter;
 };
 
 /** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
@@ -90,6 +99,19 @@ export type ResolvedDocumentAttachment = {
   documentId: string;
   chunks: PublicDocumentChunk[];
   totalChars: number;
+  // Kind and gender of the person/address placeholders in the chunks.
+  grammar?: PlaceholderGrammar[];
+};
+
+/** One row of a document's anonymization key, shown locally only. */
+export type PrivacyKeyEntry = {
+  token: string;
+  kind: string;
+  value: string;
+  // Case forms used when restoring (persons and addresses).
+  forms?: Array<{ case: string; text: string }>;
+  gender?: "m" | "f" | "unknown";
+  occurrences: number;
 };
 
 export type PagePrivacyDirective =
@@ -180,6 +202,7 @@ export interface DocumentService {
     documentId: string,
     text: string
   ): string;
+  privacyKey?(documentId: string): PrivacyKeyEntry[];
 }
 
 type PrivateDocumentRecord = {
@@ -280,10 +303,11 @@ implements DocumentService {
 
   private async extract(
     data: Uint8Array,
-    mediaType: SupportedDocumentMediaType
+    mediaType: SupportedDocumentMediaType,
+    onProgress?: ProgressReporter
   ): Promise<DocumentIngestionResult> {
     if (mediaType === "application/pdf") {
-      return this.pdfIngestor.ingest(data);
+      return this.pdfIngestor.ingest(data, onProgress);
     }
     if (
       mediaType ===
@@ -345,10 +369,13 @@ implements DocumentService {
     if (!this.imageIngestor) {
       throw new Error("IMAGE_OCR_UNAVAILABLE");
     }
-    return this.imageIngestor.ingest(
+    onProgress?.({ stage: "OCR", done: 0, total: 1 });
+    const image = await this.imageIngestor.ingest(
       data,
       mediaType
     );
+    onProgress?.({ stage: "OCR", done: 1, total: 1 });
+    return image;
   }
 
   async review(
@@ -356,9 +383,12 @@ implements DocumentService {
     mediaType: SupportedDocumentMediaType,
     security?: DocumentSecurityContext
   ): Promise<PublicDocumentReview> {
+    const onProgress = security?.onProgress;
+    onProgress?.({ stage: "READING" });
     const source = await this.extract(
       data,
-      mediaType
+      mediaType,
+      onProgress
     );
     const documentId =
       `doc_${source.sha256.slice(0, 24)}`;
@@ -413,7 +443,8 @@ implements DocumentService {
       new PseudonymizationVault();
     const suggestions: PublicPrivacySuggestion[] = [];
 
-    for (const page of source.pages) {
+    for (const [index, page] of source.pages.entries()) {
+      onProgress?.({ stage: "DETECTING", done: index, total: source.pages.length });
       const preview =
         await new LocalPolishPseudonymizer(
           suggestionVault,
@@ -518,7 +549,9 @@ implements DocumentService {
     let manualPseudonymizations = 0;
     let keptRanges = 0;
 
-    for (const page of record.source.pages) {
+    const onProgress = security?.onProgress;
+    for (const [pageIndex, page] of record.source.pages.entries()) {
+      onProgress?.({ stage: "PSEUDONYMIZING", done: pageIndex, total: record.source.pages.length });
       const pageDirectives = directives
         .filter(
           (directive) =>
@@ -587,6 +620,7 @@ implements DocumentService {
     }));
     record.protectedChunks = publicChunks;
 
+    onProgress?.({ stage: "SAVING" });
     if (
       persistentVault &&
       security?.caseDataKey &&
@@ -769,7 +803,11 @@ implements DocumentService {
     return {
       documentId: selection.documentId,
       chunks,
-      totalChars
+      totalChars,
+      grammar: placeholderGrammar(
+        chunks.map((chunk) => chunk.text).join("\n"),
+        record.vault
+      )
     };
   }
 
@@ -859,6 +897,42 @@ implements DocumentService {
       throw new Error("Unknown local document.");
     }
     return record.vault.deanonymize(text);
+  }
+
+  /**
+   * The document's anonymization key: every token, the value it hides and
+   * its case forms, with how often it occurs in the protected text. Needs
+   * the document restored (restoreDocument) with the case key first.
+   */
+  privacyKey(documentId: string): PrivacyKeyEntry[] {
+    const record = this.documents.get(documentId);
+    if (!record || !record.protectedChunks) {
+      throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+    }
+    const counts = new Map<string, number>();
+    for (const chunk of record.protectedChunks) {
+      for (const match of chunk.text.matchAll(/\[PII:([A-Z_]+):(\d{4})(?:\|[A-Z]{2,4})?\]/g)) {
+        const token = `[PII:${match[1]}:${match[2]}]`;
+        counts.set(token, (counts.get(token) ?? 0) + 1);
+      }
+    }
+    return record.vault
+      .snapshot()
+      .tokens.sort((a, b) => a.token.localeCompare(b.token, "en"))
+      .map((item) => {
+        const entity = item.entity;
+        const forms = entity
+          ? PERSON_CASES.map((personCase) => ({ case: personCase, text: entity.forms[personCase].text }))
+          : undefined;
+        return {
+          token: item.token,
+          kind: item.kind,
+          value: entity?.canonical ?? item.value,
+          ...(forms ? { forms } : {}),
+          ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
+          occurrences: counts.get(item.token) ?? 0
+        };
+      });
   }
 
   forget(documentId: string): boolean {

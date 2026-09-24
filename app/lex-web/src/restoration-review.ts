@@ -92,3 +92,50 @@ const LEFTOVER_TOKEN = /\[(?:PII|LMPII):[A-Z0-9_:]+(?:\|[A-Z]{2,4})?\]/g;
 export function unresolvedPlaceholders(content: string): string[] {
   return [...new Set(content.match(LEFTOVER_TOKEN) ?? [])];
 }
+
+export type SubstitutionRow = {
+  // Placeholder as the model wrote it, with its case suffix.
+  placeholder: string;
+  kind: string;
+  case?: string;
+  caseMissing: boolean;
+  text: string;
+  occurrences: number;
+  tone: RestorationTone;
+};
+
+type KeyMark = Pick<RestorationMark, "start" | "end" | "kind" | "case" | "source" | "status" | "confidence"> & {
+  token?: string;
+  caseMissing?: boolean;
+};
+
+/**
+ * The reverse of the anonymization key: which placeholder, in which case,
+ * became which words - one row per placeholder, case and restored form.
+ */
+export function substitutionKey(content: string, marks: KeyMark[]): SubstitutionRow[] {
+  const rows = new Map<string, SubstitutionRow>();
+  for (const mark of marks) {
+    const text = content.slice(mark.start, mark.end);
+    const base = mark.token ?? mark.kind;
+    const placeholder =
+      mark.case && !mark.caseMissing && /\]$/.test(base) ? `${base.slice(0, -1)}|${mark.case}]` : base;
+    const key = `${placeholder}\u0000${text}`;
+    const existing = rows.get(key);
+    if (existing) {
+      existing.occurrences += 1;
+      if (restorationTone(mark) === "review") existing.tone = "review";
+      continue;
+    }
+    rows.set(key, {
+      placeholder,
+      kind: mark.kind,
+      ...(mark.case ? { case: mark.case } : {}),
+      caseMissing: Boolean(mark.caseMissing),
+      text,
+      occurrences: 1,
+      tone: restorationTone(mark)
+    });
+  }
+  return [...rows.values()].sort((a, b) => a.placeholder.localeCompare(b.placeholder, "en"));
+}

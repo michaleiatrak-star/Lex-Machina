@@ -402,6 +402,7 @@ export type DocumentRestoration = {
   status: string;
   canonical?: string;
   gender?: "m1" | "f";
+  caseMissing?: boolean;
   occurrences: number;
 };
 
@@ -2642,30 +2643,78 @@ export async function reviewDocument(
 export async function processStoredCaseFile(
   caseId: string,
   uploadId: string,
-  fileId?: string
+  fileId?: string,
+  progressId?: string
 ): Promise<DocumentReviewResponse> {
   const path = fileId
     ? `/api/cases/${caseId}/files/${uploadId}/members/${fileId}/process`
     : `/api/cases/${caseId}/files/${uploadId}/process`;
   return json<DocumentReviewResponse>(
     path,
-    { method: "POST" }
+    {
+      method: "POST",
+      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {})
+    }
   );
 }
 
 export function finalizeDocument(
   caseId: string,
   documentId: string,
-  directives: PagePrivacyDirective[]
+  directives: PagePrivacyDirective[],
+  progressId?: string
 ): Promise<DocumentIngestionResponse> {
   return json<DocumentIngestionResponse>(
     `/api/documents/${documentId}/finalize`,
     {
       method: "POST",
+      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
       body: JSON.stringify({
         caseId,
         directives
       })
     }
   );
+}
+
+export type ProcessingProgress = {
+  stage: "READING" | "OCR" | "DETECTING" | "PSEUDONYMIZING" | "SAVING";
+  done?: number;
+  total?: number;
+  updatedAt: string;
+};
+
+export function newProgressId(): string {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+export async function getProcessingProgress(
+  caseId: string,
+  progressId: string
+): Promise<ProcessingProgress | null> {
+  const body = await json<{ progress: ProcessingProgress | null }>(
+    `/api/cases/${caseId}/progress/${progressId}`
+  );
+  return body.progress;
+}
+
+export type PrivacyKeyEntry = {
+  token: string;
+  kind: string;
+  value: string;
+  forms?: Array<{ case: string; text: string }>;
+  gender?: "m" | "f" | "unknown";
+  occurrences: number;
+};
+
+export async function getPrivacyKey(
+  caseId: string,
+  documentId: string
+): Promise<PrivacyKeyEntry[]> {
+  const body = await json<{ entries: PrivacyKeyEntry[] }>(
+    `/api/cases/${caseId}/documents/${documentId}/privacy-key`
+  );
+  return body.entries;
 }

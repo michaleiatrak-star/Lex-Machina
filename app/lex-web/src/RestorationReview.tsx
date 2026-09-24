@@ -3,6 +3,7 @@ import {
   TONE_LABEL,
   caseLabel,
   restorationTone,
+  substitutionKey,
   type RestorationTone
 } from "./restoration-review.js";
 
@@ -16,6 +17,8 @@ export type ReviewMark = {
   status: string;
   canonical?: string;
   gender?: "m1" | "f";
+  token?: string;
+  caseMissing?: boolean;
 };
 
 const TONES: RestorationTone[] = ["certain", "rule", "review", "manual", "stored"];
@@ -46,6 +49,7 @@ export function RestorationReview(props: {
   );
   const unresolved = props.unresolved ?? [];
   const current = selected === null ? null : props.marks[selected] ?? null;
+  const keyRows = substitutionKey(props.content, props.marks);
 
   function select(index: number): void {
     const mark = props.marks[index]!;
@@ -118,6 +122,35 @@ export function RestorationReview(props: {
             ))}
           </div>
           <div className="restoration-text">{parts}</div>
+          <details className="substitution-key">
+            <summary>Klucz podstawień: symbol z przypadkiem → odtworzone słowa ({keyRows.length})</summary>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Symbol od modelu</th>
+                  <th scope="col">Przypadek</th>
+                  <th scope="col">Odtworzono jako</th>
+                  <th scope="col">Wystąpienia</th>
+                  <th scope="col">Źródło formy</th>
+                </tr>
+              </thead>
+              <tbody>
+                {keyRows.map((row) => (
+                  <tr key={`${row.placeholder}-${row.text}`} className={`substitution-${row.tone}`}>
+                    <td><code>{row.placeholder}</code></td>
+                    <td>
+                      {row.caseMissing
+                        ? "brak - model nie podał przypadku, przyjęto mianownik"
+                        : caseLabel(row.case) || "-"}
+                    </td>
+                    <td>{row.text}</td>
+                    <td>{row.occurrences}</td>
+                    <td>{TONE_LABEL[row.tone]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </details>
           {current ? (
             <div className="restoration-editor">
               <div>
@@ -126,6 +159,7 @@ export function RestorationReview(props: {
                 {current.canonical ? ` · osoba: ${current.canonical}` : ""}
                 {` · ${TONE_LABEL[restorationTone(current)]}`}
                 {current.status === "gender_ambiguous" ? " · niepewna płeć" : ""}
+                {current.caseMissing ? " · model nie podał przypadku" : ""}
               </div>
               <input
                 aria-label="Poprawiona forma"
