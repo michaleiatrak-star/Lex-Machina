@@ -25,13 +25,39 @@ concurrency:
 
 jobs:
   g33d-windows-online-installer:
-    name: G33D Windows online installer build and acceptance
+    name: G33D Windows online installer + latest development legal corpus
     runs-on: windows-latest
     timeout-minutes: 120
 
     steps:
-      - name: Checkout
+      - name: Checkout 24 Sep runtime
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Overlay latest development legal corpus from main
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          git fetch origin main --depth=1
+          $skillsSha = (git rev-parse FETCH_HEAD).Trim()
+          Write-Host "Latest main legal-corpus source: $skillsSha"
+          git checkout $skillsSha -- "WERSJA ROZWOJOWA" "Wersja rozwojowa rozpakowana"
+
+          "runtime_head=${{ github.event.pull_request.head.sha || github.sha }}" | Out-File -FilePath "LATEST-SKILLS-BUILD-PROVENANCE.txt" -Encoding utf8
+          "skills_source_branch=main" | Out-File -FilePath "LATEST-SKILLS-BUILD-PROVENANCE.txt" -Encoding utf8 -Append
+          "skills_source_sha=$skillsSha" | Out-File -FilePath "LATEST-SKILLS-BUILD-PROVENANCE.txt" -Encoding utf8 -Append
+          "build_date_utc=$(Get-Date -AsUTC -Format o)" | Out-File -FilePath "LATEST-SKILLS-BUILD-PROVENANCE.txt" -Encoding utf8 -Append
+
+          python scripts/verify_development_archives.py
+          if ($LASTEXITCODE -ne 0) { throw "DEVELOPMENT_ARCHIVES_VERIFY_FAILED" }
+
+          $court = Get-Content -Raw "Wersja rozwojowa rozpakowana/analiza-sadowa-v6/SKILL.md"
+          $router = Get-Content -Raw "Wersja rozwojowa rozpakowana/prawny-router-v3/SKILL.md"
+          $polish = Get-Content -Raw "Wersja rozwojowa rozpakowana/prawo-polskie-v2/SKILL.md"
+          if ($court -notmatch 'version:\s*"6\.10"') { throw "LATEST_ANALIZA_SADOWA_NOT_PRESENT" }
+          if ($router -notmatch 'version:\s*"3\.50"') { throw "LATEST_PRAWNY_ROUTER_NOT_PRESENT" }
+          if ($polish -notmatch 'version:\s*"6\.20"') { throw "LATEST_PRAWO_POLSKIE_NOT_PRESENT" }
 
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -57,6 +83,10 @@ jobs:
       - name: G33D static release contract
         working-directory: app/lex-runtime
         run: npm run validate:g33d
+
+      - name: Account-session and local-runtime regressions
+        working-directory: app/lex-runtime
+        run: npx vitest run src/local-model-runtime-startup.test.ts src/providers/account-session.test.ts
 
       - name: Embedded Python hidden-stdio smoke test
         shell: pwsh
@@ -96,49 +126,25 @@ jobs:
       - name: Provision VC++ prerequisite for unattended acceptance runner
         shell: pwsh
         run: |
-          # The product bootstrap can elevate interactively when VC++ is absent.
-          # GitHub Actions has no interactive UAC surface, so provision the exact
-          # pinned prerequisite up front and let the installer exercise the rest
-          # of the real online bootstrap path without an invisible elevation wait.
           $manifest = Get-Content -Raw "app/installer/windows-release-source.json" | ConvertFrom-Json
           $vc = $manifest.systemPrerequisites.visualCppRuntime
-          if ($vc.sha256 -notmatch '^[a-fA-F0-9]{64}$') {
-            throw "ACCEPTANCE_VC_HASH_INVALID"
-          }
-
+          if ($vc.sha256 -notmatch '^[a-fA-F0-9]{64}$') { throw "ACCEPTANCE_VC_HASH_INVALID" }
           $vcInstaller = Join-Path $env:RUNNER_TEMP "vc_redist.x64-$($vc.version).exe"
           Invoke-WebRequest -UseBasicParsing -Uri $vc.url -OutFile $vcInstaller
           $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $vcInstaller).Hash.ToLowerInvariant()
-          if ($actual -ne $vc.sha256.ToLowerInvariant()) {
-            throw "ACCEPTANCE_VC_HASH_MISMATCH expected=$($vc.sha256) actual=$actual"
-          }
-
-          $install = Start-Process -FilePath $vcInstaller -ArgumentList @(
-            "/install", "/quiet", "/norestart"
-          ) -Wait -PassThru
-          if ($install.ExitCode -notin @(0, 1638, 3010)) {
-            throw "ACCEPTANCE_VC_INSTALL_FAILED:$($install.ExitCode)"
-          }
-          Write-Host "Acceptance VC++ prerequisite exit code: $($install.ExitCode)"
+          if ($actual -ne $vc.sha256.ToLowerInvariant()) { throw "ACCEPTANCE_VC_HASH_MISMATCH expected=$($vc.sha256) actual=$actual" }
+          $install = Start-Process -FilePath $vcInstaller -ArgumentList @("/install", "/quiet", "/norestart") -Wait -PassThru
+          if ($install.ExitCode -notin @(0, 1638, 3010)) { throw "ACCEPTANCE_VC_INSTALL_FAILED:$($install.ExitCode)" }
 
       - name: Reproduce pre-existing same-version Python registration
         shell: pwsh
         run: |
-          # RC3 field failure: the CPython full installer can enter maintenance
-          # mode when the same version is already registered and then return 0
-          # without provisioning Lex Machina's requested private TargetDir.
-          # Register the exact pinned Python first; the product installer must
-          # still succeed because it now uses the application-local embeddable
-          # distribution and never reuses this registered installation.
           $manifest = Get-Content -Raw "app/installer/windows-release-source.json" | ConvertFrom-Json
           $python = $manifest.runtime.python
           $foreignInstaller = Join-Path $env:RUNNER_TEMP "foreign-python-$($python.version)-amd64.exe"
           Invoke-WebRequest -UseBasicParsing -Uri $python.url -OutFile $foreignInstaller
           $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignInstaller).Hash.ToLowerInvariant()
-          if ($actualHash -ne $python.sha256.ToLowerInvariant()) {
-            throw "ACCEPTANCE_FOREIGN_PYTHON_HASH_MISMATCH expected=$($python.sha256) actual=$actualHash"
-          }
-
+          if ($actualHash -ne $python.sha256.ToLowerInvariant()) { throw "ACCEPTANCE_FOREIGN_PYTHON_HASH_MISMATCH expected=$($python.sha256) actual=$actualHash" }
           $foreignRoot = Join-Path $env:RUNNER_TEMP ("Foreign Python " + $python.version)
           $foreignArgs = @(
             "/quiet",
@@ -154,18 +160,11 @@ jobs:
             "Shortcuts=0"
           ) -join " "
           $proc = Start-Process -FilePath $foreignInstaller -ArgumentList $foreignArgs -Wait -PassThru
-          if ($proc.ExitCode -ne 0) {
-            throw "ACCEPTANCE_FOREIGN_PYTHON_INSTALL_FAILED:$($proc.ExitCode)"
-          }
+          if ($proc.ExitCode -ne 0) { throw "ACCEPTANCE_FOREIGN_PYTHON_INSTALL_FAILED:$($proc.ExitCode)" }
           $foreignExe = Join-Path $foreignRoot "python.exe"
-          if (-not (Test-Path -LiteralPath $foreignExe -PathType Leaf)) {
-            throw "ACCEPTANCE_FOREIGN_PYTHON_MISSING:$foreignExe"
-          }
+          if (-not (Test-Path -LiteralPath $foreignExe -PathType Leaf)) { throw "ACCEPTANCE_FOREIGN_PYTHON_MISSING:$foreignExe" }
           $foreignVersion = (& $foreignExe --version 2>&1 | Select-Object -First 1).ToString().Trim()
-          if ($foreignVersion -ne "Python $($python.version)") {
-            throw "ACCEPTANCE_FOREIGN_PYTHON_VERSION_INVALID:$foreignVersion"
-          }
-          Write-Host "Pre-existing registered Python ready: $foreignRoot"
+          if ($foreignVersion -ne "Python $($python.version)") { throw "ACCEPTANCE_FOREIGN_PYTHON_VERSION_INVALID:$foreignVersion" }
 
       - name: G33D installed-copy online bootstrap acceptance
         shell: pwsh
@@ -174,15 +173,7 @@ jobs:
             Sort-Object LastWriteTime -Descending |
             Select-Object -First 1
           if (-not $installer) { throw "NSIS_INSTALLER_NOT_FOUND" }
-
-          # Regression coverage for the real per-user path reported in RC2/RC3:
-          # spaces plus a Polish character must survive NSIS -> PowerShell ->
-          # app-local CPython extraction and package provisioning, even while
-          # the same CPython version is already registered elsewhere.
-          $installRoot = Join-Path $env:RUNNER_TEMP (
-            "Lex Machina Michał Acceptance-" + [Guid]::NewGuid().ToString("N")
-          )
-          Write-Host "G33D path-with-spaces/unicode acceptance root: $installRoot"
+          $installRoot = Join-Path $env:RUNNER_TEMP ("Lex Machina Michał LatestSkills-" + [Guid]::NewGuid().ToString("N"))
           ./app/installer/windows-installer-acceptance.ps1 `
             -InstallerPath $installer.FullName `
             -InstallRoot $installRoot
@@ -197,17 +188,19 @@ jobs:
           "installer=$($installer.Name)" | Out-File -FilePath "app\lex-desktop\src-tauri\target\release\bundle\nsis\SHA256.txt" -Encoding utf8
           "sha256=$hash" | Out-File -FilePath "app\lex-desktop\src-tauri\target\release\bundle\nsis\SHA256.txt" -Encoding utf8 -Append
           "bytes=$($installer.Length)" | Out-File -FilePath "app\lex-desktop\src-tauri\target\release\bundle\nsis\SHA256.txt" -Encoding utf8 -Append
+          Get-Content "LATEST-SKILLS-BUILD-PROVENANCE.txt"
           Get-Content "app\lex-desktop\src-tauri\target\release\bundle\nsis\SHA256.txt"
 
       - name: Publish online installer
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: LexMachina-Windows-Online-Installer
+          name: LexMachina-Windows-Online-Installer-2026-09-24-LatestSkills
           path: |
             app/lex-desktop/src-tauri/target/release/bundle/nsis/*.exe
             app/lex-desktop/src-tauri/target/release/bundle/nsis/SHA256.txt
             app/lex-desktop/src-tauri/runtime/release-source.json
             app/lex-desktop/src-tauri/runtime/release-requirements.txt
             app/lex-desktop/src-tauri/runtime/npm-dependency-tree.json
+            LATEST-SKILLS-BUILD-PROVENANCE.txt
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 14
