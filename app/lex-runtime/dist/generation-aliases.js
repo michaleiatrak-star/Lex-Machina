@@ -1,6 +1,8 @@
 import { PERSON_CASES } from "./privacy/person-morphology.js";
 import { genderOf } from "./privacy/token-legend.js";
 export function buildGenerationAliases(documents) {
+    let ownKeyIndex = 0;
+    const sharedTokens = new Set();
     if (documents.length > 99) {
         throw new Error("GENERATION_DOCUMENT_LIMIT");
     }
@@ -13,8 +15,13 @@ export function buildGenerationAliases(documents) {
             throw new Error("GENERATION_DOCUMENT_INVALID");
         }
         documentIds.add(document.documentId);
-        const prefix = "D" +
-            String(documentIndex + 1).padStart(2, "0");
+        void documentIndex;
+        // Own-key documents are numbered in order, as the attachment context
+        // namespaces them (session-executor namespaceDocumentAttachmentTokens).
+        const prefix = document.shared
+            ? "D00"
+            : "D" +
+                String(++ownKeyIndex).padStart(2, "0");
         for (const item of document.vault
             .snapshot()
             .tokens
@@ -23,6 +30,11 @@ export function buildGenerationAliases(documents) {
                 .exec(item.token);
             if (!match) {
                 throw new Error("GENERATION_SOURCE_TOKEN_INVALID");
+            }
+            if (document.shared) {
+                if (sharedTokens.has(item.token))
+                    continue;
+                sharedTokens.add(item.token);
             }
             entries.push({
                 alias: `[LMPII:${prefix}:${match[1]}:${match[2]}]`,

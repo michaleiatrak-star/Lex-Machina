@@ -91,6 +91,7 @@ export type ReadyDocumentResult = {
 export class LocalDocumentAuthoringService {
   constructor(
     private readonly vaults:
+      Partial<Pick<EncryptedPrivacyVaultStore, "sharedMembers">> &
       Pick<
         EncryptedPrivacyVaultStore,
         | "loadDocumentVault"
@@ -147,6 +148,14 @@ export class LocalDocumentAuthoringService {
       );
     }
 
+    const sharedMembers =
+      this.vaults.sharedMembers
+        ? await this.vaults.sharedMembers({
+            caseId: args.caseId,
+            caseDataKey: args.caseDataKey,
+            keyVersion: args.keyVersion
+          })
+        : new Set<string>();
     const documents =
       [];
     for (
@@ -155,6 +164,7 @@ export class LocalDocumentAuthoringService {
     ) {
       documents.push({
         documentId,
+        shared: sharedMembers.has(documentId),
         vault:
           await this.vaults
             .loadDocumentVault({

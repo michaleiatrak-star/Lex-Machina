@@ -22,8 +22,13 @@ export function buildGenerationAliases(
       documentId: string;
       vault:
         PseudonymizationVault;
+      // On the case's shared key: all such documents share prefix D00 and
+      // one alias per token (one person, one alias).
+      shared?: boolean;
     }>
 ): GenerationAliasManifest {
+  let ownKeyIndex = 0;
+  const sharedTokens = new Set<string>();
   if (
     documents.length > 99
   ) {
@@ -58,14 +63,19 @@ export function buildGenerationAliases(
       documentIds.add(
         document.documentId
       );
+      void documentIndex;
+      // Own-key documents are numbered in order, as the attachment context
+      // namespaces them (session-executor namespaceDocumentAttachmentTokens).
       const prefix =
-        "D" +
-        String(
-          documentIndex + 1
-        ).padStart(
-          2,
-          "0"
-        );
+        document.shared
+          ? "D00"
+          : "D" +
+            String(
+              ++ownKeyIndex
+            ).padStart(
+              2,
+              "0"
+            );
       for (
         const item
         of document.vault
@@ -88,6 +98,10 @@ export function buildGenerationAliases(
           throw new Error(
             "GENERATION_SOURCE_TOKEN_INVALID"
           );
+        }
+        if (document.shared) {
+          if (sharedTokens.has(item.token)) continue;
+          sharedTokens.add(item.token);
         }
         entries.push({
           alias:

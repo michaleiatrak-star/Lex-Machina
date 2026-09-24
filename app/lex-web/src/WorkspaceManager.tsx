@@ -4,6 +4,7 @@ import {
   deanonymizeUpload,
   finalizeDocument,
   getProcessingProgress,
+  joinSharedKey,
   keepAllDirectives,
   listCaseArtifacts,
   isDesktopShell,
@@ -271,13 +272,38 @@ export function WorkspaceManager({
     }
   }
 
-  const processedDocuments = (workspace?.items ?? [])
+  const processedEntries = (workspace?.items ?? [])
     .filter((entry) => entry.kind === "UPLOAD")
     .map((entry) => ({
       filename: entry.filename,
-      documentId: caseFiles.find((file) => file.uploadId === entry.itemId)?.processing?.documentId
+      processing: caseFiles.find((file) => file.uploadId === entry.itemId)?.processing
     }))
-    .filter((entry): entry is { filename: string; documentId: string } => Boolean(entry.documentId));
+    .filter((entry) => entry.processing && entry.processing.anonymized !== false);
+  // Keys to deanonymize with: the case's shared key once, then documents that
+  // still have their own key.
+  const sharedKeyDocument = processedEntries.find((entry) => entry.processing!.sharedKey);
+  const processedDocuments = [
+    ...(sharedKeyDocument
+      ? [{ filename: "Klucz sprawy (wspólny dla dokumentów)", documentId: sharedKeyDocument.processing!.documentId }]
+      : []),
+    ...processedEntries
+      .filter((entry) => !entry.processing!.sharedKey)
+      .map((entry) => ({ filename: `${entry.filename} (klucz osobny)`, documentId: entry.processing!.documentId }))
+  ];
+  const ownKeyDocuments = processedEntries.filter((entry) => !entry.processing!.sharedKey);
+
+  async function joinAllKeys(): Promise<void> {
+    await run(async () => {
+      let remapped = 0;
+      for (const entry of ownKeyDocuments) {
+        remapped += (await joinSharedKey(caseId, entry.processing!.documentId)).remapped;
+      }
+      setNotice(
+        `Połączono klucze ${ownKeyDocuments.length} dokumentów w klucz sprawy (przenumerowane symbole: ${remapped}). ` +
+          "Ta sama osoba ma teraz jeden symbol we wszystkich dokumentach sprawy."
+      );
+    });
+  }
 
   function processingFor(
     item: WorkspaceItem
@@ -974,7 +1000,7 @@ export function WorkspaceManager({
                             </span>
                           ) : (
                             <span className="anonymized-badge" title="Dokument ma wersję zanonimizowaną i klucz anonimizacji">
-                              Zanonimizowany
+                              {processingFor(item)!.sharedKey ? "Zanonimizowany · klucz sprawy" : "Zanonimizowany · klucz osobny"}
                             </span>
                           )
                         ) : null}
@@ -1157,6 +1183,19 @@ export function WorkspaceManager({
           )}
         </section>
       </div>
+
+      {canWrite && ownKeyDocuments.length > 0 && processedEntries.length > 1 ? (
+        <p className="workspace-shared-key-note">
+          {ownKeyDocuments.length} dokument(y) mają osobny klucz sprzed wprowadzenia klucza sprawy, więc ta sama
+          osoba może mieć w nich różne symbole.{" "}
+          <button type="button" disabled={busy} onClick={() => void joinAllKeys()}>
+            Połącz klucze sprawy
+          </button>
+          <small>
+            {" "}Dokumenty z symbolami utworzone wcześniej z tych plików deanonimizuj przed połączeniem.
+          </small>
+        </p>
+      ) : null}
 
       {artifacts.length > 0 ? (
         <section className="workspace-artifacts" aria-label="Dokumenty utworzone przez model">

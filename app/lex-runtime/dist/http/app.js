@@ -2107,7 +2107,8 @@ export function createLexHttpApp(options) {
                                         .chunks
                                         .slice(0, 32)
                                         .map((chunk) => chunk.index),
-                                    anonymized: restored.privacy.findings > 0
+                                    anonymized: restored.privacy.findings > 0,
+                                    sharedKey: options.documentService.usesSharedKey?.(restored.documentId) ?? false
                                 }
                             };
                         }
@@ -2403,6 +2404,11 @@ export function createLexHttpApp(options) {
             throw new Error("PRIVACY_EDIT_KIND_INVALID");
         return await options.documentService
             .addProtection(documentId, text, kind, security);
+    }));
+    app.post("/api/cases/:caseId/documents/:documentId/join-shared-key", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+        if (!options.documentService.joinSharedKey)
+            throw new Error("SHARED_KEY_UNAVAILABLE");
+        return await options.documentService.joinSharedKey(documentId, security);
     }));
     app.post("/api/cases/:caseId/documents/:documentId/anonymized/unprotect", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => await options.documentService
         .removeProtection(documentId, String(req.body?.token ?? ""), security)));
@@ -3589,6 +3595,22 @@ export function createLexHttpApp(options) {
                 ...new Set(resolvedAttachments
                     .map((item) => item.documentId))
             ];
+            // Documents on the case's shared key: raw tokens in the context and
+            // one alias per person (D00); the instruction is pseudonymized with
+            // the same key.
+            const sharedGeneration = sourceDocumentIds.length > 0 && options.documentService.sharedKeyState
+                ? await options.caseAccessService.withCaseDataKey(context, caseId, "ANALYZE", (caseDataKey) => options.documentService.sharedKeyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion: caseView.keyVersion
+                }))
+                : null;
+            if (sharedGeneration) {
+                for (const attachment of resolvedAttachments) {
+                    if (sharedGeneration.members.has(attachment.documentId))
+                        attachment.sharedKey = true;
+                }
+            }
             const aliases = sourceDocumentIds.length > 0
                 ? await options
                     .caseAccessService
@@ -3626,6 +3648,9 @@ export function createLexHttpApp(options) {
             const generated = await options
                 .documentAstGenerator
                 .generate({
+                ...(sharedGeneration && sharedGeneration.members.size > 0
+                    ? { privacySeed: sharedGeneration.snapshot }
+                    : {}),
                 query: sessionRequest
                     .query,
                 provider: sessionRequest
@@ -4609,6 +4634,34 @@ export function createLexHttpApp(options) {
                     });
                 }
                 sessionAttachments.push(...grouped.values());
+            }
+            // Documents of one case on its shared key: the message is pseudonymized
+            // with the same key, so a person has one symbol in the message and in
+            // every attached document.
+            const attachmentCases = [
+                ...new Set(sessionAttachments
+                    .map((attachment) => attachment.caseId)
+                    .filter((value) => Boolean(value)))
+            ];
+            if (attachmentCases.length === 1 &&
+                options.caseAccessService &&
+                options.documentService?.sharedKeyState) {
+                const sharedCaseId = attachmentCases[0];
+                const context = responseAuthContext(res);
+                const caseView = options.caseAccessService.openCase(context, sharedCaseId);
+                const shared = await options.caseAccessService.withCaseDataKey(context, sharedCaseId, "ANALYZE", (caseDataKey) => options.documentService.sharedKeyState({
+                    caseId: sharedCaseId,
+                    caseDataKey,
+                    keyVersion: caseView.keyVersion
+                }));
+                if (shared && shared.members.size > 0) {
+                    request.privacySeed = shared.snapshot;
+                    for (const attachment of sessionAttachments) {
+                        if (attachment.caseId === sharedCaseId && shared.members.has(attachment.documentId)) {
+                            attachment.sharedKey = true;
+                        }
+                    }
+                }
             }
             if (sessionAttachments.length >
                 0) {

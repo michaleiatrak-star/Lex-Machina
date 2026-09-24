@@ -1,3 +1,4 @@
+import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
 import {
   placeholderGrammar,
   placeholderKeyPrompt,
@@ -150,6 +151,8 @@ export type SessionDocumentAttachment = {
   caseId?: string;
   grammar?: PlaceholderGrammar[];
   totalPages?: number;
+  // Uses the case's shared key: its tokens are the chat's tokens, not namespaced.
+  sharedKey?: boolean;
   sourceScope?:
     | "MANUAL"
     | "CASE_KNOWLEDGE"
@@ -168,6 +171,8 @@ export type SessionDocumentAttachment = {
 
 export type SessionExecutionRequest = {
   query: string;
+  // The case's shared key: names in the message get the documents' symbols.
+  privacySeed?: PseudonymizationVaultSnapshot;
   documentAttachments?: SessionDocumentAttachment[];
   provider: ProviderId;
   model: string;
@@ -771,6 +776,9 @@ export function namespaceDocumentAttachmentTokens(
 
   return attachments.map(
     (attachment) => {
+      if (attachment.sharedKey) {
+        return { ...attachment, chunks: attachment.chunks.map((chunk) => ({ ...chunk })) };
+      }
       const prefix =
         prefixFor(
           attachment.documentId
@@ -977,7 +985,7 @@ export class SafeSessionExecutor implements SessionExecutor {
     request: SessionExecutionRequest
   ): Promise<ModelAutoRoutingResult> {
     const vault =
-      new PseudonymizationVault();
+      new PseudonymizationVault(request.privacySeed);
     const pseudonymizer =
       new LocalPolishPseudonymizer(
         vault,
@@ -1051,7 +1059,7 @@ export class SafeSessionExecutor implements SessionExecutor {
     });
 
     const chatPrivacyVault =
-      new PseudonymizationVault();
+      new PseudonymizationVault(request.privacySeed);
     const chatPseudonymizer =
       new LocalPolishPseudonymizer(
         chatPrivacyVault,
@@ -1366,10 +1374,19 @@ export class SafeSessionExecutor implements SessionExecutor {
     // around them without ever seeing a name.
     const placeholderKey = placeholderKeyPrompt([
       ...placeholderGrammar(
-        [protectedQuery, protectedAuxiliaryText ?? ""].join("\n"),
+        [
+          protectedQuery,
+          protectedAuxiliaryText ?? "",
+          // Shared-key documents use the chat's own (seeded) tokens.
+          ...attachments
+            .filter((attachment) => attachment.sharedKey)
+            .flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))
+        ].join("\n"),
         chatPrivacyVault
       ),
-      ...attachments.flatMap((attachment) => attachment.grammar ?? [])
+      ...attachments
+        .filter((attachment) => !attachment.sharedKey)
+        .flatMap((attachment) => attachment.grammar ?? [])
     ]);
 
     const draftCallbacks =

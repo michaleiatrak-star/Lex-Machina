@@ -41,6 +41,12 @@ export type PrivacyVaultPayloadV1 = {
     string,
     PseudonymizationVaultSnapshot
   >;
+  // One key for the whole case: every member document uses its tokens, so
+  // a person has one symbol in all of the case's documents.
+  shared?: {
+    snapshot: PseudonymizationVaultSnapshot;
+    members: string[];
+  };
 };
 
 export type PrivacyVaultMeta = {
@@ -280,7 +286,15 @@ function canonicalPayload(
       payload.caseId,
     generation:
       payload.generation,
-    documents
+    documents,
+    ...(payload.shared
+      ? {
+          shared: {
+            snapshot: canonicalSnapshot(payload.shared.snapshot),
+            members: [...new Set(payload.shared.members)].sort()
+          }
+        }
+      : {})
   };
 }
 
@@ -661,6 +675,20 @@ function decodeEnvelope(args: {
       new PseudonymizationVault(
         snapshot
       );
+    }
+
+    if (parsed.shared !== undefined) {
+      if (
+        !parsed.shared ||
+        typeof parsed.shared !== "object" ||
+        !Array.isArray(parsed.shared.members) ||
+        parsed.shared.members.some((id) => typeof id !== "string" || !validDocumentId(id)) ||
+        !parsed.shared.snapshot ||
+        !Array.isArray(parsed.shared.snapshot.tokens)
+      ) {
+        throw new Error("PRIVACY_VAULT_PAYLOAD_INVALID");
+      }
+      new PseudonymizationVault(parsed.shared.snapshot);
     }
 
     return canonicalPayload(
@@ -1110,6 +1138,65 @@ export class EncryptedPrivacyVaultStore {
     );
   }
 
+  /** The case's shared key and its member documents (null before the first one). */
+  async sharedState(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<{ snapshot: PseudonymizationVaultSnapshot; members: Set<string> } | null> {
+    const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+    return payload.shared
+      ? { snapshot: payload.shared.snapshot, members: new Set(payload.shared.members) }
+      : null;
+  }
+
+  /** Documents that use the case's shared key. */
+  async sharedMembers(args: {
+    caseId: string;
+    caseDataKey: Buffer;
+    keyVersion: number;
+  }): Promise<Set<string>> {
+    const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+    return new Set(payload.shared?.members ?? []);
+  }
+
+  /**
+   * Runs an operation on the case's shared key under the case lock (no two
+   * documents can hand out the same new token), then saves it and copies it
+   * to every member document's key, so each document key stays complete.
+   * Nothing is written when the operation fails.
+   */
+  async withSharedVault<T>(
+    args: {
+      caseId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    },
+    member: string | null,
+    operation: (vault: PseudonymizationVault, members: ReadonlySet<string>) => Promise<T>
+  ): Promise<T> {
+    if (member !== null && !validDocumentId(member)) {
+      throw new Error("INVALID_DOCUMENT_ID");
+    }
+    return await this.withCaseQueue(args.caseId, async () => {
+      const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+      const vault = new PseudonymizationVault(payload.shared?.snapshot);
+      const members = new Set(payload.shared?.members ?? []);
+      const result = await operation(vault, members);
+      if (member !== null) members.add(member);
+      const snapshot = vault.snapshot();
+      const documents = { ...payload.documents };
+      for (const id of members) documents[id] = snapshot;
+      await this.writePayload(args.caseId, args.caseDataKey, args.keyVersion, {
+        ...payload,
+        generation: payload.generation + 1,
+        documents,
+        shared: { snapshot, members: [...members].sort() }
+      });
+      return result;
+    });
+  }
+
   async deleteDocumentVault(args: {
     caseId: string;
     documentId: string;
@@ -1153,7 +1240,16 @@ export class EncryptedPrivacyVaultStore {
             generation:
               payload.generation +
               1,
-            documents
+            documents,
+            // The shared key keeps its entries: other documents may use them.
+            ...(payload.shared
+              ? {
+                  shared: {
+                    snapshot: payload.shared.snapshot,
+                    members: payload.shared.members.filter((id) => id !== args.documentId)
+                  }
+                }
+              : {})
           };
         await this.writePayload(
           args.caseId,

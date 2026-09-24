@@ -241,6 +241,9 @@ export function namespaceDocumentAttachmentTokens(attachments) {
         return prefix;
     };
     return attachments.map((attachment) => {
+        if (attachment.sharedKey) {
+            return { ...attachment, chunks: attachment.chunks.map((chunk) => ({ ...chunk })) };
+        }
         const prefix = prefixFor(attachment.documentId);
         return {
             ...attachment,
@@ -372,7 +375,7 @@ export class SafeSessionExecutor {
             : undefined;
     }
     async resolveAutoRouting(request) {
-        const vault = new PseudonymizationVault();
+        const vault = new PseudonymizationVault(request.privacySeed);
         const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         try {
@@ -410,7 +413,7 @@ export class SafeSessionExecutor {
             model: request.model,
             mode: request.mode
         });
-        const chatPrivacyVault = new PseudonymizationVault();
+        const chatPrivacyVault = new PseudonymizationVault(request.privacySeed);
         const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         let protectedAuxiliaryText;
@@ -587,8 +590,17 @@ export class SafeSessionExecutor {
         // Kind and gender of every placeholder the model will see: it inflects
         // around them without ever seeing a name.
         const placeholderKey = placeholderKeyPrompt([
-            ...placeholderGrammar([protectedQuery, protectedAuxiliaryText ?? ""].join("\n"), chatPrivacyVault),
-            ...attachments.flatMap((attachment) => attachment.grammar ?? [])
+            ...placeholderGrammar([
+                protectedQuery,
+                protectedAuxiliaryText ?? "",
+                // Shared-key documents use the chat's own (seeded) tokens.
+                ...attachments
+                    .filter((attachment) => attachment.sharedKey)
+                    .flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))
+            ].join("\n"), chatPrivacyVault),
+            ...attachments
+                .filter((attachment) => !attachment.sharedKey)
+                .flatMap((attachment) => attachment.grammar ?? [])
         ]);
         const draftCallbacks = request.onDraft
             ? createDraftCallbacks(chatPrivacyVault, request.onDraft)

@@ -271,8 +271,17 @@ export type StoredUploadResponse = {
     chunkIndices: number[];
     // false: processed without anonymization (plain text, no key).
     anonymized?: boolean;
+    // On the case's shared key (one symbol per person across the case).
+    sharedKey?: boolean;
   };
 };
+
+export function joinSharedKey(
+  caseId: string,
+  documentId: string
+): Promise<AnonymizedVersion & { remapped: number }> {
+  return json(`/api/cases/${caseId}/documents/${documentId}/join-shared-key`, { method: "POST" });
+}
 
 /** Directives that keep every page as written: OCR/text only, no key. */
 export function keepAllDirectives(review: DocumentReviewResponse): PagePrivacyDirective[] {

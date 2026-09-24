@@ -68,6 +68,7 @@ export class LegalDocumentAstGenerator {
             model: request.model,
             primarySkill: request.primarySkill,
             mode: request.mode,
+            ...(request.privacySeed ? { privacySeed: request.privacySeed } : {}),
             ...(request.attachments?.length
                 ? { documentAttachments: request.attachments }
                 : {})

@@ -281,15 +281,6 @@ export class LocalPrivateDocumentService {
                     1) {
                 throw new Error("DOCUMENT_VAULT_CONTEXT_REQUIRED");
             }
-            record.vault =
-                await this
-                    .privacyVaultStore
-                    .loadDocumentVault({
-                    caseId: record.caseId,
-                    documentId,
-                    caseDataKey: security.caseDataKey,
-                    keyVersion: security.keyVersion
-                });
         }
         const pages = [];
         const counts = {};
@@ -298,30 +289,57 @@ export class LocalPrivateDocumentService {
         let manualPseudonymizations = 0;
         let keptRanges = 0;
         const onProgress = security?.onProgress;
-        for (const [pageIndex, page] of record.source.pages.entries()) {
-            onProgress?.({ stage: "PSEUDONYMIZING", done: pageIndex, total: record.source.pages.length });
-            const pageDirectives = directives
-                .filter((directive) => directive.page === page.page)
-                .map(({ page: _page, ...directive }) => directive);
-            const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text, pageDirectives);
-            findings += protectedPage.findings.length;
-            manualPseudonymizations +=
-                protectedPage.findings.filter((item) => item.source === "USER").length;
-            keptRanges +=
-                protectedPage.keptRanges.length;
-            for (const [kind, count] of Object.entries(protectedPage.counts)) {
-                counts[kind] = (counts[kind] ?? 0) + count;
-            }
-            for (const annotation of protectedPage.annotations) {
-                annotations.push({
-                    page: page.page,
-                    ...annotation
+        const pseudonymizePages = async () => {
+            for (const [pageIndex, page] of record.source.pages.entries()) {
+                onProgress?.({ stage: "PSEUDONYMIZING", done: pageIndex, total: record.source.pages.length });
+                const pageDirectives = directives
+                    .filter((directive) => directive.page === page.page)
+                    .map(({ page: _page, ...directive }) => directive);
+                const protectedPage = await new LocalPolishPseudonymizer(record.vault, privacyRecognizerFor(this.namedEntities, page.source === "OCR"), this.personMorphology).pseudonymize(page.text, pageDirectives);
+                findings += protectedPage.findings.length;
+                manualPseudonymizations +=
+                    protectedPage.findings.filter((item) => item.source === "USER").length;
+                keptRanges +=
+                    protectedPage.keptRanges.length;
+                for (const [kind, count] of Object.entries(protectedPage.counts)) {
+                    counts[kind] = (counts[kind] ?? 0) + count;
+                }
+                for (const annotation of protectedPage.annotations) {
+                    annotations.push({
+                        page: page.page,
+                        ...annotation
+                    });
+                }
+                pages.push({
+                    ...page,
+                    text: protectedPage.text
                 });
             }
-            pages.push({
-                ...page,
-                text: protectedPage.text
+        };
+        // One key per case: the document is pseudonymized with the case's
+        // shared key under the case lock, so a person keeps one symbol in all of
+        // the case's documents. Without a store that supports it (tests, older
+        // setups) the document keeps its own key.
+        const sharedStore = persistentVault && this.privacyVaultStore.withSharedVault
+            ? this.privacyVaultStore
+            : undefined;
+        if (sharedStore) {
+            await sharedStore.withSharedVault({ caseId: record.caseId, caseDataKey: security.caseDataKey, keyVersion: security.keyVersion }, documentId, async (vault) => {
+                record.vault = vault;
+                await pseudonymizePages();
             });
+            record.sharedKey = true;
+        }
+        else {
+            if (persistentVault) {
+                record.vault = await this.privacyVaultStore.loadDocumentVault({
+                    caseId: record.caseId,
+                    documentId,
+                    caseDataKey: security.caseDataKey,
+                    keyVersion: security.keyVersion
+                });
+            }
+            await pseudonymizePages();
         }
         const chunks = chunkDocumentPages(pages, this.maxChunkChars);
         const pseudonymizedChars = pages.reduce((sum, page) => sum + page.text.length, 0);
@@ -333,7 +351,8 @@ export class LocalPrivateDocumentService {
         }));
         record.protectedChunks = publicChunks;
         onProgress?.({ stage: "SAVING" });
-        if (persistentVault &&
+        if (!sharedStore &&
+            persistentVault &&
             security?.caseDataKey &&
             security.keyVersion &&
             record.caseId) {
@@ -464,10 +483,17 @@ export class LocalPrivateDocumentService {
                     keyVersion: args.keyVersion
                 });
         }
+        const sharedKey = Boolean(this.privacyVaultStore?.sharedMembers &&
+            (await this.privacyVaultStore.sharedMembers({
+                caseId: args.caseId,
+                caseDataKey: args.caseDataKey,
+                keyVersion: args.keyVersion
+            })).has(args.documentId));
         this.documents.set(args.documentId, {
             mediaType: source.mediaType,
             caseId: args.caseId,
             vault,
+            sharedKey,
             source: source.source,
             protectedIngestion: protectedResult,
             protectedChunks: protectedResult
@@ -518,7 +544,9 @@ export class LocalPrivateDocumentService {
                 ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
                 occurrences: counts.get(item.token) ?? 0
             };
-        });
+        })
+            // A shared key also holds the case's other documents' entries.
+            .filter((entry) => !record.sharedKey || entry.occurrences > 0);
     }
     editableRecord(documentId) {
         const record = this.documents.get(documentId);
@@ -526,6 +554,14 @@ export class LocalPrivateDocumentService {
             throw new Error("UNKNOWN_LOCAL_DOCUMENT");
         }
         return record;
+    }
+    /** The case's shared key, to give chat the same symbols as the documents. */
+    async sharedKeyState(args) {
+        return (await this.privacyVaultStore?.sharedState?.(args)) ?? null;
+    }
+    /** Whether a restored document uses the case's shared key. */
+    usesSharedKey(documentId) {
+        return Boolean(this.documents.get(documentId)?.sharedKey);
     }
     /** Values of this document's key put back into any text (a file with its placeholders). */
     restoreText(documentId, text) {
@@ -588,70 +624,118 @@ export class LocalPrivateDocumentService {
         else if (kind === "ADDRESS" && this.personMorphology?.analyzeAddresses) {
             [entity] = await this.personMorphology.analyzeAddresses([value]);
         }
-        const known = new Set(record.vault.snapshot().tokens.map((item) => item.token));
-        const token = record.vault.getOrCreate(kind, value, entity ?? undefined);
-        const stored = record.vault.entity(token);
-        const surfaces = [
-            ...new Set([
-                value,
-                ...(stored ? PERSON_CASES.map((personCase) => stored.forms[personCase].text) : [])
-            ])
-        ].filter((surface) => surface.trim().length >= 2);
-        let replaced = 0;
-        const chunks = record.protectedIngestion.chunks.map((chunk) => {
-            const result = replaceOutsideTokens(chunk.text, surfaces, token);
-            replaced += result.count;
-            return { ...chunk, text: result.text };
+        const { token, replaced } = await this.withKey(documentId, record, security, (vault) => {
+            const known = new Set(vault.snapshot().tokens.map((item) => item.token));
+            const token = vault.getOrCreate(kind, value, entity ?? undefined);
+            const stored = vault.entity(token);
+            const surfaces = [
+                ...new Set([
+                    value,
+                    ...(stored ? PERSON_CASES.map((personCase) => stored.forms[personCase].text) : [])
+                ])
+            ].filter((surface) => surface.trim().length >= 2);
+            let replaced = 0;
+            const chunks = record.protectedIngestion.chunks.map((chunk) => {
+                const result = replaceOutsideTokens(chunk.text, surfaces, token);
+                replaced += result.count;
+                return { ...chunk, text: result.text };
+            });
+            if (replaced === 0) {
+                // Nothing matched: do not keep a new token that stands for nothing.
+                if (!known.has(token))
+                    vault.remove(token);
+                throw new Error("PRIVACY_EDIT_TEXT_NOT_FOUND");
+            }
+            const privacy = record.protectedIngestion.privacy;
+            this.replaceProtected(record, chunks, {
+                ...privacy,
+                findings: privacy.findings + replaced,
+                manualPseudonymizations: privacy.manualPseudonymizations + replaced,
+                counts: { ...privacy.counts, [kind]: (privacy.counts[kind] ?? 0) + replaced }
+            });
+            return { token, replaced };
         });
-        if (replaced === 0) {
-            // Nothing matched: do not keep a new token that stands for nothing.
-            if (!known.has(token))
-                record.vault.remove(token);
-            throw new Error("PRIVACY_EDIT_TEXT_NOT_FOUND");
-        }
-        const privacy = record.protectedIngestion.privacy;
-        this.replaceProtected(record, chunks, {
-            ...privacy,
-            findings: privacy.findings + replaced,
-            manualPseudonymizations: privacy.manualPseudonymizations + replaced,
-            counts: { ...privacy.counts, [kind]: (privacy.counts[kind] ?? 0) + replaced }
-        });
-        await this.persistEdit(documentId, record, security);
         return { ...this.anonymizedVersion(documentId), token, replaced };
     }
     /**
      * Takes a value out of the anonymization: every occurrence of the token
      * gets the value back (a person or address in the nominative, since the
-     * stored text does not keep each occurrence's case) and the token leaves
-     * the key.
+     * stored text does not keep each occurrence's case). With a document's own
+     * key the token leaves it; the case's shared key keeps it for the other
+     * documents and this document's key simply no longer lists it.
      */
     async removeProtection(documentId, token, security) {
         const record = this.editableRecord(documentId);
-        if (!/^\[PII:[A-Z_]+:\d{4}\]$/.test(token) || !record.vault.hasToken(token)) {
+        if (!/^\[PII:[A-Z_]+:\d{4}\]$/.test(token))
             throw new Error("PRIVACY_KEY_TOKEN_NOT_FOUND");
-        }
-        const value = record.vault.restore(token, "NOM").text;
-        const kind = /^\[PII:([A-Z_]+):/.exec(token)[1];
-        const pattern = new RegExp(escapeRegExp(token.slice(0, -1)) + "(?:\\|[A-Z]{2,4})?\\]", "g");
-        let restored = 0;
-        const chunks = record.protectedIngestion.chunks.map((chunk) => ({
-            ...chunk,
-            text: chunk.text.replace(pattern, () => {
-                restored += 1;
-                return value;
-            })
-        }));
-        record.vault.remove(token);
-        const privacy = record.protectedIngestion.privacy;
-        this.replaceProtected(record, chunks, {
-            ...privacy,
-            findings: Math.max(0, privacy.findings - restored),
-            counts: { ...privacy.counts, [kind]: Math.max(0, (privacy.counts[kind] ?? 0) - restored) }
+        const restored = await this.withKey(documentId, record, security, (vault) => {
+            if (!vault.hasToken(token))
+                throw new Error("PRIVACY_KEY_TOKEN_NOT_FOUND");
+            const value = vault.restore(token, "NOM").text;
+            const kind = /^\[PII:([A-Z_]+):/.exec(token)[1];
+            const pattern = new RegExp(escapeRegExp(token.slice(0, -1)) + "(?:\\|[A-Z]{2,4})?\\]", "g");
+            let restored = 0;
+            const chunks = record.protectedIngestion.chunks.map((chunk) => ({
+                ...chunk,
+                text: chunk.text.replace(pattern, () => {
+                    restored += 1;
+                    return value;
+                })
+            }));
+            if (!record.sharedKey)
+                vault.remove(token);
+            const privacy = record.protectedIngestion.privacy;
+            this.replaceProtected(record, chunks, {
+                ...privacy,
+                findings: Math.max(0, privacy.findings - restored),
+                counts: { ...privacy.counts, [kind]: Math.max(0, (privacy.counts[kind] ?? 0) - restored) }
+            });
+            return restored;
         });
-        await this.persistEdit(documentId, record, security);
         return { ...this.anonymizedVersion(documentId), restored };
     }
-    /** Corrects case forms of a person or address in the key. */
+    /**
+     * Moves a document with its own key onto the case's shared key without
+     * re-running OCR: every token of its key is matched to the shared key (the
+     * same person or value keeps one token case-wide, new ones get the next
+     * free number) and the anonymized version is rewritten with those tokens.
+     */
+    async joinSharedKey(documentId, security) {
+        const record = this.editableRecord(documentId);
+        const store = this.privacyVaultStore;
+        if (!store?.withSharedVault || !record.caseId)
+            throw new Error("SHARED_KEY_UNAVAILABLE");
+        if (record.sharedKey)
+            return { ...this.anonymizedVersion(documentId), remapped: 0 };
+        if (security.caseId !== record.caseId || !security.caseDataKey || !security.keyVersion) {
+            throw new Error("DOCUMENT_STORAGE_CONTEXT_REQUIRED");
+        }
+        const own = record.vault.snapshot().tokens;
+        let remapped = 0;
+        await store.withSharedVault({ caseId: record.caseId, caseDataKey: security.caseDataKey, keyVersion: security.keyVersion }, documentId, async (vault) => {
+            const map = new Map();
+            for (const item of own) {
+                map.set(item.token, vault.getOrCreate(item.kind, item.value, item.entity));
+            }
+            const chunks = record.protectedIngestion.chunks.map((chunk) => ({
+                ...chunk,
+                // One pass, so a remapped token is never remapped again.
+                text: chunk.text.replace(/\[PII:([A-Z_]+):(\d{4})(\|[A-Z]{2,4})?\]/g, (match, kind, sequence, requestedCase) => {
+                    const next = map.get(`[PII:${kind}:${sequence}]`);
+                    if (!next)
+                        return match;
+                    remapped += 1;
+                    return requestedCase ? next.slice(0, -1) + requestedCase + "]" : next;
+                })
+            }));
+            this.replaceProtected(record, chunks, record.protectedIngestion.privacy);
+            record.vault = vault;
+        });
+        record.sharedKey = true;
+        await this.persistEdit(documentId, record, security, false);
+        return { ...this.anonymizedVersion(documentId), remapped };
+    }
+    /** Corrects case forms of a person or address in the key (case-wide with a shared key). */
     async updateKeyForms(documentId, token, forms, security) {
         const record = this.editableRecord(documentId);
         for (const value of Object.values(forms)) {
@@ -659,9 +743,34 @@ export class LocalPrivateDocumentService {
                 throw new Error("PRIVACY_EDIT_TEXT_INVALID");
             }
         }
-        record.vault.updateForms(token, forms);
-        await this.persistEdit(documentId, record, security);
+        await this.withKey(documentId, record, security, (vault) => {
+            vault.updateForms(token, forms);
+        });
         return this.anonymizedVersion(documentId);
+    }
+    /**
+     * Runs a key change on the current key and saves it with the anonymized
+     * version: the case's shared key is re-read under the case lock (another
+     * document may have added entries since), a document's own key is edited
+     * in place.
+     */
+    async withKey(documentId, record, security, change) {
+        const store = this.privacyVaultStore;
+        if (record.sharedKey && store?.withSharedVault && record.caseId) {
+            if (security.caseId !== record.caseId || !security.caseDataKey || !security.keyVersion) {
+                throw new Error("DOCUMENT_STORAGE_CONTEXT_REQUIRED");
+            }
+            const result = await store.withSharedVault({ caseId: record.caseId, caseDataKey: security.caseDataKey, keyVersion: security.keyVersion }, documentId, async (vault) => {
+                const value = await change(vault);
+                record.vault = vault;
+                return value;
+            });
+            await this.persistEdit(documentId, record, security, false);
+            return result;
+        }
+        const result = await change(record.vault);
+        await this.persistEdit(documentId, record, security, true);
+        return result;
     }
     replaceProtected(record, chunks, privacy) {
         record.protectedIngestion = {
@@ -672,7 +781,7 @@ export class LocalPrivateDocumentService {
         };
         record.protectedChunks = chunks.map((chunk) => ({ ...chunk }));
     }
-    async persistEdit(documentId, record, security) {
+    async persistEdit(documentId, record, security, saveVault) {
         if (!record.caseId)
             return;
         if (!this.secureDocumentStore ||
@@ -689,7 +798,8 @@ export class LocalPrivateDocumentService {
             keyVersion: security.keyVersion
         };
         // The key first: a version never refers to a token its key lacks.
-        await this.privacyVaultStore.saveDocumentVault({ ...context, vault: record.vault });
+        if (saveVault)
+            await this.privacyVaultStore.saveDocumentVault({ ...context, vault: record.vault });
         await this.secureDocumentStore.saveProtected({ ...context, ingestion: record.protectedIngestion });
     }
     forget(documentId) {

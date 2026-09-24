@@ -54,8 +54,9 @@ const GENDER_LINE: Record<TokenGender, string> = {
  * model agree verbs and adjectives; the name and the address stay local.
  */
 export function placeholderKeyPrompt(entries: PlaceholderGrammar[]): string | null {
-  if (!entries.length) return null;
-  const lines = entries
+  const unique = [...new Map(entries.map((entry) => [entry.token, entry])).values()];
+  if (!unique.length) return null;
+  const lines = unique
     .slice(0, 200)
     .map((entry) =>
       `- ${entry.token}: ${entry.kind === "PERSON" ? GENDER_LINE[entry.gender ?? "unknown"] : "adres"}`

@@ -26,10 +26,18 @@ export class LocalDocumentAuthoringService {
                 .test(documentId))) {
             throw new Error("GENERATION_SOURCE_DOCUMENTS_INVALID");
         }
+        const sharedMembers = this.vaults.sharedMembers
+            ? await this.vaults.sharedMembers({
+                caseId: args.caseId,
+                caseDataKey: args.caseDataKey,
+                keyVersion: args.keyVersion
+            })
+            : new Set();
         const documents = [];
         for (const documentId of unique) {
             documents.push({
                 documentId,
+                shared: sharedMembers.has(documentId),
                 vault: await this.vaults
                     .loadDocumentVault({
                     caseId: args.caseId,

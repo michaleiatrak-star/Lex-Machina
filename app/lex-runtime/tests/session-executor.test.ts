@@ -12,6 +12,7 @@ import type {
   ProviderStreamParams
 } from "../src/providers/types.js";
 import { LexSkillRegistry } from "../src/registry.js";
+import { PseudonymizationVault } from "../src/privacy/pseudonymizer.js";
 import {
   SafeSessionExecutor,
   namespaceDocumentAttachmentTokens,
@@ -458,6 +459,44 @@ describe("SafeSessionExecutor", () => {
       ).toBe("PASS");
     }
   );
+
+  it("uses the case's shared key for the message and shared-key documents", async () => {
+    let captured:
+      ProviderStreamParams | undefined;
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "capture",
+      capabilities: { streaming: true, tools: true, reasoning: true, modelDiscovery: false },
+      async stream(params) {
+        captured = params;
+        return { fullText: "Gotowe." };
+      }
+    };
+    const providers = new ProviderRegistry();
+    providers.register(adapter);
+    const seed = new PseudonymizationVault();
+    seed.getOrCreate("EMAIL", "biuro@przyklad.pl");
+    seed.getOrCreate("EMAIL", "anna.nowak@przyklad.pl");
+    const executor = new SafeSessionExecutor(fixture(), new ProviderGateway(providers));
+    await executor.execute({
+      query: "Czy anna.nowak@przyklad.pl dostała pismo?",
+      privacySeed: seed.snapshot(),
+      documentAttachments: [{
+        documentId: "doc_0123456789abcdef01234567",
+        sharedKey: true,
+        chunks: [{ index: 1, pageStart: 1, pageEnd: 1, text: "Pismo wysłano na [PII:EMAIL:0002]." }]
+      }],
+      provider: "openai",
+      model: "test",
+      primarySkill: DR,
+      mode: "PRAWNIK"
+    });
+    const messages = captured?.messages.map((message) => String(message.content)).join("\n") ?? "";
+    expect(messages).toContain("Czy [PII:EMAIL:0002] dostała pismo?");
+    expect(messages).toContain("Pismo wysłano na [PII:EMAIL:0002].");
+    expect(messages).not.toContain("LMPII");
+    expect(messages).not.toContain("anna.nowak");
+  });
 
   it("sends the placeholder key with gender to the model, never the name", async () => {
     let captured:

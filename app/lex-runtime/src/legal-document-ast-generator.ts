@@ -11,6 +11,7 @@ import {
   type LegalStyleProfile
 } from "./legal-document-ast.js";
 import type { GenerationAliasManifest } from "./generation-aliases.js";
+import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
 import type {
   DocumentGenerationValidationContext
 } from "./document-generation-validation.js";
@@ -25,6 +26,8 @@ export type LegalDocumentAstGenerationRequest = {
   styleProfile: LegalStyleProfile;
   attachments?: SessionDocumentAttachment[];
   aliases: GenerationAliasManifest;
+  // The case's shared key, so the instruction uses the documents' symbols.
+  privacySeed?: PseudonymizationVaultSnapshot;
 };
 
 function extractJson(value: string): unknown {
@@ -109,6 +112,7 @@ export class LegalDocumentAstGenerator {
       model: request.model,
       primarySkill: request.primarySkill,
       mode: request.mode,
+      ...(request.privacySeed ? { privacySeed: request.privacySeed } : {}),
       ...(request.attachments?.length
         ? { documentAttachments: request.attachments }
         : {})
