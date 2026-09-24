@@ -172,10 +172,10 @@ describe("AUTO with native corpus access", () => {
       stream: async (params) => {
         seen.push(params);
         if (seen.length === 1) {
-          params.nativeCorpus!.onRead(`${DR03}/SKILL.md`);
+          params.nativeCorpus!.onRead!(`${DR03}/SKILL.md`);
           return { fullText: "kwalifikacja bez kwalifikatora" };
         }
-        params.nativeCorpus!.onRead(`${DR03}/modules/mod-KK-kwalifikator-karnomaterialny.md`);
+        params.nativeCorpus!.onRead!(`${DR03}/modules/mod-KK-kwalifikator-karnomaterialny.md`);
         return { fullText: "poprawiona kwalifikacja" };
       }
     };
