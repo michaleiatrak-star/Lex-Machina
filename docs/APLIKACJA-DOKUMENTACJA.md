@@ -54,7 +54,7 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - Rzeczownik instytucji na początku trafienia (Bank, Rada, Skarb, Kasa, Izba, Związek, Sąd...) - to nie osoba: `Pozwany Bank`, `Bank Pekao S.A.`, `Rada Gminy` zostają jawne. Wyjątek: słowo wskazujące osobę przed nim (`pani Rada`).
 - Rola strony (najemca, wynajmujący, wierzyciel, dłużnik, powód/powódka, pożyczkobiorca...) sama nie jest anonimizowana, ale wskazuje, że następne słowo to osoba: `Najemca Kowalski` → `Najemca [PII:PERSON:0001]`.
 
-**Z lokalnym AI** (pole obok `Dodaj pliki`; aktywne tylko przy uruchomionym modelu lokalnym, np. Bielik):
+**Z lokalnym AI** (pole obok `Dodaj pliki`, model lokalny np. Bielik; gdy model nie działa, obok pojawia się `Uruchom model lokalny` z postępem, a opcja działa od chwili gotowości modelu):
 - model dodatkowo wyszukuje dane osobowe;
 - wątpliwe trafienia (jedno słowo, słowo pospolite, rzeczownik instytucji) ocenia na podstawie **całego zdania** z zaznaczonym słowem;
 - trafienie znika tylko przy jednoznacznym „nie osoba”; brak odpowiedzi = pozostaje zanonimizowane;

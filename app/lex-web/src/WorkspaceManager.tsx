@@ -17,7 +17,9 @@ import {
   type CaseKnowledgeHit,
   type ProcessingProgress,
   type StoredUploadResponse,
-  getLocalModels
+  type LocalModelsResponse,
+  getLocalModels,
+  startLocalModel
 } from "./api.js";
 import {
   filterWorkspaceItems,
@@ -236,20 +238,56 @@ export function WorkspaceManager({
   const [busy, setBusy] = useState(false);
   // "z lokalnym AI": the running local model (e.g. Bielik) checks each document too.
   const [localAi, setLocalAi] = useState(false);
-  const [localAiReady, setLocalAiReady] = useState(false);
+  const [localRuntime, setLocalRuntime] = useState<LocalModelsResponse["runtime"] | null>(null);
+  const [localAiStarting, setLocalAiStarting] = useState(false);
+  const [localAiMessage, setLocalAiMessage] = useState("");
+  const localAiReady = Boolean(localRuntime?.configured && localRuntime.state === "READY");
   useEffect(() => {
     let cancelled = false;
     getLocalModels()
       .then((models) => {
-        if (!cancelled) setLocalAiReady(models.runtime.configured && models.runtime.state === "READY");
+        if (!cancelled) setLocalRuntime(models.runtime);
       })
       .catch(() => {
-        if (!cancelled) setLocalAiReady(false);
+        if (!cancelled) setLocalRuntime(null);
       });
     return () => {
       cancelled = true;
     };
   }, [refreshToken]);
+
+  // Ticking "z lokalnym AI" with the model stopped offers to start it; the
+  // option works as soon as the model reports READY.
+  async function startLocalAi(): Promise<void> {
+    const modelId = localRuntime?.selectedModelId;
+    if (!modelId) {
+      setLocalAiMessage("Nie wybrano modelu lokalnego - zainstaluj go w Ustawienia → Modele.");
+      return;
+    }
+    setLocalAiStarting(true);
+    setLocalAiMessage("Uruchamiam model lokalny…");
+    try {
+      const started = await startLocalModel(modelId);
+      setLocalRuntime(started.runtime);
+      const deadline = Date.now() + 10 * 60 * 1000;
+      let runtime = started.runtime;
+      while (!(runtime.configured && runtime.state === "READY") && Date.now() < deadline) {
+        setLocalAiMessage(
+          runtime.state === "PROVISIONING" ? "Przygotowuję model lokalny…" : "Uruchamiam model lokalny…"
+        );
+        await new Promise((resolve) => window.setTimeout(resolve, 2000));
+        runtime = (await getLocalModels()).runtime;
+        setLocalRuntime(runtime);
+      }
+      setLocalAiMessage(
+        runtime.state === "READY" ? "" : "Model lokalny nie uruchomił się w 10 minut - sprawdź Ustawienia → Modele."
+      );
+    } catch (failure) {
+      setLocalAiMessage(`Nie udało się uruchomić modelu lokalnego: ${failure instanceof Error ? failure.message : String(failure)}`);
+    } finally {
+      setLocalAiStarting(false);
+    }
+  }
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [artifacts, setArtifacts] = useState<CaseArtifact[]>([]);
@@ -427,7 +465,7 @@ export function WorkspaceManager({
           item.itemId,
           undefined,
           progressId,
-          localAi && localAiReady && !keepClear ? { localAi: true } : undefined
+          localAi && !keepClear ? { localAi: true } : undefined
         );
       // OCR only: every page kept as written, no anonymization key.
       const result =
@@ -875,22 +913,35 @@ export function WorkspaceManager({
             </button>
           ) : null}
           {canWrite ? (
-            <label
-              className="workspace-local-ai"
-              title={
-                localAiReady
-                  ? "Uruchomiony model lokalny dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite."
-                  : "Uruchom model lokalny (Ustawienia → Modele), aby anonimizować z lokalnym AI."
-              }
-            >
-              <input
-                type="checkbox"
-                checked={localAi && localAiReady}
-                disabled={!localAiReady || busy}
-                onChange={(event) => setLocalAi(event.target.checked)}
-              />
-              z lokalnym AI
-            </label>
+            <span className="workspace-local-ai-group">
+              <label
+                className="workspace-local-ai"
+                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite."
+              >
+                <input
+                  type="checkbox"
+                  checked={localAi}
+                  disabled={busy}
+                  onChange={(event) => {
+                    setLocalAi(event.target.checked);
+                    setLocalAiMessage("");
+                  }}
+                />
+                z lokalnym AI
+              </label>
+              {localAi && !localAiReady ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action workspace-local-ai-start"
+                  disabled={localAiStarting}
+                  onClick={() => void startLocalAi()}
+                >
+                  {localAiStarting ? "Uruchamiam…" : "Uruchom model lokalny"}
+                </button>
+              ) : null}
+              {localAi && localAiReady ? <small className="workspace-local-ai-state">model gotowy</small> : null}
+              {localAiMessage ? <small className="workspace-local-ai-state" role="status">{localAiMessage}</small> : null}
+            </span>
           ) : null}
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">

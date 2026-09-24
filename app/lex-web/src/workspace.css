@@ -1032,7 +1032,22 @@
   cursor: pointer;
 }
 
-.workspace-header-actions .workspace-local-ai:has(input:disabled) {
-  opacity: 0.6;
-  cursor: not-allowed;
+
+.workspace-header-actions .workspace-local-ai-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  max-width: 100%;
+}
+
+.workspace-header-actions .workspace-local-ai-start {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.workspace-local-ai-state {
+  color: #5d6a61;
+  font-size: 11px;
 }
