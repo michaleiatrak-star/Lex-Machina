@@ -33,6 +33,7 @@ import type {
   SecureCaseDocumentStore
 } from "./case-document-store.js";
 import type { ProgressReporter } from "./processing-progress.js";
+import { restoreWithReport } from "./privacy/restoration-report.js";
 import {
   genderOf,
   placeholderGrammar,
@@ -110,6 +111,7 @@ export type ResolvedDocumentAttachment = {
 export type AnonymizedVersion = {
   documentId: string;
   chunks: PublicDocumentChunk[];
+  highlighted: HighlightedChunk[];
   entries: PrivacyKeyEntry[];
 };
 
@@ -137,6 +139,69 @@ export function replaceOutsideTokens(
         })
   );
   return { text: out.join(""), count };
+}
+
+export type HighlightedChunk = {
+  index: number;
+  pageStart: number;
+  pageEnd: number;
+  // The original wording, with every anonymized span marked.
+  text: string;
+  marks: Array<{ start: number; end: number; token: string; kind: string }>;
+};
+
+const PROTECTED_PART = /(\[PII:[A-Z_]+:\d{4}(?:\|[A-Z]{2,4})?\])/;
+const PAGE_HEADER = /^\[STRONA [^\]\n]+\]\n?/gm;
+
+/**
+ * Lines the anonymized text up with the source to show the original words
+ * (in their original case) where each token stands. A token takes the
+ * longest of its known forms found at that point; otherwise the text up to
+ * where the next literal part continues in the source.
+ */
+export function highlightProtected(
+  protectedText: string,
+  source: string,
+  surfaces: (token: string) => string[],
+  fallback: (token: string) => string
+): { text: string; marks: HighlightedChunk["marks"] } {
+  const parts = protectedText.split(PROTECTED_PART);
+  const lower = source.toLocaleLowerCase("pl");
+  let cursor = 0;
+  let text = "";
+  const marks: HighlightedChunk["marks"] = [];
+  for (let index = 0; index < parts.length; index += 1) {
+    const part = parts[index]!;
+    if (index % 2 === 0) {
+      text += part;
+      const literal = part.replace(PAGE_HEADER, "");
+      if (literal) {
+        const found = source.indexOf(literal, cursor);
+        if (found >= 0 && found - cursor < 4000) cursor = found + literal.length;
+      }
+      continue;
+    }
+    const token = part.replace(/\|[A-Z]{2,4}\]$/, "]");
+    const kind = /^\[PII:([A-Z_]+):/.exec(token)![1]!;
+    let original = "";
+    for (const surface of [...surfaces(token)].sort((a, b) => b.length - a.length)) {
+      if (surface && lower.startsWith(surface.toLocaleLowerCase("pl"), cursor)) {
+        original = source.slice(cursor, cursor + surface.length);
+        break;
+      }
+    }
+    if (!original) {
+      const anchor = (parts[index + 1] ?? "").replace(PAGE_HEADER, "").slice(0, 24);
+      const found = anchor ? source.indexOf(anchor, cursor) : -1;
+      if (found > cursor && found - cursor <= 300) original = source.slice(cursor, found);
+    }
+    // Not found in the source (e.g. text changed since): the stored value.
+    const shown = original || fallback(token);
+    cursor += original.length;
+    text += shown;
+    marks.push({ start: text.length - shown.length, end: text.length, token, kind });
+  }
+  return { text, marks };
 }
 
 /** One row of a document's anonymization key, shown locally only. */
@@ -239,6 +304,7 @@ export interface DocumentService {
     text: string
   ): string;
   privacyKey?(documentId: string): PrivacyKeyEntry[];
+  restoreText?(documentId: string, text: string): { text: string; count: number; unresolved: string[] };
   anonymizedVersion?(documentId: string): AnonymizedVersion;
   addProtection?(
     documentId: string,
@@ -1004,12 +1070,46 @@ implements DocumentService {
     return record as PrivateDocumentRecord & { protectedIngestion: PublicDocumentIngestion };
   }
 
+  /** Values of this document's key put back into any text (a file with its placeholders). */
+  restoreText(documentId: string, text: string): { text: string; count: number; unresolved: string[] } {
+    const record = this.documents.get(documentId);
+    if (!record) throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+    const result = restoreWithReport(text, record.vault);
+    return { text: result.text, count: result.restorations.length, unresolved: result.unresolved };
+  }
+
   /** The anonymized version as stored: chunks with tokens, and its key. */
   anonymizedVersion(documentId: string): AnonymizedVersion {
     const record = this.editableRecord(documentId);
+    const vault = record.vault;
+    const surfaces = (token: string): string[] => {
+      const entity = vault.entity(token);
+      const value = vault.hasToken(token) ? vault.restore(token, null).text : "";
+      return [
+        ...new Set([
+          value,
+          ...(entity ? PERSON_CASES.map((personCase) => entity.forms[personCase].text) : [])
+        ])
+      ].filter(Boolean);
+    };
+    const fallback = (token: string): string =>
+      vault.hasToken(token) ? vault.restore(token, "NOM").text : token;
+    const chunks = record.protectedIngestion.chunks;
     return {
       documentId,
-      chunks: record.protectedIngestion.chunks.map((chunk) => ({ ...chunk })),
+      chunks: chunks.map((chunk) => ({ ...chunk })),
+      highlighted: chunks.map((chunk) => {
+        const source = record.source.pages
+          .filter((page) => page.page >= chunk.pageStart && page.page <= chunk.pageEnd)
+          .map((page) => page.text)
+          .join("\n");
+        return {
+          index: chunk.index,
+          pageStart: chunk.pageStart,
+          pageEnd: chunk.pageEnd,
+          ...highlightProtected(chunk.text, source, surfaces, fallback)
+        };
+      }),
       entries: this.privacyKey(documentId)
     };
   }

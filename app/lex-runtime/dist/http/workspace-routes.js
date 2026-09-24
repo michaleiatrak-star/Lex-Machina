@@ -12,6 +12,7 @@ import { createOrderedCaseWorkflowState, nextOrderedCaseCheckpoint } from "../or
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
 const TEMPLATE_ID = /^template_[a-f0-9]{32}$/;
+const ARTIFACT_ID = /^artifact_[a-f0-9]{32}$/;
 const FOLDER_ID = /^folder_[a-f0-9]{32}$/;
 const OPEN_TOKEN = /^open_[a-f0-9]{32}(?:\.[a-z0-9]{1,10})?$/;
 const PREVIEW_MAX_BYTES = 64 * 1024 * 1024;
@@ -1050,6 +1051,22 @@ export function registerWorkspaceRoutes(app, dependencies) {
             }));
             return { filename: upload.filename, mediaType: upload.mediaType, data: payload };
         }
+        if (ARTIFACT_ID.test(itemId) && dependencies.artifacts) {
+            const artifacts = dependencies.artifacts;
+            return await dependencies.caseAccessService.withCaseDataKey(actor, caseId, "READ", async (caseDataKey) => {
+                const context = { caseId, caseDataKey, keyVersion: data.caseView.keyVersion };
+                const artifact = (await artifacts.listArtifacts(context)).find((item) => item.artifactId === itemId);
+                if (!artifact)
+                    throw new Error("WORKSPACE_ITEM_NOT_FOUND");
+                if (artifact.bytes > maxBytes)
+                    throw new Error("WORKSPACE_ITEM_TOO_LARGE");
+                return {
+                    filename: artifact.filename,
+                    mediaType: artifact.mediaType,
+                    data: await artifacts.readArtifact({ ...context, artifactId: itemId, maxBytes })
+                };
+            });
+        }
         if (TEMPLATE_ID.test(itemId) && data.caseView.caseKind === "FIRM_KNOWLEDGE") {
             const template = await dependencies.templates.readTemplate(itemId);
             if (template.data.byteLength > maxBytes) {
@@ -1064,6 +1081,37 @@ export function registerWorkspaceRoutes(app, dependencies) {
         }
         throw new Error("WORKSPACE_ITEM_NOT_FOUND");
     };
+    // Documents made by a model in this case: the file with placeholders and
+    // the deanonymized file made from it (sourceArtifactId).
+    app.get("/api/cases/:caseId/workspace/artifacts", async (req, res) => {
+        try {
+            const actor = actorFor(req);
+            const caseId = caseIdFrom(req);
+            if (!dependencies.artifacts) {
+                res.json({ artifacts: [] });
+                return;
+            }
+            const artifacts = dependencies.artifacts;
+            dependencies.caseAccessService.assertAccess(actor, caseId, "READ");
+            const caseView = dependencies.caseAccessService.openCase(actor, caseId);
+            const list = await dependencies.caseAccessService.withCaseDataKey(actor, caseId, "READ", (caseDataKey) => artifacts.listArtifacts({ caseId, caseDataKey, keyVersion: caseView.keyVersion }));
+            res.setHeader("Cache-Control", "no-store");
+            res.json({
+                artifacts: list.map((item) => ({
+                    artifactId: item.artifactId,
+                    filename: item.filename,
+                    mediaType: item.mediaType,
+                    bytes: item.bytes,
+                    createdAt: item.createdAt,
+                    sensitivity: item.sensitivity,
+                    ...(item.sourceArtifactId ? { sourceArtifactId: item.sourceArtifactId } : {})
+                }))
+            });
+        }
+        catch (error) {
+            sendError(res, error);
+        }
+    });
     app.get("/api/cases/:caseId/workspace/items/:itemId/preview", async (req, res) => {
         let payload;
         try {

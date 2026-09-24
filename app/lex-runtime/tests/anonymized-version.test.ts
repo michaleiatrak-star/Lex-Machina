@@ -90,3 +90,38 @@ describe("editing the anonymized version and its key together", () => {
     ).toEqual({ text: "[PII:CUSTOM:0001], Nowakowski i [PII:PERSON:0001] oraz [PII:CUSTOM:0001].", count: 2 });
   });
 });
+
+describe("highlighted original text", () => {
+  it("shows the original inflected words where tokens stand", async () => {
+    const { highlightProtected } = await import("../src/document-service.js");
+    const source = "Pozew doręczono Adamowi Zielińskiemu, zam. ul. Długa 5, 00-001 Warszawa, PESEL 44051401359.";
+    const protectedText =
+      "[STRONA 1 · DIGITAL]\nPozew doręczono [PII:PERSON:0001], zam. [PII:ADDRESS:0001], PESEL [PII:PESEL:0001].";
+    const forms: Record<string, string[]> = {
+      "[PII:PERSON:0001]": ["Adam Zieliński", "Adamowi Zielińskiemu"],
+      "[PII:ADDRESS:0001]": ["ul. Długa 5, 00-001 Warszawa"],
+      "[PII:PESEL:0001]": ["44051401359"]
+    };
+    const result = highlightProtected(protectedText, source, (token) => forms[token] ?? [], (token) => token);
+    expect(result.text).toBe("[STRONA 1 · DIGITAL]\n" + source);
+    expect(result.marks.map((mark) => [result.text.slice(mark.start, mark.end), mark.kind])).toEqual([
+      ["Adamowi Zielińskiemu", "PERSON"],
+      ["ul. Długa 5, 00-001 Warszawa", "ADDRESS"],
+      ["44051401359", "PESEL"]
+    ]);
+  });
+
+  it("falls back to the literal anchor, then to the stored value", async () => {
+    const { highlightProtected } = await import("../src/document-service.js");
+    const result = highlightProtected(
+      "Firma [PII:CUSTOM:0001] zapłaci. Świadek [PII:PERSON:0002].",
+      "Firma ALFA sp. z o.o. zapłaci. Świadek inny tekst zmieniony",
+      () => [],
+      () => "Jan Nowak"
+    );
+    expect(result.marks.map((mark) => result.text.slice(mark.start, mark.end))).toEqual([
+      "ALFA sp. z o.o.",
+      "Jan Nowak"
+    ]);
+  });
+});

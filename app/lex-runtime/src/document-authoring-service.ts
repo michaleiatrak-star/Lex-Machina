@@ -926,7 +926,10 @@ export class LocalDocumentAuthoringService {
                 "CLEAR_PII",
               createdByUserId:
                 args
-                  .createdByUserId
+                  .createdByUserId,
+              sourceArtifactId:
+                args.target
+                  .artifactId
             });
 
         await this.states

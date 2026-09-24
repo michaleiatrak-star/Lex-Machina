@@ -12,7 +12,7 @@ export type WorkspaceFolder = {
 };
 
 export type WorkspaceItem = {
-  kind: "UPLOAD" | "TEMPLATE";
+  kind: "UPLOAD" | "TEMPLATE" | "ARTIFACT";
   itemId: string;
   filename: string;
   mediaType: string;

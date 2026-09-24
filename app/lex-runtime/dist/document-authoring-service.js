@@ -421,7 +421,9 @@ export class LocalDocumentAuthoringService {
                     keyVersion: args.keyVersion,
                     sensitivity: "CLEAR_PII",
                     createdByUserId: args
-                        .createdByUserId
+                        .createdByUserId,
+                    sourceArtifactId: args.target
+                        .artifactId
                 });
                 await this.states
                     .markFinalized({

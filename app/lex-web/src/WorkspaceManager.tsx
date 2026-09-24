@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   ApiError,
+  deanonymizeUpload,
   finalizeDocument,
   getProcessingProgress,
+  listCaseArtifacts,
   isDesktopShell,
   newProgressId,
   listCaseFiles,
   processStoredCaseFile,
   searchCaseKnowledge,
   uploadCaseFile,
+  type CaseArtifact,
   type CaseKnowledgeHit,
   type ProcessingProgress,
   type StoredUploadResponse
@@ -43,6 +46,7 @@ import { SheetEditor } from "./SheetEditor.js";
 import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
 import { progressLabel, progressPercent } from "./processing-progress.js";
 import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
+import { ArtifactDeanonymize } from "./ArtifactDeanonymize.js";
 import { decodeTextFile } from "./text-editing.js";
 
 const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
@@ -215,6 +219,9 @@ export function WorkspaceManager({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [artifacts, setArtifacts] = useState<CaseArtifact[]>([]);
+  const [deanonymizing, setDeanonymizing] = useState<string | null>(null);
+  const [fileDeanonymize, setFileDeanonymize] = useState<{ itemId: string; documentId: string } | null>(null);
   const [caseFiles, setCaseFiles] =
     useState<StoredUploadResponse[]>([]);
   const [progressByItem, setProgressByItem] =
@@ -222,7 +229,7 @@ export function WorkspaceManager({
   const [anonymized, setAnonymized] = useState<{
     item: WorkspaceItem;
     documentId: string;
-    tab: "text" | "key";
+    tab: "marked" | "text" | "key";
   } | null>(null);
     const [preview, setPreview] = useState<{
     item: WorkspaceItem;
@@ -240,6 +247,7 @@ export function WorkspaceManager({
     if (!caseId) {
       setWorkspace(null);
       setCaseFiles([]);
+      setArtifacts([]);
       return;
     }
     const [next, files] =
@@ -249,6 +257,7 @@ export function WorkspaceManager({
       ]);
     setWorkspace(next);
     setCaseFiles(files.uploads);
+    setArtifacts(await listCaseArtifacts(caseId).catch(() => []));
     if (
       selectedFolder &&
       !next.folders.some(
@@ -260,6 +269,14 @@ export function WorkspaceManager({
       setSelectedFolder(null);
     }
   }
+
+  const processedDocuments = (workspace?.items ?? [])
+    .filter((entry) => entry.kind === "UPLOAD")
+    .map((entry) => ({
+      filename: entry.filename,
+      documentId: caseFiles.find((file) => file.uploadId === entry.itemId)?.processing?.documentId
+    }))
+    .filter((entry): entry is { filename: string; documentId: string } => Boolean(entry.documentId));
 
   function processingFor(
     item: WorkspaceItem
@@ -332,7 +349,7 @@ export function WorkspaceManager({
     }
   }
 
-  function showAnonymized(item: WorkspaceItem, tab: "text" | "key"): void {
+  function showAnonymized(item: WorkspaceItem, tab: "marked" | "text" | "key"): void {
     const documentId = processingFor(item)?.documentId;
     if (!documentId) return;
     setPreview(null);
@@ -380,6 +397,10 @@ export function WorkspaceManager({
           setWorkspace(next);
           setCaseFiles(files.uploads);
         }
+      })
+      .then(() => listCaseArtifacts(caseId))
+      .then((list) => {
+        if (!cancelled && list) setArtifacts(list);
       })
       .catch((failure) => {
         if (!cancelled) {
@@ -984,7 +1005,7 @@ export function WorkspaceManager({
                           type="button"
                           disabled={busy}
                           title="Tekst z symbolami zastępczymi - ta wersja trafia do modeli"
-                          onClick={() => showAnonymized(item, "text")}
+                          onClick={() => showAnonymized(item, "marked")}
                         >
                           Wersja zanonimizowana
                         </button>
@@ -997,6 +1018,22 @@ export function WorkspaceManager({
                           Klucz anonimizacji
                         </button>
                       </>
+                    ) : null}
+                    {canWrite &&
+                    item.kind === "UPLOAD" &&
+                    !processingFor(item) &&
+                    processedDocuments.length > 0 &&
+                    /\.(txt|md|markdown|csv|tsv|docx|odt|xlsx|xlsm)$/i.test(item.filename) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Plik z symbolami (np. odpowiedź zewnętrznego modelu): podstawia dane z klucza wybranego dokumentu"
+                        onClick={() =>
+                          setFileDeanonymize({ itemId: item.itemId, documentId: processedDocuments[0]!.documentId })
+                        }
+                      >
+                        Deanonimizuj plik
+                      </button>
                     ) : null}
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
@@ -1049,12 +1086,115 @@ export function WorkspaceManager({
                       </button>
                     ) : null}
                   </div>
+                  {fileDeanonymize?.itemId === item.itemId ? (
+                    <div className="artifact-deanonymize">
+                      <label>
+                        Klucz dokumentu źródłowego{" "}
+                        <select
+                          value={fileDeanonymize.documentId}
+                          onChange={(event) =>
+                            setFileDeanonymize({ itemId: item.itemId, documentId: event.target.value })
+                          }
+                        >
+                          {processedDocuments.map((entry) => (
+                            <option key={entry.documentId} value={entry.documentId}>{entry.filename}</option>
+                          ))}
+                        </select>
+                      </label>
+                      <button
+                        type="button"
+                        className="chat-primary-action"
+                        disabled={busy}
+                        onClick={() =>
+                          void run(async () => {
+                            const result = await deanonymizeUpload(caseId, item.itemId, fileDeanonymize.documentId);
+                            setFileDeanonymize(null);
+                            setNotice(
+                              `Utworzono „${result.upload.filename}”: przywrócono ${result.restored} wartości.` +
+                                (result.unresolved.length
+                                  ? ` Symbole spoza klucza zostały bez zmian: ${result.unresolved.join(", ")}.`
+                                  : "")
+                            );
+                          })
+                        }
+                      >
+                        Deanonimizuj
+                      </button>
+                      <button type="button" onClick={() => setFileDeanonymize(null)}>Anuluj</button>
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ul>
           )}
         </section>
       </div>
+
+      {artifacts.length > 0 ? (
+        <section className="workspace-artifacts" aria-label="Dokumenty utworzone przez model">
+          <h4>Dokumenty utworzone przez model</h4>
+          <ul>
+            {artifacts.map((artifact) => {
+              const source = artifact.sourceArtifactId
+                ? artifacts.find((entry) => entry.artifactId === artifact.sourceArtifactId)
+                : undefined;
+              const derived = artifacts.filter((entry) => entry.sourceArtifactId === artifact.artifactId);
+              const item: WorkspaceItem = {
+                kind: "ARTIFACT",
+                itemId: artifact.artifactId,
+                filename: artifact.filename,
+                mediaType: artifact.mediaType,
+                bytes: artifact.bytes,
+                createdAt: artifact.createdAt,
+                archive: false
+              };
+              return (
+                <li key={artifact.artifactId}>
+                  <div>
+                    <strong>{artifact.filename}</strong>
+                    <small>
+                      {new Date(artifact.createdAt).toLocaleString("pl-PL")} · {bytesLabel(artifact.bytes)}
+                    </small>
+                    <small className="workspace-processing-status">
+                      {artifact.sensitivity === "PROTECTED" ? (
+                        <span className="anonymized-badge">Z symbolami</span>
+                      ) : (
+                        <span className="anonymized-badge deanonymized-badge">Deanonimizowany</span>
+                      )}
+                      {source ? ` powstał z: ${source.filename}` : ""}
+                      {derived.length ? ` · wersja z danymi: ${derived.map((entry) => entry.filename).join(", ")}` : ""}
+                    </small>
+                  </div>
+                  <div className="workspace-item-actions">
+                    <button type="button" disabled={busy} onClick={() => void showPreview(item)}>Podgląd</button>
+                    {isDesktopShell() ? (
+                      <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
+                        Otwórz w systemie
+                      </button>
+                    ) : null}
+                    {canWrite && artifact.sensitivity === "PROTECTED" ? (
+                      <button type="button" disabled={busy} onClick={() => setDeanonymizing(artifact.artifactId)}>
+                        Deanonimizuj
+                      </button>
+                    ) : null}
+                  </div>
+                  {deanonymizing === artifact.artifactId ? (
+                    <ArtifactDeanonymize
+                      caseId={caseId}
+                      artifact={artifact}
+                      onDone={(message) => {
+                        setNotice(message);
+                        void refresh();
+                      }}
+                      onCancel={() => setDeanonymizing(null)}
+                    />
+                  ) : null}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null}
 
       {anonymized ? (
         <AnonymizedDocumentView

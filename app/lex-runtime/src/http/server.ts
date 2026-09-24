@@ -669,7 +669,9 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir,
       officeEditor:
-        new LocalOfficeEditor()
+        new LocalOfficeEditor(),
+      artifacts:
+        secureCaseArtifactStore
     }
   );
   registerMaintenanceRoutes(

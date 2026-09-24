@@ -30,6 +30,36 @@ function renderProtected(text: string, onToken: (token: string) => void): ReactN
   );
 }
 
+function renderMarked(
+  text: string,
+  marks: Array<{ start: number; end: number; token: string; kind: string }>,
+  onToken: (token: string) => void
+): ReactNode[] {
+  const out: ReactNode[] = [];
+  let cursor = 0;
+  marks.forEach((mark, index) => {
+    if (mark.start > cursor) out.push(<span key={`t${index}`}>{text.slice(cursor, mark.start)}</span>);
+    out.push(
+      <mark
+        key={`m${index}`}
+        className={`anonymized-mark anonymized-${mark.kind.toLowerCase()}`}
+        title={`${KIND_LABEL[mark.kind] ?? mark.kind} → ${mark.token}`}
+        role="button"
+        tabIndex={0}
+        onClick={() => onToken(mark.token)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") onToken(mark.token);
+        }}
+      >
+        {text.slice(mark.start, mark.end)}
+      </mark>
+    );
+    cursor = mark.end;
+  });
+  out.push(<span key="tail">{text.slice(cursor)}</span>);
+  return out;
+}
+
 /**
  * The anonymized version of a case document next to its key. Selecting text
  * adds it to the anonymization; the key lets the user correct case forms or
@@ -40,12 +70,12 @@ export function AnonymizedDocumentView(props: {
   documentId: string;
   filename: string;
   readOnly: boolean;
-  initialTab?: "text" | "key";
+  initialTab?: "marked" | "text" | "key";
   onClose: () => void;
   onChanged?: () => void;
 }) {
   const [version, setVersion] = useState<AnonymizedVersion | null>(null);
-  const [tab, setTab] = useState<"text" | "key">(props.initialTab ?? "text");
+  const [tab, setTab] = useState<"marked" | "text" | "key">(props.initialTab ?? "marked");
   const [highlight, setHighlight] = useState<string | null>(null);
   const [selection, setSelection] = useState("");
   const [kind, setKind] = useState<PiiKind>("PERSON");
@@ -140,7 +170,8 @@ export function AnonymizedDocumentView(props: {
         </div>
         <div>
           <div className="text-editor-modes" role="group" aria-label="Widok">
-            <button type="button" aria-pressed={tab === "text"} onClick={() => setTab("text")}>Tekst zanonimizowany</button>
+            <button type="button" aria-pressed={tab === "marked"} onClick={() => setTab("marked")}>Zaznaczenia w tekście</button>
+            <button type="button" aria-pressed={tab === "text"} onClick={() => setTab("text")}>Wersja dla modelu</button>
             <button type="button" aria-pressed={tab === "key"} onClick={() => setTab("key")}>
               Klucz ({version?.entries.length ?? 0})
             </button>
@@ -151,7 +182,7 @@ export function AnonymizedDocumentView(props: {
 
       {!version ? (
         <p className="privacy-key-empty">{status || "Wczytywanie…"}</p>
-      ) : tab === "text" ? (
+      ) : tab !== "key" ? (
         <>
           {props.readOnly ? null : (
             <div className="text-editor-toolbar anonymized-toolbar">
@@ -172,7 +203,26 @@ export function AnonymizedDocumentView(props: {
             </div>
           )}
           <div className="anonymized-text" ref={textRef} onMouseUp={captureSelection} onKeyUp={captureSelection}>
-            {version.chunks.map((chunk) => (
+            {tab === "marked" ? (
+              <>
+                <p className="anonymized-legend">
+                  Zaznaczone słowa są w wersji dla modelu zastąpione symbolami. Najedź, aby zobaczyć symbol;
+                  kliknij, aby przejść do klucza. Zaznacz inny fragment, aby go dodać do anonimizacji.
+                </p>
+                {version.highlighted.map((chunk) => (
+                  <article key={chunk.index}>
+                    <small>
+                      s. {chunk.pageStart}
+                      {chunk.pageEnd !== chunk.pageStart ? `–${chunk.pageEnd}` : ""}
+                    </small>
+                    <p>{renderMarked(chunk.text, chunk.marks, (token) => {
+                      setHighlight(token);
+                      setTab("key");
+                    })}</p>
+                  </article>
+                ))}
+              </>
+            ) : version.chunks.map((chunk) => (
               <article key={chunk.index}>
                 <small>
                   s. {chunk.pageStart}

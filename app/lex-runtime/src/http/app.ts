@@ -5,6 +5,9 @@ import {
   type PersonMorphology
 } from "../privacy/person-morphology.js";
 import type { PiiKind } from "../privacy/pseudonymizer.js";
+import { LocalOfficeEditor, editableMediaType } from "../office-edit.js";
+import { deanonymizeModel } from "../deanonymize-file.js";
+import { decodePlainText } from "../document-service.js";
 import {
   ProcessingProgressRegistry,
   progressIdFrom
@@ -4489,6 +4492,118 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       return await options.documentService!
         .updateKeyForms!(documentId, String(req.body?.token ?? ""), forms, security);
     })
+  );
+
+  // A file with placeholders (e.g. an answer from an external model) with the
+  // values of one case document's key put back, saved as a new case file.
+  app.post(
+    "/api/cases/:caseId/files/:uploadId/deanonymize",
+    async (req, res) => {
+      const caseId = String(req.params.caseId ?? "").trim();
+      const uploadId = String(req.params.uploadId ?? "").trim();
+      const documentId = String(req.body?.documentId ?? "").trim();
+      const service = options.documentService;
+      if (!service?.restoreDocument || !service.restoreText || !options.caseAccessService || !options.secureCaseUploadStore) {
+        res.status(503).json({ error: "FILE_DEANONYMIZATION_UNAVAILABLE" });
+        return;
+      }
+      if (
+        !/^case_[a-f0-9]{32}$/.test(caseId) ||
+        !/^upload_[a-f0-9]{32}$/.test(uploadId) ||
+        !/^doc_[a-f0-9]{24}$/.test(documentId)
+      ) {
+        res.status(400).json({ error: "INVALID_FILE_DEANONYMIZATION_REQUEST" });
+        return;
+      }
+      try {
+        const context = responseAuthContext(res);
+        options.caseAccessService.assertAccess(context, caseId, "WRITE");
+        const caseView = options.caseAccessService.openCase(context, caseId);
+        const result = await options.caseAccessService.withCaseDataKey(
+          context,
+          caseId,
+          "WRITE",
+          async (caseDataKey) => {
+            const store = options.secureCaseUploadStore!;
+            const keyVersion = caseView.keyVersion;
+            const upload = (await store.listUploads({ caseId, caseDataKey, keyVersion })).find(
+              (item) => item.uploadId === uploadId
+            );
+            if (!upload) throw new Error("STORED_UPLOAD_NOT_FOUND");
+            const mediaType = upload.mediaType.split(";")[0]!.trim().toLowerCase();
+            await service.restoreDocument!({ caseId, documentId, caseDataKey, keyVersion });
+            const restore = (text: string) => service.restoreText!(documentId, text);
+            const data = await store.readUploadPayload({
+              caseId,
+              uploadId,
+              caseDataKey,
+              keyVersion,
+              maxBytes: 64 * 1024 * 1024
+            });
+            let output: Uint8Array;
+            let count: number;
+            let unresolved: string[];
+            try {
+              const editable = editableMediaType(mediaType, upload.filename);
+              if (editable && editable !== "text/csv" && editable !== "text/tab-separated-values") {
+                const editor = new LocalOfficeEditor();
+                const model = await editor.read(data, editable);
+                const restored = deanonymizeModel(model, restore);
+                const format =
+                  editable.includes("opendocument") ? "odt" : editable.includes("wordprocessing") ? "docx" : "xlsx";
+                output = await editor.write(format, restored.model);
+                ({ count, unresolved } = restored);
+              } else if (/^text\//.test(mediaType) || /\.(txt|md|markdown|csv|tsv)$/i.test(upload.filename)) {
+                const restored = restore(decodePlainText(data));
+                output = Buffer.from(restored.text, "utf8");
+                ({ count, unresolved } = restored);
+              } else {
+                throw new Error("FILE_DEANONYMIZATION_MEDIA_UNSUPPORTED");
+              }
+            } finally {
+              data.fill(0);
+            }
+            if (count === 0 && unresolved.length === 0) throw new Error("FILE_DEANONYMIZATION_NO_PLACEHOLDERS");
+            const dot = upload.filename.lastIndexOf(".");
+            const filename =
+              (dot > 0 ? upload.filename.slice(0, dot) : upload.filename) +
+              " (deanonimizowany)" +
+              (dot > 0 ? upload.filename.slice(dot) : "");
+            const outputType =
+              mediaType === "text/markdown" || mediaType === "text/csv" || mediaType === "text/tab-separated-values"
+                ? mediaType
+                : /^text\//.test(mediaType)
+                  ? "text/plain"
+                  : upload.mediaType.includes("macroenabled")
+                    ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    : mediaType;
+            const stored = await store.saveUpload({
+              caseId,
+              filename: outputType !== mediaType && /\.xlsm$/i.test(filename) ? filename.replace(/\.xlsm$/i, ".xlsx") : filename,
+              mediaType: outputType,
+              data: output,
+              caseDataKey,
+              keyVersion
+            });
+            return { upload: stored, restored: count, unresolved };
+          }
+        );
+        res.status(201).json(result);
+      } catch (error) {
+        if (sendCaseAccessError(res, error)) return;
+        const code = error instanceof Error ? error.message : "";
+        if (code === "ENOENT" || code.endsWith("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+          res.status(404).json({ error: code === "ENOENT" ? "DOCUMENT_NOT_FOUND" : code });
+          return;
+        }
+        if (code.startsWith("FILE_DEANONYMIZATION_") || code.startsWith("OFFICE_EDIT_")) {
+          res.status(422).json({ error: /^[A-Z_]+/.exec(code)![0] });
+          return;
+        }
+        console.error(`FILE_DEANONYMIZATION_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+        res.status(500).json({ error: "FILE_DEANONYMIZATION_FAILED" });
+      }
+    }
   );
 
   // Stage and page counts of a running OCR/anonymization request.

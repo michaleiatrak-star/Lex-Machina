@@ -35,6 +35,8 @@ export type StoredCaseArtifact = {
     | "CLEAR_PII";
   storage:
     "ENCRYPTED_LME1";
+  // A deanonymized file points at the file with placeholders it came from.
+  sourceArtifactId?: string;
 };
 
 export type SecureCaseArtifactStoreOptions = {
@@ -273,6 +275,7 @@ export class SecureCaseArtifactStore {
       | "PROTECTED"
       | "CLEAR_PII";
     createdByUserId?: string;
+    sourceArtifactId?: string;
   }): Promise<
     StoredCaseArtifact
   > {
@@ -323,7 +326,11 @@ export class SecureCaseArtifactStore {
         sensitivity:
           args.sensitivity,
         storage:
-          "ENCRYPTED_LME1"
+          "ENCRYPTED_LME1",
+        ...(args.sourceArtifactId &&
+        validArtifactId(args.sourceArtifactId)
+          ? { sourceArtifactId: args.sourceArtifactId }
+          : {})
       };
 
     try {

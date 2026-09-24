@@ -2712,8 +2712,40 @@ export type PrivacyKeyEntry = {
 export type AnonymizedVersion = {
   documentId: string;
   chunks: Array<{ index: number; pageStart: number; pageEnd: number; text: string }>;
+  highlighted: Array<{
+    index: number;
+    pageStart: number;
+    pageEnd: number;
+    text: string;
+    marks: Array<{ start: number; end: number; token: string; kind: string }>;
+  }>;
   entries: PrivacyKeyEntry[];
 };
+
+export type CaseArtifact = {
+  artifactId: string;
+  filename: string;
+  mediaType: string;
+  bytes: number;
+  createdAt: string;
+  sensitivity: "PROTECTED" | "CLEAR_PII";
+  sourceArtifactId?: string;
+};
+
+export async function listCaseArtifacts(caseId: string): Promise<CaseArtifact[]> {
+  return (await json<{ artifacts: CaseArtifact[] }>(`/api/cases/${caseId}/workspace/artifacts`)).artifacts;
+}
+
+export function deanonymizeUpload(
+  caseId: string,
+  uploadId: string,
+  documentId: string
+): Promise<{ upload: StoredUploadResponse; restored: number; unresolved: string[] }> {
+  return json(`/api/cases/${caseId}/files/${uploadId}/deanonymize`, {
+    method: "POST",
+    body: JSON.stringify({ documentId })
+  });
+}
 
 function anonymizedPath(caseId: string, documentId: string, action = ""): string {
   return `/api/cases/${caseId}/documents/${documentId}/anonymized${action ? `/${action}` : ""}`;

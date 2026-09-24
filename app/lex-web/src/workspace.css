@@ -856,3 +856,67 @@
   font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   cursor: pointer;
 }
+
+.workspace-artifacts {
+  margin-top: 12px;
+}
+
+.workspace-artifacts ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.workspace-artifacts li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #e3e7df;
+  border-radius: 8px;
+}
+
+.workspace-artifacts li > div:first-child {
+  display: grid;
+}
+
+.deanonymized-badge {
+  background: #f3e3c9;
+  color: #6a4512;
+}
+
+.artifact-deanonymize {
+  flex-basis: 100%;
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border-top: 1px dashed #e3e7df;
+}
+
+.anonymized-legend {
+  margin: 0 0 8px;
+  color: #6d786f;
+  font-size: 12px;
+}
+
+.anonymized-mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: #fbe3a8;
+  cursor: pointer;
+}
+
+.anonymized-person {
+  background: #f8d7c4;
+}
+
+.anonymized-address {
+  background: #d6e6f5;
+}
+
+.anonymized-custom {
+  background: #e3dcf3;
+}

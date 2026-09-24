@@ -327,7 +327,8 @@ export async function startLocalServer(options) {
         documentService,
         workspace: workspaceStore,
         rootDir: caseFileStore.rootDir,
-        officeEditor: new LocalOfficeEditor()
+        officeEditor: new LocalOfficeEditor(),
+        artifacts: secureCaseArtifactStore
     });
     registerMaintenanceRoutes(app, {
         authService,
