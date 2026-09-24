@@ -156,7 +156,12 @@ export type SessionDocumentAttachment = {
   sourceScope?:
     | "MANUAL"
     | "CASE_KNOWLEDGE"
-    | "FIRM_KNOWLEDGE";
+    | "FIRM_KNOWLEDGE"
+    | "FIRM_TEMPLATE";
+  // Shown to the model for firm templates (a filename, no case data).
+  title?: string;
+  // Picked by the user (not retrieved): sent whole or not at all.
+  selectedByUser?: boolean;
   chunks: Array<{
     index: number;
     pageStart: number;
@@ -835,11 +840,13 @@ function buildDocumentContext(
   const sections = attachments.map((attachment) => {
     const chunks = attachment.chunks.map((chunk) => {
       const sourceLabel =
-        attachment.sourceScope === "FIRM_KNOWLEDGE"
-          ? "FIRM KNOWLEDGE"
-          : attachment.sourceScope === "CASE_KNOWLEDGE"
-            ? "CASE KNOWLEDGE"
-            : "DOCUMENT";
+        attachment.sourceScope === "FIRM_TEMPLATE"
+          ? "WZÓR KANCELARII"
+          : attachment.sourceScope === "FIRM_KNOWLEDGE"
+            ? "KNOW-HOW KANCELARII"
+            : attachment.sourceScope === "CASE_KNOWLEDGE"
+              ? "CASE KNOWLEDGE"
+              : "DOCUMENT";
       const representation =
         chunk.representation ===
           "EXTRACTIVE_DIGEST"
@@ -851,6 +858,9 @@ function buildDocumentContext(
       ].join("\n");
     });
     return [
+      ...(attachment.title
+        ? [`[${attachment.documentId} · PLIK: ${attachment.title}]`]
+        : []),
       ...(attachment.totalPages
         ? [
             `[${attachment.documentId} · STRON: ${attachment.totalPages} · każda strona zaczyna się znacznikiem "=== STRONA n/${attachment.totalPages} ==="]`
@@ -860,8 +870,21 @@ function buildDocumentContext(
     ].join("\n\n");
   });
 
-  return sections.join("\n\n---\n\n");
+  const firm = attachments.some(
+    (attachment) => attachment.sourceScope === "FIRM_TEMPLATE" || attachment.sourceScope === "FIRM_KNOWLEDGE"
+  );
+  return [...(firm ? [FIRM_MATERIAL_NOTE] : []), ...sections].join("\n\n---\n\n");
 }
+
+export const buildDocumentContextForTest = buildDocumentContext;
+
+export const FIRM_MATERIAL_NOTE = [
+  "# MATERIAŁY KANCELARII",
+  "Bloki oznaczone WZÓR KANCELARII i KNOW-HOW KANCELARII pochodzą z biblioteki kancelarii, nie z akt sprawy.",
+  "- Wzór: przejmij jego układ, kolejność części, styl i stałe formuły; treść merytoryczną bierz z dokumentów sprawy i wiadomości użytkownika.",
+  "- Nie przenoś do pisma danych przykładowych z wzoru (stron, sygnatur, kwot, dat, adresów); w miejsca bez danych wstaw neutralne pole w nawiasie kwadratowym, np. [Kwota], [Termin].",
+  "- Materiały kancelarii nie są dowodami ani faktami w sprawie; nie cytuj ich jako źródła faktów."
+].join("\n");
 
 function transferExecutionEvents(
   events: ExecutionEvent[],

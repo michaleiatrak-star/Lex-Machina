@@ -526,6 +526,43 @@ export type DocumentReviewResponse = {
   }>;
 };
 
+/** What reached the model for one document of a sent message. */
+export type DocumentDelivery = {
+  documentId: string;
+  title?: string;
+  sourceScope?: "MANUAL" | "CASE_KNOWLEDGE" | "FIRM_KNOWLEDGE" | "FIRM_TEMPLATE";
+  chunks: number;
+  fullChunks: number;
+  digestChunks: number;
+  status: "FULL" | "PARTIAL" | "DIGEST" | "OMITTED";
+};
+
+export type DocumentFitResponse = {
+  limit: number;
+  local: boolean;
+  count: number;
+  estimate: {
+    modelContextTokens: number;
+    budgetTokens: number;
+    neededTokens: number;
+    fits: boolean;
+    documents: Array<{ documentId: string; title?: string; tokens: number }>;
+  } | null;
+};
+
+/** Whether the picked files fit the chosen model, checked before sending. */
+export function checkDocumentFit(input: {
+  provider: ProviderId;
+  model: string;
+  attachments: DocumentAttachmentSelection[];
+  firmTemplates: string[];
+}): Promise<DocumentFitResponse> {
+  return json<DocumentFitResponse>("/api/sessions/document-fit", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+}
+
 export type DocumentAttachmentSelection = {
   caseId: string;
   documentId: string;
@@ -933,6 +970,7 @@ export type SessionExecutionResponse = {
     omittedChunks: number;
     selectedDocuments: number;
     omittedDocuments: number;
+    documents?: DocumentDelivery[];
   };
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: BlockedReference[];
@@ -1955,6 +1993,7 @@ export function generateLegalDocument(
     templateId?: string;
     attachments?:
       DocumentAttachmentSelection[];
+    firmTemplates?: string[];
     filename?: string;
   }
 ): Promise<
@@ -2495,6 +2534,8 @@ export function executeSession(input: {
   auxiliaryText?: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
+  // Firm templates (DOCX/ODT) sent as text with the message.
+  firmTemplates?: string[];
   knowledge?: {
     caseId?: string;
     includeCase?: boolean;

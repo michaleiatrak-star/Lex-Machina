@@ -101,6 +101,18 @@ import type {
 import type {
   LocalSharedTemplateStore
 } from "../shared-template-store.js";
+import {
+  ContextBudgetError,
+  estimateDocumentFit,
+  HOSTED_CONTEXT_TOKENS,
+  LOCAL_MAX_DOCUMENT_ATTACHMENTS,
+  MAX_DOCUMENT_ATTACHMENTS
+} from "../context-orchestrator.js";
+import {
+  MAX_FIRM_TEMPLATES,
+  templateChunks,
+  templateText
+} from "../firm-template-text.js";
 import type {
   SecureCaseUploadStore
 } from "../case-secure-store.js";
@@ -517,7 +529,10 @@ export type LexHttpAppOptions = {
     LocalSharedTemplateStore,
     | "saveTemplate"
     | "listTemplates"
-  >;
+  > &
+    Partial<Pick<LocalSharedTemplateStore, "readTemplate">>;
+  // Reads firm templates (DOCX/ODT) as text for the model.
+  officeEditor?: Pick<LocalOfficeEditor, "read">;
   caseKnowledgeSearch?: Pick<
     LocalCaseKnowledgeSearch,
     "search"
@@ -929,7 +944,7 @@ function parseDocumentAttachments(
   }
 > | null {
   if (value === undefined) return [];
-  if (!Array.isArray(value) || value.length > 4) {
+  if (!Array.isArray(value) || value.length > MAX_DOCUMENT_ATTACHMENTS) {
     return null;
   }
 
@@ -991,6 +1006,23 @@ function parseDocumentAttachments(
   }
 
   return selections;
+}
+
+function isFirmScope(scope: SessionDocumentAttachment["sourceScope"]): boolean {
+  return scope === "FIRM_KNOWLEDGE" || scope === "FIRM_TEMPLATE";
+}
+
+/** Firm templates (DOCX/ODT from the firm workspace) sent with a message. */
+function parseFirmTemplates(value: unknown): string[] | null {
+  if (value === undefined) return [];
+  if (
+    !Array.isArray(value) ||
+    value.length > MAX_FIRM_TEMPLATES ||
+    value.some((item) => typeof item !== "string" || !/^template_[a-f0-9]{32}$/.test(item))
+  ) {
+    return null;
+  }
+  return [...new Set(value as string[])];
 }
 
 type SessionKnowledgeRequest = {
@@ -6132,6 +6164,19 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         parseDocumentAttachments(
           req.body?.attachments
         );
+      const firmTemplates =
+        parseFirmTemplates(
+          req.body?.firmTemplates
+        );
+      // Firm templates and firm files may shape the document; they are not
+      // case sources, so they get no aliases.
+      const firmCaseId =
+        firmTemplates?.length ||
+        attachments?.some((selection) => selection.caseId && selection.caseId !== caseId)
+          ? options.caseAccessService
+              ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+              ?.caseId
+          : undefined;
       const format =
         req.body?.format;
       const documentType =
@@ -6188,13 +6233,17 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               templateId
             )
         ) ||
+        firmTemplates === null ||
+        attachments.length + firmTemplates.length > MAX_DOCUMENT_ATTACHMENTS ||
         attachments.some(
           (selection) =>
             Boolean(
               selection.caseId
             ) &&
             selection.caseId !==
-              caseId
+              caseId &&
+            selection.caseId !==
+              firmCaseId
         )
       ) {
         res.status(400).json({
@@ -6252,10 +6301,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         const resolvedAttachments:
           SessionDocumentAttachment[] =
           [];
+        const firmSelections = attachments.filter(
+          (selection) => firmCaseId !== undefined && selection.caseId === firmCaseId && firmCaseId !== caseId
+        );
         for (
           const selection
           of attachments
         ) {
+          if (firmSelections.includes(selection)) continue;
           options
             .caseAccessService
             .assertAccess(
@@ -6386,6 +6439,13 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 schemaVersion: 1 as const,
                 entries: []
               };
+
+        // Appended after the case sources so their alias prefixes (D01…) stay the same.
+        if (firmSelections.length > 0 || firmTemplates.length > 0) {
+          const firmMaterial = await resolveSelectedAttachments(res, firmSelections, firmTemplates, firmCaseId);
+          if (!firmMaterial) return;
+          resolvedAttachments.push(...firmMaterial);
+        }
 
         let effectiveStyleProfile =
           styleProfile as
@@ -7618,6 +7678,260 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  // Documents the user picked for a message (case files, firm files, firm
+  // templates), resolved with access checks. Used to send them and to
+  // estimate whether they fit the model before sending. Null: response sent.
+  const templateTextCache = new Map<string, ReturnType<typeof templateChunks>>();
+  const resolveSelectedAttachments = async (
+    res: express.Response,
+    attachments: Array<DocumentChunkSelection & { caseId?: string }>,
+    firmTemplates: string[],
+    firmCaseId: string | undefined
+  ): Promise<SessionDocumentAttachment[] | null> => {
+    const picked: SessionDocumentAttachment[] = [];
+    if (attachments.length > 0) {
+      if (!options.documentService) {
+        res.status(503).json({
+          error:
+            "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
+        });
+        return null;
+      }
+
+      if (
+        options.caseAccessService
+      ) {
+        const context =
+          responseAuthContext(res);
+        for (
+          const selection
+          of attachments
+        ) {
+          const caseId =
+            selection.caseId ||
+            documentCaseIds.get(
+              selection.documentId
+            );
+          if (!caseId) {
+            throw new CaseAccessError(
+              "CASE_ACCESS_DENIED",
+              403
+            );
+          }
+          options.caseAccessService
+            .assertAccess(
+              context,
+              caseId,
+              "ANALYZE"
+            );
+
+          if (
+            options
+              .documentService
+              .restoreDocument
+          ) {
+            const caseView =
+              options.caseAccessService
+                .openCase(
+                  context,
+                  caseId
+                );
+            await options
+              .caseAccessService
+              .withCaseDataKey(
+                context,
+                caseId,
+                "ANALYZE",
+                async (
+                  caseDataKey
+                ) =>
+                  await options
+                    .documentService!
+                    .restoreDocument!({
+                      caseId,
+                      documentId:
+                        selection
+                          .documentId,
+                      caseDataKey,
+                      keyVersion:
+                        caseView
+                          .keyVersion
+                    })
+              );
+          }
+
+          const resolved =
+            await options
+              .documentService!
+              .resolveProtectedChunks({
+                documentId:
+                  selection
+                    .documentId,
+                chunkIndices:
+                  selection
+                    .chunkIndices
+              });
+          picked.push({
+            caseId,
+            documentId:
+              resolved.documentId,
+            sourceScope:
+              caseId === firmCaseId
+                ? "FIRM_KNOWLEDGE"
+                : "MANUAL",
+            selectedByUser: true,
+            ...(resolved.grammar
+              ? { grammar: resolved.grammar }
+              : {}),
+            ...(resolved.totalPages
+              ? { totalPages: resolved.totalPages }
+              : {}),
+            chunks:
+              resolved.chunks.map(
+                (chunk) => ({
+                  ...chunk
+                })
+              )
+          });
+        }
+      } else {
+        const resolved =
+          await Promise.all(
+            attachments.map(
+              (selection) =>
+                options
+                  .documentService!
+                  .resolveProtectedChunks({
+                    documentId:
+                      selection
+                        .documentId,
+                    chunkIndices:
+                      selection
+                        .chunkIndices
+                  })
+            )
+          );
+        picked.push(
+          ...resolved.map(
+            (attachment) => ({
+              documentId:
+                attachment.documentId,
+              sourceScope:
+                "MANUAL" as const,
+              selectedByUser: true,
+              ...(attachment.grammar
+                ? { grammar: attachment.grammar }
+                : {}),
+              ...(attachment.totalPages
+                ? { totalPages: attachment.totalPages }
+                : {}),
+              chunks:
+                attachment.chunks.map(
+                  (chunk) => ({
+                    ...chunk
+                  })
+                )
+            })
+          )
+        );
+      }
+    }
+
+    if (firmTemplates.length > 0) {
+      if (
+        !firmCaseId ||
+        !options.caseAccessService ||
+        !options.sharedTemplateStore?.readTemplate ||
+        !options.officeEditor
+      ) {
+        res.status(503).json({
+          error: "FIRM_TEMPLATES_UNAVAILABLE"
+        });
+        return null;
+      }
+      options.caseAccessService.assertAccess(
+        responseAuthContext(res),
+        firmCaseId,
+        "READ"
+      );
+      for (const templateId of firmTemplates) {
+        const template =
+          await options.sharedTemplateStore.readTemplate(templateId);
+        try {
+          // Text of a template is read once per file version (checked while picking, then sent).
+          const cacheKey = `${templateId}:${template.manifest.sha256}`;
+          let chunks = templateTextCache.get(cacheKey);
+          if (!chunks) {
+            const model = await options.officeEditor.read(
+              new Uint8Array(template.data),
+              template.manifest.mediaType
+            );
+            chunks = templateChunks(templateText(model));
+            templateTextCache.set(cacheKey, chunks);
+            if (templateTextCache.size > 32) {
+              templateTextCache.delete(templateTextCache.keys().next().value!);
+            }
+          }
+          picked.push({
+            caseId: firmCaseId,
+            documentId: templateId,
+            title: template.manifest.filename,
+            sourceScope: "FIRM_TEMPLATE",
+            selectedByUser: true,
+            chunks: chunks.map((chunk) => ({ ...chunk }))
+          });
+        } finally {
+          template.data.fill(0);
+        }
+      }
+    }
+
+    return picked;
+  };
+
+  // Checked while the user picks files: do they fit the chosen model?
+  app.post("/api/sessions/document-fit", async (req, res) => {
+    const attachments = parseDocumentAttachments(req.body?.attachments);
+    const firmTemplates = parseFirmTemplates(req.body?.firmTemplates);
+    const model = typeof req.body?.model === "string" ? req.body.model.trim() : "";
+    const provider = typeof req.body?.provider === "string" ? req.body.provider : "";
+    if (attachments === null || firmTemplates === null || !model || model.length > 200) {
+      res.status(400).json({ error: "INVALID_DOCUMENT_FIT_REQUEST" });
+      return;
+    }
+    const localWindow = options.modelCatalog.localContextWindow?.(model);
+    const limit = localWindow !== undefined ? LOCAL_MAX_DOCUMENT_ATTACHMENTS : MAX_DOCUMENT_ATTACHMENTS;
+    const count = attachments.length + firmTemplates.length;
+    if (count === 0 || count > limit) {
+      res.json({ limit, local: localWindow !== undefined, count, estimate: null });
+      return;
+    }
+    try {
+      const firmCaseId = options.caseAccessService
+        ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+        ?.caseId;
+      const picked = await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+      if (!picked) return;
+      const charsPerToken = localWindow !== undefined
+        ? options.modelCatalog.localTokenCharsPerToken?.(model)
+        : undefined;
+      res.json({
+        limit,
+        local: localWindow !== undefined,
+        count,
+        estimate: estimateDocumentFit({
+          attachments: picked,
+          modelContextTokens: localWindow ?? HOSTED_CONTEXT_TOKENS[provider] ?? 128_000,
+          ...(charsPerToken ? { tokenCharsPerToken: charsPerToken } : {})
+        })
+      });
+    } catch (error) {
+      if (!sendAuthError(res, error) && !sendCaseAccessError(res, error)) {
+        res.status(422).json({ error: "DOCUMENT_FIT_FAILED" });
+      }
+    }
+  });
+
   app.post("/api/sessions/execute", async (req, res) => {
     if (!options.sessionExecutor) {
       res.status(503).json({
@@ -7635,13 +7949,30 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       parseSessionKnowledgeRequest(
         req.body?.knowledge
       );
+    const firmTemplates =
+      parseFirmTemplates(
+        req.body?.firmTemplates
+      );
     if (
       !request ||
       attachments === null ||
-      knowledge === null
+      knowledge === null ||
+      firmTemplates === null
     ) {
       res.status(400).json({
         error: "INVALID_SESSION_REQUEST"
+      });
+      return;
+    }
+    const localModel =
+      options.modelCatalog.localContextWindow?.(request.model) !== undefined;
+    const documentLimit = localModel
+      ? LOCAL_MAX_DOCUMENT_ATTACHMENTS
+      : MAX_DOCUMENT_ATTACHMENTS;
+    if (attachments.length + firmTemplates.length > documentLimit) {
+      res.status(422).json({
+        error: "TOO_MANY_DOCUMENT_ATTACHMENTS",
+        limit: documentLimit
       });
       return;
     }
@@ -7808,150 +8139,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     try {
       const sessionAttachments:
         SessionDocumentAttachment[] = [];
+      // The firm workspace: its documents are firm material, not case files.
+      const firmCaseId =
+        attachments.length > 0 || firmTemplates.length > 0
+          ? options.caseAccessService
+              ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+              ?.caseId
+          : undefined;
 
-      if (attachments.length > 0) {
-        if (!options.documentService) {
-          res.status(503).json({
-            error:
-              "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
-          });
-          return;
-        }
-
-        if (
-          options.caseAccessService
-        ) {
-          const context =
-            responseAuthContext(res);
-          for (
-            const selection
-            of attachments
-          ) {
-            const caseId =
-              selection.caseId ||
-              documentCaseIds.get(
-                selection.documentId
-              );
-            if (!caseId) {
-              throw new CaseAccessError(
-                "CASE_ACCESS_DENIED",
-                403
-              );
-            }
-            options.caseAccessService
-              .assertAccess(
-                context,
-                caseId,
-                "ANALYZE"
-              );
-
-            if (
-              options
-                .documentService
-                .restoreDocument
-            ) {
-              const caseView =
-                options.caseAccessService
-                  .openCase(
-                    context,
-                    caseId
-                  );
-              await options
-                .caseAccessService
-                .withCaseDataKey(
-                  context,
-                  caseId,
-                  "ANALYZE",
-                  async (
-                    caseDataKey
-                  ) =>
-                    await options
-                      .documentService!
-                      .restoreDocument!({
-                        caseId,
-                        documentId:
-                          selection
-                            .documentId,
-                        caseDataKey,
-                        keyVersion:
-                          caseView
-                            .keyVersion
-                      })
-                );
-            }
-
-            const resolved =
-              await options
-                .documentService!
-                .resolveProtectedChunks({
-                  documentId:
-                    selection
-                      .documentId,
-                  chunkIndices:
-                    selection
-                      .chunkIndices
-                });
-            sessionAttachments.push({
-              caseId,
-              documentId:
-                resolved.documentId,
-              sourceScope:
-                "MANUAL",
-              ...(resolved.grammar
-                ? { grammar: resolved.grammar }
-                : {}),
-              ...(resolved.totalPages
-                ? { totalPages: resolved.totalPages }
-                : {}),
-              chunks:
-                resolved.chunks.map(
-                  (chunk) => ({
-                    ...chunk
-                  })
-                )
-            });
-          }
-        } else {
-          const resolved =
-            await Promise.all(
-              attachments.map(
-                (selection) =>
-                  options
-                    .documentService!
-                    .resolveProtectedChunks({
-                      documentId:
-                        selection
-                          .documentId,
-                      chunkIndices:
-                        selection
-                          .chunkIndices
-                    })
-              )
-            );
-          sessionAttachments.push(
-            ...resolved.map(
-              (attachment) => ({
-                documentId:
-                  attachment.documentId,
-                sourceScope:
-                  "MANUAL" as const,
-                ...(attachment.grammar
-                  ? { grammar: attachment.grammar }
-                  : {}),
-                ...(attachment.totalPages
-                  ? { totalPages: attachment.totalPages }
-                  : {}),
-                chunks:
-                  attachment.chunks.map(
-                    (chunk) => ({
-                      ...chunk
-                    })
-                  )
-              })
-            )
-          );
-        }
-      }
+      const selectedAttachments =
+        await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+      if (!selectedAttachments) return;
+      sessionAttachments.push(...selectedAttachments);
 
       if (
         knowledge.includeCase ||
@@ -8145,8 +8344,12 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           });
         }
 
+        // Retrieved passages fill what the selected documents leave free.
         sessionAttachments.push(
-          ...grouped.values()
+          ...[...grouped.values()].slice(
+            0,
+            Math.max(0, documentLimit - sessionAttachments.length)
+          )
         );
       }
 
@@ -8157,7 +8360,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         ...new Set(
           sessionAttachments
             .map((attachment) => attachment.caseId)
-            .filter((value): value is string => Boolean(value))
+            .filter((value): value is string => Boolean(value) && value !== firmCaseId)
         )
       ];
       if (
@@ -8202,6 +8405,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           .localContextWindow?.(
             request.model
           );
+      if (!localContextWindow && sessionAttachments.length > 0) {
+        request.modelContextTokens =
+          HOSTED_CONTEXT_TOKENS[request.provider] ?? 128_000;
+      }
       if (localContextWindow) {
         request.modelContextTokens =
           localContextWindow;
@@ -8251,8 +8458,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             sessionAttachments
               .filter(
                 (attachment) =>
-                  attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE"
+                  !isFirmScope(attachment.sourceScope)
               )
               .map(
                 (attachment) =>
@@ -8442,8 +8648,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             sessionAttachments
               .filter(
                 (attachment) =>
-                  attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE"
+                  !isFirmScope(attachment.sourceScope)
               )
               .map(
                 (attachment) =>
@@ -8574,8 +8779,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             sessionAttachments
               .filter(
                 (attachment) =>
-                  attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE"
+                  !isFirmScope(attachment.sourceScope)
               )
               .map(
                 (attachment) =>
@@ -8750,8 +8954,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             sessionAttachments
               .filter(
                 (attachment) =>
-                  attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE"
+                  !isFirmScope(attachment.sourceScope)
               )
               .map(
                 (attachment) =>
@@ -8877,8 +9080,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             sessionAttachments
               .filter(
                 (attachment) =>
-                  attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE"
+                  !isFirmScope(attachment.sourceScope)
               )
               .map(
                 (attachment) =>
@@ -10191,6 +10393,14 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       ) {
         res.status(409).json({
           error: error.message
+        });
+        return;
+      }
+
+      if (error instanceof ContextBudgetError) {
+        res.status(422).json({
+          error: error.message,
+          ...error.details
         });
         return;
       }

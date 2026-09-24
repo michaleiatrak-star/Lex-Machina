@@ -10,6 +10,8 @@ import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { DocumentCitationContent } from "./DocumentCitationContent.js";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
+import { FirmFilePicker } from "./FirmFilePicker.js";
+import { pickKey, type FilePick } from "./file-pick-tree.js";
 import { WorkspaceManager } from "./WorkspaceManager.js";
 import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
@@ -26,6 +28,8 @@ import {
   downloadGeneratedArtifact,
   downloadSensitiveArtifact,
   executeSession,
+  checkDocumentFit,
+  getFirmKnowledgeWorkspace,
   getSessionProgress,
   finalizeDeanonymization,
   generateLegalDocument,
@@ -60,6 +64,8 @@ import {
   type CaseScheduleEvent,
   type CaseScheduleKind,
   type DocumentAttachmentSelection,
+  type DocumentDelivery,
+  type DocumentFitResponse,
   type EvidenceItem,
   type ModelDescriptor,
   type ModelRoutingPreferences,
@@ -490,7 +496,8 @@ function upsertAttachment(
       index === existing ? selection : item
     );
   }
-  return [...current, selection].slice(-4);
+  // The limit is checked where files are picked, with a message; never drop one silently.
+  return [...current, selection];
 }
 
 function isExecutionSkill(skill: PublicSkillDescriptor): boolean {
@@ -1018,6 +1025,14 @@ export default function MatterChatApp({
   >([]);
   const [firmKnowledgeWorkspace, setFirmKnowledgeWorkspace] =
     useState<CaseListItem | null>(null);
+  // Firm templates (DOCX/ODT) picked for the message, sent as text.
+  const [firmTemplateIds, setFirmTemplateIds] = useState<string[]>([]);
+  const [pickerTab, setPickerTab] = useState<"case" | "firm">("case");
+  const [pickerNotice, setPickerNotice] = useState("");
+  const [firmPickerReload, setFirmPickerReload] = useState(0);
+  const [documentFit, setDocumentFit] = useState<DocumentFitResponse | null>(null);
+  // What reached the model with the last message.
+  const [lastDelivery, setLastDelivery] = useState<{ documents: DocumentDelivery[]; names: Record<string, string> } | null>(null);
   const [includeCaseKnowledge, setIncludeCaseKnowledge] = useState(false);
   const [includeFirmKnowledge, setIncludeFirmKnowledge] = useState(false);
   const [documentDropQueue, setDocumentDropQueue] = useState(
@@ -1072,6 +1087,110 @@ export default function MatterChatApp({
   );
   const runtimeProvider =
     runtimeProviderForPrimarySource(provider);
+  const localModelSelected =
+    provider === "local" || model.startsWith("local/");
+  // Files per message: 20 for a hosted model, 4 for a local one (server decides).
+  const documentLimit =
+    documentFit?.limit ?? (localModelSelected ? 4 : 20);
+  const selectedFileCount =
+    documentAttachments.length + firmTemplateIds.length;
+  const firmCaseId = firmKnowledgeWorkspace?.caseId;
+  const selectedFirmKeys = useMemo(
+    () =>
+      new Set([
+        ...firmTemplateIds,
+        ...documentAttachments
+          .filter((attachment) => attachment.caseId === firmCaseId)
+          .map((attachment) => attachment.documentId)
+      ]),
+    [firmTemplateIds, documentAttachments, firmCaseId]
+  );
+
+  /** Adds or removes picked files; over the limit only what fits is added, with a message. */
+  function pickFiles(picks: FilePick[], select: boolean, pickCaseId: string): void {
+    if (!select) {
+      const keys = new Set(picks.map(pickKey));
+      setDocumentAttachments((current) =>
+        current.filter((attachment) => !(attachment.caseId === pickCaseId && keys.has(attachment.documentId)))
+      );
+      setFirmTemplateIds((current) => current.filter((id) => !keys.has(id)));
+      setPickerNotice("");
+      return;
+    }
+    const chosen = new Set([...firmTemplateIds, ...documentAttachments.map((attachment) => attachment.documentId)]);
+    const fresh = picks.filter((pick) => !chosen.has(pickKey(pick)));
+    const taken = fresh.slice(0, Math.max(0, documentLimit - selectedFileCount));
+    setPickerNotice(
+      taken.length < fresh.length
+        ? `Limit ${documentLimit} plików w jednej wiadomości` +
+            (localModelSelected ? " dla modelu lokalnego" : "") +
+            `: dodano ${taken.length} z ${fresh.length}. Odznacz inne pliki albo wyślij pozostałe w kolejnej wiadomości.`
+        : ""
+    );
+    const documents = taken.flatMap((pick) => (pick.kind === "document" ? [pick] : []));
+    const templates = taken.flatMap((pick) => (pick.kind === "template" ? [pick.templateId] : []));
+    if (documents.length) {
+      setDocumentAttachments((current) =>
+        documents.reduce(
+          (list, pick) =>
+            upsertAttachment(list, { caseId: pickCaseId, documentId: pick.documentId, chunkIndices: pick.chunkIndices }),
+          current
+        )
+      );
+    }
+    if (templates.length) setFirmTemplateIds((current) => [...current, ...templates]);
+  }
+
+  const [firmFileNames, setFirmFileNames] = useState<Record<string, string>>({});
+  function fileLabel(documentId: string, title?: string): string {
+    return (
+      title ??
+      caseFiles.find((file) => file.processing?.documentId === documentId)?.filename ??
+      firmFileNames[documentId] ??
+      "plik"
+    );
+  }
+
+  // The firm library is known to the chat without visiting the Kancelaria tab.
+  useEffect(() => {
+    if (firmKnowledgeWorkspace) return;
+    let cancelled = false;
+    getFirmKnowledgeWorkspace()
+      .then((result) => {
+        if (!cancelled && result.workspace) setFirmKnowledgeWorkspace(result.workspace);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [firmKnowledgeWorkspace]);
+
+  // Does the pick fit the chosen model? Checked on the server with the same count as sending.
+  useEffect(() => {
+    if (!model || selectedFileCount === 0) {
+      setDocumentFit(null);
+      return;
+    }
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      checkDocumentFit({
+        provider: runtimeProvider,
+        model,
+        attachments: documentAttachments,
+        firmTemplates: firmTemplateIds
+      })
+        .then((result) => {
+          if (!cancelled) setDocumentFit(result);
+        })
+        .catch(() => {
+          if (!cancelled) setDocumentFit(null);
+        });
+    }, 350);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [model, runtimeProvider, documentAttachments, firmTemplateIds, selectedFileCount]);
   const providerDefinition =
     PROVIDERS.find(
       (item) =>
@@ -1586,6 +1705,9 @@ export default function MatterChatApp({
   useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
     setDocumentAttachments([]);
+    setFirmTemplateIds([]);
+    setLastDelivery(null);
+    setPickerNotice("");
     setIncludeCaseKnowledge(false);
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setCaseScheduleError("");
@@ -2565,6 +2687,9 @@ export default function MatterChatApp({
                 "lex-classic-clean-v1",
               attachments:
                 documentAttachments,
+              ...(firmTemplateIds.length > 0
+                ? { firmTemplates: firmTemplateIds }
+                : {}),
               filename:
                 (
                   documentRequest.documentType ===
@@ -2674,8 +2799,11 @@ export default function MatterChatApp({
       }
 
       setExecutionStage(
-        "Analiza prawna, routing i weryfikacja źródeł"
+        selectedFileCount > 0
+          ? `Wysyłanie ${selectedFileCount} ${selectedFileCount === 1 ? "pliku" : "plików"} do modelu · analiza prawna i weryfikacja źródeł`
+          : "Analiza prawna, routing i weryfikacja źródeł"
       );
+      setLastDelivery(null);
       const executionId =
         newExecutionId();
       const stopDraftPolling =
@@ -2704,6 +2832,9 @@ export default function MatterChatApp({
         ...(documentAttachments.length > 0
           ? { attachments: documentAttachments }
           : {}),
+        ...(firmTemplateIds.length > 0
+          ? { firmTemplates: firmTemplateIds }
+          : {}),
         knowledge: {
           caseId,
           includeCase: includeCaseKnowledge,
@@ -2717,6 +2848,17 @@ export default function MatterChatApp({
       setExecutionStage(
         "Finalizacja odpowiedzi"
       );
+      if (result.context?.documents?.length) {
+        setLastDelivery({
+          documents: result.context.documents,
+          names: Object.fromEntries(
+            result.context.documents.map((document) => [
+              document.documentId,
+              fileLabel(document.documentId, document.title)
+            ])
+          )
+        });
+      }
       if (result.processWorkflow) {
         setProcessWorkflowVisible(true);
         setProcessWorkflowRefresh(
@@ -3177,7 +3319,10 @@ export default function MatterChatApp({
     Boolean(query.trim()) &&
     !executing &&
     !caseBusy &&
-    !selectedCase?.archivedAt;
+    !selectedCase?.archivedAt &&
+    // Picked files that do not fit the model are not sent at all.
+    selectedFileCount <= documentLimit &&
+    documentFit?.estimate?.fits !== false;
 
   return (
     <div className="chat-app-shell matter-chat-app">
@@ -4151,8 +4296,9 @@ export default function MatterChatApp({
                     ? selectedDeterministicAction.label
                     : "AUTO · prawny router"}
                 </span>
-                <span>Załączniki: {documentAttachments.length}</span>
-                {documentAttachments.some((attachment) =>
+                <span>Załączniki: {selectedFileCount}</span>
+                {firmTemplateIds.length > 0 ||
+                documentAttachments.some((attachment) =>
                   caseFiles.some(
                     (file) =>
                       file.processing?.documentId === attachment.documentId &&
@@ -4162,6 +4308,47 @@ export default function MatterChatApp({
                   <span className="chat-clear-text-warning">Uwaga: część załączników to tekst jawny</span>
                 ) : null}
               </div>
+              {lastDelivery ? (
+                <div className="chat-delivery" role="status">
+                  <strong>
+                    Do modelu trafiło w całości:{" "}
+                    {lastDelivery.documents.filter((document) => document.status === "FULL").length} z{" "}
+                    {lastDelivery.documents.length} plików
+                    {lastDelivery.documents.some((document) => document.status !== "FULL")
+                      ? " - reszta skrócona lub pominięta (brak miejsca w oknie modelu)"
+                      : ""}
+                  </strong>
+                  <details>
+                    <summary>Szczegóły wysyłki</summary>
+                    <ul>
+                      {lastDelivery.documents.map((document) => (
+                        <li key={document.documentId} className={`chat-delivery-${document.status.toLowerCase()}`}>
+                          <span>{lastDelivery.names[document.documentId]}</span>
+                          <small>
+                            {document.sourceScope === "FIRM_TEMPLATE"
+                              ? "wzór kancelarii · "
+                              : document.sourceScope === "FIRM_KNOWLEDGE"
+                                ? "kancelaria · "
+                                : document.sourceScope === "CASE_KNOWLEDGE"
+                                  ? "wyszukane w sprawie · "
+                                  : ""}
+                            {document.status === "FULL"
+                              ? `w całości (${document.chunks} ${document.chunks === 1 ? "fragment" : "fragmentów"})`
+                              : document.status === "PARTIAL"
+                                ? `częściowo: ${document.fullChunks + document.digestChunks} z ${document.chunks} fragmentów`
+                                : document.status === "DIGEST"
+                                  ? "tylko streszczenie fragmentów"
+                                  : "pominięty - brak miejsca w oknie modelu"}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <button type="button" className="chat-secondary-action" onClick={() => setLastDelivery(null)}>
+                    Ukryj
+                  </button>
+                </div>
+              ) : null}
               <textarea
                 value={query}
                 maxLength={20_000}
@@ -4190,6 +4377,7 @@ export default function MatterChatApp({
                   onClick={() => {
                     const opening = !caseFilePickerOpen;
                     setCaseFilePickerOpen(opening);
+                    if (opening) setFirmPickerReload((value) => value + 1);
                     // Files added in the Sprawa tab since the list was read.
                     if (opening && caseId) {
                       void listCaseFiles(caseId)
@@ -4200,7 +4388,7 @@ export default function MatterChatApp({
                     }
                   }}
                 >
-                  Pliki{documentAttachments.length ? ` (${documentAttachments.length})` : ""}
+                  Pliki{selectedFileCount ? ` (${selectedFileCount})` : ""}
                 </button>
                 <button
                   type="button"
@@ -4222,8 +4410,67 @@ export default function MatterChatApp({
               {caseFilePickerOpen ? (
                 <div
                   className="chat-case-file-picker"
-                  aria-label="Dokumenty sprawy do dołączenia"
+                  aria-label="Pliki do dołączenia"
                 >
+                  <div className="chat-file-picker-tabs" role="tablist">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={pickerTab === "case"}
+                      onClick={() => setPickerTab("case")}
+                    >
+                      Dokumenty sprawy ({documentAttachments.filter((attachment) => attachment.caseId !== firmCaseId).length})
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={pickerTab === "firm"}
+                      disabled={!firmCaseId}
+                      title={firmCaseId ? undefined : "Biblioteka kancelarii nie jest jeszcze utworzona (zakładka Kancelaria)"}
+                      onClick={() => setPickerTab("firm")}
+                    >
+                      Wzory i know-how kancelarii ({selectedFirmKeys.size})
+                    </button>
+                    <span className="chat-file-picker-count">
+                      {selectedFileCount} z {documentLimit} plików
+                    </span>
+                  </div>
+                  {pickerNotice ? <p className="chat-inline-error" role="status">{pickerNotice}</p> : null}
+                  {documentFit?.estimate ? (
+                    <div
+                      className={`chat-file-fit ${documentFit.estimate.fits ? "" : "chat-file-fit-over"}`}
+                      role="status"
+                    >
+                      <div className="chat-file-fit-bar">
+                        <span
+                          style={{
+                            width: `${Math.min(100, Math.round((documentFit.estimate.neededTokens / Math.max(1, documentFit.estimate.budgetTokens)) * 100))}%`
+                          }}
+                        />
+                      </div>
+                      <small>
+                        Okno modelu na dokumenty: ~{Math.round(documentFit.estimate.neededTokens / 1000)} tys. z{" "}
+                        {Math.round(documentFit.estimate.budgetTokens / 1000)} tys. tokenów
+                        {documentFit.estimate.fits
+                          ? ""
+                          : ` - za dużo; największe: ${[...documentFit.estimate.documents]
+                              .sort((left, right) => right.tokens - left.tokens)
+                              .slice(0, 3)
+                              .map((document) => `${fileLabel(document.documentId, document.title)} (~${Math.round(document.tokens / 1000)} tys.)`)
+                              .join(", ")}. Odznacz część plików; wysyłka jest zablokowana.`}
+                      </small>
+                    </div>
+                  ) : null}
+                  {pickerTab === "firm" && firmCaseId ? (
+                    <FirmFilePicker
+                      firmCaseId={firmCaseId}
+                      selected={selectedFirmKeys}
+                      reloadToken={firmPickerReload}
+                      onChange={(picks, select) => pickFiles(picks, select, firmCaseId)}
+                      onNames={setFirmFileNames}
+                    />
+                  ) : (
+                  <>
                   <div className="chat-case-file-picker-head">
                     <strong>
                       Dokumenty sprawy
@@ -4283,50 +4530,14 @@ export default function MatterChatApp({
                                   checked={
                                     selected
                                   }
-                                  onChange={(
-                                    event
-                                  ) => {
-                                    const processing =
-                                      item.processing;
-                                    if (
-                                      !processing
-                                    ) {
-                                      return;
-                                    }
-                                    if (
-                                      event
-                                        .target
-                                        .checked
-                                    ) {
-                                      setDocumentAttachments(
-                                        (
-                                          current
-                                        ) =>
-                                          upsertAttachment(
-                                            current,
-                                            {
-                                              caseId,
-                                              documentId:
-                                                processing.documentId,
-                                              chunkIndices:
-                                                processing.chunkIndices
-                                            }
-                                          )
-                                      );
-                                    } else {
-                                      setDocumentAttachments(
-                                        (
-                                          current
-                                        ) =>
-                                          current.filter(
-                                            (
-                                              attachment
-                                            ) =>
-                                              attachment.documentId !==
-                                                processing.documentId
-                                          )
-                                      );
-                                    }
+                                  onChange={(event) => {
+                                    const processing = item.processing;
+                                    if (!processing) return;
+                                    pickFiles(
+                                      [{ kind: "document", documentId: processing.documentId, chunkIndices: processing.chunkIndices }],
+                                      event.target.checked,
+                                      caseId
+                                    );
                                   }}
                                 />
                                 <span>
@@ -4356,12 +4567,10 @@ export default function MatterChatApp({
                                     void processStoredCaseFile(caseId, item.uploadId)
                                       .then((review) => finalizeCaseDocument(caseId, review.documentId, []))
                                       .then((result) => {
-                                        setDocumentAttachments((current) =>
-                                          upsertAttachment(current, {
-                                            caseId,
-                                            documentId: result.documentId,
-                                            chunkIndices: result.chunks.map((chunk) => chunk.index)
-                                          })
+                                        pickFiles(
+                                          [{ kind: "document", documentId: result.documentId, chunkIndices: result.chunks.map((chunk) => chunk.index) }],
+                                          true,
+                                          caseId
                                         );
                                         setWorkspaceRefresh((value) => value + 1);
                                       })
@@ -4393,12 +4602,10 @@ export default function MatterChatApp({
                                         finalizeCaseDocument(caseId, review.documentId, keepAllDirectives(review))
                                       )
                                       .then((result) => {
-                                        setDocumentAttachments((current) =>
-                                          upsertAttachment(current, {
-                                            caseId,
-                                            documentId: result.documentId,
-                                            chunkIndices: result.chunks.map((chunk) => chunk.index)
-                                          })
+                                        pickFiles(
+                                          [{ kind: "document", documentId: result.documentId, chunkIndices: result.chunks.map((chunk) => chunk.index) }],
+                                          true,
+                                          caseId
                                         );
                                         setWorkspaceRefresh((value) => value + 1);
                                       })
@@ -4417,6 +4624,8 @@ export default function MatterChatApp({
                         }
                       )}
                     </ul>
+                  )}
+                  </>
                   )}
                 </div>
               ) : null}

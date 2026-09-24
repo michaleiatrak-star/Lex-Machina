@@ -343,6 +343,8 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const officeEditor =
+    new LocalOfficeEditor();
   const templateProfileService =
     new LocalTemplateProfileService(
       sharedTemplateStore
@@ -620,6 +622,7 @@ export async function startLocalServer(options?: {
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
+    officeEditor,
     templateProfileService,
     authService,
     supportService,
@@ -668,8 +671,7 @@ export async function startLocalServer(options?: {
         workspaceStore,
       rootDir:
         caseFileStore.rootDir,
-      officeEditor:
-        new LocalOfficeEditor(),
+      officeEditor,
       artifacts:
         secureCaseArtifactStore
     }
