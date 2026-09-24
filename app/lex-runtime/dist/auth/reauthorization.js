@@ -185,7 +185,7 @@ export class DeanonymizationReauthorizationManager {
             session
         };
     }
-    async consumeGrant(actor, grantId) {
+    async checkedGrant(actor, grantId) {
         const grant = this.grants.get(grantId);
         if (!grant) {
             throw new ReauthorizationError("REAUTH_GRANT_NOT_FOUND");
@@ -212,6 +212,26 @@ export class DeanonymizationReauthorizationManager {
             !exactTarget(grant, current)) {
             throw new ReauthorizationError("REAUTH_TARGET_CHANGED");
         }
+        return { grant, current, now };
+    }
+    /**
+     * Shows what the grant would restore without using it up: the user reviews
+     * restored names before the one-time final document is written.
+     */
+    async previewGrant(actor, grantId) {
+        const { grant, current } = await this.checkedGrant(actor, grantId);
+        this.audit(actor.user.userId, "deanonymization_grant_previewed", "PASS", {
+            grantId,
+            intentId: grant.intentId,
+            caseId: grant.caseId,
+            artifactId: grant.artifactId
+        });
+        return {
+            ...current
+        };
+    }
+    async consumeGrant(actor, grantId) {
+        const { grant, current, now } = await this.checkedGrant(actor, grantId);
         // Consume before the caller is allowed to unlock/decrypt the vault.
         grant.consumedAt =
             new Date(now).toISOString();

@@ -43,6 +43,21 @@ export type WorkspaceThreadMessage = {
   createdAt: string;
   meta?: string;
   documentCitations?: WorkspaceDocumentCitation[];
+  restorations?: RestorationMark[];
+};
+
+/** A value put back into model output locally (never sent to the model). */
+export type RestorationMark = {
+  start: number;
+  end: number;
+  token: string;
+  kind: string;
+  case?: string;
+  source: string;
+  confidence: number;
+  status: string;
+  canonical?: string;
+  gender?: "m1" | "f";
 };
 
 export type WorkspaceResponse = {

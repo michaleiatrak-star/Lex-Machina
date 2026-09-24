@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,6 +48,77 @@ export type PersonEntity = {
 
 export interface PersonMorphology {
   analyze(surfaces: string[]): Promise<Array<PersonEntity | null>>;
+  saveCorrection?(correction: NameFormCorrection): Promise<void>;
+}
+
+export type NameFormCorrection = {
+  canonical: string;
+  gender: "m1" | "f";
+  case: PersonCase;
+  text: string;
+};
+
+const CASE_TO_WORKER: Record<PersonCase, string> = {
+  NOM: "nom",
+  GEN: "gen",
+  DAT: "dat",
+  ACC: "acc",
+  INS: "inst",
+  LOC: "loc",
+  VOC: "voc"
+};
+
+const NAME_TEXT = /^[\p{L}\p{M}'’. -]{1,200}$/u;
+
+/**
+ * Word forms the user confirmed ("Müller" -> DAT "Müllerowi"). Stored per
+ * word, not per person or case, so the file is a spelling dictionary rather
+ * than a list of clients.
+ */
+export function defaultNameExceptionsPath(env: NodeJS.ProcessEnv = process.env): string {
+  const override = env.LEX_NAME_EXCEPTIONS?.trim();
+  if (override) return path.resolve(override);
+  const base = env.LOCALAPPDATA?.trim();
+  return base
+    ? path.resolve(base, "LexMachina", "privacy", "name-forms.json")
+    : path.resolve(os.homedir(), ".lex-machina", "privacy", "name-forms.json");
+}
+
+type ExceptionFile = Record<string, Record<string, Record<string, string>>>;
+
+export async function saveNameFormCorrection(
+  file: string,
+  correction: NameFormCorrection
+): Promise<void> {
+  if (
+    !NAME_TEXT.test(correction.canonical) ||
+    !NAME_TEXT.test(correction.text) ||
+    !(PERSON_CASES as readonly string[]).includes(correction.case) ||
+    (correction.gender !== "m1" && correction.gender !== "f")
+  ) {
+    throw new Error("NAME_FORM_INVALID");
+  }
+  const words = correction.canonical.trim().split(/[\s-]+/u);
+  const forms = correction.text.trim().split(/[\s-]+/u);
+  if (words.length !== forms.length) {
+    throw new Error("NAME_FORM_WORDS_MISMATCH");
+  }
+  let entries: ExceptionFile = {};
+  try {
+    entries = JSON.parse(await readFile(file, "utf8")) as ExceptionFile;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
+  words.forEach((word, index) => {
+    const byGender = (entries[word] ??= {});
+    const paradigm = (byGender[correction.gender] ??= {});
+    paradigm.nom ??= word;
+    paradigm[CASE_TO_WORKER[correction.case]] = forms[index]!;
+  });
+  await mkdir(path.dirname(file), { recursive: true, mode: 0o700 });
+  const temporary = `${file}.${process.pid}.tmp`;
+  await writeFile(temporary, JSON.stringify(entries, null, 1), { encoding: "utf8", mode: 0o600 });
+  await rename(temporary, file);
 }
 
 function defaultWorkerPath(): string {
@@ -90,12 +161,14 @@ function toEntity(raw: unknown): PersonEntity | null {
 export class LocalPersonMorphology implements PersonMorphology {
   private readonly python: string;
   private readonly workerPath: string;
+  private readonly exceptionsPath: string;
   private readonly cache = new Map<string, PersonEntity | null>();
 
   constructor(
     options: {
       python?: string;
       workerPath?: string;
+      exceptionsPath?: string;
       timeoutMs?: number;
     } = {},
     private readonly timeoutMs = options.timeoutMs ?? 120_000
@@ -108,6 +181,14 @@ export class LocalPersonMorphology implements PersonMorphology {
       options.workerPath ??
       process.env.LEX_PERSON_MORPHOLOGY_WORKER ??
       defaultWorkerPath();
+    this.exceptionsPath =
+      options.exceptionsPath ??
+      defaultNameExceptionsPath();
+  }
+
+  async saveCorrection(correction: NameFormCorrection): Promise<void> {
+    await saveNameFormCorrection(this.exceptionsPath, correction);
+    this.cache.clear();
   }
 
   async analyze(surfaces: string[]): Promise<Array<PersonEntity | null>> {
@@ -135,7 +216,11 @@ export class LocalPersonMorphology implements PersonMorphology {
         const child = spawn(
           this.python,
           ["-X", "utf8", this.workerPath, "--input", input, "--output", output],
-          { windowsHide: true, stdio: ["ignore", "ignore", "pipe"] }
+          {
+            windowsHide: true,
+            stdio: ["ignore", "ignore", "pipe"],
+            env: { ...process.env, LEX_NAME_EXCEPTIONS: this.exceptionsPath }
+          }
         );
         let stderr = "";
         child.stderr?.on("data", (chunk) => {

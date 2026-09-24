@@ -64,6 +64,21 @@ export type WorkspaceThreadMessage = {
   createdAt: string;
   meta?: string;
   documentCitations?: WorkspaceDocumentCitation[];
+  restorations?: WorkspaceRestoration[];
+};
+
+/** A value restored into an assistant message (see privacy/restoration-report). */
+export type WorkspaceRestoration = {
+  start: number;
+  end: number;
+  token: string;
+  kind: string;
+  case?: string;
+  source: string;
+  confidence: number;
+  status: string;
+  canonical?: string;
+  gender?: "m1" | "f";
 };
 
 export type CaseWorkspaceIndex = {
@@ -183,9 +198,49 @@ function safeMessage(input: WorkspaceThreadMessage): WorkspaceThreadMessage {
     return { ...citation };
   });
 
+  const restorations = (input.restorations ?? []).slice(0, 2_000).map((item) => {
+    if (
+      !Number.isInteger(item.start) ||
+      !Number.isInteger(item.end) ||
+      item.start < 0 ||
+      item.end < item.start ||
+      item.end > input.content.length ||
+      typeof item.token !== "string" ||
+      !/^\[PII:[A-Z_]+:\d{4}\]$/.test(item.token) ||
+      typeof item.kind !== "string" ||
+      !/^[A-Z_]{1,32}$/.test(item.kind) ||
+      (item.case !== undefined && !/^[A-Z]{2,4}$/.test(item.case)) ||
+      typeof item.source !== "string" ||
+      item.source.length > 64 ||
+      typeof item.confidence !== "number" ||
+      !(item.confidence >= 0 && item.confidence <= 1) ||
+      typeof item.status !== "string" ||
+      item.status.length > 32 ||
+      (item.canonical !== undefined &&
+        (typeof item.canonical !== "string" || item.canonical.length > 200)) ||
+      (item.gender !== undefined && item.gender !== "m1" && item.gender !== "f")
+    ) {
+      throw new Error("WORKSPACE_RESTORATION_INVALID");
+    }
+    return {
+      start: item.start,
+      end: item.end,
+      token: item.token,
+      kind: item.kind,
+      ...(item.case ? { case: item.case } : {}),
+      source: item.source,
+      confidence: item.confidence,
+      status: item.status,
+      ...(item.canonical ? { canonical: item.canonical } : {}),
+      ...(item.gender ? { gender: item.gender } : {})
+    };
+  });
+
+  const { restorations: _dropped, ...rest } = input;
   return {
-    ...input,
-    ...(citations.length > 0 ? { documentCitations: citations } : {})
+    ...rest,
+    ...(citations.length > 0 ? { documentCitations: citations } : {}),
+    ...(restorations.length > 0 ? { restorations } : {})
   };
 }
 
@@ -630,6 +685,9 @@ export class EncryptedCaseWorkspaceStore {
       ...item,
       ...(item.documentCitations
         ? { documentCitations: item.documentCitations.map((citation) => ({ ...citation })) }
+        : {}),
+      ...(item.restorations
+        ? { restorations: item.restorations.map((restoration) => ({ ...restoration })) }
         : {})
     }));
   }
@@ -642,10 +700,15 @@ export class EncryptedCaseWorkspaceStore {
   }): Promise<WorkspaceThreadMessage> {
     const index = await this.read(args.caseId, args.caseDataKey, args.keyVersion);
     const message = safeMessage(args.message);
-    const withoutDuplicate = index.thread.messages.filter(
-      (item) => item.messageId !== message.messageId
+    const existing = index.thread.messages.findIndex(
+      (item) => item.messageId === message.messageId
     );
-    index.thread.messages = [...withoutDuplicate, message].slice(-this.maxMessages);
+    if (existing >= 0) {
+      // A corrected message keeps its place in the thread.
+      index.thread.messages[existing] = message;
+    } else {
+      index.thread.messages = [...index.thread.messages, message].slice(-this.maxMessages);
+    }
     await this.write(index, args.caseDataKey, args.keyVersion);
     return message;
   }

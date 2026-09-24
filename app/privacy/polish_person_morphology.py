@@ -291,9 +291,15 @@ class PersonMorphology:
                 candidate = chosen[index]
                 index += 1
                 paradigm, source, conf = self._paradigm(plan, candidate, gender, observed_case)
-                if source == "unresolved":
+                # Single forms the user corrected win over the computed ones.
+                corrected = {} if plan.frozen else self._corrected_forms(plan, candidate, gender)
+                if source == "unresolved" and len(corrected) < len(CASES):
                     warnings.append(f"NO_PARADIGM:{plan.surface}")
                 for case in CASES:
+                    if case in corrected:
+                        pieces[case].append(_match_case(plan.surface, corrected[case]))
+                        sources[case].add("exception")
+                        continue
                     pieces[case].append(_match_case(plan.surface, paradigm[case]) if not plan.frozen else plan.surface)
                     confidence[case] = min(confidence[case], conf if case != observed_case else 1.0)
                     sources[case].add(source)
@@ -331,16 +337,21 @@ class PersonMorphology:
             "warnings": warnings,
         }
 
+    def _corrected_forms(self, plan: WordPlan, candidate: Candidate | None, gender: str) -> dict[str, str]:
+        word = plan.surface.strip(",;")
+        base = candidate.lemma if candidate and candidate.lemma_id.startswith("exception:") else word
+        entry = self.exceptions.lookup(base)
+        if not entry or gender not in entry:
+            return {}
+        return {case: form for case, form in entry[gender].items() if case in CASES}
+
     def _paradigm(self, plan: WordPlan, candidate: Candidate | None, gender: str, observed_case: str) -> tuple[dict[str, str], str, float]:
         if plan.frozen:
             return {case: plan.surface for case in CASES}, "frozen", 1.0
         word = plan.surface.strip(",;")
-        if candidate and candidate.lemma_id.startswith("exception:"):
-            base = candidate.lemma
-            return dict(self.exceptions.lookup(base)[gender]), "exception", 1.0
-        exception = self.exceptions.lookup(word)
-        if exception and gender in exception:
-            return dict(exception[gender]), "exception", 1.0
+        complete = self._corrected_forms(plan, candidate, gender)
+        if len(complete) == len(CASES):
+            return complete, "exception", 1.0
         if candidate:
             try:
                 generated = self.engine.generate(candidate.lemma_id)

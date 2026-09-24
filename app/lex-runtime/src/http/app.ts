@@ -1,3 +1,7 @@
+import type {
+  NameFormCorrection,
+  PersonMorphology
+} from "../privacy/person-morphology.js";
 import { createHash } from "node:crypto";
 import express, {
   type Express,
@@ -401,6 +405,8 @@ function loopbackOriginGuard(
 
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
+  // Receives word forms the user corrected in a restored answer or document.
+  personMorphology?: Pick<PersonMorphology, "saveCorrection">;
   modelCatalog:
     Pick<DynamicModelCatalog, "list"> &
     Partial<
@@ -504,7 +510,13 @@ export type LexHttpAppOptions = {
     | "createTokenized"
     | "createReady"
     | "deanonymizeConsumed"
-  >;
+  > &
+    Partial<
+      Pick<
+        LocalDocumentAuthoringService,
+        "previewDeanonymization"
+      >
+    >;
   documentAstGenerator?: Pick<
     LegalDocumentAstGenerator,
     "generate"
@@ -518,7 +530,13 @@ export type LexHttpAppOptions = {
     | "createIntent"
     | "authorizeIntent"
     | "consumeGrant"
-  >;
+  > &
+    Partial<
+      Pick<
+        DeanonymizationReauthorizationManager,
+        "previewGrant"
+      >
+    >;
   sensitiveDownloadTickets?: Pick<
     SensitiveDownloadTicketManager,
     | "issue"
@@ -2209,6 +2227,30 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       "/api/auth/activity",
       (_req, res) => {
         res.status(204).end();
+      }
+    );
+
+    // "Zapisz formę": the user corrected how a restored name inflects.
+    app.post(
+      "/api/privacy/name-forms",
+      async (req, res) => {
+        const body = req.body as Partial<NameFormCorrection> | undefined;
+        if (!options.personMorphology?.saveCorrection) {
+          res.status(503).json({ error: "PERSON_MORPHOLOGY_UNAVAILABLE" });
+          return;
+        }
+        try {
+          await options.personMorphology.saveCorrection({
+            canonical: String(body?.canonical ?? ""),
+            gender: body?.gender === "f" ? "f" : "m1",
+            case: String(body?.case ?? "") as NameFormCorrection["case"],
+            text: String(body?.text ?? "")
+          });
+          res.status(204).end();
+        } catch (error) {
+          const code = error instanceof Error ? error.message : "NAME_FORM_INVALID";
+          res.status(code.startsWith("NAME_FORM_") ? 400 : 500).json({ error: code.startsWith("NAME_FORM_") ? code : "NAME_FORM_SAVE_FAILED" });
+        }
       }
     );
 
@@ -6539,6 +6581,68 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  // Review step: restored values with their source, before the one-time
+  // final document is written. Needs the same fresh password grant.
+  app.post(
+    "/api/deanonymization/preview",
+    async (req, res) => {
+      if (
+        !options.reauthorizationManager?.previewGrant ||
+        !options.documentAuthoringService?.previewDeanonymization ||
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "DEANONYMIZATION_UNAVAILABLE"
+        });
+        return;
+      }
+      if (typeof req.body?.grantId !== "string") {
+        res.status(400).json({
+          error:
+            "INVALID_DEANONYMIZATION_REQUEST"
+        });
+        return;
+      }
+      try {
+        const context =
+          responseAuthContext(res);
+        const target =
+          await options.reauthorizationManager.previewGrant(
+            context,
+            req.body.grantId
+          );
+        const preview =
+          await options.caseAccessService.withCaseDataKey(
+            context,
+            target.caseId,
+            "REIDENTIFY",
+            (caseDataKey) =>
+              options.documentAuthoringService!.previewDeanonymization!({
+                target,
+                caseDataKey,
+                keyVersion:
+                  target.caseKeyVersion
+              })
+          );
+        res.setHeader("Cache-Control", "no-store");
+        res.json(preview);
+      } catch (error) {
+        if (
+          !sendCaseAccessError(res, error) &&
+          !sendReauthorizationError(res, error)
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof Error
+                ? error.message
+                : "DEANONYMIZATION_PREVIEW_FAILED"
+          });
+        }
+      }
+    }
+  );
+
   app.post(
     "/api/deanonymization/finalize",
     async (req, res) => {
@@ -6564,6 +6668,31 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         });
         return;
       }
+
+      const rawOverrides =
+        req.body?.overrides;
+      if (
+        rawOverrides !== undefined &&
+        (
+          !rawOverrides ||
+          typeof rawOverrides !== "object" ||
+          Array.isArray(rawOverrides) ||
+          Object.keys(rawOverrides).length > 500 ||
+          Object.values(rawOverrides).some(
+            (value) => typeof value !== "string"
+          )
+        )
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_DEANONYMIZATION_REQUEST"
+        });
+        return;
+      }
+      const overrides =
+        rawOverrides as
+          | Record<string, string>
+          | undefined;
 
       try {
         const context =
@@ -6619,6 +6748,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                             req.body
                               .filename
                         }
+                      : {}),
+                    ...(overrides
+                      ? { overrides }
                       : {})
                   });
               }
@@ -6650,6 +6782,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           deanonymizationBasis:
             final
               .deanonymizationBasis,
+          ...(final.restorations
+            ? { restorations: final.restorations }
+            : {}),
           keyBindingVerified:
             final
               .keyBindingVerified,

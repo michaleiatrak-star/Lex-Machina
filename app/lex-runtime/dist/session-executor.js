@@ -1,3 +1,4 @@
+import { restoreWithReport } from "./privacy/restoration-report.js";
 import { AuditTrail } from "./audit-trail.js";
 import { AuditedFinalizer } from "./audited-finalizer.js";
 import { LexExecutionEngine } from "./execution-engine.js";
@@ -16,7 +17,7 @@ import { evaluateModelTaskOwnershipGate } from "./model-task-ownership.js";
 import { applyAutomaticVerificationMarkers, detectHistoricalAsOf, planAutomaticLegalVerification } from "./gate-i-auto-verification.js";
 import { runGateIRuntimePrelude } from "./gate-i-runtime-prelude.js";
 import { evaluateGateIInputCompleteness, evaluateGateIWorkflowContract, gateIWorkflowContract } from "./gate-i-contracts.js";
-import { LocalPolishPseudonymizer, PII_TOKEN_WITH_CASE, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { ModelAutoRouter } from "./model-auto-routing.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { parseSkillSelectionEnvelope } from "./skill-selection.js";
@@ -1212,6 +1213,8 @@ export class SafeSessionExecutor {
             line: finding.reference.line,
             status: finding.status
         }));
+        // Every restored value is reported so the UI can mark it for review.
+        const restoredAnswer = restoreWithReport(processedDocumentCitations.text, chatPrivacyVault);
         const response = {
             sessionId: audit.sessionId,
             status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
@@ -1234,13 +1237,13 @@ export class SafeSessionExecutor {
             domainSkills: execution.domainSkills,
             ...(safeToPresent
                 ? {
-                    answer: processedDocumentCitations
-                        .text.replace(PII_TOKEN_WITH_CASE, (token, kind, sequence, requestedCase) => {
-                        const base = `[PII:${kind}:${sequence}]`;
-                        return chatPrivacyVault.hasToken(base)
-                            ? chatPrivacyVault.restore(base, requestedCase ?? null).text
-                            : token;
-                    }),
+                    answer: restoredAnswer.text,
+                    ...(restoredAnswer.restorations.length > 0
+                        ? { restorations: restoredAnswer.restorations }
+                        : {}),
+                    ...(restoredAnswer.unresolved.length > 0
+                        ? { unresolvedTokens: restoredAnswer.unresolved }
+                        : {}),
                     documentCitations: processedDocumentCitations.citations,
                     ...(reportBlueprint
                         ? {

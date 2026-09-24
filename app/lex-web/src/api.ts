@@ -1,3 +1,5 @@
+import type { RestorationMark } from "./workspace-client.js";
+
 export type ProviderId = "openai" | "anthropic" | "xai";
 
 export type AuthStatusResponse = {
@@ -382,6 +384,60 @@ export type DeanonymizationReauthorizationResponse = {
     AuthSessionInfo;
 };
 
+/** An alias used in a generated document, as it will be restored. */
+export type DocumentRestoration = {
+  alias: string;
+  kind: string;
+  case?: string;
+  text: string;
+  source: string;
+  confidence: number;
+  status: string;
+  canonical?: string;
+  gender?: "m1" | "f";
+  occurrences: number;
+};
+
+export type DeanonymizationPreview = {
+  text: string;
+  restorations: DocumentRestoration[];
+  marks: Array<{ start: number; end: number; alias: string }>;
+};
+
+export function previewDeanonymization(
+  grantId: string
+): Promise<DeanonymizationPreview> {
+  return json<DeanonymizationPreview>(
+    "/api/deanonymization/preview",
+    {
+      method: "POST",
+      body: JSON.stringify({ grantId })
+    }
+  );
+}
+
+/** "Zapisz formę": remember how a name inflects on this computer. */
+export async function saveNameForm(correction: {
+  canonical: string;
+  gender: "m1" | "f";
+  case: string;
+  text: string;
+}): Promise<void> {
+  const response = await fetch(`${apiBase()}/api/privacy/name-forms`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...authorizationHeaders()
+    },
+    body: JSON.stringify(correction)
+  });
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({})) as { error?: string };
+    throw new Error(payload.error || `HTTP_${response.status}`);
+  }
+}
+
 export type FinalizedDocumentResponse = {
   artifact:
     StoredCaseArtifact;
@@ -393,6 +449,7 @@ export type FinalizedDocumentResponse = {
     "PRIVACY_VAULT_KEY";
   keyBindingVerified:
     boolean;
+  restorations?: DocumentRestoration[];
   downloadTicket?: {
     ticketId: string;
     caseId: string;
@@ -800,6 +857,9 @@ export type EvidenceItem = {
 
 export type SessionExecutionResponse = {
   sessionId: string;
+  // Values restored locally into the answer, for highlighting and correction.
+  restorations?: RestorationMark[];
+  unresolvedTokens?: string[];
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
   provider: ProviderId;
   model: string;
@@ -1970,7 +2030,8 @@ export function reauthorizeDeanonymization(
 
 export function finalizeDeanonymization(
   grantId: string,
-  filename?: string
+  filename?: string,
+  overrides?: Record<string, string>
 ): Promise<
   FinalizedDocumentResponse
 > {
@@ -1987,6 +2048,10 @@ export function finalizeDeanonymization(
             ? {
                 filename
               }
+            : {}),
+          ...(overrides &&
+          Object.keys(overrides).length > 0
+            ? { overrides }
             : {})
         })
     }

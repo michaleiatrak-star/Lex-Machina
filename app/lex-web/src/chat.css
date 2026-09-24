@@ -1728,3 +1728,115 @@
   font-size: 13px;
   line-height: 1.5;
 }
+
+.restoration-review {
+  margin-top: 8px;
+  border: 1px solid #e0e4dc;
+  border-radius: 10px;
+  background: #fbfcfa;
+  font-size: 13px;
+}
+
+.restoration-review-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.restoration-review-head small,
+.restoration-hint {
+  color: #6d786f;
+}
+
+.restoration-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 10px 6px;
+  font-size: 11px;
+}
+
+.restoration-text {
+  max-height: 420px;
+  overflow: auto;
+  padding: 8px 10px;
+  border-top: 1px solid #e0e4dc;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+mark.restored,
+span.restored {
+  padding: 0 2px;
+  border-radius: 3px;
+  color: inherit;
+}
+
+mark.restored {
+  cursor: pointer;
+}
+
+.restored-certain {
+  background: #d8efd3;
+}
+
+.restored-rule {
+  background: #fdf0c2;
+}
+
+.restored-review {
+  background: #f8d3cf;
+  outline: 1px solid #d9776c;
+}
+
+.restored-manual {
+  background: #d4e3f7;
+}
+
+.restored-stored {
+  background: #e7e7ec;
+}
+
+.restored-selected {
+  outline: 2px solid #2d5b8a;
+}
+
+.restoration-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-top: 1px solid #e0e4dc;
+}
+
+.restoration-editor > div {
+  flex-basis: 100%;
+}
+
+.restoration-editor input {
+  min-width: 18em;
+}
+
+.restoration-hint {
+  display: block;
+  padding: 6px 10px;
+}
+
+.restoration-unresolved {
+  padding: 6px 10px;
+  color: #9b2c2c;
+}
+
+.restoration-status {
+  margin: 0;
+  padding: 6px 10px;
+}
+
+.deanonymization-review {
+  display: grid;
+  gap: 8px;
+}

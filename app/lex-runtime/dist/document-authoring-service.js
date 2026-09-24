@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { buildGenerationAliases, resolveGenerationAliases } from "./generation-aliases.js";
+import { buildGenerationAliases, resolveGenerationAliases, applyRestorationOverrides, describeGenerationAliases, renderRestorationPreview } from "./generation-aliases.js";
 import { legalDocumentPlainText, validateLegalDocumentAst } from "./legal-document-ast.js";
 import { LocalLegalDocumentRenderer } from "./legal-document-renderer.js";
 import { privacyVaultDeanonymizationKeyBinding } from "./privacy/vault-store.js";
@@ -230,7 +230,11 @@ export class LocalDocumentAuthoringService {
             rendered.data.fill(0);
         }
     }
-    async deanonymizeConsumed(args) {
+    /**
+     * Checks key binding, vault generation and the tokenized hash, then resolves
+     * every alias used in the document with its source and confidence.
+     */
+    async restorationInputs(args) {
         if (args.target
             .caseKeyVersion !==
             args.keyVersion) {
@@ -317,6 +321,34 @@ export class LocalDocumentAuthoringService {
                     .tokenizedSha256) {
                 throw new Error("GENERATION_TOKENIZED_HASH_CHANGED");
             }
+            const tokenizedText = (await this.renderer
+                .validate(args.target
+                .artifactFormat, tokenized)).text;
+            const restorations = describeGenerationAliases(tokenizedText, aliases, vaults);
+            return {
+                validationContext,
+                replacements,
+                tokenized,
+                tokenizedText,
+                keyBindingVerified,
+                restorations
+            };
+        }
+        catch (error) {
+            tokenized.fill(0);
+            throw error;
+        }
+    }
+    /** Restored text with every restored value marked, for review before finalizing. */
+    async previewDeanonymization(args) {
+        const inputs = await this.restorationInputs(args);
+        inputs.tokenized.fill(0);
+        return renderRestorationPreview(inputs.tokenizedText, inputs.restorations);
+    }
+    async deanonymizeConsumed(args) {
+        const { validationContext, replacements, tokenized, restorations, keyBindingVerified } = await this.restorationInputs(args);
+        try {
+            applyRestorationOverrides(replacements, restorations, args.overrides);
             const finalPackage = await this.renderer
                 .deanonymize(args.target
                 .artifactFormat, tokenized, replacements);
@@ -409,7 +441,10 @@ export class LocalDocumentAuthoringService {
                     replacements: finalPackage
                         .replaced ?? 0,
                     deanonymizationBasis: "PRIVACY_VAULT_KEY",
-                    keyBindingVerified
+                    keyBindingVerified,
+                    restorations: restorations.map((item) => args.overrides?.[item.alias] !== undefined
+                        ? { ...item, text: replacements.get(item.alias), source: "manual", confidence: 1, status: "ok" }
+                        : item)
                 };
             }
             finally {

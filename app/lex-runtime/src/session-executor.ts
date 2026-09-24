@@ -1,3 +1,7 @@
+import {
+  restoreWithReport,
+  type Restoration
+} from "./privacy/restoration-report.js";
 import type {
   PersonMorphology
 } from "./privacy/person-morphology.js";
@@ -121,7 +125,6 @@ import type {
 } from "./ordered-case-workflow-state.js";
 import {
   LocalPolishPseudonymizer,
-  PII_TOKEN_WITH_CASE,
   PseudonymizationVault,
   type NamedEntityRecognizer
 } from "./privacy/pseudonymizer.js";
@@ -619,6 +622,8 @@ export type SessionExecutionResponse = {
   domainSkills?: string[];
   answer?: string;
   documentCitations?: PublicDocumentCitation[];
+  restorations?: Restoration[];
+  unresolvedTokens?: string[];
   documentCitationFreshness?: {
     result: "PASS";
     checked: number;
@@ -2438,6 +2443,11 @@ export class SafeSessionExecutor implements SessionExecutor {
         status: finding.status
       }));
 
+    // Every restored value is reported so the UI can mark it for review.
+    const restoredAnswer = restoreWithReport(
+      processedDocumentCitations.text,
+      chatPrivacyVault
+    );
     const response: SessionExecutionResponse = {
       sessionId: audit.sessionId,
       status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
@@ -2464,16 +2474,13 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? {
             answer:
-              processedDocumentCitations
-                .text.replace(
-                  PII_TOKEN_WITH_CASE,
-                  (token, kind: string, sequence: string, requestedCase?: string) => {
-                    const base = `[PII:${kind}:${sequence}]`;
-                    return chatPrivacyVault.hasToken(base)
-                      ? chatPrivacyVault.restore(base, requestedCase ?? null).text
-                      : token;
-                  }
-                ),
+              restoredAnswer.text,
+            ...(restoredAnswer.restorations.length > 0
+              ? { restorations: restoredAnswer.restorations }
+              : {}),
+            ...(restoredAnswer.unresolved.length > 0
+              ? { unresolvedTokens: restoredAnswer.unresolved }
+              : {}),
             documentCitations: processedDocumentCitations.citations,
             ...(reportBlueprint
               ? {

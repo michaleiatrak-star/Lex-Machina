@@ -66,6 +66,21 @@ describe("person entities in the privacy vault", () => {
     );
   });
 
+  it("protects every later mention of a known person, in any case", async () => {
+    const vault = new PseudonymizationVault();
+    await new LocalPolishPseudonymizer(vault, personRecognizer, fakeMorphology)
+      .pseudonymize("Powód: Jan Kowalski.");
+    const blind: NamedEntityRecognizer = { recognize: async () => [] };
+    const second = await new LocalPolishPseudonymizer(vault, blind, fakeMorphology)
+      .pseudonymize("Doręczono Janowi Kowalskiemu. Jan Kowalskiewicz to inna osoba.");
+    expect(second.text).toBe(
+      "Doręczono [PII:PERSON:0001]. Jan Kowalskiewicz to inna osoba."
+    );
+    const kept = await new LocalPolishPseudonymizer(vault, blind, fakeMorphology)
+      .pseudonymize("Jan Kowalski", [{ start: 0, end: 12, action: "KEEP" }]);
+    expect(kept.text).toBe("Jan Kowalski");
+  });
+
   it("keeps exact-surface identity when no morphology engine is available", async () => {
     const vault = new PseudonymizationVault();
     const result = await new LocalPolishPseudonymizer(vault, personRecognizer)

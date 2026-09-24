@@ -270,6 +270,7 @@ export async function startLocalServer(options) {
     const documentService = new LocalPrivateDocumentService(new CompleteDocumentIngestor(new PdfJsDocumentPageSource(), new LocalPaddleOcrEngine()), privacyNamedEntities, 24_000, new CompleteImageIngestor(new LocalPaddleImageOcrEngine()), privacyVaultStore, secureCaseDocumentStore, new LocalOfficeDocumentTextExtractor(), new LocalSpreadsheetTextExtractor(), personMorphology);
     const coreApp = createLexHttpApp({
         registry,
+        personMorphology,
         modelCatalog,
         credentialResolver: credentials,
         credentialManager: credentials,

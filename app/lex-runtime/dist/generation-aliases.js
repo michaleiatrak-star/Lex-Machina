@@ -57,3 +57,74 @@ export function resolveGenerationAliases(manifest, vaults) {
     }
     return result;
 }
+const DOCUMENT_ALIAS = /\[LMPII:D\d{2}:[A-Z_]+:\d{4}(?:\|[A-Z]{2,4})?\]/g;
+export function describeGenerationAliases(tokenizedText, manifest, vaults) {
+    const counts = new Map();
+    for (const match of tokenizedText.matchAll(DOCUMENT_ALIAS)) {
+        counts.set(match[0], (counts.get(match[0]) ?? 0) + 1);
+    }
+    return [...counts].map(([alias, occurrences]) => {
+        const [, base, requestedCase] = /^(\[LMPII:D\d{2}:[A-Z_]+:\d{4})(?:\|([A-Z]{2,4}))?\]$/.exec(alias);
+        const entry = manifest.entries.find((item) => item.alias === `${base}]`);
+        const vault = entry ? vaults.get(entry.documentId) : undefined;
+        if (!entry || !vault || !vault.hasToken(entry.sourceToken)) {
+            return {
+                alias,
+                kind: /:([A-Z_]+):\d{4}/.exec(alias)[1],
+                text: alias,
+                source: "unresolved",
+                confidence: 0,
+                status: "unresolved",
+                occurrences
+            };
+        }
+        const restored = vault.restore(entry.sourceToken, requestedCase ?? null);
+        const entity = vault.entity(entry.sourceToken);
+        return {
+            alias,
+            kind: entry.kind,
+            ...(requestedCase ? { case: requestedCase } : entity ? { case: "NOM" } : {}),
+            text: restored.text,
+            source: entity ? restored.source : "vault",
+            confidence: restored.confidence,
+            status: restored.status === "ok" && entity && entity.status !== "ok"
+                ? entity.status
+                : restored.status === "unknown_token"
+                    ? "unresolved"
+                    : restored.status,
+            ...(entity ? { canonical: entity.canonical, gender: entity.gender } : {}),
+            occurrences
+        };
+    });
+}
+export function renderRestorationPreview(tokenizedText, restorations) {
+    const byAlias = new Map(restorations.map((item) => [item.alias, item]));
+    const marks = [];
+    let text = "";
+    let cursor = 0;
+    for (const match of tokenizedText.matchAll(DOCUMENT_ALIAS)) {
+        text += tokenizedText.slice(cursor, match.index);
+        cursor = match.index + match[0].length;
+        const value = byAlias.get(match[0])?.text ?? match[0];
+        marks.push({ start: text.length, end: text.length + value.length, alias: match[0] });
+        text += value;
+    }
+    text += tokenizedText.slice(cursor);
+    return { text, restorations, marks };
+}
+const OVERRIDE_TEXT = /^[^\[\]\r\n]{1,300}$/u;
+/** User corrections replace restored values, only for aliases the document uses. */
+export function applyRestorationOverrides(replacements, restorations, overrides) {
+    if (!overrides)
+        return;
+    const used = new Set(restorations.map((item) => item.alias));
+    for (const [alias, value] of Object.entries(overrides)) {
+        if (!used.has(alias) ||
+            !replacements.has(alias) ||
+            typeof value !== "string" ||
+            !OVERRIDE_TEXT.test(value.trim())) {
+            throw new Error("DEANONYMIZATION_OVERRIDE_INVALID");
+        }
+        replacements.set(alias, value.trim());
+    }
+}

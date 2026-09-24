@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +25,61 @@ const WORKER_CASE = {
     loc: "LOC",
     voc: "VOC"
 };
+const CASE_TO_WORKER = {
+    NOM: "nom",
+    GEN: "gen",
+    DAT: "dat",
+    ACC: "acc",
+    INS: "inst",
+    LOC: "loc",
+    VOC: "voc"
+};
+const NAME_TEXT = /^[\p{L}\p{M}'’. -]{1,200}$/u;
+/**
+ * Word forms the user confirmed ("Müller" -> DAT "Müllerowi"). Stored per
+ * word, not per person or case, so the file is a spelling dictionary rather
+ * than a list of clients.
+ */
+export function defaultNameExceptionsPath(env = process.env) {
+    const override = env.LEX_NAME_EXCEPTIONS?.trim();
+    if (override)
+        return path.resolve(override);
+    const base = env.LOCALAPPDATA?.trim();
+    return base
+        ? path.resolve(base, "LexMachina", "privacy", "name-forms.json")
+        : path.resolve(os.homedir(), ".lex-machina", "privacy", "name-forms.json");
+}
+export async function saveNameFormCorrection(file, correction) {
+    if (!NAME_TEXT.test(correction.canonical) ||
+        !NAME_TEXT.test(correction.text) ||
+        !PERSON_CASES.includes(correction.case) ||
+        (correction.gender !== "m1" && correction.gender !== "f")) {
+        throw new Error("NAME_FORM_INVALID");
+    }
+    const words = correction.canonical.trim().split(/[\s-]+/u);
+    const forms = correction.text.trim().split(/[\s-]+/u);
+    if (words.length !== forms.length) {
+        throw new Error("NAME_FORM_WORDS_MISMATCH");
+    }
+    let entries = {};
+    try {
+        entries = JSON.parse(await readFile(file, "utf8"));
+    }
+    catch (error) {
+        if (error.code !== "ENOENT")
+            throw error;
+    }
+    words.forEach((word, index) => {
+        const byGender = (entries[word] ??= {});
+        const paradigm = (byGender[correction.gender] ??= {});
+        paradigm.nom ??= word;
+        paradigm[CASE_TO_WORKER[correction.case]] = forms[index];
+    });
+    await mkdir(path.dirname(file), { recursive: true, mode: 0o700 });
+    const temporary = `${file}.${process.pid}.tmp`;
+    await writeFile(temporary, JSON.stringify(entries, null, 1), { encoding: "utf8", mode: 0o600 });
+    await rename(temporary, file);
+}
 function defaultWorkerPath() {
     const here = path.dirname(fileURLToPath(import.meta.url));
     return path.resolve(here, "../../../privacy/polish_person_morphology.py");
@@ -67,6 +122,7 @@ export class LocalPersonMorphology {
     timeoutMs;
     python;
     workerPath;
+    exceptionsPath;
     cache = new Map();
     constructor(options = {}, timeoutMs = options.timeoutMs ?? 120_000) {
         this.timeoutMs = timeoutMs;
@@ -78,6 +134,13 @@ export class LocalPersonMorphology {
             options.workerPath ??
                 process.env.LEX_PERSON_MORPHOLOGY_WORKER ??
                 defaultWorkerPath();
+        this.exceptionsPath =
+            options.exceptionsPath ??
+                defaultNameExceptionsPath();
+    }
+    async saveCorrection(correction) {
+        await saveNameFormCorrection(this.exceptionsPath, correction);
+        this.cache.clear();
     }
     async analyze(surfaces) {
         const missing = [...new Set(surfaces)].filter((surface) => !this.cache.has(surface));
@@ -96,7 +159,11 @@ export class LocalPersonMorphology {
         try {
             await writeFile(input, JSON.stringify({ persons: surfaces.map((surface) => ({ surface })) }), "utf8");
             await new Promise((resolve, reject) => {
-                const child = spawn(this.python, ["-X", "utf8", this.workerPath, "--input", input, "--output", output], { windowsHide: true, stdio: ["ignore", "ignore", "pipe"] });
+                const child = spawn(this.python, ["-X", "utf8", this.workerPath, "--input", input, "--output", output], {
+                    windowsHide: true,
+                    stdio: ["ignore", "ignore", "pipe"],
+                    env: { ...process.env, LEX_NAME_EXCEPTIONS: this.exceptionsPath }
+                });
                 let stderr = "";
                 child.stderr?.on("data", (chunk) => {
                     stderr = (stderr + String(chunk)).slice(-4000);

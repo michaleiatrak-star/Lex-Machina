@@ -529,6 +529,27 @@ export class PseudonymizationVault {
     };
   }
 
+  /**
+   * Every known written form of every person in this vault: the surfaces
+   * found so far and, with the morphology engine, all seven cases.
+   */
+  knownPersonForms(): Array<{ text: string; entity?: PersonEntity }> {
+    const forms = new Map<string, PersonEntity | undefined>();
+    for (const [token, value] of this.tokenToValue) {
+      if (this.tokenMetadata.get(token)?.kind !== "PERSON") continue;
+      const entity = this.tokenEntities.get(token);
+      forms.set(value, entity);
+      if (entity) {
+        for (const form of Object.values(entity.forms)) {
+          if (!forms.has(form.text)) forms.set(form.text, entity);
+        }
+      }
+    }
+    return [...forms]
+      .filter(([text]) => text.trim().length >= 4)
+      .map(([text, entity]) => (entity ? { text, entity } : { text }));
+  }
+
   hasToken(
     token: string
   ): boolean {
@@ -699,6 +720,27 @@ export class LocalPolishPseudonymizer {
       )
     ];
 
+    // A person found once is protected everywhere: mentions the recognizer
+    // missed (another page, another case form) are matched by known forms.
+    const propagatedEntities =
+      new Map<string, PersonEntity>();
+    for (const form of this.vault.knownPersonForms()) {
+      const escaped = form.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      for (const match of text.matchAll(
+        new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, "gu")
+      )) {
+        autoSpans.push({
+          start: match.index!,
+          end: match.index! + match[0].length,
+          kind: "PERSON",
+          value: match[0],
+          confidence: 1,
+          source: "AUTO"
+        });
+        if (form.entity) propagatedEntities.set(match[0], form.entity);
+      }
+    }
+
     if (this.namedEntities) {
       const named =
         await this.namedEntities.recognize(text);
@@ -738,13 +780,14 @@ export class LocalPolishPseudonymizer {
     // Canonical identity and paradigm of every person mention. Without the
     // morphology engine tokens fall back to exact-surface identity.
     const personEntities =
-      new Map<string, PersonEntity>();
+      new Map<string, PersonEntity>(propagatedEntities);
     if (this.morphology) {
       const persons = [
         ...new Set(
           findings
             .filter((finding) => finding.kind === "PERSON")
             .map((finding) => finding.value)
+            .filter((value) => !personEntities.has(value))
         )
       ];
       if (persons.length > 0) {

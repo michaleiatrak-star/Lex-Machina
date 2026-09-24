@@ -1132,6 +1132,11 @@ export function registerWorkspaceRoutes(app, dependencies) {
                     ? {
                         documentCitations: raw.documentCitations
                     }
+                    : {}),
+                ...(Array.isArray(raw.restorations)
+                    ? {
+                        restorations: raw.restorations
+                    }
                     : {})
             };
             const saved = await dependencies.caseAccessService.withCaseDataKey(actor, caseId, "WRITE", (caseDataKey) => dependencies.workspace.appendThreadMessage({

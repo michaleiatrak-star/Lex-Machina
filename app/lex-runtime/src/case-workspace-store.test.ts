@@ -82,6 +82,47 @@ describe("encrypted case workspace", () => {
       .toBe("Poufny stan faktyczny");
   });
 
+  it("keeps restoration marks and corrects a message in place", async () => {
+    const { caseId, key, store } = fixture();
+    const message = (id: string, content: string) => ({
+      messageId: "message_" + id.repeat(32),
+      role: "assistant" as const,
+      content,
+      createdAt: new Date().toISOString()
+    });
+    await store.appendThreadMessage({
+      caseId, caseDataKey: key, keyVersion: 1,
+      message: {
+        ...message("c", "Doręczono Pierre'owi Dubois."),
+        restorations: [{
+          start: 10, end: 27, token: "[PII:PERSON:0001]", kind: "PERSON", case: "DAT",
+          source: "sgjp+rule", confidence: 0.75, status: "needs_review", canonical: "Pierre Dubois", gender: "m1"
+        }]
+      }
+    });
+    await store.appendThreadMessage({ caseId, caseDataKey: key, keyVersion: 1, message: message("d", "Następna.") });
+    await store.appendThreadMessage({
+      caseId, caseDataKey: key, keyVersion: 1,
+      message: {
+        ...message("c", "Doręczono Pierre’owi Dubois."),
+        restorations: [{
+          start: 10, end: 27, token: "[PII:PERSON:0001]", kind: "PERSON", case: "DAT",
+          source: "manual", confidence: 1, status: "ok"
+        }]
+      }
+    });
+    const thread = await store.loadThread({ caseId, caseDataKey: key, keyVersion: 1 });
+    expect(thread.map((item) => item.content)).toEqual(["Doręczono Pierre’owi Dubois.", "Następna."]);
+    expect(thread[0]!.restorations).toEqual([expect.objectContaining({ source: "manual", end: 27 })]);
+    await expect(store.appendThreadMessage({
+      caseId, caseDataKey: key, keyVersion: 1,
+      message: {
+        ...message("e", "krótki"),
+        restorations: [{ start: 0, end: 99, token: "[PII:PERSON:0001]", kind: "PERSON", source: "sgjp", confidence: 1, status: "ok" }]
+      }
+    })).rejects.toThrow("WORKSPACE_RESTORATION_INVALID");
+  });
+
   it("supports several folders and item moves but rejects deleting a non-empty folder", async () => {
     const { caseId, key, store } = fixture();
     const folder = await store.createFolder({

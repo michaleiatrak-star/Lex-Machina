@@ -44,6 +44,8 @@ import {
   provisionLocalModel,
   repairLocalModel,
   reauthorizeDeanonymization,
+  previewDeanonymization,
+  saveNameForm,
   renameCase,
   setClaudeOAuthToken,
   setModelRoutingPreferences,
@@ -61,6 +63,7 @@ import {
   type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse,
+  type DeanonymizationPreview,
   type StoredUploadResponse,
   type LegalDocumentFormat,
   type LocalModelsResponse
@@ -115,6 +118,17 @@ import {
 import type {
   WorkspaceDocumentCitation
 } from "./workspace-client.js";
+import { RestorationReview } from "./RestorationReview.js";
+import {
+  DeanonymizationReview,
+  applyAliasCorrection
+} from "./DeanonymizationReview.js";
+import {
+  applyRestorationCorrection,
+  shiftMarks,
+  unresolvedPlaceholders,
+  validMarks
+} from "./restoration-review.js";
 import "./chat.css";
 import "./workspace.css";
 
@@ -717,6 +731,15 @@ function executionMessage(
           }
         : {}),
       documentCitations: execution.documentCitations,
+      ...(execution.restorations?.length
+        ? {
+            restorations:
+              shiftMarks(
+                execution.restorations,
+                verificationWarning.length
+              )
+          }
+        : {}),
       meta:
         routingMeta(
           execution,
@@ -860,6 +883,16 @@ export default function MatterChatApp({
     useState("");
   const [finalDocumentBusy, setFinalDocumentBusy] =
     useState(false);
+  const [finalReview, setFinalReview] =
+    useState<{
+      grantId: string;
+      preview: DeanonymizationPreview;
+      overrides: Record<string, string>;
+    } | null>(null);
+  // A review belongs to one generated document.
+  useEffect(() => {
+    setFinalReview(null);
+  }, [pendingFinalDocument?.artifactId]);
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -971,6 +1004,7 @@ export default function MatterChatApp({
   const {
     messages,
     setMessages,
+    updateMessage,
     loading: threadLoading,
     error: threadError
   } = useCaseThread(caseId, WELCOME);
@@ -2846,81 +2880,89 @@ export default function MatterChatApp({
     }
   }
 
-  async function finalizePendingDocument(): Promise<void> {
+  // Step 1: password -> grant -> restored text with every value marked.
+  async function reviewPendingDocument(): Promise<void> {
     if (
       !pendingFinalDocument ||
       finalDocumentBusy ||
-      !finalDocumentPassword
-        .trim()
+      !finalDocumentPassword.trim()
     ) {
       return;
     }
-
     setFinalDocumentBusy(true);
     setExecutionError("");
     try {
-      const intent =
-        await createDeanonymizationIntent(
-          pendingFinalDocument
-            .caseId,
-          pendingFinalDocument
-            .artifactId
-        );
-      const authorized =
-        await reauthorizeDeanonymization(
-          intent.intent
-            .intentId,
-          finalDocumentPassword
-        );
-      const final =
-        await finalizeDeanonymization(
-          authorized.grant
-            .grantId,
-          "LexMachina-final." +
-            pendingFinalDocument
-              .format
-        );
-      if (
-        !final.downloadTicket
-      ) {
-        throw new Error(
-          "SENSITIVE_DOWNLOAD_TICKET_MISSING"
-        );
+      const intent = await createDeanonymizationIntent(
+        pendingFinalDocument.caseId,
+        pendingFinalDocument.artifactId
+      );
+      const authorized = await reauthorizeDeanonymization(
+        intent.intent.intentId,
+        finalDocumentPassword
+      );
+      setFinalDocumentPassword("");
+      const preview = await previewDeanonymization(
+        authorized.grant.grantId
+      );
+      setFinalReview({
+        grantId: authorized.grant.grantId,
+        preview,
+        overrides: {}
+      });
+    } catch (error) {
+      setExecutionError(
+        error instanceof Error
+          ? "Nie udało się przygotować podglądu przywróconych danych: " + error.message
+          : "Nie udało się przygotować podglądu przywróconych danych."
+      );
+    } finally {
+      setFinalDocumentBusy(false);
+    }
+  }
+
+  // Step 2: the reviewed (and corrected) values go into the one-time final file.
+  async function finalizePendingDocument(): Promise<void> {
+    if (!pendingFinalDocument || !finalReview || finalDocumentBusy) {
+      return;
+    }
+    setFinalDocumentBusy(true);
+    setExecutionError("");
+    try {
+      const final = await finalizeDeanonymization(
+        finalReview.grantId,
+        "LexMachina-final." + pendingFinalDocument.format,
+        finalReview.overrides
+      );
+      if (!final.downloadTicket) {
+        throw new Error("SENSITIVE_DOWNLOAD_TICKET_MISSING");
       }
-      const blob =
-        await downloadSensitiveArtifact(
-          final.downloadTicket
-            .ticketId
-        );
-      downloadBlob(
-        blob,
-        final.artifact
-          .filename
+      const blob = await downloadSensitiveArtifact(
+        final.downloadTicket.ticketId
       );
-      setPendingFinalDocument(
-        null
-      );
-      setFinalDocumentPassword(
-        ""
-      );
+      downloadBlob(blob, final.artifact.filename);
+      const corrected = Object.keys(finalReview.overrides).length;
+      setPendingFinalDocument(null);
+      setFinalReview(null);
       setGeneratedDocumentMessage(
-        "Finalny dokument z przywróconymi danymi został utworzony i pobrany."
+        "Finalny dokument z przywróconymi danymi został utworzony i pobrany." +
+          (corrected > 0 ? ` Ręczne poprawki: ${corrected}.` : "")
       );
-      setWorkspaceRefresh(
-        (value) =>
-          value + 1
-      );
+      setWorkspaceRefresh((value) => value + 1);
     } catch (error) {
       setExecutionError(
         error instanceof Error
           ? "Nie udało się przywrócić danych do finalnego dokumentu: " +
-            error.message
+            error.message +
+            (/REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)
+              ? ". Podaj hasło ponownie."
+              : "")
           : "Nie udało się przywrócić danych do finalnego dokumentu."
       );
+      if (error instanceof Error && /REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)) {
+        setFinalReview(null);
+      }
     } finally {
-      setFinalDocumentBusy(
-        false
-      );
+      setFinalDocumentBusy(false);
     }
   }
 
@@ -3887,6 +3929,40 @@ export default function MatterChatApp({
                     citations={message.documentCitations}
                     onOpenUrl={openExternalUrl}
                   />
+                  {message.role === "assistant" &&
+                  (message.restorations?.length ||
+                    unresolvedPlaceholders(message.content).length) ? (
+                    <RestorationReview
+                      key={`${message.id}-${message.content.length}`}
+                      content={message.content}
+                      marks={validMarks(message.content, message.restorations)}
+                      unresolved={unresolvedPlaceholders(message.content)}
+                      readOnly={!canWriteCase(selectedCase)}
+                      onCorrect={async (index, text, remember) => {
+                        const marks = validMarks(message.content, message.restorations);
+                        const mark = marks[index];
+                        if (remember && mark?.canonical && mark.gender && mark.case) {
+                          await saveNameForm({
+                            canonical: mark.canonical,
+                            gender: mark.gender,
+                            case: mark.case,
+                            text: text.trim()
+                          });
+                        }
+                        const corrected = applyRestorationCorrection(
+                          message.content,
+                          marks,
+                          index,
+                          text
+                        );
+                        await updateMessage({
+                          ...message,
+                          content: corrected.content,
+                          restorations: corrected.marks
+                        });
+                      }}
+                    />
+                  ) : null}
                   {visibleMessageMeta(message.meta) ? (
                     <small className="chat-message-meta">
                       {visibleMessageMeta(message.meta)}
@@ -4256,6 +4332,46 @@ export default function MatterChatApp({
                       Każdy dokument źródłowy ma własny vault. Alias D01/D02/… jest odwracany wyłącznie przez deanonimizator przypisany do tego dokumentu.
                     </small>
                   </div>
+                  {finalReview ? (
+                    <DeanonymizationReview
+                      preview={finalReview.preview}
+                      busy={finalDocumentBusy}
+                      onCorrect={async (restoration, text, remember) => {
+                        if (
+                          remember &&
+                          restoration.canonical &&
+                          restoration.gender &&
+                          restoration.case
+                        ) {
+                          await saveNameForm({
+                            canonical: restoration.canonical,
+                            gender: restoration.gender,
+                            case: restoration.case,
+                            text: text.trim()
+                          });
+                        }
+                        setFinalReview((current) =>
+                          current
+                            ? {
+                                ...current,
+                                preview: applyAliasCorrection(
+                                  current.preview,
+                                  restoration.alias,
+                                  text
+                                ),
+                                overrides: {
+                                  ...current.overrides,
+                                  [restoration.alias]: text.trim()
+                                }
+                              }
+                            : current
+                        );
+                      }}
+                      onConfirm={() => void finalizePendingDocument()}
+                      onCancel={() => setFinalReview(null)}
+                    />
+                  ) : (
+                  <>
                   <input
                     type="password"
                     autoComplete="current-password"
@@ -4279,12 +4395,12 @@ export default function MatterChatApp({
                           .trim()
                       }
                       onClick={() =>
-                        void finalizePendingDocument()
+                        void reviewPendingDocument()
                       }
                     >
                       {finalDocumentBusy
                         ? "Przywracam dane…"
-                        : "Przywróć dane i pobierz finalny plik"}
+                        : "Przywróć dane i sprawdź przed zapisem"}
                     </button>
                     <button
                       type="button"
@@ -4314,6 +4430,8 @@ export default function MatterChatApp({
                       Pobierz wersję tokenizowaną
                     </button>
                   </div>
+                  </>
+                  )}
                 </div>
               ) : null}
               {generatedDocumentMessage ? (

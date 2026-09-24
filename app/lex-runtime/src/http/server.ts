@@ -590,6 +590,7 @@ export async function startLocalServer(options?: {
 
   const coreApp = createLexHttpApp({
     registry,
+    personMorphology,
     modelCatalog,
     credentialResolver: credentials,
     credentialManager: credentials,
