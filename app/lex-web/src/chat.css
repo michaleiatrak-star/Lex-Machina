@@ -18,6 +18,17 @@
   color: #f6f5ed;
 }
 
+/* Sections keep their size; on a short (or scaled) screen the sidebar
+   scrolls as a whole instead of squeezing the case list. */
+.chat-sidebar > * {
+  flex-shrink: 0;
+}
+
+.chat-sidebar {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 .chat-brand {
   display: flex;
   align-items: center;
@@ -91,8 +102,11 @@
 
 .matter-thread-items {
   display: grid;
+  align-content: start;
   gap: 6px;
-  min-height: 0;
+  /* At least one whole case: with min-height 0 the sidebar squeezed a single
+     case into a box with a scroll bar on shorter (scaled) Windows screens. */
+  min-height: 58px;
   max-height: 28vh;
   overflow-y: auto;
   overscroll-behavior: contain;

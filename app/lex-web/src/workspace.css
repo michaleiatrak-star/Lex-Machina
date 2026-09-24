@@ -115,7 +115,7 @@
 
 .workspace-manager-grid {
   display: grid;
-  grid-template-columns: minmax(190px, 260px) minmax(0, 1fr);
+  grid-template-columns: minmax(170px, 220px) minmax(0, 1fr);
   gap: 16px;
   margin-top: 18px;
 }
@@ -264,9 +264,11 @@
   font-size: 10px;
 }
 
+/* File row: name and status on top, one action bar below it. Two columns
+   let the buttons squeeze the name into a sliver on narrower windows. */
 .workspace-file-actions-list li {
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
 }
 
 .workspace-file-actions-list li > div:first-child {
@@ -307,9 +309,47 @@
 .workspace-item-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 6px;
   flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid #edf0ea;
+}
+
+/* Folder and delete sit at the right end of the bar, on the same line. */
+.workspace-item-actions .workspace-move {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  color: #6d7a72;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.workspace-item-actions .workspace-move select {
+  width: auto;
+  max-width: 170px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+}
+
+.workspace-item-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.workspace-file-actions-list li strong {
+  font-size: 13px;
+}
+
+.workspace-processing-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
 }
 
 .workspace-item-actions button,
@@ -944,4 +984,41 @@
   border-radius: 8px;
   background: #fbf6e7;
   color: #5c4a1c;
+}
+
+
+/* Heading: text on top, one toolbar row (search, filters, add, refresh) below. */
+.workspace-manager-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.workspace-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 10px;
+  min-width: 0;
+}
+
+.workspace-header-actions .workspace-search {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.workspace-header-actions .workspace-filter {
+  flex: 0 0 150px;
+  min-width: 0;
+}
+
+.workspace-header-actions > button,
+.workspace-header-actions .workspace-file-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 13px;
+  white-space: nowrap;
 }

@@ -143,6 +143,14 @@ function canRunPrivacyPipeline(
   );
 }
 
+/** Short file type for the list ("DOCX", "PDF"); the full media type is in the tooltip. */
+function fileTypeLabel(item: { filename: string; mediaType: string }): string {
+  const extension = /\.([a-z0-9]{1,6})$/i.exec(item.filename)?.[1];
+  if (extension) return extension.toUpperCase();
+  const subtype = item.mediaType.split(";")[0]!.split("/")[1] ?? "";
+  return subtype.length <= 8 ? subtype.toUpperCase() : "PLIK";
+}
+
 function bytesLabel(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -741,15 +749,13 @@ export function WorkspaceManager({
 
   return (
     <article className="chat-card workspace-manager">
-      <div className="chat-card-heading">
+      <div className="chat-card-heading workspace-manager-heading">
         <div>
           <p className="eyebrow">Struktura katalogów</p>
           <h2>{title}</h2>
           <p>
-            Foldery są logiczną, szyfrowaną strukturą workspace. Dotychczasowy
-            „Główny katalog” jest wyświetlany pod nazwą sprawy:
-            {" "}<strong>{rootFolderName}</strong>. Techniczny identyfikator caseId
-            pozostaje używany wyłącznie wewnętrznie do kluczy i integralności magazynu.
+            Foldery porządkują pliki sprawy; folder główny nosi nazwę sprawy
+            ({rootFolderName}). Wszystko jest przechowywane w zaszyfrowanym magazynie sprawy.
           </p>
         </div>
         <div className="workspace-header-actions">
@@ -965,9 +971,9 @@ export function WorkspaceManager({
               {visibleItems.map((item) => (
                 <li key={item.itemId}>
                   <div>
-                    <strong>{item.filename}</strong>
-                    <span>
-                      {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
+                    <strong title={item.filename}>{item.filename}</strong>
+                    <span title={item.mediaType}>
+                      {item.kind === "TEMPLATE" ? "Wzór" : "Dokument"} · {fileTypeLabel(item)} · {bytesLabel(item.bytes)}
                     </span>
                     {documentSearch.trim() ? (
                       <>
@@ -1004,11 +1010,13 @@ export function WorkspaceManager({
                             </span>
                           )
                         ) : null}
-                        {processingFor(item)
-                          ? processingFor(item)!.ocrPages > 0
-                            ? `OCR ✓ · anonimizacja ✓ · ${processingFor(item)!.ocrPages}/${processingFor(item)!.totalPages} stron OCR · vault per dokument`
-                            : `Tekst cyfrowy ✓ · anonimizacja ✓ · OCR niewymagany · vault per dokument`
-                          : "Nieprzetworzony · OCR/anonimizacja oczekuje"}
+                        <span>
+                          {processingFor(item)
+                            ? processingFor(item)!.ocrPages > 0
+                              ? `OCR: ${processingFor(item)!.ocrPages} z ${processingFor(item)!.totalPages} stron`
+                              : `Tekst cyfrowy · ${processingFor(item)!.totalPages} ${processingFor(item)!.totalPages === 1 ? "strona" : "stron"}`
+                            : "Nieprzetworzony - wybierz „OCR + anonimizuj” albo „Tylko OCR”"}
+                        </span>
                       </small>
                     ) : null}
                     {progressByItem[item.itemId] ? (
@@ -1035,7 +1043,7 @@ export function WorkspaceManager({
                         ? `Podgląd s. ${knowledgeHitFor(item)!.pageStart}`
                         : "Podgląd"}
                     </button>
-                    {processingFor(item) ? (
+                    {processingFor(item) && processingFor(item)!.anonymized !== false ? (
                       <>
                         <button
                           type="button"
@@ -1076,23 +1084,7 @@ export function WorkspaceManager({
                         Otwórz w systemie
                       </button>
                     ) : null}
-                    {canWrite ? (
-                      <select
-                        value={workspace?.itemLocations[item.itemId] ?? ""}
-                        disabled={busy}
-                        title="Przenieś do folderu"
-                        onChange={(event) => void run(async () => {
-                          await moveWorkspaceItem(caseId, item.itemId, event.target.value || null);
-                        })}
-                      >
-                        <option value="">{rootFolderName}</option>
-                        {folders.map((folder) => (
-                          <option key={folder.folderId} value={folder.folderId}>
-                            {folderPath(folder, folders)}
-                          </option>
-                        ))}
-                      </select>
-                    ) : null}
+
                     {canWrite && canRunPrivacyPipeline(item) ? (
                       <button
                         type="button"
@@ -1104,7 +1096,7 @@ export function WorkspaceManager({
                           )
                         }
                       >
-                        OCR + anonimizuj automatycznie
+                        OCR + anonimizuj
                       </button>
                     ) : null}
                     {canWrite && canRunPrivacyPipeline(item) ? (
@@ -1122,10 +1114,29 @@ export function WorkspaceManager({
                           }
                         }}
                       >
-                        Tylko OCR (bez anonimizacji)
+                        Tylko OCR
                       </button>
                     ) : null}
                     {canWrite ? (
+                      <div className="workspace-item-end">
+                      <label className="workspace-move" title="Przenieś do folderu">
+                        Folder
+                        <select
+                          value={workspace?.itemLocations[item.itemId] ?? ""}
+                          disabled={busy}
+                          aria-label={`Folder pliku ${item.filename}`}
+                          onChange={(event) => void run(async () => {
+                            await moveWorkspaceItem(caseId, item.itemId, event.target.value || null);
+                          })}
+                        >
+                          <option value="">Główny ({rootFolderName})</option>
+                          {folders.map((folder) => (
+                            <option key={folder.folderId} value={folder.folderId}>
+                              {folderPath(folder, folders)}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
                       <button
                         type="button"
                         className="workspace-delete"
@@ -1138,6 +1149,7 @@ export function WorkspaceManager({
                       >
                         Usuń
                       </button>
+                      </div>
                     ) : null}
                   </div>
                   {fileDeanonymize?.itemId === item.itemId ? (
