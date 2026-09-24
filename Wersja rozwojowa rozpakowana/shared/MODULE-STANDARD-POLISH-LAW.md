@@ -17,7 +17,7 @@ Nie wolno cytować ani parafrazować aktualnego brzmienia przepisu z pamięci mo
 4. `shared/TEMPORAL-LAW-CHECK.md`,
 5. `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`.
 
-Jeżeli nie ma dostępu do ISAP albo metryka nie została potwierdzona, oznacz element jako `WYMAGA WERYFIKACJI ISAP`.
+Jeżeli nie ma dostępu do ISAP albo metryka nie została potwierdzona, oznacz element jako `WYMAGA WERYFIKACJI RZĄD 1`.
 
 ## Minimalna struktura modułu
 Każdy moduł prawa polskiego musi zawierać albo bezpośrednio, albo przez import tego standardu:

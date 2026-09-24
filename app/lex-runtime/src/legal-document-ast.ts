@@ -1,3 +1,8 @@
+import {
+  PERSON_CASES,
+  type PersonCase
+} from "./privacy/person-morphology.js";
+
 export type LegalDocumentType =
   | "pleading"
   | "contract"
@@ -19,6 +24,8 @@ export type LegalInlineNode =
   | {
       type: "pii_ref";
       alias: string;
+      // Person references: grammatical case of this occurrence.
+      case?: PersonCase;
     }
   | {
       type: "xref";
@@ -194,9 +201,22 @@ function parseInline(
       );
     }
     used.add(alias);
+    if (
+      record.case !== undefined &&
+      !(PERSON_CASES as readonly unknown[]).includes(
+        record.case
+      )
+    ) {
+      throw new Error(
+        "AST_PII_CASE_INVALID"
+      );
+    }
     return {
       type: "pii_ref",
-      alias
+      alias,
+      ...(record.case !== undefined
+        ? { case: record.case as PersonCase }
+        : {})
     };
   }
   if (
@@ -675,7 +695,9 @@ export function legalDocumentPlainText(
           ? node.text
           : node.type ===
               "pii_ref"
-            ? node.alias
+            ? node.case
+              ? node.alias.slice(0, -1) + "|" + node.case + "]"
+              : node.alias
             : node.label
       )
       .join("");

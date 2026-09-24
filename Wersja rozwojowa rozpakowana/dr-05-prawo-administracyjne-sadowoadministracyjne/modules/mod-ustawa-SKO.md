@@ -66,7 +66,7 @@ Skarga na decyzję SKO: 30 dni od doręczenia decyzji SKO (art. 53 §1 PPSA)
 ```
 SKO NIE może orzec na niekorzyść strony odwołującej się
   WYJĄTEK: rażące naruszenie prawa LUB interes społeczny wymaga pogorszenia
-  ⚠️ Weryfikuj aktualne brzmienie art. 139 KPA w ISAP.
+  ⚠️ Weryfikuj aktualne brzmienie art. 139 KPA w ELI (RZĄD 1).
 ```
 
 ### Rodzaje rozstrzygnięć SKO
@@ -119,7 +119,7 @@ Prezes SKO: nadzór organizacyjny; etatowy; powoływany przez Prezesa RM
 Ustawa o SKO: Dz.U. 2018 poz. 570 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   Nowszy t.j. NIE ogłoszony — Dz.U. 2023 poz. 825 jest aktualnym t.j.
-  → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000825
+  → Weryfikuj zmiany po t.j. w ELI (RZĄD 1): isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000825
 ```
 
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000825

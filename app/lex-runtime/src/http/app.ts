@@ -1,3 +1,7 @@
+import type {
+  NameFormCorrection,
+  PersonMorphology
+} from "../privacy/person-morphology.js";
 import { createHash } from "node:crypto";
 import express, {
   type Express,
@@ -301,6 +305,13 @@ const PRIVACY_KINDS = new Set([
   "PHONE",
   "PERSON",
   "ADDRESS",
+  "ID_CARD",
+  "PASSPORT",
+  "KRS",
+  "LAND_REGISTRY",
+  "BIRTH_DATE",
+  "VEHICLE_PLATE",
+  "PAYMENT_CARD",
   "CUSTOM"
 ] as const);
 
@@ -401,6 +412,8 @@ function loopbackOriginGuard(
 
 export type LexHttpAppOptions = {
   registry: LexSkillRegistry;
+  // Receives word forms the user corrected in a restored answer or document.
+  personMorphology?: Pick<PersonMorphology, "saveCorrection">;
   modelCatalog:
     Pick<DynamicModelCatalog, "list"> &
     Partial<
@@ -504,7 +517,13 @@ export type LexHttpAppOptions = {
     | "createTokenized"
     | "createReady"
     | "deanonymizeConsumed"
-  >;
+  > &
+    Partial<
+      Pick<
+        LocalDocumentAuthoringService,
+        "previewDeanonymization"
+      >
+    >;
   documentAstGenerator?: Pick<
     LegalDocumentAstGenerator,
     "generate"
@@ -518,7 +537,13 @@ export type LexHttpAppOptions = {
     | "createIntent"
     | "authorizeIntent"
     | "consumeGrant"
-  >;
+  > &
+    Partial<
+      Pick<
+        DeanonymizationReauthorizationManager,
+        "previewGrant"
+      >
+    >;
   sensitiveDownloadTickets?: Pick<
     SensitiveDownloadTicketManager,
     | "issue"
@@ -822,6 +847,15 @@ function sendCaseAccessError(
   });
   return true;
 }
+
+const EXECUTION_ID_PATTERN =
+  /^[A-Za-z0-9-]{16,64}$/;
+const EXECUTION_DRAFT_TTL_MS =
+  15 * 60_000;
+const EXECUTION_DRAFT_MAX_ENTRIES = 64;
+const EXECUTION_DRAFT_MAX_CHARS = 200_000;
+// While a request is still running, refresh the idle deadline this often.
+const IN_FLIGHT_ACTIVITY_INTERVAL_MS = 60_000;
 
 function responseAuthContext(
   res: Response
@@ -1211,12 +1245,13 @@ function restoreSessionDocumentAliases(
     text: string
   ): string =>
     text.replace(
-      /\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})\]/g,
+      /\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g,
       (
         token,
         documentNumber,
         kind,
-        sequence
+        sequence,
+        requestedCase?: string
       ) => {
         const index =
           Number(
@@ -1227,8 +1262,11 @@ function restoreSessionDocumentAliases(
         if (!documentId) {
           return token;
         }
+        // The case a model asked for travels with the token to the local vault.
         const sourceToken =
-          `[PII:${kind}:${sequence}]`;
+          requestedCase
+            ? `[PII:${kind}:${sequence}|${requestedCase}]`
+            : `[PII:${kind}:${sequence}]`;
         try {
           return documentService
             .deanonymize!(
@@ -1418,6 +1456,207 @@ async function refreshDocumentCitations(args: {
 export function createLexHttpApp(options: LexHttpAppOptions): Express {
   const app = express();
   const routing = new RoutingCatalog(options.registry);
+
+  // Resolves primarySkill "AUTO" for a session request. Returns false when an
+  // error response has already been sent.
+  async function resolveAutoPrimarySkill(
+    request: SessionExecutionRequest,
+    res: Response,
+    attachmentCount: number,
+    {
+      allowModelSelection,
+      allowConversational
+    }: {
+      allowModelSelection: boolean;
+      allowConversational: boolean;
+    }
+  ): Promise<boolean> {
+      // AUTO with an account or API model: the model picks the skills itself
+      // (router-v3 first, enforced by the corpus tools) instead of a separate
+      // routing pass. Local models keep the compact routing pass.
+      const autoEnvelope =
+        request.primarySkill === "AUTO"
+          ? parseSkillSelectionEnvelope(
+              request.query
+            )
+          : null;
+      const modelSelectsSkills =
+        allowModelSelection &&
+        autoEnvelope !== null &&
+        autoEnvelope.automatic &&
+        autoEnvelope.manualSkills.length === 0 &&
+        autoEnvelope.workflowExecutionSkill === null &&
+        !request.model.startsWith("local/");
+      if (modelSelectsSkills) {
+        const placeholder =
+          [...options.registry.skills.keys()]
+            .filter((name) =>
+              name.startsWith("dr-") &&
+              (
+                !autoEnvelope.domainRestrictionActive ||
+                autoEnvelope.domainAllowList.includes(name)
+              )
+            )
+            .sort()[0];
+        if (!placeholder) {
+          res.status(422).json({
+            error:
+              "AUTO_ROUTING_FAILED",
+            reason:
+              "AUTO_ROUTING_NO_DOMAIN_CANDIDATES"
+          });
+          return false;
+        }
+        request.primarySkill =
+          placeholder;
+        request.modelSelectsSkills =
+          true;
+      }
+
+      if (
+        request.primarySkill ===
+          "AUTO"
+      ) {
+        const resolveAutoRouting =
+          options.sessionExecutor
+            ?.resolveAutoRouting
+            ?.bind(
+              options.sessionExecutor
+            );
+        if (!resolveAutoRouting) {
+          res.status(503).json({
+            error:
+              "AUTO_ROUTING_UNAVAILABLE"
+          });
+          return false;
+        }
+        try {
+          const routed =
+            await resolveAutoRouting(
+              request
+            );
+          request.primarySkill =
+            routed.decision
+              .primarySkill;
+          request.query =
+            routed.query;
+          if (
+            routed.decision.legal ===
+              false &&
+            attachmentCount === 0 &&
+            allowConversational
+          ) {
+            request.conversationalOnly =
+              true;
+          }
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            error.message ===
+              "CHAT_PRIVACY_GATE_FAILED"
+          ) {
+            res.status(503).json({
+              error:
+                "CHAT_PRIVACY_GATE_FAILED"
+            });
+            return false;
+          }
+
+          const localFailureMessage =
+            request.model.startsWith(
+              "local/"
+            )
+              ? (
+                  error instanceof
+                    ProviderGatewayError &&
+                  error.causeValue instanceof
+                    Error
+                    ? error.causeValue
+                        .message
+                    : error instanceof Error
+                      ? error.message
+                      : ""
+                )
+              : "";
+          const parsedLocalReason =
+            localFailureMessage
+              .split(
+                ":",
+                1
+              )[0] ?? "";
+          if (
+            request.model.startsWith(
+              "local/"
+            ) &&
+            /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
+              parsedLocalReason
+            )
+          ) {
+            res.status(503).json({
+              error:
+                "LOCAL_MODEL_EXECUTION_FAILED",
+              reason:
+                parsedLocalReason
+            });
+            return false;
+          }
+
+          if (
+            error instanceof
+              ProviderGatewayError
+          ) {
+            const rawReason =
+              error.causeValue instanceof
+                Error
+                ? error.causeValue
+                    .message
+                : "";
+            const parsedReason =
+              rawReason.split(
+                ":",
+                1
+              )[0] ?? "";
+            res.status(502).json({
+              error:
+                "PROVIDER_EXECUTION_FAILED",
+              provider:
+                error.provider,
+              reason:
+                /^[A-Z0-9_]+$/.test(
+                  parsedReason
+                )
+                  ? parsedReason
+                  : "PROVIDER_UNCODED_FAILURE",
+              ...(rawReason
+                ? {
+                    description:
+                      safeDiagnosticText(
+                        rawReason
+                      )
+                  }
+                : {})
+            });
+            return false;
+          }
+
+          const reason =
+            error instanceof Error &&
+            /^AUTO_ROUTING_[A-Z0-9_]+$/.test(
+              error.message
+            )
+              ? error.message
+              : "AUTO_ROUTING_FAILED";
+          res.status(422).json({
+            error:
+              "AUTO_ROUTING_FAILED",
+            reason
+          });
+          return false;
+        }
+      }
+    return true;
+  }
+
   const documentCaseIds =
     new Map<string, string>();
 
@@ -1785,11 +2024,33 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             req.path !==
               "/auth/lock"
           ) {
+            const sessionId =
+              context.session
+                .sessionId;
             options.authService!
               .touchSession(
-                context.session
-                  .sessionId
+                sessionId
               );
+            // A request the user is still waiting for (a long local-model
+            // answer, OCR) is activity: keep the session from idling out
+            // while it runs.
+            const keepAlive =
+              setInterval(
+                () => {
+                  options.authService!
+                    .touchSession(
+                      sessionId
+                    );
+                },
+                IN_FLIGHT_ACTIVITY_INTERVAL_MS
+              );
+            keepAlive.unref();
+            const stop = () =>
+              clearInterval(
+                keepAlive
+              );
+            res.once("finish", stop);
+            res.once("close", stop);
           }
           next();
         } catch (error) {
@@ -1962,6 +2223,40 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           ).json({
             error: code
           });
+        }
+      }
+    );
+
+    // User input in the window (typing, reading with scroll/mouse) counts as
+    // activity; the authentication middleware above already refreshed the
+    // idle deadline for this non-GET request.
+    app.post(
+      "/api/auth/activity",
+      (_req, res) => {
+        res.status(204).end();
+      }
+    );
+
+    // "Zapisz formę": the user corrected how a restored name inflects.
+    app.post(
+      "/api/privacy/name-forms",
+      async (req, res) => {
+        const body = req.body as Partial<NameFormCorrection> | undefined;
+        if (!options.personMorphology?.saveCorrection) {
+          res.status(503).json({ error: "PERSON_MORPHOLOGY_UNAVAILABLE" });
+          return;
+        }
+        try {
+          await options.personMorphology.saveCorrection({
+            canonical: String(body?.canonical ?? ""),
+            gender: body?.gender === "f" ? "f" : "m1",
+            case: String(body?.case ?? "") as NameFormCorrection["case"],
+            text: String(body?.text ?? "")
+          });
+          res.status(204).end();
+        } catch (error) {
+          const code = error instanceof Error ? error.message : "NAME_FORM_INVALID";
+          res.status(code.startsWith("NAME_FORM_") ? 400 : 500).json({ error: code.startsWith("NAME_FORM_") ? code : "NAME_FORM_SAVE_FAILED" });
         }
       }
     );
@@ -4040,9 +4335,25 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         });
         return;
       }
+      // A coded cause (never document content) so the UI can tell an OCR
+      // failure from a privacy/NER or extraction failure.
+      const errorCode =
+        error instanceof Error &&
+        typeof (error as { code?: unknown }).code === "string"
+          ? String((error as { code?: unknown }).code)
+          : "";
+      const reason =
+        /^[A-Z][A-Z0-9_]{2,80}$/.test(errorCode)
+          ? errorCode
+          : /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(code)?.[0];
       res.status(422).json({
         error:
-          "STORED_FILE_PROCESSING_FAILED"
+          "STORED_FILE_PROCESSING_FAILED",
+        ...(reason
+          ? {
+              reason
+            }
+          : {})
       });
     }
   }
@@ -5548,6 +5859,23 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         return;
       }
 
+      // A document request in AUTO mode is routed like a chat turn. The
+      // document pipeline (workflow, HYBRID-VAL before the file) needs its
+      // domain and workflow before it starts, so it keeps the routing pass.
+      if (
+        !(await resolveAutoPrimarySkill(
+          sessionRequest,
+          res,
+          attachments.length,
+          {
+            allowModelSelection: false,
+            allowConversational: false
+          }
+        ))
+      ) {
+        return;
+      }
+
       const route =
         routing.validate(
           sessionRequest
@@ -6260,6 +6588,68 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  // Review step: restored values with their source, before the one-time
+  // final document is written. Needs the same fresh password grant.
+  app.post(
+    "/api/deanonymization/preview",
+    async (req, res) => {
+      if (
+        !options.reauthorizationManager?.previewGrant ||
+        !options.documentAuthoringService?.previewDeanonymization ||
+        !options.caseAccessService
+      ) {
+        res.status(503).json({
+          error:
+            "DEANONYMIZATION_UNAVAILABLE"
+        });
+        return;
+      }
+      if (typeof req.body?.grantId !== "string") {
+        res.status(400).json({
+          error:
+            "INVALID_DEANONYMIZATION_REQUEST"
+        });
+        return;
+      }
+      try {
+        const context =
+          responseAuthContext(res);
+        const target =
+          await options.reauthorizationManager.previewGrant(
+            context,
+            req.body.grantId
+          );
+        const preview =
+          await options.caseAccessService.withCaseDataKey(
+            context,
+            target.caseId,
+            "REIDENTIFY",
+            (caseDataKey) =>
+              options.documentAuthoringService!.previewDeanonymization!({
+                target,
+                caseDataKey,
+                keyVersion:
+                  target.caseKeyVersion
+              })
+          );
+        res.setHeader("Cache-Control", "no-store");
+        res.json(preview);
+      } catch (error) {
+        if (
+          !sendCaseAccessError(res, error) &&
+          !sendReauthorizationError(res, error)
+        ) {
+          res.status(422).json({
+            error:
+              error instanceof Error
+                ? error.message
+                : "DEANONYMIZATION_PREVIEW_FAILED"
+          });
+        }
+      }
+    }
+  );
+
   app.post(
     "/api/deanonymization/finalize",
     async (req, res) => {
@@ -6285,6 +6675,31 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         });
         return;
       }
+
+      const rawOverrides =
+        req.body?.overrides;
+      if (
+        rawOverrides !== undefined &&
+        (
+          !rawOverrides ||
+          typeof rawOverrides !== "object" ||
+          Array.isArray(rawOverrides) ||
+          Object.keys(rawOverrides).length > 500 ||
+          Object.values(rawOverrides).some(
+            (value) => typeof value !== "string"
+          )
+        )
+      ) {
+        res.status(400).json({
+          error:
+            "INVALID_DEANONYMIZATION_REQUEST"
+        });
+        return;
+      }
+      const overrides =
+        rawOverrides as
+          | Record<string, string>
+          | undefined;
 
       try {
         const context =
@@ -6340,6 +6755,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                             req.body
                               .filename
                         }
+                      : {}),
+                    ...(overrides
+                      ? { overrides }
                       : {})
                   });
               }
@@ -6371,6 +6789,9 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           deanonymizationBasis:
             final
               .deanonymizationBasis,
+          ...(final.restorations
+            ? { restorations: final.restorations }
+            : {}),
           keyBindingVerified:
             final
               .keyBindingVerified,
@@ -6764,6 +7185,62 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     }
   );
 
+  // Live drafts of running executions, polled by the UI so the answer appears
+  // while it is generated. Owner-bound, in memory only, short-lived.
+  const executionDrafts =
+    new Map<string, {
+      owner: string;
+      text: string;
+      updatedAt: number;
+    }>();
+  const draftOwner = (
+    res: Response
+  ): string =>
+    options.authService
+      ? responseAuthContext(res)
+          .session.sessionId
+      : "local";
+  const pruneExecutionDrafts = () => {
+    const now = Date.now();
+    for (const [id, entry] of executionDrafts) {
+      if (now - entry.updatedAt > EXECUTION_DRAFT_TTL_MS) {
+        executionDrafts.delete(id);
+      }
+    }
+    while (executionDrafts.size > EXECUTION_DRAFT_MAX_ENTRIES) {
+      const oldest =
+        executionDrafts.keys().next().value;
+      if (oldest === undefined) break;
+      executionDrafts.delete(oldest);
+    }
+  };
+
+  app.get(
+    "/api/sessions/progress/:executionId",
+    (req, res) => {
+      const entry =
+        executionDrafts.get(
+          String(req.params.executionId ?? "")
+        );
+      if (
+        !entry ||
+        entry.owner !== draftOwner(res)
+      ) {
+        res.status(404).json({
+          error:
+            "EXECUTION_PROGRESS_NOT_FOUND"
+        });
+        return;
+      }
+      res.set("Cache-Control", "no-store");
+      res.json({
+        text: entry.text,
+        updatedAt:
+          new Date(entry.updatedAt).toISOString()
+      });
+    }
+  );
+
   app.post("/api/sessions/execute", async (req, res) => {
     if (!options.sessionExecutor) {
       res.status(503).json({
@@ -6799,133 +7276,56 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         knowledge.caseId;
     }
 
+    const executionId =
+      String(
+        req.get("x-lex-execution-id") ?? ""
+      );
     if (
-      request.primarySkill ===
-        "AUTO"
+      EXECUTION_ID_PATTERN.test(
+        executionId
+      )
     ) {
-      if (
-        !options
-          .sessionExecutor
-          .resolveAutoRouting
-      ) {
-        res.status(503).json({
-          error:
-            "AUTO_ROUTING_UNAVAILABLE"
-        });
-        return;
-      }
-      try {
-        const routed =
-          await options
-            .sessionExecutor
-            .resolveAutoRouting(
-              request
-            );
-        request.primarySkill =
-          routed.decision
-            .primarySkill;
-        request.query =
-          routed.query;
-      } catch (error) {
-        if (
-          error instanceof Error &&
-          error.message ===
-            "CHAT_PRIVACY_GATE_FAILED"
-        ) {
-          res.status(503).json({
-            error:
-              "CHAT_PRIVACY_GATE_FAILED"
-          });
-          return;
+      const owner =
+        draftOwner(res);
+      pruneExecutionDrafts();
+      executionDrafts.set(
+        executionId,
+        {
+          owner,
+          text: "",
+          updatedAt: Date.now()
         }
-
-        const localFailureMessage =
-          request.model.startsWith(
-            "local/"
-          )
-            ? (
-                error instanceof
-                  ProviderGatewayError &&
-                error.causeValue instanceof
-                  Error
-                  ? error.causeValue
-                      .message
-                  : error instanceof Error
-                    ? error.message
-                    : ""
-              )
-            : "";
-        const parsedLocalReason =
-          localFailureMessage
-            .split(
-              ":",
-              1
-            )[0] ?? "";
-        if (
-          request.model.startsWith(
-            "local/"
-          ) &&
-          /^LOCAL_MODEL_[A-Z0-9_]+$/.test(
-            parsedLocalReason
-          )
-        ) {
-          res.status(503).json({
-            error:
-              "LOCAL_MODEL_EXECUTION_FAILED",
-            reason:
-              parsedLocalReason
-          });
-          return;
+      );
+      request.onDraft = (text) => {
+        const entry =
+          executionDrafts.get(
+            executionId
+          );
+        if (entry && entry.owner === owner) {
+          entry.text =
+            text.slice(-EXECUTION_DRAFT_MAX_CHARS);
+          entry.updatedAt = Date.now();
         }
+      };
+      res.on("finish", () => {
+        executionDrafts.delete(
+          executionId
+        );
+      });
+    }
 
-        if (
-          error instanceof
-            ProviderGatewayError
-        ) {
-          const rawReason =
-            error.causeValue instanceof
-              Error
-              ? error.causeValue
-                  .message
-              : "";
-          const parsedReason =
-            rawReason.split(
-              ":",
-              1
-            )[0] ?? "";
-          res.status(502).json({
-            error:
-              "PROVIDER_EXECUTION_FAILED",
-            provider:
-              error.provider,
-            ...(
-              /^[A-Z0-9_]+$/.test(
-                parsedReason
-              )
-                ? {
-                    reason:
-                      parsedReason
-                  }
-                : {}
-            )
-          });
-          return;
+    if (
+      !(await resolveAutoPrimarySkill(
+        request,
+        res,
+        attachments.length,
+        {
+          allowModelSelection: true,
+          allowConversational: true
         }
-
-        const reason =
-          error instanceof Error &&
-          /^AUTO_ROUTING_[A-Z0-9_]+$/.test(
-            error.message
-          )
-            ? error.message
-            : "AUTO_ROUTING_FAILED";
-        res.status(422).json({
-          error:
-            "AUTO_ROUTING_FAILED",
-          reason
-        });
-        return;
-      }
+      ))
+    ) {
+      return;
     }
 
     const route = routing.validate(request.primarySkill);
@@ -9448,12 +9848,18 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         res.status(502).json({
           error: "PROVIDER_EXECUTION_FAILED",
           provider: error.provider,
-          ...(/^[A-Z0-9_]+$/.test(
-            parsedReason
-          )
+          reason:
+            /^[A-Z0-9_]+$/.test(
+              parsedReason
+            )
+              ? parsedReason
+              : "PROVIDER_UNCODED_FAILURE",
+          ...(rawReason
             ? {
-                reason:
-                  parsedReason
+                description:
+                  safeDiagnosticText(
+                    rawReason
+                  )
               }
             : {})
         });

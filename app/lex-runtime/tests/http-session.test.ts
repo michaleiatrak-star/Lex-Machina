@@ -151,6 +151,70 @@ describe("session execution HTTP API", () => {
     });
   });
 
+  it("exposes the live draft of a running execution and removes it when done", async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let draftSeen!: () => void;
+    const drafted = new Promise<void>((resolve) => {
+      draftSeen = resolve;
+    });
+    const executor: SessionExecutor = {
+      execute: vi.fn(async (input) => {
+        input.onDraft?.("Częściowa odpowiedź");
+        draftSeen();
+        await gate;
+        return {
+          sessionId: "session-draft",
+          status: "DRAFT_PRESENTABLE" as const,
+          provider: input.provider,
+          model: input.model,
+          primarySkill: input.primarySkill,
+          answer: "Pełna odpowiedź",
+          finalization: "PASS" as const,
+          blockedReferences: [],
+          verification: { records: 0, verified: 0, supported: 0, unverified: 0 },
+          evidence: [],
+          audit: { result: "PASS" as const, eventCount: 1, closed: true }
+        };
+      })
+    };
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      sessionExecutor: executor
+    });
+    const executionId = "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0";
+
+    const running = request(app)
+      .post("/api/sessions/execute")
+      .set("X-Lex-Execution-Id", executionId)
+      .send({
+        query: "Pytanie",
+        provider: "openai",
+        model: "gpt-test",
+        primarySkill: DR,
+        mode: "PRAWNIK"
+      })
+      .then((response) => response);
+
+    await drafted;
+    const progress = await request(app)
+      .get(`/api/sessions/progress/${executionId}`)
+      .expect(200);
+    expect(progress.body.text).toBe("Częściowa odpowiedź");
+
+    release();
+    const final = await running;
+    expect(final.status).toBe(200);
+    expect(final.body.answer).toBe("Pełna odpowiedź");
+
+    await request(app)
+      .get(`/api/sessions/progress/${executionId}`)
+      .expect(404);
+  });
+
   it("restores document aliases only at the local HTTP presentation boundary", async () => {
     const result:
       SessionExecutionResponse = {
@@ -496,5 +560,107 @@ describe("session execution HTTP API", () => {
 
     expect(executor.execute)
       .toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("AUTO skill selection", () => {
+  const envelope = (query: string) =>
+    `__LEX_SKILLS_V1__ ${JSON.stringify({ auto: true, manual: [], caseType: "AUTO" })}\n${query}`;
+
+  function app() {
+    const execute = vi.fn(async () => {
+      throw new Error("STOP");
+    });
+    const resolveAutoRouting = vi.fn(async () => ({
+      decision: {
+        legal: true,
+        primarySkill: DR,
+        domainSkills: [DR],
+        executionSkills: [],
+        workflowExecutionSkill: null
+      },
+      query: envelope("Pytanie")
+    }));
+    return {
+      execute,
+      resolveAutoRouting,
+      app: createLexHttpApp({
+        registry: registry(),
+        modelCatalog: { list: vi.fn(async () => []) },
+        sessionExecutor: { execute, resolveAutoRouting }
+      })
+    };
+  }
+
+  it("lets an account or API model pick the skills itself", async () => {
+    const setup = app();
+    await request(setup.app)
+      .post("/api/sessions/execute")
+      .send({
+        query: envelope("Sąsiad nie oddaje pożyczki."),
+        provider: "anthropic",
+        model: "account/claude",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK"
+      });
+    expect(setup.resolveAutoRouting).not.toHaveBeenCalled();
+    expect(setup.execute).toHaveBeenCalledWith(
+      expect.objectContaining({
+        modelSelectsSkills: true,
+        primarySkill: expect.stringMatching(/^dr-/)
+      })
+    );
+  });
+
+  it("routes an AUTO document request instead of rejecting it as INVALID_ROUTE", async () => {
+    const setup = app();
+    const documentApp = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      sessionExecutor: {
+        execute: setup.execute,
+        resolveAutoRouting: setup.resolveAutoRouting
+      },
+      caseAccessService: {} as never,
+      documentAuthoringService: {} as never,
+      documentAstGenerator: {} as never,
+      documentService: {} as never
+    });
+    const response = await request(documentApp)
+      .post("/api/cases/case_abc/artifacts/generate")
+      .send({
+        query: envelope("Zrób wzór wezwania do zapłaty"),
+        provider: "anthropic",
+        model: "account/claude",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK",
+        format: "docx",
+        documentType: "letter",
+        styleProfile: "lex-classic-clean-v1"
+      });
+    // Past routing: without a signed-in user the request stops at the
+    // authentication context, not at route validation.
+    expect(response.body.error).toBe("AUTH_CONTEXT_MISSING");
+    // The document pipeline needs its domain before it starts.
+    expect(setup.resolveAutoRouting).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps the routing pass for local models", async () => {
+    const setup = app();
+    await request(setup.app)
+      .post("/api/sessions/execute")
+      .send({
+        query: envelope("Sąsiad nie oddaje pożyczki."),
+        provider: "openai",
+        model: "local/bielik-11b-v3-q4km",
+        primarySkill: "AUTO",
+        mode: "PRAWNIK"
+      });
+    expect(setup.resolveAutoRouting).toHaveBeenCalledTimes(1);
+    expect(setup.execute).toHaveBeenCalledWith(
+      expect.not.objectContaining({
+        modelSelectsSkills: true
+      })
+    );
   });
 });

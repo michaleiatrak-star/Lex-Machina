@@ -1,0 +1,113 @@
+{
+ "documents": 500,
+ "seconds": 41,
+ "recognizers": "SGJP gazetteer + identifier detectors + Morfeusz2 morphology (no Stanza, no local LLM)",
+ "anonymization": {
+  "mentions": {
+   "PERSON": {
+    "mentions": 3000,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "ADDRESS": {
+    "mentions": 1500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PESEL": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "ID_CARD": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "NIP": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "REGON": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "IBAN": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PHONE": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "EMAIL": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PERSON (surname alone)": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   }
+  },
+  "falsePositives": 0,
+  "falsePositivesOnDecoys": 0,
+  "falsePositiveSamples": [],
+  "leakSamples": []
+ },
+ "identity": {
+  "documentsWherePersonSplitIntoSeveralTokens": 0,
+  "documentsWhereAddressSplitIntoSeveralTokens": 0,
+  "splitSamples": []
+ },
+ "deanonymization": {
+  "person": {
+   "formAccuracy": 100,
+   "byCase": {
+    "NOM": 100,
+    "GEN": 100,
+    "DAT": 100,
+    "ACC": 100,
+    "INS": 100,
+    "LOC": 100,
+    "VOC": 100
+   },
+   "wrong": 0,
+   "wrongFlaggedForReview": 0,
+   "wrongNotFlagged": 0
+  },
+  "address": {
+   "formAccuracy": 100,
+   "byCase": {
+    "NOM": 100,
+    "GEN": 100,
+    "DAT": 100,
+    "ACC": 100,
+    "INS": 100,
+    "LOC": 100,
+    "VOC": 100
+   },
+   "wrong": 0,
+   "wrongFlaggedForReview": 0,
+   "wrongNotFlagged": 0
+  },
+  "modelAnswersRestoredExactly": 100,
+  "missingTokens": 0,
+  "silentWrongSamples": []
+ }
+}

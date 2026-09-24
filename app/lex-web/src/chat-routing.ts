@@ -11,7 +11,13 @@ export const DETERMINISTIC_PIPELINE_SKILLS = [
   "chronologia-sprawy-v1",
   "analiza-sadowa-v6",
   "analizator-umow-v1",
-  "analizator-dowodow-v3"
+  "analizator-dowodow-v3",
+  "pisma-proste-v2",
+  "analizator-przepisow-v2",
+  "orzeczenia-sadowe-v2",
+  "przesluchanie-swiadkow-v2-min90",
+  "raport-sytuacyjny-v2",
+  "raport-klienta-v1"
 ] as const;
 
 export const DETERMINISTIC_ACTION_META_PREFIX =
@@ -62,8 +68,75 @@ export const DETERMINISTIC_ACTIONS = [
     skills: [
       "pisma-procesowe-v3"
     ]
+  },
+  {
+    id: "SIMPLE_LETTER",
+    label: "Pismo proste",
+    description:
+      "Wezwania, wnioski i krótsze pisma z walidacją przed plikiem.",
+    skills: [
+      "pisma-proste-v2"
+    ]
+  },
+  {
+    id: "STATUTE_ANALYSIS",
+    label: "Analiza przepisu",
+    description:
+      "Brzmienie aktualne i historyczne, przesłanki, wykładnia, nowelizacje.",
+    skills: [
+      "analizator-przepisow-v2"
+    ]
+  },
+  {
+    id: "CASE_LAW_RESEARCH",
+    label: "Research orzecznictwa",
+    description:
+      "Wyszukiwanie i weryfikacja sygnatur oraz tez orzeczeń.",
+    skills: [
+      "orzeczenia-sadowe-v2"
+    ]
+  },
+  {
+    id: "WITNESS_EXAMINATION",
+    label: "Przesłuchanie świadków",
+    description:
+      "Cele dowodowe, sprzeczności i zestawy pytań do świadków.",
+    skills: [
+      "przesluchanie-swiadkow-v2-min90"
+    ]
+  },
+  {
+    id: "SITUATION_REPORT",
+    label: "Raport sytuacyjny",
+    description:
+      "Fakty, ryzyka, dowody, terminy, warianty i priorytety sprawy.",
+    skills: [
+      "raport-sytuacyjny-v2"
+    ]
+  },
+  {
+    id: "CLIENT_REPORT",
+    label: "Raport dla klienta",
+    description:
+      "Stan sprawy, ryzyka i kolejne kroki zrozumiałym językiem.",
+    skills: [
+      "raport-klienta-v1"
+    ]
   }
 ] as const;
+
+/** New-conversation work mode: router-driven AUTO or a pinned execution skill. */
+export type ChatWorkMode =
+  | "AUTO"
+  | "MECHANICAL";
+
+export function workModeForAction(
+  actionId: DeterministicActionId | ""
+): ChatWorkMode {
+  return actionId
+    ? "MECHANICAL"
+    : "AUTO";
+}
 
 export type DeterministicActionId =
   (typeof DETERMINISTIC_ACTIONS)[number]["id"];

@@ -176,7 +176,7 @@ MECHANIZM ROZLICZENIA (art. 24ca ust. 12) — ZAPOBIEGANIE PODWÓJNEMU
     — rozliczenie następuje JEDNORAZOWO w deklaracji rocznej
 
 WYŁĄCZENIA (katalog w art. 24ca ust. 14, NIE zamknięty w tym module —
-  weryfikuj pełną listę na ISAP), obejmujące m.in.:
+  weryfikuj pełną listę w ELI (RZĄD 1)), obejmujące m.in.:
   □ Mali podatnicy (przychód ≤ 2 mln EUR)
   □ Podatnicy w PIERWSZYCH 3 latach działalności
   □ Przedsiębiorcy ROLNI
@@ -285,7 +285,7 @@ OBOWIĄZEK DOKUMENTACJI gdy transakcje z podmiotami powiązanymi przekraczają:
   Transakcje krajowe: ≥ 10 mln PLN
   Transakcje zagraniczne: ≥ 10 mln PLN
   Pożyczka/gwarancja: ≥ 20 mln PLN
-  ⚠️ Weryfikuj aktualne progi w ISAP
+  ⚠️ Weryfikuj aktualne progi w ELI (RZĄD 1)
 
 DOKUMENTACJA:
   Local file (dokumentacja lokalna)
@@ -384,7 +384,7 @@ Limit kosztów finansowania dłużnego:
   Koszty powyżej limitu: nie stanowią KUP w danym roku
   Możliwość rozliczenia nadwyżki w 5 kolejnych latach
 
-⚠️ Weryfikuj aktualny art. 15c CIT w ISAP — przepis był zmieniany.
+⚠️ Weryfikuj aktualny art. 15c CIT w ELI (RZĄD 1) — przepis był zmieniany.
 ```
 
 ---
@@ -392,7 +392,7 @@ Limit kosztów finansowania dłużnego:
 ## 7. ESTOŃSKI CIT — WARUNKI (weryfikuj aktualnie!)
 
 ```
-Warunki do spełnienia łącznie (art. 28j CIT — weryfikuj w ISAP):
+Warunki do spełnienia łącznie (art. 28j CIT — weryfikuj w ELI (RZĄD 1)):
   □ Brak udziałów w innych spółkach
   □ Zatrudnienie co najmniej 3 pracowników (lub kontrakt B2B z 3 osobami)
   □ Przychody pasywne < 50% przychodów ogółem
@@ -442,10 +442,10 @@ web_search: "estoński CIT 2025 2026 stawka warunki wybór MF"
 
 ## ANEKS — AMORTYZACJA I KOSZTY UZYSKANIA PRZYCHODU
 
-### Amortyzacja środków trwałych (art. 16a–16m CIT — weryfikuj w ISAP)
+### Amortyzacja środków trwałych (art. 16a–16m CIT — weryfikuj w ELI (RZĄD 1))
 
 ```
-Środek trwały: wartość > 10 000 zł (weryfikuj aktualny próg w ISAP)
+Środek trwały: wartość > 10 000 zł (weryfikuj aktualny próg w ELI (RZĄD 1))
 
 Metody amortyzacji:
   Liniowa: stałe odpisy wg stawek z załącznika do ustawy CIT
@@ -463,7 +463,7 @@ web_search: "amortyzacja nieruchomości mieszkalnych CIT zakaz 2025 2026"
 ZASADA: Koszt musi być poniesiony w celu uzyskania przychodu lub zachowania/zabezpieczenia
         jego źródła oraz nie może być wymieniony w art. 16 CIT (katalog wydatków niestanowiących KUP)
 
-Typowe wyłączenia z KUP (art. 16 CIT — weryfikuj w ISAP):
+Typowe wyłączenia z KUP (art. 16 CIT — weryfikuj w ELI (RZĄD 1)):
   → Kary umowne z określonych tytułów (weryfikuj katalog)
   → Koszty reprezentacji (np. alkohol na spotkaniach, drogie restauracje)
   → Darowizny (z wyjątkami)

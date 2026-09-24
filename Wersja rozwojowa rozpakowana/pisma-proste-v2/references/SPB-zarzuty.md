@@ -1,18 +1,23 @@
 # SPB — Zarzuty od Nakazu Zapłaty
 
 *Ładuj gdy: nakaz zapłaty wydany w postępowaniu nakazowym (nie upominawczym).
-Termin zawity: **7 dni** od doręczenia nakazu (art. 493 §1 KPC).
-Opłata: **3/4 opłaty od pozwu** (art. 19 §3 KSCU).*
+Termin zawity: **miesiąc** od doręczenia nakazu na terytorium UE, w tym w Polsce
+(art. 480² § 2 pkt 3 KPC); poza UE — 3 miesiące (pkt 4).
+Opłata: **3/4 opłaty od pozwu**; gdy nakaz wydano przeciwko konsumentowi —
+od pozwanego konsumenta **nie więcej niż 750 zł** (art. 19 ust. 4 KSCU).*
+✅ [VER] RZĄD 1 2026-09-16 — KPC `Dz.U. 2026 poz. 468`, KSCU `Dz.U. 2025 poz. 1228`.
 
 ---
 
 ## PODSTAWA PRAWNA
 
-- **art. 493 §1 KPC** — zarzuty od nakazu zapłaty w postępowaniu nakazowym
-- **art. 19 §3 KSCU** — opłata od zarzutów = 3/4 opłaty stosunkowej od wartości przedmiotu sporu
+- **art. 493 § 1 KPC** — zarzuty od nakazu zapłaty (przepis mówi, ŻE przysługują; terminu NIE zawiera)
+- **art. 480² § 2 pkt 3 KPC** — termin: miesiąc od doręczenia na terytorium UE
+- **art. 480³ KPC** — tryb: do sądu, który wydał nakaz
+- **art. 19 ust. 4 KSCU** — opłata od zarzutów = 3/4 opłaty; od konsumenta max 750 zł (KSCU dzieli się na ustępy, nie paragrafy)
 - **art. 492 §1 KPC** — nakaz zapłaty w postępowaniu nakazowym ma rygor natychmiastowej wykonalności
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl przed użyciem.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1) przed użyciem.
 
 ---
 
@@ -63,7 +68,7 @@ Opłata podstawowa wg art. 27 KSCU:
   > 20 000 zł  → 5% WPS, max 100 000 zł (⚠️ POPRAWKA 2026-07-27: było błędnie "200 000 zł", obniżone reformą z 25.07.2025)
 
 Opłata od zarzutów = 3/4 × opłata podstawowa
-Weryfikuj w aktualnej wersji KSCU na isap.sejm.gov.pl.
+Weryfikuj w aktualnej wersji KSCU na ELI (RZĄD 1).
 ```
 
 ---

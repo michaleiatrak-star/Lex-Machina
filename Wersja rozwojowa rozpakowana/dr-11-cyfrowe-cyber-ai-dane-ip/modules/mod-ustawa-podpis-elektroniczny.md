@@ -13,7 +13,7 @@
 **Ustawa z 05.09.2016 r. o uslugach zaufania oraz identyfikacji elektronicznej (UZIE)**
 - **Dz.U. 2024 poz. 1725 t.j. ze zm.** — RZĄD 1 ELI, VER 2026-08-28. To aktualny tekst jednolity polskiej ustawy o usługach zaufania oraz identyfikacji elektronicznej.
 
-**Weryfikacja ISAP i eur-lex przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) i eur-lex przed kazdy cytowaniem.**
 
 ## Rodzaje podpisow elektronicznych (eIDAS)
 ```

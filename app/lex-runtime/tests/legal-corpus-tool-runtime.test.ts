@@ -261,3 +261,66 @@ describe("G36 legal corpus runtime", () => {
     });
   });
 });
+
+describe("model skill selection mode", () => {
+  function withCriminalDomain(): LexSkillRegistry {
+    const registry = fixture();
+    const dir = path.join(registry.root, "dr-03-prawo-karne");
+    fs.mkdirSync(path.join(dir, "modules"), { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, "SKILL.md"),
+      "---\nname: dr-03-prawo-karne\nversion: \"1.0\"\n---\n# karne\n"
+    );
+    fs.writeFileSync(
+      path.join(dir, "modules", "mod-KK-kwalifikator-karnomaterialny.md"),
+      "# kwalifikator\n"
+    );
+    registry.scan();
+    return registry;
+  }
+
+  const read = (skill: string, file: string, id = skill + file) => ({
+    id,
+    name: "read_legal_resource",
+    input: { skill, path: file }
+  });
+
+  it("requires prawny-router-v3 before any other legal resource", async () => {
+    const runtime = new LegalCorpusToolRuntime(fixture(), { modelSelectsSkills: true });
+    const [blocked] = await runtime.runTools([read(DR, "SKILL.md")]);
+    expect(JSON.parse(blocked!.content)).toMatchObject({
+      status: "BLOCKED",
+      error: expect.stringMatching(/^ROUTER_V3_REQUIRED_FIRST/)
+    });
+
+    const results = await runtime.runTools([
+      read("prawny-router-v3", "SKILL.md"),
+      read(DR, "SKILL.md")
+    ]);
+    expect(results.map((item) => JSON.parse(item.content).status)).toEqual(["OK", "OK"]);
+    expect(runtime.modelSkillSelection()).toEqual({
+      primarySkill: DR,
+      loadedSkills: ["prawny-router-v3", DR],
+      domainSkills: [DR],
+      executionSkills: []
+    });
+  });
+
+  it("delivers the criminal qualifier with the first DR-03 skill entry", async () => {
+    const runtime = new LegalCorpusToolRuntime(withCriminalDomain(), { modelSelectsSkills: true });
+    await runtime.runTools([read("prawny-router-v3", "SKILL.md")]);
+    const [first] = await runtime.runTools([read("dr-03-prawo-karne", "SKILL.md")]);
+    expect(JSON.parse(first!.content).requiredModule).toMatchObject({
+      path: "dr-03-prawo-karne/modules/mod-KK-kwalifikator-karnomaterialny.md",
+      content: "# kwalifikator\n"
+    });
+    const [again] = await runtime.runTools([read("dr-03-prawo-karne", "SKILL.md", "again")]);
+    expect(JSON.parse(again!.content).requiredModule).toBeUndefined();
+  });
+
+  it("keeps the preloaded router path unchanged outside model selection", async () => {
+    const runtime = new LegalCorpusToolRuntime(fixture());
+    const [result] = await runtime.runTools([read(DR, "SKILL.md")]);
+    expect(JSON.parse(result!.content).status).toBe("OK");
+  });
+});

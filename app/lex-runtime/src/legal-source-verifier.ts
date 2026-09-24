@@ -28,6 +28,11 @@ export type LegalSourceVerificationResult = {
   host: string;
 };
 
+const NSA_WSA_SNAPSHOT_HOSTS = new Set<string>([
+  "nsa.gov.pl",
+  "orzeczenia.nsa.gov.pl"
+]);
+
 export const OFFICIAL_LEGAL_SOURCE_HOSTS = [
   "eli.gov.pl",
   "isap.sejm.gov.pl",
@@ -458,7 +463,9 @@ export class OfficialLegalSourceVerifier {
       body
     );
 
-    const record: VerificationRecord = matched
+    const snapshotOnly =
+      NSA_WSA_SNAPSHOT_HOSTS.has(host);
+    const record: VerificationRecord = matched && !snapshotOnly
       ? {
           claim: request.claim,
           kind: request.kind,
@@ -489,9 +496,18 @@ export class OfficialLegalSourceVerifier {
               : "web_fetch",
           sourceFormat:
             pdfSource ? "PDF" : "TEXT",
-          evidence: !titleMatched
-            ? "Official source was fetched, but the expected act title was not found."
-            : "Official source was fetched, but the requested reference was not found in the fetched text."
+          ...(snapshotOnly
+            ? {
+                verificationCeiling:
+                  "SNAPSHOT_NO_PROMOTION" as const
+              }
+            : {}),
+          evidence:
+            snapshotOnly && matched
+              ? `NSA/WSA SNAPSHOT (not promoted to VERIFIED): ${evidence ?? "reference found in the fetched CBOSA text"}`
+              : !titleMatched
+                ? "Official source was fetched, but the expected act title was not found."
+                : "Official source was fetched, but the requested reference was not found in the fetched text."
         };
 
     return {

@@ -353,6 +353,7 @@ export const LEGAL_VERIFICATION_SYSTEM_APPENDIX = [
     "- For UNVERIFIED/DENIED results, do not represent the citation as verified.",
     "- For case-law discovery, call search_case_law. Search SAOS and CBOSA as separate sources when both are relevant.",
     "- search_case_law returns candidates only and never creates a VERIFIED ledger record. Never cite a discovered signature as verified without the applicable verification step.",
+    "- NSA/WSA (CBOSA) material is a dated SNAPSHOT: present it as a snapshot and never promote it to VERIFIED. A CBOSA search with no hits is OUT_OF_SCOPE, never evidence that no judgment exists.",
     "- SAOS is a discovery source; CBOSA discovery is direct NSA/WSA retrieval but remains DISCOVERY until the candidate is verified under the case-law rules.",
     "- Before emitting a case signature (sygn.), call verify_case_reference.",
     "- The first supported courtFamily is SN. Pass only claim + signature + courtFamily; never invent or supply the sn.pl URL.",

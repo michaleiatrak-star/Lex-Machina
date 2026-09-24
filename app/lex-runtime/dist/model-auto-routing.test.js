@@ -85,6 +85,46 @@ afterEach(() => {
     }
 });
 describe("ModelAutoRouter", () => {
+    it("classifies a message without a legal matter so no legal skills are loaded", async () => {
+        const registry = fixture();
+        const setup = router(registry, [
+            '{"legal":false}'
+        ]);
+        const result = await setup.router
+            .resolve({
+            query: `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[]}\nCześć, jak się masz?`,
+            provider: "openai",
+            model: "account/openai/default"
+        });
+        expect(result.decision.legal).toBe(false);
+        expect(result.decision.executionSkills).toEqual([]);
+        expect(result.decision.workflowExecutionSkill).toBeNull();
+        expect(setup.adapter.calls[0]
+            ?.systemPrompt).toContain('{"legal":false}');
+    });
+    it("does not call a local model to route a trivial chat command", async () => {
+        const setup = router(fixture(), []);
+        const result = await setup.router
+            .resolve({
+            query: `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[]}\npowiedz ok`,
+            provider: "openai",
+            model: "local/bielik-11b-v3-q4km"
+        });
+        expect(result.decision.legal).toBe(false);
+        expect(setup.adapter.calls).toHaveLength(0);
+    });
+    it("routes local models from the compact catalog without the central routing map", async () => {
+        const setup = router(fixture(), [
+            '{"legal":false}'
+        ]);
+        await setup.router
+            .resolve({
+            query: `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[]}\nJaka będzie pogoda?`,
+            provider: "openai",
+            model: "local/bielik-11b-v3-q4km"
+        });
+        expect(setup.adapter.calls[0]?.systemPrompt).not.toContain("# CENTRALNA MAPA ROUTINGU");
+    });
     it("uses the model decision as the AUTO route and exact skill selection", async () => {
         const registry = fixture();
         const setup = router(registry, [
@@ -106,6 +146,7 @@ describe("ModelAutoRouter", () => {
             model: "account/openai/default"
         });
         expect(result.decision).toEqual({
+            legal: true,
             primarySkill: DR03,
             domainSkills: [
                 DR03

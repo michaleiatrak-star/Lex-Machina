@@ -38,14 +38,21 @@ w tych trybach.
 
 ✅ [VER] RZĄD 1 2026-09-10v — odczyt treści, obie taksy identyczne:
 
-| Sprawa | Stawka minimalna |
-|---|---|
-| **alimenty**, nakazanie wypłacenia wynagrodzenia do rąk drugiego małżonka | **240 zł** |
-| rozwód i unieważnienie małżeństwa | 720 zł |
-| ustanowienie rozdzielności majątkowej między małżonkami | 720 zł |
-| ustalenie ojcostwa, zaprzeczenie ojcostwa, ustalenie bezskuteczności uznania ojcostwa, rozwiązanie przysposobienia | 480 zł |
-| rozstrzygnięcie w istotnych sprawach rodziny lub co do zarządu majątkiem wspólnym | 480 zł |
-| podział majątku wspólnego | stawka z § 2 **od wartości udziału**; przy zgodnym wniosku małżonków — **50% tej stawki** |
+| Sprawa | Stawka minimalna | Podstawa (obie taksy) |
+|---|---|---|
+| rozwód i unieważnienie małżeństwa | 720 zł | § 4 ust. 1 pkt 1 |
+| stwierdzenie istnienia lub nieistnienia małżeństwa | 720 zł | § 4 ust. 1 pkt 2 |
+| przysposobienie | 360 zł | § 4 ust. 1 pkt 3 |
+| pozbawienie, ograniczenie, zawieszenie lub przywrócenie władzy rodzicielskiej oraz odebranie dziecka | 480 zł | § 4 ust. 1 pkt 4 |
+| ustalenie ojcostwa, zaprzeczenie ojcostwa, ustalenie bezskuteczności uznania ojcostwa, rozwiązanie przysposobienia | 480 zł | § 4 ust. 1 pkt 5 (w sprawie o ustalenie ojcostwa obejmuje roszczenia majątkowe strony powodowej — § 4 ust. 3) |
+| rozstrzygnięcie w istotnych sprawach rodziny lub co do zarządu majątkiem wspólnym | 480 zł | § 4 ust. 1 pkt 6 |
+| ustanowienie rozdzielności majątkowej między małżonkami | 720 zł | § 4 ust. 1 pkt 7 |
+| podział majątku wspólnego | stawka z § 2 **od wartości udziału**; przy zgodnym wniosku małżonków — **50% tej stawki** | § 4 ust. 1 pkt 8 |
+| **alimenty**, nakazanie wypłacenia wynagrodzenia za pracę do rąk drugiego małżonka | **240 zł** | § 4 ust. 1 pkt 9 |
+
+✅ [VER] RZĄD 1 2026-09-16e — odczyt § 4 w `Dz.U. 2026 poz. 215` i `Dz.U. 2026 poz. 118`;
+kolumna podstawy i trzy pominięte pozycje (pkt 2–4) dopisane po T32. Stawka z pkt 1
+obejmuje roszczenia majątkowe dochodzone łącznie, poza art. 58 § 2 i 3 KRO (§ 4 ust. 2).
 
 ⛔ **To jest przepis szczególny wobec § 2 i najczęstszy błąd w tej materii.**
 W sprawie o alimenty stawka minimalna wynosi **240 zł niezależnie od WPS** —

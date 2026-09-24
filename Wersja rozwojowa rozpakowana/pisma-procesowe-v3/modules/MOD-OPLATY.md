@@ -33,7 +33,7 @@ wiąże plik kanoniczny, a nad nim treść przepisu.
 ### Progi WPS — art. 13 ust. 1 i 2 KSCU
 
 ⛔ **Naprawa 2026-09-12.** Poprzednia wersja tej tabeli wiązała progi
-z **art. 27 pkt 1–6 KSCU**. Art. 27 ustanawia opłatę stałą **200 zł** od
+z **art. 27 pkt 1–6 KSCU**. Art. 27 ustanawia opłatę stałą **200 zł** od <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->
 enumerowanych pozwów (unieważnienie małżeństwa, zaprzeczenie ojcostwa,
 rozdzielność majątkowa, naruszenie posiadania, uchwały spółdzielni i wspólnot)
 i **nie zawiera progów wartościowych**. Dwa progi były dodatkowo przesunięte
@@ -102,7 +102,7 @@ konsumenckiego.
 | zawiadomienie o przestępstwie | brak | — |
 
 ⛔ **Cztery pozycje naprawione 2026-09-12:** zabezpieczenie art. 69 → **art. 68
-pkt 1**; „EPU 1,25 % WP, art. 19 §2b" → **1/4 opłaty, art. 19 ust. 2 pkt 2**
+pkt 1**; „EPU 1,25 % WP, art. 19 §2b" → **1/4 opłaty, art. 19 ust. 2 pkt 2** <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->
 (§2b nie istnieje; wzór procentowy działa dopiero powyżej progu 20 000 zł);
 zarzuty „art. 19 §3" → **art. 19 ust. 4** wraz z konsumenckim capem 750 zł;
 „apelacja karna 0 zł, art. 620 KPK" → art. 620 KPK dotyczy **wykładania wydatków

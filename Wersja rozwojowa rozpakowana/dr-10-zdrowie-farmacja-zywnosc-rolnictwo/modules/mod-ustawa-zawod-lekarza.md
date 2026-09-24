@@ -5,7 +5,7 @@
 - Tekst jednolity: **Dz.U. 2026 poz. 37** (t.j. z 13.01.2026)
   VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001287 [2026-05-31]
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Reguluje: prawo wykonywania zawodu lekarza (PWZ), kwalifikacje, rejestracja,
@@ -45,7 +45,7 @@ Akt: Ustawa z dnia 2 grudnia 2009 r. o izbach lekarskich — Dz.U. 2021 poz. 134
   t.j. (obwieszczenie 25.06.2021), nadal aktualny [VER: 2026-07-15]. Rozdział 5
   "Odpowiedzialność zawodowa" — art. 53-112 — to źródłowa podstawa całej
   poniższej procedury (organy, kary, przedawnienie, postępowanie mediacyjne).
-  ⚠️ Weryfikuj w ISAP przed każdym cytowaniem konkretnego artykułu.
+  ⚠️ Weryfikuj w ELI (RZĄD 1) przed każdym cytowaniem konkretnego artykułu.
 
 Organ: Okregowy Sad Lekarski -> Naczelny Sad Lekarski -> SN (kasacja)
 Kary: Upomnienie, nagana, zawieszenie PWZ (max 5 lat), pozbawienie PWZ

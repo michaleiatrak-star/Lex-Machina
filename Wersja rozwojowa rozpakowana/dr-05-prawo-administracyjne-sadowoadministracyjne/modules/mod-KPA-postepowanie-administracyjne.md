@@ -499,8 +499,8 @@ Decyzja organu I instancji
     → Autokontrola: organ I inst. może sam uchylić/zmienić decyzję w 7 dniach
 Decyzja organu II instancji
   ↓ [30 dni] SKARGA DO WSA — składana ZA POŚREDNICTWEM organu II inst.
-    → Organ II inst. ma 15 dni na przekazanie skargi i akt do WSA (art. 54 §2 PPSA)
-    → Autokontrola WSA: organ może uwzględnić skargę w 30 dniach (art. 54 §3 PPSA)
+    → Organ przekazuje skargę z kompletnymi aktami i odpowiedzią w 30 DNI od jej otrzymania; skarga przez konsula albo na decyzję MSZ w sprawach cudzoziemców — 60 dni (art. 54 § 2 PPSA; ✅ [VER] RZĄD 1 2026-09-16m; ⛔ poprzednio „15 dni")
+    → Autokontrola: organ może uwzględnić skargę W CAŁOŚCI w 30 dniach od jej otrzymania; przy decyzji — uchyla ją i wydaje nową (art. 54 § 3 PPSA)
 Wyrok WSA
   ↓ [30 dni od wyroku WSA z uzasad.] SKARGA KASACYJNA NSA — przymus adwokacki/radcowski
 ```

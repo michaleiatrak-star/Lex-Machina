@@ -5,7 +5,7 @@
 - **Dz.U. 2023 poz. 1692** (ze zm., weszla w life 08.08.2023)
   VER: isap.sejm.gov.pl [2026-05-31]
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Nowa ustawa wprowadzila system akredytacji i zdarzen niepozadanych.

@@ -27,7 +27,7 @@
 
 > ⛔ Ten plik jest jedynym miejscem w systemie, gdzie przechowywane są metryki Dz.U.
 > Żaden moduł DR-skill ani skill wykonawczy NIE MOŻE przechowywać własnych metryk Dz.U.
-> Przy każdej analizie prawnej: wczytaj ten plik → znajdź akt → użyj jako punktu startowego → sprawdź ISAP online przed cytowaniem.
+> Przy każdej analizie prawnej: wczytaj ten plik → znajdź akt → użyj jako punktu startowego → sprawdź w ELI (RZĄD 1, kanon E-1…E-5) online przed cytowaniem.
 
 ### Statusy aktów
 

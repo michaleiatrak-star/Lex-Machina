@@ -53,6 +53,9 @@ export type VerificationRecord = {
   supportQuoteHash?: string;
   supportQuote?: string;
   evidence?: string;
+  // NSA/WSA (CBOSA) material is kept as a dated snapshot and never promoted
+  // to VERIFIED/SUPPORTED.
+  verificationCeiling?: "SNAPSHOT_NO_PROMOTION";
 };
 
 function normalizeClaim(value: string): string {

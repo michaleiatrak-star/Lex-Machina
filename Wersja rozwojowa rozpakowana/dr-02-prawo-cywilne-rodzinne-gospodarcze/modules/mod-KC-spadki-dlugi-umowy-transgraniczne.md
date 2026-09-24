@@ -261,8 +261,12 @@ Rząd 2B/3:
   zmarłego); w SĄDZIE — od kilku do KILKUNASTU MIESIĘCY (sądy w Polsce
   są mocno obciążone, wydanie poprzedza ROZPRAWA)
 
-□ WAŻNOŚĆ: odpisy EPS są ważne przez 6 MIESIĘCY od wydania — po tym
-  czasie wymagane przedłużenie/nowy odpis
+□ WAŻNOŚĆ: poświadczone odpisy EPS są ważne przez **6 MIESIĘCY**; okres ten
+  organ wydający wskazuje w odpisie przez **datę ważności**. W wyjątkowych,
+  należycie uzasadnionych przypadkach organ może wyznaczyć okres DŁUŻSZY.
+  Po upływie — wniosek o PRZEDŁUŻENIE ważności albo o NOWY odpis (art. 70 ust. 3
+  rozporządzenia (UE) nr 650/2012). Organ przechowuje oryginał i prowadzi wykaz
+  osób, którym wydał odpisy (ust. 1–2). ✅ [VER] RZĄD 1 2026-09-17u — Cellar, polska wersja (CELEX 32012R0650)
 
 □ RELACJA do dokumentów krajowych: EPS NIE ZASTĘPUJE krajowego
   postanowienia o stwierdzeniu nabycia spadku ani aktu poświadczenia

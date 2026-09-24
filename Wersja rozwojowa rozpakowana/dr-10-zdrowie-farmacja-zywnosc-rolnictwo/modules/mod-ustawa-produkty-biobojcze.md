@@ -8,7 +8,7 @@
   stosowane bezposrednio na calym terytorium UE
   VER: eur-lex.europa.eu [2026-05-31]
 
-**Weryfikacja ISAP i eur-lex przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) i eur-lex przed kazdy cytowaniem.**
 
 ## Zakres
 Produkty biobojcze = produkty aktywne przeciwko organizmom szkodliwym:

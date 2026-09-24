@@ -39,7 +39,7 @@ Konstytucyjny podział władzy, Krajowa Rada Sądownictwa (kompetencje, zaskarż
 |---|---|
 | Konstytucja RP | Dz.U. 1997 nr 78 poz. 483 — rozdz. V (Prezydent), VI (RM), VIII (sądy i trybunały) |
 | Ustawa o Krajowej Radzie Sądownictwa | **Dz.U. 2024 poz. 1186 t.j.** (obw. 1.08.2024) — VER 2026-08-14 (F-15): isap.sejm.gov.pl (WDU20240001186), sejm.gov.pl (oficjalna strona KRS, obwieszczenie 9.02.2026 cytuje ten sam numer), sip.lex.pl. ⚠️ AKT INTENSYWNIE NOWELIZOWANY w 2026 r. (weto z 19.02.2026, uchwała Sejmu z 27.02.2026, wybór nowej KRS 15.05.2026) — mimo to ŻADNA z tych zmian NIE wygenerowała nowego t.j. (nowelizacja odrzucona wetem nie weszła w życie; wybór KRS z 15.05.2026 odbył się na PODSTAWIE tej wciąż obowiązującej ustawy z 2011 r., nie zmienił jej treści) — weryfikuj ponownie w ISAP przed każdym powołaniem, biorąc pod uwagę wysoką aktywność legislacyjną wokół tego aktu |
-| Ustawa o Radzie Ministrów | Dz.U. 2022 poz. 2032 ze zm. — weryfikuj aktualny t.j. w ISAP |
+| Ustawa o Radzie Ministrów | Dz.U. 2025 poz. 780 t.j. ze zm. — ✅ [VER] RZĄD 1 2026-09-16e (⛔ poprzedni zapis `2022 poz. 2032` to obwieszczenie MSWiA o rozporządzeniu — podmiana aktu) |
 | Ustawa o wykonywaniu mandatu posła i senatora | Dz.U. 2018 poz. 1799 ze zm. |
 | KPC / PPSA | j.w. — zaskarżenie aktów/uchwał w trybie sądowym |
 
@@ -88,9 +88,9 @@ WŁADZA SĄDOWNICZA (art. 10 ust. 2, art. 173 Konstytucji):
 | Kompetencja | Opis | Podstawa |
 |---|---|---|
 | Wniosek do Prezydenta o powołanie sędziego | KRS przedstawia kandydaturę; Prezydent powołuje | art. 179 Konstytucji |
-| Opiniowanie projektów aktów prawnych | Opinie do projektów dot. sądownictwa | ustawa o KRS — weryfikuj w ISAP |
+| Opiniowanie projektów aktów prawnych | Opinie do projektów dot. sądownictwa | ustawa o KRS — weryfikuj w ELI (RZĄD 1) |
 | Wniosek do TK | W sprawach zgodności z Konstytucją | art. 186 ust. 2 Konstytucji |
-| Postępowania dyscyplinarne | Uczestnictwo w trybie dyscyplinarnym sędziów | ustawa o KRS — weryfikuj w ISAP |
+| Postępowania dyscyplinarne | Uczestnictwo w trybie dyscyplinarnym sędziów | ustawa o KRS — weryfikuj w ELI (RZĄD 1) |
 
 **Zaskarżenie uchwały KRS:**
 ```
@@ -101,7 +101,7 @@ web_search: "uchwała KRS zaskarżenie tryb 2025 2026 orzecznictwo SN NSA"
 
 ### Rada Ministrów — odpowiedzialność i mechanizmy kontroli
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 146–162 Konstytucji w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie art. 146–162 Konstytucji w ELI (RZĄD 1).
 
 | Mechanizm | Opis | Podstawa Konstytucji |
 |---|---|---|
@@ -132,7 +132,7 @@ Zaskarżenie rozporządzenia:
 
 ### Prerogatywy Prezydenta vs akty wymagające kontrasygnaty
 
-> ⚠️ Pełny katalog — weryfikuj art. 144 Konstytucji w ISAP.
+> ⚠️ Pełny katalog — weryfikuj art. 144 Konstytucji w ELI (RZĄD 1).
 
 ```
 Akty wymagające kontrasygnaty Prezesa RM (art. 144 ust. 2):

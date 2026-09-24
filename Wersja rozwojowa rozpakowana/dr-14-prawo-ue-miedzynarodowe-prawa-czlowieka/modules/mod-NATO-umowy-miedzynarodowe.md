@@ -9,7 +9,7 @@
   przemieszczania i udzielania pomocy wojskom sojuszniczym —
   **Dz.U. 2024 poz. 1770 t.j.** (VER ELI 2026-08-26)
 
-**Weryfikacja:** isap.sejm.gov.pl i nato.int przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) i nato.int przed każdym cytowaniem.
 
 ## Zakres
 Art. 5 Traktatu Waszyngtońskiego: klauzula wzajemnej obrony — atak na jednego = atak

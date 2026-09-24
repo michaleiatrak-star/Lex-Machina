@@ -13,26 +13,33 @@ PO WYCZERPANIU ścieżki bezpośredniej z administratorem.*
 - **art. 60 i n. ustawy z 10.05.2018 r. o ochronie danych osobowych** —
   krajowe uregulowanie postępowania skargowego (⚠️ zweryfikuj aktualny
   t.j. na ISAP)
-- **art. 237 §1 KPA** — stosowany ODPOWIEDNIO do terminu rozpatrzenia
-  (skarga inicjuje postępowanie administracyjne) — ⚠️ POPRAWIONE
-  2026-08-08 (FAZA 3E/ZASADA 14): poprzednia wersja błędnie wskazywała
-  "§2" (który dotyczy CAŁKIEM INNEJ kwestii — 14-dniowego
-  zawiadomienia POSŁÓW/senatorów/radnych, gdy TO ONI wnieśli skargę
-  w czyimś imieniu — NIE ma zastosowania do zwykłej skargi obywatela)
-  — właściwy jest **§1** (ogólny termin miesięczny)
-- ⭐⭐ WAŻNE ZASTRZEŻENIE SUBSTANCYJNE (nie tylko cytat): dla SAMEGO
-  PUODO orzecznictwo NSA (wyrok z 29.11.2023, sygn. III OSK 1959/22)
-  WSKAZUJE, że WŁAŚCIWYM terminem jest w rzeczywistości **3 MIESIĄCE**
-  — WYNIKAJĄCE z art. 78 ust. 2 RODO w zw. z art. 50 ust. 4 ustawy o
-  ochronie danych osobowych z 10.05.2018 — TRAKTOWANE jako przepis
-  SZCZEGÓLNY (lex specialis) wobec ogólnego, miesięcznego terminu z
-  art. 237 §1 KPA — DOPIERO bezskuteczny upływ TEGO 3-miesięcznego
-  terminu uprawnia do skargi na bezczynność do WSA — ⚠️ TEMAT
-  POZOSTAJE PRZEDMIOTEM SPORU między doktryną a częścią
-  wcześniejszego orzecznictwa (NSA WYRAŹNIE to zauważa w
-  uzasadnieniu) — TRAKTUJ **3 MIESIĄCE** jako BARDZIEJ WIARYGODNY,
-  AUTORYTATYWNY punkt odniesienia (NSA, sąd wyższej instancji), NIE
-  prosty, ogólny miesiąc z KPA
+- **art. 7 ust. 1–4 u.o.d.o.** — w sprawach nieuregulowanych stosuje się KPA; postępowanie
+  **jednoinstancyjne**; na postanowienia — skarga do sądu administracyjnego
+- **art. 35 § 3 KPA** — termin załatwienia sprawy: **miesiąc**, sprawa szczególnie
+  skomplikowana — **dwa miesiące** od wszczęcia; bezczynność — art. 36–37 KPA
+  ✅ [VER] RZĄD 1 2026-09-16l — u.o.d.o. t.j. `Dz.U. 2019 poz. 1781` (zmiany po t.j.
+  nie dotyczą trybu), KPA `Dz.U. 2025 poz. 1691`
+- ⛔ **KOREKTA 2026-09-16l — poprzednia podstawa była z niewłaściwego reżimu.** Art. 237 KPA
+  (§ 1 i § 2) reguluje **skargi i wnioski z działu VIII KPA**, a nie postępowanie
+  jurysdykcyjne wszczęte skargą do Prezesa UODO (art. 77 RODO → decyzja).
+- ⛔ **„Art. 50 ust. 4 u.o.d.o." NIE ISTNIEJE** — art. 50 ma dwa ustępy (roczne
+  sprawozdanie Prezesa UODO). Nie powołuj.
+- **Art. 78 ust. 2 RODO** — prawo do skutecznego środka ochrony prawnej przed sądem, jeżeli
+  organ nadzorczy **nie rozpatrzył skargi** albo **nie poinformował** osoby, której dane
+  dotyczą, **w terminie trzech miesięcy** o postępach lub efektach rozpatrywania skargi
+  z art. 77. Postępowanie wszczyna się przed sądem państwa siedziby organu (ust. 3).
+  ✅ [VER] RZĄD 1 2026-09-17u — Cellar (Urząd Publikacji UE), polska wersja CELEX 32016R0679
+- **Art. 77 ust. 2 RODO** — organ, do którego wniesiono skargę, informuje skarżącego
+  o postępach i efektach jej rozpatrywania, w tym o możliwości skorzystania ze środka
+  sądowego z art. 78 (bez terminu w tym przepisie — termin trzech miesięcy wynika z art. 78 ust. 2).
+- 🟨 **NSA, wyrok z 29.11.2023, III OSK 1959/22** (skarga kasacyjna Prezesa UODO od wyroku
+  WSA w Warszawie II SAB/Wa 678/21, sprawa bezczynności — oddalona). Status V-SYG-0
+  (2026-09-17): **OUT_OF_SCOPE** — brak trafienia na hoście orzeczenia.nsa.gov.pl; istnienie
+  widoczne wyłącznie w serwisie wtórnym. **Snapshot bez awansu:** nie traktuj go jako
+  „autorytatywnego" źródła terminu i nie przypisuj mu treści (w szczególności relacji
+  3 miesięcy do art. 35 KPA) bez odczytu uzasadnienia z bazy NSA.
+  (⛔ poprzednia wersja nakazywała traktować ten wyrok jako „bardziej wiarygodny,
+  autorytatywny punkt odniesienia" — sprzeczne z regułą NSA/WSA: snapshot bez awansu.)
 
 ## ⭐ KOREKTA TERMINOLOGICZNA
 
@@ -105,12 +112,14 @@ zadania-osob.md`), skarga do UODO jest środkiem NASTĘPCZYM.
 ## TERMIN ROZPATRZENIA
 
 ```
-□ ORIENTACYJNIE, NIE PÓŹNIEJ niż w MIESIĄC od otrzymania wg ogólnej
-  zasady art. 237 §1 KPA (⚠️ POPRAWIONE 2026-08-08 — było błędnie
-  "§2"; DODATKOWO: orzecznictwo NSA III OSK 1959/22 wskazuje na
-  właściwy termin **3 MIESIĘCY** z art. 78 ust. 2 RODO jako lex
-  specialis — patrz wyżej, sekcja przepisów)
-□ W SPRAWACH SKOMPLIKOWANYCH — do 60 DNI
+□ MIESIĄC (sprawa wymagająca postępowania wyjaśniającego), DWA MIESIĄCE
+  (sprawa szczególnie skomplikowana) — art. 35 § 3 KPA w zw. z art. 7 ust. 1
+  u.o.d.o. (✅ RZĄD 1 2026-09-16l)
+□ 3 miesiące z art. 78 ust. 2 RODO — przesłanka środka prawnego wobec organu
+  (✅ RZĄD 1 2026-09-17u); nie jest to termin załatwienia sprawy z art. 35 § 3 KPA
+□ Od DECYZJI — skarga do sądu administracyjnego, 30 dni od doręczenia
+  (art. 53 § 1 PPSA); brak odwołania — postępowanie jednoinstancyjne
+  (art. 7 ust. 2 u.o.d.o.)
 □ Pierwsza odpowiedź informuje o PODJĘTYCH krokach (np. wszczęcie
   postępowania) — NIE jest jeszcze rozstrzygnięciem
 ```
@@ -138,11 +147,15 @@ pierwszeństwa.
 
 ---
 
-## ŹRÓDŁA (zweryfikowane online 2026-07-21)
+## ŹRÓDŁA (zebrane online 2026-07-21 — ⚠️ RZĄD 3: serwisy wtórne, NIE podstawa)
+
+> ⛔ 2026-09-16l: z serwisu wtórnego pochodziła błędna podstawa „art. 237 § 2 KPA" (potem
+> „§ 1"). Podstawy w tym szablonie wynikają wyłącznie z odczytu treści u.o.d.o. i KPA
+> (sekcja przepisów). Poniższa lista służy do orientacji, nie do cytowania.
 
 - sylwiaczub.pl, rkrodo.pl, porady.pl — elementy skargi, zakaz żądania
   kary, brak opłaty (wyjątek pełnomocnik), związanie zakresem skargi.
-- politykabezpieczenstwa.pl — podstawa proceduralna (art. 237 §2 KPA),
+- politykabezpieczenstwa.pl — forma i wymogi (⛔ podawana tam „podstawa proceduralna art. 237 § 2 KPA" — błędna, patrz korekta),
   forma elektroniczna (ESP), wymogi formalne.
 - kancelariawyrzykowscy.pl — zasada subsydiarności, terminy
   administratora, forma ustna do protokołu, adres UODO.

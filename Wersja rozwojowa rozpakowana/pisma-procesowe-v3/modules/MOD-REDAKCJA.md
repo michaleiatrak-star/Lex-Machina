@@ -23,7 +23,7 @@ modelu W1-W2-W3. W szczególności:
   ✗ "napisz mi odpowiedź na ten pozew" → W1-W2-W3 (nowe pismo)
   ✗ "to pismo przeciwnika — jak je obalić" → MOD-OBAL + W1-W2-W3
   ✗ "dodaj nowy zarzut oparty na art. X" → wymaga W1 (nowa podstawa prawna
-    = nowa weryfikacja ISAP w pełnym modelu, nie tylko redakcja stylu)
+    = nowa weryfikacja w ELI (RZĄD 1) w pełnym modelu, nie tylko redakcja stylu)
 
 MOD-REDAKCJA może być WYWOŁANY WEWNĄTRZ W2 jako krok pomocniczy (redakcja
 draftu przed przejściem do W3), ale jako samodzielna ścieżka służy do

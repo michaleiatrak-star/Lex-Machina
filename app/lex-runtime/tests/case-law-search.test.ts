@@ -320,6 +320,42 @@ describe(
     );
 
     it(
+      "reports CBOSA zero hits as OUT_OF_SCOPE, never as absence of case law",
+      async () => {
+        const fetcher =
+          vi.fn(
+            async () =>
+              new Response(
+                "<html><body>Znaleziono 0 orzeczeń</body></html>",
+                {
+                  status: 200
+                }
+              )
+          );
+
+        const result =
+          await new CaseLawSearchService(
+            fetcher
+          ).search({
+            source: "CBOSA",
+            query:
+              "postępowanie",
+            limit: 1
+          });
+
+        expect(
+          result
+        ).toMatchObject({
+          status:
+            "OUT_OF_SCOPE",
+          reason:
+            "CBOSA_NO_HITS",
+          candidates: []
+        });
+      }
+    );
+
+    it(
       "fails closed when CBOSA result-count contract drifts",
       async () => {
         const fetcher =

@@ -128,6 +128,7 @@ describe("AiSdkProviderAdapter", () => {
         ]
       )
     ).toEqual({
+      cache_prompt: true,
       model:
         "local/mistral-nemo-12b-q4km",
       messages: [
@@ -144,6 +145,7 @@ describe("AiSdkProviderAdapter", () => {
       ],
       max_tokens:
         4_096,
+      temperature: 0.3,
       stream: true
     });
   });
@@ -667,6 +669,11 @@ describe("AiSdkProviderAdapter", () => {
           expect(
             body.max_tokens
           ).toBe(128);
+          // A short command is answered deterministically.
+          expect(
+            (body as { temperature?: unknown })
+              .temperature
+          ).toBe(0);
 
           return new Response(
             JSON.stringify({

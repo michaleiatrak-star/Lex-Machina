@@ -1,0 +1,20 @@
+{
+  "_note": "Ręcznie opisane wzorce odmiany nazw obcych i rzadkich, których SGJP nie zna lub zna częściowo. Wymagają przeglądu polonisty przed traktowaniem jako wzorzec normatywny.",
+  "persons": [
+    {"nom": "Hans Müller", "gender": "m1", "forms": {"gen": "Hansa Müllera", "dat": "Hansowi Müllerowi", "acc": "Hansa Müllera", "inst": "Hansem Müllerem", "loc": "Hansie Müllerze"}},
+    {"nom": "Emma Müller", "gender": "f", "forms": {"gen": "Emmy Müller", "dat": "Emmie Müller", "acc": "Emmę Müller", "inst": "Emmą Müller", "loc": "Emmie Müller"}},
+    {"nom": "Klaus Schmidt", "gender": "m1", "forms": {"gen": "Klausa Schmidta", "dat": "Klausowi Schmidtowi", "acc": "Klausa Schmidta", "inst": "Klausem Schmidtem", "loc": "Klausie Schmidcie"}},
+    {"nom": "Jerzy de Vries", "gender": "m1", "forms": {"gen": "Jerzego de Vriesa", "dat": "Jerzemu de Vriesowi", "acc": "Jerzego de Vriesa", "inst": "Jerzym de Vriesem", "loc": "Jerzym de Vriesie"}},
+    {"nom": "Olga Petrenko", "gender": "f", "forms": {"gen": "Olgi Petrenko", "dat": "Oldze Petrenko", "acc": "Olgę Petrenko", "inst": "Olgą Petrenko", "loc": "Oldze Petrenko"}},
+    {"nom": "Oksana Kowalenko", "gender": "f", "forms": {"gen": "Oksany Kowalenko", "dat": "Oksanie Kowalenko", "acc": "Oksanę Kowalenko", "inst": "Oksaną Kowalenko", "loc": "Oksanie Kowalenko"}},
+    {"nom": "Mark Taylor", "gender": "m1", "forms": {"gen": "Marka Taylora", "dat": "Markowi Taylorowi", "acc": "Marka Taylora", "inst": "Markiem Taylorem", "loc": "Marku Taylorze"}},
+    {"nom": "Sarah Brown", "gender": "f", "forms": {"gen": "Sarah Brown", "dat": "Sarah Brown", "acc": "Sarah Brown", "inst": "Sarah Brown", "loc": "Sarah Brown"}},
+    {"nom": "Ahmed Hassan", "gender": "m1", "forms": {"gen": "Ahmeda Hassana", "dat": "Ahmedowi Hassanowi", "acc": "Ahmeda Hassana", "inst": "Ahmedem Hassanem", "loc": "Ahmedzie Hassanie"}},
+    {"nom": "Viktor Orbanek", "gender": "m1", "forms": {"gen": "Viktora Orbanka", "dat": "Viktorowi Orbankowi", "acc": "Viktora Orbanka", "inst": "Viktorem Orbankiem", "loc": "Viktorze Orbanku"}},
+    {"nom": "Lukas Novotny", "gender": "m1", "forms": {"gen": "Lukasa Novotnego", "dat": "Lukasowi Novotnemu", "acc": "Lukasa Novotnego", "inst": "Lukasem Novotnym", "loc": "Lukasie Novotnym"}},
+    {"nom": "Anna Novotna", "gender": "f", "forms": {"gen": "Anny Novotnej", "dat": "Annie Novotnej", "acc": "Annę Novotną", "inst": "Anną Novotną", "loc": "Annie Novotnej"}},
+    {"nom": "Tomasz Kowalczuk-Brandt", "gender": "m1", "forms": {"gen": "Tomasza Kowalczuka-Brandta", "dat": "Tomaszowi Kowalczukowi-Brandtowi", "acc": "Tomasza Kowalczuka-Brandta", "inst": "Tomaszem Kowalczukiem-Brandtem", "loc": "Tomaszu Kowalczuku-Brandcie"}},
+    {"nom": "Pierre Dubois", "gender": "m1", "forms": {"gen": "Pierre'a Dubois", "dat": "Pierre'owi Dubois", "acc": "Pierre'a Dubois", "inst": "Pierre'em Dubois", "loc": "Pierze Dubois"}},
+    {"nom": "Giovanni Rossi", "gender": "m1", "forms": {"gen": "Giovanniego Rossiego", "dat": "Giovanniemu Rossiemu", "acc": "Giovanniego Rossiego", "inst": "Giovannim Rossim", "loc": "Giovannim Rossim"}}
+  ]
+}

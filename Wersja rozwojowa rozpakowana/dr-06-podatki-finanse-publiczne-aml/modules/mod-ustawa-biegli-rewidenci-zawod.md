@@ -71,7 +71,7 @@ rewidentów oraz "atestacja sprawozdawczości zrównoważonego rozwoju"
    Obowiązki sprawozdawczości ESG dla różnych kategorii podmiotów (duże
    jednostki, MŚP) były odraczane wielokrotnie (nowelizacja lipiec 2025 —
    kolejne 2-letnie odroczenie). NIE podawaj dat wejścia w życie obowiązków
-   ESG z pamięci — każdorazowo weryfikuj aktualny harmonogram w ISAP i na
+   ESG z pamięci — każdorazowo weryfikuj aktualny harmonogram w ELI (RZĄD 1) i na
    stronach PIBR/MF.
 
 ⭐⭐⭐ AKTUALNY HARMONOGRAM (uzupełniono 2026-08-12, na żądanie

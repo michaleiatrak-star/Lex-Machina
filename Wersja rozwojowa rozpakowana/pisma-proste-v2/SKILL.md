@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.15"
+version: "2.21"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -56,7 +56,7 @@ Pismo ma jeden przedmiot i jedną podstawę prawną. Jeśli sprawa ma więcej w�
 → przełącz na `pisma-procesowe-v3`.
 
 **Zasada 2 — Weryfikacja przepisu przed użyciem:**
-Każdy przywołany artykuł weryfikuj na `isap.sejm.gov.pl` lub `prawo.sejm.gov.pl`.
+Każdy przywołany artykuł weryfikuj na `ELI (RZĄD 1)` lub `prawo.sejm.gov.pl`.
 Podaj pełne oznaczenie przy pierwszym użyciu.
 
 **Zasada 3 — Opłata sądowa zawsze:**
@@ -209,7 +209,7 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Typ pisma | Termin zawity | Opłata | Schemat |
 |-----------|---------------|--------|---------|
 | Sprzeciw od nakazu zapłaty (EPU/zwykły) | **14 dni** od doręczenia | brak | SPA |
-| Zarzuty od nakazu (postęp. nakazowe) | **7 dni** od doręczenia | 3/4 wpisu (art. 19 §3 KSCU) | SPB |
+| Zarzuty od nakazu (postęp. nakazowe) | **miesiąc** od doręczenia w UE, w tym w Polsce (art. 480² § 2 pkt 3 KPC) | 3/4 opłaty; od konsumenta max 750 zł (art. 19 ust. 4 KSCU) | SPB |
 | Wniosek o nadanie klauzuli | brak | 50 zł (art. 71 pkt 1–6 KSCU) | SPC |
 | Wniosek o wszczęcie egzekucji | brak | brak | SPD |
 | Wezwanie przedsądowe do zapłaty | brak | brak | SPE |
@@ -288,7 +288,7 @@ przepisu.
 | Odpowiedź na zawezwanie | brak | — |
 
 ⛔ **Naprawione 2026-09-12 (cztery pozycje):** progi WPS opisane były jako
-„art. 27 pkt 1–6 KSCU" — art. 27 ustanawia opłatę stałą 200 zł od enumerowanych
+„art. 27 pkt 1–6 KSCU" — art. 27 ustanawia opłatę stałą 200 zł od enumerowanych <!-- T28-OK: cytat opisowy — dokumentacja naprawy -->
 pozwów i nie zna progów; dwa progi były przesunięte o wiersz; wniosek
 o zabezpieczenie miał podstawę art. 69 zamiast art. 68 pkt 1; wiersz
 „doręczenie przez komornika 60 zł | Rozporządzenie MS" nie miał podstawy

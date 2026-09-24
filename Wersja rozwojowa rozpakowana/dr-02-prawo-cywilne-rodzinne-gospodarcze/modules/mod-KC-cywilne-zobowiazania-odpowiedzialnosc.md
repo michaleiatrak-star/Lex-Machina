@@ -23,7 +23,7 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Kodeks cywilny (KC) | Dz.U. 2026 poz. 795 t.j. ze zm. | Weryfikuj zmiany po t.j. w ISAP |
+| Kodeks cywilny (KC) | Dz.U. 2026 poz. 795 t.j. ze zm. | Weryfikuj zmiany po t.j. w ELI (RZĄD 1) |
 | Kodeks postępowania cywilnego (KPC) | Dz.U. 2026 poz. 468 t.j. | Nowelizacja: Dz.U. 2025 poz. 1172 (w życie 01.03.2026) |
 | Ustawa o kosztach sądowych (KSCU) | Dz.U. 2025 poz. 1228 t.j. | Weryfikuj aktualne opłaty |
 
@@ -57,7 +57,7 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 |---|---|---|
 | Podstawa | Czyn niedozwolony — brak lub niezależność od umowy | Niewykonanie lub nienależyte wykonanie umowy |
 | Ciężar dowodu | **Powód** musi wykazać: winę + szkodę + związek przyczynowy | **Domniemanie winy dłużnika** — dłużnik musi udowodnić brak winy |
-| Przedawnienie ogólne | 3 lata od wiedzy o szkodzie i sprawcy; max 10 lat od zdarzenia | 3 lata (dz. gosp.) / 6 lat (ogólne) |
+| Przedawnienie ogólne | 3 lata od wiedzy o szkodzie i sprawcy; max 10 lat od zdarzenia (art. 442¹ § 1) — ⛔ **szkoda na osobie: granica 10 lat nie obowiązuje** (§ 3) | 3 lata (dz. gosp.) / 6 lat (ogólne), koniec roku kalendarzowego (art. 118) |
 | Przedawnienie — przestępstwo | 20 lat od popełnienia | — |
 | Zakres odszkodowania | Adekwatny związek przyczynowy (art. 361 §1 KC) | j.w. + art. 361 §2 (damnum emergens + lucrum cessans) |
 
@@ -65,7 +65,7 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 
 ### Szczególne podstawy odpowiedzialności (zasada ryzyka — bez winy)
 
-> ⚠️ Brzmienie każdego artykułu — weryfikuj w aktualnym tekście KC w ISAP.
+> ⚠️ Brzmienie każdego artykułu — weryfikuj w aktualnym tekście KC w ELI (RZĄD 1).
 
 | Art. KC | Podmiot odpowiedzialny | Zasada |
 |---|---|---|
@@ -138,7 +138,7 @@ CZP 30/17), OIRP Warszawa (analiza orzecznictwa), rp.pl.
 
 ```
 Jaka wartość sporu?
-  ≤ 100 000 zł → SR | > 100 000 zł → SO (weryfikuj art. 17 KPC w ISAP)
+  ≤ 100 000 zł → SR | > 100 000 zł → SO (weryfikuj art. 17 KPC w ELI (RZĄD 1))
   ↓
 Czy istnieje dokument uzasadniający nakaz nakazowy (art. 485 KPC)?
   TAK → postępowanie nakazowe (¼ opłaty, natychmiastowe zabezpieczenie)

@@ -5,11 +5,17 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   buildCoreLegalResourcePrompt,
   isLocalLightweightConversation,
+  latestUserTurn,
   LexExecutionEngine
 } from "../src/execution-engine.js";
 import { LexSkillRegistry } from "../src/registry.js";
 import { ProviderGateway, ProviderRegistry } from "../src/providers/gateway.js";
 import { ScriptedProviderAdapter } from "../src/providers/scripted-provider.js";
+import type {
+  ProviderAdapter,
+  ProviderStreamParams,
+  ProviderStreamResult
+} from "../src/providers/types.js";
 
 const roots: string[] = [];
 const DR02 = "dr-02-prawo-cywilne-rodzinne-gospodarcze";
@@ -162,6 +168,26 @@ describe("local lightweight conversation", () => {
         true
       )
     ).toBe(true);
+    // Earlier turns of the conversation must not hide a trivial command.
+    expect(
+      isLocalLightweightConversation(
+        "local/bielik-11b-v3-q4km",
+        "Użytkownik: napisz ok\n\nAsystent: Nie udało się.\n\nUżytkownik: Napisz ok",
+        false
+      )
+    ).toBe(true);
+    expect(
+      isLocalLightweightConversation(
+        "local/bielik-11b-v3-q4km",
+        "Użytkownik: napisz ok\n\nAsystent: ok\n\nUżytkownik: przeanalizuj art. 471 k.c.",
+        false
+      )
+    ).toBe(false);
+    expect(
+      latestUserTurn(
+        "Użytkownik: a\n\nAsystent: b\n\nUżytkownik: c"
+      )
+    ).toBe("c");
     expect(
       isLocalLightweightConversation(
         "gpt-5.6-luna",
@@ -287,5 +313,194 @@ describe("LexExecutionEngine", () => {
     ).rejects.toMatchObject({
       target: "prawo-polskie-v2"
     });
+  });
+});
+
+
+const DR03 = "dr-03-prawo-karne-wykroczenia-egzekucja";
+
+class CapturingAdapter implements ProviderAdapter {
+  readonly id = "openai" as const;
+  readonly label = "capture";
+  readonly capabilities = {
+    streaming: true,
+    tools: true,
+    reasoning: true,
+    modelDiscovery: false
+  };
+  readonly calls: ProviderStreamParams[] = [];
+
+  async stream(
+    params: ProviderStreamParams
+  ): Promise<ProviderStreamResult> {
+    this.calls.push(params);
+    return { fullText: "Odpowiedź." };
+  }
+}
+
+function capturingEngine(
+  registry: LexSkillRegistry
+): { engine: LexExecutionEngine; adapter: CapturingAdapter } {
+  const providers = new ProviderRegistry();
+  const adapter = new CapturingAdapter();
+  providers.register(adapter);
+  return {
+    engine: new LexExecutionEngine(registry, new ProviderGateway(providers)),
+    adapter
+  };
+}
+
+function criminalFixture(withQualifier: boolean): LexSkillRegistry {
+  const registry = fixture();
+  const root = path.dirname(registry.get("shared")!.directory);
+  createSkill(root, DR03);
+  fs.appendFileSync(
+    path.join(root, "prawo-polskie-v2", "ROUTING-MAP.md"),
+    `- ${DR03}\n`
+  );
+  if (withQualifier) {
+    fs.mkdirSync(path.join(root, DR03, "modules"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, DR03, "modules", "mod-KK-kwalifikator-karnomaterialny.md"),
+      "# KWALIFIKATOR INDEX\n"
+    );
+  }
+  const rescanned = new LexSkillRegistry(root);
+  rescanned.scan();
+  return rescanned;
+}
+
+describe("legal skill loading scope", () => {
+  it("answers a router-classified non-legal message without loading legal skills", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    const result = await lex.executePolishLegalQuery({
+      query: "Cześć, jak się masz?",
+      conversationalOnly: true,
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+
+    expect(adapter.calls).toHaveLength(1);
+    expect(adapter.calls[0]?.systemPrompt).toContain("niezwiązaną z prawem");
+    expect(adapter.calls[0]?.systemPrompt).not.toContain("# SKILL:");
+    expect(adapter.calls[0]?.tools ?? []).toEqual([]);
+    expect(result.domainSkills).toEqual([]);
+    expect(result.executionSkills).toEqual([]);
+    expect(result.events.at(-1)).toMatchObject({
+      target: "G7_VERTICAL_SLICE",
+      detail: "conversational-non-legal"
+    });
+  });
+
+  it("keeps the full legal path when documents are attached", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    await lex.executePolishLegalQuery({
+      query: "Co o tym sądzisz?",
+      documentContext: "[DOCUMENT doc-1] umowa najmu",
+      conversationalOnly: true,
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+
+    expect(adapter.calls[0]?.systemPrompt).toContain("# SKILL:");
+    expect(adapter.calls[0]?.systemPrompt).not.toContain("niezwiązaną z prawem");
+  });
+
+  it("preloads the criminal qualifier index for every DR-03 matter", async () => {
+    const { engine: lex, adapter } = capturingEngine(criminalFixture(true));
+    const result = await lex.executePolishLegalQuery({
+      query: "Kolega zabrał mi telefon.",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" }
+    });
+
+    expect(adapter.calls[0]?.systemPrompt).toContain("# KWALIFIKATOR INDEX");
+    expect(
+      result.events.some(
+        (event) =>
+          event.type === "resource_read" &&
+          event.target ===
+            `${DR03}/modules/mod-KK-kwalifikator-karnomaterialny.md` &&
+          event.status === "OK"
+      )
+    ).toBe(true);
+  });
+
+  it("fails closed when the criminal qualifier module is missing", async () => {
+    const { engine: lex } = capturingEngine(criminalFixture(false));
+    await expect(
+      lex.executePolishLegalQuery({
+        query: "Kolega zabrał mi telefon.",
+        provider: "openai",
+        model: "account/openai/default",
+        route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" }
+      })
+    ).rejects.toThrow("criminal-law qualifier");
+  });
+});
+
+describe("local legal prompt size", () => {
+  it("gives local models a digest of long skills and a pointer to the full text", async () => {
+    const { localSkillDigest } = await import("../src/execution-engine.js");
+    const body = [
+      "# DR-02",
+      "Wstęp ".repeat(4000),
+      "## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI",
+      "Zwykły akapit bez reguł.",
+      "NIGDY nie podawaj artykułu wyłącznie z pamięci."
+    ].join("\n");
+    const digest = localSkillDigest("dr-02-x", "Opis domeny.", body);
+    expect(digest.length).toBeLessThan(3_200);
+    expect(digest).toContain("HARD GATE");
+    expect(digest).toContain("NIGDY nie podawaj");
+    expect(digest).not.toContain("Zwykły akapit");
+    expect(digest).toContain('read_legal_resource "dr-02-x/SKILL.md"');
+  });
+
+  it("uses the digest for local models and the full body for cloud models", async () => {
+    const registry = fixture();
+    const root = path.dirname(registry.get("shared")!.directory);
+    fs.writeFileSync(
+      path.join(root, DR02, "SKILL.md"),
+      `---\nname: ${DR02}\ndescription: Prawo cywilne.\n---\n# DR02\n${"Treść ".repeat(3000)}\n`
+    );
+    const rescanned = new LexSkillRegistry(root);
+    rescanned.scan();
+    const local = capturingEngine(rescanned);
+    await local.engine.executePolishLegalQuery({
+      query: "Spór o zapłatę faktury.",
+      provider: "openai",
+      model: "local/bielik-11b-v3-q4km",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+    const cloud = capturingEngine(rescanned);
+    await cloud.engine.executePolishLegalQuery({
+      query: "Spór o zapłatę faktury.",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+    expect(local.adapter.calls[0]?.systemPrompt).toContain(`# SKILL (DIGEST): ${DR02}`);
+    expect(cloud.adapter.calls[0]?.systemPrompt).toContain(`# SKILL: ${DR02}`);
+    expect(
+      local.adapter.calls[0]!.systemPrompt!.length
+    ).toBeLessThan(cloud.adapter.calls[0]!.systemPrompt!.length / 2);
+  });
+
+  it("forwards live draft callbacks to the provider", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    const deltas: string[] = [];
+    await lex.executePolishLegalQuery({
+      query: "Spór o zapłatę faktury.",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" },
+      draftCallbacks: { onContentDelta: (text: string) => deltas.push(text) }
+    });
+    adapter.calls[0]?.callbacks?.onContentDelta?.("abc");
+    expect(deltas).toEqual(["abc"]);
   });
 });

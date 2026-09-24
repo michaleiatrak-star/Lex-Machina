@@ -7,7 +7,7 @@
   ✅ [VER: ops.pl/2025/09/tekst-jednolity-3 + isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001208, 2026-05-31]
   Aktualizacje wskutek: Dz.U. 2024 poz. 858 (Aktywny Rodzic), poz. 1615, poz. 1871; Dz.U. 2025 poz. 620, 619
 
-**Weryfikacja:** isap.sejm.gov.pl + gov.pl/web/rodzina przed każdym cytowaniem kwot.
+**Weryfikacja:** ELI (RZĄD 1) + gov.pl/web/rodzina przed każdym cytowaniem kwot.
 
 ## Zakres
 Katalog świadczeń rodzinnych (art. 2 u.ś.r.):

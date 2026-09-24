@@ -90,7 +90,7 @@ TJ = re.compile(r"t\.?\s?j\.?|tekst[a-ząćęłńóśźż]*\s+jednolit", re.I)
 #    z ręcznego przeglądu 75 trafień. Każde dodane słowo zmniejsza liczbę
 #    fałszywych alarmów i zwiększa ryzyko przeoczenia — zmieniać świadomie.
 HISTORYCZNY = re.compile(
-    r"poprzedni|poprzednio|dotychczas|wyga[sś]|uchylon|zast[ąa]pion|historyczn|"
+    r"poprzedni|poprzednio|dotychczas|wyga[sś]|uchylon|zast[ąa]pion|historyczn|pierwotn|podmian|"
     r"archiw|błędn|bledn|SKORYGOWAN|dawn[ya]|PREV|NIEAKTUAL|nieaktual|"
     r"sprawdź nowszy|nie mylić|→ nowy|-> nowy",
     re.I,
@@ -113,6 +113,13 @@ CEZURA = re.compile(r"w\s+życie|wchodzi\s+w\s+życie|vacatio|od\s+\d{1,2}[.\-/]
 WYLICZENIE = re.compile(r"ze\s+zm\.|zmian[yi]|nowelizacj", re.I)
 
 MARTWE = {"wygaśnięcie aktu", "uchylony", "uznany za uchylony", "nieobowiązujący"}
+# O-11(c), 2026-09-16e — trzecia klasa: numer aktu PIERWOTNEGO albo aktu ZMIENIAJĄCEGO,
+# który ELI oznacza jako zastąpiony tekstem jednolitym, a który stoi jako aktualna
+# podstawa. Zmierzone przypadki: rozporządzenie MS o Funduszu Sprawiedliwości cytowane
+# jako `2017/1760` przy t.j. `2025/1298`; rozporządzenie MKiŚ `2024/1284` („akt objęty
+# tekstem jednolitym") jako rzekomy t.j. ustawy. Sygnał słabszy niż MARTWY — brzmienie
+# pierwotne bywa cytowane świadomie (data aktu, przepisy przejściowe).
+ZASTAPIONE_TJ = {"akt posiada tekst jednolity", "akt objęty tekstem jednolitym"}
 
 # ⛔ DRUGA KLASA, LUSTRZANA — flaga O-10, dodana 2026-09-10r.
 #   Akt o statusie „obowiązujący", którego data wejścia w życie jest w PRZYSZŁOŚCI,
@@ -266,6 +273,9 @@ def main():
                 cel = bez_cezury if WYLICZENIE.search(tresc) else przedwczesne
                 cel.setdefault(p, []).append((rel, ln, tresc))
     n_przedw = sum(len(v) for v in przedwczesne.values())
+    zastapione = {p: v for p, v in kand.items()
+                  if cache.get(p, {}).get("status") in ZASTAPIONE_TJ}
+    n_zast = sum(len(v) for v in zastapione.values())
     n_bez = sum(len(v) for v in bez_cezury.values())
 
     print("\n" + "-" * 72)
@@ -313,6 +323,20 @@ def main():
     if bez_daty:
         print(f"\n⚠️ {bez_daty} numerów bez pola `entryIntoForce` w cache — "
               f"kontrola O-10 ich nie objęła (odśwież cache bez --offline).")
+
+    print("\n" + "-" * 72)
+    if zastapione:
+        print(f"⚠️ ZASTĄPIONE TEKSTEM JEDNOLITYM: {len(zastapione)} numerów w {n_zast} miejscach "
+              f"(O-11(c)). Cytuj t.j. albo zaznacz, że chodzi o brzmienie pierwotne.")
+        for poz, v in sorted(zastapione.items(), key=lambda x: -len(x[1])):
+            c = cache[poz]
+            print(f"  Dz.U. {poz.replace('/', ' poz. ')}  [{c['status']}]  {len(v)}×")
+            print(f"      {c['tytul'][:100]}")
+            for rel, ln, tresc in v[:3]:
+                print(f"      • {rel}:{ln}")
+                print(f"        {tresc[:120]}")
+    else:
+        print("✅ Brak numerów zastąpionych tekstem jednolitym w pozycji aktualnej podstawy.")
 
     if brak_odp:
         print(f"\n⛔ BRAK ODPOWIEDZI API dla {len(brak_odp)} numerów — wynik NIEPEŁNY.")

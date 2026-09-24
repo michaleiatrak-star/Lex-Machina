@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -16,7 +16,7 @@
 
 ## ANEKS B — WYPADEK PRZY PRACY I CHOROBA ZAWODOWA
 
-### Akty prawne (weryfikuj Dz.U. w ISAP)
+### Akty prawne (weryfikuj Dz.U. w ELI (RZĄD 1))
 ```
 Ustawa z dnia 30.10.2002 r. o ubezpieczeniu społecznym z tytułu wypadków
 przy pracy i chorób zawodowych — Dz.U. 2025 poz. 1644 t.j. (obwieszczenie
@@ -54,7 +54,7 @@ są w jednym, bardziej szczegółowym miejscu:
 □ Czy pracodawca naruszył przepisy BHP → roszczenie uzupełniające z KC!
 ```
 
-### Świadczenia z ubezpieczenia wypadkowego (weryfikuj kwoty w ISAP)
+### Świadczenia z ubezpieczenia wypadkowego (weryfikuj kwoty w ELI (RZĄD 1))
 ```
 JEDNORAZOWE ODSZKODOWANIE (art. 11 ustawy):
   → Wypłacane przez ZUS za stały lub długotrwały uszczerbek na zdrowiu
@@ -79,7 +79,10 @@ Protokół powypadkowy: max 14 dni od zawiadomienia (art. 234 §1 KP — weryfik
 Zatwierdzenie protokołu przez pracodawcę: niezwłocznie po sporządzeniu
 Wniosek o jednorazowe odszkodowanie do ZUS: po zakończeniu leczenia/rehabilitacji
 Przedawnienie roszczeń z KC (wypadek): 3 lata od dnia, gdy poszkodowany dowiedział
-  się o szkodzie i zobowiązanym (art. 442¹ KC); max 10 lat od zdarzenia — weryfikuj ISAP
+  się o szkodzie i zobowiązanym (art. 442¹ § 1 KC).
+  ⛔ SZKODA NA OSOBIE (art. 442¹ § 3): przedawnienie nie może skończyć się wcześniej niż 3 lata od dowiedzenia się — granica 10 lat NIE obowiązuje
+  — wypadek przy pracy to szkoda na osobie; małoletni — nie wcześniej niż 2 lata od
+  pełnoletności (§ 4); przestępstwo — 20 lat od czynu (§ 2). ✅ [VER] RZĄD 1 2026-09-16f (KC `Dz.U. 2026 poz. 795`)
 ```
 
 ### Ścieżka sporna
@@ -93,7 +96,7 @@ ZUS odmawia świadczenia?
   → Termin: 1 miesiąc od doręczenia decyzji ZUS (art. 477⁹ KPC)
 
 Choroba zawodowa:
-  → Wykaz chorób zawodowych: rozporządzenie RM — weryfikuj w ISAP
+  → Wykaz chorób zawodowych: rozporządzenie RM — weryfikuj w ELI (RZĄD 1)
   → Organ: Państwowy Inspektor Sanitarny (PIS) → decyzja → ZUS → świadczenia
 ```
 

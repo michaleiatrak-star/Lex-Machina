@@ -1819,6 +1819,14 @@ export function registerWorkspaceRoutes(
                   WorkspaceThreadMessage["documentCitations"]
                 >
             }
+          : {}),
+        ...(Array.isArray(raw.restorations)
+          ? {
+              restorations:
+                raw.restorations as NonNullable<
+                  WorkspaceThreadMessage["restorations"]
+                >
+            }
           : {})
       };
       const saved = await dependencies.caseAccessService.withCaseDataKey(

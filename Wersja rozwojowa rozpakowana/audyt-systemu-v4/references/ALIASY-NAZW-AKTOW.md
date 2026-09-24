@@ -48,7 +48,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2025 poz. 843 | Ustawa o ryczałcie od przychodów | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 670 | Ustawa o OOŚ / oceny środowiskowe | ustawa o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa… | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1587 | Ustawa o odpadach / gospodarka komunalna | ustawa o odpadach | 2026-09-10c, RZĄD 1 |
-| **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) | Ustawa o zwolnieniach grupowych | ustawa o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | 2026-09-10c, RZĄD 1 |
+| Dz.U. 2026 poz. 1195 | Ustawa o zwolnieniach grupowych | ustawa o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | 2026-09-16c, RZĄD 1 (t.j. z 4.09.2026; poprzedni t.j. 2025 poz. 570 — wygasły; wiersz naprawiony — podmiana numeru z 10r wkleiła adnotację do komórki numeru i rozbiła kontrakt T15) |
 | Dz.U. 2023 poz. 1725 | Ustawa o skardze na przewlekłość postępowania | ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1725 | Ustawa o skargach na przewlekłość | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 522 | ⭐⭐ Ustawa o rachunkowości z 29.09.1994 | ustawa o rachunkowości | 2026-09-10c, RZĄD 1 |
@@ -59,6 +59,17 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2022 poz. 1816 | Ustawa o substancjach chem. | ustawa o substancjach chemicznych i ich mieszaninach | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1215 | Ustawa o partiach politycznych z dnia 27 czerwca 1997 r. | ustawa o partiach politycznych | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2025 poz. 300 | Ustawa o referendum ogólnokrajowym z dnia 14 marca 2003 r. | ustawa o referendum ogólnokrajowym | 2026-09-10c, RZĄD 1 |
+| Dz.U. 2024 poz. 1186 | Ustawa o KRS | ustawa o Krajowej Radzie Sądownictwa | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2026 poz. 985 | Ustawa frankowa | ustawa o szczególnych rozwiązaniach w zakresie rozpoznawania spraw dotyczących zawartych z konsumentami umów kredytu denominowanego lub indeksowanego do CHF | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2024 poz. 1131 | Rozporządzenie UE 2018/1672 (kontrola środków pieniężnych) | Prawo dewizowe (wiersz złożony: rozporządzenie UE + ustawa krajowa) | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2025 poz. 1733 | Ustawa wdrożeniowa 2021 | ustawa o zasadach realizacji zadań finansowanych ze środków europejskich w perspektywie finansowej 2021–2027 | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2023 poz. 1448 | Ustawa o bezpieczeństwie żywności | ustawa o bezpieczeństwie żywności i żywienia | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2018 poz. 1000 | Ustawa UODO stara (2018) | ustawa o ochronie danych osobowych (akt pierwotny; odesłanie historyczne) | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2025 poz. 499 | Ustawa antykorupcyjna z 1997 r. | ustawa o ograniczeniu prowadzenia działalności gospodarczej przez osoby pełniące funkcje publiczne | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2026 poz. 191 | Ustawa o PCC | ustawa o podatku od czynności cywilnoprawnych | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2024 poz. 1292 | Ustawa o ochronie zabytków | ustawa o ochronie zabytków i opiece nad zabytkami | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2025 poz. 1208 | Ustawa o świadczeniach rodzinnych | ustawa o świadczeniach rodzinnych (wiersz złożony z „Za życiem") | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2023 poz. 1587 | Ustawa o odpadach | ustawa o odpadach (wiersz złożony z gospodarką komunalną) | 2026-09-16d, RZĄD 1 (T31) |
 
 ---
 

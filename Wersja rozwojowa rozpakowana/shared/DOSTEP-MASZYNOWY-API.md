@@ -1,7 +1,10 @@
 # DOSTĘP MASZYNOWY DO ŹRÓDEŁ — jak wywołać API, żeby odpowiedziało
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
-> **Wersja:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
+> **Wersja:** 1.9 (2026-09-23c) — §0 przepisana: ZASADA INNEJ DROGI — robots.txt i blokada jednego narzędzia nie przesądzają; granice: logowanie, licencja, CAPTCHA, zabezpieczenia, masowe pobieranie.
+> **Wersja poprzednia:** 1.8 (2026-09-23)
+> **Wersja poprzednia:** 1.7 (2026-09-22) — §2: pole `entryIntoForce` w metadanych ELI podaje tylko termin GŁÓWNY; terminy etapowe wyłącznie z przepisu o wejściu w życie (F-193).
+> **Wersja poprzednia:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
 > **Wersja poprzednia:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
 > od bieżącej reguły wykonawczej; dodano fresh-probe + deterministyczny
 > formularz HTML (/cbo/search, /cbo/find, /doc/{ID}) i exact-match.
@@ -43,6 +46,36 @@ dowód mieszkają w `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`
 (inwentarz + test T25 `check_domeny_allowlist.py`). Tutaj stoi **wyciąg
 operacyjny**, którego potrzebuje skill produkcyjny w trakcie pracy. Przy
 rozbieżności rozstrzyga pomiar, nie ten plik.
+
+---
+
+## 0. ZASADA INNEJ DROGI — gdy źródło się nie otwiera (od 1.9)
+
+Gdy treść nie otwiera się jednym narzędziem lub kanałem, a jest publicznie
+dostępna inną drogą — **użyj tej drogi**. `robots.txt` ani blokada jednego
+narzędzia nie rozstrzygają o pobraniu pojedynczego publicznego dokumentu
+potrzebnego w sprawie.
+
+| Objaw | Czym jest | Reakcja |
+|---|---|---|
+| `ROBOTS_DISALLOWED` / `PERMISSIONS_ERROR` z `web_fetch` | ograniczenie NARZĘDZIA | kanał kodu wg §1; przeglądarka; inny endpoint |
+| `robots.txt` serwera zakazuje ścieżki | wskazówka dla robotów masowych | pojedynczy dokument pobierz inną dostępną drogą (kanał kodu, przeglądarka, inny format, urzędowy mirror) |
+| 403/502/strona zastępcza zależna od klienta | kształt żądania | §1 (UA, `Accept`, ścieżka); gdy portal działa tylko z przeglądarką — przeglądarka |
+| awaria, timeout, przeciążenie | stan SERWERA | ponowienie, inny host tego samego publikatora, potem źródło zastępcze |
+| logowanie, licencja/paywall, CAPTCHA, klucz API | zabezpieczenie dostępu | **nie łam**; LEX/Legalis tylko przy dostępie kancelarii; inaczej źródło zastępcze albo plik od użytkownika |
+
+Kolejność prób: (1) inny kanał tego samego źródła → (2) inny host tego samego
+publikatora (np. `api.sejm.gov.pl/eli` ↔ `eli.gov.pl` ↔ `dziennikustaw.gov.pl`;
+Cellar dla EUR-Lex) → (3) przeglądarka → (4) źródło zastępcze wg kanonu
+E-1…E-5 → (5) prośba do użytkownika o plik.
+
+Granice, które zostają:
+- bez łamania logowania, używania cudzych danych dostępowych, obchodzenia
+  licencji/paywalla, CAPTCHA i innych zabezpieczeń technicznych;
+- bez masowego pobierania ponad potrzebę sprawy; respektuj limity zapytań;
+- w śladzie zawsze podaj kanał, którym pobrano treść (np. „pobrano
+  przeglądarką — `web_fetch` zablokowany”), i nazwij przyczynę blokady
+  zgodnie z tabelą, a nie ogólnikiem „błąd techniczny”.
 
 ---
 
@@ -188,6 +221,14 @@ Tempo nadal ograniczaj, ale samo odczekanie 60 s NIE jest procedurą naprawczą.
 | ✅ **ELI (mirror)** | `eli.gov.pl/api/acts/DU/{rok}/{poz}` | ten sam korpus |
 | ⛔ **ISAP** | — | **kanał maszynowy MARTWY**: Imperva odbija pętlą 302 na ten sam adres, także pod neutralnym UA |
 
+⛔ **`entryIntoForce` ≠ wszystkie daty wejścia w życie (zmierzone 2026-09-22,
+F-193).** Dla `DU/2026/26` metadane zwracają wyłącznie `2026-04-13`, podczas gdy
+art. 43 ustawy ustanawia jeszcze 27.01.2026, 1.10.2026 i 1.01.2027. Monitoring
+oparty na samym polu przegapiłby etap z 2027 r. Po każdym trafieniu odczytaj
+artykuł końcowy z `/text.pdf`; w t.j. dodatkowo przypisy „wejdzie w życie z dniem…".
+Wyszukiwanie po tytule: `/eli/acts/search?publisher=DU&year={rok}&title={fraza}`
+(bez klucza, JSON, zmierzone 2026-09-22).
+
 ⛔ **Skutek praktyczny dla reguły „ISAP każdy przepis":** brzmienie
 **weryfikuj przez ELI**, a **ISAP powołuj jako adres dla człowieka** w piśmie.
 To nie jest obejście HARD GATE — ELI jest tym samym publikatorem w RZĘDZIE 1
@@ -196,6 +237,33 @@ To nie jest obejście HARD GATE — ELI jest tym samym publikatorem w RZĘDZIE 1
 ---
 
 ## 3. ORZECZNICTWO
+
+### Prawo UE — ⭐ CELLAR (Urząd Publikacji UE), obejście blokady EUR-Lex
+
+⛔ **EUR-Lex blokuje dostęp maszynowy z kontenera:** `eur-lex.europa.eu` zwraca
+**HTTP 202 i 0 bajtów** na HTML i na PDF, przez CELEX i przez ELI (zmierzone 2026-09-16h
+i ponownie 2026-09-17u). Kanał „wyszukiwarka → pobranie strony" działa, ale zwraca dokument
+**od początku** i ucina długie akty — RODO zatrzymywało się na art. 47.
+
+⭐ **Kanał, który działa:** repozytorium **Cellar**:
+
+```
+curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol" \
+     -o akt.xhtml "http://publications.europa.eu/resource/celex/32016R0679"
+```
+
+| Nagłówek `Accept` | Wynik (2026-09-17u) |
+|---|---|
+| `application/xhtml+xml` | **200**, 840 814 B — pełny akt, wersja polska |
+| `application/xml;notice=object` | 200, 6 955 B — metryka (notice), bez treści |
+| `text/html`, `application/pdf` | 404 |
+
+⭐ Zaleta wobec pobrania strony: **cały akt trafia do pliku**, więc artykuły z końca
+(np. art. 83 RODO) wycina się lokalnie, bez limitu kontekstu. Adres buduje się z numeru
+CELEX: `resource/celex/<CELEX>`. Język wskazuje `Accept-Language` (`pol`).
+⚠️ Dokument to XHTML z Dz.Urz. UE — przed cięciem usuń znaczniki i scal białe znaki.
+⚠️ Cellar podaje **wersję pierwotną** aktu; wersję skonsolidowaną trzeba wskazać numerem
+CELEX wersji skonsolidowanej (`0` + numer + data, np. `02016R0679-20160504`).
 
 ### SAOS — `www.saos.org.pl` (SN, NSA/WSA, sądy powszechne, TK, KIO)
 
@@ -221,6 +289,17 @@ dokładne, wielkość liter bez znaczenia. Zmierzone 2026-09-13: `III CZP 25/11`
 zwraca **67 576 trafień** na fabrykacie. Procedura: `shared/SYGNATURY.md`, V-SYG-0.
 
 ⚠️ `pageSize` **≥ 10** — mniej to HTTP 400. Indeks bywa wolny, nie skracaj timeoutu.
+
+⚡ **Dostępność — pomiar 2026-09-17s (F-171):** wszystkie trzy endpointy **wróciły**:
+`/api/search/judgments` (także z `caseNumber`) → 200, `/api/judgments/{id}` → 200,
+`/api/dump/judgments?pageSize=10` → 200. Regresja z 2026-09-09 (HTTP 502) **ustąpiła**.
+⛔ Kanał jest NIESTABILNY: w serii prób zmierzono `000` (brak odpowiedzi / timeout) w 5 z 8
+wywołań, po czym to samo zapytanie zwracało 200 w < 1 s. **Zawsze powtarzaj próbę
+(min. 3 razy) przed uznaniem sygnatury za niesprawdzalną** — pojedyncze `000` nie jest
+dowodem niedostępności ani nieistnienia orzeczenia.
+⚠️ Pokrycie potwierdzone ponownie: `III CZP 88/15` (SN, 2015) → 1 trafienie;
+`III OSK 1959/22` i `II SAB/Wa 678/21` (NSA/WSA, 2021–2023) → 0 trafień = **OUT_OF_SCOPE**,
+nie „nie istnieje".
 ⛔ SAOS to RZĄD 2A — ustala, że orzeczenie istnieje i co zawiera; **nie
 zastępuje sprawdzenia sygnatury u źródła** przy powołaniu w piśmie.
 

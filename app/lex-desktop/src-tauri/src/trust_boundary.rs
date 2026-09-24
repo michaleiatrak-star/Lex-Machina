@@ -28,6 +28,13 @@ const LOCAL_MODEL_START_PROXY_READ_TIMEOUT_SECS: u64 = 300;
 const PROVIDER_ACCOUNT_LOGIN_PROXY_READ_TIMEOUT_SECS: u64 = 300;
 const AI_SESSION_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
 const LOCAL_MODEL_MAINTENANCE_PROXY_READ_TIMEOUT_SECS: u64 = 7_200;
+// OCR, text extraction and local-model PII detection run inside these calls;
+// with a local model on CPU they routinely exceed the 120 s default.
+const DOCUMENT_PROCESSING_PROXY_READ_TIMEOUT_SECS: u64 = 1_200;
+// Every non-safelisted header the web UI sends must be listed here, otherwise
+// the webview preflight fails and fetch() rejects with "Failed to fetch".
+const CORS_ALLOWED_REQUEST_HEADERS: &str =
+    "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id, X-Lex-Execution-Id";
 const MANAGED_LOGIN: &str = "local-admin";
 const MANAGED_KEYRING_SERVICE: &str = "LexMachina/Desktop";
 const PROVIDER_KEYRING_SERVICE: &str = "LexMachina/ProviderCredential";
@@ -1377,9 +1384,12 @@ fn route_allowed(method: &str, path: &str) -> bool {
         | "/api/auth/password"
         | "/api/auth/recovery-code"
         | "/api/auth/lock"
+        | "/api/auth/activity"
         | "/api/auth/logout"
         | "/api/deanonymization/reauthorize"
         | "/api/deanonymization/finalize"
+        | "/api/deanonymization/preview"
+        | "/api/privacy/name-forms"
         | "/api/sessions/execute"
         | "/api/routes/validate" => method == "POST",
         "/api/cases"
@@ -1437,6 +1447,7 @@ fn route_allowed(method: &str, path: &str) -> bool {
             matches!(method, "GET" | "POST")
         }
         _ if path.starts_with("/api/models/") => method == "GET",
+        _ if is_execution_progress_route(path) => method == "GET",
         _ if path.starts_with("/api/sensitive-download/") => method == "GET",
         _ => false,
     }
@@ -1448,12 +1459,45 @@ struct ProxiedResponse {
     body: Vec<u8>,
 }
 
+fn is_execution_progress_route(path: &str) -> bool {
+    match path.strip_prefix("/api/sessions/progress/") {
+        Some(id) => {
+            (16..=64).contains(&id.len())
+                && id.bytes().all(|b| b.is_ascii_alphanumeric() || b == b'-')
+        }
+        None => false,
+    }
+}
+
+fn is_document_processing_route(path: &str) -> bool {
+    if matches!(path, "/api/documents/review" | "/api/documents/ingest") {
+        return true;
+    }
+    let segments: Vec<&str> = path.trim_start_matches('/').split('/').collect();
+    match segments.as_slice() {
+        ["api", "documents", document_id, "finalize"] => !document_id.is_empty(),
+        ["api", "cases", case_id, "files", upload_id, "process"] => {
+            !case_id.is_empty() && !upload_id.is_empty()
+        }
+        ["api", "cases", case_id, "files", upload_id, "members", file_id, "process"] => {
+            !case_id.is_empty() && !upload_id.is_empty() && !file_id.is_empty()
+        }
+        _ => false,
+    }
+}
+
 fn proxy_read_timeout(request: &Request<Vec<u8>>) -> Duration {
     let method = request.method().as_str();
     let path = request.uri().path();
 
     if method == "POST" && path == "/api/sessions/execute" {
         return Duration::from_secs(AI_SESSION_PROXY_READ_TIMEOUT_SECS);
+    }
+
+    if method == "POST" && is_document_processing_route(path) {
+        return Duration::from_secs(
+            DOCUMENT_PROCESSING_PROXY_READ_TIMEOUT_SECS,
+        );
     }
 
     if method == "POST" && path == "/api/local-models/start" {
@@ -1783,7 +1827,7 @@ fn cors_response(
         )
         .header(
             "Access-Control-Allow-Headers",
-            "Accept, Content-Type, Cache-Control, X-Lex-Filename, X-Lex-Case-Id",
+            CORS_ALLOWED_REQUEST_HEADERS,
         )
         .header(
             "Access-Control-Expose-Headers",
@@ -1817,7 +1861,38 @@ mod tests {
     use super::*;
 
     #[test]
+    fn preflight_allows_every_custom_header_sent_by_the_web_ui() {
+        let preflight = cors_response(StatusCode::NO_CONTENT, Vec::new(), None);
+        let allowed = preflight
+            .headers()
+            .get("Access-Control-Allow-Headers")
+            .and_then(|value| value.to_str().ok())
+            .unwrap_or_default()
+            .to_ascii_lowercase();
+        let web_api = include_str!("../../../lex-web/src/api.ts");
+        let mut checked = 0;
+        for (index, _) in web_api.match_indices("\"X-Lex-") {
+            let name: String = web_api[index + 1..]
+                .chars()
+                .take_while(|c| c.is_ascii_alphanumeric() || *c == '-')
+                .collect();
+            assert!(
+                allowed.split(", ").any(|item| item == name.to_ascii_lowercase()),
+                "{name} missing from Access-Control-Allow-Headers"
+            );
+            checked += 1;
+        }
+        assert!(checked >= 3);
+    }
+
+    #[test]
     fn allowlist_rejects_unknown_routes_and_methods() {
+        assert!(route_allowed("POST", "/api/auth/activity"));
+        assert!(!route_allowed("GET", "/api/auth/activity"));
+        assert!(route_allowed("POST", "/api/privacy/name-forms"));
+        assert!(route_allowed("POST", "/api/deanonymization/preview"));
+        assert!(!route_allowed("GET", "/api/deanonymization/preview"));
+        assert!(!route_allowed("GET", "/api/privacy/name-forms"));
         assert!(route_allowed("GET", "/api/cases"));
         assert!(route_allowed("POST", "/api/cases/case_abc/files"));
         assert!(route_allowed("GET", "/api/sensitive-download/download_abc"));
@@ -1857,6 +1932,16 @@ mod tests {
         assert!(route_allowed("GET", "/api/support/diagnostics"));
         assert!(route_allowed("POST", "/api/support/logout"));
         assert!(!route_allowed("DELETE", "/api/support/diagnostics"));
+        assert!(route_allowed(
+            "GET",
+            "/api/sessions/progress/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
+        ));
+        assert!(!route_allowed(
+            "POST",
+            "/api/sessions/progress/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0"
+        ));
+        assert!(!route_allowed("GET", "/api/sessions/progress/short"));
+        assert!(!route_allowed("GET", "/api/sessions/progress/../../auth/me"));
         assert!(!route_allowed("GET", "/api/arbitrary"));
         assert!(!route_allowed("GET", "https://example.com/"));
     }
@@ -1914,6 +1999,35 @@ mod tests {
                 )
             );
         }
+
+        for path in [
+            "/api/documents/review",
+            "/api/documents/ingest",
+            "/api/documents/doc_abc/finalize",
+            "/api/cases/case_1/files/up_1/process",
+            "/api/cases/case_1/files/up_1/members/f_1/process",
+        ] {
+            let request = Request::builder()
+                .method("POST")
+                .uri(path)
+                .body(Vec::new())
+                .expect("document processing request");
+            assert_eq!(
+                proxy_read_timeout(&request),
+                Duration::from_secs(
+                    DOCUMENT_PROCESSING_PROXY_READ_TIMEOUT_SECS
+                )
+            );
+        }
+        let listing = Request::builder()
+            .method("POST")
+            .uri("/api/cases/case_1/files")
+            .body(Vec::new())
+            .expect("upload request");
+        assert_eq!(
+            proxy_read_timeout(&listing),
+            Duration::from_secs(DEFAULT_PROXY_READ_TIMEOUT_SECS)
+        );
 
         let ordinary = Request::builder()
             .method("GET")

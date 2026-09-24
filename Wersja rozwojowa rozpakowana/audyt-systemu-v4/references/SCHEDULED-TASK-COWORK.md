@@ -59,7 +59,7 @@ Cotygodniowa weryfikacja ISAP dla map Dz.U. w skillach prawniczych (DR-01..DR-16
 ### 2B. Pole „opis systemu" / prompt zadania (treść wykonawcza)
 
 ```
-Uruchom TRYB DZU skilla audyt-systemu-v4 (weryfikacja mapy Dz.U. dla polskiego systemu prawniczego). Ta sesja startuje bez pamięci poprzednich rozmów — wykonaj samodzielnie poniższe kroki, opierając się wyłącznie na plikach skilla audyt-systemu-v4 i weryfikacji online (isap.sejm.gov.pl i pomocniczo dziennikustaw.gov.pl / sip.lex.pl / gofin.pl / infor.pl / prawo.pl), nigdy z pamięci.
+Uruchom TRYB DZU skilla audyt-systemu-v4 (weryfikacja mapy Dz.U. dla polskiego systemu prawniczego). Ta sesja startuje bez pamięci poprzednich rozmów — wykonaj samodzielnie poniższe kroki, opierając się wyłącznie na plikach skilla audyt-systemu-v4 i weryfikacji online (ELI (RZĄD 1) i pomocniczo dziennikustaw.gov.pl / sip.lex.pl / gofin.pl / infor.pl / prawo.pl), nigdy z pamięci.
 
 1. Wczytaj skill audyt-systemu-v4 (SKILL.md) oraz jego pliki references: AUDIT-JOURNAL.md, WARN-OTWARTE.md, CHECKLIST-DEDUP.md, najnowszy plik mapa_dzu_YYYY-MM-DD.md. Wczytaj też prawo-polskie-v2/ROUTING-MAP.md oraz każdy dr-01..dr-16/MAPA-AKTOW.md.
 

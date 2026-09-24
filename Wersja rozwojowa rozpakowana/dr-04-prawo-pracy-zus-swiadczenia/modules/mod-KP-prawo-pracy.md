@@ -15,7 +15,7 @@
 | **Jawność wynagrodzeń** (art. 183ca KP — nowy) | **OBOWIĄZUJE** — pracodawca musi ujawnić widełki wynagrodzenia w ogłoszeniu o pracę | Dz.U. 2025 poz. 807 |
 | Minimalne wynagrodzenie 2026 | **4 806 zł brutto/mies. od 01.01.2026 | stawka godz.: 31,40 zł** | Dz.U. 2025 poz. 1242 |
 | ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
-| Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj isap.sejm.gov.pl | — |
+| Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj ELI (RZĄD 1) | — |
 
 ---
 
@@ -53,43 +53,43 @@ Nawiązanie i rozwiązanie stosunku pracy, wypowiedzenie (wymogi formalne, przyc
 ### TERMIN 21 DNI — ABSOLUTNY PRIORYTET
 
 ```
-✅ [VER] RZĄD 1 2026-09-12n — odczyt treści KP (Dz.U. 2025 poz. 277).
-KROK 2C: nowelizacja Dz.U. 2026 poz. 1046 (w życie 5.11.2026) zmienia art. 11,
-18, 94 i 104 KP oraz art. 47 i 461 KPC — NIE dotyka art. 52, 109, 112, 264,
-265 ani 291. ⚠️ Wchodzi za niespełna dwa miesiące.
+✅ [VER] RZĄD 1 2026-09-12n, ponownie 2026-09-16 (F-189) — `Dz.U. 2025 poz. 277`.
+KROK 2C (odczyt treści 2026-09-16): `Dz.U. 2026 poz. 1046` (w życie 5.11.2026) zmienia w KP
+art. 18³ᵃ, 18³ᵈ, 18³ᵉ (+ nowe 18³ᶠ–18³ᵍ), 94, 94³ (+ nowy 94³ᵃ), 104¹; w KPC art. 47, 461
+(+ nowy 477⁶ᵃ) — NIE dotyka art. 52, 109, 112, 264, 265, 291.
 
-Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma wypowiadającego
-                                (art. 264 §1 KP)
-Odwołanie od dyscyplinarki:     21 dni od doręczenia zawiadomienia o rozwiązaniu
-                                bez wypowiedzenia ALBO od dnia WYGAŚNIĘCIA umowy
-                                (art. 264 §2 KP — dwa punkty początkowe)
-Żądanie nawiązania umowy:       21 dni od doręczenia zawiadomienia o odmowie
-                                przyjęcia do pracy (art. 264 §3 KP)
-Przywrócenie uchybionego terminu: 7 dni od ustania przyczyny; we wniosku trzeba
-                                UPRAWDOPODOBNIĆ okoliczności (art. 265 §2 KP)
-
-⛔ TERMINY DLA PRACODAWCY — ich upływ to ZARZUT OBRONY, nie termin pracownika:
-Dyscyplinarka:                  1 miesiąc od UZYSKANIA WIADOMOŚCI o okoliczności
-                                uzasadniającej rozwiązanie (art. 52 §2 KP)
-Kara porządkowa:                2 tygodnie od powzięcia wiadomości o naruszeniu
-                                I 3 miesiące od dopuszczenia się naruszenia
-                                (art. 109 §1 KP); ⚠️ bieg dwutygodniowego terminu
-                                nie rozpoczyna się / ulega zawieszeniu, gdy
-                                pracownik nie może być wysłuchany z powodu
-                                nieobecności (art. 109 §3)
-
-KARA PORZĄDKOWA — ścieżka pracownika:
-Sprzeciw do pracodawcy:         7 dni od zawiadomienia o ukaraniu (art. 112 §1)
-⭐ Milcząca zgoda:              NIEODRZUCENIE sprzeciwu w 14 dni od jego
-                                wniesienia JEST RÓWNOZNACZNE Z UWZGLĘDNIENIEM
-                                (art. 112 §1 zd. 3) — brak reakcji pracodawcy
-                                kończy sprawę po myśli pracownika, bez sądu
-Wystąpienie do sądu pracy:      14 dni od zawiadomienia o ODRZUCENIU sprzeciwu
-                                (art. 112 §2) — ⛔ warunkiem jest UPRZEDNIE
-                                wniesienie sprzeciwu
-Żądanie nawiązania umowy:       21 dni od dnia, gdy miała być zawarta
+TERMINY PRACOWNIKA:
+Odwołanie od wypowiedzenia:     21 dni od doręczenia pisma wypowiadającego (art. 264 § 1)
+Przywrócenie / odszkodowanie
+  po rozwiązaniu bez wypowiedzenia
+  LUB po WYGAŚNIĘCIU umowy:     21 dni od doręczenia zawiadomienia o rozwiązaniu
+                                ALBO od dnia wygaśnięcia umowy (art. 264 § 2)
+                                ⛔ przy wygaśnięciu nie ma pisma — termin biegnie od zdarzenia
+Żądanie nawiązania umowy:       21 dni od doręczenia zawiadomienia o ODMOWIE przyjęcia
+                                do pracy (art. 264 § 3)
+Przywrócenie terminu:           7 dni od ustania przyczyny uchybienia; okoliczności
+                                trzeba UPRAWDOPODOBNIĆ (art. 265 § 2)
+Sprzeciw od kary porządkowej:   7 dni od zawiadomienia o ukaraniu (art. 112 § 1 zd. 1)
+  ⭐ MILCZĄCA ZGODA: nieodrzucenie sprzeciwu w 14 dni od wniesienia =
+     UWZGLĘDNIENIE sprzeciwu (art. 112 § 1 zd. 3)
+  Sąd pracy: 14 dni od zawiadomienia o odrzuceniu — TYLKO po sprzeciwie (art. 112 § 2)
 ⚠️ TERMIN ZAWITY — nawet bezprawne zwolnienie staje się skuteczne po upływie!
 ⚠️ Pracodawca często manewruje negocjacjami → pilnuj terminu niezależnie od rozmów
+
+GRANICE DLA PRACODAWCY (⛔ to NIE terminy pracownika — ich upływ to ZARZUT OBRONY):
+art. 52 § 2:  dyscyplinarka nie później niż MIESIĄC od uzyskania wiadomości
+              o okoliczności — po upływie wadliwa niezależnie od zasadności przyczyny
+art. 109 § 1: kara porządkowa — nie po 2 TYGODNIACH od powzięcia wiadomości
+              i nie po 3 MIESIĄCACH od naruszenia
+art. 109 § 3: gdy pracownik nieobecny i nie może być wysłuchany — bieg 2 tygodni
+              nie rozpoczyna się, a rozpoczęty ulega zawieszeniu do stawienia się
+
+PRZEDAWNIENIE (art. 291):
+§ 1: 3 lata od wymagalności
+§ 2: roszczenie PRACODAWCY o szkodę — rok od powzięcia wiadomości, max 3 lata
+     od wyrządzenia; § 3: szkoda UMYŚLNA — przepisy KC
+§ 4: terminów nie można skracać ani przedłużać czynnością prawną
+§ 5: roszczenie stwierdzone prawomocnym orzeczeniem lub ugodą — 10 lat
 ```
 
 ### Wypowiedzenie — wymogi formalne (art. 30 KP)
@@ -108,7 +108,7 @@ Przy umowie na czas OKREŚLONY:
     ⚠️ Wyjątek: gdy pracodawca podaje przyczynę → musi być prawdziwa
 ```
 
-### Okresy wypowiedzenia (art. 36 KP — weryfikuj w ISAP po reformie stażu)
+### Okresy wypowiedzenia (art. 36 KP — weryfikuj w ELI (RZĄD 1) po reformie stażu)
 
 | Staż u danego pracodawcy | Okres |
 |---|---|
@@ -163,7 +163,7 @@ PRZYWRÓCENIE DO PRACY + wynagrodzenie za czas procesu (art. 47 KP):
 ```
 SEKTOR PUBLICZNY: od 01.01.2026
 SEKTOR PRYWATNY: od pierwszego dnia miesiąca po 6 miesiącach od ogłoszenia
-  → orientacyjnie ok. 01.04.2026 — WERYFIKUJ aktualną datę w isap.sejm.gov.pl
+  → orientacyjnie ok. 01.04.2026 — WERYFIKUJ aktualną datę w ELI (RZĄD 1)
 
 DO STAŻU WLICZA SIĘ OD TEJ DATY:
   □ Okresy pracy na umowach zlecenia i o świadczenie usług
@@ -187,7 +187,7 @@ WPŁYW NA ROSZCZENIA:
 ## 5. KALKULATOR ROSZCZEŃ FINANSOWYCH
 
 ```
-NADGODZINY (art. 151¹ KP — weryfikuj w ISAP):
+NADGODZINY (art. 151¹ KP — weryfikuj w ELI (RZĄD 1)):
   +50%: pn–pt, w porze dziennej
   +100%: pora nocna, niedziele, święta, dobowy odpoczynek
 
@@ -217,7 +217,7 @@ MINIMALNE WYNAGRODZENIE 2026: 4 806 zł brutto | stawka godzinowa: 31,40 zł
 
 Właściwość przemienna (wybór pracownika): siedziba pracodawcy / zakład pracy / miejsce zamieszkania pracownika.
 Opłata: pracownik zwolniony od kosztów do 75 000 zł.
-> ⚠️ Weryfikuj art. 461 KPC w ISAP.
+> ⚠️ Weryfikuj art. 461 KPC w ELI (RZĄD 1).
 
 ---
 

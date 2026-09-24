@@ -4,7 +4,7 @@
 > w isap.sejm.gov.pl przed każdą analizą.
 
 ## TERMIN 7 DNI NA SPRZECIW — ABSOLUTNY PRIORYTET
-Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 KPSW).
+Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK — art. 94 sam terminu nie podaje, odsyła do KPK). ✅ [VER] RZĄD 1 2026-09-16 — KPW `Dz.U. 2025 poz. 860`, KPK `Dz.U. 2026 poz. 490`.
 Sprawdź JAKO PIERWSZE w każdej sprawie nakazowej.
 
 ## SCHEMAT POSTĘPOWANIA
@@ -172,7 +172,7 @@ REKOMENDACJA: □ Sprzeciw od wyroku nakazowego  □ Rozprawa  □ Przyjąć man
 ## NOWE WYKROCZENIA DROGOWE 2026 — UZUPEŁNIENIE
 
 > Ustawa z 04.12.2025 r. (Dz.U. 2025 poz. 1872) — wejście w życie 29.01.2026 (cz. 30.03.2026)
-> Weryfikuj: isap.sejm.gov.pl → KW ze zm. Dz.U. 2025 poz. 1872
+> Weryfikuj: ELI (RZĄD 1) → KW ze zm. Dz.U. 2025 poz. 1872
 
 ```
 ART. 86c KW (NOWY — od 29.01.2026) — CELOWY DRIFT / POŚLIZG:

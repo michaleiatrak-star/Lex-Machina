@@ -72,7 +72,7 @@ Negatywna ocena wniosku / odmowa dofinansowania:
   → Protest do IZ (termin: 14 dni od doręczenia informacji)
   → Wynik protestu → skarga do WSA (termin: 14 dni od wyniku protestu)
   → NSA (skarga kasacyjna: 30 dni od wyroku WSA)
-  ⚠️ Terminy — weryfikuj aktualne w ustawie o realizacji funduszy UE w ISAP
+  ⚠️ Terminy — weryfikuj aktualne w ustawie o realizacji funduszy UE w ELI (RZĄD 1)
 
 Decyzja o zwrocie dotacji:
   → KPA → odwołanie (14 dni) → WSA → NSA

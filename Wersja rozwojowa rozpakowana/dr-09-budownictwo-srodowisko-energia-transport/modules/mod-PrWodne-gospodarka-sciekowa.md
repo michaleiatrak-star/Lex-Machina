@@ -1,6 +1,6 @@
 # mod-CQ-wodne-gospodarka-sciekowa.md — Prawo wodne, Wody Polskie i gospodarka ściekowa
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
 - Prawo wodne
@@ -322,7 +322,7 @@ Przed odpowiedzią lub pismem zastosuj:
 
 ```
 Prawo wodne: Dz.U. 2024 poz. 1773 t.j. ze zm.
-  Metrum kontrolne: Dz.U. 2025 poz. 960 — weryfikuj w ISAP czy jest nowszy t.j.
+  Metrum kontrolne: Dz.U. 2025 poz. 960 — weryfikuj w ELI (RZĄD 1) czy jest nowszy t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → Źródło: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241773
 Wody Polskie: https://wody.gov.pl

@@ -17,7 +17,7 @@ web_search: "minimalne wynagrodzenie 2025 2026 wysokość rozporządzenie Rada M
 ```
 Rozporządzenie RM w sprawie wysokości minimalnego wynagrodzenia i minimalnej stawki godzinowej.
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Aktualne wartości (WERYFIKUJ — zmieniane co roku!)
 ```

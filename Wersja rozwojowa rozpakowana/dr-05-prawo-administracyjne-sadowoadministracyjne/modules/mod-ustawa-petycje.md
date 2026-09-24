@@ -1,7 +1,7 @@
 # mod-ustawa-petycje
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o petycjach — Dz.U. 2018 poz. 870 t.j. — weryfikuj w ISAP | Konstytucja RP art. 63
+**Źródło weryfikacji:** Ustawa o petycjach — Dz.U. 2018 poz. 870 t.j. — weryfikuj w ELI (RZĄD 1) | Konstytucja RP art. 63
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -11,7 +11,7 @@
 
 Zakres: petycja do organu władzy publicznej w interesie publicznym lub własnym; terminy rozpatrzenia; petycja wielokrotna; jawność; bezczynność (skarga do WSA); różnice względem skargi i wniosku KPA.
 
-**Akt:** Ustawa o petycjach — Dz.U. 2018 poz. 870 t.j. — weryfikuj aktualne zmiany w ISAP.
+**Akt:** Ustawa o petycjach — Dz.U. 2018 poz. 870 t.j. — weryfikuj aktualne zmiany w ELI (RZĄD 1).
 
 ---
 
@@ -82,5 +82,5 @@ WNIOSEK KPA (art. 221): propozycja ulepszenia, udoskonalenia pracy organu
 Ustawa o petycjach: Dz.U. 2018 poz. 870 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   Nowszy t.j. NIE został ogłoszony — Dz.U. 2018 poz. 870 jest aktualnym t.j.
-  → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180000870
+  → Weryfikuj zmiany po t.j. w ELI (RZĄD 1): isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180000870
 ```

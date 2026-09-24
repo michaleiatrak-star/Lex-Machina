@@ -50,6 +50,7 @@ $oldEnv = @{
   STANZA_RESOURCES_DIR = $env:STANZA_RESOURCES_DIR
   PYTHONNOUSERSITE = $env:PYTHONNOUSERSITE
   PYTHONUTF8 = $env:PYTHONUTF8
+  PYTHONDONTWRITEBYTECODE = $env:PYTHONDONTWRITEBYTECODE
   HTTP_PROXY = $env:HTTP_PROXY
   HTTPS_PROXY = $env:HTTPS_PROXY
   ALL_PROXY = $env:ALL_PROXY
@@ -60,6 +61,9 @@ $env:PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK = "True"
 $env:STANZA_RESOURCES_DIR = $stanza
 $env:PYTHONNOUSERSITE = "1"
 $env:PYTHONUTF8 = "1"
+# Locked runtime files must stay byte-identical: offline extraction resets
+# source mtimes, so Python would otherwise rewrite locked __pycache__ files.
+$env:PYTHONDONTWRITEBYTECODE = "1"
 $env:HTTP_PROXY = "http://127.0.0.1:9"
 $env:HTTPS_PROXY = "http://127.0.0.1:9"
 $env:ALL_PROXY = "http://127.0.0.1:9"
@@ -308,8 +312,20 @@ try {
       throw "SELFTEST_RUNTIME_HEALTH_INVALID"
     }
   } finally {
-    if ($process -and -not $process.HasExited) {
-      Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+    if ($process) {
+      # Kill the whole tree: the sidecar's Node child otherwise survives,
+      # keeps the installer log open and blocks the install from finishing.
+      # Its "not found" stderr must not turn into a terminating error.
+      try {
+        Start-Process -FilePath (Join-Path $env:SystemRoot "System32\taskkill.exe") `
+          -ArgumentList @("/PID", $process.Id, "/T", "/F") `
+          -WindowStyle Hidden -Wait -ErrorAction Stop | Out-Null
+      } catch {
+        Write-Host "Self-test tree cleanup note: $($_.Exception.Message)"
+      }
+      if (-not $process.HasExited) {
+        Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+      }
     }
 
     # The Rust sidecar owns a child Node runtime. Stopping only the parent can
@@ -318,7 +334,9 @@ try {
     $runtimePrefix = $root.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
     Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
       try {
-        if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        if ($_.Path -and (
+            $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase) -or
+            [string]::Equals($_.Path, $node, [StringComparison]::OrdinalIgnoreCase))) {
           Write-Host "Self-test cleanup: stopping runtime child $($_.ProcessName) pid=$($_.Id)"
           Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
         }

@@ -36,7 +36,7 @@ Podatek od nieruchomości (budynki, budowle, grunty), podatek rolny, podatek le�
 |---|---|---|
 | Ustawa o podatkach i opłatach lokalnych | **Dz.U. 2025 poz. 707 t.j.** | NOWA REFORMA od 01.01.2025 |
 | Ustawa o podatku rolnym | Dz.U. 2025 poz. 1344 t.j. | |
-| Ustawa o podatku leśnym | weryfikuj aktualny t.j. w ISAP | |
+| Ustawa o podatku leśnym | weryfikuj aktualny t.j. w ELI (RZĄD 1) | |
 
 ---
 
@@ -65,11 +65,9 @@ Dla osób prawnych: Deklaracja DN-1 do 31 stycznia każdego roku + samodzielna z
 
 TERMINY PŁATNOŚCI (osoby fizyczne):
   → 4 raty: do 15 marca, 15 maja, 15 września, 15 listopada
-  (weryfikuj aktualne terminy w ustawie w ISAP)
+  (weryfikuj aktualne terminy w ustawie w ELI (RZĄD 1))
 
-TERMIN NA ODWOŁANIE OD DECYZJI: 14 dni od doręczenia — art. 223 §2 Op
-  (§1 określa wyłącznie, że odwołanie wnosi się ZA POŚREDNICTWEM organu,
-   który wydał decyzję)
+TERMIN NA ODWOŁANIE OD DECYZJI: 14 dni (art. 223 § 2 Op) — wnoszone za pośrednictwem organu, który wydał decyzję (art. 223 § 1)
 ```
 
 ---
@@ -155,12 +153,12 @@ podatkowyreferat.online, vatax.pl [kwiecień 2026, NAJŚWIEŻSZE], pit.pl.
 ## 5. NOWE DEFINICJE PO REFORMIE 2025 — KLASYFIKACJA OBIEKTÓW
 
 ```
-BUDYNEK (Dz.U. 2025 poz. 707 — weryfikuj aktualne brzmienie w ISAP):
+BUDYNEK (Dz.U. 2025 poz. 707 — weryfikuj aktualne brzmienie w ELI (RZĄD 1)):
   → Obiekt budowlany trwale związany z gruntem
   → Wydzielony z przestrzeni za pomocą przegród budowlanych
   → Posiada fundamenty i dach
 
-BUDOWLA (Dz.U. 2025 poz. 707 — weryfikuj aktualne brzmienie w ISAP):
+BUDOWLA (Dz.U. 2025 poz. 707 — weryfikuj aktualne brzmienie w ELI (RZĄD 1)):
   → Obiekt budowlany NIEBĘDĄCY budynkiem
   → Z wyłączeniami (obiekty małej architektury, wyrobiska górnicze)
   → Obejmuje: sieci uzbrojenia, drogi, mosty, rurociągi, maszty, panele PV (uwaga!)
@@ -260,7 +258,7 @@ Stawka: 2,5 q żyta (dla gruntów rolnych gospodarstw powyżej 1 ha)
 web_search: "cena skupu żyta GUS podatek rolny 2025 2026 podstawa opodatkowania"
 
 Zwolnienia: niektóre użytki zielone, grunty rolne zajęte na działalność ekologiczną
-  → weryfikuj aktualny katalog zwolnień w ustawie w ISAP
+  → weryfikuj aktualny katalog zwolnień w ustawie w ELI (RZĄD 1)
 ```
 
 ---

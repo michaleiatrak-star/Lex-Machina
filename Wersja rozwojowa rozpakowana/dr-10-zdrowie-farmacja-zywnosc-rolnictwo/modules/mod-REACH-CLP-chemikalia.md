@@ -32,7 +32,7 @@ compatibility:
 | Rozporządzenie delegowane | (UE) 2020/878 | Aktualna struktura SDS (16 sekcji) |
 | Rozporządzenie Biobójcze | (UE) nr 528/2012 | Produkty biobójcze |
 
-> ⚠ Zawsze weryfikuj aktualność przepisów: https://echa.europa.eu i https://isap.sejm.gov.pl
+> ⚠ Zawsze weryfikuj aktualność przepisów: https://echa.europa.eu i https://ELI (RZĄD 1)
 
 ---
 
@@ -202,14 +202,14 @@ Użytkownik końcowy (nie DU)
    https://eur-lex.europa.eu (teksty źródłowe UE)
 
 5. NDS/NDSCh (sekcja 8 SDS):
-   Rozporządzenie MRPiPS — weryfikuj na isap.sejm.gov.pl
+   Rozporządzenie MRPiPS — weryfikuj na ELI (RZĄD 1)
 ```
 
 ---
 
 *mod-AC-chemikalia-reach · v1.0 · 2026-05*
 *Powiązane: DR-09 POŚ, Prawo farmaceutyczne, DR-06 akcyza/UCC — używaj pełnych modułów wskazanych w tabeli wyżej.*
-*Weryfikacja przepisów: echa.europa.eu + isap.sejm.gov.pl*
+*Weryfikacja przepisów: echa.europa.eu + ELI (RZĄD 1)*
 
 ---
 

@@ -98,7 +98,7 @@ Wtedy uruchom anonimizator bez pytania wstępnego.
 Jeżeli wykryto dane osobowe, ale użytkownik nie zażądał anonimizacji wprost, zadaj:
 
 ```
-Wykryłem w przesłanym dokumencie możliwe dane osobowe lub identyfikacyjne.
+W przesłanym dokumencie wykryto możliwe dane osobowe lub identyfikacyjne.
 
 Czy chcesz je zanonimizować przed analizą?
 a) Tak — uruchom narzędzie anonimizacji.

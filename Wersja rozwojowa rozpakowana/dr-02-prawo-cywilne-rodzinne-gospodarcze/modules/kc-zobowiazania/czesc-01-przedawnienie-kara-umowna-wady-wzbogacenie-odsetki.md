@@ -10,7 +10,7 @@
 
 ## 4. TERMINY PRZEDAWNIENIA — TABELA (art. 118 i n. KC)
 
-> ⚠️ Weryfikuj aktualne brzmienie w ISAP. Od 2018 r. sąd bada przedawnienie Z URZĘDU gdy dłużnikiem jest konsument.
+> ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1). Od 2018 r. sąd bada przedawnienie Z URZĘDU gdy dłużnikiem jest konsument.
 
 | Roszczenie | Termin | Art. KC | Uwagi |
 |---|---|---|---|
@@ -56,7 +56,7 @@ Skutek miarkowania: zmniejszenie kary, nie jej uchylenie
 
 ## 6. WADY OŚWIADCZENIA WOLI — KWALIFIKATOR
 
-> ⚠️ Brzmienie każdego artykułu — weryfikuj w aktualnym KC w ISAP.
+> ⚠️ Brzmienie każdego artykułu — weryfikuj w aktualnym KC w ELI (RZĄD 1).
 
 | Wada | Art. KC | Skutek | Termin uprawnienia |
 |---|---|---|---|

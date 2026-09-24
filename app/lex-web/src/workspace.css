@@ -490,3 +490,141 @@
   color: #2f4a37;
   font-size: 12px;
 }
+
+.workspace-preview-error {
+  margin: 0;
+  padding: 16px;
+  color: #9b2c2c;
+}
+
+.pdf-preview-toolbar,
+.text-editor-toolbar,
+.text-editor-find,
+.text-editor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e3e7df;
+  background: #fafbf8;
+}
+
+.pdf-preview-toolbar input {
+  width: 4.5em;
+}
+
+.pdf-preview-spacer,
+.text-editor-spacer {
+  flex: 1;
+}
+
+.pdf-preview-page {
+  max-height: 720px;
+  overflow: auto;
+  padding: 16px;
+  background: #e9ece6;
+  text-align: center;
+}
+
+.pdf-preview-page canvas {
+  display: inline-block;
+  background: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+}
+
+.text-editor-toolbar button {
+  min-width: 2.2em;
+}
+
+.text-editor-bold {
+  font-weight: 700;
+}
+
+.text-editor-italic {
+  font-style: italic;
+}
+
+.text-editor-underline {
+  text-decoration: underline;
+}
+
+.text-editor-strike {
+  text-decoration: line-through;
+}
+
+.text-editor-modes button[aria-pressed="true"] {
+  background: #dfe8d9;
+  font-weight: 600;
+}
+
+.text-editor-body {
+  display: grid;
+  min-height: 420px;
+}
+
+.text-editor-body-split {
+  grid-template-columns: 1fr 1fr;
+}
+
+.text-editor-area {
+  width: 100%;
+  min-height: 420px;
+  max-height: 620px;
+  box-sizing: border-box;
+  padding: 16px;
+  border: 0;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.text-editor-rendered {
+  max-height: 620px;
+  overflow: auto;
+  padding: 16px 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.text-editor-body-split .text-editor-rendered {
+  border-left: 1px solid #e3e7df;
+}
+
+.text-editor-rendered blockquote {
+  margin: 0 0 12px;
+  padding-left: 12px;
+  border-left: 3px solid #c9d3c3;
+  color: #4d574f;
+}
+
+.text-editor-link {
+  color: #2d5b8a;
+  text-decoration: underline;
+}
+
+.text-editor-footer {
+  justify-content: space-between;
+  border-top: 1px solid #e3e7df;
+  border-bottom: 0;
+}
+
+.text-editor-footer small {
+  color: #6d786f;
+}
+
+.text-editor-save {
+  display: flex;
+  gap: 6px;
+}
+
+.text-editor-save input {
+  min-width: 16em;
+}
+
+.text-editor-status {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 12px;
+}

@@ -339,7 +339,7 @@ Kluczowe daty:
 • Data zdarzenia powodującego szkodę
 • Data ujawnienia szkody (jeśli różna)
 • Data wezwania do naprawienia szkody
-• Bieg przedawnienia (3 lub 10 lat — weryfikuj w ISAP)
+• Bieg przedawnienia (3 lub 10 lat — weryfikuj w ELI (RZĄD 1))
 • Data wniesienia pozwu (przerywa przedawnienie)
 ```
 

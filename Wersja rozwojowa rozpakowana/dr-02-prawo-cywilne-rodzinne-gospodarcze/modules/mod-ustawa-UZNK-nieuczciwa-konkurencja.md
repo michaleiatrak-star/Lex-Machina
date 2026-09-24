@@ -241,7 +241,7 @@ sprawa dotyczy konkretnego sporu platforma-sprzedawca.
 
 ## ROSZCZENIA PRZYSŁUGUJĄCE POSZKODOWANEMU (art. 18 UZNK)
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 18 UZNK w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie art. 18 UZNK w ELI (RZĄD 1).
 
 ```
 □ Zaniechanie niedozwolonych działań
@@ -511,7 +511,7 @@ nieopisany w tym module. Zweryfikowane zgodnie w 4+ źródłach Rządu 2B
 (lexlege.pl, inforlex.pl [z jawnym cytatem "Dz.U.2026.0.85 t.j."],  <!-- zapis źródła cytowany dosłownie — CELOWO nieujednolicony (F-125, 2026-08-24d) -->
 arslege.pl, standardyprawa.pl) — t.j. Dz.U. 2026 poz. 85, ta sama
 podstawa co już zweryfikowany art. 20 (przedawnienie, wyżej w tym pliku).
-⚠️ Weryfikuj ponownie w ISAP przed użyciem w piśmie procesowym — sekcja
+⚠️ Weryfikuj ponownie w ELI (RZĄD 1) przed użyciem w piśmie procesowym — sekcja
 karna jest szczególnie wrażliwa na precyzję cytowania (ZASADA 13).
 ```
 

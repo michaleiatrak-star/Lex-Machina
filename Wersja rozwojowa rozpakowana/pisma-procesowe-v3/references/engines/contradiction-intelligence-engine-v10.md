@@ -84,6 +84,24 @@ Sprzeczność wolno eksponować w piśmie tylko wtedy, gdy da się wskazać:
 4. którą przesłankę to narusza,
 5. jaki wniosek ma wyciągnąć sąd.
 
+## ETAP 4A — AUDYT POWOŁAŃ ORZECZNICZYCH PRZECIWNIKA (dodano 2026-09-22, F-194)
+
+Dla każdej sygnatury powołanej przez przeciwnika wykonaj kontrakt statusów
+`shared/SYGNATURY.md` i gradient TREŚĆ `shared/WERYFIKACJA-SLAD.md` (GRAD-1..4,
+przy NSA/WSA także `GRAD-3b-SYM`):
+
+| Sygnatura | Status (FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE) | Data zgodna? | Przedmiot zgodny? | Symbol CBOSA zgodny? | Skutek |
+|---|---|---|---|---|---|
+
+⛔ **KALIBRACJA-PRZECIWNIK** (`shared/WERYFIKACJA-SLAD.md`): wadliwe powołanie
+(nieistniejące, z inną datą, o innym przedmiocie) to sprzeczność typu
+„wiarygodność/staranność pisma" — **maksymalnie S3** w skali z ETAPU 3.
+Nie wolno jej: (a) przedstawiać jako przesądzającej o istocie sporu,
+(b) używać zamiast odpowiedzi na merytoryczny zarzut (REM-GATE REM-1).
+Wzorzec: NSA I OSK 590/26 (🟨 snapshot bez awansu) — autor wadliwych
+powołań wygrał co do istoty. OUT_OF_SCOPE nigdy nie jest podstawą
+twierdzenia „orzeczenie nie istnieje".
+
 ## ETAP 5 — GOTOWY BLOK ARGUMENTACYJNY
 
 Format:
@@ -97,4 +115,5 @@ Przed przygotowaniem repliki/odpowiedzi/apelacji po analizie pism przeciwnika sy
 - mapę sprzeczności,
 - ocenę istotności,
 - wskazanie, które sprzeczności wykorzystać,
-- wskazanie, które pominąć.
+- wskazanie, które pominąć,
+- audyt powołań orzeczniczych przeciwnika z ETAPU 4A (jeśli pismo zawiera sygnatury).

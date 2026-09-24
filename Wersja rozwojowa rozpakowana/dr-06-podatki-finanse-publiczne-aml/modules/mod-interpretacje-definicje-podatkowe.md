@@ -5,7 +5,7 @@
 podatkowe, uchwały NSA, interpretacje ogólne MF 2024–2025, PKWiU 2025, schematy MDR,
 ulgi innowacyjne, estoński CIT — definicje precyzowane przez KIS/MF/NSA.
 
-**Źródła (weryfikuj w ISAP/bazach przed powołaniem):**
+**Źródła (weryfikuj w ELI (RZĄD 1)/bazach przed powołaniem):**
 
 | Akt | Dz.U./źródło | Uwaga |
 |---|---|---|
@@ -38,8 +38,9 @@ INTERPRETACJA INDYWIDUALNA (art. 14b–14p Op):
     → Podatnik ZASTOSOWAŁ SIĘ do niej przed wszczęciem kontroli / postępowania
     → Interpretacja była wydana dla wnioskodawcy
     → Nie zmieniono przepisów / stanu faktycznego
-  Zaskarżenie: skarga do WSA (14 dni od doręczenia — ZAWITY)
-    Uwaga: termin 14 dni (nie 30!) — weryfikuj art. 53 §3 PPSA
+  Zaskarżenie: skarga do WSA — **30 DNI** od doręczenia interpretacji (art. 53 § 1 PPSA, który obejmuje wprost akty z art. 3 § 2 pkt 4a — interpretacje indywidualne; od 26.06.2026 także opinie z art. 3 § 2 pkt 4b — `Dz.U. 2026 poz. 846`) — ✅ [VER] RZĄD 1 2026-09-16m
+    ⛔ KOREKTA: poprzednio „14 dni (nie 30!) — art. 53 § 3 PPSA" — błędne (§ 3 dotyczy
+    prokuratora, RPO i RPD — 6 miesięcy)
   Zmiana / wygaśnięcie:
     → Organ zmienia z urzędu lub na wniosek (art. 14e Op)
     → Wygasa gdy zmieniona / uchylona przez WSA/NSA
@@ -125,7 +126,7 @@ państwami) — patrz mod-PIT-podatek-dochodowy-fizyczne.md, sekcja 1a
 CIT). PONIŻSZA treść to SKRÓCONY punkt wyjścia.
 
 ```
-PODSTAWA (art. 3 ust. 1a ustawy o PIT — weryfikuj Dz.U. 2025 w ISAP):
+PODSTAWA (art. 3 ust. 1a ustawy o PIT — weryfikuj Dz.U. 2025 w ELI (RZĄD 1)):
   Rezydent = osoba mająca miejsce zamieszkania w Polsce:
   KRYTERIUM 1: Centrum interesów osobistych lub gospodarczych (ośrodek interesów życiowych) LUB
   KRYTERIUM 2: Pobyt w Polsce > 183 dni w roku podatkowym
@@ -420,5 +421,5 @@ PKWiU:
 
 ---
 *mod-interpretacje-definicje-podatkowe.md · DR-06 · 2026-06-09*
-*Podstawa: Op (Dz.U. 2025 poz. 111) + EUREKA (podatki.gov.pl) + Uchwały NSA + Interpretacje ogólne MF*
+*Podstawa: Op (Dz.U. 2026 poz. 622 t.j.) + EUREKA (podatki.gov.pl) + Uchwały NSA + Interpretacje ogólne MF*
 *Weryfikuj sygnatury ZAWSZE przed powołaniem: podatki.gov.pl/eureka lub web_search*

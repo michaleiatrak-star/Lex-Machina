@@ -30,11 +30,14 @@ FORMA KONKORDATOWA (wyznaniowa ze skutkiem cywilnym) — na podstawie
   □ SKUTKI CYWILNE powstają, gdy: (a) zachowano wymagania prawa
     polskiego dot. zawarcia małżeństwa (m.in. brak przeszkód
     małżeńskich, wcześniejsze złożenie zaświadczenia z USC), (b)
-    kierownik USC SPORZĄDZA akt małżeństwa NA PODSTAWIE zaświadczenia
-    przekazanego przez duchownego, w TERMINIE USTAWOWYM (⚠️ dokładny
-    termin — 5 dni roboczych od zawarcia małżeństwa — zweryfikuj na
-    ISAP, przepis był PRZEDMIOTEM KILKU nowelizacji, w tym w związku
-    z cyfryzacją administracji)
+    kierownik USC SPORZĄDZA akt małżeństwa NA PODSTAWIE zaświadczenia,
+    które DUCHOWNY przekazuje do USC przed upływem PIĘCIU DNI od dnia
+    zawarcia małżeństwa; przy obliczaniu NIE UWZGLĘDNIA SIĘ dni ustawowo
+    wolnych od pracy (sobota nie jest takim dniem — ⚠️ to nie to samo co
+    „5 dni roboczych"); siła wyższa zawiesza bieg; nadanie przesyłką
+    poleconą w polskiej placówce operatora wyznaczonego jest równoznaczne
+    z przekazaniem (art. 8 § 3 KRO;
+    ✅ RZĄD 1 2026-09-17n, KRO t.j. Dz.U. 2026 poz. 236)
   □ Bez zachowania tego trybu — małżeństwo wyznaniowe wywołuje skutki
     WYŁĄCZNIE na gruncie prawa KANONICZNEGO/wewnętrznego danego
     związku wyznaniowego, NIE prawa cywilnego (para NIE jest małżeństwem

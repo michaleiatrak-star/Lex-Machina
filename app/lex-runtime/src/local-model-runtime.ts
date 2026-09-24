@@ -442,10 +442,31 @@ export type OptionalLocalLaunchSpec = {
   env: NodeJS.ProcessEnv;
 };
 
+const NATIVE_AGENT_ENV_KEYS = [
+  "LLAMA_ARG_AGENT",
+  "LLAMA_ARG_MCP_SERVERS_CONFIG",
+  "LLAMA_ARG_UI_CONFIG_FILE"
+] as const;
+
+export function lexNativeLocalAgentEnabled(
+  env: NodeJS.ProcessEnv = process.env
+): boolean {
+  return /^(?:1|true|yes)$/i.test(
+    env.LEX_LOCAL_LLAMA_NATIVE_AGENT?.trim() ?? ""
+  );
+}
+
 /**
- * Native llama.cpp agent configuration and grounded templates are
- * enhancements, not prerequisites for local inference. Existing
- * v0.1.9 installations must remain startable without re-provisioning.
+ * The llama-server owned by Lex Machina is driven by Lex's own prompt and
+ * LEX_TOOL_CALLS_JSON protocol. The native agent mode (server-side MCP tool
+ * loops) and the web-grounded chat templates belong to the standalone
+ * start-llama-native-agent.ps1 launcher: applied to Lex requests they prepend
+ * a tool-forcing policy, run server-side tool loops and reject non-alternating
+ * roles, so Lex never receives a response (LOCAL_MODEL_RESPONSE_TIMEOUT).
+ *
+ * configure-llama-native-web.ps1 also persists LLAMA_ARG_* as user-level
+ * environment variables, so they are stripped here unless explicitly enabled
+ * with LEX_LOCAL_LLAMA_NATIVE_AGENT=1 (and all assets exist).
  */
 export function buildOptionalLocalLaunchSpec(
   rootDir: string,
@@ -457,6 +478,14 @@ export function buildOptionalLocalLaunchSpec(
     normalizeModelId(modelId);
   const args = [...baseArgs];
   const env = { ...baseEnv };
+  for (const key of NATIVE_AGENT_ENV_KEYS) {
+    delete env[key];
+  }
+
+  if (!lexNativeLocalAgentEnabled(baseEnv)) {
+    return { args, env };
+  }
+
   const mcpConfigPath =
     path.join(
       rootDir,
@@ -479,12 +508,6 @@ export function buildOptionalLocalLaunchSpec(
       mcpConfigPath;
     env.LLAMA_ARG_UI_CONFIG_FILE =
       uiConfigPath;
-  } else {
-    // Do not inherit a partially configured native-agent setup from
-    // the parent process: missing files must never block localhost.
-    delete env.LLAMA_ARG_AGENT;
-    delete env.LLAMA_ARG_MCP_SERVERS_CONFIG;
-    delete env.LLAMA_ARG_UI_CONFIG_FILE;
   }
 
   const groundedTemplatePath =

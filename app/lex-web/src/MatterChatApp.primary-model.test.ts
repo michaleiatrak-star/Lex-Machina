@@ -167,3 +167,50 @@ describe("primary model chat policy", () => {
     ).toBe(true);
   });
 });
+
+describe("provider failure message", () => {
+  it("names Claude, always shows the code and the sanitized detail", async () => {
+    const { providerFailureMessage } = await import("./MatterChatApp.js");
+    const message = providerFailureMessage(
+      "anthropic-account",
+      "ACCOUNT_SESSION_CLI_SPAWN_FAILED",
+      "ACCOUNT_SESSION_CLI_SPAWN_FAILED:ENOENT:claude"
+    );
+    expect(message).toContain("Claude Code");
+    expect(message).not.toContain("ChatGPT");
+    expect(message).toContain("Kod: ACCOUNT_SESSION_CLI_SPAWN_FAILED");
+    expect(message).toContain("Szczegóły:");
+    expect(
+      providerFailureMessage("openai-account", "ACCOUNT_SESSION_CLI_FAILED")
+    ).toContain("Codex");
+  });
+});
+
+describe("routing footer", () => {
+  it("does not show a legal route for an answer without legal skills", async () => {
+    const { routingMeta } = await import("./MatterChatApp.js");
+    expect(
+      routingMeta(
+        {
+          primarySkill:
+            "dr-01-ustroj-konstytucyjny-i-zrodla-prawa",
+          loadedSkills: []
+        },
+        "dr-01-ustroj-konstytucyjny-i-zrodla-prawa"
+      )
+    ).toBe("rozmowa bez skilli prawnych");
+    expect(
+      routingMeta(
+        {
+          primarySkill:
+            "dr-02-prawo-cywilne-rodzinne-gospodarcze",
+          loadedSkills: [
+            "prawny-router-v3",
+            "dr-02-prawo-cywilne-rodzinne-gospodarcze"
+          ]
+        },
+        "dr-02-prawo-cywilne-rodzinne-gospodarcze"
+      )
+    ).toMatch(/^routing: DR 02/);
+  });
+});

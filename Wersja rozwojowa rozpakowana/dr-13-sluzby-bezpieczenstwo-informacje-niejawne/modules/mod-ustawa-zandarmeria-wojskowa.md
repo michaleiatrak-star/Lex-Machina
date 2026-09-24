@@ -1,6 +1,6 @@
 # mod-CB-zandarmeria-wojskowa-obrona.md — Żandarmeria Wojskowa, wojsko i procedury obronne
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa o Żandarmerii Wojskowej i wojskowych organach porządkowych
@@ -169,5 +169,5 @@ Ustawa o Żandarmerii Wojskowej i wojskowych organach porządkowych:
   ogłoszone 12.02.2026)
   — poprzedni t.j. Dz.U. 2024 poz. 1654 NIEAKTUALNY, zastąpiony przez t.j. 2026.159
   ✅ VER: isap.sejm.gov.pl (WDU20260000159), inforlex.pl, prawo.pl 2026-08-14 (F-57)
-  ⚠️ weryfikuj dalsze zm. w ISAP przed każdym powołaniem
+  ⚠️ weryfikuj dalsze zm. w ELI (RZĄD 1) przed każdym powołaniem
 ```

@@ -156,7 +156,7 @@ WYMIAR KARY: proporcjonalny do:
   → Korzyści osiągniętej przez naruszającego
   → Działań naprawczych podjętych dobrowolnie
 
-⚠️ Weryfikuj aktualne stawki kar w ISAP przed powołaniem.
+⚠️ Weryfikuj aktualne stawki kar w ELI (RZĄD 1) przed powołaniem.
 ```
 
 ---
@@ -174,7 +174,7 @@ DEROGACJE (wyjątkowe zezwolenia na odstępstwo):
   → RDOŚ może zezwolić gdy: nadrzędny interes publiczny + brak alternatyw + kompensacja
   → Decyzja RDOŚ → podlega kontroli WSA
 
-⚠️ Weryfikuj ustawa o ochronie przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 w ISAP.
+⚠️ Weryfikuj ustawa o ochronie przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 w ELI (RZĄD 1).
 ```
 
 ---
@@ -189,7 +189,7 @@ USTAWA z 13.04.2007 r. o zapobieganiu szkodom w środowisku:
   → Jeśli nie: organ działania naprawcze na koszt sprawcy
   → Zasada "zanieczyszczający płaci" — odpowiedzialność niezależna od winy
 
-⚠️ Brak nowszego t.j. ustawy o zapobieganiu szkodom — weryfikuj aktualny stan w ISAP.
+⚠️ Brak nowszego t.j. ustawy o zapobieganiu szkodom — weryfikuj aktualny stan w ELI (RZĄD 1).
 ```
 
 ---
@@ -227,5 +227,5 @@ REKOMENDACJA: □ Odwołanie do GDOŚ  □ Skarga do WSA  □ Zawiadomienie karn
 | Analiza szans (spór z RDOŚ / WIOŚ) | `analiza-sadowa-v6` |
 | Orzecznictwo NSA / WSA (środowisko) | `orzeczenia-sadowe-v2` |
 
-*⚠️ Wszystkie przepisy wymagają weryfikacji online w ISAP przed powołaniem.*
+*⚠️ Wszystkie przepisy wymagają weryfikacji online w ELI (RZĄD 1) przed powołaniem.*
 *Weryfikacja: 2026-06-05 | Zakaz cytowania przepisów z pamięci*

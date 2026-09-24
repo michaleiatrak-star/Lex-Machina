@@ -5,7 +5,8 @@ import {
   vi
 } from "vitest";
 import {
-  LocalLlmPrivacyNamedEntityRecognizer
+  LocalLlmPrivacyNamedEntityRecognizer,
+  privacyRecognizerFor
 } from "../src/privacy/local-llm-ner.js";
 import {
   LocalPolishPseudonymizer,
@@ -70,7 +71,9 @@ describe(
           status:
             () => ({
               configured:
-                true
+                true,
+              state:
+                "READY"
             })
         } as unknown as
           LocalModelRuntime;
@@ -199,7 +202,9 @@ describe(
           status:
             () => ({
               configured:
-                true
+                true,
+              state:
+                "READY"
             })
         } as unknown as
           LocalModelRuntime;
@@ -222,6 +227,69 @@ describe(
               "Anna Nowak"
           })
         ]);
+      }
+    );
+
+    it(
+      "uses the local model only when it is already running and only where requested",
+      async () => {
+        const stream =
+          vi.fn(
+            async () => ({
+              fullText:
+                "[]"
+            })
+          );
+        const fallback = {
+          recognize:
+            vi.fn(
+              async () => []
+            )
+        };
+        let state = "STOPPED";
+        const recognizer =
+          new LocalLlmPrivacyNamedEntityRecognizer(
+            {
+              stream
+            } as unknown as
+              ProviderGateway,
+            {
+              configuredModelId:
+                () =>
+                  "local/bielik-11b-v3-q4km",
+              status:
+                () => ({
+                  configured:
+                    true,
+                  state
+                })
+            } as unknown as
+              LocalModelRuntime,
+            fallback
+          );
+
+        await recognizer.recognize(
+          "Jan Kowalski"
+        );
+        expect(stream).not.toHaveBeenCalled();
+
+        state = "READY";
+        await privacyRecognizerFor(
+          recognizer,
+          false
+        ).recognize(
+          "Jan Kowalski"
+        );
+        expect(stream).not.toHaveBeenCalled();
+        expect(fallback.recognize).toHaveBeenCalledTimes(2);
+
+        await privacyRecognizerFor(
+          recognizer,
+          true
+        ).recognize(
+          "Jan Kowalski"
+        );
+        expect(stream).toHaveBeenCalledTimes(1);
       }
     );
   }

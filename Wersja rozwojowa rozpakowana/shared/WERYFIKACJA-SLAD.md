@@ -1,8 +1,9 @@
 # WERYFIKACJA-ŚLAD — Moduł Audytu Śladu Weryfikacji
 
 > **Plik:** `shared/WERYFIKACJA-SLAD.md`
-> **Wersja:** 1.7 (2026-09-14) — dodano provenance kanału (`access_mode`) niezależne od statusu ✅/⚠️; snapshot/crawler nie tworzy piątego statusu i sam nie uprawnia do ✅ [VER].
-> **Wersja poprzednia:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
+> **Wersja:** 1.8 (2026-09-22) — F-194: drugi precedens NSA (I OSK 590/26, 🟨 bez awansu), GRAD-3b-SYM (flaga symbolu CBOSA) i KALIBRACJA-PRZECIWNIK (wadliwe powołania przeciwnika ≠ argument merytoryczny).
+> **Wersja poprzednia:** 1.7 (2026-09-14) — dodano provenance kanału (`access_mode`) niezależne od statusu ✅/⚠️; snapshot/crawler nie tworzy piątego statusu i sam nie uprawnia do ✅ [VER].
+> **Wersja wcześniejsza:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
 >              checkpoint obowiązkowy przy ≥8 powołaniach, zamykający lukę
 >              "cichego pominięcia" pozycji bez błędu sieciowego — zgłoszone
 >              przez użytkownika po sesji, w której odpowiedź z wieloma
@@ -152,6 +153,23 @@ Termin: 2 tygodnie na sprzeciw od nakazu zapłaty (art. 502 §1 KPC) ✅ [VER: i
 > INSTYTUCJA dla spraw, gdzie strony są anonimizowane (adm./karne) i
 > GUARD STRON nie ma czego porównać.
 
+> 🟨 **Drugi precedens (dodano 2026-09-22, F-194) — wyrok NSA z 31.08.2026,
+> sygn. I OSK 590/26** (Izba Ogólnoadministracyjna; sprawa zasiłku stałego —
+> renta wyrównawcza a kryterium dochodowe). Status: **🟨 snapshot, BEZ AWANSU** —
+> istnienie potwierdzone dwoma źródłami wtórnymi RZĘDU 2B (prawo.pl, 22.09.2026;
+> wykaz orzeczeń inforfk.pl), CBOSA w dniu dodania: HTTP 503 na `/cbo/search`
+> i `/cbo/find` (kanał kodu), dokument nieodczytany → content_scope =
+> METADATA. ⛔ Do odczytu z CBOSA wolno powołać WYŁĄCZNIE metrykę, nie tezy.
+> Wg relacji prasowej: skarga kasacyjna SKO sporządzona przez radcę prawnego
+> powoływała 7 orzeczeń; NSA sprawdził wszystkie — część miała inną datę
+> i inny przedmiot (m.in. odszkodowanie za nieruchomość, przewlekłość
+> postępowania przed ministrem), część nie figurowała w rejestrze NSA.
+> ⭐ **Co wnosi ponad I FZ 104/26:** (1) linia obejmuje już dwie izby NSA;
+> (2) powołania o innym PRZEDMIOCIE były wykrywalne tanio — różnym symbolem
+> sprawy (→ GRAD-3b-SYM); (3) SKO mimo to WYGRAŁO co do istoty — wadliwe
+> powołania nie przesądziły wyniku (→ KALIBRACJA-PRZECIWNIK).
+> Awans do ✅: po odczycie `/doc/{ID}` w CBOSA (V-SYG-0.7) — flaga F-194.
+
 **Zasada:** samo `✅ [VER]` (istnienie) NIE wystarcza, gdy odpowiedź twierdzi coś
 o TREŚCI źródła. Poziom weryfikacji musi odpowiadać sile twierdzenia.
 
@@ -229,6 +247,30 @@ GRAD-3b: GUARD INSTYTUCJA/PRZEDMIOT (NOWE v1.2 — gdy GUARD STRON niemożliwy,
           ZAKRES-OK      ≈ 🟢 (GRAD-3b: przedmiot zgodny)
           WARN-ZAKRES    ≈ 🟠 (GRAD-3b: przedmiot częściowo/pomocniczo zgodny)
           ZAKAZ-ZAKRES   ≈ 🔴 (GRAD-3b: przedmiot niezgodny — blokada)
+
+GRAD-3b-SYM: FLAGA SYMBOLU CBOSA (dodano 2026-09-22, F-194 — tylko NSA/WSA):
+        Każdy dokument CBOSA ma pole „Symbol z opisem". Przy powołaniu
+        orzeczenia sądu administracyjnego na poparcie tezy porównaj symbol
+        powołanego orzeczenia z symbolem sprawy, do której ma być użyte.
+          symbol zgodny          → bez flagi (GRAD-3b nadal obowiązuje)
+          symbol różny           → 🟠 FLAGA-SYM: GRAD-3b OBOWIĄZKOWY przed
+                                   użyciem; brak odczytu przedmiotu = 🔴
+          symbolu nie odczytano  → brak flagi ≠ zgodność; zapisz „SYM: nieodczytany"
+        ⛔ FLAGA, nie blokada: orzeczenia o przepisach p.p.s.a. (skarga
+        kasacyjna, prawo pomocy, wstrzymanie wykonania) legalnie przekraczają
+        symbole materialne. Flaga wymusza odczyt, nie rozstrzyga o trafności.
+        ⛔ Symbolu nie zgaduj z sygnatury (repertorium OSK/FSK/GSK ≠ symbol).
+
+KALIBRACJA-PRZECIWNIK (dodano 2026-09-22, F-194 — analiza cudzych pism,
+        kategoria [11] i silnik V10): ustalenie, że przeciwnik powołał
+        orzeczenie nieistniejące, z inną datą lub o innym przedmiocie, to
+        argument o WIARYGODNOŚCI i staranności pisma — NIE argument co do
+        istoty. Zakaz: (a) przedstawiania go jako przesądzającego o
+        zasadności stanowiska przeciwnika; (b) pomijania odpowiedzi na istotę
+        zarzutu dlatego, że jego obudowa orzecznicza upadła (REM-GATE REM-1).
+        Wzorzec: I OSK 590/26 — autor wadliwych powołań wygrał co do istoty.
+        Tabela audytu powołań przeciwnika: sygnatura | status (FOUND /
+        NOT_FOUND / OUT_OF_SCOPE) | data zgodna? | przedmiot zgodny? | skutek.
 
 GRAD-4: REGUŁA KALIBRACJI — porównaj poziom OSIĄGNIĘTY z WYMAGANYM:
           osiągnięty ≥ wymagany → 🟢 ZWERYFIKOWANY

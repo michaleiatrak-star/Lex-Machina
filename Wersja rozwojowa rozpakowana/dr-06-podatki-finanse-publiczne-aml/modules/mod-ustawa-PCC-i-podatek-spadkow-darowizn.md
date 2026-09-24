@@ -16,7 +16,7 @@
 
 ## 2. PCC — STAWKI I PROCEDURA
 
-### Stawki PCC (art. 7 ustawy o PCC — weryfikuj w ISAP)
+### Stawki PCC (art. 7 ustawy o PCC — weryfikuj w ELI (RZĄD 1))
 
 ```
 1%:    Umowy sprzedaży ruchomości
@@ -94,7 +94,7 @@ Przy zakupie 2. i więcej nieruchomości mieszkalnych przez osobę fizyczną:
   → 6% PCC od wartości rynkowej
   → ZWOLNIENIE: zakup 1. mieszkania (art. 9 pkt 17 ustawy o PCC)
   → Warunek zwolnienia: podatnik nie posiada żadnego innego lokalu/domu
-  ⚠️ Weryfikuj aktualne warunki i wyjątki w ISAP
+  ⚠️ Weryfikuj aktualne warunki i wyjątki w ELI (RZĄD 1)
 web_search: "PCC 6% mieszkanie 2025 warunki 2 lokal zwolnienie"
 ```
 

@@ -52,7 +52,7 @@ WEZWANIE do JST do usunięcia naruszenia prawa
 SKARGA DO WSA
   → Składana bezpośrednio do WSA (art. 52 §4 PPSA — bez przekazania przez JST)
   → Właściwy WSA: siedziba organu JST
-  → Opłata: od rodzaju aktu — weryfikuj KSCU w ISAP
+  → Opłata: od rodzaju aktu — weryfikuj KSCU w ELI (RZĄD 1)
 
 WSA może:
   → Stwierdzić nieważność aktu (całość lub część)

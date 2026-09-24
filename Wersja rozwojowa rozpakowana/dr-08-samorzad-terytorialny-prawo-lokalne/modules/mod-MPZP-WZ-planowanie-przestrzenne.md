@@ -1,7 +1,7 @@
 # mod-MPZP-WZ-planowanie-przestrzenne
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o planowaniu i zagospodarowaniu przestrzennym — Dz.U. 2026 poz. 538 t.j. ze zm. | Weryfikuj aktualne zmiany w ISAP
+**Źródło weryfikacji:** Ustawa o planowaniu i zagospodarowaniu przestrzennym — Dz.U. 2026 poz. 538 t.j. ze zm. | Weryfikuj aktualne zmiany w ELI (RZĄD 1)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -261,17 +261,17 @@ ULICP (Ustalenie Lokalizacji Inwestycji Celu Publicznego):
 ### Renta planistyczna i odszkodowanie
 
 ```
-RENTA PLANISTYCZNA (art. 36 ust. 4 u.p.z.p. — weryfikuj w ISAP):
+RENTA PLANISTYCZNA (art. 36 ust. 4 u.p.z.p. — weryfikuj w ELI (RZĄD 1)):
   → Gdy wartość nieruchomości wzrosła wskutek uchwalenia / zmiany MPZP
   → Gmina może pobrać jednorazową opłatę przy zbyciu nieruchomości
   → Stawka: określona w MPZP (max 30%)
   → Termin gminy na pobranie: 5 lat od daty nabycia
 
-ODSZKODOWANIE (art. 36 ust. 1–3 u.p.z.p. — weryfikuj w ISAP):
+ODSZKODOWANIE (art. 36 ust. 1–3 u.p.z.p. — weryfikuj w ELI (RZĄD 1)):
   → Gdy wskutek zmiany MPZP korzystanie z nieruchomości stało się niemożliwe
     lub istotnie ograniczone
   → Żądanie: odszkodowanie LUB wykup LUB zamiana nieruchomości
-  → Termin na roszczenie: 5 lat od uchwalenia planu (weryfikuj w ISAP)
+  → Termin na roszczenie: 5 lat od uchwalenia planu (weryfikuj w ELI (RZĄD 1))
 ```
 
 ---

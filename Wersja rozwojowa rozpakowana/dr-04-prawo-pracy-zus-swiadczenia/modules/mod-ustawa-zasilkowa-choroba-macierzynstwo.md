@@ -1,7 +1,7 @@
 ---
 module: ustawa-zasilkowa-choroba-macierzynstwo
-version: "1.0"
-verified_on: "2026-08-27"
+version: "1.1"
+verified_on: "2026-09-22"
 coverage: "B+ — pełna mapa rozdziałów + kluczowe przesłanki i terminy"
 source_policy: "RZĄD 1 only"
 ---
@@ -67,6 +67,37 @@ Art. 11: standardowo zasiłek chorobowy wynosi 80% podstawy, a ustawa
 przewiduje sytuacje 100%. Nie przypisuj 100% na podstawie samej nazwy
 zdarzenia — odczytaj aktualny katalog.
 
+## 4a. Praca i aktywność na zwolnieniu — art. 17 (dodane 2026-09-22, F-193)
+
+✅ [VER: api.sejm.gov.pl/eli DU/2026/854 text.pdf (t.j.) + DU/2026/26 text.pdf
+(art. 13 pkt 1–2, art. 39, art. 43), 2026-09-22] RZĄD 1.
+
+| Jednostka | Treść (parafraza) | Obowiązuje od |
+|---|---|---|
+| art. 17 ust. 1 | utrata zasiłku chorobowego **za cały okres zwolnienia**, gdy w okresie orzeczonej niezdolności ubezpieczony (1) wykonuje pracę zarobkową lub (2) podejmuje aktywność niezgodną z celem zwolnienia | 13.04.2026 |
+| art. 17 ust. 1a | praca zarobkowa = każda czynność o charakterze zarobkowym, niezależnie od podstawy prawnej; wyłączone czynności incydentalne wymagane istotnymi okolicznościami; **polecenie pracodawcy nie jest istotną okolicznością** | 13.04.2026 |
+| art. 17 ust. 1b | aktywność niezgodna z celem = działania utrudniające lub wydłużające leczenie lub rekonwalescencję; wyłączone zwykłe czynności dnia codziennego i czynności incydentalne wymagane istotnymi okolicznościami | 13.04.2026 |
+| art. 17 ust. 1c | przy ≥2 tytułach ubezpieczenia niezdolność dotyczy każdego tytułu, dla którego odrębnie wystawia się zwolnienie | 13.04.2026 |
+| art. 17 ust. 1d | na żądanie ubezpieczonego można **nie wystawić** zwolnienia z tytułu, w ramach którego praca może być wykonywana z uwagi na jej rodzaj | ⏳ **1.01.2027** |
+| art. 17 ust. 1e | w przypadku z ust. 1d obowiązek poinformowania płatnika (art. 61 ust. 1 pkt 1) o okresie zwolnienia z innego tytułu | ⏳ **1.01.2027** |
+| art. 9 ust. 4 | jeden okres zasiłkowy niezależnie od liczby tytułów, także w przypadku z art. 17 ust. 1d | ⏳ **1.01.2027** |
+| art. 17 ust. 2 | zasiłek nie przysługuje, gdy zaświadczenie lekarskie sfałszowano | bez zmian |
+| art. 17 ust. 4 | ust. 1–2 stosuje się odpowiednio po ustaniu tytułu ubezpieczenia | 13.04.2026 |
+
+⛔ **Pułapka temporalna.** Ust. 1d–1e i art. 9 ust. 4 **są już w tekście
+jednolitym 2026/854**, oznaczone przypisem „wejdzie w życie z dniem 1 stycznia
+2027 r.". Odczyt t.j. bez przypisów prowadzi do zastosowania ich przed czasem.
+Do 31.12.2026 „L4 u jednego płatnika, praca u drugiego" nie ma podstawy w
+art. 17 — obowiązuje ust. 1c (niezdolność dotyczy każdego tytułu).
+
+⛔ **Przepis przejściowy (art. 39 ustawy 2026/26):** do postępowań w sprawie
+okoliczności z art. 17 ust. 1 w brzmieniu dotychczasowym, wszczętych i
+niezakończonych przed 13.04.2026, stosuje się przepisy dotychczasowe.
+
+Relacja z Kodeksem pracy: utrata zasiłku (ustawa zasiłkowa) i skutki
+pracownicze (np. wynagrodzenie chorobowe, dyscyplina) to odrębne reżimy —
+nie wywodź jednego z drugiego bez odczytu KP.
+
 ## 5. Świadczenie rehabilitacyjne — Rozdział 3
 
 Art. 18: świadczenie przysługuje po wyczerpaniu zasiłku chorobowego, gdy
@@ -130,5 +161,6 @@ Dedykowany plik osiąga **poziom B+** i pełną mapę rozdziałową.
 - [ ] odróżniono wynagrodzenie chorobowe KP od zasiłku;
 - [ ] sprawdzono wyczekiwanie i wyjątki;
 - [ ] okres zasiłkowy policzono wg aktualnych art. 8–9;
+- [ ] przy pracy/aktywności na L4: data zwolnienia zestawiona z datami art. 17 (13.04.2026 / 1.01.2027) — §4a;
 - [ ] płatnika ustalono na podstawie aktualnego art. 61;
 - [ ] przy macierzyńskim równolegle odczytano KP.

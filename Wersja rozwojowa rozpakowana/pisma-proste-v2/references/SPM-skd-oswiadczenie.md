@@ -23,7 +23,7 @@ skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.), lub pyta o
   nadpłaty w piśmie następczym / pozwie, jeśli pismo obejmuje też wezwanie
   do zapłaty)
 
-> ⚠ Weryfikuj aktualny t.j. ustawy o kredycie konsumenckim na isap.sejm.gov.pl
+> ⚠ Weryfikuj aktualny t.j. ustawy o kredycie konsumenckim na ELI (RZĄD 1)
 > przed każdym użyciem — akt nowelizowany często.
 
 ---

@@ -40,7 +40,7 @@ Tytuły pobytowe (wiza, karta pobytu, pobyt stały, rezydent długoterminowy UE)
 |---|---|
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. ze zm. |
 | Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom | Dz.U. 2025 poz. 621 |
-| Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP | weryfikuj aktualny t.j. w ISAP |
+| Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | Konwencja Genewska 1951 (status uchodźcy) | ratyfikowana przez Polskę — ✅ warstwa traktatowa [definicja uchodźcy, non-refoulement, art. 31/32/33] opracowana 2026-08-20 (F-61) w `dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-konwencja-genewska-uchodzcy-1951-protokol-1967.md`, NIE duplikować tutaj |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
@@ -159,7 +159,7 @@ Odwołanie od decyzji UW:           14 dni od doręczenia (art. 129 §2 KPA)
   → Złożone w terminie = LEGALNY POBYT DO DECYZJI SZUSC (stempel w paszporcie)
   ⚠️ Niepodjęte awizo: doręczenie z mocy prawa po 14 dniach od I awizo — termin biegnie!
 
-Skarga do WSA:                     30 dni od doręczenia decyzji SZUSC (art. 54 §1 PPSA)
+Skarga do WSA:                     30 dni od doręczenia decyzji SZUSC (art. 53 § 1 PPSA; wnoszona za pośrednictwem organu — art. 54 § 1)
   → Wyjątek konsulat/MSZ:          bezpośrednio do WSA bez etapu odwoławczego
   → WSA może wstrzymać wykonanie decyzji (art. 61 §3 PPSA — wniosek!)
 
@@ -254,7 +254,7 @@ WAŻNE: wizy wydane w celach 01, 02, 11, 14, 20, 23 oraz tranzytowe (od 01.06.20
 | Pobyt czasowy — Niebieska Karta UE | art. 127 u.c. | do 3 lat | TAK (pełny dostęp rynku pracy od 01.06.2025) | studia wyższe LUB 5 lat dośw.; wynagrodzenie ≥ 150% przeciętnego (≈ 12 272 zł brutto/mies. dla wniosków z 2025 r.) |
 | Pobyt czasowy — ICT (przeniesienie wewnątrz przedsiębiorstwa) | art. 139a u.c. | do 3 lat | TAK (jednostka przyjmująca) | pracodawca macierzysty poza UE; kadra kierownicza / specjalista / stażysta; powiązanie kapitałowe |
 | Pobyt czasowy — łączenie rodzin | art. 159 u.c. | do 3 lat | TAK (po udzieleniu) | sponsor z tytułem pobytowym; dochód; ubezpieczenie |
-| Pobyt stały | art. 195 u.c. | bezterminowy | TAK (pełny dostęp) | 5 lat pobyt ciągły LUB małżonek PL ≥ 3 lata LUB dziecko PL LUB Karta Polaka LUB uchodźca — weryfikuj przesłanki w ISAP |
+| Pobyt stały | art. 195 u.c. | bezterminowy | TAK (pełny dostęp) | 5 lat pobyt ciągły LUB małżonek PL ≥ 3 lata LUB dziecko PL LUB Karta Polaka LUB uchodźca — weryfikuj przesłanki w ELI (RZĄD 1) |
 | Rezydent długoterminowy UE | art. 211 u.c. | bezterminowy | TAK (pełny dostęp; mobilność UE) | 5 lat nieprzerw. pobytu; stabilny dochód; ubezpieczenie; znajomość j. polskiego |
 | Status uchodźcy | ustawa o ochronie cudzoziemców | bezterminowy | TAK bez zezwoleń | prześladowanie Konwencja Genewska 1951 |
 | Ochrona uzupełniająca | j.w. | do 2 lat (przedłużalne) | TAK bez zezwoleń | ryzyko poważnej krzywdy |
@@ -275,7 +275,7 @@ WAŻNE: wizy wydane w celach 01, 02, 11, 14, 20, 23 oraz tranzytowe (od 01.06.20
 ## 5. WYDALENIE / ZOBOWIĄZANIE DO POWROTU — OCHRONA
 
 ```
-PODSTAWY WYDALENIA (art. 302 u.c. — weryfikuj w ISAP):
+PODSTAWY WYDALENIA (art. 302 u.c. — weryfikuj w ELI (RZĄD 1)):
   → Nielegalny pobyt
   → Zagrożenie bezpieczeństwa / porządku publicznego
   → Skazanie za przestępstwo
@@ -600,7 +600,7 @@ web_search: "ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP tekst jed
 ## ANEKS B — WYJĄTEK: DECYZJE KONSULA / MSZ → WSA BEZ ETAPU ODWOŁAWCZEGO
 
 ```
-Art. 52 §4 PPSA (Dz.U. 2026 poz. 143) — weryfikuj aktualne brzmienie w ISAP:
+Art. 52 §4 PPSA (Dz.U. 2026 poz. 143) — weryfikuj aktualne brzmienie w ELI (RZĄD 1):
   Decyzje wydane przez konsula lub ministra właściwego ds. zagranicznych
   → Skargę do WSA można wnieść BEZ uprzedniego wyczerpania trybu odwoławczego
   (tryb odwoławczy jest niedostępny lub bezcelowy przy aktach organów RP za granicą)
@@ -615,7 +615,7 @@ Przykłady: odmowa wizy przez konsula, decyzja dotycząca dokumentów za granic�
 ```
 Po ostatecznej decyzji odmawiającej pobytu / nakazującej powrót:
   → Cudzoziemiec ma obowiązek opuszczenia RP w terminie 30 dni od dnia,
-    gdy decyzja stała się ostateczna (art. 299 ust. 3 u.c. — weryfikuj w ISAP)
+    gdy decyzja stała się ostateczna (art. 299 ust. 3 u.c. — weryfikuj w ELI (RZĄD 1))
   → Nieopuszczenie = podstawa do deportacji przymusowej
 
 Środki ochronne podczas postępowania WSA:

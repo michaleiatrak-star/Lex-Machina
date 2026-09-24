@@ -13,7 +13,7 @@ Po otrzymaniu daty doręczenia oblicz automatycznie wszystkie krytyczne terminy:
 DATA DORĘCZENIA: [DD.MM.RRRR]
 ↓
 Oblicz:
-  + 7 dni      → sprzeciw od wyroku nakazowego (wykroczenia, art. 94 KPSW) ZAWITY
+  + 7 dni      → sprzeciw od wyroku nakazowego (wykroczenia, art. 94 § 1 KPW w zw. z art. 506 § 1 KPK) ZAWITY
   + 14 dni     → odwołanie od decyzji administracyjnej (art. 129 §2 KPA) ZAWITY
   + 14 dni     → sprzeciw od orzeczenia lekarza orzecznika ZUS ZAWITY
   + 14 dni     → odstąpienie od umowy (internet / poza lokalem, art. 27 uPK)
@@ -32,9 +32,9 @@ OSTRZEŻENIA:
 
 | Termin | Czynność | Podstawa | Typ |
 |---|---|---|---|
-| **7 dni** | Sprzeciw od wyroku nakazowego | art. 94 KPSW | ZAWITY |
+| **7 dni** | Sprzeciw od wyroku nakazowego | art. 94 § 1 KPW w zw. z art. 506 § 1 KPK | ZAWITY |
 | **14 dni** | Odwołanie od decyzji adm. | art. 129 §2 KPA | ZAWITY |
-| **14 dni** | Sprzeciw od orzeczenia ZUS | art. 14 ustawy FUS | ZAWITY |
+| **14 dni** | Sprzeciw od orzeczenia ZUS | art. 14 ust. 2a FUS (do 31.12.2026); od 1.01.2027 — art. 85f ustawy o systemie ubezpieczeń społecznych (ustawa `2026/26`) | ZAWITY |
 | **14 dni** | Odstąpienie od umowy (internet) | art. 27 uPK | PREKLUZYJNY |
 | **21 dni** | Odwołanie od wypowiedzenia | art. 264 KP | ZAWITY |
 | **30 dni** | Skarga do WSA | art. 53 §1 PPSA | ZAWITY |
@@ -44,7 +44,7 @@ OSTRZEŻENIA:
 | **6 miesięcy** | Przyjęcie / odrzucenie spadku | art. 1015 KC | ZAWITY |
 | **3 lata** | Przedawnienie — roszczenia prac. | art. 291 KP | PRZEDAWNIENIE |
 | **3 lata** | Przedawnienie — delikt od wiedzy | art. 442¹ §1 KC | PRZEDAWNIENIE |
-| **5 lat** | Zachowek — przedawnienie | art. 1007 KC | PRZEDAWNIENIE |
+| **5 lat** | Zachowek — przedawnienie (od ogłoszenia testamentu albo od otwarcia spadku — § 1 / § 2–4) | art. 1007 KC | PRZEDAWNIENIE |
 | **6 lat** | Przedawnienie ogólne KC | art. 118 KC | PRZEDAWNIENIE |
 
 ---
@@ -69,8 +69,13 @@ PRZYKŁAD:
   Udział ustawowy syna: 1/2 | Udział zachowkowy: 1/2 × 1/2 = 1/4
   Zachowek = 300 000 × 1/4 = 75 000 zł
 
-PRZEDAWNIENIE: 5 lat od ogłoszenia / otwarcia testamentu (art. 1007 KC)
-WERYFIKUJ: czy darowizny sprzed ponad 10 lat można wyłączyć (art. 994 KC)
+PRZEDAWNIENIE: 5 lat — wobec spadkobierców od OGŁOSZENIA TESTAMENTU (art. 1007 § 1 KC);
+  wobec obdarowanych, zapisobierców windykacyjnych i fundacji rodzinnej — od OTWARCIA SPADKU
+  (§ 2–4). ⛔ Poprzednio „od otwarcia testamentu" — takiego punktu startowego ustawa nie zna.
+SUBSTRAT: nie dolicza się drobnych darowizn zwyczajowo przyjętych ani darowizn sprzed ponad
+  10 lat (wstecz od otwarcia spadku) na rzecz osób NIEBĘDĄCYCH spadkobiercami ani uprawnionymi
+  do zachowku (art. 994 § 1 KC); darowizny dla spadkobierców i uprawnionych — dolicza się bez
+  względu na datę. ✅ RZĄD 1 2026-09-16f
 ```
 
 ---

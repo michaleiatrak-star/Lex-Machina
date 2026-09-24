@@ -491,12 +491,10 @@ export class DeanonymizationReauthorizationManager {
     };
   }
 
-  async consumeGrant(
+  private async checkedGrant(
     actor: AuthenticatedContext,
     grantId: string
-  ): Promise<
-    DeanonymizationTargetState
-  > {
+  ) {
     const grant =
       this.grants.get(
         grantId
@@ -559,6 +557,55 @@ export class DeanonymizationReauthorizationManager {
         "REAUTH_TARGET_CHANGED"
       );
     }
+
+    return { grant, current, now };
+  }
+
+  /**
+   * Shows what the grant would restore without using it up: the user reviews
+   * restored names before the one-time final document is written.
+   */
+  async previewGrant(
+    actor: AuthenticatedContext,
+    grantId: string
+  ): Promise<
+    DeanonymizationTargetState
+  > {
+    const { grant, current } =
+      await this.checkedGrant(
+        actor,
+        grantId
+      );
+    this.audit(
+      actor.user.userId,
+      "deanonymization_grant_previewed",
+      "PASS",
+      {
+        grantId,
+        intentId:
+          grant.intentId,
+        caseId:
+          grant.caseId,
+        artifactId:
+          grant.artifactId
+      }
+    );
+    return {
+      ...current
+    };
+  }
+
+  async consumeGrant(
+    actor: AuthenticatedContext,
+    grantId: string
+  ): Promise<
+    DeanonymizationTargetState
+  > {
+    const { grant, current, now } =
+      await this.checkedGrant(
+        actor,
+        grantId
+      );
 
     // Consume before the caller is allowed to unlock/decrypt the vault.
     grant.consumedAt =

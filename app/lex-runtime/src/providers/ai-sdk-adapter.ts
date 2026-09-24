@@ -26,10 +26,18 @@ const LOCAL_DEFAULT_OUTPUT_TOKENS =
   4_096;
 const LOCAL_CONTEXT_SAFETY_TOKENS =
   1_024;
+// llama-server samples at 0.8 unless told otherwise; 11-12B instruct models
+// (Mistral NeMo recommends 0.3) then drift off the instruction or out of
+// Polish. Short commands are answered deterministically.
+const LOCAL_TEMPERATURE = 0.3;
+const LOCAL_TRIVIAL_TEMPERATURE = 0;
+// A local model on CPU may read a legal prompt for several minutes before
+// the first token; the UI shows a live draft meanwhile. Both limits stay below
+// the 1200 s desktop proxy limit for session execution.
 const LOCAL_HTTP_RESPONSE_TIMEOUT_MS =
-  300_000;
+  900_000;
 const LOCAL_FIRST_CONTENT_TIMEOUT_MS =
-  300_000;
+  900_000;
 const LOCAL_STREAM_IDLE_TIMEOUT_MS =
   120_000;
 const LOCAL_JSON_BODY_TIMEOUT_MS =
@@ -37,6 +45,58 @@ const LOCAL_JSON_BODY_TIMEOUT_MS =
 
 const LOCAL_TOOL_SENTINEL =
   "LEX_TOOL_CALLS_JSON:";
+
+/**
+ * Forwards local streaming text as a live draft, but never the text tool
+ * protocol: output that starts with the tool sentinel stays hidden.
+ */
+export function localDraftForwarder(
+  onContentDelta?: (text: string) => void
+): {
+  push: (text: string) => void;
+  finish: (fullText: string) => void;
+} {
+  let pending = "";
+  let decided:
+    "TEXT" | "TOOL" | null = null;
+  let forwarded = false;
+  return {
+    push: (text: string) => {
+      if (!onContentDelta || decided === "TOOL") return;
+      if (decided === "TEXT") {
+        forwarded = true;
+        onContentDelta(text);
+        return;
+      }
+      pending += text;
+      const head =
+        pending.trimStart();
+      if (!head) return;
+      if (
+        LOCAL_TOOL_SENTINEL.startsWith(head) ||
+        head.startsWith(LOCAL_TOOL_SENTINEL)
+      ) {
+        if (head.startsWith(LOCAL_TOOL_SENTINEL)) {
+          decided = "TOOL";
+        }
+        return;
+      }
+      decided = "TEXT";
+      forwarded = true;
+      onContentDelta(pending);
+      pending = "";
+    },
+    finish: (fullText: string) => {
+      if (!onContentDelta) return;
+      if (!forwarded) {
+        onContentDelta(fullText);
+      } else if (pending) {
+        onContentDelta(pending);
+      }
+      pending = "";
+    }
+  };
+}
 
 function compactLocalSchema(
   value: unknown,
@@ -444,7 +504,8 @@ export function buildLocalChatRequest(
   messages: ProviderStreamParams["messages"],
   maxOutputTokens:
     number = LOCAL_DEFAULT_OUTPUT_TOKENS,
-  stream = true
+  stream = true,
+  temperature = LOCAL_TEMPERATURE
 ): {
   model: string;
   messages: Array<{
@@ -452,9 +513,14 @@ export function buildLocalChatRequest(
     content: string;
   }>;
   max_tokens: number;
+  temperature: number;
   stream: boolean;
+  cache_prompt: boolean;
 } {
   return {
+    // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
+    // prompt + earlier turns) instead of re-reading it on every request.
+    cache_prompt: true,
     model: modelId,
     messages: [
       {
@@ -465,6 +531,7 @@ export function buildLocalChatRequest(
     ],
     max_tokens:
       maxOutputTokens,
+    temperature,
     stream
   };
 }
@@ -820,7 +887,8 @@ export async function readLocalSse(
   timeouts?: {
     firstContentMs?: number;
     idleMs?: number;
-  }
+  },
+  onDelta?: (text: string) => void
 ): Promise<string> {
   if (!response.body) {
     throw new Error(
@@ -863,10 +931,14 @@ export async function readLocalSse(
         `LOCAL_MODEL_HTTP_STREAM_ERROR:${streamError}`
       );
     }
-    fullText +=
+    const piece =
       parseLocalSseLine(
         rawLine
       );
+    fullText += piece;
+    if (piece) {
+      onDelta?.(piece);
+    }
     if (
       isLocalSseTerminalLine(
         rawLine
@@ -1062,7 +1134,8 @@ async function directLocalJsonCompletion(
             maxOutputTokens
           )
         ),
-        false
+        false,
+        LOCAL_TRIVIAL_TEMPERATURE
       ),
       abortSignal
     );
@@ -1184,7 +1257,8 @@ async function streamLocalChatCompletion(
   messages: ProviderStreamParams["messages"],
   contextTokens: number,
   conservativeCharsPerToken: number,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  onDelta?: (text: string) => void
 ): Promise<ProviderStreamResult> {
   const budget =
     localChatBudget(
@@ -1256,7 +1330,9 @@ async function streamLocalChatCompletion(
     return {
       fullText:
         await readLocalSse(
-          response
+          response,
+          undefined,
+          onDelta
         )
     };
   } catch (streamError) {
@@ -1374,6 +1450,11 @@ async function streamLocalModel(
         _nativeCallbacks,
       ...localParams
     } = params;
+    const draft =
+      localDraftForwarder(
+        params.callbacks
+          ?.onContentDelta
+      );
     try {
       result =
         await streamLocalChatCompletion(
@@ -1386,7 +1467,8 @@ async function streamLocalModel(
           localParams.messages,
           contextTokens,
           conservativeCharsPerToken,
-          localParams.abortSignal
+          localParams.abortSignal,
+          draft.push
         );
     } catch (error) {
       const detail =
@@ -1409,10 +1491,9 @@ async function streamLocalModel(
         result.fullText
       );
     if (!calls) {
-      params.callbacks
-        ?.onContentDelta?.(
-          result.fullText
-        );
+      draft.finish(
+        result.fullText
+      );
       return result;
     }
 

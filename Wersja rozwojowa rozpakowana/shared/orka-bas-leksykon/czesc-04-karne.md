@@ -38,7 +38,7 @@ nie każda wypowiedź obraźliwa wypełnia znamiona.
 
 ### BAS-114 — Mobbing a prawo karne
 ```
-Weryfikacja: KK + KP (weryfikuj aktualne brzmienia w ISAP)
+Weryfikacja: KK + KP (weryfikuj aktualne brzmienia w ELI (RZĄD 1))
 Status: Mobbing SENSU STRICTO nie jest przestępstwem KK — odpowiedzialność wyłącznie
 pracownicza (KP art. 94³) i cywilna (KC).
 Ale mobbingowe zachowania mogą JEDNOCZEŚNIE wyczerpywać znamiona:

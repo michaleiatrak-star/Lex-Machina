@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -21,7 +21,7 @@ rurociąg, linia i trakcja elektroenergetyczna, linia kablowa nadziemna
 i umieszczona bezpośrednio w ziemi, podziemna, wał przeciwpowodziowy,
 kanalizacja kablowa — PRZY CZYM kable w niej zainstalowane NIE stanowią
 obiektu budowlanego (orka2.sejm.gov.pl/IZ6.nsf/main/5A306280)
-→ Weryfikuj aktualne Prawo budowlane: isap.sejm.gov.pl
+→ Weryfikuj aktualne Prawo budowlane: ELI (RZĄD 1)
 ⚠️ Patrz też BAS-W10 (ORKA-BAS-VIII-X-KADENCJA.md) — pełna wersja zweryfikowana
 ```
 
@@ -61,7 +61,7 @@ OBIEKT BUDOWLANY (art. 3 pkt 1 Prawa budowlanego — weryfikuj aktualne brzmieni
   "Obiekt budowlany to budynek, budowla bądź obiekt małej architektury,
   wraz z instalacjami zapewniającymi możliwość użytkowania obiektu budowlanego
   zgodnie z jego przeznaczeniem"
-  → Weryfikuj: isap.sejm.gov.pl → Prawo budowlane Dz.U. 2026 poz. 524 art. 3
+  → Weryfikuj: ELI (RZĄD 1) → Prawo budowlane Dz.U. 2026 poz. 524 art. 3
 
 BUDYNEK (def. z u.p.o.l. dla celów podatkowych — INT7.nsf/568AC194):
   = obiekt budowlany + instalacje zapewniające użytkowanie + trwale związany z gruntem
@@ -105,7 +105,7 @@ DECYZJA O POZWOLENIU NA BUDOWĘ — wykonalność (INT7.nsf):
   → Po wykreśleniu wyrazu "ostatecznej" możliwe rozpoczęcie na podstawie
     decyzji WYKONALNEJ (nie ostatecznej) gdy jedyną stroną jest inwestor
   → Gdy więcej stron: decyzja musi mieć przymiot OSTATECZNOŚCI
-  → Weryfikuj: isap.sejm.gov.pl → Prawo budowlane art. 36 + KPA art. 130
+  → Weryfikuj: ELI (RZĄD 1) → Prawo budowlane art. 36 + KPA art. 130
 ```
 
 ---

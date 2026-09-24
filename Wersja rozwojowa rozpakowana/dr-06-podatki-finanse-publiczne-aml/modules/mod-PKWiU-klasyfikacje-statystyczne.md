@@ -11,7 +11,7 @@
 
 **PRZED każdym powołaniem przepisu, klasyfikacji, kodu PKWiU/CN/PKOB lub daty
 wejścia w życie:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. **NIGDY** nie podawaj kodu klasyfikacji, daty przejścia lub stawki
    wyłącznie z pamięci modelu — klasyfikacje i terminy przejściowe
    zmieniają się.

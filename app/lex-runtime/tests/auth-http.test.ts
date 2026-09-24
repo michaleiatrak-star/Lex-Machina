@@ -561,3 +561,108 @@ describe("admin provider credential HTTP API", () => {
     authService.close();
   });
 });
+
+describe("idle session activity", () => {
+  function fakeAuth() {
+    const touchSession = vi.fn();
+    const service = {
+      authenticateAuthorization: vi.fn(() => ({
+        user: {
+          userId: "u1",
+          loginName: "owner",
+          displayName: "Owner",
+          role: "ADMIN",
+          status: "ACTIVE"
+        },
+        session: {
+          sessionId: "s1"
+        }
+      })),
+      touchSession,
+      getModelRoutingPreferences: vi.fn(() => ({
+        auxiliaryEnabled: false,
+        auxiliaryProvider: "openai",
+        auxiliaryModel: ""
+      })),
+      status: vi.fn(() => ({
+        initialized: true,
+        requiresBootstrap: false,
+        temporaryAdminCredentialsActive: false
+      })),
+      onSessionRevoked: vi.fn(() => () => undefined)
+    };
+    return { service, touchSession };
+  }
+
+  it("treats window activity reports as user activity", async () => {
+    const { service, touchSession } = fakeAuth();
+    const app = createLexHttpApp({
+      registry: registry(),
+      modelCatalog: { list: vi.fn(async () => []) },
+      authService: service as never
+    });
+
+    await request(app)
+      .post("/api/auth/activity")
+      .set("Authorization", "Bearer token")
+      .expect(204);
+    expect(touchSession).toHaveBeenCalledWith("s1");
+  });
+
+  it("keeps the session active while a long request is still running", async () => {
+    vi.useFakeTimers({
+      toFake: ["setInterval", "clearInterval"]
+    });
+    try {
+      const { service, touchSession } = fakeAuth();
+      let release!: () => void;
+      let markStarted!: () => void;
+      const started = new Promise<void>((resolve) => {
+        markStarted = resolve;
+      });
+      const app = createLexHttpApp({
+        registry: registry(),
+        modelCatalog: { list: vi.fn(async () => []) },
+        authService: service as never,
+        sessionExecutor: {
+          execute: vi.fn(
+            () =>
+              new Promise<never>((_resolve, reject) => {
+                release = () => reject(new Error("done"));
+                markStarted();
+              })
+          )
+        }
+      });
+
+      const pending = request(app)
+        .post("/api/sessions/execute")
+        .set("Authorization", "Bearer token")
+        .send({
+          query: "Pytanie",
+          provider: "openai",
+          model: "gpt-test",
+          primarySkill: DR,
+          mode: "PRAWNIK"
+        })
+        .then((response) => response);
+      const early = await Promise.race([
+        started.then(() => null),
+        pending
+      ]);
+      expect(early).toBeNull();
+
+      const beforeWait = touchSession.mock.calls.length;
+      vi.advanceTimersByTime(20 * 60_000);
+      expect(touchSession.mock.calls.length - beforeWait).toBe(20);
+
+      release();
+      await pending;
+      const afterFinish = touchSession.mock.calls.length;
+      vi.advanceTimersByTime(5 * 60_000);
+      expect(touchSession.mock.calls.length).toBe(afterFinish);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

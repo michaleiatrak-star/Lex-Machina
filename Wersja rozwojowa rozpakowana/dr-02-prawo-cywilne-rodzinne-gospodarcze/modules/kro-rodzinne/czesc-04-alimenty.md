@@ -250,7 +250,7 @@ Na zakres alimentów NIE wpływają (nie zaliczają się):
   □ Świadczenie wychowawcze (800+) — irrelewantne dla alimentów!
   □ Świadczenia rodzinne (zasiłek rodzinny)
   □ Rodzicielskie świadczenie uzupełniające (mama 4+ / tata 4+)
-⚠️ Weryfikuj aktualne brzmienie art. 135 §3 KRO w ISAP.
+⚠️ Weryfikuj aktualne brzmienie art. 135 §3 KRO w ELI (RZĄD 1).
 ```
 
 ---

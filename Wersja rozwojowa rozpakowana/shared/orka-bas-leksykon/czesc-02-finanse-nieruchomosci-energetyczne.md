@@ -92,14 +92,14 @@ web_search: "ustawa o finansach publicznych 2025 art [X] definicja" dla aktualiz
 
 ### BAS-010 — Nieruchomość mieszkalna
 ```
-Weryfikacja: ustawa deweloperska (Dz.U. 2021 poz. 1177 t.j.) + ustawa o własności
+Weryfikacja: ustawa deweloperska (Dz.U. 2026 poz. 880 t.j.) + ustawa o własności
   lokali — definicja operacyjna, bez definicji legalnej w jednym akcie
   web_search: "nieruchomość mieszkalna definicja ustawa 2025 aktualna"
 Definicja: Nieruchomość służąca zaspokajaniu potrzeb mieszkaniowych,
 także na etapie realizacji inwestycji mieszkaniowej.
 Reguła ORKA-REG-06: Decyduje faktyczna funkcja — nieruchomość w budowie
 z wydanym pozwoleniem mieszkaniowym może być zakwalifikowana jako mieszkalna.
-Weryfikuj: ustawa o własności lokali + ustawa deweloperska (Dz.U. 2021 poz. 1177)
+Weryfikuj: ustawa o własności lokali + ustawa deweloperska (Dz.U. 2026 poz. 880 t.j.)
 ```
 
 ### BAS-105 — Zabudowa zagrodowa na gruntach leśnych

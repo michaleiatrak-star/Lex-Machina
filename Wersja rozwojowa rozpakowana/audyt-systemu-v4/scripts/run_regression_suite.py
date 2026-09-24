@@ -147,6 +147,18 @@ def main():
         ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 52/52 COV, 0 FULL i metryki", "test_f108_consistency.py", []),
         ("T19b", "T19b — F-108/46: stawki, rejestr 52/52, propagacja, mutacje", "test_f108_trade.py", repo_args),
         ("T22", "T22 KRYTYCZNY — samo-rejestracja frontmatteru", "check_frontmatter_rejestracja.py", [str(root)]),
+        # F-189 (2026-09-16): T28 i T29 są offline i deterministyczne. SKRYPTY-RECZNE
+        # deklarował T28 jako „wchodzi do orkiestratora", ale nie był wołany — 20 FAIL
+        # nie zmieniało wyniku pełnego przebiegu.
+        ("T28", "T28 KRYTYCZNY — wartości i cytaty (W1/W2 FAIL, W3 WARN)", "check_wartosci_prawne.py", ["--katalog", str(root), "--tylko-fail"]),
+        ("T29", "T29 WYSOKI — integralność podziału TABELE-OPLAT", "check_oplaty_mapa.py", ["--katalog", str(root)]),
+        # F-189 (2026-09-16c): utrata treści bez cofnięcia numeru — T12 tego nie widzi.
+        ("T30", "T30 KRYTYCZNY — utrata treści vs AUDIT-JOURNAL", "check_utrata_tresci.py", ["--repo-root", str(root)]),
+        # O-11(b), 2026-09-16e: FAIL tylko przy pliku z rejestru, którego nie ma; kwota bez podstawy = WARN.
+        ("T32", "T32 WYSOKI — tabele satelickie opłat: kwota bez podstawy", "check_tabele_satelickie.py", ["--repo-root", str(root)]),
+        # 2026-09-17r: kontrola PO wydaniu. Brak katalogu paczek → PASS, więc test nie przeszkadza
+        # w środowiskach bez wydań; rozjazd paczka↔drzewo jest jednak twardym FAIL.
+        ("T33", "T33 WYSOKI — zgodność wydanych paczek z drzewem", "check_wydanie.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -163,7 +175,9 @@ def main():
     # wyciszyć inny test KRYTYCZNY, więc nie może być zwykłym ostrzeżeniem.
     # T14 może być czerwony przejściowo, dopóki kolejne skille nie zostaną skrócone
     # do profilu uniwersalnego; nadal jest jawnie raportowany.
-    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22")
+    # T28 i T29 dołączyły 2026-09-16 (F-189): W1 to nawrót błędu JUŻ naprawionego
+    # po odczycie treści — dokładnie ta klasa, którą regresja ma blokować.
+    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29", "T30")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

@@ -5,7 +5,7 @@
 - **KSeF nie jest odrębną ustawą.** Reżim Krajowego Systemu e-Faktur jest częścią ustawy o VAT. System utworzyła ustawa z 29.10.2021 r. o zmianie ustawy o VAT oraz niektórych innych ustaw — **Dz.U. 2021 poz. 2076**, art. 4. ⛔ Poprzedni wpis „ustawa o KSeF — Dz.U. 2021 poz. 1237” był błędny i został usunięty.
 - Aktualny harmonogram obowiązkowego KSeF weryfikuj w ustawie o VAT oraz na oficjalnym portalu MF/KSeF; terminy operacyjne poniżej zweryfikowano 2026-08-28.
 
-**Weryfikacja:** isap.sejm.gov.pl + MF przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) + MF przed każdym cytowaniem.
 
 ## Zakres — informatyzacja
 Obowiązki podmiotów publicznych: elektroniczna obsługa spraw (ePUAP/mObywatel),

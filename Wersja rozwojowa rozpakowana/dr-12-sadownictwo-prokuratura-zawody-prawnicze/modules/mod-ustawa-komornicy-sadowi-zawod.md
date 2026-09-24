@@ -41,7 +41,7 @@ Postępowanie dyscyplinarne komorników — Ustawa o komornikach sądowych,
   aktualnym t.j. 2024.1458 przy najbliższej okazji)
 
 Opłaty egzekucyjne — rozporządzenie MS:
-  ⚠️ Weryfikuj aktualne rozp. w ISAP przed podaniem stawek
+  ⚠️ Weryfikuj aktualne rozp. w ELI (RZĄD 1) przed podaniem stawek
   web_search: "opłaty komornicze rozporządzenie MS 2025 2026 egzekucja stawki"
 
 KPC — skarga na czynności komornika:
@@ -49,14 +49,14 @@ KPC — skarga na czynności komornika:
   ✅ VER: isap.sejm.gov.pl 2026-06-05
 
 Ustawa o kosztach komorniczych (jeśli odrębna od u.k.s.):
-  → weryfikuj w ISAP — możliwe zmiany po 2024
+  → weryfikuj w ELI (RZĄD 1) — możliwe zmiany po 2024
 ```
 
 ## ZASADY ABSOLUTNE
 
 1. Komornik = funkcjonariusz publiczny działający przy sądzie rejonowym.
 2. Wierzyciel może wybrać DOWOLNEGO komornika w kraju (nie tylko rewirowego)
-   — weryfikuj aktualne ograniczenia w ISAP.
+   — weryfikuj aktualne ograniczenia w ELI (RZĄD 1).
 3. Odpowiedzialność cywilna za szkodę z egzekucji: komornik odpowiada OSOBIŚCIE
    (SP nie ponosi odpowiedzialności solidarnej — aktualny stan: weryfikuj).
 4. Opłaty egzekucyjne (art. 29-31 ustawy o kosztach komorniczych, 28.02.2018,

@@ -16,7 +16,7 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - przepisy przejściowe,
 - właściwy organ i tryb zaskarżenia.
 
-Dz.U. 2025 poz. 1366 (zakwaterowanie funkcjonariuszy Policji/SG/PSP/ABW/AW/SKW/SWW/SOP) zmienia równolegle ustawę o PSP — weryfikuj w ISAP przed cytowaniem przepisów o zakwaterowaniu.
+Dz.U. 2025 poz. 1366 (zakwaterowanie funkcjonariuszy Policji/SG/PSP/ABW/AW/SKW/SWW/SOP) zmienia równolegle ustawę o PSP — weryfikuj w ELI (RZĄD 1) przed cytowaniem przepisów o zakwaterowaniu.
 
 ## 2. Zakres spraw
 - status prawny i zadania PSP (formacja zawodowa, umundurowana) vs OSP (stowarzyszenie w rozumieniu Prawa o stowarzyszeniach, Dz.U. 2020 poz. 2261)
@@ -154,7 +154,7 @@ Przed odpowiedzią lub pismem zastosuj:
 
 ```
 Ustawa o Państwowej Straży Pożarnej: Dz.U. 2025 poz. 1312 t.j. (ustawa z 24.08.1991,
-  obwieszczenie 15.09.2025, weszła w życie 30.09.2025) — weryfikuj dalsze zm. w ISAP
+  obwieszczenie 15.09.2025, weszła w życie 30.09.2025) — weryfikuj dalsze zm. w ELI (RZĄD 1)
   VER: isap.sejm.gov.pl WDU20250001312
   Organy: Komendant Główny PSP -> komendant wojewódzki -> komendant powiatowy (miejski)
   Rozdz. 11 (art. 115-124n) — odpowiedzialność dyscyplinarna strażaków:
@@ -171,7 +171,7 @@ Ustawa o Państwowej Straży Pożarnej: Dz.U. 2025 poz. 1312 t.j. (ustawa z 24.0
     -> wznowienie na niekorzyść ukaranego: do 10 lat, gdy ujawniono przestępstwo (art. 124k i n.)
 
 Ustawa o ochronie przeciwpożarowej: Dz.U. 2025 poz. 188 t.j. (ustawa z 24.08.1991,
-  obwieszczenie 5.02.2025) — WERYFIKUJ dalsze zmiany w ISAP przed cytowaniem
+  obwieszczenie 5.02.2025) — WERYFIKUJ dalsze zmiany w ELI (RZĄD 1) przed cytowaniem
   VER: isap.sejm.gov.pl WDU20250000188
   UWAGA: ten sam dzień uchwalenia (24.08.1991) co ustawa o PSP, ale ODRĘBNY akt
      i odrębny Dz.U. — nie mylić numerów.
@@ -199,7 +199,7 @@ Ustawa o ochotniczych strażach pożarnych (OSP): Dz.U. 2025 poz. 244 t.j. (usta
   Rozdz. 3 (art. 12-31) — świadczenia dla strażaków ratowników OSP: ekwiwalent pieniężny,
     świadczenie ratownicze, odszkodowania/renty za wypadek — wypłacane przez komendanta
     wojewódzkiego PSP na zasadach analogicznych do strażaków PSP (ustawa z 2014 r.
-    o świadczeniach odszkodowawczych — weryfikuj osobno w ISAP)
+    o świadczeniach odszkodowawczych — weryfikuj osobno w ELI (RZĄD 1))
   Rozdz. 4 (art. 32-34) — finansowanie: dotacje na wniosek OSP/związku OSP do Komendanta
     Głównego PSP za pośrednictwem komendanta powiatowego
   Rozdz. 5 (art. 35-36) — majątek i ewidencja; likwidacja OSP -> art. 38 Prawa

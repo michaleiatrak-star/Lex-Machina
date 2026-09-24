@@ -26,6 +26,7 @@ import {
   downloadGeneratedArtifact,
   downloadSensitiveArtifact,
   executeSession,
+  getSessionProgress,
   finalizeDeanonymization,
   generateLegalDocument,
   getHealth,
@@ -43,6 +44,8 @@ import {
   provisionLocalModel,
   repairLocalModel,
   reauthorizeDeanonymization,
+  previewDeanonymization,
+  saveNameForm,
   renameCase,
   setClaudeOAuthToken,
   setModelRoutingPreferences,
@@ -60,6 +63,7 @@ import {
   type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse,
+  type DeanonymizationPreview,
   type StoredUploadResponse,
   type LegalDocumentFormat,
   type LocalModelsResponse
@@ -84,6 +88,8 @@ import {
   setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
   skillsForDeterministicAction,
+  workModeForAction,
+  type ChatWorkMode,
   type DeterministicActionId,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
@@ -112,6 +118,17 @@ import {
 import type {
   WorkspaceDocumentCitation
 } from "./workspace-client.js";
+import { RestorationReview } from "./RestorationReview.js";
+import {
+  DeanonymizationReview,
+  applyAliasCorrection
+} from "./DeanonymizationReview.js";
+import {
+  applyRestorationCorrection,
+  shiftMarks,
+  unresolvedPlaceholders,
+  validMarks
+} from "./restoration-review.js";
 import "./chat.css";
 import "./workspace.css";
 
@@ -518,26 +535,107 @@ export function localModelFailureMessage(
   }
 }
 
-function providerFailureMessage(
+export function providerFailureMessage(
   provider: PrimaryModelSource,
-  reason?: string
+  reason?: string,
+  description?: string
 ): string {
-  switch (reason) {
-    case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
-      return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
-    case "ACCOUNT_SESSION_AUTH_EXPIRED":
-      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.";
-    case "ACCOUNT_SESSION_CAPACITY":
-      return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
-    case "ACCOUNT_SESSION_PROMPT_REJECTED":
-      return "ChatGPT/Codex odrzucił bieżące żądanie po stronie usługi. Kod: ACCOUNT_SESSION_PROMPT_REJECTED";
-    case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
-      return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
-    case "ACCOUNT_SESSION_CLI_FAILED":
-      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Lex Machina 0.1.7 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
-    default:
-      return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
+  const name =
+    provider.startsWith("anthropic")
+      ? "Claude"
+      : provider.startsWith("xai")
+        ? "Grok"
+        : "ChatGPT/Codex";
+  const client =
+    provider.startsWith("anthropic")
+      ? "Claude Code"
+      : provider.startsWith("xai")
+        ? "Grok Build"
+        : "Codex";
+  const base = (() => {
+    switch (reason) {
+      case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
+        return `${name} odrzucił model domyślny dla tej sesji. Zaktualizuj aplikację i ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_AUTH_EXPIRED":
+      case "ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH":
+        return `Sesja ${name} wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.`;
+      case "ACCOUNT_SESSION_CAPACITY":
+        return `${name} chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta.`;
+      case "ACCOUNT_SESSION_PROMPT_REJECTED":
+        return `${name} odrzucił bieżące żądanie po stronie usługi.`;
+      case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
+        return `Klient ${client} jest niezgodny z kontraktem Lex Machina. Lex Machina używa przypiętej wersji prywatnego klienta; ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_CLI_SPAWN_FAILED":
+        return `Nie udało się uruchomić klienta ${client}. Ponów połączenie konta w Ustawieniach, aby Lex Machina przygotowała przypiętą wersję klienta.`;
+      case "ACCOUNT_SESSION_CLI_STALLED":
+        return `Klient ${client} nie rozpoczął pracy w ciągu 120 s (brak żadnej odpowiedzi procesu).`;
+      case "ACCOUNT_SESSION_COMMAND_TIMEOUT":
+        return `Klient ${client} przekroczył limit czasu wykonania.`;
+      case "ACCOUNT_SESSION_EMPTY_RESPONSE":
+        return `${name} zakończył wykonanie bez treści odpowiedzi.`;
+      case "ACCOUNT_SESSION_CLI_FAILED":
+        return `Klient ${client} zakończył wykonanie błędem.`;
+      default:
+        return `${name} odrzucił lub przerwał wykonanie.`;
+    }
+  })();
+  const code =
+    reason
+      ? ` Kod: ${reason}.`
+      : "";
+  const detail =
+    description?.trim()
+      ? ` Szczegóły: ${description.trim().slice(0, 600)}`
+      : "";
+  return `${base}${code}${detail}`;
+}
+
+export function newExecutionId(): string {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return crypto.randomUUID();
   }
+  return Array.from(
+    { length: 32 },
+    () => Math.floor(Math.random() * 16).toString(16)
+  ).join("");
+}
+
+/**
+ * Polls the runtime for the live draft of a running execution. Returns a
+ * stop function; the draft is cleared when polling stops.
+ */
+export function startDraftPolling(
+  executionId: string,
+  onDraft: (text: string) => void,
+  intervalMs = 1000,
+  fetchProgress: typeof getSessionProgress = getSessionProgress
+): () => void {
+  let stopped = false;
+  let inFlight = false;
+  const timer = setInterval(() => {
+    if (stopped || inFlight) return;
+    inFlight = true;
+    void fetchProgress(executionId)
+      .then((progress) => {
+        if (!stopped && progress?.text) {
+          onDraft(progress.text);
+        }
+      })
+      .catch(() => {
+        // A missed poll is harmless; the final answer still arrives.
+      })
+      .finally(() => {
+        inFlight = false;
+      });
+  }, intervalMs);
+  return () => {
+    stopped = true;
+    clearInterval(timer);
+    onDraft("");
+  };
 }
 
 async function openExternalUrl(url: string): Promise<void> {
@@ -559,6 +657,20 @@ async function openExternalUrl(url: string): Promise<void> {
     return;
   }
   window.open(url, "_blank", "noopener,noreferrer");
+}
+
+// A conversational answer loads no legal skills; the routing label would
+// suggest a legal domain that was never used.
+export function routingMeta(
+  execution: Pick<
+    ExtendedExecution,
+    "primarySkill" | "loadedSkills"
+  >,
+  route: string
+): string {
+  return execution.loadedSkills?.length === 0
+    ? "rozmowa bez skilli prawnych"
+    : `routing: ${labelForSkill(execution.primarySkill || route)}`;
 }
 
 function executionMessage(
@@ -619,8 +731,20 @@ function executionMessage(
           }
         : {}),
       documentCitations: execution.documentCitations,
+      ...(execution.restorations?.length
+        ? {
+            restorations:
+              shiftMarks(
+                execution.restorations,
+                verificationWarning.length
+              )
+          }
+        : {}),
       meta:
-        `routing: ${labelForSkill(execution.primarySkill || route)}` +
+        routingMeta(
+          execution,
+          route
+        ) +
         skillMeta +
         domainMeta +
         contextMeta +
@@ -759,6 +883,16 @@ export default function MatterChatApp({
     useState("");
   const [finalDocumentBusy, setFinalDocumentBusy] =
     useState(false);
+  const [finalReview, setFinalReview] =
+    useState<{
+      grantId: string;
+      preview: DeanonymizationPreview;
+      overrides: Record<string, string>;
+    } | null>(null);
+  // A review belongs to one generated document.
+  useEffect(() => {
+    setFinalReview(null);
+  }, [pendingFinalDocument?.artifactId]);
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -836,6 +970,10 @@ export default function MatterChatApp({
     deterministicAction,
     setDeterministicAction
   ] = useState<DeterministicActionId | "">("");
+  const [
+    workMode,
+    setWorkMode
+  ] = useState<ChatWorkMode>("AUTO");
   const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
   // null = every DR module is selected. Kept as null rather than a filled list
   // so the default sends no restriction at all and routing stays unchanged
@@ -853,6 +991,8 @@ export default function MatterChatApp({
     useState<ExecutionDiagnostic | null>(null);
   const [executionStage, setExecutionStage] =
     useState("Przygotowanie sesji");
+  const [draftText, setDraftText] =
+    useState("");
   const [executionElapsedSeconds, setExecutionElapsedSeconds] =
     useState(0);
   const [runtimePulse, setRuntimePulse] =
@@ -864,6 +1004,7 @@ export default function MatterChatApp({
   const {
     messages,
     setMessages,
+    updateMessage,
     loading: threadLoading,
     error: threadError
   } = useCaseThread(caseId, WELCOME);
@@ -1042,6 +1183,7 @@ export default function MatterChatApp({
 
   useEffect(() => {
     setDeterministicAction("");
+    setWorkMode("AUTO");
     setCaseTypeSkills([]);
     setManualSkills(null);
     setAllowedDomains(null);
@@ -1066,6 +1208,11 @@ export default function MatterChatApp({
       );
     setDeterministicAction(
       restored
+    );
+    setWorkMode(
+      workModeForAction(
+        restored
+      )
     );
     setCaseTypeSkills(
       skillsForDeterministicAction(
@@ -1763,6 +1910,9 @@ export default function MatterChatApp({
     setDeterministicAction(
       actionId
     );
+    if (actionId) {
+      setWorkMode("MECHANICAL");
+    }
     setCaseTypeSkills(
       mappedSkills
     );
@@ -2249,6 +2399,17 @@ export default function MatterChatApp({
       !model
     ) return;
 
+    if (
+      conversationIsNew &&
+      workMode === "MECHANICAL" &&
+      !deterministicAction
+    ) {
+      setExecutionError(
+        "Tryb mechaniczny: wybierz skill wykonawczy albo przełącz na tryb automatyczny."
+      );
+      return;
+    }
+
     const route =
       automaticSkills
         ? "AUTO"
@@ -2507,6 +2668,13 @@ export default function MatterChatApp({
       setExecutionStage(
         "Analiza prawna, routing i weryfikacja źródeł"
       );
+      const executionId =
+        newExecutionId();
+      const stopDraftPolling =
+        startDraftPolling(
+          executionId,
+          setDraftText
+        );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2534,7 +2702,9 @@ export default function MatterChatApp({
           includeFirm: includeFirmKnowledge,
           limit: 8
         }
-      }) as ExtendedExecution;
+      }, executionId).finally(
+        stopDraftPolling
+      ) as ExtendedExecution;
 
       setExecutionStage(
         "Finalizacja odpowiedzi"
@@ -2606,7 +2776,10 @@ export default function MatterChatApp({
                 )
               : providerFailureMessage(
                   provider,
-                  reason
+                  reason,
+                  error instanceof ApiError
+                    ? error.description
+                    : undefined
                 )
           : code ===
               "AUTO_ROUTING_FAILED"
@@ -2707,81 +2880,89 @@ export default function MatterChatApp({
     }
   }
 
-  async function finalizePendingDocument(): Promise<void> {
+  // Step 1: password -> grant -> restored text with every value marked.
+  async function reviewPendingDocument(): Promise<void> {
     if (
       !pendingFinalDocument ||
       finalDocumentBusy ||
-      !finalDocumentPassword
-        .trim()
+      !finalDocumentPassword.trim()
     ) {
       return;
     }
-
     setFinalDocumentBusy(true);
     setExecutionError("");
     try {
-      const intent =
-        await createDeanonymizationIntent(
-          pendingFinalDocument
-            .caseId,
-          pendingFinalDocument
-            .artifactId
-        );
-      const authorized =
-        await reauthorizeDeanonymization(
-          intent.intent
-            .intentId,
-          finalDocumentPassword
-        );
-      const final =
-        await finalizeDeanonymization(
-          authorized.grant
-            .grantId,
-          "LexMachina-final." +
-            pendingFinalDocument
-              .format
-        );
-      if (
-        !final.downloadTicket
-      ) {
-        throw new Error(
-          "SENSITIVE_DOWNLOAD_TICKET_MISSING"
-        );
+      const intent = await createDeanonymizationIntent(
+        pendingFinalDocument.caseId,
+        pendingFinalDocument.artifactId
+      );
+      const authorized = await reauthorizeDeanonymization(
+        intent.intent.intentId,
+        finalDocumentPassword
+      );
+      setFinalDocumentPassword("");
+      const preview = await previewDeanonymization(
+        authorized.grant.grantId
+      );
+      setFinalReview({
+        grantId: authorized.grant.grantId,
+        preview,
+        overrides: {}
+      });
+    } catch (error) {
+      setExecutionError(
+        error instanceof Error
+          ? "Nie udało się przygotować podglądu przywróconych danych: " + error.message
+          : "Nie udało się przygotować podglądu przywróconych danych."
+      );
+    } finally {
+      setFinalDocumentBusy(false);
+    }
+  }
+
+  // Step 2: the reviewed (and corrected) values go into the one-time final file.
+  async function finalizePendingDocument(): Promise<void> {
+    if (!pendingFinalDocument || !finalReview || finalDocumentBusy) {
+      return;
+    }
+    setFinalDocumentBusy(true);
+    setExecutionError("");
+    try {
+      const final = await finalizeDeanonymization(
+        finalReview.grantId,
+        "LexMachina-final." + pendingFinalDocument.format,
+        finalReview.overrides
+      );
+      if (!final.downloadTicket) {
+        throw new Error("SENSITIVE_DOWNLOAD_TICKET_MISSING");
       }
-      const blob =
-        await downloadSensitiveArtifact(
-          final.downloadTicket
-            .ticketId
-        );
-      downloadBlob(
-        blob,
-        final.artifact
-          .filename
+      const blob = await downloadSensitiveArtifact(
+        final.downloadTicket.ticketId
       );
-      setPendingFinalDocument(
-        null
-      );
-      setFinalDocumentPassword(
-        ""
-      );
+      downloadBlob(blob, final.artifact.filename);
+      const corrected = Object.keys(finalReview.overrides).length;
+      setPendingFinalDocument(null);
+      setFinalReview(null);
       setGeneratedDocumentMessage(
-        "Finalny dokument z przywróconymi danymi został utworzony i pobrany."
+        "Finalny dokument z przywróconymi danymi został utworzony i pobrany." +
+          (corrected > 0 ? ` Ręczne poprawki: ${corrected}.` : "")
       );
-      setWorkspaceRefresh(
-        (value) =>
-          value + 1
-      );
+      setWorkspaceRefresh((value) => value + 1);
     } catch (error) {
       setExecutionError(
         error instanceof Error
           ? "Nie udało się przywrócić danych do finalnego dokumentu: " +
-            error.message
+            error.message +
+            (/REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)
+              ? ". Podaj hasło ponownie."
+              : "")
           : "Nie udało się przywrócić danych do finalnego dokumentu."
       );
+      if (error instanceof Error && /REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)) {
+        setFinalReview(null);
+      }
     } finally {
-      setFinalDocumentBusy(
-        false
-      );
+      setFinalDocumentBusy(false);
     }
   }
 
@@ -3627,70 +3808,101 @@ export default function MatterChatApp({
                 );
               }}
             />
-            {conversationIsNew && availableActions.length > 0 ? (
+            {conversationIsNew ? (
               <section
                 className="chat-pipeline-picker"
-                aria-label="Typ działania dla pierwszej wiadomości"
+                aria-label="Tryb pracy dla nowej rozmowy"
               >
                 <div>
-                  <p className="eyebrow">Typ działania</p>
+                  <p className="eyebrow">Tryb pracy</p>
                   <h3>
-                    {selectedDeterministicAction
-                      ? selectedDeterministicAction.label
-                      : "Automatycznie — prawny router"}
+                    {workMode === "AUTO"
+                      ? "Automatyczny — prawny router"
+                      : selectedDeterministicAction
+                        ? `Mechaniczny — ${selectedDeterministicAction.label}`
+                        : "Mechaniczny — wybierz skill wykonawczy"}
                   </h3>
                   <p>
-                    Brak wyboru oznacza pełny tryb automatyczny: prawny-router-v3
-                    dobiera dziedziny DR i skille wykonawcze z treści wiadomości.
-                    Wybranie działania uruchamia stałe, programistyczne mapowanie
-                    na właściwy pipeline wykonawczy. Po wysłaniu pierwszej
-                    wiadomości ten wybór znika i zostaje przypięty do wątku.
+                    {workMode === "AUTO"
+                      ? "prawny-router-v3 dobiera dziedziny DR, skille wykonawcze i moduły z treści wiadomości. Pytania bez kwestii prawnej nie ładują skilli prawnych."
+                      : "Wybrany skill wykonawczy uruchamia stały, deterministyczny pipeline z jego modułami. Router nadal dobiera dziedzinę DR. Po wysłaniu pierwszej wiadomości wybór zostaje przypięty do wątku."}
                   </p>
                 </div>
-                <div className="chat-pipeline-options">
-                  {availableActions.map((action) => {
-                    const checked =
-                      deterministicAction ===
-                      action.id;
-                    return (
-                      <button
-                        key={action.id}
-                        type="button"
-                        className={
-                          checked
-                            ? "chat-pipeline-option selected"
-                            : "chat-pipeline-option"
-                        }
-                        aria-pressed={checked}
-                        onClick={() =>
-                          selectDeterministicAction(
-                            checked
-                              ? ""
-                              : action.id
-                          )
-                        }
-                      >
-                        <strong>
-                          {action.label}
-                        </strong>
-                        <small>
-                          {action.description}
-                        </small>
-                      </button>
-                    );
-                  })}
-                  {deterministicAction ? (
-                    <button
-                      type="button"
-                      className="chat-pipeline-option reset"
-                      onClick={() =>
-                        selectDeterministicAction("")
-                      }
-                    >
-                      Bez wyboru · AUTO
-                    </button>
-                  ) : null}
+                <div
+                  className="chat-work-mode"
+                  role="radiogroup"
+                  aria-label="Tryb pracy"
+                >
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "AUTO"}
+                    className={
+                      workMode === "AUTO"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => {
+                      selectDeterministicAction("");
+                      setWorkMode("AUTO");
+                    }}
+                  >
+                    <strong>Automatyczny</strong>
+                    <small>Router sam dobiera skille i moduły.</small>
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "MECHANICAL"}
+                    disabled={availableActions.length === 0}
+                    className={
+                      workMode === "MECHANICAL"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => setWorkMode("MECHANICAL")}
+                  >
+                    <strong>Mechaniczny</strong>
+                    <small>
+                      {availableActions.length > 0
+                        ? "Ty wybierasz skill wykonawczy i jego pipeline."
+                        : "Brak skilli wykonawczych w korpusie."}
+                    </small>
+                  </button>
                 </div>
+                {workMode === "MECHANICAL" ? (
+                  <div className="chat-pipeline-options">
+                    {availableActions.map((action) => {
+                      const checked =
+                        deterministicAction ===
+                        action.id;
+                      return (
+                        <button
+                          key={action.id}
+                          type="button"
+                          className={
+                            checked
+                              ? "chat-pipeline-option selected"
+                              : "chat-pipeline-option"
+                          }
+                          aria-pressed={checked}
+                          onClick={() =>
+                            selectDeterministicAction(
+                              action.id
+                            )
+                          }
+                        >
+                          <strong>
+                            {action.label}
+                          </strong>
+                          <small>
+                            {action.description}
+                          </small>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </section>
             ) : null}
 
@@ -3717,6 +3929,40 @@ export default function MatterChatApp({
                     citations={message.documentCitations}
                     onOpenUrl={openExternalUrl}
                   />
+                  {message.role === "assistant" &&
+                  (message.restorations?.length ||
+                    unresolvedPlaceholders(message.content).length) ? (
+                    <RestorationReview
+                      key={`${message.id}-${message.content.length}`}
+                      content={message.content}
+                      marks={validMarks(message.content, message.restorations)}
+                      unresolved={unresolvedPlaceholders(message.content)}
+                      readOnly={!canWriteCase(selectedCase)}
+                      onCorrect={async (index, text, remember) => {
+                        const marks = validMarks(message.content, message.restorations);
+                        const mark = marks[index];
+                        if (remember && mark?.canonical && mark.gender && mark.case) {
+                          await saveNameForm({
+                            canonical: mark.canonical,
+                            gender: mark.gender,
+                            case: mark.case,
+                            text: text.trim()
+                          });
+                        }
+                        const corrected = applyRestorationCorrection(
+                          message.content,
+                          marks,
+                          index,
+                          text
+                        );
+                        await updateMessage({
+                          ...message,
+                          content: corrected.content,
+                          restorations: corrected.marks
+                        });
+                      }}
+                    />
+                  ) : null}
                   {visibleMessageMeta(message.meta) ? (
                     <small className="chat-message-meta">
                       {visibleMessageMeta(message.meta)}
@@ -3857,6 +4103,16 @@ export default function MatterChatApp({
                   <div className="chat-message-content">
                     {executionStage}
                   </div>
+                  {draftText ? (
+                    <div className="chat-draft">
+                      <div className="chat-draft-label">
+                        Wersja robocza — odpowiedź powstaje, weryfikacja źródeł jeszcze trwa
+                      </div>
+                      <div className="chat-draft-text">
+                        {draftText}
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="chat-working-meta">
                     <span>
                       {runtimePulse === "OK"
@@ -4076,6 +4332,46 @@ export default function MatterChatApp({
                       Każdy dokument źródłowy ma własny vault. Alias D01/D02/… jest odwracany wyłącznie przez deanonimizator przypisany do tego dokumentu.
                     </small>
                   </div>
+                  {finalReview ? (
+                    <DeanonymizationReview
+                      preview={finalReview.preview}
+                      busy={finalDocumentBusy}
+                      onCorrect={async (restoration, text, remember) => {
+                        if (
+                          remember &&
+                          restoration.canonical &&
+                          restoration.gender &&
+                          restoration.case
+                        ) {
+                          await saveNameForm({
+                            canonical: restoration.canonical,
+                            gender: restoration.gender,
+                            case: restoration.case,
+                            text: text.trim()
+                          });
+                        }
+                        setFinalReview((current) =>
+                          current
+                            ? {
+                                ...current,
+                                preview: applyAliasCorrection(
+                                  current.preview,
+                                  restoration.alias,
+                                  text
+                                ),
+                                overrides: {
+                                  ...current.overrides,
+                                  [restoration.alias]: text.trim()
+                                }
+                              }
+                            : current
+                        );
+                      }}
+                      onConfirm={() => void finalizePendingDocument()}
+                      onCancel={() => setFinalReview(null)}
+                    />
+                  ) : (
+                  <>
                   <input
                     type="password"
                     autoComplete="current-password"
@@ -4099,12 +4395,12 @@ export default function MatterChatApp({
                           .trim()
                       }
                       onClick={() =>
-                        void finalizePendingDocument()
+                        void reviewPendingDocument()
                       }
                     >
                       {finalDocumentBusy
                         ? "Przywracam dane…"
-                        : "Przywróć dane i pobierz finalny plik"}
+                        : "Przywróć dane i sprawdź przed zapisem"}
                     </button>
                     <button
                       type="button"
@@ -4134,6 +4430,8 @@ export default function MatterChatApp({
                       Pobierz wersję tokenizowaną
                     </button>
                   </div>
+                  </>
+                  )}
                 </div>
               ) : null}
               {generatedDocumentMessage ? (
@@ -4253,7 +4551,7 @@ export default function MatterChatApp({
                   : "AUTO · prawny-router-v3"}
               </h2>
               <p>
-                Typ działania wybiera się wyłącznie nad polem pierwszej wiadomości.
+                Tryb pracy (automatyczny lub mechaniczny) wybiera się wyłącznie nad polem pierwszej wiadomości.
                 Brak wyboru oznacza pełne AUTO: prawny-router-v3 sam dobiera dziedziny
                 DR i skille wykonawcze. Po pierwszej wiadomości tryb jest przypięty do
                 wątku i selektor w czacie znika.

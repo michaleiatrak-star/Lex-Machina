@@ -5,7 +5,7 @@
 - Tekst jednolity: **Dz.U. 2025 poz. 1461** (t.j. z 26.09.2025)
   VER: isap.sejm.gov.pl [2026-05-31]
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Reguluje: zasady finansowania swiadczen przez NFZ, ubezipieczenie zdrowotne,

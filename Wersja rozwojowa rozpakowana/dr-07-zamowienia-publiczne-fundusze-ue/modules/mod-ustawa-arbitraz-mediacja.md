@@ -47,7 +47,7 @@ Arbitraż krajowy i międzynarodowy (KPC cz. V), zapis na sąd polubowny, skutec
 
 ```
 Forma: pisemna (lub równoważna: telegram, telefaks, e-mail potwierdzający)
-       ⚠️ Weryfikuj art. 1162 KPC w ISAP
+       ⚠️ Weryfikuj art. 1162 KPC w ELI (RZĄD 1)
 Zdatność arbitrażowa: spory majątkowe (z wyjątkiem alimentów) + niemajątkowe
                       gdy mogą być przedmiotem ugody sądowej
 Nieważność zapisu (art. 1164 KPC — weryfikuj):
@@ -65,7 +65,7 @@ Zasady: rzetelne postępowanie, równe traktowanie stron, prawo do bycia wysłuc
 
 Po wyroku:
   → Uznanie i stwierdzenie wykonalności przez SR
-    (art. 1212–1217 KPC — weryfikuj w ISAP)
+    (art. 1212–1217 KPC — weryfikuj w ELI (RZĄD 1))
   → Skarga o uchylenie: 3 miesiące od doręczenia wyroku (art. 1208 §1 KPC — weryfikuj)
     Podstawy: nieważny zapis / brak zdatności arbitrażowej / naruszenie prawa do obrony /
               sprzeczność z podstawowymi zasadami porządku prawnego (klauzula porządku publ.)

@@ -11,6 +11,11 @@ import type {
 import {
   buildGenerationAliases,
   resolveGenerationAliases,
+  applyRestorationOverrides,
+  describeGenerationAliases,
+  renderRestorationPreview,
+  type DocumentRestoration,
+  type RestorationPreview,
   type GenerationAliasManifest
 } from "./generation-aliases.js";
 import {
@@ -71,6 +76,7 @@ export type FinalDocumentResult = {
     "PRIVACY_VAULT_KEY";
   keyBindingVerified:
     boolean;
+  restorations?: DocumentRestoration[];
 };
 
 export type ReadyDocumentResult = {
@@ -538,21 +544,20 @@ export class LocalDocumentAuthoringService {
     }
   }
 
-  async deanonymizeConsumed(
+  /**
+   * Checks key binding, vault generation and the tokenized hash, then resolves
+   * every alias used in the document with its source and confidence.
+   */
+  private async restorationInputs(
     args: {
       target:
         DeanonymizationTargetState;
-      createdByUserId:
-        string;
       caseDataKey:
         Buffer;
       keyVersion:
         number;
-      filename?: string;
     }
-  ): Promise<
-    FinalDocumentResult
-  > {
+  ) {
     if (
       args.target
         .caseKeyVersion !==
@@ -712,6 +717,85 @@ export class LocalDocumentAuthoringService {
         );
       }
 
+      const tokenizedText =
+        (
+          await this.renderer
+            .validate(
+              args.target
+                .artifactFormat,
+              tokenized
+            )
+        ).text;
+      const restorations =
+        describeGenerationAliases(
+          tokenizedText,
+          aliases,
+          vaults
+        );
+      return {
+        validationContext,
+        replacements,
+        tokenized,
+        tokenizedText,
+        keyBindingVerified,
+        restorations
+      };
+    } catch (error) {
+      tokenized.fill(0);
+      throw error;
+    }
+  }
+
+  /** Restored text with every restored value marked, for review before finalizing. */
+  async previewDeanonymization(
+    args: {
+      target:
+        DeanonymizationTargetState;
+      caseDataKey:
+        Buffer;
+      keyVersion:
+        number;
+    }
+  ): Promise<RestorationPreview> {
+    const inputs =
+      await this.restorationInputs(args);
+    inputs.tokenized.fill(0);
+    return renderRestorationPreview(
+      inputs.tokenizedText,
+      inputs.restorations
+    );
+  }
+
+  async deanonymizeConsumed(
+    args: {
+      target:
+        DeanonymizationTargetState;
+      createdByUserId:
+        string;
+      caseDataKey:
+        Buffer;
+      keyVersion:
+        number;
+      filename?: string;
+      // Corrections from the review step, keyed by alias (with |CASE).
+      overrides?: Record<string, string>;
+    }
+  ): Promise<
+    FinalDocumentResult
+  > {
+    const {
+      validationContext,
+      replacements,
+      tokenized,
+      restorations,
+      keyBindingVerified
+    } = await this.restorationInputs(args);
+    try {
+      applyRestorationOverrides(
+        replacements,
+        restorations,
+        args.overrides
+      );
       const finalPackage =
         await this.renderer
           .deanonymize(
@@ -871,7 +955,14 @@ export class LocalDocumentAuthoringService {
               .replaced ?? 0,
           deanonymizationBasis:
             "PRIVACY_VAULT_KEY",
-          keyBindingVerified
+          keyBindingVerified,
+          restorations:
+            restorations.map(
+              (item) =>
+                args.overrides?.[item.alias] !== undefined
+                  ? { ...item, text: replacements.get(item.alias)!, source: "manual", confidence: 1, status: "ok" as const }
+                  : item
+            )
         };
       } finally {
         finalPackage

@@ -40,7 +40,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
 
 ## KLUCZOWE AKTY PRAWNE
 
-- KK → isap.sejm.gov.pl (Dz.U. 2025 poz. 383) — **weryfikuj online przed cytowaniem**
+- KK → ELI (RZĄD 1) (Dz.U. 2025 poz. 383) — **weryfikuj online przed cytowaniem**
 - KPK → isap.sejm.gov.pl (Dz.U. 2026 poz. 490)
 - KKW → isap.sejm.gov.pl (Dz.U. 2025 poz. 911)
 
@@ -195,7 +195,7 @@ PRZESTĘPSTWA SKARBOWE → dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-K
 ### Art. 209 KK — Niealimentacja
 
 ```
-PRZESŁANKI (art. 209 §1 KK — weryfikuj w ISAP):
+PRZESŁANKI (art. 209 §1 KK — weryfikuj w ELI (RZĄD 1)):
   → Uchylanie się od obowiązku alimentacyjnego przez co najmniej 3 miesiące LUB
   → Łączna wysokość zaległości = co najmniej 3 świadczenia periodyczne
   → Skutek: narażenie osoby uprawnionej na niemożność zaspokojenia podstawowych potrzeb

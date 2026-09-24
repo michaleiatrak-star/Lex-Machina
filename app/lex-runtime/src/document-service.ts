@@ -1,3 +1,6 @@
+import type {
+  PersonMorphology
+} from "./privacy/person-morphology.js";
 import {
   createHash
 } from "node:crypto";
@@ -20,6 +23,9 @@ import {
   type NamedEntityRecognizer,
   type PiiKind
 } from "./privacy/pseudonymizer.js";
+import {
+  privacyRecognizerFor
+} from "./privacy/local-llm-ner.js";
 import type {
   EncryptedPrivacyVaultStore
 } from "./privacy/vault-store.js";
@@ -200,7 +206,10 @@ implements DocumentService {
     private readonly officeExtractor?:
       OfficeDocumentTextExtractor,
     private readonly spreadsheetExtractor?:
-      SpreadsheetTextExtractor
+      SpreadsheetTextExtractor,
+    // One token per person and inflected restore ([PII:PERSON:0001|GEN]).
+    private readonly personMorphology?:
+      PersonMorphology
   ) {}
 
   private digitalTextResult(
@@ -398,16 +407,18 @@ implements DocumentService {
 
     const suggestionVault =
       new PseudonymizationVault();
-    const suggestionEngine =
-      new LocalPolishPseudonymizer(
-        suggestionVault,
-        this.namedEntities
-      );
     const suggestions: PublicPrivacySuggestion[] = [];
 
     for (const page of source.pages) {
       const preview =
-        await suggestionEngine.pseudonymize(
+        await new LocalPolishPseudonymizer(
+          suggestionVault,
+          privacyRecognizerFor(
+            this.namedEntities,
+            page.source === "OCR"
+          ),
+          this.personMorphology
+        ).pseudonymize(
           page.text
         );
       for (const finding of preview.findings) {
@@ -496,11 +507,6 @@ implements DocumentService {
           });
     }
 
-    const pseudonymizer =
-      new LocalPolishPseudonymizer(
-        record.vault,
-        this.namedEntities
-      );
     const pages: IngestedPage[] = [];
     const counts: Partial<Record<PiiKind, number>> = {};
     const annotations: PublicPrivacyAnnotation[] = [];
@@ -519,7 +525,14 @@ implements DocumentService {
         );
 
       const protectedPage =
-        await pseudonymizer.pseudonymize(
+        await new LocalPolishPseudonymizer(
+          record.vault,
+          privacyRecognizerFor(
+            this.namedEntities,
+            page.source === "OCR"
+          ),
+          this.personMorphology
+        ).pseudonymize(
           page.text,
           pageDirectives
         );

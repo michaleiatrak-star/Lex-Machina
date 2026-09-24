@@ -157,6 +157,15 @@ try {
   $arguments = @("/S", "/D=$InstallRoot")
   $process = Start-Process -FilePath $installer -ArgumentList $arguments -PassThru
   if (-not $process.WaitForExit($InstallTimeoutSeconds * 1000)) {
+    # Show where the install stalled before giving up.
+    Get-ChildItem -LiteralPath $InstallRoot -Recurse -File -Filter "*selftest*.log*" -ErrorAction SilentlyContinue |
+      ForEach-Object {
+        Write-Host "Install timeout diagnostic: $($_.FullName)"
+        Get-Content -LiteralPath $_.FullName -Tail 150 -ErrorAction SilentlyContinue | Out-Host
+      }
+    Get-Process -ErrorAction SilentlyContinue | Where-Object {
+      $_.Path -and $_.Path.StartsWith($InstallRoot, [StringComparison]::OrdinalIgnoreCase)
+    } | ForEach-Object { Write-Host "Install timeout process: $($_.ProcessName) pid=$($_.Id) $($_.Path)" }
     Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
     throw "INSTALLER_ACCEPTANCE_INSTALL_TIMEOUT:$InstallTimeoutSeconds"
   }

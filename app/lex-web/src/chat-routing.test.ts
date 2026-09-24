@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
   AUTO_CASE_TYPE,
+  DETERMINISTIC_ACTIONS,
   DETERMINISTIC_ACTION_META_PREFIX,
+  DETERMINISTIC_PIPELINE_SKILLS,
   SKILL_SELECTION_ENVELOPE_PREFIX,
   buildSkillSelectionEnvelope,
   choosePrimaryRoute,
@@ -10,7 +12,8 @@ import {
   getCaseTypeExecutionSkills,
   setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
-  skillsForDeterministicAction
+  skillsForDeterministicAction,
+  workModeForAction
 } from "./chat-routing.js";
 
 afterEach(() => {
@@ -336,5 +339,43 @@ describe("chat routing", () => {
       "analiza-sadowa-v6",
       "chronologia-sprawy-v1"
     ]);
+  });
+});
+
+
+describe("new conversation work mode", () => {
+  it("offers a mechanical action for every executive skill", () => {
+    const actionSkills =
+      DETERMINISTIC_ACTIONS.flatMap(
+        (action) => [...action.skills]
+      );
+    expect([...actionSkills].sort()).toEqual(
+      [...DETERMINISTIC_PIPELINE_SKILLS].sort()
+    );
+    expect(actionSkills).toEqual(
+      expect.arrayContaining([
+        "analiza-sadowa-v6",
+        "analizator-dowodow-v3",
+        "analizator-przepisow-v2",
+        "analizator-umow-v1",
+        "chronologia-sprawy-v1",
+        "orzeczenia-sadowe-v2",
+        "pisma-procesowe-v3",
+        "pisma-proste-v2",
+        "przesluchanie-swiadkow-v2-min90",
+        "raport-klienta-v1",
+        "raport-sytuacyjny-v2"
+      ])
+    );
+  });
+
+  it("maps no action to AUTO and a pinned action to MECHANICAL", () => {
+    expect(workModeForAction("")).toBe("AUTO");
+    expect(workModeForAction("STATUTE_ANALYSIS")).toBe("MECHANICAL");
+    expect(
+      deterministicActionFromMeta(
+        deterministicActionMeta("CLIENT_REPORT")
+      )
+    ).toBe("CLIENT_REPORT");
   });
 });

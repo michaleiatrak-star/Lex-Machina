@@ -10,7 +10,7 @@
 > definicji nieistotnych dla danej dziedziny (np. DR-06 nie potrzebuje
 > definicji mobbingu, DR-04 nie potrzebuje definicji obiektu liniowego).
 >
-> ⛔ HARD GATE: każdy plik tematyczny ma WŁASNĄ bramkę — weryfikuj t.j. w ISAP.
+> ⛔ HARD GATE: każdy plik tematyczny ma WŁASNĄ bramkę — weryfikuj t.j. w ELI (RZĄD 1).
 
 ---
 

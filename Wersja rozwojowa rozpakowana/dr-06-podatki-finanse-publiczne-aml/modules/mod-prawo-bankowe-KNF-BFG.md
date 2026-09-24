@@ -51,7 +51,7 @@ Dz.U. 2025 poz. 1170 i poz. 1191 (ustawa z 25.07.2025) — OBOWIĄZUJĄ:
   → Limity kadencji i zakaz "drzwi obrotowych" dla byłych urzędników KNF
   → Nowe wymogi ESG (ryzyko środowiskowe, społeczne, ładu korporacyjnego)
   → Reżim dla zagranicznych instytucji z państw trzecich (obowiązek oddziału + zezwolenie KNF)
-⚠️ Weryfikuj aktualne przepisy w Dz.U. 2026 poz. 38 t.j. w ISAP.
+⚠️ Weryfikuj aktualne przepisy w Dz.U. 2026 poz. 38 t.j. w ELI (RZĄD 1).
 ```
 
 ---
@@ -125,7 +125,7 @@ prawdopodobnie jeszcze NIE upłynął (dyrektywa PRZYJĘTA dopiero
 30.03.2026) — web_search: "dyrektywa 2026 zmiana 2014/49 zakres
 ochrony depozytów transpozycja Polska" PRZED cytowaniem w sprawie
 
-> ⚠️ Weryfikuj aktualne kwoty w ustawie o BFG: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000487
+> ⚠️ Weryfikuj aktualne kwoty w ustawie o BFG: https://ELI (RZĄD 1)/isap.nsf/DocDetails.xsp?id=WDU20240000487
 
 ---
 
@@ -153,7 +153,7 @@ generalne zniesienie tajemnicy bankowej.
 ## ANEKS — GRY HAZARDOWE (ustawa z 19.11.2009 r.)
 
 **Akt:** Ustawa o grach hazardowych — Dz.U. 2025 poz. 595 t.j. ze zm.
-✅ VER: isap.sejm.gov.pl [2026-06-05] — weryfikuj nowsze zmiany w ISAP
+✅ VER: isap.sejm.gov.pl [2026-06-05] — weryfikuj nowsze zmiany w ELI (RZĄD 1)
 
 ```
 Organ nadzoru: KAS (Krajowa Administracja Skarbowa) — nie KNF

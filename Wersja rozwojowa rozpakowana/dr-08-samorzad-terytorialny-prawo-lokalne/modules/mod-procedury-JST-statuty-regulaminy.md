@@ -12,7 +12,7 @@
 Statuty JST (obligatoryjne akty prawa miejscowego określające organizację i tryb pracy organów), regulaminy wewnętrzne rady i zarządu, procedury uchwalania aktów, inicjatywa uchwałodawcza, komisje rady, interpelacje i zapytania radnych, transmisje i protokoły sesji, dostęp do akt i dokumentów JST.
 
 ### Akty
-USG art. 3 ust. 1 i art. 22–23 (statut gminy), USP art. 2 ust. 2 i art. 13 (statut powiatu), USW art. 7 ust. 3 (statut województwa) — weryfikuj aktualne w ISAP.
+USG art. 3 ust. 1 i art. 22–23 (statut gminy), USP art. 2 ust. 2 i art. 13 (statut powiatu), USW art. 7 ust. 3 (statut województwa) — weryfikuj aktualne w ELI (RZĄD 1).
 
 ---
 
@@ -48,7 +48,7 @@ STATUT = akt prawa miejscowego:
 ### Inicjatywa uchwałodawcza obywateli
 
 ```
-Obywatelska inicjatywa uchwałodawcza (art. 41a USG — weryfikuj w ISAP):
+Obywatelska inicjatywa uchwałodawcza (art. 41a USG — weryfikuj w ELI (RZĄD 1)):
   → Gmina z ≥ 5 000 mieszkańców: inicjatywa uchwałodawcza grupy mieszkańców
   → Próg podpisów: określony w statucie (min. 100 podpisów w miastach)
   → Procedura: zebranie podpisów → złożenie wniosku → obowiązek rozpatrzenia

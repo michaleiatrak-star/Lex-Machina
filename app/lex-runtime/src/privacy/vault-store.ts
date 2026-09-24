@@ -1,4 +1,8 @@
 import {
+  PERSON_CASES,
+  type PersonEntity
+} from "./person-morphology.js";
+import {
   createCipheriv,
   createDecipheriv,
   createHash,
@@ -210,8 +214,42 @@ function canonicalSnapshot(
           kind: item.kind,
           value: item.value,
           createdAt:
-            item.createdAt
+            item.createdAt,
+          ...(item.entity
+            ? {
+                entity:
+                  canonicalEntity(
+                    item.entity
+                  )
+              }
+            : {})
         }))
+  };
+}
+
+// Person identity and paradigm, in a fixed field order for the canonical payload.
+function canonicalEntity(
+  entity: PersonEntity
+): PersonEntity {
+  const forms = {} as PersonEntity["forms"];
+  for (const personCase of PERSON_CASES) {
+    const form = entity.forms[personCase];
+    forms[personCase] = {
+      text: String(form.text),
+      source: String(form.source),
+      confidence: Number(form.confidence)
+    };
+  }
+  return {
+    canonical: String(entity.canonical),
+    gender:
+      entity.gender === "f" || entity.gender === "m3" || entity.gender === "n"
+        ? entity.gender
+        : "m1",
+    genderAlternatives: [...entity.genderAlternatives].map(String),
+    status: entity.status,
+    forms,
+    warnings: [...entity.warnings].map(String)
   };
 }
 

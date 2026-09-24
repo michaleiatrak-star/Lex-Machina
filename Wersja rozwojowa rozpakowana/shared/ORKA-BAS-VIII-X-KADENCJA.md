@@ -7,7 +7,7 @@
 > **Dostęp:** api.sejm.gov.pl (VIII–X) + cytowania przez serwisy prawne (prawo.pl, gofin.pl,
 > infor.pl, isp-modzelewski.pl, interpretacje-orzeczenia.pl) — z pełnymi treściami odpowiedzi
 >
-> ⛔ HARD GATE: weryfikuj aktualne brzmienie przepisów w ISAP przed każdym powołaniem.
+> ⛔ HARD GATE: weryfikuj aktualne brzmienie przepisów w ELI (RZĄD 1) przed każdym powołaniem.
 
 ---
 
@@ -81,7 +81,7 @@ Kluczowa różnica (MRiPS z 23.02.2023):
   Praca zdalna okazjonalna = wykonywanie pracy (nie zwolnienie od pracy)!
   → Oba uprawnienia niezależne, nie zastępują się wzajemnie.
 
-Weryfikuj: isap.sejm.gov.pl → KP art. 6718–6735 (t.j. Dz.U. 2025 poz. 277)
+Weryfikuj: ELI (RZĄD 1) → KP art. 6718–6735 (t.j. Dz.U. 2025 poz. 277)
 ```
 
 ### BAS-W04 — Ochrona pracownika szczególna — kategorie (interpelacja MRPiPS)
@@ -153,7 +153,7 @@ WYJĄTEK: najem prywatny (z majątku osobistego, poza DG) = preferencyjna stawka
 ⚠️ ZMIANA od 01.01.2025 r.: reforma podatku od nieruchomości (Dz.U. 2024
 poz. 1757) — nowe definicje budynku i budowli w upol!
 → web_search: "reforma podatek od nieruchomości 2025 nowe definicje budynek budowla"
-→ Weryfikuj: isap.sejm.gov.pl → ustawa o podatkach i opłatach lokalnych t.j. 2025
+→ Weryfikuj: ELI (RZĄD 1) → ustawa o podatkach i opłatach lokalnych t.j. 2025
 ```
 
 ### BAS-W07 — "Grunty zajęte na prowadzenie działalności" — upol (NSA 2023)
@@ -292,7 +292,7 @@ instancji za niedostateczne uzasadnienie jest właściwą sankcją.
 ### BAS-W12 — Wynagrodzenie dla celów egzekucji administracyjnej (zmiana 2024)
 ```
 Źródło: Zmiana UPEA od 25.03.2024 r. (ustawa z marca 2023 r., vacatio 12 mies.)
-Weryfikacja: kpmg.com blog prawny + isap.sejm.gov.pl → UPEA art. 8 §1 pkt 7
+Weryfikacja: kpmg.com blog prawny + ELI (RZĄD 1) → UPEA art. 8 §1 pkt 7
 
 Stara definicja (do 24.03.2024):
   Wynagrodzenie = wynagrodzenia oraz niewyłączone spod egzekucji inne świadczenia
@@ -353,7 +353,7 @@ Weryfikacja: ustawa z 12.07.2024 r. o zmianie upol (Dz.U. 2024 poz. 1757)
 ZMIANY FUNDAMENTALNE — nowe definicje w art. 1a upol:
   BUDYNEK (nowa def.): obiekt wzniesiony przez człowieka, trwale związany z gruntem,
     wydzielony z przestrzeni za pomocą przegród budowlanych, posiadający dach
-    → weryfikuj dokładne brzmienie: isap.sejm.gov.pl → Dz.U. 2024 poz. 1757
+    → weryfikuj dokładne brzmienie: ELI (RZĄD 1) → Dz.U. 2024 poz. 1757
 
   BUDOWLA (nowa def.): obiekt budowlany niebędący budynkiem, trwale związany
     z gruntem, w tym ogrodzenia, mosty, wiadukty + instalacje i urządzenia
@@ -547,7 +547,7 @@ NARUSZENIE OCHRONY DANYCH (art. 4 pkt 12 RODO):
   "Naruszenie bezpieczeństwa prowadzące do przypadkowego lub niezgodnego
   z prawem zniszczenia, utracenia, zmodyfikowania, nieuprawnionego ujawnienia
   lub nieuprawnionego dostępu do danych osobowych."
-  Obowiązek zgłoszenia: 72 godziny do UODO (art. 33 RODO)
+  Obowiązek zgłoszenia: bez zbędnej zwłoki, w miarę możliwości do 72 godzin po STWIERDZENIU naruszenia (art. 33 ust. 1 RODO; brak obowiązku przy mało prawdopodobnym ryzyku) — ✅ RZĄD 1 2026-09-17q
 
 Reguła ORKA-REG-04 (ocena ad casum): każde przetwarzanie oceniać
 indywidualnie; "zbieranie, utrwalanie, organizowanie" — lista jest
@@ -596,7 +596,7 @@ Ochrona sygnalisty:
     ze zgłoszeniem (odwrócony ciężar dowodu — art. 12 ustawy)
 
 Reguła: RPO = Centralny Organ Zewnętrzny w Polsce (art. 34 ustawy)
-Weryfikuj: isap.sejm.gov.pl → Dz.U. 2024 poz. 928 (nowelizacje 2025?)
+Weryfikuj: ELI (RZĄD 1) → Dz.U. 2024 poz. 928 (nowelizacje 2025?)
 ```
 
 ---

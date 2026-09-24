@@ -6,7 +6,7 @@
   VER: isap.sejm.gov.pl [2026-06-14, TRYB DZU]
 - Implementacja Dyrektywy UE 2019/1024 (Open Data Directive)
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Obowiazek udostepniania danych publicznych do ponownego wykorzystywania.

@@ -19,7 +19,7 @@
 ### ► SKANOWANIE SPRZECZNOŚCI Z PRAWEM (obowiązkowe dla każdego dokumentu)
 
 Dla każdego analizowanego dokumentu sprawdź aktywnie, czy jego treść jest sprzeczna
-z obowiązującym przepisem prawa. Weryfikuj online w ISAP przed wystawieniem alertu.
+z obowiązującym przepisem prawa. Weryfikuj online w ELI (RZĄD 1) przed wystawieniem alertu.
 
 **Lista kontrolna:**
 ```

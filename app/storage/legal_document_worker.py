@@ -10,7 +10,19 @@ from xml.sax.saxutils import escape
 
 FIXED_DATE = (1980, 1, 1, 0, 0, 0)
 MAX_PACKAGE_BYTES = 64 * 1024 * 1024
-ALIAS_RE = re.compile(r"\[LMPII:D\d{2}:[A-Z_]+:\d{4}\]")
+ALIAS_RE = re.compile(r"\[LMPII:D\d{2}:[A-Z_]+:\d{4}(?:\|(?:NOM|GEN|DAT|ACC|INS|LOC|VOC))?\]")
+PERSON_CASES = {"NOM", "GEN", "DAT", "ACC", "INS", "LOC", "VOC"}
+
+
+def pii_ref_text(node):
+    """Alias placeholder; a person reference may carry its grammatical case."""
+    alias = node.get("alias", "")
+    case = node.get("case")
+    if case is None:
+        return alias
+    if case not in PERSON_CASES or not alias.endswith("]"):
+        raise ValueError("AST_PII_CASE_INVALID")
+    return alias[:-1] + "|" + case + "]"
 
 DOCX_CT = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
@@ -113,7 +125,7 @@ def inline_text(nodes):
         if t == "text":
             parts.append(node.get("text", ""))
         elif t == "pii_ref":
-            parts.append(node.get("alias", ""))
+            parts.append(pii_ref_text(node))
         elif t == "xref":
             parts.append(node.get("label", ""))
         else:
@@ -124,7 +136,7 @@ def docx_runs(nodes):
     runs = []
     for node in nodes or []:
         t = node.get("type")
-        text = node.get("text", "") if t == "text" else node.get("alias", "") if t == "pii_ref" else node.get("label", "")
+        text = node.get("text", "") if t == "text" else pii_ref_text(node) if t == "pii_ref" else node.get("label", "")
         xml_space = ' xml:space="preserve"' if text[:1].isspace() or text[-1:].isspace() else ""
         runs.append("<w:r><w:t%s>%s</w:t></w:r>" % (xml_space, escape(text)))
     return "".join(runs)

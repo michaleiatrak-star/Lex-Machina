@@ -25,7 +25,7 @@
 **Symptom:** Wartość zabranego towaru = 780 zł.
 **Błędna kwalifikacja:** art. 278 §1 KK
 **Prawidłowa kwalifikacja:** art. 119 §1 KW
-**Klucz:** Próg 800 zł od 01.10.2023 r. — weryfikuj zawsze w ISAP.
+**Klucz:** Próg 800 zł od 01.10.2023 r. — weryfikuj zawsze w ELI (RZĄD 1).
 **Pułapka:** Kartka z obliczeniami wartości = potencjalny dowód czynu ciągłego.
 
 ---
@@ -287,5 +287,5 @@ IV-VI, w tym kara mieszana art. 37a/37b i dyrektywy art. 53) oraz BLOK Q
 BLOK N (środki zabezpieczające, Rozdz. X), BLOK O (zatarcie skazania,
 Rozdz. XII).*
 *Integracja: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md` + `mod-KW-kodeks-wykroczen.md` + `analiza-sadowa-v6` (Filtr #1).*
-*Weryfikacja przepisów: isap.sejm.gov.pl · Orzecznictwo: sn.pl, orzeczenia.ms.gov.pl*
+*Weryfikacja przepisów: ELI (RZĄD 1) · Orzecznictwo: sn.pl, orzeczenia.ms.gov.pl*
 *Zakaz cytowania z pamięci AI — każdy próg kwotowy i tryb ścigania weryfikuj przed analizą*

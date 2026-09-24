@@ -59,7 +59,7 @@ CEL USTAWY (art. 1): określa ZASADY rachunkowości ORAZ zasady
   jako GRANICZNA wartość
 
 ⭐ PODMIOTY OBOWIĄZANE NIEZALEŻNIE OD PRZYCHODÓW (art. 2 ust. 1 pkt
-  1 i nast., ⚠️ KATALOG WYMAGA pełnej weryfikacji na ISAP przed
+  1 i nast., ⚠️ KATALOG WYMAGA pełnej weryfikacji w ELI (RZĄD 1) przed
   cytowaniem w konkretnej sprawie — poniżej ORIENTACYJNE, NAJCZĘŚCIEJ
   spotykane kategorie): SPÓŁKI KAPITAŁOWE (z o.o., akcyjne, PROSTA
   spółka akcyjna) — NIEZALEŻNIE od skali przychodów, BANKI, ZAKŁADY
@@ -129,7 +129,7 @@ OZNACZENIA: 🟢 PEŁNE pokrycie | 🟡 CZĘŚCIOWE (wzmianka/fragment) |
 | 8 | ⭐⭐⭐ WYCENA AKTYWÓW I PASYWÓW — metody, amortyzacja, rezerwy, odpisy aktualizujące | Rozdz. 4 (art. 28-42) | 🟡 CZĘŚCIOWE (2026-08-13) | Sekcja 4b — metody wyceny (art. 28); Sekcja 5d (2026-08-13) — wycena walut obcych (art. 30) W PEŁNI opracowana; Sekcja 5g (2026-08-13) — ustalenie wyniku finansowego (art. 42-44) SYGNALIZOWANE, nieopracowane szczegółowo — priorytet niższy niż inne luki tej sesji |
 | 9 | ⭐⭐⭐ SPRAWOZDANIE FINANSOWE — struktura (bilans, RZiS, informacja dodatkowa, RPP, zestawienie zmian w kapitale) | Rozdz. 5 (art. 45-53) | 🟢 PEŁNE (2026-08-11) | Sekcja 4a — podstawowy i rozszerzony skład, wymogi formalne, forma ustrukturyzowana |
 | 10 | Sprawozdanie z działalności (odrębne od finansowego) | Art. 49 | 🔴 BRAK | — |
-| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63) | 🟢 PEŁNE (2026-08-13) | Sekcja 5b — obowiązek, progi zwolnienia (⚠️ progi wymagają weryfikacji na ISAP — rozbieżność między źródłami), metody konsolidacji (pełna/praw własności/proporcjonalna), wyłączenia, MSR |
+| 11 | ⭐⭐ SKONSOLIDOWANE sprawozdania finansowe, grupy kapitałowe | Rozdz. 6 (art. 55-63) | 🟢 PEŁNE (2026-08-13) | Sekcja 5b — obowiązek, progi zwolnienia (⚠️ progi wymagają weryfikacji w ELI (RZĄD 1) — rozbieżność między źródłami), metody konsolidacji (pełna/praw własności/proporcjonalna), wyłączenia, MSR |
 | 12 | Badanie i ogłaszanie sprawozdań — KTO musi poddać się badaniu przez biegłego rewidenta | Rozdz. 7 (art. 64-65) | 🟢 PEŁNE (2026-08-11) | Sekcja 4d — progi 2,5/5 mln EUR/50 osób, przeliczanie walutowe, sankcje art. 79, powiązanie z sekcją 4a |
 | 13 | Rachunkowość jednostek MIKRO i MAŁYCH — uproszczenia | Art. 3 ust. 1a-1b i powiązane | 🟢 PEŁNE (2026-08-11) | Sekcja 4c — progi, utrata statusu, katalog uproszczeń, procedura decyzyjna, wyłączenia |
 | 14 | Usługowe prowadzenie ksiąg — wymogi dla biur rachunkowych | Rozdz. 8a (art. 76a-76i) | 🟢 PEŁNE (2026-08-13) | Sekcja 5f — ⭐ istotna korekta: brak wymogu certyfikatu od 10.08.2014 r. (liberalizacja), wymogi osobowe art. 76a ust. 3, obowiązkowe OC art. 76h, powiązanie z AML |

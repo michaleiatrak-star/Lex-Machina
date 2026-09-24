@@ -4,7 +4,7 @@
 - Ustawa o dochodach jednostek samorządu terytorialnego — Dz.U. 2024 poz. 356 ze zm.
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
 
-**Weryfikacja:** isap.sejm.gov.pl + MF przed każdym cytowaniem kwot.
+**Weryfikacja:** ELI (RZĄD 1) + MF przed każdym cytowaniem kwot.
 
 ## Zakres
 Źródła dochodów JST: dochody własne (udziały w PIT/CIT, podatek od nieruchomości,
