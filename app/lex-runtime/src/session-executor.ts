@@ -1361,8 +1361,13 @@ export class SafeSessionExecutor implements SessionExecutor {
       this.coreLawIndex && request.model.startsWith("local/")
         ? coreLawRetrievalPrompt(this.coreLawIndex, protectedQuery)
         : null;
+    // Claude account in AUTO: skills are read natively from the corpus
+    // directory, so the corpus tools are not offered; the rest go over MCP.
+    const nativeCorpus =
+      request.modelSelectsSkills === true &&
+      this.providers.nativeCorpusAccess(request.provider, request.model);
     const toolSchemas = [
-      ...corpusTools.schemas(),
+      ...(nativeCorpus ? [] : corpusTools.schemas()),
       ...(coreLawTools
         ? coreLawTools.schemas()
         : []),
@@ -1373,7 +1378,7 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(verificationTools ? verificationTools.schemas() : [])
     ];
     const toolPrompt = [
-      corpusTools.systemPromptAppendix(),
+      ...(nativeCorpus ? [] : [corpusTools.systemPromptAppendix()]),
       ...(coreLawTools
         ? [coreLawTools.systemPromptAppendix()]
         : []),
@@ -1436,6 +1441,15 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(request.modelSelectsSkills
         ? {
             modelSelectsSkills: true
+          }
+        : {}),
+      ...(nativeCorpus
+        ? {
+            nativeCorpus: {
+              root: this.registry.root,
+              onRead: (relativePath: string) => corpusTools.recordNativeRead(relativePath),
+              missingQualifier: () => corpusTools.missingCriminalQualifier()
+            }
           }
         : {}),
       provider: request.provider,
@@ -1697,7 +1711,7 @@ export class SafeSessionExecutor implements SessionExecutor {
     const corpusAudit = corpusTools.auditEvents();
     for (const event of corpusAudit) {
       audit.record(
-        event.tool === "read_legal_resource"
+        event.tool === "read_legal_resource" || event.tool === "Read"
           ? "resource_read"
           : "tool_decision",
         event.target,

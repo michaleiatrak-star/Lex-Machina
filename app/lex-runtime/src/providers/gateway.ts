@@ -45,6 +45,10 @@ export class ProviderRegistry {
 export class ProviderGateway {
   constructor(private readonly registry: ProviderRegistry) {}
 
+  nativeCorpusAccess(providerId: ProviderId, model: string): boolean {
+    return this.registry.get(providerId)?.nativeCorpusAccess?.(model) === true;
+  }
+
   async stream(
     providerId: ProviderId,
     params: ProviderStreamParams

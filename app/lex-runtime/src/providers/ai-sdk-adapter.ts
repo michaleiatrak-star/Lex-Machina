@@ -1814,6 +1814,17 @@ export class AiSdkProviderAdapter implements ProviderAdapter {
     this.label = providerLabel(id);
   }
 
+  // Claude account sessions confine Read/Glob/Grep to the corpus (--restricted).
+  // LEX_CLAUDE_NATIVE_CORPUS=off keeps the one-tool-per-round text protocol.
+  nativeCorpusAccess(model: string): boolean {
+    return (
+      this.id === "anthropic" &&
+      Boolean(this.accountSessions) &&
+      isAccountSessionModel(this.id, model) &&
+      !/^(off|0|false)$/i.test(process.env.LEX_CLAUDE_NATIVE_CORPUS?.trim() ?? "")
+    );
+  }
+
   async stream(
     params: ProviderStreamParams
   ): Promise<ProviderStreamResult> {

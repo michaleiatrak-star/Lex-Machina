@@ -5,11 +5,16 @@ import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import readline from "node:readline";
+import { fileURLToPath } from "node:url";
+import { startToolBridge } from "./lex-tool-bridge.js";
 import type {
   NormalizedToolCall,
   ProviderId,
   ProviderStreamParams,
-  ProviderStreamResult
+  ProviderStreamResult,
+  NativeCorpusAccess,
+  NormalizedToolSchema,
+  NormalizedToolResult
 } from "./types.js";
 
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000;
@@ -1135,6 +1140,82 @@ export function claudeHeadlessArgs(
     "off",
     ...tail
   ];
+}
+
+/**
+ * Claude with read-only file tools confined to the legal corpus (--restricted
+ * limits Read/Glob/Grep to the working directory; dontAsk refuses anything not
+ * allowed) and the Lex runtime tools over one MCP server. No shell, no web,
+ * no writes, no MCP servers of the account.
+ */
+export function claudeCorpusArgs(
+  systemPrompt: string,
+  mcpConfigPath: string,
+  tail: string[] = []
+): string[] {
+  return [
+    "-p",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--restricted",
+    "--strict-mcp-config",
+    "--mcp-config",
+    mcpConfigPath,
+    "--tools",
+    "Read,Glob,Grep",
+    "--allowedTools",
+    "Read,Glob,Grep,mcp__lex",
+    "--disallowedTools",
+    "Bash,Write,Edit,NotebookEdit,WebFetch,WebSearch",
+    "--permission-mode",
+    "dontAsk",
+    "--system-prompt",
+    systemPrompt,
+    "--system-prompt-snapshot",
+    "off",
+    ...tail
+  ];
+}
+
+/** Tool uses of a Claude stream-json run, in order. */
+export function claudeToolUses(
+  stdout: string
+): Array<{ name: string; input: Record<string, unknown> }> {
+  const uses: Array<{ name: string; input: Record<string, unknown> }> = [];
+  for (const line of stdout.split(/\r?\n/)) {
+    if (!line.startsWith("{")) continue;
+    try {
+      const event = JSON.parse(line) as { type?: unknown; message?: { content?: unknown } };
+      if (event.type !== "assistant" || !Array.isArray(event.message?.content)) continue;
+      for (const block of event.message.content as Array<Record<string, unknown>>) {
+        if (block?.type === "tool_use" && typeof block.name === "string") {
+          uses.push({
+            name: block.name,
+            input:
+              block.input && typeof block.input === "object" && !Array.isArray(block.input)
+                ? (block.input as Record<string, unknown>)
+                : {}
+          });
+        }
+      }
+    } catch {
+      // Not an event line.
+    }
+  }
+  return uses;
+}
+
+/** Corpus-relative path of a native Read, or null when it is outside the corpus. */
+export function corpusRelativePath(root: string, filePath: unknown): string | null {
+  if (typeof filePath !== "string" || !filePath) return null;
+  const relative = path.relative(path.resolve(root), path.resolve(root, filePath));
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
+  return relative.split(path.sep).join("/");
+}
+
+export function lexToolsMcpServerPath(): string {
+  return fileURLToPath(new URL("./lex-tools-mcp.js", import.meta.url));
 }
 
 export function sanitizeAccountCliFailureDetail(
@@ -2664,6 +2745,22 @@ function parseToolCalls(text: string): NormalizedToolCall[] | null {
   });
 }
 
+/** The Lex instructions and conversation for a native corpus run (sent on stdin). */
+export function buildCorpusPrompt(params: ProviderStreamParams): string {
+  return [
+    "You are the semantic model inside Lex Machina.",
+    "Lex Machina supplies the complete conversation context for this turn. Do not read or infer context from any separate host-session history.",
+    "",
+    "SYSTEM:",
+    params.systemPrompt,
+    "",
+    "CONVERSATION:",
+    params.messages.map((message) => `${message.role.toUpperCase()}:\n${message.content}`).join("\n\n"),
+    "",
+    "Continue the conversation now."
+  ].join("\n");
+}
+
 function buildAccountPrompt(
   params: ProviderStreamParams,
   toolTranscript: string[]
@@ -2980,6 +3077,106 @@ export class AccountSessionManager {
       );
     }
     return status;
+  }
+
+  /**
+   * One Claude run for an AUTO legal turn: the model reads skills and their
+   * subfolders itself and calls the Lex tools over MCP, all in one process,
+   * instead of one CLI start and a full re-sent prompt per tool round.
+   */
+  async runClaudeWithCorpus(args: {
+    prompt: string;
+    corpus: NativeCorpusAccess;
+    tools: NormalizedToolSchema[];
+    runTools: (calls: NormalizedToolCall[]) => Promise<NormalizedToolResult[]>;
+    onToolCall?: (call: NormalizedToolCall) => void;
+    abortSignal?: AbortSignal;
+    continuityKey?: string;
+  }): Promise<string> {
+    await assertSubscriptionAccount("anthropic", args.abortSignal);
+    const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-account-corpus-"));
+    const bridge = await startToolBridge(args.runTools, args.onToolCall);
+    try {
+      const schemaFile = path.join(workDir, "tools.json");
+      await fsp.writeFile(
+        schemaFile,
+        JSON.stringify(
+          args.tools.map((tool) => ({
+            name: tool.function.name,
+            description: tool.function.description,
+            parameters: tool.function.parameters
+          }))
+        ),
+        { mode: 0o600 }
+      );
+      const mcpConfig = path.join(workDir, "mcp.json");
+      await fsp.writeFile(
+        mcpConfig,
+        JSON.stringify({
+          mcpServers: {
+            lex: {
+              type: "stdio",
+              command: process.execPath,
+              args: [lexToolsMcpServerPath()],
+              env: {
+                LEX_TOOL_PIPE: bridge.pipe,
+                LEX_TOOL_TOKEN: bridge.token,
+                LEX_TOOL_SCHEMAS: schemaFile
+              }
+            }
+          }
+        }),
+        { mode: 0o600 }
+      );
+      const systemPrompt =
+        "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates and legal-source verification. " +
+        "Your working directory is the Lex legal skill corpus: read skills and their modules with Read, Glob and Grep; they are read-only. " +
+        "Use the mcp__lex tools for legal verification, case law and legal sources. Do not access anything else. " +
+        "A resumed host session is continuity context only: never reuse facts from earlier host turns unless they are also in the current Lex Machina request.";
+      const run = (tail: string[]) =>
+        runCli(
+          "anthropic",
+          claudeCorpusArgs(systemPrompt, mcpConfig, tail),
+          args.prompt,
+          COMMAND_TIMEOUT_MS,
+          args.corpus.root,
+          args.abortSignal,
+          { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS }
+        );
+      let result: RunResult | null = null;
+      const savedSessionId = await readAccountSessionId("anthropic", args.continuityKey);
+      if (savedSessionId) {
+        result = await run(["--resume", savedSessionId]);
+        const outcome = parseClaudeResult(result.stdout);
+        if (result.code !== 0 || outcome?.isError) {
+          const detail = `${result.stderr}\n${result.stdout}\n${outcome?.text ?? ""}`;
+          if (!isMissingResumableSessionMessage(detail)) throw normalizeCliFailure("anthropic", result);
+          await clearAccountSessionId("anthropic", args.continuityKey);
+          result = null;
+        }
+      }
+      if (!result) result = await run([]);
+      const parsed = parseClaudeResult(result.stdout);
+      if (result.code !== 0 || !parsed || parsed.isError) {
+        throw normalizeCliFailure("anthropic", {
+          ...result,
+          code: result.code === 0 ? 1 : result.code,
+          stderr: [result.stderr, parsed?.text ?? ""].filter(Boolean).join("\n")
+        });
+      }
+      for (const use of claudeToolUses(result.stdout)) {
+        if (use.name !== "Read") continue;
+        const relative = corpusRelativePath(args.corpus.root, use.input.file_path);
+        if (relative) args.corpus.onRead?.(relative);
+      }
+      if (parsed.sessionId) {
+        await writeAccountSessionId("anthropic", parsed.sessionId, args.continuityKey);
+      }
+      return parsed.text;
+    } finally {
+      await bridge.close().catch(() => undefined);
+      await fsp.rm(workDir, { recursive: true, force: true }).catch(() => {});
+    }
   }
 
   async runText(
@@ -3449,6 +3646,20 @@ export async function streamAccountSession(
       .map((tool) => tool.function.name)
   );
   const toolTranscript: string[] = [];
+  if (provider === "anthropic" && params.nativeCorpus && params.runTools) {
+    const text = await manager.runClaudeWithCorpus({
+      prompt: buildCorpusPrompt(params),
+      corpus: params.nativeCorpus,
+      tools: params.tools ?? [],
+      runTools: params.runTools,
+      ...(params.callbacks?.onToolCallStart ? { onToolCall: params.callbacks.onToolCallStart } : {}),
+      ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
+      ...(params.continuityKey ? { continuityKey: params.continuityKey } : {})
+    });
+    if (!text.trim()) throw new Error("ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic");
+    params.callbacks?.onContentDelta?.(text);
+    return { fullText: text };
+  }
   const maxIterations =
     Math.max(
       1,

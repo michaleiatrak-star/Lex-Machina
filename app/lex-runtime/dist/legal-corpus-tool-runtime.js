@@ -183,6 +183,29 @@ export class LegalCorpusToolRuntime {
             executionSkills
         };
     }
+    /** A corpus file the model read with its own read-only file tool (native corpus access). */
+    recordNativeRead(relativePath) {
+        const skill = this.skillForPath(relativePath);
+        const parts = relativePath.split("/");
+        if (skill && parts.length === 2 && parts[1] === "SKILL.md" && !this.readSkills.includes(skill)) {
+            this.readSkills.push(skill);
+        }
+        if (skill?.startsWith(CRIMINAL_DOMAIN_PREFIX) && relativePath.endsWith(`/${CRIMINAL_QUALIFIER_INDEX}`)) {
+            this.qualifierDelivered = true;
+        }
+        this.events.push({ tool: "Read", target: relativePath, decision: "ALLOW", detail: { native: true } });
+    }
+    /**
+     * A criminal-law skill was read natively without the qualifier: the
+     * corpus path the model still has to read before qualifying the act.
+     */
+    missingCriminalQualifier() {
+        if (this.qualifierDelivered)
+            return null;
+        const criminal = this.readSkills.find((name) => name.startsWith(CRIMINAL_DOMAIN_PREFIX));
+        const skill = criminal ? this.registry.get(criminal) : undefined;
+        return skill ? `${path.basename(skill.directory)}/${CRIMINAL_QUALIFIER_INDEX}` : null;
+    }
     schemas() {
         return [
             SKILL_SCHEMA,

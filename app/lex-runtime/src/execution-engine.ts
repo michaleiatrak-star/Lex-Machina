@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import { LegalSession } from "./legal-session.js";
 import { LexSkillRegistry } from "./registry.js";
 import { ProviderGateway } from "./providers/gateway.js";
@@ -288,6 +289,12 @@ export class LexExecutionEngine {
     // AUTO for account/API models: no separate router pass; the model reads
     // prawny-router-v3 and the skills it needs through the corpus tools.
     modelSelectsSkills?: boolean;
+    // Model reads the skill corpus with its own confined file tools (Claude account).
+    nativeCorpus?: {
+      root: string;
+      onRead: (relativePath: string) => void;
+      missingQualifier: () => string | null;
+    };
     // Live draft of the model output (shown while gates are still pending).
     draftCallbacks?: StreamCallbacks;
     provider: ProviderId;
@@ -1531,6 +1538,7 @@ export class LexExecutionEngine {
           name as typeof MANDATORY_SESSION_SKILLS[number]
         );
     };
+    const native = args.nativeCorpus;
     const catalog = [...this.registry.skills.values()]
       .filter((skill) => allowed(skill.name))
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -1539,8 +1547,18 @@ export class LexExecutionEngine {
           .replace(/\s+/g, " ")
           .trim();
         const version = String(skill.frontmatter.version ?? "").trim();
-        return `- ${skill.name}${version ? ` v${version}` : ""} :: ${text.length > 300 ? text.slice(0, 300) + "…" : text || "(brak opisu)"}`;
+        const folder = native ? ` [${path.basename(skill.directory)}/]` : "";
+        return `- ${skill.name}${folder}${version ? ` v${version}` : ""} :: ${text.length > 300 ? text.slice(0, 300) + "…" : text || "(brak opisu)"}`;
       });
+    // Native corpus: the router is given in full up front (router-v3 first by
+    // construction, one tool round less) and counted as read.
+    const router = native ? this.registry.get("prawny-router-v3") : undefined;
+    const routerText = router
+      ? fs.readFileSync(path.join(router.directory, "SKILL.md"), "utf8")
+      : null;
+    if (router && routerText) {
+      native!.onRead(`${path.basename(router.directory)}/SKILL.md`);
+    }
     const toolNames = new Set(
       args.tools.map((tool) => tool.function.name)
     );
@@ -1560,7 +1578,28 @@ export class LexExecutionEngine {
       )
       .map(([instruction, tools]) => `- ${instruction} → ${tools}`);
 
-    const promptParts = [
+    const nativeParts = native
+      ? [
+          [
+            "# LEX MACHINA — AUTO: MODEL DOBIERA SKILLE",
+            "Pracujesz jak asystent prawny z zainstalowanymi skillami. Katalog roboczy to pełny korpus skilli prawnych Lex (tylko do odczytu): każdy skill to folder z SKILL.md i podfolderami (modules/, references/, shared/ i inne). Czytasz je narzędziami Read, Glob i Grep - masz dostęp do wszystkich plików i podfolderów.",
+            "Wiadomość bez kwestii prawnej (powitanie, test, krótkie polecenie, pytanie ogólne): odpowiedz bezpośrednio, bez czytania skilli.",
+            "Sprawa lub pytanie prawne: wykonaj HARD GATE i routing prawnego routera v3 podanego niżej w całości, potem przeczytaj SKILL.md właściwych domen DR i skilli wykonawczych oraz moduły, do których odsyłają. Ścieżki podawaj względem katalogu roboczego (np. dr-02-.../SKILL.md). Czytaj to, czego rzeczywiście potrzebujesz; nie udawaj, że przeczytałeś plik, którego nie otworzyłeś.",
+            `Prawo karne (DR-03): przed kwalifikacją przeczytaj obowiązkowy kwalifikator karnomaterialny <folder DR-03>/${CRIMINAL_QUALIFIER_INDEX} i zastosuj go.`,
+            "Narzędzia Lex masz jako mcp__lex__<nazwa>: rdzeń aktów prawnych z tekstami z ELI (read_core_law_article, search_core_law - lokalnie, szybko), weryfikacja przepisów i orzeczeń, orzecznictwo (SAOS, CBOSA, SN) i źródła federacyjne MCP (ISAP, EUR-Lex, KRS i inne). Brzmienie przepisu bierz z rdzenia aktów albo weryfikacji ELI, nigdy z pamięci. Orzeczenia NSA/WSA z CBOSA pozostają snapshotem bez awansu; brak trafień = OUT_OF_SCOPE.",
+            "Przed wygenerowaniem pisma (.docx) obowiązuje walidacja HYBRID-VAL z przeczytanego skilla.",
+            "Odpowiadaj po polsku, chyba że użytkownik pisze w innym języku."
+          ].join("\n"),
+          [
+            "# SKILLE PRAWNE W UŻYCIU",
+            "W tej sesji działają skille prawne Lex Machina - te same, które masz na swoim koncie (Lex używa wersji z konta, gdy jest nowsza). Instrukcje z SKILL.md i modułów są obowiązujące, a HARD GATE routera ma pierwszeństwo.",
+            "Polecenia skilli typu view/cat wykonujesz narzędziem Read; wyszukiwanie w skillach - Glob i Grep; weryfikację przepisów, orzecznictwo i źródła MCP - narzędziami mcp__lex__."
+          ].join("\n"),
+          ["# DOSTĘPNE SKILLE (folder w nawiasie)", ...catalog].join("\n"),
+          ...(routerText ? [`# PRAWNY ROUTER V3 (prawny-router-v3/SKILL.md, już przeczytany)\n\n${routerText}`] : [])
+        ]
+      : null;
+    const promptParts = nativeParts ?? [
       [
         "# LEX MACHINA — AUTO: MODEL DOBIERA SKILLE",
         "Pracujesz jak asystent prawny z zainstalowanymi skillami: sam oceniasz, które skille i moduły są potrzebne, i wczytujesz je narzędziem read_legal_resource.",
@@ -1633,12 +1672,47 @@ export class LexExecutionEngine {
         ],
         tools: args.tools,
         runTools: args.runTools,
+        ...(native ? { nativeCorpus: { root: native.root, onRead: native.onRead } } : {}),
         ...(args.draftCallbacks
           ? { callbacks: args.draftCallbacks }
           : {}),
         reasoning: "none"
       }
     );
+    // Karne: +kwalifikator. A DR-03 skill read without the qualifier gets one
+    // correcting round in the same host session.
+    const qualifier = native?.missingQualifier() ?? null;
+    if (native && qualifier) {
+      emit("gate", "CRIMINAL_QUALIFIER", "OK", `follow-up=${qualifier}`);
+      const corrected = await this.providers.stream(args.provider, {
+        model: args.model,
+        systemPrompt: promptParts.join("\n\n"),
+        ...(args.continuityKey ? { continuityKey: args.continuityKey } : {}),
+        messages: [
+          { role: "user", content: effectiveQuery },
+          { role: "assistant", content: response.fullText },
+          {
+            role: "user",
+            content:
+              `Sprawa karna: przeczytaj obowiązkowy kwalifikator karnomaterialny ${qualifier} i popraw odpowiedź zgodnie z nim. ` +
+              "Zwróć pełną, poprawioną odpowiedź (nie opis zmian)."
+          }
+        ],
+        tools: args.tools,
+        runTools: args.runTools,
+        nativeCorpus: { root: native.root, onRead: native.onRead },
+        reasoning: "none"
+      });
+      if (corrected.fullText.trim()) response.fullText = corrected.fullText;
+      if (native.missingQualifier()) {
+        emit("gate", "CRIMINAL_QUALIFIER", "BLOCKED", "QUALIFIER_NOT_READ");
+        throw new LexExecutionError(
+          "A criminal-law answer requires the criminal-law qualifier.",
+          "CRIMINAL_QUALIFIER",
+          [...events]
+        );
+      }
+    }
     emit("provider_end", args.provider, "OK", args.model);
     if (!response.fullText.trim()) {
       throw new LexExecutionError(

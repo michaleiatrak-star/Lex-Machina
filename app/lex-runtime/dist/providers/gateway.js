@@ -30,6 +30,9 @@ export class ProviderGateway {
     constructor(registry) {
         this.registry = registry;
     }
+    nativeCorpusAccess(providerId, model) {
+        return this.registry.get(providerId)?.nativeCorpusAccess?.(model) === true;
+    }
     async stream(providerId, params) {
         const provider = this.registry.get(providerId);
         if (!provider) {
