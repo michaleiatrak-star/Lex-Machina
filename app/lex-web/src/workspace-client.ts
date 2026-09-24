@@ -203,3 +203,53 @@ export function appendCaseThreadMessage(
     body: JSON.stringify(message)
   });
 }
+
+export type EditableRun = { text: string; b: boolean; i: boolean; u: boolean };
+export type EditableBlock =
+  | { type: "heading"; level: number; runs: EditableRun[] }
+  | { type: "paragraph"; runs: EditableRun[] }
+  | { type: "list"; ordered: boolean; items: EditableRun[][] }
+  | { type: "table"; rows: string[][] };
+export type EditableDocument = { kind: "document"; blocks: EditableBlock[] };
+export type EditableSheets = {
+  kind: "sheet";
+  sheets: Array<{ name: string; rows: string[][] }>;
+  truncated: boolean;
+  delimiter?: string;
+};
+export type EditableModel = EditableDocument | EditableSheets;
+export type EditableFormat = "docx" | "odt" | "xlsx" | "csv" | "tsv";
+
+export function getEditableItem(
+  caseId: string,
+  itemId: string
+): Promise<{ filename: string; mediaType: string; model: EditableModel }> {
+  return workspaceJson(`/api/cases/${caseId}/workspace/items/${itemId}/editable`);
+}
+
+/** Renders an edited model to file bytes; the caller stores them as a new case file. */
+export async function renderEditable(
+  caseId: string,
+  request: { format: EditableFormat; model: EditableModel; delimiter?: string }
+): Promise<Blob> {
+  const response = await fetch(`${apiBase()}/api/cases/${caseId}/workspace/render`, {
+    method: "POST",
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      ...authorizationHeaders()
+    },
+    body: JSON.stringify(request)
+  });
+  if (!response.ok) {
+    let code = `HTTP_${response.status}`;
+    try {
+      const body = await response.json() as { error?: string; detail?: string };
+      code = body.detail || body.error || code;
+    } catch {
+      // Keep the HTTP code.
+    }
+    throw new Error(code);
+  }
+  return await response.blob();
+}

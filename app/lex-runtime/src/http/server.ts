@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
 import { registerWorkspaceRoutes } from "./workspace-routes.js";
+import { LocalOfficeEditor } from "../office-edit.js";
 import { registerMaintenanceRoutes } from "./maintenance-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
@@ -666,7 +667,9 @@ export async function startLocalServer(options?: {
       workspace:
         workspaceStore,
       rootDir:
-        caseFileStore.rootDir
+        caseFileStore.rootDir,
+      officeEditor:
+        new LocalOfficeEditor()
     }
   );
   registerMaintenanceRoutes(

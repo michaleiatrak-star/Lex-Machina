@@ -85,6 +85,10 @@ describe("text file editing", () => {
     expect(previewKind("text/plain; charset=utf-8", "a.txt")).toBe("text");
     expect(previewKind("application/octet-stream", "notatka.md")).toBe("text");
     expect(previewKind("image/png", "skan.png")).toBe("image");
-    expect(previewKind("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "a.docx")).toBe("none");
+    expect(previewKind("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "a.docx")).toBe("document");
+    expect(previewKind("application/octet-stream", "umowa.odt")).toBe("document");
+    expect(previewKind("text/csv", "lista.csv")).toBe("sheet");
+    expect(previewKind("application/vnd.ms-excel.sheet.macroenabled.12", "a.xlsm")).toBe("sheet");
+    expect(previewKind("application/msword", "stary.doc")).toBe("none");
   });
 });

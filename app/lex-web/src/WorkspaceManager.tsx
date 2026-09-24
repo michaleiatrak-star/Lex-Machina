@@ -22,24 +22,45 @@ import {
   getWorkspace,
   moveWorkspaceItem,
   openWorkspaceItemInSystem,
+  getEditableItem,
   previewWorkspaceItem,
+  renderEditable,
+  type EditableBlock,
+  type EditableDocument,
+  type EditableFormat,
+  type EditableSheets,
   type WorkspaceFolder,
   type WorkspaceItem,
   type WorkspaceResponse
 } from "./workspace-client.js";
 import { PdfPreview } from "./PdfPreview.js";
 import { TextFileEditor } from "./TextFileEditor.js";
+import { DocumentEditor } from "./DocumentEditor.js";
+import { SheetEditor } from "./SheetEditor.js";
+import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
 import { decodeTextFile } from "./text-editing.js";
 
-const TEXT_EXTENSIONS = /\.(txt|md|markdown|csv|tsv|json|xml|log)$/i;
+const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
+const DOCUMENT_TYPES = new Set([
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.oasis.opendocument.text"
+]);
+const SHEET_TYPES = new Set([
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-excel.sheet.macroenabled.12",
+  "text/csv",
+  "text/tab-separated-values"
+]);
 
 export function previewKind(
   mediaType: string,
   filename: string
-): "text" | "pdf" | "image" | "none" {
+): "text" | "pdf" | "image" | "document" | "sheet" | "none" {
   const type = mediaType.split(";")[0]!.trim().toLowerCase();
   if (type === "application/pdf" || /\.pdf$/i.test(filename)) return "pdf";
   if (type.startsWith("image/")) return "image";
+  if (DOCUMENT_TYPES.has(type) || /\.(docx|odt)$/i.test(filename)) return "document";
+  if (SHEET_TYPES.has(type) || /\.(xlsx|xlsm|csv|tsv)$/i.test(filename)) return "sheet";
   if (
     type.startsWith("text/") ||
     type === "application/json" ||
@@ -196,6 +217,8 @@ export function WorkspaceManager({
     text?: string;
     encoding?: string;
     page?: number;
+    document?: EditableDocument;
+    sheet?: EditableSheets;
     supported: boolean;
   } | null>(null);
 
@@ -490,6 +513,36 @@ export function WorkspaceManager({
     }
   }
 
+  async function saveRendered(
+    filename: string,
+    format: EditableFormat,
+    model: EditableDocument | EditableSheets,
+    delimiter?: string
+  ): Promise<void> {
+    const blob = await renderEditable(caseId, { format, model, ...(delimiter ? { delimiter } : {}) });
+    const stored = await uploadCaseFile(caseId, new File([blob], filename, { type: blob.type }));
+    if (selectedFolder) {
+      await moveWorkspaceItem(caseId, stored.uploadId, selectedFolder);
+    }
+    await refresh();
+  }
+
+  async function saveEditedDocument(
+    filename: string,
+    format: "docx" | "odt",
+    blocks: EditableBlock[]
+  ): Promise<void> {
+    await saveRendered(filename, format, { kind: "document", blocks });
+  }
+
+  async function saveEditedSheet(
+    filename: string,
+    format: "xlsx" | "csv" | "tsv",
+    model: EditableSheets
+  ): Promise<void> {
+    await saveRendered(filename, format, model, format === "csv" ? model.delimiter : undefined);
+  }
+
   async function saveEditedText(
     filename: string,
     text: string
@@ -514,10 +567,20 @@ export function WorkspaceManager({
     setBusy(true);
     setError("");
     try {
-      const result = await previewWorkspaceItem(caseId, item.itemId);
       if (preview?.url) URL.revokeObjectURL(preview.url);
-      const kind = previewKind(result.mediaType, item.filename);
       const pageProps = page ? { page } : {};
+      const officeKind = previewKind(item.mediaType, item.filename);
+      if (officeKind === "document" || officeKind === "sheet") {
+        const editable = await getEditableItem(caseId, item.itemId);
+        setPreview(
+          editable.model.kind === "document"
+            ? { item, document: editable.model, ...pageProps, supported: true }
+            : { item, sheet: editable.model, ...pageProps, supported: true }
+        );
+        return;
+      }
+      const result = await previewWorkspaceItem(caseId, item.itemId);
+      const kind = previewKind(result.mediaType, item.filename);
       if (kind === "text") {
         const decoded = decodeTextFile(new Uint8Array(await result.blob.arrayBuffer()));
         setPreview({
@@ -931,6 +994,25 @@ export function WorkspaceManager({
               encoding={preview.encoding ?? "utf-8"}
               readOnly={!canWrite}
               onSave={saveEditedText}
+            />
+          ) : preview.document ? (
+            <DocumentEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              format={documentFormatFor(preview.item.mediaType, preview.item.filename)}
+              blocks={preview.document.blocks}
+              readOnly={!canWrite}
+              onSave={saveEditedDocument}
+            />
+          ) : preview.sheet ? (
+            <SheetEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              format={sheetFormatFor(preview.item.mediaType, preview.item.filename)}
+              model={preview.sheet}
+              macros={/\.xlsm$/i.test(preview.item.filename) || preview.item.mediaType.includes("macroenabled")}
+              readOnly={!canWrite}
+              onSave={saveEditedSheet}
             />
           ) : preview.pdf ? (
             <PdfPreview

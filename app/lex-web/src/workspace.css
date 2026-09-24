@@ -628,3 +628,116 @@
   padding: 8px 12px;
   font-size: 12px;
 }
+
+.office-editor-note {
+  margin: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e3e7df;
+  background: #fbf6e7;
+  color: #5c4a1c;
+  font-size: 12px;
+}
+
+.office-document {
+  min-height: 420px;
+  max-height: 620px;
+  overflow: auto;
+  padding: 24px 32px;
+  background: #fff;
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  outline: none;
+}
+
+.office-document[contenteditable="true"] {
+  box-shadow: inset 0 0 0 2px #dfe8d9;
+}
+
+.office-document p {
+  margin: 0 0 8px;
+}
+
+.office-document table,
+.sheet-grid {
+  border-collapse: collapse;
+}
+
+.office-document td {
+  min-width: 4em;
+  padding: 4px 8px;
+  border: 1px solid #b9c2b4;
+  vertical-align: top;
+}
+
+.sheet-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 12px 0;
+  background: #fafbf8;
+}
+
+.sheet-tabs button[aria-selected="true"] {
+  background: #dfe8d9;
+  font-weight: 600;
+}
+
+.sheet-grid-wrap {
+  max-height: 620px;
+  overflow: auto;
+  background: #fff;
+}
+
+.sheet-grid th,
+.sheet-grid td {
+  border: 1px solid #dde2d8;
+  font-size: 13px;
+}
+
+.sheet-grid th {
+  position: sticky;
+  top: 0;
+  padding: 2px 6px;
+  background: #f1f4ee;
+  color: #5b665d;
+  font-weight: 500;
+}
+
+.sheet-grid tbody th {
+  position: sticky;
+  left: 0;
+}
+
+.sheet-grid td {
+  min-width: 7em;
+  padding: 0;
+}
+
+.sheet-grid td span {
+  display: block;
+  padding: 3px 6px;
+  white-space: pre;
+}
+
+.sheet-grid input {
+  width: 100%;
+  min-width: 7em;
+  box-sizing: border-box;
+  padding: 3px 6px;
+  border: 0;
+  font: inherit;
+}
+
+.sheet-grid input:focus {
+  outline: 2px solid #7fa46b;
+}
+
+.sheet-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px;
+}

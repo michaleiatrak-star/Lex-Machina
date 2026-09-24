@@ -63,7 +63,7 @@ jobs:
         run: npm test
 
       - name: Python worker syntax
-        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py ../storage/office_extract_worker.py ../storage/spreadsheet_extract_worker.py ../storage/legal_document_worker.py
+        run: python -m py_compile ../ocr/paddle_worker.py ../privacy/stanza_ner_worker.py ../storage/zip_extract_worker.py ../storage/office_extract_worker.py ../storage/spreadsheet_extract_worker.py ../storage/legal_document_worker.py ../storage/office_edit_worker.py
 
       - name: G1 — corpus integrity
         run: npm run validate:corpus
