@@ -1,7 +1,10 @@
-import type {
-  NameFormCorrection,
-  PersonMorphology
+import {
+  PERSON_CASES,
+  type NameFormCorrection,
+  type PersonCase,
+  type PersonMorphology
 } from "../privacy/person-morphology.js";
+import type { PiiKind } from "../privacy/pseudonymizer.js";
 import {
   ProcessingProgressRegistry,
   progressIdFrom
@@ -44,6 +47,7 @@ import {
 } from "../session-executor.js";
 import type {
   DocumentChunkSelection,
+  DocumentSecurityContext,
   DocumentService,
   ResolvedDocumentAttachment,
   PagePrivacyDirective,
@@ -4378,6 +4382,114 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
   }
+
+  // The anonymized version of a case document with its key; edits change
+  // both at once (add a value to the anonymization, take one out, correct
+  // case forms). Local only - nothing here goes to a model.
+  async function withRestoredDocument(
+    req: Request,
+    res: Response,
+    access: "ANALYZE" | "WRITE",
+    action: (args: {
+      caseId: string;
+      documentId: string;
+      security: DocumentSecurityContext;
+    }) => Promise<unknown>
+  ): Promise<void> {
+    const caseId = String(req.params.caseId ?? "").trim();
+    const documentId = String(req.params.documentId ?? "").trim();
+    const service = options.documentService;
+    if (
+      !service?.restoreDocument ||
+      !service.anonymizedVersion ||
+      !service.addProtection ||
+      !service.removeProtection ||
+      !service.updateKeyForms ||
+      !options.caseAccessService
+    ) {
+      res.status(503).json({ error: "ANONYMIZED_VERSION_UNAVAILABLE" });
+      return;
+    }
+    if (!/^case_[a-f0-9]{32}$/.test(caseId) || !/^doc_[a-f0-9]{24}$/.test(documentId)) {
+      res.status(400).json({ error: "INVALID_ANONYMIZED_VERSION_REQUEST" });
+      return;
+    }
+    try {
+      const context = responseAuthContext(res);
+      options.caseAccessService.assertAccess(context, caseId, access);
+      const caseView = options.caseAccessService.openCase(context, caseId);
+      const result = await options.caseAccessService.withCaseDataKey(
+        context,
+        caseId,
+        access,
+        async (caseDataKey) => {
+          await service.restoreDocument!({ caseId, documentId, caseDataKey, keyVersion: caseView.keyVersion });
+          return await action({
+            caseId,
+            documentId,
+            security: { caseId, caseDataKey, keyVersion: caseView.keyVersion }
+          });
+        }
+      );
+      res.setHeader("Cache-Control", "no-store");
+      res.json(result);
+    } catch (error) {
+      if (sendCaseAccessError(res, error)) return;
+      const code = error instanceof Error ? error.message : "";
+      if (code === "ENOENT" || code.endsWith("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+        res.status(404).json({ error: code === "ENOENT" ? "DOCUMENT_NOT_FOUND" : code });
+        return;
+      }
+      if (code.startsWith("PRIVACY_EDIT_") || code.startsWith("PRIVACY_KEY_")) {
+        res.status(422).json({ error: code });
+        return;
+      }
+      console.error(`ANONYMIZED_VERSION_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+      res.status(500).json({ error: "ANONYMIZED_VERSION_FAILED" });
+    }
+  }
+
+  const EDITABLE_PII_KINDS = new Set<string>([
+    "PERSON", "ADDRESS", "PESEL", "NIP", "REGON", "IBAN", "EMAIL", "PHONE", "ID_CARD",
+    "PASSPORT", "BIRTH_DATE", "LAND_REGISTRY", "KRS", "VEHICLE_PLATE", "PAYMENT_CARD", "CUSTOM"
+  ]);
+
+  app.get("/api/cases/:caseId/documents/:documentId/anonymized", (req, res) =>
+    withRestoredDocument(req, res, "ANALYZE", async ({ documentId }) =>
+      options.documentService!.anonymizedVersion!(documentId)
+    )
+  );
+
+  app.post("/api/cases/:caseId/documents/:documentId/anonymized/protect", (req, res) =>
+    withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+      const text = typeof req.body?.text === "string" ? req.body.text : "";
+      const kind = String(req.body?.kind ?? "");
+      if (!EDITABLE_PII_KINDS.has(kind)) throw new Error("PRIVACY_EDIT_KIND_INVALID");
+      return await options.documentService!
+        .addProtection!(documentId, text, kind as PiiKind, security);
+    })
+  );
+
+  app.post("/api/cases/:caseId/documents/:documentId/anonymized/unprotect", (req, res) =>
+    withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) =>
+      await options.documentService!
+        .removeProtection!(documentId, String(req.body?.token ?? ""), security)
+    )
+  );
+
+  app.post("/api/cases/:caseId/documents/:documentId/anonymized/forms", (req, res) =>
+    withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+      const raw = req.body?.forms;
+      if (!raw || typeof raw !== "object") throw new Error("PRIVACY_EDIT_TEXT_INVALID");
+      const forms: Partial<Record<PersonCase, string>> = {};
+      for (const personCase of PERSON_CASES) {
+        const value = (raw as Record<string, unknown>)[personCase];
+        if (typeof value === "string") forms[personCase] = value;
+      }
+      return await options.documentService!
+        .updateKeyForms!(documentId, String(req.body?.token ?? ""), forms, security);
+    })
+  );
 
   // Stage and page counts of a running OCR/anonymization request.
   app.get(

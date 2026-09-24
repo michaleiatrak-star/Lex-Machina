@@ -15,6 +15,25 @@ export function decodePlainText(data) {
         return new TextDecoder("windows-1250").decode(data);
     }
 }
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+/** Replaces whole-word surfaces (longest first) outside existing tokens. */
+export function replaceOutsideTokens(text, surfaces, token) {
+    const ordered = [...surfaces].sort((a, b) => b.length - a.length).map(escapeRegExp);
+    if (!ordered.length)
+        return { text, count: 0 };
+    const pattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${ordered.join("|")})(?![\\p{L}\\p{N}])`, "giu");
+    let count = 0;
+    const parts = text.split(/(\[(?:LMPII:D\d{2}|PII):[A-Z_]+:\d{4}(?:\|[A-Z]{2,4})?\])/);
+    const out = parts.map((part, index) => index % 2 === 1
+        ? part
+        : part.replace(pattern, () => {
+            count += 1;
+            return token;
+        }));
+    return { text: out.join(""), count };
+}
 export class LocalPrivateDocumentService {
     pdfIngestor;
     namedEntities;
@@ -300,6 +319,7 @@ export class LocalPrivateDocumentService {
                 reversibleLocally: true
             }
         };
+        record.protectedIngestion = result;
         if (this.secureDocumentStore &&
             record.caseId) {
             if (!security ||
@@ -398,6 +418,7 @@ export class LocalPrivateDocumentService {
             caseId: args.caseId,
             vault,
             source: source.source,
+            protectedIngestion: protectedResult,
             protectedChunks: protectedResult
                 .chunks
                 .map((chunk) => ({
@@ -447,6 +468,144 @@ export class LocalPrivateDocumentService {
                 occurrences: counts.get(item.token) ?? 0
             };
         });
+    }
+    editableRecord(documentId) {
+        const record = this.documents.get(documentId);
+        if (!record || !record.protectedIngestion) {
+            throw new Error("UNKNOWN_LOCAL_DOCUMENT");
+        }
+        return record;
+    }
+    /** The anonymized version as stored: chunks with tokens, and its key. */
+    anonymizedVersion(documentId) {
+        const record = this.editableRecord(documentId);
+        return {
+            documentId,
+            chunks: record.protectedIngestion.chunks.map((chunk) => ({ ...chunk })),
+            entries: this.privacyKey(documentId)
+        };
+    }
+    /**
+     * Anonymizes one more value everywhere in the anonymized version: a person
+     * or address in every case form, anything else verbatim. The version and
+     * the key are saved together.
+     */
+    async addProtection(documentId, text, kind, security) {
+        const record = this.editableRecord(documentId);
+        const value = text.replace(/\s+/g, " ").trim();
+        if (value.length < 2 || value.length > 300 || /\[|\]/.test(value)) {
+            throw new Error("PRIVACY_EDIT_TEXT_INVALID");
+        }
+        let entity;
+        if (kind === "PERSON" && this.personMorphology) {
+            [entity] = await this.personMorphology.analyze([value]);
+        }
+        else if (kind === "ADDRESS" && this.personMorphology?.analyzeAddresses) {
+            [entity] = await this.personMorphology.analyzeAddresses([value]);
+        }
+        const known = new Set(record.vault.snapshot().tokens.map((item) => item.token));
+        const token = record.vault.getOrCreate(kind, value, entity ?? undefined);
+        const stored = record.vault.entity(token);
+        const surfaces = [
+            ...new Set([
+                value,
+                ...(stored ? PERSON_CASES.map((personCase) => stored.forms[personCase].text) : [])
+            ])
+        ].filter((surface) => surface.trim().length >= 2);
+        let replaced = 0;
+        const chunks = record.protectedIngestion.chunks.map((chunk) => {
+            const result = replaceOutsideTokens(chunk.text, surfaces, token);
+            replaced += result.count;
+            return { ...chunk, text: result.text };
+        });
+        if (replaced === 0) {
+            // Nothing matched: do not keep a new token that stands for nothing.
+            if (!known.has(token))
+                record.vault.remove(token);
+            throw new Error("PRIVACY_EDIT_TEXT_NOT_FOUND");
+        }
+        const privacy = record.protectedIngestion.privacy;
+        this.replaceProtected(record, chunks, {
+            ...privacy,
+            findings: privacy.findings + replaced,
+            manualPseudonymizations: privacy.manualPseudonymizations + replaced,
+            counts: { ...privacy.counts, [kind]: (privacy.counts[kind] ?? 0) + replaced }
+        });
+        await this.persistEdit(documentId, record, security);
+        return { ...this.anonymizedVersion(documentId), token, replaced };
+    }
+    /**
+     * Takes a value out of the anonymization: every occurrence of the token
+     * gets the value back (a person or address in the nominative, since the
+     * stored text does not keep each occurrence's case) and the token leaves
+     * the key.
+     */
+    async removeProtection(documentId, token, security) {
+        const record = this.editableRecord(documentId);
+        if (!/^\[PII:[A-Z_]+:\d{4}\]$/.test(token) || !record.vault.hasToken(token)) {
+            throw new Error("PRIVACY_KEY_TOKEN_NOT_FOUND");
+        }
+        const value = record.vault.restore(token, "NOM").text;
+        const kind = /^\[PII:([A-Z_]+):/.exec(token)[1];
+        const pattern = new RegExp(escapeRegExp(token.slice(0, -1)) + "(?:\\|[A-Z]{2,4})?\\]", "g");
+        let restored = 0;
+        const chunks = record.protectedIngestion.chunks.map((chunk) => ({
+            ...chunk,
+            text: chunk.text.replace(pattern, () => {
+                restored += 1;
+                return value;
+            })
+        }));
+        record.vault.remove(token);
+        const privacy = record.protectedIngestion.privacy;
+        this.replaceProtected(record, chunks, {
+            ...privacy,
+            findings: Math.max(0, privacy.findings - restored),
+            counts: { ...privacy.counts, [kind]: Math.max(0, (privacy.counts[kind] ?? 0) - restored) }
+        });
+        await this.persistEdit(documentId, record, security);
+        return { ...this.anonymizedVersion(documentId), restored };
+    }
+    /** Corrects case forms of a person or address in the key. */
+    async updateKeyForms(documentId, token, forms, security) {
+        const record = this.editableRecord(documentId);
+        for (const value of Object.values(forms)) {
+            if (typeof value !== "string" || value.length > 300 || /\[|\]/.test(value)) {
+                throw new Error("PRIVACY_EDIT_TEXT_INVALID");
+            }
+        }
+        record.vault.updateForms(token, forms);
+        await this.persistEdit(documentId, record, security);
+        return this.anonymizedVersion(documentId);
+    }
+    replaceProtected(record, chunks, privacy) {
+        record.protectedIngestion = {
+            ...record.protectedIngestion,
+            chunks,
+            pseudonymizedChars: chunks.reduce((sum, chunk) => sum + chunk.text.length, 0),
+            privacy
+        };
+        record.protectedChunks = chunks.map((chunk) => ({ ...chunk }));
+    }
+    async persistEdit(documentId, record, security) {
+        if (!record.caseId)
+            return;
+        if (!this.secureDocumentStore ||
+            !this.privacyVaultStore ||
+            security.caseId !== record.caseId ||
+            !security.caseDataKey ||
+            !security.keyVersion) {
+            throw new Error("DOCUMENT_STORAGE_CONTEXT_REQUIRED");
+        }
+        const context = {
+            caseId: record.caseId,
+            documentId,
+            caseDataKey: security.caseDataKey,
+            keyVersion: security.keyVersion
+        };
+        // The key first: a version never refers to a token its key lacks.
+        await this.privacyVaultStore.saveDocumentVault({ ...context, vault: record.vault });
+        await this.secureDocumentStore.saveProtected({ ...context, ingestion: record.protectedIngestion });
     }
     forget(documentId) {
         return this.documents.delete(documentId);

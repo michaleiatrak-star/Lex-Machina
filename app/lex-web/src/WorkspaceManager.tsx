@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ApiError,
   finalizeDocument,
-  getPrivacyKey,
   getProcessingProgress,
   isDesktopShell,
   newProgressId,
@@ -11,7 +10,6 @@ import {
   searchCaseKnowledge,
   uploadCaseFile,
   type CaseKnowledgeHit,
-  type PrivacyKeyEntry,
   type ProcessingProgress,
   type StoredUploadResponse
 } from "./api.js";
@@ -44,7 +42,7 @@ import { DocumentEditor } from "./DocumentEditor.js";
 import { SheetEditor } from "./SheetEditor.js";
 import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
 import { progressLabel, progressPercent } from "./processing-progress.js";
-import { PrivacyKeyTable } from "./PrivacyKeyTable.js";
+import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
 import { decodeTextFile } from "./text-editing.js";
 
 const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
@@ -221,9 +219,10 @@ export function WorkspaceManager({
     useState<StoredUploadResponse[]>([]);
   const [progressByItem, setProgressByItem] =
     useState<Record<string, Pick<ProcessingProgress, "stage" | "done" | "total">>>({});
-  const [privacyKey, setPrivacyKey] = useState<{
+  const [anonymized, setAnonymized] = useState<{
     item: WorkspaceItem;
-    entries: PrivacyKeyEntry[];
+    documentId: string;
+    tab: "text" | "key";
   } | null>(null);
     const [preview, setPreview] = useState<{
     item: WorkspaceItem;
@@ -333,18 +332,11 @@ export function WorkspaceManager({
     }
   }
 
-  async function showPrivacyKey(item: WorkspaceItem): Promise<void> {
+  function showAnonymized(item: WorkspaceItem, tab: "text" | "key"): void {
     const documentId = processingFor(item)?.documentId;
     if (!documentId) return;
-    setBusy(true);
-    setError("");
-    try {
-      setPrivacyKey({ item, entries: await getPrivacyKey(caseId, documentId) });
-    } catch (failure) {
-      setError(documentProcessingFailureMessage(failure));
-    } finally {
-      setBusy(false);
-    }
+    setPreview(null);
+    setAnonymized({ item, documentId, tab });
   }
 
   async function runAutomaticPrivacySteps(
@@ -627,6 +619,7 @@ export function WorkspaceManager({
   ): Promise<void> {
     setBusy(true);
     setError("");
+    setAnonymized(null);
     try {
       if (preview?.url) URL.revokeObjectURL(preview.url);
       const pageProps = page ? { page } : {};
@@ -949,6 +942,11 @@ export function WorkspaceManager({
                     ) : null}
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
+                        {processingFor(item) ? (
+                          <span className="anonymized-badge" title="Dokument ma wersję zanonimizowaną i klucz anonimizacji">
+                            Zanonimizowany
+                          </span>
+                        ) : null}
                         {processingFor(item)
                           ? processingFor(item)!.ocrPages > 0
                             ? `OCR ✓ · anonimizacja ✓ · ${processingFor(item)!.ocrPages}/${processingFor(item)!.totalPages} stron OCR · vault per dokument`
@@ -981,14 +979,24 @@ export function WorkspaceManager({
                         : "Podgląd"}
                     </button>
                     {processingFor(item) ? (
-                      <button
-                        type="button"
-                        disabled={busy}
-                        title="Symbole zastępcze tego dokumentu i dane, które zastępują (tylko na tym komputerze)"
-                        onClick={() => void showPrivacyKey(item)}
-                      >
-                        Klucz anonimizacji
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          disabled={busy}
+                          title="Tekst z symbolami zastępczymi - ta wersja trafia do modeli"
+                          onClick={() => showAnonymized(item, "text")}
+                        >
+                          Wersja zanonimizowana
+                        </button>
+                        <button
+                          type="button"
+                          disabled={busy}
+                          title="Symbole zastępcze i dane, które zastępują (tylko na tym komputerze)"
+                          onClick={() => showAnonymized(item, "key")}
+                        >
+                          Klucz anonimizacji
+                        </button>
+                      </>
                     ) : null}
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
@@ -1048,11 +1056,15 @@ export function WorkspaceManager({
         </section>
       </div>
 
-      {privacyKey ? (
-        <PrivacyKeyTable
-          filename={privacyKey.item.filename}
-          entries={privacyKey.entries}
-          onClose={() => setPrivacyKey(null)}
+      {anonymized ? (
+        <AnonymizedDocumentView
+          key={`${anonymized.documentId}-${anonymized.tab}`}
+          caseId={caseId}
+          documentId={anonymized.documentId}
+          filename={anonymized.item.filename}
+          readOnly={!canWrite}
+          initialTab={anonymized.tab}
+          onClose={() => setAnonymized(null)}
         />
       ) : null}
 

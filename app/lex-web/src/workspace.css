@@ -786,3 +786,73 @@
 .privacy-key-empty {
   padding: 12px 16px;
 }
+
+.anonymized-badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #dfe8d9;
+  color: #2f4a26;
+  font-weight: 600;
+}
+
+.privacy-key-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e3e7df;
+}
+
+.privacy-key-highlight td {
+  background: #fbf1dc;
+}
+
+.privacy-key-forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 4px;
+}
+
+.privacy-key-forms label {
+  display: grid;
+  font-size: 11px;
+}
+
+.privacy-key-actions {
+  white-space: nowrap;
+}
+
+.anonymized-toolbar input {
+  flex: 1;
+  min-width: 14em;
+}
+
+.anonymized-text {
+  max-height: 560px;
+  overflow: auto;
+  padding: 12px 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.anonymized-text article + article {
+  margin-top: 12px;
+  border-top: 1px dashed #e3e7df;
+}
+
+.anonymized-text small {
+  color: #6d786f;
+}
+
+.anonymized-token {
+  padding: 0 3px;
+  border: 1px solid #c9d3c3;
+  border-radius: 4px;
+  background: #eef3ea;
+  font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  cursor: pointer;
+}

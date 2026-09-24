@@ -2709,6 +2709,55 @@ export type PrivacyKeyEntry = {
   occurrences: number;
 };
 
+export type AnonymizedVersion = {
+  documentId: string;
+  chunks: Array<{ index: number; pageStart: number; pageEnd: number; text: string }>;
+  entries: PrivacyKeyEntry[];
+};
+
+function anonymizedPath(caseId: string, documentId: string, action = ""): string {
+  return `/api/cases/${caseId}/documents/${documentId}/anonymized${action ? `/${action}` : ""}`;
+}
+
+export function getAnonymizedVersion(caseId: string, documentId: string): Promise<AnonymizedVersion> {
+  return json<AnonymizedVersion>(anonymizedPath(caseId, documentId));
+}
+
+export function addToAnonymization(
+  caseId: string,
+  documentId: string,
+  text: string,
+  kind: PiiKind
+): Promise<AnonymizedVersion & { token: string; replaced: number }> {
+  return json(anonymizedPath(caseId, documentId, "protect"), {
+    method: "POST",
+    body: JSON.stringify({ text, kind })
+  });
+}
+
+export function removeFromAnonymization(
+  caseId: string,
+  documentId: string,
+  token: string
+): Promise<AnonymizedVersion & { restored: number }> {
+  return json(anonymizedPath(caseId, documentId, "unprotect"), {
+    method: "POST",
+    body: JSON.stringify({ token })
+  });
+}
+
+export function updateAnonymizationForms(
+  caseId: string,
+  documentId: string,
+  token: string,
+  forms: Record<string, string>
+): Promise<AnonymizedVersion> {
+  return json(anonymizedPath(caseId, documentId, "forms"), {
+    method: "POST",
+    body: JSON.stringify({ token, forms })
+  });
+}
+
 export async function getPrivacyKey(
   caseId: string,
   documentId: string

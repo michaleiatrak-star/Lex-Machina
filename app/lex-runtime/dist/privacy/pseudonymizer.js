@@ -277,6 +277,45 @@ export class PseudonymizationVault {
      * Every known written form of every person in this vault: the surfaces
      * found so far and, with the morphology engine, all seven cases.
      */
+    /** Drops a token and everything that maps to it (the user un-anonymized it). */
+    remove(token) {
+        if (!this.tokenToValue.has(token))
+            return false;
+        this.tokenToValue.delete(token);
+        this.tokenMetadata.delete(token);
+        this.tokenEntities.delete(token);
+        this.tokenSurfaces.delete(token);
+        for (const [key, value] of [...this.keyToToken]) {
+            if (value === token)
+                this.keyToToken.delete(key);
+        }
+        return true;
+    }
+    /**
+     * Case forms corrected by the user: each given form becomes a manual,
+     * certain form; the nominative also becomes the entity's canonical name.
+     */
+    updateForms(token, forms) {
+        const entity = this.tokenEntities.get(token);
+        if (!entity)
+            throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+        const next = {
+            ...entity,
+            forms: { ...entity.forms },
+            warnings: [...entity.warnings]
+        };
+        for (const personCase of PERSON_CASES) {
+            const text = forms[personCase]?.trim();
+            if (!text)
+                continue;
+            next.forms[personCase] = { text, source: "manual", confidence: 1 };
+        }
+        next.canonical = next.forms.NOM.text;
+        next.status = "ok";
+        this.tokenEntities.set(token, next);
+        this.keyToToken.set(`${this.tokenMetadata.get(token).kind}\u0000${next.canonical}`, token);
+        return next;
+    }
     knownEntityForms() {
         const forms = new Map();
         for (const [token, value] of this.tokenToValue) {
