@@ -25,7 +25,8 @@
 
 ## TEST NIEWYPŁACALNOŚCI (art. 11 PrUp — Dz.U. 2026 poz. 913 t.j.)
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 11 PrUp w ISAP.
+> ✅ [VER] RZĄD 1 2026-09-12l, ponownie 2026-09-16 (F-189) — `Dz.U. 2026 poz. 913`:
+> art. 11 ust. 1, 1a, 2 oraz art. 21 ust. 1 — wartości poprawne.
 
 ```
 PRZESŁANKA 1 (każdy dłużnik):
@@ -35,6 +36,13 @@ PRZESŁANKA 1 (każdy dłużnik):
 PRZESŁANKA 2 (osoby prawne i jednostki organizacyjne):
   Zobowiązania pieniężne przekraczają wartość majątku
   przez okres przekraczający 24 miesiące
+
+⛔ 3 miesiące (ust. 1a) i 24 miesiące (ust. 2) to NIE są terminy do działania.
+Pierwszy to DOMNIEMANIE (wzruszalne), drugi — samodzielna PODSTAWA
+niewypłacalności. Oba OTWIERAJĄ 30-dniowy obowiązek z art. 21 ust. 1
+(„nie później niż w terminie 30 dni od dnia, w którym wystąpiła podstawa");
+odczytanie ich jako „mam trzy miesiące" przesuwa moment odpowiedzialności
+z art. 21 ust. 3.
 ```
 
 ---
@@ -101,7 +109,8 @@ Postanowienie o ogłoszeniu upadłości
   ↓
 Syndyk (powołany przez sąd) — przejęcie zarządu masą upadłości
   ↓
-Zgłoszenie wierzytelności (termin wskazany w postanowieniu — PILNE!)
+Zgłoszenie wierzytelności SYNDYKOWI, przez system teleinformatyczny (art. 236 ust. 1)
+  (termin wskazany w postanowieniu — PILNE!)
   ↓
 Lista wierzytelności → możliwy sprzeciw do sędziego-komisarza
   ↓
@@ -196,7 +205,7 @@ Bezskuteczne na wniosek syndyka (art. 128):
   → Czynności z osobami bliskimi — 6 miesięcy przed złożeniem wniosku
   → Inne czynności — gdy kontrahent wiedział o podstawie upadłości
 
-⚠️ Terminy i przesłanki — weryfikuj aktualne przepisy PrUp w ISAP.
+⚠️ Terminy i przesłanki — weryfikuj aktualne przepisy PrUp w ELI (RZĄD 1).
 ```
 
 ---
@@ -267,7 +276,7 @@ TERMINY PREKLUZYJNE (art. 377) — ⚠️ NAJWYŻSZE ryzyko praktyczne:
 > szukającego dźwigni wobec nierzetelnego zarządu: złożenie wniosku o
 > zakaz (art. 376) nie wymaga odrębnego procesu cywilnego jak przy
 > art. 299 KSH.
-> ⚠️ Weryfikuj aktualne brzmienie i terminy w ISAP przed powołaniem w
+> ⚠️ Weryfikuj aktualne brzmienie i terminy w ELI (RZĄD 1) przed powołaniem w
 > piśmie — termin roczny z art. 377 bywa łatwo przeoczony.
 
 ---
@@ -393,7 +402,7 @@ PROCEDURA I SKUTKI:
 > zidentyfikowanego inwestora i celem jest ZACHOWANIE przedsiębiorstwa
 > (miejsca pracy, kontrakty) zamiast klasycznej likwidacji — istotnie
 > szybsze niż standardowa ścieżka.
-> ⚠️ Weryfikuj aktualne brzmienie w ISAP przed powołaniem w piśmie.
+> ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1) przed powołaniem w piśmie.
 
 ---
 
@@ -433,7 +442,7 @@ PROCEDURA I SKUTKI:
 > WNIOSEK O ZABEZPIECZENIE równolegle z wnioskiem o ogłoszenie upadłości
 > — bez tego majątek dłużnika pozostaje niechroniony do czasu
 > rozstrzygnięcia wniosku głównego, co może trwać tygodnie.
-> ⚠️ Weryfikuj aktualne brzmienie w ISAP przed powołaniem w piśmie.
+> ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1) przed powołaniem w piśmie.
 
 ---
 
@@ -546,7 +555,7 @@ Zaliczki do 75% wynagrodzenia wstępnego w 4 ratach (art. 164):
 ## ELEMENTY POZWU / WNIOSKU — ZGŁOSZENIE WIERZYTELNOŚCI
 
 ```
-Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ISAP):
+Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ELI (RZĄD 1)):
   □ Imię i nazwisko / firma wierzyciela
   □ Oznaczenie wierzytelności (tytuł, kwota, waluta)
   □ Dowody uzasadniające zgłoszenie (umowa, faktury, wezwania)
@@ -554,32 +563,25 @@ Obowiązkowe elementy zgłoszenia wierzytelności (weryfikuj art. 239 PrUp w ISA
   □ Zabezpieczenia (jeśli są)
   □ Czy wierzytelność jest sporna?
 
-ADRESAT: ⛔ SYNDYK, za pośrednictwem SYSTEMU TELEINFORMATYCZNEGO obsługującego
-        postępowanie sądowe (art. 236 ust. 1 PrUp) — NIE sędzia-komisarz i NIE
-        pismo do sądu. To zmiana reformy; zapis sprzed niej wciąż krąży.
-        Wyjątek adresowy: wierzyciele z art. 216aa ust. 1 — adres wskazany
-        w postanowieniu.
-TERMIN: 30 dni od OBWIESZCZENIA postanowienia o ogłoszeniu upadłości w Rejestrze
-        (art. 51 ust. 1 pkt 4 w zw. z art. 236 ust. 1 PrUp)
-⛔ SKUTEK SPÓŹNIENIA — nie "dodatkowa opłata", tylko RYCZAŁT ZE WSKAŹNIKA:
-   art. 235 ust. 1 PrUp — zryczałtowane koszty w wysokości 15 % PRZECIĘTNEGO
-   MIESIĘCZNEGO WYNAGRODZENIA W SEKTORZE PRZEDSIĘBIORSTW BEZ WYPŁAT NAGRÓD
-   Z ZYSKU W III KWARTALE ROKU POPRZEDNIEGO (obwieszczenie Prezesa GUS),
-   ponoszone NAWET GDY OPÓŹNIENIE POWSTAŁO BEZ WINY wierzyciela.
-   Wyjątek: spóźnienie wynikłe z korekty deklaracji dokonanej przez syndyka.
-   Syndyk wzywa do wpłaty na wskazany rachunek (ust. 2).
-   ⛔ NIE utrwalaj kwoty — wskaźnik zmienia się co roku; patrz
-      shared/TABELE-OPLAT.md sekcja 4g.
-⚠️ art. 236 ust. 2-3: wierzytelności zabezpieczone hipoteką, zastawem, zastawem
-   rejestrowym, zastawem skarbowym lub hipoteką morską trafiają na listę
-   Z URZĘDU, jeżeli wierzyciel ich nie zgłosi
+ADRESAT I FORMA (art. 236 ust. 1 PrUp): zgłoszenie kieruje się do SYNDYKA,
+  za pośrednictwem SYSTEMU TELEINFORMATYCZNEGO obsługującego postępowanie
+  sądowe. ⛔ Nie do sędziego-komisarza i nie pismem papierowym (stan sprzed
+  reformy — nawyk nadal powszechny).
+TERMIN: oznaczony w postanowieniu o ogłoszeniu upadłości.
+⛔ SPÓŹNIENIE (art. 235 ust. 1 PrUp): wierzyciel ponosi ZRYCZAŁTOWANE KOSZTY
+  = 15 % przeciętnego miesięcznego wynagrodzenia w sektorze przedsiębiorstw
+  bez wypłat nagród z zysku w III kwartale roku poprzedniego (ogłoszenie
+  Prezesa GUS) — NAWET gdy opóźnienie powstało bez jego winy (wyjątek:
+  zgłoszenie po korekcie deklaracji przez syndyka). To nie „dodatkowa opłata";
+  wskaźnik — `shared/oplaty/04-wartosci-powtarzalne-kotwice.md` sekcja 4g.
+✅ [VER] RZĄD 1 2026-09-16 — `Dz.U. 2026 poz. 913`.
 ```
 
 ---
 
 ## KATEGORIE ZASPOKOJENIA WIERZYCIELI (PrUp)
 
-> ⚠️ Weryfikuj aktualną kolejność w PrUp w ISAP.
+> ⚠️ Weryfikuj aktualną kolejność w PrUp w ELI (RZĄD 1).
 
 ```
 Wierzytelności zaspokajane z masy w kolejności:

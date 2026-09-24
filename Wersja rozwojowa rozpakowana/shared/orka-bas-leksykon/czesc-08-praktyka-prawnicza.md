@@ -210,7 +210,7 @@ PATRZ TEŻ: shared/definicje/DEF-PROCEDURA.md — rozróżnienie KATEGORII
   web_search: "nowelizacja Ordynacji podatkowej przedawnienie ugoda podatkowa
     2026 wejście w życie art 70"
 
-Weryfikacja: KC art. 118–125 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 118–125 (Dz.U. 2026 poz. 795 t.j.)
   Ustawa z 13.04.2018 r. (Dz.U. 2018 poz. 1104) — fundamentalna reforma
 
 REFORMA 2018 — KLUCZOWE ZMIANY:
@@ -249,7 +249,7 @@ UWAGA — KONSUMENT (art. 117¹ KC, od 2018):
 
 ### BAS-W33 — Kara umowna — zasady, miarkowanie, zbieg (art. 483–484 KC)
 ```
-Weryfikacja: KC art. 483–484 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 483–484 (Dz.U. 2026 poz. 795 t.j.)
 
 DEFINICJA (art. 483 §1 KC):
   "Można zastrzec w umowie, że naprawienie szkody wynikłej z niewykonania
@@ -286,7 +286,7 @@ REGUŁA: zawsze przy redagowaniu umowy wskazać: czy kara jest zaliczana na
 
 ### BAS-W34 — Odsetki ustawowe, kapitałowe, za opóźnienie — różnice (KC)
 ```
-Weryfikacja: KC art. 359, 481 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 359, 481 (Dz.U. 2026 poz. 795 t.j.)
   + obwieszczenie Ministra Sprawiedliwości ws. odsetek ustawowych
 
 TRZY RODZAJE ODSETEK — RÓŻNICE FUNDAMENTALNE:
@@ -313,7 +313,7 @@ TRZY RODZAJE ODSETEK — RÓŻNICE FUNDAMENTALNE:
   → web_search "odsetki transakcje handlowe 2026 ustawa opóźnienia stopa"
 
 STOPY (wymagają weryfikacji — zmienne!):
-  → isap.sejm.gov.pl → obwieszczenie MS ws. odsetek ustawowych
+  → ELI (RZĄD 1) → obwieszczenie MS ws. odsetek ustawowych
   → nbp.pl → stopa referencyjna (podstawa wyliczeń)
 
 PRAKTYCZNE: pozew o zapłatę = zawsze wskaż RODZAJ odsetek.

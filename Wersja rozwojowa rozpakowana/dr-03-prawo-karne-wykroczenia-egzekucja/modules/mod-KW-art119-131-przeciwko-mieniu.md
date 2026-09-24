@@ -220,7 +220,7 @@ KROK 5 — Czy czyn popełniono ZA GRANICĄ przez obywatela polskiego?
 - **RZĄD 1 — ELI:** tekst jednolity Dz.U. 2023 poz. 2119 odnotowuje, że zmiany art. 119/120/122/124 do 800 zł weszły w życie 1.10.2023.
 - e-prawnik.pl — komentarz do art. 119-131 (⚠️ część danych na tym portalu
   ODZWIERCIEDLA STARY próg 250 zł/75 zł sprzed podwyżki z 1.10.2023 —
-  NIE cytować kwot z tego źródła bez krzyżowej weryfikacji na ISAP).
+  NIE cytować kwot z tego źródła bez krzyżowej weryfikacji w ELI (RZĄD 1)).
 - zaufanyprawnik.pl — praktyczne omówienie granicy wykroczenie/
   przestępstwo w sprawach o mienie.
 

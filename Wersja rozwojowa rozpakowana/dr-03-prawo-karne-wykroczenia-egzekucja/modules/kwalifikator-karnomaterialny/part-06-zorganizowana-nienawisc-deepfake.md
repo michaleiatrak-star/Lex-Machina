@@ -142,7 +142,7 @@ dane Europolu], adwokaci-kmp.pl [sierpień 2025], csp.edu.pl
 Świadek koronny — odrębna ustawa (nie KK) — całkowite zwolnienie z
   odpowiedzialności karnej w zamian za ujawnienie istotnych informacji
   o grupie/związku; wąski zakres zastosowania, decyzja prokuratora
-  generalnego — sprawdź aktualny tekst ustawy w ISAP, nie cytuj z pamięci.
+  generalnego — sprawdź aktualny tekst ustawy w ELI (RZĄD 1), nie cytuj z pamięci.
 Mały świadek koronny (art. 60 §3-4 KK) — nadzwyczajne złagodzenie kary
   (nie pełne zwolnienie) w zamian za ujawnienie informacji organom
   ścigania — dostępny szerzej niż "duży" świadek koronny.
@@ -152,7 +152,7 @@ Rozszerzona konfiskata (art. 45 §2 KK) — domniemanie, że mienie nabyte
   narzędzie w sprawach o art. 258 połączonych z przestępstwami majątkowymi.
 Przepadek przedsiębiorstwa (art. 44a KK) — możliwy gdy przedsiębiorstwo
   służyło do popełnienia przestępstwa lub ukrycia korzyści z niego —
-  weryfikuj przesłanki aktualne w ISAP.
+  weryfikuj przesłanki aktualne w ELI (RZĄD 1).
 ```
 
 ---

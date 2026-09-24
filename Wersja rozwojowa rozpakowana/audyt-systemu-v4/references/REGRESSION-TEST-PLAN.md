@@ -365,6 +365,10 @@ blokadę — zgodnie z priorytetyzacją z sekcji 4 tego planu.
      skryptu — z NATURY wymaga osądu semantycznego (czy deklarowana
      treść "✅ OK" ODPOWIADA rzeczywistej zawartości modułu), poza
      zasięgiem prostej analizy tekstowej
+     ⚡ 2026-09-16b: `scripts/check_widmowe_pokrycie.py` wskazuje KANDYDATÓW
+     (moduł bez numeru i bez nazwy aktu z wiersza); osąd nadal ręczny.
+     Pierwszy przebieg: 30 kandydatów → 2 widma, 2 podmiany aktu,
+     1 nieistniejący tytuł, 11 błędnych wskaźników (AUDYT-2026-09-16b)
    □ T8 ma 7 przypadków WARN nigdy w pełni niesprawdzonych manualnie
      (tylko 1 z 7 zweryfikowany jako fałszywy pozytyw)
    □ Merytoryczna POPRAWNOŚĆ treści prawnej POZOSTAJE poza zakresem
@@ -1232,3 +1236,17 @@ Kody: 0 = czysto, 1 = naruszenie, 2 = błąd wywołania.
    Jeżeli powstanie druga rodzina satelitów — np. dla `terminy.md` — test trzeba
    sparametryzować, a **nie kopiować**. Dwie rozjeżdżające się implementacje tej
    samej reguły byłyby gorsze niż brak testu (ta sama zasada co przy T24).
+
+
+---
+
+## T30 — utrata treści bez cofnięcia numeru wersji (dodany 2026-09-16c, F-189)
+
+| Test | Co wykrywa | Waga | Incydent źródłowy |
+|---|---|---|---|
+| T30 | (A) wiersz tabeli „było → jest" z AUDIT-JOURNAL, którego nowego numeru brak w skillu albo którego stary numer żyje poza kontekstem historycznym; (B) ten sam numer wersji skilla w dwóch sesjach (od 2026-08-24) bez deklaracji „LUKA JAWNA"/„KOLIZJA" | ⭐⭐⭐ KRYTYCZNY (bloker) | `dr-09`: naprawa z 10l zaginęła, a numer 3.29 użyła ponownie sesja 13 — T12 nie mógł tego zobaczyć (AUDYT-2026-09-16b) |
+
+Skrypt: `scripts/check_utrata_tresci.py` (`--selftest` 5/5). Pomiar walidacyjny: na stanie
+sprzed napraw z 2026-09-16 — **5 trafień A + 1 B**; po naprawach — 0.
+⚠️ Zakres: kontrola A obejmuje tylko wpisy dziennika w postaci tabeli z numerami Dz.U.
+Naprawy opisane prozą nadal wymagają kontroli T28 (rejestr W1) albo ręcznej.

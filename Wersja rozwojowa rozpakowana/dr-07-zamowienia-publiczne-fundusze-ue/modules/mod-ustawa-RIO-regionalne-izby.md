@@ -8,7 +8,7 @@
   ani funkcji nadzorczej/kontrolnej/opiniodawczej/orzeczniczej opisanych niżej — treść
   modułu ZGODNA]
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem.
 
 ## Zakres
 RIO = organ kontroli i nadzoru finansowego JST (gmin, powiatów, województw,

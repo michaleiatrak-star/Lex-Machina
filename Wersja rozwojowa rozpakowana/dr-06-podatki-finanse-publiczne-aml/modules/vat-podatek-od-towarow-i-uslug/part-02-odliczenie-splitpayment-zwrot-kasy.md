@@ -51,13 +51,13 @@ web_search: "dobra wiara odliczenie VAT TSUE NSA orzecznictwo 2025"
 OBOWIĄZKOWY przy fakturach:
   → Wartość > 15 000 PLN brutto ORAZ
   → Towar/usługa z załącznika 15 do ustawy VAT
-  → ⚠️ Weryfikuj aktualny zał. 15 w ISAP — katalog uzupełniany
+  → ⚠️ Weryfikuj aktualny zał. 15 w ELI (RZĄD 1) — katalog uzupełniany
 
 Konto VAT (rachunek VAT):
   → Środki zablokowane — można przeznaczyć wyłącznie na VAT/ZUS/CIT/akcyzę
   → Wniosek o uwolnienie: do US w 60 dniach
 
-Naruszenie MPP: sankcja 100% podatku (art. 108a ust. 7 VAT) — weryfikuj w ISAP
+Naruszenie MPP: sankcja 100% podatku (art. 108a ust. 7 VAT) — weryfikuj w ELI (RZĄD 1)
 ```
 
 ### ⭐⭐⭐ ZWROT RÓŻNICY PODATKU — TERMINY I PRZEDŁUŻENIE WERYFIKACJI
@@ -168,7 +168,7 @@ VAT
 
 ✅ [VER: lexlege.pl — pełny tekst art. 87 ustawy o VAT, Dz.U. 2025 poz. 775
    t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP przed powołaniem w piśmie — akt ma
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) przed powołaniem w piśmie — akt ma
    nowelizacje po t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026
    poz. 507, 846]
 ```

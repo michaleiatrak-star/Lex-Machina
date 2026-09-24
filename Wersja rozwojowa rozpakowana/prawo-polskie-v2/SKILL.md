@@ -1,22 +1,13 @@
 ---
 name: prawo-polskie-v2
-version: "6.20"
+version: "6.30"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
 description: "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego."
 changelog: |
-  Wersja bieżąca: 6.18 (2026-09-10r, O-10): cezury czasowe aktów w vacatio legis
-  i zwolnienia grupowe 2025/570 → 2026/1195.
-  Poprzednio 6.17 (2026-09-10q, F-135): ROUTING-MAP — cezura czasowa reformy
-  antymobbingowej (vacatio legis do 4.11.2026).
-  Poprzednio 6.16 (2026-09-10o, F-181): ROUTING-MAP — ARiMR 2025/1363 → 2026/942.
-  Poprzednio 6.15 (2026-09-10j): ROUTING-MAP — łańcuch laboratoryjny
-  przepisany po wykryciu DWÓCH PODMIAN AKTU: 2022/2162 opisane jako nowa ustawa
-  o medycynie laboratoryjnej, a jest tekstem jednolitym STAREJ ustawy z 2001 r.;
-  2023/1517 opisane jako stara ustawa, a jest rozporządzeniem MSWiA. Podstawą
-  jest ustawa o medycynie laboratoryjnej, t.j. Dz.U. 2025 poz. 1295.
-  Pełna historia wszystkich wersji: references/CHANGELOG.md (ZASADA 15).
+  Wersja bieżąca: 6.30 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 — ISAP → ELI w zasadach workflow i sekcji Weryfikacja; ROUTING-MAP: instrukcje „weryfikuj w ISAP” → ELI.
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
@@ -38,9 +29,9 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Routing D
 
 ## ⛔ STAŁE ZASADY WORKFLOW (odsyłacz — NIE duplikować)
 
-> Sprawdzono 2026-07-06: wszystkie 4 zasady zgłoszone przez użytkownika
-> ("router→v3 pierwszy, ISAP każdy przepis, HYBRID-VAL przed .docx,
-> Karne: +kwalifikator") JUŻ są kanonicznie skodyfikowane w
+> Sprawdzono 2026-07-06, zaktualizowano 2026-09-23: zasady zgłoszone przez
+> użytkownika ("router→v3 pierwszy, przepisy przez ELI (nigdy z pamięci),
+> HYBRID-VAL przed .docx, Karne: +kwalifikator") JUŻ są kanonicznie skodyfikowane w
 > `prawny-router-v3/SKILL.md`, sekcja "PREFERENCJE UŻYTKOWNIKA (aktywne
 > globalnie)" jako UP-1 do UP-5 — nie duplikuj ich treści tutaj.
 
@@ -131,7 +122,7 @@ view dr-[XX]-[Nazwa]/modules/mod-[akt].md
 ```
 
 ## Weryfikacja
-- Teksty aktów: isap.sejm.gov.pl
+- Teksty aktów: kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md`) — E-1 api.sejm.gov.pl/eli | eli.gov.pl; E-2 isap.sejm.gov.pl jako adres dla człowieka; E-3 LEX/Legalis; E-4 ArsLege
 - Prawo UE: eur-lex.europa.eu
 - Orzeczenia: orzeczenia.ms.gov.pl | sn.pl | nsa.gov.pl
 
@@ -162,7 +153,7 @@ audyt-systemu-v4/references/mapa_dzu_*.md  ← rejestr Dz.U.
 
 | Sytuacja | Akcja |
 |---|---|
-| Nowy Dz.U. z vacatio legis znaleziony podczas weryfikacji ISAP | Dodaj `⏳ OCZEKUJE` do tabeli DR i do sekcji MONITORING |
+| Nowy Dz.U. z vacatio legis znaleziony podczas weryfikacji w ELI (RZĄD 1) | Dodaj `⏳ OCZEKUJE` do tabeli DR i do sekcji MONITORING |
 | Data wejścia w życie minęła | Zmień `⏳→✅ OK`, usuń z MONITORING, zaktualizuj mapa_dzu |
 | Akt uchylony przed wejściem | Status `❌`, usuń z MONITORING, odnotuj w AUDIT-JOURNAL |
 | Wejście w ciągu 90 dni od daty audytu | Zmień na `⚡ WCHODZI` — priorytetowa aktualizacja modułu |

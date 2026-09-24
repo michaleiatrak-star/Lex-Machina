@@ -5,7 +5,7 @@
 - Tekst jednolity: **Dz.U. 2023 poz. 1939** (ze zm.)
   ✅ VER: isap.sejm.gov.pl [2026-05-31]
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Zakres
 Reguluje: środki odurzające i psychotropowe, prekursory, nowe substancje psychoaktywne,

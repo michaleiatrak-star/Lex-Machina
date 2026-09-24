@@ -11,7 +11,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -249,7 +249,7 @@ PEŁNOMOCNICTWO A "STRONA UKRYTA" — działanie na rzecz osoby trzeciej:
 ## 5. CZYNNOŚĆ PRAWNA UKRYTA / POZORNA (art. 83 KC) — DR-02/16
 
 ```
-Weryfikacja: KC art. 83 (Dz.U. 2024 poz. 1360 t.j.)
+Weryfikacja: KC art. 83 (Dz.U. 2026 poz. 795 t.j.)
 
 PRZEPIS (art. 83 §1 KC):
   "Nieważne jest oświadczenie woli złożone drugiej stronie za jej zgodą

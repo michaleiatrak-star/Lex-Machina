@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -16,11 +16,11 @@
 ## BLOK G — DEFINICJE PODATKOWE
 
 ```
-PRZYCHÓD (art. 11 ust. 1 PIT / art. 12 ust. 1 CIT — weryfikuj w ISAP):
+PRZYCHÓD (art. 11 ust. 1 PIT / art. 12 ust. 1 CIT — weryfikuj w ELI (RZĄD 1)):
   = "Przychodami są otrzymane lub postawione do dyspozycji podatnika pieniądze
   i wartości pieniężne oraz wartość otrzymanych świadczeń w naturze
   i innych nieodpłatnych świadczeń"
-  → PIT: isap.sejm.gov.pl → ustawa o PIT Dz.U. 2026 poz. 592 t.j. art. 11
+  → PIT: ELI (RZĄD 1) → ustawa o PIT Dz.U. 2026 poz. 592 t.j. art. 11
     (⚠️ POPRAWIONE 2026-08-08: poprzednio "2024 poz. 226" — TEN numer
     JEST PRZESTARZAŁY, od tego czasu ogłoszono JESZCZE DWA kolejne
     teksty jednolite [2025 poz. 163, oraz aktualny 2026 poz. 592 z
@@ -53,7 +53,7 @@ DZIAŁALNOŚĆ GOSPODARCZA (podatki — art. 5a pkt 6 PIT — weryfikuj):
 
 ```
 Obowiązkowe przed każdym powołaniem:
-  1. isap.sejm.gov.pl → aktualny t.j. ustawy → konkretny art.
+  1. ELI (RZĄD 1) → aktualny t.j. ustawy → konkretny art.
   2. Jeśli zmieniła się definicja (nowelizacja) → weryfikuj datę zmiany i datę sprawy
   3. Dla terminów: sprawdź czy ZAWITY czy PRZEDAWNIENIA (różne skutki!)
 
@@ -71,7 +71,7 @@ Obowiązkowe przed każdym powołaniem:
 *DEFINICJE-KLUCZOWE.md · shared/ · Analizator Prawa Polskiego*
 *Weryfikacja źródeł: KC Dz.U. 2026 poz. 795 · KP Dz.U. 2025 poz. 277 · Prawo przedsiębiorców Dz.U. 2025 poz. 1480*
 *Interpelacje: pip.gov.pl · biznes.gov.pl · gov.pl · sejm.gov.pl*
-*Data weryfikacji: 2026-06-09 · Weryfikuj ZAWSZE przed powołaniem w ISAP*
+*Data weryfikacji: 2026-06-09 · Weryfikuj ZAWSZE przed powołaniem w ELI (RZĄD 1)*
 
 ---
 
@@ -93,7 +93,7 @@ PRZYCHÓD vs DOCHÓD (wyjaśnienie IZ6.nsf/6A0E7E37 — MF):
 KOSZTY PRZY UMOWIE ZLECENIA I O DZIEŁO:
   KUP = 20% przychodu pomniejszonego o składki ZUS potrącone przez płatnika
   Podstawa: art. 22 ust. 9 pkt 4 ustawy PIT
-  → Weryfikuj aktualne stawki: isap.sejm.gov.pl → PIT Dz.U. 2026 poz. 592 art. 22 (⚠️ zob. korekta wyżej — numer 2024 poz. 226 nieaktualny)
+  → Weryfikuj aktualne stawki: ELI (RZĄD 1) → PIT Dz.U. 2026 poz. 592 art. 22 (⚠️ zob. korekta wyżej — numer 2024 poz. 226 nieaktualny)
 
 ZALICZKA NA PODATEK:
   Przy stosunku pracy: pobiera PŁATNIK (pracodawca), art. 31 PIT

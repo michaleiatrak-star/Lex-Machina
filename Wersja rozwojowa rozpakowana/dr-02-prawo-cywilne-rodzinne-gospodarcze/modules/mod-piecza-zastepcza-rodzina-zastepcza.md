@@ -196,7 +196,7 @@ POWIĄZANIE proceduralne między pieczą zastępczą a systemem adopcyjnym
   zastępczej — dąż do NIEROZDZIELANIA (zasada ustawowa)
 □ Czy KANDYDACI NA rodzinę zastępczą spełniają wymogi formalne (⚠️
   szczegółowe kryteria kwalifikacyjne NIE zweryfikowane w pełni w tej
-  sesji — sprawdź na ISAP/u organizatora rodzinnej pieczy zastępczej
+  sesji — sprawdź w ELI (RZĄD 1)/u organizatora rodzinnej pieczy zastępczej
   przy konkretnej sprawie)
 □ Czy celem docelowym jest POWRÓT dziecka do rodziny biologicznej,
   UTRZYMANIE w pieczy zastępczej, czy DOCELOWA adopcja — to WPŁYWA na

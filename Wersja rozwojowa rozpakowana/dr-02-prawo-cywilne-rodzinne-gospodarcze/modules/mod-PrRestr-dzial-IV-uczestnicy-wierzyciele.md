@@ -126,6 +126,11 @@ przesłanki [NIEWERYFIKOWANE]).
 
 **Art. 91 — sprzeciw WIERZYCIELA/UCZESTNIKA co do UMIESZCZENIA
 wierzytelności:**
+- ✅ [VER] RZĄD 1 2026-09-12l, ponownie 2026-09-16 — `Dz.U. 2026 poz. 533`,
+  art. 91 ust. 1–2 (podniesione z RZĘDU 2: terminy zawite domyka wyłącznie
+  odczyt treści). ⚠️ Kanał obwieszczenia: moduł wskazuje niżej MSiG —
+  w tych postępowaniach obwieszczenia idą do Krajowego Rejestru Zadłużonych;
+  NIEROZSTRZYGNIĘTE, zweryfikuj przepisy o KRZ przy sprawie.
 - W postępowaniu UKŁADOWYM oraz SANACYJNYM — w terminie **DWÓCH
   TYGODNI (14 dni)** od dnia obwieszczenia (art. 89 ust. 2), uczestnicy
   postępowania mogą złożyć DO SĘDZIEGO-KOMISARZA sprzeciw co do
@@ -161,19 +166,9 @@ TYDZIEŃ od doręczenia odpisu. Nadzorca sądowy/zarządca jest
 OBOWIĄZANY w tym samym terminie złożyć [stanowisko/opinię — treść
 dokładna NIEWERYFIKOWANE, zdanie ucięte w źródle].
 
-**Terminy proceduralne:**
-- Sprzeciw do sędziego-komisarza: **dwa tygodnie** od obwieszczenia, o którym
-  mowa w art. 89 ust. 2 — ✅ [VER] RZĄD 1 2026-09-12l, odczyt treści
-  **art. 91 ust. 1 PrRestr** (`Dz.U. 2026 poz. 533`). Ten sam termin dla
-  sprzeciwu co do POMINIĘCIA wierzytelności (art. 91 ust. 2).
-  ⛔ Wcześniejsza adnotacja brzmiała „potwierdzone RZĄD 2, wielokrotnie
-     zgodne" — termin okazał się trafny, ale po doświadczeniu z art. 33 UPEA
-     (gdzie dwa serwisy RZĘDU 2B potwierdziły normę nieistniejącą) terminy
-     zawite domyka wyłącznie RZĄD 1.
-  ⚠️ Kanał obwieszczenia: wcześniejszy zapis wskazywał **MSiG**. Obwieszczenia
-     w postępowaniach restrukturyzacyjnych i upadłościowych idą do
-     **Krajowego Rejestru Zadłużonych** — ⛔ zweryfikuj przy sprawie, zanim
-     wskażesz klientowi, gdzie ma śledzić spis.
+**Terminy proceduralne (potwierdzone RZĄD 2, wielokrotnie zgodne):**
+- Sprzeciw do sędziego-komisarza: **14 dni** od obwieszczenia spisu
+  w MSiG.
 - Rozpatrzenie sprzeciwu przez sędziego-komisarza: **2 miesiące**
   (termin instrukcyjny — przekroczenie NIE unieważnia rozstrzygnięcia,
   ale sygnalizuje opóźnienie procesowe).

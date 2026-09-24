@@ -6,10 +6,12 @@
   ✅ VER: isap.sejm.gov.pl [2026-05-31] — weryfikuj aktualny t.j.
 
 **Fundusz Sprawiedliwości (Fundusz Pomocy Pokrzywdzonym oraz Pomocy Postpenitencjarnej):**
-- Rozporządzenie MS z 13.09.2017 r. w sprawie Funduszu Sprawiedliwości (Dz.U. 2017 poz. 1760 ze zm.)
-  ✅ VER: isap.sejm.gov.pl — weryfikuj aktualne rozporządzenie
+- Rozporządzenie MS z 13.09.2017 r. w sprawie Funduszu Pomocy Pokrzywdzonym oraz Pomocy
+  Postpenitencjarnej – Funduszu Sprawiedliwości — **t.j. Dz.U. 2025 poz. 1298**
+  ✅ [VER] RZĄD 1 2026-09-16 (ELI: t.j. obowiązujący; pierwotny Dz.U. 2017 poz. 1760 ma status
+  „akt posiada tekst jednolity" — powoływać t.j.)
 
-**Weryfikacja: isap.sejm.gov.pl i sprawiedliwosc.gov.pl/fundusz-sprawiedliwosci**
+**Weryfikacja: ELI (RZĄD 1) i sprawiedliwosc.gov.pl/fundusz-sprawiedliwosci**
 
 ## Zakres — Kompensata państwowa
 Ofiara może otrzymać kompensatę od Skarbu Państwa gdy:

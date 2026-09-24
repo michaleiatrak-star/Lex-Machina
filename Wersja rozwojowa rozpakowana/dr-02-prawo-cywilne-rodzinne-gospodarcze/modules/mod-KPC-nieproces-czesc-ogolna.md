@@ -26,7 +26,7 @@ POZIOM ŹRÓDŁA: Rząd 2 — lexlege.pl, arslege.pl, e-prawnik.pl,
 next-kp.pl, standardyprawa.pl (5 niezależnych serwisów, zgodnych
 ze sobą co do brzmienia i numeracji).
 
-⚠️ [ZALECANA WERYFIKACJA ISAP] — przed powołaniem KTÓREJKOLWIEK
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1] — przed powołaniem KTÓREJKOLWIEK
 jednostki redakcyjnej z tego modułu w piśmie procesowym potwierdź
 jej brzmienie w ISAP lub LEX/Legalis.
 
@@ -165,7 +165,7 @@ OBOWIĄZEK SĄDU [art. 510 § 2 ✓]
   □ Do wniosków PROKURATORA o wszczęcie postępowania nie stosuje
     się określonych przepisów — ⛔ KATALOG WYŁĄCZEŃ NIE ZOSTAŁ
     ODCZYTANY w tej sesji; jeżeli sprawa dotyczy wniosku
-    prokuratorskiego, sprawdź pełne brzmienie § 2 w ISAP
+    prokuratorskiego, sprawdź pełne brzmienie § 2 w ELI (RZĄD 1)
 ```
 
 ---

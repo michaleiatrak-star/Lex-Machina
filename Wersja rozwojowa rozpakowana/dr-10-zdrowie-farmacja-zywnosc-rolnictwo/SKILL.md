@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.42"
+version: "3.47"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, stawki, wymogu formalnego lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, kary, stawki refundacyjnej, dopłaty ani sygnatury wyłącznie z pamięci modelu.
 
@@ -50,8 +50,8 @@ Wykaz leków refundowanych: aktualizowany co 3 miesiące — zawsze sprawdzaj mz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -122,7 +122,7 @@ FARMACJA:
                refundacja leków Dz.U. 2026 poz. 253 t.j. (VER RZĄD 1 2026-09-10h), nadzór GIF/WIF i tryb
                odwoławczy, sankcje karne i kary pieniężne art. 124-129/127 PF)
   [✓] OK    mod-wyroby-medyczne
-              (ustawa o wyrobach medycznych Dz.U. 2022 poz. 974, MDR 2017/745,
+              (ustawa o wyrobach medycznych t.j. Dz.U. 2024 poz. 1620 — akt pierwotny 2022/974, MDR 2017/745,
                IVDR 2017/746, EUDAMED — odrębna regulacja od Prawa farmaceutycznego;
                wydzielony 2026-06-12 z mod-PrFarm CZĘŚĆ IX; scalony 2026-06-14
                z mod-ustawa-wyroby-medyczne — NOTA-7, duplikat usunięty)
@@ -242,7 +242,7 @@ view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/MAPA-AKTOW.md
 - Prawo pracy (personel medyczny, lekarze rezydenci) → `dr-04`
 - RODO w placówkach medycznych → `dr-11`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | urpl.gov.pl | gif.gov.pl | eur-lex.europa.eu | mz.gov.pl
+- Weryfikacja: ELI (RZĄD 1) | urpl.gov.pl | gif.gov.pl | eur-lex.europa.eu | mz.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

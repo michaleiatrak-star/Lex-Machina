@@ -44,7 +44,7 @@ STAN OBECNIE OBOWIĄZUJĄCY (od maja 2021): max **20 KM/H** dla
   jazdę powyżej 20 km/h, jest NIELEGALNE i wiąże się z konsekwencjami
   — potwierdzone w wielu źródłach, choć KONKRETNY przepis
   penalizujący SAMEGO użytkownika (a nie tylko sprzedawcę) wymaga
-  DODATKOWEJ weryfikacji na ISAP
+  DODATKOWEJ weryfikacji w ELI (RZĄD 1)
 
 ⭐ PROJEKTOWANE ZAOSTRZENIA (Ministerstwo Infrastruktury, projekt z
   lipca 2026, dyrektor: Dariusz Klimczak):

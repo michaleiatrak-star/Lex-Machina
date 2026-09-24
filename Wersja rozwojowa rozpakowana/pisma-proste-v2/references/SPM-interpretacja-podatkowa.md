@@ -72,13 +72,16 @@ faktycznym LUB zdarzeniu przyszłym).*
   życie nowych przepisów)
 ```
 
-## ZASKARŻENIE — ⭐ TERMIN ZAWITY 14 DNI (nie 30!)
+## ZASKARŻENIE — TERMIN 30 DNI
 
 ```
-□ Skarga do WSA — w TERMINIE 14 DNI od doręczenia interpretacji
-  (⚠️ art. 53 §3 PPSA — TERMIN KRÓTSZY niż standardowe 30 dni dla
-  większości innych skarg administracyjnych — CZĘSTY błąd praktyczny,
-  UWAŻAJ przy liczeniu terminu)
+□ Skarga do WSA — w TERMINIE 30 DNI od doręczenia interpretacji
+  (art. 53 § 1 PPSA — obejmuje wprost akty z art. 3 § 2 pkt 4a; ✅ [VER] RZĄD 1 2026-09-16m,
+  PPSA t.j. Dz.U. 2026 poz. 143; Ordynacja nie przewiduje terminu szczególnego)
+□ Wnosi się za pośrednictwem organu, który wydał interpretację (art. 54 § 1)
+⛔ KOREKTA 2026-09-16m: poprzednia wersja podawała „14 DNI (art. 53 § 3 PPSA — <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
+  termin krótszy niż standardowe 30 dni)". Art. 53 § 3 to 6 miesięcy dla
+  prokuratora, RPO i RPD — skrócony termin nie istnieje.
 ```
 
 ## POWIĄZANE INSTRUMENTY (ładuj `mod-interpretacje-definicje-podatkowe.md` po szczegóły)

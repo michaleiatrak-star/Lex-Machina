@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.8"
+version: "5.16.13"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,25 +39,8 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.5 (2026-09-10w, O-11): MP10-koszty — PIERWSZE PYTANIE
-  W KAŻDEJ SPRAWIE to czy strona w ogóle płaci. Trzy niezależne warstwy zwolnień:
-  podmiotowe z mocy ustawy (art. 96 ust. 1 KSCU — 18 kategorii), przedmiotowe
-  (art. 95) i na wniosek (art. 100–103). Dotąd moduł wskazywał wyłącznie
-  zwolnienie alimentacyjne. Pełny katalog: shared/TABELE-OPLAT.md sekcja 2b.
-  Wersja 5.16.4 (2026-09-10t, O-11): MP10-koszty oznaczony jako WARSTWA
-  DRUGA — rozpoznaje rodzaj opłaty i to, za co jest pobierana, ale NIE jest
-  źródłem liczby. Kwoty bierze się z shared/TABELE-OPLAT.md. Dopisana pułapka
-  art. 13 ust. 2 KSCU (cap 100 000 zł od 23.09.2025) oraz zwolnienie
-  alimentacyjne z art. 96 ust. 1 pkt 2 jako pierwsze pytanie w sprawie.
-  Wersja 5.16.3. Pełna historia (4.0.0-5.16.3) w
-  references/CHANGELOG.md — wczytuj na żądanie, NIE trzymaj tu ponownie
-  (F-78, 2026-08-20: to drugie takie porządkowanie tego pola po 2026-07-12;
-  następne audyty dopisujące wpisy wersji NIECH DOPISUJĄ do
-  references/CHANGELOG.md, NIE do tego pola YAML).
-  Skrót ostatniej zmiany: 5.16.3 — F-140, naprawa regresji dyskowej:
-  przywrócono wersję i odtworzono wpisy 5.16.0-5.16.2 z AUDIT-JOURNAL;
-  ponownie naprawiono art. 328 § 1 KPC w MD5-terminy.md (zweryfikowany
-  niezależnie, t.j. Dz.U. 2026 poz. 468).
+  Wersja bieżąca: 5.16.13 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (9 plików); ISAP pozostaje adres…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 # Analizator Dowodów Procesowych v5
@@ -606,7 +589,7 @@ H1. Sprawa zawiera zidentyfikowane roszczenia / zarzuty / przedmioty sporu?
     - Stanowisko Powoda (z materiału lub "nieznane — brak pisma Powoda")
     - Stanowisko Pozwanej
     - Stosowne przepisy prawne:
-      ⛔ HARDGATE: każdy przepis musi mieć etykietę "wymaga weryfikacji w ISAP"
+      ⛔ HARDGATE: każdy przepis musi mieć etykietę "wymaga weryfikacji w ELI (RZĄD 1)"
       Nie cytuj treści przepisu z pamięci — tylko art. + ustawa + oznaczenie HARDGATE
     - Rekomendacje procesowe: konkretne wnioski, żądania, argumenty
     - Przycisk drill-down: "Głębsza analiza DIS-XX ↗" → sendPrompt
@@ -645,7 +628,7 @@ I1. Dashboard wygenerowany (B1=TAK i KROK 4 wykonany)?
                   ## Kwestie sporne DIS
                   ## Pokrycie przesłanek i luki
                   ## Rekomendacje procesowe
-                  Każdy przepis → ⚠ [WYMAGA WERYFIKACJI ISAP]
+                  Każdy przepis → ⚠ [WYMAGA WERYFIKACJI RZĄD 1]
 
     EKSPORT-CSV:  tabela evidence[] jako CSV (id, nazwa, typ, poziom, score, alerty, opis)
 
@@ -702,7 +685,7 @@ KROK 3B.1 — ASPEKTY GŁÓWNE/POBOCZNE:
 KROK 3B.2 — MAPOWANIE NA PRZEPISY (dawne "KROK 4a.3"):
   view /mnt/skills/user/shared/MOD-MAPA-PRZEPISOW.md
   Zmapuj aspekty z KROK 3B.1 na przepisy kandydujące (oznaczenia
-  ⚠️ [akt] art. [X] (NIEWERYFIKOWANE) — bez wywoływania ISAP na tym etapie)
+  ⚠️ [akt] art. [X] (NIEWERYFIKOWANE) — bez wywoływania ELI/ISAP na tym etapie)
   → wynik: mapa_przepisow{}
 
 KROK 3B.3 — SELEKCJA DOWODÓW (dawne "KROK 4a.5"):
@@ -783,7 +766,7 @@ Tablice do wypełnienia: `evidence[]` · `alerts_data{}` · `coverage_data[]`
 
 **Zawsze:** ocena siły = liczba + uzasadnienie · alert = `[⚠ KOD-N]` + podstawa
 + rekomendacja · sprzeczność = cytat + lokalizacja + status · luka = konkretne
-uzupełnienie · terminy zawite oznaczone ⚠ ZAWITY · przepisy weryfikuj w ISAP.
+uzupełnienie · terminy zawite oznaczone ⚠ ZAWITY · przepisy weryfikuj w ELI (RZĄD 1).
 ⚠️ DODANE 2026-07-15 (na wyraźne polecenie użytkownika): każdy cytat z
 orzeczenia LUB z interpretacji znalezionej online (komentarz, artykuł,
 interpretacja urzędowa) MUSI mieć lokalizację w źródle (strona/teza/punkt/
@@ -795,7 +778,7 @@ zewnętrznych — jeden spójny standard w całym systemie.
 
 **Nigdy:** ocena bez kryteriów · pominięcie alertu legalności nagrań · mylenie
 terminów instrukcyjnych z zawitymi · orzeczenia z pamięci · sugerowanie że
-analiza zastępuje poradę prawnika · LEG-CONTRA bez weryfikacji w ISAP.
+analiza zastępuje poradę prawnika · LEG-CONTRA bez weryfikacji w ELI (RZĄD 1).
 
 **Progi jakości — analiza niedopuszczalna gdy:** wnioski bez źródła · cytaty
 mieszane z parafrazą · nieweryfikowane orzeczenia · hipoteza śledcza jako fakt
@@ -896,7 +879,7 @@ Dla każdej tezy T-X z dashboardu wykonaj trzy kroki:
 ```
 KROK KC1 — Skutek bezpośredni:
   "Co ta teza UDOWADNIA w sensie prawnym?"
-  → wskaż normę prawną którą teza realizuje (z W1.4 / ISAP ⚠ HARDGATE)
+  → wskaż normę prawną którą teza realizuje (z W1.4 / ELI RZĄD 1 ⚠ HARDGATE)
   → format: C-X.1: [skutek] → [norma]
 
 KROK KC2 — Skutek pośredni:

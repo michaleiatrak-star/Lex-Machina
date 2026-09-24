@@ -176,7 +176,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 └─ PO zaborze, cel: WYMUSZENIE rozporządzenia mieniem / zaprzestania działalności
     └─ → ART. 282 KK — WYMUSZENIE ROZBÓJNICZE
          Kara: 1–10 lat pozbawienia wolności
-         ⚠️ Źródło: Dz.U. 2025 poz. 383 t.j. — weryfikuj w ISAP
+         ⚠️ Źródło: Dz.U. 2025 poz. 383 t.j. — weryfikuj w ELI (RZĄD 1)
          ⚠️ WĘZEŁ GRANICZNY 282 vs 191 §2 KK:
          → 282: żądanie mienia + przemoc/groźba
          → 191 §2: zmuszanie do zaprzestania działalności gospodarczej
@@ -284,7 +284,7 @@ integralność/funkcjonalność CUDZEJ rzeczy?
    │
    ├─ Szkoda NIE PRZEKRACZA 800 zł (próg od 1.10.2023 — WCZEŚNIEJ 500 zł
    │  od 2018 r., jeszcze wcześniej ułamek minimalnego wynagrodzenia —
-   │  ⛔ ZAWSZE weryfikuj aktualny próg w ISAP przed sprawą, to "czyn
+   │  ⛔ ZAWSZE weryfikuj aktualny próg w ELI (RZĄD 1) przed sprawą, to "czyn
    │  przepołowiony" o historycznie zmiennej granicy)
    │   → WYKROCZENIE — ART. 124 §1 KW — areszt, ograniczenie wolności
    │     albo grzywna. Ściganie NA WNIOSEK pokrzywdzonego. Karalne też
@@ -344,7 +344,7 @@ ZBIEG Z INNYMI PRZEPISAMI:
     niż wartość skradzionego mienia (orzecznictwo)
   Mienie ZNACZNEJ WARTOŚCI lub dobro o SZCZEGÓLNYM ZNACZENIU DLA KULTURY
     (art. 288 §1/3 w takich przypadkach) → zaostrzona odpowiedzialność —
-    ⛔ weryfikuj aktualny próg "znacznej wartości" w ISAP (powiązany z
+    ⛔ weryfikuj aktualny próg "znacznej wartości" w ELI (RZĄD 1) (powiązany z
     wielokrotnością minimalnego wynagrodzenia, zmienia się co roku)
 
 ŚRODKI KOMPENSACYJNE:

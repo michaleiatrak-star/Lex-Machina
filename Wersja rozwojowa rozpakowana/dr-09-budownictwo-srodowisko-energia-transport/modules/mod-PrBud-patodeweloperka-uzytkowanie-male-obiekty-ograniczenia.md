@@ -169,7 +169,7 @@ WYMAGA WYŁĄCZNIE ZGŁOSZENIA (nie pozwolenia):
     inwestora, budowa na WŁASNY UŻYTEK (nie komercyjny), projekt
     budowlany i kierownik budowy WCIĄŻ WYMAGANE (mimo braku pozwolenia)
   □ Inne kategorie obiektów wg pełnej listy art. 29-30 — ZAWSZE
-    weryfikuj na ISAP przy konkretnej sprawie, katalog jest OBSZERNY
+    weryfikuj w ELI (RZĄD 1) przy konkretnej sprawie, katalog jest OBSZERNY
     i BYŁ WIELOKROTNIE nowelizowany
 ```
 
@@ -365,4 +365,4 @@ szczególnego zagrożenia powodzią (art. 77 Prawa wodnego, zakazy,
 procedura zwolnienia). Odnotowano niepewności: status projektu minimalnej
 powierzchni lokalu użytkowego (25 m² — może nie wejść w życie w tej
 formie), dokładny wymiar konsekwencji dalszego użytkowania mimo
-wstrzymania (art. 71a) — oznaczone do weryfikacji na ISAP.
+wstrzymania (art. 71a) — oznaczone do weryfikacji w ELI (RZĄD 1).

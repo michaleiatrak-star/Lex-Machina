@@ -25,7 +25,7 @@ dla utrzymania siebie i rodziny (art. 102 §1 KSCU).*
 - **art. 1171 §1 KPC** — obowiązek złożenia oświadczenia majątkowego
 - **art. 111 §1 KSCU** — cofnięcie zwolnienia gdy okoliczności ustaną
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl przed użyciem.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1) przed użyciem.
 
 ---
 
@@ -135,7 +135,7 @@ i chce go przywrócić (art. 168 KPC).*
 - **art. 170 KPC** — postanowienie sądu o przywróceniu / odmowie przywrócenia
 
 > ⚠ Termin 7-dniowy liczy się od ustania przeszkody, nie od jej zaistnienia.
-> Weryfikuj przepisy na isap.sejm.gov.pl.
+> Weryfikuj przepisy na ELI (RZĄD 1).
 
 ---
 
@@ -264,7 +264,7 @@ zakończonej sprawy sądowej (art. 9 §1 KPC).*
 - **art. 9 §2 KPC** — prawo do sporządzania odpisów, kopii, fotokopii
 - **art. 525 KPC** — wgląd w sprawie nieprocesowej
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1).
 
 ---
 
@@ -345,7 +345,7 @@ komornika (art. 139¹ KPC) jest warunkiem skuteczności doręczenia.*
   o braku możliwości jego ustalenia
 - **Rozporządzenie MS z 15.02.2016 r.** — opłata komornicza 60 zł
 
-> ⚠ Weryfikuj aktualną stawkę i przepisy na isap.sejm.gov.pl.
+> ⚠ Weryfikuj aktualną stawkę i przepisy na ELI (RZĄD 1).
 
 ---
 
@@ -445,7 +445,7 @@ lub inne orzeczenie, od którego przysługuje sprzeciw (art. 398²² KPC).*
 - **art. 398²³ §2 KPC** — skutek: orzeczenie traci moc, sprawę rozpoznaje sąd
 - **art. 39823 §3 KPC** — wymogi formalne sprzeciwu
 
-> ⚠ Weryfikuj oznaczenie artykułów (§ i superscripty) na isap.sejm.gov.pl
+> ⚠ Weryfikuj oznaczenie artykułów (§ i superscripty) na ELI (RZĄD 1)
 > — numeracja art. 398²² i 398²³ KPC może różnić się w zapisie edytorskim.
 
 ---

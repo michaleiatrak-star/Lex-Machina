@@ -70,7 +70,7 @@ Nie tylko pracownicy:
   □ Pracownicy (art. 2 ustawy o ZZ)
   □ Osoby wykonujące pracę zarobkową (zleceniobiorcy, samozatrudnieni)
     gdy mają prawo koalicji (od nowelizacji 2019)
-  ⚠️ Weryfikuj aktualne przepisy o przynależności w ISAP.
+  ⚠️ Weryfikuj aktualne przepisy o przynależności w ELI (RZĄD 1).
 ```
 
 ### Układy zbiorowe pracy (nowa ustawa Dz.U. 2025 poz. 1661)
@@ -82,7 +82,7 @@ Rejestracja: Okręgowy Inspektor Pracy (zakładowe) / MRiPS (ponadzakładowe)
 Zasada uprzywilejowania: UZP stosuje się zamiast KP — korzystniej niż KP
 
 ⚠️ Dla szczegółów zawierania, rejestracji i wypowiadania UZP:
-   → zawsze weryfikuj aktualny tekst Dz.U. 2025 poz. 1661 w ISAP
+   → zawsze weryfikuj aktualny tekst Dz.U. 2025 poz. 1661 w ELI (RZĄD 1)
 ```
 
 ### Spory zbiorowe i strajk (nowa ustawa Dz.U. 2025 poz. 1661)

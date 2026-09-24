@@ -10,7 +10,7 @@
 > **Format każdego rekordu:** Hasło | Źródło | Definicja | Podstawa prawna | Reguła
 >
 > ⛔ HARD GATE: definicje wymienione ze źródłem interpelacji są wykładnią
-> ministerialną; definicje ustawowe — weryfikuj ZAWSZE aktualny t.j. w ISAP.
+> ministerialną; definicje ustawowe — weryfikuj ZAWSZE aktualny t.j. w ELI (RZĄD 1).
 
 > ⚡ **ZMIANA STRUKTURALNA 2026-08-20 (F-78, priorytet 2):** ten plik był
 > 1975 linii. Treść 20 CZĘŚCI (I-XX) PODZIELONA na 8 plików w podkatalogu
@@ -107,7 +107,7 @@ XX+XVII). To NIE jest błąd tego podziału — odziedziczone po oryginale.
 ## QUALITY GATE — PRZED POWOŁANIEM DEFINICJI ORKA
 
 ```
-□ Sprawdź czy hasło ma definicję LEGALNĄ (ustawową) → ZAWSZE aktualizuj przez ISAP
+□ Sprawdź czy hasło ma definicję LEGALNĄ (ustawową) → ZAWSZE aktualizuj przez ELI (RZĄD 1)
 □ Sprawdź datę interpelacji źródłowej — akty prawne mogły się zmienić
 □ Zastosuj odpowiednią ORKA-REG (szczególnie REG-01 i META-01)
 □ Dla kandydatów BAS-107–125: pobierz pełny tekst odpowiedzi (API Sejmu / ręcznie)

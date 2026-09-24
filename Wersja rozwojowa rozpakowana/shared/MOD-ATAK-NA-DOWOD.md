@@ -15,7 +15,7 @@
 >   - Literatura: FindLaw Documentary Evidence 2024; Garner/Scalia "Making Your Case";
 >     MP5-atak.md (system); inwestum.pl art. 170 KPK 2025; adwokat-sechman.pl 2023
 >
-> ⛔ HARD GATE: normy, artykuły i sygnatury — weryfikuj w ISAP i orzeczenia.ms.gov.pl
+> ⛔ HARD GATE: normy, artykuły i sygnatury — weryfikuj w ELI (RZĄD 1) i orzeczenia.ms.gov.pl
 > przed powołaniem w piśmie. Moduł podaje przepisy jako punkty startowe.
 
 ---

@@ -216,4 +216,4 @@ ustawę o radiofonii i telewizji (art. 16b, 53, rola KRRiT), przepisy
 branżowe dodatkowe (żywność, leki, alkohol, tytoń), oraz Kodeks Etyki
 Reklamy jako samoregulację (Rozdział IV, zakazy wykraczające poza
 ustawowe minimum). Odnotowano niepewność co do pełnej listy przesłanek
-z art. 16b ust. 2 uRTV — oznaczoną do weryfikacji na ISAP.
+z art. 16b ust. 2 uRTV — oznaczoną do weryfikacji w ELI (RZĄD 1).

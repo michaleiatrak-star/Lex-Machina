@@ -2,18 +2,18 @@
 
 Status: moduł klasy wzorcowej. Stan metodyczny: 2026-06-02.
 Normy ISO są standardami dobrowolnymi — nie aktami prawnymi. Weryfikuj ich aktualność
-na iso.org lub PKN (Polski Komitet Normalizacyjny). Powiązane akty prawne weryfikuj w ISAP.
+na iso.org lub PKN (Polski Komitet Normalizacyjny). Powiązane akty prawne weryfikuj w ELI (RZĄD 1).
 
 ## Akt prawny / źródło
 - ISO 37301:2021 — Compliance management systems. Requirements with guidance for use
   [VER: iso.org/standard/75080.html — norma obowiązująca od 13.04.2021]
 - ISO 19600:2014 — Compliance management systems (poprzedniczka, wycofana po zastąpieniu przez 37301)
 - Ustawa o ochronie sygnalistów — Dz.U. 2024 poz. 928 ze zm.
-  [WYMAGA WERYFIKACJI ISAP: isap.sejm.gov.pl — sprawdź aktualny tekst jednolity]
+  [WYMAGA WERYFIKACJI RZĄD 1: ELI (RZĄD 1) — sprawdź aktualny tekst jednolity]
 - Kodeks karny art. 296 (niedopełnienie obowiązków) — Dz.U. 2025 poz. 383 ze zm.
-  [WYMAGA WERYFIKACJI ISAP]
+  [WYMAGA WERYFIKACJI RZĄD 1]
 - Ustawa AML — Dz.U. 2023 poz. 1124 ze zm.
-  [WYMAGA WERYFIKACJI ISAP]
+  [WYMAGA WERYFIKACJI RZĄD 1]
 
 **Uwaga:** ISO 37301 zastąpiła ISO 19600 — nie powoływać się na ISO 19600 w nowych dokumentach.
 ISO 37301 jest certyfikowalna (w odróżnieniu od ISO 19600). Certyfikacja przez jednostki

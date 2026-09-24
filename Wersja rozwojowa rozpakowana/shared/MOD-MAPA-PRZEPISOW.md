@@ -159,7 +159,7 @@ WYZWALACZ: użytkownik podaje artykuł/akt (np. "a co z art. 415 KC?",
 
 WYKONANIE:
   1. Oznacz podany przepis jako ⚠️ [nazwa aktu] art. [X] (NIEWERYFIKOWANE)
-     — bez weryfikacji ISAP w tym kroku.
+     — bez weryfikacji w ELI (RZĄD 1) w tym kroku.
   2. Wykonaj §3 (głębokość + zgodność) DLA TEGO przepisu, względem tego
      samego wyniku analizy/aspektu, którego dotyczyło pytanie (jeśli
      kontekst niejasny — zapytaj którego aspektu dotyczy, jedno pytanie).

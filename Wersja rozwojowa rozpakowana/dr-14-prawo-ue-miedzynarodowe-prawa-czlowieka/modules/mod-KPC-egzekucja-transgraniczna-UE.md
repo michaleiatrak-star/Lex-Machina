@@ -164,7 +164,7 @@ Przed odpowiedzią lub pismem zastosuj:
 
 ```
 Kodeks postępowania cywilnego (KPC):
-  Dz.U. 2026 poz. 468 t.j. ze zm. — weryfikuj w ISAP przed cytowaniem
+  Dz.U. 2026 poz. 468 t.j. ze zm. — weryfikuj w ELI (RZĄD 1) przed cytowaniem
   ✅ VER: isap.sejm.gov.pl 2026-06-07
 
 Rozporządzenia UE — egzekucja i procedury transgraniczne:
@@ -181,7 +181,7 @@ Rozporządzenia UE — egzekucja i procedury transgraniczne:
   ✅ VER: eur-lex.europa.eu 2026-06-07
 
 Prawo prywatne międzynarodowe (ustawa):
-  Dz.U. 2023 poz. 503 t.j. — weryfikuj w ISAP
+  Dz.U. 2023 poz. 503 t.j. — weryfikuj w ELI (RZĄD 1)
   ✅ VER: isap.sejm.gov.pl 2026-06-07
 
 Kluczowe procedury:

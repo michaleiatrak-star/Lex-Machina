@@ -8,7 +8,7 @@
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem definicji, artykułu lub Dz.U.:**
-1. Zweryfikuj aktualny tekst jednolity w `isap.sejm.gov.pl`
+1. Zweryfikuj aktualny tekst jednolity w `ELI (RZĄD 1)`
 2. Definicje ulegają zmianie nowelizacjami — NIE cytuj z pamięci modelu.
 
 ---
@@ -21,7 +21,7 @@
 PRACOWNIK (art. 2 KP):
   "Pracownikiem jest osoba zatrudniona na podstawie umowy o pracę, powołania,
   wyboru, mianowania lub spółdzielczej umowy o pracę."
-  → KP Dz.U. 2025 poz. 277 t.j. (weryfikuj w ISAP)
+  → KP Dz.U. 2025 poz. 277 t.j. (weryfikuj w ELI (RZĄD 1))
   Minimalny wiek: 15 lat (młodociani art. 190 KP); zakaz pracy dzieci < 15 lat
 
 PRACODAWCA (art. 3 KP):
@@ -318,7 +318,7 @@ FORMA PISEMNA UMOWY (art. 29 §2 KP — stanowisko MRPiPS, INT7.nsf/4C1435A0):
   (zmiana 2014 — projekt druk nr 2180).
   Brak potwierdzenia → wykroczenie pracodawcy (art. 281 pkt 2 KP):
     grzywna od 1 000 zł do 30 000 zł
-  ⚠️ Weryfikuj aktualne kwoty: isap.sejm.gov.pl → KP Dz.U. 2025 poz. 277 art. 29, 281
+  ⚠️ Weryfikuj aktualne kwoty: ELI (RZĄD 1) → KP Dz.U. 2025 poz. 277 art. 29, 281
 
 POTWIERDZENIE PRZED DOPUSZCZENIEM DO PRACY:
   Ministerstwo: wymóg potwierdzenia ma nastąpić PRZED DOPUSZCZENIEM do pracy (nie w dniu
@@ -340,7 +340,7 @@ OBOWIĄZEK OBECNOŚCI (art. 22 §1 + art. 100 §2 pkt 1 KP):
   KONSEKWENCJE NIEUSPRAWIEDLIWIONEJ NIEOBECNOŚCI:
   → podstawa do rozwiązania stosunku pracy (art. 52 KP)
   → brak prawa do wynagrodzenia za czas niewykonywania pracy (art. 80 KP)
-  ⚠️ Rozporządzenie o usprawiedliwianiu — weryfikuj aktualne Dz.U. w ISAP
+  ⚠️ Rozporządzenie o usprawiedliwianiu — weryfikuj aktualne Dz.U. w ELI (RZĄD 1)
 ```
 
 #### H.1.3 Urlopy rodzicielskie (INT7.nsf/785F9759, INT7.nsf/573BBE0D — Ministerstwo Pracy)
@@ -365,14 +365,14 @@ URLOP WYCHOWAWCZY (art. 186–186⁷ KP) — stanowisko ministerstwa:
   URLOP RODZICIELSKI (wg stanu z interpelacji INT7):
   → do 26 tygodni niezależnie od liczby dzieci
   → można łączyć z pracą do 1/2 etatu
-  ⚠️ Weryfikuj aktualne wymiary: isap.sejm.gov.pl → KP art. 1791–1795 (liczne zmiany)
+  ⚠️ Weryfikuj aktualne wymiary: ELI (RZĄD 1) → KP art. 1791–1795 (liczne zmiany)
   web_search: "urlop rodzicielski wymiar aktualne 2025 2026 art 1867 KP"
 ```
 
 #### H.1.4 Wypadek przy pracy — 4 elementy (pip.gov.pl — organ urzędowy)
 
 ```
-DEFINICJA USTAWOWA (art. 3 ustawy wypadkowej Dz.U. 2025 t.j. — weryfikuj w ISAP):
+DEFINICJA USTAWOWA (art. 3 ustawy wypadkowej Dz.U. 2025 t.j. — weryfikuj w ELI (RZĄD 1)):
   "Nagłe zdarzenie wywołane przyczyną zewnętrzną powodujące uraz lub śmierć,
   które nastąpiło w związku z pracą."
 
@@ -425,7 +425,7 @@ NIEOBECNOŚĆ USPRAWIEDLIWIONA — elementy (rozp. MPiPS 1996, IZ6.nsf/5187F47C)
   → Pracodawca musi być UPRZEDZONY lub ZAWIADOMIONY PODCZAS TRWANIA nieobecności
   → Nieobecność wymaga USPRAWIEDLIWIENIA zgodnie z rozporządzeniem
   → Zwolnienie chorobowe wystawione przez lekarza = standardowe usprawiedliwienie
-  → Weryfikuj rozporządzenie w ISAP (kilkukrotnie zmieniane)
+  → Weryfikuj rozporządzenie w ELI (RZĄD 1) (kilkukrotnie zmieniane)
 ```
 
 ---

@@ -548,7 +548,7 @@ WYNIK ISU-2 per umowę:
 
 ```
 ⛔ HARD GATE: Nie cytuj poniższych norm i sygnatur z pamięci modelu.
-   Każdą zweryfikuj przez web_search lub isap.sejm.gov.pl przed użyciem w piśmie.
+   Każdą zweryfikuj przez web_search lub ELI (RZĄD 1) przed użyciem w piśmie.
 
 NORMY KRAJOWE:
   □ Art. 65 §1 KC — wykładnia uwzględnia okoliczności złożenia oświadczenia

@@ -26,7 +26,7 @@ nowelizację z 26.01.2026, opublikowane przez RCL, "szeroki zakres
 wprowadzanych zmian" — luty 2026)
 ✅ VER: portaloswiatowy.pl (cytuje bezpośrednio "tekst jedn.: Dz.U. z 2026 r.,
 poz. 300"), rcl.gov.pl (komunikat RCL o nowym tekście ujednoliconym) —
-2026-08-14 (F-77). ⚠️ przy każdym powołaniu i tak sprawdź na ISAP, czy nie
+2026-08-14 (F-77). ⚠️ przy każdym powołaniu i tak sprawdź w ELI (RZĄD 1), czy nie
 doszło do kolejnej nowelizacji po 2026-08-14.
 
 Dział regulujący przedmiot tego modułu: **Dział poświęcony przepisom przejściowym

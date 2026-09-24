@@ -3,7 +3,7 @@
 ## Akt prawny / źródło
 - Ustawa o referendum lokalnym — **Dz.U. 2025 poz. 472 t.j.**, stan t.j. 14.03.2025. ✅ RZĄD 1 ELI, VER 2026-08-28.
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem.
 
 ## Zakres
 Referendum lokalne: forma bezpośredniego udziału mieszkańców w zarządzaniu JST.

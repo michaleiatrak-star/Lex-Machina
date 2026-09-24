@@ -290,7 +290,7 @@ Kolizje między narracją przeciwnika a dowodami w aktach:
 
 Jak obalić narrację przeciwnika:
   Argumentem faktycznym:
-  Argumentem prawnym (przepis do weryfikacji w ISAP):
+  Argumentem prawnym (przepis do weryfikacji w ELI (RZĄD 1)):
   Pytaniami na rozprawie:
   Wnioskiem dowodowym:
 ```
@@ -326,7 +326,7 @@ Strategie neutralizacji:
       Jak sformułować:
 
   [D] Obezwładnienie — wykazanie, że fakt jest prawnie irrelewantny:
-      Uzasadnienie prawne (przepis do weryfikacji w ISAP):
+      Uzasadnienie prawne (przepis do weryfikacji w ELI (RZĄD 1)):
 
   [E] Przyjęcie i odwrócenie — przyznanie faktu i wykazanie,
       że wzmacnia on własną pozycję:

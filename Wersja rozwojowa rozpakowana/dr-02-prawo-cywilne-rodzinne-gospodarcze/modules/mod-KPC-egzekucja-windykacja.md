@@ -100,7 +100,7 @@ CZY roszczenie pieniężne, dłużnik w Polsce, max 3-letnie?
 | Upominawczy | Roszczenie pieniężne, niebudzące wątpliwości | **Sprzeciw** | 2 tygodnie od doręczenia | Nakaz traci moc; sprawa do trybu zwykłego |
 | EPU | Roszczenie pieniężne, nie przedawnione | **Sprzeciw** | 2 tygodnie od doręczenia | Nakaz traci moc; przekazanie do SR właściwości ogólnej dłużnika |
 
-> ⚠️ Terminy ZAWITE — niedotrzymanie = utrata prawa do zaskarżenia. Weryfikuj art. 491–505 KPC w ISAP.
+> ⚠️ Terminy ZAWITE — niedotrzymanie = utrata prawa do zaskarżenia. Weryfikuj art. 491–505 KPC w ELI (RZĄD 1).
 
 ### Elementy wezwania do zapłaty
 
@@ -175,7 +175,7 @@ Formy zabezpieczenia roszczeń pieniężnych:
 Termin na wniesienie pozwu po udzieleniu zabezpieczenia: 2 tygodnie (art. 733 KPC)
   → Po upływie: zabezpieczenie upada
 
-⚠️ Weryfikuj art. 730–757 KPC w ISAP.
+⚠️ Weryfikuj art. 730–757 KPC w ELI (RZĄD 1).
 ```
 
 ---
@@ -224,7 +224,7 @@ Z NIERUCHOMOŚCI (art. 921–1013 KPC):
   → Wpis w KW o wszczęciu → opis i oszacowanie (rzeczoznawca)
   → Licytacja I: cena wywołania = ¾ wartości oszacowania
   → Licytacja II: cena wywołania = ⅔ wartości oszacowania
-  → Podział sumy: kolejność z art. 1025 KPC — weryfikuj w ISAP
+  → Podział sumy: kolejność z art. 1025 KPC — weryfikuj w ELI (RZĄD 1)
 
 Z WIERZYTELNOŚCI (art. 895–912 KPC):
   → Zajęcie wierzytelności u dłużnika dłużnika
@@ -233,7 +233,7 @@ Z WIERZYTELNOŚCI (art. 895–912 KPC):
 
 ### Koszty egzekucji (u.k.k. — Dz.U. 2024 poz. 377)
 
-> ⚠️ Weryfikuj aktualne stawki w u.k.k. w ISAP.
+> ⚠️ Weryfikuj aktualne stawki w u.k.k. w ELI (RZĄD 1).
 
 ```
 Opłata egzekucyjna (od dłużnika):
@@ -311,7 +311,7 @@ Mediacja (art. 183¹ i n. KPC):
 
 ## 9. KOSZTY SĄDOWE (KSCU — Dz.U. 2024 poz. 959)
 
-> ⚠️ Weryfikuj aktualne stawki w KSCU w ISAP.
+> ⚠️ Weryfikuj aktualne stawki w KSCU w ELI (RZĄD 1).
 
 | Tryb | Opłata |
 |---|---|

@@ -19,7 +19,7 @@ Etap 3 (prawo i ryzyka)  → przygotowanie do W1 (lista robocza przepisów)
 Etap 4 (plan pisma)      → CHECKPOINT: po Etapie 4 wejdź do W1 i wykonaj
                             cały automat stanów (W1 → zatwierdzenie → W2 → W3)
 Etap 5 (projekt pisma)   → = W2 (redakcja z placeholderami ⚠️)
-Etap 6 (audyt końcowy)   → = W3 (weryfikacja ISAP + PODMIOT-GATE + WALIDACJA +
+Etap 6 (audyt końcowy)   → = W3 (weryfikacja w ELI (RZĄD 1) + PODMIOT-GATE + WALIDACJA +
                             AUDYT-KONCOWY); obowiązuje ZAKAZ-7 i wszystkie
                             inne zakazy bezwzględne z SKILL.md
 

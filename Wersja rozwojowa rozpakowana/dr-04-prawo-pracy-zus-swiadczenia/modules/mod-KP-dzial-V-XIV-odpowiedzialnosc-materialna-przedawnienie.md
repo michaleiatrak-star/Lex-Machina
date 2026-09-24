@@ -182,7 +182,7 @@ wyrządzonej), obejmująca m.in.:
 
 ⚠️ **Dokładna treść §2 (długość terminu, moment jego rozpoczęcia) NIE
 została w pełni zrekonstruowana w tej sesji** — wymaga odrębnej,
-dogłębnej weryfikacji na ISAP i w aktualnym orzecznictwie SN przed
+dogłębnej weryfikacji w ELI (RZĄD 1) i w aktualnym orzecznictwie SN przed
 sporządzeniem pisma opartego na tym przepisie — to jeden z
 najintensywniej komentowanych fragmentów Działu XIV, co samo w sobie
 sugeruje częste spory o jego wykładnię.
@@ -297,4 +297,4 @@ art. 119 w literaturze, niepotwierdzony bezpośrednim cytatem), pełna
 treść art. 291 §2 (przedawnienie roszczenia pracodawcy — jeden z
 najbardziej skomplikowanych i najczęściej komentowanych przepisów całego
 Działu, wymaga odrębnego dogłębnego zbadania), oraz art. 292-295 w
-całości. Wszystkie oznaczone wprost do weryfikacji na ISAP przed użyciem.
+całości. Wszystkie oznaczone wprost do weryfikacji w ELI (RZĄD 1) przed użyciem.

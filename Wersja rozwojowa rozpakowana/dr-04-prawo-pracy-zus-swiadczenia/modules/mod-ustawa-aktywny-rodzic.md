@@ -7,7 +7,7 @@
 - **Dz.U. 2024 poz. 858** (weszła w życie 01.10.2024)
   ✅ VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000858 [2026-05-31]
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Zakres — trzy warianty świadczenia
 ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — 2 błędy naprawione:

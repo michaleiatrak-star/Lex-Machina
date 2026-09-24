@@ -5,7 +5,7 @@
 - Tekst jednolity: **Dz.U. 2024 poz. 1192** (obwieszczenie Marszałka Sejmu z 28.07.2024; zastępuje t.j. 2023.1109) ze zm.
   VER: isap.sejm.gov.pl [2026-08-15] — FAZA 3E (audyt-systemu-v4): progi kwotowe zastępstwa (5 mln PLN) i opiniowania (100 mln PLN) potwierdzone AKTUALNE — nowy t.j. konsoliduje zmiany redakcyjne (Sąd Polubowny art. 26, portal informacyjny, podpis elektroniczny), bez zmiany progów
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Prokuratoria Generalna = organ powolany do zastepstwa procesowego Skarbu Panstwa,

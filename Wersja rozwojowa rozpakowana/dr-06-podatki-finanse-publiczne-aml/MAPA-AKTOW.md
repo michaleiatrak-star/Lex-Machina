@@ -38,6 +38,8 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Unijny kodeks celny (UCC) / taryfa celna | rozporządzenie (UE) nr 952/2013 + właściwa nomenklatura CN | `mod-UCC-clo-taryfa-celna` | ✅ aktywny; EUR-Lex fresh gate |
 | Kontrola środków pieniężnych / prawo dewizowe / podróżni | rozporządzenie (UE) 2018/1672 + Dz.U. 2024 poz. 1131 ze zm. + akty właściwe | `mod-clo-podroznych-limity-towary-zabronione` | ✅ aktywny; fresh gate |
 | Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. ze zm. | `mod-ustawa-podatek-nieruchomosci-i-lokalne` | ✅ aktywny |
+| Ustawa o opłacie skarbowej | Dz.U. 2025 poz. 1154 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-oplata-skarbowa` | ✅ aktywny (od 2026-09-16) |
+| Ustawa o podatku od wydobycia niektórych kopalin | Dz.U. 2026 poz. 454 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-podatek-wydobycie-kopalin` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o ryczałcie od przychodów ewidencjonowanych | Dz.U. 2025 poz. 843 t.j. ze zm. | `mod-ustawa-ryczalt-przychody` | ✅ aktywny |
 | Ustawa o nadzorze nad rynkiem finansowym | Dz.U. 2026 poz. 935 t.j. ze zm. | `mod-prawo-bankowe-KNF-BFG` | ✅ aktywny |
 | Ustawa o obligacjach | Dz.U. 2025 poz. 1667 t.j. ze zm. | `mod-ustawa-rynek-kapitalowy-fundusze` | ✅ aktywny |

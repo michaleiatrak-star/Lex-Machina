@@ -76,7 +76,7 @@ Działanie: [co konkretnie uzupełnić]
 ☐ Brak twierdzeń sprzecznych ze sobą wewnętrznie w piśmie?
 
 ☐ Powołane przepisy istnieją w aktualnym brzmieniu?
-   → Weryfikacja: isap.sejm.gov.pl
+   → Weryfikacja: ELI (RZĄD 1)
 
 ☐ Powołane orzeczenia mają zweryfikowane sygnatury (URL w notatkach)?
    → Halucynacja sygnatury = błąd dyskredytujący całe pismo
@@ -122,7 +122,7 @@ Działanie: [co konkretnie uzupełnić]
    → Brakujące ogniwo = wniosek może zostać oddalony
 
 ☐ Podstawa prawna właściwa dla stanu faktycznego?
-   → Przeczytaj pełną treść przepisu na isap.sejm.gov.pl
+   → Przeczytaj pełną treść przepisu na ELI (RZĄD 1)
 
 ☐ Przepisy w właściwej kolejności (lex specialis → lex generalis)?
 

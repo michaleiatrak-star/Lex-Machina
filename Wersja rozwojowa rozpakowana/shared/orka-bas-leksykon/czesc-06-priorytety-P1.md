@@ -137,7 +137,7 @@ KONTEKST: Art. 1a ust. 1 pkt 3 upol (stare brzmienie — przed reformą 2025):
   Ustawa Dz.U. 2024 poz. 1757 wprowadza NOWE DEFINICJE budynku i budowli
   BEZPOŚREDNIO w upol — nie przez odesłanie do PrBud (wyrok TK SK 14/21)
   → "Względy techniczne" NADAL w nowym art. upol — ale zakres może się zmienić!
-  → ZAWSZE weryfikuj przez: isap.sejm.gov.pl → upol aktualne brzmienie 2025/2026
+  → ZAWSZE weryfikuj przez: ELI (RZĄD 1) → upol aktualne brzmienie 2025/2026
   web_search: "względy techniczne podatek od nieruchomości upol 2025 NSA definicja"
 ```
 

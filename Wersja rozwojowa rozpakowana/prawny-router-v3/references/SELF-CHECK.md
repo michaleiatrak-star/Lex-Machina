@@ -19,6 +19,22 @@
 □ [ANON-B] fraza żądania anonimizacji? → widget natychmiast
 JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywany.
 
+⛔ BLOK OC — OCENA PRACY (od routera 3.54)
+□ [OC-1] Prośba o ocenę pracy / „jak ci poszło” → ocena liczbowa w skali
+         0–10 (siebie i użytkownika) DOZWOLONA. Obok oceny: lista konkretnych
+         słabości z miejscem w materiale (plik / zarzut / przepis) i status
+         weryfikacji każdej.
+□ [OC-2] Każde „sprawdziłam/sprawdziłem” w ocenie musi mieć ślad źródła
+         (RZĄD + URL); brak śladu → wpis jako ⚠️ NIEWERYFIKOWANE.
+
+⛔ BLOK E — KOLEJNOŚĆ ŹRÓDEŁ (od routera 3.54)
+□ [E-1] Brzmienie każdego przepisu polskiego z ELI? (✅ [VER: ELI DU/RRRR/NNN, data])
+□ [E-2] Link ISAP podany jako adres dla czytelnika, nie jako dowód odczytu?
+□ [E-3] Użyto LEX/Legalis/ArsLege? → w śladzie zapis BRAKU-AKTU w RZĘDZIE 1
+         (ELI i ISAP niedostępne: awaria, timeout, blokada). Brak zapisu → cofnij do E-1.
+□ [E-3b] BRAK-AKTU, a od razu ⚠️ bez próby LEX/Legalis/ArsLege → błąd; wyczerp E-3/E-4.
+□ [E-4] 🟨 lub RZĄD 2B przy przepisie, który ELI dało się odczytać → błąd; popraw.
+
 □ Wczytałem references/KROK0A-anonimizer.md (szczegóły bramki)?
 □ Wczytałem references/KROK1-detekcja.md (tryb + hard gate ISAP)?
 □ web_search/web_fetch dla każdego artykułu/liczby — FAKTYCZNIE wywołałem narzędzie?

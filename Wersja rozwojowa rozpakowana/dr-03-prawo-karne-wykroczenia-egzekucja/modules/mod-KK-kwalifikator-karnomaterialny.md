@@ -19,7 +19,7 @@
 
 > Nigdy nie kwalifikuj czynu bez przejścia przez drzewo.
 > Każda kwalifikacja MUSI być oparta na chronologii faktów, nie na pierwszym pasującym przepisie.
-> Przepisy oznaczone ⚠️ weryfikuj w isap.sejm.gov.pl przed każdą analizą — zakaz cytowania z pamięci.
+> Przepisy oznaczone ⚠️ weryfikuj w ELI (RZĄD 1) przed każdą analizą — zakaz cytowania z pamięci.
 
 ---
 

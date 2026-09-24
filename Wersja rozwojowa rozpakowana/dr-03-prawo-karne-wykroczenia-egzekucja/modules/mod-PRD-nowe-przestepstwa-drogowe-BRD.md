@@ -126,7 +126,7 @@ OBLICZANIE OKRESU:
 ## 2. NOWE PRZESTĘPSTWA DROGOWE (od 29.01.2026)
 
 ```
-Ustawa z 04.12.2025 r. (Dz.U. 2025 poz. 1872) — weryfikuj: isap.sejm.gov.pl
+Ustawa z 04.12.2025 r. (Dz.U. 2025 poz. 1872) — weryfikuj: ELI (RZĄD 1)
 
 BRAWUROWA JAZDA (nowe przestępstwo KK):
   Przesłanki ŁĄCZNIE:
@@ -166,7 +166,7 @@ ZAKAZ DOŻYWOTNI I NOWY OBOWIĄZKOWY ZAKAZ:
 ## 3. PRAWO JAZDY OD 17 LAT (od 03.03.2026)
 
 ```
-Podstawa: Dz.U. 2025 poz. 1676 (weryfikuj: isap.sejm.gov.pl)
+Podstawa: Dz.U. 2025 poz. 1676 (weryfikuj: ELI (RZĄD 1))
 
 KTO MOŻE:
   → Kurs: od 3 miesięcy przed ukończeniem 17 lat

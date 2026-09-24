@@ -22,7 +22,7 @@ pod z góry przyjętą kwalifikację.
 ## P1 — PEŁNA KWALIFIKACJA PRAWNA (rozwinięcie OA.A1)
 
 ```
-Przepis: [pełna treść ustawowa — weryfikacja ISAP przed wpisaniem]
+Przepis: [pełna treść ustawowa — weryfikacja w ELI (RZĄD 1) przed wpisaniem]
 Źródło ISAP: [URL]
 
 Znamiona i ich status (z odesłaniem do OA.A1 i BF):

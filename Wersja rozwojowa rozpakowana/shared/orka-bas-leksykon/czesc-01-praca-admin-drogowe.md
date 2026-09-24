@@ -117,7 +117,7 @@ Reguła (ORKA-REG-02): Wymaganie dowodu tam, gdzie ustawa wymaga jedynie
 uprawdopodobnienia, jest wykładnią zbyt rygorystyczną i naruszeniem przepisu.
 Zastosowanie: zaświadczenia lekarskie, oświadczenia stron, pisemne potwierdzenia
 zamiast aktów urzędowych — tam gdzie ustawa wyraźnie tego nie wymaga.
-Weryfikuj: aktualne art. KPA, KPC, KPK w ISAP → różne wymagania per tryb
+Weryfikuj: aktualne art. KPA, KPC, KPK w ELI (RZĄD 1) → różne wymagania per tryb
 ```
 
 ### BAS-008 — Mienie komunalne
@@ -126,7 +126,7 @@ Weryfikacja: ustawa o samorządzie gminnym art. 43 (Dz.U. 2026 poz. 662 t.j.)
   ZWERYFIKOWANO — definicja bez zmian, aktualny t.j. 2025
 Definicja: Własność i inne prawa majątkowe należące do gmin, związków gmin
 oraz innych gminnych osób prawnych.
-Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2025 poz. 1515 t.j.)
+Podstawa: art. 43 ustawy o samorządzie gminnym (weryfikuj Dz.U. 2026 poz. 662 t.j.)
 Reguła: Mienie komunalne jest odrębne od mienia Skarbu Państwa. Gmina odpowiada
 za swoje mienie niezależnie od Skarbu Państwa (art. 165 ust. 1 Konstytucji).
 ```

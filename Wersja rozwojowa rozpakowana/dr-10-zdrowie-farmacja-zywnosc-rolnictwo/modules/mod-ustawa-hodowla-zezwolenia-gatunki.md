@@ -223,7 +223,7 @@ OBOWIĄZEK ZGŁOSZENIA: KAŻDY, kto stwierdzi OBECNOŚĆ w środowisku
   gatunek jest obcy/inwazyjny/potencjalnie inwazyjny i czy figuruje
   na liście zakazanych IGO — przydatne narzędzie WSTĘPNEJ weryfikacji
   (niezlechwasty.pl), choć dla WIĄŻĄCEGO ustalenia statusu prawnego
-  sprawdź ZAWSZE aktualne rozporządzenie na ISAP
+  sprawdź ZAWSZE aktualne rozporządzenie w ELI (RZĄD 1)
 
 Potwierdzone w 6+ zgodnych, aktualnych źródłach 2025-2026 (teraz-
 srodowisko.pl, inforlex.pl, laspolski.pl, niezlechwasty.pl,

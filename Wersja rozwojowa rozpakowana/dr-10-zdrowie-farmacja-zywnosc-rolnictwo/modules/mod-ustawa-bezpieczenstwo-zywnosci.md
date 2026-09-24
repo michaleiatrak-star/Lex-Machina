@@ -18,7 +18,7 @@
 - Rozporządzenie (WE) nr 852/2004 — higiena środków spożywczych
 - Rozporządzenie (WE) nr 853/2004 — higiena produktów pochodzenia zwierzęcego
 
-**Weryfikacja:** isap.sejm.gov.pl i eur-lex.europa.eu przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) i eur-lex.europa.eu przed każdym cytowaniem.
 
 ## Zakres
 Wymagania dla producentów i sprzedawców żywności: rejestracja zakładów (w GIS/WIJHARS),
@@ -256,7 +256,7 @@ OCHRONA KONSUMENTA — jedyne twarde wymogi: (1) lista składników W
 Potwierdzone w 6+ zgodnych źródłach (gov.pl/WIJHARS Olsztyn [Rząd 1],
 infor.pl, wylecz.to, zakrzewscy.pl) — poza statusem finalizacji
 nowelizacji z 2023 r. dot. definicji "szynki"/"wędliny", która
-wymaga dedykowanej weryfikacji aktualnego stanu na ISAP.
+wymaga dedykowanej weryfikacji aktualnego stanu w ELI (RZĄD 1).
 ```
 
 ## KLASYFIKACJA NUMERÓW E — KATEGORIE FUNKCJONALNE (dodano 2026-07-30,

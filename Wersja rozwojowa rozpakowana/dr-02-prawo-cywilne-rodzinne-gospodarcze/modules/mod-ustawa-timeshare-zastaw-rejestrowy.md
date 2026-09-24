@@ -19,7 +19,7 @@ Reguluje umowy timeshare (prawo do korzystania z miejsca zakwaterowania przez ok
 
 ## Ochrona konsumenta — Quick Check
 
-> ⚠️ Weryfikuj aktualne przepisy ustawy o timeshare w ISAP.
+> ⚠️ Weryfikuj aktualne przepisy ustawy o timeshare w ELI (RZĄD 1).
 
 ```
 PRAWO DO ODSTĄPIENIA:
@@ -72,7 +72,7 @@ Wygaśnięcie:
   → Na wniosek zastawnika
 ```
 
-## Opłaty (KSCU — weryfikuj aktualne w ISAP)
+## Opłaty (KSCU — weryfikuj aktualne w ELI (RZĄD 1))
 
 ```
 Wpis do rejestru zastawów: weryfikuj aktualną kwotę w KSCU

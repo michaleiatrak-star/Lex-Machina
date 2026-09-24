@@ -15,7 +15,7 @@
 □ Składana ZA POŚREDNICTWEM organu II instancji (NIE bezpośrednio do WSA)
 □ Termin: 30 dni od doręczenia decyzji II inst. (art. 53 §1 PPSA)
 □ WSA bada WYŁĄCZNIE zgodność z prawem — nie zastępuje organu merytoryczne
-□ Wpis sądowy: zależny od rodzaju sprawy — weryfikuj PPSA / KSCU w ISAP
+□ Wpis sądowy: zależny od rodzaju sprawy — weryfikuj PPSA / KSCU w ELI (RZĄD 1)
 □ Odpis skargi dla organu
 
 Zarzuty:

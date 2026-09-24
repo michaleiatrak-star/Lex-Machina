@@ -209,7 +209,7 @@ NIE forma współudziału w czynie bazowym.
 > ⚠️ Art. 242-244b dodane 2026-07-26 (audyt pełnego systemu T8 — tytuł
 > modułu deklarował "art. 233-244b", te przepisy wcześniej nie były
 > wspomniane w treści wcale). Zweryfikowano online 2026-07-26 (lexlege.pl,
-> prawnik.cc, arslege.pl) — WERYFIKUJ aktualność na isap.sejm.gov.pl.
+> prawnik.cc, arslege.pl) — WERYFIKUJ aktualność na ELI (RZĄD 1).
 
 ⚠️ WSZYSTKIE zagrożenia do potwierdzenia na isap.sejm.gov.pl przed
 użyciem w piśmie (PRAWO-HARDGATE).

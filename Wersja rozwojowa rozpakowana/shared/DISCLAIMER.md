@@ -61,7 +61,7 @@ skonsultowanie się z adwokatem lub radcą prawnym.
 ⚖️ **Zastrzeżenie:** Niniejsza analiza ma charakter informacyjny. Nie stanowi
 porady prawnej ani opinii prawnej w rozumieniu art. 4 Prawa o adwokaturze
 (Dz.U. z 2024 r. poz. 1564 (t.j.)) ani art. 6 ustawy o radcach prawnych
-(Dz.U. z 2024 r. poz. 499 (t.j.)). Weryfikacja przepisów: isap.sejm.gov.pl.
+(Dz.U. z 2024 r. poz. 499 (t.j.)). Weryfikacja przepisów: ELI (RZĄD 1).
 Orzecznictwo: orzeczenia.ms.gov.pl / sn.pl. Każda analiza wymaga weryfikacji
 pod kątem aktualnego stanu prawnego i okoliczności konkretnej sprawy.
 ```
@@ -199,7 +199,7 @@ Zalecam konsultację z adwokatem lub radcą prawnym.
 
 PRAWNIK inline:
 ⚖️ Niniejsza analiza ma charakter informacyjny. Nie stanowi porady prawnej
-(art. 4 Prawa o adwokaturze / art. 6 u.r.p.). Weryfikacja: isap.sejm.gov.pl.
+(art. 4 Prawa o adwokaturze / art. 6 u.r.p.). Weryfikacja: ELI (RZĄD 1).
 ```
 
 ---

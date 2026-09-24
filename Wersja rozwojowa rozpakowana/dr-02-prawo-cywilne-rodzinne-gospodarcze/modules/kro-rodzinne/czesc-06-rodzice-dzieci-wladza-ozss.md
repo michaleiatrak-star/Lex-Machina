@@ -79,7 +79,7 @@ Zasada: oboje rodzice mają pełną władzę rodzicielską
 Sąd może ją ograniczyć / zawiesić / pozbawić (art. 107, 110, 111 KRO)
   → tylko gdy dobro dziecka tego wymaga
 
-Kontakty (art. 113 i n. KRO — weryfikuj w ISAP):
+Kontakty (art. 113 i n. KRO — weryfikuj w ELI (RZĄD 1)):
   → prawo i obowiązek niezależnie od władzy rodzicielskiej
   → sąd może uregulować, ograniczyć lub zakazać kontaktów
   → wykonanie kontaktów: wniosek do sądu opiekuńczego
@@ -229,7 +229,7 @@ standardyprawa.pl [z katalogiem powiązanego orzecznictwa SN/SR]).
 > ostatniego t.j. wymaga potwierdzenia w ISAP przed cytowaniem w piśmie].
 > OZSS zastąpiły dawne Rodzinne Ośrodki Diagnostyczno-Konsultacyjne (RODK) od
 > 1.01.2016. Standardy metodologii opiniowania: zarządzenie MS z 1.02.2016 r.
-> (weryfikuj aktualność w ISAP).
+> (weryfikuj aktualność w ELI (RZĄD 1)).
 
 ```
 KIEDY SĄD KIERUJE:

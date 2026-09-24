@@ -25,7 +25,7 @@ Farmaceutyczna (GIF/WIF), sankcje karne i administracyjne.
 | Nowelizacja PF z 24.06.2025 | Dz.U. 2025 poz. 924 | isap.sejm.gov.pl |
 | Ustawa o refundacji leków z 12.05.2011 | Dz.U. 2026 poz. 253 t.j. | isap.sejm.gov.pl |
 | Nowelizacja ustawy refundacyjnej z 25.07.2025 | Dz.U. 2025 poz. 1192 | isap.sejm.gov.pl |
-| Ustawa o wyrobach medycznych z 7.04.2022 | Dz.U. 2022 poz. 974 | isap.sejm.gov.pl |
+| Ustawa o wyrobach medycznych z 7.04.2022 | t.j. Dz.U. 2024 poz. 1620 (akt pierwotny: 2022 poz. 974) | isap.sejm.gov.pl |
 | Rozporządzenie MDR 2017/745 (UE) | Dz.Urz. UE | eur-lex.europa.eu |
 
 ---
@@ -96,7 +96,7 @@ roszczenia procesowe → `shared/TERM-CALC.md`, `shared/ROSZCZENIA.md`.
 | Nowelizacja | Zakres |
 |---|---|
 | Dz.U. 2025 poz. 924 | Zm. art. 36z ust. 2 pkt 4 — brak wymogu wskazania miejsca dostawy |
-| Dz.U. 2025 poz. 1416 | Zmiany PF — weryfikuj pełny zakres w isap.sejm.gov.pl |
+| Dz.U. 2025 poz. 1416 | Zmiany PF — weryfikuj pełny zakres w ELI (RZĄD 1) |
 | Dz.U. 2025 poz. 1537 | Zmiany podstawowych warunków prowadzenia apteki (rozp. MZ) |
 
 ### Reklama aptek (art. 94a PF) — PRZEŁOMOWA ZMIANA
@@ -108,7 +108,7 @@ roszczenia procesowe → `shared/TERM-CALC.md`, `shared/ROSZCZENIA.md`.
 - Zmiany dotyczące aptek, kar GIF, badań jakościowych, przedłużania pozwoleń na dopuszczenie, wymagań wobec Osób Wykwalifikowanych.
 - Planowane przyjęcie przez RM: III kwartał 2026 r. — weryfikuj aktualny status w legislacja.rcl.gov.pl
 
-*Weryfikacja: 22.05.2026 | Źródła: isap.sejm.gov.pl, alertmedyczny.pl, gov.pl (projekt UDER114), TSUE C-200/2024*
+*Weryfikacja: 22.05.2026 | Źródła: ELI (RZĄD 1), alertmedyczny.pl, gov.pl (projekt UDER114), TSUE C-200/2024*
 
 ---
 
@@ -456,7 +456,7 @@ Kategorie:
   • Radiofarmaceutyk
   • Lek recepturowy i apteczny
 
-UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, Dz.U. 2022 poz. 974)
+UWAGA: Wyrób medyczny ≠ produkt leczniczy (odrębna ustawa 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 Suplement diety ≠ produkt leczniczy (ustawa o bezpieczeństwie żywności)
 ```
 
@@ -497,7 +497,7 @@ Procedura:
   → Prezes Urzędu wydaje zgodę (lub odmawia)
   → Produkt może być wydany wyłącznie na receptę lekarza wnioskującego
 
-Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ISAP
+Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ELI (RZĄD 1)
 ```
 
 ---
@@ -836,7 +836,7 @@ Odwołanie: do GIF / wniosek o uchylenie → skarga do WSA
 
 ## CZĘŚĆ IX — WYROBY MEDYCZNE — WYDZIELONE
 
-⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, Dz.U. 2022 poz. 974)
+⚠️ Wyroby medyczne to ODRĘBNA REGULACJA (ustawa z 7.04.2022, t.j. Dz.U. 2024 poz. 1620)
 — wydzielona 2026-06-12 do samodzielnego modułu:
 → `view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-wyroby-medyczne.md`
 

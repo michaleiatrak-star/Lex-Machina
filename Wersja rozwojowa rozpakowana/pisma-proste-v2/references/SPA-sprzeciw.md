@@ -17,7 +17,7 @@ lub EPU). Termin: **2 tygodnie** od doręczenia nakazu przy doręczeniu w kraju,
 - **art. 505³ §3 KPC** — sprzeciw od nakazu w EPU (elektroniczne postępowanie upominawcze)
 - Sprzeciw nie jest wymieniony wśród pism opłacanych w art. 19 KSCU — brak opłaty
 
-> ⚠ Weryfikuj aktualność przepisów na isap.sejm.gov.pl przed użyciem.
+> ⚠ Weryfikuj aktualność przepisów na ELI (RZĄD 1) przed użyciem.
 
 ---
 
