@@ -239,16 +239,31 @@ try {
       throw "OFFLINE_BUNDLE_SELFTEST_TIMEOUT"
     }
     $selfTestProcess.Refresh()
+    # Nothing started by the self-test may outlive it (it would hold the logs).
+    $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+    Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+      try {
+        if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+          Write-Host "Self-test leftover stopped: $($_.ProcessName) pid=$($_.Id)"
+          Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+        }
+      } catch {}
+    }
+    Start-Sleep -Milliseconds 500
     if (Test-Path -LiteralPath $selfTestErrLog -PathType Leaf) {
-      Get-Content -LiteralPath $selfTestErrLog -ErrorAction SilentlyContinue |
-        Add-Content -LiteralPath $selfTestLog -Encoding UTF8
+      try {
+        Get-Content -LiteralPath $selfTestErrLog -ErrorAction Stop |
+          Add-Content -LiteralPath $selfTestLog -Encoding UTF8 -ErrorAction Stop
+      } catch {
+        Write-Host "Self-test stderr not merged: $($_.Exception.Message)"
+      }
     }
     Get-Content -LiteralPath $selfTestLog -ErrorAction SilentlyContinue | Out-Host
     if ($selfTestProcess.ExitCode -ne 0) {
       throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$($selfTestProcess.ExitCode)"
     }
   } catch {
-    Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8
+    Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8 -ErrorAction SilentlyContinue
     Write-Host "OFFLINE_BUNDLE_SELFTEST_LOG_TAIL"
     Get-Content -LiteralPath $selfTestLog -Tail 120 -ErrorAction SilentlyContinue | Out-Host
     throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$($_.Exception.Message)"
