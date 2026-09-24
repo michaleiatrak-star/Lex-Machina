@@ -27,6 +27,29 @@ import {
   type WorkspaceItem,
   type WorkspaceResponse
 } from "./workspace-client.js";
+import { PdfPreview } from "./PdfPreview.js";
+import { TextFileEditor } from "./TextFileEditor.js";
+import { decodeTextFile } from "./text-editing.js";
+
+const TEXT_EXTENSIONS = /\.(txt|md|markdown|csv|tsv|json|xml|log)$/i;
+
+export function previewKind(
+  mediaType: string,
+  filename: string
+): "text" | "pdf" | "image" | "none" {
+  const type = mediaType.split(";")[0]!.trim().toLowerCase();
+  if (type === "application/pdf" || /\.pdf$/i.test(filename)) return "pdf";
+  if (type.startsWith("image/")) return "image";
+  if (
+    type.startsWith("text/") ||
+    type === "application/json" ||
+    type === "application/xml" ||
+    TEXT_EXTENSIONS.test(filename)
+  ) {
+    return "text";
+  }
+  return "none";
+}
 
 export function documentProcessingFailureMessage(
   failure: unknown
@@ -169,7 +192,9 @@ export function WorkspaceManager({
   const [preview, setPreview] = useState<{
     item: WorkspaceItem;
     url?: string;
+    pdf?: Blob;
     text?: string;
+    encoding?: string;
     page?: number;
     supported: boolean;
   } | null>(null);
@@ -465,6 +490,23 @@ export function WorkspaceManager({
     }
   }
 
+  async function saveEditedText(
+    filename: string,
+    text: string
+  ): Promise<void> {
+    const markdown = /\.(md|markdown)$/i.test(filename);
+    const stored = await uploadCaseFile(
+      caseId,
+      new File([text], filename, {
+        type: markdown ? "text/markdown" : "text/plain"
+      })
+    );
+    if (selectedFolder) {
+      await moveWorkspaceItem(caseId, stored.uploadId, selectedFolder);
+    }
+    await refresh();
+  }
+
   async function showPreview(
     item: WorkspaceItem,
     page?: number
@@ -474,30 +516,28 @@ export function WorkspaceManager({
     try {
       const result = await previewWorkspaceItem(caseId, item.itemId);
       if (preview?.url) URL.revokeObjectURL(preview.url);
-      if (
-        result.mediaType.startsWith("text/") ||
-        result.mediaType === "application/json"
-      ) {
+      const kind = previewKind(result.mediaType, item.filename);
+      const pageProps = page ? { page } : {};
+      if (kind === "text") {
+        const decoded = decodeTextFile(new Uint8Array(await result.blob.arrayBuffer()));
         setPreview({
           item,
-          text: await result.blob.text(),
-          ...(page
-            ? { page }
-            : {}),
+          text: decoded.text,
+          encoding: decoded.encoding,
+          ...pageProps,
           supported: true
         });
         return;
       }
-      if (
-        result.mediaType === "application/pdf" ||
-        result.mediaType.startsWith("image/")
-      ) {
+      if (kind === "pdf") {
+        setPreview({ item, pdf: result.blob, ...pageProps, supported: true });
+        return;
+      }
+      if (kind === "image") {
         setPreview({
           item,
           url: URL.createObjectURL(result.blob),
-          ...(page
-            ? { page }
-            : {}),
+          ...pageProps,
           supported: true
         });
         return;
@@ -883,20 +923,23 @@ export function WorkspaceManager({
             <button type="button" onClick={() => setPreview(null)}>Zamknij</button>
           </div>
           {preview.text !== undefined ? (
-            <pre>{preview.text}</pre>
+            <TextFileEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              mediaType={preview.item.mediaType}
+              initialText={preview.text}
+              encoding={preview.encoding ?? "utf-8"}
+              readOnly={!canWrite}
+              onSave={saveEditedText}
+            />
+          ) : preview.pdf ? (
+            <PdfPreview
+              blob={preview.pdf}
+              filename={preview.item.filename}
+              {...(preview.page ? { initialPage: preview.page } : {})}
+            />
           ) : preview.url ? (
-            preview.item.mediaType.startsWith("image/") ? (
-              <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
-            ) : (
-              <iframe
-                src={
-                  preview.page
-                    ? `${preview.url}#page=${preview.page}`
-                    : preview.url
-                }
-                title={`Podgląd ${preview.item.filename}`}
-              />
-            )
+            <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
           ) : (
             <p>
               Ten format nie ma bezpiecznego podglądu w webview. Użyj „Otwórz w systemie”,
