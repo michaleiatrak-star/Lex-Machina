@@ -31,6 +31,7 @@ import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
 import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import { CompositeRecognizer, LocalGazetteerRecognizer } from "../privacy/gazetteer-ner.js";
 import { LocalLlmPrivacyNamedEntityRecognizer } from "../privacy/local-llm-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
@@ -242,7 +243,11 @@ export async function startLocalServer(options) {
     const accountSessions = new AccountSessionManager();
     const providerRegistry = createLiveProviderRegistry(credentials, localModels, accountSessions);
     const providerGateway = new ProviderGateway(providerRegistry);
-    const stanzaNamedEntities = new LocalStanzaNamedEntityRecognizer();
+    // Stanza NER plus the SGJP name dictionary and address patterns.
+    const stanzaNamedEntities = new CompositeRecognizer([
+        new LocalStanzaNamedEntityRecognizer(),
+        new LocalGazetteerRecognizer()
+    ]);
     const privacyNamedEntities = new LocalLlmPrivacyNamedEntityRecognizer(providerGateway, localModels, stanzaNamedEntities);
     const modelCatalog = new DynamicModelCatalog(credentials, undefined, localModels);
     const legalSourceVerifier = new OfficialLegalSourceVerifier(undefined, undefined, new LocalPdfTextExtractor());

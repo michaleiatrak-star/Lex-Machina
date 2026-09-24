@@ -1,0 +1,130 @@
+{
+ "documents": 500,
+ "seconds": 40,
+ "recognizers": "SGJP gazetteer + identifier detectors + Morfeusz2 morphology (no Stanza, no local LLM)",
+ "anonymization": {
+  "mentions": {
+   "PERSON": {
+    "mentions": 1849,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "ADDRESS": {
+    "mentions": 1000,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PESEL": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "IBAN": {
+    "mentions": 500,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PERSON (upper case)": {
+    "mentions": 150,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   },
+   "PERSON (second person)": {
+    "mentions": 499,
+    "leaked": 0,
+    "recall": 100,
+    "wrongKind": 0
+   }
+  },
+  "falsePositives": 500,
+  "falsePositivesOnDecoys": 0,
+  "falsePositiveSamples": [
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz",
+   "PERSON:Adam Mickiewicz"
+  ],
+  "leakSamples": []
+ },
+ "identity": {
+  "documentsWherePersonSplitIntoSeveralTokens": 0,
+  "documentsWhereAddressSplitIntoSeveralTokens": 0,
+  "splitSamples": []
+ },
+ "deanonymization": {
+  "person": {
+   "formAccuracy": 100,
+   "byCase": {
+    "NOM": 100,
+    "GEN": 100,
+    "DAT": 100,
+    "ACC": 100,
+    "INS": 100,
+    "LOC": 100,
+    "VOC": 100
+   },
+   "wrong": 0,
+   "wrongFlaggedForReview": 0,
+   "wrongNotFlagged": 0
+  },
+  "address": {
+   "formAccuracy": 100,
+   "byCase": {
+    "NOM": 100,
+    "GEN": 100,
+    "DAT": 100,
+    "ACC": 100,
+    "INS": 100,
+    "LOC": 100,
+    "VOC": 100
+   },
+   "wrong": 0,
+   "wrongFlaggedForReview": 0,
+   "wrongNotFlagged": 0
+  },
+  "modelAnswersRestoredExactly": 100,
+  "missingTokens": 0,
+  "silentWrongSamples": []
+ }
+}

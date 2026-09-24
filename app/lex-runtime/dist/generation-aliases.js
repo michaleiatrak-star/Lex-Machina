@@ -92,7 +92,9 @@ export function describeGenerationAliases(tokenizedText, manifest, vaults) {
                 : restored.status === "unknown_token"
                     ? "unresolved"
                     : restored.status,
-            ...(entity ? { canonical: entity.canonical, gender: entity.gender } : {}),
+            ...(entity ? { canonical: entity.canonical } : {}),
+            // Gender matters for remembering a person's name form, not for addresses.
+            ...(entity && (entity.gender === "m1" || entity.gender === "f") ? { gender: entity.gender } : {}),
             occurrences
         };
     });

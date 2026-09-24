@@ -160,3 +160,32 @@ describe.skipIf(!python)("Morfeusz2 person morphology worker", () => {
     expect(nowak!.status).toBe("gender_ambiguous");
   });
 });
+
+describe.skipIf(!python)("SGJP gazetteer and address morphology workers", () => {
+  it("finds persons and addresses in a pleading and one token per entity", async () => {
+    const { LocalGazetteerRecognizer } = await import("../src/privacy/gazetteer-ner.js");
+    const recognizer = new LocalGazetteerRecognizer({
+      python: python!,
+      workerPath: path.resolve(__dirname, "../../privacy/polish_pii_gazetteer.py")
+    });
+    const morphology = new LocalPersonMorphology({
+      python: python!,
+      workerPath: path.resolve(__dirname, "../../privacy/polish_person_morphology.py")
+    });
+    const text =
+      "Powódka Anna Nowak, zamieszkała przy ul. Długiej 5/3, 30-001 Kraków, wnosi przeciwko Janowi Kowalskiemu. " +
+      "Szpital im. Jana Pawła II wystawił zaświadczenie. Adres do doręczeń: ul. Długa 5/3, 30-001 Kraków. " +
+      "Kowalski nie stawił się. Sąd Rejonowy w Krakowie wezwał Annę Nowak.";
+    const vault = new PseudonymizationVault();
+    const result = await new LocalPolishPseudonymizer(vault, recognizer, morphology).pseudonymize(text);
+    expect(result.text).toBe(
+      "Powódka [PII:PERSON:0001], zamieszkała przy [PII:ADDRESS:0001], wnosi przeciwko [PII:PERSON:0003]. " +
+      "Szpital im. Jana Pawła II wystawił zaświadczenie. Adres do doręczeń: [PII:ADDRESS:0001]. " +
+      // The surname alone is protected too (its own token: it has no given name).
+      "[PII:PERSON:0002] nie stawił się. Sąd Rejonowy w Krakowie wezwał [PII:PERSON:0001]."
+    );
+    expect(vault.restore("[PII:ADDRESS:0001]", "LOC").text).toBe("ul. Długiej 5/3, 30-001 Kraków");
+    expect(vault.restore("[PII:ADDRESS:0001]", "NOM").text).toBe("ul. Długa 5/3, 30-001 Kraków");
+    expect(vault.restore("[PII:PERSON:0003]", "NOM").text).toBe("Jan Kowalski");
+  });
+});

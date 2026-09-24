@@ -90,6 +90,13 @@ const PRIVACY_KINDS = new Set([
     "PHONE",
     "PERSON",
     "ADDRESS",
+    "ID_CARD",
+    "PASSPORT",
+    "KRS",
+    "LAND_REGISTRY",
+    "BIRTH_DATE",
+    "VEHICLE_PLATE",
+    "PAYMENT_CARD",
     "CUSTOM"
 ]);
 function parsePrivacyDirectives(value) {

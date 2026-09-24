@@ -122,6 +122,13 @@ export type PiiKind =
   | "PHONE"
   | "PERSON"
   | "ADDRESS"
+  | "ID_CARD"
+  | "PASSPORT"
+  | "KRS"
+  | "LAND_REGISTRY"
+  | "BIRTH_DATE"
+  | "VEHICLE_PLATE"
+  | "PAYMENT_CARD"
   | "CUSTOM";
 
 export type PrivacyAction =

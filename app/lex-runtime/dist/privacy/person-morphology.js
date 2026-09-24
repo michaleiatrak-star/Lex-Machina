@@ -106,7 +106,9 @@ function toEntity(raw) {
         return null;
     return {
         canonical: value.canonical,
-        gender: value.gender === "f" ? "f" : "m1",
+        gender: value.gender === "f" || value.gender === "m3" || value.gender === "n"
+            ? value.gender
+            : "m1",
         genderAlternatives: Array.isArray(value.genderAlternatives)
             ? value.genderAlternatives.map(String)
             : [],
@@ -124,6 +126,7 @@ export class LocalPersonMorphology {
     workerPath;
     exceptionsPath;
     cache = new Map();
+    addressCache = new Map();
     constructor(options = {}, timeoutMs = options.timeoutMs ?? 120_000) {
         this.timeoutMs = timeoutMs;
         this.python =
@@ -141,23 +144,33 @@ export class LocalPersonMorphology {
     async saveCorrection(correction) {
         await saveNameFormCorrection(this.exceptionsPath, correction);
         this.cache.clear();
+        this.addressCache.clear();
     }
     async analyze(surfaces) {
-        const missing = [...new Set(surfaces)].filter((surface) => !this.cache.has(surface));
+        return this.cached(surfaces, this.cache, (missing) => this.run(missing, []).then((r) => r.persons));
+    }
+    async analyzeAddresses(surfaces) {
+        return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
+    }
+    async cached(surfaces, cache, load) {
+        const missing = [...new Set(surfaces)].filter((surface) => !cache.has(surface));
         if (missing.length > 0) {
-            const results = await this.run(missing);
+            const results = await load(missing);
             missing.forEach((surface, index) => {
-                this.cache.set(surface, results[index] ?? null);
+                cache.set(surface, results[index] ?? null);
             });
         }
-        return surfaces.map((surface) => this.cache.get(surface) ?? null);
+        return surfaces.map((surface) => cache.get(surface) ?? null);
     }
-    async run(surfaces) {
+    async run(surfaces, addresses) {
         const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-person-morphology-"));
         const input = path.join(tempRoot, "input.json");
         const output = path.join(tempRoot, "output.json");
         try {
-            await writeFile(input, JSON.stringify({ persons: surfaces.map((surface) => ({ surface })) }), "utf8");
+            await writeFile(input, JSON.stringify({
+                persons: surfaces.map((surface) => ({ surface })),
+                addresses: addresses.map((surface) => ({ surface }))
+            }), "utf8");
             await new Promise((resolve, reject) => {
                 const child = spawn(this.python, ["-X", "utf8", this.workerPath, "--input", input, "--output", output], {
                     windowsHide: true,
@@ -185,7 +198,10 @@ export class LocalPersonMorphology {
                 });
             });
             const parsed = JSON.parse(await readFile(output, "utf8"));
-            return (parsed.persons ?? []).map(toEntity);
+            return {
+                persons: (parsed.persons ?? []).map(toEntity),
+                addresses: (parsed.addresses ?? []).map(toEntity)
+            };
         }
         finally {
             await rm(tempRoot, { recursive: true, force: true });

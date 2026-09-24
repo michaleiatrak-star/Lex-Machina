@@ -160,7 +160,7 @@ export function isLocalLightweightConversation(
 
 // Protected person names are inflected locally: the model only names the case.
 export const PERSON_CASE_PROTOCOL =
-  "Person tokens ([PII:PERSON:0001], [LMPII:D01:PERSON:0001]) stand for one person each, whatever case the document used. When you write a person token in a sentence, append the grammatical case of that position inside the brackets: NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. \"rozmawiał z [PII:PERSON:0001|INS]\", \"wezwanie wobec [LMPII:D01:PERSON:0002|GEN]\". Never write, inflect or guess the name yourself.";
+  "Person and address tokens ([PII:PERSON:0001], [LMPII:D01:PERSON:0001], [PII:ADDRESS:0001]) stand for one person or one address each, whatever case the document used. When you write such a token in a sentence, append the grammatical case of that position inside the brackets: NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. \"rozmawiał z [PII:PERSON:0001|INS]\", \"wezwanie wobec [LMPII:D01:PERSON:0002|GEN]\", \"zamieszkały przy [PII:ADDRESS:0001|LOC]\". Never write, inflect or guess the name or address yourself.";
 
 export const CRIMINAL_DOMAIN_PREFIX =
   "dr-03-";
@@ -1396,7 +1396,7 @@ export class LexExecutionEngine {
     }
     if (
       !args.documentContext &&
-      effectiveQuery.includes("[PII:PERSON:")
+      /\[PII:(?:PERSON|ADDRESS):/.test(effectiveQuery)
     ) {
       promptParts.push(PERSON_CASE_PROTOCOL);
     }
@@ -1590,7 +1590,7 @@ export class LexExecutionEngine {
     }
     if (
       !args.documentContext &&
-      effectiveQuery.includes("[PII:PERSON:")
+      /\[PII:(?:PERSON|ADDRESS):/.test(effectiveQuery)
     ) {
       promptParts.push(PERSON_CASE_PROTOCOL);
     }

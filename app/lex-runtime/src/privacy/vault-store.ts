@@ -242,7 +242,10 @@ function canonicalEntity(
   }
   return {
     canonical: String(entity.canonical),
-    gender: entity.gender === "f" ? "f" : "m1",
+    gender:
+      entity.gender === "f" || entity.gender === "m3" || entity.gender === "n"
+        ? entity.gender
+        : "m1",
     genderAlternatives: [...entity.genderAlternatives].map(String),
     status: entity.status,
     forms,

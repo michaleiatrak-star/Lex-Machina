@@ -39,7 +39,8 @@ export type PersonForm = {
 
 export type PersonEntity = {
   canonical: string;
-  gender: "m1" | "f";
+  // m1/f for persons; m3/n also for addresses (the gender the street name agrees with).
+  gender: "m1" | "f" | "m3" | "n";
   genderAlternatives: string[];
   status: "ok" | "gender_ambiguous" | "needs_review";
   forms: Record<PersonCase, PersonForm>;
@@ -48,6 +49,8 @@ export type PersonEntity = {
 
 export interface PersonMorphology {
   analyze(surfaces: string[]): Promise<Array<PersonEntity | null>>;
+  // "ul. Długiej 5" -> "ul. Długa 5" with its seven case forms.
+  analyzeAddresses?(surfaces: string[]): Promise<Array<PersonEntity | null>>;
   saveCorrection?(correction: NameFormCorrection): Promise<void>;
 }
 
@@ -144,7 +147,10 @@ function toEntity(raw: unknown): PersonEntity | null {
   if (PERSON_CASES.some((personCase) => !mapped[personCase])) return null;
   return {
     canonical: value.canonical,
-    gender: value.gender === "f" ? "f" : "m1",
+    gender:
+      value.gender === "f" || value.gender === "m3" || value.gender === "n"
+        ? value.gender
+        : "m1",
     genderAlternatives: Array.isArray(value.genderAlternatives)
       ? value.genderAlternatives.map(String)
       : [],
@@ -163,6 +169,7 @@ export class LocalPersonMorphology implements PersonMorphology {
   private readonly workerPath: string;
   private readonly exceptionsPath: string;
   private readonly cache = new Map<string, PersonEntity | null>();
+  private readonly addressCache = new Map<string, PersonEntity | null>();
 
   constructor(
     options: {
@@ -189,27 +196,46 @@ export class LocalPersonMorphology implements PersonMorphology {
   async saveCorrection(correction: NameFormCorrection): Promise<void> {
     await saveNameFormCorrection(this.exceptionsPath, correction);
     this.cache.clear();
+    this.addressCache.clear();
   }
 
   async analyze(surfaces: string[]): Promise<Array<PersonEntity | null>> {
-    const missing = [...new Set(surfaces)].filter((surface) => !this.cache.has(surface));
-    if (missing.length > 0) {
-      const results = await this.run(missing);
-      missing.forEach((surface, index) => {
-        this.cache.set(surface, results[index] ?? null);
-      });
-    }
-    return surfaces.map((surface) => this.cache.get(surface) ?? null);
+    return this.cached(surfaces, this.cache, (missing) => this.run(missing, []).then((r) => r.persons));
   }
 
-  private async run(surfaces: string[]): Promise<Array<PersonEntity | null>> {
+  async analyzeAddresses(surfaces: string[]): Promise<Array<PersonEntity | null>> {
+    return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
+  }
+
+  private async cached(
+    surfaces: string[],
+    cache: Map<string, PersonEntity | null>,
+    load: (missing: string[]) => Promise<Array<PersonEntity | null>>
+  ): Promise<Array<PersonEntity | null>> {
+    const missing = [...new Set(surfaces)].filter((surface) => !cache.has(surface));
+    if (missing.length > 0) {
+      const results = await load(missing);
+      missing.forEach((surface, index) => {
+        cache.set(surface, results[index] ?? null);
+      });
+    }
+    return surfaces.map((surface) => cache.get(surface) ?? null);
+  }
+
+  private async run(
+    surfaces: string[],
+    addresses: string[]
+  ): Promise<{ persons: Array<PersonEntity | null>; addresses: Array<PersonEntity | null> }> {
     const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-person-morphology-"));
     const input = path.join(tempRoot, "input.json");
     const output = path.join(tempRoot, "output.json");
     try {
       await writeFile(
         input,
-        JSON.stringify({ persons: surfaces.map((surface) => ({ surface })) }),
+        JSON.stringify({
+          persons: surfaces.map((surface) => ({ surface })),
+          addresses: addresses.map((surface) => ({ surface }))
+        }),
         "utf8"
       );
       await new Promise<void>((resolve, reject) => {
@@ -240,8 +266,14 @@ export class LocalPersonMorphology implements PersonMorphology {
           else reject(new Error(`PERSON_MORPHOLOGY_FAILED:${code}:${stderr.trim().slice(-400)}`));
         });
       });
-      const parsed = JSON.parse(await readFile(output, "utf8")) as { persons?: unknown[] };
-      return (parsed.persons ?? []).map(toEntity);
+      const parsed = JSON.parse(await readFile(output, "utf8")) as {
+        persons?: unknown[];
+        addresses?: unknown[];
+      };
+      return {
+        persons: (parsed.persons ?? []).map(toEntity),
+        addresses: (parsed.addresses ?? []).map(toEntity)
+      };
     } finally {
       await rm(tempRoot, { recursive: true, force: true });
     }
