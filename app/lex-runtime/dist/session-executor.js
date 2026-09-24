@@ -1,3 +1,4 @@
+import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import { AuditTrail } from "./audit-trail.js";
 import { AuditedFinalizer } from "./audited-finalizer.js";
@@ -520,6 +521,11 @@ export class SafeSessionExecutor {
         const coreLawTools = this.coreLawIndex
             ? new CoreLawToolRuntime(this.coreLawIndex)
             : undefined;
+        // Local 11-12B models call tools unreliably: they get the most relevant
+        // core law articles in the prompt (retrieval, not training).
+        const coreLawRag = this.coreLawIndex && request.model.startsWith("local/")
+            ? coreLawRetrievalPrompt(this.coreLawIndex, protectedQuery)
+            : null;
         const toolSchemas = [
             ...corpusTools.schemas(),
             ...(coreLawTools
@@ -548,7 +554,8 @@ export class SafeSessionExecutor {
                 : []),
             ...(attachments.length > 0
                 ? [documentCitationSystemPrompt(attachments)]
-                : [])
+                : []),
+            ...(coreLawRag ? [coreLawRag] : [])
         ].join("\n\n");
         const draftCallbacks = request.onDraft
             ? createDraftCallbacks(chatPrivacyVault, request.onDraft)

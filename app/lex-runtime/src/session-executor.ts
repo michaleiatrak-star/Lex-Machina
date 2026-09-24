@@ -1,3 +1,4 @@
+import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
 import {
   restoreWithReport,
   type Restoration
@@ -1282,6 +1283,12 @@ export class SafeSessionExecutor implements SessionExecutor {
             this.coreLawIndex
           )
         : undefined;
+    // Local 11-12B models call tools unreliably: they get the most relevant
+    // core law articles in the prompt (retrieval, not training).
+    const coreLawRag =
+      this.coreLawIndex && request.model.startsWith("local/")
+        ? coreLawRetrievalPrompt(this.coreLawIndex, protectedQuery)
+        : null;
     const toolSchemas = [
       ...corpusTools.schemas(),
       ...(coreLawTools
@@ -1310,7 +1317,8 @@ export class SafeSessionExecutor implements SessionExecutor {
         : []),
       ...(attachments.length > 0
         ? [documentCitationSystemPrompt(attachments)]
-        : [])
+        : []),
+      ...(coreLawRag ? [coreLawRag] : [])
     ].join("\n\n");
 
     const draftCallbacks =

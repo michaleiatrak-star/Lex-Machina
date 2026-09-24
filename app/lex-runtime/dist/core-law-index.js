@@ -1,3 +1,4 @@
+import { CoreLawSearchIndex } from "./core-law-search.js";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -193,6 +194,7 @@ export class CoreLawIndex {
     refs = [];
     state = { acts: {}, blockedUntil: null };
     cache = new Map();
+    searchIndex = null;
     refreshing = null;
     constructor(directory = defaultCoreLawDir(), fetcher = globalThis.fetch.bind(globalThis), pdf = new LocalPdfTextExtractor(), now = () => Date.now(), gapMs = REQUEST_GAP_MS) {
         this.directory = directory;
@@ -286,6 +288,28 @@ export class CoreLawIndex {
             Number(b.ref.consolidated) - Number(a.ref.consolidated));
         return scored[0]?.ref ?? null;
     }
+    /**
+     * Ranked search over the current text of every downloaded act (BM25),
+     * built on first use and rebuilt after a new text is downloaded.
+     */
+    search(query, options = {}) {
+        if (!this.searchIndex) {
+            const articles = [];
+            for (const act of this.summaries()) {
+                if (act.articleCount === 0)
+                    continue;
+                const record = this.currentRecord(act.eli);
+                if (!record)
+                    continue;
+                for (const id of record.articleOrder) {
+                    articles.push({ eli: record.eli, title: record.title, article: id, text: record.articles[id] });
+                }
+            }
+            this.searchIndex = new CoreLawSearchIndex(articles);
+        }
+        const eli = options.eli ? (this.state.acts[options.eli]?.currentEli ?? options.eli) : undefined;
+        return this.searchIndex.search(query, { ...(eli ? { eli } : {}), limit: options.limit ?? 10 });
+    }
     record(eli) {
         const cached = this.cache.get(eli);
         if (cached)
@@ -318,6 +342,7 @@ export class CoreLawIndex {
         const record = await this.fetchAct(eli);
         fs.writeFileSync(path.join(this.directory, fileNameFor(eli)), JSON.stringify(record));
         this.cache.delete(eli);
+        this.searchIndex = null;
         return record;
     }
     async pause() {

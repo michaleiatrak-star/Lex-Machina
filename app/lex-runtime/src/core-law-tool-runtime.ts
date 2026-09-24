@@ -1,3 +1,4 @@
+import { searchStems } from "./core-law-search.js";
 import type {
   NormalizedToolCall,
   NormalizedToolResult,
@@ -93,6 +94,48 @@ const SCHEMAS: NormalizedToolSchema[] = [
     }
   }
 ];
+
+/** The part of an article around the first query term it contains. */
+export function articleSnippet(body: string, query: string, chars = SNIPPET_CHARS): string {
+  const normalized = normalizeForSearch(body);
+  const term = searchStems(query).find((stem) => normalized.includes(stem));
+  const at = term ? Math.max(0, normalized.indexOf(term) - 80) : 0;
+  return body.slice(at, at + chars).replace(/\s+/g, " ");
+}
+
+const RAG_MAX_CHARS = 3_600;
+const RAG_ARTICLE_CHARS = 1_100;
+const RAG_MIN_SCORE = 4;
+
+/**
+ * Top core law articles for a question, as a prompt block. Placeholders are
+ * ignored; nothing is returned for small talk or when nothing matches well.
+ */
+export function coreLawRetrievalPrompt(
+  index: Pick<CoreLawIndex, "search" | "currentRecord">,
+  query: string
+): string | null {
+  const clean = query.replace(/\[(?:PII|LMPII):[^\]]+\]/g, " ");
+  if (clean.replace(/\s+/g, " ").trim().length < 12) return null;
+  const blocks: string[] = [];
+  let used = 0;
+  for (const hit of index.search(clean, { limit: 6 })) {
+    if (hit.score < RAG_MIN_SCORE) break;
+    const body = index.currentRecord(hit.eli)?.articles[hit.article];
+    if (!body) continue;
+    const text = body.length > RAG_ARTICLE_CHARS ? body.slice(0, RAG_ARTICLE_CHARS) + " […]" : body;
+    const block = `[${hit.eli}] ${hit.title} — art. ${hit.article}\n${text}`;
+    if (used + block.length > RAG_MAX_CHARS) break;
+    blocks.push(block);
+    used += block.length;
+  }
+  if (blocks.length === 0) return null;
+  return [
+    "# LOKALNE TEKSTY USTAW (dobrane automatycznie z kopii ELI)",
+    "Poniższe artykuły pochodzą z lokalnej kopii tekstów jednolitych aktów z map DR. Cytuj je z ELI i numerem artykułu, nigdy z pamięci. Jeśli nie wystarczą, użyj search_core_law / read_core_law_article; brak artykułu tutaj nie oznacza braku przepisu.",
+    ...blocks
+  ].join("\n\n");
+}
 
 export class CoreLawToolRuntime {
   private readonly events: CoreLawAuditEvent[] = [];
@@ -237,33 +280,23 @@ export class CoreLawToolRuntime {
     }
 
     if (call.name === SEARCH_TOOL) {
-      const terms = normalizeForSearch(String(call.input.query ?? ""))
-        .split(/\s+/)
-        .filter((term) => term.length > 1);
-      if (terms.length === 0) throw new Error("CORE_LAW_QUERY_REQUIRED");
-      const acts =
+      const query = String(call.input.query ?? "").trim();
+      if (!query) throw new Error("CORE_LAW_QUERY_REQUIRED");
+      const act =
         call.input.act !== undefined && call.input.act !== ""
-          ? [this.resolveAct(call.input.act)]
-          : this.index.summaries().filter((act) => act.articleCount > 0);
-      const hits: Array<{ eli: string; title: string; article: string; score: number; snippet: string }> = [];
-      for (const act of acts) {
-        const record = this.index.currentRecord(act.eli);
-        if (!record) continue;
-        for (const id of record.articleOrder) {
-          const body = record.articles[id]!;
-          const normalized = normalizeForSearch(body);
-          if (!terms.every((term) => normalized.includes(term))) continue;
-          const at = Math.max(0, normalized.indexOf(terms[0]!) - 80);
-          hits.push({
-            eli: record.eli,
-            title: record.title,
-            article: id,
-            score: terms.reduce((sum, term) => sum + normalized.split(term).length - 1, 0),
-            snippet: body.slice(at, at + SNIPPET_CHARS).replace(/\s+/g, " ")
-          });
-        }
-      }
-      hits.sort((a, b) => b.score - a.score);
+          ? this.resolveAct(call.input.act)
+          : undefined;
+      const hits = this.index
+        .search(query, { ...(act ? { eli: act.eli } : {}), limit: MAX_SEARCH_HITS })
+        .map((hit) => {
+          const body = this.index.currentRecord(hit.eli)?.articles[hit.article] ?? "";
+          return {
+            eli: hit.eli,
+            title: hit.title,
+            article: hit.article,
+            snippet: articleSnippet(body, query)
+          };
+        });
       this.events.push({
         tool: call.name,
         target: "core-law",
@@ -272,7 +305,7 @@ export class CoreLawToolRuntime {
       });
       return JSON.stringify({
         status: hits.length > 0 ? "OK" : "NO_HITS",
-        hits: hits.slice(0, MAX_SEARCH_HITS).map(({ score: _score, ...hit }) => hit)
+        hits
       });
     }
 

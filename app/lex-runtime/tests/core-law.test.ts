@@ -8,7 +8,7 @@ import {
   htmlToText,
   splitArticles
 } from "../src/core-law-index.js";
-import { CoreLawToolRuntime } from "../src/core-law-tool-runtime.js";
+import { CoreLawToolRuntime, coreLawRetrievalPrompt } from "../src/core-law-tool-runtime.js";
 
 const roots: string[] = [];
 
@@ -133,7 +133,15 @@ describe("core law index", () => {
       title: "Kodeks wykroczeń",
       text: expect.stringContaining("zakłóca spokój")
     });
-    expect(JSON.parse(search!.content).hits.map((hit: { article: string }) => hit.article)).toEqual(["148", "148a"]);
+    expect(JSON.parse(search!.content).hits.map((hit: { article: string }) => hit.article).sort()).toEqual(["148", "148a"]);
+    // Ranked, and inflected question words still find the article.
+    expect(index.search("zabił człowieka ze szczególnym okrucieństwem")[0]).toMatchObject({ article: "148a" });
+    expect(index.search("kara za zakłócanie spokoju krzykiem")[0]).toMatchObject({ eli: "DU/2025/734", article: "51" });
+    // Local models get the best articles in the prompt; small talk gets none.
+    const rag = coreLawRetrievalPrompt(index, "Czy [PII:PERSON:0001|NOM] zakłócał spokój krzykiem i hałasem?");
+    expect(rag).toContain("[DU/2025/734] Kodeks wykroczeń — art. 51");
+    expect(rag).not.toContain("PII:");
+    expect(coreLawRetrievalPrompt(index, "Napisz ok")).toBeNull();
     expect(JSON.parse(missing!.content)).toEqual({ status: "BLOCKED", error: "CORE_LAW_ARTICLE_NOT_FOUND" });
   });
 
