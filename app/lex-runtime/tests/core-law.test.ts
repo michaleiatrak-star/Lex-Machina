@@ -49,11 +49,19 @@ const KK_HTML =
   "<p>Art. 148. § 1. Kto zabija człowieka,</p><p>podlega karze pozbawienia wolności&nbsp;na czas nie krótszy od lat 10.</p>" +
   "<p>Art. 148a. § 1. Kto zabija człowieka ze szczególnym okrucieństwem</p></body></html>";
 
-function fakeEli(options: { deny?: boolean } = {}) {
+function fakeEli(options: { deny?: boolean; references?: Record<string, unknown> } = {}) {
   const requested: string[] = [];
   const fetcher = async (url: string) => {
     requested.push(url);
     if (options.deny) return new Response("", { status: 403 });
+    const references = /\/acts\/(DU\/\d+\/\d+)\/references$/.exec(url);
+    if (references) return Response.json(options.references?.[references[1]!] ?? {});
+    if (url.endsWith("/DU/2026/1500")) {
+      return Response.json({ title: "Obwieszczenie — Kodeks karny (nowszy t.j.)", textHTML: true });
+    }
+    if (url.endsWith("/DU/2026/1500/text.html")) {
+      return new Response("<p>Art. 148. § 1. Kto zabija człowieka, podlega karze w nowym brzmieniu.</p>");
+    }
     if (url.endsWith("/DU/2025/383")) {
       return Response.json({ title: "Obwieszczenie — Kodeks karny", status: "akt jednorazowy", textHTML: true, textPDF: true });
     }
@@ -129,26 +137,118 @@ describe("core law index", () => {
     expect(JSON.parse(missing!.content)).toEqual({ status: "BLOCKED", error: "CORE_LAW_ARTICLE_NOT_FOUND" });
   });
 
-  it("keeps the last good text and pauses when ELI refuses access", async () => {
+  const DAY = 25 * 60 * 60 * 1000;
+
+  async function downloadedIndex(store: string, start: number) {
+    const eli = fakeEli();
+    const index = new CoreLawIndex(store, eli.fetcher as never, eli.pdf as never, () => start, 0);
+    index.load(corpus());
+    await index.refresh();
+    return eli;
+  }
+
+  function later(store: string, now: number, options: Parameters<typeof fakeEli>[0]) {
+    const eli = fakeEli(options);
+    const index = new CoreLawIndex(store, eli.fetcher as never, eli.pdf as never, () => now, 0);
+    index.load(corpus());
+    return { eli, index };
+  }
+
+  it("downloads each text once and afterwards only checks ELI relations", async () => {
     const store = tempDir("lex-core-store-");
-    let now = Date.parse("2026-09-23T12:00:00Z");
-    const good = fakeEli();
-    const first = new CoreLawIndex(store, good.fetcher as never, good.pdf as never, () => now, 0);
-    first.load(corpus());
-    await first.refresh();
+    const start = Date.parse("2026-09-23T12:00:00Z");
+    const first = await downloadedIndex(store, start);
+    expect(first.requested.filter((url) => url.endsWith("/references"))).toEqual([]);
 
-    now += 25 * 60 * 60 * 1000;
-    const denied = fakeEli({ deny: true });
-    const second = new CoreLawIndex(store, denied.fetcher as never, denied.pdf as never, () => now, 0);
-    second.load(corpus());
-    await second.refresh();
-    // Five consecutive refusals stop the run instead of hammering the API.
-    expect(denied.requested).toHaveLength(5);
-    const kk = second.summaries().find((act) => act.eli === "DU/2025/383")!;
-    expect(kk).toMatchObject({ articleCount: 3, lastError: "ELI_HTTP_403" });
-    expect(second.record("DU/2025/383")!.articles["148"]).toContain("Kto zabija");
+    const { eli, index } = later(store, start + DAY, {});
+    await index.refresh();
+    // Only the consolidated texts are checked, and only their relations.
+    expect(eli.requested).toEqual([
+      "https://api.sejm.gov.pl/eli/acts/DU/2025/383/references",
+      "https://api.sejm.gov.pl/eli/acts/DU/2025/734/references"
+    ]);
 
-    await second.refresh();
-    expect(denied.requested).toHaveLength(5);
+    await index.refresh();
+    expect(eli.requested).toHaveLength(2);
+  });
+
+  it("downloads a new amendment on its own and flags it on the article", async () => {
+    const store = tempDir("lex-core-store-");
+    const start = Date.parse("2026-09-23T12:00:00Z");
+    await downloadedIndex(store, start);
+
+    const { eli, index } = later(store, start + DAY, {
+      references: {
+        "DU/2025/383": {
+          "Nowelizacje po tekście jednolitym": [
+            { act: { ELI: "DU/2026/999", title: "Ustawa o zmianie ustawy — Kodeks karny", promulgation: "2026-09-20" } }
+          ]
+        }
+      }
+    });
+    await index.refresh();
+    expect(eli.requested).toContain("https://api.sejm.gov.pl/eli/acts/DU/2026/999");
+    expect(eli.requested).not.toContain("https://api.sejm.gov.pl/eli/acts/DU/2025/383/text.html");
+
+    const [read] = await new CoreLawToolRuntime(index).runTools([
+      { id: "1", name: "read_core_law_article", input: { act: "KK", article: "148" } }
+    ]);
+    expect(JSON.parse(read!.content)).toMatchObject({
+      eli: "DU/2025/383",
+      amendmentsAfter: [{ eli: "DU/2026/999", title: "Ustawa o zmianie ustawy — Kodeks karny" }],
+      warning: expect.stringContaining("nowelizac")
+    });
+  });
+
+  it("replaces the copy when ELI publishes a newer consolidated text", async () => {
+    const store = tempDir("lex-core-store-");
+    const start = Date.parse("2026-09-23T12:00:00Z");
+    await downloadedIndex(store, start);
+
+    const { index } = later(store, start + DAY, {
+      references: {
+        "DU/2025/383": {
+          "Tekst jednolity dla aktu": [{ act: { ELI: "DU/1997/553" } }]
+        },
+        "DU/1997/553": {
+          "Inf. o tekście jednolitym": [
+            { act: { ELI: "DU/2025/383", status: "akt objęty tekstem jednolitym" } },
+            { act: { ELI: "DU/2026/1500", status: "obowiązujący" } }
+          ]
+        }
+      }
+    });
+    await index.refresh();
+
+    const [read] = await new CoreLawToolRuntime(index).runTools([
+      { id: "1", name: "read_core_law_article", input: { act: "KK", article: "148" } }
+    ]);
+    expect(JSON.parse(read!.content)).toMatchObject({
+      eli: "DU/2026/1500",
+      mapEli: "DU/2025/383",
+      text: expect.stringContaining("w nowym brzmieniu"),
+      amendmentsAfter: []
+    });
+  });
+
+  it("keeps the texts it has when ELI refuses access", async () => {
+    const store = tempDir("lex-core-store-");
+    const start = Date.parse("2026-09-23T12:00:00Z");
+    await downloadedIndex(store, start);
+
+    const { eli, index } = later(store, start + DAY, { deny: true });
+    await index.refresh();
+    expect(eli.requested).toHaveLength(2);
+    expect(index.summary("DU/2025/383")).toMatchObject({ articleCount: 3, lastError: "ELI_HTTP_403" });
+    expect(index.currentRecord("DU/2025/383")!.articles["148"]).toContain("Kto zabija");
+  });
+
+  it("pauses after five refusals in a row instead of hammering ELI", async () => {
+    const store = tempDir("lex-core-store-");
+    const { eli, index } = later(store, Date.parse("2026-09-23T12:00:00Z"), { deny: true });
+    await index.refresh();
+    expect(eli.requested).toHaveLength(5);
+    await index.refresh();
+    expect(eli.requested).toHaveLength(5);
   });
 });

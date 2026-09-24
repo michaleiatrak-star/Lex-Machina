@@ -165,12 +165,13 @@ export class CoreLawToolRuntime {
                 .toLowerCase();
             if (!article)
                 throw new Error("CORE_LAW_ARTICLE_REQUIRED");
-            const record = this.index.record(ref.eli);
+            const record = this.index.currentRecord(ref.eli);
             if (!record)
                 throw new Error("CORE_LAW_TEXT_NOT_YET_DOWNLOADED");
             const text = record.articles[article];
             if (text === undefined)
                 throw new Error("CORE_LAW_ARTICLE_NOT_FOUND");
+            const amendmentsAfter = this.index.summary(ref.eli)?.amendmentsAfter ?? [];
             this.events.push({
                 tool: call.name,
                 target: `${ref.eli}:art.${article}`,
@@ -185,11 +186,20 @@ export class CoreLawToolRuntime {
                 fetchedAt: record.fetchedAt,
                 sourceUrl: record.sourceUrl,
                 consolidatedText: ref.consolidated,
+                ...(record.eli !== ref.eli
+                    ? {
+                        mapEli: ref.eli,
+                        newerConsolidatedText: `Mapa wskazuje ${ref.eli}; ELI ma nowszy tekst jednolity ${record.eli} i to jego brzmienie jest podane.`
+                    }
+                    : {}),
+                amendmentsAfter,
                 article,
                 text: text.slice(0, MAX_ARTICLE_CHARS),
                 truncated: text.length > MAX_ARTICLE_CHARS,
                 mapNotes: ref.notes,
-                warning: "Brzmienie z tekstu wskazanego w mapie dziedzinowej. Jeśli mapNotes lub actStatus wskazują nowelizacje po tym tekście, potwierdź brzmienie verify_legal_reference przed przedstawieniem go jako obowiązującego."
+                warning: amendmentsAfter.length > 0
+                    ? `Po tym tekście jednolitym ogłoszono ${amendmentsAfter.length} nowelizację/nowelizacje (amendmentsAfter). Sprawdź, czy zmieniają ten artykuł (read_core_law_article z ELI nowelizacji albo verify_legal_reference), zanim przedstawisz brzmienie jako obowiązujące.`
+                    : "Brzmienie z najnowszego pobranego tekstu jednolitego. Jeśli mapNotes lub actStatus wskazują zmiany, potwierdź brzmienie verify_legal_reference przed przedstawieniem go jako obowiązującego."
             });
         }
         if (call.name === SEARCH_TOOL) {
@@ -203,7 +213,7 @@ export class CoreLawToolRuntime {
                 : this.index.summaries().filter((act) => act.articleCount > 0);
             const hits = [];
             for (const act of acts) {
-                const record = this.index.record(act.eli);
+                const record = this.index.currentRecord(act.eli);
                 if (!record)
                     continue;
                 for (const id of record.articleOrder) {

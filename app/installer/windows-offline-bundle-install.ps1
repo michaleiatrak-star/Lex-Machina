@@ -197,6 +197,14 @@ try {
     # it through *>&1 turned harmless native stderr lines (e.g. PaddleOCR
     # UserWarning) into terminating errors under Windows PowerShell 5.1.
     $selfTestShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+    # A parent PowerShell 7 exports its own PSModulePath; Windows PowerShell
+    # 5.1 inheriting it cannot autoload built-in cmdlets such as Get-FileHash.
+    $savedModulePath = $env:PSModulePath
+    $env:PSModulePath = @(
+      (Join-Path $env:ProgramFiles "WindowsPowerShell\Modules"),
+      (Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\Modules")
+    ) -join ";"
+    try {
     $selfTestProcess = Start-Process `
       -FilePath $selfTestShell `
       -ArgumentList @(
@@ -211,6 +219,9 @@ try {
       -NoNewWindow `
       -Wait `
       -PassThru
+    } finally {
+      $env:PSModulePath = $savedModulePath
+    }
     if (Test-Path -LiteralPath $selfTestErrLog -PathType Leaf) {
       Get-Content -LiteralPath $selfTestErrLog -ErrorAction SilentlyContinue |
         Add-Content -LiteralPath $selfTestLog -Encoding UTF8

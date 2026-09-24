@@ -3,7 +3,9 @@ import os from "node:os";
 import path from "node:path";
 import { LocalPdfTextExtractor } from "./pdf-text-extractor.js";
 const ELI_API = "https://api.sejm.gov.pl/eli";
-const REFRESH_AFTER_MS = 24 * 60 * 60 * 1000;
+// Texts are downloaded once. Consolidated texts are re-checked (ELI relations
+// only, no text) at most once a day for new amendments or a newer t.j.
+const CHECK_AFTER_MS = 24 * 60 * 60 * 1000;
 const RETRY_AFTER_BLOCK_MS = 60 * 60 * 1000;
 const REQUEST_GAP_MS = 750;
 const REQUEST_TIMEOUT_MS = 90_000;
@@ -141,6 +143,35 @@ export function normalizeForSearch(value) {
         .replace(/Ł/g, "L")
         .toLocaleLowerCase("pl");
 }
+function eliLinks(refs, relation) {
+    if (!refs || typeof refs !== "object")
+        return [];
+    const links = [];
+    for (const [key, value] of Object.entries(refs)) {
+        if (!relation(key) || !Array.isArray(value))
+            continue;
+        for (const item of value) {
+            const wrapper = (item && typeof item === "object" ? item : {});
+            const act = (wrapper.act && typeof wrapper.act === "object" ? wrapper.act : wrapper);
+            const match = /^DU\/(\d{4})\/(\d+)$/i.exec(String(act.ELI ?? "").trim());
+            if (!match)
+                continue;
+            links.push({
+                eli: `DU/${match[1]}/${Number(match[2])}`,
+                year: Number(match[1]),
+                pos: Number(match[2]),
+                title: typeof act.title === "string" ? act.title : null,
+                promulgation: typeof act.promulgation === "string" ? act.promulgation : null,
+                status: typeof act.status === "string" ? act.status : ""
+            });
+        }
+    }
+    return links;
+}
+function eliOrder(eli) {
+    const match = /^DU\/(\d{4})\/(\d+)$/.exec(eli);
+    return match ? [Number(match[1]), Number(match[2])] : [0, 0];
+}
 export function defaultCoreLawDir(env = process.env) {
     const override = env.LEX_CORE_LAW_DIR?.trim();
     if (override)
@@ -193,22 +224,50 @@ export class CoreLawIndex {
                 textSource: state?.textSource ?? null,
                 articleCount: state?.articleCount ?? 0,
                 fetchedAt: state?.fetchedAt ?? null,
-                lastError: state?.lastError ?? null
+                lastError: state?.lastError ?? null,
+                currentEli: state?.currentEli ?? ref.eli,
+                amendmentsAfter: state?.amendmentsAfter ?? []
             };
         });
     }
+    summary(eli) {
+        return this.summaries().find((act) => act.eli === eli) ?? null;
+    }
+    /** The text to serve for a map act: its newest downloaded t.j. */
+    currentRecord(eli) {
+        const current = this.state.acts[eli]?.currentEli ?? eli;
+        return this.record(current) ?? this.record(eli);
+    }
     ref(eli) {
         return this.refs.find((item) => item.eli === eli);
+    }
+    // Amendments downloaded after a consolidated text are readable by ELI too.
+    refOrAmendment(eli) {
+        const ref = this.ref(eli);
+        if (ref)
+            return ref;
+        for (const [mapEli, state] of Object.entries(this.state.acts)) {
+            if (state.amendmentsAfter?.some((item) => item.eli === eli)) {
+                return {
+                    eli,
+                    consolidated: false,
+                    labels: [],
+                    domains: this.ref(mapEli)?.domains ?? [],
+                    notes: [`Nowelizacja po tekście jednolitym ${state.currentEli ?? mapEli}`]
+                };
+            }
+        }
+        return null;
     }
     /** ELI, "Dz.U. 2025 poz. 383", a map label (KK, Kodeks spółek handlowych) or a title fragment. */
     resolve(act) {
         const trimmed = act.trim();
         const eli = /^DU\/(\d{4})\/(\d+)$/i.exec(trimmed);
         if (eli)
-            return this.ref(`DU/${eli[1]}/${Number(eli[2])}`) ?? null;
+            return this.refOrAmendment(`DU/${eli[1]}/${Number(eli[2])}`);
         const dzu = /(\d{4})\s*(?:r\.\s*)?poz\.\s*(\d+)/i.exec(trimmed);
         if (dzu)
-            return this.ref(`DU/${dzu[1]}/${Number(dzu[2])}`) ?? null;
+            return this.refOrAmendment(`DU/${dzu[1]}/${Number(dzu[2])}`);
         const wanted = normalizeForSearch(trimmed).replace(/[.\s]+/g, "");
         if (!wanted)
             return null;
@@ -255,6 +314,65 @@ export class CoreLawIndex {
         fs.writeFileSync(`${target}.tmp`, JSON.stringify(this.state, null, 1));
         fs.renameSync(`${target}.tmp`, target);
     }
+    async store(eli) {
+        const record = await this.fetchAct(eli);
+        fs.writeFileSync(path.join(this.directory, fileNameFor(eli)), JSON.stringify(record));
+        this.cache.delete(eli);
+        return record;
+    }
+    async pause() {
+        if (this.gapMs > 0) {
+            await new Promise((resolve) => setTimeout(resolve, this.gapMs));
+        }
+    }
+    /**
+     * A consolidated text is re-read only when ELI shows a newer t.j. of the
+     * same act; a new amendment after the t.j. is downloaded on its own.
+     */
+    async checkConsolidated(ref, state) {
+        const current = state.currentEli ?? ref.eli;
+        const references = await (await this.get(`${ELI_API}/acts/${current}/references`, "application/json")).json();
+        const known = new Set((state.amendmentsAfter ?? []).map((item) => item.eli));
+        const amendments = eliLinks(references, (key) => /^Nowelizacje po tekście jednolitym$/i.test(key));
+        for (const amendment of amendments) {
+            if (known.has(amendment.eli))
+                continue;
+            await this.pause();
+            if (!this.record(amendment.eli)) {
+                await this.store(amendment.eli);
+            }
+            state.amendmentsAfter = [
+                ...(state.amendmentsAfter ?? []),
+                { eli: amendment.eli, title: amendment.title, promulgation: amendment.promulgation }
+            ];
+            known.add(amendment.eli);
+        }
+        const base = eliLinks(references, (key) => /jednolit\S* dla/i.test(key))[0];
+        if (base) {
+            await this.pause();
+            const baseReferences = await (await this.get(`${ELI_API}/acts/${base.eli}/references`, "application/json")).json();
+            const [currentYear, currentPos] = eliOrder(current);
+            const newest = eliLinks(baseReferences, (key) => /^Inf\. o tekście jednolitym$/i.test(key))
+                .filter((link) => !/uchyl|nieobowi/i.test(link.status))
+                .sort((a, b) => a.year - b.year || a.pos - b.pos)
+                .at(-1);
+            if (newest &&
+                (newest.year > currentYear ||
+                    (newest.year === currentYear && newest.pos > currentPos))) {
+                await this.pause();
+                const record = await this.store(newest.eli);
+                state.currentEli = newest.eli;
+                // Amendments before the new t.j. are part of it now.
+                state.amendmentsAfter = [];
+                state.title = record.title;
+                state.status = record.status;
+                state.textSource = record.textSource;
+                state.articleCount = record.articleOrder.length;
+                state.fetchedAt = record.fetchedAt;
+            }
+        }
+        state.checkedAt = new Date(this.now()).toISOString();
+    }
     async refreshAll() {
         if (this.state.blockedUntil &&
             Date.parse(this.state.blockedUntil) > this.now()) {
@@ -262,47 +380,46 @@ export class CoreLawIndex {
         }
         let consecutiveFailures = 0;
         for (const ref of this.refs) {
-            const state = this.state.acts[ref.eli];
-            const fresh = state?.fetchedAt &&
-                this.now() - Date.parse(state.fetchedAt) < REFRESH_AFTER_MS &&
-                fs.existsSync(path.join(this.directory, fileNameFor(ref.eli)));
-            if (fresh)
+            const state = this.state.acts[ref.eli] ??
+                { title: null, status: null, textSource: null, articleCount: 0, fetchedAt: null, lastError: null };
+            const downloaded = this.record(state.currentEli ?? ref.eli) !== null;
+            const checkDue = downloaded &&
+                ref.consolidated &&
+                (!state.checkedAt || this.now() - Date.parse(state.checkedAt) >= CHECK_AFTER_MS);
+            if (downloaded && !checkDue)
                 continue;
             try {
-                const record = await this.fetchAct(ref.eli);
-                fs.writeFileSync(path.join(this.directory, fileNameFor(ref.eli)), JSON.stringify(record));
-                this.cache.delete(ref.eli);
-                this.state.acts[ref.eli] = {
-                    title: record.title,
-                    status: record.status,
-                    textSource: record.textSource,
-                    articleCount: record.articleOrder.length,
-                    fetchedAt: record.fetchedAt,
-                    lastError: null
-                };
+                if (!downloaded) {
+                    const record = await this.store(ref.eli);
+                    Object.assign(state, {
+                        title: record.title,
+                        status: record.status,
+                        textSource: record.textSource,
+                        articleCount: record.articleOrder.length,
+                        fetchedAt: record.fetchedAt,
+                        currentEli: ref.eli,
+                        checkedAt: new Date(this.now()).toISOString()
+                    });
+                }
+                else {
+                    await this.checkConsolidated(ref, state);
+                }
+                state.lastError = null;
                 consecutiveFailures = 0;
             }
             catch (error) {
-                // Keep the last good text; only record why this refresh failed.
-                this.state.acts[ref.eli] = {
-                    title: state?.title ?? null,
-                    status: state?.status ?? null,
-                    textSource: state?.textSource ?? null,
-                    articleCount: state?.articleCount ?? 0,
-                    fetchedAt: state?.fetchedAt ?? null,
-                    lastError: error instanceof Error ? error.message : String(error)
-                };
+                // Keep the text already held; only record why this attempt failed.
+                state.lastError = error instanceof Error ? error.message : String(error);
                 consecutiveFailures += 1;
-                if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-                    this.state.blockedUntil = new Date(this.now() + RETRY_AFTER_BLOCK_MS).toISOString();
-                    this.saveState();
-                    return;
-                }
+            }
+            this.state.acts[ref.eli] = state;
+            if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+                this.state.blockedUntil = new Date(this.now() + RETRY_AFTER_BLOCK_MS).toISOString();
+                this.saveState();
+                return;
             }
             this.saveState();
-            if (this.gapMs > 0) {
-                await new Promise((resolve) => setTimeout(resolve, this.gapMs));
-            }
+            await this.pause();
         }
         this.state.blockedUntil = null;
         this.saveState();
