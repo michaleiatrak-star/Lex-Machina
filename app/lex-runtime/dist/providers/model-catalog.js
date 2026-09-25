@@ -1,5 +1,6 @@
 import { LocalModelRuntime as DefaultLocalModelRuntime } from "../local-model-runtime.js";
 import { MissingProviderCredentialError } from "./credentials.js";
+import { newestModelFamilies } from "./model-families.js";
 function record(value) {
     return typeof value === "object" && value !== null && !Array.isArray(value)
         ? value
@@ -104,7 +105,17 @@ export class DynamicModelCatalog {
             ? value
             : undefined;
     }
+    /**
+     * The two newest versions of each main family (LEX_MODEL_CATALOG_ALL=1
+     * lists everything the provider returns).
+     */
     async list(provider) {
+        const models = await this.listAll(provider);
+        return /^(1|true|on)$/i.test(process.env.LEX_MODEL_CATALOG_ALL?.trim() ?? "")
+            ? models
+            : newestModelFamilies(models);
+    }
+    async listAll(provider) {
         if (provider === "openai") {
             const local = this.listConfiguredLocalOpenAiModels();
             const key = await this.credentials.getApiKey(provider);

@@ -33,6 +33,7 @@ function replaceAnthropicOAuthToken(token) {
             ? Buffer.from(token, "utf8")
             : null;
 }
+import { ACCOUNT_SESSION_MODELS } from "./model-families.js";
 const ACCOUNT_MODEL_IDS = {
     openai: "account/openai/default",
     anthropic: "account/anthropic/default",
@@ -1528,7 +1529,21 @@ export function accountSessionModelId(provider) {
     return ACCOUNT_MODEL_IDS[provider];
 }
 export function isAccountSessionModel(provider, model) {
-    return model === ACCOUNT_MODEL_IDS[provider];
+    return model === ACCOUNT_MODEL_IDS[provider] ||
+        accountSessionClientModel(provider, model) !== null;
+}
+/**
+ * The client model of "account/<provider>/<model>"; null for the default
+ * (the client decides) or a model not offered for the account session.
+ */
+export function accountSessionClientModel(provider, model) {
+    const prefix = `account/${provider}/`;
+    if (!model.startsWith(prefix))
+        return null;
+    const id = model.slice(prefix.length);
+    return (ACCOUNT_SESSION_MODELS[provider] ?? []).some((item) => item.id === id)
+        ? id
+        : null;
 }
 function parseToolCalls(text) {
     let normalized = text.trim();
@@ -1844,7 +1859,11 @@ export class AccountSessionManager {
                 "Use the mcp__lex tools for legal verification, case law and legal sources. Do not access anything else. " +
                 "A resumed host session is continuity context only: never reuse facts from earlier host turns unless they are also in the current Lex Machina request.";
             const input = claudeInput(args.prompt, args.images);
-            const run = (tail) => runCli("anthropic", claudeCorpusArgs(systemPrompt, mcpConfig, [...input.args, ...tail]), input.stdin, COMMAND_TIMEOUT_MS, args.corpus.root, args.abortSignal, { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS });
+            const run = (tail) => runCli("anthropic", claudeCorpusArgs(systemPrompt, mcpConfig, [
+                ...input.args,
+                ...(args.clientModel ? ["--model", args.clientModel] : []),
+                ...tail
+            ]), input.stdin, COMMAND_TIMEOUT_MS, args.corpus.root, args.abortSignal, { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS });
             let result = null;
             const savedSessionId = await readAccountSessionId("anthropic", args.continuityKey);
             if (savedSessionId) {
@@ -1887,7 +1906,9 @@ export class AccountSessionManager {
     }
     async runText(provider, prompt, abortSignal, continuityKey, 
     // Claude only (stream-json input); other CLIs get the text.
-    images = []) {
+    images = [], 
+    // A model chosen for the account session; null lets the client decide.
+    clientModel = null) {
         const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-account-session-"));
         const allowExternalTakeover = !continuityKey ||
             !await hasPinnedAccountSession(provider);
@@ -1898,7 +1919,8 @@ export class AccountSessionManager {
             }
             if (provider === "openai") {
                 const outputPath = path.join(workDir, "last-message.txt");
-                const preferredModel = codexAccountModel();
+                const preferredModel = clientModel ??
+                    codexAccountModel();
                 const candidateModels = [
                     preferredModel,
                     "gpt-5.6-luna",
@@ -2020,7 +2042,12 @@ export class AccountSessionManager {
                 "anthropic") {
                 const lexSystemPrompt = "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
                 const input = claudeInput(prompt, images);
-                const commonArgs = claudeHeadlessArgs(lexSystemPrompt, input.args);
+                const commonArgs = claudeHeadlessArgs(lexSystemPrompt, [
+                    ...input.args,
+                    ...(clientModel
+                        ? ["--model", clientModel]
+                        : [])
+                ]);
                 const hostCwd = workDir;
                 const runClaude = async (tail) => {
                     const run = await runCli(provider, [
@@ -2125,7 +2152,8 @@ export async function streamAccountSession(manager, provider, params) {
             runTools: params.runTools,
             ...(params.callbacks?.onToolCallStart ? { onToolCall: params.callbacks.onToolCallStart } : {}),
             ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
-            ...(params.continuityKey ? { continuityKey: params.continuityKey } : {})
+            ...(params.continuityKey ? { continuityKey: params.continuityKey } : {}),
+            clientModel: accountSessionClientModel(provider, params.model)
         });
         if (!text.trim())
             throw new Error("ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic");
@@ -2134,7 +2162,7 @@ export async function streamAccountSession(manager, provider, params) {
     }
     const maxIterations = Math.max(1, Math.min(params.maxIterations ?? 10, 12));
     for (let iteration = 0; iteration < maxIterations; iteration += 1) {
-        const output = await manager.runText(provider, buildAccountPrompt(params, toolTranscript), params.abortSignal, params.continuityKey, provider === "anthropic" ? messageImages(params) : []);
+        const output = await manager.runText(provider, buildAccountPrompt(params, toolTranscript), params.abortSignal, params.continuityKey, provider === "anthropic" ? messageImages(params) : [], accountSessionClientModel(provider, params.model));
         const calls = parseToolCalls(output);
         if (!calls) {
             params.callbacks?.onContentDelta?.(output);

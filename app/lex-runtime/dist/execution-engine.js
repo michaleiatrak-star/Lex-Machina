@@ -27,15 +27,13 @@ export function latestUserTurn(query) {
             USER_TURN_MARKER.length)
         : query;
 }
-export function isLocalLightweightConversation(model, query, hasBoundContext) {
-    if (!model.startsWith("local/")) {
-        return false;
-    }
-    // Exact trivial chat commands are user intent in their own right. They must
-    // not become expensive legal-workflow requests merely because a case has a
-    // durable workflow/session state attached. The lexical allow-list below is
-    // intentionally narrow; substantive legal requests still use all gates.
-    void hasBoundContext;
+/**
+ * Legal gate: an exact trivial chat command (greeting, test, thanks, "napisz
+ * ok") is user intent in its own right. It never starts a legal workflow,
+ * case retrieval or skill loading, whatever the provider, case or work mode.
+ * The allow-list is intentionally narrow; anything else keeps every gate.
+ */
+export function isTrivialChatCommand(query) {
     const normalized = latestUserTurn(query)
         .normalize("NFKC")
         .trim()
@@ -44,8 +42,15 @@ export function isLocalLightweightConversation(model, query, hasBoundContext) {
         .replace(/\s+/g, " ");
     return (/^(?:napisz|odpowiedz|powiedz)(?: tylko)?[: ]+ok[.!?]*$/
         .test(normalized) ||
-        /^(?:ok|test|hej|cześć|czesc|dzień dobry|dzien dobry|dzięki|dzieki)[.!?]*$/
+        /^(?:ok|okej|okay|test|testuję|testuje|hej|hejka|halo|cześć|czesc|witaj|witam|dzień dobry|dzien dobry|dobry wieczór|dobry wieczor|dzięki|dzieki|dziękuję|dziekuje|jesteś|jestes|działasz|dzialasz)[.!?]*$/
             .test(normalized));
+}
+export function isLocalLightweightConversation(model, query, hasBoundContext) {
+    // Bound case/workflow state does not turn a trivial command into a legal
+    // request (see isTrivialChatCommand).
+    void hasBoundContext;
+    return (model.startsWith("local/") &&
+        isTrivialChatCommand(query));
 }
 // Protected person names are inflected locally: the model only names the case.
 export const PERSON_CASE_PROTOCOL = "Person and address tokens ([PII:PERSON:0001], [LMPII:D01:PERSON:0001], [PII:ADDRESS:0001]) stand for one person or one address each, whatever case the document used. When you write such a token in a sentence, you MUST append the grammatical case of that position inside the brackets (HARD GATE: a person or address token without a case is an error): NOM, GEN, DAT, ACC, INS, LOC or VOC, e.g. \"rozmawiał z [PII:PERSON:0001|INS]\", \"wezwanie wobec [LMPII:D01:PERSON:0002|GEN]\", \"zamieszkały przy [PII:ADDRESS:0001|LOC]\". Never write, inflect or guess the name or address yourself.";
@@ -261,14 +266,15 @@ export class LexExecutionEngine {
             args.contractWorkflowContext ||
             args.orderedCaseWorkflowContext ||
             !skillEnvelope.automatic));
-        const lightweightLocal = trivialLocal ||
+        const trivialChat = isTrivialChatCommand(effectiveQuery);
+        const lightweightLocal = trivialChat ||
             conversationalOnly;
         if (lightweightLocal) {
             emit("provider_start", args.provider, "OK", args.model);
             const response = await this.providers.stream(args.provider, {
                 model: args.model,
                 systemPrompt: conversationalOnly &&
-                    !trivialLocal
+                    !trivialChat
                     ? "Jesteś asystentem Lex Machina. Router uznał tę wiadomość za niezwiązaną z prawem, więc skille prawne nie zostały załadowane. Odpowiedz rzeczowo, w języku użytkownika. Nie powołuj przepisów, sygnatur ani terminów prawnych; jeśli pytanie jednak dotyczy sprawy prawnej, powiedz to wprost i poproś o doprecyzowanie, aby uruchomić pełną analizę prawną."
                     : "Jesteś asystentem Lex Machina. Wykonaj dosłownie krótkie polecenie użytkownika. Jeśli prosi o napisanie konkretnego słowa lub zdania, odpowiedz wyłącznie tym tekstem, bez powitań i komentarzy. Na powitanie odpowiedz jednym krótkim zdaniem. Odpowiadaj po polsku.",
                 ...(args.continuityKey
@@ -279,7 +285,7 @@ export class LexExecutionEngine {
                 messages: [
                     {
                         role: "user",
-                        content: trivialLocal
+                        content: trivialChat
                             ? latestUserTurn(effectiveQuery)
                             : effectiveQuery
                     }
@@ -302,8 +308,8 @@ export class LexExecutionEngine {
                 .trim()) {
                 throw new LexExecutionError("Provider returned an empty lightweight local response.", "LOCAL_LIGHTWEIGHT_PROVIDER", [...events]);
             }
-            emit("gate", "G7_VERTICAL_SLICE", "OK", trivialLocal
-                ? "local-lightweight"
+            emit("gate", "G7_VERTICAL_SLICE", "OK", trivialChat
+                ? "trivial-chat"
                 : "conversational-non-legal");
             return {
                 provider: args.provider,

@@ -45,6 +45,7 @@ import {
   keepAllDirectives,
   listCaseFiles,
   processStoredCaseFile,
+  uploadCaseFile,
   listCaseSchedule,
   listCases,
   loginProviderAccount,
@@ -86,6 +87,12 @@ import {
   describeDocumentFile,
   enqueueDocumentDropFiles
 } from "./document-drop-queue.js";
+import {
+  createDocumentStagingState,
+  stageDocuments,
+  takeStagedDocuments,
+  updateStagedDocument
+} from "./document-staging.js";
 import {
   AUTO_CASE_TYPE,
   DETERMINISTIC_ACTIONS,
@@ -1045,6 +1052,10 @@ export default function MatterChatApp({
   const [includeFirmKnowledge, setIncludeFirmKnowledge] = useState(false);
   // Photos go to image-capable models as evidence; pages with text only on request.
   const [imagesWithText, setImagesWithText] = useState(false);
+  // Added files wait for a per-file decision; nothing starts OCR on its own.
+  const [documentStaging, setDocumentStaging] = useState(
+    createDocumentStagingState
+  );
   const [documentDropQueue, setDocumentDropQueue] = useState(
     createDocumentDropQueueState
   );
@@ -1929,6 +1940,8 @@ export default function MatterChatApp({
       return;
     }
     setPendingFirstMessage(null);
+    // Files waiting for a decision were added for the case being left.
+    setDocumentStaging(createDocumentStagingState());
     setExecutionError("");
     setGeneratedDocumentMessage("");
     setPendingFinalDocument(null);
@@ -1973,8 +1986,8 @@ export default function MatterChatApp({
       if (!selectedCase || selectedCase.archivedAt) {
         await createLocalCase(newCaseName.trim() || "Nowa sprawa");
       }
-      setDocumentDropQueue((current) =>
-        enqueueDocumentDropFiles(current, incoming)
+      setDocumentStaging((current) =>
+        stageDocuments(current, incoming)
       );
       setActiveTab("chat");
     } catch {
@@ -1982,6 +1995,48 @@ export default function MatterChatApp({
         "Nie udało się utworzyć aktywnej sprawy dla dodawanych plików."
       );
     }
+  }
+
+  function processStagedDocuments(ids?: string[]): void {
+    const taken = takeStagedDocuments(documentStaging, ids);
+    if (taken.files.length === 0) return;
+    setDocumentStaging(taken.state);
+    setDocumentDropQueue((current) =>
+      enqueueDocumentDropFiles(current, taken.files)
+    );
+  }
+
+  async function saveStagedDocuments(ids?: string[]): Promise<void> {
+    const targetCase = caseId;
+    const items = documentStaging.items.filter(
+      (item) => item.status !== "SAVING" && (!ids || ids.includes(item.id))
+    );
+    for (const item of items) {
+      setDocumentStaging((current) =>
+        updateStagedDocument(current, item.id, { status: "SAVING" })
+      );
+      try {
+        await uploadCaseFile(targetCase, item.file);
+        setDocumentStaging((current) =>
+          takeStagedDocuments(
+            updateStagedDocument(current, item.id, { status: "PENDING" }),
+            [item.id]
+          ).state
+        );
+        setWorkspaceRefresh((value) => value + 1);
+      } catch (error) {
+        setDocumentStaging((current) =>
+          updateStagedDocument(current, item.id, {
+            status: "FAILED",
+            error: error instanceof Error ? error.message : String(error)
+          })
+        );
+      }
+    }
+  }
+
+  function removeStagedDocuments(ids?: string[]): void {
+    setDocumentStaging((current) => takeStagedDocuments(current, ids).state);
   }
 
   function handleDrop(event: DragEvent<HTMLElement>): void {
@@ -3416,8 +3471,8 @@ export default function MatterChatApp({
               onClick={() => setActiveTab(id)}
             >
               {label}
-              {id === "case" && documentDropQueue.total > 0 ? (
-                <span>{documentDropQueue.total}</span>
+              {id === "case" && documentDropQueue.total + documentStaging.items.length > 0 ? (
+                <span>{documentDropQueue.total + documentStaging.items.length}</span>
               ) : null}
             </button>
           ))}
@@ -3900,6 +3955,78 @@ export default function MatterChatApp({
               : error}
           </div>
         ))}
+
+        {documentStaging.items.length > 0 ? (
+          <section className="chat-card-stack chat-document-flow" aria-label="Pliki do decyzji">
+            <article className="chat-card">
+              <p className="eyebrow">Dodane pliki · decyzja przed przetwarzaniem</p>
+              <h2>{documentStaging.items.length} do decyzji</h2>
+              <p>
+                OCR nie startuje sam. Dla każdego pliku wybierz: przetworzenie teraz (OCR i
+                decyzja o anonimizacji) albo zapis w sprawie bez przetwarzania - taki plik
+                przetworzysz później z listy dokumentów sprawy.
+              </p>
+              {documentStaging.rejected > 0 ? (
+                <p className="chat-inline-error">
+                  Pominięto {documentStaging.rejected} plików (puste albo ponad limit {MAX_DOCUMENT_DROP_QUEUE}).
+                </p>
+              ) : null}
+              <ul className="chat-file-list">
+                {documentStaging.items.map((item) => (
+                  <li key={item.id}>
+                    <strong>{item.file.name}</strong>
+                    <small>
+                      {describeDocumentFile(item.file)}
+                      {item.status === "SAVING" ? " · zapisuję w sprawie…" : ""}
+                      {item.status === "FAILED" ? ` · nie zapisano: ${item.error ?? ""}` : ""}
+                    </small>
+                    <span className="chat-file-actions">
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={item.status === "SAVING"}
+                        onClick={() => processStagedDocuments([item.id])}
+                      >
+                        OCR i prywatność teraz
+                      </button>
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={item.status === "SAVING" || !caseId}
+                        onClick={() => void saveStagedDocuments([item.id])}
+                      >
+                        Zapisz bez przetwarzania
+                      </button>
+                      <button
+                        type="button"
+                        className="chat-secondary-action"
+                        disabled={item.status === "SAVING"}
+                        onClick={() => removeStagedDocuments([item.id])}
+                      >
+                        Usuń
+                      </button>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {documentStaging.items.length > 1 ? (
+                <span className="chat-file-actions">
+                  <button type="button" className="chat-secondary-action" onClick={() => processStagedDocuments()}>
+                    Przetwórz wszystkie
+                  </button>
+                  <button
+                    type="button"
+                    className="chat-secondary-action"
+                    disabled={!caseId}
+                    onClick={() => void saveStagedDocuments()}
+                  >
+                    Zapisz wszystkie bez przetwarzania
+                  </button>
+                </span>
+              ) : null}
+            </article>
+          </section>
+        ) : null}
 
         {documentDropQueue.total > 0 ? (
           <section className="chat-card-stack chat-document-flow" aria-label="OCR i prywatność plików">

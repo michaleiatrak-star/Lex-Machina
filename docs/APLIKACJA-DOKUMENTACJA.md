@@ -36,6 +36,7 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - Obsługiwane: PDF, obrazy, DOCX, ODT, XLSX/XLSM, CSV/TSV, TXT/MD, ZIP (rozpakowanie członków).
 - **Przetwarzanie**: `OCR + anonimizuj` albo `Tylko OCR` (tekst jawny, bez klucza). OCR uruchamia się tylko dla stron bez warstwy tekstowej lub z grafiką; tekst cyfrowy idzie od razu do anonimizacji.
 - Pasek postępu: odczyt → OCR (strony) → wykrywanie → [lokalne AI] → anonimizacja → zapis klucza.
+- **Dodane pliki czekają na decyzję** (czat i `Dodaj pliki`): per plik `OCR i prywatność teraz`, `Zapisz bez przetwarzania` (przetwarzanie później z listy dokumentów sprawy) albo `Usuń`; zbiorczo `Przetwórz wszystkie` / `Zapisz wszystkie`. OCR nie startuje sam.
 - **Edytor**: DOCX/ODT (akapity, nagłówki, listy, tabele) i arkusze - zapis jako nowy plik.
 - **Wersja zanonimizowana**: podgląd z zaznaczonymi słowami, wersja dla modelu (znaczniki `Strona n z N`), klucz. Zaznaczenie tekstu dodaje go do anonimizacji; w kluczu można poprawić formy przypadków lub usunąć symbol - wersja i klucz zmieniają się razem.
 - **Dokumenty modelu**: pliki wygenerowane przez model trafiają do sprawy; deanonimizacja automatyczna z opcją podglądu; plik z symbolami wgrany z zewnątrz można zdeanonimizować przyciskiem.
@@ -85,6 +86,7 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 
 ## 5. Czat
 
+- **Bramka prawna**: krótkie polecenie bez plików (`ok`, `test`, `dzięki`, powitanie, `napisz ok`) dostaje zwykłą odpowiedź - bez skilli, routera, wyszukiwania w sprawie i workflow rodzaju sprawy (także w trybie mechanicznym). Potwierdzenia etapów workflow idą osobnym przyciskiem, nie tekstem.
 - **Pliki** rozwija listę z dwiema zakładkami: `Dokumenty sprawy` i `Wzory i know-how kancelarii` (drzewo folderów, wyszukiwarka bez polskich znaków, zaznaczanie całego folderu).
 - Dokument zanonimizowany idzie tylko w wersji z symbolami; przetworzony bez anonimizacji - jako tekst jawny (ostrzeżenie). Każda strona jest oznaczona `=== STRONA n/N ===`.
 - **Wzory kancelarii** (DOCX/ODT) idą jako tekst ze strukturą, oznaczone `WZÓR KANCELARII`; model przejmuje układ i formuły, nie przenosi danych przykładowych, puste pola wstawia jako `[Kwota]`, `[Termin]`. Wzór jest tekstem jawnym.
@@ -105,6 +107,7 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 
 | Rodzaj | Jak działa |
 |---|---|
+| Wybór modelu | API: dwie najnowsze wersje każdej rodziny (Claude Fable/Opus/Sonnet, GPT, Grok), bez Haiku/mini/nano i wariantów specjalnych. Konto: `domyślny` (decyduje klient) albo Claude Fable 5.1/5, Opus 5.5/5, Sonnet 5/4.6 (`claude --model`), GPT-5.6 Luna/5.5 (Codex) |
 | Konto Claude (CLI) | AUTO: jeden proces `claude -p`; katalog roboczy = korpus skilli (`--restricted`, tylko `Read/Glob/Grep`, `dontAsk`); narzędzia Lex przez serwer MCP `lex` |
 | Konto Codex / Grok | protokół tekstowy narzędzi Lex (runda na narzędzie) |
 | API (OpenAI, Anthropic, xAI) | klucz w pamięci procesu lub keyringu systemu |
@@ -161,6 +164,7 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 | `LEX_ACCOUNT_SKILL_DIRS` | własne katalogi skilli z kont (`off` - wyłącza) |
 | `LEX_SKILLS_PATH` | przypięty korpus (rozwój, walidacja) |
 | `LEX_CORE_LAW_REFRESH=off` | bez odświeżania rdzenia aktów w tle |
+| `LEX_MODEL_CATALOG_ALL=1` | pełna lista modeli API zamiast dwóch najnowszych wersji rodziny |
 | `LEX_NER_PYTHON`, `LEX_GAZETTEER_WORKER`, `LEX_GENERIC_WORDS` | ścieżki workerów i listy słów |
 | `LEX_HOST`, `LEX_PORT` | adres runtime (tylko loopback) |
 | `LEX_OCR_PYTHON`, `LEX_OCR_REDACTOR` | Python OCR (Pillow) i skrypt maskowania obrazów |
