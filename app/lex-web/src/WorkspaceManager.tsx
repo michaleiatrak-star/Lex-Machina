@@ -927,7 +927,7 @@ export function WorkspaceManager({
             <span className="workspace-local-ai-group">
               <label
                 className="workspace-local-ai"
-                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite. W skanach poprawia też błędy OCR: tylko drobne zmiany na słowa ze słownika, bez liczb i identyfikatorów; poprawki są wypisane i można je cofnąć."
+                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite. W skanach poprawia też błędy OCR, czytając całe zdania: pomylone litery, ogonki, sklejone i rozcięte słowa, przeniesienia i przypadkowe symbole; nie zmienia liczb, identyfikatorów, przeczeń ani stylu autora; poprawki są wypisane i można je cofnąć."
               >
                 <input
                   type="checkbox"

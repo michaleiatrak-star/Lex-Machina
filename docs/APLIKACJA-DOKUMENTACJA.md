@@ -59,7 +59,13 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - wątpliwe trafienia (jedno słowo, słowo pospolite, rzeczownik instytucji) ocenia na podstawie **całego zdania** z zaznaczonym słowem;
 - trafienie znika tylko przy jednoznacznym „nie osoba”; brak odpowiedzi = pozostaje zanonimizowane;
 - bez działającego modelu przetwarzanie kończy się komunikatem (`LOCAL_PRIVACY_MODEL_NOT_READY`), nie cichym pominięciem.
-- **korekta OCR** (skany, zdjęcia): model dostaje tylko linie o niskiej pewności OCR lub ze słowami spoza słownika SGJP i zwraca listę `słowo → poprawka`. Poprawka przechodzi tylko, gdy jest drobna (1-2 znaki, a w wyrazie z wielkiej litery 1 znak; albo same ogonki) i daje słowo ze słownika. Liczby, daty, kwoty i identyfikatory nie są zmieniane. Lista poprawek pojawia się po przetworzeniu; `Cofnij korekty` przetwarza plik ponownie bez nich. Model lokalny nie widzi obrazu: poprawia z kontekstu zdania.
+- **korekta OCR** (skany, zdjęcia). Najpierw bez modelu: ligatury (ﬁ → fi), znaki niewidoczne i miękkie łączniki, nietypowe spacje, litery cyrylicy lub greki w polskich słowach. Potem model czyta **całe fragmenty** (kilka linii, pełne zdania) z liniami o niskiej pewności, słowami spoza słownika SGJP lub przypadkowymi symbolami i zwraca listę poprawek, nie przepisany tekst. Poprawka obejmuje 1-3 słowa jednej linii albo wyraz przeniesiony (`zapła- / ty` → `zapłaty`) i przechodzi, gdy:
+  - każde słowo wyniku jest w słowniku;
+  - zmiana jest drobna: ogonki, sklejenie lub rozcięcie słów, 1-2 znaki (1 w wyrazie z wielkiej litery), usunięcie symboli bez znaczenia (`|`, `~`, `¦`, `•`, `^`...);
+  - słowo istniejące w słowniku zmienia się tylko o ogonki (`sad` → `sąd`) i tylko w linii odczytanej niepewnie;
+  - liczby, daty, kwoty, identyfikatory i `§` zostają; nie można dodać ani usunąć `nie`.
+
+  Styl i gramatyka autora dokumentu zostają bez zmian. Lista poprawek pojawia się po przetworzeniu; `Cofnij korekty` przetwarza plik ponownie bez nich. Model lokalny nie widzi obrazu.
 
 **Klucz sprawy (wspólny)**: jedna osoba ma jeden symbol we wszystkich plikach sprawy i w czacie. Starsze dokumenty z kluczem osobnym łączy przycisk `Połącz klucze sprawy`.
 
