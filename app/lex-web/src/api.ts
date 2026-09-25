@@ -2775,6 +2775,8 @@ export type AnonymizedVersion = {
     marks: Array<{ start: number; end: number; token: string; kind: string }>;
   }>;
   entries: PrivacyKeyEntry[];
+  // Legend and key for a model (no values); null without person/address symbols.
+  modelKey?: string | null;
 };
 
 export type CaseArtifact = {

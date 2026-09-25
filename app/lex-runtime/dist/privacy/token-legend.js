@@ -120,6 +120,27 @@ function partyLine(group, byToken) {
  * person (and of which gender), several persons, a firm or an address, and
  * which persons form one party. Only grammar; names and addresses stay local.
  */
+/**
+ * How a model writes with placeholders. It opens every key: in the Lex system
+ * prompt and in an anonymized file exported for an external model.
+ */
+export const PLACEHOLDER_ANSWER_LEGEND = [
+    "# LEGENDA: JAK ODPOWIADAĆ Z SYMBOLAMI ZASTĘPCZYMI (HARD GATE)",
+    "Tekst zawiera symbole zamiast danych osobowych. Prawdziwe dane zna tylko komputer użytkownika i wstawia je lokalnie do Twojej odpowiedzi - w formie, którą wskażesz symbolem.",
+    "1. Osobę i adres piszesz symbolem z przypadkiem po kresce: [PII:PERSON:0001|GEN]. Przypadek wynika z funkcji w Twoim zdaniu, nie z formy w tekście źródłowym:",
+    "   |NOM kto? co? - „[PII:PERSON:0001|NOM] wniósł pozew”",
+    "   |GEN kogo? czego? - „wezwanie [PII:PERSON:0001|GEN]”, „od [PII:PERSON:0001|GEN]”",
+    "   |DAT komu? czemu? - „doręczono [PII:PERSON:0001|DAT]”, „przeciwko [PII:PERSON:0001|DAT]”",
+    "   |ACC kogo? co? - „pozwał [PII:PERSON:0001|ACC]”",
+    "   |INS z kim? z czym? - „umowa z [PII:PERSON:0001|INS]”",
+    "   |LOC o kim? o czym? - „zamieszkały przy [PII:ADDRESS:0001|LOC]”",
+    "   |VOC zwrot bezpośredni - „Szanowny Panie [PII:PERSON:0001|VOC]”",
+    "2. Symbol przepisuj dokładnie: ten sam rodzaj, numer i przedrostek dokumentu ([LMPII:D01:PERSON:0001|GEN] to inna osoba niż [LMPII:D02:PERSON:0001|GEN]). Nie twórz nowych symboli.",
+    "3. Czasowniki, przymiotniki i imiesłowy uzgadniaj z rodzajem i liczbą z klucza poniżej; rodzaj nieustalony - formy neutralne („strona wniosła”).",
+    "4. Nazwy firmy nie odmieniaj: symbol firmy zawsze |NOM, odmieniaj słowo przed nim („od spółki [PII:PERSON:0003|NOM]”).",
+    "5. Inne symbole (PESEL, NIP, IBAN, telefon, e-mail, KRS, księga wieczysta, numer rejestracyjny, data urodzenia) przepisuj bez zmian i bez przypadku.",
+    "6. Nigdy nie wpisuj, nie odgaduj ani nie odmieniaj imion, nazwisk, nazw firm i adresów; nie zastępuj symbolu opisem („osoba oznaczona jako...”) ani inicjałami."
+].join("\n");
 export function placeholderKeyPrompt(entries, parties = []) {
     const unique = [...new Map(entries.map((entry) => [entry.token, entry])).values()];
     if (!unique.length)
@@ -128,6 +149,8 @@ export function placeholderKeyPrompt(entries, parties = []) {
     const lines = unique.slice(0, 200).map((entry) => `- ${entry.token}: ${describe(entry)}`);
     const partyLines = parties.filter((group) => group.tokens.every((token) => byToken.has(token))).slice(0, 40);
     return [
+        PLACEHOLDER_ANSWER_LEGEND,
+        "",
         "# KLUCZ SYMBOLI ZASTĘPCZYCH (HARD GATE)",
         "Każdy symbol oznacza jedną prawdziwą osobę, grupę osób o wspólnym nazwisku, firmę albo adres; dane zostają na komputerze użytkownika i wracają do tekstu lokalnie.",
         ...lines,

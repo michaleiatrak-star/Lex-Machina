@@ -62,6 +62,10 @@ describe("editing the anonymized version and its key together", () => {
     expect(added.chunks[0]!.text).not.toMatch(/Zieliń/);
     const entry = added.entries.find((item) => item.token === added.token)!;
     expect(entry).toMatchObject({ kind: "PERSON", value: "Adam Zieliński", gender: "m", occurrences: 2 });
+    // The export for an external model: legend and key, symbols only.
+    expect(added.modelKey?.startsWith("# LEGENDA: JAK ODPOWIADAĆ")).toBe(true);
+    expect(added.modelKey).toContain(`${added.token}: osoba, rodzaj męski`);
+    expect(added.modelKey).not.toMatch(/Zieliń|Adam|44051401359/);
 
     const corrected = await service.updateKeyForms(documentId, added.token, { VOC: "Panie Adamie" }, security);
     expect(corrected.entries.find((item) => item.token === added.token)!.forms).toContainEqual({ case: "VOC", text: "Panie Adamie" });

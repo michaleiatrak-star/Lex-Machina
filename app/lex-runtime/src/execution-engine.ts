@@ -727,11 +727,14 @@ export class LexExecutionEngine {
           {
             model:
               args.model,
-            systemPrompt:
+            systemPrompt: [
+              // Symbols in a conversational message still need the legend.
+              ...(args.placeholderKey ? [args.placeholderKey] : []),
               conversationalOnly &&
               !trivialChat
                 ? "Jesteś asystentem Lex Machina. Router uznał tę wiadomość za niezwiązaną z prawem, więc skille prawne nie zostały załadowane. Odpowiedz rzeczowo, w języku użytkownika. Nie powołuj przepisów, sygnatur ani terminów prawnych; jeśli pytanie jednak dotyczy sprawy prawnej, powiedz to wprost i poproś o doprecyzowanie, aby uruchomić pełną analizę prawną."
-                : "Jesteś asystentem Lex Machina. Wykonaj dosłownie krótkie polecenie użytkownika. Jeśli prosi o napisanie konkretnego słowa lub zdania, odpowiedz wyłącznie tym tekstem, bez powitań i komentarzy. Na powitanie odpowiedz jednym krótkim zdaniem. Odpowiadaj po polsku.",
+                : "Jesteś asystentem Lex Machina. Wykonaj dosłownie krótkie polecenie użytkownika. Jeśli prosi o napisanie konkretnego słowa lub zdania, odpowiedz wyłącznie tym tekstem, bez powitań i komentarzy. Na powitanie odpowiedz jednym krótkim zdaniem. Odpowiadaj po polsku."
+            ].join("\n\n"),
             ...(args.continuityKey
               ? {
                   continuityKey:
@@ -1364,6 +1367,8 @@ export class LexExecutionEngine {
           QUICK_LOCAL_TOOLS.has(tool.function.name)
         );
       const quickPrompt = [
+        // The placeholder legend and key open the prompt (HARD GATE).
+        ...(args.placeholderKey ? [args.placeholderKey] : []),
         QUICK_LEGAL_RULES,
         localSkillDigest(
           primarySkill.name,
@@ -1386,7 +1391,6 @@ export class LexExecutionEngine {
         ...(/\[PII:(?:PERSON|ADDRESS):/.test(effectiveQuery)
           ? [PERSON_CASE_PROTOCOL]
           : []),
-        ...(args.placeholderKey ? [args.placeholderKey] : []),
         args.quickLocalLegal.toolPrompt
       ].join("\n\n");
 
@@ -1708,7 +1712,8 @@ export class LexExecutionEngine {
       promptParts.push(PERSON_CASE_PROTOCOL);
     }
     if (args.placeholderKey) {
-      promptParts.push(args.placeholderKey);
+      // The placeholder legend and key open the prompt (HARD GATE).
+      promptParts.unshift(args.placeholderKey);
     }
     if (args.tools?.length && args.toolSystemPromptAppendix) {
       promptParts.push(args.toolSystemPromptAppendix);
@@ -1955,7 +1960,8 @@ export class LexExecutionEngine {
       promptParts.push(PERSON_CASE_PROTOCOL);
     }
     if (args.placeholderKey) {
-      promptParts.push(args.placeholderKey);
+      // The placeholder legend and key open the prompt (HARD GATE).
+      promptParts.unshift(args.placeholderKey);
     }
     if (args.toolSystemPromptAppendix) {
       promptParts.push(args.toolSystemPromptAppendix);

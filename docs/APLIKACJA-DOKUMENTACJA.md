@@ -79,6 +79,8 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 **Klucz sprawy (wspólny)**: jedna osoba ma jeden symbol we wszystkich plikach sprawy i w czacie. Starsze dokumenty z kluczem osobnym łączy przycisk `Połącz klucze sprawy`.
 
 **Odmiana**: model musi dopisać przypadek do symbolu (`|NOM|GEN|DAT|ACC|INS|LOC|VOC`, HARD GATE) i dostaje rodzaj osoby; Lex odmienia wartość lokalnie. Brak przypadku lub niepewna forma → oznaczenie do przeglądu.
+**Legenda i klucz symboli** otwierają prompt każdego modelu (także odpowiedź konwersacyjną, gdy w wiadomości są symbole): legenda - format `[PII:PERSON:0001|GEN]`, przypadki z pytaniami pomocniczymi, przedrostki dokumentów, firmy (`|NOM`, odmiana słowa „spółka”), inne symbole bez zmian, zakaz wpisywania danych; klucz - rodzaj, liczba, grupy, firmy, strony wieloosobowe. Bez wartości.
+**Poza programem**: w „Wersja zanonimizowana” → `Kopiuj dla modelu (z kluczem)` / `Pobierz .txt dla modelu` - legenda i klucz na początku, potem tekst ze stronami; odpowiedź zewnętrznego modelu przywraca `Deanonimizuj plik`.
 
 Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skuteczność 100%, 0 wycieków, 0 fałszywych trafień, deanonimizacja 100%.
 

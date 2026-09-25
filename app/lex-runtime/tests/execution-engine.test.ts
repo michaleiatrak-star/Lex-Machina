@@ -666,3 +666,32 @@ describe("local quick lane: provisions only from ELI texts", () => {
     await expect(request(providers)).rejects.toMatchObject({ target: "QUICK_LEGAL_UNSOURCED_PROVISION" });
   });
 });
+
+describe("placeholder key position", () => {
+  const key = "# LEGENDA: JAK ODPOWIADAĆ Z SYMBOLAMI ZASTĘPCZYMI (HARD GATE)\n# KLUCZ SYMBOLI ZASTĘPCZYCH (HARD GATE)\n- [PII:PERSON:0001]: osoba";
+
+  it("opens the system prompt of a legal turn", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    await lex.executePolishLegalQuery({
+      query: "Czy [PII:PERSON:0001] musi zapłacić fakturę?",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" },
+      placeholderKey: key
+    });
+    expect(adapter.calls[0]!.systemPrompt.startsWith("# LEGENDA: JAK ODPOWIADAĆ")).toBe(true);
+  });
+
+  it("is given in the conversational lane too", async () => {
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    await lex.executePolishLegalQuery({
+      query: "Napisz życzenia dla [PII:PERSON:0001]",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" },
+      conversationalOnly: true,
+      placeholderKey: key
+    });
+    expect(adapter.calls[0]!.systemPrompt.startsWith("# LEGENDA: JAK ODPOWIADAĆ")).toBe(true);
+  });
+});

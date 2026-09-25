@@ -49,9 +49,12 @@ import type { ProgressReporter } from "./processing-progress.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import {
   genderOf,
+  partyGroups,
   placeholderGrammar,
+  placeholderKeyPrompt,
   type PlaceholderGrammar
 } from "./privacy/token-legend.js";
+import { genericWords } from "./privacy/generic-words.js";
 import {
   PERSON_CASES,
   type PersonCase,
@@ -150,7 +153,24 @@ export type AnonymizedVersion = {
   chunks: PublicDocumentChunk[];
   highlighted: HighlightedChunk[];
   entries: PrivacyKeyEntry[];
+  // Legend and key for an external model (kinds, gender, parties - no values).
+  modelKey: string | null;
 };
+
+/**
+ * The legend and key a model needs to answer with this document's symbols:
+ * kinds, gender, number and parties of several persons. Never a value.
+ */
+export function modelKeyFor(
+  texts: string[],
+  vault: PseudonymizationVault
+): string | null {
+  const roles = genericWords().partyRoles;
+  return placeholderKeyPrompt(
+    placeholderGrammar(texts.join("\n"), vault),
+    partyGroups(texts, (word) => roles.has(word))
+  );
+}
 
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -1348,7 +1368,8 @@ implements DocumentService {
           ...highlightProtected(chunk.text, source, surfaces, fallback)
         };
       }),
-      entries: this.privacyKey(documentId)
+      entries: this.privacyKey(documentId),
+      modelKey: modelKeyFor(chunks.map((chunk) => chunk.text), vault)
     };
   }
 

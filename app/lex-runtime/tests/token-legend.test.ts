@@ -58,3 +58,13 @@ describe("placeholder key for models", () => {
     expect(byToken.get(pesel)?.gender).toBeUndefined();
   });
 });
+
+describe("placeholder legend", () => {
+  it("opens the key with the answer legend and every case code", () => {
+    const prompt = placeholderKeyPrompt([{ token: "[PII:PERSON:0001]", kind: "PERSON", gender: "f", entity: "person" }])!;
+    expect(prompt.startsWith("# LEGENDA: JAK ODPOWIADAĆ Z SYMBOLAMI ZASTĘPCZYMI (HARD GATE)")).toBe(true);
+    for (const code of ["|NOM", "|GEN", "|DAT", "|ACC", "|INS", "|LOC", "|VOC"]) expect(prompt).toContain(code);
+    expect(prompt.indexOf("# LEGENDA")).toBeLessThan(prompt.indexOf("# KLUCZ SYMBOLI ZASTĘPCZYCH"));
+    expect(prompt).toContain("[PII:PERSON:0001]: osoba, rodzaj żeński");
+  });
+});

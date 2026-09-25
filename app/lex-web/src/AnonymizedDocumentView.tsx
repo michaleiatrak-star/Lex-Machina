@@ -11,6 +11,7 @@ import {
   type PrivacyKeyEntry
 } from "./api.js";
 import { KIND_LABEL, PrivacyKeyTable } from "./PrivacyKeyTable.js";
+import { modelExportFilename, modelExportText } from "./model-export.js";
 
 const TOKEN = /(\[PII:[A-Z_]+:\d{4}(?:\|[A-Z]{2,4})?\])/;
 const PAGE_HEADER = /\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · [A-Z]+\]\n?/g;
@@ -105,6 +106,16 @@ export function AnonymizedDocumentView(props: {
   const [kind, setKind] = useState<PiiKind>("PERSON");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
+  // Legend and key first, then the text: for a model outside Lex Machina.
+  const exportText = (): string =>
+    version
+      ? modelExportText({
+          filename: props.filename,
+          modelKey: version.modelKey ?? null,
+          totalPages: version.totalPages,
+          chunks: version.chunks
+        })
+      : "";
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -207,6 +218,35 @@ export function AnonymizedDocumentView(props: {
               Klucz ({version?.entries.length ?? 0})
             </button>
           </div>
+          {version ? (
+            <>
+              <button
+                type="button"
+                title="Legenda i klucz symboli na początku, potem tekst ze stronami - do wklejenia w zewnętrzny czat; bez żadnych danych osobowych"
+                onClick={() => {
+                  void navigator.clipboard
+                    .writeText(exportText())
+                    .then(() => setStatus("Skopiowano wersję dla modelu z legendą i kluczem."))
+                    .catch(() => setStatus("Nie udało się skopiować - użyj „Pobierz .txt”."));
+                }}
+              >
+                Kopiuj dla modelu (z kluczem)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const url = URL.createObjectURL(new Blob([exportText()], { type: "text/plain;charset=utf-8" }));
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = modelExportFilename(props.filename);
+                  link.click();
+                  URL.revokeObjectURL(url);
+                }}
+              >
+                Pobierz .txt dla modelu
+              </button>
+            </>
+          ) : null}
           <button type="button" onClick={props.onClose}>Zamknij</button>
         </div>
       </div>

@@ -4,7 +4,8 @@ import { chunkDocumentPages } from "./document-ingestion.js";
 import { LocalPolishPseudonymizer, organizationEntity, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
-import { genderOf, placeholderGrammar } from "./privacy/token-legend.js";
+import { genderOf, partyGroups, placeholderGrammar, placeholderKeyPrompt } from "./privacy/token-legend.js";
+import { genericWords } from "./privacy/generic-words.js";
 import { PERSON_CASES } from "./privacy/person-morphology.js";
 import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
 import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
@@ -24,6 +25,14 @@ export function decodePlainText(data) {
     catch {
         return new TextDecoder("windows-1250").decode(data);
     }
+}
+/**
+ * The legend and key a model needs to answer with this document's symbols:
+ * kinds, gender, number and parties of several persons. Never a value.
+ */
+export function modelKeyFor(texts, vault) {
+    const roles = genericWords().partyRoles;
+    return placeholderKeyPrompt(placeholderGrammar(texts.join("\n"), vault), partyGroups(texts, (word) => roles.has(word)));
 }
 function escapeRegExp(value) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -712,7 +721,8 @@ export class LocalPrivateDocumentService {
                     ...highlightProtected(chunk.text, source, surfaces, fallback)
                 };
             }),
-            entries: this.privacyKey(documentId)
+            entries: this.privacyKey(documentId),
+            modelKey: modelKeyFor(chunks.map((chunk) => chunk.text), vault)
         };
     }
     /**
