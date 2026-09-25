@@ -573,8 +573,13 @@ def main() -> None:
     ]
     address_engine = AddressMorphology(engine.engine)
     addresses = [address_engine.analyze(item["surface"]) for item in requests.get("addresses", [])]
+    # OCR correction: is the word a form known to the SGJP dictionary?
+    known = [
+        any(interp[2][2] != "ign" for interp in engine.engine.analyse(word))
+        for word in requests.get("words", [])
+    ]
     Path(args.output).write_text(
-        json.dumps({"persons": results, "addresses": addresses}, ensure_ascii=False),
+        json.dumps({"persons": results, "addresses": addresses, "known": known}, ensure_ascii=False),
         encoding="utf-8",
     )
 

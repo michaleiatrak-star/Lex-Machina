@@ -59,6 +59,7 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - wątpliwe trafienia (jedno słowo, słowo pospolite, rzeczownik instytucji) ocenia na podstawie **całego zdania** z zaznaczonym słowem;
 - trafienie znika tylko przy jednoznacznym „nie osoba”; brak odpowiedzi = pozostaje zanonimizowane;
 - bez działającego modelu przetwarzanie kończy się komunikatem (`LOCAL_PRIVACY_MODEL_NOT_READY`), nie cichym pominięciem.
+- **korekta OCR** (skany, zdjęcia): model dostaje tylko linie o niskiej pewności OCR lub ze słowami spoza słownika SGJP i zwraca listę `słowo → poprawka`. Poprawka przechodzi tylko, gdy jest drobna (1-2 znaki, a w wyrazie z wielkiej litery 1 znak; albo same ogonki) i daje słowo ze słownika. Liczby, daty, kwoty i identyfikatory nie są zmieniane. Lista poprawek pojawia się po przetworzeniu; `Cofnij korekty` przetwarza plik ponownie bez nich. Model lokalny nie widzi obrazu: poprawia z kontekstu zdania.
 
 **Klucz sprawy (wspólny)**: jedna osoba ma jeden symbol we wszystkich plikach sprawy i w czacie. Starsze dokumenty z kluczem osobnym łączy przycisk `Połącz klucze sprawy`.
 
@@ -76,6 +77,12 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 - **Limity**: 20 plików na wiadomość dla modelu w hoście, 4 dla lokalnego; ponad limit - komunikat, nic nie znika po cichu.
 - **Okno modelu**: przed wysyłką pasek `~X tys. z Y tys. tokenów`; gdy za dużo - wskazanie największych plików i blokada wysyłki. Pliki zaznaczone idą w całości albo wcale.
 - **Po wysyłce**: `Do modelu trafiło w całości: X z Y plików` + szczegóły (w całości / częściowo / streszczenie / pominięty).
+- **Obrazy jako dowód** (tylko modele w hoście, które widzą obrazy: API i konto Claude):
+  - **zdjęcia** (plik graficzny bez tekstu albo z pojedynczymi napisami) idą jako obraz domyślnie;
+  - **strony z tekstem** idą jako obraz tylko po zaznaczeniu `Wysyłaj też obrazy stron z tekstem`;
+  - zwykłe PDF idą jako sam tekst.
+
+  Na obrazie czarne prostokąty zakrywają każde wystąpienie wartości z bieżącego klucza anonimizacji (także nazwisko rozdzielone między linie), obszary nieczytelne dla OCR oraz linie o pewności poniżej 0,5. Strony, której obrazu nie da się dopasować do tekstu, nie wysyła się. Limit: 20 obrazów na wiadomość, pierwsze 30 stron dokumentu. Model lokalny, Codex i Grok dostają sam tekst, a w etapach pojawia się informacja `obrazy pominięte`. Twarzy nie wykrywa się: zdjęcie z osobą trafia do modelu, jeśli użytkownik je wyśle.
 - **Etapy pracy**: `Etap n z 6`, zakończone i pozostałe: anonimizacja → routing → skille i moduły → model i narzędzia → weryfikacja źródeł → przywrócenie danych; pod etapami - wczytane skille i pliki, użyte narzędzia.
 
 ---
@@ -140,6 +147,7 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 | `LEX_CORE_LAW_REFRESH=off` | bez odświeżania rdzenia aktów w tle |
 | `LEX_NER_PYTHON`, `LEX_GAZETTEER_WORKER`, `LEX_GENERIC_WORDS` | ścieżki workerów i listy słów |
 | `LEX_HOST`, `LEX_PORT` | adres runtime (tylko loopback) |
+| `LEX_OCR_PYTHON`, `LEX_OCR_REDACTOR` | Python OCR (Pillow) i skrypt maskowania obrazów |
 
 ---
 
@@ -148,4 +156,6 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 - Przyspieszenie trybu natywnego Claude i weryfikacja przez lokalne AI nie były mierzone na prawdziwym koncie/modelu (pokryte testami).
 - Codex i Grok nie mają zamknięcia odczytu w jednym katalogu - zostają przy protokole tekstowym.
 - Okna kontekstu modeli w hoście są przyjęte ostrożnie (Claude 200 tys., OpenAI/Grok 128 tys. tokenów).
+- Korekta OCR i obrazy z PaddleOCR sprawdzone testami i atrapą silnika; nie mierzono jakości na prawdziwym Bieliku ani na prawdziwych skanach.
+- Maskowanie w obrębie linii jest proporcjonalne do liczby znaków (z zapasem); przy nietypowych czcionkach fragment sąsiedniego słowa może zostać zakryty.
 - Instalator offline wstrzymany.

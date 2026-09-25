@@ -33,6 +33,9 @@ export class ProviderGateway {
     nativeCorpusAccess(providerId, model) {
         return this.registry.get(providerId)?.nativeCorpusAccess?.(model) === true;
     }
+    supportsImages(providerId, model) {
+        return this.registry.get(providerId)?.supportsImages?.(model) === true;
+    }
     async stream(providerId, params) {
         const provider = this.registry.get(providerId);
         if (!provider) {

@@ -1,3 +1,4 @@
+import { maskBoxes, protectedValues, wantsImage } from "./document-evidence.js";
 import { createHash } from "node:crypto";
 import { chunkDocumentPages } from "./document-ingestion.js";
 import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
@@ -110,10 +111,16 @@ export class LocalPrivateDocumentService {
     officeExtractor;
     spreadsheetExtractor;
     personMorphology;
+    pageMasker;
+    ocrCorrector;
     documents = new Map();
     constructor(pdfIngestor, namedEntities, maxChunkChars = 24_000, imageIngestor, privacyVaultStore, secureDocumentStore, officeExtractor, spreadsheetExtractor, 
     // One token per person and inflected restore ([PII:PERSON:0001|GEN]).
-    personMorphology) {
+    personMorphology, 
+    // Masks personal data on scanned pages sent to a model as evidence.
+    pageMasker, 
+    // "z lokalnym AI": fixes OCR errors before anonymization.
+    ocrCorrector) {
         this.pdfIngestor = pdfIngestor;
         this.namedEntities = namedEntities;
         this.maxChunkChars = maxChunkChars;
@@ -123,6 +130,8 @@ export class LocalPrivateDocumentService {
         this.officeExtractor = officeExtractor;
         this.spreadsheetExtractor = spreadsheetExtractor;
         this.personMorphology = personMorphology;
+        this.pageMasker = pageMasker;
+        this.ocrCorrector = ocrCorrector;
     }
     digitalTextResult(data, text) {
         if (data.byteLength >
@@ -207,7 +216,10 @@ export class LocalPrivateDocumentService {
     async review(data, mediaType, security) {
         const onProgress = security?.onProgress;
         onProgress?.({ stage: "READING" });
-        const source = await this.extract(data, mediaType, onProgress);
+        const extracted = await this.extract(data, mediaType, onProgress);
+        const source = security?.localAi && security.ocrFix !== false
+            ? await this.correctOcr(extracted, onProgress)
+            : extracted;
         const documentId = `doc_${source.sha256.slice(0, 24)}`;
         const persistentDocument = Boolean(this.secureDocumentStore &&
             security?.caseId);
@@ -273,9 +285,30 @@ export class LocalPrivateDocumentService {
                     : {}),
                 ...(page.engine
                     ? { engine: page.engine }
+                    : {}),
+                ...(page.corrections?.length
+                    ? { corrections: page.corrections }
                     : {})
             })),
             suggestions
+        };
+    }
+    /** OCR pages through the local model's correction (original words kept). */
+    async correctOcr(source, onProgress) {
+        if (!this.ocrCorrector || !source.pages.some((page) => page.source === "OCR" && page.lines?.length)) {
+            return source;
+        }
+        const pages = [];
+        for (const page of source.pages) {
+            pages.push(await this.ocrCorrector.correct(page, (item, done, total) => onProgress?.({ stage: "AI_CHECK", done, total, item: `korekta OCR s. ${page.page}: ${item}`.slice(0, 160) })));
+        }
+        if (!pages.some((page) => page.corrections?.length))
+            return source;
+        return {
+            ...source,
+            pages,
+            sourceChars: pages.reduce((sum, page) => sum + page.text.length, 0),
+            chunks: chunkDocumentPages(pages, this.maxChunkChars)
         };
     }
     async finalizeReview(documentId, directives, security) {
@@ -445,7 +478,7 @@ export class LocalPrivateDocumentService {
         const review = await this.review(data, mediaType, security);
         return this.finalizeReview(review.documentId, [], security);
     }
-    async resolveProtectedChunks(selection) {
+    async resolveProtectedChunks(selection, options = {}) {
         const record = this.documents.get(selection.documentId);
         if (!record) {
             throw new Error("UNKNOWN_LOCAL_DOCUMENT");
@@ -474,13 +507,50 @@ export class LocalPrivateDocumentService {
         if (totalChars > 160_000) {
             throw new Error("DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE");
         }
+        const images = options.images
+            ? await this.evidenceImages(record, chunks, options.images)
+            : [];
         return {
             documentId: selection.documentId,
             chunks,
             totalChars,
             grammar: placeholderGrammar(chunks.map((chunk) => chunk.text).join("\n"), record.vault),
-            totalPages: record.source.totalPages
+            totalPages: record.source.totalPages,
+            ...(images.length ? { images } : {})
         };
+    }
+    /**
+     * Pages of the chunks as images (photos by default, text pages on request),
+     * with everything the
+     * document's current key hides painted black (so key edits apply), plus
+     * unreadable regions and badly read lines. A page that cannot be aligned
+     * or masked is not sent.
+     */
+    async evidenceImages(record, chunks, policy) {
+        if (!this.pageMasker)
+            return [];
+        const wanted = new Set(chunks.flatMap((chunk) => Array.from({ length: chunk.pageEnd - chunk.pageStart + 1 }, (_, offset) => chunk.pageStart + offset)));
+        const values = protectedValues(record.vault.snapshot().tokens);
+        const images = [];
+        for (const page of record.source.pages) {
+            if (!wanted.has(page.page) || !page.image || !wantsImage(page, record.mediaType, policy))
+                continue;
+            const boxes = maskBoxes(page, values);
+            if (!boxes)
+                continue;
+            try {
+                images.push({
+                    page: page.page,
+                    mediaType: "image/jpeg",
+                    data: await this.pageMasker.mask(page.image.jpeg, boxes),
+                    masked: boxes.length
+                });
+            }
+            catch (error) {
+                process.stderr.write(`EVIDENCE_IMAGE_SKIPPED:${error instanceof Error ? error.message : String(error)}\n`);
+            }
+        }
+        return images;
     }
     async restoreDocument(args) {
         if (!this.secureDocumentStore) {

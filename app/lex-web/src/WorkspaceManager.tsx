@@ -241,6 +241,11 @@ export function WorkspaceManager({
   const [localRuntime, setLocalRuntime] = useState<LocalModelsResponse["runtime"] | null>(null);
   const [localAiStarting, setLocalAiStarting] = useState(false);
   const [localAiMessage, setLocalAiMessage] = useState("");
+  // OCR words the local model fixed in the last processed file (undo by reprocessing).
+  const [ocrFixes, setOcrFixes] = useState<{
+    item: WorkspaceItem;
+    fixes: Array<{ page: number; from: string; to: string }>;
+  } | null>(null);
   const localAiReady = Boolean(localRuntime?.configured && localRuntime.state === "READY");
   useEffect(() => {
     let cancelled = false;
@@ -419,7 +424,8 @@ export function WorkspaceManager({
 
   async function runAutomaticPrivacy(
     item: WorkspaceItem,
-    keepClear = false
+    keepClear = false,
+    ocrFix = true
   ): Promise<void> {
     const progressId = newProgressId();
     setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
@@ -436,7 +442,7 @@ export function WorkspaceManager({
         .catch(() => undefined);
     }, 500);
     try {
-      await runAutomaticPrivacySteps(item, progressId, keepClear);
+      await runAutomaticPrivacySteps(item, progressId, keepClear, ocrFix);
     } finally {
       window.clearInterval(timer);
       setProgressByItem((current) => {
@@ -456,7 +462,8 @@ export function WorkspaceManager({
   async function runAutomaticPrivacySteps(
     item: WorkspaceItem,
     progressId: string,
-    keepClear: boolean
+    keepClear: boolean,
+    ocrFix: boolean
   ): Promise<void> {
     await run(async () => {
       const review =
@@ -465,8 +472,12 @@ export function WorkspaceManager({
           item.itemId,
           undefined,
           progressId,
-          localAi && !keepClear ? { localAi: true } : undefined
+          localAi && !keepClear ? { localAi: true, ocrFix } : undefined
         );
+      const fixes = review.pages.flatMap((page) =>
+        (page.corrections ?? []).map((fix) => ({ page: page.page, from: fix.from, to: fix.to }))
+      );
+      setOcrFixes(fixes.length ? { item, fixes } : null);
       // OCR only: every page kept as written, no anonymization key.
       const result =
         await finalizeDocument(
@@ -916,7 +927,7 @@ export function WorkspaceManager({
             <span className="workspace-local-ai-group">
               <label
                 className="workspace-local-ai"
-                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite."
+                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite. W skanach poprawia też błędy OCR: tylko drobne zmiany na słowa ze słownika, bez liczb i identyfikatorów; poprawki są wypisane i można je cofnąć."
               >
                 <input
                   type="checkbox"
@@ -1447,6 +1458,24 @@ export function WorkspaceManager({
         </p>
       ) : null}
       {notice ? <p className="workspace-notice">{notice}</p> : null}
+      {ocrFixes ? (
+        <div className="workspace-notice" role="status">
+          <strong>Korekty OCR (model lokalny) w „{ocrFixes.item.filename}”: {ocrFixes.fixes.length}</strong>
+          <ul>
+            {ocrFixes.fixes.slice(0, 50).map((fix, index) => (
+              <li key={index}>s. {fix.page}: „{fix.from}” → „{fix.to}”</li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void runAutomaticPrivacy(ocrFixes.item, false, false)}
+          >
+            Cofnij korekty (przetwórz ponownie bez nich)
+          </button>{" "}
+          <button type="button" onClick={() => setOcrFixes(null)}>Zamknij</button>
+        </div>
+      ) : null}
       {error ? <p className="chat-inline-error">{error}</p> : null}
     </article>
   );

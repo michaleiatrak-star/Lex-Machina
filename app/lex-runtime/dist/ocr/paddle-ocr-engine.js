@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { readOcrPages } from "./ocr-result.js";
 import { fileURLToPath } from "node:url";
 function defaultWorkerPath() {
     const here = path.dirname(fileURLToPath(import.meta.url));
@@ -48,7 +49,9 @@ export class LocalPaddleOcrEngine {
                 "--lang",
                 "pl",
                 "--dpi",
-                String(this.dpi)
+                String(this.dpi),
+                "--evidence-dir",
+                path.join(tempRoot, "evidence")
             ];
             if (this.device) {
                 args.push("--device", this.device);
@@ -92,7 +95,7 @@ export class LocalPaddleOcrEngine {
                     }
                 });
             });
-            const parsed = JSON.parse(await readFile(output, "utf8"));
+            const parsed = await readOcrPages(JSON.parse(await readFile(output, "utf8")), path.join(tempRoot, "evidence"));
             const requested = new Set(pages);
             const seen = new Set();
             for (const result of parsed) {

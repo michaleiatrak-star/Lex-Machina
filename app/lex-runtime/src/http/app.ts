@@ -1,3 +1,4 @@
+import type { EvidencePolicy } from "../document-evidence.js";
 import {
   PERSON_CASES,
   type NameFormCorrection,
@@ -1014,6 +1015,16 @@ function isFirmScope(scope: SessionDocumentAttachment["sourceScope"]): boolean {
 }
 
 /** Firm templates (DOCX/ODT from the firm workspace) sent with a message. */
+/**
+ * Page images a chat message sends as evidence: photos by default, pages
+ * with text too when the user ticks it ("all"), none when switched off.
+ * Local models read text only, so they get no images.
+ */
+function evidencePolicyFor(value: unknown, model: string): EvidencePolicy | undefined {
+  if (model.startsWith("local/") || value === false || value === "none") return undefined;
+  return value === "all" ? "all" : "photos";
+}
+
 function parseFirmTemplates(value: unknown): string[] | null {
   if (value === undefined) return [];
   if (
@@ -4318,7 +4329,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                       keyVersion:
                         caseView.keyVersion,
                       ...(onProgress ? { onProgress } : {}),
-                      ...(req.body?.localAi === true ? { localAi: true } : {})
+                      ...(req.body?.localAi === true ? { localAi: true } : {}),
+                      ...(req.body?.ocrFix === false ? { ocrFix: false } : {})
                     }
                   );
               } finally {
@@ -7690,7 +7702,8 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     res: express.Response,
     attachments: Array<DocumentChunkSelection & { caseId?: string }>,
     firmTemplates: string[],
-    firmCaseId: string | undefined
+    firmCaseId: string | undefined,
+    evidence?: EvidencePolicy
   ): Promise<SessionDocumentAttachment[] | null> => {
     const picked: SessionDocumentAttachment[] = [];
     if (attachments.length > 0) {
@@ -7774,7 +7787,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                 chunkIndices:
                   selection
                     .chunkIndices
-              });
+              }, evidence ? { images: evidence } : {});
           picked.push({
             caseId,
             documentId:
@@ -7790,6 +7803,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
             ...(resolved.totalPages
               ? { totalPages: resolved.totalPages }
               : {}),
+            ...(resolved.images ? { images: resolved.images } : {}),
             chunks:
               resolved.chunks.map(
                 (chunk) => ({
@@ -7812,7 +7826,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                     chunkIndices:
                       selection
                         .chunkIndices
-                  })
+                  }, evidence ? { images: evidence } : {})
             )
           );
         picked.push(
@@ -7829,6 +7843,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
               ...(attachment.totalPages
                 ? { totalPages: attachment.totalPages }
                 : {}),
+              ...(attachment.images ? { images: attachment.images } : {}),
               chunks:
                 attachment.chunks.map(
                   (chunk) => ({
@@ -8162,7 +8177,13 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
           : undefined;
 
       const selectedAttachments =
-        await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+        await resolveSelectedAttachments(
+          res,
+          attachments,
+          firmTemplates,
+          firmCaseId,
+          evidencePolicyFor(req.body?.evidenceImages, request.model)
+        );
       if (!selectedAttachments) return;
       sessionAttachments.push(...selectedAttachments);
 

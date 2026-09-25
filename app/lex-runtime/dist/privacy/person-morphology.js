@@ -152,6 +152,11 @@ export class LocalPersonMorphology {
     async analyzeAddresses(surfaces) {
         return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
     }
+    async knownWords(words) {
+        if (!words.length)
+            return [];
+        return (await this.run([], [], words)).known;
+    }
     async cached(surfaces, cache, load) {
         const missing = [...new Set(surfaces)].filter((surface) => !cache.has(surface));
         if (missing.length > 0) {
@@ -162,14 +167,15 @@ export class LocalPersonMorphology {
         }
         return surfaces.map((surface) => cache.get(surface) ?? null);
     }
-    async run(surfaces, addresses) {
+    async run(surfaces, addresses, words = []) {
         const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-person-morphology-"));
         const input = path.join(tempRoot, "input.json");
         const output = path.join(tempRoot, "output.json");
         try {
             await writeFile(input, JSON.stringify({
                 persons: surfaces.map((surface) => ({ surface })),
-                addresses: addresses.map((surface) => ({ surface }))
+                addresses: addresses.map((surface) => ({ surface })),
+                words
             }), "utf8");
             await new Promise((resolve, reject) => {
                 const child = spawn(this.python, ["-X", "utf8", this.workerPath, "--input", input, "--output", output], {
@@ -200,7 +206,8 @@ export class LocalPersonMorphology {
             const parsed = JSON.parse(await readFile(output, "utf8"));
             return {
                 persons: (parsed.persons ?? []).map(toEntity),
-                addresses: (parsed.addresses ?? []).map(toEntity)
+                addresses: (parsed.addresses ?? []).map(toEntity),
+                known: words.map((_, index) => parsed.known?.[index] === true)
             };
         }
         finally {

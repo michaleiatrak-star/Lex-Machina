@@ -8,6 +8,7 @@ import readline from "node:readline";
 import { fileURLToPath } from "node:url";
 import { startToolBridge } from "./lex-tool-bridge.js";
 import type {
+  LlmImage,
   NormalizedToolCall,
   ProviderId,
   ProviderStreamParams,
@@ -2745,6 +2746,35 @@ function parseToolCalls(text: string): NormalizedToolCall[] | null {
   });
 }
 
+/**
+ * Claude CLI input: plain text, or with images one stream-json user message
+ * (text block + image blocks) and the matching --input-format.
+ */
+export function claudeInput(prompt: string, images: LlmImage[] = []): { stdin: string; args: string[] } {
+  if (!images.length) return { stdin: prompt, args: [] };
+  return {
+    stdin:
+      JSON.stringify({
+        type: "user",
+        message: {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            ...images.map((image) => ({
+              type: "image",
+              source: { type: "base64", media_type: image.mediaType, data: image.data }
+            }))
+          ]
+        }
+      }) + "\n",
+    args: ["--input-format", "stream-json"]
+  };
+}
+
+export function messageImages(params: ProviderStreamParams): LlmImage[] {
+  return params.messages.flatMap((message) => message.images ?? []);
+}
+
 /** The Lex instructions and conversation for a native corpus run (sent on stdin). */
 export function buildCorpusPrompt(params: ProviderStreamParams): string {
   return [
@@ -3086,6 +3116,7 @@ export class AccountSessionManager {
    */
   async runClaudeWithCorpus(args: {
     prompt: string;
+    images?: LlmImage[];
     corpus: NativeCorpusAccess;
     tools: NormalizedToolSchema[];
     runTools: (calls: NormalizedToolCall[]) => Promise<NormalizedToolResult[]>;
@@ -3133,11 +3164,12 @@ export class AccountSessionManager {
         "Your working directory is the Lex legal skill corpus: read skills and their modules with Read, Glob and Grep; they are read-only. " +
         "Use the mcp__lex tools for legal verification, case law and legal sources. Do not access anything else. " +
         "A resumed host session is continuity context only: never reuse facts from earlier host turns unless they are also in the current Lex Machina request.";
+      const input = claudeInput(args.prompt, args.images);
       const run = (tail: string[]) =>
         runCli(
           "anthropic",
-          claudeCorpusArgs(systemPrompt, mcpConfig, tail),
-          args.prompt,
+          claudeCorpusArgs(systemPrompt, mcpConfig, [...input.args, ...tail]),
+          input.stdin,
           COMMAND_TIMEOUT_MS,
           args.corpus.root,
           args.abortSignal,
@@ -3183,7 +3215,9 @@ export class AccountSessionManager {
     provider: ProviderId,
     prompt: string,
     abortSignal?: AbortSignal,
-    continuityKey?: string
+    continuityKey?: string,
+    // Claude only (stream-json input); other CLIs get the text.
+    images: LlmImage[] = []
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
@@ -3460,9 +3494,11 @@ export class AccountSessionManager {
       ) {
         const lexSystemPrompt =
           "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
+        const input = claudeInput(prompt, images);
         const commonArgs =
           claudeHeadlessArgs(
-            lexSystemPrompt
+            lexSystemPrompt,
+            input.args
           );
         const hostCwd =
           workDir;
@@ -3475,7 +3511,7 @@ export class AccountSessionManager {
               ...commonArgs,
               ...tail
             ],
-            prompt,
+            input.stdin,
             COMMAND_TIMEOUT_MS,
             hostCwd,
             abortSignal,
@@ -3649,6 +3685,7 @@ export async function streamAccountSession(
   if (provider === "anthropic" && params.nativeCorpus && params.runTools) {
     const text = await manager.runClaudeWithCorpus({
       prompt: buildCorpusPrompt(params),
+      images: messageImages(params),
       corpus: params.nativeCorpus,
       tools: params.tools ?? [],
       runTools: params.runTools,
@@ -3681,7 +3718,8 @@ export async function streamAccountSession(
         toolTranscript
       ),
       params.abortSignal,
-      params.continuityKey
+      params.continuityKey,
+      provider === "anthropic" ? messageImages(params) : []
     );
     const calls =
       parseToolCalls(output);

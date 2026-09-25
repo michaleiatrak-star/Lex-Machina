@@ -49,6 +49,8 @@ export type PersonEntity = {
 
 export interface PersonMorphology {
   analyze(surfaces: string[]): Promise<Array<PersonEntity | null>>;
+  // Whether each word is a form in the SGJP dictionary (OCR correction).
+  knownWords?(words: string[]): Promise<boolean[]>;
   // "ul. Długiej 5" -> "ul. Długa 5" with its seven case forms.
   analyzeAddresses?(surfaces: string[]): Promise<Array<PersonEntity | null>>;
   saveCorrection?(correction: NameFormCorrection): Promise<void>;
@@ -207,6 +209,11 @@ export class LocalPersonMorphology implements PersonMorphology {
     return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
   }
 
+  async knownWords(words: string[]): Promise<boolean[]> {
+    if (!words.length) return [];
+    return (await this.run([], [], words)).known;
+  }
+
   private async cached(
     surfaces: string[],
     cache: Map<string, PersonEntity | null>,
@@ -224,8 +231,9 @@ export class LocalPersonMorphology implements PersonMorphology {
 
   private async run(
     surfaces: string[],
-    addresses: string[]
-  ): Promise<{ persons: Array<PersonEntity | null>; addresses: Array<PersonEntity | null> }> {
+    addresses: string[],
+    words: string[] = []
+  ): Promise<{ persons: Array<PersonEntity | null>; addresses: Array<PersonEntity | null>; known: boolean[] }> {
     const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-person-morphology-"));
     const input = path.join(tempRoot, "input.json");
     const output = path.join(tempRoot, "output.json");
@@ -234,7 +242,8 @@ export class LocalPersonMorphology implements PersonMorphology {
         input,
         JSON.stringify({
           persons: surfaces.map((surface) => ({ surface })),
-          addresses: addresses.map((surface) => ({ surface }))
+          addresses: addresses.map((surface) => ({ surface })),
+          words
         }),
         "utf8"
       );
@@ -269,10 +278,12 @@ export class LocalPersonMorphology implements PersonMorphology {
       const parsed = JSON.parse(await readFile(output, "utf8")) as {
         persons?: unknown[];
         addresses?: unknown[];
+        known?: unknown[];
       };
       return {
         persons: (parsed.persons ?? []).map(toEntity),
-        addresses: (parsed.addresses ?? []).map(toEntity)
+        addresses: (parsed.addresses ?? []).map(toEntity),
+        known: words.map((_, index) => parsed.known?.[index] === true)
       };
     } finally {
       await rm(tempRoot, { recursive: true, force: true });

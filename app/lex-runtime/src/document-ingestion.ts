@@ -22,12 +22,31 @@ export interface DocumentPageSource {
   extract(data: Uint8Array): Promise<DocumentSourceExtraction>;
 }
 
+// One recognized line: text, recognition score and box on the page image.
+export type OcrLine = {
+  text: string;
+  score?: number | null;
+  box?: [number, number, number, number];
+};
+
+// The page as the OCR saw it (JPEG, base64) with the boxes of regions the
+// OCR detected but could not read. Never sent anywhere as is: only a copy
+// with personal data masked (document-evidence.ts) reaches a model.
+export type OcrPageImage = {
+  jpeg: string;
+  width: number;
+  height: number;
+  unread: Array<[number, number, number, number]>;
+};
+
 export type OcrPageResult = {
   page: number;
   text: string;
   confidence?: number;
   lineCount?: number;
   engine?: string;
+  lines?: OcrLine[];
+  image?: OcrPageImage;
 };
 
 export interface OcrEngine {
@@ -46,6 +65,16 @@ export type IngestedPage = {
   confidence?: number;
   lineCount?: number;
   engine?: string;
+  lines?: OcrLine[];
+  image?: OcrPageImage;
+  // Words fixed by the local model after OCR (original kept here).
+  corrections?: OcrCorrection[];
+};
+
+export type OcrCorrection = {
+  line: number;
+  from: string;
+  to: string;
 };
 
 export type DocumentChunk = {
@@ -281,7 +310,9 @@ export class CompleteDocumentIngestor {
           ...(ocr.lineCount !== undefined
             ? { lineCount: ocr.lineCount }
             : {}),
-          ...(ocr.engine ? { engine: ocr.engine } : {})
+          ...(ocr.engine ? { engine: ocr.engine } : {}),
+          ...(ocr.lines ? { lines: ocr.lines } : {}),
+          ...(ocr.image ? { image: ocr.image } : {})
         };
       }
 
@@ -303,7 +334,9 @@ export class CompleteDocumentIngestor {
         ...(ocr?.lineCount !== undefined
           ? { lineCount: ocr.lineCount }
           : {}),
-        ...(ocr?.engine ? { engine: ocr.engine } : {})
+        ...(ocr?.engine ? { engine: ocr.engine } : {}),
+        ...(ocrText && ocr?.lines ? { lines: ocr.lines } : {}),
+        ...(ocrText && ocr?.image ? { image: ocr.image } : {})
       };
     });
 

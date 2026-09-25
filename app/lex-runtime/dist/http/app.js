@@ -401,6 +401,16 @@ function isFirmScope(scope) {
     return scope === "FIRM_KNOWLEDGE" || scope === "FIRM_TEMPLATE";
 }
 /** Firm templates (DOCX/ODT from the firm workspace) sent with a message. */
+/**
+ * Page images a chat message sends as evidence: photos by default, pages
+ * with text too when the user ticks it ("all"), none when switched off.
+ * Local models read text only, so they get no images.
+ */
+function evidencePolicyFor(value, model) {
+    if (model.startsWith("local/") || value === false || value === "none")
+        return undefined;
+    return value === "all" ? "all" : "photos";
+}
 function parseFirmTemplates(value) {
     if (value === undefined)
         return [];
@@ -2275,7 +2285,8 @@ export function createLexHttpApp(options) {
                         caseDataKey,
                         keyVersion: caseView.keyVersion,
                         ...(onProgress ? { onProgress } : {}),
-                        ...(req.body?.localAi === true ? { localAi: true } : {})
+                        ...(req.body?.localAi === true ? { localAi: true } : {}),
+                        ...(req.body?.ocrFix === false ? { ocrFix: false } : {})
                     });
                 }
                 finally {
@@ -4390,7 +4401,7 @@ export function createLexHttpApp(options) {
     // templates), resolved with access checks. Used to send them and to
     // estimate whether they fit the model before sending. Null: response sent.
     const templateTextCache = new Map();
-    const resolveSelectedAttachments = async (res, attachments, firmTemplates, firmCaseId) => {
+    const resolveSelectedAttachments = async (res, attachments, firmTemplates, firmCaseId, evidence) => {
         const picked = [];
         if (attachments.length > 0) {
             if (!options.documentService) {
@@ -4434,7 +4445,7 @@ export function createLexHttpApp(options) {
                             .documentId,
                         chunkIndices: selection
                             .chunkIndices
-                    });
+                    }, evidence ? { images: evidence } : {});
                     picked.push({
                         caseId,
                         documentId: resolved.documentId,
@@ -4448,6 +4459,7 @@ export function createLexHttpApp(options) {
                         ...(resolved.totalPages
                             ? { totalPages: resolved.totalPages }
                             : {}),
+                        ...(resolved.images ? { images: resolved.images } : {}),
                         chunks: resolved.chunks.map((chunk) => ({
                             ...chunk
                         }))
@@ -4462,7 +4474,7 @@ export function createLexHttpApp(options) {
                         .documentId,
                     chunkIndices: selection
                         .chunkIndices
-                })));
+                }, evidence ? { images: evidence } : {})));
                 picked.push(...resolved.map((attachment) => ({
                     documentId: attachment.documentId,
                     sourceScope: "MANUAL",
@@ -4473,6 +4485,7 @@ export function createLexHttpApp(options) {
                     ...(attachment.totalPages
                         ? { totalPages: attachment.totalPages }
                         : {}),
+                    ...(attachment.images ? { images: attachment.images } : {}),
                     chunks: attachment.chunks.map((chunk) => ({
                         ...chunk
                     }))
@@ -4711,7 +4724,7 @@ export function createLexHttpApp(options) {
                     ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
                     ?.caseId
                 : undefined;
-            const selectedAttachments = await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+            const selectedAttachments = await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId, evidencePolicyFor(req.body?.evidenceImages, request.model));
             if (!selectedAttachments)
                 return;
             sessionAttachments.push(...selectedAttachments);

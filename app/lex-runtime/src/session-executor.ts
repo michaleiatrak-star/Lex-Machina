@@ -1,3 +1,4 @@
+import type { EvidenceImage } from "./document-evidence.js";
 import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
 import {
   placeholderGrammar,
@@ -163,6 +164,8 @@ export type SessionDocumentAttachment = {
   title?: string;
   // Picked by the user (not retrieved): sent whole or not at all.
   selectedByUser?: boolean;
+  // Page images (photos; text pages on request), personal data masked.
+  images?: EvidenceImage[];
   chunks: Array<{
     index: number;
     pageStart: number;
@@ -837,8 +840,43 @@ export function markPages(text: string, totalPages?: number): string {
   );
 }
 
+export type SelectedEvidenceImage = EvidenceImage & { documentId: string };
+
+// At most this many images per message, and this much image data.
+export const MAX_EVIDENCE_IMAGES = 20;
+const MAX_EVIDENCE_BASE64 = 20 * 1024 * 1024;
+
+/** Images of the pages whose chunks made it into the context, in order. */
+export function selectEvidenceImages(
+  requested: SessionDocumentAttachment[],
+  inContext: SessionDocumentAttachment[]
+): SelectedEvidenceImage[] {
+  const selected: SelectedEvidenceImage[] = [];
+  let size = 0;
+  for (const attachment of inContext) {
+    const source = requested.find((item) => item.documentId === attachment.documentId && item.images?.length);
+    if (!source?.images) continue;
+    for (const image of source.images) {
+      const covered = attachment.chunks.some((chunk) => chunk.pageStart <= image.page && image.page <= chunk.pageEnd);
+      if (!covered || selected.length >= MAX_EVIDENCE_IMAGES || size + image.data.length > MAX_EVIDENCE_BASE64) continue;
+      size += image.data.length;
+      selected.push({ ...image, documentId: attachment.documentId });
+    }
+  }
+  return selected;
+}
+
+export const EVIDENCE_IMAGE_NOTE = [
+  "# OBRAZY JAKO DOWÓD",
+  "Do kontekstu dołączono obrazy (zdjęcia, strony) w kolejności podanej przy znacznikach [OBRAZ n].",
+  "Czarne prostokąty zasłaniają dane osobowe i nieczytelne napisy: nie zgaduj, co pod nimi jest.",
+  "Opisuj to, co widać (stan rzeczy, uszkodzenia, miejsce, układ, podpisy i pieczęcie jako fakt ich obecności); oddziel obserwację od wniosku i nie przypisuj osób na podstawie wyglądu.",
+  "Nazwy i dane z dokumentu bierz z tekstu z symbolami [PII:...], nie z obrazu."
+].join("\n");
+
 function buildDocumentContext(
-  attachments: SessionDocumentAttachment[]
+  attachments: SessionDocumentAttachment[],
+  images: SelectedEvidenceImage[] = []
 ): string {
   const sections = attachments.map((attachment) => {
     const chunks = attachment.chunks.map((chunk) => {
@@ -876,7 +914,16 @@ function buildDocumentContext(
   const firm = attachments.some(
     (attachment) => attachment.sourceScope === "FIRM_TEMPLATE" || attachment.sourceScope === "FIRM_KNOWLEDGE"
   );
-  return [...(firm ? [FIRM_MATERIAL_NOTE] : []), ...sections].join("\n\n---\n\n");
+  const imageIndex = images.length
+    ? [
+        EVIDENCE_IMAGE_NOTE,
+        ...images.map(
+          (image, index) =>
+            `[OBRAZ ${index + 1}: ${image.documentId} · STRONA ${image.page} · zamaskowane obszary: ${image.masked}]`
+        )
+      ].join("\n")
+    : null;
+  return [...(firm ? [FIRM_MATERIAL_NOTE] : []), ...sections, ...(imageIndex ? [imageIndex] : [])].join("\n\n---\n\n");
 }
 
 export const buildDocumentContextForTest = buildDocumentContext;
@@ -1321,10 +1368,29 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     const citationSources =
       contextSelection.citationSources;
+    // Page images of the attachments in context (masked evidence), for
+    // models that see images; others work from the text.
+    const evidence = selectEvidenceImages(request.documentAttachments ?? [], attachments);
+    const imagesDelivered =
+      evidence.length > 0 && this.providers.supportsImages(request.provider, request.model);
+    if (evidence.length) {
+      step(
+        "PREPARE",
+        imagesDelivered
+          ? `obrazy jako dowód: ${evidence.length} (dane osobowe zamaskowane)`
+          : `obrazy pominięte: model przyjmuje tylko tekst (${evidence.length})`
+      );
+      audit.record("resource_read", "evidence-images", "OK", {
+        delivered: imagesDelivered,
+        images: evidence.map((image) => `${image.documentId}:${image.page}`),
+        masked: evidence.reduce((sum, image) => sum + image.masked, 0)
+      });
+    }
     const documentContext =
       attachments.length > 0
         ? buildDocumentContext(
-            attachments
+            attachments,
+            imagesDelivered ? evidence : []
           )
         : undefined;
 
@@ -1433,6 +1499,17 @@ export class SafeSessionExecutor implements SessionExecutor {
           )
         : undefined;
     const execution = await this.engine.executePolishLegalQuery({
+      ...(this.coreLawIndex
+        ? {
+            coreLaw: this.coreLawIndex.summaries().map((act) => ({
+              eli: act.eli,
+              title: act.title,
+              labels: act.labels,
+              domains: act.domains,
+              articleCount: act.articleCount
+            }))
+          }
+        : {}),
       onEvent: (event) => {
         if (event.status !== "OK") return;
         if (event.type === "route") step("ROUTING", event.target);
@@ -1448,6 +1525,9 @@ export class SafeSessionExecutor implements SessionExecutor {
           }
         : {}),
       ...(documentContext ? { documentContext } : {}),
+      ...(imagesDelivered
+        ? { documentImages: evidence.map((image) => ({ mediaType: image.mediaType, data: image.data })) }
+        : {}),
       ...(placeholderKey ? { placeholderKey } : {}),
       ...(request.conversationalOnly
         ? {
