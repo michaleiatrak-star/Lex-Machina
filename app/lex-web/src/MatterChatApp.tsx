@@ -1,4 +1,17 @@
 import {
+  canWriteCase,
+  caseScheduleKindLabel,
+  caseScheduleStartLabel
+} from "./case-calendar.js";
+import { CalendarPanel } from "./CalendarPanel.js";
+import { CaseContactsCard } from "./CaseContactsCard.js";
+import { HomeDashboard } from "./HomeDashboard.js";
+import {
+  loadLastUsedModel,
+  saveLastUsedModel,
+  shouldAutoStartLocalModel
+} from "./last-used-model.js";
+import {
   useEffect,
   useMemo,
   useRef,
@@ -156,6 +169,8 @@ import "./chat.css";
 import "./workspace.css";
 
 type TabId =
+  | "home"
+  | "calendar"
   | "chat"
   | "skills"
   | "case"
@@ -804,40 +819,6 @@ function executionMessage(
   };
 }
 
-function caseScheduleKindLabel(
-  kind: CaseScheduleKind
-): string {
-  switch (kind) {
-    case "CLIENT_MEETING":
-      return "Spotkanie z klientem";
-    case "COURT_HEARING":
-      return "Posiedzenie sądu";
-    case "DEADLINE":
-      return "Termin";
-    default:
-      return "Inne";
-  }
-}
-
-function caseScheduleStartLabel(
-  value: string
-): string {
-  const parts =
-    value.split("T");
-  return parts.length === 2
-    ? parts[0] + " · " +
-        parts[1]
-    : value;
-}
-
-function canWriteCase(item: CaseListItem | undefined): boolean {
-  return Boolean(
-    item &&
-    !item.archivedAt &&
-    (item.role === "OWNER" || item.role === "EDITOR")
-  );
-}
-
 export default function MatterChatApp({
   user,
   settingsPanels,
@@ -851,7 +832,10 @@ export default function MatterChatApp({
   onLock?: () => void;
   onLogout?: () => void;
 }) {
-  const [activeTab, setActiveTab] = useState<TabId>("chat");
+  const [activeTab, setActiveTab] = useState<TabId>("home");
+  // Bumped when events change anywhere, so the home screen, the calendar and
+  // the case schedule show the same data.
+  const [scheduleRefresh, setScheduleRefresh] = useState(0);
   const [settingsSection, setSettingsSection] =
     useState<SettingsSection>("models");
   const [runtimeOnline, setRuntimeOnline] = useState(false);
@@ -921,8 +905,10 @@ export default function MatterChatApp({
     setFinalReview(null);
   }, [pendingFinalDocument?.artifactId]);
 
+  // The source and model the user last worked with become the default.
+  const [rememberedModel] = useState(() => loadLastUsedModel(user.userId));
   const [provider, setProvider] =
-    useState<PrimaryModelSource>("local");
+    useState<PrimaryModelSource>(rememberedModel?.provider ?? "local");
   const [providerConfiguration, setProviderConfiguration] = useState<
     Record<ProviderId, boolean | undefined>
   >({ openai: undefined, anthropic: undefined, xai: undefined });
@@ -954,7 +940,8 @@ export default function MatterChatApp({
   const [providerKeyBusy, setProviderKeyBusy] = useState(false);
   const [providerKeyMessage, setProviderKeyMessage] = useState("");
   const [models, setModels] = useState<ModelDescriptor[]>([]);
-  const [model, setModel] = useState("");
+  const [model, setModel] = useState(rememberedModel?.model ?? "");
+  const localAutoStartTried = useRef(false);
   const [modelError, setModelError] = useState("");
   const [
     modelCatalogLoading,
@@ -1728,7 +1715,7 @@ export default function MatterChatApp({
     return () => {
       cancelled = true;
     };
-  }, [caseId]);
+  }, [caseId, scheduleRefresh]);
 
   useEffect(() => {
     activeCaseIdRef.current =
@@ -2567,6 +2554,27 @@ export default function MatterChatApp({
     }
   }
 
+  // The last used model was local: start it on entry, once per session.
+  useEffect(() => {
+    if (
+      localAutoStartTried.current ||
+      !runtimeOnline ||
+      modelCatalogLoading ||
+      !models.some((item) => item.id === model && item.selectable) ||
+      !shouldAutoStartLocalModel({
+        remembered: rememberedModel,
+        provider,
+        model,
+        runtimeState: localRuntimeStatus?.state,
+        activeModelId: localRuntimeStatus?.activeModelId
+      })
+    ) {
+      return;
+    }
+    localAutoStartTried.current = true;
+    void startSelectedLocalModel();
+  });
+
   async function executeMessage(plain: string): Promise<void> {
     const trimmed =
       plain.trim();
@@ -2578,6 +2586,7 @@ export default function MatterChatApp({
       !runtimeOnline ||
       !model
     ) return;
+    saveLastUsedModel(user.userId, { provider, model });
 
     if (
       conversationIsNew &&
@@ -3433,6 +3442,8 @@ export default function MatterChatApp({
 
         <nav className="chat-tabs" aria-label="Sekcje aplikacji">
           {([
+            ["home", "Start"],
+            ["calendar", "Kalendarz"],
             ["chat", "Czat"],
             ["skills", "Skille"],
             ["case", "Sprawa"],
@@ -3566,6 +3577,7 @@ export default function MatterChatApp({
                   setProvider(
                     event.target.value as PrimaryModelSource
                   );
+                  localAutoStartTried.current = true;
                   setProviderApiKeyInput("");
                   setProviderKeyMessage("");
                   setProviderAccountMessage("");
@@ -3595,6 +3607,7 @@ export default function MatterChatApp({
                   setModel(
                     event.target.value
                   );
+                  saveLastUsedModel(user.userId, { provider, model: event.target.value });
                   setLocalStartMessage("");
                 }}
               >
@@ -3709,7 +3722,11 @@ export default function MatterChatApp({
               {selectedCase ? selectedCase.displayName || "Sprawa bez nazwy" : "Nowa sprawa"}
             </p>
             <h1>
-              {activeTab === "chat"
+              {activeTab === "home"
+                ? "Start"
+                : activeTab === "calendar"
+                ? "Kalendarz spraw"
+                : activeTab === "chat"
                 ? "Czat sprawy"
                 : activeTab === "skills"
                   ? "Routing i skille"
@@ -5226,6 +5243,53 @@ export default function MatterChatApp({
           </section>
         ) : null}
 
+        {activeTab === "home" ? (
+          <HomeDashboard
+            user={user}
+            cases={cases}
+            modelLabel={
+              selectedModel?.displayName ??
+              (model ? model : "")
+            }
+            modelStatus={
+              (PRIMARY_MODEL_SOURCES.find((item) => item.id === provider)?.label ?? provider) +
+              (provider === "local"
+                ? localModelReady
+                  ? " · działa"
+                  : localModelStarting || localStartBusy
+                    ? " · uruchamianie"
+                    : localRuntimeStatus
+                      ? " · zatrzymany"
+                      : " · sprawdzanie stanu"
+                : "")
+            }
+            refreshToken={scheduleRefresh}
+            onOpenCase={(nextCaseId) => {
+              switchToCase(nextCaseId);
+              setActiveTab("chat");
+            }}
+            onOpenCalendar={() => setActiveTab("calendar")}
+            onOpenFirm={() => setActiveTab("firm")}
+            onOpenModels={() => {
+              setActiveTab("settings");
+              setSettingsSection("models");
+            }}
+            onNewCase={() => void createLocalCase(newCaseName.trim() || "Nowa sprawa").catch(() => undefined)}
+          />
+        ) : null}
+
+        {activeTab === "calendar" ? (
+          <CalendarPanel
+            cases={cases}
+            refreshToken={scheduleRefresh}
+            onOpenCase={(nextCaseId) => {
+              switchToCase(nextCaseId);
+              setActiveTab("case");
+            }}
+            onChanged={() => setScheduleRefresh((value) => value + 1)}
+          />
+        ) : null}
+
         {activeTab === "case" ? (
           <section className="chat-card-stack">
             <article className="chat-card">
@@ -5453,6 +5517,11 @@ export default function MatterChatApp({
                 )}
               </div>
             </article>
+
+            <CaseContactsCard
+              caseId={selectedCase?.caseId ?? null}
+              canWrite={canWriteCase(selectedCase)}
+            />
 
             <article
               className="chat-card chat-file-drop-card"
@@ -5714,11 +5783,12 @@ export default function MatterChatApp({
                     modelCatalogLoading ||
                     models.length === 0
                   }
-                  onChange={(event) =>
+                  onChange={(event) => {
                     setModel(
                       event.target.value
-                    )
-                  }
+                    );
+                    saveLastUsedModel(user.userId, { provider, model: event.target.value });
+                  }}
                 >
                   {modelCatalogLoading ? (
                     <option value="">

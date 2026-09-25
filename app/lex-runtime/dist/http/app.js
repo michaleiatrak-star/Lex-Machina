@@ -1779,6 +1779,50 @@ export function createLexHttpApp(options) {
             }
         }
     });
+    const scheduleRoute = (failure, handler) => async (req, res) => {
+        if (!options.caseScheduleService) {
+            res.status(503).json({ error: "CASE_SCHEDULE_UNAVAILABLE" });
+            return;
+        }
+        try {
+            await handler(options.caseScheduleService, req, res);
+        }
+        catch (error) {
+            if (!sendCaseAccessError(res, error)) {
+                res.status(500).json({ error: failure });
+            }
+        }
+    };
+    // Home screen and calendar: events of all the user's active cases.
+    app.get("/api/schedule/upcoming", scheduleRoute("CASE_SCHEDULE_LIST_FAILED", async (service, req, res) => {
+        const limit = Number(req.query.limit);
+        res.json({
+            events: await service.listUpcomingEvents(responseAuthContext(res), {
+                ...(Number.isFinite(limit) ? { limit } : {}),
+                ...(typeof req.query.from === "string" ? { from: req.query.from } : {}),
+                ...(typeof req.query.until === "string" ? { until: req.query.until } : {})
+            })
+        });
+    }));
+    app.get("/api/cases/:caseId/contacts", scheduleRoute("CASE_CONTACT_LIST_FAILED", async (service, req, res) => {
+        res.json({
+            contacts: await service.listCaseContacts(responseAuthContext(res), String(req.params.caseId ?? ""))
+        });
+    }));
+    app.post("/api/cases/:caseId/contacts", scheduleRoute("CASE_CONTACT_CREATE_FAILED", async (service, req, res) => {
+        res.status(201).json(await service.addCaseContact(responseAuthContext(res), String(req.params.caseId ?? ""), {
+            kind: req.body?.kind,
+            name: req.body?.name,
+            role: req.body?.role,
+            phone: req.body?.phone,
+            email: req.body?.email,
+            address: req.body?.address,
+            notes: req.body?.notes
+        }));
+    }));
+    app.delete("/api/cases/:caseId/contacts/:contactId", scheduleRoute("CASE_CONTACT_DELETE_FAILED", async (service, req, res) => {
+        res.json(await service.deleteCaseContact(responseAuthContext(res), String(req.params.caseId ?? ""), String(req.params.contactId ?? "")));
+    }));
     app.post("/api/cases/:caseId/archive", async (req, res) => {
         if (!options.caseAccessService) {
             res.status(503).json({

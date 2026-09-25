@@ -27,11 +27,50 @@ export type CaseScheduleEvent = {
   createdByUserId: string;
 };
 
+export type CaseContactKind =
+  | "PERSON"
+  | "ORGANIZATION";
+
+/** A person or organization of the case with contact details. */
+export type CaseContact = {
+  contactId: string;
+  kind: CaseContactKind;
+  name: string;
+  role?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  notes?: string;
+  createdAt: string;
+  createdByUserId: string;
+};
+
+// Contacts live in the case's encrypted schedule file: the same key, the
+// same rotation and deletion. Files written before contacts have none.
 type StoredCaseSchedule = {
   schemaVersion: 1;
   caseId: string;
   events: CaseScheduleEvent[];
+  contacts?: CaseContact[];
 };
+
+const CONTACT_TEXT_FIELDS = ["role", "phone", "email", "address", "notes"] as const;
+
+function validContact(value: unknown): value is CaseContact {
+  if (!value || typeof value !== "object") return false;
+  const contact = value as Record<string, unknown>;
+  return (
+    typeof contact.contactId === "string" &&
+    /^casecontact_[a-f0-9]{32}$/.test(contact.contactId) &&
+    (contact.kind === "PERSON" || contact.kind === "ORGANIZATION") &&
+    typeof contact.name === "string" &&
+    typeof contact.createdAt === "string" &&
+    typeof contact.createdByUserId === "string" &&
+    CONTACT_TEXT_FIELDS.every(
+      (field) => contact[field] === undefined || typeof contact[field] === "string"
+    )
+  );
+}
 
 export type EncryptedCaseScheduleStoreOptions = {
   rootDir?: string;
@@ -165,13 +204,13 @@ export class EncryptedCaseScheduleStore {
     );
   }
 
-  async list(
+  private async readStored(
     args: {
       caseId: string;
       caseDataKey: Buffer;
       keyVersion: number;
     }
-  ): Promise<CaseScheduleEvent[]> {
+  ): Promise<{ events: CaseScheduleEvent[]; contacts: CaseContact[] }> {
     const target =
       this.schedulePath(
         args.caseId
@@ -179,7 +218,7 @@ export class EncryptedCaseScheduleStore {
     try {
       await access(target);
     } catch {
-      return [];
+      return { events: [], contacts: [] };
     }
 
     const raw =
@@ -219,47 +258,42 @@ export class EncryptedCaseScheduleStore {
       ) ||
       !parsed.events.every(
         validEvent
+      ) ||
+      (
+        parsed.contacts !== undefined &&
+        (
+          !Array.isArray(parsed.contacts) ||
+          !parsed.contacts.every(validContact)
+        )
       )
     ) {
       throw new Error(
         "CASE_SCHEDULE_INVALID"
       );
     }
-
-    return parsed.events
-      .slice()
-      .sort(
-        (left, right) =>
-          left.startsAt
-            .localeCompare(
-              right.startsAt
-            ) ||
-          left.createdAt
-            .localeCompare(
-              right.createdAt
-            )
-      );
+    return {
+      events: parsed.events,
+      contacts: parsed.contacts ?? []
+    };
   }
 
-  async save(
+  private async writeStored(
     args: {
       caseId: string;
       caseDataKey: Buffer;
       keyVersion: number;
-      events:
-        CaseScheduleEvent[];
+      events: CaseScheduleEvent[];
+      contacts: CaseContact[];
     }
   ): Promise<void> {
     if (
-      !args.events.every(
-        validEvent
-      )
+      !args.events.every(validEvent) ||
+      !args.contacts.every(validContact)
     ) {
       throw new Error(
         "CASE_SCHEDULE_INVALID"
       );
     }
-
     const payload =
       Buffer.from(
         JSON.stringify({
@@ -267,7 +301,9 @@ export class EncryptedCaseScheduleStore {
           caseId:
             args.caseId,
           events:
-            args.events
+            args.events,
+          contacts:
+            args.contacts
         } satisfies StoredCaseSchedule),
         "utf8"
       );
@@ -298,6 +334,88 @@ export class EncryptedCaseScheduleStore {
     } finally {
       payload.fill(0);
     }
+  }
+
+  async list(
+    args: {
+      caseId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    }
+  ): Promise<CaseScheduleEvent[]> {
+    const { events } =
+      await this.readStored(args);
+    return events
+      .slice()
+      .sort(
+        (left, right) =>
+          left.startsAt
+            .localeCompare(
+              right.startsAt
+            ) ||
+          left.createdAt
+            .localeCompare(
+              right.createdAt
+            )
+      );
+  }
+
+  async listContacts(
+    args: {
+      caseId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+    }
+  ): Promise<CaseContact[]> {
+    const { contacts } =
+      await this.readStored(args);
+    return contacts
+      .slice()
+      .sort((left, right) =>
+        left.name.localeCompare(right.name, "pl")
+      );
+  }
+
+  async saveContacts(
+    args: {
+      caseId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+      contacts: CaseContact[];
+    }
+  ): Promise<void> {
+    const { events } =
+      await this.readStored(args);
+    await this.writeStored({
+      ...args,
+      events
+    });
+  }
+
+  async save(
+    args: {
+      caseId: string;
+      caseDataKey: Buffer;
+      keyVersion: number;
+      events:
+        CaseScheduleEvent[];
+    }
+  ): Promise<void> {
+    if (
+      !args.events.every(
+        validEvent
+      )
+    ) {
+      throw new Error(
+        "CASE_SCHEDULE_INVALID"
+      );
+    }
+    const { contacts } =
+      await this.readStored(args);
+    await this.writeStored({
+      ...args,
+      contacts
+    });
   }
 
   async rekeyCaseSchedule(

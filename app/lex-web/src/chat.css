@@ -2140,3 +2140,128 @@ mark.restored {
   gap: 6px;
   margin-top: 6px;
 }
+
+/* Home screen and calendar */
+.lex-home-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lex-home-header > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.lex-home-header button {
+  width: fit-content;
+  margin-top: 6px;
+}
+
+.lex-home-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.lex-home-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lex-home-card-head h2 {
+  margin: 0;
+}
+
+.lex-home-item {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.lex-home-item:hover,
+.lex-home-item:focus-visible {
+  border-color: #8fb39a;
+}
+
+.matter-contact-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.lex-calendar-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.lex-calendar-head h2 {
+  margin: 0;
+  min-width: 170px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.lex-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.lex-calendar-weekday {
+  padding: 4px;
+  color: #66736a;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lex-calendar-day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 4px;
+  border: 1px solid #d9dfd6;
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lex-calendar-day.outside {
+  opacity: 0.45;
+}
+
+.lex-calendar-day.today {
+  border-color: #285132;
+  font-weight: 700;
+}
+
+.lex-calendar-day.selected {
+  background: #edf4ea;
+  border-color: #285132;
+}
+
+.lex-calendar-day small {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  min-width: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #285132;
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+}

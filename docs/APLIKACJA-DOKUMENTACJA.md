@@ -30,7 +30,12 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 
 ---
 
-## 3. Sprawy i pliki (zakładka Sprawa)
+## 3. Start, kalendarz, sprawy i pliki
+
+- **Start** (ekran po zalogowaniu): zalogowany użytkownik, model domyślny, najbliższe zdarzenia wszystkich aktywnych spraw (`GET /api/schedule/upcoming`), sprawy od ostatnio zmienionej, skrót do modułu Kancelaria.
+- **Model domyślny** = ostatnio używany (wysłanie wiadomości lub wybór modelu), zapamiętany per użytkownik w pamięci lokalnej aplikacji. Jeśli był to model lokalny, uruchamia się sam po zalogowaniu (raz na sesję).
+- **Kalendarz**: miesiąc ze zdarzeniami wszystkich spraw; nowe zdarzenie wymaga wskazania sprawy (OWNER/EDITOR) i trafia do jej terminarza.
+- **Kontakty w sprawie** (zakładka Sprawa): osoby i organizacje z rolą, telefonem, e-mailem, adresem. Przechowywane w zaszyfrowanym pliku terminarza sprawy (ten sam klucz i rotacja); audyt bez danych osobowych. API: `GET/POST /api/cases/:id/contacts`, `DELETE /api/cases/:id/contacts/:contactId`.
 
 - Każda sprawa ma własny zaszyfrowany magazyn i klucz; foldery są logiczną strukturą (folder główny nosi nazwę sprawy).
 - Obsługiwane: PDF, obrazy, DOCX, ODT, XLSX/XLSM, CSV/TSV, TXT/MD, ZIP (rozpakowanie członków).

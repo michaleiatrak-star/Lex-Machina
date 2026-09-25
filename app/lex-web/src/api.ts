@@ -206,6 +206,36 @@ export type CaseScheduleResponse = {
   events: CaseScheduleEvent[];
 };
 
+export type UpcomingCaseEvent = CaseScheduleEvent & {
+  caseId: string;
+  caseDisplayName?: string;
+};
+
+export type CaseContactKind = "PERSON" | "ORGANIZATION";
+
+export type CaseContact = {
+  contactId: string;
+  kind: CaseContactKind;
+  name: string;
+  role?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  notes?: string;
+  createdAt: string;
+  createdByUserId: string;
+};
+
+export type CaseContactInput = {
+  kind: CaseContactKind;
+  name: string;
+  role?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  notes?: string;
+};
+
 export type CaseAccessEntry = {
   user: AuthenticatedUser;
   role: CaseRole;
@@ -1725,6 +1755,43 @@ export function deleteCaseScheduleEvent(
       method: "DELETE"
     }
   );
+}
+
+/** Events of all the user's active cases from the start of today (or `from`). */
+export function listUpcomingEvents(
+  options: { limit?: number; from?: string; until?: string } = {}
+): Promise<{ events: UpcomingCaseEvent[] }> {
+  const query = new URLSearchParams();
+  if (options.limit) query.set("limit", String(options.limit));
+  if (options.from) query.set("from", options.from);
+  if (options.until) query.set("until", options.until);
+  const suffix = query.toString();
+  return json(`/api/schedule/upcoming${suffix ? `?${suffix}` : ""}`);
+}
+
+export function listCaseContacts(
+  caseId: string
+): Promise<{ contacts: CaseContact[] }> {
+  return json(`/api/cases/${caseId}/contacts`);
+}
+
+export function addCaseContact(
+  caseId: string,
+  input: CaseContactInput
+): Promise<CaseContact> {
+  return json<CaseContact>(`/api/cases/${caseId}/contacts`, {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+}
+
+export function deleteCaseContact(
+  caseId: string,
+  contactId: string
+): Promise<{ contactId: string; deletedAt: string }> {
+  return json(`/api/cases/${caseId}/contacts/${contactId}`, {
+    method: "DELETE"
+  });
 }
 
 export function archiveCase(

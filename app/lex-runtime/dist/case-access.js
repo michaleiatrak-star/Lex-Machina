@@ -67,6 +67,12 @@ function cleanScheduleStart(value) {
     }
     return cleaned;
 }
+/** Local wall-clock "YYYY-MM-DDTHH:MM", the format events are stored in. */
+function localMinute(date) {
+    const pad = (value) => String(value).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
+        `T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
 export class LocalCaseAccessService {
     store;
     auth;
@@ -348,6 +354,153 @@ export class LocalCaseAccessService {
                 eventId,
                 deletedAt
             };
+        });
+    }
+    /**
+     * Events of every active case the user can read, from the start of today,
+     * soonest first. A case whose key is unavailable is skipped, not fatal.
+     */
+    async listUpcomingEvents(context, options = {}) {
+        if (!this.schedule) {
+            throw new Error("CASE_SCHEDULE_UNAVAILABLE");
+        }
+        const from = cleanScheduleStart(options.from) ??
+            localMinute(new Date()).slice(0, 10) + "T00:00";
+        const until = cleanScheduleStart(options.until);
+        const limit = Math.min(Math.max(Math.trunc(options.limit ?? 50), 1), 500);
+        const cases = this.listCases(context).filter((item) => !item.archivedAt && item.caseKind !== "FIRM_KNOWLEDGE");
+        const upcoming = [];
+        for (const item of cases) {
+            let events;
+            try {
+                events = await this.listCaseSchedule(context, item.caseId);
+            }
+            catch {
+                continue;
+            }
+            for (const event of events) {
+                if (event.startsAt < from)
+                    continue;
+                if (until && event.startsAt > until)
+                    continue;
+                upcoming.push({
+                    ...event,
+                    caseId: item.caseId,
+                    ...(item.displayName ? { caseDisplayName: item.displayName } : {})
+                });
+            }
+        }
+        return upcoming
+            .sort((left, right) => left.startsAt.localeCompare(right.startsAt) ||
+            left.createdAt.localeCompare(right.createdAt))
+            .slice(0, limit);
+    }
+    async listCaseContacts(context, caseId) {
+        if (!this.schedule) {
+            throw new Error("CASE_SCHEDULE_UNAVAILABLE");
+        }
+        return await this.withCaseDataKey(context, caseId, "READ", async (caseDataKey) => {
+            const record = this.store.getCase(caseId);
+            if (!record) {
+                throw new CaseAccessError("CASE_NOT_FOUND", 404);
+            }
+            return await this.schedule.listContacts({
+                caseId,
+                caseDataKey,
+                keyVersion: record.keyVersion
+            });
+        });
+    }
+    async addCaseContact(context, caseId, input) {
+        if (!this.schedule) {
+            throw new Error("CASE_SCHEDULE_UNAVAILABLE");
+        }
+        const kind = input.kind === "PERSON" || input.kind === "ORGANIZATION"
+            ? input.kind
+            : null;
+        const name = cleanScheduleText(input.name, 180);
+        const role = cleanScheduleText(input.role, 120);
+        const phone = cleanScheduleText(input.phone, 60);
+        const email = cleanScheduleText(input.email, 180);
+        const address = cleanScheduleText(input.address, 300);
+        const notes = cleanScheduleText(input.notes, 2000);
+        if (!kind ||
+            !name ||
+            (phone && !/^[+\d][\d\s()./-]{2,}$/.test(phone)) ||
+            (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+            throw new CaseAccessError("INVALID_CASE_ACCESS_REQUEST", 400);
+        }
+        return await this.withCaseDataKey(context, caseId, "WRITE", async (caseDataKey) => {
+            const record = this.store.getCase(caseId);
+            if (!record) {
+                throw new CaseAccessError("CASE_NOT_FOUND", 404);
+            }
+            const contacts = await this.schedule.listContacts({
+                caseId,
+                caseDataKey,
+                keyVersion: record.keyVersion
+            });
+            const createdAt = new Date().toISOString();
+            const contact = {
+                contactId: "casecontact_" + randomBytes(16).toString("hex"),
+                kind,
+                name,
+                ...(role ? { role } : {}),
+                ...(phone ? { phone } : {}),
+                ...(email ? { email } : {}),
+                ...(address ? { address } : {}),
+                ...(notes ? { notes } : {}),
+                createdAt,
+                createdByUserId: context.user.userId
+            };
+            await this.schedule.saveContacts({
+                caseId,
+                caseDataKey,
+                keyVersion: record.keyVersion,
+                contacts: [...contacts, contact]
+            });
+            // Names and contact details stay out of the audit log.
+            this.audit(context.user.userId, "case_contact_added", createdAt, {
+                caseId,
+                contactId: contact.contactId,
+                kind: contact.kind
+            });
+            return contact;
+        });
+    }
+    async deleteCaseContact(context, caseId, contactId) {
+        if (!this.schedule) {
+            throw new Error("CASE_SCHEDULE_UNAVAILABLE");
+        }
+        if (!/^casecontact_[a-f0-9]{32}$/.test(contactId)) {
+            throw new CaseAccessError("INVALID_CASE_ACCESS_REQUEST", 400);
+        }
+        return await this.withCaseDataKey(context, caseId, "WRITE", async (caseDataKey) => {
+            const record = this.store.getCase(caseId);
+            if (!record) {
+                throw new CaseAccessError("CASE_NOT_FOUND", 404);
+            }
+            const contacts = await this.schedule.listContacts({
+                caseId,
+                caseDataKey,
+                keyVersion: record.keyVersion
+            });
+            const next = contacts.filter((item) => item.contactId !== contactId);
+            if (next.length === contacts.length) {
+                throw new CaseAccessError("CASE_CONTACT_NOT_FOUND", 404);
+            }
+            await this.schedule.saveContacts({
+                caseId,
+                caseDataKey,
+                keyVersion: record.keyVersion,
+                contacts: next
+            });
+            const deletedAt = new Date().toISOString();
+            this.audit(context.user.userId, "case_contact_deleted", deletedAt, {
+                caseId,
+                contactId
+            });
+            return { contactId, deletedAt };
         });
     }
     async listLegacyCases(context) {

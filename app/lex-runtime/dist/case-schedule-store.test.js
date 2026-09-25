@@ -77,4 +77,44 @@ describe("EncryptedCaseScheduleStore", () => {
             keyVersion: 1
         })).toEqual([]);
     });
+    it("keeps contacts and events apart in one encrypted file", async () => {
+        const root = await mkdtemp(path.join(os.tmpdir(), "lex-contacts-"));
+        roots.push(root);
+        const store = new EncryptedCaseScheduleStore({ rootDir: root });
+        const caseId = "case_" + "e".repeat(32);
+        const key = randomBytes(32);
+        const newKey = randomBytes(32);
+        const base = { caseId, caseDataKey: key, keyVersion: 1 };
+        const event = {
+            eventId: "scheduleevent_" + "1".repeat(32),
+            kind: "DEADLINE",
+            title: "Apelacja",
+            startsAt: "2026-10-10T12:00",
+            createdAt: "2026-09-22T15:00:00.000Z",
+            createdByUserId: "user_" + "c".repeat(32)
+        };
+        const contact = {
+            contactId: "casecontact_" + "2".repeat(32),
+            kind: "ORGANIZATION",
+            name: "Sad Rejonowy",
+            phone: "+48 22 000 00 00",
+            email: "biuro@example.pl",
+            createdAt: "2026-09-22T15:00:00.000Z",
+            createdByUserId: "user_" + "c".repeat(32)
+        };
+        await store.save({ ...base, events: [event] });
+        await store.saveContacts({ ...base, contacts: [contact] });
+        expect(await store.list(base)).toEqual([event]);
+        expect(await store.listContacts(base)).toEqual([contact]);
+        await store.save({ ...base, events: [] });
+        expect(await store.listContacts(base)).toEqual([contact]);
+        await store.rekeyCaseSchedule({
+            caseId,
+            oldCaseDataKey: key,
+            oldKeyVersion: 1,
+            newCaseDataKey: newKey,
+            newKeyVersion: 2
+        });
+        expect(await store.listContacts({ caseId, caseDataKey: newKey, keyVersion: 2 })).toEqual([contact]);
+    });
 });
