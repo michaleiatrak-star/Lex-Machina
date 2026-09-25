@@ -1258,15 +1258,28 @@ async function streamLocalChatCompletion(
   contextTokens: number,
   conservativeCharsPerToken: number,
   abortSignal?: AbortSignal,
-  onDelta?: (text: string) => void
+  onDelta?: (text: string) => void,
+  maxOutputCap?: number
 ): Promise<ProviderStreamResult> {
-  const budget =
+  const estimated =
     localChatBudget(
       contextTokens,
       systemPrompt,
       messages,
       conservativeCharsPerToken
     );
+  // Every generated token costs time on CPU: a caller that knows its answer
+  // is short caps the output.
+  const budget =
+    maxOutputCap && maxOutputCap >= 64
+      ? {
+          ...estimated,
+          maxOutputTokens: Math.min(
+            estimated.maxOutputTokens,
+            maxOutputCap
+          )
+        }
+      : estimated;
   const countBody =
     buildLocalChatRequest(
       modelId,
@@ -1468,7 +1481,8 @@ async function streamLocalModel(
           contextTokens,
           conservativeCharsPerToken,
           localParams.abortSignal,
-          draft.push
+          draft.push,
+          params.localMaxOutputTokens
         );
     } catch (error) {
       const detail =

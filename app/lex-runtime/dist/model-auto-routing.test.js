@@ -125,6 +125,29 @@ describe("ModelAutoRouter", () => {
         });
         expect(setup.adapter.calls[0]?.systemPrompt).not.toContain("# CENTRALNA MAPA ROUTINGU");
     });
+    it("routes a short local legal question to a domain only, with a bounded answer", async () => {
+        const setup = router(fixture(), [
+            JSON.stringify({
+                legal: true,
+                primarySkill: DR03,
+                domainSkills: [DR03],
+                executionSkills: [],
+                workflowExecutionSkill: null
+            })
+        ]);
+        const result = await setup.router
+            .resolve({
+            query: `${SKILL_SELECTION_ENVELOPE_PREFIX} {"auto":true,"manual":[]}\nczy kradzież 600 złotych to przestępstwo czy wykroczenie?`,
+            provider: "openai",
+            model: "local/mistral-nemo-12b-q4km"
+        });
+        const call = setup.adapter.calls[0];
+        expect(result.decision.primarySkill).toBe(DR03);
+        expect(call.systemPrompt).toContain("executionSkills zawsze []");
+        expect(setup.adapter.calls).toHaveLength(1);
+        expect(call.systemPrompt).not.toContain("- analizator-przepisow-v2");
+        expect(call.localMaxOutputTokens).toBe(256);
+    });
     it("uses the model decision as the AUTO route and exact skill selection", async () => {
         const registry = fixture();
         const setup = router(registry, [

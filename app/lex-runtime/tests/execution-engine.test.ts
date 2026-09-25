@@ -504,3 +504,87 @@ describe("local legal prompt size", () => {
     expect(deltas).toEqual(["abc"]);
   });
 });
+
+describe("local quick legal lane", () => {
+  function quickFixture(): LexSkillRegistry {
+    const registry = criminalFixture(true);
+    const root = path.dirname(registry.get("shared")!.directory);
+    fs.writeFileSync(
+      path.join(root, DR03, "modules", "mod-KK-kwalifikator-karnomaterialny.md"),
+      "# KWALIFIKATOR INDEX\n\n## ZASADA NACZELNA\n\n> Nigdy nie kwalifikuj czynu bez przejścia przez drzewo.\n\n---\n\n## TABELA NAWIGACYJNA\n" +
+        "| A | kradzieże | `part-01.md` |\n".repeat(200)
+    );
+    const parts = path.join(root, DR03, "modules", "kwalifikator-karnomaterialny");
+    fs.mkdirSync(parts, { recursive: true });
+    fs.writeFileSync(
+      path.join(parts, "part-01-mienie.md"),
+      [
+        "# część 1",
+        "### WĘZEŁ WARTOŚCI [A.1-W] — Kradzież bez przemocy",
+        "JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA? próg → wykroczenie kradzieży albo przestępstwo kradzieży, zależnie od wartości mienia.",
+        "### DRZEWO L.1 — USZKODZENIE MIENIA",
+        "Czy rzecz zniszczono lub uszkodzono? Wtedy blok L, nie kradzież; ocena według rozmiaru szkody i zamiaru sprawcy."
+      ].join("\n")
+    );
+    const rescanned = new LexSkillRegistry(root);
+    rescanned.scan();
+    return rescanned;
+  }
+
+  const tools = ["read_legal_resource", "search_core_law", "read_core_law_article", "web_search"].map((name) => ({
+    type: "function" as const,
+    function: { name, description: name, parameters: { type: "object", properties: {} } }
+  }));
+
+  it("answers a short criminal question from the matching qualifier nodes and core-law texts", async () => {
+    const { engine: lex, adapter } = capturingEngine(quickFixture());
+    const result = await lex.executePolishLegalQuery({
+      query: "czy kradzież 600 złotych to przestępstwo czy wykroczenie?",
+      provider: "openai",
+      model: "local/mistral-nemo-12b-q4km",
+      route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" },
+      tools: tools as never,
+      runTools: async () => [],
+      toolSystemPromptAppendix: "# FULL TOOL APPENDIX",
+      quickLocalLegal: { toolPrompt: "# LOKALNE TEKSTY USTAW\n[DU/2025/734] art. 119" }
+    });
+    const call = adapter.calls[0]!;
+    expect(call.systemPrompt).toContain("SZYBKA ODPOWIEDŹ PRAWNA");
+    expect(call.systemPrompt).toContain("WĘZEŁ WARTOŚCI [A.1-W]");
+    expect(call.systemPrompt).toContain("Nigdy nie kwalifikuj czynu");
+    expect(call.systemPrompt).toContain("[DU/2025/734] art. 119");
+    // Neither the qualifier's navigation table, the unrelated node nor the
+    // full tool appendix is read by the local model.
+    expect(call.systemPrompt).not.toContain("TABELA NAWIGACYJNA");
+    expect(call.systemPrompt).not.toContain("USZKODZENIE MIENIA");
+    expect(call.systemPrompt).not.toContain("# FULL TOOL APPENDIX");
+    expect(call.tools?.map((tool) => tool.function.name)).toEqual(["search_core_law", "read_core_law_article"]);
+    expect(call.maxIterations).toBe(3);
+    expect(call.localMaxOutputTokens).toBe(900);
+    expect(result.events.some((event) => event.target === "LOCAL_QUICK_LEGAL" && event.status === "OK")).toBe(true);
+    expect(
+      result.events.some((event) =>
+        event.type === "resource_read" &&
+        event.target.endsWith("kwalifikator-karnomaterialny/part-01-mienie.md")
+      )
+    ).toBe(true);
+  });
+
+  it("keeps the full legal path for drafting, cloud models and missing core-law texts", async () => {
+    for (const variant of [
+      { query: "Napisz zawiadomienie o kradzieży 600 zł.", model: "local/mistral-nemo-12b-q4km", quick: true },
+      { query: "czy kradzież 600 złotych to przestępstwo?", model: "account/openai/default", quick: true },
+      { query: "czy kradzież 600 złotych to przestępstwo?", model: "local/mistral-nemo-12b-q4km", quick: false }
+    ]) {
+      const { engine: lex, adapter } = capturingEngine(quickFixture());
+      await lex.executePolishLegalQuery({
+        query: variant.query,
+        provider: "openai",
+        model: variant.model,
+        route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" },
+        ...(variant.quick ? { quickLocalLegal: { toolPrompt: "# LOKALNE TEKSTY" } } : {})
+      });
+      expect(adapter.calls[0]?.systemPrompt).not.toContain("SZYBKA ODPOWIEDŹ PRAWNA");
+    }
+  });
+});

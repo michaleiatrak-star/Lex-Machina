@@ -1,4 +1,5 @@
-import { isLocalLightweightConversation } from "./execution-engine.js";
+import { isQuickLegalQuestion } from "./quick-legal-question.js";
+import { isLocalLightweightConversation, latestUserTurn } from "./execution-engine.js";
 import { MANDATORY_SESSION_SKILLS, SKILL_SELECTION_ENVELOPE_PREFIX, parseSkillSelectionEnvelope } from "./skill-selection.js";
 const EXECUTION_SKILL_NAME_OVERRIDES = new Set([
     "przesluchanie-swiadkow-v2-min90",
@@ -147,6 +148,9 @@ function validateDecision(value, domainCandidates, executionCandidates, primaryO
     };
 }
 const LOCAL_CATALOG_DESCRIPTION_CHARS = 220;
+// A short legal question on a local model is answered in the quick lane
+// (domain + provisions), so the router only has to name the domain.
+const LOCAL_QUICK_CATALOG_DESCRIPTION_CHARS = 140;
 function catalogLine(skill, maxDescriptionChars) {
     const text = description(skill) ||
         "(brak opisu)";
@@ -219,16 +223,20 @@ export class ModelAutoRouter {
             ? (await import("node:fs/promises")).readFile(routingMap, "utf8")
             : Promise.resolve("");
         const mapText = await routingMapText;
-        const catalogLimit = localModel
-            ? LOCAL_CATALOG_DESCRIPTION_CHARS
-            : undefined;
+        const quickLocal = localModel &&
+            isQuickLegalQuestion(latestUserTurn(envelope.query));
+        const catalogLimit = quickLocal
+            ? LOCAL_QUICK_CATALOG_DESCRIPTION_CHARS
+            : localModel
+                ? LOCAL_CATALOG_DESCRIPTION_CHARS
+                : undefined;
         const domainCatalog = domains.map((name) => {
             const skill = this.registry.get(name);
             return skill
                 ? catalogLine(skill, catalogLimit)
                 : name;
         });
-        const executionCatalog = executions.map((skill) => catalogLine(skill, catalogLimit));
+        const executionCatalog = (quickLocal ? [] : executions).map((skill) => catalogLine(skill, catalogLimit));
         const executionNames = executions.map((skill) => skill.name);
         const systemPrompt = [
             "# LEX MACHINA — MODEL ROUTER AUTO",
@@ -244,7 +252,9 @@ export class ModelAutoRouter {
             "legal: false TYLKO gdy wiadomość nie zawiera żadnej kwestii prawnej (powitanie, test, podziękowanie, pytanie ogólne niezwiązane z prawem). Wtedy zwróć wyłącznie {\"legal\":false}. Wtedy Lex Machina nie ładuje skilli prawnych.",
             "legal: true dla każdej sprawy lub pytania z elementem prawnym, także pośrednim (fakty sprawy, pismo, umowa, termin, przepis, urząd, sąd, dokumenty). W razie wątpliwości legal: true.",
             "Dla krótkiej komendy konwersacyjnej bez zadania prawnego executionSkills powinno być [].",
-            "Dla pytania o konkretny przepis wybierz właściwą domenę kodeksu i analizator przepisu, jeśli jest dostępny.",
+            quickLocal
+                ? "To krótkie pytanie prawne: wybierz tylko domenę DR; executionSkills zawsze [] i workflowExecutionSkill null."
+                : "Dla pytania o konkretny przepis wybierz właściwą domenę kodeksu i analizator przepisu, jeśli jest dostępny.",
             "Zwróć TYLKO jeden obiekt JSON bez markdownu i bez komentarza:",
             '{"legal":true,"primarySkill":"dr-...","domainSkills":["dr-..."],"executionSkills":[],"workflowExecutionSkill":null}',
             'albo dla wiadomości bez kwestii prawnej: {"legal":false}',
@@ -281,7 +291,11 @@ export class ModelAutoRouter {
                             .query
                     }
                 ],
-                reasoning: "none"
+                reasoning: "none",
+                // The decision is one short JSON object.
+                ...(localModel
+                    ? { localMaxOutputTokens: 256 }
+                    : {})
             });
             return response
                 .fullText

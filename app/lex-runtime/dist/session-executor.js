@@ -700,6 +700,8 @@ export class SafeSessionExecutor {
                     step("ROUTING", event.target);
                 else if (event.target === "MODEL_SKILL_SELECTION")
                     step("ROUTING", "model dobiera skille według routera v3");
+                else if (event.target === "LOCAL_QUICK_LEGAL")
+                    step("SKILLS", "szybka odpowiedź: węzły kwalifikatora i przepisy z ELI");
                 else if (event.type === "skill_read")
                     step("SKILLS", `skill ${event.target}`);
                 else if (event.type === "resource_read")
@@ -784,6 +786,18 @@ export class SafeSessionExecutor {
                 : {}),
             tools: toolSchemas,
             toolSystemPromptAppendix: toolPrompt,
+            // A short question with retrieved ELI texts may take the local quick
+            // lane; the engine decides from the route and the question itself.
+            ...(coreLawRag && coreLawTools && attachments.length === 0
+                ? {
+                    quickLocalLegal: {
+                        toolPrompt: [
+                            coreLawTools.systemPromptAppendix(),
+                            coreLawRag
+                        ].join("\n\n")
+                    }
+                }
+                : {}),
             runGateIRuntimePrelude: (workflowPlan) => runGateIRuntimePrelude({
                 workflow: workflowPlan.id,
                 query: protectedQuery,

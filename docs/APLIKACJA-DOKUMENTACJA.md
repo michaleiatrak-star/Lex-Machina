@@ -110,6 +110,8 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 | API (OpenAI, Anthropic, xAI) | klucz w pamięci procesu lub keyringu systemu |
 | Lokalny (llama.cpp, np. Bielik) | kompaktowy routing, RAG z rdzenia aktów w prompcie, limit 4 plików |
 
+**Szybka odpowiedź (model lokalny)**: jedno krótkie pytanie prawne (do ~320 znaków, bez dokumentów, bez polecenia napisania/analizy) i znalezione teksty z rdzenia aktów → router wybiera tylko domenę DR, model dostaje zasady HARD GATE, skrót skilla DR, przepisy z ELI i (sprawa karna) wybrane przez runtime węzły kwalifikatora karnomaterialnego zamiast całego indeksu; narzędzia tylko rdzenia aktów i `verify_legal_reference`, maks. 3 rundy, odpowiedź do 900 tokenów. Prompt ok. 8-11 tys. znaków zamiast ok. 25 tys. Weryfikacja po odpowiedzi bez zmian. Pozostałe pytania - pełna ścieżka.
+
 **Narzędzia Lex dostępne dla modeli** (w Claude jako `mcp__lex__*`): rdzeń aktów prawnych (teksty z ELI, lokalnie), weryfikacja przepisów i orzeczeń, orzecznictwo (SAOS, CBOSA, SN), źródła federacyjne MCP (ISAP, EUR-Lex, KRS i inne), raporty. Każde wywołanie przechodzi przez audytowany runtime.
 
 **Gwarancje routingu**: prawny-router-v3 zawsze pierwszy (w Claude - podany w całości w prompcie); sprawa karna wymaga kwalifikatora karnomaterialnego (DR-03), brak = runda korekty, dalej brak = blokada; przed plikiem `.docx` walidacja HYBRID-VAL.
@@ -168,6 +170,7 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 ## 11. Znane ograniczenia
 
 - Przyspieszenie trybu natywnego Claude i weryfikacja przez lokalne AI nie były mierzone na prawdziwym koncie/modelu (pokryte testami).
+- Czas szybkiej odpowiedzi modelu lokalnego nie był mierzony na prawdziwym modelu; zmierzony jest rozmiar promptu (ok. 3 razy mniejszy).
 - Codex i Grok nie mają zamknięcia odczytu w jednym katalogu - zostają przy protokole tekstowym.
 - Okna kontekstu modeli w hoście są przyjęte ostrożnie (Claude 200 tys., OpenAI/Grok 128 tys. tokenów).
 - Korekta OCR i obrazy z PaddleOCR sprawdzone testami i atrapą silnika; nie mierzono jakości na prawdziwym Bieliku ani na prawdziwych skanach.

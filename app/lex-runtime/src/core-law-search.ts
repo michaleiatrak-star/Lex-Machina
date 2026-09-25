@@ -28,6 +28,48 @@ export function searchStems(text: string): string[] {
     .map((word) => (/^\d+$/.test(word) ? word : word.slice(0, 6)));
 }
 
+// Everyday names of offences and acts differ from the statutory wording
+// ("kradzież" vs "kto kradnie / zabiera w celu przywłaszczenia"). A question
+// stem adds the stems the statutes use for the same act.
+const QUERY_EXPANSIONS: Record<string, string[]> = {
+  kradzi: ["kradni", "zabier", "przywl"],
+  ukradl: ["kradni", "zabier", "przywl"],
+  ukradz: ["kradni", "zabier", "przywl"],
+  wlaman: ["kradni", "wlaman"],
+  rozboj: ["kradni", "przemo"],
+  przywl: ["przywl", "powier"],
+  oszust: ["wprowa", "niekor", "rozpor"],
+  oszuka: ["wprowa", "niekor", "rozpor"],
+  zabojs: ["zabija"],
+  zabici: ["zabija"],
+  grozb: ["grozi"],
+  grozba: ["grozi"],
+  zniszc: ["niszcz", "uszkad"],
+  uszkod: ["niszcz", "uszkad"],
+  pobici: ["pobici", "bojce"],
+  bojka: ["bojce", "pobici"],
+  pijan: ["nietrz", "odurz"],
+  alkoho: ["nietrz", "odurz"],
+  nietrz: ["nietrz", "odurz"],
+  nekani: ["uporcz", "nekaj"],
+  stalki: ["uporcz", "nekaj"],
+  znies: ["znies", "zniewa"],
+  obraz: ["zniewa", "znies"],
+  wymusz: ["wymusz", "przemo", "grozb"]
+};
+
+export function expandQueryStems(stems: string[]): string[] {
+  const expanded = new Set(stems);
+  for (const stem of stems) {
+    for (const [prefix, extra] of Object.entries(QUERY_EXPANSIONS)) {
+      if (stem.startsWith(prefix)) {
+        for (const item of extra) expanded.add(item);
+      }
+    }
+  }
+  return [...expanded];
+}
+
 export type SearchableArticle = {
   eli: string;
   title: string;
@@ -71,7 +113,7 @@ export class CoreLawSearchIndex {
   }
 
   search(query: string, options: { eli?: string; limit?: number } = {}): SearchHit[] {
-    const stems = [...new Set(searchStems(query))];
+    const stems = expandQueryStems([...new Set(searchStems(query))]);
     const scores = new Map<number, number>();
     const n = this.docs.length;
     for (const stem of stems) {

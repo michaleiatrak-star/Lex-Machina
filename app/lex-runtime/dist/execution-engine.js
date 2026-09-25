@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { knowledgeMapPrompt } from "./knowledge-map.js";
 import { LegalSession } from "./legal-session.js";
+import { criminalQualifierExcerpt, isQuickLegalQuestion, qualifierPrinciples, QUICK_LEGAL_RULES, QUICK_LOCAL_MAX_OUTPUT_TOKENS, QUICK_LOCAL_MAX_TOOL_ROUNDS, QUICK_LOCAL_TOOLS } from "./quick-legal-question.js";
 import { MANDATORY_SESSION_SKILLS, parseSkillSelectionEnvelope, resolveAdditionalSkills } from "./skill-selection.js";
 import { createDeterministicWorkflowPlan, deterministicWorkflowPrompt } from "./deterministic-workflow.js";
 import { gateISemanticPrompt } from "./gate-i-semantic-contract.js";
@@ -317,6 +318,12 @@ export class LexExecutionEngine {
                 events
             };
         }
+        const quickLocal = Boolean(args.quickLocalLegal) &&
+            args.model.startsWith("local/") &&
+            !boundContext &&
+            (workflowPlan.id === "LEGAL_QUERY_V1" ||
+                workflowPlan.id === "STATUTE_ANALYSIS_V1") &&
+            isQuickLegalQuestion(latestUserTurn(effectiveQuery));
         const semanticWorkflowResources = [];
         for (const resource of workflowPlan.requiredFreshResources) {
             if (!workflowPlan.executionSkill) {
@@ -367,6 +374,7 @@ export class LexExecutionEngine {
             args.route.primarySkill,
             ...skillSelection.domainSkills
         ].find((name) => name.startsWith(CRIMINAL_DOMAIN_PREFIX));
+        let quickQualifier = "";
         if (criminalDomain) {
             const resource = `${criminalDomain}/${CRIMINAL_QUALIFIER_INDEX}`;
             const resolved = this.registry.resolveResource(criminalDomain, CRIMINAL_QUALIFIER_INDEX);
@@ -385,11 +393,28 @@ export class LexExecutionEngine {
                 throw new LexExecutionError("The mandatory criminal-law qualifier module is unavailable.", resource, [...events]);
             }
             emit("resource_read", resource, "OK", "runtime-preload;criminal-qualifier");
-            semanticWorkflowResources.push([
-                `# RUNTIME-PRELOADED SEMANTIC CONTEXT: ${resource}`,
-                "Mandatory for this criminal/misdemeanour matter: follow this decision tree before any qualification, analysis or pleading, and read the matching part file under modules/kwalifikator-karnomaterialny/ with the legal corpus tools.",
-                content
-            ].join("\n\n"));
+            if (quickLocal) {
+                const excerpt = criminalQualifierExcerpt(path.join(path.dirname(resolved), "kwalifikator-karnomaterialny"), latestUserTurn(effectiveQuery));
+                if (!excerpt) {
+                    emit("resource_read", `${criminalDomain}/modules/kwalifikator-karnomaterialny`, "BLOCKED", "CRIMINAL_QUALIFIER_NODES_NOT_FOUND");
+                    throw new LexExecutionError("No criminal-qualifier node matches this question.", resource, [...events]);
+                }
+                for (const file of excerpt.files) {
+                    emit("resource_read", `${criminalDomain}/modules/kwalifikator-karnomaterialny/${file}`, "OK", "runtime-preload;criminal-qualifier-nodes");
+                }
+                quickQualifier = [
+                    "# KWALIFIKATOR KARNOMATERIALNY — WĘZŁY DLA TEGO PYTANIA",
+                    `Runtime przeszedł indeks ${CRIMINAL_QUALIFIER_INDEX} i wybrał węzły: ${excerpt.nodes.join("; ")}. Idź przez drzewo pytanie po pytaniu.`,
+                    qualifierPrinciples(content),
+                    excerpt.text
+                ].join("\n\n");
+            }
+            else
+                semanticWorkflowResources.push([
+                    `# RUNTIME-PRELOADED SEMANTIC CONTEXT: ${resource}`,
+                    "Mandatory for this criminal/misdemeanour matter: follow this decision tree before any qualification, analysis or pleading, and read the matching part file under modules/kwalifikator-karnomaterialny/ with the legal corpus tools.",
+                    content
+                ].join("\n\n"));
         }
         if (args.guideContext &&
             workflowPlan.id !==
@@ -503,6 +528,84 @@ export class LexExecutionEngine {
         if (runtimePrelude.result ===
             "BLOCKED") {
             throw new LexExecutionError("Mandatory Gate I runtime prelude is unavailable.", runtimePrelude.gate, [...events]);
+        }
+        if (quickLocal && args.quickLocalLegal) {
+            const primarySkill = this.registry.get(args.route.primarySkill);
+            const primaryBody = (() => {
+                try {
+                    return fs.readFileSync(path.join(primarySkill.directory, "SKILL.md"), "utf8");
+                }
+                catch {
+                    return "";
+                }
+            })();
+            const quickTools = (args.tools ?? []).filter((tool) => QUICK_LOCAL_TOOLS.has(tool.function.name));
+            const quickPrompt = [
+                QUICK_LEGAL_RULES,
+                localSkillDigest(primarySkill.name, String(primarySkill.frontmatter.description ?? ""), primaryBody, 1_200),
+                ...(quickQualifier ? [quickQualifier] : []),
+                ...(semanticWorkflowResources.length > 0
+                    ? [
+                        [
+                            "# RUNTIME-PRELOADED SEMANTIC CONTEXT",
+                            ...semanticWorkflowResources
+                        ].join("\n\n")
+                    ]
+                    : []),
+                ...(runtimePrelude.appendix
+                    ? [runtimePrelude.appendix]
+                    : []),
+                ...(/\[PII:(?:PERSON|ADDRESS):/.test(effectiveQuery)
+                    ? [PERSON_CASE_PROTOCOL]
+                    : []),
+                ...(args.placeholderKey ? [args.placeholderKey] : []),
+                args.quickLocalLegal.toolPrompt
+            ].join("\n\n");
+            emit("gate", "LOCAL_QUICK_LEGAL", "OK", `workflow=${workflowPlan.id};promptChars=${quickPrompt.length};tools=${quickTools.length}`);
+            emit("provider_start", args.provider, "OK", args.model);
+            const response = await this.providers.stream(args.provider, {
+                model: args.model,
+                systemPrompt: quickPrompt,
+                ...(args.continuityKey
+                    ? { continuityKey: args.continuityKey }
+                    : {}),
+                messages: [
+                    {
+                        role: "user",
+                        content: effectiveQuery
+                    }
+                ],
+                ...(quickTools.length > 0 && args.runTools
+                    ? {
+                        tools: quickTools,
+                        runTools: args.runTools,
+                        maxIterations: QUICK_LOCAL_MAX_TOOL_ROUNDS
+                    }
+                    : {}),
+                ...(args.draftCallbacks
+                    ? { callbacks: args.draftCallbacks }
+                    : {}),
+                localMaxOutputTokens: QUICK_LOCAL_MAX_OUTPUT_TOKENS,
+                reasoning: "none"
+            });
+            emit("provider_end", args.provider, "OK", args.model);
+            emit("gate", "G39H_WORKFLOW_PROVIDER_COMPLETE", response.fullText.trim()
+                ? "OK"
+                : "BLOCKED", `workflow=${workflowPlan.id}`);
+            if (!response.fullText.trim()) {
+                throw new LexExecutionError("Provider returned an empty quick legal answer.", "G39H_WORKFLOW_PROVIDER_COMPLETE", [...events]);
+            }
+            emit("gate", "G7_VERTICAL_SLICE", "OK", "local-quick-legal");
+            return {
+                provider: args.provider,
+                primarySkill: args.route.primarySkill,
+                loadedSkills: skillSelection.loadedSkills,
+                executionSkills: skillSelection.executionSkills,
+                domainSkills: skillSelection.domainSkills,
+                workflowPlan,
+                output: response.fullText,
+                events
+            };
         }
         const localModel = args.model.startsWith("local/");
         const baseSystemPrompt = combineSkillPrompt(this.registry, [

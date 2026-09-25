@@ -646,8 +646,16 @@ async function exactLocalInputTokens(endpoint, body, abortSignal) {
         cleanup();
     }
 }
-async function streamLocalChatCompletion(endpoint, modelId, systemPrompt, messages, contextTokens, conservativeCharsPerToken, abortSignal, onDelta) {
-    const budget = localChatBudget(contextTokens, systemPrompt, messages, conservativeCharsPerToken);
+async function streamLocalChatCompletion(endpoint, modelId, systemPrompt, messages, contextTokens, conservativeCharsPerToken, abortSignal, onDelta, maxOutputCap) {
+    const estimated = localChatBudget(contextTokens, systemPrompt, messages, conservativeCharsPerToken);
+    // Every generated token costs time on CPU: a caller that knows its answer
+    // is short caps the output.
+    const budget = maxOutputCap && maxOutputCap >= 64
+        ? {
+            ...estimated,
+            maxOutputTokens: Math.min(estimated.maxOutputTokens, maxOutputCap)
+        }
+        : estimated;
     const countBody = buildLocalChatRequest(modelId, systemPrompt, messages, budget.maxOutputTokens, false);
     const exactPromptTokens = await exactLocalInputTokens(endpoint, countBody, abortSignal);
     const exactAvailable = exactPromptTokens ===
@@ -726,7 +734,7 @@ async function streamLocalModel(endpoint, modelId, contextTokens, conservativeCh
             ?.onContentDelta);
         try {
             result =
-                await streamLocalChatCompletion(endpoint, modelId, buildLocalToolSystemPrompt(params, toolTranscript), localParams.messages, contextTokens, conservativeCharsPerToken, localParams.abortSignal, draft.push);
+                await streamLocalChatCompletion(endpoint, modelId, buildLocalToolSystemPrompt(params, toolTranscript), localParams.messages, contextTokens, conservativeCharsPerToken, localParams.abortSignal, draft.push, params.localMaxOutputTokens);
         }
         catch (error) {
             const detail = error instanceof Error
