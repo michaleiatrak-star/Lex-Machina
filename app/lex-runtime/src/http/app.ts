@@ -140,8 +140,10 @@ import type {
 } from "../document-generation-state.js";
 import {
   parseSkillSelectionEnvelope,
-  resolveAdditionalSkills
+  resolveAdditionalSkills,
+  SKILL_SELECTION_ENVELOPE_PREFIX
 } from "../skill-selection.js";
+import { isTrivialChatCommand } from "../execution-engine.js";
 import {
   createDeterministicWorkflowPlan
 } from "../deterministic-workflow.js";
@@ -1177,6 +1179,44 @@ async function assertDocumentWorkflowFinalizationAllowed(
       "PROCESS_PLEADING_FINAL_REQUIRED"
     );
   }
+}
+
+/**
+ * Legal gate for chat: a trivial command without attachments is answered in
+ * the conversational lane. The work mode's pinned workflow, the router, case
+ * retrieval and legal skills are not used for it.
+ */
+export function applyTrivialChatGate(
+  registry: LexSkillRegistry,
+  request: SessionExecutionRequest,
+  attachmentCount: number
+): boolean {
+  const envelope =
+    parseSkillSelectionEnvelope(request.query);
+  if (
+    attachmentCount > 0 ||
+    !isTrivialChatCommand(envelope.query)
+  ) {
+    return false;
+  }
+  const domain =
+    request.primarySkill.startsWith("dr-") &&
+    registry.get(request.primarySkill)
+      ? request.primarySkill
+      : [...registry.skills.keys()]
+          .filter((name) => name.startsWith("dr-"))
+          .sort()[0];
+  if (!domain) return false;
+  request.primarySkill = domain;
+  request.query =
+    SKILL_SELECTION_ENVELOPE_PREFIX +
+    " " +
+    JSON.stringify({ auto: false, manual: [], workflow: null }) +
+    "\n" +
+    envelope.query;
+  request.conversationalOnly = true;
+  delete request.modelSelectsSkills;
+  return true;
 }
 
 function previewSessionWorkflow(
@@ -8066,8 +8106,27 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       });
     }
 
-    request.onStep?.("ROUTING", request.primarySkill === "AUTO" ? "prawny-router-v3: wybór dziedziny" : `wybrany skill ${request.primarySkill}`);
+    const trivialChat =
+      applyTrivialChatGate(
+        options.registry,
+        request,
+        attachments.length + firmTemplates.length
+      );
+    if (trivialChat) {
+      // No case passages for a greeting or "ok".
+      knowledge.includeCase = false;
+      knowledge.includeFirm = false;
+    }
+    request.onStep?.(
+      "ROUTING",
+      trivialChat
+        ? "krótkie polecenie: bez skilli prawnych i workflow"
+        : request.primarySkill === "AUTO"
+          ? "prawny-router-v3: wybór dziedziny"
+          : `wybrany skill ${request.primarySkill}`
+    );
     if (
+      !trivialChat &&
       !(await resolveAutoPrimarySkill(
         request,
         res,

@@ -129,25 +129,15 @@ export function latestUserTurn(
     : query;
 }
 
-export function isLocalLightweightConversation(
-  model: string,
-  query: string,
-  hasBoundContext: boolean
+/**
+ * Legal gate: an exact trivial chat command (greeting, test, thanks, "napisz
+ * ok") is user intent in its own right. It never starts a legal workflow,
+ * case retrieval or skill loading, whatever the provider, case or work mode.
+ * The allow-list is intentionally narrow; anything else keeps every gate.
+ */
+export function isTrivialChatCommand(
+  query: string
 ): boolean {
-  if (
-    !model.startsWith(
-      "local/"
-    )
-  ) {
-    return false;
-  }
-
-  // Exact trivial chat commands are user intent in their own right. They must
-  // not become expensive legal-workflow requests merely because a case has a
-  // durable workflow/session state attached. The lexical allow-list below is
-  // intentionally narrow; substantive legal requests still use all gates.
-  void hasBoundContext;
-
   const normalized =
     latestUserTurn(query)
       .normalize("NFKC")
@@ -165,8 +155,22 @@ export function isLocalLightweightConversation(
   return (
     /^(?:napisz|odpowiedz|powiedz)(?: tylko)?[: ]+ok[.!?]*$/
       .test(normalized) ||
-    /^(?:ok|test|hej|cześć|czesc|dzień dobry|dzien dobry|dzięki|dzieki)[.!?]*$/
+    /^(?:ok|okej|okay|test|testuję|testuje|hej|hejka|halo|cześć|czesc|witaj|witam|dzień dobry|dzien dobry|dobry wieczór|dobry wieczor|dzięki|dzieki|dziękuję|dziekuje|jesteś|jestes|działasz|dzialasz)[.!?]*$/
       .test(normalized)
+  );
+}
+
+export function isLocalLightweightConversation(
+  model: string,
+  query: string,
+  hasBoundContext: boolean
+): boolean {
+  // Bound case/workflow state does not turn a trivial command into a legal
+  // request (see isTrivialChatCommand).
+  void hasBoundContext;
+  return (
+    model.startsWith("local/") &&
+    isTrivialChatCommand(query)
   );
 }
 
@@ -695,8 +699,12 @@ export class LexExecutionEngine {
         )
       );
 
+    const trivialChat =
+      isTrivialChatCommand(
+        effectiveQuery
+      );
     const lightweightLocal =
-      trivialLocal ||
+      trivialChat ||
       conversationalOnly;
 
     if (lightweightLocal) {
@@ -714,7 +722,7 @@ export class LexExecutionEngine {
               args.model,
             systemPrompt:
               conversationalOnly &&
-              !trivialLocal
+              !trivialChat
                 ? "Jesteś asystentem Lex Machina. Router uznał tę wiadomość za niezwiązaną z prawem, więc skille prawne nie zostały załadowane. Odpowiedz rzeczowo, w języku użytkownika. Nie powołuj przepisów, sygnatur ani terminów prawnych; jeśli pytanie jednak dotyczy sprawy prawnej, powiedz to wprost i poproś o doprecyzowanie, aby uruchomić pełną analizę prawną."
                 : "Jesteś asystentem Lex Machina. Wykonaj dosłownie krótkie polecenie użytkownika. Jeśli prosi o napisanie konkretnego słowa lub zdania, odpowiedz wyłącznie tym tekstem, bez powitań i komentarzy. Na powitanie odpowiedz jednym krótkim zdaniem. Odpowiadaj po polsku.",
             ...(args.continuityKey
@@ -728,7 +736,7 @@ export class LexExecutionEngine {
                 role:
                   "user",
                 content:
-                  trivialLocal
+                  trivialChat
                     ? latestUserTurn(
                         effectiveQuery
                       )
@@ -773,8 +781,8 @@ export class LexExecutionEngine {
         "gate",
         "G7_VERTICAL_SLICE",
         "OK",
-        trivialLocal
-          ? "local-lightweight"
+        trivialChat
+          ? "trivial-chat"
           : "conversational-non-legal"
       );
       return {

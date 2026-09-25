@@ -588,3 +588,24 @@ describe("local quick legal lane", () => {
     }
   });
 });
+
+describe("legal gate for trivial chat commands", () => {
+  it("answers a trivial command without skills for every provider", async () => {
+    const { isTrivialChatCommand } = await import("../src/execution-engine.js");
+    expect(isTrivialChatCommand("Dzięki!")).toBe(true);
+    expect(isTrivialChatCommand("Użytkownik: pozew\n\nAsystent: gotowe\n\nUżytkownik: ok")).toBe(true);
+    expect(isTrivialChatCommand("ok, napisz pozew")).toBe(false);
+
+    const { engine: lex, adapter } = capturingEngine(fixture());
+    const result = await lex.executePolishLegalQuery({
+      query: "Dzięki!",
+      provider: "openai",
+      model: "account/openai/default",
+      route: { jurisdiction: "PL", primarySkill: DR02, mode: "LAIK" }
+    });
+    expect(result.loadedSkills).toEqual([]);
+    expect(adapter.calls).toHaveLength(1);
+    expect(adapter.calls[0]?.systemPrompt).not.toContain("# SKILL");
+    expect(adapter.calls[0]?.messages.at(-1)?.content).toBe("Dzięki!");
+  });
+});
