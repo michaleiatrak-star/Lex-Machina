@@ -286,22 +286,20 @@ export class AuxiliaryModelScheduler {
                 cachedVerificationResults: empty
             };
         }
-        if (args.primary.model.startsWith("local/") &&
-            args.config.model.startsWith("local/") &&
-            args.config.model !==
-                args.primary.model) {
-            // Lex currently owns one local llama-server process/port. Starting a
-            // different local helper here would unload the user's selected primary
-            // model and make the UI appear to "switch back" to Bielik. Keep the
-            // selected primary model authoritative and use its deterministic
-            // fallback responsibilities instead.
+        if (args.config.model.startsWith("local/")) {
+            // Local models (Bielik, Mistral) help with files only: OCR correction
+            // and personal-data detection. As a legal helper they duplicate the
+            // deterministic Gate I reference check (same detector, ELI verified)
+            // while costing CPU time before the answer, a model load when the
+            // primary is a cloud model, or a swap of the one local llama-server
+            // when the primary is another local model.
             const ownership = resolveAuxiliaryTaskOwnership("LEGAL_REFERENCE_PREFLIGHT", {
                 applicable: true,
                 auxiliarySucceeded: false,
-                reason: "AUXILIARY_LOCAL_RUNTIME_CONFLICT"
+                reason: "AUXILIARY_LOCAL_MODEL_FILES_ONLY"
             });
             return {
-                summary: timed(defaultSummary(args.config, "SKIPPED_LOCAL_RUNTIME_CONFLICT", ownership)),
+                summary: timed(defaultSummary(args.config, "SKIPPED_LOCAL_MODEL_FILES_ONLY", ownership)),
                 appendix: primaryFallbackAppendix(ownership),
                 cachedVerificationResults: empty
             };

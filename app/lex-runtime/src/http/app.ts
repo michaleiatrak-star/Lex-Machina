@@ -1223,6 +1223,26 @@ export function applyTrivialChatGate(
   return true;
 }
 
+/**
+ * X-Lex-Processing on a raw document upload: "local-ai" (the local model also
+ * checks personal data) and "ocr-fix" (the local model corrects OCR errors),
+ * comma separated; absent = plain OCR and rules-based anonymization.
+ */
+export function documentProcessingOptions(
+  header: string | undefined
+): { localAi?: true; ocrFix?: true } {
+  const flags = new Set(
+    (header ?? "")
+      .split(",")
+      .map((item) => item.trim().toLowerCase())
+      .filter(Boolean)
+  );
+  return {
+    ...(flags.has("local-ai") ? { localAi: true as const } : {}),
+    ...(flags.has("ocr-fix") ? { ocrFix: true as const } : {})
+  };
+}
+
 function previewSessionWorkflow(
   registry: LexSkillRegistry,
   request: SessionExecutionRequest
@@ -4375,7 +4395,7 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                         caseView.keyVersion,
                       ...(onProgress ? { onProgress } : {}),
                       ...(req.body?.localAi === true ? { localAi: true } : {}),
-                      ...(req.body?.ocrFix === false ? { ocrFix: false } : {})
+                      ...(typeof req.body?.ocrFix === "boolean" ? { ocrFix: req.body.ocrFix } : {})
                     }
                   );
               } finally {
@@ -5942,7 +5962,10 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
                         caseId,
                         caseDataKey,
                         keyVersion:
-                          caseView.keyVersion
+                          caseView.keyVersion,
+                        ...documentProcessingOptions(
+                          req.get("x-lex-processing")
+                        )
                       }
                     )
               );

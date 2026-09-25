@@ -34,9 +34,9 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 
 - Każda sprawa ma własny zaszyfrowany magazyn i klucz; foldery są logiczną strukturą (folder główny nosi nazwę sprawy).
 - Obsługiwane: PDF, obrazy, DOCX, ODT, XLSX/XLSM, CSV/TSV, TXT/MD, ZIP (rozpakowanie członków).
-- **Przetwarzanie**: `OCR + anonimizuj` albo `Tylko OCR` (tekst jawny, bez klucza). OCR uruchamia się tylko dla stron bez warstwy tekstowej lub z grafiką; tekst cyfrowy idzie od razu do anonimizacji.
+- **Przetwarzanie** (wybór przy każdym pliku, nic nie startuje samo): `OCR + anonimizacja`, `OCR + anonimizacja z AI`, `Tylko OCR` (tekst jawny, bez klucza), `Tylko OCR z korektą AI`. OCR uruchamia się tylko dla stron bez warstwy tekstowej lub z grafiką; tekst cyfrowy idzie od razu dalej. Tryby „z AI” wymagają działającego modelu lokalnego (`Uruchom model lokalny` nad listą).
 - Pasek postępu: odczyt → OCR (strony) → wykrywanie → [lokalne AI] → anonimizacja → zapis klucza.
-- **Dodane pliki czekają na decyzję** (czat i `Dodaj pliki`): per plik `OCR i prywatność teraz`, `Zapisz bez przetwarzania` (przetwarzanie później z listy dokumentów sprawy) albo `Usuń`; zbiorczo `Przetwórz wszystkie` / `Zapisz wszystkie`. OCR nie startuje sam.
+- **Dodane pliki czekają na decyzję** (czat i `Dodaj pliki`): przy każdym pliku sposób przetwarzania (te same 4 tryby) i `Przetwórz`, albo `Zapisz bez przetwarzania` / `Usuń`; zbiorczo `Przetwórz wszystkie (wybrane sposoby)`. Tryby z anonimizacją przechodzą przegląd prywatności; `Tylko OCR` zapisuje plik w sprawie i dołącza go do wiadomości.
 - **Edytor**: DOCX/ODT (akapity, nagłówki, listy, tabele) i arkusze - zapis jako nowy plik.
 - **Wersja zanonimizowana**: podgląd z zaznaczonymi słowami, wersja dla modelu (znaczniki `Strona n z N`), klucz. Zaznaczenie tekstu dodaje go do anonimizacji; w kluczu można poprawić formy przypadków lub usunąć symbol - wersja i klucz zmieniają się razem.
 - **Dokumenty modelu**: pliki wygenerowane przez model trafiają do sprawy; deanonimizacja automatyczna z opcją podglądu; plik z symbolami wgrany z zewnątrz można zdeanonimizować przyciskiem.
@@ -55,7 +55,7 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - Rzeczownik instytucji na początku trafienia (Bank, Rada, Skarb, Kasa, Izba, Związek, Sąd...) - to nie osoba: `Pozwany Bank`, `Bank Pekao S.A.`, `Rada Gminy` zostają jawne. Wyjątek: słowo wskazujące osobę przed nim (`pani Rada`).
 - Rola strony (najemca, wynajmujący, wierzyciel, dłużnik, powód/powódka, pożyczkobiorca...) sama nie jest anonimizowana, ale wskazuje, że następne słowo to osoba: `Najemca Kowalski` → `Najemca [PII:PERSON:0001]`.
 
-**Z lokalnym AI** (pole obok `Dodaj pliki`, model lokalny np. Bielik; gdy model nie działa, obok pojawia się `Uruchom model lokalny` z postępem, a opcja działa od chwili gotowości modelu):
+**Z AI** (tryby `... z AI` przy pliku, model lokalny np. Bielik; gdy model nie działa, nad listą jest `Uruchom model lokalny` z postępem):
 - model dodatkowo wyszukuje dane osobowe;
 - wątpliwe trafienia (jedno słowo, słowo pospolite, rzeczownik instytucji) ocenia na podstawie **całego zdania** z zaznaczonym słowem;
 - trafienie znika tylko przy jednoznacznym „nie osoba”; brak odpowiedzi = pozostaje zanonimizowane;
@@ -112,6 +112,7 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 | Konto Codex / Grok | protokół tekstowy narzędzi Lex (runda na narzędzie) |
 | API (OpenAI, Anthropic, xAI) | klucz w pamięci procesu lub keyringu systemu |
 | Lokalny (llama.cpp, np. Bielik) | kompaktowy routing, RAG z rdzenia aktów w prompcie, limit 4 plików |
+| Model pomocniczy | tylko modele w chmurze; model lokalny nie jest pomocnikiem prawnym (`SKIPPED_LOCAL_MODEL_FILES_ONLY`) - pracuje przy plikach (korekta OCR, dane osobowe). Odwołania w pytaniu sprawdza runtime (Gate I, ELI) |
 
 **Bramka złożoności (wejście, bez wywołania modelu)**: `TRIVIAL` (polecenie bez treści prawnej), `SIMPLE` (jedno krótkie pytanie: do 320 znaków, do 3 zdań i 2 pytań, bez plików, trybu mechanicznego, zlecenia pisma/analizy, orzecznictwa, >3 kwot/dat, >2 stron, >2 aktów), `STANDARD` (reszta, z kodami powodów). Wynik widać w oknie postępu. Przy wątpliwości - `STANDARD`.
 

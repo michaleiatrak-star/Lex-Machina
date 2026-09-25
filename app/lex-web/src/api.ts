@@ -2674,8 +2674,14 @@ export async function uploadCaseFile(
 
 export async function reviewDocument(
   file: File,
-  caseId: string
+  caseId: string,
+  // localAi: the local model also checks personal data; ocrFix: it corrects OCR.
+  options?: { localAi?: boolean; ocrFix?: boolean }
 ): Promise<DocumentReviewResponse> {
+  const processing = [
+    ...(options?.localAi ? ["local-ai"] : []),
+    ...(options?.ocrFix ? ["ocr-fix"] : [])
+  ].join(",");
   const response = await fetch(
     `${apiBase()}/api/documents/review`,
     {
@@ -2685,6 +2691,7 @@ export async function reviewDocument(
         "Content-Type": uploadMediaType(file),
         ...authorizationHeaders(),
         "X-Lex-Case-Id": caseId,
+        ...(processing ? { "X-Lex-Processing": processing } : {}),
         "X-Lex-Filename":
           encodeURIComponent(file.name)
       },
@@ -2734,8 +2741,17 @@ export async function processStoredCaseFile(
     {
       method: "POST",
       ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
-      ...(options?.localAi
-        ? { body: JSON.stringify({ localAi: true, ...(options.ocrFix === false ? { ocrFix: false } : {}) }) }
+      ...(options?.localAi || typeof options?.ocrFix === "boolean"
+        ? {
+            headers: {
+              ...(progressId ? { "X-Lex-Progress": progressId } : {}),
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              ...(options.localAi ? { localAi: true } : {}),
+              ...(typeof options.ocrFix === "boolean" ? { ocrFix: options.ocrFix } : {})
+            })
+          }
         : {})
     }
   );

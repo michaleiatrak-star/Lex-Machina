@@ -8,6 +8,14 @@ import { genderOf, placeholderGrammar } from "./privacy/token-legend.js";
 import { PERSON_CASES } from "./privacy/person-morphology.js";
 import { DOCX_MEDIA_TYPE, ODT_MEDIA_TYPE } from "./office-document-extractor.js";
 import { XLSX_MEDIA_TYPE, XLSM_MEDIA_TYPE, CSV_MEDIA_TYPE, TSV_MEDIA_TYPE } from "./spreadsheet-extractor.js";
+/**
+ * OCR correction by the local model: on for "z AI" anonymization unless
+ * switched off (undo), and on its own for "Tylko OCR z korektą AI".
+ */
+export function shouldCorrectOcr(security) {
+    return (security?.ocrFix === true ||
+        (security?.localAi === true && security.ocrFix !== false));
+}
 /** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
 export function decodePlainText(data) {
     try {
@@ -217,7 +225,7 @@ export class LocalPrivateDocumentService {
         const onProgress = security?.onProgress;
         onProgress?.({ stage: "READING" });
         const extracted = await this.extract(data, mediaType, onProgress);
-        const source = security?.localAi && security.ocrFix !== false
+        const source = shouldCorrectOcr(security)
             ? await this.correctOcr(extracted, onProgress)
             : extracted;
         const documentId = `doc_${source.sha256.slice(0, 24)}`;

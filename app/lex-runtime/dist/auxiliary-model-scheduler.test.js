@@ -98,7 +98,7 @@ describe("program-controlled auxiliary scheduler", () => {
         expect(calls)
             .toHaveLength(0);
     });
-    it("does not swap a selected local primary for a different local helper", async () => {
+    it("keeps local models for files only and never runs them as a legal helper", async () => {
         const { gateway, calls } = gatewayWith(async () => "SHOULD_NOT_RUN");
         const scheduler = new AuxiliaryModelScheduler(gateway);
         const result = await scheduler.preflight({
@@ -114,15 +114,34 @@ describe("program-controlled auxiliary scheduler", () => {
             currentUserText: "Sprawdź art. 5 KC.",
             runVerificationTools: async () => []
         });
-        expect(result.summary.status).toBe("SKIPPED_LOCAL_RUNTIME_CONFLICT");
+        expect(result.summary.status).toBe("SKIPPED_LOCAL_MODEL_FILES_ONLY");
         expect(result.summary
             .ownership
             .effectiveOwner).toBe("PRIMARY");
         expect(result.summary
             .ownership
-            .fallbackReason).toBe("AUXILIARY_LOCAL_RUNTIME_CONFLICT");
+            .fallbackReason).toBe("AUXILIARY_LOCAL_MODEL_FILES_ONLY");
         expect(calls)
             .toHaveLength(0);
+    });
+    it("does not load a local model as a legal helper for a cloud primary", async () => {
+        const { gateway, calls } = gatewayWith(async () => "SHOULD_NOT_RUN");
+        const result = await new AuxiliaryModelScheduler(gateway).preflight({
+            config: {
+                enabled: true,
+                provider: "openai",
+                model: "local/bielik-11b-v3-q4km"
+            },
+            primary: {
+                provider: "anthropic",
+                model: "claude-test"
+            },
+            currentUserText: "Sprawdź art. 5 KC.",
+            runVerificationTools: async () => []
+        });
+        expect(result.summary.status).toBe("SKIPPED_LOCAL_MODEL_FILES_ONLY");
+        expect(result.summary.ownership.effectiveOwner).toBe("PRIMARY");
+        expect(calls).toHaveLength(0);
     });
     it("uses helper only for extraction and sends candidates to deterministic verifier", async () => {
         const { gateway, calls } = gatewayWith(async () => JSON.stringify({
@@ -146,7 +165,7 @@ describe("program-controlled auxiliary scheduler", () => {
             config: {
                 enabled: true,
                 provider: "openai",
-                model: "local/bielik-11b-v3-q4km"
+                model: "helper-cloud-test"
             },
             primary: {
                 provider: "anthropic",
@@ -217,7 +236,7 @@ describe("program-controlled auxiliary scheduler", () => {
             config: {
                 enabled: true,
                 provider: "openai",
-                model: "local/bielik-11b-v3-q4km"
+                model: "helper-cloud-test"
             },
             primary: {
                 provider: "anthropic",
@@ -289,7 +308,7 @@ describe("program-controlled auxiliary scheduler", () => {
             config: {
                 enabled: true,
                 provider: "openai",
-                model: "local/bielik-11b-v3-q4km"
+                model: "helper-cloud-test"
             },
             primary: {
                 provider: "xai",

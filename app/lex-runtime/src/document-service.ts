@@ -78,11 +78,26 @@ export type DocumentSecurityContext = {
   keyVersion?: number;
   // Stage and page counts for the case view's progress bar.
   onProgress?: ProgressReporter;
-  // "z lokalnym AI": the running local model checks every page.
+  // "z lokalnym AI": the running local model checks every page for
+  // personal data.
   localAi?: boolean;
-  // With localAi: also fix OCR errors (default on; off = original OCR text).
+  // OCR correction by the local model: true = on (also without localAi, for
+  // "Tylko OCR z korektą AI"), false = off; unset = on with localAi.
   ocrFix?: boolean;
 };
+
+/**
+ * OCR correction by the local model: on for "z AI" anonymization unless
+ * switched off (undo), and on its own for "Tylko OCR z korektą AI".
+ */
+export function shouldCorrectOcr(
+  security?: Pick<DocumentSecurityContext, "localAi" | "ocrFix">
+): boolean {
+  return (
+    security?.ocrFix === true ||
+    (security?.localAi === true && security.ocrFix !== false)
+  );
+}
 
 /** UTF-8 (BOM stripped), else Windows-1250 as used by older Polish files. */
 export function decodePlainText(data: Uint8Array): string {
@@ -594,7 +609,7 @@ implements DocumentService {
       onProgress
     );
     const source =
-      security?.localAi && security.ocrFix !== false
+      shouldCorrectOcr(security)
         ? await this.correctOcr(extracted, onProgress)
         : extracted;
     const documentId =

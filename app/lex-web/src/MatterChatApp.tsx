@@ -89,10 +89,18 @@ import {
 } from "./document-drop-queue.js";
 import {
   createDocumentStagingState,
+  setStagedDocumentMode,
   stageDocuments,
   takeStagedDocuments,
   updateStagedDocument
 } from "./document-staging.js";
+import {
+  DOCUMENT_PROCESSING_MODES,
+  processingModeKeepsClearText,
+  processingModeOptions,
+  processingModeUsesLocalAi,
+  type DocumentProcessingMode
+} from "./document-processing-mode.js";
 import {
   AUTO_CASE_TYPE,
   DETERMINISTIC_ACTIONS,
@@ -1056,6 +1064,8 @@ export default function MatterChatApp({
   const [documentStaging, setDocumentStaging] = useState(
     createDocumentStagingState
   );
+  // Mode of each file handed to the privacy review (anonymization modes).
+  const reviewModes = useRef(new WeakMap<File, DocumentProcessingMode>());
   const [documentDropQueue, setDocumentDropQueue] = useState(
     createDocumentDropQueueState
   );
@@ -1998,12 +2008,80 @@ export default function MatterChatApp({
   }
 
   function processStagedDocuments(ids?: string[]): void {
-    const taken = takeStagedDocuments(documentStaging, ids);
-    if (taken.files.length === 0) return;
-    setDocumentStaging(taken.state);
-    setDocumentDropQueue((current) =>
-      enqueueDocumentDropFiles(current, taken.files)
+    const pending = documentStaging.items.filter(
+      (item) => item.status !== "SAVING" && (!ids || ids.includes(item.id))
     );
+    const clear = pending.filter((item) => processingModeKeepsClearText(item.mode));
+    if (
+      clear.length > 0 &&
+      !window.confirm(
+        `${clear.map((item) => `„${item.file.name}”`).join(", ")}: bez anonimizacji - wybrane do czatu trafią do modelu z danymi osobowymi w jawnej postaci. Kontynuować?`
+      )
+    ) {
+      return;
+    }
+    // Anonymization modes: the per-file privacy review (with AI when chosen).
+    const review = pending.filter((item) => !processingModeKeepsClearText(item.mode));
+    if (review.length > 0) {
+      const taken = takeStagedDocuments(documentStaging, review.map((item) => item.id));
+      for (const item of taken.items) reviewModes.current.set(item.file, item.mode);
+      setDocumentStaging(taken.state);
+      setDocumentDropQueue((current) =>
+        enqueueDocumentDropFiles(current, taken.files)
+      );
+    }
+    for (const item of clear) void processStagedClearText(item.id, item.file, item.mode);
+  }
+
+  // OCR only (optionally with the local model's OCR correction): stored in
+  // the case, processed without anonymization and attached to the message.
+  async function processStagedClearText(
+    id: string,
+    file: File,
+    mode: DocumentProcessingMode
+  ): Promise<void> {
+    const targetCase = caseId;
+    setDocumentStaging((current) =>
+      updateStagedDocument(current, id, { status: "SAVING" })
+    );
+    try {
+      const stored = await uploadCaseFile(targetCase, file);
+      const review = await processStoredCaseFile(
+        targetCase,
+        stored.uploadId,
+        undefined,
+        undefined,
+        processingModeOptions(mode)
+      );
+      const result = await finalizeCaseDocument(
+        targetCase,
+        review.documentId,
+        keepAllDirectives(review)
+      );
+      pickFiles(
+        [{ kind: "document", documentId: result.documentId, chunkIndices: result.chunks.map((chunk) => chunk.index) }],
+        true,
+        targetCase
+      );
+      setDocumentStaging((current) =>
+        takeStagedDocuments(
+          updateStagedDocument(current, id, { status: "PENDING" }),
+          [id]
+        ).state
+      );
+      setWorkspaceRefresh((value) => value + 1);
+    } catch (error) {
+      const code = error instanceof Error ? error.message : String(error);
+      setDocumentStaging((current) =>
+        updateStagedDocument(current, id, {
+          status: "FAILED",
+          error:
+            processingModeUsesLocalAi(mode) && /LOCAL_PRIVACY_MODEL/.test(code)
+              ? "tryb z AI wymaga uruchomionego modelu lokalnego (zakładka Sprawa → Uruchom model lokalny)"
+              : code
+        })
+      );
+    }
   }
 
   async function saveStagedDocuments(ids?: string[]): Promise<void> {
@@ -3962,9 +4040,10 @@ export default function MatterChatApp({
               <p className="eyebrow">Dodane pliki · decyzja przed przetwarzaniem</p>
               <h2>{documentStaging.items.length} do decyzji</h2>
               <p>
-                OCR nie startuje sam. Dla każdego pliku wybierz: przetworzenie teraz (OCR i
-                decyzja o anonimizacji) albo zapis w sprawie bez przetwarzania - taki plik
-                przetworzysz później z listy dokumentów sprawy.
+                OCR nie startuje sam. Dla każdego pliku wybierz sposób: OCR + anonimizacja,
+                OCR + anonimizacja z AI, Tylko OCR albo Tylko OCR z korektą AI (AI = model
+                lokalny, tylko do plików). Możesz też zapisać plik bez przetwarzania i
+                przetworzyć go później w zakładce Sprawa.
               </p>
               {documentStaging.rejected > 0 ? (
                 <p className="chat-inline-error">
@@ -3977,17 +4056,34 @@ export default function MatterChatApp({
                     <strong>{item.file.name}</strong>
                     <small>
                       {describeDocumentFile(item.file)}
-                      {item.status === "SAVING" ? " · zapisuję w sprawie…" : ""}
+                      {item.status === "SAVING" ? " · zapisuję i przetwarzam…" : ""}
                       {item.status === "FAILED" ? ` · nie zapisano: ${item.error ?? ""}` : ""}
                     </small>
                     <span className="chat-file-actions">
+                      <select
+                        aria-label={`Sposób przetwarzania: ${item.file.name}`}
+                        value={item.mode}
+                        disabled={item.status === "SAVING"}
+                        title={DOCUMENT_PROCESSING_MODES.find((entry) => entry.mode === item.mode)?.title}
+                        onChange={(event) =>
+                          setDocumentStaging((current) =>
+                            setStagedDocumentMode(current, item.id, event.target.value as DocumentProcessingMode)
+                          )
+                        }
+                      >
+                        {DOCUMENT_PROCESSING_MODES.map((entry) => (
+                          <option key={entry.mode} value={entry.mode} title={entry.title}>
+                            {entry.label}
+                          </option>
+                        ))}
+                      </select>
                       <button
                         type="button"
                         className="chat-secondary-action"
-                        disabled={item.status === "SAVING"}
+                        disabled={item.status === "SAVING" || !caseId}
                         onClick={() => processStagedDocuments([item.id])}
                       >
-                        OCR i prywatność teraz
+                        Przetwórz
                       </button>
                       <button
                         type="button"
@@ -4012,7 +4108,7 @@ export default function MatterChatApp({
               {documentStaging.items.length > 1 ? (
                 <span className="chat-file-actions">
                   <button type="button" className="chat-secondary-action" onClick={() => processStagedDocuments()}>
-                    Przetwórz wszystkie
+                    Przetwórz wszystkie (wybrane sposoby)
                   </button>
                   <button
                     type="button"
@@ -4061,6 +4157,10 @@ export default function MatterChatApp({
             <DocumentPrivacyPanel
               caseId={caseId}
               incomingFile={documentDropQueue.files[0] ?? null}
+              processingOptionsFor={(file) => {
+                const mode = reviewModes.current.get(file);
+                return mode ? processingModeOptions(mode) : undefined;
+              }}
               onIncomingFileConsumed={() =>
                 setDocumentDropQueue((current) => consumeDocumentDropFile(current))
               }
@@ -5853,6 +5953,12 @@ export default function MatterChatApp({
                 zamknięte zadania pomocnicze, np. wyłuskanie jawnych referencji do przepisów,
                 Dz.U. lub sygnatur. Weryfikację wykonuje następnie deterministyczny runtime.
               </p>
+              <p>
+                Modele lokalne (Bielik, Mistral) nie są tu używane: pracują przy plikach
+                (korekta OCR, wykrywanie danych osobowych - tryby „z AI” w Sprawie i w czacie).
+                Odwołania do przepisów w pytaniu i tak sprawdza runtime przez ELI przed
+                odpowiedzią, więc zwykle wystarczy jeden model główny.
+              </p>
               <label>
                 Provider pomocniczy
                 <select
@@ -5862,10 +5968,7 @@ export default function MatterChatApp({
                     setModelRouting((current) => ({
                       ...current,
                       auxiliaryProvider: next,
-                      auxiliaryModel:
-                        next === "openai"
-                          ? "local/bielik-11b-v3-q4km"
-                          : ""
+                      auxiliaryModel: ""
                     }));
                     setModelRoutingMessage("");
                   }}
@@ -5893,9 +5996,8 @@ export default function MatterChatApp({
                     (item) => item.id === modelRouting.auxiliaryModel
                   ) && modelRouting.auxiliaryModel ? (
                     <option value={modelRouting.auxiliaryModel}>
-                      {modelRouting.auxiliaryModel ===
-                      "local/bielik-11b-v3-q4km"
-                        ? "Bielik 11B v3 · domyślny"
+                      {modelRouting.auxiliaryModel.startsWith("local/")
+                        ? `${modelRouting.auxiliaryModel} · model lokalny (pomijany - tylko pliki)`
                         : modelRouting.auxiliaryModel}
                     </option>
                   ) : null}
@@ -5903,17 +6005,19 @@ export default function MatterChatApp({
                   !modelRouting.auxiliaryModel ? (
                     <option value="">Brak dostępnych modeli</option>
                   ) : null}
-                  {auxiliaryModels.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.displayName}
-                    </option>
-                  ))}
+                  {auxiliaryModels
+                    .filter((item) => !item.id.startsWith("local/"))
+                    .map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.displayName}
+                      </option>
+                    ))}
                 </select>
               </label>
               <small>
-                Domyślny helper: Bielik. Jeżeli nie jest zainstalowany, aktywne
-                zadanie pomocnicze zostanie oznaczone jako FAILED/DEGRADED,
-                ale model główny nadal może wykonać odpowiedź.
+                Jeżeli helper nie zadziała, zadanie pomocnicze zostanie oznaczone jako
+                FAILED/DEGRADED, a model główny nadal wykona odpowiedź. Wcześniej wybrany
+                model lokalny jest pomijany (status SKIPPED_LOCAL_MODEL_FILES_ONLY).
               </small>
               {modelRouting.auxiliaryEnabled &&
               !modelRouting.auxiliaryModel.startsWith("local/") ? (

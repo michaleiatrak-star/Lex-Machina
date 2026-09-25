@@ -53,6 +53,15 @@ import { progressLabel, progressPercent } from "./processing-progress.js";
 import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
 import { ArtifactDeanonymize } from "./ArtifactDeanonymize.js";
 import { decodeTextFile } from "./text-editing.js";
+import {
+  DEFAULT_DOCUMENT_PROCESSING_MODE,
+  DOCUMENT_PROCESSING_MODES,
+  processingModeKeepsClearText,
+  processingModeLabel,
+  processingModeOptions,
+  processingModeUsesLocalAi,
+  type DocumentProcessingMode
+} from "./document-processing-mode.js";
 
 const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
 const DOCUMENT_TYPES = new Set([
@@ -107,10 +116,10 @@ export function documentProcessingFailureMessage(
     return code;
   }
   if (reason === "LOCAL_PRIVACY_MODEL_NOT_READY") {
-    return "Nie udało się przetworzyć dokumentu: opcja „z lokalnym AI” wymaga uruchomionego modelu lokalnego (Ustawienia → Modele). Uruchom model albo odznacz opcję.";
+    return "Nie udało się przetworzyć dokumentu: tryb „z AI” wymaga uruchomionego modelu lokalnego. Użyj „Uruchom model lokalny” albo wybierz tryb bez AI.";
   }
   if (reason === "LOCAL_PRIVACY_MODEL_FAILED") {
-    return "Nie udało się przetworzyć dokumentu: lokalny model nie odpowiedział podczas sprawdzania danych osobowych. Spróbuj ponownie albo odznacz „z lokalnym AI”.";
+    return "Nie udało się przetworzyć dokumentu: lokalny model nie odpowiedział podczas sprawdzania pliku. Spróbuj ponownie albo wybierz tryb bez AI.";
   }
   const cause =
     reason === "OCR_REQUIRED" || reason === "OCR_ENGINE_MISSING"
@@ -236,14 +245,17 @@ export function WorkspaceManager({
     setKnowledgeSearchError
   ] = useState("");
   const [busy, setBusy] = useState(false);
-  // "z lokalnym AI": the running local model (e.g. Bielik) checks each document too.
-  const [localAi, setLocalAi] = useState(false);
+  // Processing mode chosen per file (OCR only / with AI / anonymization).
+  const [modeByItem, setModeByItem] = useState<Record<string, DocumentProcessingMode>>({});
+  const modeFor = (item: WorkspaceItem): DocumentProcessingMode =>
+    modeByItem[item.itemId] ?? DEFAULT_DOCUMENT_PROCESSING_MODE;
   const [localRuntime, setLocalRuntime] = useState<LocalModelsResponse["runtime"] | null>(null);
   const [localAiStarting, setLocalAiStarting] = useState(false);
   const [localAiMessage, setLocalAiMessage] = useState("");
   // OCR words the local model fixed in the last processed file (undo by reprocessing).
   const [ocrFixes, setOcrFixes] = useState<{
     item: WorkspaceItem;
+    mode: DocumentProcessingMode;
     fixes: Array<{ page: number; from: string; to: string }>;
   } | null>(null);
   const localAiReady = Boolean(localRuntime?.configured && localRuntime.state === "READY");
@@ -424,9 +436,16 @@ export function WorkspaceManager({
 
   async function runAutomaticPrivacy(
     item: WorkspaceItem,
-    keepClear = false,
+    mode: DocumentProcessingMode,
+    // false = run the same mode again without the AI's OCR corrections
     ocrFix = true
   ): Promise<void> {
+    if (processingModeUsesLocalAi(mode) && !localAiReady) {
+      setLocalAiMessage(
+        `„${processingModeLabel(mode)}” wymaga uruchomionego modelu lokalnego - użyj „Uruchom model lokalny”.`
+      );
+      return;
+    }
     const progressId = newProgressId();
     setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
     // Stage and page counts while the request runs; text never leaves the runtime.
@@ -442,7 +461,7 @@ export function WorkspaceManager({
         .catch(() => undefined);
     }, 500);
     try {
-      await runAutomaticPrivacySteps(item, progressId, keepClear, ocrFix);
+      await runAutomaticPrivacySteps(item, progressId, mode, ocrFix);
     } finally {
       window.clearInterval(timer);
       setProgressByItem((current) => {
@@ -462,9 +481,11 @@ export function WorkspaceManager({
   async function runAutomaticPrivacySteps(
     item: WorkspaceItem,
     progressId: string,
-    keepClear: boolean,
+    mode: DocumentProcessingMode,
     ocrFix: boolean
   ): Promise<void> {
+    const keepClear = processingModeKeepsClearText(mode);
+    const options = processingModeOptions(mode);
     await run(async () => {
       const review =
         await processStoredCaseFile(
@@ -472,12 +493,12 @@ export function WorkspaceManager({
           item.itemId,
           undefined,
           progressId,
-          localAi && !keepClear ? { localAi: true, ocrFix } : undefined
+          options ? { ...options, ...(ocrFix ? {} : { ocrFix: false }) } : undefined
         );
       const fixes = review.pages.flatMap((page) =>
         (page.corrections ?? []).map((fix) => ({ page: page.page, from: fix.from, to: fix.to }))
       );
-      setOcrFixes(fixes.length ? { item, fixes } : null);
+      setOcrFixes(fixes.length ? { item, mode, fixes } : null);
       // OCR only: every page kept as written, no anonymization key.
       const result =
         await finalizeDocument(
@@ -925,22 +946,13 @@ export function WorkspaceManager({
           ) : null}
           {canWrite ? (
             <span className="workspace-local-ai-group">
-              <label
-                className="workspace-local-ai"
-                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite. W skanach poprawia też błędy OCR, czytając całe zdania: pomylone litery, ogonki, sklejone i rozcięte słowa, przeniesienia i przypadkowe symbole; nie zmienia liczb, identyfikatorów, przeczeń ani stylu autora; poprawki są wypisane i można je cofnąć."
+              <small
+                className="workspace-local-ai-state"
+                title="Model lokalny (np. Bielik) pomaga tylko przy plikach: w trybach „z AI” wyszukuje dane osobowe (rozstrzyga z całego zdania) i poprawia błędy OCR w skanach; nie zmienia liczb, identyfikatorów, przeczeń ani stylu autora, a poprawki są wypisane i można je cofnąć."
               >
-                <input
-                  type="checkbox"
-                  checked={localAi}
-                  disabled={busy}
-                  onChange={(event) => {
-                    setLocalAi(event.target.checked);
-                    setLocalAiMessage("");
-                  }}
-                />
-                z lokalnym AI
-              </label>
-              {localAi && !localAiReady ? (
+                Model lokalny dla plików: {localAiReady ? "gotowy" : "nie działa"}
+              </small>
+              {!localAiReady ? (
                 <button
                   type="button"
                   className="chat-secondary-action workspace-local-ai-start"
@@ -950,7 +962,6 @@ export function WorkspaceManager({
                   {localAiStarting ? "Uruchamiam…" : "Uruchom model lokalny"}
                 </button>
               ) : null}
-              {localAi && localAiReady ? <small className="workspace-local-ai-state">model gotowy</small> : null}
               {localAiMessage ? <small className="workspace-local-ai-state" role="status">{localAiMessage}</small> : null}
             </span>
           ) : null}
@@ -1119,7 +1130,7 @@ export function WorkspaceManager({
                             ? processingFor(item)!.ocrPages > 0
                               ? `OCR: ${processingFor(item)!.ocrPages} z ${processingFor(item)!.totalPages} stron`
                               : `Tekst cyfrowy · ${processingFor(item)!.totalPages} ${processingFor(item)!.totalPages === 1 ? "strona" : "stron"}`
-                            : "Nieprzetworzony - wybierz „OCR + anonimizuj” albo „Tylko OCR”"}
+                            : "Nieprzetworzony - wybierz sposób przetwarzania i „Przetwórz”"}
                         </span>
                       </small>
                     ) : null}
@@ -1190,36 +1201,44 @@ export function WorkspaceManager({
                     ) : null}
 
                     {canWrite && canRunPrivacyPipeline(item) ? (
-                      <button
-                        type="button"
-                        disabled={busy}
-                        title="Uruchom lokalne wydobycie tekstu/OCR i pseudonimizację; powstanie osobny zaszyfrowany vault oraz odwracalny deanonimizator tego dokumentu"
-                        onClick={() =>
-                          void runAutomaticPrivacy(
-                            item
-                          )
-                        }
-                      >
-                        OCR + anonimizuj
-                      </button>
-                    ) : null}
-                    {canWrite && canRunPrivacyPipeline(item) ? (
-                      <button
-                        type="button"
-                        disabled={busy}
-                        title="Tylko wydobycie tekstu/OCR, bez anonimizacji: plik będzie wysyłany do modeli jako tekst jawny"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              `„${item.filename}” zostanie przetworzony bez anonimizacji. Wybrany do czatu trafi do modelu z danymi osobowymi w jawnej postaci. Kontynuować?`
-                            )
-                          ) {
-                            void runAutomaticPrivacy(item, true);
+                      <span className="workspace-process">
+                        <select
+                          aria-label={`Sposób przetwarzania: ${item.filename}`}
+                          value={modeFor(item)}
+                          disabled={busy}
+                          title={DOCUMENT_PROCESSING_MODES.find((entry) => entry.mode === modeFor(item))?.title}
+                          onChange={(event) =>
+                            setModeByItem((current) => ({
+                              ...current,
+                              [item.itemId]: event.target.value as DocumentProcessingMode
+                            }))
                           }
-                        }}
-                      >
-                        Tylko OCR
-                      </button>
+                        >
+                          {DOCUMENT_PROCESSING_MODES.map((entry) => (
+                            <option key={entry.mode} value={entry.mode} title={entry.title}>
+                              {entry.label}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          type="button"
+                          disabled={busy}
+                          onClick={() => {
+                            const mode = modeFor(item);
+                            if (
+                              processingModeKeepsClearText(mode) &&
+                              !window.confirm(
+                                `„${item.filename}” zostanie przetworzony bez anonimizacji. Wybrany do czatu trafi do modelu z danymi osobowymi w jawnej postaci. Kontynuować?`
+                              )
+                            ) {
+                              return;
+                            }
+                            void runAutomaticPrivacy(item, mode);
+                          }}
+                        >
+                          Przetwórz
+                        </button>
+                      </span>
                     ) : null}
                     {canWrite ? (
                       <div className="workspace-item-end">
@@ -1469,7 +1488,7 @@ export function WorkspaceManager({
           <button
             type="button"
             disabled={busy}
-            onClick={() => void runAutomaticPrivacy(ocrFixes.item, false, false)}
+            onClick={() => void runAutomaticPrivacy(ocrFixes.item, ocrFixes.mode, false)}
           >
             Cofnij korekty (przetwórz ponownie bez nich)
           </button>{" "}

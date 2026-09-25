@@ -170,10 +170,13 @@ export function DocumentPrivacyPanel({
   onIncomingFileConsumed,
   onAttachmentSelectionChange,
   onCaseFilesChange,
-  onProcessingEvent
+  onProcessingEvent,
+  processingOptionsFor
 }: {
   caseId: string;
   incomingFile?: File | null;
+  // Per-file processing chosen before upload (AI personal-data check, AI OCR fix).
+  processingOptionsFor?: (file: File) => { localAi?: boolean; ocrFix?: boolean } | undefined;
   onIncomingFileConsumed?: () => void;
   onAttachmentSelectionChange?: (
     selection: DocumentAttachmentSelection | null
@@ -328,7 +331,8 @@ export function DocumentPrivacyPanel({
       const result =
         await reviewDocument(
           file,
-          caseId
+          caseId,
+          processingOptionsFor?.(file)
         );
       setReview(result);
       onCaseFilesChange?.();
