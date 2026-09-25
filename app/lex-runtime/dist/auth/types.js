@@ -1,8 +1,3 @@
-export const DEFAULT_MODEL_ROUTING_PREFERENCES = {
-    auxiliaryEnabled: false,
-    auxiliaryProvider: "openai",
-    auxiliaryModel: "local/bielik-11b-v3-q4km"
-};
 export const DEFAULT_AUTH_SESSION_POLICY = {
     idleTimeoutMs: 15 * 60 * 1000,
     overallTimeoutMs: 8 * 60 * 60 * 1000

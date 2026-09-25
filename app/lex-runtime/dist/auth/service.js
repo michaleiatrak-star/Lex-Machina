@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { DEFAULT_AUTH_KDF, DEFAULT_MODEL_ROUTING_PREFERENCES } from "./types.js";
+import { DEFAULT_AUTH_KDF } from "./types.js";
 import { decryptRecoveryUserMasterKey, decryptUserMasterKey, deriveRecoveryKey, encryptRecoveryUserMasterKey, encryptUserMasterKey, generateRecoveryCode, isValidLoginName, normalizeLoginName, PasswordKdfExecutor, randomKdfSalt, randomRecoverySalt, randomUserMasterKey, validateDisplayName, validateNewPassword } from "./crypto.js";
 import { generateUserSharingKeys } from "../case-crypto.js";
 import { AuthSessionManager } from "./session-manager.js";
@@ -142,36 +142,6 @@ export class LocalAuthService {
             requiresBootstrap: !initialized,
             temporaryAdminCredentialsActive
         };
-    }
-    getModelRoutingPreferences(actor) {
-        const stored = this.store
-            .getModelRoutingPreferences(actor.user.userId);
-        return stored
-            ? { ...stored }
-            : {
-                ...DEFAULT_MODEL_ROUTING_PREFERENCES
-            };
-    }
-    setModelRoutingPreferences(actor, input) {
-        const model = input.auxiliaryModel
-            .normalize("NFKC")
-            .trim();
-        if (model.length < 1 ||
-            model.length > 256 ||
-            (model.startsWith("local/") &&
-                input.auxiliaryProvider !==
-                    "openai")) {
-            throw new AuthError("INVALID_USER_REQUEST", 400);
-        }
-        const value = {
-            auxiliaryEnabled: input.auxiliaryEnabled,
-            auxiliaryProvider: input.auxiliaryProvider,
-            auxiliaryModel: model,
-            updatedAt: new Date(this.clock.now()).toISOString()
-        };
-        this.store
-            .setModelRoutingPreferences(actor.user.userId, value);
-        return { ...value };
     }
     async bootstrap(input) {
         if (this.store.countUsers() > 0) {

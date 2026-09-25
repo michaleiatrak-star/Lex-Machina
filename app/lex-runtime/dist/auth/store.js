@@ -252,6 +252,8 @@ export class LocalAuthStore {
     `);
         this.db.prepare("INSERT OR IGNORE INTO auth_schema(version) VALUES (5)").run();
         this.db.prepare("INSERT OR IGNORE INTO auth_schema(version) VALUES (6)").run();
+        // Legacy (auxiliary model role, removed): the table stays so existing
+        // databases keep their schema history; nothing reads or writes it.
         this.db.exec(`
       CREATE TABLE IF NOT EXISTS
         user_model_routing_preferences (
@@ -283,60 +285,6 @@ export class LocalAuthStore {
             .prepare("SELECT COUNT(*) AS count FROM users")
             .get();
         return numberValue(row?.count, "count");
-    }
-    getModelRoutingPreferences(userId) {
-        const row = this.db.prepare(`
-      SELECT
-        auxiliary_enabled,
-        auxiliary_provider,
-        auxiliary_model,
-        updated_at
-      FROM user_model_routing_preferences
-      WHERE user_id = ?
-      LIMIT 1
-    `).get(userId);
-        if (!row) {
-            return null;
-        }
-        const provider = textValue(row.auxiliary_provider, "auxiliary_provider");
-        if (provider !== "openai" &&
-            provider !== "anthropic" &&
-            provider !== "xai") {
-            throw new Error("AUTH_DB_INVALID_MODEL_ROUTING_PROVIDER");
-        }
-        const model = textValue(row.auxiliary_model, "auxiliary_model").trim();
-        if (model.length < 1 ||
-            model.length > 256) {
-            throw new Error("AUTH_DB_INVALID_MODEL_ROUTING_MODEL");
-        }
-        return {
-            auxiliaryEnabled: numberValue(row.auxiliary_enabled, "auxiliary_enabled") === 1,
-            auxiliaryProvider: provider,
-            auxiliaryModel: model,
-            updatedAt: textValue(row.updated_at, "updated_at")
-        };
-    }
-    setModelRoutingPreferences(userId, value) {
-        this.db.prepare(`
-      INSERT INTO user_model_routing_preferences (
-        user_id,
-        auxiliary_enabled,
-        auxiliary_provider,
-        auxiliary_model,
-        updated_at
-      ) VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(user_id)
-      DO UPDATE SET
-        auxiliary_enabled =
-          excluded.auxiliary_enabled,
-        auxiliary_provider =
-          excluded.auxiliary_provider,
-        auxiliary_model =
-          excluded.auxiliary_model,
-        updated_at =
-          excluded.updated_at
-    `).run(userId, value.auxiliaryEnabled ? 1 : 0, value.auxiliaryProvider, value.auxiliaryModel, value.updatedAt ??
-            new Date().toISOString());
     }
     createFirstUser(user) {
         this.db.exec("BEGIN IMMEDIATE");

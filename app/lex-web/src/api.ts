@@ -715,13 +715,6 @@ export type ProviderAccountStatusResponse = {
   providers: ProviderAccountSessionStatus[];
 };
 
-export type ModelRoutingPreferences = {
-  auxiliaryEnabled: boolean;
-  auxiliaryProvider: ProviderId;
-  auxiliaryModel: string;
-  updatedAt?: string;
-};
-
 export type GuideSessionState = {
   schemaVersion: 1;
   sessionId: string;
@@ -934,25 +927,6 @@ export type SessionExecutionResponse = {
     primary: {
       provider: ProviderId;
       model: string;
-    };
-    auxiliary?: {
-      enabled: boolean;
-      provider: ProviderId;
-      model: string;
-      status:
-        | "DISABLED"
-        | "SKIPPED_NO_ELIGIBLE_TASK"
-        | "SKIPPED_SAME_AS_PRIMARY"
-        | "PASS"
-        | "FAILED";
-      tasks: Array<
-        "LEGAL_REFERENCE_PREFLIGHT"
-      >;
-      extractedCandidates: number;
-      deterministicVerifications: number;
-      cachedVerifierReuses: number;
-      latencyMs: number;
-      error?: string;
     };
   };
   primarySkill: string;
@@ -2374,32 +2348,6 @@ export async function installStagedApplicationUpdate(
 
 export function getProviderStatus(): Promise<ProviderStatusResponse> {
   return json<ProviderStatusResponse>("/api/providers");
-}
-
-export function getModelRoutingPreferences():
-  Promise<ModelRoutingPreferences> {
-  return json<ModelRoutingPreferences>(
-    "/api/model-routing/preferences"
-  );
-}
-
-export function setModelRoutingPreferences(
-  input: ModelRoutingPreferences
-): Promise<ModelRoutingPreferences> {
-  return json<ModelRoutingPreferences>(
-    "/api/model-routing/preferences",
-    {
-      method: "PUT",
-      body: JSON.stringify({
-        auxiliaryEnabled:
-          input.auxiliaryEnabled,
-        auxiliaryProvider:
-          input.auxiliaryProvider,
-        auxiliaryModel:
-          input.auxiliaryModel
-      })
-    }
-  );
 }
 
 export function validateRoute(

@@ -5202,115 +5202,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
   );
 
   app.get(
-    "/api/model-routing/preferences",
-    (_req, res) => {
-      if (!options.authService) {
-        res.status(503).json({
-          error:
-            "AUTH_SERVICE_UNAVAILABLE"
-        });
-        return;
-      }
-      const actor =
-        responseAuthContext(res);
-      res.json(
-        options.authService
-          .getModelRoutingPreferences(
-            actor
-          )
-      );
-    }
-  );
-
-  app.put(
-    "/api/model-routing/preferences",
-    (req, res) => {
-      if (!options.authService) {
-        res.status(503).json({
-          error:
-            "AUTH_SERVICE_UNAVAILABLE"
-        });
-        return;
-      }
-      const body =
-        req.body &&
-        typeof req.body ===
-          "object" &&
-        !Array.isArray(req.body)
-          ? req.body as
-              Record<
-                string,
-                unknown
-              >
-          : null;
-      const provider =
-        typeof body
-          ?.auxiliaryProvider ===
-          "string"
-          ? body
-              .auxiliaryProvider
-          : "";
-      const model =
-        typeof body
-          ?.auxiliaryModel ===
-          "string"
-          ? body
-              .auxiliaryModel
-              .trim()
-          : "";
-      const enabled =
-        body?.auxiliaryEnabled;
-
-      if (
-        typeof enabled !==
-          "boolean" ||
-        !isProviderId(provider) ||
-        model.length < 1 ||
-        model.length > 256
-      ) {
-        res.status(400).json({
-          error:
-            "INVALID_MODEL_ROUTING_PREFERENCES"
-        });
-        return;
-      }
-
-      const actor =
-        responseAuthContext(res);
-      try {
-        res.json(
-          options.authService
-            .setModelRoutingPreferences(
-              actor,
-              {
-                auxiliaryEnabled:
-                  enabled,
-                auxiliaryProvider:
-                  provider,
-                auxiliaryModel:
-                  model
-              }
-            )
-        );
-      } catch (error) {
-        if (
-          error instanceof
-            AuthError
-        ) {
-          res.status(
-            error.httpStatus
-          ).json({
-            error:
-              error.code
-          });
-          return;
-        }
-        throw error;
-      }
-    }
-  );
-
-  app.get(
     "/api/provider-accounts",
     async (_req, res) => {
       if (!options.accountSessions) {
@@ -8204,22 +8095,6 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
     if (options.authService) {
       const actor =
         responseAuthContext(res);
-      const preferences =
-        options.authService
-          .getModelRoutingPreferences(
-            actor
-          );
-      request.auxiliaryRouting = {
-        enabled:
-          preferences
-            .auxiliaryEnabled,
-        provider:
-          preferences
-            .auxiliaryProvider,
-        model:
-          preferences
-            .auxiliaryModel
-      };
 
       if (
         request.primarySkill ===

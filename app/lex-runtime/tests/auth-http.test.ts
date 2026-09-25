@@ -579,11 +579,6 @@ describe("idle session activity", () => {
         }
       })),
       touchSession,
-      getModelRoutingPreferences: vi.fn(() => ({
-        auxiliaryEnabled: false,
-        auxiliaryProvider: "openai",
-        auxiliaryModel: ""
-      })),
       status: vi.fn(() => ({
         initialized: true,
         requiresBootstrap: false,

@@ -36,7 +36,6 @@ import {
   getHealth,
   getLocalModels,
   getModels,
-  getModelRoutingPreferences,
   getProviderAccountStatus,
   getProviderStatus,
   getRoutes,
@@ -56,7 +55,6 @@ import {
   saveNameForm,
   renameCase,
   setClaudeOAuthToken,
-  setModelRoutingPreferences,
   setProviderApiKey,
   startLocalModel,
   unarchiveCase,
@@ -70,7 +68,6 @@ import {
   type ExecutionStepsSnapshot,
   type EvidenceItem,
   type ModelDescriptor,
-  type ModelRoutingPreferences,
   type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse,
@@ -737,10 +734,7 @@ function executionMessage(
           : execution.courtWorkflow
             ? ` · analiza sądowa: ${execution.courtWorkflow.stage}${execution.courtWorkflow.nextCheckpoint ? ` · następny: ${execution.courtWorkflow.nextCheckpoint}` : ""}`
             : "";
-    const modelRoutingMeta =
-      execution.modelRouting?.auxiliary
-        ? ` · główny: ${execution.modelRouting.primary.model} · pomocniczy: ${execution.modelRouting.auxiliary.model} [${execution.modelRouting.auxiliary.status}] · helper ${execution.modelRouting.auxiliary.latencyMs} ms${execution.modelRouting.auxiliary.deterministicVerifications > 0 ? ` · preflight verify: ${execution.modelRouting.auxiliary.deterministicVerifications}` : ""}${execution.modelRouting.auxiliary.cachedVerifierReuses > 0 ? ` · cache reuse: ${execution.modelRouting.auxiliary.cachedVerifierReuses}` : ""}`
-        : ` · główny: ${execution.model}`;
+    const modelRoutingMeta = ` · model: ${execution.model}`;
     const verificationDegraded =
       execution.finalization !== "PASS" ||
       execution.gateI?.result === "BLOCKED";
@@ -976,19 +970,6 @@ export default function MatterChatApp({
   ] = useState<
     LocalModelsResponse["runtime"] | null
   >(null);
-  const [modelRouting, setModelRouting] =
-    useState<ModelRoutingPreferences>({
-      auxiliaryEnabled: false,
-      auxiliaryProvider: "openai",
-      auxiliaryModel:
-        "local/bielik-11b-v3-q4km"
-    });
-  const [auxiliaryModels, setAuxiliaryModels] =
-    useState<ModelDescriptor[]>([]);
-  const [modelRoutingBusy, setModelRoutingBusy] =
-    useState(false);
-  const [modelRoutingMessage, setModelRoutingMessage] =
-    useState("");
 
   const [routes, setRoutes] = useState<string[]>([]);
   const [skills, setSkills] = useState<PublicSkillDescriptor[]>(
@@ -1250,12 +1231,6 @@ export default function MatterChatApp({
       localRuntimeStatus?.state ===
         "PROVISIONING"
     );
-  const selectedAuxiliaryModel =
-    auxiliaryModels.find(
-      (item) =>
-        item.id ===
-          modelRouting.auxiliaryModel
-    );
   const executionSkills = useMemo(
     () => skills
       .filter(isExecutionSkill)
@@ -1398,16 +1373,14 @@ export default function MatterChatApp({
       getRoutes(),
       getProviderStatus(),
       getProviderAccountStatus(),
-      listCases(),
-      getModelRoutingPreferences()
+      listCases()
     ])
       .then(([
         health,
         routeList,
         providerStatus,
         accountStatus,
-        caseList,
-        routingPreferences
+        caseList
       ]) => {
         if (cancelled) return;
         setRuntimeOnline(health.status === "ok" && health.localOnly === true);
@@ -1436,9 +1409,6 @@ export default function MatterChatApp({
             ProviderId,
             ProviderAccountSessionStatus
           >
-        );
-        setModelRouting(
-          routingPreferences
         );
       })
       .catch((error) => {
@@ -1693,53 +1663,6 @@ export default function MatterChatApp({
     providerConfigured,
     runtimeProvider,
     accountSession,
-    localModelsRefreshToken
-  ]);
-
-  useEffect(() => {
-    let cancelled = false;
-    setAuxiliaryModels([]);
-
-    const configured =
-      providerConfiguration[
-        modelRouting.auxiliaryProvider
-      ];
-    if (
-      configured !== true &&
-      !modelRouting.auxiliaryModel
-        .startsWith("local/")
-    ) {
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    void getModels(
-      modelRouting.auxiliaryProvider
-    )
-      .then((response) => {
-        if (!cancelled) {
-          setAuxiliaryModels(
-            response.models.filter(
-              (item) =>
-                item.selectable
-            )
-          );
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setAuxiliaryModels([]);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    modelRouting.auxiliaryProvider,
-    modelRouting.auxiliaryModel,
-    providerConfiguration,
     localModelsRefreshToken
   ]);
 
@@ -2440,32 +2363,6 @@ export default function MatterChatApp({
       setProviderKeyMessage(error instanceof Error ? error.message : String(error));
     } finally {
       setProviderKeyBusy(false);
-    }
-  }
-
-  async function saveModelRouting(): Promise<void> {
-    if (modelRoutingBusy) return;
-    setModelRoutingBusy(true);
-    setModelRoutingMessage("");
-    try {
-      const saved =
-        await setModelRoutingPreferences(
-          modelRouting
-        );
-      setModelRouting(saved);
-      setModelRoutingMessage(
-        saved.auxiliaryEnabled
-          ? "Model pomocniczy aktywny. Program użyje go tylko dla dozwolonych zadań pomocniczych."
-          : "Model pomocniczy wyłączony."
-      );
-    } catch (error) {
-      setModelRoutingMessage(
-        error instanceof Error
-          ? error.message
-          : String(error)
-      );
-    } finally {
-      setModelRoutingBusy(false);
     }
   }
 
@@ -5927,121 +5824,6 @@ export default function MatterChatApp({
                     ? `Klucz API dla ${providerDefinition.label} — otwórz w przeglądarce ↗`
                     : `Utwórz / pobierz klucz ${providerDefinition.label} — otwórz w przeglądarce ↗`}
                 </button>
-              ) : null}
-            </article>
-
-            <article className="chat-card chat-settings-advanced">
-              <p className="eyebrow">Ustawienie zaawansowane</p>
-              <h2>Model pomocniczy</h2>
-              <label className="chat-toggle-row">
-                <input
-                  type="checkbox"
-                  checked={modelRouting.auxiliaryEnabled}
-                  onChange={(event) =>
-                    setModelRouting((current) => ({
-                      ...current,
-                      auxiliaryEnabled: event.target.checked
-                    }))
-                  }
-                />
-                <span>
-                  Aktywuj programistyczny lane pomocniczy
-                </span>
-              </label>
-              <p>
-                Helper nie odpowiada na całe pytanie. Program może przekazać mu wyłącznie
-                zamknięte zadania pomocnicze, np. wyłuskanie jawnych referencji do przepisów,
-                Dz.U. lub sygnatur. Weryfikację wykonuje następnie deterministyczny runtime.
-              </p>
-              <p>
-                Modele lokalne (Bielik, Mistral) nie są tu używane: pracują przy plikach
-                (korekta OCR, wykrywanie danych osobowych - tryby „z AI” w Sprawie i w czacie).
-                Odwołania do przepisów w pytaniu i tak sprawdza runtime przez ELI przed
-                odpowiedzią, więc zwykle wystarczy jeden model główny.
-              </p>
-              <label>
-                Provider pomocniczy
-                <select
-                  value={modelRouting.auxiliaryProvider}
-                  onChange={(event) => {
-                    const next = event.target.value as ProviderId;
-                    setModelRouting((current) => ({
-                      ...current,
-                      auxiliaryProvider: next,
-                      auxiliaryModel: ""
-                    }));
-                    setModelRoutingMessage("");
-                  }}
-                >
-                  {PROVIDERS.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Model pomocniczy
-                <select
-                  value={modelRouting.auxiliaryModel}
-                  disabled={modelRoutingBusy}
-                  onChange={(event) =>
-                    setModelRouting((current) => ({
-                      ...current,
-                      auxiliaryModel: event.target.value
-                    }))
-                  }
-                >
-                  {!auxiliaryModels.some(
-                    (item) => item.id === modelRouting.auxiliaryModel
-                  ) && modelRouting.auxiliaryModel ? (
-                    <option value={modelRouting.auxiliaryModel}>
-                      {modelRouting.auxiliaryModel.startsWith("local/")
-                        ? `${modelRouting.auxiliaryModel} · model lokalny (pomijany - tylko pliki)`
-                        : modelRouting.auxiliaryModel}
-                    </option>
-                  ) : null}
-                  {auxiliaryModels.length === 0 &&
-                  !modelRouting.auxiliaryModel ? (
-                    <option value="">Brak dostępnych modeli</option>
-                  ) : null}
-                  {auxiliaryModels
-                    .filter((item) => !item.id.startsWith("local/"))
-                    .map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.displayName}
-                      </option>
-                    ))}
-                </select>
-              </label>
-              <small>
-                Jeżeli helper nie zadziała, zadanie pomocnicze zostanie oznaczone jako
-                FAILED/DEGRADED, a model główny nadal wykona odpowiedź. Wcześniej wybrany
-                model lokalny jest pomijany (status SKIPPED_LOCAL_MODEL_FILES_ONLY).
-              </small>
-              {modelRouting.auxiliaryEnabled &&
-              !modelRouting.auxiliaryModel.startsWith("local/") ? (
-                <p className="chat-inline-warning">
-                  Uwaga: pomocniczy model nie jest lokalny. Program może wysłać
-                  do wskazanego providera wyłącznie bieżącą wypowiedź użytkownika
-                  potrzebną do dozwolonego zadania pomocniczego.
-                </p>
-              ) : null}
-              <button
-                type="button"
-                className="chat-primary-action"
-                disabled={
-                  modelRoutingBusy ||
-                  !modelRouting.auxiliaryModel.trim()
-                }
-                onClick={() => void saveModelRouting()}
-              >
-                {modelRoutingBusy
-                  ? "Zapisywanie…"
-                  : "Zapisz rozdział modeli"}
-              </button>
-              {modelRoutingMessage ? (
-                <small>{modelRoutingMessage}</small>
               ) : null}
             </article>
 

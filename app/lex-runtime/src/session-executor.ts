@@ -114,14 +114,10 @@ import {
   type GateITurnState
 } from "./gate-i-turn-state.js";
 import {
-  AuxiliaryModelScheduler,
-  auxiliaryVerificationCallKey,
-  type AuxiliaryRoutingConfig,
-  type AuxiliaryRoutingSummary
-} from "./auxiliary-model-scheduler.js";
-import {
-  evaluateModelTaskOwnershipGate
+  evaluateModelTaskOwnershipGate,
+  resolveReferencePreflightOwnership
 } from "./model-task-ownership.js";
+import { detectLegalReferences } from "./finalization-gate.js";
 import {
   applyAutomaticVerificationMarkers,
   detectHistoricalAsOf,
@@ -198,7 +194,6 @@ export type SessionExecutionRequest = {
       provider: ProviderId;
       model: string;
     };
-    auxiliary?: AuxiliaryRoutingSummary;
   };
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
@@ -216,8 +211,8 @@ export type SessionExecutionRequest = {
   onStep?: ExecutionStepReporter;
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
+  // The current user message without chat history (grammar of placeholders).
   auxiliaryText?: string;
-  auxiliaryRouting?: AuxiliaryRoutingConfig;
   guideContext?: Pick<
     GuideSessionState,
     | "revision"
@@ -647,7 +642,6 @@ export type SessionExecutionResponse = {
       provider: ProviderId;
       model: string;
     };
-    auxiliary?: AuxiliaryRoutingSummary;
   };
   primarySkill: string;
   loadedSkills?: string[];
@@ -1023,8 +1017,6 @@ export class SafeSessionExecutor implements SessionExecutor {
   private readonly engine: LexExecutionEngine;
   private readonly autoRouter:
     ModelAutoRouter;
-  private readonly auxiliaryScheduler:
-    AuxiliaryModelScheduler;
 
   constructor(
     private readonly registry: LexSkillRegistry,
@@ -1043,10 +1035,6 @@ export class SafeSessionExecutor implements SessionExecutor {
     this.autoRouter =
       new ModelAutoRouter(
         registry,
-        providers
-      );
-    this.auxiliaryScheduler =
-      new AuxiliaryModelScheduler(
         providers
       );
   }
@@ -1256,50 +1244,16 @@ export class SafeSessionExecutor implements SessionExecutor {
       PublicAuxiliarySourceItem[] =
       [];
 
-    const auxiliary =
-      await this.auxiliaryScheduler
-        .preflight({
-          config:
-            request.auxiliaryRouting ?? {
-              enabled: false,
-              provider: "openai",
-              model:
-                "local/bielik-11b-v3-q4km"
-            },
-          primary: {
-            provider:
-              request.provider,
-            model:
-              request.model
-          },
-          currentUserText:
-            protectedAuxiliaryText ??
-            protectedQuery,
-          ...(verificationTools
-            ? {
-                runVerificationTools:
-                  (calls) =>
-                    verificationTools
-                      .runTools(calls)
-              }
-            : {})
-        });
-
-    audit.record(
-      "gate",
-      "G39K_AUXILIARY_MODEL_ROUTING",
-      auxiliary.summary.status ===
-        "FAILED"
-        ? "DEGRADED"
-        : "OK",
-      {
-        ...auxiliary.summary
-      }
-    );
-
+    // References in the message are checked by the Gate I runtime prelude
+    // (ELI); no model is asked to extract them.
     const modelTaskOwnership =
       evaluateModelTaskOwnershipGate(
-        auxiliary.summary.ownership
+        resolveReferencePreflightOwnership(
+          detectLegalReferences(
+            protectedAuxiliaryText ??
+              protectedQuery
+          ).length > 0
+        )
       );
     audit.record(
       "gate",
@@ -1475,9 +1429,6 @@ export class SafeSessionExecutor implements SessionExecutor {
         : []),
       ...(verificationTools
         ? [verificationTools.systemPromptAppendix()]
-        : []),
-      ...(auxiliary.appendix
-        ? [auxiliary.appendix]
         : []),
       ...(attachments.length > 0
         ? [documentCitationSystemPrompt(attachments)]
@@ -1743,45 +1694,12 @@ export class SafeSessionExecutor implements SessionExecutor {
           }
         }
 
-        const cachedVerificationResults:
-          NormalizedToolResult[] = [];
-        const uncachedVerificationCalls:
-          NormalizedToolCall[] = [];
-
-        for (
-          const call
-          of verificationCalls
-        ) {
-          const cached =
-            auxiliary
-              .cachedVerificationResults
-              .get(
-                auxiliaryVerificationCallKey(
-                  call
-                )
-              );
-          if (cached) {
-            auxiliary.summary
-              .cachedVerifierReuses +=
-                1;
-            cachedVerificationResults.push({
-              ...cached,
-              tool_use_id:
-                call.id
-            });
-          } else {
-            uncachedVerificationCalls.push(
-              call
-            );
-          }
-        }
-
         const verificationResults =
-          uncachedVerificationCalls.length > 0 &&
+          verificationCalls.length > 0 &&
           verificationTools
             ? await verificationTools
                 .runTools(
-                  uncachedVerificationCalls
+                  verificationCalls
                 )
             : [];
 
@@ -1791,7 +1709,6 @@ export class SafeSessionExecutor implements SessionExecutor {
             ...coreLawResults,
             ...reportResults,
             ...federationResults,
-            ...cachedVerificationResults,
             ...verificationResults
           ].map((result) => [
             result.tool_use_id,
@@ -2737,13 +2654,7 @@ export class SafeSessionExecutor implements SessionExecutor {
             request.provider,
           model:
             request.model
-        },
-        ...(request.auxiliaryRouting
-          ? {
-              auxiliary:
-                auxiliary.summary
-            }
-          : {})
+        }
       },
       primarySkill: execution.primarySkill,
       loadedSkills: execution.loadedSkills,

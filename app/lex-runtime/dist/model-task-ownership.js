@@ -10,9 +10,10 @@ export const MODEL_TASK_OWNERSHIP = [
         mandatory: true
     },
     {
+        // Deterministic Gate I prelude: the same detector as finalization,
+        // verified through ELI. There is no auxiliary model role.
         task: "LEGAL_REFERENCE_PREFLIGHT",
-        owner: "AUXILIARY",
-        fallbackOwner: "PRIMARY",
+        owner: "RUNTIME",
         mandatory: false
     },
     {
@@ -31,6 +32,7 @@ export function modelTaskPolicy(task) {
 export function validateModelTaskOwnership() {
     const seen = new Set();
     const duplicateTasks = [];
+    // Kept in the report shape; no task has an auxiliary owner any more.
     const missingFallbacks = [];
     const invalidFallbacks = [];
     for (const policy of MODEL_TASK_OWNERSHIP) {
@@ -38,11 +40,6 @@ export function validateModelTaskOwnership() {
             duplicateTasks.push(policy.task);
         }
         seen.add(policy.task);
-        if (policy.owner ===
-            "AUXILIARY" &&
-            !policy.fallbackOwner) {
-            missingFallbacks.push(policy.task);
-        }
         if (policy.fallbackOwner &&
             policy.fallbackOwner ===
                 policy.owner) {
@@ -63,51 +60,17 @@ export function validateModelTaskOwnership() {
         duplicateTasks
     };
 }
-export function resolveAuxiliaryTaskOwnership(task, args) {
-    const policy = modelTaskPolicy(task);
-    if (!args.applicable) {
-        return {
-            task,
-            applicable: false,
-            configuredOwner: policy.owner,
-            ...(policy.fallbackOwner
-                ? {
-                    fallbackOwner: policy.fallbackOwner
-                }
-                : {}),
-            effectiveOwner: "NOT_APPLICABLE",
-            fallbackApplied: false
-        };
-    }
-    if (args.auxiliarySucceeded) {
-        return {
-            task,
-            applicable: true,
-            configuredOwner: policy.owner,
-            ...(policy.fallbackOwner
-                ? {
-                    fallbackOwner: policy.fallbackOwner
-                }
-                : {}),
-            effectiveOwner: "AUXILIARY",
-            fallbackApplied: false
-        };
-    }
-    if (!policy.fallbackOwner) {
-        throw new Error(`MODEL_TASK_FALLBACK_MISSING:${task}`);
-    }
+/** Reference preflight is runtime work whenever the message cites law. */
+export function resolveReferencePreflightOwnership(applicable) {
+    const policy = modelTaskPolicy("LEGAL_REFERENCE_PREFLIGHT");
     return {
-        task,
-        applicable: true,
+        task: policy.task,
+        applicable,
         configuredOwner: policy.owner,
-        fallbackOwner: policy.fallbackOwner,
-        effectiveOwner: policy.fallbackOwner,
-        fallbackApplied: true,
-        ...(args.reason
-            ? {
-                fallbackReason: args.reason
-            }
-            : {})
+        effectiveOwner: applicable
+            ? policy.owner
+            : "NOT_APPLICABLE",
+        fallbackApplied: false
     };
 }
 export function evaluateModelTaskOwnershipGate(resolution) {

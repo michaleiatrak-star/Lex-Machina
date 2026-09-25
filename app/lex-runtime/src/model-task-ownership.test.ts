@@ -6,7 +6,7 @@ import {
 import {
   MODEL_TASK_OWNERSHIP,
   evaluateModelTaskOwnershipGate,
-  resolveAuxiliaryTaskOwnership,
+  resolveReferencePreflightOwnership,
   validateModelTaskOwnership
 } from "./model-task-ownership.js";
 
@@ -14,69 +14,29 @@ describe(
   "model task ownership",
   () => {
     it(
-      "classifies every registered task exactly once and requires a non-auxiliary fallback for auxiliary work",
+      "classifies every registered task exactly once, without an auxiliary model owner",
       () => {
-        const report =
-          validateModelTaskOwnership();
-
-        expect(report)
-          .toEqual({
-            result: "PASS",
-            missingFallbacks: [],
-            invalidFallbacks: [],
-            duplicateTasks: []
-          });
-
-        const auxiliary =
-          MODEL_TASK_OWNERSHIP
-            .filter(
-              (policy) =>
-                policy.owner ===
-                  "AUXILIARY"
-            );
-
+        expect(validateModelTaskOwnership()).toEqual({
+          result: "PASS",
+          missingFallbacks: [],
+          invalidFallbacks: [],
+          duplicateTasks: []
+        });
         expect(
-          auxiliary.length
-        ).toBeGreaterThan(0);
-        for (
-          const policy
-          of auxiliary
-        ) {
-          expect(
-            policy.fallbackOwner
-          ).toBe("PRIMARY");
-        }
+          MODEL_TASK_OWNERSHIP.map((policy) => policy.owner)
+        ).not.toContain("AUXILIARY");
       }
     );
 
     it(
-      "falls back to the primary model when the auxiliary preflight cannot run",
+      "keeps the reference preflight runtime-owned",
       () => {
         const resolution =
-          resolveAuxiliaryTaskOwnership(
-            "LEGAL_REFERENCE_PREFLIGHT",
-            {
-              applicable: true,
-              auxiliarySucceeded:
-                false,
-              reason:
-                "AUXILIARY_DISABLED"
-            }
-          );
-
-        expect(
-          resolution
-            .effectiveOwner
-        ).toBe("PRIMARY");
-        expect(
-          resolution
-            .fallbackApplied
-        ).toBe(true);
-        expect(
-          evaluateModelTaskOwnershipGate(
-            resolution
-          ).result
-        ).toBe("PASS");
+          resolveReferencePreflightOwnership(true);
+        expect(resolution.effectiveOwner).toBe("RUNTIME");
+        expect(resolution.fallbackApplied).toBe(false);
+        expect(evaluateModelTaskOwnershipGate(resolution).result).toBe("PASS");
+        expect(resolveReferencePreflightOwnership(false).effectiveOwner).toBe("NOT_APPLICABLE");
       }
     );
 

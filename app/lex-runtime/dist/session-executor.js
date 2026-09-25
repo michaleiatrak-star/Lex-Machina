@@ -16,8 +16,8 @@ import { orchestrateDocumentContext } from "./context-orchestrator.js";
 import { evaluateGuideOutput } from "./guide-session-state.js";
 import { evaluateGateIInvariants } from "./gate-i-invariants.js";
 import { blockGateITurn, createGateITurnState, passGateITurnPhase } from "./gate-i-turn-state.js";
-import { AuxiliaryModelScheduler, auxiliaryVerificationCallKey } from "./auxiliary-model-scheduler.js";
-import { evaluateModelTaskOwnershipGate } from "./model-task-ownership.js";
+import { evaluateModelTaskOwnershipGate, resolveReferencePreflightOwnership } from "./model-task-ownership.js";
+import { detectLegalReferences } from "./finalization-gate.js";
 import { applyAutomaticVerificationMarkers, detectHistoricalAsOf, planAutomaticLegalVerification } from "./gate-i-auto-verification.js";
 import { runGateIRuntimePrelude } from "./gate-i-runtime-prelude.js";
 import { evaluateGateIInputCompleteness, evaluateGateIWorkflowContract, gateIWorkflowContract } from "./gate-i-contracts.js";
@@ -402,7 +402,6 @@ export class SafeSessionExecutor {
     personMorphology;
     engine;
     autoRouter;
-    auxiliaryScheduler;
     constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools, coreLawIndex, personMorphology) {
         this.registry = registry;
         this.providers = providers;
@@ -415,8 +414,6 @@ export class SafeSessionExecutor {
         this.engine = new LexExecutionEngine(registry, providers);
         this.autoRouter =
             new ModelAutoRouter(registry, providers);
-        this.auxiliaryScheduler =
-            new AuxiliaryModelScheduler(providers);
     }
     // A local primary model keeps the text on this machine, so the chat does
     // not also wait for local-model PII detection before answering.
@@ -523,33 +520,10 @@ export class SafeSessionExecutor {
         const reportTools = new ReportBlueprintToolRuntime();
         const federationTools = this.legalFederationTools;
         const auxiliarySources = [];
-        const auxiliary = await this.auxiliaryScheduler
-            .preflight({
-            config: request.auxiliaryRouting ?? {
-                enabled: false,
-                provider: "openai",
-                model: "local/bielik-11b-v3-q4km"
-            },
-            primary: {
-                provider: request.provider,
-                model: request.model
-            },
-            currentUserText: protectedAuxiliaryText ??
-                protectedQuery,
-            ...(verificationTools
-                ? {
-                    runVerificationTools: (calls) => verificationTools
-                        .runTools(calls)
-                }
-                : {})
-        });
-        audit.record("gate", "G39K_AUXILIARY_MODEL_ROUTING", auxiliary.summary.status ===
-            "FAILED"
-            ? "DEGRADED"
-            : "OK", {
-            ...auxiliary.summary
-        });
-        const modelTaskOwnership = evaluateModelTaskOwnershipGate(auxiliary.summary.ownership);
+        // References in the message are checked by the Gate I runtime prelude
+        // (ELI); no model is asked to extract them.
+        const modelTaskOwnership = evaluateModelTaskOwnershipGate(resolveReferencePreflightOwnership(detectLegalReferences(protectedAuxiliaryText ??
+            protectedQuery).length > 0));
         audit.record("gate", modelTaskOwnership.gate, modelTaskOwnership.result ===
             "PASS"
             ? "OK"
@@ -655,9 +629,6 @@ export class SafeSessionExecutor {
                 : []),
             ...(verificationTools
                 ? [verificationTools.systemPromptAppendix()]
-                : []),
-            ...(auxiliary.appendix
-                ? [auxiliary.appendix]
                 : []),
             ...(attachments.length > 0
                 ? [documentCitationSystemPrompt(attachments)]
@@ -870,36 +841,16 @@ export class SafeSessionExecutor {
                         auxiliarySources.push(source);
                     }
                 }
-                const cachedVerificationResults = [];
-                const uncachedVerificationCalls = [];
-                for (const call of verificationCalls) {
-                    const cached = auxiliary
-                        .cachedVerificationResults
-                        .get(auxiliaryVerificationCallKey(call));
-                    if (cached) {
-                        auxiliary.summary
-                            .cachedVerifierReuses +=
-                            1;
-                        cachedVerificationResults.push({
-                            ...cached,
-                            tool_use_id: call.id
-                        });
-                    }
-                    else {
-                        uncachedVerificationCalls.push(call);
-                    }
-                }
-                const verificationResults = uncachedVerificationCalls.length > 0 &&
+                const verificationResults = verificationCalls.length > 0 &&
                     verificationTools
                     ? await verificationTools
-                        .runTools(uncachedVerificationCalls)
+                        .runTools(verificationCalls)
                     : [];
                 const byId = new Map([
                     ...corpusResults,
                     ...coreLawResults,
                     ...reportResults,
                     ...federationResults,
-                    ...cachedVerificationResults,
                     ...verificationResults
                 ].map((result) => [
                     result.tool_use_id,
@@ -1439,12 +1390,7 @@ export class SafeSessionExecutor {
                 primary: {
                     provider: request.provider,
                     model: request.model
-                },
-                ...(request.auxiliaryRouting
-                    ? {
-                        auxiliary: auxiliary.summary
-                    }
-                    : {})
+                }
             },
             primarySkill: execution.primarySkill,
             loadedSkills: execution.loadedSkills,

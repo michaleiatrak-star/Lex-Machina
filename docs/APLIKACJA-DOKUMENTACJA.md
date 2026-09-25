@@ -112,7 +112,7 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 | Konto Codex / Grok | protokół tekstowy narzędzi Lex (runda na narzędzie) |
 | API (OpenAI, Anthropic, xAI) | klucz w pamięci procesu lub keyringu systemu |
 | Lokalny (llama.cpp, np. Bielik) | kompaktowy routing, RAG z rdzenia aktów w prompcie, limit 4 plików |
-| Model pomocniczy | tylko modele w chmurze; model lokalny nie jest pomocnikiem prawnym (`SKIPPED_LOCAL_MODEL_FILES_ONLY`) - pracuje przy plikach (korekta OCR, dane osobowe). Odwołania w pytaniu sprawdza runtime (Gate I, ELI) |
+| Role modeli | jeden model główny odpowiada na całość; nie ma modelu pomocniczego. Modele lokalne (Bielik, Mistral): pliki (korekta OCR, dane osobowe - tryby „z AI”) i model główny przy prostych pytaniach. Odwołania w pytaniu sprawdza runtime (Gate I, ELI) |
 
 **Bramka złożoności (wejście, bez wywołania modelu)**: `TRIVIAL` (polecenie bez treści prawnej), `SIMPLE` (jedno krótkie pytanie: do 320 znaków, do 3 zdań i 2 pytań, bez plików, trybu mechanicznego, zlecenia pisma/analizy, orzecznictwa, >3 kwot/dat, >2 stron, >2 aktów), `STANDARD` (reszta, z kodami powodów). Wynik widać w oknie postępu. Przy wątpliwości - `STANDARD`.
 
