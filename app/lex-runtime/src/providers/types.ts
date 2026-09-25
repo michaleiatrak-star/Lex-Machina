@@ -67,6 +67,19 @@ export type ProviderStreamParams = {
   localTransport?: "stream" | "json";
   localMaxOutputTokens?: number;
   abortSignal?: AbortSignal;
+  /**
+   * Read-only access to the legal skill corpus for a model CLI that can
+   * confine its own file tools to one directory (Claude account session):
+   * skills and all their subfolders are read natively in one CLI run, and
+   * `tools` are served over MCP. Other adapters ignore it.
+   */
+  nativeCorpus?: NativeCorpusAccess;
+};
+
+export type NativeCorpusAccess = {
+  root: string;
+  // Relative path of every corpus file the model read (audit).
+  onRead?: (relativePath: string) => void;
 };
 
 export type ProviderStreamResult = {
@@ -79,4 +92,6 @@ export interface ProviderAdapter {
   readonly capabilities: ProviderCapabilities;
   stream(params: ProviderStreamParams): Promise<ProviderStreamResult>;
   listModels?(): Promise<string[]>;
+  // True when this model reads the skill corpus with its own confined file tools.
+  nativeCorpusAccess?(model: string): boolean;
 }

@@ -29,7 +29,7 @@ export class LocalPaddleOcrEngine {
         this.timeoutMs =
             options.timeoutMs ?? 30 * 60 * 1000;
     }
-    async recognizePages(data, pages) {
+    async recognizePages(data, pages, onPage) {
         if (pages.length === 0)
             return [];
         const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-paddle-ocr-"));
@@ -64,24 +64,31 @@ export class LocalPaddleOcrEngine {
                 let stderr = "";
                 const timer = setTimeout(() => {
                     child.kill("SIGKILL");
-                    reject(new Error("Local PaddleOCR worker exceeded the configured timeout."));
+                    reject(new Error("OCR_ENGINE_TIMEOUT: Local PaddleOCR worker exceeded the configured timeout."));
                 }, this.timeoutMs);
+                let pagesDone = 0;
                 child.stderr.on("data", (chunk) => {
-                    stderr += chunk.toString("utf8");
+                    const text = chunk.toString("utf8");
+                    const finished = text.match(/^LEX_OCR_PAGE \d+$/gm)?.length ?? 0;
+                    if (finished && onPage) {
+                        pagesDone += finished;
+                        onPage(Math.min(pagesDone, pages.length));
+                    }
+                    stderr += text;
                     if (stderr.length > 32_000) {
                         stderr = stderr.slice(-32_000);
                     }
                 });
                 child.once("error", (error) => {
                     clearTimeout(timer);
-                    reject(error);
+                    reject(new Error(`OCR_ENGINE_START_FAILED: ${error.message}`));
                 });
                 child.once("exit", (code) => {
                     clearTimeout(timer);
                     if (code === 0)
                         resolve();
                     else {
-                        reject(new Error(`Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
+                        reject(new Error(`${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`));
                     }
                 });
             });
@@ -92,12 +99,12 @@ export class LocalPaddleOcrEngine {
                 if (!Number.isInteger(result.page) ||
                     !requested.has(result.page) ||
                     seen.has(result.page)) {
-                    throw new Error("Local PaddleOCR worker returned an invalid page set.");
+                    throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker returned an invalid page set.");
                 }
                 seen.add(result.page);
             }
             if (seen.size !== requested.size) {
-                throw new Error("Local PaddleOCR worker did not account for every requested page.");
+                throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR worker did not account for every requested page.");
             }
             return parsed.sort((a, b) => a.page - b.page);
         }

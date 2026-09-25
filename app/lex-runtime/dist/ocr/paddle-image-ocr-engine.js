@@ -66,7 +66,7 @@ export class LocalPaddleImageOcrEngine {
                 let stderr = "";
                 const timer = setTimeout(() => {
                     child.kill("SIGKILL");
-                    reject(new Error("Local PaddleOCR image worker exceeded the configured timeout."));
+                    reject(new Error("OCR_ENGINE_TIMEOUT: Local PaddleOCR image worker exceeded the configured timeout."));
                 }, this.timeoutMs);
                 child.stderr.on("data", (chunk) => {
                     stderr += chunk.toString("utf8");
@@ -76,21 +76,21 @@ export class LocalPaddleImageOcrEngine {
                 });
                 child.once("error", (error) => {
                     clearTimeout(timer);
-                    reject(error);
+                    reject(new Error(`OCR_ENGINE_START_FAILED: ${error.message}`));
                 });
                 child.once("exit", (code) => {
                     clearTimeout(timer);
                     if (code === 0)
                         resolve();
                     else {
-                        reject(new Error(`Local PaddleOCR image worker failed with exit code ${code}: ${stderr.trim()}`));
+                        reject(new Error(`${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR image worker failed with exit code ${code}: ${stderr.trim()}`));
                     }
                 });
             });
             const parsed = JSON.parse(await readFile(output, "utf8"));
             if (parsed.length !== 1 ||
                 parsed[0]?.page !== 1) {
-                throw new Error("Local PaddleOCR image worker returned an invalid result set.");
+                throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR image worker returned an invalid result set.");
             }
             return parsed[0];
         }

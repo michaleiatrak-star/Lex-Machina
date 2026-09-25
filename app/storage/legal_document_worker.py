@@ -10,7 +10,19 @@ from xml.sax.saxutils import escape
 
 FIXED_DATE = (1980, 1, 1, 0, 0, 0)
 MAX_PACKAGE_BYTES = 64 * 1024 * 1024
-ALIAS_RE = re.compile(r"\[LMPII:D\d{2}:[A-Z_]+:\d{4}\]")
+ALIAS_RE = re.compile(r"\[LMPII:D\d{2}:[A-Z_]+:\d{4}(?:\|(?:NOM|GEN|DAT|ACC|INS|LOC|VOC))?\]")
+PERSON_CASES = {"NOM", "GEN", "DAT", "ACC", "INS", "LOC", "VOC"}
+
+
+def pii_ref_text(node):
+    """Alias placeholder; a person reference may carry its grammatical case."""
+    alias = node.get("alias", "")
+    case = node.get("case")
+    if case is None:
+        return alias
+    if case not in PERSON_CASES or not alias.endswith("]"):
+        raise ValueError("AST_PII_CASE_INVALID")
+    return alias[:-1] + "|" + case + "]"
 
 DOCX_CT = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
@@ -32,8 +44,15 @@ DOCX_ROOT_RELS = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
 </Relationships>"""
 
+# Without these relationships Word ignores styles.xml and numbering.xml:
+# title, headings and quotes would render as plain paragraphs.
 DOCX_DOC_RELS = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>"""
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
+<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
+<Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" Target="numbering.xml"/>
+</Relationships>"""
 
 DOCX_CORE = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>Lex Machina document</dc:title><dc:creator>Lex Machina</dc:creator></cp:coreProperties>"""
@@ -113,7 +132,7 @@ def inline_text(nodes):
         if t == "text":
             parts.append(node.get("text", ""))
         elif t == "pii_ref":
-            parts.append(node.get("alias", ""))
+            parts.append(pii_ref_text(node))
         elif t == "xref":
             parts.append(node.get("label", ""))
         else:
@@ -124,7 +143,7 @@ def docx_runs(nodes):
     runs = []
     for node in nodes or []:
         t = node.get("type")
-        text = node.get("text", "") if t == "text" else node.get("alias", "") if t == "pii_ref" else node.get("label", "")
+        text = node.get("text", "") if t == "text" else pii_ref_text(node) if t == "pii_ref" else node.get("label", "")
         xml_space = ' xml:space="preserve"' if text[:1].isspace() or text[-1:].isspace() else ""
         runs.append("<w:r><w:t%s>%s</w:t></w:r>" % (xml_space, escape(text)))
     return "".join(runs)

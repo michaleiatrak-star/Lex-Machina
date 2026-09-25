@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import sys
 import os
 from pathlib import Path
 
@@ -225,6 +226,8 @@ def main() -> None:
                         page_number,
                     )
                 )
+                # Progress for the runtime (page number only, no content).
+                print(f"LEX_OCR_PAGE {page_number}", file=sys.stderr, flush=True)
         finally:
             doc.close()
 

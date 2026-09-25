@@ -1,3 +1,8 @@
+import { PERSON_CASES } from "../privacy/person-morphology.js";
+import { LocalOfficeEditor, editableMediaType } from "../office-edit.js";
+import { deanonymizeModel } from "../deanonymize-file.js";
+import { decodePlainText } from "../document-service.js";
+import { ProcessingProgressRegistry, progressIdFrom } from "../processing-progress.js";
 import { createHash } from "node:crypto";
 import express from "express";
 import helmet from "helmet";
@@ -11,6 +16,9 @@ import { SupportError } from "../support-service.js";
 import { parseGuideTransition } from "../guide-session-state.js";
 import { CaseAccessError } from "../case-access.js";
 import { ReauthorizationError } from "../auth/reauthorization.js";
+import { ExecutionSteps } from "../execution-steps.js";
+import { ContextBudgetError, estimateDocumentFit, HOSTED_CONTEXT_TOKENS, LOCAL_MAX_DOCUMENT_ATTACHMENTS, MAX_DOCUMENT_ATTACHMENTS } from "../context-orchestrator.js";
+import { MAX_FIRM_TEMPLATES, templateChunks, templateText } from "../firm-template-text.js";
 import { assertStoredDocumentSignature, storedDocumentMediaType } from "../stored-document-source.js";
 import { parseSkillSelectionEnvelope, resolveAdditionalSkills } from "../skill-selection.js";
 import { createDeterministicWorkflowPlan } from "../deterministic-workflow.js";
@@ -90,6 +98,13 @@ const PRIVACY_KINDS = new Set([
     "PHONE",
     "PERSON",
     "ADDRESS",
+    "ID_CARD",
+    "PASSPORT",
+    "KRS",
+    "LAND_REGISTRY",
+    "BIRTH_DATE",
+    "VEHICLE_PLATE",
+    "PAYMENT_CARD",
     "CUSTOM"
 ]);
 function parsePrivacyDirectives(value) {
@@ -301,6 +316,12 @@ function sendCaseAccessError(res, error) {
     });
     return true;
 }
+const EXECUTION_ID_PATTERN = /^[A-Za-z0-9-]{16,64}$/;
+const EXECUTION_DRAFT_TTL_MS = 15 * 60_000;
+const EXECUTION_DRAFT_MAX_ENTRIES = 64;
+const EXECUTION_DRAFT_MAX_CHARS = 200_000;
+// While a request is still running, refresh the idle deadline this often.
+const IN_FLIGHT_ACTIVITY_INTERVAL_MS = 60_000;
 function responseAuthContext(res) {
     const context = res.locals.lexAuth;
     if (!context) {
@@ -336,7 +357,7 @@ function sanitizeModels(models) {
 function parseDocumentAttachments(value) {
     if (value === undefined)
         return [];
-    if (!Array.isArray(value) || value.length > 4) {
+    if (!Array.isArray(value) || value.length > MAX_DOCUMENT_ATTACHMENTS) {
         return null;
     }
     const selections = [];
@@ -375,6 +396,20 @@ function parseDocumentAttachments(value) {
         });
     }
     return selections;
+}
+function isFirmScope(scope) {
+    return scope === "FIRM_KNOWLEDGE" || scope === "FIRM_TEMPLATE";
+}
+/** Firm templates (DOCX/ODT from the firm workspace) sent with a message. */
+function parseFirmTemplates(value) {
+    if (value === undefined)
+        return [];
+    if (!Array.isArray(value) ||
+        value.length > MAX_FIRM_TEMPLATES ||
+        value.some((item) => typeof item !== "string" || !/^template_[a-f0-9]{32}$/.test(item))) {
+        return null;
+    }
+    return [...new Set(value)];
 }
 function parseSessionKnowledgeRequest(value) {
     if (value === undefined) {
@@ -520,13 +555,16 @@ function restoreSessionDocumentAliases(result, documentService) {
     if (documentIds.length === 0) {
         return;
     }
-    const restoreText = (text) => text.replace(/\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})\]/g, (token, documentNumber, kind, sequence) => {
+    const restoreText = (text) => text.replace(/\[LMPII:D(\d{2}):([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g, (token, documentNumber, kind, sequence, requestedCase) => {
         const index = Number(documentNumber) - 1;
         const documentId = documentIds[index];
         if (!documentId) {
             return token;
         }
-        const sourceToken = `[PII:${kind}:${sequence}]`;
+        // The case a model asked for travels with the token to the local vault.
+        const sourceToken = requestedCase
+            ? `[PII:${kind}:${sequence}|${requestedCase}]`
+            : `[PII:${kind}:${sequence}]`;
         try {
             return documentService
                 .deanonymize(documentId, sourceToken);
@@ -623,6 +661,131 @@ async function refreshDocumentCitations(args) {
 export function createLexHttpApp(options) {
     const app = express();
     const routing = new RoutingCatalog(options.registry);
+    // Resolves primarySkill "AUTO" for a session request. Returns false when an
+    // error response has already been sent.
+    async function resolveAutoPrimarySkill(request, res, attachmentCount, { allowModelSelection, allowConversational }) {
+        // AUTO with an account or API model: the model picks the skills itself
+        // (router-v3 first, enforced by the corpus tools) instead of a separate
+        // routing pass. Local models keep the compact routing pass.
+        const autoEnvelope = request.primarySkill === "AUTO"
+            ? parseSkillSelectionEnvelope(request.query)
+            : null;
+        const modelSelectsSkills = allowModelSelection &&
+            autoEnvelope !== null &&
+            autoEnvelope.automatic &&
+            autoEnvelope.manualSkills.length === 0 &&
+            autoEnvelope.workflowExecutionSkill === null &&
+            !request.model.startsWith("local/");
+        if (modelSelectsSkills) {
+            const placeholder = [...options.registry.skills.keys()]
+                .filter((name) => name.startsWith("dr-") &&
+                (!autoEnvelope.domainRestrictionActive ||
+                    autoEnvelope.domainAllowList.includes(name)))
+                .sort()[0];
+            if (!placeholder) {
+                res.status(422).json({
+                    error: "AUTO_ROUTING_FAILED",
+                    reason: "AUTO_ROUTING_NO_DOMAIN_CANDIDATES"
+                });
+                return false;
+            }
+            request.primarySkill =
+                placeholder;
+            request.modelSelectsSkills =
+                true;
+        }
+        if (request.primarySkill ===
+            "AUTO") {
+            const resolveAutoRouting = options.sessionExecutor
+                ?.resolveAutoRouting
+                ?.bind(options.sessionExecutor);
+            if (!resolveAutoRouting) {
+                res.status(503).json({
+                    error: "AUTO_ROUTING_UNAVAILABLE"
+                });
+                return false;
+            }
+            try {
+                const routed = await resolveAutoRouting(request);
+                request.primarySkill =
+                    routed.decision
+                        .primarySkill;
+                request.query =
+                    routed.query;
+                if (routed.decision.legal ===
+                    false &&
+                    attachmentCount === 0 &&
+                    allowConversational) {
+                    request.conversationalOnly =
+                        true;
+                }
+            }
+            catch (error) {
+                if (error instanceof Error &&
+                    error.message ===
+                        "CHAT_PRIVACY_GATE_FAILED") {
+                    res.status(503).json({
+                        error: "CHAT_PRIVACY_GATE_FAILED"
+                    });
+                    return false;
+                }
+                const localFailureMessage = request.model.startsWith("local/")
+                    ? (error instanceof
+                        ProviderGatewayError &&
+                        error.causeValue instanceof
+                            Error
+                        ? error.causeValue
+                            .message
+                        : error instanceof Error
+                            ? error.message
+                            : "")
+                    : "";
+                const parsedLocalReason = localFailureMessage
+                    .split(":", 1)[0] ?? "";
+                if (request.model.startsWith("local/") &&
+                    /^LOCAL_MODEL_[A-Z0-9_]+$/.test(parsedLocalReason)) {
+                    res.status(503).json({
+                        error: "LOCAL_MODEL_EXECUTION_FAILED",
+                        reason: parsedLocalReason
+                    });
+                    return false;
+                }
+                if (error instanceof
+                    ProviderGatewayError) {
+                    const rawReason = error.causeValue instanceof
+                        Error
+                        ? error.causeValue
+                            .message
+                        : "";
+                    const parsedReason = rawReason.split(":", 1)[0] ?? "";
+                    res.status(502).json({
+                        error: "PROVIDER_EXECUTION_FAILED",
+                        provider: error.provider,
+                        reason: /^[A-Z0-9_]+$/.test(parsedReason)
+                            ? parsedReason
+                            : "PROVIDER_UNCODED_FAILURE",
+                        ...(rawReason
+                            ? {
+                                description: safeDiagnosticText(rawReason)
+                            }
+                            : {})
+                    });
+                    return false;
+                }
+                const reason = error instanceof Error &&
+                    /^AUTO_ROUTING_[A-Z0-9_]+$/.test(error.message)
+                    ? error.message
+                    : "AUTO_ROUTING_FAILED";
+                res.status(422).json({
+                    error: "AUTO_ROUTING_FAILED",
+                    reason
+                });
+                return false;
+            }
+        }
+        return true;
+    }
+    const processingProgress = new ProcessingProgressRegistry();
     const documentCaseIds = new Map();
     app.disable("x-powered-by");
     app.use(helmet());
@@ -853,9 +1016,21 @@ export function createLexHttpApp(options) {
                 if (req.method !== "GET" &&
                     req.path !==
                         "/auth/lock") {
+                    const sessionId = context.session
+                        .sessionId;
                     options.authService
-                        .touchSession(context.session
-                        .sessionId);
+                        .touchSession(sessionId);
+                    // A request the user is still waiting for (a long local-model
+                    // answer, OCR) is activity: keep the session from idling out
+                    // while it runs.
+                    const keepAlive = setInterval(() => {
+                        options.authService
+                            .touchSession(sessionId);
+                    }, IN_FLIGHT_ACTIVITY_INTERVAL_MS);
+                    keepAlive.unref();
+                    const stop = () => clearInterval(keepAlive);
+                    res.once("finish", stop);
+                    res.once("close", stop);
                 }
                 next();
             }
@@ -960,6 +1135,33 @@ export function createLexHttpApp(options) {
                             : 500).json({
                     error: code
                 });
+            }
+        });
+        // User input in the window (typing, reading with scroll/mouse) counts as
+        // activity; the authentication middleware above already refreshed the
+        // idle deadline for this non-GET request.
+        app.post("/api/auth/activity", (_req, res) => {
+            res.status(204).end();
+        });
+        // "Zapisz formę": the user corrected how a restored name inflects.
+        app.post("/api/privacy/name-forms", async (req, res) => {
+            const body = req.body;
+            if (!options.personMorphology?.saveCorrection) {
+                res.status(503).json({ error: "PERSON_MORPHOLOGY_UNAVAILABLE" });
+                return;
+            }
+            try {
+                await options.personMorphology.saveCorrection({
+                    canonical: String(body?.canonical ?? ""),
+                    gender: body?.gender === "f" ? "f" : "m1",
+                    case: String(body?.case ?? ""),
+                    text: String(body?.text ?? "")
+                });
+                res.status(204).end();
+            }
+            catch (error) {
+                const code = error instanceof Error ? error.message : "NAME_FORM_INVALID";
+                res.status(code.startsWith("NAME_FORM_") ? 400 : 500).json({ error: code.startsWith("NAME_FORM_") ? code : "NAME_FORM_SAVE_FAILED" });
             }
         });
         app.post("/api/auth/lock", (_req, res) => {
@@ -1921,7 +2123,9 @@ export function createLexHttpApp(options) {
                                     chunkIndices: restored
                                         .chunks
                                         .slice(0, 32)
-                                        .map((chunk) => chunk.index)
+                                        .map((chunk) => chunk.index),
+                                    anonymized: restored.privacy.findings > 0,
+                                    sharedKey: options.documentService.usesSharedKey?.(restored.documentId) ?? false
                                 }
                             };
                         }
@@ -2063,12 +2267,15 @@ export function createLexHttpApp(options) {
                 }
                 try {
                     assertStoredDocumentSignature(data, mediaType);
+                    const onProgress = processingProgress.reporter(caseId, progressIdFrom(req.get("x-lex-progress")));
                     return await options
                         .documentService
                         .review(data, mediaType, {
                         caseId,
                         caseDataKey,
-                        keyVersion: caseView.keyVersion
+                        keyVersion: caseView.keyVersion,
+                        ...(onProgress ? { onProgress } : {}),
+                        ...(req.body?.localAi === true ? { localAi: true } : {})
                     });
                 }
                 finally {
@@ -2127,11 +2334,280 @@ export function createLexHttpApp(options) {
                 });
                 return;
             }
+            // A coded cause (never document content) so the UI can tell an OCR
+            // failure from a privacy/NER or extraction failure.
+            const errorCode = error instanceof Error &&
+                typeof error.code === "string"
+                ? String(error.code)
+                : "";
+            const errorName = error instanceof Error && /^[A-Za-z]{3,60}$/.test(error.name) && error.name !== "Error"
+                ? error.name.replace(/([a-z])([A-Z])/g, "$1_$2").toUpperCase()
+                : "";
+            const reason = /^[A-Z][A-Z0-9_]{2,80}$/.test(errorCode)
+                ? errorCode
+                : /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(code)?.[0] ??
+                    (errorName ? `INTERNAL_${errorName}` : undefined);
+            // Code and error type only: the message may quote document content.
+            console.error(`STORED_FILE_PROCESSING_FAILED:${reason ?? "UNKNOWN"}`);
             res.status(422).json({
-                error: "STORED_FILE_PROCESSING_FAILED"
+                error: "STORED_FILE_PROCESSING_FAILED",
+                ...(reason
+                    ? {
+                        reason
+                    }
+                    : {})
             });
         }
     }
+    // The anonymized version of a case document with its key; edits change
+    // both at once (add a value to the anonymization, take one out, correct
+    // case forms). Local only - nothing here goes to a model.
+    async function withRestoredDocument(req, res, access, action) {
+        const caseId = String(req.params.caseId ?? "").trim();
+        const documentId = String(req.params.documentId ?? "").trim();
+        const service = options.documentService;
+        if (!service?.restoreDocument ||
+            !service.anonymizedVersion ||
+            !service.addProtection ||
+            !service.removeProtection ||
+            !service.updateKeyForms ||
+            !options.caseAccessService) {
+            res.status(503).json({ error: "ANONYMIZED_VERSION_UNAVAILABLE" });
+            return;
+        }
+        if (!/^case_[a-f0-9]{32}$/.test(caseId) || !/^doc_[a-f0-9]{24}$/.test(documentId)) {
+            res.status(400).json({ error: "INVALID_ANONYMIZED_VERSION_REQUEST" });
+            return;
+        }
+        try {
+            const context = responseAuthContext(res);
+            options.caseAccessService.assertAccess(context, caseId, access);
+            const caseView = options.caseAccessService.openCase(context, caseId);
+            const result = await options.caseAccessService.withCaseDataKey(context, caseId, access, async (caseDataKey) => {
+                await service.restoreDocument({ caseId, documentId, caseDataKey, keyVersion: caseView.keyVersion });
+                return await action({
+                    caseId,
+                    documentId,
+                    security: { caseId, caseDataKey, keyVersion: caseView.keyVersion }
+                });
+            });
+            res.setHeader("Cache-Control", "no-store");
+            res.json(result);
+        }
+        catch (error) {
+            if (sendCaseAccessError(res, error))
+                return;
+            const code = error instanceof Error ? error.message : "";
+            if (code === "ENOENT" || code.endsWith("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+                res.status(404).json({ error: code === "ENOENT" ? "DOCUMENT_NOT_FOUND" : code });
+                return;
+            }
+            if (code.startsWith("PRIVACY_EDIT_") || code.startsWith("PRIVACY_KEY_")) {
+                res.status(422).json({ error: code });
+                return;
+            }
+            console.error(`ANONYMIZED_VERSION_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+            res.status(500).json({ error: "ANONYMIZED_VERSION_FAILED" });
+        }
+    }
+    const EDITABLE_PII_KINDS = new Set([
+        "PERSON", "ADDRESS", "PESEL", "NIP", "REGON", "IBAN", "EMAIL", "PHONE", "ID_CARD",
+        "PASSPORT", "BIRTH_DATE", "LAND_REGISTRY", "KRS", "VEHICLE_PLATE", "PAYMENT_CARD", "CUSTOM"
+    ]);
+    app.get("/api/cases/:caseId/documents/:documentId/anonymized", (req, res) => withRestoredDocument(req, res, "ANALYZE", async ({ documentId }) => options.documentService.anonymizedVersion(documentId)));
+    app.post("/api/cases/:caseId/documents/:documentId/anonymized/protect", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+        const text = typeof req.body?.text === "string" ? req.body.text : "";
+        const kind = String(req.body?.kind ?? "");
+        if (!EDITABLE_PII_KINDS.has(kind))
+            throw new Error("PRIVACY_EDIT_KIND_INVALID");
+        return await options.documentService
+            .addProtection(documentId, text, kind, security);
+    }));
+    app.post("/api/cases/:caseId/documents/:documentId/join-shared-key", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+        if (!options.documentService.joinSharedKey)
+            throw new Error("SHARED_KEY_UNAVAILABLE");
+        return await options.documentService.joinSharedKey(documentId, security);
+    }));
+    app.post("/api/cases/:caseId/documents/:documentId/anonymized/unprotect", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => await options.documentService
+        .removeProtection(documentId, String(req.body?.token ?? ""), security)));
+    app.post("/api/cases/:caseId/documents/:documentId/anonymized/forms", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+        const raw = req.body?.forms;
+        if (!raw || typeof raw !== "object")
+            throw new Error("PRIVACY_EDIT_TEXT_INVALID");
+        const forms = {};
+        for (const personCase of PERSON_CASES) {
+            const value = raw[personCase];
+            if (typeof value === "string")
+                forms[personCase] = value;
+        }
+        return await options.documentService
+            .updateKeyForms(documentId, String(req.body?.token ?? ""), forms, security);
+    }));
+    // A file with placeholders (e.g. an answer from an external model) with the
+    // values of one case document's key put back, saved as a new case file.
+    app.post("/api/cases/:caseId/files/:uploadId/deanonymize", async (req, res) => {
+        const caseId = String(req.params.caseId ?? "").trim();
+        const uploadId = String(req.params.uploadId ?? "").trim();
+        const documentId = String(req.body?.documentId ?? "").trim();
+        const service = options.documentService;
+        if (!service?.restoreDocument || !service.restoreText || !options.caseAccessService || !options.secureCaseUploadStore) {
+            res.status(503).json({ error: "FILE_DEANONYMIZATION_UNAVAILABLE" });
+            return;
+        }
+        if (!/^case_[a-f0-9]{32}$/.test(caseId) ||
+            !/^upload_[a-f0-9]{32}$/.test(uploadId) ||
+            !/^doc_[a-f0-9]{24}$/.test(documentId)) {
+            res.status(400).json({ error: "INVALID_FILE_DEANONYMIZATION_REQUEST" });
+            return;
+        }
+        try {
+            const context = responseAuthContext(res);
+            options.caseAccessService.assertAccess(context, caseId, "WRITE");
+            const caseView = options.caseAccessService.openCase(context, caseId);
+            const result = await options.caseAccessService.withCaseDataKey(context, caseId, "WRITE", async (caseDataKey) => {
+                const store = options.secureCaseUploadStore;
+                const keyVersion = caseView.keyVersion;
+                const upload = (await store.listUploads({ caseId, caseDataKey, keyVersion })).find((item) => item.uploadId === uploadId);
+                if (!upload)
+                    throw new Error("STORED_UPLOAD_NOT_FOUND");
+                const mediaType = upload.mediaType.split(";")[0].trim().toLowerCase();
+                await service.restoreDocument({ caseId, documentId, caseDataKey, keyVersion });
+                const restore = (text) => service.restoreText(documentId, text);
+                const data = await store.readUploadPayload({
+                    caseId,
+                    uploadId,
+                    caseDataKey,
+                    keyVersion,
+                    maxBytes: 64 * 1024 * 1024
+                });
+                let output;
+                let count;
+                let unresolved;
+                try {
+                    const editable = editableMediaType(mediaType, upload.filename);
+                    if (editable && editable !== "text/csv" && editable !== "text/tab-separated-values") {
+                        const editor = new LocalOfficeEditor();
+                        const model = await editor.read(data, editable);
+                        const restored = deanonymizeModel(model, restore);
+                        const format = editable.includes("opendocument") ? "odt" : editable.includes("wordprocessing") ? "docx" : "xlsx";
+                        output = await editor.write(format, restored.model);
+                        ({ count, unresolved } = restored);
+                    }
+                    else if (/^text\//.test(mediaType) || /\.(txt|md|markdown|csv|tsv)$/i.test(upload.filename)) {
+                        const restored = restore(decodePlainText(data));
+                        output = Buffer.from(restored.text, "utf8");
+                        ({ count, unresolved } = restored);
+                    }
+                    else {
+                        throw new Error("FILE_DEANONYMIZATION_MEDIA_UNSUPPORTED");
+                    }
+                }
+                finally {
+                    data.fill(0);
+                }
+                if (count === 0 && unresolved.length === 0)
+                    throw new Error("FILE_DEANONYMIZATION_NO_PLACEHOLDERS");
+                const dot = upload.filename.lastIndexOf(".");
+                const filename = (dot > 0 ? upload.filename.slice(0, dot) : upload.filename) +
+                    " (deanonimizowany)" +
+                    (dot > 0 ? upload.filename.slice(dot) : "");
+                const outputType = mediaType === "text/markdown" || mediaType === "text/csv" || mediaType === "text/tab-separated-values"
+                    ? mediaType
+                    : /^text\//.test(mediaType)
+                        ? "text/plain"
+                        : upload.mediaType.includes("macroenabled")
+                            ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            : mediaType;
+                const stored = await store.saveUpload({
+                    caseId,
+                    filename: outputType !== mediaType && /\.xlsm$/i.test(filename) ? filename.replace(/\.xlsm$/i, ".xlsx") : filename,
+                    mediaType: outputType,
+                    data: output,
+                    caseDataKey,
+                    keyVersion
+                });
+                return { upload: stored, restored: count, unresolved };
+            });
+            res.status(201).json(result);
+        }
+        catch (error) {
+            if (sendCaseAccessError(res, error))
+                return;
+            const code = error instanceof Error ? error.message : "";
+            if (code === "ENOENT" || code.endsWith("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+                res.status(404).json({ error: code === "ENOENT" ? "DOCUMENT_NOT_FOUND" : code });
+                return;
+            }
+            if (code.startsWith("FILE_DEANONYMIZATION_") || code.startsWith("OFFICE_EDIT_")) {
+                res.status(422).json({ error: /^[A-Z_]+/.exec(code)[0] });
+                return;
+            }
+            console.error(`FILE_DEANONYMIZATION_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+            res.status(500).json({ error: "FILE_DEANONYMIZATION_FAILED" });
+        }
+    });
+    // Stage and page counts of a running OCR/anonymization request.
+    app.get("/api/cases/:caseId/progress/:progressId", (req, res) => {
+        const caseId = String(req.params.caseId ?? "").trim();
+        const progressId = progressIdFrom(req.params.progressId);
+        if (!options.caseAccessService || !/^case_[a-f0-9]{32}$/.test(caseId) || !progressId) {
+            res.status(400).json({ error: "INVALID_PROGRESS_REQUEST" });
+            return;
+        }
+        try {
+            options.caseAccessService.assertAccess(responseAuthContext(res), caseId, "ANALYZE");
+        }
+        catch (error) {
+            if (!sendCaseAccessError(res, error))
+                res.status(403).json({ error: "CASE_ACCESS_DENIED" });
+            return;
+        }
+        res.setHeader("Cache-Control", "no-store");
+        res.json({ progress: processingProgress.get(caseId, progressId) ?? null });
+    });
+    // The anonymization key of one processed case document, for the user on
+    // this computer only (never part of a model request).
+    app.get("/api/cases/:caseId/documents/:documentId/privacy-key", async (req, res) => {
+        const caseId = String(req.params.caseId ?? "").trim();
+        const documentId = String(req.params.documentId ?? "").trim();
+        if (!options.documentService?.restoreDocument ||
+            !options.documentService.privacyKey ||
+            !options.caseAccessService) {
+            res.status(503).json({ error: "PRIVACY_KEY_UNAVAILABLE" });
+            return;
+        }
+        if (!/^case_[a-f0-9]{32}$/.test(caseId) || !/^doc_[a-f0-9]{24}$/.test(documentId)) {
+            res.status(400).json({ error: "INVALID_PRIVACY_KEY_REQUEST" });
+            return;
+        }
+        try {
+            const context = responseAuthContext(res);
+            options.caseAccessService.assertAccess(context, caseId, "ANALYZE");
+            const caseView = options.caseAccessService.openCase(context, caseId);
+            await options.caseAccessService.withCaseDataKey(context, caseId, "ANALYZE", (caseDataKey) => options.documentService.restoreDocument({
+                caseId,
+                documentId,
+                caseDataKey,
+                keyVersion: caseView.keyVersion
+            }));
+            res.setHeader("Cache-Control", "no-store");
+            res.json({
+                documentId,
+                entries: options.documentService.privacyKey(documentId)
+            });
+        }
+        catch (error) {
+            if (sendCaseAccessError(res, error))
+                return;
+            const code = error instanceof Error ? error.message : "";
+            if (code === "ENOENT" || code.includes("NOT_FOUND") || code === "UNKNOWN_LOCAL_DOCUMENT") {
+                res.status(404).json({ error: "PRIVACY_KEY_NOT_FOUND" });
+                return;
+            }
+            console.error(`PRIVACY_KEY_FAILED:${/^[A-Z][A-Z0-9_]{2,80}/.exec(code)?.[0] ?? "UNKNOWN"}`);
+            res.status(500).json({ error: "PRIVACY_KEY_FAILED" });
+        }
+    });
     app.post("/api/cases/:caseId/files/:uploadId/process", async (req, res) => {
         await processStoredCaseFile(req, res);
     });
@@ -2934,7 +3410,12 @@ export function createLexHttpApp(options) {
                         .finalizeReview(documentId, directives, {
                         caseId,
                         caseDataKey,
-                        keyVersion: caseView.keyVersion
+                        keyVersion: caseView.keyVersion,
+                        ...(progressIdFrom(req.get("x-lex-progress"))
+                            ? {
+                                onProgress: processingProgress.reporter(caseId, progressIdFrom(req.get("x-lex-progress")))
+                            }
+                            : {})
                     }));
             }
             else {
@@ -3019,6 +3500,15 @@ export function createLexHttpApp(options) {
             "");
         const sessionRequest = parseSessionRequest(req.body);
         const attachments = parseDocumentAttachments(req.body?.attachments);
+        const firmTemplates = parseFirmTemplates(req.body?.firmTemplates);
+        // Firm templates and firm files may shape the document; they are not
+        // case sources, so they get no aliases.
+        const firmCaseId = firmTemplates?.length ||
+            attachments?.some((selection) => selection.caseId && selection.caseId !== caseId)
+            ? options.caseAccessService
+                ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+                ?.caseId
+            : undefined;
         const format = req.body?.format;
         const documentType = req.body?.documentType;
         const styleProfile = req.body?.styleProfile;
@@ -3052,12 +3542,25 @@ export function createLexHttpApp(options) {
                 undefined &&
                 !/^template_[a-f0-9]{32}$/
                     .test(templateId)) ||
+            firmTemplates === null ||
+            attachments.length + firmTemplates.length > MAX_DOCUMENT_ATTACHMENTS ||
             attachments.some((selection) => Boolean(selection.caseId) &&
                 selection.caseId !==
-                    caseId)) {
+                    caseId &&
+                selection.caseId !==
+                    firmCaseId)) {
             res.status(400).json({
                 error: "INVALID_DOCUMENT_GENERATION_REQUEST"
             });
+            return;
+        }
+        // A document request in AUTO mode is routed like a chat turn. The
+        // document pipeline (workflow, HYBRID-VAL before the file) needs its
+        // domain and workflow before it starts, so it keeps the routing pass.
+        if (!(await resolveAutoPrimarySkill(sessionRequest, res, attachments.length, {
+            allowModelSelection: false,
+            allowConversational: false
+        }))) {
             return;
         }
         const route = routing.validate(sessionRequest
@@ -3075,7 +3578,10 @@ export function createLexHttpApp(options) {
                 .caseAccessService
                 .openCase(context, caseId);
             const resolvedAttachments = [];
+            const firmSelections = attachments.filter((selection) => firmCaseId !== undefined && selection.caseId === firmCaseId && firmCaseId !== caseId);
             for (const selection of attachments) {
+                if (firmSelections.includes(selection))
+                    continue;
                 options
                     .caseAccessService
                     .assertAccess(context, caseId, "ANALYZE");
@@ -3108,6 +3614,12 @@ export function createLexHttpApp(options) {
                     documentId: resolved
                         .documentId,
                     sourceScope: "MANUAL",
+                    ...(resolved.grammar
+                        ? { grammar: resolved.grammar }
+                        : {}),
+                    ...(resolved.totalPages
+                        ? { totalPages: resolved.totalPages }
+                        : {}),
                     chunks: resolved.chunks.map((chunk) => ({
                         ...chunk
                     }))
@@ -3117,6 +3629,22 @@ export function createLexHttpApp(options) {
                 ...new Set(resolvedAttachments
                     .map((item) => item.documentId))
             ];
+            // Documents on the case's shared key: raw tokens in the context and
+            // one alias per person (D00); the instruction is pseudonymized with
+            // the same key.
+            const sharedGeneration = sourceDocumentIds.length > 0 && options.documentService.sharedKeyState
+                ? await options.caseAccessService.withCaseDataKey(context, caseId, "ANALYZE", (caseDataKey) => options.documentService.sharedKeyState({
+                    caseId,
+                    caseDataKey,
+                    keyVersion: caseView.keyVersion
+                }))
+                : null;
+            if (sharedGeneration) {
+                for (const attachment of resolvedAttachments) {
+                    if (sharedGeneration.members.has(attachment.documentId))
+                        attachment.sharedKey = true;
+                }
+            }
             const aliases = sourceDocumentIds.length > 0
                 ? await options
                     .caseAccessService
@@ -3133,6 +3661,13 @@ export function createLexHttpApp(options) {
                     schemaVersion: 1,
                     entries: []
                 };
+            // Appended after the case sources so their alias prefixes (D01…) stay the same.
+            if (firmSelections.length > 0 || firmTemplates.length > 0) {
+                const firmMaterial = await resolveSelectedAttachments(res, firmSelections, firmTemplates, firmCaseId);
+                if (!firmMaterial)
+                    return;
+                resolvedAttachments.push(...firmMaterial);
+            }
             let effectiveStyleProfile = styleProfile;
             let templateProfile;
             if (templateId) {
@@ -3154,6 +3689,9 @@ export function createLexHttpApp(options) {
             const generated = await options
                 .documentAstGenerator
                 .generate({
+                ...(sharedGeneration && sharedGeneration.members.size > 0
+                    ? { privacySeed: sharedGeneration.snapshot }
+                    : {}),
                 query: sessionRequest
                     .query,
                 provider: sessionRequest
@@ -3457,6 +3995,45 @@ export function createLexHttpApp(options) {
             }
         }
     });
+    // Review step: restored values with their source, before the one-time
+    // final document is written. Needs the same fresh password grant.
+    app.post("/api/deanonymization/preview", async (req, res) => {
+        if (!options.reauthorizationManager?.previewGrant ||
+            !options.documentAuthoringService?.previewDeanonymization ||
+            !options.caseAccessService) {
+            res.status(503).json({
+                error: "DEANONYMIZATION_UNAVAILABLE"
+            });
+            return;
+        }
+        if (typeof req.body?.grantId !== "string") {
+            res.status(400).json({
+                error: "INVALID_DEANONYMIZATION_REQUEST"
+            });
+            return;
+        }
+        try {
+            const context = responseAuthContext(res);
+            const target = await options.reauthorizationManager.previewGrant(context, req.body.grantId);
+            const preview = await options.caseAccessService.withCaseDataKey(context, target.caseId, "REIDENTIFY", (caseDataKey) => options.documentAuthoringService.previewDeanonymization({
+                target,
+                caseDataKey,
+                keyVersion: target.caseKeyVersion
+            }));
+            res.setHeader("Cache-Control", "no-store");
+            res.json(preview);
+        }
+        catch (error) {
+            if (!sendCaseAccessError(res, error) &&
+                !sendReauthorizationError(res, error)) {
+                res.status(422).json({
+                    error: error instanceof Error
+                        ? error.message
+                        : "DEANONYMIZATION_PREVIEW_FAILED"
+                });
+            }
+        }
+    });
     app.post("/api/deanonymization/finalize", async (req, res) => {
         if (!options.reauthorizationManager ||
             !options.documentAuthoringService ||
@@ -3474,6 +4051,19 @@ export function createLexHttpApp(options) {
             });
             return;
         }
+        const rawOverrides = req.body?.overrides;
+        if (rawOverrides !== undefined &&
+            (!rawOverrides ||
+                typeof rawOverrides !== "object" ||
+                Array.isArray(rawOverrides) ||
+                Object.keys(rawOverrides).length > 500 ||
+                Object.values(rawOverrides).some((value) => typeof value !== "string"))) {
+            res.status(400).json({
+                error: "INVALID_DEANONYMIZATION_REQUEST"
+            });
+            return;
+        }
+        const overrides = rawOverrides;
         try {
             const context = responseAuthContext(res);
             // Consume before CDK unwrap / vault access.
@@ -3507,6 +4097,9 @@ export function createLexHttpApp(options) {
                             filename: req.body
                                 .filename
                         }
+                        : {}),
+                    ...(overrides
+                        ? { overrides }
                         : {})
                 });
             });
@@ -3525,6 +4118,9 @@ export function createLexHttpApp(options) {
                 replacements: final.replacements,
                 deanonymizationBasis: final
                     .deanonymizationBasis,
+                ...(final.restorations
+                    ? { restorations: final.restorations }
+                    : {}),
                 keyBindingVerified: final
                     .keyBindingVerified,
                 ...(downloadTicket
@@ -3753,6 +4349,221 @@ export function createLexHttpApp(options) {
             });
         }
     });
+    // Live drafts of running executions, polled by the UI so the answer appears
+    // while it is generated. Owner-bound, in memory only, short-lived.
+    const executionDrafts = new Map();
+    const draftOwner = (res) => options.authService
+        ? responseAuthContext(res)
+            .session.sessionId
+        : "local";
+    const pruneExecutionDrafts = () => {
+        const now = Date.now();
+        for (const [id, entry] of executionDrafts) {
+            if (now - entry.updatedAt > EXECUTION_DRAFT_TTL_MS) {
+                executionDrafts.delete(id);
+            }
+        }
+        while (executionDrafts.size > EXECUTION_DRAFT_MAX_ENTRIES) {
+            const oldest = executionDrafts.keys().next().value;
+            if (oldest === undefined)
+                break;
+            executionDrafts.delete(oldest);
+        }
+    };
+    app.get("/api/sessions/progress/:executionId", (req, res) => {
+        const entry = executionDrafts.get(String(req.params.executionId ?? ""));
+        if (!entry ||
+            entry.owner !== draftOwner(res)) {
+            res.status(404).json({
+                error: "EXECUTION_PROGRESS_NOT_FOUND"
+            });
+            return;
+        }
+        res.set("Cache-Control", "no-store");
+        res.json({
+            text: entry.text,
+            updatedAt: new Date(entry.updatedAt).toISOString(),
+            steps: entry.steps.snapshot()
+        });
+    });
+    // Documents the user picked for a message (case files, firm files, firm
+    // templates), resolved with access checks. Used to send them and to
+    // estimate whether they fit the model before sending. Null: response sent.
+    const templateTextCache = new Map();
+    const resolveSelectedAttachments = async (res, attachments, firmTemplates, firmCaseId) => {
+        const picked = [];
+        if (attachments.length > 0) {
+            if (!options.documentService) {
+                res.status(503).json({
+                    error: "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
+                });
+                return null;
+            }
+            if (options.caseAccessService) {
+                const context = responseAuthContext(res);
+                for (const selection of attachments) {
+                    const caseId = selection.caseId ||
+                        documentCaseIds.get(selection.documentId);
+                    if (!caseId) {
+                        throw new CaseAccessError("CASE_ACCESS_DENIED", 403);
+                    }
+                    options.caseAccessService
+                        .assertAccess(context, caseId, "ANALYZE");
+                    if (options
+                        .documentService
+                        .restoreDocument) {
+                        const caseView = options.caseAccessService
+                            .openCase(context, caseId);
+                        await options
+                            .caseAccessService
+                            .withCaseDataKey(context, caseId, "ANALYZE", async (caseDataKey) => await options
+                            .documentService
+                            .restoreDocument({
+                            caseId,
+                            documentId: selection
+                                .documentId,
+                            caseDataKey,
+                            keyVersion: caseView
+                                .keyVersion
+                        }));
+                    }
+                    const resolved = await options
+                        .documentService
+                        .resolveProtectedChunks({
+                        documentId: selection
+                            .documentId,
+                        chunkIndices: selection
+                            .chunkIndices
+                    });
+                    picked.push({
+                        caseId,
+                        documentId: resolved.documentId,
+                        sourceScope: caseId === firmCaseId
+                            ? "FIRM_KNOWLEDGE"
+                            : "MANUAL",
+                        selectedByUser: true,
+                        ...(resolved.grammar
+                            ? { grammar: resolved.grammar }
+                            : {}),
+                        ...(resolved.totalPages
+                            ? { totalPages: resolved.totalPages }
+                            : {}),
+                        chunks: resolved.chunks.map((chunk) => ({
+                            ...chunk
+                        }))
+                    });
+                }
+            }
+            else {
+                const resolved = await Promise.all(attachments.map((selection) => options
+                    .documentService
+                    .resolveProtectedChunks({
+                    documentId: selection
+                        .documentId,
+                    chunkIndices: selection
+                        .chunkIndices
+                })));
+                picked.push(...resolved.map((attachment) => ({
+                    documentId: attachment.documentId,
+                    sourceScope: "MANUAL",
+                    selectedByUser: true,
+                    ...(attachment.grammar
+                        ? { grammar: attachment.grammar }
+                        : {}),
+                    ...(attachment.totalPages
+                        ? { totalPages: attachment.totalPages }
+                        : {}),
+                    chunks: attachment.chunks.map((chunk) => ({
+                        ...chunk
+                    }))
+                })));
+            }
+        }
+        if (firmTemplates.length > 0) {
+            if (!firmCaseId ||
+                !options.caseAccessService ||
+                !options.sharedTemplateStore?.readTemplate ||
+                !options.officeEditor) {
+                res.status(503).json({
+                    error: "FIRM_TEMPLATES_UNAVAILABLE"
+                });
+                return null;
+            }
+            options.caseAccessService.assertAccess(responseAuthContext(res), firmCaseId, "READ");
+            for (const templateId of firmTemplates) {
+                const template = await options.sharedTemplateStore.readTemplate(templateId);
+                try {
+                    // Text of a template is read once per file version (checked while picking, then sent).
+                    const cacheKey = `${templateId}:${template.manifest.sha256}`;
+                    let chunks = templateTextCache.get(cacheKey);
+                    if (!chunks) {
+                        const model = await options.officeEditor.read(new Uint8Array(template.data), template.manifest.mediaType);
+                        chunks = templateChunks(templateText(model));
+                        templateTextCache.set(cacheKey, chunks);
+                        if (templateTextCache.size > 32) {
+                            templateTextCache.delete(templateTextCache.keys().next().value);
+                        }
+                    }
+                    picked.push({
+                        caseId: firmCaseId,
+                        documentId: templateId,
+                        title: template.manifest.filename,
+                        sourceScope: "FIRM_TEMPLATE",
+                        selectedByUser: true,
+                        chunks: chunks.map((chunk) => ({ ...chunk }))
+                    });
+                }
+                finally {
+                    template.data.fill(0);
+                }
+            }
+        }
+        return picked;
+    };
+    // Checked while the user picks files: do they fit the chosen model?
+    app.post("/api/sessions/document-fit", async (req, res) => {
+        const attachments = parseDocumentAttachments(req.body?.attachments);
+        const firmTemplates = parseFirmTemplates(req.body?.firmTemplates);
+        const model = typeof req.body?.model === "string" ? req.body.model.trim() : "";
+        const provider = typeof req.body?.provider === "string" ? req.body.provider : "";
+        if (attachments === null || firmTemplates === null || !model || model.length > 200) {
+            res.status(400).json({ error: "INVALID_DOCUMENT_FIT_REQUEST" });
+            return;
+        }
+        const localWindow = options.modelCatalog.localContextWindow?.(model);
+        const limit = localWindow !== undefined ? LOCAL_MAX_DOCUMENT_ATTACHMENTS : MAX_DOCUMENT_ATTACHMENTS;
+        const count = attachments.length + firmTemplates.length;
+        if (count === 0 || count > limit) {
+            res.json({ limit, local: localWindow !== undefined, count, estimate: null });
+            return;
+        }
+        try {
+            const firmCaseId = options.caseAccessService
+                ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+                ?.caseId;
+            const picked = await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+            if (!picked)
+                return;
+            const charsPerToken = localWindow !== undefined
+                ? options.modelCatalog.localTokenCharsPerToken?.(model)
+                : undefined;
+            res.json({
+                limit,
+                local: localWindow !== undefined,
+                count,
+                estimate: estimateDocumentFit({
+                    attachments: picked,
+                    modelContextTokens: localWindow ?? HOSTED_CONTEXT_TOKENS[provider] ?? 128_000,
+                    ...(charsPerToken ? { tokenCharsPerToken: charsPerToken } : {})
+                })
+            });
+        }
+        catch (error) {
+            if (!sendAuthError(res, error) && !sendCaseAccessError(res, error)) {
+                res.status(422).json({ error: "DOCUMENT_FIT_FAILED" });
+            }
+        }
+    });
     app.post("/api/sessions/execute", async (req, res) => {
         if (!options.sessionExecutor) {
             res.status(503).json({
@@ -3763,11 +4574,24 @@ export function createLexHttpApp(options) {
         const request = parseSessionRequest(req.body);
         const attachments = parseDocumentAttachments(req.body?.attachments);
         const knowledge = parseSessionKnowledgeRequest(req.body?.knowledge);
+        const firmTemplates = parseFirmTemplates(req.body?.firmTemplates);
         if (!request ||
             attachments === null ||
-            knowledge === null) {
+            knowledge === null ||
+            firmTemplates === null) {
             res.status(400).json({
                 error: "INVALID_SESSION_REQUEST"
+            });
+            return;
+        }
+        const localModel = options.modelCatalog.localContextWindow?.(request.model) !== undefined;
+        const documentLimit = localModel
+            ? LOCAL_MAX_DOCUMENT_ATTACHMENTS
+            : MAX_DOCUMENT_ATTACHMENTS;
+        if (attachments.length + firmTemplates.length > documentLimit) {
+            res.status(422).json({
+                error: "TOO_MANY_DOCUMENT_ATTACHMENTS",
+                limit: documentLimit
             });
             return;
         }
@@ -3775,85 +4599,42 @@ export function createLexHttpApp(options) {
             request.accountSessionKey =
                 knowledge.caseId;
         }
-        if (request.primarySkill ===
-            "AUTO") {
-            if (!options
-                .sessionExecutor
-                .resolveAutoRouting) {
-                res.status(503).json({
-                    error: "AUTO_ROUTING_UNAVAILABLE"
-                });
-                return;
-            }
-            try {
-                const routed = await options
-                    .sessionExecutor
-                    .resolveAutoRouting(request);
-                request.primarySkill =
-                    routed.decision
-                        .primarySkill;
-                request.query =
-                    routed.query;
-            }
-            catch (error) {
-                if (error instanceof Error &&
-                    error.message ===
-                        "CHAT_PRIVACY_GATE_FAILED") {
-                    res.status(503).json({
-                        error: "CHAT_PRIVACY_GATE_FAILED"
-                    });
-                    return;
+        const executionId = String(req.get("x-lex-execution-id") ?? "");
+        if (EXECUTION_ID_PATTERN.test(executionId)) {
+            const owner = draftOwner(res);
+            pruneExecutionDrafts();
+            executionDrafts.set(executionId, {
+                owner,
+                text: "",
+                updatedAt: Date.now(),
+                steps: new ExecutionSteps()
+            });
+            request.onStep = (phase, detail) => {
+                const entry = executionDrafts.get(executionId);
+                if (entry && entry.owner === owner) {
+                    entry.steps.report(phase, detail);
+                    entry.updatedAt = Date.now();
                 }
-                const localFailureMessage = request.model.startsWith("local/")
-                    ? (error instanceof
-                        ProviderGatewayError &&
-                        error.causeValue instanceof
-                            Error
-                        ? error.causeValue
-                            .message
-                        : error instanceof Error
-                            ? error.message
-                            : "")
-                    : "";
-                const parsedLocalReason = localFailureMessage
-                    .split(":", 1)[0] ?? "";
-                if (request.model.startsWith("local/") &&
-                    /^LOCAL_MODEL_[A-Z0-9_]+$/.test(parsedLocalReason)) {
-                    res.status(503).json({
-                        error: "LOCAL_MODEL_EXECUTION_FAILED",
-                        reason: parsedLocalReason
-                    });
-                    return;
+            };
+            request.onStep("PREPARE", "przygotowanie wiadomości");
+            request.onDraft = (text) => {
+                const entry = executionDrafts.get(executionId);
+                if (entry && entry.owner === owner) {
+                    entry.text =
+                        text.slice(-EXECUTION_DRAFT_MAX_CHARS);
+                    entry.updatedAt = Date.now();
                 }
-                if (error instanceof
-                    ProviderGatewayError) {
-                    const rawReason = error.causeValue instanceof
-                        Error
-                        ? error.causeValue
-                            .message
-                        : "";
-                    const parsedReason = rawReason.split(":", 1)[0] ?? "";
-                    res.status(502).json({
-                        error: "PROVIDER_EXECUTION_FAILED",
-                        provider: error.provider,
-                        ...(/^[A-Z0-9_]+$/.test(parsedReason)
-                            ? {
-                                reason: parsedReason
-                            }
-                            : {})
-                    });
-                    return;
-                }
-                const reason = error instanceof Error &&
-                    /^AUTO_ROUTING_[A-Z0-9_]+$/.test(error.message)
-                    ? error.message
-                    : "AUTO_ROUTING_FAILED";
-                res.status(422).json({
-                    error: "AUTO_ROUTING_FAILED",
-                    reason
-                });
-                return;
-            }
+            };
+            res.on("finish", () => {
+                executionDrafts.delete(executionId);
+            });
+        }
+        request.onStep?.("ROUTING", request.primarySkill === "AUTO" ? "prawny-router-v3: wybór dziedziny" : `wybrany skill ${request.primarySkill}`);
+        if (!(await resolveAutoPrimarySkill(request, res, attachments.length, {
+            allowModelSelection: true,
+            allowConversational: true
+        }))) {
+            return;
         }
         const route = routing.validate(request.primarySkill);
         if (!route.valid) {
@@ -3924,77 +4705,16 @@ export function createLexHttpApp(options) {
         }
         try {
             const sessionAttachments = [];
-            if (attachments.length > 0) {
-                if (!options.documentService) {
-                    res.status(503).json({
-                        error: "DOCUMENT_ATTACHMENT_SERVICE_UNAVAILABLE"
-                    });
-                    return;
-                }
-                if (options.caseAccessService) {
-                    const context = responseAuthContext(res);
-                    for (const selection of attachments) {
-                        const caseId = selection.caseId ||
-                            documentCaseIds.get(selection.documentId);
-                        if (!caseId) {
-                            throw new CaseAccessError("CASE_ACCESS_DENIED", 403);
-                        }
-                        options.caseAccessService
-                            .assertAccess(context, caseId, "ANALYZE");
-                        if (options
-                            .documentService
-                            .restoreDocument) {
-                            const caseView = options.caseAccessService
-                                .openCase(context, caseId);
-                            await options
-                                .caseAccessService
-                                .withCaseDataKey(context, caseId, "ANALYZE", async (caseDataKey) => await options
-                                .documentService
-                                .restoreDocument({
-                                caseId,
-                                documentId: selection
-                                    .documentId,
-                                caseDataKey,
-                                keyVersion: caseView
-                                    .keyVersion
-                            }));
-                        }
-                        const resolved = await options
-                            .documentService
-                            .resolveProtectedChunks({
-                            documentId: selection
-                                .documentId,
-                            chunkIndices: selection
-                                .chunkIndices
-                        });
-                        sessionAttachments.push({
-                            caseId,
-                            documentId: resolved.documentId,
-                            sourceScope: "MANUAL",
-                            chunks: resolved.chunks.map((chunk) => ({
-                                ...chunk
-                            }))
-                        });
-                    }
-                }
-                else {
-                    const resolved = await Promise.all(attachments.map((selection) => options
-                        .documentService
-                        .resolveProtectedChunks({
-                        documentId: selection
-                            .documentId,
-                        chunkIndices: selection
-                            .chunkIndices
-                    })));
-                    sessionAttachments.push(...resolved.map((attachment) => ({
-                        documentId: attachment.documentId,
-                        sourceScope: "MANUAL",
-                        chunks: attachment.chunks.map((chunk) => ({
-                            ...chunk
-                        }))
-                    })));
-                }
-            }
+            // The firm workspace: its documents are firm material, not case files.
+            const firmCaseId = attachments.length > 0 || firmTemplates.length > 0
+                ? options.caseAccessService
+                    ?.getFirmKnowledgeWorkspace(responseAuthContext(res))
+                    ?.caseId
+                : undefined;
+            const selectedAttachments = await resolveSelectedAttachments(res, attachments, firmTemplates, firmCaseId);
+            if (!selectedAttachments)
+                return;
+            sessionAttachments.push(...selectedAttachments);
             if (knowledge.includeCase ||
                 knowledge.includeFirm) {
                 if (!options.caseAccessService ||
@@ -4083,7 +4803,36 @@ export function createLexHttpApp(options) {
                         text: hit.text
                     });
                 }
-                sessionAttachments.push(...grouped.values());
+                // Retrieved passages fill what the selected documents leave free.
+                sessionAttachments.push(...[...grouped.values()].slice(0, Math.max(0, documentLimit - sessionAttachments.length)));
+            }
+            // Documents of one case on its shared key: the message is pseudonymized
+            // with the same key, so a person has one symbol in the message and in
+            // every attached document.
+            const attachmentCases = [
+                ...new Set(sessionAttachments
+                    .map((attachment) => attachment.caseId)
+                    .filter((value) => Boolean(value) && value !== firmCaseId))
+            ];
+            if (attachmentCases.length === 1 &&
+                options.caseAccessService &&
+                options.documentService?.sharedKeyState) {
+                const sharedCaseId = attachmentCases[0];
+                const context = responseAuthContext(res);
+                const caseView = options.caseAccessService.openCase(context, sharedCaseId);
+                const shared = await options.caseAccessService.withCaseDataKey(context, sharedCaseId, "ANALYZE", (caseDataKey) => options.documentService.sharedKeyState({
+                    caseId: sharedCaseId,
+                    caseDataKey,
+                    keyVersion: caseView.keyVersion
+                }));
+                if (shared && shared.members.size > 0) {
+                    request.privacySeed = shared.snapshot;
+                    for (const attachment of sessionAttachments) {
+                        if (attachment.caseId === sharedCaseId && shared.members.has(attachment.documentId)) {
+                            attachment.sharedKey = true;
+                        }
+                    }
+                }
             }
             if (sessionAttachments.length >
                 0) {
@@ -4092,6 +4841,10 @@ export function createLexHttpApp(options) {
             }
             const localContextWindow = options.modelCatalog
                 .localContextWindow?.(request.model);
+            if (!localContextWindow && sessionAttachments.length > 0) {
+                request.modelContextTokens =
+                    HOSTED_CONTEXT_TOKENS[request.provider] ?? 128_000;
+            }
             if (localContextWindow) {
                 request.modelContextTokens =
                     localContextWindow;
@@ -4114,8 +4867,7 @@ export function createLexHttpApp(options) {
                     return;
                 }
                 const nonFirmCaseIds = new Set(sessionAttachments
-                    .filter((attachment) => attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE")
+                    .filter((attachment) => !isFirmScope(attachment.sourceScope))
                     .map((attachment) => attachment.caseId)
                     .filter((caseId) => Boolean(caseId)));
                 const processCaseId = knowledge.caseId ??
@@ -4213,8 +4965,7 @@ export function createLexHttpApp(options) {
                     return;
                 }
                 const nonFirmCaseIds = new Set(sessionAttachments
-                    .filter((attachment) => attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE")
+                    .filter((attachment) => !isFirmScope(attachment.sourceScope))
                     .map((attachment) => attachment.caseId)
                     .filter((caseId) => Boolean(caseId)));
                 const courtCaseId = knowledge.caseId ??
@@ -4277,8 +5028,7 @@ export function createLexHttpApp(options) {
                     return;
                 }
                 const nonFirmCaseIds = new Set(sessionAttachments
-                    .filter((attachment) => attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE")
+                    .filter((attachment) => !isFirmScope(attachment.sourceScope))
                     .map((attachment) => attachment.caseId)
                     .filter((caseId) => Boolean(caseId)));
                 const chronologyCaseId = knowledge.caseId ??
@@ -4364,8 +5114,7 @@ export function createLexHttpApp(options) {
                     return;
                 }
                 const nonFirmCaseIds = new Set(sessionAttachments
-                    .filter((attachment) => attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE")
+                    .filter((attachment) => !isFirmScope(attachment.sourceScope))
                     .map((attachment) => attachment.caseId)
                     .filter((caseId) => Boolean(caseId)));
                 const contractCaseId = knowledge.caseId ??
@@ -4422,8 +5171,7 @@ export function createLexHttpApp(options) {
                 }
                 const workflowId = previewPlan.id;
                 const nonFirmCaseIds = new Set(sessionAttachments
-                    .filter((attachment) => attachment.sourceScope !==
-                    "FIRM_KNOWLEDGE")
+                    .filter((attachment) => !isFirmScope(attachment.sourceScope))
                     .map((attachment) => attachment.caseId)
                     .filter((caseId) => Boolean(caseId)));
                 const orderedCaseId = knowledge.caseId ??
@@ -5232,6 +5980,13 @@ export function createLexHttpApp(options) {
                 });
                 return;
             }
+            if (error instanceof ContextBudgetError) {
+                res.status(422).json({
+                    error: error.message,
+                    ...error.details
+                });
+                return;
+            }
             if (error instanceof Error &&
                 [
                     "UNKNOWN_LOCAL_DOCUMENT",
@@ -5282,9 +6037,12 @@ export function createLexHttpApp(options) {
                 res.status(502).json({
                     error: "PROVIDER_EXECUTION_FAILED",
                     provider: error.provider,
-                    ...(/^[A-Z0-9_]+$/.test(parsedReason)
+                    reason: /^[A-Z0-9_]+$/.test(parsedReason)
+                        ? parsedReason
+                        : "PROVIDER_UNCODED_FAILURE",
+                    ...(rawReason
                         ? {
-                            reason: parsedReason
+                            description: safeDiagnosticText(rawReason)
                         }
                         : {})
                 });

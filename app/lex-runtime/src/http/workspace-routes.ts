@@ -1,3 +1,10 @@
+import {
+  FORMAT_MEDIA_TYPE,
+  editableMediaType,
+  type EditableFormat,
+  type EditableModel,
+  type LocalOfficeEditor
+} from "../office-edit.js";
 import { randomBytes } from "node:crypto";
 import {
   mkdir,
@@ -19,6 +26,7 @@ import type { SecureCaseUploadStore } from "../case-secure-store.js";
 import type { LocalSharedTemplateStore } from "../shared-template-store.js";
 import type { EncryptedPrivacyVaultStore } from "../privacy/vault-store.js";
 import type { LocalPrivateDocumentService } from "../document-service.js";
+import type { SecureCaseArtifactStore } from "../case-artifact-store.js";
 import {
   documentIdFromSha256,
   purgeSecureCaseDocument
@@ -55,6 +63,7 @@ import {
 const CASE_ID = /^case_[a-f0-9]{32}$/;
 const UPLOAD_ID = /^upload_[a-f0-9]{32}$/;
 const TEMPLATE_ID = /^template_[a-f0-9]{32}$/;
+const ARTIFACT_ID = /^artifact_[a-f0-9]{32}$/;
 const FOLDER_ID = /^folder_[a-f0-9]{32}$/;
 const OPEN_TOKEN = /^open_[a-f0-9]{32}(?:\.[a-z0-9]{1,10})?$/;
 const PREVIEW_MAX_BYTES = 64 * 1024 * 1024;
@@ -108,12 +117,22 @@ function sendError(res: Response, error: unknown): void {
     code.includes("INVALID") ||
     code.includes("TOO_LARGE") ||
     code.includes("LIMIT_EXCEEDED") ||
-    code.includes("TRANSITION")
+    code.includes("TRANSITION") ||
+    (code.startsWith("OFFICE_EDIT_") && code.includes("UNSUPPORTED"))
   ) {
     res.status(422).json({ error: code });
     return;
   }
   res.status(500).json({ error: "WORKSPACE_OPERATION_FAILED", detail: code });
+}
+
+/**
+ * Sends file bytes and wipes them once the response is done: the socket may
+ * still hold the buffer after send() returns, so wiping earlier corrupts it.
+ */
+function sendAndWipe(res: Response, data: Buffer): void {
+  res.once("close", () => data.fill(0));
+  res.send(data);
 }
 
 function extensionFor(filename: string): string {
@@ -178,6 +197,9 @@ export function registerWorkspaceRoutes(
     >;
     workspace: EncryptedCaseWorkspaceStore;
     rootDir: string;
+    officeEditor?: Pick<LocalOfficeEditor, "read" | "write">;
+    // Documents made by a model (with placeholders or deanonymized).
+    artifacts?: Pick<SecureCaseArtifactStore, "listArtifacts" | "readArtifact">;
   }
 ): void {
   const actorFor = (req: Request) =>
@@ -1721,6 +1743,27 @@ export function registerWorkspaceRoutes(
       );
       return { filename: upload.filename, mediaType: upload.mediaType, data: payload };
     }
+    if (ARTIFACT_ID.test(itemId) && dependencies.artifacts) {
+      const artifacts = dependencies.artifacts;
+      return await dependencies.caseAccessService.withCaseDataKey(
+        actor,
+        caseId,
+        "READ",
+        async (caseDataKey) => {
+          const context = { caseId, caseDataKey, keyVersion: data.caseView.keyVersion };
+          const artifact = (await artifacts.listArtifacts(context)).find(
+            (item) => item.artifactId === itemId
+          );
+          if (!artifact) throw new Error("WORKSPACE_ITEM_NOT_FOUND");
+          if (artifact.bytes > maxBytes) throw new Error("WORKSPACE_ITEM_TOO_LARGE");
+          return {
+            filename: artifact.filename,
+            mediaType: artifact.mediaType,
+            data: await artifacts.readArtifact({ ...context, artifactId: itemId, maxBytes })
+          };
+        }
+      );
+    }
     if (TEMPLATE_ID.test(itemId) && data.caseView.caseKind === "FIRM_KNOWLEDGE") {
       const template = await dependencies.templates.readTemplate(itemId);
       if (template.data.byteLength > maxBytes) {
@@ -1736,6 +1779,42 @@ export function registerWorkspaceRoutes(
     throw new Error("WORKSPACE_ITEM_NOT_FOUND");
   };
 
+  // Documents made by a model in this case: the file with placeholders and
+  // the deanonymized file made from it (sourceArtifactId).
+  app.get("/api/cases/:caseId/workspace/artifacts", async (req, res) => {
+    try {
+      const actor = actorFor(req);
+      const caseId = caseIdFrom(req);
+      if (!dependencies.artifacts) {
+        res.json({ artifacts: [] });
+        return;
+      }
+      const artifacts = dependencies.artifacts;
+      dependencies.caseAccessService.assertAccess(actor, caseId, "READ");
+      const caseView = dependencies.caseAccessService.openCase(actor, caseId);
+      const list = await dependencies.caseAccessService.withCaseDataKey(
+        actor,
+        caseId,
+        "READ",
+        (caseDataKey) => artifacts.listArtifacts({ caseId, caseDataKey, keyVersion: caseView.keyVersion })
+      );
+      res.setHeader("Cache-Control", "no-store");
+      res.json({
+        artifacts: list.map((item) => ({
+          artifactId: item.artifactId,
+          filename: item.filename,
+          mediaType: item.mediaType,
+          bytes: item.bytes,
+          createdAt: item.createdAt,
+          sensitivity: item.sensitivity,
+          ...(item.sourceArtifactId ? { sourceArtifactId: item.sourceArtifactId } : {})
+        }))
+      });
+    } catch (error) {
+      sendError(res, error);
+    }
+  });
+
   app.get("/api/cases/:caseId/workspace/items/:itemId/preview", async (req, res) => {
     let payload: Buffer | undefined;
     try {
@@ -1745,11 +1824,58 @@ export function registerWorkspaceRoutes(
       res.setHeader("Content-Type", item.mediaType || "application/octet-stream");
       res.setHeader("Content-Disposition", contentDisposition(item.filename));
       res.setHeader("Cache-Control", "no-store");
-      res.send(payload);
+      sendAndWipe(res, payload);
+      payload = undefined;
     } catch (error) {
       sendError(res, error);
     } finally {
       payload?.fill(0);
+    }
+  });
+
+  // Editable model of a DOCX/ODT document or XLSX/CSV sheet for the in-app editor.
+  app.get("/api/cases/:caseId/workspace/items/:itemId/editable", async (req, res) => {
+    let payload: Buffer | undefined;
+    try {
+      if (!dependencies.officeEditor) throw new Error("OFFICE_EDIT_UNAVAILABLE");
+      const actor = actorFor(req);
+      const item = await readItem(actor, caseIdFrom(req), String(req.params.itemId ?? ""), PREVIEW_MAX_BYTES);
+      payload = item.data;
+      const mediaType = editableMediaType(item.mediaType, item.filename);
+      if (!mediaType) throw new Error("OFFICE_EDIT_MEDIA_TYPE_UNSUPPORTED");
+      const model = await dependencies.officeEditor.read(payload, mediaType);
+      res.setHeader("Cache-Control", "no-store");
+      res.json({ filename: item.filename, mediaType: item.mediaType, model });
+    } catch (error) {
+      sendError(res, error);
+    } finally {
+      payload?.fill(0);
+    }
+  });
+
+  // An edited model rendered to a new file; the client stores it as a new
+  // case file, so the original is never overwritten.
+  app.post("/api/cases/:caseId/workspace/render", async (req, res) => {
+    let output: Buffer | undefined;
+    try {
+      if (!dependencies.officeEditor) throw new Error("OFFICE_EDIT_UNAVAILABLE");
+      const actor = actorFor(req);
+      dependencies.caseAccessService.assertAccess(actor, caseIdFrom(req), "WRITE");
+      const format = String(req.body?.format ?? "") as EditableFormat;
+      const model = req.body?.model as EditableModel | undefined;
+      if (!(format in FORMAT_MEDIA_TYPE) || !model || typeof model !== "object") {
+        throw new Error("OFFICE_EDIT_INVALID_REQUEST");
+      }
+      const delimiter = typeof req.body?.delimiter === "string" ? req.body.delimiter.slice(0, 1) : undefined;
+      output = await dependencies.officeEditor.write(format, model, delimiter);
+      res.setHeader("Content-Type", FORMAT_MEDIA_TYPE[format]);
+      res.setHeader("Cache-Control", "no-store");
+      sendAndWipe(res, output);
+      output = undefined;
+    } catch (error) {
+      sendError(res, error);
+    } finally {
+      output?.fill(0);
     }
   });
 
@@ -1817,6 +1943,14 @@ export function registerWorkspaceRoutes(
               documentCitations:
                 raw.documentCitations as NonNullable<
                   WorkspaceThreadMessage["documentCitations"]
+                >
+            }
+          : {}),
+        ...(Array.isArray(raw.restorations)
+          ? {
+              restorations:
+                raw.restorations as NonNullable<
+                  WorkspaceThreadMessage["restorations"]
                 >
             }
           : {})

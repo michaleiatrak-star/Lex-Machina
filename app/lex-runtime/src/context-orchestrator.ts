@@ -20,7 +20,54 @@ export type ContextBudgetReport = {
   omittedChunks: number;
   selectedDocuments: number;
   omittedDocuments: number;
+  // What reached the model, per document (shown to the user after sending).
+  documents?: DocumentDelivery[];
 };
+
+export type DocumentDelivery = {
+  documentId: string;
+  title?: string;
+  sourceScope?: SessionDocumentAttachment["sourceScope"];
+  chunks: number;
+  fullChunks: number;
+  digestChunks: number;
+  status: "FULL" | "PARTIAL" | "DIGEST" | "OMITTED";
+};
+
+/** User-selected documents do not fit the model window; nothing is truncated. */
+export class ContextBudgetError extends Error {
+  constructor(
+    code: string,
+    readonly details: { budgetTokens: number; neededTokens: number; documents: number }
+  ) {
+    super(code);
+  }
+}
+
+function delivery(
+  attachment: SessionDocumentAttachment,
+  sent: SessionDocumentAttachment["chunks"]
+): DocumentDelivery {
+  const digestChunks = sent.filter((chunk) => chunk.representation === "EXTRACTIVE_DIGEST").length;
+  const fullChunks = sent.length - digestChunks;
+  const chunks = attachment.chunks.length;
+  return {
+    documentId: attachment.documentId,
+    ...(attachment.title ? { title: attachment.title } : {}),
+    ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {}),
+    chunks,
+    fullChunks,
+    digestChunks,
+    status:
+      sent.length === 0
+        ? "OMITTED"
+        : fullChunks === chunks
+          ? "FULL"
+          : digestChunks > 0 && fullChunks === 0 && sent.length === chunks
+            ? "DIGEST"
+            : "PARTIAL"
+  };
+}
 
 export type OrchestratedDocumentContext = {
   attachments: SessionDocumentAttachment[];
@@ -28,6 +75,16 @@ export type OrchestratedDocumentContext = {
   report: ContextBudgetReport;
 };
 
+// Documents in one message; the context window decides how much of them fits.
+export const MAX_DOCUMENT_ATTACHMENTS = 20;
+// A local model gets fewer: long prompts make it slow and unreliable.
+export const LOCAL_MAX_DOCUMENT_ATTACHMENTS = 4;
+// Hosted APIs do not report their window; a conservative one per provider.
+export const HOSTED_CONTEXT_TOKENS: Record<string, number> = {
+  anthropic: 200_000,
+  openai: 128_000,
+  xai: 128_000
+};
 const LEGACY_CHAR_CAP = 160_000;
 const MIN_CONTEXT_WINDOW = 8_192;
 const MAX_CONTEXT_WINDOW = 262_144;
@@ -319,9 +376,10 @@ function cloneWithChunks(
 }
 
 function sourcePriority(
-  scope: SessionDocumentAttachment["sourceScope"]
+  attachment: SessionDocumentAttachment
 ): number {
-  if (scope === "MANUAL" || scope === undefined) {
+  const scope = attachment.sourceScope;
+  if (attachment.selectedByUser || scope === "MANUAL" || scope === undefined) {
     return 0;
   }
   if (scope === "CASE_KNOWLEDGE") {
@@ -371,7 +429,7 @@ export function orchestrateDocumentContext(args: {
       ? "CALIBRATED_LOCAL_TOKENIZER" as const
       : "CONSERVATIVE_CHAR_HEURISTIC" as const;
 
-  if (attachments.length > 4) {
+  if (attachments.length > MAX_DOCUMENT_ATTACHMENTS) {
     throw new Error(
       "TOO_MANY_DOCUMENT_ATTACHMENTS"
     );
@@ -465,7 +523,8 @@ export function orchestrateDocumentContext(args: {
         omittedChunks: 0,
         selectedDocuments:
           attachments.length,
-        omittedDocuments: 0
+        omittedDocuments: 0,
+        documents: attachments.map((attachment) => delivery(attachment, attachment.chunks))
       }
     };
   }
@@ -541,23 +600,23 @@ export function orchestrateDocumentContext(args: {
     .filter(
       (attachment) =>
         sourcePriority(
-          attachment.sourceScope
+          attachment
         ) === 0
     );
   const knowledge = attachments
     .filter(
       (attachment) =>
         sourcePriority(
-          attachment.sourceScope
+          attachment
         ) > 0
     )
     .sort(
       (left, right) =>
         sourcePriority(
-          left.sourceScope
+          left
         ) -
         sourcePriority(
-          right.sourceScope
+          right
         )
     );
 
@@ -588,8 +647,14 @@ export function orchestrateDocumentContext(args: {
         0
       );
     if (used + cost > documentBudget) {
-      throw new Error(
-        "MANUAL_DOCUMENT_CONTEXT_EXCEEDS_BUDGET"
+      const needed = manual.reduce(
+        (sum, item) =>
+          sum + item.chunks.reduce((chunkSum, chunk) => chunkSum + chunkTokens(item, chunk, charsPerTokenEstimate), 0),
+        0
+      );
+      throw new ContextBudgetError(
+        "MANUAL_DOCUMENT_CONTEXT_EXCEEDS_BUDGET",
+        { budgetTokens: documentBudget, neededTokens: needed, documents: manual.length }
       );
     }
     used += cost;
@@ -817,7 +882,46 @@ export function orchestrateDocumentContext(args: {
       selectedDocuments:
         selectedIds.size,
       omittedDocuments:
-        omittedDocumentIds.size
+        omittedDocumentIds.size,
+      documents: attachments.map((attachment) =>
+        delivery(
+          attachment,
+          selected.find((item) => item.documentId === attachment.documentId)?.chunks ?? []
+        )
+      )
     }
   };
+}
+
+export type DocumentFitEstimate = {
+  modelContextTokens: number;
+  budgetTokens: number;
+  neededTokens: number;
+  fits: boolean;
+  documents: Array<{ documentId: string; title?: string; tokens: number }>;
+};
+
+/**
+ * Whether documents picked for a message fit the model before it is sent.
+ * Same token estimate as sending; the system prompt is not known yet, so
+ * its reserve is taken at the upper end.
+ */
+export function estimateDocumentFit(args: {
+  attachments: readonly SessionDocumentAttachment[];
+  modelContextTokens: number;
+  tokenCharsPerToken?: number;
+}): DocumentFitEstimate {
+  const charsPerToken = args.tokenCharsPerToken ?? 3;
+  const window = Math.min(MAX_CONTEXT_WINDOW, Math.max(MIN_CONTEXT_WINDOW, args.modelContextTokens));
+  const outputReserve = Math.min(16_384, Math.max(4_096, Math.floor(window * 0.12)));
+  const systemReserve = Math.min(48_000, Math.max(12_000, Math.floor(window * 0.35)));
+  const safetyReserve = Math.max(2_048, Math.floor(window * 0.04));
+  const budgetTokens = Math.max(0, window - outputReserve - systemReserve - safetyReserve);
+  const documents = args.attachments.map((attachment) => ({
+    documentId: attachment.documentId,
+    ...(attachment.title ? { title: attachment.title } : {}),
+    tokens: attachment.chunks.reduce((sum, chunk) => sum + chunkTokens(attachment, chunk, charsPerToken), 0)
+  }));
+  const neededTokens = documents.reduce((sum, document) => sum + document.tokens, 0);
+  return { modelContextTokens: window, budgetTokens, neededTokens, fits: neededTokens <= budgetTokens, documents };
 }

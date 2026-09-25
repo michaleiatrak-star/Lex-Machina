@@ -1,3 +1,41 @@
+/** User-selected documents do not fit the model window; nothing is truncated. */
+export class ContextBudgetError extends Error {
+    details;
+    constructor(code, details) {
+        super(code);
+        this.details = details;
+    }
+}
+function delivery(attachment, sent) {
+    const digestChunks = sent.filter((chunk) => chunk.representation === "EXTRACTIVE_DIGEST").length;
+    const fullChunks = sent.length - digestChunks;
+    const chunks = attachment.chunks.length;
+    return {
+        documentId: attachment.documentId,
+        ...(attachment.title ? { title: attachment.title } : {}),
+        ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {}),
+        chunks,
+        fullChunks,
+        digestChunks,
+        status: sent.length === 0
+            ? "OMITTED"
+            : fullChunks === chunks
+                ? "FULL"
+                : digestChunks > 0 && fullChunks === 0 && sent.length === chunks
+                    ? "DIGEST"
+                    : "PARTIAL"
+    };
+}
+// Documents in one message; the context window decides how much of them fits.
+export const MAX_DOCUMENT_ATTACHMENTS = 20;
+// A local model gets fewer: long prompts make it slow and unreliable.
+export const LOCAL_MAX_DOCUMENT_ATTACHMENTS = 4;
+// Hosted APIs do not report their window; a conservative one per provider.
+export const HOSTED_CONTEXT_TOKENS = {
+    anthropic: 200_000,
+    openai: 128_000,
+    xai: 128_000
+};
 const LEGACY_CHAR_CAP = 160_000;
 const MIN_CONTEXT_WINDOW = 8_192;
 const MAX_CONTEXT_WINDOW = 262_144;
@@ -157,8 +195,9 @@ function cloneWithChunks(attachment, chunks) {
         }))
     };
 }
-function sourcePriority(scope) {
-    if (scope === "MANUAL" || scope === undefined) {
+function sourcePriority(attachment) {
+    const scope = attachment.sourceScope;
+    if (attachment.selectedByUser || scope === "MANUAL" || scope === undefined) {
         return 0;
     }
     if (scope === "CASE_KNOWLEDGE") {
@@ -183,7 +222,7 @@ export function orchestrateDocumentContext(args) {
         undefined
         ? "CALIBRATED_LOCAL_TOKENIZER"
         : "CONSERVATIVE_CHAR_HEURISTIC";
-    if (attachments.length > 4) {
+    if (attachments.length > MAX_DOCUMENT_ATTACHMENTS) {
         throw new Error("TOO_MANY_DOCUMENT_ATTACHMENTS");
     }
     if (attachments.length === 0) {
@@ -240,7 +279,8 @@ export function orchestrateDocumentContext(args) {
                 compressionSavedTokens: 0,
                 omittedChunks: 0,
                 selectedDocuments: attachments.length,
-                omittedDocuments: 0
+                omittedDocuments: 0,
+                documents: attachments.map((attachment) => delivery(attachment, attachment.chunks))
             }
         };
     }
@@ -266,11 +306,11 @@ export function orchestrateDocumentContext(args) {
         throw new Error("MODEL_CONTEXT_BUDGET_TOO_SMALL");
     }
     const manual = attachments
-        .filter((attachment) => sourcePriority(attachment.sourceScope) === 0);
+        .filter((attachment) => sourcePriority(attachment) === 0);
     const knowledge = attachments
-        .filter((attachment) => sourcePriority(attachment.sourceScope) > 0)
-        .sort((left, right) => sourcePriority(left.sourceScope) -
-        sourcePriority(right.sourceScope));
+        .filter((attachment) => sourcePriority(attachment) > 0)
+        .sort((left, right) => sourcePriority(left) -
+        sourcePriority(right));
     let used = 0;
     const selected = [];
     let selectedChunks = 0;
@@ -285,7 +325,8 @@ export function orchestrateDocumentContext(args) {
         const cost = attachment.chunks.reduce((sum, chunk) => sum +
             chunkTokens(attachment, chunk, charsPerTokenEstimate), 0);
         if (used + cost > documentBudget) {
-            throw new Error("MANUAL_DOCUMENT_CONTEXT_EXCEEDS_BUDGET");
+            const needed = manual.reduce((sum, item) => sum + item.chunks.reduce((chunkSum, chunk) => chunkSum + chunkTokens(item, chunk, charsPerTokenEstimate), 0), 0);
+            throw new ContextBudgetError("MANUAL_DOCUMENT_CONTEXT_EXCEEDS_BUDGET", { budgetTokens: documentBudget, neededTokens: needed, documents: manual.length });
         }
         used += cost;
         selectedChunks +=
@@ -394,7 +435,28 @@ export function orchestrateDocumentContext(args) {
             compressionSavedTokens,
             omittedChunks,
             selectedDocuments: selectedIds.size,
-            omittedDocuments: omittedDocumentIds.size
+            omittedDocuments: omittedDocumentIds.size,
+            documents: attachments.map((attachment) => delivery(attachment, selected.find((item) => item.documentId === attachment.documentId)?.chunks ?? []))
         }
     };
+}
+/**
+ * Whether documents picked for a message fit the model before it is sent.
+ * Same token estimate as sending; the system prompt is not known yet, so
+ * its reserve is taken at the upper end.
+ */
+export function estimateDocumentFit(args) {
+    const charsPerToken = args.tokenCharsPerToken ?? 3;
+    const window = Math.min(MAX_CONTEXT_WINDOW, Math.max(MIN_CONTEXT_WINDOW, args.modelContextTokens));
+    const outputReserve = Math.min(16_384, Math.max(4_096, Math.floor(window * 0.12)));
+    const systemReserve = Math.min(48_000, Math.max(12_000, Math.floor(window * 0.35)));
+    const safetyReserve = Math.max(2_048, Math.floor(window * 0.04));
+    const budgetTokens = Math.max(0, window - outputReserve - systemReserve - safetyReserve);
+    const documents = args.attachments.map((attachment) => ({
+        documentId: attachment.documentId,
+        ...(attachment.title ? { title: attachment.title } : {}),
+        tokens: attachment.chunks.reduce((sum, chunk) => sum + chunkTokens(attachment, chunk, charsPerToken), 0)
+    }));
+    const neededTokens = documents.reduce((sum, document) => sum + document.tokens, 0);
+    return { modelContextTokens: window, budgetTokens, neededTokens, fits: neededTokens <= budgetTokens, documents };
 }

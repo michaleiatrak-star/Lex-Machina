@@ -1,3 +1,4 @@
+import { PERSON_CASES } from "./person-morphology.js";
 import { createCipheriv, createDecipheriv, createHash, createHmac, hkdfSync, randomBytes } from "node:crypto";
 import { mkdir, open, readFile, rename, rm } from "node:fs/promises";
 import os from "node:os";
@@ -70,8 +71,35 @@ function canonicalSnapshot(snapshot) {
             token: item.token,
             kind: item.kind,
             value: item.value,
-            createdAt: item.createdAt
+            createdAt: item.createdAt,
+            ...(item.entity
+                ? {
+                    entity: canonicalEntity(item.entity)
+                }
+                : {})
         }))
+    };
+}
+// Person identity and paradigm, in a fixed field order for the canonical payload.
+function canonicalEntity(entity) {
+    const forms = {};
+    for (const personCase of PERSON_CASES) {
+        const form = entity.forms[personCase];
+        forms[personCase] = {
+            text: String(form.text),
+            source: String(form.source),
+            confidence: Number(form.confidence)
+        };
+    }
+    return {
+        canonical: String(entity.canonical),
+        gender: entity.gender === "f" || entity.gender === "m3" || entity.gender === "n"
+            ? entity.gender
+            : "m1",
+        genderAlternatives: [...entity.genderAlternatives].map(String),
+        status: entity.status,
+        forms,
+        warnings: [...entity.warnings].map(String)
     };
 }
 function canonicalPayload(payload) {
@@ -84,7 +112,15 @@ function canonicalPayload(payload) {
         schemaVersion: 1,
         caseId: payload.caseId,
         generation: payload.generation,
-        documents
+        documents,
+        ...(payload.shared
+            ? {
+                shared: {
+                    snapshot: canonicalSnapshot(payload.shared.snapshot),
+                    members: [...new Set(payload.shared.members)].sort()
+                }
+            }
+            : {})
     };
 }
 function aadBytes(args) {
@@ -250,6 +286,17 @@ function decodeEnvelope(args) {
                 throw new Error("PRIVACY_VAULT_PAYLOAD_INVALID");
             }
             new PseudonymizationVault(snapshot);
+        }
+        if (parsed.shared !== undefined) {
+            if (!parsed.shared ||
+                typeof parsed.shared !== "object" ||
+                !Array.isArray(parsed.shared.members) ||
+                parsed.shared.members.some((id) => typeof id !== "string" || !validDocumentId(id)) ||
+                !parsed.shared.snapshot ||
+                !Array.isArray(parsed.shared.snapshot.tokens)) {
+                throw new Error("PRIVACY_VAULT_PAYLOAD_INVALID");
+            }
+            new PseudonymizationVault(parsed.shared.snapshot);
         }
         return canonicalPayload(parsed);
     }
@@ -449,6 +496,48 @@ export class EncryptedPrivacyVaultStore {
             return next.generation;
         });
     }
+    /** The case's shared key and its member documents (null before the first one). */
+    async sharedState(args) {
+        const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+        return payload.shared
+            ? { snapshot: payload.shared.snapshot, members: new Set(payload.shared.members) }
+            : null;
+    }
+    /** Documents that use the case's shared key. */
+    async sharedMembers(args) {
+        const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+        return new Set(payload.shared?.members ?? []);
+    }
+    /**
+     * Runs an operation on the case's shared key under the case lock (no two
+     * documents can hand out the same new token), then saves it and copies it
+     * to every member document's key, so each document key stays complete.
+     * Nothing is written when the operation fails.
+     */
+    async withSharedVault(args, member, operation) {
+        if (member !== null && !validDocumentId(member)) {
+            throw new Error("INVALID_DOCUMENT_ID");
+        }
+        return await this.withCaseQueue(args.caseId, async () => {
+            const payload = await this.readPayload(args.caseId, args.caseDataKey, args.keyVersion);
+            const vault = new PseudonymizationVault(payload.shared?.snapshot);
+            const members = new Set(payload.shared?.members ?? []);
+            const result = await operation(vault, members);
+            if (member !== null)
+                members.add(member);
+            const snapshot = vault.snapshot();
+            const documents = { ...payload.documents };
+            for (const id of members)
+                documents[id] = snapshot;
+            await this.writePayload(args.caseId, args.caseDataKey, args.keyVersion, {
+                ...payload,
+                generation: payload.generation + 1,
+                documents,
+                shared: { snapshot, members: [...members].sort() }
+            });
+            return result;
+        });
+    }
     async deleteDocumentVault(args) {
         if (!validDocumentId(args.documentId)) {
             throw new Error("INVALID_DOCUMENT_ID");
@@ -466,7 +555,16 @@ export class EncryptedPrivacyVaultStore {
                 ...payload,
                 generation: payload.generation +
                     1,
-                documents
+                documents,
+                // The shared key keeps its entries: other documents may use them.
+                ...(payload.shared
+                    ? {
+                        shared: {
+                            snapshot: payload.shared.snapshot,
+                            members: payload.shared.members.filter((id) => id !== args.documentId)
+                        }
+                    }
+                    : {})
             };
             await this.writePayload(args.caseId, args.caseDataKey, args.keyVersion, next);
             return true;

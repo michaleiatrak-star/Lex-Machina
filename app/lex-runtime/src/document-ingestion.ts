@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import type { ProgressReporter } from "./processing-progress.js";
 
 export type DocumentPageSourceName =
   | "DIGITAL"
@@ -8,6 +9,8 @@ export type DocumentPageSourceName =
 export type ExtractedDigitalPage = {
   page: number;
   text: string;
+  // false: the page draws no image, so OCR has nothing to read.
+  hasImages?: boolean;
 };
 
 export type DocumentSourceExtraction = {
@@ -30,7 +33,9 @@ export type OcrPageResult = {
 export interface OcrEngine {
   recognizePages(
     data: Uint8Array,
-    pages: number[]
+    pages: number[],
+    // Called with the number of pages finished so far.
+    onPage?: (done: number) => void
   ): Promise<OcrPageResult[]>;
 }
 
@@ -198,7 +203,10 @@ export class CompleteDocumentIngestor {
       DEFAULT_DOCUMENT_INGESTION_LIMITS
   ) {}
 
-  async ingest(data: Uint8Array): Promise<DocumentIngestionResult> {
+  async ingest(
+    data: Uint8Array,
+    onProgress?: ProgressReporter
+  ): Promise<DocumentIngestionResult> {
     if (data.byteLength > this.limits.maxBytes) {
       throw new DocumentIngestionError(
         "Document exceeds the configured byte safety limit.",
@@ -219,7 +227,8 @@ export class CompleteDocumentIngestor {
       .filter(
         (page) =>
           page.text.trim().length <
-          this.limits.minDigitalCharsPerPage
+            this.limits.minDigitalCharsPerPage &&
+          page.hasImages !== false
       )
       .map((page) => page.page);
 
@@ -230,8 +239,17 @@ export class CompleteDocumentIngestor {
       );
     }
 
+    if (ocrCandidates.length) {
+      onProgress?.({ stage: "OCR", done: 0, total: ocrCandidates.length });
+    }
     const ocrResults = this.ocr && ocrCandidates.length
-      ? await this.ocr.recognizePages(data, ocrCandidates)
+      ? await this.ocr.recognizePages(
+          data,
+          ocrCandidates,
+          onProgress
+            ? (done) => onProgress({ stage: "OCR", done, total: ocrCandidates.length })
+            : undefined
+        )
       : [];
 
     const ocrByPage = new Map(

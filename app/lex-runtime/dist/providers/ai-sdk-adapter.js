@@ -5,11 +5,65 @@ import { isAccountSessionModel, streamAccountSession } from "./account-session.j
 const MAX_OUTPUT_TOKENS = 16_384;
 const LOCAL_DEFAULT_OUTPUT_TOKENS = 4_096;
 const LOCAL_CONTEXT_SAFETY_TOKENS = 1_024;
-const LOCAL_HTTP_RESPONSE_TIMEOUT_MS = 300_000;
-const LOCAL_FIRST_CONTENT_TIMEOUT_MS = 300_000;
+// llama-server samples at 0.8 unless told otherwise; 11-12B instruct models
+// (Mistral NeMo recommends 0.3) then drift off the instruction or out of
+// Polish. Short commands are answered deterministically.
+const LOCAL_TEMPERATURE = 0.3;
+const LOCAL_TRIVIAL_TEMPERATURE = 0;
+// A local model on CPU may read a legal prompt for several minutes before
+// the first token; the UI shows a live draft meanwhile. Both limits stay below
+// the 1200 s desktop proxy limit for session execution.
+const LOCAL_HTTP_RESPONSE_TIMEOUT_MS = 900_000;
+const LOCAL_FIRST_CONTENT_TIMEOUT_MS = 900_000;
 const LOCAL_STREAM_IDLE_TIMEOUT_MS = 120_000;
 const LOCAL_JSON_BODY_TIMEOUT_MS = 300_000;
 const LOCAL_TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
+/**
+ * Forwards local streaming text as a live draft, but never the text tool
+ * protocol: output that starts with the tool sentinel stays hidden.
+ */
+export function localDraftForwarder(onContentDelta) {
+    let pending = "";
+    let decided = null;
+    let forwarded = false;
+    return {
+        push: (text) => {
+            if (!onContentDelta || decided === "TOOL")
+                return;
+            if (decided === "TEXT") {
+                forwarded = true;
+                onContentDelta(text);
+                return;
+            }
+            pending += text;
+            const head = pending.trimStart();
+            if (!head)
+                return;
+            if (LOCAL_TOOL_SENTINEL.startsWith(head) ||
+                head.startsWith(LOCAL_TOOL_SENTINEL)) {
+                if (head.startsWith(LOCAL_TOOL_SENTINEL)) {
+                    decided = "TOOL";
+                }
+                return;
+            }
+            decided = "TEXT";
+            forwarded = true;
+            onContentDelta(pending);
+            pending = "";
+        },
+        finish: (fullText) => {
+            if (!onContentDelta)
+                return;
+            if (!forwarded) {
+                onContentDelta(fullText);
+            }
+            else if (pending) {
+                onContentDelta(pending);
+            }
+            pending = "";
+        }
+    };
+}
 function compactLocalSchema(value, depth = 0) {
     if (depth > 6 ||
         value === null ||
@@ -214,8 +268,11 @@ export function localChatBudget(contextTokens, systemPrompt, messages, conservat
         maxOutputTokens: Math.max(64, Math.min(MAX_OUTPUT_TOKENS, LOCAL_DEFAULT_OUTPUT_TOKENS, available))
     };
 }
-export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true) {
+export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true, temperature = LOCAL_TEMPERATURE) {
     return {
+        // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
+        // prompt + earlier turns) instead of re-reading it on every request.
+        cache_prompt: true,
         model: modelId,
         messages: [
             {
@@ -225,6 +282,7 @@ export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutput
             ...messages
         ],
         max_tokens: maxOutputTokens,
+        temperature,
         stream
     };
 }
@@ -415,7 +473,7 @@ async function localHttpFailure(response) {
         .replace(/[\r\n]+/g, " ")
         .slice(-1200)}`);
 }
-export async function readLocalSse(response, timeouts) {
+export async function readLocalSse(response, timeouts, onDelta) {
     if (!response.body) {
         throw new Error("LOCAL_MODEL_HTTP_EMPTY_BODY");
     }
@@ -434,8 +492,11 @@ export async function readLocalSse(response, timeouts) {
         if (streamError) {
             throw new Error(`LOCAL_MODEL_HTTP_STREAM_ERROR:${streamError}`);
         }
-        fullText +=
-            parseLocalSseLine(rawLine);
+        const piece = parseLocalSseLine(rawLine);
+        fullText += piece;
+        if (piece) {
+            onDelta?.(piece);
+        }
         if (isLocalSseTerminalLine(rawLine)) {
             terminalSeen = true;
         }
@@ -525,7 +586,7 @@ async function readLocalJson(response) {
     return content;
 }
 async function directLocalJsonCompletion(endpoint, modelId, systemPrompt, messages, maxOutputTokens, abortSignal) {
-    const response = await fetchLocalChatResponse(endpoint, buildLocalChatRequest(modelId, systemPrompt, messages, Math.max(16, Math.min(1_024, maxOutputTokens)), false), abortSignal);
+    const response = await fetchLocalChatResponse(endpoint, buildLocalChatRequest(modelId, systemPrompt, messages, Math.max(16, Math.min(1_024, maxOutputTokens)), false, LOCAL_TRIVIAL_TEMPERATURE), abortSignal);
     if (!response.ok) {
         await localHttpFailure(response);
     }
@@ -585,7 +646,7 @@ async function exactLocalInputTokens(endpoint, body, abortSignal) {
         cleanup();
     }
 }
-async function streamLocalChatCompletion(endpoint, modelId, systemPrompt, messages, contextTokens, conservativeCharsPerToken, abortSignal) {
+async function streamLocalChatCompletion(endpoint, modelId, systemPrompt, messages, contextTokens, conservativeCharsPerToken, abortSignal, onDelta) {
     const budget = localChatBudget(contextTokens, systemPrompt, messages, conservativeCharsPerToken);
     const countBody = buildLocalChatRequest(modelId, systemPrompt, messages, budget.maxOutputTokens, false);
     const exactPromptTokens = await exactLocalInputTokens(endpoint, countBody, abortSignal);
@@ -609,7 +670,7 @@ async function streamLocalChatCompletion(endpoint, modelId, systemPrompt, messag
     }
     try {
         return {
-            fullText: await readLocalSse(response)
+            fullText: await readLocalSse(response, undefined, onDelta)
         };
     }
     catch (streamError) {
@@ -661,9 +722,11 @@ async function streamLocalModel(endpoint, modelId, contextTokens, conservativeCh
         maxIterations; iteration += 1) {
         let result;
         const { tools: _nativeTools, runTools: _nativeRunTools, callbacks: _nativeCallbacks, ...localParams } = params;
+        const draft = localDraftForwarder(params.callbacks
+            ?.onContentDelta);
         try {
             result =
-                await streamLocalChatCompletion(endpoint, modelId, buildLocalToolSystemPrompt(params, toolTranscript), localParams.messages, contextTokens, conservativeCharsPerToken, localParams.abortSignal);
+                await streamLocalChatCompletion(endpoint, modelId, buildLocalToolSystemPrompt(params, toolTranscript), localParams.messages, contextTokens, conservativeCharsPerToken, localParams.abortSignal, draft.push);
         }
         catch (error) {
             const detail = error instanceof Error
@@ -676,8 +739,7 @@ async function streamLocalModel(endpoint, modelId, contextTokens, conservativeCh
         }
         const calls = parseLocalToolCalls(result.fullText);
         if (!calls) {
-            params.callbacks
-                ?.onContentDelta?.(result.fullText);
+            draft.finish(result.fullText);
             return result;
         }
         if (calls.length === 0 ||
@@ -888,6 +950,14 @@ export class AiSdkProviderAdapter {
         this.localModels = localModels;
         this.accountSessions = accountSessions;
         this.label = providerLabel(id);
+    }
+    // Claude account sessions confine Read/Glob/Grep to the corpus (--restricted).
+    // LEX_CLAUDE_NATIVE_CORPUS=off keeps the one-tool-per-round text protocol.
+    nativeCorpusAccess(model) {
+        return (this.id === "anthropic" &&
+            Boolean(this.accountSessions) &&
+            isAccountSessionModel(this.id, model) &&
+            !/^(off|0|false)$/i.test(process.env.LEX_CLAUDE_NATIVE_CORPUS?.trim() ?? ""));
     }
     async stream(params) {
         if (isAccountSessionModel(this.id, params.model)) {

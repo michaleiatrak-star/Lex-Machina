@@ -1,4 +1,8 @@
 import { DEFAULT_PDF_MAX_BYTES, LocalPdfTextExtractor, PdfTextExtractionError } from "./pdf-text-extractor.js";
+const NSA_WSA_SNAPSHOT_HOSTS = new Set([
+    "nsa.gov.pl",
+    "orzeczenia.nsa.gov.pl"
+]);
 export const OFFICIAL_LEGAL_SOURCE_HOSTS = [
     "eli.gov.pl",
     "isap.sejm.gov.pl",
@@ -263,7 +267,8 @@ export class OfficialLegalSourceVerifier {
         const fetchedAt = this.now();
         const sourceUrl = url.toString();
         const evidence = evidenceSnippet(request.claim, request.kind, body);
-        const record = matched
+        const snapshotOnly = NSA_WSA_SNAPSHOT_HOSTS.has(host);
+        const record = matched && !snapshotOnly
             ? {
                 claim: request.claim,
                 kind: request.kind,
@@ -290,9 +295,16 @@ export class OfficialLegalSourceVerifier {
                     ? "web_fetch_pdf"
                     : "web_fetch",
                 sourceFormat: pdfSource ? "PDF" : "TEXT",
-                evidence: !titleMatched
-                    ? "Official source was fetched, but the expected act title was not found."
-                    : "Official source was fetched, but the requested reference was not found in the fetched text."
+                ...(snapshotOnly
+                    ? {
+                        verificationCeiling: "SNAPSHOT_NO_PROMOTION"
+                    }
+                    : {}),
+                evidence: snapshotOnly && matched
+                    ? `NSA/WSA SNAPSHOT (not promoted to VERIFIED): ${evidence ?? "reference found in the fetched CBOSA text"}`
+                    : !titleMatched
+                        ? "Official source was fetched, but the expected act title was not found."
+                        : "Official source was fetched, but the requested reference was not found in the fetched text."
             };
         return {
             record,

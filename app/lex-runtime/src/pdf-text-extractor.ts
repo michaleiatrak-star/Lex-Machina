@@ -74,7 +74,8 @@ implements PdfTextExtractor {
       );
 
       loadingTask = pdfjs.getDocument({
-        data,
+        // pdf.js rejects Buffer and transfers (detaches) what it gets: pass a plain copy.
+        data: new Uint8Array(data),
         useSystemFonts: false,
         disableFontFace: true,
         verbosity: 0

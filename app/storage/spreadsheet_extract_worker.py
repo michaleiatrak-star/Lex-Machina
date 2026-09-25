@@ -198,8 +198,26 @@ def xlsx_text(data: bytes) -> str:
             text_chars += 1
         return "\n".join(lines).strip()
 
+def decode_delimited(data: bytes) -> str:
+    """UTF-8 (with or without BOM), else Windows-1250 (older Polish exports)."""
+    try:
+        return data.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return data.decode("cp1250", errors="replace")
+
+
+def sniff_delimiter(text: str, default: str) -> str:
+    """Polish Excel writes ';' because ',' is the decimal separator; the
+    header line decides, since values may contain decimal commas."""
+    if default != ",":
+        return default
+    header = next((line for line in text.splitlines() if line.strip()), "")
+    return ";" if header.count(";") > header.count(",") else ","
+
+
 def delimited_text(data: bytes, delimiter: str) -> str:
-    text = data.decode("utf-8-sig", errors="replace")
+    text = decode_delimited(data)
+    delimiter = sniff_delimiter(text, delimiter)
     reader = csv.reader(io.StringIO(text), delimiter=delimiter)
     lines = []
     text_chars = 0

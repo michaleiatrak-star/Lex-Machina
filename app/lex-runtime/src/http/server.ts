@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import { createLexHttpApp } from "./app.js";
 import { registerLegacyMigrationRoutes } from "./legacy-migration-routes.js";
 import { registerWorkspaceRoutes } from "./workspace-routes.js";
+import { LocalOfficeEditor } from "../office-edit.js";
 import { registerMaintenanceRoutes } from "./maintenance-routes.js";
 import { LexSkillRegistry } from "../registry.js";
 import { DynamicModelCatalog } from "../providers/model-catalog.js";
@@ -25,6 +26,15 @@ import { ProviderGateway } from "../providers/gateway.js";
 import {
   GitHubReleaseUpdateDiscovery
 } from "../update-discovery.js";
+import {
+  applyAccountSkills
+} from "../account-skills.js";
+import {
+  CoreLawIndex
+} from "../core-law-index.js";
+import {
+  LocalPersonMorphology
+} from "../privacy/person-morphology.js";
 import {
   MaintenanceService,
   commitSkillOverlayRuntimeHealth,
@@ -43,6 +53,10 @@ import { LocalPaddleOcrEngine } from "../ocr/paddle-ocr-engine.js";
 import { LocalPaddleImageOcrEngine } from "../ocr/paddle-image-ocr-engine.js";
 import { CompleteImageIngestor } from "../image-ingestion.js";
 import { LocalStanzaNamedEntityRecognizer } from "../privacy/stanza-ner.js";
+import {
+  CompositeRecognizer,
+  LocalGazetteerRecognizer
+} from "../privacy/gazetteer-ner.js";
 import { LocalLlmPrivacyNamedEntityRecognizer } from "../privacy/local-llm-ner.js";
 import { LocalPrivateDocumentService } from "../document-service.js";
 import { LocalCaseFileStore } from "../case-file-store.js";
@@ -252,6 +266,38 @@ export function resolveRuntimeRoot(): string {
     bundled;
 }
 
+// Newer legal skills from the model accounts, unless the corpus path is
+// pinned explicitly (development, validation).
+function resolveAccountSkillRoot(
+  baseRoot: string
+): string {
+  if (process.env.LEX_SKILLS_PATH?.trim()) {
+    return baseRoot;
+  }
+  try {
+    const result =
+      applyAccountSkills(
+        baseRoot
+      );
+    for (const skill of result.applied) {
+      process.stderr.write(
+        `LEX_ACCOUNT_SKILL_APPLIED:${skill.name}:${skill.source}:${skill.bundledVersion ?? "none"}->${skill.version}\n`
+      );
+    }
+    for (const skill of result.rejected) {
+      process.stderr.write(
+        `LEX_ACCOUNT_SKILL_REJECTED:${skill.name}:${skill.source}:${skill.reason}\n`
+      );
+    }
+    return result.root;
+  } catch (error) {
+    process.stderr.write(
+      `LEX_ACCOUNT_SKILLS_UNAVAILABLE:${error instanceof Error ? error.message : String(error)}\n`
+    );
+    return baseRoot;
+  }
+}
+
 export async function startLocalServer(options?: {
   host?: string;
   port?: number;
@@ -268,8 +314,12 @@ export async function startLocalServer(options?: {
 
   assertLoopbackHost(host);
 
-  const runtimeRoot =
+  const baseRuntimeRoot =
     resolveRuntimeRoot();
+  const runtimeRoot =
+    resolveAccountSkillRoot(
+      baseRuntimeRoot
+    );
   const registry =
     new LexSkillRegistry(
       runtimeRoot
@@ -293,6 +343,8 @@ export async function startLocalServer(options?: {
       rootDir:
         caseFileStore.rootDir
     });
+  const officeEditor =
+    new LocalOfficeEditor();
   const templateProfileService =
     new LocalTemplateProfileService(
       sharedTemplateStore
@@ -449,8 +501,12 @@ export async function startLocalServer(options?: {
     accountSessions
   );
   const providerGateway = new ProviderGateway(providerRegistry);
+  // Stanza NER plus the SGJP name dictionary and address patterns.
   const stanzaNamedEntities =
-    new LocalStanzaNamedEntityRecognizer();
+    new CompositeRecognizer([
+      new LocalStanzaNamedEntityRecognizer(),
+      new LocalGazetteerRecognizer()
+    ]);
   const privacyNamedEntities =
     new LocalLlmPrivacyNamedEntityRecognizer(
       providerGateway,
@@ -473,6 +529,37 @@ export async function startLocalServer(options?: {
   const legalFederationTools =
     new LegalFederationToolRuntime();
 
+  // Morfeusz2/SGJP person-name morphology in the payload Python.
+  const personMorphology =
+    new LocalPersonMorphology();
+
+  // Official ELI texts of every act named in the domain act maps; refreshed
+  // in the background, kept locally for offline and local-model use.
+  const coreLawIndex =
+    new CoreLawIndex();
+  try {
+    coreLawIndex.load(
+      runtimeRoot
+    );
+    if (
+      !/^(off|0|false)$/i.test(
+        process.env.LEX_CORE_LAW_REFRESH?.trim() ?? ""
+      )
+    ) {
+      void coreLawIndex
+        .refresh()
+        .catch((error) => {
+          process.stderr.write(
+            `LEX_CORE_LAW_REFRESH_FAILED:${error instanceof Error ? error.message : String(error)}\n`
+          );
+        });
+    }
+  } catch (error) {
+    process.stderr.write(
+      `LEX_CORE_LAW_UNAVAILABLE:${error instanceof Error ? error.message : String(error)}\n`
+    );
+  }
+
   const sessionExecutor =
     new SafeSessionExecutor(
       registry,
@@ -486,7 +573,9 @@ export async function startLocalServer(options?: {
           new TemporalSourceFreshnessChecker()
         ),
       privacyNamedEntities,
-      legalFederationTools
+      legalFederationTools,
+      coreLawIndex,
+      personMorphology
     );
   const documentAstGenerator =
     new LegalDocumentAstGenerator(
@@ -506,11 +595,13 @@ export async function startLocalServer(options?: {
       privacyVaultStore,
       secureCaseDocumentStore,
       new LocalOfficeDocumentTextExtractor(),
-      new LocalSpreadsheetTextExtractor()
+      new LocalSpreadsheetTextExtractor(),
+      personMorphology
     );
 
   const coreApp = createLexHttpApp({
     registry,
+    personMorphology,
     modelCatalog,
     credentialResolver: credentials,
     credentialManager: credentials,
@@ -531,6 +622,7 @@ export async function startLocalServer(options?: {
     caseFileStore,
     secureCaseUploadStore,
     sharedTemplateStore,
+    officeEditor,
     templateProfileService,
     authService,
     supportService,
@@ -578,7 +670,10 @@ export async function startLocalServer(options?: {
       workspace:
         workspaceStore,
       rootDir:
-        caseFileStore.rootDir
+        caseFileStore.rootDir,
+      officeEditor,
+      artifacts:
+        secureCaseArtifactStore
     }
   );
   registerMaintenanceRoutes(
@@ -597,7 +692,7 @@ export async function startLocalServer(options?: {
     server.once("listening", () => {
       try {
         commitSkillOverlayRuntimeHealth(
-          runtimeRoot
+          baseRuntimeRoot
         );
       } catch (error) {
         server.close(() => {

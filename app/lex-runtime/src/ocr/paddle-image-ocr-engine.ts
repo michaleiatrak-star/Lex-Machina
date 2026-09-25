@@ -115,7 +115,7 @@ implements ImageOcrEngine {
           child.kill("SIGKILL");
           reject(
             new Error(
-              "Local PaddleOCR image worker exceeded the configured timeout."
+              "OCR_ENGINE_TIMEOUT: Local PaddleOCR image worker exceeded the configured timeout."
             )
           );
         }, this.timeoutMs);
@@ -128,7 +128,7 @@ implements ImageOcrEngine {
         });
         child.once("error", (error) => {
           clearTimeout(timer);
-          reject(error);
+          reject(new Error(`OCR_ENGINE_START_FAILED: ${error.message}`));
         });
         child.once("exit", (code) => {
           clearTimeout(timer);
@@ -136,7 +136,7 @@ implements ImageOcrEngine {
           else {
             reject(
               new Error(
-                `Local PaddleOCR image worker failed with exit code ${code}: ${stderr.trim()}`
+                `${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR image worker failed with exit code ${code}: ${stderr.trim()}`
               )
             );
           }
@@ -152,7 +152,7 @@ implements ImageOcrEngine {
         parsed[0]?.page !== 1
       ) {
         throw new Error(
-          "Local PaddleOCR image worker returned an invalid result set."
+          "OCR_ENGINE_INVALID_RESULT: Local PaddleOCR image worker returned an invalid result set."
         );
       }
 

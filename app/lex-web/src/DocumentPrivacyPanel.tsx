@@ -30,6 +30,13 @@ const PII_KINDS: Array<{
   { value: "IBAN", label: "Rachunek / IBAN" },
   { value: "EMAIL", label: "E-mail" },
   { value: "PHONE", label: "Telefon" },
+  { value: "ID_CARD", label: "Dowód osobisty" },
+  { value: "PASSPORT", label: "Paszport" },
+  { value: "BIRTH_DATE", label: "Data urodzenia" },
+  { value: "LAND_REGISTRY", label: "Księga wieczysta" },
+  { value: "KRS", label: "KRS" },
+  { value: "VEHICLE_PLATE", label: "Nr rejestracyjny" },
+  { value: "PAYMENT_CARD", label: "Karta płatnicza" },
   { value: "CUSTOM", label: "Inne" }
 ];
 

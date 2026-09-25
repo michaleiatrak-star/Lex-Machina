@@ -12,6 +12,7 @@ import type {
   ProviderStreamParams
 } from "../src/providers/types.js";
 import { LexSkillRegistry } from "../src/registry.js";
+import { PseudonymizationVault } from "../src/privacy/pseudonymizer.js";
 import {
   SafeSessionExecutor,
   namespaceDocumentAttachmentTokens,
@@ -458,6 +459,91 @@ describe("SafeSessionExecutor", () => {
       ).toBe("PASS");
     }
   );
+
+  it("uses the case's shared key for the message and shared-key documents", async () => {
+    let captured:
+      ProviderStreamParams | undefined;
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "capture",
+      capabilities: { streaming: true, tools: true, reasoning: true, modelDiscovery: false },
+      async stream(params) {
+        captured = params;
+        return { fullText: "Gotowe." };
+      }
+    };
+    const providers = new ProviderRegistry();
+    providers.register(adapter);
+    const seed = new PseudonymizationVault();
+    seed.getOrCreate("EMAIL", "biuro@przyklad.pl");
+    seed.getOrCreate("EMAIL", "anna.nowak@przyklad.pl");
+    const executor = new SafeSessionExecutor(fixture(), new ProviderGateway(providers));
+    await executor.execute({
+      query: "Czy anna.nowak@przyklad.pl dostała pismo?",
+      privacySeed: seed.snapshot(),
+      documentAttachments: [{
+        documentId: "doc_0123456789abcdef01234567",
+        sharedKey: true,
+        chunks: [{ index: 1, pageStart: 1, pageEnd: 1, text: "Pismo wysłano na [PII:EMAIL:0002]." }]
+      }],
+      provider: "openai",
+      model: "test",
+      primarySkill: DR,
+      mode: "PRAWNIK"
+    });
+    const messages = captured?.messages.map((message) => String(message.content)).join("\n") ?? "";
+    expect(messages).toContain("Czy [PII:EMAIL:0002] dostała pismo?");
+    expect(messages).toContain("Pismo wysłano na [PII:EMAIL:0002].");
+    expect(messages).not.toContain("LMPII");
+    expect(messages).not.toContain("anna.nowak");
+  });
+
+  it("sends the placeholder key with gender to the model, never the name", async () => {
+    let captured:
+      ProviderStreamParams | undefined;
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "capture",
+      capabilities: { streaming: true, tools: true, reasoning: true, modelDiscovery: false },
+      async stream(params) {
+        captured = params;
+        return { fullText: "Gotowe." };
+      }
+    };
+    const providers = new ProviderRegistry();
+    providers.register(adapter);
+    const executor = new SafeSessionExecutor(fixture(), new ProviderGateway(providers));
+    await executor.execute({
+      query: "Przeanalizuj załączony dokument.",
+      documentAttachments: [{
+        documentId: "doc_0123456789abcdef01234567",
+        grammar: [
+          { token: "[PII:PERSON:0001]", kind: "PERSON", gender: "f" },
+          { token: "[PII:ADDRESS:0001]", kind: "ADDRESS" }
+        ],
+        totalPages: 3,
+        chunks: [{
+          index: 1,
+          pageStart: 1,
+          pageEnd: 2,
+          text: "[STRONA 1 · DIGITAL]\n[PII:PERSON:0001] zamieszkała przy [PII:ADDRESS:0001].\n[STRONA 2 · CZĘŚĆ 2/2 · OCR]\nciąg dalszy"
+        }]
+      }],
+      provider: "openai",
+      model: "test",
+      primarySkill: DR,
+      mode: "PRAWNIK"
+    });
+    expect(captured?.systemPrompt).toContain("KLUCZ SYMBOLI ZASTĘPCZYCH (HARD GATE)");
+    expect(captured?.systemPrompt).toContain("[LMPII:D01:PERSON:0001]: osoba, rodzaj żeński");
+    expect(captured?.systemPrompt).toContain("[LMPII:D01:ADDRESS:0001]: adres");
+    expect(captured?.systemPrompt).toContain("MUST append the grammatical case");
+    const context = String(captured?.messages[0]?.content);
+    expect(context).toContain("STRON: 3");
+    expect(context).toContain("=== STRONA 1/3 ===");
+    expect(context).toContain("=== STRONA 2/3 (ciąg dalszy, część 2/2) · tekst z OCR ===");
+    expect(context).not.toContain("[STRONA 1 · DIGITAL]");
+  });
 
   it("sends finalized protected chunks as untrusted document context", async () => {
     let captured:

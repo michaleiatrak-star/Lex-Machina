@@ -186,6 +186,8 @@ fn run_runtime(root: &Path) -> Result<i32, String> {
         .env("STANZA_RESOURCES_DIR", stanza)
         .env("PYTHONNOUSERSITE", "1")
         .env("PYTHONUTF8", "1")
+        // Never rewrite locked __pycache__ files of the private runtime.
+        .env("PYTHONDONTWRITEBYTECODE", "1")
         .stdin(Stdio::null())
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())

@@ -1,3 +1,17 @@
+import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
+import {
+  placeholderGrammar,
+  placeholderKeyPrompt,
+  type PlaceholderGrammar
+} from "./privacy/token-legend.js";
+import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
+import {
+  restoreWithReport,
+  type Restoration
+} from "./privacy/restoration-report.js";
+import type {
+  PersonMorphology
+} from "./privacy/person-morphology.js";
 import {
   AuditTrail,
   type AuditEvent
@@ -8,10 +22,12 @@ import {
   type ExecutionEvent
 } from "./execution-engine.js";
 import { ProviderGateway } from "./providers/gateway.js";
+import type { ExecutionStepReporter } from "./execution-steps.js";
 import type {
   NormalizedToolCall,
   NormalizedToolResult,
-  ProviderId
+  ProviderId,
+  StreamCallbacks
 } from "./providers/types.js";
 import { LexSkillRegistry } from "./registry.js";
 import {
@@ -21,6 +37,12 @@ import {
 import type {
   LegalVerificationToolFactory
 } from "./verification-tool-runtime.js";
+import type {
+  CoreLawIndex
+} from "./core-law-index.js";
+import {
+  CoreLawToolRuntime
+} from "./core-law-tool-runtime.js";
 import {
   LegalCorpusToolRuntime
 } from "./legal-corpus-tool-runtime.js";
@@ -119,16 +141,28 @@ import {
   type ModelAutoRoutingResult
 } from "./model-auto-routing.js";
 import {
+  privacyRecognizerFor
+} from "./privacy/local-llm-ner.js";
+import {
   parseSkillSelectionEnvelope
 } from "./skill-selection.js";
 
 export type SessionDocumentAttachment = {
   documentId: string;
   caseId?: string;
+  grammar?: PlaceholderGrammar[];
+  totalPages?: number;
+  // Uses the case's shared key: its tokens are the chat's tokens, not namespaced.
+  sharedKey?: boolean;
   sourceScope?:
     | "MANUAL"
     | "CASE_KNOWLEDGE"
-    | "FIRM_KNOWLEDGE";
+    | "FIRM_KNOWLEDGE"
+    | "FIRM_TEMPLATE";
+  // Shown to the model for firm templates (a filename, no case data).
+  title?: string;
+  // Picked by the user (not retrieved): sent whole or not at all.
+  selectedByUser?: boolean;
   chunks: Array<{
     index: number;
     pageStart: number;
@@ -143,6 +177,8 @@ export type SessionDocumentAttachment = {
 
 export type SessionExecutionRequest = {
   query: string;
+  // The case's shared key: names in the message get the documents' symbols.
+  privacySeed?: PseudonymizationVaultSnapshot;
   documentAttachments?: SessionDocumentAttachment[];
   provider: ProviderId;
   model: string;
@@ -156,6 +192,16 @@ export type SessionExecutionRequest = {
   };
   primarySkill: string;
   mode: "LAIK" | "PRAWNIK";
+  // Set only by the AUTO router (decision.legal === false): answer without
+  // loading legal skills, modules or legal tools.
+  conversationalOnly?: boolean;
+  // AUTO for account/API models: the model picks skills itself.
+  modelSelectsSkills?: boolean;
+  // Runtime-only (never parsed from HTTP): receives the live draft text of
+  // the model answer with the chat pseudonyms already restored.
+  onDraft?: (text: string) => void;
+  // Runtime-only: the stage of the turn and what was done in it (skills, tools).
+  onStep?: ExecutionStepReporter;
   modelContextTokens?: number;
   tokenCharsPerToken?: number;
   auxiliaryText?: string;
@@ -597,6 +643,8 @@ export type SessionExecutionResponse = {
   domainSkills?: string[];
   answer?: string;
   documentCitations?: PublicDocumentCitation[];
+  restorations?: Restoration[];
+  unresolvedTokens?: string[];
   documentCitationFreshness?: {
     result: "PASS";
     checked: number;
@@ -736,12 +784,26 @@ export function namespaceDocumentAttachmentTokens(
 
   return attachments.map(
     (attachment) => {
+      if (attachment.sharedKey) {
+        return { ...attachment, chunks: attachment.chunks.map((chunk) => ({ ...chunk })) };
+      }
       const prefix =
         prefixFor(
           attachment.documentId
         );
       return {
         ...attachment,
+        ...(attachment.grammar
+          ? {
+              grammar: attachment.grammar.map((entry) => ({
+                ...entry,
+                token: entry.token.replace(
+                  /^\[PII:/,
+                  `[LMPII:${prefix}:`
+                )
+              }))
+            }
+          : {}),
         chunks:
           attachment.chunks.map(
             (chunk) => ({
@@ -759,17 +821,35 @@ export function namespaceDocumentAttachmentTokens(
   );
 }
 
+/**
+ * Stored page headers ("[STRONA 3 · CZĘŚĆ 1/2 · OCR]") as an explicit page
+ * boundary with the page count, so a model knows how long the document is
+ * and where each page starts.
+ */
+export function markPages(text: string, totalPages?: number): string {
+  return text.replace(
+    /^\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · ([A-Z]+)\]$/gm,
+    (_header, page: string, part?: string, parts?: string, source?: string) =>
+      `=== STRONA ${page}${totalPages ? `/${totalPages}` : ""}` +
+      (part && part !== "1" ? ` (ciąg dalszy, część ${part}/${parts})` : part ? ` (część ${part}/${parts})` : "") +
+      (source === "OCR" ? " · tekst z OCR" : source === "BLANK" ? " · pusta" : "") +
+      " ==="
+  );
+}
+
 function buildDocumentContext(
   attachments: SessionDocumentAttachment[]
 ): string {
   const sections = attachments.map((attachment) => {
     const chunks = attachment.chunks.map((chunk) => {
       const sourceLabel =
-        attachment.sourceScope === "FIRM_KNOWLEDGE"
-          ? "FIRM KNOWLEDGE"
-          : attachment.sourceScope === "CASE_KNOWLEDGE"
-            ? "CASE KNOWLEDGE"
-            : "DOCUMENT";
+        attachment.sourceScope === "FIRM_TEMPLATE"
+          ? "WZÓR KANCELARII"
+          : attachment.sourceScope === "FIRM_KNOWLEDGE"
+            ? "KNOW-HOW KANCELARII"
+            : attachment.sourceScope === "CASE_KNOWLEDGE"
+              ? "CASE KNOWLEDGE"
+              : "DOCUMENT";
       const representation =
         chunk.representation ===
           "EXTRACTIVE_DIGEST"
@@ -777,14 +857,37 @@ function buildDocumentContext(
           : "";
       return [
         `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
-        chunk.text
+        markPages(chunk.text, attachment.totalPages)
       ].join("\n");
     });
-    return chunks.join("\n\n");
+    return [
+      ...(attachment.title
+        ? [`[${attachment.documentId} · PLIK: ${attachment.title}]`]
+        : []),
+      ...(attachment.totalPages
+        ? [
+            `[${attachment.documentId} · STRON: ${attachment.totalPages} · każda strona zaczyna się znacznikiem "=== STRONA n/${attachment.totalPages} ==="]`
+          ]
+        : []),
+      ...chunks
+    ].join("\n\n");
   });
 
-  return sections.join("\n\n---\n\n");
+  const firm = attachments.some(
+    (attachment) => attachment.sourceScope === "FIRM_TEMPLATE" || attachment.sourceScope === "FIRM_KNOWLEDGE"
+  );
+  return [...(firm ? [FIRM_MATERIAL_NOTE] : []), ...sections].join("\n\n---\n\n");
 }
+
+export const buildDocumentContextForTest = buildDocumentContext;
+
+export const FIRM_MATERIAL_NOTE = [
+  "# MATERIAŁY KANCELARII",
+  "Bloki oznaczone WZÓR KANCELARII i KNOW-HOW KANCELARII pochodzą z biblioteki kancelarii, nie z akt sprawy.",
+  "- Wzór: przejmij jego układ, kolejność części, styl i stałe formuły; treść merytoryczną bierz z dokumentów sprawy i wiadomości użytkownika.",
+  "- Nie przenoś do pisma danych przykładowych z wzoru (stron, sygnatur, kwot, dat, adresów); w miejsca bez danych wstaw neutralne pole w nawiasie kwadratowym, np. [Kwota], [Termin].",
+  "- Materiały kancelarii nie są dowodami ani faktami w sprawie; nie cytuj ich jako źródła faktów."
+].join("\n");
 
 function transferExecutionEvents(
   events: ExecutionEvent[],
@@ -809,6 +912,49 @@ function transferExecutionEvents(
   }
 }
 
+const DRAFT_PII_TOKEN =
+  /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
+// An incomplete token at the end of the stream is held back until complete.
+const DRAFT_PARTIAL_TOKEN_TAIL =
+  /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4}(?:\|[A-Z]{0,4})?)?)?)?)?)?$/;
+
+export function createDraftCallbacks(
+  vault: PseudonymizationVault,
+  onDraft: (text: string) => void
+): StreamCallbacks {
+  let raw = "";
+  const publish = () => {
+    const visible =
+      raw.replace(
+        DRAFT_PARTIAL_TOKEN_TAIL,
+        ""
+      );
+    onDraft(
+      visible.replace(
+        DRAFT_PII_TOKEN,
+        (token, kind: string, sequence: string, requestedCase?: string) => {
+          const base = `[PII:${kind}:${sequence}]`;
+          return vault.hasToken(base)
+            ? vault.restore(base, requestedCase ?? null).text
+            : token;
+        }
+      )
+    );
+  };
+  return {
+    onContentDelta: (text: string) => {
+      raw += text;
+      publish();
+    },
+    // A tool round starts a new model turn; the previous partial text was
+    // only a preamble to the tool call.
+    onToolCallStart: () => {
+      raw = "";
+      publish();
+    }
+  };
+}
+
 export interface SessionExecutor {
   resolveAutoRouting?(
     request: SessionExecutionRequest
@@ -829,7 +975,9 @@ export class SafeSessionExecutor implements SessionExecutor {
     private readonly finalizer = new AuditedFinalizer(),
     private readonly verificationToolFactory?: LegalVerificationToolFactory,
     private readonly chatNamedEntityRecognizer?: NamedEntityRecognizer,
-    private readonly legalFederationTools?: LegalFederationToolRuntime
+    private readonly legalFederationTools?: LegalFederationToolRuntime,
+    private readonly coreLawIndex?: CoreLawIndex,
+    private readonly personMorphology?: PersonMorphology
   ) {
     this.engine = new LexExecutionEngine(
       registry,
@@ -846,15 +994,31 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
   }
 
+  // A local primary model keeps the text on this machine, so the chat does
+  // not also wait for local-model PII detection before answering.
+  private chatRecognizerFor(
+    model: string
+  ): NamedEntityRecognizer | undefined {
+    return this.chatNamedEntityRecognizer
+      ? privacyRecognizerFor(
+          this.chatNamedEntityRecognizer,
+          !model.startsWith("local/")
+        )
+      : undefined;
+  }
+
   async resolveAutoRouting(
     request: SessionExecutionRequest
   ): Promise<ModelAutoRoutingResult> {
     const vault =
-      new PseudonymizationVault();
+      new PseudonymizationVault(request.privacySeed);
     const pseudonymizer =
       new LocalPolishPseudonymizer(
         vault,
-        this.chatNamedEntityRecognizer
+        this.chatRecognizerFor(
+          request.model
+        ),
+        this.personMorphology
       );
     let protectedQuery: string;
     try {
@@ -913,6 +1077,11 @@ export class SafeSessionExecutor implements SessionExecutor {
   async execute(
     request: SessionExecutionRequest
   ): Promise<SessionExecutionResponse> {
+    const step: ExecutionStepReporter = request.onStep ?? (() => undefined);
+    step("PREPARE", "anonimizacja wiadomości");
+    if (request.documentAttachments?.length) {
+      step("PREPARE", `pliki w kontekście: ${request.documentAttachments.length}`);
+    }
     const audit = new AuditTrail();
     audit.start({
       provider: request.provider,
@@ -921,11 +1090,14 @@ export class SafeSessionExecutor implements SessionExecutor {
     });
 
     const chatPrivacyVault =
-      new PseudonymizationVault();
+      new PseudonymizationVault(request.privacySeed);
     const chatPseudonymizer =
       new LocalPolishPseudonymizer(
         chatPrivacyVault,
-        this.chatNamedEntityRecognizer
+        this.chatRecognizerFor(
+          request.model
+        ),
+        this.personMorphology
       );
     let protectedQuery:
       string;
@@ -1010,7 +1182,13 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     const ledger = new VerificationLedger();
     const verificationTools = this.verificationToolFactory?.(ledger);
-    const corpusTools = new LegalCorpusToolRuntime(this.registry);
+    const corpusTools = new LegalCorpusToolRuntime(
+      this.registry,
+      {
+        modelSelectsSkills:
+          request.modelSelectsSkills === true
+      }
+    );
     const reportTools = new ReportBlueprintToolRuntime();
     const federationTools =
       this.legalFederationTools;
@@ -1179,8 +1357,28 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     }
 
+    const coreLawTools =
+      this.coreLawIndex
+        ? new CoreLawToolRuntime(
+            this.coreLawIndex
+          )
+        : undefined;
+    // Local 11-12B models call tools unreliably: they get the most relevant
+    // core law articles in the prompt (retrieval, not training).
+    const coreLawRag =
+      this.coreLawIndex && request.model.startsWith("local/")
+        ? coreLawRetrievalPrompt(this.coreLawIndex, protectedQuery)
+        : null;
+    // Claude account in AUTO: skills are read natively from the corpus
+    // directory, so the corpus tools are not offered; the rest go over MCP.
+    const nativeCorpus =
+      request.modelSelectsSkills === true &&
+      this.providers.nativeCorpusAccess(request.provider, request.model);
     const toolSchemas = [
-      ...corpusTools.schemas(),
+      ...(nativeCorpus ? [] : corpusTools.schemas()),
+      ...(coreLawTools
+        ? coreLawTools.schemas()
+        : []),
       ...reportTools.schemas(),
       ...(federationTools
         ? federationTools.schemas()
@@ -1188,7 +1386,10 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(verificationTools ? verificationTools.schemas() : [])
     ];
     const toolPrompt = [
-      corpusTools.systemPromptAppendix(),
+      ...(nativeCorpus ? [] : [corpusTools.systemPromptAppendix()]),
+      ...(coreLawTools
+        ? [coreLawTools.systemPromptAppendix()]
+        : []),
       reportTools.systemPromptAppendix(),
       ...(federationTools
         ? [federationTools.systemPromptAppendix()]
@@ -1201,12 +1402,75 @@ export class SafeSessionExecutor implements SessionExecutor {
         : []),
       ...(attachments.length > 0
         ? [documentCitationSystemPrompt(attachments)]
-        : [])
+        : []),
+      ...(coreLawRag ? [coreLawRag] : [])
     ].join("\n\n");
 
+    // Kind and gender of every placeholder the model will see: it inflects
+    // around them without ever seeing a name.
+    const placeholderKey = placeholderKeyPrompt([
+      ...placeholderGrammar(
+        [
+          protectedQuery,
+          protectedAuxiliaryText ?? "",
+          // Shared-key documents use the chat's own (seeded) tokens.
+          ...attachments
+            .filter((attachment) => attachment.sharedKey)
+            .flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))
+        ].join("\n"),
+        chatPrivacyVault
+      ),
+      ...attachments
+        .filter((attachment) => !attachment.sharedKey)
+        .flatMap((attachment) => attachment.grammar ?? [])
+    ]);
+
+    const draftCallbacks =
+      request.onDraft
+        ? createDraftCallbacks(
+            chatPrivacyVault,
+            request.onDraft
+          )
+        : undefined;
     const execution = await this.engine.executePolishLegalQuery({
+      onEvent: (event) => {
+        if (event.status !== "OK") return;
+        if (event.type === "route") step("ROUTING", event.target);
+        else if (event.target === "MODEL_SKILL_SELECTION") step("ROUTING", "model dobiera skille według routera v3");
+        else if (event.type === "skill_read") step("SKILLS", `skill ${event.target}`);
+        else if (event.type === "resource_read") step("SKILLS", event.target);
+        else if (event.type === "provider_start") step("MODEL", `model ${event.detail ?? event.target}`);
+      },
       query: protectedQuery,
+      ...(draftCallbacks
+        ? {
+            draftCallbacks
+          }
+        : {}),
       ...(documentContext ? { documentContext } : {}),
+      ...(placeholderKey ? { placeholderKey } : {}),
+      ...(request.conversationalOnly
+        ? {
+            conversationalOnly: true
+          }
+        : {}),
+      ...(request.modelSelectsSkills
+        ? {
+            modelSelectsSkills: true
+          }
+        : {}),
+      ...(nativeCorpus
+        ? {
+            nativeCorpus: {
+              root: this.registry.root,
+              onRead: (relativePath: string) => {
+                corpusTools.recordNativeRead(relativePath);
+                step("SKILLS", relativePath);
+              },
+              missingQualifier: () => corpusTools.missingCriminalQualifier()
+            }
+          }
+        : {}),
       provider: request.provider,
       model: request.model,
       ...(request.accountSessionKey
@@ -1278,6 +1542,14 @@ export class SafeSessionExecutor implements SessionExecutor {
               : {})
           }),
       runTools: async (calls) => {
+        for (const call of calls) {
+          if (corpusTools.handles(call.name)) {
+            const target = [call.input.skill, call.input.path].filter((part) => typeof part === "string").join("/");
+            step("SKILLS", target || call.name);
+          } else {
+            step("MODEL", `narzędzie ${call.name}`);
+          }
+        }
         const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
         const reportCalls = calls.filter((call) => reportTools.handles(call.name));
         const federationCalls = calls.filter(
@@ -1286,8 +1558,15 @@ export class SafeSessionExecutor implements SessionExecutor {
               call.name
             ) ?? false
         );
+        const coreLawCalls = calls.filter(
+          (call) =>
+            coreLawTools?.handles(
+              call.name
+            ) ?? false
+        );
         const verificationCalls = calls.filter(
           (call) =>
+            !(coreLawTools?.handles(call.name) ?? false) &&
             !corpusTools.handles(call.name) &&
             !reportTools.handles(call.name) &&
             !(federationTools?.handles(call.name) ?? false)
@@ -1296,6 +1575,13 @@ export class SafeSessionExecutor implements SessionExecutor {
         const corpusResults = corpusCalls.length > 0
           ? await corpusTools.runTools(corpusCalls)
           : [];
+        const coreLawResults =
+          coreLawTools &&
+          coreLawCalls.length > 0
+            ? await coreLawTools.runTools(
+                coreLawCalls
+              )
+            : [];
         const reportResults = reportCalls.length > 0
           ? await reportTools.runTools(reportCalls)
           : [];
@@ -1387,6 +1673,7 @@ export class SafeSessionExecutor implements SessionExecutor {
         const byId = new Map(
           [
             ...corpusResults,
+            ...coreLawResults,
             ...reportResults,
             ...federationResults,
             ...cachedVerificationResults,
@@ -1411,10 +1698,47 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     transferExecutionEvents(execution.events, audit);
 
+    const modelSelectedSkills =
+      execution.events.some(
+        (event) =>
+          event.target ===
+            "MODEL_SKILL_SELECTION" &&
+          event.status === "OK"
+      );
+    if (modelSelectedSkills) {
+      // Report what the model actually loaded (audited corpus reads).
+      const selection =
+        corpusTools.modelSkillSelection();
+      execution.loadedSkills =
+        selection.loadedSkills;
+      execution.domainSkills =
+        selection.domainSkills;
+      execution.executionSkills =
+        selection.executionSkills;
+      if (selection.primarySkill) {
+        execution.primarySkill =
+          selection.primarySkill;
+      }
+    }
+
+    for (const event of coreLawTools?.auditEvents() ?? []) {
+      audit.record(
+        event.tool === "read_core_law_article"
+          ? "resource_read"
+          : "tool_decision",
+        `core-law:${event.target}`,
+        event.decision === "ALLOW" ? "OK" : "BLOCKED",
+        {
+          tool: event.tool,
+          ...(event.detail ? event.detail : {})
+        }
+      );
+    }
+
     const corpusAudit = corpusTools.auditEvents();
     for (const event of corpusAudit) {
       audit.record(
-        event.tool === "read_legal_resource"
+        event.tool === "read_legal_resource" || event.tool === "Read"
           ? "resource_read"
           : "tool_decision",
         event.target,
@@ -1426,7 +1750,21 @@ export class SafeSessionExecutor implements SessionExecutor {
       );
     }
 
-    const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK");
+    // When the model picks skills itself, a refused read it can correct
+    // (router-v3 not read yet, a guessed file name) is guidance, not a failed
+    // turn. Path escapes and other refusals still block.
+    const correctableCorpusRefusal =
+      /^(ROUTER_V3_REQUIRED_FIRST|LEGAL_RESOURCE_NOT_FOUND|LEGAL_SKILL_NOT_FOUND|LEGAL_RESOURCE_NOT_FILE|INVALID_RESOURCE_OFFSET)/;
+    const corpusBlocked = corpusAudit.some(
+      (event) =>
+        event.decision === "BLOCK" &&
+        !(
+          modelSelectedSkills &&
+          correctableCorpusRefusal.test(
+            String(event.detail?.error ?? "")
+          )
+        )
+    );
     audit.record(
       "gate",
       "G36_LEGAL_CORPUS_RUNTIME",
@@ -1741,6 +2079,7 @@ export class SafeSessionExecutor implements SessionExecutor {
           ].join("\n")
         : processedDocumentCitations.text;
 
+    step("VERIFY", "przepisy, orzeczenia i cytaty w odpowiedzi");
     const finalization = this.finalizer.finalize({
       text: finalizationText,
       ledger,
@@ -2246,6 +2585,12 @@ export class SafeSessionExecutor implements SessionExecutor {
         status: finding.status
       }));
 
+    step("RESTORE", "symbole zastępcze → dane z lokalnego klucza");
+    // Every restored value is reported so the UI can mark it for review.
+    const restoredAnswer = restoreWithReport(
+      processedDocumentCitations.text,
+      chatPrivacyVault
+    );
     const response: SessionExecutionResponse = {
       sessionId: audit.sessionId,
       status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
@@ -2272,20 +2617,13 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...(safeToPresent
         ? {
             answer:
-              processedDocumentCitations
-                .text.replace(
-                  /\[PII:[A-Z_]+:\d{4}\]/g,
-                  (token) =>
-                    chatPrivacyVault
-                      .hasToken(
-                        token
-                      )
-                      ? chatPrivacyVault
-                          .resolveToken(
-                            token
-                          )
-                      : token
-                ),
+              restoredAnswer.text,
+            ...(restoredAnswer.restorations.length > 0
+              ? { restorations: restoredAnswer.restorations }
+              : {}),
+            ...(restoredAnswer.unresolved.length > 0
+              ? { unresolvedTokens: restoredAnswer.unresolved }
+              : {}),
             documentCitations: processedDocumentCitations.citations,
             ...(reportBlueprint
               ? {

@@ -1,3 +1,5 @@
+import type { RestorationMark } from "./workspace-client.js";
+
 export type ProviderId = "openai" | "anthropic" | "xai";
 
 export type AuthStatusResponse = {
@@ -120,6 +122,13 @@ export type PiiKind =
   | "PHONE"
   | "PERSON"
   | "ADDRESS"
+  | "ID_CARD"
+  | "PASSPORT"
+  | "KRS"
+  | "LAND_REGISTRY"
+  | "BIRTH_DATE"
+  | "VEHICLE_PLATE"
+  | "PAYMENT_CARD"
   | "CUSTOM";
 
 export type PrivacyAction =
@@ -260,8 +269,26 @@ export type StoredUploadResponse = {
     ocrPages: number;
     blankPages: number;
     chunkIndices: number[];
+    // false: processed without anonymization (plain text, no key).
+    anonymized?: boolean;
+    // On the case's shared key (one symbol per person across the case).
+    sharedKey?: boolean;
   };
 };
+
+export function joinSharedKey(
+  caseId: string,
+  documentId: string
+): Promise<AnonymizedVersion & { remapped: number }> {
+  return json(`/api/cases/${caseId}/documents/${documentId}/join-shared-key`, { method: "POST" });
+}
+
+/** Directives that keep every page as written: OCR/text only, no key. */
+export function keepAllDirectives(review: DocumentReviewResponse): PagePrivacyDirective[] {
+  return review.pages
+    .filter((page) => page.text.length > 0)
+    .map((page) => ({ page: page.page, start: 0, end: page.text.length, action: "KEEP" as const }));
+}
 
 export type CaseFilesResponse = {
   caseId: string;
@@ -382,6 +409,61 @@ export type DeanonymizationReauthorizationResponse = {
     AuthSessionInfo;
 };
 
+/** An alias used in a generated document, as it will be restored. */
+export type DocumentRestoration = {
+  alias: string;
+  kind: string;
+  case?: string;
+  text: string;
+  source: string;
+  confidence: number;
+  status: string;
+  canonical?: string;
+  gender?: "m1" | "f";
+  caseMissing?: boolean;
+  occurrences: number;
+};
+
+export type DeanonymizationPreview = {
+  text: string;
+  restorations: DocumentRestoration[];
+  marks: Array<{ start: number; end: number; alias: string }>;
+};
+
+export function previewDeanonymization(
+  grantId: string
+): Promise<DeanonymizationPreview> {
+  return json<DeanonymizationPreview>(
+    "/api/deanonymization/preview",
+    {
+      method: "POST",
+      body: JSON.stringify({ grantId })
+    }
+  );
+}
+
+/** "Zapisz formę": remember how a name inflects on this computer. */
+export async function saveNameForm(correction: {
+  canonical: string;
+  gender: "m1" | "f";
+  case: string;
+  text: string;
+}): Promise<void> {
+  const response = await fetch(`${apiBase()}/api/privacy/name-forms`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...authorizationHeaders()
+    },
+    body: JSON.stringify(correction)
+  });
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({})) as { error?: string };
+    throw new Error(payload.error || `HTTP_${response.status}`);
+  }
+}
+
 export type FinalizedDocumentResponse = {
   artifact:
     StoredCaseArtifact;
@@ -393,6 +475,7 @@ export type FinalizedDocumentResponse = {
     "PRIVACY_VAULT_KEY";
   keyBindingVerified:
     boolean;
+  restorations?: DocumentRestoration[];
   downloadTicket?: {
     ticketId: string;
     caseId: string;
@@ -442,6 +525,43 @@ export type DocumentReviewResponse = {
     kind: PiiKind;
   }>;
 };
+
+/** What reached the model for one document of a sent message. */
+export type DocumentDelivery = {
+  documentId: string;
+  title?: string;
+  sourceScope?: "MANUAL" | "CASE_KNOWLEDGE" | "FIRM_KNOWLEDGE" | "FIRM_TEMPLATE";
+  chunks: number;
+  fullChunks: number;
+  digestChunks: number;
+  status: "FULL" | "PARTIAL" | "DIGEST" | "OMITTED";
+};
+
+export type DocumentFitResponse = {
+  limit: number;
+  local: boolean;
+  count: number;
+  estimate: {
+    modelContextTokens: number;
+    budgetTokens: number;
+    neededTokens: number;
+    fits: boolean;
+    documents: Array<{ documentId: string; title?: string; tokens: number }>;
+  } | null;
+};
+
+/** Whether the picked files fit the chosen model, checked before sending. */
+export function checkDocumentFit(input: {
+  provider: ProviderId;
+  model: string;
+  attachments: DocumentAttachmentSelection[];
+  firmTemplates: string[];
+}): Promise<DocumentFitResponse> {
+  return json<DocumentFitResponse>("/api/sessions/document-fit", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+}
 
 export type DocumentAttachmentSelection = {
   caseId: string;
@@ -800,6 +920,9 @@ export type EvidenceItem = {
 
 export type SessionExecutionResponse = {
   sessionId: string;
+  // Values restored locally into the answer, for highlighting and correction.
+  restorations?: RestorationMark[];
+  unresolvedTokens?: string[];
   status: "DRAFT_PRESENTABLE" | "BLOCKED";
   provider: ProviderId;
   model: string;
@@ -847,6 +970,7 @@ export type SessionExecutionResponse = {
     omittedChunks: number;
     selectedDocuments: number;
     omittedDocuments: number;
+    documents?: DocumentDelivery[];
   };
   finalization: "PASS" | "DEGRADED" | "BLOCKED";
   blockedReferences: BlockedReference[];
@@ -1448,6 +1572,28 @@ export function getAuthMe():
   );
 }
 
+/**
+ * Tells the runtime the user is active in the window. Best effort: an expired
+ * session is detected by the regular /api/auth/me check.
+ */
+export async function reportUserActivity():
+  Promise<void> {
+  try {
+    await fetch(
+      `${apiBase()}/api/auth/activity`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          ...authorizationHeaders()
+        }
+      }
+    );
+  } catch {
+    // Offline runtime: nothing to extend.
+  }
+}
+
 export async function lockAuth():
   Promise<void> {
   const headers =
@@ -1847,6 +1993,7 @@ export function generateLegalDocument(
     templateId?: string;
     attachments?:
       DocumentAttachmentSelection[];
+    firmTemplates?: string[];
     filename?: string;
   }
 ): Promise<
@@ -1948,7 +2095,8 @@ export function reauthorizeDeanonymization(
 
 export function finalizeDeanonymization(
   grantId: string,
-  filename?: string
+  filename?: string,
+  overrides?: Record<string, string>
 ): Promise<
   FinalizedDocumentResponse
 > {
@@ -1965,6 +2113,10 @@ export function finalizeDeanonymization(
             ? {
                 filename
               }
+            : {}),
+          ...(overrides &&
+          Object.keys(overrides).length > 0
+            ? { overrides }
             : {})
         })
     }
@@ -2382,20 +2534,67 @@ export function executeSession(input: {
   auxiliaryText?: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
+  // Firm templates (DOCX/ODT) sent as text with the message.
+  firmTemplates?: string[];
   knowledge?: {
     caseId?: string;
     includeCase?: boolean;
     includeFirm?: boolean;
     limit?: number;
   };
-}): Promise<SessionExecutionResponse> {
+}, executionId?: string): Promise<SessionExecutionResponse> {
   return json<SessionExecutionResponse>("/api/sessions/execute", {
     method: "POST",
+    ...(executionId
+      ? {
+          headers: {
+            "X-Lex-Execution-Id":
+              executionId
+          }
+        }
+      : {}),
     body: JSON.stringify({
       ...input,
       mode: input.mode ?? "PRAWNIK"
     })
   });
+}
+
+export type ExecutionStepsSnapshot = {
+  current: number;
+  total: number;
+  phases: Array<{
+    key: string;
+    label: string;
+    status: "done" | "active" | "pending";
+    details: string[];
+  }>;
+};
+
+export type SessionExecutionProgress = {
+  text: string;
+  updatedAt: string;
+  // Stages of the turn: done, running, pending, with skills and tools used.
+  steps?: ExecutionStepsSnapshot;
+};
+
+/** Live draft of a running execution (null when not available). */
+export async function getSessionProgress(
+  executionId: string
+): Promise<SessionExecutionProgress | null> {
+  try {
+    return await json<SessionExecutionProgress>(
+      `/api/sessions/progress/${encodeURIComponent(executionId)}`
+    );
+  } catch (error) {
+    if (
+      error instanceof ApiError &&
+      error.status === 404
+    ) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 function uploadMediaType(file: File): string {
@@ -2516,30 +2715,165 @@ export async function reviewDocument(
 export async function processStoredCaseFile(
   caseId: string,
   uploadId: string,
-  fileId?: string
+  fileId?: string,
+  progressId?: string,
+  // "z lokalnym AI": the running local model also checks the document.
+  options?: { localAi?: boolean }
 ): Promise<DocumentReviewResponse> {
   const path = fileId
     ? `/api/cases/${caseId}/files/${uploadId}/members/${fileId}/process`
     : `/api/cases/${caseId}/files/${uploadId}/process`;
   return json<DocumentReviewResponse>(
     path,
-    { method: "POST" }
+    {
+      method: "POST",
+      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
+      ...(options?.localAi ? { body: JSON.stringify({ localAi: true }) } : {})
+    }
   );
 }
 
 export function finalizeDocument(
   caseId: string,
   documentId: string,
-  directives: PagePrivacyDirective[]
+  directives: PagePrivacyDirective[],
+  progressId?: string
 ): Promise<DocumentIngestionResponse> {
   return json<DocumentIngestionResponse>(
     `/api/documents/${documentId}/finalize`,
     {
       method: "POST",
+      ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
       body: JSON.stringify({
         caseId,
         directives
       })
     }
   );
+}
+
+export type ProcessingProgress = {
+  stage: "READING" | "OCR" | "DETECTING" | "AI_CHECK" | "PSEUDONYMIZING" | "SAVING";
+  done?: number;
+  total?: number;
+  // AI_CHECK: the words the local model is checking now.
+  item?: string;
+  updatedAt: string;
+};
+
+export function newProgressId(): string {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+export async function getProcessingProgress(
+  caseId: string,
+  progressId: string
+): Promise<ProcessingProgress | null> {
+  const body = await json<{ progress: ProcessingProgress | null }>(
+    `/api/cases/${caseId}/progress/${progressId}`
+  );
+  return body.progress;
+}
+
+export type PrivacyKeyEntry = {
+  token: string;
+  kind: string;
+  value: string;
+  forms?: Array<{ case: string; text: string }>;
+  gender?: "m" | "f" | "unknown";
+  occurrences: number;
+};
+
+export type AnonymizedVersion = {
+  documentId: string;
+  totalPages: number;
+  chunks: Array<{ index: number; pageStart: number; pageEnd: number; text: string }>;
+  highlighted: Array<{
+    index: number;
+    pageStart: number;
+    pageEnd: number;
+    text: string;
+    marks: Array<{ start: number; end: number; token: string; kind: string }>;
+  }>;
+  entries: PrivacyKeyEntry[];
+};
+
+export type CaseArtifact = {
+  artifactId: string;
+  filename: string;
+  mediaType: string;
+  bytes: number;
+  createdAt: string;
+  sensitivity: "PROTECTED" | "CLEAR_PII";
+  sourceArtifactId?: string;
+};
+
+export async function listCaseArtifacts(caseId: string): Promise<CaseArtifact[]> {
+  return (await json<{ artifacts: CaseArtifact[] }>(`/api/cases/${caseId}/workspace/artifacts`)).artifacts;
+}
+
+export function deanonymizeUpload(
+  caseId: string,
+  uploadId: string,
+  documentId: string
+): Promise<{ upload: StoredUploadResponse; restored: number; unresolved: string[] }> {
+  return json(`/api/cases/${caseId}/files/${uploadId}/deanonymize`, {
+    method: "POST",
+    body: JSON.stringify({ documentId })
+  });
+}
+
+function anonymizedPath(caseId: string, documentId: string, action = ""): string {
+  return `/api/cases/${caseId}/documents/${documentId}/anonymized${action ? `/${action}` : ""}`;
+}
+
+export function getAnonymizedVersion(caseId: string, documentId: string): Promise<AnonymizedVersion> {
+  return json<AnonymizedVersion>(anonymizedPath(caseId, documentId));
+}
+
+export function addToAnonymization(
+  caseId: string,
+  documentId: string,
+  text: string,
+  kind: PiiKind
+): Promise<AnonymizedVersion & { token: string; replaced: number }> {
+  return json(anonymizedPath(caseId, documentId, "protect"), {
+    method: "POST",
+    body: JSON.stringify({ text, kind })
+  });
+}
+
+export function removeFromAnonymization(
+  caseId: string,
+  documentId: string,
+  token: string
+): Promise<AnonymizedVersion & { restored: number }> {
+  return json(anonymizedPath(caseId, documentId, "unprotect"), {
+    method: "POST",
+    body: JSON.stringify({ token })
+  });
+}
+
+export function updateAnonymizationForms(
+  caseId: string,
+  documentId: string,
+  token: string,
+  forms: Record<string, string>
+): Promise<AnonymizedVersion> {
+  return json(anonymizedPath(caseId, documentId, "forms"), {
+    method: "POST",
+    body: JSON.stringify({ token, forms })
+  });
+}
+
+export async function getPrivacyKey(
+  caseId: string,
+  documentId: string
+): Promise<PrivacyKeyEntry[]> {
+  const body = await json<{ entries: PrivacyKeyEntry[] }>(
+    `/api/cases/${caseId}/documents/${documentId}/privacy-key`
+  );
+  return body.entries;
 }

@@ -1,52 +1,52 @@
-function digits(value) {
-    return value.replace(/\D/g, "");
+import { personPart } from "./generic-words.js";
+import { detectIdentifiers } from "./identifiers.js";
+import { PERSON_CASES } from "./person-morphology.js";
+/** [PII:PERSON:0001] or, with the grammatical case a model asked for, [PII:PERSON:0001|INS]. */
+export const PII_TOKEN_WITH_CASE = /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
+function isShouting(text) {
+    return text === text.toLocaleUpperCase("pl") && /\p{L}{2}/u.test(text);
 }
-function validPesel(value) {
-    const raw = digits(value);
-    if (!/^\d{11}$/.test(raw))
-        return false;
-    const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
-    const sum = weights.reduce((acc, weight, index) => acc + weight * Number(raw[index]), 0);
-    return (10 - (sum % 10)) % 10 === Number(raw[10]);
+function titleCase(text) {
+    return text
+        .toLocaleLowerCase("pl")
+        .replace(/(^|[\s\-'’])(\p{L})/gu, (_match, lead, letter) => lead + letter.toLocaleUpperCase("pl"));
 }
-function validNip(value) {
-    const raw = digits(value);
-    if (!/^\d{10}$/.test(raw))
-        return false;
-    const weights = [6, 5, 7, 2, 3, 4, 5, 6, 7];
-    const sum = weights.reduce((acc, weight, index) => acc + weight * Number(raw[index]), 0);
-    return sum % 11 === Number(raw[9]);
+/**
+ * A name read from an all-caps heading ("JAN KOWALSKI") is restored in normal
+ * spelling inside sentences; abbreviations of addresses (ul., al.) stay lower.
+ */
+function calmEntity(entity) {
+    if (!isShouting(entity.canonical))
+        return entity;
+    const calm = (text) => titleCase(text).replace(/\b(Ul|Al|Pl|Os|Ulica|Ulicy|Ulicę|Ulicą|Ulico|Aleja|Alei|Aleję|Aleją|Alejo|Plac|Placu|Placem|Osiedle|Osiedla|Osiedlu|Osiedlem)\b/gu, (word) => word.toLocaleLowerCase("pl"));
+    return {
+        ...entity,
+        canonical: calm(entity.canonical),
+        forms: Object.fromEntries(Object.entries(entity.forms).map(([key, form]) => [key, { ...form, text: calm(form.text) }]))
+    };
 }
-function collectRegex(text, regex, kind, validate) {
-    const spans = [];
-    for (const match of text.matchAll(regex)) {
-        const value = match[0];
-        const start = match.index;
-        if (typeof start !== "number" ||
-            !value ||
-            (validate && !validate(value))) {
-            continue;
-        }
-        spans.push({
-            start,
-            end: start + value.length,
-            kind,
-            value,
-            confidence: 1,
-            source: "AUTO"
-        });
-    }
-    return spans;
+// Persons and addresses with a paradigm: one token per canonical entity.
+const ENTITY_KINDS = new Set(["PERSON", "ADDRESS"]);
+function personEntityKey(entity, kind = "PERSON") {
+    return `${kind}\u0000entity\u0000${entity.canonical.toLocaleLowerCase("pl")}\u0000${entity.gender}`;
 }
 const PRIORITY = {
     PESEL: 100,
+    PAYMENT_CARD: 99,
+    ID_CARD: 98,
+    PASSPORT: 97,
+    LAND_REGISTRY: 96,
     NIP: 95,
     REGON: 90,
     IBAN: 85,
     EMAIL: 80,
     PHONE: 70,
+    // A structural address wins over a name inside it ("ul. Jana Kowalskiego 5").
+    ADDRESS: 65,
     PERSON: 60,
-    ADDRESS: 55,
+    BIRTH_DATE: 54,
+    VEHICLE_PLATE: 53,
+    KRS: 52,
     CUSTOM: 50
 };
 function overlaps(a, b) {
@@ -101,6 +101,9 @@ export class PseudonymizationVault {
     keyToToken = new Map();
     counters = new Map();
     tokenMetadata = new Map();
+    tokenEntities = new Map();
+    // Every surface mapped to a token in this session (for entity merging).
+    tokenSurfaces = new Map();
     constructor(snapshot) {
         if (snapshot) {
             this.hydrate(snapshot);
@@ -142,25 +145,196 @@ export class PseudonymizationVault {
                 kind: item.kind,
                 createdAt: item.createdAt
             });
+            if (item.entity) {
+                this.tokenEntities.set(item.token, item.entity);
+                this.keyToToken.set(personEntityKey(item.entity, item.kind), item.token);
+            }
         }
     }
-    getOrCreate(kind, value) {
+    getOrCreate(kind, value, entity) {
         const key = `${kind}\u0000${value}`;
         const existing = this.keyToToken.get(key);
         if (existing) {
             return existing;
+        }
+        // One person, one token: "Jana Kowalskiego" and "Janem Kowalskim" are the
+        // same Jan Kowalski.
+        const entityKey = ENTITY_KINDS.has(kind) && entity
+            ? personEntityKey(entity, kind)
+            : null;
+        const sameEntity = entityKey
+            ? this.keyToToken.get(entityKey) ?? this.overlappingEntityToken(kind, entity, value)
+            : undefined;
+        if (sameEntity) {
+            this.keyToToken.set(key, sameEntity);
+            if (entityKey)
+                this.keyToToken.set(entityKey, sameEntity);
+            // The document's own nominative decides the paradigm: "Martyna Jurga"
+            // wins over "Martyna Jurda" read from "Martynie Jurdze".
+            this.tokenSurfaces.get(sameEntity)?.add(value);
+            const current = this.tokenEntities.get(sameEntity);
+            const nominative = entity &&
+                current &&
+                value.toLocaleLowerCase("pl") === entity.canonical.toLocaleLowerCase("pl") &&
+                current.canonical.toLocaleLowerCase("pl") !== entity.canonical.toLocaleLowerCase("pl") &&
+                this.keyToToken.get(`${kind}\u0000${current.canonical}`) !== sameEntity;
+            // An unambiguous reading replaces an ambiguous one, and a normally
+            // written name replaces one read from an all-caps heading.
+            const clearer = entity && current && current.status !== "ok" && entity.status === "ok";
+            const calmer = entity && current && isShouting(current.canonical) && !isShouting(entity.canonical);
+            if (entity && (nominative || clearer || calmer)) {
+                this.tokenEntities.set(sameEntity, calmEntity(entity));
+            }
+            return sameEntity;
         }
         const next = (this.counters.get(kind) ?? 0) + 1;
         this.counters.set(kind, next);
         const token = `[PII:${kind}:${String(next).padStart(4, "0")}]`;
         this.keyToToken.set(key, token);
         this.tokenToValue.set(token, value);
+        this.tokenSurfaces.set(token, new Set([value]));
         this.tokenMetadata.set(token, {
             kind,
             createdAt: new Date()
                 .toISOString()
         });
+        if (entity && entityKey) {
+            this.tokenEntities.set(token, calmEntity(entity));
+            this.keyToToken.set(entityKey, token);
+        }
         return token;
+    }
+    /**
+     * Two analyses of one person can reach different lemmas (Malek from
+     * "Daniel Malek", Malc from "Danielem Malkiem"); when two paradigms share at
+     * a case form they are the same entity.
+     */
+    overlappingEntityToken(kind, entity, value) {
+        const lower = (text) => text.toLocaleLowerCase("pl");
+        const forms = new Set(Object.values(entity.forms).map((form) => lower(form.text)));
+        for (const [token, other] of this.tokenEntities) {
+            if (this.tokenMetadata.get(token)?.kind !== kind)
+                continue;
+            const otherForms = new Set(Object.values(other.forms).map((form) => lower(form.text)));
+            // The mention is one of the forms of a known entity, or a known mention
+            // is one of this entity's forms - whatever gender either analysis chose
+            // for an ambiguous form ("Martynie Jurdze").
+            if (otherForms.has(lower(value)))
+                return token;
+            const surfaces = this.tokenSurfaces.get(token);
+            if (surfaces && [...surfaces].some((surface) => forms.has(lower(surface))))
+                return token;
+            if (other.gender === entity.gender && [...otherForms].some((text) => forms.has(text)))
+                return token;
+        }
+        return undefined;
+    }
+    entity(token) {
+        return this.tokenEntities.get(token);
+    }
+    /**
+     * Value for a token in a model's output. A person token with a case
+     * ([PII:PERSON:0001|INS]) gets that inflected form; a bare person token gets
+     * the nominative. Other kinds return the stored value.
+     */
+    restore(token, requestedCase) {
+        const value = this.tokenToValue.get(token);
+        const metadata = this.tokenMetadata.get(token);
+        if (value === undefined || !metadata) {
+            throw new Error(`Unknown pseudonymization token: ${token}`);
+        }
+        const entity = this.tokenEntities.get(token);
+        const validCase = requestedCase &&
+            PERSON_CASES.includes(requestedCase)
+            ? requestedCase
+            : null;
+        if (!entity) {
+            return {
+                token,
+                requestedCase: validCase,
+                text: value,
+                kind: metadata.kind,
+                source: "stored",
+                confidence: 1,
+                status: metadata.kind === "PERSON" && requestedCase
+                    ? "no_forms"
+                    : "ok"
+            };
+        }
+        const form = entity.forms[validCase ?? "NOM"];
+        return {
+            token,
+            requestedCase: validCase,
+            text: form.text,
+            kind: metadata.kind,
+            source: form.source,
+            confidence: form.confidence,
+            status: requestedCase && !validCase
+                ? "invalid_case"
+                : "ok"
+        };
+    }
+    /**
+     * Every known written form of every person in this vault: the surfaces
+     * found so far and, with the morphology engine, all seven cases.
+     */
+    /** Drops a token and everything that maps to it (the user un-anonymized it). */
+    remove(token) {
+        if (!this.tokenToValue.has(token))
+            return false;
+        this.tokenToValue.delete(token);
+        this.tokenMetadata.delete(token);
+        this.tokenEntities.delete(token);
+        this.tokenSurfaces.delete(token);
+        for (const [key, value] of [...this.keyToToken]) {
+            if (value === token)
+                this.keyToToken.delete(key);
+        }
+        return true;
+    }
+    /**
+     * Case forms corrected by the user: each given form becomes a manual,
+     * certain form; the nominative also becomes the entity's canonical name.
+     */
+    updateForms(token, forms) {
+        const entity = this.tokenEntities.get(token);
+        if (!entity)
+            throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+        const next = {
+            ...entity,
+            forms: { ...entity.forms },
+            warnings: [...entity.warnings]
+        };
+        for (const personCase of PERSON_CASES) {
+            const text = forms[personCase]?.trim();
+            if (!text)
+                continue;
+            next.forms[personCase] = { text, source: "manual", confidence: 1 };
+        }
+        next.canonical = next.forms.NOM.text;
+        next.status = "ok";
+        this.tokenEntities.set(token, next);
+        this.keyToToken.set(`${this.tokenMetadata.get(token).kind}\u0000${next.canonical}`, token);
+        return next;
+    }
+    knownEntityForms() {
+        const forms = new Map();
+        for (const [token, value] of this.tokenToValue) {
+            const kind = this.tokenMetadata.get(token)?.kind;
+            if (!kind || !ENTITY_KINDS.has(kind))
+                continue;
+            const entity = this.tokenEntities.get(token);
+            forms.set(value, entity ? { kind, entity } : { kind });
+            if (entity) {
+                for (const form of Object.values(entity.forms)) {
+                    if (!forms.has(form.text))
+                        forms.set(form.text, { kind, entity });
+                }
+            }
+        }
+        return [...forms]
+            .filter(([text]) => text.trim().length >= 4)
+            .map(([text, item]) => ({ text, ...item }));
     }
     hasToken(token) {
         return this.tokenToValue
@@ -186,11 +360,15 @@ export class PseudonymizationVault {
             if (!metadata) {
                 throw new Error("PRIVACY_VAULT_METADATA_MISSING");
             }
+            const entity = this.tokenEntities.get(token);
             return {
                 token,
                 kind: metadata.kind,
                 value,
-                createdAt: metadata.createdAt
+                createdAt: metadata.createdAt,
+                ...(entity
+                    ? { entity }
+                    : {})
             };
         })
             .sort((a, b) => a.token.localeCompare(b.token, "en"));
@@ -200,7 +378,7 @@ export class PseudonymizationVault {
         };
     }
     deanonymize(text) {
-        return text.replace(/\[PII:[A-Z_]+:\d{4}\]/g, (token) => this.resolveToken(token));
+        return text.replace(PII_TOKEN_WITH_CASE, (_match, kind, sequence, requestedCase) => this.restore(`[PII:${kind}:${sequence}]`, requestedCase ?? null).text);
     }
     get size() {
         return this.tokenToValue
@@ -210,9 +388,11 @@ export class PseudonymizationVault {
 export class LocalPolishPseudonymizer {
     vault;
     namedEntities;
-    constructor(vault, namedEntities) {
+    morphology;
+    constructor(vault, namedEntities, morphology) {
         this.vault = vault;
         this.namedEntities = namedEntities;
+        this.morphology = morphology;
     }
     async pseudonymize(text, directives = []) {
         const manual = normalizeDirectives(text, directives);
@@ -233,18 +413,32 @@ export class LocalPolishPseudonymizer {
             source: "USER",
             ...(item.label ? { label: item.label } : {})
         }));
-        const autoSpans = [
-            ...collectRegex(text, /\b\d{11}\b/g, "PESEL", validPesel),
-            ...collectRegex(text, /\b\d{10}\b/g, "NIP", validNip),
-            ...collectRegex(text, /\b(?:\d{9}|\d{14})\b/g, "REGON"),
-            ...collectRegex(text, /\bPL(?:[\s-]?\d){26}\b/gi, "IBAN"),
-            ...collectRegex(text, /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, "EMAIL"),
-            ...collectRegex(text, /(?:\+48[\s-]?)?\d{3}[\s-]\d{3}[\s-]\d{3}\b/g, "PHONE")
-        ];
+        const autoSpans = detectIdentifiers(text);
+        // A person found once is protected everywhere: mentions the recognizer
+        // missed (another page, another case form) are matched by known forms.
+        const propagatedEntities = new Map();
+        for (const form of this.vault.knownEntityForms()) {
+            const escaped = form.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            for (const match of text.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, "gu"))) {
+                autoSpans.push({
+                    start: match.index,
+                    end: match.index + match[0].length,
+                    kind: form.kind,
+                    value: match[0],
+                    confidence: 1,
+                    source: "AUTO"
+                });
+                if (form.entity)
+                    propagatedEntities.set(`${form.kind}\u0000${match[0]}`, form.entity);
+            }
+        }
         if (this.namedEntities) {
             const named = await this.namedEntities.recognize(text);
-            for (const span of named) {
-                if (text.slice(span.start, span.end) === span.value) {
+            for (const found of named) {
+                // "Bank", "Rada Gminy": an institution; "Najemca Jan Kowalski": the name only.
+                const span = found.kind === "PERSON" ? personPart(text, found) : found;
+                if (span &&
+                    text.slice(span.start, span.end) === span.value) {
                     autoSpans.push({
                         ...span,
                         source: "AUTO"
@@ -261,9 +455,45 @@ export class LocalPolishPseudonymizer {
         ]);
         let output = text;
         const publicFindings = [];
+        // Canonical identity and paradigm of every person mention. Without the
+        // morphology engine tokens fall back to exact-surface identity.
+        // Canonical identity and paradigm of every person and address mention,
+        // keyed by kind and surface. Without the morphology engine tokens fall back
+        // to exact-surface identity.
+        const entities = new Map(propagatedEntities);
+        const analyse = async (kind, run) => {
+            if (!run)
+                return;
+            const surfaces = [
+                ...new Set(findings
+                    .filter((finding) => finding.kind === kind)
+                    .map((finding) => finding.value)
+                    .filter((value) => !entities.has(`${kind}\u0000${value}`)))
+            ];
+            if (surfaces.length === 0)
+                return;
+            try {
+                const analysed = await run(surfaces);
+                surfaces.forEach((surface, index) => {
+                    const entity = analysed[index];
+                    if (entity)
+                        entities.set(`${kind}\u0000${surface}`, entity);
+                });
+            }
+            catch (error) {
+                process.stderr.write(`${kind}_MORPHOLOGY_DEGRADED:${error instanceof Error ? error.message : String(error)}\n`);
+            }
+        };
+        if (this.morphology) {
+            const morphology = this.morphology;
+            await analyse("PERSON", (surfaces) => morphology.analyze(surfaces));
+            await analyse("ADDRESS", morphology.analyzeAddresses
+                ? (surfaces) => morphology.analyzeAddresses(surfaces)
+                : undefined);
+        }
         for (let index = findings.length - 1; index >= 0; index -= 1) {
             const finding = findings[index];
-            const token = this.vault.getOrCreate(finding.kind, finding.value);
+            const token = this.vault.getOrCreate(finding.kind, finding.value, entities.get(`${finding.kind}\u0000${finding.value}`));
             output =
                 output.slice(0, finding.start) +
                     token +

@@ -1,5 +1,9 @@
 param(
-  [string]$Configuration = "release"
+  [string]$Configuration = "release",
+  # The standalone offline installer reuses this thin payload; its NSIS hook
+  # runs bootstrap\windows-offline-bundle-install.ps1 when the offline runtime
+  # zip sits beside the installer. The online installer must not carry them.
+  [switch]$IncludeOfflineHelpers
 )
 
 $ErrorActionPreference = "Stop"
@@ -74,6 +78,15 @@ foreach ($file in @(
 )) {
   Copy-Item (Join-Path $installer $file) (Join-Path $bootstrap $file)
 }
+$offlineHelpers = @(
+  "windows-offline-bundle-install.ps1",
+  "extract-offline-zip.ps1"
+)
+if ($IncludeOfflineHelpers) {
+  foreach ($file in $offlineHelpers) {
+    Copy-Item (Join-Path $installer $file) (Join-Path $bootstrap $file)
+  }
+}
 
 Write-Host "[3/4] Build native runtime sidecar"
 Push-Location $desktop
@@ -112,14 +125,23 @@ foreach ($required in @(
   }
 }
 
-foreach ($forbidden in @(
+$forbiddenComponents = @(
   "app\node_modules\.bin\codex.cmd",
   "app\node_modules\.bin\claude.cmd",
   "app\node_modules\@openai\codex",
-  "app\node_modules\@anthropic-ai\claude-code",
-  "bootstrap\windows-offline-bundle-install.ps1",
-  "bootstrap\extract-offline-zip.ps1"
-)) {
+  "app\node_modules\@anthropic-ai\claude-code"
+)
+$offlineHelperPaths = $offlineHelpers | ForEach-Object { "bootstrap\$_" }
+if ($IncludeOfflineHelpers) {
+  foreach ($required in $offlineHelperPaths) {
+    if (-not (Test-Path -LiteralPath (Join-Path $payload $required) -PathType Leaf)) {
+      throw "OFFLINE_PAYLOAD_REQUIRED_FILE_MISSING:$required"
+    }
+  }
+} else {
+  $forbiddenComponents += $offlineHelperPaths
+}
+foreach ($forbidden in $forbiddenComponents) {
   if (Test-Path -LiteralPath (Join-Path $payload $forbidden)) {
     throw "ONLINE_PAYLOAD_FORBIDDEN_OPTIONAL_COMPONENT_PRESENT:$forbidden"
   }

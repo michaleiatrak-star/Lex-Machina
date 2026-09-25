@@ -13,6 +13,7 @@ import type {
 import {
   appendCaseThreadMessage,
   getCaseThread,
+  type RestorationMark,
   type WorkspaceDocumentCitation,
   type WorkspaceThreadMessage
 } from "./workspace-client.js";
@@ -26,6 +27,7 @@ export type CaseChatMessage = {
     AuxiliarySourceItem[];
   meta?: string;
   documentCitations?: WorkspaceDocumentCitation[];
+  restorations?: RestorationMark[];
 };
 
 function persistedMessageId(id: string): string {
@@ -46,6 +48,9 @@ function fromStored(message: WorkspaceThreadMessage): CaseChatMessage {
     ...(message.meta ? { meta: message.meta } : {}),
     ...(message.documentCitations?.length
       ? { documentCitations: message.documentCitations }
+      : {}),
+    ...(message.restorations?.length
+      ? { restorations: message.restorations }
       : {})
   };
 }
@@ -59,6 +64,9 @@ function toStored(message: CaseChatMessage): WorkspaceThreadMessage {
     ...(message.meta ? { meta: message.meta } : {}),
     ...(message.documentCitations?.length
       ? { documentCitations: message.documentCitations }
+      : {}),
+    ...(message.restorations?.length
+      ? { restorations: message.restorations }
       : {})
   };
 }
@@ -69,6 +77,8 @@ export function useCaseThread(
 ): {
   messages: CaseChatMessage[];
   setMessages: Dispatch<SetStateAction<CaseChatMessage[]>>;
+  // Replaces a stored message in place (e.g. a corrected restored name).
+  updateMessage: (message: CaseChatMessage) => Promise<void>;
   loading: boolean;
   loadedCaseId: string;
   error: string;
@@ -145,9 +155,23 @@ export function useCaseThread(
     [caseId, loadedCaseId]
   );
 
+  const updateMessage = useCallback(
+    async (message: CaseChatMessage) => {
+      const next = messagesRef.current.map((item) =>
+        item.id === message.id ? message : item
+      );
+      messagesRef.current = next;
+      setLocalMessages(next);
+      if (!caseId || loadedCaseId !== caseId || !/^message_[a-f0-9]{16,64}$/.test(message.id)) return;
+      await appendCaseThreadMessage(caseId, toStored(message));
+    },
+    [caseId, loadedCaseId]
+  );
+
   return {
     messages,
     setMessages,
+    updateMessage,
     loading: Boolean(caseId && loadedCaseId !== caseId) || loading,
     loadedCaseId,
     error

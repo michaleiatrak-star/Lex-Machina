@@ -190,15 +190,80 @@ try {
   }
   $selfTestLog = Join-Path $runtime "bootstrap\offline-payload-selftest.log"
   Remove-Item -LiteralPath $selfTestLog -Force -ErrorAction SilentlyContinue
+  $selfTestErrLog = $selfTestLog + ".stderr"
+  Remove-Item -LiteralPath $selfTestErrLog -Force -ErrorAction SilentlyContinue
   try {
-    & $selfTest -PayloadRoot $runtime *>&1 |
-      Tee-Object -FilePath $selfTestLog |
-      Out-Host
-    if ($LASTEXITCODE -ne 0) {
-      throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$LASTEXITCODE"
+    # Run the self-test as a separate process with file redirection. Piping
+    # it through *>&1 turned harmless native stderr lines (e.g. PaddleOCR
+    # UserWarning) into terminating errors under Windows PowerShell 5.1.
+    $selfTestShell = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+    # A parent PowerShell 7 exports its own PSModulePath; Windows PowerShell
+    # 5.1 inheriting it cannot autoload built-in cmdlets such as Get-FileHash.
+    $savedModulePath = $env:PSModulePath
+    $env:PSModulePath = @(
+      (Join-Path $env:ProgramFiles "WindowsPowerShell\Modules"),
+      (Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\Modules")
+    ) -join ";"
+    try {
+    $selfTestProcess = Start-Process `
+      -FilePath $selfTestShell `
+      -ArgumentList @(
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy", "Bypass",
+        "-File", ('"' + $selfTest + '"'),
+        "-PayloadRoot", ('"' + $runtime + '"')
+      ) `
+      -RedirectStandardOutput $selfTestLog `
+      -RedirectStandardError $selfTestErrLog `
+      -NoNewWindow `
+      -PassThru
+    } finally {
+      $env:PSModulePath = $savedModulePath
+    }
+    # Reading Handle keeps ExitCode available after WaitForExit.
+    $null = $selfTestProcess.Handle
+    # A hung stage must fail with its log, not stall the whole install.
+    if (-not $selfTestProcess.WaitForExit(45 * 60 * 1000)) {
+      Add-Content -LiteralPath $selfTestLog -Value "SELFTEST_TIMEOUT_45_MIN" -Encoding UTF8
+      $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+      Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+        try {
+          if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_TIMEOUT_PROCESS:" + $_.ProcessName + ":" + $_.Id) -Encoding UTF8
+            Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+          }
+        } catch {}
+      }
+      Stop-Process -Id $selfTestProcess.Id -Force -ErrorAction SilentlyContinue
+      throw "OFFLINE_BUNDLE_SELFTEST_TIMEOUT"
+    }
+    $selfTestProcess.Refresh()
+    # Nothing started by the self-test may outlive it (it would hold the logs).
+    $runtimePrefix = $runtime.TrimEnd([char]92, [char]47) + [IO.Path]::DirectorySeparatorChar
+    Get-Process -ErrorAction SilentlyContinue | ForEach-Object {
+      try {
+        if ($_.Path -and $_.Path.StartsWith($runtimePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+          Write-Host "Self-test leftover stopped: $($_.ProcessName) pid=$($_.Id)"
+          Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue
+        }
+      } catch {}
+    }
+    Start-Sleep -Milliseconds 500
+    if (Test-Path -LiteralPath $selfTestErrLog -PathType Leaf) {
+      try {
+        Get-Content -LiteralPath $selfTestErrLog -ErrorAction Stop |
+          Add-Content -LiteralPath $selfTestLog -Encoding UTF8 -ErrorAction Stop
+      } catch {
+        Write-Host "Self-test stderr not merged: $($_.Exception.Message)"
+      }
+    }
+    Get-Content -LiteralPath $selfTestLog -ErrorAction SilentlyContinue | Out-Host
+    if ($selfTestProcess.ExitCode -ne 0) {
+      throw "OFFLINE_BUNDLE_SELFTEST_EXIT:$($selfTestProcess.ExitCode)"
     }
   } catch {
-    Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8
+    Add-Content -LiteralPath $selfTestLog -Value ("SELFTEST_EXCEPTION:" + $_.Exception.Message) -Encoding UTF8 -ErrorAction SilentlyContinue
     Write-Host "OFFLINE_BUNDLE_SELFTEST_LOG_TAIL"
     Get-Content -LiteralPath $selfTestLog -Tail 120 -ErrorAction SilentlyContinue | Out-Host
     throw "OFFLINE_BUNDLE_SELFTEST_FAILED:$($_.Exception.Message)"

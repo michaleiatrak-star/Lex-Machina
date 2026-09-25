@@ -10,6 +10,8 @@ import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
 import { DocumentCitationContent } from "./DocumentCitationContent.js";
 import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
 import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
+import { FirmFilePicker } from "./FirmFilePicker.js";
+import { pickKey, type FilePick } from "./file-pick-tree.js";
 import { WorkspaceManager } from "./WorkspaceManager.js";
 import { ProcessPleadingWorkflowPanel } from "./ProcessPleadingWorkflowPanel.js";
 import {
@@ -26,6 +28,9 @@ import {
   downloadGeneratedArtifact,
   downloadSensitiveArtifact,
   executeSession,
+  checkDocumentFit,
+  getFirmKnowledgeWorkspace,
+  getSessionProgress,
   finalizeDeanonymization,
   generateLegalDocument,
   getHealth,
@@ -36,13 +41,18 @@ import {
   getProviderStatus,
   getRoutes,
   isDesktopShell,
+  finalizeDocument as finalizeCaseDocument,
+  keepAllDirectives,
   listCaseFiles,
+  processStoredCaseFile,
   listCaseSchedule,
   listCases,
   loginProviderAccount,
   provisionLocalModel,
   repairLocalModel,
   reauthorizeDeanonymization,
+  previewDeanonymization,
+  saveNameForm,
   renameCase,
   setClaudeOAuthToken,
   setModelRoutingPreferences,
@@ -54,12 +64,16 @@ import {
   type CaseScheduleEvent,
   type CaseScheduleKind,
   type DocumentAttachmentSelection,
+  type DocumentDelivery,
+  type DocumentFitResponse,
+  type ExecutionStepsSnapshot,
   type EvidenceItem,
   type ModelDescriptor,
   type ModelRoutingPreferences,
   type ProviderAccountSessionStatus,
   type ProviderId,
   type SessionExecutionResponse,
+  type DeanonymizationPreview,
   type StoredUploadResponse,
   type LegalDocumentFormat,
   type LocalModelsResponse
@@ -84,6 +98,8 @@ import {
   setAllowedDomainSkills,
   setCaseTypeExecutionSkills,
   skillsForDeterministicAction,
+  workModeForAction,
+  type ChatWorkMode,
   type DeterministicActionId,
   type PublicSkillDescriptor
 } from "./chat-routing.js";
@@ -112,6 +128,17 @@ import {
 import type {
   WorkspaceDocumentCitation
 } from "./workspace-client.js";
+import { RestorationReview } from "./RestorationReview.js";
+import {
+  DeanonymizationReview,
+  applyAliasCorrection
+} from "./DeanonymizationReview.js";
+import {
+  applyRestorationCorrection,
+  shiftMarks,
+  unresolvedPlaceholders,
+  validMarks
+} from "./restoration-review.js";
 import "./chat.css";
 import "./workspace.css";
 
@@ -470,7 +497,8 @@ function upsertAttachment(
       index === existing ? selection : item
     );
   }
-  return [...current, selection].slice(-4);
+  // The limit is checked where files are picked, with a message; never drop one silently.
+  return [...current, selection];
 }
 
 function isExecutionSkill(skill: PublicSkillDescriptor): boolean {
@@ -518,26 +546,112 @@ export function localModelFailureMessage(
   }
 }
 
-function providerFailureMessage(
+export function providerFailureMessage(
   provider: PrimaryModelSource,
-  reason?: string
+  reason?: string,
+  description?: string
 ): string {
-  switch (reason) {
-    case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
-      return "ChatGPT/Codex odrzucił model domyślny dla tej sesji. Lex Machina używa kompatybilnej listy modeli konta; jeśli błąd wraca, zaktualizuj aplikację i ponów połączenie konta.";
-    case "ACCOUNT_SESSION_AUTH_EXPIRED":
-      return "Sesja ChatGPT/Codex wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.";
-    case "ACCOUNT_SESSION_CAPACITY":
-      return "ChatGPT/Codex chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta. Kod: ACCOUNT_SESSION_CAPACITY";
-    case "ACCOUNT_SESSION_PROMPT_REJECTED":
-      return "ChatGPT/Codex odrzucił bieżące żądanie po stronie usługi. Kod: ACCOUNT_SESSION_PROMPT_REJECTED";
-    case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
-      return "Klient Codex jest niezgodny z kontraktem Lex Machina. Zaktualizuj Lex Machina — aplikacja korzysta z przypiętej wersji prywatnego klienta Codex.";
-    case "ACCOUNT_SESSION_CLI_FAILED":
-      return "Klient ChatGPT/Codex zakończył wykonanie błędem. Lex Machina 0.1.7 rozróżnia model, logowanie, limity i zgodność CLI; ponowne połączenie konta powinno zachować historię sprawy.";
-    default:
-      return `Provider odrzucił lub przerwał wykonanie${reason ? ` (kod: ${reason})` : ""}.`;
+  const name =
+    provider.startsWith("anthropic")
+      ? "Claude"
+      : provider.startsWith("xai")
+        ? "Grok"
+        : "ChatGPT/Codex";
+  const client =
+    provider.startsWith("anthropic")
+      ? "Claude Code"
+      : provider.startsWith("xai")
+        ? "Grok Build"
+        : "Codex";
+  const base = (() => {
+    switch (reason) {
+      case "ACCOUNT_SESSION_MODEL_UNSUPPORTED":
+        return `${name} odrzucił model domyślny dla tej sesji. Zaktualizuj aplikację i ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_AUTH_EXPIRED":
+      case "ACCOUNT_SESSION_NOT_SUBSCRIPTION_AUTH":
+        return `Sesja ${name} wygasła albo została odrzucona. Otwórz Ustawienia → Modele i AI i ponownie połącz konto.`;
+      case "ACCOUNT_SESSION_CAPACITY":
+        return `${name} chwilowo odrzuca wykonanie z powodu limitu lub dostępności konta.`;
+      case "ACCOUNT_SESSION_PROMPT_REJECTED":
+        return `${name} odrzucił bieżące żądanie po stronie usługi.`;
+      case "ACCOUNT_SESSION_CLI_INCOMPATIBLE":
+        return `Klient ${client} jest niezgodny z kontraktem Lex Machina. Lex Machina używa przypiętej wersji prywatnego klienta; ponów połączenie konta.`;
+      case "ACCOUNT_SESSION_CLI_SPAWN_FAILED":
+        return `Nie udało się uruchomić klienta ${client}. Ponów połączenie konta w Ustawieniach, aby Lex Machina przygotowała przypiętą wersję klienta.`;
+      case "ACCOUNT_SESSION_CLI_STALLED":
+        return `Klient ${client} nie rozpoczął pracy w ciągu 120 s (brak żadnej odpowiedzi procesu).`;
+      case "ACCOUNT_SESSION_COMMAND_TIMEOUT":
+        return `Klient ${client} przekroczył limit czasu wykonania.`;
+      case "ACCOUNT_SESSION_EMPTY_RESPONSE":
+        return `${name} zakończył wykonanie bez treści odpowiedzi.`;
+      case "ACCOUNT_SESSION_CLI_FAILED":
+        return `Klient ${client} zakończył wykonanie błędem.`;
+      default:
+        return `${name} odrzucił lub przerwał wykonanie.`;
+    }
+  })();
+  const code =
+    reason
+      ? ` Kod: ${reason}.`
+      : "";
+  const detail =
+    description?.trim()
+      ? ` Szczegóły: ${description.trim().slice(0, 600)}`
+      : "";
+  return `${base}${code}${detail}`;
+}
+
+export function newExecutionId(): string {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return crypto.randomUUID();
   }
+  return Array.from(
+    { length: 32 },
+    () => Math.floor(Math.random() * 16).toString(16)
+  ).join("");
+}
+
+/**
+ * Polls the runtime for the live draft of a running execution. Returns a
+ * stop function; the draft is cleared when polling stops.
+ */
+export function startDraftPolling(
+  executionId: string,
+  onDraft: (text: string) => void,
+  intervalMs = 1000,
+  fetchProgress: typeof getSessionProgress = getSessionProgress,
+  onSteps?: (steps: ExecutionStepsSnapshot | null) => void
+): () => void {
+  let stopped = false;
+  let inFlight = false;
+  const timer = setInterval(() => {
+    if (stopped || inFlight) return;
+    inFlight = true;
+    void fetchProgress(executionId)
+      .then((progress) => {
+        if (!stopped && progress?.text) {
+          onDraft(progress.text);
+        }
+        if (!stopped && progress?.steps) {
+          onSteps?.(progress.steps);
+        }
+      })
+      .catch(() => {
+        // A missed poll is harmless; the final answer still arrives.
+      })
+      .finally(() => {
+        inFlight = false;
+      });
+  }, intervalMs);
+  return () => {
+    stopped = true;
+    clearInterval(timer);
+    onDraft("");
+    onSteps?.(null);
+  };
 }
 
 async function openExternalUrl(url: string): Promise<void> {
@@ -559,6 +673,20 @@ async function openExternalUrl(url: string): Promise<void> {
     return;
   }
   window.open(url, "_blank", "noopener,noreferrer");
+}
+
+// A conversational answer loads no legal skills; the routing label would
+// suggest a legal domain that was never used.
+export function routingMeta(
+  execution: Pick<
+    ExtendedExecution,
+    "primarySkill" | "loadedSkills"
+  >,
+  route: string
+): string {
+  return execution.loadedSkills?.length === 0
+    ? "rozmowa bez skilli prawnych"
+    : `routing: ${labelForSkill(execution.primarySkill || route)}`;
 }
 
 function executionMessage(
@@ -619,8 +747,20 @@ function executionMessage(
           }
         : {}),
       documentCitations: execution.documentCitations,
+      ...(execution.restorations?.length
+        ? {
+            restorations:
+              shiftMarks(
+                execution.restorations,
+                verificationWarning.length
+              )
+          }
+        : {}),
       meta:
-        `routing: ${labelForSkill(execution.primarySkill || route)}` +
+        routingMeta(
+          execution,
+          route
+        ) +
         skillMeta +
         domainMeta +
         contextMeta +
@@ -743,6 +883,7 @@ export default function MatterChatApp({
   const [workspaceRefresh, setWorkspaceRefresh] = useState(0);
   const [caseFiles, setCaseFiles] =
     useState<StoredUploadResponse[]>([]);
+  const [pickerAnonymizing, setPickerAnonymizing] = useState<string | null>(null);
   const [caseFilePickerOpen, setCaseFilePickerOpen] =
     useState(false);
   const [caseFilePickerError, setCaseFilePickerError] =
@@ -759,6 +900,16 @@ export default function MatterChatApp({
     useState("");
   const [finalDocumentBusy, setFinalDocumentBusy] =
     useState(false);
+  const [finalReview, setFinalReview] =
+    useState<{
+      grantId: string;
+      preview: DeanonymizationPreview;
+      overrides: Record<string, string>;
+    } | null>(null);
+  // A review belongs to one generated document.
+  useEffect(() => {
+    setFinalReview(null);
+  }, [pendingFinalDocument?.artifactId]);
 
   const [provider, setProvider] =
     useState<PrimaryModelSource>("local");
@@ -836,6 +987,10 @@ export default function MatterChatApp({
     deterministicAction,
     setDeterministicAction
   ] = useState<DeterministicActionId | "">("");
+  const [
+    workMode,
+    setWorkMode
+  ] = useState<ChatWorkMode>("AUTO");
   const [caseTypeSkills, setCaseTypeSkills] = useState<string[]>([]);
   // null = every DR module is selected. Kept as null rather than a filled list
   // so the default sends no restriction at all and routing stays unchanged
@@ -851,8 +1006,11 @@ export default function MatterChatApp({
   const [executionError, setExecutionError] = useState("");
   const [executionDiagnostic, setExecutionDiagnostic] =
     useState<ExecutionDiagnostic | null>(null);
+  const [executionSteps, setExecutionSteps] = useState<ExecutionStepsSnapshot | null>(null);
   const [executionStage, setExecutionStage] =
     useState("Przygotowanie sesji");
+  const [draftText, setDraftText] =
+    useState("");
   const [executionElapsedSeconds, setExecutionElapsedSeconds] =
     useState(0);
   const [runtimePulse, setRuntimePulse] =
@@ -864,6 +1022,7 @@ export default function MatterChatApp({
   const {
     messages,
     setMessages,
+    updateMessage,
     loading: threadLoading,
     error: threadError
   } = useCaseThread(caseId, WELCOME);
@@ -873,6 +1032,14 @@ export default function MatterChatApp({
   >([]);
   const [firmKnowledgeWorkspace, setFirmKnowledgeWorkspace] =
     useState<CaseListItem | null>(null);
+  // Firm templates (DOCX/ODT) picked for the message, sent as text.
+  const [firmTemplateIds, setFirmTemplateIds] = useState<string[]>([]);
+  const [pickerTab, setPickerTab] = useState<"case" | "firm">("case");
+  const [pickerNotice, setPickerNotice] = useState("");
+  const [firmPickerReload, setFirmPickerReload] = useState(0);
+  const [documentFit, setDocumentFit] = useState<DocumentFitResponse | null>(null);
+  // What reached the model with the last message.
+  const [lastDelivery, setLastDelivery] = useState<{ documents: DocumentDelivery[]; names: Record<string, string> } | null>(null);
   const [includeCaseKnowledge, setIncludeCaseKnowledge] = useState(false);
   const [includeFirmKnowledge, setIncludeFirmKnowledge] = useState(false);
   const [documentDropQueue, setDocumentDropQueue] = useState(
@@ -927,6 +1094,110 @@ export default function MatterChatApp({
   );
   const runtimeProvider =
     runtimeProviderForPrimarySource(provider);
+  const localModelSelected =
+    provider === "local" || model.startsWith("local/");
+  // Files per message: 20 for a hosted model, 4 for a local one (server decides).
+  const documentLimit =
+    documentFit?.limit ?? (localModelSelected ? 4 : 20);
+  const selectedFileCount =
+    documentAttachments.length + firmTemplateIds.length;
+  const firmCaseId = firmKnowledgeWorkspace?.caseId;
+  const selectedFirmKeys = useMemo(
+    () =>
+      new Set([
+        ...firmTemplateIds,
+        ...documentAttachments
+          .filter((attachment) => attachment.caseId === firmCaseId)
+          .map((attachment) => attachment.documentId)
+      ]),
+    [firmTemplateIds, documentAttachments, firmCaseId]
+  );
+
+  /** Adds or removes picked files; over the limit only what fits is added, with a message. */
+  function pickFiles(picks: FilePick[], select: boolean, pickCaseId: string): void {
+    if (!select) {
+      const keys = new Set(picks.map(pickKey));
+      setDocumentAttachments((current) =>
+        current.filter((attachment) => !(attachment.caseId === pickCaseId && keys.has(attachment.documentId)))
+      );
+      setFirmTemplateIds((current) => current.filter((id) => !keys.has(id)));
+      setPickerNotice("");
+      return;
+    }
+    const chosen = new Set([...firmTemplateIds, ...documentAttachments.map((attachment) => attachment.documentId)]);
+    const fresh = picks.filter((pick) => !chosen.has(pickKey(pick)));
+    const taken = fresh.slice(0, Math.max(0, documentLimit - selectedFileCount));
+    setPickerNotice(
+      taken.length < fresh.length
+        ? `Limit ${documentLimit} plików w jednej wiadomości` +
+            (localModelSelected ? " dla modelu lokalnego" : "") +
+            `: dodano ${taken.length} z ${fresh.length}. Odznacz inne pliki albo wyślij pozostałe w kolejnej wiadomości.`
+        : ""
+    );
+    const documents = taken.flatMap((pick) => (pick.kind === "document" ? [pick] : []));
+    const templates = taken.flatMap((pick) => (pick.kind === "template" ? [pick.templateId] : []));
+    if (documents.length) {
+      setDocumentAttachments((current) =>
+        documents.reduce(
+          (list, pick) =>
+            upsertAttachment(list, { caseId: pickCaseId, documentId: pick.documentId, chunkIndices: pick.chunkIndices }),
+          current
+        )
+      );
+    }
+    if (templates.length) setFirmTemplateIds((current) => [...current, ...templates]);
+  }
+
+  const [firmFileNames, setFirmFileNames] = useState<Record<string, string>>({});
+  function fileLabel(documentId: string, title?: string): string {
+    return (
+      title ??
+      caseFiles.find((file) => file.processing?.documentId === documentId)?.filename ??
+      firmFileNames[documentId] ??
+      "plik"
+    );
+  }
+
+  // The firm library is known to the chat without visiting the Kancelaria tab.
+  useEffect(() => {
+    if (firmKnowledgeWorkspace) return;
+    let cancelled = false;
+    getFirmKnowledgeWorkspace()
+      .then((result) => {
+        if (!cancelled && result.workspace) setFirmKnowledgeWorkspace(result.workspace);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [firmKnowledgeWorkspace]);
+
+  // Does the pick fit the chosen model? Checked on the server with the same count as sending.
+  useEffect(() => {
+    if (!model || selectedFileCount === 0) {
+      setDocumentFit(null);
+      return;
+    }
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      checkDocumentFit({
+        provider: runtimeProvider,
+        model,
+        attachments: documentAttachments,
+        firmTemplates: firmTemplateIds
+      })
+        .then((result) => {
+          if (!cancelled) setDocumentFit(result);
+        })
+        .catch(() => {
+          if (!cancelled) setDocumentFit(null);
+        });
+    }, 350);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [model, runtimeProvider, documentAttachments, firmTemplateIds, selectedFileCount]);
   const providerDefinition =
     PROVIDERS.find(
       (item) =>
@@ -1042,6 +1313,7 @@ export default function MatterChatApp({
 
   useEffect(() => {
     setDeterministicAction("");
+    setWorkMode("AUTO");
     setCaseTypeSkills([]);
     setManualSkills(null);
     setAllowedDomains(null);
@@ -1066,6 +1338,11 @@ export default function MatterChatApp({
       );
     setDeterministicAction(
       restored
+    );
+    setWorkMode(
+      workModeForAction(
+        restored
+      )
     );
     setCaseTypeSkills(
       skillsForDeterministicAction(
@@ -1435,6 +1712,9 @@ export default function MatterChatApp({
   useEffect(() => {
     setDocumentDropQueue(createDocumentDropQueueState());
     setDocumentAttachments([]);
+    setFirmTemplateIds([]);
+    setLastDelivery(null);
+    setPickerNotice("");
     setIncludeCaseKnowledge(false);
     setCaseNameDraft(selectedCase?.displayName ?? "");
     setCaseScheduleError("");
@@ -1498,9 +1778,13 @@ export default function MatterChatApp({
       caseId;
   }, [caseId]);
 
+  // A different case closes the file list; a refresh within one case keeps it open.
+  useEffect(() => {
+    setCaseFilePickerOpen(false);
+  }, [caseId]);
+
   useEffect(() => {
     let cancelled = false;
-    setCaseFilePickerOpen(false);
     setCaseFilePickerError("");
     if (!caseId) {
       setCaseFiles([]);
@@ -1763,6 +2047,9 @@ export default function MatterChatApp({
     setDeterministicAction(
       actionId
     );
+    if (actionId) {
+      setWorkMode("MECHANICAL");
+    }
     setCaseTypeSkills(
       mappedSkills
     );
@@ -2249,6 +2536,17 @@ export default function MatterChatApp({
       !model
     ) return;
 
+    if (
+      conversationIsNew &&
+      workMode === "MECHANICAL" &&
+      !deterministicAction
+    ) {
+      setExecutionError(
+        "Tryb mechaniczny: wybierz skill wykonawczy albo przełącz na tryb automatyczny."
+      );
+      return;
+    }
+
     const route =
       automaticSkills
         ? "AUTO"
@@ -2396,6 +2694,9 @@ export default function MatterChatApp({
                 "lex-classic-clean-v1",
               attachments:
                 documentAttachments,
+              ...(firmTemplateIds.length > 0
+                ? { firmTemplates: firmTemplateIds }
+                : {}),
               filename:
                 (
                   documentRequest.documentType ===
@@ -2505,8 +2806,21 @@ export default function MatterChatApp({
       }
 
       setExecutionStage(
-        "Analiza prawna, routing i weryfikacja źródeł"
+        selectedFileCount > 0
+          ? `Wysyłanie ${selectedFileCount} ${selectedFileCount === 1 ? "pliku" : "plików"} do modelu · analiza prawna i weryfikacja źródeł`
+          : "Analiza prawna, routing i weryfikacja źródeł"
       );
+      setLastDelivery(null);
+      const executionId =
+        newExecutionId();
+      const stopDraftPolling =
+        startDraftPolling(
+          executionId,
+          setDraftText,
+          1000,
+          getSessionProgress,
+          setExecutionSteps
+        );
       const result = await executeSession({
         query: buildSkillSelectionEnvelope(
           conversationForProvider(
@@ -2528,17 +2842,33 @@ export default function MatterChatApp({
         ...(documentAttachments.length > 0
           ? { attachments: documentAttachments }
           : {}),
+        ...(firmTemplateIds.length > 0
+          ? { firmTemplates: firmTemplateIds }
+          : {}),
         knowledge: {
           caseId,
           includeCase: includeCaseKnowledge,
           includeFirm: includeFirmKnowledge,
           limit: 8
         }
-      }) as ExtendedExecution;
+      }, executionId).finally(
+        stopDraftPolling
+      ) as ExtendedExecution;
 
       setExecutionStage(
         "Finalizacja odpowiedzi"
       );
+      if (result.context?.documents?.length) {
+        setLastDelivery({
+          documents: result.context.documents,
+          names: Object.fromEntries(
+            result.context.documents.map((document) => [
+              document.documentId,
+              fileLabel(document.documentId, document.title)
+            ])
+          )
+        });
+      }
       if (result.processWorkflow) {
         setProcessWorkflowVisible(true);
         setProcessWorkflowRefresh(
@@ -2606,7 +2936,10 @@ export default function MatterChatApp({
                 )
               : providerFailureMessage(
                   provider,
-                  reason
+                  reason,
+                  error instanceof ApiError
+                    ? error.description
+                    : undefined
                 )
           : code ===
               "AUTO_ROUTING_FAILED"
@@ -2707,81 +3040,89 @@ export default function MatterChatApp({
     }
   }
 
-  async function finalizePendingDocument(): Promise<void> {
+  // Step 1: password -> grant -> restored text with every value marked.
+  async function reviewPendingDocument(): Promise<void> {
     if (
       !pendingFinalDocument ||
       finalDocumentBusy ||
-      !finalDocumentPassword
-        .trim()
+      !finalDocumentPassword.trim()
     ) {
       return;
     }
-
     setFinalDocumentBusy(true);
     setExecutionError("");
     try {
-      const intent =
-        await createDeanonymizationIntent(
-          pendingFinalDocument
-            .caseId,
-          pendingFinalDocument
-            .artifactId
-        );
-      const authorized =
-        await reauthorizeDeanonymization(
-          intent.intent
-            .intentId,
-          finalDocumentPassword
-        );
-      const final =
-        await finalizeDeanonymization(
-          authorized.grant
-            .grantId,
-          "LexMachina-final." +
-            pendingFinalDocument
-              .format
-        );
-      if (
-        !final.downloadTicket
-      ) {
-        throw new Error(
-          "SENSITIVE_DOWNLOAD_TICKET_MISSING"
-        );
+      const intent = await createDeanonymizationIntent(
+        pendingFinalDocument.caseId,
+        pendingFinalDocument.artifactId
+      );
+      const authorized = await reauthorizeDeanonymization(
+        intent.intent.intentId,
+        finalDocumentPassword
+      );
+      setFinalDocumentPassword("");
+      const preview = await previewDeanonymization(
+        authorized.grant.grantId
+      );
+      setFinalReview({
+        grantId: authorized.grant.grantId,
+        preview,
+        overrides: {}
+      });
+    } catch (error) {
+      setExecutionError(
+        error instanceof Error
+          ? "Nie udało się przygotować podglądu przywróconych danych: " + error.message
+          : "Nie udało się przygotować podglądu przywróconych danych."
+      );
+    } finally {
+      setFinalDocumentBusy(false);
+    }
+  }
+
+  // Step 2: the reviewed (and corrected) values go into the one-time final file.
+  async function finalizePendingDocument(): Promise<void> {
+    if (!pendingFinalDocument || !finalReview || finalDocumentBusy) {
+      return;
+    }
+    setFinalDocumentBusy(true);
+    setExecutionError("");
+    try {
+      const final = await finalizeDeanonymization(
+        finalReview.grantId,
+        "LexMachina-final." + pendingFinalDocument.format,
+        finalReview.overrides
+      );
+      if (!final.downloadTicket) {
+        throw new Error("SENSITIVE_DOWNLOAD_TICKET_MISSING");
       }
-      const blob =
-        await downloadSensitiveArtifact(
-          final.downloadTicket
-            .ticketId
-        );
-      downloadBlob(
-        blob,
-        final.artifact
-          .filename
+      const blob = await downloadSensitiveArtifact(
+        final.downloadTicket.ticketId
       );
-      setPendingFinalDocument(
-        null
-      );
-      setFinalDocumentPassword(
-        ""
-      );
+      downloadBlob(blob, final.artifact.filename);
+      const corrected = Object.keys(finalReview.overrides).length;
+      setPendingFinalDocument(null);
+      setFinalReview(null);
       setGeneratedDocumentMessage(
-        "Finalny dokument z przywróconymi danymi został utworzony i pobrany."
+        "Finalny dokument z przywróconymi danymi został utworzony i pobrany." +
+          (corrected > 0 ? ` Ręczne poprawki: ${corrected}.` : "")
       );
-      setWorkspaceRefresh(
-        (value) =>
-          value + 1
-      );
+      setWorkspaceRefresh((value) => value + 1);
     } catch (error) {
       setExecutionError(
         error instanceof Error
           ? "Nie udało się przywrócić danych do finalnego dokumentu: " +
-            error.message
+            error.message +
+            (/REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)
+              ? ". Podaj hasło ponownie."
+              : "")
           : "Nie udało się przywrócić danych do finalnego dokumentu."
       );
+      if (error instanceof Error && /REAUTH_GRANT_(EXPIRED|ALREADY_USED)/.test(error.message)) {
+        setFinalReview(null);
+      }
     } finally {
-      setFinalDocumentBusy(
-        false
-      );
+      setFinalDocumentBusy(false);
     }
   }
 
@@ -2988,7 +3329,10 @@ export default function MatterChatApp({
     Boolean(query.trim()) &&
     !executing &&
     !caseBusy &&
-    !selectedCase?.archivedAt;
+    !selectedCase?.archivedAt &&
+    // Picked files that do not fit the model are not sent at all.
+    selectedFileCount <= documentLimit &&
+    documentFit?.estimate?.fits !== false;
 
   return (
     <div className="chat-app-shell matter-chat-app">
@@ -3627,70 +3971,101 @@ export default function MatterChatApp({
                 );
               }}
             />
-            {conversationIsNew && availableActions.length > 0 ? (
+            {conversationIsNew ? (
               <section
                 className="chat-pipeline-picker"
-                aria-label="Typ działania dla pierwszej wiadomości"
+                aria-label="Tryb pracy dla nowej rozmowy"
               >
                 <div>
-                  <p className="eyebrow">Typ działania</p>
+                  <p className="eyebrow">Tryb pracy</p>
                   <h3>
-                    {selectedDeterministicAction
-                      ? selectedDeterministicAction.label
-                      : "Automatycznie — prawny router"}
+                    {workMode === "AUTO"
+                      ? "Automatyczny — prawny router"
+                      : selectedDeterministicAction
+                        ? `Mechaniczny — ${selectedDeterministicAction.label}`
+                        : "Mechaniczny — wybierz skill wykonawczy"}
                   </h3>
                   <p>
-                    Brak wyboru oznacza pełny tryb automatyczny: prawny-router-v3
-                    dobiera dziedziny DR i skille wykonawcze z treści wiadomości.
-                    Wybranie działania uruchamia stałe, programistyczne mapowanie
-                    na właściwy pipeline wykonawczy. Po wysłaniu pierwszej
-                    wiadomości ten wybór znika i zostaje przypięty do wątku.
+                    {workMode === "AUTO"
+                      ? "prawny-router-v3 dobiera dziedziny DR, skille wykonawcze i moduły z treści wiadomości. Pytania bez kwestii prawnej nie ładują skilli prawnych."
+                      : "Wybrany skill wykonawczy uruchamia stały, deterministyczny pipeline z jego modułami. Router nadal dobiera dziedzinę DR. Po wysłaniu pierwszej wiadomości wybór zostaje przypięty do wątku."}
                   </p>
                 </div>
-                <div className="chat-pipeline-options">
-                  {availableActions.map((action) => {
-                    const checked =
-                      deterministicAction ===
-                      action.id;
-                    return (
-                      <button
-                        key={action.id}
-                        type="button"
-                        className={
-                          checked
-                            ? "chat-pipeline-option selected"
-                            : "chat-pipeline-option"
-                        }
-                        aria-pressed={checked}
-                        onClick={() =>
-                          selectDeterministicAction(
-                            checked
-                              ? ""
-                              : action.id
-                          )
-                        }
-                      >
-                        <strong>
-                          {action.label}
-                        </strong>
-                        <small>
-                          {action.description}
-                        </small>
-                      </button>
-                    );
-                  })}
-                  {deterministicAction ? (
-                    <button
-                      type="button"
-                      className="chat-pipeline-option reset"
-                      onClick={() =>
-                        selectDeterministicAction("")
-                      }
-                    >
-                      Bez wyboru · AUTO
-                    </button>
-                  ) : null}
+                <div
+                  className="chat-work-mode"
+                  role="radiogroup"
+                  aria-label="Tryb pracy"
+                >
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "AUTO"}
+                    className={
+                      workMode === "AUTO"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => {
+                      selectDeterministicAction("");
+                      setWorkMode("AUTO");
+                    }}
+                  >
+                    <strong>Automatyczny</strong>
+                    <small>Router sam dobiera skille i moduły.</small>
+                  </button>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={workMode === "MECHANICAL"}
+                    disabled={availableActions.length === 0}
+                    className={
+                      workMode === "MECHANICAL"
+                        ? "chat-pipeline-option selected"
+                        : "chat-pipeline-option"
+                    }
+                    onClick={() => setWorkMode("MECHANICAL")}
+                  >
+                    <strong>Mechaniczny</strong>
+                    <small>
+                      {availableActions.length > 0
+                        ? "Ty wybierasz skill wykonawczy i jego pipeline."
+                        : "Brak skilli wykonawczych w korpusie."}
+                    </small>
+                  </button>
                 </div>
+                {workMode === "MECHANICAL" ? (
+                  <div className="chat-pipeline-options">
+                    {availableActions.map((action) => {
+                      const checked =
+                        deterministicAction ===
+                        action.id;
+                      return (
+                        <button
+                          key={action.id}
+                          type="button"
+                          className={
+                            checked
+                              ? "chat-pipeline-option selected"
+                              : "chat-pipeline-option"
+                          }
+                          aria-pressed={checked}
+                          onClick={() =>
+                            selectDeterministicAction(
+                              action.id
+                            )
+                          }
+                        >
+                          <strong>
+                            {action.label}
+                          </strong>
+                          <small>
+                            {action.description}
+                          </small>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </section>
             ) : null}
 
@@ -3717,6 +4092,40 @@ export default function MatterChatApp({
                     citations={message.documentCitations}
                     onOpenUrl={openExternalUrl}
                   />
+                  {message.role === "assistant" &&
+                  (message.restorations?.length ||
+                    unresolvedPlaceholders(message.content).length) ? (
+                    <RestorationReview
+                      key={`${message.id}-${message.content.length}`}
+                      content={message.content}
+                      marks={validMarks(message.content, message.restorations)}
+                      unresolved={unresolvedPlaceholders(message.content)}
+                      readOnly={!canWriteCase(selectedCase)}
+                      onCorrect={async (index, text, remember) => {
+                        const marks = validMarks(message.content, message.restorations);
+                        const mark = marks[index];
+                        if (remember && mark?.canonical && mark.gender && mark.case) {
+                          await saveNameForm({
+                            canonical: mark.canonical,
+                            gender: mark.gender,
+                            case: mark.case,
+                            text: text.trim()
+                          });
+                        }
+                        const corrected = applyRestorationCorrection(
+                          message.content,
+                          marks,
+                          index,
+                          text
+                        );
+                        await updateMessage({
+                          ...message,
+                          content: corrected.content,
+                          restorations: corrected.marks
+                        });
+                      }}
+                    />
+                  ) : null}
                   {visibleMessageMeta(message.meta) ? (
                     <small className="chat-message-meta">
                       {visibleMessageMeta(message.meta)}
@@ -3857,6 +4266,36 @@ export default function MatterChatApp({
                   <div className="chat-message-content">
                     {executionStage}
                   </div>
+                  {executionSteps ? (
+                    <ol className="chat-steps" aria-label="Etapy pracy">
+                      <li className="chat-steps-summary">
+                        Etap {executionSteps.current} z {executionSteps.total} · zakończone:{" "}
+                        {executionSteps.phases.filter((phase) => phase.status === "done").length} · pozostało:{" "}
+                        {executionSteps.phases.filter((phase) => phase.status !== "done").length}
+                      </li>
+                      {executionSteps.phases.map((phase) => (
+                        <li key={phase.key} className={`chat-step chat-step-${phase.status}`}>
+                          <span className="chat-step-status">
+                            {phase.status === "done" ? "zakończono" : phase.status === "active" ? "w toku" : "oczekuje"}
+                          </span>
+                          <strong>{phase.label}</strong>
+                          {phase.details.length ? (
+                            <small>{phase.details.slice(-6).join(" · ")}</small>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
+                  {draftText ? (
+                    <div className="chat-draft">
+                      <div className="chat-draft-label">
+                        Wersja robocza — odpowiedź powstaje, weryfikacja źródeł jeszcze trwa
+                      </div>
+                      <div className="chat-draft-text">
+                        {draftText}
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="chat-working-meta">
                     <span>
                       {runtimePulse === "OK"
@@ -3887,8 +4326,59 @@ export default function MatterChatApp({
                     ? selectedDeterministicAction.label
                     : "AUTO · prawny router"}
                 </span>
-                <span>Załączniki: {documentAttachments.length}</span>
+                <span>Załączniki: {selectedFileCount}</span>
+                {firmTemplateIds.length > 0 ||
+                documentAttachments.some((attachment) =>
+                  caseFiles.some(
+                    (file) =>
+                      file.processing?.documentId === attachment.documentId &&
+                      file.processing.anonymized === false
+                  )
+                ) ? (
+                  <span className="chat-clear-text-warning">Uwaga: część załączników to tekst jawny</span>
+                ) : null}
               </div>
+              {lastDelivery ? (
+                <div className="chat-delivery" role="status">
+                  <strong>
+                    Do modelu trafiło w całości:{" "}
+                    {lastDelivery.documents.filter((document) => document.status === "FULL").length} z{" "}
+                    {lastDelivery.documents.length} plików
+                    {lastDelivery.documents.some((document) => document.status !== "FULL")
+                      ? " - reszta skrócona lub pominięta (brak miejsca w oknie modelu)"
+                      : ""}
+                  </strong>
+                  <details>
+                    <summary>Szczegóły wysyłki</summary>
+                    <ul>
+                      {lastDelivery.documents.map((document) => (
+                        <li key={document.documentId} className={`chat-delivery-${document.status.toLowerCase()}`}>
+                          <span>{lastDelivery.names[document.documentId]}</span>
+                          <small>
+                            {document.sourceScope === "FIRM_TEMPLATE"
+                              ? "wzór kancelarii · "
+                              : document.sourceScope === "FIRM_KNOWLEDGE"
+                                ? "kancelaria · "
+                                : document.sourceScope === "CASE_KNOWLEDGE"
+                                  ? "wyszukane w sprawie · "
+                                  : ""}
+                            {document.status === "FULL"
+                              ? `w całości (${document.chunks} ${document.chunks === 1 ? "fragment" : "fragmentów"})`
+                              : document.status === "PARTIAL"
+                                ? `częściowo: ${document.fullChunks + document.digestChunks} z ${document.chunks} fragmentów`
+                                : document.status === "DIGEST"
+                                  ? "tylko streszczenie fragmentów"
+                                  : "pominięty - brak miejsca w oknie modelu"}
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                  <button type="button" className="chat-secondary-action" onClick={() => setLastDelivery(null)}>
+                    Ukryj
+                  </button>
+                </div>
+              ) : null}
               <textarea
                 value={query}
                 maxLength={20_000}
@@ -3910,24 +4400,25 @@ export default function MatterChatApp({
                 <button
                   type="button"
                   className="chat-secondary-action"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  📎 Pliki
-                </button>
-                <button
-                  type="button"
-                  className="chat-secondary-action"
                   aria-expanded={
                     caseFilePickerOpen
                   }
-                  onClick={() =>
-                    setCaseFilePickerOpen(
-                      (value) =>
-                        !value
-                    )
-                  }
+                  title="Wybierz pliki sprawy do wysłania z wiadomością"
+                  onClick={() => {
+                    const opening = !caseFilePickerOpen;
+                    setCaseFilePickerOpen(opening);
+                    if (opening) setFirmPickerReload((value) => value + 1);
+                    // Files added in the Sprawa tab since the list was read.
+                    if (opening && caseId) {
+                      void listCaseFiles(caseId)
+                        .then((result) => setCaseFiles(result.uploads))
+                        .catch((error) =>
+                          setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                        );
+                    }
+                  }}
                 >
-                  🗂 Dokumenty
+                  Pliki{selectedFileCount ? ` (${selectedFileCount})` : ""}
                 </button>
                 <button
                   type="button"
@@ -3949,15 +4440,83 @@ export default function MatterChatApp({
               {caseFilePickerOpen ? (
                 <div
                   className="chat-case-file-picker"
-                  aria-label="Dokumenty sprawy do dołączenia"
+                  aria-label="Pliki do dołączenia"
                 >
+                  <div className="chat-file-picker-tabs" role="tablist">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={pickerTab === "case"}
+                      onClick={() => setPickerTab("case")}
+                    >
+                      Dokumenty sprawy ({documentAttachments.filter((attachment) => attachment.caseId !== firmCaseId).length})
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={pickerTab === "firm"}
+                      disabled={!firmCaseId}
+                      title={firmCaseId ? undefined : "Biblioteka kancelarii nie jest jeszcze utworzona (zakładka Kancelaria)"}
+                      onClick={() => setPickerTab("firm")}
+                    >
+                      Wzory i know-how kancelarii ({selectedFirmKeys.size})
+                    </button>
+                    <span className="chat-file-picker-count">
+                      {selectedFileCount} z {documentLimit} plików
+                    </span>
+                  </div>
+                  {pickerNotice ? <p className="chat-inline-error" role="status">{pickerNotice}</p> : null}
+                  {documentFit?.estimate ? (
+                    <div
+                      className={`chat-file-fit ${documentFit.estimate.fits ? "" : "chat-file-fit-over"}`}
+                      role="status"
+                    >
+                      <div className="chat-file-fit-bar">
+                        <span
+                          style={{
+                            width: `${Math.min(100, Math.round((documentFit.estimate.neededTokens / Math.max(1, documentFit.estimate.budgetTokens)) * 100))}%`
+                          }}
+                        />
+                      </div>
+                      <small>
+                        Okno modelu na dokumenty: ~{Math.round(documentFit.estimate.neededTokens / 1000)} tys. z{" "}
+                        {Math.round(documentFit.estimate.budgetTokens / 1000)} tys. tokenów
+                        {documentFit.estimate.fits
+                          ? ""
+                          : ` - za dużo; największe: ${[...documentFit.estimate.documents]
+                              .sort((left, right) => right.tokens - left.tokens)
+                              .slice(0, 3)
+                              .map((document) => `${fileLabel(document.documentId, document.title)} (~${Math.round(document.tokens / 1000)} tys.)`)
+                              .join(", ")}. Odznacz część plików; wysyłka jest zablokowana.`}
+                      </small>
+                    </div>
+                  ) : null}
+                  {pickerTab === "firm" && firmCaseId ? (
+                    <FirmFilePicker
+                      firmCaseId={firmCaseId}
+                      selected={selectedFirmKeys}
+                      reloadToken={firmPickerReload}
+                      onChange={(picks, select) => pickFiles(picks, select, firmCaseId)}
+                      onNames={setFirmFileNames}
+                    />
+                  ) : (
+                  <>
                   <div className="chat-case-file-picker-head">
                     <strong>
                       Dokumenty sprawy
                     </strong>
                     <small>
-                      Zaznacz dowolną liczbę gotowych plików. Status OCR pokazuje, które strony wymagały rozpoznawania tekstu.
+                      Zaznaczone pliki zostaną wysłane z wiadomością, z oznaczeniem każdej strony. Plik
+                      zanonimizowany trafia do modelu wyłącznie w wersji z symbolami; plik przetworzony bez
+                      anonimizacji - jako tekst jawny.
                     </small>
+                    <button
+                      type="button"
+                      className="chat-secondary-action"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      Dodaj pliki do sprawy
+                    </button>
                   </div>
                   {caseFilePickerError ? (
                     <p className="chat-inline-error">
@@ -4001,50 +4560,14 @@ export default function MatterChatApp({
                                   checked={
                                     selected
                                   }
-                                  onChange={(
-                                    event
-                                  ) => {
-                                    const processing =
-                                      item.processing;
-                                    if (
-                                      !processing
-                                    ) {
-                                      return;
-                                    }
-                                    if (
-                                      event
-                                        .target
-                                        .checked
-                                    ) {
-                                      setDocumentAttachments(
-                                        (
-                                          current
-                                        ) =>
-                                          upsertAttachment(
-                                            current,
-                                            {
-                                              caseId,
-                                              documentId:
-                                                processing.documentId,
-                                              chunkIndices:
-                                                processing.chunkIndices
-                                            }
-                                          )
-                                      );
-                                    } else {
-                                      setDocumentAttachments(
-                                        (
-                                          current
-                                        ) =>
-                                          current.filter(
-                                            (
-                                              attachment
-                                            ) =>
-                                              attachment.documentId !==
-                                                processing.documentId
-                                          )
-                                      );
-                                    }
+                                  onChange={(event) => {
+                                    const processing = item.processing;
+                                    if (!processing) return;
+                                    pickFiles(
+                                      [{ kind: "document", documentId: processing.documentId, chunkIndices: processing.chunkIndices }],
+                                      event.target.checked,
+                                      caseId
+                                    );
                                   }}
                                 />
                                 <span>
@@ -4053,18 +4576,86 @@ export default function MatterChatApp({
                                   </strong>
                                   <small>
                                     {item.processing
-                                      ? item.processing.ocrPages > 0
-                                        ? `OCR ✓ · ${item.processing.ocrPages}/${item.processing.totalPages} stron`
-                                        : `Tekst cyfrowy ✓ · OCR niewymagany · ${item.processing.totalPages} stron`
-                                      : "Nieprzetworzony · uruchom OCR/prywatność w zakładce Pliki"}
+                                      ? (item.processing.anonymized === false
+                                          ? "Wysyłany tekst jawny (bez anonimizacji)"
+                                          : "Wysyłana wersja zanonimizowana") +
+                                        ` · ${item.processing.totalPages} stron` +
+                                        (item.processing.ocrPages > 0 ? ` · OCR ${item.processing.ocrPages}` : "")
+                                      : "Nieprzetworzony - wybierz anonimizację albo samo OCR"}
                                   </small>
                                 </span>
                               </label>
+                              {!item.processing && canWriteCase(selectedCase) ? (
+                                <>
+                                <button
+                                  type="button"
+                                  className="chat-secondary-action"
+                                  disabled={pickerAnonymizing !== null}
+                                  onClick={() => {
+                                    setPickerAnonymizing(item.uploadId);
+                                    setCaseFilePickerError("");
+                                    void processStoredCaseFile(caseId, item.uploadId)
+                                      .then((review) => finalizeCaseDocument(caseId, review.documentId, []))
+                                      .then((result) => {
+                                        pickFiles(
+                                          [{ kind: "document", documentId: result.documentId, chunkIndices: result.chunks.map((chunk) => chunk.index) }],
+                                          true,
+                                          caseId
+                                        );
+                                        setWorkspaceRefresh((value) => value + 1);
+                                      })
+                                      .catch((error) =>
+                                        setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                                      )
+                                      .finally(() => setPickerAnonymizing(null));
+                                  }}
+                                >
+                                  {pickerAnonymizing === item.uploadId ? "Przetwarzam…" : "Anonimizuj i zaznacz"}
+                                </button>
+                                <button
+                                  type="button"
+                                  className="chat-secondary-action"
+                                  disabled={pickerAnonymizing !== null}
+                                  title="Tylko OCR/tekst, bez anonimizacji - plik trafi do modelu z jawnymi danymi"
+                                  onClick={() => {
+                                    if (
+                                      !window.confirm(
+                                        `„${item.filename}” trafi do modelu bez anonimizacji, z danymi osobowymi w jawnej postaci. Kontynuować?`
+                                      )
+                                    ) {
+                                      return;
+                                    }
+                                    setPickerAnonymizing(item.uploadId);
+                                    setCaseFilePickerError("");
+                                    void processStoredCaseFile(caseId, item.uploadId)
+                                      .then((review) =>
+                                        finalizeCaseDocument(caseId, review.documentId, keepAllDirectives(review))
+                                      )
+                                      .then((result) => {
+                                        pickFiles(
+                                          [{ kind: "document", documentId: result.documentId, chunkIndices: result.chunks.map((chunk) => chunk.index) }],
+                                          true,
+                                          caseId
+                                        );
+                                        setWorkspaceRefresh((value) => value + 1);
+                                      })
+                                      .catch((error) =>
+                                        setCaseFilePickerError(error instanceof Error ? error.message : String(error))
+                                      )
+                                      .finally(() => setPickerAnonymizing(null));
+                                  }}
+                                >
+                                  Tylko OCR i zaznacz
+                                </button>
+                                </>
+                              ) : null}
                             </li>
                           );
                         }
                       )}
                     </ul>
+                  )}
+                  </>
                   )}
                 </div>
               ) : null}
@@ -4076,6 +4667,46 @@ export default function MatterChatApp({
                       Każdy dokument źródłowy ma własny vault. Alias D01/D02/… jest odwracany wyłącznie przez deanonimizator przypisany do tego dokumentu.
                     </small>
                   </div>
+                  {finalReview ? (
+                    <DeanonymizationReview
+                      preview={finalReview.preview}
+                      busy={finalDocumentBusy}
+                      onCorrect={async (restoration, text, remember) => {
+                        if (
+                          remember &&
+                          restoration.canonical &&
+                          restoration.gender &&
+                          restoration.case
+                        ) {
+                          await saveNameForm({
+                            canonical: restoration.canonical,
+                            gender: restoration.gender,
+                            case: restoration.case,
+                            text: text.trim()
+                          });
+                        }
+                        setFinalReview((current) =>
+                          current
+                            ? {
+                                ...current,
+                                preview: applyAliasCorrection(
+                                  current.preview,
+                                  restoration.alias,
+                                  text
+                                ),
+                                overrides: {
+                                  ...current.overrides,
+                                  [restoration.alias]: text.trim()
+                                }
+                              }
+                            : current
+                        );
+                      }}
+                      onConfirm={() => void finalizePendingDocument()}
+                      onCancel={() => setFinalReview(null)}
+                    />
+                  ) : (
+                  <>
                   <input
                     type="password"
                     autoComplete="current-password"
@@ -4099,12 +4730,12 @@ export default function MatterChatApp({
                           .trim()
                       }
                       onClick={() =>
-                        void finalizePendingDocument()
+                        void reviewPendingDocument()
                       }
                     >
                       {finalDocumentBusy
                         ? "Przywracam dane…"
-                        : "Przywróć dane i pobierz finalny plik"}
+                        : "Przywróć dane i sprawdź przed zapisem"}
                     </button>
                     <button
                       type="button"
@@ -4134,6 +4765,8 @@ export default function MatterChatApp({
                       Pobierz wersję tokenizowaną
                     </button>
                   </div>
+                  </>
+                  )}
                 </div>
               ) : null}
               {generatedDocumentMessage ? (
@@ -4253,7 +4886,7 @@ export default function MatterChatApp({
                   : "AUTO · prawny-router-v3"}
               </h2>
               <p>
-                Typ działania wybiera się wyłącznie nad polem pierwszej wiadomości.
+                Tryb pracy (automatyczny lub mechaniczny) wybiera się wyłącznie nad polem pierwszej wiadomości.
                 Brak wyboru oznacza pełne AUTO: prawny-router-v3 sam dobiera dziedziny
                 DR i skille wykonawcze. Po pierwszej wiadomości tryb jest przypięty do
                 wątku i selektor w czacie znika.

@@ -1,7 +1,11 @@
+import { placeholderGrammar, placeholderKeyPrompt } from "./privacy/token-legend.js";
+import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
+import { restoreWithReport } from "./privacy/restoration-report.js";
 import { AuditTrail } from "./audit-trail.js";
 import { AuditedFinalizer } from "./audited-finalizer.js";
 import { LexExecutionEngine } from "./execution-engine.js";
 import { VerificationLedger } from "./verification-ledger.js";
+import { CoreLawToolRuntime } from "./core-law-tool-runtime.js";
 import { LegalCorpusToolRuntime } from "./legal-corpus-tool-runtime.js";
 import { ReportBlueprintToolRuntime } from "./report-blueprint-tool-runtime.js";
 import { evaluateDeterministicWorkflowOutput, evaluateDeterministicWorkflowReads } from "./deterministic-workflow.js";
@@ -17,6 +21,7 @@ import { runGateIRuntimePrelude } from "./gate-i-runtime-prelude.js";
 import { evaluateGateIInputCompleteness, evaluateGateIWorkflowContract, gateIWorkflowContract } from "./gate-i-contracts.js";
 import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { ModelAutoRouter } from "./model-auto-routing.js";
+import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { parseSkillSelectionEnvelope } from "./skill-selection.js";
 export function publicAuxiliarySourceFromToolResult(result) {
     let payload;
@@ -236,9 +241,20 @@ export function namespaceDocumentAttachmentTokens(attachments) {
         return prefix;
     };
     return attachments.map((attachment) => {
+        if (attachment.sharedKey) {
+            return { ...attachment, chunks: attachment.chunks.map((chunk) => ({ ...chunk })) };
+        }
         const prefix = prefixFor(attachment.documentId);
         return {
             ...attachment,
+            ...(attachment.grammar
+                ? {
+                    grammar: attachment.grammar.map((entry) => ({
+                        ...entry,
+                        token: entry.token.replace(/^\[PII:/, `[LMPII:${prefix}:`)
+                    }))
+                }
+                : {}),
             chunks: attachment.chunks.map((chunk) => ({
                 ...chunk,
                 text: chunk.text.replace(/\[PII:([A-Z_]+):(\d{4})\]/g, (_token, kind, sequence) => `[LMPII:${prefix}:${kind}:${sequence}]`)
@@ -246,27 +262,59 @@ export function namespaceDocumentAttachmentTokens(attachments) {
         };
     });
 }
+/**
+ * Stored page headers ("[STRONA 3 · CZĘŚĆ 1/2 · OCR]") as an explicit page
+ * boundary with the page count, so a model knows how long the document is
+ * and where each page starts.
+ */
+export function markPages(text, totalPages) {
+    return text.replace(/^\[STRONA (\d+)(?: · CZĘŚĆ (\d+)\/(\d+))? · ([A-Z]+)\]$/gm, (_header, page, part, parts, source) => `=== STRONA ${page}${totalPages ? `/${totalPages}` : ""}` +
+        (part && part !== "1" ? ` (ciąg dalszy, część ${part}/${parts})` : part ? ` (część ${part}/${parts})` : "") +
+        (source === "OCR" ? " · tekst z OCR" : source === "BLANK" ? " · pusta" : "") +
+        " ===");
+}
 function buildDocumentContext(attachments) {
     const sections = attachments.map((attachment) => {
         const chunks = attachment.chunks.map((chunk) => {
-            const sourceLabel = attachment.sourceScope === "FIRM_KNOWLEDGE"
-                ? "FIRM KNOWLEDGE"
-                : attachment.sourceScope === "CASE_KNOWLEDGE"
-                    ? "CASE KNOWLEDGE"
-                    : "DOCUMENT";
+            const sourceLabel = attachment.sourceScope === "FIRM_TEMPLATE"
+                ? "WZÓR KANCELARII"
+                : attachment.sourceScope === "FIRM_KNOWLEDGE"
+                    ? "KNOW-HOW KANCELARII"
+                    : attachment.sourceScope === "CASE_KNOWLEDGE"
+                        ? "CASE KNOWLEDGE"
+                        : "DOCUMENT";
             const representation = chunk.representation ===
                 "EXTRACTIVE_DIGEST"
                 ? " · EXTRACTIVE DIGEST · BACKLINK=ORIGINAL_CHUNK"
                 : "";
             return [
                 `[${sourceLabel} ${attachment.documentId} · CHUNK ${chunk.index} · PAGES ${chunk.pageStart}-${chunk.pageEnd}${representation}]`,
-                chunk.text
+                markPages(chunk.text, attachment.totalPages)
             ].join("\n");
         });
-        return chunks.join("\n\n");
+        return [
+            ...(attachment.title
+                ? [`[${attachment.documentId} · PLIK: ${attachment.title}]`]
+                : []),
+            ...(attachment.totalPages
+                ? [
+                    `[${attachment.documentId} · STRON: ${attachment.totalPages} · każda strona zaczyna się znacznikiem "=== STRONA n/${attachment.totalPages} ==="]`
+                ]
+                : []),
+            ...chunks
+        ].join("\n\n");
     });
-    return sections.join("\n\n---\n\n");
+    const firm = attachments.some((attachment) => attachment.sourceScope === "FIRM_TEMPLATE" || attachment.sourceScope === "FIRM_KNOWLEDGE");
+    return [...(firm ? [FIRM_MATERIAL_NOTE] : []), ...sections].join("\n\n---\n\n");
 }
+export const buildDocumentContextForTest = buildDocumentContext;
+export const FIRM_MATERIAL_NOTE = [
+    "# MATERIAŁY KANCELARII",
+    "Bloki oznaczone WZÓR KANCELARII i KNOW-HOW KANCELARII pochodzą z biblioteki kancelarii, nie z akt sprawy.",
+    "- Wzór: przejmij jego układ, kolejność części, styl i stałe formuły; treść merytoryczną bierz z dokumentów sprawy i wiadomości użytkownika.",
+    "- Nie przenoś do pisma danych przykładowych z wzoru (stron, sygnatur, kwot, dat, adresów); w miejsca bez danych wstaw neutralne pole w nawiasie kwadratowym, np. [Kwota], [Termin].",
+    "- Materiały kancelarii nie są dowodami ani faktami w sprawie; nie cytuj ich jako źródła faktów."
+].join("\n");
 function transferExecutionEvents(events, audit) {
     for (const event of events) {
         if (event.type === "skill_read" ||
@@ -279,6 +327,33 @@ function transferExecutionEvents(events, audit) {
         }
     }
 }
+const DRAFT_PII_TOKEN = /\[PII:([A-Z_]+):(\d{4})(?:\|([A-Z]{2,4}))?\]/g;
+// An incomplete token at the end of the stream is held back until complete.
+const DRAFT_PARTIAL_TOKEN_TAIL = /\[(?:P(?:I(?:I(?::[A-Z_]*(?::\d{0,4}(?:\|[A-Z]{0,4})?)?)?)?)?)?$/;
+export function createDraftCallbacks(vault, onDraft) {
+    let raw = "";
+    const publish = () => {
+        const visible = raw.replace(DRAFT_PARTIAL_TOKEN_TAIL, "");
+        onDraft(visible.replace(DRAFT_PII_TOKEN, (token, kind, sequence, requestedCase) => {
+            const base = `[PII:${kind}:${sequence}]`;
+            return vault.hasToken(base)
+                ? vault.restore(base, requestedCase ?? null).text
+                : token;
+        }));
+    };
+    return {
+        onContentDelta: (text) => {
+            raw += text;
+            publish();
+        },
+        // A tool round starts a new model turn; the previous partial text was
+        // only a preamble to the tool call.
+        onToolCallStart: () => {
+            raw = "";
+            publish();
+        }
+    };
+}
 export class SafeSessionExecutor {
     registry;
     providers;
@@ -286,25 +361,36 @@ export class SafeSessionExecutor {
     verificationToolFactory;
     chatNamedEntityRecognizer;
     legalFederationTools;
+    coreLawIndex;
+    personMorphology;
     engine;
     autoRouter;
     auxiliaryScheduler;
-    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools) {
+    constructor(registry, providers, finalizer = new AuditedFinalizer(), verificationToolFactory, chatNamedEntityRecognizer, legalFederationTools, coreLawIndex, personMorphology) {
         this.registry = registry;
         this.providers = providers;
         this.finalizer = finalizer;
         this.verificationToolFactory = verificationToolFactory;
         this.chatNamedEntityRecognizer = chatNamedEntityRecognizer;
         this.legalFederationTools = legalFederationTools;
+        this.coreLawIndex = coreLawIndex;
+        this.personMorphology = personMorphology;
         this.engine = new LexExecutionEngine(registry, providers);
         this.autoRouter =
             new ModelAutoRouter(registry, providers);
         this.auxiliaryScheduler =
             new AuxiliaryModelScheduler(providers);
     }
+    // A local primary model keeps the text on this machine, so the chat does
+    // not also wait for local-model PII detection before answering.
+    chatRecognizerFor(model) {
+        return this.chatNamedEntityRecognizer
+            ? privacyRecognizerFor(this.chatNamedEntityRecognizer, !model.startsWith("local/"))
+            : undefined;
+    }
     async resolveAutoRouting(request) {
-        const vault = new PseudonymizationVault();
-        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatNamedEntityRecognizer);
+        const vault = new PseudonymizationVault(request.privacySeed);
+        const pseudonymizer = new LocalPolishPseudonymizer(vault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         try {
             protectedQuery =
@@ -335,14 +421,19 @@ export class SafeSessionExecutor {
         };
     }
     async execute(request) {
+        const step = request.onStep ?? (() => undefined);
+        step("PREPARE", "anonimizacja wiadomości");
+        if (request.documentAttachments?.length) {
+            step("PREPARE", `pliki w kontekście: ${request.documentAttachments.length}`);
+        }
         const audit = new AuditTrail();
         audit.start({
             provider: request.provider,
             model: request.model,
             mode: request.mode
         });
-        const chatPrivacyVault = new PseudonymizationVault();
-        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatNamedEntityRecognizer);
+        const chatPrivacyVault = new PseudonymizationVault(request.privacySeed);
+        const chatPseudonymizer = new LocalPolishPseudonymizer(chatPrivacyVault, this.chatRecognizerFor(request.model), this.personMorphology);
         let protectedQuery;
         let protectedAuxiliaryText;
         try {
@@ -386,7 +477,9 @@ export class SafeSessionExecutor {
         const requestedHistoricalAsOf = detectHistoricalAsOf(protectedQuery);
         const ledger = new VerificationLedger();
         const verificationTools = this.verificationToolFactory?.(ledger);
-        const corpusTools = new LegalCorpusToolRuntime(this.registry);
+        const corpusTools = new LegalCorpusToolRuntime(this.registry, {
+            modelSelectsSkills: request.modelSelectsSkills === true
+        });
         const reportTools = new ReportBlueprintToolRuntime();
         const federationTools = this.legalFederationTools;
         const auxiliarySources = [];
@@ -474,8 +567,23 @@ export class SafeSessionExecutor {
                 ...(attachment.sourceScope ? { sourceScope: attachment.sourceScope } : {})
             });
         }
+        const coreLawTools = this.coreLawIndex
+            ? new CoreLawToolRuntime(this.coreLawIndex)
+            : undefined;
+        // Local 11-12B models call tools unreliably: they get the most relevant
+        // core law articles in the prompt (retrieval, not training).
+        const coreLawRag = this.coreLawIndex && request.model.startsWith("local/")
+            ? coreLawRetrievalPrompt(this.coreLawIndex, protectedQuery)
+            : null;
+        // Claude account in AUTO: skills are read natively from the corpus
+        // directory, so the corpus tools are not offered; the rest go over MCP.
+        const nativeCorpus = request.modelSelectsSkills === true &&
+            this.providers.nativeCorpusAccess(request.provider, request.model);
         const toolSchemas = [
-            ...corpusTools.schemas(),
+            ...(nativeCorpus ? [] : corpusTools.schemas()),
+            ...(coreLawTools
+                ? coreLawTools.schemas()
+                : []),
             ...reportTools.schemas(),
             ...(federationTools
                 ? federationTools.schemas()
@@ -483,7 +591,10 @@ export class SafeSessionExecutor {
             ...(verificationTools ? verificationTools.schemas() : [])
         ];
         const toolPrompt = [
-            corpusTools.systemPromptAppendix(),
+            ...(nativeCorpus ? [] : [corpusTools.systemPromptAppendix()]),
+            ...(coreLawTools
+                ? [coreLawTools.systemPromptAppendix()]
+                : []),
             reportTools.systemPromptAppendix(),
             ...(federationTools
                 ? [federationTools.systemPromptAppendix()]
@@ -496,11 +607,72 @@ export class SafeSessionExecutor {
                 : []),
             ...(attachments.length > 0
                 ? [documentCitationSystemPrompt(attachments)]
-                : [])
+                : []),
+            ...(coreLawRag ? [coreLawRag] : [])
         ].join("\n\n");
+        // Kind and gender of every placeholder the model will see: it inflects
+        // around them without ever seeing a name.
+        const placeholderKey = placeholderKeyPrompt([
+            ...placeholderGrammar([
+                protectedQuery,
+                protectedAuxiliaryText ?? "",
+                // Shared-key documents use the chat's own (seeded) tokens.
+                ...attachments
+                    .filter((attachment) => attachment.sharedKey)
+                    .flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))
+            ].join("\n"), chatPrivacyVault),
+            ...attachments
+                .filter((attachment) => !attachment.sharedKey)
+                .flatMap((attachment) => attachment.grammar ?? [])
+        ]);
+        const draftCallbacks = request.onDraft
+            ? createDraftCallbacks(chatPrivacyVault, request.onDraft)
+            : undefined;
         const execution = await this.engine.executePolishLegalQuery({
+            onEvent: (event) => {
+                if (event.status !== "OK")
+                    return;
+                if (event.type === "route")
+                    step("ROUTING", event.target);
+                else if (event.target === "MODEL_SKILL_SELECTION")
+                    step("ROUTING", "model dobiera skille według routera v3");
+                else if (event.type === "skill_read")
+                    step("SKILLS", `skill ${event.target}`);
+                else if (event.type === "resource_read")
+                    step("SKILLS", event.target);
+                else if (event.type === "provider_start")
+                    step("MODEL", `model ${event.detail ?? event.target}`);
+            },
             query: protectedQuery,
+            ...(draftCallbacks
+                ? {
+                    draftCallbacks
+                }
+                : {}),
             ...(documentContext ? { documentContext } : {}),
+            ...(placeholderKey ? { placeholderKey } : {}),
+            ...(request.conversationalOnly
+                ? {
+                    conversationalOnly: true
+                }
+                : {}),
+            ...(request.modelSelectsSkills
+                ? {
+                    modelSelectsSkills: true
+                }
+                : {}),
+            ...(nativeCorpus
+                ? {
+                    nativeCorpus: {
+                        root: this.registry.root,
+                        onRead: (relativePath) => {
+                            corpusTools.recordNativeRead(relativePath);
+                            step("SKILLS", relativePath);
+                        },
+                        missingQualifier: () => corpusTools.missingCriminalQualifier()
+                    }
+                }
+                : {}),
             provider: request.provider,
             model: request.model,
             ...(request.accountSessionKey
@@ -557,14 +729,29 @@ export class SafeSessionExecutor {
                     : {})
             }),
             runTools: async (calls) => {
+                for (const call of calls) {
+                    if (corpusTools.handles(call.name)) {
+                        const target = [call.input.skill, call.input.path].filter((part) => typeof part === "string").join("/");
+                        step("SKILLS", target || call.name);
+                    }
+                    else {
+                        step("MODEL", `narzędzie ${call.name}`);
+                    }
+                }
                 const corpusCalls = calls.filter((call) => corpusTools.handles(call.name));
                 const reportCalls = calls.filter((call) => reportTools.handles(call.name));
                 const federationCalls = calls.filter((call) => federationTools?.handles(call.name) ?? false);
-                const verificationCalls = calls.filter((call) => !corpusTools.handles(call.name) &&
+                const coreLawCalls = calls.filter((call) => coreLawTools?.handles(call.name) ?? false);
+                const verificationCalls = calls.filter((call) => !(coreLawTools?.handles(call.name) ?? false) &&
+                    !corpusTools.handles(call.name) &&
                     !reportTools.handles(call.name) &&
                     !(federationTools?.handles(call.name) ?? false));
                 const corpusResults = corpusCalls.length > 0
                     ? await corpusTools.runTools(corpusCalls)
+                    : [];
+                const coreLawResults = coreLawTools &&
+                    coreLawCalls.length > 0
+                    ? await coreLawTools.runTools(coreLawCalls)
                     : [];
                 const reportResults = reportCalls.length > 0
                     ? await reportTools.runTools(reportCalls)
@@ -620,6 +807,7 @@ export class SafeSessionExecutor {
                     : [];
                 const byId = new Map([
                     ...corpusResults,
+                    ...coreLawResults,
                     ...reportResults,
                     ...federationResults,
                     ...cachedVerificationResults,
@@ -638,16 +826,47 @@ export class SafeSessionExecutor {
             }
         });
         transferExecutionEvents(execution.events, audit);
+        const modelSelectedSkills = execution.events.some((event) => event.target ===
+            "MODEL_SKILL_SELECTION" &&
+            event.status === "OK");
+        if (modelSelectedSkills) {
+            // Report what the model actually loaded (audited corpus reads).
+            const selection = corpusTools.modelSkillSelection();
+            execution.loadedSkills =
+                selection.loadedSkills;
+            execution.domainSkills =
+                selection.domainSkills;
+            execution.executionSkills =
+                selection.executionSkills;
+            if (selection.primarySkill) {
+                execution.primarySkill =
+                    selection.primarySkill;
+            }
+        }
+        for (const event of coreLawTools?.auditEvents() ?? []) {
+            audit.record(event.tool === "read_core_law_article"
+                ? "resource_read"
+                : "tool_decision", `core-law:${event.target}`, event.decision === "ALLOW" ? "OK" : "BLOCKED", {
+                tool: event.tool,
+                ...(event.detail ? event.detail : {})
+            });
+        }
         const corpusAudit = corpusTools.auditEvents();
         for (const event of corpusAudit) {
-            audit.record(event.tool === "read_legal_resource"
+            audit.record(event.tool === "read_legal_resource" || event.tool === "Read"
                 ? "resource_read"
                 : "tool_decision", event.target, event.decision === "ALLOW" ? "OK" : "BLOCKED", {
                 tool: event.tool,
                 ...(event.detail ? event.detail : {})
             });
         }
-        const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK");
+        // When the model picks skills itself, a refused read it can correct
+        // (router-v3 not read yet, a guessed file name) is guidance, not a failed
+        // turn. Path escapes and other refusals still block.
+        const correctableCorpusRefusal = /^(ROUTER_V3_REQUIRED_FIRST|LEGAL_RESOURCE_NOT_FOUND|LEGAL_SKILL_NOT_FOUND|LEGAL_RESOURCE_NOT_FILE|INVALID_RESOURCE_OFFSET)/;
+        const corpusBlocked = corpusAudit.some((event) => event.decision === "BLOCK" &&
+            !(modelSelectedSkills &&
+                correctableCorpusRefusal.test(String(event.detail?.error ?? ""))));
         audit.record("gate", "G36_LEGAL_CORPUS_RUNTIME", corpusBlocked ? "BLOCKED" : "OK", { toolEvents: corpusAudit.length });
         const reportAudit = reportTools.auditEvents();
         for (const event of reportAudit) {
@@ -813,6 +1032,7 @@ export class SafeSessionExecutor {
                 "[/STRUCTURED_REPORT_BLUEPRINT_DATA]"
             ].join("\n")
             : processedDocumentCitations.text;
+        step("VERIFY", "przepisy, orzeczenia i cytaty w odpowiedzi");
         const finalization = this.finalizer.finalize({
             text: finalizationText,
             ledger,
@@ -1105,6 +1325,9 @@ export class SafeSessionExecutor {
             line: finding.reference.line,
             status: finding.status
         }));
+        step("RESTORE", "symbole zastępcze → dane z lokalnego klucza");
+        // Every restored value is reported so the UI can mark it for review.
+        const restoredAnswer = restoreWithReport(processedDocumentCitations.text, chatPrivacyVault);
         const response = {
             sessionId: audit.sessionId,
             status: safeToPresent ? "DRAFT_PRESENTABLE" : "BLOCKED",
@@ -1127,12 +1350,13 @@ export class SafeSessionExecutor {
             domainSkills: execution.domainSkills,
             ...(safeToPresent
                 ? {
-                    answer: processedDocumentCitations
-                        .text.replace(/\[PII:[A-Z_]+:\d{4}\]/g, (token) => chatPrivacyVault
-                        .hasToken(token)
-                        ? chatPrivacyVault
-                            .resolveToken(token)
-                        : token),
+                    answer: restoredAnswer.text,
+                    ...(restoredAnswer.restorations.length > 0
+                        ? { restorations: restoredAnswer.restorations }
+                        : {}),
+                    ...(restoredAnswer.unresolved.length > 0
+                        ? { unresolvedTokens: restoredAnswer.unresolved }
+                        : {}),
                     documentCitations: processedDocumentCitations.citations,
                     ...(reportBlueprint
                         ? {

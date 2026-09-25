@@ -122,7 +122,11 @@ export class SecureCaseArtifactStore {
                 }
                 : {}),
             sensitivity: args.sensitivity,
-            storage: "ENCRYPTED_LME1"
+            storage: "ENCRYPTED_LME1",
+            ...(args.sourceArtifactId &&
+                validArtifactId(args.sourceArtifactId)
+                ? { sourceArtifactId: args.sourceArtifactId }
+                : {})
         };
         try {
             await writeCaseBlob({

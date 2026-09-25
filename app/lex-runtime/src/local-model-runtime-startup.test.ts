@@ -97,45 +97,83 @@ describe(
       );
     }
 
+    function writeAllOptionalAssets(root: string) {
+      const files = {
+        mcp: path.join(root, "mcp-servers.json"),
+        ui: path.join(root, "llama-ui-config.json"),
+        template: path.join(
+          root,
+          "mistral-nemo-web-grounded.jinja"
+        )
+      };
+      fs.writeFileSync(files.mcp, "{}\n");
+      fs.writeFileSync(files.ui, "{}\n");
+      fs.writeFileSync(
+        files.template,
+        "{{ messages }}\n"
+      );
+      return files;
+    }
+
     it(
-      "uses native-agent configuration and a grounded template when all optional assets exist",
+      "keeps the Lex-owned server plain even when native-agent assets and user-level LLAMA_ARG_* exist",
       () => {
         const root =
           temporaryRoot();
-        const mcp =
-          path.join(
+        const files =
+          writeAllOptionalAssets(root);
+        const baseArgs = [
+          "--model",
+          "model.gguf"
+        ];
+
+        const result =
+          buildOptionalLocalLaunchSpec(
             root,
-            "mcp-servers.json"
+            "local/mistral-nemo-12b-q4km",
+            baseArgs,
+            {
+              LLAMA_ARG_AGENT: "true",
+              LLAMA_ARG_MCP_SERVERS_CONFIG:
+                files.mcp,
+              LLAMA_ARG_UI_CONFIG_FILE:
+                files.ui
+            }
           );
-        const ui =
-          path.join(
-            root,
-            "llama-ui-config.json"
-          );
-        const template =
-          path.join(
-            root,
-            "mistral-nemo-web-grounded.jinja"
-          );
-        fs.writeFileSync(
-          mcp,
-          "{}\n"
-        );
-        fs.writeFileSync(
-          ui,
-          "{}\n"
-        );
-        fs.writeFileSync(
-          template,
-          "{{ messages }}\n"
-        );
+
+        expect(result.args)
+          .toEqual(baseArgs);
+        expect(
+          result.env.LLAMA_ARG_AGENT
+        ).toBeUndefined();
+        expect(
+          result.env
+            .LLAMA_ARG_MCP_SERVERS_CONFIG
+        ).toBeUndefined();
+        expect(
+          result.env
+            .LLAMA_ARG_UI_CONFIG_FILE
+        ).toBeUndefined();
+      }
+    );
+
+    it(
+      "uses native-agent configuration and a grounded template only on explicit opt-in",
+      () => {
+        const root =
+          temporaryRoot();
+        const files =
+          writeAllOptionalAssets(root);
 
         const result =
           buildOptionalLocalLaunchSpec(
             root,
             "local/mistral-nemo-12b-q4km",
             ["--model", "model.gguf"],
-            {}
+            {
+              LEX_LOCAL_LLAMA_NATIVE_AGENT:
+                "1"
+            }
           );
 
         expect(
@@ -145,17 +183,17 @@ describe(
         expect(
           result.env
             .LLAMA_ARG_MCP_SERVERS_CONFIG
-        ).toBe(mcp);
+        ).toBe(files.mcp);
         expect(
           result.env
             .LLAMA_ARG_UI_CONFIG_FILE
-        ).toBe(ui);
+        ).toBe(files.ui);
         expect(result.args)
           .toContain(
             "--chat-template-file"
           );
         expect(result.args)
-          .toContain(template);
+          .toContain(files.template);
       }
     );
   }

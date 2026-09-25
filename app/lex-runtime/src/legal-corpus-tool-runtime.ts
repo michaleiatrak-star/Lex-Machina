@@ -8,6 +8,25 @@ import type {
 import {
   LexSkillRegistry
 } from "./registry.js";
+import {
+  CRIMINAL_DOMAIN_PREFIX,
+  CRIMINAL_QUALIFIER_INDEX
+} from "./execution-engine.js";
+
+const ROUTER_SKILL = "prawny-router-v3";
+// Loaded by the router itself; they are not a legal domain or workflow.
+const INFRASTRUCTURE_SKILLS = new Set([
+  ROUTER_SKILL,
+  "shared",
+  "prawo-polskie-v2"
+]);
+
+export type ModelSkillSelection = {
+  primarySkill: string | null;
+  loadedSkills: string[];
+  domainSkills: string[];
+  executionSkills: string[];
+};
 
 const LIST_SKILLS =
   "list_legal_skills";
@@ -269,10 +288,63 @@ export class LegalCorpusToolRuntime {
   private readonly events:
     LegalCorpusAuditEvent[] = [];
 
+  // Skills whose SKILL.md the model read, in order.
+  private readonly readSkills:
+    string[] = [];
+  private qualifierDelivered = false;
+
   constructor(
     private readonly registry:
-      LexSkillRegistry
+      LexSkillRegistry,
+    // AUTO for account/API models: the model picks skills itself; the runtime
+    // still enforces router-v3 first and the criminal qualifier.
+    private readonly options: {
+      modelSelectsSkills?: boolean;
+    } = {}
   ) {}
+
+  modelSkillSelection(): ModelSkillSelection {
+    const domainSkills =
+      this.readSkills.filter((name) => name.startsWith("dr-"));
+    const executionSkills =
+      this.readSkills.filter(
+        (name) =>
+          !name.startsWith("dr-") &&
+          !INFRASTRUCTURE_SKILLS.has(name)
+      );
+    return {
+      primarySkill:
+        domainSkills[0] ??
+        (this.readSkills.length > 0 ? ROUTER_SKILL : null),
+      loadedSkills: [...this.readSkills],
+      domainSkills,
+      executionSkills
+    };
+  }
+
+  /** A corpus file the model read with its own read-only file tool (native corpus access). */
+  recordNativeRead(relativePath: string): void {
+    const skill = this.skillForPath(relativePath);
+    const parts = relativePath.split("/");
+    if (skill && parts.length === 2 && parts[1] === "SKILL.md" && !this.readSkills.includes(skill)) {
+      this.readSkills.push(skill);
+    }
+    if (skill?.startsWith(CRIMINAL_DOMAIN_PREFIX) && relativePath.endsWith(`/${CRIMINAL_QUALIFIER_INDEX}`)) {
+      this.qualifierDelivered = true;
+    }
+    this.events.push({ tool: "Read", target: relativePath, decision: "ALLOW", detail: { native: true } });
+  }
+
+  /**
+   * A criminal-law skill was read natively without the qualifier: the
+   * corpus path the model still has to read before qualifying the act.
+   */
+  missingCriminalQualifier(): string | null {
+    if (this.qualifierDelivered) return null;
+    const criminal = this.readSkills.find((name) => name.startsWith(CRIMINAL_DOMAIN_PREFIX));
+    const skill = criminal ? this.registry.get(criminal) : undefined;
+    return skill ? `${path.basename(skill.directory)}/${CRIMINAL_QUALIFIER_INDEX}` : null;
+  }
 
   schemas():
     NormalizedToolSchema[] {
@@ -587,6 +659,31 @@ export class LegalCorpusToolRuntime {
         );
       }
 
+      const resolvedPath =
+        path.relative(
+          this.registry.root,
+          resolved
+        )
+        .replaceAll(
+          path.sep,
+          "/"
+        );
+      const targetSkill =
+        this.skillForPath(
+          resolvedPath
+        );
+      if (
+        this.options.modelSelectsSkills &&
+        targetSkill !== ROUTER_SKILL &&
+        !this.readSkills.includes(
+          ROUTER_SKILL
+        )
+      ) {
+        throw new Error(
+          "ROUTER_V3_REQUIRED_FIRST: read skill=prawny-router-v3 path=SKILL.md before any other legal resource"
+        );
+      }
+
       const text =
         textFile(
           resolved
@@ -648,6 +745,68 @@ export class LegalCorpusToolRuntime {
           "/"
         );
 
+      const isSkillEntry =
+        targetSkill !== null &&
+        resolvedPath.split("/").length === 2 &&
+        resolvedPath.endsWith("/SKILL.md");
+      if (
+        isSkillEntry &&
+        !this.readSkills.includes(
+          targetSkill
+        )
+      ) {
+        this.readSkills.push(
+          targetSkill
+        );
+      }
+      // A criminal-law matter always goes through the qualifier: it is
+      // delivered with the first DR-03 skill entry, not left to the model.
+      let requiredModule:
+        | { path: string; content: string }
+        | undefined;
+      if (
+        this.options.modelSelectsSkills &&
+        isSkillEntry &&
+        targetSkill.startsWith(
+          CRIMINAL_DOMAIN_PREFIX
+        ) &&
+        !this.qualifierDelivered
+      ) {
+        const qualifier =
+          this.registry.resolveResource(
+            targetSkill,
+            CRIMINAL_QUALIFIER_INDEX
+          );
+        if (!qualifier) {
+          throw new Error(
+            "CRIMINAL_QUALIFIER_MISSING"
+          );
+        }
+        requiredModule = {
+          path:
+            `${targetSkill}/${CRIMINAL_QUALIFIER_INDEX}`,
+          content:
+            textFile(
+              qualifier
+            ).slice(
+              0,
+              MAX_READ_CHARS
+            )
+        };
+        this.qualifierDelivered = true;
+        this.events.push({
+          tool: call.name,
+          target:
+            requiredModule.path,
+          decision:
+            "ALLOW",
+          detail: {
+            deliveredWith:
+              resolvedPath
+          }
+        });
+      }
+
       this.events.push({
         tool: call.name,
         target:
@@ -675,13 +834,39 @@ export class LegalCorpusToolRuntime {
         totalChars:
           text.length,
         nextOffset,
-        content
+        content,
+        ...(requiredModule
+          ? {
+              requiredModule: {
+                ...requiredModule,
+                instruction:
+                  "Mandatory criminal-law qualifier. Apply it before any criminal-law qualification."
+              }
+            }
+          : {})
       });
     }
 
     throw new Error(
       "UNKNOWN_LEGAL_CORPUS_TOOL"
     );
+  }
+
+  private skillForPath(
+    relativePath: string
+  ): string | null {
+    const directory =
+      relativePath.split("/", 1)[0];
+    for (const skill of this.registry.skills.values()) {
+      if (
+        path.basename(
+          skill.directory
+        ) === directory
+      ) {
+        return skill.name;
+      }
+    }
+    return null;
   }
 
   private targetFor(

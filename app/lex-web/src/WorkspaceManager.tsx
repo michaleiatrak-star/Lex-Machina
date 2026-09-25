@@ -1,13 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  ApiError,
+  deanonymizeUpload,
   finalizeDocument,
+  getProcessingProgress,
+  joinSharedKey,
+  keepAllDirectives,
+  listCaseArtifacts,
   isDesktopShell,
+  newProgressId,
   listCaseFiles,
   processStoredCaseFile,
   searchCaseKnowledge,
   uploadCaseFile,
+  type CaseArtifact,
   type CaseKnowledgeHit,
-  type StoredUploadResponse
+  type ProcessingProgress,
+  type StoredUploadResponse,
+  type LocalModelsResponse,
+  getLocalModels,
+  startLocalModel
 } from "./api.js";
 import {
   filterWorkspaceItems,
@@ -21,11 +33,99 @@ import {
   getWorkspace,
   moveWorkspaceItem,
   openWorkspaceItemInSystem,
+  getEditableItem,
   previewWorkspaceItem,
+  renderEditable,
+  type EditableBlock,
+  type EditableDocument,
+  type EditableFormat,
+  type EditableSheets,
   type WorkspaceFolder,
   type WorkspaceItem,
   type WorkspaceResponse
 } from "./workspace-client.js";
+import { PdfPreview } from "./PdfPreview.js";
+import { TextFileEditor } from "./TextFileEditor.js";
+import { DocumentEditor } from "./DocumentEditor.js";
+import { SheetEditor } from "./SheetEditor.js";
+import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
+import { progressLabel, progressPercent } from "./processing-progress.js";
+import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
+import { ArtifactDeanonymize } from "./ArtifactDeanonymize.js";
+import { decodeTextFile } from "./text-editing.js";
+
+const TEXT_EXTENSIONS = /\.(txt|md|markdown|json|xml|log)$/i;
+const DOCUMENT_TYPES = new Set([
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.oasis.opendocument.text"
+]);
+const SHEET_TYPES = new Set([
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-excel.sheet.macroenabled.12",
+  "text/csv",
+  "text/tab-separated-values"
+]);
+
+export function previewKind(
+  mediaType: string,
+  filename: string
+): "text" | "pdf" | "image" | "document" | "sheet" | "none" {
+  const type = mediaType.split(";")[0]!.trim().toLowerCase();
+  if (type === "application/pdf" || /\.pdf$/i.test(filename)) return "pdf";
+  if (type.startsWith("image/")) return "image";
+  if (DOCUMENT_TYPES.has(type) || /\.(docx|odt)$/i.test(filename)) return "document";
+  if (SHEET_TYPES.has(type) || /\.(xlsx|xlsm|csv|tsv)$/i.test(filename)) return "sheet";
+  if (
+    type.startsWith("text/") ||
+    type === "application/json" ||
+    type === "application/xml" ||
+    TEXT_EXTENSIONS.test(filename)
+  ) {
+    return "text";
+  }
+  return "none";
+}
+
+export function documentProcessingFailureMessage(
+  failure: unknown
+): string {
+  if (!(failure instanceof Error)) {
+    return String(failure);
+  }
+  const code =
+    failure instanceof ApiError
+      ? failure.code
+      : failure.message;
+  const reason =
+    failure instanceof ApiError
+      ? failure.reason ?? ""
+      : "";
+  if (code.startsWith("DESKTOP_RUNTIME_PROXY_FAILED")) {
+    return `Przetwarzanie dokumentu nie zakończyło się w limicie czasu połączenia z lokalnym runtime. Kod: ${code}`;
+  }
+  if (code !== "STORED_FILE_PROCESSING_FAILED") {
+    return code;
+  }
+  if (reason === "LOCAL_PRIVACY_MODEL_NOT_READY") {
+    return "Nie udało się przetworzyć dokumentu: opcja „z lokalnym AI” wymaga uruchomionego modelu lokalnego (Ustawienia → Modele). Uruchom model albo odznacz opcję.";
+  }
+  if (reason === "LOCAL_PRIVACY_MODEL_FAILED") {
+    return "Nie udało się przetworzyć dokumentu: lokalny model nie odpowiedział podczas sprawdzania danych osobowych. Spróbuj ponownie albo odznacz „z lokalnym AI”.";
+  }
+  const cause =
+    reason === "OCR_REQUIRED" || reason === "OCR_ENGINE_MISSING"
+      ? "dokument wymaga OCR, ale lokalny silnik OCR nie jest zainstalowany lub jest niekompletny"
+      : reason === "OCR_ENGINE_START_FAILED"
+        ? "nie udało się uruchomić lokalnego silnika OCR (Python)"
+      : reason.startsWith("OCR_")
+        ? "lokalny OCR nie przetworzył stron wymagających rozpoznania tekstu"
+        : reason.startsWith("DOCUMENT_")
+          ? "dokument przekracza limity bezpieczeństwa przetwarzania"
+          : reason
+            ? "błąd lokalnego przetwarzania dokumentu"
+            : "nieokreślony błąd lokalnego przetwarzania dokumentu";
+  return `Nie udało się przetworzyć dokumentu: ${cause}.${reason ? ` Kod: ${reason}` : ""}`;
+}
 
 function canRunPrivacyPipeline(
   item: WorkspaceItem
@@ -50,6 +150,14 @@ function canRunPrivacyPipeline(
         "application/vnd.ms-excel.sheet.macroenabled.12"
     )
   );
+}
+
+/** Short file type for the list ("DOCX", "PDF"); the full media type is in the tooltip. */
+function fileTypeLabel(item: { filename: string; mediaType: string }): string {
+  const extension = /\.([a-z0-9]{1,6})$/i.exec(item.filename)?.[1];
+  if (extension) return extension.toUpperCase();
+  const subtype = item.mediaType.split(";")[0]!.split("/")[1] ?? "";
+  return subtype.length <= 8 ? subtype.toUpperCase() : "PLIK";
 }
 
 function bytesLabel(bytes: number): string {
@@ -128,15 +236,81 @@ export function WorkspaceManager({
     setKnowledgeSearchError
   ] = useState("");
   const [busy, setBusy] = useState(false);
+  // "z lokalnym AI": the running local model (e.g. Bielik) checks each document too.
+  const [localAi, setLocalAi] = useState(false);
+  const [localRuntime, setLocalRuntime] = useState<LocalModelsResponse["runtime"] | null>(null);
+  const [localAiStarting, setLocalAiStarting] = useState(false);
+  const [localAiMessage, setLocalAiMessage] = useState("");
+  const localAiReady = Boolean(localRuntime?.configured && localRuntime.state === "READY");
+  useEffect(() => {
+    let cancelled = false;
+    getLocalModels()
+      .then((models) => {
+        if (!cancelled) setLocalRuntime(models.runtime);
+      })
+      .catch(() => {
+        if (!cancelled) setLocalRuntime(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshToken]);
+
+  // Ticking "z lokalnym AI" with the model stopped offers to start it; the
+  // option works as soon as the model reports READY.
+  async function startLocalAi(): Promise<void> {
+    const modelId = localRuntime?.selectedModelId;
+    if (!modelId) {
+      setLocalAiMessage("Nie wybrano modelu lokalnego - zainstaluj go w Ustawienia → Modele.");
+      return;
+    }
+    setLocalAiStarting(true);
+    setLocalAiMessage("Uruchamiam model lokalny…");
+    try {
+      const started = await startLocalModel(modelId);
+      setLocalRuntime(started.runtime);
+      const deadline = Date.now() + 10 * 60 * 1000;
+      let runtime = started.runtime;
+      while (!(runtime.configured && runtime.state === "READY") && Date.now() < deadline) {
+        setLocalAiMessage(
+          runtime.state === "PROVISIONING" ? "Przygotowuję model lokalny…" : "Uruchamiam model lokalny…"
+        );
+        await new Promise((resolve) => window.setTimeout(resolve, 2000));
+        runtime = (await getLocalModels()).runtime;
+        setLocalRuntime(runtime);
+      }
+      setLocalAiMessage(
+        runtime.state === "READY" ? "" : "Model lokalny nie uruchomił się w 10 minut - sprawdź Ustawienia → Modele."
+      );
+    } catch (failure) {
+      setLocalAiMessage(`Nie udało się uruchomić modelu lokalnego: ${failure instanceof Error ? failure.message : String(failure)}`);
+    } finally {
+      setLocalAiStarting(false);
+    }
+  }
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [artifacts, setArtifacts] = useState<CaseArtifact[]>([]);
+  const [deanonymizing, setDeanonymizing] = useState<string | null>(null);
+  const [fileDeanonymize, setFileDeanonymize] = useState<{ itemId: string; documentId: string } | null>(null);
   const [caseFiles, setCaseFiles] =
     useState<StoredUploadResponse[]>([]);
-  const [preview, setPreview] = useState<{
+  const [progressByItem, setProgressByItem] =
+    useState<Record<string, Pick<ProcessingProgress, "stage" | "done" | "total">>>({});
+  const [anonymized, setAnonymized] = useState<{
+    item: WorkspaceItem;
+    documentId: string;
+    tab: "marked" | "text" | "key";
+  } | null>(null);
+    const [preview, setPreview] = useState<{
     item: WorkspaceItem;
     url?: string;
+    pdf?: Blob;
     text?: string;
+    encoding?: string;
     page?: number;
+    document?: EditableDocument;
+    sheet?: EditableSheets;
     supported: boolean;
   } | null>(null);
 
@@ -144,6 +318,7 @@ export function WorkspaceManager({
     if (!caseId) {
       setWorkspace(null);
       setCaseFiles([]);
+      setArtifacts([]);
       return;
     }
     const [next, files] =
@@ -153,6 +328,7 @@ export function WorkspaceManager({
       ]);
     setWorkspace(next);
     setCaseFiles(files.uploads);
+    setArtifacts(await listCaseArtifacts(caseId).catch(() => []));
     if (
       selectedFolder &&
       !next.folders.some(
@@ -163,6 +339,39 @@ export function WorkspaceManager({
     ) {
       setSelectedFolder(null);
     }
+  }
+
+  const processedEntries = (workspace?.items ?? [])
+    .filter((entry) => entry.kind === "UPLOAD")
+    .map((entry) => ({
+      filename: entry.filename,
+      processing: caseFiles.find((file) => file.uploadId === entry.itemId)?.processing
+    }))
+    .filter((entry) => entry.processing && entry.processing.anonymized !== false);
+  // Keys to deanonymize with: the case's shared key once, then documents that
+  // still have their own key.
+  const sharedKeyDocument = processedEntries.find((entry) => entry.processing!.sharedKey);
+  const processedDocuments = [
+    ...(sharedKeyDocument
+      ? [{ filename: "Klucz sprawy (wspólny dla dokumentów)", documentId: sharedKeyDocument.processing!.documentId }]
+      : []),
+    ...processedEntries
+      .filter((entry) => !entry.processing!.sharedKey)
+      .map((entry) => ({ filename: `${entry.filename} (klucz osobny)`, documentId: entry.processing!.documentId }))
+  ];
+  const ownKeyDocuments = processedEntries.filter((entry) => !entry.processing!.sharedKey);
+
+  async function joinAllKeys(): Promise<void> {
+    await run(async () => {
+      let remapped = 0;
+      for (const entry of ownKeyDocuments) {
+        remapped += (await joinSharedKey(caseId, entry.processing!.documentId)).remapped;
+      }
+      setNotice(
+        `Połączono klucze ${ownKeyDocuments.length} dokumentów w klucz sprawy (przenumerowane symbole: ${remapped}). ` +
+          "Ta sama osoba ma teraz jeden symbol we wszystkich dokumentach sprawy."
+      );
+    });
   }
 
   function processingFor(
@@ -209,19 +418,62 @@ export function WorkspaceManager({
   }
 
   async function runAutomaticPrivacy(
-    item: WorkspaceItem
+    item: WorkspaceItem,
+    keepClear = false
+  ): Promise<void> {
+    const progressId = newProgressId();
+    setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
+    // Stage and page counts while the request runs; text never leaves the runtime.
+    const timer = window.setInterval(() => {
+      void getProcessingProgress(caseId, progressId)
+        .then((progress) => {
+          if (progress) {
+            setProgressByItem((current) =>
+              current[item.itemId] ? { ...current, [item.itemId]: progress } : current
+            );
+          }
+        })
+        .catch(() => undefined);
+    }, 500);
+    try {
+      await runAutomaticPrivacySteps(item, progressId, keepClear);
+    } finally {
+      window.clearInterval(timer);
+      setProgressByItem((current) => {
+        const { [item.itemId]: _done, ...rest } = current;
+        return rest;
+      });
+    }
+  }
+
+  function showAnonymized(item: WorkspaceItem, tab: "marked" | "text" | "key"): void {
+    const documentId = processingFor(item)?.documentId;
+    if (!documentId) return;
+    setPreview(null);
+    setAnonymized({ item, documentId, tab });
+  }
+
+  async function runAutomaticPrivacySteps(
+    item: WorkspaceItem,
+    progressId: string,
+    keepClear: boolean
   ): Promise<void> {
     await run(async () => {
       const review =
         await processStoredCaseFile(
           caseId,
-          item.itemId
+          item.itemId,
+          undefined,
+          progressId,
+          localAi && !keepClear ? { localAi: true } : undefined
         );
+      // OCR only: every page kept as written, no anonymization key.
       const result =
         await finalizeDocument(
           caseId,
           review.documentId,
-          []
+          keepClear ? keepAllDirectives(review) : [],
+          progressId
         );
       setNotice(
         `„${item.filename}”: OCR/pseudonimizacja zakończona · ${result.ocrPages} stron OCR · ${result.privacy.findings} anonimizacji · osobny vault/deanonimizator zapisany dla ${result.documentId}.`
@@ -246,9 +498,13 @@ export function WorkspaceManager({
           setCaseFiles(files.uploads);
         }
       })
+      .then(() => listCaseArtifacts(caseId))
+      .then((list) => {
+        if (!cancelled && list) setArtifacts(list);
+      })
       .catch((failure) => {
         if (!cancelled) {
-          setError(failure instanceof Error ? failure.message : String(failure));
+          setError(documentProcessingFailureMessage(failure));
         }
       });
     return () => {
@@ -425,10 +681,57 @@ export function WorkspaceManager({
       await action();
       await refresh();
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }
+  }
+
+  async function saveRendered(
+    filename: string,
+    format: EditableFormat,
+    model: EditableDocument | EditableSheets,
+    delimiter?: string
+  ): Promise<void> {
+    const blob = await renderEditable(caseId, { format, model, ...(delimiter ? { delimiter } : {}) });
+    const stored = await uploadCaseFile(caseId, new File([blob], filename, { type: blob.type }));
+    if (selectedFolder) {
+      await moveWorkspaceItem(caseId, stored.uploadId, selectedFolder);
+    }
+    await refresh();
+  }
+
+  async function saveEditedDocument(
+    filename: string,
+    format: "docx" | "odt",
+    blocks: EditableBlock[]
+  ): Promise<void> {
+    await saveRendered(filename, format, { kind: "document", blocks });
+  }
+
+  async function saveEditedSheet(
+    filename: string,
+    format: "xlsx" | "csv" | "tsv",
+    model: EditableSheets
+  ): Promise<void> {
+    await saveRendered(filename, format, model, format === "csv" ? model.delimiter : undefined);
+  }
+
+  async function saveEditedText(
+    filename: string,
+    text: string
+  ): Promise<void> {
+    const markdown = /\.(md|markdown)$/i.test(filename);
+    const stored = await uploadCaseFile(
+      caseId,
+      new File([text], filename, {
+        type: markdown ? "text/markdown" : "text/plain"
+      })
+    );
+    if (selectedFolder) {
+      await moveWorkspaceItem(caseId, stored.uploadId, selectedFolder);
+    }
+    await refresh();
   }
 
   async function showPreview(
@@ -437,40 +740,49 @@ export function WorkspaceManager({
   ): Promise<void> {
     setBusy(true);
     setError("");
+    setAnonymized(null);
     try {
-      const result = await previewWorkspaceItem(caseId, item.itemId);
       if (preview?.url) URL.revokeObjectURL(preview.url);
-      if (
-        result.mediaType.startsWith("text/") ||
-        result.mediaType === "application/json"
-      ) {
+      const pageProps = page ? { page } : {};
+      const officeKind = previewKind(item.mediaType, item.filename);
+      if (officeKind === "document" || officeKind === "sheet") {
+        const editable = await getEditableItem(caseId, item.itemId);
+        setPreview(
+          editable.model.kind === "document"
+            ? { item, document: editable.model, ...pageProps, supported: true }
+            : { item, sheet: editable.model, ...pageProps, supported: true }
+        );
+        return;
+      }
+      const result = await previewWorkspaceItem(caseId, item.itemId);
+      const kind = previewKind(result.mediaType, item.filename);
+      if (kind === "text") {
+        const decoded = decodeTextFile(new Uint8Array(await result.blob.arrayBuffer()));
         setPreview({
           item,
-          text: await result.blob.text(),
-          ...(page
-            ? { page }
-            : {}),
+          text: decoded.text,
+          encoding: decoded.encoding,
+          ...pageProps,
           supported: true
         });
         return;
       }
-      if (
-        result.mediaType === "application/pdf" ||
-        result.mediaType.startsWith("image/")
-      ) {
+      if (kind === "pdf") {
+        setPreview({ item, pdf: result.blob, ...pageProps, supported: true });
+        return;
+      }
+      if (kind === "image") {
         setPreview({
           item,
           url: URL.createObjectURL(result.blob),
-          ...(page
-            ? { page }
-            : {}),
+          ...pageProps,
           supported: true
         });
         return;
       }
       setPreview({ item, supported: false });
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }
@@ -482,7 +794,7 @@ export function WorkspaceManager({
     try {
       await openWorkspaceItemInSystem(caseId, item.itemId);
     } catch (failure) {
-      setError(failure instanceof Error ? failure.message : String(failure));
+      setError(documentProcessingFailureMessage(failure));
     } finally {
       setBusy(false);
     }
@@ -499,15 +811,13 @@ export function WorkspaceManager({
 
   return (
     <article className="chat-card workspace-manager">
-      <div className="chat-card-heading">
+      <div className="chat-card-heading workspace-manager-heading">
         <div>
           <p className="eyebrow">Struktura katalogów</p>
           <h2>{title}</h2>
           <p>
-            Foldery są logiczną, szyfrowaną strukturą workspace. Dotychczasowy
-            „Główny katalog” jest wyświetlany pod nazwą sprawy:
-            {" "}<strong>{rootFolderName}</strong>. Techniczny identyfikator caseId
-            pozostaje używany wyłącznie wewnętrznie do kluczy i integralności magazynu.
+            Foldery są logiczną, szyfrowaną strukturą workspace. „Główny katalog” jest
+            wyświetlany pod nazwą sprawy: <strong>{rootFolderName}</strong>.
           </p>
         </div>
         <div className="workspace-header-actions">
@@ -601,6 +911,37 @@ export function WorkspaceManager({
             >
               Wyczyść filtry
             </button>
+          ) : null}
+          {canWrite ? (
+            <span className="workspace-local-ai-group">
+              <label
+                className="workspace-local-ai"
+                title="Model lokalny (np. Bielik) dodatkowo wyszukuje dane osobowe i rozstrzyga z całego zdania, czy słowo to nazwisko, nazwa czy słowo pospolite."
+              >
+                <input
+                  type="checkbox"
+                  checked={localAi}
+                  disabled={busy}
+                  onChange={(event) => {
+                    setLocalAi(event.target.checked);
+                    setLocalAiMessage("");
+                  }}
+                />
+                z lokalnym AI
+              </label>
+              {localAi && !localAiReady ? (
+                <button
+                  type="button"
+                  className="chat-secondary-action workspace-local-ai-start"
+                  disabled={localAiStarting}
+                  onClick={() => void startLocalAi()}
+                >
+                  {localAiStarting ? "Uruchamiam…" : "Uruchom model lokalny"}
+                </button>
+              ) : null}
+              {localAi && localAiReady ? <small className="workspace-local-ai-state">model gotowy</small> : null}
+              {localAiMessage ? <small className="workspace-local-ai-state" role="status">{localAiMessage}</small> : null}
+            </span>
           ) : null}
           {canWrite ? (
             <label className="chat-secondary-action workspace-file-upload">
@@ -723,9 +1064,9 @@ export function WorkspaceManager({
               {visibleItems.map((item) => (
                 <li key={item.itemId}>
                   <div>
-                    <strong>{item.filename}</strong>
-                    <span>
-                      {item.kind === "TEMPLATE" ? "WZÓR" : "DOKUMENT"} · {bytesLabel(item.bytes)} · {item.mediaType}
+                    <strong title={item.filename}>{item.filename}</strong>
+                    <span title={item.mediaType}>
+                      {item.kind === "TEMPLATE" ? "Wzór" : "Dokument"} · {fileTypeLabel(item)} · {bytesLabel(item.bytes)}
                     </span>
                     {documentSearch.trim() ? (
                       <>
@@ -751,12 +1092,31 @@ export function WorkspaceManager({
                     ) : null}
                     {item.kind === "UPLOAD" ? (
                       <small className="workspace-processing-status">
-                        {processingFor(item)
-                          ? processingFor(item)!.ocrPages > 0
-                            ? `OCR ✓ · anonimizacja ✓ · ${processingFor(item)!.ocrPages}/${processingFor(item)!.totalPages} stron OCR · vault per dokument`
-                            : `Tekst cyfrowy ✓ · anonimizacja ✓ · OCR niewymagany · vault per dokument`
-                          : "Nieprzetworzony · OCR/anonimizacja oczekuje"}
+                        {processingFor(item) ? (
+                          processingFor(item)!.anonymized === false ? (
+                            <span className="anonymized-badge clear-text-badge" title="Przetworzony bez anonimizacji: tekst trafia do modeli w jawnej postaci">
+                              Tekst jawny (bez anonimizacji)
+                            </span>
+                          ) : (
+                            <span className="anonymized-badge" title="Dokument ma wersję zanonimizowaną i klucz anonimizacji">
+                              {processingFor(item)!.sharedKey ? "Zanonimizowany · klucz sprawy" : "Zanonimizowany · klucz osobny"}
+                            </span>
+                          )
+                        ) : null}
+                        <span>
+                          {processingFor(item)
+                            ? processingFor(item)!.ocrPages > 0
+                              ? `OCR: ${processingFor(item)!.ocrPages} z ${processingFor(item)!.totalPages} stron`
+                              : `Tekst cyfrowy · ${processingFor(item)!.totalPages} ${processingFor(item)!.totalPages === 1 ? "strona" : "stron"}`
+                            : "Nieprzetworzony - wybierz „OCR + anonimizuj” albo „Tylko OCR”"}
+                        </span>
                       </small>
+                    ) : null}
+                    {progressByItem[item.itemId] ? (
+                      <div className="workspace-progress" role="status" aria-live="polite">
+                        <progress max={100} value={progressPercent(progressByItem[item.itemId]!)} />
+                        <small>{progressLabel(progressByItem[item.itemId]!)}</small>
+                      </div>
                     ) : null}
                   </div>
                   <div className="workspace-item-actions">
@@ -776,28 +1136,48 @@ export function WorkspaceManager({
                         ? `Podgląd s. ${knowledgeHitFor(item)!.pageStart}`
                         : "Podgląd"}
                     </button>
+                    {processingFor(item) && processingFor(item)!.anonymized !== false ? (
+                      <>
+                        <button
+                          type="button"
+                          disabled={busy}
+                          title="Tekst z symbolami zastępczymi - ta wersja trafia do modeli"
+                          onClick={() => showAnonymized(item, "marked")}
+                        >
+                          Wersja zanonimizowana
+                        </button>
+                        <button
+                          type="button"
+                          disabled={busy}
+                          title="Symbole zastępcze i dane, które zastępują (tylko na tym komputerze)"
+                          onClick={() => showAnonymized(item, "key")}
+                        >
+                          Klucz anonimizacji
+                        </button>
+                      </>
+                    ) : null}
+                    {canWrite &&
+                    item.kind === "UPLOAD" &&
+                    !processingFor(item) &&
+                    processedDocuments.length > 0 &&
+                    /\.(txt|md|markdown|csv|tsv|docx|odt|xlsx|xlsm)$/i.test(item.filename) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Plik z symbolami (np. odpowiedź zewnętrznego modelu): podstawia dane z klucza wybranego dokumentu"
+                        onClick={() =>
+                          setFileDeanonymize({ itemId: item.itemId, documentId: processedDocuments[0]!.documentId })
+                        }
+                      >
+                        Deanonimizuj plik
+                      </button>
+                    ) : null}
                     {isDesktopShell() ? (
                       <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
                         Otwórz w systemie
                       </button>
                     ) : null}
-                    {canWrite ? (
-                      <select
-                        value={workspace?.itemLocations[item.itemId] ?? ""}
-                        disabled={busy}
-                        title="Przenieś do folderu"
-                        onChange={(event) => void run(async () => {
-                          await moveWorkspaceItem(caseId, item.itemId, event.target.value || null);
-                        })}
-                      >
-                        <option value="">{rootFolderName}</option>
-                        {folders.map((folder) => (
-                          <option key={folder.folderId} value={folder.folderId}>
-                            {folderPath(folder, folders)}
-                          </option>
-                        ))}
-                      </select>
-                    ) : null}
+
                     {canWrite && canRunPrivacyPipeline(item) ? (
                       <button
                         type="button"
@@ -809,10 +1189,47 @@ export function WorkspaceManager({
                           )
                         }
                       >
-                        OCR + anonimizuj automatycznie
+                        OCR + anonimizuj
+                      </button>
+                    ) : null}
+                    {canWrite && canRunPrivacyPipeline(item) ? (
+                      <button
+                        type="button"
+                        disabled={busy}
+                        title="Tylko wydobycie tekstu/OCR, bez anonimizacji: plik będzie wysyłany do modeli jako tekst jawny"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              `„${item.filename}” zostanie przetworzony bez anonimizacji. Wybrany do czatu trafi do modelu z danymi osobowymi w jawnej postaci. Kontynuować?`
+                            )
+                          ) {
+                            void runAutomaticPrivacy(item, true);
+                          }
+                        }}
+                      >
+                        Tylko OCR
                       </button>
                     ) : null}
                     {canWrite ? (
+                      <div className="workspace-item-end">
+                      <label className="workspace-move" title="Przenieś do folderu">
+                        Folder
+                        <select
+                          value={workspace?.itemLocations[item.itemId] ?? ""}
+                          disabled={busy}
+                          aria-label={`Folder pliku ${item.filename}`}
+                          onChange={(event) => void run(async () => {
+                            await moveWorkspaceItem(caseId, item.itemId, event.target.value || null);
+                          })}
+                        >
+                          <option value="">Główny ({rootFolderName})</option>
+                          {folders.map((folder) => (
+                            <option key={folder.folderId} value={folder.folderId}>
+                              {folderPath(folder, folders)}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
                       <button
                         type="button"
                         className="workspace-delete"
@@ -825,14 +1242,143 @@ export function WorkspaceManager({
                       >
                         Usuń
                       </button>
+                      </div>
                     ) : null}
                   </div>
+                  {fileDeanonymize?.itemId === item.itemId ? (
+                    <div className="artifact-deanonymize">
+                      <label>
+                        Klucz dokumentu źródłowego{" "}
+                        <select
+                          value={fileDeanonymize.documentId}
+                          onChange={(event) =>
+                            setFileDeanonymize({ itemId: item.itemId, documentId: event.target.value })
+                          }
+                        >
+                          {processedDocuments.map((entry) => (
+                            <option key={entry.documentId} value={entry.documentId}>{entry.filename}</option>
+                          ))}
+                        </select>
+                      </label>
+                      <button
+                        type="button"
+                        className="chat-primary-action"
+                        disabled={busy}
+                        onClick={() =>
+                          void run(async () => {
+                            const result = await deanonymizeUpload(caseId, item.itemId, fileDeanonymize.documentId);
+                            setFileDeanonymize(null);
+                            setNotice(
+                              `Utworzono „${result.upload.filename}”: przywrócono ${result.restored} wartości.` +
+                                (result.unresolved.length
+                                  ? ` Symbole spoza klucza zostały bez zmian: ${result.unresolved.join(", ")}.`
+                                  : "")
+                            );
+                          })
+                        }
+                      >
+                        Deanonimizuj
+                      </button>
+                      <button type="button" onClick={() => setFileDeanonymize(null)}>Anuluj</button>
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ul>
           )}
         </section>
       </div>
+
+      {canWrite && ownKeyDocuments.length > 0 && processedEntries.length > 1 ? (
+        <p className="workspace-shared-key-note">
+          {ownKeyDocuments.length} dokument(y) mają osobny klucz sprzed wprowadzenia klucza sprawy, więc ta sama
+          osoba może mieć w nich różne symbole.{" "}
+          <button type="button" disabled={busy} onClick={() => void joinAllKeys()}>
+            Połącz klucze sprawy
+          </button>
+          <small>
+            {" "}Dokumenty z symbolami utworzone wcześniej z tych plików deanonimizuj przed połączeniem.
+          </small>
+        </p>
+      ) : null}
+
+      {artifacts.length > 0 ? (
+        <section className="workspace-artifacts" aria-label="Dokumenty utworzone przez model">
+          <h4>Dokumenty utworzone przez model</h4>
+          <ul>
+            {artifacts.map((artifact) => {
+              const source = artifact.sourceArtifactId
+                ? artifacts.find((entry) => entry.artifactId === artifact.sourceArtifactId)
+                : undefined;
+              const derived = artifacts.filter((entry) => entry.sourceArtifactId === artifact.artifactId);
+              const item: WorkspaceItem = {
+                kind: "ARTIFACT",
+                itemId: artifact.artifactId,
+                filename: artifact.filename,
+                mediaType: artifact.mediaType,
+                bytes: artifact.bytes,
+                createdAt: artifact.createdAt,
+                archive: false
+              };
+              return (
+                <li key={artifact.artifactId}>
+                  <div>
+                    <strong>{artifact.filename}</strong>
+                    <small>
+                      {new Date(artifact.createdAt).toLocaleString("pl-PL")} · {bytesLabel(artifact.bytes)}
+                    </small>
+                    <small className="workspace-processing-status">
+                      {artifact.sensitivity === "PROTECTED" ? (
+                        <span className="anonymized-badge">Z symbolami</span>
+                      ) : (
+                        <span className="anonymized-badge deanonymized-badge">Deanonimizowany</span>
+                      )}
+                      {source ? ` powstał z: ${source.filename}` : ""}
+                      {derived.length ? ` · wersja z danymi: ${derived.map((entry) => entry.filename).join(", ")}` : ""}
+                    </small>
+                  </div>
+                  <div className="workspace-item-actions">
+                    <button type="button" disabled={busy} onClick={() => void showPreview(item)}>Podgląd</button>
+                    {isDesktopShell() ? (
+                      <button type="button" disabled={busy} onClick={() => void openInSystem(item)}>
+                        Otwórz w systemie
+                      </button>
+                    ) : null}
+                    {canWrite && artifact.sensitivity === "PROTECTED" ? (
+                      <button type="button" disabled={busy} onClick={() => setDeanonymizing(artifact.artifactId)}>
+                        Deanonimizuj
+                      </button>
+                    ) : null}
+                  </div>
+                  {deanonymizing === artifact.artifactId ? (
+                    <ArtifactDeanonymize
+                      caseId={caseId}
+                      artifact={artifact}
+                      onDone={(message) => {
+                        setNotice(message);
+                        void refresh();
+                      }}
+                      onCancel={() => setDeanonymizing(null)}
+                    />
+                  ) : null}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ) : null}
+
+      {anonymized ? (
+        <AnonymizedDocumentView
+          key={`${anonymized.documentId}-${anonymized.tab}`}
+          caseId={caseId}
+          documentId={anonymized.documentId}
+          filename={anonymized.item.filename}
+          readOnly={!canWrite}
+          initialTab={anonymized.tab}
+          onClose={() => setAnonymized(null)}
+        />
+      ) : null}
 
       {preview ? (
         <section className="workspace-preview" aria-label="Podgląd pliku">
@@ -849,20 +1395,42 @@ export function WorkspaceManager({
             <button type="button" onClick={() => setPreview(null)}>Zamknij</button>
           </div>
           {preview.text !== undefined ? (
-            <pre>{preview.text}</pre>
+            <TextFileEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              mediaType={preview.item.mediaType}
+              initialText={preview.text}
+              encoding={preview.encoding ?? "utf-8"}
+              readOnly={!canWrite}
+              onSave={saveEditedText}
+            />
+          ) : preview.document ? (
+            <DocumentEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              format={documentFormatFor(preview.item.mediaType, preview.item.filename)}
+              blocks={preview.document.blocks}
+              readOnly={!canWrite}
+              onSave={saveEditedDocument}
+            />
+          ) : preview.sheet ? (
+            <SheetEditor
+              key={preview.item.itemId}
+              filename={preview.item.filename}
+              format={sheetFormatFor(preview.item.mediaType, preview.item.filename)}
+              model={preview.sheet}
+              macros={/\.xlsm$/i.test(preview.item.filename) || preview.item.mediaType.includes("macroenabled")}
+              readOnly={!canWrite}
+              onSave={saveEditedSheet}
+            />
+          ) : preview.pdf ? (
+            <PdfPreview
+              blob={preview.pdf}
+              filename={preview.item.filename}
+              {...(preview.page ? { initialPage: preview.page } : {})}
+            />
           ) : preview.url ? (
-            preview.item.mediaType.startsWith("image/") ? (
-              <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
-            ) : (
-              <iframe
-                src={
-                  preview.page
-                    ? `${preview.url}#page=${preview.page}`
-                    : preview.url
-                }
-                title={`Podgląd ${preview.item.filename}`}
-              />
-            )
+            <img src={preview.url} alt={`Podgląd ${preview.item.filename}`} />
           ) : (
             <p>
               Ten format nie ma bezpiecznego podglądu w webview. Użyj „Otwórz w systemie”,

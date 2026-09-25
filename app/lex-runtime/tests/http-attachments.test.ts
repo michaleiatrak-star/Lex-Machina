@@ -128,6 +128,7 @@ describe("G32 HTTP document attachments", () => {
               "doc_0123456789abcdef01234567",
             sourceScope:
               "MANUAL",
+            selectedByUser: true,
             chunks: [{
               index: 2,
               pageStart: 3,

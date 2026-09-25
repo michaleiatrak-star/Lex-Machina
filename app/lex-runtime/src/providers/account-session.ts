@@ -1,20 +1,28 @@
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, type Dirent } from "node:fs";
+import { existsSync, statSync, type Dirent } from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import readline from "node:readline";
+import { fileURLToPath } from "node:url";
+import { startToolBridge } from "./lex-tool-bridge.js";
 import type {
   NormalizedToolCall,
   ProviderId,
   ProviderStreamParams,
-  ProviderStreamResult
+  ProviderStreamResult,
+  NativeCorpusAccess,
+  NormalizedToolSchema,
+  NormalizedToolResult
 } from "./types.js";
 
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000;
 const AUTH_TIMEOUT_MS = 5 * 60 * 1000;
 const STATUS_TIMEOUT_MS = 15_000;
+// stream-json prints its init event before the API request; silence past this
+// window means the client is stuck before inference (not a slow answer).
+const CLAUDE_FIRST_OUTPUT_TIMEOUT_MS = 120_000;
 const OPTIONAL_ACCOUNT_CLIENT_INSTALL_TIMEOUT_MS = 10 * 60 * 1000;
 const MAX_CAPTURE_BYTES = 8 * 1024 * 1024;
 const TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
@@ -603,37 +611,106 @@ function parseCodexFinalText(
   return finalText || null;
 }
 
-function parseClaudeResult(
+type ClaudeResultPayload = {
+  type?: unknown;
+  subtype?: unknown;
+  is_error?: unknown;
+  result?: unknown;
+  errors?: unknown;
+  session_id?: unknown;
+};
+
+function claudeResultPayload(
+  stdout: string
+): ClaudeResultPayload | null {
+  const candidates = [
+    stdout.trim(),
+    ...stdout
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .reverse()
+  ];
+  for (const candidate of candidates) {
+    if (!candidate.startsWith("{")) continue;
+    try {
+      const payload =
+        JSON.parse(candidate) as ClaudeResultPayload;
+      if (
+        payload &&
+        typeof payload === "object" &&
+        (
+          payload.type === "result" ||
+          (
+            payload.type === undefined &&
+            "result" in payload
+          )
+        )
+      ) {
+        return payload;
+      }
+    } catch {
+      // Partial or non-JSON lines are ignored.
+    }
+  }
+  return null;
+}
+
+export function claudeResultReady(
+  stdout: string
+): boolean {
+  return claudeResultPayload(stdout) !== null;
+}
+
+export function parseClaudeResult(
   stdout: string
 ): {
   text: string;
   sessionId: string | null;
+  isError: boolean;
 } | null {
-  try {
-    const payload =
-      JSON.parse(stdout) as {
-        result?: unknown;
-        session_id?: unknown;
-      };
-    const text =
-      typeof payload.result ===
-        "string"
-        ? payload.result.trim()
-        : "";
-    if (!text) return null;
-    const sessionId =
-      typeof payload.session_id ===
-        "string" &&
-      payload.session_id
-        ? payload.session_id
-        : null;
-    return {
-      text,
-      sessionId
-    };
-  } catch {
-    return null;
-  }
+  const payload =
+    claudeResultPayload(stdout);
+  if (!payload) return null;
+  const isError =
+    payload.is_error === true ||
+    (
+      typeof payload.subtype === "string" &&
+      payload.subtype.startsWith("error")
+    );
+  const errors =
+    Array.isArray(payload.errors)
+      ? payload.errors
+          .filter(
+            (item): item is string =>
+              typeof item === "string"
+          )
+          .join(" ")
+      : "";
+  const resultText =
+    typeof payload.result ===
+      "string"
+      ? payload.result.trim()
+      : "";
+  const text =
+    isError
+      ? [resultText, errors]
+          .filter(Boolean)
+          .join(" ")
+          .trim()
+      : resultText;
+  if (!text && !isError) return null;
+  const sessionId =
+    typeof payload.session_id ===
+      "string" &&
+    payload.session_id
+      ? payload.session_id
+      : null;
+  return {
+    text,
+    sessionId,
+    isError
+  };
 }
 
 export type ProviderAccountSessionStatus = {
@@ -681,6 +758,9 @@ function accountEnvironment(provider: ProviderId): NodeJS.ProcessEnv {
   } else if (provider === "anthropic") {
     delete env.ANTHROPIC_API_KEY;
     delete env.ANTHROPIC_AUTH_TOKEN;
+    // A runtime started from inside a Claude Code shell must not make the
+    // provider subprocess believe it is a nested Claude Code session.
+    delete env.CLAUDECODE;
     env.CLAUDE_CODE_MCP_STARTUP_WAIT_MS = "0";
     env.MCP_CONNECTION_NONBLOCKING = "true";
     const token =
@@ -1038,11 +1118,18 @@ export function claudeHeadlessArgs(
   systemPrompt: string,
   tail: string[] = []
 ): string[] {
+  // stream-json + --verbose emits an init event before the API request and a
+  // final `result` line; Lex settles on that line instead of waiting for the
+  // process to exit (Windows child processes can keep claude.exe alive).
+  // --strict-mcp-config without --mcp-config starts no MCP servers at all:
+  // --restricted alone still launches user/project MCP servers.
   return [
     "-p",
     "--output-format",
-    "json",
+    "stream-json",
+    "--verbose",
     "--restricted",
+    "--strict-mcp-config",
     "--tools",
     "",
     "--disallowedTools",
@@ -1053,6 +1140,82 @@ export function claudeHeadlessArgs(
     "off",
     ...tail
   ];
+}
+
+/**
+ * Claude with read-only file tools confined to the legal corpus (--restricted
+ * limits Read/Glob/Grep to the working directory; dontAsk refuses anything not
+ * allowed) and the Lex runtime tools over one MCP server. No shell, no web,
+ * no writes, no MCP servers of the account.
+ */
+export function claudeCorpusArgs(
+  systemPrompt: string,
+  mcpConfigPath: string,
+  tail: string[] = []
+): string[] {
+  return [
+    "-p",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--restricted",
+    "--strict-mcp-config",
+    "--mcp-config",
+    mcpConfigPath,
+    "--tools",
+    "Read,Glob,Grep",
+    "--allowedTools",
+    "Read,Glob,Grep,mcp__lex",
+    "--disallowedTools",
+    "Bash,Write,Edit,NotebookEdit,WebFetch,WebSearch",
+    "--permission-mode",
+    "dontAsk",
+    "--system-prompt",
+    systemPrompt,
+    "--system-prompt-snapshot",
+    "off",
+    ...tail
+  ];
+}
+
+/** Tool uses of a Claude stream-json run, in order. */
+export function claudeToolUses(
+  stdout: string
+): Array<{ name: string; input: Record<string, unknown> }> {
+  const uses: Array<{ name: string; input: Record<string, unknown> }> = [];
+  for (const line of stdout.split(/\r?\n/)) {
+    if (!line.startsWith("{")) continue;
+    try {
+      const event = JSON.parse(line) as { type?: unknown; message?: { content?: unknown } };
+      if (event.type !== "assistant" || !Array.isArray(event.message?.content)) continue;
+      for (const block of event.message.content as Array<Record<string, unknown>>) {
+        if (block?.type === "tool_use" && typeof block.name === "string") {
+          uses.push({
+            name: block.name,
+            input:
+              block.input && typeof block.input === "object" && !Array.isArray(block.input)
+                ? (block.input as Record<string, unknown>)
+                : {}
+          });
+        }
+      }
+    } catch {
+      // Not an event line.
+    }
+  }
+  return uses;
+}
+
+/** Corpus-relative path of a native Read, or null when it is outside the corpus. */
+export function corpusRelativePath(root: string, filePath: unknown): string | null {
+  if (typeof filePath !== "string" || !filePath) return null;
+  const relative = path.relative(path.resolve(root), path.resolve(root, filePath));
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
+  return relative.split(path.sep).join("/");
+}
+
+export function lexToolsMcpServerPath(): string {
+  return fileURLToPath(new URL("./lex-tools-mcp.js", import.meta.url));
 }
 
 export function sanitizeAccountCliFailureDetail(
@@ -1128,11 +1291,37 @@ async function resolveCommand(command: string): Promise<string | null> {
     5_000
   ).catch(() => null);
   if (!result || result.code !== 0) return null;
-  const candidate = result.stdout
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .find(Boolean);
-  return candidate || null;
+  return pickResolvedCommand(
+    result.stdout
+  );
+}
+
+/**
+ * `where.exe claude` lists the extensionless POSIX shim of an npm global
+ * install first (e.g. %APPDATA%\npm\claude). Node cannot spawn it, which
+ * surfaced as an uncoded "Provider odrzucił" failure. Only runnable Windows
+ * candidates are accepted, .exe first.
+ */
+export function pickResolvedCommand(
+  whereOutput: string,
+  platform = process.platform
+): string | null {
+  const candidates =
+    whereOutput
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+  if (platform !== "win32") {
+    return candidates[0] ?? null;
+  }
+  for (const extension of [".exe", ".cmd", ".bat", ".com"]) {
+    const match =
+      candidates.find((candidate) =>
+        candidate.toLowerCase().endsWith(extension)
+      );
+    if (match) return match;
+  }
+  return null;
 }
 
 async function resolveAccountExecutable(
@@ -1140,6 +1329,15 @@ async function resolveAccountExecutable(
 ): Promise<string | null> {
   const command =
     CLI_NAMES[provider];
+
+  // Status must probe the same client that executes requests.
+  if (provider === "anthropic") {
+    const pinned =
+      privateClaudeExecutable();
+    if (pinned) {
+      return pinned;
+    }
+  }
 
   // Match the proven ChatGPT behavior for both account providers:
   // prefer the user's normally installed official CLI, then use the
@@ -1211,6 +1409,41 @@ function appendCapture(
   return next.slice(-MAX_CAPTURE_BYTES);
 }
 
+type RunSettleOptions = {
+  // Resolve with exit code 0 as soon as stdout carries a complete answer,
+  // then terminate the process tree instead of waiting for it to exit.
+  settleOnStdout?: (stdout: string) => boolean;
+  // Fail fast when the client prints nothing at all within this window.
+  firstOutputTimeoutMs?: number;
+};
+
+function killProcessTree(
+  child: ChildProcessWithoutNullStreams
+): void {
+  if (
+    process.platform === "win32" &&
+    typeof child.pid === "number"
+  ) {
+    // child.kill() on Windows ends only the direct child (e.g. cmd.exe),
+    // leaving claude.exe/codex.exe running and holding the pipes open.
+    try {
+      const killer = spawn(
+        "taskkill",
+        ["/pid", String(child.pid), "/T", "/F"],
+        {
+          windowsHide: true,
+          stdio: "ignore"
+        }
+      );
+      killer.once("error", () => child.kill());
+      return;
+    } catch {
+      // Fall back to the direct kill below.
+    }
+  }
+  child.kill();
+}
+
 function runDirect(
   executable: string,
   args: string[],
@@ -1218,13 +1451,16 @@ function runDirect(
   env: NodeJS.ProcessEnv,
   timeoutMs: number,
   cwd?: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  settleOptions: RunSettleOptions = {}
 ): Promise<RunResult> {
   return new Promise((resolve, reject) => {
     const child = spawnResolved(executable, args, cwd, env);
     let stdout = "";
     let stderr = "";
     let settled = false;
+    let firstOutputTimer:
+      NodeJS.Timeout | null = null;
 
     const finish = (
       callback: () => void
@@ -1232,12 +1468,15 @@ function runDirect(
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      if (firstOutputTimer) {
+        clearTimeout(firstOutputTimer);
+      }
       abortSignal?.removeEventListener("abort", onAbort);
       callback();
     };
 
     const onAbort = () => {
-      child.kill();
+      killProcessTree(child);
       finish(() => {
         const error = new Error("ACCOUNT_SESSION_ABORTED");
         error.name = "AbortError";
@@ -1246,22 +1485,76 @@ function runDirect(
     };
 
     const timer = setTimeout(() => {
-      child.kill();
+      killProcessTree(child);
       finish(() =>
-        reject(new Error("ACCOUNT_SESSION_COMMAND_TIMEOUT"))
+        reject(
+          new Error(
+            `ACCOUNT_SESSION_COMMAND_TIMEOUT${
+              stderr.trim()
+                ? `:${sanitizeAccountCliFailureDetail(stderr)}`
+                : ""
+            }`
+          )
+        )
       );
     }, timeoutMs);
+
+    if (settleOptions.firstOutputTimeoutMs) {
+      firstOutputTimer = setTimeout(() => {
+        if (stdout) return;
+        killProcessTree(child);
+        finish(() =>
+          reject(
+            new Error(
+              `ACCOUNT_SESSION_CLI_STALLED${
+                stderr.trim()
+                  ? `:${sanitizeAccountCliFailureDetail(stderr)}`
+                  : ""
+              }`
+            )
+          )
+        );
+      }, settleOptions.firstOutputTimeoutMs);
+    }
 
     abortSignal?.addEventListener("abort", onAbort, { once: true });
 
     child.stdout.on("data", (chunk) => {
       stdout = appendCapture(stdout, chunk);
+      if (
+        !settled &&
+        settleOptions.settleOnStdout?.(stdout)
+      ) {
+        const captured = stdout;
+        finish(() =>
+          resolve({
+            code: 0,
+            stdout: captured,
+            stderr
+          })
+        );
+        killProcessTree(child);
+      }
     });
     child.stderr.on("data", (chunk) => {
       stderr = appendCapture(stderr, chunk);
     });
+    child.stdin.on("error", () => {
+      // The client may exit before consuming stdin; the exit handler reports it.
+    });
     child.once("error", (error) => {
-      finish(() => reject(error));
+      const errno =
+        (error as NodeJS.ErrnoException).code ??
+        "UNKNOWN";
+      finish(() =>
+        reject(
+          new Error(
+            `ACCOUNT_SESSION_CLI_SPAWN_FAILED:${errno}:${sanitizeAccountCliFailureDetail(
+              `${executable}: ${error.message}`
+            )}`
+          )
+        )
+      );
     });
     child.once("exit", (code) => {
       finish(() =>
@@ -1295,7 +1588,14 @@ async function ensureAccountExecutable(
     ) {
       return privateExecutable;
     }
-    if (!privateExecutable) {
+    // Claude: always run the pinned client, like the working ChatGPT/Codex
+    // path. A system-wide Claude Code of another version may reject Lex's
+    // headless flags; it shares the same login (~/.claude), so it is only a
+    // fallback when provisioning the pinned client fails.
+    if (
+      !privateExecutable &&
+      provider === "openai"
+    ) {
       const systemExecutable =
         await resolveCommand(CLI_NAMES[provider]);
       if (systemExecutable) {
@@ -1310,6 +1610,25 @@ async function ensureAccountExecutable(
     }
   }
 
+  try {
+    return await provisionPinnedAccountClient(
+      provider
+    );
+  } catch (error) {
+    if (provider === "anthropic") {
+      const systemExecutable =
+        await resolveCommand(CLI_NAMES[provider]);
+      if (systemExecutable) {
+        return systemExecutable;
+      }
+    }
+    throw error;
+  }
+}
+
+async function provisionPinnedAccountClient(
+  provider: ProviderId
+): Promise<string | null> {
   const spec =
     OPTIONAL_ACCOUNT_CLIENTS[
       provider
@@ -1408,13 +1727,58 @@ async function ensureAccountExecutable(
   return installed;
 }
 
+/**
+ * On Windows npm exposes Claude Code as a claude.cmd shim that only forwards
+ * to the native bin/claude.exe. Spawning the shim goes through cmd.exe, which
+ * re-quotes arguments, and kill() then ends only cmd.exe. Run the native
+ * executable directly when the package has already placed it.
+ */
+export function nativeClaudeExecutable(
+  executable: string,
+  platform = process.platform
+): string {
+  if (
+    platform !== "win32" ||
+    !/[\\/]claude\.cmd$/i.test(executable)
+  ) {
+    return executable;
+  }
+  const shimDir =
+    path.dirname(executable);
+  // node_modules/.bin/claude.cmd (private install) or
+  // %APPDATA%/npm/claude.cmd (npm global install).
+  for (const packageRoot of [
+    path.join(shimDir, ".."),
+    path.join(shimDir, "node_modules")
+  ]) {
+    const candidate =
+      path.join(
+        packageRoot,
+        "@anthropic-ai",
+        "claude-code",
+        "bin",
+        "claude.exe"
+      );
+    try {
+      // The unpopulated postinstall placeholder is a tiny stub.
+      if (statSync(candidate).size > 1024 * 1024) {
+        return candidate;
+      }
+    } catch {
+      // Try the next layout; keep the shim when none is present.
+    }
+  }
+  return executable;
+}
+
 async function runCli(
   provider: ProviderId,
   args: string[],
   stdinText: string | undefined,
   timeoutMs: number,
   cwd?: string,
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  settleOptions?: RunSettleOptions
 ): Promise<RunResult> {
   const executable =
     await ensureAccountExecutable(
@@ -1424,13 +1788,16 @@ async function runCli(
     throw new Error(`ACCOUNT_SESSION_CLI_NOT_INSTALLED:${provider}`);
   }
   return runDirect(
-    executable,
+    provider === "anthropic"
+      ? nativeClaudeExecutable(executable)
+      : executable,
     args,
     stdinText,
     accountEnvironment(provider),
     timeoutMs,
     cwd,
-    abortSignal
+    abortSignal,
+    settleOptions
   );
 }
 
@@ -2378,6 +2745,22 @@ function parseToolCalls(text: string): NormalizedToolCall[] | null {
   });
 }
 
+/** The Lex instructions and conversation for a native corpus run (sent on stdin). */
+export function buildCorpusPrompt(params: ProviderStreamParams): string {
+  return [
+    "You are the semantic model inside Lex Machina.",
+    "Lex Machina supplies the complete conversation context for this turn. Do not read or infer context from any separate host-session history.",
+    "",
+    "SYSTEM:",
+    params.systemPrompt,
+    "",
+    "CONVERSATION:",
+    params.messages.map((message) => `${message.role.toUpperCase()}:\n${message.content}`).join("\n\n"),
+    "",
+    "Continue the conversation now."
+  ].join("\n");
+}
+
 function buildAccountPrompt(
   params: ProviderStreamParams,
   toolTranscript: string[]
@@ -2510,10 +2893,15 @@ export class AccountSessionManager {
           STATUS_TIMEOUT_MS
         );
       } else if (provider === "anthropic") {
-        result = await runCli(
-          provider,
+        // Probe the resolved client directly: a status poll must never
+        // trigger the (minutes-long) pinned-client provisioning.
+        result = await runDirect(
+          nativeClaudeExecutable(
+            executable
+          ),
           ["auth", "status"],
           undefined,
+          accountEnvironment(provider),
           STATUS_TIMEOUT_MS
         );
       } else {
@@ -2689,6 +3077,106 @@ export class AccountSessionManager {
       );
     }
     return status;
+  }
+
+  /**
+   * One Claude run for an AUTO legal turn: the model reads skills and their
+   * subfolders itself and calls the Lex tools over MCP, all in one process,
+   * instead of one CLI start and a full re-sent prompt per tool round.
+   */
+  async runClaudeWithCorpus(args: {
+    prompt: string;
+    corpus: NativeCorpusAccess;
+    tools: NormalizedToolSchema[];
+    runTools: (calls: NormalizedToolCall[]) => Promise<NormalizedToolResult[]>;
+    onToolCall?: (call: NormalizedToolCall) => void;
+    abortSignal?: AbortSignal;
+    continuityKey?: string;
+  }): Promise<string> {
+    await assertSubscriptionAccount("anthropic", args.abortSignal);
+    const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-account-corpus-"));
+    const bridge = await startToolBridge(args.runTools, args.onToolCall);
+    try {
+      const schemaFile = path.join(workDir, "tools.json");
+      await fsp.writeFile(
+        schemaFile,
+        JSON.stringify(
+          args.tools.map((tool) => ({
+            name: tool.function.name,
+            description: tool.function.description,
+            parameters: tool.function.parameters
+          }))
+        ),
+        { mode: 0o600 }
+      );
+      const mcpConfig = path.join(workDir, "mcp.json");
+      await fsp.writeFile(
+        mcpConfig,
+        JSON.stringify({
+          mcpServers: {
+            lex: {
+              type: "stdio",
+              command: process.execPath,
+              args: [lexToolsMcpServerPath()],
+              env: {
+                LEX_TOOL_PIPE: bridge.pipe,
+                LEX_TOOL_TOKEN: bridge.token,
+                LEX_TOOL_SCHEMAS: schemaFile
+              }
+            }
+          }
+        }),
+        { mode: 0o600 }
+      );
+      const systemPrompt =
+        "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates and legal-source verification. " +
+        "Your working directory is the Lex legal skill corpus: read skills and their modules with Read, Glob and Grep; they are read-only. " +
+        "Use the mcp__lex tools for legal verification, case law and legal sources. Do not access anything else. " +
+        "A resumed host session is continuity context only: never reuse facts from earlier host turns unless they are also in the current Lex Machina request.";
+      const run = (tail: string[]) =>
+        runCli(
+          "anthropic",
+          claudeCorpusArgs(systemPrompt, mcpConfig, tail),
+          args.prompt,
+          COMMAND_TIMEOUT_MS,
+          args.corpus.root,
+          args.abortSignal,
+          { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS }
+        );
+      let result: RunResult | null = null;
+      const savedSessionId = await readAccountSessionId("anthropic", args.continuityKey);
+      if (savedSessionId) {
+        result = await run(["--resume", savedSessionId]);
+        const outcome = parseClaudeResult(result.stdout);
+        if (result.code !== 0 || outcome?.isError) {
+          const detail = `${result.stderr}\n${result.stdout}\n${outcome?.text ?? ""}`;
+          if (!isMissingResumableSessionMessage(detail)) throw normalizeCliFailure("anthropic", result);
+          await clearAccountSessionId("anthropic", args.continuityKey);
+          result = null;
+        }
+      }
+      if (!result) result = await run([]);
+      const parsed = parseClaudeResult(result.stdout);
+      if (result.code !== 0 || !parsed || parsed.isError) {
+        throw normalizeCliFailure("anthropic", {
+          ...result,
+          code: result.code === 0 ? 1 : result.code,
+          stderr: [result.stderr, parsed?.text ?? ""].filter(Boolean).join("\n")
+        });
+      }
+      for (const use of claudeToolUses(result.stdout)) {
+        if (use.name !== "Read") continue;
+        const relative = corpusRelativePath(args.corpus.root, use.input.file_path);
+        if (relative) args.corpus.onRead?.(relative);
+      }
+      if (parsed.sessionId) {
+        await writeAccountSessionId("anthropic", parsed.sessionId, args.continuityKey);
+      }
+      return parsed.text;
+    } finally {
+      await bridge.close().catch(() => undefined);
+      await fsp.rm(workDir, { recursive: true, force: true }).catch(() => {});
+    }
   }
 
   async runText(
@@ -2978,10 +3466,10 @@ export class AccountSessionManager {
           );
         const hostCwd =
           workDir;
-        const runClaude = (
+        const runClaude = async (
           tail: string[]
-        ) =>
-          runCli(
+        ): Promise<RunResult> => {
+          const run = await runCli(
             provider,
             [
               ...commonArgs,
@@ -2990,8 +3478,37 @@ export class AccountSessionManager {
             prompt,
             COMMAND_TIMEOUT_MS,
             hostCwd,
-            abortSignal
+            abortSignal,
+            {
+              settleOnStdout:
+                claudeResultReady,
+              firstOutputTimeoutMs:
+                CLAUDE_FIRST_OUTPUT_TIMEOUT_MS
+            }
           );
+          // An early-settled error result must still take the failure path
+          // (e.g. stale --resume id falls back to a fresh Lex session).
+          const outcome =
+            parseClaudeResult(
+              run.stdout
+            );
+          if (outcome?.isError) {
+            return {
+              code:
+                run.code === 0
+                  ? 1
+                  : run.code,
+              stdout: "",
+              stderr: [
+                run.stderr.trim(),
+                outcome.text
+              ]
+                .filter(Boolean)
+                .join("\n")
+            };
+          }
+          return run;
+        };
 
         let result:
           RunResult | null =
@@ -3054,6 +3571,7 @@ export class AccountSessionManager {
             "ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic"
           );
         }
+
         if (parsed.sessionId) {
           await writeAccountSessionId(
             provider,
@@ -3128,6 +3646,20 @@ export async function streamAccountSession(
       .map((tool) => tool.function.name)
   );
   const toolTranscript: string[] = [];
+  if (provider === "anthropic" && params.nativeCorpus && params.runTools) {
+    const text = await manager.runClaudeWithCorpus({
+      prompt: buildCorpusPrompt(params),
+      corpus: params.nativeCorpus,
+      tools: params.tools ?? [],
+      runTools: params.runTools,
+      ...(params.callbacks?.onToolCallStart ? { onToolCall: params.callbacks.onToolCallStart } : {}),
+      ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
+      ...(params.continuityKey ? { continuityKey: params.continuityKey } : {})
+    });
+    if (!text.trim()) throw new Error("ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic");
+    params.callbacks?.onContentDelta?.(text);
+    return { fullText: text };
+  }
   const maxIterations =
     Math.max(
       1,

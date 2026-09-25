@@ -49,6 +49,34 @@ describe("OfficialLegalSourceVerifier", () => {
     expect(result.record.evidence).toContain("Treść przepisu.");
   });
 
+  it("keeps a matched NSA/WSA judgment as a snapshot and never promotes it to VERIFIED", async () => {
+    const verifier = new OfficialLegalSourceVerifier(
+      async () =>
+        new Response(
+          "<html><title>Wyrok Naczelnego Sądu Administracyjnego</title><body>" +
+          "<p>Sygn. akt II FSK 123/20</p><p>Uzasadnienie.</p></body></html>",
+          {
+            status: 200,
+            headers: { "content-type": "text/html; charset=utf-8" }
+          }
+        ),
+      () => "2026-09-23T12:00:00.000Z"
+    );
+
+    const result = await verifier.verify({
+      claim: "II FSK 123/20",
+      kind: "case",
+      url: "https://orzeczenia.nsa.gov.pl/doc/ABCDEF1234",
+      expectedTitle: "Wyrok Naczelnego Sądu Administracyjnego",
+      toolCallId: "tool-nsa"
+    });
+
+    expect(result.matched).toBe(true);
+    expect(result.record.status).toBe("UNVERIFIED");
+    expect(result.record.verificationCeiling).toBe("SNAPSHOT_NO_PROMOTION");
+    expect(result.record.evidence).toContain("NSA/WSA SNAPSHOT");
+  });
+
   it("extracts only the requested article section from the official text", async () => {
     const verifier = new OfficialLegalSourceVerifier(
       async () =>
