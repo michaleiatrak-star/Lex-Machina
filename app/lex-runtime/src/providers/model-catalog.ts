@@ -5,6 +5,7 @@ import {
   type ProviderCredentialResolver
 } from "./credentials.js";
 import type { ProviderId } from "./types.js";
+import { newestModelFamilies } from "./model-families.js";
 
 export type ModelDescriptor = {
   provider: ProviderId;
@@ -163,7 +164,18 @@ export class DynamicModelCatalog {
       : undefined;
   }
 
+  /**
+   * The two newest versions of each main family (LEX_MODEL_CATALOG_ALL=1
+   * lists everything the provider returns).
+   */
   async list(provider: ProviderId): Promise<ModelDescriptor[]> {
+    const models = await this.listAll(provider);
+    return /^(1|true|on)$/i.test(process.env.LEX_MODEL_CATALOG_ALL?.trim() ?? "")
+      ? models
+      : newestModelFamilies(models);
+  }
+
+  async listAll(provider: ProviderId): Promise<ModelDescriptor[]> {
     if (provider === "openai") {
       const local = this.listConfiguredLocalOpenAiModels();
       const key = await this.credentials.getApiKey(provider);

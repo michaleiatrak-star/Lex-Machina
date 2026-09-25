@@ -117,3 +117,37 @@ export function canExecutePrimaryModel(
   }
   return providerConfigured === true;
 }
+
+// Account sessions (Claude Code / Codex): "default" leaves the choice to the
+// client; the rest are the two newest versions of each main family. Keep in
+// sync with ACCOUNT_SESSION_MODELS in the runtime (model-families.ts).
+const ACCOUNT_SESSION_MODELS: Partial<Record<ProviderId, Array<{ id: string; label: string }>>> = {
+  anthropic: [
+    { id: "claude-fable-5-1", label: "Claude Fable 5.1" },
+    { id: "claude-fable-5", label: "Claude Fable 5" },
+    { id: "claude-opus-5-5", label: "Claude Opus 5.5" },
+    { id: "claude-opus-5", label: "Claude Opus 5" },
+    { id: "claude-sonnet-5", label: "Claude Sonnet 5" },
+    { id: "claude-sonnet-4-6", label: "Claude Sonnet 4.6" }
+  ],
+  openai: [
+    { id: "gpt-5.6-luna", label: "GPT-5.6 Luna" },
+    { id: "gpt-5.5", label: "GPT-5.5" }
+  ]
+};
+
+export function accountModelChoices(
+  source: PrimaryModelSource,
+  defaultLabel: string
+): Array<{ id: string; label: string }> {
+  const defaultId = accountModelIdForPrimarySource(source);
+  if (!defaultId) return [];
+  const provider = runtimeProviderForPrimarySource(source);
+  return [
+    { id: defaultId, label: defaultLabel },
+    ...(ACCOUNT_SESSION_MODELS[provider] ?? []).map((item) => ({
+      id: `account/${provider}/${item.id}`,
+      label: `${item.label} · konto`
+    }))
+  ];
+}

@@ -39,7 +39,7 @@ describe("DynamicModelCatalog", () => {
       new StaticCredentialResolver({ openai: "secret-openai" }),
       fetcher
     );
-    const models = await catalog.list("openai");
+    const models = await catalog.listAll("openai");
 
     expect(seen).toEqual([{
       url: "https://api.openai.com/v1/models",
@@ -90,7 +90,7 @@ describe("DynamicModelCatalog", () => {
       new StaticCredentialResolver({ anthropic: "secret-anthropic" }),
       fetcher
     );
-    const models = await catalog.list("anthropic");
+    const models = await catalog.listAll("anthropic");
 
     expect(models.map((model) => model.id)).toEqual([
       "claude-a",
@@ -123,7 +123,7 @@ describe("DynamicModelCatalog", () => {
       new StaticCredentialResolver({ xai: "secret-xai" }),
       fetcher
     );
-    const models = await catalog.list("xai");
+    const models = await catalog.listAll("xai");
 
     expect(models).toEqual([
       expect.objectContaining({

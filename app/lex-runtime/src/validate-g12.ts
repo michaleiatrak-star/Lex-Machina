@@ -62,9 +62,10 @@ const credentials = new StaticCredentialResolver({
 });
 const catalog = new DynamicModelCatalog(credentials, fetcher);
 
-const openai = await catalog.list("openai");
-const anthropic = await catalog.list("anthropic");
-const xai = await catalog.list("xai");
+// Raw discovery; list() then offers the newest versions of each family.
+const openai = await catalog.listAll("openai");
+const anthropic = await catalog.listAll("anthropic");
+const xai = await catalog.listAll("xai");
 
 const serialized = JSON.stringify({ openai, anthropic, xai });
 const pass =

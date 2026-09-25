@@ -55,6 +55,8 @@ function replaceAnthropicOAuthToken(
       : null;
 }
 
+import { ACCOUNT_SESSION_MODELS } from "./model-families.js";
+
 const ACCOUNT_MODEL_IDS: Record<ProviderId, string> = {
   openai: "account/openai/default",
   anthropic: "account/anthropic/default",
@@ -2683,7 +2685,24 @@ export function isAccountSessionModel(
   provider: ProviderId,
   model: string
 ): boolean {
-  return model === ACCOUNT_MODEL_IDS[provider];
+  return model === ACCOUNT_MODEL_IDS[provider] ||
+    accountSessionClientModel(provider, model) !== null;
+}
+
+/**
+ * The client model of "account/<provider>/<model>"; null for the default
+ * (the client decides) or a model not offered for the account session.
+ */
+export function accountSessionClientModel(
+  provider: ProviderId,
+  model: string
+): string | null {
+  const prefix = `account/${provider}/`;
+  if (!model.startsWith(prefix)) return null;
+  const id = model.slice(prefix.length);
+  return (ACCOUNT_SESSION_MODELS[provider] ?? []).some((item) => item.id === id)
+    ? id
+    : null;
 }
 
 function parseToolCalls(text: string): NormalizedToolCall[] | null {
@@ -3123,6 +3142,7 @@ export class AccountSessionManager {
     onToolCall?: (call: NormalizedToolCall) => void;
     abortSignal?: AbortSignal;
     continuityKey?: string;
+    clientModel?: string | null;
   }): Promise<string> {
     await assertSubscriptionAccount("anthropic", args.abortSignal);
     const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-account-corpus-"));
@@ -3168,7 +3188,11 @@ export class AccountSessionManager {
       const run = (tail: string[]) =>
         runCli(
           "anthropic",
-          claudeCorpusArgs(systemPrompt, mcpConfig, [...input.args, ...tail]),
+          claudeCorpusArgs(systemPrompt, mcpConfig, [
+            ...input.args,
+            ...(args.clientModel ? ["--model", args.clientModel] : []),
+            ...tail
+          ]),
           input.stdin,
           COMMAND_TIMEOUT_MS,
           args.corpus.root,
@@ -3217,7 +3241,9 @@ export class AccountSessionManager {
     abortSignal?: AbortSignal,
     continuityKey?: string,
     // Claude only (stream-json input); other CLIs get the text.
-    images: LlmImage[] = []
+    images: LlmImage[] = [],
+    // A model chosen for the account session; null lets the client decide.
+    clientModel: string | null = null
   ): Promise<string> {
     const workDir = await fsp.mkdtemp(
       path.join(os.tmpdir(), "lex-account-session-")
@@ -3245,6 +3271,7 @@ export class AccountSessionManager {
             "last-message.txt"
           );
         const preferredModel =
+          clientModel ??
           codexAccountModel();
         const candidateModels =
           [
@@ -3498,7 +3525,12 @@ export class AccountSessionManager {
         const commonArgs =
           claudeHeadlessArgs(
             lexSystemPrompt,
-            input.args
+            [
+              ...input.args,
+              ...(clientModel
+                ? ["--model", clientModel]
+                : [])
+            ]
           );
         const hostCwd =
           workDir;
@@ -3691,7 +3723,8 @@ export async function streamAccountSession(
       runTools: params.runTools,
       ...(params.callbacks?.onToolCallStart ? { onToolCall: params.callbacks.onToolCallStart } : {}),
       ...(params.abortSignal ? { abortSignal: params.abortSignal } : {}),
-      ...(params.continuityKey ? { continuityKey: params.continuityKey } : {})
+      ...(params.continuityKey ? { continuityKey: params.continuityKey } : {}),
+      clientModel: accountSessionClientModel(provider, params.model)
     });
     if (!text.trim()) throw new Error("ACCOUNT_SESSION_EMPTY_RESPONSE:anthropic");
     params.callbacks?.onContentDelta?.(text);
@@ -3719,7 +3752,8 @@ export async function streamAccountSession(
       ),
       params.abortSignal,
       params.continuityKey,
-      provider === "anthropic" ? messageImages(params) : []
+      provider === "anthropic" ? messageImages(params) : [],
+      accountSessionClientModel(provider, params.model)
     );
     const calls =
       parseToolCalls(output);

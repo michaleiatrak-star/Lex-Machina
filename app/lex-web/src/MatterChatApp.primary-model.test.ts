@@ -214,3 +214,19 @@ describe("routing footer", () => {
     ).toMatch(/^routing: DR 02/);
   });
 });
+
+describe("account model choices", () => {
+  it("offers the client default and the newest models of the account", async () => {
+    const { accountModelChoices } = await import("./primary-model-policy.js");
+    const claude = accountModelChoices("anthropic-account", "Claude · model konta").map((item) => item.id);
+    expect(claude[0]).toBe("account/anthropic/default");
+    expect(claude).toContain("account/anthropic/claude-opus-5-5");
+    expect(claude.some((id) => id.includes("haiku"))).toBe(false);
+    expect(accountModelChoices("openai-account", "Codex").map((item) => item.id)).toEqual([
+      "account/openai/default",
+      "account/openai/gpt-5.6-luna",
+      "account/openai/gpt-5.5"
+    ]);
+    expect(accountModelChoices("anthropic", "x")).toEqual([]);
+  });
+});

@@ -117,6 +117,7 @@ import {
   type MatterStatusFilter
 } from "./search-filters.js";
 import {
+  accountModelChoices,
   accountModelIdForPrimarySource,
   canExecutePrimaryModel,
   isAccountPrimarySource,
@@ -1506,16 +1507,20 @@ export default function MatterChatApp({
         const authenticated =
           accountSession
             ?.authenticated === true;
-        setModels([
-          {
+        const choices =
+          accountModelChoices(
+            provider,
+            ACCOUNT_MODEL_LABELS[
+              runtimeProvider
+            ]
+          );
+        setModels(
+          choices.map((choice) => ({
             provider:
               runtimeProvider,
-            id:
-              accountModelId,
+            id: choice.id,
             displayName:
-              ACCOUNT_MODEL_LABELS[
-                runtimeProvider
-              ],
+              choice.label,
             selectable:
               authenticated,
             ownedBy:
@@ -1524,10 +1529,16 @@ export default function MatterChatApp({
               "account-session",
               "lex-runtime-tools"
             ]
-          }
-        ]);
-        setModel(
-          accountModelId
+          }))
+        );
+        // Keep the chosen account model while the source stays the same.
+        setModel((current) =>
+          choices.some(
+            (choice) =>
+              choice.id === current
+          )
+            ? current
+            : accountModelId
         );
         if (
           accountSession &&
