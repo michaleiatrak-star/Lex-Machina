@@ -105,12 +105,13 @@ else {
             "LEGAL_QUERY_V1" &&
         unsafeHttp.status === 200 &&
         unsafe.status === "DRAFT_PRESENTABLE" &&
-        unsafe.finalization === "BLOCKED" &&
+        // HARD GATE: shown only with the marker at the unverified claim.
+        unsafe.finalization === "DEGRADED" &&
         typeof unsafe.answer === "string" &&
-        unsafe.answer.includes("Zastosowanie ma art. 1234 KC.") &&
+        unsafe.answer.includes("Zastosowanie ma art. 1234 KC ⚠️ [NIEWERYFIKOWANE].") &&
         unsafeAudit.closed === true &&
         unsafeReferences.some((reference) => reference.claim === "art. 1234 KC" &&
-            reference.status === "MISSING_LEDGER_RECORD") &&
+            reference.status === "UNVERIFIED_MARKED") &&
         invalidRouteHttp.status === 422 &&
         invalidRouteHttp.body?.error === "INVALID_ROUTE";
     process.stdout.write(JSON.stringify({

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { assessMatterComplexity } from "./matter-complexity.js";
 /**
  * Quick legal questions on local models.
  *
@@ -17,38 +18,12 @@ import path from "node:path";
  *   matching decision-tree nodes ("Karne: +kwalifikator")
  * - core-law tools only, at most two tool rounds, bounded answer length
  */
-const MAX_QUICK_CHARS = 320;
-const MAX_QUICK_SENTENCES = 3;
-const QUESTION_START = /^(?:czy|jak[a-ząćęłńóśźż]*|ile|kiedy|kto|komu|kogo|co|gdzie|dlaczego|czemu|jaki[a-ząćęłńóśźż]*|kt[oó]r[a-ząćęłńóśźż]*|w jakim|na jakiej|od kiedy|do kiedy|po ilu|ile lat|czym|z jakiego)\b/u;
-// Tasks that need a workflow, documents or a long work product never take
-// the quick lane, even when phrased as a question.
-const WORK_PRODUCT = /\b(?:napisz|sporz[aą]d[zź]|przygotuj|zredaguj|popraw|przeanalizuj|oce[nń] (?:umow|pism|dokument|akt)|sprawd[zź] (?:umow|pism|dokument|akt)|raport|chronologi|dokument|za[lł][aą]cznik|akt[ay] sprawy|strategi|przes[lł]uchani|[sś]wiadk|sygnatur|\.docx)/iu;
-export function normalizedQuestion(text) {
-    return text
-        .normalize("NFKC")
-        .replace(/\s+/g, " ")
-        .trim();
-}
 /**
- * A single short legal question without documents, drafting or analysis:
- * answerable from a few provisions.
+ * A short single legal question: the SIMPLE level of the entry gate
+ * (matter-complexity.ts) for a message without documents or workflow.
  */
 export function isQuickLegalQuestion(text) {
-    const question = normalizedQuestion(text);
-    if (question.length < 12 || question.length > MAX_QUICK_CHARS) {
-        return false;
-    }
-    if (/\n\s*\n/.test(text.trim()))
-        return false;
-    const sentences = question
-        .split(/(?<=[.!?])\s+/)
-        .filter((part) => part.trim());
-    if (sentences.length > MAX_QUICK_SENTENCES)
-        return false;
-    if (WORK_PRODUCT.test(question))
-        return false;
-    const lower = question.toLowerCase();
-    return question.includes("?") || QUESTION_START.test(lower);
+    return assessMatterComplexity({ query: text }).level === "SIMPLE";
 }
 const STOPWORDS = new Set([
     "czy", "jest", "jako", "albo", "oraz", "przez", "ktory", "która", "które",
@@ -170,8 +145,10 @@ export const QUICK_LEGAL_RULES = [
     "2. Przy każdym przepisie podaj akt, artykuł i ELI.",
     "3. Sprawa karna lub wykroczeniowa: przejdź przez podane węzły kwalifikatora karnomaterialnego, pytanie po pytaniu, zanim wskażesz kwalifikację. Wskaż okoliczności, które zmieniłyby kwalifikację (np. włamanie, przemoc, czyn ciągły).",
     "4. Orzeczenia NSA/WSA z CBOSA pozostają snapshotem bez awansu; brak trafień = OUT_OF_SCOPE. W tej odpowiedzi nie powołuj orzeczeń, których nie zweryfikowano.",
-    "5. Forma: najpierw odpowiedź wprost (1-2 zdania), potem podstawa prawna, potem krótko: od czego zależy wynik i co zmieniłoby ocenę. Bez wstępów, maksymalnie ok. 250 słów.",
-    "Odpowiadaj po polsku."
+    "5. Nie podawaj pozycji Dz.U., adresów URL ani dat nowelizacji, których nie ma w tekstach lub wynikach narzędzi z tej rozmowy. Nie pisz, że coś zweryfikowałeś narzędziem, jeśli go nie wywołałeś.",
+    "6. Gdy rdzeń aktów nie wystarcza, użyj źródeł MCP (search_federated_legal_sources, get_federated_legal_document: ISAP/ELI, EUR-Lex i inne); to materiał do odczytu, weryfikację brzmienia robi verify_legal_reference.",
+    "7. Forma: najpierw odpowiedź wprost (1-2 zdania), potem podstawa prawna, potem krótko: od czego zależy wynik i co zmieniłoby ocenę. Bez wstępów, maksymalnie ok. 250 słów.",
+    "Odpowiadaj wyłącznie po polsku. Nie pokazuj swojego rozumowania ani planu - tylko odpowiedź."
 ].join("\n");
 export const QUICK_LOCAL_MAX_OUTPUT_TOKENS = 900;
 export const QUICK_LOCAL_MAX_TOOL_ROUNDS = 3;
@@ -179,5 +156,146 @@ export const QUICK_LOCAL_TOOLS = new Set([
     "search_core_law",
     "read_core_law_article",
     "list_core_law_acts",
-    "verify_legal_reference"
+    "verify_legal_reference",
+    "list_federated_legal_sources",
+    "search_federated_legal_sources",
+    "get_federated_legal_document",
+    "call_federated_legal_source"
 ]);
+/**
+ * "Przepisy przez ELI, nigdy z pamięci" enforced for the quick lane: every
+ * article the answer cites must have been given to the model in this turn -
+ * in the retrieved ELI texts or by a core-law read / legal-reference
+ * verification. Matching is by article number (acts are not resolved from
+ * free text), so this catches provisions the model had no text for.
+ */
+export function citedArticles(text) {
+    return [
+        ...new Set([...text.matchAll(/\bart(?:yku[lł]\w*|\.)?\s*(\d{1,4}[a-z]?)\b/giu)].map((match) => match[1].toLowerCase()))
+    ];
+}
+export function sourcedArticlesFromPrompt(prompt) {
+    return [
+        ...prompt.matchAll(/^\[[^\]]+\][^\n]*— art\. (\S+)$/gmu)
+    ].map((match) => match[1].toLowerCase());
+}
+export function sourcedArticlesFromToolResult(name, content) {
+    let value;
+    try {
+        value = JSON.parse(content);
+    }
+    catch {
+        return [];
+    }
+    if (name === "read_core_law_article" && value.status === "OK" && typeof value.article === "string") {
+        return [value.article.toLowerCase()];
+    }
+    if (name === "verify_legal_reference" &&
+        (value.status === "VERIFIED" || value.status === "SUPPORTED") &&
+        typeof value.claim === "string") {
+        return citedArticles(value.claim);
+    }
+    return [];
+}
+export function unsourcedArticles(answer, sourced) {
+    return citedArticles(answer).filter((article) => !sourced.has(article));
+}
+const QUICK_TOOL_NAMES = [
+    "read_core_law_article",
+    "search_core_law",
+    "list_core_law_acts",
+    "verify_legal_reference",
+    "list_federated_legal_sources",
+    "search_federated_legal_sources",
+    "get_federated_legal_document",
+    "call_federated_legal_source"
+];
+function journalKey(year, position) {
+    return `${year}/${Number(position)}`;
+}
+/** "Dz.U. 2022 poz. 2151", "Dz. U. z 2025 r. poz. 734" -> "2022/2151". */
+export function citedJournals(text) {
+    return [
+        ...new Set([...text.matchAll(/Dz\.?\s*U\.?\s*(?:z\s+)?(\d{4})\s*(?:r\.?)?\s*(?:nr\s*\d+\s*)?,?\s*poz\.?\s*(\d+)/giu)].map((match) => journalKey(match[1], match[2])))
+    ];
+}
+function elisIn(text) {
+    return [...text.matchAll(/\bDU\/(\d{4})\/(\d+)\b/gi)].map((match) => journalKey(match[1], match[2]));
+}
+function urlsIn(text) {
+    return [...text.matchAll(/https?:\/\/[^\s)\]>"'<,]+/gi)].map((match) => match[0].replace(/[.;:!?]+$/, ""));
+}
+/**
+ * What the local model received in this turn (retrieved ELI texts and tool
+ * results). An answer may cite an article, a Dz.U. position, a URL or a tool
+ * only when it is backed here; the finalization gate then still requires
+ * VERIFIED ELI records for every citation.
+ */
+export class QuickLaneSources {
+    articles = new Set();
+    journals = new Set();
+    urls = new Set();
+    toolsCalled = new Set();
+    addPrompt(prompt) {
+        for (const article of sourcedArticlesFromPrompt(prompt))
+            this.articles.add(article);
+        for (const journal of elisIn(prompt))
+            this.journals.add(journal);
+        for (const url of urlsIn(prompt))
+            this.urls.add(url);
+    }
+    addToolResult(name, content) {
+        this.toolsCalled.add(name);
+        let ok = true;
+        try {
+            const value = JSON.parse(content);
+            ok = value.status !== "BLOCKED" && value.error === undefined;
+        }
+        catch {
+            // Federated documents may be plain text.
+        }
+        if (!ok)
+            return;
+        for (const article of sourcedArticlesFromToolResult(name, content))
+            this.articles.add(article);
+        if (name === "get_federated_legal_document" || name === "call_federated_legal_source") {
+            for (const match of content.matchAll(/\bArt\.\s*(\d{1,4}[a-z]?)\./g)) {
+                this.articles.add(match[1].toLowerCase());
+            }
+        }
+        for (const journal of elisIn(content))
+            this.journals.add(journal);
+        for (const url of urlsIn(content))
+            this.urls.add(url);
+    }
+    get articleCount() {
+        return this.articles.size;
+    }
+    /** Human-readable references in the answer that nothing in this turn backs. */
+    unsourced(answer) {
+        const missing = [];
+        for (const article of citedArticles(answer)) {
+            if (!this.articles.has(article))
+                missing.push(`art. ${article}`);
+        }
+        for (const journal of citedJournals(answer)) {
+            if (!this.journals.has(journal)) {
+                const [year, position] = journal.split("/");
+                missing.push(`Dz.U. ${year} poz. ${position}`);
+            }
+        }
+        for (const url of urlsIn(answer)) {
+            const backed = [...this.urls].some((known) => url.startsWith(known) || known.startsWith(url)) ||
+                (/^https:\/\/(?:api|isap)\.sejm\.gov\.pl\//i.test(url) &&
+                    elisIn(url.replace(/%2F/gi, "/")).some((journal) => this.journals.has(journal)));
+            if (!backed)
+                missing.push(url);
+        }
+        for (const tool of QUICK_TOOL_NAMES) {
+            if (answer.includes(tool) && !this.toolsCalled.has(tool)) {
+                missing.push(`narzędzie ${tool} (nie zostało użyte w tej odpowiedzi)`);
+            }
+        }
+        return missing;
+    }
+}

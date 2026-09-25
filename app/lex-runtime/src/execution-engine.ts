@@ -4,13 +4,17 @@ import { knowledgeMapPrompt, type KnowledgeMapAct } from "./knowledge-map.js";
 import { LegalSession } from "./legal-session.js";
 import {
   criminalQualifierExcerpt,
-  isQuickLegalQuestion,
   qualifierPrinciples,
   QUICK_LEGAL_RULES,
   QUICK_LOCAL_MAX_OUTPUT_TOKENS,
   QUICK_LOCAL_MAX_TOOL_ROUNDS,
-  QUICK_LOCAL_TOOLS
+  QUICK_LOCAL_TOOLS,
+  QuickLaneSources
 } from "./quick-legal-question.js";
+import {
+  assessMatterComplexity,
+  type MatterComplexity
+} from "./matter-complexity.js";
 import { LexSkillRegistry } from "./registry.js";
 import { ProviderGateway } from "./providers/gateway.js";
 import type {
@@ -19,6 +23,7 @@ import type {
   NormalizedToolResult,
   NormalizedToolSchema,
   ProviderId,
+  ProviderStreamParams,
   StreamCallbacks
 } from "./providers/types.js";
 import {
@@ -378,6 +383,8 @@ export class LexExecutionEngine {
     quickLocalLegal?: {
       toolPrompt: string;
     };
+    /** Result of the entry gate; computed here when the caller has none. */
+    matterComplexity?: MatterComplexity;
     runTools?: (
       calls: NormalizedToolCall[]
     ) => Promise<NormalizedToolResult[]>;
@@ -802,6 +809,22 @@ export class LexExecutionEngine {
       };
     }
 
+    // Entry gate (matter-complexity.ts): a SIMPLE matter on a local model
+    // loads router v3 + one DR domain in compact form instead of the full
+    // legal profile.
+    const complexity =
+      args.matterComplexity ??
+      assessMatterComplexity({
+        query: effectiveQuery,
+        attachmentCount: args.documentContext ? 1 : 0,
+        workflowPinned: boundContext
+      });
+    emit(
+      "gate",
+      "MATTER_COMPLEXITY",
+      "OK",
+      `level=${complexity.level}${complexity.reasons.length ? `;reasons=${complexity.reasons.join("|")}` : ""}`
+    );
     const quickLocal =
       Boolean(args.quickLocalLegal) &&
       args.model.startsWith("local/") &&
@@ -810,9 +833,7 @@ export class LexExecutionEngine {
         workflowPlan.id === "LEGAL_QUERY_V1" ||
         workflowPlan.id === "STATUTE_ANALYSIS_V1"
       ) &&
-      isQuickLegalQuestion(
-        latestUserTurn(effectiveQuery)
-      );
+      complexity.level === "SIMPLE";
 
     const semanticWorkflowResources:
       string[] = [];
@@ -1381,8 +1402,25 @@ export class LexExecutionEngine {
         "OK",
         args.model
       );
-      const response =
-        await this.providers.stream(
+      // Articles whose text the model received in this turn.
+      const sources = new QuickLaneSources();
+      sources.addPrompt(args.quickLocalLegal.toolPrompt);
+      const runTools = args.runTools;
+      const trackedRunTools = runTools
+        ? async (calls: NormalizedToolCall[]) => {
+            const results = await runTools(calls);
+            for (const result of results) {
+              const call = calls.find((item) => item.id === result.tool_use_id);
+              if (!call) continue;
+              sources.addToolResult(call.name, result.content);
+            }
+            return results;
+          }
+        : undefined;
+      const quickRequest = (
+        messages: ProviderStreamParams["messages"]
+      ) =>
+        this.providers.stream(
           args.provider,
           {
             model: args.model,
@@ -1390,16 +1428,11 @@ export class LexExecutionEngine {
             ...(args.continuityKey
               ? { continuityKey: args.continuityKey }
               : {}),
-            messages: [
-              {
-                role: "user",
-                content: effectiveQuery
-              }
-            ],
-            ...(quickTools.length > 0 && args.runTools
+            messages,
+            ...(quickTools.length > 0 && trackedRunTools
               ? {
                   tools: quickTools,
-                  runTools: args.runTools,
+                  runTools: trackedRunTools,
                   maxIterations:
                     QUICK_LOCAL_MAX_TOOL_ROUNDS
                 }
@@ -1412,6 +1445,55 @@ export class LexExecutionEngine {
             reasoning: "none"
           }
         );
+      const question = {
+        role: "user" as const,
+        content: effectiveQuery
+      };
+      const response = await quickRequest([question]);
+      let missing = sources.unsourced(response.fullText);
+      if (missing.length > 0) {
+        // One correcting round: fetch the text or drop the provision.
+        emit(
+          "gate",
+          "QUICK_LEGAL_SOURCES",
+          "OK",
+          `correction=${missing.join("|")}`
+        );
+        const corrected = await quickRequest([
+          question,
+          { role: "assistant", content: response.fullText },
+          {
+            role: "user",
+            content:
+              `Odpowiedź zawiera odwołania bez źródła w tej rozmowie: ${missing.join("; ")}. ` +
+              "Przepis: pobierz brzmienie read_core_law_article (akt i numer artykułu) albo usuń go. Pozycję Dz.U., adres URL lub datę nowelizacji podaj tylko z wyników narzędzi, inaczej usuń. Nie twierdź, że użyłeś narzędzia, którego nie wywołałeś. Nigdy nie podawaj prawa z pamięci. " +
+              "Zwróć pełną, poprawioną odpowiedź (nie opis zmian)."
+          }
+        ]);
+        if (corrected.fullText.trim()) {
+          response.fullText = corrected.fullText;
+        }
+        missing = sources.unsourced(response.fullText);
+      }
+      if (missing.length > 0) {
+        emit(
+          "gate",
+          "QUICK_LEGAL_SOURCES",
+          "BLOCKED",
+          `unsourced=${missing.join("|")}`
+        );
+        throw new LexExecutionError(
+          "The answer cites provisions without an ELI text in this turn.",
+          "QUICK_LEGAL_UNSOURCED_PROVISION",
+          [...events]
+        );
+      }
+      emit(
+        "gate",
+        "QUICK_LEGAL_SOURCES",
+        "OK",
+        `sourcedArticles=${sources.articleCount}`
+      );
       emit(
         "provider_end",
         args.provider,

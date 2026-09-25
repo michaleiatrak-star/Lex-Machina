@@ -281,7 +281,8 @@ const pass = issues.length === 0 &&
         "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.html") &&
     staleHttp.status === 200 &&
     stale.status === "DRAFT_PRESENTABLE" &&
-    stale.finalization === "BLOCKED" &&
+    // HARD GATE: shown only with the marker at the unverified claim.
+    stale.finalization === "DEGRADED" &&
     typeof stale.answer === "string" &&
     staleVerification.records === 0 &&
     staleFetches.length === 0 &&

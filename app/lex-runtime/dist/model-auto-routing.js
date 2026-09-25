@@ -1,5 +1,5 @@
-import { isQuickLegalQuestion } from "./quick-legal-question.js";
-import { isLocalLightweightConversation, latestUserTurn } from "./execution-engine.js";
+import { assessMatterComplexity } from "./matter-complexity.js";
+import { isLocalLightweightConversation } from "./execution-engine.js";
 import { MANDATORY_SESSION_SKILLS, SKILL_SELECTION_ENVELOPE_PREFIX, parseSkillSelectionEnvelope } from "./skill-selection.js";
 const EXECUTION_SKILL_NAME_OVERRIDES = new Set([
     "przesluchanie-swiadkow-v2-min90",
@@ -224,7 +224,8 @@ export class ModelAutoRouter {
             : Promise.resolve("");
         const mapText = await routingMapText;
         const quickLocal = localModel &&
-            isQuickLegalQuestion(latestUserTurn(envelope.query));
+            (args.matterComplexity ??
+                assessMatterComplexity({ query: envelope.query })).level === "SIMPLE";
         const catalogLimit = quickLocal
             ? LOCAL_QUICK_CATALOG_DESCRIPTION_CHARS
             : localModel

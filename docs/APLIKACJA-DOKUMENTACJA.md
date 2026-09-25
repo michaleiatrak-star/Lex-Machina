@@ -113,7 +113,13 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 | API (OpenAI, Anthropic, xAI) | klucz w pamięci procesu lub keyringu systemu |
 | Lokalny (llama.cpp, np. Bielik) | kompaktowy routing, RAG z rdzenia aktów w prompcie, limit 4 plików |
 
-**Szybka odpowiedź (model lokalny)**: jedno krótkie pytanie prawne (do ~320 znaków, bez dokumentów, bez polecenia napisania/analizy) i znalezione teksty z rdzenia aktów → router wybiera tylko domenę DR, model dostaje zasady HARD GATE, skrót skilla DR, przepisy z ELI i (sprawa karna) wybrane przez runtime węzły kwalifikatora karnomaterialnego zamiast całego indeksu; narzędzia tylko rdzenia aktów i `verify_legal_reference`, maks. 3 rundy, odpowiedź do 900 tokenów. Prompt ok. 8-11 tys. znaków zamiast ok. 25 tys. Weryfikacja po odpowiedzi bez zmian. Pozostałe pytania - pełna ścieżka.
+**Bramka złożoności (wejście, bez wywołania modelu)**: `TRIVIAL` (polecenie bez treści prawnej), `SIMPLE` (jedno krótkie pytanie: do 320 znaków, do 3 zdań i 2 pytań, bez plików, trybu mechanicznego, zlecenia pisma/analizy, orzecznictwa, >3 kwot/dat, >2 stron, >2 aktów), `STANDARD` (reszta, z kodami powodów). Wynik widać w oknie postępu. Przy wątpliwości - `STANDARD`.
+
+**Szybka odpowiedź (model lokalny, `SIMPLE`)**: router wybiera tylko domenę DR; model dostaje zasady HARD GATE, skrót skilla DR, przepisy z rdzenia aktów (ELI) i - w sprawie karnej - wybrane przez runtime węzły kwalifikatora zamiast całego indeksu; narzędzia: rdzeń aktów, `verify_legal_reference`, źródła MCP (ISAP/ELI, EUR-Lex i inne); maks. 3 rundy, odpowiedź do 900 tokenów; bez automatycznego dociągania akt sprawy. Prompt ok. 8-11 tys. znaków zamiast ok. 25 tys.
+
+**Strażnik źródeł (szybka odpowiedź)**: każdy artykuł, pozycja Dz.U., adres URL i powołane narzędzie w odpowiedzi musi pochodzić z tekstów ELI lub wyników narzędzi tej tury; inaczej jedna runda korekty („pobierz albo usuń”), potem blokada `QUICK_LEGAL_UNSOURCED_PROVISION`. Rozumowanie modelu (`<think>`, angielskie akapity przed polską odpowiedzią) jest wycinane.
+
+**Finalizacja (wszystkie modele)**: niezweryfikowany przepis lub Dz.U. jest pokazywany wyłącznie z `⚠️ [NIEWERYFIKOWANE]` przy samym odwołaniu (wstawia runtime); zmyślona lub zmieniona sygnatura, cytat albo teza orzeczenia blokuje odpowiedź.
 
 **Narzędzia Lex dostępne dla modeli** (w Claude jako `mcp__lex__*`): rdzeń aktów prawnych (teksty z ELI, lokalnie), weryfikacja przepisów i orzeczeń, orzecznictwo (SAOS, CBOSA, SN), źródła federacyjne MCP (ISAP, EUR-Lex, KRS i inne), raporty. Każde wywołanie przechodzi przez audytowany runtime.
 
@@ -175,6 +181,7 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 
 - Przyspieszenie trybu natywnego Claude i weryfikacja przez lokalne AI nie były mierzone na prawdziwym koncie/modelu (pokryte testami).
 - Czas szybkiej odpowiedzi modelu lokalnego nie był mierzony na prawdziwym modelu; zmierzony jest rozmiar promptu (ok. 3 razy mniejszy).
+- Strażnik źródeł porównuje numery artykułów, nie akty: art. 119 KC przejdzie, jeśli w turze był tekst art. 119 KW (finalizacja ELI nadal go sprawdza).
 - Codex i Grok nie mają zamknięcia odczytu w jednym katalogu - zostają przy protokole tekstowym.
 - Okna kontekstu modeli w hoście są przyjęte ostrożnie (Claude 200 tys., OpenAI/Grok 128 tys. tokenów).
 - Korekta OCR i obrazy z PaddleOCR sprawdzone testami i atrapą silnika; nie mierzono jakości na prawdziwym Bieliku ani na prawdziwych skanach.

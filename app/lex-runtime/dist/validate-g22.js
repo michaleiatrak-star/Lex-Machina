@@ -276,8 +276,9 @@ const pass = issues.length === 0 &&
     typeof near.answer === "string" &&
     nearVerification.records === 0 &&
     fakeHttp.status === 200 &&
-    fake.status === "DRAFT_PRESENTABLE" &&
-    typeof fake.answer === "string" &&
+    // HARD GATE: a fabricated or altered case-law claim is never shown.
+    fake.status === "BLOCKED" &&
+    fake.answer === undefined &&
     typeof fakeVerification.records ===
         "number" &&
     fakeVerification.records >= 1 &&

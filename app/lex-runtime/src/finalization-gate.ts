@@ -193,6 +193,15 @@ export class FinalizationGate {
         );
 
       const record = ledger.latest(reference.claim);
+      // HARD GATE: no access to a source -> [NIEWERYFIKOWANE], never an
+      // unmarked claim. A marked claim without any record is shown marked.
+      if (!record && UNVERIFIED_MARKER.test(reference.lineText)) {
+        findings.push({
+          reference,
+          status: "UNVERIFIED_MARKED"
+        });
+        continue;
+      }
       if (!record) {
         findings.push({
           reference,
@@ -474,4 +483,43 @@ export class FinalizationGate {
       caseSupportFindings
     };
   }
+}
+
+export const UNVERIFIED_MARKER_TEXT = "⚠️ [NIEWERYFIKOWANE]";
+
+/**
+ * Inserts the HARD GATE marker after every statute or Dz.U. reference that
+ * has no VERIFIED record and no marker yet, so an unverified claim is never
+ * shown unmarked. Case-law findings are not marked here: they block.
+ */
+export function markUnverifiedReferences(
+  text: string,
+  report: FinalizationReport
+): string {
+  const markable = new Set<FinalizationFinding["status"]>([
+    "MISSING_LEDGER_RECORD",
+    "UNVERIFIED_NOT_MARKED"
+  ]);
+  const byLine = new Map<number, string[]>();
+  for (const finding of report.findings) {
+    if (!markable.has(finding.status)) continue;
+    if (finding.reference.kind === "case") continue;
+    byLine.set(finding.reference.line, [
+      ...(byLine.get(finding.reference.line) ?? []),
+      finding.reference.claim
+    ]);
+  }
+  if (byLine.size === 0) return text;
+  const lines = text.split(/\r?\n/u);
+  for (const [line, claims] of byLine) {
+    let lineText = lines[line - 1] ?? "";
+    for (const claim of [...new Set(claims)]) {
+      const at = lineText.indexOf(claim);
+      if (at < 0) continue;
+      const end = at + claim.length;
+      lineText = `${lineText.slice(0, end)} ${UNVERIFIED_MARKER_TEXT}${lineText.slice(end)}`;
+    }
+    lines[line - 1] = lineText;
+  }
+  return lines.join("\n");
 }

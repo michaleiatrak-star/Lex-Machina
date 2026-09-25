@@ -8,7 +8,10 @@ import type {
   LexSkillRecord,
   LexSkillRegistry
 } from "./registry.js";
-import { isQuickLegalQuestion } from "./quick-legal-question.js";
+import {
+  assessMatterComplexity,
+  type MatterComplexity
+} from "./matter-complexity.js";
 import {
   isLocalLightweightConversation,
   latestUserTurn
@@ -366,6 +369,7 @@ export class ModelAutoRouter {
     query: string;
     provider: ProviderId;
     model: string;
+    matterComplexity?: MatterComplexity;
   }): Promise<
     ModelAutoRoutingResult
   > {
@@ -478,9 +482,10 @@ export class ModelAutoRouter {
 
     const quickLocal =
       localModel &&
-      isQuickLegalQuestion(
-        latestUserTurn(envelope.query)
-      );
+      (
+        args.matterComplexity ??
+        assessMatterComplexity({ query: envelope.query })
+      ).level === "SIMPLE";
     const catalogLimit =
       quickLocal
         ? LOCAL_QUICK_CATALOG_DESCRIPTION_CHARS

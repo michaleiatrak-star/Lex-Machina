@@ -278,8 +278,9 @@ const pass = issues.length === 0 &&
         supportedSummary.records - 1 &&
     supportedSummary.unverified === 0 &&
     fakeHttp.status === 200 &&
-    fake.status === "DRAFT_PRESENTABLE" &&
-    typeof fake.answer === "string" &&
+    // HARD GATE: a fabricated or altered case-law claim is never shown.
+    fake.status === "BLOCKED" &&
+    fake.answer === undefined &&
     typeof fakeSummary.records ===
         "number" &&
     fakeSummary.records >= 1 &&
@@ -288,10 +289,9 @@ const pass = issues.length === 0 &&
     fakeSummary.supported === 0 &&
     fakeSummary.unverified === 0 &&
     alteredHttp.status === 200 &&
-    altered.status ===
-        "DRAFT_PRESENTABLE" &&
-    typeof altered.answer ===
-        "string" &&
+    // HARD GATE: a fabricated or altered case-law claim is never shown.
+    altered.status === "BLOCKED" &&
+    altered.answer === undefined &&
     typeof alteredSummary.records ===
         "number" &&
     alteredSummary.records >= 3 &&
@@ -300,10 +300,9 @@ const pass = issues.length === 0 &&
         alteredSummary.records - 1 &&
     alteredSummary.unverified === 0 &&
     omittedHttp.status === 200 &&
-    omitted.status ===
-        "DRAFT_PRESENTABLE" &&
-    typeof omitted.answer ===
-        "string" &&
+    // HARD GATE: a fabricated or altered case-law claim is never shown.
+    omitted.status === "BLOCKED" &&
+    omitted.answer === undefined &&
     typeof omittedSummary.records ===
         "number" &&
     omittedSummary.records >= 3 &&

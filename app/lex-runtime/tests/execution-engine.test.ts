@@ -609,3 +609,60 @@ describe("legal gate for trivial chat commands", () => {
     expect(adapter.calls[0]?.messages.at(-1)?.content).toBe("Dzięki!");
   });
 });
+
+describe("local quick lane: provisions only from ELI texts", () => {
+  function scriptedEngine(answers: string[]) {
+    const calls: ProviderStreamParams[] = [];
+    const adapter: ProviderAdapter = {
+      id: "openai",
+      label: "scripted",
+      capabilities: { streaming: true, tools: true, reasoning: true, modelDiscovery: false },
+      async stream(params) {
+        calls.push(params);
+        return { fullText: answers[Math.min(calls.length - 1, answers.length - 1)]! };
+      }
+    };
+    const providers = new ProviderRegistry();
+    providers.register(adapter);
+    return { calls, providers };
+  }
+
+  function quickRegistry(): LexSkillRegistry {
+    const registry = criminalFixture(true);
+    const root = path.dirname(registry.get("shared")!.directory);
+    const parts = path.join(root, DR03, "modules", "kwalifikator-karnomaterialny");
+    fs.mkdirSync(parts, { recursive: true });
+    fs.writeFileSync(
+      path.join(parts, "part-01.md"),
+      "### WĘZEŁ WARTOŚCI — Kradzież bez przemocy\nJaka jest wartość skradzionego mienia? Próg decyduje: wykroczenie kradzieży albo przestępstwo kradzieży mienia.\n"
+    );
+    const rescanned = new LexSkillRegistry(root);
+    rescanned.scan();
+    return rescanned;
+  }
+
+  const request = (providers: ProviderRegistry) =>
+    new LexExecutionEngine(quickRegistry(), new ProviderGateway(providers)).executePolishLegalQuery({
+      query: "czy kradzież 600 złotych to przestępstwo czy wykroczenie?",
+      provider: "openai",
+      model: "local/mistral-nemo-12b-q4km",
+      route: { jurisdiction: "PL", primarySkill: DR03, mode: "LAIK" },
+      quickLocalLegal: { toolPrompt: "# LOKALNE TEKSTY USTAW\n\n[DU/2025/734] Kodeks wykroczeń — art. 119\nArt. 119. § 1. Kto kradnie" }
+    });
+
+  it("asks once to fetch or drop a provision cited from memory", async () => {
+    const { calls, providers } = scriptedEngine([
+      "Wykroczenie (art. 119 KW), a przy włamaniu art. 279 KK.",
+      "Wykroczenie (art. 119 KW)."
+    ]);
+    const result = await request(providers);
+    expect(calls).toHaveLength(2);
+    expect(String(calls[1]!.messages.at(-1)!.content)).toContain("art. 279");
+    expect(result.output).toBe("Wykroczenie (art. 119 KW).");
+  });
+
+  it("blocks an answer that still cites a provision without its text", async () => {
+    const { providers } = scriptedEngine(["Przestępstwo z art. 278 KK."]);
+    await expect(request(providers)).rejects.toMatchObject({ target: "QUICK_LEGAL_UNSOURCED_PROVISION" });
+  });
+});

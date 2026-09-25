@@ -128,6 +128,8 @@ describe("AiSdkProviderAdapter", () => {
         ]
       )
     ).toEqual({
+      reasoning_format: "deepseek",
+      chat_template_kwargs: { enable_thinking: false },
       cache_prompt: true,
       model:
         "local/mistral-nemo-12b-q4km",

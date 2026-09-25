@@ -1,3 +1,4 @@
+import { FinalizationGate, markUnverifiedReferences } from "./finalization-gate.js";
 import { genericWords } from "./privacy/generic-words.js";
 import { placeholderGrammar, partyGroups, placeholderKeyPrompt } from "./privacy/token-legend.js";
 import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
@@ -440,7 +441,10 @@ export class SafeSessionExecutor {
             .resolve({
             query: protectedQuery,
             provider: request.provider,
-            model: request.model
+            model: request.model,
+            ...(request.matterComplexity
+                ? { matterComplexity: request.matterComplexity }
+                : {})
         });
         // Keep the user's original text for the actual execution. Only the
         // model-selected routing envelope is copied from the protected prepass.
@@ -786,17 +790,21 @@ export class SafeSessionExecutor {
                 : {}),
             tools: toolSchemas,
             toolSystemPromptAppendix: toolPrompt,
-            // A short question with retrieved ELI texts may take the local quick
-            // lane; the engine decides from the route and the question itself.
-            ...(coreLawRag && coreLawTools && attachments.length === 0
+            // A SIMPLE matter (entry gate) on a local model takes the compact
+            // lane: core-law texts in the prompt, core-law tools for the rest.
+            ...(coreLawTools && request.model.startsWith("local/") && attachments.length === 0
                 ? {
                     quickLocalLegal: {
                         toolPrompt: [
                             coreLawTools.systemPromptAppendix(),
-                            coreLawRag
+                            coreLawRag ??
+                                "# LOKALNE TEKSTY USTAW\nDla tego pytania nie dobrano automatycznie artykułów. Znajdź przepis search_core_law, a jego brzmienie weź z read_core_law_article; bez tego nie podawaj treści przepisu."
                         ].join("\n\n")
                     }
                 }
+                : {}),
+            ...(request.matterComplexity
+                ? { matterComplexity: request.matterComplexity }
                 : {}),
             runGateIRuntimePrelude: (workflowPlan) => runGateIRuntimePrelude({
                 workflow: workflowPlan.id,
@@ -1019,7 +1027,16 @@ export class SafeSessionExecutor {
                 });
             }
         }
-        const processedDocumentCitations = processDocumentCitationMarkers(automaticVerification.text, citationSources);
+        const citedAnswer = processDocumentCitationMarkers(automaticVerification.text, citationSources);
+        // HARD GATE: an unverified statute or Dz.U. reference is shown only with
+        // its [NIEWERYFIKOWANE] marker, placed at the claim itself.
+        const preFinalization = new FinalizationGate().evaluate(citedAnswer.text, ledger);
+        const processedDocumentCitations = preFinalization.result === "BLOCKED"
+            ? {
+                ...citedAnswer,
+                text: markUnverifiedReferences(citedAnswer.text, preFinalization)
+            }
+            : citedAnswer;
         audit.record("gate", "LOCAL_DOCUMENT_DEEP_LINKS", "OK", {
             accepted: processedDocumentCitations.citations.length,
             rejected: processedDocumentCitations.rejectedMarkers,
@@ -1359,7 +1376,11 @@ export class SafeSessionExecutor {
             gateIBlocked ||
             gateITurn.result !==
                 "PASS";
-        const presentationBlocked = corpusBlocked ||
+        const presentationBlocked = 
+        // Still blocked after marking: a case-law claim without evidence or a
+        // verification marker that does not match its source.
+        finalization.result === "BLOCKED" ||
+            corpusBlocked ||
             workflowResourcesBlocked ||
             workflowOutputBlocked ||
             guideOutputBlocked ||

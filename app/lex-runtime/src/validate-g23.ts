@@ -529,8 +529,9 @@ const pass =
   verifiedSummary.unverified === 0 &&
 
   fakeHttp.status === 200 &&
-  fake.status === "DRAFT_PRESENTABLE" &&
-  typeof fake.answer === "string" &&
+  // HARD GATE: a fabricated or altered case-law claim is never shown.
+  fake.status === "BLOCKED" &&
+  fake.answer === undefined &&
   typeof fakeSummary.records ===
     "number" &&
   fakeSummary.records >= 1 &&
@@ -540,10 +541,9 @@ const pass =
   fakeSummary.unverified === 0 &&
 
   alteredHttp.status === 200 &&
-  altered.status ===
-    "DRAFT_PRESENTABLE" &&
-  typeof altered.answer ===
-    "string" &&
+  // HARD GATE: a fabricated or altered case-law claim is never shown.
+  altered.status === "BLOCKED" &&
+  altered.answer === undefined &&
   typeof alteredSummary.records ===
     "number" &&
   alteredSummary.records >= 2 &&

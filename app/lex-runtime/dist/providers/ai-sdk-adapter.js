@@ -18,6 +18,46 @@ const LOCAL_FIRST_CONTENT_TIMEOUT_MS = 900_000;
 const LOCAL_STREAM_IDLE_TIMEOUT_MS = 120_000;
 const LOCAL_JSON_BODY_TIMEOUT_MS = 300_000;
 const LOCAL_TOOL_SENTINEL = "LEX_TOOL_CALLS_JSON:";
+const THINK_OPEN = /^\s*<(think|thinking|reasoning)>/i;
+/**
+ * Removes model reasoning a local chat template left in the content: whole
+ * <think>...</think> blocks, and everything before a closing tag whose
+ * opening tag the template emitted in the prompt.
+ */
+export function stripLocalReasoning(text) {
+    let result = text.replace(/<(think|thinking|reasoning)>[\s\S]*?<\/\1>/gi, "");
+    const close = /<\/(?:think|thinking|reasoning)>/i.exec(result);
+    if (close) {
+        result = result.slice(close.index + close[0].length);
+    }
+    // An unclosed block at the end (output cut by the token limit).
+    result = result.replace(/<(think|thinking|reasoning)>[\s\S]*$/i, "");
+    return dropLeadingEnglishReasoning(result.trim());
+}
+const ENGLISH_WORDS = /\b(?:the|and|that|this|is|are|was|i|i'm|let's|need|should|user|asking|okay|so|first|then|about|from|with|which)\b/gi;
+const POLISH_LETTERS = /[ąćęłńóśźż]/i;
+function looksEnglish(paragraph) {
+    const words = paragraph.split(/\s+/).filter(Boolean).length;
+    if (words < 8 || POLISH_LETTERS.test(paragraph))
+        return false;
+    return (paragraph.match(ENGLISH_WORDS) ?? []).length / words > 0.15;
+}
+/**
+ * Untagged reasoning: leading English paragraphs before a Polish answer
+ * (a Polish answer never starts that way; nothing is removed when the whole
+ * text is English).
+ */
+export function dropLeadingEnglishReasoning(text) {
+    const paragraphs = text.split(/\n\s*\n/);
+    let index = 0;
+    while (index < paragraphs.length - 1 && looksEnglish(paragraphs[index])) {
+        index += 1;
+    }
+    return index > 0 &&
+        paragraphs.slice(index).some((paragraph) => POLISH_LETTERS.test(paragraph))
+        ? paragraphs.slice(index).join("\n\n").trim()
+        : text;
+}
 /**
  * Forwards local streaming text as a live draft, but never the text tool
  * protocol: output that starts with the tool sentinel stays hidden.
@@ -36,9 +76,19 @@ export function localDraftForwarder(onContentDelta) {
                 return;
             }
             pending += text;
-            const head = pending.trimStart();
+            let head = pending.trimStart();
             if (!head)
                 return;
+            // Reasoning is not shown: wait for the end of a <think> block.
+            if (THINK_OPEN.test(head) || "<think".startsWith(head.slice(0, 6).toLowerCase())) {
+                const close = /<\/(?:think|thinking|reasoning)>/i.exec(head);
+                if (!close)
+                    return;
+                pending = head.slice(close.index + close[0].length);
+                head = pending.trimStart();
+                if (!head)
+                    return;
+            }
             if (LOCAL_TOOL_SENTINEL.startsWith(head) ||
                 head.startsWith(LOCAL_TOOL_SENTINEL)) {
                 if (head.startsWith(LOCAL_TOOL_SENTINEL)) {
@@ -55,7 +105,7 @@ export function localDraftForwarder(onContentDelta) {
             if (!onContentDelta)
                 return;
             if (!forwarded) {
-                onContentDelta(fullText);
+                onContentDelta(stripLocalReasoning(fullText));
             }
             else if (pending) {
                 onContentDelta(pending);
@@ -270,6 +320,11 @@ export function localChatBudget(contextTokens, systemPrompt, messages, conservat
 }
 export function buildLocalChatRequest(modelId, systemPrompt, messages, maxOutputTokens = LOCAL_DEFAULT_OUTPUT_TOKENS, stream = true, temperature = LOCAL_TEMPERATURE) {
     return {
+        // Reasoning never belongs in a Lex answer: templates that support it
+        // skip the thinking phase, and llama-server moves any reasoning into
+        // reasoning_content, which Lex does not read.
+        reasoning_format: "deepseek",
+        chat_template_kwargs: { enable_thinking: false },
         // Reuse llama.cpp's KV cache for the unchanged prompt prefix (system
         // prompt + earlier turns) instead of re-reading it on every request.
         cache_prompt: true,
@@ -745,6 +800,10 @@ async function streamLocalModel(endpoint, modelId, contextTokens, conservativeCh
                 .replace(/[\r\n]+/g, " ")
                 .slice(-800)}`);
         }
+        result = {
+            ...result,
+            fullText: stripLocalReasoning(result.fullText)
+        };
         const calls = parseLocalToolCalls(result.fullText);
         if (!calls) {
             draft.finish(result.fullText);
@@ -1044,6 +1103,8 @@ export class AiSdkProviderAdapter {
                 try {
                     const direct = await directLocalJsonCompletion(localStatus.endpoint, configuredModel.id, params.systemPrompt, params.messages, params.localMaxOutputTokens ??
                         128, params.abortSignal);
+                    direct.fullText =
+                        stripLocalReasoning(direct.fullText);
                     params.callbacks
                         ?.onContentDelta?.(direct.fullText);
                     return direct;

@@ -22,6 +22,7 @@ import { MAX_FIRM_TEMPLATES, templateChunks, templateText } from "../firm-templa
 import { assertStoredDocumentSignature, storedDocumentMediaType } from "../stored-document-source.js";
 import { parseSkillSelectionEnvelope, resolveAdditionalSkills, SKILL_SELECTION_ENVELOPE_PREFIX } from "../skill-selection.js";
 import { isTrivialChatCommand } from "../execution-engine.js";
+import { assessMatterComplexity, describeMatterComplexity } from "../matter-complexity.js";
 import { createDeterministicWorkflowPlan } from "../deterministic-workflow.js";
 import { completeProcessExecution, requireProcessExecutionPermit } from "../process-pleading-execution-gate.js";
 import { PROCESS_AUTO_MAX_STEPS, runBoundedProcessAutoSequence } from "../process-pleading-auto-runner.js";
@@ -4683,11 +4684,26 @@ export function createLexHttpApp(options) {
             });
         }
         const trivialChat = applyTrivialChatGate(options.registry, request, attachments.length + firmTemplates.length);
-        if (trivialChat) {
-            // No case passages for a greeting or "ok".
+        // Entry gate: how much of the legal system this message needs.
+        const entryEnvelope = parseSkillSelectionEnvelope(request.query);
+        const complexity = assessMatterComplexity({
+            query: entryEnvelope.query,
+            attachmentCount: attachments.length + firmTemplates.length,
+            workflowPinned: !trivialChat &&
+                (entryEnvelope.workflowExecutionSkill !== null ||
+                    entryEnvelope.manualSkills.length > 0)
+        });
+        request.matterComplexity = complexity;
+        const localSimple = complexity.level === "SIMPLE" &&
+            request.model.startsWith("local/");
+        if (trivialChat || localSimple) {
+            // No case passages for a greeting; for a simple question on a local
+            // model they would cost minutes of prompt reading (selected files
+            // still make the matter STANDARD).
             knowledge.includeCase = false;
             knowledge.includeFirm = false;
         }
+        request.onStep?.("PREPARE", `ocena sprawy: ${describeMatterComplexity(complexity)}`);
         request.onStep?.("ROUTING", trivialChat
             ? "krótkie polecenie: bez skilli prawnych i workflow"
             : request.primarySkill === "AUTO"

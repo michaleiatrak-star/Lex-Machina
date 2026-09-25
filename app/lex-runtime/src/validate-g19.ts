@@ -511,7 +511,8 @@ const pass =
 
   staleHttp.status === 200 &&
   stale.status === "DRAFT_PRESENTABLE" &&
-  stale.finalization === "BLOCKED" &&
+  // HARD GATE: shown only with the marker at the unverified claim.
+  stale.finalization === "DEGRADED" &&
   typeof stale.answer === "string" &&
   staleVerification.records === 0 &&
   staleFetches.length === 0 &&

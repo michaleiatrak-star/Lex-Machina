@@ -145,6 +145,10 @@ import {
 } from "../skill-selection.js";
 import { isTrivialChatCommand } from "../execution-engine.js";
 import {
+  assessMatterComplexity,
+  describeMatterComplexity
+} from "../matter-complexity.js";
+import {
   createDeterministicWorkflowPlan
 } from "../deterministic-workflow.js";
 import type {
@@ -8112,11 +8116,36 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
         request,
         attachments.length + firmTemplates.length
       );
-    if (trivialChat) {
-      // No case passages for a greeting or "ok".
+    // Entry gate: how much of the legal system this message needs.
+    const entryEnvelope =
+      parseSkillSelectionEnvelope(request.query);
+    const complexity =
+      assessMatterComplexity({
+        query: entryEnvelope.query,
+        attachmentCount:
+          attachments.length + firmTemplates.length,
+        workflowPinned:
+          !trivialChat &&
+          (
+            entryEnvelope.workflowExecutionSkill !== null ||
+            entryEnvelope.manualSkills.length > 0
+          )
+      });
+    request.matterComplexity = complexity;
+    const localSimple =
+      complexity.level === "SIMPLE" &&
+      request.model.startsWith("local/");
+    if (trivialChat || localSimple) {
+      // No case passages for a greeting; for a simple question on a local
+      // model they would cost minutes of prompt reading (selected files
+      // still make the matter STANDARD).
       knowledge.includeCase = false;
       knowledge.includeFirm = false;
     }
+    request.onStep?.(
+      "PREPARE",
+      `ocena sprawy: ${describeMatterComplexity(complexity)}`
+    );
     request.onStep?.(
       "ROUTING",
       trivialChat

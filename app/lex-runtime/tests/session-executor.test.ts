@@ -760,7 +760,7 @@ describe("SafeSessionExecutor", () => {
     );
   });
 
-  it("withholds provider output when a legal reference lacks verification", async () => {
+  it("never presents an unverified legal reference without its HARD GATE marker", async () => {
     const unsafe: ProviderAdapter = {
       id: "anthropic",
       label: "unsafe-test",
@@ -793,17 +793,20 @@ describe("SafeSessionExecutor", () => {
       mode: "PRAWNIK"
     });
 
+    // The claim is shown only marked at the claim itself (DEGRADED), never
+    // as an unmarked statement under a generic banner.
     expect(result.status).toBe("DRAFT_PRESENTABLE");
-    expect(result.finalization).toBe("BLOCKED");
+    expect(result.finalization).toBe("DEGRADED");
     expect(result.answer).toContain(
-      "Zastosowanie ma art. 1234 KC."
+      "Zastosowanie ma art. 1234 KC ⚠️ [NIEWERYFIKOWANE]."
     );
     expect(result.blockedReferences).toContainEqual(
       expect.objectContaining({
         claim: "art. 1234 KC",
-        status: "MISSING_LEDGER_RECORD"
+        status: "UNVERIFIED_MARKED"
       })
     );
+    // The audit still records that verification could not run here.
     expect(result.audit).toMatchObject({
       result: "BLOCKED",
       closed: true

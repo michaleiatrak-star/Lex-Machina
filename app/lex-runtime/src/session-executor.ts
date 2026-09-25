@@ -1,3 +1,8 @@
+import {
+  FinalizationGate,
+  markUnverifiedReferences
+} from "./finalization-gate.js";
+import type { MatterComplexity } from "./matter-complexity.js";
 import { genericWords } from "./privacy/generic-words.js";
 import type { EvidenceImage } from "./document-evidence.js";
 import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
@@ -202,6 +207,8 @@ export type SessionExecutionRequest = {
   conversationalOnly?: boolean;
   // AUTO for account/API models: the model picks skills itself.
   modelSelectsSkills?: boolean;
+  // Runtime-only (never parsed from HTTP): result of the entry gate.
+  matterComplexity?: MatterComplexity;
   // Runtime-only (never parsed from HTTP): receives the live draft text of
   // the model answer with the chat pseudonyms already restored.
   onDraft?: (text: string) => void;
@@ -1093,7 +1100,10 @@ export class SafeSessionExecutor implements SessionExecutor {
           provider:
             request.provider,
           model:
-            request.model
+            request.model,
+          ...(request.matterComplexity
+            ? { matterComplexity: request.matterComplexity }
+            : {})
         });
 
     // Keep the user's original text for the actual execution. Only the
@@ -1611,17 +1621,21 @@ export class SafeSessionExecutor implements SessionExecutor {
         : {}),
       tools: toolSchemas,
       toolSystemPromptAppendix: toolPrompt,
-      // A short question with retrieved ELI texts may take the local quick
-      // lane; the engine decides from the route and the question itself.
-      ...(coreLawRag && coreLawTools && attachments.length === 0
+      // A SIMPLE matter (entry gate) on a local model takes the compact
+      // lane: core-law texts in the prompt, core-law tools for the rest.
+      ...(coreLawTools && request.model.startsWith("local/") && attachments.length === 0
         ? {
             quickLocalLegal: {
               toolPrompt: [
                 coreLawTools.systemPromptAppendix(),
-                coreLawRag
+                coreLawRag ??
+                  "# LOKALNE TEKSTY USTAW\nDla tego pytania nie dobrano automatycznie artykułów. Znajdź przepis search_core_law, a jego brzmienie weź z read_core_law_article; bez tego nie podawaj treści przepisu."
               ].join("\n\n")
             }
           }
+        : {}),
+      ...(request.matterComplexity
+        ? { matterComplexity: request.matterComplexity }
         : {}),
       runGateIRuntimePrelude:
         (workflowPlan) =>
@@ -2017,11 +2031,28 @@ export class SafeSessionExecutor implements SessionExecutor {
       }
     }
 
-    const processedDocumentCitations =
+    const citedAnswer =
       processDocumentCitationMarkers(
         automaticVerification.text,
         citationSources
       );
+    // HARD GATE: an unverified statute or Dz.U. reference is shown only with
+    // its [NIEWERYFIKOWANE] marker, placed at the claim itself.
+    const preFinalization =
+      new FinalizationGate().evaluate(
+        citedAnswer.text,
+        ledger
+      );
+    const processedDocumentCitations =
+      preFinalization.result === "BLOCKED"
+        ? {
+            ...citedAnswer,
+            text: markUnverifiedReferences(
+              citedAnswer.text,
+              preFinalization
+            )
+          }
+        : citedAnswer;
     audit.record(
       "gate",
       "LOCAL_DOCUMENT_DEEP_LINKS",
@@ -2619,6 +2650,9 @@ export class SafeSessionExecutor implements SessionExecutor {
         "PASS";
 
     const presentationBlocked =
+      // Still blocked after marking: a case-law claim without evidence or a
+      // verification marker that does not match its source.
+      finalization.result === "BLOCKED" ||
       corpusBlocked ||
       workflowResourcesBlocked ||
       workflowOutputBlocked ||
