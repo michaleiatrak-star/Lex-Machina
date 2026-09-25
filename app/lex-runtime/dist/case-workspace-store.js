@@ -94,7 +94,8 @@ function safeMessage(input) {
             (item.canonical !== undefined &&
                 (typeof item.canonical !== "string" || item.canonical.length > 200)) ||
             (item.gender !== undefined && item.gender !== "m1" && item.gender !== "f") ||
-            (item.caseMissing !== undefined && typeof item.caseMissing !== "boolean")) {
+            (item.caseMissing !== undefined && typeof item.caseMissing !== "boolean") ||
+            (item.agreement !== undefined && (typeof item.agreement !== "string" || item.agreement.length > 200))) {
             throw new Error("WORKSPACE_RESTORATION_INVALID");
         }
         return {
@@ -108,7 +109,8 @@ function safeMessage(input) {
             status: item.status,
             ...(item.canonical ? { canonical: item.canonical } : {}),
             ...(item.gender ? { gender: item.gender } : {}),
-            ...(item.caseMissing ? { caseMissing: true } : {})
+            ...(item.caseMissing ? { caseMissing: true } : {}),
+            ...(item.agreement ? { agreement: item.agreement } : {})
         };
     });
     const { restorations: _dropped, ...rest } = input;

@@ -99,7 +99,11 @@ function canonicalEntity(entity) {
         genderAlternatives: [...entity.genderAlternatives].map(String),
         status: entity.status,
         forms,
-        warnings: [...entity.warnings].map(String)
+        warnings: [...entity.warnings].map(String),
+        // Only when set: keys written before these fields keep their exact bytes.
+        ...(entity.number === "pl" ? { number: "pl" } : {}),
+        ...(entity.type === "organization" ? { type: "organization" } : {}),
+        ...(typeof entity.legalForm === "string" && entity.legalForm ? { legalForm: String(entity.legalForm).slice(0, 60) } : {})
     };
 }
 function canonicalPayload(payload) {

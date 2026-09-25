@@ -53,6 +53,7 @@ import type {
   DocumentChunkSelection,
   DocumentSecurityContext,
   DocumentService,
+  KeyGrammar,
   ResolvedDocumentAttachment,
   PagePrivacyDirective,
   SupportedDocumentMediaType
@@ -4552,6 +4553,21 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
       }
       return await options.documentService!
         .updateKeyForms!(documentId, String(req.body?.token ?? ""), forms, security);
+    })
+  );
+
+  // What a person token is: a man, a woman, several persons, a firm.
+  app.post("/api/cases/:caseId/documents/:documentId/anonymized/grammar", (req, res) =>
+    withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+      const grammar = String(req.body?.grammar ?? "");
+      if (!["m", "f", "group-m", "group-f", "organization"].includes(grammar)) throw new Error("PRIVACY_EDIT_GRAMMAR_INVALID");
+      if (!options.documentService!.updateKeyGrammar) throw new Error("PRIVACY_EDIT_GRAMMAR_UNAVAILABLE");
+      return await options.documentService!.updateKeyGrammar(
+        documentId,
+        String(req.body?.token ?? ""),
+        grammar as KeyGrammar,
+        security
+      );
     })
   );
 

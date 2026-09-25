@@ -1,7 +1,9 @@
+import { genericWords } from "./privacy/generic-words.js";
 import type { EvidenceImage } from "./document-evidence.js";
 import type { PseudonymizationVaultSnapshot } from "./privacy/pseudonymizer.js";
 import {
   placeholderGrammar,
+  partyGroups,
   placeholderKeyPrompt,
   type PlaceholderGrammar
 } from "./privacy/token-legend.js";
@@ -803,7 +805,8 @@ export function namespaceDocumentAttachmentTokens(
                 token: entry.token.replace(
                   /^\[PII:/,
                   `[LMPII:${prefix}:`
-                )
+                ),
+                ...(entry.owner ? { owner: entry.owner.replace(/^\[PII:/, `[LMPII:${prefix}:`) } : {})
               }))
             }
           : {}),
@@ -1474,6 +1477,7 @@ export class SafeSessionExecutor implements SessionExecutor {
 
     // Kind and gender of every placeholder the model will see: it inflects
     // around them without ever seeing a name.
+    const roles = genericWords().partyRoles;
     const placeholderKey = placeholderKeyPrompt([
       ...placeholderGrammar(
         [
@@ -1489,7 +1493,11 @@ export class SafeSessionExecutor implements SessionExecutor {
       ...attachments
         .filter((attachment) => !attachment.sharedKey)
         .flatMap((attachment) => attachment.grammar ?? [])
-    ]);
+    ], partyGroups(
+      // Parties of several persons named after a role word ("powodowie [..] i [..]").
+      [protectedQuery, protectedAuxiliaryText ?? "", ...attachments.flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))],
+      (word) => roles.has(word)
+    ));
 
     const draftCallbacks =
       request.onDraft

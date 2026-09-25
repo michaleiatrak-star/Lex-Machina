@@ -2454,6 +2454,15 @@ export function createLexHttpApp(options) {
         return await options.documentService
             .updateKeyForms(documentId, String(req.body?.token ?? ""), forms, security);
     }));
+    // What a person token is: a man, a woman, several persons, a firm.
+    app.post("/api/cases/:caseId/documents/:documentId/anonymized/grammar", (req, res) => withRestoredDocument(req, res, "WRITE", async ({ documentId, security }) => {
+        const grammar = String(req.body?.grammar ?? "");
+        if (!["m", "f", "group-m", "group-f", "organization"].includes(grammar))
+            throw new Error("PRIVACY_EDIT_GRAMMAR_INVALID");
+        if (!options.documentService.updateKeyGrammar)
+            throw new Error("PRIVACY_EDIT_GRAMMAR_UNAVAILABLE");
+        return await options.documentService.updateKeyGrammar(documentId, String(req.body?.token ?? ""), grammar, security);
+    }));
     // A file with placeholders (e.g. an answer from an external model) with the
     // values of one case document's key put back, saved as a new case file.
     app.post("/api/cases/:caseId/files/:uploadId/deanonymize", async (req, res) => {

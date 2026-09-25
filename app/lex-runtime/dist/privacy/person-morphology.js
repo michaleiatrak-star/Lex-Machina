@@ -116,7 +116,8 @@ function toEntity(raw) {
             ? value.status
             : "ok",
         forms: mapped,
-        warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : []
+        warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : [],
+        ...(value.number === "pl" ? { number: "pl" } : {})
     };
 }
 /** Morfeusz2/SGJP engine in the payload Python (same interpreter as Stanza NER). */
@@ -146,8 +147,14 @@ export class LocalPersonMorphology {
         this.cache.clear();
         this.addressCache.clear();
     }
-    async analyze(surfaces) {
-        return this.cached(surfaces, this.cache, (missing) => this.run(missing, []).then((r) => r.persons));
+    async analyze(surfaces, hints = []) {
+        // The cache key carries the hints: "Kowalskim" alone and after "państwu" differ.
+        const keys = surfaces.map((surface, index) => {
+            const hint = hints[index];
+            return hint?.genderHint || hint?.numberHint ? `${surface}\u0000${hint.genderHint ?? ""}\u0000${hint.numberHint ?? ""}` : surface;
+        });
+        const hintByKey = new Map(keys.map((key, index) => [key, hints[index]]));
+        return this.cached(keys, this.cache, (missing) => this.run(missing.map((key) => ({ surface: key.split("\u0000")[0], ...(hintByKey.get(key) ?? {}) })), []).then((r) => r.persons));
     }
     async analyzeAddresses(surfaces) {
         return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
@@ -173,7 +180,7 @@ export class LocalPersonMorphology {
         const output = path.join(tempRoot, "output.json");
         try {
             await writeFile(input, JSON.stringify({
-                persons: surfaces.map((surface) => ({ surface })),
+                persons: surfaces.map((item) => (typeof item === "string" ? { surface: item } : item)),
                 addresses: addresses.map((surface) => ({ surface })),
                 words
             }), "utf8");

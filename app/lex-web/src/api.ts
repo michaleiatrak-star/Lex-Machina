@@ -421,6 +421,8 @@ export type DocumentRestoration = {
   canonical?: string;
   gender?: "m1" | "f";
   caseMissing?: boolean;
+  // A verb or role word next to the symbol disagrees with the key's gender or number.
+  agreement?: string;
   occurrences: number;
 };
 
@@ -2789,8 +2791,13 @@ export type PrivacyKeyEntry = {
   value: string;
   forms?: Array<{ case: string; text: string }>;
   gender?: "m" | "f" | "unknown";
+  // Person tokens: one person, several persons named together, or a firm.
+  entity?: "person" | "group" | "organization";
+  legalForm?: string;
   occurrences: number;
 };
+
+export type KeyGrammar = "m" | "f" | "group-m" | "group-f" | "organization";
 
 export type AnonymizedVersion = {
   documentId: string;
@@ -2871,6 +2878,19 @@ export function updateAnonymizationForms(
   return json(anonymizedPath(caseId, documentId, "forms"), {
     method: "POST",
     body: JSON.stringify({ token, forms })
+  });
+}
+
+/** What a person symbol is: a man, a woman, several persons, a firm. */
+export function updateAnonymizationGrammar(
+  caseId: string,
+  documentId: string,
+  token: string,
+  grammar: KeyGrammar
+): Promise<AnonymizedVersion> {
+  return json(anonymizedPath(caseId, documentId, "grammar"), {
+    method: "POST",
+    body: JSON.stringify({ token, grammar })
   });
 }
 

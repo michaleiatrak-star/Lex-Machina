@@ -4,7 +4,9 @@ import {
   getAnonymizedVersion,
   removeFromAnonymization,
   updateAnonymizationForms,
+  updateAnonymizationGrammar,
   type AnonymizedVersion,
+  type KeyGrammar,
   type PiiKind,
   type PrivacyKeyEntry
 } from "./api.js";
@@ -181,6 +183,13 @@ export function AnonymizedDocumentView(props: {
     );
   }
 
+  function saveGrammar(entry: PrivacyKeyEntry, grammar: KeyGrammar): void {
+    void apply(
+      () => updateAnonymizationGrammar(props.caseId, props.documentId, entry.token, grammar),
+      () => `Zapisano, kim jest ${entry.token}; model dostanie to w kluczu, a odmiana przy przywracaniu się zmieniła.`
+    );
+  }
+
   return (
     <section className="workspace-preview anonymized-view" aria-label="Wersja zanonimizowana">
       <div className="workspace-preview-head">
@@ -265,7 +274,7 @@ export function AnonymizedDocumentView(props: {
           entries={version.entries}
           highlight={highlight}
           busy={busy}
-          {...(props.readOnly ? {} : { onRemove: remove, onSaveForms: saveForms })}
+          {...(props.readOnly ? {} : { onRemove: remove, onSaveForms: saveForms, onSaveGrammar: saveGrammar })}
         />
       )}
       {status && version ? <p className="text-editor-status" role="status">{status}</p> : null}

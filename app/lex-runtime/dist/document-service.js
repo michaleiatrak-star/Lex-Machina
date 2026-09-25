@@ -1,7 +1,7 @@
 import { maskBoxes, protectedValues, wantsImage } from "./document-evidence.js";
 import { createHash } from "node:crypto";
 import { chunkDocumentPages } from "./document-ingestion.js";
-import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { LocalPolishPseudonymizer, organizationEntity, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import { genderOf, placeholderGrammar } from "./privacy/token-legend.js";
@@ -637,6 +637,12 @@ export class LocalPrivateDocumentService {
                 value: entity?.canonical ?? item.value,
                 ...(forms ? { forms } : {}),
                 ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
+                ...(item.kind === "PERSON" && entity
+                    ? {
+                        entity: entity.type === "organization" ? "organization" : entity.number === "pl" ? "group" : "person",
+                        ...(entity.legalForm ? { legalForm: entity.legalForm } : {})
+                    }
+                    : {}),
                 occurrences: counts.get(item.token) ?? 0
             };
         })
@@ -840,6 +846,37 @@ export class LocalPrivateDocumentService {
         }
         await this.withKey(documentId, record, security, (vault) => {
             vault.updateForms(token, forms);
+        });
+        return this.anonymizedVersion(documentId);
+    }
+    /**
+     * Sets what a person token is: a man or a woman (forms of that gender), a
+     * family named together (plural forms), or a firm (never inflected). The
+     * model's key and the restored forms follow.
+     */
+    async updateKeyGrammar(documentId, token, grammar, security) {
+        const record = this.editableRecord(documentId);
+        await this.withKey(documentId, record, security, async (vault) => {
+            const current = vault.entity(token);
+            if (!current)
+                throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+            // The name as the key holds it: a firm as written, a person in the nominative.
+            const name = current.canonical;
+            if (grammar === "organization") {
+                vault.setEntity(token, organizationEntity(name, current.legalForm));
+                return;
+            }
+            const gender = grammar === "f" || grammar === "group-f" ? "f" : "m1";
+            const group = grammar.startsWith("group");
+            const [analysed] = this.personMorphology
+                ? await this.personMorphology.analyze([name], [{ genderHint: gender, numberHint: group ? "pl" : "sg" }])
+                : [null];
+            if (group && analysed?.number !== "pl")
+                throw new Error("PRIVACY_KEY_GROUP_UNSUPPORTED");
+            const { type: _type, legalForm: _legalForm, ...base } = current;
+            vault.setEntity(token, analysed
+                ? { ...analysed, status: "ok", genderAlternatives: [], warnings: analysed.warnings.filter((w) => w !== "GENDER_HEURISTIC") }
+                : { ...base, gender, status: "ok", genderAlternatives: [], warnings: base.warnings.filter((w) => w !== "GENDER_HEURISTIC") });
         });
         return this.anonymizedVersion(documentId);
     }

@@ -59,6 +59,8 @@ export type RestorationMark = {
   canonical?: string;
   gender?: "m1" | "f";
   caseMissing?: boolean;
+  // A verb or role word next to the symbol disagrees with the key's gender or number.
+  agreement?: string;
 };
 
 export type WorkspaceResponse = {

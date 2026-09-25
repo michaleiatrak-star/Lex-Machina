@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { PrivacyKeyEntry } from "./api.js";
+import type { KeyGrammar, PrivacyKeyEntry } from "./api.js";
 import { caseLabel } from "./restoration-review.js";
 
 export const KIND_LABEL: Record<string, string> = {
@@ -23,6 +23,26 @@ export const KIND_LABEL: Record<string, string> = {
 
 const GENDER_LABEL = { m: "mężczyzna", f: "kobieta", unknown: "nieustalona" } as const;
 
+const GRAMMAR_LABEL: Record<KeyGrammar, string> = {
+  m: "osoba - mężczyzna",
+  f: "osoba - kobieta",
+  "group-m": "kilka osób (np. małżonkowie)",
+  "group-f": "kilka kobiet",
+  organization: "firma (nazwa z imieniem/nazwiskiem)"
+};
+
+function grammarOf(entry: PrivacyKeyEntry): KeyGrammar | "" {
+  if (entry.entity === "organization") return "organization";
+  if (entry.entity === "group") return entry.gender === "f" ? "group-f" : "group-m";
+  return entry.gender === "m" ? "m" : entry.gender === "f" ? "f" : "";
+}
+
+function describeEntry(entry: PrivacyKeyEntry): string {
+  if (entry.entity === "organization") return ` · firma${entry.legalForm ? ` (${entry.legalForm})` : ""}`;
+  if (entry.entity === "group") return entry.gender === "f" ? " · kilka kobiet" : " · kilka osób";
+  return entry.gender ? ` · ${GENDER_LABEL[entry.gender]}` : "";
+}
+
 /**
  * A document's anonymization key: what each placeholder stands for and the
  * case forms used to put it back. Values stay hidden until asked for; with
@@ -35,11 +55,13 @@ export function PrivacyKeyTable(props: {
   busy?: boolean;
   onRemove?: (entry: PrivacyKeyEntry) => void;
   onSaveForms?: (entry: PrivacyKeyEntry, forms: Record<string, string>) => void;
+  // Sets what a person symbol is; the model's key and the restored forms follow.
+  onSaveGrammar?: (entry: PrivacyKeyEntry, grammar: KeyGrammar) => void;
 }) {
   const [visible, setVisible] = useState(false);
   const [editing, setEditing] = useState<string | null>(null);
   const [draft, setDraft] = useState<Record<string, string>>({});
-  const editable = Boolean(props.onRemove || props.onSaveForms);
+  const editable = Boolean(props.onRemove || props.onSaveForms || props.onSaveGrammar);
 
   return (
     <div className="privacy-key">
@@ -72,7 +94,24 @@ export function PrivacyKeyTable(props: {
                   <td><code>{entry.token}</code></td>
                   <td>
                     {KIND_LABEL[entry.kind] ?? entry.kind}
-                    {entry.gender ? ` · ${GENDER_LABEL[entry.gender]}` : ""}
+                    {describeEntry(entry)}
+                    {entry.kind === "PERSON" && props.onSaveGrammar ? (
+                      <select
+                        aria-label={`Kim jest ${entry.token}`}
+                        title="Rodzaj i liczba trafiają do klucza dla modelu (uzgadnianie form) i zmieniają odmianę przy przywracaniu"
+                        disabled={props.busy}
+                        value={grammarOf(entry)}
+                        onChange={(event) => {
+                          const next = event.target.value as KeyGrammar;
+                          if (next) props.onSaveGrammar?.(entry, next);
+                        }}
+                      >
+                        {grammarOf(entry) === "" ? <option value="">nieustalona - wybierz</option> : null}
+                        {(Object.keys(GRAMMAR_LABEL) as KeyGrammar[]).map((value) => (
+                          <option key={value} value={value}>{GRAMMAR_LABEL[value]}</option>
+                        ))}
+                      </select>
+                    ) : null}
                   </td>
                   <td>{visible ? entry.value : "••••••"}</td>
                   <td>

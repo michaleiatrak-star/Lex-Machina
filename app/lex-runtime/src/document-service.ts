@@ -28,6 +28,7 @@ import type {
 } from "./image-ingestion.js";
 import {
   LocalPolishPseudonymizer,
+  organizationEntity,
   PseudonymizationVault,
   type PseudonymizationVaultSnapshot,
   type ManualPrivacyDirective,
@@ -233,8 +234,14 @@ export type PrivacyKeyEntry = {
   // Case forms used when restoring (persons and addresses).
   forms?: Array<{ case: string; text: string }>;
   gender?: "m" | "f" | "unknown";
+  // Person tokens: one person, several persons named together, or a firm.
+  entity?: "person" | "group" | "organization";
+  legalForm?: string;
   occurrences: number;
 };
+
+// What the user may set for a person token in the key.
+export type KeyGrammar = "m" | "f" | "group-m" | "group-f" | "organization";
 
 export type PagePrivacyDirective =
   ManualPrivacyDirective & {
@@ -351,6 +358,12 @@ export interface DocumentService {
     token: string,
     security: DocumentSecurityContext
   ): Promise<AnonymizedVersion & { restored: number }>;
+  updateKeyGrammar?(
+    documentId: string,
+    token: string,
+    grammar: KeyGrammar,
+    security: DocumentSecurityContext
+  ): Promise<AnonymizedVersion>;
   updateKeyForms?(
     documentId: string,
     token: string,
@@ -1242,6 +1255,12 @@ implements DocumentService {
           value: entity?.canonical ?? item.value,
           ...(forms ? { forms } : {}),
           ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
+          ...(item.kind === "PERSON" && entity
+            ? {
+                entity: entity.type === "organization" ? "organization" as const : entity.number === "pl" ? "group" as const : "person" as const,
+                ...(entity.legalForm ? { legalForm: entity.legalForm } : {})
+              }
+            : {}),
           occurrences: counts.get(item.token) ?? 0
         };
       })
@@ -1476,6 +1495,44 @@ implements DocumentService {
     }
     await this.withKey(documentId, record, security, (vault) => {
       vault.updateForms(token, forms);
+    });
+    return this.anonymizedVersion(documentId);
+  }
+
+  /**
+   * Sets what a person token is: a man or a woman (forms of that gender), a
+   * family named together (plural forms), or a firm (never inflected). The
+   * model's key and the restored forms follow.
+   */
+  async updateKeyGrammar(
+    documentId: string,
+    token: string,
+    grammar: KeyGrammar,
+    security: DocumentSecurityContext
+  ): Promise<AnonymizedVersion> {
+    const record = this.editableRecord(documentId);
+    await this.withKey(documentId, record, security, async (vault) => {
+      const current = vault.entity(token);
+      if (!current) throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+      // The name as the key holds it: a firm as written, a person in the nominative.
+      const name = current.canonical;
+      if (grammar === "organization") {
+        vault.setEntity(token, organizationEntity(name, current.legalForm));
+        return;
+      }
+      const gender = grammar === "f" || grammar === "group-f" ? "f" as const : "m1" as const;
+      const group = grammar.startsWith("group");
+      const [analysed] = this.personMorphology
+        ? await this.personMorphology.analyze([name], [{ genderHint: gender, numberHint: group ? "pl" as const : "sg" as const }])
+        : [null];
+      if (group && analysed?.number !== "pl") throw new Error("PRIVACY_KEY_GROUP_UNSUPPORTED");
+      const { type: _type, legalForm: _legalForm, ...base } = current;
+      vault.setEntity(
+        token,
+        analysed
+          ? { ...analysed, status: "ok", genderAlternatives: [], warnings: analysed.warnings.filter((w) => w !== "GENDER_HEURISTIC") }
+          : { ...base, gender, status: "ok", genderAlternatives: [], warnings: base.warnings.filter((w) => w !== "GENDER_HEURISTIC") }
+      );
     });
     return this.anonymizedVersion(documentId);
   }

@@ -45,10 +45,21 @@ export type PersonEntity = {
   status: "ok" | "gender_ambiguous" | "needs_review";
   forms: Record<PersonCase, PersonForm>;
   warnings: string[];
+  // "pl": several persons named together (Kowalscy, Nowakowie); gender m1 is
+  // then the masculine-personal plural, f the plural of women only.
+  number?: "pl";
+  // A firm whose name contains a person's name ("PHU Jan Kowalski", "Nowak
+  // sp. z o.o."): not inflected on restore; legalForm as written after it.
+  type?: "organization";
+  legalForm?: string;
 };
 
+// Per mention: the gender or number the surrounding words make certain
+// ("państwo Kowalscy" is a family, "Kowalskim" alone may be one person).
+export type PersonHints = { genderHint?: "m1" | "f"; numberHint?: "pl" | "sg" };
+
 export interface PersonMorphology {
-  analyze(surfaces: string[]): Promise<Array<PersonEntity | null>>;
+  analyze(surfaces: string[], hints?: Array<PersonHints | undefined>): Promise<Array<PersonEntity | null>>;
   // Whether each word is a form in the SGJP dictionary (OCR correction).
   knownWords?(words: string[]): Promise<boolean[]>;
   // "ul. Długiej 5" -> "ul. Długa 5" with its seven case forms.
@@ -161,7 +172,8 @@ function toEntity(raw: unknown): PersonEntity | null {
         ? value.status
         : "ok",
     forms: mapped,
-    warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : []
+    warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : [],
+    ...(value.number === "pl" ? { number: "pl" as const } : {})
   };
 }
 
@@ -201,8 +213,16 @@ export class LocalPersonMorphology implements PersonMorphology {
     this.addressCache.clear();
   }
 
-  async analyze(surfaces: string[]): Promise<Array<PersonEntity | null>> {
-    return this.cached(surfaces, this.cache, (missing) => this.run(missing, []).then((r) => r.persons));
+  async analyze(surfaces: string[], hints: Array<PersonHints | undefined> = []): Promise<Array<PersonEntity | null>> {
+    // The cache key carries the hints: "Kowalskim" alone and after "państwu" differ.
+    const keys = surfaces.map((surface, index) => {
+      const hint = hints[index];
+      return hint?.genderHint || hint?.numberHint ? `${surface}\u0000${hint.genderHint ?? ""}\u0000${hint.numberHint ?? ""}` : surface;
+    });
+    const hintByKey = new Map(keys.map((key, index) => [key, hints[index]]));
+    return this.cached(keys, this.cache, (missing) =>
+      this.run(missing.map((key) => ({ surface: key.split("\u0000")[0]!, ...(hintByKey.get(key) ?? {}) })), []).then((r) => r.persons)
+    );
   }
 
   async analyzeAddresses(surfaces: string[]): Promise<Array<PersonEntity | null>> {
@@ -230,7 +250,7 @@ export class LocalPersonMorphology implements PersonMorphology {
   }
 
   private async run(
-    surfaces: string[],
+    surfaces: Array<string | ({ surface: string } & PersonHints)>,
     addresses: string[],
     words: string[] = []
   ): Promise<{ persons: Array<PersonEntity | null>; addresses: Array<PersonEntity | null>; known: boolean[] }> {
@@ -241,7 +261,7 @@ export class LocalPersonMorphology implements PersonMorphology {
       await writeFile(
         input,
         JSON.stringify({
-          persons: surfaces.map((surface) => ({ surface })),
+          persons: surfaces.map((item) => (typeof item === "string" ? { surface: item } : item)),
           addresses: addresses.map((surface) => ({ surface })),
           words
         }),

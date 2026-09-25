@@ -92,6 +92,9 @@ export type GenerationAliasEntry = {
   kind: string;
   // Persons only: grammatical gender for agreement, never the name.
   gender?: "m" | "f" | "unknown";
+  // Several persons named together, or a firm named after a person.
+  entity?: "group" | "organization";
+  legalForm?: string;
 };
 
 export type LegalDocumentAstValidation = {

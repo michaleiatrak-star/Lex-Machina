@@ -1,4 +1,5 @@
-import { placeholderGrammar, placeholderKeyPrompt } from "./privacy/token-legend.js";
+import { genericWords } from "./privacy/generic-words.js";
+import { placeholderGrammar, partyGroups, placeholderKeyPrompt } from "./privacy/token-legend.js";
 import { coreLawRetrievalPrompt } from "./core-law-tool-runtime.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import { AuditTrail } from "./audit-trail.js";
@@ -251,7 +252,8 @@ export function namespaceDocumentAttachmentTokens(attachments) {
                 ? {
                     grammar: attachment.grammar.map((entry) => ({
                         ...entry,
-                        token: entry.token.replace(/^\[PII:/, `[LMPII:${prefix}:`)
+                        token: entry.token.replace(/^\[PII:/, `[LMPII:${prefix}:`),
+                        ...(entry.owner ? { owner: entry.owner.replace(/^\[PII:/, `[LMPII:${prefix}:`) } : {})
                     }))
                 }
                 : {}),
@@ -660,6 +662,7 @@ export class SafeSessionExecutor {
         ].join("\n\n");
         // Kind and gender of every placeholder the model will see: it inflects
         // around them without ever seeing a name.
+        const roles = genericWords().partyRoles;
         const placeholderKey = placeholderKeyPrompt([
             ...placeholderGrammar([
                 protectedQuery,
@@ -672,7 +675,9 @@ export class SafeSessionExecutor {
             ...attachments
                 .filter((attachment) => !attachment.sharedKey)
                 .flatMap((attachment) => attachment.grammar ?? [])
-        ]);
+        ], partyGroups(
+        // Parties of several persons named after a role word ("powodowie [..] i [..]").
+        [protectedQuery, protectedAuxiliaryText ?? "", ...attachments.flatMap((attachment) => attachment.chunks.map((chunk) => chunk.text))], (word) => roles.has(word)));
         const draftCallbacks = request.onDraft
             ? createDraftCallbacks(chatPrivacyVault, request.onDraft)
             : undefined;

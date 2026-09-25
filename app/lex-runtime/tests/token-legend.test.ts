@@ -31,9 +31,9 @@ describe("placeholder key for models", () => {
       vault
     );
     expect(entries).toEqual([
-      { token: anna, kind: "PERSON", gender: "f" },
-      { token: jan, kind: "PERSON", gender: "m" },
-      { token: kim, kind: "PERSON", gender: "unknown" },
+      { token: anna, kind: "PERSON", gender: "f", entity: "person" },
+      { token: jan, kind: "PERSON", gender: "m", entity: "person" },
+      { token: kim, kind: "PERSON", gender: "unknown", entity: "person" },
       { token: "[PII:ADDRESS:0007]", kind: "ADDRESS" }
     ]);
     const prompt = placeholderKeyPrompt(entries)!;

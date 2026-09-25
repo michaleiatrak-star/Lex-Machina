@@ -67,6 +67,14 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 
   Styl i gramatyka autora dokumentu zostają bez zmian. Lista poprawek pojawia się po przetworzeniu; `Cofnij korekty` przetwarza plik ponownie bez nich. Model lokalny nie widzi obrazu.
 
+**Osoby, rodziny, firmy, strony wieloosobowe**:
+- `Kowalscy`, `Nowakowie`, `państwo Wiśniewscy` → jeden symbol „kilka osób” z odmianą mnogą (`Kowalskich`, `Nowakom`); `Zielińskie` → kilka kobiet.
+- Wspólne nazwisko: `Piotrowi i Marii Nowakom`, `Jan, Ewa i Anna Wiśniewscy` → osobne osoby z własnym nazwiskiem (Piotr Nowak, Maria Nowak).
+- Firma z imieniem/nazwiskiem (`PHU Jan Kowalski`, `Nowak sp. z o.o.`, `Kowalski i Wspólnicy sp.k.`, `pod firmą …`) → osobny symbol „firma” (z formą prawną), nieodmieniany; ta sama osoba jako przedsiębiorca ma własny symbol, model dostaje informację o powiązaniu.
+- Klucz dla modelu: rodzaj i liczba każdego symbolu, strony wieloosobowe (`powodowie: [..], [..]` → męskoosobowy / same kobiety → niemęskoosobowy) i nakaz rozstrzygnięcia solidarności przy kilku osobach po jednej stronie.
+- Kontrola odpowiedzi: czasownik lub rola przy symbolu niezgodna z kluczem (`[kobieta] wniósł`, `Pozwany [rodzina]`) → oznaczenie do przeglądu przed deanonimizacją (czat i pisma).
+- Tabela klucza: pole „kim jest” (mężczyzna, kobieta, kilka osób, kilka kobiet, firma) - zmiana od razu w kluczu dla modelu i w odmianie.
+
 **Klucz sprawy (wspólny)**: jedna osoba ma jeden symbol we wszystkich plikach sprawy i w czacie. Starsze dokumenty z kluczem osobnym łączy przycisk `Połącz klucze sprawy`.
 
 **Odmiana**: model musi dopisać przypadek do symbolu (`|NOM|GEN|DAT|ACC|INS|LOC|VOC`, HARD GATE) i dostaje rodzaj osoby; Lex odmienia wartość lokalnie. Brak przypadku lub niepewna forma → oznaczenie do przeglądu.

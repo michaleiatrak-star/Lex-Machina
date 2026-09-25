@@ -1,3 +1,4 @@
+import { agreementIssues } from "./privacy/restoration-report.js";
 import { PERSON_CASES } from "./privacy/person-morphology.js";
 import { genderOf } from "./privacy/token-legend.js";
 export function buildGenerationAliases(documents) {
@@ -42,7 +43,9 @@ export function buildGenerationAliases(documents) {
                 sourceToken: item.token,
                 kind: item.kind,
                 ...(item.kind === "PERSON"
-                    ? { gender: genderOf(document.vault, item.token) }
+                    ? item.entity?.type === "organization"
+                        ? { entity: "organization", ...(item.entity.legalForm ? { legalForm: item.entity.legalForm } : {}) }
+                        : { gender: genderOf(document.vault, item.token), ...(item.entity?.number === "pl" ? { entity: "group" } : {}) }
                     : {})
             });
         }
@@ -79,6 +82,18 @@ export function describeGenerationAliases(tokenizedText, manifest, vaults) {
     for (const match of tokenizedText.matchAll(DOCUMENT_ALIAS)) {
         counts.set(match[0], (counts.get(match[0]) ?? 0) + 1);
     }
+    const entityOfAlias = (alias) => {
+        const entry = manifest.entries.find((item) => item.alias === alias);
+        return entry ? vaults.get(entry.documentId)?.entity(entry.sourceToken) : undefined;
+    };
+    // Per alias as written: the first disagreement found among its occurrences.
+    const agreement = new Map();
+    const issues = agreementIssues(tokenizedText, entityOfAlias);
+    for (const match of tokenizedText.matchAll(DOCUMENT_ALIAS)) {
+        const note = issues.get(match.index);
+        if (note && !agreement.has(match[0]))
+            agreement.set(match[0], note);
+    }
     return [...counts].map(([alias, occurrences]) => {
         const [, base, requestedCase] = /^(\[LMPII:D\d{2}:[A-Z_]+:\d{4})(?:\|([A-Z]{2,4}))?\]$/.exec(alias);
         const entry = manifest.entries.find((item) => item.alias === `${base}]`);
@@ -107,11 +122,13 @@ export function describeGenerationAliases(tokenizedText, manifest, vaults) {
                 ? entity.status
                 : restored.status === "unknown_token"
                     ? "unresolved"
-                    : restored.status === "ok" && entity && !requestedCase
-                        // The model gave no case: the nominative is a guess (hard gate).
+                    : restored.status === "ok" && entity && (!requestedCase || agreement.has(alias))
+                        // No case (the nominative is a guess, hard gate) or a verb that
+                        // disagrees with the key: a person checks it.
                         ? "needs_review"
                         : restored.status,
             ...(entity ? { canonical: entity.canonical } : {}),
+            ...(agreement.has(alias) ? { agreement: agreement.get(alias) } : {}),
             // Gender matters for remembering a person's name form, not for addresses.
             ...(entity && (entity.gender === "m1" || entity.gender === "f") ? { gender: entity.gender } : {}),
             occurrences
