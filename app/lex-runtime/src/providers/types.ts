@@ -15,9 +15,17 @@ export type ProviderCapabilities = {
   modelDiscovery: boolean;
 };
 
+// A page image sent with a message (masked evidence; models with vision).
+export type LlmImage = {
+  mediaType: "image/jpeg" | "image/png";
+  // base64
+  data: string;
+};
+
 export type LlmMessage = {
   role: "user" | "assistant";
   content: string;
+  images?: LlmImage[];
 };
 
 export type NormalizedToolSchema = {
@@ -94,4 +102,6 @@ export interface ProviderAdapter {
   listModels?(): Promise<string[]>;
   // True when this model reads the skill corpus with its own confined file tools.
   nativeCorpusAccess?(model: string): boolean;
+  // True when images in messages reach this model.
+  supportsImages?(model: string): boolean;
 }

@@ -233,8 +233,162 @@ class PersonMorphology:
             plans.append(WordPlan(token, candidates=self._candidates(token.strip(",;"))))
         return plans
 
-    def analyze(self, surface: str, gender_hint: str | None = None) -> dict[str, Any]:
-        """Canonical form, gender and paradigm for one person mention."""
+    # -- plural surnames: families and shared surnames -------------------
+
+    def _plural_surname(self, word: str) -> tuple[str, str, str, set[str], bool] | None:
+        """(lemma_id, lemma, gender, cases, also_singular) of a surname read in the plural."""
+        try:
+            analyses = self.engine.analyse(word.strip(",;"))
+        except Exception:
+            return None
+        plural = None
+        singular = False
+        for item in analyses:
+            _orth, lemma_id, tag, name_types, _q = item[2]
+            parts = _features(tag)
+            if parts[0] != {"subst"} or len(parts) < 4 or "nazwisko" not in name_types:
+                continue
+            if "sg" in parts[1]:
+                singular = True
+            elif "pl" in parts[1] and plural is None:
+                genders = parts[3] & {"m1", "f"}
+                if genders:
+                    gender = "m1" if "m1" in genders else "f"
+                    plural = (lemma_id, lemma_id.split(":", 1)[0], gender, parts[2] & set(CASES))
+        if plural is None:
+            return None
+        return (*plural, singular)
+
+    def _plural_paradigm(self, lemma_id: str, gender: str) -> dict[str, str] | None:
+        try:
+            generated = self.engine.generate(lemma_id)
+        except Exception:
+            return None
+        by_case: dict[str, list[str]] = {case: [] for case in CASES}
+        for orth, _lemma, tag, *_rest in generated:
+            parts = _features(tag)
+            if parts[0] != {"subst"} or len(parts) < 4 or "pl" not in parts[1] or gender not in parts[3]:
+                continue
+            for case in parts[2] & set(CASES):
+                by_case[case].append(orth)
+        if not all(by_case[case] for case in CASES):
+            return None
+        return {case: by_case[case][0] for case in CASES}
+
+    def _singular_surname(self, lemma_id: str, lemma: str, gender: str, case: str) -> str | None:
+        """The singular form of a surname for one person of the family."""
+        if gender == "m1":
+            try:
+                generated = self.engine.generate(lemma_id)
+            except Exception:
+                generated = []
+            for orth, _lemma, tag, *_rest in generated:
+                parts = _features(tag)
+                if parts[0] == {"subst"} and len(parts) >= 4 and "sg" in parts[1] and "m1" in parts[3] and case in parts[2]:
+                    return orth
+            rule = _rule_masculine(lemma)
+            return rule[case] if rule else None
+        low = lemma.lower()
+        base = lemma[:-1] + "a" if low.endswith(("ski", "cki", "dzki")) else lemma
+        rule = _rule_feminine(base)
+        return rule[case] if rule else None
+
+    def _group(self, surface: str, plural: tuple[str, str, str, set[str], bool]) -> dict[str, Any] | None:
+        lemma_id, _lemma, gender, _cases, _sg = plural
+        paradigm = self._plural_paradigm(lemma_id, gender)
+        if not paradigm:
+            return None
+        forms = {
+            case: {"text": _match_case(surface, paradigm[case]), "source": "sgjp", "confidence": 1.0}
+            for case in CASES
+        }
+        return {
+            "surface": surface,
+            "canonical": forms["nom"]["text"],
+            "gender": gender,
+            "genderAlternatives": [],
+            "observedCase": "nom",
+            "forms": forms,
+            "status": "ok",
+            "warnings": ["GROUP"],
+            "number": "pl",
+        }
+
+    def analyze(self, surface: str, gender_hint: str | None = None, number_hint: str | None = None) -> dict[str, Any]:
+        """Canonical form, gender and paradigm for one person mention (or a family named together)."""
+        tokens = re.findall(r"\S+", surface)
+        name_tokens = [t for t in tokens if not FROZEN.match(t) and t not in PARTICLES and LETTER.search(t)]
+        if name_tokens and "-" not in name_tokens[-1]:
+            plural = self._plural_surname(name_tokens[-1])
+            if plural:
+                lemma_id, lemma, _gender, cases, also_singular = plural
+                if len(name_tokens) == 1 and number_hint == "sg":
+                    # Set by the user: one person of the family ("Kowalscy" -> Kowalski / Kowalska).
+                    person_gender = gender_hint or "m1"
+                    single = self._singular_surname(lemma_id, lemma, person_gender, "nom")
+                    if single:
+                        return self._analyze_single(_match_case(name_tokens[-1], single), person_gender)
+                elif len(name_tokens) == 1 and (not also_singular or number_hint == "pl"):
+                    # "Kowalscy", "Nowakowie", "(państwo) Wiśniewscy": a family.
+                    group = self._group(surface, plural)
+                    if group:
+                        return group
+                elif len(name_tokens) > 1:
+                    # "Marii Nowakom" in "Piotrowi i Marii Nowakom": one person
+                    # of the family; the surname becomes her or his own. A
+                    # surname that is also singular ("Kowalskim") is read so
+                    # only when the ordinary reading fails.
+                    ordinary = self._analyze_single(surface, gender_hint) if also_singular else None
+                    if ordinary is not None and ordinary["status"] == "ok":
+                        return ordinary
+                    given = self._plan(name_tokens[0])[0].candidates
+                    genders = {g for c in given if c.role == "given" for g in c.genders}
+                    if genders:
+                        person_gender = gender_hint or ("f" if genders == {"f"} else "m1")
+                        given_cases = {c for cand in given if cand.role == "given" and person_gender in cand.genders for c in cand.cases}
+                        case = next((c for c in CASES if c in cases and c in given_cases), None)
+                        single = self._singular_surname(lemma_id, lemma, person_gender, case) if case else None
+                        if single:
+                            rebuilt = " ".join(tokens[:-1] + [_match_case(name_tokens[-1], single)])
+                            result = self._analyze_single(rebuilt, person_gender)
+                            if result["status"] != "needs_review" or ordinary is None:
+                                result["surface"] = surface
+                                result["warnings"] = [*result["warnings"], "SHARED_SURNAME"]
+                                return result
+                    if ordinary is not None:
+                        return ordinary
+            elif number_hint == "pl" and len(name_tokens) == 1 and gender_hint:
+                # Set by the user (always with a gender): "Kowalski" -> the family
+                # "Kowalscy" ("Kowalska" + f -> "Kowalskie"). From context alone
+                # ("najemcy Kowalskiemu") a singular form stays one person.
+                singular = self._singular_surname_lemma(name_tokens[-1], gender_hint)
+                if singular:
+                    group = self._group(surface, singular)
+                    if group:
+                        group["canonical"] = group["forms"]["nom"]["text"]
+                        return group
+        return self._analyze_single(surface, gender_hint)
+
+    def _singular_surname_lemma(self, word: str, gender_hint: str | None) -> tuple[str, str, str, set[str], bool] | None:
+        """A surname in the singular as the lemma of its family's plural."""
+        want = "f" if gender_hint == "f" else "m1"
+        if want == "f" and word.lower().endswith(("ski", "cki", "dzki")):
+            # "Kowalski" + women: the feminine lemma "Kowalska", not the
+            # indeclinable feminine reading SGJP gives every surname.
+            return self._singular_surname_lemma(word[:-1] + "a", "f")
+        try:
+            analyses = self.engine.analyse(word.strip(",;"))
+        except Exception:
+            return None
+        for item in analyses:
+            _orth, lemma_id, tag, name_types, _q = item[2]
+            parts = _features(tag)
+            if parts[0] == {"subst"} and len(parts) >= 4 and "nazwisko" in name_types and want in parts[3]:
+                if self._plural_paradigm(lemma_id, want):
+                    return (lemma_id, lemma_id.split(":", 1)[0], want, set(CASES), True)
+        return None
+
+    def _analyze_single(self, surface: str, gender_hint: str | None = None) -> dict[str, Any]:
         words = []
         for token in re.findall(r"\S+", surface):
             # Hyphenated surnames inflect part by part (Kowalska-Nowak).
@@ -568,13 +722,18 @@ def main() -> None:
     exceptions_raw = os.environ.get("LEX_NAME_EXCEPTIONS", "").strip()
     engine = PersonMorphology(Path(exceptions_raw) if exceptions_raw else None)
     results = [
-        engine.analyze(item["surface"], item.get("genderHint"))
+        engine.analyze(item["surface"], item.get("genderHint"), item.get("numberHint"))
         for item in requests.get("persons", [])
     ]
     address_engine = AddressMorphology(engine.engine)
     addresses = [address_engine.analyze(item["surface"]) for item in requests.get("addresses", [])]
+    # OCR correction: is the word a form known to the SGJP dictionary?
+    known = [
+        any(interp[2][2] != "ign" for interp in engine.engine.analyse(word))
+        for word in requests.get("words", [])
+    ]
     Path(args.output).write_text(
-        json.dumps({"persons": results, "addresses": addresses}, ensure_ascii=False),
+        json.dumps({"persons": results, "addresses": addresses, "known": known}, ensure_ascii=False),
         encoding="utf-8",
     )
 

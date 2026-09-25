@@ -107,6 +107,8 @@ export type SubstitutionRow = {
 type KeyMark = Pick<RestorationMark, "start" | "end" | "kind" | "case" | "source" | "status" | "confidence"> & {
   token?: string;
   caseMissing?: boolean;
+  // A verb or role word next to the symbol disagrees with the key's gender or number.
+  agreement?: string;
 };
 
 /**

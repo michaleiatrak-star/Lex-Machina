@@ -867,10 +867,41 @@ async function streamModel(model, params, label) {
     const sdk = await import("ai");
     const tools = await toAiSdkTools(params);
     const reasoning = (params.reasoning ?? "none");
+    const withImages = params.messages.some((message) => message.images?.length);
+    let fullText = "";
+    try {
+        return await streamModelOnce(sdk, model, params, label, tools, reasoning, withImages, (text) => {
+            fullText += text;
+        });
+    }
+    catch (error) {
+        // A model without vision rejects the images: answer from the text alone.
+        if (!withImages || fullText || error?.name === "AbortError")
+            throw error;
+        process.stderr.write(`PROVIDER_IMAGES_REJECTED:${label}:${String(error?.message ?? error).slice(0, 300)}\n`);
+        return streamModelOnce(sdk, model, params, label, tools, reasoning, false, () => { });
+    }
+}
+function sdkMessages(messages, images) {
+    return messages.map((message) => images && message.role === "user" && message.images?.length
+        ? {
+            role: "user",
+            content: [
+                { type: "text", text: message.content },
+                ...message.images.map((image) => ({
+                    type: "image",
+                    image: image.data,
+                    mediaType: image.mediaType
+                }))
+            ]
+        }
+        : { role: message.role, content: message.content });
+}
+async function streamModelOnce(sdk, model, params, label, tools, reasoning, images, onText) {
     const result = sdk.streamText({
         model,
         system: params.systemPrompt,
-        messages: params.messages,
+        messages: sdkMessages(params.messages, images),
         ...(tools ? { tools } : {}),
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         stopWhen: sdk.stepCountIs(params.maxIterations ?? 10),
@@ -885,6 +916,7 @@ async function streamModel(model, params, label) {
         switch (part.type) {
             case "text-delta":
                 fullText += part.text;
+                onText(part.text);
                 params.callbacks?.onContentDelta?.(part.text);
                 break;
             case "reasoning-start":
@@ -958,6 +990,15 @@ export class AiSdkProviderAdapter {
             Boolean(this.accountSessions) &&
             isAccountSessionModel(this.id, model) &&
             !/^(off|0|false)$/i.test(process.env.LEX_CLAUDE_NATIVE_CORPUS?.trim() ?? ""));
+    }
+    // API models read images; of the account CLIs only Claude takes them
+    // (stream-json input); local models are text-only.
+    supportsImages(model) {
+        if (model.startsWith("local/"))
+            return false;
+        if (isAccountSessionModel(this.id, model))
+            return this.id === "anthropic";
+        return true;
     }
     async stream(params) {
         if (isAccountSessionModel(this.id, params.model)) {

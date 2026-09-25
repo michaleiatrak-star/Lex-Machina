@@ -1,3 +1,5 @@
+import { LocalPageImageMasker } from "../document-evidence.js";
+import { LocalOcrCorrector } from "../ocr-correction.js";
 import { timingSafeEqual } from "node:crypto";
 import express, {
   type NextFunction,
@@ -596,7 +598,12 @@ export async function startLocalServer(options?: {
       secureCaseDocumentStore,
       new LocalOfficeDocumentTextExtractor(),
       new LocalSpreadsheetTextExtractor(),
-      personMorphology
+      personMorphology,
+      new LocalPageImageMasker(),
+      new LocalOcrCorrector(
+        () => privacyNamedEntities.localModel(),
+        (words) => personMorphology.knownWords(words)
+      )
     );
 
   const coreApp = createLexHttpApp({

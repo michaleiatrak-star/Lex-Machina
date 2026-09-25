@@ -115,7 +115,53 @@ function calmEntity(entity: PersonEntity): PersonEntity {
 const ENTITY_KINDS = new Set<PiiKind>(["PERSON", "ADDRESS"]);
 
 function personEntityKey(entity: PersonEntity, kind: PiiKind = "PERSON"): string {
-  return `${kind}\u0000entity\u0000${entity.canonical.toLocaleLowerCase("pl")}\u0000${entity.gender}`;
+  return `${kind}\u0000entity\u0000${entity.canonical.toLocaleLowerCase("pl")}\u0000${entity.gender}\u0000${entity.type ?? ""}${entity.number ?? ""}`;
+}
+
+// A firm named after a person has its own token, never the person's.
+function valueKey(kind: PiiKind, value: string, entity?: PersonEntity): string {
+  return entity?.type === "organization" ? `${kind}\u0000org\u0000${value}` : `${kind}\u0000${value}`;
+}
+
+// Words after which a surname names several persons ("państwo Kowalscy").
+const GROUP_WORDS = new Set([
+  "państwo", "państwa", "państwu", "państwem", "małżonkowie", "małżonków", "małżonkom", "małżonkami",
+  "małżonkach", "rodzeństwo", "rodzeństwa", "rodzeństwu", "rodzeństwem", "rodzina", "rodziny", "rodzinie",
+  "rodzinę", "rodziną", "powodowie", "pozwani", "powódki", "pozwane", "wnioskodawcy", "uczestnicy",
+  "dłużnicy", "wierzyciele", "spadkobiercy", "najemcy", "oskarżeni", "obwinieni", "skarżący", "oboje", "obaj", "obie"
+]);
+
+// "PHU Jan Kowalski", "pod firmą Jan Nowak", "Kancelaria Adwokacka Jan Kowalski".
+const FIRM_BEFORE =
+  /(?:\b(?:P\.?P\.?H\.?U\.?|P\.?H\.?U\.?|F\.?H\.?U\.?|F\.?P\.?H\.?U\.?|Firma|Przedsiębiorstwo|Zakład|Kancelaria|Biuro|Studio|Sklep|Warsztat|Hurtownia|Gabinet|Pracownia|Agencja)(?:\s+(?:\p{Lu}[\p{L}-]*|[\p{L}]+\.)){0,2}|\bpod\s+(?:firmą|nazwą))\s*[„"»]?\s*$/u;
+// "Nowak sp. z o.o.", "Kowalski i Wspólnicy sp.k.", "Jan Nowak Transport".
+const LEGAL_FORM =
+  /(sp\.\s?z\s?o\.\s?o\.|spółk[aiąę]\s+z\s+ograniczoną\s+odpowiedzialnością|spółk[aiąę]\s+(?:akcyjn|komandytow|jawn|partnersk|cywiln)\p{L}*|S\.\s?A\.|sp\.\s?k\.(?:\s?a\.)?|sp\.\s?j\.|sp\.\s?p\.|s\.\s?c\.|S\.K\.A\.|P\.S\.A\.)/u;
+const FIRM_AFTER =
+  /^\s*(?:i\s+(?:Wspólnicy|Partnerzy|Syn|Synowie|S-ka)\b|&|(?:Usługi|Transport|Handel|Budownictwo|Consulting|Group|Trade|Service|Serwis|Invest|Development|Logistics|Holding|Media|Design|Auto|Bud|Tech|Soft|Med|Eko)\b|,?\s*(?:sp\.|spółk|S\.\s?A\.|s\.\s?c\.|S\.K\.A\.|P\.S\.A\.))/u;
+
+/** The firm around a person-name mention, if the name is part of a firm name. */
+export function firmContext(text: string, start: number, end: number): { legalForm?: string } | null {
+  const before = text.slice(Math.max(0, start - 60), start).split(/[\n.;:!?](?=\s)/).pop() ?? "";
+  // To the end of the sentence: "PHU Jan Kowalski. Umowę zawarła X sp.k." is not one firm.
+  const lineAfter = (text.slice(end, end + 80).split("\n")[0] ?? "").split(/(?<=[.!?])\s+(?=\p{Lu})/u)[0] ?? "";
+  if (!FIRM_BEFORE.test(before) && !FIRM_AFTER.test(lineAfter)) return null;
+  const legal = LEGAL_FORM.exec(lineAfter.slice(0, 60));
+  return legal ? { legalForm: legal[1]!.replace(/\s+/g, " ") } : {};
+}
+
+export function organizationEntity(value: string, legalForm?: string): PersonEntity {
+  const form = { text: value, source: "frozen", confidence: 1 };
+  return {
+    canonical: value,
+    gender: "n",
+    genderAlternatives: [],
+    status: "ok",
+    forms: { NOM: form, GEN: form, DAT: form, ACC: form, INS: form, LOC: form, VOC: form },
+    warnings: ["ORGANIZATION"],
+    type: "organization",
+    ...(legalForm ? { legalForm } : {})
+  };
 }
 
 export type RestoredToken = {
@@ -325,8 +371,7 @@ export class PseudonymizationVault {
         );
       }
 
-      const key =
-        `${item.kind}\u0000${item.value}`;
+      const key = valueKey(item.kind, item.value, item.entity);
       if (
         this.keyToToken.has(key)
       ) {
@@ -384,8 +429,7 @@ export class PseudonymizationVault {
     value: string,
     entity?: PersonEntity
   ): string {
-    const key =
-      `${kind}\u0000${value}`;
+    const key = valueKey(kind, value, entity);
     const existing =
       this.keyToToken.get(key);
     if (existing) {
@@ -416,7 +460,7 @@ export class PseudonymizationVault {
         current &&
         value.toLocaleLowerCase("pl") === entity.canonical.toLocaleLowerCase("pl") &&
         current.canonical.toLocaleLowerCase("pl") !== entity.canonical.toLocaleLowerCase("pl") &&
-        this.keyToToken.get(`${kind}\u0000${current.canonical}`) !== sameEntity;
+        this.keyToToken.get(valueKey(kind, current.canonical, current)) !== sameEntity;
       // An unambiguous reading replaces an ambiguous one, and a normally
       // written name replaces one read from an all-caps heading.
       const clearer = entity && current && current.status !== "ok" && entity.status === "ok";
@@ -484,8 +528,11 @@ export class PseudonymizationVault {
   ): string | undefined {
     const lower = (text: string) => text.toLocaleLowerCase("pl");
     const forms = new Set(Object.values(entity.forms).map((form) => lower(form.text)));
+    if (entity.type === "organization") return undefined;
     for (const [token, other] of this.tokenEntities) {
       if (this.tokenMetadata.get(token)?.kind !== kind) continue;
+      // A firm, or one person against a family: never the same entity.
+      if (other.type === "organization" || (other.number ?? "sg") !== (entity.number ?? "sg")) continue;
       const otherForms = new Set(Object.values(other.forms).map((form) => lower(form.text)));
       // The mention is one of the forms of a known entity, or a known mention
       // is one of this entity's forms - whatever gender either analysis chose
@@ -612,13 +659,47 @@ export class PseudonymizationVault {
     return next;
   }
 
+  /**
+   * Replaces a person token's entity after the user set what it is (a man,
+   * a woman, several persons, a firm): the token and its surfaces stay, the
+   * keys follow the new kind of entity.
+   */
+  setEntity(token: string, next: PersonEntity): void {
+    const kind = this.tokenMetadata.get(token)?.kind;
+    const current = this.tokenEntities.get(token);
+    if (kind !== "PERSON" || !current) throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+    const wasFirm = current.type === "organization";
+    const isFirm = next.type === "organization";
+    for (const [key, value] of [...this.keyToToken]) {
+      if (value !== token) continue;
+      if (key.startsWith(`${kind}\u0000entity\u0000`)) {
+        this.keyToToken.delete(key);
+      } else if (wasFirm !== isFirm) {
+        const surface = wasFirm ? key.slice(`${kind}\u0000org\u0000`.length) : key.slice(`${kind}\u0000`.length);
+        const moved = valueKey(kind, surface, next);
+        const other = this.keyToToken.get(moved);
+        if (other && other !== token) throw new Error("PRIVACY_KEY_CONFLICT");
+        this.keyToToken.delete(key);
+        this.keyToToken.set(moved, token);
+      }
+    }
+    const entityKey = personEntityKey(next, kind);
+    const other = this.keyToToken.get(entityKey);
+    if (other && other !== token) throw new Error("PRIVACY_KEY_CONFLICT");
+    this.keyToToken.set(entityKey, token);
+    this.tokenEntities.set(token, next);
+  }
+
   knownEntityForms(): Array<{ text: string; kind: PiiKind; entity?: PersonEntity }> {
     const forms = new Map<string, { kind: PiiKind; entity?: PersonEntity }>();
     for (const [token, value] of this.tokenToValue) {
       const kind = this.tokenMetadata.get(token)?.kind;
       if (!kind || !ENTITY_KINDS.has(kind)) continue;
-      const entity = this.tokenEntities.get(token);
-      forms.set(value, entity ? { kind, entity } : { kind });
+      const stored = this.tokenEntities.get(token);
+      // A firm's name also protects other mentions, but they are read afresh
+      // (the same words may be the owner's name).
+      const entity = stored?.type === "organization" ? undefined : stored;
+      if (!forms.has(value)) forms.set(value, entity ? { kind, entity } : { kind });
       if (entity) {
         for (const form of Object.values(entity.forms)) {
           if (!forms.has(form.text)) forms.set(form.text, { kind, entity });
@@ -834,6 +915,16 @@ export class LocalPolishPseudonymizer {
     // to exact-surface identity.
     const entities =
       new Map<string, PersonEntity>(propagatedEntities);
+    // Surfaces written after "państwo", "małżonkowie", a plural role...: a family.
+    const plural = new Set(
+      findings
+        .filter((finding) => finding.kind === "PERSON")
+        .filter((finding) => {
+          const previous = /([\p{L}]+)\s*$/u.exec(text.slice(Math.max(0, finding.start - 30), finding.start));
+          return previous && GROUP_WORDS.has(previous[1]!.toLocaleLowerCase("pl"));
+        })
+        .map((finding) => finding.value)
+    );
     const analyse = async (
       kind: PiiKind,
       run: ((surfaces: string[]) => Promise<Array<PersonEntity | null>>) | undefined
@@ -862,13 +953,93 @@ export class LocalPolishPseudonymizer {
     };
     if (this.morphology) {
       const morphology = this.morphology;
-      await analyse("PERSON", (surfaces) => morphology.analyze(surfaces));
+      await analyse("PERSON", (surfaces) =>
+        morphology.analyze(surfaces, surfaces.map((surface) => (plural.has(surface) ? { numberHint: "pl" as const } : undefined)))
+      );
       await analyse(
         "ADDRESS",
         morphology.analyzeAddresses
           ? (surfaces) => morphology.analyzeAddresses!(surfaces)
           : undefined
       );
+    }
+
+    // Per mention: a firm named after a person, a family the recognizer
+    // missed ("małżonkowie Kowalscy") and given names that share the next
+    // person's surname ("Piotrowi i Marii Nowakom"). New mentions are added
+    // only when the dictionary confirms them.
+    const byFinding = new Map<PiiSpan, PersonEntity>();
+    for (const finding of findings) {
+      if (finding.kind !== "PERSON" || finding.source === "USER") continue;
+      const firm = firmContext(text, finding.start, finding.end);
+      if (firm) byFinding.set(finding, organizationEntity(finding.value, firm.legalForm));
+    }
+    if (this.morphology) {
+      const morphology = this.morphology;
+      const taken = (start: number, end: number) =>
+        [...keep, ...labelDirectives, ...findings].some((item) => overlaps({ start, end }, item));
+      const analyseSafely = async (surfaces: string[], hints?: Array<{ numberHint: "pl" } | undefined>) => {
+        try {
+          return await morphology.analyze(surfaces, hints);
+        } catch (error) {
+          process.stderr.write(`PERSON_MORPHOLOGY_DEGRADED:${error instanceof Error ? error.message : String(error)}\n`);
+          return surfaces.map(() => null);
+        }
+      };
+
+      const families: PiiSpan[] = [];
+      for (const match of text.matchAll(/(?<![\p{L}])(\p{L}+)\s+(\p{Lu}\p{Ll}+(?:-\p{Lu}\p{Ll}+)?)(?![\p{L}])/gu)) {
+        if (!GROUP_WORDS.has(match[1]!.toLocaleLowerCase("pl"))) continue;
+        const start = match.index! + match[0].length - match[2]!.length;
+        const end = start + match[2]!.length;
+        if (!taken(start, end)) families.push({ start, end, kind: "PERSON", value: match[2]!, confidence: 0.9, source: "AUTO" });
+      }
+      if (families.length) {
+        const analysed = await analyseSafely(families.map((span) => span.value), families.map(() => ({ numberHint: "pl" as const })));
+        families.forEach((span, position) => {
+          const entity = analysed[position];
+          if (entity?.number !== "pl" || taken(span.start, span.end)) return;
+          findings.push(span);
+          entities.set(`PERSON\u0000${span.value}`, entity);
+        });
+      }
+
+      const shared: Array<{ span: PiiSpan; surface: string; added: boolean }> = [];
+      for (const finding of [...findings]) {
+        const entity = entities.get(`PERSON\u0000${finding.value}`);
+        if (finding.kind !== "PERSON" || byFinding.has(finding) || !entity?.warnings.includes("SHARED_SURNAME")) continue;
+        const surname = finding.value.split(/\s+/).pop()!;
+        let cursor = finding.start;
+        for (let step = 0; step < 5; step += 1) {
+          const before = text.slice(Math.max(0, cursor - 60), cursor);
+          const match = /(?<![\p{L}])(\p{Lu}\p{Ll}+)\s*(?:,|\bi\b|\boraz\b)\s*$/u.exec(before);
+          if (!match) break;
+          const start = cursor - before.length + match.index;
+          const end = start + match[1]!.length;
+          const existing = findings.find((item) => item.start === start && item.end === end && item.kind === "PERSON");
+          if (!existing && taken(start, end)) break;
+          shared.push({
+            span: existing ?? { start, end, kind: "PERSON", value: match[1]!, confidence: 0.9, source: "AUTO" },
+            surface: `${match[1]} ${surname}`,
+            added: !existing
+          });
+          cursor = start;
+        }
+      }
+      if (shared.length) {
+        const analysed = await analyseSafely(shared.map((item) => item.surface));
+        shared.forEach((item, position) => {
+          const entity = analysed[position];
+          // Only a name SGJP knows as a given name gets the shared surname.
+          if (!entity?.warnings.includes("SHARED_SURNAME")) return;
+          if (item.added) {
+            if (taken(item.span.start, item.span.end)) return;
+            findings.push(item.span);
+          }
+          byFinding.set(item.span, entity);
+        });
+      }
+      findings.sort((a, b) => a.start - b.start);
     }
 
     for (
@@ -880,7 +1051,7 @@ export class LocalPolishPseudonymizer {
       const token = this.vault.getOrCreate(
         finding.kind,
         finding.value,
-        entities.get(`${finding.kind}\u0000${finding.value}`)
+        byFinding.get(finding) ?? entities.get(`${finding.kind}\u0000${finding.value}`)
       );
       output =
         output.slice(0, finding.start) +

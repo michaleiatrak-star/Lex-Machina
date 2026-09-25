@@ -1042,6 +1042,8 @@ export default function MatterChatApp({
   const [lastDelivery, setLastDelivery] = useState<{ documents: DocumentDelivery[]; names: Record<string, string> } | null>(null);
   const [includeCaseKnowledge, setIncludeCaseKnowledge] = useState(false);
   const [includeFirmKnowledge, setIncludeFirmKnowledge] = useState(false);
+  // Photos go to image-capable models as evidence; pages with text only on request.
+  const [imagesWithText, setImagesWithText] = useState(false);
   const [documentDropQueue, setDocumentDropQueue] = useState(
     createDocumentDropQueueState
   );
@@ -2840,7 +2842,10 @@ export default function MatterChatApp({
         primarySkill: route,
         mode: "PRAWNIK",
         ...(documentAttachments.length > 0
-          ? { attachments: documentAttachments }
+          ? {
+              attachments: documentAttachments,
+              evidenceImages: imagesWithText ? "all" as const : "photos" as const
+            }
           : {}),
         ...(firmTemplateIds.length > 0
           ? { firmTemplates: firmTemplateIds }
@@ -5361,6 +5366,14 @@ export default function MatterChatApp({
                     onChange={(event) => setIncludeFirmKnowledge(event.target.checked)}
                   />
                   Przeszukuj know-how kancelarii
+                </label>
+                <label title="Zdjęcia bez tekstu modele hostowane dostają zawsze jako obraz; modele lokalne czytają tylko tekst.">
+                  <input
+                    type="checkbox"
+                    checked={imagesWithText}
+                    onChange={(event) => setImagesWithText(event.target.checked)}
+                  />
+                  Wysyłaj też obrazy stron z tekstem (dane osobowe zamaskowane)
                 </label>
               </div>
             </article>

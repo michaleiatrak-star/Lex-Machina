@@ -293,6 +293,11 @@ export class LocalLlmPrivacyNamedEntityRecognizer {
     withLocalAi(onCheck) {
         return { recognize: (text) => this.recognizeWithLocalAi(text, onCheck) };
     }
+    /** The running local model as a one-shot question, or null when it is not ready. */
+    localModel() {
+        const modelId = this.readyModel();
+        return modelId ? (system, content) => this.ask(modelId, system, content) : null;
+    }
     readyModel() {
         const modelId = this.localModels.configuredModelId();
         try {

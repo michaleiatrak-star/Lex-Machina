@@ -1,6 +1,7 @@
+import { maskBoxes, protectedValues, wantsImage } from "./document-evidence.js";
 import { createHash } from "node:crypto";
 import { chunkDocumentPages } from "./document-ingestion.js";
-import { LocalPolishPseudonymizer, PseudonymizationVault } from "./privacy/pseudonymizer.js";
+import { LocalPolishPseudonymizer, organizationEntity, PseudonymizationVault } from "./privacy/pseudonymizer.js";
 import { privacyRecognizerFor } from "./privacy/local-llm-ner.js";
 import { restoreWithReport } from "./privacy/restoration-report.js";
 import { genderOf, placeholderGrammar } from "./privacy/token-legend.js";
@@ -110,10 +111,16 @@ export class LocalPrivateDocumentService {
     officeExtractor;
     spreadsheetExtractor;
     personMorphology;
+    pageMasker;
+    ocrCorrector;
     documents = new Map();
     constructor(pdfIngestor, namedEntities, maxChunkChars = 24_000, imageIngestor, privacyVaultStore, secureDocumentStore, officeExtractor, spreadsheetExtractor, 
     // One token per person and inflected restore ([PII:PERSON:0001|GEN]).
-    personMorphology) {
+    personMorphology, 
+    // Masks personal data on scanned pages sent to a model as evidence.
+    pageMasker, 
+    // "z lokalnym AI": fixes OCR errors before anonymization.
+    ocrCorrector) {
         this.pdfIngestor = pdfIngestor;
         this.namedEntities = namedEntities;
         this.maxChunkChars = maxChunkChars;
@@ -123,6 +130,8 @@ export class LocalPrivateDocumentService {
         this.officeExtractor = officeExtractor;
         this.spreadsheetExtractor = spreadsheetExtractor;
         this.personMorphology = personMorphology;
+        this.pageMasker = pageMasker;
+        this.ocrCorrector = ocrCorrector;
     }
     digitalTextResult(data, text) {
         if (data.byteLength >
@@ -207,7 +216,10 @@ export class LocalPrivateDocumentService {
     async review(data, mediaType, security) {
         const onProgress = security?.onProgress;
         onProgress?.({ stage: "READING" });
-        const source = await this.extract(data, mediaType, onProgress);
+        const extracted = await this.extract(data, mediaType, onProgress);
+        const source = security?.localAi && security.ocrFix !== false
+            ? await this.correctOcr(extracted, onProgress)
+            : extracted;
         const documentId = `doc_${source.sha256.slice(0, 24)}`;
         const persistentDocument = Boolean(this.secureDocumentStore &&
             security?.caseId);
@@ -273,9 +285,30 @@ export class LocalPrivateDocumentService {
                     : {}),
                 ...(page.engine
                     ? { engine: page.engine }
+                    : {}),
+                ...(page.corrections?.length
+                    ? { corrections: page.corrections }
                     : {})
             })),
             suggestions
+        };
+    }
+    /** OCR pages through the local model's correction (original words kept). */
+    async correctOcr(source, onProgress) {
+        if (!this.ocrCorrector || !source.pages.some((page) => page.source === "OCR" && page.lines?.length)) {
+            return source;
+        }
+        const pages = [];
+        for (const page of source.pages) {
+            pages.push(await this.ocrCorrector.correct(page, (item, done, total) => onProgress?.({ stage: "AI_CHECK", done, total, item: `korekta OCR s. ${page.page}: ${item}`.slice(0, 160) })));
+        }
+        if (!pages.some((page) => page.corrections?.length))
+            return source;
+        return {
+            ...source,
+            pages,
+            sourceChars: pages.reduce((sum, page) => sum + page.text.length, 0),
+            chunks: chunkDocumentPages(pages, this.maxChunkChars)
         };
     }
     async finalizeReview(documentId, directives, security) {
@@ -445,7 +478,7 @@ export class LocalPrivateDocumentService {
         const review = await this.review(data, mediaType, security);
         return this.finalizeReview(review.documentId, [], security);
     }
-    async resolveProtectedChunks(selection) {
+    async resolveProtectedChunks(selection, options = {}) {
         const record = this.documents.get(selection.documentId);
         if (!record) {
             throw new Error("UNKNOWN_LOCAL_DOCUMENT");
@@ -474,13 +507,50 @@ export class LocalPrivateDocumentService {
         if (totalChars > 160_000) {
             throw new Error("DOCUMENT_ATTACHMENT_CONTEXT_TOO_LARGE");
         }
+        const images = options.images
+            ? await this.evidenceImages(record, chunks, options.images)
+            : [];
         return {
             documentId: selection.documentId,
             chunks,
             totalChars,
             grammar: placeholderGrammar(chunks.map((chunk) => chunk.text).join("\n"), record.vault),
-            totalPages: record.source.totalPages
+            totalPages: record.source.totalPages,
+            ...(images.length ? { images } : {})
         };
+    }
+    /**
+     * Pages of the chunks as images (photos by default, text pages on request),
+     * with everything the
+     * document's current key hides painted black (so key edits apply), plus
+     * unreadable regions and badly read lines. A page that cannot be aligned
+     * or masked is not sent.
+     */
+    async evidenceImages(record, chunks, policy) {
+        if (!this.pageMasker)
+            return [];
+        const wanted = new Set(chunks.flatMap((chunk) => Array.from({ length: chunk.pageEnd - chunk.pageStart + 1 }, (_, offset) => chunk.pageStart + offset)));
+        const values = protectedValues(record.vault.snapshot().tokens);
+        const images = [];
+        for (const page of record.source.pages) {
+            if (!wanted.has(page.page) || !page.image || !wantsImage(page, record.mediaType, policy))
+                continue;
+            const boxes = maskBoxes(page, values);
+            if (!boxes)
+                continue;
+            try {
+                images.push({
+                    page: page.page,
+                    mediaType: "image/jpeg",
+                    data: await this.pageMasker.mask(page.image.jpeg, boxes),
+                    masked: boxes.length
+                });
+            }
+            catch (error) {
+                process.stderr.write(`EVIDENCE_IMAGE_SKIPPED:${error instanceof Error ? error.message : String(error)}\n`);
+            }
+        }
+        return images;
     }
     async restoreDocument(args) {
         if (!this.secureDocumentStore) {
@@ -567,6 +637,12 @@ export class LocalPrivateDocumentService {
                 value: entity?.canonical ?? item.value,
                 ...(forms ? { forms } : {}),
                 ...(item.kind === "PERSON" ? { gender: genderOf(record.vault, item.token) } : {}),
+                ...(item.kind === "PERSON" && entity
+                    ? {
+                        entity: entity.type === "organization" ? "organization" : entity.number === "pl" ? "group" : "person",
+                        ...(entity.legalForm ? { legalForm: entity.legalForm } : {})
+                    }
+                    : {}),
                 occurrences: counts.get(item.token) ?? 0
             };
         })
@@ -770,6 +846,37 @@ export class LocalPrivateDocumentService {
         }
         await this.withKey(documentId, record, security, (vault) => {
             vault.updateForms(token, forms);
+        });
+        return this.anonymizedVersion(documentId);
+    }
+    /**
+     * Sets what a person token is: a man or a woman (forms of that gender), a
+     * family named together (plural forms), or a firm (never inflected). The
+     * model's key and the restored forms follow.
+     */
+    async updateKeyGrammar(documentId, token, grammar, security) {
+        const record = this.editableRecord(documentId);
+        await this.withKey(documentId, record, security, async (vault) => {
+            const current = vault.entity(token);
+            if (!current)
+                throw new Error("PRIVACY_KEY_ENTITY_NOT_FOUND");
+            // The name as the key holds it: a firm as written, a person in the nominative.
+            const name = current.canonical;
+            if (grammar === "organization") {
+                vault.setEntity(token, organizationEntity(name, current.legalForm));
+                return;
+            }
+            const gender = grammar === "f" || grammar === "group-f" ? "f" : "m1";
+            const group = grammar.startsWith("group");
+            const [analysed] = this.personMorphology
+                ? await this.personMorphology.analyze([name], [{ genderHint: gender, numberHint: group ? "pl" : "sg" }])
+                : [null];
+            if (group && analysed?.number !== "pl")
+                throw new Error("PRIVACY_KEY_GROUP_UNSUPPORTED");
+            const { type: _type, legalForm: _legalForm, ...base } = current;
+            vault.setEntity(token, analysed
+                ? { ...analysed, status: "ok", genderAlternatives: [], warnings: analysed.warnings.filter((w) => w !== "GENDER_HEURISTIC") }
+                : { ...base, gender, status: "ok", genderAlternatives: [], warnings: base.warnings.filter((w) => w !== "GENDER_HEURISTIC") });
         });
         return this.anonymizedVersion(documentId);
     }

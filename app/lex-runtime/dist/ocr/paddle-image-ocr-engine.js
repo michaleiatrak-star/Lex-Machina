@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { readOcrPages } from "./ocr-result.js";
 import { fileURLToPath } from "node:url";
 function defaultWorkerPath() {
     const here = path.dirname(fileURLToPath(import.meta.url));
@@ -50,7 +51,9 @@ export class LocalPaddleImageOcrEngine {
                 "--pages",
                 "1",
                 "--lang",
-                "pl"
+                "pl",
+                "--evidence-dir",
+                path.join(tempRoot, "evidence")
             ];
             if (this.device) {
                 args.push("--device", this.device);
@@ -87,7 +90,7 @@ export class LocalPaddleImageOcrEngine {
                     }
                 });
             });
-            const parsed = JSON.parse(await readFile(output, "utf8"));
+            const parsed = await readOcrPages(JSON.parse(await readFile(output, "utf8")), path.join(tempRoot, "evidence"));
             if (parsed.length !== 1 ||
                 parsed[0]?.page !== 1) {
                 throw new Error("OCR_ENGINE_INVALID_RESULT: Local PaddleOCR image worker returned an invalid result set.");

@@ -116,7 +116,8 @@ function toEntity(raw) {
             ? value.status
             : "ok",
         forms: mapped,
-        warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : []
+        warnings: Array.isArray(value.warnings) ? value.warnings.map(String) : [],
+        ...(value.number === "pl" ? { number: "pl" } : {})
     };
 }
 /** Morfeusz2/SGJP engine in the payload Python (same interpreter as Stanza NER). */
@@ -146,11 +147,22 @@ export class LocalPersonMorphology {
         this.cache.clear();
         this.addressCache.clear();
     }
-    async analyze(surfaces) {
-        return this.cached(surfaces, this.cache, (missing) => this.run(missing, []).then((r) => r.persons));
+    async analyze(surfaces, hints = []) {
+        // The cache key carries the hints: "Kowalskim" alone and after "państwu" differ.
+        const keys = surfaces.map((surface, index) => {
+            const hint = hints[index];
+            return hint?.genderHint || hint?.numberHint ? `${surface}\u0000${hint.genderHint ?? ""}\u0000${hint.numberHint ?? ""}` : surface;
+        });
+        const hintByKey = new Map(keys.map((key, index) => [key, hints[index]]));
+        return this.cached(keys, this.cache, (missing) => this.run(missing.map((key) => ({ surface: key.split("\u0000")[0], ...(hintByKey.get(key) ?? {}) })), []).then((r) => r.persons));
     }
     async analyzeAddresses(surfaces) {
         return this.cached(surfaces, this.addressCache, (missing) => this.run([], missing).then((r) => r.addresses));
+    }
+    async knownWords(words) {
+        if (!words.length)
+            return [];
+        return (await this.run([], [], words)).known;
     }
     async cached(surfaces, cache, load) {
         const missing = [...new Set(surfaces)].filter((surface) => !cache.has(surface));
@@ -162,14 +174,15 @@ export class LocalPersonMorphology {
         }
         return surfaces.map((surface) => cache.get(surface) ?? null);
     }
-    async run(surfaces, addresses) {
+    async run(surfaces, addresses, words = []) {
         const tempRoot = await mkdtemp(path.join(os.tmpdir(), "lex-person-morphology-"));
         const input = path.join(tempRoot, "input.json");
         const output = path.join(tempRoot, "output.json");
         try {
             await writeFile(input, JSON.stringify({
-                persons: surfaces.map((surface) => ({ surface })),
-                addresses: addresses.map((surface) => ({ surface }))
+                persons: surfaces.map((item) => (typeof item === "string" ? { surface: item } : item)),
+                addresses: addresses.map((surface) => ({ surface })),
+                words
             }), "utf8");
             await new Promise((resolve, reject) => {
                 const child = spawn(this.python, ["-X", "utf8", this.workerPath, "--input", input, "--output", output], {
@@ -200,7 +213,8 @@ export class LocalPersonMorphology {
             const parsed = JSON.parse(await readFile(output, "utf8"));
             return {
                 persons: (parsed.persons ?? []).map(toEntity),
-                addresses: (parsed.addresses ?? []).map(toEntity)
+                addresses: (parsed.addresses ?? []).map(toEntity),
+                known: words.map((_, index) => parsed.known?.[index] === true)
             };
         }
         finally {

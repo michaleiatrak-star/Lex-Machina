@@ -19,6 +19,8 @@ export type ReviewMark = {
   gender?: "m1" | "f";
   token?: string;
   caseMissing?: boolean;
+  // A verb or role word next to the symbol disagrees with the key's gender or number.
+  agreement?: string;
 };
 
 const TONES: RestorationTone[] = ["certain", "rule", "review", "manual", "stored"];
@@ -160,6 +162,7 @@ export function RestorationReview(props: {
                 {` · ${TONE_LABEL[restorationTone(current)]}`}
                 {current.status === "gender_ambiguous" ? " · niepewna płeć" : ""}
                 {current.caseMissing ? " · model nie podał przypadku" : ""}
+                {current.agreement ? ` · ${current.agreement}` : ""}
               </div>
               <input
                 aria-label="Poprawiona forma"

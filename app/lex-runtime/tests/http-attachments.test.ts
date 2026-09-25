@@ -119,7 +119,7 @@ describe("G32 HTTP document attachments", () => {
       documentId:
         "doc_0123456789abcdef01234567",
       chunkIndices: [2]
-    });
+    }, { images: "photos" });
     expect(executor.execute)
       .toHaveBeenCalledWith(
         expect.objectContaining({

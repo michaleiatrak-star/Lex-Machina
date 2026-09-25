@@ -1,3 +1,5 @@
+import { LocalPageImageMasker } from "../document-evidence.js";
+import { LocalOcrCorrector } from "../ocr-correction.js";
 import { timingSafeEqual } from "node:crypto";
 import express from "express";
 import helmet from "helmet";
@@ -274,7 +276,7 @@ export async function startLocalServer(options) {
     }
     const sessionExecutor = new SafeSessionExecutor(registry, providerGateway, undefined, (ledger) => new LegalVerificationToolRuntime(ledger, legalSourceVerifier, undefined, new TemporalSourceFreshnessChecker()), privacyNamedEntities, legalFederationTools, coreLawIndex, personMorphology);
     const documentAstGenerator = new LegalDocumentAstGenerator(sessionExecutor);
-    const documentService = new LocalPrivateDocumentService(new CompleteDocumentIngestor(new PdfJsDocumentPageSource(), new LocalPaddleOcrEngine()), privacyNamedEntities, 24_000, new CompleteImageIngestor(new LocalPaddleImageOcrEngine()), privacyVaultStore, secureCaseDocumentStore, new LocalOfficeDocumentTextExtractor(), new LocalSpreadsheetTextExtractor(), personMorphology);
+    const documentService = new LocalPrivateDocumentService(new CompleteDocumentIngestor(new PdfJsDocumentPageSource(), new LocalPaddleOcrEngine()), privacyNamedEntities, 24_000, new CompleteImageIngestor(new LocalPaddleImageOcrEngine()), privacyVaultStore, secureCaseDocumentStore, new LocalOfficeDocumentTextExtractor(), new LocalSpreadsheetTextExtractor(), personMorphology, new LocalPageImageMasker(), new LocalOcrCorrector(() => privacyNamedEntities.localModel(), (words) => personMorphology.knownWords(words)));
     const coreApp = createLexHttpApp({
         registry,
         personMorphology,

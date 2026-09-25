@@ -59,6 +59,21 @@ Runtime jest źródłem prawdy; `app/lex-runtime/dist` jest zbudowany i trzymany
 - wątpliwe trafienia (jedno słowo, słowo pospolite, rzeczownik instytucji) ocenia na podstawie **całego zdania** z zaznaczonym słowem;
 - trafienie znika tylko przy jednoznacznym „nie osoba”; brak odpowiedzi = pozostaje zanonimizowane;
 - bez działającego modelu przetwarzanie kończy się komunikatem (`LOCAL_PRIVACY_MODEL_NOT_READY`), nie cichym pominięciem.
+- **korekta OCR** (skany, zdjęcia). Najpierw bez modelu: ligatury (ﬁ → fi), znaki niewidoczne i miękkie łączniki, nietypowe spacje, litery cyrylicy lub greki w polskich słowach. Potem model czyta **całe fragmenty** (kilka linii, pełne zdania) z liniami o niskiej pewności, słowami spoza słownika SGJP lub przypadkowymi symbolami i zwraca listę poprawek, nie przepisany tekst. Poprawka obejmuje 1-3 słowa jednej linii albo wyraz przeniesiony (`zapła- / ty` → `zapłaty`) i przechodzi, gdy:
+  - każde słowo wyniku jest w słowniku;
+  - zmiana jest drobna: ogonki, sklejenie lub rozcięcie słów, 1-2 znaki (1 w wyrazie z wielkiej litery), usunięcie symboli bez znaczenia (`|`, `~`, `¦`, `•`, `^`...);
+  - słowo istniejące w słowniku zmienia się tylko o ogonki (`sad` → `sąd`) i tylko w linii odczytanej niepewnie;
+  - liczby, daty, kwoty, identyfikatory i `§` zostają; nie można dodać ani usunąć `nie`.
+
+  Styl i gramatyka autora dokumentu zostają bez zmian. Lista poprawek pojawia się po przetworzeniu; `Cofnij korekty` przetwarza plik ponownie bez nich. Model lokalny nie widzi obrazu.
+
+**Osoby, rodziny, firmy, strony wieloosobowe**:
+- `Kowalscy`, `Nowakowie`, `państwo Wiśniewscy` → jeden symbol „kilka osób” z odmianą mnogą (`Kowalskich`, `Nowakom`); `Zielińskie` → kilka kobiet.
+- Wspólne nazwisko: `Piotrowi i Marii Nowakom`, `Jan, Ewa i Anna Wiśniewscy` → osobne osoby z własnym nazwiskiem (Piotr Nowak, Maria Nowak).
+- Firma z imieniem/nazwiskiem (`PHU Jan Kowalski`, `Nowak sp. z o.o.`, `Kowalski i Wspólnicy sp.k.`, `pod firmą …`) → osobny symbol „firma” (z formą prawną), nieodmieniany; ta sama osoba jako przedsiębiorca ma własny symbol, model dostaje informację o powiązaniu.
+- Klucz dla modelu: rodzaj i liczba każdego symbolu, strony wieloosobowe (`powodowie: [..], [..]` → męskoosobowy / same kobiety → niemęskoosobowy) i nakaz rozstrzygnięcia solidarności przy kilku osobach po jednej stronie.
+- Kontrola odpowiedzi: czasownik lub rola przy symbolu niezgodna z kluczem (`[kobieta] wniósł`, `Pozwany [rodzina]`) → oznaczenie do przeglądu przed deanonimizacją (czat i pisma).
+- Tabela klucza: pole „kim jest” (mężczyzna, kobieta, kilka osób, kilka kobiet, firma) - zmiana od razu w kluczu dla modelu i w odmianie.
 
 **Klucz sprawy (wspólny)**: jedna osoba ma jeden symbol we wszystkich plikach sprawy i w czacie. Starsze dokumenty z kluczem osobnym łączy przycisk `Połącz klucze sprawy`.
 
@@ -76,6 +91,12 @@ Audyt (`app/privacy/benchmarks/privacy_audit.mts`, 500 dokumentów): skutecznoś
 - **Limity**: 20 plików na wiadomość dla modelu w hoście, 4 dla lokalnego; ponad limit - komunikat, nic nie znika po cichu.
 - **Okno modelu**: przed wysyłką pasek `~X tys. z Y tys. tokenów`; gdy za dużo - wskazanie największych plików i blokada wysyłki. Pliki zaznaczone idą w całości albo wcale.
 - **Po wysyłce**: `Do modelu trafiło w całości: X z Y plików` + szczegóły (w całości / częściowo / streszczenie / pominięty).
+- **Obrazy jako dowód** (tylko modele w hoście, które widzą obrazy: API i konto Claude):
+  - **zdjęcia** (plik graficzny bez tekstu albo z pojedynczymi napisami) idą jako obraz domyślnie;
+  - **strony z tekstem** idą jako obraz tylko po zaznaczeniu `Wysyłaj też obrazy stron z tekstem`;
+  - zwykłe PDF idą jako sam tekst.
+
+  Na obrazie czarne prostokąty zakrywają każde wystąpienie wartości z bieżącego klucza anonimizacji (także nazwisko rozdzielone między linie), obszary nieczytelne dla OCR oraz linie o pewności poniżej 0,5. Strony, której obrazu nie da się dopasować do tekstu, nie wysyła się. Limit: 20 obrazów na wiadomość, pierwsze 30 stron dokumentu. Model lokalny, Codex i Grok dostają sam tekst, a w etapach pojawia się informacja `obrazy pominięte`. Twarzy nie wykrywa się: zdjęcie z osobą trafia do modelu, jeśli użytkownik je wyśle.
 - **Etapy pracy**: `Etap n z 6`, zakończone i pozostałe: anonimizacja → routing → skille i moduły → model i narzędzia → weryfikacja źródeł → przywrócenie danych; pod etapami - wczytane skille i pliki, użyte narzędzia.
 
 ---
@@ -140,6 +161,7 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 | `LEX_CORE_LAW_REFRESH=off` | bez odświeżania rdzenia aktów w tle |
 | `LEX_NER_PYTHON`, `LEX_GAZETTEER_WORKER`, `LEX_GENERIC_WORDS` | ścieżki workerów i listy słów |
 | `LEX_HOST`, `LEX_PORT` | adres runtime (tylko loopback) |
+| `LEX_OCR_PYTHON`, `LEX_OCR_REDACTOR` | Python OCR (Pillow) i skrypt maskowania obrazów |
 
 ---
 
@@ -148,4 +170,6 @@ W nowym repozytorium: dodaj `push: branches: [main]` do `on:` w `lex-installer.y
 - Przyspieszenie trybu natywnego Claude i weryfikacja przez lokalne AI nie były mierzone na prawdziwym koncie/modelu (pokryte testami).
 - Codex i Grok nie mają zamknięcia odczytu w jednym katalogu - zostają przy protokole tekstowym.
 - Okna kontekstu modeli w hoście są przyjęte ostrożnie (Claude 200 tys., OpenAI/Grok 128 tys. tokenów).
+- Korekta OCR i obrazy z PaddleOCR sprawdzone testami i atrapą silnika; nie mierzono jakości na prawdziwym Bieliku ani na prawdziwych skanach.
+- Maskowanie w obrębie linii jest proporcjonalne do liczby znaków (z zapasem); przy nietypowych czcionkach fragment sąsiedniego słowa może zostać zakryty.
 - Instalator offline wstrzymany.

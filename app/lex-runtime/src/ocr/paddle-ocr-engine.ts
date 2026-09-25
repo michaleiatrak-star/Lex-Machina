@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { readOcrPages } from "./ocr-result.js";
 import { fileURLToPath } from "node:url";
 import type {
   OcrEngine,
@@ -77,7 +78,9 @@ implements OcrEngine {
         "--lang",
         "pl",
         "--dpi",
-        String(this.dpi)
+        String(this.dpi),
+        "--evidence-dir",
+        path.join(tempRoot, "evidence")
       ];
       if (this.device) {
         args.push("--device", this.device);
@@ -139,9 +142,10 @@ implements OcrEngine {
         });
       });
 
-      const parsed = JSON.parse(
-        await readFile(output, "utf8")
-      ) as OcrPageResult[];
+      const parsed = await readOcrPages(
+        JSON.parse(await readFile(output, "utf8")) as unknown[],
+        path.join(tempRoot, "evidence")
+      );
 
       const requested = new Set(pages);
       const seen = new Set<number>();

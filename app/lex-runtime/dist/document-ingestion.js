@@ -138,7 +138,9 @@ export class CompleteDocumentIngestor {
                     ...(ocr.lineCount !== undefined
                         ? { lineCount: ocr.lineCount }
                         : {}),
-                    ...(ocr.engine ? { engine: ocr.engine } : {})
+                    ...(ocr.engine ? { engine: ocr.engine } : {}),
+                    ...(ocr.lines ? { lines: ocr.lines } : {}),
+                    ...(ocr.image ? { image: ocr.image } : {})
                 };
             }
             if (digital) {
@@ -158,7 +160,9 @@ export class CompleteDocumentIngestor {
                 ...(ocr?.lineCount !== undefined
                     ? { lineCount: ocr.lineCount }
                     : {}),
-                ...(ocr?.engine ? { engine: ocr.engine } : {})
+                ...(ocr?.engine ? { engine: ocr.engine } : {}),
+                ...(ocrText && ocr?.lines ? { lines: ocr.lines } : {}),
+                ...(ocrText && ocr?.image ? { image: ocr.image } : {})
             };
         });
         const sourceChars = pages.reduce((sum, page) => sum + page.text.length, 0);

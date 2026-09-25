@@ -82,10 +82,59 @@ def parse_pages(raw: str) -> list[int]:
     return pages
 
 
-def predict_image(ocr: PaddleOCR, image: np.ndarray, page_number: int) -> dict:
+EVIDENCE_MAX_SIDE = 1600
+
+
+def _box(values) -> list[float] | None:
+    """[x0, y0, x1, y1] from a box or polygon."""
+    try:
+        flat = np.asarray(values, dtype=float).reshape(-1)
+    except (TypeError, ValueError):
+        return None
+    if flat.size == 4:
+        x0, y0, x1, y1 = flat.tolist()
+    elif flat.size >= 8 and flat.size % 2 == 0:
+        xs, ys = flat[0::2], flat[1::2]
+        x0, y0, x1, y1 = float(xs.min()), float(ys.min()), float(xs.max()), float(ys.max())
+    else:
+        return None
+    return [min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)]
+
+
+def _overlap(a: list[float], b: list[float]) -> float:
+    w = min(a[2], b[2]) - max(a[0], b[0])
+    h = min(a[3], b[3]) - max(a[1], b[1])
+    if w <= 0 or h <= 0:
+        return 0.0
+    area = max(1.0, (a[2] - a[0]) * (a[3] - a[1]))
+    return (w * h) / area
+
+
+def _field(item, payload: dict, key: str):
+    try:
+        value = item[key]
+        if value is not None:
+            return value
+    except Exception:
+        pass
+    return payload.get(key)
+
+
+def predict_image(
+    ocr: PaddleOCR,
+    image: np.ndarray,
+    page_number: int,
+    evidence_dir: Path | None = None,
+) -> dict:
     prediction = list(ocr.predict(image))
     texts: list[str] = []
     scores: list[float] = []
+    # Per line: text, recognition score and box, for OCR correction and for
+    # masking personal data on the page image sent as evidence.
+    lines: list[dict] = []
+    unread: list[list[float]] = []
+    evidence_image = image
+    boxes_known = True
 
     for item in prediction:
         payload = item.json
@@ -96,14 +145,47 @@ def predict_image(ocr: PaddleOCR, image: np.ndarray, page_number: int) -> dict:
 
         rec_texts = payload.get("rec_texts") or []
         rec_scores = payload.get("rec_scores") or []
-        for text in rec_texts:
+        rec_boxes = _field(item, payload, "rec_boxes")
+        rec_polys = _field(item, payload, "rec_polys")
+        dt_polys = _field(item, payload, "dt_polys")
+        geometry = rec_boxes if rec_boxes is not None and len(rec_boxes) == len(rec_texts) else rec_polys
+        if geometry is None or len(geometry) != len(rec_texts):
+            boxes_known = False
+            geometry = [None] * len(rec_texts)
+
+        # Boxes are in the coordinates of the preprocessed (rotated,
+        # unwarped) image; without it the boxes cannot be trusted.
+        pre = _field(item, payload, "doc_preprocessor_res")
+        if pre is not None:
+            try:
+                output_img = pre["output_img"]
+            except Exception:
+                output_img = None
+            if output_img is None:
+                boxes_known = False
+            else:
+                evidence_image = np.asarray(output_img)
+
+        read_boxes: list[list[float]] = []
+        for index, text in enumerate(rec_texts):
+            try:
+                score = float(rec_scores[index])
+            except (IndexError, TypeError, ValueError):
+                score = None
+            if score is not None:
+                scores.append(score)
+            box = _box(geometry[index]) if geometry[index] is not None else None
             if isinstance(text, str) and text.strip():
                 texts.append(text.strip())
-        for score in rec_scores:
-            try:
-                scores.append(float(score))
-            except (TypeError, ValueError):
-                pass
+                lines.append({"text": text.strip(), "score": score, "box": box})
+                if box:
+                    read_boxes.append(box)
+            elif box:
+                unread.append(box)
+        for poly in dt_polys if dt_polys is not None else []:
+            box = _box(poly)
+            if box and not any(_overlap(box, known) > 0.5 for known in read_boxes):
+                unread.append(box)
 
     confidence = (
         sum(scores) / len(scores)
@@ -111,13 +193,37 @@ def predict_image(ocr: PaddleOCR, image: np.ndarray, page_number: int) -> dict:
         else None
     )
 
-    return {
+    result = {
         "page": page_number,
         "text": "\n".join(texts),
         "confidence": confidence,
         "lineCount": len(texts),
         "engine": "PaddleOCR PP-OCRv6_medium",
+        "lines": [
+            {"text": line["text"], "score": line["score"]}
+            for line in lines
+        ],
     }
+
+    if evidence_dir is not None and boxes_known and all(line["box"] for line in lines):
+        height, width = evidence_image.shape[:2]
+        scale = min(1.0, EVIDENCE_MAX_SIDE / max(width, height))
+        picture = Image.fromarray(evidence_image[:, :, :3].astype(np.uint8))
+        if scale < 1.0:
+            picture = picture.resize((max(1, round(width * scale)), max(1, round(height * scale))))
+        name = f"page-{page_number}.jpg"
+        picture.save(evidence_dir / name, format="JPEG", quality=90)
+        scaled = lambda box: [round(value * scale, 1) for value in box]
+        for index, line in enumerate(lines):
+            result["lines"][index]["box"] = scaled(line["box"])
+        result["evidence"] = {
+            "file": name,
+            "width": picture.width,
+            "height": picture.height,
+            "unread": [scaled(box) for box in unread],
+        }
+
+    return result
 
 
 def main() -> None:
@@ -128,6 +234,7 @@ def main() -> None:
     parser.add_argument("--lang", default="pl")
     parser.add_argument("--dpi", type=int, default=220)
     parser.add_argument("--device", default=None)
+    parser.add_argument("--evidence-dir", default=None)
     parser.add_argument(
         "--mode",
         choices=("pdf", "image"),
@@ -184,6 +291,9 @@ def main() -> None:
 
     ocr = PaddleOCR(**ocr_kwargs)
     results = []
+    evidence_dir = Path(args.evidence_dir) if args.evidence_dir else None
+    if evidence_dir is not None:
+        evidence_dir.mkdir(parents=True, exist_ok=True)
 
     if args.mode == "image":
         if pages != [1]:
@@ -191,7 +301,7 @@ def main() -> None:
         with Image.open(args.input) as source:
             image = np.array(source.convert("RGB"))
         results.append(
-            predict_image(ocr, image, 1)
+            predict_image(ocr, image, 1, evidence_dir)
         )
     else:
         doc = fitz.open(args.input)
@@ -224,6 +334,7 @@ def main() -> None:
                         ocr,
                         image,
                         page_number,
+                        evidence_dir,
                     )
                 )
                 # Progress for the runtime (page number only, no content).

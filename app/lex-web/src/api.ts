@@ -421,6 +421,8 @@ export type DocumentRestoration = {
   canonical?: string;
   gender?: "m1" | "f";
   caseMissing?: boolean;
+  // A verb or role word next to the symbol disagrees with the key's gender or number.
+  agreement?: string;
   occurrences: number;
 };
 
@@ -517,6 +519,8 @@ export type DocumentReviewResponse = {
     source: "DIGITAL" | "OCR" | "BLANK";
     confidence?: number;
     engine?: string;
+    // Words the local model fixed after OCR.
+    corrections?: Array<{ line: number; from: string; to: string }>;
   }>;
   suggestions: Array<{
     page: number;
@@ -2534,6 +2538,8 @@ export function executeSession(input: {
   auxiliaryText?: string;
   mode?: "LAIK" | "PRAWNIK";
   attachments?: DocumentAttachmentSelection[];
+  // Page images as evidence: photos (default) or also pages with text.
+  evidenceImages?: "photos" | "all";
   // Firm templates (DOCX/ODT) sent as text with the message.
   firmTemplates?: string[];
   knowledge?: {
@@ -2718,7 +2724,7 @@ export async function processStoredCaseFile(
   fileId?: string,
   progressId?: string,
   // "z lokalnym AI": the running local model also checks the document.
-  options?: { localAi?: boolean }
+  options?: { localAi?: boolean; ocrFix?: boolean }
 ): Promise<DocumentReviewResponse> {
   const path = fileId
     ? `/api/cases/${caseId}/files/${uploadId}/members/${fileId}/process`
@@ -2728,7 +2734,9 @@ export async function processStoredCaseFile(
     {
       method: "POST",
       ...(progressId ? { headers: { "X-Lex-Progress": progressId } } : {}),
-      ...(options?.localAi ? { body: JSON.stringify({ localAi: true }) } : {})
+      ...(options?.localAi
+        ? { body: JSON.stringify({ localAi: true, ...(options.ocrFix === false ? { ocrFix: false } : {}) }) }
+        : {})
     }
   );
 }
@@ -2783,8 +2791,13 @@ export type PrivacyKeyEntry = {
   value: string;
   forms?: Array<{ case: string; text: string }>;
   gender?: "m" | "f" | "unknown";
+  // Person tokens: one person, several persons named together, or a firm.
+  entity?: "person" | "group" | "organization";
+  legalForm?: string;
   occurrences: number;
 };
+
+export type KeyGrammar = "m" | "f" | "group-m" | "group-f" | "organization";
 
 export type AnonymizedVersion = {
   documentId: string;
@@ -2865,6 +2878,19 @@ export function updateAnonymizationForms(
   return json(anonymizedPath(caseId, documentId, "forms"), {
     method: "POST",
     body: JSON.stringify({ token, forms })
+  });
+}
+
+/** What a person symbol is: a man, a woman, several persons, a firm. */
+export function updateAnonymizationGrammar(
+  caseId: string,
+  documentId: string,
+  token: string,
+  grammar: KeyGrammar
+): Promise<AnonymizedVersion> {
+  return json(anonymizedPath(caseId, documentId, "grammar"), {
+    method: "POST",
+    body: JSON.stringify({ token, grammar })
   });
 }
 

@@ -522,6 +522,12 @@ implements NamedEntityRecognizer {
     return { recognize: (text: string) => this.recognizeWithLocalAi(text, onCheck) };
   }
 
+  /** The running local model as a one-shot question, or null when it is not ready. */
+  localModel(): ((system: string, content: string) => Promise<string>) | null {
+    const modelId = this.readyModel();
+    return modelId ? (system, content) => this.ask(modelId, system, content) : null;
+  }
+
   private readyModel(): string | null {
     const modelId = this.localModels.configuredModelId();
     try {

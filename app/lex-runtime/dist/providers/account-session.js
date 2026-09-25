@@ -1578,6 +1578,33 @@ function parseToolCalls(text) {
         };
     });
 }
+/**
+ * Claude CLI input: plain text, or with images one stream-json user message
+ * (text block + image blocks) and the matching --input-format.
+ */
+export function claudeInput(prompt, images = []) {
+    if (!images.length)
+        return { stdin: prompt, args: [] };
+    return {
+        stdin: JSON.stringify({
+            type: "user",
+            message: {
+                role: "user",
+                content: [
+                    { type: "text", text: prompt },
+                    ...images.map((image) => ({
+                        type: "image",
+                        source: { type: "base64", media_type: image.mediaType, data: image.data }
+                    }))
+                ]
+            }
+        }) + "\n",
+        args: ["--input-format", "stream-json"]
+    };
+}
+export function messageImages(params) {
+    return params.messages.flatMap((message) => message.images ?? []);
+}
 /** The Lex instructions and conversation for a native corpus run (sent on stdin). */
 export function buildCorpusPrompt(params) {
     return [
@@ -1816,7 +1843,8 @@ export class AccountSessionManager {
                 "Your working directory is the Lex legal skill corpus: read skills and their modules with Read, Glob and Grep; they are read-only. " +
                 "Use the mcp__lex tools for legal verification, case law and legal sources. Do not access anything else. " +
                 "A resumed host session is continuity context only: never reuse facts from earlier host turns unless they are also in the current Lex Machina request.";
-            const run = (tail) => runCli("anthropic", claudeCorpusArgs(systemPrompt, mcpConfig, tail), args.prompt, COMMAND_TIMEOUT_MS, args.corpus.root, args.abortSignal, { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS });
+            const input = claudeInput(args.prompt, args.images);
+            const run = (tail) => runCli("anthropic", claudeCorpusArgs(systemPrompt, mcpConfig, [...input.args, ...tail]), input.stdin, COMMAND_TIMEOUT_MS, args.corpus.root, args.abortSignal, { settleOnStdout: claudeResultReady, firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS });
             let result = null;
             const savedSessionId = await readAccountSessionId("anthropic", args.continuityKey);
             if (savedSessionId) {
@@ -1857,7 +1885,9 @@ export class AccountSessionManager {
             await fsp.rm(workDir, { recursive: true, force: true }).catch(() => { });
         }
     }
-    async runText(provider, prompt, abortSignal, continuityKey) {
+    async runText(provider, prompt, abortSignal, continuityKey, 
+    // Claude only (stream-json input); other CLIs get the text.
+    images = []) {
         const workDir = await fsp.mkdtemp(path.join(os.tmpdir(), "lex-account-session-"));
         const allowExternalTakeover = !continuityKey ||
             !await hasPinnedAccountSession(provider);
@@ -1989,13 +2019,14 @@ export class AccountSessionManager {
             if (provider ===
                 "anthropic") {
                 const lexSystemPrompt = "You are the semantic model inside Lex Machina. Lex Machina owns privacy gates, legal-source verification and all tool execution. Current Lex Machina instructions override prior host-session instructions. A resumed host session is continuity context only: never reuse, reveal or infer facts from earlier host turns unless those facts are also present in the current Lex Machina request. Do not access local files, external services or tools.";
-                const commonArgs = claudeHeadlessArgs(lexSystemPrompt);
+                const input = claudeInput(prompt, images);
+                const commonArgs = claudeHeadlessArgs(lexSystemPrompt, input.args);
                 const hostCwd = workDir;
                 const runClaude = async (tail) => {
                     const run = await runCli(provider, [
                         ...commonArgs,
                         ...tail
-                    ], prompt, COMMAND_TIMEOUT_MS, hostCwd, abortSignal, {
+                    ], input.stdin, COMMAND_TIMEOUT_MS, hostCwd, abortSignal, {
                         settleOnStdout: claudeResultReady,
                         firstOutputTimeoutMs: CLAUDE_FIRST_OUTPUT_TIMEOUT_MS
                     });
@@ -2088,6 +2119,7 @@ export async function streamAccountSession(manager, provider, params) {
     if (provider === "anthropic" && params.nativeCorpus && params.runTools) {
         const text = await manager.runClaudeWithCorpus({
             prompt: buildCorpusPrompt(params),
+            images: messageImages(params),
             corpus: params.nativeCorpus,
             tools: params.tools ?? [],
             runTools: params.runTools,
@@ -2102,7 +2134,7 @@ export async function streamAccountSession(manager, provider, params) {
     }
     const maxIterations = Math.max(1, Math.min(params.maxIterations ?? 10, 12));
     for (let iteration = 0; iteration < maxIterations; iteration += 1) {
-        const output = await manager.runText(provider, buildAccountPrompt(params, toolTranscript), params.abortSignal, params.continuityKey);
+        const output = await manager.runText(provider, buildAccountPrompt(params, toolTranscript), params.abortSignal, params.continuityKey, provider === "anthropic" ? messageImages(params) : []);
         const calls = parseToolCalls(output);
         if (!calls) {
             params.callbacks?.onContentDelta?.(output);

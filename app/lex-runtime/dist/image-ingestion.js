@@ -33,7 +33,10 @@ export class CompleteImageIngestor {
             ...(result.lineCount !== undefined
                 ? { lineCount: result.lineCount }
                 : {}),
-            ...(result.engine ? { engine: result.engine } : {})
+            ...(result.engine ? { engine: result.engine } : {}),
+            ...(text && result.lines ? { lines: result.lines } : {}),
+            // A photo without text keeps its image too (evidence).
+            ...(result.image ? { image: result.image } : {})
         };
         const chunks = chunkDocumentPages([page], this.limits.maxChunkChars);
         if (chunks.reduce((sum, chunk) => sum + chunk.sourceChars, 0) !== text.length) {
