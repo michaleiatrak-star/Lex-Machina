@@ -76,7 +76,7 @@ PRAWA PROCESOWE:
   → Prawa pracownicze: ustawa pragmatyczna MON (nie KP co do zasady)
   → Zakaz rozwiązania stosunku służbowego w czasie służby bez zgody przełożonego
 
-WERYFIKUJ: isap.sejm.gov.pl → ustawa o obronie Ojczyzny — wielokrotnie nowelizowana
+WERYFIKUJ: ELI (RZĄD 1) → ustawa o obronie Ojczyzny — wielokrotnie nowelizowana
   web_search: "żołnierz definicja ustawa obrona ojczyzny 2025 2026 aktualny"
 ```
 

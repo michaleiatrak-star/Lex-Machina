@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.77"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.81"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.77 (2026-09-16, F-189): ⭐ DOSTEP-MASZYNOWY-API — nowa sekcja „Prawo UE — CELLAR”: obejście blokady EUR-Lex (202/0 B z kontenera); `publications.europa.eu/resource/celex/<CELEX>` z Acce…
+  Wersja bieżąca: 3.81 (2026-09-23, AUDYT-2026-09-23c): HIERARCHIA-ZRODEL 1.11 i PRAWO-HARDGATE: E-3 uruchamia BRAK-AKTU (obowiązkowo), przy awarii ELI próba ISAP; ISAP-AUDIT-PROTOCOL analogicznie. DOSTEP-MASZYNOWY-API 1.9: §0…
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

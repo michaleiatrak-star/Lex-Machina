@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.20"
+version: "5.28"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -290,7 +290,7 @@ W2 — PROJEKT PISMA
      → STOP po W2 — nie pytaj użytkownika, przejdź do W3 automatycznie
 
 W3 — WERYFIKACJA ZE ŹRÓDEŁ + WALIDACJA
-     web_fetch dla każdego ⚠️ → zamknięcie przez zweryfikowane cytaty z ISAP
+     web_fetch dla każdego ⚠️ → zamknięcie przez zweryfikowane cytaty z ELI (RZĄD 1, kanon E-1…E-5)
      web_fetch dla każdego [ORZECZENIE] → sygnatura + teza + URL ze źródła
      MOD-WALIDACJA (bloki A–I) → raport formalny
      Pismo finalne z pełnymi oznaczeniami Dz.U.
@@ -333,10 +333,10 @@ nie uruchamiaj W1 (Test C) — to są ścieżki dla pism PISANYCH OD ZERA.
 Pismo proste = spełnia WSZYSTKIE trzy warunki:
 1. Jedno żądanie procesowe
 2. Jedna podstawa prawna (nie wymaga analizy wielowątkowej)
-3. Należy do katalogu: sprzeciw od nakazu (art. 503 KPC), zarzuty od nakazu
-   (art. 493 KPC), wniosek o klauzulę (art. 781 KPC), wniosek o wszczęcie
+3. Należy do katalogu: sprzeciw od nakazu (art. 505 § 1 KPC — ⛔ art. 503 uchylony),
+   zarzuty od nakazu (art. 493 § 1 KPC; termin obu — art. 480² § 2 KPC), wniosek o klauzulę (art. 781 KPC), wniosek o wszczęcie
    egzekucji (art. 797 KPC), zabezpieczenie (art. 730 KPC), zwolnienie od kosztów
-   (art. 102 KSCU), uzasadnienie wyroku (art. 328¹ KPC), przywrócenie terminu
+   (art. 102 KSCU), uzasadnienie wyroku (art. 328 § 1 KPC), przywrócenie terminu
    (art. 168 KPC), wezwanie przedsądowe (art. 455 KC), wgląd do akt (art. 9 KPC),
    doręczenie przez komornika (art. 139¹ KPC), sprzeciw od orzeczenia referendarza
    (art. 398²² KPC).
@@ -430,7 +430,7 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
   view shared/MOD-ELIMINACJA-TEZ.md
 
   Per każde żądanie z petitum:
-  → ET-Q1: Czy istnieje przepis który to żądanie PRZEWIDUJE? (ISAP)
+  → ET-Q1: Czy istnieje przepis który to żądanie PRZEWIDUJE? (ELI — RZĄD 1)
   → ET-Q2: Czy PRZESŁANKI przepisu są spełnione przez fakty F-nn?
            (subsumpcja — per każda przesłanka osobno)
   → ET-Q3: Czy przepisy z materiału dowodowego są PRAWIDŁOWE?
@@ -800,7 +800,7 @@ view shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZKOWE — zawsze p
 
 ### W3.1–W3.7 + Finalizacja
 
-> Szczegóły kroków W3.1 (ISAP), W3.2 (orzeczenia + ZAKRES-STOSOWANIA),
+> Szczegóły kroków W3.1 (ELI — RZĄD 1), W3.2 (orzeczenia + ZAKRES-STOSOWANIA),
 > W3.3 (MOD-FAKTY), W3.4 (MOD-WALIDACJA bloki A–J + moduły warunkowe),
 > W3.5 (HYBRID-VALIDATION), W3.6 (raport W3), W3.6a (AUDYT-KOŃCOWY +
 > COURT-SIMULATION + LEGAL-QUALITY-GATE), W3.7 (PEER-REVIEW + POST-VALIDATION

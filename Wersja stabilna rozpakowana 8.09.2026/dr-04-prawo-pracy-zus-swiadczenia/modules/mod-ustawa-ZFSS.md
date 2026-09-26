@@ -23,7 +23,7 @@
 web_search: "ZFŚS odpis podstawowy 2025 2026 wysokość obwieszczenie MRiPS"
 ```
 
-**Weryfikacja ISAP przed każdym cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
 ## Zakres
 ZFŚS = fundusz tworzony przez pracodawcę dla finansowania działalności socjalnej na rzecz:

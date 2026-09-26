@@ -9,7 +9,7 @@
   sesji, nie osobny t.j. Poprzedni t.j.: Dz.U. 2022 poz. 2123.
   VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000917
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Ochrona praw osob z zaburzeniami psychicznymi. Przymusowe leczenie, hospitalizacja

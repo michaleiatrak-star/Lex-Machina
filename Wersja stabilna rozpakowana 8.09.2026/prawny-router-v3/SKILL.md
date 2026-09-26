@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.52"
+version: "3.55"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -107,7 +107,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.52 (2026-09-16, F-189): references/legacy-material-router/cyberprzestepstwa.md — „art. 117 § 1 KC — 6 lat” → art. 118 KC (F-135). Treść routera bez zmian.…
+  Wersja bieżąca: 3.55 (2026-09-23, AUDYT-2026-09-23c): E-3/E-4 obowiązkowe przy BRAKU-AKTU w RZĘDZIE 1; ZASADA INNEJ DROGI zamiast zakazu obchodzenia blokad; SELF-CHECK OC-1 skala 0–10 — patrz references/CHANGELOG.md.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -161,9 +161,13 @@ w `dependencies.requires`; w przeciwnym razie zgłoś błąd ścieżki.
 
 ```
 UP-1: router→v3 ZAWSZE pierwszy (przed jakimkolwiek skillem dziedzinowym) — każda jurysdykcja
-UP-2: ISAP pierwszy — identyfikacja aktu i próba pobrania tekstu. Gdy pobranie
-      aktu lub tekstu niemożliwe: LEX / Legalis / ArsLege, zgodnie z
-      references/ZRODLA-AKTOW-FALLBACK.md. Weryfikuj KAŻDE powołanie online.
+UP-2: ELI PIERWSZY — kanon E-1…E-5 (shared/HIERARCHIA-ZRODEL.md):
+      E-1 ELI (api.sejm.gov.pl/eli kanałem kodu → eli.gov.pl) — brzmienie, t.j., status;
+      E-2 ISAP — wyłącznie adres dla człowieka i pomocnicza identyfikacja;
+      E-3 LEX / Legalis → E-4 ArsLege — gdy aktu nie da się pobrać z RZĘDU 1
+          (ELI ani ISAP: awaria serwera, timeout, blokada) — wtedy obowiązkowo;
+      E-5 ⚠️ [NIEWERYFIKOWANE]. Szczegóły: references/ZRODLA-AKTOW-FALLBACK.md.
+      Weryfikuj KAŻDE powołanie online; nigdy z pamięci.
 UP-3: Sprawy karne → KROK1-detekcja.md kieruje do dr-03; kwalifikacja przez
          view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 UP-4: HYBRID-VALIDATION przed każdym .docx
@@ -216,6 +220,15 @@ KROK 0D → [STATUS PODMIOTÓW — OZNACZENIE ⬛] → obowiązkowy gdy w materi
 KROK 1  → [DETEKCJA TRYBU + HARD GATE] → view references/KROK1-detekcja.md
 KROK 2  → [ROUTING [1]–[11]] → poniżej w tym pliku
 KROK 3  → Załaduj PRIMARY → SECONDARY → FALLBACK
+          ⛔ [R-3.54-a] Skill dziedzinowy (DR-01…DR-16) wczytuj PRZED weryfikacją
+          przepisów, nie po niej — to on wskazuje, które przepisy weryfikować.
+          Odroczenie DR-xx „do czasu weryfikacji” jest niedopuszczalne.
+          ⛔ [R-3.54-b] Gdy sprawa dotyczy odpowiedzi na wezwanie / zarządzenie
+          sądu: przed decyzją PRIMARY / ODRZUCONE odczytaj treść wezwania.
+          Wezwanie żądające stanowiska, twierdzeń lub wniosków dowodowych →
+          pisma-procesowe-v3; wyłącznie uzupełnienie braku formalnego lub
+          przedłożenie dokumentu → pisma-proste-v2. Powód odrzucenia w KROKU 3A
+          musi wskazywać, co wynika z treści wezwania.
 KROK 3A → [ŚLAD ROUTINGU — OBOWIĄZKOWY]
           Bezpośrednio po KROK 3, PRZED przejściem do KROK 4, wypisz blok:
           ```

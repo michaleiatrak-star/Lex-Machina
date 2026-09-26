@@ -313,7 +313,7 @@ TRZY RODZAJE ODSETEK — RÓŻNICE FUNDAMENTALNE:
   → web_search "odsetki transakcje handlowe 2026 ustawa opóźnienia stopa"
 
 STOPY (wymagają weryfikacji — zmienne!):
-  → isap.sejm.gov.pl → obwieszczenie MS ws. odsetek ustawowych
+  → ELI (RZĄD 1) → obwieszczenie MS ws. odsetek ustawowych
   → nbp.pl → stopa referencyjna (podstawa wyliczeń)
 
 PRAKTYCZNE: pozew o zapłatę = zawsze wskaż RODZAJ odsetek.

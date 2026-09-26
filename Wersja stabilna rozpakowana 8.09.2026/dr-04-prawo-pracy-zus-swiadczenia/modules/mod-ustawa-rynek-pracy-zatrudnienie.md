@@ -9,7 +9,7 @@
   Nowelizacje: Dz.U. 2025 poz. 1746, 1794; Dz.U. 2026 poz. 451, 507
   ✅ [VER: przepisy.gofin.pl/przepisy,2,18,30,8789, 2026-05-31]
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem.
 
 ## Zakres
 Nowa ustawa obowiązuje od 1 czerwca 2025 r. Zastąpiła całkowicie ustawę o promocji

@@ -46,7 +46,7 @@ Stanowisko Biura Pełnomocnika Rządu ds. Osób Niepełnosprawnych (źródło: f
 PODSTAWA KWALIFIKACJI: § 32 rozporządzenia Ministra Gospodarki, Pracy
 i Polityki Społecznej z dnia 15.07.2003 r. w sprawie orzekania
 o niepełnosprawności i stopniu niepełnosprawności
-(t.j. **Dz.U. 2026 poz. 677 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj aktualne Dz.U. w ISAP)
+(t.j. **Dz.U. 2026 poz. 677 t.j.** ✅ [VER] RZĄD 1 2026-09-10n — weryfikuj aktualne Dz.U. w ELI (RZĄD 1))
 ```
 
 ### I.2 Kryteria medyczne — definicja operacyjna
@@ -78,7 +78,7 @@ STOPNIE wg PZN i VademecumKadrowego.pl (wykładnia rozporządzenia):
   PRAWIE NIEWIDOMA (definicja funkcjonalna — nie prawna):
     ostrość ≤ 0,1 LUB pole ≤ 20 stopni niezależnie od ostrości
 
-WERYFIKUJ AKTUALNIE: isap.sejm.gov.pl → rozp. MGPiPS 15.07.2003
+WERYFIKUJ AKTUALNIE: ELI (RZĄD 1) → rozp. MGPiPS 15.07.2003
   → web_search: "§ 32 rozporządzenie orzekanie niepełnosprawności
     stopień wzrok 04-O aktualny tekst 2025 2026"
 ```
@@ -129,7 +129,7 @@ WAŻNE: "niewidomy" w KPK = osoba pozbawiona lub znacznie ograniczona
   w zakresie wzroku — interpretacja funkcjonalna, nie tylko formalna
   (osoba bez orzeczenia 04-O ale faktycznie niewidoma kwalifikuje się)
 
-WERYFIKUJ: isap.sejm.gov.pl → KPK Dz.U. 2026 poz. 490 art. 79
+WERYFIKUJ: ELI (RZĄD 1) → KPK Dz.U. 2026 poz. 490 art. 79
 ```
 
 ### II.2 Postępowanie CYWILNE
@@ -354,7 +354,7 @@ WERYFIKUJ: pzn.org.pl/baza-wiedzy/ulgi-i-przywileje
 ## ŹRÓDŁA
 
 ```
-PODSTAWY PRAWNE (weryfikuj aktualne t.j. w ISAP):
+PODSTAWY PRAWNE (weryfikuj aktualne t.j. w ELI (RZĄD 1)):
   KPK art. 79 §1 pkt 2 — obrońca obligatoryjny dla niewidomego
     isap.sejm.gov.pl → Dz.U. 2026 poz. 490
   KPC art. 157 §2 — zapis dźwięku z akt

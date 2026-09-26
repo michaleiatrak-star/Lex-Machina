@@ -67,7 +67,7 @@ Procedura:
   → Prezes Urzędu wydaje zgodę (lub odmawia)
   → Produkt może być wydany wyłącznie na receptę lekarza wnioskującego
 
-Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ISAP
+Podstawa prawna: art. 4 PF — weryfikuj aktualne brzmienie i procedurę w ELI (RZĄD 1)
 ```
 
 ---

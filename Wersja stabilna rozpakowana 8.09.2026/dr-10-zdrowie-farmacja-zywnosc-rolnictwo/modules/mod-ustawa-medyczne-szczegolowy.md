@@ -188,5 +188,5 @@ REKOMENDACJA: □ FKZM (do 200 000 zł, szybciej)  □ Pozew cywilny (bez limitu
 *Ustawa o pr. pacjenta (u.p.p.): Dz.U. 2024 poz. 581 t.j. | KC: Dz.U. 2026 poz. 795 t.j.*
 *KOZM ZLIKWIDOWANE 01.07.2024 | FKZM działa od 06.09.2023*
 *Kwoty FKZM: coroczna waloryzacja — weryfikuj aktualną wysokość: gov.pl/web/rpp*
-*Ustawa o zawodzie lekarza: weryfikuj aktualny t.j. w isap.sejm.gov.pl*
+*Ustawa o zawodzie lekarza: weryfikuj aktualny t.j. w ELI (RZĄD 1)*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

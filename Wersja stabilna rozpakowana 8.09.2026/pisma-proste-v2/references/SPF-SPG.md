@@ -31,7 +31,7 @@ niezbędny do wniesienia apelacji.*
 > ⚠ **UWAGA KRYTYCZNA:** Termin tygodniowy liczy się od dnia **ogłoszenia** wyroku
 > (przy wyroku wydanym na posiedzeniu jawnym), a od dnia **doręczenia** wyroku
 > — gdy wyrok wydano na posiedzeniu niejawnym lub doręcza się z urzędu (art. 328 §2 KPC).
-> Weryfikuj przepisy na isap.sejm.gov.pl.
+> Weryfikuj przepisy na ELI (RZĄD 1).
 
 ---
 
@@ -117,7 +117,7 @@ opłaty od pozwu (art. 69 ust. 2).*
 - **art. 68 pkt 1 KSCU** — opłata stała od wniosku o udzielenie, zmianę lub uchylenie zabezpieczenia: 100 zł
 - **art. 69 ust. 1–2 KSCU** — zabezpieczenie roszczenia pieniężnego przed wszczęciem: 1/4 opłaty od pozwu, zaliczana na poczet opłaty
 
-> ⚠ Weryfikuj przepisy na isap.sejm.gov.pl.
+> ⚠ Weryfikuj przepisy na ELI (RZĄD 1).
 
 ---
 

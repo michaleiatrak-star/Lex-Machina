@@ -7,7 +7,7 @@ Rzecznik Praw Pacjenta (RPP); odpowiedzialność zawodowa lekarza (izba lekarska
 ustawa o jakości w opiece zdrowotnej; NFZ — odmowy.
 
 **Weryfikacja:** 22.05.2026
-**Akty prawne — weryfikuj przed każdym powołaniem w isap.sejm.gov.pl:**
+**Akty prawne — weryfikuj przed każdym powołaniem w ELI (RZĄD 1):**
 - Ustawa o prawach pacjenta i RPP: **Dz.U. 2024 poz. 581 t.j.**
 - Ustawa o jakości w opiece zdrowotnej i bezpieczeństwie pacjenta: **Dz.U. 2023 poz. 1692**
 - KC (delikt, odszkodowanie): **Dz.U. 2026 poz. 795 t.j.**

@@ -7,7 +7,7 @@
 - UWAGA: Ustawa czesciowo deaktywowana przez DSA (Rozp. UE 2022/2065) - weryfikuj zakres!
   web_search: "DSA Digital Services Act Polska UUDE zakres stosowania 2024 2025"
 
-**Weryfikacja ISAP i eur-lex przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) i eur-lex przed kazdy cytowaniem.**
 
 ## Zakres
 Reguluje swiadczenie uslug droga elektroniczna (e-uslugi) przez dostawcow

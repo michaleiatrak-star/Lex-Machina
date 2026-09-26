@@ -8,7 +8,7 @@
 
 > Nigdy nie kwalifikuj czynu bez przejścia przez drzewo.
 > Każda kwalifikacja MUSI być oparta na chronologii faktów, nie na pierwszym pasującym przepisie.
-> Przepisy oznaczone ⚠️ weryfikuj w isap.sejm.gov.pl przed każdą analizą — zakaz cytowania z pamięci.
+> Przepisy oznaczone ⚠️ weryfikuj w ELI (RZĄD 1) przed każdą analizą — zakaz cytowania z pamięci.
 
 ---
 
@@ -85,7 +85,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 └─ PO zaborze, cel: WYMUSZENIE rozporządzenia mieniem / zaprzestania działalności
     └─ → ART. 282 KK — WYMUSZENIE ROZBÓJNICZE
          Kara: 1–10 lat pozbawienia wolności
-         ⚠️ Źródło: Dz.U.2025.383 t.j. — weryfikuj w ISAP
+         ⚠️ Źródło: Dz.U.2025.383 t.j. — weryfikuj w ELI (RZĄD 1)
          ⚠️ WĘZEŁ GRANICZNY 282 vs 191 §2 KK:
          → 282: żądanie mienia + przemoc/groźba
          → 191 §2: zmuszanie do zaprzestania działalności gospodarczej
@@ -97,7 +97,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 
 ```
 JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA?
-⚠️ Aktualny próg od 01.10.2023 — zawsze weryfikuj w isap.sejm.gov.pl
+⚠️ Aktualny próg od 01.10.2023 — zawsze weryfikuj w ELI (RZĄD 1)
 ⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U.2025.383 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
 │
 ├─ ≤ 800 zł → ART. 119 §1 KW — WYKROCZENIE KRADZIEŻY
@@ -327,7 +327,7 @@ CZY KIEROWCA BYŁ POD WPŁYWEM SUBSTANCJI?
 │           ─ wyjątek: szczególnie uzasadniony wypadek (ocena sądu)
 │       ⚠️ Recydywa: art. 178a §4 KK → 3 m-ce – 5 lat PW, zakaz min. 10 lat
 │           (dożywotni zakaz recydywy zakwestionowany przez TK 04.06.2024 — niekonstytucyjny)
-│       ⚠️ Weryfikuj progi: isap.sejm.gov.pl — ustawa o wychowaniu w trzeźwości
+│       ⚠️ Weryfikuj progi: ELI (RZĄD 1) — ustawa o wychowaniu w trzeźwości
 │
 └─ Wypadek drogowy (niezależnie od alkoholu):
     CZY NASTĄPIŁ SKUTEK?
@@ -352,14 +352,14 @@ START: Jaki był charakter działania sprawcy?
 │   ├─ TAK → ART. 190 §1 KK — GROŹBA KARALNA
 │   │   Kara: do 2 lat PW
 │   │   ⚠️ Tryb: prywatnoskargowy (po nowelizacji 2023 — sprawdź aktualny stan)
-│   │   Weryfikuj aktualny tryb ścigania: isap.sejm.gov.pl
+│   │   Weryfikuj aktualny tryb ścigania: ELI (RZĄD 1)
 │   └─ NIE → brak przestępstwa (subiektywne odczucie nie wystarczy)
 │
 ├─ POWTARZALNE NĘKANIE
 │   Czy wywołało poczucie zagrożenia lub istotnie naruszyło prywatność?
 │   └─ TAK → ART. 190a §1 KK — STALKING
 │       Kara: do 8 lat PW (po nowelizacji 2023 r.)
-│       ⚠️ Tryb: z urzędu (po nowelizacji 2023 r.) — weryfikuj isap.sejm.gov.pl
+│       ⚠️ Tryb: z urzędu (po nowelizacji 2023 r.) — weryfikuj ELI (RZĄD 1)
 │       OBRONA: brak powtarzalności / brak skutku / uzasadniony cel
 │       Plik referencyjny: /references/stalking-nekanie.md
 │
@@ -426,7 +426,7 @@ START: Czy czyn dotyczył systemów informatycznych lub danych?
 **Symptom:** Wartość zabranego towaru = 780 zł.
 **Błędna kwalifikacja:** art. 278 §1 KK
 **Prawidłowa kwalifikacja:** art. 119 §1 KW
-**Klucz:** Próg 800 zł od 01.10.2023 r. — weryfikuj zawsze w ISAP.
+**Klucz:** Próg 800 zł od 01.10.2023 r. — weryfikuj zawsze w ELI (RZĄD 1).
 **Pułapka:** Kartka z obliczeniami wartości = potencjalny dowód czynu ciągłego.
 
 ---
@@ -585,5 +585,5 @@ Przesłuchanie sprawcy lub świadka:
 *kwalifikator-karnomaterialny v1.1 · Moduł referencyjny dla prawo-polskie-v2*
 *Re-weryfikacja online: 21.05.2026 | KK Dz.U.2025.383 t.j. (wersja od 29.01.2026)*
 *Integracja: prawo-karne.md + wykroczenia.md + analiza-sadowa-v6 (Filtr #1)*
-*Weryfikacja przepisów: isap.sejm.gov.pl · Orzecznictwo: sn.pl, orzeczenia.ms.gov.pl*
+*Weryfikacja przepisów: ELI (RZĄD 1) · Orzecznictwo: sn.pl, orzeczenia.ms.gov.pl*
 *Zakaz cytowania z pamięci AI — każdy próg kwotowy i tryb ścigania weryfikuj przed analizą*

@@ -5,7 +5,7 @@
   ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
 - Rozporządzenie MS w sprawie szczegółowego trybu postępowania... (wzory formularzy)
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem.
 
 ## Zakres — wymogi formalne pisma procesowego (art. 126 KPC)
 

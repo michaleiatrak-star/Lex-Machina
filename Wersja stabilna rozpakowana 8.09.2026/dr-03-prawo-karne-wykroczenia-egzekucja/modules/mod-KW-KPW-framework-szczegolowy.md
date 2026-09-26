@@ -172,7 +172,7 @@ REKOMENDACJA: □ Sprzeciw od wyroku nakazowego  □ Rozprawa  □ Przyjąć man
 ## NOWE WYKROCZENIA DROGOWE 2026 — UZUPEŁNIENIE
 
 > Ustawa z 04.12.2025 r. (Dz.U. 2025 poz. 1872) — wejście w życie 29.01.2026 (cz. 30.03.2026)
-> Weryfikuj: isap.sejm.gov.pl → KW ze zm. Dz.U. 2025 poz. 1872
+> Weryfikuj: ELI (RZĄD 1) → KW ze zm. Dz.U. 2025 poz. 1872
 
 ```
 ART. 86c KW (NOWY — od 29.01.2026) — CELOWY DRIFT / POŚLIZG:

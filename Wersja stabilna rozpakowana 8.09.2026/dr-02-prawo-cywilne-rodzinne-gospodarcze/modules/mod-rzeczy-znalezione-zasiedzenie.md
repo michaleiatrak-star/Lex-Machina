@@ -323,7 +323,7 @@ RÓWNOLEGLE.
   IV CSK 117/12).
 - ⚠️ Odnotowana rozbieżność źródeł co do progu przy doliczaniu
   posiadania poprzednika w złej wierze (20 vs 30 lat) — wymaga
-  ostatecznej weryfikacji na ISAP.
+  ostatecznej weryfikacji w ELI (RZĄD 1).
 
 ---
 

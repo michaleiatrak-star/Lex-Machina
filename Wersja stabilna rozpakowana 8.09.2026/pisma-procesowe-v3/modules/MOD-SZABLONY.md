@@ -66,7 +66,9 @@ Pozwany:  [Imię Nazwisko / Nazwa spółki]
 Wartość przedmiotu sporu: [kwota cyframi] zł
 (słownie: [kwota słownie] złotych)
 
-Opłata sądowa: [kwota] zł (art. 13 §2 lub art. 27 KSCU)
+Opłata sądowa: [kwota] zł — ⛔ najpierw sprawdź ZWOLNIENIA (art. 94–103 KSCU),
+  potem kwotę z `shared/TABELE-OPLAT.md`; cap opłaty stosunkowej z art. 13 ust. 2
+  to 100 000 zł od 23.09.2025, nie 200 000 zł
                / wniosek o zwolnienie od kosztów w odrębnym piśmie
 
                               P O Z E W
@@ -112,7 +114,7 @@ doręczonego z uzasadnieniem dnia [data] r.
 
 **Reguły apelacji — obowiązkowo sprawdź:**
 - Termin: 14 dni od doręczenia wyroku z uzasadnieniem (art. 369 §1 KPC) — TERMIN ZAWITY
-- Wniosek o uzasadnienie: 7 dni od ogłoszenia wyroku (art. 328¹ KPC) — TERMIN ZAWITY (najpierw!)
+- Wniosek o uzasadnienie: tydzień od ogłoszenia wyroku, a gdy wyrok doręcza się z urzędu — od doręczenia (**art. 328 § 1 i § 2 KPC**; ⛔ jednostka 328[1] nie istnieje) — TERMIN ZAWITY (najpierw!)
 - Apelacja składana ZAWSZE za pośrednictwem sądu I instancji (art. 369 §3 KPC)
 - WPZ nie może przekraczać WPS z pozwu (art. 368 §2 KPC)
 
@@ -189,8 +191,11 @@ przez [Sąd] dnia [data] r., sygn. akt [sygnatura],
 doręczonego pozwanemu dnia [data] r.
 ```
 
-**Termin:** 14 dni od doręczenia nakazu (art. 503 §1 KPC) — TERMIN ZAWITY
-**Skutek:** nakaz traci moc, sprawa od początku (art. 505 KPC)
+**Termin:** **2 tygodnie** od doręczenia nakazu przy doręczeniu w kraju,
+**miesiąc** przy doręczeniu poza krajem na terytorium UE — **art. 480² § 2 pkt 1–2 KPC**.
+⛔ art. 503 KPC jest UCHYLONY; dopuszczalność sprzeciwu — art. 505 § 1 KPC,
+tryb — art. 480³ KPC.
+**Skutek:** nakaz traci moc w części zaskarżonej (art. 505 § 2 KPC)
 
 ---
 
@@ -201,7 +206,7 @@ Powód (Pracownik): [Imię Nazwisko], [Adres], PESEL: [nr]
 Pozwany (Pracodawca): [Pełna nazwa], [Adres], NIP: [nr]
 
 Wartość przedmiotu sporu: [kwota] zł
-(Sprawy pracownicze — zwolnienie z opłaty do WPS 50 000 zł, art. 96 §1 pkt 4 KSCU)
+(Sprawy pracownicze — pracownik zwolniony z kosztów sądowych **niezależnie od WPS**, art. 96 ust. 1 pkt 4 KSCU; próg 50 000 zł z art. 35 ust. 1 zd. 2 KSCU uruchamia opłatę dopiero od **apelacji**, nie od pozwu)
 
                               P O Z E W
 o [przywrócenie do pracy / odszkodowanie / zapłatę wynagrodzenia /

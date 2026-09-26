@@ -219,7 +219,7 @@ się na art. 169)
   3 miesiące-5 lat.
 
 Zweryfikowano online 2026-07-26 (lexlege.pl, przepisy.gofin.pl,
-dlajurysty.pl) — WERYFIKUJ aktualność na isap.sejm.gov.pl przed użyciem.
+dlajurysty.pl) — WERYFIKUJ aktualność na ELI (RZĄD 1) przed użyciem.
 
 ---
 

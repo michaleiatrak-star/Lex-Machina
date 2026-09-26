@@ -35,7 +35,7 @@ OD 01.01.2026: świadczenie wspierające przysługuje WSZYSTKIM z decyzją WZON
 |---|---|
 | Ustawa z dnia 7 lipca 2023 r. o świadczeniu wspierającym | Dz.U. 2023 poz. 1429 ze zm. |
 | Ustawa o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób niepełnosprawnych | Dz.U. 2026 poz. 884 t.j. ze zm. |
-| Rozp. MRPiPS w sprawie ustalania poziomu potrzeby wsparcia | Dz.U. 2023 — weryfikuj aktualny w ISAP |
+| Rozp. MRPiPS w sprawie ustalania poziomu potrzeby wsparcia | Dz.U. 2023 — weryfikuj aktualny w ELI (RZĄD 1) |
 
 ---
 
@@ -223,7 +223,7 @@ Złożenie po 3 miesiącach:
 | Upływ 3 miesięcy bez wniosku do ZUS | Utrata wyrównania wstecznego | Złóż wniosek do ZUS natychmiast po decyzji WZON |
 | Zaniżona punktacja | Niższe świadczenie przez 7 lat | Odwołanie do WZON + kompletna dokumentacja |
 | Pominięte schorzenia | Zaniżony wynik | Uzupełnij dokumentację przed wnioskiem |
-| Zmiana przepisów | Progi punktowe / kwoty / czas świadczenia w trakcie zmian | Weryfikuj aktualny stan ustawy w ISAP |
+| Zmiana przepisów | Progi punktowe / kwoty / czas świadczenia w trakcie zmian | Weryfikuj aktualny stan ustawy w ELI (RZĄD 1) |
 
 ---
 

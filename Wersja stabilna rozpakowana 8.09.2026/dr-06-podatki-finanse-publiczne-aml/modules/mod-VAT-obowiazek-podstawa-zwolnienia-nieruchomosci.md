@@ -170,7 +170,7 @@ Checklist praktyczny:
 □ Czy TRANSAKCJA nie jest OBJĘTA odrębnym reżimem szczególnym
   (WNT/WDT/import towarów/bony) WYMAGAJĄCYM odrębnej analizy
 
-⚠️ Weryfikuj aktualne brzmienie art. 19a w ISAP — przepis ma LICZNE
+⚠️ Weryfikuj aktualne brzmienie art. 19a w ELI (RZĄD 1) — przepis ma LICZNE
   ustępy Z odesłaniami krzyżowymi (1a, 1b, 4a i in.), CZĘSTO
   nowelizowane PRZY okazji zmian W innych obszarach (KSeF, bony,
   interfejsy elektroniczne) — SPRAWDŹ najnowszą WERSJĘ przy
@@ -385,7 +385,7 @@ Checklist praktyczny:
   (wypłacony DALSZEMU ogniwu łańcucha) — OBA typy MOGĄ obniżać
   podstawę, ALE wymagają INNEJ dokumentacji
 
-⚠️ Weryfikuj aktualne brzmienie art. 29a w ISAP — przepis BYŁ
+⚠️ Weryfikuj aktualne brzmienie art. 29a w ELI (RZĄD 1) — przepis BYŁ
   WIELOKROTNIE nowelizowany (SLIM VAT, KSeF, system KAUCYJNY) —
   SZCZEGÓLNIE sprawdź, CZY dana zmiana (np. ust. 13a, 15c) JUŻ
   WESZŁA w życie NA dzień analizy KONKRETNEJ sprawy.
@@ -576,7 +576,7 @@ Checklist praktyczny (nieruchomości):
 □ Czy TO nieruchomość ZABUDOWANA (pkt 10/10a) czy NIEZABUDOWANA (pkt
   9) — RÓŻNE reżimy, przy DZIAŁCE budowlanej brak ZWOLNIENIA w ogóle
 
-⚠️ Weryfikuj aktualne brzmienie art. 43 w ISAP — KATALOG jest
+⚠️ Weryfikuj aktualne brzmienie art. 43 w ELI (RZĄD 1) — KATALOG jest
   OBSZERNY (ust. 1 ma KILKADZIESIĄT punktów) i BYŁ wielokrotnie
   nowelizowany. Śledź TAKŻE projekt DEREGULACYJNY zmian W VAT
   planowanych OD 1.10.2026 (skład VAT, split PAYMENT, limit
@@ -755,7 +755,7 @@ Checklist praktyczny (DŁUŻNIK — obrona/zgodność):
   stosuj automatycznie DOSŁOWNEGO brzmienia art. 89b BEZ tej
   weryfikacji
 
-⚠️ Weryfikuj aktualne brzmienie art. 89a-89b w ISAP — SZCZEGÓLNIE
+⚠️ Weryfikuj aktualne brzmienie art. 89a-89b w ELI (RZĄD 1) — SZCZEGÓLNIE
   uważaj na STARSZE materiały cytujące WARUNKI sprzed nowelizacji
   1.10.2021 (WYMÓG statusu VAT dłużnika, WYŁĄCZENIE przy
   restrukturyzacji PO stronie wierzyciela) — TE wymogi ZOSTAŁY

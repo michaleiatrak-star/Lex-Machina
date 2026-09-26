@@ -7,7 +7,7 @@
   ✅ [VER: eur-lex.europa.eu, 2026-05-31]
 - Konwencja paryska, Układ PCT (patenty międzynarodowe)
 
-**Weryfikacja:** isap.sejm.gov.pl i uprp.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) i uprp.gov.pl przed każdym cytowaniem.
 
 ## Zakres
 **Patenty:** Ochrona wynalazku przez 20 lat. Warunki: nowość + poziom wynalazczy

@@ -22,7 +22,7 @@
 
 ## KLUCZOWE OBOWIĄZKI DEWELOPERA
 
-> ⚠️ Weryfikuj aktualne przepisy ustawy w ISAP — nowa ustawa deweloperska obowiązuje od 01.07.2022.
+> ⚠️ Weryfikuj aktualne przepisy ustawy w ELI (RZĄD 1) — nowa ustawa deweloperska obowiązuje od 01.07.2022.
 
 ```
 □ Mieszkaniowy rachunek powierniczy (MRP) — obowiązkowy dla nowych inwestycji
@@ -56,7 +56,7 @@ Nabywca: wyznacza dodatkowy termin ALBO
          odmawia odbioru (wada istotna) ALBO
          żąda obniżenia ceny
          
-⚠️ Terminy i procedury — weryfikuj aktualne przepisy ustawy w ISAP.
+⚠️ Terminy i procedury — weryfikuj aktualne przepisy ustawy w ELI (RZĄD 1).
 ```
 
 ---

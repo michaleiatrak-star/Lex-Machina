@@ -117,7 +117,7 @@ Reguła (ORKA-REG-02): Wymaganie dowodu tam, gdzie ustawa wymaga jedynie
 uprawdopodobnienia, jest wykładnią zbyt rygorystyczną i naruszeniem przepisu.
 Zastosowanie: zaświadczenia lekarskie, oświadczenia stron, pisemne potwierdzenia
 zamiast aktów urzędowych — tam gdzie ustawa wyraźnie tego nie wymaga.
-Weryfikuj: aktualne art. KPA, KPC, KPK w ISAP → różne wymagania per tryb
+Weryfikuj: aktualne art. KPA, KPC, KPK w ELI (RZĄD 1) → różne wymagania per tryb
 ```
 
 ### BAS-008 — Mienie komunalne

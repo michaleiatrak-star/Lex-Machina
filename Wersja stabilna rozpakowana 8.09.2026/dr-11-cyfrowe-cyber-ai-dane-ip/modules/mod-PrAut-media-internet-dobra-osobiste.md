@@ -1,6 +1,6 @@
 # mod-CZ-ip-media-internet-dobra-osobiste.md — IP, media, Internet, dobra osobiste i platformy
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
 - Prawo autorskie

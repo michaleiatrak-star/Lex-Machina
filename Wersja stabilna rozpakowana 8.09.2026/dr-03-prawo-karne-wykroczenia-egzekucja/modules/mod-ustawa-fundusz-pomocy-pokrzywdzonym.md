@@ -11,7 +11,7 @@
   ✅ [VER] RZĄD 1 2026-09-16 (ELI: t.j. obowiązujący; pierwotny Dz.U. 2017 poz. 1760 ma status
   „akt posiada tekst jednolity" — powoływać t.j.)
 
-**Weryfikacja: isap.sejm.gov.pl i sprawiedliwosc.gov.pl/fundusz-sprawiedliwosci**
+**Weryfikacja: ELI (RZĄD 1) i sprawiedliwosc.gov.pl/fundusz-sprawiedliwosci**
 
 ## Zakres — Kompensata państwowa
 Ofiara może otrzymać kompensatę od Skarbu Państwa gdy:

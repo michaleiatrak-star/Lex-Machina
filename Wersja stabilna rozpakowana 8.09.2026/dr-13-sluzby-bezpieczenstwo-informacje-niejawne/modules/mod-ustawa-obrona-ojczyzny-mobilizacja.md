@@ -132,7 +132,7 @@ Ustawa o obronie Ojczyzny:
   ✅ VER: isap.sejm.gov.pl (WDU20250000825) 2026-08-14 (F-57) — koryguje poprzedni
     błędny zapis tego modułu, który mimo poprawki mapy z 2026-07-02 nadal podawał
     2022.655 jako podstawę
-  ⚠️ weryfikuj każdą kolejną zmianę w ISAP przed powołaniem
+  ⚠️ weryfikuj każdą kolejną zmianę w ELI (RZĄD 1) przed powołaniem
 
 Kluczowe procedury:
   Kwalifikacja wojskowa i rekrutacja — WCR (Wojskowe Centrum Rekrutacji):
@@ -153,7 +153,7 @@ Kluczowe procedury:
 
   Świadczenia na rzecz obrony (rekwizycja):
     → Decyzja wójta / starosty / Wojewody
-    → Odszkodowanie za rekwizycję — weryfikuj przepisy w ISAP
+    → Odszkodowanie za rekwizycję — weryfikuj przepisy w ELI (RZĄD 1)
     → Zaskarżenie: odwołanie → WSA
 
   Wydatki na obronę: docelowo 5% PKB — aktualizuj ze źródeł

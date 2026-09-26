@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.56"
+version: "3.58"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -51,8 +51,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -60,8 +60,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ISAP**
-- Źródło podstawowe: ISAP; LEX/Legalis dopuszczalne wyłącznie pomocniczo
+- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
 
 ## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
 
@@ -583,7 +583,7 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                apelacja vs zażalenie [518 — kryterium ISTOTY SPRAWY],
                skarga kasacyjna [519(1) — katalog CZĘŚCIOWY].
                UWAGA: źródło Rzędu 2 (5 niezależnych serwisów),
-               znacznik [ZALECANA WERYFIKACJA ISAP]; jednostki, których
+               znacznik [ZALECANA WERYFIKACJA RZĄD 1]; jednostki, których
                NUMERU nie odczytano, oznaczone w module jako [NR ?].
                v1.0.0 = TYLKO część ogólna — sprawy spadkowe, rzeczowe,
                wieczystoksięgowe i ubezwłasnowolnienie NADAL NIEPOKRYTE)
@@ -670,7 +670,7 @@ view dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-POKRYCIA.md
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2` / `analizator-umow-v1`
 - mod-KRO-rodzinne (sprawy rozwodowe, świadkowie) → `shared/MOD-ATAK-NA-SWIADKA.md` (kanoniczne techniki
   ataku/obrony wiarygodności świadka) oraz `przesluchanie-swiadkow-v2-min90` (przygotowanie przesłuchania)
-- Weryfikacja prawa: isap.sejm.gov.pl
+- Weryfikacja prawa: ELI (RZĄD 1)
 - Orzecznictwo: orzeczenia.ms.gov.pl, sn.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)

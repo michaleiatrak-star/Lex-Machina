@@ -6,7 +6,7 @@
   ✅ VER: ELI/ISAP WDU20260000015 [2026-08-25]
 - Poprzednie t.j.: Dz.U. 2025 poz. 450 i Dz.U. 2024 poz. 814
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Zakres
 Warunki i zasady wykonywania zawodow pielegniarki i poloznej.

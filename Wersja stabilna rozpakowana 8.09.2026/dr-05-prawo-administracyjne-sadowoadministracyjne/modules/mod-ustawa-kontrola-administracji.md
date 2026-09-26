@@ -70,5 +70,5 @@ Zalecenia pokontrolne:
 Ustawa o kontroli w administracji rządowej: Dz.U. 2026 poz. 158 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   ⛔ ADNOTACJA NIEPRAWDZIWA — skorygowana 2026-09-10o: nowszy tekst jednolity ZOSTAŁ ogłoszony. Aktualny: **Dz.U. 2026 poz. 158** ✅ [VER] RZĄD 1 2026-09-10o, zero nowelizacji po nim; `2020/224` ma status *wygaśnięcie aktu*
-  → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20200000224
+  → Weryfikuj zmiany po t.j. w ELI (RZĄD 1): isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20200000224
 ```

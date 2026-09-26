@@ -69,7 +69,7 @@ KROK 0A.5 → Dopiero po odpowiedzi (lub znaczniku sesji) → przejdź do KROK 1
 ## PYTANIE ANONIMIZACYJNE (zadaj DOSŁOWNIE, zakończ odpowiedź)
 
 ```
-📋 Wykryłem w przesłanym dokumencie dane osobowe (imiona, adresy, numery identyfikacyjne).
+📋 W przesłanym materiale wykryto dane osobowe (imiona, adresy, numery identyfikacyjne).
 
 Czy chcesz je zanonimizować przed analizą?
 a) Tak — uruchom narzędzie anonimizacji (zalecane ze względów RODO)
@@ -83,6 +83,34 @@ Zanonimizowany dokument trafi automatycznie do analizy.
 > zero kwalifikacji — nawet "na razie". Czekaj na a/b.
 
 "a"/tak → widget | "b"/nie → decyzja_sesji='raw' → KROK 1
+
+---
+
+## ŚCIEŻKA FOLDER / DYSK (Cowork, folder kontekstu, >3 pliki) — od routera 3.54
+
+Widżet nie widzi plików z dysku, więc przy materiałach z folderu pytanie
+brzmi (zamiast wersji powyżej, DOSŁOWNIE, zakończ odpowiedź):
+
+```
+📋 W materiałach sprawy wykryto dane osobowe (imiona i nazwiska, adresy, dane
+finansowe, dokumentacja medyczna). Widżet anonimizacji nie odczyta plików
+z dysku, dlatego do wyboru są:
+a) Anonimizacja skryptem — kopie robocze z danymi zastąpionymi znacznikami;
+   analiza wyłącznie na kopiach, oryginały bez zmian
+b) Analiza bez anonimizacji — dane pozostają w plikach na dysku,
+   w raportach stosowane są inicjały
+c) Samodzielna anonimizacja — przygotujesz zanonimizowane pliki i wskażesz folder
+```
+
+Wykrycie sygnałów (0A.2) w tej ścieżce ogranicza się do nazw plików, metadanych
+i skanu automatycznego skryptem — **nie** do czytania treści przez model.
+
+„a” → skrypt (regex + słownik nazw z metadanych/nagłówków) tworzy kopie w
+katalogu roboczym; model odczytuje **wyłącznie kopie**. Skrypt drukuje tylko
+statystykę zamian, nie treść. decyzja_sesji='anon'.
+⛔ Zakaz odczytu oryginałów przez model przed zamknięciem 0A „dla przygotowania
+anonimizacji”. Jeżeli odczyt był konieczny, zgłoś to PRZED analizą, jako
+naruszenie bramki, a nie jako informację po fakcie.
 
 ---
 

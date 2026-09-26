@@ -63,7 +63,7 @@ SKARGA DO WSA — dopiero PO decyzji Prezesa PFRON, nie zamiast niej:
     (nie WSA lokalny wg miejsca zamieszkania — częsty błąd praktyczny)
   → Tryb PPSA ogólny (skarga na decyzję administracyjną)
 
-OBOWIĄZKI PODMIOTÓW PUBLICZNYCH (weryfikuj aktualne przepisy w ISAP):
+OBOWIĄZKI PODMIOTÓW PUBLICZNYCH (weryfikuj aktualne przepisy w ELI (RZĄD 1)):
   □ Dostępność architektoniczna (bez barier fizycznych)
   □ Dostępność cyfrowa (WCAG 2.1 — strony internetowe i aplikacje mobilne)
   □ Dostępność informacyjno-komunikacyjna (alternatywne formaty, tłumacz migowy)
@@ -81,4 +81,4 @@ OBOWIĄZKI PODMIOTÓW PUBLICZNYCH (weryfikuj aktualne przepisy w ISAP):
 
 **Powiązania:** `dr-04` → `mod-ustawa-rehabilitacja-PFRON` | `mod-ustawa-RPO` | `pisma-procesowe-v3` | `dr-10/mod-ustawa-edukacja-specjalna-dostepnosc` (pełne omówienie trybu + styk z edukacją specjalną)
 
-**Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190001696 (akt pierwotny) — zweryfikuj aktualny t.j. w ISAP przed cytowaniem
+**Źródła:** https://ELI (RZĄD 1)/isap.nsf/DocDetails.xsp?id=WDU20190001696 (akt pierwotny) — zweryfikuj aktualny t.j. w ISAP przed cytowaniem

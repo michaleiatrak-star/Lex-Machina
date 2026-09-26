@@ -1,6 +1,6 @@
 # mod-BX-policja-procedury-wewnetrzne.md — Policja — procedury wewnętrzne, czynności służbowe i kontrola
 
-Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
+Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-05-28. Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw; LEX/Legalis dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo dla komentarza.
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa o Policji
@@ -184,7 +184,7 @@ Ustawa o środkach przymusu bezpośredniego i broni palnej:
   — poprzednie t.j. Dz.U. 2023 poz. 202 i Dz.U. 2025 poz. 555 NIEAKTUALNE,
     zastąpione przez t.j. 2026.244
   ✅ VER: isap.sejm.gov.pl, inforlex.pl (Dz.U. 2026 poz. 244) 2026-08-14 (F-57)
-  ⚠️ weryfikuj dalsze zm. w ISAP przed każdym powołaniem
+  ⚠️ weryfikuj dalsze zm. w ELI (RZĄD 1) przed każdym powołaniem
 
 Odpowiedzialność odszkodowawcza Skarbu Państwa za działania Policji:
   → Art. 417 KC (delikt władzy publicznej)

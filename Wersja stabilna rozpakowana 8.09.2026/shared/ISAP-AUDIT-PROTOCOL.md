@@ -1,26 +1,27 @@
 # ISAP-AUDIT-PROTOCOL — protokół aktualności prawa
 
 **Data wdrożenia:** 2026-05-28
-**Aktualizacja:** 2026-09-14 (v1.1) — zniesiona wyłączność ISAP; katalog RZĘDU 1
+**Aktualizacja:** 2026-09-23 (v1.2) — kolejność wg KANONU E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` v1.10): ELI pierwszy, ISAP adres dla człowieka.
+**Aktualizacja poprzednia:** 2026-09-14 (v1.1) — zniesiona wyłączność ISAP; katalog RZĘDU 1
 zgodny z `shared/HIERARCHIA-ZRODEL.md` v1.7 i `shared/PRAWO-HARDGATE.md` v2.5.
 
 > ⛔ HARD GATE — wczytaj view shared/PRAWO-HARDGATE.md przed pierwszym przepisem w każdej odpowiedzi.
 
 ## Zasada nadrzędna
 
-Nie wolno powoływać przepisów, numerów Dz.U., dat wejścia w życie ani statusów aktów prawnych z pamięci modelu. Dopuszczalne źródła dla polskich aktów prawnych — publikatory urzędowe RZĘDU 1:
+Nie wolno powoływać przepisów, numerów Dz.U., dat wejścia w życie ani statusów aktów prawnych z pamięci modelu. Dopuszczalne źródła dla polskich aktów prawnych — publikatory urzędowe RZĘDU 1, w kolejności użycia (kanon E-1…E-5):
 
-- `isap.sejm.gov.pl` — priorytet co do mocy
-- `eli.gov.pl` — urzędowy portal ELI dla Dz.U., równorzędny co do mocy
-- `api.sejm.gov.pl/eli/...` — warstwa strukturalna (Dz.U. i M.P.)
+- `api.sejm.gov.pl/eli/...` — **E-1, kanał podstawowy**: brzmienie (`text.pdf` t.j.), metryka, status, zmiany (Dz.U. i M.P.)
+- `eli.gov.pl` — urzędowy portal ELI dla Dz.U. (E-1, gdy host nie ma kanału kodu: B-1 → B-2)
+- `isap.sejm.gov.pl` — **E-2: adres dla człowieka** i pomocnicza identyfikacja; ta sama moc, ale kanał maszynowy martwy
 - `dziennikustaw.gov.pl`, `monitorpolski.gov.pl` — ten sam publikator, inny gospodarz
 - `dziennikiurzedowe.gov.pl` — dzienniki resortowe i wojewódzkie (akty prawa miejscowego)
 
 ⛔ Osiągalność ≠ moc. Który z tych hostów odpowiada w danym środowisku i w
 którym kanale (`web_fetch` / wykonanie kodu) — rozstrzyga tabela kanałów w
 `shared/HIERARCHIA-ZRODEL.md`. Nie zakładaj dostępności żadnego z nich;
-zmierz ją. ⛔ Źródła komercyjne (lexlege, prawo.pl, arslege) NIE należą do
-RZĘDU 1 i nie zastępują publikatora.
+zmierz ją. ⛔ Źródła komercyjne (LEX/Legalis — E-3; lexlege, prawo.pl, arslege — E-4) NIE należą do
+RZĘDU 1 i nie zastępują publikatora; sięga się po nie, gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada, brak kanału) — wtedy obowiązkowo.
 
 ## Sekwencja obowiązkowa
 

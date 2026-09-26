@@ -93,7 +93,7 @@ KSeF (Krajowy System e-Faktur) — HARMONOGRAM WDROŻENIA:
   Certyfikat wystawcy faktury: dostępny od 01.11.2025 (ważny 2 lata)
   Tryb offline (awaryjny): umożliwia wystawienie poza systemem + przesłanie do następnego dnia roboczego
 
-  Podstawa: Ustawa z 5.08.2025 r. o KSeF — weryfikuj w ISAP
+  Podstawa: Ustawa z 5.08.2025 r. o KSeF — weryfikuj w ELI (RZĄD 1)
   web_search: "KSeF obowiązkowy termin 2026 ustawa Dz.U. 2025 MF aktualna"
 ```
 

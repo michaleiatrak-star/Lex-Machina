@@ -1,7 +1,7 @@
 # MOD-NAZEWNICTWO-STRON — Tabele nazewnictwa stron, wymogi formalne i wzory nagłówków pism
 
 > Wersja: 1.0.0 | Wywoływany z: MOD-LAPSUS-AUDYT.md (KROK L0) + BLOK-NAZW + pisma-procesowe-v3
-> ⚠ HARDGATE: podstawy prawne wymagają weryfikacji w ISAP przed powołaniem w piśmie
+> ⚠ HARDGATE: podstawy prawne wymagają weryfikacji w ELI (RZĄD 1) przed powołaniem w piśmie
 
 ---
 
@@ -423,7 +423,7 @@ natychmiastowego zaprzestania następujących działań:
 
 2. [KONKRETNE DZIAŁANIE 2 — analogicznie]
 
-Powyższe działania naruszają [wskazać konkretne dobro / przepis — po weryfikacji ISAP].
+Powyższe działania naruszają [wskazać konkretne dobro / przepis — po weryfikacji w ELI (RZĄD 1)].
 
 Wzywam do zaprzestania ww. działań w terminie natychmiastowym.
 W przypadku kontynuowania naruszeń [klient] rozważy skierowanie

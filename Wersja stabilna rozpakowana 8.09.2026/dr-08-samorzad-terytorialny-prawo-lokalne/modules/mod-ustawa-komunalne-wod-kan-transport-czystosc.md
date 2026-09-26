@@ -32,7 +32,7 @@ Umowa z odbiorcą:
   → Wodomierz: przedsiębiorstwo zapewnia i kalibruje
 
 Prawo do niższej opłaty:
-  → Przy udokumentowanym przecieku za wodomierzem — weryfikuj przepisy w ISAP
+  → Przy udokumentowanym przecieku za wodomierzem — weryfikuj przepisy w ELI (RZĄD 1)
 ```
 
 ---
@@ -50,7 +50,7 @@ Plan transportowy: obowiązkowy dla gmin ≥ 50 000 mieszkańców
   → Aktualizacja: co 4 lata
 
 Ulgi ustawowe: 20%, 37%, 49%, 78%, 100% — rekompensata z budżetu państwa
-  ⚠️ Weryfikuj aktualny katalog uprawnionych w ISAP
+  ⚠️ Weryfikuj aktualny katalog uprawnionych w ELI (RZĄD 1)
 ```
 
 ---

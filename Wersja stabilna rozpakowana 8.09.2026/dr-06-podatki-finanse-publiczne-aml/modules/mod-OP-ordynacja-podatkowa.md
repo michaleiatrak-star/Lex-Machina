@@ -26,7 +26,7 @@ Postępowanie podatkowe (Op), terminy zawite i przedawnienie, korekta deklaracji
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Ordynacja podatkowa (Op) | **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) | Najnowszy tekst jednolity — weryfikuj zmiany w ISAP |
+| Ordynacja podatkowa (Op) | **Dz.U. 2026 poz. 622** (t.j. kwiecień 2026) | Najnowszy tekst jednolity — weryfikuj zmiany w ELI (RZĄD 1) |
 | Kodeks karny skarbowy (KKS) | Dz.U. 2025 poz. 633 t.j. | |
 | PPSA | Dz.U. 2026 poz. 143 t.j. | Dla skargi do WSA/NSA |
 
@@ -63,7 +63,7 @@ Korekta deklaracji:                zawieszona po wszczęciu postępowania/kontro
 Wniosek o interpretację indyw.:    3 miesiące na wydanie (art. 14d Op)
 Czynny żal (KKS):                  PRZED wszczęciem postępowania przez organ
 Przedawnienie zobowiązania:        5 lat od końca roku cal. (art. 70 §1 Op)
-⚠️ Weryfikuj aktualne brzmienie każdego przepisu w ISAP.
+⚠️ Weryfikuj aktualne brzmienie każdego przepisu w ELI (RZĄD 1).
 ```
 
 ### Ścieżki odwoławcze
@@ -768,7 +768,7 @@ KOREKTA DEKLARACJI jako forma czynnego żalu:
 Organ podatkowy może wydać decyzję o zabezpieczeniu przed wydaniem decyzji ustalającej:
   → Gdy zachodzi uzasadniona obawa, że zobowiązanie nie zostanie wykonane
   → Formy: hipoteka przymusowa, zastaw skarbowy, blokada rachunku
-  ⚠️ Weryfikuj przesłanki i tryb w aktualnym art. 33 Op w ISAP
+  ⚠️ Weryfikuj przesłanki i tryb w aktualnym art. 33 Op w ELI (RZĄD 1)
 ```
 
 ---
@@ -879,7 +879,7 @@ REKOMENDACJA: □ Odwołanie  □ Skarga do WSA  □ Korekta  □ Czynny żal  �
 
 ## ANEKS — ODSETKI ZA ZWŁOKĘ I TRYB OBNIŻENIA
 
-### Stawki odsetek (art. 56 i n. Op — weryfikuj aktualne w ISAP)
+### Stawki odsetek (art. 56 i n. Op — weryfikuj aktualne w ELI (RZĄD 1))
 
 ```
 Odsetki standardowe:
@@ -892,11 +892,11 @@ Odsetki obniżone do 50% stawki standardowej:
     do złożenia deklaracji (rok podatkowy) LUB w ciągu 6 miesięcy od wykrycia
     błędu przez podatnika
   □ Zaległość wpłacona w ciągu 7 dni od dnia złożenia korekty
-  ⚠️ Weryfikuj aktualne warunki w art. 56a Op w ISAP.
+  ⚠️ Weryfikuj aktualne warunki w art. 56a Op w ELI (RZĄD 1).
 
 Odsetki podwyższone (200%):
   → Przy zaległościach z tytułu VAT i akcyzy (wykryte przez organ)
-  → Weryfikuj aktualny art. 56b Op w ISAP.
+  → Weryfikuj aktualny art. 56b Op w ELI (RZĄD 1).
 ```
 
 ### Kalkulator odsetek

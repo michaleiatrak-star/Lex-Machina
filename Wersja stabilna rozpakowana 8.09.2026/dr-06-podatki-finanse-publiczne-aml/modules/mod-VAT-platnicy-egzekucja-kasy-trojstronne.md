@@ -5,7 +5,7 @@
 >
 > ⛔ **HARD GATE — patrz `shared/PRAWO-HARDGATE.md`.** Kwoty ulg, progów i kar
 > zmieniają się nowelizacjami i rozporządzeniami — każda liczba w tym module
-> jest PUNKTEM STARTOWYM wymagającym weryfikacji w ISAP na datę czynności.
+> jest PUNKTEM STARTOWYM wymagającym weryfikacji w ELI (RZĄD 1) na datę czynności.
 >
 > ⚠️ **PRZYPOMNIENIE GLOBALNE RODZINY mod-VAT-*:** termin podstawowy zwrotu
 > różnicy podatku wynosi **40 dni** (art. 87 ust. 2 zd. 1), **NIE 60**.

@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: "3.28"
+version: "3.30"
 description: "Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje, bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -51,8 +51,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -60,8 +60,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ISAP**
-- Źródło podstawowe: ISAP; LEX/Legalis dopuszczalne wyłącznie pomocniczo
+- **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
 
 ## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
 
@@ -291,7 +291,7 @@ view dr-05-prawo-administracyjne-sadowoadministracyjne/MAPA-POKRYCIA.md
 - KPA / PPSA: teraz KANONICZNIE tutaj → `mod-KPA-postepowanie-administracyjne` (PRZENIESIONY 2026-07-19 z DR-04)
 - Cudzoziemcy (prawo pracy): `dr-04` → `mod-ustawa-cudzoziemcy`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja prawa: isap.sejm.gov.pl
+- Weryfikacja prawa: ELI (RZĄD 1)
 - Orzecznictwo: orzeczenia.nsa.gov.pl, cbosa.nsa.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.46 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (30 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 3.45 (2026-09-16, F-189): mod-grzywny-mandaty-szczegolowe — art. 189g KPA według brzmienia: kara nie może być NAŁOŻONA po 5 latach (§ 1), nie podlega EGZEKUCJI po 5 latach (§ 3) — nie „przedawnienie wszczęcia” (F-135, RZĄD 1).
 - 3.44 (2026-09-16, F-189): F-135 (RZĄD 1 — KKS 2025/633): mod-KKS-karny-skarbowy-i-AML — nowa sekcja 1a „Terminy i progi KKS”, poz. 2026/421 i daty szczegółowe 2026/846 (uchylenie art. 16b od 1.10.2026; mandat zaoczny od 26.12.2026); mod-czynny-zal-KK-KKS-samooskarzenie — art. 16 § 4–6 (forma, bezskuteczność, wyłączenia), art. 16a § 3 z odczytu, ⛔ korekta: art. 16 KKS nie odsyła do usiłowania (art. 21 § 3 KKS → art. 15 KK).
 - 3.43 (2026-09-16, F-189): mod-KK-cyberprzestepstwa-szczegolowy — „art. 117 § 1 KC — 6 lat” → art. 118 KC (art. 117 nie podaje terminu; F-135, RZĄD 1).

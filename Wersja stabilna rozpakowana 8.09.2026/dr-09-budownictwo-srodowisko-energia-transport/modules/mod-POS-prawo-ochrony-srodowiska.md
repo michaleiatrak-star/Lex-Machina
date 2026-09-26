@@ -141,7 +141,7 @@ Inwestycja na obszarze Natura 2000
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji
 online w ISAP / orzeczenia.nsa.gov.pl / sn.pl przed powołaniem.*
 *Weryfikacja: 22.05.2026 | UOOŚiS: Dz.U. 2024 poz. 1112 t.j. | POŚ: Dz.U. 2025 poz. 647 t.j. | Ochrona przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 ✅ VER: 2026-06-05 (poprzedni: Dz.U. 2024 poz. 1478) | KK: Dz.U. 2025 poz. 383 t.j.*
-*Zakaz cytowania przepisów i kar z pamięci — każdy artykuł weryfikuj w isap.sejm.gov.pl*
+*Zakaz cytowania przepisów i kar z pamięci — każdy artykuł weryfikuj w ELI (RZĄD 1)*
 
 ---
 

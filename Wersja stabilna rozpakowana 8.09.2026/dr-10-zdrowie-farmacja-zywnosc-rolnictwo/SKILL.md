@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.46"
+version: "3.47"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, stawki, wymogu formalnego lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, kary, stawki refundacyjnej, dopłaty ani sygnatury wyłącznie z pamięci modelu.
 
@@ -50,8 +50,8 @@ Wykaz leków refundowanych: aktualizowany co 3 miesiące — zawsze sprawdzaj mz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -242,7 +242,7 @@ view dr-10-zdrowie-farmacja-zywnosc-rolnictwo/MAPA-AKTOW.md
 - Prawo pracy (personel medyczny, lekarze rezydenci) → `dr-04`
 - RODO w placówkach medycznych → `dr-11`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja: isap.sejm.gov.pl | urpl.gov.pl | gif.gov.pl | eur-lex.europa.eu | mz.gov.pl
+- Weryfikacja: ELI (RZĄD 1) | urpl.gov.pl | gif.gov.pl | eur-lex.europa.eu | mz.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)
 

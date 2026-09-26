@@ -6,7 +6,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
 - metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
 - jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
-- ⚠️ ZAKAZ podawania taksyz pamięci — weryfikuj aktualne rozp. MS w ISAP.
+- ⚠️ ZAKAZ podawania taksyz pamięci — weryfikuj aktualne rozp. MS w ELI (RZĄD 1).
 ---
 
 **Zakres:** czynności notarialne (akty notarialne, poświadczenia, depozyty, protesty weksli),
@@ -25,7 +25,7 @@ Prawo o notariacie:
     Dz.U. 2025 poz. 497, 621, 622, 769, 820, 1203
     Dz.U. 2026 poz. 252, 347, 473
   ✅ VER: 2026-07-02
-  → ZAWSZE weryfikuj aktualną wersję w ISAP przed cytowaniem
+  → ZAWSZE weryfikuj aktualną wersję w ELI (RZĄD 1) przed cytowaniem
 
 Postępowanie dyscyplinarne notariuszy — Prawo o notariacie, Rozdział 6
   "Odpowiedzialność dyscyplinarna", art. 50-63c:
@@ -40,14 +40,14 @@ Postępowanie dyscyplinarne notariuszy — Prawo o notariacie, Rozdział 6
 
 Taksa notarialna:
   Rozp. MS w spr. maksymalnych stawek taksy notarialnej
-  → Weryfikuj AKTUALNE stawki w ISAP przed podaniem kwoty
+  → Weryfikuj AKTUALNE stawki w ELI (RZĄD 1) przed podaniem kwoty
   web_search: "taksa notarialna rozporządzenie Ministra Sprawiedliwości 2025 2026 isap"
 
 KPC art. 777 §1 pkt 4 i 5 — akt notarialny jako tytuł egzekucyjny:
-  Dz.U. 2026 poz. 468 t.j. — weryfikuj w ISAP
+  Dz.U. 2026 poz. 468 t.j. — weryfikuj w ELI (RZĄD 1)
 
 KC art. 158 — obowiązkowa forma notarialna przeniesienia własności nieruchomości:
-  Dz.U. 2026 poz. 795 t.j. ze zm. — weryfikuj w ISAP
+  Dz.U. 2026 poz. 795 t.j. ze zm. — weryfikuj w ELI (RZĄD 1)
 ```
 
 ## ZASADY ABSOLUTNE
@@ -109,7 +109,7 @@ Strategia: ostrożny / ofensywny / eskalacyjny
 
 ```text
 □ prawidłowy tryb i organ
-□ termin na zaskarżenie odmowy notariusza (weryfikuj w ISAP)
+□ termin na zaskarżenie odmowy notariusza (weryfikuj w ELI (RZĄD 1))
 □ legitymacja strony
 □ żądanie możliwe prawnie
 □ fakty powiązane z normą

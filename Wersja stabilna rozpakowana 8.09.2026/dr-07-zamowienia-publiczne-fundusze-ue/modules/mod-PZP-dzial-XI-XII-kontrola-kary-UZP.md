@@ -182,4 +182,4 @@ zawiadomienie rzecznika dyscypliny finansów publicznych), wysokość kar
 kolizyjna. Odnotowano niepewność: dokładna tabela progów kar w zależności
 od wartości zamówienia, dokładny próg dla dostaw/usług przy kontroli
 uprzedniej, termin na zastrzeżenia zamawiającego — wszystkie oznaczone
-do weryfikacji na ISAP.
+do weryfikacji w ELI (RZĄD 1).

@@ -1,7 +1,7 @@
 # WIDGET-MENU — Interaktywne menu wyboru elementów audytu
 
-> **13 pozycji**. Pozycja 11 tworzy zadanie cykliczne, pozycja 13 synchronizuje
-> pamięć routera; obie są akcjami, nie fazami audytu.
+> **13 pozycji**. Pozycja 11 tworzy zadanie cykliczne, pozycja 13 sprawdza zgodność
+> preferencji z kontraktem routera; obie są akcjami, nie fazami audytu.
 
 ## Cel
 Widget React renderowany przez `show_widget` — pozwala użytkownikowi wybrać jeden lub więcej elementów audytu przed jego uruchomieniem. Eliminuje potrzebę przepisywania poleceń tekstowych.
@@ -112,8 +112,8 @@ const AUDIT_ITEMS = [
   {
     id: "pamiec-trwala",
     group: "Automatyzacja",
-    label: "🧠 Pamięć trwała — instrukcje routera",
-    desc: "Porównaj i po zgodzie zsynchronizuj krytyczny kontrakt routera",
+    label: "🧠 Kontrakt routera w preferencjach",
+    desc: "Porównaj preferencje z UP routera i zaproponuj tekst do Ustawień (bez zapisu do pamięci)",
     phase: "PAMIEC-TRWALA-ROUTER.md"
   }
 ];
@@ -280,16 +280,15 @@ najpierw audyt, a utworzenie zadania na końcu, żeby propozycja opierała się 
 
 ## Pozycja 13 — obsługa wyboru
 
-Pozycja **13 (`pamiec-trwala`) nie audytuje niczego**:
+Pozycja **13 (`pamiec-trwala`) nie audytuje niczego i niczego nie zapisuje**:
 
 1. Wczytaj `references/PAMIEC-TRWALA-ROUTER.md`.
-2. Odczytaj wersję routera i wydzieloną sekcję trwałych preferencji.
-3. Pokaż użytkownikowi dokładny diff i pełną treść docelową; zakończ turę.
-4. Po akceptacji zastąp tylko sekcję markerów albo dopisz ją, jeśli nie istnieje.
-5. Ponownie odczytaj pamięć i odnotuj wynik w `AUDIT-JOURNAL.md`.
+2. Porównaj preferencje użytkownika z UP-1…UP-6 routera (treść, nie wersja).
+3. Pokaż rozbieżności i proponowany tekst do wklejenia w Ustawienia → Profil.
+4. Odnotuj wynik w `AUDIT-JOURNAL.md`, jeżeli host pozwala na zapis.
 
-Nigdy nie nadpisuj całego pliku preferencji. Brak natywnej pamięci trwałej
-raportuj jako `NIEOBSŁUGIWANE W HOŚCIE`.
+⛔ Zakaz zapisu bloków dyrektyw do pamięci trwałej hosta (odrzuca je
+klasyfikator; ponowienie = obchodzenie zabezpieczenia).
 
 ---
 

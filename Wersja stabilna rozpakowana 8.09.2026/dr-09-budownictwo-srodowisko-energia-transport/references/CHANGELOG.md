@@ -1,5 +1,6 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.37 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (16 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
 - 3.36 (2026-09-16, F-189): F-135 (RZĄD 1 — KC): mod-ustawa-transport — art. 442¹ § 2–3 przy szkodzie z nieutrzymania drogi; mod-PrBud-prawo-budowlane — przedawnienie z umowy o roboty budowlane: 3 lata tylko dla roszczeń związanych z DG, inwestor-konsument — 6 lat; koniec roku kalendarzowego (art. 118).
 - 3.35 (2026-09-16, F-189): mod-prawo-geologiczne-gornicze — wygasły t.j. PGG `2024/1290` → `2026/69` (RZĄD 1; T27).
 - 3.34 (2026-09-16, F-189): T31 — dwie PODMIANY AKTU usunięte (RZĄD 1): Prawo energetyczne `2025/459` (obwieszczenie MF) → `2026/43` w MAPA-AKTOW; „Prawo gazowe” `2024/1538` (obwieszczenie MSWiA) → `2026/43` w MAPA-AKTOW i mod-ustawa-prawo-gazowe (odrębna ustawa „Prawo gazowe” nie istnieje); mod-ustawa-charakterystyka-energetyczna: `2024/544` (rozporządzenie MON) → t.j. `2024/101`.

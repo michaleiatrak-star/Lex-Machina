@@ -179,7 +179,7 @@ Checklist praktyczny:
   kryteria MIARKOWANIA z ust. 2b oraz NA linię TSUE Grupa Warzywna,
   JEŚLI okoliczności wskazują NA brak celowego DZIAŁANIA
 
-⚠️ Weryfikuj aktualne brzmienie art. 112b-112c w ISAP — TO obszar Z
+⚠️ Weryfikuj aktualne brzmienie art. 112b-112c w ELI (RZĄD 1) — TO obszar Z
   ISTOTNĄ, DOŚĆ ŚWIEŻĄ reformą (2023) — STARSZE orzecznictwo/
   komentarze SPRZED tej daty WYMAGAJĄ ostrożnego STOSOWANIA (część
   argumentacji, np. CO do samej ZASADY proporcjonalności, POZOSTAJE
@@ -475,7 +475,7 @@ z zarzutem karnoskarbowym)
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
    art. 108 ust. 1–3, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -568,7 +568,7 @@ występował w całym DR-06)
 ✅ [VER: lexlege.pl — pełny tekst art. 88 ustawy o VAT, Dz.U. 2025 poz. 775
    t.j., stan prawny na 12.08.2026; pobrane 2026-08-12; brzmienie
    potwierdzone dodatkowo w arslege.pl i eureka.mf.gov.pl]
-⚠️ [ZALECANA WERYFIKACJA ISAP]
+⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
 ---
@@ -730,7 +730,7 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
    (⛔ poprzedni zapis „późniejszą zmianą 2020 poz. 289" był chronologicznie
    sprzeczny). **Cytuj: t.j. Dz.U. 2021 poz. 999.** Rekomendacja
    zamknięta 2026-09-16e (O-11(c)).
-⚠️ [ZALECANA WERYFIKACJA ISAP — w szczególności aktualny status i tekst
+⚠️ [ZALECANA WERYFIKACJA w ELI (RZĄD 1) — w szczególności aktualny status i tekst
    rozporządzenia z 17.12.2015 r., którego metryki NIE potwierdzono w
    źródle urzędowym]
 ✅ [POZYCJA ZAMKNIĘTA 2026-08-20 (F-18) — znacznik wyżej był NIEAKTUALNY,

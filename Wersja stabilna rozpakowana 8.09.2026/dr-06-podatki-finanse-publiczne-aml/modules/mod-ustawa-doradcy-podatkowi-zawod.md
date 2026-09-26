@@ -16,7 +16,7 @@ Ustawa o doradztwie podatkowym (z 5.07.1996):
   Ostatni POTWIERDZONY t.j.: Dz.U. 2021 poz. 2117 (obwieszczenie
   Marszałka Sejmu z 14.10.2021) ✅ VER: isap.sejm.gov.pl 2026-06-14
   ⚠️ MOŻLIWY NOWSZY T.J. — ustawa była nowelizowana po 2021 r. (patrz
-  nowelizacja 2025 poniżej). Sprawdź na isap.sejm.gov.pl, czy istnieje
+  nowelizacja 2025 poniżej). Sprawdź na ELI (RZĄD 1), czy istnieje
   nowszy tekst jednolity przed cytowaniem numeracji artykułów.
 
 ⚡ NOWELIZACJA Dz.U. 2025 poz. 1882 — Ustawa z 4.12.2025 o zmianie ustawy
@@ -26,7 +26,7 @@ administracyjnymi
   → https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001882
   → Prezydent podpisał ustawę (artykuł KIDP, ok. 18.12.2025) — ROZSZERZA
     zakres czynności doradztwa podatkowego. Dokładny zakres rozszerzenia
-    → WERYFIKUJ w ISAP (treść ustawy + uzasadnienie projektu)
+    → WERYFIKUJ w ELI (RZĄD 1) (treść ustawy + uzasadnienie projektu)
   → Zmienia RÓWNIEŻ Prawo o postępowaniu przed sądami administracyjnymi
     (PPSA) — możliwy wpływ na zastępstwo procesowe doradców podatkowych
     przed WSA/NSA — WERYFIKUJ zakres

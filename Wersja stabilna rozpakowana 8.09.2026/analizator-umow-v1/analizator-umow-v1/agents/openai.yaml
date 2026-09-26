@@ -1,0 +1,14 @@
+interface:
+  display_name: analizator umow v1
+  short_description: 'Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów
+    korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP,
+    founders, finansowanie i PZP.'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

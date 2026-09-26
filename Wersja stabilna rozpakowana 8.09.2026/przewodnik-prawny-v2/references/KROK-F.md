@@ -72,11 +72,13 @@ Jeśli pismo dotyczy kilku roszczeń/zarzutów → osobna teza per wątek.
 ```
 PROCEDURA:
 1. Zidentyfikuj wszystkie "art. X" / "§ Y" / "ustawa z dnia..."
-2. web_fetch isap.sejm.gov.pl → sprawdź istnienie i brzmienie
+2. web_fetch ELI (RZĄD 1) → sprawdź istnienie i brzmienie
 3. Sprawdź nowelizacje po dacie zdarzenia
 
 WYNIK DLA LAIKA:
-✅ art. 503 KPC — POPRAWNY. Daje Ci prawo do zaprzeczenia nakazowi.
+✅ art. 505 § 1 KPC — POPRAWNY. Daje Ci prawo wniesienia sprzeciwu od nakazu
+   zapłaty (termin: art. 480² § 2 KPC). ⛔ art. 500–504 KPC są UCHYLONE —
+   pismo powołujące art. 503 wskazuje nieistniejącą podstawę.
 ⚠ art. 415 KC — PRAWIDŁOWY, ale NIEKOMPLETNY.
    Żeby wygrać na tej podstawie musisz udowodnić 3 rzeczy:
    (1) wina, (2) szkoda, (3) związek między nimi. Brakuje (3).

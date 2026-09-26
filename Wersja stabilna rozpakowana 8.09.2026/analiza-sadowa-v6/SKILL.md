@@ -1,18 +1,13 @@
 ---
 name: analiza-sadowa-v6
-version: "6.5"
+version: "6.10"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
 description: "Czteroprzebiegowa analiza akt, pism, wyroków i dowodów: mapa faktów, kwalifikacja prawna, analiza adversarialna, dwukrotna weryfikacja, ocena szans i raport końcowy."
-changelog:
-  # ⛔ ZASADA 15: skrót bieżącej wersji, nie historia.
-  # Pełna historia (w tym 39 linii przeniesionych stąd 2026-08-24, F-129):
-  #   view analiza-sadowa-v6/references/CHANGELOG.md
-  - "6.5 (2026-08-24, flaga F-129): historia wersji wyniesiona z pola YAML
-    do references/CHANGELOG.md — jedna lokalizacja kanoniczna. Treść
-    przeniesiona 1:1, bez rekonstrukcji. Opis: audyt-systemu-v4/references/
-    AUDIT-JOURNAL.md, wpis AUDYT-2026-08-24b."
+changelog: |
+  Wersja bieżąca: 6.10 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (2 plików); ISAP pozostaje adres…
+  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
@@ -145,7 +140,7 @@ SD-GATE-4: SD-VER ≠ KOMPLET → ⛔ BLOKADA Przejścia I. Nie wyświetlaj komu
 Każde przejście zostanie wysłane jako OSOBNA WIADOMOŚĆ — nie łącz ich w jednej odpowiedzi.
 
   Wiadomość 1 → Przejście I   — mapowanie faktyczne (zero oceny prawnej)
-  Wiadomość 2 → Przejście II  — kwalifikacja prawna (normy ISAP, macierz fakt-norma)
+  Wiadomość 2 → Przejście II  — kwalifikacja prawna (normy z RZĘDU 1 — ELI, macierz fakt-norma)
   Wiadomość 3 → Przejście III — analiza adversarialna + WERYFIKACJA PIERWSZA
                                 (sędzia / przeciwnik / własny pełnomocnik + V10)
   Wiadomość 4 → Przejście IV  — autokorekta P1-P5 + WERYFIKACJA OSTATECZNA
@@ -255,7 +250,7 @@ TAK → usuń, zastąp suchym opisem. NIE → przejdź dalej.
 ### PRZEJŚCIE II — KWALIFIKACJA PRAWNA
 **Cel: Przypisanie faktów z Mapy Faktycznej do norm prawnych. Żadne nowe fakty nie powstają.**
 
-> ⚠️ REGUŁA BEZWZGLĘDNA — WERYFIKACJA ISAP PRZED MACIERZĄ:
+> ⚠️ REGUŁA BEZWZGLĘDNA — WERYFIKACJA w ELI (RZĄD 1) PRZED MACIERZĄ:
 > Przed wpisaniem JAKIEJKOLWIEK normy do macierzy fakt-norma Claude MUSI:
 > 1. Wywołać web_search z zapytaniem o treść konkretnego przepisu (eli.gov.pl / lexlege.pl / arslege.pl)
 > 2. Odczytać aktualną treść przepisu z wyników
@@ -289,7 +284,7 @@ FAKTY NEUTRALNE:    [fakt] → [dlaczego bez normy]
 ```
 
 PUNKT STOP przed Przejściem III:
-Czy każda norma pochodzi z ISAP / oficjalnego źródła ZWERYFIKOWANEGO web_search w tej sesji?
+Czy każda norma pochodzi z ELI (RZĄD 1, kanon E-1…E-5) / oficjalnego źródła ZWERYFIKOWANEGO web_search w tej sesji?
 Czy żaden wniosek nie opiera się na fakcie spoza Mapy Faktycznej?
 TAK do obu → przejdź dalej. NIE → uzupełnij brakujące web_search przed przejściem dalej.
 
@@ -543,7 +538,7 @@ KROK 0 — Model czteroprzebiegowy z dwukrotną weryfikacją [OBOWIĄZKOWY]
   Każde przejście = OSOBNA WIADOMOŚĆ
 
   Wiadomość 1 → Przejście I   — Mapa faktyczna
-  Wiadomość 2 → Przejście II  — Macierz fakt-norma (ISAP)
+  Wiadomość 2 → Przejście II  — Macierz fakt-norma (RZĄD 1 — ELI)
   Wiadomość 3 → Przejście III — Raport adversarialny + WERYFIKACJA PIERWSZA (W1-W4)
   Wiadomość 4 → Przejście IV  — Autokorekta P1-P5 + WERYFIKACJA OSTATECZNA (O1-O5) → GATE
   Wiadomość 5 → Raport końcowy §1-§11 (tylko po GATE: ZATWIERDZONE TAK)
@@ -672,7 +667,7 @@ PRZEJŚCIE I — MAPA FAKTYCZNA
   Kwoty/daty: [rejestr]
 
 PRZEJŚCIE II — MACIERZ FAKT-NORMA
-  [tabela: fakt → norma (ISAP) → znamię → status]
+  [tabela: fakt → norma (ELI) → znamię → status]
   Sporne: [...] | Niesporne: [...]
 
 PRZEJŚCIE III — RAPORT ADVERSARIALNY
@@ -691,7 +686,7 @@ PRZEJŚCIE IV — AUTOKOREKTA
 ─── RAPORT §1-§11 ──────────────────────────────────────────────────────
 
 §1.  KWALIFIKACJA PRAWNA I ZNAMIONA
-     Przepis: [pełna treść z ISAP]
+     Przepis: [pełna treść z ELI (RZĄD 1)]
      Znamiona: [każde oddzielnie — sporne vs niesporne]
 
 §2.  ORZECZNICTWO

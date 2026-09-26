@@ -6,7 +6,7 @@
   VER: isap.sejm.gov.pl [2026-05-31] - weryfikuj aktualny t.j.!
 - Podstawa: art. 202-207 Konstytucji RP
 
-**Weryfikacja ISAP przed kazdy cytowaniem.**
+**Weryfikacja w ELI (RZĄD 1) przed kazdy cytowaniem.**
 
 ## Status i niezaleznosc
 NIK = naczelny organ kontroli panstwowej.
@@ -48,7 +48,7 @@ Zastrzezenia:  ⚠️ POPRAWKA 2026-07-27 (FAZA 3E/ZASADA 14) — poprzednia
                PROTOKOŁU KONTROLI na rzecz wystąpienia pokontrolnego —
                możliwe, że "protokół kontroli" jako odrębny dokument z
                własnym terminem już nie istnieje w obecnej praktyce.
-               SPRAWDŹ aktualny stan w ISAP przed użyciem w piśmie.
+               SPRAWDŹ aktualny stan w ELI (RZĄD 1) przed użyciem w piśmie.
 Wystapieniepokontrolne: Kierownik zawiadamia o sposobie realizacji wnioskow w terminie
                NIE KRÓTSZYM niż 14 dni (potwierdzone: gov.pl/NIK,
                nik.gov.pl — to inny termin niż zastrzeżenia, dotyczy
@@ -98,6 +98,6 @@ web_search: "ustawa NIK Najwyzsza Izba Kontroli Dz.U. 2022 poz. 623 isap"
 Ustawa o NIK: Dz.U. 2022 poz. 623 t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   Nowszy t.j. NIE ogłoszony — Dz.U. 2022 poz. 623 jest aktualnym t.j.
-  → Weryfikuj zmiany po t.j. w ISAP: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220000623
+  → Weryfikuj zmiany po t.j. w ELI (RZĄD 1): isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220000623
   Podstawa konstytucyjna: art. 202–207 Konstytucji RP
 ```

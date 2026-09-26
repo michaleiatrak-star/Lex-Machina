@@ -6,7 +6,7 @@
   VER: isap.sejm.gov.pl [2026-05-31]
   UWAGA: Dz.U. 2026 poz. 246 - rozp. RM zmienilo stawki wynagrodzen od 01.01.2026
 
-**Weryfikacja ISAP i rozp. RM przed kazdy cytowaniem kwot!**
+**Weryfikacja w ELI (RZĄD 1) i rozp. RM przed kazdy cytowaniem kwot!**
 
 ## Zakres
 Dotyczy: urzenicy JST, kierownicy jednostek organizacyjnych JST, pracownicy mianowani

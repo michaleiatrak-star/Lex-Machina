@@ -13,7 +13,7 @@
 - **art. 917–918 KC** — ugoda jako umowa prawa materialnego (definicja, wady)
 - **art. 123 §1 pkt 1 KC** — zawezwanie przerywa bieg przedawnienia
 
-> ⚠ Weryfikuj aktualność przepisów na isap.sejm.gov.pl przed użyciem.
+> ⚠ Weryfikuj aktualność przepisów na ELI (RZĄD 1) przed użyciem.
 
 ---
 

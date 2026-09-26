@@ -46,7 +46,7 @@ Dla każdego używanego przepisu wygeneruj tabelę:
 | tamże | tamże | art. 32-33 | skarga na brak dostępności do Prezesa Zarządu PFRON, termin 30 dni od upływu terminu na wniosek/odmowy; postępowanie JEDNOINSTANCYJNE, decyzja nakazowa z terminem realizacji (min. 30 dni, w sprawach skomplikowanych 60 dni) | tryb skargowy | egzekucja przez grzywnę w celu przymuszenia (UPEA) |
 
 ⚠️ Weryfikuj każdorazowo, czy nie ukazał się nowszy t.j. ustawy o dostępności
-(2024.1411 może już nie być najnowszym — sprawdź isap.sejm.gov.pl na dzień
+(2024.1411 może już nie być najnowszym — sprawdź ELI (RZĄD 1) na dzień
 użycia, ustawa nowelizowana relatywnie często w związku z wdrażaniem
 European Accessibility Act/dyrektywy UE 2019/882).
 

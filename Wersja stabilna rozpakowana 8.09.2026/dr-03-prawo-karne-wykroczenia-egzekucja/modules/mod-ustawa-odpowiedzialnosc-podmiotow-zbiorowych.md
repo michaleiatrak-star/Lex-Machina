@@ -9,7 +9,7 @@
   art. 4; obowiązuje od 30.04.2026 r. Dodała art. 7b i zmieniła art. 16
   ust. 1 pkt 18. ✅ VER ELI/PDF 2026-08-26.
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem — ustawa była wielokrotnie
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem — ustawa była wielokrotnie
 nowelizowana, art. 16 (katalog czynów) jest długi i regularnie rozszerzany.
 
 ---
@@ -68,7 +68,7 @@ Warunek (stan obecny, Dz.U. 2024 poz. 1822): wcześniejsze prawomocne skazanie s
 (lub umorzenie w wypadkach przewidzianych przez ustawę) — prejudykat. Katalog czynów
 zabronionych będących podstawą odpowiedzialności: zamknięty katalog w art. 16 ustawy
 (przestępstwa gospodarcze, przeciwko obrotowi pieniędzmi/papierami wartościowymi,
-łapownictwo, skarbowe i inne — WERYFIKUJ aktualną treść art. 16 w ISAP, katalog
+łapownictwo, skarbowe i inne — WERYFIKUJ aktualną treść art. 16 w ELI (RZĄD 1), katalog
 regularnie rozszerzany nowelizacjami).
 
 ⚠️ Wymóg prejudykatu może zostać USUNIĘTY planowaną dużą reformą (patrz ALERT

@@ -31,7 +31,7 @@ transgraniczne" — rozróżnij od razu przy intake:
   brzmienie, rama unijna bywa nowelizowana
 
 **⚠️ Ustawa była wielokrotnie nowelizowana pod presją wydarzeń (COVID-19,
-wojna w Ukrainie) — ZAWSZE weryfikuj aktualny t.j. w ISAP przed sprawą.**
+wojna w Ukrainie) — ZAWSZE weryfikuj aktualny t.j. w ELI (RZĄD 1) przed sprawą.**
 
 ### Dwa mechanizmy — NIE MYLIĆ
 
@@ -72,7 +72,7 @@ przedłużany, USTAWĄ Z 9.07.2025 UCZYNIONY BEZTERMINOWYM od 24.07.2025):
 □ Organ kontroli właściwy dla danego podmiotu (zależny od sektora —
   sprawdź w rozporządzeniu, nie zakładaj jednego organu dla wszystkich)
 □ Zgłoszenie PRZED dokonaniem inwestycji — brak zgody = nieważność
-  czynności prawnej (sprawdź aktualną sankcję w ISAP)
+  czynności prawnej (sprawdź aktualną sankcję w ELI (RZĄD 1))
 ```
 
 ### ⭐ PRZYKŁAD ROBOCZY (dodany 2026-07-18): INWESTOR ROSYJSKI W PRZEMYŚLE ZBROJENIOWYM

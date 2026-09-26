@@ -489,7 +489,7 @@ WCZYTAJ ZAWSZE:
 ## ŹRÓDŁA
 
 ```
-AKTY PRAWNE (weryfikuj aktualne t.j. w ISAP):
+AKTY PRAWNE (weryfikuj aktualne t.j. w ELI (RZĄD 1)):
   KC art. 12–16: zdolność do czynności prawnych, ubezwłasnowolnienie
     isap.sejm.gov.pl → Dz.U. 2026 poz. 795 (KC t.j.)
   KPK art. 79: obrona obligatoryjna

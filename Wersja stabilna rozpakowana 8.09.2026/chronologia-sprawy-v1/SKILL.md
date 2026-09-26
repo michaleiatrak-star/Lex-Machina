@@ -1,6 +1,6 @@
 ---
 name: chronologia-sprawy-v1
-version: "1.8"
+version: "1.9"
 type: executive-chronologia
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -844,7 +844,7 @@ ZASADY:
   (sekcja 3B) i czy zbudowano tabelę rekoncyliacji krzyżowej między dokumentami
   (kto komu ile, czy i kiedy zwrócone)? Brak tego kroku = analiza niekompletna,
   nawet jeśli oś czasu dat jest kompletna.
-□ Czy nie podałem żadnego przepisu, terminu ustawowego ani sygnatury bez weryfikacji ISAP?
+□ Czy nie podałem żadnego przepisu, terminu ustawowego ani sygnatury bez weryfikacji w ELI (RZĄD 1)?
 ```
 
 ---

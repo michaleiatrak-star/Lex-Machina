@@ -88,9 +88,9 @@ WŁADZA SĄDOWNICZA (art. 10 ust. 2, art. 173 Konstytucji):
 | Kompetencja | Opis | Podstawa |
 |---|---|---|
 | Wniosek do Prezydenta o powołanie sędziego | KRS przedstawia kandydaturę; Prezydent powołuje | art. 179 Konstytucji |
-| Opiniowanie projektów aktów prawnych | Opinie do projektów dot. sądownictwa | ustawa o KRS — weryfikuj w ISAP |
+| Opiniowanie projektów aktów prawnych | Opinie do projektów dot. sądownictwa | ustawa o KRS — weryfikuj w ELI (RZĄD 1) |
 | Wniosek do TK | W sprawach zgodności z Konstytucją | art. 186 ust. 2 Konstytucji |
-| Postępowania dyscyplinarne | Uczestnictwo w trybie dyscyplinarnym sędziów | ustawa o KRS — weryfikuj w ISAP |
+| Postępowania dyscyplinarne | Uczestnictwo w trybie dyscyplinarnym sędziów | ustawa o KRS — weryfikuj w ELI (RZĄD 1) |
 
 **Zaskarżenie uchwały KRS:**
 ```
@@ -101,7 +101,7 @@ web_search: "uchwała KRS zaskarżenie tryb 2025 2026 orzecznictwo SN NSA"
 
 ### Rada Ministrów — odpowiedzialność i mechanizmy kontroli
 
-> ⚠️ Weryfikuj aktualne brzmienie art. 146–162 Konstytucji w ISAP.
+> ⚠️ Weryfikuj aktualne brzmienie art. 146–162 Konstytucji w ELI (RZĄD 1).
 
 | Mechanizm | Opis | Podstawa Konstytucji |
 |---|---|---|
@@ -132,7 +132,7 @@ Zaskarżenie rozporządzenia:
 
 ### Prerogatywy Prezydenta vs akty wymagające kontrasygnaty
 
-> ⚠️ Pełny katalog — weryfikuj art. 144 Konstytucji w ISAP.
+> ⚠️ Pełny katalog — weryfikuj art. 144 Konstytucji w ELI (RZĄD 1).
 
 ```
 Akty wymagające kontrasygnaty Prezesa RM (art. 144 ust. 2):

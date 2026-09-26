@@ -268,4 +268,4 @@ pokryte? Uzupełniaj je"). Zweryfikowano online: art. 70-71, 77-79, 83
 (Rozdz. XII), art. 109, 115-116, 118 (Rozdz. XIII). Odnotowano niepewności:
 art. 72-76/80-82 (Rozdz. X), 110-114 dokładna treść (Rozdz. XIII), 107a
 pełna treść, dokładna górna granica grzywny art. 108 — wszystkie oznaczone
-wprost do weryfikacji na ISAP.
+wprost do weryfikacji w ELI (RZĄD 1).

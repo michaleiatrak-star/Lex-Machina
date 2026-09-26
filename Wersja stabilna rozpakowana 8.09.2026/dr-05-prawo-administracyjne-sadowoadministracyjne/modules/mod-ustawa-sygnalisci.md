@@ -94,7 +94,7 @@ KANAŁ JAWNY (ujawnienie publiczne):
 ### Ochrona sygnalisty — zakres
 
 ```
-ZAKAZ DZIAŁAŃ ODWETOWYCH (art. 12 ustawy — weryfikuj w ISAP):
+ZAKAZ DZIAŁAŃ ODWETOWYCH (art. 12 ustawy — weryfikuj w ELI (RZĄD 1)):
   → Zakaz zwolnienia, degradacji, pominięcia awansu
   → Zakaz szykanowania, izolacji, mobbingu
   → Zakaz ujawnienia tożsamości sygnalisty

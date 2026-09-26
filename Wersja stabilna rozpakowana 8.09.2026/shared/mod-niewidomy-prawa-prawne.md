@@ -177,7 +177,7 @@ PRZESŁUCHANIE NIEWIDOMEGO ŚWIADKA (KPC):
 ## 4. PRAWA NIEWIDOMEGO PRZY CZYNNOŚCIACH NOTARIALNYCH
 
 ```
-PRAWO O NOTARIACIE art. 87 (weryfikuj aktualny t.j.: isap.sejm.gov.pl):
+PRAWO O NOTARIACIE art. 87 (weryfikuj aktualny t.j.: ELI (RZĄD 1)):
 
 OSOBA NIEWIDOMA (art. 87 §1 zd. 2 Prawa o notariacie):
   "Jeżeli osoba jest niewidoma, głucha, niema lub głuchoniema, notariusz
@@ -279,7 +279,7 @@ PRZY STOPNIU ZNACZNYM:
   → Czas pracy: max 7 godz./dobę i 35 godz./tydz.
   → Dodatkowy urlop: 10 dni roboczych rocznie
   → Zwolnienie celowe: do 21 dni
-  ⚠️ Weryfikuj aktualne limity: isap.sejm.gov.pl → ustawa rehabilitacyjna art. 15–17
+  ⚠️ Weryfikuj aktualne limity: ELI (RZĄD 1) → ustawa rehabilitacyjna art. 15–17
 
 DOFINANSOWANIE DO WYNAGRODZENIA (art. 26a ustawy rehabilitacyjnej):
   Pracodawca może otrzymać z PFRON (2026 — weryfikuj kwoty!):

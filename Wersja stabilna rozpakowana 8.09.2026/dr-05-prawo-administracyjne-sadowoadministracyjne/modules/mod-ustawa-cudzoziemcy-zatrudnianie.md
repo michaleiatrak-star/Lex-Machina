@@ -113,7 +113,7 @@ różnych ministrów, z różnymi datami wejścia w życie — nie mylić ich ze
   oczekiwania na decyzje.
 ```
 
-**Weryfikacja (metodologia ZASADA 14):** RZĄD 1 — lexlege.pl/isap.sejm.gov.pl
+**Weryfikacja (metodologia ZASADA 14):** RZĄD 1 — lexlege.pl/ELI (RZĄD 1)
 (pełny tekst art. 3 ustawy, dziennikustaw.gov.pl PDF D2025000062101.pdf),
 gov.pl/web/kolumbia (placówka dyplomatyczna RP, cytuje wprost treść
 rozporządzenia MRPiPS z numerem Dz.U.), rp.pl (Dziennik Ustaw z 12.08.2026,
@@ -145,7 +145,7 @@ ELEKTRONIZACJA: wszystkie wnioski WYŁĄCZNIE przez praca.gov.pl
 Organ: Wojewoda właściwy ze względu na siedzibę pracodawcy (zezwolenia A–D)
        Starosta (zezwolenie sezonowe S)
 
-TYPY ZEZWOLEŃ (ustawa Dz.U. 2025 poz. 621 — weryfikuj aktualny tekst w ISAP):
+TYPY ZEZWOLEŃ (ustawa Dz.U. 2025 poz. 621 — weryfikuj aktualny tekst w ELI (RZĄD 1)):
 
 Typ A — ogólne zezwolenie na pracę (art. 26):
   → Cudzoziemiec zatrudniony u polskiego pracodawcy na umowę o pracę / cywilnoprawną
@@ -216,7 +216,7 @@ KARY DLA PRACODAWCY za nielegalne zatrudnienie:
 
 ## 2. MATRYCA: DOKUMENT POBYTOWY → UPRAWNIENIE DO PRACY
 
-> ⚠️ Weryfikuj każdorazowo w ISAP (art. 3 ustawy Dz.U. 2025 poz. 621) — lista może być rozszerzana rozporządzeniem.
+> ⚠️ Weryfikuj każdorazowo w ELI (RZĄD 1) (art. 3 ustawy Dz.U. 2025 poz. 621) — lista może być rozszerzana rozporządzeniem.
 
 | Dokument / tytuł pobytowy | Praca bez zezwolenia? | Uwagi |
 |---|---|---|

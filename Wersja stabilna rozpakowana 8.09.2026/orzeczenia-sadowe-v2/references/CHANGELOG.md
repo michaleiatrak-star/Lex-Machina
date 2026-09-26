@@ -1,8 +1,73 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+**2.18 (2026-09-22, F-194) — Zasada 2B:** odwołanie do `GRAD-3b-SYM` (symbol CBOSA jako flaga wymuszająca odczyt przedmiotu) i `KALIBRACJA-PRZECIWNIK` z `shared/WERYFIKACJA-SLAD.md` 1.8; precedens NSA I OSK 590/26 jako 🟨 bez awansu (CBOSA 503, 2026-09-22).
+
+**2.17 (2026-09-14) — retrieval/snapshot CBOSA jako materiał badawczy z jawnym provenance:**
+- 2.19 (2026-09-23, AUDYT-2026-09-23b): kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` 1.10): instrukcje weryfikacji „w ISAP” / „isap.sejm.gov.pl →” zamienione na „w ELI (RZĄD 1)” (1 plików); ISAP pozostaje adresem dla człowieka; wpisy historyczne („zweryfikowano w ISAP …”) bez zmian.
+- fallback V-SYG-0.5 nie jest już redukowany do samego ISTNIENIA, gdy host
+  faktycznie zwraca oficjalny snapshot `/doc/{ID}`;
+- obowiązkowe: POST-CHECK HOSTA → exact-match → content_scope;
+- `site:` nie jest filtrem bezpieczeństwa;
+- snapshot może dostarczyć metrykę, sentencję i uzasadnienie, ale pozostaje
+  `CRAWLED_OR_INDEXED` i sam nie uzyskuje ✅ [VER];
+- direct parser i jego testy 22/22 pozostają bez zmian.
+**2.16 (2026-09-14) — integracja adaptera CBOSA z kanonicznym routingiem źródeł:**
+- CBOSA powiązana z `shared/HIERARCHIA-ZRODEL.md` jako RZĄD 2A oraz z
+  `SYGNATURY`, `DOSTEP-MASZYNOWY-API`, `PRAWO-HARDGATE-ORZECZENIA` i MCP fallback.
+- Parser hardened fail-closed: krytyczny drift HTML, nieznany licznik, przerwany
+  transport, Content-Length mismatch i błąd kandydata → OUT_OF_SCOPE.
+- Dodano sesyjną kontrolę paginacji i wykrywanie zapętlenia/duplikatów.
+- Brak opublikowanego uzasadnienia = FOUND dla metryki/sentencji z
+  `reasoning_available=false`; nie wolno wtedy przypisywać tezy z uzasadnienia.
+- Zestaw regresyjny rozszerzony do **22/22 PASS**.
+- Reguła 7: pełny skill wydawany jako ZIP, nie sam diff.
+
 > Pełna historia napraw i zmian wersji. Wyniesiona z SKILL.md 2026-07-12
 > (runda 2 — redukcja kosztu kontekstu) — treść skopiowana 1:1, bez zmian.
 > Wczytuj TYLKO gdy potrzebujesz historii konkretnej naprawy.
+
+**2.15 (2026-09-14) — bezpośredni adapter HTML CBOSA + exact-match NSA/WSA:**
+- Dodano `references/CBOSA-ADAPTER.md`: odtworzony kontrakt formularza
+  `POST /cbo/search`, sesyjnej paginacji `GET /cbo/find?p=N` i pełnego
+  dokumentu `GET /doc/{ID}`. Dostępność CBOSA jest od tej wersji mierzona
+  świeżo w bieżącym runtime; historyczny pomiar 503 nie jest globalnym stanem.
+  Przy niedostępności pozostaje kanoniczny fallback `shared/SYGNATURY.md`,
+  V-SYG-0.5.
+- Dodano własny, bez-zależnościowy parser `tools/cbosa_parser.py`. Wyciąga
+  `/doc/{ID}`, sygnaturę, sąd, datę, sentencję i pełne uzasadnienie; filtruje
+  CAŁY zbiór po znormalizowanym exact-match. Wynik: `FOUND` / `NOT_FOUND` /
+  `AMBIGUOUS` / `OUT_OF_SCOPE`; „blisko pasujące” sygnatury są jawnie
+  odrzucane i raportowane.
+- Fail-closed rozszerzono na kompletność wyniku: niepełna paginacja, zmiana
+  kontraktu HTML albo błąd odczytu któregokolwiek kandydata blokują negatywny
+  wniosek i dają `OUT_OF_SCOPE`.
+- Zakres `FOUND` z direct CBOSA podniesiono do `ISTNIENIE+TREŚĆ` po faktycznym
+  odczycie `/doc/{ID}`; poziom `FRAGMENT` nadal wymaga pinpointu zgodnie z
+  `shared/WERYFIKACJA-SLAD.md`.
+- Dodano `tests/test_cbosa_parser.py`. Test lokalny: **6/6 PASS** — deduplikacja
+  doc-id, pełna treść, FOUND + odrzucenie near-match, NOT_FOUND, AMBIGUOUS,
+  OUT_OF_SCOPE przy wymaganej paginacji. W trakcie testu wykryto i naprawiono
+  dwa realne tryby regresji parsera: kropki w skrócie repertorium
+  (`f.s.k.` → `FSK`) oraz `<br>` jako element pusty, który nie może
+  zwiększać głębokości parsera sekcji.
+- Kontrolę struktury wykonano dodatkowo na publicznym fixture CBOSA
+  `II FSK 2870/18` z projektu `matematicsolutions/mcp-nsa`: rzeczywisty
+  dokument zawiera tytuł, Sąd, Datę orzeczenia, Sentencję i ponad 51 tys.
+  znaków HTML uzasadnienia; fixture listy wyników zawiera realne linki
+  `/doc/{ID}`. To kontrola struktury realnego HTML, nie własny test live
+  sieciowy.
+- ⛔ Ograniczenie pomiaru tej sesji: środowisko kontenerowe nie miało DNS do
+  CBOSA, więc nie raportuje się fikcyjnego „live socket testu”. Kształt requestu
+  został niezależnie potwierdzony przez publiczne implementacje
+  `matematicsolutions/mcp-nsa` i `worldwidelaw/legal-sources`, a runtime
+  skilla ma obowiązek wykonać fresh probe.
+- **Reguła 7 OUTPUT-COMPLETENESS:** zmiana jest wydawana jako cały
+  `orzeczenia-sadowe-v2` ze wszystkimi plikami i podfolderami oraz
+  zaktualizowanym manifestem/checksumami, nie jako sam diff.
+- Wykryto pre-existing drift: `SKILL.md` był już w wersji 2.14, podczas gdy
+  lokalny CHANGELOG kończył się na 2.11 (a stopka wskazywała 2.6). Wersja 2.15
+  przywraca poprawny bieżący wpis bez wymyślania nieudokumentowanej historii
+  wersji 2.12–2.14.
 
 **2.7 (2026-07-12, runda 2):** wyniesienie tej sekcji CHANGELOG (112 linii,
 wersje 2.1–2.6) z SKILL.md do osobnego pliku referencyjnego — SKILL.md

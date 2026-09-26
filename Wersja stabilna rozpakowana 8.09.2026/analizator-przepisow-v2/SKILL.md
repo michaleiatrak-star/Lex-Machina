@@ -1,6 +1,6 @@
 ---
 name: analizator-przepisow-v2
-version: "2.6"
+version: "2.8"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -49,7 +49,7 @@ Profesjonalne narzędzie do analizy przepisów prawnych z widgetem wizualnym, au
 
 ## ZASADA NACZELNA
 
-> ⛔ HARDGATE — Nigdy nie cytuj przepisów z pamięci. Każdy przepis MUSI być pobrany z ISAP lub innego oficjalnego źródła zgodnie z procedurą w `shared/PRAWO-HARDGATE.md`. Jeśli wszystkie źródła niedostępne — oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
+> ⛔ HARDGATE — Nigdy nie cytuj przepisów z pamięci. Każdy przepis MUSI być pobrany według kanonu E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md`): najpierw ELI (RZĄD 1), ISAP wyłącznie jako adres dla człowieka, LEX/Legalis → ArsLege, gdy aktu nie da się pobrać z RZĘDU 1 — procedura w `shared/PRAWO-HARDGATE.md`. Jeśli wszystkie źródła niedostępne — oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
 
 ---
 
@@ -147,8 +147,13 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 ### Procedura weryfikacji (OBOWIĄZKOWA)
 
 ```
-1. web_search: [nazwa aktu] + "tekst jednolity" + rok na ISAP
-2. web_fetch tekstu jednolitego
+1. E-1 ELI: api.sejm.gov.pl/eli/acts/search?title=[nazwa aktu] → aktualny t.j.
+   (rok/poz.), metryka /eli/acts/DU/{rok}/{poz} — kanałem kodu (curl/skrypt);
+   host bez kanału kodu → B-1 web_search „eli.gov.pl DU {rok} {poz}” → B-2 web_fetch
+2. Odczyt treści: /eli/acts/DU/{rok}/{poz}/text.pdf (t.j.; pułapka /text.html
+   — B-T1…B-T3 PRAWO-HARDGATE). Link ISAP dopisz dla czytelnika (E-2).
+   Aktu nie da się pobrać z RZĘDU 1 (ELI ani ISAP — awaria serwera, timeout,
+   blokada; zapisz próby) → obowiązkowo E-3 LEX/Legalis → E-4 ArsLege.
 3. Zlokalizuj dokładny przepis (artykuł / paragraf / ustęp / punkt)
 4. Z treści obwieszczenia o t.j. wypisz nowelizacje JUŻ UWZGLĘDNIONE
    (obwieszczenia standardowo wymieniają: „uwzględnia zmiany wprowadzone
@@ -178,14 +183,14 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 KARTA PRZEPISU
 Akt prawny:         [pełna nazwa + rok + Dz.U.]
 Numer przepisu:     [art./§/ust./pkt]
-Tekst jednolity z:  [data Dz.U. lub data publikacji ISAP]
+Tekst jednolity z:  [Dz.U. RRRR poz. NNN — z metryki ELI]
 Nowelizacje w t.j.: [lista ustaw zmieniających już uwzględnionych w t.j.,
                      z treści obwieszczenia]
 Nowelizacje po t.j.:[TAK: pełna lista chronologiczna / brak — patrz KROK
                      2C — / NIE sprawdzono]
 Status:             Obowiązuje / Zmieniony / Uchylony
 Data analizy:       [data stanu prawnego]
-Źródło URL:         [link ISAP lub inne źródło]
+Źródło URL:         [link ELI (odczyt) + link ISAP (dla człowieka); inne źródło tylko wg E-3/E-4]
 
 PEŁNA TREŚĆ PRZEPISU:
 [tekst dosłownie z oficjalnego źródła]
@@ -199,7 +204,8 @@ Stosuj gdy użytkownik chce zbadać przepis w stanie na konkretną datę przesz�
 
 ```
 1. Ustal datę docelową: [DD.MM.RRRR]
-2. Na ISAP wyszukaj historię nowelizacji danego aktu
+2. W ELI ustal historię aktu: /eli/acts/DU/{rok}/{poz}/references (zmiany,
+   teksty jednolite) — ISAP tylko jako link dla czytelnika
 3. Zidentyfikuj tekst jednolity obowiązujący W DNIU docelowym
 4. Pobierz historyczną wersję przepisu
 5. Oznacz wyraźnie: "STAN NA [data]" we wszystkich wynikach
@@ -241,7 +247,7 @@ Różnice procesowo istotne: [co się zmieniło i jak wpływa]
 
 > ⚠️ **DRZEWO-LIMIT — przeczytaj przed wygenerowaniem:**
 > Drzewo przesłanek jest modelem analitycznym opartym na tekście przepisu pobranego
-> z ISAP. NIE jest oficjalną wykładnią prawa ani opinią prawną.
+> z ELI (RZĄD 1). NIE jest oficjalną wykładnią prawa ani opinią prawną.
 > Struktura logiczna (koniunkcja / alternatywa) wynika z literalnej analizy językowej
 > przepisu — może odbiegać od wykładni przyjętej w orzecznictwie.
 >
@@ -353,7 +359,7 @@ KONKLUZJA:
 RAPORT ANALIZY — [identyfikator przepisu]
 Stan prawny na: [data] | Typ sprawy: [typ] | Wygenerowano: [dziś]
 
-1. PRZEPIS (źródło: [URL ISAP])
+1. PRZEPIS (źródło: [URL ELI] · ISAP: [URL dla czytelnika])
    [pełna treść]
 
 2. STRUKTURA PRZESŁANEK
@@ -495,7 +501,7 @@ Wczytaj ten plik na etapie 5–9 i 13 sekwencji obowiązkowej (patrz INSTRUKCJE 
 ```
 1. Moduł 0 → intake + routing
    Jeśli brak przepisu → Widget wyboru przepisu (Moduł 0.3)
-2. Moduł 1 → pobierz przepis z ISAP (ZAWSZE, BEZ WYJĄTKU)
+2. Moduł 1 → pobierz przepis z ELI — kanon E-1…E-5 (ZAWSZE, BEZ WYJĄTKU)
    Lub Moduł 1H → tryb historyczny
 3. Moduł 2 → dekompozycja przesłanek
 4. Moduł 3 → analiza spełnienia (jeśli jest stan faktyczny)
@@ -532,11 +538,17 @@ Wczytaj ten plik na etapie 5–9 i 13 sekwencji obowiązkowej (patrz INSTRUKCJE 
 - Format: [Sąd], [data], sygn. [sygnatura], [teza skrócona]
 - Link do źródła oficjalnego obowiązkowy
 
-### Postępowanie przy braku dostępu do ISAP
+### Postępowanie przy braku dostępu do źródeł (kanon E-1…E-5)
 
 ```
-Spróbuj kolejno: sejm.gov.pl → EUR-Lex → BIP organu
-Jeśli wszystkie niedostępne:
+Brak dostępu do ISAP = stan normalny (kanał maszynowy martwy) — NIE przerywa
+pracy i NIE uruchamia źródeł zastępczych; brzmienie bierzesz z ELI.
+ELI niedostępny → sprawdź kształt żądania (DOSTEP-MASZYNOWY-API §1), drugi
+kanał (web_fetch/B-1→B-2 ↔ kanał kodu), ISAP / dziennikustaw.gov.pl; zapisz
+wynik prób. Aktu nie da się pobrać z RZĘDU 1 → obowiązkowo kolejno: E-3 LEX/Legalis (przy licencji) → E-4 ArsLege
+(🟨 na warunkach K-1…K-4). Prawo UE → EUR-Lex; akty organu → BIP / dziennik
+urzędowy.
+Jeśli wszystkie niedostępne (E-5):
   ZATRZYMAJ analizę
   Poinformuj użytkownika
   Zaproponuj dostarczenie tekstu przez użytkownika
@@ -551,7 +563,7 @@ Zapytanie: "Czy art. 415 KC stosuje się do mojej sprawy? Stan na 1.01.2020."
 
 ```
 [M0]  Ścieżka C — historyczna
-[M1H] Pobrano ISAP, Dz.U. 2019 poz. 1145, stan na 01.01.2020
+[M1H] Pobrano ELI DU/2019/1145 (text.pdf), stan na 01.01.2020
 [M2]  Koniunkcja: P1 Szkoda | P2 Wina | P3 Związek przyczynowy
 [M3]  P1 T 90% | P2 ? 55% (brak protokołu) | P3 T 80%
 [M7]  SN: "wina" — wykładnia obiektywna (sygn. zweryfikowana)

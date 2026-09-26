@@ -12,7 +12,7 @@
   ✅ VER: isap.sejm.gov.pl, wikipedia.pl, lexlege.pl (stan 06.08.2026, 20.01.2026 —
     2 źródła niezależnie potwierdzają BRAK nowszego t.j. niż 2022.1689) 2026-08-14 (F-57)
 
-**Weryfikacja:** isap.sejm.gov.pl przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) przed każdym cytowaniem.
 
 ## Zakres
 Środki stosowane wobec sprawców najcięższych przestępstw seksualnych i recydywistów

@@ -5,21 +5,21 @@
 **Świadome utrzymanie dwóch wersji:** TAK — zakresy się nie pokrywają; tu perspektywa compliance pracodawcy, w DR-05 perspektywa procesowo-pracownicza sygnalisty.
 
 Status: moduł prawa polskiego klasy wzorcowej. Stan metodyczny: 2026-06-13.
-Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw;
+Źródła prawa muszą być każdorazowo weryfikowane w ELI (RZĄD 1) / Dzienniku Ustaw;
 LEX/Legalis dopuszczalne pomocniczo.
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa o ochronie osób zgłaszających naruszenia prawa (ustawa o sygnalistach)
   Dz.U. 2024 poz. 928 ze zm.
-  [WYMAGA WERYFIKACJI ISAP: isap.sejm.gov.pl/isap.nsf — sprawdź aktualny tekst jednolity]
+  [WYMAGA WERYFIKACJI RZĄD 1: ELI (RZĄD 1)/isap.nsf — sprawdź aktualny tekst jednolity]
 - Dyrektywa UE 2019/1937 (Whistleblower Directive) — podstawa implementacji
   [VER: eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32019L1937]
 - Kodeks pracy art. 11² (zakaz dyskryminacji) — Dz.U. 2025 poz. 277 ze zm.
-  [WYMAGA WERYFIKACJI ISAP]
+  [WYMAGA WERYFIKACJI RZĄD 1]
 - KK art. 218 (naruszenie praw pracowniczych), art. 231 (nadużycie uprawnień)
-  Dz.U. 2025 poz. 383 ze zm. [WYMAGA WERYFIKACJI ISAP]
+  Dz.U. 2025 poz. 383 ze zm. [WYMAGA WERYFIKACJI RZĄD 1]
 - Ustawa o ochronie danych osobowych (UODO) — Dz.U. 2019 poz. 1781 ze zm.
-  [WYMAGA WERYFIKACJI ISAP]
+  [WYMAGA WERYFIKACJI RZĄD 1]
 
 Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. Przed użyciem
 artykułu ustal: akt i Dz.U., status obowiązywania, wersję temporalną na dzień zdarzenia,
@@ -61,7 +61,7 @@ Ustawa obejmuje m.in.:
 - osoby ułatwiające zgłoszenie (pomocnicy sygnalisty)
 - osoby powiązane z sygnalistą (krewni, współpracownicy)
 
-**WYMAGA WERYFIKACJI ISAP** — katalog może ulec zmianie; sprawdź aktualny art. 4 ustawy.
+**WYMAGA WERYFIKACJI RZĄD 1** — katalog może ulec zmianie; sprawdź aktualny art. 4 ustawy.
 
 ## 5. Katalog naruszeń objętych ochroną
 Ustawa obejmuje naruszenia m.in. w zakresie:
@@ -81,7 +81,7 @@ Ustawa obejmuje naruszenia m.in. w zakresie:
 - bezpieczeństwa transportu
 - ochrony środowiska
 
-**WYMAGA WERYFIKACJI ISAP** — pełen katalog: sprawdź aktualny art. 3 ustawy.
+**WYMAGA WERYFIKACJI RZĄD 1** — pełen katalog: sprawdź aktualny art. 3 ustawy.
 
 ## 6. Mapa proceduralna
 
@@ -439,9 +439,9 @@ KATALOG:        Ochrona dotyczy tylko naruszeń z katalogu ustawy — nie każde
 
 ## 11. Odpowiedzialność karna
 ```
-Działanie odwetowe wobec sygnalisty:         [WYMAGA WERYFIKACJI ISAP — art. KK lub art. ustawy]
-Utrudnianie lub uniemożliwianie zgłoszenia:  [WYMAGA WERYFIKACJI ISAP]
-Ujawnienie tożsamości sygnalisty:            [WYMAGA WERYFIKACJI ISAP]
+Działanie odwetowe wobec sygnalisty:         [WYMAGA WERYFIKACJI RZĄD 1 — art. KK lub art. ustawy]
+Utrudnianie lub uniemożliwianie zgłoszenia:  [WYMAGA WERYFIKACJI RZĄD 1]
+Ujawnienie tożsamości sygnalisty:            [WYMAGA WERYFIKACJI RZĄD 1]
 Fałszywe zgłoszenie (celowo):                Odpowiedzialność karna lub cywilna sygnalisty
                                               — brak ochrony przy złej wierze
 

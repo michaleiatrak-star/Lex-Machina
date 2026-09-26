@@ -6,7 +6,7 @@
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
 > o najwyższej w całej ustawie gęstości odesłań do prawa celnego UE (UKC)
 > i do rozporządzeń wykonawczych. Żadna kwota progowa ani warunek proceduralny
-> NIE może być użyty bez weryfikacji w ISAP i w przepisach celnych na datę
+> NIE może być użyty bez weryfikacji w ELI (RZĄD 1) i w przepisach celnych na datę
 > zgłoszenia celnego.
 >
 > ⚠️ **PRZYPOMNIENIE GLOBALNE RODZINY mod-VAT-*:** termin podstawowy zwrotu
@@ -225,7 +225,7 @@
   sesji: czy przepis krajowy (art. 52 ust. 1) został formalnie
   ZNOWELIZOWANY w ślad za tym wyrokiem, czy funkcjonuje nadal w
   brzmieniu niezgodnym (z obowiązkiem prounijnej wykładni przez organy)
-  — sprawdź aktualny stan w ISAP przed powołaniem w piśmie.
+  — sprawdź aktualny stan w ELI (RZĄD 1) przed powołaniem w piśmie.
 
 ⭐ art. 53–80 — kazuistyka zwolnień celowych (m.in. towary dla
   organizacji charytatywnych, dla osób niepełnosprawnych, próbki,

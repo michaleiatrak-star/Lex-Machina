@@ -36,7 +36,7 @@ Rozwiązywanie stosunków pracy z przyczyn niedotyczących pracowników (ekonomi
 
 ## 3. PROCEDURA
 
-### Progi zwolnień grupowych (art. 1 ust. 1 — weryfikuj w ISAP)
+### Progi zwolnień grupowych (art. 1 ust. 1 — weryfikuj w ELI (RZĄD 1))
 
 ```
 Pracodawca ≥ 20 pracowników + w ciągu 30 dni:
@@ -73,7 +73,7 @@ Przyczyny: niedotyczące pracowników
 
 ---
 
-## 4. ODPRAWA (art. 8 ustawy — weryfikuj w ISAP)
+## 4. ODPRAWA (art. 8 ustawy — weryfikuj w ELI (RZĄD 1))
 
 ```
 Należna z mocy prawa — pracodawca nie może się zwolnić:

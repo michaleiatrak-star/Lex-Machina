@@ -75,7 +75,7 @@ Podstawa zwolnienia:
 Rodzaj opłaty: stosunkowa (5% WPS) / stała / podstawowa / tymczasowa
 WPS:
 Opłata obliczona:
-Podstawa prawna (art. KSCU): [do weryfikacji w ISAP]
+Podstawa prawna (art. KSCU): [do weryfikacji w ELI (RZĄD 1)]
 Cap ustawowy (max): [do weryfikacji]
 Opłata minimalna (min): [do weryfikacji]
 Opłata po ewentualnym rozszerzeniu roszczenia:

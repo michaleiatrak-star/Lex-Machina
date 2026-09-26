@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: "3.10"
+version: "3.11"
 description: "Zamówienia publiczne i fundusze UE: PZP, postępowania zakupowe, KIO, środki ochrony prawnej, finansowanie UE i powiązane zagadnienia realizacyjne."
 ---
 
@@ -26,7 +26,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
 **PRZED każdym powołaniem przepisu, artykułu, terminu lub sygnatury:**
-1. Zweryfikuj brzmienie i Dz.U. w `isap.sejm.gov.pl`
+1. Zweryfikuj brzmienie i Dz.U. w `ELI (RZĄD 1)`
 2. Zweryfikuj orzeczenie w `orzeczenia.ms.gov.pl` / `nsa.gov.pl` / `sn.pl`
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
@@ -51,8 +51,8 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 > zmianie brzmienia).
 >
 > ⛔ Wyzwalaczem jest BRAK WYWOŁANIA NARZĘDZIA dla danego twierdzenia w danej
-> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ISAP nie zwalnia z
-> oznaczenia, tylko je wymusza.
+> odpowiedzi — nie brak narzędzi w sesji. Niedostępność ELI (oba kanały) nie zwalnia z
+> oznaczenia, tylko je wymusza; niedostępność ISAP to stan normalny.
 
 ---
 
@@ -60,7 +60,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
-- **Zakaz cytowania przepisów i kwot z pamięci — każde brzmienie weryfikuj w ISAP**
+- **Zakaz cytowania przepisów i kwot z pamięci — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - **Terminy w KIO są absolutne i zawite — minuty decydują**
 
 ## ORKA-BAS — Definicje wspomagające (shared/ORKA-BAS-LEKSYKON.md)
@@ -186,7 +186,7 @@ view dr-07-zamowienia-publiczne-fundusze-ue/MAPA-POKRYCIA.md
 - Samorząd terytorialny: `dr-08`
 - Zamówienia obronne: `dr-13`
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
-- Weryfikacja prawa: isap.sejm.gov.pl
+- Weryfikacja prawa: ELI (RZĄD 1)
 - Orzecznictwo KIO: orzeczenia.uzp.gov.pl (Faza 1-K, orzeczenia-sadowe-v2) | UZP: uzp.gov.pl
 
 ## ⚖️ DISCLAIMER (obowiązkowy)

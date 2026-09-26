@@ -7,7 +7,7 @@
 - Dyrektywa EPBD (2010/31/UE + rewizja 2024/1275/UE — EPBD recast)
   ✅ [VER: EUR-Lex, 2026-05-31]
 
-**Weryfikacja:** isap.sejm.gov.pl i EUR-Lex przed każdym cytowaniem.
+**Weryfikacja:** ELI (RZĄD 1) i EUR-Lex przed każdym cytowaniem.
 
 ## Zakres
 Certyfikat energetyczny: obowiązkowy przy sprzedaży lub najmie budynku/lokalu

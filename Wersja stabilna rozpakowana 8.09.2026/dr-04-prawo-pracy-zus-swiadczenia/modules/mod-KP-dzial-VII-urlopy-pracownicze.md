@@ -213,6 +213,6 @@ urlopu, urlop w okresie wypowiedzenia, ekwiwalent (art. 171 pełna
 treść §1-3 + nowe §4-5 z nowelizacji 2026). Odnotowano niepewności:
 dokładny wymiar urlopu na żądanie (4 dni — niepotwierdzone bezpośrednio
 w KP w tej sesji), urlop opiekuńczy (Rozdział Ia), urlopy bezpłatne
-(Rozdział II) — wszystkie oznaczone do weryfikacji na ISAP. Odnotowano
+(Rozdział II) — wszystkie oznaczone do weryfikacji w ELI (RZĄD 1). Odnotowano
 projekt (NIEWPROWADZONY) dodatkowego urlopu za staż pracy — nie
 traktować jako obowiązujące prawo.
