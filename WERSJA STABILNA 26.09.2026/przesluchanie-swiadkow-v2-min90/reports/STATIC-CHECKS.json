@@ -1,0 +1,10 @@
+{
+  "skill_yaml_frontmatter": true,
+  "no_component_imports_in_jsx": true,
+  "no_createPortal": true,
+  "no_window_open": true,
+  "has_witness_types": true,
+  "has_judge_types": true,
+  "has_matrix": true,
+  "text_first_policy": true
+}

@@ -1,0 +1,11 @@
+default_render: chat_text
+jsx_render: explicit_request_only
+forbidden_by_default:
+  - side_panel
+  - createPortal
+  - window.open
+  - auto_artifact_generation
+allowed_when_requested:
+  - inline_jsx
+  - dashboard
+  - visualization
