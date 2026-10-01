@@ -32,8 +32,11 @@ uruchamia serwer z pliku na dysku, nie z archiwum.
 Serwery: `isap`, `saos`, `krs`, `nbp`, `eurlex`, `eureka`, `sudop`, `cbosa`, `uodo`, `wl` (biała lista VAT), `ceidg` (tylko z `CEIDG_API_KEY`).
 
 ⚠️ `cbosa`: port 1:1 parsera `orzeczenia-sadowe-v2/tools/cbosa_parser.py` (równoważność:
-`cbosa-example/test_normalizacja.mjs`, 25 przypadków generowanych z Pythona + paginacja). Warstwa
-HTTP (sesja, cookies, przekierowania) NIEZMIERZONA na żywo — z sandboxa Claude brama wyjściowa
-zwraca 503 (F-213). Pierwsze uruchomienie `test_na_zywo.mjs` u siebie rozstrzyga.
+`cbosa-example/test_normalizacja.mjs`, 25 przypadków generowanych z Pythona + paginacja + regresje
+z pomiaru na żywo). Warstwa HTTP zmierzona na żywo 2026-09-30/10-01 (macOS, Node 22) — trzy defekty
+naprawione: (1) kontrola `Content-Length` myliła bajty skompresowane (gzip) z po dekompresji;
+(2) sekcja „powiązane" (`span.powiazane`) była liczona jako wyniki; (3) metadane dokumentu
+w zagnieżdżonych tabelach nie były odczytywane („brak pól Data orzeczenia"). `test_na_zywo.mjs`: CBOSA → FOUND (pełny harness 30/30).
+Z sandboxa Claude nadal 503 (F-213); pomiar wykonywać z sieci użytkownika.
 
 ⛔ Po każdej zmianie w `*-example/*.js`: `python zbuduj_pakiet.py`, inaczej CI zgłosi nieaktualny `dist/`.

@@ -1,7 +1,7 @@
 # CBOSA-ADAPTER — kanoniczny kontrakt dostępu NSA/WSA
 
 > **Plik:** `shared/CBOSA-ADAPTER.md`
-> **Wersja:** 1.1 (2026-09-14) — rozdzielono DIRECT_LIVE od CRAWLED_OR_INDEXED; fallback snapshot ma host post-check, exact-match i jawny content_scope.
+> **Wersja:** 1.2 (2026-09-30) — doprecyzowano: sekcja „powiązane" poza zbiorem wyników; kontrola `Content-Length` tylko bez kodowania treści. (1.1 z 2026-09-14 — rozdzielono DIRECT_LIVE od CRAWLED_OR_INDEXED; fallback snapshot ma host post-check, exact-match i jawny content_scope.)
 > **Status źródła:** CBOSA / `orzeczenia.nsa.gov.pl` = **RZĄD 2A**
 > **Rola:** transport i walidacja; adapter nie ma własnego RZĘDU.
 
@@ -42,7 +42,7 @@ submit=Szukaj
 
 1. Odczytaj licznik `Znaleziono N orzeczeń`.
 2. Nierozpoznany licznik = `OUT_OF_SCOPE`.
-3. Wyciągnij unikalne `/doc/{ID}`.
+3. Wyciągnij unikalne `/doc/{ID}` z listy wyników — sekcja „powiązane" (`span.powiazane`) nie należy do zbioru wyników i nie liczy się do licznika ani paginacji.
 4. Jeśli liczba ID < N, pobieraj `/cbo/find?p=N` z tymi samymi cookies.
 5. Brak nowych ID na kolejnej stronie, pętla paginacji, więcej ID niż licznik
    albo limit bezpieczeństwa = `OUT_OF_SCOPE`.
@@ -58,7 +58,10 @@ Dla każdego kandydata pobierz `/doc/{ID}`. Wymagane do uznania dokumentu:
 - sentencja.
 
 Jeżeli transport jest oznaczony jako niepełny albo `Content-Length` nie zgadza
-się z liczbą odebranych bajtów → `OUT_OF_SCOPE`.
+się z liczbą odebranych bajtów → `OUT_OF_SCOPE`. Kontrolę stosuje się do odpowiedzi
+bez kodowania treści: przy `Content-Encoding` (gzip/br) nagłówek opisuje bajty
+skompresowane, a porównywana treść jest po dekompresji — porównanie wprost daje
+fałszywy alarm.
 
 Krytyczny drift HTML lub błąd odczytu choć jednego kandydata także daje
 `OUT_OF_SCOPE`, bo exact-match mógł zostać przeoczony.

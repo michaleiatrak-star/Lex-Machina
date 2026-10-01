@@ -4,7 +4,7 @@ b817c3a462bb38ed5bb739643d7442d2681c2e628da3010f7af715d04b6b18f0  ./ACTIVATION-M
 913fb9f6704c699488f283f32c460c4a22a986c11ceed4bec152e1ca4a8dc3e5  ./AUDIT-TRAIL-SPEC.md
 04b048b8cedd6335fde815e11118a070653018b8994b2a6d9b0b0996b8abb302  ./AUDYT-KONCOWY.md
 c1841ad6f5a9ea2320c2d44e2d491832925ac598877cf3891c1f710811cbcd99  ./BRAKI-FORMALNE.md
-af55f424ecef4a291134fae58e238aee90ac48f9c3207633656da60567c985fd  ./CBOSA-ADAPTER.md
+c9e4c18e72a65bdb08455bbdca0c6016cde7cd8ef94682da9cbce7c87be2ac31  ./CBOSA-ADAPTER.md
 023e63a4148424326ab142efc068ec5270c524aecfcd21fa5a48a8c468aa403c  ./CLAIM-VALIDATION.md
 1e6d281c8c97d416b73a08f8fedd5a712e2fd5053414b4521e2ed10c712b6c7d  ./CP-GATE.md
 00b1862b042e32f3dd8f283270b27eca8fc15555b6954c673d74ae313eb0fbd7  ./CROSS-DOMAIN-CONFLICT-ROUTER.md
@@ -179,6 +179,7 @@ e380f8c9c87a9fa4c3dec694b4822fc6dd7c85c6c689269fd60b5a1a2c2a477d  ./tools/connec
 b44f877bd34d3fdd1eb8730ba21ae226e3c551fbc280c3359dd8fd12b19520bf  ./tools/export_gate.py
 137a25e650f05a205b41aba2b48cd0e8fb7e0eecdec6f649500a4ed704c73bc6  ./tools/extract_api_verification_log.py
 a15ee50bf82c68e2f74f6ead98573dc9c92fcb2e5097fbbe2e30106946223f76  ./tools/hash_chain_verify.py
+6b240d1dc2249daef42b303495831c4809767784677e8d12a7538b53613f2d5d  ./tools/mcp-servers/mcp-servers-examples.zip
 464bec5a7a22f230c7045e63f3cb7d37f46288de9439d22f65ba95d775d5a7fa  ./tools/przyklad-adapter-normalizujacy.md
 59a6d07766e8c3c63ce45db996ab6dcce57c72a9ef6eebc412890bacbe8f8604  ./tools/przyklady/konwersacja_api_przyklad.json
 2ab6d6782765da82d89372681577c35886665f3f21e2ffab28de4419a3dcbcc2  ./tools/przyklady/przyklad_pisma.md
