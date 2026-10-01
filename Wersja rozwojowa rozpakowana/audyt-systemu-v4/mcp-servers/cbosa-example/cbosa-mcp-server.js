@@ -72,7 +72,16 @@ class Zbieracz { // _TextCollector
 // ── parser wyników i dokumentu (odpowiedniki _SearchParser / _DocumentParser) ─────────────
 export function extractDocIds(html) {
   const out = [], widz = new Set();
+  // ⚡ 2026-09-30 (pomiar na żywo): sekcja „powiązane" (span.powiazane) nie jest listą wyników — jej
+  // /doc/{ID} podbijałoby licznik ponad „Znaleziono N orzeczeń" i wymuszało fałszywy fail-closed.
+  let powiazane = 0;
   for (const t of tokeny(html)) {
+    if (t.typ === "start" && t.tag === "span" && klasy(t.atr).has("powiazane")) { powiazane += 1; continue; }
+    if (powiazane > 0) {
+      if (t.typ === "start" && t.tag === "span") powiazane += 1;
+      else if (t.typ === "koniec" && t.tag === "span") powiazane -= 1;
+      continue;
+    }
     if (t.typ === "koniec" || t.tag !== "a") continue;
     const m = (t.atr.href ?? "").match(/^\/doc\/([A-Z0-9]{10})\/?$/i);
     if (m && !widz.has(m[1].toUpperCase())) { widz.add(m[1].toUpperCase()); out.push(m[1].toUpperCase()); }
@@ -95,14 +104,15 @@ function sygnaturaZTytulu(title) {
 
 function parsujDokumentSurowo(html) {
   const s = { title: new Zbieracz(), inTitle: false, tabela: {}, sekcje: {}, tdKl: null, td: new Zbieracz(),
+    tdGleb: 0, tdKomorka: null, tdKomorki: [],
     divKl: null, div: new Zbieracz(), etykTab: null, etykSek: null, glab: 0, sekcja: null,
     htmlEnd: false, bodyEnd: false, widzSent: false, widzUzas: false };
-  const nl = () => { if (s.tdKl) s.td.newline(); if (s.divKl) s.div.newline(); };
+  const nl = () => { if (s.tdKl) (s.tdKomorka ?? s.td).newline(); if (s.divKl) s.div.newline(); };
   for (const t of tokeny(html)) {
     if (t.typ === "tekst") {
       if (s.glab > 0 && s.sekcja) { s.sekcja.add(t.tekst); continue; }
       if (s.inTitle) s.title.add(t.tekst);
-      if (s.tdKl !== null) s.td.add(t.tekst);
+      if (s.tdKl !== null) (s.tdKomorka ?? s.td).add(t.tekst);
       if (s.divKl !== null) s.div.add(t.tekst);
       continue;
     }
@@ -111,7 +121,17 @@ function parsujDokumentSurowo(html) {
     if (t.typ === "start" || t.typ === "pusty") {
       const k = klasy(t.atr);
       if (tag === "title") { s.inTitle = true; continue; }
-      if (tag === "td") { s.tdKl = klucz(k); s.td = new Zbieracz(); continue; }
+      // ⚡ 2026-10-01 (pomiar na żywo): metadane w zagnieżdżonych tabelach (td.info-list-label > td.lista-label;
+      // td.info-list-value > table > td). Wartość pola = tekst bezpośredni komórki, a gdy brak — pierwsza niepusta komórka zagnieżdżona (adnotacje, np. „orzeczenie prawomocne", pomijane).
+      if (tag === "td") {
+        const tk = klasy(t.atr);
+        if (tk.has("lista-label") || tk.has("info-list-value")) {
+          s.tdKl = klucz(tk); s.td = new Zbieracz(); s.tdGleb = 1; s.tdKomorka = null; s.tdKomorki = [];
+        } else if (s.tdKl !== null) {
+          s.tdGleb += 1; s.tdKomorka = new Zbieracz();
+        }
+        continue;
+      }
       if (tag === "div") { s.divKl = klucz(k); s.div = new Zbieracz(); continue; }
       if (tag === "span" && k.has("info-list-value-uzasadnienie") && s.etykSek) { s.glab = 1; s.sekcja = new Zbieracz(); continue; }
       if (s.glab > 0) {
@@ -135,10 +155,18 @@ function parsujDokumentSurowo(html) {
       continue;
     }
     if (tag === "td" && s.tdKl !== null) {
+      if (s.tdGleb > 1) {
+        s.tdGleb -= 1;
+        const pod = (s.tdKomorka?.text() ?? "").trim();
+        if (pod) s.tdKomorki.push(pod);
+        s.tdKomorka = null;
+        continue;
+      }
       const tx = s.td.text(), k = new Set(s.tdKl.split(" "));
+      const zagn = (s.tdKomorki ?? []).find((x) => x) ?? "";
       if (k.has("lista-label")) s.etykTab = tx;
-      else if (k.has("info-list-value") && s.etykTab) { s.tabela[s.etykTab] = tx; s.etykTab = null; }
-      s.tdKl = null; s.td = new Zbieracz(); continue;
+      else if (k.has("info-list-value") && s.etykTab) { s.tabela[s.etykTab] = tx || zagn; s.etykTab = null; }
+      s.tdKl = null; s.td = new Zbieracz(); s.tdGleb = 0; s.tdKomorka = null; s.tdKomorki = []; continue;
     }
     if (tag === "div" && s.divKl !== null) {
       const tx = s.div.text(), k = new Set(s.divKl.split(" "));
