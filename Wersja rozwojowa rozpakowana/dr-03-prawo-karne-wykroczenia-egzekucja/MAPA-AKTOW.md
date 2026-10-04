@@ -42,8 +42,8 @@ Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednol
 | KK art. 263 — broń | `mod-KK-art263-bron-nielegalna` | ✅ aktywny; fresh gate ustaw administracyjnych |
 | KK art. 267–269c — cyberprzestępstwa | `mod-KK-art267-269c-cyberprzestepstwa` + `mod-KK-cyberprzestepstwa-szczegolowy` | ✅ aktywny |
 | KK art. 270–277d, 310 — fałszerstwa dokumentów, pieniędzy i papierów wartościowych | `mod-KK-art270-310-falszerstwa-dokumentow` | ✅ aktywny |
-| KK art. 278–295 — przestępstwa przeciwko mieniu (kradzież, rozbój, przywłaszczenie, oszustwo, paserstwo; art. 294 kwalifikacje wartościowe, art. 295 naprawienie szkody) | `mod-KK-art278-295-przestepstwa-przeciwko-mieniu` | ✅ NOWY 2026-10-04i; fresh gate (ELI) |
-| KK art. 291–293, 299 — paserstwo / pranie pieniędzy | `mod-KK-art291-pranie-pieniedzy` | ✅ aktywny |
+| KK art. 278–295 — przestępstwa przeciwko mieniu (kradzież, rozbój, przywłaszczenie, oszustwo, paserstwo; art. 294 kwalifikacje wartościowe, art. 295 naprawienie szkody) | `mod-KK-art278-295-przestepstwa-przeciwko-mieniu` | ✅ NOWY 2026-10-04i; fresh gate (ELI); ⛔ art. 291–293 pokryte TAKŻE przez wiersz paserstwa/prania — wczytaj oba |
+| KK art. 291–293, 299 — paserstwo / pranie pieniędzy | `mod-KK-art291-pranie-pieniedzy` | ✅ aktywny; ⛔ art. 291–293 NAKŁADAJĄ SIĘ z wierszem „KK art. 278–295” — pytanie o paserstwo wymaga OBU modułów (ten: pranie pieniędzy i AML; tamten: tryb ścigania, art. 294–295, przedawnienie) |
 | KK art. 296 — nadużycie zaufania | `mod-KK-art296-naduzycie-zaufania` | ✅ aktywny |
 | KK art. 296a — korupcja prywatna | `mod-KK-art296a-korupcja-sektor-prywatny` | ✅ aktywny |
 | KK art. 305 — zmowa przetargowa | `mod-KK-art305-zmowa-przetargowa-karna` | ✅ aktywny |

@@ -5,7 +5,7 @@ dependencies:
   requires:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
-version: "6.169"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.170"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -139,6 +139,12 @@ scripts:
                                           # Offline (Node opcjonalny: bez niego WARN); BLOKER od 2026-10-01b
   - scripts/check_mapy_aktow.py          # T45 — MAPA-AKTOW/ROUTING-MAP czytelne dla parsera Markdown (nagłówek,
                                           # liczba komórek), każdy moduł DR w kolumnie „Moduł”, odesłania rozwiązywalne
+  - scripts/test_mac_ce_litery.py        # T46 — polskie litery w Dz.U./M.P. 2000–2009 (Mac CE opisane jako Mac
+                                          # Roman, zgłoszenie #83): mapa wyprowadzona z kodeków, wykrycie usterki
+                                          # (bez fałszywych trafień na francuskim), żywa pagina, zgodność PY↔JS
+  - scripts/napraw_tekst_dzu.py          # KONWERTER UŻYTKOWNIKA (nie test) — czyta akt Dz.U./M.P. z lat 2000–2009
+                                          # z poprawnymi polskimi literami: txt/md/html do podglądu. Wiążący
+                                          # pozostaje PDF ogłoszony; do pisma cytuj z ELI (RZĄD 1)
   - scripts/check_osiagalnosc_shared.py  # T44 — każdy plik shared osiągalny z SKILL.md skilli produkcyjnych
                                           # (bez krawędzi z audytu i rejestrów); allowlista z uzasadnieniem
   - scripts/check_sieroty.py             # T43 — sieroty: plik bez ścieżki wywołania (ścieżkowo, odróżnia
@@ -1494,7 +1500,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.169 | Ostatnia aktualizacja: 2026-10-04j (TRYB TREŚĆ: F-233 zamknięta — porozumienie administracyjne 2013/1375 w DR-04 3.44; limit MRG PL–Rosja potwierdzony, ścieżka odwoławcza naprawiona w DR-14 3.12); poprzednio 2026-10-04i (rozdz. XXXV KK — moduł DR-03 3.52; F-231 i F-232 zamknięte)*
+*Wersja: 6.170 | Ostatnia aktualizacja: 2026-10-04k (zgłoszenie #83: polskie litery Mac CE w Dz.U./M.P. 2000–2009 — naprawa w serwerze MCP i w `check_wyjatek_gate_eli.py`, przebudowany `dist`, test T46, konwerter `napraw_tekst_dzu.py`; nowa F-234); poprzednio 2026-10-04j (F-233 zamknięta)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

@@ -181,6 +181,7 @@ def main():
         ("T44", "T44 KRYTYCZNY — osiągalność shared ze skilli produkcyjnych", "check_osiagalnosc_shared.py", ["--repo-root", str(root)]),
         # 2026-10-04e: mapy aktów czytelne maszynowo i kompletne wobec modułów (F-229).
         ("T45", "T45 KRYTYCZNY — mapy aktów: struktura tabel, pokrycie modułów, odesłania", "check_mapy_aktow.py", ["--repo-root", str(root)]),
+        ("T46", "T46 WYSOKI — litery Mac CE w aktach 2000–2009: mapa, wykrycie, pagina, zgodność PY↔JS", "test_mac_ce_litery.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -202,7 +203,7 @@ def main():
     # T34–T36 dołączyły 2026-09-26 (F-196, F-200, F-201).
     # T38 dołączył 2026-09-27e (AUDYT-2026-09-27e).
     # T39 i T40 dołączyły 2026-09-29 (F-215, F-216/F-217); T41 — 2026-09-29c (limit plików).
-    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29", "T30", "T34", "T35", "T36", "T38", "T39", "T40", "T41", "T43", "T44", "T45")
+    BLOCKERY = ("T1", "T6_T7", "T18", "T19", "T19b", "T22", "T28", "T29", "T30", "T34", "T35", "T36", "T38", "T39", "T40", "T41", "T43", "T44", "T45", "T46")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

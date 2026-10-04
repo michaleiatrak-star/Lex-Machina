@@ -1,6 +1,6 @@
 {
   "name": "audyt-systemu-v4",
-  "version": "6.169",
+  "version": "6.170",
   "description": "Audyt jakości, spójności i bezpieczeństwa systemu prawnych skilli: zależności, wersje, mapy Dz.U., treść merytoryczna, propagacja zmian, deduplikacja i bramki jakości.",
   "author": {
     "name": "Adrian Miłosz Kalinowski",

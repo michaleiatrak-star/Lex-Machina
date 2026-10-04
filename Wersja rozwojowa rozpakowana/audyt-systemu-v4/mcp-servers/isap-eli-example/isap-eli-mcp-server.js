@@ -181,8 +181,41 @@ server.registerTool(
 
 const pamiecTekstu = new Map();
 
+// ── Dz.U./M.P. z lat 2000–2009: polskie litery w fontach QuarkXPress „…PL” są zapisane
+// w kodach Mac Central European, a PDF deklaruje je jako Mac Roman („Za∏àcznik” zamiast
+// „Załącznik”). Dotyczy pdfjs tak samo jak pdftotext, pdfplumber, pypdf i PyMuPDF.
+// Mapa WYPROWADZONA, nie przepisana: litera.encode("mac_latin2").decode("mac_roman");
+// Ó i ó mapują się na siebie, więc nie ma ich w tabeli (16 pozycji, nie 18).
+const MAC_CE_NA_PL = Object.fromEntries(
+  [..."Ñàåç¢´¸∏¡ƒÂÊèê˚˝"].map((c, i) => [c, "ĄąĆćĘęŁłŃńŚśŹźŻż"[i]]),
+);
+// ⛔ Bramką NIE jest rocznik, tylko wykrycie usterki: à, ç, è, ê, Ñ i å są prawdziwymi literami
+// w tekstach francuskich, hiszpańskich i skandynawskich (umowy międzynarodowe w Dz.U.), więc
+// przeliczenie po samym roczniku psułoby je. Sygnałem usterki są znaki, które w tekście
+// urzędowym nie występują poza nią (¢ ´ ¸ ∏ ¡ ƒ Â Ê ˚ ˝), przy JEDNOCZESNYM braku prawidłowych
+// polskich znaków diakrytycznych — przy tej usterce font psuje je wszystkie, więc licznik = 0.
+const MARKERY_MAC_CE = /[¢´¸∏¡ƒÂÊ˚˝]/g;
+const DIAKRYTYKI_PL = /[ąćęłńśźżĄĆĘŁŃŚŹŻ]/g;
+
+/** Czy strona ma polskie litery w kodach Mac CE odczytanych jako Mac Roman. */
+export function zepsuteMacCE(tekst) {
+  return (tekst.match(MARKERY_MAC_CE) ?? []).length >= 2 && (tekst.match(DIAKRYTYKI_PL) ?? []).length === 0;
+}
+/** Przelicza litery TYLKO na stronach, na których usterka została wykryta. */
+export function naprawMacCE(tekst) {
+  return zepsuteMacCE(tekst) ? tekst.replace(/[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]/g, (c) => MAC_CE_NA_PL[c]) : tekst;
+}
+
+// Żywa pagina. Pierwszy wzorzec — format bieżący („Dziennik Ustaw – 12 – Poz. 345”), drugi —
+// format z lat 2000–2009 („Dziennik Ustaw Nr 105 — 7006 — Poz. 990 i 991”), też dla M.P.
+// ⛔ Klasy znaków celowo bez `\s`: `\s` obejmuje koniec wiersza, więc wzorzec zjadałby numer
+// pozycji stojący w następnym wierszu jako nagłówek treści (zmierzone na DU/2000/649).
+const PAGINA_BIEZACA = /^Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\.\s*\d+\s*$/m;
+const PAGINA_2000_2009 = /^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$/gm;
+
 export function czyscTekstPdf(strony) {
-  return strony.map((t) => t.replace(/^Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\.\s*\d+\s*$/m, "")).join("\n")
+  return strony.map(naprawMacCE)
+    .map((t) => t.replace(PAGINA_BIEZACA, "").replace(PAGINA_2000_2009, "")).join("\n")
     .replace(/(\p{L})-\n(\p{Ll})/gu, "$1$2").replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n");
 }
 

@@ -353,11 +353,50 @@ def _pick_tj(data):
     return pool[-1]
 
 
+MAC_CE_NA_PL = {m: p for m, p in zip("Ñàåç¢´¸∏¡ƒÂÊèê˚˝", "ĄąĆćĘęŁłŃńŚśŹźŻż")}
+_MARKERY_MAC_CE = re.compile(r"[¢´¸∏¡ƒÂÊ˚˝]")
+_DIAKRYTYKI_PL = re.compile(r"[ąćęłńśźżĄĆĘŁŃŚŹŻ]")
+# Żywa pagina zeszytu 2000–2009 („Dziennik Ustaw Nr 105 — 7006 — Poz. 990 i 991”).
+# Bez `-layout` rozpada się na trzy wiersze, stąd dopuszczone pojedyncze złamania
+# PRZED „—” i PRZED „Poz.”. Klasy bez `\s`: `\s` objęłoby koniec wiersza i wzorzec
+# zjadałby numer pozycji stojący w następnym wierszu jako nagłówek treści.
+_PAGINA_2000_2009 = re.compile(
+    r"^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?"
+    r"[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}"
+    r"(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$", re.M)
+
+
+def zepsute_mac_ce(tekst):
+    """Polskie litery zapisane w Mac CE, a opisane w PDF jako Mac Roman.
+
+    Dotyczy Dz.U. i M.P. z lat 2000–2009 (fonty QuarkXPress „…PL”): „Za∏àcznik”
+    zamiast „Załącznik”, więc wyszukiwanie fraz nie znajduje nic. Bramką jest
+    WYKRYCIE, nie rocznik — à, ç, è, ê, Ñ i å bywają prawdziwymi literami
+    (umowy międzynarodowe po francusku, hiszpańsku, w językach skandynawskich).
+    """
+    return len(_MARKERY_MAC_CE.findall(tekst)) >= 2 and not _DIAKRYTYKI_PL.search(tekst)
+
+
+def napraw_mac_ce(tekst):
+    """Przelicza litery tylko wtedy, gdy usterka została wykryta."""
+    if not zepsute_mac_ce(tekst):
+        return tekst
+    return re.sub(r"[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]", lambda m: MAC_CE_NA_PL[m.group()], tekst)
+
+
 def pdf_to_text(url):
-    """Pobiera PDF i wyciąga tekst przez `pdftotext -layout`.
+    """Pobiera PDF i wyciąga tekst przez `pdftotext`.
 
     Tekst jednolity (obwieszczenie) ma w ELI `textHTML: false` — PDF jest
     JEDYNĄ maszynową postacią jego treści.
+
+    Dla zeszytów Dz.U./M.P. z lat 2000–2009 (dwa łamy na stronie, polskie
+    litery w Mac CE) `-layout` stawia łamy obok siebie i miesza zdania, więc
+    po wykryciu usterki tekst jest czytany PONOWNIE bez `-layout`, w kolejności
+    czytania. Zmierzone na 53 aktach z lat 2000–2009 mających oficjalny HTML
+    (udział słów wzorca we właściwej kolejności): 0,486 → 0,566 po samej
+    naprawie liter → 0,813 po dodaniu trybu bez `-layout`.
+    Dla aktów nowszych nic się nie zmienia — detektor nie trafia (0 na 16).
     """
     import shutil
     import subprocess
@@ -377,11 +416,19 @@ def pdf_to_text(url):
         try:
             out = subprocess.run(["pdftotext", "-layout", src, "-"],
                                  capture_output=True, timeout=300)
+            if out.returncode != 0:
+                return None, "pdftotext kod {}".format(out.returncode)
+            tekst = out.stdout.decode("utf-8", errors="replace")
+            if zepsute_mac_ce(tekst):
+                bez_layout = subprocess.run(["pdftotext", src, "-"],
+                                            capture_output=True, timeout=300)
+                if bez_layout.returncode == 0:
+                    tekst = bez_layout.stdout.decode("utf-8", errors="replace")
         except Exception as exc:                   # noqa: BLE001
             return None, "BŁĄD pdftotext: {}".format(exc)
-    if out.returncode != 0:
-        return None, "pdftotext kod {}".format(out.returncode)
-    return out.stdout.decode("utf-8", errors="replace"), None
+    # Naprawa per strona (separator \f), bo wykrycie dotyczy fontu strony.
+    tekst = "\f".join(napraw_mac_ce(s) for s in tekst.split("\f"))
+    return _PAGINA_2000_2009.sub("", tekst), None
 
 
 def fetch_act_text(act_id, force_ogloszony=False, allow_stale=False):

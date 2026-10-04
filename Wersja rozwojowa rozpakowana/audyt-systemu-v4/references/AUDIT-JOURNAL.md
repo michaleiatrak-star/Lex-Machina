@@ -69891,6 +69891,77 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-04k — ZGŁOSZENIE #83: polskie litery w Dz.U./M.P. 2000–2009 naprawione w obu ścieżkach, konwerter dla użytkownika, test T46 (6.170)
+
+### 1. ŹRÓDŁO ZLECENIA
+Użytkownik przekazał zgłoszenie #83 (autor: PolskiAgentW, repozytorium `eli2md` / `dziennik-ustaw-2000-2011-md`; w treści zaznaczone, że przygotowane z użyciem AI): `isap_tekst` czyta z PDF polskie litery zapisane w kodach Mac Central European, opisane w PDF jako Mac Roman — „Za∏àcznik” zamiast „Załącznik”, „noÊników” zamiast „nośników”, przez co `szukaj` nie znajduje fraz. Dodatkowo polecenie: dołożyć konwerter dla użytkownika, żeby w podglądzie czcionka była prawidłowa.
+
+### 2. CO JEST W ZAKRESIE SKILLI (w odróżnieniu od F-230)
+Oba pliki wskazane w zgłoszeniu leżą w drzewie skilli, więc poprawka była wykonalna tutaj:
+- `audyt-systemu-v4/mcp-servers/isap-eli-example/isap-eli-mcp-server.js` — `tekstPdf` / `czyscTekstPdf` (pdfjs);
+- `audyt-systemu-v4/scripts/check_wyjatek_gate_eli.py` — `pdf_to_text` (`pdftotext -layout`);
+- `audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs` — zbudowany pakiet, przebudowany w tej sesji.
+
+### 3. WERYFIKACJA MAPY — NIE PRZEPISANA, WYPROWADZONA
+STATUS: ✅ POTWIERDZONE NIEZALEŻNIE. ŹRÓDŁO: kodeki Pythona — dla każdej polskiej litery `litera.encode("mac_latin2").decode("mac_roman")`. REPRODUKCJA: to samo wyrażenie dla ciągu `ĄąĆćĘęŁłŃńÓóŚśŹźŻż`.
+
+Mapa wyprowadzona ma 18 pozycji, z czego `Ó` i `ó` mapują się na siebie — zostaje 16 par, identycznych co do znaku z tabelą ze zgłoszenia. ⇒ Tabela ze zgłoszenia jest poprawna, a jej 16 pozycji (zamiast 18) jest konsekwencją, nie brakiem. Mapa w kodzie jest budowana z tego samego ciągu i pilnuje jej test T46.
+
+### 4. BRAMKA: WYKRYCIE USTERKI, NIE ROCZNIK
+Zgłoszenie proponowało warunek `rok >= 2000 && rok <= 2009`, bo mapa zmienia też prawdziwe „à”, „ç”, „è”, „ê” (teksty francuskie w umowach międzynarodowych). ⛔ Przyjęto rozwiązanie mocniejsze: bramką jest **wykrycie usterki na stronie**, nie rocznik.
+```
+zepsute = (liczba znaków [¢ ´ ¸ ∏ ¡ ƒ Â Ê ˚ ˝] >= 2) ORAZ (liczba [ąćęłńśźżĄĆĘŁŃŚŹŻ] == 0)
+```
+Markery to znaki, które w polskim tekście urzędowym nie występują poza tą usterką; z listy wyłączono à, ç, è, ê, Ñ, å jako realne litery obcych alfabetów. Drugi warunek wynika z natury usterki: psuje ona WSZYSTKIE polskie znaki diakrytyczne naraz, więc ich licznik musi wynosić zero. ⇒ akt francuskojęzyczny spoza tej usterki nie zostanie przeliczony, a akt z usterką spoza lat 2000–2009 (gdyby taki był) zostanie naprawiony.
+ZMIERZONE: 0 fałszywych trafień na 16 aktach z lat 2015–2023; 53 trafienia na 53 aktach z lat 2000–2009.
+
+### 5. POMIAR (ZASADA 14 — liczby, nie wrażenia)
+Próba: akty Dz.U. z lat 2000–2009 mające JEDNOCZEŚNIE oficjalny HTML (wzorzec) i PDF; losowanie z ziarnem 83, po 6 na rocznik, odrzucone akty o HTML < 150 słów → **n = 53**. Kontrola regresji: 15 aktów z lat 2015–2023 wybranych tak samo. Miara: udział słów wzorca obecnych w tekście z PDF — „we właściwej kolejności” (najdłuższy wspólny podciąg) i „bez względu na kolejność” (wielozbiór).
+
+**Ścieżka JS (pdfjs, `czyscTekstPdf`), n = 53:**
+| wariant | kolejność | wielozbiór |
+|---|---|---|
+| stan przed poprawką | 0,736 | 0,781 |
+| sama naprawa liter | 0,894 | 0,942 |
+| samo usunięcie żywej paginy | 0,736 | 0,779 |
+| obie poprawki | 0,893 | 0,940 |
+Aktów pogorszonych przez poprawkę: **0**.
+
+**Ścieżka Python (`pdftotext`), n = 53:**
+| wariant | kolejność | wielozbiór |
+|---|---|---|
+| stan przed poprawką (`-layout`) | 0,486 | 0,755 |
+| + naprawa liter | 0,566 | 0,901 |
+| + naprawa liter, pagina i czytanie BEZ `-layout` | **0,813** | **0,940** |
+
+Akty 2015–2023 (n = 15): 0,882 / 0,935 przed → 0,880 / 0,933 po. Różnica −0,002 to artefakt miary (patrz §6), nie utrata treści: litery i tryb czytania na tych aktach nie zmieniają się w ogóle, bo wykrycie nie trafia.
+
+### 6. BŁĄD METODY W ZGŁOSZENIU — NAZWANY
+Miara ze zgłoszenia liczy, ile słów WZORCA znalazło się w tekście z PDF. Jest to miara **kompletności**, nie czystości: nadmiarowy tekst w PDF (żywa pagina, sąsiednia pozycja) nie obniża jej w ogóle. ⇒ Druga z proponowanych poprawek (usunięcie nagłówka stron) **z definicji nie może** podnieść tej liczby, a usunięcie czegokolwiek może ją tylko obniżyć. Zmierzone: wariant „sama pagina” daje 0,736 / 0,779 wobec 0,736 / 0,781 — spadek o 0,002, bo nagłówek dostarczał słów („ustaw”, „poz”), którymi miara zaliczała wystąpienia ze wzorca. Nie jest to argument przeciw usuwaniu paginy: wiersz „Dziennik Ustaw Nr 105 — 7006 — Poz. 990 i 991” wstrzyknięty w środek zdania psuje `wytnijArtykul` i zwraca śmieci w `szukaj`, a kod już usuwał nagłówek w formacie bieżącym — rozszerzenie na format 2000–2009 jest dokończeniem istniejącej intencji, nie nową funkcją. Uzasadnienie jest więc KONSTRUKCYJNE, nie pomiarowe, i tak jest w kodzie opisane.
+
+### 7. BŁĘDY WŁASNE TEJ SESJI (ZASADA 14)
+1. **Pierwsza wersja wzorca paginy zjadała treść.** Klasa `[\d,\s i–-]` zawiera `\s`, które obejmuje koniec wiersza, więc dopasowanie przechodziło do następnego wiersza i kasowało numer pozycji stojący tam jako nagłówek treści (zmierzone na DU/2000/649: „Poz. 649\n649” → znikało oba). Naprawione przez `[^\S\n]` (biała spacja bez końca wiersza); przypadek ma własną asercję w T46.
+2. **Wzorzec nie trafiał paginy łamanej.** Bez `-layout` nagłówek rozpada się na trzy wiersze rozdzielone pustymi, a na dalszych stronach bywa bez części „Poz. …”. Wykryte dopiero przy uruchomieniu na prawdziwym akcie — poprawione (dopuszczone do dwóch złamań wiersza, część „Poz.” opcjonalna).
+3. W konwerterze została po redakcji konstrukcja `r"…" if False else r"…"` — usunięta przed wydaniem.
+Punkty 1 i 2 wyszły z uruchomienia kodu na realnym akcie, nie z lektury — zapis dla przyszłych sesji: wzorca na tekst z PDF nie wolno przyjmować bez odpalenia na pliku.
+
+### 8. CO POWSTAŁO
+- **`scripts/napraw_tekst_dzu.py` — konwerter dla użytkownika** (polecenie z tej sesji). Przyjmuje ELI (`DU/2003/991`), lokalny PDF, plik tekstowy albo potok; zwraca `txt`, `md` albo samodzielny `html` z deklaracją UTF-8 i czcionką szeryfową do czytania na ekranie. `--szukaj FRAZA` pokazuje liczbę trafień przed i po naprawie. W nagłówku wyniku stoi granica użycia: wiążący jest PDF ogłoszony, do pisma obowiązuje ELI (RZĄD 1). Sprawdzone na DU/2003/991: „nośników” 0× przed, 14× po.
+- **`scripts/test_mac_ce_litery.py` (T46)**, zarejestrowany w `run_regression_suite.py` i w BLOCKERACH: mapa w kodzie musi równać się mapie z kodeków; wykrycie ma trafiać w tekst zepsuty i NIE trafiać w poprawny polski ani we francuski; pagina w obu postaciach usuwana, numer pozycji nietknięty; mapa i markery w Pythonie i w JS muszą być zgodne. Działa offline.
+- Przebudowany `mcp-servers/dist/lex-mcp.mjs` (2 453 211 B) — poprawka jest w wydanym pakiecie, nie tylko w źródle.
+
+### 9. CO ZOSTAJE NIEROZWIĄZANE → F-234
+PDF pojedynczej pozycji obejmuje CAŁE strony zeszytu, na których ją wydrukowano, więc tekst zawiera fragmenty sąsiednich pozycji (DU/2003/991 zaczyna się załącznikiem do poz. 990). Żadna z poprawek tego nie dotyka i zgłoszenie też nie podaje gotowego rozwiązania. Zarejestrowane jako **F-234**.
+
+### 10. CO ZWERYFIKOWANO, A CZEGO NIE
+Zweryfikowane: mapa liter (kodeki), zachowanie wykrycia na dwóch korpusach, skuteczność obu ścieżek wobec oficjalnego HTML, działanie poprawionych funkcji uruchomionych z PLIKÓW REPOZYTORIUM (nie z kopii roboczych), obecność poprawki w zbudowanym pakiecie.
+NIEZWERYFIKOWANE: liczby z nagłówka zgłoszenia (16 759 aktów Dz.U. bez HTML, 9 593 akty M.P.) — nie liczyłem ich; treść repozytorium `dziennik-ustaw-2000-2011-md` — nie pobierałem go i nie jest źródłem dla systemu (konwersja nieoficjalna); zachowanie usterki w Monitorze Polskim — poprawka obejmuje M.P. w kodzie, ale pomiar zrobiłem wyłącznie na Dz.U., bo tylko tam są akty z oficjalnym HTML do porównania.
+
+### 11. WNIOSKI I ZALECENIA
+1. Zgłoszenie zewnętrzne z gotową łatką trzeba przyjmować jak każde inne źródło: tabela okazała się poprawna, ale sprawdzenie jej kodekami kosztowało jedno polecenie, a bramka po roczniku — gdyby ją przyjąć — psułaby teksty francuskie w umowach międzynarodowych.
+2. Miarę dostarczoną wraz ze zgłoszeniem należy przeczytać, zanim się jej użyje do oceny poprawki: ta mierzyła kompletność i z definicji nie widziała drugiej z proponowanych zmian.
+3. Dwie implementacje tej samej reguły (Python i JS) rozjeżdżają się po cichu — dlatego T46 porównuje je ze sobą, a nie tylko każdą z osobna z wzorcem.
+
 ## AUDYT-2026-10-04j — TRYB TREŚĆ: F-233 zamknięta w obu częściach; limit MRG PL–Rosja potwierdzony, ścieżka odwoławcza w DR-14 naprawiona (6.169)
 
 ### 1. ŹRÓDŁO ZLECENIA
