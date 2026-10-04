@@ -6,6 +6,11 @@
 > samodzielny skill — ładowany WYŁĄCZNIE przez indeks nadrzędny na żądanie
 > konkretnego bloku.
 
+> ✅ Od 2026-10-04i pełna mapa rozdziału XXXV KK (art. 278–295 — typy, zagrożenia, tryb
+> ścigania, art. 294 kwalifikacje wartościowe, art. 295, przedawnienie) jest w
+> `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md`; ta część zachowuje schematy
+> rozbój/kradzież rozbójnicza i zniszczenie mienia.
+
 ---
 
 ## BLOK 0 — CZĘŚĆ OGÓLNA KK: KLASYFIKACJA I KONTRATYPY (dodany 2026-07-15, naprawa braku)

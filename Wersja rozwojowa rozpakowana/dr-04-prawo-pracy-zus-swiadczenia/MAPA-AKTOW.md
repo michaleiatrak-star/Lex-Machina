@@ -45,6 +45,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa „Aktywny Rodzic” | Dz.U. 2026 poz. 532 t.j. (akt pierwotny: Dz.U. 2024 poz. 858) | `mod-ustawa-aktywny-rodzic` | ✅ aktywny |
 | Ustawa o pomocy społecznej | Dz.U. 2026 poz. 639 t.j. ze zm. | `mod-ustawa-pomoc-spoleczna` | ✅ aktywny; fresh gate kwot |
 | Ustawa o ochronie konkurencji i konsumentów — routing pracowniczo-konsumencki | Dz.U. 2025 poz. 1714 t.j. ze zm. | `mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK` | ✅ aktywny / cross-domain |
+| Umowa RP–Ukraina o zabezpieczeniu społecznym (Kijów 18.05.2012) + porozumienie administracyjne | Dz.U. 2013 poz. 1373 (w mocy od 1.01.2014) ✅ [VER] RZĄD 1 2026-10-04i; porozumienie administracyjne Dz.U. 2013 poz. 1375; oświadczenie rządowe Dz.U. 2013 poz. 1374; ustawa ratyfikacyjna Dz.U. 2012 poz. 1378 | `mod-umowa-PL-UA-zabezpieczenie-spoleczne` | ✅ NOWY 2026-10-04i (F-231); treść Umowy odczytana ze skanu ELI, porozumienie administracyjne nieodczytane — fresh gate |
 | KPA — sprawy administracyjne świadczeń | Dz.U. 2025 poz. 1691 t.j. ze zm. | DR-05 `mod-KPA-current-state-COV.md` + `mod-KPA-postepowanie-administracyjne` | 🔗 routing DR-05 |
 
 ## Reguły runtime

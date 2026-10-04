@@ -69891,6 +69891,76 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-04i — TRYB TREŚĆ: luka pokrycia rozdz. XXXV KK zamknięta (decyzja użytkownika), F-231 i F-232 zamknięte, 5 błędów treści nazwanych (6.168)
+
+### 1. ŹRÓDŁO ZLECENIA
+Użytkownik, po raporcie z AUDYT-2026-10-04h: „zajmij się tym" wobec trzech pozycji (F-231, F-232, obserwacja o luce DR-03) oraz wprost: „te art 278-295 powinny być w DR-03, dotyczy to min oszustwa". W trakcie sesji użytkownik zmienił model i polecił ponowną weryfikację pod kątem art. 286 — wykonana, wyniki w §2A i §5.
+
+### 2. WYKONANE
+
+#### 2A. Rozdział XXXV KK (art. 278–295) — nowy moduł DR-03 (3.52)
+STATUS: ✅ ZAMKNIĘTE. ŹRÓDŁO: ELI DU/2025/383 `text.pdf` (t.j. KK), RZĄD 1, odczyt 2026-10-04i; `references` t.j. oraz pole „Akty zmieniające" aktu pierwotnego ELI DU/1997/553; pełne teksty czterech nowelizacji po t.j. REPRODUKCJA: `curl -sS https://api.sejm.gov.pl/eli/acts/DU/2025/383` i `.../text.pdf`; `pdftotext -layout`; wypis artykułów zmienianych: `grep -o -E "art\. ?[0-9]+[a-z]*"` na tekstach DU/2025/1818, DU/2025/1872, DU/2026/902, DU/2026/988.
+
+Utworzony `dr-03/modules/mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md`: tabela całego rozdziału (typ, zagrożenie, tryb ścigania — art. 278 § 1–5, 279–283, 284–285, 286–287, 288–290, 291–293, 294, 295), definicje art. 115 § 4–11 (w tym § 9a — kradzież szczególnie zuchwała), drzewo A (zabór/przywłaszczenie/rozbój/kradzież rozbójnicza), drzewo B (oszustwo i rozgraniczenia), katalog odesłań art. 294 § 1–4 w ujęciu tabelarycznym, art. 295, przedawnienie wyliczone z art. 101 § 1 i art. 7 § 2, granica z KW, checklista, powiązania. Rejestracja: MAPA-AKTOW DR-03, lista modułów w SKILL.md, indeks `mod-KK-current-state-COV`, odesłania z `kwalifikator-karnomaterialny/part-01` i `part-03`, ROUTING-MAP `prawo-polskie-v2` (nowy wiersz + przekierowanie wiersza „KK art. 286 — oszustwo", który wskazywał ANEKS w `mod-KK-KPK-framework-karne.md`).
+
+⛔ KROK 2C (nowelizacje po tekście jednolitym) — **żadna nie zmienia art. 278–295 KK**, w tym art. 286:
+| Nowelizacja | Zmieniane artykuły KK | 278–295 |
+|---|---|---|
+| 2025/1818 | 217a, 222, 223, 231b | NIE |
+| 2025/1872 | 39, 42, 43a, 44b, 69, 115 (dodany § 26), 156, 157, 164, 165, 165a, 173, 174, 177, 178, 178a, 178b, 178c, 178d, 200a, 202, 255a, 258, 263, 355 | NIE |
+| 2026/902 | odnośnik nr 1, 269b | NIE |
+| 2026/988 | dodany 255b | NIE |
+
+Dwie pułapki odnotowane w module: (a) „art. 295" w ustawie 2025/1872 to art. 295 **KPK** (zmieniany jej art. 3), nie KK; (b) 2025/1872 zmienia art. 115 KK, z którego moduł bierze definicje, ale wyłącznie przez dodanie § 26 — progi 200 000 zł i 1 000 000 zł pozostają aktualne.
+
+#### 2B. F-231 — umowa PL–UA o zabezpieczeniu społecznym: moduł utworzony (DR-04 3.43)
+STATUS: ✅ ZAMKNIĘTA. ŹRÓDŁO: ELI DU/2013/1373 (Umowa; `text.pdf` — skan bez warstwy tekstowej, wersja polska art. 1–30 odczytana wizualnie ze stron 2–17), DU/2013/1374 (oświadczenie rządowe), DU/2013/1375 (porozumienie administracyjne), DU/2012/1378 (ustawa ratyfikacyjna) — metadane RZĄD 1. REPRODUKCJA: `curl` na te cztery identyfikatory; `pdftoppm -r 100 -f 2 -l 17` na `text.pdf` umowy i odczyt stron.
+
+Utworzony `dr-04/modules/mod-umowa-PL-UA-zabezpieczenie-spoleczne.md`: zakres przedmiotowy (art. 2) i podmiotowy (art. 3), równe traktowanie (art. 4), transfer świadczeń z wyłączeniami (art. 5), ustawodawstwo właściwe (art. 6–8: delegowanie 24 miesiące + 36 miesięcy za zgodą drugiej Strony, samozatrudnienie 24 miesiące bez przedłużenia, transport, statki, urzędnicy, personel dyplomatyczny), bezrobocie (art. 9), choroba i macierzyństwo (art. 10–11), emerytury i renty (art. 12–16: sumowanie, próg 12 miesięcy, państwo trzecie, zrównanie faktów, obliczenie proporcjonalne), wypadki przy pracy i pogłębienie choroby zawodowej (art. 17–18), zasiłek pogrzebowy (art. 19), procedura (art. 20–27, w tym art. 24 — termin zachowany przy złożeniu u organu drugiej Strony, art. 23 ust. 2 — zakaz żądania uwierzytelnienia, art. 25 ust. 2 — zakaz odrzucenia z powodu języka), przepisy przejściowe (art. 28, z gwarancją niepogorszenia), wypowiedzenie i wejście w życie (art. 29–30). Rejestracja: MAPA-AKTOW DR-04, lista modułów w SKILL.md, ROUTING-MAP (nowy wiersz z ostrzeżeniem „nie mylić z 2009/858"), mapa centralna (wiersz 2013/1373 zaktualizowany; dopisane wiersze 2013/1375, 2013/1374, 2012/1378).
+
+#### 2C. F-232 — Drugi protokół MRG PL–UA: odczytany, wykryty BŁĄD TREŚCI (DR-14 3.11)
+STATUS: ✅ ZAMKNIĘTA, z WARN-TREŚĆ naprawionym. ŹRÓDŁO: ELI DU/2016/664 `text.pdf` (skan bez warstwy tekstowej — strony 1–3 odczytane wizualnie, art. 1–8 protokołu) oraz ELI DU/2009/858 `text.pdf` (skan; art. 4 pierwotnej umowy potwierdzony OCR-em strony 3). REPRODUKCJA: `pdftoppm -r 90 -f 1 -l 9` na obu plikach; odczyt.
+
+Hipoteza z F-232 („czy protokół zmienia przepisy opisane w module") **potwierdziła się**: moduł `dr-14/mod-maly-ruch-graniczny.md` podawał jako obowiązujący limit pobytu „do 60 dni jednorazowo / max 90 dni w ciągu 6 miesięcy" — to brzmienie art. 4 **sprzed** protokołu. Art. 1 protokołu nadał art. 4 Umowy brzmienie: nieprzerwany pobyt w strefie przygranicznej **do 90 dni każdorazowo od dnia przekroczenia granicy**. Ponadto protokół: art. 2 — nowe brzmienie art. 9 (opłata 20 euro za pierwszy wniosek; zwolnienia: osoby niepełnosprawne, emeryci i renciści, dzieci do lat 18; brak opłaty za drugi i kolejny wniosek); art. 3 — nowy art. 9a (usługodawca zewnętrzny, opłata ≤ 1/4 opłaty z art. 9 ust. 1, rozpatrywanie wniosków wyłącznie przez organy z Załącznika nr 3); art. 4 — uchylenie art. 13 Umowy; art. 5 — rozszerzenie Załącznika nr 1 (obwód wołyński: Hevyn, Orani, Rusniv; obwód lwowski: Tysovets); art. 6 — nowe brzmienie Załącznika nr 4 (sankcje); art. 7–8 — wejście w życie i integralność z Umową; przy rozbieżności interpretacyjnej rozstrzyga tekst angielski.
+
+Przy okazji poprawiony drugi błąd modułu: sankcje opisywano jednym ciągiem z „wydaleniem" po stronie polskiej — w Załączniku nr 4 wydalenie figuruje po stronie **ukraińskiej**; po stronie RP są: decyzja o zobowiązaniu do powrotu, wpis do wykazu cudzoziemców o niepożądanym pobycie, unieważnienie zezwolenia, grzywna. Limit dla umowy PL–Rosja oznaczony jako niezweryfikowany (→ F-233).
+
+#### 2D. Błędy treści znalezione przy okazji i nazwane wprost
+| # | Miejsce | Błąd | Naprawa |
+|---|---|---|---|
+| 1 | `dr-03/mod-KK-art291-pranie-pieniedzy` nagłówek | „rozdział XXXV (art. 291–297) i rozdział XXXVI (art. 296–305)" — błędne granice obu rozdziałów | ELI: XXXV = art. 278–295; XXXVI = art. 296–309 (ostatni artykuł rozdziału to art. 309; art. 310 otwiera XXXVII) |
+| 2 | tamże, blok paserstwa | art. 291 „do 5 lat (lub **do 8 lat** przy znacznej wartości)" — w art. 291 nie ma takiej sankcji | art. 291 § 1: 3 mies.–5 lat; znaczna wartość podnosi zagrożenie przez art. 294 § 1 (1–10 lat) i tylko dla § 1 |
+| 3 | tamże | art. 292 opisany bez § 2 (rzecz znacznej wartości: 3 mies.–5 lat) | uzupełnione; dodano, że art. 292 **nie** jest objęty art. 294 |
+| 4 | tamże | „Nie można być ukarany za paserstwo w stosunku do własnego przestępstwa" podane w bloku przepisów | oznaczone jako zasada doktrynalna (współukarany czyn następczy), niezweryfikowana — nie norma |
+| 5 | `dr-03/mod-swiadek-koronny-duzy-maly` §13 | odesłanie do „czynnego żalu z art. 299 **§ 6** KK" | ELI: czynny żal to art. 299 **§ 8**; § 6 dotyczy znacznej korzyści majątkowej |
+
+### 3. BŁĘDY WŁASNE TEJ SESJI (ZASADA 14 — nazwane, nie ukryte)
+1. **Odwrócona reguła intertemporalna.** W pierwszej redakcji modułu art. 278–295 napisałem „stosuje się brzmienie z czasu czynu, chyba że nowe jest względniejsze". Art. 4 § 1 KK (ELI) stanowi odwrotnie: stosuje się ustawę **nową**, a poprzednią tylko gdy jest względniejsza dla sprawcy. Poprawione, z cytatem.
+2. **Błędny katalog art. 306b.** Napisałem, że eskalacja wartościowa art. 297 KK idzie przez art. 306b. ELI: katalog art. 306b § 1–2 to art. 296 § 1 lub 2, art. 296a § 1 lub 4, art. 299 § 1, 2, 5 lub 6, art. 303 § 1 — **art. 297 w nim nie występuje**; dla art. 297 jest wyłącznie art. 309 (grzywna do 3000 stawek obok PW). Poprawione i opisane w module jako korekta własna.
+3. **Zakres rozdziału XXXVI** podany najpierw jako „art. 296–306" (poprawnie: 296–309) — w dwóch plikach.
+4. **Nieodrobiona weryfikacja** — zostawiłem w module „KW art. 127 — ⚠️ potwierdź w ELI"; po ponownym przejściu potwierdzone i wpisane brzmienie (art. 127 § 1–2 KW, ELI DU/2025/734).
+5. Drobne: odesłanie do art. 53 § 3 KK zamiast § 2; opis art. 190a § 2 jako „kradzież tożsamości" (ustawa mówi o podszyciu się i wykorzystaniu wizerunku/danych); niepełne wskazania paragrafów przy wniosku (art. 288 bez „§ 4").
+
+Punkty 1–3 i 5 wykryła **ponowna kontrola zlecona przez użytkownika po zmianie modelu** — pierwsza redakcja przeszła przez moją własną kontrolę bez ich wychwycenia. To obserwacja o aparacie, nie o treści: kontrola „czytam własny tekst zaraz po napisaniu" wykryła 0 z 4 błędów rzeczowych.
+
+### 4. LUKA POKRYCIA Z 04g — ROZSTRZYGNIĘCIE REJESTRU (ZASADA 10)
+AUDYT-2026-10-04g odnotował „lukę pokrycia: brak modułu DR-03 dla art. 278–295 KK" bez wiersza w `WARN-OTWARTE.md`, z adnotacją „do decyzji, czy zarejestrować". Decyzja: **nie otwierano flagi**, ponieważ luka została zamknięta w tej samej sesji, w której padła decyzja użytkownika — otwarcie i zamknięcie flagi w jednym wpisie zaśmiecałoby rejestr bez wartości informacyjnej. Zamknięcie jest udokumentowane tutaj (§2A) oraz w CHANGELOG DR-03 3.52. Gdyby zlecenie nie przyszło, flaga byłaby konieczna — brak modułu dla najczęstszych przestępstw przeciwko mieniu to luka wysokiego ciężaru dla kancelarii karnej.
+
+### 4C. STAN REJESTRU PO SESJI
+- ZAMKNIĘTE: F-231, F-232.
+- OTWARTA NOWA: **F-233** (nieodczytane porozumienie administracyjne Dz.U. 2013 poz. 1375; niezweryfikowany limit pobytu w umowie MRG PL–Rosja Dz.U. 2012 poz. 814).
+- BEZ ZMIAN: F-230 (poprawka indeksu RAG — poza zakresem skilli, wymaga dostępu do gałęzi roboczej).
+- Tablica sterująca: Wykonalne 5, Reaktywne 2, Zależne 21, Odnotowane 1 → razem 29. Kolejny wolny numer: **F-234**.
+
+### 5. CO ZWERYFIKOWANO, A CZEGO NIE (ZASADA 14 — granice)
+Zweryfikowane w RZĘDZIE 1: brzmienie art. 278–295, 4 § 1, 7, 11, 12, 101–104, 115, 291–295, 299, 306b, 309 KK; art. 121 § 2 i art. 127 KW; zamknięty zbiór nowelizacji KK po t.j. (dwa niezależne zapisy ELI); metadane i treść umowy PL–UA o zabezpieczeniu społecznym oraz Drugiego protokołu MRG.
+NIEZWERYFIKOWANE i tak oznaczone w modułach: orzecznictwo i doktryna (wykładnia znamion, zamiar pierwotny przy art. 286, zbieg, „współukarany czyn następczy"); treść porozumienia administracyjnego 2013/1375; praktyka stosowania umowy PL–UA po 24.02.2022; status faktyczny umów MRG; przyporządkowanie typów do punktów art. 101 § 1 jest **obliczeniem własnym**, nie cytatem.
+
+### 6. WNIOSKI I ZALECENIA
+1. Wpis „luka pokrycia" bez flagi w rejestrze (04g) przetrwał jedną sesję tylko dlatego, że użytkownik sam o nią zapytał. Zalecenie: FAZA 3E kończy się decyzją tak/nie o flagach — brak decyzji jest wynikiem nieakceptowalnym.
+2. Moduł opisujący wycinek rozdziału (tu: art. 291–293 w module „paserstwo/pranie") maskuje brak modułu dla całego rozdziału — kontrola spójności map wykryła to dopiero po zawężeniu wiersza w 04g. Zalecenie: kontrola „czy nagłówek modułu obejmuje cały rozdział kodeksu, do którego wiersz mapy się odwołuje".
+3. Akty ogłoszone jako skany (umowy międzynarodowe sprzed ok. 2017 r.) nie poddają się `pdftotext`; wymagają rasteryzacji i odczytu. Zalecenie: dla typu RAT w mapie centralnej zakładać odczyt wizualny jako normę, nie wyjątek — i nie przyjmować, że akt zmieniający „pewnie nie rusza" opisanego przepisu.
+
 ## AUDYT-2026-10-04h — TRYB DZU (ROUTING-MAP): trzy wiersze z notatki do wydania 0.1.14 zweryfikowane w ELI; indeks RAG poza zakresem skilli; źródło wydania = repozytorium (6.167)
 
 ### 1. STATUS OGÓLNY

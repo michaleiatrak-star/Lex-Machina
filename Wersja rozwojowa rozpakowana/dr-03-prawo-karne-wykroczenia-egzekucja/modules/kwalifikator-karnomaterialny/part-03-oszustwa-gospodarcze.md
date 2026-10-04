@@ -8,6 +8,11 @@
 
 ---
 
+> ✅ Od 2026-10-04i pełna mapa rozdziału XXXV KK (art. 278–295: typy, zagrożenia,
+> tryb ścigania, art. 294 kwalifikacje wartościowe, art. 295, przedawnienie)
+> jest w `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md` — ten blok zostaje
+> jako schemat rozgraniczeń i poszlak zamiaru; nie dubluj tam tabel zagrożeń.
+
 ## BLOK C — PRZESTĘPSTWA OSZUKAŃCZE
 
 ### DRZEWO C.1 — OSZUSTWO / WYŁUDZENIE / NIEWYWIĄZANIE Z UMOWY

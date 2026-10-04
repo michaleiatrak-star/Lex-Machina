@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.51"
+version: "3.52"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 dependencies:
   requires:
@@ -117,7 +117,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
   mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
-## Moduły (70 łącznie — ✓ 70 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
+## Moduły (71 łącznie — ✓ 71 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
   [✓] OK    mod-KK-current-state-COV
   [✓] OK    mod-KKW-current-state-COV
@@ -259,6 +259,13 @@ AUDIT-JOURNAL.md`.
               (nadrobienie 2026-07-21: trzy różne "fałszerstwa"
                [dokumentów/pieniędzy/papierów wartościowych], dodany
                2026-07-16)
+  [✓] NOWY  mod-KK-art278-295-przestepstwa-przeciwko-mieniu
+              (2026-10-04i, zamknięcie luki z AUDYT-2026-10-04g: rozdz. XXXV KK —
+               kradzież 278–283, przywłaszczenie 284, oszustwo 286, oszustwo
+               komputerowe 287, zniszczenie 288, pojazd 289, paserstwo 291–293,
+               kwalifikacje wartościowe 294, naprawienie szkody 295; tabela
+               trybu ścigania, przedawnienie, granica z KW; brzmienie z ELI
+               DU/2025/383, żadna z 4 nowelizacji po t.j. nie zmienia art. 278–295)
   [✓] OK    mod-KK-art296-naduzycie-zaufania
               (nadrobienie 2026-07-21: działanie na szkodę majątkową,
                dodany 2026-07-16)

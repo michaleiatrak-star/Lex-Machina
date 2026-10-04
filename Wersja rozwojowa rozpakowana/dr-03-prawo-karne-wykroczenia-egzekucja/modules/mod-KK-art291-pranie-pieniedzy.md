@@ -1,23 +1,31 @@
-# Moduł — KK art. 291–299 — Paserstwo, pranie pieniędzy
+# Moduł — KK art. 291–293 (paserstwo) i art. 299 (pranie pieniędzy)
 
 ## Akt prawny
-**Kodeks karny — rozdział XXXV (art. 291–297) i rozdział XXXVI (art. 296–305)**
+**Kodeks karny — art. 291–293 należą do rozdziału XXXV (art. 278–295, przestępstwa przeciwko mieniu); art. 299 — do rozdziału XXXVI (art. 296–309, przestępstwa przeciwko obrotowi gospodarczemu i interesom majątkowym w obrocie cywilnoprawnym)**
 - Tekst jednolity KK: **Dz.U. 2025 poz. 383**
-  ✅ VER: isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000383 [2026-05-31]
+  ✅ [VER: ELI DU/2025/383 text.pdf, RZĄD 1, 2026-10-04]
+- ⚠️ KOREKTA 2026-10-04i (nazwanie błędu): wcześniejszy nagłówek podawał „rozdział XXXV (art. 291–297) i rozdział XXXVI (art. 296–305)" — błędne granice rozdziałów (ELI: XXXV = art. 278–295; XXXVI zaczyna się od art. 296). Całość rozdziału XXXV (kradzież, rozbój, przywłaszczenie, oszustwo, paserstwo, art. 294–295): `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md`.
 
 **Ustawa AML — karny wymiar:**
 → DR-03/mod-KKS-karny-skarbowy-i-AML
 
 **Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
 
-## Paserstwo (art. 291–293 KK)
+## Paserstwo (art. 291–293 KK) — brzmienie ELI (korekta 2026-10-04i)
 ```
-Art. 291 § 1:  Nabywanie, pomoc w zbyciu, przyjmowanie, ukrywanie rzeczy uzyskanej
-               z przestępstwa — do 5 lat (lub do 8 lat przy znacznej wartości)
-Art. 292:      Paserstwo nieumyślne — do 2 lat (lub grzywna)
-Art. 293:      Paserstwo programów komputerowych
-Zasada:        Nie można być ukarany za paserstwo w stosunku do własnego przestępstwa
+Art. 291 § 1:  nabywa / pomaga do zbycia / przyjmuje / pomaga do ukrycia rzeczy uzyskanej za pomocą
+               czynu zabronionego — 3 miesiące–5 lat
+Art. 291 § 2:  wypadek mniejszej wagi — grzywna, ograniczenie wolności albo PW do roku
+Art. 292 § 1:  paserstwo nieumyślne („powinien i może przypuszczać") — grzywna, ograniczenie wolności
+               albo PW do 2 lat
+Art. 292 § 2:  rzecz znacznej wartości (> 200 000 zł) — 3 miesiące–5 lat
+Art. 293:      § 1 — odpowiednio do programu komputerowego; § 2 — fakultatywny przepadek chociażby
+               rzecz nie była własnością sprawcy
+Art. 294 § 1:  art. 291 § 1 przy mieniu znacznej wartości — 1–10 lat (art. 292 NIE objęty)
 ```
+✅ [VER: ELI DU/2025/383 text.pdf, art. 291–295, RZĄD 1, 2026-10-04]
+
+⛔ **Błędy usunięte w tej wersji (nazwane wprost):** (1) „do 8 lat przy znacznej wartości" przy art. 291 — takiej wartości w art. 291 nie ma; (2) „Art. 292 — do 2 lat (lub grzywna)" pomijał § 2 (3 mies.–5 lat przy znacznej wartości); (3) zdanie „Nie można być ukarany za paserstwo w stosunku do własnego przestępstwa" **nie jest przepisem** — to zasada doktrynalna (współukarany czyn następczy), niezweryfikowana tutaj; nie przytaczaj jej jako normy prawnej. Pełny opis, tryb, przedawnienie, art. 295: `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md` §9.
 
 ## Pranie pieniędzy (art. 299 KK)
 ```

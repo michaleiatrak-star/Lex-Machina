@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.42"
+version: "3.43"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -99,7 +99,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (42 łącznie — ✓ 42 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
   [✓] OK    mod-KP-current-state-COV
   [✓] OK    mod-SUS-current-state-COV
@@ -152,6 +152,14 @@ AUDIT-JOURNAL.md`.
                zależnie od charakteru i wagi. Domyka lukę po odkryciu,
                że prawo pracy/BHP NIE jest w katalogu ustawy o
                sygnalistach — patrz dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md)
+  [✓] NOWY  mod-umowa-PL-UA-zabezpieczenie-spoleczne
+              (dodany 2026-10-04i, domyka F-231: umowa dwustronna RP–Ukraina
+               o zabezpieczeniu społecznym, Dz.U. 2013 poz. 1373 — zakres
+               przedmiotowy i podmiotowy, ustawodawstwo właściwe i delegowanie
+               24+36 mies., sumowanie okresów i obliczenie proporcjonalne,
+               wypadki przy pracy, zasiłek pogrzebowy, terminy z art. 24,
+               zakaz legalizacji dokumentów art. 23, przepisy przejściowe
+               art. 28; NIE jest to koordynacja unijna ani mały ruch graniczny)
   [✓] NOWY  mod-ustawa-karta-nauczyciela-pracownicze
               (dodany 2026-07-27, domyka F-19 z WARN-OTWARTE.md: brak
                treści pracowniczej Karty Nauczyciela — wynagrodzenie

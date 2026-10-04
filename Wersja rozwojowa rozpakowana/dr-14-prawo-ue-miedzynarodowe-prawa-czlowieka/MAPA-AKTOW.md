@@ -26,6 +26,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan akt → moduł. Historia weryfi
 | Rejestr źródeł prawa i lifecycle | moduł metodyczny | `mod-rejestr-zrodla-prawa-lifecycle` | 🟢 operacyjny |
 | Mały ruch graniczny — rama UE 1931/2006 + 1342/2011 | EUR-Lex | `mod-maly-ruch-graniczny` | 🟢 operacyjny; stan praktyczny fresh gate |
 | MRG Polska–Ukraina | Dz.U. 2009 nr 103 poz. 858 | `mod-maly-ruch-graniczny` | 🟢 akt zmapowany; zastosowanie praktyczne fresh gate |
+| MRG Polska–Ukraina — Drugi protokół (art. 4 pobyt do 90 dni, art. 9/9a opłaty, Załączniki 1 i 4) | Dz.U. 2016 poz. 664 | `mod-maly-ruch-graniczny` | 🟢 treść odczytana ze skanu 2026-10-04i; fresh gate |
 | MRG Polska–Rosja / obwód kaliningradzki | Dz.U. 2012 poz. 814 | `mod-maly-ruch-graniczny` | 🟡 status wykonywania wymaga fresh gate |
 | MRG Polska–Białoruś | dokumentacja ratyfikacyjna / urzędowa | `mod-maly-ruch-graniczny` | 🟡 status wejścia w życie i praktyki wymaga fresh gate |
 | Kontrola niektórych inwestycji (FDI screening) | Dz.U. 2026 poz. 47 t.j. | `mod-inwestycje-transgraniczne-FDI-BIT` | 🟢 operacyjny |

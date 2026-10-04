@@ -14,6 +14,12 @@ Kodeks jest obsługiwany jako trzy części:
 | szczególna — rozdz. XVI–XXXVII | typy przestępstw | B+/COV, routing do kwalifikatora i modułów tematycznych |
 | wojskowa — rozdz. XXXVIII–XLIV | odpowiedzialność i przestępstwa wojskowe | B+/COV, aktywowana tylko przy właściwym statusie sprawcy |
 
+### Moduły tematyczne — rozdz. XXXV (dodane 2026-10-04i)
+
+| Rozdział | Zakres | Moduł |
+|---|---|---|
+| XXXV — przestępstwa przeciwko mieniu | art. 278–295 (kradzież, rozbój, przywłaszczenie, oszustwo, oszustwo komputerowe, zniszczenie mienia, pojazd, paserstwo, kwalifikacje wartościowe, naprawienie szkody) | `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md` (+ schematy w `kwalifikator-karnomaterialny/part-01`, `part-03`) |
+
 ## Runtime
 
 Ten plik jest indeksem current-state. Treść materialna znajduje się przede wszystkim w `mod-KK-kwalifikator-karnomaterialny.md`, katalogu `kwalifikator-karnomaterialny/` oraz modułach tematycznych KK.

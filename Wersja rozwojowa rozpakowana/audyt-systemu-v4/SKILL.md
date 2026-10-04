@@ -5,7 +5,7 @@ dependencies:
   requires:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
-version: "6.167"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
+version: "6.168"   # ⛔ CUDZYSŁOWY OBOWIĄZKOWE od 6.10: niecytowane `6.10` YAML
                   # parsuje jako float 6.1 — czyli numer NIŻSZY niż 6.9, co cicho
                   # odwraca porządek wersji. Wykryte przy walidacji 2026-08-20z.
                   # Każda kolejna wersja z dwucyfrowym minor — też w cudzysłowie.
@@ -1494,7 +1494,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.167 | Ostatnia aktualizacja: 2026-10-04h (trzy wiersze ROUTING-MAP z ELI — prawo-polskie-v2 6.37; F-230, F-231, F-232); poprzednio 2026-10-04g (rozbieżności MAPA-AKTOW wykryte mechanicznie przez aplikację — DR-03 3.51, DR-09 3.43, prawo-polskie-v2 6.36); poprzednio 2026-10-04f (przegląd stawek mandatów DR-03 wobec rozp. PRM z 24.11.2003 i art. 96 KPW — DR-03 3.50; T11 zsynchronizowany: ROUTING-MAP 6.35, mapa Dz.U.). Poprzednio 6.164 — 2026-10-04e (F-229, T45).*
+*Wersja: 6.168 | Ostatnia aktualizacja: 2026-10-04i (TRYB TREŚĆ: rozdz. XXXV KK — nowy moduł DR-03 3.52; F-231 zamknięta modułem DR-04 3.43; F-232 zamknięta — DR-14 3.11; nowa F-233); poprzednio 2026-10-04h (trzy wiersze ROUTING-MAP z ELI — prawo-polskie-v2 6.37)*
 
 *(Stopka podawała „5.0 | 2026-07-04" przy `version: 6.8` w YAML — rozjazd
 9 wersji, naprawiony 2026-08-20y. **Stopkę aktualizuj razem z polem `version`**;

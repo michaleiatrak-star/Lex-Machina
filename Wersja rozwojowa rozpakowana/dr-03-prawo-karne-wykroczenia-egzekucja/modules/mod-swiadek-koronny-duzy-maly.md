@@ -204,7 +204,7 @@ konkretnej sprawie karnoskarbowej, NIE zakładaj identyczności reżimów.
   się potrzeba obu instytucji; ZASTĘPUJE dotychczasową dwuliniową
   wzmiankę pełną treścią tutaj — rozważ w przyszłym audycie dodanie
   odesłania zwrotnego z BLOK H do tego modułu.
-- **`mod-KK-art291-pranie-pieniedzy.md`** — czynny żal z art. 299 §6 KK
+- **`mod-KK-art291-pranie-pieniedzy.md`** — czynny żal z art. 299 §8 KK (✅ ELI DU/2025/383; wcześniej błędnie „§6" — korekta 2026-10-04i)
   to INNY, samodzielny mechanizm (nie świadek koronny), ale bywa mylony
   — sprawdź, czy klient nie ma na myśli tej instytucji zamiast art. 60.
 
