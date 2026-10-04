@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.36"
+version: "6.37"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,8 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.36 (2026-10-04g, AUDYT-2026-10-04g): 
-  Poprzednia: 6.35 (2026-10-04f, AUDYT-2026-10-04f): 
+  Wersja bieżąca: 6.37 (2026-10-04h, AUDYT-2026-10-04h): ROUTING-MAP — 3 wiersze (WT 2002 reżim przejściowy, MRG PL–UA, refundacja PrFarm), RZĄD 1 ELI.
+  Poprzednia: 6.36 (2026-10-04g, AUDYT-2026-10-04g): wiersz KK fałszerstw.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

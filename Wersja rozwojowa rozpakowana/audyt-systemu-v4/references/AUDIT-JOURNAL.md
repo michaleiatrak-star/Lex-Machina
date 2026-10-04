@@ -69890,3 +69890,42 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 ### 5. STRUKTURA SYSTEMU — SNAPSHOT
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
+
+## AUDYT-2026-10-04h — TRYB DZU (ROUTING-MAP): trzy wiersze z notatki do wydania 0.1.14 zweryfikowane w ELI; indeks RAG poza zakresem skilli; źródło wydania = repozytorium (6.167)
+
+### 1. STATUS OGÓLNY
+Zakres zlecenia (notatka „czego nie ma w 0.1.14”): (a) poprawka indeksu RAG, (b) trzy brakujące wiersze ROUTING-MAP: umowa PL–UA, WT — reżim przejściowy, refundacja w PrFarm. Notatka podawała blokadę ELI (403); w tej sesji ELI odpowiadało (api.sejm.gov.pl/eli i eli.gov.pl — kod 200; isap.sejm.gov.pl — 302 na stronę ładowania, tylko link dla człowieka). Wynik: (b) wykonane w całości, (a) niewykonalne w skillach (F-230).
+
+**Źródło wydania (ZASADA 7, F-221/F-223).** `SKILL_SOURCE` = repozytorium `michaleiatrak-star/lex-machina`, `main` (HEAD `6f193cf`, 2026-10-04 19:05), drzewo „Wersja rozwojowa rozpakowana” (audyt 6.166). Kopia zainstalowana odrzucona jako źródło: bazowy T22 = FAIL, 12 rozjazdów w 9 skillach (frontmatter przepisany serializatorem hosta). Porównanie repo ↔ kopia zainstalowana: różne wyłącznie 32 pliki `SKILL.md`, wszystkie pozostałe pliki bajtowo zgodne.
+
+### 2. NAPRAWY
+**2A. ROUTING-MAP (prawo-polskie-v2 6.36 → 6.37) — trzy wiersze, wszystkie ✅ [VER] RZĄD 1 ELI, odczyt 2026-10-04:**
+1. Nowy wiersz „Warunki techniczne budynków — reżim przejściowy” (lustro wiersza DR-09 MAPA-AKTOW i mapy centralnej): rozp. MI z 12.04.2002, Dz.U. 2002 poz. 690 — ELI „uznany za uchylony”, `NOT_IN_FORCE`; art. 66 ustawy 2019/1696 (t.j. 2024/1411, odczyt `text.pdf`): przepisy wykonawcze zachowują moc nie dłużej niż 84 miesiące od wejścia w życie ustawy; stosowanie przejściowe — art. 102a–102c PrBud (Dz.U. 2026 poz. 1161, odczyt `text.pdf`): 18 miesięcy od 20.09.2026, przepisy „obowiązujące do dnia 19 września 2026 r.”.
+2. Nowy wiersz MRG Polska–Ukraina: Dz.U. 2009 nr 103 poz. 858 — ELI „obowiązujący”, wejście 2009-07-01, akt zmieniający DU/2016/664 (Drugi protokół).
+3. Wiersz refundacji PrFarm: „⚠️ zweryfikuj t.j. …” → Prawo farmaceutyczne Dz.U. 2026 poz. 612 t.j. (obwieszczenie 17.04.2026; ELI: nowelizacje po t.j. — 791, 1079, 1004) oraz ustawa refundacyjna Dz.U. 2026 poz. 253 t.j. (obwieszczenie 20.02.2026; po t.j. — 791). Najnowszy t.j. PrFarm: pierwszy wynik wyszukiwania tytułów ELI (limit 15 pozycji) to poz. 612; kolejne są starsze.
+
+**2B. ⛔ Błąd w notatce źródłowej (nazwany wprost).** Notatka łączyła etykietę „umowa o zabezpieczeniu społecznym PL–UA” z numerem Dz.U. 2009 poz. 858. Numer należy do umowy o **małym ruchu granicznym** (ELI DU/2009/858: „Umowa … o zasadach małego ruchu granicznego, podpisana w Kijowie dnia 28 marca 2008 roku, oraz Protokół…”); mapa centralna i DR-14 opisywały go poprawnie. Umowa o zabezpieczeniu społecznym to Dz.U. 2013 poz. 1373 (porozumienie administracyjne poz. 1375, oświadczenie rządowe o mocy obowiązującej poz. 1374, ratyfikacja Dz.U. 2012 poz. 1378). Przypadek wzorcowy ZASADY 8 (zgodność nazwy i numeru). Zarejestrowano wiersz MRG pod właściwą nazwą; umowa o zabezpieczeniu społecznym — brak modułu, F-231, numer dopisany do mapy centralnej.
+
+**2C. ⛔ Błąd własny audytora (nazwany wprost).** W trakcie sesji zgłosiłem wstępne podejrzenie rozbieżności o jeden dzień w mapach (metadane ELI aktu 2002/690: data uchylenia 2026-09-21; mapy: „od 20.09.2026”) na podstawie samych metadanych. Po odczycie tekstu art. 102a–102c PrBud (Dz.U. 2026 poz. 1161: przepisy „obowiązujące do dnia 19 września 2026 r.”) podejrzenie okazało się nietrafne: mapy zgodne z tekstem ustawy, odstaje pole daty w metadanych ELI. Bez flagi; obserwacja zapisana w wierszu WT w ROUTING-MAP. Wzorzec: pole metadanych ELI nie zastępuje odczytu przepisu, który ustala datę.
+
+**2D. Mapa Dz.U. (`mapa_dzu_2026-10-04.md`, FAZA 7B):** dopisane 2 wiersze — `2016/664` i `2013/1373` (cytowane w ROUTING-MAP, nieobecne w mapie centralnej). Numery `2009/858`, `2002/690`, `2026/612`, `2026/253` były w mapie; metryki sprawdzone, bez zmiany statusu.
+
+### 3. OSTRZEŻENIA (WARN)
+- **F-230** (zależna od środowiska/dewelopera) — poprawka indeksu RAG: brak kodu do odczytu. STATUS ⚠️ [NIEWERYFIKOWANE — HIPOTEZA] co do istnienia/treści poprawki; ŹRÓDŁO: `git ls-remote --heads` repo → 101 gałęzi, najwyższa `release/0.1.11`; `grep -rIl -w -i rag` → jeden plik z opisem (nie kod); REPRODUKCJA — te polecenia.
+- **F-231** (niski) — umowa PL–UA o zabezpieczeniu społecznym bez modułu.
+- **F-232** (niski) — `mod-maly-ruch-graniczny` nie wspomina o Drugim protokole 2016/664; treść protokołu nieodczytana.
+- Obserwacja bez flagi: wpis AUDYT-2026-10-04g odnotował „lukę pokrycia: brak modułu DR-03 dla art. 278–295 KK” jako WARN bez wiersza w `WARN-OTWARTE.md` (ZASADA 10) — do decyzji, czy zarejestrować.
+
+### 4. WERYFIKACJA Dz.U. (RZĄD 1 — `api.sejm.gov.pl/eli/acts/DU/…`, 2026-10-04)
+2009/858 — obowiązujący, wejście 2009-07-01; 2016/664 — obowiązujący; 2013/1373, 1375, 1374, 2012/1378 — obowiązujące/jednorazowe (ELI); 2002/690 — „uznany za uchylony”; 2019/1696 → t.j. 2024/1411 (art. 66, `text.pdf`); 2026/1161 (art. 102a–102c, `text.pdf`); 2026/612 — obowiązujący, nowelizacje po t.j.: 791, 1079, 1004; 2026/253 — obowiązujący, po t.j.: 791. Wszystkie potwierdzenia: RZĄD 1; źródeł niższych rzędów nie użyto.
+
+### 4C. TREŚĆ MERYTORYCZNA MODUŁÓW
+FAZA 3E nie uruchamiana: w sesji nie wykryto zmiany statusu aktu (nowy TJ / WSZEDŁ / WARN 3C). Kontrola zgodności modułów z nowymi wierszami: `mod-PrFarm-refundacja-nadzor-sankcje` (poz. 612, 253 — zgodne), `mod-PrBud-uzupelnienie-pokrycia-2026` § 9a (poz. 690, art. 102a–102c, 19.09.2026 — zgodne), `mod-maly-ruch-graniczny` (poz. 858 — zgodne; brak wzmianki o 2016/664 → F-232).
+
+### 5. STRUKTURA SYSTEMU — SNAPSHOT
+Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polskie-v2 6.36 → **6.37**, audyt 6.166 → **6.167**.
+
+### 6. WNIOSKI I ZALECENIA
+1. Etykieta z notatki nie jest dowodem numeru — ZASADA 8 zadziałała: rozbieżność nazwy i numeru wyszła dopiero po odczycie metryki ELI.
+2. Poprawka RAG wymaga dostępu do gałęzi roboczej aplikacji (poza publicznym repo skilli); po udostępnieniu — zamknąć F-230 testem na obu formatach odwołań.
+3. Wydanie budowane z repozytorium, nie z kopii zainstalowanej (T22 na kopii zainstalowanej = FAIL z założenia).

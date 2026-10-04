@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.37 (2026-10-04h, AUDYT-2026-10-04h): ROUTING-MAP — trzy wiersze zweryfikowane w ELI (RZĄD 1, 2026-10-04): (1) nowy wiersz „Warunki techniczne budynków — reżim przejściowy” (rozp. WT 2002, Dz.U. 2002 poz. 690 — uznane za uchylone; stosowanie przejściowe wg art. 102a–102c PrBud, Dz.U. 2026 poz. 1161; synchronizacja z DR-09 i mapą centralną); (2) nowy wiersz MRG Polska–Ukraina (Dz.U. 2009 poz. 858; Drugi protokół Dz.U. 2016 poz. 664) — ⛔ numer 2009/858 to umowa o małym ruchu granicznym, NIE o zabezpieczeniu społecznym (ta: Dz.U. 2013 poz. 1373, brak modułu); (3) wiersz refundacji PrFarm: „⚠️ zweryfikuj t.j.” → Prawo farmaceutyczne Dz.U. 2026 poz. 612 t.j. (+ 791, 1004, 1079) i ustawa refundacyjna Dz.U. 2026 poz. 253 t.j. (+ 791). Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04h.
+
 - 6.36 (2026-10-04g, AUDYT-2026-10-04g): ROUTING-MAP — wiersz KK fałszerstw zawężony do „art. 270-277d, 310” (wg nagłówka modułu DR-03; synchronizacja z DR-03 3.51).
 
 - 6.35 (2026-10-04f, AUDYT-2026-10-04f): ROUTING-MAP (synchronizacja T11): transport drogowy — t.j. Dz.U. 2025 poz. 1490 (było 2024/1539 — nieaktualny t.j.); nowe wiersze: taryfikator mandatów (rozp. PRM z 24.11.2003, t.j. 2013/1624 ze zm.) i ustawa o państwowej kompensacie (t.j. 2016/325); opłaty w sprawach karnych — zakres t.j. 2023/123. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04f.
