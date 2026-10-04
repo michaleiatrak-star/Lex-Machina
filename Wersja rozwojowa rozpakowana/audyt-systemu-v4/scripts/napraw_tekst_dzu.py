@@ -48,8 +48,22 @@ ELI_BASE = "https://api.sejm.gov.pl/eli/acts"
 # Mapa WYPROWADZONA z kodeków, nie przepisana ze zgłoszenia:
 #   litera.encode("mac_latin2").decode("mac_roman")
 # Ó i ó mapują się na siebie, więc nie ma ich w tabeli (16 pozycji, nie 18).
-MAC_CE_NA_PL = {m: p for m, p in zip("Ñàåç¢´¸∏¡ƒÂÊèê˚˝", "ĄąĆćĘęŁłŃńŚśŹźŻż")}
-_WSZYSTKIE = re.compile(r"[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]")
+# Mapa NIE jest przepisana — powstaje z kodeków przy starcie: bajt 128–255 odczytany jako
+# Mac Roman (tak opisuje go PDF) zestawiony z tym samym bajtem w Mac Central European (tak jest
+# naprawdę zapisany); zostają wyłącznie te pozycje, które w Mac CE są polską literą.
+# Ó i ó mapują się na siebie i wypadają z filtra, stąd 16 pozycji, nie 18.
+# ⛔ Nie zastępować tabelą wpisaną ręcznie: błąd literowy byłby nie do wychwycenia wzrokiem.
+TABELA_MAC_CE = str.maketrans({
+    bytes([b]).decode("mac_roman"): bytes([b]).decode("mac_latin2")
+    for b in range(128, 256)
+    if bytes([b]).decode("mac_latin2") in "ąćęłńśźżĄĆĘŁŃŚŹŻ"
+})
+MAC_CE_NA_PL = {chr(k): v for k, v in TABELA_MAC_CE.items()}
+
+# Wyrażenie budowane Z TABELI — jedno źródło prawdy, nic do zsynchronizowania ręcznie.
+# `str.translate` dawał identyczny wynik, ale jest wolniejszy: zmierzone na 274 tys. znaków
+# z 8 680 podmianami — 21,2 ms wobec 3,5 ms (AUDYT-2026-10-04k).
+_WSZYSTKIE_MAC_CE = re.compile("[" + re.escape("".join(MAC_CE_NA_PL)) + "]")
 # Znaki, które w polskim tekście urzędowym nie występują poza tą usterką.
 # Celowo BEZ à, ç, è, ê, Ñ, å — to prawdziwe litery w umowach po francusku,
 # hiszpańsku i w językach skandynawskich, publikowanych w Dz.U.
@@ -70,7 +84,29 @@ def napraw_mac_ce(tekst):
     """Przelicza litery TYLKO gdy usterka wykryta — inaczej zwraca wejście."""
     if not zepsute_mac_ce(tekst):
         return tekst
-    return _WSZYSTKIE.sub(lambda m: MAC_CE_NA_PL[m.group()], tekst)
+    return _WSZYSTKIE_MAC_CE.sub(lambda m: MAC_CE_NA_PL[m.group()], tekst)
+
+
+def napraw_mac_ce_dokument(tekst):
+    """Naprawa całego dokumentu: rozpoznanie na JEDNEJ stronie przenosi się na pozostałe.
+
+    Font jest własnością zeszytu, nie strony. Strona złożona niemal bez polskiego
+    tekstu (wykaz substancji, tabela liczb) ma za mało markerów, by przejść próg
+    samodzielnie — zmierzone na DU/2000/1097 str. 10: jeden marker w słowie
+    „Za∏àcznik” i zero polskich liter, przez co strona zostawała nieprzeliczona.
+    Strona dziedziczy rozpoznanie, gdy ma CHOĆ JEDEN marker i zero polskich znaków
+    diakrytycznych; strona bez markerów (np. wyłącznie obcojęzyczna) zostaje nietknięta.
+    Zmierzone na 53 aktach z lat 2000–2009: nieprzeliczonych znaków 2 → 0.
+    """
+    strony = tekst.split("\f")
+    dokument_zepsuty = any(zepsute_mac_ce(s) for s in strony)
+    wynik = []
+    for s in strony:
+        if zepsute_mac_ce(s) or (dokument_zepsuty and _MARKERY.search(s) and not _DIAKRYTYKI_PL.search(s)):
+            wynik.append(_WSZYSTKIE_MAC_CE.sub(lambda m: MAC_CE_NA_PL[m.group()], s))
+        else:
+            wynik.append(s)
+    return "\f".join(wynik)
 
 
 def pdf_na_tekst(sciezka):
@@ -116,7 +152,7 @@ def wczytaj(zrodlo):
 
 
 def posprzataj(tekst, zostaw_pagine=False):
-    tekst = "\f".join(napraw_mac_ce(s) for s in tekst.split("\f"))
+    tekst = napraw_mac_ce_dokument(tekst)
     if not zostaw_pagine:
         tekst = _PAGINA.sub("", tekst)
     tekst = tekst.replace("\f", "\n")

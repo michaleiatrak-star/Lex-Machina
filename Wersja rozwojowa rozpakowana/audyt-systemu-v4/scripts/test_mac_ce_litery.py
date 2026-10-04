@@ -108,6 +108,24 @@ def main():
             nap = getattr(mod, "napraw_mac_ce", None)
             if nap and nap("Za∏àcznik okreÊla noÊniki s∏u˝àce") != "Załącznik określa nośniki służące":
                 bledy.append("{}: napraw_mac_ce nie odtwarza oczekiwanego tekstu".format(plik))
+            # Propagacja rozpoznania w obrębie dokumentu (AUDYT-2026-10-04k, pomiar: 2 → 0
+            # nieprzeliczonych znaków). Strona z jednym markerem i bez polskich liter
+            # NIE przechodzi progu sama — ma go odziedziczyć po stronie rozpoznanej.
+            dok = getattr(mod, "napraw_mac_ce_dokument", None)
+            if dok is None:
+                bledy.append("{}: brak funkcji napraw_mac_ce_dokument".format(plik))
+            else:
+                slaba = "Za∏àcznik nr 3\nWYKAZ SUBSTANCJI PSYCHOTROPOWYCH\nAMFEPRAMON\nDELORAZEPAM"
+                mocna = "Za∏àcznik okreÊla noÊniki s∏u˝àce do zapisu"
+                wynik = dok(mocna + "\f" + slaba)
+                if "Za∏àcznik nr 3" in wynik:
+                    bledy.append("{}: strona o jednym markerze NIE odziedziczyła rozpoznania".format(plik))
+                if "Załącznik nr 3" not in wynik:
+                    bledy.append("{}: propagacja nie dała oczekiwanego tekstu".format(plik))
+                # strona bez markerów (obcojęzyczna) ma zostać nietknięta
+                obca = "Accord relatif à la coopération, créé à Genève"
+                if dok(mocna + "\f" + obca).split("\f")[1] != obca:
+                    bledy.append("{}: propagacja ZMIENIŁA stronę bez markerów (ryzyko dla tekstów obcych)".format(plik))
 
         pag = getattr(mod, "_PAGINA_2000_2009", None) or getattr(mod, "_PAGINA", None)
         if pag is None:
@@ -141,7 +159,8 @@ def main():
             else:
                 mow("  serwer MCP (JS): mapa zgodna z kodekami")
         for frag, opis in (("MARKERY_MAC_CE", "markery"), ("DIAKRYTYKI_PL", "diakrytyki"),
-                           ("PAGINA_2000_2009", "pagina 2000–2009")):
+                           ("PAGINA_2000_2009", "pagina 2000–2009"),
+                           ("naprawMacCEDokument", "propagacja rozpoznania w dokumencie")):
             if frag not in src:
                 bledy.append("JS: brak {} ({})".format(frag, opis))
 

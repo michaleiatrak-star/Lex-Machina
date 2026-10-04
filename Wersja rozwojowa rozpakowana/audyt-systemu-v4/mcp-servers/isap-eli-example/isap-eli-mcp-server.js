@@ -194,16 +194,30 @@ const MAC_CE_NA_PL = Object.fromEntries(
 // przeliczenie po samym roczniku psułoby je. Sygnałem usterki są znaki, które w tekście
 // urzędowym nie występują poza nią (¢ ´ ¸ ∏ ¡ ƒ Â Ê ˚ ˝), przy JEDNOCZESNYM braku prawidłowych
 // polskich znaków diakrytycznych — przy tej usterce font psuje je wszystkie, więc licznik = 0.
-const MARKERY_MAC_CE = /[¢´¸∏¡ƒÂÊ˚˝]/g;
-const DIAKRYTYKI_PL = /[ąćęłńśźżĄĆĘŁŃŚŹŻ]/g;
+const MARKERY_MAC_CE = /[¢´¸∏¡ƒÂÊ˚˝]/;        // bez flagi /g — używane też przez .test()
+const DIAKRYTYKI_PL = /[ąćęłńśźżĄĆĘŁŃŚŹŻ]/;  // bez flagi /g — j.w.
 
 /** Czy strona ma polskie litery w kodach Mac CE odczytanych jako Mac Roman. */
 export function zepsuteMacCE(tekst) {
-  return (tekst.match(MARKERY_MAC_CE) ?? []).length >= 2 && (tekst.match(DIAKRYTYKI_PL) ?? []).length === 0;
+  return (tekst.match(/[¢´¸∏¡ƒÂÊ˚˝]/g) ?? []).length >= 2 && !DIAKRYTYKI_PL.test(tekst);
 }
 /** Przelicza litery TYLKO na stronach, na których usterka została wykryta. */
 export function naprawMacCE(tekst) {
   return zepsuteMacCE(tekst) ? tekst.replace(/[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]/g, (c) => MAC_CE_NA_PL[c]) : tekst;
+}
+
+/** Naprawa całego dokumentu: rozpoznanie na JEDNEJ stronie przenosi się na pozostałe.
+ * Font jest własnością zeszytu, nie strony, a strona złożona niemal bez polskiego tekstu
+ * (wykaz substancji, tabela liczb) ma za mało markerów, by przejść próg samodzielnie —
+ * zmierzone na DU/2000/1097 str. 10: jeden marker w słowie „Za∏àcznik” i zero polskich liter.
+ * Strona dziedziczy rozpoznanie, gdy ma CHOĆ JEDEN marker i zero polskich znaków
+ * diakrytycznych; strona bez markerów (np. wyłącznie obcojęzyczna) pozostaje nietknięta. */
+export function naprawMacCEDokument(strony) {
+  const dokumentZepsuty = strony.some(zepsuteMacCE);
+  return strony.map((s) => (
+    zepsuteMacCE(s) || (dokumentZepsuty && MARKERY_MAC_CE.test(s) && !DIAKRYTYKI_PL.test(s))
+      ? s.replace(/[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]/g, (c) => MAC_CE_NA_PL[c])
+      : s));
 }
 
 // Żywa pagina. Pierwszy wzorzec — format bieżący („Dziennik Ustaw – 12 – Poz. 345”), drugi —
@@ -214,7 +228,7 @@ const PAGINA_BIEZACA = /^Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\.\s*\d+\s*$/m;
 const PAGINA_2000_2009 = /^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$/gm;
 
 export function czyscTekstPdf(strony) {
-  return strony.map(naprawMacCE)
+  return naprawMacCEDokument(strony)
     .map((t) => t.replace(PAGINA_BIEZACA, "").replace(PAGINA_2000_2009, "")).join("\n")
     .replace(/(\p{L})-\n(\p{Ll})/gu, "$1$2").replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n");
 }

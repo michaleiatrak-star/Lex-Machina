@@ -353,7 +353,22 @@ def _pick_tj(data):
     return pool[-1]
 
 
-MAC_CE_NA_PL = {m: p for m, p in zip("Ñàåç¢´¸∏¡ƒÂÊèê˚˝", "ĄąĆćĘęŁłŃńŚśŹźŻż")}
+# Mapa NIE jest przepisana — powstaje z kodeków przy starcie: bajt 128–255 odczytany jako
+# Mac Roman (tak opisuje go PDF) zestawiony z tym samym bajtem w Mac Central European (tak jest
+# naprawdę zapisany); zostają wyłącznie te pozycje, które w Mac CE są polską literą.
+# Ó i ó mapują się na siebie i wypadają z filtra, stąd 16 pozycji, nie 18.
+# ⛔ Nie zastępować tabelą wpisaną ręcznie: błąd literowy byłby nie do wychwycenia wzrokiem.
+TABELA_MAC_CE = str.maketrans({
+    bytes([b]).decode("mac_roman"): bytes([b]).decode("mac_latin2")
+    for b in range(128, 256)
+    if bytes([b]).decode("mac_latin2") in "ąćęłńśźżĄĆĘŁŃŚŹŻ"
+})
+MAC_CE_NA_PL = {chr(k): v for k, v in TABELA_MAC_CE.items()}
+
+# Wyrażenie budowane Z TABELI — jedno źródło prawdy, nic do zsynchronizowania ręcznie.
+# `str.translate` dawał identyczny wynik, ale jest wolniejszy: zmierzone na 274 tys. znaków
+# z 8 680 podmianami — 21,2 ms wobec 3,5 ms (AUDYT-2026-10-04k).
+_WSZYSTKIE_MAC_CE = re.compile("[" + re.escape("".join(MAC_CE_NA_PL)) + "]")
 _MARKERY_MAC_CE = re.compile(r"[¢´¸∏¡ƒÂÊ˚˝]")
 _DIAKRYTYKI_PL = re.compile(r"[ąćęłńśźżĄĆĘŁŃŚŹŻ]")
 # Żywa pagina zeszytu 2000–2009 („Dziennik Ustaw Nr 105 — 7006 — Poz. 990 i 991”).
@@ -381,7 +396,29 @@ def napraw_mac_ce(tekst):
     """Przelicza litery tylko wtedy, gdy usterka została wykryta."""
     if not zepsute_mac_ce(tekst):
         return tekst
-    return re.sub(r"[Ñàåç¢´¸∏¡ƒÂÊèê˚˝]", lambda m: MAC_CE_NA_PL[m.group()], tekst)
+    return _WSZYSTKIE_MAC_CE.sub(lambda m: MAC_CE_NA_PL[m.group()], tekst)
+
+
+def napraw_mac_ce_dokument(tekst):
+    """Naprawa całego dokumentu: rozpoznanie na JEDNEJ stronie przenosi się na pozostałe.
+
+    Font jest własnością zeszytu, nie strony. Strona złożona niemal bez polskiego
+    tekstu (wykaz substancji, tabela liczb) ma za mało markerów, by przejść próg
+    samodzielnie — zmierzone na DU/2000/1097 str. 10: jeden marker w słowie
+    „Za∏àcznik” i zero polskich liter, przez co strona zostawała nieprzeliczona.
+    Strona dziedziczy rozpoznanie, gdy ma CHOĆ JEDEN marker i zero polskich znaków
+    diakrytycznych; strona bez markerów (np. wyłącznie obcojęzyczna) zostaje nietknięta.
+    Zmierzone na 53 aktach z lat 2000–2009: nieprzeliczonych znaków 2 → 0.
+    """
+    strony = tekst.split("\f")
+    dokument_zepsuty = any(zepsute_mac_ce(s) for s in strony)
+    wynik = []
+    for s in strony:
+        if zepsute_mac_ce(s) or (dokument_zepsuty and _MARKERY_MAC_CE.search(s) and not _DIAKRYTYKI_PL.search(s)):
+            wynik.append(_WSZYSTKIE_MAC_CE.sub(lambda m: MAC_CE_NA_PL[m.group()], s))
+        else:
+            wynik.append(s)
+    return "\f".join(wynik)
 
 
 def pdf_to_text(url):
@@ -427,7 +464,7 @@ def pdf_to_text(url):
         except Exception as exc:                   # noqa: BLE001
             return None, "BŁĄD pdftotext: {}".format(exc)
     # Naprawa per strona (separator \f), bo wykrycie dotyczy fontu strony.
-    tekst = "\f".join(napraw_mac_ce(s) for s in tekst.split("\f"))
+    tekst = napraw_mac_ce_dokument(tekst)
     return _PAGINA_2000_2009.sub("", tekst), None
 
 

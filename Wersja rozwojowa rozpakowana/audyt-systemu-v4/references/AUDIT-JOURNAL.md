@@ -69953,6 +69953,40 @@ Punkty 1 i 2 wyszły z uruchomienia kodu na realnym akcie, nie z lektury — zap
 ### 9. CO ZOSTAJE NIEROZWIĄZANE → F-234
 PDF pojedynczej pozycji obejmuje CAŁE strony zeszytu, na których ją wydrukowano, więc tekst zawiera fragmenty sąsiednich pozycji (DU/2003/991 zaczyna się załącznikiem do poz. 990). Żadna z poprawek tego nie dotyka i zgłoszenie też nie podaje gotowego rozwiązania. Zarejestrowane jako **F-234**.
 
+### 9A. DRUGIE PODEJŚCIE — „czy wynik może być lepszy?” (pytanie użytkownika, ten sam dzień)
+Pierwszy pomiar potraktowałem jako koniec pracy. Na pytanie, czy da się lepiej, przeprowadziłem diagnozę BRAKUJĄCYCH słów i znalazłem trzy rzeczy — jedną do naprawy, dwie do odrzucenia:
+
+**(1) NAPRAWIONE — próg wykrycia był za ostry dla stron ubogich w polski tekst.** Diagnoza na 19 aktach: po naprawie zostały 2 nieprzeliczone znaki, oba na DU/2000/1097 str. 10 — „Za∏àcznik nr 3” nad wykazem substancji psychotropowych. Strona miała JEDEN marker i zero polskich liter, więc nie przechodziła progu `>= 2`. Font jest jednak własnością zeszytu, nie strony, więc dołożona **propagacja w obrębie dokumentu**: gdy choć jedna strona jest rozpoznana, pozostałe dziedziczą rozpoznanie pod warunkiem, że mają co najmniej jeden marker i zero polskich znaków diakrytycznych. Strona bez markerów (wyłącznie obcojęzyczna) zostaje nietknięta — osobna asercja w T46. ZMIERZONE: nieprzeliczonych znaków **2 → 0**; miara pokrycia bez zmian (0,813 / 0,940), bo te strony to wykazy nazw chemicznych, prawie bez słów wzorca. ⇒ poprawka POPRAWNOŚCI, nie wyniku liczbowego — i tak została opisana.
+
+**(2) ODRZUCONE — tryb `-raw`.** Daje lepszą kolejność (0,850 wobec 0,813), ale gorszą kompletność (0,900 wobec 0,940). Rozstrzygnięte miarą bliższą zastosowaniu niż LCS: czy 5-wyrazowa fraza ze wzorca znajduje się w tekście z PDF (proxy dla `szukaj`, 1325 fraz z 53 aktów):
+| tryb | trafialność frazy |
+|---|---|
+| `-layout` (stan sprzed poprawki) | 0,462 |
+| **domyślny (bez `-layout`)** | **0,785** |
+| `-raw` | 0,654 |
+⇒ zostaje tryb domyślny. Usterka zgłoszona w #83 to „szukaj nie znajduje fraz”, więc o wyborze decyduje ta miara, nie LCS.
+
+**(3) ODRZUCONE — sklejanie wyrazów przeniesionych z dywizem.** Zmierzone: trafialność frazy 0,785 przed i po. Bez wpływu, bo czytanie bez `-layout` już je łączy. Pozostaje tylko w konwerterze, gdzie służy czytelności.
+
+**Skąd bierze się reszta luki (0,813, nie 1,0) — i dlaczego NIE jest to wada ekstrakcji.** Wykaz najczęściej brakujących słów wzorca: `wymienionej` ×170, `przypisie` ×167, `ustalonym` ×104, `dodany` ×50, `czyli` ×42, `weszła` ×35. To słownictwo APARATU REDAKCYJNEGO ISAP („w brzmieniu ustalonym przez art. … ustawy wymienionej w przypisie 1, która weszła w życie z dniem …”), którego w PDF nie ma w ogóle. W drugą stronę: tylko **0,708** słów z PDF występuje w HTML — to z kolei treść sąsiednich pozycji wydrukowanych na tych samych stronach (F-234). ⇒ Obie miary mają sufit poniżej 1,0 z przyczyn strukturalnych, a największą pozostałą dźwignią nie jest ekstrakcja, tylko **wycięcie aktu z zeszytu (F-234)**.
+
+**Kontrola ryzyka dla tekstów obcojęzycznych.** Sprawdzone osobno: w próbie są trzy akty z „«…»”, ale to polski cudzysłów ówczesnego składu („«oraz Fundusz LeÊny»”), a wszystkie à/ç na tych stronach to mojibake. Fałszywego przeliczenia tekstu francuskiego nie stwierdzono.
+
+### 9B. DWA DALSZE POMYSŁY SPRAWDZONE NA ŻĄDANIE UŻYTKOWNIKA
+
+**(a) „A gdyby zastosować wzorzec liter?” — SPRAWDZONE I ODRZUCONE.** Zbudowany profil częstości liter polszczyzny z 515 666 znaków oficjalnego HTML (najczęstsze: a 8,7%, o 8,0%, i 7,4%, e 7,0%; znaki diakrytyczne 5,1% liter). Kryterium: mapuj, jeżeli po mapowaniu tekst jest BLIŻEJ tego profilu (odległość całkowitego wahania).
+- Na danych rzeczywistych nie wnosi nic: **0 rozbieżności** z regułą markerową na 292 stronach z lat 2000–2009 i 285 stronach z lat 2015–2023.
+- Jest SŁABSZE w dwóch miejscach: na 15 stronach ubogich w litery (poniżej 60) nie wydaje decyzji w ogóle, a w teście kontrolowanym **fałszywie mapuje tekst francuski** — i w wersji liczącej tylko alfabet polski, i w wersji z masą znaków mojibake (odległość maleje, bo à→ą i ç→ć przesuwają rozkład w stronę polszczyzny). Reguła markerowa francuskiego nie rusza.
+⇒ Profil statystyczny zostaje odrzucony. Przyczyna jest zrozumiała: wykrycie ma rozstrzygać o OBECNOŚCI konkretnej usterki kodowania, a nie o tym, „jak bardzo tekst przypomina polski”; znaki ¢ ´ ¸ ∏ ¡ ƒ Â Ê ˚ ˝ są jej bezpośrednim świadectwem, a rozkład liter — poszlaką.
+
+**(b) Konstrukcja tabeli z kodeków w czasie działania — PRZYJĘTE (propozycja użytkownika).** Zamiast dwóch ciągów wpisanych w kod tabela powstaje przy starcie:
+```python
+TABELA_MAC_CE = str.maketrans({bytes([b]).decode("mac_roman"): bytes([b]).decode("mac_latin2")
+                               for b in range(128, 256) if bytes([b]).decode("mac_latin2") in "ąćęłńśźżĄĆĘŁŃŚŹŻ"})
+```
+Sprawdzone: daje **dokładnie te same 16 pozycji** co tabela dotychczasowa, a w zakresie bajtów 128–255 żaden znak Mac Roman nie ma niejednoznacznego odpowiednika w Mac CE. Zysk jest w utrzymaniu: błędu literowego w ręcznie wpisanym ciągu nie da się wychwycić wzrokiem, a tu nie ma czego wpisywać. Ó/ó wypadają z filtra same.
+⛔ KOREKTA WŁASNA: zapowiedziałem przy tym użytkownikowi, że `str.translate` będzie szybszy — **nieprawda**. Zmierzone na 273 940 znakach z 8 680 podmianami: `translate` 21,2 ms, `re.sub` z klasą znaków 3,5 ms, czyli ~6× na korzyść `re.sub` (translate sprawdza każdy znak w słowniku, wyrażenie skanuje w C i woła funkcję tylko na trafieniach). Pierwszy pomiar zrobiłem na tekście JUŻ naprawionym, gdzie `re.sub` nie miał czego podmieniać — wynik był bezwartościowy i został powtórzony. Wdrożone rozwiązanie: tabela z kodeków (propozycja użytkownika) + zastosowanie przez `re.sub`, przy czym klasa znaków jest BUDOWANA Z TABELI, więc źródło prawdy pozostaje jedno. W JS tabela zostaje wpisana (brak tych kodeków w środowisku), a jej zgodność z kodekami pilnuje T46.
+
 ### 10. CO ZWERYFIKOWANO, A CZEGO NIE
 Zweryfikowane: mapa liter (kodeki), zachowanie wykrycia na dwóch korpusach, skuteczność obu ścieżek wobec oficjalnego HTML, działanie poprawionych funkcji uruchomionych z PLIKÓW REPOZYTORIUM (nie z kopii roboczych), obecność poprawki w zbudowanym pakiecie.
 NIEZWERYFIKOWANE: liczby z nagłówka zgłoszenia (16 759 aktów Dz.U. bez HTML, 9 593 akty M.P.) — nie liczyłem ich; treść repozytorium `dziennik-ustaw-2000-2011-md` — nie pobierałem go i nie jest źródłem dla systemu (konwersja nieoficjalna); zachowanie usterki w Monitorze Polskim — poprawka obejmuje M.P. w kodzie, ale pomiar zrobiłem wyłącznie na Dz.U., bo tylko tam są akty z oficjalnym HTML do porównania.
