@@ -1,8 +1,8 @@
-9034164723d094ab6c0e07ccd2f4ffd64bd78ffd371736c6c36c6f48393a895b  ./.claude-plugin/plugin.json
+a1170aebc460eda71d653cca20762c3fb71b5e1709b71478cb05967f83c87fee  ./.claude-plugin/plugin.json
 6890df87ea195c47d9ba9a5649fa662fe5d18952dcda4f3bbc563aaf46682a37  ./MAPA-AKTOW.md
 afc080fa6c163b25960985dc80c541245402958855d3ac853835e9640037f01d  ./MAPA-POKRYCIA.md
 433b720250fe97d5e9dd1f0db7ce7a1bb464a4de16c6e9b8fe4fc16e2396a083  ./PORTABILITY-MANIFEST.md
-9b1c73c0e66cbb322f4caa6ca55299cb929bb6c50751498f94015b874736f157  ./SKILL.md
+27d476ec76410857928d54f3a10afd01ffd2446a68e45b0dc7be375d4cc6e215  ./SKILL.md
 674c95294d72b9adf311234a798c639d004bd5e0fdcaacbcd912be772e223a2e  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 b5caba60082a311151beb50575b9b13880f70a87d9bf278e79b9a75b43a6c630  ./modules/mod-EKPC-ETPC-prawa-czlowieka.md
@@ -15,6 +15,6 @@ d42e183500ab3c6023fd29be59858e9500e660e4d144b07d7d19a318a253404c  ./modules/mod-
 f67a61b28a3230811000edfabe8ad1bb1d21a5cbdb83abc59208b99a9893986f  ./modules/mod-inwestycje-transgraniczne-FDI-BIT.md
 f71a5f7c5c783bb78979d8db494314383a7537499eb53ef34d6cf484af196e01  ./modules/mod-konwencja-genewska-uchodzcy-1951-protokol-1967.md
 70beba420b8669cfbef88a7e7e118e3f2a3417d22c4d6f7e0a1f9c78ed3de4c8  ./modules/mod-konwencje-wiedenskie-dyplomatyczne-konsularne.md
-41577454213914ce1604b3ed503ed494f077b7f115c02afdb21ab823c641e1de  ./modules/mod-maly-ruch-graniczny.md
+5c02c655d2125482abd6453bb434c3ca3903c4ff254b1c00e06fbb709d8776ad  ./modules/mod-maly-ruch-graniczny.md
 3a5e8d52977c413bbdcd356c0d0614dd01c44d7181bb64c46c6770acf03fbab9  ./modules/mod-rejestr-zrodla-prawa-lifecycle.md
-57d676ec5805bf008540ffd0dc0c021985e259b796b6097f58bcbc529ce5bfde  ./references/CHANGELOG.md
+91d6b99f1940d916a3a6890d3318e62b00b728de07b74516351a8c2fed3e0c72  ./references/CHANGELOG.md

@@ -69891,6 +69891,56 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-04j — TRYB TREŚĆ: F-233 zamknięta w obu częściach; limit MRG PL–Rosja potwierdzony, ścieżka odwoławcza w DR-14 naprawiona (6.169)
+
+### 1. ŹRÓDŁO ZLECENIA
+Użytkownik: „zrób 233" — polecenie wykonania obu części flagi F-233 otwartej w AUDYT-2026-10-04i.
+
+### 2. WYKONANE
+
+#### 2A. F-233 część (1) — porozumienie administracyjne Dz.U. 2013 poz. 1375 odczytane (DR-04 3.44)
+STATUS: ✅ ZAMKNIĘTE. ŹRÓDŁO: ELI DU/2013/1375 — metadane (status „obowiązujący", w mocy od 2014-01-01, pole `Odesłania` → DU/2013/1373) oraz `text.pdf` (skan bez warstwy tekstowej; polska wersja art. 1–8 na stronach 2–8, odczyt wizualny). REPRODUKCJA: `curl -sS https://api.sejm.gov.pl/eli/acts/DU/2013/1375` i `.../text.pdf`; `pdftoppm -r 100 -f 2 -l 8 -png`.
+
+Do `dr-04/modules/mod-umowa-PL-UA-zabezpieczenie-spoleczne.md` dodana sekcja **6A**:
+- **instytucje łącznikowe** (art. 2): po stronie RP — ZUS Centrala (ubezpieczenia społeczne poza rolnikami), KRUS Centrala (rolnicy), Ministerstwo Pracy i Polityki Społecznej (zasiłki dla bezrobotnych); po stronie ukraińskiej sześć instytucji (Ministerstwo Polityki Społecznej — dział II Umowy; trzy dyrekcje wykonawcze funduszy; Fundusz Emerytalny; Wydział Orzecznictwa Medyczno-Społecznego MOZ);
+- **instytucje właściwe** (art. 3): w RP — ZUS, KRUS oraz **wojewódzkie urzędy pracy** (asymetria wobec instytucji łącznikowej, którą jest ministerstwo);
+- **art. 4 — zaświadczenie o ustawodawstwie właściwym** (funkcjonalny odpowiednik A1): wydawane na wniosek pracodawcy albo samozatrudnionego, ze wskazaniem okresu ważności, i stanowiące dowód wyłączenia spod ustawodawstwa drugiej Strony; kopia trafia do pracownika, pracodawcy i instytucji drugiej Strony; **ust. 4** — wniosek o zgodę z art. 7 ust. 1 Umowy (przedłużenie delegowania ponad 24 miesiące) składa się przed końcem okresu początkowego, a wniosek spóźniony podlega badaniu przyczyn opóźnienia i — przy uzasadnieniu — jest przesyłany dalej; ust. 5 — do art. 8 Umowy wyznaczono ZUS Centralę i Ministerstwo Polityki Społecznej Ukrainy;
+- **obieg wniosków** (art. 5–6) i wymiana danych statystycznych (art. 7); wejście w życie (art. 8).
+
+⛔ Zastrzeżenie, które ZOSTAJE na trwałe (nie jest flagą, lecz właściwością aktu): **wzorów formularzy nie ma w Dz.U.** — art. 2 ust. 2 i art. 5 ust. 1 Porozumienia odsyłają do formularzy uzgadnianych przez instytucje łącznikowe poza tekstem aktu. Dodatkowo art. 2 ust. 3 pozwala wyznaczyć inne instytucje łącznikowe za samym zawiadomieniem drugiej Strony, więc wykaz z 2012 r. może być nieaktualny — oznaczone w module.
+
+#### 2B. F-233 część (2) — limit pobytu MRG PL–Rosja POTWIERDZONY (DR-14 3.12)
+STATUS: ✅ ZAMKNIĘTE, bez korekty liczby. ŹRÓDŁO: ELI DU/2012/814 — metadane (status „obowiązujący", w mocy od 2012-07-27) oraz `text.pdf` (skan; polska wersja art. 1–5 na stronach 2–5, odczyt wizualny). REPRODUKCJA: `curl` + `pdftoppm -r 100 -f 2 -l 9 -png`.
+
+Art. 4 ust. 1 Umowy: pobyt w strefie przygranicznej **każdorazowo do 30 dni** licząc od dnia wjazdu, **łącznie nie więcej niż 90 dni w okresie każdych 6 miesięcy** liczonych od dnia pierwszego wjazdu. ⇒ liczba, którą moduł podawał bez weryfikacji, jest **prawidłowa**; flaga zamyka się potwierdzeniem, nie naprawą. Odnotowane, bo wynik negatywny bywa pomijany: brak błędu też jest wynikiem audytu i wymaga zapisu ze ŹRÓDŁEM.
+
+Przy odczycie dopisano do modułu treść, której wcześniej nie było: wymóg stałego zamieszkania w strefie ≥ 3 lata z wyjątkiem podmiotowym dla współmałżonków i dzieci na utrzymaniu (art. 2 ust. 1 lit. e i ust. 2), przesłanki i przeszkody wydania zezwolenia (art. 3), okresy ważności zezwoleń — pierwsze 2 lata, kolejne 5 lat, nie dłużej niż ważność dokumentu podróży (art. 4 ust. 2–3), zakaz pracy (ust. 5), reguła „o zakresie swobody decyduje podstawa WJAZDU, nie posiadanie obu dokumentów" przy zbiegu zezwolenia i wizy (ust. 6–7) oraz siła wyższa (ust. 8).
+
+#### 2C. Znalezione przy okazji: błąd w ścieżce odwoławczej (DR-14)
+STATUS: ✅ NAPRAWIONE. ŹRÓDŁO: ELI DU/2025/1079 (ustawa o cudzoziemcach, t.j. z 25.07.2025) `text.pdf`, art. 42–43; ⛔ KROK 2C: nowelizacje po t.j. — DU/2025/1794 i DU/2026/203 — **nie zmieniają art. 40–48** (kontrola: wyodrębnienie bloku „W ustawie z dnia 12 grudnia 2013 r. o cudzoziemcach" z tekstu każdej ustawy zmieniającej i wypis zmienianych artykułów; w DU/2025/1794 zmieniane są m.in. art. 1–28, 58–64a, 99–168a, 196–314a, 397–464, w DU/2026/203 art. 23–451 — w obu zbiorach brak 40–48). REPRODUKCJA: pobranie obu tekstów i ten sam wypis.
+
+Moduł MRG podawał jedną ścieżkę („odmowa/cofnięcie → wniosek o ponowne rozpatrzenie przez konsula, 14 dni"), a wśród sankcji wymieniał unieważnienie zezwolenia bez wskazania, że ma ono **inny tryb**. Stan ustawowy: art. 42 ust. 1–4 — odmowy udzielenia i cofnięcia dokonuje konsul właściwy ze względu na miejsce stałego zamieszkania, środkiem jest wniosek o ponowne rozpatrzenie sprawy przez konsula w terminie 14 dni od doręczenia; art. 43 ust. 1–3 — **unieważnienie** zezwolenia następuje decyzją komendanta wojewódzkiego lub powiatowego (miejskiego) Policji albo komendanta oddziału lub placówki Straży Granicznej, a przysługuje od niej **odwołanie do wojewody** właściwego ze względu na siedzibę organu; art. 47 — zatrzymanie zezwolenia przez komendanta placówki SG. Moduł rozdziela teraz obie ścieżki.
+
+Powołanie, które w module stało bez weryfikacji („art. 42 ust. 3-4 ustawy o cudzoziemcach"), okazało się **trafne** — potwierdzone co do treści i terminu.
+
+### 3. BŁĘDY WŁASNE TEJ SESJI
+Nie stwierdzono. Wszystkie twierdzenia dopisane w tej sesji pochodzą z odczytu tekstów w RZĘDZIE 1; żadna liczba ani termin nie zostały wpisane z pamięci.
+
+### 4. STAN REJESTRU PO SESJI
+- ZAMKNIĘTA: **F-233** (obie części).
+- NOWYCH FLAG: brak — odczyt nie ujawnił luki wymagającej śledzenia. Zastrzeżenie o formularzach poza Dz.U. zostaje w module jako właściwość aktu, nie jako flaga.
+- BEZ ZMIAN: **F-230** (poprawka indeksu RAG — wymaga dostępu do gałęzi roboczej).
+- Tablica sterująca: Wykonalne 4, Reaktywne 2, Zależne 21, Odnotowane 1 → razem **28**. Kolejny wolny numer: **F-234**.
+
+### 5. CO ZWERYFIKOWANO, A CZEGO NIE (ZASADA 14 — granice)
+Zweryfikowane w RZĘDZIE 1: art. 1–8 Porozumienia administracyjnego (DU/2013/1375); art. 1–5 umowy MRG PL–Rosja (DU/2012/814); art. 42–43 ustawy o cudzoziemcach (DU/2025/1079) wraz z zamkniętą kontrolą nowelizacji po t.j.
+NIEZWERYFIKOWANE i tak oznaczone w modułach: numery i wzory formularzy stosowanych przez ZUS, KRUS i instytucje ukraińskie (poza Dz.U.); aktualność wykazu instytucji łącznikowych z 2012 r. (art. 2 ust. 3 Porozumienia dopuszcza zmianę samym zawiadomieniem); **faktyczny** stan stosowania umów MRG, w tym utrzymywanie zawieszenia umowy z Rosją po 2022 r. — odczyt tekstu umowy niczego tu nie rozstrzyga i moduł to mówi wprost.
+
+### 6. WNIOSKI I ZALECENIA
+1. Flaga zamknięta **potwierdzeniem** (część 2) jest tak samo wartościowa jak zamknięta naprawą — i równie łatwo ją przeoczyć przy przeglądzie rejestru. Zalecenie: w opisie zamknięcia zawsze oznaczać, czy wynik był pozytywny czy negatywny.
+2. Odczyt aktu zleconego flagą dwa razy z rzędu (04i, 04j) ujawnił błąd treści **poza** zakresem flagi (ścieżka odwoławcza). Zalecenie: przy otwieraniu modułu w ramach flagi przechodzić wszystkie powołania w sekcji, której flaga dotyczy, a nie tylko kwestionowaną pozycję.
+3. Przy ustawach zmieniających wiele aktów naraz wypis „art. N" z całego tekstu daje fałszywe trafienia. Zalecenie metodyczne: najpierw wyodrębnić blok „W ustawie z dnia … o …", dopiero w nim szukać zakresu artykułów — wzorzec użyty w §2C.
+
 ## AUDYT-2026-10-04i — TRYB TREŚĆ: luka pokrycia rozdz. XXXV KK zamknięta (decyzja użytkownika), F-231 i F-232 zamknięte, 5 błędów treści nazwanych (6.168)
 
 ### 1. ŹRÓDŁO ZLECENIA

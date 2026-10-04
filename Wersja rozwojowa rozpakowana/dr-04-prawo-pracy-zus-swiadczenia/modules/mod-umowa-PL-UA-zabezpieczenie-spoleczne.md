@@ -19,8 +19,10 @@
 
 ✅ [VER: ELI DU/2013/1373 `text.pdf` — **skan bez warstwy tekstowej**; polska wersja Umowy (art. 1–30) odczytana wizualnie ze stron 2–17, odczyt 2026-10-04i]
 
+✅ [VER: ELI DU/2013/1375 `text.pdf` — **skan bez warstwy tekstowej**; polska wersja Porozumienia administracyjnego (art. 1–8) odczytana wizualnie ze stron 2–8, odczyt 2026-10-04j] — treść w sekcji 6A.
+
 ⚠️ **Granice tej weryfikacji — czytaj przed użyciem w sprawie:**
-- Odczytana jest **treść Umowy**. Treść **Porozumienia administracyjnego** (poz. 1375 — formularze, tryb obiegu wniosków, instytucje) **nie została odczytana** w tej sesji.
+- Odczytane są **teksty Umowy i Porozumienia administracyjnego**. ⛔ Porozumienie **nie zawiera** wzorów formularzy — art. 2 ust. 2 i art. 5 ust. 1 odsyłają do „uzgodnionych", „dwujęzycznych" formularzy ustalanych przez instytucje łącznikowe poza tekstem aktu. Numerów i wzorów tych formularzy **nie da się ustalić z Dz.U.** — pochodzą z ZUS/KRUS i ukraińskich instytucji; przy sprawie sprawdź bieżący wykaz u instytucji.
 - Umowa nie ma w ELI pola „akty zmieniające"; nie sprawdzono odrębnie, czy po 2013 r. zawarto protokoły zmieniające poza Dz.U. — ⛔ fresh gate przy sprawie.
 - Praktyka stosowania po 24.02.2022 (wojna, ochrona czasowa, wymiana informacji z ukraińskim PFU) **nie jest tu opisana** — to stan faktyczny, nie treść umowy; sprawdź bieżące komunikaty ZUS.
 - Orzecznictwo (SN, sądy ubezpieczeń społecznych) — nie weryfikowane; `orzeczenia-sadowe-v2`.
@@ -155,11 +157,80 @@ art. 26  Świadczenia wypłaca się BEZPOŚREDNIO osobom uprawnionym zamieszkał
          w walucie urzędowej państwa instytucji wypłacającej, a przy braku wymienialności —
          w innej walucie swobodnie wymienialnej.
 art. 27  Spory o stosowanie i wykładnię Umowy rozstrzygają WSPÓLNIE władze właściwe obu Stron.
-art. 20  Władze właściwe uzgadniają porozumienie administracyjne (→ Dz.U. 2013 poz. 1375),
+art. 20  Władze właściwe uzgadniają porozumienie administracyjne (→ Dz.U. 2013 poz. 1375, sekcja 6A),
          wyznaczają instytucje łącznikowe i właściwe oraz wymieniają informacje o zmianach ustawodawstwa.
 ```
 
-**Władza właściwa (art. 1 ust. 1 pkt 2):** w RP — minister właściwy do spraw zabezpieczenia społecznego; na Ukrainie — specjalnie upoważniony centralny organ władzy wykonawczej w zakresie pracy i polityki społecznej. **Instytucja łącznikowa** (pkt 4) zapewnia koordynację i wymianę informacji; konkretne instytucje wyznacza porozumienie administracyjne — ⚠️ nie odczytano.
+**Władza właściwa (art. 1 ust. 1 pkt 2):** w RP — minister właściwy do spraw zabezpieczenia społecznego; na Ukrainie — specjalnie upoważniony centralny organ władzy wykonawczej w zakresie pracy i polityki społecznej. **Instytucja łącznikowa** (pkt 4) zapewnia koordynację i wymianę informacji; konkretne instytucje wyznacza Porozumienie administracyjne — sekcja 6A.
+
+---
+
+## 6A. POROZUMIENIE ADMINISTRACYJNE (Dz.U. 2013 poz. 1375) — KTO JEST KIM I JAKI JEST OBIEG
+
+✅ [VER: ELI DU/2013/1375 `text.pdf`, art. 1–8, odczyt wizualny 2026-10-04j, RZĄD 1] — Porozumienie podpisane tego samego dnia co Umowa (Kijów, 18.05.2012); art. 8: wchodzi w życie z dniem podpisania, nie wcześniej niż z dniem wejścia w życie Umowy, i obowiązuje przez okres jej obowiązywania (ELI: w mocy od **1.01.2014**). Pojęcia mają to samo znaczenie co w Umowie (art. 1).
+
+### Instytucje łącznikowe (art. 2 — w rozumieniu art. 20 pkt 2 Umowy)
+
+| Strona | Instytucja łącznikowa | Zakres |
+|---|---|---|
+| **RP** | **ZUS, Centrala w Warszawie** | ustawodawstwo dotyczące ubezpieczeń społecznych, **z wyjątkiem** ubezpieczenia społecznego rolników |
+| **RP** | **KRUS, Centrala w Warszawie** | ubezpieczenie społeczne rolników |
+| **RP** | **Ministerstwo Pracy i Polityki Społecznej** | zasiłki dla bezrobotnych |
+| **Ukraina** | Ministerstwo Polityki Społecznej Ukrainy | stosowanie działu II Umowy (ustawodawstwo właściwe) |
+| **Ukraina** | Dyrekcja Wykonawcza Funduszu Ubezpieczenia Społecznego z tytułu czasowej utraty zdolności do pracy | choroba, ciąża i poród |
+| **Ukraina** | Dyrekcja Wykonawcza Funduszu Ubezpieczenia Społecznego z tytułu wypadków przy pracy i chorób zawodowych | wypadki przy pracy, choroby zawodowe |
+| **Ukraina** | Dyrekcja Wykonawcza Funduszu Powszechnego Państwowego Ubezpieczenia Społecznego z tytułu bezrobocia (Państwowe Centrum Zatrudnienia) | bezrobocie |
+| **Ukraina** | Fundusz Emerytalny Ukrainy | emerytury, renty, zasiłki pogrzebowe |
+| **Ukraina** | Wydział Orzecznictwa Medyczno-Społecznego Ministerstwa Ochrony Zdrowia Ukrainy | ocena poziomu i przyczyn inwalidztwa oraz stałej utraty zdolności do pracy |
+
+- Art. 2 ust. 2: instytucje łącznikowe **uzgadniają wspólne procedury i dwujęzyczne formularze** niezbędne do stosowania Umowy i Porozumienia (⇒ formularzy nie ma w Dz.U.).
+- Art. 2 ust. 3: każda władza właściwa może wyznaczyć **inne** instytucje łącznikowe, zawiadamiając niezwłocznie drugą Stronę ⇒ **lista powyżej jest stanem z 2012 r. — przy sprawie potwierdź aktualny układ u instytucji**.
+
+### Instytucje właściwe (art. 3)
+- **RP:** ZUS (ubezpieczenia społeczne, poza rolnikami); KRUS (rolnicy); **wojewódzkie urzędy pracy** (zasiłki dla bezrobotnych — uwaga: instytucją *łącznikową* jest ministerstwo, *właściwą* — WUP).
+- **Ukraina:** Fundusz Ubezpieczenia Społecznego z tytułu czasowej utraty zdolności do pracy; Fundusz Ubezpieczenia Społecznego z tytułu wypadków przy pracy i chorób zawodowych; Fundusz Powszechnego Państwowego Ubezpieczenia Społecznego z tytułu bezrobocia; Fundusz Emerytalny Ukrainy.
+
+### ⭐ Art. 4 — ZAŚWIADCZENIE O USTAWODAWSTWU WŁAŚCIWYM (odpowiednik A1 w relacjach unijnych)
+```
+ust. 1  Gdy stosuje się dział II Umowy (art. 6–8), instytucja właściwa NA WNIOSEK PRACODAWCY albo
+        osoby pracującej na własny rachunek wydaje ZAŚWIADCZENIE potwierdzające, że pracownik
+        lub samozatrudniony podlega temu ustawodawstwu, ZE WSKAZANIEM OKRESU WAŻNOŚCI.
+        ⭐ Zaświadczenie jest DOWODEM, że osoba jest WYŁĄCZONA spod ustawodawstwa drugiej Strony.
+ust. 2  Wydaje: na Ukrainie — Ministerstwo Polityki Społecznej lub wyznaczona przez nie instytucja;
+        w RP — ZUS (poza rolnikami) albo KRUS (rolnicy).
+ust. 3  Instytucja wydająca dostarcza KOPIĘ: pracownikowi/samozatrudnionemu, pracodawcy pracownika
+        oraz instytucji łącznikowej lub właściwej drugiej Strony.
+ust. 4  ⛔ TERMIN: wniosek o zgodę z art. 7 ust. 1 Umowy (przedłużenie delegowania ponad 24 miesiące)
+        składa się do instytucji łącznikowej PRZED KOŃCEM POCZĄTKOWEGO OKRESU DELEGOWANIA.
+        Wniosek złożony PO utracie ważności zaświadczenia: instytucja łącznikowa, która go otrzymała,
+        BADA PRZYCZYNY OPÓŹNIENIA i — jeżeli uzna je za uzasadnione — przesyła wniosek instytucji
+        łącznikowej drugiej Strony w celu uzyskania zgody. ⇒ spóźnienie nie jest automatycznie fatalne,
+        ale wymaga wykazania przyczyny.
+ust. 5  Do stosowania art. 8 Umowy (wyjątki uzgadniane) wyznaczono: na Ukrainie — Ministerstwo
+        Polityki Społecznej; w RP — ZUS, Centrala w Warszawie.
+```
+
+### Obieg wniosków o świadczenia (art. 5–6)
+```
+art. 5  ZASIŁKI DLA BEZROBOTNYCH: wnioskodawca przedkłada instytucji właściwej Strony, w której
+        ubiega się o zasiłek, ZAŚWIADCZENIE NA UZGODNIONYM FORMULARZU potwierdzające okresy
+        ubezpieczenia przebyte u drugiej Strony; na tym samym formularzu potwierdza się okresy
+        POBIERANIA zasiłku u drugiej Strony (art. 9 ust. 2 Umowy — skrócenie okresu wypłaty).
+art. 6  ŚWIADCZENIA Z UBEZPIECZEŃ SPOŁECZNYCH I UBEZPIECZENIA ROLNIKÓW:
+  ust. 1  instytucja, która otrzyma wniosek o świadczenie należne wg ustawodawstwa DRUGIEJ Strony,
+          przesyła go na odpowiednim formularzu instytucji właściwej drugiej Strony — zgodnie
+          z art. 24 Umowy — WRAZ ze wszystkimi dostępnymi dokumentami i informacjami
+          (⇒ praktyczny mechanizm za regułą „wniosek złożony u jednej Strony = złożony u drugiej");
+  ust. 2  instytucje wymieniają się BEZZWŁOCZNIE dokumentami i informacjami potrzebnymi do decyzji
+          oraz informują się o okolicznościach wpływających na prawo, wysokość lub wypłatę;
+  ust. 3  instytucja przekazuje NA WŁASNY KOSZT, na wniosek drugiej, informacje i posiadaną
+          DOKUMENTACJĘ LEKARSKĄ dotyczącą inwalidztwa (niezdolności do pracy) wnioskodawcy
+          lub świadczeniobiorcy;
+  ust. 4  instytucja weryfikuje informacje o wnioskodawcy i członkach jego rodziny; RODZAJE
+          weryfikowanych informacji uzgadniają instytucje łącznikowe.
+art. 7  Instytucje łącznikowe wymieniają roczne dane statystyczne na dzień 31 grudnia: liczba
+        zaświadczeń z art. 4 i płatności dla świadczeniobiorców, z rodzajami świadczeń.
+```
 
 ## 7. PRZEPISY PRZEJŚCIOWE (art. 28) — CZĘSTE ŹRÓDŁO SPORU
 
@@ -204,7 +275,12 @@ ust. 5  Przy stosowaniu art. 7 do osób delegowanych przed wejściem Umowy w ży
 □ Czy organ odrzucił dokument z powodu języka? art. 25 ust. 2 — nie wolno
 □ Świadczenie sprzed 1.01.2014 — czy wniosek o ponowne ustalenie (art. 28 ust. 4) jest korzystny;
   czy działa gwarancja niepogorszenia (wymóg zamieszkania w RP)
-□ Treść Porozumienia administracyjnego (Dz.U. 2013 poz. 1375) i formularze — ODCZYTAJ, nieodczytane tutaj
+□ Delegowanie: czy jest ZAŚWIADCZENIE z art. 4 Porozumienia (dowód wyłączenia spod ustawodawstwa
+  drugiej Strony) i czy nie upłynął jego okres ważności; wniosek o przedłużenie — PRZED końcem
+  okresu początkowego, a jeśli po — przygotuj uzasadnienie opóźnienia (art. 4 ust. 4 Porozumienia)
+□ Właściwy adresat: ZUS / KRUS / WUP (zasiłek dla bezrobotnych) — sekcja 6A; układ instytucji
+  z 2012 r. mógł się zmienić (art. 2 ust. 3 Porozumienia) — potwierdź
+□ Formularze: nie są częścią Dz.U. (uzgadniają je instytucje łącznikowe) — pobierz bieżące z ZUS/KRUS
 □ Brzmienie przepisów do pisma — PRAWO-HARDGATE + ELI; orzecznictwo — orzeczenia-sadowe-v2
 ```
 
@@ -228,7 +304,7 @@ ust. 5  Przy stosowaniu art. 7 do osób delegowanych przed wejściem Umowy w ży
 ```
 ELI: https://api.sejm.gov.pl/eli/acts/DU/2013/1373            (Umowa — metadane)
 ELI: https://api.sejm.gov.pl/eli/acts/DU/2013/1373/text.pdf   (skan: wersja polska na stronach 2–17)
-ELI: https://api.sejm.gov.pl/eli/acts/DU/2013/1375            (Porozumienie administracyjne — DO ODCZYTANIA)
+ELI: https://api.sejm.gov.pl/eli/acts/DU/2013/1375            (Porozumienie administracyjne — odczytane, sekcja 6A)
 ELI: https://api.sejm.gov.pl/eli/acts/DU/2013/1374            (oświadczenie rządowe — data wejścia w życie)
 web_fetch: https://www.zus.pl — bieżąca praktyka i formularze w sprawach PL–UA (fresh gate)
 ```

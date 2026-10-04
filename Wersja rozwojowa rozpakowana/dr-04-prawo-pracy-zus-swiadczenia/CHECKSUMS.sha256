@@ -1,8 +1,8 @@
-5a9b3eeef06b3d6bd7789ef9e18f9e2dcde16d6964222a57d04f257f6c39221d  ./.claude-plugin/plugin.json
+61fb4dcbf79a766f6008cb1379e291eea4c462033e95fee7870c6c980a8c57e2  ./.claude-plugin/plugin.json
 5b3ec2d240173c36e869f63f7b58d7e2405b5afa455b1ebeaf7baea0a9bab2ed  ./MAPA-AKTOW.md
 13010fba8fe5772fe76abbd1275bb232d9d1303bc06deec10257e3079292145f  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-e98939e9986827eacdb675f328d01ad712636a09a5630586a29d3309392d5e7a  ./SKILL.md
+776b10e913c09302a11c9f2d2b6e79684ad1a998925f501db40a895f926869f5  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -29,7 +29,7 @@ c7175681ca4b214a08a5a6d2cd3e9cd44a1adab9898ffead488fc4c83c4137e9  ./modules/mod-
 f5706b24f796328c181d544ada931c0c0ce7053f0d1cf9cea2612d8d8ed327b6  ./modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md
 53ea75171c12dfa6c8272ab5cf85a851095b0372ddd6be8b8bddc0ad0ccdedce  ./modules/mod-obchodzenie-prawa-pracy-reforma-PIP-2026.md
 d151cb5c938ad347a0ce53488161e53402215c5b9f0e4ed8b7da04e2c9fbf8ee  ./modules/mod-reforma-stazu-pracy-2025-2026.md
-b9bc274dd3dfe799610609d8f199517952042b8947844bd8c0ef43ccedac7bdc  ./modules/mod-umowa-PL-UA-zabezpieczenie-spoleczne.md
+5573415ea04393403f1aca01631f4bd6feaf53f9721eec4278c3185d8068b79e  ./modules/mod-umowa-PL-UA-zabezpieczenie-spoleczne.md
 d0d1e121f5d15a651f5f62fdbed106bbaf51a64fd2d84914f0a04199ddc67198  ./modules/mod-ustawa-PIP-inspekcja-pracy.md
 0b6cb523024286d9c9d6717155362f4851b736c6358fd90fed66c7859b026220  ./modules/mod-ustawa-ZFSS.md
 a97713c5d807f8848abd2f71e8875b5d2cb0b74d85934df37122b9eef715991f  ./modules/mod-ustawa-aktywny-rodzic.md
@@ -48,4 +48,4 @@ b7e0ef8f4093faf5aef890ccddbac69c4dc517c762ac25e26fffcfca921d7de4  ./modules/mod-
 ef83da86f346814a8b673d20401a9bca3eff8636744f8a32aad7f3eff2cf7acb  ./modules/mod-ustawa-zwolnienia-grupowe.md
 262f569cea81431b9372cc3b5285399183bafcaac09745423b16b8383502e7d8  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-cc8b9557739bdc4de2ec4b4c726cbe965c1b68bf8f96bf510775ec94a3034c47  ./references/CHANGELOG.md
+9ca135e6df908e0e4e794180d451770fea87723201a60d861357d8f8ac010025  ./references/CHANGELOG.md
