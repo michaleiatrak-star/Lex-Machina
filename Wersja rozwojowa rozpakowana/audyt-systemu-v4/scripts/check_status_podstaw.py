@@ -99,7 +99,7 @@ HISTORYCZNY = re.compile(
 # Pliki, w których wygasłe numery są treścią, nie podstawą: dziennik audytów,
 # changelogi, rejestry flag, generacje map, raporty z pomiarów.
 POMIJANE_NAZWY = {
-    "AUDIT-JOURNAL.md", "CHANGELOG.md", "WARN-OTWARTE.md",
+    "AUDIT-JOURNAL.md", "CHANGELOG.md", "HISTORIA-ZMIAN-PLIKOW.md", "WARN-OTWARTE.md",
     "ALIASY-NAZW-AKTOW.md", "CHECKLIST-DEDUP.md",
 }
 POMIJANE_WZORCE = ("mapa_dzu_", "F-108-verification", "F-135-cross-check",

@@ -151,18 +151,3 @@ informacji, nie realizuje pełnego zespołu znamion § 1.
 - ELI/ISAP: Dz.U. 2025 poz. 383 ze zmianami — Kodeks karny.
 - ELI/ISAP: Dz.U. 2025 poz. 734 ze zmianami — Kodeks wykroczeń,
   w szczególności art. 107a.
-
----
-
-## CHANGELOG
-
-**2.0 (2026-08-25):** Pełna korekta z urzędowym tekstem Dz.U. 2026
-poz. 988: oznaczono obowiązywanie od 23.08.2026 r.; usunięto błędny próg
-1–10 lat; przeniesiono cel korzyści do obowiązkowych znamion § 1 i § 2;
-odtworzono prawidłowy, alternatywny katalog § 4 bez pozaustawowego warunku
-braku udziału w czynie; potwierdzono odrębny zakres art. 107a KW; dodano
-kontrolę temporalną i test znamion.
-
-**1.0–1.1 (2026-07-18–2026-07-27):** Wersje historyczne. Zawierały
-sprzeczne informacje o stanie wejścia w życie, sankcji i § 4; zastąpione
-w całości po weryfikacji urzędowej.

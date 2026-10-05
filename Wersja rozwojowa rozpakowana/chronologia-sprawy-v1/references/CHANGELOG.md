@@ -1,5 +1,11 @@
 # CHANGELOG — chronologia-sprawy-v1
 
+- 1.16 (2026-10-05d, AUDYT-2026-10-05d): Szablony `assets/widget-timeline.html` (SAMPLE_DATA) i `assets/widget-graf-przyczynowy.html` (GRAF): literał danych poprzedzony komentarzem `lex:dane`. Host obsługujący show_widget z polem `data` (Lex Machina) wstawia dane sam i dokłada pasek eksportu (oś czasu; graf zachowuje własny pasek MOD-WIDGET-IO), więc model przekazuje tylko dane zamiast przepisywać szablon. Na innych hostach bez zmian.
+
+- 1.15 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
+
+- 1.14 (2026-10-04m, AUDYT-2026-10-04m): Sekcja „Historia wersji” oznaczona `<!-- lex:wykonuje-aplikacja: HISTORIA -->` (metadane pomijane w prompcie aplikacji). Treść bez zmian. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04m.
+
 - 1.13 (2026-10-01b, AUDYT-2026-10-01b): **TRYB C — graf przyczynowy.** Zdarzenie ma `id` (Z-nnn — wspólny z MP13 i grafem) i opcjonalne `przyczyny` (tylko przy dowodzie mechanizmu; kolejność dat ≠ przyczyna). TRYB C: `shared/MOD-GRAF-PRZYCZYNOWY.md` + widget `assets/widget-graf-przyczynowy.html` (SVG, scenariusze obalony/udowodniony z przeliczeniem, pasek MOD-WIDGET-IO JSON/MD; silnik 1:1 z Pythonem — T42). `widget-timeline.html`: dane osób trzecich z prawdziwej sprawy (nazwisko, numer telefonu, firma) zastąpione znacznikami.
 
 - 1.12 (2026-09-27e, AUDYT-2026-09-27e): claude.ai po dodaniu marketplace instalował wyłącznie 4 z 32 pluginów (shared, prawny-router-v3, analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90); jedyna cecha wspólna tych 4, nieobecna w żadnym z 28 pozostałych, to klucz `dependencies` we frontmatterze SKILL.md. Dodano go (`requires: [shared]` — zgodnie ze stanem faktycznym) oraz jawny manifest pluginu (name, description = description z SKILL.md, author, repository, license) — host nie musi niczego wnioskować z SKILL.md. `version` w manifeście = `version:` z SKILL.md (pilnuje T38 w audyt-systemu-v4) — host rozpoznaje aktualizację po podbiciu wersji. Treść skilla bez zmian.

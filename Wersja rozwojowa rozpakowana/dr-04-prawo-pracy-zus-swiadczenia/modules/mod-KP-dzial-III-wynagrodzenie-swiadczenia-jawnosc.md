@@ -242,21 +242,3 @@ udowodnić, że doszło.
   wieloźródłowa (7 niezależnych portali branżowych) weryfikacja
   harmonogramu wdrożenia jawności wynagrodzeń w Polsce, z konsekwentnym
   potwierdzeniem daty 24.12.2025 dla Etapu 1.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu w odpowiedzi na pytanie
-użytkownika o nowe przepisy dot. świadczeń wypłacanych przez pracodawcę.
-Zweryfikowano online: pełną treść art. 92 KP (wynagrodzenie chorobowe —
-progi 33/14 dni, stawki 80%/100%, sposób liczenia, wpływ na staż pracy)
-oraz ZUPEŁNIE NOWY temat — jawność wynagrodzeń (dyrektywa UE 2023/970),
-z potwierdzonym 3-etapowym harmonogramem wdrożenia (Etap 1 już
-obowiązuje od 24.12.2025, Etap 2 termin 7.06.2026 z możliwym
-opóźnieniem, Etap 3 raportowanie od 2027/2031). Odnotowano uczciwie
-rozbieżność źródeł co do wysokości projektowanych grzywien (2000-60000
-vs 3000-50000 zł) oraz niepewny status ostatecznej ustawy implementującej
-Etap 2-3 na dzień weryfikacji. Rozdział II Działu III (ochrona
-wynagrodzenia, potrącenia, art. 84-91) NIE został zbadany w tej sesji —
-oznaczony jako priorytet dla kolejnej tury audytu KP.

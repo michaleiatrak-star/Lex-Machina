@@ -307,35 +307,3 @@ Wynik pracy modułu:
 | Nieważny testament | Brak wymagań formy / zdolności do czynności | Analiza przez prawnika przed wszczęciem postępowania |
 | Zaginięcie testamentu | Testament nie znaleziony | Wniosek do sądu o przeszukanie akt; notariusze (CRRN) |
 | Pominięcie przy zachowku | Rozliczenie darowizn z przeszłości | Pełna analiza darowizn za życia spadkodawcy |
-
----
-
-## CHANGELOG
-
-**2.0 (2026-07-19):** Rozbudowa modułu na wyraźne żądanie użytkownika po
-audycie pokrycia prawa spadkowego, który wykazał, że rdzeń (dziedziczenie
-ustawowe/testamentowe, zachowek, dział spadku) był solidny, ale 8
-instytucji było CAŁKOWICIE nieobecnych w całym systemie. Zweryfikowano
-online i dodano: zapis zwykły i zapis windykacyjny (z kluczowym
-rozróżnieniem skutku obligacyjnego vs rzeczowego), polecenie testamentowe,
-wykonawca testamentu, wydziedziczenie (z WYRAŹNYM rozróżnieniem od
-niegodności dziedziczenia — różne źródło: oświadczenie woli vs orzeczenie
-sądu), pełne opracowanie odpowiedzialności za długi spadkowe (dwa okresy,
-solidarność do działu spadku), umowy dotyczące spadku — zrzeczenie się
-dziedziczenia (z kluczowym ograniczeniem: niemożność zawarcia z gminą/
-Skarbem Państwa), oraz — jako BEZPOŚREDNIĄ odpowiedź na pytanie o
-sytuację "gdy nie ma nikogo, kto mógłby dziedziczyć" — pełny mechanizm
-dziedziczenia przez gminę/Skarb Państwa jako spadkobierców OSTATECZNYCH
-(art. 935 KC), w tym: dziedziczenie PRZYMUSOWE (brak możliwości
-odrzucenia spadku ustawowego), automatyczne dobrodziejstwo inwentarza,
-kontekst historyczny (reforma 2003) i odnotowane, NIEWPROWADZONE jeszcze
-prace legislacyjne nad odpowiedzialnością gmin za długi spadkowe.
-Dodano też DWIE sekcje świadomie oznaczone jako PUNKT STARTOWY, nie
-pełne opracowanie (spadki transgraniczne/Europejskie Poświadczenie
-Spadkowe, dziedziczenie gospodarstw rolnych, spis inwentarza —
-procedura) — zgodnie z ZASADA 13, bez fabrykowania pewności tam, gdzie
-weryfikacja nie była wystarczająco głęboka w tej sesji.
-
-**1.0 (2026-06-05):** Wersja pierwotna — dziedziczenie ustawowe, formy
-testamentu, przyjęcie/odrzucenie spadku, zachowek, dział spadku, zmiany
-od 15.11.2023, opłaty sądowe.

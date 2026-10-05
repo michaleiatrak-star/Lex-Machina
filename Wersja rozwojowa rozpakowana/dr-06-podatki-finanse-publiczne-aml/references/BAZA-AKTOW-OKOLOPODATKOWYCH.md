@@ -119,29 +119,3 @@ Ryczałt          → mod-ustawa-ryczalt-przychody.md
 TREŚCI (tylko metryki Dz.U. na poziomie aktu) — jeśli któryś cytuje
 konkretny artykuł zmieniony przez Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować), wymaga to
 osobnego przebiegu KROK 2C przy najbliższym użyciu.
-
-## 3. Changelog
-
-- **1.1.0 (2026-08-11):** Druga tura (sekcja 0a): spadki i darowizny,
-  PCC, podatki lokalne, ryczałt, gry hazardowe. Znaleziono i naprawiono:
-  (a) nieaktualny t.j. ustawy o spadkach i darowiznach (2024 poz. 1837 →
-  2026 poz. 478) — ten sam wzorzec co akcyza, z dodatkową komplikacją,
-  że w MAPA-AKTOW.md wiersz tej ustawy W OGÓLE NIE ISTNIAŁ (był tylko w
-  ROUTING-MAP.md, i to z błędnym numerem) — dodano brakujący wiersz;
-  (b) brak numeru Dz.U. dla ustawy o grach hazardowych w ramach wiersza
-  "podatki sektorowe" — ustalono i dodano (Dz.U. 2025 poz. 595 t.j.).
-  Pozostałe trzy podatki sektorowe (tonażowy, cukrowa, detaliczna) oraz
-  UFP, obligacje, usługi płatnicze, biegli rewidenci, doradztwo
-  podatkowe — nadal NIE zweryfikowane, jawnie odnotowane do kolejnej tury.
-- **1.0.0 (2026-08-11):** Utworzenie bazy analogicznie do
-  BAZA-AKTOW-OKOLOAKCYZOWYCH.md, na żądanie użytkownika. Zweryfikowano
-  5 głównych aktów podatkowych (VAT, PIT, CIT, Ordynacja podatkowa, KAS)
-  bezpośrednio na ISAP/obwieszczeniach. Wynik: t.j. wszystkich pięciu
-  były aktualne (w przeciwieństwie do akcyzy), ale brakowało odnotowania
-  nowelizacji post-t.j., w tym jednej wspólnej dla wszystkich pięciu
-  (Dz.U. 2026 poz. 846 (⛔ w życie 1.10.2026 — do tej daty NIE stosować)). Znaleziono i poprawiono jedną rozbieżność
-  liczbową w MAPA-AKTOW/ROUTING-MAP (KAS: poz. 395 → poprawnie poz. 415).
-  Pozostałe akty okołopodatkowe (PCC, spadki/darowizny, lokalne, ryczałt
-  szczegółowo, sektorowe, obligacje, usługi płatnicze, zawody: biegli
-  rewidenci/doradcy podatkowi, UFP) NIE zostały ponownie zweryfikowane
-  w tej sesji — do zrobienia w kolejnej turze.

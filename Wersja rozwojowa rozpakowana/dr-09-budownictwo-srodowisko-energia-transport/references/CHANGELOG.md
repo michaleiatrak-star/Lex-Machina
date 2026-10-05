@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.44 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
+
 - 3.43 (2026-10-04g, AUDYT-2026-10-04g): MAPA-AKTOW — wiersz „Ustawa o elektromobilności i paliwach alternatywnych” (Dz.U. 2026 poz. 1243 t.j.) wskazywał `mod-ustawa-charakterystyka-energetyczna`, który ustawy nie omawia (0 wystąpień); teraz `mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski` § 7 ELEKTROMOBILNOŚĆ (t.j. 2026/1243 ✅ [VER] RZĄD 1 2026-10-04 w module). Moduł charakterystyki energetycznej dostał własny wiersz (Dz.U. 2024 poz. 101 t.j., ✅ [VER] RZĄD 1 2026-09-16d — metryka z modułu; T45). Bez zmian treści prawa.
 
 - 3.42 (2026-10-04f, AUDYT-2026-10-04f): Moduł transportu: „mandat karny do 5 000 PLN” rozróżniony — naruszenia z zał. nr 1 ustawy o transporcie drogowym (ITD/Policja/KAS/SG) do 2 000 zł (art. 96 § 1a pkt 2 KPW), wykroczenia z rozdz. XI KW do 5 000 / 6 000 zł (§ 1ad). Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04f.

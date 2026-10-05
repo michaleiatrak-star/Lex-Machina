@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.39"
+version: "6.41"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,8 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.39 (2026-10-04j, AUDYT-2026-10-04j): ROUTING-MAP — wiersz umowy PL–UA o zabezpieczeniu społecznym uzupełniony o instytucje z porozumienia administracyjnego; wiersz MRG PL–Rosja o zweryfikowany limit pobytu (art. 4 ust. 1). RZĄD 1 ELI.
-  Poprzednia: 6.38 (2026-10-04i, AUDYT-2026-10-04i): nowe wiersze KK art. 278–295 i umowa PL–UA o zabezpieczeniu społecznym; przekierowanie wiersza art. 286.
+  Wersja bieżąca: 6.41 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

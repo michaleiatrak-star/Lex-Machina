@@ -201,18 +201,3 @@ którego zależą uprawnienia pracownicze (z zastrzeżeniami dla okresów do
   kontekst propozycji dodatkowego urlopu za staż pracy (NIE wprowadzone,
   tylko projekt — oznaczone jako niewiążące).
 - kadry.infor.pl — zwolnienie z obowiązku pracy z tyt. siły wyższej.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — drugi priorytet z audytu
-pokrycia KP. Zweryfikowano online: wymiar urlopu (art. 154, 20/26 dni),
-zasady proporcjonalności i narastania, niezrzekalność, odwołanie z
-urlopu, urlop w okresie wypowiedzenia, ekwiwalent (art. 171 pełna
-treść §1-3 + nowe §4-5 z nowelizacji 2026). Odnotowano niepewności:
-dokładny wymiar urlopu na żądanie (4 dni — niepotwierdzone bezpośrednio
-w KP w tej sesji), urlop opiekuńczy (Rozdział Ia), urlopy bezpłatne
-(Rozdział II) — wszystkie oznaczone do weryfikacji w ELI (RZĄD 1). Odnotowano
-projekt (NIEWPROWADZONY) dodatkowego urlopu za staż pracy — nie
-traktować jako obowiązujące prawo.

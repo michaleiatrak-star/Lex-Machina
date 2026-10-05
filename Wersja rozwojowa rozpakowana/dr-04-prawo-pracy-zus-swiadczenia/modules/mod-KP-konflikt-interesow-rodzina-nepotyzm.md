@@ -225,21 +225,3 @@ zależy od tego, KTO ponosi ryzyko decyzji kadrowej:
 - maciejwnuk.pl — rozróżnienie tolerancji nepotyzmu wg struktury
   właścicielskiej (korporacje vs sektor publiczny vs właściciel z
   bezpośrednim nadzorem).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("konflikt interesów, rodzina, pracownik"). Zweryfikowano online:
-rozgraniczenie sektor prywatny (pełna legalność, brak ograniczeń
-ustawowych) vs publiczny (obowiązek z ustawy o finansach publicznych +
-praktyka zakazu podległości bezpośredniej krewnych), definicję i formy
-nepotyzmu/kumoterstwa, negatywne konsekwencje biznesowe, instrumenty
-przeciwdziałania (audyt, ograniczenie nadzoru, kanały sygnalistów,
-polityka konfliktu interesów), oraz trafne rozróżnienie poziomu
-tolerancji społecznej/organizacyjnej w zależności od struktury
-właścicielskiej (korporacja rozdrobniona vs sektor publiczny vs
-właściciel z bezpośrednim nadzorem). Odnotowano niepewność: dokładny
-rodzaj sankcji za naruszenie obowiązku z ustawy o finansach publicznych
-— oznaczone do weryfikacji przy konkretnej sprawie.

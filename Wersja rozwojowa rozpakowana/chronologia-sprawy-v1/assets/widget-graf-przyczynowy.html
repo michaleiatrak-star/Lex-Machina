@@ -1,7 +1,9 @@
 <!-- widget-graf-przyczynowy.html — TRYB C chronologia-sprawy-v1 (1.13, AUDYT-2026-10-01b).
      Wzorzec dla show_widget: podmień stałą GRAF (dane z rozmowy, schemat: shared/MOD-GRAF-PRZYCZYNOWY.md §2).
      Silnik między znacznikami ENGINE-START/ENGINE-END jest 1:1 z shared/tools/graf_przyczynowy.py
-     (parytet sprawdza audyt-systemu-v4/scripts/check_graf_przyczynowy.py — T42). Dane przykładowe są fikcyjne. -->
+     (parytet sprawdza audyt-systemu-v4/scripts/check_graf_przyczynowy.py — T42). Dane przykładowe są fikcyjne.
+     Literał danych ma przed sobą komentarz „lex:dane”: host obsługujący show_widget z polem `data`
+     (Lex Machina) wstawia dane sam — wtedy przekaż tylko `path` i `data`, nie przepisuj szablonu. -->
 <style>
   .gp { font-family: var(--font-sans, system-ui, sans-serif); color: var(--color-text-primary, #1f2328); }
   .gp h3 { margin: 4px 0 8px; font-size: 16px; }
@@ -47,7 +49,7 @@
 </div>
 <script>
 // ── DANE (fikcyjny przykład — podmień) ─────────────────────────────────────────
-let GRAF = {
+let GRAF = /* lex:dane */ {
   tytul: "Przykład: wypowiedzenie po skardze",
   teza: "Z-005", dziedzina: "cywilne",
   wezly: [

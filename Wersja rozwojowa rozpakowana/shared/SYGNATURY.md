@@ -2,23 +2,6 @@
 
 > **Plik:** `shared/SYGNATURY.md`
 > **Wersja:** 1.6 (2026-09-14) — V-SYG-0.5: POST-CHECK HOSTA, rozdzielenie `site:` od filtra domeny oraz jawny zakres treści snapshotu bez promocji do DIRECT_LIVE / ✅ [VER].
-> **Wersja poprzednia:** 1.5 (2026-09-14) — dodano V-SYG-0.7 DIRECT-CBOSA: fresh-probe,
->              formularz HTML + pełna paginacja + /doc/{ID} + exact-match;
->              V-SYG-0.5 pozostaje fallbackiem wyłącznie po niedostępności
->              direct CBOSA. Fail-closed dla driftu HTML/transportu.
-> **Wersja poprzednia:** 1.4 (2026-09-13d) — dodano V-SYG-0.6 (rozstrzyganie AMBIGUOUS na
->              portalu sądu); doprecyzowano V-SYG-0.4 (post-check FILTRUJE zbiór,
->              nie porównuje pierwszego rekordu — przypadek `II CSKP 100/21`);
->              odnotowano odrzucenie zamienników CBOSA na `robots.txt`.
->              Flagi F-188, F-191, F-192, AUDYT-2026-09-13d.
-> **Wersja poprzednia:** 1.3 (2026-09-13b) — dodano V-SYG-0.5 (kanał zdegradowany dla
->              pionu sądowoadministracyjnego) oraz oś ZAKRES POTWIERDZENIA
->              (ISTNIENIE / ISTNIENIE+TREŚĆ). Flaga F-183a, AUDYT-2026-09-13b.
-> **Wersja poprzednia:** 1.2 (2026-09-13) — dodano V-SYG-0 (binarna kontrola istnienia
->              sygnatury: normalizacja → routing bazy → okno pokrycia → post-check
->              tożsamości). Flagi F-182…F-186, AUDYT-2026-09-13.
-> **Wersja poprzednia:** 1.1 (2026-07-05) — KONTRAKT WYNIKU WERYFIKACJI
->              (FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE, wzorzec sententim; AUDYT-2026-07-05a)
 > **Wersja 1.0:** (2026-05-25)
 > **Status:** AKTYWNY — naprawa BLOKER-2
 > **Podstawa:** Instrukcja sądowa (zarządzenie MS z 19.06.2019, Dz. Urz. MS z 2019 r. poz. 138 ze zm.)

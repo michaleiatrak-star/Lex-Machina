@@ -149,11 +149,3 @@ konkretnej sprawie.
    coś zmieniło się po tej dacie) — niepotwierdzone bez ISAP.
 6. Orzecznictwo poza jednym przykładem (VIII U 764/23) — uruchomić
    `orzeczenia-sadowe-v2` przy konkretnej sprawie spornej.
-
-## CHANGELOG
-
-- **2026-08-18** — utworzenie modułu (F-29 pkt 4, audyt-systemu-v4).
-  Pokrycie: warunki podstawowe (art. 4) w całości, katalog grup
-  zawodowych (art. 5-12) w większości, rekompensata, FEP i obowiązki
-  pracodawcy w całości. Procedura wnioskowa i pełne wykazy załączników
-  pozostają otwarte — flagowane jawnie, nie zgadywane.

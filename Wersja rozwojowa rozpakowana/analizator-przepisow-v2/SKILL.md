@@ -1,6 +1,6 @@
 ---
 name: analizator-przepisow-v2
-version: "2.9"
+version: "2.11"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -86,6 +86,13 @@ H) Przepis z odesłaniem do innych   → +7B (mapa powiązań) do każdej ście�
 ### Krok 0.3 — WIDGET WYBORU PRZEPISU
 
 Uruchom gdy: użytkownik nie podał przepisu, pyta o "widget wyboru", "wyszukaj przepis" lub wpisał tylko kodeks bez artykułu.
+
+#### Szablon gotowy (host z `show_widget` czytającym plik korpusu)
+
+`show_widget(path="analizator-przepisow-v2/assets/widget-wybor-przepisu.html")` — formularz bez danych sprawy, spełnia specyfikację niżej; przycisk wysyła polecenie analizy przez `sendPrompt`.
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+#### Specyfikacja do samodzielnego wygenerowania (host bez szablonu)
 
 Wygeneruj interaktywny widget HTML (CSS i JS inline) z następującymi elementami:
 
@@ -519,13 +526,35 @@ Wczytaj ten plik na etapie 5–9 i 13 sekwencji obowiązkowej (patrz INSTRUKCJE 
 10. Moduł 4 → raport końcowy
 11. Moduł 5 → zbieg norm (jeśli wiele przepisów)
 12. Moduł 6 → tryb specjalny (karny / admin / proceduralny)
-13. Moduł 8 → Widget wyników HTML z 7 zakładkami (zawsze po analizie)
-    ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
-    view shared/MOD-WIDGET-IO.md
-    → wbuduj pasek IO w nagłówek widgetu
-    → IO_SKILL_ID='analizator-przepisow-v2', IO_CASE_ID=sygnatura_lub_przepis
-    → matryca: Export JSON ✅ MD ✅ | Import JSON ✅
+13. Moduł 8 → Widget wyników z 7 zakładkami (zawsze po analizie) — wykonanie: „Moduł 8 — wykonanie widgetu” niżej
 14. Moduł 9 → propozycja kolejnych skillów
+```
+
+#### Moduł 8 — wykonanie widgetu: szablon zasilany danymi (host z `show_widget` przyjmującym `data`)
+
+`show_widget(path="analizator-przepisow-v2/assets/widget-wyniki.html", data=DANE)` — bez kodu; host wstawia dane i dokłada pasek eksportu/importu. Zakładki i funkcje jak w `references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md` § MODUŁ 8. DANE (pola opcjonalne można pominąć):
+```
+przepis: {oznaczenie, akt, tresc, status: obowiazuje|zmieniony|uchylony, stan_na, url, w_praktyce, os_czasu: [{data, opis}]}
+przeslanki: {logika: AND|OR|MIXED, lista: [{id, nazwa, status: T|N|?, pewnosc 0–100, uzasadnienie, braki}]}
+wynik: {ocena: stosuje|nie_stosuje|watpliwe, opis}
+orzeczenia: {jednolita: true|false, rozbieznosc: {a, b, przyczyna, rekomendacja},
+             lista: [{sygnatura, sad, rok, teza, url, trafnosc 0–100, tier: 1|2|3}]}
+powiazania: [{artykul, akt, relacja: odeslanie|wyjatek|lex_specialis|uzupelnienie|definicja, opis}]
+historia: [{data, akt_zmieniajacy, opis, istotnosc: wysoka|niska}]; porownanie: {poprzednia, aktualna}
+raport: {konkluzja, kolor: zielony|czerwony|pomaranczowy, pewnosc 0–100, ryzyka: [], rekomendacje: [], dla_ciebie}
+```
+Zasady treści bez zmian: brzmienie z ELI, statusy źródeł, sygnatury wyłącznie zweryfikowane.
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+#### Moduł 8 — wykonanie widgetu: kod HTML i pasek IO (host bez pola `data`)
+
+Wygeneruj widget wg `references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md` § MODUŁ 8. Przed `show_widget`:
+```
+⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
+view shared/MOD-WIDGET-IO.md
+→ wbuduj pasek IO w nagłówek widgetu
+→ IO_SKILL_ID='analizator-przepisow-v2', IO_CASE_ID=sygnatura_lub_przepis
+→ matryca: Export JSON ✅ MD ✅ | Import JSON ✅
 ```
 
 ### Poziomy pewności
@@ -600,19 +629,3 @@ view shared/QUALITY-CHECK.md
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.
-
----
-
-## CHANGELOG
-
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
-`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
-
-```
-view analizator-przepisow-v2/references/CHANGELOG.md
-```
-
-*(Wpisy 2.4 … 2.1 przeniesione stąd 1:1 do `references/CHANGELOG.md`
-dnia 2026-08-24, flaga F-126 — usunięcie stanu przejściowego, w którym
-historia mieszkała w DWÓCH miejscach. Treść nie została przeredagowana
-ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*

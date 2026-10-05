@@ -179,26 +179,3 @@ ZNACZNIE DŁUŻEJ niż te terminy sugerują
   S7, S19), skutek prawny ZRID (przejście własności z mocy prawa).
 - gdo.org.pl — terminy 30/60 dni (instrukcyjne, nie zawite), rygor
   natychmiastowej wykonalności jako czynnik różnicujący.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-21):** Utworzenie modułu na wyraźne żądanie użytkownika
-("GDDKiA"). Zweryfikowano online: status i kompetencje GDDKiA jako
-zarządcy dróg krajowych, w pełni opracowano mechanizm ZRID (Zezwolenie
-na Realizację Inwestycji Drogowej) w ramach specustawy drogowej z 2003
-r. — decyzja ZINTEGROWANA łącząca projekt budowlany/pozwolenie na
-budowę/podział nieruchomości/wywłaszczenie w JEDNYM akcie, z reformą
-2018 r. skracającą czas oczekiwania z 5 do 3 miesięcy poprzez połączenie
-dwóch wcześniej odrębnych decyzji. KLUCZOWY skutek prawny — przejście
-własności Z MOCY PRAWA z chwilą ostateczności ZRID, bez odrębnego
-postępowania wywłaszczeniowego. Opracowano dwa warianty terminów
-wydania decyzji odszkodowawczej (30/60 dni zależnie od rygoru
-natychmiastowej wykonalności, oba instrukcyjne), mechanizmy
-podwyższające odszkodowanie (dodatek 10 000 zł dla zamieszkałych
-nieruchomości mieszkalnych, możliwe premiowanie szybkiego wydania
-nieruchomości — oznaczone jako punkt startowy wymagający dalszej
-weryfikacji dokładnej wysokości), oraz opcję nieruchomości zamiennej.
-Rozgraniczono kompetencje: GDDKiA realizuje/wypłaca, wojewoda ustala
-wysokość odszkodowania decyzją administracyjną.

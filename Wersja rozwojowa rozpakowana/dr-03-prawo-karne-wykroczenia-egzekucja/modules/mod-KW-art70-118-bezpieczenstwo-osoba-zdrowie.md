@@ -256,16 +256,3 @@ naruszenie).
 - statusprawnypsawpolsce.com — kompendium przepisów o zwierzętach (art.
   77-78, 108 KW).
 - standardyprawa.pl — orzecznictwo do art. 106, 115, 116 KW.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — kontynuacja uzupełniania
-pokrycia KW na wyraźne żądanie użytkownika ("czy kwestie KW zostały już
-pokryte? Uzupełniaj je"). Zweryfikowano online: art. 70-71, 77-79, 83
-(Rozdz. X), art. 104-108 w tym CENTRALNY art. 107 — złośliwe niepokojenie
-(Rozdz. XII), art. 109, 115-116, 118 (Rozdz. XIII). Odnotowano niepewności:
-art. 72-76/80-82 (Rozdz. X), 110-114 dokładna treść (Rozdz. XIII), 107a
-pełna treść, dokładna górna granica grzywny art. 108 — wszystkie oznaczone
-wprost do weryfikacji w ELI (RZĄD 1).

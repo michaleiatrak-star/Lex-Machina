@@ -1,0 +1,131 @@
+<!-- widget-raport-klienta.html — raport-klienta-v1, widget zasilany danymi (schemat: references/BLUEPRINT-SCHEMA.md).
+     show_widget(path="raport-klienta-v1/assets/widget-raport-klienta.html", data=DANE) — bez przepisywania kodu.
+     Struktura sekcji zależy od profile (IND/BIZ) i tryb (standard/zle_wiadomosci/brak_nowosci/ograniczenie_szkod).
+     Pola puste (null, [], "") nie są renderowane. -->
+<style>
+  :root { --rk-fg: var(--color-text-primary, #1f2a24); --rk-muted: var(--color-text-secondary, #5d6a62);
+          --rk-line: var(--color-border-tertiary, #dfe5e0); --rk-soft: var(--color-background-secondary, #f4f7f4);
+          --rk-accent: #1f4e79; --rk-danger: #a32d2d; --rk-danger-bg: #fbeeee; --rk-warn: #8a5a0b; --rk-warn-bg: #fff6e5;
+          --rk-ok: #2e6b3a; --rk-ok-bg: #edf6ee; }
+  #rk { font: 14px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--rk-fg); max-width: 860px; margin: 0 auto; padding: 16px; }
+  #rk header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; border-bottom: 2px solid var(--rk-accent); padding-bottom: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  #rk h1 { font-size: 20px; margin: 0; color: var(--rk-accent); }
+  #rk h2 { font-size: 15px; margin: 18px 0 6px; color: var(--rk-accent); }
+  #rk .meta { color: var(--rk-muted); font-size: 12px; }
+  #rk .box { border: 1px solid var(--rk-line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; background: #fff; }
+  #rk .delta { background: var(--rk-soft); }
+  #rk .important { border: 2px solid var(--rk-danger); background: var(--rk-danger-bg); }
+  #rk .level { display: inline-block; padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; }
+  #rk .level-good { background: var(--rk-ok-bg); color: var(--rk-ok); }
+  #rk .level-neutral { background: var(--rk-warn-bg); color: var(--rk-warn); }
+  #rk .level-bad, #rk .level-lost { background: var(--rk-danger-bg); color: var(--rk-danger); }
+  #rk table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  #rk th, #rk td { border: 1px solid var(--rk-line); padding: 5px 8px; text-align: left; vertical-align: top; }
+  #rk th { background: var(--rk-soft); }
+  #rk ul, #rk ol { margin: 4px 0; padding-left: 22px; }
+  #rk .prio-czerwony { color: var(--rk-danger); font-weight: 700; }
+  #rk .prio-pomaranczowy { color: #b25e09; font-weight: 700; }
+  #rk .prio-zolty { color: #8a7a0b; font-weight: 700; }
+  #rk .print { border: 1px solid var(--rk-accent); background: var(--rk-accent); color: #fff; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  #rk footer { margin-top: 18px; padding-top: 8px; border-top: 1px solid var(--rk-line); color: var(--rk-muted); font-size: 12px; }
+  @media print { #rk .print { display: none; } #lex-io { display: none !important; } }
+</style>
+<div id="rk"></div>
+<script>
+const RK = /* lex:dane */ {"profile":"IND","tryb":"standard","kancelaria":null,"klient":null,"prawnik":null,"sprawa":null,"etap":null,"ocena":null,"terminy":[],"kontekst":null,"delta":null,"assessment":{"level":"neutral"}};
+
+(function () {
+  const D = RK || {};
+  const root = document.getElementById("rk");
+  const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const has = (v) => v != null && v !== "" && !(Array.isArray(v) && v.length === 0) &&
+    !(typeof v === "object" && !Array.isArray(v) && Object.values(v).every((x) => !has(x)));
+  const list = (items, ordered) => {
+    const tag = ordered ? "ol" : "ul";
+    return `<${tag}>${items.filter(has).map((x) => `<li>${esc(x)}</li>`).join("")}</${tag}>`;
+  };
+  const table = (rows, cols) => has(rows)
+    ? `<table><thead><tr>${cols.map(([, label]) => `<th>${esc(label)}</th>`).join("")}</tr></thead><tbody>${
+        rows.map((r) => `<tr>${cols.map(([key]) => `<td${key === "priorytet" ? ` class="prio-${esc(r[key])}"` : ""}>${esc(r[key] ?? "")}</td>`).join("")}</tr>`).join("")
+      }</tbody></table>`
+    : "";
+  const section = (title, body, cls) => body ? `<h2>${esc(title)}</h2><div class="box ${cls || ""}">${body}</div>` : "";
+  const BIZ = D.profile === "BIZ";
+  const tryb = D.tryb || "standard";
+  const levelText = { good: "Dobra", neutral: "Przeciętna", bad: "Niekorzystna", lost: "Sprawa zakończona niekorzystnie" };
+  const level = D.assessment && D.assessment.level;
+
+  // Delta: obiekt {ma_poprzedni_raport, data_poprzedniego, co_sie_zmienilo[], bez_zmian} albo lista zmian.
+  const delta = Array.isArray(D.delta) ? { ma_poprzedni_raport: true, co_sie_zmienilo: D.delta } : (D.delta || {});
+  const deltaHtml = delta.ma_poprzedni_raport && has(delta.co_sie_zmienilo)
+    ? section(`Co się zmieniło od ostatniego raportu${delta.data_poprzedniego ? ` (${delta.data_poprzedniego})` : ""}`, list(delta.co_sie_zmienilo), "delta")
+    : "";
+
+  const ocena = () => {
+    const o = D.ocena || {};
+    if (BIZ) {
+      const lines = [];
+      if (o.wynik_korzystny_proc != null) lines.push(`Prawdopodobieństwo wyniku korzystnego: <b>${esc(o.wynik_korzystny_proc)}%</b>`);
+      if (o.wariant_alternatywny_proc != null) lines.push(`Wariant alternatywny: <b>${esc(o.wariant_alternatywny_proc)}%</b>`);
+      if (o.przedzial_ufnosci) lines.push(`Przedział ufności: ${esc(o.przedzial_ufnosci)}${o.liczba_czynnikow ? ` (na podstawie ${esc(o.liczba_czynnikow)} czynników)` : ""}`);
+      if (o.opis) lines.push(esc(o.opis));
+      return lines.join("<br>");
+    }
+    return [o.opis && `<b>${esc(o.opis)}</b>`, o.podstawa && esc(o.podstawa)].filter(Boolean).join("<br>");
+  };
+  const header = (title) => `<header><div><h1>${esc(title)}</h1><div class="meta">${
+      [D.klient && `Dla: ${esc(D.klient)}`, D.prawnik && `Prowadzi: ${esc(D.prawnik)}`, D.data_raportu && `Data: ${esc(D.data_raportu)}`].filter(Boolean).join(" · ")
+    }</div></div><div>${level ? `<span class="level level-${esc(level)}">Ocena sytuacji: ${esc(levelText[level] || level)}</span> ` : ""}<button class="print" onclick="window.print()">Eksportuj PDF</button></div></header>`;
+  const terminy = table(D.terminy, [["nazwa", "Termin"], ["data", "Data"], ["odpowiedzialny", "Kto"]]);
+  const potw = D.potwierdzenie && has(D.potwierdzenie)
+    ? section("WAŻNE — potrzebujemy potwierdzenia", `${esc(D.potwierdzenie.czynnosc)}${D.potwierdzenie.data ? ` do <b>${esc(D.potwierdzenie.data)}</b>` : ""}.${
+        D.potwierdzenie.konsekwencja ? ` Jeśli tego nie zrobimy, ${esc(D.potwierdzenie.konsekwencja)}.` : ""} Proszę odpisać z potwierdzeniem, że wiadomość dotarła.`, "important")
+    : "";
+  const biz = () => [
+    section("Ekspozycja finansowa", table(D.kwoty, [["pozycja", "Pozycja"], ["kwota_pln", "Kwota (PLN)"], ["prawdopodobienstwo", "Prawdopodobieństwo"], ["wartosc_oczekiwana", "Wartość oczekiwana"]]) +
+      table(D.risk_table, [["klauzula", "Klauzula"], ["dni", "Dni"], ["pln", "PLN"], ["proc_wartosci_umowy", "% wartości umowy"]])),
+    section("Wpływ na działalność", has(D.wplyw_na_dzialalnosc) ? list(Object.entries(D.wplyw_na_dzialalnosc).filter(([, v]) => has(v)).map(([k, v]) => `${k}: ${v}`)) : ""),
+    section("Harmonogram", table(D.harmonogram, [["etap", "Etap"], ["termin", "Termin"], ["odpowiedzialny", "Odpowiedzialny"], ["status", "Status"]])),
+    section("Luki kontraktowe", table(D.luki_kontraktowe, [["klauzula", "Brakująca klauzula"], ["ryzyko", "Ryzyko"], ["priorytet", "Priorytet"]])),
+    section("Działania wymagane po stronie Klienta", table(D.dzialania_klienta, [["dzialanie", "Działanie"], ["termin", "Termin"], ["uzasadnienie", "Uzasadnienie"]]), "important"),
+    section("Rekomendacje dla zarządu", table(D.rekomendacje_zarzad, [["rekomendacja", "Rekomendacja"], ["uzasadnienie", "Uzasadnienie"], ["alternatywa_odrzucona", "Odrzucona alternatywa"]]))
+  ].join("");
+  const poufnosc = BIZ ? `<footer>${D.klauzula_nda ? esc(D.klauzula_nda) : "Dokument poufny — tajemnica zawodowa pełnomocnika."}${D.kancelaria ? ` · ${esc(D.kancelaria)}` : ""}</footer>`
+    : `<footer>${D.kancelaria ? esc(D.kancelaria) : ""}</footer>`;
+
+  let html = "";
+  if (tryb === "brak_nowosci") {
+    const z = D.najblizsze_zdarzenie || {};
+    html = header(`Status sprawy${D.data_raportu ? ` — ${D.data_raportu}` : ""}`) +
+      `<div class="box"><p>Od ostatniego raportu${delta.data_poprzedniego ? ` (${esc(delta.data_poprzedniego)})` : ""} nie zaszły istotne zmiany w sprawie.</p>` +
+      (D.etap ? `<p>Aktualny etap: ${esc(D.etap)}</p>` : "") +
+      (z.co ? `<p>Najbliższe oczekiwane zdarzenie: ${esc(z.co)} — przewidywany termin: ${esc(z.termin || "nieznany, zależy od harmonogramu sądu")}.</p>` : "") +
+      `<p>${BIZ ? (has(D.dzialania_klienta) ? "" : "Brak działań wymaganych po stronie Klienta w tym okresie.") : "Skontaktujemy się, gdy coś się zmieni."}</p></div>` +
+      (BIZ ? section("Działania wymagane po stronie Klienta", table(D.dzialania_klienta, [["dzialanie", "Działanie"], ["termin", "Termin"], ["uzasadnienie", "Uzasadnienie"]]), "important") : "") + poufnosc;
+  } else if (tryb === "zle_wiadomosci") {
+    const z = D.zle_wiadomosci || {};
+    const cd = z.co_dalej || {};
+    html = header("Raport o sprawie") + deltaHtml +
+      section("Co się wydarzyło", [z.fakt && `<p>${esc(z.fakt)}</p>`, z.znaczenie && `<p><b>Co to oznacza:</b> ${esc(z.znaczenie)}</p>`, z.przyczyna && `<p><b>Przyczyna:</b> ${esc(z.przyczyna)}</p>`].filter(Boolean).join("")) +
+      section("Co dalej", [cd.srodek && `<p><b>${esc(cd.srodek)}</b>${cd.termin ? ` — termin: <b>${esc(cd.termin)}</b>` : ""}</p>`, cd.po_stronie_klienta && `<p>Po Pana/Pani stronie: ${esc(cd.po_stronie_klienta)}</p>`].filter(Boolean).join(""), "important") +
+      (BIZ ? section("Zaktualizowana ekspozycja finansowa", table(D.kwoty, [["pozycja", "Pozycja"], ["kwota_pln", "Kwota (PLN)"], ["prawdopodobienstwo", "Prawdopodobieństwo"], ["wartosc_oczekiwana", "Wartość oczekiwana"]])) : "") +
+      potw + section("Terminy", terminy) + poufnosc;
+  } else if (tryb === "ograniczenie_szkod") {
+    const o = D.ograniczenie_szkod || {};
+    html = header("Raport zamykający sprawę") + deltaHtml +
+      section("Wynik", o.wynik ? `<p>${esc(o.wynik)}</p>` : "") +
+      section("Co jest zamknięte", has(o.zamkniete) ? list(o.zamkniete) : "") +
+      section("Do rozliczenia", table(o.do_rozliczenia, [["pozycja", "Pozycja"], ["termin", "Termin"], ["odpowiedzialny", "Odpowiedzialny"]])) +
+      section("Działania natychmiastowe", has(o.natychmiastowe) ? list(o.natychmiastowe, true) : "", "important") +
+      section("Ryzyka rezydualne", has(o.ryzyka_rezydualne) ? list(o.ryzyka_rezydualne) : "<p>Nie zidentyfikowano ryzyk rezydualnych.</p>") +
+      (BIZ ? section("Rekomendacja końcowa", table(D.rekomendacje_zarzad, [["rekomendacja", "Rekomendacja"], ["uzasadnienie", "Uzasadnienie"], ["alternatywa_odrzucona", "Odrzucona alternatywa"]])) : "") + poufnosc;
+  } else {
+    html = header(BIZ ? "Raport o stanie sprawy — zarząd" : "Raport o Pana/Pani sprawie") + deltaHtml +
+      section("Sytuacja", [D.sprawa && `<p>${esc(D.sprawa)}</p>`, D.etap && `<p><b>Etap:</b> ${esc(D.etap)}</p>`, D.kontekst && `<p>${esc(D.kontekst)}</p>`, ocena() && `<p>${ocena()}</p>`].filter(Boolean).join("")) +
+      (BIZ ? biz() : section("Co dalej", has(D.co_dalej) ? list(D.co_dalej.slice(0, 3), true) : "") + potw) +
+      section("Terminy", terminy) +
+      (!BIZ && D.kancelaria ? section("Kontakt", `<p>${esc(D.kancelaria)}${D.prawnik ? ` — ${esc(D.prawnik)}` : ""}</p>`) : "") + poufnosc;
+  }
+  root.innerHTML = html;
+})();
+</script>

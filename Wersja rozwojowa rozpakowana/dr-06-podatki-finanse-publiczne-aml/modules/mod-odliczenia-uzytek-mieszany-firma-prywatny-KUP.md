@@ -315,26 +315,3 @@ Częsty błąd praktyczny: ZAŁOŻENIE, że ograniczenie odliczenia VAT (np.
   ust. 2a-2c), zmiana metodologii 2022 (moc zamiast pojemności),
   utrwalone orzecznictwo NSA (paliwo w ryczałcie), pojazdy elektryczne
   i ładowanie w domu, proporcjonalne obniżenie za niepełny miesiąc.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-21):** Utworzenie modułu w odpowiedzi na audyt
-kompletności prawa podatkowego w zakresie firm/konsumentów/użytku
-własnego/odliczeń/odsprzedaży. Zweryfikowano online i w pełni
-opracowano: zasady VAT od samochodów osobowych (domyślne 50%, ścieżka
-do 100% z trzema łącznymi warunkami — wyłączny użytek służbowy,
-ewidencja przebiegu, regulamin — plus formalne zgłoszenie VAT-26 z
-krytycznym terminem 25. dnia miesiąca po PIERWSZYM wydatku, ryzyko
-kontroli poprzez zestawienie danych ANPR z ewidencją, konsekwencje
-wykrycia naruszenia — korekta wsteczna do 5 lat); ryczałt PIT za
-użytek prywatny samochodu służbowego (250/400 zł wg MOCY silnika od
-2022, proporcjonalne obniżenie, utrwalone i jednolite orzecznictwo NSA
-że ryczałt obejmuje WSZYSTKIE koszty eksploatacyjne w tym paliwo,
-rozszerzenie na ładowanie pojazdów elektrycznych); ogólne zasady KUP
-(klauzula generalna, wymogi, przykłady kategorii mieszanych — limity
-samochodowe, reprezentacja, IP Box). Dodano SYNTEZĘ w postaci macierzy
-decyzyjnej (firma/konsument/odsprzedaż/niejednoznaczna klasyfikacja) z
-KLUCZOWYM ustaleniem, że VAT i KUP to DWA NIEZALEŻNE reżimy prawne,
-często błędnie utożsamiane w praktyce.

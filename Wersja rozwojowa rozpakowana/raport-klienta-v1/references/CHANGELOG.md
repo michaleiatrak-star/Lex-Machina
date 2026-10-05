@@ -1,5 +1,7 @@
 # CHANGELOG — raport-klienta-v1
 
+- 1.7 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-klienta.html` zasilany danymi: sekcje wg profilu IND/BIZ i trybu, „Eksportuj PDF”. Schemat: pola `co_dalej`, `potwierdzenie`, `data_raportu`, `najblizsze_zdarzenie`, `delta` jako obiekt.
+
 - 1.6 (2026-09-27e, AUDYT-2026-09-27e): claude.ai po dodaniu marketplace instalował wyłącznie 4 z 32 pluginów (shared, prawny-router-v3, analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90); jedyna cecha wspólna tych 4, nieobecna w żadnym z 28 pozostałych, to klucz `dependencies` we frontmatterze SKILL.md. Dodano go (`requires: [shared]` — zgodnie ze stanem faktycznym) oraz jawny manifest pluginu (name, description = description z SKILL.md, author, repository, license) — host nie musi niczego wnioskować z SKILL.md. `version` w manifeście = `version:` z SKILL.md (pilnuje T38 w audyt-systemu-v4) — host rozpoznaje aktualizację po podbiciu wersji. Treść skilla bez zmian.
 - 1.5 (2026-09-05, sesja audytowa `audyt-systemu-v4`, flaga **F-163**): utworzono
   trzy pliki `references/`, które SKILL.md deklarował w drzewie katalogu i kazał

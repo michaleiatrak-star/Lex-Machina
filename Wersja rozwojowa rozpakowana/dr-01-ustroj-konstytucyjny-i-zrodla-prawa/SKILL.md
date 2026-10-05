@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: "3.14"
+version: "3.15"
 description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 dependencies:
   requires:
@@ -190,15 +190,3 @@ Moduł ZTP (2026-07-17) domyka lukę doktrynalną: system miał już mechanikę 
 (MOD-VACATIO-LEGIS) ale brakowało podstawy prawnej samej techniki legislacyjnej
 i literatury eksperckiej — teraz obie warstwy są rozdzielone i połączone
 odesłaniami, bez duplikacji.
-
-## CHANGELOG
-
-⛔ **Historia zmian tego skilla NIE mieszka w tym pliku** (ZASADA 15,
-`audyt-systemu-v4/SKILL.md`). Jedyna lokalizacja kanoniczna:
-
-```
-view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/references/CHANGELOG.md
-```
-
-*(Wpis 3.3 przeniesiony stąd 1:1 dnia 2026-08-24, flaga F-126. Luka 3.4–3.6
-odnotowana tam jawnie jako nieodtworzona — zakaz rekonstrukcji z pamięci.)*

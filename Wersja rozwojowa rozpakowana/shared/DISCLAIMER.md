@@ -8,6 +8,7 @@
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## ZASADA GŁÓWNA
 
 **Każda odpowiedź systemu dotycząca prawa MUSI kończyć się disclaimerem.**
@@ -39,6 +40,7 @@ ale router ZAWSZE weryfikuje jego obecność w SELF-CHECK.
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## KIEDY STOSOWAĆ
 
 ```
@@ -60,6 +62,7 @@ WYJĄTEK — pominąć gdy:
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## TREŚĆ DISCLAIMERA — DWA WARIANTY
 
 ### TRYB LAIK (uproszczony)
@@ -114,6 +117,7 @@ wystarczy wariant PRAWNIK.
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## POZYCJA DISCLAIMERA
 
 ```
@@ -124,6 +128,7 @@ Widget (raport/dash.) → sekcja "Informacje prawne" na końcu widgetu
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## INTEGRACJA ZE SKILLAMI — WYMAGANIA PER SKILL
 
 ### prawny-router-v3 (KROK 7) ✅ Zintegrowany
@@ -207,6 +212,7 @@ Jednak gdy DR-skill generuje samodzielny output (np. widget), powinien go dodać
 
 ---
 
+<!-- lex:wykonuje-aplikacja: PROFIL -->
 ## MECHANIZM AWARYJNY (gdy brak dostępu do shared/DISCLAIMER.md)
 
 Router i skille używają wbudowanego wariantu inline:
@@ -223,6 +229,7 @@ PRAWNIK inline:
 
 ---
 
+<!-- lex:wykonuje-aplikacja: DISCLAIMER -->
 ## SELF-CHECK ROUTERA — SEKCJA DISCLAIMERA
 
 Sekcja już jest w KROK 7 routera (v3.5) i pozostaje w SELF-CHECK (v3.6):

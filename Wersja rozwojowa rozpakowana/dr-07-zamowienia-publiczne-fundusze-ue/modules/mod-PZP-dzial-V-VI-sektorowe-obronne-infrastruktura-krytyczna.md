@@ -222,20 +222,3 @@ KROK 4: Czy JEDNOCZEŚNIE spełnione są przesłanki stosowania przepisów
   PZP i niepokoju zamawiających sektorowych z branży energetycznej/
   paliwowej/transportowej po nowelizacji; mechanizm niejawnego wykazu RCB.
 - apexnet.com.pl — klasyfikacja zamówień klasyczne/sektorowe/obronne.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-(przetargi organizowane przez korporacje = zamawiający sektorowi/
-przedsiębiorstwa publiczne; przetargi dot. infrastruktury krytycznej).
-Zweryfikowano online: 7 rodzajów działalności sektorowej, definicję
-"przedsiębiorstwa publicznego" (dominujący wpływ zamawiającego
-publicznego), prawa szczególne/wyłączne jako alternatywną podstawę
-statusu sektorowego, progi unijne sektorowe/obronne (wyższe niż
-klasyczne), oraz KLUCZOWY mechanizm art. 131a ust. 1a PZP (infrastruktura
-krytyczna + przesłanki dyrektywy obronnej łącznie → reżim Działu VI,
-z niejawnym wykazem RCB jako punktem odniesienia). Naprawiono martwy
-odnośnik z `mod-PZP-zamowienia-publiczne-KIO.md` (przekierowanie do
-nieistniejącego modułu DR-13) — treść teraz dostępna bezpośrednio w DR-07.

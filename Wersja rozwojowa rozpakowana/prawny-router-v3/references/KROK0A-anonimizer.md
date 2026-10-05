@@ -1,3 +1,4 @@
+<!-- lex:wykonuje-aplikacja: ANONIMIZACJA -->
 # KROK 0A — Anonimizer (Bramka Twarda RODO)
 
 > Plik wydzielony z prawny-router-v3/SKILL.md (R1).

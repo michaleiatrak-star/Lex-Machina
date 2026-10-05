@@ -669,23 +669,3 @@ MOD-PRACODAWCA-RZECZYWISTY (W0–W4):
 PRE-W2-VERIFICATION-GATE (PRE-W2.C/D):
   Wykrywa rozbieżność online → triggeruje oba moduły w kolejności ISU → MOD-PR-RZECZ.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.1.0 (2026-06-27) — Dodano algorytm ISU-PESEL (P1-P6): weryfikacja PESEL przez format, dekodowanie daty urodzenia z uwzględnieniem wszystkich stuleci, dekodowanie płci (P10), suma kontrolna wagowa [1,3,7,9,1,3,7,9,1,3], raport ERR-F/ERR-D/ERR-PL/ERR-CK z klasyfikacją anomalii Klasa I/III. Przykład obliczeniowy dla PESEL YYMMDDSSSSC.
-
-1.0.0 (2026-06-27) — Pierwsza wersja. Wydzielono z WARSTWA 0 modułu
-  MOD-PRACODAWCA-RZECZYWISTY v2.1.0 (WARN-19) w odpowiedzi na propozycję
-  dewelopera: mechanika danych większościowych jest bardziej universalna niż
-  pracodawca rzeczywisty i powinna działać na wszystkich typach dokumentów
-  i postępowań, nie tylko pracowniczych.
-  Zakres: umowy o pracę, B2B, faktury VAT, polisy, zamówienia, pisma procesowe.
-  Nowe: katalog EL-PODMIOT/EL-OSOBA/EL-FAKTURA (10+7+8 elementów z wagami),
-  procedura ISU-1–ISU-5, 3 sytuacje szczególne, mapa zastosowań.
-  Integracja: pisma-procesowe-v3, analizator-umow-v1, analizator-dowodow-v3,
-  PRE-W2-VERIFICATION-GATE, MOD-DOKUMENT-ANOMALIE, MOD-PRACODAWCA-RZECZYWISTY.
-  WARN-19 zamknięty przez ten plik.
-```

@@ -182,19 +182,3 @@ Producent/importer napojów w opakowaniach objętych systemem musi:
 - sozos.pl — pełny zakres podmiotowy, nowelizacja z 21.11.2024.
 - molok.com — rozporządzenie Ministra Klimatu z 8.07.2024, okres
   przejściowy dla zapasów sprzed 1.10.2025.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("kaucję"). Zweryfikowano online: pełne ramy prawne systemu kaucyjnego
-(ustawa 2023 + nowelizacja 2024 + rozporządzenie wykonawcze), zakres
-przedmiotowy (3 kategorie opakowań z limitami pojemności), wysokość
-kaucji (0,50/1,00 zł), wymogi formalne dla opakowań i zasady zwrotu (bez
-paragonu, warunek nieuszkodzonego opakowania), cele ilościowe (77%/90%)
-i sankcje dla producentów, oraz ŚWIEŻĄ nowelizację z lutego 2026 r.
-wprowadzającą wyjątek dla browarów prowadzących własne systemy zbiórki.
-Odnotowano niepewności: dokładne progi zwalniające małe sklepy z
-obowiązku przyjmowania zwrotów, pełny mechanizm naliczania sankcji,
-traktowanie VAT kwoty kaucji — oznaczone do dalszej weryfikacji.

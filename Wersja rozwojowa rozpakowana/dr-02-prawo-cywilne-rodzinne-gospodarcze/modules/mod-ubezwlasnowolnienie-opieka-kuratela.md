@@ -255,21 +255,3 @@ funkcjonowanie → droga proceduralna:
   kwestia (nie)możności zmuszenia pracownika ośrodka.
 - doradcawpomocyspolecznej.pl — rozgraniczenie kurateli dla osoby
   ubezwłasnowolnionej i kurateli dla osoby niepełnosprawnej (art. 183 KRO).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika,
-ze SZCZEGÓLNYM naciskiem na sytuację osoby BEZ RODZINY, której stan
-zdrowia nie pozwala na samodzielne funkcjonowanie. Zweryfikowano
-online: pełną treść art. 13/16 KC (przesłanki łączne, moment oceny),
-procedurę (sąd okręgowy, udział prokuratora, dowody, przekazanie do
-sądu opiekuńczego), skutki (całkowite vs częściowe), hierarchię
-opiekunów z art. 176 KRO, oraz KLUCZOWY MECHANIZM dla braku rodziny —
-ustawodawca świadomie przerzucił obowiązek poszukiwania opiekuna na
-Ośrodek Pomocy Społecznej, który prowadzi STAŁY NABÓR kandydatów
-(niekoniecznie spokrewnionych) i przedstawia ich sądowi. Dodano
-odrębną, często mylącą instytucję kurateli dla osoby niepełnosprawnej
-(art. 183 KRO, nie wymaga ubezwłasnowolnienia, tylko wsparcie nie
-zastępstwo).

@@ -201,19 +201,3 @@ ktoś inny.
   Kodeksu Etyki Reklamy.
 - radareklamy.pl — pełny tekst Kodeksu Etyki Reklamy, Rozdział IV
   (reklama skierowana do dzieci i młodzieży).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("reklama agresywna wobec nieletnich"). Zweryfikowano online: zakaz
-podstawowy z ustawy o przeciwdziałaniu nieuczciwym praktykom rynkowym
-(bezpośrednie wezwanie do zakupu), BARDZO AKTUALNĄ sprawę UOKiK
-przeciwko influencerom gamingowym (listopad 2025 — konkretne
-sformułowania uznane za naruszające, mechanizm "presji zakupowej"),
-ustawę o radiofonii i telewizji (art. 16b, 53, rola KRRiT), przepisy
-branżowe dodatkowe (żywność, leki, alkohol, tytoń), oraz Kodeks Etyki
-Reklamy jako samoregulację (Rozdział IV, zakazy wykraczające poza
-ustawowe minimum). Odnotowano niepewność co do pełnej listy przesłanek
-z art. 16b ust. 2 uRTV — oznaczoną do weryfikacji w ELI (RZĄD 1).

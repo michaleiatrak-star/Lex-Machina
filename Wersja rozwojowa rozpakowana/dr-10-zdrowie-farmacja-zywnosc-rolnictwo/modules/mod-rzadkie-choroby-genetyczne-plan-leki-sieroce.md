@@ -209,21 +209,3 @@ Checklist praktyczny (refundacja):
 - gov.pl (dokument PDF Planu dla Chorób Rzadkich 2024-2025) — pełne
   dane epidemiologiczne (5/10000, 1/50000-100000, 80% podłoże
   genetyczne, 50% ujawnienie w dzieciństwie).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-20):** Utworzenie modułu na wyraźne żądanie użytkownika.
-Zweryfikowano online: definicję chorób rzadkich/ultrarzadkich wg UE,
-skalę zjawiska w Polsce, historię i status wdrożenia Planu dla Chorób
-Rzadkich (w tym odnotowane OPÓŹNIENIA legislacyjne — zapowiadany na
-2023 r., nadal w fazie wdrażania kolejnych edycji), sześć głównych
-obszarów planu, rolę Ośrodków Eksperckich Chorób Rzadkich, Polskiego
-Rejestru Chorób Rzadkich i Paszportu Pacjenta, oraz W PEŁNI mechanizm
-refundacji leków sierocych — z KLUCZOWYM problemem systemowym (leki
-sieroce historycznie konkurowały o refundację na tych samych zasadach
-co leki powszechne, mimo gorszego wyniku analizy farmakoekonomicznej
-dla małej populacji pacjentów) i konkretnym postępem (36+12 nowych
-terapii refundowanych 2024-2025) oraz proponowaną nowelizacją
-uwzględniającą wpływ choroby na całą rodzinę.

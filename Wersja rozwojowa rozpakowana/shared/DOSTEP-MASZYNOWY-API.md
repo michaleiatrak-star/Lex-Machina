@@ -2,33 +2,22 @@
 
 > **Plik:** `shared/DOSTEP-MASZYNOWY-API.md`
 > **Wersja:** 1.11 (2026-09-26, F-204) — §4: adapter kodu `tools/adapter_krs_vat.py` (KRS + WL, bez serwerów zewnętrznych); schemat JSON KRS zmierzony live tą sesją, WL zablokowana WAF-em Incapsula z tego środowiska (objaw zapisany, nie ukryty).
-> **Wersja poprzednia:** 1.10 (2026-09-26, F-201) — §2: struktura HTML ELI (obwieszczenie: część 1 = przepisy ustaw zmieniających, część 2 = tekst jednolity; jednostki `data-id`) i narzędzie `tools/eli_art_extract.py`; najnowszy t.j. bez HTML → odczyt PDF przed ✅.
-> **Wersja poprzednia:** 1.9 (2026-09-23c) — §0 przepisana: ZASADA INNEJ DROGI — robots.txt i blokada jednego narzędzia nie przesądzają; granice: logowanie, licencja, CAPTCHA, zabezpieczenia, masowe pobieranie.
-> **Wersja poprzednia:** 1.8 (2026-09-23)
-> **Wersja poprzednia:** 1.7 (2026-09-22) — §2: pole `entryIntoForce` w metadanych ELI podaje tylko termin GŁÓWNY; terminy etapowe wyłącznie z przepisu o wejściu w życie (F-193).
-> **Wersja poprzednia:** 1.6 (2026-09-14) — CBOSA retrieval/snapshot: `site:` tylko discovery; obowiązkowy POST-CHECK HOSTA, exact-match i content_scope bez promocji snapshotu do DIRECT_LIVE.
-> **Wersja poprzednia:** 1.5 (2026-09-14) — CBOSA: historyczny pomiar 503 oddzielony
 > od bieżącej reguły wykonawczej; dodano fresh-probe + deterministyczny
 > formularz HTML (/cbo/search, /cbo/find, /doc/{ID}) i exact-match.
 > Fallback indeksowy pozostaje tylko po niedostępności direct CBOSA.
-> **Wersja poprzednia:** 1.4 (2026-09-13d) — §1: trzeci reżim UA (SAOS i cała rodzina
 > `orzeczenia.*.gov.pl` odrzucają łańcuch przeglądarkowy) + odnotowany fałszywy
 > alarm „awaria MS"; §3: dosłowny 17-pozycyjny kontekst Tapestry, portale sądów
 > jako warstwa rozstrzygania AMBIGUOUS, zamienniki CBOSA odrzucone na
 > `robots.txt`, sprostowanie statusu `www.sn.pl`; §4: REGON/BIR — blokada
 > proceduralna (F-158c zamknięta). Flagi F-187…F-192, AUDYT-2026-09-13d.
-> **Wersja poprzednia:** 1.3 (2026-09-13c) — ponowny pomiar listy dozwolonych domen
 > (T25, 52 sondy): odblokowane 6 hostów, w tym `wl-api.mf.gov.pl` (F-157b);
 > sprostowana ścieżka HUDOC (F-186a); CBOSA potwierdzona jako regresja
 > niezależna od listy. AUDYT-2026-09-13c.
-> **Wersja poprzednia:** 1.2 (2026-09-13b) — §3: kanał zdegradowany CBOSA przez indeks
 > wyszukiwarki (F-183a) oraz sprostowanie statusu `nsa.gov.pl`.
-> **Wersja poprzednia:** 1.1 (2026-09-13) — §1: wyjątek `sn.pl` od reguły neutralnego UA
 > oraz rozróżnienie „403 proxy vs 403 WAF"; §3: przepisany inwentarz
 > orzecznictwa na pomiarze (SN snproxy, GET po sygnaturze w `orzeczenia.ms.gov.pl`,
 > okno pokrycia SAOS, CBOSA martwa w obu kanałach, KIO bez filtra).
 > Flagi F-182…F-186, AUDYT-2026-09-13.
-> **Wersja poprzednia:** 1.0 (2026-09-04c) — utworzony po wykryciu, że instrukcje dostępu
 > istniały wyłącznie w `audyt-systemu-v4/references/PORTALE-ORZECZNICZE-API.md`,
 > czyli w skillu narzędziowym, **którego żaden skill produkcyjny nie wczytuje**
 > (zależność sprawdzona: `audyt-systemu-v4` nie występuje w `dependencies.requires`

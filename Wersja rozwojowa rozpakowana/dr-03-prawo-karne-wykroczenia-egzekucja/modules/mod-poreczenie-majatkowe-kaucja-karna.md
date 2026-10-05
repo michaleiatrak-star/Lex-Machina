@@ -230,23 +230,3 @@ MOŻNA je ZWRÓCIĆ WCZEŚNIEJ, jeśli SĄD UCHYLI środek zapobiegawczy w
 - adwokat-grycz.pl, adwokat-24.pl — krąg osób uprawnionych do złożenia
   poręczenia, cofnięcie poręczenia (forma, skuteczność, wyjątek po
   przepadku).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("kaucję" w znaczeniu karnoprocesowym). Zweryfikowano online: pełną
-treść art. 266-269 KPK — formy poręczenia (pieniądze/papiery
-wartościowe/zastaw/hipoteka), krąg osób uprawnionych (bez ograniczeń),
-KLUCZOWE ograniczenie źródła pochodzenia przedmiotu (zakaz przysporzenia
-specjalnie na ten cel, z uzasadnieniem funkcjonalnym — realność groźby
-utraty), brak sztywnych widełek kwotowych z zasadą realności
-(niedopuszczalność kwoty oczywiście nieosiągalnej), praktyczną procedurę
-wpłaty, przepadek/ściągnięcie (w tym możliwość częściowego przepadku z
-zastosowaniem innego środka poza aresztem, oraz pierwszeństwo
-pokrzywdzonego do zaspokojenia roszczeń z przepadniętych wartości),
-zasady ustania (z nieintuicyjnym momentem zwrotu przy skazaniu — dopiero
-od rozpoczęcia odbywania kary) oraz cofnięcia poręczenia przez
-składającego (bez uzasadnienia, ale skuteczne dopiero po zastąpieniu
-innym środkiem).

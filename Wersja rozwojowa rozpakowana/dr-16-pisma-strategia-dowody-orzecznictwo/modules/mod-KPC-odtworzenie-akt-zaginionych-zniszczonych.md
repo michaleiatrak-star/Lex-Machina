@@ -200,19 +200,3 @@ wykonalności, wznowienie).
 - kruczek.pl — praktyczny przewodnik po procedurze, rozróżnienie
   odtworzenia pełnego/częściowego.
 - ebos.pl — relacja sędziowska z praktyki (Rep. Co, przebieg rozprawy).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("odtwarzanie dokumentów"). Zweryfikowano online: pełną treść art.
-716-729 KPC (co podlega odtworzeniu — pełne vs częściowe wg statusu
-sprawy, wszczęcie z urzędu/na wniosek z wyjątkiem siły wyższej, terminy
-zawite 3/10 lat, trzyetapowa procedura rosnącej formalności — proste
-dołączenie odpisów → wezwanie do oświadczeń → dochodzenie z urzędu,
-sankcja grzywny za niewykonanie wezwania, zakończenie postanowieniem z
-zażaleniem, możliwość ponownego wszczęcia sprawy przy nieudanej
-rekonstrukcji). Dodano praktyczny schemat na podstawie realnego
-orzecznictwa (I Co 3669/13, III Cz 77/20) pokazujący zbieg z zarzutem
-przedawnienia roszczenia (art. 125 §1 KC).

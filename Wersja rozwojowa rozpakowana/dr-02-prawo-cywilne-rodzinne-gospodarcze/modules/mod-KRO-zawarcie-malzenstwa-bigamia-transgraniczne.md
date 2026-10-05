@@ -437,31 +437,3 @@ całościowe rozstrzygnięcie.
   Prezydenta, Ministra Sprawiedliwości, posła Lewicy) — WSZYSTKIE
   źródła potwierdzają spójnie kluczowe fakty, rozbieżne WYŁĄCZNIE co do
   OCENY politycznej/doktrynalnej znaczenia wyroku.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("rozwody, śluby, ślub za granicą, bigamia, także zawarta w kraju który
-na to pozwala, ślub jednopłciowy i prawa z tym związane"). Zweryfikowano
-online: pełne opracowanie zawarcia małżeństwa (formy cywilna/
-konkordatowa, przesłanki, przeszkody małżeńskie), bigamii (warstwa
-cywilna — unieważnienie z szerokim kręgiem uprawnionych, konwalidacja;
-warstwa karna — art. 206 KK), małżeństwa zawartego za granicą (zasada
-locus regit actum, transkrypcja, klauzula porządku publicznego),
-bigamii zawartej za granicą w kraju dopuszczającym poligamię (analiza:
-brak uznania w Polsce niezależnie od ważności zagranicznej, możliwa
-odpowiedzialność karna obywatela polskiego — z zastrzeżeniem
-niedokończonej analizy jurysdykcyjnej), oraz — jako NAJOBSZERNIEJSZĄ i
-najbardziej AKTUALNĄ część — małżeństwa jednopłciowego: PRZEŁOMOWY
-wyrok TSUE C-713/23 (25.11.2025) i wyrok NSA (20.03.2026) nakazujący
-transkrypcję zagranicznych małżeństw jednopłciowych obywateli UE
-korzystających ze swobody przemieszczania się, z KLUCZOWYM zastrzeżeniem
-o WĄSKIM zakresie tego obowiązku (tylko ewidencja, nie pełne prawo
-materialne; tylko UE, niepewne dla spoza UE), oraz UCZCIWIE
-przedstawionym, NIEROZSTRZYGNIĘTYM kontekstem politycznym (zapowiedziany
-wniosek do TK, stanowiska różnych aktorów politycznych jako STANOWISKA,
-nie fakty prawne). Odnotowano wprost dwie niepewności wymagające
-dalszej weryfikacji: zastosowanie do par spoza UE, oraz pełna analiza
-jurysdykcyjna prawa karnego przy bigamii zagranicznej.

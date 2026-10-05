@@ -224,17 +224,3 @@ konkretnej sprawie karnoskarbowej, NIE zakładaj identyczności reżimów.
 - bip.brpo.gov.pl — publikacja RPO nt. instytucji małego świadka
   koronnego, krytyka rozbieżności KK/KKS, postulat ujednolicenia i
   obowiązkowego nagrywania przesłuchań.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("mały i duży świadek koronny"), rozbudowa dwuliniowej wzmianki w BLOK
-H. Zweryfikowano online: pełną konstrukcję ustawy o świadku koronnym
-(przesłanki, immunitet, program ochrony, umorzenie i ryzyko wznowienia
-w ciągu 5 lat), pełną treść art. 60 §3-4 KK (charakter obligatoryjny
-ale uznaniowa ocena przesłanek, najczęstsze powody niepowodzenia w
-praktyce), rozróżnienie od świadka incognito (często mylonego pojęcia),
-odnotowaną krytykę doktrynalną RPO dot. rozbieżności między KK a KKS.
-Dodano tabelę porównawczą i checklist strategiczny.

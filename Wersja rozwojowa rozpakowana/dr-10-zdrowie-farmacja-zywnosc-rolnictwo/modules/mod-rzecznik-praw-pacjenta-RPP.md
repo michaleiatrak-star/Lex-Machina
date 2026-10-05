@@ -192,22 +192,3 @@ ZAJĘTYM stanowisku
   trzy rozstrzygnięcia, termin 30 dni, odwołanie wg KPA).
 - tzlaw.pl — praktyczne aspekty prowadzenia postępowania, katalog
   najistotniejszych praw pacjenta.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-21):** Utworzenie modułu na wyraźne żądanie użytkownika
-— potwierdzono, że RPP był dotąd wymieniony DOSŁOWNIE JEDNYM SŁOWEM
-bez merytorycznej treści. Zweryfikowano online i w pełni opracowano:
-status i gwarancje niezależności, wszczęcie postępowania (na wniosek —
-bezpłatny, niski próg "uprawdopodobnienia" — oraz z urzędu, w tym
-odrębna kategoria praktyk naruszających ZBIOROWE prawa pacjentów),
-sposób prowadzenia postępowania (samodzielnie lub przez inne organy,
-w tym uprawnienie do kontroli placówki BEZ uprzedzenia), trzy możliwe
-rozstrzygnięcia (brak naruszenia / wystąpienie z żądaniem postępowania
-dyscyplinarnego / wniosek do organu nadrzędnego) z KLUCZOWYM terminem
-30 dni na odpowiedź adresata wystąpienia, oraz jasne rozgraniczenie —
-Rzecznik NIE wydaje władczych decyzji karzących, jego wystąpienie ma
-charakter perswazyjno-opiniodawczy, równoległy wobec innych ścieżek
-(cywilnej, karnej, dyscyplinarnej).

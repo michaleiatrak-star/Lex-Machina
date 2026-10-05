@@ -162,31 +162,3 @@ oczywiste. Rozważyć przy kolejnym audycie systemowym (`audyt-systemu-v4`),
 czy nie połączyć ich w jedno źródło prawdy — podobny problem duplikacji
 (dwie niezależne implementacje tego samego mechanizmu) opisano już
 wcześniej dla `PRAWO-HARDGATE.md` vs `WERYFIKACJA-SLAD.md` (v2.3).
-
-## 6. Changelog
-
-- **1.2.0 (2026-08-11):** Dodano sekcję 6 (synchronizacja z MAPA-AKTOW.md
-  i ROUTING-MAP.md) po tym, jak użytkownik zapytał, czy zweryfikowane akty
-  zostały też dodane do mapy aktów prawnych w `prawo-polskie-v2` i
-  odpowiednim module DR — okazało się, że nie, i że te same nieaktualne
-  oznaczenia Dz.U. (ustawa akcyzowa: 2025 poz. 126) występowały
-  niezależnie w obu tych plikach. Poprawiono wszystkie trzy miejsca
-  równocześnie, patrz AUDYT-2026-08-11c/d w AUDIT-JOURNAL.md.
-- **1.1.0 (2026-08-11):** Kontrola aktualności zgodnie z REGUŁĄ
-  AKTUALNOŚCI (`shared/PRAWO-HARDGATE.md`). Wynik: **ustawa akcyzowa
-  była oznaczona nieaktualnym t.j.** (Dz.U. 2025 poz. 126 zamiast
-  aktualnego Dz.U. 2026 poz. 412) — poprawiono w sekcji 0 i 1, oraz
-  równolegle w `mod-ustawa-akcyzowa-i-clo-UCC.md`. Dodano zweryfikowane
-  oznaczenia Dz.U. dla ustawy o wyrobie alkoholu etylowego (Dz.U. 2025
-  poz. 1893 t.j.) i ustawy SENT (Dz.U. 2024 poz. 1218 t.j.), wcześniej
-  wymienionych bez konkretnego oznaczenia. Odnotowano nowelizacje
-  post-t.j. do sprawdzenia punktowo (KKS: poz. 347/421/846/901 z 2026;
-  u.p.a.: poz. 414 z 2026) oraz projekt legislacyjny w toku (zaostrzenie
-  przepisów alkoholowych) — nieobowiązujący, wymaga odrębnej weryfikacji
-  statusu przed użyciem.
-- **1.0.0 (2026-08-11):** Utworzenie bazy w ramach naprawy AUDYT-2026-08-11
-  (błędne oznaczenie ✅ dla art. 100 u.p.a. w sprawie dot. produkcji poza
-  składem podatkowym). Pierwsza wersja — pokrycie: rdzeń akcyzowy, mapa
-  KKS art. 54-91, akty powiązane. Do rozbudowy w miarę kolejnych spraw
-  (np. szczegółowa mapa rozporządzeń wykonawczych do u.p.a., jeśli
-  okaże się potrzebna praktycznie).

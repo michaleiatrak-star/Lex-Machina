@@ -271,26 +271,3 @@ zmiany legislacyjnej z 2025 r., zgodnie z poleceniem "sprawdź
 aktualizacje i wprowadź je" — NIE jest to pełne opracowanie przepisu,
 tylko właściwe uwzględnienie NAJNOWSZEJ zmiany w stanie prawnym.
 ```
-
----
-
-## CHANGELOG
-
-**1.1 (2026-07-17):** Druga weryfikacja na wyraźne żądanie użytkownika.
-Rozstrzygnięto WSZYSTKIE wcześniejsze niepewności: art. 50a (dokładny
-numer i treść — nóż/maczeta, wariant stadionowy §1a, przepadek
-obligatoryjny §2), art. 52a (nawoływanie do przestępstwa — nowy artykuł
-nieznany we wcześniejszej wersji), art. 52b (olej opałowy), art. 53
-(uchylony), art. 54 (przepisy porządkowe lokalne + wymóg zgodności z
-Konstytucją wg SN), art. 63a (nielegalne plakaty/graffiti), art. 64
-(pełna treść, w tym §2 o oświetleniu tabliczki). Zero pozostałych
-niepewności w tym module.
-
-**1.0 (2026-07-17):** Utworzenie modułu — drugi priorytet z audytu
-pokrycia Kodeksu wykroczeń. Zweryfikowano online: art. 51 (przepis
-centralny, w tym nowszy §2a o ochronie personelu medycznego/urzędów),
-art. 49/49a/50/52, przepis o niebezpiecznych przedmiotach w miejscu
-publicznym (numer artykułu NIEPOTWIERDZONY — oznaczony wprost),
-art. 64 (fragment). Odnotowano niepewność dla art. 50a, 53-54, 63a —
-oznaczone do weryfikacji przy pierwszym praktycznym użyciu, zgodnie
-z ZASADA 13 (brak fabrykacji pewności bez faktycznej weryfikacji).

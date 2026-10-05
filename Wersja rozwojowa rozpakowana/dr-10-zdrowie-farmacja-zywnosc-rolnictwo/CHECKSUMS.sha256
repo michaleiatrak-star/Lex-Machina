@@ -1,8 +1,8 @@
-5b64b9520045c80d19a9b50b6cc97ccfb7d9a86d908ef3acb614f19753a1a7a7  ./.claude-plugin/plugin.json
+226551920c87bda002635ac47f3c56a8eb5d5d54a24870b16f5fc58c053b515f  ./.claude-plugin/plugin.json
 76730c922f88ba1b85921211139cb3462f1eaab007ae92952b1df5475da982b4  ./MAPA-AKTOW.md
 f3c655f9bc61cc2cecafbcc16bf7571959f1edb09906586b463ae86872825298  ./MAPA-POKRYCIA.md
 93c70aa27ded8dd55a23051bde455f08453fa3d966b2b0d6bfde845a27df6de1  ./PORTABILITY-MANIFEST.md
-542549686ac60e26e9706df0e3b683b316785e02c9f220c69672515e6b8b1f5e  ./SKILL.md
+a337a2aa98a55fad867e884e88c1c55350082fb4ff0ca49d3377f3a35f601945  ./SKILL.md
 ee2f304c7b47b9ae45e7c4a708348f6be9a5d29f60faa1b3f15124ea502375ea  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 c7f2b5a906dfcf2b2580864a7417383d877bf96492a6a18a4f6f0f58c1de8673  ./modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md
@@ -11,8 +11,8 @@ c465f54c9dca270b0c9c56fda3b1bc8722a9826ff166095a22c39acf281dc166  ./modules/mod-
 2e19d0758975ec46cd07886dc9e2277585483419fb755a0d938224035d9dd4e4  ./modules/mod-PrFarm-szczegolowy.md
 ba9d60e360e568fe3cc9e45f1fead26b3cd15594d1de14ee6dfd7f76690296e4  ./modules/mod-REACH-CLP-chemikalia.md
 dbcdba8ef7f26678d3d75bc447a127a2f8b764023ac1624c6647eb81ade77123  ./modules/mod-prawa-ucznia.md
-6e1b5a4379f823dedacaeb3cbdcf0ee110cefb7e501abbea81e37aef7dd48871  ./modules/mod-rzadkie-choroby-genetyczne-plan-leki-sieroce.md
-78cda0af2d8a0f3e722c14c7685563c7d79018d865e5b73c1138e55af2318cd3  ./modules/mod-rzecznik-praw-pacjenta-RPP.md
+fa95efd8e3ff56ddea21455791f54e36fb219493df1c92f732eaa04ffd6f96f2  ./modules/mod-rzadkie-choroby-genetyczne-plan-leki-sieroce.md
+a05685b1a545cd47cfa8eee4d007073b2957cf8afb988106c0181acf40ee81cd  ./modules/mod-rzecznik-praw-pacjenta-RPP.md
 f6ecdcc04efe5ccc3e29f4a5ccd13915ef81412adac189fb21b2773638d94f17  ./modules/mod-ustawa-NFZ-swiadczenia.md
 bcd43c007c95c9bc78feea32e06b79b291ecbc40fbc7b351de0b28bbba5fabd9  ./modules/mod-ustawa-aptekarz-zawod.md
 52e16a242c025408fd23eaed7f236a7c19610aee74f56334578b0aba55b2db73  ./modules/mod-ustawa-bezpieczenstwo-zywnosci.md
@@ -36,4 +36,5 @@ d8a25a7a75dba1be5492134b91d4e665d2a1be807c9db72cf813c7305043153e  ./modules/mod-
 c63e7a0c19e10c769891a2ddd614a35138b7b9fcbef3f8806912c34fc47edc3f  ./modules/mod-ustawa-zawody-prawnicze-pokrewne.md
 2591a3e26e7ee36990e1cf6faef05a87ed8ae4846c3e5569d44293e5ef9c1647  ./modules/mod-ustawa-zdrowie-psychiczne.md
 da02497d2dc03ec7b23a81e5312b7fd2878f74fa70b5e0823f548ad1998eed5e  ./modules/mod-wyroby-medyczne.md
-6005aaa057624d3eb0be867097265e41f99c69d02f54287cc16bc12484db7845  ./references/CHANGELOG.md
+74d4a39b4d2ee74052f740a40683fa0f44261fc9c7cffd313df5f8a9c33d46e2  ./references/CHANGELOG.md
+855248345d0da0b0116e7414a8819b5e9c8ce4113495cb3b8388e40ac593d670  ./references/HISTORIA-ZMIAN-PLIKOW.md

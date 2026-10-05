@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.19"
+version: "5.16.21"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,8 +39,7 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.19 (2026-10-04b, AUDYT-2026-10-04b): F-225 — usunięte duplikaty MOD-NAZEWNICTWO-STRON i MD7 (gałąź 5.17.0); powiązany contradictory-evidence-engine-v10 i 3 szablony (KROK 3 pkt 4).
-  Poprzednia: 5.16.18 (2026-10-01b, AUDYT-2026-10-01b): MP13 §13.2a — graf przyczynowy (shared/MOD-GRAF-PRZYCZYNOWY.md); rachunek siły łańcucha doprecyzowany.
+  Wersja bieżąca: 5.16.21 (2026-10-05h, AUDYT-2026-10-05h): Dashboard (KROK 4) zasilany danymi: jeden obiekt LEX_DATA po komentarzu `lex:dane`, bez przykładowych danych sprawy w szablonie; zakładki Osoby, Nazewnictwo, Kwestie sporne i Lapsusy renderowane przy starcie (wcześniej puste). Kreator przez `show_widget(path)`. BLOK I i wariant z kodem oznaczone WIDGET-DANE.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -284,7 +283,9 @@ ST-FINAL w shared/MOD-STEP-TRACKER.md.
 Uruchom widget kreator (zebranie danych od użytkownika):
 
 ```
-view /mnt/skills/user/analizator-dowodow-v3/assets/widget-kreator.html
+show_widget(path="analizator-dowodow-v3/assets/widget-kreator.html")
+  — formularz bez danych sprawy; host czyta plik, nie przepisuj kodu.
+  Host bez `path`: view tego pliku → show_widget(widget_code=<treść>)
 
 LOGIKA AUTO-SELECT (v2):
 - 1 sygnał kontekstowy → auto-wybór trybu badania (bez pytania)
@@ -297,7 +298,7 @@ FORMAT WYJŚCIA (STEP 4):
 - NARR → MD-NARR jako plik .md
 - OBA → dashboard + plik .md
 - INLINE → bez widgetu
-→ show_widget(...)
+→ dashboard: KROK 4
 ```
 
 Po zebraniu danych przejdź do KROK 2.
@@ -613,6 +614,7 @@ H1. Sprawa zawiera zidentyfikowane roszczenia / zarzuty / przedmioty sporu?
 
 ---
 
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
 ## BLOK I — Import / Eksport raportu
 
 ```
@@ -737,13 +739,21 @@ zaktualizowane odpowiednio do „KROK 3B" / „KROK 3B.2" / „KROK 3B.3" — pa
 
 ## KROK 4 — DASHBOARD (jeśli B1=TAK)
 
+Host z `show_widget` przyjmującym `data`: `show_widget(path="analizator-dowodow-v3/assets/dashboard.html", data=DANE, title="analizator_dowodow_dashboard")` — bez kodu; eksport JSON/MD/CSV jest w szablonie, host dokłada import. DANE = `{caseId, mode, evidence, alerts_data, coverage_data, gaps, terminy, recs, contradictions, persons, nazewnictwo, dis_items, lapsusy, roszczenia}`; struktura pól w komentarzu nad `LEX_DATA` w szablonie. Pominięte pole = pusta zakładka.
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+#### Host bez pola `data`
+
 ```
 view /mnt/skills/user/analizator-dowodow-v3/assets/dashboard.html
+→ wpisz dane w obiekt LEX_DATA (literał po /* lex:dane */), resztę pliku bez zmian
 → show_widget(widget_code=<treść>, title="analizator_dowodow_dashboard",
               loading_messages=["Buduję dashboard dowodów...",
                                 "Wczytuję sprzeczności...",
                                 "Kalkuluję pozycję procesową..."])
 ```
+
+#### Treść danych
 
 Tablice do wypełnienia: `evidence[]` · `alerts_data{}` · `coverage_data[]`
 · `gaps[]` · `terminy[]` · `recs[]` · `contradictions[]` (typy: `legal|intra|inter|doubt`) · `dziedziny[]`

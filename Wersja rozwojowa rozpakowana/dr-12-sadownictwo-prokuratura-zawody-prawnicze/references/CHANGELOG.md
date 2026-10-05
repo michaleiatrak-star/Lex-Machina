@@ -1,5 +1,7 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.23 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
+
 - 4.22 (2026-10-04c, AUDYT-2026-10-04c): **F-227 (zamknięta).** SKILL.md nie wczytywał `MAPA-POKRYCIA.md`, choć `prawny-router-v3/references/pokrycie-dziedzinowe.md` nazywa lokalną mapę jedynym bieżącym źródłem statusu pokrycia — dodana sekcja „Mapa pokrycia treściowego” z `view`, wzorem DR-02…DR-06 i DR-16. Treść prawa bez zmian. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04c.
 
 - 4.21 (2026-10-03b, AUDYT-2026-10-03b, F-223): `SKILL.md` odtworzony z `main` sprzed 4.20 (wydanie 4.20 zbudowano z kopii zainstalowanej — host zdjął wcięcie `dependencies.requires` i usunął komentarz YAML) + wpis tury XII przeniesiony bez zmian. Treść 4.20 (F-219) bez zmian.

@@ -1,8 +1,11 @@
-44ee5c9a561eb13efbf536c619ca1b418007eb0ee762e3786c08df40da0e0544  ./.claude-plugin/plugin.json
+4bcbcfbe3d80ec5dfc3c0117d5e30737822c6f987738d011e1b82e71fcc49d3a  ./.claude-plugin/plugin.json
 feb3b42725e560bf6675a4ff840f965871d89eea770e676f03cc72264bc5eb91  ./PORTABILITY-MANIFEST.md
-6c8dd7942fc5d8aa12b9f74ced1ec35e15585a281342a460f6210d16d45e5ff2  ./SKILL.md
+a4bb45235d0c2a80ea41bd0515f7b82c76d6bb4ede69fcca0bb5dd4444ed7680  ./SKILL.md
 efb3ecea3f10b91e25f3773a1c55a908aa04fed8ea62ec0e47f11b3e8de22d8d  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
-b0d0c5e816bf1c3a394c896b458616118f494ff2e0ebc3b09d91f767c01525e6  ./references/CHANGELOG.md
+7cd8d0eeaaa7437fcec9e93653fc7a882791bdd89d6d7b1629c2e32da88be6ea  ./assets/widget-wybor-przepisu.html
+ded7d8e00f46bd02ca4bec2b61ee690a88cd5c09f120a282eb6a117963dbb794  ./assets/widget-wyniki.html
+518b52bcce50428efab56d1ebad89b5465c407ded327b5e0f5c3a21a6708c215  ./references/CHANGELOG.md
+0d3a7a683e9a4a52e7dd7cf2c6d1a15ea8fc93d1fd989ba82ec55356dc8db1e9  ./references/HISTORIA-ZMIAN-PLIKOW.md
 b8e6a45e40ca0cd51d83db9a5de5554ad6d8d1fe708f0bab6121511ee30f368a  ./references/MOD-ORZECZ-POWIAZANIA-HISTORIA.md
 a3ab0d4d15a35f27b9b1317b14639961c210792ff5c74f3ec9f0f49a09e19581  ./references/MOD-VACATIO-LEGIS.md

@@ -241,7 +241,7 @@ PODSTAWA = re.compile(
 # ominąć bramki dopisaniem słowa "uchylony" do modułu merytorycznego.
 # ---------------------------------------------------------------------------
 POMIJANE_NAZWY = {
-    "AUDIT-JOURNAL.md", "CHANGELOG.md", "WARN-OTWARTE.md",
+    "AUDIT-JOURNAL.md", "CHANGELOG.md", "HISTORIA-ZMIAN-PLIKOW.md", "WARN-OTWARTE.md",
     "REGRESSION-TEST-PLAN.md", "SKRYPTY-RECZNE.md",
     "CHECKLIST-DEDUP.md", "FORMAT-RAPORTU-ROZNIC.md",
 }

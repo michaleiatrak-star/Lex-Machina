@@ -264,19 +264,3 @@ dlajurysty.pl) — WERYFIKUJ aktualność na ELI (RZĄD 1) przed użyciem.
   linia orzecznicza nt. "dopalaczy" jako środków szkodliwych z pkt 2).
 - statystyka.policja.pl — oficjalny wykaz typów czynów w tym rozdziale
   z danymi statystycznymi (do weryfikacji częstości przy potrzebie).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu na wyraźne żądanie użytkownika —
-bezpieczeństwo infrastruktury krytycznej podniesione do priorytetu w
-kontekście obecnej sytuacji geopolitycznej. Zweryfikowano online: pełną
-treść art. 163 (z praktycznymi przykładami sabotażu infrastruktury),
-art. 165 (§1 pkt 3-4 — SERCE ochrony infrastruktury krytycznej fizycznej
-i cyfrowej w KK), art. 165a (finansowanie terroryzmu, obecnie 2-15 lat),
-art. 168-169 (przygotowanie i czynny żal). Odnotowano terminologiczną
-różnicę między KK ("urządzenie użyteczności publicznej") a ustawowym
-pojęciem "infrastruktura krytyczna" z odrębnych aktów — wyjaśnione, że
-zastosowanie art. 165 §1 pkt 3 nie wymaga formalnego wpisu na listę
-infrastruktury krytycznej.

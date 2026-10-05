@@ -429,23 +429,3 @@ REGUŁA-MINIMUM-PARTII: Nie dziel jeśli możesz uniknąć:
 □ Luki z wcześniejszych checkpointów: weryfikacja zamknięcia w PD6?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-21) — Pierwsza wersja.
-Przyczyna: brak jakiegokolwiek mechanizmu zarządzania oknem kontekstowym
-wewnątrz sesji przy dużych zbiorach dowodów. Model mógł rozpocząć analizę
-dużego materiału (np. ZIP z 35 plikami) i urwać bez ostrzeżenia gdy kontekst
-się wypełnił — tracąc wszystkie wyniki częściowej analizy.
-Istniejący MOD-KONTEKST-SESJI działa między sesjami (export/import stanu),
-nie wewnątrz sesji. Ten moduł wypełnia tę lukę przez profilaktyczne
-szacowanie rozmiaru materiału przed analizą i podział na partie z protokołem
-checkpointów i wznawiania.
-Przykład triggera: ZIP z 35 plikami (9.5 MB) — sesja VII P 94/25 —
-model przeanalizował go bez podziału, ryzykując utratę wyników.
-Przy STATUS KRYTYCZNE (≥30 plików) moduł wymusiłby podział na ~9 partii
-po 4 pliki, z 8 checkpointami między partiami.
-```

@@ -315,27 +315,3 @@ orzecznictwa przy konkretnej sprawie.
 - slownik.kulepszejprzyszlosci.pl, k-poa.torun.pl, childadoption.eu —
   cele Konwencji haskiej, praktyczna procedura adopcji zagranicznej w
   Polsce (ośrodki adopcyjne, wymóg przyjazdu do Polski).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("adopcja... w tym adopcja zagraniczna — przez ludzi z zza granicy i w
-sytuacji gdy dziecko jest za granicą"). Zweryfikowano online: PEŁNE
-opracowanie przysposobienia krajowego (trzy rodzaje — pełne/niepełne/
-całkowite, z KLUCZOWYM rozróżnieniem: całkowite jest NIEROZWIĄZYWALNE,
-w przeciwieństwie do pozostałych dwóch; przesłanki, w tym POTWIERDZONY
-WPROST brak możliwości wspólnego przysposobienia przez pary
-jednopłciowe; procedura sądowa) oraz przysposobienia międzynarodowego
-wg Konwencji haskiej z 1993 r. — z ZASADĄ SUBSYDIARNOŚCI jako
-centralnym mechanizmem (adopcja zagraniczna dopiero po wyczerpaniu
-możliwości krajowych), OBU kierunkami scenariusza (cudzoziemiec
-adoptujący w Polsce — z praktycznym wymogiem przyjazdu i ograniczoną
-liczbą uprawnionych ośrodków adopcyjnych; Polacy adoptujący dziecko za
-granicą — analogiczny mechanizm organów centralnych), oraz szczególnym,
-doktrynalnie spornym przypadkiem przysposobienia transgranicznego
-pasierba. Odnotowano niepewności: dokładna minimalna różnica wieku
-(art. 114¹ §2 KRO, oceniana kazuistycznie w orzecznictwie), aktualna
-lista uprawnionych ośrodków adopcyjnych (stan z 2017 r. mógł się
-zmienić), procedura dla państw spoza Konwencji haskiej.

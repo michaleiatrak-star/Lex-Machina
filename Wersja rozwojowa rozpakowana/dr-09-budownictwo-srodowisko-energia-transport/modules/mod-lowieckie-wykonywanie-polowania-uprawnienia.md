@@ -405,34 +405,3 @@ z rejestru F-93/WARN-OTWARTE — **ZAMKNIĘTE**.
    2026-08-18** (Dz.U. 2025 poz. 1795, patrz § 7 wyżej, propagacja z F-93).
 7. Aktualna stawka opłaty skarbowej za wniosek z art. 45 ust. 3 (zmienna
    w czasie, nie przyjmować automatycznie z BIP bez weryfikacji daty).
-
----
-
-## CHANGELOG
-
-- **2026-08-16d** — utworzenie modułu. Naprawa kolejnego punktu
-  priorytetowego flagi **F-91** (audyt-systemu-v4, tablica sterująca
-  WARN-OTWARTE.md) po Rozdz. 9 i Rozdz. 5: Rozdz. 8 Prawa łowieckiego,
-  art. 42-45 (poza już opisanym 42aa). Źródła: Rząd 2B (lexlege.pl,
-  arslege.pl) + Rząd 3 zbieżny (liczne BIP-y, sip.lex.pl/OpenLEX) +
-  orzecznictwo NSA (postanowienie II OW 131/15, art. 45 ust. 3 jako
-  zadanie zlecone). Rozbieżność źródeł na organie odwoławczym art. 42da
-  ust. 2 rozstrzygnięta na korzyść 4 zgodnych źródeł (Zarząd Główny PZŁ)
-  wobec 1 mniej wiarygodnego (blog: okręgowa rada łowiecka). Odkryto i
-  odnotowano częściowe dane o ustawie z 21.11.2025 o zdrowiu zwierząt
-  (data potwierdzona, metryka Dz.U. wciąż nieustalona — kontynuacja
-  sygnału z sesji 2026-08-16). 7 punktów ⚠️ NIEWERYFIKOWANE zamiast
-  zgadywania. Pozostaje otwarte w F-91: Rozdz. 6a, 1-4/6/7/11 (dr-09).
-
-- **2026-08-16g** — 🔴 **NAPRAWA LUKI WŁASNEJ:** dodano § 2a — **art. 42ab**
-  (obowiązek informacyjny przy polowaniu zbiorowym: 14 dni do wójta
-  i nadleśniczego, 5 dni na podanie do publicznej wiadomości trzema kanałami,
-  ⭐⭐ SPRZECIW właściciela/posiadacza/zarządcy gruntu na min. 3 dni przed,
-  tablice ostrzegawcze, delegacja rozporządzeniowa). Artykuł został pominięty
-  przy tworzeniu modułu w sesji 16d mimo deklarowanego zakresu „42a–42e";
-  luka wykryta w sesji 16g przy kontroli krzyżowej list artykułów
-  (`grep "42ab"` w całym dr-09 = 0 trafień). Odnotowano powiązanie pakietowe
-  z art. 27b i 42da (jedna nowelizacja z 22.03.2018 — spójny mechanizm
-  ochrony właściciela gruntu) oraz SPORNY skutek naruszenia (nie budować
-  zarzutu nielegalności polowania bez orzecznictwa). ⚠️ Treść ust. 4-5
-  (tryb rozpoznania sprzeciwu) NIEWERYFIKOWANA — dopisana do listy braków.

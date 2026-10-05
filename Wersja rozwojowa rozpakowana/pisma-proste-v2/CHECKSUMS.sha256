@@ -1,9 +1,10 @@
-a27807ddafdea0c928f013111d520a8df14d6b19555d517596a579fe7c570c44  ./.claude-plugin/plugin.json
+da7dab4d596ca5d08a538e83e77bd053ff35bd9cd760cf382b6f393010f19831  ./.claude-plugin/plugin.json
 49eca7b24319ac4a396f2e3ff07b4f2971ca7f70f749c47b18a8ffdfc0546969  ./PORTABILITY-MANIFEST.md
-8faa1a5922ef193b351b91253ccb0011b709ca651d1becdbfac6909eb4c9931c  ./SKILL.md
+ca7ed08517c899501b4c1758fe3fbab026c5a587d0c5ff0e93fda32c1c15e27d  ./SKILL.md
 7838c9ee5368ea708512d2c10455cd0b85db0707af3c0f1ef0c44d63480b4d85  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
-2bceb1d044f0c44d703986c6bb2d0c5c363f6781b42ffa48c322a682de4dfa1d  ./references/CHANGELOG.md
+de908ad5f4b6aa673a6172a755c6eb5709df755d30c2bec3982a40ec1ef8450a  ./references/CHANGELOG.md
+ca00b89d47c27e8d4ef7167471e955330f0b31abf56107609db42435537f7dea  ./references/HISTORIA-ZMIAN-PLIKOW.md
 a9e075075bbc7a4cf60e633ae397d1b23f88e6ade6feecc6adfed3b4f720647f  ./references/M1-zasady.md
 61daeb1ef49dcb7ec76e94e19a4a8a21927b1125e2e5bd2434f7125ff19093e9  ./references/M2-intake.md
 5d649e13b28b6ce715c3de796f3ce0d46a6467254a20e721fa9213f2e9ab954e  ./references/M3-weryfikacja.md

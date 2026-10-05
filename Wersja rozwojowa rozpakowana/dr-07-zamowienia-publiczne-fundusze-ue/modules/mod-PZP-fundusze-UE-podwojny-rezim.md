@@ -206,20 +206,3 @@ w pełni w tej sesji — zweryfikuj na ISAP).
   prowadzących do korekt.
 - noweprzetargi.pl — kontekst 2026 (pięć nowelizacji w dwanaście
   miesięcy — sygnał do regularnej re-weryfikacji stanu prawnego).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-(przetargi dotowane przez UE). Zweryfikowano online: podwójny reżim
-prawny (PZP + Wytyczne kwalifikowalności 2021-2027), zasadę
-konkurencyjności dla zamówień poniżej progu PZP jako ODRĘBNY obowiązek,
-3 główne kategorie taryfikatora korekt finansowych (opis przedmiotu,
-warunki nieproporcjonalne, błędy oceny ofert), mechanizm wysokości i
-możliwości obniżenia korekty (z wyjątkiem dla nadużycia finansowego
-potwierdzonego prawomocnie), próg 10/20 mln EUR dla dodatkowego
-obowiązku przekazania dokumentacji do UZP. Odnotowano niepewności:
-dokładna podstawa procentowa korekty (cały projekt vs dane zamówienie),
-szczegółowe różnice proceduralne między kontrolą krajową a unijną —
-oznaczone do dalszej weryfikacji.

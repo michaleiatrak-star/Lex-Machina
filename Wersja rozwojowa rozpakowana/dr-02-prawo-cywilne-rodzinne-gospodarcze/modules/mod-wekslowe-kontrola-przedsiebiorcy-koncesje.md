@@ -444,27 +444,3 @@ WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ — orientacyjnie: działalność
   koncesja/zezwolenie/wpis do rejestru działalności regulowanej,
   hierarchia/subsydiarność koncesji, charakter prawny wpisu (spór
   doktrynalny), promesa koncesji.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika,
-uzupełniające 3 luki z audytu pokrycia prawa gospodarczego. Zweryfikowano
-online: **Część A** — pełną strukturę ustawy Prawo wekslowe (1936, wciąż
-praktycznie niezmienionej), essentialia negotii weksla trasowanego i
-własnego, indos, poręczenie (aval), protest, przedawnienie (terminy
-krótsze niż cywilne ogólne), prawo czekowe (różnica: trasat zawsze
-bankiem), praktyczne zastosowanie (weksel in blanco jako zabezpieczenie,
-postępowanie nakazowe). **Część B** — Rozdział 5 Prawa przedsiębiorców
-(obowiązek zawiadomienia, terminy 7-30 dni, szeroki katalog wyjątków od
-zawiadomienia, książka kontroli, sprzeciw, odpowiedzialność
-odszkodowawcza organu). **Część C** — trzy poziomy reglamentacji
-(koncesja/zezwolenie/wpis do rejestru działalności regulowanej) z
-KLUCZOWĄ zasadą subsydiarności koncesji (środek ostateczny w hierarchii)
-i doktrynalnym sporem co do charakteru prawnego wpisu do rejestru
-(czynność materialno-techniczna vs decyzja). Odnotowano niepewności:
-dokładne limity czasu trwania kontroli wg wielkości przedsiębiorcy
-(art. 54-56 Prawa przedsiębiorców), dokładne terminy przedawnienia
-wekslowego, dokładna podstawa prawna odszkodowania za nieprawidłową
-kontrolę — oznaczone do dalszej weryfikacji w ELI (RZĄD 1).

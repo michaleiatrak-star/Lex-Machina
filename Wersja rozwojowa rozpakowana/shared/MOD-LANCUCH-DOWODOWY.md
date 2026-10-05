@@ -433,22 +433,3 @@ OUTPUT:
 □ Triangulacja P+: ≥2 niezależne źródła dla ogniw kl. C/D?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-24) — Pierwsza wersja.
-Przyczyna: system miał fragmentaryczne pokrycie łańcucha:
-  MOD-DOWODY D2 (prosty schemat A→B→wniosek), MOD-POSZLAKI-KONTEKST
-  (poszlaki L-X bez architektury budowy i ataku), MOD-ATAK-NA-DOWOD
-  §AD-12 SY (atak systemowy bez procedury łańcucha).
-Luki wypełnione: 5 typów łańcuchów (ŁB-3), 4 typy ogniw (ŁB-1),
-  schemat ŁD-n (ŁB-2), BRAMKA EQG (ŁB-5), 4 strategie ataku ŁA-1..ŁA-4,
-  schemat sekcji w piśmie (CZĘŚĆ III), pipeline ŁD-1..ŁD-7.
-Źródła: KPC art. 231, 233; MOD-POSZLAKI-KONTEKST (istniejący);
-  MacCarthy §12 (atak na najsłabsze ogniwo); Garner/Scalia §27 (łańcuch
-  argumentacji); MOD-NEGACJA §N2 (odporność ogniwa); MOD-ATAK-NA-DOWOD
-  SHIELD (szczepienie); MOD-PROWENIENCJA §PR2 (triangulacja P+).
-```

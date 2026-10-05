@@ -33,6 +33,9 @@ w które dałoby się to wpisać.
 | `kontekst` | string | 2–3 zdania |
 | `delta` | lista \| `null` | zmiany od poprzedniego raportu; `null` przy pierwszym |
 | `assessment.level` | `"good"` \| `"neutral"` \| `"bad"` \| `"lost"` | patrz §3 |
+| `data_raportu` | string | data raportu (nagłówek) |
+
+`delta` jako obiekt: `{ ma_poprzedni_raport, data_poprzedniego, co_sie_zmienilo: [], bez_zmian }` (sekcja delta w SKILL.md); sama lista = lista zmian.
 
 ---
 
@@ -96,12 +99,14 @@ ale wtedy **nazwij to w opisie**, inaczej odbiorca odczyta różnicę jako błą
 | Pole | Typ | Uwagi |
 |---|---|---|
 | `potwierdzenie_odbioru` | bool \| `null` | tylko gdy wymagane |
+| `co_dalej` | lista string (maks. 3) | kroki klienta, 1 zdanie każdy |
+| `potwierdzenie` | `{ czynnosc, data, konsekwencja }` \| `null` | ramka „WAŻNE — potrzebujemy potwierdzenia”; konsekwencja wprost |
 
 ---
 
 ## 6. POLA TRYBÓW SPECJALNYCH
 
-**`zle_wiadomosci`** — obecne wyłącznie przy tym trybie:
+**`zle_wiadomosci`** — obecne wyłącznie przy tym trybie, pod kluczem `zle_wiadomosci`:
 ```json
 { "fakt": "…", "znaczenie": "…", "przyczyna": "…",
   "co_dalej": { "srodek": "…", "termin": "…", "po_stronie_klienta": "…" } }
@@ -109,7 +114,9 @@ ale wtedy **nazwij to w opisie**, inaczej odbiorca odczyta różnicę jako błą
 ⛔ `co_dalej.srodek` i `co_dalej.termin` **nie mogą być `null`**. Jeśli są —
 tryb rozpoznano błędnie; wróć do KROK 1A.
 
-**`ograniczenie_szkod`** — obecne wyłącznie przy tym trybie:
+**`brak_nowosci`** — `najblizsze_zdarzenie: { co, termin }` (termin `null` = „nieznany, zależy od harmonogramu sądu”).
+
+**`ograniczenie_szkod`** — obecne wyłącznie przy tym trybie, pod kluczem `ograniczenie_szkod`:
 ```json
 { "wynik": "…", "zamkniete": ["…"],
   "do_rozliczenia": [{ "pozycja": "…", "termin": "…", "odpowiedzialny": "…" }],

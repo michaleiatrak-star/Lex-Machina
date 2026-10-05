@@ -348,33 +348,3 @@ MOD-FAKTY weryfikuje wygenerowaną treść **po** jej wygenerowaniu.
 Oba moduły są komplementarne — nie zastępują się wzajemnie.
 
 Krok CV-ALT zasila W1.3 (mapa cel→przesłanka→dowód) obok głównej ścieżki S1.
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.1.0 (2026-06-26)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-26):
-  Problem: pismo procesowe (rozszerzenie pozwu) pomijało co najmniej 6 wątków
-  prawnych zawartych w pismach procesowych powoda dostępnych w materiale:
-  - art. 94³ §3 KP (odszkodowanie za mobbing) — pismo Riposta, pismo 12.05.2026
-  - art. 101¹ §1 KP (abuzywny zakaz konkurencji) — Riposta pkt IV
-  - zarzut wobec zeznań świadka [ŚWIADEK-K] w odrębnej sprawie — pismo 12.05.2026 pkt IV
-  - art. 6 KEA (konflikt interesów pełnomocnika) — Riposta pkt VI
-  - roszczenie z tytułu opłat za pozwolenia na pracę / przywłaszczenie — Riposta pkt III/V
-  - propozycja ugodowa (zakres wycofania roszczeń) — pismo 12.05.2026 pkt V
-  Przyczyna systemowa: brak kroku wykrywającego wątki z pism procesowych
-  strony w materiale dowodowym i pytającego użytkownika czy uwzględnić.
-Naprawa:
-  + KROK C0 — SKAN PISM PROCESOWYCH STRONY: obowiązkowy skan wątków
-    z każdego D[id] = "pismo procesowe strony", konfrontacja z T1..Tn,
-    raport T_BRAK i zapytanie użytkownika + STOP.
-  + Skan C0 musi być wykonany PRZED C1 — lista tez aktualizowana po C0.
-
-1.0.0 (pierwotna)
-  MOD-CLAIM-VALIDATION — pierwotna wersja (data nieznana).
-  Weryfikacja twierdzeń strony vs materiał i przepisy.
-  Krok CV-ALT (roszczenie alternatywne) dodany w wersji 1.0.
-```
-

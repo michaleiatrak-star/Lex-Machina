@@ -26,11 +26,11 @@ ALLOW = {
         'ARCHIWALNY schemat v1, zarejestrowany w drzewie SKILL.md samą nazwą; nazwa nieunikalna (router/anonimizer)',
 }
 
-HIST = re.compile(r'(CHECKSUMS\.sha256|CHANGELOG\.md|AUDIT-JOURNAL\.md|mapa_dzu_[^/]*\.md|WARN-OTWARTE\.md|DEDUPLICATION-POLICY\.md|CHECKLIST-DEDUP\.md)$')
+HIST = re.compile(r'(CHECKSUMS\.sha256|CHANGELOG\.md|HISTORIA-ZMIAN-PLIKOW\.md|AUDIT-JOURNAL\.md|mapa_dzu_[^/]*\.md|WARN-OTWARTE\.md|DEDUPLICATION-POLICY\.md|CHECKLIST-DEDUP\.md)$')
 SKIP = ('/mcp-servers/', '/node_modules/', '/__pycache__/', '/.git/')
 TXT = ('.md', '.py', '.sh', '.json', '.yaml', '.yml', '.txt', '.mjs', '.js', '.jsx', '.html')
 INFRA = re.compile(r'(^SKILL\.md$|^CHECKSUMS\.sha256$|^\.claude-plugin/plugin\.json$|^agents/openai\.yaml$|'
-                   r'^assets/icon\.svg$|^README\.md$|^PORTABILITY-MANIFEST\.md$|^MANIFEST\.md$|^\.mcp\.json$|^NOTICE$|^LICENSE$|^(references/)?CHANGELOG\.md$|__init__\.py$)')
+                   r'^assets/icon\.svg$|^README\.md$|^PORTABILITY-MANIFEST\.md$|^MANIFEST\.md$|^\.mcp\.json$|^NOTICE$|^LICENSE$|^(references/)?CHANGELOG\.md$|^references/HISTORIA-ZMIAN-PLIKOW\.md$|__init__\.py$)')
 
 skills = sorted(d for d in os.listdir(ROOT) if os.path.isfile(os.path.join(ROOT, d, 'SKILL.md')))
 files, texts = {}, {}

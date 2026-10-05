@@ -324,23 +324,3 @@ RÓWNOLEGLE.
 - ⚠️ Odnotowana rozbieżność źródeł co do progu przy doliczaniu
   posiadania poprzednika w złej wierze (20 vs 30 lat) — wymaga
   ostatecznej weryfikacji w ELI (RZĄD 1).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne wskazanie użytkownika
-("rzeczy znalezione, przywłaszczenie mienia i zasiedzenie"). Zweryfikowano
-online: pełną ustawę o rzeczach znalezionych (2015) — obowiązki znalazcy,
-kategorie szczególne, znaleźne 1/10 wartości, nabycie własności po
-roku/2 latach, przejście na powiat; pełne opracowanie zasiedzenia (art.
-172-176 KC) — przesłanki, terminy, kryteria dobrej/złej wiary z momentem
-oceny, doliczanie posiadania poprzednika, charakter deklaratoryjny
-orzeczenia sądu, ograniczenie dla nieruchomości rolnych (300 ha, rolnik
-indywidualny), pułapka współwłasności (SN IV CSK 117/12), procedura
-sądowa. Potwierdzono, że przywłaszczenie mienia (warstwa karna) jest już
-dobrze pokryte — bez duplikacji, z wyraźnym połączeniem tematycznym do
-Części A (znalazca działający z zamiarem zatrzymania = przywłaszczenie).
-Odnotowano NIEROZSTRZYGNIĘTĄ rozbieżność źródeł co do progu lat przy
-art. 176 KC (20 vs 30) — oznaczoną wprost do dalszej weryfikacji zamiast
-wybrania jednej wersji arbitralnie.

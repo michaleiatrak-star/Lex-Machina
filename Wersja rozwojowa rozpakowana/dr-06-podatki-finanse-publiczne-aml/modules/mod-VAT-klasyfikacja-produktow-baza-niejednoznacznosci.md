@@ -448,21 +448,3 @@ samorządowych organów podatkowych]).
   wyrobu medycznego, różnego VAT" w zależności od faktycznego zastosowania.
 - przetargi.wody.gov.pl — konkretny przykład kodu CN 4015 19 00 z
   wyraźnym wyłączeniem zastosowań medycznych z tej pozycji celnej.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-— zbudowanie "bazy" produktów, gdzie stawka VAT zależy od niejednoznacznej
-klasyfikacji tego samego fizycznego towaru. Skorygowano terminologię:
-mechanizm dotyczy PKWiU/CN i statusu prawnego towaru (wyrób medyczny wg
-MDR), NIE kodu PKD (który klasyfikuje działalność podatnika, nie towar).
-W PEŁNI opracowano na konkretnym przykładzie rękawic nitrylowych
-(diagnostyczne/medyczne 8% vs robocze/BHP 23%, z realnym przykładem WIS
-i interpretacji podatkowych pokazujących, że TA SAMA fizyczna partia
-towaru może wymagać różnych stawek zależnie od odbiorcy/przeznaczenia
-KONKRETNEJ transakcji). Rozszerzono na 3 dodatkowe, w pełni udokumentowane
-przypadki (maseczki, płyny dezynfekujące, podkłady chłonne) oraz
-zasygnalizowano 5 dalszych kategorii jako punkt startowy do przyszłego
-pogłębienia.

@@ -223,26 +223,3 @@ KROK 5 — Czy czyn popełniono ZA GRANICĄ przez obywatela polskiego?
   NIE cytować kwot z tego źródła bez krzyżowej weryfikacji w ELI (RZĄD 1)).
 - zaufanyprawnik.pl — praktyczne omówienie granicy wykroczenie/
   przestępstwo w sprawach o mienie.
-
----
-
-## CHANGELOG
-
-**1.1 (2026-07-17):** Druga weryfikacja na wyraźne żądanie użytkownika
-("zweryfikuj to co nie zweryfikowałem"). Rozstrzygnięto WSZYSTKIE
-wcześniejsze niepewności: art. 120 (próg ZRÓWNANY z 800 zł, nie 75 zł —
-starsze źródło było nieaktualne), art. 123 (z ogrodu, nieznaczna ilość,
-250 zł, ściganie na wniosek), art. 126 (wartości niemajątkowe/sentymentalne,
-ściganie na wniosek), art. 127 (samowolne użycie, ściganie na żądanie).
-Zero pozostałych niepewności w tym module.
-
-**1.0 (2026-07-17):** Utworzenie modułu — najwyższy priorytet z audytu
-pokrycia Kodeksu wykroczeń (Rozdział XIV, mienie — jedna z najczęstszych
-kategorii spraw wykroczeniowych, dotąd reprezentowana w systemie WYŁĄCZNIE
-przez sam próg kwotowy 800 zł bez treści merytorycznej). Zweryfikowano
-online: art. 119 (w tym KLUCZOWE wyłączenia — broń/zuchwałość/przemoc —
-często pomijane w praktyce), art. 122 (paserstwo umyślne/nieumyślne),
-art. 124 (zniszczenie mienia), art. 131 (zastosowanie za granicą).
-Odnotowano niepewność źródłową dla art. 120, 123, 126 (dokładne progi/
-treść) — oznaczone do weryfikacji przy pierwszym praktycznym użyciu,
-zgodnie z ZASADA 13 (brak fabrykacji pewności bez faktycznej weryfikacji).

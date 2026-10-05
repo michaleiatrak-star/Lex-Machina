@@ -341,24 +341,3 @@ DZIAŁANIE NAPRAWCZE (obligatoryjne, natychmiast):
 
 Tej naprawy nie można pominąć ani odroczyć.
 ```
-
----
-
-## HISTORIA WERSJI
-
-```
-v1.1.0  2026-06-27  Naprawy z audytu VII P 94/25:
-                    1. Dodano [CP-FSL-D] do CP-REJESTRU (aktywny gdy SD-VER=KOMPLET i ≥1 teza)
-                    2. Dodano §3A REGUŁA ZAKAZU FAŁSZYWEGO N/A (CRIT-NA):
-                       N/A wyłącznie gdy techniczny warunek aktywacji = NIE;
-                       zakaz N/A z powodu "typ pisma" / "prosta sprawa" / "brak prośby"
-                    3. Dodano kontrolę CP-FSL-D w bramce CP-CHECK (§4)
-                    Root cause: w sprawie VII P 94/25 CP-1c-macierz i CP-1c-lancuch
-                    oznaczono N/A "pismo rozszerzające" — mimo 35 plików i 3 tez.
-                    FSL-D nie istniał w rejestrze → nie blokował .docx.
-
-v1.0.0  2026-06-24  Pierwsza wersja — lekcja z sesji VII P 94/25.
-                    Przyczyna: model wygenerował .docx (15 stron) bez
-                    żadnego z 14 wymaganych checkpointów, co grozi
-                    złożeniem niezweryfikowanego pisma do sądu.
-```

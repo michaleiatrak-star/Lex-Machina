@@ -16,6 +16,7 @@
 - Ścieżki względne `references/...`, `modules/...`, `assets/...` dotyczą bieżącego skilla.
 - Historyczne ścieżki w changelogach i dziennikach audytu są dokumentacją, nie instrukcją runtime.
 
+<!-- lex:wykonuje-aplikacja: RESOLVER -->
 ## 1A. RESOLVER-SKILLI — instalacja z marketplace, kilka kopii tego samego skilla
 
 **Adres logiczny, nie ścieżka hosta.** Zapisy `shared/X`, `<skill>/X`,

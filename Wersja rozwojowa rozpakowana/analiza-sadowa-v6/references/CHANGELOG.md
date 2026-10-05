@@ -1,5 +1,7 @@
 # CHANGELOG — analiza-sadowa-v6
 
+- 6.14 (2026-10-05h, AUDYT-2026-10-05h): TRYB B: `assets/widget-analiza.html` (10 zakładek, wartości tekst/lista/tabela/podsekcje); W6: szablon raportu sytuacyjnego zamiast kodu. Warianty z kodem w sekcjach WIDGET-DANE.
+
 - 6.13 (2026-09-27e, AUDYT-2026-09-27e): claude.ai po dodaniu marketplace instalował wyłącznie 4 z 32 pluginów (shared, prawny-router-v3, analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90); jedyna cecha wspólna tych 4, nieobecna w żadnym z 28 pozostałych, to klucz `dependencies` we frontmatterze SKILL.md. Dodano go (`requires: [shared]` — zgodnie ze stanem faktycznym) oraz jawny manifest pluginu (name, description = description z SKILL.md, author, repository, license) — host nie musi niczego wnioskować z SKILL.md. `version` w manifeście = `version:` z SKILL.md (pilnuje T38 w audyt-systemu-v4) — host rozpoznaje aktualizację po podbiciu wersji. Treść skilla bez zmian.
 - 6.12 (2026-09-27d, AUDYT-2026-09-27d, F-207): **odtworzone** wywołanie `shared/MOD-WEJSCIE-DOKUMENTU.md` (bramka WD-1…WD-3, F-200) — jedyna zmiana tego skilla z wydania 6.11, które nie dotarło do repozytorium. Treść reguł nie jest kopiowana; obecność wywołania pilnuje T35.
 - 6.11 — WYDANIE NIEDOSTARCZONE (F-207): odnotowane w AUDIT-JOURNAL, AUDYT-2026-09-26 §7 (wywołanie WD, F-200), nieobecne na żadnej gałęzi `michaleiatrak-star/Lex-Machina`. Zakres odtworzony w 6.12; numer 6.11 nie jest używany ponownie.

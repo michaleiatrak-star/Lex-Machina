@@ -204,16 +204,3 @@ nie jest warunkiem wygaśnięcia ograniczenia.
 | Orzecznictwo o przesłankach TA | `orzeczenia-sadowe-v2` |
 | Strategia i dowody | `analiza-sadowa-v6` |
 | Poręczenie majątkowe | `mod-poreczenie-majatkowe-kaucja-karna.md` |
-
----
-
-## CHANGELOG
-
-**2.0.0 (2026-08-25):** Weryfikacja z Dz.U. 2026 poz. 490. Naprawiono
-art. 249 § 3a/§ 5, art. 252 i drogę zażaleniową, art. 263 § 4–7; dodano
-art. 156 § 5a, 249a § 1, 250 § 2a–2b, kazus z tomem VI, kwalifikację
-art. 87 KW/art. 178a KK, prawidłowe podstawy zaskarżenia zatrzymania oraz
-regułę kontaktu z obrońcą po 14 dniach.
-
-**1.0.0 (2026-08-13):** Wersja pierwotna; zastąpiona po audycie zakresu
-i jednostek redakcyjnych.

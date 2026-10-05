@@ -276,25 +276,3 @@ sugerowano.
   zidentyfikowanych, nie w pełni zrekonstruowanych treściowo).
 - inforlex.pl — komentarz praktyczny do art. 114-115 (ciężar dowodu,
   brak domniemania winy przy szkodzie niepowierzonej).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — domknięcie priorytetów
-wysokiego rzędu z audytu pokrycia KP. Zweryfikowano online: art. 114-118
-(odpowiedzialność zwykła, ciężar dowodu po stronie pracodawcy, brak
-domniemania winy, przyczynienie się, odpowiedzialność wielu pracowników),
-art. 120 (odpowiedzialność pracodawcy wobec osób trzecich + regres),
-art. 121-122 (miarkowanie tylko dla szkody nieumyślnej, pełna
-odpowiedzialność za szkodę umyślną), art. 124-126 (mienie powierzone,
-KLUCZOWE odwrócenie ciężaru dowodu/domniemanie winy, warunek
-prawidłowego powierzenia jako przesłanka surowszej odpowiedzialności,
-wspólna odpowiedzialność materialna), art. 291 §1 (ogólna zasada 3 lat).
-Odnotowano UCZCIWIE istotne niepewności: dokładny przepis limitujący
-odpowiedzialność nieumyślną do 3-miesięcznego wynagrodzenia (przypisywany
-art. 119 w literaturze, niepotwierdzony bezpośrednim cytatem), pełna
-treść art. 291 §2 (przedawnienie roszczenia pracodawcy — jeden z
-najbardziej skomplikowanych i najczęściej komentowanych przepisów całego
-Działu, wymaga odrębnego dogłębnego zbadania), oraz art. 292-295 w
-całości. Wszystkie oznaczone wprost do weryfikacji w ELI (RZĄD 1) przed użyciem.

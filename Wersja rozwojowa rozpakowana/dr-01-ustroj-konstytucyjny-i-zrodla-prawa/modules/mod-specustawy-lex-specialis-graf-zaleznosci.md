@@ -312,25 +312,3 @@ view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-stany-nadzwyczajne-sy
 
 Katalog specustaw doraźnych (np. koronawirusowa) POZOSTAJE w niniejszym
 module (sekcja 3) — tamten moduł się do niego odsyła, nie duplikuje.
-
-## CHANGELOG
-
-**1.2 (2026-08-14, F-77):** Korekta numeru Dz.U. dla ZTP w sekcji 2 —
-poprzedni t.j. 2016.283 zastąpiony aktualnym t.j. 2026.300 (konsolidacja
-nowelizacji 2026.100 z 26.01.2026). Wpis w CHANGELOG 1.0 poniżej pozostaje
-NIEZMIENIONY jako historyczny zapis stanu weryfikacji na 2026-07-17.
-
-**1.1 (2026-07-17):** Wpięto zweryfikowane sygnatury TK (K 4/10 — linia
-potwierdzająca, SK 37/19 — linia krytyczna) do sekcji 4.1, bilans nt.
-konstytucyjności specustawy drogowej. Weryfikacja: trybunal.gov.pl (komunikaty
-oficjalne), prawo.pl, OpenLEX, BRPO.
-
-**1.0 (2026-07-17):** Utworzenie modułu na wniosek użytkownika (mechanizm
-specustaw + lex specialis + graf zależności). Zweryfikowano online: ZTP
-Rozdział 4a § 29a-29c (przepisy epizodyczne, t.j. Dz.U. 2026 poz. 300 ze
-zm.), katalog przykładowy specustaw (Wikipedia PL), reguła lex specialis
-derogat legi generali i jej kolizja z lex posterior. Zarejestrowano w
-`audyt-systemu-v4/references/CHECKLIST-DEDUP.md` jako lokalizację
-kanoniczną — bez duplikacji z `mod-ZTP-przepisy-przejsciowe-doktryna.md`
-(rozdzielenie: tamten = przepisy przejściowe/Rozdział 5 ZTP; ten = lex
-specialis + przepisy epizodyczne/Rozdział 4a ZTP + graf zależności).

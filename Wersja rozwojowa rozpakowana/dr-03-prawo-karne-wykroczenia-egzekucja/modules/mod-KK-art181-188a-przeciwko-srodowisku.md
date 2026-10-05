@@ -246,19 +246,3 @@ KROK 7: Czy sprawca DOBROWOLNIE naprawił szkodę (w całości/znacznej
   zanieczyszczenie/odpady).
 - standardyprawa.pl — orzecznictwo, w tym problem zbiegu sankcji
   administracyjnej i karnej (ne bis in idem) przy przemieszczaniu odpadów.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu na wyraźne żądanie użytkownika —
-środowisko jako "jeden z powszechniejszych tematów". Zweryfikowano
-online: art. 181 (ochrona przyrody, 3 warianty), art. 182 (zanieczyszczenie,
-przepis centralny), art. 183 (odpady — najczęstsza podstawa
-odpowiedzialności przedsiębiorców), art. 184 (materiał promieniotwórczy),
-art. 185 (typ kwalifikowany, skutek śmiertelny), art. 186 (urządzenia
-ochronne), reformę 2022 r. (Dz.U. 2022 poz. 1726), mechanizm czynnego żalu
-(naprawienie szkody). Odnotowano NIEPEWNOŚCI: dokładna treść art. 187,
-188, 188a, dokładny wymiar kary art. 183 §1 i art. 184, oraz dokładny
-numer artykułu regulującego czynny żal (sekcja 8) — wszystkie oznaczone
-wprost do weryfikacji w ELI (RZĄD 1) przed użyciem w piśmie, zgodnie z ZASADA 13.

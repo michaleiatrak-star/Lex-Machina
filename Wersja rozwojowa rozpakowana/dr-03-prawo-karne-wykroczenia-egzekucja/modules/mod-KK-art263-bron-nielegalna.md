@@ -208,19 +208,3 @@ wyliczeniem konkretnej sprawy.
   handlowania, akty wykonawcze (ustawa o broni i amunicji 1999, ustawa
   o działalności gospodarczej w zakresie materiałów wybuchowych/broni
   2019), charakter formalny przestępstwa.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-("handel i nielegalny wyrób broni"). Zweryfikowano online: pełną treść
-art. 263 §1-4 KK, definicje wyrabiania/handlowania (§1) i posiadania
-(§2) z charakterem formalnym/bezskutkowym, KLUCZOWE pułapki
-kwalifikacyjne (broń gazowa = broń palna wg uchwały SN I KZP 39/03;
-broń alarmowa >6mm wymaga zezwolenia; istotne części broni/amunicji
-traktowane jak cała broń), zasadę "jednego czynu" dla długotrwałego
-posiadania, obligatoryjną karę finansową (min. 5000/10000 zł),
-orzecznictwo SN IV KK 420/19 (amunicja niezależnie od broni). Odnotowano
-niepewność co do dokładnej podstawy prawnej obligatoryjnej grzywny —
-oznaczoną do weryfikacji w ELI (RZĄD 1).

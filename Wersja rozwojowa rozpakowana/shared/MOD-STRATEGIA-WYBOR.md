@@ -356,21 +356,3 @@ PROPONOWANA STRUKTURA: SCENARIUSZ 2 — WARSTWOWA OBRONA A/B/C
 □ Wynik zapisany w MOD-HISTORIA-STRATEGII przed W1.3?
 Którykolwiek = NIE → uzupełnij przed W1.3.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-21) — Pierwsza wersja.
-  Przyczyna: brak obligatoryjnego mechanizmu oceny i rankingu ścieżek przed
-  wyborem jednej, zidentyfikowany w sesji VII P 94/25 (rozszerzenie powództwa).
-  System posiadał: MOD-WARIANTY-POZWU (generowanie kart, warunkowo aktywowany),
-  MOD-ATAK-NA-DRAFT (ocena po wyborze), MOD-RED-TEAM-WLASNY (ocena ram).
-  Brakowało: spójnego pipeline'u który obligatoryjnie ocenia WSZYSTKIE ścieżki
-  pod kątem ataku przeciwnika PRZED wyborem jednej, rankinguje je i rekomenduje
-  najsilniejszą — z zasadą, że ścieżka z atakiem 🔴 bez kontrargumentu nie może
-  być ścieżką główną.
-  Powiązane naprawy w tej samej sesji: PRE-W2-VERIFICATION-GATE.md (weryfikacja
-  podmiotów przed W2), aktualizacje SKILL.md pisma-procesowe-v3 i prawny-router-v3.
-```

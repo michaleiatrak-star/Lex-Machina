@@ -1,6 +1,6 @@
 {
   "name": "prawo-polskie-v2",
-  "version": "6.39",
+  "version": "6.41",
   "description": "Fasada routingu prawa polskiego: wybiera jeden z DR-01–DR-16 i przekazuje sprawę do właściwego skilla dziedzinowego; nie zawiera treści prawa materialnego.",
   "author": {
     "name": "Adrian Miłosz Kalinowski",

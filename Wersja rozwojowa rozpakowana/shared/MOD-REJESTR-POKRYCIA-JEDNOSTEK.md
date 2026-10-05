@@ -205,11 +205,3 @@ Raport końcowy dla użytkownika MUSI zawierać:
 | Trwałość | w kontekście tury/sesji (in-memory REJESTR) | plik na dysku, przetrwa kompaktowanie |
 | Pytanie, na które odpowiada | "czy ten dokument przeszedł wszystkie wymagane bramki?" | "czy wszystkie 160 kazusów mają faktyczne pokrycie?" |
 | Używane razem? | TAK — mogą współistnieć: RPK śledzi jednostkę-kazus, STEP-TRACKER może dodatkowo śledzić kroki wewnątrz rozwiązania jednej, szczególnie złożonej jednostki |
-
----
-
-## CHANGELOG
-
-**1.0.0 (2026-08-18):** Utworzenie modułu w odpowiedzi na incydent
-pominięcia kazusów 100, 140, 148 (i potencjalnie innych, niezidentyfikowanych)
-w sesji 160-kazusowej. Zarejestrowany w `shared/SKILL.md`.

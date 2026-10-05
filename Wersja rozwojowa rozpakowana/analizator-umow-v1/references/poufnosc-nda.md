@@ -345,24 +345,3 @@ WYNIK OGÓLNY:
 *Dla RODO/DPA przy danych osobowych → references/mod-shared-rodo.md (Moduł RODO)*
 *Dla routingu typów umów → references/mod-J0-routing.md (Moduł J — nawigacja)*
 *Prawo weryfikuj w ELI (RZĄD 1) · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*
-
----
-
-## CHANGELOG
-
-**2026-07-30:** Utworzono Moduł K (poufność/NDA) w toku zewnętrznej analizy
-porównawczej klauzul kontraktowych. Wypełnia lukę: system dotychczas nie miał
-dedykowanego modułu eksperckiego dla poufności, mimo że jest to klauzula niemal
-tak powszechna jak zakaz konkurencji (Moduł I), na wzór którego zbudowano
-strukturę (mapa prawna, test ważności, pułapki, checklista, szablon, scoring,
-złote zasady). Wprowadzono rozróżnienie dwóch podstaw ochrony (klauzula
-kontraktowa vs tajemnica przedsiębiorstwa z art. 11 UZNK) jako centralną
-zasadę modułu (K.1, Pułapka K-6) — nieobecne w źródłowym dokumencie
-porównawczym, który tego rozróżnienia nie zawierał. Zintegrowano z istniejącymi
-modułami: `mod-shared-economic.md` (OEK.3, OEK.3a, OEK.5, OEK.5a — kalkulacja
-kar i limitów), `mod-shared-rodo.md` (spójność terminów notyfikacji przy
-jednoczesnym DPA — Pułapka K-7). Wymaga integracji routingu w SKILL.md,
-mod-J0-routing.md i punktowych odesłań z innych modułów (b2b-podwykonawcze.md,
-mod-J6-it-konsorcjum.md, mod-FA-founders-dokumenty-zalozycielskie.md,
-mod-core-checklist.md, triage-szybki.md) — patrz wpisy w tych plikach z tą
-samą datą.

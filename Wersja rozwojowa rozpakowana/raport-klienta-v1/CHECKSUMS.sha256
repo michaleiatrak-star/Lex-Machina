@@ -1,9 +1,10 @@
-cf96843f08f8b0acf84a1e953e8c7221d82f1c394e07d33f63eea30d7e21265b  ./.claude-plugin/plugin.json
+0f55a8d854985ecffdcdae1eec3e5cf044719cabc2010352a65ca4d009727937  ./.claude-plugin/plugin.json
 f2935e6e60edd01ab9f8a2913d83530983955b19b9ae44823593bd78def3eb49  ./PORTABILITY-MANIFEST.md
-a4679a30cda00db7f0f56468569c23ebb74044da2f3745790d56322efcd4de55  ./SKILL.md
+a49605499f074fbf677a84d096f4ed8247708c711c3701b6e9a2dfba15bca367  ./SKILL.md
 4e70d8517ed806846674476e1e4c09d40eb0603b8088e9419094c0b15be86883  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
-2319033d4cf7b6ee93f404afeba91bc386f86263ecd9a18d238927d43fa21b32  ./references/BLUEPRINT-SCHEMA.md
-fd539676053af69f4d900509fb3ce5ea536517e7e9078838c4c5ae5f074e2d8f  ./references/CHANGELOG.md
+4ac4b2044d83c65e099273646f3c622e00ce936e70d956eb9ab9be00b8485801  ./assets/widget-raport-klienta.html
+e51f3bda399d2e1a7d2faf23d09f423d56f4dd15987d4dd4c8f3b1c985974fd5  ./references/BLUEPRINT-SCHEMA.md
+dc9d6ea49f2aac0014ed6b6a8f6126a7f7326b2d73fea39edae0b37fc5840cf6  ./references/CHANGELOG.md
 094fc35c71c401337eba026cf2e796b1f6fc2bd0ad250fa5ea5cb2b1b0391a65  ./references/jezyk-klienta.md
 29f6cc31b6c715aba10915abf5c76fb6682e32f033d5d2ab84cd62045c69626c  ./references/sekcje-biznesowe.md

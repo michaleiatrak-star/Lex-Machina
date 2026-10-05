@@ -1,6 +1,6 @@
 ---
 name: raport-klienta-v1
-version: "1.6"
+version: "1.7"
 type: ux-raport
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
@@ -66,19 +66,18 @@ raport-klienta-v1/
 
 ---
 
-## REGUŁA RENDEROWANIA — JEDYNA POPRAWNA METODA
+## REGUŁA RENDEROWANIA
 
-Raport dla klienta **ZAWSZE** renderuj przez `show_widget` z HTML (vanilla JS).
+Raport dla klienta renderuj szablonem `assets/widget-raport-klienta.html` przez `show_widget(path=…, data=DANE)` (KROK 5). Dane wyłącznie wg `references/BLUEPRINT-SCHEMA.md`.
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+## RENDEROWANIE BEZ POLA `data`
 
 ```
-NIE WOLNO:
-  ✗ używać present_files z plikiem .jsx (nie renderuje się w claude.ai)
-  ✗ używać cp, str_replace, bash do generowania tego widgetu
-  ✗ używać window.__INJECTED__ (mechanizm React/bundler, nie działa w show_widget)
-
-WOLNO TYLKO:
-  ✓ show_widget z widget_code zawierającym HTML + vanilla JS + CSS variables
-  ✓ dane sprawy jako literały JS wbudowane bezpośrednio w HTML
+1. visualize:read_me z modules=["interactive","mockup"] (raz na sesję)
+2. view raport-klienta-v1/assets/widget-raport-klienta.html → wpisz DANE w literał
+   po /* lex:dane */, resztę pliku bez zmian → show_widget(widget_code=<treść>)
+NIE WOLNO: present_files z .jsx, cp/str_replace/bash, window.__INJECTED__
 ```
 
 ---
@@ -346,10 +345,12 @@ KROK 4 — Przeanalizuj rozmowę → wyciągnij dane (BLUEPRINT-SCHEMA.md)
           W przeciwnym razie → wyciągnij bezpośrednio z historii rozmowy
           Sprawdź, czy istnieje poprzedni raport dla tej sprawy → wypełnij
           pole delta (patrz "ZMIANY OD OSTATNIEGO RAPORTU")
-KROK 5 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
-          (tylko jeśli nie załadowano w tej sesji)
-KROK 6 — Wywołaj show_widget z kompletnym HTML widgetu — struktura zależna
-          od trybu:
+KROK 5 — show_widget(path="raport-klienta-v1/assets/widget-raport-klienta.html",
+                      data=DANE, title="raport_klienta") — bez kodu; szablon sam
+          układa sekcje wg profile i tryb (struktura niżej), ma „Eksportuj PDF”
+          (window.print()); host dokłada pasek eksportu/importu.
+          Host bez pola `data` → § RENDEROWANIE BEZ POLA `data`.
+KROK 6 — Struktura sekcji (realizuje ją szablon):
           STANDARD, IND:  Delta (jeśli jest) | Sytuacja | Co dalej |
                           Potwierdzenie odbioru (jeśli wymagane) | Terminy | Kontakt
           STANDARD, BIZ:  Delta (jeśli jest) | Sytuacja | Ekspozycja finansowa |
@@ -360,7 +361,6 @@ KROK 6 — Wywołaj show_widget z kompletnym HTML widgetu — struktura zależna
           OGRANICZENIE_SZKOD: Wynik | Co jest zamknięte | Do rozliczenia |
                           Działania natychmiastowe | Ryzyka rezydualne |
                           (BIZ: rekomendacja końcowa + poufność)
-          + przycisk "Eksportuj PDF" → window.print()
 KROK 7 — Po wygenerowaniu: zaproponuj "Czy chcesz eksportować do PDF?"
 ```
 

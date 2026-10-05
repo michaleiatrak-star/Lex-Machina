@@ -249,25 +249,3 @@ TYLKO CZĘŚCIĄ wymogu, NIE całością
   ustawy o rachunkowości, ścieżka apelacyjna/kasacyjna).
 - gazetaprawna.pl — rozróżnienie dwóch form czynnego żalu w KK (art.
   15 — odstąpienie od usiłowania vs zapobieżenie skutkowi).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-21):** Utworzenie modułu na wyraźne żądanie użytkownika.
-Ustalono, że "samooskarżenie" NIE JEST odrębną, nazwaną instytucją
-polskiego prawa karnego — to potoczne określenie odnoszące się do
-JEDNEJ z trzech odrębnych instytucji (czynny żal / przyznanie się do
-winy / dobrowolne poddanie się karze), z jasnym rozróżnieniem CZASOWYM
-(przed vs po wykryciu/wszczęciu postępowania). W PEŁNI opracowano
-czynny żal w KK (art. 15 — dwie odrębne formy: odstąpienie od
-usiłowania vs zapobieżenie skutkowi) oraz — jako NAJCZĘŚCIEJ praktycznie
-istotny — czynny żal w KKS (art. 16-16a), z KLUCZOWYM ustaleniem
-zaskakującym dla wielu: czynny żal z ZASADY NIE jest tylko "samo-
-donosem", lecz WYMAGA (dla pełnej skuteczności) również ujawnienia
-współdziałających, oraz warunku uiszczenia należności w terminie.
-Rozróżniono art. 16 (ogólny, pełne zawiadomienie) od art. 16a (węższy,
-sama korekta deklaracji/księgi). Odnotowano, że temat był DOTĄD
-przywoływany jako hasło kontrolne w 9+ innych modułach systemu, BEZ
-rzeczywistej treści — ten moduł jest teraz CENTRALNYM punktem
-odniesienia dla wszystkich tych odesłań.

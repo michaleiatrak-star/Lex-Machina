@@ -1,6 +1,7 @@
-f1671ce4b73a4bd7d69e395a4edf7f55e11e28a748971102b4b6cc51757e131a  ./.claude-plugin/plugin.json
+acf9cbe46e42b62935290e18e1dc840128fc66145fece0d90161646069fc7c0e  ./.claude-plugin/plugin.json
 f3ea9eaa543e50296513c8c3fd8ae5506aea12eb189775f99bb382cd6ab260d4  ./PORTABILITY-MANIFEST.md
-2b3a392c69c8d5a832ef1f87910cf5a875b75c65fc525f28e8adfedcfbd98a49  ./SKILL.md
+6864d2788951c133830c7fa9990657b787b058281ffd85d9a07b34cbb5f718d1  ./SKILL.md
 64f72a9a283de348b6cade23f878b91fc93ae4ccc740de542d475fb6cf86347e  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
-860a80bd52d7c11a844e9e6f3775729c644ce05fdef34e4b671648d9a4fea931  ./references/CHANGELOG.md
+a1f641efca8a6aeb0b4921de13ce58a966dd1445bb086f32828fb10d02655ed6  ./assets/widget-raport-sytuacyjny.html
+2d878b27be93cb8135865a0954836f844bd983d912638e4e9d5e08e91005baea  ./references/CHANGELOG.md

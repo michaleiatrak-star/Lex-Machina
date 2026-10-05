@@ -185,17 +185,3 @@ TRIGGER AUTOMATYCZNY:
   □ Dokumenty rejestrowe z numerami identyfikacyjnymi
   □ Dokumenty tworzone przez pracodawcę/kontrahneta
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-23)
-Przyczyna: analiza porównawcza z konkurencyjnym systemem AI (sprawa VII P 94/25).
-Konkurencja wykryła: (1) REGON 14-cyfrowy w umowach HPG, (2) KRS/NIP cross-contamination
-w umowach 3-5, (3) rozbieżność adresu powoda Azot 21/31 vs 2A/31.
-Żadna z tych anomalii nie była wykryta przez system przed tym modułem.
-Efekt procesowy: każda anomalia Klasy I to gotowy argument "błąd pracodawcy nie szkodzi
-pracownikowi" — wbudowany w uzasadnienie pisma.
-```

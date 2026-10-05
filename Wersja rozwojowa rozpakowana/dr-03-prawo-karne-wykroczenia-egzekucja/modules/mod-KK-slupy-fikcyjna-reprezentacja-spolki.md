@@ -329,24 +329,3 @@ START: Czy osoba formalnie pełni funkcję (prezes/wspólnik) BEZ
   reprezentacji spółki kapitałowej i skutków wpisu w KRS.
 - apcz.umk.pl, wpia.uw.edu.pl (rozprawa doktorska K. Zych) — analiza
   akademicka art. 17 KSH i konstrukcji fałszywego organu.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu na wyraźne żądanie użytkownika.
-Ustalono, że korupcja (4 dedykowane moduły) i poplecznictwo (dodane
-2026-07-16) są JUŻ dobrze pokryte — potwierdzono i odesłano, bez
-duplikacji. Zbudowano od podstaw: Część A (odpowiedzialność karna
-"słupów" — współsprawstwo/pomocnictwo, rozbieżność orzecznictwa co do
-świadomości, konsekwencje finansowe, kontrast z odpowiedzialnością
-rzeczywistego decydenta jako sprawcy kierowniczego/polecającego,
-powiązanie z KSH) i Część B (fikcyjna reprezentacja spółki —
-rozróżnienie falsus procurator/fałszywy organ, mechanizm bezskuteczności
-zawieszonej z możliwością potwierdzenia nawet z mocą wsteczną, ochrona
-kontrahenta przez wpis w KRS, zbieg z odpowiedzialnością karną).
-Zweryfikowano online: SN III CSK 33/13, art. 103 KC, art. 39 KC, art. 17
-KSH. Odnotowano niepewność: dokładny zakres ochrony kontrahenta przez
-wpis w KRS przy rzeczywistym braku umocowania (sporne, bogate
-orzecznictwo) oraz zastosowanie art. 244 KK przy obejściu zakazu
-sądowego przez słupa — obie kwestie oznaczone do dalszej weryfikacji.

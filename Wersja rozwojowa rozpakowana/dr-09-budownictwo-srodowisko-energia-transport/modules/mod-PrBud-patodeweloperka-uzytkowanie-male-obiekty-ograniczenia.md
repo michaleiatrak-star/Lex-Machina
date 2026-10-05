@@ -362,27 +362,3 @@ teren może być OSZP nawet jeśli plan tego wprost nie precyzuje.
 - rp.pl, muratorplus.pl, kancelariasznajder.pl (2×), wodnoprawne.pl,
   ongeo.pl — obszary szczególnego zagrożenia powodzią, art. 77 Prawa
   wodnego, procedura zwolnienia z zakazu.
-
----
-
-## CHANGELOG
-
-**1.1 (2026-10-04):** Część B — alert o utracie mocy rozp. WT z 2002 r.
-z upływem 19.09.2026 (art. 66 ustawy o dostępności, 84 mies.) i o
-reżimie przejściowym art. 102a–102c PrBud dodanym ustawą Dz.U. 2026
-poz. 1161; pozycja w checkliście. RZĄD 1 (ELI), 2026-10-04.
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne żądanie użytkownika
-(nielegalna budowa, zmiana przeznaczenia budynku, patodeweloperka,
-niewielkie obiekty inżynieryjne, linie wysokiego napięcia, strefa
-powodziowa). Zweryfikowano online: pełną procedurę zmiany sposobu
-użytkowania (art. 71/71a), reformę "antypatodeweloperską" 2024 z
-konkretnymi parametrami (odległości, tereny zielone), rozszerzone
-zwolnienia z pozwolenia na budowę (domy do 70 m², reforma 2022), strefy
-ochronne linii wysokiego napięcia (z zastrzeżeniem braku jednolitego
-przepisu ustawowego — zależność od MPZP/norm operatora), obszary
-szczególnego zagrożenia powodzią (art. 77 Prawa wodnego, zakazy,
-procedura zwolnienia). Odnotowano niepewności: status projektu minimalnej
-powierzchni lokalu użytkowego (25 m² — może nie wejść w życie w tej
-formie), dokładny wymiar konsekwencji dalszego użytkowania mimo
-wstrzymania (art. 71a) — oznaczone do weryfikacji w ELI (RZĄD 1).

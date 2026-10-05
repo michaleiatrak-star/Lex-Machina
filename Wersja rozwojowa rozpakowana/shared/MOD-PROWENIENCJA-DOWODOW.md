@@ -439,19 +439,3 @@ NA ŻĄDANIE:
 □ PR5: dla każdego P! — konkretny wniosek dowodowy (art. 248 / biegły)?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-24) — Pierwsza wersja.
-Przyczyna: system nie miał mechanizmu wykrywania wspólnego źródła i proweniencji
-dowodów. MET-NET (MOD-METODY-BADAWCZE) mapuje relacje podmiotów, nie
-łańcuchy źródłowe dokumentów. MP6-sledczy (analizator-dowodow-v3) zawiera
-OSINT i HUMINT, ale bez systematycznej taksonomii typów proweniencji i procedury
-skanowania par D-NNN. Moduł implementuje DTA Warstwę 4 (Pochodzenie faktu) jako
-standard systemowy dostępny dla analizatora, pism procesowych i MP6.
-Taksonomia: 7 typów (SYS/KOM/ZAW/AUT/URZ/LIN/CHAIN), 4 klasy konsekwencji
-(P+/P-/P0/P!), procedura PR1-PR5 z integracją DTA-ID-MODE i BLOK-KONSEKWENCJE.
-```

@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.21"
+version: "2.23"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -57,7 +57,7 @@ wyszukiwaniem orzeczeń, wskaźnikiem pokrycia przesłanek i systemem alertów.
 
 ## Widget interaktywny
 
-Uruchom widget opisany w `references/widget.md`.
+Uruchom widget: szablon zasilany danymi `assets/widget-orzeczenia.html` albo kod z `references/widget.md` (warianty niżej).
 
 Widget zawiera 5 zakładek:
 - **Profil ryzyka** — alerty wstępne dla sprawy w trybie laik lub prawnik
@@ -67,6 +67,27 @@ Widget zawiera 5 zakładek:
 - **Raport** — wskaźnik pokrycia, ocena linii orzeczniczej, kolejność powołania
 
 Przełącznik **LAIK / PRAWNIK** w nagłówku zmienia język alertów, tez i rekomendacji jednocześnie we wszystkich zakładkach.
+
+Widget wywołujesz **dwukrotnie:**
+- przed wyszukiwaniem — z danymi Fazy 0-A i 0-B, komunikat „Trwa wyszukiwanie…" w zakładkach Orzeczenia i Raport
+- po wyszukiwaniu — z kompletnymi danymi wszystkich faz
+
+### Szablon zasilany danymi (host z `show_widget` przyjmującym `data`)
+
+`show_widget(path="orzeczenia-sadowe-v2/assets/widget-orzeczenia.html", data=DANE)` — bez kodu; host wstawia dane i dokłada pasek eksportu. DANE (pola opcjonalne można pominąć):
+```
+tytul, tryb: laik|prawnik, etap: wyszukiwanie|wynik
+ryzyko: [{poziom: high|mid|low, laik, prawnik}]                         — Faza 0-A
+przeslanki: {przepis, instytucja, jurysdykcja, lista: [{tresc, ciezar, pokrycie 0–100, stan: ok|warn|gap}]}
+orzeczenia: [{sygnatura, kategoria: 6A|1|2|3A|3B|4|5|6|7, sad, teza_laik, teza_prawnik,
+              przeslanki (Zasada 11), url, alerty: [{typ: old|conflict|law|eu|nurl|zp, laik, prawnik}]}]
+bilans: {ocena: bad|mid|good, zgodne, przeciwne, neutralne, laik, prawnik, przeciwne_sygnatury: [{sygnatura, teza}]}
+ocena: {laik, prawnik}; kolejnosc: [{sygnatura, dlaczego}]; jurysdykcja_zagraniczna
+```
+Zasady treści (status źródeł, linia przeciwna, Zasada 11) — bez zmian; dane to wyłącznie wyniki Faz 0–4.
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+### Kod widgetu i pasek IO (host bez pola `data`)
 
 Kod widgetu: patrz `references/widget.md` — wklej jako argument `widget_code` narzędzia
 `show_widget`, podstawiając dane konkretnej sprawy w miejsca oznaczone `<!-- DANE: ... -->`.
@@ -79,10 +100,6 @@ view shared/MOD-WIDGET-IO.md
 → matryca: Export JSON ✅ MD ✅ | Import JSON —
 → w obu wywołaniach (przed i po wyszukiwaniu): pasek IO obecny
 ```
-
-Widget wywołujesz **dwukrotnie:**
-- przed wyszukiwaniem — z danymi Fazy 0-A i 0-B, komunikat „Trwa wyszukiwanie…" w zakładkach Orzeczenia i Raport
-- po wyszukiwaniu — z kompletnymi danymi wszystkich faz
 
 ---
 
@@ -744,6 +761,7 @@ Brak pola pełnotekstowego w danym portalu → wróć do strategii Fazy 1 (fraza
 
 ---
 
+<!-- lex:wczytaj-gdy: ZAMOWIENIA-PUBLICZNE -->
 ## Faza 1-K — Orzecznictwo KIO / zamówienia publiczne (PZP)
 
 Stosuj gdy sprawa dotyczy zamówień publicznych: odwołanie do KIO, skarga na

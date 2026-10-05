@@ -361,26 +361,3 @@ KROK 4 — Czy zagrożenie ma charakter wojenny lub godzi w porządek
   rygory art. 31 ust. 3 Konstytucji w pełni obowiązywały" jako gotowa
   podstawa zarzutu przy kwestionowaniu aktów wykonawczych z okresów
   kryzysowych (nie tylko COVID — mechanizm jest uniwersalny).
-
----
-
-## CHANGELOG
-
-**1.1 (2026-07-17):** Wpięto zweryfikowaną linię orzeczniczą SN (II KK 74/21,
-II KK 64/21, II KK 97/21, II KK 122/21 — wszystkie z 16.03.2021/14.04.2021)
-do sekcji 4.1: brak podstawy ustawowej dla ograniczeń covidowych. Weryfikacja:
-sn.pl (baza orzeczeń), bip.brpo.gov.pl (pełny tekst), inforlex.pl. Dodano
-zastrzeżenie rozróżniające tę linię od generycznego odesłania do "dyskrecji
-RM" (S. Czarnow) — inna sygnatura, do odrębnej weryfikacji.
-
-**1.0 (2026-07-17):** Utworzenie modułu na wniosek użytkownika (rozbudowa
-rodziny modułów DR-01 o prawo międzyczasowe/kolizyjne o sytuacje kryzysowe:
-klęski żywiołowe, katastrofy, epidemie). Zweryfikowano online: Rozdział XI
-Konstytucji (art. 228-234), ustawa o stanie klęski żywiołowej (t.j. Dz.U.
-2025 poz. 112), ustawa o zarządzaniu kryzysowym (t.j. 2026, dokładny numer
-do potwierdzenia), nowa ustawa o ochronie ludności i obronie cywilnej
-(Dz.U. 2024 poz. 1907, w życie 1.01.2025 — NIE zastępuje poprzednich
-aktów, współistnieje), ustawa o zapobieganiu chorobom zakaźnym (art.
-46/46a/46b), doktrynalna kontrowersja COVID-19 (Czarnow, Palestra 6/2020
-i 9/2020, Temidium). Zarejestrowano w `CHECKLIST-DEDUP.md` — bez
-duplikacji z `mod-specustawy...` (katalog specustaw pozostaje tam).

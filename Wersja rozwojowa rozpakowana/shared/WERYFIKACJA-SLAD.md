@@ -2,23 +2,11 @@
 
 > **Plik:** `shared/WERYFIKACJA-SLAD.md`
 > **Wersja:** 1.8 (2026-09-22) — F-194: drugi precedens NSA (I OSK 590/26, 🟨 bez awansu), GRAD-3b-SYM (flaga symbolu CBOSA) i KALIBRACJA-PRZECIWNIK (wadliwe powołania przeciwnika ≠ argument merytoryczny).
-> **Wersja poprzednia:** 1.7 (2026-09-14) — dodano provenance kanału (`access_mode`) niezależne od statusu ✅/⚠️; snapshot/crawler nie tworzy piątego statusu i sam nie uprawnia do ✅ [VER].
-> **Wersja wcześniejsza:** 1.6 (2026-08-27) — dodano REJESTR POKRYCIA WERYFIKACJI (RPW):
->              checkpoint obowiązkowy przy ≥8 powołaniach, zamykający lukę
->              "cichego pominięcia" pozycji bez błędu sieciowego — zgłoszone
->              przez użytkownika po sesji, w której odpowiedź z wieloma
->              przepisami (art. 249, 249a, 258, 257, 259, 156 §5a, 460, 463,
->              73, 178a KK — 10 powołań) nie wskazała, do którego momentu
->              sięgała weryfikacja ani co pozostało nieobjęte (patrz CHANGELOG)
 > **Wersja:** 1.4 (2026-07-15b) — dodano obowiązkową kategoryzację RZĄD
 >              (odesłanie do `shared/HIERARCHIA-ZRODEL.md`) przy każdej
 >              kotwicy tekstowej i w tabeli śladu — zgłoszone przez
 >              użytkownika po incydencie: link 🔗 podany bez kategoryzacji
 >              źródła (patrz CHANGELOG)
-> **Wersja poprzednia:** 1.3 (2026-07-15) — dodano KOTWICA-TEKSTOWA (Text Fragment):
->              link bezpośredni do konkretnego zdania w źródle, na wniosek
->              użytkownika po teście mechanizmu cytowania w rozmowie
->              (patrz sekcja niżej + CHANGELOG na końcu pliku)
 > **Wersja 1.2** (2026-07-05b) — naprawa luki "cytat na poparcie tezy bez
 >              parafrazy" (NSA I FZ 104/26) + GUARD INSTYTUCJA/PRZEDMIOT dla
 >              orzeczeń anonimizowanych (adm./karne)
@@ -597,101 +585,3 @@ Tryb awaryjny NIE oznacza pominięcia disclaimera — DISCLAIMER.md stosuje się
        RPW-CHECKPOINT na końcu odpowiedzi. Brak checkpointu = WARN, ten
        sam poziom co brak kategoryzacji RZĄD.
 ```
-
----
-
-## CHANGELOG
-
-**1.6 (2026-08-27) — DODANO: REJESTR POKRYCIA WERYFIKACJI (RPW):**
-- Zgłoszenie użytkownika: w odpowiedzi z 10 powołaniami KPK/KK (analiza
-  kazusów o tymczasowym aresztowaniu) nie było widoczne, do którego
-  momentu sięgała faktyczna weryfikacja i co ewentualnie zostało pominięte
-  — mimo że każdy przepis osobno miał swój ślad, brakowało ZBIORCZEGO
-  podsumowania zasięgu. Zapytanie: "aparat znakowania jest kluczowy, gdyż
-  wskazuje czy nie jest to halucynacja, skąd inaczej użytkownika ma to
-  wiedzieć?" — trafna uwaga o potrzebie widocznego checkpointu, nie tylko
-  znaczników per-element.
-- Rozpoznana luka: KROK W-4 chroni przed serią błędów sieciowych (≥3
-  nieudane z rzędu), nie przed cichym pominięciem pozycji bez błędu —
-  inny mechanizm, inna przyczyna, wymaga osobnej bramki.
-- Naprawa: nowa sekcja RPW (próg ≥8 powołań, RPW-INIT/COMMIT/CHECKPOINT/
-  RESUME, analogiczna do `MOD-REJESTR-POKRYCIA-JEDNOSTEK.md`), kolumna
-  `Nr` w tabeli śladu, 3 punkty w SELF-CHECK, rozszerzenie reguły 14
-  routera.
-- ⚠️ **Ograniczenie znane i jawne (ten sam typ, co przy `KROK 3A` routera
-  i `AUDIT-CLAIM-GATE` w audyt-systemu-v4):** RPW-CHECKPOINT jest
-  deklaracją modelu, nie dowodem niezależnie sprawdzalnym przez drugą
-  osobę. Wiarygodność checkpointu rośnie tylko o tyle, o ile pozycje w
-  nim wymienione dają się zweryfikować (mają URL/źródło przy sobie) —
-  sam fakt istnienia wiersza "RPW-CHECKPOINT: X/Y" nie jest silniejszym
-  dowodem niż dowolna inna samo-deklaracja. Skuteczność tej bramki (czy
-  faktycznie zmienia zachowanie, a nie tylko dodaje tekst) wymaga testu
-  analogicznego do F-113, nie jest tu domyślnie zakładana.
-- Wersja 1.5 → 1.6.
-
-**1.5 (2026-07-15c) — SCALENIE: KOTWICA-TEKSTOWA przeniesiona do shared/PRAWO-HARDGATE.md:**
-- Wykryto: mechanizm KOTWICA-TEKSTOWA (Text Fragment `#:~:text=`) powstał
-  tutaj 2026-07-15 niezależnie od KROK 5A w `shared/PRAWO-HARDGATE.md`,
-  dodanego TEGO SAMEGO DNIA — dwie osobne implementacje tego samego
-  problemu (link do konkretnego miejsca w źródle) w dwóch plikach shared/.
-  Zgłoszone przez użytkownika po incydencie: odpowiedź z modułu karnego
-  (dr-03) nie zastosowała żadnej z dwóch wersji.
-- Naprawa: pełna treść (Text Fragment, KT-1→KT-4, RZĄD, zastrzeżenie
-  o przeglądarkach, FALLBACK) przeniesiona do `PRAWO-HARDGATE.md` KROK 5A
-  (2.2→2.3), scalona z istniejącą tam treścią o numerach strony/tezy/
-  nagłówka. Ten plik zachowuje wyłącznie krótkie odesłanie w miejscu
-  dawnej pełnej sekcji, plus poprawione odesłania w GRADIENCIE i KROK W-3b
-  (dotąd wskazywały "patrz wyżej" na treść, która po scaleniu już tu nie
-  jest pełna).
-- Ten plik (WERYFIKACJA-SLAD.md) pozostaje kanoniczny dla: znaczników
-  ✅/⚠️ [VER/NIEWERYFIKOWANE], GRADIENTU (ISTNIENIE/TREŚĆ/FRAGMENT),
-  formatu tabeli śladu, SVG (usuwanie znaczników z dokumentów finalnych).
-  `PRAWO-HARDGATE.md` jest kanoniczny dla: samego mechanizmu kotwicy
-  (jak zbudować link), niezależnie od tego, który plik ustala WYMÓG
-  jej zastosowania.
-- Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis
-  AUDYT-2026-07-15c.
-- Wersja 1.4 → 1.5.
-
-**1.4 (2026-07-15b):**
-- **Naprawa: brak obowiązkowej kategoryzacji RZĄD przy linkach.** Zgłoszone
-  przez użytkownika: w poprzedniej turze podano link 🔗 (kotwica tekstowa)
-  bez kategoryzacji źródła wg hierarchii RZĄD 1/2A/2B/3 — mechanizm ten
-  istniał już w systemie, ale wyłącznie lokalnie w `analizator-przepisow-v2`
-  i nie był ładowany/wymuszany w kontekście tego pliku ani w odpowiedziach
-  generowanych poza tym skillem.
-- **Naprawa systemowa (nie punktowa):** hierarchia źródeł wydzielona do
-  nowego kanonicznego pliku `shared/HIERARCHIA-ZRODEL.md`, współdzielonego
-  przez ten plik, `shared/PRAWO-HARDGATE.md` i `analizator-przepisow-v2`
-  (który teraz się do niego odsyła zamiast duplikować treść).
-- Dodano wymóg RZĄD do sekcji KOTWICA-TEKSTOWA (kategoryzacja OBOK 🔗,
-  nie zamiast), do formatu śladu weryfikacji i do SELF-CHECK.
-- Wersja 1.3 → 1.4.
-
-**1.3 (2026-07-15):**
-- Dodano sekcję **🔗 KOTWICA-TEKSTOWA (Text Fragment)** — na wyraźne życzenie
-  użytkownika, po tym jak w rozmowie przetestowano ręcznie skonstruowany link
-  `#:~:text=...` i porównano go z natywnym mechanizmem cytowania Claude
-  (tag `` z indeksem dokument-zdanie). Ustalono, że to dwa różne
-  mechanizmy: natywne cytowanie jest weryfikowalne wewnątrz rozmowy, ale nie
-  gwarantuje przewinięcia żywej strony po kliknięciu; Text Fragment adresuje
-  właśnie ten drugi przypadek, kosztem braku gwarancji (przeglądarka, trwałość
-  treści strony).
-- Nowy znacznik `🔗 [KOTWICA-TEKSTOWA: URL#:~:text=…]` w tabeli statusów —
-  TOWARZYSZY dotychczasowym ✅/🟢, nie zastępuje ich. Poziom weryfikacji
-  (ISTNIENIE/TREŚĆ/FRAGMENT) nadal ustala WYŁĄCZNIE GRADIENT.
-- Nowy krok **KT-1→KT-4** (procedura konstrukcji) oraz **KROK W-3b** w
-  sekwencji obowiązkowej — kotwica tekstowa musi być budowana w tej samej
-  odpowiedzi co web_fetch/web_search źródła, nie doklejana post factum bez
-  ponownego odczytu.
-- Rozszerzony SELF-CHECK o dwa punkty kontrolne dla KOTWICA-TEKSTOWA.
-- Zastrzeżenie obowiązkowe wprowadzone jako twardy wymóg: ZAKAZ prezentowania
-  linku jako gwarantowanego — zawsze z zastrzeżeniem o wsparciu przeglądarek
-  (Chromium tak, Safari/Firefox nie gwarantowanie) i możliwej dezaktualizacji
-  treści strony źródłowej.
-- Dodano **FALLBACK** (na wyraźne życzenie użytkownika): gdy konstrukcja
-  kotwicy tekstowej zawodzi (fragment za długi/nieregularny, treść z PDF-a,
-  brak pewności unikalności dopasowania) → nie twórz jej "na siłę", podaj
-  wyłącznie zwykły link do strony źródłowej, bez znacznika 🔗, z wyraźną
-  adnotacją że to link do strony, nie do fragmentu.
-- Wersja 1.2 → 1.3.

@@ -229,24 +229,3 @@ POWIĄZANIE proceduralne między pieczą zastępczą a systemem adopcyjnym
   ogólnokrajowa stawka sztywna.
 - infor.pl — praktyczny przegląd rodzajów rodzin zastępczych, historia
   reformy 2012.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("opieka zastępcza"). Zweryfikowano online: pełną strukturę systemu
-pieczy zastępczej (rodzinna: spokrewniona/niezawodowa/zawodowa w 3
-wariantach/rodzinny dom dziecka/rodzina pomocowa; instytucjonalna),
-procedurę umieszczenia dziecka (orzeczenie sądu, rola PCPR, zasada
-nierozdzielania rodzeństwa nawet transgranicznie), współpracę z
-ośrodkiem adopcyjnym. Dodano KLUCZOWE rozgraniczenie od przysposobienia
-— piecza zastępcza to opieka CZASOWA z zachowaniem więzi prawnej z
-rodziną biologiczną, przysposobienie to trwała zmiana statusu prawnego
-— z wyjaśnieniem, że rodzina zastępcza SPOKREWNIONA (dziadkowie,
-wujostwo) to prawdopodobnie to, co użytkownik miał na myśli mówiąc o
-"adopcji przez rodzinę", choć precyzyjnie to ODRĘBNA instytucja (opieka,
-nie adopcja). Odnotowano niepewności: dokładne kryteria kwalifikacyjne
-kandydatów na rodzinę zastępczą, szczegóły formy instytucjonalnej,
-dokładny limit dzieci w rodzinnym domu dziecka — oznaczone do dalszej
-weryfikacji.

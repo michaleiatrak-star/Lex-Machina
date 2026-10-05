@@ -165,21 +165,3 @@ dwóch systemów kar mimo podobnych rzędów wielkości kwot.
   unieważnienia umowy (art. 459).
 - ekomentarzpzp.uzp.gov.pl — komentarz do art. 596 (katalog organów
   kontroli, norma kolizyjna).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu — priorytet z audytu pokrycia
-PZP. Zweryfikowano online: dwa rodzaje kontroli (doraźna, uprzednia)
-z progiem 20 mln EUR dla robót budowlanych przy kontroli uprzedniej,
-kluczowe ograniczenie zakresu kontroli (WYŁĄCZNIE zgodność z przepisami,
-NIE gospodarność/celowość/rzetelność — rozgranicza od NIK), trzy możliwe
-działania Prezesa UZP po stwierdzeniu naruszenia (kara pieniężna,
-wystąpienie o unieważnienie umowy z 4-letnim terminem zawitym,
-zawiadomienie rzecznika dyscypliny finansów publicznych), wysokość kar
-(3000-150000 zł), katalog innych organów kontroli (art. 596) i norma
-kolizyjna. Odnotowano niepewność: dokładna tabela progów kar w zależności
-od wartości zamówienia, dokładny próg dla dostaw/usług przy kontroli
-uprzedniej, termin na zastrzeżenia zamawiającego — wszystkie oznaczone
-do weryfikacji w ELI (RZĄD 1).

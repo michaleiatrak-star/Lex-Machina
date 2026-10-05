@@ -285,29 +285,3 @@ ATAK-TYP-06: "Zarzut nowy — prekluzja procesowa"
 ATAK-TYP-07: "Brak interesu w zaskarżeniu"
   → Kontratak: gravamen — wyrok niekorzystny dla skarżącego w konkretnym zakresie
 ```
-
----
-
-## 8. Historia zmian
-
-```
-1.1.0 (2026-06-21) — Dodano krok D5: analiza własnych słabości i ryzyk
-                      prawnych (RP), dowodowych (RD) i procesowych (RPC).
-                      D5 wypełnia lukę między D2 (atak przeciwnika) a D4
-                      (luki dowodowe): patrzy oczami WŁASNEJ STRONY i SĄDU,
-                      nie pełnomocnika pozwanej. Zaktualizowano RAPORT D
-                      o sekcję D5. Zaktualizowano sekwencję w integracji
-                      (D1→D2→D3→D5→D4). Zaktualizowano SKILL.md
-                      pisma-procesowe-v3 W2.4 o krok D5.
-                      Naprawa ZASADY 7: dostarczono pełne ZIPy obu skilli
-                      (pisma-procesowe-v3 + shared) zamiast luźnych plików.
-
-1.0.0 (2026-06-21) — Pierwsza wersja. Utworzony po wykryciu błędu: krok W2.4
-                      był opisany w pisma-procesowe-v3/SKILL.md (linia 569-589)
-                      ale plik kanoniczny nie istniał w shared/ — co powodowało
-                      pominięcie kroku przez model bez sygnalizacji błędu.
-                      Root cause: odesłanie do nieistniejącego pliku nie powoduje
-                      błędu wykonania, tylko ciche pominięcie view().
-                      Naprawa: (1) utworzenie tego pliku, (2) wzmocnienie ZAKAZU
-                      w SKILL.md W2.4 z explicit linią blokującą przejście do W3.
-```

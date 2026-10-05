@@ -349,20 +349,3 @@ STOP PO PK7:
   Wyświetl rejestr [A]–[E] jako CHECKPOINT PK.
   Czekaj na zatwierdzenie przed W1.3.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-23) — Pierwsza wersja. Moduł uniwersalny.
-Przyczyna: analiza porównawcza pisma generowanego (AI) vs pisma poprawionego
-przez użytkownika w sprawie VII P 94/25 — wersja poprawiona zawierała:
-(1) tabele graniczne HP→HPG z konkretnymi datami i kandydatami,
-(2) walory procesowe 1/2/3 dla osobistego aktu Prezesa,
-(3) antycypację zarzutów w 4 miejscach uzasadnienia,
-(4) ścieżkę alternatywną art. 23¹ KP + art. 25¹ §3 KP,
-(5) walor "przyznania" z dokumentów złożonych przez pozwaną.
-System wydobywał tylko Warstwę 1. Ten moduł wymusza Warstwy 2 i 3.
-Charakter: UNIWERSALNY — nie ograniczony do spraw pracowniczych.
-```

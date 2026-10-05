@@ -662,23 +662,3 @@ KROK NG6 — INTEGRACJA:
 □ NG5: raport negacji wygenerowany i dostępny w dashboardzie?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-24) — Pierwsza wersja.
-Źródła: art. 6 KC, art. 229-234 KPC, art. 233 §2 KPC (Dz.U. 2026 poz. 468).
-Linia orzecznicza: SN IV CSK 669/15; I BP 6/14; II CSK 621/13; SA Katowice
-I ACa 677/14; SAOS IX GC 292/20; SA Lublin I ACa 206/20.
-Porównawcze: probatio diabolica (CC fr. art. 1353); FRCP 37(e) spoliation.
-12 technik negacji (N1-N12): gołosłowne zaprzeczenie, twierdzenie o nieistnieniu
-faktu pozytywnego, twierdzenie o nieistnieniu elementu prawnego, ogólnikowe
-zaprzeczenie, atak na autentyczność, odmowa przedłożenia dokumentu, zarzut
-braku formy, atak na świadka, zarzut prekluzji, cherry-picking, antycypacja
-zarzutu przez immunizację, spoliation.
-Integracja: BLOK-NEGACJA w analizator-dowodow-v3 (auto-trigger); MP4 §4.3
-(typ N1-N12 per atak); RAPORT D §D2 (riposta minimalna); MOD-MACIERZ-DOWOD-TEZA
-(luki → podatność na N-techniki); BLOK-PROWENIENCJA P! → N5 autowyzwalacz.
-```

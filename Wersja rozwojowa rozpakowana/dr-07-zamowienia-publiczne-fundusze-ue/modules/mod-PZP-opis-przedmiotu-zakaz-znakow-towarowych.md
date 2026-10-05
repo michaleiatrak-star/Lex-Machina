@@ -211,20 +211,3 @@ siebie.
   kompatybilność).
 - gov.pl/attachment (UZP) — "Opis przedmiotu zamówienia w świetle
   kontroli Prezesa UZP i orzecznictwa KIO".
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-18):** Utworzenie modułu na wyraźne, precyzyjne pytanie
-użytkownika o zakaz wskazywania producenta i próby obchodzenia przez
-dokładną specyfikację. Zweryfikowano online: pełną treść art. 99 ust.
-4-5 (zakaz + wyjątek z warunkami łącznymi), zasadę naruszenia
-POŚREDNIEGO przez dobór parametrów (kluczowa odpowiedź na pytanie),
-wskazówkę TSUE o proporcjonalności szczegółowości opisu, oraz WAŻNE
-rozróżnienie: sam fakt, że tylko jeden producent spełnia specyfikację,
-NIE WYSTARCZA do stwierdzenia naruszenia — kluczowy jest test obiektywnego
-uzasadnienia/intencji, nie tylko skutek. Dodano checklist analityczny
-i katalog dowodów praktycznych stosowanych przed KIO. Odnotowano
-niepewność: dokładna treść art. 99 ust. 6 (obowiązki przy zastosowaniu
-wyjątku) — oznaczona do weryfikacji w ELI (RZĄD 1).

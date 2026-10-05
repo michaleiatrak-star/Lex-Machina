@@ -472,31 +472,3 @@ sprawdzić przy sprawie przez `dr-05`.
    2a-2d, art. 39 i art. 59 ust. 3 z tego punktu — **NIETKNIĘTE**,
    pozostają do kolejnej tury; uruchomić `orzeczenia-sadowe-v2` dla
    wszystkich czterech wątków łącznie, zamiast pojedynczych web_search.
-
----
-
-## CHANGELOG
-
-- **2026-08-16f** — utworzenie modułu. Naprawa kolejnego punktu
-  priorytetowego flagi **F-91**: Rozdz. 6 Prawa łowieckiego (art. 32–35a
-  **oraz 32b**), w całości, artykuł po artykule. Metoda wg wniosku z sesji
-  16e: strona ROZDZIAŁU w lexlege.pl, jeden `web_fetch`.
-  ⭐ **Odkrycie:** **art. 32b** (PZŁ jako podmiot ochrony ludności) — przepis
-  spoza opisu zakresu rozdziału („32–35a") i nieobecny w listach artykułów
-  u części dostawców; źródło ustalone (ustawa z 5.12.2024, Dz.U. 2024
-  poz. 1907, w życie 1.01.2025), akt potwierdzony jako JUŻ SKATALOGOWANY
-  w systemie (dr-01, dr-08, dr-13) — nie jest to luka rejestrowa klasy F-89.
-  ⭐ **Odkrycie:** art. 33 ust. 2a–2d — odpowiedzialność PZŁ za zobowiązania
-  odszkodowawcze koła (subsydiarna przy likwidacji, SOLIDARNA przy uchybieniu
-  terminom) z regresem do członków zarządu koła; bezpośrednio uzupełnia
-  moduł szkód łowieckich, wcześniej nieopisane.
-  ⭐ **Ustalenie ustrojowe:** Zarząd Główny i zarządy okręgowe są POZA limitem
-  dwóch kadencji z art. 32a ust. 2; Łowczy Krajowy pochodzi z nominacji
-  ministra, nie z wyboru.
-  ⭐ **Sprzężenie z Rozdz. 6a:** art. 33c ust. 1 pkt 2 — każde ukaranie
-  dyscyplinarne wyklucza z organów, co wzmacnia argument z K 21/11
-  (skutek nie jest wyłącznie wewnątrzorganizacyjny).
-  Odnotowano rozbieżność opisu zakresu rozdziału wobec jego rzeczywistej
-  treści (art. 32b), analogicznie do braku art. 35q w Rozdz. 6a.
-  7 punktów ⚠️ NIEWERYFIKOWANE zamiast zgadywania; zero sygnatur powołanych
-  bez weryfikacji. Pozostaje otwarte w F-91: Rozdz. 7, 1–4, 11 (dr-09).

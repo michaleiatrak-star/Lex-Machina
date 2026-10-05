@@ -311,18 +311,3 @@ Sprawa dot. lasu/pola/ogrodu (kradzież drewna/gałęzi, uszkodzenie upraw,
 - Studia Prawnicze 2019 nr 2 — kontekst doktrynalny obyczajności na
   gruncie Rozdziału XVI.
 - standardyprawa.pl — orzecznictwo do art. 148, 150, 158 KW.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — DOMKNIĘCIE pokrycia części
-szczególnej KW na wyraźne żądanie użytkownika ("czy kwestie KW zostały
-już pokryte? Uzupełniaj je"). Zweryfikowano online: art. 133-134 (Rozdz.
-XV), art. 140-142 w pełni (Rozdz. XVI, w tym pogłębiona wykładnia art. 140
-z literatury naukowej), art. 143-145 częściowo (Rozdz. XVII), art. 146-147a
-częściowo (Rozdz. XVIII), art. 148-150 w pełni (Rozdz. XIX, początek).
-Odnotowano UCZCIWIE, że ten moduł ma WIĘCEJ niepewności niż poprzednie —
-Rozdział XIX w szczególności (art. 151-166, ok. 16 artykułów) NIE został
-zbadany ze szczegółowością porównywalną do wcześniejszych modułów —
-oznaczony jako wymagający odrębnego opracowania przy konkretnej sprawie.

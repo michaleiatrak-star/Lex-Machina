@@ -5,6 +5,8 @@
   (TRYB B, KROK B1/B3) ale fizycznie nie istniał na dysku — CRIT wg
   audyt-systemu-v4 FAZA 2A (martwe odwołanie).
 
+     Literał danych ma przed sobą komentarz „lex:dane”: host obsługujący show_widget z polem `data`
+     (Lex Machina) wstawia dane sam — wtedy przekaż tylko `path` i `data`, nie przepisuj szablonu.
   UWAGA: to jest SZABLON/DOKUMENTACJA STRUKTURY — NIE kopiuj 1:1 do
   show_widget. Przy realnym wywołaniu TRYB B:
     1. wywołaj visualize:read_me z modules=["interactive","mockup"],
@@ -26,7 +28,7 @@
   // ============================================================
   // PRZYKŁADOWE DANE — ZASTĄP rzeczywistymi danymi sprawy przy realnym użyciu
   // ============================================================
-  const SAMPLE_DATA = {
+  const SAMPLE_DATA = /* lex:dane */ {
     watki: [
       { id: "W1", nazwa: "Zatrudnienie i jego zakończenie" },
       { id: "W2", nazwa: "Zarzuty karne i ich rozpowszechnianie" },

@@ -270,28 +270,3 @@ Karta parkingowa dla niepełnosprawnych | mod-UDP-strefy-platnego-parkowania.md 
   opozycji antykomunistycznej).
 - oddechzycia.pl — rozróżnienie organów (ZUS vs MOPS), wyłączenie dla
   renty socjalnej.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-20):** Utworzenie modułu na wyraźne żądanie użytkownika
-o dodatek rehabilitacyjny, świadczenie wyrównawcze i pozostałe
-świadczenia dla niepełnosprawnych. UCZCIWIE ustalono, że "dodatek
-rehabilitacyjny" NIE ISTNIEJE pod tą nazwą jako samodzielne świadczenie
-— zamiast fabrykować jego istnienie, wskazano cztery prawdopodobne
-świadczenia, o które faktycznie może chodzić (świadczenie
-rehabilitacyjne ZUS, dofinansowanie turnusu PFRON, zaopatrzenie
-ortopedyczne, dodatek pielęgnacyjny), z rekomendacją dopytania klienta.
-W PEŁNI opracowano: dodatek pielęgnacyjny (ZUS, dotąd całkowita luka),
-zasiłek pielęgnacyjny (dotąd tylko nazwa bez treści), świadczenie
-rehabilitacyjne (ZUS, most między zasiłkiem chorobowym a rentą/
-powrotem do pracy). Świadczenie wyrównawcze opracowano z KLUCZOWYM
-rozróżnieniem DWÓCH niezwiązanych ze sobą wariantów (opiekun dziecka
-wymagającego stałej opieki — związany z niepełnosprawnością; działacz
-opozycji antykomunistycznej — NIEZWIĄZANY), z wariantem 1 oznaczonym
-jako punkt startowy wymagający pogłębienia. Dodano zbiorczy katalog
-"pozostałych" świadczeń z odesłaniami do już istniejących modułów,
-oraz UCZCIWIE odnotowano DWIE dodatkowe, dotąd nieopracowane luki (ulga
-rehabilitacyjna PIT, zwolnienie z abonamentu RTV) jako punkty startowe
-dla przyszłych sesji.

@@ -1,6 +1,6 @@
 ---
 name: raport-sytuacyjny-v2
-version: "2.11"
+version: "2.12"
 type: executive-raport
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 2.11 (2026-09-27e, AUDYT-2026-09-27e): jawny manifest `.claude-plugin/plugin.json` oraz `dependencies.requires: [shared]` we frontmatterze — import z marketplace w claude.ai. Treść skilla bez zmian.
+  Wersja bieżąca: 2.12 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-sytuacyjny.html` zasilany blueprintem (7 zakładek); sekwencja: `show_widget(path, data=BLUEPRINT)`. Wariant bez pola `data` (MOD-WIDGET-IO, kod) w sekcji WIDGET-DANE.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -198,23 +198,11 @@ FRAZY WYZWALAJĄCE — reaguj natychmiast, bez potwierdzenia:
 ```
 KROK 1 — Przeanalizuj rozmowę → zbuduj blueprint JSON (schemat poniżej)
 KROK 2 — Wykonaj walidację kompletności blueprintu (sekcja WALIDACJA)
-KROK 3 — Wywołaj visualize:read_me z modules=["interactive","mockup"]
-          (tylko jeśli nie załadowano w tej sesji)
-KROK 3a — ⛔ MOD-WIDGET-IO (OBOWIĄZKOWE przed show_widget):
-           view shared/MOD-WIDGET-IO.md
-           → wbuduj pasek IO w nagłówek widgetu (powyżej zakładek)
-           → IO_SKILL_ID='raport-sytuacyjny-v2', IO_CASE_ID=sygnatura
-           → matryca: Export JSON ✅ PDF ✅ | Import JSON ✅
-           → ioGetState(): pełny blueprint JSON (§ BLUEPRINT JSON)
-           → ioSetState(s): odtwórz wszystkie zakładki z wczytanego blueprintu
-KROK 4 — Wywołaj show_widget z widget_code zawierającym kompletny HTML widgetu:
-          • dane sprawy jako literały JS wbudowane bezpośrednio w HTML
-          • vanilla JS + CSS variables (var(--color-*))
-          • BEZ React, BEZ importów, BEZ window.__INJECTED__
-          • zakładki: Sprawa | Chronologia | Źródła | Ryzyka |
-                      Luki i sprzeczności | Rekomendacje | Historia strategii
-          • przyciski sendPrompt dla następnych kroków w zakładce Rekomendacje
-KROK 5 — Poprzedź widget komunikatem:
+KROK 3 — show_widget(path="raport-sytuacyjny-v2/assets/widget-raport-sytuacyjny.html",
+                      data=BLUEPRINT, title="raport_sytuacyjny")
+          — bez kodu; host wstawia blueprint i dokłada pasek eksportu/importu.
+          Host bez pola `data` → § WIDGET — WYKONANIE BEZ POLA `data`.
+KROK 4 — Poprzedź widget komunikatem:
           "Poniżej aktualny raport sytuacyjny sprawy —
            możesz uzupełnić brakujące dane lub skorygować automatycznie
            rozpoznane informacje."
@@ -227,6 +215,21 @@ NIE WOLNO:
 ```
 
 ---
+
+<!-- lex:wykonuje-aplikacja: WIDGET-DANE -->
+## WIDGET — WYKONANIE BEZ POLA `data`
+
+```
+1. visualize:read_me z modules=["interactive","mockup"] (raz na sesję)
+2. ⛔ MOD-WIDGET-IO: view shared/MOD-WIDGET-IO.md → pasek IO w nagłówku
+   (IO_SKILL_ID='raport-sytuacyjny-v2', IO_CASE_ID=sygnatura; Export JSON ✅ PDF ✅ | Import JSON ✅;
+   ioGetState() = pełny blueprint, ioSetState(s) odtwarza wszystkie zakładki)
+3. view raport-sytuacyjny-v2/assets/widget-raport-sytuacyjny.html → wpisz blueprint
+   w literał po /* lex:dane */ → show_widget(widget_code=<treść>)
+   albo kompletny HTML: vanilla JS + CSS variables, BEZ React/importów/window.__INJECTED__;
+   zakładki Sprawa | Chronologia | Źródła | Ryzyka | Luki i sprzeczności |
+   Rekomendacje | Historia strategii; sendPrompt w zakładce Rekomendacje
+```
 
 ## BLUEPRINT JSON — SCHEMAT DANYCH
 

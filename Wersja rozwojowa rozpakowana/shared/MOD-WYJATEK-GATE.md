@@ -283,16 +283,3 @@ Konsumenci i punkty wpięcia:
 Dopóki tam stoją, moduł NIE uruchomi się z tych skilli — nie zakładaj, że
 uruchomi. „Moduł-widmo" (deklarowany konsument bez faktycznego wywołania) to
 klasa błędu wykrywana testem T18.
-
----
-
-## 10. HISTORIA NAZWY
-
-Wersja 1.0 nosiła nazwę `MOD-UNIT-SWEEP.md` i miała jedno zamiatanie
-(sąsiedztwo redakcyjne). Nazwa opisywała **czynność**, nie cel, przez co
-mechanizm wyglądał na wąską sztuczkę zamiast na regułę ogólną — i faktycznie
-pokrywał tylko jedno z czterech miejsc, w których mieszkają wyjątki. Zmiana
-nazwy i zakresu nastąpiła na uwagę użytkownika w tej samej sesji, przed
-pierwszym użyciem produkcyjnym. Plik `MOD-UNIT-SWEEP.md` NIE pozostaje
-w bibliotece — dwie nazwy tego samego mechanizmu to klasa błędu opisana
-w `shared/DEDUPLICATION-POLICY.md`.

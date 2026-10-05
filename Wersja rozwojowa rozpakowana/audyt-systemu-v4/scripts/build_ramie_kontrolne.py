@@ -193,7 +193,7 @@ def main():
                 for r in BRAMKI[b].get("usun_pliki", [])]
     if usuniete:
         print("\n── sprzątanie odwołań po skasowanych plikach ──")
-        POMIN = ("CHANGELOG.md", "AUDIT-JOURNAL.md", "WARN-OTWARTE.md")
+        POMIN = ("CHANGELOG.md", "HISTORIA-ZMIAN-PLIKOW.md", "AUDIT-JOURNAL.md", "WARN-OTWARTE.md")
         zmienione = wyciete_linie = 0
         for korzen, _, pliki in os.walk(out):
             for nazwa in pliki:

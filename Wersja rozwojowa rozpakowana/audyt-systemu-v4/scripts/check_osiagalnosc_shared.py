@@ -31,11 +31,11 @@ ALLOW = {
     'tools/przyklady/sesja_pelna.json': 'fikstura self-testu walidatora, wskazana z tools/README.md',
 }
 
-HIST = re.compile(r'(CHECKSUMS\.sha256|CHANGELOG\.md|AUDIT-JOURNAL\.md|mapa_dzu_[^/]*\.md|WARN-OTWARTE\.md|DEDUPLICATION-POLICY\.md|CHECKLIST-DEDUP\.md)$')
+HIST = re.compile(r'(CHECKSUMS\.sha256|CHANGELOG\.md|HISTORIA-ZMIAN-PLIKOW\.md|AUDIT-JOURNAL\.md|mapa_dzu_[^/]*\.md|WARN-OTWARTE\.md|DEDUPLICATION-POLICY\.md|CHECKLIST-DEDUP\.md)$')
 SKIP = ('/mcp-servers/', '/node_modules/', '/__pycache__/', '/.git/')
 TXT = ('.md', '.py', '.sh', '.json', '.yaml', '.yml', '.txt', '.mjs', '.js', '.jsx', '.html')
 INFRA = re.compile(r'(^SKILL\.md$|^CHECKSUMS\.sha256$|^\.claude-plugin/plugin\.json$|^agents/openai\.yaml$|'
-                   r'^assets/icon\.svg$|^README\.md$|^PORTABILITY-MANIFEST\.md$|^MANIFEST\.md$|^\.mcp\.json$|^NOTICE$|^LICENSE$|^(references/)?CHANGELOG\.md$|__init__\.py$)')
+                   r'^assets/icon\.svg$|^README\.md$|^PORTABILITY-MANIFEST\.md$|^MANIFEST\.md$|^\.mcp\.json$|^NOTICE$|^LICENSE$|^(references/)?CHANGELOG\.md$|^references/HISTORIA-ZMIAN-PLIKOW\.md$|__init__\.py$)')
 
 skills = sorted(d for d in os.listdir(ROOT) if os.path.isfile(os.path.join(ROOT, d, 'SKILL.md')))
 files, texts = {}, {}
@@ -106,7 +106,8 @@ while q:
     for v in edges.get(u, ()):
         if v not in seen:
             seen.add(v); parent[v] = u; q.append(v)
-sh = sorted(k for k in files if k[0] == 'shared')
+# Historia zmian plików (AUDYT-2026-10-04n) nie jest wywoływana przy pracy — z definicji.
+sh = sorted(k for k in files if k[0] == 'shared' and not k[1].endswith('HISTORIA-ZMIAN-PLIKOW.md'))
 direct = {k: sorted({f'{a}/{b}' for (a, b), vs in edges.items() if k in vs and a != 'shared' and not HIST.search(b)}) for k in sh}
 def chain(k):
     c = []

@@ -420,25 +420,3 @@ Dz.Urz.UE C 2021/528], tvn24.pl.
   limit leków (5 opakowań), CITES i sankcja karna 3 miesiące-5 lat.
 - slaskie.kas.gov.pl — oficjalny poradnik KAS "warto wiedzieć przed
   wakacjami" — pełny katalog norm i ograniczeń.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("cło, limity przewozu i towary zabronione w ruchu transgranicznym").
-Potwierdzono, że dotychczasowy `mod-UCC-clo-taryfa-celna.md` pokrywa
-WYŁĄCZNIE stronę komercyjną (B2B) — ten moduł uzupełnia stronę
-KONSUMENCKĄ/podróżnych. Zweryfikowano online i w pełni opracowano: limit
-przewozu gotówki (rozporządzenie UE 2018/1672, próg 10 000 EUR,
-rozszerzona definicja środków pieniężnych obejmująca złoto/platynę BEZ
-progu kwotowego oraz karty przedpłacone, procedura zgłoszenia z opcją
-elektroniczną przez PUESC, sankcja czasowego zatrzymania z postępowaniem
-do 90 dni); zwolnienia celne dla podróżnych (limity wartościowe 300/430
-EUR zależne od transportu, szczegółowe normy ilościowe alkoholu/tytoniu/
-e-papierosów z możliwością proporcjonalnego łączenia, całkowity zakaz
-żywności pochodzenia zwierzęcego, limit 5 opakowań leków); towary
-zabronione (CITES z konkretnymi przykładami — kość słoniowa, dzikie
-koty — i surową sankcją karną 3 miesiące-5 lat, sygnalizacja innych
-kategorii — broń, zabytki, podróbki — z odesłaniem do już istniejących
-modułów bez duplikacji).

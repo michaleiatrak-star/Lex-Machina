@@ -344,22 +344,3 @@ powództwo do sądu: 3 MIESIĄCE             wypłata: 30 dni od doręczenia dec
   charakteru decyzji nadleśniczego. Osobno sprawdzić orzecznictwo TK dot.
   art. 48 pkt 7 i art. 27b
 ```
-
----
-
-## CHANGELOG
-
-**1.0 (2026-08-16):** Utworzenie modułu — zamknięcie punktu (1) flagi F-91,
-zidentyfikowanego jako najwyższy priorytet w audycie `AUDYT-2026-08-16`.
-Opracowano cały Rozdz. 9 (art. 46, 46a, 46c-46g, 47-49a, 50): podmiot
-odpowiedzialny i zamknięty katalog pięciu gatunków, odpowiedzialność Skarbu
-Państwa z podziałem na obwody leśne/polne, trzyosobowy zespół szacujący i
-skutek niestawiennictwa, dwuetapowe szacowanie z pełnym katalogiem ustaleń i
-wymogami protokołu, 7-dniowe odwołanie do nadleśniczego z mechanizmem opinii
-izby rolniczej, decyzja ostateczna w 14 dni i powództwo CYWILNE w 3 miesiące,
-odesłanie do KPA wraz z wyłączeniem nadleśniczego będącego członkiem koła
-łowieckiego, siedem wyłączeń z art. 48 (w tym próg 100 kg żyta/ha i sprzężenie
-z art. 27b), mapa terminów obu stron. ⭐ Odnotowano pułapkę źródłową: serwisy
-Rząd 2 renderują UCHYLONY art. 46b z pełną archiwalną treścią o rzeczoznawcach
-izb rolniczych — moduł zawiera jawny zakaz powoływania tego przepisu. Żadnej
-sygnatury orzeczniczej nie wpisano (HARDGATE).

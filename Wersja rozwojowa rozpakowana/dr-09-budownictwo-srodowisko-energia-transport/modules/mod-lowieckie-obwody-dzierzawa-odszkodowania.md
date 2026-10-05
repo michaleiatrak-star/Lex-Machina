@@ -358,18 +358,3 @@ uprawie (46 i n.)? Odpowiedź determinuje właściwy moduł i pozwanego.
    zarządcy uiszczają ekwiwalent równy średniemu czynszowi dzierżawy.
 7. Tryb tworzenia obwodów o powierzchni mniejszej niż 3000 ha (art. 23
    ust. 2 i n.) — zgoda którego organu, w jakim trybie.
-
----
-
-## CHANGELOG
-
-- **2026-08-16c** — utworzenie modułu. Naprawa punktu priorytetowego flagi
-  **F-91** (audyt-systemu-v4, tablica sterująca WARN-OTWARTE.md): Rozdz. 5
-  Prawa łowieckiego, art. 23–31, z priorytetem art. 27b wg wskazania
-  tablicy. Źródła: Rząd 1 (isap.sejm.gov.pl/api.sejm.gov.pl, t.j. Dz.U.
-  2025 poz. 539 — dostęp przez snippety wyszukiwania, pełny fetch
-  zablokowany ROBOTS_DISALLOWED) + Rząd 2B (lexlege.pl, arslege.pl) —
-  zgodne, min. 2–3 źródła niezależne na przepis (ZASADA 14
-  audyt-systemu-v4). 7 punktów oznaczonych ⚠️ NIEWERYFIKOWANE zamiast
-  zgadywania (PRAWO-HARDGATE). Pozostaje otwarte w F-91: Rozdz. 8, 6a,
-  1-4/6/7/11 (dr-09).

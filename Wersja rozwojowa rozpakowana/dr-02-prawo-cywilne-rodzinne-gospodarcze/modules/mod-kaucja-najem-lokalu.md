@@ -162,19 +162,3 @@ PROCEDURA przy sporze o zwrot:
   (12-krotność zwykły / 6-krotność okazjonalny), terminu zwrotu,
   MECHANIZMU WALORYZACJI z konkretnym przykładem liczbowym, ciężaru
   dowodu przy potrąceniach.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-19):** Utworzenie modułu na wyraźne żądanie użytkownika
-("kaucję"). Zweryfikowano online: podstawę prawną i funkcję kaucji
-zabezpieczającej przy najmie, DWA różne limity maksymalne (12-krotność
-dla najmu zwykłego, 6-krotność dla okazjonalnego — z zastrzeżeniem, że
-"czynsz" nie obejmuje mediów/opłat administracyjnych), termin zwrotu (1
-miesiąc od opróżnienia lokalu), oraz — jako element CZĘSTO POMIJANY w
-praktyce — mechanizm WALORYZACJI kaucji przy wzroście czynszu w trakcie
-trwania najmu, z konkretnym przykładem liczbowym pokazującym, że kwota
-zwracana może znacząco przewyższać pierwotnie wpłaconą. Dodano zasady
-potrąceń (ciężar dowodu na wynajmującym) i praktyczną procedurę
-dochodzenia zwrotu.

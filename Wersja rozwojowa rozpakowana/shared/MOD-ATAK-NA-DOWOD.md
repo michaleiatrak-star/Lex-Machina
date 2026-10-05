@@ -665,28 +665,3 @@ Specyfika KPA:
 □ Integracja: MP5 karty [UD] zaktualizowane o AD-X per atak dowodowy?
 Którykolwiek = NIE → wróć do brakującego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-24) — Pierwsza wersja.
-Przyczyna: system miał fragmentaryczne pokrycie ataku na dowody
-  (MD3b §LEG-CONTRA-N dla zakazów, PREKLUZJA-DOWODOWA dla prekluzji,
-  MP5 §5.2 dla ogólnej typologii). Brakowało: kompleksowej taksonomii
-  12 wektorów, procedury ADIS (sekwencja ofensywna), SHIELD (szczepienie),
-  specyfiki dowodów elektronicznych i integracji z pipeline pisma.
-Źródła: KPC art. 227, 232-233, 235¹-², 243-257, 278-291 (Dz.U.2026.468);
-  KPK art. 168a, 170, 174 (Dz.U.2026.490); SN III CSK 253/13;
-  FindLaw Documentary Evidence 2024; Garner/Scalia Making Your Case;
-  inwestum.pl art.170 KPK 2025; adwokat-sechman.pl 2023;
-  FRE 401-403, 801-807, 901-903 (US porównawcze);
-  USCOURTS FRE 901(c) deepfake proposal 2025.
-12 wektorów: AD-1 autentyczność, AD-2 custody, AD-3 relewantność,
-  AD-4 forma/oryginał, AD-5 zakaz ustawowy, AD-6 wiarygodność treści,
-  AD-7 zakres wniosku, AD-8 prekluzja, AD-9 kontrdowód aktywny,
-  AD-10 cyfrowe, AD-11 jednostronne, AD-12 systemowy.
-Procedury: ADIS (ofensywna, 5 kroków), SHIELD (obronna, 6 kroków).
-Specyfika: DR-02/03/04/05.
-```

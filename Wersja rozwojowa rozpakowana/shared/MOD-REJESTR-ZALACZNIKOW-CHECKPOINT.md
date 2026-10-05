@@ -151,34 +151,3 @@ Jeśli użytkownik pyta w dowolnym momencie "czy sprawdziłeś wszystko",
 Którykolwiek = NIE → wróć do właściwej fazy. Nie przedstawiaj wniosków
 jako kompletnych.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-07-12, aktualizacja integracji 2026-07-14)
-Przyczyna: sprawa XI P 27/26, świadek [ŚWIADEK-K] — moduł istniał od
-  utworzenia (poniżej), ale w przesluchanie-swiadkow-v2-min90 nie był
-  deklarowaną zależnością required, więc uruchamiał się wyłącznie
-  reaktywnie (na wprost zadane pytanie użytkownika), a nie proaktywnie
-  w pierwszej odpowiedzi po wgraniu dowodów. Model przedstawił
-  tezy/pytania oparte na 7 z 23 plików bez zasygnalizowania braków.
-Naprawa (2026-07-14): przesluchanie-swiadkow-v2-min90 — dodano ten
-  moduł do dependencies.required, dodano RZ-SHOW-GATE do
-  validation.required_gates, dodano jawny etap pipeline
-  PRE-W1a.4-RZ-SHOW wykonywany BEZPOŚREDNIO po SD-VER i PRZED profilem
-  świadka, w KAŻDEJ turze z dowodami — nie tylko na żądanie
-  użytkownika. Wersja modułu pozostawiona bez zmian (1.0.0) — zmianie
-  uległo wyłącznie wpięcie zależności w skillu nadrzędnym, nie treść
-  merytoryczna samego modułu. Zob. changelog przesluchanie-swiadkow-v2-min90.
-
-1.0.0 (2026-07-12)
-Przyczyna: sprawa XI P 27/26 — model sprawdził materiał wybiórczo
-  i nie zasygnalizował tego użytkownikowi; braki (w tym 2 kluczowe
-  zrzuty WhatsApp) wyszły na jaw dopiero po pytaniu kontrolnym
-  użytkownika. Utworzono na wyraźne polecenie użytkownika.
-Zakres: nowy moduł, komplementarny do MOD-SKAN-DOWODOW-KOMPLETNY —
-  ten moduł odpowiada za WIDOCZNOŚĆ i ZGODĘ UŻYTKOWNIKA na etapowanie,
-  SD-KOMPLETNY za samą metodologię odczytu.
-```

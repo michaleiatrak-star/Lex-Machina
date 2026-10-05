@@ -221,17 +221,3 @@ aktu ogólnego wyłącza konkretna specustawa (graf zależności) — wywołaj:
 ```
 view dr-01-ustroj-konstytucyjny-i-zrodla-prawa/modules/mod-specustawy-lex-specialis-graf-zaleznosci.md
 ```
-
-## CHANGELOG
-
-**1.1 (2026-07-17):** Wpięto zweryfikowane sygnatury TK (P 31/02, K 8/98) do
-sekcji 3 — na wniosek użytkownika, po sprawdzeniu że moduł miał wcześniej
-tylko generyczne odesłania bez konkretnych sygnatur. Weryfikacja: ISAP, SAOS.
-
-**1.0 (2026-07-17):** Utworzenie modułu na wniosek użytkownika (mechanizm +
-literatura ekspercka nt. przepisów przejściowych). Zweryfikowano online: t.j.
-ZTP (t.j. Dz.U. 2026 poz. 300), art. 4 KK, przykłady z
-rozmowy (orzeczenia o niepełnosprawności, prawo jazdy, kara śmierci).
-Zarejestrowano w `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` jako
-lokalizację kanoniczną dla warstwy doktrynalnej — mechanika dat pozostaje
-wyłącznie w `MOD-VACATIO-LEGIS.md`, bez duplikacji.

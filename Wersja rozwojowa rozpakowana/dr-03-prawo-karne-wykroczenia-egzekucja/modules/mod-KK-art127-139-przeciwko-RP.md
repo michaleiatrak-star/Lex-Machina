@@ -246,20 +246,3 @@ KROK 6: Czy poszkodowanym jest PAŃSTWO SOJUSZNICZE (nie RP)?
   ograniczeń obecnych przepisów KK wobec współczesnych zjawisk dezinformacji.
 - zaufanyprawnik.pl — praktyczne omówienia obrony w sprawach o zdradę
   dyplomatyczną i szpiegostwo, z datą reformy i porównaniem sankcji.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu na wyraźne żądanie użytkownika —
-priorytet podniesiony w kontekście wojny na Ukrainie i przypadków
-szpiegostwa. Zweryfikowano online: pełną treść art. 130 (§1-6, reforma
-17.08.2023 — drastyczne zaostrzenie sankcji), art. 131 (czynny żal, 2
-warianty), art. 132 (dezinformacja wywiadowcza — z KLUCZOWYM zastrzeżeniem
-o wąskim zakresie, częsty błąd interpretacyjny), art. 138 (zasada
-wzajemności, w tym rozszerzenie na państwo sojusznicze — bezpośrednio
-istotne w obecnym kontekście geopolitycznym), art. 129 (zdrada
-dyplomatyczna, pełne przesłanki). Odnotowano niepewność: dokładny wymiar
-kar dla art. 130 §3 i §6 po reformie, oraz istnienie §7-9 sugerowane
-przez odesłanie w art. 40 §3 (nie ustalone w tej sesji, oznaczone wprost
-do weryfikacji w ELI (RZĄD 1) przed użyciem).

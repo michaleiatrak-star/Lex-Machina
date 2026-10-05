@@ -1,5 +1,7 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.46 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
+
 - 1.45 (2026-10-04b, AUDYT-2026-10-04b): **Sieroty (F-225).** `references/szukaj_klauzul_uokik.py` powiązany w sekcji źródeł (Klauzule UOKiK) — wcześniej bez odwołania w skillu. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04b.
 
 - 1.44 (2026-09-29, AUDYT-2026-09-29, F-215): arytmetyka umowy przeniesiona z modelu do narzędzia `shared/tools/kontrakt_rachunek.py` (shared 3.99): RK.2a pkt 0 (ekspozycja E1–E4, liczba bez źródła = BRAK_ZRODLA), triage Krok 2a (+ kontrola kwota cyfrą/słownie), weryfikacja odesłań Krok 1.2 (martwe odesłania, dosłowność cytatów WD-2). Pomiar na `benchmark/posiane-wady/`: 05 — i3 i i6 wykryte, 01 — zero alarmów (T39). Porównanie z commercial-legal-pl (ZIP) i z opinią zewnętrzną: 5 z 7 rekomendacji już obecnych (IC.2, WD-2/WD-3, ocena-drugiej-strony, NEG.2, MU.2) — bez zmian; ontologia klauzul odrzucona (patrz AUDIT-JOURNAL AUDYT-2026-09-29).

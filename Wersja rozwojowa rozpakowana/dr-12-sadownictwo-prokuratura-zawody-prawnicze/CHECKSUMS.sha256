@@ -1,15 +1,15 @@
-48e700e33349cca40d8c72528fc83783d7f98ecb2b1f1a300a7035709d61228b  ./.claude-plugin/plugin.json
+867a221a1f6821b38f7cd32c02f5fbacb730b9d76c70bd1a6b78dd17d6a85618  ./.claude-plugin/plugin.json
 d84df35654a57cb9b445db3a98a40e3d1fc9d9f066c6c7bc22a2b8cf05732c34  ./MAPA-AKTOW.md
 601a3dbac3a7233e0bfc7b70194fd08fa5380bf42b4cb614fc9b4522ee986f1b  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-8c4c7316748d6b80fc2994557c58b26e822097bcab36704c0dd029771e236eec  ./SKILL.md
+9956f3ed2b5b68f8ffd0dc8a9c6453e66e0c4f66ff62017248ef306a97b98f04  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 41ecf6d89da12743636c67ab29de443bbe34596f68de7355e2aba491e60cf183  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
 9bb05e684c61eb510584560af2f7900a73d7679aa0f8d9944dbd2e06dc2f0134  ./modules/mod-KPC-biegli-sadowi-opinie.md
 e8b8db22cb9c125dfa96d1f2e03aac7fabfa2b03fbd628297c143b2ca2a9c6d8  ./modules/mod-KSCU-koszty-sadowe-i-pomoc-prawna.md
 5f994ef1e0ddeb36f09063ad41a7f89287c81a61626aef1e11a18325a9bc2bfe  ./modules/mod-PrProkuratura-organy-ochrony-prawa.md
-4bfa1d1cb9b4532bfeef7a93d84aedbc57a2fb04ed0a4c43844563df132e1c48  ./modules/mod-techniki-mediacyjne-negocjacyjne.md
+7417daf5bd7ac3cc20a095ea6ca626f9a1037fa39add34422ed61dda9094a9ec  ./modules/mod-techniki-mediacyjne-negocjacyjne.md
 277fac08a09cc9c90086c8fef09887335f14e48464e458d355f4cbbb1b1a6450  ./modules/mod-ustawa-adwokatura.md
 770a6a86c0d92d7ac9daa48d5cb8e3669d0af3abefd13e923244bfcfcd582942  ./modules/mod-ustawa-komornicy-sadowi-zawod.md
 a73e69d00c75c1dbf7bc9263d10635bb7d33607678233bae70c36a8960357762  ./modules/mod-ustawa-notariat.md
@@ -18,4 +18,5 @@ a73e69d00c75c1dbf7bc9263d10635bb7d33607678233bae70c36a8960357762  ./modules/mod-
 dc534dc03bb206096a9c58859bd144d5da1eb2294af8c527cc09331c398fc2a2  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 07ddd71ea03d55f1f656f11bec015f69c408f3ac7279c68c23eb29808b63c4ee  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 fa1b245b7464740abf8946df58d35f81eab24f3c51155e7510c200a514a16248  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
-0a5b007433f150fcfbbce8c38f3408b4e1a5d21762e71527efef94de73e73e55  ./references/CHANGELOG.md
+d4afe888fdd992d1e23acef7b4c8fda2b1f4451d27de47881c59ae623090f0e9  ./references/CHANGELOG.md
+6d577f0ec1363735343a495462aadeddd8891741a26ca60e27a18a499fc8e5f0  ./references/HISTORIA-ZMIAN-PLIKOW.md

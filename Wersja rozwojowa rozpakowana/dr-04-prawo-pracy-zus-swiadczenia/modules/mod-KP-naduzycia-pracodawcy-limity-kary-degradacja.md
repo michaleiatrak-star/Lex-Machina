@@ -388,21 +388,3 @@ skorygowane na istniejące `mod-KP-prawo-pracy.md` oraz
   omówienia degradacji i wypowiedzenia zmieniającego.
 - dlafirm.pracuj.pl, poradnikprzedsiebiorcy.pl, Biuro Karier UMK,
   e-prawnik.pl — kary porządkowe, elementy formalne, orzecznictwo.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu na wyraźne żądanie użytkownika —
-trzy nowe tematy (obejście limitu umów terminowych przez rotację między
-podmiotami, elementy konieczne kar porządkowych, degradacja karna vs
-faktyczna) + potwierdzenie/odesłanie dla trzech już zbadanych (mobbing,
-BHP, sygnaliści). Zweryfikowano online: doktrynę "nadużycia osobowości
-prawnej"/"przebicia zasłony korporacyjnej" (4 orzeczenia SN/SO), pełną
-treść art. 108-113 (elementy zawiadomienia, terminy, sprzeciw), oraz
-rozgraniczenie degradacji karnej (bezprawnej, poza zamkniętym katalogiem)
-od degradacji w trybie wypowiedzenia zmieniającego (legalnej, art. 42).
-Odnotowano niepewności: dokładna wzajemna relacja terminów 2 tygodnie/
-3 miesiące (art. 109), dokładny termin zatarcia kary porządkowej,
-dokładny limit łączny kar pieniężnych w miesiącu — wszystkie oznaczone
-do weryfikacji w ELI (RZĄD 1).

@@ -310,39 +310,3 @@ REGUŁA-ORPHAN-D:
 
 Którykolwiek = NIE → wróć do właściwego kroku.
 ```
-
----
-
-## HISTORIA ZMIAN
-
-```
-1.0.0 (2026-06-27)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-27):
-  Root cause zidentyfikowany przez dewelopera:
-  (1) SD-VER = KOMPLET (wszystkie pliki odczytane) — ale macierz D×T
-      budowana z pamięci, nie z per-teza przeszukania SD-FAKTY.
-      Skutek: teza gotowości do pracy → 1 dowód zamiast 4.
-      Teza pracodawcy faktycznego → argumenty ogólne zamiast konkretnych
-      wierszy z XLSX i zrzutów ekranu.
-  (2) Nazwy plików mylące (Szef.odt, Zatrudnienie.odt) — model
-      pomijał je w skanowaniu per-teza bo „intuicyjnie" nie pasowały
-      do treści tezy.
-  (3) Brak FSL-D jako gate między SD-VER a macierzą D×T — luźna
-      reguła „sprawdź SD-FAKTY" nieskuteczna bez hard gate.
-
-  Rozwiązanie:
-  - Nowy hard gate FSL-D-SCAN wymusza per-teza przejście przez
-    WSZYSTKIE D[id] niezależnie od nazwy
-  - ZAKAZ CYTOWANIA Z PAMIĘCI dla faktów (analogia do FACT-SOURCE-LOCK
-    dla przepisów) — każde twierdzenie faktyczne musi mieć D[id]+lok.
-  - REGUŁA-NAZWA-PLIKU-MYLĄCA: zakaz wnioskowania z nazwy
-  - REGUŁA-ORPHAN-D: pliki nieużyte = kandydaci na nowe tezy
-  - Blokada .docx gdy ⬛ FSL-D-LUKA 🔴/🟠 bez decyzji użytkownika
-
-  Wzorzec projektowy: FSL-D jest dla FAKTÓW tym, czym FACT-SOURCE-LOCK
-  jest dla PRZEPISÓW i czym MOD-SKAN-DOWODOW-KOMPLETNY jest dla STRON.
-  Trzy poziomy gwarancji kompletności:
-    L1 (strony):    SD-KOMPLETNY   — czy 100% stron odczytano?
-    L2 (tezy):      FSL-D (TEN)    — czy 100% tez ma źródło w plikach?
-    L3 (przepisy):  FACT-SRC-LOCK  — czy 100% przepisów zweryfikowano?
-```

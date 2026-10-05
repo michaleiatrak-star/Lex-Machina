@@ -451,25 +451,3 @@ ilustracyjny** — nie powoływać jako linii orzeczniczej.
    przeszkoda co przy F-79, F-88, F-92); lexlege.pl deklaruje stan na
    16.08.2026, co jest przesłanką, ale **nie zastępuje kontroli w ISAP**.
 6. Praktyka ustalania wysokości kosztów z art. 35p (brak taryfy ustawowej).
-
----
-
-## CHANGELOG
-
-- **2026-08-16e** — utworzenie modułu. Zamknięcie **punktu 1 flagi F-91**
-  (audyt-systemu-v4, tablica sterująca `WARN-OTWARTE.md`): Rozdz. 6a Prawa
-  łowieckiego, art. 35b–35t w całości, artykuł po artykule, bez luk.
-  Źródło pełnej treści: lexlege.pl (Rząd 2B, cały rozdział pobrany jednym
-  fetchem, stan deklarowany 16.08.2026, Dz.U. 2025 poz. 539 t.j.).
-  ⭐ **Ustalenie korygujące opis flagi:** wbrew skrótowi w tablicy
-  sterującej, odwołanie do sądu okręgowego NIE wynika z Rozdz. 6a, lecz
-  z **art. 33 ust. 6** (Rozdz. 6) — przepis dopisany do modułu wraz
-  z linią orzeczniczą (jednoinstancyjność, wyłączenie kasacji, wyłączenie
-  powództw o uchylenie uchwał, kontrola dolegliwości kary).
-  ⭐ Odnotowano brak art. 35q w numeracji ustawy (35p → 35r) — żeby kolejny
-  audyt nie zgłosił tego jako luki pokrycia.
-  Kontekst konstytucyjny: TK K 21/11 i geneza Rozdz. 6a (ustawa z 12.12.2013,
-  Dz.U. 2014 poz. 228, w życie 21.04.2014). 6 punktów ⚠️ NIEWERYFIKOWANE
-  zamiast zgadywania; sygnatury z oznaczeniem rzędu źródła i zakazem
-  powołania bez weryfikacji przez `orzeczenia-sadowe-v2`.
-  Pozostaje otwarte w F-91: Rozdz. 1–4, 6, 7, 11 (dr-09).

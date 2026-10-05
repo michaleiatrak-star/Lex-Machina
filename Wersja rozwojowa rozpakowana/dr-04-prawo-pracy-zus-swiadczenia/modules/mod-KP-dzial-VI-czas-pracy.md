@@ -223,16 +223,3 @@ Zweryfikuj na ISAP przy konkretnej sprawie.
 - nadgodziny.pl, SD Worx — kalkulacja limitów miesięcznych/rocznych.
 - zgoda-studio.pl — nowelizacja Dz.U. 2026 poz. 25 (forma elektroniczna
   wniosków, w życie 27.01.2026).
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — najwyższy priorytet z audytu
-pokrycia KP (czas pracy/nadgodziny — jedna z najczęstszych kategorii
-sporów). Zweryfikowano online: normy czasu pracy (art. 129, 131), okresy
-odpoczynku (132-134), definicja i limity nadgodzin (151, w tym limit
-150h i granica 48h/tydzień), dodatki (151¹), czas wolny zamiast dodatku
-(151²), nowelizację 2026 o formie elektronicznej wniosków. Odnotowano
-niepewność: dokładna treść przepisów o porze nocnej i pracy w niedziele/
-święta (Rozdziały VI-VII) — oznaczone do weryfikacji.

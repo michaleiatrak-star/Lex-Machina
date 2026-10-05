@@ -210,24 +210,3 @@ w zależności od ETAPU postępowania:
 - agnieszkaswiatlon.pl — związanie sądu wnioskiem, zmiana warunków
   wymaga zgody oskarżonego, dopuszczalność mimo cofnięcia przyznania
   się do winy.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-21):** Utworzenie modułu na wyraźne żądanie użytkownika
-— dotąd CAŁKOWITA luka mimo powszechności tej instytucji w praktyce.
-W pełni opracowano DWA odrębne tryby: art. 335 KPK (wniosek prokuratora
-na etapie postępowania przygotowawczego) i art. 387 KPK (wniosek
-oskarżonego na etapie sądowym, z terminem do zakończenia pierwszego
-przesłuchania wszystkich oskarżonych). Odnotowano ZASKAKUJĄCY,
-potwierdzony orzecznictwem SN niuans — art. 387, w odróżnieniu od art.
-335, formalnie NIE WYMAGA przyznania się do winy jako przesłanki
-literalnej, z praktycznym zastrzeżeniem że zależy to od składu sądu.
-Opracowano warunki zgody uczestników (prokurator + pokrzywdzony przy
-art. 387), ograniczenia przedmiotowe (zbrodnie, wysokie zagrożenie
-karą), korzyści (skrócenie czasu, łagodniejszy wymiar) z WAŻNYM
-zastrzeżeniem że tryb NIE przyspiesza samego zatarcia skazania (tylko
-czas postępowania), oraz kluczowe ryzyko — utrata prawa zaskarżenia
-ustaleń faktycznych/wysokości kary poza uchybieniami proceduralnymi.
-Dodano wyraźne rozróżnienie od czynnego żalu (inny etap, inne skutki).

@@ -153,15 +153,3 @@ odrębnej, aktualnej weryfikacji orzecznictwa/doktryny online.
   postępowania przygotowawczego.
 - **J. Consedine**, *Sprawiedliwość naprawcza — kompensacyjna praktyka
   prawa karnego* — międzynarodowa perspektywa teoretyczna.
-
----
-
-## CHANGELOG
-
-**1.0 (2026-07-17):** Utworzenie modułu — wypełnienie luki zidentyfikowanej
-podczas audytu mediacji w systemie (żaden moduł nie obejmował mediacji
-karnej, mimo odrębnej podstawy prawnej — art. 23a KPK — i odrębnej idei,
-sprawiedliwości naprawczej). Zweryfikowano online: pełną treść art. 23a
-KPK (§1-7), datę wejścia w życie (1.07.2003) i rozszerzenia na wykroczenia
-(1.07.2015), literaturę (Bieńkowska, Kosonoga, Zalewski, Murzynowski,
-Consedine). Zarejestrowano w `CHECKLIST-DEDUP.md`.

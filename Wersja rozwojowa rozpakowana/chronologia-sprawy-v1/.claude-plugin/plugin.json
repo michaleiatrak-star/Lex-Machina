@@ -1,6 +1,6 @@
 {
   "name": "chronologia-sprawy-v1",
-  "version": "1.13",
+  "version": "1.16",
   "description": "Chronologia sprawy z dokumentów i dowodów: oś czasu per wątek, klasy pewności, proweniencja, sprzeczności dat/opisów, korelacja finansowa i opcjonalny interaktywny timeline.",
   "author": {
     "name": "Adrian Miłosz Kalinowski",
