@@ -1,0 +1,280 @@
+<!-- widget-orzeczenia.html — orzeczenia-sadowe-v2: widget zasilany danymi (ten sam wygląd i zakładki co references/widget.md).
+     Host obsługujący show_widget z polem `data` (Lex Machina): show_widget(path="orzeczenia-sadowe-v2/assets/widget-orzeczenia.html",
+     data=DANE) — bez przepisywania kodu; host dokłada pasek eksportu. Inne hosty: podmień literał po komentarzu „lex:dane”.
+     Treść renderowana jako tekst (bez HTML z danych); link tylko http(s).
+     SCHEMAT DANYCH (pola opcjonalne można pominąć):
+       tytul: string; tryb: "laik"|"prawnik"; etap: "wyszukiwanie" (przed wyszukiwaniem) | "wynik"
+       ryzyko: [{ poziom: "high"|"mid"|"low", laik, prawnik }]                      — Faza 0-A
+       przeslanki: { przepis, instytucja, jurysdykcja,
+                     lista: [{ tresc, ciezar, pokrycie: 0–100, stan: "ok"|"warn"|"gap" }] } — Faza 0-B
+       orzeczenia: [{ sygnatura, kategoria: "6A"|"1"|"2"|"3A"|"3B"|"4"|"5"|"6"|"7", sad, teza_laik, teza_prawnik,
+                      przeslanki (Zasada 11), url, alerty: [{ typ: "old"|"conflict"|"law"|"eu"|"nurl"|"zp", laik, prawnik }] }]
+       bilans: { ocena: "bad"|"mid"|"good", zgodne, przeciwne, neutralne, laik, prawnik,
+                 przeciwne_sygnatury: [{ sygnatura, teza }] } — tylko gdy Faza 1-D wykonana
+       ocena: { laik, prawnik }; kolejnosc: [{ sygnatura, dlaczego }]; jurysdykcja_zagraniczna: string -->
+<style>
+  :root {
+    --c-bg: var(--color-bg-primary, #fff);
+    --c-surface: var(--color-bg-secondary, #f8f9fa);
+    --c-border: var(--color-border-primary, #dee2e6);
+    --c-text: var(--color-text-primary, #212529);
+    --c-muted: var(--color-text-secondary, #6c757d);
+    --c-accent: var(--color-accent-primary, #0d6efd);
+    --c-green: #198754; --c-red: #dc3545;
+    --c-yellow: #ffc107; --c-blue: #0dcaf0;
+    --c-purple: #7c3aed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; font-size: 14px;
+         color: var(--c-text); background: var(--c-bg); }
+
+  .header { padding: 14px 16px; border-bottom: 1px solid var(--c-border);
+            display: flex; justify-content: space-between; align-items: center; }
+  .header h2 { font-size: 15px; font-weight: 700; }
+  .mode-toggle { display: flex; gap: 4px; }
+  .mode-btn { padding: 4px 12px; border-radius: 20px; border: 1px solid var(--c-border);
+              cursor: pointer; font-size: 12px; background: var(--c-surface); }
+  .mode-btn.active { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+
+  .tabs { display: flex; border-bottom: 1px solid var(--c-border); overflow-x: auto; }
+  .tab { padding: 9px 14px; cursor: pointer; white-space: nowrap; font-size: 13px;
+         border-bottom: 2px solid transparent; color: var(--c-muted); }
+  .tab.active { color: var(--c-accent); border-bottom-color: var(--c-accent); font-weight: 600; }
+
+  .panel { display: none; padding: 14px 16px; }
+  .panel.active { display: block; }
+
+  /* Profil ryzyka */
+  .alert-box { border-radius: 8px; padding: 10px 14px; margin-bottom: 10px;
+               border-left: 4px solid; }
+  .alert-box.high  { background: #fff5f5; border-color: var(--c-red); }
+  .alert-box.mid   { background: #fffbf0; border-color: var(--c-yellow); }
+  .alert-box.low   { background: #f0fff4; border-color: var(--c-green); }
+  .alert-label { font-size: 11px; font-weight: 700; text-transform: uppercase;
+                 letter-spacing: .5px; margin-bottom: 4px; }
+  .alert-text { font-size: 13px; line-height: 1.5; }
+  .mode-laik { } .mode-prawnik { display: none; }
+  body.prawnik .mode-laik { display: none; }
+  body.prawnik .mode-prawnik { display: block; }
+
+  /* Przesłanki */
+  .preslanka { margin-bottom: 12px; }
+  .preslanka-header { display: flex; justify-content: space-between;
+                      font-size: 12px; margin-bottom: 4px; }
+  .bar-track { height: 8px; background: var(--c-border); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width .4s; }
+  .bar-fill.ok   { background: var(--c-green); }
+  .bar-fill.warn { background: var(--c-yellow); }
+  .bar-fill.gap  { background: var(--c-red); }
+
+  /* Orzeczenia */
+  .orz-card { border: 1px solid var(--c-border); border-radius: 8px;
+               padding: 12px 14px; margin-bottom: 10px; }
+  .orz-card.zp { border-left: 3px solid var(--c-purple); }
+  .orz-header { display: flex; justify-content: space-between;
+                align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .orz-sig { font-weight: 700; font-size: 13px; }
+  .kat-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px;
+               background: var(--c-surface); border: 1px solid var(--c-border);
+               white-space: nowrap; }
+  .kat-badge.kat-6a { background: #f3e8ff; border-color: var(--c-purple);
+                      color: var(--c-purple); font-weight: 700; }
+  .orz-sad { font-size: 12px; color: var(--c-muted); margin-bottom: 4px; }
+  .orz-teza { font-size: 13px; line-height: 1.5; margin-bottom: 8px; }
+  .orz-przeslanki { font-size: 12px; line-height: 1.5; color: var(--c-muted);
+                     margin-bottom: 8px; padding-left: 8px;
+                     border-left: 2px solid var(--c-border); }
+  .orz-alerts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .a-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .alert-old  { background: #fffbf0; color: #856404; }
+  .alert-conflict { background: #fff5f5; color: var(--c-red); }
+  .alert-law  { background: #fff5f5; color: var(--c-red); }
+  .alert-eu   { background: #e7f5ff; color: #0c5460; }
+  .alert-nurl { background: var(--c-surface); color: var(--c-muted); }
+  .alert-ok   { background: #f0fff4; color: var(--c-green); }
+  .alert-zp   { background: #f3e8ff; color: var(--c-purple); font-weight: 600; }
+  .orz-link { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .orz-link a { font-size: 12px; color: var(--c-accent); text-decoration: none; }
+
+  /* Alerty (zakładka) */
+  .alert-detail { border: 1px solid var(--c-border); border-radius: 8px;
+                  padding: 10px 14px; margin-bottom: 10px; }
+  .alert-detail-sig { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+  .alert-detail-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .alert-detail-list li { font-size: 12px; padding: 4px 8px; border-radius: 6px; line-height: 1.5; }
+
+  /* Eksport */
+  .export-btn { font-size: 12px; padding: 5px 14px; border-radius: 20px;
+                border: 1px solid var(--c-border); cursor: pointer;
+                background: var(--c-surface); color: var(--c-text);
+                margin-top: 12px; }
+  .export-btn:hover { background: var(--c-border); }
+
+  /* Raport */
+  .wskaznik { margin-bottom: 16px; }
+  .wskaznik-title { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+  .rekomendacja { background: var(--c-surface); border-radius: 8px;
+                  padding: 10px 14px; font-size: 13px; line-height: 1.6; }
+
+  /* Bilans linii orzeczniczej */
+  .bilans-box { border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+                border-left: 4px solid; font-size: 13px; line-height: 1.6; }
+  .bilans-box.bad { background: #fff5f5; border-color: var(--c-red); }
+  .bilans-box.mid { background: #fffbf0; border-color: var(--c-yellow); }
+  .bilans-box.good { background: #f0fff4; border-color: var(--c-green); }
+  .bilans-title { font-weight: 700; font-size: 12px; text-transform: uppercase;
+                  letter-spacing: .5px; margin-bottom: 6px; }
+  .bilans-counts { display: flex; gap: 14px; font-size: 12px; margin-bottom: 6px; }
+  .bilans-sygnatury { font-size: 12px; color: var(--c-muted); }
+
+  .loading-msg { color: var(--c-muted); font-style: italic; text-align: center;
+                 padding: 24px; font-size: 13px; }
+  .empty-msg { color: var(--c-muted); font-style: italic; padding: 12px 0; font-size: 13px; }
+  .a-tag + .a-tag { margin-left: 0; }
+</style>
+
+<div class="header">
+  <h2 id="w-tytul"></h2>
+  <div class="mode-toggle">
+    <button class="mode-btn" data-mode="laik">LAIK</button>
+    <button class="mode-btn" data-mode="prawnik">PRAWNIK</button>
+  </div>
+</div>
+<div class="tabs" id="w-tabs"></div>
+<div id="tab-ryzyko" class="panel"></div>
+<div id="tab-preslanka" class="panel"></div>
+<div id="tab-orzeczenia" class="panel"></div>
+<div id="tab-alerty" class="panel"></div>
+<div id="tab-raport" class="panel"></div>
+
+<script>
+const DANE = /* lex:dane */ {
+  tytul: "Rozwiązanie umowy bez wypowiedzenia (dane przykładowe, fikcyjne)",
+  tryb: "laik",
+  etap: "wyszukiwanie",
+  ryzyko: [{ poziom: "high", laik: "Termin na odwołanie jest krótki.", prawnik: "Termin z przepisu do weryfikacji w ELI." }],
+  przeslanki: { przepis: "art. X", instytucja: "przykład", jurysdykcja: "PL",
+    lista: [{ tresc: "Przesłanka 1", ciezar: "pracodawca", pokrycie: 60, stan: "warn" }] },
+  orzeczenia: [], bilans: null, ocena: null, kolejnosc: [], jurysdykcja_zagraniczna: ""
+};
+
+(function () {
+  const D = DANE || {};
+  const ALERT = { old: ["alert-old", "STARE"], conflict: ["alert-conflict", "SPRZECZNE"], law: ["alert-law", "ZMIANA PRAWA"],
+    eu: ["alert-eu", "WYMIAR UE"], nurl: ["alert-nurl", "BRAK URL"], zp: ["alert-zp", "ZASADA PRAWNA"] };
+  const ZP_LAIK = "To wiążąca zasada prawna Sądu Najwyższego.";
+  const ZP_PRAWNIK = "Uchwała z mocą zasady prawnej (art. 87 § 1 ustawy z 8 XII 2017 r. o SN). Wiąże wszystkie składy SN.";
+  const LEVEL = { high: "Alert wysoki", mid: "Alert średni", low: "Alert niski" };
+  const searching = D.etap === "wyszukiwanie";
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = String(text); return e; }
+  function modes(parent, tag, cls, laik, prawnik) {
+    if (laik) parent.appendChild(el(tag, (cls ? cls + " " : "") + "mode-laik", laik));
+    if (prawnik) parent.appendChild(el(tag, (cls ? cls + " " : "") + "mode-prawnik", prawnik));
+  }
+  function loading(panel) { panel.appendChild(el("p", "loading-msg", "Trwa wyszukiwanie…")); }
+  function safeUrl(u) { return /^https?:\/\//i.test(String(u || "")) ? String(u) : null; }
+  function bars(parent, lista) {
+    (lista || []).forEach(function (p, i) {
+      const box = el("div", "preslanka"); const h = el("div", "preslanka-header");
+      h.appendChild(el("span", "", "P" + (i + 1) + ": " + (p.tresc || "") + (p.ciezar ? " (ciężar: " + p.ciezar + ")" : "")));
+      const pct = Math.max(0, Math.min(100, Number(p.pokrycie) || 0));
+      h.appendChild(el("span", "", pct + "%")); box.appendChild(h);
+      const track = el("div", "bar-track"); const fill = el("div", "bar-fill " + (["ok", "warn", "gap"].indexOf(p.stan) >= 0 ? p.stan : "warn"));
+      fill.style.width = pct + "%"; track.appendChild(fill); box.appendChild(track); parent.appendChild(box);
+    });
+  }
+  function copy(text) {
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).catch(function () {
+      const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(ta);
+    });
+  }
+
+  document.getElementById("w-tytul").textContent = D.tytul || "Orzecznictwo";
+  const tabs = [["ryzyko", "Profil ryzyka"], ["preslanka", "Przesłanki"], ["orzeczenia", "Orzeczenia"], ["alerty", "Alerty"], ["raport", "Raport"]];
+  const tabBar = document.getElementById("w-tabs");
+  function show(name) {
+    document.querySelectorAll(".panel").forEach(function (p) { p.classList.toggle("active", p.id === "tab-" + name); });
+    tabBar.querySelectorAll(".tab").forEach(function (t) { t.classList.toggle("active", t.getAttribute("data-tab") === name); });
+  }
+  tabs.forEach(function (t) { const e = el("div", "tab", t[1]); e.setAttribute("data-tab", t[0]); e.onclick = function () { show(t[0]); }; tabBar.appendChild(e); });
+  function setMode(m) {
+    document.body.classList.toggle("prawnik", m === "prawnik");
+    document.querySelectorAll(".mode-btn").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-mode") === m); });
+  }
+  document.querySelectorAll(".mode-btn").forEach(function (b) { b.onclick = function () { setMode(b.getAttribute("data-mode")); }; });
+
+  const ryzyko = document.getElementById("tab-ryzyko");
+  (D.ryzyko || []).forEach(function (a) {
+    const poziom = LEVEL[a.poziom] ? a.poziom : "mid"; const box = el("div", "alert-box " + poziom);
+    box.appendChild(el("div", "alert-label", LEVEL[poziom])); modes(box, "div", "alert-text", a.laik, a.prawnik); ryzyko.appendChild(box);
+  });
+  if (!(D.ryzyko || []).length) ryzyko.appendChild(el("p", "empty-msg", "Brak alertów wstępnych."));
+
+  const pres = document.getElementById("tab-preslanka"); const P = D.przeslanki || {};
+  const meta = el("p", "", "Przepis: " + (P.przepis || "—") + " | Instytucja: " + (P.instytucja || "—") + " | Jurysdykcja: " + (P.jurysdykcja || "—"));
+  meta.style.cssText = "font-size:12px;color:var(--c-muted);margin-bottom:12px;"; pres.appendChild(meta); bars(pres, P.lista);
+
+  const orz = document.getElementById("tab-orzeczenia"); const alerty = document.getElementById("tab-alerty");
+  const lista = (D.orzeczenia || []).slice().sort(function (a, b) { return (b.kategoria === "6A") - (a.kategoria === "6A"); });
+  if (searching && !lista.length) { loading(orz); loading(alerty); }
+  else {
+    lista.forEach(function (o) {
+      const zp = o.kategoria === "6A"; const card = el("div", "orz-card" + (zp ? " zp" : "")); const h = el("div", "orz-header");
+      h.appendChild(el("span", "orz-sig", o.sygnatura)); h.appendChild(el("span", "kat-badge" + (zp ? " kat-6a" : ""), zp ? "Kat. 6A — Zasada prawna" : "Kat. " + (o.kategoria || "?")));
+      card.appendChild(h); card.appendChild(el("div", "orz-sad", o.sad || ""));
+      modes(card, "div", "orz-teza", o.teza_laik, o.teza_prawnik);
+      if (o.przeslanki) card.appendChild(el("div", "orz-przeslanki", o.przeslanki));
+      const tags = el("div", "orz-alerts"); const list = (o.alerty || []).filter(function (a) { return ALERT[a.typ]; });
+      if (zp && !list.some(function (a) { return a.typ === "zp"; })) list.unshift({ typ: "zp" });
+      const url = safeUrl(o.url); if (!url && !list.some(function (a) { return a.typ === "nurl"; })) list.push({ typ: "nurl" });
+      if (list.length) list.forEach(function (a) { tags.appendChild(el("span", "a-tag " + ALERT[a.typ][0], ALERT[a.typ][1])); });
+      else tags.appendChild(el("span", "a-tag alert-ok", "bez alertów"));
+      card.appendChild(tags);
+      if (url) { const link = el("div", "orz-link"); const a = el("a", "", "Otwórz oryginał"); a.href = url; a.target = "_blank"; a.rel = "noopener"; link.appendChild(a); card.appendChild(link); }
+      orz.appendChild(card);
+      const active = list.filter(function (a) { return a.typ !== "nurl" || !url; });
+      if (active.length) {
+        const det = el("div", "alert-detail"); det.appendChild(el("div", "alert-detail-sig", o.sygnatura)); const ul = el("ul", "alert-detail-list");
+        active.forEach(function (a) {
+          const li = el("li", "a-tag " + ALERT[a.typ][0], ALERT[a.typ][1] + " — ");
+          modes(li, "span", "", a.laik || (a.typ === "zp" ? ZP_LAIK : ""), a.prawnik || (a.typ === "zp" ? ZP_PRAWNIK : "")); ul.appendChild(li);
+        });
+        det.appendChild(ul); alerty.appendChild(det);
+      }
+    });
+    if (!lista.length) orz.appendChild(el("p", "empty-msg", "Brak orzeczeń."));
+    if (!alerty.children.length) alerty.appendChild(el("p", "empty-msg", "Brak alertów dla tej linii orzeczniczej."));
+  }
+  const kopiujSyg = el("button", "export-btn", "Kopiuj listę sygnatur");
+  kopiujSyg.onclick = function () { copy(lista.map(function (o) { return (o.sygnatura || "") + " | " + (o.sad || ""); }).join("\n")); };
+  alerty.appendChild(kopiujSyg);
+
+  const raport = document.getElementById("tab-raport");
+  if (searching && !lista.length) loading(raport);
+  else {
+    const B = D.bilans;
+    if (B) {
+      const ocena = ["bad", "mid", "good"].indexOf(B.ocena) >= 0 ? B.ocena : "mid"; const box = el("div", "bilans-box " + ocena);
+      box.appendChild(el("div", "bilans-title", "Bilans linii orzeczniczej")); const c = el("div", "bilans-counts");
+      c.appendChild(el("span", "", "Zgodne: " + (B.zgodne || 0))); c.appendChild(el("span", "", "Przeciwne: " + (B.przeciwne || 0))); c.appendChild(el("span", "", "Neutralne: " + (B.neutralne || 0)));
+      box.appendChild(c); modes(box, "div", "", B.laik, B.prawnik);
+      const syg = el("div", "bilans-sygnatury"); (B.przeciwne_sygnatury || []).forEach(function (s) { syg.appendChild(el("div", "", (s.sygnatura || "") + " — " + (s.teza || ""))); });
+      box.appendChild(syg); raport.appendChild(box);
+    }
+    const w = el("div", "wskaznik"); w.appendChild(el("div", "wskaznik-title", "Wskaźnik pokrycia przesłanek")); bars(w, P.lista); raport.appendChild(w);
+    const rek = el("div", "rekomendacja"); rek.appendChild(el("strong", "", "Ocena linii: "));
+    if (D.ocena) modes(rek, "span", "", D.ocena.laik, D.ocena.prawnik);
+    if ((D.kolejnosc || []).length) {
+      rek.appendChild(document.createElement("br")); rek.appendChild(el("strong", "", "Kolejność powołania w piśmie:"));
+      const ol = el("ol"); ol.style.cssText = "padding-left:18px;margin-top:6px;font-size:13px;";
+      D.kolejnosc.forEach(function (k) { ol.appendChild(el("li", "", (k.sygnatura || "") + (k.dlaczego ? " — " + k.dlaczego : ""))); }); rek.appendChild(ol);
+    }
+    if (D.jurysdykcja_zagraniczna) { const j = el("div", "", "Jurysdykcja zagraniczna: " + D.jurysdykcja_zagraniczna); j.style.cssText = "font-size:12px;color:var(--c-muted);margin-top:8px;"; rek.appendChild(j); }
+    raport.appendChild(rek);
+    const kopiujRap = el("button", "export-btn", "Kopiuj raport"); kopiujRap.onclick = function () { copy(raport.innerText || ""); }; raport.appendChild(kopiujRap);
+  }
+  setMode(D.tryb === "prawnik" ? "prawnik" : "laik");
+  show("ryzyko");
+})();
+</script>

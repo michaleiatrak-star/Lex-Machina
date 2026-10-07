@@ -1,0 +1,269 @@
+{
+  "wersja": "1.0",
+  "utworzony": "2026-09-27b",
+  "flaga": "F-167 / F-207",
+  "opis": "Rejestr bramek mierzalnych — DANE, nie kod. Jedna pozycja = jedna bramka podlegajaca pomiarowi A/B. Skrypt scripts/build_ramie_kontrolne.py czyta ten plik i buduje ramie kontrolne (A) przez wyciecie wskazanych bramek z kopii drzewa. Dodanie nowej bramki = nowy wpis TUTAJ, bez zmiany kodu.",
+  "legenda": {
+    "usun_pliki": "pliki kanoniczne bramki usuwane w ramieniu A (sciezki wzgledem korzenia drzewa skilli)",
+    "kotwice": "[plik, tekst] — tekst MUSI wystapic dokladnie raz; usuwany doslownie",
+    "zakresy": "[plik, od, do] — wycina blok od 'od' (wlacznie) do 'do' (wylacznie); krawedzie musza byc stabilne",
+    "zamiany": "[plik, stare, nowe] — zamiana doslowna; idempotentna (gdy 'stare' nieobecne a 'nowe' obecne → pomijana bez bledu). Sluzy tam, gdzie usuniecie calej linii zabralo by TAKZE tresc bramek NIEmierzonych",
+    "kolejnosc": "bramki stosowane w kolejnosci z listy --bramki; zamiany zaprojektowane jako niezalezne od kolejnosci",
+    "nazwy_krotkie": "nazwy bramki uzywane w tresci BEZ nazwy pliku (np. 'CN-2', 'REM-GATE'). Po operacji skrypt SKANUJE drzewo i przerywa, gdy ktorakolwiek zostala — sprzatanie odwolan czysci tylko sciezki plikow, wiec bez tej kontroli ramie A zachowuje logike bramki i pomiar mierzy cos innego niz deklaruje (wada wykryta 2026-09-27b przy F-167)",
+    "dopuszczone_wzmianki": "lista sciezek, w ktorych wzmianka o nazwie krotkiej jest swiadomie zostawiona; kazda z uzasadnieniem. Pusta lista = wymagana zerowa resztka",
+    "pomijane_w_skanie": "katalogi/pliki poza skanem resztkowym: historia audytu i sama aparatura pomiarowa (obecna IDENTYCZNIE w obu ramionach, wiec nie rozniczkuje pomiaru)"
+  },
+  "bramki": {
+    "B1": {
+      "opis": "ANTY-FASADA (AF-1…AF-6)",
+      "usun_pliki": [
+        "shared/SELF-CHECK-ANTY-FASADA.md"
+      ],
+      "kotwice": [
+        [
+          "prawny-router-v3/references/SELF-CHECK.md",
+          "□ [ANTY-FASADA + AF-6] Wykonaj self-check antyfasadowy z modułu kanonicznego:\n    view shared/SELF-CHECK-ANTY-FASADA.md\n"
+        ]
+      ],
+      "zakresy": [],
+      "zamiany": []
+    },
+    "B2": {
+      "opis": "KOTWICA URZĘDOWA 🟨",
+      "usun_pliki": [],
+      "kotwice": [
+        [
+          "prawny-router-v3/references/SELF-CHECK.md",
+          "□ RZĄD 1 niedostępny (robots)? → sekwencja B-1 web_search → B-2 web_fetch\n  wykonana, a przy blokadzie warunki K-1…K-4 kotwicy urzędowej spełnione?\n"
+        ]
+      ],
+      "zakresy": [],
+      "zamiany": []
+    },
+    "B3": {
+      "opis": "DOMAIN-LOCK",
+      "usun_pliki": [
+        "shared/DOMAIN-LOCK.md"
+      ],
+      "kotwice": [],
+      "zakresy": [
+        [
+          "prawny-router-v3/references/SELF-CHECK.md",
+          "□ [DOMAIN-LOCK] ⛔ KONTROLA NA WYJŚCIU",
+          "□ [CV-ALT / RELACJA PODSTAW]"
+        ]
+      ],
+      "zamiany": []
+    },
+    "B4": {
+      "opis": "RATE-COMPLETENESS",
+      "usun_pliki": [
+        "shared/RATE-COMPLETENESS.md"
+      ],
+      "kotwice": [],
+      "zakresy": [
+        [
+          "prawny-router-v3/references/SELF-CHECK.md",
+          "□ [RATE-COMPLETENESS] Odpowiedź zawiera odsetki",
+          "□ Sygnatury orzeczeń przeszły V-SYG"
+        ]
+      ],
+      "zamiany": []
+    },
+    "B5": {
+      "opis": "ŚLAD ROUTINGU (KROK 3A / ROUTER-WCZYTANY)",
+      "usun_pliki": [],
+      "kotwice": [],
+      "zakresy": [
+        [
+          "prawny-router-v3/SKILL.md",
+          "KROK 3A → [ŚLAD ROUTINGU — OBOWIĄZKOWY]",
+          "KROK 4  → Wykonaj analizę"
+        ],
+        [
+          "prawny-router-v3/references/SELF-CHECK.md",
+          "□ [KROK 3A ŚLAD ROUTINGU]",
+          "□ ⛔ VER-GRAIN — KONTROLA NA WYJŚCIU"
+        ]
+      ],
+      "zamiany": []
+    },
+    "CN": {
+      "opis": "CN-GATE — bramka normy centralnej (zakres czasowy/podmiotowy/przedmiotowy)",
+      "dodana_pomiar": "2026-09-27b (F-167)",
+      "usun_pliki": [
+        "shared/MOD-CN-GATE.md"
+      ],
+      "kotwice": [],
+      "zakresy": [
+        [
+          "prawny-router-v3/SKILL.md",
+          "**BRAMKA NORMY CENTRALNEJ** (auto, PRZED wszystkimi pozostałymi) — CN-GATE:",
+          "**BRAMKA CHRONOLOGICZNA** (auto, przed KROK 4) — DWA NIEZALEŻNE TORY:"
+        ],
+        [
+          "prawny-router-v3/SKILL.md",
+          "UP-6: KAŻDA sprawa → CN-GATE przed analizą",
+          "```"
+        ]
+      ],
+      "zamiany": [
+        [
+          "prawny-router-v3/references/PROFIL-LEKKI.md",
+          "bezwarunkowo: `MOD-CN-GATE`,\n",
+          "bezwarunkowo: "
+        ],
+        [
+          "shared/MIEDZYNARODOWE-GATES.md",
+          "WYJ-GATE. CN-GATE (`shared/MOD-CN-GATE.md`) i REM-GATE\n(`shared/MOD-REM-GATE.md`) **NIE są zastępowane** — działają w obu ścieżkach.\nMG-1 rozszerza CN-1 i CN-2 o warstwę traktatową.\n",
+          "WYJ-GATE.\n"
+        ],
+        [
+          "shared/MIEDZYNARODOWE-GATES.md",
+          "NIE zastępuje: shared/MOD-CN-GATE.md, shared/MOD-REM-GATE.md,\n             shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n",
+          "NIE zastępuje: shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n"
+        ],
+        [
+          "prawny-router-v3/SKILL.md",
+          "(wykładnia KWPT art. 31-33). ⛔ CN-GATE i REM-GATE NIE są podmieniane —",
+          "(wykładnia KWPT art. 31-33). ⛔"
+        ],
+        [
+          "prawny-router-v3/references/PROFIL-LEKKI.md",
+          "⛔ **UP-6 pozostaje bez zmian.** CN-GATE i REM-GATE działają w KAŻDEJ sprawie,\nw obu jurysdykcjach, bez wyjątku. Odroczony jest ODCZYT modułu, nie WYKONANIE",
+          "⛔ **UP-6 pozostaje bez zmian.** Odroczony jest ODCZYT modułu, nie WYKONANIE"
+        ],
+        [
+          "prawny-router-v3/references/PROFIL-LEKKI.md",
+          "⛔ sprawa karna materialna (zakaz analogii na niekorzyść — CN-GATE bez override)",
+          "⛔ sprawa karna materialna (zakaz analogii na niekorzyść adresata normy)"
+        ],
+        [
+          "shared/KONEKTORY-REKOMENDOWANE.md",
+          "powołaniem jak każde inne: podlega VER-GRAIN, CN-GATE, WYJ-GATE i wymogowi",
+          "powołaniem jak każde inne: podlega VER-GRAIN, WYJ-GATE i wymogowi"
+        ],
+        [
+          "shared/SKILL.md",
+          " CN-GATE i REM-GATE NIE są podmieniane.",
+          ""
+        ],
+        [
+          "shared/MIEDZYNARODOWE-GATES.md",
+          "(b) atrybucja per podmiot („powiązany własnościowo lub organizacyjnie\n    z państwem, więc to zachowanie państwa\") zamiast per zachowanie —\n    zastosuj rozłączne testy z CN-2 (status organu / wykonywanie funkcji\n    publicznych / faktyczne kierowanie KONKRETNYM zachowaniem)\n",
+          ""
+        ],
+        [
+          "shared/MIEDZYNARODOWE-GATES.md",
+          "(c) ZAŁOŻENIE reżimu odpowiedzialności (np. że jest absolutny) zamiast\n    odczytania go z tekstu — sprawdź, czy nie istnieje przepis-bliźniak\n    ustanawiający inny standard (winy zamiast odpowiedzialności absolutnej)\n    dla innego miejsca, przedmiotu albo strony zdarzenia (CN-3)\n",
+          ""
+        ]
+      ],
+      "nazwy_krotkie": [
+        "CN-GATE",
+        "CN-1",
+        "CN-2",
+        "CN-3"
+      ],
+      "dopuszczone_wzmianki": []
+    },
+    "REM": {
+      "opis": "REM-GATE — bramka środka naprawczego i pokrycia (REM-0…REM-4)",
+      "dodana_pomiar": "2026-09-27b (F-167)",
+      "usun_pliki": [
+        "shared/MOD-REM-GATE.md"
+      ],
+      "kotwice": [],
+      "zakresy": [
+        [
+          "prawny-router-v3/SKILL.md",
+          "**BRAMKA ŚRODKA NAPRAWCZEGO** (auto, przed oddaniem) — REM-GATE:",
+          "## REGUŁY NADRZĘDNE"
+        ]
+      ],
+      "zamiany": [
+        [
+          "prawny-router-v3/references/PROFIL-LEKKI.md",
+          "`MOD-REM-GATE`, `MOD-WYJATEK-GATE`",
+          "`MOD-WYJATEK-GATE`"
+        ],
+        [
+          "shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md",
+          "⛔ Rząd źródła **nie zmienia siły argumentu** — zob. `shared/MOD-REM-GATE.md`\n§REM-3. Zmienia wyłącznie status powołania.\n",
+          ""
+        ],
+        [
+          "shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md",
+          "⛔ **PRÓBA DWUKANAŁOWA JEST OBOWIĄZKOWA** (`shared/MOD-REM-GATE.md` §REM-0,\nF-164). Kanał kodu i kanał pobierania mają",
+          "⛔ **PRÓBA DWUKANAŁOWA JEST OBOWIĄZKOWA.** Kanał kodu i kanał pobierania mają"
+        ],
+        [
+          "shared/MIEDZYNARODOWE-GATES.md",
+          "mocny politycznie i słaby tekstowo — oznacz go jako taki (REM-3).",
+          "mocny politycznie i słaby tekstowo — oznacz go jako taki."
+        ],
+        [
+          "shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md",
+          "⛔ redukować objętość argumentu z powodu niższego rzędu źródła (REM-3)\n",
+          ""
+        ],
+        [
+          "shared/SKILL.md",
+          " Rząd źródła NIE zmienia siły argumentu (REM-3).",
+          ""
+        ],
+        [
+          "shared/WERYFIKACJA-SLAD.md",
+          "zarzutu dlatego, że jego obudowa orzecznicza upadła (REM-GATE REM-1).",
+          "zarzutu dlatego, że jego obudowa orzecznicza upadła."
+        ],
+        [
+          "pisma-procesowe-v3/references/engines/contradiction-intelligence-engine-v10.md",
+          "(b) używać zamiast odpowiedzi na merytoryczny zarzut (REM-GATE REM-1).",
+          "(b) używać zamiast odpowiedzi na merytoryczny zarzut."
+        ],
+        [
+          "shared/PRAWO-HARDGATE.md",
+          "- napisać, że źródło jest niedostępne — Reguła 12d (REM-0) wymaga pomiaru",
+          "- napisać, że źródło jest niedostępne — Reguła 12d wymaga pomiaru"
+        ],
+        [
+          "dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-PrFarm-refundacja-nadzor-sankcje.md",
+          "⛔ **Ustalone 2026-09-10h. Pomiar dwukanałowy wykonany (Reguła 12d/REM-0).**",
+          "⛔ **Ustalone 2026-09-10h. Pomiar dwukanałowy wykonany (Reguła 12d).**"
+        ],
+        [
+          "shared/KONEKTORY-REKOMENDOWANE.md",
+          "⛔ **Reguła 12d (REM-0) obowiązuje również tutaj.**",
+          "⛔ **Reguła 12d obowiązuje również tutaj.**"
+        ],
+        [
+          "prawny-router-v3/SKILL.md",
+          "- **Reguła 12d — próba przed znacznikiem (REM-0):**",
+          "- **Reguła 12d — próba przed znacznikiem:**"
+        ],
+        [
+          "prawny-router-v3/references/PROFIL-LEKKI.md",
+          "⛔ To jest ta sama klasa błędu co **F-164** (REM-0): reguła zbudowana na tezie",
+          "⛔ To jest ta sama klasa błędu co **F-164**: reguła zbudowana na tezie"
+        ]
+      ],
+      "uwaga_projektowa": "Zamiana nr 3 ZOSTAWIA regule proby dwukanalowej, usuwajac tylko jej przypisanie do REM-0. Powod: dostep do zrodel jest udokumentowany niezaleznie w shared/DOSTEP-MASZYNOWY-API.md; usuniecie samej reguly sprawiloby, ze ramie A mierzy GORSZY DOSTEP DO ZRODEL, a nie brak REM-GATE — czyli dokladnie blad 'mierzenia czegos innego niz deklarowane', ktory uniewaznil TEST1-3. Zamiany zdejmujace samo PRZYPISANIE do REM-0/REM-1/REM-3 tam, gdzie otaczajaca regula nalezy do innego modulu i nie odtwarza mechanizmu bramki (PRAWO-HARDGATE, WERYFIKACJA-SLAD, contradiction-engine, dr-10) — zachowana zostaje zdolnosc, usuniete zostaje wywolanie bramki. Granica opisana w PLAN-POMIARU-BRAMEK-UNIWERSALNY.md §3.",
+      "nazwy_krotkie": [
+        "REM-GATE",
+        "REM-0",
+        "REM-1",
+        "REM-2",
+        "REM-3",
+        "REM-4"
+      ],
+      "dopuszczone_wzmianki": []
+    }
+  },
+  "pomijane_w_skanie": [
+    "audyt-systemu-v4/",
+    "CHANGELOG.md",
+    "AUDIT-JOURNAL.md",
+    "WARN-OTWARTE.md"
+  ]
+}

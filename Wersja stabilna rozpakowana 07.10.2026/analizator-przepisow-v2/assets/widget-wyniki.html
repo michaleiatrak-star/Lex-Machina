@@ -1,0 +1,142 @@
+<!-- widget-wyniki.html — analizator-przepisow-v2, Moduł 8 (WIDGET WYNIKÓW, 7 zakładek), zasilany danymi.
+     Host obsługujący show_widget z polem `data` (Lex Machina): show_widget(path="analizator-przepisow-v2/assets/widget-wyniki.html",
+     data=DANE) — bez przepisywania kodu; host dokłada pasek eksportu/importu. Inne hosty: podmień literał po komentarzu „lex:dane”.
+     Treść renderowana jako tekst (bez HTML z danych); linki tylko http(s). Schemat DANE: SKILL.md, Krok 13 (Moduł 8). -->
+<style>
+  :root { --primary:#1B3A6B; --accent:#C8960C; --bg:#F8F7F4; --success:#16a34a; --danger:#dc2626; --warn:#d97706; --muted:#57606a; --line:#d8d4cc; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"Segoe UI",system-ui,sans-serif; background:var(--bg); color:#1f2328; min-width:320px; font-size:13px; }
+  .head { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+  .head h2 { margin:0; font-size:15px; color:var(--primary); }
+  .tabs { display:flex; overflow-x:auto; border-bottom:1px solid var(--line); background:#fff; }
+  .tab { padding:8px 12px; cursor:pointer; white-space:nowrap; color:var(--muted); border-bottom:2px solid transparent; }
+  .tab.active { color:var(--primary); border-bottom-color:var(--accent); font-weight:600; }
+  .panel { display:none; padding:12px 16px; } .panel.active { display:block; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:10px; }
+  .badge { display:inline-block; font-size:11px; padding:1px 8px; border-radius:10px; border:1px solid var(--line); background:#f3f1ec; margin-right:4px; }
+  .ok { background:#e9f7ee; border-color:var(--success); color:#0f6b31; } .bad { background:#fdecec; border-color:var(--danger); color:#9b1c1c; } .mid { background:#fff4e5; border-color:var(--warn); color:#8a4b00; }
+  .tresc { white-space:pre-wrap; line-height:1.55; }
+  .muted { color:var(--muted); font-size:12px; }
+  .node { border-left:4px solid var(--line); background:#fff; border-radius:6px; padding:6px 10px; margin:6px 0 6px 18px; }
+  .node.T { border-left-color:var(--success); } .node.N { border-left-color:var(--danger); } .node.Q { border-left-color:var(--warn); }
+  table { width:100%; border-collapse:collapse; background:#fff; } th, td { border:1px solid var(--line); padding:5px 7px; text-align:left; vertical-align:top; }
+  th { background:#f3f1ec; font-size:12px; }
+  .bar { height:7px; background:#e6e2da; border-radius:4px; overflow:hidden; min-width:60px; } .bar > div { height:100%; background:var(--primary); }
+  .big { font-size:15px; font-weight:700; padding:10px 12px; border-radius:8px; border:2px solid; margin-bottom:10px; }
+  button.act { border:1px solid var(--primary); background:#fff; color:var(--primary); border-radius:6px; padding:5px 10px; cursor:pointer; margin:4px 6px 0 0; font:inherit; }
+  button.act.on { background:var(--primary); color:#fff; }
+  .rel { cursor:pointer; } .rel:hover { background:#f6f3ea; }
+  details summary { cursor:pointer; font-weight:600; color:var(--primary); }
+  .empty { color:var(--muted); font-style:italic; }
+</style>
+<div class="head"><h2 id="w-tytul"></h2><span id="w-status"></span></div>
+<div class="tabs" id="w-tabs"></div>
+<div id="t1" class="panel"></div><div id="t2" class="panel"></div><div id="t3" class="panel"></div><div id="t4" class="panel"></div>
+<div id="t5" class="panel"></div><div id="t6" class="panel"></div><div id="t7" class="panel"></div>
+<script>
+const DANE = /* lex:dane */ {
+  przepis: { oznaczenie: "art. 415 KC (dane przykładowe, fikcyjne)", akt: "Kodeks cywilny", tresc: "Treść przepisu z ELI.", status: "obowiazuje", stan_na: "2026-10-05", url: "https://eli.gov.pl/", w_praktyce: "" },
+  przeslanki: { logika: "AND", lista: [{ id: "P1", nazwa: "szkoda", status: "?", pewnosc: 50, uzasadnienie: "", braki: "" }] },
+  wynik: { ocena: "watpliwe", opis: "" },
+  orzeczenia: { jednolita: true, lista: [] }, powiazania: [], historia: [], raport: { konkluzja: "", pewnosc: 50, ryzyka: [], rekomendacje: [] }
+};
+(function () {
+  const D = DANE || {};
+  const $ = (id) => document.getElementById(id);
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null && text !== "") e.textContent = String(text); return e; }
+  function link(url, text) { if (!/^https?:\/\//i.test(String(url || ""))) return null; const a = el("a", "", text || "Otwórz źródło"); a.href = url; a.target = "_blank"; a.rel = "noopener"; return a; }
+  function bar(p) { const b = el("div", "bar"); const f = el("div"); f.style.width = Math.max(0, Math.min(100, Number(p) || 0)) + "%"; b.appendChild(f); return b; }
+  function empty(parent, text) { parent.appendChild(el("p", "empty", text)); }
+  function prompt(text) { if (typeof window.sendPrompt === "function") window.sendPrompt(text); }
+  const ST = { T: ["T", "spełniona", "ok"], N: ["N", "niespełniona", "bad"], "?": ["Q", "wątpliwa", "mid"] };
+  const P = D.przepis || {};
+  $("w-tytul").textContent = P.oznaczenie || "Analiza przepisu";
+  const STATUS = { obowiazuje: ["obowiązuje", "ok"], zmieniony: ["zmieniony", "mid"], uchylony: ["uchylony", "bad"] };
+  const s = STATUS[P.status]; if (s) $("w-status").appendChild(el("span", "badge " + s[1], s[0]));
+  const TABS = ["Karta przepisu", "Drzewo przesłanek", "Matryca oceny", "Orzecznictwo", "Powiązania norm", "Historia zmian", "Raport"];
+  TABS.forEach(function (name, i) { const t = el("div", "tab", name); t.onclick = function () { show(i + 1); }; $("w-tabs").appendChild(t); });
+  function show(n) { for (let i = 1; i <= 7; i++) { $("t" + i).classList.toggle("active", i === n); $("w-tabs").children[i - 1].classList.toggle("active", i === n); } }
+
+  // 1 — karta przepisu
+  const k = $("t1"); const card = el("div", "card");
+  card.appendChild(el("div", "muted", [P.akt, P.stan_na ? "stan prawny na " + P.stan_na : ""].filter(Boolean).join(" · ")));
+  card.appendChild(el("div", "tresc", P.tresc || "")); const l = link(P.url, "Tekst w źródle"); if (l) card.appendChild(l); k.appendChild(card);
+  if ((P.os_czasu || []).length) { const c = el("div", "card"); c.appendChild(el("strong", "", "Oś czasu zmian")); P.os_czasu.forEach(function (z) { c.appendChild(el("div", "", (z.data || "") + " — " + (z.opis || ""))); }); k.appendChild(c); }
+  if (P.w_praktyce) { const d = el("details"); d.appendChild(el("summary", "", "W PRAKTYCE")); d.appendChild(el("div", "tresc", P.w_praktyce)); k.appendChild(d); }
+
+  // 2 — drzewo przesłanek z trybem krokowym
+  const lista = ((D.przeslanki || {}).lista) || [];
+  const t2 = $("t2"); t2.appendChild(el("span", "badge", "Logika: " + ((D.przeslanki || {}).logika || "AND")));
+  lista.forEach(function (p) { const st = ST[p.status] || ST["?"]; const n = el("div", "node " + st[0]); n.title = p.uzasadnienie || ""; n.appendChild(el("strong", "", (p.id || "") + " " + (p.nazwa || ""))); n.appendChild(el("span", "badge " + st[2], st[1])); if (p.uzasadnienie) n.appendChild(el("div", "muted", p.uzasadnienie)); t2.appendChild(n); });
+  if (!lista.length) empty(t2, "Brak przesłanek.");
+  else {
+    const krok = el("div", "card"); const start = el("button", "act", "Sprawdź krok po kroku"); krok.appendChild(start); t2.appendChild(krok);
+    start.onclick = function () {
+      const odp = []; krok.textContent = "";
+      (function pytanie(i) {
+        krok.textContent = "";
+        if (i >= lista.length) {
+          const logika = (D.przeslanki || {}).logika || "AND";
+          const wynik = logika === "OR" ? (odp.indexOf("TAK") >= 0 ? "przepis stosuje się" : odp.indexOf("WĄTPLIWE") >= 0 ? "wynik wątpliwy" : "przepis nie stosuje się")
+            : (odp.indexOf("NIE") >= 0 ? "przepis nie stosuje się" : odp.indexOf("WĄTPLIWE") >= 0 ? "wynik wątpliwy" : "przepis stosuje się");
+          krok.appendChild(el("strong", "", "Podsumowanie: " + wynik + (logika === "MIXED" ? " (logika mieszana — sprawdź strukturę przesłanek)" : "")));
+          const r = el("button", "act", "Zacznij od nowa"); r.onclick = start.onclick; krok.appendChild(el("br")); krok.appendChild(r); return;
+        }
+        krok.appendChild(el("div", "muted", "Krok " + (i + 1) + "/" + lista.length));
+        krok.appendChild(el("div", "", "Czy przesłanka [" + (lista[i].id || "P" + (i + 1)) + ": " + (lista[i].nazwa || "") + "] jest spełniona?"));
+        ["TAK", "NIE", "WĄTPLIWE"].forEach(function (o) { const b = el("button", "act", o); b.onclick = function () { odp.push(o); pytanie(i + 1); }; krok.appendChild(b); });
+      })(0);
+    };
+  }
+
+  // 3 — matryca oceny
+  const t3 = $("t3");
+  if (lista.length) {
+    const tb = el("table"); const h = el("tr"); ["Przesłanka", "Status", "Pewność", "Uzasadnienie", "Braki"].forEach(function (x) { h.appendChild(el("th", "", x)); }); tb.appendChild(h);
+    lista.forEach(function (p) { const st = ST[p.status] || ST["?"]; const r = el("tr"); r.appendChild(el("td", "", (p.id || "") + " " + (p.nazwa || ""))); const c = el("td"); c.appendChild(el("span", "badge " + st[2], st[1])); r.appendChild(c);
+      const pc = el("td"); pc.appendChild(bar(p.pewnosc)); pc.appendChild(el("span", "muted", (Number(p.pewnosc) || 0) + "%")); r.appendChild(pc); r.appendChild(el("td", "", p.uzasadnienie || "")); r.appendChild(el("td", "", p.braki || "")); tb.appendChild(r); });
+    t3.appendChild(tb);
+  } else empty(t3, "Brak przesłanek.");
+  const W = D.wynik || {}; const WY = { stosuje: ["PRZEPIS STOSUJE SIĘ", "ok"], nie_stosuje: ["PRZEPIS NIE STOSUJE SIĘ", "bad"], watpliwe: ["WYNIK WĄTPLIWY", "mid"] }[W.ocena];
+  if (WY) { const b = el("div", "big " + WY[1], "WYNIK KOŃCOWY: " + WY[0]); t3.appendChild(b); if (W.opis) t3.appendChild(el("div", "tresc", W.opis)); }
+
+  // 4 — orzecznictwo z filtrami
+  const O = D.orzeczenia || {}; const t4 = $("t4");
+  if (O.jednolita === false && O.rozbieznosc) { const r = O.rozbieznosc; const b = el("div", "card bad"); b.appendChild(el("strong", "", "LINIA NIEJEDNOLITA"));
+    [["Stanowisko A", r.a], ["Stanowisko B", r.b], ["Przyczyna rozbieżności", r.przyczyna], ["Rekomendacja", r.rekomendacja]].forEach(function (x) { if (x[1]) b.appendChild(el("div", "", x[0] + ": " + x[1])); }); t4.appendChild(b); }
+  else if (O.jednolita === true) t4.appendChild(el("div", "card ok", "LINIA JEDNOLITA"));
+  const TIER = { 1: "SN/NSA/TK", 2: "SA/WSA", 3: "SR/SO" }; const filtry = el("div"); const aktywne = { 1: true, 2: true, 3: true }; const karty = [];
+  [1, 2, 3].forEach(function (t) { const b = el("button", "act on", TIER[t]); b.onclick = function () { aktywne[t] = !aktywne[t]; b.classList.toggle("on", aktywne[t]); karty.forEach(function (c) { c.el.style.display = aktywne[c.tier] ? "" : "none"; }); }; filtry.appendChild(b); });
+  t4.appendChild(filtry);
+  (O.lista || []).forEach(function (o) { const tier = [1, 2, 3].indexOf(Number(o.tier)) >= 0 ? Number(o.tier) : 3; const c = el("div", "card"); c.appendChild(el("strong", "", o.sygnatura || ""));
+    c.appendChild(el("span", "badge", "tier " + tier + " · " + TIER[tier])); c.appendChild(el("div", "muted", [o.sad, o.rok].filter(Boolean).join(", "))); c.appendChild(el("div", "tresc", o.teza || ""));
+    if (o.trafnosc !== undefined) { c.appendChild(el("div", "muted", "Trafność: " + (Number(o.trafnosc) || 0) + "%")); c.appendChild(bar(o.trafnosc)); }
+    const a = link(o.url, "Otwórz orzeczenie"); if (a) c.appendChild(a); else c.appendChild(el("span", "badge mid", "BRAK URL")); t4.appendChild(c); karty.push({ el: c, tier: tier }); });
+  if (!(O.lista || []).length) empty(t4, "Brak orzeczeń.");
+
+  // 5 — powiązania norm
+  const t5 = $("t5"); const KOL = { odeslanie: "mid", wyjatek: "bad", lex_specialis: "bad", uzupelnienie: "ok", definicja: "ok" };
+  (D.powiazania || []).forEach(function (r) { const n = el("div", "node rel"); n.appendChild(el("strong", "", (r.artykul || "") + (r.akt ? " " + r.akt : ""))); n.appendChild(el("span", "badge " + (KOL[r.relacja] || ""), r.relacja || "relacja"));
+    if (r.opis) n.appendChild(el("div", "muted", r.opis)); n.title = "Kliknij, aby przeanalizować"; n.onclick = function () { prompt("Analizuj " + (r.artykul || "") + " " + (r.akt || "")); }; t5.appendChild(n); });
+  if (!(D.powiazania || []).length) empty(t5, "Brak powiązań.");
+
+  // 6 — historia zmian
+  const t6 = $("t6"); const H = D.historia || [];
+  const dzis = new Date(); const swieza = H.some(function (z) { const d = new Date(z.data); return !isNaN(d) && (dzis - d) / 86400000 <= 183; });
+  if (swieza) t6.appendChild(el("div", "card mid", "ŚWIEŻA NOWELIZACJA — zmiana w ostatnich 6 miesiącach"));
+  if (H.length) { const tb = el("table"); const h = el("tr"); ["Data", "Akt zmieniający", "Opis", "Istotność"].forEach(function (x) { h.appendChild(el("th", "", x)); }); tb.appendChild(h);
+    H.forEach(function (z) { const r = el("tr"); r.appendChild(el("td", "", z.data || "")); r.appendChild(el("td", "", z.akt_zmieniajacy || "")); r.appendChild(el("td", "", z.opis || ""));
+      const c = el("td"); c.appendChild(el("span", "badge " + (z.istotnosc === "wysoka" ? "mid" : ""), z.istotnosc === "wysoka" ? "WYSOKA" : "niska")); r.appendChild(c); tb.appendChild(r); });
+    t6.appendChild(tb); } else empty(t6, "Brak nowelizacji w ostatnich 3 latach.");
+  if (D.porownanie && (D.porownanie.poprzednia || D.porownanie.aktualna)) { const c = el("div", "card"); c.appendChild(el("strong", "", "Porównanie wersji")); c.appendChild(el("div", "muted", "Poprzednia:")); c.appendChild(el("div", "tresc", D.porownanie.poprzednia || "")); c.appendChild(el("div", "muted", "Aktualna:")); c.appendChild(el("div", "tresc", D.porownanie.aktualna || "")); t6.appendChild(c); }
+
+  // 7 — raport
+  const R = D.raport || {}; const t7 = $("t7"); const KK = { zielony: "ok", czerwony: "bad", pomaranczowy: "mid" }[R.kolor] || (WY ? WY[1] : "mid");
+  if (R.konkluzja) t7.appendChild(el("div", "big " + KK, R.konkluzja));
+  t7.appendChild(el("div", "muted", "Pewność analizy: " + (Number(R.pewnosc) || 0) + "%")); t7.appendChild(bar(R.pewnosc));
+  [["Ryzyka", R.ryzyka], ["Rekomendacje", R.rekomendacje]].forEach(function (x) { if (!(x[1] || []).length) return; const c = el("div", "card"); c.appendChild(el("strong", "", x[0])); const ul = el("ul"); x[1].forEach(function (t) { ul.appendChild(el("li", "", t)); }); c.appendChild(ul); t7.appendChild(c); });
+  if (R.dla_ciebie) t7.appendChild(el("div", "card", "Co to oznacza dla Ciebie: " + R.dla_ciebie));
+  ["Generuj pismo procesowe", "Zbadaj orzecznictwo", "Analizuj dowody"].forEach(function (t) { const b = el("button", "act", t); b.onclick = function () { prompt(t); }; t7.appendChild(b); });
+  show(1);
+})();
+</script>

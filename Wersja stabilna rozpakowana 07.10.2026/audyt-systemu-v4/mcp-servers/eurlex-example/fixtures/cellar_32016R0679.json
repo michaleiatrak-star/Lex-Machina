@@ -1,0 +1,27 @@
+[
+ {
+  "work": {
+   "type": "uri",
+   "value": "http://publications.europa.eu/resource/cellar/3e485e15-11bd-11e6-ba9a-01aa75ed71a1"
+  },
+  "title": {
+   "type": "literal",
+   "value": "Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) (Tekst mający znaczenie dla EOG)"
+  },
+  "date": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#date",
+   "value": "2016-04-27"
+  },
+  "inforce": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#boolean",
+   "value": "1"
+  },
+  "end": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#date",
+   "value": "9999-12-31"
+  }
+ }
+]

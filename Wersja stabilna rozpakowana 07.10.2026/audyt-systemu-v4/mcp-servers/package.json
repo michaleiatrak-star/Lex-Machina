@@ -1,0 +1,13 @@
+{
+  "name": "lex-machina-mcp-servers",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Serwery MCP Lex Machina — wspólne zależności (AUDYT-2026-09-27s: scalone z 10 kopii per serwer)",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "pdfjs-dist": "4.10.38",
+    "zod": "^4.4.3"
+  }
+}

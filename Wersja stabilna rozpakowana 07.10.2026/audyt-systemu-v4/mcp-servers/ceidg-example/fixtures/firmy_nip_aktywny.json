@@ -1,0 +1,15 @@
+{
+  "_zrodlo": "KSZTAŁT zmierzony na żywym API https://dane.biznes.gov.pl/api/ceidg/v3/firmy?nip=... 2026-09-29 (AUDYT-2026-09-29, F-214). Dane osobowe, adres, NIP, REGON i id ZASTĄPIONE FIKCYJNYMI (NIP z poprawną sumą kontrolną). Klucze i zagnieżdżenie — bez zmian.",
+  "firmy": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "nazwa": "Jan Testowy Usługi",
+      "adresDzialalnosci": { "ulica": "ul. Przykładowa", "budynek": "1", "lokal": "2", "miasto": "Jaworzno", "wojewodztwo": "ŚLĄSKIE", "powiat": "Jaworzno", "gmina": "Jaworzno", "kraj": "PL", "kod": "43-600", "terc": "2468011", "simc": "0940335", "ulic": "00000" },
+      "wlasciciel": { "imie": "Jan", "nazwisko": "Testowy", "nip": "1234563218", "regon": "000000000" },
+      "dataRozpoczecia": "2026-09-21",
+      "status": "AKTYWNY",
+      "link": "https://dane.biznes.gov.pl/api/ceidg/v3/firma/00000000-0000-4000-8000-000000000001"
+    }
+  ],
+  "count": 1
+}
