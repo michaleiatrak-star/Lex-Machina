@@ -18,7 +18,13 @@ orzeczenia.ms.gov.pl) w logu sesji.
 
 ```
 python3 walidator_cytowan.py --document pismo.docx --log sesja.json
+python3 walidator_cytowan.py --self-test   # przypadki negatywne zgł. #89
 ```
+
+Dopasowanie (od shared 3.99.19, zgł. #89): domena urzędowa = host z `urlparse` równy domenie
+albo `*.domena`, tylko `https` (także w `result_urls`); zgodność = pełny identyfikator
+(Dz.U.: rok + pozycja, także ELI `DU/RRRR/POZ` i `WDU…`; sygnatura: wszystkie człony;
+artykuł: numer [+ §] [+ skrót kodeksu]), nie pojedynczy ciąg cyfr.
 
 Przykład (żywy test, oba scenariusze):
 ```
