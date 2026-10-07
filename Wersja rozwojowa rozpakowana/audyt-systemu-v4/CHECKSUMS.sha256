@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-15fb3e7bd2d44bfec9513275de007acdfacbeeaceb5127194823a11c862b462e  ./SKILL.md
+abcb191c30f534af12102899329efb0245e1a55ea5ff4445b6fbed53e3915b67  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -64,6 +64,7 @@ a05c97584e366b660da784d061a2d661929b3acaaf51e50766bf4ff17711082a  ./mcp-servers/
 871cd4f763e943ebd76c7e7e17fe3c4b4b0fb161e95551985127c8b1d2b3fe1e  ./mcp-servers/saos-example/test_normalizacja.mjs
 b7a00e5b21791fe4f5578d9c6141c3efc79c817ec60dd69a0b90fd0b4e18db4b  ./mcp-servers/sn-example/sn-captcha-auto.mjs
 ef35958e15310ad768c1d3fdcd7735d0078ff0de6803b2837fa86c5b3f02ddd7  ./mcp-servers/sn-example/sn-mcp-server.js
+13380efe40cf9e306668ab64335c538abda7d133fb5d79b24a54bf06277917c6  ./mcp-servers/sn-example/test_normalizacja.mjs
 3b8100a80817aee9fd8690c09675ff87fd2e5a8c2af857a255ec3ed879d5e7fd  ./mcp-servers/sp-example/sp-mcp-server.js
 208c9a30af99c60ba8ea8e44d79f4368ca416edb49e25148a7c19dabd5a436eb  ./mcp-servers/sudop-example/README.md
 1cba6bad59aadec9058c9dc109ac5d850a2494136ac77a26648d0e13dc45ad78  ./mcp-servers/sudop-example/sudop-mcp-server.js
@@ -72,6 +73,7 @@ ef35958e15310ad768c1d3fdcd7735d0078ff0de6803b2837fa86c5b3f02ddd7  ./mcp-servers/
 fb90065f5a11aa61a795238376dfb9b5bec7439d685a3a90026da6f2b88632bb  ./mcp-servers/test_poprawnosci.mjs
 913b405fb251ce3a042119f7ebfd3b49b0e4ac7f8bc7b4b6399504d23c1de84b  ./mcp-servers/test_protokol.mjs
 71d3363a30983ed1dddda8fa26a1240eae178a3781bd8a9a434679d9622232c9  ./mcp-servers/test_sady.mjs
+49233a917342bc6c346098e8781af0d53b46c677fe7455050647830383fd02ca  ./mcp-servers/tk-example/test_normalizacja.mjs
 822748b622a4740fc445ce664ea0bd4bf7edeb6479724e93dc1b6b3d5ab37e0c  ./mcp-servers/tk-example/tk-mcp-server.js
 c226922d0f6da812b4d3f257893708f908622057386c576b4635ed887d76c40b  ./mcp-servers/uodo-example/fixtures/uodo.json
 ce24aabec71ee995707965b9f8a990c1e2eb63c1caeccf2a887f86e1ccbf5546  ./mcp-servers/uodo-example/test_normalizacja.mjs
@@ -90,15 +92,11 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 53f0880bdbf47510b8c7fb18a67130b1a3f2107bcb9d931a37e422aa82a92461  ./modules/MOD-WSTAWKI.md
 13279701eef22c911cdbcb35412d94c9a85112217351307db910732dbc21e8da  ./references/ALIASY-NAZW-AKTOW.md
 2b830671a3dde03bbb72e16098d9bb9231ba0cf9a98ba2d10d3073f75f04d010  ./references/AUDIT-JOURNAL.md
-3bf7289e4b1f1f9ffdbd1fa0834e81c5c9404510d58de48bf7b745fabc4eaff3  ./references/CHANGELOG.md
+ffeb88da05cb6476042db2ff35f2005e7dab78a3adb0b97298c078050093226d  ./references/CHANGELOG.md
 aee9df0be072509755f8ce08a6863ffec3aee26277d7239005542a42da732f67  ./references/CHECKLIST-DEDUP.md
 4029e076fe66794f7ccbd36ee3da795faf8d856895ebaba8461d755f89c02f78  ./references/COWORK-HARMONOGRAM-NATYWNY.md
-acf1a3408d1662c382244cc8a0ae87861ffa6d4d63f1501470cd6ee218bd2f66  ./references/F-104-lista-robocza-mapa-dzu.md
-42ae3bed0e65d108ec029a58cec6fd5c0b591cd29803fdae133a094c1236d3a6  ./references/F-104-lista-robocza-roczniki-starsze.md
 77f0985c652b148932668bbad675c927ab1649a1e1bde87cab6701abe888ad8a  ./references/F-108-lista-MS-egzamin-2026.md
-1783b3f1963d355e5e351f8b5b63504c53d466cdf6fd7c019d0522adc4203d3c  ./references/F-108-verification-2026-08-28.md
 4daada2cfff51f2f20f9129cd04893336fe7d5e8c7a439b57579326d5d84b1fb  ./references/F-113-PREFLIGHT-2026-08-26.md
-4114229a4f662c18cd730212ed8e8ba50911ceadd913021d767827d75ea43c48  ./references/F-136-zakres-DzU-2022-2600.md
 7a47f3a73c5e5315c1dd590daa42e1747c287c9932d8fe13dfddace2b0ec7603  ./references/F-152-pomiar-domen-2026-09-04.md
 baa43c96154b351da65b3af2c3971ba95f1b2c4199d317c77bb9c36a825c659e  ./references/F-171-pomiar-domen-2026-09-09.md
 5890bd42e0ea323562414ea63b0cd34da395696c08aa3544877b836e4804e73c  ./references/FORMAT-RAPORTU-ROZNIC.md
@@ -114,17 +112,9 @@ c679e729f656a190e7f28f8322bd4b4787fa239fdce03fbe5d2ffaf2fdc1b990  ./references/P
 722f681125e6308658fb3b47433a57a3355409a245477df47f6a2e937c3981d4  ./references/REJESTR-KORPUSU-POMIAROWEGO.md
 c17f58e4f82e65706a75b7d47bc097772787da8533fc2f647814d90f721bf750  ./references/SCHEDULED-TASK-COWORK.md
 634f7086e1298864a5064782c5c1986ff44d5845722eee51ca6c2f81ee013b85  ./references/SKRYPTY-RECZNE.md
-e905551b41855ba8fd0e57d13b743c4cd02352f77ccedbf6fe98e7f79595fc0a  ./references/SPROSTOWANIE-LM-2026-08-23.md
-4348feae13e9494b753627a408167aeb1247bd9d245bbb6092135b395acb2218  ./references/SYNC-DZU-AUTOMATYCZNY.md
+82a72e5ef250fdbbbd184bd943bfc2a408d5b6a459a8a3d913624c48573dc4b9  ./references/SYNC-DZU-AUTOMATYCZNY.md
 5aba0dd82c9189b49690817fb06cb7c6d9e7cc1c112491c52997dd99287bdeab  ./references/WARN-OTWARTE.md
-773846301c27612af25ac6ce60076757d8e1845d86aad45cdb0cebb4cc786101  ./references/mapa_dzu_2026-07-02.md
-830c8b2cca04f595b9b36b38743fbe20afd589490b529559509700f7b77499b4  ./references/mapa_dzu_2026-07-04.md
-c6e1a0e5b813254cec3859e76c7053c87401845f9ecfa6adda7437dbf5e7ad38  ./references/mapa_dzu_2026-07-15.md
-f86ea55ffa93b7e24770a505096d751887a75298198061eeb149f2f0e7ba00bc  ./references/mapa_dzu_2026-08-26.md
 b53258f9480de7129bdc392b9fbd403dde496cfa6e17720c70b21a6a99b417b3  ./references/mapa_dzu_2026-08-28.md
-be721ceacbb1aa48a6d0c8074bb08a19fe89ff9340eb7459c227efc749efabbf  ./references/mapa_dzu_2026-09-09.md
-afe1664ba6d6a19a2bed6a8133adee311e754251c882aa2934562e3d156fefc4  ./references/mapa_dzu_2026-09-10.md
-b921c4b6d7b79604634906bdc75c1323b7b5518125708f3bdf3fe708ff9f3192  ./references/mapa_dzu_2026-09-22.md
 1d90055b17a638fe63de90b8c4f1b8d80b00447163e096137abbc23ffc281ab1  ./references/mapa_dzu_2026-10-04.md
 24e8f5b4e4230b0d790a4bd12fd8a42abfe8cea7486a63d0dbb3f80fe30988ee  ./references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md
 641c3646c2a480cf0425f959157cc132ffe0f3655a4d08408d6881a01ab80584  ./references/raporty-pokrycia-2026-08-13/raport-pokrycia-KKW.md
@@ -186,6 +176,7 @@ f99267e67a76d1ee1888563696afccb04d6e8c530e84abf7f22d2258444ea0c3  ./scripts/test
 f9d2127aae0202ea0bfbd7820946642588a37995f8e1095193683f451a07ca90  ./scripts/test_f108_consistency.py
 cb5f1bfc6cbedb4f175e56c5d807f044f19f32237427e33a99f4e8c1864076d1  ./scripts/test_f108_trade.py
 efaf2952fff1164cd7d9921c52b274b85f5535dbf63e292bd8932906aff5209b  ./scripts/test_header_snapshot.py
+a11daec78ae28f13741370ba832a4fc067b6d2645b999930ed2a37103005c116  ./scripts/test_konstytucja_tekst_czysty.py
 abc88148e6cbf61559c7dc187f25c0b458ba59dc0efa8240ffbc6db2a0c1eb9f  ./scripts/test_mac_ce_litery.py
 899c914ec10189ed892d98df9f4a928f758e5bcac85074e80303467fdac9b7f6  ./scripts/test_module_count.py
 ad8c406e100e29c550843f1c0ed16eb0bb4f0b5bfdd0486efd6a97128347e7ec  ./scripts/test_module_registration.py
@@ -195,6 +186,3 @@ ad8c406e100e29c550843f1c0ed16eb0bb4f0b5bfdd0486efd6a97128347e7ec  ./scripts/test
 7819f3628026a9e1334f7f3ee934b4483be33c4c3caa1fc1f37d16f167dbe934  ./scripts/test_title_scope_match.py
 3f4ff8808d97b116562fcca4839a024f853fff97670d034ac69695c098dfaa79  ./scripts/weryfikator_sygnatur.py
 e1c3e575fc614e0d6c19920cf3a91e463b64f639cc86656deb67439b658ba972  ./widgets/WIDGET-MENU.md
-a11daec78ae28f13741370ba832a4fc067b6d2645b999930ed2a37103005c116  ./scripts/test_konstytucja_tekst_czysty.py
-49233a917342bc6c346098e8781af0d53b46c677fe7455050647830383fd02ca  ./mcp-servers/tk-example/test_normalizacja.mjs
-13380efe40cf9e306668ab64335c538abda7d133fb5d79b24a54bf06277917c6  ./mcp-servers/sn-example/test_normalizacja.mjs

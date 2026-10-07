@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.207"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.208"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -21,21 +21,13 @@ references:
   - references/F-113-PREFLIGHT-2026-08-26.md
   - references/HISTORIA-ZMIAN-PLIKOW.md
   - references/CHANGELOG.md
-  - references/F-104-lista-robocza-roczniki-starsze.md
-  - references/F-136-zakres-DzU-2022-2600.md
   - references/F-171-pomiar-domen-2026-09-09.md
   - references/F-152-pomiar-domen-2026-09-04.md
   - references/PORTALE-ORZECZNICZE-API.md
   - references/WARN-OTWARTE.md
-  - references/SPROSTOWANIE-LM-2026-08-23.md
   - references/CHECKLIST-DEDUP.md
   - references/mapa_dzu_2026-10-04.md
-  - references/mapa_dzu_2026-09-22.md
-  - references/mapa_dzu_2026-09-10.md
-  - references/mapa_dzu_2026-09-09.md
   - references/mapa_dzu_2026-08-28.md
-  - references/mapa_dzu_2026-08-26.md
-  - references/mapa_dzu_2026-07-15.md
   - references/ALIASY-NAZW-AKTOW.md
   - references/SKRYPTY-RECZNE.md
   - references/PROTOKOL-WYKONAWCZY-F113.md
@@ -46,12 +38,8 @@ references:
   - references/SCHEDULED-TASK-COWORK.md
   - references/PAMIEC-TRWALA-ROUTER.md
   - references/FORMAT-RAPORTU-ROZNIC.md
-  - references/mapa_dzu_2026-07-04.md
-  - references/mapa_dzu_2026-07-02.md
   - references/F-108-lista-MS-egzamin-2026.md
-  - references/F-108-verification-2026-08-28.md
   - references/COWORK-HARMONOGRAM-NATYWNY.md
-  - references/F-104-lista-robocza-mapa-dzu.md
   - references/raporty-pokrycia-2026-08-13/
   - references/PLAN-POMIARU-BRAMEK-UNIWERSALNY.md
   - references/REJESTR-BRAMEK-POMIAR.json
@@ -70,6 +58,7 @@ scripts:
   - scripts/check_graf_przyczynowy.py
   - scripts/check_mapy_aktow.py
   - scripts/test_mac_ce_litery.py
+  - scripts/test_konstytucja_tekst_czysty.py
   - scripts/napraw_tekst_dzu.py
   - scripts/check_osiagalnosc_shared.py
   - scripts/check_sieroty.py
@@ -1299,25 +1288,16 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
     ├── PORTALE-ORZECZNICZE-API.md              ← dostęp maszynowy do orzecznictwa/interpretacji
     ├── F-171-pomiar-domen-2026-09-09.md        ← surowy wynik T25 (52 sondy), 4 regresje — F-171
     ├── F-152-pomiar-domen-2026-09-04.md        ← surowy wynik T25 (40 sond), dowód zamknięcia F-152
-    ├── F-136-zakres-DzU-2022-2600.md           ← 116/116 dyspozycji nowelizacji KK i pomiar korpusu
     ├── SYNC-DZU-AUTOMATYCZNY.md                ← + HARMONOGRAM-CRON.md, FORMAT-RAPORTU-ROZNIC.md
     ├── SCHEDULED-TASK-COWORK.md                ← POZYCJA 11 menu (FAZA 0C)
     ├── PAMIEC-TRWALA-ROUTER.md                 ← POZYCJA 13 menu (FAZA 0D)
-    ├── SPROSTOWANIE-LM-2026-08-23.md           ← dokument dla autora raportów TEST1-3
     ├── F-108-lista-MS-egzamin-2026.md          ← benchmark F-108 (52 akty MS; 52/52 B+/COV, 0 FULL)
-    ├── F-108-verification-2026-08-28.md         ← raport źródłowy re-audytu F-108
-    ├── F-104-lista-robocza-mapa-dzu.md         ← lista robocza F-104, rocznik 2026
-    ├── F-104-lista-robocza-roczniki-starsze.md ← lista robocza F-104, roczniki 2013-2025 (F-124)
     ├── mapa_dzu_2026-10-04.md                  ← mapa Dz.U. AKTUALNA (AUDYT-2026-10-04, 2026/1161)
-    ├── mapa_dzu_2026-09-22.md                  ← generacja poprzednia (F-193)
-    ├── mapa_dzu_2026-09-10.md                  ← generacja poprzednia (F-148a)
-    ├── mapa_dzu_2026-09-09.md                  ← generacja poprzednia (F-172)
-    ├── mapa_dzu_2026-08-28.md                  ← POPRZEDNIA generacja
-    ├── mapa_dzu_2026-08-26.md                  ← POPRZEDNIA generacja
-    ├── mapa_dzu_2026-07-15 / 07-04 / 07-02.md  ← POPRZEDNIE generacje, cytowane w dzienniku (06-14 usunięta w 6.146)
+    ├── mapa_dzu_2026-08-28.md                  ← generacja poprzednia; dane test_f108_consistency.py
+    │                                             (starsze generacje usunięte w 6.208 — historia w Git)
     └── raporty-pokrycia-2026-08-13/            ← 12 raportów + indeks = 13 plików
 ```
 
 ---
 
-*Wersja: 6.207 | Ostatnia aktualizacja: 2026-10-07 (AUDYT-2026-10-07d). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.208 | Ostatnia aktualizacja: 2026-10-07 (AUDYT-2026-10-07e). Stopkę aktualizuj razem z polem `version`.*
