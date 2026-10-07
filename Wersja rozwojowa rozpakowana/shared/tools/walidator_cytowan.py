@@ -44,6 +44,8 @@ Użycie:
 
 Kod wyjścia: 0 = wszystkie cytaty mają odpowiadające zdarzenie weryfikacji
              1 = co najmniej jedna cytata bez śladu weryfikacji (BLOKADA)
+
+Testy: tools/test_walidator_cytowan.py (python3 -m unittest test_walidator_cytowan, offline).
 """
 
 import argparse
@@ -51,6 +53,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 OFFICIAL_DOMAINS = (
     "isap.sejm.gov.pl",
@@ -101,16 +104,41 @@ def read_document_text(path: Path) -> str:
 
 def tokenize_citation(citation_text: str):
     """Wyciąga tokeny identyfikujące cytat (numery, lata) do dopasowania
-    fuzzy wobec query_context/url w logu — np. z 'Dz.U. 2023 poz. 1691'
+    wobec query_context/url w logu — np. z 'Dz.U. 2023 poz. 1691'
     wyciąga {'2023', '1691'}; z 'art. 211 KC' wyciąga {'211'}."""
-    return set(re.findall(r"\d+", citation_text))
+    return {str(int(n)) for n in re.findall(r"\d+", citation_text)}
+
+
+# Identyfikator ISAP (WDU/WMP + rok 4 cyfry + numer 3 + pozycja 4), np. WDU20230001691.
+ISAP_ID = re.compile(r"W(?:DU|MP)(\d{4})(\d{3})(\d{4})", re.IGNORECASE)
+
+
+def official_url(url: str) -> bool:
+    """https i host równy domenie urzędowej albo jej subdomenie. Nie podciąg
+    URL-a: 'msn.pl', 'sn.pl.evil.example' i 'evil.example/sn.pl' odpadają."""
+    try:
+        parts = urlsplit((url or "").strip())
+        host = (parts.hostname or "").rstrip(".").lower()
+    except ValueError:
+        return False
+    return parts.scheme == "https" and any(host == d or host.endswith("." + d) for d in OFFICIAL_DOMAINS)
+
+
+def haystack_numbers(text: str) -> set:
+    """Całe liczby z tekstu zdarzenia (bez zer wiodących) plus rok, numer
+    i pozycja rozpisane z identyfikatora ISAP."""
+    numbers = {str(int(n)) for n in re.findall(r"\d+", text)}
+    for rok, nr, poz in ISAP_ID.findall(text):
+        numbers.update({str(int(rok)), str(int(nr)), str(int(poz))})
+    return numbers
 
 
 def log_has_verification(citation, events):
     """Zwraca (True, event) jeśli istnieje zdarzenie na oficjalnej domenie
-    zawierające co najmniej jeden token liczbowy z cytatu w query_context
-    lub w URL. Fuzzy z definicji — patrz docstring modułu, sekcja 'czego
-    NIE sprawdza'."""
+    (host, nie podciąg URL-a), którego query_context, zapytanie lub URL
+    zawiera WSZYSTKIE liczby z cytatu jako całe liczby ('211' nie pasuje
+    do '2110', samo '2023' nie potwierdza 'Dz.U. 2023 poz. 1691'). Nadal
+    nie sprawdza wierności treści — patrz docstring modułu."""
     tokens = tokenize_citation(citation["tekst"])
     if not tokens:
         return False, None
@@ -121,16 +149,12 @@ def log_has_verification(citation, events):
             ev.get("url", ""),
             " ".join(ev.get("result_urls", []) or []),
         ]
-        haystack = " ".join(haystack_parts).lower()
-        is_official = ev.get("url", "").startswith("https://") and any(
-            d in ev.get("url", "") for d in OFFICIAL_DOMAINS
-        )
-        is_official = is_official or any(
-            d in u for u in (ev.get("result_urls", []) or []) for d in OFFICIAL_DOMAINS
+        is_official = official_url(ev.get("url", "")) or any(
+            official_url(u) for u in (ev.get("result_urls", []) or [])
         )
         if not is_official:
             continue
-        if any(tok in haystack for tok in tokens):
+        if tokens <= haystack_numbers(" ".join(haystack_parts)):
             return True, ev
     return False, None
 

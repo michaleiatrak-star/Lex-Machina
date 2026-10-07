@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.65 (2026-10-07f, AUDYT-2026-10-07f): Włączony PR #85 (pełne korpusy Prawa upadłościowego t.j. Dz.U. 2026 poz. 913 i Prawa restrukturyzacyjnego t.j. Dz.U. 2026 poz. 533, 603 + 407 jawnych nagłówków, czytniki `scripts/prup.py`, `scripts/prrestr.py`, `scripts/insolvency.py`, 19 nowych lub przepisanych modułów PrUp/PrRestr — szczegóły w sekcji „pełny korpus PrUp + PrRestr” niżej). Weryfikacja ELI 2026-10-07: oba t.j. najnowsze (poprzednie 2025/614 i 2024/1428 wygasłe), PDF-y korpusu bajtowo zgodne z ELI. MAPA-AKTOW: wiersz zmian po t.j. jeszcze nie w życiu — Dz.U. 2026 poz. 1206 (od 11.01.2027: PrUp art. 452 ust. 1, 456 ust. 1; PrRestr art. 4 ust. 2 pkt 4) i Dz.U. 2026 poz. 176 (od 18.02.2027: PrRestr art. 156 ust. 5 pkt 4 uchylony).
+
 - 3.64 (2026-10-05p, AUDYT-2026-10-05p): MAPA-AKTOW: zakres KRO (rozwód, separacja, alimenty, władza rodzicielska, kontakty) i ubezpieczeń obowiązkowych (OC sprawcy, wypadek drogowy) — aplikacja wskazuje właściwy moduł aktu.
 
 - 3.63 (2026-10-05l, AUDYT-2026-10-05l): Linie „Hasła spraw” w mod-KRO-rodzinne, mod-ustawa-prawa-konsumenta, mod-PrUpad-upadlosc-restrukturyzacja, mod-KSH-organy-spolki-zoo (dobór modułu przez aplikację). Treść prawna bez zmian.
@@ -43,3 +45,12 @@
 - 3.37 (2026-08-26): poprawiono i zsynchronizowano metryki tekstów jednolitych
   w modułach cywilnych, rodzinnych, konsumenckich, nieruchomościowych,
   upadłościowych i korporacyjnych.
+
+## 2026-10-04 — pełny korpus PrUp + PrRestr
+
+Pełne źródła obu ustaw (603 + 407 nagłówków), metryki, 11 aktów pomocniczych,
+czytniki, kontrola dat, rejestr jednostek i routing. Dodano 11 modułów;
+przepisano nieaktualne moduły układu, układu częściowego, organów i wierzycieli.
+Skorygowano reguły reformy 2025/1085, przyszłe brzmienie art. 156 PrRestr,
+odesłanie art. 266f PrUp i pozostałości dawnej upadłości układowej.
+Testy techniczne nie stanowią niezależnego audytu każdej wykładni.

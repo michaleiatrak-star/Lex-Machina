@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-04",
+  "repository": "https://github.com/jaco/Lex-Machina",
+  "branch": "main",
+  "baseline": "b651cea8b8363b2f5c287530b4a8e815eaf077ac",
+  "versions": {
+    "dr-02": "3.63",
+    "prawo-polskie-v2": "6.38",
+    "audyt-systemu-v4": "6.168"
+  },
+  "scope": "Pełne teksty PrUp i PrRestr, routing każdego jawnego nagłówka oraz procedury obu ustaw.",
+  "coverage": {
+    "laws": {
+      "prup": {
+        "headings": 603,
+        "routed": 603,
+        "unrouted": 0,
+        "statuses": {
+          "POMINIETE_W_TJ": 1,
+          "TEKST_W_TJ": 556,
+          "UCHYLONY": 46
+        }
+      },
+      "prrestr": {
+        "headings": 407,
+        "routed": 407,
+        "unrouted": 0,
+        "statuses": {
+          "POMINIETE_W_TJ": 1,
+          "TEKST_W_TJ": 400,
+          "UCHYLONY": 6
+        }
+      }
+    },
+    "full_commentary": false,
+    "coverage_kind": "PELNY_TEKST_I_ROUTING_PROCEDUR",
+    "supplemental_acts": 11
+  },
+  "reader_tests": {
+    "passed": 37,
+    "failed": 0,
+    "scope": "integralność, granice, routing, daty, bramka reformy i zachowanie źródeł; nie orzeczenia prawne"
+  },
+  "repository_checks": [
+    {
+      "check": "reader_tests",
+      "returncode": 0,
+      "output": ".....................................\n----------------------------------------------------------------------\nRan 37 tests in 5.725s\n\nOK\n"
+    },
+    {
+      "check": "module_registration",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "check": "module_count",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "check": "plugin_manifest",
+      "returncode": 0,
+      "output": "T38: skille: 32; marketplace.json: TAK\nWYNIK: PASS\n"
+    },
+    {
+      "check": "coverage_coherence",
+      "returncode": 0,
+      "output": "DR checked: 16; modules: 467\nWYNIK: OK — 16 map bieżących, routing i moduły spójne, brak warstwy baseline/delta w runtime.\n"
+    },
+    {
+      "check": "module_length",
+      "returncode": 0,
+      "output": "check_dlugosc_modulow.py — T13 (próg długości, ZASADA 13)\n  przeskanowano modułów `modules/mod-*.md`: 85\n  zasobów kanonicznych `shared/**/*.md`: 0 (w tym satelity w podkatalogach)\n  próg CRIT: >1000 linii | strefa WARN: 800-1000\n\n✅ Żaden moduł nie przekracza progu 1000 linii.\n\n⚠️  STREFA OSTRZEGAWCZA 800-1000 — podziel PRZY OKAZJI najbliższej edycji, nie hurtem: 1\n       861  modules/mod-KSH-spolki-handlowe.md\n\n====================================================================\nWYNIK T13: ✅ OK — brak modułów powyżej progu.\n   1 plik(ów) w strefie ostrzegawczej — bez działania dzisiaj.\n"
+    }
+  ],
+  "archives": {
+    "packages": 32,
+    "errors": []
+  },
+  "online_checks": {
+    "prup": {
+      "checked_at": "2026-10-04T16:31:13.549646+00:00",
+      "result": "ZGODNOSC_SNAPSHOTU_Z_ELI",
+      "scope": "PDF i relacje ELI; nie ocena prawa właściwego dla dat sprawy"
+    },
+    "prrestr": {
+      "checked_at": "2026-10-04T16:31:15.920891+00:00",
+      "result": "ZGODNOSC_SNAPSHOTU_Z_ELI",
+      "scope": "PDF i relacje ELI; nie ocena prawa właściwego dla dat sprawy"
+    }
+  },
+  "source_scenarios": "Wersja rozwojowa rozpakowana/dr-02-prawo-cywilne-rodzinne-gospodarcze/references/insolvency/scenariusze-weryfikacji.md",
+  "generic_codex_validator": {
+    "result": "INCOMPATIBLE_INHERITED_SCHEMA",
+    "detail": "Minimalny quick_validate odrzuca zastane dependencies/version. Format repozytorium zachowany; własny walidator manifestów przechodzi."
+  },
+  "limits": [
+    "Routing wszystkich nagłówków i procedury tematyczne nie są pełnym komentarzem doktrynalnym ani niezależnym audytem wykładni każdej jednostki (F-230).",
+    "Przepisy historyczne wymagają rekonstrukcji na daty konkretnej sprawy; brak automatycznego scalenia wszystkich nowelizacji od 2003 r.",
+    "Powiązane ustawy, akty wykonawcze i orzeczenia mają osobne źródła i wymagają aktualnego odczytu.",
+    "Bez instalacji produkcyjnej i bez tworzenia PR."
+  ],
+  "rebase": {
+    "upstream": "6f193cfd09aafd6406b2bbe8bf9daf012cb88330",
+    "audit_flag": "F-230",
+    "note": "F-225 w upstream dotyczy innej, zamkniętej flagi; niezależna walidacja PrUp/PrRestr pozostaje otwarta jako F-230.",
+    "checks": {
+      "insolvency_tests": {
+        "returncode": 0,
+        "output": "...................\n----------------------------------------------------------------------\nRan 19 tests in 7.749s\n\nOK\n"
+      },
+      "module_registration": {
+        "returncode": 0,
+        "output": "SKILL                                           dysk   [✓]  mapa  rout  STATUS\n--------------------------------------------------------------------------------------------\ndr-01-ustroj-konstytucyjny-i-zrodla-prawa         15    15    15    15  OK\ndr-02-prawo-cywilne-rodzinne-gospodarcze          85    85    85    85  OK\ndr-03-prawo-karne-wykroczenia-egzekucja           70    70    70    70  OK\ndr-04-prawo-pracy-zus-swiadczenia                 42    42    42    42  OK\ndr-05-prawo-administracyjne-sadowoadministracyjne    23    23    23    23  OK\ndr-06-podatki-finanse-publiczne-aml               47    47    47    47  OK\ndr-07-zamowienia-publiczne-fundusze-ue            20    20    20    20  OK\ndr-08-samorzad-terytorialny-prawo-lokalne         20    20    20    20  OK\ndr-09-budownictwo-srodowisko-energia-transport    36    36    36    36  OK\ndr-10-zdrowie-farmacja-zywnosc-rolnictwo          31    31    31    31  OK\ndr-11-cyfrowe-cyber-ai-dane-ip                    22    22    22    22  OK\ndr-12-sadownictwo-prokuratura-zawody-prawnicze    13    13    13    13  OK\ndr-13-sluzby-bezpieczenstwo-informacje-niejawne    12    12    12    12  OK\ndr-14-prawo-ue-miedzynarodowe-prawa-czlowieka     12    12    12    12  OK\ndr-15-compliance-iso-governance-audyt             10    10    10    10  OK\ndr-16-pisma-strategia-dowody-orzecznictwo         11    11    11    11  OK\n--------------------------------------------------------------------------------------------\nDziedzin z rozbieżnościami: 0 z 16\n"
+      },
+      "coverage_coherence": {
+        "returncode": 0,
+        "output": "DR checked: 16; modules: 467\nWYNIK: OK — 16 map bieżących, routing i moduły spójne, brak warstwy baseline/delta w runtime.\n"
+      },
+      "plugin_manifest": {
+        "returncode": 0,
+        "output": "T38: skille: 32; marketplace.json: TAK\nWYNIK: PASS\n"
+      },
+      "versions": {
+        "returncode": 0,
+        "output": "========================================================================\nTEST T12 — ZGODNOŚĆ METADANYCH WERSJI SKILLA\nKatalog: Wersja rozwojowa rozpakowana\n========================================================================\n\n✅ Brak rozbieżności.\n"
+      },
+      "checksums": {
+        "returncode": 0,
+        "output": "========================================================================\nTEST T21 — KOMPLETNOŚĆ I ZGODNOŚĆ CHECKSUMS.sha256\nKatalog: Wersja rozwojowa rozpakowana\nTryb: REPOZYTORIUM (ścisły)\n========================================================================\n--- analiza-sadowa-v6 ---\n  plików na dysku: 23   wpisów: 24\n  ✅ komplet i zgodność\n--- analizator-dowodow-v3 ---\n  plików na dysku: 39   wpisów: 40\n  ✅ komplet i zgodność\n--- analizator-przepisow-v2 ---\n  plików na dysku: 7   wpisów: 8\n  ✅ komplet i zgodność\n--- analizator-umow-v1 ---\n  plików na dysku: 71   wpisów: 72\n  ✅ komplet i zgodność\n--- audyt-systemu-v4 ---\n  plików na dysku: 186   wpisów: 186\n  ✅ komplet i zgodność\n--- chronologia-sprawy-v1 ---\n  plików na dysku: 13   wpisów: 14\n  ✅ komplet i zgodność\n--- dr-01-ustroj-konstytucyjny-i-zrodla-prawa ---\n  plików na dysku: 22   wpisów: 23\n  ✅ komplet i zgodność\n--- dr-02-prawo-cywilne-rodzinne-gospodarcze ---\n  plików na dysku: 172   wpisów: 172\n  ✅ komplet i zgodność\n--- dr-03-prawo-karne-wykroczenia-egzekucja ---\n  plików na dysku: 85   wpisów: 86\n  ✅ komplet i zgodność\n--- dr-04-prawo-pracy-zus-swiadczenia ---\n  plików na dysku: 49   wpisów: 50\n  ✅ komplet i zgodność\n--- dr-05-prawo-administracyjne-sadowoadministracyjne ---\n  plików na dysku: 38   wpisów: 39\n  ✅ komplet i zgodność\n--- dr-06-podatki-finanse-publiczne-aml ---\n  plików na dysku: 77   wpisów: 78\n  ✅ komplet i zgodność\n--- dr-07-zamowienia-publiczne-fundusze-ue ---\n  plików na dysku: 27   wpisów: 28\n  ✅ komplet i zgodność\n--- dr-08-samorzad-terytorialny-prawo-lokalne ---\n  plików na dysku: 27   wpisów: 28\n  ✅ komplet i zgodność\n--- dr-09-budownictwo-srodowisko-energia-transport ---\n  plików na dysku: 49   wpisów: 50\n  ✅ komplet i zgodność\n--- dr-10-zdrowie-farmacja-zywnosc-rolnictwo ---\n  plików na dysku: 38   wpisów: 39\n  ✅ komplet i zgodność\n--- dr-11-cyfrowe-cyber-ai-dane-ip ---\n  plików na dysku: 29   wpisów: 30\n  ✅ komplet i zgodność\n--- dr-12-sadownictwo-prokuratura-zawody-prawnicze ---\n  plików na dysku: 20   wpisów: 21\n  ✅ komplet i zgodność\n--- dr-13-sluzby-bezpieczenstwo-informacje-niejawne ---\n  plików na dysku: 19   wpisów: 20\n  ✅ komplet i zgodność\n--- dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka ---\n  plików na dysku: 19   wpisów: 20\n  ✅ komplet i zgodność\n--- dr-15-compliance-iso-governance-audyt ---\n  plików na dysku: 17   wpisów: 18\n  ✅ komplet i zgodność\n--- dr-16-pisma-strategia-dowody-orzecznictwo ---\n  plików na dysku: 18   wpisów: 19\n  ✅ komplet i zgodność\n--- orzeczenia-sadowe-v2 ---\n  plików na dysku: 10   wpisów: 11\n  ✅ komplet i zgodność\n--- pisma-procesowe-v3 ---\n  plików na dysku: 43   wpisów: 44\n  ✅ komplet i zgodność\n--- pisma-proste-v2 ---\n  plików na dysku: 26   wpisów: 27\n  ✅ komplet i zgodność\n--- prawny-router-v3 ---\n  plików na dysku: 30   wpisów: 31\n  ✅ komplet i zgodność\n--- prawo-polskie-v2 ---\n  plików na dysku: 6   wpisów: 6\n  ✅ komplet i zgodność\n--- przesluchanie-swiadkow-v2-min90 ---\n  plików na dysku: 33   wpisów: 34\n  ✅ komplet i zgodność\n--- przewodnik-prawny-v2 ---\n  plików na dysku: 8   wpisów: 9\n  ✅ komplet i zgodność\n--- raport-klienta-v1 ---\n  plików na dysku: 8   wpisów: 9\n  ✅ komplet i zgodność\n--- raport-sytuacyjny-v2 ---\n  plików na dysku: 5   wpisów: 6\n  ✅ komplet i zgodność\n--- shared ---\n  plików na dysku: 187   wpisów: 189\n  ✅ komplet i zgodność\n------------------------------------------------------------------------\nSkille z CHECKSUMS: 32   rozjazdów łącznie: 0\nWYNIK T21: PASS\n"
+      },
+      "act_maps": {
+        "returncode": 0,
+        "output": "TEST T45 — MAPY AKTÓW: STRUKTURA, POKRYCIE MODUŁÓW, ROZWIĄZYWALNOŚĆ\nKatalog: Wersja rozwojowa rozpakowana\n✅ dr-01-ustroj-konstytucyjny-i-zrodla-prawa/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-02-prawo-cywilne-rodzinne-gospodarcze/MAPA-AKTOW.md: tabel 5, błędów 0\n✅ dr-03-prawo-karne-wykroczenia-egzekucja/MAPA-AKTOW.md: tabel 6, błędów 0\n  ℹ️  odesłanie międzydziedzinowe: mod-ustawa-komornicy-sadowi-zawod → dr-12-sadownictwo-prokuratura-zawody-prawnicze\n✅ dr-04-prawo-pracy-zus-swiadczenia/MAPA-AKTOW.md: tabel 1, błędów 0\n  ℹ️  odesłanie międzydziedzinowe: mod-KPA-current-state-COV → dr-05-prawo-administracyjne-sadowoadministracyjne\n  ℹ️  odesłanie międzydziedzinowe: mod-KPA-postepowanie-administracyjne → dr-05-prawo-administracyjne-sadowoadministracyjne\n✅ dr-05-prawo-administracyjne-sadowoadministracyjne/MAPA-AKTOW.md: tabel 1, błędów 0\n  ℹ️  odesłanie międzydziedzinowe: mod-przewleklosc-current-state-COV → dr-01-ustroj-konstytucyjny-i-zrodla-prawa\n  ℹ️  odesłanie międzydziedzinowe: mod-wojewoda-administracja-rzadowa-current-state-COV → dr-08-samorzad-terytorialny-prawo-lokalne\n✅ dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md: tabel 1, błędów 0\n  ℹ️  odesłanie międzydziedzinowe: mod-KKS-karny-skarbowy-i-AML → dr-03-prawo-karne-wykroczenia-egzekucja\n  ℹ️  odesłanie międzydziedzinowe: mod-Prawo-przedsiebiorcow-current-state-COV → dr-02-prawo-cywilne-rodzinne-gospodarcze\n✅ dr-07-zamowienia-publiczne-fundusze-ue/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-08-samorzad-terytorialny-prawo-lokalne/MAPA-AKTOW.md: tabel 3, błędów 0\n✅ dr-09-budownictwo-srodowisko-energia-transport/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-10-zdrowie-farmacja-zywnosc-rolnictwo/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-11-cyfrowe-cyber-ai-dane-ip/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.md: tabel 2, błędów 0\n  ℹ️  odesłanie międzydziedzinowe: mod-USP-ustroj-sadow-powszechnych → dr-01-ustroj-konstytucyjny-i-zrodla-prawa\n✅ dr-13-sluzby-bezpieczenstwo-informacje-niejawne/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-15-compliance-iso-governance-audyt/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ dr-16-pisma-strategia-dowody-orzecznictwo/MAPA-AKTOW.md: tabel 1, błędów 0\n✅ prawo-polskie-v2/ROUTING-MAP.md: tabel 21, błędów 0\nOdesłania międzydziedzinowe (informacyjnie): 8\nWYNIK T45: ✅ PASS\n"
+      }
+    },
+    "inherited_issues": [],
+    "zip_only_update": "Aktualizacja b8f0bad zmieniała wyłącznie ZIP-y. Zachowano zmiany źródłowe z tych paczek w rozpakowanych skillach audyt, DR-03, DR-09 i prawo-polskie-v2.",
+    "resolved_upstream": "c593324 usunął osiem historycznych plików routera bez sum; kontrola CHECKSUMS przechodzi dla wszystkich 32 skilli."
+  }
+}

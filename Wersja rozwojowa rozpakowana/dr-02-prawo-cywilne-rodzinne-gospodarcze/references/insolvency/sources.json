@@ -1,0 +1,137 @@
+{
+  "verified_on": "2026-10-04",
+  "scope": "Teksty pierwotne, poprzednie t.j. i nowelizacje potrzebne do ostatnich t.j. oraz późniejsze ogłoszone zmiany; nie automatyczna rekonstrukcja każdego stanu od 2003 r.",
+  "sources": [
+    {
+      "id": "amendment-2025-1085",
+      "eli": "DU/2025/1085",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/1085/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2025-1085.pdf": "56468119848adffcc2c55faa62642640972474b39d15521ed77c52b530f59b1b",
+        "amendment-2025-1085.txt": "ed0f260adc22da0ae9a954d21f6be43afcf87d32a9fb27380a9e7df8df205e80",
+        "amendment-2025-1085.json": "f01f605d8480dfb5d9bd2eb8d087f53f06d41d1b25e8994716cf36157df91c68"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2025-1170",
+      "eli": "DU/2025/1170",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/1170/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2025-1170.pdf": "9cabd5943965b9e31b76767e944cdd8aaa0320abcd57d8a3f72a0f1afa62ab7a",
+        "amendment-2025-1170.txt": "81220761285837b971f7dc280c8f93b45ba592dbab665430566d5e50c81f580d",
+        "amendment-2025-1170.json": "9b8bbc8810b71da45067f8b1a0d4ef4ab40f541e9098bd93006f7079368fbca9"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2025-1172",
+      "eli": "DU/2025/1172",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/1172/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2025-1172.pdf": "944a82e2b5213a5edfad85e85f40ff53a316a3791593d807da3165d0da1dc81d",
+        "amendment-2025-1172.txt": "7b37cd2666e417297d67b43fac94d7c73d937cc158aec1cce58e230c240aa32b",
+        "amendment-2025-1172.json": "17b5cccd83a5115656ef122b5bc0f3f96f2ebd5610b1f9fbda51efc145cacee0"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2026-176",
+      "eli": "DU/2026/176",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/176/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2026-176.pdf": "d46c2a1840a343b70dcb6aed451e12874101a0c94caac060cb560af01ecbb299",
+        "amendment-2026-176.txt": "f4fd6e8099d72d3ffcda4352047830bd6853ec902059fe26169b68858cb3b352",
+        "amendment-2026-176.json": "81683309c9cce0c852d8ce4a50a9430e52e29dce5945a402a3ec58ba35d2ab15"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2026-331",
+      "eli": "DU/2026/331",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/331/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2026-331.pdf": "64af52d2cbc9ac8e3f8b2c56745fac09f98ad3b1a4a21c56bb8eb8d90ad4b6e5",
+        "amendment-2026-331.txt": "9b15017f8038cea97414b0429800126f1733ed687658fbbd8a0463047104e537",
+        "amendment-2026-331.json": "e9f0b0079dbf90dae5d1b19e9df895936f34b648295b83f226b6a8d8399a02cb"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2026-340",
+      "eli": "DU/2026/340",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/340/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2026-340.pdf": "7ded2605d1eea8c76215231926bce3dc5dab6418cfe3b790fd94a9eaaab488e1",
+        "amendment-2026-340.txt": "638a2567ed808ec52744c789df3223e032247a091b315639eefa5cd6e80bd9f1",
+        "amendment-2026-340.json": "f93207239caa842dc70fb06e053db6158903882cbe6e9b2052b765f85e6e472e"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "original-prrestr",
+      "eli": "DU/2015/978",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2015/978/text.pdf",
+      "role": "historyczny_nie_stosuj_jako_biezacy",
+      "files": {
+        "original-prrestr.pdf": "c5c6f50edb83521f1e36f533e8bf2e770419931e88c690cc4ee81590dc6c0a53",
+        "original-prrestr.txt": "b9aabcb43a39cf3d6fa83a82a6d5dbade8ea2f65695c956e63340408f33d8da6",
+        "original-prrestr.json": "292020124b6f884ff4a122012ce80db6d65ffc2e66a541d57a4082ec59e35aa9"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "original-prup",
+      "eli": "DU/2003/535",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2003/535/text.pdf",
+      "role": "historyczny_nie_stosuj_jako_biezacy",
+      "files": {
+        "original-prup.pdf": "c8aa4413a28ca5eb95c44ca63aa41941419ae6e1099dbf97e8128afc4eaf8d12",
+        "original-prup.txt": "28820d9e7ef6b3eb0997f361e3a66378b0a06929fdaf406765da2786a5bfc843",
+        "original-prup.json": "14a395d94baa46deb509423f11969ed0c9cac1b2ef912578629958736242d8a2"
+      },
+      "text_extraction": "stary skład dwukolumnowy i niepoprawne mapowanie polskich znaków; do cytowania użyj PDF, nie TXT; pierwsza strona zawiera też końcówkę poprzedniej pozycji Dz.U."
+    },
+    {
+      "id": "history-prrestr-2024",
+      "eli": "DU/2024/1428",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2024/1428/text.pdf",
+      "role": "historyczny_nie_stosuj_jako_biezacy",
+      "files": {
+        "history-prrestr-2024.pdf": "2123bfa1417720a0672361443351e7dbd0f77aca98dfbbe2f5c9a8508d78f762",
+        "history-prrestr-2024.txt": "28943dd864bf6267084f3d70775ec0c1b159f80cecf34d3d1fbf11613a088b60",
+        "history-prrestr-2024.json": "c4784006a7ef13281e8dc3bc0510960d3f4a6cd6a35cf87d4824692c545e61e2"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "history-prup-2025",
+      "eli": "DU/2025/614",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2025/614/text.pdf",
+      "role": "historyczny_nie_stosuj_jako_biezacy",
+      "files": {
+        "history-prup-2025.pdf": "1adf0a0fb632aa8157c3315584f6e0f9a9e291ea8fe46a40d41e82f267870d17",
+        "history-prup-2025.txt": "86f80a0c9ef7a58a1e27e32f87d9e5ea0b6eb64ab59525b89401d19cde2e7f76",
+        "history-prup-2025.json": "ac3267fb3f47bf79d4873887c8920b04d032b4c66fed58b1c9d93bb00f12ac57"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    },
+    {
+      "id": "amendment-2026-1206",
+      "eli": "DU/2026/1206",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf",
+      "role": "nowelizacja",
+      "files": {
+        "amendment-2026-1206.txt": "e12e8f67c1c1716199648eb38ef142cb26fb684f452012a9e2af1194ae88f515",
+        "amendment-2026-1206.pdf": "9b1cefbd26b7fdf95542dd9287e2bbb51c08df9c432450ed58e2853b2937c655"
+      },
+      "text_extraction": "pomocnicza; cytat porównaj z PDF"
+    }
+  ]
+}

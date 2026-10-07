@@ -1,5 +1,41 @@
 # AUDIT-JOURNAL — Dziennik Audytów Systemu Prawnego AI
 
+
+## AUDYT-2026-10-04-PrUp — pełny korpus i procedury syndyka
+
+Zakres: lokalne rozszerzenie linii rozwojowej; punkt wyjścia
+`f66715f290fe998b091eb577ffbc61384c56a9c2`. Bez publikacji upstream i bez zmian
+w produkcyjnych sprawach. Wersje: DR-02 3.62, prawo-polskie-v2 6.36,
+audyt-systemu-v4 6.166.
+
+Źródła RZĄD 1 odczytane 04.10.2026: ELI DU/2026/913 (metryka, pełny PDF),
+relacje DU/2003/535 oraz nowelizacja DU/2026/1206 (art. 7 i 57). KPC 2026/468
+art. 130 odczytany pomocniczo; użycie w sprawie wymaga osobnej kontroli zmian KPC.
+
+Wykonano:
+- zastosowanie korekt art. 239/240, kategorii zaspokojenia i wyjątków od KRZ;
+- usunięcie konfliktujących opisów konsumenta (491^14a vs 491^16;
+  celowość vs umyślność) oraz nadmiernie szerokiego opisu art. 128;
+- zachowanie pełnego PDF i ekstrakcji, indeks 603 jawnych nagłówków i mapa
+  70 węzłów struktury; uchylone/pominięte części jawne;
+- pięć modułów: źródło i wersje, zgłoszenia/lista, podział funduszów,
+  syndyk/likwidacja, konsument; routing w czterech rejestrach;
+- czytnik Python z identyfikacją indeksów górnych, granic artykułów,
+  kontrolą integralności i porównaniem źródła/relacji online;
+- rejestr źródła i częściowego opracowania per artykuł; wykryte ustępy
+  pozostają ekstrakcją pomocniczą, nie deklaracją audytu wszystkich ustępów;
+- odnotowanie zmiany art. 452 ust. 1 i 456 ust. 1 od 11.01.2027.
+
+Testy czytnika: 18 przypadków offline obejmujących odczyt, numery indeksowane,
+nieznane przepisy, integralność, nowe nowelizacje i awarię ELI. Rzeczywisty odczyt
+art. 240 z --verify-online potwierdził zgodność PDF i relacji. To nie jest
+benchmark jakości rozstrzygnięć prawnych. Wyniki walidatorów rejestracji,
+routingu, wersji i paczek są dołączone do raportu dostawy.
+
+Otwarte: F-230 — pogłębianie komentarza i niezależna walidacja przypadków,
+wersje historyczne i przepisy wykonawcze dobierane do konkretnej sprawy.
+Dostęp do całej ustawy nie jest deklaracją komentarza FULL ani wdrożenia produkcyjnego.
+
 > ⛔ **F-198 ZAMKNIĘTA JAKO ADNOTACJA (2026-09-26, wariant „zostaw z adnotacją" z
 > WARN-OTWARTE.md) — trzy wpisy poniżej (23c, 23b, 23) stoją tu WBREW FAZIE 7A.**
 > Zostały dopisane na POCZĄTKU pliku zamiast na końcu (reguła kanoniczna od
@@ -69675,6 +69711,21 @@ Jak w § 2B. Wszystkie twierdzenia o treści zmian — RZĄD 1 (ELI `text.pdf`);
 1. Po ogłoszeniu nowego rozp. WT — FAZA 3E na parametrach WT (F-224); do tego czasu każde powołanie WT wymaga ustalenia, czy inwestor złożył oświadczenie z art. 102a.
 2. Mapy w modułach podawały datę ogłoszenia jako datę obwieszczenia (2025/1783) — przy kolejnych t.j. odczytywać `announcementDate` z ELI, nie `promulgation`.
 
+## AUDYT-2026-10-04-PrUp-PrRestr
+
+Zakres: pełne korpusy i procedury obu ustaw. PrUp 603, PrRestr 407 jawnych
+nagłówków, bez nieprzypisanych jednostek. Przepisy pominięte w t.j. zachowano
+w pełnych pierwotnych PDF-ach. Dodano 11 źródeł pomocniczych i 11 modułów.
+Naprawy: zabezpieczenia i zgody po reformie, uchylone 181/186 PrRestr,
+nowe większości grupowe, 211b/218a PZU, przyszłe 156 ust. 5 pkt 4 PrRestr,
+266f PrUp (odesłanie zamiast domniemanego wynagrodzenia), usunięcie dawnego
+rozróżnienia trybów upadłości i utożsamienia miesiąca z 30 dniami.
+Czytnik odmawia znanej niewłaściwej wersji przy jawnej dacie i nie oznacza
+offline jako świeżej weryfikacji. Źródło i routing nie są dowodem pełnej
+wykładni wszystkich wyjątków; F-239 pozostaje jawna dla niezależnej walidacji.
+Wyniki automatyczne i sprawdzenia scenariuszy: delivery/WERYFIKACJA.json
+oraz references/insolvency/scenariusze-weryfikacji.md.
+
 ---
 
 ## AUDYT-2026-10-04b — TRYB STRUKTURA: sieroty i relikty w całym systemie; T43 `check_sieroty.py` (6.161)
@@ -69890,6 +69941,47 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 ### 5. STRUKTURA SYSTEMU — SNAPSHOT
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
+
+## AUDYT-2026-10-07f — PR #85: pełne korpusy Prawa upadłościowego i restrukturyzacyjnego; mapy aktów; korekta mapy Dz.U. (6.209)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: przejrzeć PR #85 (autor zewnętrzny, 2026-10-04), ustalić, co faktycznie dodaje i jakie akty prawne, dodać akty do map prawo-polskie-v2 i DR-02, wpis w dzienniku. PR był 2 commity za main (rozbieżne wersje, paczki ZIP, rejestry).
+
+### 2. CO DODAJE PR #85
+- Pełne korpusy (PDF + tekst + indeks artykułów + rejestr pokrycia): Prawo upadłościowe — t.j. Dz.U. 2026 poz. 913 (603 jawne nagłówki), Prawo restrukturyzacyjne — t.j. Dz.U. 2026 poz. 533 (407).
+- 11 źródeł pomocniczych w `references/insolvency/sources/`: teksty pierwotne (DU/2003/535, DU/2015/978), poprzednie t.j. (DU/2025/614, DU/2024/1428 — oznaczone jako historyczne), nowelizacje DU/2025/1085, 1170, 1172, DU/2026/176, 331, 340, 1206.
+- Czytniki i testy: `scripts/prup.py`, `prrestr.py`, `insolvency.py`, `build_prup_coverage.py`, `test_prup.py`, `test_insolvency.py`.
+- 19 nowych modułów i 9 przepisanych (PrUp: wniosek, skutki/masa, organy, wierzytelności 235–266, syndyk/likwidacja, podział 335–360, konsument, zakończenie/zakaz/karne, źródła; PrRestr: wejście/plan/test, PZU, PPU/PU, sanacja, procedura/zakończenie, odrębne/międzynarodowe, źródła).
+- Wiersze MAPA-AKTOW DR-02 i ROUTING-MAP prawo-polskie-v2 dla każdego modułu.
+
+### 3. WERYFIKACJA ELI (RZĄD 1, 2026-10-07)
+- DU/2026/913 i DU/2026/533 — obowiązujące, najnowsze t.j. (references base: 2003/535, 2015/978); DU/2025/614 i DU/2024/1428 — wygaśnięcie aktu.
+- Akty zmieniające po t.j.: PrUp — tylko 2026/1206 (art. 7: art. 452 ust. 1, 456 ust. 1; w życie 11.01.2027, art. 57); PrRestr — 2026/1206 (art. 24: art. 4 ust. 2 pkt 4; 11.01.2027) i 2026/176 (art. 24: uchylenie art. 156 ust. 5 pkt 4; art. 35 — 12 mies. od ogłoszenia, 18.02.2027). Zestaw zgodny z metadanymi PR. 2025/1085, 1170, 1172, 2026/331, 340 — ujęte w t.j.
+- PDF-y korpusu bajtowo zgodne z ELI (`text.pdf`): 2026/913, 2026/533, 2026/1206, 2026/176.
+- Licencja doradcy restrukturyzacyjnego: DU/2022/1007 — najnowszy t.j. dla DU/2007/850, brak późniejszych zmian (dopisek „[sprawdź nowszy t.j.]” w ROUTING-MAP zamknięty).
+
+### 4. ZMIANY
+- Scalenie PR #85 na main: konflikty wersji i rejestrów rozstrzygnięte na korzyść main; w `mod-PrUpad-upadlosc-restrukturyzacja` zachowane obie części (hasła spraw z main i blok źródła z PR); paczki ZIP przebudowane.
+- ⛔ Flaga F-230 z PR kolidowała z istniejącą F-230 (AUDYT-2026-10-04h) → przenumerowana na **F-239** (WARN-OTWARTE i wpis AUDYT-2026-10-04-PrUp-PrRestr).
+- MAPA-AKTOW DR-02 i ROUTING-MAP: wiersz zmian po t.j. jeszcze nie w życiu (2026/1206, 2026/176) z temporal gate.
+- ⛔ BŁĄD w `mapa_dzu_2026-10-04.md`: Dz.U. 2025 poz. 1085 opisana jako „KSH — zmiana (nowa ustawa)”; według ELI to ustawa z 25.07.2025 o zmianie PrRestr, PrUp i ustawy o KRZ — poprawione. Wiersze 2026/1206 (dodany DR-02) i 2026/176 uzupełnione o zmiany PrUp/PrRestr; nowy wiersz MONITORING.
+- Wersje: dr-02-prawo-cywilne-rodzinne-gospodarcze 3.64 → 3.65, prawo-polskie-v2 6.45 → 6.46, audyt-systemu-v4 6.208 → 6.209.
+- Synchronizacja z aplikacją Lex-machina-aplikacja 0.1.21: audyt-systemu-v4 6.208 (weryfikator sygnatur — zgł. #90; T22; T41); biblioteka wspólna 3.99.19 (walidator cytowań — zgł. #89).
+- `scripts/repack_development_archives.py` i `scripts/verify_development_archives.py` zsynchronizowane z aplikacją: wersja w tym repozytorium pakowała `.claude-plugin/` i `.mcp.json` do ZIP-ów (poprawka 6.187 nie była przeniesiona) — claude.ai odrzuca takie paczki (T34).
+- Testy PR `test_prup.py`, `test_insolvency.py` (37/37 PASS) wskazane w SKILL.md DR-02 (T43).
+
+### 5. OGRANICZENIA
+F-239 (z PR) pozostaje otwarta: źródło i routing nie są niezależnym audytem wykładni wszystkich wyjątków i odesłań. Treść modułów przejęta z PR bez przeglądu merytorycznego każdego artykułu; skontrolowane: akty, wersje, daty wejścia w życie, zgodność PDF z ELI.
+
+## AUDYT-2026-10-07e — weryfikator sygnatur: FOUND bez post-checku (zgł. #90); T22, T41 (6.208)
+
+**Zgłoszenie.** `weryfikator_sygnatur.py` zwracał FOUND, nie sprawdzając, czy znaleziona sprawa ma pytaną sygnaturę. Potwierdzone w kodzie: gałąź POWSZECHNE budowała trafienia jako `[{"sygnatura": pytana}] * liczba_wyników` — licznik portalu wystarczał do FOUND przy jednym wyniku, a post-check tożsamości działał tylko dla SN. Wyszukiwarka Portalu Orzeczeń jest rozmyta, a ta sama sygnatura występuje w wielu sądach.
+
+**Naprawa.** `ms_wyniki()` odczytuje z listy wyników sygnaturę, sąd i adres `/details/` (układ zmierzony na żywo 2026-10-07). Post-check `tozsame()` dla wszystkich baz. Brak zgodnej przy wynikach nieodczytanych (paginacja, zmiana układu) → OUT_OF_SCOPE z uzasadnieniem, nie NOT_FOUND.
+
+**Pomiar.** `--selftest` PASS (19/19). Na żywo: I ACa 100/19 → FOUND (Sąd Apelacyjny w Poznaniu); I ACa 100/18 → AMBIGUOUS (5); I ACa 999999/19 → NOT_FOUND. Gałąź SN: sn.pl HTTP 403 (blokada po stronie serwera od 2026-10-06, poza zakresem zmiany).
+
+**Przy okazji.** T22 — brak wpisu `scripts/test_konstytucja_tekst_czysty.py`; T41 — 201 plików po 6.207 (dwa osobne testy offline sn/tk wbrew konwencji `test_sady.mjs`), scalone. T47 wymaga `npm ci` w `mcp-servers/` (środowisko, nie wada).
 
 ## AUDYT-2026-10-06n — etpcz: wyszukiwanie po frazie zwracało „brak trafienia” mimo trafień; karta Wyszukiwanie: fraza pierwsza (6.203)
 

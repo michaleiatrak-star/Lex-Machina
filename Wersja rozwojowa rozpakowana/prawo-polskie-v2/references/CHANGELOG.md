@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.46 (2026-10-07f, AUDYT-2026-10-07f): ROUTING-MAP — sekcja „Prawo upadłościowe i restrukturyzacyjne — źródła i procedury” z PR #85 (26 wierszy modułów PrUp/PrRestr); nowy wiersz zmian po t.j. jeszcze nie w życiu: Dz.U. 2026 poz. 1206 (od 11.01.2027) i Dz.U. 2026 poz. 176 (od 18.02.2027), ELI 2026-10-07; licencja doradcy restrukturyzacyjnego — „[sprawdź nowszy t.j.]” zastąpione weryfikacją ELI (2022/1007 najnowszy t.j. dla DU/2007/850, brak późniejszych zmian).
+
 - 6.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
 
 - 6.44 (2026-10-05p, AUDYT-2026-10-05p): Routing błyskawiczny: DR-03 „podrobić podpis”, „sfałszować”, „pijany kierowca”, „KKS”, „karny skarbowy” (rdzeń „podrobienie” nie łapał „podrobił”); DR-04 „wynagrodzenie”.
@@ -99,3 +101,12 @@
   zgodnie z decyzją generalną F-102(C); `version` ujęty w cudzysłów
   (profilaktyka pułapki float, F-102(B)). Pełny opis:
   `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-08-23g.
+
+## 2026-10-04 — pełny korpus PrUp + PrRestr
+
+Pełne źródła obu ustaw (603 + 407 nagłówków), metryki, 11 aktów pomocniczych,
+czytniki, kontrola dat, rejestr jednostek i routing. Dodano 11 modułów;
+przepisano nieaktualne moduły układu, układu częściowego, organów i wierzycieli.
+Skorygowano reguły reformy 2025/1085, przyszłe brzmienie art. 156 PrRestr,
+odesłanie art. 266f PrUp i pozostałości dawnej upadłości układowej.
+Testy techniczne nie stanowią niezależnego audytu każdej wykładni.

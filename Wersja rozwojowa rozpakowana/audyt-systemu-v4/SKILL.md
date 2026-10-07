@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.207"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.209"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -78,6 +78,7 @@ scripts:
   - scripts/check_podmiana_aktu.py
   - scripts/check_widmowe_pokrycie.py
   - scripts/weryfikator_sygnatur.py
+  - scripts/test_konstytucja_tekst_czysty.py
   - scripts/test_pokrycie_orkiestratora.py
   - scripts/test_module_registration.py
   - scripts/test_module_count.py
@@ -1320,4 +1321,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.207 | Ostatnia aktualizacja: 2026-10-07 (AUDYT-2026-10-07d). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.209 | Ostatnia aktualizacja: 2026-10-07 (AUDYT-2026-10-07f). Stopkę aktualizuj razem z polem `version`.*

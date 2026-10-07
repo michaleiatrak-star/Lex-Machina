@@ -2,6 +2,9 @@
 """Rebuild existing development ZIPs from their matching unpacked skills.
 
 Preserves archive names and file bytes. Does not package unrelated directories.
+Plugin-channel files at the skill root (`.claude-plugin/`, `.mcp.json`) stay in the
+repository for the marketplace and are left out of the ZIP: claude.ai rejects a
+skill upload that carries a plugin manifest.
 Stages and verifies every archive before replacing any existing ZIP.
 """
 import argparse
@@ -33,7 +36,9 @@ def repack(repo):
             source = unpacked / root
             if source.is_symlink() or not (source / 'SKILL.md').is_file():
                 raise ValueError(f'Missing or unsafe source: {source}')
-            paths = sorted(source.rglob('*'))
+            paths = sorted(p for p in source.rglob('*')
+                           if not p.relative_to(source).parts[0].startswith('.')
+                           and '__pycache__' not in p.parts)
             if any(p.is_symlink() for p in paths):
                 raise ValueError(f'Symlink in source: {source}')
             with ZipFile(stage / archive.name, 'w', ZIP_DEFLATED,

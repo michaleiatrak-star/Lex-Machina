@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.45"
+version: "6.46"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
+  Wersja bieżąca: 6.46 (2026-10-07f): ROUTING-MAP — procedury i pełne korpusy PrUp (Dz.U. 2026 poz. 913) i PrRestr (Dz.U. 2026 poz. 533) z PR #85; wiersz zmian po t.j. (2026/1206 od 11.01.2027, 2026/176 od 18.02.2027); licencja doradcy restrukturyzacyjnego 2022/1007 potwierdzona w ELI jako najnowszy t.j.
+  Poprzednia: 6.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
