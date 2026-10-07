@@ -44,18 +44,23 @@ submit=Szukaj
 2. Nierozpoznany licznik = `OUT_OF_SCOPE`.
 3. Wyciągnij unikalne `/doc/{ID}`.
 4. Jeśli liczba ID < N, pobieraj `/cbo/find?p=N` z tymi samymi cookies.
-5. Brak nowych ID na kolejnej stronie, pętla paginacji, więcej ID niż licznik
-   albo limit bezpieczeństwa = `OUT_OF_SCOPE`.
+5. Brak nowych ID na kolejnej stronie, pętla paginacji albo limit bezpieczeństwa =
+   `OUT_OF_SCOPE`. Nadmiar ID ponad licznik N nie jest driftem (strona niesie też linki
+   spoza trafień: orzeczenia powiązane, nawigacja) — to dodatkowi kandydaci, filtrowani
+   przez exact-match + fail-closed odczyt dokumentu, nie powód do `OUT_OF_SCOPE`.
 6. Dopiero kompletny zbiór kandydatów wolno klasyfikować.
 
 ## Dokument i integralność transportu
 
-Dla każdego kandydata pobierz `/doc/{ID}`. Wymagane do uznania dokumentu:
+Dla każdego kandydata pobierz `/doc/{ID}`. Wymagane do uznania dokumentu (kotwice poprawności, fail-closed):
 - zamknięty BODY/HTML,
 - sygnatura,
-- sąd,
-- data,
 - sentencja.
+
+Pola `sąd` i `data orzeczenia` są BEST-EFFORT: ich brak (inny układ karty) nie przekreśla
+odczytu treści — zwracamy je jako `null` z listą `brak_metadanych`, a dokument dalej jest uznany.
+Odczyt etykiet jest tolerancyjny (bez końcowego `:`, synonimy „Sąd/Organ", „Data wyroku"). Wcześniej
+twardy wymóg tych pól dawał fałszywe `OUT_OF_SCOPE` dla realnych orzeczeń (zgł. 2026-10-07).
 
 Jeżeli transport jest oznaczony jako niepełny albo `Content-Length` nie zgadza
 się z liczbą odebranych bajtów → `OUT_OF_SCOPE`.

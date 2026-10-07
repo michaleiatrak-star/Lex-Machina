@@ -332,6 +332,16 @@
   <a href="/detailsetpc/$N/990000000000001_I_ETPC_000001_2019_De_2020-01-01_001">1/19</a>`;
   assert.deepStrictEqual(parsujWyniki(wyniki), { liczba: 2, docIds: [id, "990000000000001_I_ETPC_000001_2019_De_2020-01-01_001"] });
   assert.deepStrictEqual(parsujWyniki("<p>Nie znaleziono żadnego wyniku</p>"), { liczba: 0, docIds: [] });
+  // Po frazie linki niosą zakodowaną frazę zamiast $N (pomiar 2026-10-06: 741 trafień, 0 odczytanych przed poprawką).
+  const frazowe = '<span class="big_number">741</span>' +
+    '<a href="/detailsetpc/prawo$0020do$0020s$0105du/990000000000001_I_ETPC_074438_2014_Wy_2019-10-03_001">a</a>' +
+    '<a href="/detailsetpc/prawo$0020do$0020s$0105du/990000000000001_I_ETPC_043397_2098_De_2001-10-23_001">b</a>';
+  assert.deepStrictEqual(parsujWyniki(frazowe), {
+    liczba: 741,
+    docIds: ["990000000000001_I_ETPC_074438_2014_Wy_2019-10-03_001", "990000000000001_I_ETPC_043397_2098_De_2001-10-23_001"]
+  });
+  assert.strictEqual(docIdZ("https://etpcz.ms.gov.pl/detailsetpc/prawo$0020do$0020s$0105du/990000000000001_I_ETPC_074438_2014_Wy_2019-10-03_001"),
+    "990000000000001_I_ETPC_074438_2014_Wy_2019-10-03_001");
   // Prawdziwy formularz etpcz.ms.gov.pl (G40B 2026-10-06): complaintNumber, nie complainant (skarżący).
   const prawdziwy = `<form onsubmit="javascript:return Tapestry.waitForPage(event);" action="/searchetpc.advancedsearchform" method="post" id="advancedSearchForm">
 <input value="$N/$N/$N/$N/$N/$N/$N/$N/$N/$N/1" name="t:ac" type="hidden"><input value="22oQ:H4sI" name="t:formdata" type="hidden">

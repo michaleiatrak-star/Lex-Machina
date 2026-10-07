@@ -1,8 +1,74 @@
 {
   "mcpServers": {
-    "mcp-isap": {
-      "command": "npx",
-      "args": ["-y", "@matematicsolutions/mcp-isap"]
+    "lex-isap": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "isap"
+      ]
+    },
+    "lex-eurlex": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "eurlex"
+      ]
+    },
+    "lex-saos": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "saos"
+      ]
+    },
+    "lex-cbosa": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "cbosa"
+      ]
+    },
+    "lex-krs": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "krs"
+      ]
+    },
+    "lex-wl": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "wl"
+      ]
+    },
+    "lex-nbp": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "nbp"
+      ]
+    },
+    "lex-eureka": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "eureka"
+      ]
+    },
+    "lex-sudop": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "sudop"
+      ]
+    },
+    "lex-uodo": {
+      "command": "node",
+      "args": [
+        "<KATALOG_REPOZYTORIUM>/Wersja rozwojowa rozpakowana/audyt-systemu-v4/mcp-servers/dist/lex-mcp.mjs",
+        "uodo"
+      ]
     }
   }
 }

@@ -27,6 +27,13 @@ const ids = (a, b) => Array.from({ length: b - a }, (_, i) => `A${String(a + i).
   assert.strictEqual(v.status, "AMBIGUOUS"); assert.strictEqual(v.doc_ids.length, 12); n++; }
 { const v = await weryfikujSygnature(strona(11, ids(0, 10)), "II FSK 100/24", async () => strona(11, ids(0, 10)), async () => dok);
   assert.strictEqual(v.status, "OUT_OF_SCOPE"); assert.match(v.powod, /bez nowych ID/); n++; }
+// Nadmiar unikalnych /doc/ ponad licznik (linki powiązane/nawigacja) NIE jest driftem:
+// exact-match decyduje. Wcześniej fałszywe OUT_OF_SCOPE dla istniejącego wyroku (zgł. 2026-10-07).
+{ const dok2 = dok.replace(/II\s*FSK\s*100\/24/gi, "III FSK 100/24");
+  const v = await weryfikujSygnature(strona(1, ids(0, 2)), "II FSK 100/24",
+    async () => { throw new Error("brak stron"); },
+    async (id) => (id === "A000000000" ? dok : dok2));
+  assert.strictEqual(v.status, "FOUND"); assert.strictEqual(v.matches[0].case_number, "II FSK 100/24"); n++; }
 // Komórka wartości z zagnieżdżoną tabelą (data | prawomocność) — wcześniej „brak pól Data orzeczenia”.
 { const zagn = dok.replace(/<td class="info-list-value">(\d{4}-\d{2}-\d{2})<\/td>/,
     '<td class="info-list-value"><table class="info-list"><tr><td >$1</td><td class="war_header">orzeczenie prawomocne</td></tr></table></td>');
@@ -35,6 +42,23 @@ const ids = (a, b) => Array.from({ length: b - a }, (_, i) => `A${String(a + i).
   assert.match(d.judgment_date, /^\d{4}-\d{2}-\d{2}$/);
   assert.strictEqual(d.finality, "orzeczenie prawomocne");
   assert.ok(d.court); n++; }
+// Karta bez pól „Sąd”/„Data orzeczenia” (inny układ) — BEST-EFFORT, nie OUT_OF_SCOPE.
+// Wcześniej fałszywe „brak pól Sąd, Data orzeczenia” mimo realnego orzeczenia (zgł. 2026-10-07).
+{ const bezMeta = dok
+    .replace('<tr><td class="lista-label">Sąd</td><td class="info-list-value">Naczelny Sąd Administracyjny</td></tr>', "")
+    .replace('<tr><td class="lista-label">Data orzeczenia</td><td class="info-list-value">2026-01-10</td></tr>', "");
+  assert.notStrictEqual(bezMeta, dok);
+  const d = parsujDokument(bezMeta, "AAAAAAAAAA");
+  assert.strictEqual(d.court, null);
+  assert.strictEqual(d.judgment_date, null);
+  assert.deepStrictEqual(d.brak_metadanych, ["Sąd", "Data orzeczenia"]);
+  assert.match(d.operative_part, /Oddala skargę kasacyjną/);
+  const v = await weryfikujSygnature(strona(1, ids(0, 1)), "II FSK 100/24",
+    async () => { throw new Error("brak stron"); }, async () => bezMeta);
+  assert.strictEqual(v.status, "FOUND"); n++; }
+// Brak Sentencji NADAL fail-closed (kotwica poprawności).
+{ const bezSent = dok.replace('<div class="lista-label">Sentencja</div>', '<div class="lista-label">Inne</div>');
+  assert.throws(() => parsujDokument(bezSent, "AAAAAAAAAA"), /brak Sentencji/); n++; }
 console.log(`OK: ${n} przypadków zgodnych z parserem referencyjnym (Python) + paginacja`);
 
 { let n = 0;

@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.16"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.18"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.16 (2026-10-06): HIERARCHIA-ZRODEL i DOSTEP-MASZYNOWY-API: ETPCz (baza MS etpcz.ms.gov.pl, stałe linki, id dokumentu); Portal Orzeczeń tylko po sygnaturze albo frazie
+  Wersja bieżąca: 3.99.18 (2026-10-07): CBOSA-ADAPTER — pola „sąd" i „data orzeczenia" w dokumencie są BEST-EFFORT (null + brak_metadanych), wymagane pozostają tylko zamknięty BODY/HTML, sygnatura i sentencja; twardy wymóg sądu/daty dawał fałszywe OUT_OF_SCOPE dla realnych orzeczeń (zgł. 2026-10-07)
+  3.99.17 (2026-10-07): CBOSA-ADAPTER pkt 5 — nadmiar unikalnych /doc/ ponad licznik „Znaleziono N" nie jest driftem (linki spoza trafień: orzeczenia powiązane, nawigacja); to kandydaci filtrowani przez exact-match + fail-closed odczyt dokumentu, nie powód do OUT_OF_SCOPE
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

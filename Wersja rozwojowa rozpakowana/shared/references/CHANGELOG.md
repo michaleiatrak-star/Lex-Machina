@@ -1,5 +1,8 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.18 (2026-10-07): CBOSA-ADAPTER — pola „sąd" i „data orzeczenia" w dokumencie są BEST-EFFORT (zwracane jako null z listą brak_metadanych); wymagane do uznania dokumentu pozostają tylko zamknięty BODY/HTML, sygnatura i sentencja, a odczyt etykiet jest tolerancyjny (synonimy „Sąd/Organ", „Data wyroku", bez końcowego „:"). Twardy wymóg pól sądu/daty dawał fałszywe OUT_OF_SCOPE „brak pól Sąd, Data orzeczenia" dla realnych orzeczeń (zgł. 2026-10-07)
+- 3.99.17 (2026-10-07): CBOSA-ADAPTER pkt 5 — nadmiar unikalnych /doc/ ponad licznik „Znaleziono N" nie jest driftem (strona niesie też linki spoza trafień: orzeczenia powiązane, nawigacja); to dodatkowi kandydaci filtrowani przez exact-match + fail-closed odczyt dokumentu, nie powód do OUT_OF_SCOPE. Usuwa fałszywe OUT_OF_SCOPE przy sprawdzaniu sygnatury istniejących wyroków
+
 - 3.99.16 (2026-10-06): HIERARCHIA-ZRODEL i DOSTEP-MASZYNOWY-API: ETPCz (baza MS etpcz.ms.gov.pl, stałe linki, id dokumentu); Portal Orzeczeń tylko po sygnaturze albo frazie
 
 - 3.99.15 (2026-10-06): HIERARCHIA-ZRODEL i DOSTEP-MASZYNOWY-API: TK wyłącznie ze źródeł urzędowych (karta sprawy IPO po sygnaturze, OTK ZU, formularz IPO); SAOS nie jest źródłem TK

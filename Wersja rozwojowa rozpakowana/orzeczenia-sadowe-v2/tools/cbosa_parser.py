@@ -47,6 +47,8 @@ class CbosaJudgment:
     url: str
     reasoning_available: bool = False
     document_complete: bool = True
+    finality: Optional[str] = None
+    missing_metadata: tuple[str, ...] = ()
 
     @property
     def full_text(self) -> str:
@@ -285,6 +287,22 @@ def _extract_case_from_title(title: str) -> Optional[str]:
     return None
 
 
+def _table_value(table: dict[str, str], labels: tuple[str, ...]) -> Optional[str]:
+    """Odczyt pola tabeli z tolerancją etykiety: wprost, z dwukropkiem, oraz po normalizacji
+    (bez końcowego ":", bez spacji, bez wielkości liter) — i po liście synonimów.
+    Odpowiednik poleTabeli() z portu JS."""
+    for label in labels:
+        if table.get(label):
+            return table[label]
+        if table.get(f"{label}:"):
+            return table[f"{label}:"]
+    want = {label.lower() for label in labels}
+    for key, value in table.items():
+        if value and re.sub(r":\s*$", "", key).strip().lower() in want:
+            return value
+    return None
+
+
 def parse_cbosa_document(document_html: str, doc_id: str) -> CbosaJudgment:
     safe_doc_id = re.sub(r"[^A-Z0-9]", "", doc_id.upper())
     if not _DOC_ID_RE.fullmatch(safe_doc_id):
@@ -297,41 +315,39 @@ def parse_cbosa_document(document_html: str, doc_id: str) -> CbosaJudgment:
     title = parser.title.text()
     case_number = (
         _extract_case_from_title(title)
-        or parser.table_values.get("Sygnatura")
-        or parser.table_values.get("Sygnatura akt")
+        or _table_value(parser.table_values, ("Sygnatura", "Sygnatura akt"))
     )
     if not case_number:
         raise ValueError(f"Brak sygnatury w dokumencie CBOSA {safe_doc_id}")
 
     case_number = normalize_case_number(case_number)
-    court = parser.table_values.get("Sąd")
-    judgment_date = parser.table_values.get("Data orzeczenia")
-    # "2019-05-22 orzeczenie prawomocne" -> "2019-05-22"
-    date_match = re.search(r"\d{4}-\d{2}-\d{2}", judgment_date or "")
-    if date_match:
-        judgment_date = date_match.group(0)
+    court = _table_value(parser.table_values, ("Sąd", "Sąd/Organ", "Sąd orzekający"))
+    date_field = _table_value(parser.table_values, ("Data orzeczenia", "Data wyroku")) or ""
+    # "2019-05-22 orzeczenie prawomocne" -> data + informacja CBOSA o prawomocności
+    date_match = re.search(r"\d{4}-\d{2}-\d{2}", date_field)
+    judgment_date = date_match.group(0) if date_match else date_field
+    finality_match = re.search(r"orzeczenie\s+(?:nie)?prawomocne", date_field, flags=re.I)
+    finality = finality_match.group(0).lower() if finality_match else None
     operative_part = parser.sections.get("Sentencja")
     reasoning = parser.sections.get("Uzasadnienie")
 
+    # KOTWICE poprawności (fail-closed): sygnatura, Sentencja, zamknięty BODY/HTML.
+    # "Sąd"/"Data orzeczenia" są BEST-EFFORT — ich brak (inny układ karty) nie przekreśla
+    # odczytu treści; zwracamy je jako None z listą missing_metadata (zgł. 2026-10-07:
+    # karta bez pól "Sąd, Data orzeczenia" dawała fałszywe OUT_OF_SCOPE mimo realnego orzeczenia).
     if not parser.saw_html_end or not parser.saw_body_end:
         raise ValueError(f"Niekompletny HTML CBOSA {safe_doc_id}: brak zamknięcia BODY/HTML")
-    missing_required = [
-        name for name, value in (
-            ("Sąd", court),
-            ("Data orzeczenia", judgment_date),
-            ("Sentencja", operative_part),
-        )
-        if not value
-    ]
-    if missing_required:
+    if not operative_part:
         raise ValueError(
-            f"Zmiana/niekompletność kontraktu HTML CBOSA {safe_doc_id}: "
-            f"brak pól {', '.join(missing_required)}"
+            f"Zmiana/niekompletność kontraktu HTML CBOSA {safe_doc_id}: brak Sentencji"
         )
     if parser.saw_uzasadnienie_label and not reasoning:
         raise ValueError(
             f"Niekompletna sekcja Uzasadnienie w dokumencie CBOSA {safe_doc_id}"
         )
+    missing_metadata = tuple(
+        name for name, value in (("Sąd", court), ("Data orzeczenia", judgment_date)) if not value
+    )
 
     return CbosaJudgment(
         doc_id=safe_doc_id,
@@ -343,6 +359,8 @@ def parse_cbosa_document(document_html: str, doc_id: str) -> CbosaJudgment:
         url=f"{CBOSA_BASE_URL}/doc/{safe_doc_id}",
         reasoning_available=bool(reasoning),
         document_complete=True,
+        finality=finality,
+        missing_metadata=missing_metadata,
     )
 
 
@@ -395,14 +413,12 @@ def collect_search_doc_ids(
                 added += 1
         return added
 
+    # Nadmiar unikalnych /doc/{ID} ponad licznik „Znaleziono N” NIE jest driftem: strona
+    # wyników CBOSA niesie też linki spoza trafień (orzeczenia powiązane, nawigacja). To
+    # dodatkowi kandydaci, nie brak kompletności — i tak przechodzą przez exact-match
+    # + fail-closed parse_cbosa_document, więc nie dają fałszywego trafienia. Dawna blokada
+    # `> total` zwracała fałszywe OUT_OF_SCOPE dla istniejących wyroków (zgł. 2026-10-07).
     add_page(first_html)
-    if len(ordered) > total:
-        return CbosaSearchCollection(
-            status=VerificationStatus.OUT_OF_SCOPE,
-            doc_ids=tuple(ordered),
-            total=total,
-            reason="Liczba unikalnych /doc/{ID} przekracza licznik CBOSA.",
-        )
 
     page = 2
     while len(ordered) < total:
@@ -421,13 +437,6 @@ def collect_search_doc_ids(
                 doc_ids=tuple(ordered),
                 total=total,
                 reason=f"Paginacja zatrzymała się/powtórzyła na stronie p={page}.",
-            )
-        if len(ordered) > total:
-            return CbosaSearchCollection(
-                status=VerificationStatus.OUT_OF_SCOPE,
-                doc_ids=tuple(ordered),
-                total=total,
-                reason="Paginacja zwróciła więcej unikalnych dokumentów niż licznik CBOSA.",
             )
         page += 1
 

@@ -69891,6 +69891,24 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-06n — etpcz: wyszukiwanie po frazie zwracało „brak trafienia” mimo trafień; karta Wyszukiwanie: fraza pierwsza (6.203)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: wstawić audyt-systemu-v4 6.202 (paczka użytkownika), sprawdzić działanie wszystkich konektorów w aplikacji i przyjazne przekazywanie danych w wyszukiwarkach; podstawową formą jest szukanie po frazie i ta opcja ma być pierwsza.
+
+### 2. USTALENIA
+- F-237 (BŁĄD): `etpcz_szukaj` po frazie — strona wyników etpcz.ms.gov.pl podaje linki `/detailsetpc/<zakodowana fraza>/<id>`, a `parsujWyniki` i `docIdZ` przyjmowały tylko segment `$N` (link po numerze skargi). Pomiar 2026-10-06: „prawo do sądu” — 741 trafień, 0 odczytanych, status OUT_OF_SCOPE.
+- Pomiar konektorów (test_protokol: 16/16 serwerów; test_poprawnosci: 17 PASS, 4 FAIL po stronie źródeł z sieci CI — WL i sn.pl: ochrona przed botami, CBOSA: ECONNRESET, SO Poznań: niepełny łańcuch TLS; test_sady: OK; G40 aplikacji: 15/15 źródeł, CEIDG bez klucza).
+- Aplikacja (lex-web, poza korpusem): 6 narzędzi bez polskiej nazwy (w tym `sn_szukaj`, więc wyszukiwanie SN po frazie nie było pierwsze), 13 pól SN bez etykiet, pole frazy za sygnaturą (SAOS, TSUE, ETPCz), tytuły „Wynik N” w ETPCz, kod `SN_WERYFIKACJA_WYMAGANA` jako komunikat, surowe wartości statusu („obowiazuje”, „nieznany”), ostrzeżenie konektora o dacie KIO niewyświetlane.
+
+### 3. ZMIANA
+- etpcz-example: rozpoznanie id dokumentu z dowolnym segmentem ścieżki (fraza albo `$N`); test_sady: przypadek strony wyników po frazie; dist/lex-mcp.mjs przebudowany (zbuduj_pakiet.py, esbuild przypięty).
+- F-238 (BŁĄD): T41 (`check_limit_plikow.py`) liczył pliki kanału pluginów (`.claude-plugin/`, `.mcp.json`), których paczka nie zawiera od 6.187 — wersja 6.202 (paczka 198 plików) dawała fałszywy FAIL „200 plików”. T41 liczy teraz to, co wchodzi do paczki; selftest z plikami pluginu.
+- Aplikacja: kolejność narzędzi fraza → sygnatura → odczyt → pobieranie → obsługa dostępu; pole frazy pierwsze (po wymaganym wskazaniu aktu w ISAP); źródła z wyszukiwaniem po frazie oznaczone i pierwsze w grupie; komplet polskich nazw narzędzi i pól (test na katalogu 16 konektorów).
+
+### 4. WERYFIKACJA
+etpcz na żywo po poprawce: „prawo do sądu” — 741 trafień, kandydaci z numerem skargi; numer 43447/19 — FOUND. Wyniki frazowe 10 źródeł przez parser karty Wyszukiwanie: tytuły, sąd, data, status po polsku.
+
 ## AUDYT-2026-10-06k — T11: Dz.U. 2026 poz. 982 dopisana do snapshotu indeksu Dz.U. (6.200)
 
 ### 1. ŹRÓDŁO

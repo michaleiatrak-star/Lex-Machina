@@ -14,10 +14,18 @@ from pathlib import Path
 
 LIMIT, OSTRZ = 200, 190
 POMIN = {"__pycache__", "node_modules", ".git"}
+# Pliki kanału pluginów w korzeniu skilla nie wchodzą do paczki (6.187, F-230) — limit dotyczy paczki.
+KANAL_PLUGINOW = {".claude-plugin", ".mcp.json"}
 
 
 def policz(skill: Path) -> int:
-    return sum(1 for p in skill.rglob("*") if p.is_file() and not (set(p.relative_to(skill).parts) & POMIN))
+    return sum(
+        1
+        for p in skill.rglob("*")
+        if p.is_file()
+        and not (set(p.relative_to(skill).parts) & POMIN)
+        and p.relative_to(skill).parts[0] not in KANAL_PLUGINOW
+    )
 
 
 def main() -> int:
@@ -30,8 +38,11 @@ def main() -> int:
             for i in range(3):
                 (s / f"{i}.md").write_text("x")
             (s / "__pycache__" / "a.pyc").write_text("x")
+            (s / ".claude-plugin").mkdir()
+            (s / ".claude-plugin" / "plugin.json").write_text("{}")
+            (s / ".mcp.json").write_text("{}")
             ok = policz(s) == 3
-        print(f"SELFTEST: {'OK' if ok else 'FAIL'} (pomija __pycache__)"); return 0 if ok else 1
+        print(f"SELFTEST: {'OK' if ok else 'FAIL'} (pomija __pycache__ i pliki kanału pluginów)"); return 0 if ok else 1
     root = Path(a.repo_root or Path(__file__).resolve().parents[2])
     fail = False
     for sk in sorted(p for p in root.iterdir() if (p / "SKILL.md").is_file()):

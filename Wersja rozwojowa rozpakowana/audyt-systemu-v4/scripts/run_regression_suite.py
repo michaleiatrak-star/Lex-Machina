@@ -182,6 +182,7 @@ def main():
         # 2026-10-04e: mapy aktów czytelne maszynowo i kompletne wobec modułów (F-229).
         ("T45", "T45 KRYTYCZNY — mapy aktów: struktura tabel, pokrycie modułów, odesłania", "check_mapy_aktow.py", ["--repo-root", str(root)]),
         ("T46", "T46 WYSOKI — litery Mac CE w aktach 2000–2009: mapa, wykrycie, pagina, zgodność PY↔JS", "test_mac_ce_litery.py", ["--repo-root", str(root)]),
+        ("T47", "T47 WYSOKI — wyjątek RZĄD 1: czysty tekst ujednolicony Konstytucji (zgł. #83)", "test_konstytucja_tekst_czysty.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)

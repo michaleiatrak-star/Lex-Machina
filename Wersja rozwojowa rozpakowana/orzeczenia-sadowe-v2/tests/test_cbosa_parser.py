@@ -143,6 +143,18 @@ def test_repeated_pagination_fails_closed():
     r=collect_search_doc_ids(first,lambda page:repeated)
     assert r.status == VerificationStatus.OUT_OF_SCOPE
 
+def test_extra_doc_links_beyond_counter_are_candidates_not_drift():
+    # Strona wyników niesie linki /doc/ spoza trafień (orzeczenia powiązane, nawigacja),
+    # więc unikalnych ID bywa więcej niż licznik N. To dodatkowi kandydaci, nie drift:
+    # exact-match + fail-closed odczyt dokumentu decydują. Wcześniej fałszywe OUT_OF_SCOPE.
+    s = search(1, [("AAAAAAAAAA", "hit"), ("BBBBBBBBBB", "powiazane")])
+    r = verify_search_results(
+        s, "II FSK 100/24",
+        lambda doc_id: doc() if doc_id == "AAAAAAAAAA" else doc("III FSK 100/24"),
+    )
+    assert r.status == VerificationStatus.FOUND
+    assert r.judgment is not None and r.judgment.case_number == "II FSK 100/24"
+
 def test_pagination_collects_unique_docs():
     first=search(11,[(f"A{i:09}","x") for i in range(10)])
     second=search(11,[("B000000000","last")])
@@ -161,6 +173,31 @@ def test_content_length_mismatch_fails_closed():
     fetched=FetchedHtml(text=html,content_length=len(html)+10,received_bytes=len(html))
     r=verify_search_results(search(1,[("AAAAAAAAAA","one")]),"II FSK 100/24",lambda _:fetched)
     assert r.status == VerificationStatus.OUT_OF_SCOPE
+
+
+def test_missing_sad_and_data_are_best_effort_not_out_of_scope():
+    # zgł. 2026-10-07: karta bez pól "Sąd"/"Data orzeczenia" (inny układ) dawała fałszywe
+    # OUT_OF_SCOPE mimo realnego orzeczenia. Sentencja + sygnatura + zamknięty HTML wystarczą.
+    html = doc()
+    html = html.replace(
+        '<tr><td class="lista-label">Sąd</td><td class="info-list-value">Naczelny Sąd Administracyjny</td></tr>', ""
+    ).replace(
+        '<tr><td class="lista-label">Data orzeczenia</td><td class="info-list-value">2026-01-10</td></tr>', ""
+    )
+    d = parse_cbosa_document(html, "AAAAAAAAAA")
+    assert d.case_number == "II FSK 100/24"
+    assert d.court is None
+    assert d.judgment_date is None
+    assert set(d.missing_metadata) == {"Sąd", "Data orzeczenia"}
+    assert "Oddala skargę kasacyjną" in (d.operative_part or "")
+    r = verify_search_results(search(1, [("AAAAAAAAAA", "one")]), "II FSK 100/24", lambda _: html)
+    assert r.status == VerificationStatus.FOUND
+
+
+def test_missing_sentencja_still_fails_closed():
+    html = doc().replace('<div class="lista-label">Sentencja</div>', '<div class="lista-label">Inne</div>')
+    with pytest.raises(ValueError, match="brak Sentencji"):
+        parse_cbosa_document(html, "AAAAAAAAAA")
 
 
 def test_value_cell_with_nested_table_keeps_judgment_date():

@@ -58,7 +58,7 @@ export function dozwolonyHost(url) {
 /** Id dokumentu z linku do treści/metryki albo samo id. */
 export function docIdZ(s) {
   const t = String(s ?? "").trim();
-  const m = /\/(?:etpccontent|detailsetpc)\/\$N\/([A-Za-z0-9_.-]{10,120})/.exec(t);
+  const m = /\/(?:etpccontent|detailsetpc)\/[^/"'\s<>]+\/(\d{10,20}_I_ETPC_[A-Za-z0-9_.-]{6,100})/.exec(t);
   if (m) return m[1];
   return /^\d{10,20}_I_ETPC_[A-Za-z0-9_.-]+$/.test(t) ? t : null;
 }
@@ -94,7 +94,8 @@ export function parsujWyniki(html) {
   const t = String(html ?? "");
   if (/Nie znaleziono żadnego wyniku|Nie znaleziono zadnego wyniku/i.test(t)) return { liczba: 0, docIds: [] };
   const liczbaTxt = /class="big_number"[^>]*>\s*([\d\s ]+)</.exec(t)?.[1];
-  const docIds = [...new Set([...t.matchAll(/\/(?:detailsetpc|etpccontent)\/\$N\/([A-Za-z0-9_.-]{10,120})/g)].map((m) => m[1]))];
+  // Po numerze skargi linki mają segment $N, po frazie — zakodowaną frazę (/detailsetpc/prawo$0020do…/id).
+  const docIds = [...new Set([...t.matchAll(/\/(?:detailsetpc|etpccontent)\/[^/"'\s<>]+\/(\d{10,20}_I_ETPC_[A-Za-z0-9_.-]{6,100})/g)].map((m) => m[1]))];
   return { liczba: liczbaTxt ? Number(liczbaTxt.replace(/[\s ]/g, "")) : null, docIds };
 }
 

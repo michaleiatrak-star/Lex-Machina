@@ -181,6 +181,26 @@ server.registerTool(
 
 const pamiecTekstu = new Map();
 
+// ── WYJĄTEK RZĄD 1: czysty tekst jednolity (ujednolicony, type "U") ważniejszy od text.pdf.
+// Zmierzone 2026-10-07 na żywym ELI: Konstytucja DU/1997/483 ma textHTML:false, więc isap_tekst
+// czyta `text.pdf` — a to skan z ukrytą warstwą OCR, w którym numery 12 artykułów są zniekształcone
+// (np. „Art. ISO.” zamiast „Art. 150.”), co dawało NOT_FOUND dla art. 150. Plik ujednolicony
+// (texts[].type === "U", D19970483Lj.pdf, 294 KB born-digital) jest czysty: wszystkie 12 numerów
+// (108, 138, 141, 145, 146, 150–154, 156, 176) są poprawne. Dlatego dla tych ELI pobieramy
+// wersję "U" zamiast text.pdf. Klucz = ELI aktu; typ = kod z `texts`.
+const WYJATKI_TEKST_CZYSTY = {
+  "DU/1997/483": { typ: "U", plik: "D19970483Lj.pdf", powod: "skan OCR z 1997 r. zniekształca numery artykułów (np. „Art. ISO.” zamiast „Art. 150.”)" },
+};
+
+/** Zwraca URL czystego tekstu ujednoliconego dla wyjątku RZĄD 1 albo null. `plik` z żywych
+ * metadanych (`texts`), z fallbackiem na wartość zapisaną w mapie, gdy metadanych brak. */
+export function wybierzTekstCzysty(eli, meta = null) {
+  const w = WYJATKI_TEKST_CZYSTY[eli];
+  if (!w) return null;
+  const plik = (meta?.texts ?? []).find((t) => t.type === w.typ)?.fileName ?? w.plik;
+  return { url: `${ELI_BASE_URL}/${eli}/text/${w.typ}/${encodeURIComponent(plik)}`, powod: w.powod };
+}
+
 // ── Dz.U./M.P. z lat 2000–2009: polskie litery w fontach QuarkXPress „…PL” są zapisane
 // w kodach Mac Central European, a PDF deklaruje je jako Mac Roman („Za∏àcznik” zamiast
 // „Załącznik”). Dotyczy pdfjs tak samo jak pdftotext, pdfplumber, pypdf i PyMuPDF.
@@ -256,9 +276,9 @@ export function wytnijArtykul(zalacznik, numer) {
   return m ? m[1].trim() : null;
 }
 
-async function tekstPdf(eli) {
+async function tekstPdf(eli, url = null) {
   if (pamiecTekstu.has(eli)) return pamiecTekstu.get(eli);
-  const resp = await fetch(`${ELI_BASE_URL}/${eli}/text.pdf`, { signal: sygnal(90000) });
+  const resp = await fetch(url ?? `${ELI_BASE_URL}/${eli}/text.pdf`, { signal: sygnal(90000) });
   if (!resp.ok) throw new Error(`PDF ${eli}: HTTP ${resp.status}`);
   const dane = new Uint8Array(await resp.arrayBuffer());
   const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
@@ -312,14 +332,16 @@ server.registerTool("isap_tekst", {
       if (!tj) return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, powod: "Nie ustalono aktualnego t.j. (brak obowiązującego obwieszczenia w /references)." });
       zrodlo = tj; wersjaTekstu = "tekst_jednolity";
     }
-    const pelny = await tekstPdf(zrodlo.eli);
+    const czysty = wybierzTekstCzysty(zrodlo.eli, meta);
+    const pelny = await tekstPdf(zrodlo.eli, czysty?.url ?? null);
     const obw = wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(pelny) : { zalacznik: pelny, nie_obejmuje: null, stan_prawny_na: null };
-    const result = { identyfikator: zrodlo.identyfikator, eli_bazowy: eli, eli_zrodla_tekstu: zrodlo.eli, wersja_tekstu: wersjaTekstu,
+    const result = { identyfikator: zrodlo.identyfikator, eli_bazowy: eli, eli_zrodla_tekstu: zrodlo.eli, wersja_tekstu: czysty ? "tekst_ujednolicony" : wersjaTekstu,
       status_obowiazywania: wersjaTekstu === "tekst_jednolity" ? zrodlo.status_obowiazywania : st,
       tytul_lub_nazwa: zrodlo.tytul_lub_nazwa, stan_prawny_na: obw.stan_prawny_na,
-      url_zrodlowy: `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf` };
+      url_zrodlowy: czysty?.url ?? `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf` };
     const uw = [];
-    if (wersjaTekstu === "tekst_ogloszony") uw.push("⚠️ Tekst OGŁOSZONY (brzmienie z dnia ogłoszenia), nie stan obecny.");
+    if (czysty) uw.push(`✅ Tekst ujednolicony (wersja „U”) — ${czysty.powod}; pominięto skan text.pdf.`);
+    if (wersjaTekstu === "tekst_ogloszony" && !czysty) uw.push("⚠️ Tekst OGŁOSZONY (brzmienie z dnia ogłoszenia), nie stan obecny.");
     if (obw.nie_obejmuje) result.tj_nie_obejmuje = obw.nie_obejmuje.slice(0, 4000);
     if (tj && !jestObwieszczeniemTj) {
       result.zmiany_po_tj = await zmianyPoTj(eli, tj);
