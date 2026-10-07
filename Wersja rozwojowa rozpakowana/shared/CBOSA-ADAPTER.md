@@ -1,7 +1,7 @@
 # CBOSA-ADAPTER — kanoniczny kontrakt dostępu NSA/WSA
 
 > **Plik:** `shared/CBOSA-ADAPTER.md`
-> **Wersja:** 1.1 (2026-09-14) — rozdzielono DIRECT_LIVE od CRAWLED_OR_INDEXED; fallback snapshot ma host post-check, exact-match i jawny content_scope.
+> **Wersja:** 1.2 (2026-10-07) — sekcja „powiązane” (`span.powiazane`) poza zbiorem kandydatów; etykieta pola także w zagnieżdżonej tabeli (`td.info-list-label > table > td.lista-label`) — pomiar na żywo z PR #84 (geek111). (1.1 z 2026-09-14 — rozdzielono DIRECT_LIVE od CRAWLED_OR_INDEXED; fallback snapshot ma host post-check, exact-match i jawny content_scope.
 > **Status źródła:** CBOSA / `orzeczenia.nsa.gov.pl` = **RZĄD 2A**
 > **Rola:** transport i walidacja; adapter nie ma własnego RZĘDU.
 
@@ -42,7 +42,7 @@ submit=Szukaj
 
 1. Odczytaj licznik `Znaleziono N orzeczeń`.
 2. Nierozpoznany licznik = `OUT_OF_SCOPE`.
-3. Wyciągnij unikalne `/doc/{ID}`.
+3. Wyciągnij unikalne `/doc/{ID}` z listy wyników — z pominięciem sekcji „powiązane” (`span.powiazane`), która nie należy do zbioru wyników.
 4. Jeśli liczba ID < N, pobieraj `/cbo/find?p=N` z tymi samymi cookies.
 5. Brak nowych ID na kolejnej stronie, pętla paginacji albo limit bezpieczeństwa =
    `OUT_OF_SCOPE`. Nadmiar ID ponad licznik N nie jest driftem (strona niesie też linki
@@ -59,7 +59,9 @@ Dla każdego kandydata pobierz `/doc/{ID}`. Wymagane do uznania dokumentu (kotwi
 
 Pola `sąd` i `data orzeczenia` są BEST-EFFORT: ich brak (inny układ karty) nie przekreśla
 odczytu treści — zwracamy je jako `null` z listą `brak_metadanych`, a dokument dalej jest uznany.
-Odczyt etykiet jest tolerancyjny (bez końcowego `:`, synonimy „Sąd/Organ", „Data wyroku"). Wcześniej
+Odczyt etykiet jest tolerancyjny (bez końcowego `:`, synonimy „Sąd/Organ", „Data wyroku"); etykieta może
+stać w komórce `td.lista-label` albo w zagnieżdżonej tabeli w `td.info-list-label`, a wartość w tabeli
+zagnieżdżonej w `td.info-list-value` (data | „orzeczenie prawomocne"). Wcześniej
 twardy wymóg tych pól dawał fałszywe `OUT_OF_SCOPE` dla realnych orzeczeń (zgł. 2026-10-07).
 
 Jeżeli transport jest oznaczony jako niepełny albo `Content-Length` nie zgadza

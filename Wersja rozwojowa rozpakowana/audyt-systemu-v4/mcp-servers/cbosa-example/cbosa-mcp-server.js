@@ -72,7 +72,15 @@ class Zbieracz { // _TextCollector
 // ── parser wyników i dokumentu (odpowiedniki _SearchParser / _DocumentParser) ─────────────
 export function extractDocIds(html) {
   const out = [], widz = new Set();
+  // Sekcja „powiązane” (span.powiazane) nie należy do listy wyników (PR #84): jej linki nie są
+  // kandydatami, więc nie ma po co pobierać tych dokumentów.
+  let powiazane = 0;
   for (const t of tokeny(html)) {
+    if (t.tag === "span") {
+      if (t.typ === "start" && (powiazane > 0 || klasy(t.atr).has("powiazane"))) { powiazane += 1; continue; }
+      if (t.typ === "koniec" && powiazane > 0) { powiazane -= 1; continue; }
+    }
+    if (powiazane > 0) continue;
     if (t.typ === "koniec" || t.tag !== "a") continue;
     const m = (t.atr.href ?? "").match(/^\/doc\/([A-Z0-9]{10})\/?$/i);
     if (m && !widz.has(m[1].toUpperCase())) { widz.add(m[1].toUpperCase()); out.push(m[1].toUpperCase()); }
@@ -143,7 +151,9 @@ function parsujDokumentSurowo(html) {
     if (tag === "td" && s.tdZagn > 0) { s.tdZagn -= 1; s.td.add(" "); continue; }
     if (tag === "td" && s.tdKl !== null) {
       const tx = s.td.text(), k = new Set(s.tdKl.split(" "));
-      if (k.has("lista-label")) s.etykTab = tx;
+      // Etykieta bywa też zagnieżdżona: td.info-list-label > table > td.lista-label (pomiar na żywo,
+      // PR #84) — wcześniej ginęła razem z wartością pola („Sąd”, „Data orzeczenia” = null).
+      if (k.has("lista-label") || k.has("info-list-label")) s.etykTab = tx;
       else if (k.has("info-list-value") && s.etykTab) { s.tabela[s.etykTab] = tx; s.etykTab = null; }
       s.tdKl = null; s.td = new Zbieracz(); continue;
     }

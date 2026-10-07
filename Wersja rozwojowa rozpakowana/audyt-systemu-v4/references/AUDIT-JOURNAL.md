@@ -69942,6 +69942,25 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-07h — CBOSA: wartościowe części PR #84 (etykiety w zagnieżdżonych tabelach, sekcja „powiązane”) (6.211)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: porównać PR #84 (geek111, 2026-10-02, pomiar na żywej stronie CBOSA) z bieżącym konektorem i przenieść to, co faktycznie wartościowe.
+
+### 2. PORÓWNANIE (przypadki z PR #84 uruchomione na kodzie z main)
+- Sekcja „powiązane”: main dawał poprawny FOUND (od 6.205 nadmiar ID to kandydaci filtrowani exact-matchem), ale pobierał zbędne dokumenty. PR #84 pomija `span.powiazane` przy zbieraniu.
+- ⛔ BŁĄD w main: etykieta pola w zagnieżdżonej tabeli (`td.info-list-label > table > td.lista-label`) nie była rozpoznawana — dokument III OSK 1959/22 dawał `sąd: null`, `data: null` (`brak_metadanych`), choć dane są na karcie. 6.207 obsłużył tylko zagnieżdżenie w komórce WARTOŚCI.
+- Sumy kontrolne z PR #84 (brak wpisów per-przykład) — nieaktualne: tych plików nie ma w drzewie.
+- Całego PR nie scalono: cofałby późniejsze zmiany 6.205–6.207 (best-effort sądu/daty, tolerancyjne etykiety, ponowienia).
+
+### 3. ZMIANA
+- `cbosa-mcp-server.js` i `orzeczenia-sadowe-v2/tools/cbosa_parser.py`: komórka `td.info-list-label` traktowana jak etykieta; `span.powiazane` (z zagnieżdżeniem) pomijany przy `/doc/{ID}`. Semantyka best-effort sądu/daty bez zmian.
+- `shared/CBOSA-ADAPTER.md` 1.2.
+- Testy: JS `test_normalizacja.mjs` +2 (31), Python `test_cbosa_parser.py` +2 (30); `dist/lex-mcp.mjs` przebudowany, `zbuduj_pakiet.py --sprawdz` zgodny; `test_protokol.mjs` OK.
+- Wersje: audyt-systemu-v4 6.210 → 6.211, orzeczenia-sadowe-v2 2.25 → 2.26, biblioteka wspólna 3.99.20 → 3.99.21.
+
+### 4. WERYFIKACJA
+Na przypadkach z PR #84: dokument → sąd „Naczelny Sąd Administracyjny”, data 2023-11-29, prawomocność „orzeczenie prawomocne”; lista z „powiązanymi” → jeden kandydat, FOUND. Brak dostępu do żywego CBOSA z tej sesji — weryfikacja na fragmentach HTML zmierzonych przez autora PR.
 ## AUDYT-2026-10-07g — PR #95 (równoległa sesja): walidator cytowań i weryfikator sygnatur w wersji pełniejszej; porządki references; .claude (6.210)
 
 ### 1. ŹRÓDŁO

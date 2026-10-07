@@ -98,9 +98,17 @@ class _SearchParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.doc_ids: list[str] = []
         self._seen: set[str] = set()
+        # The "related" section (span.powiazane) is not part of the result list (PR #84).
+        self._related_depth = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, Optional[str]]]) -> None:
-        if tag.lower() != "a":
+        low = tag.lower()
+        if low == "span":
+            classes = (dict(attrs).get("class") or "").split()
+            if self._related_depth > 0 or "powiazane" in classes:
+                self._related_depth += 1
+                return
+        if self._related_depth > 0 or low != "a":
             return
         href = dict(attrs).get("href") or ""
         m = re.fullmatch(r"/doc/([A-Z0-9]{10})/?", href, re.I)
@@ -111,9 +119,16 @@ class _SearchParser(HTMLParser):
             self._seen.add(doc_id)
             self.doc_ids.append(doc_id)
 
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "span" and self._related_depth > 0:
+            self._related_depth -= 1
+
 
 class _DocumentParser(HTMLParser):
     TABLE_LABEL_CLASS = "lista-label"
+    # The label may itself be nested: td.info-list-label > table > td.lista-label
+    # (live page, PR #84); the outer cell then carries the label.
+    OUTER_LABEL_CLASS = "info-list-label"
     VALUE_CLASS = "info-list-value"
     SECTION_VALUE_CLASS = "info-list-value-uzasadnienie"
 
@@ -223,7 +238,7 @@ class _DocumentParser(HTMLParser):
         if low == "td" and self._current_td_class is not None:
             text = self._current_td.text()
             classes = set(self._current_td_class.split())
-            if self.TABLE_LABEL_CLASS in classes:
+            if self.TABLE_LABEL_CLASS in classes or self.OUTER_LABEL_CLASS in classes:
                 self._pending_table_label = text
             elif self.VALUE_CLASS in classes and self._pending_table_label:
                 self.table_values[self._pending_table_label] = text
