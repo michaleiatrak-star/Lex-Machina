@@ -79,8 +79,8 @@ Gwarancyjnym; same art. 425a–425s nie stanowią kompletnej podstawy.
 ## Granica modułu
 
 Art. 426 i następne obejmują dalsze odrębne reżimy, m.in. banki i SKOK.
-Nie są merytorycznie rozwinięte w tym module; przy ich uruchomieniu pokaż
-status `LUKA — WYMAGA ŚWIEŻEGO OPRACOWANIA`, a nie domyślne pokrycie.
+Są opracowane w `mod-PrUpad-postepowania-odrebne-426-491-38.md`;
+przejdź do odpowiedniej procedury wraz z pełnym źródłem z czytnika.
 
 ## Self-check
 
@@ -89,3 +89,25 @@ status `LUKA — WYMAGA ŚWIEŻEGO OPRACOWANIA`, a nie domyślne pokrycie.
 - [ ] Czy sprawdzono prawo UE lub umowę międzynarodową przy art. 378–417?
 - [ ] Czy nie rozszerzono pokrycia modułu na art. 426 i następne?
 - [ ] Czy ustalono fakty konieczne do zastosowania konkretnego przepisu?
+
+## Wykonanie procedury transgranicznej i szczególnej
+
+Dla uznania zagranicznego postępowania zbierz orzeczenie, dowód ustanowienia
+zarządcy i dokumenty z art. 386–390, tłumaczenia, dane dłużnika, COMI, majątek
+i istniejące postępowania. Sprawdź przesłanki odmowy, środki tymczasowe,
+obwieszczenia, treść rozstrzygnięcia i skutki uznania według 392–404.
+Postępowanie główne i wtórne różnią się zakresem majątku oraz kompetencjami;
+plan koordynacji musi obejmować rozliczenie wierzycieli i nadwyżki (405–417).
+Najpierw rozstrzygnij pierwszeństwo rozporządzenia UE 2015/848/umowy.
+
+Po śmierci przedsiębiorcy ustal datę śmierci, termin i legitymację wniosku
+z art. 7 oraz 418–419, spadkobierców/kuratora/zarządcę sukcesyjnego, skład
+spadku, rozporządzenia i roszczenia. Postępowanie wszczęte po śmierci
+nie jest tym samym co śmierć upadłego w toku postępowania.
+
+Deweloper: rozdziel przedsięwzięcia/zadania inwestycyjne, nabywców, rachunki
+powiernicze, zabezpieczenia i budżet ukończenia. Wariant kontynuacji przez
+syndyka (425e–425h), likwidacji (425i–425k), przejęcia (425l–425m) i układu
+(425n–425s) ma własne przesłanki, zgody, rozliczenia i głosowanie.
+Porównaj koszty i odzysk nabywców, odczytaj ochronę z ustawy deweloperskiej
+oraz DFG i przepisy przejściowe dla dat konkretnych umów.

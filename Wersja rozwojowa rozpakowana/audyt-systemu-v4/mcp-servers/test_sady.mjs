@@ -127,6 +127,43 @@
   }
 }
 
+// ═══ sn — sesja snproxy (dawny sn-example/test_normalizacja.mjs) ═══
+{
+  const { bladSn, rekordy, ERR_SESJA_SN, normalizujSygnature } = await import("./sn-example/sn-mcp-server.js");
+  const { default: assert } = await import("node:assert");
+
+  // Testy offline konektora SN (bez sieci): rozpoznanie błędu sesji snproxy, koperta com_ajax, rekordy.
+  // Pełny przebieg po sieci: ../test_poprawnosci.mjs.
+
+  // 1. „Brak tokenu” i pokrewne = błąd SESJI → kierowane w ścieżkę weryfikacji (BlokadaSn), nie martwy ERROR.
+  //    Regresja zgł. 2026-10-07: sygnatura dawała ERROR „sn.pl zgłosił błąd: Brak tokenu” bez fallbacku.
+  for (const msg of ["Brak tokenu", "Brak tokenu sesji", "Sesja wygasła", "Zaloguj się", "Wymagana weryfikacja (captcha)"]) {
+    assert.ok(ERR_SESJA_SN.test(msg), `powinno być błędem sesji: ${msg}`);
+  }
+  // Błąd merytoryczny zapytania NIE jest błędem sesji → zostaje zwykłym ERROR.
+  for (const msg of ["Nieprawidłowy parametr sygnatura", "Błąd bazy danych", "Zbyt długie zapytanie"]) {
+    assert.ok(!ERR_SESJA_SN.test(msg), `nie powinno być błędem sesji: ${msg}`);
+  }
+  console.log("OK: ERR_SESJA_SN — token/sesja/weryfikacja = sesja; błąd zapytania = zwykły ERROR");
+
+  // 2. Koperta com_ajax z błędem (różne głębokości) rozpoznawana przez bladSn; rekord nie jest błędem.
+  assert.strictEqual(bladSn({ error: "Brak tokenu" }), "Brak tokenu");
+  assert.strictEqual(bladSn({ data: { error: "Brak tokenu" } }), "Brak tokenu");
+  assert.strictEqual(bladSn([{ error: "Sesja wygasła" }]), "Sesja wygasła");
+  assert.strictEqual(bladSn({ data: [{ sygnatura_sprawy: "III CZP 25/11" }] }), null);
+  console.log("OK: bladSn — koperta błędu na różnych głębokościach; rekord nie jest błędem");
+
+  // 3. rekordy z różnych kształtów opakowania com_ajax.
+  const rec = { sygnatura_sprawy: "III CZP 25/11", data_wydania: "2011-05-10T00:00:00", forma_orzeczenia: "uchwała SN", id: "42" };
+  assert.deepStrictEqual(rekordy({ data: [rec] }), [rec]);
+  assert.deepStrictEqual(rekordy({ data: { data: [rec] } }), [rec]);
+  assert.deepStrictEqual(rekordy(rec), [rec]);
+  assert.strictEqual(normalizujSygnature("iii  czp  25 / 11").toUpperCase(), "III CZP 25/11");
+  console.log("OK: rekordy — opakowania com_ajax; normalizacja sygnatury");
+
+  console.log("\nWSZYSTKIE TESTY SN (offline) PRZESZŁY");
+}
+
 // ═══ sp ═══
 {
   // Funkcje czyste konektora sp (bez sieci): Tapestry, portal sądu, id dokumentu, strona wyników.
@@ -297,6 +334,54 @@
     assert.ok(!postacSygnaturyTk("II OSK 1/20") && !postacSygnaturyTk("I C 100/15 x"));
     console.log("OK: sygnatura w postaci TK spoza listy repertoriów idzie do źródeł urzędowych");
   }
+}
+
+// ═══ tk — niedostępność źródła (dawny tk-example/test_normalizacja.mjs) ═══
+{
+  const { bladTransportu, zawieraSygnature, normalizujSygnature, toSygnaturaTk, postacSygnaturyTk, wynikiOtkzu, dokumentyIpo } = await import("./tk-example/tk-mcp-server.js");
+  const { BudzetWyczerpany } = await import("./wspolne/budzet.mjs");
+  const { default: assert } = await import("node:assert");
+
+  // Testy offline konektora TK (bez sieci): klasyfikacja niedostępności źródła, kontrola sygnatury,
+  // parsowanie wyników OTK ZU / dokumentów IPO. Pełny przebieg po sieci: ../test_poprawnosci.mjs.
+
+  // 1. Niedostępność transportu → ERROR (nie OUT_OF_SCOPE). Regresja zgł. 2026-10-07:
+  //    komunikat „Przekroczony budżet czasu wywołania (50000 ms)” nie był rozpoznawany i dawał OUT_OF_SCOPE.
+  assert.strictEqual(bladTransportu(new BudzetWyczerpany("Przekroczony budżet czasu wywołania (50000 ms) — źródło nie odpowiada; spróbuj ponownie później.")), true);
+  { const e = new Error("The operation was aborted due to timeout"); assert.strictEqual(bladTransportu(e), true); }
+  { const e = new Error("x"); e.name = "TimeoutError"; assert.strictEqual(bladTransportu(e), true); }
+  { const e = new Error("x"); e.name = "AbortError"; assert.strictEqual(bladTransportu(e), true); }
+  assert.strictEqual(bladTransportu(new Error("IPO HTTP 503")), true);
+  assert.strictEqual(bladTransportu(new Error("OTK ZU: nie rozpoznano formularza wyszukiwarki (zmiana strony?)")), true);
+  assert.strictEqual(bladTransportu(new Error("fetch failed")), true);
+  // „Rzetelny brak” (dotarliśmy, brak orzeczenia) NIE jest błędem transportu → zostaje OUT_OF_SCOPE.
+  assert.strictEqual(bladTransportu(new Error("karta sprawy IPO nie zawiera pytanej sygnatury")), false);
+  assert.strictEqual(bladTransportu(new Error("brak trafienia w wyszukiwarce OTK ZU")), false);
+  console.log("OK: bladTransportu — timeout/budżet/HTTP/zmiana formularza = niedostępność; brak trafienia = rzetelny brak");
+
+  // 2. Kontrola sygnatury TK.
+  assert.strictEqual(normalizujSygnature("P 4 / 23"), "P 4/23");
+  assert.ok(toSygnaturaTk("P 4/23") && toSygnaturaTk("SK 3/20") && toSygnaturaTk("K 33/07"));
+  assert.ok(!toSygnaturaTk("II CSK 1/20")); // repertorium spoza TK
+  assert.ok(postacSygnaturyTk("Xx 1/99"));
+  assert.ok(zawieraSygnature("… w sprawie o sygn. akt P 4/23 orzeka …", "P 4/23"));
+  assert.ok(zawieraSygnature("sygn. P 4/2023", "P 4/23")); // rok 4-cyfrowy
+  assert.ok(!zawieraSygnature("P 40/23", "P 4/23")); // bez fałszywego trafienia na dłuższym numerze
+  console.log("OK: sygnatura TK — normalizacja, repertorium, dopasowanie roku, brak fałszywego trafienia");
+
+  // 3. Parsowanie wyników (fragmenty układu rzeczywistego).
+  { const html = '<li>Wyrok — sygn. SK 3/20 <a href="/2020/A/15">pozycja</a></li><li>K 1/00 <a href="/2000/A/1">x</a></li>';
+    const l = wynikiOtkzu(html, "SK 3/20", "https://otkzu.trybunal.gov.pl/Wyszukiwanie");
+    assert.deepStrictEqual(l, ["https://otkzu.trybunal.gov.pl/2020/A/15"]); }
+  { const html = '<a href="#sprawaForm:tabView:dok_7">Wyrok z dnia 1 maja 2020 r.</a>'
+      + '<div id="sprawaForm:tabView:dok_7">… sygn. akt SK 3/20 … <a href="/ipo/downloadOrzeczenieDoc?dok=99">doc</a></div></form>';
+    const d = dokumentyIpo(html, "https://ipo.trybunal.gov.pl/ipo/view/sprawa.xhtml");
+    assert.strictEqual(d.length, 1);
+    assert.match(d[0].url, /#dok_7$/);
+    assert.match(d[0].url_doc, /downloadOrzeczenieDoc\?dok=99$/); }
+  console.log("OK: parsowanie OTK ZU (pozycja zbioru) i zakładek dokumentów IPO");
+
+  console.log("\nWSZYSTKIE TESTY TK (offline) PRZESZŁY");
 }
 
 // ═══ etpcz ═══

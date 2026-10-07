@@ -1,0 +1,35 @@
+{
+  "act": "Ustawa z dnia 28 lutego 2003 r. — Prawo upadłościowe",
+  "base_eli": "DU/2003/535",
+  "consolidated_eli": "DU/2026/913",
+  "verified_on": "2026-10-04",
+  "legal_status_date": "2026-06-10",
+  "promulgation": "2026-07-07",
+  "pdf_url": "https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf",
+  "references_url": "https://api.sejm.gov.pl/eli/acts/DU/2003/535/references",
+  "pdf_sha256": "773dd1099cb636a5a66eb996240bc8013f70f8d1692f440c10bb4c5448a235c1",
+  "text_sha256": "69e89894b9d500f84fbb143e658f9bdcef5d8655a5e8258be08083ea21592830",
+  "expected_article_headings": 603,
+  "later_amendments": [
+    {
+      "eli": "DU/2026/1206",
+      "articles": [
+        "452",
+        "456"
+      ],
+      "units": [
+        "452 ust. 1",
+        "456 ust. 1"
+      ],
+      "effective_from": "2027-01-11",
+      "basis": "art. 7 i art. 57 nowelizacji",
+      "source": "https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf",
+      "action": "Nie stosuj przyszłej redakcji przed datą wejścia; po dacie odczytaj nowelizację i aktualne relacje."
+    }
+  ],
+  "excluded_from_article_index": [
+    "Tytuł VI części pierwszej: uchylony, bez indywidualnych nagłówków artykułów w t.j.",
+    "Część czwarta: uchylona, bez indywidualnych nagłówków artykułów w t.j."
+  ],
+  "coverage": "Kompletny PDF i ekstrakcja; indeks wszystkich jawnych nagłówków. Nie jest deklaracją pełnego komentarza ani audytu wszystkich ustępów."
+}

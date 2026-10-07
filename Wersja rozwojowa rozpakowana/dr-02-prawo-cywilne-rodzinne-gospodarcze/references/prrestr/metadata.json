@@ -1,0 +1,47 @@
+{
+  "act": "Ustawa z dnia 15 maja 2015 r. — Prawo restrukturyzacyjne",
+  "base_eli": "DU/2015/978",
+  "consolidated_eli": "DU/2026/533",
+  "verified_on": "2026-10-04",
+  "legal_status_date": "2026-03-25",
+  "promulgation": "2026-04-17",
+  "pdf_url": "https://api.sejm.gov.pl/eli/acts/DU/2026/533/text.pdf",
+  "references_url": "https://api.sejm.gov.pl/eli/acts/DU/2015/978/references",
+  "expected_article_headings": 407,
+  "later_amendments": [
+    {
+      "eli": "DU/2026/1206",
+      "articles": [
+        "4"
+      ],
+      "units": [
+        "4 ust. 2 pkt 4"
+      ],
+      "effective_from": "2027-01-11",
+      "basis": "art. 24 i 57 nowelizacji",
+      "source": "https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf",
+      "action": "Zmiana wyłączenia oddziałów bankowych; nie stosuj przed wejściem w życie."
+    },
+    {
+      "eli": "DU/2026/176",
+      "articles": [
+        "156"
+      ],
+      "units": [
+        "156 ust. 5 pkt 4"
+      ],
+      "effective_from": "2027-02-18",
+      "basis": "art. 24 i 35 nowelizacji; odnośniki 31–32 t.j.",
+      "source": "https://api.sejm.gov.pl/eli/acts/DU/2026/176/text.pdf",
+      "included_in_pdf": true,
+      "action": "PDF zawiera dwa warianty pkt 4. Obecny obowiązuje do 17.02.2027; od 18.02.2027 punkt uchylony."
+    }
+  ],
+  "excluded_from_article_index": [
+    "Tytuł IV dział III: uchylony, bez indywidualnych nagłówków; tekst historyczny nie jest prawem bieżącym.",
+    "Art. 401–447: zbiorowo pominięte przepisy zmieniające inne ustawy; tekst pierwotny w references/insolvency/sources/."
+  ],
+  "coverage": "Pełny PDF i ekstrakcja, wszystkie jawne nagłówki; dostępność źródła nie oznacza pełnego komentarza doktrynalnego.",
+  "pdf_sha256": "a9a822e56825e1655599f774fada8b6c9c2016abb2e4d9a29be1cd3fc6496f46",
+  "text_sha256": "bf268d1482a3f36b0563eaa13967ea4310aa1997f8f66932b16d51e2e553fedb"
+}

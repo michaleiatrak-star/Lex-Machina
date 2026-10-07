@@ -2,7 +2,8 @@
 """Check that unpacked development skills exactly match their ZIP sources.
 
 Directories without a corresponding archive are reported, never removed.
-This is a byte-integrity check, not a legal-content audit.
+This is a byte-integrity check, not a legal-content audit. Plugin-channel files
+at the skill root (`.claude-plugin/`, `.mcp.json`) are not part of the archive.
 """
 import argparse
 import hashlib
@@ -35,7 +36,13 @@ def verify(archives, unpacked):
                 continue
             roots.add(root)
             actual = {(root + '/' + p.relative_to(unpacked / root).as_posix()): p
-                      for p in (unpacked / root).rglob('*') if p.is_file()}
+                      for p in (unpacked / root).rglob('*') if p.is_file()
+                      and not p.relative_to(unpacked / root).parts[0].startswith('.')
+                      and '__pycache__' not in p.parts}
+            for n in sorted(n for n in names if PurePosixPath(n).parts[1].startswith('.')):
+                errors.append(f'plugin file in skill archive: {n}')
+            for n in sorted(n for n in names if '__pycache__' in PurePosixPath(n).parts):
+                errors.append(f'build artefact in skill archive: {n}')
             for n in sorted(set(names) - actual.keys()):
                 errors.append(f'missing: {n}')
             for n in sorted(actual.keys() - set(names)):

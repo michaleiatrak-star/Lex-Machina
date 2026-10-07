@@ -1,0 +1,791 @@
+                          DZIENNIK USTAW
+                          RZECZYPOSPOLITEJ POLSKIEJ
+                                          Warszawa, dnia 16 marca 2026 r.
+
+                                                             Poz. 340
+
+
+                                                             US T AW A
+                                                      z dnia 23 stycznia 2026 r.
+
+      o zmianie niektórych ustaw związanych z funkcjonowaniem rynku finansowego oraz ochroną uczestników
+                                                  tego rynku1), 2)
+
+     Art. 1. W ustawie z dnia 29 sierpnia 1997 r. – Prawo bankowe (Dz. U. z 2026 r. poz. 38, 176 i 331) wprowadza się
+następujące zmiany:
+1)    w odnośniku nr 1 do tytułu ustawy w pkt 7 kropkę zastępuje się średnikiem i dodaje się pkt 8 w brzmieniu:
+      „8) dyrektywy Parlamentu Europejskiego i Rady 2014/59/UE z dnia 15 maja 2014 r. ustanawiającej ramy na potrzeby
+          prowadzenia działań naprawczych oraz restrukturyzacji i uporządkowanej likwidacji w odniesieniu do instytucji
+          kredytowych i firm inwestycyjnych oraz zmieniającej dyrektywę Rady 82/891/EWG i dyrektywy Parlamentu
+          Europejskiego i Rady 2001/24/WE, 2002/47/WE, 2004/25/WE, 2005/56/WE, 2007/36/WE, 2011/35/UE, 2012/30/UE
+          i 2013/36/EU oraz rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 1093/2010 i (UE) nr 648/2012 (Dz. Urz.
+          UE L 173 z 12.06.2014, str. 190, Dz. Urz. UE L 349 z 05.12.2014, str. 68, Dz. Urz. UE L 345 z 27.12.2017,
+
+1)   Niniejsza ustawa:
+     1) wdraża dyrektywę Parlamentu Europejskiego i Rady (UE) 2024/1174 z dnia 11 kwietnia 2024 r. zmieniającą dyrektywę 2014/59/UE
+        i rozporządzenie (UE) nr 806/2014 w odniesieniu do niektórych aspektów minimalnego wymogu w zakresie funduszy własnych
+        i zobowiązań kwalifikowalnych (Dz. Urz. UE L 2024/1174 z 22.04.2024);
+     2) uzupełnia wdrożenie dyrektywy Parlamentu Europejskiego i Rady (UE) 2019/879 z dnia 20 maja 2019 r. zmieniającej dyrektywę
+        2014/59/UE w odniesieniu do zdolności do pokrycia strat i dokapitalizowania instytucji kredytowych i firm inwestycyjnych oraz
+        dyrektywę 98/26/WE (Dz. Urz. UE L 150 z 07.06.2019, str. 296 oraz Dz. Urz. UE L 283 z 31.08.2020, str. 2);
+     3) uzupełnia wdrożenie dyrektywy Parlamentu Europejskiego i Rady 2014/59/UE z dnia 15 maja 2014 r. ustanawiającej ramy na
+        potrzeby prowadzenia działań naprawczych oraz restrukturyzacji i uporządkowanej likwidacji w odniesieniu do instytucji kredy-
+        towych i firm inwestycyjnych oraz zmieniającej dyrektywę Rady 82/891/EWG i dyrektywy Parlamentu Europejskiego i Rady
+        2001/24/WE, 2002/47/WE, 2004/25/WE, 2005/56/WE, 2007/36/WE, 2011/35/UE, 2012/30/UE i 2013/36/EU oraz rozporządze-
+        nia Parlamentu Europejskiego i Rady (UE) nr 1093/2010 i (UE) nr 648/2012 (Dz. Urz. UE L 173 z 12.06.2014, str. 190, Dz. Urz.
+        UE L 349 z 05.12.2014, str. 68, Dz. Urz. UE L 345 z 27.12.2017, str. 96, Dz. Urz. UE L 150 z 07.06.2019, str. 296, Dz. Urz.
+        UE L 203 z 01.08.2019, str. 10, Dz. Urz. UE L 314 z 05.12.2019, str. 64, Dz. Urz. UE L 328 z 18.12.2019, str. 29, Dz. Urz.
+        UE L 283 z 31.08.2020, str. 2, Dz. Urz. UE L 22 z 22.01.2021, str. 1, Dz. Urz. UE L 275 z 25.10.2022, str. 1, Dz. Urz. UE L 333
+        z 27.12.2022, str. 153, Dz. Urz. UE L 2023/2864 z 20.12.2023 oraz Dz. Urz. UE L 2024/1174 z 22.04.2024);
+     4) uzupełnia wdrożenie dyrektywy Parlamentu Europejskiego i Rady 2014/92/UE z dnia 23 lipca 2014 r. w sprawie porównywalno-
+        ści opłat związanych z rachunkami płatniczymi, przenoszenia rachunku płatniczego oraz dostępu do podstawowego rachunku
+        płatniczego (Dz. Urz. UE L 257 z 28.08.2014, str. 214);
+     5) służy stosowaniu:
+        a) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2024/886 z dnia 13 marca 2024 r. w sprawie zmiany rozporządzeń
+            (UE) nr 260/2012 i (UE) 2021/1230 oraz dyrektyw 98/26/WE i (UE) 2015/2366 w odniesieniu do poleceń przelewu natych-
+            miastowego w euro (Dz. Urz. UE L 2024/886 z 19.03.2024),
+        b) rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/1011 z dnia 8 czerwca 2016 r. w sprawie indeksów stosowanych
+            jako wskaźniki referencyjne w instrumentach finansowych i umowach finansowych lub do pomiaru wyników funduszy inwe-
+            stycyjnych i zmieniającego dyrektywy 2008/48/WE i 2014/17/UE oraz rozporządzenie (UE) nr 596/2014 (Dz. Urz. UE L 171
+            z 29.06.2016, str. 1, Dz. Urz. UE L 137 z 24.05.2017, str. 41, Dz. Urz. UE L 317 z 09.12.2019, str. 17, Dz. Urz. UE L 334
+            z 27.12.2019, str. 1, Dz. Urz. UE L 49 z 12.02.2021, str. 6, Dz. Urz. UE L 333 z 27.12.2022, str. 1, Dz. Urz. UE L 2023/2869
+            z 20.12.2023 oraz Dz. Urz. UE L 2025/914 z 19.05.2025).
+Dziennik Ustaw                                                   –2–                                                         Poz. 340
+
+           str. 96, Dz. Urz. UE L 150 z 07.06.2019, str. 296, Dz. Urz. UE L 203 z 01.08.2019, str. 10, Dz. Urz. UE L 314
+           z 05.12.2019, str. 64, Dz. Urz. UE L 328 z 18.12.2019, str. 29, Dz. Urz. UE L 283 z 31.08.2020, str. 2, Dz. Urz.
+           UE L 22 z 22.01.2021, str. 1, Dz. Urz. UE L 275 z 25.10.2022, str. 1, Dz. Urz. UE L 333 z 27.12.2022, str. 153,
+           Dz. Urz. UE L 2023/2864 z 20.12.2023 oraz Dz. Urz. UE L 2024/1174 z 22.04.2024).”;
+2)    w art. 142 dodaje się ust. 9 w brzmieniu:
+            „9. Podjęcia przez Komisję Nadzoru Finansowego czynności, o których mowa w ust. 3, i czynności, o których
+      mowa w art. 138 ust. 1 i 2, w przypadku, o którym mowa w art. 141q ust. 8, oraz ustanowienia kuratora, o którym
+      mowa w art. 144 ust. 1, albo zarządu komisarycznego, o którym mowa w art. 145 ust. 1, a także skutków wystąpienia
+      tych zdarzeń w odniesieniu do umów zawartych przez bank nie uznaje się za podstawę realizacji zabezpieczenia
+      w rozumieniu art. 3 pkt 4 ustawy z dnia 2 kwietnia 2004 r. o niektórych zabezpieczeniach finansowych ani za ogłosze-
+      nie upadłości w rozumieniu art. 1 pkt 14 ustawy z dnia 24 sierpnia 2001 r. o ostateczności rozrachunku w systemach
+      płatności i systemach rozrachunku papierów wartościowych oraz zasadach nadzoru nad tymi systemami, jeżeli nadal
+      są wypełniane istotne zobowiązania banku wynikające z umowy, w tym zobowiązania do płatności i dostawy, a także
+      zobowiązania do zapewnienia zabezpieczenia. Przepisy art. 156 ust. 2−5 ustawy z dnia 10 czerwca 2016 r. o Banko-
+      wym Funduszu Gwarancyjnym, systemie gwarantowania depozytów oraz przymusowej restrukturyzacji stosuje się
+      odpowiednio.”.
+     Art. 2. W ustawie z dnia 29 sierpnia 1997 r. o Narodowym Banku Polskim (Dz. U. z 2022 r. poz. 2025) wprowadza się
+następujące zmiany:
+1)    do tytułu ustawy dodaje się odnośnik nr 1 w brzmieniu:
+      „1) Niniejsza ustawa w zakresie swojej regulacji wdraża dyrektywę Parlamentu Europejskiego i Rady (UE) 2015/2366
+          z dnia 25 listopada 2015 r. w sprawie usług płatniczych w ramach rynku wewnętrznego, zmieniającą dyrek-
+          tywy 2002/65/WE, 2009/110/WE, 2013/36/UE i rozporządzenie (UE) nr 1093/2010 oraz uchylającą dyrek-
+          tywę 2007/64/WE (Dz. Urz. WE L 337 z 23.12.2015, str. 35, Dz. Urz. UE L 102 z 23.04.2018, str. 97, Dz. Urz.
+          UE L 333 z 27.12.2022, str. 153 oraz Dz. Urz. UE L 2024/886 z 19.03.2024).”;
+2)    w art. 51 w ust. 1 po pkt 3b dodaje się pkt 3c w brzmieniu:
+      „3c) instytucji płatniczych i instytucji pieniądza elektronicznego, za zgodą Prezesa NBP;”.
+     Art. 3. W ustawie z dnia 24 sierpnia 2001 r. o ostateczności rozrachunku w systemach płatności i systemach rozra-
+chunku papierów wartościowych oraz zasadach nadzoru nad tymi systemami (Dz. U. z 2024 r. poz. 585) wprowadza się
+następujące zmiany:
+1)    w odnośniku nr 1 do tytułu ustawy zdanie pierwsze otrzymuje brzmienie:
+      „Niniejsza ustawa w zakresie swojej regulacji wdraża dyrektywę 98/26/WE Parlamentu Europejskiego i Rady z dnia
+      19 maja 1998 r. w sprawie zamknięcia rozliczeń w systemach płatności i rozrachunku papierów wartościowych
+      (Dz. Urz. WE L 166 z 11.06.1998, str. 45, Dz. Urz. UE L 146 z 10.06.2009, str. 37, Dz. Urz. UE L 331 z 15.12.2010,
+      str. 120, Dz. Urz. UE L 201 z 27.07.2012, str. 1, Dz. Urz. UE L 257 z 28.08.2014, str. 1, Dz. Urz. UE L 150
+      z 07.06.2019, str. 296 oraz Dz. Urz. UE L 2024/886 z 19.03.2024).”;
+2)    w art. 1:
+      a)   w pkt 5 lit. l otrzymuje brzmienie:
+           „l)    w odniesieniu do systemów płatności – instytucja płatnicza oraz instytucja pieniądza elektronicznego
+                  w rozumieniu ustawy z dnia 19 sierpnia 2011 r. o usługach płatniczych (Dz. U. z 2025 r. poz. 611 i 1069 oraz
+                  z 2026 r. poz. 340);”,
+      b) pkt 9 otrzymuje brzmienie:
+           „9)    uczestnik – instytucję, CCP, agenta rozrachunkowego, izbę rozliczeniową, podmiot prowadzący system lub
+                  członka rozliczającego CCP, który uzyskał zezwolenie udzielone zgodnie z art. 17 rozporządzenia (UE)
+                  nr 648/2012;”;
+
+2)   Niniejszą ustawą zmienia się ustawy: ustawę z dnia 29 sierpnia 1997 r. – Prawo bankowe, ustawę z dnia 29 sierpnia 1997 r. o Naro-
+     dowym Banku Polskim, ustawę z dnia 24 sierpnia 2001 r. o ostateczności rozrachunku w systemach płatności i systemach rozra-
+     chunku papierów wartościowych oraz zasadach nadzoru nad tymi systemami, ustawę z dnia 28 lutego 2003 r. – Prawo upadłościowe,
+     ustawę z dnia 29 lipca 2005 r. o nadzorze nad rynkiem kapitałowym, ustawę z dnia 29 lipca 2005 r. o obrocie instrumentami finanso-
+     wymi, ustawę z dnia 19 sierpnia 2011 r. o usługach płatniczych oraz ustawę z dnia 10 czerwca 2016 r. o Bankowym Funduszu
+     Gwarancyjnym, systemie gwarantowania depozytów oraz przymusowej restrukturyzacji.
+Dziennik Ustaw                                                    –3–                                                         Poz. 340
+
+3)    w art. 2a dodaje się zdanie drugie w brzmieniu:
+      „Nie stanowi to ograniczenia odpowiedzialności uczestnika, za którego pośrednictwem uczestnik pośredni przekazuje
+      zlecenia rozrachunku do systemu.”;
+4)    po art. 14 dodaje się art. 14a w brzmieniu:
+            „Art. 14a. 1. Podmiot prowadzący system płatności określa kryteria i warunki uczestnictwa w tym systemie
+      płatności oraz zasady jego funkcjonowania, z uwzględnieniem potrzeby zapewnienia sprawnego i bezpiecznego funk-
+      cjonowania systemu płatności oraz ostateczności rozrachunku zleceń rozrachunku realizowanych w tym systemie
+      płatności.
+           2. NBP określa kryteria i warunki uczestnictwa w prowadzonych przez siebie systemach płatności oraz zasady
+      funkcjonowania tych systemów płatności, uwzględniając realizację zadań NBP.
+            3. NBP może żądać od podmiotu ubiegającego się o uczestnictwo w systemie płatności, o którym mowa w ust. 2,
+      lub uczestniczącego w takim systemie płatności przekazania niezbędnych dokumentów, w tym wydanych przez odpo-
+      wiednie organy, w celu dokonania oceny spełniania przez ten podmiot kryteriów i warunków uczestnictwa w takim
+      systemie płatności.”;
+5)    w art. 15:
+      a)   w ust. 1 wyrazy „i art. 11–14” zastępuje się wyrazami „ , art. 11–14 i art. 14a ust. 2 i 3”,
+      b) ust. 2 i 3 otrzymują brzmienie:
+                   „2. Przepisy art. 4–7, art. 11–14 i art. 14a ust. 1 ustawy oraz art. 22 ust. 1 pkt 4, art. 66, art. 67, art. 80
+           i art. 135–137 ustawy z dnia 28 lutego 2003 r. – Prawo upadłościowe oraz art. 227 ust. 1 pkt 10, art. 242, art. 244,
+           art. 245, art. 254, art. 255 i art. 309 ustawy z dnia 15 maja 2015 r. – Prawo restrukturyzacyjne stosuje się także do
+           systemów innych niż systemy wskazane w ust. 1, w których istnieje ryzyko wystąpienia sytuacji, w której nie-
+           wywiązanie się ze zobowiązań przez uczestnika systemu może spowodować niewywiązanie się ze zobowiązań
+           przez innego jego uczestnika lub uczestników (ryzyko systemowe), określonych w przepisach wydanych na pod-
+           stawie ust. 3.
+                3. Minister właściwy do spraw instytucji finansowych, po zasięgnięciu opinii Prezesa NBP oraz KNF, określi,
+           w drodze rozporządzenia, systemy inne niż wskazane w ust. 1, w których istnieje ryzyko wystąpienia ryzyka sys-
+           temowego, uwzględniając konieczność zapewnienia stabilności i bezpieczeństwa systemów płatności.”.
+     Art. 4. W ustawie z dnia 28 lutego 2003 r. – Prawo upadłościowe (Dz. U. z 2025 r. poz. 614, 1085, 1170 i 1172 oraz
+z 2026 r. poz. 331) wprowadza się następujące zmiany:
+1)    w odnośniku nr 1 do tytułu ustawy w pkt 3 kropkę zastępuje się średnikiem i dodaje się pkt 4 w brzmieniu:
+      „4) dyrektywę Parlamentu Europejskiego i Rady 2014/59/UE z dnia 15 maja 2014 r. ustanawiającą ramy na potrzeby
+          prowadzenia działań naprawczych oraz restrukturyzacji i uporządkowanej likwidacji w odniesieniu do instytucji
+          kredytowych i firm inwestycyjnych oraz zmieniającą dyrektywę Rady 82/891/EWG i dyrektywy Parlamentu
+          Europejskiego i Rady 2001/24/WE, 2002/47/WE, 2004/25/WE, 2005/56/WE, 2007/36/WE, 2011/35/UE, 2012/30/UE
+          i 2013/36/EU oraz rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 1093/2010 i (UE) nr 648/2012
+          (Dz. Urz. UE L 173 z 12.06.2014, str. 190, Dz. Urz. UE L 349 z 05.12.2014, str. 68, Dz. Urz. UE L 345 z 27.12.2017,
+          str. 96, Dz. Urz. UE L 150 z 07.06.2019, str. 296, Dz. Urz. UE L 203 z 01.08.2019, str. 10, Dz. Urz. UE L 314
+          z 05.12.2019, str. 64, Dz. Urz. UE L 328 z 18.12.2019, str. 29, Dz. Urz. UE L 283 z 31.08.2020, str. 2, Dz. Urz.
+          UE L 22 z 22.01.2021, str. 1, Dz. Urz. UE L 275 z 25.10.2022, str. 1, Dz. Urz. UE L 333 z 27.12.2022, str. 153,
+          Dz. Urz. UE L 2023/2864 z 20.12.2023 oraz Dz. Urz. UE L 2024/1174 z 22.04.2024).”;
+2)    w art. 440 w ust. 2 w pkt 1 wyrazy „przypadające za trzy ostatnie lata przed dniem ogłoszeniem upadłości należności
+      z tytułu składek na ubezpieczenia społeczne w rozumieniu ustawy z dnia 13 października 1998 r. o systemie ubezpie-
+      czeń społecznych” zastępuje się wyrazami „a także zobowiązania wobec organów realizujących zadania z zakresu
+      zabezpieczenia społecznego w działach zabezpieczenia społecznego, o których mowa w art. 3 ust. 1 rozporządzenia
+      Parlamentu Europejskiego i Rady (WE) nr 883/2004 z dnia 29 kwietnia 2004 r. w sprawie koordynacji systemów
+      zabezpieczenia społecznego (Dz. Urz. UE L 166 z 30.04.2004, str. 1, z późn. zm.3)), w tym Państwowego Funduszu
+      Rehabilitacji Osób Niepełnosprawnych, a także organów realizujących zadania z zakresu ubezpieczenia zdrowotnego
+      i pomocy społecznej”.
+
+
+3)   Zmiany wymienionego rozporządzenia zostały ogłoszone w Dz. Urz. UE L 284 z 30.10.2009, str. 43, Dz. Urz. UE L 338 z 22.12.2010,
+     str. 35, Dz. Urz. UE L 149 z 08.06.2012, str. 4, Dz. Urz. UE L 349 z 19.12.2012, str. 45, Dz. Urz. UE L 158 z 10.06.2013, str. 1,
+     Dz. Urz. UE L 188 z 09.07.2013, str. 10, Dz. Urz. UE L 346 z 20.12.2013, str. 27, Dz. Urz. UE L 366 z 20.12.2014, str. 15, Dz. Urz.
+     UE L 76 z 22.03.2017, str. 13, Dz. Urz. UE L 186 z 11.07.2019, str. 21 oraz Dz. Urz. UE L 338 z 15.10.2020, str. 18.
+Dziennik Ustaw                                                  –4–                                                        Poz. 340
+
+     Art. 5. W ustawie z dnia 29 lipca 2005 r. o nadzorze nad rynkiem kapitałowym (Dz. U. z 2024 r. poz. 1161 i 1222 oraz
+z 2025 r. poz. 146 i 1069) wprowadza się następujące zmiany:
+1)    w art. 23i:
+      a)   w ust. 1:
+            – uchyla się pkt 1 i 2,
+            – po pkt 2 dodaje się pkt 2a i 2b w brzmieniu:
+               „2a) wyznaczenia wskaźnika referencyjnego jako istotnego na podstawie art. 24 ust. 3 i 7 rozporządzenia
+                    2016/1011;
+               2b)     udzielenia zezwolenia, o którym mowa w art. 29 ust. 1 rozporządzenia 2016/1011;”,
+            – uchyla się pkt 5,
+      b) dodaje się ust. 3 w brzmieniu:
+                  „3. Komisja wydaje oraz publikuje oświadczenie i może wydać powiadomienie, o których mowa w art. 24
+           ust. 2 rozporządzenia 2016/1011, a także wydaje ogłoszenie, o którym mowa w art. 24a ust. 6 tego rozporządzenia.”;
+2)    w art. 23j:
+      a)   po ust. 1 dodaje się ust. 1a w brzmieniu:
+                 „1a. Przepis ust. 1 stosuje się odpowiednio do podmiotu uczestniczącego w opracowywaniu wskaźnika
+           referencyjnego lub przekazującego dane na potrzeby jego opracowywania, w tym usługodawcy, któremu zadania,
+           usługi lub czynności związane z opracowywaniem wskaźnika referencyjnego zostały zlecone zgodnie z art. 10
+           rozporządzenia 2016/1011.”,
+      b) w ust. 2 we wprowadzeniu do wyliczenia wyrazy „w ust. 1” zastępuje się wyrazami „w ust. 1 i 1a”,
+      c)   dodaje się ust. 3 w brzmieniu:
+                 „3. Komisja może żądać od administratora podjęcia działań, o których mowa w art. 41 ust. 1 lit. l rozporzą-
+           dzenia 2016/1011.”.
+     Art. 6. W ustawie z dnia 29 lipca 2005 r. o obrocie instrumentami finansowymi (Dz. U. z 2024 r. poz. 722, z późn.
+zm.4)) wprowadza się następujące zmiany:
+1)    w odnośniku nr 1 do tytułu ustawy w pkt 9 kropkę zastępuje się średnikiem i dodaje się pkt 10 w brzmieniu:
+      „10) dyrektywy Parlamentu Europejskiego i Rady 2014/59/UE z dnia 15 maja 2014 r. ustanawiającej ramy na potrzeby
+           prowadzenia działań naprawczych oraz restrukturyzacji i uporządkowanej likwidacji w odniesieniu do instytucji
+           kredytowych i firm inwestycyjnych oraz zmieniającej dyrektywę Rady 82/891/EWG i dyrektywy Parlamentu
+           Europejskiego i Rady 2001/24/WE, 2002/47/WE, 2004/25/WE, 2005/56/WE, 2007/36/WE, 2011/35/UE, 2012/30/UE
+           i 2013/36/EU oraz rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 1093/2010 i (UE) nr 648/2012
+           (Dz. Urz. UE L 173 z 12.06.2014, str. 190, Dz. Urz. UE L 349 z 05.12.2014, str. 68, Dz. Urz. UE L 345 z 27.12.2017,
+           str. 96, Dz. Urz. UE L 150 z 07.06.2019, str. 296, Dz. Urz. UE L 203 z 01.08.2019, str. 10, Dz. Urz. UE L 314
+           z 05.12.2019, str. 64, Dz. Urz. UE L 328 z 18.12.2019, str. 29, Dz. Urz. UE L 283 z 31.08.2020, str. 2, Dz. Urz.
+           UE L 22 z 22.01.2021, str. 1, Dz. Urz. UE L 275 z 25.10.2022, str. 1, Dz. Urz. UE L 333 z 27.12.2022, str. 153,
+           Dz. Urz. UE L 2023/2864 z 20.12.2023 oraz Dz. Urz. UE L 2024/1174 z 22.04.2024).”;
+2)    w art. 110zz dodaje się ust. 7 w brzmieniu:
+             „7. Podjęcia przez Komisję czynności, o których mowa w ust. 1 i art. 110zk ust. 10, oraz ustanowienia kuratora
+      albo zarządu komisarycznego, o których mowa w art. 110zza, a także skutków wystąpienia tych zdarzeń w odniesieniu
+      do umów zawartych przez dom maklerski nie uznaje się za podstawę realizacji zabezpieczenia w rozumieniu
+      art. 3 pkt 4 ustawy z dnia 2 kwietnia 2004 r. o niektórych zabezpieczeniach finansowych ani za ogłoszenie upadłości
+      w rozumieniu art. 1 pkt 14 ustawy o ostateczności rozrachunku, jeżeli nadal są wypełniane istotne zobowiązania domu
+      maklerskiego wynikające z umowy, w tym zobowiązania do płatności i dostawy, a także zobowiązania do zapewnienia
+      zabezpieczenia. Przepisy art. 156 ust. 2–5 ustawy z dnia 10 czerwca 2016 r. o Bankowym Funduszu Gwarancyjnym,
+      systemie gwarantowania depozytów oraz przymusowej restrukturyzacji stosuje się odpowiednio.”;
+
+
+4)   Zmiany tekstu jednolitego wymienionej ustawy zostały ogłoszone w Dz. U. z 2024 r. poz. 1863, z 2025 r. poz. 146, 820, 923, 1014,
+     1069, 1216 i 1556 oraz z 2026 r. poz. 176.
+Dziennik Ustaw                                               –5–                                                 Poz. 340
+
+3)   w art. 162 uchyla się ust. 11 i 12;
+4)   w art. 163 uchyla się ust. 14;
+5)   w art. 176i:
+     a)   w ust. 1:
+           – po pkt 4 dodaje się pkt 4a–4e w brzmieniu:
+             „4a) administrator narusza wymogi dotyczące opracowywania unijnych wskaźników referencyjnych transfor-
+                  macji klimatycznej oraz unijnych wskaźników referencyjnych dostosowanych do porozumienia pary-
+                  skiego wynikające z art. 19a ust. 1 rozporządzenia 2016/1011 i określone w przepisach tytułów II–IV
+                  tego rozporządzenia lub w załączniku III do tego rozporządzenia,
+             4b)      administrator narusza wymogi w zakresie norm minimalnych dotyczących unijnych wskaźników refe-
+                      rencyjnych transformacji klimatycznej oraz unijnych wskaźników referencyjnych dostosowanych do po-
+                      rozumienia paryskiego, określonych w przepisach aktu delegowanego wydanego na podstawie art. 19a
+                      ust. 2 rozporządzenia 2016/1011,
+             4c)      administrator narusza wymogi dotyczące umieszczania akronimu „CTB” w nazwie unijnych wskaźni-
+                      ków referencyjnych transformacji klimatycznej lub akronimu „PAB” w nazwie unijnych wskaźników
+                      referencyjnych dostosowanych do porozumienia paryskiego, o których mowa w art. 19a ust. 5 rozporzą-
+                      dzenia 2016/1011,
+             4d)      administrator narusza wymogi określone w art. 19b rozporządzenia 2016/1011 odnoszące się do dobie-
+                      rania, ważenia lub wykluczania aktywów bazowych przy opracowywaniu unijnych wskaźników referen-
+                      cyjnych transformacji klimatycznej,
+             4e)      administrator narusza wymogi dotyczące obowiązku wykluczenia, przy opracowywaniu unijnych wskaź-
+                      ników referencyjnych dostosowanych do porozumienia paryskiego, sektorów określonych w przepisach
+                      aktu delegowanego wydanego na podstawie art. 19c ust. 1 rozporządzenia 2016/1011,”,
+           – w pkt 7 po wyrazach „w art. 24” dodaje się wyrazy „ , art. 24a”,
+           – uchyla się pkt 8,
+           – w pkt 12 na końcu dodaje się przecinek i dodaje się pkt 13 i 14 w brzmieniu:
+             „13) podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, nie realizuje żądania, o którym
+                  mowa w art. 23j ust. 1 lub 2 tej ustawy,
+             14)      administrator nie realizuje żądania, o którym mowa w art. 23j ust. 3 ustawy o nadzorze”,
+           – część wspólna otrzymuje brzmienie:
+             „ – Komisja może nałożyć, odpowiednio na administratora, podmiot nadzorowany przekazujący dane, podmiot
+             nadzorowany albo podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, inny niż administrator,
+             karę pieniężną do wysokości 2 212 750 zł – w przypadku osoby fizycznej, a w przypadku niebędącego osobą
+             fizyczną administratora, podmiotu nadzorowanego przekazującego dane, podmiotu nadzorowanego albo pod-
+             miotu, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, innego niż administrator – karę pieniężną do
+             wysokości 4 425 500 zł albo do wysokości kwoty stanowiącej równowartość 10 % całkowitego rocznego przy-
+             chodu wykazanego w ostatnim zbadanym sprawozdaniu finansowym za rok obrotowy, jeżeli przekracza
+             ona 4 425 500 zł.”,
+     b) w ust. 3 wyrazy „podmiot nadzorowany przekazujący dane albo przez podmiot nadzorowany” zastępuje się wyra-
+        zami „podmiot nadzorowany albo podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, inny niż
+        administrator,”,
+     c)   w ust. 4 wyrazy „podmiot nadzorowany przekazujący dane albo podmiot nadzorowany” zastępuje się wyrazami
+          „podmiot nadzorowany albo podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, inny niż
+          administrator,”,
+     d) w ust. 7 wyrazy „podmiot nadzorowany przekazujący dane albo podmiot nadzorowany” zastępuje się wyrazami
+        „podmiot nadzorowany albo podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, inny niż
+        administrator,”,
+     e)   w ust. 8 wyrazy „podmiot nadzorowany przekazujący dane albo podmiot nadzorowany” zastępuje się wyrazami
+          „podmiot nadzorowany albo podmiot, o którym mowa w art. 23j ust. 1 lub 1a ustawy o nadzorze, inny niż
+          administrator,”;
+Dziennik Ustaw                                               –6–                                                     Poz. 340
+
+6)    uchyla się art. 176k;
+7)    w art. 178b dotychczasową treść oznacza się jako ust. 1 i dodaje się ust. 2 w brzmieniu:
+           „2. Tej samej karze podlega administrator niewpisany do rejestru, o którym mowa w art. 36 rozporządzenia
+      2016/1011, który narusza zakaz, o którym mowa w art. 19a ust. 4 lit. a lub b tego rozporządzenia.”.
+     Art. 7. W ustawie z dnia 19 sierpnia 2011 r. o usługach płatniczych (Dz. U. z 2025 r. poz. 611 i 1069) wprowadza się
+następujące zmiany:
+1)    odnośnik nr 1 do tytułu ustawy otrzymuje brzmienie:
+      „1) Niniejsza ustawa w zakresie swojej regulacji wdraża:
+           1) dyrektywę 2007/64/WE Parlamentu Europejskiego i Rady z dnia 13 listopada 2007 r. w sprawie usług płatni-
+              czych w ramach rynku wewnętrznego zmieniającą dyrektywy 97/7/WE, 2002/65/WE, 2005/60/WE i 2006/48/WE
+              i uchylającą dyrektywę 97/5/WE (Dz. Urz. UE L 319 z 05.12.2007, str. 1, Dz. Urz. UE L 187 z 18.07.2009,
+              str. 5 oraz Dz. Urz. UE L 302 z 17.11.2009, str. 97);
+           2) dyrektywę Parlamentu Europejskiego i Rady (UE) 2015/2366 z dnia 25 listopada 2015 r. w sprawie usług płat-
+              niczych w ramach rynku wewnętrznego, zmieniającą dyrektywy 2002/65/WE, 2009/110/WE, 2013/36/UE
+              i rozporządzenie (UE) nr 1093/2010 oraz uchylającą dyrektywę 2007/64/WE (Dz. Urz. UE L 337 z 23.12.2015,
+              str. 35, Dz. Urz. UE L 333 z 27.12.2022, str. 153 oraz Dz. Urz. UE L 2024/886 z 19.03.2024).”;
+2)    w art. 2:
+      a)   po pkt 23 dodaje się pkt 23a w brzmieniu:
+           „23a) polecenie przelewu natychmiastowego w euro – polecenie przelewu natychmiastowego w rozumieniu art. 2
+                 pkt 1a rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustana-
+                 wiającego wymogi techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz
+                 zmieniającego rozporządzenie (WE) nr 924/2009 (Dz. Urz. UE L 94 z 30.03.2012, str. 22, z późn. zm.5));”,
+      b) po pkt 29a dodaje się pkt 29b w brzmieniu:
+           „29b) transgraniczna transakcja płatnicza – płatność transgraniczną w rozumieniu art. 2 pkt 26 rozporządzenia
+                 Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi tech-
+                 niczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozpo-
+                 rządzenie (WE) nr 924/2009;”;
+3)    po art. 6e dodaje się art. 6f w brzmieniu:
+             „Art. 6f. 1. Dostawca, o którym mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, w terminach określonych w art. 15 ust. 3
+      rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi
+      techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie
+      (WE) nr 924/2009 oraz zgodnie z terminami określonymi w wykonawczych standardach technicznych przyjętych
+      przez Komisję Europejską na podstawie art. 15 ust. 5 tego rozporządzenia, przekazuje KNF powiadomienie zawiera-
+      jące informacje za poprzedni rok kalendarzowy o:
+      1)    wysokości opłat za wykonywanie poleceń przelewu w walucie polskiej oraz w euro i poleceń przelewu natych-
+            miastowego w walucie polskiej oraz poleceń przelewu natychmiastowego w euro oraz za prowadzenie rachun-
+            ków płatniczych w walucie polskiej oraz w euro;
+      2)    odsetku poleceń przelewu natychmiastowego w walucie polskiej oraz poleceń przelewu natychmiastowego
+            w euro, które zostały odrzucone, oddzielnie dla krajowych transakcji płatniczych i transgranicznych transakcji
+            płatniczych, ze względu na zastosowanie ukierunkowanych finansowych środków ograniczających, o których
+            mowa w art. 2 pkt 1e rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r.
+            ustanawiającego wymogi techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro
+            oraz zmieniającego rozporządzenie (WE) nr 924/2009;
+      3)    wolumenie i wartości poleceń przelewu natychmiastowego w walucie polskiej oraz poleceń przelewu natych-
+            miastowego w euro dotyczących krajowych transakcji płatniczych i transgranicznych transakcji płatniczych
+            wykonanych przez dostawców, o których mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, w poprzednim roku kalenda-
+            rzowym.
+
+5)   Zmiany wymienionego rozporządzenia zostały ogłoszone w Dz. Urz. UE L 84 z 20.03.2014, str. 1 oraz Dz. Urz. UE L 2024/886
+     z 19.03.2024.
+Dziennik Ustaw                                              –7–                                                     Poz. 340
+
+          2. Powiadomienie, o którym mowa w ust. 1, jest sporządzane w ujednoliconym formacie zgodnie z wykonaw-
+     czymi standardami technicznymi przyjętymi przez Komisję Europejską na podstawie art. 15 ust. 5 rozporządzenia Par-
+     lamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne i hand-
+     lowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie (WE) nr 924/2009.
+         3. KNF, corocznie, w terminie do dnia 9 października roku następnego, przekazuje Komisji Europejskiej oraz
+     EUNB powiadomienie, o którym mowa w ust. 1.”;
+4)   w art. 9:
+     a)   w ust. 3 uchyla się pkt 1,
+     b) w ust. 4a zdanie pierwsze otrzymuje brzmienie:
+          „W przypadku gdy uczestnik systemu płatności w rozumieniu art. 1 pkt 1 ustawy o ostateczności rozrachunku,
+          o którym mowa w art. 15 tej ustawy, zezwala dostawcy, o którym mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, który nie
+          jest uczestnikiem tego systemu, posiadającemu zezwolenie KNF lub wpisanemu do rejestru, lub będącemu unijną
+          instytucją płatniczą lub unijną instytucją pieniądza elektronicznego wykonującą usługi płatnicze na terytorium
+          Rzeczypospolitej Polskiej, na przekazywanie zleceń transferu za pośrednictwem tego systemu, zapewnia innemu
+          dostawcy, o którym mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, posiadającemu zezwolenie KNF lub wpisanemu do
+          rejestru, lub będącemu unijną instytucją płatniczą lub unijną instytucją pieniądza elektronicznego wykonującą
+          usługi płatnicze na terytorium Rzeczypospolitej Polskiej, na jego wniosek, taką samą możliwość ich przekazywa-
+          nia w sposób obiektywny, proporcjonalny i niedyskryminujący pozostałych dostawców usług płatniczych.”;
+5)   po art. 9 dodaje się art. 9a w brzmieniu:
+           „Art. 9a. 1. Instytucja płatnicza lub instytucja pieniądza elektronicznego ubiegające się o uczestnictwo w syste-
+     mach płatności w rozumieniu art. 1 pkt 1 ustawy o ostateczności rozrachunku, o których mowa w art. 15 tej ustawy,
+     oraz uczestniczące w tych systemach posiadają i aktualizują:
+     1)    opis środków podjętych w celu ochrony środków pieniężnych użytkowników;
+     2)    opis zasad zarządzania i mechanizmów kontroli wewnętrznej w odniesieniu do usług płatniczych lub usług
+           w zakresie wydawania pieniądza elektronicznego, w tym procedur dotyczących podejmowania decyzji, procedur
+           zarządzania ryzykiem i procedur księgowych;
+     3)    opis rozwiązań w zakresie korzystania z usług technologii informacyjno-komunikacyjnych, stosowanych zgod-
+           nie z art. 6 i art. 7 rozporządzenia 2022/2554;
+     4)    plan likwidacji na wypadek upadłości, dostosowany do przewidywanej wielkości i modelu biznesowego insty-
+           tucji płatniczej lub instytucji pieniądza elektronicznego.
+            2. W przypadku gdy krajowa instytucja płatnicza lub krajowa instytucja pieniądza elektronicznego chronią środki
+     pieniężne użytkowników przez ich deponowanie w sposób określony odpowiednio w art. 78 ust. 1 pkt 2 lit. a lub
+     art. 132n ust. 1 pkt 2 lit. a lub inwestowanie zgodnie z przepisami wykonawczymi wydanymi odpowiednio na podsta-
+     wie art. 79 lub art. 132o lub unijna instytucja płatnicza lub unijna instytucja pieniądza elektronicznego chronią środki
+     pieniężne użytkowników w sposób określony w przepisach prawa macierzystego państwa członkowskiego, opis, o któ-
+     rym mowa w ust. 1 pkt 1, zawiera:
+     1)    opis polityki inwestycyjnej zapewniającej, aby wybrane aktywa były płynne, bezpieczne oraz obarczone niskim
+           ryzykiem;
+     2)    wskazanie liczby osób posiadających dostęp do rachunku przeznaczonego do ochrony środków pieniężnych użyt-
+           kowników oraz funkcji tych osób;
+     3)    opis procesu podejmowania decyzji zapewniającego ochronę środków pieniężnych użytkowników przed rosz-
+           czeniami wierzycieli instytucji płatniczej lub instytucji pieniądza elektronicznego, w szczególności w przypadku
+           niewypłacalności instytucji płatniczej lub instytucji pieniądza elektronicznego.
+           3. Do opisu, o którym mowa w ust. 1 pkt 1, załącza się:
+     1)    wzór umowy z podmiotem prowadzącym rachunek, o którym mowa odpowiednio w art. 78 ust. 1 pkt 2 lit. a lub
+           art. 132n ust. 1 pkt 2 lit. a;
+     2)    oświadczenie o zgodności z zasadami ochrony środków pieniężnych użytkowników, o których mowa odpowied-
+           nio w art. 78 lub art. 132n.
+Dziennik Ustaw                                            –8–                                                     Poz. 340
+
+          4. W przypadku gdy krajowa instytucja płatnicza lub krajowa instytucja pieniądza elektronicznego chronią środki
+    pieniężne użytkowników w sposób określony odpowiednio w art. 78 ust. 2 lub art. 132n ust. 2 oraz w przypadku gdy
+    unijna instytucja płatnicza lub unijna instytucja pieniądza elektronicznego chronią środki pieniężne w sposób określony
+    w przepisach macierzystego państwa członkowskiego opis, o którym mowa w ust. 1 pkt 1, zawiera:
+    1)    potwierdzenie, że umowa gwarancji bankowej albo ubezpieczeniowej albo umowa ubezpieczenia nie została
+          zawarta z zakładem ubezpieczeń, bankiem krajowym, instytucją kredytową, oddziałem instytucji kredytowej lub
+          oddziałem banku zagranicznego, które należą do tej samej grupy co instytucja płatnicza lub instytucja pieniądza
+          elektronicznego;
+    2)    informacje na temat procesu uzgodnień służących zapewnieniu, aby umowa gwarancji bankowej albo ubezpie-
+          czeniowej albo umowa ubezpieczenia były wystarczające do wypełnienia przez cały czas obowiązków instytucji
+          płatniczej lub instytucji pieniądza elektronicznego w zakresie ochrony środków pieniężnych;
+    3)    wskazanie czasu trwania i warunków odnowienia ochrony ubezpieczeniowej lub gwarancyjnej.
+         5. W przypadku, o którym mowa w ust. 4, do opisu, o którym mowa w ust. 1 pkt 1, załącza się kopię umowy
+    gwarancji bankowej albo ubezpieczeniowej albo umowy ubezpieczenia lub kopię projektów tych umów.
+          6. Opis, o którym mowa w ust. 1 pkt 2 i 3, zawiera informacje wskazujące, że przyjęte zasady zarządzania,
+    mechanizmy kontroli wewnętrznej i rozwiązania w zakresie korzystania z technologii informacyjno-komunikacyjnych
+    są proporcjonalne, odpowiednie, należyte i adekwatne, a w przypadku zasad zarządzania i mechanizmów kontroli
+    wewnętrznej opis zawiera ponadto:
+    1)    informacje o zidentyfikowanych ryzykach, w tym ich rodzaju, oraz procedurach służących ocenie ryzyk i za-
+          pobiegania im;
+    2)    wskazanie procedur przeprowadzania stałych i okresowych kontroli, w tym częstotliwości kontroli i zasobów
+          przydzielonych do tych kontroli;
+    3)    wskazanie procedur księgowych dotyczących rejestracji i procedur zgłaszania informacji finansowych do KNF
+          i Generalnego Inspektora Informacji Finansowej zgodnie z ustawą z dnia 1 marca 2018 r. o przeciwdziałaniu
+          praniu pieniędzy oraz finansowaniu terroryzmu (Dz. U. z 2025 r. poz. 644 i 1669), zwaną dalej „ustawą o przeciw-
+          działaniu praniu pieniędzy”;
+    4)    wskazanie osób odpowiedzialnych za funkcje kontroli wewnętrznej, w tym za kontrolę zgodności oraz za prze-
+          prowadzanie stałych i okresowych kontroli, oraz dane identyfikacyjne tych osób obejmujące imiona i nazwiska
+          oraz adresy zamieszkania, a także ich życiorysy;
+    5)    wskazanie osoby odpowiedzialnej za procesy zarządzania i mechanizmy kontroli wewnętrznej, niebędącej bieg-
+          łym rewidentem;
+    6)    wskazanie osób zarządzających oraz wchodzących w skład organu nadzoru lub komisji rewizyjnej – w przy-
+          padku gdy taki organ nadzoru lub komisja zostały powołane, oraz dane identyfikacyjne tych osób obejmujące
+          imiona i nazwiska oraz adresy zamieszkania;
+    7)    wskazanie sposobu monitorowania i kontroli funkcji powierzanych w ramach outsourcingu kontroli wewnętrznej;
+    8)    wskazanie sposobu monitorowania i kontroli czynności dokonywanych przez agentów i oddziały – w przypadku
+          prowadzenia działalności za pośrednictwem agentów lub posiadania oddziałów;
+    9)    wskazanie zasad zarządzania grupą – w przypadku gdy instytucja płatnicza lub instytucja pieniądza elektronicz-
+          nego są jednostkami zależnymi podmiotu podlegającego przepisom prawa państwa członkowskiego innego niż
+          Rzeczpospolita Polska.
+          7. Plan likwidacji, o którym mowa w ust. 1 pkt 4, zawiera opis środków ograniczających ryzyko na wypadek
+    zakończenia świadczenia usług płatniczych lub prowadzenia działalności w zakresie wydawania pieniądza elektronicz-
+    nego, zapewniających realizację oczekujących transakcji płatniczych lub czynności w zakresie pieniądza elektronicz-
+    nego i rozwiązanie obowiązujących umów.
+         8. Instytucja płatnicza lub instytucja pieniądza elektronicznego, o których mowa w ust. 1, na żądanie podmiotu
+    prowadzącego system, o którym mowa w ust. 1, przedstawiają opinię właściwego organu nadzorczego albo inny
+    równoważny dokument wydany lub opracowany na podstawie przepisów obowiązujących w macierzystym państwie
+    członkowskim dotyczące spełnienia wymogów określonych w ust. 1–7.
+Dziennik Ustaw                                             –9–                                                    Poz. 340
+
+           9. W przypadku ubiegania się o uczestnictwo lub w związku z uczestnictwem w systemie, o którym mowa
+     w ust. 1, na wniosek krajowej instytucji płatniczej lub krajowej instytucji pieniądza elektronicznego, KNF wydaje opi-
+     nię w zakresie zgodności działalności krajowej instytucji płatniczej lub krajowej instytucji pieniądza elektronicznego
+     z przepisami ust. 1–7.
+          10. Wniosek, o którym mowa w ust. 9, zawiera dokumenty i informacje potwierdzające zgodność działalności
+     wnioskodawcy z przepisami ust. 1–7.
+           11. KNF może żądać od krajowej instytucji płatniczej lub krajowej instytucji pieniądza elektronicznego przed-
+     stawienia dodatkowych dokumentów lub informacji niezbędnych do wydania opinii, o której mowa w ust. 9.”;
+6)   w art. 14 dodaje się ust. 12–19 w brzmieniu:
+           „12. Czynności podejmowane przez KNF w zakresie nadzoru nad przestrzeganiem przepisów rozporządzenia
+     Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne
+     i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie (WE)
+     nr 924/2009 przez dostawców, o których mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, polegają w szczególności na:
+     1)   monitorowaniu przestrzegania przepisów rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012
+          z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne i handlowe w odniesieniu do poleceń przelewu i po-
+          leceń zapłaty w euro oraz zmieniającego rozporządzenie (WE) nr 924/2009;
+     2)   przeciwdziałaniu próbom naruszenia zakazów lub ograniczeń określonych w art. 5a–5d rozporządzenia Parla-
+          mentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne
+          i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie
+          (WE) nr 924/2009.
+           13. W przypadku gdy dostawca, o którym mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, nie wykonuje obowiązków lub
+     nienależycie wykonuje obowiązki i nie przestrzega zakazów lub ograniczeń, o których mowa w art. 5a–5d rozporzą-
+     dzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi tech-
+     niczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie
+     (WE) nr 924/2009, KNF może, w drodze decyzji:
+     1)   nałożyć na tego dostawcę karę pieniężną do wysokości 10 % łącznych przychodów netto z tytułu świadczenia
+          usług płatniczych wykazanych w jego ostatnim zbadanym sprawozdaniu finansowym, a w przypadku braku
+          obowiązku badania sprawozdania finansowego – do wysokości 10 % przychodu wykazanego w ostatnim za-
+          twierdzonym sprawozdaniu finansowym, a w przypadku gdy dostawca jest jednostką zależną jednostki dominu-
+          jącej lub jednostki, która skutecznie wywiera znaczący wpływ na tę jednostkę – do wysokości 10 % przychodu
+          wynikającego ze skonsolidowanego sprawozdania finansowego jednostki dominującej najwyższego szczebla
+          osiągniętego w poprzednim roku obrotowym;
+     2)   nałożyć na osobę, która w okresie, w którym nastąpiło naruszenie, pełniła funkcję osoby zarządzającej, bez-
+          pośrednio odpowiedzialnej za stwierdzone nieprawidłowości, albo była bezpośrednio odpowiedzialna za nadzór
+          nad obszarem, w którym stwierdzono nieprawidłowości, karę pieniężną do wysokości 21 500 000 zł.
+           14. Przepisu ust. 13 nie stosuje się do naruszenia przez dostawcę wymogu dotyczącego zapewnienia posiadania
+     zdolności odbiorczej, o którym mowa w art. 5a ust. 1 akapit drugi rozporządzenia Parlamentu Europejskiego i Rady
+     (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne i handlowe w odniesieniu do poleceń
+     przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie (WE) nr 924/2009, w przypadku, o którym
+     mowa w art. 11 ust. 1c tego rozporządzenia.
+          15. Przy ustalaniu wysokości kar pieniężnych, o których mowa w ust. 13, KNF uwzględnia w szczególności:
+     1)   rodzaj i wagę naruszenia przepisów art. 5a–5d rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012
+          z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne i handlowe w odniesieniu do poleceń przelewu
+          i poleceń zapłaty w euro oraz zmieniającego rozporządzenie (WE) nr 924/2009;
+     2)   wpływ naruszenia przepisów, o których mowa w pkt 1, na prawidłowe funkcjonowanie rynku usług płatniczych;
+     3)   rozmiar prowadzonej działalności;
+     4)   sytuację finansową dostawcy, który dokonał naruszenia;
+     5)   stopień przyczynienia się dostawcy do powstałego naruszenia;
+     6)   skalę korzyści uzyskanych przez dostawcę lub strat przez niego unikniętych, o ile można te korzyści lub straty
+          ustalić.
+Dziennik Ustaw                                               – 10 –                                                 Poz. 340
+
+           16. W przypadku stwierdzenia okoliczności wskazujących na możliwość wystąpienia zagrożenia niewykonania
+     lub nienależytego wykonania przez dostawców, o których mowa w art. 4 ust. 2 pkt 1–4, 6, 9 i 11, obowiązków okreś-
+     lonych w art. 5a–5d rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. usta-
+     nawiającego wymogi techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmie-
+     niającego rozporządzenie (WE) nr 924/2009, KNF może także skierować do dostawcy zalecenia.
+           17. Zalecenia, o których mowa w ust. 16, są sporządzane w formie pisemnej:
+     1)    w postaci papierowej i opatrywane podpisem własnoręcznym albo
+     2)    w postaci elektronicznej i opatrywane kwalifikowanym podpisem elektronicznym, podpisem zaufanym albo pod-
+           pisem osobistym lub kwalifikowaną pieczęcią elektroniczną KNF ze wskazaniem w treści pisma osoby opatru-
+           jącej pismo pieczęcią.
+           18. Zalecenia sporządzone w sposób, o którym mowa w ust. 17 pkt 2, doręcza się na adres do doręczeń elek-
+     tronicznych.
+           19. W przypadku stwierdzenia naruszenia, o którym mowa w art. 5a–5d rozporządzenia Parlamentu Europej-
+     skiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi techniczne i handlowe w odniesie-
+     niu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporządzenie (WE) nr 924/2009, dokonanego
+     przez unijną instytucję płatniczą lub unijną instytucję pieniądza elektronicznego przepisy art. 107 ust. 1 i 3–8 stosuje
+     się odpowiednio.”;
+7)   w art. 34c:
+     a)   w ust. 3 po wyrazach „100 000 zł” dodaje się wyrazy „ , chyba że naruszenie dotyczy przepisów art. 5a–5d rozpo-
+          rządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi
+          techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporzą-
+          dzenie (WE) nr 924/2009”,
+     b) po ust. 3 dodaje się ust. 3a w brzmieniu:
+                „3a. W przypadku nieusunięcia naruszeń, o których mowa w ust. 1, dotyczących przepisów art. 5a–5d roz-
+          porządzenia Parlamentu Europejskiego i Rady (UE) nr 260/2012 z dnia 14 marca 2012 r. ustanawiającego wymogi
+          techniczne i handlowe w odniesieniu do poleceń przelewu i poleceń zapłaty w euro oraz zmieniającego rozporzą-
+          dzenie (WE) nr 924/2009 lub w przypadku braku odpowiedzi na wezwanie, o którym mowa w ust. 1 pkt 1, KNF
+          może, w drodze decyzji, nałożyć na użytkownika:
+          1)    który jest osobą prawną lub jednostką organizacyjną niebędącą osobą prawną – karę pieniężną do wysokości
+                10 % łącznych przychodów netto z tytułu świadczenia usług płatniczych wykazanych w jego ostatnim zba-
+                danym sprawozdaniu finansowym, a w przypadku braku obowiązku badania sprawozdania finansowego –
+                do wysokości 10 % przychodu wykazanego w ostatnim zatwierdzonym sprawozdaniu finansowym;
+          2)    który jest osobą fizyczną – karę pieniężną do wysokości 21 500 000 zł.”,
+     c)   w ust. 4 wyrazy „ust. 3” zastępuje się wyrazami „ust. 3 i 3a”;
+8)   w art. 59ic:
+     a)   w ust. 7 w pkt 1 po wyrazach „w art. 59ia ust. 3” dodaje się wyrazy „ , chyba że konsument wykaże, że otrzymał
+          od tego dostawcy informację o zamknięciu podstawowego rachunku płatniczego”,
+     b) ust. 8 otrzymuje brzmienie:
+                 „ 8. W przypadkach, o których mowa w ust. 6 i 7, dostawca niezwłocznie informuje konsumenta, nieodpłat-
+          nie, o przyczynach odmowy zawarcia umowy, chyba że przekazanie takiej informacji zagrażałoby bezpieczeństwu
+          narodowemu lub porządkowi publicznemu lub byłoby sprzeczne z przepisami prawa, w tym z przepisami ustawy
+          o przeciwdziałaniu praniu pieniędzy.”;
+9)   w art. 59im w ust. 3 w pkt 5 wyrazy „w pkt 1–3” zastępuje się wyrazami „w pkt 1, 2 i 4”;
+10) w art. 78 w ust. 1 w pkt 2 lit. a otrzymuje brzmienie:
+     „a) składane na wyodrębnionym do tego celu rachunku bankowym w banku krajowym, instytucji kredytowej, od-
+         dziale banku zagranicznego lub banku centralnym państwa członkowskiego według uznania tego banku central-
+         nego lub”;
+11) w art. 132n w ust. 1 w pkt 2 lit. a otrzymuje brzmienie:
+     „a) składane na wyodrębnionym do tego celu rachunku bankowym w banku krajowym, instytucji kredytowej, oddziale
+         banku zagranicznego lub banku centralnym państwa członkowskiego według uznania tego banku centralnego lub”.
+Dziennik Ustaw                                              – 11 –                                               Poz. 340
+
+     Art. 8. W ustawie z dnia 10 czerwca 2016 r. o Bankowym Funduszu Gwarancyjnym, systemie gwarantowania depozy-
+tów oraz przymusowej restrukturyzacji (Dz. U. z 2025 r. poz. 643, 1069 i 1844 oraz z 2026 r. poz. 176 i 331) wprowadza się
+następujące zmiany:
+1)   w art. 2 po pkt 41a dodaje się pkt 41b w brzmieniu:
+     „41b) podmiot podlegający likwidacji:
+           a)     osobę prawną mającą siedzibę w państwie członkowskim, której likwidację w ramach postępowania upad-
+                  łościowego przewidziano w grupowym planie przymusowej restrukturyzacji lub planie przymusowej
+                  restrukturyzacji,
+           b) niebędący podmiotem podlegającym przymusowej restrukturyzacji podmiot należący do grupy podlegającej
+              przymusowej restrukturyzacji, wobec którego w grupowym planie przymusowej restrukturyzacji nie prze-
+              widziano umorzenia lub konwersji instrumentów kapitałowych lub zobowiązań kwalifikowalnych;”;
+2)   w art. 72 po ust. 1 dodaje się ust. 1a w brzmieniu:
+            „1a. W przypadku gdy z oszacowania, o którym mowa w art. 137 ust. 2 lub 3, wynika, że wartość netto podmiotu
+     jest dodatnia, Fundusz może, w wyniku przeprowadzenia konwersji instrumentów kapitałowych lub zobowiązań kwa-
+     lifikowalnych, dokonać procentowego zmniejszenia udziału dotychczasowych posiadaczy instrumentów, o których
+     mowa w ust. 1 pkt 1.”;
+3)   w art. 89 po ust. 1a dodaje się ust. 1b w brzmieniu:
+          „1b. W przypadku, o którym mowa w ust. 1a, Fundusz określa terminy spełnienia przez bank wymogów, o któ-
+     rych mowa w art. 97–99, z uwzględnieniem terminu wykonania zaleceń Komisji Nadzoru Finansowego, o których
+     mowa w art. 133a ust. 5a ustawy – Prawo bankowe.”;
+4)   w art. 96b w ust. 2 w pkt 2 wyrazy „lub prowadzą” zastępuje się wyrazami „oraz prowadzą”;
+5)   w art. 97:
+     a)   uchyla się ust. 2d,
+     b) po ust. 2d dodaje się ust. 2da–2de w brzmieniu:
+                „2da. W przypadku podmiotu podlegającego likwidacji Fundusz nie określa minimalnego poziomu fundu-
+          szy własnych i zobowiązań kwalifikowalnych, o którym mowa w ust. 1. Przepisów art. 77 ust. 2 i art. 78a rozpo-
+          rządzenia nr 575/2013 nie stosuje się.
+               2db. Fundusz może określić minimalny poziom funduszy własnych i zobowiązań kwalifikowalnych, o któ-
+          rym mowa w ust. 1, dla podmiotu podlegającego likwidacji, na poziomie indywidualnym, w wysokości większej
+          niż kwota na pokrycie strat, uwzględniając w szczególności wpływ, jaki likwidacja tego podmiotu miałaby na
+          ryzyko zarażania oraz stabilność finansową w systemie finansowym, w tym zdolność finansowania obowiązko-
+          wego systemu gwarantowania depozytów.
+               2dc. W przypadku, o którym mowa w ust. 2db, podmiot podlegający likwidacji, z wyłączeniem kasy,
+          utrzymuje:
+          1)      fundusze własne;
+          2)      zobowiązania spełniające warunki, o których mowa w art. 72a rozporządzenia nr 575/2013, z wyjątkiem
+                  warunków, o których mowa w art. 72b ust. 2 lit. b i d tego rozporządzenia;
+          3)      zobowiązania, o których mowa w art. 97a ust. 2.
+                2dd. Instrumenty funduszy własnych i zobowiązań kwalifikowalnych wyemitowane przez podmiot zależny
+          będący podmiotem podlegającym likwidacji, dla którego Fundusz nie określił minimalnego poziomu funduszy
+          własnych i zobowiązań kwalifikowalnych, nie podlegają odliczeniu na podstawie art. 72e ust. 5 rozporządzenia
+          nr 575/2013.
+                2de. Podmiot krajowy oraz podmiot, o którym mowa w art. 64 pkt 2 lit. b–d, będący podmiotem zależnym
+          podmiotu podlegającego przymusowej restrukturyzacji lub podmiotu z państwa trzeciego, który byłby podmiotem
+          podlegającym przymusowej restrukturyzacji gdyby miał siedzibę na terytorium państwa członkowskiego, nie-
+          będący podmiotem podlegającym przymusowej restrukturyzacji, odlicza, zgodnie z art. 72e ust. 5 rozporządzenia
+          nr 575/2013, instrumenty funduszy własnych w podmiotach zależnych będących instytucjami lub podmiotami
+          krajowymi, które wchodzą w skład tej samej grupy podlegającej przymusowej restrukturyzacji i są podmiotami
+          podlegającymi likwidacji, dla których Fundusz nie określił minimalnego poziomu funduszy własnych
+          i zobowiązań kwalifikowalnych, jeżeli łączna kwota tych instrumentów jest równa co najmniej 7 % łącznej kwoty
+          jego funduszy własnych i zobowiązań spełniających warunki, o których mowa w art. 98 ust. 2l, obliczanych co
+          roku według stanu na dzień 31 grudnia jako średnia z poprzednich 12 miesięcy.”;
+Dziennik Ustaw                                              – 12 –                                              Poz. 340
+
+6)   w art. 98:
+     a)   po ust. 2h dodaje się ust. 2ha–2hc w brzmieniu:
+                „2ha. Fundusz może zobowiązać podmiot zależny, o którym mowa w ust. 2g lub 2h, do spełniania wymogu,
+          o którym mowa w art. 97 ust. 1, na zasadzie skonsolidowanej, jeżeli łącznie są spełnione następujące warunki:
+          1)      podmiot ten spełnia jeden z następujących warunków:
+                  a)   jego bezpośrednim podmiotem dominującym jest podmiot podlegający przymusowej restrukturyzacji,
+                       przy czym:
+                       – podmiot podlegający przymusowej restrukturyzacji jest unijną dominującą finansową spółką holdin-
+                         gową lub unijną dominującą finansową spółką holdingową o działalności mieszanej oraz
+                       – podmiot podlegający przymusowej restrukturyzacji nie jest bezpośrednim podmiotem dominującym
+                         wobec innego podmiotu zależnego, który jest objęty wymogiem, o którym mowa w art. 97 ust. 1,
+                         oraz
+                       – zarówno ten podmiot, jak i podmiot podlegający przymusowej restrukturyzacji mają siedzibę
+                         w Rzeczypospolitej Polskiej i są częścią tej samej grupy podlegającej przymusowej restruktury-
+                         zacji, oraz
+                       – dokonanie przez ten podmiot odliczeń na podstawie art. 72e ust. 5 rozporządzenia nr 575/2013
+                         wywarłoby nieproporcjonalny wpływ na ten podmiot,
+                  b) podlega, wyłącznie na zasadzie skonsolidowanej, dodatkowemu wymogowi w zakresie funduszy włas-
+                     nych, o którym mowa w art. 138 ust. 2 pkt 2 ustawy – Prawo bankowe – w przypadku banku, albo
+                     o którym mowa w art. 110y ust. 3 ustawy o obrocie instrumentami finansowymi – w przypadku domu
+                     maklerskiego, a ustalenie, na zasadzie skonsolidowanej, wymogu, o którym mowa w art. 97 ust. 1, nie
+                     doprowadzi do zawyżenia potrzeb, o których mowa w art. 97 ust. 2 pkt 2, w zakresie dokapitalizowania
+                     grupy, w której skład wchodzą podmioty objęte konsolidacją podmiotu, w szczególności w przypadku
+                     gdy w tej samej grupie przeważają podmioty podlegające likwidacji;
+          2)      spełnienie wymogu, o którym mowa w art. 97 ust. 1, na zasadzie skonsolidowanej, nie narusza w istotny
+                  sposób:
+                  a)   wykonalności i wiarygodności strategii przymusowej restrukturyzacji grupy podlegającej przymusowej
+                       restrukturyzacji,
+                  b) zdolności tego podmiotu do spełniania wymogów w zakresie funduszy własnych, o których mowa
+                     w art. 92–98 rozporządzenia nr 575/2013, po umorzeniu lub konwersji instrumentów kapitałowych lub
+                     zobowiązań kwalifikowalnych,
+                  c)   adekwatności wewnętrznego mechanizmu przeniesienia strat i dokapitalizowania, w tym umorzenia lub
+                       konwersji instrumentów kapitałowych lub zobowiązań kwalifikowalnych tego podmiotu lub innych
+                       podmiotów, które wchodzą w skład grupy podlegającej przymusowej restrukturyzacji.
+                2hb. Podmiot zależny, o którym mowa w ust. 2g i 2h, zobowiązany do spełniania wymogu, o którym mowa
+          w art. 97 ust. 1, na zasadzie skonsolidowanej zgodnie z ust. 2ha, zalicza do kwoty funduszy własnych i zobowią-
+          zań kwalifikowalnych zobowiązania, o których mowa w ust. 2l pkt 1, które zostały wyemitowane przez podmiot
+          zależny mający siedzibę w państwie członkowskim, objęty konsolidacją tego podmiotu zależnego, na rzecz:
+          1)      podmiotu podlegającego przymusowej restrukturyzacji oraz zostały nabyte bezpośrednio przez ten podmiot
+                  lub za pośrednictwem innych podmiotów, które wchodzą w skład tej samej grupy podlegającej przymusowej
+                  restrukturyzacji i nie są objęte konsolidacją tego podmiotu zależnego;
+          2)      akcjonariusza tego podmiotu zależnego, który nie wchodzi w skład tej samej grupy podlegającej przymuso-
+                  wej restrukturyzacji.
+                 2hc. Wartość zobowiązań zaliczonych do kwoty funduszy własnych i zobowiązań kwalifikowalnych zgod-
+          nie z ust. 2hb nie może przekraczać kwoty stanowiącej różnicę pomiędzy kwotą minimalnego poziomu funduszy
+          własnych i zobowiązań kwalifikowalnych, do którego utrzymywania jest obowiązany podmiot zależny objęty kon-
+          solidacją, a kwotą zobowiązań wyemitowanych przez ten podmiot zależny objęty konsolidacją na rzecz podmiotu
+          zobowiązanego do spełniania wymogu, o którym mowa w art. 97 ust. 1, na zasadzie skonsolidowanej zgodnie
+          z ust. 2ha, nabytych przez ten podmiot bezpośrednio albo pośrednio przez inne podmioty, które wchodzą w skład
+          tej samej grupy podlegającej przymusowej restrukturyzacji, objęte konsolidacją tego podmiotu, powiększoną
+          o kwotę funduszy własnych tego podmiotu zależnego objętego konsolidacją wyemitowanych zgodnie z ust. 2l
+          pkt 2.”,
+Dziennik Ustaw                                             – 13 –                                                   Poz. 340
+
+     b) w ust. 2j w pkt 3 wyrazy „o którym mowa w art. 98 ust. 2a” zastępuje się wyrazami „o którym mowa w ust. 2a”,
+     c)   w ust. 2n pkt 3 otrzymuje brzmienie:
+          „3)   gwarancja jest zabezpieczona w sposób określony w umowie o ustanowienie zabezpieczenia finansowego,
+                o której mowa w art. 5 ust. 1 ustawy z dnia 2 kwietnia 2004 r. o niektórych zabezpieczeniach finansowych
+                (Dz. U. z 2024 r. poz. 294), w wysokości co najmniej 50 %;”;
+7)   w art. 99a:
+     a)   w ust. 6 wprowadzenie do wyliczenia otrzymuje brzmienie:
+          „Podmiot, z wyłączeniem podmiotu podlegającego likwidacji, który nie jest obowiązany do utrzymywania mini-
+          malnego poziomu funduszy własnych i zobowiązań kwalifikowalnych, nierzadziej niż raz w roku, zamieszcza na
+          swojej stronie internetowej, według stanu na koniec roku poprzedzającego, informacje dotyczące:”,
+     b) ust. 9 otrzymuje brzmienie:
+                „9. Fundusz może wyznaczyć podmiotowi podlegającemu likwidacji, dla którego określił minimalny poziom
+          funduszy własnych i zobowiązań kwalifikowalnych na podstawie art. 97 ust. 2db, termin przekazywania infor-
+          macji, o których mowa w ust. 1, oraz termin zamieszczania na stronie internetowej informacji, o których mowa
+          w ust. 6, inne niż terminy określone odpowiednio w ust. 4 i 6, a także może określić szczegółowy zakres infor-
+          macji inny niż określony w ust. 1 i 6. Fundusz informuje ten podmiot o zakresie i terminach przekazywania lub
+          zamieszczania informacji.”;
+8)   w art. 144b ust. 3 otrzymuje brzmienie:
+           „3. Krajowy podmiot dominujący posiadający podmiot zależny z siedzibą na terytorium państwa trzeciego
+     zapewnia, że w umowach finansowych, dla których prawem właściwym jest prawo państwa trzeciego, zawieranych
+     przez jego podmiot zależny, znajduje się zastrzeżenie, że wykonanie przez Fundusz uprawnień, o których mowa
+     w art. 142–144a, nie może stanowić powodu rozwiązania tych umów przed terminem, zawieszenia ich wykonania lub
+     ich zmiany, skorzystania z klauzuli kompensacyjnej lub prawa do potrącenia, lub prowadzenia egzekucji zabezpieczeń
+     wierzytelności.”;
+9)   w art. 156:
+     a)   ust. 1 otrzymuje brzmienie:
+                  „1. Podjęcia przez Fundusz czynności, o których mowa w art. 70 ust. 1 pkt 1, art. 72 ust. 5, art. 80 ust. 3
+          i art. 95 ust. 1, 6 i 6a, wszczęcia przymusowej restrukturyzacji, powołania zarządu podmiotu w restrukturyzacji
+          lub pełnomocników, o których mowa w art. 114 ust. 1, zawieszenia wykonania zobowiązań, o którym mowa
+          w art. 144a ust. 1, oraz decyzji podejmowanych przez Fundusz w ramach przymusowej restrukturyzacji, a także
+          skutków wystąpienia tych zdarzeń w odniesieniu do umów zawartych przez podmiot lub podmiot w restruktury-
+          zacji, nie uznaje się za podstawę realizacji zabezpieczenia w rozumieniu art. 3 pkt 4 ustawy z dnia 2 kwietnia
+          2004 r. o niektórych zabezpieczeniach finansowych ani za ogłoszenie upadłości w rozumieniu art. 1 pkt 14 ustawy
+          o ostateczności rozrachunku, jeżeli nadal są wypełniane istotne zobowiązania podmiotu lub podmiotu w restruk-
+          turyzacji wynikające z umowy, w tym zobowiązania do płatności i dostawy, a także zobowiązania do zapewnienia
+          zabezpieczenia, z zastrzeżeniem art. 142, art. 144, art. 161 i art. 213.”,
+     b) w ust. 2 wprowadzenie do wyliczenia otrzymuje brzmienie:
+          „Jeżeli istotne postanowienia umowy, w szczególności w zakresie dostawy, płatności i zabezpieczenia, są wyko-
+          nywane przez podmiot, podmiot w restrukturyzacji lub podmioty grupy, której częścią jest ten podmiot lub ten
+          podmiot w restrukturyzacji, wystąpienie zdarzeń, o których mowa w ust. 1, lub ich skutków nie stanowi dla drugiej
+          strony takiej umowy podstawy do:”,
+     c)   ust. 4 otrzymuje brzmienie:
+                „4. Przepisy ust. 1 i 2 nie naruszają prawa do podjęcia działania, o którym mowa w ust. 2, jeżeli realizacja
+          tego prawa następuje z przyczyn innych niż w związku z wystąpieniem zdarzeń, o których mowa w ust. 1, lub ich
+          skutków.”;
+10) w art. 204 dotychczasową treść oznacza się jako ust. 1 i dodaje się ust. 2 w brzmieniu:
+          „2. W przypadku, o którym mowa w ust. 1, Fundusz stosuje stopę konwersji wierzytelności zapewniającą, że
+     wierzyciele nie poniosą strat większych niż te, które ponieśliby w postępowaniu upadłościowym.”;
+Dziennik Ustaw                                                   – 14 –                                                      Poz. 340
+
+11) w art. 206:
+      a)   w ust. 1:
+            – pkt 3 i 4 otrzymują brzmienie:
+               „3)     wynikających z posiadania przez podmiot w restrukturyzacji praw majątkowych lub środków pienięż-
+                       nych należących do klientów, w tym zdeponowanych w ich imieniu przez fundusze inwestycyjne lub
+                       alternatywne fundusze inwestycyjne, pod warunkiem że tacy klienci podlegają ochronie na podstawie
+                       przepisów dotyczących postępowania upadłościowego;
+               4)      wynikających ze stosunku powierniczego między podmiotem w restrukturyzacji a inną osobą (benefi-
+                       cjentem), pod warunkiem że taki beneficjent podlega ochronie na podstawie przepisów dotyczących
+                       postępowania upadłościowego lub prawa cywilnego;”,
+            − pkt 9 otrzymuje brzmienie:
+               „9)     wobec organów realizujących zadania z zakresu zabezpieczenia społecznego w działach zabezpieczenia
+                       społecznego, o których mowa w art. 3 ust. 1 rozporządzenia Parlamentu Europejskiego i Rady (WE)
+                       nr 883/2004 z dnia 29 kwietnia 2004 r. w sprawie koordynacji systemów zabezpieczenia społecznego
+                       (Dz. Urz. UE L 166 z 30.04.2004, str. 1, z późn. zm.6)), w tym Państwowego Funduszu Rehabilitacji
+                       Osób Niepełnosprawnych, a także organów realizujących zadania z zakresu ubezpieczenia zdrowotnego
+                       i pomocy społecznej, pod warunkiem że takie zobowiązania są uprzywilejowane na podstawie odrębnych
+                       przepisów;”,
+            − pkt 11 otrzymuje brzmienie:
+               „11) wobec podmiotów, które wchodzą w skład tej samej grupy podlegającej przymusowej restrukturyzacji
+                    co podmiot w restrukturyzacji, będących jego podmiotami zależnymi i niebędących podmiotami pod-
+                    legającymi przymusowej restrukturyzacji, niezależnie od terminu wymagalności tych zobowiązań.”,
+      b) ust. 1a otrzymuje brzmienie:
+                 „1a. W przypadku zobowiązań, o których mowa w ust. 1 pkt 11, należących do kategorii zaspokajania na-
+           leżności, o których mowa w art. 440 ust. 2 pkt 6–10 ustawy – Prawo upadłościowe, ich umorzenie lub konwersja
+           są dokonywane, o ile organy przymusowej restrukturyzacji właściwe dla podmiotów zależnych mających siedzibę
+           w państwie członkowskim innym niż Rzeczpospolita Polska i niebędących podmiotami podlegającymi przymuso-
+           wej restrukturyzacji poinformują Fundusz, że kwota wynikająca z zobowiązań i funduszy własnych, o których
+           mowa w przepisach prawa tego państwa członkowskiego implementujących art. 45f ust. 2 dyrektywy Parlamentu
+           Europejskiego i Rady 2014/59/UE z dnia 15 maja 2014 r. ustanawiającej ramy na potrzeby prowadzenia działań
+           naprawczych oraz restrukturyzacji i uporządkowanej likwidacji w odniesieniu do instytucji kredytowych i firm
+           inwestycyjnych oraz zmieniającej dyrektywę Rady 82/891/EWG i dyrektywy Parlamentu Europejskiego i Rady
+           2001/24/WE, 2002/47/WE, 2004/25/WE, 2005/56/WE, 2007/36/WE, 2011/35/UE, 2012/30/UE i 2013/36/EU
+           oraz rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 1093/2010 i (UE) nr 648/2012, jest wystarczająca
+           do realizacji preferowanej strategii przymusowej restrukturyzacji.”,
+      c)   po ust. 1a dodaje się ust. 1b w brzmieniu:
+                 „1b. W przypadku gdy podmiot krajowy należy do grupy podlegającej przymusowej restrukturyzacji i nie
+           jest podmiotem podlegającym przymusowej restrukturyzacji, Fundusz, na wniosek organu przymusowej restruk-
+           turyzacji właściwego dla podmiotu dominującego mającego siedzibę w państwie członkowskim innym niż Rzecz-
+           pospolita Polska, ustala, czy kwota funduszy własnych i zobowiązań kwalifikowalnych podmiotu krajowego, speł-
+           niających warunki, o których mowa w art. 98 ust. 2l, jest wystarczająca do realizacji preferowanej strategii przy-
+           musowej restrukturyzacji.”;
+12) w art. 222:
+      a)   w ust. 3 skreśla się wyrazy „zgodnie z art. 97 ust. 2d”,
+      b) w ust. 8 w pkt 3 skreśla się wyrazy „oraz instrumentów dających prawa do nabycia instrumentów dłużnych”,
+
+6)   Zmiany wymienionego rozporządzenia zostały ogłoszone w Dz. Urz. UE L 284 z 30.10.2009, str. 43, Dz. Urz. UE L 338 z 22.12.2010,
+     str. 35, Dz. Urz. UE L 344 z 29.12.2010, str. 1, Dz. Urz. UE L 149 z 08.06.2012, str. 4, Dz. Urz. UE L 349 z 19.12.2012, str. 45,
+     Dz. Urz. UE L 158 z 10.06.2013, str. 1, Dz. Urz. UE L 188 z 09.07.2013, str. 10, Dz. Urz. UE L 346 z 20.12.2013, str. 27, Dz. Urz.
+     UE L 366 z 20.12.2014, str. 15, Dz. Urz. UE L 76 z 22.03.2017, str. 13, Dz. Urz. UE L 186 z 11.07.2019, str. 21 oraz Dz. Urz.
+     UE L 338 z 15.10.2020, str. 18.
+Dziennik Ustaw                                                   – 15 –                                                          Poz. 340
+
+     c)   w ust. 10 zdanie pierwsze otrzymuje brzmienie:
+          „Instrumenty i zobowiązania, w odniesieniu do których podmiot nie wykonał obowiązku, o którym mowa w ust. 1,
+          nie są zaliczane do utrzymywanego przez podmiot minimalnego poziomu funduszy własnych lub zobowiązań
+          kwalifikowalnych.”;
+13) art. 339 otrzymuje brzmienie:
+            „Art. 339. 1. W przypadku wydania decyzji o nałożeniu kary, o której mowa w art. 79 ust. 1, art. 95 ust. 6, art. 175
+     ust. 6, art. 335 ust. 1–2a, art. 336 ust. 1 i 1a, art. 337a ust. 1 i art. 338 ust. 1 i 1a, oraz w przypadku zastosowania środ-
+     ków, o których mowa w art. 337a ust. 2 i 3, odpowiednio Komisja Nadzoru Finansowego albo Fundusz niezwłocznie
+     powiadamiają Europejski Urząd Nadzoru Bankowego o nałożeniu tej kary lub zastosowaniu tych środków, a w przy-
+     padku gdy od tego rozstrzygnięcia złożono wniosek o ponowne rozpatrzenie sprawy lub wniesiono skargę do sądu
+     administracyjnego – także o złożeniu takiego wniosku lub wniesieniu takiej skargi i o wyniku ich rozpatrzenia.
+            2. W przypadku gdy rozstrzygnięcie w przedmiocie nałożenia kary, o której mowa w art. 79 ust. 1, art. 95 ust. 6,
+     art. 175 ust. 6, art. 335 ust. 1–2a, art. 336 ust. 1 i 1a, art. 337a ust. 1 i art. 338 ust. 1 i 1a, oraz w przypadku zastosowa-
+     nia środków, o których mowa w art. 337a ust. 2 i 3, jest ostateczne, odpowiednio Komisja Nadzoru Finansowego albo
+     Fundusz niezwłocznie zamieszczają na swojej stronie internetowej informację o nałożeniu tej kary lub zastosowaniu
+     tych środków, w tym o rodzaju i charakterze naruszenia przepisów prawa, ze wskazaniem imienia i nazwiska osoby
+     fizycznej lub nazwy (firmy) podmiotu, na których nałożono tę karę lub wobec których zastosowano ten środek.
+           3. Odpowiednio Komisja Nadzoru Finansowego albo Fundusz dokonują publikacji informacji, o której mowa
+     w ust. 2, w formie zanonimizowanej, w przypadku gdy:
+     1)    kara, o której mowa w art. 79 ust. 1, art. 95 ust. 6, art. 175 ust. 6, art. 335 ust. 1–2a, art. 336 ust. 1 i 1a, art. 337a
+           ust. 1 i art. 338 ust. 1 i 1a, została nałożona na osobę fizyczną oraz w przypadku gdy środek, o którym mowa
+           w art. 337a ust. 2 i 3, został nałożony na osobę fizyczną, a ujawnienie jej imienia i nazwiska byłoby środkiem
+           niewspółmiernym do wagi dokonanego naruszenia;
+     2)    ujawnienie nazwy (firmy) podmiotu lub imienia i nazwiska osoby fizycznej stanowiłoby zagrożenie dla stabil-
+           ności rynków finansowych lub zagroziłoby prowadzonemu postępowaniu karnemu lub postępowaniu w spra-
+           wach o przestępstwa skarbowe;
+     3)    ujawnienie nazwy (firmy) podmiotu lub imienia i nazwiska osoby fizycznej wyrządziłoby niewspółmierną szkodę
+           tej osobie lub temu podmiotowi.
+           4. Odpowiednio Komisja Nadzoru Finansowego albo Fundusz mogą uzupełnić informację o nałożeniu kary,
+     o której mowa w art. 79 ust. 1, art. 95 ust. 6, art. 175 ust. 6, art. 335 ust. 1–2a, art. 336 ust. 1 i 1a, art. 337a ust. 1 i art. 338
+     ust. 1 i 1a, lub zastosowaniu środka, o którym mowa w art. 337a ust. 2 i 3, o nazwę (firmę) podmiotu albo imię
+     i nazwisko osoby fizycznej, w przypadku gdy ustały przyczyny określone w ust. 3 pkt 1–3. Uzupełnienia nie dokonuje
+     się po upływie roku od dnia publikacji tej informacji.
+            5. Informacje, o których mowa w ust. 2, są dostępne na stronie internetowej odpowiednio Komisji Nadzoru
+     Finansowego albo Funduszu przez okres 5 lat od dnia publikacji, z tym że wskazanie imienia i nazwiska osoby fizycz-
+     nej, na którą nałożono karę, o której mowa w art. 79 ust. 1, art. 95 ust. 6, art. 175 ust. 6, art. 335 ust. 1–2a, art. 336
+     ust. 1 i 1a, art. 337a ust. 1 i art. 338 ust. 1 i 1a, lub wobec której zastosowano środek, o którym mowa w art. 337a ust. 2
+     i 3, przez okres niedłuższy niż rok.”.
+     Art. 9. Do postępowań upadłościowych wszczętych i niezakończonych przed dniem wejścia w życie niniejszej ustawy
+stosuje się przepis art. 440 ust. 2 pkt 1 ustawy zmienianej w art. 4, w brzmieniu dotychczasowym.
+      Art. 10. Do podmiotu podlegającego likwidacji nie stosuje się przepisów art. 97 ust. 1 i art. 99a ust. 1 ustawy zmienia-
+nej w art. 8 oraz przepisu art. 99a ust. 6 ustawy zmienianej w art. 8, w brzmieniu nadanym niniejszą ustawą, w odniesieniu
+do określonego dla tego podmiotu przez Bankowy Fundusz Gwarancyjny przed dniem wejścia w życie niniejszej ustawy
+minimalnego poziomu funduszy własnych i zobowiązań kwalifikowalnych, z wyjątkiem przypadku, o którym mowa w art. 97
+ust. 2d zdanie drugie ustawy zmienianej w art. 8, w brzmieniu dotychczasowym. Przepisów art. 89 ustawy zmienianej
+w art. 8, w brzmieniu nadanym niniejszą ustawą, i art. 91 ustawy zmienianej w art. 8 nie stosuje się.
+     Art. 11. Dotychczasowe przepisy wykonawcze wydane na podstawie art. 15 ust. 2 ustawy zmienianej w art. 3, zacho-
+wują moc do dnia wejścia w życie przepisów wykonawczych wydanych na podstawie art. 15 ust. 3 ustawy zmienianej
+w art. 3, w brzmieniu nadanym niniejszą ustawą, jednak niedłużej niż przez 6 miesięcy od dnia wejścia w życie niniejszej
+ustawy.
+Dziennik Ustaw                                            – 16 –                                                 Poz. 340
+
+     Art. 12. Ustawa wchodzi w życie po upływie 14 dni od dnia ogłoszenia, z wyjątkiem art. 7 pkt 2, 3, 6 i 7, które wcho-
+dzą w życie z dniem 9 stycznia 2027 r.
+
+
+                                                                        Prezydent Rzeczypospolitej Polskiej: K. Nawrocki
+

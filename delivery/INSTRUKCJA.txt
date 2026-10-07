@@ -1,0 +1,40 @@
+Lex-Machina — Prawo upadłościowe i Prawo restrukturyzacyjne, 04.10.2026
+
+Bieżąca paczka: Lex-Machina-PrUp-PrRestr-2026-10-04.zip.
+Poprzednia paczka Lex-Machina-PrUp-2026-10-04.zip jest historyczna (DR-02 3.62).
+Repozytorium publiczne: https://github.com/jaco/Lex-Machina
+Gałąź: main. Bez PR do projektu źródłowego.
+
+32 skille linii rozwojowej; DR-02 3.63, router 6.35, audyt 6.162.
+Pełne urzędowe PDF-y obu ustaw, 603 + 407 nagłówków w indeksach,
+11 aktów pomocniczych, 11 nowych modułów (85 łącznie w DR-02),
+procedury czterech postępowań restrukturyzacyjnych i upadłości.
+Pełne teksty pierwotne zachowują przepisy pominięte w t.j.
+
+Rozpakuj wymagane ZIP-y z skills/. Zachowaj zależności z README projektu:
+shared, prawny-router-v3, prawo-polskie-v2, DR-02 i odpowiednie skille wykonawcze.
+Nie nastąpiła automatyczna instalacja ani integracja z produkcyjnym system kancelarii.
+
+Z katalogu dr-02-prawo-cywilne-rodzinne-gospodarcze:
+  python3 scripts/prup.py article 240 --verify-online
+  python3 scripts/prrestr.py article 211b --verify-online
+  python3 scripts/prrestr.py article 156 --as-of 2026-10-04 --verify-online
+  python3 scripts/insolvency.py route prrestr 312
+  python3 scripts/insolvency.py coverage
+  python3 scripts/insolvency.py regime --event arrangement_date=2025-08-22
+  python3 -m unittest discover -s scripts -p 'test_*.py'
+
+Wejście: modules/mod-PrUpad-zrodla-i-wersje.md i mod-PrRestr-zrodla-i-wersje.md.
+Katalog: references/insolvency/katalog.md.
+Wersje: references/insolvency/wersje-i-przepisy-przejsciowe.md.
+Przepis na następny akt: references/insolvency/dodawanie-ustawy.md.
+
+37 testów technicznych, kontrola 32 archiwów i bieżący odczyt ELI obu ustaw
+przeszły. Wyniki, scenariusze i ograniczenia: WERYFIKACJA.json.
+Pełny tekst i procedury nie oznaczają kompletnego komentarza doktrynalnego
+ani niezależnego audytu każdej wykładni. Przy pracy na sprawie wybierz wersję
+według jej dat, przepisów przejściowych i aktualnych źródeł. Czytnik nie scala
+automatycznie całej historii ustaw; nie potwierdza sam prawa właściwego dla sprawy.
+
+Oryginał: https://github.com/michaleiatrak-star/Lex-Machina
+Licencja GPL-3.0-only; zachowane oznaczenia autorstwa oryginału.

@@ -86,6 +86,8 @@ Art. 442 otwiera szczególny reżim majątkowy. Nie mieszaj tej masy ze zwykłą
 
 ## 7. Zakres, art. 451–455
 
+✅ [VER] RZĄD 1, 2026-10-04: nowelizacja [2026/1206](https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf), art. 7 i 57, zmienia art. 452 ust. 1 i 456 ust. 1 od 11.01.2027. Przed użyciem ustal wersję czasową; nie stosuj przyszłego brzmienia do stanu na 04.10.2026.
+
 Dział III reguluje postępowania dotyczące instytucji kredytowych i banków z elementem transgranicznym.
 
 Przed zastosowaniem ustal:
@@ -147,6 +149,9 @@ Połącz z ustawą o obligacjach i dokumentacją emisji.
 
 # CZĘŚĆ F — UPADŁOŚĆ KONSUMENCKA
 
+Procedura wykonawcza i wyłączenia części pierwszej: `mod-PrUpad-konsument-workflow.md`.
+Nie utożsamiaj celowości z art. 491^14a z każdą umyślnością z art. 491^15 ust. 1a.
+
 ## 15. Zakres, art. 491^1
 
 Tytuł V dotyczy osób fizycznych, wobec których nie prowadzi się upadłości na zasadach właściwych przedsiębiorcom.
@@ -186,7 +191,7 @@ Nie traktuj oddłużenia jako automatycznego skutku samego ogłoszenia upadłoś
 
 ## 19. Negatywne przesłanki planu/umorzenia, art. 491^14a
 
-Aktualny art. 491^14a wymaga szczególnej oceny zachowania dłużnika, w tym umyślnego doprowadzenia lub istotnego zwiększenia niewypłacalności oraz wcześniejszych oddłużeń w ustawowym okresie. Ustawa przewiduje również klauzule słuszności/humanitarne.
+Aktualny art. 491^14a wymaga szczególnej oceny zachowania dłużnika, w tym celowego doprowadzenia do niewypłacalności lub istotnego zwiększenia jej stopnia oraz wcześniejszych oddłużeń w ustawowym okresie. Ustawa przewiduje również klauzule słuszności/humanitarne.
 
 **Gate dowodowy:** ustal chronologię zadłużenia, czynności rozporządzających, moment utraty płynności, wcześniejsze postępowania i przyczyny osobiste.
 

@@ -1,0 +1,3261 @@
+{
+  "source_sha256": "bf268d1482a3f36b0563eaa13967ea4310aa1997f8f66932b16d51e2e553fedb",
+  "articles": [
+    {
+      "id": "1",
+      "label": "1",
+      "start": 5300,
+      "end": 5505,
+      "page": 3,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "2",
+      "label": "2",
+      "start": 5505,
+      "end": 5765,
+      "page": 3,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "3",
+      "label": "3",
+      "start": 5765,
+      "end": 8531,
+      "page": 3,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "4",
+      "label": "4",
+      "start": 8531,
+      "end": 14694,
+      "page": 4,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "5",
+      "label": "5",
+      "start": 14694,
+      "end": 14719,
+      "page": 5,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "5a",
+      "label": "5a",
+      "start": 14719,
+      "end": 14982,
+      "page": 5,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "6",
+      "label": "6",
+      "start": 14982,
+      "end": 15544,
+      "page": 5,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "7",
+      "label": "7",
+      "start": 15544,
+      "end": 16191,
+      "page": 5,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "8",
+      "label": "8",
+      "start": 16191,
+      "end": 16712,
+      "page": 5,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "9",
+      "label": "9",
+      "start": 16712,
+      "end": 17734,
+      "page": 5,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "10",
+      "label": "10",
+      "start": 17734,
+      "end": 20376,
+      "page": 6,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "10a",
+      "label": "10a",
+      "start": 20376,
+      "end": 23469,
+      "page": 6,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "11",
+      "label": "11",
+      "start": 23469,
+      "end": 23633,
+      "page": 7,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "12",
+      "label": "12",
+      "start": 23633,
+      "end": 25078,
+      "page": 7,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "13",
+      "label": "13",
+      "start": 25078,
+      "end": 26056,
+      "page": 7,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "14",
+      "label": "14",
+      "start": 26056,
+      "end": 26980,
+      "page": 8,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "15",
+      "label": "15",
+      "start": 26980,
+      "end": 28314,
+      "page": 8,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "16",
+      "label": "16",
+      "start": 28314,
+      "end": 28782,
+      "page": 8,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "17",
+      "label": "17",
+      "start": 28782,
+      "end": 29118,
+      "page": 8,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "18",
+      "label": "18",
+      "start": 29118,
+      "end": 30185,
+      "page": 8,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "19",
+      "label": "19",
+      "start": 30185,
+      "end": 30825,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "20",
+      "label": "20",
+      "start": 30825,
+      "end": 30929,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "21",
+      "label": "21",
+      "start": 30929,
+      "end": 31694,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "22",
+      "label": "22",
+      "start": 31694,
+      "end": 32105,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "23",
+      "label": "23",
+      "start": 32105,
+      "end": 32252,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "24",
+      "label": "24",
+      "start": 32252,
+      "end": 36161,
+      "page": 9,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "25",
+      "label": "25",
+      "start": 36161,
+      "end": 36652,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "25a",
+      "label": "25a",
+      "start": 36652,
+      "end": 36982,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "26",
+      "label": "26",
+      "start": 36982,
+      "end": 37359,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "26a",
+      "label": "26a",
+      "start": 37359,
+      "end": 37669,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "27",
+      "label": "27",
+      "start": 37669,
+      "end": 38587,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "28",
+      "label": "28",
+      "start": 38587,
+      "end": 40152,
+      "page": 10,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "29",
+      "label": "29",
+      "start": 40152,
+      "end": 40726,
+      "page": 11,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "30",
+      "label": "30",
+      "start": 40726,
+      "end": 42685,
+      "page": 11,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "30a",
+      "label": "30a",
+      "start": 42685,
+      "end": 43087,
+      "page": 11,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "31",
+      "label": "31",
+      "start": 43087,
+      "end": 44393,
+      "page": 11,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "32",
+      "label": "32",
+      "start": 44393,
+      "end": 46453,
+      "page": 12,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "33",
+      "label": "33",
+      "start": 46453,
+      "end": 47242,
+      "page": 12,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "34",
+      "label": "34",
+      "start": 47242,
+      "end": 47471,
+      "page": 12,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "34a",
+      "label": "34a",
+      "start": 47471,
+      "end": 48704,
+      "page": 12,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "34b",
+      "label": "34b",
+      "start": 48704,
+      "end": 49370,
+      "page": 13,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "35",
+      "label": "35",
+      "start": 49370,
+      "end": 51244,
+      "page": 13,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "36",
+      "label": "36",
+      "start": 51244,
+      "end": 52272,
+      "page": 13,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "37",
+      "label": "37",
+      "start": 52272,
+      "end": 53542,
+      "page": 13,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "38",
+      "label": "38",
+      "start": 53542,
+      "end": 56090,
+      "page": 14,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "39",
+      "label": "39",
+      "start": 56090,
+      "end": 56634,
+      "page": 14,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "40",
+      "label": "40",
+      "start": 56634,
+      "end": 57742,
+      "page": 14,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "41",
+      "label": "41",
+      "start": 57742,
+      "end": 58431,
+      "page": 15,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "42",
+      "label": "42",
+      "start": 58431,
+      "end": 60476,
+      "page": 15,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "43",
+      "label": "43",
+      "start": 60476,
+      "end": 61165,
+      "page": 15,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "43a",
+      "label": "43a",
+      "start": 61165,
+      "end": 62671,
+      "page": 16,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "44",
+      "label": "44",
+      "start": 62671,
+      "end": 63939,
+      "page": 16,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "45",
+      "label": "45",
+      "start": 63939,
+      "end": 64598,
+      "page": 16,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "46",
+      "label": "46",
+      "start": 64598,
+      "end": 65707,
+      "page": 16,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "47",
+      "label": "47",
+      "start": 65707,
+      "end": 66155,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "48",
+      "label": "48",
+      "start": 66155,
+      "end": 66722,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "49",
+      "label": "49",
+      "start": 66722,
+      "end": 66901,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "50",
+      "label": "50",
+      "start": 66901,
+      "end": 67385,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "51",
+      "label": "51",
+      "start": 67385,
+      "end": 69797,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "52",
+      "label": "52",
+      "start": 69797,
+      "end": 70230,
+      "page": 17,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "53",
+      "label": "53",
+      "start": 70230,
+      "end": 70455,
+      "page": 18,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "54",
+      "label": "54",
+      "start": 70455,
+      "end": 72201,
+      "page": 18,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "55",
+      "label": "55",
+      "start": 72201,
+      "end": 75580,
+      "page": 18,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "56",
+      "label": "56",
+      "start": 75580,
+      "end": 76828,
+      "page": 19,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "57",
+      "label": "57",
+      "start": 76828,
+      "end": 77382,
+      "page": 19,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "58",
+      "label": "58",
+      "start": 77382,
+      "end": 79272,
+      "page": 19,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "59",
+      "label": "59",
+      "start": 79272,
+      "end": 81802,
+      "page": 20,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "60",
+      "label": "60",
+      "start": 81802,
+      "end": 82254,
+      "page": 20,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "61",
+      "label": "61",
+      "start": 82254,
+      "end": 84659,
+      "page": 20,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "62",
+      "label": "62",
+      "start": 84659,
+      "end": 84896,
+      "page": 21,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "63",
+      "label": "63",
+      "start": 84896,
+      "end": 85067,
+      "page": 21,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "64",
+      "label": "64",
+      "start": 85067,
+      "end": 85541,
+      "page": 21,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "65",
+      "label": "65",
+      "start": 85541,
+      "end": 87737,
+      "page": 21,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "66",
+      "label": "66",
+      "start": 87737,
+      "end": 88068,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "67",
+      "label": "67",
+      "start": 88068,
+      "end": 89866,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "68",
+      "label": "68",
+      "start": 89866,
+      "end": 91035,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "69",
+      "label": "69",
+      "start": 91035,
+      "end": 91643,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "70",
+      "label": "70",
+      "start": 91643,
+      "end": 91785,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "71",
+      "label": "71",
+      "start": 91785,
+      "end": 92254,
+      "page": 22,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "72",
+      "label": "72",
+      "start": 92254,
+      "end": 93013,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "73",
+      "label": "73",
+      "start": 93013,
+      "end": 93428,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "74",
+      "label": "74",
+      "start": 93428,
+      "end": 93628,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "75",
+      "label": "75",
+      "start": 93628,
+      "end": 94644,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "76",
+      "label": "76",
+      "start": 94644,
+      "end": 94946,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "77",
+      "label": "77",
+      "start": 94946,
+      "end": 96029,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "78",
+      "label": "78",
+      "start": 96029,
+      "end": 96220,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "79",
+      "label": "79",
+      "start": 96220,
+      "end": 97302,
+      "page": 23,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "80",
+      "label": "80",
+      "start": 97302,
+      "end": 98046,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "81",
+      "label": "81",
+      "start": 98046,
+      "end": 99340,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "82",
+      "label": "82",
+      "start": 99340,
+      "end": 99747,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "83",
+      "label": "83",
+      "start": 99747,
+      "end": 100397,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "84",
+      "label": "84",
+      "start": 100397,
+      "end": 100860,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "85",
+      "label": "85",
+      "start": 100860,
+      "end": 101021,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "86",
+      "label": "86",
+      "start": 101021,
+      "end": 103823,
+      "page": 24,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "86a",
+      "label": "86a",
+      "start": 103823,
+      "end": 104384,
+      "page": 25,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "87",
+      "label": "87",
+      "start": 104384,
+      "end": 104527,
+      "page": 25,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "88",
+      "label": "88",
+      "start": 104527,
+      "end": 104553,
+      "page": 25,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "89",
+      "label": "89",
+      "start": 104553,
+      "end": 104677,
+      "page": 25,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "90",
+      "label": "90",
+      "start": 104677,
+      "end": 105149,
+      "page": 25,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "91",
+      "label": "91",
+      "start": 105149,
+      "end": 106287,
+      "page": 25,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "92",
+      "label": "92",
+      "start": 106287,
+      "end": 108796,
+      "page": 26,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "93",
+      "label": "93",
+      "start": 108796,
+      "end": 109229,
+      "page": 26,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "94",
+      "label": "94",
+      "start": 109229,
+      "end": 110399,
+      "page": 26,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "95",
+      "label": "95",
+      "start": 110399,
+      "end": 111899,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "96",
+      "label": "96",
+      "start": 111899,
+      "end": 112057,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "97",
+      "label": "97",
+      "start": 112057,
+      "end": 112286,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "98",
+      "label": "98",
+      "start": 112286,
+      "end": 113070,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "99",
+      "label": "99",
+      "start": 113070,
+      "end": 113680,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "100",
+      "label": "100",
+      "start": 113680,
+      "end": 114205,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "101",
+      "label": "101",
+      "start": 114205,
+      "end": 115573,
+      "page": 27,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "102",
+      "label": "102",
+      "start": 115573,
+      "end": 116924,
+      "page": 28,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "103",
+      "label": "103",
+      "start": 116924,
+      "end": 117467,
+      "page": 28,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "104",
+      "label": "104",
+      "start": 117467,
+      "end": 117689,
+      "page": 28,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "105",
+      "label": "105",
+      "start": 117689,
+      "end": 120439,
+      "page": 28,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "106",
+      "label": "106",
+      "start": 120439,
+      "end": 120885,
+      "page": 29,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "107",
+      "label": "107",
+      "start": 120885,
+      "end": 121709,
+      "page": 29,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "108",
+      "label": "108",
+      "start": 121709,
+      "end": 122298,
+      "page": 29,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "109",
+      "label": "109",
+      "start": 122298,
+      "end": 122829,
+      "page": 29,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "110",
+      "label": "110",
+      "start": 122829,
+      "end": 125136,
+      "page": 29,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "111",
+      "label": "111",
+      "start": 125136,
+      "end": 125421,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "112",
+      "label": "112",
+      "start": 125421,
+      "end": 126122,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "113",
+      "label": "113",
+      "start": 126122,
+      "end": 127144,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "114",
+      "label": "114",
+      "start": 127144,
+      "end": 127642,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "115",
+      "label": "115",
+      "start": 127642,
+      "end": 127760,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "116",
+      "label": "116",
+      "start": 127760,
+      "end": 129101,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "117",
+      "label": "117",
+      "start": 129101,
+      "end": 130063,
+      "page": 30,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "118",
+      "label": "118",
+      "start": 130063,
+      "end": 131524,
+      "page": 31,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "119",
+      "label": "119",
+      "start": 131524,
+      "end": 134552,
+      "page": 31,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "120",
+      "label": "120",
+      "start": 134552,
+      "end": 135094,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "121",
+      "label": "121",
+      "start": 135094,
+      "end": 136306,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "122",
+      "label": "122",
+      "start": 136306,
+      "end": 137136,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "123",
+      "label": "123",
+      "start": 137136,
+      "end": 138366,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "124",
+      "label": "124",
+      "start": 138366,
+      "end": 138464,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "125",
+      "label": "125",
+      "start": 138464,
+      "end": 138924,
+      "page": 32,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "126",
+      "label": "126",
+      "start": 138924,
+      "end": 139821,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "127",
+      "label": "127",
+      "start": 139821,
+      "end": 140069,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "128",
+      "label": "128",
+      "start": 140069,
+      "end": 141056,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "129",
+      "label": "129",
+      "start": 141056,
+      "end": 142580,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "130",
+      "label": "130",
+      "start": 142580,
+      "end": 143004,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "131",
+      "label": "131",
+      "start": 143004,
+      "end": 143703,
+      "page": 33,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "132",
+      "label": "132",
+      "start": 143703,
+      "end": 144484,
+      "page": 34,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "133",
+      "label": "133",
+      "start": 144484,
+      "end": 145595,
+      "page": 34,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "134",
+      "label": "134",
+      "start": 145595,
+      "end": 146062,
+      "page": 34,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "135",
+      "label": "135",
+      "start": 146062,
+      "end": 146987,
+      "page": 34,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "136",
+      "label": "136",
+      "start": 146987,
+      "end": 148254,
+      "page": 34,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "137",
+      "label": "137",
+      "start": 148254,
+      "end": 148992,
+      "page": 35,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "138",
+      "label": "138",
+      "start": 148992,
+      "end": 149100,
+      "page": 35,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "139",
+      "label": "139",
+      "start": 149100,
+      "end": 149540,
+      "page": 35,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "139a",
+      "label": "139a",
+      "start": 149540,
+      "end": 149569,
+      "page": 35,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "140",
+      "label": "140",
+      "start": 149569,
+      "end": 153287,
+      "page": 35,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "141",
+      "label": "141",
+      "start": 153287,
+      "end": 156131,
+      "page": 36,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "142",
+      "label": "142",
+      "start": 156131,
+      "end": 159507,
+      "page": 36,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "143",
+      "label": "143",
+      "start": 159507,
+      "end": 164322,
+      "page": 37,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "144",
+      "label": "144",
+      "start": 164322,
+      "end": 166064,
+      "page": 38,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "145",
+      "label": "145",
+      "start": 166064,
+      "end": 169874,
+      "page": 38,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "146",
+      "label": "146",
+      "start": 169874,
+      "end": 170371,
+      "page": 39,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "147",
+      "label": "147",
+      "start": 170371,
+      "end": 171173,
+      "page": 40,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "148",
+      "label": "148",
+      "start": 171173,
+      "end": 172557,
+      "page": 40,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "149",
+      "label": "149",
+      "start": 172557,
+      "end": 173309,
+      "page": 40,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "150",
+      "label": "150",
+      "start": 173309,
+      "end": 174837,
+      "page": 40,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "151",
+      "label": "151",
+      "start": 174837,
+      "end": 175764,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "152",
+      "label": "152",
+      "start": 175764,
+      "end": 175890,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "153",
+      "label": "153",
+      "start": 175890,
+      "end": 176099,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "154",
+      "label": "154",
+      "start": 176099,
+      "end": 176409,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "155",
+      "label": "155",
+      "start": 176409,
+      "end": 176946,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "156",
+      "label": "156",
+      "start": 176946,
+      "end": 180029,
+      "page": 41,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "157",
+      "label": "157",
+      "start": 180029,
+      "end": 180213,
+      "page": 42,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "158",
+      "label": "158",
+      "start": 180213,
+      "end": 180659,
+      "page": 42,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "159",
+      "label": "159",
+      "start": 180659,
+      "end": 180953,
+      "page": 42,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "160",
+      "label": "160",
+      "start": 180953,
+      "end": 183231,
+      "page": 42,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "161",
+      "label": "161",
+      "start": 183231,
+      "end": 185575,
+      "page": 43,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "161a",
+      "label": "161a",
+      "start": 185575,
+      "end": 186834,
+      "page": 43,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "162",
+      "label": "162",
+      "start": 186834,
+      "end": 188234,
+      "page": 43,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "163",
+      "label": "163",
+      "start": 188234,
+      "end": 189246,
+      "page": 44,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "164",
+      "label": "164",
+      "start": 189246,
+      "end": 190690,
+      "page": 44,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "165",
+      "label": "165",
+      "start": 190690,
+      "end": 193610,
+      "page": 44,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "165a",
+      "label": "165a",
+      "start": 193610,
+      "end": 193917,
+      "page": 45,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "166",
+      "label": "166",
+      "start": 193917,
+      "end": 194185,
+      "page": 45,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "167",
+      "label": "167",
+      "start": 194185,
+      "end": 194635,
+      "page": 45,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "168",
+      "label": "168",
+      "start": 194635,
+      "end": 194665,
+      "page": 45,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "169",
+      "label": "169",
+      "start": 194665,
+      "end": 196253,
+      "page": 45,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "170",
+      "label": "170",
+      "start": 196253,
+      "end": 196933,
+      "page": 46,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "171",
+      "label": "171",
+      "start": 196933,
+      "end": 197573,
+      "page": 46,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "172",
+      "label": "172",
+      "start": 197573,
+      "end": 198621,
+      "page": 46,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "173",
+      "label": "173",
+      "start": 198621,
+      "end": 200361,
+      "page": 46,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "174",
+      "label": "174",
+      "start": 200361,
+      "end": 200627,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "175",
+      "label": "175",
+      "start": 200627,
+      "end": 201944,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "176",
+      "label": "176",
+      "start": 201944,
+      "end": 203008,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "177",
+      "label": "177",
+      "start": 203008,
+      "end": 203493,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "178",
+      "label": "178",
+      "start": 203493,
+      "end": 203891,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "179",
+      "label": "179",
+      "start": 203891,
+      "end": 205001,
+      "page": 47,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "180",
+      "label": "180",
+      "start": 205001,
+      "end": 206373,
+      "page": 48,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "181",
+      "label": "181",
+      "start": 206373,
+      "end": 206404,
+      "page": 48,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "182",
+      "label": "182",
+      "start": 206404,
+      "end": 207550,
+      "page": 48,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "183",
+      "label": "183",
+      "start": 207550,
+      "end": 208364,
+      "page": 48,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "184",
+      "label": "184",
+      "start": 208364,
+      "end": 208633,
+      "page": 48,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "185",
+      "label": "185",
+      "start": 208633,
+      "end": 209431,
+      "page": 48,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "186",
+      "label": "186",
+      "start": 209431,
+      "end": 209462,
+      "page": 49,
+      "source_status": "UCHYLONY"
+    },
+    {
+      "id": "187",
+      "label": "187",
+      "start": 209462,
+      "end": 209939,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "188",
+      "label": "188",
+      "start": 209939,
+      "end": 210337,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "189",
+      "label": "189",
+      "start": 210337,
+      "end": 210709,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "190",
+      "label": "190",
+      "start": 210709,
+      "end": 211772,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "191",
+      "label": "191",
+      "start": 211772,
+      "end": 212467,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "192",
+      "label": "192",
+      "start": 212467,
+      "end": 213524,
+      "page": 49,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "193",
+      "label": "193",
+      "start": 213524,
+      "end": 213617,
+      "page": 50,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "194",
+      "label": "194",
+      "start": 213617,
+      "end": 214692,
+      "page": 50,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "195",
+      "label": "195",
+      "start": 214692,
+      "end": 214970,
+      "page": 50,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "196",
+      "label": "196",
+      "start": 214970,
+      "end": 215109,
+      "page": 50,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "196a",
+      "label": "196a",
+      "start": 215109,
+      "end": 218350,
+      "page": 50,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "196b",
+      "label": "196b",
+      "start": 218350,
+      "end": 220515,
+      "page": 51,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "196c",
+      "label": "196c",
+      "start": 220515,
+      "end": 220838,
+      "page": 51,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "196d",
+      "label": "196d",
+      "start": 220838,
+      "end": 221395,
+      "page": 51,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "197",
+      "label": "197",
+      "start": 221395,
+      "end": 223658,
+      "page": 51,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "198",
+      "label": "198",
+      "start": 223658,
+      "end": 225827,
+      "page": 52,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "199",
+      "label": "199",
+      "start": 225827,
+      "end": 226499,
+      "page": 52,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "200",
+      "label": "200",
+      "start": 226499,
+      "end": 228238,
+      "page": 52,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "201",
+      "label": "201",
+      "start": 228238,
+      "end": 229769,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "202",
+      "label": "202",
+      "start": 229769,
+      "end": 229959,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "203",
+      "label": "203",
+      "start": 229959,
+      "end": 230273,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "204",
+      "label": "204",
+      "start": 230273,
+      "end": 230930,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "205",
+      "label": "205",
+      "start": 230930,
+      "end": 231227,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "206",
+      "label": "206",
+      "start": 231227,
+      "end": 232024,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "207",
+      "label": "207",
+      "start": 232024,
+      "end": 232109,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "208",
+      "label": "208",
+      "start": 232109,
+      "end": 233015,
+      "page": 53,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "209",
+      "label": "209",
+      "start": 233015,
+      "end": 233999,
+      "page": 54,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "210",
+      "label": "210",
+      "start": 233999,
+      "end": 234419,
+      "page": 54,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "211",
+      "label": "211",
+      "start": 234419,
+      "end": 235224,
+      "page": 54,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "211a",
+      "label": "211a",
+      "start": 235224,
+      "end": 237766,
+      "page": 54,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "211b",
+      "label": "211b",
+      "start": 237766,
+      "end": 238881,
+      "page": 55,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "212",
+      "label": "212",
+      "start": 238881,
+      "end": 240993,
+      "page": 55,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "213",
+      "label": "213",
+      "start": 240993,
+      "end": 244464,
+      "page": 56,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "214",
+      "label": "214",
+      "start": 244464,
+      "end": 244933,
+      "page": 56,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "215",
+      "label": "215",
+      "start": 244933,
+      "end": 245104,
+      "page": 56,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "216",
+      "label": "216",
+      "start": 245104,
+      "end": 246084,
+      "page": 56,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "217",
+      "label": "217",
+      "start": 246084,
+      "end": 246211,
+      "page": 57,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "218",
+      "label": "218",
+      "start": 246211,
+      "end": 247295,
+      "page": 57,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "218a",
+      "label": "218a",
+      "start": 247295,
+      "end": 248171,
+      "page": 57,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "219",
+      "label": "219",
+      "start": 248171,
+      "end": 251327,
+      "page": 57,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "220",
+      "label": "220",
+      "start": 251327,
+      "end": 253424,
+      "page": 58,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "221",
+      "label": "221",
+      "start": 253424,
+      "end": 254444,
+      "page": 58,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "222",
+      "label": "222",
+      "start": 254444,
+      "end": 255285,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "223",
+      "label": "223",
+      "start": 255285,
+      "end": 256428,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "224",
+      "label": "224",
+      "start": 256428,
+      "end": 256884,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "225",
+      "label": "225",
+      "start": 256884,
+      "end": 257222,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226",
+      "label": "226",
+      "start": 257222,
+      "end": 257475,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226a",
+      "label": "226a",
+      "start": 257475,
+      "end": 258282,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226b",
+      "label": "226b",
+      "start": 258282,
+      "end": 259956,
+      "page": 59,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226c",
+      "label": "226c",
+      "start": 259956,
+      "end": 261486,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226d",
+      "label": "226d",
+      "start": 261486,
+      "end": 261920,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226e",
+      "label": "226e",
+      "start": 261920,
+      "end": 262024,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226f",
+      "label": "226f",
+      "start": 262024,
+      "end": 262573,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226g",
+      "label": "226g",
+      "start": 262573,
+      "end": 262759,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226h",
+      "label": "226h",
+      "start": 262759,
+      "end": 263151,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "226i",
+      "label": "226i",
+      "start": 263151,
+      "end": 263981,
+      "page": 60,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "227",
+      "label": "227",
+      "start": 263981,
+      "end": 268094,
+      "page": 61,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "228",
+      "label": "228",
+      "start": 268094,
+      "end": 268469,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "229",
+      "label": "229",
+      "start": 268469,
+      "end": 269200,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "230",
+      "label": "230",
+      "start": 269200,
+      "end": 269671,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "231",
+      "label": "231",
+      "start": 269671,
+      "end": 270248,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "232",
+      "label": "232",
+      "start": 270248,
+      "end": 270498,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "233",
+      "label": "233",
+      "start": 270498,
+      "end": 272567,
+      "page": 62,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "234",
+      "label": "234",
+      "start": 272567,
+      "end": 272868,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "235",
+      "label": "235",
+      "start": 272868,
+      "end": 275634,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "236",
+      "label": "236",
+      "start": 275634,
+      "end": 275864,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "237",
+      "label": "237",
+      "start": 275864,
+      "end": 276592,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "238",
+      "label": "238",
+      "start": 276592,
+      "end": 276938,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "239",
+      "label": "239",
+      "start": 276938,
+      "end": 277979,
+      "page": 63,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "240",
+      "label": "240",
+      "start": 277979,
+      "end": 278153,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "241",
+      "label": "241",
+      "start": 278153,
+      "end": 278244,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "242",
+      "label": "242",
+      "start": 278244,
+      "end": 279002,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "243",
+      "label": "243",
+      "start": 279002,
+      "end": 279680,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "244",
+      "label": "244",
+      "start": 279680,
+      "end": 281413,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "245",
+      "label": "245",
+      "start": 281413,
+      "end": 282985,
+      "page": 64,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "246",
+      "label": "246",
+      "start": 282985,
+      "end": 283979,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "247",
+      "label": "247",
+      "start": 283979,
+      "end": 284209,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "248",
+      "label": "248",
+      "start": 284209,
+      "end": 284416,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "249",
+      "label": "249",
+      "start": 284416,
+      "end": 284806,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "250",
+      "label": "250",
+      "start": 284806,
+      "end": 286187,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "251",
+      "label": "251",
+      "start": 286187,
+      "end": 286429,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "252",
+      "label": "252",
+      "start": 286429,
+      "end": 287632,
+      "page": 65,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "253",
+      "label": "253",
+      "start": 287632,
+      "end": 289111,
+      "page": 66,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "254",
+      "label": "254",
+      "start": 289111,
+      "end": 289537,
+      "page": 66,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "255",
+      "label": "255",
+      "start": 289537,
+      "end": 290249,
+      "page": 66,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "256",
+      "label": "256",
+      "start": 290249,
+      "end": 292007,
+      "page": 66,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "257",
+      "label": "257",
+      "start": 292007,
+      "end": 292511,
+      "page": 66,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "258",
+      "label": "258",
+      "start": 292511,
+      "end": 292953,
+      "page": 67,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "259",
+      "label": "259",
+      "start": 292953,
+      "end": 294447,
+      "page": 67,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "260",
+      "label": "260",
+      "start": 294447,
+      "end": 295948,
+      "page": 67,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "261",
+      "label": "261",
+      "start": 295948,
+      "end": 297522,
+      "page": 67,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "262",
+      "label": "262",
+      "start": 297522,
+      "end": 297820,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "263",
+      "label": "263",
+      "start": 297820,
+      "end": 298628,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "264",
+      "label": "264",
+      "start": 298628,
+      "end": 299848,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "265",
+      "label": "265",
+      "start": 299848,
+      "end": 300050,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "266",
+      "label": "266",
+      "start": 300050,
+      "end": 300417,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "267",
+      "label": "267",
+      "start": 300417,
+      "end": 301262,
+      "page": 68,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "268",
+      "label": "268",
+      "start": 301262,
+      "end": 303686,
+      "page": 69,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "269",
+      "label": "269",
+      "start": 303686,
+      "end": 304405,
+      "page": 69,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "270",
+      "label": "270",
+      "start": 304405,
+      "end": 304744,
+      "page": 69,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "271",
+      "label": "271",
+      "start": 304744,
+      "end": 305246,
+      "page": 69,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "272",
+      "label": "272",
+      "start": 305246,
+      "end": 305828,
+      "page": 69,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "273",
+      "label": "273",
+      "start": 305828,
+      "end": 305928,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "274",
+      "label": "274",
+      "start": 305928,
+      "end": 306251,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "275",
+      "label": "275",
+      "start": 306251,
+      "end": 307379,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "276",
+      "label": "276",
+      "start": 307379,
+      "end": 307806,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "277",
+      "label": "277",
+      "start": 307806,
+      "end": 308548,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "278",
+      "label": "278",
+      "start": 308548,
+      "end": 309200,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "279",
+      "label": "279",
+      "start": 309200,
+      "end": 309561,
+      "page": 70,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "280",
+      "label": "280",
+      "start": 309561,
+      "end": 310879,
+      "page": 71,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "281",
+      "label": "281",
+      "start": 310879,
+      "end": 311138,
+      "page": 71,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "282",
+      "label": "282",
+      "start": 311138,
+      "end": 311940,
+      "page": 71,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "283",
+      "label": "283",
+      "start": 311940,
+      "end": 312296,
+      "page": 71,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "284",
+      "label": "284",
+      "start": 312296,
+      "end": 316670,
+      "page": 71,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "285",
+      "label": "285",
+      "start": 316670,
+      "end": 317179,
+      "page": 72,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "286",
+      "label": "286",
+      "start": 317179,
+      "end": 318441,
+      "page": 72,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "287",
+      "label": "287",
+      "start": 318441,
+      "end": 319191,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "288",
+      "label": "288",
+      "start": 319191,
+      "end": 320010,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "289",
+      "label": "289",
+      "start": 320010,
+      "end": 320577,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "290",
+      "label": "290",
+      "start": 320577,
+      "end": 321291,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "291",
+      "label": "291",
+      "start": 321291,
+      "end": 321892,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "292",
+      "label": "292",
+      "start": 321892,
+      "end": 322307,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "293",
+      "label": "293",
+      "start": 322307,
+      "end": 322803,
+      "page": 73,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "294",
+      "label": "294",
+      "start": 322803,
+      "end": 322963,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "295",
+      "label": "295",
+      "start": 322963,
+      "end": 323051,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "296",
+      "label": "296",
+      "start": 323051,
+      "end": 323368,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "297",
+      "label": "297",
+      "start": 323368,
+      "end": 323456,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "298",
+      "label": "298",
+      "start": 323456,
+      "end": 325508,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "299",
+      "label": "299",
+      "start": 325508,
+      "end": 326164,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "300",
+      "label": "300",
+      "start": 326164,
+      "end": 326562,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "301",
+      "label": "301",
+      "start": 326562,
+      "end": 327429,
+      "page": 74,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "302",
+      "label": "302",
+      "start": 327429,
+      "end": 327891,
+      "page": 75,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "303",
+      "label": "303",
+      "start": 327891,
+      "end": 328238,
+      "page": 75,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "304",
+      "label": "304",
+      "start": 328238,
+      "end": 329919,
+      "page": 75,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "305",
+      "label": "305",
+      "start": 329919,
+      "end": 332634,
+      "page": 75,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "306",
+      "label": "306",
+      "start": 332634,
+      "end": 333188,
+      "page": 76,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "307",
+      "label": "307",
+      "start": 333188,
+      "end": 334899,
+      "page": 76,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "308",
+      "label": "308",
+      "start": 334899,
+      "end": 335166,
+      "page": 76,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "309",
+      "label": "309",
+      "start": 335166,
+      "end": 336116,
+      "page": 76,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "310",
+      "label": "310",
+      "start": 336116,
+      "end": 336544,
+      "page": 77,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "311",
+      "label": "311",
+      "start": 336544,
+      "end": 337281,
+      "page": 77,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "312",
+      "label": "312",
+      "start": 337281,
+      "end": 339313,
+      "page": 77,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "313",
+      "label": "313",
+      "start": 339313,
+      "end": 339823,
+      "page": 77,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "314",
+      "label": "314",
+      "start": 339823,
+      "end": 340478,
+      "page": 77,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "315",
+      "label": "315",
+      "start": 340478,
+      "end": 340922,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "316",
+      "label": "316",
+      "start": 340922,
+      "end": 341025,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "317",
+      "label": "317",
+      "start": 341025,
+      "end": 341443,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "318",
+      "label": "318",
+      "start": 341443,
+      "end": 341677,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "319",
+      "label": "319",
+      "start": 341677,
+      "end": 342095,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "320",
+      "label": "320",
+      "start": 342095,
+      "end": 343551,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "321",
+      "label": "321",
+      "start": 343551,
+      "end": 344273,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "322",
+      "label": "322",
+      "start": 344273,
+      "end": 344899,
+      "page": 78,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "323",
+      "label": "323",
+      "start": 344899,
+      "end": 347268,
+      "page": 79,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "324",
+      "label": "324",
+      "start": 347268,
+      "end": 347513,
+      "page": 79,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "325",
+      "label": "325",
+      "start": 347513,
+      "end": 348154,
+      "page": 79,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "326",
+      "label": "326",
+      "start": 348154,
+      "end": 349083,
+      "page": 79,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "327",
+      "label": "327",
+      "start": 349083,
+      "end": 349589,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "328",
+      "label": "328",
+      "start": 349589,
+      "end": 350322,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "329",
+      "label": "329",
+      "start": 350322,
+      "end": 350916,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "330",
+      "label": "330",
+      "start": 350916,
+      "end": 351550,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "331",
+      "label": "331",
+      "start": 351550,
+      "end": 353326,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "332",
+      "label": "332",
+      "start": 353326,
+      "end": 353977,
+      "page": 80,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "333",
+      "label": "333",
+      "start": 353977,
+      "end": 354701,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "334",
+      "label": "334",
+      "start": 354701,
+      "end": 355410,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "335",
+      "label": "335",
+      "start": 355410,
+      "end": 355645,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "336",
+      "label": "336",
+      "start": 355645,
+      "end": 355898,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "337",
+      "label": "337",
+      "start": 355898,
+      "end": 356312,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "338",
+      "label": "338",
+      "start": 356312,
+      "end": 356547,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "339",
+      "label": "339",
+      "start": 356547,
+      "end": 356860,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "340",
+      "label": "340",
+      "start": 356860,
+      "end": 357514,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "341",
+      "label": "341",
+      "start": 357514,
+      "end": 357836,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "342",
+      "label": "342",
+      "start": 357836,
+      "end": 358605,
+      "page": 81,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "343",
+      "label": "343",
+      "start": 358605,
+      "end": 358710,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "344",
+      "label": "344",
+      "start": 358710,
+      "end": 359042,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "345",
+      "label": "345",
+      "start": 359042,
+      "end": 359223,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "346",
+      "label": "346",
+      "start": 359223,
+      "end": 359432,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "347",
+      "label": "347",
+      "start": 359432,
+      "end": 359574,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "348",
+      "label": "348",
+      "start": 359574,
+      "end": 360432,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "349",
+      "label": "349",
+      "start": 360432,
+      "end": 360816,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "350",
+      "label": "350",
+      "start": 360816,
+      "end": 362794,
+      "page": 82,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "351",
+      "label": "351",
+      "start": 362794,
+      "end": 363073,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "352",
+      "label": "352",
+      "start": 363073,
+      "end": 363279,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "353",
+      "label": "353",
+      "start": 363279,
+      "end": 363542,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "354",
+      "label": "354",
+      "start": 363542,
+      "end": 364520,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "355",
+      "label": "355",
+      "start": 364520,
+      "end": 365791,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "356",
+      "label": "356",
+      "start": 365791,
+      "end": 366185,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "357",
+      "label": "357",
+      "start": 366185,
+      "end": 366646,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "358",
+      "label": "358",
+      "start": 366646,
+      "end": 367735,
+      "page": 83,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "359",
+      "label": "359",
+      "start": 367735,
+      "end": 369698,
+      "page": 84,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "360",
+      "label": "360",
+      "start": 369698,
+      "end": 370468,
+      "page": 84,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "361",
+      "label": "361",
+      "start": 370468,
+      "end": 371519,
+      "page": 84,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "362",
+      "label": "362",
+      "start": 371519,
+      "end": 372317,
+      "page": 84,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "363",
+      "label": "363",
+      "start": 372317,
+      "end": 373274,
+      "page": 84,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "364",
+      "label": "364",
+      "start": 373274,
+      "end": 373450,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "365",
+      "label": "365",
+      "start": 373450,
+      "end": 373747,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "366",
+      "label": "366",
+      "start": 373747,
+      "end": 374412,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "367",
+      "label": "367",
+      "start": 374412,
+      "end": 375270,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "399",
+      "label": "399",
+      "start": 375270,
+      "end": 376062,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "400",
+      "label": "400",
+      "start": 376062,
+      "end": 376601,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "401–447",
+      "label": "401–447",
+      "start": 376601,
+      "end": 376768,
+      "page": 85,
+      "source_status": "POMINIETE_W_TJ"
+    },
+    {
+      "id": "448",
+      "label": "448",
+      "start": 376768,
+      "end": 377107,
+      "page": 85,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "449",
+      "label": "449",
+      "start": 377107,
+      "end": 377255,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "450",
+      "label": "450",
+      "start": 377255,
+      "end": 377497,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "451",
+      "label": "451",
+      "start": 377497,
+      "end": 377677,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "452",
+      "label": "452",
+      "start": 377677,
+      "end": 378707,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "453",
+      "label": "453",
+      "start": 378707,
+      "end": 379249,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "454",
+      "label": "454",
+      "start": 379249,
+      "end": 379546,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "455",
+      "label": "455",
+      "start": 379546,
+      "end": 380735,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    },
+    {
+      "id": "456",
+      "label": "456",
+      "start": 380735,
+      "end": 381517,
+      "page": 86,
+      "source_status": "TEKST_W_TJ"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # DR-02 — Mapa Pokrycia Treściowego
 
-**Stan operacyjny:** 2026-08-28
+**Stan operacyjny:** 2026-10-04 (aktualizacja PrUp; pozostałe zakresy wg wcześniejszych audytów)
 
 Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Historia napraw i wcześniejsze statusy pozostają poza mapą runtime.
 
@@ -25,7 +25,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 |---|---|---|
 | KPC — Dz.U. 2026 poz. 468, postępowanie rozpoznawcze, zabezpieczające/egzekucyjne i międzynarodowe | 🟢 B+ / COV | `mod-KPC-current-state-COV.md` + rodzina modułów KPC |
 | KSH — wszystkie tytuły co najmniej operacyjnie pokryte | 🟢 B+ / COV | rodzina KSH + `mod-KSH-uzupelnienie-pokrycia-2026.md` |
-| Prawo upadłościowe | 🟢 B+ / COV | moduły PrUp, w tym likwidacja i postępowania odrębne |
+| Prawo upadłościowe | Pełne źródło + workflow B; komentarz częściowy | `mod-PrUpad-zrodla-i-wersje.md`; rejestr `references/prup/coverage.json` |
 | Prawo restrukturyzacyjne | 🟢 B+ / COV | moduły PrRestr + pomoc publiczna |
 
 ## Nieruchomości / zabezpieczenia / spółdzielczość
@@ -60,3 +60,41 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 2. KPC ma osobny current-state COV spinający rozproszone moduły procesowe; dalsza praca dotyczy głębokości konkretnych działów, nie braku mapy strukturalnej.
 3. Dalsza praca dotyczy głębokości poszczególnych artykułów i niszowych wariantów, nie braku routingu.
 4. `COV` nie oznacza `FULL`; każda konkretna jednostka wymaga fresh gate do ELI/ISAP.
+
+## PrUp — stan po rozszerzeniu 2026-10-04
+
+Pełny PDF i ekstrakcja t.j. 2026/913; 603 jawne nagłówki artykułów/grup,
+70 węzłów struktury. Pominięte i uchylone części są jawnie zaznaczone.
+Nie jest to 603 merytorycznie zaudytowanych artykułów ani komentarz `FULL`.
+
+| Procedura | Moduł | Głębokość |
+|---|---|---|
+| Pełny tekst PrUp, wersje czasowe, indeks artykułów i odczyt ELI | `mod-PrUpad-zrodla-i-wersje.md` | źródło, metryka i odczyt |
+| Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` | workflow B; wyjątki przez pełny przepis |
+| Fundusze masy, kategorie, zabezpieczenia i plan podziału | `mod-PrUpad-podzial-335-360.md` | workflow B; wyjątki przez pełny przepis |
+| Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | `mod-PrUpad-syndyk-likwidacja.md` | workflow B; wyjątki przez pełny przepis |
+| Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | `mod-PrUpad-konsument-workflow.md` | workflow B; wyjątki przez pełny przepis |
+
+Rejestr `references/prup/coverage.json` oddziela obecność tekstu, routing,
+głębokość procedury i brak pełnego niezależnego audytu jednostki. Ustępy
+wykryte w ekstrakcji nie są automatycznie oznaczane jako zweryfikowane.
+
+Do dalszego pogłębienia: komentarze do pozostałych jednostek, historyczne
+wersje dla starszych spraw i kazusy oparte na rzeczywistych aktach.
+
+
+## Pełne korpusy i procedury niewypłacalności
+
+| Zakres | Podstawa | Moduł | Status |
+|---|---|---|---|
+| PrRestr — Prawo restrukturyzacyjne — pełny korpus i sposób użycia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-zrodla-i-wersje` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Restrukturyzacja — kwalifikacja sprawy, plan i test zaspokojenia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-wejscie-plan-test` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Postępowanie o zatwierdzenie układu — pełny przebieg | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-pzu` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Przyspieszone postępowanie układowe i postępowanie układowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-ppu-pu` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Sanacja — zarząd, działania sanacyjne i układ | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-sanacja` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Restrukturyzacja — procedura wspólna, zakończenie i upadłość | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-procedura-zakonczenie` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Restrukturyzacja — transgraniczne, odrębne, karne i przejściowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-odrebne-miedzynarodowe` | pełne źródło / procedura tematyczna; fresh gate |
+| PrUp — Upadłość — przesłanki, wniosek, zabezpieczenie i pre-pack | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-wniosek-ogloszenie` | pełne źródło / procedura tematyczna; fresh gate |
+| PrUp — Upadłość — masa, umowy, bezskuteczność i procesy | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-skutki-masa-bezskutecznosc` | pełne źródło / procedura tematyczna; fresh gate |
+| PrUp — Upadłość — organy, wierzyciele i wspólna procedura | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-organy-procedura` | pełne źródło / procedura tematyczna; fresh gate |
+| PrUp — Upadłość — zakończenie, oddłużenie przedsiębiorcy, zakaz i przepisy końcowe | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-zakonczenie-zakaz-karne` | pełne źródło / procedura tematyczna; fresh gate |
