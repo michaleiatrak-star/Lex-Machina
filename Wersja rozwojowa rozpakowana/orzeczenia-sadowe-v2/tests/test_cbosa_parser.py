@@ -211,3 +211,29 @@ def test_value_cell_with_nested_table_keeps_judgment_date():
     parsed = parse_cbosa_document(html, "AAAAAAAAAA")
     assert parsed.judgment_date == "2026-01-10"
     assert parsed.court == "Naczelny Sąd Administracyjny"
+
+
+# Live CBOSA layouts reported in PR #84 (geek111): nested label cells and the "related" section.
+NESTED_LABEL_DOC = (
+    "<html><head><TITLE>III OSK 1959/22 - Wyrok NSA z 2023-11-29</TITLE></head><body>"
+    '<table><tr><td class="info-list-label"><table><tr><td class="lista-label">Data orzeczenia</td></tr></table></td>'
+    '<td class="info-list-value"><table><tr><td>2023-11-29</td><td>orzeczenie prawomocne</td></tr></table></td></tr>'
+    '<tr><td class="info-list-label"><table><tr><td class="lista-label">Sąd</td></tr></table></td>'
+    '<td class="info-list-value">Naczelny Sąd Administracyjny</td></tr></table>'
+    '<div class="lista-label">Sentencja</div><span class="info-list-value-uzasadnienie"><p>Oddala skargę kasacyjną.</p></span>'
+    "</body></html>"
+)
+
+
+def test_nested_label_cell_keeps_court_and_date():
+    parsed = parse_cbosa_document(NESTED_LABEL_DOC, "2E1C5318E4")
+    assert parsed.case_number == "III OSK 1959/22"
+    assert parsed.court == "Naczelny Sąd Administracyjny"
+    assert parsed.judgment_date == "2023-11-29"
+
+
+def test_related_section_is_not_a_search_result():
+    html = ('<html><body><div>Znaleziono 1 orzeczeń</div><a href="/doc/AAAAAAAAAA">x</a>'
+            '<span class="powiazane"><span><a href="/doc/BBBBBBBBBB">y</a></span></span>'
+            '<a href="/doc/CCCCCCCCCC">z</a></body></html>')
+    assert extract_doc_ids(html) == ["AAAAAAAAAA", "CCCCCCCCCC"]

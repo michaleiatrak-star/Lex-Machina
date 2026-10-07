@@ -92,3 +92,31 @@ import { toSamoZdanie } from "./saos-mcp-server.js";
   if (skanujCytowanie(inny, "III CRN 126/80").sygnaly.length) { console.error("FAIL: data przy innej sygnaturze potraktowana jako kotwica"); process.exit(1); }
   console.log("OK: 2026-10-01 — odesłanie datą wykryte; ta sama data z inną sygnaturą pominięta");
 }
+
+// zgł. #90 — FOUND tylko przy tożsamości sygnatury (courtCases[].caseNumber), nie „jedna pozycja po mapowaniu”
+{ const w = normalizujOdpowiedzSAOS(fx("SUPREME"), { sygnatura: "II PK 29/09" });
+  assert.strictEqual(w.status, "NOT_FOUND");
+  assert.deepStrictEqual(w.odrzucone_post_checkiem, ["II PK 291/09"]);
+  console.log("OK: #90 sygnatura nieistniejąca (near-match II PK 291/09) → NOT_FOUND, nie FOUND"); }
+
+{ const w = normalizujOdpowiedzSAOS(fx("SUPREME"), { sygnatura: "I PK 291/09" });
+  assert.strictEqual(w.status, "NOT_FOUND");
+  console.log("OK: #90 sygnatura różna literą (I PK vs II PK) → NOT_FOUND"); }
+
+{ const w = normalizujOdpowiedzSAOS(fx("SUPREME"), { sygnatura: "ii  pk 291/09" });
+  assert.strictEqual(w.status, "FOUND");
+  console.log("OK: #90 normalizacja (wielkość liter, spacje) → FOUND"); }
+
+{ const tk = [{ courtType: "CONSTITUTIONAL_TRIBUNAL", courtCases: [{ caseNumber: "K 7/94" }] }];
+  assert.strictEqual(normalizujOdpowiedzSAOS(tk, { sygnatura: "K 7/94" }).status, "FOUND");
+  assert.strictEqual(normalizujOdpowiedzSAOS(tk, { sygnatura: "SK 7/94" }).status, "NOT_FOUND");
+  console.log("OK: #90 TK — sygnatura z courtCases[].caseNumber; SK 7/94 ≠ K 7/94"); }
+
+{ const w = normalizujOdpowiedzSAOS([...fx("COMMON"), ...fx("SUPREME")], { sygnatura: "II PK 291/09" });
+  assert.strictEqual(w.status, "FOUND");
+  assert.deepStrictEqual(w.odrzucone_post_checkiem, ["I ACa 566/12"]);
+  console.log("OK: #90 obce trafienie odrzucone post-checkiem, zostaje jedno tożsame → FOUND"); }
+
+{ const w = normalizujOdpowiedzSAOS(fx("COMMON"), { sygnatura: "II PK 291/09", kompletne: false });
+  assert.strictEqual(w.status, "ERROR");
+  console.log("OK: #90 niepełne stronicowanie bez trafienia → ERROR, nie NOT_FOUND"); }

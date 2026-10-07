@@ -69942,6 +69942,38 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-07h — CBOSA: wartościowe części PR #84 (etykiety w zagnieżdżonych tabelach, sekcja „powiązane”) (6.211)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: porównać PR #84 (geek111, 2026-10-02, pomiar na żywej stronie CBOSA) z bieżącym konektorem i przenieść to, co faktycznie wartościowe.
+
+### 2. PORÓWNANIE (przypadki z PR #84 uruchomione na kodzie z main)
+- Sekcja „powiązane”: main dawał poprawny FOUND (od 6.205 nadmiar ID to kandydaci filtrowani exact-matchem), ale pobierał zbędne dokumenty. PR #84 pomija `span.powiazane` przy zbieraniu.
+- ⛔ BŁĄD w main: etykieta pola w zagnieżdżonej tabeli (`td.info-list-label > table > td.lista-label`) nie była rozpoznawana — dokument III OSK 1959/22 dawał `sąd: null`, `data: null` (`brak_metadanych`), choć dane są na karcie. 6.207 obsłużył tylko zagnieżdżenie w komórce WARTOŚCI.
+- Sumy kontrolne z PR #84 (brak wpisów per-przykład) — nieaktualne: tych plików nie ma w drzewie.
+- Całego PR nie scalono: cofałby późniejsze zmiany 6.205–6.207 (best-effort sądu/daty, tolerancyjne etykiety, ponowienia).
+
+### 3. ZMIANA
+- `cbosa-mcp-server.js` i `orzeczenia-sadowe-v2/tools/cbosa_parser.py`: komórka `td.info-list-label` traktowana jak etykieta; `span.powiazane` (z zagnieżdżeniem) pomijany przy `/doc/{ID}`. Semantyka best-effort sądu/daty bez zmian.
+- `shared/CBOSA-ADAPTER.md` 1.2.
+- Testy: JS `test_normalizacja.mjs` +2 (31), Python `test_cbosa_parser.py` +2 (30); `dist/lex-mcp.mjs` przebudowany, `zbuduj_pakiet.py --sprawdz` zgodny; `test_protokol.mjs` OK.
+- Wersje: audyt-systemu-v4 6.210 → 6.211, orzeczenia-sadowe-v2 2.25 → 2.26, biblioteka wspólna 3.99.20 → 3.99.21.
+
+### 4. WERYFIKACJA
+Na przypadkach z PR #84: dokument → sąd „Naczelny Sąd Administracyjny”, data 2023-11-29, prawomocność „orzeczenie prawomocne”; lista z „powiązanymi” → jeden kandydat, FOUND. Brak dostępu do żywego CBOSA z tej sesji — weryfikacja na fragmentach HTML zmierzonych przez autora PR.
+## AUDYT-2026-10-07g — PR #95 (równoległa sesja): walidator cytowań i weryfikator sygnatur w wersji pełniejszej; porządki references; .claude (6.210)
+
+### 1. ŹRÓDŁO
+PR #95 (gałąź claude/serene-babbage-2pod4g) — te same zgłoszenia #87, #89, #90 co PR #94, rozwiązane niezależnie; konflikt z main po scaleniu #94 (wersje 6.208/6.209 i 3.99.19 użyte podwójnie).
+
+### 2. PORÓWNANIE I DECYZJA
+- Walidator cytowań: wersja #95 lepsza — pełny identyfikator (sygnatura z literami izby, artykuł z § i kodeksem, Dz.U. rok+pozycja/ELI/WDU). ⛔ Wersja 3.99.19 z main dopasowywała same liczby: cytat „I CSK 123/24” uznawała za potwierdzony zapytaniem o „II CSK 123/24”. Przyjęta wersja #95; `test_walidator_cytowan.py` z main dostosowany (+1 przypadek: różna litera izby).
+- Weryfikator sygnatur: wersja #95 pełniejsza — wszystkie strony Portalu Orzeczeń i SAOS; ⛔ SAOS podaje sygnaturę w `courtCases[].caseNumber`, a 6.208 z main czytał nieistniejące `caseNumbers` (TK/KIO zawsze bez sygnatury). Przyjęta wersja #95 wraz z post-checkiem w konektorze MCP `saos-example`.
+- Porządki references z #95 (archiwalne mapy Dz.U. i listy robocze, zero aktywnych odwołań; T41 zapas) i usunięcie prywatnej konfiguracji `.claude/` z repozytorium (zgł. #87) — przyjęte bez zmian.
+
+### 3. ZMIANY W SCALENIU
+main dołączony do gałęzi #95 (bez przepisywania historii). Historia 6.208/6.209 i 3.99.19 z main zachowana; treść #95 opisana jako audyt 6.210 i biblioteka wspólna 3.99.20. `dist/lex-mcp.mjs` przebudowany ze źródeł po scaleniu; sumy i paczki ZIP odtworzone.
+
 ## AUDYT-2026-10-07f — PR #85: pełne korpusy Prawa upadłościowego i restrukturyzacyjnego; mapy aktów; korekta mapy Dz.U. (6.209)
 
 ### 1. ŹRÓDŁO

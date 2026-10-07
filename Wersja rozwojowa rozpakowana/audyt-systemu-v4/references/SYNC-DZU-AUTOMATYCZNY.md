@@ -58,7 +58,7 @@ nowelizacja czeka na swoją kolej w harmonogramie sesji audytowych.
 
 ## Integracja z audyt-systemu-v4
 
-`references/mapa_dzu_2026-07-04.md` w audyt-systemu-v4 pozostaje jedynym źródłem
+Najnowsza `references/mapa_dzu_YYYY-MM-DD.md` (wybierana dynamicznie, FAZA 0) pozostaje jedynym źródłem
 prawdy używanym przez router i DR-skille. Ten skill produkuje wyłącznie
 **wejściowy raport dla FAZY 3**, nie nową kopię mapy. Po sesji audytowej,
 aktualizacja `mapa_dzu` przebiega dokładnie tak jak dotychczas (str_replace na

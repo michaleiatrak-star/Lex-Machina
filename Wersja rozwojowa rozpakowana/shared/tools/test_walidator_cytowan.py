@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Testy walidator_cytowan.py: domena urzędowa po hoście, liczby z cytatu jako całe liczby.
+"""Testy walidator_cytowan.py: domena urzędowa po hoście, pełny identyfikator cytatu.
 
 Uruchomienie:  python3 -m unittest test_walidator_cytowan -v   (z katalogu shared/tools)
 """
@@ -15,7 +15,8 @@ _spec.loader.exec_module(w)
 
 
 def potwierdzone(cytat, **zdarzenie):
-    return w.log_has_verification({"tekst": cytat}, [zdarzenie])[0]
+    c = w.extract_citations(cytat)[0]  # typ cytatu (artykul / dziennik_ustaw / sygnatura) z ekstraktora
+    return w.log_has_verification(c, [zdarzenie])[0]
 
 
 class DomenaUrzedowa(unittest.TestCase):
@@ -42,6 +43,9 @@ class ZgodnoscCytatu(unittest.TestCase):
     def test_wszystkie_liczby_cytatu(self):
         self.assertFalse(potwierdzone("Dz.U. 2023 poz. 1691", url="https://isap.sejm.gov.pl/a", query_context="ustawa 2023"))
         self.assertFalse(potwierdzone("I CSK 123/24", url="https://orzeczenia.nsa.gov.pl/doc/X", query_context="I CSK 1234/24"))
+
+    def test_sygnatura_rozna_litera_izby(self):
+        self.assertFalse(potwierdzone("I CSK 123/24", url="https://www.sn.pl/x", query_context="II CSK 123/24"))
 
     def test_identyfikator_isap(self):
         self.assertTrue(potwierdzone("Dz.U. 2023 poz. 1691",
