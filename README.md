@@ -65,32 +65,21 @@ z polskim prawem:
 
 ```mermaid
 flowchart TB
-    U([👤 Użytkownik]) --> R
+    U(["Użytkownik"]) --> R
 
-    subgraph ROUTING["🧭 Warstwa routingu"]
-        R[prawny-router-v3<br/>tryb PRAWNIK / LAIK] --> PP[prawo-polskie-v2<br/>ROUTING-MAP]
+    subgraph SYS["System skilli Lex Machina"]
+        R["prawny-router-v3<br/>tryb PRAWNIK / LAIK"] --> PP["prawo-polskie-v2<br/>ROUTING-MAP"]
+        PP --> DR["Dziedziny prawa<br/>DR-01 … DR-16<br/>jeden moduł = jeden akt"]
+        DR --> EXEC["Skille wykonawcze<br/>pisma, analiza sądowa,<br/>umowy, dowody, raporty"]
+        SH["shared/ — bramki weryfikacji<br/>PRAWO-HARDGATE v2.0<br/>SYGNATURY v1.1<br/>WERYFIKACJA-SLAD v1.1<br/>MOD-AUDIT-BUNDLE"]
+        R -.->|"obowiązkowe bramki"| SH
+        DR -.-> SH
+        EXEC -.->|"każde powołanie"| SH
     end
 
-    subgraph DR["📚 Dziedziny prawa — DR-01 … DR-16"]
-        D1[dr-01 ustrój] ~~~ D2[dr-02 cywilne] ~~~ D3[dr-03 karne] ~~~ DN[… dr-16 pisma/strategia]
-    end
-
-    subgraph EXEC["🛠️ Skille wykonawcze"]
-        E1[pisma-procesowe-v3] ~~~ E2[analiza-sadowa-v6] ~~~ E3[analizator-umow / dowodow] ~~~ E4[raporty / przesłuchania]
-    end
-
-    subgraph SHARED["🛡️ shared/ — biblioteka współdzielona"]
-        S1[PRAWO-HARDGATE v2.0<br/>ŹRÓDŁO-0: API ELI/SAOS/CELLAR] ~~~ S2[SYGNATURY v1.1<br/>FOUND / NOT_FOUND / AMBIGUOUS] ~~~ S3[WERYFIKACJA-SLAD v1.1<br/>gradient ISTNIENIE/TREŚĆ/FRAGMENT] ~~~ S4[MOD-AUDIT-BUNDLE<br/>AI Act art. 12]
-    end
-
-    AUD[📋 audyt-systemu-v4<br/>AUDIT-JOURNAL + mapa Dz.U.]
-
-    PP --> DR
-    DR --> EXEC
-    ROUTING -.obowiązkowe bramki.-> SHARED
-    DR -.-> SHARED
-    EXEC -.-> SHARED
-    AUD -. audytuje .-> ROUTING & DR & EXEC & SHARED
+    EXEC --> OUT(["Wynik ze śladem<br/>weryfikacji"])
+    SH -.->|"API / konektory MCP"| SRC[("Źródła urzędowe<br/>ISAP/ELI, SAOS, CBOSA,<br/>SN, EUR-Lex")]
+    AUD["audyt-systemu-v4<br/>AUDIT-JOURNAL + mapa Dz.U."] -.->|"audytuje"| SYS
 ```
 
 **Przepływ sprawy:** router klasyfikuje sprawę i tryb → ładuje właściwe moduły DR (lazy

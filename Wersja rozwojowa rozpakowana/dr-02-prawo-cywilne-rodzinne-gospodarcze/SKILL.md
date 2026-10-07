@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.64"
+version: "3.65"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -60,6 +60,18 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 
 ---
 
+## Upadłość i restrukturyzacja — wejście operacyjne
+
+Upadłość: `modules/mod-PrUpad-zrodla-i-wersje.md`.
+Restrukturyzacja: `modules/mod-PrRestr-zrodla-i-wersje.md`.
+Pełne korpusy: `references/prup/`, `references/prrestr/`.
+Katalog każdego nagłówka: `references/insolvency/katalog.md`.
+Wersje i przepisy przejściowe: `references/insolvency/wersje-i-przepisy-przejsciowe.md`.
+`scripts/insolvency.py coverage` sprawdza integralność i pełność routingu.
+Testy: `scripts/test_prup.py`, `scripts/test_insolvency.py` (`python3 -m unittest test_prup test_insolvency` z katalogu `scripts/`; integralność źródła, granice artykułów, wersje i routing — nie poprawność rozstrzygnięć).
+Dostęp do całego tekstu i procedur nie jest deklaracją pełnego komentarza
+orzeczniczego; dobierz prawo do dat i faktów konkretnej sprawy.
+
 ## Zasada architektoniczna
 - Jeden moduł = jeden akt prawny (tekst jednolity Dz.U.)
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
@@ -103,7 +115,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (69 łącznie — ✓ 69 OK, ☐ 0 STUB)
+## Moduły (85 łącznie — rejestracja w SKILL.md; głębokość w MAPA-POKRYCIA)
 
   [✓] OK    mod-KC-current-state-COV
   [✓] OK    mod-KPC-current-state-COV
@@ -444,79 +456,54 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                poleceń zarządowi [art. 219 §2], rozszerzenie uprawnień
                i zawieszenie członka zarządu [art. 220]. ⚠️
                [NIEWERYFIKOWANE RZĄD 1] większość treści)
+  [✓] OK    mod-PrRestr-zrodla-i-wersje
+              (Prawo restrukturyzacyjne — pełny korpus i sposób użycia)
+  [✓] OK    mod-PrRestr-wejscie-plan-test
+              (Restrukturyzacja — kwalifikacja sprawy, plan i test zaspokojenia)
+  [✓] OK    mod-PrRestr-pzu
+              (Postępowanie o zatwierdzenie układu — pełny przebieg)
+  [✓] OK    mod-PrRestr-ppu-pu
+              (Przyspieszone postępowanie układowe i postępowanie układowe)
+  [✓] OK    mod-PrRestr-sanacja
+              (Sanacja — zarząd, działania sanacyjne i układ)
+  [✓] OK    mod-PrRestr-procedura-zakonczenie
+              (Restrukturyzacja — procedura wspólna, zakończenie i upadłość)
+  [✓] OK    mod-PrRestr-odrebne-miedzynarodowe
+              (Restrukturyzacja — transgraniczne, odrębne, karne i przejściowe)
+  [✓] OK    mod-PrUpad-wniosek-ogloszenie
+              (Upadłość — przesłanki, wniosek, zabezpieczenie i pre-pack)
+  [✓] OK    mod-PrUpad-skutki-masa-bezskutecznosc
+              (Upadłość — masa, umowy, bezskuteczność i procesy)
+  [✓] OK    mod-PrUpad-organy-procedura
+              (Upadłość — organy, wierzyciele i wspólna procedura)
+  [✓] OK    mod-PrUpad-zakonczenie-zakaz-karne
+              (Upadłość — zakończenie, oddłużenie przedsiębiorcy, zakaz i przepisy końcowe)
+  [✓] OK    mod-PrUpad-zrodla-i-wersje
+              (Prawo upadłościowe — pełny tekst, wersje i nawigacja; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-wierzytelnosci-235-266
+              (PrUp — zgłoszenia, sprawdzanie i lista wierzytelności; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-podzial-335-360
+              (PrUp — fundusze masy, kategorie i plan podziału; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-syndyk-likwidacja
+              (PrUp — czynności syndyka, sprawozdawczość i likwidacja; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-konsument-workflow
+              (PrUp — upadłość konsumencka w pracy syndyka; źródło i procedura, fresh/temporal gate)
   [✓] OK    mod-PrUpad-upadlosc-restrukturyzacja
-              (⭐ PODZIELONY 2026-08-21, ZASADA 13 — plik zachowuje nazwę
-               jako indeksator; Tytuł Va + Tytuł VII Dział I + Tytuł IX
-               wydzielone do mod-PrUpad-uklad-likwidacja-zakonczenie)
-  [✓] NOWY  mod-PrUpad-uklad-likwidacja-zakonczenie
-              (wydzielony 2026-08-21 z modułu wyżej — podział WYPRZEDZAJĄCY
-               przed dalszymi transzami F-86: układ w upadłości [266a-266f],
-               likwidacja masy Dział I [306-315], zakończenie i umorzenie
-               postępowania [361-372])
-  [✓] NOWY  mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026
-              (pozostałe puste zakresy PrUp/PrRestr, w tym F-86 od art. 426 i ogólne tryby restrukturyzacji)
-  [✓] NOWY  mod-PrUpad-postepowania-odrebne-426-491-38
-              (F-86 DOMKNIĘTA: B+ dla postępowań odrębnych 426–491^38 — banki/SKOK, hipoteczne, transgraniczne, ubezpieczenia, obligacje, konsument i układ konsumencki; RZĄD 1 ELI)
-  [✓] NOWY  mod-PrUpad-likwidacja-miedzynarodowe-szczegolne
-              (dodany 2026-08-26 — częściowe uzupełnienie F-86: likwidacja [316-334],
-               postępowanie międzynarodowe [378-417], postępowania po
-               śmierci dłużnika i wobec deweloperów [418-425s])
-  [✓] NOWY  mod-PrRestr-dzial-III-nadzorca-zarzadca
-              (dodany 2026-08-19 — naprawa F-87 priorytet 1: Dział III
-               PrRestr, art. 23-64. Struktura 4 rozdziałów + tabela
-               kwalifikatora organu wg trybu postępowania; Rozdz. 1
-               przepisy ogólne [wymogi licencji, odpowiedzialność
-               cywilna + obowiązkowe OC, czas trwania funkcji,
-               mediacja]; Rozdz. 2 nadzorca układu [wynagrodzenie
-               umowne z limitem dla mikroprzedsiębiorców]; Rozdz. 3
-               nadzorca sądowy [art. 39 — sankcja NIEWAŻNOŚCI za
-               czynność bez zgody, katalog obowiązków, wzór
-               wynagrodzenia 2x-44x podstawy, redukcja do 40% przy
-               niepowodzeniu]; Rozdz. 4 zarządca [art. 52-53 — pełne
-               przejęcie zarządu masą sanacyjną, działanie we własnym
-               imieniu na rachunek dłużnika]. ⚠️ Oddział 2 Rozdz. 4
-               [wynagrodzenie zarządcy] — luka całkowita, świadomie
-               oznaczona, priorytet dla kolejnej sesji)
-  [✓] NOWY  mod-PrRestr-dzial-IV-uczestnicy-wierzyciele
-              (dodany 2026-08-19 — naprawa F-87 priorytet 2: Dział IV
-               i V PrRestr, art. 65-149. ⭐ Fundamentalna różnica vs
-               PrUp: BRAK instytucji zgłoszenia wierzytelności — spis
-               sporządzany Z URZĘDU przez nadzorcę/zarządcę; Rozdz. 1
-               definicje [wierzytelność bezsporna/sporna, art. 65 ust.
-               7 sankcja utraty uprawnień]; Rozdz. 2 spis wierzytelności
-               [art. 90-94 sprzeciw dłużnika/wierzyciela, termin 14 dni,
-               art. 102 spis z klauzulą wykonalności = tytuł wykonawczy];
-               Rozdz. 3 zgromadzenie wierzycieli [art. 104-105 zwołanie,
-               art. 107 prawo głosu i waga kapitałowa, art. 113 quorum
-               1/5 i próg 2/3 przyjęcia układu]; Rozdz. 4 rada
-               wierzycieli [skład 5+2, art. 128 szeroki katalog
-               kompetencji w tym zezwolenie na kredyt/sprzedaż
-               nieruchomości pod rygorem nieważności, art. 133 uchwała
-               w pełnym składzie może wymusić zmianę nadzorcy/zarządcy].
-               ⚠️ Dział V [pomoc publiczna] — luka niemal całkowita,
-               PLUS wykryte ryzyko przestarzałego odesłania do
-               uchylonego rozporządzenia UE 659/1999, priorytet WYSOKI
-               dla kolejnej sesji)
-  [✓] NOWY  mod-PrRestr-dzial-V-pomoc-publiczna
-              (dodany 2026-08-20 — naprawa F-87 priorytet 3: Dział V
-               PrRestr, art. 140-149 [139a uchylony 2020]. Test
-               prywatnego wierzyciela/inwestora [art. 140]; cele i
-               warunki pomocy [art. 141-142, 4 przesłanki kumulatywne];
-               zasada "one time, last time" — limit 10 lat z 3
-               wyjątkami [art. 143]; wkład własny i środki wyrównujące
-               [art. 144-145]; wyjątek dla usług w ogólnym interesie
-               gospodarczym [art. 146]; próg 10 mln EUR zwalniający z
-               notyfikacji KE dla MŚP [art. 148, przesłanki
-               kumulatywne]. ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP
-               niedostępny w tym środowisku, treść oparta na 4
-               zgodnych źródłach RZĄD 2/3. ⚠️ Ryzyko przestarzałego
-               odesłania do uchylonego rozporządzenia UE 659/1999
-               [odnotowane wcześniej przy mod-dzial-IV] — NIE
-               zweryfikowane w tej sesji, priorytet dla kolejnej.
-               ⚠️ Ustawa z 16.07.2020 o pomocy publicznej w celu
-               ratowania/restrukturyzacji [dawna materia art. 139a]
-               — CAŁKOWICIE nieobecna w systemie, kandydat na nową
-               flagę)
+              (Upadłość i restrukturyzacja — kwalifikacja i nawigacja; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-uklad-likwidacja-zakonczenie
+              (Układ w upadłości i powiązanie z likwidacją; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026
+              (Prawo upadłościowe i restrukturyzacyjne — wspólna nawigacja; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-postepowania-odrebne-426-491-38
+              (Prawo upadłościowe — postępowania odrębne od art. 426 do art. 491^38; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrUpad-likwidacja-miedzynarodowe-szczegolne
+              (Prawo upadłościowe — dalsza likwidacja, postępowanie międzynarodowe i odrębne; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrRestr-dzial-III-nadzorca-zarzadca
+              (Nadzorca i zarządca — kompetencje, kontrola i wynagrodzenie; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrRestr-dzial-IV-uczestnicy-wierzyciele
+              (Restrukturyzacja — uczestnicy, spis, zgromadzenie i rada; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrRestr-dzial-V-pomoc-publiczna
+              (Restrukturyzacja — pomoc publiczna i test prywatnego wierzyciela; źródło i procedura, fresh/temporal gate)
   [✓] NOWY  mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow
               (dodany 2026-08-20 — naprawa F-98: ustawa z 16.07.2020
                [Dz.U. 2020 poz. 1298], akt CAŁKOWICIE nieobecny w
@@ -530,35 +517,10 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                art. 145 PrRestr]. ⚠️ [NIEWERYFIKOWANE RZĄD 1] — ISAP
                niedostępny, treść oparta na 4 zgodnych źródłach RZĄD 2/3.
                ⚠️ Numer aktualnego t.j. NIE potwierdzony)
-  [✓] NOWY  mod-PrRestr-dzial-VII-uklad-czesciowy
-              (dodany 2026-08-20 — naprawa F-87, ostatni priorytet z
-               pierwotnego zakresu: Dział VII PrRestr, art. 180-188.
-               Kryteria wyodrębnienia wierzycieli [art. 180, trójwarunkowy
-               test + zakaz manipulacji]; katalog przykładowy
-               wierzytelności [art. 181]; zakaz pokrzywdzenia wierzycieli
-               nieobjętych + bezskuteczność zabezpieczeń przy upadłości
-               w ciągu roku [art. 183]; zastrzeżenia wierzyciela
-               nieobjętego [art. 185]; próg głosowania 2/3, bardziej
-               restrykcyjny niż art. 119 wg doktryny [art. 186]; zakres
-               podmiotowy — art. 166 ust. 1 NIE stosuje się, inaczej niż
-               przy układzie zwykłym [art. 187]; zażalenie wierzyciela
-               nieobjętego ograniczone do zarzutów art. 180/183 [art.
-               188]. ⚠️ [NIEWERYFIKOWANE RZĄD 1]. Rekomendacja: F-87
-               pierwotny zakres W CAŁOŚCI zamknięty — pozostałe segmenty
-               PrRestr [Dział VIII, Tytuł III-IV] kandydują na NOWĄ
-               flagę zamiast rozszerzania F-87)
-  [✓] NOWY  mod-PrRestr-dzial-VI-uklad
-              (dodany 2026-08-14 — naprawa F-69: Dział VI PrRestr,
-               art. 150-179. Przepisy ogólne [150-154, wierzytelności
-               wyłączone z układu — stosunek pracy wymaga zgody],
-               propozycje układowe [155-163, katalog technik
-               restrukturyzacji, ochrona minimum wynagrodzenia],
-               głosowanie i zatwierdzenie [art. 119 — podwójny próg
-               50%/2/3, mechanizm cramdown, test zaspokojenia — nowość
-               23.08.2025, art. 165 — przesłanki odmowy zatwierdzenia
-               w tym kryterium ochrony najlepszych interesów
-               wierzycieli], skutki układu [166 — moc wiążąca mimo
-               pominięcia w spisie])
+  [✓] OK    mod-PrRestr-dzial-VII-uklad-czesciowy
+              (Układ częściowy — wybór wierzycieli, ochrona i głosowanie; źródło i procedura, fresh/temporal gate)
+  [✓] OK    mod-PrRestr-dzial-VI-uklad
+              (Układ — zakres, propozycje, głosowanie, zatwierdzenie i wykonanie; źródło i procedura, fresh/temporal gate)
   [✓] NOWY  mod-ustawa-doradca-restrukturyzacyjny-zawod
               (Dz.U. 2022 poz. 1007 [licencja, sprawdź nowszy t.j.] +
                Pr. upadłościowe Dz.U. 2026 poz. 913 art. 157 + Pr.

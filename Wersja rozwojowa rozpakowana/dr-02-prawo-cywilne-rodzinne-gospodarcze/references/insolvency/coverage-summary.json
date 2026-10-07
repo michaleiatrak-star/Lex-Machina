@@ -1,0 +1,27 @@
+{
+  "laws": {
+    "prup": {
+      "headings": 603,
+      "routed": 603,
+      "unrouted": 0,
+      "statuses": {
+        "POMINIETE_W_TJ": 1,
+        "TEKST_W_TJ": 556,
+        "UCHYLONY": 46
+      }
+    },
+    "prrestr": {
+      "headings": 407,
+      "routed": 407,
+      "unrouted": 0,
+      "statuses": {
+        "POMINIETE_W_TJ": 1,
+        "TEKST_W_TJ": 400,
+        "UCHYLONY": 6
+      }
+    }
+  },
+  "full_commentary": false,
+  "coverage_kind": "PELNY_TEKST_I_ROUTING_PROCEDUR",
+  "supplemental_acts": 11
+}

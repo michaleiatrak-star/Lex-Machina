@@ -43,6 +43,8 @@ Użycie:
     python3 walidator_cytowan.py --document pismo.docx --log sesja.json  (wymaga python-docx)
     python3 walidator_cytowan.py --self-test
 
+Testy jednostkowe: tools/test_walidator_cytowan.py (python3 -m unittest test_walidator_cytowan).
+
 Kod wyjścia: 0 = wszystkie cytaty mają odpowiadające zdarzenie weryfikacji
              1 = co najmniej jedna cytata bez śladu weryfikacji (BLOKADA)
 """

@@ -92,6 +92,7 @@ i przetestowane** (wcześniej ten README tylko je opisywał, bez kodu):
 | Skrypt | Test | Wynik |
 |---|---|---|
 | `walidator_cytowan.py` | syntetyczny .md + .docx + 2 fixture'y `przyklady/` | ✅ wszystkie 4 przypadki poprawne |
+| `walidator_cytowan.py` (3.99.20) | `test_walidator_cytowan.py`: podciąg domeny (`msn.pl`, `sn.pl.evil…`, ścieżka), http, liczba jako całość, pełny identyfikator, sygnatura różna literą izby, ID ISAP; `--self-test` | ✅ 7/7 + 14/14; fixture'y `przyklady/` bez zmiany wyniku |
 | `extract_api_verification_log.py` | self-test: konwersacja z web_fetch + web_search + 1 wywołanie bez wyniku | ✅ 2/2 zdarzenia poprawnie wydobyte, wywołanie bez wyniku poprawnie pominięte |
 | `export_gate.py` | self-test end-to-end: 2 powołania, 1 zweryfikowane w konwersacji, 1 nie | ✅ poprawna blokada (exit 1) ze wskazaniem dokładnego powołania; test ścieżki pozytywnej (wszystko zweryfikowane, exit 0) wykonany osobno, PASS |
 

@@ -1,0 +1,3 @@
+
+# Preserve official PDF bytes, including older ASCII-encoded PDFs.
+*.pdf binary

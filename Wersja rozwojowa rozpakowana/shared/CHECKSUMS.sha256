@@ -111,7 +111,7 @@ ac704f746a5c924b3da72d440b45a90b249d02c522292c1b094d59a88fa168ee  ./QUALITY-CHEC
 23161c3eb34f2881bf18b967986f135025a797d64d1df3a00eefb790ceac6c3e  ./SAMORZADY-ZAWODOWE-DOKUMENTY.md
 ba18bee0f9e85d8f1ed59e1ae8f088783356cfcdb6e23a96cfec06b772443158  ./SCHEMAT-ODPOWIEDZI-MCP.md
 0f16dc99652c571a564134018a4ad2e9a32b146d497ee16a623567e60b703d28  ./SELF-CHECK-ANTY-FASADA.md
-98471651202a652ad3d1e1ccc4a09cc704880de33ea44c84d16a610458058813  ./SKILL.md
+13bb99b20e383c265e33f6441b9b55d902dc34d828c1673b3a48a1e17dcf9844  ./SKILL.md
 3e9f1de4c748d486aaf815c77225c5510bac582733fc784319408bb29853e4b7  ./SOCIAL-SECURITY-LAW-STANDARD.md
 6c054870d323d16cede19104aec6dbbde588d37b25e63787545f88a4a7644c5e  ./STALKING-NEKANIE.md
 b085584d1988a37a6728e50773ae3ae3ab070bca8eb6f46684550e57bdb518b9  ./STRATEGIA-PROCESOWA.md
@@ -162,10 +162,10 @@ d5cb4227eec998d3cf60f2a10dc623ed16aacc3c043fdc34c6e956057a1613e9  ./orka-bas-lek
 144e11faee1e8cab5d5816156b8b2ce3db821b6c4966a6fb80477658dab5d449  ./portale-branzowe-rzad-2b/czesc-03-dr10-dr16.md
 4d4b2ba02159b8952b9ed65f9e1ca3312b60b465d111fb525da388f483fe462f  ./portale-branzowe-rzad-2b/czesc-04-ogolne-metodologia.md
 96e652f120086923c723404209817ad85348e09fbcbe9bfea7689b502d37b941  ./raport-sytuacyjny-integracja.md
-9d1d9bfee0f20283b34ccde7f608ba59031464636f530f5039a1ad4bfbcb24e0  ./references/CHANGELOG.md
+75c010b99a4add5ef4397f220be34adc5b5565f8e570621c2e58ae01b8db9316  ./references/CHANGELOG.md
 52609da689a443d57ddfd00c3b3e79d35da778463854149d7a6461dd751e0bb4  ./references/HISTORIA-ZMIAN-PLIKOW.md
 5d772ad2845dbbd58a43a9a95012b8952228dc4dd59d29ee6167bb30c7f6a47c  ./terminy.md
-9f0940f20e4b10a1144e2e14bf7dec23ca1201a294ca02b166679cb9819db31e  ./tools/README.md
+fa68a65a6c22f06ad7e3c639c85f90b48264a23675d69f578e673c90ea5c41a3  ./tools/README.md
 663cc1e444e36cedf07c715891c171b2f6f4077f4f5fc149387c003f6b492cc1  ./tools/adapter_krs_vat.py
 d8850aefa2658379fe0c9a7d6ba35ba20e1e0d99f55ce3df26ca42980f14194d  ./tools/append_event.py
 e380f8c9c87a9fa4c3dec694b4822fc6dd7c85c6c689269fd60b5a1a2c2a477d  ./tools/connector_health_check.py
@@ -175,6 +175,7 @@ b44f877bd34d3fdd1eb8730ba21ae226e3c551fbc280c3359dd8fd12b19520bf  ./tools/export
 31307e9031c88d8974ea512fb05628e40ea49147749b0679dd7261a85e1b7b27  ./tools/graf_przyczynowy.py
 a15ee50bf82c68e2f74f6ead98573dc9c92fcb2e5097fbbe2e30106946223f76  ./tools/hash_chain_verify.py
 3f09f1e34e6c008bdf24a9116323e2303fd0c72045f983de17d1df5417df7e09  ./tools/kontrakt_rachunek.py
+6b240d1dc2249daef42b303495831c4809767784677e8d12a7538b53613f2d5d  ./tools/mcp-servers/mcp-servers-examples.zip
 464bec5a7a22f230c7045e63f3cb7d37f46288de9439d22f65ba95d775d5a7fa  ./tools/przyklad-adapter-normalizujacy.md
 c0ef7a8eeb5f80a2f207f7340d0e8c8378297e30b73f2b010462186e9a1cdce2  ./tools/przyklady/konwersacja_api_przyklad.json
 2ab6d6782765da82d89372681577c35886665f3f21e2ffab28de4419a3dcbcc2  ./tools/przyklady/przyklad_pisma.md
@@ -185,4 +186,5 @@ eacbfc82c6ea6d31722a4804754ef29aca93dfc6d106b08055c9ce2d9412312b  ./tools/test_a
 f8672a6f2a5e8aea61b036bb8405d0a362fcaafa5c3fc8487b43f82e79b4ca35  ./tools/test_eli_art_extract.py
 318b49cdf482e3327d75b411df6360f7648b7a6f6763ac5c69076a600f1ebb15  ./tools/test_kontrakt_rachunek.py
 2870bac23fa28452da2d55637f4e74e820321260bbd5c517e96df4822e80bacf  ./tools/test_mcp_protocol.py
-bef34c9f3a6baa5cf7dbbb12c04bdf6ca8166eb1632986f33a92f649aba5b857  ./tools/walidator_cytowan.py
+93604d8637c356e8ec7b9677e61b4bdcbd0fca7699a0c7397f189aba74d39e61  ./tools/test_walidator_cytowan.py
+97debbaec1a235bd1e38447c14476b2eccd87cc4cd4de93b484d0fe3eeb42763  ./tools/walidator_cytowan.py

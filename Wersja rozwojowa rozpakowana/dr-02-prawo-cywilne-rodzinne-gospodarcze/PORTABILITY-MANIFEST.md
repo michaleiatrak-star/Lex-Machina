@@ -25,3 +25,19 @@ Wydanie po pełnym skanie ścieżek kanonicznych. Aktywne odwołania do nieistni
 - aktywne ścieżki `/mnt/skills/user/...` normalizowane są do kanonicznego `skill/path`;
 - bezpośrednie endpointy dostawców AI w statycznych artefaktach są wyłączone;
 - wydanie podlega skanowi prywatności/secrets oraz manifestowi integralności całego release.
+
+
+## Rozszerzenie PrUp 2026-10-04 (3.62)
+
+Po bazowej migracji dodano źródłowy korpus PrUp, czytnik Python 3 bez zależności
+zewnętrznych i pięć modułów. Odczyt PDF/JSON/Markdown działa również bez Pythona;
+brak Pythona nie upoważnia do pominięcia weryfikacji online. Aktualna integralność
+plików jest w CHECKSUMS.sha256. Nowa treść nie jest deklaracją niezmienności
+merytorycznej z historycznej sekcji „Zakres zmian”.
+
+## Pełne oba korpusy — 2026-10-04
+
+Python 3 (biblioteka standardowa): `scripts/prup.py`, `scripts/prrestr.py`,
+`scripts/insolvency.py`. Bez Pythona czytaj pełne PDF-y i moduły, a świeżość
+sprawdź przez oficjalne ELI narzędziem hosta. Wszystkie ścieżki są względne
+wobec katalogu skilla; aktualny katalog roboczy nie wpływa na odczyt.
