@@ -1,0 +1,39 @@
+[
+ {
+  "id": 4,
+  "href": "https://www.saos.org.pl/api/judgments/4",
+  "courtType": "COMMON",
+  "courtCases": [
+   {
+    "caseNumber": "I ACa 566/12"
+   }
+  ],
+  "judgmentType": "SENTENCE",
+  "judges": [
+   {
+    "name": "Andrzej Struzik",
+    "function": null,
+    "specialRoles": [
+     "PRESIDING_JUDGE"
+    ]
+   }
+  ],
+  "textContent": " odszkodowania, kwoty po 600 zł. tytułem renty kwoty 80.000 zł. tytułem <em>zadośćuczynienia</em> za doznaną krzywdę. Podstawą zgłoszonego przez powoda roszczenia było twierdzenie, że na skutek potrącenia go w dniu 29",
+  "keywords": [
+   "odszkodowanie"
+  ],
+  "division": {
+   "href": "https://www.saos.org.pl/api/ccDivisions/816",
+   "id": 816,
+   "name": "I Wydział Cywilny",
+   "code": "0000503",
+   "court": {
+    "href": "https://www.saos.org.pl/api/commonCourts/123",
+    "id": 123,
+    "code": "15200000",
+    "name": "Sąd Apelacyjny w Krakowie"
+   }
+  },
+  "judgmentDate": "2012-08-22"
+ }
+]

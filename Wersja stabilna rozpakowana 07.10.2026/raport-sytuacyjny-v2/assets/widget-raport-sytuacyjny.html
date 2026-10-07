@@ -1,0 +1,128 @@
+<!-- widget-raport-sytuacyjny.html — raport-sytuacyjny-v2, widget zasilany blueprintem (schemat: SKILL.md § BLUEPRINT JSON,
+     z polami rozszerzonymi). Host obsługujący show_widget z polem `data` (Lex Machina):
+     show_widget(path="raport-sytuacyjny-v2/assets/widget-raport-sytuacyjny.html", data=BLUEPRINT) — bez przepisywania kodu;
+     host dokłada pasek eksportu/importu. Inne hosty: podmień literał po komentarzu „lex:dane”.
+     Treść jako tekst (bez HTML z danych). Pola zakładki Sprawa są edytowalne; eksport zapisuje poprawione dane. -->
+<style>
+  :root { --b:#d0d7de; --muted:#57606a; --acc:#1B3A6B; --bg2:#f6f8fa; --ok:#e9f7ee; --okb:#16a34a; --mid:#fff4e5; --midb:#d97706; --bad:#fdecec; --badb:#dc2626; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,"Segoe UI",sans-serif; font-size:13px; color:#1f2328; min-width:320px; }
+  .head { padding:12px 16px; border-bottom:1px solid var(--b); display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; align-items:center; }
+  .head h2 { margin:0; font-size:15px; color:var(--acc); }
+  .tabs { display:flex; overflow-x:auto; border-bottom:1px solid var(--b); }
+  .tab { padding:8px 12px; cursor:pointer; white-space:nowrap; color:var(--muted); border-bottom:2px solid transparent; }
+  .tab.active { color:var(--acc); border-bottom-color:var(--acc); font-weight:600; }
+  .panel { display:none; padding:12px 16px; } .panel.active { display:block; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px 14px; }
+  label { display:block; font-size:11px; color:var(--muted); margin-bottom:2px; }
+  input, textarea, select { width:100%; font:inherit; padding:5px 7px; border:1px solid var(--b); border-radius:5px; }
+  textarea { min-height:52px; resize:vertical; }
+  .card { border:1px solid var(--b); border-radius:8px; padding:9px 12px; margin-bottom:8px; background:#fff; }
+  .P1, .bad { border-left:3px solid var(--badb); background:var(--bad); } .P2, .mid { border-left:3px solid var(--midb); background:var(--mid); } .P3 { border-left:3px solid var(--b); background:var(--bg2); }
+  .badge { display:inline-block; font-size:11px; padding:1px 7px; border-radius:10px; border:1px solid var(--b); background:var(--bg2); margin-right:4px; }
+  .sA { background:var(--ok); border-color:var(--okb); } .sC, .sD { background:var(--mid); border-color:var(--midb); } .sE { background:var(--bad); border-color:var(--badb); }
+  table { width:100%; border-collapse:collapse; } th, td { border:1px solid var(--b); padding:5px 7px; text-align:left; vertical-align:top; } th { background:var(--bg2); font-size:12px; }
+  .muted { color:var(--muted); font-size:12px; } .empty { color:var(--muted); font-style:italic; }
+  .cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; margin-bottom:10px; }
+  button.act { border:1px solid var(--acc); background:#fff; color:var(--acc); border-radius:6px; padding:5px 10px; cursor:pointer; margin:4px 6px 0 0; font:inherit; }
+  .bar { height:7px; background:#e6e2da; border-radius:4px; overflow:hidden; } .bar > div { height:100%; background:var(--acc); }
+</style>
+<div class="head"><h2 id="w-tytul">Raport sytuacyjny sprawy</h2><span id="w-meta" class="muted"></span></div>
+<div class="tabs" id="w-tabs"></div>
+<div id="t1" class="panel"></div><div id="t2" class="panel"></div><div id="t3" class="panel"></div><div id="t4" class="panel"></div>
+<div id="t5" class="panel"></div><div id="t6" class="panel"></div><div id="t7" class="panel"></div>
+<script>
+const BLUEPRINT = /* lex:dane */ {
+  tryb: "C", przepis: "art. 415 KC (dane przykładowe, fikcyjne)", czyn: "roszczenie odszkodowawcze", etap: "przedsądowy", dziedzina: "cywilne",
+  sygnatura: null, termin: null, pilnosc: "normalna", confidence: 50, uwagi_pewnosci: "", s1rola: "powód", s1opis: "", s2rola: "pozwany", s2opis: "",
+  zdarzenie: "Opis zdarzenia.", skutki: null, p1lbl: "wygranie", p1pct: 50, p1opis: null, p2lbl: null, p2pct: 0, p2war: null,
+  sources: [], dowody: [], risk_map: [], conflicts: [], chronologia: [], procedural_recommendations: [], nastepnyKrok: null
+};
+(function () {
+  const D = BLUEPRINT || {};
+  const $ = (id) => document.getElementById(id);
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null && text !== "") e.textContent = String(text); return e; }
+  function empty(p, t) { p.appendChild(el("p", "empty", t)); }
+  function list(v) { return Array.isArray(v) ? v : []; }
+  function prompt(t) { if (typeof window.sendPrompt === "function") window.sendPrompt(t); }
+  function table(parent, rows, cols) {
+    const tb = el("table"); const h = el("tr"); cols.forEach(function (c) { h.appendChild(el("th", "", c[1])); }); tb.appendChild(h);
+    rows.forEach(function (r) { const tr = el("tr"); cols.forEach(function (c) { const td = el("td"); const v = r[c[0]];
+      if (c[2]) c[2](td, v, r); else td.textContent = v === null || v === undefined ? "—" : String(v); tr.appendChild(td); }); tb.appendChild(tr); });
+    parent.appendChild(tb);
+  }
+  const TABS = ["Sprawa", "Chronologia", "Źródła", "Ryzyka", "Luki i sprzeczności", "Rekomendacje", "Historia strategii"];
+  TABS.forEach(function (n, i) { const t = el("div", "tab", n); t.onclick = function () { show(i + 1); }; $("w-tabs").appendChild(t); });
+  function show(n) { for (let i = 1; i <= 7; i++) { $("t" + i).classList.toggle("active", i === n); $("w-tabs").children[i - 1].classList.toggle("active", i === n); } }
+  $("w-meta").textContent = [D.sygnatura ? "sygn. " + D.sygnatura : "", D.etap, D.pilnosc ? "pilność: " + D.pilnosc : ""].filter(Boolean).join(" · ");
+
+  // 1 — sprawa (edytowalna; zmiany trafiają do eksportu)
+  const t1 = $("t1"); const grid = el("div", "grid");
+  [["przepis", "Przepis"], ["czyn", "Roszczenie / czyn"], ["etap", "Etap"], ["dziedzina", "Dziedzina"], ["sygnatura", "Sygnatura"], ["termin", "Termin"],
+   ["pilnosc", "Pilność"], ["s1rola", "Strona 1 — rola"], ["s1opis", "Strona 1 — opis"], ["s2rola", "Strona 2 — rola"], ["s2opis", "Strona 2 — opis"]].forEach(function (f) {
+    const box = el("div"); box.appendChild(el("label", "", f[1])); const inp = el("input"); inp.value = D[f[0]] === null || D[f[0]] === undefined ? "" : D[f[0]];
+    inp.oninput = function () { D[f[0]] = inp.value.trim() || null; }; box.appendChild(inp); grid.appendChild(box); });
+  t1.appendChild(grid);
+  [["zdarzenie", "Zdarzenie (stan faktyczny)"], ["skutki", "Skutki"]].forEach(function (f) { const box = el("div"); box.style.marginTop = "8px";
+    box.appendChild(el("label", "", f[1])); const ta = el("textarea"); ta.value = D[f[0]] || ""; ta.oninput = function () { D[f[0]] = ta.value.trim() || null; }; box.appendChild(ta); t1.appendChild(box); });
+  const pr = el("div", "card"); pr.style.marginTop = "10px";
+  [["p1lbl", "p1pct", "p1opis"], ["p2lbl", "p2pct", "p2war"]].forEach(function (k) { if (!D[k[0]]) return; pr.appendChild(el("div", "", D[k[0]] + ": " + (Number(D[k[1]]) || 0) + "%"));
+    const b = el("div", "bar"); const f = el("div"); f.style.width = Math.max(0, Math.min(100, Number(D[k[1]]) || 0)) + "%"; b.appendChild(f); pr.appendChild(b); if (D[k[2]]) pr.appendChild(el("div", "muted", D[k[2]])); });
+  const pew = D.poziomPewnosciRaportu !== undefined ? D.poziomPewnosciRaportu + "/10" : (D.confidence !== undefined ? D.confidence + "%" : null);
+  if (pew) pr.appendChild(el("div", "muted", "Pewność raportu: " + pew + (D.uwagi_pewnosci ? " — " + D.uwagi_pewnosci : "")));
+  if (pr.children.length) t1.appendChild(pr);
+  list(D.ograniczeniaRaportu).forEach(function (o) { t1.appendChild(el("div", "card mid", "Ograniczenie: " + o)); });
+
+  // 2 — chronologia
+  const chron = list(D.chronologia).length ? D.chronologia : list(window._chronologiaData);
+  if (chron.length) table($("t2"), chron, [["data", "Data"], ["zdarzenie", "Zdarzenie"], ["zrodlo", "Źródło"], ["status_zrodla", "Status źródła"], ["znaczenie_procesowe", "Znaczenie"], ["ryzyko", "Ryzyko"]]);
+  else empty($("t2"), "Brak chronologii.");
+
+  // 3 — źródła i dowody
+  const t3 = $("t3"); const statusCell = function (td, v) { const s = String(v || "").charAt(0); td.appendChild(el("span", "badge s" + s, v || "—")); };
+  if (list(D.ustaleniaZeStatusemZrodla).length) { t3.appendChild(el("strong", "", "Ustalenia ze statusem źródła"));
+    D.ustaleniaZeStatusemZrodla.forEach(function (u) { t3.appendChild(el("div", "card", typeof u === "object" ? Object.keys(u).map(function (k) { return k + ": " + u[k]; }).join(" · ") : u)); }); }
+  if (list(D.sources).length) table(t3, D.sources, [["status", "Status", statusCell], ["type", "Typ"], ["name", "Opis"], ["impact", "Wpływ"], ["ryzyko", "Ryzyko"]]);
+  if (list(D.dowody).length) { t3.appendChild(el("strong", "", "Dowody")); table(t3, D.dowody, [["poziom", "Poziom", statusCell], ["opis", "Opis"], ["typ", "Typ"], ["zrodlo", "Źródło"], ["ryzyko", "Ryzyko"]]); }
+  if (!t3.children.length) empty(t3, "Brak źródeł.");
+  t3.appendChild(el("p", "muted", "Statusy: A — źródło bezpośrednie · B — pośrednie · C — twierdzenie strony · D — luka dowodowa · E — sprzeczność"));
+
+  // 4 — ryzyka (priorytety aspektów nad mapą)
+  const t4 = $("t4"); const PA = D.priorytetyAspektow || {};
+  if (list(PA.aspekty_glowne).length || list(PA.aspekty_poboczne).length) {
+    const cols = el("div", "cols"); [["Roszczenia główne", PA.aspekty_glowne], ["Kwestie poboczne", PA.aspekty_poboczne]].forEach(function (c) {
+      const box = el("div", "card"); box.appendChild(el("strong", "", c[0])); const ul = el("ul"); list(c[1]).forEach(function (a) { ul.appendChild(el("li", "", typeof a === "object" ? JSON.stringify(a) : a)); }); box.appendChild(ul); cols.appendChild(box); });
+    t4.appendChild(cols);
+    const met = PA.metody_wybrane || {}; if (Object.keys(met).length) { const m = el("div", "card"); m.appendChild(el("strong", "", "Metody badawcze zastosowane")); Object.keys(met).forEach(function (k) { m.appendChild(el("div", "", k + ": " + met[k])); }); t4.appendChild(m); }
+  }
+  const risks = list(D.mapaRyzyk).map(function (r) { return { p: r.priorytet, name: r.ryzyko, prob: r["prawdopodobieństwo"], imp: r["wpływ"], mit: r["działanie_mitygujące"], kat: r.kategoria, pod: r.podstawa }; })
+    .concat(list(D.risk_map).map(function (r) { return { p: r.level, name: r.name, prob: r.probability, imp: r.wplyw, mit: r.mitigation }; }));
+  risks.sort(function (a, b) { return String(a.p).localeCompare(String(b.p)); }).forEach(function (r) {
+    const c = el("div", "card " + (/^P[123]$/.test(r.p) ? r.p : "P3")); c.appendChild(el("span", "badge", r.p || "P?")); c.appendChild(el("strong", "", r.name || ""));
+    c.appendChild(el("div", "muted", [r.kat, r.prob ? "prawdopodobieństwo: " + r.prob : "", r.imp ? "wpływ: " + r.imp : ""].filter(Boolean).join(" · ")));
+    if (r.pod) c.appendChild(el("div", "", "Podstawa: " + r.pod)); if (r.mit) c.appendChild(el("div", "", "Działanie: " + r.mit)); t4.appendChild(c); });
+  if (!risks.length && !t4.children.length) empty(t4, "Brak ryzyk.");
+
+  // 5 — luki i sprzeczności
+  const t5 = $("t5"); const conf = list(D.sprzecznosciILuki).concat(list(D.conflicts));
+  conf.forEach(function (s) { const c = el("div", "card " + (s.znaczenie === "wysokie" ? "bad" : s.znaczenie === "średnie" ? "mid" : ""));
+    c.appendChild(el("strong", "", s.punkt || s.type || "Sprzeczność")); [["Wersja 1", s.wersja_1], ["Wersja 2", s.wersja_2], ["Opis", s.opis], ["Znaczenie", s.znaczenie], ["Rekomendacja", s.rekomendacja]]
+      .forEach(function (x) { if (x[1]) c.appendChild(el("div", "", x[0] + ": " + x[1])); }); t5.appendChild(c); });
+  if (!conf.length) empty(t5, typeof D.sprzecznosciILuki === "string" ? D.sprzecznosciILuki : "Nie wykryto sprzeczności w dostarczonym materiale.");
+
+  // 6 — rekomendacje + następne kroki
+  const t6 = $("t6"); const rec = list(D.rekomendacjeProcesowe).concat(list(D.procedural_recommendations));
+  rec.forEach(function (r) { const c = el("div", "card"); c.appendChild(el("div", "", typeof r === "object" ? (r.text || r.rekomendacja || JSON.stringify(r)) : r));
+    if (r && r.deadline) c.appendChild(el("div", "muted", "Termin: " + r.deadline)); t6.appendChild(c); });
+  if (!rec.length) empty(t6, "Brak rekomendacji.");
+  if (D.nastepnyKrok) t6.appendChild(el("div", "card mid", "Następny krok: " + D.nastepnyKrok));
+  [D.nastepnyKrok, "Przygotuj pismo w tej sprawie", "Przeanalizuj dowody", "Odśwież raport sytuacyjny"].filter(Boolean).forEach(function (t) { const b = el("button", "act", t); b.onclick = function () { prompt(t); }; t6.appendChild(b); });
+
+  // 7 — historia strategii
+  const t7 = $("t7"); const H = D.historiaStrategii || {};
+  if (list(H.wersje).length) H.wersje.forEach(function (w, i) { const c = el("div", "card"); c.appendChild(el("strong", "", "Wersja " + (w.wersja || i + 1) + (w.data ? " — " + w.data : "")));
+    Object.keys(w).filter(function (k) { return ["wersja", "data"].indexOf(k) < 0; }).forEach(function (k) { const v = w[k]; c.appendChild(el("div", "", k + ": " + (typeof v === "object" ? JSON.stringify(v) : v))); }); t7.appendChild(c); });
+  else empty(t7, "Brak zapisanej historii dla tej sprawy.");
+  show(1);
+})();
+</script>

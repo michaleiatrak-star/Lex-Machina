@@ -1,0 +1,25 @@
+[
+ {
+  "id": 112224,
+  "href": "https://www.saos.org.pl/api/judgments/112224",
+  "courtType": "NATIONAL_APPEAL_CHAMBER",
+  "courtCases": [
+   {
+    "caseNumber": "KIO/UZP 2/07"
+   }
+  ],
+  "judgmentType": "DECISION",
+  "judges": [
+   {
+    "name": "Bettman Barbara",
+    "function": null,
+    "specialRoles": [
+     "PRESIDING_JUDGE"
+    ]
+   }
+  ],
+  "textContent": " postępowanie odwoławcze 2. nakazać Urzędowi <em>Zamówień</em> Publicznych zwrot z rachunku dochodów własnych Urzędu <em>Zamówień</em> Publicznych na rzecz MERCURY ENGINEERING Polska Sp. z o.o., Warszawa, ul. W. Rzymowskiego 53 ... : xxx)1. 3. kosztami postępowania obciąża xxx i nakazuje2: 1) zaliczyć na rzecz Urzędu <em>Zamówień</em> Publicznych koszty w wysokości 0 zł 0 gr (słownie: xxx) z kwoty",
+  "keywords": [],
+  "judgmentDate": "2007-12-10"
+ }
+]

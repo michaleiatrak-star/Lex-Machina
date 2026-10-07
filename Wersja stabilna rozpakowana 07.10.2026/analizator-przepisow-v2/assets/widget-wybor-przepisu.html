@@ -1,0 +1,99 @@
+<!-- widget-wybor-przepisu.html — analizator-przepisow-v2, Krok 0.3 (WIDGET WYBORU PRZEPISU).
+     Stały formularz bez danych sprawy: show_widget(path="analizator-przepisow-v2/assets/widget-wybor-przepisu.html").
+     Przycisk wysyła polecenie analizy przez sendPrompt; bez sendPrompt pokazuje gotowe polecenie do skopiowania. -->
+<style>
+  :root { --primary:#1B3A6B; --accent:#C8960C; --bg:#F8F7F4; --success:#16a34a; --danger:#dc2626; --warn:#d97706; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Segoe UI",system-ui,sans-serif; background:var(--bg); color:#1f2328; min-width:320px; }
+  .wrap { padding:14px 16px; }
+  h2 { margin:0 0 12px; font-size:16px; color:var(--primary); }
+  fieldset { border:1px solid #d8d4cc; border-radius:8px; padding:10px 12px; margin:0 0 12px; background:#fff; }
+  legend { font-size:12px; font-weight:700; color:var(--primary); padding:0 4px; text-transform:uppercase; letter-spacing:.04em; }
+  label { display:block; font-size:12px; color:#57606a; margin:6px 0 3px; }
+  select, input[type=text], input[type=date], textarea { width:100%; padding:6px 8px; border:1px solid #c9c4ba; border-radius:6px; font:inherit; font-size:13px; background:#fff; }
+  textarea { min-height:70px; resize:vertical; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; } .row > div { flex:1 1 200px; }
+  .preview { font-size:13px; margin-top:4px; color:var(--primary); font-weight:600; min-height:18px; }
+  .badges { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .badge { border:1px solid var(--accent); color:#7a5a06; background:#fff8e6; border-radius:12px; padding:2px 9px; font-size:12px; cursor:pointer; }
+  .badge:hover { background:#ffefc2; }
+  .check { display:flex; align-items:center; gap:6px; font-size:13px; color:#1f2328; }
+  .state { font-size:12px; color:#57606a; margin-top:6px; }
+  button.go { background:var(--primary); color:#fff; border:0; border-radius:8px; padding:9px 16px; font-size:14px; cursor:pointer; }
+  button.go:disabled { background:#9aa6b8; cursor:not-allowed; }
+  .fallback { display:none; margin-top:10px; font-size:12px; background:#fff; border:1px dashed var(--accent); border-radius:6px; padding:8px; white-space:pre-wrap; }
+</style>
+<div class="wrap">
+  <h2>Analizator Przepisów Prawnych v2</h2>
+  <fieldset><legend>1. Identyfikacja przepisu</legend>
+    <div class="row">
+      <div><label for="akt">Kodeks / akt prawny</label>
+        <select id="akt">
+          <option value="">— wybierz —</option>
+          <optgroup label="Prawo cywilne"><option>KC</option><option>KPC</option><option>KRO</option><option>KSH</option></optgroup>
+          <optgroup label="Prawo karne"><option>KK</option><option>KPK</option><option>KKW</option><option>KW</option><option>KPW</option></optgroup>
+          <optgroup label="Prawo administracyjne"><option>KPA</option><option>PPSA</option><option>OP</option></optgroup>
+          <optgroup label="Prawo pracy"><option>KP</option></optgroup>
+          <optgroup label="Inne ustawy"><option>uVAT</option><option>uPIT</option><option>uCIT</option><option>PrBud</option><option>RODO</option><option>UODO</option><option value="inne">inne…</option></optgroup>
+        </select>
+        <input type="text" id="akt-inne" placeholder="nazwa aktu" style="display:none;margin-top:6px">
+      </div>
+      <div><label for="art">Numer artykułu</label>
+        <input type="text" id="art" placeholder="np. 415 lub 23 ust. 1 pkt 2">
+        <div class="preview" id="podglad"></div>
+      </div>
+    </div>
+    <div class="badges" id="szybkie"></div>
+  </fieldset>
+  <fieldset><legend>2. Parametry</legend>
+    <div class="row">
+      <div><label for="cel">Cel analizy</label>
+        <select id="cel"><option>czy stosuje się</option><option>wykładnia przesłanek</option><option>linia orzecznicza</option><option>stan historyczny</option><option>zbieg norm</option><option>tryb karny</option><option>tryb administracyjny</option><option selected>pełna analiza</option></select></div>
+      <div><label for="typ">Typ sprawy</label>
+        <select id="typ"><option>cywilna</option><option>karna</option><option>administracyjna</option><option>pracownicza</option><option>podatkowa</option><option>gospodarcza</option></select></div>
+    </div>
+  </fieldset>
+  <fieldset><legend>3. Data stanu prawnego</legend>
+    <label class="check"><input type="checkbox" id="hist"> Data historyczna</label>
+    <input type="date" id="data" style="display:none;margin-top:6px">
+    <div class="state" id="stan">Stan prawny: aktualny (dziś)</div>
+  </fieldset>
+  <fieldset><legend>4. Stan faktyczny</legend>
+    <textarea id="fakty" placeholder="Opisz swoją sytuację..."></textarea>
+  </fieldset>
+  <button class="go" id="go" disabled>Analizuj przepis</button>
+  <div class="fallback" id="fallback"></div>
+</div>
+<script>
+(function () {
+  var SZYBKIE = { KC: ["415", "471", "448", "23", "446"], KPC: ["840", "843", "189", "193", "730"], KK: ["278", "286", "190", "193", "177"], KP: ["52", "55", "183a", "94"], KRO: ["56", "58", "61¹"] };
+  var $ = function (id) { return document.getElementById(id); };
+  function akt() { return $("akt").value === "inne" ? $("akt-inne").value.trim() : $("akt").value; }
+  function odswiez() {
+    var a = akt(), n = $("art").value.trim();
+    $("podglad").textContent = a && n ? "art. " + n + " " + a : "";
+    $("go").disabled = !(a && n);
+    $("akt-inne").style.display = $("akt").value === "inne" ? "block" : "none";
+    $("data").style.display = $("hist").checked ? "block" : "none";
+    $("stan").textContent = $("hist").checked && $("data").value ? "Stan prawny: historyczny " + $("data").value : "Stan prawny: aktualny (dziś)";
+    var box = $("szybkie"); box.textContent = "";
+    Object.keys(SZYBKIE).forEach(function (k) {
+      if (a && a !== k) return;
+      SZYBKIE[k].forEach(function (nr) {
+        var b = document.createElement("span"); b.className = "badge"; b.textContent = k + " " + nr;
+        b.onclick = function () { $("akt").value = k; $("art").value = nr; odswiez(); };
+        box.appendChild(b);
+      });
+    });
+  }
+  ["akt", "akt-inne", "art", "hist", "data"].forEach(function (id) { $(id).addEventListener("input", odswiez); $(id).addEventListener("change", odswiez); });
+  $("go").onclick = function () {
+    var data = $("hist").checked && $("data").value ? $("data").value : "aktualny (dziś)";
+    var tekst = "Analizuj " + akt() + " art. " + $("art").value.trim() + ". Cel: " + $("cel").value + ". Typ sprawy: " + $("typ").value +
+      ". Stan prawny na: " + data + ". Stan faktyczny: " + ($("fakty").value.trim() || "brak");
+    if (typeof window.sendPrompt === "function") window.sendPrompt(tekst);
+    else { $("fallback").style.display = "block"; $("fallback").textContent = "Skopiuj polecenie do rozmowy:\n" + tekst; }
+  };
+  odswiez();
+})();
+</script>

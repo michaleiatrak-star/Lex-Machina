@@ -1,0 +1,37 @@
+[
+ {
+  "id": 76329,
+  "href": "https://www.saos.org.pl/api/judgments/76329",
+  "courtType": "SUPREME",
+  "courtCases": [
+   {
+    "caseNumber": "II PK 291/09"
+   }
+  ],
+  "judgmentType": "SENTENCE",
+  "judges": [
+   {
+    "name": "Bogusław Cudowski",
+    "function": null,
+    "specialRoles": []
+   }
+  ],
+  "textContent": "Wyrok z dnia 7 kwietnia 2010 r. II PK 291/09 Pracownik nie ma interesu prawnego w ustaleniu, że dopuszczono się wobec niego mobbingu (art. 189 oraz art. 943 § 1 i 2 k.p.), jeżeli może wystąpić z roszczeniami o ochronę dóbr osobistych (art. 24 k.c. i art. 111 k.p.). Przewodniczący SSN Roman Kuczyński, Sędziowie SN: Bogusław Cudowski, Romualda Spyt (sprawozdawca). Sąd Najwyższy, po rozpoznaniu na po",
+  "keywords": [],
+  "personnelType": "THREE_PERSON",
+  "judgmentForm": "wyrok SN",
+  "division": {
+   "href": "https://www.saos.org.pl/api/scDivisions/7",
+   "id": 7,
+   "name": "Wydział II",
+   "chambers": [
+    {
+     "href": "https://www.saos.org.pl/api/scChambers/3",
+     "id": 3,
+     "name": "Izba Pracy, Ubezpieczeń Społecznych i Spraw Publicznych"
+    }
+   ]
+  },
+  "judgmentDate": "2010-04-07"
+ }
+]

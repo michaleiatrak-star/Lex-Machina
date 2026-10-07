@@ -1,0 +1,79 @@
+<!-- widget-analiza.html — analiza-sadowa-v6 TRYB B, widget zasilany danymi.
+     show_widget(path="analiza-sadowa-v6/assets/widget-analiza.html", data=DANE) — bez przepisywania kodu.
+     DANE: pola sprawy (syg, sad, rodzaj, klient, rola, przeciwnik, etap, wartosc, przepis, znamiona, notatki)
+     + zakladki: {intake, przejscie1, przejscie2, przejscie3, przejscie4, dowody, filtry, orzecznictwo, koszty, raport}.
+     Wartość zakładki: tekst | lista tekstów | lista obiektów (tabela) | obiekt {podtytuł: wartość}. -->
+<style>
+  :root { --as-fg: var(--color-text-primary, #1f2a24); --as-muted: var(--color-text-secondary, #5d6a62);
+          --as-line: var(--color-border-tertiary, #dfe5e0); --as-soft: var(--color-background-secondary, #f4f7f4); --as-accent: #2d4a6b; }
+  #as { font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--as-fg); padding: 12px; }
+  #as h1 { font-size: 18px; margin: 0 0 2px; color: var(--as-accent); }
+  #as .meta { color: var(--as-muted); font-size: 12px; margin-bottom: 10px; }
+  #as nav { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid var(--as-line); margin-bottom: 12px; }
+  #as nav button { border: 0; background: none; padding: 7px 10px; cursor: pointer; color: var(--as-muted); border-bottom: 2px solid transparent; font: inherit; font-size: 13px; }
+  #as nav button.on { color: var(--as-accent); border-bottom-color: var(--as-accent); font-weight: 600; }
+  #as h3 { font-size: 14px; margin: 14px 0 6px; color: var(--as-accent); }
+  #as table { border-collapse: collapse; width: 100%; font-size: 13px; margin: 4px 0 10px; }
+  #as th, #as td { border: 1px solid var(--as-line); padding: 5px 8px; text-align: left; vertical-align: top; }
+  #as th { background: var(--as-soft); }
+  #as .empty { color: var(--as-muted); font-style: italic; }
+  #as .st-SPEŁNIONE, #as .st-SPELNIONE { color: #2e6b3a; font-weight: 600; }
+  #as .st-NIESPEŁNIONE, #as .st-NIESPELNIONE { color: #a32d2d; font-weight: 600; }
+  #as .st-WĄTPLIWE, #as .st-WATPLIWE, #as .st-BRAK { color: #8a5a0b; font-weight: 600; }
+  #as .next { margin-top: 12px; border: 1px solid var(--as-accent); background: none; color: var(--as-accent); border-radius: 6px; padding: 6px 12px; cursor: pointer; font: inherit; }
+  #as p { margin: 4px 0; white-space: pre-wrap; }
+</style>
+<div id="as"></div>
+<script>
+const ANALIZA = /* lex:dane */ {"syg":null,"sad":null,"rodzaj":null,"klient":null,"rola":null,"przeciwnik":null,"etap":null,"wartosc":null,"przepis":null,"znamiona":[],"notatki":null,"zakladki":{}};
+
+(function () {
+  const D = ANALIZA || {};
+  const Z = D.zakladki || {};
+  const root = document.getElementById("as");
+  const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const label = (k) => String(k).replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase());
+  const cell = (k, v) => {
+    const text = v == null ? "" : typeof v === "object" ? JSON.stringify(v) : String(v);
+    const cls = /status|stan|ocena/i.test(k) ? ` class="st-${esc(text.split(/\s/)[0].toUpperCase())}"` : "";
+    return `<td${cls}>${esc(text)}</td>`;
+  };
+  const render = (v) => {
+    if (v == null || v === "" || (Array.isArray(v) && !v.length)) return '<p class="empty">Brak danych.</p>';
+    if (typeof v !== "object") return `<p>${esc(v)}</p>`;
+    if (Array.isArray(v)) {
+      if (v.every((x) => x == null || typeof x !== "object")) return `<ul>${v.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      const cols = [...new Set(v.flatMap((x) => (x && typeof x === "object" && !Array.isArray(x) ? Object.keys(x) : [])))];
+      return `<table><thead><tr>${cols.map((c) => `<th>${esc(label(c))}</th>`).join("")}</tr></thead><tbody>${
+        v.map((row) => `<tr>${cols.map((c) => cell(c, row && row[c])).join("")}</tr>`).join("")}</tbody></table>`;
+    }
+    return Object.entries(v).map(([k, x]) => `<h3>${esc(label(k))}</h3>${render(x)}`).join("");
+  };
+  const intake = () => {
+    const pola = [["syg", "Sygnatura"], ["sad", "Sąd"], ["rodzaj", "Rodzaj sprawy"], ["klient", "Klient"], ["rola", "Rola klienta"],
+      ["przeciwnik", "Przeciwnik"], ["etap", "Etap"], ["wartosc", "Wartość przedmiotu sporu"], ["przepis", "Przepis"]];
+    const rows = pola.filter(([k]) => D[k] != null && D[k] !== "").map(([k, l]) => `<tr><th>${esc(l)}</th><td>${esc(D[k])}</td></tr>`).join("");
+    return (rows ? `<table>${rows}</table>` : "") +
+      (D.znamiona && D.znamiona.length ? `<h3>Znamiona / przesłanki</h3>${render(D.znamiona)}` : "") +
+      (D.notatki ? `<h3>Notatki</h3>${render(D.notatki)}` : "") +
+      (Z.intake ? render(Z.intake) : "") || '<p class="empty">Brak danych.</p>';
+  };
+  const TABS = [["intake", "Intake"], ["przejscie1", "Przejście I"], ["przejscie2", "Przejście II"], ["przejscie3", "Przejście III+W1"],
+    ["przejscie4", "Przejście IV+WO"], ["dowody", "Dowody"], ["filtry", "Filtry"], ["orzecznictwo", "Orzecznictwo"], ["koszty", "Koszty"], ["raport", "Raport"]];
+  let active = "przejscie1";
+  const draw = () => {
+    const i = TABS.findIndex(([k]) => k === active);
+    const next = TABS[i + 1];
+    root.innerHTML = `<h1>Analiza sądowa${D.syg ? ` — ${esc(D.syg)}` : ""}</h1>` +
+      `<div class="meta">${[D.sad, D.rodzaj, D.etap].filter(Boolean).map(esc).join(" · ")}</div>` +
+      `<nav>${TABS.map(([k, l]) => `<button data-tab="${k}" class="${k === active ? "on" : ""}">${esc(l)}</button>`).join("")}</nav>` +
+      `<section>${active === "intake" ? intake() : render(Z[active])}</section>` +
+      (next ? `<button class="next" data-tab="${next[0]}">Dalej: ${esc(next[1])} →</button>` : "");
+  };
+  root.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-tab]");
+    if (t) { active = t.getAttribute("data-tab"); draw(); }
+  });
+  draw();
+})();
+</script>

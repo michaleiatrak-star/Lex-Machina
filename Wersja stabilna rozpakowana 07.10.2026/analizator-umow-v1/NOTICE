@@ -1,0 +1,27 @@
+Lex Machina — analizator-umow-v1
+Licencja projektu: GNU General Public License v3.0 (LICENSE w repozytorium Lex Machina).
+
+Niniejszy skill zawiera materiał zaadaptowany i zmodyfikowany z projektu:
+
+  Polish Commercial Legal (commercial-legal-pl)
+  https://github.com/apiotrowski-afk/commercial-legal-pl
+  Copyright 2026 Kancelaria Radców Prawnych Żurawska Piotrowski i Wspólnicy
+  Licensed under the Apache License, Version 2.0
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Zakres adaptacji: struktura i część sformułowań workflow oraz reguł redakcyjnych
+wskazanych nagłówkiem „Atrybucja (Apache 2.0)” na początku każdego pliku pochodnego.
+Wszystkie te pliki zostały zmienione w ramach Lex Machina (przebudowa pod routing
+modułów, bramki systemu, usunięcie odniesień do konkretnej kancelarii, własne
+uzupełnienia). Zmiany: references/CHANGELOG.md (wpisy 1.22, 1.24, 1.40, 1.41).
+
+Dodatkowo (od 1.41, F-203(a)): katalog `benchmark/posiane-wady/` adaptuje na
+zasadzie Apache 2.0 metodologię i format benchmarku z `examples/benchmark/`
+tego samego projektu (podział na klasy czyste/jawne/ukryte/rachunkowe/
+adwersarialne, format manifestu złotego standardu, protokół sędziego z
+„twardym zerem" zmyśleń). Atrybucja w
+`benchmark/posiane-wady/manifesty/instrukcja-sedziego.md` i
+`benchmark/posiane-wady/README.md`. Same teksty 5 umów testowych oraz treść
+manifestu wad są opracowaniem własnym Lex Machina — oryginalne umowy testowe
+źródłowego projektu są tam celowo wyłączone z publikacji (`.gitignore`
+repozytorium źródłowego) i nie były dostępne do skopiowania ani parafrazy.

@@ -1,0 +1,27 @@
+[
+ {
+  "work": {
+   "type": "uri",
+   "value": "http://publications.europa.eu/resource/cellar/775a4724-2086-4a06-9213-1a4e6489053b"
+  },
+  "title": {
+   "type": "literal",
+   "value": "Dyrektywa 95/46/WE Parlamentu Europejskiego i Rady z dnia 24 października 1995 r. w sprawie ochrony osób fizycznych w zakresie przetwarzania danych osobowych i swobodnego przepływu tych danych"
+  },
+  "date": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#date",
+   "value": "1995-10-24"
+  },
+  "inforce": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#boolean",
+   "value": "0"
+  },
+  "end": {
+   "type": "literal",
+   "datatype": "http://www.w3.org/2001/XMLSchema#date",
+   "value": "2018-05-24"
+  }
+ }
+]

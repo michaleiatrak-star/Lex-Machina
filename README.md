@@ -5,7 +5,7 @@
 **Modułowy system skilli prawniczych AI dla prawa polskiego — z twardymi bramkami antyhalucynacyjnymi**
 
 [![Licencja: GPL v3](https://img.shields.io/badge/Licencja-GPL%20v3-blue.svg)](LICENSE)
-[![Wersja stabilna](https://img.shields.io/badge/stabilna-26.09.2026-2A6F50.svg)](#-wersjonowanie)
+[![Wersja stabilna](https://img.shields.io/badge/stabilna-07.10.2026-2A6F50.svg)](#-wersjonowanie)
 [![Wieloplatformowość](https://img.shields.io/badge/wieloplatformowo%C5%9B%C4%87-stabilna%20%2B%20rozwojowa-2A6F50.svg)](#-kompatybilno%C5%9B%C4%87-llm)
 [![Wersja rozwojowa](https://img.shields.io/badge/rozwojowa-aktywna-orange.svg)](#-wersjonowanie)
 [![Skille](https://img.shields.io/badge/skille-32-8A2BE2.svg)](#-katalog-skilli)
@@ -102,7 +102,7 @@ powołanie przepisu/orzeczenia przechodzi przez bramki `shared/` → wynik z wid
 
 ## 🔌 Kompatybilność LLM
 
-**Obie wersje — stabilna (26.09.2026) i rozwojowa — są w pełni wieloplatformowe.**
+**Obie wersje — stabilna (07.10.2026) i rozwojowa — są w pełni wieloplatformowe.**
 Ten sam zestaw skilli działa na Claude, na hostach zgodnych z OpenAI (**ChatGPT,
 Codex, API, Atlas**) oraz na **Grok**, bez przepisywania metodologii, HARD GATE ani
 bramek jakości. Działanie na **Claude i ChatGPT zostało potwierdzone testami całego
@@ -115,7 +115,7 @@ są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
 > **Grok — automatyczne pobranie z repozytorium.** Grokowi wystarczy **wskazać
 > repozytorium** (URL GitHub) i **którą wersję** ma wziąć — rozwojową
 > (`Wersja rozwojowa rozpakowana/`) albo stabilną
-> (`Wersja stabilna rozpakowana 26.09.2026/`) — obie niosą warstwę
+> (`Wersja stabilna rozpakowana 07.10.2026/`) — obie niosą warstwę
 > host-neutralną. Grok pobiera i instaluje skille
 > samodzielnie, bez ręcznego wgrywania folderów. Reguły sterujące (odpowiednik
 > User Preferences) wskazujesz w jego instrukcjach/personalizacji tak samo jak na
@@ -125,7 +125,7 @@ są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
 
 | Element | Lokalizacja | Rola |
 |---|---|---|
-| Adapter runtime | [`shared/UNIVERSAL-RUNTIME-ADAPTER.md`](Wersja%20stabilna%20rozpakowana%2026.09.2026/shared/UNIVERSAL-RUNTIME-ADAPTER.md) | Jeden kontrakt wykonawczy: mapuje operacje zależne od hosta (`view`, `web_search`, `web_fetch`, `create_file`, `show_widget`) na natywne funkcje hosta lub ich odpowiedniki. |
+| Adapter runtime | [`shared/UNIVERSAL-RUNTIME-ADAPTER.md`](Wersja%20stabilna%20rozpakowana%2007.10.2026/shared/UNIVERSAL-RUNTIME-ADAPTER.md) | Jeden kontrakt wykonawczy: mapuje operacje zależne od hosta (`view`, `web_search`, `web_fetch`, `create_file`, `show_widget`) na natywne funkcje hosta lub ich odpowiedniki. |
 | Manifest OpenAI | `<skill>/agents/openai.yaml` | Rejestracja skilla w ekosystemie OpenAI (`products: chatgpt, codex, api, atlas`) + `allow_implicit_invocation`. |
 | Manifest integralności | `<skill>/PORTABILITY-MANIFEST.md` | Lista plików + SHA-256 — dowód, że przeniesienie między hostami jest bezstratne. |
 | Pole `compatibility:` | frontmatter `SKILL.md` | Deklaruje wymagane operacje hosta (lub równoważne wg adaptera). |
@@ -152,10 +152,8 @@ są traktowane jako semantyka, nie jako wymóg konkretnego API danego dostawcy.
 > wynik merytoryczny, bez żadnej wersji „portowanej" ani osobnej gałęzi kodu. Grok
 > instaluje ten sam zestaw, pobierając go wprost z repozytorium (Krok 6).
 >
-> Jedyna różnica między hostami jest rejestracyjna, nie funkcjonalna: 31 z 32
-> katalogów niesie `agents/openai.yaml`, dzięki czemu pojawia się samodzielnie
-> w katalogu skilli hosta OpenAI; `analizator-dowodow-v3` tego manifestu nie ma,
-> więc uruchamia się przez router zamiast z listy. Analogicznie brak pola
+> Wszystkie 32 katalogi niosą `agents/openai.yaml`, więc każdy skill pojawia się
+> samodzielnie w katalogu skilli hosta OpenAI. Brak pola
 > `compatibility:` w modułach `dr-01` … `dr-16` niczego nie blokuje — wymagane
 > operacje hosta rozstrzyga wtedy adapter runtime.
 
@@ -170,9 +168,9 @@ Lex-Machina/
 ├── DOKUMENTACJA-WDROZENIOWA-2026-07-13.md   ← dokumentacja wdrożeniowa systemu
 ├── claude_desktop_config.json               ← przykładowa konfiguracja konektorów MCP
 ├── benchmark/                               ← wyniki testów na bankach kazusów (per data)
-├── WERSJA STABILNA 26.09.2026/               ← skille spakowane (.zip) — wersja stabilna
+├── WERSJA STABILNA 07.10.2026/               ← skille spakowane (.zip) — wersja stabilna
 ├── WERSJA ROZWOJOWA/                        ← skille spakowane (.zip) — wersja rozwojowa
-├── Wersja stabilna rozpakowana 26.09.2026/   ← źródła skilli — wersja stabilna
+├── Wersja stabilna rozpakowana 07.10.2026/   ← źródła skilli — wersja stabilna
 │                                              (host-neutralna: Claude / OpenAI / Grok)
 └── Wersja rozwojowa rozpakowana/            ← źródła skilli — tu trafiają bieżące zmiany
     ├── shared/                              ← bramki (PRAWO-HARDGATE, SYGNATURY,
@@ -418,7 +416,7 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 > host zgodny z OpenAI (ChatGPT / Codex / API / Atlas) albo Grok. Skille wymagają planu,
 > w którym host udostępnia wgrywanie skilli · przeglądarka — bez instalacji oprogramowania.
 >
-> **Inne hosty:** host-neutralne są **obie wersje — stabilna (26.09.2026) i rozwojowa**
+> **Inne hosty:** host-neutralne są **obie wersje — stabilna (07.10.2026) i rozwojowa**
 > (wspólny [adapter runtime](#-kompatybilno%C5%9B%C4%87-llm)). Kroki 1–4 opisują ścieżkę
 > Claude AI; **Krok 5** — instalację w ChatGPT (hosty zgodne z OpenAI), a **Krok 6** —
 > w Grok, który pobiera skille wprost z repozytorium po wskazaniu wersji. Na każdym
@@ -505,7 +503,7 @@ uruchomić router, dopytać o charakter sprawy i zaproponować przewodnik.
 <details>
 <summary><b>Krok 5 — Instalacja w ChatGPT (host zgodny z OpenAI)</b></summary>
 
-Host-neutralna jest zarówno wersja stabilna (26.09.2026), jak i rozwojowa, więc
+Host-neutralna jest zarówno wersja stabilna (07.10.2026), jak i rozwojowa, więc
 w ChatGPT wgrywa się **te same foldery skilli** i w **tej samej kolejności** co
 w Claude (patrz Krok 2) — z dowolnego z dwóch katalogów wersji. Każdy skill niesie
 manifest `agents/openai.yaml` (`products: chatgpt, codex, api, atlas`) rozpoznawany
@@ -549,7 +547,7 @@ repozytorium**. Wystarczy:
 
    | Wersja | Katalog w repozytorium | Host-neutralna |
    |---|---|---|
-   | 🟢 stabilna (zalecana) | `Wersja stabilna rozpakowana 26.09.2026/` | tak |
+   | 🟢 stabilna (zalecana) | `Wersja stabilna rozpakowana 07.10.2026/` | tak |
    | 🟠 rozwojowa | `Wersja rozwojowa rozpakowana/` | tak |
 
 3. Grok pobiera i instaluje skille automatycznie (zaczynając od `shared/`, potem
@@ -608,7 +606,7 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 
 | Kanał | Lokalizacja | Przeznaczenie |
 |---|---|---|
-| 🟢 **Stabilna** | `WERSJA STABILNA 26.09.2026/` + katalog rozpakowany | do codziennej pracy; **wieloplatformowa** — Claude + ChatGPT/Codex/API/Atlas + Grok |
+| 🟢 **Stabilna** | `WERSJA STABILNA 07.10.2026/` + katalog rozpakowany | do codziennej pracy; **wieloplatformowa** — Claude + ChatGPT/Codex/API/Atlas + Grok |
 | 🟠 **Rozwojowa** | `WERSJA ROZWOJOWA/` + `Wersja rozwojowa rozpakowana/` | nowe mechanizmy przed promocją; ta sama warstwa host-neutralna |
 
 > **Zmiana wobec poprzednich wydań:** do 21.08.2026 warstwa host-neutralna była
@@ -616,6 +614,12 @@ Wskazuj wprost tryb z sekcji „TRYBY WYWOŁANIA" w `audyt-systemu-v4/SKILL.md`:
 > Claude AI. Wraz z wydaniem **8.09.2026 warstwa została promowana do wersji
 > stabilnej** — oba katalogi mają dziś identyczną zawartość, więc wybór kanału nie
 > wpływa już na to, na jakim hoście system zadziała.
+
+> **Wydanie stabilne 07.10.2026** — promocja całej wersji rozwojowej (32 skille, stan
+> z 7.10.2026, m.in. `audyt-systemu-v4` 6.202, `shared` 3.99.16, `prawny-router-v3` 3.67,
+> `prawo-polskie-v2` 6.45). W chwili wydania kanały stabilny i rozwojowy są identyczne;
+> ZIP-y odpowiadają katalogom rozpakowanym bajt w bajt
+> (`scripts/verify_development_archives.py`).
 
 Każda zmiana w systemie jest odnotowana w
 [**dzienniku audytów**](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/references/AUDIT-JOURNAL.md)
