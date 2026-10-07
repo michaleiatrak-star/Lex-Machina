@@ -405,8 +405,17 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 
 | Konektor | Źródło | Status |
 |---|---|---|
-| `mcp-isap` | api.sejm.gov.pl/eli — 96 000+ aktów Dz.U./M.P. | skonfigurowany ([`claude_desktop_config.json`](claude_desktop_config.json)) |
-| SAOS, EUR-Lex/CELLAR, KRS, CEIDG, NBP, SUDOP | przykładowe implementacje | [`shared/tools/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/shared/tools/mcp-servers/) + rekomendacje: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md) |
+| `lex-isap` | api.sejm.gov.pl/eli — akty Dz.U./M.P., status, aktualny t.j. | własny serwer repozytorium |
+| `lex-saos`, `lex-cbosa`, `lex-eurlex`, `lex-eureka`, `lex-krs`, `lex-wl`, `lex-nbp`, `lex-sudop`, `lex-uodo` | orzecznictwo, interpretacje, rejestry, kursy, pomoc publiczna, UODO | własne serwery repozytorium |
+
+Serwery leżą w [`audyt-systemu-v4/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/mcp-servers/) (`dist/lex-mcp.mjs`, zależności wbudowane, bez `npx` i bez pobierania z npm przy starcie).
+
+| Host | Konfiguracja |
+|---|---|
+| Claude Code + marketplace (plugin `audyt-systemu-v4`) | automatycznie — [`.mcp.json` pluginu](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/.mcp.json) instaluje się z wtyczką |
+| Claude Desktop | [`claude_desktop_config.json`](claude_desktop_config.json) — zamień `<KATALOG_REPOZYTORIUM>` na ścieżkę klonu; albo rozszerzenie `lex-machina.mcpb` (`python zbuduj_pakiet.py --mcpb`) |
+
+Rekomendacje: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md).
 
 ---
 
@@ -456,6 +465,18 @@ Kolejność wgrywania:
 
 **Minimalna instalacja:** `shared/` + `prawo-polskie-v2/` + `prawny-router-v3/` +
 `przewodnik-prawny-v2/` + dowolny skill wykonawczy + DR-skille właściwe dla Twojej sprawy.
+</details>
+
+<details>
+<summary><b>Claude Code — marketplace przypięty do tagu</b></summary>
+
+```text
+/plugin marketplace add michaleiatrak-star/Lex-Machina#<TAG>
+/plugin install prawny-router-v3@lex-machina-legal-skills
+```
+
+`#<TAG>` przypina katalog do wydania skilli; bez niego instalujesz bieżący `main` (HEAD).
+Zależności (`shared`, DR-01–DR-16, skille wykonawcze) instalują się razem z routerem.
 </details>
 
 <details>

@@ -77,11 +77,18 @@ export function normalizujOdpowiedzEURLEX(rawBindings, celex) {
     return { status: "NOT_FOUND", query_type: "akt_prawny_ue", source: "eur-lex",
       uwaga: "Brak dzieła o tym numerze CELEX w Cellar. Sprawdź format numeru." };
   }
-  if (rawBindings.length > 1) {
+  // CELEX jest identyfikatorem JEDNOZNACZNYM. Cellar potrafi jednak zwrócić dla jednego
+  // CELEX kilka ?work: obok dzieła z tytułem PL także powiązany zasób bez tytułu (np. inna
+  // manifestacja wyroku TSUE). Zwijamy do dzieł z tytułem — dopiero gdy kilka z nich NADAL ma
+  // tytuł, jest to realna wieloznaczność (AMBIGUOUS). Wcześniej jeden bez tytułu psuł FOUND.
+  const tytulowane = rawBindings.filter((b) => b.title?.value);
+  const efektywne = tytulowane.length ? tytulowane : rawBindings;
+  if (efektywne.length > 1) {
     return { status: "AMBIGUOUS", query_type: "akt_prawny_ue", source: "eur-lex",
-      kandydaci: rawBindings.map((b) => ({ work: b.work?.value, tytul: b.title?.value ?? null })) };
+      kandydaci: efektywne.map((b) => ({ work: b.work?.value, tytul: b.title?.value ?? null })) };
   }
-  const b = rawBindings[0];
+  const b = efektywne[0];
+  const pominiete = rawBindings.length - efektywne.length;
   const status = statusObowiazywania(b.inforce?.value);
   const koniec = b.end?.value && !b.end.value.startsWith("9999") ? b.end.value : null;
   const wynik = {
@@ -104,6 +111,10 @@ export function normalizujOdpowiedzEURLEX(rawBindings, celex) {
   if (status === "uchylony") {
     wynik.uwaga = `⛔ Akt nie obowiązuje${koniec ? ` od dnia następnego po ${koniec}` : ""} ` +
       `(uchylony lub wygasły). Nie powołuj jako prawa obowiązującego.`;
+  }
+  if (pominiete > 0) {
+    wynik.uwaga = `${wynik.uwaga ? wynik.uwaga + " " : ""}` +
+      `Cellar zwrócił też ${pominiete} powiązany zasób bez tytułu PL dla tego CELEX — pominięto.`;
   }
   return wynik;
 }

@@ -17,7 +17,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { sygnal, owinSerwer } from "../wspolne/budzet.mjs";
+import { sygnal, owinSerwer, BudzetWyczerpany } from "../wspolne/budzet.mjs";
 
 const IPO = "https://ipo.trybunal.gov.pl/ipo";
 const OTKZU = "https://otkzu.trybunal.gov.pl";
@@ -256,6 +256,18 @@ const NOTA = "Źródłem jest link do samego orzeczenia w IPO/OTK ZU (tylko źr�
 const odp = (w) => ({ content: [{ type: "text", text: JSON.stringify(w, null, 2) }] });
 const blad = (e) => ({ status: "ERROR", ...baza, detail: String(e?.message ?? e), retrieved_at: new Date().toISOString() });
 
+/** Czy błąd źródła to NIEDOSTĘPNOŚĆ transportu (timeout, wyczerpany budżet, zerwane połączenie, HTTP,
+ * zmiana/nierozpoznanie formularza), a nie rzetelne „sprawdzono, brak orzeczenia”. Taki stan to ERROR
+ * (źródło nie odpowiedziało), nie OUT_OF_SCOPE. Klasyfikacja po typie błędu, nie po treści komunikatu
+ * (zgł. 2026-10-07: „Przekroczony budżet czasu wywołania” nie pasował do regexu i dawał fałszywe OUT_OF_SCOPE). */
+export function bladTransportu(e) {
+  if (e instanceof BudzetWyczerpany) return true;
+  const n = e?.name ?? "";
+  if (n === "TimeoutError" || n === "AbortError") return true;
+  return /HTTP|fetch|abort|timeout|budżet|budzet|rozpozna|nie odpowiada|ECONN|ENOTFOUND|EAI_AGAIN|socket|network|UND_ERR/i
+    .test(String(e?.message ?? e));
+}
+
 const server = owinSerwer(globalThis.__LEX_MCP_WSPOLNY ?? new McpServer({ name: "tk-connector", version: "1.0.0" }));
 
 server.registerTool("tk_sprawdz_sygnature", {
@@ -272,46 +284,51 @@ server.registerTool("tk_sprawdz_sygnature", {
     return odp({ status: "OUT_OF_SCOPE", ...baza, oczekiwana, powod: "SYGNATURA_INNEGO_SADU",
       uwaga: `${oczekiwana} nie ma postaci sygnatury TK (repertorium K, P, SK, U, Kp, Kpt, Pp, Ts, Tw, S bez numeru wydziału).` });
   }
-  const bledy = {};
-  // 1. Karta sprawy IPO pod stałym adresem (źródło urzędowe).
-  try {
-    const sprawa = await ipoSprawa(oczekiwana);
-    if (sprawa) {
-      return odp({ status: "FOUND", ...baza, metoda: "IPO — karta sprawy", oczekiwana,
+  // Trzy urzędowe źródła TK odpytywane RÓWNOLEGLE (nie sekwencyjnie): wolne IPO nie wyczerpuje wtedy
+  // wspólnego budżetu czasu, odbierając szansę OTK ZU i formularzowi IPO (zgł. 2026-10-07: wszystkie trzy
+  // padały kaskadowo na timeout, a wynik był mylnie OUT_OF_SCOPE). Priorytet wyniku zachowany kolejnością.
+  const czas = () => new Date().toISOString();
+  const zrodla = [
+    { klucz: "ipo", async szukaj() {
+      const sprawa = await ipoSprawa(oczekiwana);
+      if (!sprawa) return { brak: "karta sprawy IPO nie zawiera pytanej sygnatury" };
+      return { wynik: odp({ status: "FOUND", ...baza, metoda: "IPO — karta sprawy", oczekiwana,
         result: { sygnatura: oczekiwana, url_orzeczenia: sprawa.dokumenty[0]?.url ?? sprawa.url_sprawy, url_sprawy: sprawa.url_sprawy, dokumenty: sprawa.dokumenty },
         uwaga: "Karta sprawy IPO zawiera pytaną sygnaturę. Przed powołaniem przeczytaj dokument orzeczenia tk_pobierz (z sygnaturą). " + NOTA,
-        retrieved_at: new Date().toISOString() });
-    }
-    bledy.ipo = "karta sprawy IPO nie zawiera pytanej sygnatury";
-  } catch (e) { bledy.ipo = String(e?.message ?? e); }
-  // 2. OTK ZU — urzędowy zbiór orzeczeń (pozycja /{rok}/{A|B}/{poz}).
-  try {
-    const linki = await otkzuSzukaj(oczekiwana);
-    if (linki.length) {
-      return odp({ status: linki.length === 1 ? "FOUND" : "AMBIGUOUS", ...baza, source: "otkzu.trybunal.gov.pl", metoda: "OTK ZU — wyszukiwarka (Sygnatura)", oczekiwana,
+        retrieved_at: czas() }) };
+    } },
+    { klucz: "otkzu", async szukaj() {
+      const linki = await otkzuSzukaj(oczekiwana);
+      if (!linki.length) return { brak: "brak trafienia w wyszukiwarce OTK ZU" };
+      return { wynik: odp({ status: linki.length === 1 ? "FOUND" : "AMBIGUOUS", ...baza, source: "otkzu.trybunal.gov.pl", metoda: "OTK ZU — wyszukiwarka (Sygnatura)", oczekiwana,
         ...(linki.length === 1 ? { result: { sygnatura: oczekiwana, url_orzeczenia: linki[0] } } : { kandydaci: linki.map((url) => ({ sygnatura: oczekiwana, url_orzeczenia: url })) }),
         uwaga: "Pozycja OTK ZU przy pytanej sygnaturze — przed powołaniem przeczytaj ją tk_pobierz (z sygnaturą). " + NOTA,
-        retrieved_at: new Date().toISOString() });
-    }
-    bledy.otkzu = "brak trafienia w wyszukiwarce OTK ZU";
-  } catch (e) { bledy.otkzu = String(e?.message ?? e); }
-  // 3. Formularz JSF IPO (bywa niesprawny).
-  try {
-    const linki = await ipoSzukaj(oczekiwana);
-    if (linki.length) {
-      return odp({ status: linki.length === 1 ? "FOUND" : "AMBIGUOUS", ...baza, metoda: "IPO — formularz wyszukiwarki", oczekiwana,
+        retrieved_at: czas() }) };
+    } },
+    { klucz: "ipo_wyszukiwarka", async szukaj() {
+      const linki = await ipoSzukaj(oczekiwana);
+      if (!linki.length) return { brak: "brak trafienia w formularzu IPO" };
+      return { wynik: odp({ status: linki.length === 1 ? "FOUND" : "AMBIGUOUS", ...baza, metoda: "IPO — formularz wyszukiwarki", oczekiwana,
         ...(linki.length === 1 ? { result: { sygnatura: oczekiwana, url_orzeczenia: linki[0] } } : { kandydaci: linki.map((url) => ({ sygnatura: oczekiwana, url_orzeczenia: url })) }),
         uwaga: "Link z wyszukiwarki IPO — przed powołaniem przeczytaj dokument tk_pobierz (z sygnaturą). " + NOTA,
-        retrieved_at: new Date().toISOString() });
-    }
-    bledy.ipo_wyszukiwarka = "brak trafienia w formularzu IPO";
-  } catch (e) { bledy.ipo_wyszukiwarka = String(e?.message ?? e); }
-  const wszystkieBledy = Object.values(bledy).every((b) => /HTTP|fetch|abort|timeout|rozpoznano|ECONN|ENOTFOUND/i.test(b));
+        retrieved_at: czas() }) };
+    } },
+  ];
+  const stany = await Promise.all(zrodla.map((z) => z.szukaj().then((r) => ({ ...r }), (e) => ({ blad: e }))));
+  // Priorytet: pierwszy znaleziony w kolejności źródeł.
+  for (const s of stany) if (s.wynik) return s.wynik;
+  const bledy = {};
+  let osiagnieto = false; // czy choć jedno źródło rzetelnie sprawdziło (dotarliśmy i brak trafienia)
+  stany.forEach((s, i) => {
+    if (s.brak !== undefined) { bledy[zrodla[i].klucz] = s.brak; osiagnieto = true; }
+    else { bledy[zrodla[i].klucz] = String(s.blad?.message ?? s.blad); if (!bladTransportu(s.blad)) osiagnieto = true; }
+  });
+  const wszystkieBledy = !osiagnieto; // żadne źródło nie odpowiedziało → ERROR (nie OUT_OF_SCOPE)
   return odp({ status: wszystkieBledy ? "ERROR" : "OUT_OF_SCOPE", ...baza, oczekiwana, zrodla: bledy,
     ...(pozaLista ? { powod: "REPERTORIUM_SPOZA_LISTY_TK", repertoria_tk: [...REP_TK] } : {}),
     url_sprawy: urlSprawyIpo(oczekiwana), url_wyszukiwarki_otkzu: `${OTKZU}/Wyszukiwanie`, zapytanie_wyszukiwarki: zapytanie(oczekiwana),
-    uwaga: `${wszystkieBledy ? "Źródła urzędowe TK nie odpowiedziały" : `Brak trafienia ${oczekiwana} w IPO i OTK ZU`} — otwórz url_sprawy albo wyszukiwarkę OTK ZU; znaleziony dokument sprawdź tk_pobierz. ${NOTA}`,
-    retrieved_at: new Date().toISOString() });
+    uwaga: `${wszystkieBledy ? "Źródła urzędowe TK nie odpowiedziały (timeout/niedostępność) — spróbuj ponownie" : `Brak trafienia ${oczekiwana} w IPO i OTK ZU`} — otwórz url_sprawy albo wyszukiwarkę OTK ZU; znaleziony dokument sprawdź tk_pobierz. ${NOTA}`,
+    retrieved_at: czas() });
 });
 
 server.registerTool("tk_pobierz", {

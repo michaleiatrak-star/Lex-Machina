@@ -1,5 +1,7 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+- 2.25 (2026-10-07): CBOSA — nadmiar unikalnych /doc/ ponad licznik „Znaleziono N" nie jest już driftem (strona wyników niesie też linki spoza trafień: orzeczenia powiązane, nawigacja). Parser referencyjny cbosa_parser.py: usunięto dwie gałęzie „> total → OUT_OF_SCOPE"; nadmiarowe ID to kandydaci filtrowani przez exact-match + fail-closed odczyt dokumentu. Test regresyjny (total=1, 2 linki → FOUND). Pozostałe bramki (nierozpoznany licznik, zatrzymana paginacja, niekompletny dokument, transport) bez zmian
+
 - 2.24 (2026-10-06): SN: link = karta orzeczenia (sn.pl ?orzeczenie=ID), nie blob:/stary katalog PDF; SAOS = RZĄD 3 (agregator akademiczny), zastępczo przy awarii bazy urzędowej
 
 - 2.23 (2026-10-05f, AUDYT-2026-10-05f): Znacznik `<!-- lex:wczytaj-gdy: ZAMOWIENIA-PUBLICZNE -->` nad „Faza 1-K — Orzecznictwo KIO / zamówienia publiczne (PZP)” (sekcja sama stanowi: „Stosuj gdy sprawa dotyczy zamówień publicznych”). Aplikacja Lex Machina dołącza ją, gdy rozpozna sprawę zamówień publicznych; w przeciwnym razie model dostaje nagłówek z informacją, że może przeczytać sekcję z pliku. Treść bez zmian.

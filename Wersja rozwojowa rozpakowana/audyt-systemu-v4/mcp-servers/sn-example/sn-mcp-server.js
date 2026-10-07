@@ -275,6 +275,11 @@ async function zadanieSn(url, poczatkowe, strona = false, ua = null) {
 }
 
 const baza = { source: "sn.pl", query_type: "orzeczenie" };
+// Błąd snproxy wskazujący na SESJĘ/weryfikację (nie na wadliwe zapytanie): widżet sn.pl woła snproxy
+// bez parametru token — „Brak tokenu” znaczy, że sesja nie jest zweryfikowana (jak blokada bot), a nie
+// że brakuje pola w żądaniu. Taki błąd kierujemy w ścieżkę BlokadaSn: fallback SAOS + instrukcja
+// „Zweryfikuj w sn.pl → Gotowe → ponów” (zgł. 2026-10-07: „Brak tokenu” leciał jako martwy ERROR).
+export const ERR_SESJA_SN = /brak\s+token|token|sesj|autoryz|uprawnie|zaloguj|wygas|captcha|zweryfik|niezalogowan/i;
 const NOTA = "Źródło = KARTA orzeczenia (link „url_karty”), nigdy blob: ani PDF. Orzeczenie SN to materiał orzeczniczy (R2A), " +
   "przepis weryfikuj w ELI. Brak trafienia nie dowodzi braku orzeczenia (np. jeszcze nieopublikowane).";
 const odp = (w) => ({ content: [{ type: "text", text: JSON.stringify(w, null, 2) }] });
@@ -306,7 +311,10 @@ server.registerTool("sn_sprawdz_sygnature", {
   try {
     const dane = await pobierzJson(proxy("searchOrzeczenia", { sygnatura: oczekiwana, strona: "1", rozmiar_strony: "25" }));
     const upstream = bladSn(dane);
-    if (upstream) return odp({ status: "ERROR", ...baza, oczekiwana, detail: `sn.pl zgłosił błąd: ${upstream}`, retrieved_at: new Date().toISOString() });
+    if (upstream) {
+      if (ERR_SESJA_SN.test(upstream)) throw new BlokadaSn(`sn.pl: ${upstream} — sesja niezweryfikowana`);
+      return odp({ status: "ERROR", ...baza, oczekiwana, detail: `sn.pl zgłosił błąd: ${upstream}`, retrieved_at: new Date().toISOString() });
+    }
     const lista = rekordy(dane);
     if (lista === null) return odp({ status: "ERROR", ...baza, oczekiwana, detail: "Nieznany kształt odpowiedzi snproxy (zmiana portalu?).", retrieved_at: new Date().toISOString() });
     const trafione = lista.filter((r) => normalizujSygnature(r.sygnatura_sprawy).toUpperCase() === oczekiwana.toUpperCase());
@@ -415,7 +423,10 @@ server.registerTool("sn_szukaj", {
   try {
     const dane = await pobierzJson(proxy("searchOrzeczenia", p));
     const upstream = bladSn(dane);
-    if (upstream) return odp({ status: "ERROR", ...baza, detail: `sn.pl zgłosił błąd: ${upstream}`, retrieved_at: new Date().toISOString() });
+    if (upstream) {
+      if (ERR_SESJA_SN.test(upstream)) throw new BlokadaSn(`sn.pl: ${upstream} — sesja niezweryfikowana`);
+      return odp({ status: "ERROR", ...baza, detail: `sn.pl zgłosił błąd: ${upstream}`, retrieved_at: new Date().toISOString() });
+    }
     const lista = rekordy(dane);
     if (lista === null) return odp({ status: "ERROR", ...baza, detail: "Nieznany kształt odpowiedzi snproxy (zmiana portalu?).", retrieved_at: new Date().toISOString() });
     const trafione = lista.filter((r) => pasujeDoFiltra(r, a));

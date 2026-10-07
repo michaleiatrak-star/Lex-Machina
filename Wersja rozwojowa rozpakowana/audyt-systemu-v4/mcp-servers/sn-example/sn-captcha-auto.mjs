@@ -83,10 +83,19 @@ async function sonda(page) {
         const r = await fetch(adres, { credentials: "include",
           headers: { Accept: "application/json, text/javascript, */*; q=0.01", "X-Requested-With": "XMLHttpRequest" } });
         const t = await r.text();
-        try { JSON.parse(t); return { status: r.status, json: true }; } catch { return { status: r.status, json: false }; }
+        let o; try { o = JSON.parse(t); } catch { return { status: r.status, json: false }; }
+        // Koperta com_ajax z błędem sesji/tokenu („Brak tokenu”) to poprawny JSON, ale NIE dane —
+        // weryfikacja wtedy nie przeszła (zgł. 2026-10-07: sonda błędnie zaliczała taką odpowiedź).
+        let cur = o, blad = false;
+        for (let i = 0; i < 5 && cur && typeof cur === "object"; i += 1) {
+          const c = Array.isArray(cur) ? cur[0] : cur;
+          if (c && c.error !== undefined && c.error !== null && c.error !== false && !("sygnatura_sprawy" in c)) { blad = true; break; }
+          cur = c ? c.data : null;
+        }
+        return { status: r.status, json: true, bladSesji: blad };
       } catch { return { status: 0, json: false }; }
     }, u).catch(() => ({ status: 0, json: false }));
-    if (w.status === 200 && w.json) return u.split("?")[0];
+    if (w.status === 200 && w.json && !w.bladSesji) return u.split("?")[0];
   }
   return null;
 }

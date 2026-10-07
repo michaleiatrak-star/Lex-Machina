@@ -1,285 +1,291 @@
 {
- "zrodlo": "orzeczenia-sadowe-v2/tools/cbosa_parser.py 2.21",
- "dokumenty": [
-  {
-   "nazwa": "bazowy",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "sygn z kropkami",
-   "html": "\n<html><head><TITLE>II F.S.K. 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "encje i nbsp",
-   "html": "\n<html><head><TITLE>II&nbsp;FSK&#160;100 / 24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "postanowienie",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Postanowienie NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "dodatkowe klasy",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label extra\">Sąd</td><td class=\"info-list-value x\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label extra\">Data orzeczenia</td><td class=\"info-list-value x\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label extra\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label extra\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "zmieniona etykieta Sąd",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Organ</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "ERR": "ValueError"
-   }
-  },
-  {
-   "nazwa": "brak zamknięcia html",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "ERR": "ValueError"
-   }
-  },
-  {
-   "nazwa": "br w sentencji",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\">Oddala<br>skargę<br/>kasacyjną.</span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala\nskargę\nkasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "zagnieżdżenia",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><div><p>Pełne <b>uzasadnienie</b>.</p><ul><li>pkt 1</li><li>pkt 2</li></ul></div><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\npkt 1\npkt 2",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "bez uzasadnienia",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n</body></html>",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": null,
-    "reasoning_available": false
-   }
-  },
-  {
-   "nazwa": "ucięte uzasadnienie",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "ERR": "ValueError"
-   }
-  },
-  {
-   "nazwa": "captcha",
-   "html": "<html><body><h1>Potwierdź, że nie jesteś robotem</h1></body></html>",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "ERR": "ValueError"
-   }
-  },
-  {
-   "nazwa": "sygn tylko w tabeli",
-   "html": "\n<html><head><title>CBOSA</title></head><body>\n<table><tr><td class=\"lista-label\">Sygnatura</td><td class=\"info-list-value\">ii fsk 100/24</td></tr>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "komentarz HTML",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<!-- <td class=\"lista-label\">Sąd</td> --><table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "AAAAAAAAAA",
-   "oczekiwane": {
-    "doc_id": "AAAAAAAAAA",
-    "case_number": "II FSK 100/24",
-    "court": "Naczelny Sąd Administracyjny",
-    "judgment_date": "2026-01-10",
-    "operative_part": "Oddala skargę kasacyjną.",
-    "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
-    "reasoning_available": true
-   }
-  },
-  {
-   "nazwa": "zły doc_id",
-   "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-   "doc_id": "ABC",
-   "oczekiwane": {
-    "ERR": "ValueError"
-   }
-  }
- ],
- "scenariusze": [
-  {
-   "nazwa": "exact",
-   "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "FOUND",
-   "rejected": [],
-   "matches": [
-    "II FSK 100/24"
-   ]
-  },
-  {
-   "nazwa": "near-match",
-   "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "II FSK 100/23",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "NOT_FOUND",
-   "rejected": [
-    "II FSK 100/24"
-   ],
-   "matches": []
-  },
-  {
-   "nazwa": "kosmetyka",
-   "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "ii fsk 100 / 24",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "FOUND",
-   "rejected": [],
-   "matches": [
-    "II FSK 100/24"
-   ]
-  },
-  {
-   "nazwa": "dwa te same",
-   "search": "<html><body><div>Znaleziono 2 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a><a href=\"/doc/BBBBBBBBBB\">y</a></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
-    "BBBBBBBBBB": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "AMBIGUOUS",
-   "rejected": [],
-   "matches": [
-    "II FSK 100/24",
-    "II FSK 100/24"
-   ]
-  },
-  {
-   "nazwa": "zero",
-   "search": "<html><body><div>Znaleziono 0 orzeczeń</div></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {},
-   "status": "NOT_FOUND",
-   "rejected": [],
-   "matches": []
-  },
-  {
-   "nazwa": "brak licznika",
-   "search": "<html><body><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "OUT_OF_SCOPE",
-   "rejected": [],
-   "matches": []
-  },
-  {
-   "nazwa": "duplikat linku",
-   "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {
-    "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
-   },
-   "status": "FOUND",
-   "rejected": [],
-   "matches": [
-    "II FSK 100/24"
-   ]
-  },
-  {
-   "nazwa": "captcha kandydata",
-   "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
-   "oczekiwana": "II FSK 100/24",
-   "docs": {
-    "AAAAAAAAAA": "<html><body><h1>Potwierdź, że nie jesteś robotem</h1></body></html>"
-   },
-   "status": "OUT_OF_SCOPE",
-   "rejected": [],
-   "matches": []
-  }
- ]
+  "zrodlo": "orzeczenia-sadowe-v2/tools/cbosa_parser.py 2.21",
+  "dokumenty": [
+    {
+      "nazwa": "bazowy",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "sygn z kropkami",
+      "html": "\n<html><head><TITLE>II F.S.K. 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "encje i nbsp",
+      "html": "\n<html><head><TITLE>II&nbsp;FSK&#160;100 / 24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "postanowienie",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Postanowienie NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "dodatkowe klasy",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label extra\">Sąd</td><td class=\"info-list-value x\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label extra\">Data orzeczenia</td><td class=\"info-list-value x\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label extra\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label extra\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "zmieniona etykieta Sąd",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Organ</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": null,
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "brak zamknięcia html",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "ERR": "ValueError"
+      }
+    },
+    {
+      "nazwa": "br w sentencji",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\">Oddala<br>skargę<br/>kasacyjną.</span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala\nskargę\nkasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "zagnieżdżenia",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><div><p>Pełne <b>uzasadnienie</b>.</p><ul><li>pkt 1</li><li>pkt 2</li></ul></div><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\npkt 1\npkt 2",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "bez uzasadnienia",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n</body></html>",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": null,
+        "reasoning_available": false
+      }
+    },
+    {
+      "nazwa": "ucięte uzasadnienie",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "ERR": "ValueError"
+      }
+    },
+    {
+      "nazwa": "captcha",
+      "html": "<html><body><h1>Potwierdź, że nie jesteś robotem</h1></body></html>",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "ERR": "ValueError"
+      }
+    },
+    {
+      "nazwa": "sygn tylko w tabeli",
+      "html": "\n<html><head><title>CBOSA</title></head><body>\n<table><tr><td class=\"lista-label\">Sygnatura</td><td class=\"info-list-value\">ii fsk 100/24</td></tr>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "komentarz HTML",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<!-- <td class=\"lista-label\">Sąd</td> --><table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "AAAAAAAAAA",
+      "oczekiwane": {
+        "doc_id": "AAAAAAAAAA",
+        "case_number": "II FSK 100/24",
+        "court": "Naczelny Sąd Administracyjny",
+        "judgment_date": "2026-01-10",
+        "operative_part": "Oddala skargę kasacyjną.",
+        "reasoning": "Pełne uzasadnienie.\nDrugi akapit.",
+        "reasoning_available": true
+      }
+    },
+    {
+      "nazwa": "zły doc_id",
+      "html": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+      "doc_id": "ABC",
+      "oczekiwane": {
+        "ERR": "ValueError"
+      }
+    }
+  ],
+  "scenariusze": [
+    {
+      "nazwa": "exact",
+      "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "FOUND",
+      "rejected": [],
+      "matches": [
+        "II FSK 100/24"
+      ]
+    },
+    {
+      "nazwa": "near-match",
+      "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "II FSK 100/23",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "NOT_FOUND",
+      "rejected": [
+        "II FSK 100/24"
+      ],
+      "matches": []
+    },
+    {
+      "nazwa": "kosmetyka",
+      "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "ii fsk 100 / 24",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "FOUND",
+      "rejected": [],
+      "matches": [
+        "II FSK 100/24"
+      ]
+    },
+    {
+      "nazwa": "dwa te same",
+      "search": "<html><body><div>Znaleziono 2 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a><a href=\"/doc/BBBBBBBBBB\">y</a></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n",
+        "BBBBBBBBBB": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "AMBIGUOUS",
+      "rejected": [],
+      "matches": [
+        "II FSK 100/24",
+        "II FSK 100/24"
+      ]
+    },
+    {
+      "nazwa": "zero",
+      "search": "<html><body><div>Znaleziono 0 orzeczeń</div></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {},
+      "status": "NOT_FOUND",
+      "rejected": [],
+      "matches": []
+    },
+    {
+      "nazwa": "brak licznika",
+      "search": "<html><body><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "OUT_OF_SCOPE",
+      "rejected": [],
+      "matches": []
+    },
+    {
+      "nazwa": "duplikat linku",
+      "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {
+        "AAAAAAAAAA": "\n<html><head><TITLE>II FSK 100/24 - Wyrok NSA z 2026-01-10</TITLE></head><body>\n<table>\n<tr><td class=\"lista-label\">Sąd</td><td class=\"info-list-value\">Naczelny Sąd Administracyjny</td></tr>\n<tr><td class=\"lista-label\">Data orzeczenia</td><td class=\"info-list-value\">2026-01-10</td></tr>\n</table>\n<div class=\"lista-label\">Sentencja</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Oddala skargę kasacyjną.</p></span>\n<div class=\"lista-label\">Uzasadnienie</div>\n<span class=\"info-list-value-uzasadnienie\"><p>Pełne uzasadnienie.</p><p>Drugi akapit.</p></span>\n</body></html>\n"
+      },
+      "status": "FOUND",
+      "rejected": [],
+      "matches": [
+        "II FSK 100/24"
+      ]
+    },
+    {
+      "nazwa": "captcha kandydata",
+      "search": "<html><body><div>Znaleziono 1 orzeczeń</div><a href=\"/doc/AAAAAAAAAA\">x</a></body></html>",
+      "oczekiwana": "II FSK 100/24",
+      "docs": {
+        "AAAAAAAAAA": "<html><body><h1>Potwierdź, że nie jesteś robotem</h1></body></html>"
+      },
+      "status": "OUT_OF_SCOPE",
+      "rejected": [],
+      "matches": []
+    }
+  ]
 }

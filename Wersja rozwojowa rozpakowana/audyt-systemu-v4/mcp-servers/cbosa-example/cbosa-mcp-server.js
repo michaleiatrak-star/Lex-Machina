@@ -158,26 +158,45 @@ function parsujDokumentSurowo(html) {
   return s;
 }
 
-/** Odpowiednik parse_cbosa_document — rzuca błąd przy każdej niekompletności (fail-closed). */
+/** Odczyt pola tabeli z tolerancją etykiety: wprost, z dwukropkiem, oraz po normalizacji
+ * (bez końcowego „:”, bez spacji, bez wielkości liter) — i po liście synonimów. */
+function poleTabeli(tabela, etykiety) {
+  for (const e of etykiety) {
+    if (tabela[e]) return tabela[e];
+    if (tabela[`${e}:`]) return tabela[`${e}:`];
+  }
+  const want = new Set(etykiety.map((e) => e.toLowerCase()));
+  for (const [k, v] of Object.entries(tabela)) {
+    if (v && want.has(k.replace(/:\s*$/, "").trim().toLowerCase())) return v;
+  }
+  return null;
+}
+
+/** Odpowiednik parse_cbosa_document. KOTWICE poprawności (fail-closed): sygnatura, Sentencja,
+ * zamknięty BODY/HTML. „Sąd”/„Data orzeczenia” są BEST-EFFORT — ich brak (inny układ karty)
+ * nie przekreśla odczytu treści; zwracamy je jako null z listą `brak_metadanych` (zgł. 2026-10-07:
+ * karta bez pól „Sąd, Data orzeczenia” dawała fałszywe OUT_OF_SCOPE mimo realnego orzeczenia). */
 export function parsujDokument(html, docId) {
   const id = String(docId).toUpperCase().replace(/[^A-Z0-9]/g, "");
   if (!DOC_ID_RE.test(id)) throw new Error(`Nieprawidłowy CBOSA doc_id: ${docId}`);
   const s = parsujDokumentSurowo(html);
-  let syg = sygnaturaZTytulu(s.title.text()) || s.tabela["Sygnatura"] || s.tabela["Sygnatura akt"];
+  let syg = sygnaturaZTytulu(s.title.text()) || poleTabeli(s.tabela, ["Sygnatura", "Sygnatura akt"]);
   if (!syg) throw new Error(`Brak sygnatury w dokumencie CBOSA ${id}`);
   syg = normalizeCaseNumber(syg);
-  const sad = s.tabela["Sąd"], dataPole = s.tabela["Data orzeczenia"] ?? "";
+  const sad = poleTabeli(s.tabela, ["Sąd", "Sąd/Organ", "Sąd orzekający"]);
+  const dataPole = poleTabeli(s.tabela, ["Data orzeczenia", "Data wyroku"]) ?? "";
   // „2019-05-22 orzeczenie prawomocne” → data i informacja CBOSA o prawomocności
   const data = dataPole.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? dataPole;
   const prawomocnosc = /orzeczenie\s+(nie)?prawomocne/i.exec(dataPole)?.[0]?.toLowerCase() ?? null;
   const sent = s.sekcje["Sentencja"], uzas = s.sekcje["Uzasadnienie"];
   if (!s.htmlEnd || !s.bodyEnd) throw new Error(`Niekompletny HTML CBOSA ${id}: brak zamknięcia BODY/HTML`);
-  const brak = [["Sąd", sad], ["Data orzeczenia", data], ["Sentencja", sent]].filter(([, v]) => !v).map(([n]) => n);
-  if (brak.length) throw new Error(`Zmiana/niekompletność kontraktu HTML CBOSA ${id}: brak pól ${brak.join(", ")}`);
+  if (!sent) throw new Error(`Zmiana/niekompletność kontraktu HTML CBOSA ${id}: brak Sentencji`);
   if (s.widzUzas && !uzas) throw new Error(`Niekompletna sekcja Uzasadnienie w dokumencie CBOSA ${id}`);
+  const brakMeta = [["Sąd", sad], ["Data orzeczenia", data]].filter(([, v]) => !v).map(([n]) => n);
   return { doc_id: id, case_number: syg, court: sad || null, judgment_date: data || null,
     operative_part: sent || null, reasoning: uzas || null, url: `${BASE}/doc/${id}`,
-    reasoning_available: Boolean(uzas), document_complete: true, finality: prawomocnosc };
+    reasoning_available: Boolean(uzas), document_complete: true, finality: prawomocnosc,
+    ...(brakMeta.length ? { brak_metadanych: brakMeta } : {}) };
 }
 
 /** Odpowiednik collect_search_doc_ids + verify_search_results + classify_exact_matches. */
@@ -198,7 +217,11 @@ export async function weryfikujSygnature(searchHtml, oczekiwana, pobierzStrone, 
     if (!nowe.length) return oos(`Paginacja bez nowych ID na stronie ${p} (total=${total}, odczytano=${ids.length}).`, ids);
     for (const i of nowe) { widz.add(i); ids.push(i); }
   }
-  if (ids.length > total) return oos("Liczba unikalnych /doc/{ID} przekracza licznik CBOSA.", ids);
+  // Nadmiar unikalnych /doc/{ID} ponad licznik „Znaleziono N” NIE jest driftem: strona wyników
+  // CBOSA niesie też linki spoza trafień (orzeczenia powiązane, nawigacja). To dodatkowi
+  // kandydaci, nie brak kompletności — i tak przechodzą przez exact-match + fail-closed
+  // parsujDokument, więc nie mogą dać fałszywego trafienia. Blokada `> total` dawała fałszywe
+  // OUT_OF_SCOPE dla istniejących wyroków (zgł. użytkownika 2026-10-07).
   const dok = [];
   try { for (const id of ids) dok.push(parsujDokument(await pobierzDokument(id), id)); }
   catch (e) { return oos(`Nie udało się odczytać wszystkich kandydatów CBOSA: ${e.message}`, ids); }
@@ -337,7 +360,8 @@ server.registerTool("cbosa_pobierz", {
     return tekst({ status: "FOUND", query_type: "orzeczenie", source: "cbosa", snapshot: "🟨", awans: false, confidence: "snapshot",
       result: { identyfikator: d.case_number, sad: d.court, data_wyroku: d.judgment_date, url_zrodlowy: d.url,
         ...(d.finality ? { prawomocnosc: `${d.finality} (wg CBOSA)` } : {}),
-        sentencja: d.operative_part, uzasadnienie: d.reasoning, uzasadnienie_dostepne: d.reasoning_available }, uwaga: SNAP });
+        sentencja: d.operative_part, uzasadnienie: d.reasoning, uzasadnienie_dostepne: d.reasoning_available },
+      uwaga: d.brak_metadanych ? `Karta bez pól: ${d.brak_metadanych.join(", ")} (inny układ karty) — treść odczytana. ${SNAP}` : SNAP });
   } catch (e) { return tekst({ ...blad(e), status: "OUT_OF_SCOPE", powod: String(e?.message ?? e) }); }
 });
 

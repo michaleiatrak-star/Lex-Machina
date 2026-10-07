@@ -21,6 +21,26 @@ const fx = (c) => JSON.parse(readFileSync(new URL(`./fixtures/cellar_${c}.json`,
   assert.strictEqual(w.status, "NOT_FOUND");
   console.log("OK: fikcyjny CELEX → NOT_FOUND"); }
 
+{ // Regresja (zgł. 2026-10-07): jeden CELEX wyroku TSUE zwraca z Cellar dwa ?work — jeden
+  // z tytułem PL, drugi bez. CELEX jest jednoznaczny → FOUND z wersji tytułowanej, nie AMBIGUOUS.
+  const dwaWorki = [
+    { work: { value: "http://publications.europa.eu/resource/cellar/4a1837dd" },
+      title: { value: "Wyrok Trybunału (druga izba) z dnia 3 września 2026 r.#BdM Banca SpA przeciwko Komisji Europejskiej.#Sprawa C-145/24 P." },
+      inforce: { value: "true" } },
+    { work: { value: "http://publications.europa.eu/resource/cellar/507eb501" } }
+  ];
+  const w = normalizujOdpowiedzEURLEX(dwaWorki, "62024CJ0145");
+  assert.strictEqual(w.status, "FOUND");
+  assert.match(w.result.tytul_lub_nazwa, /BdM Banca/);
+  assert.match(w.uwaga, /pominięto/);
+  const amb = normalizujOdpowiedzEURLEX([
+    { work: { value: "x" }, title: { value: "Akt A" } },
+    { work: { value: "y" }, title: { value: "Akt B" } }
+  ], "62024CJ0145");
+  assert.strictEqual(amb.status, "AMBIGUOUS");
+  assert.strictEqual(amb.kandydaci.length, 2);
+  console.log("OK: CELEX z duplikatem bez tytułu → FOUND; dwa tytułowane → AMBIGUOUS"); }
+
 { assert.match(budujZapytanieSparql("32016R0679"), /"32016R0679"\^\^xsd:string/);
   assert.throws(() => budujZapytanieSparql('3" } ; DROP'), /Niepoprawny numer CELEX/);
   console.log("OK: literał typowany; wstrzyknięcie odrzucone"); }
