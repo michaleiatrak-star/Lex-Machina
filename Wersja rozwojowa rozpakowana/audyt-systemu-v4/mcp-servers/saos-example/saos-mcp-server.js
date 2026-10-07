@@ -120,6 +120,22 @@ export function pozaZasiegiem(syg, courtType, dataOd) {
     powod: `SAOS nie zawiera orzeczeń ${r.courtType === "SUPREME" ? "SN" : r.courtType === "CONSTITUTIONAL_TRIBUNAL" ? "TK" : "KIO"} po ${z.doRoku} r. (zmierzone 2026-09-28); sygnatura/zakres z ${r.rok} r. Źródło właściwe: ${z.zrodlo}. Brak trafienia NIE oznacza, że orzeczenie nie istnieje.` };
 }
 
+// ⛔ POPRAWKA 2026-10-07 (zgł. #90): FOUND dla `sygnatura` wymaga TOŻSAMOŚCI sygnatury trafienia
+//    (`courtCases[].caseNumber`, normalizacja jak weryfikator_sygnatur.py: bez kropek, zwinięte spacje,
+//    bez rozróżniania wielkości liter). Dotąd FOUND = „po mapowaniu została jedna pozycja”, więc przy
+//    `pageSize: 1` każde zapytanie z ≥1 trafieniem dawało FOUND. Wyszukiwanie po sygnaturze przegląda
+//    wszystkie strony wyników (dotąd jedna strona, `totalResults` pomijane).
+export function normalizujSygnature(s) {
+  return String(s ?? "").replace(/\./g, "").replace(/\s+/g, " ").trim().toUpperCase();
+}
+export function sygnaturyTrafienia(item) {
+  return (item?.courtCases ?? []).map((c) => c?.caseNumber).filter(Boolean);
+}
+export function tozsamaSygnatura(pytana, item) {
+  const p = normalizujSygnature(pytana);
+  return sygnaturyTrafienia(item).some((s) => normalizujSygnature(s) === p);
+}
+
 /**
  * Normalizuje surową odpowiedź SAOS do schematu z shared/SCHEMAT-ODPOWIEDZI-MCP.md.
  * Czysta funkcja — testowalna bez sieci. Każdy wynik to KANDYDAT (Zasada 5).
@@ -145,6 +161,23 @@ export function normalizujOdpowiedzSAOS(rawItems, kontekst = {}) {
     return w;
   }
 
+  let odrzucone = [];
+  if (kontekst.sygnatura) {
+    const zgodne = rawItems.filter((i) => tozsamaSygnatura(kontekst.sygnatura, i));
+    odrzucone = rawItems.filter((i) => !zgodne.includes(i)).map((i) => sygnaturyTrafienia(i).join("; ") || null);
+    if (zgodne.length === 0) {
+      if (kontekst.kompletne === false) {
+        return { status: "ERROR", query_type: "orzeczenie", source: "saos", odrzucone_post_checkiem: odrzucone,
+          detail: "Nie przejrzano wszystkich stron wyników SAOS — brak podstaw do NOT_FOUND." };
+      }
+      return { status: "NOT_FOUND", query_type: "orzeczenie", source: "saos", odrzucone_post_checkiem: odrzucone,
+        uwaga: `SAOS zwrócił ${rawItems.length} trafień, żadne nie ma sygnatury „${kontekst.sygnatura}” ` +
+          "(post-check tożsamości). SAOS nie jest wyczerpujący — przed uznaniem sygnatury za nieistniejącą " +
+          "sprawdź źródło Tier 1 (SYGNATURY.md, V-SYG-0)." };
+    }
+    rawItems = zgodne;
+  }
+
   const zmapowane = rawItems.map((item) => {
     const sygn = (item.courtCases ?? []).map((c) => c.caseNumber).filter(Boolean);
     return {
@@ -160,19 +193,24 @@ export function normalizujOdpowiedzSAOS(rawItems, kontekst = {}) {
     };
   });
 
+  const post = odrzucone.length ? { odrzucone_post_checkiem: odrzucone } : {};
   if (zmapowane.length > 1) {
-    return { status: "AMBIGUOUS", query_type: "orzeczenie", source: "saos", kandydaci: zmapowane };
+    return { status: "AMBIGUOUS", query_type: "orzeczenie", source: "saos", kandydaci: zmapowane, ...post };
   }
   return {
     status: "FOUND",
     query_type: "orzeczenie",
     source: "saos",
+    ...post,
     result: zmapowane[0],
     retrieved_at: new Date().toISOString(),
     confidence: "candidate-only", // NIE "deterministic" — wymaga weryfikacji Tier 1
   };
 }
 
+const MAX_STRON = 10;
+
+/** Jedna strona (`fraza`) albo wszystkie strony (`sygnatura`, zgł. #90). Zwraca { items, kompletne }. */
 async function pobierzZSaos(params) {
   const qs = new URLSearchParams();
   if (params.sygnatura) qs.set("caseNumber", params.sygnatura);
@@ -180,9 +218,24 @@ async function pobierzZSaos(params) {
   if (params.courtType) qs.set("courtType", params.courtType);
   if (params.dataOd) qs.set("judgmentDateFrom", params.dataOd);
   if (params.dataDo) qs.set("judgmentDateTo", params.dataDo);
-  qs.set("pageSize", String(params.pageSize ?? 10));
-  const url = `${SAOS_BASE_URL}?${qs.toString()}`;
+  if (!params.sygnatura) {
+    qs.set("pageSize", String(params.pageSize ?? 10));
+    return { items: (await pobierzStrone(qs)).items ?? [], kompletne: true };
+  }
+  qs.set("pageSize", "100");
+  const items = [];
+  for (let strona = 0; strona < MAX_STRON; strona++) {
+    qs.set("pageNumber", String(strona));
+    const dane = await pobierzStrone(qs);
+    const porcja = dane.items ?? [];
+    items.push(...porcja);
+    if (porcja.length === 0 || items.length >= (dane.info?.totalResults ?? 0)) return { items, kompletne: true };
+  }
+  return { items, kompletne: false };
+}
 
+async function pobierzStrone(qs) {
+  const url = `${SAOS_BASE_URL}?${qs.toString()}`;
   let ostatni;
   for (let proba = 1; proba <= PROBY; proba++) {
     try {
@@ -194,8 +247,7 @@ async function pobierzZSaos(params) {
         const t = (await resp.text()).slice(0, 2000);
         throw new Error(/Przerwa techniczna/i.test(t) ? "SAOS: przerwa techniczna (HTML zamiast JSON)" : `SAOS zwrócił ${typ || "brak typu"} zamiast JSON`);
       }
-      const dane = await resp.json();
-      return dane.items ?? [];
+      return await resp.json();
     } catch (e) {
       ostatni = e;
     }
@@ -221,7 +273,8 @@ server.registerTool(
       ]).optional().describe("Typ sądu. ADMINISTRATIVE zwraca status OUT_OF_SCOPE — SAOS nie ma NSA/WSA."),
       dataOd: z.string().optional().describe("Data początkowa, format yyyy-MM-dd"),
       dataDo: z.string().optional().describe("Data końcowa, format yyyy-MM-dd"),
-      pageSize: z.number().int().min(1).max(100).optional().describe("Liczba wyników (domyślnie 10)"),
+      pageSize: z.number().int().min(1).max(100).optional()
+        .describe("Liczba wyników dla `fraza` (domyślnie 10). Przy `sygnatura` ignorowane — przeglądane są wszystkie strony."),
     },
   },
   async ({ sygnatura, fraza, courtType, dataOd, dataDo, pageSize }) => {
@@ -235,8 +288,8 @@ server.registerTool(
       wynik = pozaZasiegiem(null, courtType, dataOd);
     } else {
       try {
-        const items = await pobierzZSaos({ sygnatura, fraza, courtType, dataOd, dataDo, pageSize });
-        wynik = normalizujOdpowiedzSAOS(items, { courtType, sygnatura });
+        const { items, kompletne } = await pobierzZSaos({ sygnatura, fraza, courtType, dataOd, dataDo, pageSize });
+        wynik = normalizujOdpowiedzSAOS(items, { courtType, sygnatura, kompletne });
         if (wynik.status === "NOT_FOUND" && sygnatura) wynik = pozaZasiegiem(sygnatura) ?? wynik;
       } catch (err) {
         wynik = { status: "ERROR", query_type: "orzeczenie", source: "saos",

@@ -138,15 +138,44 @@ def tozsame(pytana: str, zwrocona: str) -> bool:
     return normalizuj(pytana).upper() == normalizuj(zwrocona).upper()
 
 
+def post_check(pytana: str, trafienia: list):
+    """Wspólny post-check V-SYG-0.4 dla wszystkich baz: zostają trafienia, których
+    sygnatura (albo jedna z `sygnatury`) jest tożsama z pytaną. Zwraca (zgodne, odrzucone)."""
+    zgodne, odrzucone = [], []
+    for t in trafienia:
+        kandydaci = t.get("sygnatury") or [t.get("sygnatura", "")]
+        (zgodne if any(tozsame(pytana, k) for k in kandydaci) else odrzucone).append(t)
+    return zgodne, [t.get("sygnatura", "") for t in odrzucone]
+
+
 # ==========================================================================
 # KANAŁY
 # ==========================================================================
+MAX_STRON = 20  # górny limit stronicowania; przekroczenie = wynik niepełny, nigdy FOUND/NOT_FOUND
+
+
+def sygnatury_saos(item: dict) -> list:
+    """SAOS podaje sygnaturę w `courtCases[].caseNumber` — także dla TK i KIO (zgł. #90;
+    pola `caseNumbers` w odpowiedzi nie ma)."""
+    return [c.get("caseNumber") for c in (item.get("courtCases") or []) if c.get("caseNumber")]
+
+
 def saos_case_number(syg: str):
-    r = requests.get(SAOS, params={"caseNumber": normalizuj(syg), "pageSize": 10},
-                     headers=UA_NEUTRALNY, timeout=TIMEOUT)
-    r.raise_for_status()
-    j = r.json()
-    return j.get("info", {}).get("totalResults", 0), j.get("items", [])
+    """Wszystkie strony wyników (zgł. #90). Zwraca (totalResults, items, kompletne)."""
+    items, total, strona = [], 0, 0
+    while strona < MAX_STRON:
+        r = requests.get(SAOS, params={"caseNumber": normalizuj(syg), "pageSize": 100,
+                                       "pageNumber": strona},
+                         headers=UA_NEUTRALNY, timeout=TIMEOUT)
+        r.raise_for_status()
+        j = r.json()
+        total = j.get("info", {}).get("totalResults", 0)
+        porcja = j.get("items", [])
+        items += porcja
+        if not porcja or len(items) >= total:
+            return total, items, True
+        strona += 1
+    return total, items, False
 
 
 def sn_search(syg: str):
@@ -163,16 +192,34 @@ def sn_search(syg: str):
         return []
 
 
+TRAFIENIE_MS = re.compile(r'<h4><a href="(/details/[^"]+)">([^<]+)</a></h4>')
+
+
+def trafienia_ms(html: str) -> list:
+    """Sygnatury z listy wyników Portalu Orzeczeń (pomiar 2026-10-07:
+    `<h4><a href="/details/$N/ID">I ACa 566/12</a></h4>` na każde trafienie)."""
+    return [{"sygnatura": syg.strip(), "zrodlo": MS + href} for href, syg in TRAFIENIE_MS.findall(html)]
+
+
 def ms_search(syg: str):
-    """Portal Orzeczeń — kodowanie kontekstu Tapestry: ' '->$0020, '/'->$002f."""
+    """Portal Orzeczeń — kodowanie kontekstu Tapestry: ' '->$0020, '/'->$002f.
+    Zwraca (liczba_wg_portalu, trafienia z sygnaturami ze WSZYSTKICH stron, kompletne).
+    Dawniej sama liczba → FOUND bez sprawdzenia sygnatury (zgł. #90)."""
     enc = normalizuj(syg).replace(" ", "$0020").replace("/", "$002f")
-    url = f"{MS}/search/advanced/$N/{enc}" + "/$N" * 15 + "/1"
-    r = requests.get(url, headers=UA_NEUTRALNY, timeout=TIMEOUT)
-    r.raise_for_status()
-    if "Nie znaleziono" in r.text:
-        return 0, url
-    m = re.search(r'big_number[^>]*>([^<]+)<', r.text)
-    return (int(m.group(1).strip().replace("\xa0", "")) if m else 0), url
+    trafienia, n = [], 0
+    for strona in range(1, MAX_STRON + 1):
+        url = f"{MS}/search/advanced/$N/{enc}" + "/$N" * 15 + f"/{strona}"
+        r = requests.get(url, headers=UA_NEUTRALNY, timeout=TIMEOUT)
+        r.raise_for_status()
+        if "Nie znaleziono" in r.text:
+            return 0, [], True
+        m = re.search(r'big_number[^>]*>([^<]+)<', r.text)
+        n = int(m.group(1).strip().replace("\xa0", "")) if m else 0
+        porcja = trafienia_ms(r.text)
+        trafienia += porcja
+        if not porcja or len(trafienia) >= n:
+            return n, trafienia, True
+    return n, trafienia, False
 
 
 # ==========================================================================
@@ -221,28 +268,28 @@ def v_syg_0(syg: str) -> dict:
                                       "i rocznik poza oknem SAOS (F-184/F-185)")
             return wynik
 
-    trafienia = []
+    trafienia, kompletne = [], True
     if baza == "SN":
         for it in sn_search(syg):
             trafienia.append({"sygnatura": it.get("sygnatura_sprawy", ""),
                               "data": it.get("data_wydania"),
                               "zrodlo": "sn.pl"})
     elif baza == "POWSZECHNE":
-        n, url = ms_search(syg)
-        trafienia = [{"sygnatura": normalizuj(syg), "zrodlo": url}] * n
+        _, trafienia, kompletne = ms_search(syg)
     else:
         ct = {"TK": "CONSTITUTIONAL_TRIBUNAL", "KIO": "NATIONAL_APPEAL_CHAMBER"}.get(baza)
         if ct and w_oknie(ct, rok):
-            total, items = saos_case_number(syg)
-            trafienia = [{"sygnatura": i.get("caseNumbers", [""])[0] if i.get("caseNumbers") else "",
+            _, items, kompletne = saos_case_number(syg)
+            trafienia = [{"sygnatura": "; ".join(sygnatury_saos(i)), "sygnatury": sygnatury_saos(i),
                           "zrodlo": "saos"} for i in items]
 
-    # V-SYG-0.4 — post-check tożsamości
-    if baza == "SN":
-        zgodne = [t for t in trafienia if tozsame(syg, t["sygnatura"])]
-        odrzucone = [t["sygnatura"] for t in trafienia if t not in zgodne]
-        wynik["odrzucone_post_checkiem"] = odrzucone
-        trafienia = zgodne
+    # V-SYG-0.4 — post-check tożsamości dla KAŻDEJ bazy (zgł. #90: dotąd tylko SN)
+    trafienia, wynik["odrzucone_post_checkiem"] = post_check(syg, trafienia)
+    if not kompletne and len(trafienia) <= 1:
+        wynik.update(status="OUT_OF_SCOPE",
+                     uzasadnienie=f"przejrzano {MAX_STRON} stron wyników bez kompletu — "
+                                  "brak podstaw do FOUND/NOT_FOUND")
+        return wynik
 
     if len(trafienia) == 1:
         wynik.update(status="FOUND", trafienie=trafienia[0],
@@ -348,6 +395,20 @@ def cmd_selftest():
     spr("0.2 routing NSA (OSK)", routuj("OSK"), "CBOSA")
     spr("0.5 post-check tytułu: fabrykat", tozsame("I FSK 999999/23", "I FSK 919/23"), False)
     spr("0.5 post-check tytułu: trafienie", tozsame("i fsk 229/20", "I FSK 229/20"), True)
+    # zgł. #90 — SAOS: sygnatura w courtCases[].caseNumber (także TK/KIO), nie caseNumbers
+    spr("#90 SAOS TK courtCases", sygnatury_saos({"courtCases": [{"caseNumber": "K 7/94"}]}), ["K 7/94"])
+    spr("#90 SAOS bez courtCases", sygnatury_saos({"caseNumbers": ["K 7/94"]}), [])
+    # zgł. #90 — post-check we wszystkich bazach; negatywne: nieistniejąca i różna literą
+    tk = [{"sygnatura": "K 7/94", "sygnatury": ["K 7/94"]}]
+    spr("#90 post-check TK: trafienie", len(post_check("K 7/94", tk)[0]), 1)
+    spr("#90 post-check: sygnatura nieistniejąca", len(post_check("K 77/94", tk)[0]), 0)
+    spr("#90 post-check: różna literą (SK vs K)", len(post_check("SK 7/94", tk)[0]), 0)
+    ms_html = ('<h4><a href="/details/$N/A">I ACa 566/12</a></h4>'
+               '<h4><a href="/details/$N/B">I ACa 56/12</a></h4>')
+    ms = trafienia_ms(ms_html)
+    spr("#90 MS: sygnatury z listy wyników", [t["sygnatura"] for t in ms], ["I ACa 566/12", "I ACa 56/12"])
+    spr("#90 MS: post-check odrzuca near-match", post_check("I ACa 566/12", ms)[1], ["I ACa 56/12"])
+    spr("#90 MS: II ACa != I ACa", len(post_check("II ACa 566/12", ms)[0]), 0)
     print("\nSELFTEST:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
