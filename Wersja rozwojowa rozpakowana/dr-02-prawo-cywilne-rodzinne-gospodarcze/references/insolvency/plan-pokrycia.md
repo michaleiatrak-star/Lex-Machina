@@ -54,7 +54,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | `mod-PrRestr-wejscie-plan-test` | 1–22 | 23 | 4.3 / 190 | ✅ A (16.3 kB, 709 B/art; 2026-10-08) |
 | `mod-PrRestr-procedura-zakonczenie` | 189–337 | 39 | 3.3 / 86 | ✅ A (19.8 kB, 508 B/art; 2026-10-08) |
 | `mod-PrRestr-odrebne-miedzynarodowe` | 338–456 | 41 | 3.8 / 94 | ✅ A (18.2 kB, 443 B/art; 2026-10-08) |
-| `mod-PrRestr-dzial-VI-uklad` | 150–179 | 31 | 5.3 / 175 | ⬜ |
+| `mod-PrRestr-dzial-VI-uklad` | 150–179 | 31 | 5.3 / 175 | ✅ A (19.9 kB, 642 B/art; 2026-10-08) |
 | `mod-PrRestr-dzial-V-pomoc-publiczna` | 140–149 | 10 | 3.1 / 316 | ⬜ |
 | `mod-PrRestr-dzial-VII-uklad-czesciowy` | 180–188 | 7 | 2.7 / 394 | ⬜ (uzupełnić format) |
 
