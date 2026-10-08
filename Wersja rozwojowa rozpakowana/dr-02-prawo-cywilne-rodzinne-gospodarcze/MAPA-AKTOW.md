@@ -64,7 +64,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | PrUp — układ w postępowaniu upadłościowym (art. 266a–266f) | jw. | `mod-PrUpad-uklad-likwidacja-zakonczenie` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — postępowanie międzynarodowe, po śmierci dłużnika, deweloper (art. 378–425s) | jw. | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — postępowania odrębne: banki, SKOK, banki hipoteczne, instytucje EOG, ubezpieczyciele, obligacje, układ konsumencki (art. 426–491, 491²⁵–491³⁸) | jw. | `mod-PrUpad-postepowania-odrebne-426-491-38` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
-| PrUp + PrRestr — uzupełnienie | PrUp jw. + PrRestr Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026` | 🟡 B |
+| PrUp + PrRestr — wspólna nawigacja i status pokrycia (wszystkie moduły A) | PrUp jw. + PrRestr Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026` | ✅ hub nawigacyjny; fresh gate |
 | Prawo restrukturyzacyjne — układ | Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrRestr-dzial-VI-uklad` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — układ częściowy | jw. | `mod-PrRestr-dzial-VII-uklad-czesciowy` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — nadzorca / zarządca | jw. | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |

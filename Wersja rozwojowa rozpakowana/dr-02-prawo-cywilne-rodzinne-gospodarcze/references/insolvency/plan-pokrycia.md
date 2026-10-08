@@ -58,16 +58,17 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | `mod-PrRestr-dzial-V-pomoc-publiczna` | 140–149 | 10 | 3.1 / 316 | ✅ A (14.6 kB, 1457 B/art; 2026-10-08) |
 | `mod-PrRestr-dzial-VII-uklad-czesciowy` | 180–188 | 7 | 2.7 / 394 | ✅ A (7.7 kB, 1102 B/art; 2026-10-08) |
 
-### Fala 4 — wersje, nowelizacje, mapy
+### Fala 4 — wersje, nowelizacje, mapy ✅ (2026-10-08)
 
 ```
-□ references/insolvency/sources/amendment-*.pdf → wersje-i-przepisy-przejsciowe.md:
-  dla każdej nowelizacji (2025/1085, 1170, 1172; 2026/176, 331, 340, 1206): zmienione jednostki,
-  data wejścia, przepis przejściowy; odesłanie z każdego modułu, którego dotyczy
-□ mod-PrUpad-zrodla-i-wersje, mod-PrRestr-zrodla-i-wersje — aktualizacja po falach 1–3
-□ mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026 — węzeł nawigacji z listą modułów A
-□ MAPA-AKTOW / MAPA-POKRYCIA: status modułu → „A / COV-ART” po ukończeniu
-□ build_prup_coverage.py: commentary_status = KOMENTARZ_A dla artykułów modułów ✅
+☑ wersje-i-przepisy-przejsciowe.md — tabela nowelizacji 2025/1085, 1170, 1172; 2026/176, 331, 340, 1206:
+  zmienione jednostki (odczyt z sources/amendment-*.txt), data wejścia, przepis przejściowy, moduły
+☑ mod-PrUpad-zrodla-i-wersje, mod-PrRestr-zrodla-i-wersje — status A, odesłanie do tabeli nowelizacji
+☑ mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026 — hub z listą 22 modułów A obu ustaw
+☑ MAPA-AKTOW / MAPA-POKRYCIA — statusy „A / COV-ART” (finalize każdego modułu)
+☑ scripts/insolvency.py build: commentary_status = KOMENTARZ_A_COV_ART dla aktywnych artykułów modułów A
+  (956/956), NIE_DOTYCZY_* dla uchylonych / pominiętych; full_commentary pozostaje false (brak deklaracji
+  pełnego komentarza doktrynalnego i bazy orzecznictwa); test: test_commentary_status_matches_module_class
 ```
 
 ## Zasady pracy

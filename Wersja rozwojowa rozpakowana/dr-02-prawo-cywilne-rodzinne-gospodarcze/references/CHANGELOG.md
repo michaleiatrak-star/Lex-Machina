@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.88 (2026-10-08): Fala 4 zamknięta: tabela nowelizacji w wersje-i-przepisy-przejsciowe.md uzupełniona o zmienione jednostki odczytane z tekstów nowelizacji (2025/1085, 1170, 1172; 2026/176, 331, 340, 1206), daty wejścia, przepisy przejściowe i moduły. Poprawiono błędny wiersz 2026/331 (art. 7-9 dotyczą ustawy o bankach spółdzielczych; zmiana PrUp to art. 65a bez przepisu przejściowego) i brak jednostek dla 2025/1172 (PrUp 35, 229; PrRestr 209). Hub mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026 przebudowany na listę 22 modułów A; zrodla-i-wersje — status A, poprawiona etykieta uklad-likwidacja-zakonczenie (art. 266a-266f). scripts/insolvency.py: commentary_status = KOMENTARZ_A_COV_ART dla 956 aktywnych artykułów (NIE_DOTYCZY_* dla uchylonych/pominiętych), full_commentary pozostaje false; nowy test.
+
 - 3.87 (2026-10-08): mod-PrRestr-dzial-VII-uklad-czesciowy przebudowany do klasy A / COV-ART: PrRestr art. 180-188 (7 aktywnych; uchylone 181, 186). Usunięto ze starego modułu glosę z pamięci (oddalenie z art. 13 PrUp jako „z powodu ubóstwa masy”) i niezweryfikowane odesłanie do art. 4 DU/2025/1085.
 
 - 3.86 (2026-10-08): mod-PrRestr-dzial-V-pomoc-publiczna przebudowany do klasy A / COV-ART: PrRestr art. 140-149 (10 aktywnych; uchylony 139a). Pełna treść testu prywatnego wierzyciela / inwestora (140), przesłanek (141-143), wkładu własnego 25/40/50% (144), środków wyrównujących (145), zwolnienia MŚP z notyfikacji do 10 mln EUR (148). Stary moduł bez błędów merytorycznych.

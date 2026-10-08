@@ -41,8 +41,11 @@ nagłówki i przypisy; nie cytuj ich jako części normy. Indeks nie zastępuje 
   Na 04.10.2026 wymóg oznaczenia rodzaju akcji nadal obowiązuje.
 - Reforma DU/2025/1085: dla wyboru starych/nowych reguł decyduje jej art. 4,
   a nie sama data głosowania lub sporządzania opinii.
+- Ujęte w t.j. (z regułami przejściowymi): DU/2025/1085 (43 zmiany PrRestr, art. 4), DU/2025/1170 (art. 26a; art. 5 — sprawy wszczęte i niezakończone), DU/2025/1172 (art. 209 ust. 1). Pełna tabela: `references/insolvency/wersje-i-przepisy-przejsciowe.md`.
 
 ## Dobór procedury
+
+Wszystkie moduły tabeli są w klasie **A / COV-ART** (08.10.2026; `references/insolvency/plan-pokrycia.md`).
 
 | Zadanie | Moduł |
 |---|---|

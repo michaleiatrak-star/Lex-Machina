@@ -104,6 +104,15 @@ class CorpusTest(unittest.TestCase):
         self.assertFalse(out['full_commentary'])
         self.assertEqual(len(insolvency.source_manifest()['sources']),11)
 
+    def test_commentary_status_matches_module_class(self):
+        for law in ['prup','prrestr']:
+            cov=json.loads((insolvency.ROOT/'references'/law/'coverage.json').read_text())
+            self.assertFalse(cov['full_commentary'])
+            for a in cov['articles']:
+                with self.subTest(law=law,article=a['id']):
+                    self.assertEqual(a['commentary_status'],insolvency.commentary_status(a,a['procedure_modules']))
+                    if a['source_status']!='TEKST_W_TJ':self.assertTrue(a['commentary_status'].startswith('NIE_DOTYCZY_'))
+
     def test_specific_routes_not_catch_all(self):
         examples=[('prup','56h','wniosek-ogloszenie'),('prup','70^1','skutki-masa'),
                   ('prup','136','skutki-masa'),('prup','149','organy-procedura'),
