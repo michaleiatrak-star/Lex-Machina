@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.84 (2026-10-08): mod-PrRestr-odrebne-miedzynarodowe przebudowany do klasy A / COV-ART: PrRestr art. 338-367, 399-400, 448-456 (41 aktywnych; dział III uchylony, art. 401-447 pominięte w t.j.). Przepisy karne z kwalifikatorem (występek — art. 7 KK odczytany z ELI, t.j. DU/2025/383). Usunięto ze starego modułu tezę z pamięci o wyłączeniu Danii z rozp. 2015/848 i nieprecyzyjny opis art. 349-353 (art. 351 to wyłączenie PZU wobec dewelopera).
+
 - 3.83 (2026-10-08): mod-PrRestr-procedura-zakonczenie przebudowany do klasy A / COV-ART: PrRestr art. 189-209 i 324-337 (39 aktywnych). Błąd starego modułu: art. 327 opisany jako ograniczenie legitymacji do zaskarżenia odmowy (ust. 2 dotyczy postanowienia oddalającego wniosek o umorzenie — zażalenie tylko wnioskodawcy). Dodano pełny katalog spraw dla składu 3 sędziów (200 ust. 1a), reguły terminów (201), wyjątki od systemu (196b-196c), domniemanie 30 dni (326 ust. 2), rozliczenie zarządcy (330-333).
 
 - 3.82 (2026-10-08): mod-PrRestr-wejscie-plan-test przebudowany do klasy A / COV-ART: PrRestr art. 1-22 (23 aktywne; uchylony 5). Pełny katalog wyłączeń art. 4 ust. 2 z oznaczeniem zmiany pkt 4 od 11.01.2027 (DU/2026/1206), elementy planu (art. 10 ust. 1 pkt 1-11) i testu zaspokojenia (10a), zbieg z upadłością (11-13), właściwość COMI (15), sędzia-komisarz (18-21). Stary moduł bez błędów merytorycznych; brak oznaczenia nowelizacji art. 4 uzupełniony.
