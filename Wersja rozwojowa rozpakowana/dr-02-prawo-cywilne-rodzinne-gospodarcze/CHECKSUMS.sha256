@@ -1,7 +1,7 @@
-c4eba151e32a9aa6a0906ae68b5280a53ccbc518d97b4473b11d18e6ad7bf514  ./MAPA-AKTOW.md
-0bd62bb600d67649905b9218a650147312ab58ed905e47b256c5f3a4efb20c49  ./MAPA-POKRYCIA.md
+b3aa48551e5955eb5ad60751dac4f32d331e14ace18dcaee1acc1b83012a5d62  ./MAPA-AKTOW.md
+dedd40682b1d87edb4f54f8764a61233cad3bc7f9fbee5fe4eae5c9ca722f348  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-8df6c8dd16e6b58349b3a7a806431dab4eb5f8f8fb2dc39e0b653cfafb102852  ./SKILL.md
+91c02359bad5efda8d8294363dbe73ff70462050b4583477084123ef0cf87695  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -51,7 +51,7 @@ c5e02b892e72255620698e89e0c99ad331bf9e43cee789abf14959fb3ebed215  ./modules/mod-
 ca0d8c0b67899e45f94f0121b5b2b16c8a56ec3c4224ff0fd4a0d0c4cc815a63  ./modules/mod-PrRestr-dzial-VI-uklad.md
 d37363109a265c7abd18c248ba376646b5c494de77e77a4951dc12a7001a8db6  ./modules/mod-PrRestr-dzial-VII-uklad-czesciowy.md
 d5536c31a83c2dcd74913ee948cbe6be1151e391d4845f480ec61cc009d16ed4  ./modules/mod-PrRestr-odrebne-miedzynarodowe.md
-802d67120920f0ea6456e62407d2ab8fe528a719a21214ce2d597316f4d268c2  ./modules/mod-PrRestr-ppu-pu.md
+5716f1c3d0277d70d00a4a68e22d7cdc97e16ac859642b91eb5b521b760f7d00  ./modules/mod-PrRestr-ppu-pu.md
 6dc622295b516c44a27406bf817fe1f7cd46d43a89af21479899a046a82e1c2d  ./modules/mod-PrRestr-procedura-zakonczenie.md
 6f285a210e37d114d497063b12cc37b9eb77d733174ff72bfe5d90786a4de39d  ./modules/mod-PrRestr-pzu.md
 6cf5ebb3c29c5ce8b5a610043b51505b5b0d3c8c9dcfea4d467ba50f0ea60dcf  ./modules/mod-PrRestr-sanacja.md
@@ -105,12 +105,12 @@ bc9125f92d068cf5aae2c3d69a0413bd14303b5e5920ff4e6ec1547a1c809fb0  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-86103d2cb5723b0c9c546d634887342ea52ed49caecb4832d7a23695953abbc0  ./references/CHANGELOG.md
+2c2a7b616d85b1b41bcda8c007294a7fc144ae86c97848b9a0d5f4814bfbf6a6  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
 34a00b4c5e762ccac1fd6e1a64ac253acc13deb6d4cc57b6ec155e67feff05f0  ./references/insolvency/dodawanie-ustawy.md
 39af9c0cfae027c310cdead968e499aeb9f58ff018e1080d6c1e46f1eabe3933  ./references/insolvency/katalog.md
-f8ddb191b5134309ce1c5e75e0d3184f1013e37590c7efc2b138ed8b97a3a40b  ./references/insolvency/plan-pokrycia.md
+05749b3511fb874f7dd8426e442e3f17708724c6b6adbf48272c17b05d5af525  ./references/insolvency/plan-pokrycia.md
 dce07bb0a66327427786e9f9dbe1478b5501aeddafeba8841a8a18978267e09a  ./references/insolvency/scenariusze-weryfikacji.md
 f01f605d8480dfb5d9bd2eb8d087f53f06d41d1b25e8994716cf36157df91c68  ./references/insolvency/sources/amendment-2025-1085.json
 56468119848adffcc2c55faa62642640972474b39d15521ed77c52b530f59b1b  ./references/insolvency/sources/amendment-2025-1085.pdf

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.77 (2026-10-08): mod-PrRestr-ppu-pu przebudowany do klasy A / COV-ART: PrRestr art. 227-282 (56 aktywnych). Błąd starego modułu: tabela trybów błędnie przypisywała art. 273-274 do zarządu dłużnika i 275-276 do masy i zobowiązań (art. 273 to odesłanie do art. 238-256; 274-275 — skład masy i spis inwentarza; 276-279 — procesy i egzekucja). Próg 15% zweryfikowany w art. 3 ust. 3-4.
+
 - 3.76 (2026-10-08): mod-PrUpad-postepowania-odrebne-426-491-38 przebudowany do klasy A / COV-ART: art. 426-491 i 491^25-491^38 (89 aktywnych; uchylone 428, 430, 431, 435, 447). Pełna tabela 10 kategorii art. 440, testy banku hipotecznego (446a-446d), prawo właściwe (460-470), układ konsumencki z wynagrodzeniem nadzorcy (491^35). Zachowano jeden plik (podział na 2 pliki z planu porzucony: stabilny routing coverage.csv). Nowelizacja DU/2026/1206 (art. 452 ust. 1, 456 ust. 1 od 11.01.2027) oznaczona w nagłówku. Usunięto ze starego modułu treści spoza zakresu (tor upadłości konsumenckiej 491^1-491^24 dublujący mod-PrUpad-konsument-workflow) i nieoparte na tekście twierdzenie o dacie oceny statusu przedsiębiorcy.
 
 - 3.75 (2026-10-08): mod-PrUpad-likwidacja-miedzynarodowe-szczegolne przebudowany do klasy A / COV-ART: art. 378-425s (67 aktywnych; uchylone 385, 391, 399, 400, 420). Błąd starego modułu: sekcja 1 omawiała art. 316-334 spoza routingu modułu (zakres mod-PrUpad-syndyk-likwidacja) — usunięta, etykieta w MAPA-AKTOW poprawiona. Rozporządzenie (UE) 2015/848 zweryfikowane w EUR-Lex (CELEX 32015R0848, obowiązuje).

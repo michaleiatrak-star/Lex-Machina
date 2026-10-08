@@ -46,7 +46,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 
 | Moduł | Zakres | Akt. art. | Przed | Status |
 |---|---|---|---|---|
-| `mod-PrRestr-ppu-pu` | 227–282 | 56 | 3.9 / 71 | ⬜ |
+| `mod-PrRestr-ppu-pu` | 227–282 | 56 | 3.9 / 71 | ✅ A (23.9 kB, 425 B/art; 2026-10-08) |
 | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele` | 65–139 | 75 | 3.2 / 43 | ⬜ |
 | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | 23–64 | 48 | 3.0 / 64 | ⬜ |
 | `mod-PrRestr-sanacja` | 283–323 | 41 | 4.1 / 103 | ⬜ |
