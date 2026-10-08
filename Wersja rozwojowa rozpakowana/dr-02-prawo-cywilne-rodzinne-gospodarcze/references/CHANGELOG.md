@@ -1,5 +1,9 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.87 (2026-10-08): mod-PrRestr-dzial-VII-uklad-czesciowy przebudowany do klasy A / COV-ART: PrRestr art. 180-188 (7 aktywnych; uchylone 181, 186). Usunięto ze starego modułu glosę z pamięci (oddalenie z art. 13 PrUp jako „z powodu ubóstwa masy”) i niezweryfikowane odesłanie do art. 4 DU/2025/1085.
+
+- 3.86 (2026-10-08): mod-PrRestr-dzial-V-pomoc-publiczna przebudowany do klasy A / COV-ART: PrRestr art. 140-149 (10 aktywnych; uchylony 139a). Pełna treść testu prywatnego wierzyciela / inwestora (140), przesłanek (141-143), wkładu własnego 25/40/50% (144), środków wyrównujących (145), zwolnienia MŚP z notyfikacji do 10 mln EUR (148). Stary moduł bez błędów merytorycznych.
+
 - 3.85 (2026-10-08): mod-PrRestr-dzial-VI-uklad przebudowany do klasy A / COV-ART: PrRestr art. 150-179 (31 aktywnych; uchylony 168). Błąd starego modułu: art. 154 opisany jako przepis o podmiotach/zobowiązaniach szczególnych (dotyczy KRUS — stosowanie przepisów o ZUS). Dodano pełne reguły konwersji (156 ust. 5-6), grup obowiązkowych i ochrony zabezpieczonych (161-161a), korzystniejszych warunków (162 ust. 2), zatwierdzenia i najlepszego interesu (164-165), skutków i wykonania (166-179); oznaczono uchylenie 156 ust. 5 pkt 4 od 18.02.2027.
 
 - 3.84 (2026-10-08): mod-PrRestr-odrebne-miedzynarodowe przebudowany do klasy A / COV-ART: PrRestr art. 338-367, 399-400, 448-456 (41 aktywnych; dział III uchylony, art. 401-447 pominięte w t.j.). Przepisy karne z kwalifikatorem (występek — art. 7 KK odczytany z ELI, t.j. DU/2025/383). Usunięto ze starego modułu tezę z pamięci o wyłączeniu Danii z rozp. 2015/848 i nieprecyzyjny opis art. 349-353 (art. 351 to wyłączenie PZU wobec dewelopera).

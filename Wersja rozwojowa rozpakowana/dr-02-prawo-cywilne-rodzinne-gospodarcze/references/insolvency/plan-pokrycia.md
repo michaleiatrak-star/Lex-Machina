@@ -55,8 +55,8 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | `mod-PrRestr-procedura-zakonczenie` | 189–337 | 39 | 3.3 / 86 | ✅ A (19.8 kB, 508 B/art; 2026-10-08) |
 | `mod-PrRestr-odrebne-miedzynarodowe` | 338–456 | 41 | 3.8 / 94 | ✅ A (18.2 kB, 443 B/art; 2026-10-08) |
 | `mod-PrRestr-dzial-VI-uklad` | 150–179 | 31 | 5.3 / 175 | ✅ A (19.9 kB, 642 B/art; 2026-10-08) |
-| `mod-PrRestr-dzial-V-pomoc-publiczna` | 140–149 | 10 | 3.1 / 316 | ⬜ |
-| `mod-PrRestr-dzial-VII-uklad-czesciowy` | 180–188 | 7 | 2.7 / 394 | ⬜ (uzupełnić format) |
+| `mod-PrRestr-dzial-V-pomoc-publiczna` | 140–149 | 10 | 3.1 / 316 | ✅ A (14.6 kB, 1457 B/art; 2026-10-08) |
+| `mod-PrRestr-dzial-VII-uklad-czesciowy` | 180–188 | 7 | 2.7 / 394 | ✅ A (7.7 kB, 1102 B/art; 2026-10-08) |
 
 ### Fala 4 — wersje, nowelizacje, mapy
 
