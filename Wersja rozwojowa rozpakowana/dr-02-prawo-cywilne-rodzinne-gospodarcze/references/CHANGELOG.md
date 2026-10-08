@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.79 (2026-10-08): mod-PrRestr-dzial-III-nadzorca-zarzadca przebudowany do klasy A / COV-ART: PrRestr art. 23-64 (48 aktywnych). Pełne tabele wynagrodzenia nadzorcy sądowego (art. 42: 2-44 podstaw) i zarządcy (art. 55: 3-208 podstaw), zaliczki PPU (43a), procenty przy porażce (40% / 30%), depozyt i uchwała wierzycieli (59, 61). Oznaczono odesłanie art. 38 ust. 1c pkt 3 do ustawy, która utraciła moc (odnośnik t.j.). Usunięto ze starego modułu niezweryfikowane odesłanie do art. 226d.
+
 - 3.78 (2026-10-08): mod-PrRestr-dzial-IV-uczestnicy-wierzyciele przebudowany do klasy A / COV-ART: PrRestr art. 65-139 (75 aktywnych; uchylony 88). Pełne reguły spisu (77-87, 86a), sprzeciwu (91-96), wyciągu jako tytułu (102), wyłączeń głosu (109, 116), większości i cram-down (119), zezwoleń rady (129). Usunięto ze starego modułu niezweryfikowane odesłanie do art. 211b i 216 (PZU) spoza zakresu.
 
 - 3.77 (2026-10-08): mod-PrRestr-ppu-pu przebudowany do klasy A / COV-ART: PrRestr art. 227-282 (56 aktywnych). Błąd starego modułu: tabela trybów błędnie przypisywała art. 273-274 do zarządu dłużnika i 275-276 do masy i zobowiązań (art. 273 to odesłanie do art. 238-256; 274-275 — skład masy i spis inwentarza; 276-279 — procesy i egzekucja). Próg 15% zweryfikowany w art. 3 ust. 3-4.

@@ -67,7 +67,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | PrUp + PrRestr — uzupełnienie | PrUp jw. + PrRestr Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026` | 🟡 B |
 | Prawo restrukturyzacyjne — układ | Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrRestr-dzial-VI-uklad` | ✅ aktywny |
 | PrRestr — układ częściowy | jw. | `mod-PrRestr-dzial-VII-uklad-czesciowy` | ✅ aktywny |
-| PrRestr — nadzorca / zarządca | jw. | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | ✅ aktywny |
+| PrRestr — nadzorca / zarządca | jw. | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — uczestnicy / wierzyciele | jw. | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — pomoc publiczna | jw. | `mod-PrRestr-dzial-V-pomoc-publiczna` | ✅ aktywny |
 | Pomoc publiczna na ratowanie / restrukturyzację | Dz.U. 2026 poz. 113 t.j. ze zm. | `mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow` | ✅ aktywny |
