@@ -14,7 +14,7 @@
 □ POWIĄZANIA (moduły dr-02, inne DR; przepisy innych aktów tylko po weryfikacji ELI)
 □ WYNIK (co ma powstać: tabela przesłanek, pismo, kalendarz)
 □ testy: scripts/test_prup.py, test_insolvency.py; audyt: check_rejestracja_modulow, check_coverage_coherence
-Miara pomocnicza: ≥ 400 B treści na aktywny artykuł (stan wyjściowy modułów: 43–477 B).
+Miara pomocnicza (orientacyjna): ok. 400 B treści na aktywny artykuł (stan wyjściowy modułów: 43–477 B).
 ```
 
 ## Stan i kolejność prac
@@ -26,7 +26,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | Moduł | Zakres | Akt. art. | Przed (kB, B/art) | Status |
 |---|---|---|---|---|
 | `mod-PrUpad-wniosek-ogloszenie` | 1–56h | 62 | 3.9 / 63 | ✅ A (30.0 kB, 495 B/art; 2026-10-08) |
-| `mod-PrUpad-skutki-masa-bezskutecznosc` | 57–147a | 85 | 4.6 / 55 | ⬜ |
+| `mod-PrUpad-skutki-masa-bezskutecznosc` | 57–147a | 85 | 4.6 / 55 | ✅ A (33.6 kB, 395 B/art; 2026-10-08) |
 | `mod-PrUpad-organy-procedura` | 149–234 | 69 | 3.1 / 46 | ⬜ |
 | `mod-PrUpad-zakonczenie-zakaz-karne` | 361–546 | 36 | 3.5 / 99 | ⬜ |
 | `mod-PrUpad-uklad-likwidacja-zakonczenie` | 266a–266f | 6 | 2.8 / 477 | ⬜ (uzupełnić format) |
