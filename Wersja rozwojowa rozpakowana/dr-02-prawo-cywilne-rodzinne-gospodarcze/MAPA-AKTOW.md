@@ -59,7 +59,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | PrUp — Pełny tekst PrUp, wersje czasowe, indeks artykułów i odczyt ELI | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-zrodla-i-wersje` | źródło pełne / workflow B; fresh gate |
 | PrUp — Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-wierzytelnosci-235-266` | źródło pełne / workflow B; fresh gate |
 | PrUp — Fundusze masy, kategorie, zabezpieczenia i plan podziału | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-podzial-335-360` | źródło pełne / workflow B; fresh gate |
-| PrUp — Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-syndyk-likwidacja` | źródło pełne / workflow B; fresh gate |
+| PrUp — Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-syndyk-likwidacja` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-konsument-workflow` | źródło pełne / workflow B; fresh gate |
 | PrUp — układ w postępowaniu upadłościowym (art. 266a–266f) | jw. | `mod-PrUpad-uklad-likwidacja-zakonczenie` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — likwidacja / międzynarodowe / szczególne | jw. | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | ✅ aktywny |
