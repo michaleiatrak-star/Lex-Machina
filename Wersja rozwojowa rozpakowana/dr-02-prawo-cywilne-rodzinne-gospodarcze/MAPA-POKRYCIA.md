@@ -70,7 +70,7 @@ Nie jest to 603 merytorycznie zaudytowanych artykułów ani komentarz `FULL`.
 | Procedura | Moduł | Głębokość |
 |---|---|---|
 | Pełny tekst PrUp, wersje czasowe, indeks artykułów i odczyt ELI | `mod-PrUpad-zrodla-i-wersje.md` | źródło, metryka i odczyt |
-| Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` | workflow B; wyjątki przez pełny przepis |
+| Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | Fundusze masy, kategorie, zabezpieczenia i plan podziału | `mod-PrUpad-podzial-335-360.md` | workflow B; wyjątki przez pełny przepis |
 | Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | `mod-PrUpad-syndyk-likwidacja.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony) |
 | Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | `mod-PrUpad-konsument-workflow.md` | workflow B; wyjątki przez pełny przepis |
