@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.83 (2026-10-08): mod-PrRestr-procedura-zakonczenie przebudowany do klasy A / COV-ART: PrRestr art. 189-209 i 324-337 (39 aktywnych). Błąd starego modułu: art. 327 opisany jako ograniczenie legitymacji do zaskarżenia odmowy (ust. 2 dotyczy postanowienia oddalającego wniosek o umorzenie — zażalenie tylko wnioskodawcy). Dodano pełny katalog spraw dla składu 3 sędziów (200 ust. 1a), reguły terminów (201), wyjątki od systemu (196b-196c), domniemanie 30 dni (326 ust. 2), rozliczenie zarządcy (330-333).
+
 - 3.82 (2026-10-08): mod-PrRestr-wejscie-plan-test przebudowany do klasy A / COV-ART: PrRestr art. 1-22 (23 aktywne; uchylony 5). Pełny katalog wyłączeń art. 4 ust. 2 z oznaczeniem zmiany pkt 4 od 11.01.2027 (DU/2026/1206), elementy planu (art. 10 ust. 1 pkt 1-11) i testu zaspokojenia (10a), zbieg z upadłością (11-13), właściwość COMI (15), sędzia-komisarz (18-21). Stary moduł bez błędów merytorycznych; brak oznaczenia nowelizacji art. 4 uzupełniony.
 
 - 3.81 (2026-10-08): mod-PrRestr-pzu przebudowany do klasy A / COV-ART: PrRestr art. 210-226i (29 aktywnych). Błąd starego modułu: art. 214 opisany jako przepis o brakujących lub nieważnych głosach (dotyczy doręczenia dokumentów udzielającemu wsparcia z art. 140; ważność głosu reguluje art. 215, nieważność karty — art. 213 ust. 3). Usunięto niezweryfikowaną tezę o zabezpieczeniach rzeczowych. Dodano 12 elementów karty (213), treść sprawozdania (220), skargę na odmowę obwieszczenia (226b).
