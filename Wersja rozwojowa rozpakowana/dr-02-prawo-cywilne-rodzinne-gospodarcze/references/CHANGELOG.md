@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.75 (2026-10-08): mod-PrUpad-likwidacja-miedzynarodowe-szczegolne przebudowany do klasy A / COV-ART: art. 378-425s (67 aktywnych; uchylone 385, 391, 399, 400, 420). Błąd starego modułu: sekcja 1 omawiała art. 316-334 spoza routingu modułu (zakres mod-PrUpad-syndyk-likwidacja) — usunięta, etykieta w MAPA-AKTOW poprawiona. Rozporządzenie (UE) 2015/848 zweryfikowane w EUR-Lex (CELEX 32015R0848, obowiązuje).
+
 - 3.74 (2026-10-08): mod-PrUpad-konsument-workflow przebudowany do klasy A / COV-ART: art. 491^1-491^24 (26 aktywnych, uchylone 491^4, 491^11, 491^13). Uzupełniono pominięte jednostki: 491^2 ust. 3a, 5a-5c, 491^14 ust. 2 (zakończenie przy wniosku wierzyciela), 491^16 ust. 2b, 491^19 ust. 4, 491^21 ust. 3, 491^24 ust. 3. Stary moduł bez błędów merytorycznych; regułę art. 361 z art. 491^1 ust. 4 przypisano do trybu ust. 2.
 
 - 3.73 (2026-10-08): `mod-PrUpad-podzial-335-360` przebudowany do klasy A / COV-ART z urzędowego t.j. PrUp DU/2026/913 (snapshot SHA-256 zgodny; t.j. obowiązujący wg ELI 2026-10-08): fundusze masy i sumy z przedmiotów obciążonych, kategorie I–VII z wyjątkami kategorii IV, kwota mieszkaniowa, kolejność kosztów i zobowiązań masy, alimenty po ogłoszeniu, potrącenia z sumy z przedmiotu obciążonego (limit 1/10), uprzywilejowanie przy nieruchomości, plan ogólny i oddzielny, zarzuty, zatwierdzenie, wykonanie, warunkowe i niewymagalne, depozyt — wszystkie 26 aktywnych artykułów; wyłączenia trybu konsumenckiego z art. 491² ust. 1.
