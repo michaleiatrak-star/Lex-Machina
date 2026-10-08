@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.91 (2026-10-08): Upadłość konsumencka trafia do `mod-PrUpad-konsument-workflow`: wiersz MAPA-AKTOW nazwany „Upadłość konsumencka osoby fizycznej (oddłużenie)” (było tylko „Tryby konsumenckie…”) i linia „Hasła spraw” w module (ogłosić upadłość konsumencką, oddłużenie, umorzenie długów, plan spłaty). Dotąd „Chcę ogłosić upadłość konsumencką” wskazywało moduł kredytu konsumenckiego.
+
 - 3.90 (2026-10-08): prup.py verify (--verify-online dla prup.py i prrestr.py): porównanie relacji ELI pomija pole changeDate (data edycji rekordu powiązanego aktu, nie treść prawna). Dotąd każda edycja metadanych dowolnego powiązanego aktu dawała fałszywe ZMIANA_ZRODLA mimo identycznego PDF i zbioru relacji (zaobserwowane 2026-10-08). Zmiana PDF, nowy akt w relacjach oraz zmiana tytułu/statusu/numeru powiązanego aktu nadal blokują. Testy: test_online_change_date_only_passes, test_online_related_act_status_change_blocks.
 
 - 3.89 (2026-10-08): Akty pomocnicze PrUp/PrRestr (11 wpisów w sources.json) bez lokalnych PDF/TXT: usunięto 22 pliki (PDF i TXT 11 aktów) oraz duplikat prup/sources/nowelizacja-1206; zostają metryki ELI (*.json, dodano amendment-2026-1206.json) i sha256 pełnych PDF-ów (zweryfikowane z ELI 08.10.2026). Nowy rejestr references/REJESTR-ZRODEL.json = lista źródeł dla RAG aplikacji (13 pozycji; role w sources.json bez zmian, więc aplikacja nadal pobiera nowelizacje z ELI). Moduły i dokumenty nie linkują już do usuniętych PDF-ów; snapshoty bieżących t.j. (prup.pdf, prrestr.pdf) bez zmian.

@@ -1,7 +1,7 @@
-582bfcab7320c2f9f37049636e46d0e07251415474e5417ffb84c04d5e05ff6b  ./MAPA-AKTOW.md
+b15607d99768b42d7de981de5db64d11b448530f2e1fd6bde8c4ef5458b849b1  ./MAPA-AKTOW.md
 887f381cef2a0eaa1486fba44d44ef960e86741d56d8abc00c4fb736c6ba9094  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-3a3a95d2bf974b15e82fa4e629d3fb0e3fa46b4d07ed051793702310f4272aeb  ./SKILL.md
+368672726c4cbbf4a75dfae672851d07f8c419c7acf89be13de40058546aae44  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -58,7 +58,7 @@ f7818804c025e077d1ce1be94d7ba17947939a5ac55270617cd23a734a079ab3  ./modules/mod-
 8efd4bfcc445e7d2cab798b01fd12db8278b0619212c63506cf6de05017c3eb0  ./modules/mod-PrRestr-wejscie-plan-test.md
 bdfafd0c0900475c1e0d7df773558c2f00563fb5fdda6557067ef7d0a077060f  ./modules/mod-PrRestr-zrodla-i-wersje.md
 e11f14256bfe7c2ac516d40eefe100195e8b0425971e0089b33070418051f89f  ./modules/mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026.md
-e7a07a0c75998ec450112b18d42502c203be9a23e6e40004272faef66004569a  ./modules/mod-PrUpad-konsument-workflow.md
+b72b155cf9b4bd7b94ba9ad577dc1c998fb16f87f7406fd8769151722db29fc2  ./modules/mod-PrUpad-konsument-workflow.md
 ae10d84cbb40b8f88c7dca32b6cb9524b182c4fc819c3f71b298cba8af945f6e  ./modules/mod-PrUpad-likwidacja-miedzynarodowe-szczegolne.md
 7a9bb8f82da4387cccd87f84ce213c149e1603390e64b7f265f9900892ada0d5  ./modules/mod-PrUpad-organy-procedura.md
 0e7429e4d4d07be94e674c31edf3a874fe8be89f22b8e0da282a098685e643a5  ./modules/mod-PrUpad-podzial-335-360.md
@@ -105,7 +105,7 @@ bc9125f92d068cf5aae2c3d69a0413bd14303b5e5920ff4e6ec1547a1c809fb0  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-26694fa1069f14cbf9116c373abaf9647aae54c4c43e53fd4c0e5c0251414257  ./references/CHANGELOG.md
+9f9d1b06eb2f80906352012a78110af8775c808c8aaf94f7aee0438c110cdfb5  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
 52a094221ec53d81190c3e613a40f5b5b7d67e96e346e713a9f68821269a9a55  ./references/insolvency/dodawanie-ustawy.md
