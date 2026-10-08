@@ -69,7 +69,9 @@ Katalog wszystkich jawnych nagłówków obu t.j.: `references/insolvency/katalog
 Sprawdzenie: `python3 scripts/insolvency.py coverage`; odczyt z procedurą:
 `python3 scripts/insolvency.py route prup 127`. Pismo dotyczące restrukturyzacji
 uruchamia również `mod-PrRestr-zrodla-i-wersje.md` i czytnik `scripts/prrestr.py`.
-Pełne teksty pierwotne, poprzednie t.j. i nowelizacje w `references/insolvency/sources/`.
+Nowelizacje, teksty pierwotne i poprzednie t.j. (2024/1428, 2025/614) to wskaźniki ELI + sha256
+w `references/insolvency/sources/*.json`; PDF-y pobiera warstwa RAG aplikacji wg
+`references/REJESTR-ZRODEL.json`.
 Wybór reżimu: `references/insolvency/wersje-i-przepisy-przejsciowe.md`.
 Instrukcja dalszej rozbudowy: `references/insolvency/dodawanie-ustawy.md`.
 

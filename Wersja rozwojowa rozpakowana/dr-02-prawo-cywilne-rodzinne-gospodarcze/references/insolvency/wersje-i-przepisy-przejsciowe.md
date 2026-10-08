@@ -8,13 +8,14 @@
 | Prawo restrukturyzacyjne | DU/2026/533 | 25.03.2026 | 17.04.2026 |
 
 Metryki źródłowe, PDF, ekstrakcje i hashe: `../prup/`, `../prrestr/`.
-Pełne teksty niżej wskazanych nowelizacji: `sources/`, metryka: `sources.json`.
+Niżej wskazane nowelizacje: metryki ELI w `sources/*.json`, `sources.json`; PDF-y tylko na liście RAG
+(`../REJESTR-ZRODEL.json`), treść z linków ELI w tabeli.
 Sprawdź aktualne relacje ELI obu aktów przy każdym użyciu. Brak zmiany PDF
 tekstu jednolitego nie dowodzi, że nie uchwalono późniejszej nowelizacji.
 
 ## Reżimy przejściowe
 
-Zmienione jednostki odczytano z tekstów nowelizacji w `sources/amendment-*.txt` (08.10.2026); daty wejścia — z przepisów końcowych tych ustaw.
+Zmienione jednostki odczytano z tekstów nowelizacji w ELI (08.10.2026); daty wejścia — z przepisów końcowych tych ustaw.
 
 | Nowelizacja | Zmienione jednostki PrUp / PrRestr | Wejście w życie | Przepis przejściowy (reguła dla sprawy) | Moduły |
 |---|---|---|---|---|
@@ -36,7 +37,7 @@ Zmienione jednostki odczytano z tekstów nowelizacji w `sources/amendment-*.txt`
 3. Wybierz reżim na podstawie przepisów przejściowych; wpisz zdarzenie,
    datę, dowód i jednostkę nowelizacji. Sam numer najnowszego t.j. nie wystarcza.
 4. Dla starszej sprawy pobierz właściwy tekst i zmiany między nim a datą
-   graniczną. Dołączone poprzednie t.j. 2024/1428 i 2025/614 są punktami
+   graniczną. Poprzednie t.j. 2024/1428 i 2025/614 są wskaźnikami ELI (PDF z ELI, sha256 w rejestrze) i punktami
    odniesienia, nie automatycznie gotowymi wersjami dla każdej daty.
 5. Nie scalaj wariantów „na oko”. Gdy czytnik blokuje `--as-of`, odczytaj
    wskazaną nowelizację i przeprowadź udokumentowaną rekonstrukcję.
@@ -48,7 +49,7 @@ zdarzenia w danych” wymaga potwierdzenia, że lista zdarzeń jest kompletna.
 
 ## Przepisy pominięte i uchylone
 
-Pełne pierwotne PDF obu ustaw zachowują przepisy zmieniające inne akty
+Teksty pierwotne obu ustaw (ELI `DU/2003/535`, `DU/2015/978`) zawierają przepisy zmieniające inne akty
 (PrUp 524–535 i PrRestr 401–447), których teksty jednolite nie drukują.
 Odczyt tekstu pierwotnego nie przywraca przepisów uchylonych. Skutki dawnych
 zmian należy sprawdzać we właściwej wersji aktu zmienionego. Rejestr nie
