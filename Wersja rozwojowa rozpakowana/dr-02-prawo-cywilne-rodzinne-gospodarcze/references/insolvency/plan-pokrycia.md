@@ -27,7 +27,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 |---|---|---|---|---|
 | `mod-PrUpad-wniosek-ogloszenie` | 1–56h | 62 | 3.9 / 63 | ✅ A (30.0 kB, 495 B/art; 2026-10-08) |
 | `mod-PrUpad-skutki-masa-bezskutecznosc` | 57–147a | 85 | 4.6 / 55 | ✅ A (33.6 kB, 395 B/art; 2026-10-08) |
-| `mod-PrUpad-organy-procedura` | 149–234 | 69 | 3.1 / 46 | ⬜ |
+| `mod-PrUpad-organy-procedura` | 149–234 | 69 | 3.1 / 46 | ✅ A (25.8 kB, 373 B/art; 2026-10-08) |
 | `mod-PrUpad-zakonczenie-zakaz-karne` | 361–546 | 36 | 3.5 / 99 | ⬜ |
 | `mod-PrUpad-uklad-likwidacja-zakonczenie` | 266a–266f | 6 | 2.8 / 477 | ⬜ (uzupełnić format) |
 
