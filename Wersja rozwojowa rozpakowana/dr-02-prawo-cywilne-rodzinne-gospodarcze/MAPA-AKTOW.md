@@ -114,7 +114,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 |---|---|---|---|
 | PrRestr — Prawo restrukturyzacyjne — pełny korpus i sposób użycia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-zrodla-i-wersje` | pełne źródło / procedura tematyczna; fresh gate |
 | PrRestr — Restrukturyzacja — kwalifikacja sprawy, plan i test zaspokojenia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-wejscie-plan-test` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Postępowanie o zatwierdzenie układu — pełny przebieg | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-pzu` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Postępowanie o zatwierdzenie układu — pełny przebieg | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-pzu` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — Przyspieszone postępowanie układowe i postępowanie układowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-ppu-pu` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — Sanacja — zarząd, działania sanacyjne i układ | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-sanacja` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — Restrukturyzacja — procedura wspólna, zakończenie i upadłość | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-procedura-zakonczenie` | pełne źródło / procedura tematyczna; fresh gate |

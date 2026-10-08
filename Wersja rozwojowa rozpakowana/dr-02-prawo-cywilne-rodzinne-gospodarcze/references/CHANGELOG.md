@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.81 (2026-10-08): mod-PrRestr-pzu przebudowany do klasy A / COV-ART: PrRestr art. 210-226i (29 aktywnych). Błąd starego modułu: art. 214 opisany jako przepis o brakujących lub nieważnych głosach (dotyczy doręczenia dokumentów udzielającemu wsparcia z art. 140; ważność głosu reguluje art. 215, nieważność karty — art. 213 ust. 3). Usunięto niezweryfikowaną tezę o zabezpieczeniach rzeczowych. Dodano 12 elementów karty (213), treść sprawozdania (220), skargę na odmowę obwieszczenia (226b).
+
 - 3.80 (2026-10-08): mod-PrRestr-sanacja przebudowany do klasy A / COV-ART: PrRestr art. 283-323 (41 aktywnych). Błędy starego modułu: art. 295 opisany jako spis inwentarza (to odesłanie do art. 242-246), art. 296 jako kontrola czynności dłużnika (to ustalenie składu masy), art. 319 jako ograniczenia układu i spis (to pomoc publiczna w planie); usunięte. Dodano prawo wykupu MON (323 ust. 2-2d) i bezskuteczność wynagrodzeń zarządu (305).
 
 - 3.79 (2026-10-08): mod-PrRestr-dzial-III-nadzorca-zarzadca przebudowany do klasy A / COV-ART: PrRestr art. 23-64 (48 aktywnych). Pełne tabele wynagrodzenia nadzorcy sądowego (art. 42: 2-44 podstaw) i zarządcy (art. 55: 3-208 podstaw), zaliczki PPU (43a), procenty przy porażce (40% / 30%), depozyt i uchwała wierzycieli (59, 61). Oznaczono odesłanie art. 38 ust. 1c pkt 3 do ustawy, która utraciła moc (odnośnik t.j.). Usunięto ze starego modułu niezweryfikowane odesłanie do art. 226d.
