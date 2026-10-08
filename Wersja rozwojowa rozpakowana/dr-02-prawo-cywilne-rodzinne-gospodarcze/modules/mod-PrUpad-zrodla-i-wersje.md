@@ -75,6 +75,8 @@ Instrukcja dalszej rozbudowy: `references/insolvency/dodawanie-ustawy.md`.
 
 ## Routing pracy syndyka
 
+Wszystkie moduły tabeli są w klasie **A / COV-ART** (08.10.2026; `references/insolvency/plan-pokrycia.md`). Nowelizacje ze zmienionymi jednostkami i przepisami przejściowymi: `references/insolvency/wersje-i-przepisy-przejsciowe.md`.
+
 | Zadanie | Moduł |
 |---|---|
 | Zgłoszenie, braki, zwrot, sprawdzanie, lista, sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` |
@@ -85,7 +87,7 @@ Instrukcja dalszej rozbudowy: `references/insolvency/dodawanie-ustawy.md`.
 | Masa, umowy, małżeństwo, bezskuteczność, procesy | `mod-PrUpad-skutki-masa-bezskutecznosc.md` |
 | Organy, rada i zgromadzenie, KRZ i doręczenia | `mod-PrUpad-organy-procedura.md` |
 | Zakończenie, zakaz, karne i przejściowe | `mod-PrUpad-zakonczenie-zakaz-karne.md` |
-| Układ, zakończenie, umorzenie | `mod-PrUpad-uklad-likwidacja-zakonczenie.md` |
+| Układ w postępowaniu upadłościowym (art. 266a–266f) | `mod-PrUpad-uklad-likwidacja-zakonczenie.md` |
 | Międzynarodowe, deweloperzy, po śmierci dłużnika | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne.md` |
 | Banki/SKOK, ubezpieczyciele, obligacje, układ konsumencki | `mod-PrUpad-postepowania-odrebne-426-491-38.md` |
 | Pozostały artykuł / wyjątek nieopisany w komentarzu | Odczyt jednostki + odesłań z pełnego źródła, samodzielna analiza |

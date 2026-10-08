@@ -1,158 +1,212 @@
-# PrUp — zgłoszenia, sprawdzanie i lista wierzytelności
+# Upadłość — zgłoszenie i ustalenie wierzytelności: zgłoszenie, sprawdzenie, lista, sprzeciw, zatwierdzenie, wyciąg (PrUp art. 235–266)
 
-**Zakres:** art. 235–266 wraz z art. 216a–216ab; procedura ogólna i rozdzielenie
-trybu konsumenckiego. **Poziom B:** workflow, mapa wszystkich jednostek tytułu V;
-bez deklaracji pełnego komentarza, orzecznictwa i wszystkich wersji historycznych.
-Import standardu 13 sekcji: `shared/MODULE-STANDARD-POLISH-LAW.md`.
+**Status:** moduł klasy kancelaryjnej — poziom A / COV-ART (każdy obowiązujący artykuł z zakresu omówiony; uchylone oznaczone)
+**Źródło:** Prawo upadłościowe — t.j. [Dz.U. 2026 poz. 913](https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf) (ELI DU/2026/913; akt bazowy DU/2003/535)
+**Weryfikacja:** snapshot PDF 04.10.2026 (SHA-256 zgodny z `references/prup/metadata.json`); status t.j. „obowiązuje” potwierdzony w ELI 08.10.2026 ✅ [VER: isap_lookup DU/2003/535 → DU/2026/913, 2026-10-08]
+**Zmiany po t.j. w tym zakresie:** brak.
+**ZASADA:** przed powołaniem odczytaj przepis: `python3 scripts/prup.py article NUMER --verify-online`. Odesłania do KPC (art. 130, 350, 353) — odczytaj w ELI na dzień czynności.
+**Tryb konsumencki:** art. 491² ust. 1 wyłącza m.in. art. 244, 245 i 253–264 (zweryfikowane w t.j.) → `mod-PrUpad-konsument-workflow`.
 
-## Źródła i wejście
+---
 
-✅ [VER] RZĄD 1, odczyt 2026-10-04: [PrUp, Dz.U. 2026 poz. 913,
-s. 45–46 i 52–57](https://api.sejm.gov.pl/eli/acts/DU/2026/913/text.pdf).
-Każdy wiersz poniższej mapy opisuje wskazaną jednostkę tego źródła.
-Przed użyciem: `mod-PrUpad-zrodla-i-wersje.md`, fresh gate i reguły przejściowe.
-KPC jest odrębnym aktem: odesłanie z art. 241 wymaga odczytu art. 130 KPC
-w wersji właściwej dla czynności, nie odtworzenia terminu z pamięci.
+## FAZA 0 — INTAKE
 
-Zbierz: postanowienie i obwieszczenie o upadłości, tryb z postanowienia, zgłoszenie
-z załącznikami i datą wpływu, potwierdzenia doręczeń, dokumenty upadłego, historię
-wpłat i cesji, zabezpieczenia, okresy odsetkowe, wcześniejsze wezwania i odpowiedzi.
-Dla każdej pozycji zachowaj osobno kwotę zgłoszoną, uznaną i nieuznaną z powodem.
+```
+□ Termin zgłoszeń: 30 dni od obwieszczenia postanowienia o ogłoszeniu w KRZ (art. 51 ust. 1 pkt 4)
+  — data obwieszczenia? zgłoszenie w terminie czy po nim (ryczałt z art. 235, skutki z art. 252)?
+□ Czy wierzytelność wymaga zgłoszenia? (pracownicze — nie; zabezpieczone rzeczowo — z urzędu)
+□ Kanał: system teleinformatyczny / wyjątek papierowy dla wierzycieli z art. 216aa
+□ Treść z art. 240 pkt 1–7 i 9; dowody; kategoria (art. 342); zabezpieczenia; toczące się sprawy
+□ Szczególne obliczenia: niepieniężna, niewymagalna bez odsetek, odsetki, waluta obca,
+  świadczenia okresowe, współdłużnik/poręczyciel, okres rozliczeniowy przecinający datę upadłości
+□ Sprzeciw: data obwieszczenia o złożeniu listy → 2 tygodnie; legitymacja; zakaz nowych twierdzeń
+□ Po zakończeniu: wyciąg z listy jako tytuł egzekucyjny; umorzenie zobowiązań (art. 265)
+```
 
-## 0. Właściwy tor postępowania
+---
 
-- Ustal, czy chodzi o tryb ogólny, konsumencki z art. 491^1 ust. 1, czy konsumenta
-  prowadzonego według części pierwszej (art. 491^1 ust. 2).
-- W podstawowym trybie konsumenckim art. 491^2 ust. 1 wyłącza m.in. art. 244,
-  245 i 253–264. Nie twórz automatycznie formalnej listy i sprzeciwu z art. 256.
-  Kontrolę zgłoszeń powiąż z procedurą projektu planu spłaty z art. 491^14.
-- Odczytaj `mod-PrUpad-konsument-workflow.md` przy każdym konsumencie.
-  Nie zakładaj trybu po samym statusie osoby fizycznej.
+## MAPA ARTYKUŁÓW
 
-## 1. Zgłoszenie czy ujęcie z urzędu
-
-| Jednostka | Działanie / rozstrzygnięcie |
-|---|---|
-| 235 ust. 1–2 | Ustal spóźnienie, podstawę ryczałtu, wyjątek korekty dokumentu rozliczeniowego przez syndyka oraz wezwanie do wpłaty. Zryczałtowane koszty nie są automatycznie opłatą sądową. |
-| 236 ust. 1 | Zgłoszenie syndykowi w terminie z postanowienia, przez system z zastrzeżeniem wyjątków. |
-| 236 ust. 2–4 | Zabezpieczenia rzeczowe i przypadek braku osobistej odpowiedzialności upadłego; sprawdź ujęcie z urzędu. |
-| 237 | Należności ze stosunku pracy nie wymagają zgłoszenia; ujęcie z urzędu. |
-| 238 | Uwzględnij odpowiednie reguły FGŚP oraz KRUS. |
-| 239 | Uchylony — nie jest podstawą aktualnej checklisty. |
-| 239a | Zgłoszenie przerywa przedawnienie; nowy bieg od dnia po prawomocnym zakończeniu albo umorzeniu postępowania. Oddziel ten skutek od skutków zwrotu. |
-| 216a, 216aa, 216ab | Ustal kanał, podpis i załączniki oraz wyjątki; samo wniesienie poza KRZ nie przesądza wadliwości. |
-
-Ryczałt z art. 235: 15% wskazanego w ustawie wynagrodzenia GUS za III kwartał
-poprzedniego roku. Nie utrwalaj jednej kwoty PLN; zapisz rok, źródło wskaźnika,
-wartość, wzór, wynik i wyjątek. Stosuj `shared/RATE-COMPLETENESS.md`.
-
-## 2. Kontrola formalna
-
-Art. 240 pkt 1–7 i 9 oraz 240a wymagają sprawdzenia:
-
-- Tożsamość wierzyciela: imię/nazwa, PESEL/KRS lub identyfikacja zastępcza,
-  firma przedsiębiorcy, miejsce zamieszkania/siedziba, adres, NIP jeśli istnieje.
-- Wierzytelność i należności uboczne; dla niepieniężnej także wartość.
-- Dowody istnienia; uwzględnij możliwość powołania uznania w spisie restrukturyzacyjnym.
-- Kategoria, zabezpieczenia, a przy braku długu osobistego — przedmiot zabezpieczenia.
-- Stan właściwych postępowań, jeżeli się toczą.
-- Rachunek bankowy, jeżeli wierzyciel taki posiada. Brak rachunku nie oznacza
-  automatycznie braku formalnego, jeśli wierzyciel go nie posiada.
-
-**Art. 241:** wady formalne i brak wpłaty ryczałtu w wyznaczonym terminie
-uruchamiają odpowiednie stosowanie art. 130 KPC. Art. 241 nadal zawiera
-odesłanie do uchylonego art. 239 z przypisem redakcyjnym — nie przywraca jego treści.
-Art. 242 jest uchylony.
-
-Dla wezwania zapisz osobno: konkretny brak, przepis, sposób naprawy, właściwy
-termin i rygor. Przy art. 130 KPC uwzględnij również wariant zagraniczny;
-nie wpisuj jednolitego terminu bez sprawdzenia danych adresowych i reprezentacji.
-Źródło pomocnicze odczytane 04.10.2026: [KPC 2026/468, art. 130, s. 26–27](https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf).
-Dla użycia procesowego ponów weryfikację zmian KPC.
-
-**Zwrot, art. 242a:** uzasadnienie i właściwe pouczenie; skarga do sędziego-komisarza,
-wnoszona do syndyka. Syndyk uwzględnia ją w całości albo przekazuje z dokumentami.
-Nie myl skargi na zwrot z późniejszym sprzeciwem do listy.
-
-## 3. Kontrola merytoryczna — art. 243
-
-1. Sprawdź księgi, inne dokumenty upadłego i właściwe rejestry; wezwij upadłego
-   do oświadczenia o uznaniu wierzytelności.
-2. Jeśli brak potwierdzenia, wezwij wierzyciela do dokumentów wskazanych
-   w zgłoszeniu, z pouczeniem o odmowie uznania.
-3. Termin tygodniowy z ust. 2 nie podlega przedłużeniu ani przywróceniu;
-   dokumenty spóźnione można uwzględnić, gdy nie opóźni to przekazania listy.
-4. Odróżnij brak dowodu zasadności od wady formalnej zgłoszenia. Nie żądaj
-   automatycznie zwrotu całego zgłoszenia tylko dlatego, że kwota jest sporna.
-5. Sprawdź umowę/tytuł, wykonanie, saldo po wpłatach, cesję, wymagalność,
-   podstawę i okresy odsetek, potrącenie oraz skutki prawomocnego orzeczenia.
-   Odesłania materialne zweryfikuj osobno. Kwoty policz deterministycznie.
-
-Matryca dowodów: każda składowa roszczenia → dokument i miejsce → kwota/okres
-→ zastrzeżenie → przyjęte ustalenie. Nie oznaczaj „uznana” na podstawie samej
-zgodności arytmetycznej ani samego braku sprzeciwu upadłego.
-
-## 4. Ustalenie i wycena listy — wyłącznie gdy właściwy tryb ją przewiduje
-
-| Jednostka | Kontrola |
-|---|---|
-| 244 | Niezwłoczna lista po terminie zgłoszeń i sprawdzeniu; nie później niż dwa miesiące od końca terminu zgłoszeń. |
-| 245 | Oddzielne rubryki: identyfikacja, suma uznana, kategoria, zabezpieczenie, warunek, uzasadnienie odmowy; dołącz oświadczenie upadłego albo informację o braku i przyczynie. |
-| 245a | Podziel okres rozliczeniowy przecinający dzień upadłości; uwzględnij leasing z ust. 2 oraz odrębne deklaracje z ust. 3. |
-| 246 | Wyceń wierzytelność niepieniężną na dzień ogłoszenia upadłości. |
-| 247 | Rozdziel dyskonto niewymagalnej wierzytelności bez odsetek od odsetek naliczonych do dnia poprzedzającego upadłość. Odczytaj ustawowe limity dyskonta. |
-| 248 | Roszczenia zwrotne: sprawdź zapłatę przez współdłużnika/poręczyciela; zgłoszenie przed zapłatą ma regułę warunkową i ograniczenie głosu. |
-| 249 | Świadczenia okresowe: odrębnie oznaczony czas, dożywotnie/nieoznaczone, suma wykupu; wyłączenie alimentów. |
-| 250 | Zabezpieczenie za granicą: dowód wykreślenia albo uznanie postępowania w państwie zabezpieczenia. |
-| 251 | Waluta: kurs średni NBP z dnia ogłoszenia, a przy braku kursu średnia cena rynkowa z tej daty. Nie zastępuj automatycznie kursem ostatniego dnia roboczego. Przeliczenie na listę nie zmienia waluty zobowiązania. |
-| 252 | Spóźnienie nie cofa dokonanych czynności i planów; sprawdź granicę ostatecznego planu oraz skutki końca postępowania. |
-| 253 | Uzupełnienie listy po późnych zgłoszeniach i jego obwieszczenie. |
-| 254 | Cesja po zgłoszeniu: dokument o wymaganej formie, moment zgłoszenia syndykowi/przekazania listy i możliwe uwzględnienie przez sędziego-komisarza. |
-
-## 5. Sprzeciw, zatwierdzenie i dalsze skutki
-
-| Jednostka | Kontrola |
-|---|---|
-| 255–256 | Obwieszczenie złożenia listy uruchamia dwa tygodnie na sprzeciw; zbadaj legitymację wierzyciela i odrębne warunki dla upadłego. |
-| 257 | Wierzytelność zaskarżona, żądanie, uzasadnienie, dowody, opłata i dopuszczalność. |
-| 258 | Granice twierdzeń/zarzutów i wyjątki; przy prawomocnym orzeczeniu szczególne ograniczenie do późniejszych zdarzeń potwierdzonych pismem. |
-| 258a | Doręczenie i odpowiedź, przekazanie dokumentów przez syndyka; prekluzja i wyjątki dla późnych twierdzeń/dowodów. |
-| 259 | Rozpoznanie, możliwa rozprawa, dowody z innych postępowań, status syndyka, zażalenie i ograniczenia przekazania do ponownego rozpoznania. |
-| 260 | Zatwierdzenie po rozstrzygnięciu sprzeciwów albo ich braku; możliwe częściowe zatwierdzenie; obwieszczenie. |
-| 261 | Zmiana z urzędu przy nieistnieniu wierzytelności lub pominięciu należności ujmowanej z urzędu; środek zaskarżenia i obwieszczenia. |
-| 262 | Uzupełnienie, prawomocne rozstrzygnięcia i oczywiste omyłki to różne podstawy; zmiana kwoty po ustaleniu listy jest uwzględniana przy podziale/głosowaniu. |
-| 263 | Odmowa uznania nie przekreśla dochodzenia roszczenia; odczytaj ograniczenie czasowe i art. 145 ust. 1. |
-| 264–265 | Wyciąg z zatwierdzonej listy jako tytuł egzekucyjny i jego granice; brak długu osobistego oraz skutki oddłużenia. Nie utożsamiaj tytułu egzekucyjnego z wykonawczym. |
-| 266 | Zwrot dokumentów ze wzmianką o uznanej kwocie na zarządzenie właściwego organu. |
-
-## Terminy i dowody ich początku
-
-| Zdarzenie | Termin / przepis | Dowód początku |
+| Zakres | Treść | Sekcja |
 |---|---|---|
-| Skarga na zwrot | tydzień, 242a ust. 4 | doręczenie zarządzenia z uzasadnieniem |
-| Przekazanie skargi przez syndyka | trzy dni, 242a ust. 5 | otrzymanie skargi |
-| Dokumenty do sprawdzenia | tydzień, 243 ust. 2 | skuteczne wezwanie; zweryfikuj reguły doręczenia |
-| Sporządzenie listy | maks. dwa miesiące, 244 | koniec okresu zgłoszeń |
-| Sprzeciw | dwa tygodnie, 256 | obwieszczenie z art. 255 ust. 2 |
-| Odpowiedź na sprzeciw | wyznaczony, nie krótszy niż tydzień, 258a | doręczenie zobowiązania |
+| 235 | ryczałt za zgłoszenie po terminie | A |
+| 236–238 | wierzytelności podlegające zgłoszeniu, pracownicze, FGŚP, KRUS | A |
+| 239a–240a | przerwanie przedawnienia, treść zgłoszenia | B |
+| 241–243 | wady zgłoszenia, zwrot i skarga, sprawdzenie przez syndyka | C |
+| 244–254 | sporządzenie listy, rubryki, zasady wyceny, zgłoszenia spóźnione, uzupełnienie, zmiana wierzyciela | D |
+| 255–259 | obwieszczenie listy, sprzeciw, odpowiedź, rozpoznanie, zażalenie | E |
+| 260–262 | zatwierdzenie, zmiany z urzędu, uzupełnienie, sprostowanie | F |
+| 263–266 | dochodzenie wierzytelności nieuznanej, wyciąg z listy jako tytuł, umorzenie, zwrot dokumentów | G |
+| uchylone | 239, 242 (art. 241 nadal odsyła do art. 239 — przypis 12 t.j.: uchylony, nie przywracaj treści) | — |
 
-Stosuj `shared/TERM-CALC.md`; odrębnie oznacz terminy instrukcyjne organu.
-Nie obliczaj daty końcowej bez daty początku i właściwych reguł procesowych.
+---
 
-## Wynik, ryzyka i quality gate
+## A. Kto i co zgłasza (art. 235–238)
 
-Wynik: tryb → stan zgłoszenia → braki formalne → dowody i spór merytoryczny
-→ kwoty/składniki → kategoria/zabezpieczenie → projekt czynności i adresat
-→ terminy/pouczenia → źródła. Uzasadnienie odmowy odnosi się do każdego
-spornego składnika, a nie do oceny wiarygodności osoby jako takiej.
+- **Art. 236 ust. 1:** wierzyciel **osobisty**, który chce uczestniczyć i wymaga ustalenia wierzytelności, zgłasza ją **syndykowi przez system teleinformatyczny** w terminie z postanowienia o ogłoszeniu.
+- **Art. 236 ust. 2–4:** wierzytelności zabezpieczone hipoteką, zastawem, zastawem rejestrowym/skarbowym, hipoteką morską lub innym wpisem w KW / rejestrze okrętowym — zgłoszenie uprawnieniem; **brak zgłoszenia → umieszczenie na liście z urzędu**; odpowiednio, gdy upadły jest tylko dłużnikiem rzeczowym, a wierzyciel chce zaspokojenia z przedmiotu; przepisy dotyczą też innych należności z masy.
+- **Art. 237:** należności **ze stosunku pracy nie wymagają zgłoszenia** — z urzędu na liście.
+- **Art. 238:** roszczenia FGŚP o zwrot wypłaconych świadczeń — jak pracownicze; wierzytelności KRUS — jak ZUS.
+- **Art. 235 — zgłoszenie po terminie:** wierzyciel ponosi **zryczałtowane koszty** = **15%** przeciętnego miesięcznego wynagrodzenia w sektorze przedsiębiorstw bez nagród z zysku w **III kw. roku poprzedniego** (GUS), **nawet bez winy**; wyjątek — spóźnienie wynikające z korekty deklaracji lub podobnego rozliczenia przez syndyka (ust. 1); syndyk zobowiązuje do wpłaty na wskazany rachunek w wyznaczonym terminie (ust. 2). Kwotę licz z aktualnego obwieszczenia GUS.
 
-Przed zakończeniem sprawdź: dokumenty warunkowe, uprawnienie do papieru,
-ujęcie z urzędu, rozliczenie wpłat, datę odcięcia odsetek, brak podwójnego uznania,
-tryb konsumencki i różnicę między zwrotem a odmową. Nie wysyłaj ani nie podpisuj
-pisma w ramach samego opracowania modułu.
+## B. Treść zgłoszenia i przedawnienie (art. 239a–240a)
 
-Powiązania: `mod-PrUpad-podzial-335-360.md`, `mod-PrUpad-konsument-workflow.md`,
-`pisma-procesowe-v3`, `analizator-dowodow-v3`, `orzeczenia-sadowe-v2`.
-Orzecznictwo i wysokości opłat nie są tu utrwalone; pobierz właściwe źródła
-przed użyciem. Wątpliwości materialne rozstrzygaj na podstawie pełnych akt,
-nie przez automatyczne uznanie wyniku ekstrakcji.
+- **Art. 239a:** zgłoszenie **przerywa bieg przedawnienia**; biegnie na nowo od dnia po **uprawomocnieniu się postanowienia o zakończeniu albo umorzeniu** postępowania.
+
+**Treść zgłoszenia (art. 240):**
+```
+1) wierzyciel: imię i nazwisko / nazwa, PESEL / KRS (brak → inne dane z art. 22 ust. 4 —
+   art. 240a), firma przedsiębiorcy, miejsce zamieszkania / siedziba, adres, NIP
+2) określenie wierzytelności z należnościami ubocznymi; wartość wierzytelności niepieniężnej
+3) dowody istnienia — przy uznaniu w spisie wierzytelności z restrukturyzacji wystarczy
+   powołanie się na to
+4) kategoria zaspokojenia (art. 342)
+5) zabezpieczenia
+6) przy wierzytelności, za którą upadły odpowiada tylko rzeczowo — przedmiot zabezpieczenia
+7) stan sprawy, jeżeli toczy się postępowanie sądowe, administracyjne, sądowoadministracyjne
+   lub polubowne
+9) numer rachunku bankowego (jeżeli wierzyciel ma)
+(pkt 8 uchylony)
+```
+
+## C. Wady, zwrot, sprawdzenie (art. 241–243)
+
+- **Art. 241:** zgłoszenie niespełniające warunków pisma procesowego lub art. 240 (odesłanie do uchylonego art. 239 — bez treści) albo brak wpłaty ryczałtu z art. 235 w terminie syndyka → **art. 130 KPC odpowiednio** (wezwanie do uzupełnienia pod rygorem zwrotu).
+
+**Zwrot i skarga (art. 242a):**
+```
+Zarządzenie syndyka o zwrocie — z uzasadnieniem (ust. 1)
+Skarga do s.-k.; pouczenie wierzyciela bez profesjonalnego pełnomocnika o terminie i sposobie (ust. 2)
+Wymogi pisma procesowego + oznaczenie zwróconego zgłoszenia (ust. 3)
+Termin: TYDZIEŃ od doręczenia zarządzenia z uzasadnieniem (ust. 4)
+Wnosi się DO SYNDYKA; syndyk w 3 DNI przekazuje s.-k. ze zgłoszeniem i zarządzeniem przez system,
+  chyba że uwzględni skargę w całości (zawiadamia skarżącego) (ust. 5)
+S.-k. rozpoznaje w TYDZIEŃ od wpływu (przy brakach / opłacie — od uzupełnienia) (ust. 6)
+Odrzucenie: po terminie, niedopuszczalna, nieuzupełniona, nieopłacona; zażalenie (ust. 7)
+```
+
+**Sprawdzenie (art. 243):**
+```
+Syndyk sprawdza potwierdzenie w księgach i dokumentach upadłego, KW, rejestrach; wzywa upadłego
+  do oświadczenia w zakreślonym terminie, czy uznaje (ust. 1)
+Brak potwierdzenia → wezwanie wierzyciela do złożenia w TYDZIEŃ dokumentów wskazanych
+  w zgłoszeniu pod rygorem ODMOWY UZNANIA (ust. 2)
+  — termin NIE podlega przedłużeniu ani przywróceniu
+  — dokumenty spóźnione syndyk może uwzględnić, jeżeli nie opóźni to przekazania listy
+Wezwanie zawiera pouczenie o skutkach uchybienia (ust. 3)
+```
+
+## D. Lista wierzytelności (art. 244–254)
+
+- **Art. 244:** po upływie terminu zgłoszeń i sprawdzeniu — niezwłocznie, **najpóźniej w 2 miesiące** od upływu terminu zgłoszeń.
+- **Art. 245 — rubryki:** l.p.; dane wierzyciela (inne dane — art. 22 ust. 4); suma uznana; kategoria; istnienie i rodzaj zabezpieczenia; warunkowość; uzasadnienie odmowy uznania; załącza się **oświadczenie upadłego** z uzasadnieniem albo wzmiankę, że go nie złożył i dlaczego (pkt 7, 9 oraz ust. 2, 3, 5 uchylone).
+
+**Zasady umieszczania na liście:**
+
+| Art. | Sytuacja | Reguła |
+|---|---|---|
+| 245a | okres rozliczeniowy, w trakcie którego ogłoszono upadłość (czynsz, podatki, składki) | **z mocy prawa** proporcjonalny podział na część sprzed i po dniu ogłoszenia; odpowiednio leasing, gdy przedmiot nie jest u upadłego środkiem trwałym (PIT/CIT); deklaracje — odrębne dla obu części |
+| 246 | wierzytelność niepieniężna | suma pieniężna wg wartości z **dnia ogłoszenia** |
+| 247 ust. 1 | niewymagalna, bez zastrzeżenia odsetek | minus odsetki ustawowe, nie wyżej niż **6%**, od ogłoszenia do wymagalności, maks. za **2 lata** |
+| 247 ust. 2 | odsetki od wierzytelności pieniężnej | naliczone **do dnia poprzedzającego** dzień ogłoszenia włącznie |
+| 248 | współdłużnik, poręczyciel (regres) | w wysokości, w jakiej zaspokoili wierzyciela; mogą zgłosić przed zaspokojeniem (także gwarant, bank akredytywy) — jako **warunkowa**, bez prawa głosu |
+| 249 | świadczenia powtarzające się | czas oznaczony — suma za cały czas minus odsetki ustawowe (≤ 6%) do wymagalności każdego świadczenia; dożywotnie lub nieoznaczone — wartość prawa; suma wykupu z umowy — jako wartość prawa; **nie dotyczy alimentów** |
+| 250 | zabezpieczenie hipoteką / wpisem na majątku za granicą | na liście po dowodzie **wykreślenia** wpisu — chyba że upadłość uznana w państwie położenia przedmiotu |
+| 251 | waluta obca | przeliczenie po **średnim kursie NBP z dnia ogłoszenia** (brak kursu — średnia cena rynkowa z tej daty); nie przekształca zobowiązania w złotowe; wypłata w planie podziału — w PLN |
+| 252 | zgłoszenie **po terminie** (bez względu na przyczynę) | dokonane czynności skuteczne; bez wpływu na złożone plany podziału; udział tylko w planach sporządzonych po uznaniu; brak prawomocnego rozstrzygnięcia do zakończenia/umorzenia → umorzenie w tym zakresie; zgłoszenie po zatwierdzeniu **ostatecznego** planu — bez rozpoznania |
+| 253 | zgłoszenia po terminie | syndyk uzupełnia listę na bieżąco; po przekazaniu listy s.-k. — uzupełnienie listy ze sposobem zaspokojenia; obwieszczenie |
+| 254 | zmiana wierzyciela po zgłoszeniu (cesja) | uwzględnia się, gdy stwierdzona dokumentem urzędowym albo niebudzącym wątpliwości dokumentem prywatnym z podpisem **urzędowo poświadczonym** i zgłoszona syndykowi **przed przekazaniem listy** s.-k.; później — s.-k. może uwzględnić do ostatecznego zatwierdzenia, jeśli bez opóźnienia; nieuwzględnienie nie odbiera nabywcy uprawnień w dalszym toku |
+
+## E. Sprzeciw (art. 255–259)
+
+```
+Obwieszczenie o dacie złożenia listy (255 ust. 2; ust. 1 uchylony)
+SPRZECIW do s.-k. w 2 TYGODNIE od obwieszczenia (256):
+  — wierzyciel umieszczony na liście → co do UZNANIA (cudzej) wierzytelności
+  — wierzyciel, któremu odmówiono → co do ODMOWY uznania (swojej)
+  — upadły, gdy lista niezgodna z jego wnioskami lub oświadczeniami; jeżeli mimo wezwania nie
+    składał oświadczeń — tylko po wykazaniu przyczyn od niego niezależnych
+Wymogi (257): pismo procesowe + zaskarżona wierzytelność + wniosek (uznanie / odmowa)
+  + uzasadnienie + dowody; braki / brak opłaty → art. 130 KPC; odrzucenie: po terminie,
+  niedopuszczalny, nieuzupełniony, nieopłacony (ust. 3 uchylony)
+Prekluzja (258): tylko twierdzenia i zarzuty ze ZGŁOSZENIA — nowe tylko, gdy wcześniej
+  niemożliwe albo potrzeba wynikła później; wierzytelność stwierdzona prawomocnym orzeczeniem
+  — sprzeciw wyłącznie na zdarzeniach po zamknięciu rozprawy, udowodnionych pismem
+Odpowiedź (258a): s.-k. doręcza odpis syndykowi, upadłemu i wierzycielowi, którego dotyczy;
+  termin odpowiedzi NIE KRÓTSZY NIŻ TYDZIEŃ; syndyk przekazuje zgłoszenie i dokumenty z art. 243
+  ust. 2; odpowiedź spóźniona / nieuzupełniona — zwrot; twierdzenia i dowody spoza sprzeciwu
+  i odpowiedzi pomija się, chyba że brak winy albo bez zwłoki
+Rozpoznanie (259): s.-k. / zastępca / wyznaczony sędzia na NIEJAWNYM w 2 MIESIĄCE od wniesienia;
+  rozprawa fakultatywna — niestawiennictwo nie wstrzymuje; można odstąpić od świadka lub
+  biegłego i oprzeć się na dokumentach z innego postępowania; syndyk ma prawa uczestnika;
+  ZAŻALENIE — upadły, syndyk, każdy wierzyciel; uchylenie i przekazanie tylko przy konieczności
+  przeprowadzenia postępowania dowodowego w całości albo nieważności nieusuwalnej w II instancji
+```
+
+## F. Zatwierdzenie i zmiany listy (art. 260–262)
+
+- **Art. 260:** po prawomocnym rozstrzygnięciu sprzeciwów s.-k. zmienia listę i ją **zatwierdza**; bez sprzeciwów — po upływie terminu na sprzeciw; możliwe **częściowe zatwierdzenie** w zakresie nieobjętym sprzeciwami; obwieszczenie zatwierdzenia.
+- **Art. 261:** s.-k. **z urzędu** zmienia listę, gdy umieszczono wierzytelności nieistniejące (w całości lub części) albo pominięto wierzytelności umieszczane z urzędu; obwieszczenie daty postanowienia; zażalenie; obwieszczenie prawomocności.
+- **Art. 262:** zgłoszone po terminie lub ujawnione później (niewymagające zgłoszenia) — **uzupełnienie listy**; sprostowanie stosownie do prawomocnych orzeczeń; **zmiana wysokości po ustaleniu listy** uwzględniana przy planie podziału albo głosowaniu; oczywiste omyłki — art. 350 i 353 KPC odpowiednio (s.-k. lub referendarz; skarga na referendarza nie wstrzymuje mocy; sąd jednoosobowo jako II instancja); obwieszczenie prawomocnego sprostowania (ust. 3 uchylony).
+
+## G. Po ustaleniu listy i po zakończeniu (art. 263–266)
+
+- **Art. 263:** odmowa uznania nie zamyka drogi do dochodzenia we właściwym trybie — z uwzględnieniem art. 145 ust. 1 dopiero **po umorzeniu lub zakończeniu** upadłości.
+- **Art. 264 — wyciąg z listy jako tytuł egzekucyjny:**
+```
+Po zakończeniu / umorzeniu: wyciąg z zatwierdzonej listy (oznaczenie wierzytelności + suma
+  otrzymana w postępowaniu) = TYTUŁ EGZEKUCYJNY przeciwko upadłemu (ust. 1; zastrzeżenie
+  „art. 296” odsyła do przepisu uchylonego tytułu VI)
+Upadły, który nie uznał wierzytelności i nie ma co do niej prawomocnego orzeczenia, może żądać
+  ustalenia jej nieistnienia (w całości / części) (ust. 2)
+Po nadaniu klauzuli — zarzut nieistnienia tylko w powództwie o pozbawienie tytułu
+  wykonawczego wykonalności (ust. 3)
+Nie dotyczy wierzycieli, wobec których upadły nie był dłużnikiem osobistym (ust. 4)
+```
+- **Art. 265:** częściowe umorzenie zobowiązań → wzmianka w wyciągu o zakresie odpowiedzialności; **całkowite umorzenie → art. 264 nie stosuje się** (brak tytułu) — umorzenie: art. 369–370f → `mod-PrUpad-zakonczenie-zakaz-karne`.
+- **Art. 266:** wierzyciel może żądać zwrotu dokumentów; wydaje sekretarz sądowy na zarządzenie s.-k. z adnotacją o sumie uznania.
+
+---
+
+## TERMINY — ZESTAWIENIE
+
+| Termin | Zdarzenie początkowe | Podstawa |
+|---|---|---|
+| 30 dni | obwieszczenie postanowienia o ogłoszeniu w KRZ — zgłoszenie wierzytelności | art. 51 ust. 1 pkt 4, 236 |
+| wyznaczony przez syndyka | wpłata ryczałtu za spóźnione zgłoszenie | art. 235 ust. 2 |
+| tydzień | doręczenie zarządzenia o zwrocie z uzasadnieniem — skarga | art. 242a ust. 4 |
+| 3 dni | otrzymanie skargi — przekazanie przez syndyka | art. 242a ust. 5 |
+| tydzień | wpływ skargi / uzupełnienie — rozpoznanie przez s.-k. | art. 242a ust. 6 |
+| tydzień (nieprzywracalny) | wezwanie — dokumenty wierzyciela | art. 243 ust. 2 |
+| 2 mies. | upływ terminu zgłoszeń — lista | art. 244 |
+| 6% / 2 lata | dyskonto niewymagalnej wierzytelności bez odsetek | art. 247 ust. 1 |
+| dzień ogłoszenia | kurs NBP, wartość niepieniężnej | art. 246, 251 |
+| 2 tyg. | obwieszczenie o złożeniu listy — sprzeciw | art. 256 |
+| ≥ tydzień | odpowiedź na sprzeciw | art. 258a ust. 1 |
+| 2 mies. | wniesienie sprzeciwu — rozpoznanie | art. 259 ust. 1 |
+| dzień po prawomocności | zakończenie / umorzenie — nowy bieg przedawnienia | art. 239a |
+
+## PUŁAPKI
+
+- Ryczałt za spóźnione zgłoszenie należy się także przy opóźnieniu niezawinionym (235 ust. 1).
+- Pracowniczych nie zgłasza się; zabezpieczone rzeczowo trafiają na listę z urzędu (236–237).
+- Termin tygodnia z art. 243 ust. 2 jest nieprzywracalny — wszystkie dowody w zgłoszeniu lub w tym terminie.
+- Odsetki na liście kończą się na dniu poprzedzającym ogłoszenie (247 ust. 2); po upadłości zaspokojenie odsetek — art. 92 (`mod-PrUpad-skutki-masa-bezskutecznosc`).
+- Cesja po zgłoszeniu wymaga podpisu urzędowo poświadczonego i zgłoszenia przed przekazaniem listy (254).
+- Sprzeciw wierzyciela co do swojej wierzytelności przysługuje tylko przy odmowie uznania; co do cudzej — tylko wierzycielowi umieszczonemu na liście (256 ust. 1).
+- Prekluzja: sprzeciw tylko na twierdzeniach ze zgłoszenia (258), sąd pomija spóźnione dowody (258a ust. 3).
+- Wyciąg z listy nie jest tytułem przy całkowitym umorzeniu zobowiązań (265 ust. 2) ani wobec dłużnika rzeczowego (264 ust. 4).
+- W trybie konsumenckim art. 244, 245 i 253–264 nie mają zastosowania (491² ust. 1).
+
+## POWIĄZANIA
+
+- Termin zgłoszeń i ogłoszenie → `mod-PrUpad-wniosek-ogloszenie`
+- Potrącenie (oświadczenie przy zgłoszeniu, art. 96), odsetki z masy (art. 92), procesy (art. 145) → `mod-PrUpad-skutki-masa-bezskutecznosc`
+- Wyjątki papierowe (216aa), doręczenia, zażalenie (222–224) → `mod-PrUpad-organy-procedura`
+- Kategorie (art. 342) i plan podziału → `mod-PrUpad-podzial-335-360`
+- Głosowanie nad układem (lista, sprzeciwy ≤ 15%) → `mod-PrUpad-uklad-likwidacja-zakonczenie`
+- Umorzenie zobowiązań → `mod-PrUpad-zakonczenie-zakaz-karne`; konsument → `mod-PrUpad-konsument-workflow`
+
+## WYNIK
+
+Kompletne zgłoszenie (art. 240) z wyliczeniem kwoty (246–251) i kategorią; dla spóźnionego — ryczałt i skutki z art. 252; dla syndyka — lista z rubrykami art. 245 w terminie z art. 244; dla sprzeciwu — pismo z art. 257 w 2 tygodnie z kontrolą prekluzji (258); po zakończeniu — wniosek o wyciąg z listy (264) z uwzględnieniem umorzenia (265).

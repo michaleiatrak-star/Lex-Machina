@@ -70,10 +70,10 @@ Nie jest to 603 merytorycznie zaudytowanych artykułów ani komentarz `FULL`.
 | Procedura | Moduł | Głębokość |
 |---|---|---|
 | Pełny tekst PrUp, wersje czasowe, indeks artykułów i odczyt ELI | `mod-PrUpad-zrodla-i-wersje.md` | źródło, metryka i odczyt |
-| Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` | workflow B; wyjątki przez pełny przepis |
-| Fundusze masy, kategorie, zabezpieczenia i plan podziału | `mod-PrUpad-podzial-335-360.md` | workflow B; wyjątki przez pełny przepis |
-| Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | `mod-PrUpad-syndyk-likwidacja.md` | workflow B; wyjątki przez pełny przepis |
-| Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | `mod-PrUpad-konsument-workflow.md` | workflow B; wyjątki przez pełny przepis |
+| Zgłoszenia, braki, zwrot, sprawdzanie, lista i sprzeciw | `mod-PrUpad-wierzytelnosci-235-266.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| Fundusze masy, kategorie, zabezpieczenia i plan podziału | `mod-PrUpad-podzial-335-360.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| Czynności syndyka, wynagrodzenie, sprawozdania, plan i sprzedaż | `mod-PrUpad-syndyk-likwidacja.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony) |
+| Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | `mod-PrUpad-konsument-workflow.md` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 
 Rejestr `references/prup/coverage.json` oddziela obecność tekstu, routing,
 głębokość procedury i brak pełnego niezależnego audytu jednostki. Ustępy
@@ -88,13 +88,13 @@ wersje dla starszych spraw i kazusy oparte na rzeczywistych aktach.
 | Zakres | Podstawa | Moduł | Status |
 |---|---|---|---|
 | PrRestr — Prawo restrukturyzacyjne — pełny korpus i sposób użycia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-zrodla-i-wersje` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Restrukturyzacja — kwalifikacja sprawy, plan i test zaspokojenia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-wejscie-plan-test` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Postępowanie o zatwierdzenie układu — pełny przebieg | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-pzu` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Przyspieszone postępowanie układowe i postępowanie układowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-ppu-pu` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Sanacja — zarząd, działania sanacyjne i układ | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-sanacja` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Restrukturyzacja — procedura wspólna, zakończenie i upadłość | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-procedura-zakonczenie` | pełne źródło / procedura tematyczna; fresh gate |
-| PrRestr — Restrukturyzacja — transgraniczne, odrębne, karne i przejściowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-odrebne-miedzynarodowe` | pełne źródło / procedura tematyczna; fresh gate |
-| PrUp — Upadłość — przesłanki, wniosek, zabezpieczenie i pre-pack | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-wniosek-ogloszenie` | pełne źródło / procedura tematyczna; fresh gate |
-| PrUp — Upadłość — masa, umowy, bezskuteczność i procesy | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-skutki-masa-bezskutecznosc` | pełne źródło / procedura tematyczna; fresh gate |
-| PrUp — Upadłość — organy, wierzyciele i wspólna procedura | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-organy-procedura` | pełne źródło / procedura tematyczna; fresh gate |
-| PrUp — Upadłość — zakończenie, oddłużenie przedsiębiorcy, zakaz i przepisy końcowe | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-zakonczenie-zakaz-karne` | pełne źródło / procedura tematyczna; fresh gate |
+| PrRestr — Restrukturyzacja — kwalifikacja sprawy, plan i test zaspokojenia | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-wejscie-plan-test` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrRestr — Postępowanie o zatwierdzenie układu — pełny przebieg | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-pzu` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrRestr — Przyspieszone postępowanie układowe i postępowanie układowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-ppu-pu` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrRestr — Sanacja — zarząd, działania sanacyjne i układ | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-sanacja` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrRestr — Restrukturyzacja — procedura wspólna, zakończenie i upadłość | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-procedura-zakonczenie` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrRestr — Restrukturyzacja — transgraniczne, odrębne, karne i przejściowe | Dz.U. 2026 poz. 533; metryka i kontrola nowelizacji w korpusie | `mod-PrRestr-odrebne-miedzynarodowe` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrUp — Upadłość — przesłanki, wniosek, zabezpieczenie i pre-pack | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-wniosek-ogloszenie` | ✅ A / COV-ART (każdy aktywny art. 1–56h omówiony); fresh gate |
+| PrUp — Upadłość — masa, umowy, bezskuteczność i procesy | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-skutki-masa-bezskutecznosc` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrUp — Upadłość — organy, wierzyciele i wspólna procedura | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-organy-procedura` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
+| PrUp — Upadłość — zakończenie, oddłużenie przedsiębiorcy, zakaz i przepisy końcowe | Dz.U. 2026 poz. 913; metryka i kontrola nowelizacji w korpusie | `mod-PrUpad-zakonczenie-zakaz-karne` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |

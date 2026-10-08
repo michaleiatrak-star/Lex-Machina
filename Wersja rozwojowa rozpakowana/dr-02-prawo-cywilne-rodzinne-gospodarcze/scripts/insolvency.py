@@ -95,6 +95,17 @@ def structure(raw, articles, marker):
     return rows
 
 
+A_MARKER = 'poziom A / COV-ART'
+
+
+def commentary_status(article, modules):
+    if article['source_status'] != 'TEKST_W_TJ':
+        return 'NIE_DOTYCZY_'+article['source_status']
+    if modules and all(A_MARKER in (ROOT/'modules'/m).read_text()[:600] for m in modules):
+        return 'KOMENTARZ_A_COV_ART'
+    return 'PROCEDURA_TEMATYCZNA_I_ODCZYT_JEDNOSTKI'
+
+
 def build():
     source_manifest()
     counts = {}
@@ -119,7 +130,7 @@ def build():
             rows.append({**a, 'source_url': meta['pdf_url']+'#page='+str(a['page']),
                          'source_module': source_module, 'procedure_modules': modules,
                          'structure': current_context,
-                         'commentary_status': 'PROCEDURA_TEMATYCZNA_I_ODCZYT_JEDNOSTKI',
+                         'commentary_status': commentary_status(a, modules),
                          'independent_legal_review': 'NIE_JEST_CERTYFIKATEM_WYKLADNI_KAZDEJ_JEDNOSTKI',
                          'reference_candidates': candidates,
                          'reference_policy': 'Kandydaci z tekstu wraz z przypisami; ustal akt docelowy i zakres odesłania przed użyciem.',
@@ -154,7 +165,7 @@ def coverage_check():
         if [a['id'] for a in articles]!=[a['id'] for a in coverage['articles']]:
             raise ValueError('Pokrycie nie odpowiada pełnemu indeksowi '+law)
         for a,c in zip(articles,coverage['articles']):
-            if any(a[k]!=c[k] for k in a) or c['procedure_modules']!=route(law,a['id']):
+            if any(a[k]!=c[k] for k in a) or c['procedure_modules']!=route(law,a['id']) or c['commentary_status']!=commentary_status(a,c['procedure_modules']):
                 raise ValueError('Niespójne źródło/routing '+law+' '+a['id'])
             for module in c['procedure_modules']+[c['source_module']]:
                 if not (ROOT/'modules'/module).is_file():raise ValueError('Brak modułu '+module)
