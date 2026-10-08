@@ -96,6 +96,26 @@ class PrUpTest(unittest.TestCase):
         with patch.object(prup,'download',side_effect=[pdf,refs]):
             self.assertEqual(prup.verify(self.meta)['result'],'ZGODNOSC_SNAPSHOTU_Z_ELI')
 
+    def test_online_change_date_only_passes(self):
+        pdf=(prup.SOURCE/'prup.pdf').read_bytes();refs=json.loads((prup.SOURCE/'references.json').read_text())
+        touched=[0]
+        def bump(value):
+            if isinstance(value,dict):
+                if 'changeDate' in value:value['changeDate']='2099-01-01 00:00';touched[0]+=1
+                for v in value.values():bump(v)
+            elif isinstance(value,list):
+                for v in value:bump(v)
+        bump(refs);self.assertGreater(touched[0],0)
+        with patch.object(prup,'download',side_effect=[pdf,json.dumps(refs).encode()]):
+            self.assertEqual(prup.verify(self.meta)['result'],'ZGODNOSC_SNAPSHOTU_Z_ELI')
+
+    def test_online_related_act_status_change_blocks(self):
+        pdf=(prup.SOURCE/'prup.pdf').read_bytes();refs=json.loads((prup.SOURCE/'references.json').read_text())
+        item=next(i for k in ('Akty zmieniające','Akty zmienione','Odesłania') for i in refs.get(k,[]) if 'status' in i.get('act',{}))
+        item['act']['status']='zmieniony status';item['act']['changeDate']='2099-01-01 00:00'
+        with patch.object(prup,'download',side_effect=[pdf,json.dumps(refs).encode()]):
+            with self.assertRaisesRegex(ValueError,'ZMIANA_ZRODLA'):prup.verify(self.meta)
+
     def test_online_new_amendment_blocks(self):
         pdf=(prup.SOURCE/'prup.pdf').read_bytes();refs=json.loads((prup.SOURCE/'references.json').read_text())
         refs['Akty zmieniające'].append({'act':{'ELI':'test/new'},'date':'2099-01-01'})

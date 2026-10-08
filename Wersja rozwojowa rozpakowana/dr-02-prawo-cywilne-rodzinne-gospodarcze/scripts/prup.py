@@ -83,8 +83,17 @@ def load():
     return metadata, data['articles'], raw
 
 
+def without_change_date(value):
+    """Drop ELI's `changeDate` (last edit of a related act's record, not legal content)."""
+    if isinstance(value, dict):
+        return {k: without_change_date(v) for k, v in value.items() if k != 'changeDate'}
+    if isinstance(value, list):
+        return [without_change_date(v) for v in value]
+    return value
+
+
 def relations(value):
-    return {k: v for k,v in value.items() if k in ('Akty zmieniające', 'Akty uchylające', 'Akty uznające za uchylone', 'Inf. o tekście jednolitym', 'Orzeczenie TK')}
+    return without_change_date({k: v for k,v in value.items() if k in ('Akty zmieniające', 'Akty uchylające', 'Akty uznające za uchylone', 'Inf. o tekście jednolitym', 'Orzeczenie TK')})
 
 
 def download(url):
