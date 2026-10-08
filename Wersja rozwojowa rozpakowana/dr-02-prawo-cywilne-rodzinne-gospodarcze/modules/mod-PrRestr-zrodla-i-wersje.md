@@ -12,8 +12,8 @@ Każdy artykuł i wyjątek pozostaje dostępny w indeksie `references/prrestr/in
 Ustawa z 15 maja 2015 r., akt pierwotny DU/2015/978, tekst jednolity DU/2026/533
 (stan prawny 25.03.2026). Pełny PDF obejmuje również obwieszczenie, przepisy
 przejściowe i przypisy. Indeks zawiera 407 jawnych nagłówków artykułów/grup.
-Art. 401–447 są w t.j. pominięte zbiorowo; pełny tekst pierwotny jest w
-`references/insolvency/sources/original-prrestr.pdf`. Uchylony dział III tytułu IV
+Art. 401–447 są w t.j. pominięte zbiorowo; tekst pierwotny (Dz.U. 2015 poz. 978)
+odczytaj z ELI `DU/2015/978`; źródło jest na liście RAG (`references/REJESTR-ZRODEL.json`). Uchylony dział III tytułu IV
 nie tworzy obowiązujących procedur dla banków.
 
 ```sh

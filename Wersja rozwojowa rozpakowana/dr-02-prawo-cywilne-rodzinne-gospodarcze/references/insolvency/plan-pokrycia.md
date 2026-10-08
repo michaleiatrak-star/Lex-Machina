@@ -62,7 +62,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 
 ```
 ☑ wersje-i-przepisy-przejsciowe.md — tabela nowelizacji 2025/1085, 1170, 1172; 2026/176, 331, 340, 1206:
-  zmienione jednostki (odczyt z sources/amendment-*.txt), data wejścia, przepis przejściowy, moduły
+  zmienione jednostki (odczyt z tekstów w ELI), data wejścia, przepis przejściowy, moduły
 ☑ mod-PrUpad-zrodla-i-wersje, mod-PrRestr-zrodla-i-wersje — status A, odesłanie do tabeli nowelizacji
 ☑ mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026 — hub z listą 22 modułów A obu ustaw
 ☑ MAPA-AKTOW / MAPA-POKRYCIA — statusy „A / COV-ART” (finalize każdego modułu)

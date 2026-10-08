@@ -1,7 +1,7 @@
 # Katalog Prawa upadłościowego i restrukturyzacyjnego
 
-Wszystkie jawne nagłówki z obu tekstów jednolitych. Pełne teksty pierwotne
-z przepisami pominiętymi w t.j.: `sources/`. Przepisy uchylone są oznaczone.
+Wszystkie jawne nagłówki z obu tekstów jednolitych. Przepisy pominięte w t.j.
+i teksty pierwotne: ELI (lista RAG: `REJESTR-ZRODEL.json`). Przepisy uchylone są oznaczone.
 Status źródła i routing nie stanowią deklaracji pełnego komentarza doktrynalnego.
 
 ## Prawo upadłościowe

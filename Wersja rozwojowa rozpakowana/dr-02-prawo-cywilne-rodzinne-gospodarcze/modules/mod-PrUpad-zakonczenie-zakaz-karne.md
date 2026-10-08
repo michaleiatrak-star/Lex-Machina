@@ -39,7 +39,7 @@
 | 373–377 | zakaz prowadzenia działalności gospodarczej | D |
 | 522–523 | przepisy karne | E |
 | 536–546 | przepisy przejściowe i końcowe ustawy z 2003 r. | F |
-| uchylone / pominięte | 370 (uchylony); 524–535 i 541–542 (pominięte w t.j. — zmiany innych ustaw; treść w `references/insolvency/sources/original-prup.pdf`) | — |
+| uchylone / pominięte | 370 (uchylony); 524–535 i 541–542 (pominięte w t.j. — zmiany innych ustaw; tekst pierwotny z ELI `DU/2003/535`, lista RAG: `references/REJESTR-ZRODEL.json`) | — |
 
 ---
 

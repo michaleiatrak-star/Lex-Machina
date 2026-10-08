@@ -2,10 +2,13 @@
 
 1. Ustal właściwy DR i istniejące moduły. Przeczytaj SKILL.md, mapę aktów,
    pokrycia i centralny ROUTING-MAP; unikaj drugiej sprzecznej kopii reguł.
-2. Pobierz z oficjalnego ELI metadane aktu, pełny PDF t.j., relacje aktu
+2. Pobierz z oficjalnego ELI metadane aktu, PDF bieżącego t.j., relacje aktu
    pierwotnego oraz właściwe nowelizacje. Zachowaj strony obwieszczenia,
    przypisy i przepisy przejściowe; data publikacji nie jest stanem prawnym.
-3. Zapisz pełną ekstrakcję, SHA-256, daty i pochodzenie w references/.
+3. Zapisz SHA-256, daty i pochodzenie w references/ oraz wpis w `references/REJESTR-ZRODEL.json`.
+   Bieżące t.j. tylko jako snapshot czytnika; akty pomocnicze (tekst pierwotny, poprzednie t.j.,
+   nowelizacje) wyłącznie jako wskaźnik ELI + sha256 + strony na liście RAG. Nie wkładaj do skilla
+   PDF-ów tych aktów i nie linkuj do nich z modułów.
    W razie indeksów górnych skontroluj ekstrakcję z PDF. Nie utożsamiaj
    art. 491¹⁴ z art. 49114. Pominięte/uchylone grupy pozostaw jawne.
 4. Dodaj parser/czytnik ze sprawdzeniem integralności, dokładnymi granicami
