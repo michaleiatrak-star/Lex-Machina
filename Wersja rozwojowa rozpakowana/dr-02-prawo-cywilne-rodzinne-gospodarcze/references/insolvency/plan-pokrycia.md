@@ -39,7 +39,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | `mod-PrUpad-wierzytelnosci-235-266` | 235–266 | 35 | 10.8 / 315 | ✅ A (17.5 kB, 501 B/art; 2026-10-08) |
 | `mod-PrUpad-podzial-335-360` | 335–360 | 26 | 7.4 / 289 | ✅ A (15.2 kB, 586 B/art; 2026-10-08) |
 | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | 378–425s | 67 | 6.4 / 97 | ✅ A (29.5 kB, 438 B/art; 2026-10-08) |
-| `mod-PrUpad-postepowania-odrebne-426-491-38` | 426–491³⁸ | 89 | 14.3 / 165 | ⬜ (podział na 2 pliki) |
+| `mod-PrUpad-postepowania-odrebne-426-491-38` | 426–491³⁸ | 89 | 14.3 / 165 | ✅ A (35.0 kB, 393 B/art; 2026-10-08) |
 | `mod-PrUpad-konsument-workflow` | 491¹–491²⁴ | 26 | 10.0 / 393 | ✅ A (28.6 kB, 1099 B/art; 2026-10-08) |
 
 ### Fala 3 — PrRestr

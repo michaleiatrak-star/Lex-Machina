@@ -63,7 +63,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | PrUp — Tryby konsumenckie, wyłączenia części pierwszej i plan spłaty | Dz.U. 2026 poz. 913; 2026/1206: zmiana art. 452 i 456 od 11.01.2027 | `mod-PrUpad-konsument-workflow` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — układ w postępowaniu upadłościowym (art. 266a–266f) | jw. | `mod-PrUpad-uklad-likwidacja-zakonczenie` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp — postępowanie międzynarodowe, po śmierci dłużnika, deweloper (art. 378–425s) | jw. | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
-| PrUp — postępowania odrębne | jw. | `mod-PrUpad-postepowania-odrebne-426-491-38` | ✅ aktywny |
+| PrUp — postępowania odrębne: banki, SKOK, banki hipoteczne, instytucje EOG, ubezpieczyciele, obligacje, układ konsumencki (art. 426–491, 491²⁵–491³⁸) | jw. | `mod-PrUpad-postepowania-odrebne-426-491-38` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrUp + PrRestr — uzupełnienie | PrUp jw. + PrRestr Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrUp-PrRestr-uzupelnienie-pokrycia-2026` | 🟡 B |
 | Prawo restrukturyzacyjne — układ | Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrRestr-dzial-VI-uklad` | ✅ aktywny |
 | PrRestr — układ częściowy | jw. | `mod-PrRestr-dzial-VII-uklad-czesciowy` | ✅ aktywny |
