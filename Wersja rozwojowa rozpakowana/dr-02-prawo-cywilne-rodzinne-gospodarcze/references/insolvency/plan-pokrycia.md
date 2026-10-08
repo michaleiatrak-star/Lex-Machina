@@ -40,7 +40,7 @@ Gęstość = bajty modułu / aktywne artykuły. Status: ✅ A ukończony · ⬜ 
 | `mod-PrUpad-podzial-335-360` | 335–360 | 26 | 7.4 / 289 | ✅ A (15.2 kB, 586 B/art; 2026-10-08) |
 | `mod-PrUpad-likwidacja-miedzynarodowe-szczegolne` | 378–425s | 67 | 6.4 / 97 | ⬜ |
 | `mod-PrUpad-postepowania-odrebne-426-491-38` | 426–491³⁸ | 89 | 14.3 / 165 | ⬜ (podział na 2 pliki) |
-| `mod-PrUpad-konsument-workflow` | 491¹–491²⁴ | 26 | 10.0 / 393 | ⬜ (uzupełnić format) |
+| `mod-PrUpad-konsument-workflow` | 491¹–491²⁴ | 26 | 10.0 / 393 | ✅ A (28.6 kB, 1099 B/art; 2026-10-08) |
 
 ### Fala 3 — PrRestr
 
