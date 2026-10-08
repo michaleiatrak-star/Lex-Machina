@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.46"
+version: "6.47"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,8 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.46 (2026-10-07f): ROUTING-MAP — procedury i pełne korpusy PrUp (Dz.U. 2026 poz. 913) i PrRestr (Dz.U. 2026 poz. 533) z PR #85; wiersz zmian po t.j. (2026/1206 od 11.01.2027, 2026/176 od 18.02.2027); licencja doradcy restrukturyzacyjnego 2022/1007 potwierdzona w ELI jako najnowszy t.j.
-  Poprzednia: 6.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
+  Wersja bieżąca: 6.47 (2026-10-08): Routing błyskawiczny DR-02: „ojcostwo”, „ustalenie ojcostwa”, „zaprzeczenie ojcostwa”, „upadłość konsumencka” (pytanie o ustalenie ojcostwa nie trafiało do żadnej dziedziny).
+  Poprzednia: 6.46 (2026-10-07f): ROUTING-MAP — procedury i pełne korpusy PrUp (Dz.U. 2026 poz. 913) i PrRestr (Dz.U. 2026 poz. 533) z PR #85; wiersz zmian po t.j. (2026/1206 od 11.01.2027, 2026/176 od 18.02.2027); licencja doradcy restrukturyzacyjnego 2022/1007 potwierdzona w ELI jako najnowszy t.j.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -102,7 +102,7 @@ view prawo-polskie-v2/ROUTING-MAP.md
 | Fraza / temat sprawy | DR-skill |
 |---|---|
 | Konstytucja, TK, Trybunał Konstytucyjny, ustrój, skarga konstytucyjna, referendum, Rzecznik Praw Obywatelskich, mandat posła, mandat senatora, stan wyjątkowy, stan wojenny, stan klęski żywiołowej, partia polityczna, Sąd Najwyższy, KRS, Sejm, Senat, Prezydent RP, weto, podpisanie ustawy, immunitet, wotum nieufności, inicjatywa ustawodawcza, źródła prawa, hierarchia aktów prawnych, umowa międzynarodowa a ustawa, przepisy przejściowe, specustawa, niedziałanie prawa wstecz, Rada Ministrów, uchwała Sejmu, wybory do Sejmu, wybory parlamentarne, wybory prezydenckie, protest wyborczy, ustrój sądów, sędzia Sądu Najwyższego | `dr-01-Ustroj-Konstytucyjny-i-Zrodla-Prawa` |
-| Umowa, odszkodowanie, zadośćuczynienie, KC, spadek, zachowek, testament, dziedziczenie, alimenty, rozwód, separacja, władza rodzicielska, kontakty z dzieckiem, najem, czynsz, eksmisja, lokator, rękojmia, reklamacja, konsument, kredyt, frankowy, deweloper, wspólnota mieszkaniowa, nieruchomość, służebność, zasiedzenie, dobra osobiste, spółka, upadłość, windykacja, windykator, dług, zapłata, fundacja rodzinna, księga wieczysta, chwilówka, parabank, kaucja, wyprowadzka, przedawnienie roszczenia, faktura, pies, pogryzienie, zwierzę, spółka cywilna, spółka jawna, hipoteka, ubezpieczyciel, sąsiad | `dr-02-Prawo-Cywilne-Rodzinne-Gospodarcze` |
+| Umowa, odszkodowanie, zadośćuczynienie, KC, spadek, zachowek, testament, dziedziczenie, alimenty, ojcostwo, ustalenie ojcostwa, zaprzeczenie ojcostwa, rozwód, separacja, władza rodzicielska, kontakty z dzieckiem, najem, czynsz, eksmisja, lokator, rękojmia, reklamacja, konsument, kredyt, frankowy, deweloper, wspólnota mieszkaniowa, nieruchomość, służebność, zasiedzenie, dobra osobiste, spółka, upadłość, upadłość konsumencka, windykacja, windykator, dług, zapłata, fundacja rodzinna, księga wieczysta, chwilówka, parabank, kaucja, wyprowadzka, przedawnienie roszczenia, faktura, pies, pogryzienie, zwierzę, spółka cywilna, spółka jawna, hipoteka, ubezpieczyciel, sąsiad | `dr-02-Prawo-Cywilne-Rodzinne-Gospodarcze` |
 | Przestępstwo, KK, KPK, wykroczenie, mandat, stalking, przemoc, cyberprzestępstwo, pobicie, kradzież, oszustwo, nietrzeźwy, po alkoholu, prokurator, śledztwo, akt oskarżenia, pokrzywdzony, areszt, niebieska karta, groźby karalne, komornik, egzekucja komornicza, zniesławienie, znieważenie, punkty karne, prawo jazdy, oszukany, przywłaszczenie, sprzeniewierzenie, fałszerstwo, podrobienie podpisu, zatarcie skazania, Krajowy Rejestr Karny, wypadek drogowy, narkotyki, marihuana, zajęcie rachunku, podrobić podpis, sfałszować, pijany kierowca, KKS, karny skarbowy | `dr-03-Prawo-Karne-Wykroczenia-Egzekucja` |
 | Wypowiedzenie, KP, umowa o pracę, stosunek pracy, pracodawca, zwolnienie dyscyplinarne, mobbing, nadgodziny, urlop, sąd pracy, wypadek przy pracy, zakaz konkurencji, umowa zlecenie, ZUS, zasiłek, L4, zwolnienie lekarskie, macierzyński, emerytura, renta, KRUS, PFRON, pomoc społeczna, dyskryminacja płacowa, choroba zawodowa, świadectwo pracy, czas pracy, 800 plus, świadczenie wychowawcze, PIP, inspekcja pracy, odprawa, bezrobotny, wynagrodzenie | `dr-04-Prawo-Pracy-ZUS-Swiadczenia` |
 | KPA, decyzja urzędu, decyzja administracyjna, SKO, WSA, NSA, bezczynność, przewlekłość, informacja publiczna, cudzoziemcy, karta pobytu, egzekucja admin., stwierdzenie nieważności decyzji, petycja, skarga kasacyjna do NSA, Samorządowe kolegium odwoławcze, postępowanie administracyjne, interes prawny, zaświadczenie, Rzecznik Praw Dziecka, zezwolenie na pracę, cudzoziemiec, ponaglenie, organ administracji | `dr-05-Prawo-Administracyjne-Sadowoadministracyjne` |

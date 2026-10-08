@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.47 (2026-10-08): Routing błyskawiczny DR-02: „ojcostwo”, „ustalenie ojcostwa”, „zaprzeczenie ojcostwa”, „upadłość konsumencka”. Pytanie „Ustalenie ojcostwa dziecka po rozstaniu” nie trafiało do żadnej dziedziny: brak słowa w tabeli, a dopasowanie przez mapę aktów DR-02 spadło poniżej progu po dodaniu wierszy PrUp/PrRestr w 6.46.
+
 - 6.46 (2026-10-07f, AUDYT-2026-10-07f): ROUTING-MAP — sekcja „Prawo upadłościowe i restrukturyzacyjne — źródła i procedury” z PR #85 (26 wierszy modułów PrUp/PrRestr); nowy wiersz zmian po t.j. jeszcze nie w życiu: Dz.U. 2026 poz. 1206 (od 11.01.2027) i Dz.U. 2026 poz. 176 (od 18.02.2027), ELI 2026-10-07; licencja doradcy restrukturyzacyjnego — „[sprawdź nowszy t.j.]” zastąpione weryfikacją ELI (2022/1007 najnowszy t.j. dla DU/2007/850, brak późniejszych zmian).
 
 - 6.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
