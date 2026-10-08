@@ -68,7 +68,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Prawo restrukturyzacyjne — układ | Dz.U. 2026 poz. 533 t.j. ze zm. | `mod-PrRestr-dzial-VI-uklad` | ✅ aktywny |
 | PrRestr — układ częściowy | jw. | `mod-PrRestr-dzial-VII-uklad-czesciowy` | ✅ aktywny |
 | PrRestr — nadzorca / zarządca | jw. | `mod-PrRestr-dzial-III-nadzorca-zarzadca` | ✅ aktywny |
-| PrRestr — uczestnicy / wierzyciele | jw. | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele` | ✅ aktywny |
+| PrRestr — uczestnicy / wierzyciele | jw. | `mod-PrRestr-dzial-IV-uczestnicy-wierzyciele` | ✅ A / COV-ART (każdy aktywny artykuł omówiony); fresh gate |
 | PrRestr — pomoc publiczna | jw. | `mod-PrRestr-dzial-V-pomoc-publiczna` | ✅ aktywny |
 | Pomoc publiczna na ratowanie / restrukturyzację | Dz.U. 2026 poz. 113 t.j. ze zm. | `mod-ustawa-pomoc-ratowanie-restrukturyzacja-przedsiebiorcow` | ✅ aktywny |
 | PrUp i PrRestr — zmiany po t.j. (jeszcze nie w życiu) | Dz.U. 2026 poz. 1206 (od 11.01.2027: PrUp art. 452 ust. 1, 456 ust. 1; PrRestr art. 4 ust. 2 pkt 4); Dz.U. 2026 poz. 176 (od 18.02.2027: PrRestr art. 156 ust. 5 pkt 4 uchylony) | `mod-PrUpad-zrodla-i-wersje`, `mod-PrRestr-zrodla-i-wersje` | ⏳ temporal gate: przed datą wejścia stosuj brzmienie z t.j.; ELI 2026-10-07 |
