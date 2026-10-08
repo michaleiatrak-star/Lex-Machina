@@ -327,6 +327,7 @@ Orzeczenie                       → ZAWSZE URL bezpośredni do orzeczenia + dat
 
 ---
 
+<!-- lex:wykonuje-aplikacja: STRIP-VER -->
 ## ⛔ STRIP-VER-GATE — BRAMKA OCZYSZCZANIA PRZED EKSPORTEM DOKUMENTU
 
 > **Wersja:** 1.0 (2026-06-23) — patch STRIP-VER

@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.27"
+version: "2.28"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -154,6 +154,7 @@ KROK 9b → WERYFIKACJA FAKTYCZNA (M-FAKTY)             [zawsze gdy pismo z dost
            Wyświetl Raport MOD-FAKTY przed oddaniem pisma. (patrz sekcja poniżej)
 KROK 9c → Wczytaj:
            view shared/HYBRID-VALIDATION.md    [zawsze — auto-raport braków]
+           view shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE  [zawsze przed plikiem — znaczniki ✅/⚠️ i tabela śladu poza dokumentem]
 KROK 10 → Wczytaj references/M9-format.md             [zawsze — prezentacja odpowiedzi]
 ```
 
