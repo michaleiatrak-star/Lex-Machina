@@ -1,7 +1,7 @@
 8c788700b97f39b1ef181d1e47906d45560455f6d2aa2aa361aa68d6c61384df  ./MAPA-AKTOW.md
 07b354fe610f54e76c37859ede687a027bf45e3551994233b45b67939a2a5211  ./MAPA-POKRYCIA.md
 1f31019a1365f4cda2e6f4849e64b29cd2e793be0f09a763518d451db6a7a2b5  ./PORTABILITY-MANIFEST.md
-e6a4ab46e5200248e9d9bbb4e7e1e088f3629548db214df98830cc1ce4424994  ./SKILL.md
+b3cc81222af9ee60e8a176f66da2b51c3cacb95d7ba35d847d15b8b05b7a8b31  ./SKILL.md
 d233400387309c7a87d8e09858b5dc021fd6eac8faf77bf09dc6e4c1432c35ca  ./agents/openai.yaml
 0cdb7990dea3ad89ead04743eeac2dc58c119fb0b8b4a01499a21237f155bc1a  ./assets/icon.svg
 7ff7d2203e296892bd5edae7d3cfd0762ee05e08781fbb584aa50b96fc064c12  ./modules/mod-PZP-dzial-I-podstawy-wylaczenia-szacowanie.md
@@ -23,6 +23,6 @@ dd59cfce3e84d3fc884f1040881a70404afd350878a6efff2a1d00de07c03172  ./modules/mod-
 4cbb7969430a4612cdca191d2e6f6e003547775d6ce6a3ca731f6aca902f3d32  ./modules/mod-ustawa-RIO-regionalne-izby.md
 0b76c8243b3baefb3113a8b6714b49a3dff749f4cbc168c060246311f2cf9166  ./modules/mod-ustawa-arbitraz-mediacja.md
 f64d12edb41eac8f92d439e56b9cc3da219ccd7d901b69700bb8b4bb4e1e45cb  ./modules/mod-ustawa-dyscyplina-finansow-publicznych.md
-f962b47b85c856c9a954b431a4a5969845155f4a3747ef8fc4aad1508aef73ba  ./modules/mod-ustawa-fundusze-UE-pomoc-publiczna.md
-e95645890c397cfcf68c6a9164514964a9152a9812d9bf2d47f77ac63dc3c4e9  ./references/CHANGELOG.md
+d1b6c6dacc7c65d8bda21be1fa2e2fa49994e3e40c7d12e8d14a48d18181d44b  ./modules/mod-ustawa-fundusze-UE-pomoc-publiczna.md
+e617d0f787cf3803eefb03afe80a2b76fdba40a21d8e233d720c47b79c826e4c  ./references/CHANGELOG.md
 4925736ce9856044215d5b0986eda1a9e0d15a01926bb7fabcbdbadab36a6b59  ./references/HISTORIA-ZMIAN-PLIKOW.md

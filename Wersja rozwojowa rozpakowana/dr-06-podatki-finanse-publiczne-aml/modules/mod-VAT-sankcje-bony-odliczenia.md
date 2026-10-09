@@ -474,7 +474,7 @@ z zarzutem karnoskarbowym)
   bez NIP
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 108 ust. 1–3, Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j., 2026-08-12]
+   art. 108 ust. 1–3, Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) t.j., 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 

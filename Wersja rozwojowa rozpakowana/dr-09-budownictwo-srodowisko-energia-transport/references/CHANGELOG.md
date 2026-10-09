@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.47 (2026-10-09g, AUDYT-2026-10-09g): Transport (MAPA-AKTOW): nowelizacje po t.j. z datami z przepisów o wejściu w życie — transport drogowy, drogi publiczne, kolejowy, Prawo lotnicze, Kodeks morski; POŚ 10 (+1 ⏳), UOOŚiS 2 (+1 ⏳); ⛔ mod-PrWodne: Prawo wodne t.j. 2025/960 (było 2024/1773 — t.j. ustawy o minimalnym wynagrodzeniu); ⛔ ZRID t.j. 2024/311 (było 2024/1641 — rozp. RM). ELI 2026-10-09.
+
 - 3.46 (2026-10-09f, AUDYT-2026-10-09f): mod-ustawa-architekci-inzynierowie: odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (IARP, PIIB).
 
 - 3.45 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.26 (2026-10-09g, AUDYT-2026-10-09g): ⛔ SKILL.md: Prawo komunikacji elektronicznej Dz.U. 2024 poz. 1221 (było 1220 — rozp. MF); ustawa o ochronie danych osobowych t.j. 2019/1781 — nowelizacje po t.j. 2026/252 art. 16, 2026/548 art. 38. ELI 2026-10-09.
+
 - 3.25 (2026-10-09c, AUDYT-2026-10-09c): mod-KSC-NIS2: linia „Hasła spraw” (ransomware, atak hakerski, incydent, CSIRT). Treść prawna bez zmian.
 
 - 3.24 (2026-10-09, AUDYT-2026-10-09): informatyzacja — t.j. Dz.U. 2026 poz. 1241; KP w RODO — t.j. 2026/1245 (ELI 2026-10-09).

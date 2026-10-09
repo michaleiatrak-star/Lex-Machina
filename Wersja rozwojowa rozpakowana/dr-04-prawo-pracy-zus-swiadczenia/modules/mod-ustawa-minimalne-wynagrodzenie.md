@@ -55,7 +55,7 @@ Nagrody jubileuszowe, odprawy: NIE wliczają się
 ## Weryfikacja online
 ```
 web_search: "minimalne wynagrodzenie 2026 rozporządzenie Rada Ministrów"
-web_search: "ustawa minimalne wynagrodzenie Dz.U. 2024 poz. 642 isap"
+web_search: "ustawa minimalne wynagrodzenie Dz.U. 2024 poz. 1773 isap"
 ```
 
 

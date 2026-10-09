@@ -85,7 +85,7 @@ Odpowiedzialność zarządcy za szkodę z nieutrzymania drogi:
 
 ---
 
-## 4. SPECUSTAWA DROGOWA — ZRID (Dz.U. 2024 poz. 1641)
+## 4. SPECUSTAWA DROGOWA — ZRID (Dz.U. 2024 poz. 311 t.j.; ⛔ KOREKTA 2026-10-09: było „2024 poz. 1641” — rozporządzenie RM)
 
 ### Decyzja ZRID — jedna decyzja zastępuje trzy
 

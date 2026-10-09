@@ -10,7 +10,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | RODO — DPIA | jw. | `mod-RODO-DPIA-ocena-skutkow` | ✅ aktywny |
 | RODO — DSAR / prawa podmiotów danych | jw. | `mod-RODO-DSAR-zadania-osob` | ✅ aktywny |
 | RODO — RCP / DPA | jw. | `mod-RODO-RCP-DPA-rejestr-powierzenie` | ✅ aktywny |
-| Ustawa o ochronie danych osobowych | Dz.U. 2019 poz. 1781 t.j. ze zm. | `mod-UODO-postepowanie-ochrona-danych` | ✅ aktywny; fresh gate |
+| Ustawa o ochronie danych osobowych | Dz.U. 2019 poz. 1781 t.j. ze zm.; po t.j.: Dz.U. 2026 poz. 252 art. 16 (od 3.04.2026) i 2026 poz. 548 art. 38 (ustawa o zarządzaniu danymi, od 23.07.2026) — ELI 2026-10-09 | `mod-UODO-postepowanie-ochrona-danych` | ✅ aktywny; fresh gate |
 | Krajowy System Cyberbezpieczeństwa / NIS2 | Dz.U. 2026 poz. 20 t.j. ze zm. | `mod-KSC-NIS2-cyberbezpieczenstwo-telekom` | ✅ aktywny; fresh gate |
 | DORA / eIDAS 2.0 | rozporządzenie (UE) 2022/2554 + rozporządzenie (UE) 2024/1183 | `mod-DORA-eIDAS-cyfrowe-finanse` | ✅ aktywny; EUR-Lex fresh gate |
 | Prawo komunikacji elektronicznej + poczta + UKE | Dz.U. 2024 poz. 1221 ze zm. + właściwe akty pocztowe | `mod-PrTelekom-poczta-UKE` | ✅ aktywny; fresh gate |

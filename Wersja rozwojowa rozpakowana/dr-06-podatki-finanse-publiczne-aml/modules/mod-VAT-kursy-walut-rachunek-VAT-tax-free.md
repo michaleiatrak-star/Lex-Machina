@@ -287,7 +287,7 @@
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263)
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09)
 RZĄD 1/2 — puesc.gov.pl, biznes.gov.pl (TAX FREE: warunki, próg 200 zł,
   próg zwolnienia podmiotowego 240 000 zł od 1.01.2026, kasa online)
 RZĄD 2 — brzmienie art. 108b ust. 1: przepisy.gofin.pl

@@ -140,7 +140,7 @@ EWIDENCYJNE — art. 109, 109a, 110 ustawy VAT
     przechowywanie **10 LAT**
 
 ✅ [VER: lexlege.pl — pełny tekst art. 109, 109a, 109b i 110 ustawy o VAT,
-   Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
+   Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ✅ [LUKA ZAMKNIĘTA 2026-08-12 (iteracja II): deklaracje (art. 99) i
    informacje podsumowujące (art. 100) opracowano w sekcji **5a** niżej.

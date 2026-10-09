@@ -347,7 +347,7 @@ B2C (konsument) = ustawa o prawach konsumenta art. 43a–43n. NIE MIESZAĆ!
 
 ### BAS-W14 — Nowe definicje budynek/budowla w upol (od 01.01.2025)
 ```
-Weryfikacja: ustawa z 12.07.2024 r. o zmianie upol (Dz.U. 2024 poz. 1757)
+Weryfikacja: ustawa z 19.11.2024 r. o zmianie ustawy o podatku rolnym, upol i innych (Dz.U. 2024 poz. 1757; data poprawiona wg ELI 2026-10-09)
   wejście w życie: 01.01.2025 r.
 
 ZMIANY FUNDAMENTALNE — nowe definicje w art. 1a upol:

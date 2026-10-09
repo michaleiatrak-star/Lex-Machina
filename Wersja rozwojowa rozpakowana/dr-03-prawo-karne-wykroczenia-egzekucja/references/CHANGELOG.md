@@ -1,5 +1,7 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.62 (2026-10-09g, AUDYT-2026-10-09g): PRD i u.k.p.: lista nowelizacji po t.j. uzupełniona o 2025/820, 1006, 1872 i ⏳ 2026/1073, ⏳ 2026/187 (daty z przepisów o wejściu w życie, ELI 2026-10-09).
+
 - 3.61 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-KK-art163-172: odesłanie „infrastruktura krytyczna” kierowało do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (rejestr samorządów zawodowych, bez takiej sekcji) — teraz art. 3 pkt 2 ustawy o zarządzaniu kryzysowym (t.j. 2026/574, ELI 2026-10-09) i dr-08/mod-ustawa-zarzadzanie-kryzysowe.
 
 - 3.60 (2026-10-09c, AUDYT-2026-10-09c): mod-KK-art267-269c: linia „Hasła spraw” (przejęcie konta, BLIK, phishing, fałszywy profil, ransomware). Treść prawna bez zmian.

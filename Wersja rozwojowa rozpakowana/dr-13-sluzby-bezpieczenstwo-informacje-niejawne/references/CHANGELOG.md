@@ -1,5 +1,7 @@
 # CHANGELOG — dr-13-sluzby-bezpieczenstwo-informacje-niejawne
 
+- 3.17 (2026-10-09g, AUDYT-2026-10-09g): ⛔ SKILL.md: ABW i AW — t.j. 2026/937, CBA — t.j. 2025/712 (było „ABW 2024/1183; AW, CBA 2024/1392” — obwieszczenie MF i rozp. RM o stanie klęski); poprzedni t.j. CBA to 2024/184. ELI 2026-10-09.
+
 - 3.16 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-ustawa-straz-graniczna: „ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546” to t.j. rozp. RM o zaświadczeniach de minimis — poprawione na t.j. 2026/862 (ELI 2026-10-09).
 
 - 3.15 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99 (2026-10-09g, AUDYT-2026-10-09g): VAT: nowa nowelizacja po t.j. 2026/1263 — Dz.U. 2026 poz. 1270 (od 1.12.2026/1.01.2027, dalsze etapy do 1.07.2028) w MAPA-AKTOW i 10 modułach VAT. ELI 2026-10-09.
+
 - 3.98 (2026-10-09f, AUDYT-2026-10-09f): Doradztwo podatkowe: t.j. Dz.U. 2026 poz. 1274 w module i SKILL.md (było wygasłe 2021/2117); BAZA-AKTOW-OKOLOPODATKOWYCH: VAT t.j. 2026/1263 (było wygasłe 2025/775); odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (KIDP). ELI 2026-10-09.
 
 - 3.97 (2026-10-09, AUDYT-2026-10-09): VAT — t.j. Dz.U. 2026 poz. 1263 (stan 26.08.2026; obejmuje 2025/894, 896, 1203, 1541, 1811, 2026/846) ⛔ zawiera 2026/507 w vacatio legis do 14.10.2026; doradztwo podatkowe — t.j. Dz.U. 2026 poz. 1274 ⛔ zawiera 2026/176 (od 18.02.2027). Zapisy odczytu ze starego t.j. VAT zachowane z adnotacją „obecny t.j.” (ELI 2026-10-09).

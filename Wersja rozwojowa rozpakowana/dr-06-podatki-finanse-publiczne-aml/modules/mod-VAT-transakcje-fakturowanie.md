@@ -96,7 +96,7 @@ towarów na cele osobiste, świadczenia dla pracowników)
     odpłatne (wtedy reżim odpłatności + ewentualnie art. 32)?
 
 ✅ [VER: lexlege.pl — pełny tekst art. 7 i art. 8 ustawy o VAT,
-   Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
+   Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) t.j., stan prawny na 12.08.2026; pobrane 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
