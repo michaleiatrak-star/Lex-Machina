@@ -1,6 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
-- 6.48 (2026-10-09): Routing błyskawiczny DR-01–DR-16: słownictwo z pytań laików i opisów spraw (m.in. DR-01 kadencja/kontrasygnata, DR-02 dział spadku/sprzeciw od nakazu zapłaty, DR-04 przełożony/szef, DR-05 zezwolenie na pobyt/decyzja wojewody, DR-15 lista sankcyjna/mapa ryzyk); usunięte frazy zbyt szerokie (darowizna, umowa sprzedaży, kara umowna, nakaz zapłaty, spółka z o.o., skarga do WSA i in.). Top-1 DR: kontrolny zestaw 160 pytań 64.4% → 86.3%, 10000 pytań 60.7% → 88.1%, 500 pytań 93.6% → 94.6%.
+- 6.48 (2026-10-09): Routing błyskawiczny DR-01–DR-16: słownictwo z pytań laików i opisów spraw (m.in. DR-01 kadencja/kontrasygnata, DR-02 dział spadku/sprzeciw od nakazu zapłaty, DR-04 przełożony/szef w pracy, DR-05 zezwolenie na pobyt/decyzja wojewody, DR-15 lista sankcyjna/mapa ryzyk); usunięte frazy zbyt szerokie (darowizna, umowa sprzedaży, kara umowna, nakaz zapłaty, spółka z o.o., skarga do WSA i in.) oraz nazwy tematów bez sprawy (oprogramowanie, TikTok, kurs online, sztuczna inteligencja), które otwierały skille prawne dla pytań nieprawnych. Top-1 DR: kontrolny zestaw 160 pytań 64.4% → 85.0%, 10000 pytań 60.7% → 88.1%, 500 pytań 93.6% → 94.6%.
 
 - 6.47 (2026-10-08): Routing błyskawiczny DR-02: „ojcostwo”, „ustalenie ojcostwa”, „zaprzeczenie ojcostwa”, „upadłość konsumencka”. Pytanie „Ustalenie ojcostwa dziecka po rozstaniu” nie trafiało do żadnej dziedziny: brak słowa w tabeli, a dopasowanie przez mapę aktów DR-02 spadło poniżej progu po dodaniu wierszy PrUp/PrRestr w 6.46.
 
