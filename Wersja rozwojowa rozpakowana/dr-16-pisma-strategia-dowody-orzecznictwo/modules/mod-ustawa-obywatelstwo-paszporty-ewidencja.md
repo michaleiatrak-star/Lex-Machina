@@ -1,5 +1,7 @@
 # mod-DX — Obywatelstwo, paszporty, USC, ewidencja ludności i dokumenty publiczne
 
+**Hasła spraw:** wymeldowanie, zameldowanie, meldunek, wymeldować byłego partnera, paszport, dowód osobisty, PESEL, obywatelstwo polskie, akt urodzenia z zagranicy, transkrypcja.
+
 ## Status modułu
 
 Moduł prawa polskiego klasy eksperckiej. Stosować analogicznie do modułów prawa pracy i prawa karnego: intake → akty prawne → procedura → dowody → strategia → ryzyka → orzecznictwo → checklisty → workflow.

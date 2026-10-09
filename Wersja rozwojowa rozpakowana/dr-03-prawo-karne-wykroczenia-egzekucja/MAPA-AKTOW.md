@@ -34,7 +34,7 @@ Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednol
 | KK art. 190a — stalking | `mod-KK-art190a-stalking` + `shared/STALKING-NEKANIE.md` | ✅ aktywny |
 | KK art. 207 — przemoc domowa | `mod-KK-art207-przemoc-domowa` + `mod-KK-przemoc-domowa-szczegolowy` | ✅ aktywny |
 | KK art. 212–216 — cześć | `mod-KK-art212-216-przeciwko-czci` | ✅ aktywny |
-| KK art. 217a / 222–226 — ochrona funkcjonariusza i osoby interweniującej | `mod-KK-art222-226-ochrona-funkcjonariusza` | ✅ aktywny |
+| KK art. 217a / 222–226 — ochrona funkcjonariusza i osoby interweniującej (także adwokat: Prawo o adwokaturze art. 7 ust. 3, Dz.U. 2026 poz. 1290, od 17.10.2026; radca prawny: art. 12 ust. 1 u.r.p., Dz.U. 2026 poz. 731, od 18.06.2026) | `mod-KK-art222-226-ochrona-funkcjonariusza` | ✅ aktywny |
 | KK art. 228–231 — korupcja urzędnicza | `mod-KK-art228-231-korupcja-urzednicza` | ✅ aktywny |
 | KK art. 233–244b — wymiar sprawiedliwości | `mod-KK-art233-244b-przeciwko-wymiarowi-sprawiedliwosci` | ✅ aktywny |
 | KK art. 250a — korupcja wyborcza | `mod-KK-art250a-korupcja-wyborcza` | ✅ aktywny |

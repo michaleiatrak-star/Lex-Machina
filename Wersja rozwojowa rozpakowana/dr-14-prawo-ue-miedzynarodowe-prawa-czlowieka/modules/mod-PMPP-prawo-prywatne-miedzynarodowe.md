@@ -1,5 +1,7 @@
 # Moduł — Prawo prywatne międzynarodowe i kolizyjne (PMPP)
 
+**Hasła spraw:** firma z zagranicy, kontrahent zagraniczny, zagraniczna firma nie zapłaciła, który sąd jest właściwy, sąd właściwy, prawo właściwe, jurysdykcja, spadek za granicą, majątek za granicą, uznanie zagranicznego wyroku, umowa z firmą zagraniczną, dostawa towaru za granicę.
+
 
 ## 1. CORE
 

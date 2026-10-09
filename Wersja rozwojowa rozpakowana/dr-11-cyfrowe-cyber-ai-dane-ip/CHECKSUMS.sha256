@@ -1,7 +1,7 @@
 3a2f8e230b0469b40da6c3d1e79180ff5821fc84644b257e956c8d26da361812  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-139d7f0dd93fd91e510da09a920bd613092f656ad2d911cf47f4805a04e444af  ./SKILL.md
+2497bd18ce389dddbce95425a6085caec8a1e2a3ff7d6de457057bf76226f240  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 379c038ace0a42bd49321d6f0c8fe01cc6d56d31641c751c6d869e09600b65b7  ./modules/mod-AI-Act-framework.md
@@ -9,7 +9,7 @@ ab0928325b932801b79742bfcad9714d8639e3f88639a4703fd49ed7e1864af2  ./modules/mod-
 83f5ad66c63deda0e10c65fda4a062346b00ec38688a091e80fb0908f5efe32b  ./modules/mod-DORA-eIDAS-cyfrowe-finanse.md
 4cb1276fb79e6154a730a39813d45d16297211ead7b0e02ece7a4878fd6f203d  ./modules/mod-DSA-digital-services-act.md
 8711100d490acb9305df6d67ac77e30ea8c09630e41226d2deacf4912144f698  ./modules/mod-EUCS-CRA-akty-regulacyjne-UE.md
-5463fb5c470ac8dc517389137b560a6c8c9ea34c4501643176518b39e7a73e32  ./modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom.md
+5e79a9102608afb7829033bc35e10e30e6776cfe9877489c4c4b74c8f6429e9c  ./modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom.md
 7cd686e740da4079bf69ab18c3f15fcf10b84ad042dae4e34d997fb21035e6a6  ./modules/mod-MiCA-kryptoaktywa.md
 ec9919c8ae5514c14080f4abb0e271d454045eab52d1d8e17006a860fa38f5a3  ./modules/mod-PrAut-media-internet-dobra-osobiste.md
 b444303da37dd0d95c9a4a2589777db8809f407dd1ab675f7984dee5d530f4f8  ./modules/mod-PrAut-wlasnosc-intelektualna-IP.md
@@ -26,4 +26,4 @@ e3e2a5c526f48b6ffd320e3a068d633b00ce4f236234c1cd63bfffc81bc95cc3  ./modules/mod-
 aff4384416951db74063a36b73e12ddfdf3b3262d3075696e03597a1274233bb  ./modules/mod-ustawa-podpis-elektroniczny.md
 0bba80f38aaa77ace308d59347302ec2797f48cb15021051a06ad810cf181f50  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 130eef15304528cf161d78f760ed8c1cc9892c1f60ddd6b69834d47343c8fcfa  ./modules/mod-ustawa-uslugi-elektroniczne.md
-b8f3ddba1e4d588fde45d936f4a902681dcf8da75a6549563c29bac8bdf147f6  ./references/CHANGELOG.md
+6306977bf2c4ae0223347b6a5faae6cae47acff0412c1b1216994146db6ec36e  ./references/CHANGELOG.md
