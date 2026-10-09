@@ -1,7 +1,7 @@
 686c7e3cf4d50746a7c237c89fb8d66f15aa950babe83a23bd1e23f86ab8e928  ./MAPA-AKTOW.md
 0d97a5a2e1e76e300f26de4be86efebf1a63c435e0765abdc4e169eb1d197127  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-b8ec39661b7fb0873408a2b04451115837ba39bf8740265637282641ee1c5d35  ./SKILL.md
+5a10a1b404ceabcf24d537b6ae7c24e4c21b8208914d86d4e89f00bd5981c8bb  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -36,7 +36,7 @@ a7ed31dd12726bb5911709bc95e7285d0c083778fba07737a0664d46ea56dbfd  ./modules/mod-
 6708f6784d15d7d27a0972861c5c19f8db1d096e233ec3455df57195ff4bcc63  ./modules/mod-ustawa-minimalne-wynagrodzenie.md
 2fbdf9b261a42873f1a70b0194c69c6601725008d66bdb3082836d00e6424112  ./modules/mod-ustawa-ochrona-konkurencji-konsumentow-UOKiK.md
 8f6b7bd68816b8f6942efe53d1912128667d937df2e50709f539aece2146a4df  ./modules/mod-ustawa-pomoc-spoleczna.md
-35966e66e1f43d9ddc4be42a93ceb129169d44a47a03e597b28fff6258ed2ca9  ./modules/mod-ustawa-praca-tymczasowa.md
+f7c5a421ad4c85701d780976a5e218087f295548cb66bba15071dc6a3a8e048e  ./modules/mod-ustawa-praca-tymczasowa.md
 050ab7e352501b022941789952b16ff34c3aabe0d10a9dddd572202244a3c8b6  ./modules/mod-ustawa-rehabilitacja-PFRON.md
 bdba62cd61aca45d77cdcf3c9431451d1d2d4d4213879cc07c3b2e4afe2d4dac  ./modules/mod-ustawa-rynek-pracy-zatrudnienie.md
 218863a0dd0f0ddd0bcc0528409249b7df9b8d6af87437ec7a604c31f5ac9d85  ./modules/mod-ustawa-swiadczenia-rodzinne.md
@@ -47,5 +47,5 @@ b7e0ef8f4093faf5aef890ccddbac69c4dc517c762ac25e26fffcfca921d7de4  ./modules/mod-
 ef83da86f346814a8b673d20401a9bca3eff8636744f8a32aad7f3eff2cf7acb  ./modules/mod-ustawa-zwolnienia-grupowe.md
 1425c6535d36eef63bf25d192e46a556ce44f8d161609d2d5c5872c3d7374d99  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-2002f6d6eca880b1fcd074fdf2f5679b0c8be664d52a7676325625aaf79daa4f  ./references/CHANGELOG.md
+c78a702062f55147416522c6b3fa92f00547fad3981b0485cfa619244228ef06  ./references/CHANGELOG.md
 524575362b60f3d2eeb1b219131da9540142ca27bf15bcd7e46e31618e6ccc06  ./references/HISTORIA-ZMIAN-PLIKOW.md

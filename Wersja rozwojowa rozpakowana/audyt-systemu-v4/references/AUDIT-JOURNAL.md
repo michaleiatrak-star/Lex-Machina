@@ -69942,6 +69942,12 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-09h — odesłania między skillami i t.j. w nagłówkach modułów (6.216)
+
+- Kontrola wszystkich ścieżek do plików w .md korpusu (`view …`, backticki, ścieżki względne): po odsianiu wpisów historycznych w rejestrach deduplikacji (usunięty plik → kanoniczny) jedno żywe martwe odesłanie — `prawo-polskie-v2/SKILL.md` (przykład `modules/mod-KP-kodeks-pracy.md`).
+- t.j. w nagłówkach modułów wobec wiersza MAPA-AKTOW (ELI 2026-10-09): ⛔ dr-04 `mod-ustawa-praca-tymczasowa` podawał t.j. 2025/1682 — to t.j. ustawy o delegowaniu pracowników (DU/2016/868); właściwy t.j. 2025/236 (DU/2003/1608). dr-11 `mod-ustawa-informatyzacja`: zapytanie weryfikacyjne na wygasłym 2025/1703 → 2026/1241. Pozostałe różnice to moduły wieloaktowe (np. KKS w module Ordynacji) — poprawne.
+- Wersje: audyt 6.216, dr-04 3.49, dr-11 3.27, prawo-polskie-v2 6.56.
+
 ## AUDYT-2026-10-09g — przegląd aktów w ELI: nowe nowelizacje, daty wejścia w życie na poziomie artykułu, błędne numery (6.215)
 
 ### 1. ŹRÓDŁO

@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.216 (2026-10-09h, AUDYT-2026-10-09h): Inspekcja odesłań między skillami (wszystkie ścieżki do plików w .md) i t.j. w nagłówkach modułów wobec MAPA-AKTOW: 1 martwe odesłanie (prawo-polskie-v2), 1 podmiana aktu (dr-04 praca tymczasowa), 1 wygasły t.j. w zapytaniu (dr-11).
+
 - 6.215 (2026-10-09g, AUDYT-2026-10-09g): mapa_dzu (ELI 2026-10-09): ⛔ 22 wiersze ze statusem OK opisywały inny akt niż numer (np. 2024/1773 „Prawo wodne” = t.j. ustawy o minimalnym wynagrodzeniu, 2024/1567 „kredyt konsumencki” = rozp. PRM o wyborach, 2024/1194 „zarządzanie kryzysowe” = dozór techniczny) — oznaczone WIERSZ BŁĘDNY/PREV; 12 opisów poprawionych przy poprawnym numerze; 2018/1000 i 2019/1781 — jedna ustawa (nie „stara” i „nowa UODO”); nowe wiersze: 2026/1270 (VAT), 663, 41, 607, 864, 912, 1073, 1097, 1157, 548, 2025/820, 1006, 1668, 1843, 2021/2076.
 
 - 6.214 (2026-10-09f, AUDYT-2026-10-09f): Inspekcja powiązań skille↔shared: 15 plików z jednym konsumentem przeniesionych do skilli; T39 na nowej ścieżce `kontrakt_rachunek.py`. mapa_dzu: ⛔ KOREKTA 2024/1546 (to t.j. rozp. de minimis, nie ochrona cudzoziemców), 2024/1837 → PREV (t.j. 2026/478), nowy wiersz 2026/1297 (choroby zawodowe), 2026/574 — nowelizacje po t.j. 815 i 1206 art. 15 (od 11.01.2027). ELI 2026-10-09.

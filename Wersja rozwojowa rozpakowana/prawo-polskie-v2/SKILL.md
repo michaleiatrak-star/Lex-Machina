@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.55"
+version: "6.56"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.55 (2026-10-09g): ROUTING-MAP (ELI 2026-10-09, daty z przepisów o wejściu w życie): KSH (+644, ⏳176, ⏳187), lombardowa i kredyt konsumencki (⏳ 1206 art. 21/38 od 11.01.2027 — nie 29.09.2026), antykorupcja (⏳ 1003 art. 118), VAT (⏳ 2026/1270), transport, POŚ, trzeźwość/tytoń (t.j. 2026/1214 obejmuje 2025/427 i 799); ⛔ UPEA bez „2026/532” (Aktywny rodzic), leśna/łowiecka bez „2024/1219” (rozp. MSiT), KSeF 2021/2076 (było 2021/1237), PrEnergetyczne t.j. 2026/43, ustawa o ochronie danych osobowych 2018 — obowiązująca (nie „historyczna”).
+  Wersja bieżąca: 6.56 (2026-10-09h): SKILL.md: przykład modułu aktu wskazywał nieistniejący `modules/mod-KP-kodeks-pracy.md` — poprawione na `mod-KP-prawo-pracy.md`.
   Poprzednia: 6.46 (2026-10-07f): ROUTING-MAP — procedury i pełne korpusy PrUp (Dz.U. 2026 poz. 913) i PrRestr (Dz.U. 2026 poz. 533) z PR #85; wiersz zmian po t.j. (2026/1206 od 11.01.2027, 2026/176 od 18.02.2027); licencja doradcy restrukturyzacyjnego 2022/1007 potwierdzona w ELI jako najnowszy t.j.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
@@ -86,7 +86,7 @@ prawo-polskie-v2 (ten plik — routing)
     ↓
 DR-skill właściwy (np. dr-04-Prawo-Pracy-ZUS-Swiadczenia)
     ↓
-moduł aktu prawnego (np. modules/mod-KP-kodeks-pracy.md)
+moduł aktu prawnego (np. modules/mod-KP-prawo-pracy.md)
 ```
 
 Nie ładuj wszystkich DR-skills naraz. Wczytaj JEDEN pasujący.

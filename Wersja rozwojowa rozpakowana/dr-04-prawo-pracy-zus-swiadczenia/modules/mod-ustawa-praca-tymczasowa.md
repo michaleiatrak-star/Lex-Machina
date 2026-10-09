@@ -4,8 +4,8 @@
 
 ## Akt prawny
 **Ustawa z 09.07.2003 r. o zatrudnianiu pracowników tymczasowych**
-- Tekst jednolity: **Dz.U. 2025 poz. 1682** (t.j. z 02.12.2025)
-  ✅ VER: isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20250001682 [2026-05-31]
+- Tekst jednolity: **Dz.U. 2025 poz. 236** (obwieszczenie z 21.02.2025; najnowszy, brak nowelizacji po t.j.) ✅ [VER] RZĄD 1 2026-10-09 (ELI, akt bazowy DU/2003/1608)
+  ⛔ KOREKTA 2026-10-09: było „Dz.U. 2025 poz. 1682” — to t.j. ustawy o DELEGOWANIU PRACOWNIKÓW w ramach świadczenia usług (inny akt)
 - Poprzedni t.j.: Dz.U. 2022 poz. 1472
 
 **Weryfikacja w ELI (RZĄD 1) przed każdym cytowaniem.**
@@ -41,7 +41,7 @@ Dostęp do urządzeń socjalnych: Na warunkach ustalonych z PU
 
 ## Weryfikacja online
 ```
-web_search: "ustawa praca tymczasowa Dz.U. 2025 poz. 1682 isap t.j."
+web_search: "ustawa o zatrudnianiu pracowników tymczasowych Dz.U. 2025 poz. 236 t.j. ELI"
 web_search: "praca tymczasowa 18 miesięcy limit 36 miesięcy 2025"
 ```
 

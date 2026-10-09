@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.56 (2026-10-09h, AUDYT-2026-10-09h): SKILL.md: przykład modułu aktu wskazywał nieistniejący `modules/mod-KP-kodeks-pracy.md` — poprawione na `mod-KP-prawo-pracy.md`.
+
 - 6.55 (2026-10-09g, AUDYT-2026-10-09g): ROUTING-MAP (ELI 2026-10-09, daty z przepisów o wejściu w życie): KSH (+644, ⏳176, ⏳187), lombardowa i kredyt konsumencki (⏳ 1206 art. 21/38 od 11.01.2027 — nie 29.09.2026), antykorupcja (⏳ 1003 art. 118), VAT (⏳ 2026/1270), transport, POŚ, trzeźwość/tytoń (t.j. 2026/1214 obejmuje 2025/427 i 799); ⛔ UPEA bez „2026/532” (Aktywny rodzic), leśna/łowiecka bez „2024/1219” (rozp. MSiT), KSeF 2021/2076 (było 2021/1237), PrEnergetyczne t.j. 2026/43, ustawa o ochronie danych osobowych 2018 — obowiązująca (nie „historyczna”).
 
 - 6.54 (2026-10-09f, AUDYT-2026-10-09f): ROUTING-MAP: ⛔ wiersz „ustawa o zarządzaniu kryzysowym i ochronie ludności — 2024/1907” rozdzielony na dwie ustawy; zarządzanie kryzysowe — nowelizacje po t.j. 815 i 1206 art. 15 (od 11.01.2027); nowy wiersz rozp. w sprawie chorób zawodowych (t.j. 2026/1297); 7 wzmianek historycznych zapisanych jako RRRR/NNNN, żeby indeks RAG nie pobierał wygasłych t.j. ELI 2026-10-09.
