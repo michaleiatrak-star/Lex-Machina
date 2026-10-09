@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.69 (2026-10-09e): KROK 2 [5] ORZECZNICTWO: „wyszukaj/znajdź/podaj wyrok”, „orzeczenie Sądu Najwyższego”, „zweryfikowany wyrok”, „orzecznictwo” (wcześniej „wyszukaj wyroku … SN” trafiało do [2] analiza-sadowa-v6 przez samo słowo „wyrok”); [2]: „przeanalizuj/oceń wyrok”, „analiza wyroku” — wyrok sądu apelacyjnego to nie apelacja [3]. Nazwa sądu wskazuje źródło, nie dziedzinę.
+  Wersja bieżąca: 3.69 (2026-10-09e): KROK 2 [5] ORZECZNICTWO: „wyszukaj/znajdź/podaj wyrok”, „orzeczenie Sądu Najwyższego”, „zweryfikowany wyrok”, „orzecznictwo” (wcześniej „wyszukaj wyroku … SN” trafiało do [2] analiza-sadowa-v6 przez samo słowo „wyrok”); [2]: „przeanalizuj/oceń wyrok, orzeczenie, postanowienie”, „analiza wyroku/postanowienia” — wyrok sądu apelacyjnego to nie apelacja [3]. Nazwa sądu wskazuje źródło, nie dziedzinę.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -315,7 +315,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 → [1] wchodzi, gdy umowa jest przedmiotem pracy: analiza, sprawdzenie, napisanie, negocjacje, podpisanie, klauzule, zapisy. Umowa jako tło sporu („brak zgodności towaru z umową”, „deweloper nie wykonał umowy”, „umowa międzynarodowa”) → [10].
 
 ### [2] AKTA / WYROK / ANALIZA SZANS
-`wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "przeanalizuj wyrok" / "przeanalizuj orzeczenie" / "analiza wyroku" / "oceń wyrok" / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`
+`wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "przeanalizuj wyrok" / "przeanalizuj orzeczenie" / "przeanalizuj postanowienie" / "analiza wyroku" / "analiza postanowienia" / "oceń wyrok" / "oceń postanowienie" / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`
 → Analiza wyroku, który użytkownik ma (także wyroku sądu apelacyjnego), to [2], nie [3]: „apelacyjny” nazywa sąd, nie pismo. Wyroku trzeba najpierw poszukać → [5] (`orzeczenia-sadowe-v2`), potem jego analiza (`analiza-sadowa-v6` jako SECONDARY).
 → PRIMARY: `view analiza-sadowa-v6/SKILL.md`
 → SECONDARY: `analizator-dowodow-v3`, `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
