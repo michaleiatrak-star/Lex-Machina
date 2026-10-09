@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.67"
+version: "3.68"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.67 (2026-10-06): HARD-GATES-ORZECZNICTWO: karta SN; SAOS RZĄD 3 tylko zastępczo
+  Wersja bieżąca: 3.68 (2026-10-09): KROK 2: [1]/[6]/[8] tylko gdy umowa, dowód lub świadek jest przedmiotem pracy; jako tło sprawy → [10].
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -312,6 +312,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 → PRIMARY: `view analizator-umow-v1/SKILL.md`
 → SECONDARY: `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
 → „Na umowie zlecenie / o pracę / o dzieło” to podstawa zatrudnienia osoby, nie umowa do analizy → [10].
+→ [1] wchodzi, gdy umowa jest przedmiotem pracy: analiza, sprawdzenie, napisanie, negocjacje, podpisanie, klauzule, zapisy. Umowa jako tło sporu („brak zgodności towaru z umową”, „deweloper nie wykonał umowy”, „umowa międzynarodowa”) → [10].
 
 ### [2] AKTA / WYROK / ANALIZA SZANS
 `wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`
@@ -337,7 +338,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 `maile / SMS / nagrania / faktury / terminy procesowe / policz termin / termin na wniesienie / jako dowód / czy to dowód / moc dowodowa / koszty sądowe / opłaty komornicze`
 → PRIMARY: `view analizator-dowodow-v3/SKILL.md`
 → SECONDARY: `analiza-sadowa-v6`
-→ Maile / SMS / nagrania wskazują [6], gdy pytanie dotyczy dowodu (ocena, wykorzystanie); sama opowieść o sprawie („SMS-y i śledzenie”) → [10].
+→ Maile / SMS / nagrania / faktury wskazują [6], gdy pytanie dotyczy dowodu (ocena, wykorzystanie); sama opowieść o sprawie („SMS-y i śledzenie”, „wystawiłem fakturę, a kontrahent nie płaci”) → [10].
 
 ### [7] ZAGUBIONY / FALLBACK
 `"co mam zrobić" / "od czego zacząć" / wyjaśnienie wyniku / walidacja przepisu`
@@ -348,6 +349,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 `świadek / cross-examination / biegły / pytania do świadka / rozbicie zeznania`
 → PRIMARY: `view przesluchanie-swiadkow-v2-min90/SKILL.md`
 → SECONDARY: `analizator-dowodow-v3`, `analiza-sadowa-v6`
+→ [8] wchodzi przy przygotowaniu przesłuchania, pytań do świadka lub biegłego albo rozbiciu zeznania. Świadek lub biegły wspomniany w opowieści o sprawie („biegły nie stawił się na rozprawę”) → [10]; biegły rewident to nie biegły sądowy → [10].
 
 ### [9] ANALIZA PRZEPISU
 `"art. X" / "§ Y" / przesłanki / wykładnia / "czy mnie dotyczy"`
