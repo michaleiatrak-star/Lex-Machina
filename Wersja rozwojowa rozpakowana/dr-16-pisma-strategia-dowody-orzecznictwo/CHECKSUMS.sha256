@@ -1,7 +1,7 @@
 b52b26ca1eff5100ca8e548e82e5c4ad3dd67c0cdde76801926fed6561b74af5  ./MAPA-AKTOW.md
 81971413c080cfe0d1e84390fe6652fa496f27e88d1fe2df11da8f35b40f2d6a  ./MAPA-POKRYCIA.md
 ff2f5c239252308e995668e5167cbeb05a4368b56c583d536c15e74390eb0cbc  ./PORTABILITY-MANIFEST.md
-3165192d4594d1730bd40d286a4b8fc04d66d87af5d7a7e4fdd7f5df1d0078fa  ./SKILL.md
+526a5b27785d6cf2e7c9d974e0d50b6254ff28a47e054ff1ae7054a389770519  ./SKILL.md
 5b9edca7fc9b4da72a01f2540817b96534448face01f09eef1ab08ae4e24b529  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 ea46fbb5b672c37b0dad3cbd0be4a04f65d4230598ce72408a5c72090495b577  ./modules/mod-KPC-arbitraz-sportowy-dyscyplinarny.md
@@ -13,7 +13,7 @@ dde55b3fd35090738c00ac6ae6b908835c056e8351ce3b375926faf8bae6b5de  ./modules/mod-
 be211990e6bd89456d8466f923311d4a1c1b6d21737ff5434b5afbf39faa561c  ./modules/mod-narzedzie-kalkulatory.md
 212501ab2ed22f17ef214487138db1951191d519eb4b2448ebee696083182f2b  ./modules/mod-narzedzie-kontroler-kompletnosci.md
 bb62924f335507528f4d8fd622d1b9126be54b819aee6f9ac12a223e7adcbfbf  ./modules/mod-ustawa-archiwa-dokumentacja.md
-fdcf9386944a4b6e057991743ce7cae2e3f1f6f28c6bced00f1664833854d4e3  ./modules/mod-ustawa-obywatelstwo-paszporty-ewidencja.md
-f319f911143f130280f86176fdfb741cd15057fc088536652f5c08fa742e40f1  ./modules/mod-ustawa-prawo-prasowe-media.md
-2f431cc1d3a02598eed0539f5c5dbc0511359fcbdcb5c00e688ff6f473ec1059  ./references/CHANGELOG.md
+1dc7554bd6855ea72f827ef1dae798af81ccc03510fb27a96284c4ce234bda19  ./modules/mod-ustawa-obywatelstwo-paszporty-ewidencja.md
+db4a44f3994138b41a46a417abf7698b655a54cf841cdf30a26b54f9f1bc8666  ./modules/mod-ustawa-prawo-prasowe-media.md
+c8e4e8170fe7b3dd9c8eef607e79a924bf87dce0e48644ad96b389848c607a19  ./references/CHANGELOG.md
 2d0a5cc2977a48d357e3d41caef2a057ab0eb2c15ee07181e67bb2b3d616449c  ./references/HISTORIA-ZMIAN-PLIKOW.md

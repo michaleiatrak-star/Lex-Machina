@@ -1,5 +1,7 @@
 # CHANGELOG — dr-16-pisma-strategia-dowody-orzecznictwo
 
+- 3.13 (2026-10-09c, AUDYT-2026-10-09c): mod-ustawa-prawo-prasowe-media i mod-ustawa-obywatelstwo-paszporty-ewidencja: linie „Hasła spraw” (sprostowanie prasowe, sprostowanie artykułu, gazeta; wymeldowanie, zameldowanie, PESEL). Treść prawna bez zmian.
+
 - 3.12 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
 
 - 3.11 (2026-10-04b, AUDYT-2026-10-04b): **Sieroty (F-225).** `MAPA-POKRYCIA.md` bez wywołania — dodany `view` (sekcja „Mapa pokrycia treściowego”, wzorem DR-02…DR-06). Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04b.

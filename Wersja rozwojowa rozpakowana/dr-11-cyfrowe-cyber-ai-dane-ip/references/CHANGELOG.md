@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.25 (2026-10-09c, AUDYT-2026-10-09c): mod-KSC-NIS2: linia „Hasła spraw” (ransomware, atak hakerski, incydent, CSIRT). Treść prawna bez zmian.
+
 - 3.24 (2026-10-09, AUDYT-2026-10-09): informatyzacja — t.j. Dz.U. 2026 poz. 1241; KP w RODO — t.j. 2026/1245 (ELI 2026-10-09).
 
 - 3.23 (2026-10-05m, AUDYT-2026-10-05m): mod-RODO-DSAR: „Hasła spraw” zawężone do terminów żądań osób (bez ogólnych słów, które dawały fałszywe trafienia). Treść prawna bez zmian.

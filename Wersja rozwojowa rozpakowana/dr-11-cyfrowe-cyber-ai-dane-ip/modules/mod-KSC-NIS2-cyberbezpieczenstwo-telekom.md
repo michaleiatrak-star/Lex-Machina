@@ -12,6 +12,8 @@ compatibility:
 
 # mod-AI — Telekomunikacja / Cyberbezpieczeństwo / NIS2 / Usługi Cyfrowe
 
+**Hasła spraw:** ransomware, atak hakerski, zaszyfrowane dane, okup, incydent, zgłoszenie incydentu, CSIRT.
+
 ## AKTY PRAWNE — WERYFIKUJ
 
 | Akt | Zakres |

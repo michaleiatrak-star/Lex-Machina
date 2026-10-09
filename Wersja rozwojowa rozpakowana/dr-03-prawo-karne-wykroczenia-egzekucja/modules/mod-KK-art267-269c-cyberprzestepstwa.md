@@ -1,5 +1,7 @@
 # Moduł [T] — Cyberprzestępczość
 
+**Hasła spraw:** przejęcie konta, włamanie na konto, konto na Facebooku, hasło, BLIK, phishing, fałszywy profil, podszywanie się, hakowanie, ransomware.
+
 **Zakres:** Art. 267–269c KK (hacking, DDoS, sabotaż), art. 287 KK (oszustwo komputerowe,
 phishing), art. 190a §2 KK (podszywanie w sieci), art. 212/216 KK (zniesławienie/zniewaga
 online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberprzestępczości.
