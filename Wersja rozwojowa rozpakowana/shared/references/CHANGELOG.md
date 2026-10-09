@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.25 (2026-10-09e, AUDYT-2026-10-09e): ACTIVATION-MATRIX: wiersz orzeczenia-sadowe-v2 — „znajdź/wyszukaj orzeczenie”, „wyszukaj/podaj wyrok”, „zweryfikowany wyrok”.
+
 - 3.99.24 (2026-10-09, AUDYT-2026-10-09): DEF-PRACA, MOD-ELIMINACJA-TEZ, ORKA-BAS: KP t.j. Dz.U. 2026 poz. 1245 (⛔ art. 94³ w brzmieniu 2026/1046 od 5.11.2026); leksykon ORKA-BAS: VAT — adnotacja „obecny t.j. 2026/1263” (ELI 2026-10-09).
 
 - 3.99.23 (2026-10-08): WERYFIKACJA-SLAD.md — sekcja „⛔ STRIP-VER-GATE” oznaczona `<!-- lex:wykonuje-aplikacja: STRIP-VER -->`: aplikacja Lex Machina usuwa znaczniki ✅ [VER…]/KOTWICA/⚠️ z pliku pisma deterministycznie (w prompcie aplikacji sekcja jest zastępowana jedną linią). Poza aplikacją (konto Claude) reguła działa jak dotąd; treść bez zmian.

@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.69 (2026-10-09e, AUDYT-2026-10-09e): KROK 2 [5] ORZECZNICTWO: „wyszukaj/znajdź/podaj wyrok”, „orzeczenie Sądu Najwyższego”, „zweryfikowany wyrok”, „orzecznictwo” (wcześniej „wyszukaj wyroku … SN” trafiało do [2] analiza-sadowa-v6 przez samo słowo „wyrok”); [2]: „przeanalizuj/oceń wyrok”, „analiza wyroku” — wyrok sądu apelacyjnego to nie apelacja [3]. Nazwa sądu wskazuje źródło, nie dziedzinę.
+
 - 3.68 (2026-10-09): KROK 2: [1] tylko gdy umowa jest przedmiotem pracy (analiza, napisanie, negocjacje, podpisanie, klauzule); umowa jako tło sporu → [10]. [6] faktury jako dowód, nie opowieść o niezapłaconej fakturze. [8] przy przygotowaniu przesłuchania świadka lub biegłego; biegły w opowieści i biegły rewident → [10].
 
 - 3.67 (2026-10-06): HARD-GATES-ORZECZNICTWO: karta SN; SAOS RZĄD 3 tylko zastępczo

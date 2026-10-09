@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.53 (2026-10-09e, AUDYT-2026-10-09e): Routing błyskawiczny DR-01: „Sąd Najwyższy” zastąpione przez „ustawa o Sądzie Najwyższym”, „Izba Kontroli Nadzwyczajnej” — nazwa sądu w pytaniu o orzecznictwo („wyszukaj wyrok SN o grupie przestępczej”) wskazywała DR-01 zamiast dziedziny sprawy (DR-03).
+
 - 6.52 (2026-10-09d, AUDYT-2026-10-09d): Routing błyskawiczny: DR-02 „wspólnota”, „zarząd wspólnoty” (wcześniej trafiało tylko przypadkiem przez rdzeń „wspólnika”), DR-10 „pielęgniarka środowiskowa”, DR-11 „zdjęcie bez zgody”, DR-12 „koszty pozwu”. Treść prawna bez zmian.
 
 - 6.51 (2026-10-09c, AUDYT-2026-10-09c): Routing błyskawiczny — sprawy wielodziedzinowe i najsłabsze DR: DR-05 (Karta Polaka, kurator oświaty, braki wniosku, wszczęcie postępowania administracyjnego, legalizacja pobytu, skarga na bezczynność), DR-09 (linia wysokiego napięcia, koncesja geologiczna, panele fotowoltaiczne, wycięcie drzewa), DR-11 (przejęcie konta, fałszywy profil, chatbot musi informować, przekazanie danych, sprostowanie danych), DR-13 (dostęp służb do danych, billingi, dane telekomunikacyjne), DR-14 (sankcje UE, towary podwójnego zastosowania, uznanie orzeczenia, rozwód za granicą), DR-16 (sprostowanie artykułu, gazeta, wymeldowanie, przegląd/zestawienie orzecznictwa, plan przesłuchania), DR-03 (nadużycie zaufania, korupcja, łapówka, porwanie rodzicielskie). Treść prawna bez zmian.

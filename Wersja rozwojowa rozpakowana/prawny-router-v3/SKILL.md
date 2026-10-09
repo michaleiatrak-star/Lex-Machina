@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.68"
+version: "3.69"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.68 (2026-10-09): KROK 2: [1]/[6]/[8] tylko gdy umowa, dowód lub świadek jest przedmiotem pracy; jako tło sprawy → [10].
+  Wersja bieżąca: 3.69 (2026-10-09e): KROK 2 [5] ORZECZNICTWO: „wyszukaj/znajdź/podaj wyrok”, „orzeczenie Sądu Najwyższego”, „zweryfikowany wyrok”, „orzecznictwo” (wcześniej „wyszukaj wyroku … SN” trafiało do [2] analiza-sadowa-v6 przez samo słowo „wyrok”); [2]: „przeanalizuj/oceń wyrok”, „analiza wyroku” — wyrok sądu apelacyjnego to nie apelacja [3]. Nazwa sądu wskazuje źródło, nie dziedzinę.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -315,7 +315,8 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 → [1] wchodzi, gdy umowa jest przedmiotem pracy: analiza, sprawdzenie, napisanie, negocjacje, podpisanie, klauzule, zapisy. Umowa jako tło sporu („brak zgodności towaru z umową”, „deweloper nie wykonał umowy”, „umowa międzynarodowa”) → [10].
 
 ### [2] AKTA / WYROK / ANALIZA SZANS
-`wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`
+`wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "przeanalizuj wyrok" / "przeanalizuj orzeczenie" / "analiza wyroku" / "oceń wyrok" / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`
+→ Analiza wyroku, który użytkownik ma (także wyroku sądu apelacyjnego), to [2], nie [3]: „apelacyjny” nazywa sąd, nie pismo. Wyroku trzeba najpierw poszukać → [5] (`orzeczenia-sadowe-v2`), potem jego analiza (`analiza-sadowa-v6` jako SECONDARY).
 → PRIMARY: `view analiza-sadowa-v6/SKILL.md`
 → SECONDARY: `analizator-dowodow-v3`, `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
 
@@ -330,7 +331,8 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 → NIE używaj gdy >1 wątek → [3] · Wyjście: **obowiązkowo .docx**
 
 ### [5] ORZECZNICTWO
-`"znajdź wyrok" / "precedens" / "linia orzecznicza" / weryfikacja sygnatury`
+`"znajdź wyrok" / "znajdź orzeczenie" / "wyszukaj wyrok" / "wyszukaj orzeczenie" / "podaj wyrok" / "podaj orzeczenie" / "zweryfikowany wyrok" / "wyrok Sądu Najwyższego" / "orzeczenie Sądu Najwyższego" / "orzecznictwo" / "precedens" / "linia orzecznicza" / weryfikacja sygnatury`
+→ Wyszukanie lub weryfikacja orzeczenia („wyszukaj wyrok SN”, „podaj zweryfikowany wyrok”) to [5], nie [2]: [2] analizuje wyrok, który użytkownik ma; nazwa sądu (SN, NSA) wskazuje źródło, nie dziedzinę sprawy.
 → PRIMARY: `view orzeczenia-sadowe-v2/SKILL.md`
 → SECONDARY: `analiza-sadowa-v6`
 
