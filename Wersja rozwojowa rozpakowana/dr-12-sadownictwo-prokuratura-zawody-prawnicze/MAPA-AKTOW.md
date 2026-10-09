@@ -17,8 +17,8 @@ Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt oraz
 | odpowiedzialność dyscyplinarna zawodów | właściwa ustawa korporacyjna + kodeks etyki danego zawodu | `mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow` | ✅ |
 | koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 t.j. + późn. zm. | `mod-KSCU-koszty-sadowe-i-pomoc-prawna` | ✅ |
 | KPC — biegli sądowi i opinie | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-biegli-sadowi-opinie` | ✅ |
-| Prawo o adwokaturze | Dz.U. 2024 poz. 1564 t.j. + późn. zm.; ELI wskazuje akty zmieniające po t.j. | `mod-ustawa-adwokatura` | ✅ B+/COV |
-| ustawa o radcach prawnych | Dz.U. 2024 poz. 499 t.j. + późn. zm., w tym Dz.U. 2026 poz. 731 obowiązujący od 18.06.2026 | `mod-ustawa-radcowie-prawni` | ✅ B+/COV |
+| Prawo o adwokaturze | Dz.U. 2024 poz. 1564 t.j. + późn. zm., w tym Dz.U. 2026 poz. 1290 — w życie 17.10.2026 (art. 1 pkt 16, 41, 42 od 1.01.2027): art. 7 ust. 3 ochrona funkcjonariusza publicznego, art. 4 ust. 1 definicja pomocy prawnej, dział VIIIa przepisy karne (art. 95o–95q) ✅ [VER] RZĄD 1 2026-10-09 (ELI DU/2026/1290 + text.pdf) | `mod-ustawa-adwokatura` | ✅ B+/COV |
+| ustawa o radcach prawnych | Dz.U. 2024 poz. 499 t.j. + późn. zm., w tym Dz.U. 2026 poz. 731 obowiązujący od 18.06.2026 (art. 12 ust. 1 — ochrona funkcjonariusza publicznego) | `mod-ustawa-radcowie-prawni` | ✅ B+/COV |
 | Prawo o notariacie | Dz.U. 2026 poz. 614 t.j. + późn. zm. | `mod-ustawa-notariat` | ✅ |
 | ustawa o komornikach sądowych | Dz.U. 2026 poz. 881 t.j. + późn. zm. | `mod-ustawa-komornicy-sadowi-zawod` | ✅ |
 | ustawa o rzecznikach patentowych | Dz.U. 2026 poz. 778 t.j. + późn. zm. | `mod-ustawa-rzecznicy-patentowi-zawod` | ✅ |

@@ -41,7 +41,7 @@ Radca prawny świadczy pomoc prawną w formach dopuszczonych ustawą. Przy anali
 
 ## 4. Nowelizacja obowiązująca — Dz.U. 2026 poz. 731
 
-Ustawa z 15.05.2026 r. o zmianie ustawy o radcach prawnych weszła w życie **18.06.2026** i jest częścią bieżącego stanu prawnego.
+Ustawa z 15.05.2026 r. o zmianie ustawy o radcach prawnych (ogł. 3.06.2026) weszła w życie **18.06.2026** i jest częścią bieżącego stanu prawnego.
 
 Nowelizacja obejmuje m.in.:
 - reguły przetwarzania i retencji danych osobowych przez organy samorządu;
@@ -51,6 +51,9 @@ Nowelizacja obejmuje m.in.:
 - zmianę katalogu podmiotów uprawnionych do kasacji od prawomocnego orzeczenia Wyższego Sądu Dyscyplinarnego;
 - odpowiedzialność dyscyplinarną związaną z obowiązkiem ubezpieczeniowym;
 - nowy rozdział 6a i art. 74² penalizujący nieuprawnione posługiwanie się tytułem „radca prawny” lub oznaczeniem kancelarii.
+- **art. 12 ust. 1** (ust. 2 uchylony): „Radca prawny podczas wykonywania czynności zawodowych lub w związku z ich wykonywaniem korzysta z ochrony przysługującej funkcjonariuszowi publicznemu na zasadach określonych w ustawie z dnia 6 czerwca 1997 r. – Kodeks karny” ✅ [VER] RZĄD 1 2026-10-09 (ELI DU/2026/731 text.pdf). Ustawa nie zmienia KK (art. 115 § 13): radca korzysta z ochrony, nie jest funkcjonariuszem publicznym. Kwalifikacja czynu przeciwko radcy → DR-03 `mod-KK-art222-226-ochrona-funkcjonariusza`. Analogiczna ochrona adwokata od 17.10.2026 (Dz.U. 2026 poz. 1290) → `mod-ustawa-adwokatura.md` sekcja 8a;
+- **art. 12a** — strój urzędowy radcy prawnego (toga z żabotem i wypustką koloru ciemnoniebieskiego; rozporządzenie MS);
+- **art. 8a** — ochrona oznaczeń „kancelaria radcy prawnego” i „kancelaria radców prawnych”.
 
 **HARD GATE:** gdy sprawa dotyczy zdarzenia sprzed 18.06.2026, sprawdź przepisy przejściowe nowelizacji; w szczególności ustawa zawiera osobne reguły dla części spraw dyscyplinarnych i danych.
 

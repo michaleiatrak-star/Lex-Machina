@@ -1,5 +1,7 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.59 (2026-10-09b, AUDYT-2026-10-09b): mod-KK-art222-226-ochrona-funkcjonariusza: ochrona funkcjonariusza publicznego z ustaw zawodowych — radca prawny (art. 12 ust. 1 u.r.p., Dz.U. 2026 poz. 731, od 18.06.2026) i adwokat (art. 7 ust. 3 PoA, Dz.U. 2026 poz. 1290, od 17.10.2026); KK nie zmieniony (art. 115 § 13); ścieżka kwalifikacji. MAPA-AKTOW: wiersz KK 222–226.
+
 - 3.58 (2026-10-09, AUDYT-2026-10-09): KKW — t.j. Dz.U. 2026 poz. 1307 (obwieszczenie z 4.09.2026, ogł. 8.10.2026; obejmuje 2025/1423), ELI 2026-10-09.
 
 - 3.57 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795

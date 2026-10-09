@@ -109,6 +109,28 @@ piśmie (PRAWO-HARDGATE).
 - Nadużycie funkcji przez SAMEGO funkcjonariusza (odwrotna strona —
   gdy to funkcjonariusz przekracza uprawnienia) → `mod-KK-art228-231-korupcja-urzednicza.md` DRZEWO K.4.
 - Uszczerbek na zdrowiu jako skutek czynnej napaści → `mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md`.
+- Adwokat / radca prawny jako pokrzywdzony (ochrona z ustaw zawodowych) → sekcja „OCHRONA FUNKCJONARIUSZA PUBLICZNEGO Z USTAW ZAWODOWYCH” poniżej; DR-12 `mod-ustawa-adwokatura.md`, `mod-ustawa-radcowie-prawni.md`.
+
+---
+
+## ⭐ OCHRONA FUNKCJONARIUSZA PUBLICZNEGO Z USTAW ZAWODOWYCH — RADCA PRAWNY, ADWOKAT (dodane 2026-10-09)
+
+Ustawy zawodowe przyznają ochronę przysługującą funkcjonariuszowi publicznemu „na zasadach określonych w Kodeksie karnym”, **bez zmiany art. 115 § 13 KK** (ustawy zmieniające nie zmieniają KK). Pokrzywdzony korzysta z ochrony jak funkcjonariusz; sam nie jest funkcjonariuszem publicznym.
+
+| Zawód | Podstawa | Od kiedy | Zakres |
+|---|---|---|---|
+| radca prawny | art. 12 ust. 1 ustawy o radcach prawnych, w brzmieniu Dz.U. 2026 poz. 731 | 18.06.2026 | podczas wykonywania czynności zawodowych lub w związku z ich wykonywaniem |
+| adwokat | art. 7 ust. 3 Prawa o adwokaturze, w brzmieniu Dz.U. 2026 poz. 1290 | **17.10.2026** | jw.; do 16.10.2026 art. 7 ust. 1: „ochrona prawna podobnie jak sędzia i prokurator” |
+
+✅ [VER] RZĄD 1 2026-10-09: ELI DU/2026/731 i DU/2026/1290 (text.pdf), KK t.j. Dz.U. 2025 poz. 383.
+
+**Ścieżka kwalifikacji (czyn wobec adwokata/radcy):**
+1. Data czynu → właściwy stan prawny (adwokat: przed 17.10.2026 inna podstawa ochrony — art. 7 ust. 1 w dotychczasowym brzmieniu; ustal jej skutek w aktualnym orzecznictwie, nie z pamięci).
+2. Związek z czynnościami zawodowymi („podczas” albo „w związku z”) — bez niego: art. 212–217 KK (`mod-KK-art212-216-przeciwko-czci.md`), zwykle tryb prywatnoskargowy.
+3. Przy związku: drzewa F.1–F.4 tego modułu (art. 226, 222, 223, 224 KK) — tryb z urzędu.
+4. Brzmienie i zagrożenie każdego przepisu KK odczytaj w ELI w tej turze (PRAWO-HARDGATE).
+
+Ustawy zawodowe: DR-12 `mod-ustawa-adwokatura.md` (sekcja 8a), `mod-ustawa-radcowie-prawni.md`.
 
 ---
 

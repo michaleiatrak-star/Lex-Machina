@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.213 (2026-10-09b, AUDYT-2026-10-09b): mapa_dzu: nowy wiersz 2026/1290 (NW) + MONITORING do 17.10.2026; ⛔ KOREKTA wiersza 2026/731: ogłoszona 3.06.2026, nie 15.05.2026 (data ustawy).
+
 - 6.212 (2026-10-09, AUDYT-2026-10-09): mapa_dzu: nowe t.j. 2026/1231, 1240, 1241, 1244, 1245, 1252, 1263, 1274, 1282, 1293, 1307, 2023/501 (stare → PREV); KOREKTA podmiany: Traktat Północnoatlantycki to Dz.U. 2000 poz. 970 (DU/1999/970 to rozp. MF), 2000/257 to umowa NATO SOFA; MONITORING: 2026/1046 (KP, 5.11.2026), 2026/507 (VAT, 14.10.2026) — zawarte już w nowych t.j.; ALIASY: 2026/1240. CHECKLIST-DEDUP: komornicy t.j. 2026/881. T15 (audit_tj_inventory) maps/operational: 0 problemów — test nie był w run_regression_suite, dlatego 17 nieaktualnych t.j. nie zostało wcześniej wykrytych.
 
 - 6.211 (2026-10-07h, AUDYT-2026-10-07h): CBOSA `cbosa-example` — wartościowe części PR #84 (geek111) przeniesione na obecny konektor: etykieta pola w zagnieżdżonej tabeli (dokument zwraca sąd i datę zamiast `null`), sekcja „powiązane” pominięta przy zbieraniu kandydatów (bez zbędnych pobrań). Parytet z `orzeczenia-sadowe-v2/tools/cbosa_parser.py`; testy JS 31, Python 30; dist przebudowany (`zbuduj_pakiet.py --sprawdz` zgodny).
