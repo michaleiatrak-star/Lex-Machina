@@ -1,7 +1,7 @@
 # Kodeks pracy — current-state COV
 
 **Stan weryfikacji:** 2026-08-28  
-**Tekst jednolity bazowy:** Dz.U. 2025 poz. 277  
+**Tekst jednolity bazowy:** Dz.U. 2026 poz. 1245  
 **Stan prawny tekstu jednolitego:** 2025-02-07  
 **Źródło kanoniczne:** ELI/ISAP  
 **Status:** **B+ / COV** — aktualna struktura kodeksu jest zmapowana do rodziny modułów prawa pracy; brak deklaracji `FULL` artykuł-po-artykule.

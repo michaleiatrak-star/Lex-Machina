@@ -3,7 +3,7 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
 ## Akt prawny / źródło
-- Ustawa o świadczeniach rodzinnych — Dz.U. 2025 poz. 1208 (t.j.)
+- Ustawa o świadczeniach rodzinnych — Dz.U. 2026 poz. 1240 (t.j.)
   ✅ [VER: ops.pl/2025/09/tekst-jednolity-3 + isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001208, 2026-05-31]
   Aktualizacje wskutek: Dz.U. 2024 poz. 858 (Aktywny Rodzic), poz. 1615, poz. 1871; Dz.U. 2025 poz. 620, 619
 
@@ -38,7 +38,7 @@ Gmina (ośrodek pomocy społecznej / centrum usług społecznych)
 
 ## Weryfikacja online
 ```
-web_search: "świadczenia rodzinne Dz.U. 2025 poz. 1208 tekst jednolity"
+web_search: "świadczenia rodzinne Dz.U. 2025 poz. 1208 (obecny t.j. Dz.U. 2026 poz. 1240) tekst jednolity"
 web_search: "becikowe świadczenie pielęgnacyjne 2025 2026 kwoty"
 ```
 

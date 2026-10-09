@@ -1,7 +1,7 @@
 # mod-KP-prawo-pracy
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** KP — Dz.U. 2025 poz. 277 t.j. ze zm. (zm.: poz. 807 jawność wynagrodzeń; poz. 1423 reforma stażu; Dz.U. 2026 poz. 25)
+**Źródło weryfikacji:** KP — Dz.U. 2026 poz. 1245 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) (obejmuje m.in. 2025/807 jawność wynagrodzeń, 2025/1423 reforma stażu, 2026/25; ⛔ także 2026/1046 — w życie 5.11.2026)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl | LEX/Legalis wyłącznie pomocniczo
 
@@ -28,7 +28,7 @@ Nawiązanie i rozwiązanie stosunku pracy, wypowiedzenie (wymogi formalne, przyc
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Kodeks pracy (KP) | Dz.U. 2025 poz. 277 t.j. ze zm. | Weryfikuj wszystkie nowelizacje w ISAP |
+| Kodeks pracy (KP) | Dz.U. 2026 poz. 1245 t.j. ze zm. | Weryfikuj wszystkie nowelizacje w ISAP |
 | Ustawa o minimalnym wynagrodzeniu | Dz.U. 2024 poz. 1773 t.j. | Kwota co roku z rozporządzenia RM |
 | Rozp. RM w sprawie wys. min. wynagrodzenia | Dz.U. 2025 poz. 1242 (2026 r.) | Weryfikuj przez web_search co rok |
 

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.24 (2026-10-09, AUDYT-2026-10-09): informatyzacja — t.j. Dz.U. 2026 poz. 1241; KP w RODO — t.j. 2026/1245 (ELI 2026-10-09).
+
 - 3.23 (2026-10-05m, AUDYT-2026-10-05m): mod-RODO-DSAR: „Hasła spraw” zawężone do terminów żądań osób (bez ogólnych słów, które dawały fałszywe trafienia). Treść prawna bez zmian.
 
 - 3.22 (2026-10-05l, AUDYT-2026-10-05l): Linie „Hasła spraw” w modułach RODO (DSAR, RCP/DPA, DPIA), UODO, usług elektronicznych, prawa autorskiego (IP, media/wizerunek) i DSA — sprawy RODO trafiają do właściwego modułu. Treść prawna bez zmian.

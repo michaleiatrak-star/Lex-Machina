@@ -205,7 +205,7 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 
 | Źródło | URL | Zakres |
 |---|---|---|
-| ISAP — tekst jednolity | isap.sejm.gov.pl | Dz.U. 2021 poz. 2117, Dz.U. 2025 poz. 1882 |
+| ISAP — tekst jednolity | isap.sejm.gov.pl | Dz.U. 2026 poz. 1274, Dz.U. 2025 poz. 1882 |
 | Krajowa Izba Doradców Podatkowych | kidp.pl | Lista, samorząd, sąd dyscyplinarny |
 | podatki.gov.pl/narzedzia/eureka | podatki.gov.pl | Interpretacje, MDR |
 

@@ -16,7 +16,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 |---|---|---|
 | KC — Dz.U. 2026 poz. 795 | 🟢 B+ / COV | `mod-KC-current-state-COV.md` + moduły tematyczne |
 | KRO — Dz.U. 2026 poz. 236 | 🟢 B+ / COV | `mod-KRO-rodzinne.md` + moduły tematyczne |
-| prawa konsumenta — Dz.U. 2024 poz. 1796 ze zm. | 🟢 B+ / COV | `mod-ustawa-prawa-konsumenta.md` |
+| prawa konsumenta — Dz.U. 2026 poz. 1244 ze zm. | 🟢 B+ / COV | `mod-ustawa-prawa-konsumenta.md` |
 | UOKiK — Dz.U. 2025 poz. 1714 | 🟢 B+ / COV | `mod-ustawa-UOKIK-antymonopolowe.md` |
 
 ## KPC / KSH / niewypłacalność

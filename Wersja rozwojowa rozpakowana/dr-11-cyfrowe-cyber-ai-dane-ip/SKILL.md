@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.23"
+version: "3.24"
 description: "Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act, usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna."
 dependencies:
   requires:
@@ -170,7 +170,7 @@ USŁUGI CYFROWE I ELEKTRONICZNE:
   [✓] OK    mod-ustawa-uslugi-elektroniczne
               (usługi drogą elektroniczną Dz.U. 2024 poz. 1513 — częściowo deaktywowana przez DSA)
   [✓] OK    mod-ustawa-informatyzacja-podmiotow-publicznych
-              (informatyzacja: Dz.U. 2025 poz. 1703 t.j.; e-Doręczenia; KSeF)
+              (informatyzacja: Dz.U. 2026 poz. 1241 t.j.; e-Doręczenia; KSeF)
   [✓] OK    mod-ustawa-podpis-elektroniczny
               (podpis elektroniczny: eIDAS 1.0 Rozp. 910/2014 + UZIE Dz.U. 2016 poz. 1579)
   [✓] OK    mod-ustawa-otwarte-dane

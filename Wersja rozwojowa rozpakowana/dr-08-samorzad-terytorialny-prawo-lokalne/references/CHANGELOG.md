@@ -1,5 +1,7 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.18 (2026-10-09, AUDYT-2026-10-09): dochody JST — pierwszy t.j. Dz.U. 2026 poz. 1252 ⛔ zawiera 2026/875 (od 1.01.2027); transport zbiorowy — t.j. Dz.U. 2026 poz. 1231 (ELI 2026-10-09).
+
 - 3.17 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795
 
 - 3.16 (2026-10-05l, AUDYT-2026-10-05l): mod-MPZP-WZ-planowanie-przestrzenne: linia „Hasła spraw”. Treść prawna bez zmian.

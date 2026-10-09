@@ -1,6 +1,6 @@
 # Moduł — VAT: przeliczanie walut obcych (art. 31a–31b), rachunek VAT i uwolnienie środków (art. 108b), system zwrotu podatku podróżnym TAX FREE (art. 126–130)
 
-> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**.
+> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 > ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026 — do tej daty NIE stosować), 846.
 >
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.**
@@ -287,7 +287,7 @@
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263)
 RZĄD 1/2 — puesc.gov.pl, biznes.gov.pl (TAX FREE: warunki, próg 200 zł,
   próg zwolnienia podmiotowego 240 000 zł od 1.01.2026, kasa online)
 RZĄD 2 — brzmienie art. 108b ust. 1: przepisy.gofin.pl

@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.24 (2026-10-09, AUDYT-2026-10-09): DEF-PRACA, MOD-ELIMINACJA-TEZ, ORKA-BAS: KP t.j. Dz.U. 2026 poz. 1245 (⛔ art. 94³ w brzmieniu 2026/1046 od 5.11.2026); leksykon ORKA-BAS: VAT — adnotacja „obecny t.j. 2026/1263” (ELI 2026-10-09).
+
 - 3.99.23 (2026-10-08): WERYFIKACJA-SLAD.md — sekcja „⛔ STRIP-VER-GATE” oznaczona `<!-- lex:wykonuje-aplikacja: STRIP-VER -->`: aplikacja Lex Machina usuwa znaczniki ✅ [VER…]/KOTWICA/⚠️ z pliku pisma deterministycznie (w prompcie aplikacji sekcja jest zastępowana jedną linią). Poza aplikacją (konto Claude) reguła działa jak dotąd; treść bez zmian.
 - 3.99.22 (2026-10-08): Usunięto tools/mcp-servers/mcp-servers-examples.zip (relikt; serwery MCP są rozpakowane w audyt-systemu-v4/mcp-servers/, zob. PORTABILITY-MANIFEST.md pkt 3.93) wraz z wpisem w CHECKSUMS.sha256. Liczba plików skilla: 190 (zgodnie z limitations w SKILL.md).
 - 3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” (`span.powiazane`) poza zbiorem kandydatów; etykieta pola może stać w zagnieżdżonej tabeli `td.info-list-label`, a wartość w tabeli w `td.info-list-value`. Pomiar na żywo z PR #84 (geek111)

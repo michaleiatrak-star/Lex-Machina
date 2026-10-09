@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.68 (2026-10-09): KROK 2: [1] tylko gdy umowa jest przedmiotem pracy (analiza, napisanie, negocjacje, podpisanie, klauzule); umowa jako tło sporu → [10]. [6] faktury jako dowód, nie opowieść o niezapłaconej fakturze. [8] przy przygotowaniu przesłuchania świadka lub biegłego; biegły w opowieści i biegły rewident → [10].
+
 - 3.67 (2026-10-06): HARD-GATES-ORZECZNICTWO: karta SN; SAOS RZĄD 3 tylko zastępczo
 
 - 3.66 (2026-10-05m, AUDYT-2026-10-05m): KROK 2: [3] odwołanie do KIO, skarga do WSA; [6] jako dowód / czy to dowód / moc dowodowa.

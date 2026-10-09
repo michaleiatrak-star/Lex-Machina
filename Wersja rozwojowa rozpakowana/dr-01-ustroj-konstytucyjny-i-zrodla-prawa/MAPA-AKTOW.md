@@ -15,7 +15,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan akt → moduł. Historia napraw
 | Ustawa o Krajowej Radzie Sądownictwa | Dz.U. 2024 poz. 1186 t.j. | `mod-KRS-current-state-COV` | 🟢 B+/COV |
 | Ustrój władzy — KRS / Rada Ministrów / Prezydent / odpowiedzialność konstytucyjna (moduł przekrojowy) | Konstytucja + właściwe bieżące ustawy ustrojowe | `mod-ustawa-KRS-i-ustroj-wladzy` | ✅ aktywny; każdy akt fresh gate |
 | Ustawa o Radzie Ministrów | Dz.U. 2025 poz. 780 t.j. ze zm. | `mod-Rada-Ministrow-current-state-COV` | 🟢 B+/COV |
-| Wykonywanie mandatu posła i senatora | Dz.U. 2024 poz. 907 t.j. | `mod-mandat-posla-senatora-current-state-COV` | 🟢 B+/COV |
+| Wykonywanie mandatu posła i senatora | Dz.U. 2026 poz. 1282 t.j. | `mod-mandat-posla-senatora-current-state-COV` | 🟢 B+/COV |
 | Partie polityczne | Dz.U. 2023 poz. 1215 t.j. | `mod-partie-polityczne-current-state-COV` | 🟢 B+/COV |
 | Referendum ogólnokrajowe | Dz.U. 2025 poz. 300 t.j. | `mod-ustawa-partie-polityczne-referendum` | 🟢 operacyjny |
 | Zasady techniki prawodawczej | Dz.U. 2026 poz. 300 t.j. | `mod-ZTP-przepisy-przejsciowe-doktryna` | 🟢 operacyjny |

@@ -13,7 +13,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Kodeks pracy
 
-**Baza operacyjna:** Dz.U. 2025 poz. 277 t.j.; ELI wskazuje późniejsze akty zmieniające, dlatego przy każdej konkretnej jednostce obowiązuje fresh gate do tekstu ujednoliconego i daty wejścia w życie.
+**Baza operacyjna:** Dz.U. 2026 poz. 1245 t.j.; ELI wskazuje późniejsze akty zmieniające, dlatego przy każdej konkretnej jednostce obowiązuje fresh gate do tekstu ujednoliconego i daty wejścia w życie.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|

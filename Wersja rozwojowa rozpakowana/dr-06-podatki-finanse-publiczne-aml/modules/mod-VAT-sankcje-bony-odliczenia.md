@@ -474,7 +474,7 @@ z zarzutem karnoskarbowym)
   bez NIP
 
 ✅ [VER: lexlege.pl / arslege.pl / przepisy.gofin.pl — zgodne brzmienie
-   art. 108 ust. 1–3, Dz.U. 2025 poz. 775 t.j., 2026-08-12]
+   art. 108 ust. 1–3, Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j., 2026-08-12]
 ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
 ```
 
@@ -710,7 +710,7 @@ zdrowia, edukacja, finanse, NGO, spółdzielnie)
     mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
 
 ✅ [VER: lexlege.pl — pełny tekst art. 90, 90a, 90b, 90c i 91 ustawy o
-   VAT, Dz.U. 2025 poz. 775 t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
+   VAT, Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j.; pobrane 2026-08-12. Art. 86 ust. 2a–2h i
    rozporządzenie Dz.U. 2015 poz. 2193 — potwierdzone w 4 niezależnych
    źródłach, w tym interpretacji KIS i opracowaniu KPMG]
 ✅ ZAMKNIĘTE 2026-08-20 (F-18) — metryka rozporządzenia z 17.12.2015 r.

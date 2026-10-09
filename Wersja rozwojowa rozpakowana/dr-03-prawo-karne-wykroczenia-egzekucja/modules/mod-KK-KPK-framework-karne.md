@@ -42,7 +42,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
 
 - KK → ELI (RZĄD 1) (Dz.U. 2025 poz. 383) — **weryfikuj online przed cytowaniem**
 - KPK → isap.sejm.gov.pl (Dz.U. 2026 poz. 490)
-- KKW → isap.sejm.gov.pl (Dz.U. 2025 poz. 911)
+- KKW → isap.sejm.gov.pl (Dz.U. 2026 poz. 1307 t.j.)
 
 ---
 

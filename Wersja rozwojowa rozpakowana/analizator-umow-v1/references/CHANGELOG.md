@@ -1,5 +1,7 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.47 (2026-10-09, AUDYT-2026-10-09): zakaz konkurencji, RODO-archiwizacja, B2C — KP t.j. Dz.U. 2026 poz. 1245, prawa konsumenta t.j. Dz.U. 2026 poz. 1244 (ELI: poprzednie t.j. 2025/277 i 2024/1796 wygasły); zapisy odczytu ze starych t.j. oznaczone „obecny t.j.”.
+
 - 1.46 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
 
 - 1.45 (2026-10-04b, AUDYT-2026-10-04b): **Sieroty (F-225).** `references/szukaj_klauzul_uokik.py` powiązany w sekcji źródeł (Klauzule UOKiK) — wcześniej bez odwołania w skillu. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04b.

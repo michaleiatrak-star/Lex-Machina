@@ -20,7 +20,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan akt → moduł. Historia weryfi
 | MPPOiP | Dz.U. 1977 nr 38 poz. 167 | `mod-ONZ-pakty-prawa-czlowieka` | 🟢 operacyjny |
 | MPPGSiK | Dz.U. 1977 nr 38 poz. 169 | `mod-ONZ-pakty-prawa-czlowieka` | 🟢 operacyjny |
 | CRPD | Dz.U. 2012 poz. 1169 | `mod-ONZ-pakty-prawa-czlowieka` | 🟢 operacyjny |
-| Traktat Waszyngtoński (NATO) | Dz.U. 1999 nr 87 poz. 970 | `mod-NATO-umowy-miedzynarodowe` | 🟢 operacyjny |
+| Traktat Waszyngtoński (NATO) | Dz.U. 2000 poz. 970 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) | `mod-NATO-umowy-miedzynarodowe` | 🟢 operacyjny |
 | SOFA NATO | Dz.U. 2000 nr 21 poz. 257 | `mod-NATO-umowy-miedzynarodowe` | 🟢 operacyjny |
 | Zasady pobytu wojsk obcych na terytorium RP | Dz.U. 2024 poz. 1770 t.j. | `mod-NATO-umowy-miedzynarodowe` | 🟢 operacyjny |
 | Rejestr źródeł prawa i lifecycle | moduł metodyczny | `mod-rejestr-zrodla-prawa-lifecycle` | 🟢 operacyjny |

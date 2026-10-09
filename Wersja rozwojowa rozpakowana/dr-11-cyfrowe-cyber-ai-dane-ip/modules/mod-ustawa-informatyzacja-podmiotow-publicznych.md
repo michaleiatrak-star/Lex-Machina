@@ -1,7 +1,7 @@
 # Moduł — Informatyzacja podmiotów publicznych i KSeF
 
 ## Akt prawny / źródło
-- Ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne — **Dz.U. 2025 poz. 1703 t.j. ze zm.**; obwieszczenie z 7.11.2025, stan t.j. 28.10.2025. ✅ RZĄD 1 ELI, VER 2026-08-28.
+- Ustawa o informatyzacji działalności podmiotów realizujących zadania publiczne — **Dz.U. 2025 poz. 1703 (obecny t.j. Dz.U. 2026 poz. 1241) t.j. ze zm.**; obwieszczenie z 7.11.2025, stan t.j. 28.10.2025. ✅ RZĄD 1 ELI, VER 2026-08-28.
 - **KSeF nie jest odrębną ustawą.** Reżim Krajowego Systemu e-Faktur jest częścią ustawy o VAT. System utworzyła ustawa z 29.10.2021 r. o zmianie ustawy o VAT oraz niektórych innych ustaw — **Dz.U. 2021 poz. 2076**, art. 4. ⛔ Poprzedni wpis „ustawa o KSeF — Dz.U. 2021 poz. 1237” był błędny i został usunięty.
 - Aktualny harmonogram obowiązkowego KSeF weryfikuj w ustawie o VAT oraz na oficjalnym portalu MF/KSeF; terminy operacyjne poniżej zweryfikowano 2026-08-28.
 

@@ -52,7 +52,7 @@
 > RODO (Rozporządzenie UE 2016/679) — eur-lex.europa.eu
 > Ustawa o ochronie danych osobowych (wdrażająca RODO, z 10.05.2018) —
 >   weryfikuj aktualny t.j. w ELI (RZĄD 1)
-> Kodeks pracy — t.j. Dz.U. 2025 poz. 277 ze zm.
+> Kodeks pracy — t.j. Dz.U. 2026 poz. 1245 ze zm.
 >   ✅ VER: nowelizacja Dz.U. 2026 poz. 25 (ustawa z 4.12.2025, w życie
 >   26/27.01.2026 — sprawdź dokładną datę w ELI (RZĄD 1)) — KLUCZOWA dla regulaminu
 >   pracy/wynagradzania, patrz J21.4

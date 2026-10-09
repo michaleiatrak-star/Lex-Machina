@@ -3,7 +3,7 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji — RZĄD 1 / VER 2026-08-28:**
 - Wod-kan: Dz.U. 2024 poz. 757 t.j. ✅ VER: 2026-06-05
-- Transport zbiorowy: **Dz.U. 2025 poz. 285 t.j.** z 14.02.2025 ✅ VER: 2026-06-05
+- Transport zbiorowy: **Dz.U. 2026 poz. 1231 t.j.** z 1.09.2026 ✅ [VER] RZĄD 1 2026-10-09 (ELI) (poprzedni t.j. 2025/285 z 14.02.2025, VER 2026-06-05)
 - Czystość i porządek: **Dz.U. 2025 poz. 733 t.j. ze zm.**; ELI tekst ujednolicony sprawdzony w stanie 03.08.2026
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 

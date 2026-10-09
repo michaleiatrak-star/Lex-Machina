@@ -15,7 +15,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Interpretacje podatkowe / MDR / objaśnienia MF | OP jw. + właściwe akty wykonawcze | `mod-interpretacje-definicje-podatkowe` | ✅ aktywny; fresh gate |
 | Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. ze zm. | `mod-PIT-podatek-dochodowy-fizyczne` | ✅ aktywny |
 | Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. ze zm. | `mod-CIT-podatek-dochodowy-prawne` | ✅ aktywny |
-| Ustawa o VAT | **Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy tekst jednolity. ⛔ KROK 2C: **5 nowelizacji po tekście jednolitym** — Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811. Materia wyjątkowo ruchliwa: brzmienie każdego powoływanego artykułu czytać u źródła, tekst jednolity NIE oddaje stanu bieżącego | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
+| Ustawa o VAT | **Dz.U. 2026 poz. 1263 t.j.** ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) — obwieszczenie z 1.09.2026 (ogł. 28.09.2026), stan prawny na 26.08.2026; obejmuje nowelizacje 2025 poz. 894, 896, 1203, 1541, 1811 oraz 2026 poz. 507 i 846. ⛔ 2026/507 wchodzi w życie 14.10.2026 — t.j. zawiera już to brzmienie. Materia wyjątkowo ruchliwa: brzmienie każdego powoływanego artykułu czytać u źródła | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
 | VAT — import towarów i zwolnienia importowe | jw. + właściwe akty wykonawcze | `mod-VAT-import-towarow-i-zwolnienia-importowe` | ✅ aktywny |
 | VAT — WIS | jw. | `mod-VAT-WIS-tryb-i-ochrona` | ✅ aktywny |
 | VAT — kursy walut / rachunek VAT / TAX FREE | jw. | `mod-VAT-kursy-walut-rachunek-VAT-tax-free` | ✅ aktywny |
@@ -46,7 +46,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o usługach płatniczych | Dz.U. 2026 poz. 623 t.j. ze zm. | `mod-ustawa-uslugi-platnicze` | ✅ aktywny |
 | Ustawa o rachunkowości | Dz.U. 2026 poz. 522 t.j. ze zm. | `mod-ustawa-rachunkowosci` | 🟢/🟡 aktywny |
 | Biegli rewidenci i nadzór publiczny | Dz.U. 2025 poz. 1891 t.j. ze zm. | `mod-ustawa-biegli-rewidenci-zawod` | ✅ aktywny |
-| Doradztwo podatkowe | Dz.U. 2021 poz. 2117 t.j. ze zm. | `mod-ustawa-doradcy-podatkowi-zawod` | ✅ aktywny; fresh gate |
+| Doradztwo podatkowe | Dz.U. 2026 poz. 1274 t.j. ze zm. | `mod-ustawa-doradcy-podatkowi-zawod` | ✅ aktywny; fresh gate |
 | PKPiR / ewidencje uproszczone | właściwe akty wykonawcze obowiązujące od 2026 r. | `mod-PKPiR-ewidencje-uproszczone` | ✅ aktywny; fresh gate |
 | JPK / księgi elektroniczne / e-sprawozdania | właściwe ustawy i akty wykonawcze | `mod-JPK-ksiegi-elektroniczne-e-sprawozdania` | ✅ aktywny; temporal gate |
 | Kasy rejestrujące | właściwe akty wykonawcze MF | `mod-kasy-rejestrujace-fiskalizacja` | ✅ aktywny; fresh gate |

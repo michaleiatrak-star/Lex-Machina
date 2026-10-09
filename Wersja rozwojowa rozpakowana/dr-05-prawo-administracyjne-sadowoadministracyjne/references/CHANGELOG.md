@@ -1,5 +1,7 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.33 (2026-10-09, AUDYT-2026-10-09): cudzoziemcy: świadczenia rodzinne — t.j. Dz.U. 2026 poz. 1240 (ELI 2026-10-09).
+
 - 3.32 (2026-10-05l, AUDYT-2026-10-05l): Linie „Hasła spraw” w mod-ustawa-cudzoziemcy i mod-KPA-tryby-nadzwyczajne-i-strategia. Treść prawna bez zmian.
 
 - 3.31 (2026-09-27e, AUDYT-2026-09-27e): claude.ai po dodaniu marketplace instalował wyłącznie 4 z 32 pluginów (shared, prawny-router-v3, analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90); jedyna cecha wspólna tych 4, nieobecna w żadnym z 28 pozostałych, to klucz `dependencies` we frontmatterze SKILL.md. Dodano go (`requires: [shared]` — zgodnie ze stanem faktycznym) oraz jawny manifest pluginu (name, description = description z SKILL.md, author, repository, license) — host nie musi niczego wnioskować z SKILL.md. `version` w manifeście = `version:` z SKILL.md (pilnuje T38 w audyt-systemu-v4) — host rozpoznaje aktualizację po podbiciu wersji. Treść skilla bez zmian.

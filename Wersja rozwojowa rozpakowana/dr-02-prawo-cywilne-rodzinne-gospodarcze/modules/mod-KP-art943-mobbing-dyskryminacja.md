@@ -1,6 +1,6 @@
 # mod-KP-art943-mobbing-dyskryminacja
 
-**Źródło weryfikacji:** KP art. 94³ i art. 18³a–18³e — Dz.U. 2025 poz. 277 t.j. ze zm.
+**Źródło weryfikacji:** KP art. 94³ i art. 18³a–18³e — Dz.U. 2026 poz. 1245 t.j. ze zm.
 **Data weryfikacji online:** 2026-06-05
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **Uwaga:** Mobbing jest uregulowany w KP — ale jako roszczenie majątkowe trafia do DR-02 (prawo cywilne). Prawo pracy → DR-04.

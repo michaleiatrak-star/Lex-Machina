@@ -463,7 +463,7 @@ tekst zastępuje poprzednią, częściowo nieaktualną wersję ANEKSU A.
 |---|---|---|
 | Legalizacja pobytu (beneficjenci ochrony czasowej) | Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP — ⚠️ numer t.j. WYMAGA POTWIERDZENIA w ISAP (mapa wskazuje 2024.1546, ale znaleziono poszlaki nowszego t.j. — patrz MAPA-AKTOW wiersz "ochrona cudzoziemcom") | przepisy o legalizacji PRZENIESIONE z dawnej specustawy |
 | Powierzanie pracy bez zezwolenia | Ustawa o warunkach dopuszczalności powierzania pracy cudzoziemcom na terytorium RP — Dz.U. 2025 poz. 621 | dawny art. 22 specustawy UCHYLONY, przeniesiony tutaj — powiadomienie PUP przez system praca.gov.pl w ciągu 7 dni |
-| Świadczenia rodzinne dla opiekunów tymczasowych dzieci | Ustawa o świadczeniach rodzinnych (Dz.U. 2025 poz. 1208) — znowelizowana ustawą z 23.01.2026 (dodano art. 3a) | nowa kategoria: "opiekun tymczasowy dziecka" / "opiekun wskazany przez władze kraju pochodzenia" |
+| Świadczenia rodzinne dla opiekunów tymczasowych dzieci | Ustawa o świadczeniach rodzinnych (Dz.U. 2026 poz. 1240) — znowelizowana ustawą z 23.01.2026 (dodano art. 3a) | nowa kategoria: "opiekun tymczasowy dziecka" / "opiekun wskazany przez władze kraju pochodzenia" |
 | Okres ochrony czasowej dla DOTYCHCZASOWYCH beneficjentów | Trwa do **4.03.2027 r.** (przedłużona decyzją Rady UE 2022/382 i kolejnymi) | NOWY reżim prawny, ta sama data graniczna co poprzednio planowana |
 
 ⭐⭐ NOWE ROZPORZĄDZENIE WYKONAWCZE (dodane 2026-08-08, na żądanie

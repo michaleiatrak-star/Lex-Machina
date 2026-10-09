@@ -3,7 +3,7 @@
 **Hasła spraw:** reklamacja, rękojmia, niezgodność towaru z umową, wadliwy towar, zwrot towaru, odstąpienie od umowy zawartej na odległość, zakupy w internecie, sklep internetowy, konsument
 
 **Stan operacyjny:** 2026-08-28  
-**Źródło kanoniczne:** ELI — ustawa z 30.05.2014 r. o prawach konsumenta, Dz.U. 2024 poz. 1796 t.j., status obowiązujący; ELI wskazuje akty zmieniające po tekście jednolitym, więc każda jednostka wymaga fresh gate.
+**Źródło kanoniczne:** ELI — ustawa z 30.05.2014 r. o prawach konsumenta, Dz.U. 2026 poz. 1244 t.j., status obowiązujący; ELI wskazuje akty zmieniające po tekście jednolitym, więc każda jednostka wymaga fresh gate.
 
 **Rola:** ustawa szczególna wobec ogólnego frameworku konsumenckiego KC. Klauzule abuzywne i ogólna definicja konsumenta pozostają również w aktualnym KC.
 
@@ -74,4 +74,4 @@ Indywidualne roszczenie konsumenta z umowy nie jest tym samym co postępowanie P
 
 ## Fresh gate
 
-Przed podaniem terminu, wyjątku od odstąpienia, kolejności środków reklamacyjnych lub skutku prawnego pobierz aktualny tekst ujednolicony ELI dla Dz.U. 2024 poz. 1796 wraz z późniejszymi zmianami. Prawo UE stanowiące tło implementacyjne weryfikuj w EUR-Lex.
+Przed podaniem terminu, wyjątku od odstąpienia, kolejności środków reklamacyjnych lub skutku prawnego pobierz aktualny tekst ujednolicony ELI dla Dz.U. 2026 poz. 1244 wraz z późniejszymi zmianami. Prawo UE stanowiące tło implementacyjne weryfikuj w EUR-Lex.

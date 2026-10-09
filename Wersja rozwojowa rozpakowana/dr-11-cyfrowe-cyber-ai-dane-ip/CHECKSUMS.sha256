@@ -1,7 +1,7 @@
-52b9198de275424ba0b94f70653f8f81748bd23c8d7e369d48523b9b3de6bb35  ./MAPA-AKTOW.md
+3a2f8e230b0469b40da6c3d1e79180ff5821fc84644b257e956c8d26da361812  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-50b3165b37774052143a9cb11182b67ad948affd58991ce92d6c62ba09deeda1  ./SKILL.md
+139d7f0dd93fd91e510da09a920bd613092f656ad2d911cf47f4805a04e444af  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 379c038ace0a42bd49321d6f0c8fe01cc6d56d31641c751c6d869e09600b65b7  ./modules/mod-AI-Act-framework.md
@@ -18,12 +18,12 @@ b444303da37dd0d95c9a4a2589777db8809f407dd1ab675f7984dee5d530f4f8  ./modules/mod-
 518c1b82701605f8602a57306749622282b1e5e8a80082131f321806a0a6502c  ./modules/mod-RODO-DSAR-zadania-osob.md
 65a6efe962c7b0fc2f1842fbc108b9a9669570ee4588ab524cf1979477b9b20c  ./modules/mod-RODO-GDPR-2016-679.md
 b183d42e70a6a5e6e4a43b92773424f88e2babab200024a7afcf6ae617567ac7  ./modules/mod-RODO-RCP-DPA-rejestr-powierzenie.md
-fbf46e03dd63595467aa2a1e840851ecdb0e3cb724f758b3f58994ec619a4d01  ./modules/mod-RODO-szczegolowy.md
+2a6ef98bd950f1ee0f5a3a750dbd19406616ce9945fe9427048c6a8f83115de2  ./modules/mod-RODO-szczegolowy.md
 7f77072a724e4f2b1e2dd4865ce5d02eae21286fb02fc25df793e0d37272692e  ./modules/mod-UODO-postepowanie-ochrona-danych.md
 e3e2a5c526f48b6ffd320e3a068d633b00ce4f236234c1cd63bfffc81bc95cc3  ./modules/mod-ustawa-certyfikacja-cyberbezpieczenstwa.md
-a8373b44f42a620f1a6e8129859b026a7402b303daef9a5813752cc8b55d1fdb  ./modules/mod-ustawa-informatyzacja-podmiotow-publicznych.md
+1ff7517c96faf4a3e99c8deac08ff503f980145101d819b4d5659afb495f633b  ./modules/mod-ustawa-informatyzacja-podmiotow-publicznych.md
 98653fc25d0fe35c0d62c5ffbba71818fe748be791da2272ed00d1ce69d0863f  ./modules/mod-ustawa-otwarte-dane.md
 aff4384416951db74063a36b73e12ddfdf3b3262d3075696e03597a1274233bb  ./modules/mod-ustawa-podpis-elektroniczny.md
 0bba80f38aaa77ace308d59347302ec2797f48cb15021051a06ad810cf181f50  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 130eef15304528cf161d78f760ed8c1cc9892c1f60ddd6b69834d47343c8fcfa  ./modules/mod-ustawa-uslugi-elektroniczne.md
-a4f9294d656f04076ac863341390c978211082f6eaf3478abcb7e74cda265727  ./references/CHANGELOG.md
+b8f3ddba1e4d588fde45d936f4a902681dcf8da75a6549563c29bac8bdf147f6  ./references/CHANGELOG.md

@@ -27,7 +27,7 @@ Definicja ministerialna:
 
 Reguła: Brak KTÓREGOKOLWIEK z ustawowych warunków (3 mies. / bez obniżenia
 wynagrodzenia / zgodność z kwalifikacjami) = zmiana rodzaju pracy sprzeczna z prawem.
-Podstawa: art. 42 §4 KP (Dz.U. 2025 poz. 277 t.j. — weryfikuj)
+Podstawa: art. 42 §4 KP (Dz.U. 2026 poz. 1245 t.j. — weryfikuj)
 ```
 
 ### BAS-W02 — Szczególne potrzeby pracodawcy (godziny nadliczbowe, art. 151 §1 KP)
@@ -81,7 +81,7 @@ Kluczowa różnica (MRiPS z 23.02.2023):
   Praca zdalna okazjonalna = wykonywanie pracy (nie zwolnienie od pracy)!
   → Oba uprawnienia niezależne, nie zastępują się wzajemnie.
 
-Weryfikuj: ELI (RZĄD 1) → KP art. 6718–6735 (t.j. Dz.U. 2025 poz. 277)
+Weryfikuj: ELI (RZĄD 1) → KP art. 6718–6735 (t.j. Dz.U. 2025 poz. 277 (obecny t.j. Dz.U. 2026 poz. 1245))
 ```
 
 ### BAS-W04 — Ochrona pracownika szczególna — kategorie (interpelacja MRPiPS)

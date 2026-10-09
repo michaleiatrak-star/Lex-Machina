@@ -12,7 +12,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 **Baza KPK:** Dz.U. 2026 poz. 490 t.j. ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie Marszałka Sejmu z 27.03.2026.
 ⛔ KROK 2C: **pięć nowelizacji po tekście jednolitym** — Dz.U. 2026 poz. 421, 638, 760, 882, 901.
 Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednolity nie oddaje stanu bieżącego.  
-**Baza KKW:** Dz.U. 2025 poz. 911 t.j. ze zm.
+**Baza KKW:** Dz.U. 2026 poz. 1307 t.j. ze zm.
 
 | Zakres | Moduł / routing | Status runtime |
 |---|---|---|
@@ -98,7 +98,7 @@ Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednol
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
 | Kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j. ze zm. | `mod-KKS-karny-skarbowy-i-AML` | 🟢 B+/COV |
-| Fundusz Pomocy Pokrzywdzonym oraz Pomocy Postpenitencjarnej („Fundusz Sprawiedliwości”) + państwowa kompensata | KKW art. 43 — t.j. Dz.U. 2025 poz. 911 (po t.j.: Dz.U. 2025 poz. 1423, w mocy 1.01.2026 — art. 43 bez zmian); rozp. MS z 13.09.2017 w sprawie Funduszu — t.j. Dz.U. 2025 poz. 1298 (brak aktów zmieniających po t.j.); ustawa z 7.07.2005 o państwowej kompensacie — t.j. Dz.U. 2016 poz. 325 (brak aktów zmieniających po t.j.) ✅ [VER] RZĄD 1 2026-10-04 (ELI `/references` DU/1997/557, DU/2017/1760, DU/2005/1415) | `mod-ustawa-fundusz-pomocy-pokrzywdzonym` | ✅ aktywny; fresh gate aktu wykonawczego |
+| Fundusz Pomocy Pokrzywdzonym oraz Pomocy Postpenitencjarnej („Fundusz Sprawiedliwości”) + państwowa kompensata | KKW art. 43 — t.j. Dz.U. 2026 poz. 1307 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) (obejmuje 2025/1423 — art. 43 bez zmian); rozp. MS z 13.09.2017 w sprawie Funduszu — t.j. Dz.U. 2025 poz. 1298 (brak aktów zmieniających po t.j.); ustawa z 7.07.2005 o państwowej kompensacie — t.j. Dz.U. 2016 poz. 325 (brak aktów zmieniających po t.j.) ✅ [VER] RZĄD 1 2026-10-04 (ELI `/references` DU/1997/557, DU/2017/1760, DU/2005/1415) | `mod-ustawa-fundusz-pomocy-pokrzywdzonym` | ✅ aktywny; fresh gate aktu wykonawczego |
 | Opłaty w sprawach karnych (ustawa z 23.06.1973) | Dz.U. 2023 poz. 123 t.j. (obejmuje zmiany do Dz.U. 2022 poz. 2600; brak aktów zmieniających po t.j.) ✅ [VER] RZĄD 1 2026-10-04 (ELI `/references` DU/1973/152) | `mod-ustawa-oplaty-w-sprawach-karnych` | 🟢 B+/COV |
 | Taryfikator mandatów — rozp. PRM z 24.11.2003 w sprawie wysokości grzywien nakładanych w drodze mandatów karnych za wybrane rodzaje wykroczeń | t.j. Dz.U. 2013 poz. 1624 ze zm. (ostatnia zmiana Dz.U. 2023 poz. 1256; tabela B — Dz.U. 2021 poz. 2484) ✅ [VER] RZĄD 1 2026-10-04 (ELI `/references` DU/2003/2023). ⛔ NIE Dz.U. 2026 poz. 724 (punkty karne) | `mod-grzywny-mandaty-szczegolowe`, `mod-KW-KPW-framework-szczegolowy` | ✅ aktywny; kwoty z odczytu ELI 2026-10-04 |
 | AML — routing do KKS / DR-06 | Dz.U. 2025 poz. 644 t.j. ze zm. | `mod-KKS-karny-skarbowy-i-AML` + DR-06 | ✅ aktywny |

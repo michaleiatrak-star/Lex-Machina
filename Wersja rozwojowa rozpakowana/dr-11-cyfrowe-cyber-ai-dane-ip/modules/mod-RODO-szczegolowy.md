@@ -127,7 +127,7 @@ WARUNKI LEGALNOŚCI MONITORINGU WIZYJNEGO:
     miejsc odpoczynku (chyba że wymagają tego szczególne warunki — art. 22² §2 KP)
   □ Przechowywanie: max 3 miesiące (chyba że dowód w postępowaniu)
 
-MONITORING POCZTY E-MAIL (art. 22³ KP — weryfikuj numerację w aktualnym t.j. KP Dz.U. 2025 poz. 277):
+MONITORING POCZTY E-MAIL (art. 22³ KP — weryfikuj numerację w aktualnym t.j. KP Dz.U. 2026 poz. 1245):
   → Cel: weryfikacja wykonania pracy
   → Zakaz naruszania tajemnicy korespondencji i dóbr osobistych
   → Te same wymogi informacyjne jak monitoring wizyjny
@@ -190,5 +190,5 @@ REKOMENDACJA: □ Skarga UODO  □ Pozew cywilny  □ Oba  □ Wezwanie przedsą
 
 *RODO (UE) 2016/679 → eur-lex.europa.eu*
 *Ustawa o ODO (Dz.U. 2019 poz. 1781 — weryfikuj aktualny t.j. w ELI (RZĄD 1))*
-*KP art. 22²–22³ (Dz.U. 2025 poz. 277 t.j.) | Wytyczne EROD: edpb.europa.eu*
+*KP art. 22²–22³ (Dz.U. 2026 poz. 1245 t.j.) | Wytyczne EROD: edpb.europa.eu*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

@@ -19,7 +19,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | Prawo o ustroju sądów administracyjnych — Dz.U. 2024 poz. 1267 | `mod-PUSA-current-state-COV.md` | 🟢 B+ / COV |
 | ustawa o Krajowej Radzie Sądownictwa — Dz.U. 2024 poz. 1186 | `mod-KRS-current-state-COV.md` | 🟢 B+ / COV |
 | ustawa o Radzie Ministrów — Dz.U. 2025 poz. 780 ze zm. | `mod-Rada-Ministrow-current-state-COV.md` | 🟢 B+ / COV |
-| wykonywanie mandatu posła i senatora — Dz.U. 2024 poz. 907 ze zm. | `mod-mandat-posla-senatora-current-state-COV.md` | 🟢 B+ / COV |
+| wykonywanie mandatu posła i senatora — Dz.U. 2026 poz. 1282 ze zm. | `mod-mandat-posla-senatora-current-state-COV.md` | 🟢 B+ / COV |
 | partie polityczne — Dz.U. 2023 poz. 1215 | `mod-partie-polityczne-current-state-COV.md` | 🟢 B+ / COV |
 | skarga na przewlekłość — Dz.U. 2023 poz. 1725 | `mod-przewleklosc-current-state-COV.md` | 🟢 B+ / COV |
 
