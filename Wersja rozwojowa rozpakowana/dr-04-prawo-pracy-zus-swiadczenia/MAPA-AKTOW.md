@@ -21,6 +21,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Obchodzenie prawa pracy / mechanizmy kontrolne PIP | KP + ustawa o PIP + akty szczególne | `mod-obchodzenie-prawa-pracy-reforma-PIP-2026` | ✅ aktywny; fresh gate |
 | Klasyfikacja naruszeń BHP / prawa pracy | KP + ustawa o PIP + właściwe przepisy branżowe | `mod-klasyfikacja-naruszen-bhp-prawa-pracy` | ✅ aktywny; routing przekrojowy |
 | Wypadki przy pracy / choroby zawodowe | Dz.U. 2025 poz. 1644 t.j. ze zm. + przepisy wykonawcze | `mod-wypadek-przy-pracy-choroba-zawodowa` | ✅ aktywny |
+| Rozporządzenie RM w sprawie chorób zawodowych (wykaz) | Dz.U. 2026 poz. 1297 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI; poprzedni t.j. 2022/1836 — wygaśnięcie aktu) | `mod-wypadek-przy-pracy-choroba-zawodowa` | ✅ aktywny |
 | Ustawa o zakładowym funduszu świadczeń socjalnych | Dz.U. 2024 poz. 288 t.j. ze zm. | `mod-ustawa-ZFSS` | ✅ aktywny |
 | Ustawa o minimalnym wynagrodzeniu za pracę | Dz.U. 2024 poz. 1773 ze zm. + aktualne rozporządzenie płacowe | `mod-ustawa-minimalne-wynagrodzenie` | ✅ aktywny; fresh gate kwot |
 | Ustawa o zatrudnianiu pracowników tymczasowych | Dz.U. 2025 poz. 236 t.j. ze zm. | `mod-ustawa-praca-tymczasowa` | ✅ aktywny |

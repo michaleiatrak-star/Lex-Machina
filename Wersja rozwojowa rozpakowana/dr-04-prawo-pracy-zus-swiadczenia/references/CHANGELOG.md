@@ -1,5 +1,7 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.47 (2026-10-09f, AUDYT-2026-10-09f): Rozporządzenie RM w sprawie chorób zawodowych: t.j. Dz.U. 2026 poz. 1297 (ELI 2026-10-09) — numer w mod-wypadek-przy-pracy-choroba-zawodowa i nowy wiersz MAPA-AKTOW (moduł zawierał akt bez wiersza mapy).
+
 - 3.46 (2026-10-09, AUDYT-2026-10-09): KP — t.j. Dz.U. 2026 poz. 1245 (stan 27.08.2026) ⛔ zawiera reformę antymobbingową 2026/1046 w vacatio legis do 5.11.2026; świadczenia rodzinne — t.j. Dz.U. 2026 poz. 1240; prawa konsumenta — t.j. 2026/1244 (ELI 2026-10-09).
 
 - 3.45 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

@@ -263,7 +263,7 @@ Reguła: Katalog ZAMKNIĘTY — podmiot spoza listy art. 9 UFP nie należy do SF
 ### BAS-097 / BAS-098 — Poręczenie i Gwarancja Skarbu Państwa
 ```
 Weryfikacja: ustawa o poręczeniach i gwarancjach udzielanych przez SP
-  (Dz.U. 2024 poz. 836 t.j.) — ZWERYFIKOWANO
+  (Dz.U. 2024 poz. 291 t.j. ze zm.; nowelizacje po t.j.: 2026/635, 2026/680 — ✅ [VER] RZĄD 1 2026-10-09 (ELI); było błędnie 2024 poz. 836 = rozporządzenie o likwidacji funduszy inwestycyjnych)
 PORĘCZENIE SP (art. 89 ust. 1 pkt 4 UFP):
   Zobowiązanie SP do spełnienia świadczenia pieniężnego w razie niewykonania
   go przez dłużnika głównego — akcesoryjne, wygasa z głównym zobowiązaniem.
@@ -273,7 +273,7 @@ GWARANCJA SP:
 Reguła: Gwarancja silniejsza niż poręczenie — beneficjent nie musi dowodzić
   winy dłużnika ani wyczerpania środków od dłużnika przed żądaniem od SP.
 Podstawa: ustawa o poręczeniach i gwarancjach udzielanych przez SP
-  (Dz.U. 2024 poz. 836 t.j.)
+  (Dz.U. 2024 poz. 291 t.j. ze zm.)
 ```
 
 ### BAS-110 — Absolwent centrum integracji społecznej (CIS)
@@ -338,7 +338,7 @@ Weryfikuj: Dz.U. 2020 poz. 374 i kolejne zmiany tarcz antykryzysowych (historycz
 ```
 Weryfikacja: ustawa z 15.06.2012 r. o skutkach powierzania wykonywania pracy
   cudzoziemcom przebywającym wbrew przepisom na terytorium RP
-  (Dz.U. 2024 poz. 1543 t.j. — weryfikuj)
+  (Dz.U. 2025 poz. 1567 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); było błędnie 2024 poz. 1543 = rozporządzenie MZ o AOS)
 
 Definicja: Powierzenie cudzoziemcowi wykonywania pracy bez wymaganego:
   a) tytułu pobytowego uprawniającego do wykonywania pracy, LUB

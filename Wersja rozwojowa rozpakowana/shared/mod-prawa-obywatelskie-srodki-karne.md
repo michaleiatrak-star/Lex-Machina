@@ -337,7 +337,7 @@ Podstawy prawne (Dz.U. 2025 poz. 383 t.j. — weryfikuj):
   KK art. 107     — terminy zatarcia skazania
   KK art. 106a    — wyłączenie zatarcia (przestępstwa seksualne vs małoletni < 15 lat)
   Konstytucja art. 62 ust. 2 — wyłączenie praw wyborczych
-  Ustawa o KRK (Dz.U. 2023 poz. 1750 t.j. — weryfikuj)
+  Ustawa o KRK (Dz.U. 2024 poz. 276 t.j. ze zm.; nowelizacje po t.j.: 2025/1235, 2026/252, 2026/421, 2026/760 — ✅ [VER] RZĄD 1 2026-10-09 (ELI). Było błędnie `2023 poz. 1750` = rozporządzenie RM o programie dla szkół)
 
 web_search:
   "środki karne art 39 KK 2025 aktualny katalog"

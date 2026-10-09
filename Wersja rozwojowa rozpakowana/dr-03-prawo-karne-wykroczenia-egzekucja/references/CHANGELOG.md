@@ -1,5 +1,7 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.61 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-KK-art163-172: odesłanie „infrastruktura krytyczna” kierowało do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (rejestr samorządów zawodowych, bez takiej sekcji) — teraz art. 3 pkt 2 ustawy o zarządzaniu kryzysowym (t.j. 2026/574, ELI 2026-10-09) i dr-08/mod-ustawa-zarzadzanie-kryzysowe.
+
 - 3.60 (2026-10-09c, AUDYT-2026-10-09c): mod-KK-art267-269c: linia „Hasła spraw” (przejęcie konta, BLIK, phishing, fałszywy profil, ransomware). Treść prawna bez zmian.
 
 - 3.59 (2026-10-09b, AUDYT-2026-10-09b): mod-KK-art222-226-ochrona-funkcjonariusza: ochrona funkcjonariusza publicznego z ustaw zawodowych — radca prawny (art. 12 ust. 1 u.r.p., Dz.U. 2026 poz. 731, od 18.06.2026) i adwokat (art. 7 ust. 3 PoA, Dz.U. 2026 poz. 1290, od 17.10.2026); KK nie zmieniony (art. 115 § 13); ścieżka kwalifikacji. MAPA-AKTOW: wiersz KK 222–226.

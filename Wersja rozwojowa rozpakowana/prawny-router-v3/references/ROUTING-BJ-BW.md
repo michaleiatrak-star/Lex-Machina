@@ -34,11 +34,11 @@
 Dołącz odpowiednio do typu sprawy:
 
 ```text
-view shared/SOCIAL-SECURITY-LAW-STANDARD.md        (ZUS, KRUS, renty)
+view prawny-router-v3/references/SOCIAL-SECURITY-LAW-STANDARD.md        (ZUS, KRUS, renty)
 view shared/DISABILITY-FUNCTIONAL-ASSESSMENT.md    (niepełnosprawność, PFRON)
 view shared/EXPERT-OPINION-AUDIT.md                (biegli, opinie)
-view shared/DISCIPLINARY-PROCEEDINGS-STANDARD.md   (dyscyplinarki zawodowe)
-view shared/JUDICIARY-LEGAL-STANDARD.md            (ustrój sądów, zawody zaufania)
+view prawny-router-v3/references/DISCIPLINARY-PROCEEDINGS-STANDARD.md   (dyscyplinarki zawodowe)
+view prawny-router-v3/references/JUDICIARY-LEGAL-STANDARD.md            (ustrój sądów, zawody zaufania)
 ```
 
 ---

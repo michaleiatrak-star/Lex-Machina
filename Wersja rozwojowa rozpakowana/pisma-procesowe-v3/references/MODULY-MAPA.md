@@ -56,7 +56,7 @@ MOD-TIMING             W2.1       gdy timing złożenia jest istotny (pierwsza
                                    rozprawa <14 dni / prekluzja / korzystne
                                    postanowienie); view shared/MOD-TIMING.md
 MOD-DOKTRYNA           W2.1       gdy uzasadnienie powołuje komentarze lub
-                                   literaturę prawniczą; view shared/MOD-DOKTRYNA.md
+                                   literaturę prawniczą; view modules/MOD-DOKTRYNA.md
 MOD-INTRO              W2.2       executive summary — zawsze przy: pozew /
                                    apelacja / pismo >3 str.; view shared/MOD-INTRO.md
 MOD-ATAK-NA-DRAFT      W2.4       zawsze — bez warunku aktywacji
@@ -173,7 +173,7 @@ view shared/POST-VALIDATION.md              (W3.7 K2 — zawsze)
 view shared/MOD-PEER-REVIEW.md              (W3.7 K1 — warunkowo)
 view shared/MOD-INTRO.md                    (W2.2 — pozew/apelacja/>3str)
 view shared/MOD-KONCENTRACJA.md             (W3.4 Blok C — zawsze)
-view shared/MOD-DOKTRYNA.md                 (W2.1 — gdy doktryna w uzasadnieniu)
+view modules/MOD-DOKTRYNA.md                 (W2.1 — gdy doktryna w uzasadnieniu)
 view shared/MOD-TIMING.md                   (W2.1 — gdy timing istotny)
 view shared/raport-sytuacyjny-integracja.md
 view shared/MOD-WARIANTY-POZWU.md           (W1.2b, gdy aktywny)

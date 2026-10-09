@@ -34,7 +34,7 @@ Router sprawdza tę macierz gdy fraza wyzwalająca pasuje do ≥2 skillów.
 | pismo procesowe + dostarczone akta | `analiza-sadowa-v6` (W1) → `pisma-procesowe-v3` (W2) | analizator-dowodow |
 | "napisz pozew / apelację / zażalenie" / "skarga do WSA" / "odwołanie do KIO" | `pisma-procesowe-v3` | pisma-proste-v2 |
 | 1 wątek + katalog pisma prostego | `pisma-proste-v2` | pisma-procesowe-v3 |
-| "znajdź wyrok" / "precedens" / sygnatura do weryfikacji | `orzeczenia-sadowe-v2` | analiza-sadowa-v6 |
+| "znajdź wyrok" / "znajdź orzeczenie" / "wyszukaj wyrok" / "wyszukaj orzeczenie" / "podaj wyrok" / "zweryfikowany wyrok" / "precedens" / sygnatura do weryfikacji | `orzeczenia-sadowe-v2` | analiza-sadowa-v6 |
 | orzecznictwo jako wsparcie do pisma (W3) | `orzeczenia-sadowe-v2` jako SECONDARY | — |
 | "analiza umowy" / "czy mogę podpisać" / klauzule | `analizator-umow-v1` | analiza-sadowa-v6 |
 | "co to znaczy" / "nie rozumiem pisma" / wyjaśnienie | `przewodnik-prawny-v2` | analizator-przepisow-v2 |

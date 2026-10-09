@@ -1,6 +1,6 @@
 # ORZECZENIA-OUTPUT-SCHEMA — Protokół danych wyjściowych orzeczenia-sadowe-v2
 
-> **Plik:** `shared/ORZECZENIA-OUTPUT-SCHEMA.md`
+> **Plik:** `orzeczenia-sadowe-v2/references/ORZECZENIA-OUTPUT-SCHEMA.md`
 > **Wersja:** 1.3
 > **Właściciel:** orzeczenia-sadowe-v2
 > **Konsumenci:** pisma-procesowe-v3 (W3.2), analizator-umow-v1, analiza-sadowa-v6
@@ -210,5 +210,5 @@ view orzeczenia-sadowe-v2/SKILL.md
 
 ---
 
-*ORZECZENIA-OUTPUT-SCHEMA v1.1 · shared · właściciel: orzeczenia-sadowe-v2*
+*ORZECZENIA-OUTPUT-SCHEMA v1.1 · orzeczenia-sadowe-v2/references (do 2026-10-09 w shared) · właściciel: orzeczenia-sadowe-v2*
 *Konsumenci: pisma-procesowe-v3 · analizator-umow-v1 · analiza-sadowa-v6*

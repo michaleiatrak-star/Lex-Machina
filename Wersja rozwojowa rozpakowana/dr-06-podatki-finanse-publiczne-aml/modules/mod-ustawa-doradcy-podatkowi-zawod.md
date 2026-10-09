@@ -13,8 +13,8 @@ w isap.sejm.gov.pl przed każdym powołaniem.
 
 ```
 Ustawa o doradztwie podatkowym (z 5.07.1996):
-  Ostatni POTWIERDZONY t.j.: Dz.U. 2021 poz. 2117 (obwieszczenie
-  Marszałka Sejmu z 14.10.2021) ✅ VER: isap.sejm.gov.pl 2026-06-14
+  Aktualny t.j.: Dz.U. 2026 poz. 1274 ✅ [VER] RZĄD 1 2026-10-09 (ELI): najnowszy t.j. aktu
+  DU/1996/475, brak nowelizacji po t.j. Poprzedni: Dz.U. 2021 poz. 2117 (wygaśnięcie aktu)
   ⚠️ MOŻLIWY NOWSZY T.J. — ustawa była nowelizowana po 2021 r. (patrz
   nowelizacja 2025 poniżej). Sprawdź na ELI (RZĄD 1), czy istnieje
   nowszy tekst jednolity przed cytowaniem numeracji artykułów.
@@ -173,8 +173,8 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 ## QUALITY GATE
 
 ```
-□ Czy sprawdzono, czy istnieje nowszy t.j. niż Dz.U. 2021 poz. 2117 (ustawa
-  nowelizowana po 2021 — w szczególności Dz.U. 2025 poz. 1882)?
+□ Czy sprawdzono, czy istnieje nowszy t.j. niż Dz.U. 2026 poz. 1274
+  (stan 2026-10-09: brak nowelizacji po t.j.)?
 □ Czy zweryfikowano aktualny zakres czynności doradztwa podatkowego (art. 2)
   po nowelizacji 2025/1882 — NIE zakładać starego zakresu z pamięci?
 □ Czy rozróżniono krąg podmiotów uprawnionych do doradztwa podatkowego
@@ -212,6 +212,8 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 ---
 
 ## ⚖️ DISCLAIMER
+
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 4 (KIDP); RZĄD 1 tylko z oficjalnego portalu samorządu.
 
 Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 

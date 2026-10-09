@@ -1,6 +1,6 @@
 # MOD-AUDIT-BUNDLE — Paczka Audytowa Outputu (AI Act art. 12)
 
-> **Plik:** `shared/MOD-AUDIT-BUNDLE.md`
+> **Plik:** `pisma-procesowe-v3/modules/MOD-AUDIT-BUNDLE.md`
 > **Wersja:** 1.0.0 (2026-07-05)
 > **Status:** NOWY — AUDYT-2026-07-05a
 > **Wzorzec:** legal-ai-audit-bundle (fundament-weryfikacyjny, awesome-matematic-skills-pl)
@@ -38,8 +38,8 @@ ani kontrahenta (STRIP-VER-GATE stosuje się do dokumentu głównego bez zmian).
 | Raport kroków | output MOD-STEP-TRACKER (wykonane / pominięte kroki i bramki) | TAK dla wysokiej stawki |
 | Raport walidacji | wyniki bramek: LEGAL-QUALITY-GATE, AUDYT-KONCOWY, PEER-REVIEW / POST-VALIDATION | jeśli uruchomione |
 | Metadane | model, data, tryb (PRAWNIK/LAIK), użyte skille/moduły, źródła, kto zatwierdza | TAK |
-| Log zdarzeń hash-chain | prowadzi portal wg `shared/AUDIT-TRAIL-SPEC.md` (`tools/append_event.py`, weryfikacja `tools/hash_chain_verify.py`) | jeśli host prowadzi log |
-| Wynik bramki eksportu | `shared/tools/export_gate.py` (log z `tools/extract_api_verification_log.py` + `tools/walidator_cytowan.py`; opis `shared/tools/README.md`) | jeśli host ma log sesji API |
+| Log zdarzeń hash-chain | prowadzi portal wg `shared/AUDIT-TRAIL-SPEC.md` (`shared/tools/append_event.py`, weryfikacja `shared/tools/hash_chain_verify.py`) | jeśli host prowadzi log |
+| Wynik bramki eksportu | `shared/tools/export_gate.py` (log z `shared/tools/extract_api_verification_log.py` + `shared/tools/walidator_cytowan.py`; opis `shared/tools/README.md`) | jeśli host ma log sesji API |
 | Disclaimer | wariant użyty z DISCLAIMER.md | TAK |
 
 ⛔ **NIGDY w paczce:** mapa anonimizacji / pseudonimizacji (KROK 0A routera) —

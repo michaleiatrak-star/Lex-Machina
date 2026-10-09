@@ -184,7 +184,7 @@ Ustawa o Straży Granicznej:
     była NIEAKTUALNA co do numeru t.j.)
 
 Ustawa o cudzoziemcach — Dz.U. 2025 poz. 1079 t.j. — weryfikuj w ELI (RZĄD 1)
-Ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546 t.j. — weryfikuj
+Ustawa o udzielaniu cudzoziemcom ochrony na terytorium RP — Dz.U. 2026 poz. 862 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI). ⛔ BŁĄD SKORYGOWANY: było `Dz.U. 2024 poz. 1546` — to t.j. rozporządzenia RM w sprawie zaświadczeń o pomocy de minimis (inny akt)
 
 Kluczowe sprawy SG:
   Detencja cudzoziemca:

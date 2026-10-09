@@ -2,7 +2,7 @@
 
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
-**Źródło kanoniczne:** ELI, Dz.U. 2024 poz. 907, stan prawny tekstu jednolitego 23.05.2024, z późniejszymi zmianami.
+**Źródło kanoniczne:** ELI, Dz.U. 2026 poz. 1282 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); poprzedni t.j. Dz.U. 2024 poz. 907 — wygaśnięcie aktu.
 
 ## Struktura
 

@@ -1,11 +1,10 @@
 # MOD-ELIMINACJA-TEZ — Eliminacja Tez, Żądań i Przepisów bez Pokrycia Prawnego
 
-> **Plik:** `shared/MOD-ELIMINACJA-TEZ.md`
-> **Status:** PRODUKCJA — plik kanoniczny shared
+> **Plik:** `pisma-procesowe-v3/modules/MOD-ELIMINACJA-TEZ.md`
+> **Status:** PRODUKCJA — moduł lokalny pisma-procesowe-v3 (do 2026-10-09 w `shared/`; jedyny konsument)
 > **Pozycja w pipeline:**
 >   - pisma-procesowe-v3: W1.2a-POST — PO CLAIM-VALIDATION, PRZED W1.3
->   - analizator-dowodow-v3: BLOK-C (po analizie faktów, przed tezami)
-> **Wywołanie:** `view shared/MOD-ELIMINACJA-TEZ.md`
+> **Wywołanie:** `view modules/MOD-ELIMINACJA-TEZ.md`
 > **Trigger:** OBOWIĄZKOWY per każde żądanie i każdą tezę główną
 
 ---

@@ -68,7 +68,7 @@ Wypisz wszystkie paragrafy/§ z krótkim opisem (max 1 zdanie) + załączniki.
 - **C. Do definicji** — terminy z Wielkiej Litery, z liczbą wystąpień każdego.
 
 **Wsparcie deterministyczne (F-215, od 1.44):** z wykonaniem kodu uruchom
-`python shared/tools/kontrakt_rachunek.py odeslania --plik <umowa>` — wykaz odesłań kategorii A
+`python analizator-umow-v1/scripts/kontrakt_rachunek.py odeslania --plik <umowa>` — wykaz odesłań kategorii A
 (§, ust., pkt, załączniki) do jednostek, których w umowie NIE MA. Wynik narzędzia to minimum,
 nie komplet: kategorie B i C oraz odesłania „poprawne formalnie, błędne merytorycznie” (odesłanie
 do istniejącego ustępu o innej treści) oceniasz sam. Cytaty z umowy przed wydaniem raportu:

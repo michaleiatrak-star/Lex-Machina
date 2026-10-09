@@ -68,6 +68,8 @@ Pelny opis trybu, tabela zawodow i uzasadnienie: dr-12 ->
   "Orzecznictwo dyscyplinarne — instancje i bazy"
 ```
 
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 3 (NIL, w tym lekarze dentyści); RZĄD 1 tylko z oficjalnego portalu samorządu.
+
 ## Weryfikacja online
 ```
 web_search: "ustawa zawod lekarza Dz.U. 2026 poz. 37 isap t.j."

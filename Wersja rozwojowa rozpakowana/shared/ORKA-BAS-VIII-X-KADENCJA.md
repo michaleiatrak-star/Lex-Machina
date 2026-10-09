@@ -375,7 +375,7 @@ web_search: "reforma podatek od nieruchomości 2025 budowla definicja TK SK 14/2
 ### BAS-W15 — Choroba zawodowa — 2 przesłanki (art. 235(1) KP + rozp. RM 2009)
 ```
 Weryfikacja online: KP art. 235(1) + rozp. RM z 30.06.2009 ws. chorób zawodowych
-  (Dz.U. 2022 poz. 1836 — weryfikuj aktualny t.j.)
+  (Dz.U. 2026 poz. 1297 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); poprzedni t.j. 2022 poz. 1836 — wygaśnięcie aktu)
 
 Definicja (art. 235(1) §1 KP):
   "Za chorobę zawodową uważa się chorobę wymienioną w wykazie chorób zawodowych,

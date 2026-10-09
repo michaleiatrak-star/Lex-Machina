@@ -105,7 +105,7 @@ Weryfikuj: ustawa o własności lokali + ustawa deweloperska (Dz.U. 2026 poz. 88
 ### BAS-105 — Zabudowa zagrodowa na gruntach leśnych
 ```
 Weryfikacja: MŚ interp. nr 23020/6.07.2011 + ustawa o lasach
-  (Dz.U. 2024 poz. 1143 t.j.) + PrBud (Dz.U. 2026 poz. 524 t.j.) — ZWERYFIKOWANO
+  (Dz.U. 2026 poz. 663 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); było błędnie 2024 poz. 1143 = rozporządzenie o egzaminie maturalnym) + PrBud (Dz.U. 2026 poz. 524 t.j.) — ZWERYFIKOWANO
 Źródło: odpowiedź MŚ na interpelację nr 23020, 6.07.2011
 Teza: Definicji zabudowy zagrodowej z rozp. o warunkach technicznych NIE MOŻNA
 stosować jako podstawy dopuszczalności zabudowy na gruntach leśnych.
@@ -113,7 +113,7 @@ Reguła (ORKA-REG-05): Definicja techniczna nie tworzy prawa do zabudowy.
 Na gruntach leśnych bez zmiany przeznaczenia → dopuszczalne wyłącznie budynki
 i budowle dla potrzeb gospodarki leśnej.
 Dodatkowe: pojęcie "gospodarstwa leśnego" nie ma ogólnej systemowej definicji.
-Podstawa: ustawa o lasach (Dz.U. 2024 poz. 1143 t.j.) + prawo budowlane
+Podstawa: ustawa o lasach (Dz.U. 2026 poz. 663 t.j.) + prawo budowlane
 ```
 
 ### BAS-115 — Wolnostojące ogniwa fotowoltaiczne

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.98 (2026-10-09f, AUDYT-2026-10-09f): Doradztwo podatkowe: t.j. Dz.U. 2026 poz. 1274 w module i SKILL.md (było wygasłe 2021/2117); BAZA-AKTOW-OKOLOPODATKOWYCH: VAT t.j. 2026/1263 (było wygasłe 2025/775); odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (KIDP). ELI 2026-10-09.
+
 - 3.97 (2026-10-09, AUDYT-2026-10-09): VAT — t.j. Dz.U. 2026 poz. 1263 (stan 26.08.2026; obejmuje 2025/894, 896, 1203, 1541, 1811, 2026/846) ⛔ zawiera 2026/507 w vacatio legis do 14.10.2026; doradztwo podatkowe — t.j. Dz.U. 2026 poz. 1274 ⛔ zawiera 2026/176 (od 18.02.2027). Zapisy odczytu ze starego t.j. VAT zachowane z adnotacją „obecny t.j.” (ELI 2026-10-09).
 
 - 3.96 (2026-10-05l, AUDYT-2026-10-05l): mod-CIT-podatek-dochodowy-prawne: linia „Hasła spraw”. Treść prawna bez zmian.

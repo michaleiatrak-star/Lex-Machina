@@ -1,5 +1,9 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.26 (2026-10-09f, AUDYT-2026-10-09f): 15 plików z jednym konsumentem przeniesionych do skilli (pisma-procesowe-v3/modules ×8, prawny-router-v3/references ×4, orzeczenia-sadowe-v2/references ×1, analizator-umow-v1/scripts ×2); rejestry zaktualizowane. MOD-KARTA-DOWODU: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-B2. ⛔ Błędne numery (ELI 2026-10-09): ulgowe przejazdy 2024/1914 → 2024/380, KRK 2023/1750 → 2024/276, lasy 2024/1143 → 2026/663, poręczenia SP 2024/836 → 2024/291, praca cudzoziemców 2024/1543 → 2025/1567; choroby zawodowe → t.j. 2026/1297.
+
+- 3.99.25 (2026-10-09e, AUDYT-2026-10-09e): ACTIVATION-MATRIX: wiersz orzeczenia-sadowe-v2 — „znajdź/wyszukaj orzeczenie”, „wyszukaj/podaj wyrok”, „zweryfikowany wyrok”.
+
 - 3.99.24 (2026-10-09, AUDYT-2026-10-09): DEF-PRACA, MOD-ELIMINACJA-TEZ, ORKA-BAS: KP t.j. Dz.U. 2026 poz. 1245 (⛔ art. 94³ w brzmieniu 2026/1046 od 5.11.2026); leksykon ORKA-BAS: VAT — adnotacja „obecny t.j. 2026/1263” (ELI 2026-10-09).
 
 - 3.99.23 (2026-10-08): WERYFIKACJA-SLAD.md — sekcja „⛔ STRIP-VER-GATE” oznaczona `<!-- lex:wykonuje-aplikacja: STRIP-VER -->`: aplikacja Lex Machina usuwa znaczniki ✅ [VER…]/KOTWICA/⚠️ z pliku pisma deterministycznie (w prompcie aplikacji sekcja jest zastępowana jedną linią). Poza aplikacją (konto Claude) reguła działa jak dotąd; treść bez zmian.

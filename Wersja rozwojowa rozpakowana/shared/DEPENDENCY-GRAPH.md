@@ -125,7 +125,6 @@
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
 | `DEDUPLICATION-POLICY.md` | ACTIVE (deweloper) | audyt-systemu-v4 |
-| `KANCELARIA-WORKFLOW.md` | INTERNAL | shared/SKILL.md |
 
 ## Raporty i integracje
 

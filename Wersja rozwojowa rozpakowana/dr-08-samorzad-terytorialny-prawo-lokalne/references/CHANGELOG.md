@@ -1,5 +1,7 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.19 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-ustawa-zarzadzanie-kryzysowe i MAPA-AKTOW: dwie ustawy łączone pod numerem 2024/1907 — rozdzielone: zarządzanie kryzysowe t.j. 2026/574 (+815, +1206 art. 15 od 11.01.2027), ochrona ludności i obrona cywilna 2024/1907 (+646, +815, ⏳ 1705 od 1.01.2027); ⛔ „ustawa z 2022 r.” → z 5.12.2024. ELI 2026-10-09.
+
 - 3.18 (2026-10-09, AUDYT-2026-10-09): dochody JST — pierwszy t.j. Dz.U. 2026 poz. 1252 ⛔ zawiera 2026/875 (od 1.01.2027); transport zbiorowy — t.j. Dz.U. 2026 poz. 1231 (ELI 2026-10-09).
 
 - 3.17 (2026-10-06): nowelizacje po t.j. (ELI 2026-10-06): PRD/u.k.p./drogi publiczne/transport drogowy — Dz.U. 2025 poz. 1676, 1734, 1843; Dz.U. 2026 poz. 180, 982; nowa ustawa o zdrowiu zwierząt Dz.U. 2025 poz. 1795

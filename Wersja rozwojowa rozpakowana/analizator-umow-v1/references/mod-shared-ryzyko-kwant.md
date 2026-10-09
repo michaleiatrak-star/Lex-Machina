@@ -122,8 +122,8 @@ WNIOSKI:
 **Zasady rachunku**
 0. ⛔ **Arytmetykę wykonuje narzędzie, nie model** (F-215, od 1.44): gdy host ma wykonanie
    kodu, zapisz liczby wyekstrahowane z umowy (każda z polem `zrodlo` = §/ust.) do JSON i uruchom
-   `python shared/tools/kontrakt_rachunek.py ekspozycja --json dane.json` (schemat: docstring i
-   `shared/tools/test_kontrakt_rachunek.py`, przypadek `TM04`). Linię `R-EKS:` bierzesz z pola
+   `python analizator-umow-v1/scripts/kontrakt_rachunek.py ekspozycja --json dane.json` (schemat: docstring i
+   `analizator-umow-v1/scripts/test_kontrakt_rachunek.py`, przypadek `TM04`). Linię `R-EKS:` bierzesz z pola
    `linia_R_EKS` wyniku. Pojedyncze działanie: `kontrakt_rachunek.py oblicz "190*2*160"`.
    Liczba bez źródła → narzędzie zwraca `BRAK_ZRODLA` (egzekwuje WD-2). Bez wykonania kodu —
    rachunek ręczny jak niżej, z adnotacją `[rachunek ręczny — niezweryfikowany narzędziem]`.

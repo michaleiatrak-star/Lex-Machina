@@ -96,7 +96,7 @@ kontroli, co odpowiada temu, że to właśnie tu znaleziono rozbieżność).
 
 | Akt | Metryka Dz.U. (t.j.) | Uwaga |
 |---|---|---|
-| Ustawa z dnia 11 marca 2004 r. o podatku od towarów i usług (VAT) | ✅ Dz.U. 2025 poz. 775 t.j. | + nowelizacje poz. 1811/2025, 507/2026, 846/2026 |
+| Ustawa z dnia 11 marca 2004 r. o podatku od towarów i usług (VAT) | ✅ Dz.U. 2026 poz. 1263 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI) (poprzedni t.j. Dz.U. 2025 poz. 775 — wygaśnięcie aktu) | brzmienie art. czytaj z t.j. 2026/1263 |
 | Ustawa z dnia 26 lipca 1991 r. o podatku dochodowym od osób fizycznych (PIT) | ✅ Dz.U. 2026 poz. 592 t.j. | + nowelizacje poz. 779/2026, 846/2026 |
 | Ustawa z dnia 15 lutego 1992 r. o podatku dochodowym od osób prawnych (CIT) | ✅ Dz.U. 2026 poz. 554 t.j. | + nowelizacje poz. 779/2026, 846/2026 |
 | Ustawa z dnia 29 sierpnia 1997 r. — Ordynacja podatkowa | ✅ Dz.U. 2026 poz. 622 t.j. | + nowelizacja poz. 846/2026 (macierzysta) |

@@ -19,7 +19,8 @@
 | planowanie przestrzenne — MPZP/WZ | Dz.U. 2026 poz. 538 t.j. | `mod-MPZP-WZ-planowanie-przestrzenne.md` | 🟢 operacyjne |
 | lokalne podatki i opłaty | Dz.U. 2025 poz. 707 t.j. + aktualna uchwała lokalna | `mod-lokalne-podatki-oplaty-taryfy.md` | 🟢 operacyjne |
 | dochody JST | akt pierwotny Dz.U. 2024 poz. 1572; t.j. Dz.U. 2026 poz. 1252 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) (⛔ obejmuje 2026/875 — w życie 1.01.2027) | `mod-ustawa-dochody-JST.md` | 🟢 operacyjne; fresh gate |
-| zarządzanie kryzysowe / ochrona ludności | Dz.U. 2024 poz. 1907 (ustawa, brak t.j.) | `mod-ustawa-zarzadzanie-kryzysowe.md` | 🟢 operacyjne; stan po wejściu zmian z 2026 r. |
+| zarządzanie kryzysowe | Dz.U. 2026 poz. 574 t.j.; po t.j.: 2026/815, 2026/1206 art. 15 (od 11.01.2027) ✅ [VER] 2026-10-09 | `mod-ustawa-zarzadzanie-kryzysowe.md` | 🟢 operacyjne; temporal gate |
+| ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 (ustawa, brak t.j.) ze zm. 2026/646, 2026/815; ⏳ 2025/1705 od 1.01.2027 ✅ [VER] 2026-10-09 | `mod-ustawa-zarzadzanie-kryzysowe.md` | 🟢 operacyjne; stan po wejściu zmian z 2026 r. |
 | publiczny transport zbiorowy | Dz.U. 2026 poz. 1231 t.j. | `mod-ustawa-komunalne-wod-kan-transport-czystosc.md` | 🟢 operacyjne |
 | referendum lokalne | Dz.U. 2025 poz. 472 t.j. | `mod-ustawa-referendum-lokalne.md` | 🟢 operacyjne |
 | pracownicy samorządowi | Dz.U. 2024 poz. 1135 t.j. | `mod-ustawa-pracownicy-samorzadowi.md` | 🟢 operacyjne |

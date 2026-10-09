@@ -322,6 +322,8 @@ web_search: "samorząd zawodowy urbanistów 2026 przywrócenie status"
 
 ## ⚖️ DISCLAIMER
 
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 4 (IARP, PIIB); RZĄD 1 tylko z oficjalnego portalu samorządu.
+
 Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 
 ---

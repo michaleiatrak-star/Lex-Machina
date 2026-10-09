@@ -54,7 +54,7 @@ BAS-122  Żołnierz (definicja ustawowa)
   web_search: "żołnierz definicja ustawa o obronie ojczyzny 2025"
 
 BAS-123  Choroba zawodowa
-  Kierunek: KP art. 235 + rozp. RM ws. chorób zawodowych (Dz.U. 2022 poz. 1836 — weryfikuj)
+  Kierunek: KP art. 235 + rozp. RM ws. chorób zawodowych (Dz.U. 2026 poz. 1297 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI); poprzedni t.j. 2022 poz. 1836 — wygaśnięcie aktu)
   Definicja robocza: choroba ujęta w wykazie chorób zawodowych, jeżeli stwierdzono
   jej związek z narażeniem zawodowym.
   web_search: "choroba zawodowa wykaz rozporządzenie 2025 definicja warunki"

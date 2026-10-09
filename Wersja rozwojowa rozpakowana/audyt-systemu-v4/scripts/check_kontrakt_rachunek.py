@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """T39 — check_kontrakt_rachunek.py: regresja deterministycznego rachunku umowy (F-215).
 
-(1) testy jednostkowe `shared/tools/test_kontrakt_rachunek.py` (offline);
+(1) testy jednostkowe `analizator-umow-v1/scripts/test_kontrakt_rachunek.py` (offline);
 (2) pomiar na korpusie `analizator-umow-v1/benchmark/posiane-wady/umowy/`:
     05 → rozbieżność kwota cyfrą/słownie (wada i3) i martwe odesłanie do §10 (wada i6) WYKRYTE;
     01 (kontrolna, zero wad) → zero rozbieżności słownie i zero martwych odesłań (brak fałszywych alarmów);
@@ -16,10 +16,10 @@ from pathlib import Path
 def main() -> int:
     ap = argparse.ArgumentParser(); ap.add_argument("--repo-root"); a = ap.parse_args()
     root = Path(a.repo_root or Path(__file__).resolve().parents[2])
-    tools = root / "shared" / "tools"
+    tools = root / "analizator-umow-v1" / "scripts"
     kor = root / "analizator-umow-v1" / "benchmark" / "posiane-wady" / "umowy"
     if not (tools / "kontrakt_rachunek.py").is_file() or not (tools / "test_kontrakt_rachunek.py").is_file():
-        print("❌ brak shared/tools/kontrakt_rachunek.py lub testu"); return 2
+        print("❌ brak analizator-umow-v1/scripts/kontrakt_rachunek.py lub testu"); return 2
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
     r = subprocess.run([sys.executable, "-m", "unittest", "test_kontrakt_rachunek"], cwd=tools, env=env,
                        capture_output=True, text=True, timeout=120)

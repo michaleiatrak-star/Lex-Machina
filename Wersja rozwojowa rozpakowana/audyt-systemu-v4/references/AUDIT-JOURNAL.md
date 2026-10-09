@@ -69942,6 +69942,42 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-09f — inspekcja powiązań skille↔shared, przeniesienie plików z jednym konsumentem, błędy t.j. i map, RAG (6.214)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: przejrzeć wszystkie powiązania między skillami a modułami; pliki `shared` wywoływane tylko z jednego skilla przenieść do tego skilla; przy okazji poprawić błędy t.j./aktów, braki odesłań z map do modułów i RAG.
+
+### 2. METODA
+- Graf odwołań: każdy plik `shared` (poza rejestrami) × wszystkie pliki skilli (nazwa unikalna albo ścieżka `shared/...`), osobno odwołania z innych plików `shared` i z kodu aplikacji (`app/lex-runtime`).
+- Kryterium przeniesienia: dokładnie jeden skill-konsument (poza audytem), brak odwołań z plików `shared`, które zostają, brak odczytu ścieżką przez aplikację (np. `shared/MOD-PEER-REVIEW.md`, `shared/ACTIVATION-MATRIX.md` czyta runtime — zostają).
+- Akty: `audit_tj_inventory.py --mode all`, T31 `check_podmiana_aktu.py` (0 kandydatów), T27 `check_status_podstaw.py`, kontrola t.j. w modułach DR wobec MAPA-AKTOW/ROUTING-MAP/mapa_dzu; każdy wynik sprawdzony w ELI (`/acts`, `/references`, `text.pdf`), odczyt 2026-10-09.
+- Mapy: każdy moduł 16 DR ma wiersz w MAPA-AKTOW i ROUTING-MAP (0 braków).
+
+### 3. PRZENIESIENIA (15 plików)
+- `pisma-procesowe-v3/modules/`: MOD-AUDIT-BUNDLE, MOD-DOKTRYNA, MOD-ELIMINACJA-TEZ, MOD-BUDOWA-ARGUMENTU, MOD-KOSZT-ODPOWIEDZI, MOD-MIKROPODSUMOWANIA, MOD-SKUTEK-PROCESOWY, MOD-STRESS-TEST.
+- `prawny-router-v3/references/`: KANCELARIA-WORKFLOW, SOCIAL-SECURITY-LAW-STANDARD, DISCIPLINARY-PROCEEDINGS-STANDARD, JUDICIARY-LEGAL-STANDARD.
+- `orzeczenia-sadowe-v2/references/`: ORZECZENIA-OUTPUT-SCHEMA.
+- `analizator-umow-v1/scripts/`: kontrakt_rachunek.py + test_kontrakt_rachunek.py (T39 na nowej ścieżce).
+- Rejestry: `shared/SKILL.md` (wiersze usunięte, jeden wiersz zbiorczy; plik-most ORZECZENIA-OUTPUT-SCHEMA zniknął z listy odstępstw), `DEPENDENCY-GRAPH.md`.
+
+### 4. BŁĘDY NAZWANE
+- ⛔ dr-03 mod-KK-art163-172: odesłanie „infrastruktura krytyczna — sekcja o zarządzaniu kryzysowym” do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (rejestr samorządów zawodowych — takiej sekcji nie ma). Teraz: art. 3 pkt 2 ustawy o zarządzaniu kryzysowym (t.j. 2026/574). SAMORZADY po tej korekcie nie miał żadnego konsumenta, choć CHECKLIST-DEDUP wskazuje DR-06/09/10/12 — odesłania dopisane w modułach zawodów (KIDP, IARP/PIIB, NIL, zawody prawnicze); plik zostaje w `shared`.
+- ⛔ Martwe deklaracje konsumenta: MOD-ELIMINACJA-TEZ („analizator-dowodow-v3 BLOK-C”) i MOD-KARTA-DOWODU („BLOK-B2”) — takich bloków w analizator-dowodow-v3 nie ma; usunięte.
+- ⛔ dr-08 + ROUTING-MAP: „ustawa o zarządzaniu kryzysowym i ochronie ludności — Dz.U. 2024 poz. 1907” — dwie ustawy pod jednym numerem. 2024/1907 = ustawa z 5.12.2024 o ochronie ludności i obronie cywilnej (bez t.j.; zm. 2026/646, 2026/815; 2025/1705 od 1.01.2027). Zarządzanie kryzysowe = t.j. 2026/574; po t.j. 2026/815 (od 4.07.2026) i 2026/1206 art. 15 (załącznik, od 11.01.2027 — art. 57). Moduł dr-08 podawał też „ustawa z 2022 r.”.
+- ⛔ dr-13 mod-ustawa-straz-graniczna i mapa_dzu: 2024/1546 opisany jako ustawa o udzielaniu ochrony cudzoziemcom — w ELI t.j. rozp. RM o zaświadczeniach de minimis (DU/2007/354). Poprawnie: t.j. 2026/862.
+- ⛔ shared: ulgowe przejazdy 2024/1914 (nowelizacja ustawy o odpadach) → 2024/380; KRK 2023/1750 (rozp. o programie dla szkół) → 2024/276; lasy 2024/1143 (rozp. o maturze) → 2026/663; poręczenia SP 2024/836 (rozp. o likwidacji funduszy) → 2024/291; praca cudzoziemców 2024/1543 (rozp. MZ) → 2025/1567.
+- Wygasłe t.j. jako aktualna podstawa: doradztwo podatkowe 2021/2117 → 2026/1274 (dr-06, dr-10); mandat posła 2024/907 → 2026/1282 (dr-01); VAT 2025/775 → 2026/1263 (BAZA-AKTOW-OKOLOPODATKOWYCH); choroby zawodowe 2022/1836 → 2026/1297 (shared); mapa_dzu 2024/1837 OK → PREV.
+- Brak wiersza mapy dla aktu w module: rozp. RM w sprawie chorób zawodowych (dr-04 mod-wypadek) — numer w module + wiersze dr-04 MAPA-AKTOW, ROUTING-MAP, mapa_dzu.
+
+### 5. RAG
+`extractCoreActs` (app) na poprawionych mapach: 413 → 406 aktów. 7 wygasłych t.j. trafiało do indeksu z wzmianek historycznych, których filtr nie rozpoznaje („potwierdzony wtedy”, „zastępuje t.j.”, „wiersz podawał”) — zapisane w ROUTING-MAP jako RRRR/NNNN. Zostają celowo: WT 2002/690 (reżim przejściowy) i PKWiU 2015 — runtime oznacza je „akt nieobowiązujący według ELI”.
+
+### 6. FAŁSZYWE ALARMY (bez zmian)
+T27: 2026/875 w dr-03 ma datę 01.01.2027; KW 2023/2119 i KP 2023/1465 — cytaty historyczne; USP 2024/334 — w ELI nadal najnowszy t.j. (wiersz PREV w mapa_dzu to opisany duplikat). TITLE_MISMATCH w BAZA-AKTOW-OKOLOPODATKOWYCH — wiersz z nazwą ustawy przy numerze obwieszczenia t.j.
+
+### 7. WERSJE
+audyt 6.214, shared 3.99.26, analizator-umow-v1 1.48, dr-01 3.18, dr-03 3.61, dr-04 3.47, dr-06 3.98, dr-08 3.19, dr-09 3.46, dr-10 3.53, dr-12 4.25, dr-13 3.16, orzeczenia-sadowe-v2 2.27, pisma-procesowe-v3 5.38, prawny-router-v3 3.70, prawo-polskie-v2 6.54.
+
 ## AUDYT-2026-10-07h — CBOSA: wartościowe części PR #84 (etykiety w zagnieżdżonych tabelach, sekcja „powiązane”) (6.211)
 
 ### 1. ŹRÓDŁO

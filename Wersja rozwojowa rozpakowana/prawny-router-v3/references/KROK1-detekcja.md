@@ -203,7 +203,7 @@ Po detekcji trybu i przed przekazaniem sprawy do skilla dziedzinowego — wczyta
 
 ```text
 Zawsze dla pism / strategii / akt / terminów / ryzyka / dowodów:
-  view shared/KANCELARIA-WORKFLOW.md
+  view prawny-router-v3/references/KANCELARIA-WORKFLOW.md
   view shared/TRYBY-PROCESOWE.md
   view shared/RISK-ASSESSMENT.md
 

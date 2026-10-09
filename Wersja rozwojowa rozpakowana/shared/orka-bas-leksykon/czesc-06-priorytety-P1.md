@@ -210,7 +210,7 @@ REGUŁA ORKA-REG-01: Definicja "przedsiębiorcy" różni się w:
 ```
 ⚠️ Pełna treść tego rekordu: → patrz CZĘŚĆ XVII, BAS-120, w pliku
   `czesc-07-priorytety-P2-bas-v18.md`
-  (ustawa z 15.06.2012 r. — Dz.U. 2024 poz. 1543 t.j.; wersja zweryfikowana,
+  (ustawa z 15.06.2012 r. — Dz.U. 2025 poz. 1567 t.j., ELI 2026-10-09; wersja zweryfikowana,
   bez błędnego odesłania do uchylonej ustawy o promocji zatrudnienia)
 ```
 

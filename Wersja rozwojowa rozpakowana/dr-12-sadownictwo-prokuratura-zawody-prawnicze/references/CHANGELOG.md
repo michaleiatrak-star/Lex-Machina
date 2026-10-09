@@ -1,5 +1,7 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.25 (2026-10-09f, AUDYT-2026-10-09f): mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow: odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (kanoniczny rejestr dokumentów samorządów; wcześniej żaden skill go nie wczytywał).
+
 - 4.24 (2026-10-09b, AUDYT-2026-10-09b): Prawo o adwokaturze — nowelizacja Dz.U. 2026 poz. 1290 (ustawa z 4.09.2026, ogł. 2.10.2026, w życie 17.10.2026; art. 1 pkt 16, 41, 42 od 1.01.2027): art. 7 ust. 3 ochrona przysługująca funkcjonariuszowi publicznemu (dotąd art. 7 ust. 1 „podobnie jak sędzia i prokurator”), art. 4 ust. 1 pomoc prawna, art. 49a Krajowy Rejestr Adwokatów i Aplikantów, art. 77 aplikant radcowski, dział VIIIa art. 95o–95q, przepisy przejściowe; mod-ustawa-adwokatura sekcja 8a. Radcy prawni: art. 12 ust. 1 (Dz.U. 2026 poz. 731, od 18.06.2026) w mod-ustawa-radcowie-prawni. ✅ RZĄD 1 ELI 2026-10-09.
 
 - 4.23 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

@@ -108,7 +108,7 @@ obu → 🟢.
 
 Gdy dokument ma limit odpowiedzialności, karę umowną, indemnifikację lub automatyczne
 przedłużenie: wykonaj **R-EKS** (`references/mod-shared-ryzyko-kwant.md`, RK.2a — E1–E4).
-Z wykonaniem kodu: `shared/tools/kontrakt_rachunek.py ekspozycja` (pkt 0 RK.2a) oraz
+Z wykonaniem kodu: `analizator-umow-v1/scripts/kontrakt_rachunek.py ekspozycja` (pkt 0 RK.2a) oraz
 `kontrakt_rachunek.py slownie --plik <umowa>` — rozbieżność kwoty cyfrą/słownie to ustalenie, nie „literówka”.
 Kategorię ustalasz na **policzonej** ekspozycji, nie na etykiecie klauzuli. Wynik R-EKS
 trafia do notatki triage jedną linią.
