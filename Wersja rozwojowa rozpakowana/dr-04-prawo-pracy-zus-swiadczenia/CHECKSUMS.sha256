@@ -1,7 +1,7 @@
-978dbc795b30f314f6f5e6ab06806b71748ff3fde746f2a076523218cda35460  ./MAPA-AKTOW.md
+686c7e3cf4d50746a7c237c89fb8d66f15aa950babe83a23bd1e23f86ab8e928  ./MAPA-AKTOW.md
 0d97a5a2e1e76e300f26de4be86efebf1a63c435e0765abdc4e169eb1d197127  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-ffa8327912fa1292499d21fbae1400b7d526d9e5a53a5cdf6d7b019ff9b1dc17  ./SKILL.md
+eef5980610a31c3a86bf96404882b81f5386dc28cbc4c7a81be3aa0e36fdc9ac  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -45,7 +45,7 @@ b7e0ef8f4093faf5aef890ccddbac69c4dc517c762ac25e26fffcfca921d7de4  ./modules/mod-
 4025a485c1890c5c6665fde76c19f5a0e3633569036258a5ee1a336eea9a9c5b  ./modules/mod-ustawa-zasilkowa-current-state-COV.md
 85eca4be45136bab3449f66a266d4a1da30461bfcf1e255358a7a6ce490f4021  ./modules/mod-ustawa-zwiazki-zawodowe-spory-zbiorowe.md
 ef83da86f346814a8b673d20401a9bca3eff8636744f8a32aad7f3eff2cf7acb  ./modules/mod-ustawa-zwolnienia-grupowe.md
-833dac3c0cea594371c34d94df47141efccce87f3f91adbb839bc4bb3d47e704  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
+1425c6535d36eef63bf25d192e46a556ce44f8d161609d2d5c5872c3d7374d99  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-0666610055a7c7ef16acb29b6e7dfa779c6d30a03b5473b7e2ef5e831b376178  ./references/CHANGELOG.md
+e8ecbc2ff884df7d4f6a3f0306f7a8e92e75d45e397dca7b754bb4c6d2c66778  ./references/CHANGELOG.md
 524575362b60f3d2eeb1b219131da9540142ca27bf15bcd7e46e31618e6ccc06  ./references/HISTORIA-ZMIAN-PLIKOW.md

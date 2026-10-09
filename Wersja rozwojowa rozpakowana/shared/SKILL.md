@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.24"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.26"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -32,25 +32,24 @@ escalation:
 limitations:
   - "ZNANE ODSTĘPSTWO od zasady 'shared = warstwa bazowa bez zależności
     zwrotnych', zweryfikowane ręcznie 2026-07-04 (FAZA 2E audyt-systemu-v4):
-    5 plików zawiera instrukcję `view` wprost do konkretnego skilla
+    4 pliki zawierają instrukcję `view` wprost do konkretnego skilla
     nadrzędnego — MOD-METODY-BADAWCZE.md → analizator-dowodow-v3/SKILL.md;
     PRE-W2-VERIFICATION-GATE.md i MOD-IDENTYFIKACJA-STRONY-UMOWY.md →
     pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md;
     MOD-MAPA-PRZEPISOW.md → analizator-przepisow-v2/SKILL.md;
-    ORZECZENIA-OUTPUT-SCHEMA.md → orzeczenia-sadowe-v2/SKILL.md;
     raport-sytuacyjny-integracja.md → raport-sytuacyjny-v2/SKILL.md.
     NIE scalone/wydzielone w tej sesji — pole `dependencies.requires`
     zostawione jako [] (zgodnie z zasadą architektoniczną), ODSTĘPSTWO
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (190 plików — stan 2026-10-04b po usunięciu 7 reliktów, F-225; wcześniej 197 — stan 2026-10-01b, z .claude-plugin/plugin.json) — każda zmiana pliku kanonicznego ma
+  - rozmiar (176 plików — stan 2026-10-09f po przeniesieniu 15 plików z jednym konsumentem do skilli; 190 — stan 2026-10-04b po usunięciu 7 reliktów, F-225; wcześniej 197 — stan 2026-10-01b, z .claude-plugin/plugin.json) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.24 (2026-10-09): DEF-PRACA, MOD-ELIMINACJA-TEZ, ORKA-BAS: KP t.j. Dz.U. 2026 poz. 1245 (⛔ art. 94³ w brzmieniu 2026/1046 od 5.11.2026); leksykon ORKA-BAS: VAT — adnotacja „obecny t.j. 2026/1263” (E
+  Wersja bieżąca: 3.99.26 (2026-10-09f): 15 plików z jednym konsumentem przeniesionych do skilli (pisma-procesowe-v3/modules ×8, prawny-router-v3/references ×4, orzeczenia-sadowe-v2/references ×1, analizator-umow-v1/scripts ×2); rejestry zaktualizowane. MOD-KARTA-DOWODU: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-B2. ⛔ Błędne numery (ELI 2026-10-09): ulgowe przejazdy 2024/1914 → 2024/380, KRK 2023/1750 → 2024/276, lasy 2024/1143 → 2026/663, poręczenia SP 2024/836 → 2024/291, praca cudzoziemców 2024/1543 → 2025/1567; choroby zawodowe → t.j. 2026/1297.
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)
   3.99.20 (2026-10-07): walidator_cytowan z PR #95 — zgodność po pełnym identyfikatorze (Dz.U. rok+pozycja/ELI/WDU, sygnatura całością, artykuł z § i kodeksem) zamiast samych liczb; domena po hoście, https także w result_urls (zgł. #89)
@@ -138,14 +137,12 @@ Wszystkie pliki są kanoniczne — nie istnieją stuby ani kopie w innych lokali
 | Plik | Rola |
 |------|------|
 | `tools/eli_art_extract.py` | Deterministyczny odczyt jednostki redakcyjnej z ELI po strukturze HTML (`data-id`), z pominięciem treści obwieszczenia i przypisów; pole `aktualnosc` wykrywa najnowszy t.j. dostępny tylko w PDF. Statusy FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE. Testy: `tools/test_eli_art_extract.py` (unittest, tryb live `LEX_LIVE=1`). Dodane 2026-09-26, F-201 |
-| `tools/kontrakt_rachunek.py` | Deterministyczny rachunek i kontrole liczbowe umowy (stdlib, offline): `oblicz`, `ekspozycja` (R-EKS E1–E4; liczba bez `zrodlo` = BRAK_ZRODLA), `slownie` (kwota cyfrą ↔ słownie, polska odmiana), `odeslania` (martwe odesłania §/ust./załączniki), `cytaty` (WD-2: dosłowność cytatu). Testy: `tools/test_kontrakt_rachunek.py` (13); regresja T39. Dodane 2026-09-29 (F-215), do repozytorium dopiero 2026-10-01b (odtworzone z zapisu sesji) |
 | `tools/graf_przyczynowy.py` | Silnik `MOD-GRAF-PRZYCZYNOWY.md`: wsparcie węzłów (bramy I/LUB), ścieżki i najsłabsze ogniwa, ogniwa krytyczne, scenariusze „co jeśli”, sprzężenia (cykle), flagi art. 361 § 1/362/441 KC i art. 2 KK; MD/JSON/Mermaid; `--selftest`; parytet z widgetem chronologii — T42. Dodane 2026-10-01b |
 | `tools/adapter_krs_vat.py` | Własny adapter KRS (`api-krs.ms.gov.pl`) + Biała lista VAT (`wl-api.mf.gov.pl`), bez serwerów zewnętrznych, bez klucza (F-204). Waliduje NIP (suma kontrolna) i dopełnia numer KRS zerami; zwraca FOUND/NOT_FOUND/INVALID_INPUT/ERROR — nigdy sam nie awansuje do statusu weryfikacji prawnej. ⚠️ Schemat KRS zmierzony LIVE 2026-09-26; schemat WL NIE zmierzony ponownie w tej sesji (blokada WAF Incapsula na kanale kodu z tego środowiska — zob. nagłówek pliku), przejęty z pomiaru zapisanego w `DOSTEP-MASZYNOWY-API.md` §4. Testy: `tools/test_adapter_krs_vat.py` (22 testy, w tym 2 live `LEX_LIVE=1`) |
 | `tools/walidator_cytowan.py` | Deterministyczna bramka: sprawdza, czy każde powołanie w gotowym piśmie ma odpowiadający log web_fetch. Pełny opis: `tools/README.md`. ✅ **F-206 ZAMKNIĘTA 2026-09-26d** — przywrócony bajt-w-bajt z historii git repozytorium (usunięty z drzewa rozwojowego mergem `d3385b9`, 2026-08-27; odzyskany z równoległej migawki stabilnej sprzed jej osobnego usunięcia w `6dbe7a0`, 2026-09-08 — potwierdzona identyczność treści `diff`), usunięty wraz z 7 innymi narzędziami; zweryfikowany na fixture'ach `tools/przyklady/` (4/4 przypadki zgodne z opisem w `tools/README.md`). 3.99.20 (zgł. #89, PR #95): domena urzędowa po hoście URL-a (https, host = domena albo subdomena, także `result_urls`), nie podciąg; zgodność po pełnym identyfikatorze cytatu (Dz.U. rok+pozycja / ELI / WDU, sygnatura całością, artykuł z § i kodeksem); `--self-test` 14 przypadków. Testy: `tools/test_walidator_cytowan.py` (unittest, offline) |
 | `tools/extract_api_verification_log.py` | Buduje `sesja.json` (log zdarzeń weryfikacji) z surowej konwersacji API; wejście dla `walidator_cytowan.py`. ✅ Przywrócony 2026-09-26d (F-206), `--self-test` PASS (2/2 zdarzenia poprawnie wydobyte) |
 | `tools/export_gate.py` | Łączy `extract_api_verification_log.py` + `walidator_cytowan.py` w jedną bramkę eksportu (exit 1 = zablokuj eksport). ✅ Przywrócony 2026-09-26d (F-206), `--self-test` PASS |
 | `tools/append_event.py` + `tools/hash_chain_verify.py` + `tools/router_event_parser.py` | Log audytowy hash-chain: zapis zdarzenia, weryfikacja integralności łańcucha, parsowanie znaczników. Referencyjne dla developera portalu (`shared/AUDIT-TRAIL-SPEC.md`). ✅ Przywrócone 2026-09-26d (F-206) — dodatkowo znalezione jako NIEOBECNE poza zakresem pierwotnego opisu F-206 w `WARN-OTWARTE.md` (ten sam commit usuwający, ta sama data). Zweryfikowane end-to-end: `append_event.py` zapisał 3-wpisowy łańcuch, `hash_chain_verify.py` potwierdził integralność, a po ręcznym spreparowaniu naruszenia (zmiana `payload` we wpisie seq=2) poprawnie wykrył pierwszy niezgodny wpis |
-| `MOD-AUDIT-BUNDLE.md` | Paczka audytowa outputu (AI Act art. 12) — składa wyniki WERYFIKACJA-SLAD, MOD-STEP-TRACKER i bramek walidacji w jeden artefakt z manifestem; deliverable dla audytora, nigdy dla sądu. Wołany przez `pisma-procesowe-v3` po ST-FINAL (tryb PRAWNIK / żądanie użytkownika) — podpięty 2026-10-04b (F-225; od 3.19 bez wywołania) |
 | `ORKA-BAS-001-125.json` | Dane maszynowe leksykonu ORKA (125 rekordów `id/haslo/modul/definicja`; 41 bez odpowiednika w `orka-bas-leksykon/*.md`) — wskazany z `ORKA-BAS-LEKSYKON.md` (2026-10-04b, F-225) |
 | `tools/test_mcp_protocol.py` + `tools/connector_health_check.py` | Klasyfikacja odpowiedzi connectora MCP (testy jednostkowe) + health-check dostępności connectorów. Referencyjne, poza LLM (`shared/MCP-INTEGRACJA.md`). ✅ Przywrócone 2026-09-26d (F-206) — jak wyżej, poza pierwotnym zakresem F-206. `test_mcp_protocol.py`: 6/6 testów PASS (`python3 -m unittest test_mcp_protocol`). `connector_health_check.py --self-test`: PASS |
 
@@ -216,20 +213,13 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `ROSZCZENIA.md` | Konstrukcja roszczeń głównych, ewentualnych i alternatywnych |
 | `STRATEGIA-PROCESOWA.md` | Taktyka procesowa i wybór następnego ruchu |
 | `QUALITY-CHECK.md` | Kontrola jakości pisma: logika, struktura, nadmiar, emocjonalność |
-| `KANCELARIA-WORKFLOW.md` | Sekwencja pracy kancelaryjnej możliwa w `.md skills` |
 | `MOD-TIMING.md` | Strategia timing składania pism — macierz T1–T5, 6 modeli (T-EARLY…T-ADVANCE-NOTICE) |
 | `MOD-PEER-REVIEW.md` | Weryfikacja krzyżowa pisma — 4 role (adwokat diabła, sędzia, klient, spójność) |
 | `MOD-INTRO.md` | Executive summary pisma (str. 1) — 2–5 zdań, max 150 słów, killer argument na str. 1 |
 | `MOD-KONCENTRACJA.md` | Metryka długości pisma per typ — limity orientacyjne, algorytm K1–K4, reguły skracania |
-| `MOD-DOKTRYNA.md` | Polityka cytowania komentarzy i doktryny — hierarchia D-1–D-4, formaty, HARDGATEs |
 | `MOD-WIDGET-IO.md` | ⭐ Obligatoryjny pasek Import/Export dla widgetów analitycznych — matryca per skill, wzorzec HTML/CSS/JS, reguły IO-1–IO-8 |
-| `MOD-KARTA-DOWODU.md` | ⛔ Karta dowodowa i graf faktów — pisma-procesowe-v3 W1.2c-PRE (po SD-SKAN, przed macierzą MT1); analizator-dowodow-v3 BLOK-B2 |
-| `MOD-ELIMINACJA-TEZ.md` | ⛔ Eliminacja tez, żądań i przepisów bez pokrycia prawnego — pisma-procesowe-v3 W1.2a-POST (po CLAIM-VALIDATION, przed W1.3); analizator-dowodow-v3 BLOK-C |
-| `MOD-BUDOWA-ARGUMENTU.md` | ⛔ Obowiązkowy schemat budowy każdego argumentu — W2.2, każdy akapit uzasadnienia |
-| `MOD-KOSZT-ODPOWIEDZI.md` | ⛔ Optymalizacja kosztu procesowego dla przeciwnika — W2.2 dla każdego głównego twierdzenia + W3.6a AUDYT-KOŃCOWY |
-| `MOD-MIKROPODSUMOWANIA.md` | ⛔ Obowiązkowe podsumowanie każdego rozdziału uzasadnienia — W2.2, koniec każdej sekcji numerowanej |
-| `MOD-SKUTEK-PROCESOWY.md` | ⛔ Obowiązkowy blok skutku procesowego — W2.2, koniec każdego bloku uzasadnienia klasy A/B |
-| `MOD-STRESS-TEST.md` | ⛔ Symulacja odpowiedzi pełnomocnika pozwanego — po W2 (projekt pisma), przed W3 / AUDYT-KOŃCOWY |
+| `MOD-KARTA-DOWODU.md` | ⛔ Karta dowodowa i graf faktów — pisma-procesowe-v3 W1.2c-PRE (po SD-SKAN, przed macierzą MT1); MOD-METODY-BADAWCZE (analizator-dowodow-v3 nie ma bloku B2 — deklaracja usunięta 2026-10-09) |
+| Przeniesione z `shared/` 2026-10-09 (jedyny konsument) | `pisma-procesowe-v3/modules/`: MOD-AUDIT-BUNDLE, MOD-DOKTRYNA, MOD-ELIMINACJA-TEZ, MOD-BUDOWA-ARGUMENTU, MOD-KOSZT-ODPOWIEDZI, MOD-MIKROPODSUMOWANIA, MOD-SKUTEK-PROCESOWY, MOD-STRESS-TEST; `prawny-router-v3/references/`: KANCELARIA-WORKFLOW, SOCIAL-SECURITY-LAW-STANDARD, DISCIPLINARY-PROCEEDINGS-STANDARD, JUDICIARY-LEGAL-STANDARD; `orzeczenia-sadowe-v2/references/`: ORZECZENIA-OUTPUT-SCHEMA; `analizator-umow-v1/scripts/`: kontrakt_rachunek.py + test (T39) |
 
 ### Obowiązkowe wywołania dla generatorów pism
 
@@ -261,28 +251,28 @@ Gdy pismo wymaga executive summary, metryki długości lub peer review:
 view shared/MOD-INTRO.md           (pozew/apelacja/pismo >3 str.)
 view shared/MOD-KONCENTRACJA.md    (kontrola długości — zawsze)
 view shared/MOD-PEER-REVIEW.md     (gdy WPS>50k / ≥3 żądania / apelacja)
-view shared/MOD-DOKTRYNA.md        (gdy cytowanie komentarzy w W2)
+view pisma-procesowe-v3/modules/MOD-DOKTRYNA.md   (lokalny; gdy cytowanie komentarzy w W2)
 view shared/MOD-TIMING.md          (gdy pytanie o timing złożenia)
 ```
 
 Przed W1.3 (eliminacja tez bez pokrycia) i w trakcie W1.2c-PRE (karta dowodowa), obowiązkowo:
 
 ```text
-view shared/MOD-ELIMINACJA-TEZ.md  (⛔ W1.2a-POST, po CLAIM-VALIDATION)
+view pisma-procesowe-v3/modules/MOD-ELIMINACJA-TEZ.md  (⛔ W1.2a-POST, po CLAIM-VALIDATION)
 view shared/MOD-KARTA-DOWODU.md    (⛔ W1.2c-PRE, po SD-SKAN)
 ```
 
 W W2.2 (redakcja każdego bloku uzasadnienia), obowiązkowo w tej kolejności:
 
 ```text
-view shared/MOD-BUDOWA-ARGUMENTU.md    (⛔ każdy akapit uzasadnienia)
-view shared/MOD-KOSZT-ODPOWIEDZI.md    (⛔ każde główne twierdzenie)
-view shared/MOD-SKUTEK-PROCESOWY.md    (⛔ koniec bloku klasy A/B)
-view shared/MOD-MIKROPODSUMOWANIA.md   (⛔ koniec każdego rozdziału)
+view pisma-procesowe-v3/modules/MOD-BUDOWA-ARGUMENTU.md    (⛔ każdy akapit uzasadnienia)
+view pisma-procesowe-v3/modules/MOD-KOSZT-ODPOWIEDZI.md    (⛔ każde główne twierdzenie)
+view pisma-procesowe-v3/modules/MOD-SKUTEK-PROCESOWY.md    (⛔ koniec bloku klasy A/B)
+view pisma-procesowe-v3/modules/MOD-MIKROPODSUMOWANIA.md   (⛔ koniec każdego rozdziału)
 ```
 
 Po W2 (projekt pisma gotowy), przed W3/AUDYT-KOŃCOWY, obowiązkowo:
 
 ```text
-view shared/MOD-STRESS-TEST.md     (⛔ symulacja odpowiedzi pełnomocnika pozwanego)
+view pisma-procesowe-v3/modules/MOD-STRESS-TEST.md     (⛔ symulacja odpowiedzi pełnomocnika pozwanego)
 ```

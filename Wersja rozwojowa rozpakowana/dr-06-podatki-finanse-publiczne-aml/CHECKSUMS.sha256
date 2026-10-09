@@ -1,7 +1,7 @@
 5b42d0f54d4064650d995c565b388085ee8d525b46f644938a191eb6b63426a2  ./MAPA-AKTOW.md
 09b5b612b258f9798b1777158d3f8cd814a77081741ac9f99e80a9786b10ae4f  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-2037fda9e83ca10735547bbe91f7b687581291ff87bd8db057c92d80d8d41747  ./SKILL.md
+1dda15693e97ad189e744e70d7be80cde7ce5ffba9141cb7145bdca121f7774d  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 b957886f0c5a16a23f9690b0466af0ad5708097c1a1fddf05d14a4fcf1379099  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -43,7 +43,7 @@ a01c7ba74fd06a70eebfa6e2a3c01ae9133d6baf53598086f39d53b3c3906ae3  ./modules/mod-
 9e11bae225d2dd2e890871aadd35740c9215c310a024652c92e599c986baaa14  ./modules/mod-ustawa-PCC-i-podatek-spadkow-darowizn.md
 5efb4eac8b7fddb7ff10450b09003374bd4a2cc7900b2e891b86da910234a6d0  ./modules/mod-ustawa-akcyzowa-i-clo-UCC.md
 be6ff6846af602b042e0a419429be338cace9a77961274aa35aca779235c61bc  ./modules/mod-ustawa-biegli-rewidenci-zawod.md
-ab0f488d44ed29581cc5669e1dacb0dd8d9fe96fc800c6965e9e7f6d6fe2fea9  ./modules/mod-ustawa-doradcy-podatkowi-zawod.md
+50a63081de3354ef75808a41860842940b86a7dac2d6e460cf2918b6e60de749  ./modules/mod-ustawa-doradcy-podatkowi-zawod.md
 e4d301431077a197e12b4e583dcf250c6c2a62b2c93e04c04450439ebfb1eba3  ./modules/mod-ustawa-oplata-skarbowa.md
 3e2b975b412bd65ce4d6ae1b24aa2a846c8910175744b53818fdbe31e0bb213a  ./modules/mod-ustawa-podatek-nieruchomosci-i-lokalne.md
 410e2e7324d98b9445f4a7933f44fc95d5298c13a00aee8a0c4d9cd7185a3231  ./modules/mod-ustawa-podatek-wydobycie-kopalin.md
@@ -73,6 +73,6 @@ eb72a362815ad764e1327b0167c9b50fbdff6fda69f39ee38a4d7b53612f0dec  ./modules/vat-
 f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-podatek-od-towarow-i-uslug/part-05-grupa-srednia.md
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 5666286b9a042068711d23dd0689936598ec28bfb3fecee053c072dc80dce86e  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
-3a6b9fc092897dadebabcca947ec1ed6da87036ec61ae54d02dd835d030b59d4  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-a855393545f98990f62a946096b49ec5c024152fde7afe2e72a361ad9156b403  ./references/CHANGELOG.md
+31df376d6b18b767e827269a5c4c6d1f685f00997c698a1ead319267c3737cd0  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
+e8451fd6770e01bf7a28e3171e567b0b6a1c0d55aae052a1b3b8d0346be6862f  ./references/CHANGELOG.md
 0f04d7c347f094d44d41df4e026937cf23482a7e4ce7e3393ee611dad0c8e05a  ./references/HISTORIA-ZMIAN-PLIKOW.md

@@ -1326,7 +1326,7 @@ jest odpowiedzią na pomiar z claude.ai 2026-09-27 (4 z 32 pluginów, jedyna cec
 
 | Test | Co mierzy | Waga | Zależność |
 |---|---|---|---|
-| T39 | (1) `shared/tools/test_kontrakt_rachunek.py` — 13 testów: `oblicz` (bezpieczeństwo AST), `ekspozycja` na liczbach umowy 04 = manifest złotego standardu (60 800 / 729 600 / 243,20 / 201,40 / NIEOGRANICZONA / data okna 2027-02-01), liczba bez źródła = BRAK_ZRODLA, odmiana liczebników, martwe odesłania, wykaz załączników w 2 liniach, cytaty; (2) korpus `analizator-umow-v1/benchmark/posiane-wady/`: 05 i3+i6 wykryte, 01 zero alarmów, 04 pary zgodne | KRYTYCZNY (BLOKER) | offline |
+| T39 | (1) `analizator-umow-v1/scripts/test_kontrakt_rachunek.py` — 13 testów: `oblicz` (bezpieczeństwo AST), `ekspozycja` na liczbach umowy 04 = manifest złotego standardu (60 800 / 729 600 / 243,20 / 201,40 / NIEOGRANICZONA / data okna 2027-02-01), liczba bez źródła = BRAK_ZRODLA, odmiana liczebników, martwe odesłania, wykaz załączników w 2 liniach, cytaty; (2) korpus `analizator-umow-v1/benchmark/posiane-wady/`: 05 i3+i6 wykryte, 01 zero alarmów, 04 pary zgodne | KRYTYCZNY (BLOKER) | offline |
 
 **Wykonanie:** `python3 audyt-systemu-v4/scripts/check_kontrakt_rachunek.py --repo-root <drzewo>`.
 **Pomiar walidacyjny (2026-09-29):** 13/13 (wpis pierwotnie podawał 14 — korekta 2026-10-01b wg zapisu sesji) + 5/5 kontroli korpusu. Pierwszy przebieg wykrył fałszywy alarm

@@ -255,7 +255,7 @@ UPRAWNIENI (weryfikuj aktualny stan — ustawa o ruchu drogowym):
 ### 5.3 Ulgi komunikacyjne
 
 ```
-(Weryfikuj ustawę o uprawnieniach do ulgowych przejazdów — Dz.U. 2024 poz. 1914 t.j. — weryfikuj!)
+(Ustawa o uprawnieniach do ulgowych przejazdów środkami publicznego transportu zbiorowego — Dz.U. 2024 poz. 380 t.j. ✅ [VER] RZĄD 1 2026-10-09 (ELI). Było błędnie `2024 poz. 1914` = nowelizacja ustawy o odpadach)
 
 Symbol 04-O + stopień umiarkowany:
   → 37% ulgi na przejazdy PKP i PKS (klasa II, pociągi osobowe i pośpieszne)

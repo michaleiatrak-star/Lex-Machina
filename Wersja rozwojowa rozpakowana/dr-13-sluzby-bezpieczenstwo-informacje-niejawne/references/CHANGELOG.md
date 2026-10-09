@@ -1,5 +1,7 @@
 # CHANGELOG — dr-13-sluzby-bezpieczenstwo-informacje-niejawne
 
+- 3.16 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-ustawa-straz-graniczna: „ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546” to t.j. rozp. RM o zaświadczeniach de minimis — poprawione na t.j. 2026/862 (ELI 2026-10-09).
+
 - 3.15 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.
 
 - 3.14 (2026-10-04c, AUDYT-2026-10-04c): **F-227 (zamknięta).** SKILL.md nie wczytywał `MAPA-POKRYCIA.md`, choć `prawny-router-v3/references/pokrycie-dziedzinowe.md` nazywa lokalną mapę jedynym bieżącym źródłem statusu pokrycia — dodana sekcja „Mapa pokrycia treściowego” z `view`, wzorem DR-02…DR-06 i DR-16. Treść prawa bez zmian. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04c.

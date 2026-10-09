@@ -1,6 +1,6 @@
 # MOD-DOKTRYNA — polityka cytowania doktryny i komentarzy w pismach procesowych
 
-> Wersja: 1.0.0 | Typ: moduł redakcyjny | shared/
+> Wersja: 1.0.0 | Typ: moduł redakcyjny | pisma-procesowe-v3/modules/ (do 2026-10-09 w `shared/`)
 > Wywoływany z: pisma-procesowe-v3 W2 (sekcja uzasadnienia prawnego)
 >               MOD-ORZE (W3.2) gdy obok orzeczenia potrzebna doktryna
 > Podstawa ekspercka: Garner *Legal Writing in Plain English* (substantive footnotes);
@@ -160,7 +160,7 @@ Zasada Garnera: jeden celny cytat lepszy niż pięć marginalnych.
 W W2 — gdy redagowane jest uzasadnienie prawne:
 ```
 Czy jest potrzeba powołania doktryny?
-  TAK → view shared/MOD-DOKTRYNA.md
+  TAK → view modules/MOD-DOKTRYNA.md
         → Zastosuj D-1/D-2/D-3/D-4
         → Ustal poziom hierarchii (§2)
         → Zastosuj format z §3

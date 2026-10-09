@@ -1,5 +1,7 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+- 2.27 (2026-10-09f, AUDYT-2026-10-09f): `ORZECZENIA-OUTPUT-SCHEMA.md` przeniesiony z `shared/` do `references/` (jedyny konsument).
+
 - 2.26 (2026-10-07g, AUDYT-2026-10-07g): `tools/cbosa_parser.py` — etykieta pola w zagnieżdżonej tabeli (`td.info-list-label > table > td.lista-label`) rozpoznana: dokument zwraca sąd i datę zamiast `null` (pomiar na żywo III OSK 1959/22 z PR #84, geek111); sekcja „powiązane” (`span.powiazane`) pominięta przy zbieraniu `/doc/{ID}`. Testy +2 (30/30); parytet z konektorem JS.
 
 - 2.25 (2026-10-07): CBOSA — nadmiar unikalnych /doc/ ponad licznik „Znaleziono N" nie jest już driftem (strona wyników niesie też linki spoza trafień: orzeczenia powiązane, nawigacja). Parser referencyjny cbosa_parser.py: usunięto dwie gałęzie „> total → OUT_OF_SCOPE"; nadmiarowe ID to kandydaci filtrowani przez exact-match + fail-closed odczyt dokumentu. Test regresyjny (total=1, 2 linki → FOUND). Pozostałe bramki (nierozpoznany licznik, zatrzymana paginacja, niekompletny dokument, transport) bez zmian

@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.37"
+version: "5.38"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -147,7 +147,7 @@ KROK C — ST-FINAL (OBOWIĄZKOWY i BLOKUJĄCY przed KAŻDYM present_files pisma
        STATUS PISMA = ✅ FINAL — GOTOWE DO ZŁOŻENIA.
        Dozwolone present_files bez dalszych pytań.
        Tryb PRAWNIK/kancelaria lub żądanie użytkownika → po present_files:
-       `view shared/MOD-AUDIT-BUNDLE.md` (paczka audytowa AI Act art. 12 —
+       `view modules/MOD-AUDIT-BUNDLE.md` (paczka audytowa AI Act art. 12 —
        deliverable dla audytora, nigdy dla sądu ani kontrahenta).
 
   • Jeśli liczba ≥ 1  →  WARUNEK SPEŁNIONY → URUCHOM INFORMACJĘ WARUNKOWĄ:
@@ -445,7 +445,7 @@ Przed zbudowaniem mapy przesłanka → dowód wykonaj weryfikację twierdzeń st
 
 ```
 KROK ET: Eliminacja tez i weryfikacja przepisów
-  view shared/MOD-ELIMINACJA-TEZ.md
+  view modules/MOD-ELIMINACJA-TEZ.md
 
   Per każde żądanie z petitum:
   → ET-Q1: Czy istnieje przepis który to żądanie PRZEWIDUJE? (ELI — RZĄD 1)
@@ -689,7 +689,7 @@ view shared/MOD-TIMING.md                         (gdy timing złożenia jest is
                                                                      pierwsza rozprawa <14 dni /
                                                                      wniosek dowodowy grożący prekluzją /
                                                                      korzystne postanowienie do utrwalenia)
-view shared/MOD-DOKTRYNA.md                       (gdy uzasadnienie powołuje
+view modules/MOD-DOKTRYNA.md                       (gdy uzasadnienie powołuje
                                                                      komentarze lub literaturę —
                                                                      hierarchia: orzeczenie > doktryna)
 ⛔ UWAGA: MOD-MACIERZ-DOWOD-TEZA (KROK MT) wykonany już w W1.2c.
@@ -712,22 +712,22 @@ view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
                                                                      na umowach / zmiana nazwy pracodawcy /
                                                                      argument o tożsamości pracodawcy —
                                                                      wykonaj NAJPIERW ISU, potem PR1→PR4)
-view shared/MOD-BUDOWA-ARGUMENTU.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
+view modules/MOD-BUDOWA-ARGUMENTU.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
                                                                      schemat 7-elementowy każdego bloku,
                                                                      klasyfikacja A/B/C/D, kolejność tez,
                                                                      zamknięcie furtki, wniosek cząstkowy)
-view shared/MOD-KOSZT-ODPOWIEDZI.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
+view modules/MOD-KOSZT-ODPOWIEDZI.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
                                                                      szablon KO-2 dla twierdzeń o dokumentach
                                                                      pozwanego, numerowanie KO-4, audit KO-3
                                                                      uruchamiany po W2 przed AUDYT-KOŃCOWY)
-view shared/MOD-SKUTEK-PROCESOWY.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
+view modules/MOD-SKUTEK-PROCESOWY.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
                                                                      SP-1: blok skutku po każdej podstawie
                                                                      prawnej; SP-3: 4 pytania kontrolne;
                                                                      SP-5: pozycja w schemacie 7-el.)
-view shared/MOD-MIKROPODSUMOWANIA.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
+view modules/MOD-MIKROPODSUMOWANIA.md               (⛔ OBOWIĄZKOWE — zawsze przed W2.2:
                                                                      MK-1: 3-4 zdania po każdym rozdziale;
                                                                      MK-2: zasady redakcji; BLOKADA gdy brak)
-view shared/MOD-STRESS-TEST.md                     (⛔ OBOWIĄZKOWE — po W2, przed W3:
+view modules/MOD-STRESS-TEST.md                     (⛔ OBOWIĄZKOWE — po W2, przed W3:
                                                                      ST-1: symulacja odpowiedzi pełnomocnika;
                                                                      ST-2: raport do wyświetlenia;
                                                                      ST-3: fix dla argumentów 🔴;

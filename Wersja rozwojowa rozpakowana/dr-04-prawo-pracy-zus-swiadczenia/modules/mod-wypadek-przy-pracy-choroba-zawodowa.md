@@ -96,7 +96,9 @@ ZUS odmawia świadczenia?
   → Termin: 1 miesiąc od doręczenia decyzji ZUS (art. 477⁹ KPC)
 
 Choroba zawodowa:
-  → Wykaz chorób zawodowych: rozporządzenie RM — weryfikuj w ELI (RZĄD 1)
+  → Wykaz chorób zawodowych: rozporządzenie RM z 30.06.2009 w sprawie chorób
+    zawodowych — t.j. Dz.U. 2026 poz. 1297 (ELI 2026-10-09; przed powołaniem
+    sprawdź nowelizacje po t.j. w ELI, RZĄD 1)
   → Organ: Państwowy Inspektor Sanitarny (PIS) → decyzja → ZUS → świadczenia
 ```
 

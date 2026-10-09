@@ -1,9 +1,9 @@
 # MOD-KOSZT-ODPOWIEDZI — Optymalizacja Kosztu Procesowego dla Przeciwnika
 
-> **Plik:** `shared/MOD-KOSZT-ODPOWIEDZI.md`
-> **Status:** PRODUKCJA — plik kanoniczny shared
+> **Plik:** `pisma-procesowe-v3/modules/MOD-KOSZT-ODPOWIEDZI.md`
+> **Status:** PRODUKCJA — moduł lokalny pisma-procesowe-v3 (do 2026-10-09 w `shared/`; jedyny konsument)
 > **Pozycja w pipeline:** W2.2 (redakcja) + W3.6a (AUDYT-KONCOWY)
-> **Wywołanie:** `view shared/MOD-KOSZT-ODPOWIEDZI.md`
+> **Wywołanie:** `view modules/MOD-KOSZT-ODPOWIEDZI.md`
 > **Trigger:** OBOWIĄZKOWY w W2.2 dla każdego głównego twierdzenia
 
 ---

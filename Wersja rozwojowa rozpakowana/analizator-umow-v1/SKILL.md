@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.47"
+version: "1.48"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -19,7 +19,7 @@ compatibility: "Requires current official legal sources and access to the separa
 Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmienia metodologii analizy umów, scoringu ryzyka, routingów J/G/H/I/K, hard gate’ów, checklist ani wymogów finalizacji.
 
 1. `view`, `web_search`, `web_fetch`, `present_files`, `create_file`, `bash`, `python` i podobne nazwy traktuj jako nazwy operacji semantycznych, jeżeli bieżący host nie udostępnia literalnie narzędzia o tej nazwie. Użyj równoważnej funkcji hosta.
-2. `view analizator-umow-v1/...` oraz `view references/...` oznaczają świeży odczyt odpowiedniego pliku lokalnego tego skilla (`references/`, `workflows/`). Nie wymagaj literalnego katalogu `/mnt/skills`.
+2. `view analizator-umow-v1/...` oraz `view references/...` oznaczają świeży odczyt odpowiedniego pliku lokalnego tego skilla (`references/`, `workflows/`, `scripts/`). Nie wymagaj literalnego katalogu `/mnt/skills`.
 3. `view shared/<plik>` oznacza świeży odczyt z osobnego, kanonicznego skilla `shared`. NIE kopiuj `shared` do tej paczki. Jeżeli obowiązkowy zasób shared jest niedostępny, zastosuj fail-closed zamiast zastępować go pamięcią modelu.
 4. `web_search` / `web_fetch` oznaczają świeże wyszukanie i odczyt źródła. Dla prawa, orzecznictwa, UOKiK, EUR-Lex, NBP i innych danych regulacyjnych zachowaj istniejący wymóg źródła oficjalnego i zakaz cytowania z pamięci.
 5. `present_files` / `create_file` oznaczają utworzenie i przekazanie użytkownikowi dokumentu przez natywną funkcję plikową/dokumentową bieżącego hosta. Brak literalnej funkcji `present_files` nie zwalnia z bramek AU-HYBRID/AU-STRIP/AU-POST/AU-DISC i ST-GATE-FINAL.
@@ -556,7 +556,7 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 *Weryfikacja: ELI (RZĄD 1) · rejestr.uokik.gov.pl · uokik.gov.pl · eur-lex.europa.eu*
 *             sn.pl · orzeczenia.ms.gov.pl · curia.europa.eu · saos.org.pl · uodo.gov.pl · nbp.pl*
 *NOWE v1.44 (2026-09-29, F-215, patrz CHANGELOG.md): rachunek R-EKS, zgodność kwot cyfrą/słownie,*
-*martwe odesłania i dosłowność cytatów — deterministycznie przez `shared/tools/kontrakt_rachunek.py`*
+*martwe odesłania i dosłowność cytatów — deterministycznie przez `analizator-umow-v1/scripts/kontrakt_rachunek.py`*
 *(RK.2a pkt 0, triage Krok 2a, weryfikacja odesłań Krok 1.2). Bez wykonania kodu — jak dotąd, z adnotacją.*
 
 *NOWE v1.41 (2026-09-26, F-203(a), patrz CHANGELOG.md): korpus regresyjny*

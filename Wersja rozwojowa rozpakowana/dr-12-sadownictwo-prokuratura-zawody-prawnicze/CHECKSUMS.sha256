@@ -1,7 +1,7 @@
 bfb616c7048c4874fac4bb94859f9ec8ec75750a8afbe778328fb881604c74b0  ./MAPA-AKTOW.md
 601a3dbac3a7233e0bfc7b70194fd08fa5380bf42b4cb614fc9b4522ee986f1b  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-0578bae2f845b3d93d450559c3a41df8d0e2328f3cb313ddc3c1a41f027baf3a  ./SKILL.md
+e86b724245250e60feff8b6a2b15f554db4f8402d99223beefd9b11a6f61637c  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 41ecf6d89da12743636c67ab29de443bbe34596f68de7355e2aba491e60cf183  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
@@ -12,10 +12,10 @@ e8b8db22cb9c125dfa96d1f2e03aac7fabfa2b03fbd628297c143b2ca2a9c6d8  ./modules/mod-
 010818e1533304ab040bcd314e212ecd80f706a037a21c8303fc66c2c0dabd86  ./modules/mod-ustawa-adwokatura.md
 770a6a86c0d92d7ac9daa48d5cb8e3669d0af3abefd13e923244bfcfcd582942  ./modules/mod-ustawa-komornicy-sadowi-zawod.md
 a73e69d00c75c1dbf7bc9263d10635bb7d33607678233bae70c36a8960357762  ./modules/mod-ustawa-notariat.md
-25d83f93198994c211bee23e143f2fa896cb134bfbd9672deeb773fd98febe85  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
+1b0ec8e33c85c095c0b9ec357b7536966f0981645835386c677d0c2420be5f94  ./modules/mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow.md
 bf84f95a35ce1fd037ab79b62a482f613ce4402d014892cad29b11fbb2cfe010  ./modules/mod-ustawa-radcowie-prawni.md
 dc534dc03bb206096a9c58859bd144d5da1eb2294af8c527cc09331c398fc2a2  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 07ddd71ea03d55f1f656f11bec015f69c408f3ac7279c68c23eb29808b63c4ee  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 fa1b245b7464740abf8946df58d35f81eab24f3c51155e7510c200a514a16248  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
-af9d9f525735841063964fc1d0ab9e27d1c010404c8348e4aada11b01cc00ea0  ./references/CHANGELOG.md
+ea746856884787918a074c3a36df4d0a0940080b0d58634a8307e3928baab215  ./references/CHANGELOG.md
 6d577f0ec1363735343a495462aadeddd8891741a26ca60e27a18a499fc8e5f0  ./references/HISTORIA-ZMIAN-PLIKOW.md

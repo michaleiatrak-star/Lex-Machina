@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.97"
+version: "3.98"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 dependencies:
   requires:
@@ -725,7 +725,7 @@ przez cross-reference, bez duplikacji treści).
                atestacji sprawozdawczości ESG/CSRD; harmonogram ESG
                wielokrotnie odraczany — zawsze weryfikuj online)
   [✓] NOWY  mod-ustawa-doradcy-podatkowi-zawod
-              (Dz.U. 2021 poz. 2117 + nowelizacja Dz.U. 2025 poz. 1882
+              (Dz.U. 2026 poz. 1274 t.j., obejmuje nowelizację Dz.U. 2025 poz. 1882
                [rozszerzenie zakresu doradztwa + zmiana PPSA]; zawód
                zaufania publicznego — samorząd KIDP; krąg uprawnionych
                szerszy niż tylko doradcy podatkowi — adwokaci/radcowie/

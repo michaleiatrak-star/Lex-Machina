@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.26"
+version: "2.27"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -1129,7 +1129,7 @@ Skill wykrywa poziom automatycznie. Użytkownik może wpisać „tryb prawnik" /
 Gdy wynik tego skilla trafia do pisma-procesowe-v3, analizator-umow-v1 lub innych konsumentów:
 
 ```
-view shared/ORZECZENIA-OUTPUT-SCHEMA.md
+view references/ORZECZENIA-OUTPUT-SCHEMA.md
 → Format rekordu ORZ-REKORD (pola OBL + OPT)
 → Instrukcje per consumer (pisma-procesowe-v3 W3.2, analizator-umow-v1, analiza-sadowa-v6)
 → Reguły integralności (brak URL = ⛔, Kat. 6A priorytet, zakaz ukrywania Kat. 3B)

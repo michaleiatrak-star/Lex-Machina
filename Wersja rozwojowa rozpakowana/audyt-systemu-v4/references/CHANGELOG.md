@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.214 (2026-10-09f, AUDYT-2026-10-09f): Inspekcja powiązań skille↔shared: 15 plików z jednym konsumentem przeniesionych do skilli; T39 na nowej ścieżce `kontrakt_rachunek.py`. mapa_dzu: ⛔ KOREKTA 2024/1546 (to t.j. rozp. de minimis, nie ochrona cudzoziemców), 2024/1837 → PREV (t.j. 2026/478), nowy wiersz 2026/1297 (choroby zawodowe), 2026/574 — nowelizacje po t.j. 815 i 1206 art. 15 (od 11.01.2027). ELI 2026-10-09.
+
 - 6.213 (2026-10-09b, AUDYT-2026-10-09b): mapa_dzu: nowy wiersz 2026/1290 (NW) + MONITORING do 17.10.2026; ⛔ KOREKTA wiersza 2026/731: ogłoszona 3.06.2026, nie 15.05.2026 (data ustawy).
 
 - 6.212 (2026-10-09, AUDYT-2026-10-09): mapa_dzu: nowe t.j. 2026/1231, 1240, 1241, 1244, 1245, 1252, 1263, 1274, 1282, 1293, 1307, 2023/501 (stare → PREV); KOREKTA podmiany: Traktat Północnoatlantycki to Dz.U. 2000 poz. 970 (DU/1999/970 to rozp. MF), 2000/257 to umowa NATO SOFA; MONITORING: 2026/1046 (KP, 5.11.2026), 2026/507 (VAT, 14.10.2026) — zawarte już w nowych t.j.; ALIASY: 2026/1240. CHECKLIST-DEDUP: komornicy t.j. 2026/881. T15 (audit_tj_inventory) maps/operational: 0 problemów — test nie był w run_regression_suite, dlatego 17 nieaktualnych t.j. nie zostało wcześniej wykrytych.

@@ -1,7 +1,7 @@
 6fa2a62cff687935f6cee8adb4d1ced8a187aace35f262b5483a6d7342a1e0dc  ./MAPA-AKTOW.md
 f3c655f9bc61cc2cecafbcc16bf7571959f1edb09906586b463ae86872825298  ./MAPA-POKRYCIA.md
 93c70aa27ded8dd55a23051bde455f08453fa3d966b2b0d6bfde845a27df6de1  ./PORTABILITY-MANIFEST.md
-ffaa18492a84edcd4b2c01be8cc24797f91c8f01d7a3e2833a3ed586606ed1b1  ./SKILL.md
+7c5e955ca926242ff49272ca69b45e09edc6184c48bc7db806c00e42c6deada6  ./SKILL.md
 ee2f304c7b47b9ae45e7c4a708348f6be9a5d29f60faa1b3f15124ea502375ea  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 c7f2b5a906dfcf2b2580864a7417383d877bf96492a6a18a4f6f0f58c1de8673  ./modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md
@@ -31,9 +31,9 @@ b2b9028799d6b345e7bf3f1018eecd63684e8abcb3a650c40048a71825b6a75d  ./modules/mod-
 d36c7f704fbf456263bbe9727bab6d1dd39693c6e83f84ea4df66ea26233b0ee  ./modules/mod-ustawa-psycholog-zawod.md
 935aa8cafa82daf96bfdd6c3590c5df3cf0b39e6b47118832bc33909f95edff1  ./modules/mod-ustawa-rolne-zywnosc-weterynaria.md
 27a14cee60890f9fadacae518b2b52f2290bc330202118346f09eb76f5a93acb  ./modules/mod-ustawa-sport-turystyka-imprezy-masowe.md
-3a186614e0f4456fb46983a95014ca3db17737ad55c0a687693e1f29f80530c1  ./modules/mod-ustawa-zawod-lekarza.md
-c63e7a0c19e10c769891a2ddd614a35138b7b9fcbef3f8806912c34fc47edc3f  ./modules/mod-ustawa-zawody-prawnicze-pokrewne.md
+d8240f3d7f639cd61e50b67f8ede5a4aaef6d74e7ee4e5aa12da96cad45c2af5  ./modules/mod-ustawa-zawod-lekarza.md
+0d269fbf15c55b70e32262ff83d3d62a7eedab2beda39c8abe931c3d5b2b73aa  ./modules/mod-ustawa-zawody-prawnicze-pokrewne.md
 2591a3e26e7ee36990e1cf6faef05a87ed8ae4846c3e5569d44293e5ef9c1647  ./modules/mod-ustawa-zdrowie-psychiczne.md
 da02497d2dc03ec7b23a81e5312b7fd2878f74fa70b5e0823f548ad1998eed5e  ./modules/mod-wyroby-medyczne.md
-33ae8a88a87b8b5c46a2ae57c65d81aa4a7a016937068a47180f70cefa646069  ./references/CHANGELOG.md
+bc06cdd544a0e5ddabfea91f28dd2250cb783ddb6b393eb381f07818ec378af9  ./references/CHANGELOG.md
 855248345d0da0b0116e7414a8819b5e9c8ce4113495cb3b8388e40ac593d670  ./references/HISTORIA-ZMIAN-PLIKOW.md

@@ -118,9 +118,10 @@ strajkową (pkt 5, klauzula generalna).
 
 ⚠️ **Uwaga terminologiczna:** KK posługuje się pojęciem "urządzenie
 użyteczności publicznej", NIE formalnym terminem "infrastruktura
-krytyczna" (który jest zdefiniowany USTAWOWO gdzie indziej — ustawa o
-zarządzaniu kryzysowym, patrz `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md`
-sekcja o zarządzaniu kryzysowym oraz `dr-01/mod-stany-nadzwyczajne-
+krytyczna" (który jest zdefiniowany USTAWOWO gdzie indziej — art. 3 pkt 2
+ustawy o zarządzaniu kryzysowym, t.j. Dz.U. 2026 poz. 574 ze zm., odczyt ELI
+2026-10-09; patrz `dr-08-samorzad-terytorialny-prawo-lokalne/modules/
+mod-ustawa-zarzadzanie-kryzysowe.md` oraz `dr-01/mod-stany-nadzwyczajne-
 sytuacje-kryzysowe.md`). Przy konkretnej sprawie sprawdź, czy dany obiekt
 jest formalnie wpisany na listę infrastruktury krytycznej (co może
 wpływać na kwalifikację dodatkową lub okoliczności obciążające), ale

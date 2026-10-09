@@ -229,6 +229,8 @@ niezawodnej procedurze weryfikacji sygnatury wg PRAWO-HARDGATE KROK 0–5.
 
 ---
 
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 2 (zawody prawnicze), 3–4 (pozostałe); RZĄD 1 tylko z oficjalnego portalu samorządu.
+
 ## STATUS KANCELARSKI
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
