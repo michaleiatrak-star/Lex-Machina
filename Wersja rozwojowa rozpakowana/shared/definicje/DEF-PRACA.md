@@ -21,7 +21,7 @@
 PRACOWNIK (art. 2 KP):
   "Pracownikiem jest osoba zatrudniona na podstawie umowy o pracę, powołania,
   wyboru, mianowania lub spółdzielczej umowy o pracę."
-  → KP Dz.U. 2025 poz. 277 t.j. (weryfikuj w ELI (RZĄD 1))
+  → KP Dz.U. 2025 poz. 277 (obecny t.j. Dz.U. 2026 poz. 1245) t.j. (weryfikuj w ELI (RZĄD 1))
   Minimalny wiek: 15 lat (młodociani art. 190 KP); zakaz pracy dzieci < 15 lat
 
 PRACODAWCA (art. 3 KP):
@@ -64,7 +64,7 @@ OBOWIĄZUJĄCA DEFINICJA (art. 94³ §2 KP — do wejścia w życie nowelizacji)
   zastraszaniu pracownika, wywołujące u niego zaniżoną ocenę przydatności zawodowej,
   powodujące lub mające na celu poniżenie lub ośmieszenie pracownika, izolowanie go
   lub wyeliminowanie z zespołu współpracowników."
-  → KP Dz.U. 2025 poz. 277 t.j. art. 94³
+  → KP Dz.U. 2026 poz. 1245 t.j. art. 94³ (⛔ t.j. zawiera już brzmienie z Dz.U. 2026 poz. 1046 — w życie 5.11.2026; do zdarzeń wcześniejszych stare brzmienie)
 
 OBOWIĄZUJĄCE WYMOGI (WSZYSTKIE ŁĄCZNIE):
   1. Działania/zachowania dotyczące/skierowane przeciwko pracownikowi
@@ -230,7 +230,7 @@ OBECNIE OBOWIĄZUJĄCE ROSZCZENIA (art. 94³ §3–4 KP):
 
 ### Linia orzecznicza SN — przesłanki sporne i ocenne (BAS-W20)
 ```
-Weryfikacja: KP art. 94³ (Dz.U. 2025 poz. 277 t.j.) + SN I PK 176/06 + standardyprawa.pl
+Weryfikacja: KP art. 94³ (Dz.U. 2026 poz. 1245 t.j.; ⛔ nowe brzmienie z 2026/1046 od 5.11.2026) + SN I PK 176/06 + standardyprawa.pl
 
 STATUS: DEFINICJA LEGALNA ISTNIEJE — ale 2 kluczowe przesłanki są ocenne i sporne
 

@@ -6,7 +6,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Kodeks pracy — indeks całego aktu | Dz.U. 2025 poz. 277 t.j. ze zm. | `mod-KP-current-state-COV.md` + `mod-KP-prawo-pracy` | 🟢 B+/COV; fresh gate |
+| Kodeks pracy — indeks całego aktu | Dz.U. 2026 poz. 1245 t.j. ze zm. | `mod-KP-current-state-COV.md` + `mod-KP-prawo-pracy` | 🟢 B+/COV; fresh gate |
 | KP — praca zdalna | jw. | `mod-KP-praca-zdalna` | ✅ aktywny |
 | KP — czas pracy | jw. | `mod-KP-dzial-VI-czas-pracy` | 🟢 B+/COV |
 | KP — urlopy pracownicze | jw. | `mod-KP-dzial-VII-urlopy-pracownicze` | 🟢 B+/COV |
@@ -40,7 +40,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | FUS — pozostałe działy | jw. | `mod-FUS-uzupelnienie-pokrycia-2026` | 🟡 B |
 | Dodatek pielęgnacyjny / świadczenie rehabilitacyjne / świadczenia pokrewne | FUS + ustawa zasiłkowa + ustawa o świadczeniach rodzinnych | `mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze` | ✅ aktywny; fresh gate |
 | Emerytury pomostowe | Dz.U. 2024 poz. 1696 t.j. ze zm. | `mod-emerytury-pomostowe` | ✅ aktywny; fresh gate |
-| Ustawa o świadczeniach rodzinnych + „Za życiem” / programy wsparcia | Dz.U. 2025 poz. 1208 t.j. ze zm. + właściwe akty/programy | `mod-ustawa-swiadczenia-rodzinne` | ✅ aktywny; fresh gate |
+| Ustawa o świadczeniach rodzinnych + „Za życiem” / programy wsparcia | Dz.U. 2026 poz. 1240 t.j. ze zm. + właściwe akty/programy | `mod-ustawa-swiadczenia-rodzinne` | ✅ aktywny; fresh gate |
 | Ustawa o świadczeniu wspierającym / WZON | Dz.U. 2026 poz. 873 t.j. (akt pierwotny: Dz.U. 2023 poz. 1429) | `mod-ustawa-swiadczenie-wspierajace-WZON` | ✅ aktywny |
 | Ustawa „Aktywny Rodzic” | Dz.U. 2026 poz. 532 t.j. (akt pierwotny: Dz.U. 2024 poz. 858) | `mod-ustawa-aktywny-rodzic` | ✅ aktywny |
 | Ustawa o pomocy społecznej | Dz.U. 2026 poz. 639 t.j. ze zm. | `mod-ustawa-pomoc-spoleczna` | ✅ aktywny; fresh gate kwot |

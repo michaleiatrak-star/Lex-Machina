@@ -1,5 +1,7 @@
 # CHANGELOG — dr-01-ustroj-konstytucyjny-i-zrodla-prawa
 
+- 3.17 (2026-10-09, AUDYT-2026-10-09): mandat posła i senatora — t.j. Dz.U. 2026 poz. 1282 (ELI 2026-10-09; poprzedni 2024/907 wygasł).
+
 - 3.16 (2026-10-05l, AUDYT-2026-10-05l): mod-stany-nadzwyczajne: linia „Hasła spraw” (słowa, którymi klient opisuje sprawę; aplikacja dobiera po nich moduł). Treść prawna bez zmian.
 
 - 3.15 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

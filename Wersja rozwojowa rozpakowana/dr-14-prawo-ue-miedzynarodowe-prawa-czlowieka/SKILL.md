@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: "3.12"
+version: "3.13"
 description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 dependencies:
   requires:
@@ -156,7 +156,7 @@ PRAWA CZŁOWIEKA — ONZ:
 
 NATO I UMOWY OBRONNE:
   [✓] OK    mod-NATO-umowy-miedzynarodowe
-              (Traktat Waszyngtoński Dz.U. 1999 nr 87 poz. 970;
+              (Traktat Waszyngtoński Dz.U. 2000 poz. 970;
                SOFA Dz.U. 2000 nr 21 poz. 257;
                art. 5 — klauzula wzajemnej obrony; jurysdykcja nad obcymi żołnierzami;
                art. 42 TUE — wspólna obrona UE; zgoda Sejmu art. 117 Konstytucji)

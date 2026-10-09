@@ -1,6 +1,6 @@
 # Moduł — VAT: rejestracja i wykreślenie (Dział X rozdz. 1), zapłata podatku (Dział X rozdz. 4), metoda kasowa małego podatnika (art. 21), likwidacja działalności i remanent (art. 14)
 
-> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**
+> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**
 > (obwieszczenie Marszałka Sejmu z 21.05.2025). ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz.
 > 894, 896, 1203, 1811; Dz.U. 2026 poz. 507, 846 — sprawdź przed każdym powołaniem.
 >
@@ -447,7 +447,7 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (potwierdzono brak
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) (potwierdzono brak
   nowszego tekstu jednolitego na 12.08.2026)
 RZĄD 2 — struktura ustawy i brzmienie art. 103 ust. 1, art. 96 ust. 9h,
   art. 105b: arslege.pl / lexlege.pl (stan 12.08.2026), przepisy.gofin.pl

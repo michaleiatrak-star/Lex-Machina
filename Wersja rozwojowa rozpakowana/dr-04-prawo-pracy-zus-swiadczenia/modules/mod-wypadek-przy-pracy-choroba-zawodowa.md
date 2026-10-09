@@ -28,7 +28,7 @@ Marszałka Sejmu z 28.11.2025), ze zm. Dz.U. 2026 poz. 26
   nieaktualny — pominięty pośredni t.j. Dz.U. 2025 poz. 1644 (21.02.2025)
 
 Kodeks pracy — art. 234–237 KP (obowiązki pracodawcy po wypadku)
-  → weryfikuj: Dz.U. 2025 poz. 277 t.j. ze zm.
+  → weryfikuj: Dz.U. 2026 poz. 1245 t.j. ze zm.
 ```
 
 ### Definicja wypadku przy pracy — 4 elementy

@@ -17,7 +17,7 @@ dopuszczalne pomocniczo przy braku praktycznego dostępu do aktu albo
 dla komentarza.
 
 > ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP. Akt bazowy: KKW,
-> Dz.U. 2025 poz. 911 t.j.
+> Dz.U. 2026 poz. 1307 t.j. (obwieszczenie z 4.09.2026, ogł. 8.10.2026; obejmuje 2025/1423)
 
 ---
 
@@ -45,7 +45,7 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
 ⭐⭐⭐ ART. 161 §3-4 — TERMIN KARENCJI PO ODMOWIE (⭐⭐⭐ KLUCZOWY
   przepis praktyczny, uzależniony od WYMIARU KARY — dwa różne okresy).
   ⛔ NAPRAWIONE 2026-08-22 (weryfikacja HYBRID-VAL, RZĄD 1: lexlege.pl
-  stan prawny na 17.08.2026, Dz.U. 2025 poz. 911 t.j. — poprzednia wersja
+  stan prawny na 17.08.2026, Dz.U. 2025 poz. 911 (obecny t.j. Dz.U. 2026 poz. 1307) t.j. — poprzednia wersja
   tej sekcji cytowała próg 3 lata/3+6 mies., co jest STARĄ wersją
   przepisu sprzed nowelizacji z 7.07.2022 (Dz.U. 2022 poz. 2600); wyniki
   wyszukiwania są w tej materii silnie zaśmiecone nieaktualnymi/
@@ -446,7 +446,7 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
 
 ```
 ✅ Zweryfikowane RZĄD 1: arslege.pl, lexlege.pl, przepisy.gofin.pl —
-zgodne przy każdym cytowanym artykule, stan Dz.U. 2025 poz. 911 t.j.
+zgodne przy każdym cytowanym artykule, stan Dz.U. 2025 poz. 911 (obecny t.j. Dz.U. 2026 poz. 1307) t.j.
 Struktura: Oddział 1 (Wykonywanie orzeczeń, 9-17a), Oddział 2
 (Postępowanie przed sądem, 18-24), Oddział 3 (Postępowanie egzekucyjne,
 25-31 — ⚠️ POPRAWKA: mapa pokrycia BŁĘDNIE podawała górną granicę jako

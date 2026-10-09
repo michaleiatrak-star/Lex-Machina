@@ -2,7 +2,7 @@
 
 ## Akt prawny / źródło
 - Traktat Północnoatlantycki (Traktat Waszyngtoński) — 4.04.1949
-  Ratyfikowany przez Polskę: Dz.U. 1999 nr 87 poz. 970
+  Tekst w Dz.U.: Dz.U. 2000 poz. 970 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane)
   ✅ VER: isap.sejm.gov.pl 2026-06-07
 - Umowa SOFA (Status of Forces Agreement) w ramach NATO — Dz.U. 2000 nr 21 poz. 257
 - Ustawa o zasadach pobytu wojsk obcych na terytorium RP, ich
@@ -36,6 +36,6 @@ Ustawa:     Zgoda Sejmu na wejście obcych wojsk na terytorium RP (art. 117 Kons
 
 ## Weryfikacja online
 ```
-web_search: "Traktat Waszyngtoński art. 5 NATO Polska Dz.U. 1999 poz. 970"
+web_search: "Traktat Waszyngtoński art. 5 NATO Polska Dz.U. 2000 poz. 970"
 web_search: "NATO SOFA umowa Polska 2025 aktualizacja"
 ```

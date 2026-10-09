@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.92 (2026-10-09, AUDYT-2026-10-09): prawa konsumenta — t.j. Dz.U. 2026 poz. 1244; KP (mobbing) — t.j. Dz.U. 2026 poz. 1245 ⛔ zawiera 2026/1046 w vacatio legis do 5.11.2026 (ELI 2026-10-09).
+
 - 3.91 (2026-10-08): Upadłość konsumencka trafia do `mod-PrUpad-konsument-workflow`: wiersz MAPA-AKTOW nazwany „Upadłość konsumencka osoby fizycznej (oddłużenie)” (było tylko „Tryby konsumenckie…”) i linia „Hasła spraw” w module (ogłosić upadłość konsumencką, oddłużenie, umorzenie długów, plan spłaty). Dotąd „Chcę ogłosić upadłość konsumencką” wskazywało moduł kredytu konsumenckiego.
 
 - 3.90 (2026-10-08): prup.py verify (--verify-online dla prup.py i prrestr.py): porównanie relacji ELI pomija pole changeDate (data edycji rekordu powiązanego aktu, nie treść prawna). Dotąd każda edycja metadanych dowolnego powiązanego aktu dawała fałszywe ZMIANA_ZRODLA mimo identycznego PDF i zbioru relacji (zaobserwowane 2026-10-08). Zmiana PDF, nowy akt w relacjach oraz zmiana tytułu/statusu/numeru powiązanego aktu nadal blokują. Testy: test_online_change_date_only_passes, test_online_related_act_status_change_blocks.

@@ -21,7 +21,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Digital Services Act | rozporządzenie (UE) 2022/2065 | `mod-DSA-digital-services-act` | ✅ aktywny |
 | CRA / EUCS / Data Act / Data Governance Act | właściwe akty UE, w tym rozporządzenie (UE) 2024/2847 | `mod-EUCS-CRA-akty-regulacyjne-UE` | ✅ aktywny; EUR-Lex fresh gate |
 | MiCA | rozporządzenie (UE) 2023/1114 | `mod-MiCA-kryptoaktywa` | ✅ aktywny; EUR-Lex fresh gate |
-| Informatyzacja podmiotów publicznych | Dz.U. 2025 poz. 1703 t.j. ze zm. | `mod-ustawa-informatyzacja-podmiotow-publicznych` | ✅ aktywny |
+| Informatyzacja podmiotów publicznych | Dz.U. 2026 poz. 1241 t.j. ze zm. | `mod-ustawa-informatyzacja-podmiotow-publicznych` | ✅ aktywny |
 | KSeF — routing podatkowo-cyfrowy | bieżący reżim ustawy o VAT + akty wykonawcze | `mod-ustawa-informatyzacja-podmiotow-publicznych` + routing DR-06 | ✅ aktywny; temporal gate |
 | Otwarte dane i ponowne wykorzystywanie | Dz.U. 2023 poz. 1524 t.j. ze zm. | `mod-ustawa-otwarte-dane` | ✅ aktywny |
 | Usługi zaufania / identyfikacja elektroniczna / eIDAS | Dz.U. 2024 poz. 1725 t.j. ze zm. + rozporządzenie (UE) nr 910/2014 ze zm. | `mod-ustawa-podpis-elektroniczny` | ✅ aktywny; EUR-Lex fresh gate |

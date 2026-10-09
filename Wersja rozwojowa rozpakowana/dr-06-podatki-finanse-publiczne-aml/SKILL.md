@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.96"
+version: "3.97"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 dependencies:
   requires:
@@ -280,7 +280,7 @@ art. 43 ust. 3–5, centralizacja rozliczeń JST.
 DWA NOWE MODUŁY):** przeprowadzono audyt pokrycia ustawy o VAT
 **według systematyki ustawy** (13 działów), a nie — jak dotąd —
 według historii pytań użytkownika. Struktura ustawy zweryfikowana
-online (t.j. Dz.U. 2025 poz. 775; potwierdzono BRAK nowszego tekstu
+online (t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263); potwierdzono BRAK nowszego tekstu
 jednolitego na 12.08.2026). Wynik: pokrycie globalne ~55–60%, ale
 skrajnie nierówne — Dział IX ~90%, Dział VII ~5%.
 

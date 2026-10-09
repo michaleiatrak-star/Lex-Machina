@@ -41,7 +41,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Kodeks karny wykonawczy
 
-**Baza:** Dz.U. 2025 poz. 911 ze zmianami po t.j.
+**Baza:** Dz.U. 2026 poz. 1307 ze zmianami po t.j.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|

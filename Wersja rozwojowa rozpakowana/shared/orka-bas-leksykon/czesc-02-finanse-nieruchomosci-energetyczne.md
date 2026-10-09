@@ -24,10 +24,10 @@ inaczej. "Opłata" o charakterze przymusowym i bezzwrotnym może być podatkiem.
 
 ### BAS-099 — VAT
 ```
-Weryfikacja: ustawa o VAT (**Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym) — ZWERYFIKOWANO
+Weryfikacja: ustawa o VAT (**Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym) — ZWERYFIKOWANO
 Definicja: Podatek od towarów i usług — podatek obrotowy nakładany na wartość
 dodaną na każdym etapie produkcji i dystrybucji.
-Podstawa: ustawa o VAT (**Dz.U. 2025 poz. 775 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
+Podstawa: ustawa o VAT (**Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
 Reguła: Podatnik VAT = podmiot wykonujący samodzielnie działalność gospodarczą
 (art. 15 ust. 1 uVAT). Forma prawna i cel nie są decydujące — liczy się samodzielność
 i regularne wykonywanie czynności opodatkowanych.

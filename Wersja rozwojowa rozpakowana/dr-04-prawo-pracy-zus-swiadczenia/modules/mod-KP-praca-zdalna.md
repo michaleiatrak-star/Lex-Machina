@@ -17,7 +17,7 @@
 ## ANEKS C — PRACA ZDALNA (art. 67⁵-67²⁴ KP)
 
 > Dodano do KP na mocy Dz.U. 2023 poz. 240 (wejście w życie 07.04.2023).
-> Weryfikuj aktualne brzmienie: Dz.U. 2025 poz. 277 t.j. ze zm.
+> Weryfikuj aktualne brzmienie: Dz.U. 2026 poz. 1245 t.j. ze zm.
 
 ### Podstawy prawne
 ```

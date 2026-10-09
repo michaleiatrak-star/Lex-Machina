@@ -19,7 +19,7 @@
 
 ### Weryfikacja online — ZAWSZE przed analizą:
 ```
-isap.sejm.gov.pl → Kodeks pracy (t.j. Dz.U. 2025 poz. 277) → art. 101¹ i 101²
+isap.sejm.gov.pl → Kodeks pracy (t.j. Dz.U. 2025 poz. 277 (obecny t.j. Dz.U. 2026 poz. 1245)) → art. 101¹ i 101²
 isap.sejm.gov.pl → Kodeks cywilny → art. 353¹, 483–484, 5 (zakaz B2B)
 isap.sejm.gov.pl → ustawa o zwalczaniu nieuczciwej konkurencji (UZNK)
 sn.pl → fraza "zakaz konkurencji" → aktualna linia orzecznicza

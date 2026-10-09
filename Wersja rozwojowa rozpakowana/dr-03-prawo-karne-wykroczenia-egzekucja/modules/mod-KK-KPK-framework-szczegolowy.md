@@ -209,7 +209,7 @@ REKOMENDACJA: □ Warunkowe umorzenie  □ Mediacja  □ Obrona na rozprawie  �
 | Przesłuchanie na rozprawie | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` + skill `przesluchanie-swiadkow-v2-min90` |
 | Stalking / nękanie jako przestępstwo | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 
-*KK (Dz.U. 2025 poz. 383 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2025 poz. 911)*
+*KK (Dz.U. 2025 poz. 383 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2026 poz. 1307 t.j.)*
 *Weryfikacja art. 178a i 190 KK: ELI (RZĄD 1) — zmiany nowelizacja 07.07.2022 (w życie 01.10.2023) i 14.03.2024*
 *Audyt: 21.05.2026 — błędy zagrożeń art. 178a §1 (2→3 lata) i art. 190 §1 (2→3 lata) NAPRAWIONE*
 *Weryfikacja: orzeczenia.ms.gov.pl, sn.pl*

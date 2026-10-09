@@ -94,7 +94,7 @@ DECYZJA:
 **Przykład (sprawa VII P 94/25):**
 
 ```
-PRZEPIS: art. 25¹ §3 KP (Dz.U. z 2025 r. poz. 277 t.j.)
+PRZEPIS: art. 25¹ §3 KP (Dz.U. 2026 poz. 1245 t.j.)
 PRZESŁANKA P1: zawarto co najmniej cztery umowy terminowe
 FAKT F-001: umowy nr 1-4 w aktach sprawy (D01)
 SUBSUMPCJA: F-001 ✅ spełnia P1 — 4 umowy wykazane dokumentarnie

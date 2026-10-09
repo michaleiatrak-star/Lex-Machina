@@ -343,7 +343,7 @@ nazwą urzędu. Naprawiono w mod-wyroby-medyczne.md, mod-PrFarm-prawo-farmaceuty
 Wykryte podczas przeglądu pokrycia "zawodów zaufania publicznego" (grupa a —
 zawody prawnicze: adwokat, radca prawny, notariusz, komornik, kurator sądowy).
 
-Dwa moduły dla jednej ustawy o komornikach sądowych (Dz.U. 2024 poz. 1458 t.j.):
+Dwa moduły dla jednej ustawy o komornikach sądowych (Dz.U. 2026 poz. 881 t.j.):
 - `dr-03/.../mod-ustawa-komornicy-sadowi.md` (39 linii, stub bez HARDGATE-equiv,
   MAPA-AKTOW cytował STARY t.j. Dz.U. 2023 poz. 1691)
 - `dr-12/.../mod-ustawa-komornicy-sadowi-zawod.md` (202 linie, pełny: intake,

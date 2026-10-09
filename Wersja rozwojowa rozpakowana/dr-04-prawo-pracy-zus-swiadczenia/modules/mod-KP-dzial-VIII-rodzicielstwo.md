@@ -9,7 +9,7 @@ rodzic.md"] było BŁĘDNYM ZMAPOWANIEM — tamten moduł dotyczy wyłącznie
 urlopach rodzicielskich.)
 
 > ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
-> Akt bazowy: KP, Dz.U. 2025 poz. 277 t.j.
+> Akt bazowy: KP, Dz.U. 2026 poz. 1245 t.j.
 
 **Rola w systemie:** KP Dział VIII (Uprawnienia pracowników związane z
 rodzicielstwem, art. 176-189¹) — obok już dobrze opracowanego Działu

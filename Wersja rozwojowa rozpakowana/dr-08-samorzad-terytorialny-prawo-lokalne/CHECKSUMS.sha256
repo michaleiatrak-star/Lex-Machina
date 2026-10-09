@@ -1,7 +1,7 @@
-0f11c658fee1b51ee72b079e92c64510df8e80e60e9248e69b2b8c175d97393c  ./MAPA-AKTOW.md
+7bfac459ebf315d0159ad9ae3c37e7075d1ba42cda7c3c34a41c227a5770bc29  ./MAPA-AKTOW.md
 2763701bd121dd6e70f1098ed71416e7d78852962b0289d7ec1db280fe520eae  ./MAPA-POKRYCIA.md
 5bb12ce059b79b514a3d11ba63efd201748c8e3a064a8f97bf576eace6a83782  ./PORTABILITY-MANIFEST.md
-89b1259e2e8ce7386414765479dc5e84a909b7567a9efb93d1c9a7cc53da3092  ./SKILL.md
+ad2cf92694655e024968bc005ed5e9cd8aa2c52998de1c4e8ca192095d84c69c  ./SKILL.md
 5681f9c71bd5ec9f182f0618b4a75d9711a50f1d57cb6788f5a98b5b4603e99b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4da06fd5ff6fe8ee90f423e87688d02caa64e4a5165b02567b656c93bf67f83  ./modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md
@@ -16,7 +16,7 @@ cd6a6747d79f319f28f8894f2c2fa29a659bf6e158aab0c196a61fccce08b942  ./modules/mod-
 eb12345930e1e5951c904a3b115f58a81a3852bd7cd99d4750a540197cfef50d  ./modules/mod-procedury-JST-statuty-regulaminy.md
 0eb33d5303c598c0181c7f96e607ba40463c9ee266434046d78d13cf64744b44  ./modules/mod-skargi-na-prawo-miejscowe-WSA-NSA.md
 e1f6cca563c6511e64b912d357d8e247580538c1f8fc2662b5689bff0ccfeae0  ./modules/mod-ustawa-dochody-JST.md
-c6d999a5cb375230522cb1dad3d6c13f8d8940d12992ffb7a8bc11e96622c41b  ./modules/mod-ustawa-komunalne-wod-kan-transport-czystosc.md
+0cb5038d594248389308cd68d240a867f861056e2fa8a718b26e83101cc99aea  ./modules/mod-ustawa-komunalne-wod-kan-transport-czystosc.md
 501c400ffda2d4a08157bdb5cd578eed2444a12d74b05f095c12498548d5f98b  ./modules/mod-ustawa-pracownicy-samorzadowi.md
 f7b792d7a30c379aeb091f345a982eff9cf16c9808e019514a38092ca40b2efd  ./modules/mod-ustawa-referendum-lokalne.md
 f82ae6a5e1caf7ea3b05787477f879f3a0dc549634d7762b6773a6040655f54e  ./modules/mod-ustawa-samorzad-powiatowy.md
@@ -24,4 +24,4 @@ a18e15e1ac8c6e62cbee58217dd5beec1701bbf682f92d950047bfa083872f78  ./modules/mod-
 aff6d1ee5b6b2d6b86c49d14a877c40fd919a014f2fb2b31d15d31e6940e42ff  ./modules/mod-ustawa-zabytki-rewitalizacja.md
 536b89773939cd2e9134f119913ca7482142587ed0cb7b80fa23754f49f88717  ./modules/mod-ustawa-zarzadzanie-kryzysowe.md
 a63b556d8c55c3c190dce944b8a4780f76c019ae0fc70fc2f396c853d37990ee  ./modules/mod-wojewoda-administracja-rzadowa-current-state-COV.md
-c7e55f98ede1eb710b6f5b84d8e7c403e6d7d0170210f2d50c72a2fe89c1ef82  ./references/CHANGELOG.md
+5f87419236ff2ac2dda169d1fcf770da3986ec8777edd04ba11c3442ee180d30  ./references/CHANGELOG.md

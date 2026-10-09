@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.48"
+version: "6.49"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.48 (2026-10-09): Routing błyskawiczny DR-01–DR-16: słownictwo laików i opisów spraw, frazy zbyt szerokie usunięte (top-1 DR na zestawie kontrolnym 64.4% → 85.0%).
+  Wersja bieżąca: 6.49 (2026-10-09): ROUTING-MAP: nowe t.j. z ELI (2026-10-09) — KP 2026/1245 (⛔ 2026/1046 od 5.11.2026), VAT 2026/1263 (⛔ 2026/507 od 14.10.2026), prawa konsumenta 2026/1244, mandat posła 2026/1282, ś
   Poprzednia: 6.46 (2026-10-07f): ROUTING-MAP — procedury i pełne korpusy PrUp (Dz.U. 2026 poz. 913) i PrRestr (Dz.U. 2026 poz. 533) z PR #85; wiersz zmian po t.j. (2026/1206 od 11.01.2027, 2026/176 od 18.02.2027); licencja doradcy restrukturyzacyjnego 2022/1007 potwierdzona w ELI jako najnowszy t.j.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---

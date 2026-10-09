@@ -17,7 +17,7 @@ UOKiK (Urząd Ochrony Konkurencji i Konsumentów), praktyki naruszające zbiorow
 | Akt | Dz.U. / źródło |
 |---|---|
 | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2025 poz. 1714 t.j. ze zm. |
-| Ustawa o prawach konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. |
+| Ustawa o prawach konsumenta | Dz.U. 2026 poz. 1244 t.j. ze zm. |
 | Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | KC art. 385¹–385³ | klauzule abuzywne | Dz.U. 2026 poz. 795 t.j. |
 | Dyrektywa Omnibus (2019/2161) | ceny promocyjne, opinie | wdrożona do prawa polskiego |
@@ -108,7 +108,7 @@ Rejestr klauzul niedozwolonych UOKiK:
 
 ```
 Obowiązek: przy promocji podawać najniższą cenę z 30 dni poprzedzających obniżkę
-  → art. 4a ustawy o prawach konsumenta (Dz.U. 2024 poz. 1796 t.j.)
+  → art. 4a ustawy o prawach konsumenta (Dz.U. 2026 poz. 1244 t.j.)
   ⚠️ Weryfikuj aktualne brzmienie w ELI (RZĄD 1)
 
 Naruszenie: kara UOKiK + roszczenie cywilne konsumenta

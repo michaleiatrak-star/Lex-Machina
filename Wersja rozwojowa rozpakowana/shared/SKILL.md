@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.23"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.24"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -50,7 +50,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.23 (2026-10-08): WERYFIKACJA-SLAD § STRIP-VER-GATE oznaczona lex:wykonuje-aplikacja: STRIP-VER (aplikacja Lex sama usuwa znaczniki z pliku pisma); treść reguły bez zmian
+  Wersja bieżąca: 3.99.24 (2026-10-09): DEF-PRACA, MOD-ELIMINACJA-TEZ, ORKA-BAS: KP t.j. Dz.U. 2026 poz. 1245 (⛔ art. 94³ w brzmieniu 2026/1046 od 5.11.2026); leksykon ORKA-BAS: VAT — adnotacja „obecny t.j. 2026/1263” (E
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)
   3.99.20 (2026-10-07): walidator_cytowan z PR #95 — zgodność po pełnym identyfikatorze (Dz.U. rok+pozycja/ELI/WDU, sygnatura całością, artykuł z § i kodeksem) zamiast samych liczb; domena po hoście, https także w result_urls (zgł. #89)

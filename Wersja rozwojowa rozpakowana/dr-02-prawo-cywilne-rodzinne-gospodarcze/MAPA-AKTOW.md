@@ -78,7 +78,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Prawa konsumenta | Dz.U. 2024 poz. 1796 t.j. ze zm. | `mod-ustawa-prawa-konsumenta` | 🟢 B+/COV |
+| Prawa konsumenta | Dz.U. 2026 poz. 1244 t.j. ze zm. | `mod-ustawa-prawa-konsumenta` | 🟢 B+/COV |
 | UOKiK | Dz.U. 2025 poz. 1714 t.j. ze zm. | `mod-ustawa-UOKIK-antymonopolowe` | 🟢 B+/COV |
 | Kredyt konsumencki / SKD | Dz.U. 2025 poz. 1362 t.j. ze zm. | `mod-ustawa-kredyt-konsumencki-SKD` | ✅ aktywny; fresh gate |
 | Parabanki / lombardy / lichwa | KC/KK + ustawa lombardowa Dz.U. 2024 poz. 1111 t.j. ze zm. + akty szczególne | `mod-parabanki-chwilowki-lombardy-lichwa.md` | ✅ aktywny; fresh gate |

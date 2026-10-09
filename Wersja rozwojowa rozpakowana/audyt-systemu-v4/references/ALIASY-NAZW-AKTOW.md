@@ -69,6 +69,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2026 poz. 191 | Ustawa o PCC | ustawa o podatku od czynności cywilnoprawnych | 2026-09-16d, RZĄD 1 (T31) |
 | Dz.U. 2024 poz. 1292 | Ustawa o ochronie zabytków | ustawa o ochronie zabytków i opiece nad zabytkami | 2026-09-16d, RZĄD 1 (T31) |
 | Dz.U. 2025 poz. 1208 | Ustawa o świadczeniach rodzinnych | ustawa o świadczeniach rodzinnych (wiersz złożony z „Za życiem") | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2026 poz. 1240 | Ustawa o świadczeniach rodzinnych | ustawa o świadczeniach rodzinnych (wiersz złożony z „Za życiem"; nowy t.j. z 1.09.2026) | 2026-10-09, RZĄD 1 (T31) |
 | Dz.U. 2023 poz. 1587 | Ustawa o odpadach | ustawa o odpadach (wiersz złożony z gospodarką komunalną) | 2026-09-16d, RZĄD 1 (T31) |
 
 ---

@@ -10,7 +10,7 @@
 > energetyczne, finansowe (kredyt konsumencki → łącz z J4).
 
 > ⛔ HARD GATE — przed podaniem art. ustawy o prawach konsumenta (PK), KC, terminów weryfikuj:
-> isap.sejm.gov.pl → ustawa z 30.05.2014 r. o prawach konsumenta (t.j. Dz.U. 2024 poz. 1796)
+> isap.sejm.gov.pl → ustawa z 30.05.2014 r. o prawach konsumenta (t.j. Dz.U. 2024 poz. 1796 (obecny t.j. Dz.U. 2026 poz. 1244))
 > isap.sejm.gov.pl → KC → art. 221 (definicja konsumenta), art. 385¹–385³ (klauzule abuzywne)
 > rejestr.uokik.gov.pl → numer wpisu dla każdej klauzuli niedozwolonej (zakaz cytowania z pamięci)
 > orzeczenia.ms.gov.pl → XVII AmC (SOKiK) — orzecznictwo abuzywne

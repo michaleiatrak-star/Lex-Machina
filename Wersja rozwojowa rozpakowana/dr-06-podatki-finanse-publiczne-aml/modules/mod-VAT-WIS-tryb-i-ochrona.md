@@ -1,6 +1,6 @@
 # Moduł — VAT: Wiążąca Informacja Stawkowa (WIS) — pełny tryb, moc wiążąca i ochronna, ważność, zmiana i wygaśnięcie (Dział VIII rozdz. 1a, art. 42a–42i)
 
-> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**.
+> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 >
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Opłaty, terminy i zakres
 > ochrony były wielokrotnie nowelizowane (m.in. SLIM VAT 3) — zweryfikuj
@@ -216,7 +216,7 @@
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (Dział VIII rozdz. 1a,
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) (Dział VIII rozdz. 1a,
   art. 42a-42i)
 RZĄD 1/2 — podatki.gov.pl (serwis MF, „Najważniejsze informacje o wniosku"):
   5-letni okres ważności, forma elektroniczna wniosku

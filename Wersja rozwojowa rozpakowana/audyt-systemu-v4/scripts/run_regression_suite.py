@@ -139,6 +139,10 @@ def main():
         ("T8", "T8 WYSOKI — Zakres tytuł-vs-treść", "test_title_scope_match.py", repo_args),
         ("T9", "T9 WYSOKI — Przeniesienia do shared", "test_moved_to_shared.py", repo_args),
         ("T11", "T11 WYSOKI — Synchronizacja aktów", "check_sync_aktow.py", repo_args + ["--limit", "10"]),
+        # AUDYT-2026-10-09: T15 (ELI, sieć) nie był w zestawie — 17 map wskazywało t.j.,
+        # które ELI oznacza „wygaśnięcie aktu”, i żaden test zestawu tego nie zgłosił.
+        # Bez sieci kod 2 (BŁĄD, nie blocker): wynik do przejrzenia, nie pusty sukces.
+        ("T15", "T15 WYSOKI — aktualność t.j. w mapach aktów (Sejm ELI, sieć)", "audit_tj_inventory.py", ["--root", str(root), "--mode", "maps"]),
         ("T12", "T12 ŚREDNI — Zgodność wersji/changelogu", "check_wersje_changelog.py", [str(root)]),
         ("T13", "T13 ŚREDNI — Długość modułów", "check_dlugosc_modulow.py", [str(root)]),
         ("T14", "T14 KRYTYCZNY — description ≤200", "check_description.py", [str(root)]),

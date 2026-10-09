@@ -1,6 +1,6 @@
 94eb8d671ce15fc4ae0671df2499ca350f8dcc90e9f151e8d1b22a14de2cb463  ./NOTICE
 532165db1bcdc6a9634490d21847bb93a4f1596436b397287344d820e5beeec1  ./PORTABILITY-MANIFEST.md
-a287731fc5a6282553b09be42713607cee96057e7c53c993a119d9256d8dd9eb  ./SKILL.md
+cd332cf147d8c9b5c503f5e5a76e54196808b357f237eac7041953f31f6c88ee  ./SKILL.md
 a8894e5463f321487a6233c1b9b10f5caea8ac2a2b8a9deb9824ae245d237348  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
 f5adb2b1988ebfd743378091125076b20a5677ea2b478b3cb37d4f695541b082  ./benchmark/posiane-wady/README.md
@@ -12,7 +12,7 @@ ad7d21631521a47e2ba0285b4c88f1b0c2e56e63bd474b48bb86b1f1e72f8c89  ./benchmark/po
 5ffe95913b7d3e04e16c489c5fd9d712049eb527ecf29af2f9379ddbb048c2bb  ./benchmark/posiane-wady/umowy/04-matematyczna-tm.md
 26b46fbccbeaf79ae5be06a49314332f9a80e482ad2684739f4889121a60fce1  ./benchmark/posiane-wady/umowy/05-adwersarialne-injection.md
 70b200f4c7a85436d8d146204a71cda11c2ceb8ca2d0add25fd4dd1716bd7251  ./benchmark/posiane-wady/wyniki/oceny/README.md
-5aeb41936b42507296449426388356ad1e3c363f3622c39c12ee6841ea107afc  ./references/CHANGELOG.md
+0232af4b6a7e40e5aad146fcaebbf4ea7e3f4f6c9cdc3d7bad78eb03bdbcb40d  ./references/CHANGELOG.md
 d8d6b296b3e0947ee81567992924b24508479a332758315f2078b40a555eb2c8  ./references/HISTORIA-ZMIAN-PLIKOW.md
 93dc21293d084a931cbb4282fe68e4ec9a8fd36b1c5ed6d124f1266fda8b0a1c  ./references/b2b-podwykonawcze.md
 41e7a97f2c301f10047726ecb0db6fb299031235548f6d6951871d62b4c72f68  ./references/generator/boilerplate-strukturalne.md
@@ -27,13 +27,13 @@ f6f9ad6efb318ef5e599ddd850f7f791146790d5d7e8cf54c05b14aa43f3ed2f  ./references/m
 66c252c5b506619ae710fd05c3b99e0791e46ec0e40aed2dcd75bb08d2cbf498  ./references/mod-J1-najem.md
 66b844cb7575d5520f300071aec758ad737bdc3c9fb77d5ea531814ac0ad7478  ./references/mod-J10-ubezpieczenia.md
 4909ccd46e23942ea15c4305019d752ad12063c53aebe991bf64ade25521514d  ./references/mod-J2-nieruchomosci.md
-5ff61defd6982017c46c8e997187392f1b369cabf55ceb0020e776a463872daa  ./references/mod-J21-rodo-archiwizacja-regulaminy.md
+7437de2a6dc45f55877913886da6862b43ee763129ddcf8749ba3b3b3aef7406  ./references/mod-J21-rodo-archiwizacja-regulaminy.md
 8e9bc3f2134759f4b2120787553bdce7cd58bd1120b4647dcb2a23f4fa057e58  ./references/mod-J3-dystrybucja.md
 25fcd0fb74282502e4a9527519391793555a73a9f4d9027089766bc6aa47fbad  ./references/mod-J4-finansowanie.md
 808e03ef1dda2ee6433a7d4002d8717e0909d7f52683f4d4b1ad27b7ae2802a8  ./references/mod-J5-umowy-wykonawcze.md
 b3837bbe733d8cfbabac520cca199622626b0b0c945b7edf7260ee249d2d9fd7  ./references/mod-J6-it-konsorcjum.md
 0cee0b99f40168579ef85bcfee70ceb1fb66696f92ae8dd93117f57d0ca6424c  ./references/mod-J7-pzp.md
-c2f441a2eee21c8cab120c07aa281422274eb2241525895f5fe2300c2b60b41a  ./references/mod-J8-b2c.md
+a619c4fe31cf3394c16053c9b676aa54563a0766fe58485dbe9636be44760968  ./references/mod-J8-b2c.md
 a90e87c94956729b7a6eb663ec65edfc8af48d305179d56c550b49cb74283421  ./references/mod-J9-ip-prawa-autorskie.md
 b938a5196b8439e86886303724b1f1efa6a1a79b9928f86879fd6a5477e19b9a  ./references/mod-MA-transakcje.md
 6a5d3195a383d832f652707246b4ccdc7b29ebc5c5abb9a240ade4f4ff7f4d23  ./references/mod-core-checklist.md
@@ -61,7 +61,7 @@ a906e3d16b70e7e0f6859feb8d1189cffdec7cd2c8849c3c6fae7ceb3a80f79c  ./references/m
 3dcfafc6664be8f2d03ca80db24ff15ee77be575cc4ae4f88a2803d24cc64052  ./references/poufnosc-nda.md
 38c6be5220f9a7a151f058dffbd8a332ac462ffc0308f1a0189e0cd34f10b3ae  ./references/szukaj_klauzul_uokik.py
 cfd1d41556f8269fea781e5db9f79833137f1e924641c5578b1bc3d0ddbcc4e2  ./references/umowy-o-prace.md
-61b4f2d19ba922493d2b07efe8de1a54216745104c56a934d73fe668998584f3  ./references/zakaz-konkurencji.md
+d58d7175525b8a3e72e97be3325b1a993e80485786047c0671c15ea656431a54  ./references/zakaz-konkurencji.md
 975c58a2248f13ce8d3ba66b4e39d8d7277194c6e04ddc8d0cfa914e5e33116b  ./workflows/generator-dokumentow-hr-rodo.md
 9e668b4fcfc18c00cc0140e842e276a796373def37ce14843dbc2d3138ad7a00  ./workflows/generator-dokumentow-korporacyjnych.md
 0428b16faec0aa4c3ecee1e21bfd6a356799b93fa6404154aa1b176989e30439  ./workflows/generator-regulaminu.md

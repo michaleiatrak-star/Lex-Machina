@@ -1,6 +1,6 @@
 # Moduł — VAT: import towarów — wymiar i pobór (Dział VII, art. 33–40), procedura uproszczona art. 33a, miejsce świadczenia przy imporcie (art. 26a), zwolnienia z tytułu importu (Dział VIII rozdz. 3, art. 45–82a)
 
-> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2025 poz. 775**.
+> **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 > ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026), 846.
 >
 > ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
@@ -305,7 +305,7 @@
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (struktura Działu VII
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) (struktura Działu VII
   i Działu VIII rozdz. 3 potwierdzona)
 RZĄD 2 — lexlege.pl / przepisy.gofin.pl (zakresy artykułów, brzmienie
   art. 45, 51, 52)

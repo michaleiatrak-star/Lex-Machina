@@ -10,8 +10,8 @@ source_policy: "RZĄD 1 only"
 
 ## 1. Źródło
 
-Kodeks karny wykonawczy — **Dz.U. 2025 poz. 911 t.j.**, stan prawny t.j.
-04.06.2025. ELI wskazuje późniejszą nowelizację; przed powołaniem jednostki
+Kodeks karny wykonawczy — **Dz.U. 2026 poz. 1307 t.j.** (poprzedni t.j. 2025/911), stan prawny t.j.
+2.09.2026, obejmuje nowelizację 2025/1423 (✅ [VER] RZĄD 1 2026-10-09). Przed powołaniem jednostki
 odczytaj aktualny tekst ujednolicony.
 
 - https://eli.gov.pl/eli/DU/2025/911/ogl

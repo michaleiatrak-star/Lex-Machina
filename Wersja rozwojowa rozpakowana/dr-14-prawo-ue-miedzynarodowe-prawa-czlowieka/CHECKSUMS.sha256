@@ -1,13 +1,13 @@
-6890df87ea195c47d9ba9a5649fa662fe5d18952dcda4f3bbc563aaf46682a37  ./MAPA-AKTOW.md
+a13baa158e1865b18bca739ca5ef512c8066288c102b599b444ab8bc4bb69c97  ./MAPA-AKTOW.md
 afc080fa6c163b25960985dc80c541245402958855d3ac853835e9640037f01d  ./MAPA-POKRYCIA.md
 433b720250fe97d5e9dd1f0db7ce7a1bb464a4de16c6e9b8fe4fc16e2396a083  ./PORTABILITY-MANIFEST.md
-27d476ec76410857928d54f3a10afd01ffd2446a68e45b0dc7be375d4cc6e215  ./SKILL.md
+984f7d54ff0db292d0835f60648b9d37d99c0b225d8d26c66243396f8b7c1f53  ./SKILL.md
 674c95294d72b9adf311234a798c639d004bd5e0fdcaacbcd912be772e223a2e  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 b5caba60082a311151beb50575b9b13880f70a87d9bf278e79b9a75b43a6c630  ./modules/mod-EKPC-ETPC-prawa-czlowieka.md
 14b5a0a0c1e61757bf8117fdf9bc09d6d67f9d8170714ea87cb64afcf03bb2d8  ./modules/mod-KPC-egzekucja-transgraniczna-UE.md
 3f1b4d928870c02555a4c218e6538251ebc181a3a211fe34e47bf45425dde5cd  ./modules/mod-KPP-karta-praw-podstawowych-UE.md
-225bd8df6291ac8b86817ff62afe3c5417f3c40da756076d03bda7acc22fb383  ./modules/mod-NATO-umowy-miedzynarodowe.md
+eaaa5f8fa4609bbb138fa036853fd3248df14cd99990ecde2042e0c0642ca864  ./modules/mod-NATO-umowy-miedzynarodowe.md
 e170362314e5c120a158e4a2e465843ce63671028df0d79ca2b48cb0e41a41fb  ./modules/mod-ONZ-pakty-prawa-czlowieka.md
 d42e183500ab3c6023fd29be59858e9500e660e4d144b07d7d19a318a253404c  ./modules/mod-PMPP-prawo-prywatne-miedzynarodowe.md
 03663a7fa33df05363fe5a85ee9fca9f29be807708b78f389d529d409545c52b  ./modules/mod-TFUE-TUE-prawo-pierwotne-UE.md
@@ -16,4 +16,4 @@ f71a5f7c5c783bb78979d8db494314383a7537499eb53ef34d6cf484af196e01  ./modules/mod-
 70beba420b8669cfbef88a7e7e118e3f2a3417d22c4d6f7e0a1f9c78ed3de4c8  ./modules/mod-konwencje-wiedenskie-dyplomatyczne-konsularne.md
 5c02c655d2125482abd6453bb434c3ca3903c4ff254b1c00e06fbb709d8776ad  ./modules/mod-maly-ruch-graniczny.md
 3a5e8d52977c413bbdcd356c0d0614dd01c44d7181bb64c46c6770acf03fbab9  ./modules/mod-rejestr-zrodla-prawa-lifecycle.md
-91d6b99f1940d916a3a6890d3318e62b00b728de07b74516351a8c2fed3e0c72  ./references/CHANGELOG.md
+a9ed82a9c57d05424d27fcd69e8ff5d6555aecae28cf39b47953b285709faeed  ./references/CHANGELOG.md

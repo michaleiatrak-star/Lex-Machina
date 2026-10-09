@@ -1,7 +1,7 @@
 d44ae03b5818f12408a185f6189e5b044a83d0186353093b2119cd377a0339c2  ./MAPA-AKTOW.md
 346b51beaec59e5775c6a634a8390cfb0d55d01ee64027be16d54f2f4598d82e  ./MAPA-POKRYCIA.md
 a808237feda76fe62f698fa05077021474124d22b033504d5c34a649534077fd  ./PORTABILITY-MANIFEST.md
-15e7801a2fa06432b56a3da5e2aace328fdc01009979b9dc4938c9a7fc1f8005  ./SKILL.md
+4574463657e403071dd3c67abea2e13662cb48ff18627242f598b921a6ab5295  ./SKILL.md
 baecf8aed4d2ca051e8212f1e45ad5dc19ad072d16f130d24009bd3e8404214b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4440cd21b5b3b68d8b64601f5c5434a4f9e1b4751dd49412e1e124f086a2120  ./modules/kpa-tryby-nadzwyczajne/czesc-01-tryby-nadzwyczajne.md
@@ -27,7 +27,7 @@ d8bf28d02841b97c750b4c1062abf6098b6bcd3571a49c476aa5d02ad7a05361  ./modules/mod-
 36193062081e10a9e133e38824d4e75642870ab8138fbce0d4b4b8b64d32c507  ./modules/mod-ustawa-RPO.md
 fc50453d8ca5525250a2048c1ad17ba5256831f29b4a92388a7cfa2884cd1de6  ./modules/mod-ustawa-SKO.md
 1fbda94bd61c83a0f049ad7965e8952c7c4ed31e84d64b02af299759101c9b1d  ./modules/mod-ustawa-cudzoziemcy-zatrudnianie.md
-4586a66b65e9b594d08e25872170ae4dd5b05951b9e29fbbb3360cf85ae7d937  ./modules/mod-ustawa-cudzoziemcy.md
+c2b4d2195d01866e60c594634319ef6c4aa83b31e31bb88adc930d76f7b17daa  ./modules/mod-ustawa-cudzoziemcy.md
 1c121bf7efac4b4618d6f5ccbcc6d9df6080afb419ad84509d97fee5c5deb0dd  ./modules/mod-ustawa-dostepnosc-niepelnosprawni.md
 0e92bb95fa8ba26b83faf856e0a0f2b4c44b2f29c641d88e243c5cb0be2de0e5  ./modules/mod-ustawa-kontrola-administracji.md
 ec38358ff5b4a97da77e8626b92f63f9d79acab1854ab55973b9329902a3b861  ./modules/mod-ustawa-petycje.md
@@ -35,4 +35,4 @@ ec38358ff5b4a97da77e8626b92f63f9d79acab1854ab55973b9329902a3b861  ./modules/mod-
 0a4f7d990649346529a549a9532ca5ab40c1576c4d4c8ac936ba67af1a40f52e  ./modules/mod-ustawa-sygnalisci.md
 b06340e18a2ab4ee4dc8d92b5baa2f634ba53799f9e115ac31cd5e8636bf8ce3  ./modules/mod-ustawa-wojewoda-administracja-rzadowa.md
 603bd4d238a8b56d93b2c7651fcb7cc1548c6020d3fab44cc01c62ad66592deb  ./modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md
-0db3274baa4ac9e040c7b710152241df991a04089161cae48ee4c133f70436ac  ./references/CHANGELOG.md
+07fcd2f6a055cd8e0fe28cdf557b0f26110fe466da77d0b52880d31e9c35745b  ./references/CHANGELOG.md

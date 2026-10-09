@@ -2,7 +2,7 @@
 
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
-**Źródło kanoniczne:** ELI, Dz.U. 2025 poz. 911, stan prawny tekstu jednolitego 04.06.2025, z późniejszymi zmianami.
+**Źródło kanoniczne:** ELI, Dz.U. 2026 poz. 1307, stan prawny tekstu jednolitego 2.09.2026 (obejmuje 2025/1423). ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane)
 
 ## Struktura current-state
 
@@ -37,7 +37,7 @@ W każdej sprawie wykonawczej ustal:
 
 ## Temporal gate
 
-ELI wskazuje nowelizację po t.j. Dz.U. 2025 poz. 911. Przed użyciem terminu, przesłanki, właściwości organu lub sposobu wykonania pobierz aktualny tekst ujednolicony i sprawdź przepisy przejściowe.
+Nowelizacja po t.j. 2025/911 (Dz.U. 2025 poz. 1423) jest już w t.j. Dz.U. 2026 poz. 1307. Przed użyciem terminu, przesłanki, właściwości organu lub sposobu wykonania pobierz aktualny tekst ujednolicony i sprawdź przepisy przejściowe.
 
 ## Quality gate
 - [ ] ustalono rodzaj wykonywanego orzeczenia;
