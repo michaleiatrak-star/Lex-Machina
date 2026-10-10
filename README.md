@@ -466,6 +466,8 @@ Kolejność wgrywania:
 
 `#<TAG>` przypina katalog do wydania skilli; bez niego instalujesz bieżący `main` (HEAD).
 Zależności (`shared`, DR-01–DR-16, skille wykonawcze) instalują się razem z routerem.
+Pole `dependencies` w `marketplace.json` wymaga aktualnego Claude Code CLI (zweryfikowano na 2.1.296; starsze wersje zgłaszają `Unrecognized key 'dependencies'` — zaktualizuj CLI).
+Wersja stabilna nie ma manifestów wtyczek — instaluje się ją, kopiując foldery skilli.
 </details>
 
 <details>
