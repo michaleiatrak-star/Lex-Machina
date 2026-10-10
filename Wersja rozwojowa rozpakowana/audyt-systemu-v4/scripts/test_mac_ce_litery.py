@@ -53,6 +53,52 @@ def wczytaj_modul(sciezka, nazwa):
     return mod
 
 
+def klasa_znakow(wzorzec):
+    """Zbiór znaków prostej klasy „[...]” (markery, diakrytyki); None, gdy to nie klasa."""
+    m = re.fullmatch(r"\[([^\]\\]+)\]", wzorzec)
+    return set(m.group(1)) if m else None
+
+
+def porownaj_wzorce_js(src, wzorce_py, mow):
+    """2026-10-10 (audyt mutacyjny): wcześniej pkt 4 sprawdzał tylko OBECNOŚĆ nazw
+    `MARKERY_MAC_CE`/`PAGINA_2000_2009` w JS — zawężenie markerów w JS do `[¢]` przechodziło.
+    Teraz treść wzorców JS musi być identyczna z pythonową (markery i diakrytyki jako zbiory
+    znaków, pagina — dosłownie, z flagą `m`)."""
+    bledy = []
+    # Wszystkie pythonowe implementacje muszą być zgodne także między sobą.
+    for klucz, per_plik in wzorce_py.items():
+        if len({rx.pattern for rx in per_plik.values()}) > 1:
+            bledy.append("PY: wzorce {} różnią się między plikami: {}".format(klucz, sorted(per_plik)))
+    py = {k: next(iter(v.values())) for k, v in wzorce_py.items() if v}
+    for klucz, stala in (("markery", "MARKERY_MAC_CE"), ("diakrytyki", "DIAKRYTYKI_PL"),
+                         ("pagina", "PAGINA_2000_2009")):
+        m = re.search(r"const " + stala + r" = /(.+)/([a-z]*);", src)
+        if not m:
+            bledy.append("JS: nie znaleziono literału {} w postaci `const {} = /…/;`".format(stala, stala))
+            continue
+        if klucz not in py:
+            continue
+        zrodlo, flagi = m.group(1), m.group(2)
+        if klucz == "pagina":
+            if zrodlo != py[klucz].pattern or "m" not in flagi:
+                bledy.append("JS: PAGINA_2000_2009 różni się od wzorca pythonowego")
+        elif klasa_znakow(zrodlo) != klasa_znakow(py[klucz].pattern):
+            bledy.append("JS: {} = {} ≠ Python {}".format(stala, zrodlo, py[klucz].pattern))
+    # Każdy inny literał klasy z flagą /g (kopia markerów w zepsuteMacCE, klasa wszystkich
+    # znaków Mac CE w podmianie) musi być równy markerom albo pełnej mapie z kodeków.
+    if "markery" in py:
+        wz = klasa_znakow(py["markery"].pattern)
+        pelna = set(mapa_z_kodekow())
+        for lit in re.findall(r"/(\[[^\]/]+\])/g", src):
+            zn = klasa_znakow(lit)
+            if zn and zn & pelna and zn not in (wz, pelna):
+                bledy.append("JS: literał {} nie jest ani klasą markerów {}, ani pełną mapą Mac CE".format(
+                    lit, py["markery"].pattern))
+    if not bledy:
+        mow("  serwer MCP (JS): markery, diakrytyki i pagina zgodne z Pythonem")
+    return bledy
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo-root", default=".")
@@ -70,6 +116,9 @@ def main():
     if len(wzorcowa) != 16:
         bledy.append("mapa z kodeków ma {} pozycji, oczekiwano 16".format(len(wzorcowa)))
 
+    # Wzorce strony pythonowej do porównania z JS (pkt 4): {nazwa: {plik: pattern}}.
+    wzorce_py = {"markery": {}, "diakrytyki": {}, "pagina": {}}
+
     # 1 + 2 + 3: strona pythonowa
     for plik, nazwa in (("scripts/napraw_tekst_dzu.py", "konwerter"),
                         ("scripts/check_wyjatek_gate_eli.py", "gate_eli")):
@@ -82,6 +131,14 @@ def main():
         except Exception as exc:                   # noqa: BLE001
             bledy.append("{}: nie importuje się ({})".format(plik, exc))
             continue
+        for klucz, attrs in (("markery", ("_MARKERY_MAC_CE", "_MARKERY")),
+                             ("diakrytyki", ("_DIAKRYTYKI_PL",)),
+                             ("pagina", ("_PAGINA_2000_2009", "_PAGINA"))):
+            rx = next((getattr(mod, x) for x in attrs if getattr(mod, x, None) is not None), None)
+            if rx is None:
+                bledy.append("{}: brak wzorca {} ({})".format(plik, klucz, "/".join(attrs)))
+            else:
+                wzorce_py[klucz][plik] = rx
         mapa = getattr(mod, "MAC_CE_NA_PL", None)
         if mapa != wzorcowa:
             bledy.append("{}: MAC_CE_NA_PL != mapa z kodeków (brakuje {}, nadmiarowe {})".format(
@@ -163,6 +220,7 @@ def main():
                            ("naprawMacCEDokument", "propagacja rozpoznania w dokumencie")):
             if frag not in src:
                 bledy.append("JS: brak {} ({})".format(frag, opis))
+        bledy += porownaj_wzorce_js(src, wzorce_py, mow)
 
     print()
     if bledy:
