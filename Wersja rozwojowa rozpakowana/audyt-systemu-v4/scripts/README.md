@@ -62,6 +62,11 @@ Dz.U. z audytu 2026-08-28. Jest uruchamiany przez
 `run_regression_suite.py` (z `--repo-root`) i jego FAIL jest blockerem strukturalnym.
 Wiersze Dz.U. sprawdza w najnowszej `references/mapa_dzu_RRRR-MM-DD.md` (od 2026-10-10).
 
+## _lex_common.py — wspólne narzędzia (import, nie test)
+
+Graf odwołań T43/T44 (`RefGraph`, indeks odwrotny nazwa pliku -> źródła) i inwentarz
+modułów T1/T2/T13 (`module_files`: `modules/**`, także bez prefiksu `mod-`). Od 2026-10-10.
+
 ## check_sieroty.py — T43 sieroty (pliki bez ścieżki wywołania)
 
 Dodany 2026-10-04b (AUDYT-2026-10-04b, F-225). Dla każdego pliku każdego skilla

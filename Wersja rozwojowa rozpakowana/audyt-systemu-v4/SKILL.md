@@ -62,6 +62,7 @@ scripts:
   - scripts/napraw_tekst_dzu.py
   - scripts/check_osiagalnosc_shared.py
   - scripts/check_sieroty.py
+  - scripts/_lex_common.py
   - scripts/check_limit_plikow.py
   - scripts/check_tabele_satelickie.py
   - scripts/check_podmiana_aktu.py
