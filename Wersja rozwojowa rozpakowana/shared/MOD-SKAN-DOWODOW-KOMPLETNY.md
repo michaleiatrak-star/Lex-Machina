@@ -58,7 +58,9 @@ WYKRYJ w treści wiadomości użytkownika SŁOWA KLUCZOWE sugerujące załączni
   "protokół" / "wyrok" / "pismo" (bez wyraźnego cytowania treści w wiadomości)
 
 SPRAWDŹ: czy w bieżącej wiadomości faktycznie istnieje plik do odczytania?
-  TEST 1: czy w uploads/ jest plik?  → bash: ls -la /mnt/user-data/uploads/ 2>/dev/null
+  TEST 1: czy w katalogu załączników hosta jest plik?  → natywny listing plików hosta
+          (claude.ai: bash: ls -la /mnt/user-data/uploads/ 2>/dev/null;
+          UNIVERSAL-RUNTIME-ADAPTER §4)
   TEST 2: czy w kontekście jest blok <uploaded_files> z ścieżkami plików?
   TEST 3: czy użytkownik wkleił treść dokumentu bezpośrednio w wiadomości?
 
@@ -88,7 +90,8 @@ WYNIK:
 ⛔ HARD GATE: Nie przystępuj do analizy żadnego pliku bez wykonania SD-INW.
 
 KROK SD-INW.1 — Zidentyfikuj WSZYSTKIE pliki dostępne do analizy:
-  Źródło A: /mnt/user-data/uploads/ → bash: ls -la /mnt/user-data/uploads/
+  Źródło A: katalog załączników hosta → natywny listing plików
+            (claude.ai: bash: ls -la /mnt/user-data/uploads/)
   Źródło B: bloki <uploaded_files> w kontekście
   Źródło C: treść wklejona przez użytkownika
 

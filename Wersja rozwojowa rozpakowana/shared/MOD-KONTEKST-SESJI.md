@@ -44,8 +44,10 @@ NIE GENERUJ gdy:
 
 ## 2. Format pliku kontekstu (.md)
 
-Plik generowany przez `bash_tool` (create_file) do `/mnt/user-data/outputs/`,
-następnie udostępniany przez `present_files`. Format: czytelny dla człowieka
+Plik generowany przez `bash_tool` (create_file) do katalogu wyjściowego hosta
+(na claude.ai: `/mnt/user-data/outputs/`; inny host — natywny mechanizm plików,
+`shared/UNIVERSAL-RUNTIME-ADAPTER.md` §4), następnie udostępniany przez
+`present_files` lub odpowiednik hosta. Format: czytelny dla człowieka
 AND przetwarzalny przez model przy wklejeniu w kolejnej sesji.
 
 ```markdown
@@ -187,7 +189,8 @@ KROK E2 — Wypełnij szablon §2 danymi z KROK E1.
 
 KROK E3 — Utwórz plik:
   Nazwa pliku: kontekst-sesji-[YYYY-MM-DD]-[skrót_sprawy].md
-  Ścieżka: /mnt/user-data/outputs/
+  Ścieżka: katalog wyjściowy hosta (claude.ai: /mnt/user-data/outputs/;
+    UNIVERSAL-RUNTIME-ADAPTER §4)
   Narzędzie: bash_tool (cat > ... << 'EOF') — NIE create_file (może już
     istnieć z wcześniejszej sesji tego dnia).
 

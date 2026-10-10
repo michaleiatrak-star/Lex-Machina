@@ -263,7 +263,8 @@ System automatycznie wczyta stan i wznowi od P[i+1].
 
 KROK PD4.1 — Wypełnij checkpoint danymi z STAN_PARTII (PD3.3).
 KROK PD4.2 — Zapisz jako plik przez bash_tool / create_file:
-  Ścieżka: /mnt/user-data/outputs/checkpoint-P[i]-[sygnatura].md
+  Ścieżka: [katalog wyjściowy hosta]/checkpoint-P[i]-[sygnatura].md
+    (claude.ai: /mnt/user-data/outputs/; UNIVERSAL-RUNTIME-ADAPTER §4)
 KROK PD4.3 — present_files checkpoint.
 KROK PD4.4 — Wyświetl instrukcję:
   "📋 Checkpoint P[i] gotowy. W następnej wiadomości:

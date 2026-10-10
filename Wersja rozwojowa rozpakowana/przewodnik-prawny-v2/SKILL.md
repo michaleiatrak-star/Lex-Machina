@@ -487,7 +487,8 @@ Brak dokumentów:
 ### D.4 Po wygenerowaniu pisma
 
 ```
-1. Dostarcz pismo przez docx-skill → cp do /mnt/user-data/outputs/ → present_files
+1. Dostarcz pismo przez docx-skill → zapisz w katalogu wyjściowym hosta
+   (claude.ai: /mnt/user-data/outputs/; UNIVERSAL-RUNTIME-ADAPTER §4) → present_files lub odpowiednik hosta
 2. LAIK — instrukcja złożenia:
    "Oto gotowe pismo. Teraz:
    📌 Wydrukuj [X] egzemplarzy

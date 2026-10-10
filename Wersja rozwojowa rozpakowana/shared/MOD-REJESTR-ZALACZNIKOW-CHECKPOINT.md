@@ -46,7 +46,8 @@ gdy użytkownik o to wprost zapytał.
 KROK RZ.1 — Zidentyfikuj WSZYSTKIE pliki, tak jak w SD-INW.1
   (uploads/, <uploaded_files>, wklejona treść) — w tym zawartość
   KAŻDEGO zip/archiwum, także zagnieżdżonego (zip w zip).
-  bash: ls -la /mnt/user-data/uploads/
+  listing katalogu załączników hosta (claude.ai: bash: ls -la /mnt/user-data/uploads/;
+    UNIVERSAL-RUNTIME-ADAPTER §4)
   bash: unzip -l plik.zip  (rekurencyjnie dla zip-w-zip)
 
 KROK RZ.2 — Zbuduj tabelę RZ-REJ z KOLUMNAMI:

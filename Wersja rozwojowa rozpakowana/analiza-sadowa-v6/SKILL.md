@@ -380,7 +380,8 @@ V10-6 JUDICIAL CREDIBILITY SIMULATION
 >   — oznaczyć fakt jako NIEZWERYFIKOWANY i obniżyć poziom pewności do WĄTPLIWY.
 >
 > FORMAT OBOWIĄZKOWY przed każdym krokiem W:
->   [view: /mnt/user-data/uploads/{plik}, strony {X}-{Y}]
+>   [view: {katalog załączników hosta}/{plik}, strony {X}-{Y}]
+>   (claude.ai: /mnt/user-data/uploads/; UNIVERSAL-RUNTIME-ADAPTER §4)
 >   → co odczytano / potwierdzono / skorygowano
 
 ```
@@ -493,7 +494,8 @@ P7. KOMPLETNOŚĆ SZEREGU  (RATE-COMPLETENESS, dodane 2026-08-23 — F-109)
 >   jest bezwzględnie zakazane. Identyczne konsekwencje jak w Weryfikacji Pierwszej.
 >
 > FORMAT OBOWIĄZKOWY przed każdym krokiem O:
->   [view: /mnt/user-data/uploads/{plik}, strony {X}-{Y}]
+>   [view: {katalog załączników hosta}/{plik}, strony {X}-{Y}]
+>   (claude.ai: /mnt/user-data/uploads/; UNIVERSAL-RUNTIME-ADAPTER §4)
 >   → co odczytano / potwierdzono / skorygowano
 
 ```
