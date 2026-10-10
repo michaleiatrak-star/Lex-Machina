@@ -1,11 +1,12 @@
 /**
  * sn-captcha-auto.mjs — przejście weryfikacji sn.pl (Incapsula) i zapis sesji dla konektora SN.
  *
- * 1.5.0 (audyt 6.202, 2026-10-06) — BEZ PŁATNYCH USŁUG. Zamiast 2captcha:
- *  1. Playwright bez okna (headless) — przechodzi samo wyzwanie JS Incapsuli, w budżecie wywołania;
- *  2. gdy sn.pl pokazuje widżet (reCAPTCHA/hCaptcha/Turnstile) albo tryb bez okna nie przeszedł —
- *     WIDOCZNE okno przeglądarki, w którym weryfikację przechodzi użytkownik. Okno działa w tle
- *     (wywołanie MCP wraca od razu — klient ma limit 60 s), sesja zapisuje się sama po przejściu.
+ * 1.6.0 (audyt 6.218, 2026-10-10) — tylko człowiek przechodzi weryfikację: WIDOCZNE okno
+ *  przeglądarki (Playwright, bez trybu bez okna, bez maskowania automatyzacji i bez podmiany UA).
+ *  Automatyczne przechodzenie wyzwania Incapsuli bez udziału użytkownika (1.5.0, tryb headless)
+ *  usunięte: to obchodzenie zabezpieczenia serwisu (shared/DOSTEP-MASZYNOWY-API.md §0).
+ *  Okno działa w tle (wywołanie MCP wraca od razu — klient ma limit 60 s), sesja zapisuje się sama
+ *  po przejściu; zapisany User-Agent to faktyczny UA tej przeglądarki.
  * Przejście weryfikacji potwierdza SONDA: zapytanie snproxy z wnętrza strony musi zwrócić JSON.
  * (1.4.0 uznawała za sukces samą obecność ciasteczek incap_ses/visid_incap, które Incapsula
  * ustawia już na stronie wyzwania — zapisywała sesję, która nie przechodziła.)
@@ -13,20 +14,17 @@
  * Env:
  *   SN_CAPTCHA_AUTO=1          automat przy każdej blokadzie w sn_sprawdz_sygnature/sn_szukaj/sn_pobierz
  *   SN_SESSION_FILE=ścieżka    domyślnie ~/.lex-machina/sn-session.json (poza katalogiem pluginu)
- *   SN_CAPTCHA_HEADLESS=0      pomiń próbę bez okna, od razu okno widoczne
  *   SN_CAPTCHA_RECZNIE=0       nie otwieraj okna widocznego (np. serwer bez ekranu)
- *   SN_CAPTCHA_TIMEOUT_MS      limit próby bez okna (domyślnie 35000, przycinany do budżetu wywołania)
  *   SN_CAPTCHA_RECZNIE_MS      czas na weryfikację w oknie (domyślnie 300000)
  * Wymaga (opcjonalnie): npm i playwright && npx playwright install chromium — w katalogu mcp-servers.
  */
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { pozostalyBudzet } from "../wspolne/budzet.mjs";
 
 const START = "https://www.sn.pl/pl/wyszukiwarka-orzeczen";
-const DEFAULT_UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36";
+// UA ręcznie przekazanej sesji, gdy użytkownik nie podał własnego (uczciwy identyfikator klienta).
+const DEFAULT_UA = "LexMachina-MCP/1.6 (+https://github.com/michaleiatrak-star/Lex-Machina)";
 /** Sondy snproxy (względne — wykonywane z wnętrza strony sn.pl). Obie ścieżki: wynik mówi, która działa. */
 export const SONDY = ["/pl/index.php", "/index.php"].map((p) =>
   `${p}?option=com_ajax&plugin=snproxy&format=json&task=searchOrzeczenia&sygnatura=${encodeURIComponent("III CZP 25/11")}`);
@@ -101,15 +99,13 @@ async function sonda(page) {
 }
 
 /**
- * Jedna przeglądarka: wejście na wyszukiwarkę, czekanie na przejście weryfikacji (sonda co 3 s), zapis sesji.
- * headless=true przerywa od razu przy widżecie (człowiek go nie zobaczy).
+ * Widoczne okno: wejście na wyszukiwarkę, weryfikację przechodzi użytkownik, sonda co 3 s, zapis sesji.
  */
-export async function solvePlaywright(pageUrl = START, env = process.env, { headless = true, limitMs = 35000 } = {}) {
+export async function solvePlaywright(pageUrl = START, env = process.env, { limitMs = 300000 } = {}) {
   const playwright = await zaladujPlaywright();
-  const browser = await playwright.chromium.launch({ headless, args: ["--disable-blink-features=AutomationControlled"] });
+  const browser = await playwright.chromium.launch({ headless: false });
   try {
-    const context = await browser.newContext({ userAgent: DEFAULT_UA, locale: "pl-PL", viewport: { width: 1280, height: 800 } });
-    await context.addInitScript(() => { Object.defineProperty(navigator, "webdriver", { get: () => undefined }); });
+    const context = await browser.newContext({ locale: "pl-PL", viewport: { width: 1280, height: 800 } });
     const page = await context.newPage();
     const doKiedy = Date.now() + limitMs;
     await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: Math.max(5000, limitMs) }).catch(() => {});
@@ -118,14 +114,11 @@ export async function solvePlaywright(pageUrl = START, env = process.env, { head
       const endpoint = await sonda(page);
       if (endpoint) {
         const cookie = (await context.cookies("https://www.sn.pl")).map((c) => `${c.name}=${c.value}`).join("; ");
-        return { ...zapiszSesjePlik({ cookie, userAgent: DEFAULT_UA, source: headless ? "playwright-auto" : "playwright-okno" }, env),
+        const userAgent = await page.evaluate(() => navigator.userAgent).catch(() => DEFAULT_UA);
+        return { ...zapiszSesjePlik({ cookie, userAgent, source: "playwright-okno" }, env),
           endpoint, challenge: ch };
       }
       ch = wykryjChallenge(await page.content().catch(() => ""));
-      if (headless && maWidzet(ch)) {
-        const e = new Error(`sn.pl pokazuje widżet ${ch.kind} — wymaga przejścia przez człowieka w widocznym oknie`);
-        e.challenge = ch; e.widzet = true; throw e;
-      }
       await page.waitForTimeout(3000);
     }
     const e = new Error(`Weryfikacja sn.pl nie przeszła w ${Math.round(limitMs / 1000)} s (sonda snproxy bez JSON)`);
@@ -146,7 +139,7 @@ export async function otworzOkno(pageUrl = START, env = process.env) {
   await zaladujPlaywright(); // brak Playwrighta → błąd od razu, nie w tle
   const biezace = { stan: "otwarte", otwarte_at: new Date().toISOString(), limit_ms: ms(env.SN_CAPTCHA_RECZNIE_MS, 300000, 30000) };
   okno = biezace;
-  solvePlaywright(pageUrl, env, { headless: false, limitMs: biezace.limit_ms })
+  solvePlaywright(pageUrl, env, { limitMs: biezace.limit_ms })
     .then((r) => { biezace.stan = "zapisane"; biezace.wynik = { path: r.path, cookies_count: r.cookies_count, names: r.names, saved_at: r.saved_at, endpoint: r.endpoint }; })
     .catch((e) => { biezace.stan = "nieudane"; biezace.blad = e.message; });
   return publiczne(biezace);
@@ -155,21 +148,12 @@ export async function otworzOkno(pageUrl = START, env = process.env) {
 const UWAGA_RECZNIE = "Poza automatem: otwórz https://www.sn.pl/pl/wyszukiwarka-orzeczen w przeglądarce, przejdź weryfikację " +
   "i przekaż nagłówek Cookie narzędziem sn_sesja_ustaw (albo SN_COOKIE).";
 
-/** Próba bez okna w budżecie wywołania, potem okno widoczne w tle (jeśli dozwolone). */
+/** Przy blokadzie: widoczne okno w tle (jeśli dozwolone) — weryfikację przechodzi użytkownik. */
 export async function rozwiazAutomatycznie(htmlHint = "", pageUrl = START, env = process.env) {
   const ch = wykryjChallenge(htmlHint);
   const steps = [];
-  const zostalo = pozostalyBudzet() - 10000;
-  if (String(env.SN_CAPTCHA_HEADLESS ?? "1") !== "0" && !maWidzet(ch) && zostalo >= 8000) {
-    steps.push("playwright-headless");
-    try {
-      const r = await solvePlaywright(pageUrl, env, { headless: true, limitMs: Math.min(ms(env.SN_CAPTCHA_TIMEOUT_MS, 35000, 8000), zostalo) });
-      return { ok: true, method: "playwright", challenge: ch, steps, ...r };
-    } catch (e) {
-      steps.push(`headless: ${e.message}`);
-      if (e.challenge) ch.strona = e.challenge.kind; // co faktycznie pokazał sn.pl (np. incapsula_js, recaptcha)
-      if (/^Brak playwright/.test(e.message)) return { ok: false, method: "none", challenge: ch, steps, uwaga: `${e.message}. ${UWAGA_RECZNIE}` };
-    }
+  try { await zaladujPlaywright(); } catch (e) {
+    return { ok: false, method: "none", challenge: ch, steps, uwaga: `${e.message}. ${UWAGA_RECZNIE}` };
   }
   if (recznieDozwolone(env)) {
     steps.push("okno-widoczne");

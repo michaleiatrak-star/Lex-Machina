@@ -36,17 +36,16 @@ Serwery: `isap`, `saos`, `sn`, `kio` (orzeczenia KIO i sądów zamówień — wy
 HTTP (sesja, cookies, przekierowania) NIEZMIERZONA na żywo — z sandboxa Claude brama wyjściowa
 zwraca 503 (F-213). Pierwsze uruchomienie `test_na_zywo.mjs` u siebie rozstrzyga.
 
-⚠️ `sn` (konektor 1.5.0 = sn-konektor-lex 1.4.0 + poprawki audytu 6.202): `sn-example/sn-mcp-server.js` +
+⚠️ `sn` (konektor 1.6.0 = sn-konektor-lex 1.4.0 + poprawki audytu 6.202 i 6.218): `sn-example/sn-mcp-server.js` +
 `sn-example/sn-captcha-auto.mjs`. Narzędzia: `sn_sprawdz_sygnature`, `sn_szukaj`, `sn_pobierz` oraz obsługa blokady
 sn.pl (Incapsula): `sn_sesja_status` (bez wartości ciasteczek; stan okna weryfikacji), `sn_sesja_ustaw` (wklejony
-nagłówek Cookie), `sn_captcha_auto` — **bez płatnych usług**: najpierw Playwright bez okna (samo wyzwanie JS,
-w budżecie wywołania), a gdy potrzebny człowiek — widoczne okno przeglądarki w tle; użytkownik przechodzi w nim
-weryfikację, sesja zapisuje się sama (wywołanie MCP wraca od razu: `PENDING`, stan w `sn_sesja_status`).
+nagłówek Cookie), `sn_captcha_auto` — widoczne okno przeglądarki w tle; weryfikację przechodzi w nim użytkownik (od 1.6.0 bez
+automatycznej próby bez okna, bez maskowania automatyzacji i bez podmiany User-Agent), sesja zapisuje się sama (wywołanie MCP wraca od razu: `PENDING`, stan w `sn_sesja_status`).
 Sukces potwierdza sonda snproxy z wnętrza strony (odpowiedź JSON), nie sama obecność ciasteczek — Incapsula
 ustawia `incap_ses`/`visid_incap` już na stronie blokady (pomiar 2026-10-06: HTTP 403 + oba ciasteczka).
 Sesja: `SN_SESSION_FILE` albo domyślnie `~/.lex-machina/sn-session.json` (poza katalogiem pluginu, prawa 0600)
-lub `SN_COOKIE`. Zmienne: `SN_CAPTCHA_AUTO=1` (automat przy każdej blokadzie), `SN_CAPTCHA_HEADLESS=0` (od razu
-okno), `SN_CAPTCHA_RECZNIE=0` (bez okna, np. serwer bez ekranu), `SN_CAPTCHA_TIMEOUT_MS`, `SN_CAPTCHA_RECZNIE_MS`.
+lub `SN_COOKIE`. Zmienne: `SN_CAPTCHA_AUTO=1` (automat przy każdej blokadzie), `SN_CAPTCHA_RECZNIE=0` (bez okna,
+np. serwer bez ekranu), `SN_CAPTCHA_RECZNIE_MS`. Bez sesji zapytania idą z identyfikatorem `LexMachina-MCP`.
 `playwright` NIE jest wbudowany w `dist/` (`--external:playwright`) — bez `npm i playwright && npx playwright
 install chromium` w tym katalogu `sn_captcha_auto` zwraca jawny błąd, a pozostałe narzędzia działają jak dotąd.
 Gdy blokada trwa: `SN_WERYFIKACJA_WYMAGANA`, opcjonalnie SAOS jako RZĄD 3 z jawnym oznaczeniem — nigdy oficjalne

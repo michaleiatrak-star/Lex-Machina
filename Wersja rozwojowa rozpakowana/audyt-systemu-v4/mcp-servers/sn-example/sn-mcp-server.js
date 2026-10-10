@@ -33,7 +33,8 @@ import {
 const PROXY = "https://www.sn.pl/pl/index.php";
 const KARTA = "https://www.sn.pl/pl/wyszukiwarka-orzeczen";
 const HOSTY = new Set(["sn.pl", "www.sn.pl"]);
-const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36";
+// Bez sesji użytkownika: uczciwy identyfikator klienta (bez podszywania się pod przeglądarkę).
+const UA = "LexMachina-MCP/1.6 (+https://github.com/michaleiatrak-star/Lex-Machina)";
 const PORCJA = 20000;
 const MAX_BASE64 = 8_000_000;
 
@@ -512,22 +513,18 @@ server.registerTool("sn_sesja_ustaw", {
 });
 
 /**
- * Przejście weryfikacji sn.pl bez płatnych usług (1.5.0): Playwright bez okna w budżecie wywołania,
- * a gdy to nie wystarcza (widżet, wyzwanie nie przeszło) — widoczne okno w tle, w którym weryfikację
- * przechodzi użytkownik. Wymaga: npm i playwright && npx playwright install chromium (katalog mcp-servers).
- * Ustawienia są przekazywane kopią env — wywołanie nie zmienia process.env serwera (tryb wspólny).
+ * Weryfikacja sn.pl przez użytkownika (1.6.0): widoczne okno przeglądarki w tle, w którym weryfikację
+ * przechodzi człowiek; bez automatycznego przechodzenia wyzwania. Wymaga: npm i playwright &&
+ * npx playwright install chromium (katalog mcp-servers).
  */
 server.registerTool("sn_captcha_auto", {
-  title: "Przejdź weryfikację sn.pl (Playwright, bez płatnych usług)",
+  title: "Weryfikacja sn.pl w oknie przeglądarki (przechodzi użytkownik)",
   description:
-    "Gdy sn.pl blokuje zapytania: próba automatyczna bez okna; jeśli wymaga człowieka — otwiera widoczne okno " +
-    "przeglądarki (w tle), w którym użytkownik przechodzi weryfikację, a sesja zapisuje się sama. " +
-    "headless:false = od razu okno widoczne. Stan: sn_sesja_status.",
-  inputSchema: {
-    headless: z.boolean().optional().describe("false = od razu widoczne okno do weryfikacji przez użytkownika"),
-  },
-}, async ({ headless }) => {
-  const env = { ...process.env, ...(headless === false ? { SN_CAPTCHA_HEADLESS: "0" } : headless === true ? { SN_CAPTCHA_HEADLESS: "1" } : {}) };
+    "Gdy sn.pl blokuje zapytania: otwiera widoczne okno przeglądarki (w tle), w którym użytkownik przechodzi " +
+    "weryfikację; sesja zapisuje się sama. Bez automatycznego przechodzenia wyzwania. Stan: sn_sesja_status.",
+  inputSchema: {},
+}, async () => {
+  const env = { ...process.env };
   try {
     const r = await rozwiazAutomatycznie("", KARTA, env);
     if (r.ok) {
