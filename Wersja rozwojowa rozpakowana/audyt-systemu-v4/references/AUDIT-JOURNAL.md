@@ -69942,6 +69942,15 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-10a — testy mutacyjne zestawu regresyjnego, wspólny moduł skryptów (6.217)
+
+- Mutacje (defekt wprowadzony w kopii korpusu, oczekiwany FAIL/WARN): 12 luk, w których zestaw dawał PASS, naprawionych; każda mutacja wykrywana po poprawce, czysty korpus PASS (T34 po przepakowaniu ZIP).
+- T40: skan sekretów obejmuje pliki > 3 MB (AUDIT-JOURNAL.md, repozytorium publiczne). T19: `--repo-root`, najnowsza mapa_dzu zamiast zaszytej 2026-08-28. T12 kontrola 5 (dysk vs dziennik): bieżące formaty wpisów. T9: nazwa przeniesionego pliku z rozróżnieniem wielkości liter. T35: nieistniejący konsument z DEPENDENCY-GRAPH = FAIL B. T43/T44: wspólny graf odwołań, rdzeń-słowo tylko po „/” lub w backtickach. T3: numer z mapy głównej wycisza alarm tylko przy wierszu tego samego aktu. T18/T45: brak ROUTING-MAP, map DR lub pokrycia = FAIL. T46: porównanie treści wzorców Mac CE (JS vs Python). MOCK: górna granica dat i pozycja znana z mapy. T1/T2/T13: moduły z `modules/**` i bez prefiksu `mod-` (T13: 580 plików zamiast 471; T1 bez stałego zwolnienia). T28: wyciszenie W1 tylko przy markerze obok cytatu. T42/T19b: drobne.
+- Optymalizacja: `scripts/_lex_common.py` (graf T43/T44, inwentarz modułów T1/T2/T13), prekompilacja wzorców T28; pakiet offline 42,2 s → 23,3 s.
+- ⚠ Kontrola 5 nie chroni 11 skilli, bo wpisy dziennika podawały „Wersje: N skilli (lista w CHANGELOG)”. Od tego wpisu wersje zawsze jawnie: „skill X.Y”.
+- mapa_dzu: ⛔ wiersz 2023/2759 (t.j. ustawy o prawach konsumenta) miał status OK; ELI DU/2023/2759 — „wygaśnięcie aktu”, zastąpiony przez 2024/1796, potem 2026/1244 → PREV. dr-02 `mod-KC-konsumenckie`: zapytanie na 2026/1244.
+- Wersje: audyt-systemu-v4 6.217, dr-02-prawo-cywilne-rodzinne-gospodarcze 3.93.
+
 ## AUDYT-2026-10-09h — odesłania między skillami i t.j. w nagłówkach modułów (6.216)
 
 - Kontrola wszystkich ścieżek do plików w .md korpusu (`view …`, backticki, ścieżki względne): po odsianiu wpisów historycznych w rejestrach deduplikacji (usunięty plik → kanoniczny) jedno żywe martwe odesłanie — `prawo-polskie-v2/SKILL.md` (przykład `modules/mod-KP-kodeks-pracy.md`).

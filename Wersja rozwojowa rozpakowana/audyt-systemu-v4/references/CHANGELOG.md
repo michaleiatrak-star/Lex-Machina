@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.217 (2026-10-10, AUDYT-2026-10-10a): Testy mutacyjne zestawu regresyjnego: 12 luk naprawionych (T40 pliki >3 MB, T19 --repo-root i najnowsza mapa_dzu, T12 kontrola 5 w bieżącym formacie dziennika, T9, T35, T43/T44, T3, T18/T45 brak map = FAIL, T46 treść wzorców, MOCK, T1/T2/T13 modules/** i moduły bez prefiksu mod-, T28 wyciszenie lokalne); wspólny `scripts/_lex_common.py`; pakiet offline 42 s → 23 s. mapa_dzu: 2023/2759 (t.j. ustawy o prawach konsumenta) — PREV, nie OK (ELI: wygaśnięcie aktu).
+
 - 6.216 (2026-10-09h, AUDYT-2026-10-09h): Inspekcja odesłań między skillami (wszystkie ścieżki do plików w .md) i t.j. w nagłówkach modułów wobec MAPA-AKTOW: 1 martwe odesłanie (prawo-polskie-v2), 1 podmiana aktu (dr-04 praca tymczasowa), 1 wygasły t.j. w zapytaniu (dr-11).
 
 - 6.215 (2026-10-09g, AUDYT-2026-10-09g): mapa_dzu (ELI 2026-10-09): ⛔ 22 wiersze ze statusem OK opisywały inny akt niż numer (np. 2024/1773 „Prawo wodne” = t.j. ustawy o minimalnym wynagrodzeniu, 2024/1567 „kredyt konsumencki” = rozp. PRM o wyborach, 2024/1194 „zarządzanie kryzysowe” = dozór techniczny) — oznaczone WIERSZ BŁĘDNY/PREV; 12 opisów poprawionych przy poprawnym numerze; 2018/1000 i 2019/1781 — jedna ustawa (nie „stara” i „nowa UODO”); nowe wiersze: 2026/1270 (VAT), 663, 41, 607, 864, 912, 1073, 1097, 1157, 548, 2025/820, 1006, 1668, 1843, 2021/2076.

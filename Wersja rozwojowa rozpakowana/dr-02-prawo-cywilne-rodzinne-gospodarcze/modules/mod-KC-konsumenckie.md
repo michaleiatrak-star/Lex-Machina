@@ -86,7 +86,7 @@ PRZEDSIĘBIORCY (kodeksowa rękojmia — art. 556 i n. KC):
 
 ```
 web_search: "klauzule abuzywne art 385 KC orzecznictwo SN TSUE 2025 2026"
-web_search: "prawo odstąpienia umowa odległość 14 dni ustawa prawa konsumenta isap 2023 poz. 2759"
+web_search: "prawo odstąpienia umowa odległość 14 dni ustawa prawa konsumenta isap 2026 poz. 1244"
 web_search: "rękojmia niezgodność towaru konsument 2023 nowe przepisy orzecznictwo"
 web_search: "rejestr klauzul niedozwolonych UOKiK rejestr.uokik.gov.pl"
 ```
