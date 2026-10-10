@@ -75,11 +75,17 @@ def main(root: Path) -> int:
     modules = {}
     for d in drs:
         module_dir = d / "modules"
-        for p in module_dir.glob("*.md") if module_dir.is_dir() else []:
+        for p in module_dir.rglob("*.md") if module_dir.is_dir() else []:
             modules[p.stem] = p
     module_tokens = {name: tokens(name) for name in modules}
 
     # 2. Central routing explicit paths must exist.
+    # 2026-10-10: brak pliku rejestru = FAIL (wcześniej read() zwracał "" i test dawał PASS).
+    for rel in ("prawo-polskie-v2/ROUTING-MAP.md", "prawny-router-v3/references/pokrycie-dziedzinowe.md"):
+        if not (root / rel).is_file():
+            problems.append(f"BRAK REJESTRU: {rel}")
+    if len(drs) != 16:
+        problems.append(f"LICZBA DR: {len(drs)} (oczekiwane 16)")
     routing = read(root / "prawo-polskie-v2" / "ROUTING-MAP.md")
     for full, _name in MOD.findall(routing):
         if not (root / full).exists():
@@ -87,6 +93,9 @@ def main(root: Path) -> int:
 
     # 3. Local MAPA-AKTOW references to mod-* must resolve somewhere.
     for d in drs:
+        if not (d / "MAPA-AKTOW.md").is_file():
+            problems.append(f"BRAK MAPA-AKTOW: {d.name}")
+            continue
         mapa = read(d / "MAPA-AKTOW.md")
         for name in sorted(set(MOD_NAME.findall(mapa))):
             if name not in modules:
@@ -133,7 +142,7 @@ def main(root: Path) -> int:
         return 1
 
     print(
-        "WYNIK: OK — 16 map bieżących, routing i moduły spójne, "
+        f"WYNIK: OK — {len(drs)} map bieżących, routing i moduły spójne, "
         "brak warstwy baseline/delta w runtime."
     )
     return 0
