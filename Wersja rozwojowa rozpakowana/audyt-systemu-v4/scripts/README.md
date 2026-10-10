@@ -59,7 +59,8 @@ Deterministyczny guard bieżącego benchmarku 52 aktów. Chroni rozdzielenie
 `routing != COV != FULL`, końcowy wynik 52/52 COV przy 0 FULL, obecność
 current-state modułów domykających F-108 oraz zestaw krytycznych korekt metryk
 Dz.U. z audytu 2026-08-28. Jest uruchamiany przez
-`run_regression_suite.py` i jego FAIL jest blockerem strukturalnym.
+`run_regression_suite.py` (z `--repo-root`) i jego FAIL jest blockerem strukturalnym.
+Wiersze Dz.U. sprawdza w najnowszej `references/mapa_dzu_RRRR-MM-DD.md` (od 2026-10-10).
 
 ## check_sieroty.py — T43 sieroty (pliki bez ścieżki wywołania)
 

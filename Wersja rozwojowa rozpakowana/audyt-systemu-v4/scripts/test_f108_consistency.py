@@ -5,14 +5,28 @@ This is a static consistency test. It does not replace live ELI/EUR-Lex checks.
 """
 
 from pathlib import Path
+import argparse
 import re
 import sys
 
-AUDIT = Path(__file__).resolve().parents[1]
-DEV = AUDIT.parent
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--repo-root", default=None)
+_args = _ap.parse_args()
+
+DEV = Path(_args.repo_root).resolve() if _args.repo_root else Path(__file__).resolve().parents[2]
+AUDIT = DEV / "audyt-systemu-v4"
 F108 = AUDIT / "references" / "F-108-lista-MS-egzamin-2026.md"
-MAP = AUDIT / "references" / "mapa_dzu_2026-08-28.md"
 ROUTING = DEV / "prawo-polskie-v2" / "ROUTING-MAP.md"
+
+
+def newest_map(refs: Path) -> Path | None:
+    """Najnowsza generacja mapa_dzu_RRRR-MM-DD.md (do 2026-10-10 test czytał na sztywno 2026-08-28)."""
+    maps = sorted(p for p in refs.glob("mapa_dzu_*.md")
+                  if re.fullmatch(r"mapa_dzu_\d{4}-\d{2}-\d{2}\.md", p.name))
+    return maps[-1] if maps else None
+
+
+MAP = newest_map(AUDIT / "references")
 
 EXPECTED_BELOW_COV = set()
 
@@ -66,12 +80,15 @@ for needle in [
     if needle not in routing:
         fail(f"F-108 current-state module not registered in ROUTING-MAP: {needle}")
 
+if MAP is None:
+    fail("no mapa_dzu_RRRR-MM-DD.md in audyt-systemu-v4/references")
 dzu = MAP.read_text(encoding="utf-8")
 required = {
     "| 2026 | 810 | Prawo o prokuraturze |",
     "| 2026 | 854 | Ustawa o świadczeniach pieniężnych",
     "| 2026 | 316 | Ustawa z 23.01.2026 r. o zmianie ustawy o fundacjach",
-    "| 2024 | 1796 | Ustawa o prawach konsumenta |",
+    # Tożsamość aktu (korekta 2026-08-28); od t.j. 2026/1244 wiersz ma dopisek „— poprzedni t.j.”.
+    "| 2024 | 1796 | Ustawa o prawach konsumenta",
     "| 2023 | 166 | Ustawa o fundacjach | TJ | OK |",
     "| 2020 | 2261 | Prawo o stowarzyszeniach | TJ | OK |",
 }
@@ -89,4 +106,5 @@ for needle in forbidden:
     if needle in dzu:
         fail(f"known false Dz.U. identity returned: {needle}")
 
+print(f"Mapa Dz.U.: {MAP.name}")
 print("PASS: F-108 inventory=52/52, COV=52/52, FULL=0/52, current-state modules and known currentness corrections preserved.")

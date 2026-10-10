@@ -148,7 +148,7 @@ def main():
         ("T14", "T14 KRYTYCZNY — description ≤200", "check_description.py", [str(root)]),
         ("T17", "T17 KRYTYCZNY — kontrakt routera", "test_router_contract.py", repo_args),
         ("T18", "T18 KRYTYCZNY — spójność map pokrycia i routingu", "check_coverage_coherence.py", [str(root)]),
-        ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 52/52 COV, 0 FULL i metryki", "test_f108_consistency.py", []),
+        ("T19", "T19 KRYTYCZNY — F-108: 52/52 inventory, 52/52 COV, 0 FULL i metryki", "test_f108_consistency.py", repo_args),
         ("T19b", "T19b — F-108/46: stawki, rejestr 52/52, propagacja, mutacje", "test_f108_trade.py", repo_args),
         ("T22", "T22 KRYTYCZNY — samo-rejestracja frontmatteru", "check_frontmatter_rejestracja.py", [str(root)]),
         # F-189 (2026-09-16): T28 i T29 są offline i deterministyczne. SKRYPTY-RECZNE
