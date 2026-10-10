@@ -35,11 +35,12 @@ zdarzenia, nie daty analizy.
 
 **Zasada innej drogi (od routera 3.55).** Gdy źródło jest zablokowane dla
 jednego narzędzia lub kanału, a ta sama treść jest publicznie dostępna inną
-drogą — **użyj tej drogi**: kanał kodu, inny endpoint tego samego wydawcy,
-urzędowy mirror, przeglądarka, inny format (PDF/HTML), inny publikator.
-`robots.txt` nie rozstrzyga o pobraniu pojedynczego publicznego dokumentu
-potrzebnego w sprawie. Granice: bez łamania logowania, cudzych danych
-dostępowych, licencji i paywalla, CAPTCHA i zabezpieczeń technicznych; bez
+dozwoloną drogą — **użyj tej drogi**: kanał kodu, inny endpoint tego samego wydawcy,
+urzędowy mirror, przeglądarka użytkownika, inny format (PDF/HTML), inny publikator.
+Blokada narzędzia (`web_fetch`) nie oznacza braku źródła; zakaz `robots.txt`
+serwera respektuj. Granice: bez łamania logowania, cudzych danych
+dostępowych, licencji i paywalla, CAPTCHA, WAF i zabezpieczeń technicznych
+(także przez podszywanie się pod przeglądarkę); bez
 masowego pobierania ponad potrzebę sprawy. W śladzie podaj, którym kanałem
 pobrano treść. Szczegóły: `shared/DOSTEP-MASZYNOWY-API.md` §0. Nie zakładaj,
 że użytkownik ma dostęp do LEX/Legalis. Żaden z tych serwisów nie staje się

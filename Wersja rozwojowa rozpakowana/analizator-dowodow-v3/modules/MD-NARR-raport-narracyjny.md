@@ -247,7 +247,7 @@ nieprzekazany w pełni) — łącz myślnikiem/ukośnikiem zgodnie z konwencją 
 MD-NARR jest generowany PO dashboardzie, jako dodatek (zob. "Kiedy uruchamiać").
 
 Po wygenerowaniu treści:
-1. `create_file` → zapisz jako `.md` w `/mnt/user-data/outputs/`
+1. `create_file` → zapisz jako `.md` w katalogu wyjściowym hosta (claude.ai: `/mnt/user-data/outputs/`; `shared/UNIVERSAL-RUNTIME-ADAPTER.md` §4)
 2. `present_files` → udostępnij użytkownikowi
 3. Krótka wiadomość w czacie: 2-3 najważniejsze ustalenia + wskazanie sekcji
    "Braki informacyjne" jako listy TODO — NIE powtarzaj treści dokumentu w

@@ -1,6 +1,6 @@
 ---
 name: przewodnik-prawny-v2
-version: "2.10"
+version: "2.11"
 type: ux-guide
 status: production
 description: "Przewodnik prawny i fallback routera: pomaga zidentyfikować problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny skill."
@@ -10,7 +10,7 @@ dependencies:
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
 changelog: |
-  Wersja bieżąca: 2.10 (2026-09-27e, AUDYT-2026-09-27e): jawny manifest `.claude-plugin/plugin.json` oraz `dependencies.requires: [shared]` we frontmatterze — import z marketplace w claude.ai. Treść skilla bez zmian.
+  Wersja bieżąca: 2.11 (2026-10-10b, AUDYT-2026-10-10b): Katalog wyjściowy hosta zamiast stałej ścieżki /mnt/user-data.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -487,7 +487,8 @@ Brak dokumentów:
 ### D.4 Po wygenerowaniu pisma
 
 ```
-1. Dostarcz pismo przez docx-skill → cp do /mnt/user-data/outputs/ → present_files
+1. Dostarcz pismo przez docx-skill → zapisz w katalogu wyjściowym hosta
+   (claude.ai: /mnt/user-data/outputs/; UNIVERSAL-RUNTIME-ADAPTER §4) → present_files lub odpowiednik hosta
 2. LAIK — instrukcja złożenia:
    "Oto gotowe pismo. Teraz:
    📌 Wydrukuj [X] egzemplarzy

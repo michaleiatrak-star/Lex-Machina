@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.15"
+version: "6.16"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.15 (2026-10-05j, AUDYT-2026-10-05j): Etap KOLEJNA-TURA: Przejście III, Przejście IV, format raportu końcowego i sekwencja po raporcie (każde przejście to osobna wiadomość) dołączane od drugiej tury wątku. Treść bez zmian.
+  Wersja bieżąca: 6.16 (2026-10-10b, AUDYT-2026-10-10b): Ścieżki katalogu wyjściowego neutralne względem hosta; sekwencja wyszukiwania orzeczeń zgodna z Fazą 1-0.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -380,7 +380,8 @@ V10-6 JUDICIAL CREDIBILITY SIMULATION
 >   — oznaczyć fakt jako NIEZWERYFIKOWANY i obniżyć poziom pewności do WĄTPLIWY.
 >
 > FORMAT OBOWIĄZKOWY przed każdym krokiem W:
->   [view: /mnt/user-data/uploads/{plik}, strony {X}-{Y}]
+>   [view: {katalog załączników hosta}/{plik}, strony {X}-{Y}]
+>   (claude.ai: /mnt/user-data/uploads/; UNIVERSAL-RUNTIME-ADAPTER §4)
 >   → co odczytano / potwierdzono / skorygowano
 
 ```
@@ -493,7 +494,8 @@ P7. KOMPLETNOŚĆ SZEREGU  (RATE-COMPLETENESS, dodane 2026-08-23 — F-109)
 >   jest bezwzględnie zakazane. Identyczne konsekwencje jak w Weryfikacji Pierwszej.
 >
 > FORMAT OBOWIĄZKOWY przed każdym krokiem O:
->   [view: /mnt/user-data/uploads/{plik}, strony {X}-{Y}]
+>   [view: {katalog załączników hosta}/{plik}, strony {X}-{Y}]
+>   (claude.ai: /mnt/user-data/uploads/; UNIVERSAL-RUNTIME-ADAPTER §4)
 >   → co odczytano / potwierdzono / skorygowano
 
 ```

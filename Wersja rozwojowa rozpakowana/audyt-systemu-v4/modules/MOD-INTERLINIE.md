@@ -22,10 +22,16 @@ Zbędna interlinia to:
 
 ## Procedura wykrycia
 
+**Zakres:** wyłącznie korpus skilli Lex Machina. Korzeń jest obowiązkowy
+(`LEX_MACHINA_SKILLS_ROOT` albo udokumentowany katalog skilli wg adaptera
+runtime) — nigdy bieżący katalog roboczy. Nie edytuj plików poza korpusem
+skilli ani w katalogach `archive/`.
+
 ```bash
-# Znajdź pliki z ≥2 kolejnymi pustymi liniami
-for f in $(find  -name "*.md" | grep -v archive); do
-  count=$(grep -c "^$" "$f" || true)
+# Znajdź pliki z ≥2 kolejnymi pustymi liniami (korzeń obowiązkowy, odporne na spacje)
+ROOT="${LEX_MACHINA_SKILLS_ROOT:?ustaw LEX_MACHINA_SKILLS_ROOT na korzeń korpusu skilli}"
+find "$ROOT" -type d -name archive -prune -o -type f -name "*.md" -print0 |
+while IFS= read -r -d '' f; do
   doubles=$(awk '/^$/{c++; if(c>=2) print NR": "$0} /^./{c=0}' "$f" | wc -l)
   if [ "$doubles" -gt 0 ]; then
     echo "ZBĘDNE: $doubles interlinie → $f"
@@ -42,7 +48,8 @@ awk '/^$/{c++; if(c>=2) print NR": [PUSTA]"} /^./{c=0}' SKILL_PATH/SKILL.md
 
 ## Procedura naprawy
 
-Dla każdego pliku z wykrytymi zbędnymi interlinimi:
+Dla każdego pliku z wykrytymi zbędnymi interlinimi (tylko pliki spod
+`$LEX_MACHINA_SKILLS_ROOT`, poza `archive/`; plik spoza korpusu → pomiń i zgłoś):
 
 1. **Skopiuj** plik do `/home/claude/` (read-only mount)
 2. **Usuń** wielokrotne puste linie narzędziem `sed`:

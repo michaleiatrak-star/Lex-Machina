@@ -1,5 +1,7 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.39 (2026-10-10b, AUDYT-2026-10-10b): W3-WERYFIKACJA KROK 1: najpierw narzędzia urzędowe (sn_/cbosa_/kio_sprawdz_sygnature), SAOS zastępczo w zasięgu.
+
 - 5.38 (2026-10-09f, AUDYT-2026-10-09f): 8 modułów przeniesionych z `shared/` do `modules/` (jedyny konsument): MOD-AUDIT-BUNDLE, MOD-DOKTRYNA, MOD-ELIMINACJA-TEZ, MOD-BUDOWA-ARGUMENTU, MOD-KOSZT-ODPOWIEDZI, MOD-MIKROPODSUMOWANIA, MOD-SKUTEK-PROCESOWY, MOD-STRESS-TEST; `view modules/...`. MOD-ELIMINACJA-TEZ: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-C (taki blok nie istnieje).
 
 - 5.37 (2026-10-06): MOD-ORZE: sn.pl wyszukiwarka-orzeczen, link = karta

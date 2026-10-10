@@ -20,7 +20,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 | Typ zapytania w systemie | Connector (kategoria funkcjonalna) | Źródło danych | Licencja typowa w tej kategorii |
 |---|---|---|---|
 | Numer/status/tekst jednolity ustawy, Dz.U./M.P. | MCP server dla Sejm ELI API (Dziennik Ustaw + Monitor Polski) | api.sejm.gov.pl (ELI) | MIT (typowo) |
-| Orzecznictwo sądów powszechnych (SO/SA/SN — szeroka baza) | MCP server dla SAOS | orzeczenia.ms.gov.pl / SAOS | MIT (typowo) |
+| Orzecznictwo sądów powszechnych (SO/SA bieżąco; SN tylko do 2016) | MCP server dla SAOS | orzeczenia.ms.gov.pl / SAOS | MIT (typowo) |
 | Orzecznictwo NSA + 16 WSA (administracyjne, podatkowe, RODO) | MCP server dla CBOSA **MCP-FIRST**; bez MCP: natywny direct HTML adapter Lex Machina | orzeczenia.nsa.gov.pl (CBOSA, RZĄD 2A) | MIT dla zewnętrznego MCP; adapter LM = część repo |
 | Orzecznictwo KIO (zamówienia publiczne) | MCP server dla bazy KIO | orzeczenia.uzp.gov.pl | Apache-2.0 (typowo) |
 | Prawo UE (rozporządzenia/dyrektywy/CELEX/orzeczenia TSUE) | MCP server dla CELLAR/EUR-Lex | eur-lex.europa.eu | MIT (typowo) |
@@ -323,6 +323,12 @@ z `audyt-systemu-v4/mcp-servers/`.
 | `api.sejm.gov.pl/eli` (Dz.U./M.P.) | ✅ | `isap-eli-example` |
 | `www.saos.org.pl/api` — SP (bieżąco), SN do 2016, TK do 2015, KIO do 2018 | ✅ 27t: zasięg zmierzony rok po roku | `saos-example` 1.2.0 (OUT_OF_SCOPE poza zasięgiem) |
 | `www.saos.org.pl/api` — **NSA/WSA** | ⛔ **0 orzeczeń** dla każdego zapytania → OUT_OF_SCOPE | brak — właściwe źródło CBOSA |
+
+⛔ **Skutek dla kolejności odkrywania** (kanon: `orzeczenia-sadowe-v2`, Faza 1-0): ze względu
+na zasięg wyżej SAOS służy do wyszukiwania tematycznego orzeczeń starszych i sądów
+powszechnych oraz jako cytator. Sygnatura znana → od razu baza urzędowa (bez SAOS);
+nowsze SN/TK/KIO → web_search (fraza abstrakcyjna, tylko sygnatury ze źródeł wtórnych) +
+wyszukiwarki urzędowe (sn.pl, CBOSA, UZP); sn.pl zablokowany → SAOS tylko sprzed 2017.
 | `api-krs.ms.gov.pl` (KRS) | ✅ | `krs-example` |
 | `api.nbp.pl` (kursy) | ✅ (dni wolne → ostatnia tabela, jawnie) | `nbp-example` 1.1.0 |
 | `publications.europa.eu` SPARQL (Cellar) | ✅ (status obowiązywania, tytuł PL) | `eurlex-example` 1.1.0 |

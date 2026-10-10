@@ -66,9 +66,11 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 ```
 POZIOM A — konektor MCP (gdy skonfigurowany w środowisku; mapa: shared/MCP-INTEGRACJA.md):
   isap_lookup (eli | query)       (Lex Machina, lex-isap)     → akty Dz.U./M.P.: status + aktualny t.j.
-  saos_search / cbosa_sprawdz_sygnature / eureka_sprawdz_sygnature (Lex Machina) → sygnatury SN/SP/TK/KIO, NSA/WSA, interpretacje
+  sn_sprawdz_sygnature / cbosa_sprawdz_sygnature / kio_sprawdz_sygnature / eureka_sprawdz_sygnature (Lex Machina) → sygnatury SN, NSA/WSA, KIO, interpretacje (sygnatura znana → baza urzędowa po repertorium)
+  saos_search (Lex Machina)       → SP bieżąco; SN do 2016, TK do 2015, KIO do 2018 — zastępczo/discovery (orzeczenia-sadowe-v2 Faza 1-0)
   eurlex_lookup                   (Lex Machina, lex-eurlex)   → akty UE: status obowiązywania
   get_act / verify_article        (mcp-isap, legal-cite-pl)  → akty Dz.U./M.P. (konektory obce)
+    ⚠️ mcp-isap zwraca metadane; treść tekstu jednolitego wyłącznie z `/text.pdf` (POZIOM B, ELI).
   verify_signature / search_judgments (sententim)            → sygnatury (kontrakt FOUND/NOT_FOUND/AMBIGUOUS)
   narzędzia SAOS / KIO / EUR-Lex  (prawo-pl-saos, kio-orzeczenia-mcp, prawo-eu-eurlex)
 

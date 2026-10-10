@@ -1,7 +1,8 @@
 # PROFIL-LEKKI — kolejność odczytu zasobów obowiązkowych
 
 > **Plik:** `prawny-router-v3/references/PROFIL-LEKKI.md`
-> **Wersja:** 1.2 (2026-09-10b) — rdzeń po F-180;
+> **Wersja:** 1.3 (2026-10-10) — koszty zmierzone ponownie (`wc -c`), ST jako bezwarunkowy;
+>              1.2 (2026-09-10b) — rdzeń po F-180;
 >              1.1 (2026-09-10) — przesłanka kosztowa skorygowana (F-179);
 >              1.0 wprowadzona w routerze 3.43, flaga F-173.
 > **Status:** KANONICZNY dla kolejności odczytu. Nie zawiera treści merytorycznej.
@@ -39,22 +40,31 @@ Wersja 1.0 (2026-09-10) uzasadniała profil pomiarem „≈219 kB ≈ 54 tys. to
 ścieżki obowiązkowej". **Ta liczba była fałszywa w przesłance.** Sumowała
 zasoby, które nigdy nie były ładowane bezwarunkowo: `MOD-CN-GATE`,
 `MOD-REM-GATE`, `MOD-WYJATEK-GATE`, `MOD-OS-CZASU-PRZESLANEK`,
-`HIERARCHIA-ZRODEL`, `MOD-STEP-TRACKER` i `DISCLAIMER` mają wyzwalacze
-warunkowe zapisane u siebie i podlegają leniwemu ładowaniu (lazy loading) —
+`HIERARCHIA-ZRODEL` i `DISCLAIMER` mają wyzwalacze
+warunkowe zapisane u siebie (`MOD-STEP-TRACKER` — zob. korekta 1.3 niżej) i podlegają leniwemu ładowaniu (lazy loading) —
 host wczytuje treść zasobu dopiero przy `view`, nie z góry.
 
 ⛔ To jest ta sama klasa błędu co **F-164** (REM-0): reguła zbudowana na tezie
 o świecie, której nikt nie zmierzył. Odnotowane jawnie, bo wersja 1.0 trafiła
 do wydania 3.43.
 
-### Rzeczywisty model kosztu — zmierzony 2026-09-10
+### Rzeczywisty model kosztu — zmierzony ponownie 2026-10-10 (`wc -c`, wersja rozwojowa)
+
+Tokeny szacowane przy ≈3,7 B/token (polski tekst z diakrytykami) — szacunek, nie pomiar tokenizera.
 
 | Warstwa | Kiedy w kontekście | Rozmiar |
 |---|---|---:|
 | `name` + `description` 32 skilli | **zawsze**, niezależnie od sprawy | ≈5,9 kB ≈ 1,5 tys. tokenów |
-| Rdzeń R-1…R-5 (router, KROK 0A, KROK 1, PRAWO-HARDGATE, SELF-CHECK) | po wyzwoleniu routera — **bezwarunkowo, w każdej sprawie** | ≈100 kB ≈ 25 tys. tokenów |
-| Zasoby warunkowe (CN, REM, WYJ, OŚ, HIERARCHIA, ST, DISCLAIMER, …) | wyłącznie po padnięciu wyzwalacza | 0–113 kB |
+| Rdzeń R-1…R-5 (router, KROK 0A, KROK 1, PRAWO-HARDGATE, SELF-CHECK) | po wyzwoleniu routera — **bezwarunkowo, w każdej sprawie** | ≈102,8 kB ≈ 28 tys. tokenów |
+| `MOD-STEP-TRACKER` | ⛔ **praktycznie bezwarunkowo** — router KROK 0-ST (ST-INIT w każdej sesji) | ≈12,4 kB ≈ 3,4 tys. tokenów |
+| Rdzeń + CN-GATE + REM-GATE (UP-6: każda sprawa) | w praktyce w każdej sprawie z rozstrzygnięciem i oddaniem wyniku | ≈126 kB ≈ 34 tys. tokenów |
+| Zasoby warunkowe (CN, REM, WYJ, OŚ, HIERARCHIA, DISCLAIMER, …) | wyłącznie po padnięciu wyzwalacza | 0–103 kB |
 | PRIMARY + moduły dziedzinowe + materiał sprawy | po routingu | zmienne |
+
+Typowa sprawa polska (rdzeń + CN + REM + PROFIL-LEKKI + STEP-TRACKER +
+UNIVERSAL-RUNTIME-ADAPTER + HIERARCHIA-ZRODEL + ZRODLA-AKTOW-FALLBACK +
+WYJATEK-GATE + DISCLAIMER): **≈220 kB ≈ 55–60 tys. tokenów** przed PRIMARY
+i materiałem sprawy. Odroczenie zmienia moment odczytu, nie tę sumę.
 
 Wniosek, którego wersja 1.0 nie postawiła: **koszt stały systemu jest znikomy
 (≈1,5 tys. tokenów), a warstwa warunkowa była leniwa, zanim ten plik powstał.**
@@ -105,7 +115,7 @@ R-5  references/SELF-CHECK.md           — przed wysłaniem odpowiedzi
 ⛔ Żadna z tych pięciu pozycji NIE PODLEGA odroczeniu w żadnym profilu.
 Brak którejkolwiek → `⛔ TRYB ZDEGRADOWANY`, nie „profil jeszcze lżejszy”.
 
-Koszt rdzenia: ≈104 kB ≈ 26 tys. tokenów.
+Koszt rdzenia: ≈102,8 kB ≈ 28 tys. tokenów (pomiar 2026-10-10; z `MOD-STEP-TRACKER`, ładowanym w KROKU 0-ST, ≈115 kB ≈ 31 tys.).
 
 ---
 
@@ -127,7 +137,7 @@ przez F-113.
 | `shared/MOD-OS-CZASU-PRZESLANEK.md` | ≥2 daty w stanie faktycznym | przed konkluzją |
 | `shared/MOD-REM-GATE.md` | oddajesz analizę / opinię / raport / pismo | przed HYBRID-VALIDATION |
 | `shared/DISCLAIMER.md` | odpowiedź zawiera treść prawną | KROK 7 |
-| `shared/MOD-STEP-TRACKER.md` | ST-INIT: każda sesja · FAZA 2/3: ścieżka dokumentu | przed pierwszym `present_files` |
+| `shared/MOD-STEP-TRACKER.md` | ⛔ ST-INIT: każda sesja (router KROK 0-ST — faktycznie bezwarunkowo) · FAZA 2/3: ścieżka dokumentu | ST-INIT: zaraz po HG-ACTIVE; FAZA 3: przed pierwszym `present_files` |
 | `shared/DOSTEP-MASZYNOWY-API.md` | użycie kanału kodu (`bash`/`curl`) | przed pierwszym wywołaniem |
 | `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` | obecność plików lub wzmianka o załącznikach | KROK 0C |
 | `shared/MOD-PORCJOWANIE-DOWODOW.md` | materiał przekracza próg porcjowania | po SD-VER |

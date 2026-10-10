@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.22"
+version: "5.16.23"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,7 +39,7 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.22 (2026-10-05o, AUDYT-2026-10-05o): dashboard: escapowanie danych, wartości domyślne pól, zakładka roszczeń od startu (F-232)
+  Wersja bieżąca: 5.16.23 (2026-10-10b, AUDYT-2026-10-10b): widget-kreator: auto-fill lokalny, bez wysyłania treści rozmowy do api.anthropic.com; MD-NARR: katalog wyjściowy hosta zamiast /mnt/user-data.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

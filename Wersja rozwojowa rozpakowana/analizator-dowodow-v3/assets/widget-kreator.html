@@ -104,8 +104,8 @@ h1{font-size:22px;font-weight:700;color:#f1f5f9;margin-bottom:6px;text-align:cen
     <div class="step-header"><div class="step-num">3</div><div class="step-title">Opisz dowody i okoliczności</div></div>
 
     <div class="autofill-bar">
-      <div class="af-info">Masz już opisaną sprawę w rozmowie? Wypełnij pola automatycznie.</div>
-      <button class="btn-autofill" id="btn-af" onclick="autoFill()">✨ Auto-fill z czatu</button>
+      <div class="af-info">Masz już opisaną sprawę w rozmowie? Wypełnij pola lokalną heurystyką (nic nie jest wysyłane poza przeglądarkę) i sprawdź wynik.</div>
+      <button class="btn-autofill" id="btn-af" onclick="autoFill()">Wypełnij z czatu (lokalnie)</button>
     </div>
     <div class="af-msg" id="af-msg"></div>
     <div class="input-row">
@@ -144,11 +144,11 @@ const state={tryb:'',mod:[],dowody:'',sprawa:'',data:''};
 function sel(el,key,val){document.querySelectorAll(`[onclick*="${key}"]`).forEach(e=>e.classList.remove('selected'));el.classList.add('selected');state[key]=val;}
 function tog(el,key,val){el.classList.toggle('selected');if(!state[key])state[key]=[];const i=state[key].indexOf(val);if(i>-1)state[key].splice(i,1);else state[key].push(val);}
 
-async function autoFill(){
+function autoFill(){
   const btn=document.getElementById('btn-af');
   const msg=document.getElementById('af-msg');
   btn.disabled=true;
-  btn.innerHTML='<span class="spin"></span> Analizuję rozmowę…';
+  btn.innerHTML='<span class="spin"></span> Odczytuję rozmowę…';
   msg.style.display='none';
 
   // Zbierz tekst rozmowy z DOM
@@ -177,40 +177,33 @@ async function autoFill(){
     resetBtn(); return;
   }
 
-  const PROMPT=`Na podstawie poniższej rozmowy prawnej wyciągnij dane do analizy dowodów.\nZwróć WYŁĄCZNIE JSON bez backticks i markdown. Jeśli danych brak → null lub pusty string.\n\n{"dowody":"lista dowodów z nazwy, typu i dat — każdy dowód w nowej linii lub null","sprawa":"1-3 zdania opisu sprawy i co chce udowodnić lub null","data":"data doręczenia wyroku lub pisma jeśli wspomniana lub null"}\n\nROZMOWA:\n${conv.slice(0,7000)}`;
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:600,
-        system:'Odpowiadasz WYŁĄCZNIE poprawnym JSON bez żadnego tekstu przed ani po.',
-        messages:[{role:'user',content:PROMPT}]
-      })
-    });
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const raw=(data.content||[]).map(b=>b.text||'').join('').trim();
-    let d;
-    try{d=JSON.parse(raw);}catch(_){
-      try{d=JSON.parse(raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'').trim());}catch(_2){
-        const m=raw.match(/\{[\s\S]*\}/);if(m)d=JSON.parse(m[0]);else throw new Error('Nieprawidłowy JSON');
-      }
-    }
-    let filled=0;
-    if(d.dowody){document.getElementById('t-dowody').value=d.dowody;filled++;}
-    if(d.sprawa){document.getElementById('t-sprawa').value=d.sprawa;filled++;}
-    if(d.data){document.getElementById('t-data').value=d.data;filled++;}
-    if(filled>0)showMsg('ok',`✓ Wypełniono ${filled} ${filled===1?'pole':'pola'} automatycznie — sprawdź i uzupełnij jeśli potrzeba.`);
-    else showMsg('err','Nie znaleziono danych dowodów w rozmowie — wypełnij ręcznie.');
-  }catch(err){
-    showMsg('err','Błąd auto-fill: '+err.message+' — wypełnij pola ręcznie.');
-  }
+  // Ekstrakcja lokalna i deterministyczna: tekst NIE opuszcza przeglądarki
+  // (zakaz wywołań dostawców AI z widgetów, shared/UNIVERSAL-RUNTIME-ADAPTER.md).
+  const d=extractLocal(conv);
+  let filled=0;
+  const tD=document.getElementById('t-dowody'),tS=document.getElementById('t-sprawa'),tT=document.getElementById('t-data');
+  if(d.dowody&&!tD.value.trim()){tD.value=d.dowody;filled++;}
+  if(d.sprawa&&!tS.value.trim()){tS.value=d.sprawa;filled++;}
+  if(d.data&&!tT.value.trim()){tT.value=d.data;filled++;}
+  if(filled>0)showMsg('ok',`Wypełniono ${filled} ${filled===1?'pole':'pola'} lokalnie (heurystyka) — sprawdź i popraw.`);
+  else showMsg('err','Nie rozpoznano danych w rozmowie — wklej lub opisz dowody ręcznie.');
   resetBtn();
 }
 
+const DOW_RE=/(umow[aąęy]|aneks|faktur|rachun|paragon|nagrani|e-?mail|mail|sms|wiadomoś|korespondenc|zeznani|świad|opini[aię]|biegł|protokó|protokoł|notatk|zaświadcz|wyciąg|potwierdz|zdjęci|fotograf|nagranie|film|wydruk|zrzut|screenshot|dokument|pismo|decyzj|wyrok|postanowien|nakaz|wezwani|pokwitowan|oświadczen)/i;
+const DATE_RE=/\b(\d{1,2}[.\-\/]\d{1,2}[.\-\/]\d{2,4}|\d{4}-\d{2}-\d{2}|\d{1,2}\s+(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})\b/i;
+const DOR_RE=/(doręcz|ogłosz|otrzymał|odebrał|wydan|termin)/i;
+function extractLocal(text){
+  const sents=text.replace(/\r/g,'').split(/\n+|(?<=[^\s.]{3}[.!?])\s+/).map(x=>x.trim()).filter(x=>x.length>8&&x.length<400);
+  const seen=new Set();const uniq=a=>a.filter(x=>{const k=x.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});
+  const dow=uniq(sents.filter(x=>DOW_RE.test(x))).slice(0,12);
+  const dat=sents.find(x=>DATE_RE.test(x)&&DOR_RE.test(x))||'';
+  const spr=sents.filter(x=>!DOW_RE.test(x)).slice(0,3).join(' ');
+  return {dowody:dow.join('\n'),sprawa:spr.slice(0,600),data:dat.slice(0,300)};
+}
+
 function showMsg(type,text){const msg=document.getElementById('af-msg');msg.className='af-msg '+type;msg.textContent=text;msg.style.display='block';setTimeout(()=>{msg.style.display='none';},5000);}
-function resetBtn(){const btn=document.getElementById('btn-af');btn.disabled=false;btn.innerHTML='✨ Auto-fill z czatu';}
+function resetBtn(){const btn=document.getElementById('btn-af');btn.disabled=false;btn.innerHTML='Wypełnij z czatu (lokalnie)';}
 function go(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');

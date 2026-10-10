@@ -201,7 +201,7 @@ niezależnie od hosta.
 
 | Skill | Rola |
 |---|---|
-| `prawny-router-v3` | Punkt wejścia każdej sprawy: klasyfikacja [1]–[10], tryb PRAWNIK/LAIK, anonimizacja (KROK 0A), macierz aktywacji, step-tracker |
+| `prawny-router-v3` | Punkt wejścia każdej sprawy prawnej (nie przy wzmiankach prawnych w pracy nad kodem): klasyfikacja [1]–[10], tryb PRAWNIK/LAIK, anonimizacja (KROK 0A), macierz aktywacji, step-tracker |
 | `prawo-polskie-v2` | Mapa routingu: sprawa → właściwe skille DR |
 | `przewodnik-prawny-v2` | Punkt wejścia dla laika — prowadzenie za rękę |
 
@@ -466,6 +466,8 @@ Kolejność wgrywania:
 
 `#<TAG>` przypina katalog do wydania skilli; bez niego instalujesz bieżący `main` (HEAD).
 Zależności (`shared`, DR-01–DR-16, skille wykonawcze) instalują się razem z routerem.
+Pole `dependencies` w `marketplace.json` wymaga aktualnego Claude Code CLI (zweryfikowano na 2.1.296; starsze wersje zgłaszają `Unrecognized key 'dependencies'` — zaktualizuj CLI).
+Wersja stabilna nie ma manifestów wtyczek — instaluje się ją, kopiując foldery skilli.
 </details>
 
 <details>

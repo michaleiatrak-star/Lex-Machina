@@ -1,5 +1,7 @@
 # CHANGELOG — orzeczenia-sadowe-v2
 
+- 2.28 (2026-10-10b, AUDYT-2026-10-10b): Faza 1-0: kolejność odkrywania (A znana sygnatura → rejestr; B nowsze → web_search + sn.pl/CBOSA; C starsze i SP → SAOS + web_search, SAOS jako cytator; D blokada sn.pl → SAOS tylko sprzed 2017); ze źródła wtórnego tylko sygnatura.
+
 - 2.27 (2026-10-09f, AUDYT-2026-10-09f): `ORZECZENIA-OUTPUT-SCHEMA.md` przeniesiony z `shared/` do `references/` (jedyny konsument).
 
 - 2.26 (2026-10-07g, AUDYT-2026-10-07g): `tools/cbosa_parser.py` — etykieta pola w zagnieżdżonej tabeli (`td.info-list-label > table > td.lista-label`) rozpoznana: dokument zwraca sąd i datę zamiast `null` (pomiar na żywo III OSK 1959/22 z PR #84, geek111); sekcja „powiązane” (`span.powiazane`) pominięta przy zbieraniu `/doc/{ID}`. Testy +2 (30/30); parytet z konektorem JS.

@@ -14,7 +14,7 @@ Skanuje cały `` i wykrywa:
 
 ```
 python3 ci_check_shared.py --repo-root "$LEX_MACHINA_SKILLS_ROOT"
-bash install_precommit_hook.sh "$LEX_MACHINA_SKILLS_ROOT"   # podpina jako git hook
+bash install_precommit_hook.sh "$LEX_MACHINA_SKILLS_ROOT"   # podpina jako git hook; istniejący hook tylko z --force (kopia .bak), --test uruchamia
 ```
 
 Pierwsze uruchomienie na produkcyjnym stanie silnika (2026-07-12): 0 zerwanych
@@ -98,4 +98,12 @@ parsujące Markdown — tabela bez nagłówka albo wiersz z nadmiarową komórk�
 
 ```
 python3 check_mapy_aktow.py --repo-root "$LEX_MACHINA_SKILLS_ROOT"
+```
+
+## build_ramie_kontrolne.py, ocena_transkryptow_f113.py — odmowy i selftest
+
+```
+python3 build_ramie_kontrolne.py --selftest        # out==src, out w src, src w out, /, $HOME, --force bez znacznika
+python3 ocena_transkryptow_f113.py --selftest      # brak katalogu, mapowanie.json, X###.txt, resztki tmp, --dry-run
+python3 ocena_transkryptow_f113.py anonimizuj katalog/ --dry-run
 ```

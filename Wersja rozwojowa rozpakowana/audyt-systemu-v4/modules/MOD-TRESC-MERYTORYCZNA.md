@@ -45,7 +45,8 @@ wskazanego aktu/modułu.
 Dla każdej zmiany wykrytej w FAZA 3 (nowy t.j. / WSZEDŁ / nowszy akt w 3C):
 
 ```bash
-grep -rl "<nazwa aktu lub skrót>" dr-*/modules/*.md dr-*/MAPA-AKTOW.md
+ROOT="${LEX_MACHINA_SKILLS_ROOT:?ustaw korzeń korpusu skilli}"
+grep -l "<nazwa aktu lub skrót>" "$ROOT"/dr-*/modules/*.md "$ROOT"/dr-*/MAPA-AKTOW.md
 ```
 
 Skorzystaj z kolumny `Moduł` w `MAPA-AKTOW.md` danej dziedziny (jeśli

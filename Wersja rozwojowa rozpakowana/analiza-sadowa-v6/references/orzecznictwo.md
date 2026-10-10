@@ -55,10 +55,12 @@ Na podstawie Filtru #1 — dla każdego **spornego znamienia** szukaj odrębnie.
 
 ### Krok 2: Zapytania do baz
 ```
-Sekwencja wyszukiwania:
+Sekwencja wyszukiwania (kolejność odkrywania: orzeczenia-sadowe-v2, Faza 1-0):
 1. orzeczenia.ms.gov.pl → [przepis] + [kluczowe słowo ze spornego znamienia]
-2. sn.pl → [jak wyżej]
-3. saos.org.pl → weryfikacja krzyżowa znalezionych sygnatur
+2. sn.pl → [jak wyżej]; orzeczenia nowsze → równolegle web_search (fraza abstrakcyjna,
+   bez danych sprawy) po sygnatury ze źródeł wtórnych — tylko trop
+3. saos.org.pl → orzeczenia starsze/SP i cytator (zasięg: SP bieżąco, SN do 2016,
+   TK do 2015, KIO do 2018); weryfikacja zawsze w bazie urzędowej
 ```
 
 ### Krok 3: Weryfikacja orzeczenia

@@ -28,7 +28,7 @@ Kanał dobieraj deterministycznie wg rodziny sądu:
 | SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `shared/SYGNATURY.md` |
 | SR/SO/SA | `orzeczenia.ms.gov.pl` + portal właściwego sądu | GET po sygnaturze; portal lokalny przy AMBIGUOUS |
 | **NSA/WSA** | **CBOSA — `orzeczenia.nsa.gov.pl`** | **fresh-probe → POST `/cbo/search` → kompletna paginacja `/cbo/find?p=N` → GET `/doc/{ID}` → exact-match**; wykonanie: `shared/CBOSA-ADAPTER.md` |
-| SAOS | `saos.org.pl` | discovery / kontrola krzyżowa, nie źródło rozstrzygające dla NSA/WSA |
+| SAOS | `saos.org.pl` | discovery (orzeczenia starsze i SP — `orzeczenia-sadowe-v2` Faza 1-0) / kontrola krzyżowa / cytator; zasięg: SP bieżąco, SN do 2016, TK do 2015, KIO do 2018; nie źródło rozstrzygające, NSA/WSA brak |
 
 Dla CBOSA:
 - `0 exact-match` po **kompletnym** przeszukaniu → `NOT_FOUND`;

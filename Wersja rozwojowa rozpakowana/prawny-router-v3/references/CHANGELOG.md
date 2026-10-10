@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.71 (2026-10-10b, AUDYT-2026-10-10b): Opis: router przy sprawach prawnych, nie przy wzmiankach prawnych w pracy nad kodem; preferencje użytkownika w zakresie sprawy prawnej; PROFIL-LEKKI 1.3 z kosztami zmierzonymi (rdzeń ≈103 kB ≈28 tys. tokenów, typowa sprawa ≈221 kB ≈55-60 tys.); HARD-GATES-ORZECZNICTWO i ZRODLA-AKTOW-FALLBACK bez obchodzenia WAF.
+
 - 3.70 (2026-10-09f, AUDYT-2026-10-09f): KANCELARIA-WORKFLOW, SOCIAL-SECURITY-LAW-STANDARD, DISCIPLINARY-PROCEEDINGS-STANDARD, JUDICIARY-LEGAL-STANDARD przeniesione z `shared/` do `references/` (jedyny konsument).
 
 - 3.69 (2026-10-09e, AUDYT-2026-10-09e): KROK 2 [5] ORZECZNICTWO: „wyszukaj/znajdź/podaj wyrok”, „orzeczenie Sądu Najwyższego”, „zweryfikowany wyrok”, „orzecznictwo” (wcześniej „wyszukaj wyroku … SN” trafiało do [2] analiza-sadowa-v6 przez samo słowo „wyrok”); [2]: „przeanalizuj/oceń wyrok, orzeczenie, postanowienie”, „analiza wyroku/postanowienia” — wyrok sądu apelacyjnego to nie apelacja [3]. Nazwa sądu wskazuje źródło, nie dziedzinę.

@@ -43,26 +43,30 @@ rozbieżności rozstrzyga pomiar, nie ten plik.
 ## 0. ZASADA INNEJ DROGI — gdy źródło się nie otwiera (od 1.9)
 
 Gdy treść nie otwiera się jednym narzędziem lub kanałem, a jest publicznie
-dostępna inną drogą — **użyj tej drogi**. `robots.txt` ani blokada jednego
-narzędzia nie rozstrzygają o pobraniu pojedynczego publicznego dokumentu
-potrzebnego w sprawie.
+dostępna inną **dozwoloną** drogą — **użyj tej drogi**. Blokada jednego
+narzędzia (np. `ROBOTS_DISALLOWED` z `web_fetch`) nie oznacza braku źródła.
+Zakaz w `robots.txt` serwera i ochronę techniczną (WAF, weryfikacja człowieka)
+respektuj — nie obchodź ich kanałem automatycznym; skorzystaj z przeglądarki
+użytkownika, innego publikatora albo pliku od użytkownika.
 
 | Objaw | Czym jest | Reakcja |
 |---|---|---|
-| `ROBOTS_DISALLOWED` / `PERMISSIONS_ERROR` z `web_fetch` | ograniczenie NARZĘDZIA | kanał kodu wg §1; przeglądarka; inny endpoint |
-| `robots.txt` serwera zakazuje ścieżki | wskazówka dla robotów masowych | pojedynczy dokument pobierz inną dostępną drogą (kanał kodu, przeglądarka, inny format, urzędowy mirror) |
-| 403/502/strona zastępcza zależna od klienta | kształt żądania | §1 (UA, `Accept`, ścieżka); gdy portal działa tylko z przeglądarką — przeglądarka |
+| `ROBOTS_DISALLOWED` / `PERMISSIONS_ERROR` z `web_fetch` | ograniczenie NARZĘDZIA (sprawdź `robots.txt` serwera) | gdy serwer nie zakazuje — kanał kodu wg §1 lub inny endpoint; gdy zakazuje — wiersz niżej |
+| `robots.txt` serwera zakazuje ścieżki | zakaz dla automatów | nie odpytuj automatycznie; inny publikator/urzędowy mirror, przeglądarka użytkownika albo plik od użytkownika |
+| 403/502/strona zastępcza zależna od klienta | kształt żądania | §1 (neutralny UA, `Accept`, ścieżka) |
+| 403 WAF / strona weryfikacji człowieka (np. `sn.pl`) | ochrona techniczna | **nie obchodź** bez udziału użytkownika; przeglądarka konektora SN (`sn_captcha_auto`) tylko po zatwierdzeniu przez użytkownika w oknie czatu albo w panelu wyszukiwania; inaczej sesja zweryfikowana przez użytkownika, źródło zastępcze albo plik od użytkownika |
 | awaria, timeout, przeciążenie | stan SERWERA | ponowienie, inny host tego samego publikatora, potem źródło zastępcze |
 | logowanie, licencja/paywall, CAPTCHA, klucz API | zabezpieczenie dostępu | **nie łam**; LEX/Legalis tylko przy dostępie kancelarii; inaczej źródło zastępcze albo plik od użytkownika |
 
 Kolejność prób: (1) inny kanał tego samego źródła → (2) inny host tego samego
 publikatora (np. `api.sejm.gov.pl/eli` ↔ `eli.gov.pl` ↔ `dziennikustaw.gov.pl`;
-Cellar dla EUR-Lex) → (3) przeglądarka → (4) źródło zastępcze wg kanonu
+Cellar dla EUR-Lex) → (3) przeglądarka użytkownika (jego sesja) → (4) źródło zastępcze wg kanonu
 E-1…E-5 → (5) prośba do użytkownika o plik.
 
 Granice, które zostają:
 - bez łamania logowania, używania cudzych danych dostępowych, obchodzenia
-  licencji/paywalla, CAPTCHA i innych zabezpieczeń technicznych;
+  licencji/paywalla, CAPTCHA, WAF, zakazu `robots.txt` i innych zabezpieczeń
+  technicznych (także przez podszywanie się pod przeglądarkę);
 - bez masowego pobierania ponad potrzebę sprawy; respektuj limity zapytań;
 - w śladzie zawsze podaj kanał, którym pobrano treść (np. „pobrano
   przeglądarką — `web_fetch` zablokowany”), i nazwij przyczynę blokady
@@ -92,27 +96,27 @@ centrum danych jest dla WAF-ów kilku polskich serwisów **silniejszym** sygnał
 bota niż uczciwe `curl/8.5.0`. Nie „naprawiaj" HTTP 502 łańcuchem
 przeglądarkowym — to go powoduje.
 
-### ⚠️ WYJĄTEK ZMIERZONY — `sn.pl` wymaga UA przeglądarkowego (2026-09-13)
+### ⛔ `sn.pl` — ochrona WAF; przeglądarka tylko po zatwierdzeniu użytkownika (zmienione 2026-10-10)
 
-Reguła neutralnego UA jest **domyślna, nie uniwersalna**. Jeden host zachowuje
-się odwrotnie:
+Pomiar 2026-09-13: `sn.pl/index.php?option=com_ajax&plugin=snproxy&…` pod
+`curl/8.5.0` → **403 (strona WAF serwisu)**. To ochrona techniczna, nie błąd
+kształtu żądania — w zwykłych zapytaniach (`web_fetch`, `curl`) **nie obchodź jej
+łańcuchem przeglądarkowym** (§0). Przy 403 WAF / captcha:
 
-| Wywołanie | `curl/8.5.0` | UA Chrome |
-|---|---|---|
-| `sn.pl/index.php?option=com_ajax&plugin=snproxy&…` | **403 (strona WAF serwisu)** | **200, JSON** |
-| `orzeczenia.ms.gov.pl` | 200 | 502 |
+1. **Sesja użytkownika** — przeglądarkę uruchamia się wyłącznie po zatwierdzeniu
+   przez użytkownika w oknie czatu albo w panelu wyszukiwania: aplikacja Lex Machina
+   pokazuje okno weryfikacji `sn.pl`, konektor SN (`sn_captcha_auto`, Playwright)
+   otwiera przeglądarkę; zapisana sesja służy dalszym zapytaniom.
+2. **SAOS** — wyłącznie dla orzeczeń SN sprzed 2017 (okno pokrycia, §3).
+3. **Plik od użytkownika** (pobrany przez niego z `sn.pl`).
 
-Minimalny warunek dla `sn.pl`: **sam nagłówek `User-Agent` przeglądarkowy**
-wystarcza (zmierzone: `Accept: */*` bez `Sec-Fetch-*` i bez `Referer` → 200).
-Pełny łańcuch przeglądarkowy nie jest wymagany.
-
-⛔ **Skutek:** reguła §1 czytana jako globalna sama odcinała dostęp do jedynego
-dziś żywego kanału RZĘDU 1 dla orzecznictwa SN. Wyjątek jest wąski i dotyczy
-wyłącznie `sn.pl` — dla pozostałych hostów obowiązuje `curl/8.5.0`.
+Równolegle wolno szukać tropów (sygnatur) w `web_search` — tylko trop, nie
+weryfikacja (`orzeczenia-sadowe-v2`, Faza 1-0). ⛔ Brak odpowiedzi `sn.pl` ≠
+nieistnienie orzeczenia → `OUT_OF_SCOPE`, nigdy `NOT_FOUND`.
 
 #### Rozszerzenie pomiaru — 2026-09-13d, F-190 (12 hostów, oba reżimy)
 
-Wyjątek `sn.pl` potwierdzony niezależnie. Pomiar dokłada **drugi kierunek**:
+Blokada WAF `sn.pl` pod UA neutralnym potwierdzona niezależnie. Pomiar dokłada **drugi kierunek**:
 łańcuch przeglądarkowy nie jest tylko „zbędny", lecz **aktywnie odrzucany** przez
 dwa dalsze kanały RZĘDU 1/2A — i dotyczy to **całej rodziny** Portali Orzeczeń,
 nie samego agregatu.
@@ -128,9 +132,9 @@ nie samego agregatu.
 | `orzeczenia.nsa.gov.pl` (CBOSA) | 503 | 503 (martwy w obu) |
 
 ⛔ **Reguła po tym pomiarze — trzy reżimy, nie dwa:** (a) domyślnie `curl/8.5.0`;
-(b) `sn.pl` — UA przeglądarkowy; (c) SAOS i **każdy** host `orzeczenia.*.gov.pl` —
+(b) `sn.pl` — neutralny UA, a przy 403 WAF sesja użytkownika (bez podmiany UA, wyżej); (c) SAOS i **każdy** host `orzeczenia.*.gov.pl` —
 neutralny **obowiązkowo**, łańcuch przeglądarkowy je psuje. Nie ma ustawienia
-globalnego, które obsłuży (b) i (c) naraz — dobór jest per-host.
+globalnego „naprawiającego" (b) — przy WAF decyduje człowiek, nie nagłówek.
 
 ⚠️ **Pułapka zaobserwowana w sesji 2026-09-13d (do nie powtórzenia):** po
 przełączeniu wszystkich sond na łańcuch przeglądarkowy cztery Portale Orzeczeń
@@ -267,7 +271,7 @@ i ponownie 2026-09-17u). Kanał „wyszukiwarka → pobranie strony" działa, al
 
 ```
 curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol" \
-     -o akt.xhtml "http://publications.europa.eu/resource/celex/32016R0679"
+     -o akt.xhtml "https://publications.europa.eu/resource/celex/32016R0679"
 ```
 
 | Nagłówek `Accept` | Wynik (2026-09-17u) |
@@ -278,12 +282,19 @@ curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol" \
 
 ⭐ Zaleta wobec pobrania strony: **cały akt trafia do pliku**, więc artykuły z końca
 (np. art. 83 RODO) wycina się lokalnie, bez limitu kontekstu. Adres buduje się z numeru
-CELEX: `resource/celex/<CELEX>`. Język wskazuje `Accept-Language` (`pol`).
+CELEX: `https://publications.europa.eu/resource/celex/<CELEX>`. Język wskazuje `Accept-Language` (`pol`).
+⚠️ Przy 303 z `Location: http://…` przepisz adres na `https://` przed kolejnym żądaniem
+(nie podążaj ślepo `-L` na `http://`).
 ⚠️ Dokument to XHTML z Dz.Urz. UE — przed cięciem usuń znaczniki i scal białe znaki.
 ⚠️ Cellar podaje **wersję pierwotną** aktu; wersję skonsolidowaną trzeba wskazać numerem
 CELEX wersji skonsolidowanej (`0` + numer + data, np. `02016R0679-20160504`).
 
-### SAOS — `www.saos.org.pl` (SN, NSA/WSA, sądy powszechne, TK, KIO)
+### SAOS — `www.saos.org.pl` (sądy powszechne bieżąco; SN do 2016, TK do 2015, KIO do 2018; bez NSA/WSA)
+
+⭐ **Rola w kolejności odkrywania** (kanon: `orzeczenia-sadowe-v2`, Faza 1-0): SAOS
+do wyszukiwania tematycznego orzeczeń starszych i sądów powszechnych oraz jako
+cytator; nie przy znanej sygnaturze i nie dla nowszych orzeczeń SN/TK/KIO
+(poza zasięgiem). Odkrycie ≠ weryfikacja.
 
 Dokumentacja: `www.saos.org.pl/help/index.php/dokumentacja-api`. Bez klucza.
 
@@ -364,7 +375,9 @@ słowa są wyszukiwane osobno („IV CKN 1525/00” → 42 tys. trafień zamiast
 
 ### ⭐ SN — `sn.pl`, proxy AJAX `snproxy` (JSON, nieudokumentowane, zmierzone 2026-09-13)
 
-⛔ Wymaga **UA przeglądarkowego** — wyjątek od §1, patrz tam.
+⛔ Chronione WAF-em: przy 403/captcha **nie podmieniaj UA** — sesja zweryfikowana
+przez użytkownika (okno `sn.pl` w aplikacji Lex Machina), SAOS dla SN sprzed 2017
+albo plik od użytkownika (§1, wyjątek `sn.pl`).
 
 ⚠️ **Sprostowanie 2026-09-13d (F-187):** wcześniejszy zapis „`sn.pl` bez `www.` —
 `www.sn.pl` jest poza listą dozwolonych domen" **już nie obowiązuje**. Zmierzone

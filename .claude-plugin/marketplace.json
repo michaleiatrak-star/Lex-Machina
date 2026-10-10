@@ -26,7 +26,7 @@
     {
       "name": "prawny-router-v3",
       "source": "./Wersja rozwojowa rozpakowana/prawny-router-v3",
-      "description": "UŻYWAJ ZAWSZE i AUTOMATYCZNIE przy każdej sprawie prawnej, w każdej jurysdykcji. Wczytaj przed analizą, oceną cudzego materiału lub pismem; uruchamia HARD GATE i routing.",
+      "description": "UŻYWAJ ZAWSZE, gdy użytkownik prosi o analizę prawną, pismo lub ocenę materiału prawnego, w każdej jurysdykcji. Nie przy wzmiankach prawnych w pracy nad kodem (licencje, RODO).",
       "dependencies": [
         "shared",
         "audyt-systemu-v4",

@@ -40,8 +40,12 @@ FORMAT RAPORTU bloku P:
 Dla każdego ⚠️On z listy W2.3:
 
 ```
-  KROK 1: kanał strukturalny NAJPIERW (PRAWO-HARDGATE POZIOM A/B):
-           web_fetch → saos.org.pl/api/search/judgments?... lub MCP: saos_search z `sygnatura` / cbosa_sprawdz_sygnature (Lex Machina — shared/MCP-INTEGRACJA.md; konektory obce: verify_signature),
+  KROK 1: kanał strukturalny NAJPIERW (PRAWO-HARDGATE POZIOM A/B) — sygnatura znana →
+           od razu baza urzędowa po repertorium (orzeczenia-sadowe-v2 Faza 1-0 A; shared/SYGNATURY.md ROUTING BAZ):
+           MCP: sn_sprawdz_sygnature / cbosa_sprawdz_sygnature / kio_sprawdz_sygnature, portal SP (Lex Machina —
+           shared/MCP-INTEGRACJA.md; konektory obce: verify_signature);
+           SAOS (saos_search z `sygnatura` / API caseNumber) tylko zastępczo i w zasięgu
+           (SP bieżąco, SN do 2016, TK do 2015, KIO do 2018; bez NSA/WSA),
            fallback: web_search → "[opis orzeczenia] sygnatura site:orzeczenia.ms.gov.pl"
            lub: web_search → "[opis orzeczenia] sygnatura site:sn.pl"
            Klasyfikuj wynik wg kontraktu FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE
