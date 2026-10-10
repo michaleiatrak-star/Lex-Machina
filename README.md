@@ -201,7 +201,7 @@ niezależnie od hosta.
 
 | Skill | Rola |
 |---|---|
-| `prawny-router-v3` | Punkt wejścia każdej sprawy: klasyfikacja [1]–[10], tryb PRAWNIK/LAIK, anonimizacja (KROK 0A), macierz aktywacji, step-tracker |
+| `prawny-router-v3` | Punkt wejścia każdej sprawy prawnej (nie przy wzmiankach prawnych w pracy nad kodem): klasyfikacja [1]–[10], tryb PRAWNIK/LAIK, anonimizacja (KROK 0A), macierz aktywacji, step-tracker |
 | `prawo-polskie-v2` | Mapa routingu: sprawa → właściwe skille DR |
 | `przewodnik-prawny-v2` | Punkt wejścia dla laika — prowadzenie za rękę |
 

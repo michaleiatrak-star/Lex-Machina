@@ -5,7 +5,7 @@ type: orchestration
 status: production
 entrypoint: SKILL.md
 compatibility: "web_search, web_fetch, file_read (view), create_file, show_widget — lub równoważne funkcje hosta wg shared/UNIVERSAL-RUNTIME-ADAPTER.md"
-description: "UŻYWAJ ZAWSZE i AUTOMATYCZNIE przy każdej sprawie prawnej, w każdej jurysdykcji. Wczytaj przed analizą, oceną cudzego materiału lub pismem; uruchamia HARD GATE i routing."
+description: "UŻYWAJ ZAWSZE, gdy użytkownik prosi o analizę prawną, pismo lub ocenę materiału prawnego, w każdej jurysdykcji. Nie przy wzmiankach prawnych w pracy nad kodem (licencje, RODO)."
 dependencies:
   requires:
     - shared
@@ -190,7 +190,10 @@ w `dependencies.requires`; w przeciwnym razie zgłoś błąd ścieżki.
 
 # Router Prawny v3 — Spis Treści i Sekwencja Główna
 
-## PREFERENCJE UŻYTKOWNIKA (aktywne globalnie)
+## PREFERENCJE UŻYTKOWNIKA (aktywne w całej sprawie prawnej obsługiwanej przez router)
+
+UP-1…UP-6 obowiązują od wczytania routera do końca sprawy prawnej — nie w rozmowach
+bez sprawy prawnej (np. praca nad kodem z wzmianką o licencji lub RODO).
 
 ```
 UP-1: router→v3 ZAWSZE pierwszy (przed jakimkolwiek skillem dziedzinowym) — każda jurysdykcja

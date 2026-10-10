@@ -1,7 +1,7 @@
 {
   "name": "prawny-router-v3",
   "version": "3.70",
-  "description": "UŻYWAJ ZAWSZE i AUTOMATYCZNIE przy każdej sprawie prawnej, w każdej jurysdykcji. Wczytaj przed analizą, oceną cudzego materiału lub pismem; uruchamia HARD GATE i routing.",
+  "description": "UŻYWAJ ZAWSZE, gdy użytkownik prosi o analizę prawną, pismo lub ocenę materiału prawnego, w każdej jurysdykcji. Nie przy wzmiankach prawnych w pracy nad kodem (licencje, RODO).",
   "author": {
     "name": "Adrian Miłosz Kalinowski",
     "email": "adrian@lexagento.pl"
