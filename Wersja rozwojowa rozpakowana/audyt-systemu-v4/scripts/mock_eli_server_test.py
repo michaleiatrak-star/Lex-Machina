@@ -48,6 +48,14 @@ PRZYKLADOWA_ODPOWIEDZ_ELI = {
         # pozycja spoza przedziału — sprawdza, że filtr daty faktycznie działa
         {"year": 2026, "pos": 111, "title": "Ustawa sprzed przedzialu", "announcementDate": "2026-01-05",
          "ELI": "http://mock/eli/2026/111"},
+        # 2026-10-10 (audyt mutacyjny): pozycja ZNANA z mapy w przedziale, na górnej granicy
+        # (włącznie) — oczekiwane „TAK”; wcześniej znana pozycja nigdy nie trafiała do raportu,
+        # więc status zawsze „NIE” przechodził.
+        {"year": 2026, "pos": 800, "title": "Ustawa znana z mapy", "announcementDate": "2026-07-31",
+         "ELI": "http://mock/eli/2026/800"},
+        # pozycja po górnej granicy — zepsuta górna granica filtra przechodziła
+        {"year": 2026, "pos": 1200, "title": "Ustawa po przedziale", "announcementDate": "2026-08-01",
+         "ELI": "http://mock/eli/2026/1200"},
     ]
 }
 
@@ -88,7 +96,8 @@ def main():
             mapa_path = Path(tmp) / "mapa_test.md"
             mapa_path.write_text(
                 "Kodeks cywilny — Dz.U. 2026 poz. 795 (t.j.)\n"
-                "Inna ustawa — Dz.U. 2020 poz. 5\n",
+                "Inna ustawa — Dz.U. 2020 poz. 5\n"
+                "Ustawa znana z mapy — Dz.U. 2026 poz. 800\n",
                 encoding="utf-8",
             )
             out_path = Path(tmp) / "raport.md"
@@ -103,18 +112,27 @@ def main():
             print(raport)
             print()
 
+            wiersze = {l.split("|")[1].strip(): l for l in raport.splitlines()
+                       if l.startswith("| Dz.U.")}
+            ids = {p["identyfikator"] for p in nowe_pozycje}
+
             # asercje testowe
             kontrole = [
-                ("filtr daty: 1 pozycja w przedziale 04-31.07",
-                 len(nowe_pozycje) == 1),
-                ("pozycja spoza przedziału odfiltrowana",
-                 all(p["identyfikator"] != "Dz.U. 2026 poz. 111" for p in nowe_pozycje)),
+                ("filtr daty: dokładnie 999 i 800 w przedziale 04-31.07 (granice włącznie)",
+                 ids == {"Dz.U. 2026 poz. 999", "Dz.U. 2026 poz. 800"}),
+                ("pozycja sprzed przedziału odfiltrowana",
+                 "Dz.U. 2026 poz. 111" not in ids),
+                ("pozycja po przedziale odfiltrowana (górna granica)",
+                 "Dz.U. 2026 poz. 1200" not in ids),
                 ("nowa pozycja obecna i oznaczona NIE",
-                 "Ustawa testowa Z" in raport and "| NIE |" in raport),
+                 "Ustawa testowa Z" in wiersze.get("Dz.U. 2026 poz. 999", "")
+                 and "| NIE |" in wiersze.get("Dz.U. 2026 poz. 999", "")),
+                ("pozycja znana z mapy oznaczona TAK",
+                 "| TAK |" in wiersze.get("Dz.U. 2026 poz. 800", "")),
                 ("rozpoznanie pozycji już znanej z mapy",
                  "Dz.U. 2026 poz. 795" in numery_znane),
                 ("mapa czytana z Path bez błędu typu",
-                 len(numery_znane) == 2),
+                 len(numery_znane) == 3),
             ]
     finally:
         server.shutdown()
