@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.218 (2026-10-10b, AUDYT-2026-10-10b): Uwagi zewnętrznego wdrożenia: find/grep z obowiązkowym korzeniem korpusu (MOD-INTERLINIE i in.); zadanie cykliczne tylko na żądanie; dziennik czytany od najnowszego wpisu, nie w całości; bezpieczne skrypty (hook pre-commit z kopią, ramię kontrolne z realpath i znacznikiem, anonimizacja F-113 bez nadpisań, --selftest); konektor SN 1.6.0: weryfikację sn.pl przechodzi tylko użytkownik (bez automatu headless i podmiany UA); weryfikator_sygnatur bez UA przeglądarki.
+
 - 6.217 (2026-10-10, AUDYT-2026-10-10a): Testy mutacyjne zestawu regresyjnego: 12 luk naprawionych (T40 pliki >3 MB, T19 --repo-root i najnowsza mapa_dzu, T12 kontrola 5 w bieżącym formacie dziennika, T9, T35, T43/T44, T3, T18/T45 brak map = FAIL, T46 treść wzorców, MOCK, T1/T2/T13 modules/** i moduły bez prefiksu mod-, T28 wyciszenie lokalne); wspólny `scripts/_lex_common.py`; pakiet offline 42 s → 23 s. mapa_dzu: 2023/2759 (t.j. ustawy o prawach konsumenta) — PREV, nie OK (ELI: wygaśnięcie aktu).
 
 - 6.216 (2026-10-09h, AUDYT-2026-10-09h): Inspekcja odesłań między skillami (wszystkie ścieżki do plików w .md) i t.j. w nagłówkach modułów wobec MAPA-AKTOW: 1 martwe odesłanie (prawo-polskie-v2), 1 podmiana aktu (dr-04 praca tymczasowa), 1 wygasły t.j. w zapytaniu (dr-11).

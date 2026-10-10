@@ -1,7 +1,7 @@
 f47a08645edca7d50ae2e4f3f43135bbe60f4f0b7f50338831bcfa9289f7807e  ./MAPA-AKTOW.md
 5b3fd066e29140dac6a2b9b19f0a2044684dc05b0d859a55d1fff628edf26916  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-0f23304298ee51af05a578fb4f88c12956697842ef242d33baca403898d85529  ./SKILL.md
+c2b3ef304b0479534f89f8e1eed0f72c130d4969386b3561b3f39def3a7a31a5  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -105,7 +105,7 @@ bc9125f92d068cf5aae2c3d69a0413bd14303b5e5920ff4e6ec1547a1c809fb0  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-6c13256e10715062ed800200dbb5058c5d7791ac84224c2ab020f1495e9f3dfa  ./references/CHANGELOG.md
+8416643e389e7110d6dcf8dbfc09d64d4472f5c59b4fa8732d205656073635af  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
@@ -113,7 +113,7 @@ df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/i
 bcc7920cbff7be85427807f4d360e215ab0775f06179bad252c7982b847dacfc  ./references/insolvency/katalog.md
 86172c3e055cc9ed4587ecd944dc301c1d318fc33ec17d448d98d308a31d96d3  ./references/insolvency/plan-pokrycia.md
 dce07bb0a66327427786e9f9dbe1478b5501aeddafeba8841a8a18978267e09a  ./references/insolvency/scenariusze-weryfikacji.md
-50c8272a1fcf1b5af830ee1bb1d46806618a7238f4e5e53a2bf57470b760c1e6  ./references/insolvency/sources.json
+fe6f0d7377651ba44e5553552fe0ad6fc34a70fa0226efcd6f583fd917ea6dfb  ./references/insolvency/sources.json
 f01f605d8480dfb5d9bd2eb8d087f53f06d41d1b25e8994716cf36157df91c68  ./references/insolvency/sources/amendment-2025-1085.json
 9b8bbc8810b71da45067f8b1a0d4ef4ab40f541e9098bd93006f7079368fbca9  ./references/insolvency/sources/amendment-2025-1170.json
 17b5cccd83a5115656ef122b5bc0f3f96f2ebd5610b1f9fbda51efc145cacee0  ./references/insolvency/sources/amendment-2025-1172.json

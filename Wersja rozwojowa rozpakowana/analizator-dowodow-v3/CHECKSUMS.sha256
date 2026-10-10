@@ -1,11 +1,11 @@
-77a04b8e03ae014b148818d41bb75eb6836d50a5a2c022b45ab764a235bb5d18  ./SKILL.md
+c987d79c297fec9aa27d14db3550992b0cd7e8c1a2d3e59eb125f22462524097  ./SKILL.md
 6a7c4cb707d9cdce519062eae055b60604f709df30e8dc702c09e6504b8b4179  ./agents/openai.yaml
 c83468edbc76f9aaa5a4e6bc40d7c8de3efff006935b44f4f1cf810a48cd0fb0  ./assets/dashboard.html
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
-cd038fc6ed13e3f1560bb8a7a380921d2e4cd91ca704a18b1b07693ea54860e9  ./assets/widget-kreator.html
+019685c04dcdc57773acf19d33430324b6d2a4565dca479c03b8588e14d2797c  ./assets/widget-kreator.html
 fa231d1842d6ff0384ebbae3a49c8854e2d8e9c4123870794385c7c236e67376  ./checklists/kontrola-jakosci.md
 b560693d212b146707d6cdf86cd878f2af166056d60244c861693887184c2a18  ./checklists/sprawa-pracownicza.md
-43eb3edae3f88240a343271663e994c06318ad712a99a120a2746459648b193e  ./modules/MD-NARR-raport-narracyjny.md
+6bff5876b32dc790c5a90d7b9775e0e64da694ed399793aefd3f566aedd5c455  ./modules/MD-NARR-raport-narracyjny.md
 c6b43d28accf8a3da82826fb1a1af72eece282b41fe5bbd556a7319253979f29  ./modules/MD1-klasyfikacja.md
 09b6560f1a359d973966936282093522e6a6a4e0de36570a9b2bdc28752e12a7  ./modules/MD2-scoring.md
 b7c8761361a4863868e6b76d2e674a892c23de56bb4272f4f5fc0bddf10f3bc4  ./modules/MD3a-walidacja-formalna.md
@@ -30,7 +30,7 @@ f755ae617d989360b9ad31dbe8bf944becacf53b5aecd634f3cac24eda8d6901  ./modules/MP2-
 383dd0c1decf97ddef7e61f55c491f32e93a017162ecb7d11386b78db3353491  ./modules/MP8-dowody.md
 484cbe02a3a93cff656800640874ab2f4611093e3ce71dcc782fd206b71e049a  ./modules/MP9-jakosc.md
 10667796daf3fd6fcf4e3d2acf80e578166f7c4f2a650faa793d04978da11e02  ./modules/MX-dziedziny.md
-218ccb5fb2d830317a2b8b4deef9888fc901208dfe7d8e3baade587a390e5d88  ./references/CHANGELOG.md
+e4652cb88f82aafbfa187b9f7cf44f75e2049adc7d8f92450efafde5f5a085f0  ./references/CHANGELOG.md
 bd98fe34b6479adcb7e2ca5ad2138a560712546310c658ab4207caff89f81d52  ./references/HISTORIA-ZMIAN-PLIKOW.md
 852dd0672cf8e854fd6beae36ea6aaabd68c5fdb17e67752d59f4252af6d4121  ./references/engines/contradictory-evidence-engine-v10.md
 6f06a9a616eea04860567e0f1ea28fb1825550a1d2514945b51e1483c7073e5c  ./references/engines/evidence-driven-matrix.md

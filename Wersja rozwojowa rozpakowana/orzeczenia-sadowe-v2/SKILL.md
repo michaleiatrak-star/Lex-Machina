@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.27"
+version: "2.28"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"

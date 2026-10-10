@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.70"
+version: "3.71"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.70 (2026-10-09f): KANCELARIA-WORKFLOW, SOCIAL-SECURITY-LAW-STANDARD, DISCIPLINARY-PROCEEDINGS-STANDARD, JUDICIARY-LEGAL-STANDARD przeniesione z `shared/` do `references/` (jedyny konsument).
+  Wersja bieżąca: 3.71 (2026-10-10b, AUDYT-2026-10-10b): Opis: router przy sprawach prawnych, nie przy wzmiankach prawnych w pracy nad kodem; preferencje użytkownika w zakresie sprawy prawnej; PROFIL-LEKKI 1.3 z kosztami zmierzonymi (rdzeń ≈103 kB ≈28 tys. tokenów, typowa sprawa ≈221 kB ≈55-60 tys.); HARD-GATES-ORZECZNICTWO i ZRODLA-AKTOW-FALLBACK bez obchodzenia WAF.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
