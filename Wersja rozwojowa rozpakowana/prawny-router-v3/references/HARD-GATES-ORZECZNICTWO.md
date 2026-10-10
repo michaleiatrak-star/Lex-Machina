@@ -7,7 +7,7 @@ Wykluczyć fikcyjne sygnatury i niezweryfikowane tezy.
 
 1. Ustal, czy orzecznictwo jest potrzebne.
 2. Wyszukaj orzeczenia w publicznych źródłach:
-   - SN: baza SN / SAOS / portale sądowe,
+   - SN: baza SN (SAOS tylko dla orzeczeń do 2016) / portale sądowe,
    - NSA: CBOSA,
    - TK: trybunal.gov.pl,
    - ETPCz: HUDOC,
@@ -47,9 +47,11 @@ Statusy (wyłącznie te):
 ⛔ Zakazane sformułowania: „prawdopodobnie istnieje”, „wygląda na realne”.
 ⛔ Dwie sygnatury z tym samym dniem i miesiącem w jednej odpowiedzi → sprawdź
 osobno każdą parę sygnatura–data; zbieżność traktuj jako sygnał pomyłki.
-⛔ Brak dostępu do tekstu jednym narzędziem (blokada narzędzia, `robots.txt`)
-→ użyj innej drogi: kanały z `shared/DOSTEP-MASZYNOWY-API.md` §3, kanał kodu,
-przeglądarka, inny portal z tym samym orzeczeniem (zasada innej drogi, §0).
+⛔ Brak dostępu do tekstu jednym narzędziem (blokada narzędzia)
+→ użyj innej dozwolonej drogi: kanały z `shared/DOSTEP-MASZYNOWY-API.md` §3,
+przeglądarka użytkownika, inny portal z tym samym orzeczeniem (zasada innej
+drogi, §0). Zakaz `robots.txt` serwera, WAF i CAPTCHA respektuj — bez podmiany
+UA i automatów do wyzwań (np. `sn.pl` 403: sesja zweryfikowana przez użytkownika).
 Gdy wszystkie zawiodą — poproś użytkownika o pobranie orzeczenia i wgranie pliku.
 
 ## Format użycia w piśmie

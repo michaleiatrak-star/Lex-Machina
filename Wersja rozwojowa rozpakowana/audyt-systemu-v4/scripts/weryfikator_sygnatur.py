@@ -35,12 +35,16 @@ except ImportError:  # pragma: no cover
 
 # --- Kształt żądania: shared/DOSTEP-MASZYNOWY-API.md §1 --------------------
 UA_NEUTRALNY = {"User-Agent": "curl/8.5.0", "Accept": "*/*"}
-# ⚠️ WYJĄTEK zmierzony 2026-09-13: sn.pl oddaje 403 pod UA neutralnym.
-UA_PRZEGLADARKA = {
-    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                   "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"),
-    "Accept": "*/*",
-}
+# ⛔ sn.pl: bez podmiany UA na przeglądarkowy (nie obchodzimy WAF). 403/strona
+#    weryfikacji -> BlokadaSnWaf -> OUT_OF_SCOPE z instrukcją: sesja użytkownika
+#    (okno weryfikacji sn.pl w aplikacji Lex Machina), SAOS dla SN sprzed 2017,
+#    plik od użytkownika. shared/DOSTEP-MASZYNOWY-API.md §1.
+
+
+class BlokadaSnWaf(Exception):
+    """sn.pl odpowiedział stroną ochrony (403/HTML) zamiast JSON."""
+
+
 TIMEOUT = 60
 
 SAOS = "https://www.saos.org.pl/api/search/judgments"
@@ -179,12 +183,14 @@ def saos_case_number(syg: str):
 
 
 def sn_search(syg: str):
-    """⚠️ Wymaga UA przeglądarkowego (wyjątek §1) i hosta bez 'www.'."""
+    """UA neutralny; 403 albo HTML zamiast JSON -> BlokadaSnWaf (bez obchodzenia WAF)."""
     r = requests.get(SN, params={"option": "com_ajax", "plugin": "snproxy",
                                  "format": "json", "task": "searchOrzeczenia",
                                  "sygnatura": normalizuj(syg), "strona": 1,
                                  "rozmiar_strony": 25},
-                     headers=UA_PRZEGLADARKA, timeout=TIMEOUT)
+                     headers=UA_NEUTRALNY, timeout=TIMEOUT)
+    if r.status_code == 403 or r.text.lstrip().startswith("<"):
+        raise BlokadaSnWaf(f"HTTP {r.status_code}")
     r.raise_for_status()
     try:
         return r.json()["data"][0]["data"]
@@ -270,7 +276,23 @@ def v_syg_0(syg: str) -> dict:
 
     trafienia, kompletne = [], True
     if baza == "SN":
-        for it in sn_search(syg):
+        try:
+            sn_wyniki = sn_search(syg)
+        except BlokadaSnWaf as e:
+            wynik.update(status="OUT_OF_SCOPE", zakres_potwierdzenia=None,
+                         uzasadnienie=f"sn.pl: ochrona WAF/weryfikacja człowieka ({e}) — "
+                                      "brak odpowiedzi nie oznacza nieistnienia orzeczenia",
+                         wymagane_dalsze_dzialanie={
+                             "sesja_uzytkownika": "weryfikacja sn.pl we własnej przeglądarce użytkownika "
+                                                  "(aplikacja Lex Machina: okno weryfikacji sn.pl)",
+                             "saos": "tylko orzeczenia SN sprzed 2017 (okno pokrycia SAOS)"
+                                     if rok <= int(OKNO["SUPREME"]["do"][:4]) else
+                                     "nie dotyczy — SAOS nie obejmuje SN od 2017",
+                             "plik": "orzeczenie dostarczone przez użytkownika",
+                             "zakaz": "podmiana UA, obchodzenie CAPTCHA/WAF",
+                         })
+            return wynik
+        for it in sn_wyniki:
             trafienia.append({"sygnatura": it.get("sygnatura_sprawy", ""),
                               "data": it.get("data_wydania"),
                               "zrodlo": "sn.pl"})
@@ -342,10 +364,7 @@ def cmd_kanaly():
     print(f"# Kanały orzecznicze — pomiar {datetime.date.today().isoformat()}")
     probki = [
         ("SAOS", SAOS + "?caseNumber=III+CZP+25/11&pageSize=10", UA_NEUTRALNY),
-        ("sn.pl (UA przegl.)", SN + "?option=com_ajax&plugin=snproxy&format=json"
-                                    "&task=searchOrzeczenia&sygnatura=III+CZP+25/11"
-                                    "&strona=1&rozmiar_strony=25", UA_PRZEGLADARKA),
-        ("sn.pl (UA neutralny)", SN + "?option=com_ajax&plugin=snproxy&format=json"
+        ("sn.pl", SN + "?option=com_ajax&plugin=snproxy&format=json"
                                       "&task=searchOrzeczenia&sygnatura=III+CZP+25/11"
                                       "&strona=1&rozmiar_strony=25", UA_NEUTRALNY),
         ("orzeczenia.ms.gov.pl", MS + "/search/advanced/$N/I$0020C$0020100$002f15"
