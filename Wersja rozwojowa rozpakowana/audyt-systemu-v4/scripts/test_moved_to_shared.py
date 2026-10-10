@@ -46,10 +46,21 @@ from pathlib import Path
 
 SKIP_SKILLS = {"shared", "audyt-systemu-v4"}
 
+# 2026-10-10 (audyt mutacyjny): IGNORECASE obejmował też grupę nazwy, więc `[A-Z]`
+# łapało zwykłe słowo („Przeniesiony do shared w dniu …” → nazwa „w”), a ta „nazwa”
+# zawsze była „wspomniana” w shared/ — deklaracja z pozostawioną kopią przechodziła.
+# Teraz: fraza bez rozróżniania wielkości liter, nazwa — z rozróżnieniem: w backtickach
+# albo goły `mod-…` / nazwa wielkimi literami z myślnikiem (MOD-X, PRZESLUCHANIE-SWIADKOW-KPC).
 MOVED_PATTERN = re.compile(
-    r"przeniesion\w*\s+do\s+shared[/\s]*[^\n]{0,80}?`?(mod-[\w-]+|[A-Z][\w-]+)`?",
-    re.IGNORECASE,
+    r"(?i:przeniesion\w*\s+do\s+shared)[/\s]*[^\n]{0,80}?"
+    r"(?:`(mod-[\w-]+|[A-Z][\w-]+)(?:\.md)?`"
+    r"|(?<![\w-])(mod-[\w-]+|[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+)(?![\w-]))"
 )
+
+
+def mentions(text: str, name: str) -> bool:
+    """Wzmianka nazwy jako całego tokenu (nie podciągu: „mod-X” ≠ „mod-X-nowy”)."""
+    return re.search(r"(?<![\w-])" + re.escape(name) + r"(?![\w-])", text) is not None
 
 
 def find_skill_md_files(repo_root: Path):
@@ -70,7 +81,7 @@ def shared_file_exists_by_stem_or_mention(shared_dir: Path, name: str) -> bool:
         return True
     for f in shared_dir.glob("*.md"):
         try:
-            if name in f.read_text(encoding="utf-8", errors="ignore"):
+            if mentions(f.read_text(encoding="utf-8", errors="ignore"), name):
                 return True
         except Exception:
             continue
@@ -110,7 +121,7 @@ def main():
             continue
 
         for m in MOVED_PATTERN.finditer(text):
-            name = m.group(1)
+            name = m.group(1) or m.group(2)
             checked += 1
 
             if not shared_file_exists_by_stem_or_mention(shared_dir, name):
