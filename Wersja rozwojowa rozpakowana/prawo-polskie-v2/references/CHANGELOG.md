@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.57 (2026-10-10a): Routing błyskawiczny: „egzekucja komornicza”, „zajęcie rachunku”, „zajęcie wynagrodzenia”, „egzekucja z wynagrodzenia”, „kwota wolna od zajęcia” przeniesione z DR-03 do DR-02 (KPC, `mod-KPC-egzekucja-windykacja`), nowe „skarga na czynność komornika”, „powództwo przeciwegzekucyjne”, „zwolnienie spod egzekucji”; „komornik” z DR-03 do DR-12 (`mod-ustawa-komornicy-sadowi-zawod`). DR-03 nie ma treści o egzekucji cywilnej — sprawy komornicze trafiały do prawa karnego (benchmark aplikacji: 1000 kazusów, 2026-10-10).
+
 - 6.56 (2026-10-09h, AUDYT-2026-10-09h): SKILL.md: przykład modułu aktu wskazywał nieistniejący `modules/mod-KP-kodeks-pracy.md` — poprawione na `mod-KP-prawo-pracy.md`.
 
 - 6.55 (2026-10-09g, AUDYT-2026-10-09g): ROUTING-MAP (ELI 2026-10-09, daty z przepisów o wejściu w życie): KSH (+644, ⏳176, ⏳187), lombardowa i kredyt konsumencki (⏳ 1206 art. 21/38 od 11.01.2027 — nie 29.09.2026), antykorupcja (⏳ 1003 art. 118), VAT (⏳ 2026/1270), transport, POŚ, trzeźwość/tytoń (t.j. 2026/1214 obejmuje 2025/427 i 799); ⛔ UPEA bez „2026/532” (Aktywny rodzic), leśna/łowiecka bez „2024/1219” (rozp. MSiT), KSeF 2021/2076 (było 2021/1237), PrEnergetyczne t.j. 2026/43, ustawa o ochronie danych osobowych 2018 — obowiązująca (nie „historyczna”).
