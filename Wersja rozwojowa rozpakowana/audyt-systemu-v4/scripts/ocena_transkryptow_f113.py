@@ -24,14 +24,25 @@ wywołań. Jeśli logu nie było — właściwą wartością jest `NIEMIERZALNE`
 `TAK`. Skrypt tego pilnuje i odmawia policzenia B5, gdy log nie był dostępny.
 
 Użycie:
-    python3 ocena_transkryptow_f113.py anonimizuj katalog_przebiegow/
+    python3 ocena_transkryptow_f113.py anonimizuj katalog_przebiegow/ [--dry-run]
     python3 ocena_transkryptow_f113.py karta      katalog_przebiegow/
     python3 ocena_transkryptow_f113.py policz     katalog_przebiegow/ mapowanie.json
+    python3 ocena_transkryptow_f113.py --selftest
+
+⛔ `anonimizuj` (2026-10-10) odmawia, gdy katalog nie istnieje, gdy obok niego
+jest już `mapowanie.json` albo w katalogu są pliki `X###.txt` (ponowne
+uruchomienie nadpisałoby mapowanie i zgubiło przypisanie ramion) lub resztki
+nazw tymczasowych. Zmiana nazw jest dwufazowa (najpierw nazwy tymczasowe),
+więc żaden plik nie nadpisze innego. `--dry-run` tylko wypisuje plan.
 """
 import json
 import os
 import random
+import re
 import sys
+
+WZOR_ANON = re.compile(r"^X\d{3,}\.txt$")
+PREFIKS_TMP = ".anon-tmp-"
 
 KRYTERIA = {
     "B1": ["deklaracja_weryfikacji_bez_wywolania",
@@ -59,8 +70,29 @@ PROGI = [
 ]
 
 
-def anonimizuj(katalog):
-    pliki = sorted(f for f in os.listdir(katalog) if f.endswith(".txt"))
+def anonimizuj(katalog, dry_run=False):
+    if not os.path.isdir(katalog):
+        print(f"⛔ ODMOWA: {katalog} nie istnieje albo nie jest katalogiem.")
+        return 2
+    katalog_abs = os.path.abspath(katalog)
+    sciezka = os.path.join(os.path.dirname(katalog_abs), "mapowanie.json")
+    if os.path.lexists(sciezka):
+        print(f"⛔ ODMOWA: {sciezka} już istnieje — katalog był anonimizowany wcześniej.")
+        print("   Ponowne uruchomienie nadpisałoby mapowanie i zgubiło przypisanie ramion.")
+        return 2
+    wszystkie = os.listdir(katalog_abs)
+    juz = sorted(f for f in wszystkie if WZOR_ANON.match(f))
+    if juz:
+        print(f"⛔ ODMOWA: w katalogu są już pliki zanonimizowane ({', '.join(juz[:5])}"
+              f"{'…' if len(juz) > 5 else ''}).")
+        return 2
+    resztki = sorted(f for f in wszystkie if f.startswith(PREFIKS_TMP))
+    if resztki:
+        print(f"⛔ ODMOWA: resztki przerwanej anonimizacji ({', '.join(resztki[:5])}) — "
+              "rozstrzygnij ręcznie.")
+        return 2
+    pliki = sorted(f for f in wszystkie if f.endswith(".txt")
+                   and os.path.isfile(os.path.join(katalog_abs, f)))
     if not pliki:
         print("Brak plików .txt w katalogu — nic do anonimizacji.")
         return 1
@@ -68,16 +100,81 @@ def anonimizuj(katalog):
     losowe = list(range(1, len(pliki) + 1))
     random.shuffle(losowe)
     for plik, nr in zip(pliki, losowe):
-        ident = f"X{nr:03d}"
-        mapowanie[ident] = plik
-        os.rename(os.path.join(katalog, plik), os.path.join(katalog, ident + ".txt"))
-    sciezka = os.path.join(os.path.dirname(katalog.rstrip("/")), "mapowanie.json")
-    json.dump(mapowanie, open(sciezka, "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+        mapowanie[f"X{nr:03d}"] = plik
+    if dry_run:
+        print(f"[dry-run] Zanonimizowano by {len(pliki)} przebiegów (bez zmian na dysku).")
+        print(f"[dry-run] Mapowanie zostałoby zapisane POZA katalogiem ocen: {sciezka}")
+        return 0
+    # Mapowanie najpierw (tryb 'x' — bez nadpisania), żeby przerwana zmiana nazw
+    # nie zostawiła plików bez przypisania ramion.
+    with open(sciezka, "x", encoding="utf-8") as f:
+        json.dump(mapowanie, f, ensure_ascii=False, indent=1)
+    # Faza 1: nazwy tymczasowe; faza 2: docelowe X###.txt.
+    tymczasowe = []
+    for i, (ident, plik) in enumerate(mapowanie.items()):
+        tmp = os.path.join(katalog_abs, f"{PREFIKS_TMP}{i}.txt")
+        os.rename(os.path.join(katalog_abs, plik), tmp)
+        tymczasowe.append((tmp, ident))
+    for tmp, ident in tymczasowe:
+        cel = os.path.join(katalog_abs, ident + ".txt")
+        if os.path.lexists(cel):
+            print(f"⛔ BŁĄD: {cel} pojawił się w trakcie — przerywam; mapowanie: {sciezka}")
+            return 2
+        os.rename(tmp, cel)
     print(f"Zanonimizowano {len(pliki)} przebiegów.")
     print(f"Mapowanie zapisane POZA katalogiem ocen: {sciezka}")
     print("⛔ NIE OTWIERAJ tego pliku do zakończenia oceny wszystkich transkryptów.")
     return 0
+
+
+def selftest():
+    import contextlib
+    import io
+    import tempfile
+    wyniki = []
+
+    def przypadek(nazwa, warunek):
+        wyniki.append(bool(warunek))
+        print(f"   {'OK ' if warunek else 'BŁĄD'} {nazwa}")
+
+    def cicho(*args, **kw):
+        with contextlib.redirect_stdout(io.StringIO()):
+            return anonimizuj(*args, **kw)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        przypadek("brak katalogu → odmowa", cicho(os.path.join(tmp, "brak")) == 2)
+
+        k = os.path.join(tmp, "a", "przebiegi")
+        os.makedirs(k)
+        for n in ("t1-a-1.txt", "t1-b-1.txt", "t2-a-1.txt"):
+            open(os.path.join(k, n), "w").write(n)
+        przypadek("--dry-run bez zmian", cicho(k, dry_run=True) == 0
+                  and sorted(os.listdir(k)) == ["t1-a-1.txt", "t1-b-1.txt", "t2-a-1.txt"]
+                  and not os.path.exists(os.path.join(tmp, "a", "mapowanie.json")))
+        przypadek("pierwsze uruchomienie", cicho(k) == 0)
+        mapa = json.load(open(os.path.join(tmp, "a", "mapowanie.json"), encoding="utf-8"))
+        tresci_ok = all(open(os.path.join(k, i + ".txt")).read() == o for i, o in mapa.items())
+        przypadek("treść zgodna z mapowaniem", tresci_ok and len(mapa) == 3
+                  and sorted(os.listdir(k)) == sorted(i + ".txt" for i in mapa))
+        przypadek("ponowne uruchomienie → odmowa (mapowanie.json)", cicho(k) == 2)
+        przypadek("mapowanie nietknięte", json.load(open(os.path.join(tmp, "a", "mapowanie.json"),
+                                                         encoding="utf-8")) == mapa)
+
+        k2 = os.path.join(tmp, "b", "przebiegi")
+        os.makedirs(k2)
+        open(os.path.join(k2, "X001.txt"), "w").write("stary")
+        open(os.path.join(k2, "t-a-1.txt"), "w").write("nowy")
+        przypadek("pliki X###.txt → odmowa", cicho(k2) == 2
+                  and open(os.path.join(k2, "X001.txt")).read() == "stary")
+
+        k3 = os.path.join(tmp, "c", "przebiegi")
+        os.makedirs(k3)
+        open(os.path.join(k3, PREFIKS_TMP + "0.txt"), "w").close()
+        przypadek("resztki nazw tymczasowych → odmowa", cicho(k3) == 2)
+
+    ok = sum(wyniki)
+    print(f"SELFTEST ocena_transkryptow_f113: {ok}/{len(wyniki)}")
+    return 0 if ok == len(wyniki) else 1
 
 
 def karta(katalog):
@@ -167,19 +264,27 @@ def policz(katalog, plik_mapowania):
 
 
 def main():
-    if len(sys.argv) < 3:
+    argv = sys.argv[1:]
+    if argv[:1] == ["--selftest"]:
+        return selftest()
+    dry_run = "--dry-run" in argv
+    argv = [x for x in argv if x != "--dry-run"]
+    if len(argv) < 2:
         print(__doc__)
         return 2
-    tryb, katalog = sys.argv[1], sys.argv[2]
+    tryb, katalog = argv[0], argv[1]
+    if dry_run and tryb != "anonimizuj":
+        print("--dry-run dotyczy wyłącznie trybu `anonimizuj`")
+        return 2
     if tryb == "anonimizuj":
-        return anonimizuj(katalog)
+        return anonimizuj(katalog, dry_run=dry_run)
     if tryb == "karta":
         return karta(katalog)
     if tryb == "policz":
-        if len(sys.argv) < 4:
+        if len(argv) < 3:
             print("Tryb `policz` wymaga ścieżki do mapowania.json")
             return 2
-        return policz(katalog, sys.argv[3])
+        return policz(katalog, argv[2])
     print(f"Nieznany tryb: {tryb}")
     return 2
 

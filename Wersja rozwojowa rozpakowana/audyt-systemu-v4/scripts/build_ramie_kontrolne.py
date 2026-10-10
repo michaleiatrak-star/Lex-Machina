@@ -43,6 +43,14 @@ CO ROBI
   Skrypt odmawia zapisu wewnątrz drzewa źródłowego. Ramię A jest artefaktem
   testowym i nigdy nie wraca do wydania.
 
+⛔ BEZPIECZEŃSTWO ŚCIEŻEK (2026-10-10)
+  Ścieżki porównywane po `realpath` (dowiązania symboliczne nie omijają
+  kontroli). Odmowa, gdy: out == src, out wewnątrz src, src wewnątrz out,
+  out to `/` albo katalog domowy. `--force` usuwa istniejący katalog wyjściowy
+  WYŁĄCZNIE wtedy, gdy zawiera znacznik `.lex-ramie-kontrolne` utworzony przez
+  poprzednią budowę tego skryptu; katalog bez znacznika → odmowa.
+  `--selftest` sprawdza te odmowy na katalogach tymczasowych.
+
 KODY WYJŚCIA
   0 — ramię A zbudowane, brak zerwanych odwołań
   1 — nie wykonano któregoś wycięcia (zmieniła się treść pliku źródłowego)
@@ -69,6 +77,83 @@ def wczytaj_rejestr(sciezka):
     return d
 
 
+ZNACZNIK = ".lex-ramie-kontrolne"
+
+
+def _wewnatrz(sciezka, katalog):
+    """True, gdy `sciezka` leży wewnątrz `katalog` (obie po realpath)."""
+    katalog = katalog.rstrip(os.sep) or os.sep
+    if katalog == os.sep:
+        return sciezka != os.sep
+    return sciezka.startswith(katalog + os.sep)
+
+
+def sprawdz_sciezki(repo_root, out_arg, force):
+    """Zwraca (src, out, None) albo (None, None, komunikat odmowy)."""
+    src = os.path.realpath(repo_root)
+    out = os.path.realpath(out_arg)
+    dom = os.path.realpath(os.path.expanduser("~"))
+    if not os.path.isdir(src):
+        return None, None, f"BŁĄD: {src} nie istnieje albo nie jest katalogiem"
+    if out == os.sep or out == dom:
+        return None, None, (f"⛔ ODMOWA: katalog wyjściowy {out} to katalog główny "
+                            "albo domowy — nie może być ramieniem A.")
+    if out == src or _wewnatrz(out, src):
+        return None, None, ("⛔ ODMOWA: katalog wyjściowy leży wewnątrz drzewa źródłowego.\n"
+                            "   Ramię A jest artefaktem testowym i nie może powstać w drzewie wydania.")
+    if _wewnatrz(src, out):
+        return None, None, ("⛔ ODMOWA: drzewo źródłowe leży wewnątrz katalogu wyjściowego — "
+                            "--force usunąłby źródło.")
+    if os.path.lexists(out):
+        if not force:
+            return None, None, f"BŁĄD: {out} istnieje (użyj --force)"
+        if not os.path.isdir(out) or os.path.islink(out) \
+                or not os.path.isfile(os.path.join(out, ZNACZNIK)):
+            return None, None, (f"⛔ ODMOWA: {out} istnieje, ale nie zawiera znacznika {ZNACZNIK} "
+                                "poprzedniej budowy ramienia A — --force nie usuwa obcych katalogów.")
+    return src, out, None
+
+
+def selftest():
+    import tempfile
+    wyniki = []
+
+    def przypadek(nazwa, warunek):
+        wyniki.append((nazwa, bool(warunek)))
+        print(f"   {'OK ' if warunek else 'BŁĄD'} {nazwa}")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        src = os.path.join(tmp, "src")
+        os.makedirs(os.path.join(src, "sub"))
+        obcy = os.path.join(tmp, "obcy")
+        os.makedirs(obcy)
+        open(os.path.join(obcy, "wazny.txt"), "w").close()
+        poprzedni = os.path.join(tmp, "poprzedni")
+        os.makedirs(poprzedni)
+        open(os.path.join(poprzedni, ZNACZNIK), "w").close()
+        link = os.path.join(tmp, "link-do-src")
+        os.symlink(src, link)
+
+        przypadek("out == src", sprawdz_sciezki(src, src, True)[2])
+        przypadek("out wewnątrz src", sprawdz_sciezki(src, os.path.join(src, "sub", "a"), True)[2])
+        przypadek("out == src przez dowiązanie", sprawdz_sciezki(src, link, True)[2])
+        przypadek("src wewnątrz out", sprawdz_sciezki(src, tmp, True)[2])
+        przypadek("out == /", sprawdz_sciezki(src, os.sep, True)[2])
+        przypadek("out == katalog domowy", sprawdz_sciezki(src, os.path.expanduser("~"), True)[2])
+        przypadek("istniejący out bez --force", sprawdz_sciezki(src, poprzedni, False)[2])
+        przypadek("--force na katalogu bez znacznika", sprawdz_sciezki(src, obcy, True)[2])
+        przypadek("--force na katalogu ze znacznikiem dozwolony",
+                  sprawdz_sciezki(src, poprzedni, True)[2] is None)
+        przypadek("nowy out poza src dozwolony",
+                  sprawdz_sciezki(src, os.path.join(tmp, "nowy"), False)[2] is None)
+        przypadek("brak src", sprawdz_sciezki(os.path.join(tmp, "brak"), os.path.join(tmp, "x"), False)[2])
+        przypadek("katalog obcy nietknięty", os.path.isfile(os.path.join(obcy, "wazny.txt")))
+
+    ok = sum(1 for _, w in wyniki if w)
+    print(f"SELFTEST build_ramie_kontrolne: {ok}/{len(wyniki)}")
+    return 0 if ok == len(wyniki) else 1
+
+
 def wytnij_zakres(tekst, od, do, gdzie):
     i = tekst.find(od)
     if i == -1:
@@ -88,8 +173,13 @@ def main():
     ap.add_argument("--rejestr", default=REJESTR_DOMYSLNY,
                     help="plik rejestru bramek (domyślnie references/REJESTR-BRAMEK-POMIAR.json)")
     ap.add_argument("--lista", action="store_true", help="wypisz bramki dostępne w rejestrze i wyjdź")
-    ap.add_argument("--force", action="store_true", help="nadpisz istniejący katalog wyjściowy")
+    ap.add_argument("--force", action="store_true",
+                    help=f"nadpisz istniejący katalog wyjściowy (tylko ze znacznikiem {ZNACZNIK})")
+    ap.add_argument("--selftest", action="store_true", help="sprawdź odmowy ścieżek i wyjdź")
     a = ap.parse_args()
+
+    if a.selftest:
+        return selftest()
 
     try:
         rejestr = wczytaj_rejestr(a.rejestr)
@@ -108,23 +198,17 @@ def main():
         print("BŁĄD: wymagane --repo-root, --out i --bramki (albo --lista)", file=sys.stderr)
         return 2
 
-    src = os.path.abspath(a.repo_root)
-    out = os.path.abspath(a.out)
-    if not os.path.isdir(src):
-        print(f"BŁĄD: {src} nie istnieje", file=sys.stderr)
+    src, out, odmowa = sprawdz_sciezki(a.repo_root, a.out, a.force)
+    if odmowa:
+        print(odmowa, file=sys.stderr)
         return 2
-    if out == src or out.startswith(src + os.sep):
-        print("⛔ ODMOWA: katalog wyjściowy leży wewnątrz drzewa źródłowego.\n"
-              "   Ramię A jest artefaktem testowym i nie może powstać w drzewie wydania.",
-              file=sys.stderr)
-        return 2
-    if os.path.exists(out):
-        if not a.force:
-            print(f"BŁĄD: {out} istnieje (użyj --force)", file=sys.stderr)
-            return 2
+    if os.path.lexists(out):
         shutil.rmtree(out)
 
     shutil.copytree(src, out)
+    with open(os.path.join(out, ZNACZNIK), "w", encoding="utf-8") as f:
+        f.write("Ramię A (kontrolne) zbudowane przez build_ramie_kontrolne.py — artefakt testowy.\n"
+                f"źródło: {src}\n")
     wybrane = [b.strip() for b in a.bramki.split(",") if b.strip()]
     print("=" * 72)
     print("RAMIĘ A (kontrolne)")

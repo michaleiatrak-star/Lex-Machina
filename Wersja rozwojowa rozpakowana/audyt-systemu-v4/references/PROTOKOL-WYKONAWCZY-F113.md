@@ -49,7 +49,10 @@ mierzenie czegoś innego niż deklarowane.
 dlatego, że treść bramki zmieniła się od ostatniej edycji tabeli `BRAMKI`
 w skrypcie. **Poprawia się wtedy kotwicę, nigdy drzewo produkcyjne.**
 
-⛔ Ramię A nigdy nie wraca do wydania. Skrypt odmawia zapisu wewnątrz repo.
+⛔ Ramię A nigdy nie wraca do wydania. Skrypt odmawia zapisu wewnątrz repo,
+gdy repo leży wewnątrz katalogu wyjściowego oraz do `/` i katalogu domowego;
+`--force` usuwa tylko katalog ze znacznikiem `.lex-ramie-kontrolne` z poprzedniej
+budowy (znacznik wchodzi do manifestu ramienia A).
 
 ### Weryfikacja ramienia przed przebiegiem
 
