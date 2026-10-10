@@ -34,10 +34,10 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 ## Wzorce do wykrycia (regex)
 
 ```bash
-# Frazy meta-opisowe
-grep -rn \
+# Frazy meta-opisowe (korzeń korpusu obowiązkowy; nigdy bieżący katalog)
+grep -rn --include="*.md" --exclude-dir=archive \
   -e "Ten skill\|Ten moduł\|Celem tego\|Poniżej znajdziesz\|W tej sekcji\|Niniejszy\|służy do\|ma na celu\|pozwala na\|umożliwia użytkownikowi\|został stworzony\|jest przeznaczony" \
-   --include="*.md" | grep -v archive | grep -v "MOD-WSTAWKI"
+  "${LEX_MACHINA_SKILLS_ROOT:?ustaw korzeń korpusu skilli}" | grep -v "MOD-WSTAWKI"
 ```
 
 ```bash

@@ -441,7 +441,7 @@ stała); nie przepisuj jej z pamięci. Zapytaj jednym zdaniem, które serwery za
 ## FAZA 1 — INWENTARYZACJA SYSTEMU
 
 ```bash
-find "$LEX_MACHINA_SKILLS_ROOT" -not -path "*/archive/*" | sort
+find "${LEX_MACHINA_SKILLS_ROOT:?}" -not -path "*/archive/*" | sort
 ```
 
 Jeżeli host nie udostępnia zmiennej, najpierw rozwiąż semantyczny katalog
@@ -461,7 +461,7 @@ Wykryj: nowe skille, usunięte skille, zmienione rozmiary.
 Dla każdego SKILL.md sprawdź, czy wszystkie `view`/`load` odwołania wskazują na istniejące pliki:
 
 ```bash
-grep -r "view " "$LEX_MACHINA_SKILLS_ROOT" --include="*.md" | grep -v archive
+grep -r "view " "${LEX_MACHINA_SKILLS_ROOT:?}" --include="*.md" | grep -v archive
 ```
 
 Każda ścieżka nieistniejąca = błąd **CRIT**.
@@ -472,7 +472,7 @@ Sprawdź, czy żaden skill nie odwołuje się do usuniętej wersji innego skilla
 
 ```bash
 grep -r "przewodnik-prawny-v1\|analiza-sadowa-v5\|pisma-procesowe-v2" \
-  "$LEX_MACHINA_SKILLS_ROOT" --include="*.md" | grep -v archive
+  "${LEX_MACHINA_SKILLS_ROOT:?}" --include="*.md" | grep -v archive
 ```
 
 Dodaj tu wzorce wg historii napraw z `references/CHANGELOG.md` i `references/CHECKLIST-DEDUP.md`.
@@ -492,7 +492,7 @@ view audyt-systemu-v4/modules/MOD-DESCRIPTION.md
 Kontrola automatyczna (test **T14**, zalecana zamiast ręcznego liczenia):
 
 ```bash
-python3 audyt-systemu-v4/scripts/check_description.py "$LEX_MACHINA_SKILLS_ROOT"
+python3 audyt-systemu-v4/scripts/check_description.py "${LEX_MACHINA_SKILLS_ROOT:?}"
 ```
 
 **Brak pola / pole puste = CRIT** (F-130). Długość >200 = **CRIT**,
@@ -718,7 +718,7 @@ dla skilli proceduralnych).
 ### 4A — Zakaz cytowania z pamięci
 
 ```bash
-grep -r "Dz\.U\. [0-9]\{4\} poz\." "$LEX_MACHINA_SKILLS_ROOT" \
+grep -r "Dz\.U\. [0-9]\{4\} poz\." "${LEX_MACHINA_SKILLS_ROOT:?}" \
   --include="*.md" | grep -v "isap\|weryfikuj\|MAPA\|mapa_dzu\|references\|archive" | head -30
 ```
 
@@ -727,7 +727,7 @@ Hardkodowane Dz.U. bez kontekstu weryfikacji = **WARN**.
 ### 4B — PRAWO-HARDGATE obecny
 
 ```bash
-grep -r "PRAWO-HARDGATE" "$LEX_MACHINA_SKILLS_ROOT" \
+grep -r "PRAWO-HARDGATE" "${LEX_MACHINA_SKILLS_ROOT:?}" \
   --include="*.md" | grep -v archive | head -10
 ```
 
