@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API §sn.pl: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację przechodzi człowiek, bez podmiany User-Agenta.
+
 - 3.99.28 (2026-10-10b, AUDYT-2026-10-10b): Kolejność odkrywania orzeczeń wg zmierzonego zasięgu SAOS (SN do 2016, TK do 2015, KIO do 2018): znana sygnatura → rejestr urzędowy; nowsze → web_search (zapytanie bez danych sprawy) + wyszukiwarki urzędowe; DOSTEP-MASZYNOWY-API bez obchodzenia WAF/robots.txt (sn.pl: sesja użytkownika); Cellar po https; mcp-isap: treść t.j. tylko z text.pdf; ścieżki /mnt/user-data neutralne względem hosta; check_widget_no_ai_egress.py.
 
 - 3.99.27 (2026-10-09g, AUDYT-2026-10-09g): ORKA-BAS-VIII: ustawa zmieniająca upol 2024/1757 jest z 19.11.2024 (było „z 12.07.2024”). ELI 2026-10-09.

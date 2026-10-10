@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "lex-machina",
   "display_name": "Lex Machina — polskie źródła prawa",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Weryfikacja źródeł prawa polskiego i UE: ISAP (z treścią), SAOS (z cytatorem), CBOSA, EUREKA, EUR-Lex i TSUE, KRS, NBP, SUDOP, UODO, biała lista VAT, CEIDG.",
   "long_description": "Serwery MCP systemu Lex Machina (audyt-systemu-v4 6.150). Każdy wynik w schemacie FOUND / NOT_FOUND / AMBIGUOUS / ERROR, z jawnym statusem obowiązywania lub aktualności. Kontrola sygnatur z post-checkiem tożsamości (prefiks ani prawie-trafienie nie potwierdza sygnatury). NSA/WSA (CBOSA): snapshot, brak trafień = OUT_OF_SCOPE.",
   "author": {
@@ -105,7 +105,7 @@
     },
     {
       "name": "sn_captcha_auto",
-      "description": "SN: przejście weryfikacji sn.pl — automat Playwright albo widoczne okno dla użytkownika (bez płatnych usług)"
+      "description": "SN: przejście weryfikacji sn.pl w oknie przeglądarki użytkownika (Edge/Chrome), sesja zapisuje się sama (bez płatnych usług)"
     },
     {
       "name": "sp_sprawdz_sygnature",

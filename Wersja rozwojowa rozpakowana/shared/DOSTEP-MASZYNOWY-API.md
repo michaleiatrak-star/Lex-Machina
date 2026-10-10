@@ -105,8 +105,9 @@ kształtu żądania — w zwykłych zapytaniach (`web_fetch`, `curl`) **nie obch
 
 1. **Sesja użytkownika** — przeglądarkę uruchamia się wyłącznie po zatwierdzeniu
    przez użytkownika w oknie czatu albo w panelu wyszukiwania: aplikacja Lex Machina
-   pokazuje okno weryfikacji `sn.pl`, konektor SN (`sn_captcha_auto`, Playwright)
-   otwiera przeglądarkę; zapisana sesja służy dalszym zapytaniom.
+   pokazuje okno weryfikacji `sn.pl`, konektor SN (`sn_captcha_auto`) otwiera
+   przeglądarkę użytkownika (Edge/Chrome; weryfikację przechodzi człowiek, bez
+   podmiany User-Agenta); zapisana sesja służy dalszym zapytaniom.
 2. **SAOS** — wyłącznie dla orzeczeń SN sprzed 2017 (okno pokrycia, §3).
 3. **Plik od użytkownika** (pobrany przez niego z `sn.pl`).
 

@@ -512,17 +512,17 @@ server.registerTool("sn_sesja_ustaw", {
 });
 
 /**
- * Przejście weryfikacji sn.pl bez płatnych usług (1.5.0): Playwright bez okna w budżecie wywołania,
- * a gdy to nie wystarcza (widżet, wyzwanie nie przeszło) — widoczne okno w tle, w którym weryfikację
- * przechodzi użytkownik. Wymaga: npm i playwright && npx playwright install chromium (katalog mcp-servers).
+ * Przejście weryfikacji sn.pl bez płatnych usług (1.7.0): widoczne okno w tle w przeglądarce systemowej
+ * (Edge/Chrome/Chromium przez DevTools; bez niej okno Playwrighta), w którym weryfikację przechodzi
+ * użytkownik. Z zainstalowanym Playwrightem najpierw próba bez okna w budżecie wywołania.
  * Ustawienia są przekazywane kopią env — wywołanie nie zmienia process.env serwera (tryb wspólny).
  */
 server.registerTool("sn_captcha_auto", {
-  title: "Przejdź weryfikację sn.pl (Playwright, bez płatnych usług)",
+  title: "Przejdź weryfikację sn.pl (okno przeglądarki, bez płatnych usług)",
   description:
-    "Gdy sn.pl blokuje zapytania: próba automatyczna bez okna; jeśli wymaga człowieka — otwiera widoczne okno " +
-    "przeglądarki (w tle), w którym użytkownik przechodzi weryfikację, a sesja zapisuje się sama. " +
-    "headless:false = od razu okno widoczne. Stan: sn_sesja_status.",
+    "Gdy sn.pl blokuje zapytania: otwiera widoczne okno przeglądarki użytkownika (Edge/Chrome) na sn.pl, " +
+    "w którym użytkownik przechodzi weryfikację; sesja zapisuje się sama, okno się zamyka. Z zainstalowanym " +
+    "Playwrightem najpierw próba bez okna. headless:false = od razu okno. Stan: sn_sesja_status.",
   inputSchema: {
     headless: z.boolean().optional().describe("false = od razu widoczne okno do weryfikacji przez użytkownika"),
   },

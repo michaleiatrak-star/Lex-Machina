@@ -69942,6 +69942,15 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-10c — konektor SN w Claude Desktop: okno w przeglądarce użytkownika (6.219)
+
+- Problem: `sn_captcha_auto` w Claude Desktop zawsze zwracał błąd — rozszerzenie (lex-machina.mcpb) ma tylko `lex-mcp.mjs` zbudowany z `--external:playwright`, a plugin (Claude Code/Cowork) nie rejestrował serwera `lex-sn` w `.mcp.json`.
+- Zmiana (konektor SN 1.7.0): `sn-example/przegladarka-systemowa.mjs` — Edge/Chrome/Chromium z tymczasowym profilem przez protokół DevTools (własny klient WebSocket, Node 18+), sonda snproxy z karty sn.pl, zapis ciasteczek sn.pl i rzeczywistego User-Agenta, zamknięcie okna i usunięcie profilu (także po zakończeniu serwera). Okno otwiera się tylko po wywołaniu narzędzia zatwierdzonym przez użytkownika; weryfikację przechodzi człowiek. Bez przeglądarki opartej na Chromium (Safari) — `sn_sesja_ustaw`. Ścieżki z Playwrightem bez zmian.
+- `.mcp.json`: `lex-sn`. mcpb-manifest 1.3.4.
+- Testy: test_sady.mjs (wyszukiwanie przeglądarki, ramki WebSocket, pełny przebieg okna na atrapie CDP), test_protokol.mjs; na żywo z Chromium: start 1,5 s, sonda w karcie, ciasteczka, ramka 200 kB, zamknięcie i usunięcie profilu; z `dist/lex-mcp.mjs` przez stdio: `PENDING` w 0,24 s, przeglądarka zamknięta po zakończeniu serwera.
+- ISAP (G17 w aplikacji, 2026-10-10 ~19:00 UTC): `api.sejm.gov.pl/eli/acts/*/text.html` zwraca HTTP 500 w ~0,6 s dla wielu aktów (KC 10/12, KP 4/4, Konstytucja 4/4); metadane aktu i `text.pdf` działają. Awaria po stronie Sejmu, nie kodu.
+- Wersje: audyt-systemu-v4 6.219, shared 3.99.29.
+
 ## AUDYT-2026-10-10b — uwagi zewnętrznego wdrożenia, kolejność odkrywania orzeczeń (6.218)
 
 - Źródło: raport użytkownika po wdrożeniu wersji stabilnej 26.09.2026 w Claude Code (Windows). Każda uwaga sprawdzona na origin/main 86af46054 (DEV i STB 07.10.2026).
