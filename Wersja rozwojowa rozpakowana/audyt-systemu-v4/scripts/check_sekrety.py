@@ -18,7 +18,9 @@ import argparse, base64, json, re, sys
 from pathlib import Path
 
 POMIN_KAT = {".git", "node_modules", "__pycache__", "dist"}
-MAX_B = 3_000_000
+POMIN_ROZSZ = {".png", ".jpg", ".zip", ".pdf", ".mcpb", ".ico", ".woff", ".woff2"}
+# Brak górnego limitu rozmiaru: AUDIT-JOURNAL.md (>3 MB) był pomijany w całości, a repozytorium
+# jest publiczne (audyt mutacyjny 2026-10-10). Pliki czytane strumieniowo, linia po linii.
 JWT = re.compile(r"eyJ[A-Za-z0-9_-]{8,}\.eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{10,}")
 PREF = re.compile(r"(sk-ant-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}"
                   r"|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{20,})")
@@ -42,7 +44,11 @@ def ladunek(tok: str):
 
 
 def skanuj_tekst(tekst: str):
-    for nr, l in enumerate(tekst.splitlines(), 1):
+    yield from skanuj_linie(tekst.splitlines())
+
+
+def skanuj_linie(linie):
+    for nr, l in enumerate(linie, 1):
         if "sekrety:ignoruj" in l:
             continue
         for m in JWT.finditer(l):
@@ -63,13 +69,15 @@ def skanuj(root: Path):
     for p in sorted(root.rglob("*")):
         if not p.is_file() or any(c in POMIN_KAT for c in p.relative_to(root).parts):
             continue
-        if p.stat().st_size > MAX_B or p.suffix.lower() in {".png", ".jpg", ".zip", ".pdf", ".mcpb", ".ico", ".woff", ".woff2"}:
+        if p.suffix.lower() in POMIN_ROZSZ:
             continue
         try:
-            t = p.read_text(encoding="utf-8")
+            with p.open(encoding="utf-8", newline=None) as f:
+                # Wyniki zbierane per plik: plik binarny (błąd dekodowania) odpada w całości.
+                zn = list(skanuj_linie(l.rstrip("\n") for l in f))
         except (UnicodeDecodeError, OSError):
             continue
-        for nr, typ, podglad in skanuj_tekst(t):
+        for nr, typ, podglad in zn:
             yield p.relative_to(root), nr, typ, podglad
 
 
@@ -91,6 +99,12 @@ def selftest() -> int:
         typy = [t for _, t, _ in skanuj_tekst(tekst)]
         w = (ocz in typy) if ocz else not typy
         print(f"{'PASS' if w else 'FAIL'} {opis}"); ok &= w
+    # Duży plik (> 3 MB, jak AUDIT-JOURNAL.md) też musi być skanowany.
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        (Path(td) / "duzy.md").write_text(("linia\n" * 700_000) + f"PESEL: {fake_pesel}\n", encoding="utf-8")
+        w = any(t.startswith("PESEL") for _, _, t, _ in skanuj(Path(td)))
+    print(f"{'PASS' if w else 'FAIL'} plik > 3 MB skanowany"); ok &= w
     print(f"SELFTEST: {'OK' if ok else 'FAIL'}")
     return 0 if ok else 1
 
