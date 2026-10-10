@@ -283,6 +283,6 @@
   "storage": {
    "rag_wskaznik": "metadane ELI (json), sha256 pełnego PDF, strony cytowanych jednostek; PDF pobiera warstwa RAG aplikacji z url"
   },
-  "refetch": "curl -sL <url> → sha256sum = full_pdf_sha256"
+  "refetch": "curl -A \"Mozilla/5.0\" <url> → sha256sum = full_pdf_sha256"
  }
 }

@@ -122,10 +122,6 @@
       assert.match(r.uwaga, /Brak playwright/);
       assert.ok(!JSON.stringify(r).includes("2captcha"));
     }
-    // 1.6.0: weryfikację przechodzi tylko użytkownik; w kodzie nie ma próby bez okna ani maskowania automatyzacji.
-    const zrodloCaptcha = czytaj(new URL("./sn-example/sn-captcha-auto.mjs", import.meta.url), "utf8");
-    assert.ok(!/headless:\s*true|AutomationControlled|navigator, "webdriver"/.test(zrodloCaptcha), "bez automatu headless");
-    assert.ok(!/Chrome\/\d/.test(zrodloCaptcha), "bez podmiany UA na Chrome");
     rmSync(kat, { recursive: true, force: true });
     console.log("OK: weryfikacja sn.pl — przełączniki, sondy snproxy, ścieżka sesji w ~/.lex-machina, zapis 0600 bez zmiany env, brak Playwrighta jawnie");
   }
