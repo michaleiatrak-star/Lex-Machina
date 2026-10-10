@@ -143,6 +143,18 @@ def extract_act_dzu_pairs(text: str):
     return results
 
 
+# Słowa zbyt ogólne, by łączyć wiersz mapy głównej z aktem z mapy lokalnej.
+GENERIC_WORDS = {"ustawa", "ustawy", "kodeks", "prawo", "przepisy", "rozporzadzenie",
+                 "rozporządzenie", "dnia", "roku", "tekst", "jednolity", "zmianie",
+                 "niektórych", "innych", "oraz", "poprzedni", "aktualny", "zm"}
+
+
+def slowa_aktu(tekst: str) -> set:
+    """Słowa wyróżniające nazwy aktu: > 3 znaki albo skrót wielkimi literami (PCC, KSH)."""
+    return {w.lower() for w in re.findall(r"\w+", tekst)
+            if len(w) > 3 or (len(w) >= 2 and w.isupper() and w.isalpha())} - GENERIC_WORDS
+
+
 def jaccard(a: set, b: set) -> float:
     if not a or not b:
         return 0.0
@@ -191,10 +203,17 @@ def main():
     # do WYCISZANIA i odpowiada na jedno pytanie: „czy ten numer jest
     # gdziekolwiek zarejestrowany centralnie?". Operacja jednokierunkowa —
     # może tylko zmniejszyć liczbę alarmów, nigdy jej zwiększyć.
-    main_numbers = set()
+    #
+    # ⛔ 2026-10-10 (audyt mutacyjny): numer obecny GDZIEKOLWIEK w mapie głównej wyciszał
+    # alarm — DR-13 SG 367→199 przechodził, bo 199 stoi w wierszu SUS. Teraz numer wycisza
+    # tylko wtedy, gdy wiersz mapy głównej, w którym stoi, ma przed tym numerem co najmniej
+    # jedno wspólne słowo wyróżniające z nazwą aktu w mapie lokalnej (F-141 zostaje
+    # wyciszony: własny wiersz „referendum” ma słowo „referendum”).
+    main_numbers = {}
     for _linia in main_text.splitlines():
-        for _m in DZU_PATTERN.finditer(normalizuj(_linia)):
-            main_numbers.add((_m.group(1), _m.group(2)))
+        _n = normalizuj(_linia)
+        for _m in DZU_PATTERN.finditer(_n):
+            main_numbers.setdefault((_m.group(1), _m.group(2)), []).append(slowa_aktu(_n[: _m.start()]))
 
     suspicious = 0
     checked_local_maps = 0
@@ -223,8 +242,8 @@ def main():
                 continue  # brak wystarczająco podobnego dopasowania — poza zakresem
             m_words, m_prefix, m_year, m_poz = best_match
             if (l_year, l_poz) != (m_year, m_poz):
-                if (l_year, l_poz) in main_numbers:
-                    continue  # numer JEST w mapie głównej, przy innym wierszu
+                if any(slowa_aktu(l_prefix) & w for w in main_numbers.get((l_year, l_poz), ())):
+                    continue  # numer JEST w mapie głównej, przy wierszu tego samego aktu
                 dedup_key = (skill_dir.name, l_prefix[:40], m_prefix[:40])
                 if dedup_key in seen_pairs:
                     continue
