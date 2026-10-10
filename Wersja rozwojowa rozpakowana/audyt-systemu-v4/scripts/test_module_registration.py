@@ -11,9 +11,10 @@ nazwach-podciągach (patrz docstring funkcji check_registration niżej).
   zbudowanych 2026-07-16/18 nigdy nie trafiło do rejestru. Analogiczny,
   mniejszy przypadek: mod-KK-art233-244b (jeden plik, sesja 2026-07-20).
 
-ZASADA TESTU: dla KAŻDEGO skilla o strukturze `modules/*.md`, KAŻDY
-plik fizycznie obecny na dysku MUSI być wspomniany (po nazwie pliku,
-bez rozszerzenia .md) GDZIEŚ w treści SKILL.md tego samego skilla.
+ZASADA TESTU: dla KAŻDEGO skilla z katalogiem `modules/`, KAŻDY plik .md
+w `modules/**` (także podkatalogi i nazwy bez `mod-`) MUSI być zarejestrowany:
+nazwą w SKILL.md, kodem (MD1, MP12) w SKILL.md, gdy kod nosi jeden plik, albo
+nazwą w pliku wskazanym z SKILL.md (rejestr modułów, moduł nadrzędny części).
 
 Test jest DETERMINISTYCZNY — nie wymaga LLM ani sieci, wyłącznie
 analiza plików na dysku (ta sama filozofia co ci_check_shared.py).
@@ -27,10 +28,13 @@ Kod wyjścia:
 """
 
 import argparse
+import collections
 import os
 import re
 import sys
 from pathlib import Path
+
+from _lex_common import HIST, module_files
 
 # Skille jawnie WYŁĄCZONE z tego testu — nie mają struktury modules/*.md
 # zarejestrowanej w SKILL.md w ten sam sposób (np. shared/ jest biblioteką
@@ -38,21 +42,19 @@ from pathlib import Path
 # ustalenie przy budowie PORTALE-BRANZOWE-RZAD-2B.md).
 SKIP_SKILLS = {"shared", "audyt-systemu-v4"}
 
-# ⚠️ ZNANE OGRANICZENIE HEURYSTYKI (odnotowane 2026-07-21 przy pierwszym
-# uruchomieniu tego testu): niektóre skille odwołują się do modułów
-# SKRÓCONYMI KODAMI w treści SKILL.md (np. "MD1", "MP0"), zamiast pełną
-# nazwą pliku ("MD1-klasyfikacja.md", "MP0-intake.md") — dla TYCH skilli
-# prosty test "czy nazwa pliku występuje w tekście" daje FAŁSZYWE
-# POZYTYWY (moduł JEST referencjonowany, tylko innym zapisem). Te skille
-# WYMAGAJĄ manualnej weryfikacji zamiast automatycznej — NIE wykluczono
-# ich całkowicie z testu (żeby nie ukryć PRZYSZŁYCH, prawdziwych braków),
-# ale ich wynik NALEŻY interpretować z tym zastrzeżeniem.
-KNOWN_ABBREVIATED_NAMING = {
-    "analizator-dowodow-v3",  # SKILL.md używa "MD1"/"MP0" itd., nie pełnych nazw
-    "pisma-procesowe-v3",     # SKILL.md używa "MOD-ETAPY" jako etykiety w tekście
-                              # opisowym, wymaga weryfikacji manualnej czy to
-                              # faktyczny brak czy tylko inny format odwołania
-}
+# 2026-10-10 (audyt mutacyjny): zbiór KNOWN_ABBREVIATED_NAMING zwalniał
+# analizator-dowodow-v3 i pisma-procesowe-v3 z FAIL na stałe („26 pozycji do weryfikacji
+# manualnej”), więc dowolny nowy moduł w tych skillach przechodził. Zastąpiony regułami
+# rejestracji (patrz check_registration): kod modułu (MD1, MP12, MD-NARR) w SKILL.md,
+# gdy nosi go jeden plik, oraz wzmianka w pliku wskazanym z SKILL.md (rejestr modułów,
+# moduł nadrzędny podkatalogu). Te same reguły obejmują podkatalogi modules/**.
+MODULE_CODE = re.compile(r"^(M[DPX]\d*[a-z]?(?:-NARR)?)-")
+TOK = re.compile(r"[A-Za-z0-9_\-\./]+\.md")
+
+
+def token_re(name: str):
+    """Nazwa jako cały token: nie poprzedzona i nie followed przez [\\w-]."""
+    return re.compile(r"(?<![\w-])" + re.escape(name) + r"(?![\w-])")
 
 
 def semantic_skill_name(skill_dir: Path) -> str:
@@ -111,15 +113,39 @@ def check_registration(skill_dir: Path, modules_dir: Path, skill_md: Path):
     except Exception as e:
         return None, f"BŁĄD ODCZYTU SKILL.md: {e}"
 
-    module_files = sorted(p.stem for p in modules_dir.glob("*.md"))
+    rels = module_files(skill_dir)          # modules/**, także bez prefiksu mod-
+    stem = lambda rel: os.path.splitext(os.path.basename(rel))[0]
+    codes = collections.Counter(
+        MODULE_CODE.match(stem(r)).group(1) for r in rels if MODULE_CODE.match(stem(r)))
+
+    # Pliki „o jeden krok” od SKILL.md: wskazane ścieżką (rejestr modułów, np.
+    # references/MODULY-MAPA.md) oraz moduły z modules/ zarejestrowane nazwą (moduł
+    # nadrzędny rejestruje swoje części w podkatalogu). Pliki historii się nie liczą.
+    hop = set()
+    for t in set(TOK.findall(skill_text)):
+        t2 = t.lstrip("./")
+        if t2.startswith(skill_dir.name + "/"):
+            t2 = t2[len(skill_dir.name) + 1:]
+        if (skill_dir / t2).is_file() and not HIST.search(t2):
+            hop.add(t2)
+    for rel in rels:
+        if "/" not in rel and token_re(stem(rel)).search(skill_text):
+            hop.add("modules/" + rel)
+    hop_text = {h: (skill_dir / h).read_text(encoding="utf-8", errors="replace") for h in sorted(hop)}
+
     missing = []
-    for name in module_files:
-        # Dopasowanie: `name` NIE poprzedzone i NIE followed przez [\w-]
-        pattern = re.compile(
-            r"(?<![\w-])" + re.escape(name) + r"(?![\w-])"
-        )
-        if not pattern.search(skill_text):
-            missing.append(name)
+    for rel in rels:
+        name = stem(rel)
+        if token_re(name).search(skill_text):
+            continue
+        m = MODULE_CODE.match(name)
+        if m and codes[m.group(1)] == 1 and re.search(
+                r"(?<![\w-])" + re.escape(m.group(1)) + r"(?!\w)", skill_text):
+            continue
+        pat = token_re(name)
+        if any(pat.search(t) for h, t in hop_text.items() if h != "modules/" + rel):
+            continue
+        missing.append(rel[:-3])
     return missing, None
 
 
@@ -133,7 +159,6 @@ def main():
     skills = find_skills_with_modules(repo_root)
 
     total_missing = 0
-    total_flagged_for_review = 0
     report_lines = []
 
     for skill_dir, modules_dir, skill_md in skills:
@@ -144,19 +169,10 @@ def main():
             total_missing += 1
             continue
         if missing:
-            if skill_name in KNOWN_ABBREVIATED_NAMING:
-                report_lines.append(
-                    f"  ⚠️ DO WERYFIKACJI MANUALNEJ  {skill_name}: "
-                    f"{len(missing)} plików bez DOSŁOWNEGO dopasowania nazwy "
-                    f"(ZNANE odwołania skrótowe w tym skillu — SPRAWDŹ RĘCZNIE, "
-                    f"nie traktuj automatycznie jako FAIL):"
-                )
-                total_flagged_for_review += len(missing)
-            else:
-                report_lines.append(
-                    f"  BŁĄD  {skill_name}: {len(missing)} niezarejestrowanych modułów:"
-                )
-                total_missing += len(missing)
+            report_lines.append(
+                f"  BŁĄD  {skill_name}: {len(missing)} niezarejestrowanych modułów:"
+            )
+            total_missing += len(missing)
             for name in missing:
                 report_lines.append(f"        - {name}.md")
 
@@ -168,15 +184,11 @@ def main():
         else:
             print("  Wszystkie moduły są zarejestrowane w odpowiadających SKILL.md.")
         print()
-        if total_flagged_for_review:
-            print(f"UWAGA: {total_flagged_for_review} pozycji oznaczonych do WERYFIKACJI "
-                  f"MANUALNEJ (skille z odwołaniami skrótowymi) — NIE liczą się do FAIL.")
         if total_missing:
             print(f"WYNIK T1: FAIL — {total_missing} niezarejestrowanych modułów "
                   f"musi zostać dodanych do SKILL.md.")
         else:
-            print("WYNIK T1: OK — brak niezarejestrowanych modułów (poza pozycjami "
-                  "do weryfikacji manualnej, jeśli występują).")
+            print("WYNIK T1: OK — brak niezarejestrowanych modułów.")
 
     sys.exit(1 if total_missing else 0)
 

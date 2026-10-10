@@ -142,3 +142,23 @@ def module_files(skill_dir, prefix_only=False):
                 continue
             out.append(rel)
     return sorted(out)
+
+
+def logical_modules(skill_dir):
+    """Liczba modułów logicznych (T2): pliki z `modules/` + pliki z podkatalogów, których
+    nie wskazuje (nazwą) żaden moduł z `modules/` — część podzielonego modułu liczy się
+    razem z modułem nadrzędnym, plik w podkatalogu bez rodzica jest osobnym modułem."""
+    rels = module_files(skill_dir)
+    top = [r for r in rels if '/' not in r]
+    texts = []
+    for r in top:
+        with open(os.path.join(str(skill_dir), 'modules', r), encoding='utf-8', errors='replace') as h:
+            texts.append(h.read())
+    bez_rodzica = []
+    for r in rels:
+        if '/' not in r:
+            continue
+        pat = re.compile(r'(?<![\w-])' + re.escape(os.path.splitext(os.path.basename(r))[0]) + r'(?![\w-])')
+        if not any(pat.search(t) for t in texts):
+            bez_rodzica.append(r)
+    return top, bez_rodzica

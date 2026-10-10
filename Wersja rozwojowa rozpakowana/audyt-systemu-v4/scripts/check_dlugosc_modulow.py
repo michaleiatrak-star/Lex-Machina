@@ -40,7 +40,10 @@ Użycie:
 Kod wyjścia: 0 = brak naruszeń progu, 1 = wykryto plik >1000 linii.
 """
 import os
+import re
 import sys
+
+NIE_MODUL = re.compile(r'^(README|INDEX|CHANGELOG|HISTORIA-ZMIAN-PLIKOW)\.md$', re.I)
 
 PROG_CRIT = 1000
 PROG_WARN = 800
@@ -81,7 +84,9 @@ def zbierz(katalog):
                 if n > PROG_WARN:
                     pominiete.append((n, rel))
                 continue
-            if os.path.basename(root) == 'modules' and nazwa.startswith('mod-'):
+            # 2026-10-10: cały `modules/**` (podkatalogi części, nazwy MD1-/MP0-/MOD-/czesc-),
+            # wcześniej tylko `modules/mod-*.md` — 109 z ok. 580 plików modułów było poza testem.
+            if 'modules' in os.path.relpath(root, katalog).split(os.sep) and not NIE_MODUL.search(nazwa):
                 moduly.append((n, rel))
             elif nazwa == 'SKILL.md':
                 skille.append((n, rel))
@@ -105,6 +110,10 @@ PRZYPADKI_SELFTEST = [
      'shared/oplaty/01-a.md', 'kanoniczne'),
     ('moduł dziedzinowy trafia do kategorii modułów',
      'dr-99-x/modules/mod-y.md', 'moduly'),
+    ('moduł bez prefiksu mod- (MD1-) też jest modułem',
+     'dr-99-x/modules/MD1-y.md', 'moduly'),
+    ('część w podkatalogu modules/ też jest modułem',
+     'dr-99-x/modules/podzial/czesc-01.md', 'moduly'),
     ('SKILL.md ma własną kategorię',
      'dr-99-x/SKILL.md', 'skille'),
     ('plik poza shared i poza modules jest pomijany',
@@ -146,7 +155,7 @@ def main(katalog=None, pokaz_strefe=True):
     kanon_duze = sorted([x for x in kanoniczne if x[0] > PROG_WARN], reverse=True)
 
     print('check_dlugosc_modulow.py — T13 (próg długości, ZASADA 13)')
-    print(f'  przeskanowano modułów `modules/mod-*.md`: {len(moduly)}')
+    print(f'  przeskanowano modułów `modules/**/*.md`: {len(moduly)}')
     print(f'  zasobów kanonicznych `shared/**/*.md`: {len(kanoniczne)}'
           f' (w tym satelity w podkatalogach)')
     print(f'  próg CRIT: >{PROG_CRIT} linii | strefa WARN: {PROG_WARN}-{PROG_CRIT}\n')

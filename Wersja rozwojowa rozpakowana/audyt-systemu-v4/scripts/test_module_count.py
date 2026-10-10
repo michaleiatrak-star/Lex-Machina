@@ -31,6 +31,8 @@ import re
 import sys
 from pathlib import Path
 
+from _lex_common import logical_modules
+
 SKIP_SKILLS = {"shared", "audyt-systemu-v4"}
 
 # Wzorzec liczący linię typu: "## Moduły (52 łącznie — ..." lub
@@ -72,7 +74,11 @@ def check_count(skill_dir: Path, modules_dir: Path, skill_md: Path):
         return None, None  # brak deklaracji licznika — test nie dotyczy tego skilla
 
     declared = int(m.group(1))
-    actual_physical = len(list(modules_dir.glob("*.md")))
+    # 2026-10-10: modules/** — część w podkatalogu wskazana przez moduł nadrzędny liczy się
+    # z nim, plik w podkatalogu bez rodzica — jako osobny moduł (wcześniej glob("*.md")
+    # nie widział podkatalogów, więc moduł dodany w podkatalogu nie zmieniał licznika).
+    top, bez_rodzica = logical_modules(skill_dir)
+    actual_physical = len(top) + len(bez_rodzica)
 
     return (declared, actual_physical), None
 
