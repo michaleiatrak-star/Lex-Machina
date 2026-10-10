@@ -10,7 +10,7 @@ CO SPRAWDZA
   C. każdy konsument ma w SKILL.md wywołanie `shared/MOD-WEJSCIE-DOKUMENTU.md` (FAIL);
   D. żaden konsument nie trzyma KOPII treści reguł (nagłówki `## WD-1`/`WD-1.1`…) (FAIL) —
      wzorzec F-115: kopie dryfują przy pierwszej zmianie źródła.
-Offline. Kod: 0 PASS, 1 FAIL, 2 błąd wejścia. --selftest: 4 przypadki.
+Offline. Kod: 0 PASS, 1 FAIL, 2 błąd wejścia. --selftest: 5 przypadków.
 """
 import argparse, re, shutil, sys, tempfile
 from pathlib import Path
@@ -26,8 +26,9 @@ def konsumenci(root: Path):
     for l in dg.read_text(encoding="utf-8").splitlines():
         if l.startswith(f"| `{MOD}`"):
             kol = l.split("|")[3]
-            return [n for n in re.findall(r"[a-z0-9]+(?:-[a-z0-9]+)+", kol.split("—")[0]) if (root / n).is_dir()] \
-                or re.findall(r"[a-z0-9]+(?:-[a-z0-9]+)+", kol.split("—")[0])
+            # 2026-10-10: bez filtra „katalog istnieje” — odfiltrowanie po cichu usuwało
+            # z listy konsumenta z literówką albo usuniętego skilla zamiast FAIL B.
+            return re.findall(r"[a-z0-9]+(?:-[a-z0-9]+)+", kol.split("—")[0])
     return None
 
 
@@ -72,6 +73,9 @@ def _selftest() -> int:
         wyn.append(("kopia treści → FAIL D", any(b.startswith("D:") for b in sprawdz(tmp)[0])))
         (tmp / "shared" / MOD).write_text("## WD-1\n## WD-3\n", encoding="utf-8")
         wyn.append(("moduł bez WD-2 → FAIL A", any("WD-2" in b for b in sprawdz(tmp)[0])))
+        (tmp / "shared" / "DEPENDENCY-GRAPH.md").write_text(
+            f"| `{MOD}` | ACTIVE | skill-a, skill-zz — utworzony |\n", encoding="utf-8")
+        wyn.append(("nieistniejący konsument → FAIL B", any(b.startswith("B:") for b in sprawdz(tmp)[0])))
         for n, w in wyn:
             print(f"  {'✅' if w else '❌'} {n}"); ok &= w
     finally:
