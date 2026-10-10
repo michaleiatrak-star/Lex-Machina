@@ -257,7 +257,8 @@ WYJATEK = re.compile(r"T28-OK:")
 # ⚠️ ŚWIADOMY KOMPROMIS. Moduły muszą móc OPISAĆ błąd, żeby przed nim ostrzegać
 #    ("art. 503 KPC jest UCHYLONY"). Bez tego wyłączenia bramka zgłaszałaby
 #    własną dokumentację naprawy i zostałaby wyłączona po drugim przebiegu.
-#    Cena: da się ominąć W1 dopisując do linii słowo "uchylony". Uznajemy to za
+#    Cena: da się ominąć W1 dopisując słowo "uchylony" obok cytatu (od 2026-10-10
+#    tylko w oknie OKNO_OPISU znaków, nie w dowolnym miejscu linii). Uznajemy to za
 #    akceptowalne, bo taki zapis sam w sobie niesie ostrzeżenie dla czytelnika —
 #    inaczej niż milczący błędny cytat, przed którym ten test broni.
 OPIS_BLEDU = (
@@ -265,6 +266,67 @@ OPIS_BLEDU = (
     "naprawion", "naprawa", "obalone", "nieaktualn", "błędn", "blednie",
     "zamiast", "-> art", "→ art", "znany błędny cytat", "t28",
 )
+
+
+# 2026-10-10 (audyt mutacyjny): słowo z OPIS_BLEDU wyciszało CAŁĄ linię, więc błędny
+# cytat w linii, która gdziekolwiek zawierała np. „zamiast”, przechodził. Teraz marker
+# musi stać w sąsiedztwie dopasowania (OKNO_OPISU znaków przed początkiem lub po końcu).
+OKNO_OPISU = 60
+
+# Prekompilacja (T28 był ok. 10 s, ~40 % w re._compile): wzorce rejestru skompilowane raz.
+# Filtr wstępny: wzorzec, który na pewno wymaga cyfry (analiza drzewa składni wyrażenia,
+# nie heurystyka), nie jest sprawdzany w linii bez cyfr (ok. 69 % linii korpusu).
+try:
+    import re._parser as _sre_parse          # Python >= 3.11
+    import re._constants as _sre_c
+except ImportError:                          # pragma: no cover
+    import sre_parse as _sre_parse
+    import sre_constants as _sre_c
+
+
+def _wymaga_cyfry(drzewo):
+    """True, gdy KAŻDE dopasowanie zawiera cyfrę ASCII (konserwatywnie: w razie
+    wątpliwości False — wtedy wzorzec jest sprawdzany w każdej linii)."""
+    for op, av in drzewo:
+        if _wezel_wymaga_cyfry(op, av):
+            return True
+    return False
+
+
+def _wezel_wymaga_cyfry(op, av):
+    if op is _sre_c.LITERAL:
+        return chr(av).isdigit() and chr(av).isascii()
+    if op is _sre_c.IN:
+        if any(o is _sre_c.NEGATE for o, _ in av):
+            return False
+        for o, a in av:
+            if o is _sre_c.LITERAL and chr(a) in "0123456789":
+                continue
+            if o is _sre_c.RANGE and "0" <= chr(a[0]) and chr(a[1]) <= "9":
+                continue
+            if o is _sre_c.CATEGORY and a is _sre_c.CATEGORY_DIGIT:
+                continue
+            return False
+        return True
+    if op in (_sre_c.MAX_REPEAT, _sre_c.MIN_REPEAT):
+        mn, _mx, sub = av
+        return mn >= 1 and _wymaga_cyfry(sub)
+    if op is _sre_c.SUBPATTERN:
+        return _wymaga_cyfry(av[-1])
+    if op is _sre_c.BRANCH:
+        return all(_wymaga_cyfry(g) for g in av[1])
+    return False
+
+
+REJESTR_C = [(ident, re.compile(wzor, re.IGNORECASE), poprawnie, sesja,
+              _wymaga_cyfry(_sre_parse.parse(wzor, re.IGNORECASE)))
+             for ident, wzor, poprawnie, sesja in REJESTR]
+CYFRA = re.compile(r"[0-9]")
+
+
+def opisuje_blad_przy(linia_nisko, start, koniec):
+    okno = linia_nisko[max(0, start - OKNO_OPISU):koniec + OKNO_OPISU]
+    return any(m in okno for m in OPIS_BLEDU)
 
 
 def pliki(katalog):
@@ -289,12 +351,13 @@ def skanuj_tekst(tekst, sciezka="<bufor>"):
             continue
 
         nisko_linii = linia.lower()
-        opisuje_blad = any(m in nisko_linii for m in OPIS_BLEDU)
 
-        for ident, wzor, poprawnie, sesja in REJESTR:
-            if opisuje_blad:
+        ma_cyfre = CYFRA.search(linia) is not None
+        for ident, wzor, poprawnie, sesja, wymaga_cyfry in REJESTR_C:
+            if wymaga_cyfry and not ma_cyfre:
                 continue
-            if re.search(wzor, linia, re.IGNORECASE):
+            if any(not opisuje_blad_przy(nisko_linii, m.start(), m.end())
+                   for m in wzor.finditer(linia)):
                 fails.append((sciezka, i, ident,
                               "znany błędny cytat -> %s [zweryfikowane %s]"
                               % (poprawnie, sesja)))
@@ -427,6 +490,11 @@ PRZYPADKI = [
     ("ale milczący błędny cytat obok opisu w innej linii — nadal FAIL",
      "\u26d4 art. 503 KPC jest uchylony\n| Sprzeciw | 14 dni | art. 503 \u00a71 KPC |",
      1, 0),
+    ("słowo-marker daleko od cytatu w tej samej linii NIE wycisza (2026-10-10)",
+     "| Sprzeciw | 14 dni | art. 503 \u00a71 KPC | termin liczy się od doręczenia nakazu "
+     "pozwanemu | formularz urzędowy stosuj zamiast pisma odręcznego |", 1, 0),
+    ("ten sam cytat dwa razy: jeden opisany, drugi milczący — FAIL",
+     "art. 503 KPC jest uchylony; " + "x" * 80 + " | Sprzeciw | art. 503 \u00a71 KPC |", 1, 0),
     ("marker T28-OK wyłącza kontrolę w tej jednej linii",
      "art. 503 \u00a71 KPC  <!-- T28-OK: cytat historyczny w opisie naprawy -->",
      0, 0),
