@@ -11,7 +11,7 @@ i `audyt-systemu-v4`); krawędzie z audytu i z rejestrów nie liczą się. Plik 
 osiągalny bezpośrednio albo przez łańcuch plików `shared`. Allowlista z uzasadnieniem — niżej.
 Offline, deterministyczny. Kod wyjścia 1 = nieosiągalny plik spoza allowlisty.
 """
-import os, re, sys, json, collections
+import os, re, sys, collections
 
 import argparse
 ap = argparse.ArgumentParser()
@@ -31,66 +31,16 @@ ALLOW = {
     'tools/przyklady/sesja_pelna.json': 'fikstura self-testu walidatora, wskazana z tools/README.md',
 }
 
-HIST = re.compile(r'(CHECKSUMS\.sha256|CHANGELOG\.md|HISTORIA-ZMIAN-PLIKOW\.md|AUDIT-JOURNAL\.md|mapa_dzu_[^/]*\.md|WARN-OTWARTE\.md|DEDUPLICATION-POLICY\.md|CHECKLIST-DEDUP\.md)$')
-SKIP = ('/mcp-servers/', '/node_modules/', '/__pycache__/', '/.git/')
-TXT = ('.md', '.py', '.sh', '.json', '.yaml', '.yml', '.txt', '.mjs', '.js', '.jsx', '.html')
-INFRA = re.compile(r'(^SKILL\.md$|^CHECKSUMS\.sha256$|^\.claude-plugin/plugin\.json$|^agents/openai\.yaml$|'
-                   r'^assets/icon\.svg$|^README\.md$|^PORTABILITY-MANIFEST\.md$|^MANIFEST\.md$|^\.mcp\.json$|^NOTICE$|^LICENSE$|^(references/)?CHANGELOG\.md$|^references/HISTORIA-ZMIAN-PLIKOW\.md$|__init__\.py$)')
+from _lex_common import RefGraph, HIST
 
-skills = sorted(d for d in os.listdir(ROOT) if os.path.isfile(os.path.join(ROOT, d, 'SKILL.md')))
-files, texts = {}, {}
-for s in skills:
-    base = os.path.join(ROOT, s)
-    for dp, dn, fn in os.walk(base):
-        if any(x in dp + '/' for x in SKIP):
-            continue
-        for f in fn:
-            ap = os.path.join(dp, f); rel = os.path.relpath(ap, base)
-            files[(s, rel)] = ap
-            if f.endswith(TXT):
-                texts[(s, rel)] = open(ap, encoding='utf-8', errors='replace').read()
+G = RefGraph(ROOT)
+skills, files, texts, dirtoks = G.skills, G.files, G.texts, G.dirtoks
 
-TOK = re.compile(r'[A-Za-z0-9_\-\.ąćęłńóśźżĄĆĘŁŃÓŚŹŻ/]+\.(?:md|py|sh|json|yaml|yml|mjs|js|jsx|html|svg|txt)')
-WORD = re.compile(r'[A-Za-z0-9_\-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+')
-toks = {k: set(TOK.findall(t)) for k, t in texts.items()}
-words = {k: set(WORD.findall(t)) for k, t in texts.items()}
-dirtoks = {k: set(re.findall(r'[A-Za-z0-9_\-\./]+/', t)) for k, t in texts.items()}
-bn_count = collections.Counter(os.path.basename(r) for (_, r) in files)
-
-def aliases(s):
-    a = {s}
-    m = re.match(r'(dr-\d\d)', s)
-    if m: a.add(m.group(1))
-    return a
-
-def refers(src, s, rel):
-    bn = os.path.basename(rel); stem = os.path.splitext(bn)[0]
-    T = toks.get(src, ())
-    if bn_count[bn] == 1:
-        if any(os.path.basename(t) == bn for t in T):
-            return True
-        return len(stem) >= 8 and stem in words.get(src, ())
-    for t in T:
-        if os.path.basename(t) != bn:
-            continue
-        t2 = t.lstrip('./')
-        if src[0] == s and (t2 == rel or t2.endswith('/' + rel) and t2[:-len(rel)].rstrip('/').split('/')[-1] in aliases(s)):
-            return True
-        for a in aliases(s):
-            if t2.endswith(a + '/' + rel):
-                return True
-    return False
-
-
-import collections
-INF = re.compile(r'(^SKILL\.md$)')
 edges = collections.defaultdict(set)
 tgts = [k for k in files]
 for (s, rel) in tgts:
-    for src in texts:
-        if src == (s, rel) or HIST.search(src[1]):
-            continue
-        if refers(src, s, rel):
+    for src in G.referrers(s, rel):
+        if not HIST.search(src[1]):
             edges[src].add((s, rel))
     regdirs = set(dirtoks.get((s, 'SKILL.md'), ())) | set(dirtoks.get((s, 'MANIFEST.md'), ()))
     if any(rel.startswith(d.lstrip('./')) and d.lstrip('./') != rel and d.lstrip('./').count('/') >= 2 for d in regdirs):

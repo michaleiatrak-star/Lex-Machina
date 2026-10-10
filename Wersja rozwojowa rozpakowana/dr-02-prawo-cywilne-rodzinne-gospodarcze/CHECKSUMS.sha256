@@ -1,7 +1,7 @@
 f47a08645edca7d50ae2e4f3f43135bbe60f4f0b7f50338831bcfa9289f7807e  ./MAPA-AKTOW.md
 5b3fd066e29140dac6a2b9b19f0a2044684dc05b0d859a55d1fff628edf26916  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-65f1c9cd163b9e40436e1e13b46a117e6229913326f2e25f489a9a717d22e7cf  ./SKILL.md
+0f23304298ee51af05a578fb4f88c12956697842ef242d33baca403898d85529  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -22,7 +22,7 @@ d07c5d2ea604d4c0aed8e7eaa7f3bf617a47ecfad44e822f633d45e6371f6c17  ./modules/kro-
 1305d551b880dc26e2a7965e2c0843e016fbc54a241346b00fb68a5bb0f85e5f  ./modules/kro-rodzinne/czesc-08-referencje-strategia.md
 4757761bf4dd7fd6a0a2b0067a841d9190f8f2d45b50cb4fd14677383a42a761  ./modules/mod-KC-current-state-COV.md
 70af7c73de42b5ac15d09be41c1a29174f3748c24cc126299168100b09b6744a  ./modules/mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md
-52e6e2c473087891fc25562a0773b2cc1ccc227266202fcea77821670eef0f53  ./modules/mod-KC-konsumenckie.md
+ab8df6a052de17d302fd2c453b0d571590363213d62b6f0c4d2ea4770217d8f8  ./modules/mod-KC-konsumenckie.md
 e18a33fe71088bc3f00b736eee42b7cea9949eb93c804efe3b28e3c80d51b7f0  ./modules/mod-KC-kredyty-frankowe.md
 1211b4f7905c851ed2644046a94e51c79499401a20fab31186cb1541c6c843ac  ./modules/mod-KC-spadki-dlugi-umowy-transgraniczne.md
 770d03bdc147f5658deb7abbb59a4bd75b1fca2d5a4f79c7069aef7cb1de864a  ./modules/mod-KC-spadki-zachowek-dzial-rozrzadzenia.md
@@ -105,16 +105,19 @@ bc9125f92d068cf5aae2c3d69a0413bd14303b5e5920ff4e6ec1547a1c809fb0  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-c5a29133a42b5d807de575b65060c7b26eda12c12f2da4d9df9eed8173dd9e52  ./references/CHANGELOG.md
+6c13256e10715062ed800200dbb5058c5d7791ac84224c2ab020f1495e9f3dfa  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
+75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
 52a094221ec53d81190c3e613a40f5b5b7d67e96e346e713a9f68821269a9a55  ./references/insolvency/dodawanie-ustawy.md
 bcc7920cbff7be85427807f4d360e215ab0775f06179bad252c7982b847dacfc  ./references/insolvency/katalog.md
 86172c3e055cc9ed4587ecd944dc301c1d318fc33ec17d448d98d308a31d96d3  ./references/insolvency/plan-pokrycia.md
 dce07bb0a66327427786e9f9dbe1478b5501aeddafeba8841a8a18978267e09a  ./references/insolvency/scenariusze-weryfikacji.md
+50c8272a1fcf1b5af830ee1bb1d46806618a7238f4e5e53a2bf57470b760c1e6  ./references/insolvency/sources.json
 f01f605d8480dfb5d9bd2eb8d087f53f06d41d1b25e8994716cf36157df91c68  ./references/insolvency/sources/amendment-2025-1085.json
 9b8bbc8810b71da45067f8b1a0d4ef4ab40f541e9098bd93006f7079368fbca9  ./references/insolvency/sources/amendment-2025-1170.json
 17b5cccd83a5115656ef122b5bc0f3f96f2ebd5610b1f9fbda51efc145cacee0  ./references/insolvency/sources/amendment-2025-1172.json
+a9b7d1fd8c054ec34ad6ecb39a55e4e2ffe0a8c20b929fea294ecf9873e03abd  ./references/insolvency/sources/amendment-2026-1206.json
 81683309c9cce0c852d8ce4a50a9430e52e29dce5945a402a3ec58ba35d2ab15  ./references/insolvency/sources/amendment-2026-176.json
 e9f0b0079dbf90dae5d1b19e9df895936f34b648295b83f226b6a8d8399a02cb  ./references/insolvency/sources/amendment-2026-331.json
 f93207239caa842dc70fb06e053db6158903882cbe6e9b2052b765f85e6e472e  ./references/insolvency/sources/amendment-2026-340.json
@@ -122,7 +125,6 @@ c4784006a7ef13281e8dc3bc0510960d3f4a6cd6a35cf87d4824692c545e61e2  ./references/i
 ac3267fb3f47bf79d4873887c8920b04d032b4c66fed58b1c9d93bb00f12ac57  ./references/insolvency/sources/history-prup-2025.json
 292020124b6f884ff4a122012ce80db6d65ffc2e66a541d57a4082ec59e35aa9  ./references/insolvency/sources/original-prrestr.json
 14a395d94baa46deb509423f11969ed0c9cac1b2ef912578629958736242d8a2  ./references/insolvency/sources/original-prup.json
-50c8272a1fcf1b5af830ee1bb1d46806618a7238f4e5e53a2bf57470b760c1e6  ./references/insolvency/sources.json
 3cb972a5687c7a43b5cb9c319cb766c98e6d5bdd98f5cf5912847d352bfafb8d  ./references/insolvency/wersje-i-przepisy-przejsciowe.md
 ce37ae44906642e8e8be7754a19718d320220031873346e9da4670bc4a7c7bcb  ./references/prrestr/coverage.csv
 58a8feff302808916b929ada7145f6f47bda1b94904cb48f64f4b7c2f36539a9  ./references/prrestr/coverage.json
@@ -148,5 +150,3 @@ f4d3d58353d81f3c160d00f6e1e4153bff264ee72fc6af606ce0890a2f3c3dc2  ./scripts/buil
 2f3af4a1d78d15ad5e860da8ed9e771a4a7a0493154e8c8a3d7db33cc6fea7f7  ./scripts/prup.py
 73f9278b5f02a41346defd2f53d7283b75319e3239a90327cc0ce76924a72041  ./scripts/test_insolvency.py
 da2f60c16a8f2e406df57882923a9c63b4fd7e7df2a03c254bb56e0e78941860  ./scripts/test_prup.py
-75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
-a9b7d1fd8c054ec34ad6ecb39a55e4e2ffe0a8c20b929fea294ecf9873e03abd  ./references/insolvency/sources/amendment-2026-1206.json

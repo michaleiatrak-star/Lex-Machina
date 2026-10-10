@@ -105,4 +105,9 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    # 2026-10-10: brak modułu/rejestru/skilla = czytelny FAIL zamiast wyjątku.
+    try:
+        raise SystemExit(main())
+    except (FileNotFoundError, KeyError, StopIteration) as exc:
+        print(f'FAIL brak wymaganego pliku, skilla albo wiersza: {getattr(exc, "filename", None) or exc!r}')
+        raise SystemExit(1)

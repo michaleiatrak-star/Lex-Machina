@@ -69,6 +69,11 @@ def main():
     print(f'Katalog: {root}')
     files = sorted(glob.glob(os.path.join(root, 'dr-*', 'MAPA-AKTOW.md')))
     rm = os.path.join(root, 'prawo-polskie-v2', 'ROUTING-MAP.md')
+    # 2026-10-10: brak ROUTING-MAP albo map DR = FAIL (wcześniej plik był po cichu pomijany).
+    if not os.path.exists(rm):
+        print('  ⛔ brak prawo-polskie-v2/ROUTING-MAP.md'); err += 1
+    if len(files) != 16:
+        print(f'  ⛔ map dr-*/MAPA-AKTOW.md: {len(files)} (oczekiwane 16)'); err += 1
     for path in files + ([rm] if os.path.exists(rm) else []):
         skill = os.path.relpath(path, root).split(os.sep)[0]
         tabs, orphan = tables(path)

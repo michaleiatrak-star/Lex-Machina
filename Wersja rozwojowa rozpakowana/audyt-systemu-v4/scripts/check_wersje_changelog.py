@@ -56,6 +56,10 @@ gdy major z dziennika różni się od dyskowego. Wynik ZANIŻONY (przeoczone pod
 jest bezpieczny; wynik ZAWYŻONY dałby fałszywy alarm, a te uczą ignorowania testu.
 Bez tych trzech zabezpieczeń przebiegi kontrolne dawały: numer Dz.U. „2026.215"
 jako rzekomą wersję oraz cztery cudze numery z linii wyliczających kilka skilli.
+Od 2026-10-10 parser czyta też format bieżący (bez strzałki, ze skrótami nazw):
+„- Wersje: audyt 6.216, dr-04 3.49”, „### 5. WERSJE” + wiersz par, punkt listy
+„- skill X.Y: …” oraz „## AUDYT-… (6.216)”. Wcześniej kontrola była martwa:
+najwyższa wersja z dziennika była niższa od dyskowej we wszystkich 32 skillach.
 
 Kod wyjścia: 0 = brak rozbieżności, 1 = wykryto rozbieżności.
 
@@ -220,45 +224,26 @@ def wersje_z_dziennika(baza, nazwa_skilla):
         if not os.path.exists(plik):
             _CACHE_DZIENNIK[plik] = None
         else:
-            _CACHE_DZIENNIK[plik] = open(
+            _CACHE_DZIENNIK[plik] = _jednostki_dziennika(open(
                 plik, encoding="utf-8", errors="replace"
-            ).read().splitlines()
-    linie = _CACHE_DZIENNIK[plik]
-    if linie is None:
+            ).read().splitlines())
+    jednostki = _CACHE_DZIENNIK[plik]
+    if jednostki is None:
         return None
     znalezione = []
-    # ⛔ F-189 (2026-09-16): blok „**Wersje:**" bywa wielowierszowy. Dwie
-    # postacie były niewidoczne: (a) linia kontynuacji bez słowa „wersj"
-    # (zapis „X → Y" bez prefiksu `v` nie był w niej szukany) oraz (b) nazwa
-    # skilla na końcu jednej linii, a numery na początku następnej. Skutek
-    # zmierzony 2026-09-16: 9 regresji dyskowych, T12 zgłaszał jedną.
-    # Blok od linii zawierającej „wersj" do pierwszej pustej linii jest
-    # SKLEJANY w jeden ciąg i dopiero wtedy dzielony na segmenty.
-    jednostki = []          # (tekst, czy_blok_wersji)
-    blok = None
-    for linia in linie:
-        if not linia.strip():
-            if blok is not None:
-                jednostki.append((" ".join(blok), True))
-                blok = None
-            continue
-        if linia.lstrip().startswith("|"):
-            # Wiersz tabeli jest samodzielną jednostką (jeden skill na wiersz);
-            # sklejenie tabeli w ciąg przypisywało numer z sąsiedniego wiersza.
-            jednostki.append((linia, True))
-            continue
-        if blok is not None:
-            blok.append(linia.strip())
-        elif "wersj" in linia.lower():
-            blok = [linia.strip()]
-        else:
-            jednostki.append((linia, False))
-    if blok is not None:
-        jednostki.append((" ".join(blok), True))
+    wz_aliasow = _wzorzec_aliasow(nazwa_skilla)
 
-    for tekst, w_bloku_wersji in jednostki:
-        if nazwa_skilla not in tekst:
+    for tekst, rodzaj in jednostki:
+        if rodzaj == "naglowek":
+            # „## AUDYT-… (6.216)” — numer w nawiasie na końcu nagłówka to wersja audytu.
+            if nazwa_skilla == "audyt-systemu-v4":
+                m = NAGLOWEK_AUDYT.match(tekst)
+                if m:
+                    znalezione.append(m.group(1))
             continue
+        if not wz_aliasow.search(tekst):
+            continue
+        w_bloku_wersji = rodzaj in ("blok", "tabela", "punkt")
         # ⚠️ Dziennik często wylicza kilka skilli w JEDNEJ linii
         # („`pisma-proste-v2` v2.5→2.6, `pisma-procesowe-v3` v5.14→5.15").
         # Bez podziału na segmenty parser przypisywał cudze podbicie — pierwszy
@@ -271,13 +256,93 @@ def wersje_z_dziennika(baza, nazwa_skilla):
         segmenty = [c for s_ in re.split(r"[,;]", tekst)
                     for c in re.split(r"(?=`[^`]+`)", s_)]
         for segment in segmenty:
-            if nazwa_skilla not in segment:
-                continue
-            _dopasuj_segment(segment, znalezione, w_bloku_wersji, nazwa_skilla)
+            if nazwa_skilla in segment:
+                _dopasuj_segment(segment, znalezione, w_bloku_wersji, nazwa_skilla)
+            if rodzaj in ("blok", "punkt"):
+                _dopasuj_bez_strzalki(segment, znalezione, wz_aliasow)
 
     if not znalezione:
         return None
     return max(znalezione, key=klucz)
+
+
+# 2026-10-10 (audyt mutacyjny): od ok. 2026-10-04 dziennik zapisuje wersje bez strzałki
+# i skrótami nazw — „- Wersje: audyt 6.216, dr-04 3.49”, „### 5. WERSJE” + wiersz par,
+# „- raport-klienta-v1 1.7: …”, „## AUDYT-… (6.216)”. Parser znał tylko „X → Y” przy pełnej
+# nazwie, więc najwyższa wersja z dziennika była NIŻSZA od dyskowej we wszystkich skillach,
+# a kontrola 5 nie mogła niczego wykryć. Zapisy bez strzałki liczą się WYŁĄCZNIE w bloku
+# „Wersje”/„WERSJE” i w punkcie listy zaczynającym się od par „skill X.Y[, skill X.Y]:”.
+ALIASY_STALE = {"audyt-systemu-v4": ["audyt"], "shared": ["biblioteka wspólna"]}
+NAGLOWEK_AUDYT = re.compile(r"^## AUDYT-\S+ .*\((\d+\.\d+(?:\.\d+)?)\)\s*$")
+_PARA = r"`?[\w-]+`?\s+v?\d+\.\d+(?:\.\d+)?"
+PUNKT_WERSJI = re.compile(r"^\s*[-*]\s+" + _PARA + r"(?:\s*,\s*" + _PARA + r")*\s*:")
+NAGLOWEK_WERSJI = re.compile(r"^#+\s.*\bwersj", re.I)
+WERSJA_PO_NAZWIE = re.compile(
+    r"`?\s+\*{0,2}v?(\d+\.\d+(?:\.\d+)?)(?:\s*(?:→|->)\s*\*{0,2}v?(\d+\.\d+(?:\.\d+)?))?(?![\d/]|\.\d)"
+)
+
+
+def _wzorzec_aliasow(nazwa_skilla):
+    alternatywy = [re.escape(nazwa_skilla)]
+    m = re.match(r"(dr-\d\d)-", nazwa_skilla)
+    if m:
+        alternatywy.append("(?i:" + re.escape(m.group(1)) + ")")
+    alternatywy += [re.escape(a) for a in ALIASY_STALE.get(nazwa_skilla, [])]
+    return re.compile(r"(?<![\w-])(?:" + "|".join(alternatywy) + r")(?![\w/-])")
+
+
+def _jednostki_dziennika(linie):
+    """Dzieli dziennik na jednostki (tekst, rodzaj): naglowek / tabela / blok / punkt / proza."""
+    # ⛔ F-189 (2026-09-16): blok „**Wersje:**" bywa wielowierszowy. Dwie
+    # postacie były niewidoczne: (a) linia kontynuacji bez słowa „wersj"
+    # (zapis „X → Y" bez prefiksu `v` nie był w niej szukany) oraz (b) nazwa
+    # skilla na końcu jednej linii, a numery na początku następnej. Skutek
+    # zmierzony 2026-09-16: 9 regresji dyskowych, T12 zgłaszał jedną.
+    # Blok od linii zawierającej „wersj" do pierwszej pustej linii jest
+    # SKLEJANY w jeden ciąg i dopiero wtedy dzielony na segmenty.
+    jednostki = []
+    blok = None
+    for linia in linie:
+        if linia.startswith("## AUDYT"):
+            if blok is not None:
+                jednostki.append((" ".join(blok), "blok"))
+                blok = None
+            jednostki.append((linia, "naglowek"))
+            continue
+        if not linia.strip():
+            # Nagłówek „### 5. WERSJE” rozdzielony pustą linią od listy wersji
+            # nie zamyka bloku.
+            if blok is not None and not (len(blok) == 1 and NAGLOWEK_WERSJI.match(blok[0])):
+                jednostki.append((" ".join(blok), "blok"))
+                blok = None
+            continue
+        if linia.lstrip().startswith("|"):
+            # Wiersz tabeli jest samodzielną jednostką (jeden skill na wiersz);
+            # sklejenie tabeli w ciąg przypisywało numer z sąsiedniego wiersza.
+            jednostki.append((linia, "tabela"))
+            continue
+        if blok is not None:
+            blok.append(linia.strip())
+        elif "wersj" in linia.lower():
+            blok = [linia.strip()]
+        elif PUNKT_WERSJI.match(linia):
+            jednostki.append((linia, "punkt"))
+        else:
+            jednostki.append((linia, "proza"))
+    if blok is not None:
+        jednostki.append((" ".join(blok), "blok"))
+    return jednostki
+
+
+def _dopasuj_bez_strzalki(segment, znalezione, wz_aliasow):
+    """„skill X.Y” / „skill X.Y → Z” bezpośrednio za nazwą (pełną albo skrótem) skilla."""
+    for m_n in wz_aliasow.finditer(segment):
+        m = WERSJA_PO_NAZWIE.match(segment, m_n.end())
+        if not m:
+            continue
+        kandydat = m.group(2) or m.group(1)
+        if int(kandydat.split(".")[0]) < MAX_MAJOR_WERSJI:
+            znalezione.append(kandydat)
 
 
 def _dopasuj_segment(segment, znalezione, w_bloku_wersji=False, nazwa_skilla=None):
