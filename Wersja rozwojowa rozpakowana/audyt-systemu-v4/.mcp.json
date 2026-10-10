@@ -69,6 +69,13 @@
         "${CLAUDE_PLUGIN_ROOT}/mcp-servers/dist/lex-mcp.mjs",
         "wl"
       ]
+    },
+    "lex-sn": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/mcp-servers/dist/lex-mcp.mjs",
+        "sn"
+      ]
     }
   }
 }

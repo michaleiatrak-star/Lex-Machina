@@ -125,6 +125,60 @@
     rmSync(kat, { recursive: true, force: true });
     console.log("OK: weryfikacja sn.pl — przełączniki, sondy snproxy, ścieżka sesji w ~/.lex-machina, zapis 0600 bez zmiany env, brak Playwrighta jawnie");
   }
+  {
+    // 1.7.0: okno w przeglądarce systemowej (DevTools) — wyszukiwanie przeglądarki, ramki WebSocket,
+    // pełny przebieg okna na atrapie CDP; bez sieci i bez prawdziwej przeglądarki.
+    const { kandydaciPrzegladarki, znajdzPrzegladarke, dekodujRamki } = await import("./sn-example/przegladarka-systemowa.mjs");
+    const { otworzOkno, stanOkna } = await import("./sn-example/sn-captcha-auto.mjs");
+    const { mkdtempSync, readFileSync: czytaj, rmSync } = await import("node:fs");
+    const { tmpdir } = await import("node:os");
+    const { join } = await import("node:path");
+    const win = kandydaciPrzegladarki("win32", { "ProgramFiles(x86)": "C:\\PF86", ProgramFiles: "C:\\PF" });
+    assert.match(win[0], /PF86\\Microsoft\\Edge\\Application\\msedge\.exe$/, "Edge pierwszy na Windowsie");
+    assert.ok(win.some((p) => /Google\\Chrome\\Application\\chrome\.exe$/.test(p)));
+    assert.ok(kandydaciPrzegladarki("darwin", { HOME: "/Users/u" }).some((p) => p.endsWith("Google Chrome.app/Contents/MacOS/Google Chrome")));
+    assert.ok(!kandydaciPrzegladarki("darwin", { HOME: "/Users/u" }).some((p) => /Safari/.test(p)), "Safari nie obsługuje DevTools");
+    const chrome = kandydaciPrzegladarki("darwin", { HOME: "/Users/u" }).find((p) => /Google Chrome$/.test(p));
+    assert.strictEqual(znajdzPrzegladarke({ HOME: "/Users/u" }, "darwin", (p) => p === chrome), chrome);
+    assert.strictEqual(znajdzPrzegladarke({ HOME: "/Users/u" }, "darwin", () => false), null);
+    assert.strictEqual(znajdzPrzegladarke({ SN_PRZEGLADARKA: "/x/edge" }, "linux", (p) => p === "/x/edge"), "/x/edge");
+    assert.strictEqual(znajdzPrzegladarke({ SN_PRZEGLADARKA: "/brak" }, "linux", () => false), null);
+    // Ramki serwera: krótka, 16-bitowa długość, fragmenty, ping, niepełna reszta.
+    const r = (op, dane, fin = true) => { const b = Buffer.from(dane); const n = b.length;
+      const h = n < 126 ? Buffer.from([(fin ? 0x80 : 0) | op, n]) : Buffer.from([(fin ? 0x80 : 0) | op, 126, n >> 8, n & 255]);
+      return Buffer.concat([h, b]); };
+    const dlugi = JSON.stringify({ id: 1, result: { x: "a".repeat(300) } });
+    const [w, reszta] = dekodujRamki(Buffer.concat([r(1, '{"id":7}'), r(1, dlugi), r(1, '{"a":', false), r(0, "1}"), r(9, ""), r(1, "abc").subarray(0, 3)]));
+    assert.deepStrictEqual(w.map((x) => x.typ), ["tekst", "tekst", "tekst", "ping"]);
+    assert.deepStrictEqual([w[0].dane, w[1].dane, w[2].dane], ['{"id":7}', dlugi, '{"a":1}']);
+    assert.strictEqual(reszta.length, 3, "niepełna ramka czeka na resztę");
+    // Pełny przebieg na atrapie: weryfikacja przechodzi przy drugiej sondzie, sesja z rzeczywistym UA, okno zamknięte.
+    const kat = mkdtempSync(join(tmpdir(), "sn-okno-"));
+    const env = { SN_SESSION_FILE: join(kat, "s.json"), SN_CAPTCHA_RECZNIE_MS: "30000" };
+    let sondy = 0, zamkniete = false; const wywolania = [];
+    const cdp = { async wyslij(m, p) { wywolania.push(m);
+      if (m === "Target.getTargets") return { targetInfos: [{ type: "page", url: "https://www.sn.pl/pl/wyszukiwarka-orzeczen", targetId: "T1" }] };
+      if (m === "Target.attachToTarget") return { sessionId: "S1" };
+      if (m === "Runtime.evaluate") { assert.match(p.expression, /snproxy/); sondy += 1;
+        return { result: { value: sondy >= 2 ? { status: 200, json: true, bladSesji: false } : { status: 200, json: true, bladSesji: true } } }; }
+      if (m === "Storage.getCookies") return { cookies: [{ name: "incap_ses_1", value: "TAJNE", domain: ".sn.pl" }, { name: "inne", value: "x", domain: "example.com" }] };
+      if (m === "Browser.getVersion") return { userAgent: "Mozilla/5.0 Prawdziwy Edg/141" };
+      return {}; } };
+    const o = await otworzOkno(undefined, env, { znajdz: () => "/x/msedge", uruchom: async () => ({ cdp, czyDziala: () => !zamkniete, zamknij: async () => { zamkniete = true; } }) });
+    assert.deepStrictEqual([o.stan, o.przegladarka], ["otwarte", "msedge"]);
+    for (let i = 0; i < 100 && stanOkna().stan === "otwarte"; i += 1) await new Promise((x) => setTimeout(x, 100));
+    const st = stanOkna();
+    assert.strictEqual(st.stan, "zapisane", JSON.stringify(st));
+    assert.ok(zamkniete, "okno zamknięte po zapisie sesji");
+    const plik = JSON.parse(czytaj(env.SN_SESSION_FILE, "utf8"));
+    assert.deepStrictEqual([plik.cookie, plik.userAgent, plik.source], ["incap_ses_1=TAJNE", "Mozilla/5.0 Prawdziwy Edg/141", "przegladarka-systemowa"]);
+    assert.ok(!JSON.stringify(st).includes("TAJNE"), "wartości ciasteczek nie trafiają do stanu okna");
+    // Bez przeglądarki systemowej i bez Playwrighta: jawny błąd, nic nie startuje.
+    await assert.rejects(otworzOkno(undefined, env, { znajdz: () => null, zaladujPlaywright: async () => { throw new Error("Brak playwright"); } }),
+      /Brak przeglądarki Edge\/Chrome\/Chromium i brak playwright/);
+    rmSync(kat, { recursive: true, force: true });
+    console.log("OK: okno sn.pl w przeglądarce systemowej — Edge/Chrome/Chromium, ramki WebSocket, sesja z rzeczywistym UA, zamknięcie okna");
+  }
 }
 
 // ═══ sn — sesja snproxy (dawny sn-example/test_normalizacja.mjs) ═══
