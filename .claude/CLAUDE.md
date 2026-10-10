@@ -11,7 +11,7 @@ When committing code changes:
 ## Documentation Style
 
 When creating or updating markdown documentation files:
-- **Never create .md files unless explicitly instructed.**
+- **Never create .md documentation files (README, reports, summaries) unless explicitly instructed.** This rule does not apply to skill content: SKILL.md, modules and references inside skill directories are code and may be created/edited as the task requires.
 - **Be extremely concise** - engineers scan, they don't read novels
 - **Only include essential information** - what they need to know, not what's possible to explain
 - **Prefer examples over prose** - show the pattern, not the theory
