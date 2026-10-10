@@ -86,7 +86,7 @@ def main() -> int:
 
     print("C. regresja i podpięcia:")
     lan = (root / "shared/MOD-LANCUCH-DOWODOWY.md").read_text(encoding="utf-8")
-    if re.search(r"×\s*0[.,]9\s*=\s*0[.,]27", lan):
+    if re.search(r"[×xX*]\s*0[.,]9\s*=\s*0[.,]27", lan):  # także zapis „x”/„*” (2026-10-10)
         bledy.append("MOD-LANCUCH-DOWODOWY nadal zawiera błędną formułę „× 0,9 = 0,27”")
     for plik, wzorzec in [("shared/MOD-GRAF-PRZYCZYNOWY.md", "graf_przyczynowy.py"),
                           ("analizator-dowodow-v3/modules/MP13-synteza-faktyczna.md", "MOD-GRAF-PRZYCZYNOWY"),
