@@ -54,7 +54,7 @@ użytkownika, innego publikatora albo pliku od użytkownika.
 | `ROBOTS_DISALLOWED` / `PERMISSIONS_ERROR` z `web_fetch` | ograniczenie NARZĘDZIA (sprawdź `robots.txt` serwera) | gdy serwer nie zakazuje — kanał kodu wg §1 lub inny endpoint; gdy zakazuje — wiersz niżej |
 | `robots.txt` serwera zakazuje ścieżki | zakaz dla automatów | nie odpytuj automatycznie; inny publikator/urzędowy mirror, przeglądarka użytkownika albo plik od użytkownika |
 | 403/502/strona zastępcza zależna od klienta | kształt żądania | §1 (neutralny UA, `Accept`, ścieżka) |
-| 403 WAF / strona weryfikacji człowieka (np. `sn.pl`) | ochrona techniczna | **nie obchodź** (bez podmiany UA, bez automatu do wyzwań); sesja zweryfikowana przez użytkownika w jego przeglądarce, źródło zastępcze albo plik od użytkownika |
+| 403 WAF / strona weryfikacji człowieka (np. `sn.pl`) | ochrona techniczna | **nie obchodź** bez udziału użytkownika; przeglądarka konektora SN (`sn_captcha_auto`) tylko po zatwierdzeniu przez użytkownika w oknie czatu albo w panelu wyszukiwania; inaczej sesja zweryfikowana przez użytkownika, źródło zastępcze albo plik od użytkownika |
 | awaria, timeout, przeciążenie | stan SERWERA | ponowienie, inny host tego samego publikatora, potem źródło zastępcze |
 | logowanie, licencja/paywall, CAPTCHA, klucz API | zabezpieczenie dostępu | **nie łam**; LEX/Legalis tylko przy dostępie kancelarii; inaczej źródło zastępcze albo plik od użytkownika |
 
@@ -96,16 +96,17 @@ centrum danych jest dla WAF-ów kilku polskich serwisów **silniejszym** sygnał
 bota niż uczciwe `curl/8.5.0`. Nie „naprawiaj" HTTP 502 łańcuchem
 przeglądarkowym — to go powoduje.
 
-### ⛔ `sn.pl` — ochrona WAF; bez podmiany UA (zmienione 2026-10-10)
+### ⛔ `sn.pl` — ochrona WAF; przeglądarka tylko po zatwierdzeniu użytkownika (zmienione 2026-10-10)
 
 Pomiar 2026-09-13: `sn.pl/index.php?option=com_ajax&plugin=snproxy&…` pod
 `curl/8.5.0` → **403 (strona WAF serwisu)**. To ochrona techniczna, nie błąd
-kształtu żądania — **nie obchodź jej łańcuchem przeglądarkowym** ani automatem
-do wyzwań (§0). Przy 403 WAF / captcha:
+kształtu żądania — w zwykłych zapytaniach (`web_fetch`, `curl`) **nie obchodź jej
+łańcuchem przeglądarkowym** (§0). Przy 403 WAF / captcha:
 
-1. **Sesja użytkownika** — weryfikację przechodzi człowiek we własnej
-   przeglądarce; aplikacja Lex Machina pokazuje okno weryfikacji `sn.pl`
-   i używa sesji zweryfikowanej przez użytkownika.
+1. **Sesja użytkownika** — przeglądarkę uruchamia się wyłącznie po zatwierdzeniu
+   przez użytkownika w oknie czatu albo w panelu wyszukiwania: aplikacja Lex Machina
+   pokazuje okno weryfikacji `sn.pl`, konektor SN (`sn_captcha_auto`, Playwright)
+   otwiera przeglądarkę; zapisana sesja służy dalszym zapytaniom.
 2. **SAOS** — wyłącznie dla orzeczeń SN sprzed 2017 (okno pokrycia, §3).
 3. **Plik od użytkownika** (pobrany przez niego z `sn.pl`).
 

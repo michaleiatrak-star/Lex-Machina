@@ -1,7 +1,5 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
-- 3.94 (2026-10-10b, AUDYT-2026-10-10b): sources.json: refetch PDF bez UA przeglądarkowego.
-
 - 3.93 (2026-10-10, AUDYT-2026-10-10a): mod-KC-konsumenckie: zapytanie weryfikacyjne na t.j. Dz.U. 2026 poz. 1244 (było wygasłe 2023/2759; ELI 2026-10-10).
 
 - 3.92 (2026-10-09, AUDYT-2026-10-09): prawa konsumenta — t.j. Dz.U. 2026 poz. 1244; KP (mobbing) — t.j. Dz.U. 2026 poz. 1245 ⛔ zawiera 2026/1046 w vacatio legis do 5.11.2026 (ELI 2026-10-09).
