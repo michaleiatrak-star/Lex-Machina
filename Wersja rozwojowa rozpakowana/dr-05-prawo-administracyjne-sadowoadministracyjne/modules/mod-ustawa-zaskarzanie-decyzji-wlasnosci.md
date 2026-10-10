@@ -23,7 +23,7 @@ Art. 156 § 2 KPA — nie stwierdza się nieważności z przyczyn wymienionych w
 | Akt | Dz.U. |
 |---|---|
 | KPA art. 156 §2 i art. 158 §3 | Dz.U. 2025 poz. 1691 t.j. |
-| Ustawa z 09.06.2021 r. (nowelizacja KPA — art. 156 §2) | Dz.U. 2021 poz. 1706 |
+| Ustawa z 11.08.2021 r. o zmianie KPA (art. 156 §2) | Dz.U. 2021 poz. 1491 (ELI 2026-10-09; było błędnie „z 09.06.2021, Dz.U. 2021 poz. 1706” — rozporządzenie MKiŚ) |
 | Ustawa reprywatyzacyjna (nieruchomości warszawskie) | Dz.U. 2021 poz. 795 ze zm. |
 
 ---
@@ -46,7 +46,7 @@ Art. 156 § 2 KPA — nie stwierdza się nieważności z przyczyn wymienionych w
 ### Ograniczenia nieważności decyzji dot. nieruchomości (art. 156 §2 KPA)
 
 ```
-Nowelizacja KPA (Dz.U. 2021 poz. 1706 — w życie od 16.09.2021):
+Nowelizacja KPA (Dz.U. 2021 poz. 1491 — w życie od 16.09.2021):
 
 DO 10 LAT od doręczenia decyzji:
   → Stwierdzenie nieważności MOŻLIWE (art. 156 §1 KPA)

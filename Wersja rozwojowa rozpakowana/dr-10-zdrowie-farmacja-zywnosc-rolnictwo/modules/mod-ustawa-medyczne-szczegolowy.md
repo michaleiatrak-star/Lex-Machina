@@ -84,7 +84,7 @@ CIĘŻAR DOWODU:
   → KLUCZOWY DOWÓD: opinia biegłego sądowego (obligatoryjny w sprawach med.)
 
 SĄD WŁAŚCIWY:
-  → SR: do 100 000 zł (próg od 01.07.2023 na mocy Dz.U. 2023 poz. 1114 zm. KPC art. 17 pkt 4)
+  → SR: do 100 000 zł (próg od 01.07.2023 na mocy ustawy z 9.03.2023, Dz.U. 2023 poz. 614, art. 1 pkt 1 — KPC art. 17 pkt 4; ELI 2026-10-09)
      → SO: powyżej 100 000 zł — weryfikuj aktualnie art. 17 KPC
   → SO: powyżej + sprawy o zadośćuczynienie dot. naruszenia dóbr osobistych
   → Właściwość: siedziba pozwanego LUB miejsce zdarzenia (wybór powoda)

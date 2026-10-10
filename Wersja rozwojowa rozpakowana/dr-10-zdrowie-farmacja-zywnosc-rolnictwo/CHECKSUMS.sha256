@@ -1,7 +1,7 @@
 6fa2a62cff687935f6cee8adb4d1ced8a187aace35f262b5483a6d7342a1e0dc  ./MAPA-AKTOW.md
 f3c655f9bc61cc2cecafbcc16bf7571959f1edb09906586b463ae86872825298  ./MAPA-POKRYCIA.md
 93c70aa27ded8dd55a23051bde455f08453fa3d966b2b0d6bfde845a27df6de1  ./PORTABILITY-MANIFEST.md
-7c5e955ca926242ff49272ca69b45e09edc6184c48bc7db806c00e42c6deada6  ./SKILL.md
+a98c63db530d75872461a0d11ab1ee6650ea5446e85368b0762abac6bb079661  ./SKILL.md
 ee2f304c7b47b9ae45e7c4a708348f6be9a5d29f60faa1b3f15124ea502375ea  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 c7f2b5a906dfcf2b2580864a7417383d877bf96492a6a18a4f6f0f58c1de8673  ./modules/mod-GIF-GIS-nadzor-farmaceutyczny-sanitarny.md
@@ -23,7 +23,7 @@ f1de1e2af954d06824a5cbad38ee60d8f81f8f3f0f492af07bdccd792ba3384a  ./modules/mod-
 34666dce49c9b842ce4b58d46c67f88d8b3f3a60b0e6633f2e498d33367f4d32  ./modules/mod-ustawa-inspekcja-weterynaryjna.md
 6b12581dfc78f64c0da886e140d2220afb8494747ff54046e2332b8faccc0637  ./modules/mod-ustawa-jakosc-opieka-zdrowotna.md
 323445205c834290fc892288f2ca733e54d18b1c0582c0e89b1aefe9d42b95d0  ./modules/mod-ustawa-lekarz-weterynarii-zawod.md
-12c46cea73cf766a422621966c2a97724719a9f4c0a259aa8e5734a6c814a977  ./modules/mod-ustawa-medyczne-szczegolowy.md
+f5b3489f1c224713c0c60ddab4648af134168a6f099afe4e33fc9720182b8703  ./modules/mod-ustawa-medyczne-szczegolowy.md
 062c33b273783538a1893a23ff946ab22f40f0d9e894bff84e2bf379cd8560cb  ./modules/mod-ustawa-oswiata-szkolnictwo-wyzsze.md
 ccefc524ebf616b207ba3a5f86f9b536cfe47be2ba7e9d5934740d6b5ea248d5  ./modules/mod-ustawa-pielegniarka-polozna.md
 b2b9028799d6b345e7bf3f1018eecd63684e8abcb3a650c40048a71825b6a75d  ./modules/mod-ustawa-prawa-pacjenta-framework.md
@@ -35,5 +35,5 @@ d8240f3d7f639cd61e50b67f8ede5a4aaef6d74e7ee4e5aa12da96cad45c2af5  ./modules/mod-
 0d269fbf15c55b70e32262ff83d3d62a7eedab2beda39c8abe931c3d5b2b73aa  ./modules/mod-ustawa-zawody-prawnicze-pokrewne.md
 2591a3e26e7ee36990e1cf6faef05a87ed8ae4846c3e5569d44293e5ef9c1647  ./modules/mod-ustawa-zdrowie-psychiczne.md
 da02497d2dc03ec7b23a81e5312b7fd2878f74fa70b5e0823f548ad1998eed5e  ./modules/mod-wyroby-medyczne.md
-bc06cdd544a0e5ddabfea91f28dd2250cb783ddb6b393eb381f07818ec378af9  ./references/CHANGELOG.md
+43d78f02eff8b7c025507a745bbf55167f31dd0dab3ba839d5a71ce19e865b36  ./references/CHANGELOG.md
 855248345d0da0b0116e7414a8819b5e9c8ce4113495cb3b8388e40ac593d670  ./references/HISTORIA-ZMIAN-PLIKOW.md

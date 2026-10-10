@@ -447,7 +447,7 @@ z mapy pokrycia działami: Dział X rozdz. 1 i 4, Dział IV rozdz. 3, Dział II 
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) (potwierdzono brak
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) (potwierdzono brak
   nowszego tekstu jednolitego na 12.08.2026)
 RZĄD 2 — struktura ustawy i brzmienie art. 103 ust. 1, art. 96 ust. 9h,
   art. 105b: arslege.pl / lexlege.pl (stan 12.08.2026), przepisy.gofin.pl

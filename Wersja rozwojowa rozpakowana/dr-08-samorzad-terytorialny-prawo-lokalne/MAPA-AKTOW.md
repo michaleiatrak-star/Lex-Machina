@@ -29,7 +29,7 @@
 | ochrona zabytków | Dz.U. 2024 poz. 1292 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne; fresh gate |
 | rewitalizacja | Dz.U. 2024 poz. 278 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne |
 | cmentarze i chowanie zmarłych | Dz.U. 2025 poz. 1590 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne |
-| drogi publiczne — SPP/ŚSPP | Dz.U. 2025 poz. 889 t.j.; po t.j.: zm. Dz.U. 2026 poz. 982 (w mocy 21.09.2026 — brzmienie art. 13/13b/13f czytać u źródła) ✅ [VER] 2026-10-06 ELI | `mod-UDP-strefy-platnego-parkowania.md` | 🟢 operacyjne |
+| drogi publiczne — SPP/ŚSPP | Dz.U. 2025 poz. 889 t.j.; po t.j.: zm. Dz.U. 2026 poz. 815 art. 2 (w mocy 4.07.2026) i Dz.U. 2026 poz. 982 (w mocy 21.09.2026 — brzmienie art. 13/13b/13f czytać u źródła) ✅ [VER] 2026-10-06 ELI | `mod-UDP-strefy-platnego-parkowania.md` | 🟢 operacyjne |
 
 ## Weryfikacja w źródle urzędowym — 2026-09-01h
 

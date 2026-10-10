@@ -1,7 +1,7 @@
-3a2f8e230b0469b40da6c3d1e79180ff5821fc84644b257e956c8d26da361812  ./MAPA-AKTOW.md
+e3636ed5e13257edb8942d0a48835aad0181a7f8f0a27fc99a9911619c38274d  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-2497bd18ce389dddbce95425a6085caec8a1e2a3ff7d6de457057bf76226f240  ./SKILL.md
+b034416ebed617271c450ecc8886875696d0213fee7a1b9f297f3654c3f06ee1  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 379c038ace0a42bd49321d6f0c8fe01cc6d56d31641c751c6d869e09600b65b7  ./modules/mod-AI-Act-framework.md
@@ -21,9 +21,9 @@ b183d42e70a6a5e6e4a43b92773424f88e2babab200024a7afcf6ae617567ac7  ./modules/mod-
 2a6ef98bd950f1ee0f5a3a750dbd19406616ce9945fe9427048c6a8f83115de2  ./modules/mod-RODO-szczegolowy.md
 7f77072a724e4f2b1e2dd4865ce5d02eae21286fb02fc25df793e0d37272692e  ./modules/mod-UODO-postepowanie-ochrona-danych.md
 e3e2a5c526f48b6ffd320e3a068d633b00ce4f236234c1cd63bfffc81bc95cc3  ./modules/mod-ustawa-certyfikacja-cyberbezpieczenstwa.md
-1ff7517c96faf4a3e99c8deac08ff503f980145101d819b4d5659afb495f633b  ./modules/mod-ustawa-informatyzacja-podmiotow-publicznych.md
+f013f83a208eb349c5f64d03e60b9a24001bf6b0c42c6a9c21a82d76f4a1e8ba  ./modules/mod-ustawa-informatyzacja-podmiotow-publicznych.md
 98653fc25d0fe35c0d62c5ffbba71818fe748be791da2272ed00d1ce69d0863f  ./modules/mod-ustawa-otwarte-dane.md
 aff4384416951db74063a36b73e12ddfdf3b3262d3075696e03597a1274233bb  ./modules/mod-ustawa-podpis-elektroniczny.md
 0bba80f38aaa77ace308d59347302ec2797f48cb15021051a06ad810cf181f50  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 130eef15304528cf161d78f760ed8c1cc9892c1f60ddd6b69834d47343c8fcfa  ./modules/mod-ustawa-uslugi-elektroniczne.md
-6306977bf2c4ae0223347b6a5faae6cae47acff0412c1b1216994146db6ec36e  ./references/CHANGELOG.md
+046c4b16a000dcc2653dde4bfb80f56c7cd78759cb4227ce3fe5010efe7078d7  ./references/CHANGELOG.md

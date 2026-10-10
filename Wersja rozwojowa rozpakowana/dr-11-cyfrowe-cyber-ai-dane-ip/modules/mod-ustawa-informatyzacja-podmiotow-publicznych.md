@@ -43,7 +43,7 @@ Dostępność cyfrowa:     WCAG 2.1 — strony podmiotów publicznych (Dz.U. 201
 
 ## Weryfikacja online
 ```
-web_search: "ustawa informatyzacja podmiotów publicznych Dz.U. 2025 poz. 1703 ELI"
+web_search: "ustawa informatyzacja podmiotów publicznych Dz.U. 2026 poz. 1241 ELI"
 web_search: "KSeF e-faktury obowiązkowe termin 2025 2026"
 web_search: "e-Doręczenia harmonogram wdrożenia 2025"
 ```

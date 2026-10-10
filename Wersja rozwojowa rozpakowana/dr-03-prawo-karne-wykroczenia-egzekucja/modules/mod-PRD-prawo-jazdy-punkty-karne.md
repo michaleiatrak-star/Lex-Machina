@@ -5,8 +5,8 @@
 
 | Akt | Dz.U. | Status | Uwaga |
 |---|---|---|---|
-| Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. | ze zm. po t.j. (w mocy do 2026-10-06): Dz.U. 2025 poz. 1676, 1734, 1843, Dz.U. 2026 poz. 180, 982; zapowiedź Dz.U. 2026 poz. 875 (01.01.2027) | Weryfikuj aktualny t.j. i brzmienie art. — ELI (RZĄD 1) |
-| Ustawa o kierujących pojazdami (u.k.p.) | Dz.U. 2025 poz. 1226 t.j. ze zm. | ze zm. po t.j.: Dz.U. 2025 poz. 1676, Dz.U. 2026 poz. 180, 982 | Aktualny t.j. i brzmienie art. — weryfikuj ELI |
+| Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. | ze zm. po t.j. (ELI 2026-10-09): Dz.U. 2025 poz. 820, 1006, 1676, 1734, 1843, 1872, Dz.U. 2026 poz. 180, 982; zapowiedź Dz.U. 2026 poz. 875 (01.01.2027), 1073 (11.05.2027) | Weryfikuj aktualny t.j. i brzmienie art. — ELI (RZĄD 1) |
+| Ustawa o kierujących pojazdami (u.k.p.) | Dz.U. 2025 poz. 1226 t.j. ze zm. | ze zm. po t.j. (ELI 2026-10-09): Dz.U. 2025 poz. 1676, 1872, Dz.U. 2026 poz. 180, 982; zapowiedź Dz.U. 2026 poz. 187 (19.05.2028) | Aktualny t.j. i brzmienie art. — weryfikuj ELI |
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat, cofnięcie za jazdę po zatrzymaniu |
 | Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Rozp. MSWiA ws. ewidencji kierujących | Dz.U. 2026 poz. 724 (nowe) | W życie 03.06.2026 | **ZASTĄPIONE**: Dz.U. 2023 poz. 1897 ze zm. Dz.U. 2026 poz. 144 → nowe rozporządzenie 29.05.2026 |

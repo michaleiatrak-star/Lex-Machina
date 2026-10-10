@@ -324,7 +324,7 @@ Przed odpowiedzią lub pismem zastosuj:
 ## WERYFIKACJA Dz.U.
 
 ```
-Prawo wodne: Dz.U. 2024 poz. 1773 t.j. ze zm.
+Prawo wodne: Dz.U. 2025 poz. 960 t.j. ze zm. (ELI 2026-10-09); po t.j.: 2025/1535, 2026/445, 605, 815, 1033 (⛔ KOREKTA: było „2024 poz. 1773” — t.j. ustawy o minimalnym wynagrodzeniu)
   Metrum kontrolne: Dz.U. 2025 poz. 960 — weryfikuj w ELI (RZĄD 1) czy jest nowszy t.j.
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → Źródło: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241773

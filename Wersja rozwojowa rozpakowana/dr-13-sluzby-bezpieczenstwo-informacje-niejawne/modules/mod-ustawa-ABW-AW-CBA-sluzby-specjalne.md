@@ -168,7 +168,7 @@ Przed odpowiedzią lub pismem zastosuj:
 ```
 Ustawa o ABW oraz AW: Dz.U. 2026 poz. 937 t.j. (VER 2026-07-02 — WARN-28 zamknięty; to nowy t.j. tej samej ustawy z 24.05.2002 r., NIE nowa ustawa — art. 1 "Tworzy się ABW" to oryginalny tekst ustawy z 2002 r. powtórzony w konsolidacji, nie dowód reformy) — weryfikuj dalsze zm. w ISAP
 Ustawa o CBA: Dz.U. 2025 poz. 712 t.j. (obwieszczenie Marszałka Sejmu z 10.04.2025)
-  — poprzedni t.j. Dz.U. 2024 poz. 1392 NIEAKTUALNY, zastąpiony przez t.j. 2025.712
+  — poprzedni t.j. Dz.U. 2024 poz. 184 NIEAKTUALNY, zastąpiony przez t.j. 2025.712 (⛔ KOREKTA 2026-10-09: było „2024 poz. 1392” — w ELI to rozporządzenie RM o stanie klęski żywiołowej)
   ✅ VER: isap.sejm.gov.pl (WDU20250000712), infor.pl, lexlege.pl 2026-08-14 (F-57)
 Ustawa o SOP: Dz.U. 2025 poz. 34 t.j. ze zm.
   → Dz.U. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy SOP

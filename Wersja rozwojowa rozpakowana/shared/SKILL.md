@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.26"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.27"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.26 (2026-10-09f): 15 plików z jednym konsumentem przeniesionych do skilli (pisma-procesowe-v3/modules ×8, prawny-router-v3/references ×4, orzeczenia-sadowe-v2/references ×1, analizator-umow-v1/scripts ×2); rejestry zaktualizowane. MOD-KARTA-DOWODU: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-B2. ⛔ Błędne numery (ELI 2026-10-09): ulgowe przejazdy 2024/1914 → 2024/380, KRK 2023/1750 → 2024/276, lasy 2024/1143 → 2026/663, poręczenia SP 2024/836 → 2024/291, praca cudzoziemców 2024/1543 → 2025/1567; choroby zawodowe → t.j. 2026/1297.
+  Wersja bieżąca: 3.99.27 (2026-10-09g): ORKA-BAS-VIII: ustawa zmieniająca upol 2024/1757 jest z 19.11.2024 (było „z 12.07.2024”). ELI 2026-10-09.
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)
   3.99.20 (2026-10-07): walidator_cytowan z PR #95 — zgodność po pełnym identyfikatorze (Dz.U. rok+pozycja/ELI/WDU, sygnatura całością, artykuł z § i kodeksem) zamiast samych liczb; domena po hoście, https także w result_urls (zgł. #89)

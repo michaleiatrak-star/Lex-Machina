@@ -32,7 +32,7 @@
 # mod-VAT-podatek-od-towarow-i-uslug
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** VAT — Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) t.j. z 21.05.2025 (poprzedni t.j.: Dz.U. 2024 poz. 361)
+**Źródło weryfikacji:** VAT — Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) t.j. z 21.05.2025 (poprzedni t.j.: Dz.U. 2024 poz. 361)
 **Data weryfikacji online:** 2026-08-12 (poprzednia: 2026-06-05)
 **⚠️ NOWELIZACJE PO TEKŚCIE JEDNOLITYM — nałóż przed każdym powołaniem:**
 Dz.U. 2025 poz. 894, 896 (art. 113 ust. 1: 200 000 → 240 000 zł), 1203,

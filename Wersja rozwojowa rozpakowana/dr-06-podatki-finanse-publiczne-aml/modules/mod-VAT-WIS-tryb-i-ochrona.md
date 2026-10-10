@@ -216,7 +216,7 @@
 ## ŹRÓDŁA WERYFIKACJI (zweryfikowane online 2026-08-12)
 
 ```
-RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263) (Dział VIII rozdz. 1a,
+RZĄD 1 — isap.sejm.gov.pl: t.j. Dz.U. 2025 poz. 775 (obecny t.j. Dz.U. 2026 poz. 1263; ⏳ po t.j. Dz.U. 2026 poz. 1270 — od 1.12.2026/1.01.2027 i dalej, ELI 2026-10-09) (Dział VIII rozdz. 1a,
   art. 42a-42i)
 RZĄD 1/2 — podatki.gov.pl (serwis MF, „Najważniejsze informacje o wniosku"):
   5-letni okres ważności, forma elektroniczna wniosku

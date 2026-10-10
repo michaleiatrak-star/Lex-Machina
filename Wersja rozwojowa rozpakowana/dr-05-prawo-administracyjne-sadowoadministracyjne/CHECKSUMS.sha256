@@ -1,7 +1,7 @@
 d44ae03b5818f12408a185f6189e5b044a83d0186353093b2119cd377a0339c2  ./MAPA-AKTOW.md
 346b51beaec59e5775c6a634a8390cfb0d55d01ee64027be16d54f2f4598d82e  ./MAPA-POKRYCIA.md
 a808237feda76fe62f698fa05077021474124d22b033504d5c34a649534077fd  ./PORTABILITY-MANIFEST.md
-4574463657e403071dd3c67abea2e13662cb48ff18627242f598b921a6ab5295  ./SKILL.md
+e7c96f3b1d09cbc71580dd93d29113b9b008d9ac950177b6dc11bef39711d08d  ./SKILL.md
 baecf8aed4d2ca051e8212f1e45ad5dc19ad072d16f130d24009bd3e8404214b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4440cd21b5b3b68d8b64601f5c5434a4f9e1b4751dd49412e1e124f086a2120  ./modules/kpa-tryby-nadzwyczajne/czesc-01-tryby-nadzwyczajne.md
@@ -34,5 +34,5 @@ ec38358ff5b4a97da77e8626b92f63f9d79acab1854ab55973b9329902a3b861  ./modules/mod-
 7d00090b52f8aee98ed8ff4548f3262ccf3f733f50dcd1056733c906c6ba31bf  ./modules/mod-ustawa-skargi-przewleklosc-dostep-sadu.md
 0a4f7d990649346529a549a9532ca5ab40c1576c4d4c8ac936ba67af1a40f52e  ./modules/mod-ustawa-sygnalisci.md
 b06340e18a2ab4ee4dc8d92b5baa2f634ba53799f9e115ac31cd5e8636bf8ce3  ./modules/mod-ustawa-wojewoda-administracja-rzadowa.md
-603bd4d238a8b56d93b2c7651fcb7cc1548c6020d3fab44cc01c62ad66592deb  ./modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md
-07fcd2f6a055cd8e0fe28cdf557b0f26110fe466da77d0b52880d31e9c35745b  ./references/CHANGELOG.md
+dc5ec3dc4eed1bb9ba3a9b69f48317d1216e4b146d94b423931dbebf5fca3d6e  ./modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md
+fb5fb5cc7d5d551b0d4a28a6f907fa91ebdbc3687c15188db143da5051be8286  ./references/CHANGELOG.md

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-07-zamowienia-publiczne-fundusze-ue
 
+- 3.15 (2026-10-09g, AUDYT-2026-10-09g): mod-ustawa-fundusze-UE-pomoc-publiczna: ustawa wdrożeniowa — t.j. 2025/1733 jest pierwszym t.j. (było „zastępuje t.j. 2024.1655” — rozp. MON); nowelizacje po t.j. 2025/1844, 2026/912.
+
 - 3.14 (2026-10-05l, AUDYT-2026-10-05l): mod-PZP-wykonanie-umowy-compliance: linia „Hasła spraw”. Treść prawna bez zmian.
 
 - 3.13 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

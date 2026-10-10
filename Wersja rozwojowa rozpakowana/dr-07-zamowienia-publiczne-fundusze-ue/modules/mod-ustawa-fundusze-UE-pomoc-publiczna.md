@@ -3,7 +3,7 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:** Ustawa wdrożeniowa 2021-2027 (zasady realizacji zadań finansowanych
 ze środków europejskich w perspektywie finansowej 2021-2027, z 28.04.2022) — Dz.U. 2025
-poz. 1733 t.j. (zastępuje t.j. 2024.1655) | Ustawa o zasadach prowadzenia polityki rozwoju
+poz. 1733 t.j. (pierwszy t.j.; akt pierwotny Dz.U. 2022 poz. 1079; po t.j.: 2025/1844, 2026/912 — ELI 2026-10-09) | Ustawa o zasadach prowadzenia polityki rozwoju
 (z 6.12.2006) — Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324)
 | Ustawa o postępowaniu w sprawach pomocy publicznej — Dz.U. 2026 poz. 500 t.j. (poprzedni
 t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15
@@ -24,7 +24,7 @@ Perspektywa finansowa UE 2021–2027 (EFRR, EFS+, Fundusz Spójności, FST), ins
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa wdrożeniowa 2021–2027 (realizacja zadań fin. ze środków europejskich, 28.04.2022) | Dz.U. 2025 poz. 1733 t.j. (zastępuje t.j. 2024.1655) |
+| Ustawa wdrożeniowa 2021–2027 (realizacja zadań fin. ze środków europejskich, 28.04.2022) | Dz.U. 2025 poz. 1733 t.j. (pierwszy t.j.; akt pierwotny Dz.U. 2022 poz. 1079; po t.j.: 2025/1844, 2026/912 — ELI 2026-10-09) |
 | Ustawa o zasadach prowadzenia polityki rozwoju (6.12.2006) | Dz.U. 2025 poz. 198 t.j. (obwieszczenie 5.02.2025; zastępuje t.j. 2024.324) |
 | Ustawa o postępowaniu w sprawach pomocy publicznej | Dz.U. 2026 poz. 500 t.j. (poprzedni t.j.: Dz.U. 2024 poz. 1635; Dz.U. 2023 poz. 702) ✅ VER: 2026-08-15 |
 | Rozporządzenie ogólne UE 2021/1060 | stosowane bezpośrednio — funduszowe |

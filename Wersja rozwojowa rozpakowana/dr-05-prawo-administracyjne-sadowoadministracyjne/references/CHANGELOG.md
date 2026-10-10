@@ -1,5 +1,7 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.34 (2026-10-09g, AUDYT-2026-10-09g): ⛔ mod-ustawa-zaskarzanie-decyzji-wlasnosci: nowelizacja KPA art. 156 §2 to ustawa z 11.08.2021, Dz.U. 2021 poz. 1491 (było „z 09.06.2021, Dz.U. 2021 poz. 1706” — rozp. MKiŚ). ELI 2026-10-09.
+
 - 3.33 (2026-10-09, AUDYT-2026-10-09): cudzoziemcy: świadczenia rodzinne — t.j. Dz.U. 2026 poz. 1240 (ELI 2026-10-09).
 
 - 3.32 (2026-10-05l, AUDYT-2026-10-05l): Linie „Hasła spraw” w mod-ustawa-cudzoziemcy i mod-KPA-tryby-nadzwyczajne-i-strategia. Treść prawna bez zmian.

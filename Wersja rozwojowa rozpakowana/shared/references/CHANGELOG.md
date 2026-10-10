@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.27 (2026-10-09g, AUDYT-2026-10-09g): ORKA-BAS-VIII: ustawa zmieniająca upol 2024/1757 jest z 19.11.2024 (było „z 12.07.2024”). ELI 2026-10-09.
+
 - 3.99.26 (2026-10-09f, AUDYT-2026-10-09f): 15 plików z jednym konsumentem przeniesionych do skilli (pisma-procesowe-v3/modules ×8, prawny-router-v3/references ×4, orzeczenia-sadowe-v2/references ×1, analizator-umow-v1/scripts ×2); rejestry zaktualizowane. MOD-KARTA-DOWODU: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-B2. ⛔ Błędne numery (ELI 2026-10-09): ulgowe przejazdy 2024/1914 → 2024/380, KRK 2023/1750 → 2024/276, lasy 2024/1143 → 2026/663, poręczenia SP 2024/836 → 2024/291, praca cudzoziemców 2024/1543 → 2025/1567; choroby zawodowe → t.j. 2026/1297.
 
 - 3.99.25 (2026-10-09e, AUDYT-2026-10-09e): ACTIVATION-MATRIX: wiersz orzeczenia-sadowe-v2 — „znajdź/wyszukaj orzeczenie”, „wyszukaj/podaj wyrok”, „zweryfikowany wyrok”.

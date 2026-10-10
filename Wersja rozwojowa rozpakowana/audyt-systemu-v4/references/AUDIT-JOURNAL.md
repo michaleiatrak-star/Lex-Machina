@@ -69942,6 +69942,38 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-09h — odesłania między skillami i t.j. w nagłówkach modułów (6.216)
+
+- Kontrola wszystkich ścieżek do plików w .md korpusu (`view …`, backticki, ścieżki względne): po odsianiu wpisów historycznych w rejestrach deduplikacji (usunięty plik → kanoniczny) jedno żywe martwe odesłanie — `prawo-polskie-v2/SKILL.md` (przykład `modules/mod-KP-kodeks-pracy.md`).
+- t.j. w nagłówkach modułów wobec wiersza MAPA-AKTOW (ELI 2026-10-09): ⛔ dr-04 `mod-ustawa-praca-tymczasowa` podawał t.j. 2025/1682 — to t.j. ustawy o delegowaniu pracowników (DU/2016/868); właściwy t.j. 2025/236 (DU/2003/1608). dr-11 `mod-ustawa-informatyzacja`: zapytanie weryfikacyjne na wygasłym 2025/1703 → 2026/1241. Pozostałe różnice to moduły wieloaktowe (np. KKS w module Ordynacji) — poprawne.
+- Wersje: audyt 6.216, dr-04 3.49, dr-11 3.27, prawo-polskie-v2 6.56.
+
+## AUDYT-2026-10-09g — przegląd aktów w ELI: nowe nowelizacje, daty wejścia w życie na poziomie artykułu, błędne numery (6.215)
+
+### 1. ŹRÓDŁO
+Zlecenie użytkownika: przejrzeć akty pod kątem nowych t.j. i nowelizacji; zaktualizować mapy, RAG i moduły, które się do nich odwołują.
+
+### 2. METODA
+- Wszystkie 406 aktów indeksu RAG (`extractCoreActs` na mapach): najnowszy t.j. aktu bazowego i nowelizacje po t.j. (sekcja ELI „Nowelizacje po tekście jednolitym” ∪ akty zmieniające z promulgacją po t.j.).
+- Wynik: nowszy t.j. niż w mapach — 0. Nowelizacje po t.j. nienazwane w wierszach — 405; zgodnie z F-156 NIE dopisywane hurtowo (liczy je T24, runtime ostrzega przy artykule). Poprawione wyłącznie wiersze z zamkniętą listą lub liczbą („JEDNA nowelizacja”, „zero nowelizacji”, „KROK 2C: …”), która przestała być prawdziwa (18 miejsc).
+- Daty wejścia w życie z tekstu każdej nowelizacji (artykuł zmieniający + przepis końcowy), nie z metadanych ELI.
+- mapa_dzu: opis każdego wiersza OK porównany z tytułem ELI (pełny tytuł, za „jednolitego tekstu”).
+
+### 3. USTALENIA NAZWANE
+- ⛔ Metadane ELI `entryIntoForce` to data głównej części ustawy, nie artykułu: 2026/1206 art. 21 (kredyt konsumencki) i art. 38 (lombardowa) — od 11.01.2027 (wyjątek art. 57), nie 29.09.2026; 2026/1003 art. 118 (ustawa antykorupcyjna) — rozdz. 9, 3 miesiące od ogłoszenia 27.07.2026, nie 11.08.2026.
+- Nowy akt nieobecny w korpusie: Dz.U. 2026 poz. 1270 (zmiana VAT, od 1.12.2026/1.01.2027, etapy do 1.07.2028) — dr-06 MAPA-AKTOW, 10 modułów VAT, ROUTING-MAP, mapa_dzu.
+- Fałszywe listy nowelizacji: KSH („JEDNA” — jest też 2026/644 i ⏳176, ⏳187), lombardowa („zero”), antykorupcja, VAT (lista dotyczyła poprzedniego t.j.), PRD/u.k.p. (brak 2025/820, 1006, 1872), drogi publiczne (brak 2026/815), transport kolejowy/lotniczy/morski/drogowy, POŚ (9 → 10), UOOŚiS (1 → 2).
+- „NIEUSTALONE” rozstrzygnięte: t.j. 2026/1214 (ustawa tytoniowa) obejmuje 2025/427 i 799 (poza art. 2–4 ustawy 2025/427).
+- ⛔ Żywe błędne numery: Prawo wodne 2024/1773 (t.j. ustawy o minimalnym wynagrodzeniu) → 2025/960; ZRID 2024/1641 (rozp. RM) → 2024/311; leśna/łowiecka 2024/1219 (rozp. MSiT) → 2026/663 i 2025/539; KSeF 2021/1237 (nowelizacja oświatowa) → 2021/2076; UPEA „+2026/532” (Aktywny rodzic) usunięte; PKE 2024/1220 → 1221; ABW/AW/CBA 2024/1183 i 1392 → 2026/937 i 2025/712; KPA art. 156 §2 2021/1706 → 2021/1491; próg KPC art. 17 pkt 4 2023/1114 → 2023/614; PrEnergetyczne 2025/459 → 2026/43; upol 2024/1757 — data ustawy 19.11.2024.
+- ⛔ ROUTING-MAP: ustawa o ochronie danych osobowych z 2018 r. opisana jako „stara, ref historyczna” — jest obowiązująca (t.j. 2019/1781; po t.j. 2026/252, 2026/548).
+- ⛔ mapa_dzu: 22 wiersze OK z innym aktem pod numerem → WIERSZ BŁĘDNY/PREV; 12 opisów poprawionych przy poprawnym numerze.
+
+### 4. RAG
+406 aktów; z indeksu wypadły błędne 2024/1219 i 2021/1237; doszły 2026/1270, 2025/960, 2026/663.
+
+### 5. WERSJE
+audyt 6.215, shared 3.99.27, dr-03 3.62, dr-04 3.48, dr-05 3.34, dr-06 3.99, dr-07 3.15, dr-08 3.20, dr-09 3.47, dr-10 3.54, dr-11 3.26, dr-13 3.17, prawo-polskie-v2 6.55.
+
 ## AUDYT-2026-10-09f — inspekcja powiązań skille↔shared, przeniesienie plików z jednym konsumentem, błędy t.j. i map, RAG (6.214)
 
 ### 1. ŹRÓDŁO

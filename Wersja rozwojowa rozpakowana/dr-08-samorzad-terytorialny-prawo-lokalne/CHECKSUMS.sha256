@@ -1,7 +1,7 @@
-2726d59ad4835390974353816080d34a0c3723ecd94b9c3accc443a70693ddab  ./MAPA-AKTOW.md
+321ba598bf7a85c334af54656b51af5389351f56f296686eb656038d3e185d22  ./MAPA-AKTOW.md
 2763701bd121dd6e70f1098ed71416e7d78852962b0289d7ec1db280fe520eae  ./MAPA-POKRYCIA.md
 5bb12ce059b79b514a3d11ba63efd201748c8e3a064a8f97bf576eace6a83782  ./PORTABILITY-MANIFEST.md
-100d0fdd0bc177fd53868c219a258b9eb498a59a93e07deb77bd42c14066f936  ./SKILL.md
+5ef5141af1af20a17b45226afa9456a003500d273ee219394f486ddde1056da9  ./SKILL.md
 5681f9c71bd5ec9f182f0618b4a75d9711a50f1d57cb6788f5a98b5b4603e99b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4da06fd5ff6fe8ee90f423e87688d02caa64e4a5165b02567b656c93bf67f83  ./modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md
@@ -24,4 +24,4 @@ a18e15e1ac8c6e62cbee58217dd5beec1701bbf682f92d950047bfa083872f78  ./modules/mod-
 aff6d1ee5b6b2d6b86c49d14a877c40fd919a014f2fb2b31d15d31e6940e42ff  ./modules/mod-ustawa-zabytki-rewitalizacja.md
 d11b6023f63ad1bcdbf2367d4b320ca670d50a29c4c558007c0d32407ed3ab77  ./modules/mod-ustawa-zarzadzanie-kryzysowe.md
 a63b556d8c55c3c190dce944b8a4780f76c019ae0fc70fc2f396c853d37990ee  ./modules/mod-wojewoda-administracja-rzadowa-current-state-COV.md
-9218b0f491b4c3d36c46acc9630fb3759fbc72399f12ba04e298a35d0ab8f34e  ./references/CHANGELOG.md
+5517f637d60377171b55b8aee99a10625137921889f8d3148945a82342da0b64  ./references/CHANGELOG.md
