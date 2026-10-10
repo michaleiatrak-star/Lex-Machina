@@ -47,13 +47,17 @@
 > jest OBOWIĄZKOWA obok znacznika VER przy KAŻDYM linku do takiego źródła.
 
 ```
-KROK 0 (strukturalny — ZAWSZE próbuj pierwszy):
-  Konektor MCP verify_signature (sententim / prawo-pl-saos) — gdy dostępny,
-  MCP: `saos_search` z parametrem `sygnatura` (Lex Machina, lex-saos) — ten sam kontrakt, exact caseNumber
-  lub web_fetch: https://www.saos.org.pl/api/search/judgments?caseNumber=[sygnatura]
+KROK 0 (strukturalny — sygnatura ZNANA → od razu baza urzędowa po repertorium):
+  Routing: shared/SYGNATURY.md, ROUTING BAZ (SN → sn.pl / MCP `sn_*`; sądy powszechne →
+  orzeczenia.ms.gov.pl / `sp_*`; NSA/WSA → KROK 0A; KIO → UZP / `kio_*`; TK → IPO/OTK ZU / `tk_*`).
+  Bez web_search i bez SAOS na tym etapie (orzeczenia-sadowe-v2, Faza 1-0 A).
+  SAOS (`saos_search` z `sygnatura` / `caseNumber=`) — WYŁĄCZNIE zastępczo, gdy baza urzędowa
+  nie działa (np. sn.pl 403 WAF), i tylko w zasięgu: SP bieżąco, SN do 2016, TK do 2015,
+  KIO do 2018; NSA/WSA nigdy. Poza zasięgiem → OUT_OF_SCOPE.
   → Wynik interpretuj wg kontraktu FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE
     (pełny kontrakt: shared/SYGNATURY.md, sekcja "KONTRAKT WYNIKU WERYFIKACJI")
-  → FOUND (dokładnie 1 trafienie) → znacznik ✅ [VER: saos.org.pl API, data], przejdź do KROK 3
+  → FOUND (dokładnie 1 trafienie) → znacznik ✅ [VER: <baza urzędowa>, data]
+    (zastępczo z SAOS: ✅ [VER: saos.org.pl API, data] + RZĄD 3), przejdź do KROK 3
   → AMBIGUOUS (≥2 sądy, ta sama sygnatura) → NIE wybieraj sam; dopytaj o sąd/datę lub podaj kandydatów
   → NOT_FOUND w zakresie pokrywanym przez bazę → traktuj jak sygnaturę prawdopodobnie zmyśloną (SCENARIUSZ B)
   → OUT_OF_SCOPE / baza nie pokrywa danego sądu (np. NSA/WSA w SAOS) → przejdź do KROK 1
@@ -92,7 +96,8 @@ KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
   orzeczenia.ms.gov.pl → sądy powszechne (apelacyjne, okręgowe, rejonowe)
   orzeczenia.nsa.gov.pl (CBOSA) → NSA + wszystkie WSA; wykonanie wg KROK 0A
   trybunal.gov.pl → Trybunał Konstytucyjny
-  saos.org.pl     → agregator (pomocniczo, gdy powyższe niedostępne)
+  saos.org.pl     → agregator (pomocniczo, gdy powyższe niedostępne; tylko w zasięgu:
+                     SP bieżąco, SN do 2016, TK do 2015, KIO do 2018; bez NSA/WSA)
 
   [zawody zaufania publicznego — odpowiedzialność dyscyplinarna, dot. dr-12
    mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow]:

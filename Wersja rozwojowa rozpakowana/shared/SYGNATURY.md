@@ -265,7 +265,7 @@ Powyższa redakcja V-SYG-0.4 wyrównuje ten rozjazd.
 | Repertorium sygnatury | Baza właściwa | Kanał |
 |---|---|---|
 | C, Ns, Nc, Co, K, Ko, W, GC, GU, GRp, RC, U, P, ACa, ACz, AKa, AKz, APa, AUa, AGa | `orzeczenia.ms.gov.pl` | GET po sygnaturze |
-| CSK, CSKP, KK, NKK, UK, NSNc, NKN, CNP, CO (SN), SDI, ZK | `sn.pl` (snproxy JSON) | GET, UA przeglądarkowy |
+| CSK, CSKP, KK, NKK, UK, NSNc, NKN, CNP, CO (SN), SDI, ZK | `sn.pl` (snproxy JSON) | GET, UA neutralny; 403 WAF → sesja użytkownika / SAOS sprzed 2017 / plik (`DOSTEP-MASZYNOWY-API.md` §1), bez podmiany UA |
 | SA/{siedziba}, SAB/{siedziba}, FSK, OSK, GSK, FSN, ONSA | `orzeczenia.nsa.gov.pl` (CBOSA) | **fresh-probe → V-SYG-0.7 DIRECT-CBOSA**; gdy direct zawiedzie → **V-SYG-0.5 fallback indeksowy** |
 | K, P, SK, U, Kpt, Kp (TK) | `ipo.trybunal.gov.pl`, `otkzu.trybunal.gov.pl` | ⛔ brak kontroli po sygnaturze |
 | KIO | `orzeczenia.uzp.gov.pl` | ⛔ brak filtra po sygnaturze |
@@ -560,4 +560,5 @@ agregator akademicki: **RZĄD 3** w `shared/HIERARCHIA-ZRODEL.md` i Tier 3 w
 właściwego dla repertorium; SAOS zastępczo tylko przy jej awarii albo braku
 trwałego linku (SN ma kartę orzeczenia). W V-SYG-0 SAOS pełni
 funkcję **kontroli krzyżowej**, nie funkcję bazy rozstrzygającej — rozstrzyga
-baza z kolumny „Baza właściwa" tabeli ROUTING BAZ.
+baza z kolumny „Baza właściwa" tabeli ROUTING BAZ. Sygnatura znana → od razu baza
+właściwa, bez SAOS i web_search (`orzeczenia-sadowe-v2`, Faza 1-0 A).

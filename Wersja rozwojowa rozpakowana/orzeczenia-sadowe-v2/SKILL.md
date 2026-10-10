@@ -347,7 +347,8 @@ Pomiar z 2026-09-13 wykazał niedostępność CBOSA w tamtym środowisku, ale ni
 przenosić tego statusu na kolejną sesję bez świeżej próby. Dla każdego kanału
 stosuj aktualny pomiar z `shared/DOSTEP-MASZYNOWY-API.md` oraz poniższe reguły:
 - `orzeczenia.ms.gov.pl` — GET po sygnaturze, patrz Faza 1-S;
-- `sn.pl` — `snproxy` JSON; dobór nagłówków zgodnie ze świeżym pomiarem runtime;
+- `sn.pl` — `snproxy` JSON, neutralny UA; przy 403 WAF/captcha nie obchodź ochrony —
+  Faza 1-0 D (sesja użytkownika, SAOS sprzed 2017, plik);
 - `orzeczenia.nsa.gov.pl` (CBOSA) — **najpierw fresh probe**. Jeżeli portal zwraca
   właściwy HTML, wczytaj `references/CBOSA-ADAPTER.md` i użyj deterministycznego
   kontraktu `POST /cbo/search → /cbo/find?p=N → /doc/{ID}`; przy hoście z
@@ -494,6 +495,34 @@ pomiń profil, wyszukiwanie prowadź bez preferowanego kierunku i pomiń Fazę 1
 
 ## Faza 1 — Wyszukiwanie
 
+### Faza 1-0 — Kolejność odkrywania (discovery) — wybierz ścieżkę PRZED zapytaniem
+
+⛔ Odkrycie ≠ weryfikacja. Każda ścieżka kończy się w bazie urzędowej (Faza 1-S,
+V-SYG); reguły statusów bez zmian: NSA/WSA z CBOSA bez odczytu direct = 🟨 snapshot,
+nigdy awansowany; brak trafienia w CBOSA = `OUT_OF_SCOPE`.
+
+**Dlaczego tak — zmierzony zasięg SAOS** (`shared/KONEKTORY-REKOMENDOWANE.md`,
+`shared/DOSTEP-MASZYNOWY-API.md` §3): sądy powszechne bieżąco, SN do 2016, TK do
+2015, KIO do 2018, NSA/WSA — brak. SAOS nie znajdzie nowszych orzeczeń SN/TK/KIO
+ani żadnych NSA/WSA.
+
+| Sytuacja | Ścieżka |
+|---|---|
+| **A. Sygnatura znana** | od razu baza urzędowa po repertorium (`shared/SYGNATURY.md`, ROUTING BAZ; Faza 1-S). Bez `web_search`, bez SAOS. |
+| **B. Temat, orzeczenia nowsze** (SN po 2016, TK po 2015, KIO po 2018 albo dowolne z ostatnich ~2–3 lat) | **równolegle:** (1) `web_search` ogólny — szuka sygnatur w źródłach wtórnych (komunikaty prasowe sądów, serwisy prawnicze, artykuły kancelarii); (2) wyszukiwarki pełnotekstowe urzędowe: formularz `sn.pl` (pole treści), CBOSA (`wszystkieSlowa`), `orzeczenia.uzp.gov.pl`, TK. |
+| **C. Temat, orzeczenia starsze albo sądy powszechne** | SAOS (Faza 1-T.1) + `web_search`; SAOS także jako **cytator** (późniejsze orzeczenia powołujące sygnaturę: `saos_cytator` / `saos_cite_check`). |
+| **D. `sn.pl` zablokowany** (403 WAF / captcha) | `web_search` po tropy + SAOS **tylko dla orzeczeń sprzed 2017**. Brak trafienia ≠ nieistnienie orzeczenia (`OUT_OF_SCOPE`). Użytkownik może przejść weryfikację `sn.pl` we własnej przeglądarce (aplikacja Lex Machina: okno weryfikacji `sn.pl`) albo dostarczyć plik. ⛔ Bez podmiany UA i obchodzenia WAF (`shared/DOSTEP-MASZYNOWY-API.md` §0–§1). |
+
+⛔ **Zapytanie `web_search` (ścieżki B i D) = abstrakcyjna fraza prawna.** Zakaz
+danych sprawy i danych osobowych (nazwisk, firm, adresów, dat i kwot ze sprawy,
+sygnatury akt własnej sprawy). Przykład: ✅ `uchwała SN zachowek darowizna
+doliczenie` — ⛔ `Kowalski zachowek darowizna 2019 Kraków`.
+
+⛔ **Źródło wtórne = wyłącznie trop.** Z artykułu/komunikatu bierzesz TYLKO
+sygnaturę (i ew. datę/sąd do zawężenia). Tezę i cytat bierzesz z tekstu
+urzędowego po weryfikacji (Faza 1-S → 1-T.3, Zasada 2A). Nie powołuj źródła
+wtórnego jako źródła orzeczenia (Zasada 4).
+
 ### Portale krajowe i UE (Tier 1–3)
 
 Kolejność priorytetu dla spraw polskich:
@@ -503,15 +532,17 @@ Kolejność priorytetu dla spraw polskich:
 4. trybunal.gov.pl/orzeczenia — TK
 5. curia.europa.eu — TSUE (dla materii objętej prawem UE)
 6. hudoc.echr.coe.int — ETPC (dla materii objętej Konwencją)
-7. saos.org.pl — Agregator (backup — tylko gdy brak wyniku w 1–6)
+7. saos.org.pl — Agregator (discovery dla orzeczeń starszych/sądów powszechnych i cytator — Faza 1-0 C/D; weryfikacja zastępcza tylko przy awarii bazy urzędowej)
 
 Jedno trafienie w portalach 1–6 = orzeczenie zweryfikowane.
 Brak trafienia w 1–6 + trafienie tylko w innych źródłach → status „Źródło niepotwierdzone w portalu sądowym".
 
-Strategia: fraza + przepis → instytucja prawna → zagadnienie ogólne → SAOS.
+Strategia: fraza + przepis → instytucja prawna → zagadnienie ogólne; źródło
+tropów wg Faza 1-0 (SAOS tylko w zasięgu: ścieżki C/D).
 Gdy celem jest odnalezienie KONKRETNEJ tezy (dosłownego sformułowania z uzasadnienia),
 a nie tylko orzeczeń „w temacie" — nie zaczynaj od web_search (przeszukuje zaindeksowane
-strony, nie treść uzasadnień) — zacznij od Fazy 1-T (SAOS API + CBOSA pełnotekstowo).
+strony, nie treść uzasadnień) — zacznij od Fazy 1-T (pełnotekstowo: `sn.pl`/CBOSA dla
+orzeczeń nowszych, SAOS API dla starszych i sądów powszechnych — Faza 1-0).
 
 ### Sądy szczególne i dyscyplinarne służb mundurowych
 
@@ -653,9 +684,10 @@ Procedura:
 3. To jest ETAP WYSZUKANIA KANDYDATÓW, nie weryfikacji — saos.org.pl nadal pełni
    wyłącznie rolę wsparcia (Zasada 5) → przejdź do 1-T.3 przed powołaniem sygnatury.
 ```
-⚠️ SAOS to projekt akademicki (ICM UW) — pokrycie nie jest wyczerpujące, a baza bywa
-opóźniona względem najnowszych orzeczeń. Traktuj trafienie jako trop, nie jako
-potwierdzenie.
+⚠️ SAOS to projekt akademicki (ICM UW) — pokrycie nie jest wyczerpujące. Zasięg
+zmierzony: sądy powszechne bieżąco, SN do 2016, TK do 2015, KIO do 2018, NSA/WSA brak
+(Faza 1-0) — dla nowszych SN/TK/KIO i dla NSA/WSA nie używaj SAOS do wyszukiwania.
+Traktuj trafienie jako trop, nie jako potwierdzenie.
 
 ### 1-T.2 — CBOSA (NSA/WSA) — formularz HTML + pełny tekst
 
@@ -755,7 +787,7 @@ sygnatury" stosuj analogicznie wszędzie tam, gdzie portal na to pozwala:
   tekstu urzędowego i wyszukiwania po frazie via Google (`site:` operator)
   patrz też `otkzu.trybunal.gov.pl` (Zasada 5B — równoważne źródło, ten sam organ).
 Brak pola pełnotekstowego w danym portalu → wróć do strategii Fazy 1 (fraza → przepis
-→ instytucja → SAOS jako uzupełnienie).
+→ instytucja; SAOS jako uzupełnienie tylko w zasięgu — Faza 1-0).
 
 ---
 
@@ -942,7 +974,8 @@ FALLBACK F-1: web_search niedostępny
 → Poinformuj użytkownika: „Wyszukiwanie online chwilowo niedostępne.
   Nie mogę zweryfikować orzeczeń online. Nie podam sygnatur bez weryfikacji."
 → Zaoferuj: opis instytucji prawnej i przesłanek bez powołania konkretnych sygnatur
-→ Zalecenie: sprawdź orzeczenia samodzielnie na sn.pl, orzeczenia.ms.gov.pl, saos.org.pl
+→ Zalecenie: sprawdź orzeczenia samodzielnie na sn.pl, orzeczenia.ms.gov.pl,
+  orzeczenia.nsa.gov.pl; saos.org.pl tylko w zasięgu (SP; SN do 2016, TK do 2015, KIO do 2018)
 
 FALLBACK F-2: web_fetch na portalu sądowym zwraca błąd (portal niedostępny)
 → Przejdź do następnego portalu w hierarchii
@@ -951,7 +984,7 @@ FALLBACK F-2: web_fetch na portalu sądowym zwraca błąd (portal niedostępny)
 
 FALLBACK F-3: wyniki wyszukiwania istnieją, ale URL prowadzi do płatnej bazy (LEX, Legalis)
 → Zapisz: „Dostęp płatny — nie cytuję."
-→ Szukaj tego samego orzeczenia w saos.org.pl
+→ Ustal sygnaturę (trop) i weryfikuj w bazie urzędowej (Faza 1-0 A); SAOS tylko w zasięgu
 
 FALLBACK F-4: luka pokrycia przesłanek < 40% po wyczerpaniu wyszukiwania
 → Alert luki: „Brak orzeczeń potwierdzających [przesłanka X]"
@@ -1104,7 +1137,8 @@ Skill wykrywa poziom automatycznie. Użytkownik może wpisać „tryb prawnik" /
 |----------|-----------|
 | Portal Tier 1–3 niedostępny | Przejdź do następnego w kolejności |
 | Wszystkie portale Tier 1–3 niedostępne | Wykonaj FALLBACK F-1 |
-| Brak wyników | Rozszerz frazę lub użyj SAOS, rozważ Fazę 1-L (sieć lokalna) |
+| Brak wyników | Rozszerz frazę; SAOS tylko w zasięgu (Faza 1-0 C); rozważ Fazę 1-L (sieć lokalna) |
+| `sn.pl` 403 WAF / captcha | Faza 1-0 D: `web_search` po tropy, SAOS tylko sprzed 2017, sesja użytkownika albo plik; brak trafienia = `OUT_OF_SCOPE` |
 | Portal lokalny (SA/SO/SR) sądu nieznany lub niedostępny | web_search nazwy sądu → zweryfikuj URL przez web_fetch; brak potwierdzenia → traktuj jak F-2 |
 | Sprzeczne orzeczenia | Kat. 3A + Kat. 3B — nigdy nie ukrywaj |
 | Liczna linia przeciwna do oczekiwanego rozstrzygnięcia | Wykonaj Fazę 1-D → oblicz BILANS (Faza 2) → alert 🔴/🟡 w Raporcie (Zasada 10) |
