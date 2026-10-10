@@ -121,6 +121,8 @@ lub równoważnego artefaktu. Brak takiej funkcji nie znosi bramek jakości.
 - Akta sprawy, tajemnica zawodowa i dane osobowe nie mogą zostać wysłane do
   zewnętrznej usługi tylko dlatego, że historyczny widget zawierał endpoint API.
 - Domyślny fallback anonimizacji: lokalny/deterministyczny, bez transmisji danych.
+- Kontrola: `python3 shared/tools/check_widget_no_ai_egress.py` (kod 1 = endpoint
+  dostawcy AI w `*.html`/`*.js`/`*.jsx`/`*.mjs`).
 
 ## 6. UI i artefakty
 

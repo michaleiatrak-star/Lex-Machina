@@ -153,6 +153,14 @@ live-zmierzonej odpowiedzi KRS) + 2 live (`LEX_LIVE=1`), oba PASS 2026-09-26
 (KRS: FOUND; WL: ERROR z poprawną podpowiedzią WAF — test przechodzi, bo
 sprawdza POPRAWNE ROZPOZNANIE blokady, nie sukces połączenia).
 
+## check_widget_no_ai_egress.py — widgety bez wywołań dostawców AI
+
+```bash
+python3 check_widget_no_ai_egress.py --repo-root "Wersja rozwojowa rozpakowana"   # exit 1 = endpoint AI
+```
+
+Egzekwuje `UNIVERSAL-RUNTIME-ADAPTER.md` §5 dla `*.html`/`*.js`/`*.jsx`/`*.mjs`.
+
 ## Nie mylić z audyt-systemu-v4/scripts/ci_check_shared.py
 
 Ten katalog i `audyt-systemu-v4/scripts/` rozwiązują różne problemy:
