@@ -24,12 +24,18 @@ z tym zrobić*. Jeśli cron nie jest wdrożony, zadanie Cowork działa samodziel
 
 ---
 
-## 1. WARUNEK URUCHOMIENIA (kiedy Claude ma to zaproponować)
+## 1. WARUNEK URUCHOMIENIA (kiedy Claude ma to wykonać)
 
-Zaproponuj utworzenie zadania, gdy **oba** warunki są spełnione łącznie:
+⛔ **Tylko na wyraźne żądanie użytkownika** — wybór pozycji 11 menu
+(`widgets/WIDGET-MENU.md`, id `harmonogram`) albo jednoznaczna prośba
+o utworzenie zadania cyklicznego. **Nigdy nie proponuj zadania automatycznie**
+(ani na końcu audytu, ani po wykryciu Cowork).
 
-1. **Wykryto pracę w Cowork** — sesja toczy się w Cowork (interfejs agentowy
-   z zadaniami i plikami), a nie w zwykłym oknie czatu.
+Po takim żądaniu sprawdź łącznie:
+
+1. **Praca w Cowork** — sesja toczy się w Cowork (interfejs agentowy
+   z zadaniami i plikami), a nie w zwykłym oknie czatu. Poza Cowork: powiedz
+   jednym zdaniem, że zadanie wymaga harmonogramu Cowork, i nie twórz go.
 2. **Brak wcześniej utworzonego zadania** — użytkownik nie ma jeszcze tego
    zadania w harmonogramie Cowork.
 
@@ -38,13 +44,13 @@ harmonogramu Cowork. Jeżeli nie ma jednoznacznego potwierdzenia w kontekście
 sesji (np. użytkownik pokazał wpis, albo poprzedni raport z tego zadania jest
 w plikach), **zapytaj jednym zdaniem**: *„Czy masz już w Cowork zadanie
 cykliczne «Cotygodniowa weryfikacja ISAP»?"* — i dopiero na odpowiedź
-przeczącą przejdź do § 2. Wielokrotne proponowanie już istniejącego zadania
-jest uciążliwe i podważa zaufanie do reszty audytu.
+przeczącą przejdź do § 2.
 
-**Zgoda użytkownika jest warunkiem koniecznym.** Wystarczy akceptacja („tak",
-„twórz") — nie wymagaj przepisywania treści zadania. Bez zgody: nie twórz,
-odnotuj w AUDIT-JOURNAL.md jedno zdanie („zaproponowano, odmowa/brak
-odpowiedzi") i nie wracaj do tematu w tej samej sesji.
+**Zgoda użytkownika jest warunkiem koniecznym.** Wybór pozycji 11 lub prośba
+użytkownika jest zgodą na utworzenie; przed utworzeniem potwierdź jednym
+zdaniem nazwę i częstotliwość. Bez potwierdzenia: nie twórz, odnotuj
+w AUDIT-JOURNAL.md jedno zdanie („żądano, nie potwierdzono") i nie wracaj do
+tematu w tej samej sesji.
 
 ---
 
@@ -61,7 +67,7 @@ Cotygodniowa weryfikacja ISAP dla map Dz.U. w skillach prawniczych (DR-01..DR-16
 ```
 Uruchom TRYB DZU skilla audyt-systemu-v4 (weryfikacja mapy Dz.U. dla polskiego systemu prawniczego). Ta sesja startuje bez pamięci poprzednich rozmów — wykonaj samodzielnie poniższe kroki, opierając się wyłącznie na plikach skilla audyt-systemu-v4 i weryfikacji online (ELI (RZĄD 1) i pomocniczo dziennikustaw.gov.pl / sip.lex.pl / gofin.pl / infor.pl / prawo.pl), nigdy z pamięci.
 
-1. Wczytaj skill audyt-systemu-v4 (SKILL.md) oraz jego pliki references: AUDIT-JOURNAL.md, WARN-OTWARTE.md, CHECKLIST-DEDUP.md, najnowszy plik mapa_dzu_YYYY-MM-DD.md. Wczytaj też prawo-polskie-v2/ROUTING-MAP.md oraz każdy dr-01..dr-16/MAPA-AKTOW.md.
+1. Wczytaj skill audyt-systemu-v4 (SKILL.md) oraz jego pliki references: z AUDIT-JOURNAL.md wyłącznie najnowszy wpis i szablon wpisu wg procedury ODCZYT DZIENNIKA z FAZY 0 (nie wczytuj całego dziennika — kilka MB), WARN-OTWARTE.md, CHECKLIST-DEDUP.md, najnowszy plik mapa_dzu_YYYY-MM-DD.md. Wczytaj też prawo-polskie-v2/ROUTING-MAP.md oraz każdy dr-01..dr-16/MAPA-AKTOW.md.
 
 2. Wykonaj FAZA 0 (ustal wynik ostatniego audytu, otwarte WARN, kontekst).
 
@@ -69,7 +75,7 @@ Uruchom TRYB DZU skilla audyt-systemu-v4 (weryfikacja mapy Dz.U. dla polskiego s
 
 4. Priorytetyzuj w pierwszej kolejności pozycje oznaczone ⏳ OCZEKUJE / ⚡ WCHODZI-90DNI w MONITORING oraz wszelkie ⚠️ ALERT z poprzednich audytów, a także kluczowe kodeksy wymienione w kroku 3A.
 
-5. Wykonaj FAZA 7A (dopisz nowy wpis ## AUDYT-YYYY-MM-DD na początku AUDIT-JOURNAL.md, zaktualizuj stopkę) i FAZA 7B (jeśli znaleziono zmiany Dz.U. — nowa wersja mapa_dzu_YYYY-MM-DD.md z zaktualizowanymi statusami; jeśli brak zmian — odnotuj to wprost w AUDIT-JOURNAL.md, plik mapy bez zmian).
+5. Wykonaj FAZA 7A (wstaw nowy wpis ## AUDYT-YYYY-MM-DD[litera] bezpośrednio przed dotychczas najnowszym wpisem AUDIT-JOURNAL.md, dokładnie wg reguły i poleceń z SKILL.md 7A, bez oglądania całego pliku; stopki nie aktualizuj) i FAZA 7B (jeśli znaleziono zmiany Dz.U. — nowa wersja mapa_dzu_YYYY-MM-DD.md z zaktualizowanymi statusami; jeśli brak zmian — odnotuj to wprost w AUDIT-JOURNAL.md, plik mapy bez zmian).
 
 6. Jeśli wprowadzono jakiekolwiek zmiany w plikach skilla: wykonaj obowiązkową procedurę PRE-DELIVERY-COMPLETENESS-CHECK z ZASADY 7 (SKILL.md audyt-systemu-v4) — policz pliki oryginału PRZED edycją, skopiuj CAŁE drzewo katalogu do katalogu roboczego, nanieś zmiany na kopii, policz pliki PO edycji i pokaż porównanie liczb w odpowiedzi, dopiero potem spakuj CAŁY katalog audyt-systemu-v4 do archiwum .skill/.zip i użyj present_files na całym archiwum — nigdy na pojedynczych plikach.
 

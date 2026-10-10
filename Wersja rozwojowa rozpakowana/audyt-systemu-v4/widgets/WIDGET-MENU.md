@@ -273,13 +273,15 @@ export default function AuditMenu() {
 ## Pozycja 11 — obsługa wyboru (⚠️ INNA niż pozostałe pozycje)
 
 Pozycje 1-10 i 12 uruchamiają fazę audytu. Pozycja **11 (`harmonogram`) nie
-audytuje niczego** — tworzy zadanie cykliczne w Cowork. Po jej wybraniu:
+audytuje niczego** — tworzy zadanie cykliczne w Cowork. To jedyna droga
+uruchomienia (obok wyraźnej prośby użytkownika); ⛔ zadania nie proponuje się
+automatycznie. Po jej wybraniu:
 
 1. Wczytaj `references/SCHEDULED-TASK-COWORK.md`.
 2. Sprawdź WARUNEK URUCHOMIENIA (§ 1 tego pliku): praca w Cowork **oraz**
    brak wcześniej utworzonego zadania. ⛔ Jeśli nie masz pewności co do
    drugiego warunku — **zapytaj jednym zdaniem**, nie zakładaj.
-3. Poproś o akceptację (wystarczy „tak”) i dopiero wtedy utwórz zadanie,
+3. Potwierdź jednym zdaniem nazwę i częstotliwość, dopiero wtedy utwórz zadanie,
    wklejając **dosłownie** treść z § 2A (Description) i § 2B (prompt).
    ⛔ Nie parafrazuj — treść jest kanoniczna.
 4. Blok map pokrycia (§ 3) dopisuj do promptu **wyłącznie** po zamknięciu
@@ -287,7 +289,7 @@ audytuje niczego** — tworzy zadanie cykliczne w Cowork. Po jej wybraniu:
 5. Odnotuj w `AUDIT-JOURNAL.md`: utworzono / odmówiono / już istniało.
 
 Pozycja 11 może być wybrana **razem** z pozycjami audytowymi — wtedy wykonaj
-najpierw audyt, a utworzenie zadania na końcu, żeby propozycja opierała się na
+najpierw audyt, a utworzenie zadania na końcu, żeby zadanie opierało się na
 świeżym wyniku.
 
 ---

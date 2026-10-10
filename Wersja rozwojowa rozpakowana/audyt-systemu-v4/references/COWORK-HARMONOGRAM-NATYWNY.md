@@ -76,9 +76,9 @@ Na początku TRYB DZU-COWORK zawsze sprawdź:
 - **cronExpression:** domyślnie `0 20 * * 0` (niedziela 20:00, czas lokalny) — dostosuj do wyboru użytkownika, format "MIN GODZ * * DZIEŃ_TYGODNIA" (0=niedziela..6=sobota).
 - **prompt:** pełna treść jak w sekcji "TRYB DZU-COWORK" niniejszego skilla (SKILL.md) — instrukcja dla zaplanowanego uruchomienia musi być w PEŁNI samodzielna (sesja startuje bez pamięci tej rozmowy), obejmować: wczytanie ROUTING-MAP.md + dr-*/MAPA-AKTOW.md + mapa_dzu_*.md, wykonanie FAZA 0 + FAZA 3 (3-PULL, 3A, 3B, 3C) + FAZA 7A + FAZA 7B z SKILL.md audyt-systemu-v4, priorytetyzację pozycji ⏳/⚡ MONITORING + ⚠️ ALERT + kluczowych kodeksów, oraz — w razie zmian — pełną procedurę PRE-DELIVERY-COMPLETENESS-CHECK (policz pliki → kopiuj całe drzewo → edytuj → policz ponownie → porównaj → zip całego katalogu → present_files) przed wydaniem zaktualizowanego pliku `.skill`.
 
-## Procedura instalacji/aktualizacji zadania (wykonuje sesja Cowork — na żądanie
-użytkownika ALBO automatycznie po zakończeniu manualnego TRYB DZU w sesji
-interaktywnej Cowork)
+## Procedura instalacji/aktualizacji zadania (wykonuje sesja Cowork — wyłącznie na
+wyraźne żądanie użytkownika: pozycja 11 menu albo prośba; ⛔ nigdy automatycznie,
+także nie po zakończeniu TRYB DZU)
 
 1. Wykryj środowisko (patrz wyżej). Jeśli nie-Cowork → zatrzymaj się tutaj,
    nie wykonuj kroków 2-5.
@@ -107,9 +107,8 @@ interaktywnej Cowork)
 5. Potwierdź w czacie: nazwa zadania, harmonogram, następne uruchomienie.
 
 **Zasada praktyczna:** krok 2 (SCHEDULE-EXISTS-GATE) wykonuje się ZAWSZE,
-niezależnie od tego czy tryb wywołano wprost, czy automatycznie po TRYB DZU —
-oferta (krok 3) nigdy nie pojawia się użytkownikowi, jeśli aktywny harmonogram
-już istnieje.
+po każdym żądaniu użytkownika — pytanie o termin (krok 3) nigdy nie pojawia
+się, jeśli aktywny harmonogram już istnieje.
 
 ## Aktualizacja tej specyfikacji
 

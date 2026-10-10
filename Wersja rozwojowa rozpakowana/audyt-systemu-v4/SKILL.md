@@ -278,13 +278,29 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 Przed jakimkolwiek działaniem wczytaj:
 
 ```
-view audyt-systemu-v4/references/AUDIT-JOURNAL.md
+ODCZYT DZIENNIKA (wyłącznie potrzebny fragment — procedura niżej)
 view audyt-systemu-v4/references/WARN-OTWARTE.md
 view audyt-systemu-v4/references/CHECKLIST-DEDUP.md
 USTAL AKTUALNA_MAPA_DZU: wylistuj references/mapa_dzu_YYYY-MM-DD.md,
 wybierz plik z najpóźniejszą datą w nazwie i sprawdź, że da się go odczytać
 view AKTUALNA_MAPA_DZU
 ```
+
+⛔ **Nie wczytuj całego `AUDIT-JOURNAL.md`** (ok. 71 tys. linii, ok. 4 MB) — ani
+w FAZIE 0, ani w 7A. Odczytuj tylko potrzebny fragment:
+
+```bash
+J=audyt-systemu-v4/references/AUDIT-JOURNAL.md
+# najnowszy wpis = najwyższy identyfikator AUDYT-…, nie ostatnia pozycja w pliku
+N=$(grep -n '^## AUDYT-[0-9]' "$J" | LC_ALL=C sort -t' ' -k2,2 | tail -1 | cut -d: -f1)
+# odczyt najnowszego wpisu: od linii N do nagłówka następnego wpisu
+sed -n "${N},$((N+120))p" "$J" | awk 'NR>1 && /^## /{exit} {print}'
+# szablon wpisu (tylko przy pisaniu, FAZA 6/7A)
+S=$(grep -n '^## SZABLON NOWEGO WPISU' "$J" | cut -d: -f1); sed -n "${S},$((S+38))p" "$J"
+```
+
+Wcześniejsze wpisy czytaj tylko wtedy, gdy zadanie ich wymaga (np. `grep -n
+'AUDYT-2026-08-15h' "$J"` → odczyt zakresu linii tego wpisu).
 
 ⛔ Nie wpisuj na stałe daty bieżącej mapy w procedurze. Każda nowa generacja
 zmienia nazwę pliku; brak dynamicznego wyboru powodował odwołania do usuniętej
@@ -318,33 +334,34 @@ Gdy użytkownik podał konkretny tryb lub zakres → pomiń widget, przejdź bez
 
 ---
 
-## FAZA 0C — WYKRYCIE PRACY W COWORK I ZADANIE CYKLICZNE (POZYCJA 11)
+## FAZA 0C — ZADANIE CYKLICZNE W COWORK (POZYCJA 11, TYLKO NA ŻĄDANIE)
 
-*(dodane 2026-08-15o — odtworzenie mechanizmu opisanego przez użytkownika jako
-istniejący wcześniej i utworzony z poziomu czatu w Cowork za jego akceptacją.)*
+*(dodane 2026-08-15o; od 2026-10-10 wyłącznie na wyraźne żądanie użytkownika.)*
 
-Sprawdź **na końcu sesji audytowej** (nie na początku — propozycja ma się
-opierać na świeżym wyniku), czy zachodzą łącznie:
+⛔ **Nigdy nie proponuj zadania cyklicznego automatycznie** — ani na końcu
+audytu, ani po wykryciu Cowork. FAZĘ 0C uruchamia wyłącznie: wybór pozycji 11
+menu (`widgets/WIDGET-MENU.md`, id `harmonogram`) albo jednoznaczna prośba
+użytkownika o utworzenie zadania.
 
-1. sesja toczy się w **Cowork**;
+Po takim żądaniu sprawdź łącznie:
+
+1. sesja toczy się w **Cowork** (poza Cowork: poinformuj jednym zdaniem, nie twórz);
 2. użytkownik **nie ma jeszcze** zadania cyklicznego „Cotygodniowa weryfikacja
    ISAP" w harmonogramie Cowork.
 
 ⛔ **Warunku 2 NIE zgaduj** — Claude nie widzi listy zadań harmonogramu. Bez
 jednoznacznego potwierdzenia w kontekście: zapytaj jednym zdaniem.
 
-Jeśli oba spełnione → zaproponuj utworzenie zadania i po akceptacji utwórz je
-**dosłownie** wg `references/SCHEDULED-TASK-COWORK.md` (§ 2A Description,
-§ 2B prompt — treść kanoniczna, bez parafrazy). Blok map pokrycia (§ 3 tamże)
-dołączaj do promptu wyłącznie po **zamknięciu flagi F-83**; dopóki otwarta —
-pomiń i odnotuj. Wynik (utworzono / odmowa / już istniało) zapisz w
-AUDIT-JOURNAL.md jednym zdaniem.
+Jeśli oba spełnione → utwórz zadanie **dosłownie** wg
+`references/SCHEDULED-TASK-COWORK.md` (§ 2A Description, § 2B prompt — treść
+kanoniczna, bez parafrazy). Blok map pokrycia (§ 3 tamże) dołączaj do promptu
+wyłącznie po **zamknięciu flagi F-83**; dopóki otwarta — pomiń i odnotuj.
+Wynik (utworzono / odmowa / już istniało) zapisz w AUDIT-JOURNAL.md jednym zdaniem.
 
 Wariant natywny (harmonogram wbudowany w Cowork, bez infrastruktury developera): `references/COWORK-HARMONOGRAM-NATYWNY.md` (do 6.146 plik bez odwołania z treści).
 
-W trybie graficznym ta sama funkcja jest **pozycją 11** menu
-(`widgets/WIDGET-MENU.md`, id `harmonogram`) i może być wybrana samodzielnie
-albo razem z pozycjami audytowymi.
+Pozycja 11 może być wybrana samodzielnie albo razem z pozycjami audytowymi
+(wtedy zadanie tworzy się po audycie).
 
 ---
 
@@ -787,33 +804,45 @@ Po zakończeniu audytu **ZAWSZE** zaktualizuj pliki references (7A obowiązkowo,
 > pliku (ok. w. 18383). Kolejność wpisów w pliku jest dziś mieszana (24 przejścia
 > rosnące i 24 malejące na 698 wpisów) — nie jest ani chronologiczna, ani odwrotna.
 >
-> **Reguła kanoniczna od 2026-08-15p: NOWE WPISY DOPISUJE SIĘ NA KOŃCU PLIKU.**
-> Uzasadnienie: (a) tak faktycznie działa praktyka ostatnich kilkunastu sesji —
-> zmiana konwencji wstecz wymagałaby przenoszenia setek wpisów; (b) plik ma
-> ~40 tys. linii, a wstawianie na początku przez `str_replace` w tak dużym pliku
-> to udokumentowane ryzyko incydentu REGUŁY 5 (kasowanie sąsiedniego markera);
-> (c) dopisanie na końcu jest operacją bezkolizyjną.
+> **Reguła z 2026-08-15p (nakazywała dopisywanie na KOŃCU PLIKU) — zastąpiona
+> praktyką od 2026-10-04h.** Od wpisu AUDYT-2026-10-04h kolejne wpisy tworzą na
+> końcu pliku blok w kolejności **od najnowszego** (10-10a, 10-09h, 10-09g, …,
+> 10-04h); stan zmierzony 2026-10-10.
 >
 > **Stopki NIE reanimujemy jako pola do ręcznej aktualizacji** — była martwa
 > przez ponad dwa miesiące, co dowodzi, że nikt jej nie utrzymuje. Datę ostatniego
-> audytu odczytuje się z **tytułu ostatniego wpisu**, który jest samoaktualizujący.
-> Istniejącą stopkę w połowie pliku pozostawiono jako artefakt historyczny
-> z adnotacją.
+> audytu odczytuje się z **najwyższego identyfikatora wpisu** (nie z pozycji
+> w pliku). Istniejącą stopkę w połowie pliku pozostawiono jako artefakt
+> historyczny z adnotacją.
 >
-> ⚠️ **Historyczny wariant (nieaktualny, zachowany dla zrozumienia starych wpisów):**
-> wpisy sprzed sierpnia 2026 były wstawiane na początku listy.
+> ⚠️ **Historyczne warianty (nieaktualne, zachowane dla zrozumienia starych wpisów):**
+> wpisy sprzed sierpnia 2026 były wstawiane na początku listy; od 2026-08-15p do
+> 2026-10-04g — na końcu pliku.
+
+**Reguła kanoniczna (od 2026-10-04h):** nowy wpis `## AUDYT-YYYY-MM-DD[litera]`
+wstaw **bezpośrednio PRZED dotychczas najnowszym wpisem** (najwyższy identyfikator;
+dziś pierwszy wpis bloku malejącego przy końcu pliku), bez separatora `---`.
+Litera po dacie rozróżnia kilka sesji tego samego dnia (a, b, c…). Nie oglądaj
+całego pliku — wystarczą numery linii:
 
 ```bash
-view audyt-systemu-v4/references/AUDIT-JOURNAL.md
+J=audyt-systemu-v4/references/AUDIT-JOURNAL.md
+grep -n "^## AUDYT-$(date +%Y-%m-%d)" "$J"                     # wolna litera
+N=$(grep -n '^## AUDYT-[0-9]' "$J" | LC_ALL=C sort -t' ' -k2,2 | tail -1 | cut -d: -f1)
+sed -n "${N},$((N+15))p" "$J"                                  # kontrola miejsca
+# nowy_wpis.md: treść wpisu zakończona jedną pustą linią
+python3 - "$J" nowy_wpis.md "$N" <<'PY'
+import sys
+j, w, n = sys.argv[1], sys.argv[2], int(sys.argv[3])
+linie = open(j, encoding="utf-8").read().split("\n")
+nowe = open(w, encoding="utf-8").read().rstrip("\n").split("\n") + [""]
+assert linie[n - 1].startswith("## AUDYT-"), "linia N nie jest nagłówkiem wpisu"
+open(j, "w", encoding="utf-8").write("\n".join(linie[:n - 1] + nowe + linie[n - 1:]))
+PY
+grep -n '^## AUDYT-[0-9]' "$J" | LC_ALL=C sort -t' ' -k2,2 | tail -2   # nowy wpis = najwyższy
 ```
-
-Następnie dopisz wpis `## AUDYT-YYYY-MM-DD[litera]` **na końcu pliku**, poprzedzony
-separatorem `---`. Litera po dacie rozróżnia kilka sesji tego samego dnia (a, b, c…);
-przed użyciem sprawdź, która litera jest wolna:
-```bash
-grep -n "^## AUDYT-$(date +%Y-%m-%d)" references/AUDIT-JOURNAL.md
-```
-⛔ Nie wstawiaj wpisu na początku pliku ani w środku — patrz korekta wyżej.
+⛔ Nie wstawiaj wpisu na początku pliku, w środku ani za ostatnim wpisem bloku
+malejącego. Nie używaj `str_replace` na całym pliku (ryzyko REGUŁY 5).
 
 ### 7B — Aktualizacja mapa_dzu_YYYY-MM-DD.md
 
@@ -1282,7 +1311,7 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 │   │                                             2 skrypty .sh, README.md — pełna lista w YAML
 │   └── …                                         `scripts:`
 └── references/                                 ← 44 pliki (31 w katalogu głównym + 13 w podfolderze)
-    ├── AUDIT-JOURNAL.md                        ← dziennik audytów, ~44 tys. linii, 2,6 MB
+    ├── AUDIT-JOURNAL.md                        ← dziennik audytów (kilka MB; nie wczytywać w całości — FAZA 0)
     ├── WARN-OTWARTE.md                         ← rejestr żywy otwartych flag (ZASADA 10)
     ├── CHANGELOG.md                            ← historia wersji orkiestratora (F-78)
     ├── CHECKLIST-DEDUP.md                      ← mapa pojęć → lokalizacje kanoniczne
