@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.29"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.30"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację sn.pl przechodzi człowiek, bez podmiany User-Agenta.
+  Wersja bieżąca: 3.99.30 (2026-10-11a, AUDYT-2026-10-11a): FORMAT-CYTOWANIA.md (jedna reguła zapisu powołań wg ZTP, kontrola F1–F9), walidator_cytowan.py --format, subagenci Claude Code w agents/ (zgł. #109, #110).
+  3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację sn.pl przechodzi człowiek, bez podmiany User-Agenta.
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)
   3.99.20 (2026-10-07): walidator_cytowan z PR #95 — zgodność po pełnym identyfikatorze (Dz.U. rok+pozycja/ELI/WDU, sygnatura całością, artykuł z § i kodeksem) zamiast samych liczb; domena po hoście, https także w result_urls (zgł. #89)
@@ -199,6 +200,8 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | Plik | Rola |
 |------|------|
 | `FORMAL-CHECK.md` | Centralna walidacja formalna pisma i decyzja: gotowe / uzupełnić / nie składać |
+| `FORMAT-CYTOWANIA.md` | Kanoniczna reguła zapisu powołań aktów w tekście dla adresata (ZTP), kontrola F1–F9; pierwszeństwo nad innymi wzorami |
+| `agents/weryfikator-isap.md`, `agents/weryfikator-orzeczen.md`, `agents/recenzent-niezalezny.md` | Subagenci Claude Code (`shared:<nazwa>`) dla W3.1, W3.2, W3.7 pisma-procesowe-v3; własny kontekst; poza Claude Code tryb single-agent |
 | `BRAKI-FORMALNE.md` | Klasyfikacja braków krytycznych, istotnych i technicznych |
 | `WARUNKI-SKUTECZNOSCI.md` | Warunki procesowej skuteczności pozwu, apelacji, zażalenia, sprzeciwu, KPA itd. |
 | `TRYBY-PROCESOWE.md` | Centralny rejestr trybów, etapów, rygorów i modułów do wczytania |

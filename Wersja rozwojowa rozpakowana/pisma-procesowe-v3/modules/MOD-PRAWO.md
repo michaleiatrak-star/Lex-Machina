@@ -120,15 +120,15 @@ PROCEDURA WERYFIKACJI:
 2. Otwórz tekst jednolity — sprawdź datę ("stan na dzień: [data]")
 3. Znajdź artykuł — odczytaj AKTUALNE brzmienie ze strony
 4. Czy był nowelizowany po dacie zdarzenia? (prawo intertemporalne)
-5. Zapisz: pełne oznaczenie z Dz.U.
+5. Zapisz: pełne oznaczenie z dziennikiem wg shared/FORMAT-CYTOWANIA.md
 ```
 
-Pełne oznaczenie przy pierwszym użyciu:
+Pełne oznaczenie przy pierwszym użyciu (zapis: shared/FORMAT-CYTOWANIA.md, pierwszeństwo nad tym przykładem):
 ```
-art. 81 §1 ustawy z dnia 26 czerwca 1974 r. — Kodeks pracy
-(t.j. Dz.U. z [rok z weryfikacji online] r. poz. [nr z weryfikacji online] ze zm.)
+art. 81 § 1 ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy
+(Dz. U. z [rok z weryfikacji online] r. poz. [nr z weryfikacji online][ z późn. zm.]; dalej: k.p.)
 ```
-Dalej w tekście: skrót "art. 81 §1 KP"
+Dalej w tekście: skrót "art. 81 § 1 k.p."
 
 ## KROK P4 — Zasada intertemporalna
 

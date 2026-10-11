@@ -1,5 +1,7 @@
 # CHANGELOG — pisma-proste-v2
 
+- 2.29 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109): KROK 9d wczytuje `shared/FORMAT-CYTOWANIA.md`. SPH: ⛔ „art. 102 §1” u.k.s.c. → „art. 102 ust. 1” (ustawa ma ustępy; ELI DU/2025/1228, 2026-10-11), zapis „(Dz. U. z [rok] r. poz. [nr])”. SPF-SPG: metryka t.j. DU/2025/1228 oznaczona jako metryka, zapis do pisma z ELI wg reguły.
+
 - 2.28 (2026-10-08): KROK 9c — dodane wywołanie `shared/WERYFIKACJA-SLAD.md § STRIP-VER-GATE` przed wygenerowaniem pliku (znaczniki weryfikacji i tabela śladu poza dokumentem). Dotąd reguła docierała do pism prostych tylko przez ogólny wyzwalacz w shared; pisma-procesowe-v3 odwołuje się do niej w W3-WERYFIKACJA.
 
 - 2.27 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

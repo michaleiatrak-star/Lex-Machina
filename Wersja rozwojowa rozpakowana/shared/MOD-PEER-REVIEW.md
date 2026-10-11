@@ -18,8 +18,12 @@ Moduł symuluje "drugiego adwokata" — niezależny przegląd pisma z perspektyw
 - sędziego (co wzbudzi wątpliwości sądu?),
 - klienta (czy pismo realizuje jego interes, nie tylko formalne żądania?).
 
-Silnik jest single-agent — peer review realizowany jest przez wywołanie
-`analiza-sadowa-v6` w trybie weryfikacji krzyżowej na gotowym piśmie z W3.
+**W Claude Code** przegląd wykonuje subagent `shared:recenzent-niezalezny` (`shared/agents/recenzent-niezalezny.md`)
+we własnym kontekście: dostaje tylko plik pisma i akta, nie zna zamiaru autora (zgł. #110). To jedyny tryb, w którym
+przegląd jest rzeczywiście niezależny od autora.
+**Gdzie indziej** (claude.ai, API, Codex, aplikacja) silnik jest single-agent: peer review realizowany jest przez
+wywołanie `analiza-sadowa-v6` w trybie weryfikacji krzyżowej na gotowym piśmie z W3, w tym samym kontekście co autor.
+Wynik oznacz wtedy jako przegląd własny (nie niezależny).
 
 ---
 

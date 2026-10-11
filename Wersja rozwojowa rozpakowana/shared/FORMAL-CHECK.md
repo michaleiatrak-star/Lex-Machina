@@ -54,6 +54,12 @@ Sprawdź przed oddaniem pisma:
 | PPSA | przepisy PPSA właściwe dla skargi, zażalenia, skargi kasacyjnej i braków formalnych |
 | Koszty cywilne | ustawa o kosztach sądowych w sprawach cywilnych, zwłaszcza właściwe przepisy o opłacie stałej / stosunkowej |
 
+### 3a. Zapis powołań aktów
+
+Każde powołanie aktu w treści pisma: `shared/FORMAT-CYTOWANIA.md` (kontrola F1–F9; narzędzie:
+`python3 shared/tools/walidator_cytowan.py --document PISMO --format`, kod 3 = naruszenia).
+Naruszenie F1–F9 w treści dla adresata = brak uzupełniający; F6 (metryka lub URL w treści) = brak krytyczny.
+
 ## 4. Decyzja walidacyjna
 
 Po sprawdzeniu wydaj jedną z decyzji:
@@ -74,6 +80,7 @@ Opłata: ...
 Właściwość: ...
 Braki krytyczne: ...
 Braki uzupełniające: ...
+Zapis powołań (FORMAT-CYTOWANIA F1–F9): ✅ / lista kodów
 Ryzyko procesowe: ...
 Decyzja: ✅ / ⚠️ / ⛔
 ```

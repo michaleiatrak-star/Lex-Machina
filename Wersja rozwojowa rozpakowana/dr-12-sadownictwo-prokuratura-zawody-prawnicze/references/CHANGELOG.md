@@ -1,5 +1,7 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.26 (2026-10-11a, AUDYT-2026-10-11a): MAPA-AKTOW: zmiany po t.j. z ELI `/references` — u.k.s.c. 2025/1228: 2026/473 (8.07.2026), 1003 (28.10.2026), 346 (30.09.2028); Prawo o adwokaturze 2024/1564: 2025/1172, 2026/370, 846, 1290; radcy 2024/499: 2025/1172, 2026/370, 731, 846. ⚠️ Treść mod-KSCU nie była przeglądana pod kątem 473/1003/346 — zadanie dla audytu DZU.
+
 - 4.25 (2026-10-09f, AUDYT-2026-10-09f): mod-ustawa-odpowiedzialnosc-dyscyplinarna-zawodow: odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (kanoniczny rejestr dokumentów samorządów; wcześniej żaden skill go nie wczytywał).
 
 - 4.24 (2026-10-09b, AUDYT-2026-10-09b): Prawo o adwokaturze — nowelizacja Dz.U. 2026 poz. 1290 (ustawa z 4.09.2026, ogł. 2.10.2026, w życie 17.10.2026; art. 1 pkt 16, 41, 42 od 1.01.2027): art. 7 ust. 3 ochrona przysługująca funkcjonariuszowi publicznemu (dotąd art. 7 ust. 1 „podobnie jak sędzia i prokurator”), art. 4 ust. 1 pomoc prawna, art. 49a Krajowy Rejestr Adwokatów i Aplikantów, art. 77 aplikant radcowski, dział VIIIa art. 95o–95q, przepisy przejściowe; mod-ustawa-adwokatura sekcja 8a. Radcy prawni: art. 12 ust. 1 (Dz.U. 2026 poz. 731, od 18.06.2026) w mod-ustawa-radcowie-prawni. ✅ RZĄD 1 ELI 2026-10-09.

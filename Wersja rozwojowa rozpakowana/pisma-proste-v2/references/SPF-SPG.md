@@ -24,7 +24,8 @@ niezbędny do wniesienia apelacji.*
 - **art. 328 §3 KPC** — obowiązek wskazania we wniosku zakresu (całość / część wyroku)
 - **art. 328 §4 KPC** — sąd odrzuca wniosek spóźniony, nieopłacony lub dotknięty brakami
 - **art. 25b ust. 1 KSCU** — opłata 100 zł od wniosku o doręczenie wyroku z uzasadnieniem
-  (t.j. Dz.U. z 2025 r. poz. 1228)
+  (metryka: ostatni t.j. ELI DU/2025/1228; zapis do pisma i zmiany po t.j. z bieżącej weryfikacji ELI
+  wg shared/FORMAT-CYTOWANIA.md)
 - **art. 25b ust. 3 KSCU** — opłata jest zaliczana na poczet opłaty od środka zaskarżenia
 - **art. 369 §1 KPC** — termin apelacji: 14 dni od doręczenia wyroku z uzasadnieniem
 

@@ -30,6 +30,8 @@
 | `FACT-SOURCE-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
 | `LEGAL-STATUS-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
 | `FORMAL-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `FORMAT-CYTOWANIA.md` | ACTIVE — KANONICZNY | pisma-procesowe-v3 (W3.1, W3.6, MOD-PRAWO, MOD-SZABLONY), pisma-proste-v2 (KROK 9d), via HYBRID-VALIDATION / FORMAL-CHECK / AUDYT-KONCOWY / PRAWO-HARDGATE wszystkie skille generujące dokument |
+| `agents/*.md` (3) | ACTIVE (Claude Code) | pisma-procesowe-v3 W3.1/W3.2/W3.7 (W3-WERYFIKACJA), MOD-PEER-REVIEW |
 | `BRAKI-FORMALNE.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `WARUNKI-SKUTECZNOSCI.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `QUALITY-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |

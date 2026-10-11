@@ -41,6 +41,8 @@ Punkty odniesienia przy ocenie:
 ```
 Poprawność faktów      → MOD-FAKTY / CLAIM-VALIDATION: czy 0 wpisów ⛔ FIKCJA?
 Poprawność prawna      → MOD-PRAWO/MOD-ORZE: czy wszystkie ⚠️ zamknięte ✅?
+                          + zapis powołań wg shared/FORMAT-CYTOWANIA.md: 0 naruszeń F1–F9
+                          (każde naruszenie obniża ocenę; F6 metryka w treści → <7/10)
 Odporność na kontrarg. → R2/R3 (MOD-RED-TEAM-WLASNY): czy 0 tez nieprzepisanych?
 Dowodowość             → W1.3 mapa: czy luki BRAK KRYTYCZNY = 0?
 Realizm sądowy         → RISK-ASSESSMENT: czy poziom ryzyka ≠ Krytyczne?

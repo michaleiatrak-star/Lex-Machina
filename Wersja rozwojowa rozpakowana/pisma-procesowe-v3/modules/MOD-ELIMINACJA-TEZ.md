@@ -184,7 +184,7 @@ RAPORT ELIMINACJI TEZ I WERYFIKACJI PRZEPISÓW
 
 KOREKTY PRZEPISÓW Z MATERIAŁU:
   ⚠️ Dokument [D-nn, str. X] cytuje: art. [błędny]
-     Prawidłowy przepis: art. [skorygowany] (Dz.U. XXXX poz. NNN t.j.)
+     Prawidłowy przepis: art. [skorygowany] (Dz. U. z RRRR r. poz. N) — zapis: shared/FORMAT-CYTOWANIA.md
      Korekta wbudowana w pismo: TAK
 
 PRZEPISY UCHYLONE W MATERIALE:

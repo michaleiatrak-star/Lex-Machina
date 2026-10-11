@@ -44,6 +44,27 @@ const out = {
 process.stdout.write(JSON.stringify(out));
 """
 
+# Hak (node --import): pakiety spoza node:/ścieżek względnych → moduł-zaślepka z eksportami
+# używanymi przez serwery MCP (McpServer, StdioServerTransport, z) i domyślnym.
+_HOOKS = r"""
+const STUB = "lex-stub:pakiet";
+export async function resolve(spec, ctx, next) {
+  if (spec.startsWith("node:") || spec.startsWith(".") || spec.startsWith("/") || spec.startsWith("file:")
+      || spec.startsWith("data:") || spec === STUB) return next(spec, ctx);
+  return { url: STUB, shortCircuit: true };
+}
+export async function load(url, ctx, next) {
+  if (url !== STUB) return next(url, ctx);
+  const src = "const P = new Proxy(function () {}, { get: (t, k) => (k === 'then' ? undefined : "
+    + "k === Symbol.toPrimitive ? () => '' : P), apply: () => P, construct: () => P });"
+    + "export const McpServer = P, StdioServerTransport = P, z = P; export default P;";
+  return { format: "module", source: src, shortCircuit: true };
+}
+"""
+ZASLEPKI_PAKIETOW = "data:text/javascript," + __import__("urllib.parse").parse.quote(
+    'import { register } from "node:module"; register("data:text/javascript,'
+    + __import__("urllib.parse").parse.quote(_HOOKS) + '");')
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -79,8 +100,11 @@ def main() -> int:
             "OK" if not bledy else "FAIL"))
         return 2 if not bledy else 1
 
-    r = subprocess.run([node, "--input-type=module", "-e", NODE_PROBE], cwd=str(audyt / "mcp-servers"),
-                       capture_output=True, text=True, timeout=60)
+    # Serwer importuje @modelcontextprotocol/sdk i zod, a node_modules nie może być w drzewie (T34).
+    # Hak ładowania podstawia za KAŻDY pakiet zewnętrzny zaślepkę (uniwersalny Proxy), więc
+    # sprawdzana jest prawdziwa funkcja z niezmienionego pliku serwera, offline.
+    r = subprocess.run([node, "--import", ZASLEPKI_PAKIETOW, "--input-type=module", "-e", NODE_PROBE],
+                       cwd=str(audyt / "mcp-servers"), capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
         bledy.append("node: wykonanie wybierzTekstCzysty nie powiodło się: {}".format(
             (r.stderr or r.stdout)[-400:]))

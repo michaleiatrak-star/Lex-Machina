@@ -263,8 +263,9 @@ I. STAN FAKTYCZNY
 
 II. PODSTAWA PRAWNA
    [Przepis ogólny → przepis szczególny → przepisy wykonawcze]
-   [Format: "Podstawę prawną niniejszego żądania stanowi art. X §Y
-    ustawy z dnia [...] (t.j. Dz.U. [...]), zgodnie z którym [istota]."]
+   [Format: "Podstawę prawną niniejszego żądania stanowi art. X § Y
+    ustawy z dnia [...] r. o [...] (Dz. U. z RRRR r. poz. N), zgodnie z którym [istota]."
+    Zapis powołania: shared/FORMAT-CYTOWANIA.md]
 
 III. ANALIZA PRAWNA
     III.1 [Nazwa roszczenia/zarzutu]
@@ -326,7 +327,7 @@ Po uzasadnieniu, przed podpisem:
 TEZY DOWODOWE I WSKAZANIE DOWODÓW
 
 Teza 1: [Treść — jedno zdanie]
-Podstawa: art. X §Y [ustawa] (Dz.U. rok poz. nr t.j.)
+Podstawa: art. X § Y [ustawa] (Dz. U. z RRRR r. poz. N) — zapis: shared/FORMAT-CYTOWANIA.md
 Klasyfikacja: A / B / C / D
 Dowody:
   • [Nazwa dowodu] (str. X akt / zał. nr Y)

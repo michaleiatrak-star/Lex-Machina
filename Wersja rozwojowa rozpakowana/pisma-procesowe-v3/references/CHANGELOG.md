@@ -1,5 +1,7 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.40 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109 i #110): Zapis powołań wg `shared/FORMAT-CYTOWANIA.md` w W3-WERYFIKACJA (KROK 5, raport P, W3.6 + wiersz „ZAPIS F1–F9”), MOD-PRAWO, MOD-SZABLONY, MOD-BUDOWA-ARGUMENTU, MOD-ELIMINACJA-TEZ (bez „t.j.”, „Dz. U.”, „z … r.”, k.p., § 1; URL/ELI w raporcie, nie w piśmie). W Claude Code: W3.1 → `shared:weryfikator-isap`, W3.2 → `shared:weryfikator-orzeczen`, W3.7 → `shared:recenzent-niezalezny` (tylko plik pisma i akta); poza Claude Code kroki bez zmian.
+
 - 5.39 (2026-10-10b, AUDYT-2026-10-10b): W3-WERYFIKACJA KROK 1: najpierw narzędzia urzędowe (sn_/cbosa_/kio_sprawdz_sygnature), SAOS zastępczo w zasięgu.
 
 - 5.38 (2026-10-09f, AUDYT-2026-10-09f): 8 modułów przeniesionych z `shared/` do `modules/` (jedyny konsument): MOD-AUDIT-BUNDLE, MOD-DOKTRYNA, MOD-ELIMINACJA-TEZ, MOD-BUDOWA-ARGUMENTU, MOD-KOSZT-ODPOWIEDZI, MOD-MIKROPODSUMOWANIA, MOD-SKUTEK-PROCESOWY, MOD-STRESS-TEST; `view modules/...`. MOD-ELIMINACJA-TEZ: usunięta martwa deklaracja analizator-dowodow-v3 BLOK-C (taki blok nie istnieje).

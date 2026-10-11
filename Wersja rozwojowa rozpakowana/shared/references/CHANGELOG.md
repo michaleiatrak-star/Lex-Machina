@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.30 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109 i #110): FORMAT-CYTOWANIA.md — jedna reguła zapisu powołań w tekście dla adresata (ZTP t.j. DU/2026/300: § 57, § 59 ust. 1, § 154 ust. 3, § 158, § 162 ust. 2 pkt 1; „Dz. U.”, „z … r.”, bez „t.j.”, „z późn. zm.”, k.p.c., § 1, metryka ELI tylko w części roboczej), kontrola F1–F9; odesłania w PRAWO-HARDGATE (format i URL do logu), FORMAL-CHECK, LEGAL-QUALITY-GATE, AUDYT-KONCOWY, HYBRID-VALIDATION. walidator_cytowan.py --format (kod 3), skróty z kropkami, jednostki, indeksy górne, warianty dziennika, .docx z tabelami i superscriptem; testy 19 + self-test 32. agents/: weryfikator-isap, weryfikator-orzeczen, recenzent-niezalezny (Claude Code, własny kontekst; MOD-PEER-REVIEW: tryb niezależny i tryb single-agent). DISCLAIMER: tytuły ustaw bez nieaktualnych metryk.
+
 - 3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API §sn.pl: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację przechodzi człowiek, bez podmiany User-Agenta.
 
 - 3.99.28 (2026-10-10b, AUDYT-2026-10-10b): Kolejność odkrywania orzeczeń wg zmierzonego zasięgu SAOS (SN do 2016, TK do 2015, KIO do 2018): znana sygnatura → rejestr urzędowy; nowsze → web_search (zapytanie bez danych sprawy) + wyszukiwarki urzędowe; DOSTEP-MASZYNOWY-API bez obchodzenia WAF/robots.txt (sn.pl: sesja użytkownika); Cellar po https; mcp-isap: treść t.j. tylko z text.pdf; ścieżki /mnt/user-data neutralne względem hosta; check_widget_no_ai_egress.py.

@@ -71,8 +71,8 @@ WYJĄTEK — pominąć gdy:
 ---
 ⚖️ **Ważna informacja:** Niniejsza analiza ma charakter wyłącznie informacyjny
 i edukacyjny. Nie stanowi porady prawnej ani opinii prawnej w rozumieniu
-Prawa o adwokaturze (t.j. Dz.U. z 2024 r. poz. 1564, ze zm.) ani ustawy o radcach
-prawnych (t.j. Dz.U. z 2024 r. poz. 499, ze zm.). W indywidualnej sprawie zalecam
+ustawy z dnia 26 maja 1982 r. – Prawo o adwokaturze ani ustawy z dnia 6 lipca 1982 r.
+o radcach prawnych. W indywidualnej sprawie zalecam
 skonsultowanie się z adwokatem lub radcą prawnym.
 ```
 
@@ -81,9 +81,9 @@ skonsultowanie się z adwokatem lub radcą prawnym.
 ```
 ---
 ⚖️ **Zastrzeżenie:** Niniejsza analiza ma charakter informacyjny. Nie stanowi
-porady prawnej ani opinii prawnej w rozumieniu art. 4 ust. 1 Prawa o adwokaturze
-(t.j. Dz.U. z 2024 r. poz. 1564, ze zm.) ani art. 6 ust. 1 ustawy o radcach prawnych
-(t.j. Dz.U. z 2024 r. poz. 499, ze zm.). Weryfikacja przepisów: ELI (RZĄD 1).
+porady prawnej ani opinii prawnej w rozumieniu art. 4 ust. 1 ustawy z dnia 26 maja 1982 r.
+– Prawo o adwokaturze ani art. 6 ust. 1 ustawy z dnia 6 lipca 1982 r. o radcach prawnych.
+Weryfikacja przepisów: ELI (RZĄD 1).
 Orzecznictwo: orzeczenia.ms.gov.pl / sn.pl. Każda analiza wymaga weryfikacji
 pod kątem aktualnego stanu prawnego i okoliczności konkretnej sprawy.
 ```

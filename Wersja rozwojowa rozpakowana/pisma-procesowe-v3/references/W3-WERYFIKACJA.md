@@ -10,6 +10,12 @@
 
 ### W3.1 — Weryfikacja przepisów (ISAP)
 
+**W Claude Code** (dostępny subagent `shared:weryfikator-isap`, narzędzie Agent): deleguj ⚠️Pn w paczkach po 1–4 akty, kilka
+instancji równolegle (zgł. #110). Zlecenie: lista powołań z datą zdarzenia i tezą + ścieżki
+`shared/PRAWO-HARDGATE.md`, tego pliku i `shared/FORMAT-CYTOWANIA.md`. Do głównego kontekstu wraca tylko tabela
+(t.j., zmiany po t.j., brzmienie dosłowne, zapis do pisma, URL) — wpisz ją jako raport bloku P.
+**Gdzie indziej** (claude.ai, API, Codex, aplikacja Lex Machina) albo gdy subagent niedostępny: kroki poniżej, bez zmian.
+
 Dla każdego ⚠️Pn z listy W2.3:
 
 ```
@@ -17,11 +23,13 @@ Dla każdego ⚠️Pn z listy W2.3:
   KROK 2: Potwierdź: tytuł aktu, numer Dz.U., data tekstu jednolitego
   KROK 3: Odczytaj brzmienie artykułu ze źródła — nie parafrazuj z pamięci
   KROK 4: Sprawdź: czy artykuł nie był nowelizowany po dacie zdarzenia?
-  KROK 5: Zapisz: "art. [X] [ustawa] (Dz.U. [rok] poz. [nr] t.j.)" + URL
+  KROK 5: Zapisz zapis do pisma wg shared/FORMAT-CYTOWANIA.md:
+          "art. [X] ustawy z dnia [...] r. o [...] (Dz. U. z [rok] r. poz. [nr])"
+          URL i metryka ELI → tylko raport bloku P (część robocza), nie treść pisma
 
-FORMAT RAPORTU bloku P:
-  ✅ P1: art. [X] [ustawa] (Dz.U. [rok] poz. [nr]) — URL: [...]
-  ✅ P2: art. [X] [ustawa] (Dz.U. [rok] poz. [nr]) — URL: [...]
+FORMAT RAPORTU bloku P (część robocza):
+  ✅ P1: zapis do pisma: art. [X] [ustawa] (Dz. U. z [rok] r. poz. [nr]) — ELI: DU/[rok]/[nr] — URL: [...]
+  ✅ P2: zapis do pisma: art. [X] [ustawa] (Dz. U. z [rok] r. poz. [nr]) — ELI: DU/[rok]/[nr] — URL: [...]
   ⛔ P3: [opis] — BRAK DOSTĘPU / NIE ZNALEZIONO
           → pozostaw ⚠️ w piśmie z adnotacją [WYMAGA RĘCZNEJ WERYFIKACJI]
 ```
@@ -36,6 +44,11 @@ FORMAT RAPORTU bloku P:
 > instytucji procesowej — sygnały "bezrefleksyjnego" AI. KROK 2 poniżej
 > rozszerzono o obowiązkową weryfikację DOKŁADNEJ DATY (nie tylko sygnatury
 > i tezy) — dotąd tylko domyślnie zakładana, teraz jawna.
+
+**W Claude Code** (dostępny subagent `shared:weryfikator-orzeczen`, narzędzie Agent): deleguj ⚠️On w paczkach po 3–5 sygnatur, równolegle.
+Zlecenie: sygnatura, data i teza z projektu, teza pisma + ścieżki tego pliku i `shared/SYGNATURY.md`.
+Wraca tabela FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE z dokładną datą, tezą ze źródła i ZAKRESEM.
+**Gdzie indziej** (claude.ai, API, Codex, aplikacja Lex Machina) albo gdy subagent niedostępny: kroki poniżej, bez zmian.
 
 Dla każdego ⚠️On z listy W2.3:
 
@@ -219,7 +232,9 @@ FAZA 3: licznik ⬛ + docx gdy kompletne
 
 ### W3.6 — Pismo finalne
 
-Po zamknięciu wszystkich ⚠️ — wydaj wersję finalną:
+Po zamknięciu wszystkich ⚠️ — wydaj wersję finalną. Zapis powołań w treści: `shared/FORMAT-CYTOWANIA.md`
+(F1–F9; gdy jest narzędzie: `walidator_cytowan.py --document PISMO --format`, kod 3 = popraw). Raport W3,
+metryki ELI i URL-e idą pod nagłówek `CZĘŚĆ ROBOCZA` albo do osobnego pliku, nigdy do treści pisma.
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -229,6 +244,7 @@ PRZEPISY:   ✅ [n] zweryfikowane | ⛔ [n] brak dostępu
 ORZECZENIA: ✅ [n] zweryfikowane | ⛔ [n] nie znaleziono
 WALIDACJA:  [GOTOWE DO ZŁOŻENIA / WYMAGA POPRAWEK / BLOKADA]
 POLA ⬛:    [n] do uzupełnienia
+ZAPIS F1–F9: [0 naruszeń / lista kodów]
 
 STATUS PISMA: [GOTOWE / PROJEKT — uzupełnij przed złożeniem]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -278,6 +294,10 @@ Aktywuj gdy CHOĆBY JEDNO jest prawdą:
   □ użytkownik użył zwrotu "peer review" / "adwokat diabła" / "sprawdź jeszcze raz"
 
 Jeśli aktywny:
+W Claude Code (subagent shared:recenzent-niezalezny): przekaż WYŁĄCZNIE ścieżkę pliku pisma
+  i ścieżki akt — bez rozumowania autora, bez list W2/W3, bez raportu W3 (zgł. #110).
+  Wynik subagenta (tabela ATAK/UWAGA-SĄDU/INTERES-KLIENTA/SPÓJNOŚĆ + PEER-OK/UWAGI/STOP)
+  zastępuje 4 role poniżej. Gdzie indziej albo bez subagenta: jak niżej.
 view shared/MOD-PEER-REVIEW.md
 
 Wykonaj 4 role: Adwokat diabła (ATAK-n), Sędzia (UWAGA-SĄDU-n),

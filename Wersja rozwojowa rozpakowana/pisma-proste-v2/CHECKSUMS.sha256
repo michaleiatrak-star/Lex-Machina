@@ -1,8 +1,8 @@
 49eca7b24319ac4a396f2e3ff07b4f2971ca7f70f749c47b18a8ffdfc0546969  ./PORTABILITY-MANIFEST.md
-d401ed828fc7595d879a9843bb9fe393af8f312032ca86446eb888e98f076cbc  ./SKILL.md
+040c258ab3db5fec5edc0248ef9266123c94922cf78128653870ea3b80b88339  ./SKILL.md
 7838c9ee5368ea708512d2c10455cd0b85db0707af3c0f1ef0c44d63480b4d85  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
-295ba5c0f83e5145b4dcedfe6634adadfe14ec4366642b0108115371138c486d  ./references/CHANGELOG.md
+9da7a0d74dd2d95a3b3765079eada276e4d9da5702fd143e1cb68bfc6ecd456e  ./references/CHANGELOG.md
 ca00b89d47c27e8d4ef7167471e955330f0b31abf56107609db42435537f7dea  ./references/HISTORIA-ZMIAN-PLIKOW.md
 a9e075075bbc7a4cf60e633ae397d1b23f88e6ade6feecc6adfed3b4f720647f  ./references/M1-zasady.md
 61daeb1ef49dcb7ec76e94e19a4a8a21927b1125e2e5bd2434f7125ff19093e9  ./references/M2-intake.md
@@ -16,8 +16,8 @@ e07cc667d67e7e8f20779423a360a4d248c5dd77a6ba1bd0e0ce17cfa660ad6a  ./references/S
 d4ebe88ae828c795301dd559965d2ba0299a9d1500b804693f0a4e12558a61a2  ./references/SPB-zarzuty.md
 ec5dad722c70d30725b86b043f419ebf9a1b2ca8c96c2b16590bd1e66f026f12  ./references/SPC-SPD-SPE.md
 571738853887ff8666d651bdf133eeef32c32929f3ae9a9469e9c96eac713eb8  ./references/SPE-ostateczne.md
-223ef17d5c7c8706e52e359e6ee982c6d1a089f585ac5848b62bd0f3ea644e5d  ./references/SPF-SPG.md
-f6fabcab1108ae2971cd46209e15f46835ccce8cca5bfafd79926b41100d4ec5  ./references/SPH-inne.md
+fbc5d94ae25e3cba7b776f066901a5f653185881352b86728a4087b6834c06d8  ./references/SPF-SPG.md
+fe25618bff7062b4ab1a42533b5cd7a35d16957b558e31bb66eb636936597165  ./references/SPH-inne.md
 30838ff6fbad504652ece723c8a09bc4b0a68ac2194a1057f77e5f4f58191b31  ./references/SPI-zawezwanie.md
 6c20ad728da7cfd5b298781e317c82ac124e09a05babbc6ff9bf474e08f341da  ./references/SPJ-interpretacja-zus.md
 d703b445c32a7e8fe954e04e13957218d17a64d8788a0b7c0c3a084726c7f4e5  ./references/SPK-skarga-do-UODO.md

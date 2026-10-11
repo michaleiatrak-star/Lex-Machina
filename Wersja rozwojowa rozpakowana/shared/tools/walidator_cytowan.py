@@ -41,12 +41,17 @@ SCHEMA_LOGU (JSON):
 Użycie:
     python3 walidator_cytowan.py --document pismo.md --log sesja.json
     python3 walidator_cytowan.py --document pismo.docx --log sesja.json  (wymaga python-docx)
+    python3 walidator_cytowan.py --document pismo.docx --format   (kontrola zapisu, bez logu)
     python3 walidator_cytowan.py --self-test
+
+KONTROLA ZAPISU (--format, zgł. #109): reguła shared/FORMAT-CYTOWANIA.md, kody F1–F9.
+  Sprawdzana jest treść dla adresata: tekst do nagłówka `CZĘŚĆ ROBOCZA` (dalej metryki są dozwolone).
 
 Testy jednostkowe: tools/test_walidator_cytowan.py (python3 -m unittest test_walidator_cytowan).
 
-Kod wyjścia: 0 = wszystkie cytaty mają odpowiadające zdarzenie weryfikacji
-             1 = co najmniej jedna cytata bez śladu weryfikacji (BLOKADA)
+Kod wyjścia: 0 = wszystkie cytaty mają odpowiadające zdarzenie weryfikacji (i zapis zgodny, gdy --format)
+             1 = co najmniej jedna cytata bez śladu weryfikacji (BLOKADA; pierwszeństwo przed 3)
+             3 = naruszenia zapisu powołań (--format)
 """
 
 import argparse
@@ -67,13 +72,21 @@ OFFICIAL_DOMAINS = (
 
 # --- ekstrakcja cytatów ------------------------------------------------
 
+SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+_SUP_TO_DIGIT = str.maketrans(SUP, "0123456789")
+# Skrót aktu po jednostce: wielkie litery (KPC), z kropkami (k.p.c., p.p.s.a.), mieszany (u.KRS).
+SKROT_AKTU = r"(?:[A-ZŁŚŻ]{2,5}(?![\w.])|(?:[a-ząćęłńóśźż]{1,4}\.){1,5}(?:[A-ZŁŚŻ]{2,5}(?![\w.]))?)"
+JEDNOSTKA = r"(?:\s?(?:§\s?\d+[a-z]?|ust\.\s?\d+[a-z]?|pkt\s?\d+[a-z]?|lit\.\s?[a-z](?![a-z])|zdanie\s\w+))"
+
 CITATION_PATTERNS = {
     "artykul": re.compile(
-        r"art\.\s?\d+[a-z]?(?:\s?§\s?\d+[a-z]?)?(?:\s?(?:KC|KPC|KK|KPK|KP|KRO|KSH|KPA|KSCU|KPSW|KW))?",
+        r"art\.\s?\d+[a-z]?(?:[" + SUP + r"]+|\^\d+)?" + JEDNOSTKA + r"*(?:\s" + SKROT_AKTU + r")?",
         re.IGNORECASE,
     ),
     "dziennik_ustaw": re.compile(
-        r"Dz\.\s?U\.\s?(?:z\s?)?\d{4}(?:\s?r\.)?[,.]?\s?poz\.\s?\d+", re.IGNORECASE
+        r"Dz\.\s?U\.(?:\s?(?:z\s?)?\d{4}(?:\s?r\.)?)?(?:\s?Nr\s?\d+)?[,.]?\s?poz\.\s?\d+"
+        r"|Dz\.\s?U\.\s?\d{4}\.\d+",
+        re.IGNORECASE,
     ),
     "sygnatura": re.compile(
         r"\b[IVXLC]{1,4}\s?[A-Z]{1,4}\s?\d{1,5}/\d{2,4}\b"
@@ -97,8 +110,40 @@ def read_document_text(path: Path) -> str:
             print("BŁĄD: obsługa .docx wymaga `pip install python-docx --break-system-packages`", file=sys.stderr)
             sys.exit(2)
         d = docx.Document(str(path))
-        return "\n".join(p.text for p in d.paragraphs)
+        return "\n".join(_docx_akapit(p) for p in _docx_akapity(d))
     return path.read_text(encoding="utf-8", errors="replace")
+
+
+def _docx_akapit(p) -> str:
+    """Tekst akapitu; cyfry w indeksie górnym jako znaki ²² (art. 398²²), nie jako „39822”."""
+    out = []
+    for run in p.runs:
+        t = run.text
+        if run.font.superscript and t.strip().isdigit():
+            t = t.translate(str.maketrans("0123456789", SUP))
+        out.append(t)
+    return "".join(out) if p.runs else p.text
+
+
+def _docx_akapity(d):
+    """Akapity treści i komórek tabel (zagnieżdżonych także), w kolejności dokumentu."""
+    from docx.table import Table
+    from docx.text.paragraph import Paragraph
+
+    def z_kontenera(element, rodzic):
+        for el in element.iterchildren():
+            tag = el.tag.rsplit("}", 1)[-1]
+            if tag == "p":
+                yield Paragraph(el, rodzic)
+            elif tag == "tbl":
+                widziane = set()  # komórka scalona występuje w wierszu wielokrotnie
+                for wiersz in Table(el, rodzic).rows:
+                    for komorka in wiersz.cells:
+                        if id(komorka._tc) not in widziane:
+                            widziane.add(id(komorka._tc))
+                            yield from z_kontenera(komorka._tc, komorka)
+
+    yield from z_kontenera(d.element.body, d._body)
 
 
 # --- dopasowanie do logu weryfikacji ------------------------------------
@@ -120,7 +165,13 @@ def _oficjalny_url(url) -> bool:
 
 
 def _normalizuj(s: str) -> str:
-    return re.sub(r"\s+", " ", unquote_plus(s).lower())
+    s = re.sub(r"[" + SUP + r"]+", lambda m: "^" + m.group(0).translate(_SUP_TO_DIGIT), unquote_plus(s))
+    return re.sub(r"\s+", " ", s.lower())
+
+
+def _klucz_skrotu(skrot: str) -> str:
+    """KPC, k.p.c., K.P.C. → „kpc”; u.KRS → „ukrs”."""
+    return re.sub(r"[^a-ząćęłńóśźż]", "", skrot.lower())
 
 
 def wzorce_identyfikatora(citation):
@@ -130,12 +181,16 @@ def wzorce_identyfikatora(citation):
     t = citation["tekst"]
     typ = citation["typ"]
     if typ == "dziennik_ustaw":
-        m = re.search(r"(\d{4}).*?poz\.\s?(\d+)", t, re.IGNORECASE)
+        m = re.search(r"(\d{4})(?:\s?r\.)?(?:.*?poz\.\s?|\.)(\d+)", t, re.IGNORECASE)
         if not m:
-            return []
+            m = re.search(r"poz\.\s?(\d+)", t, re.IGNORECASE)
+            if not m:
+                return []
+            # „Dz. U. poz. 1061” (bez rocznika): sama pozycja przy oznaczeniu dziennika.
+            return [rf"dz\.?\s*u\.?.{{0,16}}?poz\.?\s*0*{int(m.group(1))}(?!\d)"]
         rok, poz = m.group(1), int(m.group(2))
         return [
-            rf"dz\.?\s*u\.?\s*(z\s*)?{rok}\s*(r\.?)?\s*[,.]?\s*poz\.?\s*0*{poz}(?!\d)",  # Dz.U. 2019 poz. 1145
+            rf"dz\.?\s*u\.?\s*(z\s*)?{rok}\s*(r\.?)?\s*(nr\s*\d+)?\s*[,.]?\s*(poz\.?\s*)?0*{poz}(?!\d)",  # Dz.U. 2019 poz. 1145
             rf"(?<![a-z0-9])du/{rok}/0*{poz}(?!\d)",                                       # ELI DU/2019/1145
             rf"wdu{rok}{poz:07d}(?!\d)",                                                   # ISAP WDU20190001145
         ]
@@ -143,18 +198,23 @@ def wzorce_identyfikatora(citation):
         czlony = re.findall(r"[a-z]+|\d+|/", t.lower())
         return [r"(?<![a-z0-9])" + r"\s*".join(re.escape(c) for c in czlony) + r"(?!\d)"]
     if typ == "artykul":
-        m = re.match(
-            r"art\.\s?(\d+[a-z]?)(?:\s?§\s?(\d+[a-z]?))?(?:\s?([a-z]+))?\s*$", t, re.IGNORECASE
-        )
+        tn = _normalizuj(t)
+        m = re.match(r"art\.\s?(\d+[a-z]?(?:\^\d+)?)((?:\s?§\s?\d+[a-z]?)?)", tn)
         if not m:
             return []
-        nr, par, kodeks = m.group(1).lower(), m.group(2), m.group(3)
-        wz = rf"(?<![a-z0-9])art\.?\s*{re.escape(nr)}(?![0-9a-z])"
+        nr = m.group(1)
+        par = re.search(r"§\s?(\d+[a-z]?)", m.group(2) or "")
+        sk = re.search(r"\s(" + SKROT_AKTU + r")\s*$", t)
+        kodeks = _klucz_skrotu(sk.group(1)) if sk else ""
+        wz = rf"(?<![a-z0-9])art\.?\s*{re.escape(nr)}(?![0-9a-z^])"
         if par:
-            wz += rf"\s*§\s*{re.escape(par.lower())}(?![0-9a-z])"
+            wz += rf"(?:\s*(?:ust|pkt|lit|zdanie)\.?\s*\w+)*?\s*§\s*{re.escape(par.group(1))}(?![0-9a-z])"
+        wzorce = [wz]
         if kodeks:
-            wz += rf".{{0,80}}?(?<![a-z]){re.escape(kodeks.lower())}(?![a-z])"
-        return [wz]
+            # Skrót w logu w dowolnej postaci: KPC = k.p.c.; „k.p.k.” ≠ „k.p.c.”.
+            litery = r"\.?\s?".join(re.escape(c) for c in kodeks)
+            wzorce = [w + rf".{{0,80}}?(?<![a-ząćęłńóśźż]){litery}\.?(?![a-ząćęłńóśźż])" for w in wzorce]
+        return wzorce
     return []
 
 
@@ -181,8 +241,69 @@ def log_has_verification(citation, events):
     return False, None
 
 
+# --- kontrola zapisu (shared/FORMAT-CYTOWANIA.md, kody F1–F9) -----------
+
+CZESC_ROBOCZA = re.compile(r"^[#*\s]*CZ[EĘ][SŚ][CĆ]\s+ROBOCZA\b", re.IGNORECASE | re.MULTILINE)
+KODEKSY_WIELKIE = r"KPC|KPK|KPA|PPSA|KKS|KKW|KPW|KRO|KSH|KC|KP|KK|KW"
+_POWOLANIE_DZ = re.compile(r"\([^()]*?Dz\.\s?U\.[^()]*\)", re.IGNORECASE)
+_WPROWADZENIE = re.compile(r"(?:dalej:?|zwan\w*\s+dalej)\s*[„\"]?((?:[a-ząćęłńóśźż]{1,4}\.){1,5})[”\"]?", re.IGNORECASE)
+_SKROT_PO_ART = re.compile(
+    r"art\.\s?\d+[a-z]?(?:[" + SUP + r"]+|\^\d+)?" + JEDNOSTKA + r"*\s((?:[a-ząćęłńóśźż]{1,4}\.){2,5})(?![a-ząćęłńóśźż])"
+)
+
+REGULY_ZAPISU = [
+    ("F1", "skrót dziennika bez spacji: „Dz. U.”", re.compile(r"Dz\.U\.")),
+    ("F2", "rocznik bez „z … r.”", re.compile(r"Dz\.\s?U\.\s?(?:\d{4}(?!\.\d)|z\s?\d{4}(?!\s?r\.))")),
+    ("F3", "dopisek „t.j.”", re.compile(r"(?<![a-ząćęłńóśźż])t\.\s?j\.")),
+    ("F4", "„ze zm.” zamiast listy zmian albo „z późn. zm.”", re.compile(r"\bze\s?zm\.")),
+    ("F5", "zapis skrócony „Dz.U.RRRR.N”", re.compile(r"Dz\.\s?U\.\s?\d{4}\.\d+")),
+    ("F6", "metryka konektora, ELI, status albo URL źródła w treści",
+     re.compile(r"(?<![A-Za-z0-9])DU/\d{4}/\d+|\bWDU\d{11}\b|\b(?:NOT_)?IN_FORCE\b|display_?address"
+                r"|https?://(?:[\w.-]+\.)?(?:isap\.sejm\.gov\.pl|api\.sejm\.gov\.pl|eli\.gov\.pl)\S*", re.IGNORECASE)),
+    ("F7", "skrót kodeksu wielkimi literami (k.p.c., k.c. …)",
+     re.compile(r"(?<![\w.])(?:KPC|KPK|KPA|PPSA|KKS|KKW|KPW|KRO|KSH)(?![\w.])"
+                r"|art\.[^\n;()]{0,40}?(?<![\w.])(?:" + KODEKSY_WIELKIE + r")(?![\w.])")),
+    ("F8", "zapis jednostki: „§ 1”, bez przecinków między jednostkami, indeks górny zamiast „^”",
+     re.compile(r"§\d|art\.\s?\d+[a-z]?(?:[" + SUP + r"]+)?,\s?(?:§|ust\.|pkt|lit\.)|art\.\s?\d+[a-z]?\^\d")),
+]
+
+
+def tresc_dla_adresata(text: str) -> str:
+    """Tekst do nagłówka `CZĘŚĆ ROBOCZA` (dalej metryki i linki są dozwolone)."""
+    m = CZESC_ROBOCZA.search(text)
+    return text[: m.start()] if m else text
+
+
+def kontrola_zapisu(text: str):
+    """Naruszenia reguły shared/FORMAT-CYTOWANIA.md w treści dla adresata: lista słowników
+    {kod, opis, fragment, pozycja}, w kolejności tekstu."""
+    tresc = tresc_dla_adresata(text)
+    naruszenia = []
+    for kod, opis, wzor in REGULY_ZAPISU:
+        for m in wzor.finditer(tresc):
+            if kod == "F3" and not re.search(r"Dz\.\s?U\.", tresc[max(0, m.start() - 60): m.end() + 60]):
+                continue  # „t.j.” poza powołaniem dziennika (np. w zdaniu o tekście jednolitym)
+            naruszenia.append({"kod": kod, "opis": opis, "fragment": m.group(0), "pozycja": m.start()})
+    # F9: skrót aktu po artykule użyty przed wprowadzeniem albo nigdy niewprowadzony.
+    wprowadzone = {}
+    for m in _WPROWADZENIE.finditer(tresc):
+        wprowadzone.setdefault(_klucz_skrotu(m.group(1)), m.start())
+    for m in _SKROT_PO_ART.finditer(tresc):
+        klucz = _klucz_skrotu(m.group(1))
+        kiedy = wprowadzone.get(klucz)
+        if kiedy is None:
+            opis = f"skrót „{m.group(1)}” niewprowadzony (dalej: {m.group(1)})"
+        elif m.start(1) < kiedy:
+            opis = f"skrót „{m.group(1)}” użyty przed wprowadzeniem"
+        else:
+            continue
+        naruszenia.append({"kod": "F9", "opis": opis, "fragment": m.group(0), "pozycja": m.start()})
+    naruszenia.sort(key=lambda n: (n["pozycja"], n["kod"]))
+    return naruszenia
+
+
 def self_test() -> int:
-    """Przypadki ze zgł. #89 (negatywne) + pozytywne kontrolne."""
+    """Przypadki ze zgł. #89 (negatywne) + pozytywne kontrolne; zgł. #109: skróty, indeksy, zapis F1–F9."""
     def ok(tekst, typ, ev):
         return log_has_verification({"typ": typ, "tekst": tekst}, [ev])[0]
     isap = "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190001145"
@@ -215,29 +336,85 @@ def self_test() -> int:
          {"url": isap, "query_context": "art. 415 § 1 kodeksu cywilnego (KC)"}),
         ("query_context = None", False, "art. 5 KC", "artykul", {"url": isap, "query_context": None}),
     ]
+    # Dopasowanie skrótów i indeksów górnych do logu (zgł. #109).
+    def z_tekstu(cytat, kontekst):
+        c = extract_citations(cytat)[0]
+        return log_has_verification(c, [{"url": isap, "query_context": kontekst}])[0]
+    logi = [
+        ("k.p.c. = KPC", True, "art. 130 § 1 k.p.c.", "art. 130 § 1 KPC"),
+        ("KPC = k.p.c.", True, "art. 130 § 1 KPC", "art. 130 § 1 k.p.c."),
+        ("k.p.c. ≠ k.p.k.", False, "art. 130 k.p.c.", "art. 130 k.p.k."),
+        ("398²² = 398^22", True, "art. 398²² k.p.c.", "art. 398^22 KPC"),
+        ("398²² ≠ 398", False, "art. 398²² k.p.c.", "art. 398 KPC"),
+    ]
+    # Kontrola zapisu (shared/FORMAT-CYTOWANIA.md): oczekiwany zbiór kodów naruszeń.
+    zapisy = [
+        ("t.j., Dz.U., ze zm.", {"F1", "F3", "F4"}, "(t.j. Dz.U. z 2025 r. poz. 869 ze zm.)"),
+        ("Dz.U. bez z … r.", {"F1", "F2"}, "(Dz.U. 2025 poz. 869)"),
+        ("zapis skrócony", {"F1", "F3", "F5"}, "(Dz.U.2025.383 t.j.)"),
+        ("brak r.", {"F2"}, "(Dz. U. z 2025 poz. 869)"),
+        ("§1 i KPC", {"F7", "F8"}, "art. 130 §1 KPC"),
+        ("indeks ^", {"F8"}, "kodeks (Dz. U. z 2025 r. poz. 1; dalej: k.p.c.), art. 398^22 § 1 k.p.c."),
+        ("skrót przed wprowadzeniem", {"F9"}, "art. 5 k.c. … (Dz. U. z 2026 r. poz. 795; dalej: k.c.)"),
+        ("metryka w treści", {"F6"}, "(DU/2025/869, IN_FORCE)"),
+        ("metryka w części roboczej", set(), "Treść.\n\nCZĘŚĆ ROBOCZA\n(DU/2025/869, IN_FORCE) Dz.U. 2025 poz. 869"),
+        ("skrót wprowadzony", set(), "(Dz. U. z 2026 r. poz. 795; dalej: k.c.), potem art. 415 k.c."),
+        ("dziennik z numerem", set(), "(Dz. U. z 1997 r. Nr 89, poz. 555)"),
+        ("bez rocznika", set(), "(Dz. U. poz. 1061)"),
+        ("przecinek między jednostkami", {"F8"}, "art. 5, ust. 2 ustawy"),
+    ]
     bledy = 0
     for opis, oczekiwane, tekst, typ, ev in przypadki:
         wynik = ok(tekst, typ, ev)
         if wynik != oczekiwane:
             bledy += 1
             print(f"FAIL: {opis}: oczekiwano {oczekiwane}, jest {wynik}")
-    print(f"SELF-TEST: {len(przypadki) - bledy}/{len(przypadki)} OK")
+    for opis, oczekiwane, cytat, kontekst in logi:
+        wynik = z_tekstu(cytat, kontekst)
+        if wynik != oczekiwane:
+            bledy += 1
+            print(f"FAIL: {opis}: oczekiwano {oczekiwane}, jest {wynik}")
+    for opis, oczekiwane, tekst in zapisy:
+        wynik = {n["kod"] for n in kontrola_zapisu(tekst)}
+        if wynik != oczekiwane:
+            bledy += 1
+            print(f"FAIL (zapis): {opis}: oczekiwano {sorted(oczekiwane)}, jest {sorted(wynik)}")
+    razem = len(przypadki) + len(logi) + len(zapisy)
+    print(f"SELF-TEST: {razem - bledy}/{razem} OK")
     return 1 if bledy else 0
+
+
+def raport_zapisu(text: str, quiet: bool = False) -> int:
+    naruszenia = kontrola_zapisu(text)
+    if not quiet:
+        print(f"KONTROLA ZAPISU (shared/FORMAT-CYTOWANIA.md): naruszeń {len(naruszenia)}")
+        for n in naruszenia:
+            print(f"  ✗ {n['kod']} {n['fragment']!r} (pozycja {n['pozycja']}) — {n['opis']}")
+        if not naruszenia:
+            print("  ✓ zapis powołań zgodny z regułą")
+    return 3 if naruszenia else 0
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--document", type=Path)
     ap.add_argument("--log", type=Path)
+    ap.add_argument("--format", action="store_true", help="kontrola zapisu powołań (kody F1–F9), bez logu")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     if args.self_test:
         sys.exit(self_test())
-    if not (args.document and args.log):
-        ap.error("wymagane --document i --log (albo --self-test)")
+    if not args.document or not (args.log or args.format):
+        ap.error("wymagane --document z --log i/lub --format (albo --self-test)")
 
     text = read_document_text(args.document)
+    kod_zapisu = raport_zapisu(text, args.quiet) if args.format else 0
+    if not args.log:
+        sys.exit(kod_zapisu)
+    if args.format and not args.quiet:
+        print()
+
     citations = extract_citations(text)
 
     log_data = json.loads(args.log.read_text(encoding="utf-8"))
@@ -269,7 +446,7 @@ def main():
             print("WYNIK: OK — każde powołanie ma odpowiadające zdarzenie weryfikacji na oficjalnym źródle.")
             print("(Nie potwierdza to wierności treści cytatu — tylko fakt próby weryfikacji. Patrz docstring.)")
 
-    sys.exit(1 if unverified else 0)
+    sys.exit(1 if unverified else kod_zapisu)
 
 
 if __name__ == "__main__":

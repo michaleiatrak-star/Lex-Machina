@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.28"
+version: "2.29"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -451,6 +451,7 @@ Przed oddaniem jakiegokolwiek pisma, nawet prostego, wczytaj i zastosuj:
 ```text
 view shared/TRYBY-PROCESOWE.md
 view shared/FORMAL-CHECK.md
+view shared/FORMAT-CYTOWANIA.md
 view shared/BRAKI-FORMALNE.md
 view shared/WARUNKI-SKUTECZNOSCI.md
 view shared/RISK-ASSESSMENT.md

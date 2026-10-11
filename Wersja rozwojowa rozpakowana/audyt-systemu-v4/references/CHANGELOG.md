@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.220 (2026-10-11a, AUDYT-2026-10-11a): T47 bez `node_modules` (hak `node --import` z zaślepką pakietów zewnętrznych; funkcja serwera sprawdzana bez zmian w serwerze). Wpis dziennika: FORMAT-CYTOWANIA (zgł. #109), subagenci Claude Code (zgł. #110), sekcja monitoringu t.j. poza DR w ROUTING-MAP; wersje shared 3.99.30, pisma-procesowe-v3 5.40, pisma-proste-v2 2.29, prawo-polskie-v2 6.59, dr-12 4.26.
+
 - 6.219 (2026-10-10c, AUDYT-2026-10-10c): Konektor SN 1.7.0: okno weryfikacji sn.pl w przeglądarce użytkownika (Edge/Chrome/Chromium) przez protokół DevTools, bez Playwrighta i bez zależności — `sn_captcha_auto` działa z rozszerzenia Claude Desktop (lex-machina.mcpb 1.3.4). Weryfikację przechodzi człowiek; zapis ciasteczek sn.pl z rzeczywistym User-Agentem przeglądarki, tymczasowy profil, port DevTools tylko na 127.0.0.1, okno zamykane po zapisie i po zakończeniu serwera. Safari bez DevTools: `sn_sesja_ustaw`. Playwright (gdy zainstalowany) bez zmian. Plugin: `lex-sn` w `.mcp.json`.
 
 - 6.218 (2026-10-10b, AUDYT-2026-10-10b): Uwagi zewnętrznego wdrożenia: find/grep z obowiązkowym korzeniem korpusu (MOD-INTERLINIE i in.); zadanie cykliczne tylko na żądanie; dziennik czytany od najnowszego wpisu, nie w całości; bezpieczne skrypty (hook pre-commit z kopią, ramię kontrolne z realpath i znacznikiem, anonimizacja F-113 bez nadpisań, --selftest); weryfikator_sygnatur bez UA przeglądarki (konektor SN bez zmian: przeglądarka po zatwierdzeniu użytkownika w czacie albo panelu wyszukiwania).

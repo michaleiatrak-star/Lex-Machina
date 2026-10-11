@@ -40,13 +40,15 @@ Dotyczy KAŻDEJ dziedziny prawa: cywilnego, karnego, pracy, administracyjnego, p
 >      → odczytaj łańcuch "Tekst jednolity" — najnowsza pozycja = obowiązujący t.j.
 >      (patrz sekcja "WARSTWA STRUKTURALNA (ŹRÓDŁO-0)").
 >   2. Fallback: sprawdź na isap.sejm.gov.pl jaki jest NAJNOWSZY t.j. danego aktu.
->   3. Jeśli od najnowszego t.j. były nowelizacje — wskaż je jako "(ze zm. Dz.U. YYYY poz. NNN)".
+>   3. Jeśli od najnowszego t.j. były nowelizacje — wymień je (do 5) albo dopisz „z późn. zm.” (powyżej 5),
+>      wg `shared/FORMAT-CYTOWANIA.md` sekcja 1.
 >   4. Dopiero na tej podstawie cytuj przepis.
 >
-> Standardowy format cytowania:
->   art. X ustawy z dnia [...] (t.j. Dz.U. z RRRR r. poz. NNN[, ze zm.])
+> Zapis powołania w tekście dla adresata: wyłącznie `shared/FORMAT-CYTOWANIA.md` (pierwszeństwo nad
+> każdym innym wzorem), np. pierwsze powołanie:
+>   art. X ustawy z dnia [...] r. o [...] (Dz. U. z RRRR r. poz. N[ z późn. zm.]; dalej: [skrót])
 >
-> ⛔ ZAKAZ formatu: "Dz.U. 2022 poz. XYZ" gdy istnieje t.j. 2025 lub 2026.
+> ⛔ ZAKAZ powołania t.j. 2022, gdy istnieje t.j. 2025 lub 2026 (zakaz dotyczy wyboru t.j., nie zapisu).
 > ⛔ ZAKAZ używania t.j. starszego niż najnowszy dostępny — nawet gdy moduł podaje inny rok.
 > Jeśli t.j. w module jest starszy niż najnowszy w ELI: użyj najnowszego z ELI (RZĄD 1, E-1).
 
@@ -347,8 +349,10 @@ KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym 
 
 KROK 3: Znajdź artykuł → odczytaj AKTUALNE brzmienie ze źródła
 KROK 4: Sprawdź datę "stan na dzień" — czy obowiązuje w dacie zdarzenia?
-KROK 5: Zapisz pełne oznaczenie: art. X §Y ustawy z dnia [...] (t.j. Dz.U. z [...] r. poz. [...])
-KROK 5A: Dołącz URL źródła (ELI text.pdf/text.html; obok link ISAP dla człowieka) + gdy to PDF —
+KROK 5: Zapisz pełne oznaczenie wg shared/FORMAT-CYTOWANIA.md:
+        art. X § Y ustawy z dnia [...] r. o [...] (Dz. U. z RRRR r. poz. N)
+KROK 5A: Dołącz URL źródła do logu weryfikacji / części roboczej, nie do treści pisma
+  (FORMAT-CYTOWANIA F6) (ELI text.pdf/text.html; obok link ISAP dla człowieka) + gdy to PDF —
   kotwica #page=N do konkretnej strony z tym przepisem, jeśli znana z
   faktycznie przeczytanej treści (nie zgadnięta). Ten sam wymóg linku i
   lokalizacji co dla orzeczeń (patrz "PROCEDURA OBOWIĄZKOWA PRZED KAŻDYM

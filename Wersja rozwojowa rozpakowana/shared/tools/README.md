@@ -18,8 +18,16 @@ orzeczenia.ms.gov.pl) w logu sesji.
 
 ```
 python3 walidator_cytowan.py --document pismo.docx --log sesja.json
-python3 walidator_cytowan.py --self-test   # przypadki negatywne zgł. #89
+python3 walidator_cytowan.py --document pismo.docx --format   # zapis powołań, bez logu (zgł. #109)
+python3 walidator_cytowan.py --self-test   # przypadki zgł. #89 i #109
 ```
+
+Kontrola zapisu (`--format`, od shared 3.99.30, zgł. #109): reguła `shared/FORMAT-CYTOWANIA.md`, kody F1–F9
+(`Dz.U.` bez spacji, brak „z … r.”, „t.j.”, „ze zm.”, `Dz.U.RRRR.N`, metryka/ELI/URL w treści, `KPC`, `§1` / przecinki /
+`^`, skrót przed wprowadzeniem). Sprawdzana treść kończy się na nagłówku `CZĘŚĆ ROBOCZA`. Kod wyjścia 3 = naruszenia
+(1 = brak weryfikacji ma pierwszeństwo). Ekstrakcja: skróty z kropkami i mieszane (`k.p.c.`, `u.KRS`), jednostki
+(`ust.`, `pkt`, `lit.`), indeksy górne (`398²²`; w .docx superscript), `Dz.U.RRRR.N`, `Dz. U. poz. N`, `Nr N, poz. N`;
+.docx z tabelami. Dopasowanie do logu: `KPC` = `k.p.c.`, `398²²` = `398^22`, `398²²` ≠ `398`.
 
 Dopasowanie (od shared 3.99.19, zgł. #89): domena urzędowa = host z `urlparse` równy domenie
 albo `*.domena`, tylko `https` (także w `result_urls`); zgodność = pełny identyfikator
@@ -92,6 +100,7 @@ i przetestowane** (wcześniej ten README tylko je opisywał, bez kodu):
 | Skrypt | Test | Wynik |
 |---|---|---|
 | `walidator_cytowan.py` | syntetyczny .md + .docx + 2 fixture'y `przyklady/` | ✅ wszystkie 4 przypadki poprawne |
+| `walidator_cytowan.py` (3.99.30) | `test_walidator_cytowan.py`: ekstrakcja skrótów/jednostek/indeksów, warianty dziennika, `KPC` = `k.p.c.`, F1–F9, część robocza, CLI exit 3, .docx (tabela + superscript); `--self-test` | ✅ 19/19 + 32/32 |
 | `walidator_cytowan.py` (3.99.20) | `test_walidator_cytowan.py`: podciąg domeny (`msn.pl`, `sn.pl.evil…`, ścieżka), http, liczba jako całość, pełny identyfikator, sygnatura różna literą izby, ID ISAP; `--self-test` | ✅ 7/7 + 14/14; fixture'y `przyklady/` bez zmiany wyniku |
 | `extract_api_verification_log.py` | self-test: konwersacja z web_fetch + web_search + 1 wywołanie bez wyniku | ✅ 2/2 zdarzenia poprawnie wydobyte, wywołanie bez wyniku poprawnie pominięte |
 | `export_gate.py` | self-test end-to-end: 2 powołania, 1 zweryfikowane w konwersacji, 1 nie | ✅ poprawna blokada (exit 1) ze wskazaniem dokładnego powołania; test ścieżki pozytywnej (wszystko zweryfikowane, exit 0) wykonany osobno, PASS |

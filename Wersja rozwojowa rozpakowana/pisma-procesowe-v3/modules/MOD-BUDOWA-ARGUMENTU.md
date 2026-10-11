@@ -40,8 +40,9 @@ Per każdy blok uzasadnienia (roszczenie / teza główna):
 [3] PODSTAWA PRAWNA
     Konkretny przepis z numerem Dz.U. (zweryfikowany w W3.1).
     Reguła: przepis musi być spójny z PRZESŁANKĄ — nie tylko z tematem.
-    Wzorzec: "Zgodnie z art. X §Y [ustawa] (Dz.U. [rok] poz. [nr] t.j.), [treść przesłanki]."
-    ⚠️ Nie: "Na podstawie KP" — zawsze konkretny artykuł i paragraf.
+    Wzorzec: "Zgodnie z art. X § Y [ustawa] (Dz. U. z [rok] r. poz. [nr]), [treść przesłanki]."
+    (zapis powołania: shared/FORMAT-CYTOWANIA.md; przy kolejnym powołaniu sam skrót, np. k.p.)
+    ⚠️ Nie: "Na podstawie Kodeksu pracy" — zawsze konkretny artykuł i paragraf.
 
 [4] SKUTEK PROCESOWY
     Co z powyższego wynika dla tego postępowania.

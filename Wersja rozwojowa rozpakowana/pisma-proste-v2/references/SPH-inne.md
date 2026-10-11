@@ -61,8 +61,8 @@ Sygn. akt: [sygnatura] / (dla nowego postępowania: —)
 
             WNIOSEK O ZWOLNIENIE OD KOSZTÓW SĄDOWYCH
 
-Na podstawie art. 102 §1 ustawy z dnia 28 lipca 2005 r. o kosztach
-sądowych w sprawach cywilnych (t.j. Dz.U. z [rok] poz. [nr]) wnoszę
+Na podstawie art. 102 ust. 1 ustawy z dnia 28 lipca 2005 r. o kosztach
+sądowych w sprawach cywilnych (Dz. U. z [rok] r. poz. [nr]) wnoszę
 o zwolnienie mnie od kosztów sądowych w całości / w części [wskazać
 w jakiej części — np. od opłaty od pozwu / od opłaty od apelacji].
 
