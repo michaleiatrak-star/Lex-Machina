@@ -54,8 +54,9 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install optional test dependency
-        run: python3 -m pip install --disable-pip-version-check python-docx
+      # PyYAML: T38 (manifesty pluginów); python-docx: test .docx walidatora cytowań (T48).
+      - name: Install test dependencies
+        run: python3 -m pip install --disable-pip-version-check pyyaml python-docx
 
       - name: Run full regression suite
         shell: bash
