@@ -34,3 +34,32 @@ jobs:
           python3 "$ROOT/audyt-systemu-v4/scripts/test_moved_to_shared.py" --repo-root "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/ci_check_shared.py" --repo-root "$ROOT"
           python3 "$ROOT/audyt-systemu-v4/scripts/test_f108_consistency.py"
+
+  # 2026-10-11 (AUDYT-2026-10-11b, zewnętrzne code review: „CI uruchamia garstkę skryptów”):
+  # pełny zestaw regresyjny — wszystkie testy T1–T49, testy jednostkowe skilli (T48)
+  # i mutacje dowodzące, że każdy bloker potrafi się nie udać (T49). Kod ≠ 0 = blocker.
+  regression-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install optional test dependency
+        run: python3 -m pip install --disable-pip-version-check python-docx
+
+      - name: Run full regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Wersja rozwojowa rozpakowana/audyt-systemu-v4/scripts/run_regression_suite.py" \
+            --repo-root "$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana"

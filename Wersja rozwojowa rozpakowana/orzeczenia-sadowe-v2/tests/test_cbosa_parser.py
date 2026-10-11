@@ -1,6 +1,14 @@
-import pytest
+"""Testy cbosa_parser.py (stdlib, bez pytest). Uruchomienie z dowolnego katalogu:
+    python3 -m unittest discover -s orzeczenia-sadowe-v2/tests
+Funkcje test_* są zbierane do jednego unittest.TestCase (load_tests na końcu pliku)."""
+import re
+import sys
+import unittest
+from pathlib import Path
 
-from cbosa_parser import (
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+
+from cbosa_parser import (  # noqa: E402
     FetchedHtml,
     VerificationStatus,
     collect_search_doc_ids,
@@ -72,25 +80,15 @@ def test_duplicate_links_same_document_are_fetched_once():
     assert r.status == VerificationStatus.FOUND
     assert calls == ["AAAAAAAAAA"]
 
-@pytest.mark.parametrize("returned",[
-    "III FSK 100/24",
-    "II FSK 100/23",
-    "II FSK 101/24",
-    "II OSK 100/24",
-    "II SA/Wa 100/24",
-])
-def test_near_matches_are_rejected(returned):
-    r=verify_search_results(search(1,[("AAAAAAAAAA","one")]),"II FSK 100/24",lambda _:doc(returned))
-    assert r.status == VerificationStatus.NOT_FOUND
-    assert normalize_case_number(returned) in r.rejected_case_numbers
+def test_near_matches_are_rejected():
+    for returned in ("III FSK 100/24", "II FSK 100/23", "II FSK 101/24", "II OSK 100/24", "II SA/Wa 100/24"):
+        r=verify_search_results(search(1,[("AAAAAAAAAA","one")]),"II FSK 100/24",lambda _, ret=returned:doc(ret))
+        assert r.status == VerificationStatus.NOT_FOUND, returned
+        assert normalize_case_number(returned) in r.rejected_case_numbers, returned
 
-@pytest.mark.parametrize("variant",[
-    "ii fsk 100/24",
-    "II   FSK   100/24",
-    "II F.S.K. 100 / 24",
-])
-def test_cosmetic_case_number_variants_match(variant):
-    assert normalize_case_number(variant) == "II FSK 100/24"
+def test_cosmetic_case_number_variants_match():
+    for variant in ("ii fsk 100/24", "II   FSK   100/24", "II F.S.K. 100 / 24"):
+        assert normalize_case_number(variant) == "II FSK 100/24", variant
 
 def test_two_distinct_docs_same_exact_case_are_ambiguous():
     s=search(2,[("AAAAAAAAAA","one"),("BBBBBBBBBB","two")])
@@ -196,8 +194,12 @@ def test_missing_sad_and_data_are_best_effort_not_out_of_scope():
 
 def test_missing_sentencja_still_fails_closed():
     html = doc().replace('<div class="lista-label">Sentencja</div>', '<div class="lista-label">Inne</div>')
-    with pytest.raises(ValueError, match="brak Sentencji"):
+    try:
         parse_cbosa_document(html, "AAAAAAAAAA")
+    except ValueError as exc:
+        assert re.search("brak Sentencji", str(exc)), exc
+    else:
+        raise AssertionError("brak Sentencji: oczekiwano ValueError")
 
 
 def test_value_cell_with_nested_table_keeps_judgment_date():
@@ -237,3 +239,15 @@ def test_related_section_is_not_a_search_result():
             '<span class="powiazane"><span><a href="/doc/BBBBBBBBBB">y</a></span></span>'
             '<a href="/doc/CCCCCCCCCC">z</a></body></html>')
     assert extract_doc_ids(html) == ["AAAAAAAAAA", "CCCCCCCCCC"]
+
+
+def load_tests(loader, tests, pattern):
+    suite = unittest.TestSuite()
+    for name, fn in sorted(globals().items()):
+        if name.startswith("test_") and callable(fn):
+            suite.addTest(unittest.FunctionTestCase(fn, description=name))
+    return suite
+
+
+if __name__ == "__main__":
+    unittest.main()

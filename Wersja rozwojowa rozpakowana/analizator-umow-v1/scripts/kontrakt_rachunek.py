@@ -64,8 +64,9 @@ _DOZW = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub,
 
 def oblicz(wyr: str) -> Decimal:
     """Bezpieczne wyrażenie arytmetyczne w Decimal. Przecinek dziesiętny dozwolony
-    (190,5); separator tysięcy kropką NIE (niejednoznaczny) — podaj 9800, nie 9.800."""
-    w = re.sub(r"(\d),(\d)", r"\1.\2", wyr.replace("×", "*").replace("÷", "/"))
+    (190,5); separator tysięcy spacją dozwolony (1 500 000); kropką NIE (niejednoznaczny) — 9800, nie 9.800."""
+    w = re.sub(r"(?<=\d)[ \u00a0\u202f](?=\d{3}(?!\d))", "", wyr)
+    w = re.sub(r"(\d),(\d)", r"\1.\2", w.replace("×", "*").replace("÷", "/"))
     drzewo = ast.parse(w, mode="eval")
     for n in ast.walk(drzewo):
         if not isinstance(n, _DOZW):
@@ -309,8 +310,10 @@ JEDN = _formy(
 MNOZ = _formy((1000, "tysiąc tysiące tysięcy tysiąca tysiącach tysiącem"),
               (1000000, "milion miliony milionów miliona milionem"))
 SLOWO = re.compile(r"[a-ząćęłńóśźż]+", re.I)
-# separator tysięcy: kropka, spacja niełamiąca (U+00A0) lub wąska spacja niełamiąca (U+202F)
-CYFRY = re.compile(r"(?<![\d.,])(\d{1,3}(?:[.\u00a0\u202f]\d{3})+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)(?![\d])")
+# separator tysięcy: kropka, spacja (zapis typowy w umowach i w fmt()), spacja niełamiąca (U+00A0)
+# lub wąska spacja niełamiąca (U+202F); grupa po separatorze to zawsze 3 cyfry.
+SEP_TYS = "[. \u00a0\u202f]"
+CYFRY = re.compile(r"(?<![\d.,])(\d{1,3}(?:" + SEP_TYS + r"\d{3}(?![\d]))+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)(?![\d])")
 
 
 def slowa_na_liczbe(slowa: list[str]) -> int | None:
@@ -327,7 +330,7 @@ def slowa_na_liczbe(slowa: list[str]) -> int | None:
 
 
 def _cyfra(s: str) -> Decimal:
-    return D(re.sub(r"[.\u00a0\u202f]", "", s).replace(",", "."))
+    return D(re.sub(SEP_TYS, "", s).replace(",", "."))
 
 
 def slownie(tekst: str) -> list[dict]:
@@ -361,7 +364,10 @@ def slownie(tekst: str) -> list[dict]:
                         _, m = min(kand, key=lambda x: x[0])
                         uzyte_cyfry.add(m.start())
                         c = _cyfra(m.group(1))
-                        zgod = c == D(wart) or (c.to_integral_value() == c and int(c) == wart)
+                        # „… złotych 50/100” — grosze zapisane ułamkiem po liczebniku
+                        gr = re.match(r"\s*(?:zł\w*|złot\w*)?\s*(\d{1,2})\s*/\s*100", po)
+                        wart_d = D(wart) + (D(gr.group(1)) / 100 if gr else 0)
+                        zgod = c == wart_d or (c.to_integral_value() == c and int(c) == wart and not gr)
                         linia = tekst[:off + s].count("\n") + 1
                         wyniki.append({"status": "OK" if zgod else "ROZBIEZNOSC", "linia": linia,
                                        "cyfra": m.group(1), "slownie": " ".join(fraza),

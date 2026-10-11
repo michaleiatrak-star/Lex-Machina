@@ -3,6 +3,7 @@
 Nie są testem poprawności rozstrzygnięć prawnych ani benchmarkiem modelu.
 """
 import contextlib
+from datetime import date
 import io
 import json
 from pathlib import Path
@@ -67,10 +68,27 @@ class PrUpTest(unittest.TestCase):
         self.assertEqual(json.loads(out)['freshness']['result'],'SNAPSHOT_OFFLINE_NIE_JEST_FRESH_GATE')
 
     def test_future_amendment_flagged_for_affected_only(self):
-        _,out,_=self.run_cli('article','452')
-        self.assertEqual(json.loads(out)['amendments'][0]['effective_from'],'2027-01-11')
-        _,out,_=self.run_cli('article','240')
-        self.assertEqual(json.loads(out)['amendments'],[])
+        with patch.object(prup,'_today',lambda:date(2026,10,11)):
+            _,out,_=self.run_cli('article','452')
+            self.assertEqual(json.loads(out)['amendments'][0]['effective_from'],'2027-01-11')
+            _,out,_=self.run_cli('article','240')
+            self.assertEqual(json.loads(out)['amendments'],[])
+
+    def test_temporal_lock_is_default(self):
+        # Bez --as-of blokada liczy się na dziś: po wejściu znanej nowelizacji snapshot nie podaje
+        # brzmienia zmienionego artykułu (uwaga z recenzji kodu 2026-10-11; wcześniej tylko z --as-of).
+        with patch.object(prup,'_today',lambda:date(2027,1,11)):
+            code,out,err=self.run_cli('article','452')
+            self.assertEqual(code,2); self.assertEqual(out,'')
+            self.assertIn('WYMAGANA_ZMIANA_WERSJI',json.loads(err)['error'])
+            code,out,_=self.run_cli('article','240')
+            self.assertEqual(code,0); self.assertFalse(json.loads(out)['temporal']['blocked'])
+        with patch.object(prup,'_today',lambda:date(2026,10,11)):
+            code,out,_=self.run_cli('article','452')
+            self.assertEqual(code,0)
+            self.assertFalse(json.loads(out)['temporal']['explicit_date'])
+            code,_,err=self.run_cli('article','452','--as-of','2026-01-01')
+            self.assertEqual(code,2); self.assertIn('WERSJA_HISTORYCZNA',json.loads(err)['error'])
 
     def test_source_tamper_blocks(self):
         with tempfile.TemporaryDirectory() as directory:

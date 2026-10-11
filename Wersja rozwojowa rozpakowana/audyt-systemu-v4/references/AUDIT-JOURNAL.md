@@ -69942,6 +69942,16 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-11b — uwagi z zewnętrznego code review: separator tysięcy, blokada czasowa, CI (6.221)
+
+- Źródło: recenzja kodu przekazana przez właściciela (osoba z doświadczeniem ponad 1000 code review). Każda uwaga sprawdzona na `main` 8d4dbe977.
+- ⛔ `kontrakt_rachunek.py`: spacja nie była separatorem tysięcy — „1 500 000 zł (słownie: jeden milion pięćset tysięcy złotych)” → ROZBIEŻNOŚĆ (para z „000”); narzędzie nie czytało własnego `fmt()`. Poprawione (SEP_TYS z kropką, spacją, U+00A0, U+202F; `oblicz` „1 500”), grosze „50/100” doliczane. analizator-umow-v1 1.49.
+- `prup.py article`: blokada czasowa działała tylko z `--as-of`; teraz domyślnie na dziś. Bez regresji dziś (jedyna nowelizacja w snapshocie od 11.01.2027); test art. 452 nie wygaśnie. dr-02 3.94.
+- CI uruchamiał 5 skryptów, zestaw tylko kompilował. ⛔ Trzy luki potwierdzone: (1) testy skilli (insolvency, prup, cbosa_parser, walidator, eli, krs/vat, mcp, kontrakt) nie wołane przez nic — `test_cbosa_parser.py` nie importował się od dodania (orzeczenia-sadowe-v2 2.29: stdlib, 24/24); (2) KRYTYCZNE T14, T17, T42 i WYSOKIE T47 poza blokerami — zielony wynik końcowy niezależnie od nich; (3) T43 uznawał wzmiankę w skrypcie audytu za ścieżkę wywołania (sierota maskowana nazwą w skrypcie — zmierzone na mutacji). T33 w repozytorium sprawdza 0 paczek (pusty sukces) — poza blokerami, rolę pełni T34.
+- Nowe: T48 (testy jednostkowe skilli, 0 testów = FAIL), T49 (31 mutacji na kopii korpusu; kontrola na czystej kopii; każdy bloker poza T19b i T30 wykrywa defekt). Blokery: wszystkie deterministyczne offline; poza: T3, T8 (heurystyki), T15 (sieć), T33. CI: job `regression-suite` (Python 3.11, Node 22, python-docx) uruchamia pełny zestaw.
+- Potwierdzone bez zmian (uwagi pozytywne recenzji): paczki deterministyczne (T34), brak sekretów (T40), instalator scala `claude_desktop_config.json`.
+- Wersje: analizator-umow-v1 1.49, dr-02-prawo-cywilne-rodzinne-gospodarcze 3.94, orzeczenia-sadowe-v2 2.29, audyt-systemu-v4 6.221.
+
 ## AUDYT-2026-10-11a — format powołań (zgł. #109), subagenci Claude Code (zgł. #110), monitoring t.j. poza DR (6.220)
 
 - Źródło: zgłoszenia #109 i #110 (KajetanCiunelis), wersja rozwojowa 8be00e7. Wzorzec sprawdzony w RZĘDZIE 1: ZTP t.j. ELI DU/2026/300 (text.pdf): § 57, § 59 ust. 1, § 154 ust. 3, § 158 ust. 1, 5–7, § 162 ust. 2 pkt 1 („Dz. U.”). Wszystkie 11 lokalizacji z tabeli zgłoszenia potwierdzone.

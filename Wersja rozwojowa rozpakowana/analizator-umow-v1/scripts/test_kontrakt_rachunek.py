@@ -108,6 +108,21 @@ class Slownie(unittest.TestCase):
         r = K.slownie("NIP 7252345678, 90-425 Łódź, kara 4.000,00 zł (słownie: cztery tysiące złotych).")
         self.assertEqual([(p["cyfra"], p["status"]) for p in r], [("4.000,00", "OK")])
 
+    def test_spacja_jako_separator_tysiecy(self):
+        # Uwaga z recenzji kodu (2026-10-11): „1 500 000 zł” dawało fałszywą ROZBIEŻNOŚĆ (para z „000”).
+        r = K.slownie("Wynagrodzenie wynosi 1 500 000 zł (słownie: jeden milion pięćset tysięcy złotych).")
+        self.assertEqual([(p["cyfra"], p["status"]) for p in r], [("1 500 000", "OK")])
+        r = K.slownie("Kara 12 500 zł (słownie: dwanaście tysięcy złotych).")
+        self.assertEqual([(p["cyfra"], p["status"]) for p in r], [("12 500", "ROZBIEZNOSC")])
+        self.assertEqual(K._cyfra(K.fmt(D("1234567.89"))), D("1234567.89"))  # narzędzie czyta własny zapis
+        self.assertEqual(K.oblicz("1 500 * 2"), D(3000))
+
+    def test_grosze_ulamkiem(self):
+        ok = K.slownie("Kara 12 500,50 zł (słownie: dwanaście tysięcy pięćset złotych 50/100).")
+        zle = K.slownie("Kara 12 500,50 zł (słownie: dwanaście tysięcy pięćset złotych 60/100).")
+        self.assertEqual([p["status"] for p in ok], ["OK"])
+        self.assertEqual([p["status"] for p in zle], ["ROZBIEZNOSC"])
+
 
 class Odeslania(unittest.TestCase):
     UM = ("## §1 Przedmiot\n\n1.1. Treść.\n1.2. Zob. ust. 1.1 oraz §2 ust. 2.1.\n\n"

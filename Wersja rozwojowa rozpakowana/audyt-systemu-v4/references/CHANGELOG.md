@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.221 (2026-10-11b, AUDYT-2026-10-11b, zewnętrzne code review): T48 `check_testy_skilli.py` — testy jednostkowe skilli (4 katalogi, 142 testy; 0 testów = FAIL); T49 `test_mutacje_zestawu.py` — 31 mutacji, każdy bloker (poza T19b, T30) musi wykryć wprowadzony defekt, kontrola na czystej kopii; blokerami wszystkie testy deterministyczne offline (dodane T2, T9, T11–T14, T17, T23, T32, T42, T47–T49, MOCK; poza: T3, T8, T15, T33). CI (`f138-structural-audit.yml`): job `regression-suite` uruchamia pełny zestaw.
+
 - 6.220 (2026-10-11a, AUDYT-2026-10-11a): T47 bez `node_modules` (hak `node --import` z zaślepką pakietów zewnętrznych; funkcja serwera sprawdzana bez zmian w serwerze). Wpis dziennika: FORMAT-CYTOWANIA (zgł. #109), subagenci Claude Code (zgł. #110), sekcja monitoringu t.j. poza DR w ROUTING-MAP; wersje shared 3.99.30, pisma-procesowe-v3 5.40, pisma-proste-v2 2.29, prawo-polskie-v2 6.59, dr-12 4.26.
 
 - 6.219 (2026-10-10c, AUDYT-2026-10-10c): Konektor SN 1.7.0: okno weryfikacji sn.pl w przeglądarce użytkownika (Edge/Chrome/Chromium) przez protokół DevTools, bez Playwrighta i bez zależności — `sn_captcha_auto` działa z rozszerzenia Claude Desktop (lex-machina.mcpb 1.3.4). Weryfikację przechodzi człowiek; zapis ciasteczek sn.pl z rzeczywistym User-Agentem przeglądarki, tymczasowy profil, port DevTools tylko na 127.0.0.1, okno zamykane po zapisie i po zakończeniu serwera. Safari bez DevTools: `sn_sesja_ustaw`. Playwright (gdy zainstalowany) bez zmian. Plugin: `lex-sn` w `.mcp.json`.

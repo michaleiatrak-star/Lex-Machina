@@ -1,5 +1,7 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.49 (2026-10-11b, AUDYT-2026-10-11b, zewnętrzne code review): `kontrakt_rachunek.py` — ⛔ spacja jako separator tysięcy: „1 500 000 zł (słownie: jeden milion pięćset tysięcy złotych)” dawało fałszywą ROZBIEŻNOŚĆ (para z „000”), a narzędzie nie czytało własnego zapisu `fmt()`; `oblicz` przyjmuje „1 500”; grosze ułamkiem „złotych 50/100” doliczane do kwoty słownej. Testy: +2 (15/15).
+
 - 1.48 (2026-10-09f, AUDYT-2026-10-09f): `kontrakt_rachunek.py` + test przeniesione z `shared/tools/` do `scripts/` (jedyny konsument); odwołania w SKILL.md, references i workflows; T39 czyta nową ścieżkę.
 
 - 1.47 (2026-10-09, AUDYT-2026-10-09): zakaz konkurencji, RODO-archiwizacja, B2C — KP t.j. Dz.U. 2026 poz. 1245, prawa konsumenta t.j. Dz.U. 2026 poz. 1244 (ELI: poprzednie t.j. 2025/277 i 2024/1796 wygasły); zapisy odczytu ze starych t.j. oznaczone „obecny t.j.”.

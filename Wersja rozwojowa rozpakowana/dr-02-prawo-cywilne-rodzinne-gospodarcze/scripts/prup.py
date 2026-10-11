@@ -116,10 +116,16 @@ def verify(metadata):
             'scope': 'PDF i relacje ELI; nie ocena prawa właściwego dla dat sprawy'}
 
 
-def temporal_status(metadata, as_of=None, article=None):
-    """Refuse known wrong snapshots; never infer a case's transition regime."""
+def _today():
     from datetime import date
-    target = date.fromisoformat(as_of) if as_of else date.today()
+    return date.today()
+
+
+def temporal_status(metadata, as_of=None, article=None):
+    """Refuse known wrong snapshots; never infer a case's transition regime.
+    Without as_of the check runs for today (default lock, not opt-in)."""
+    from datetime import date
+    target = date.fromisoformat(as_of) if as_of else _today()
     day = target.isoformat()
     changes = [{**a, 'state': 'WESZLA_W_ZYCIE' if a['effective_from'] <= day else 'PRZYSZLA'}
                for a in metadata['later_amendments']
@@ -128,7 +134,7 @@ def temporal_status(metadata, as_of=None, article=None):
     reason = 'WYMAGA_USTALENIA_PRZEPISOW_PRZEJSCIOWYCH_DLA_SPRAWY'
     if day < metadata['legal_status_date']:
         blocked, reason = True, 'WERSJA_HISTORYCZNA: data wcześniejsza niż stan prawny snapshotu; użyj tekstu historycznego i nowelizacji'
-    elif as_of and day > date.today().isoformat():
+    elif as_of and day > _today().isoformat():
         blocked, reason = True, 'DATA_PRZYSZLA: nie można potwierdzić przyszłego stanu prawnego'
     elif any(a['state'] == 'WESZLA_W_ZYCIE' for a in changes):
         blocked, reason = True, 'WYMAGANA_ZMIANA_WERSJI: weszła znana nowelizacja; snapshot wymaga wyboru/scalenia właściwego wariantu'
@@ -144,7 +150,8 @@ def main():
     article = sub.add_parser('article')
     article.add_argument('id', help='np. 240, 216aa, 491^14, 491[14], 491¹⁴')
     article.add_argument('--verify-online', action='store_true')
-    article.add_argument('--as-of', help='YYYY-MM-DD; kontrola daty prawa, nie automatyczny wybór przepisów przejściowych')
+    article.add_argument('--as-of', help='YYYY-MM-DD (domyślnie dziś); blokada stanu prawnego działa zawsze, '
+                         'nie jest automatycznym wyborem przepisów przejściowych')
     temporal = sub.add_parser('temporal')
     temporal.add_argument('--as-of', required=True)
     sub.add_parser('verify')
@@ -170,14 +177,14 @@ def main():
                 found = next((a for a in articles if a['id']==wanted), None)
                 if found is None:
                     raise ValueError('BRAK_W_SNAPSHOCIE: nie zgaduj numeru ani treści; sprawdź uchylone/pominięte części PDF')
-                if args.as_of:
-                    status = temporal_status(meta, args.as_of, wanted)
-                    if status['blocked']:
-                        raise ValueError(status['reason'])
+                # Blokada czasowa domyślnie (bez --as-of: na dziś) — uwaga z recenzji kodu 2026-10-11.
+                status = temporal_status(meta, args.as_of, wanted)
+                if status['blocked']:
+                    raise ValueError(status['reason'])
                 freshness = verify(meta) if args.verify_online else {'result':'SNAPSHOT_OFFLINE_NIE_JEST_FRESH_GATE'}
                 out = {**found, 'source':meta['pdf_url']+'#page='+str(found['page']),
                        'snapshot_verified_on':meta['verified_on'], 'freshness':freshness,
-                       'temporal':temporal_status(meta, args.as_of, wanted),
+                       'temporal':status,
                        'temporal_warning':'Przed użyciem ustal daty sprawy i przepisy przejściowe. Snapshot nie jest automatycznie właściwą wersją historyczną ani przyszłą.',
                        'amendments':[x for x in meta['later_amendments'] if wanted in x['articles']],
                        'extraction_warning':'Ekstrakcja zawiera nagłówki stron, przypisy i etykiety kolejnych działów. Cytat porównaj z PDF; zapis [n] oznacza indeks górny.',
