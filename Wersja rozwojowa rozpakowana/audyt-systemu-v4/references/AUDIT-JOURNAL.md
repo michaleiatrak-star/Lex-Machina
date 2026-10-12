@@ -70883,3 +70883,10 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Poprawione: ROUTING-MAP (2 wiersze), dr-05 MAPA-AKTOW i mod-UPEA (4 miejsca), dr-03 mod-grzywny-mandaty-szczegolowe (2), shared ISAP-METRYKI-AKTOW, terminy.md (art. 17 § 1a — oba brzmienia z cytatem: do 27.10.2026 „dla których organem wyższego stopnia jest minister”, od 28.10.2026 także „w stosunku do których brak organu wyższego stopnia”), mapa_dzu_2026-10-04 (1311, 1315).
 - Ochrona przyrody 2026/1315: obwieszczenie z 4.09.2026 potwierdza objęcie zmian 426, 737 i 912 — ustalenie z 12b było trafne.
 - Wersje: audyt-systemu-v4 6.224, dr-03 3.64, dr-05 3.36, prawo-polskie-v2 6.61, shared 3.99.33.
+
+## AUDYT-2026-10-12d — isap_tekst: odczyt PDF t.j. jak RAG aplikacji (6.225)
+- Pomiar wyjściowy (wspólny benchmark z legal-cite-pl, 14 aktów, 6247 art.): `isap_tekst` 5092 zgodnych, 445 z błędną treścią, 532 brakujących — przypisy w treści, nagłówki z indeksem górnym i zakresy nierozpoznane, artykuły drukowane dwukrotnie sklejone.
+- Zmiana: `wspolne/akt-pdf.mjs` (generowany: `npm run build:akt-pdf` w app/lex-runtime) + `tekstZPdf`/`artykulObowiazujacy` w serwerze. Różnice pdf.js 4.10 vs 6.x (elementy „Art”+„.”, „1 )”, „(uchylony) 9)”, „Art. 10. 8)”) usunięte we wspólnym kodzie; serwer zostaje na pdfjs-dist 4.10 (Node ≥ 18).
+- Wynik: 6023 zgodne, 8 błędów (2 to literówki wzorca HTML), 36 braków (te same odmawia legal-cite; 34 to KP 238–241³⁰).
+- Wersje: audyt-systemu-v4 6.225, mcpb 1.3.5.
+

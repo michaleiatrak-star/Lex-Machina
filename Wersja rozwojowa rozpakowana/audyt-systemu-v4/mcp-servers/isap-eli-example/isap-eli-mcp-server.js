@@ -40,7 +40,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 import { sygnal, owinSerwer, budzetWyczerpany } from "../wspolne/budzet.mjs";
+import {
+  articleFootnotes, articleWording, extractPageFootnotes, joinLineItems, normalizeArticleId,
+  repairDzuPdfEncoding, splitArticles, stripPdfPageHeaders, stripTrailingHeadings,
+} from "../wspolne/akt-pdf.mjs";
 
 const ELI_BASE_URL = "https://api.sejm.gov.pl/eli/acts"; // ✅ zweryfikowane wobec żywego API 2026-09-27g
 
@@ -244,14 +249,7 @@ export function naprawMacCEDokument(strony) {
 // format z lat 2000–2009 („Dziennik Ustaw Nr 105 — 7006 — Poz. 990 i 991”), też dla M.P.
 // ⛔ Klasy znaków celowo bez `\s`: `\s` obejmuje koniec wiersza, więc wzorzec zjadałby numer
 // pozycji stojący w następnym wierszu jako nagłówek treści (zmierzone na DU/2000/649).
-const PAGINA_BIEZACA = /^Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\.\s*\d+\s*$/m;
 const PAGINA_2000_2009 = /^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$/gm;
-
-export function czyscTekstPdf(strony) {
-  return naprawMacCEDokument(strony)
-    .map((t) => t.replace(PAGINA_BIEZACA, "").replace(PAGINA_2000_2009, "")).join("\n")
-    .replace(/(\p{L})-\n(\p{Ll})/gu, "$1$2").replace(/[ \t]+\n/g, "\n").replace(/\n{2,}/g, "\n");
-}
 
 export function normalizujNumerArt(a) {
   return String(a).trim().replace(/^art\.?\s*/i, "").replace(/\s+/g, "")
@@ -268,30 +266,64 @@ export function podzielObwieszczenie(tekst) {
   return { preambula, zalacznik, nie_obejmuje: p2 ? p2[0].trim() : null, stan_prawny_na: stan ? stan[1] : null };
 }
 
-/** Cały artykuł z tekstu ustawy: od „Art. N.” do następnego „Art. …”. */
-export function wytnijArtykul(zalacznik, numer) {
-  const n = normalizujNumerArt(numer).replace(/[[\]]/g, "\\$&");
-  const re = new RegExp(`(?:^|\\n)(Art\\.\\s*${n}\\.[\\s\\S]*?)(?=\\nArt\\.\\s*\\d+[a-z]*(?:\\[\\d+\\])?\\.\\s|\\n\\s*Rozdział|\\n\\s*DZIAŁ|\\n\\s*TYTUŁ|\\n\\s*KSIĘGA|$)`);
-  const m = zalacznik.match(re);
-  return m ? m[1].trim() : null;
+/** PDF → tekst aktu tym samym odczytem co RAG aplikacji (wspolne/akt-pdf.mjs): wiersze składane
+ * z geometrii pozycji, przypisy z dołu strony (drobny druk) wyjęte z treści, paginy usunięte.
+ * Zwraca { tekst, strony, przypisy, sha256 }. Czysta funkcja na bajtach — testowalna offline. */
+export async function tekstZPdf(dane) {
+  const sha256 = createHash("sha256").update(dane).digest("hex");
+  const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  if (!globalThis.pdfjsWorker) globalThis.pdfjsWorker = await import("pdfjs-dist/legacy/build/pdf.worker.mjs");
+  const doc = await pdfjs.getDocument({ data: dane, isEvalSupported: false, disableFontFace: true, verbosity: 0 }).promise;
+  const surowe = [];
+  for (let i = 1; i <= doc.numPages; i++) {
+    const elementy = (await (await doc.getPage(i)).getTextContent()).items;
+    surowe.push(joinLineItems(elementy, true).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").trim());
+  }
+  const strony = naprawMacCEDokument(surowe)
+    .map((t) => stripPdfPageHeaders(repairDzuPdfEncoding(t.replace(PAGINA_2000_2009, ""))).trim());
+  const { pages, footnotes } = extractPageFootnotes(strony);
+  return { tekst: pages.filter(Boolean).join("\n"), strony: pages, przypisy: footnotes, sha256 };
 }
 
 async function tekstPdf(eli, url = null) {
   if (pamiecTekstu.has(eli)) return pamiecTekstu.get(eli);
   const resp = await fetch(url ?? `${ELI_BASE_URL}/${eli}/text.pdf`, { signal: sygnal(90000) });
   if (!resp.ok) throw new Error(`PDF ${eli}: HTTP ${resp.status}`);
-  const dane = new Uint8Array(await resp.arrayBuffer());
-  const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
-  if (!globalThis.pdfjsWorker) globalThis.pdfjsWorker = await import("pdfjs-dist/legacy/build/pdf.worker.mjs");
-  const doc = await pdfjs.getDocument({ data: dane, isEvalSupported: false, disableFontFace: true, verbosity: 0 }).promise;
-  const strony = [];
-  for (let i = 1; i <= doc.numPages; i++) {
-    const c = await (await doc.getPage(i)).getTextContent();
-    strony.push(c.items.map((it) => it.str + (it.hasEOL ? "\n" : "")).join(""));
-  }
-  const t = czyscTekstPdf(strony);
+  const t = await tekstZPdf(new Uint8Array(await resp.arrayBuffer()));
   pamiecTekstu.set(eli, t);
   return t;
+}
+
+const dzisWarszawa = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Warsaw" }).format(new Date());
+
+/** Podział załącznika na artykuły (raz na dokument). Nagłówki: „Art. 11[1].”, „Art. 6 1 .”, zakresy
+ * „Art. 133–142.”; artykuł drukowany kilkakrotnie (brzmienie obecne i przyszłe) zostaje z wydrukami. */
+function artykulyDokumentu(dok) {
+  if (!dok.podzial) dok.podzial = splitArticles(dok.zalacznik);
+  return dok.podzial;
+}
+
+/** Cały artykuł w brzmieniu obowiązującym w dniu `dzis`, rozstrzygniętym z odnośników
+ * („Obowiązuje do wejścia w życie zmiany…”, „Dodany … wejdzie w życie z dniem …”). null = brak. */
+export function artykulObowiazujacy(dok, numer, dzis = dzisWarszawa()) {
+  const { articles, repeats } = artykulyDokumentu(dok);
+  const id = normalizeArticleId(String(numer).replace(/^art\.?\s*/i, ""));
+  if (!articles[id]) return null;
+  const wydruki = [articles[id], ...(repeats[id] ?? [])].map(stripTrailingHeadings);
+  const oznaczony = wydruki.join("\n");
+  const przypisy = dok.przypisy ?? {};
+  const z = articleFootnotes(oznaczony, przypisy);
+  const brzmienie = articleWording(oznaczony, przypisy, dzis);
+  const wynik = { id, tresc: z.text, odnosniki: Object.fromEntries(z.notes.map((n) => [n, przypisy[n]]).filter(([, t]) => t)) };
+  // Jednostka drukowana dwukrotnie także wewnątrz jednego artykułu („2. … 200 000 złotych.” obok
+  // „2. … 100 000 złotych.”): brzmienie wybiera się zawsze, gdy artykuł ma odnośniki.
+  if (z.notes.length || wydruki.length > 1) {
+    if (brzmienie.unresolved) wynik.nierozstrzygniete = true;
+    else wynik.tresc = brzmienie.text;
+    if (brzmienie.pending.length) wynik.brzmienia_przyszle = brzmienie.pending;
+  }
+  wynik.tresc = wynik.tresc.trim();
+  return wynik;
 }
 
 async function zmianyPoTj(eliBazowy, tj) {
@@ -333,12 +365,14 @@ server.registerTool("isap_tekst", {
       zrodlo = tj; wersjaTekstu = "tekst_jednolity";
     }
     const czysty = wybierzTekstCzysty(zrodlo.eli, meta);
-    const pelny = await tekstPdf(zrodlo.eli, czysty?.url ?? null);
-    const obw = wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(pelny) : { zalacznik: pelny, nie_obejmuje: null, stan_prawny_na: null };
+    const pdf = await tekstPdf(zrodlo.eli, czysty?.url ?? null);
+    const obw = { ...(wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(pdf.tekst) : { zalacznik: pdf.tekst, nie_obejmuje: null, stan_prawny_na: null }), przypisy: pdf.przypisy };
     const result = { identyfikator: zrodlo.identyfikator, eli_bazowy: eli, eli_zrodla_tekstu: zrodlo.eli, wersja_tekstu: czysty ? "tekst_ujednolicony" : wersjaTekstu,
       status_obowiazywania: wersjaTekstu === "tekst_jednolity" ? zrodlo.status_obowiazywania : st,
       tytul_lub_nazwa: zrodlo.tytul_lub_nazwa, stan_prawny_na: obw.stan_prawny_na,
-      url_zrodlowy: czysty?.url ?? `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf` };
+      url_zrodlowy: czysty?.url ?? `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf`,
+      proweniencja: { plik_sha256: pdf.sha256, ekstraktor: "pdf.js-lines/2 (wspolne/akt-pdf.mjs)",
+        uwaga: "Konwersja PDF → tekst nieurzędowa; urzędowy jest PDF pod url_zrodlowy." } };
     const uw = [];
     if (czysty) uw.push(`✅ Tekst ujednolicony (wersja „U”) — ${czysty.powod}; pominięto skan text.pdf.`);
     if (wersjaTekstu === "tekst_ogloszony" && !czysty) uw.push("⚠️ Tekst OGŁOSZONY (brzmienie z dnia ogłoszenia), nie stan obecny.");
@@ -348,10 +382,16 @@ server.registerTool("isap_tekst", {
       if (result.zmiany_po_tj.length) uw.push(`⚠️ ${result.zmiany_po_tj.length} akt(y) zmieniające ogłoszone po t.j. — brzmienie może być nieaktualne.`);
     }
     if (artykul) {
-      const art = wytnijArtykul(obw.zalacznik, artykul);
+      const art = artykulObowiazujacy(obw, artykul);
       if (!art) return tekstOdp({ status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
-      result.artykul = normalizujNumerArt(artykul); result.tresc = art;
-      if (/^Art\.\s*\S+\.\s*\(uchylony\)/.test(art)) uw.push("⛔ Artykuł uchylony.");
+      result.artykul = normalizujNumerArt(artykul); result.tresc = art.tresc;
+      if (Object.keys(art.odnosniki).length) result.odnosniki = art.odnosniki;
+      if (art.brzmienia_przyszle) {
+        result.brzmienia_przyszle = art.brzmienia_przyszle;
+        uw.push("⚠️ T.j. drukuje też brzmienie wchodzące w życie później (brzmienia_przyszle); `tresc` = brzmienie obowiązujące dziś.");
+      }
+      if (art.nierozstrzygniete) uw.push("⚠️ Kilka brzmień jednostki bez odczytywalnej daty wejścia w życie: `tresc` zawiera wszystkie — nie podawaj jej jako jednego obowiązującego brzmienia.");
+      if (/^Art\.\s*\S+\.\s*\(uchylony\)/.test(art.tresc)) uw.push("⛔ Artykuł uchylony.");
     } else if (szukaj) {
       const fr = []; let i = -1; const low = obw.zalacznik.toLowerCase(), q = szukaj.toLowerCase();
       while (fr.length < 5 && (i = low.indexOf(q, i + 1)) >= 0) fr.push({ pozycja: i, fragment: obw.zalacznik.slice(Math.max(0, i - 400), i + 400) });

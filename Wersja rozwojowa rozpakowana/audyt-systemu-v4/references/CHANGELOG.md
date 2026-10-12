@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.225 (2026-10-12d, AUDYT-2026-10-12d): `isap_tekst` czyta PDF t.j. tym samym kodem co RAG aplikacji (`mcp-servers/wspolne/akt-pdf.mjs`, generowany z aplikacji): wiersze z geometrii pozycji, przypisy z dołu strony (drobny druk) poza treścią, nagłówki „Art. 11 [1] .”, „Art. 6 1 .”, „Art. 133–142.”, brzmienie obowiązujące wg odnośników (`brzmienia_przyszle` dla jednostek wchodzących później, `odnosniki`, `proweniencja` z sha256 PDF). Benchmark 14 aktów / 6247 art. (wzorzec HTML ELI): zgodne 5092 → 6023, błędna treść 445 → 8, braki 532 → 36. Usunięte `czyscTekstPdf` i `wytnijArtykul`. mcpb 1.3.5.
+
 - 6.224 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). mapa_dzu_2026-10-04: wiersze 1311 i 1315.
 
 - 6.223 (2026-10-12b, AUDYT-2026-10-12b): SKILL.md MONITORING: Dz.U. 2026 poz. 646 — w życie 29.05.2026 (było „OCZEKUJE”); dodana Dz.U. 2026 poz. 815 (zarządzanie kryzysowe i 26 innych ustaw, w mocy 4.07.2026, art. 73). ELI 2026-10-12.
