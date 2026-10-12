@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.33 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). ISAP-METRYKI-AKTOW; terminy.md — art. 17 § 1a: oba brzmienia z cytatem.
+
 - 3.99.32 (2026-10-12b, AUDYT-2026-10-12b): ISAP-METRYKI-AKTOW, LEGAL-REGISTRY, terminy.md: UPEA t.j. 2026/1311 (⏳ 2026/1003 — art. 17 § 1a, od 28.10.2026), ochrona przyrody t.j. 2026/1315, megaustawa t.j. 2026/562, zmiany z 2026/815 (KSC, PKE, Prawo wodne, ochrona ludności); orka-bas-leksykon: metryki obrony Ojczyzny i UDP. ELI 2026-10-12.
 
 - 3.99.31 (2026-10-12a, AUDYT-2026-10-12a, uwagi do #109 i #110): walidator_cytowan.py — `sys.stdout.reconfigure(encoding="utf-8")` w main(): na konsoli Windows (cp1250) `--format` z naruszeniami kończył się UnicodeEncodeError i kodem 1 zamiast 3; test z PYTHONIOENCODING=cp1250. agents/: weryfikator-isap liczy zmiany ogłoszone po t.j. i wybiera zapis (do 5 wymienia, więcej „z późn. zm.”), PDF tylko w katalogu tymczasowym, indeks `Art. 77[2]` → `art. 77²`; recenzent-niezalezny uruchamia walidator (`python3 -I … --format`) i czyta .docx przez python-docx; weryfikator-orzeczen zwraca zapis do pisma (rodzaj ze źródła, data słownie).

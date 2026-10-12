@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.61 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). ROUTING-MAP wiersze UPEA.
+
 - 6.60 (2026-10-12b, AUDYT-2026-10-12b): ROUTING-MAP: UPEA t.j. 2026/1311 (⏳ 2026/1003 od 28.10.2026), ochrona przyrody t.j. 2026/1315; zmiany po t.j. z 2026/815 przy 20 aktach (Policja, SG, ŻW, SOP, obrona Ojczyzny, ochrona ludności, śpbp, ppoż., KSC, PKE, megaustawa, Prawo wodne, odpady, kontrola inwestycji); rzeczy znalezione — 2026/184 (od 19.05.2026, art. 187 KC: 6 miesięcy / rok). ELI 2026-10-12.
 
 - 6.59 (2026-10-11b, AUDYT-2026-10-11a): ROUTING-MAP: nowa sekcja „SKILLE WYKONAWCZE I SHARED — akty powołane poza DR (monitoring t.j.)” — u.k.s.c. (t.j. 2025/1228, zmiany 2026/473, 1003, 346), ZTP (2026/300), Prawo o adwokaturze, ustawa o radcach prawnych, z miejscami powołań; MONITORING: u.k.s.c. 1003 (28.10.2026) i 346 (30.09.2028), adwokatura 1290 (17.10.2026); wiersze DR-12 uzupełnione o zmiany po t.j. (adwokatura +1172, 370, 846; radcy +846). ELI `/references` 2026-10-11.

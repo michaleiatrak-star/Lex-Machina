@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.224 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). mapa_dzu_2026-10-04: wiersze 1311 i 1315.
+
 - 6.223 (2026-10-12b, AUDYT-2026-10-12b): SKILL.md MONITORING: Dz.U. 2026 poz. 646 — w życie 29.05.2026 (było „OCZEKUJE”); dodana Dz.U. 2026 poz. 815 (zarządzanie kryzysowe i 26 innych ustaw, w mocy 4.07.2026, art. 73). ELI 2026-10-12.
 
 - 6.222 (2026-10-12a, AUDYT-2026-10-12a): wpis dziennika — uwagi zgłaszającego do #109 (walidator na Windows, dwa wzory zapisu w pisma-procesowe-v3) i #110 (porównanie agentów); zmiany w shared 3.99.31 i pisma-procesowe-v3 5.41.

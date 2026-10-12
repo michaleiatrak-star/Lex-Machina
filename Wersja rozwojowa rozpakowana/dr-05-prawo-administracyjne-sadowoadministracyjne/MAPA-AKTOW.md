@@ -15,7 +15,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt → moduł**. Histo
 | PPSA — terminy, kasacja, koszty i prawo pomocy | jw. | `mod-PPSA-terminy-kasacja-prawo-pomocy` | ✅ aktywny |
 | PPSA — posiedzenia sądowe | jw. | `mod-PPSA-posiedzenia-sadowe-rozdzial-7` | ✅ aktywny |
 | PPSA — orzeczenia sądowe | jw. | `mod-PPSA-orzeczenia-sadowe-rozdzial-10` | ✅ aktywny |
-| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 1311 t.j. (obwieszczenie z 1.09.2026, ogł. 9.10.2026; zm. 2026/1003 (część UPEA w mocy od 28.10.2026; ogł. 27.07.2026 przed obwieszczeniem — czy t.j. ją obejmuje, sprawdzić po udostępnieniu tekstu t.j. w ELI; stan ELI 2026-10-12)) | `mod-UPEA-egzekucja-administracyjna` | ✅ aktywny |
+| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 1311 t.j. (obwieszczenie z 1.09.2026, ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) | `mod-UPEA-egzekucja-administracyjna` | ✅ aktywny |
 | Ustawa o dostępie do informacji publicznej (UDIP) | Dz.U. 2022 poz. 902 t.j. ze zm. | `mod-UDIP-dostep-informacji-publicznej` | ✅ aktywny |
 | Ustawa o otwartych danych i ponownym wykorzystywaniu informacji sektora publicznego | Dz.U. 2023 poz. 1524 t.j. ze zm. | `mod-UDIP-dostep-informacji-publicznej` | ✅ aktywny |
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 t.j. ze zm. | `mod-ustawa-cudzoziemcy` | ✅ aktywny; fresh gate |

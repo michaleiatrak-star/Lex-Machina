@@ -70876,3 +70876,10 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Bez zmian (celowe przykłady KC DU/1964/93, DU/2019/1145, 2025/1071): analizator-przepisow-v2 SKILL.md ścieżka historyczna, KONEKTORY-REKOMENDOWANE, PRAWO-HARDGATE, przyklad-adapter-normalizujacy, przyklady/przyklad_pisma (wzór błędnego pisma); mapa_dzu_2026-08-28 i 2026-10-04 — migawki datowane.
 - RAG aplikacji (`core-law-index`) buduje listę aktów z MAPA-AKTOW, ROUTING-MAP i sources.json — po synchronizacji pobiera t.j. 1311 i 1315 oraz zapisuje zmiany po t.j.
 - Wersje: audyt-systemu-v4 6.223, dr-01 3.19, dr-02 3.95, dr-03 3.63, dr-05 3.35, dr-08 3.21, dr-09 3.48, dr-11 3.28, dr-12 4.27, dr-13 3.18, dr-14 3.15, prawo-polskie-v2 6.60, shared 3.99.32.
+
+## AUDYT-2026-10-12c — korekta: t.j. UPEA 2026/1311 obejmuje zmianę z 2026/1003 (6.224)
+
+- ⛔ Błąd w AUDYT-2026-10-12b: wpisałem „⏳ po t.j.: 2026/1003 art. 116 (art. 17 § 1a, od 28.10.2026)” i założyłem, że t.j. 1311 tej zmiany nie obejmuje, bo w chwili wpisu tekstu t.j. nie było w ELI (textPDF = false) — wniosek z dat, nie z obwieszczenia. Obwieszczenie z 1.09.2026 (Dz.U. 2026 poz. 1311, text.pdf odczytany 2026-10-12) w pkt 1 ppkt 3 wymienia ustawę o systemach sztucznej inteligencji (poz. 1003) wśród zmian uwzględnionych; art. 17 § 1a podany w dwóch brzmieniach: odnośnik 13 — do wejścia w życie zmiany, odnośnik 14 — w brzmieniu z art. 116 ustawy 2026/1003, od 28.10.2026 (art. 127 tej ustawy przytoczony w pkt 2 obwieszczenia). Brak zmian po t.j.
+- Poprawione: ROUTING-MAP (2 wiersze), dr-05 MAPA-AKTOW i mod-UPEA (4 miejsca), dr-03 mod-grzywny-mandaty-szczegolowe (2), shared ISAP-METRYKI-AKTOW, terminy.md (art. 17 § 1a — oba brzmienia z cytatem: do 27.10.2026 „dla których organem wyższego stopnia jest minister”, od 28.10.2026 także „w stosunku do których brak organu wyższego stopnia”), mapa_dzu_2026-10-04 (1311, 1315).
+- Ochrona przyrody 2026/1315: obwieszczenie z 4.09.2026 potwierdza objęcie zmian 426, 737 i 912 — ustalenie z 12b było trafne.
+- Wersje: audyt-systemu-v4 6.224, dr-03 3.64, dr-05 3.36, prawo-polskie-v2 6.61, shared 3.99.33.

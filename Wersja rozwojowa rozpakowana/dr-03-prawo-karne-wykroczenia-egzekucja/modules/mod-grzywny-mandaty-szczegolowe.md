@@ -12,7 +12,7 @@ kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 | KPSW | Dz.U. 2025 poz. 860 t.j. ze zm. **Dz.U. 2026 poz. 473** | art. 95–102 (mandat karny). ⛔ 2026 poz. 473 to NOWELIZACJA (ustawa o zmianie ustawy o PIP oraz niektórych innych ustaw), **nie** t.j. — wcześniejszy zapis „2026.473 t.j." był błędny, sprostowany 2026-08-15 |
 | KPA | Dz.U. 2025 poz. 1691 t.j. | Dział IVa art. 189a–189k (adm. kary pieniężne) |
 | KPA art. 88 | j.w. | grzywna porządkowa świadka/biegłego |
-| UPEA | Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739); ⏳ zm. Dz.U. 2026 poz. 1003 art. 116 — nowe brzmienie art. 17 § 1a (zażalenie 7 dni, art. 127 § 3 KPA), w mocy od 28.10.2026 (art. 127 pkt 2) (ELI 2026-10-12) | art. 119–125 (grzywna w celu przymuszenia). ⛔ POPRAWIONE 2026-08-15: wcześniej moduł podawał 2023 poz. 2505 — numer nieaktualny o DWA cykle t.j. |
+| UPEA | Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) | art. 119–125 (grzywna w celu przymuszenia). ⛔ POPRAWIONE 2026-08-15: wcześniej moduł podawał 2023 poz. 2505 — numer nieaktualny o DWA cykle t.j. |
 | Ustawa o drogach publicznych (UDP) | Dz.U. 2025 poz. 889 t.j. ze zm. Dz.U. 2026 poz. 815 (od 4.07.2026), 982 (od 21.09.2026) | art. 13, 13b, 13f (opłaty parkingowe). Nowelizacja 2026 poz. 815 dodała tylko art. 20i (czasowe ograniczenia ruchu w sytuacji kryzysowej) — bez wpływu na art. 13–13f |
 
 ---
@@ -284,7 +284,7 @@ WERYFIKUJ: ELI (RZĄD 1) → KPA → Dział IVa art. 189a–189k
 ## 5. EGZEKUCJA ADMINISTRACYJNA NIEZAPŁACONYCH GRZYWIEN/KAR
 
 ```
-Podstawa: UPEA Dz.U. 2026 poz. 1311 t.j. (⏳ zm. 2026/1003 od 28.10.2026 — art. 17 § 1a)
+Podstawa: UPEA Dz.U. 2026 poz. 1311 t.j. (art. 17 § 1a w nowym brzmieniu od 28.10.2026)
 Organ egzekucyjny: naczelnik US / wójt (burmistrz/prezydent) / inne
 
 TRYB EGZEKUCJI NALEŻNOŚCI PIENIĘŻNYCH:

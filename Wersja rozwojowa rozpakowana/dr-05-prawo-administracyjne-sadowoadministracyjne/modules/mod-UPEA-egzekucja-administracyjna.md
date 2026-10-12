@@ -1,7 +1,7 @@
 # mod-UPEA-egzekucja-administracyjna
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** UPEA — Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; ⏳ zm. Dz.U. 2026 poz. 1003 art. 116 — nowe brzmienie art. 17 § 1a (zażalenie 7 dni, art. 127 § 3 KPA), w mocy od 28.10.2026 (art. 127 pkt 2)) (ELI 2026-10-12) | KPA — Dz.U. 2025 poz. 1691 | PPSA — Dz.U. 2026 poz. 143
+**Źródło weryfikacji:** UPEA — Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) | KPA — Dz.U. 2025 poz. 1691 | PPSA — Dz.U. 2026 poz. 143
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -37,7 +37,7 @@ Tytuł wykonawczy administracyjny, upomnienie, zarzuty w postępowaniu egzekucyj
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739); ⏳ zm. 2026/1003 (art. 17 § 1a, od 28.10.2026) |
+| Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) |
 | KPA | Dz.U. 2025 poz. 1691 t.j. |
 | PPSA | Dz.U. 2026 poz. 143 t.j. |
 
@@ -105,8 +105,8 @@ SKARGA DO WSA na postanowienie ostateczne
 ```
 ⛔ NAPRAWIONE 2026-09-12h / odtworzone 2026-09-16 (F-189). ✅ [VER] RZĄD 1 2026-09-16
 — UPEA `Dz.U. 2026 poz. 1311` t.j. (ogł. 9.10.2026; obejmuje zm. 516 i 739, które zmieniały art. 3a
-i przepisy o sprzedaży, NIE art. 15, 33, 54, 80). ⏳ Zm. 2026/1003 art. 116 (od 28.10.2026) zmienia
-wyłącznie art. 17 § 1a, też NIE art. 15, 33, 54, 80 (ELI 2026-10-12).
+i przepisy o sprzedaży, NIE art. 15, 33, 54, 80, oraz zm. 2026/1003 — tylko art. 17 § 1a, nowe brzmienie
+od 28.10.2026, w t.j. obok dotychczasowego; brak zmian po t.j., ELI 2026-10-12).
 Zarzut w sprawie egzekucji (art. 33 § 5 UPEA) — wnosi się NIE PÓŹNIEJ NIŻ:
   1) 30 dni od wyegzekwowania w całości obowiązku, kosztów upomnienia
      i kosztów egzekucyjnych;
@@ -270,7 +270,7 @@ web_search: "UPEA Dz.U. 2026 poz. 1311 isap.sejm.gov.pl tekst jednolity"
 - [ ] Upomnienie i tytuł wykonawczy doręczone prawidłowo?
 - [ ] Termin końcowy zarzutu (art. 33 § 5) nie upłynął? Skarga na czynność — 7 dni z art. 54 § 3?
 - [ ] Właściwy organ egzekucyjny wskazany?
-- [ ] Aktualny t.j. UPEA (Dz.U. 2026 poz. 1311) i zm. po t.j. (2026/1003 od 28.10.2026) zweryfikowane?
+- [ ] Aktualny t.j. UPEA (Dz.U. 2026 poz. 1311) zweryfikowany; przy art. 17 § 1a brzmienie właściwe dla daty (zmiana od 28.10.2026)?
 - [ ] Tryb (zarzuty vs KPA vs WSA) prawidłowo dobrany?
 
 ---

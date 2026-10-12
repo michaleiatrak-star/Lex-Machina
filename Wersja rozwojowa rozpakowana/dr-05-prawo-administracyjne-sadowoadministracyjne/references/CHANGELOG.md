@@ -1,5 +1,7 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.36 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). MAPA-AKTOW, mod-UPEA-egzekucja-administracyjna.
+
 - 3.35 (2026-10-12b, AUDYT-2026-10-12b): UPEA: nowy t.j. Dz.U. 2026 poz. 1311 (ogł. 9.10.2026; obejmuje zm. 516, 739) w MAPA-AKTOW i mod-UPEA; ⏳ zm. 2026/1003 art. 116 — art. 17 § 1a (zażalenie 7 dni), od 28.10.2026. ELI 2026-10-12.
 
 - 3.34 (2026-10-09g, AUDYT-2026-10-09g): ⛔ mod-ustawa-zaskarzanie-decyzji-wlasnosci: nowelizacja KPA art. 156 §2 to ustawa z 11.08.2021, Dz.U. 2021 poz. 1491 (było „z 09.06.2021, Dz.U. 2021 poz. 1706” — rozp. MKiŚ). ELI 2026-10-09.

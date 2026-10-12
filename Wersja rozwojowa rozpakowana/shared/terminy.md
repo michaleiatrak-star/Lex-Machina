@@ -3,7 +3,7 @@
 > **Stan weryfikacji:** ✅ [VER] RZĄD 1 — odczyt treści: KPC `Dz.U. 2026 poz. 468`,
 > KPK `Dz.U. 2026 poz. 490`, KPW `Dz.U. 2025 poz. 860` (2026-09-12d);
 > **KPA `Dz.U. 2025 poz. 1691` i PPSA `Dz.U. 2026 poz. 143` (2026-09-12g);
-> UPEA `Dz.U. 2026 poz. 1311` t.j. (ELI 2026-10-12; ⏳ zm. 2026/1003 od 28.10.2026); Ordynacja podatkowa
+> UPEA `Dz.U. 2026 poz. 1311` t.j. (ELI 2026-10-12; art. 17 § 1a w nowym brzmieniu od 28.10.2026); Ordynacja podatkowa
 > `Dz.U. 2026 poz. 622` (2026-09-12i); KKW `Dz.U. 2025 poz. 911` (2026-09-12j);
 > KRO `Dz.U. 2026 poz. 236` (2026-09-12k); Prawo upadłościowe
 > `Dz.U. 2026 poz. 913` i Prawo restrukturyzacyjne `Dz.U. 2026 poz. 533`
@@ -200,9 +200,10 @@ podlega natychmiastowemu wykonaniu z mocy ustawy (§ 3).
 
 ## Egzekucja administracyjna (UPEA) — ⛔ dwa instrumenty, dwie podstawy
 
-✅ [VER] ELI 2026-10-12 — `Dz.U. 2026 poz. 1311` t.j. (obejmuje zm. 516, 739 — **nie dotykały art. 15, 33, 34, 54**).
-⏳ Zm. `Dz.U. 2026 poz. 1003` art. 116 (od 28.10.2026) — nowe art. 17 § 1a: do zażaleń na postanowienia z art. 34 § 2
-wierzycieli bez organu wyższego stopnia albo podległych ministrowi stosuje się art. 127 § 3 KPA, termin **7 dni** od doręczenia postanowienia.
+✅ [VER] ELI 2026-10-12 — `Dz.U. 2026 poz. 1311` t.j. (obejmuje zm. 516, 739 i 1003 — **nie dotykają art. 15, 33, 34, 54**).
+Art. 17 § 1a (zażalenie na postanowienie wierzyciela z art. 34 § 2: art. 127 § 3 KPA, termin **7 dni** od doręczenia) —
+t.j. podaje dwa brzmienia: do 27.10.2026 tylko wierzyciele, „dla których organem wyższego stopnia jest minister”;
+od 28.10.2026 (art. 116 ustawy 2026/1003) także wierzyciele, „w stosunku do których brak organu wyższego stopnia”.
 
 | Termin | Czynność | Podstawa |
 |---|---|---|

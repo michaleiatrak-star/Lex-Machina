@@ -1,5 +1,7 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.64 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). mod-grzywny-mandaty-szczegolowe.
+
 - 3.63 (2026-10-12b, AUDYT-2026-10-12b): mod-grzywny-mandaty-szczegolowe: UPEA t.j. Dz.U. 2026 poz. 1311 (było 2026/268, w stopce 2023/2505), ⏳ 2026/1003 art. 116 (art. 17 § 1a, od 28.10.2026); UDP ze zm. 2026/815, 982. mod-KK-art163-172: definicja infrastruktury krytycznej po 2026/815 (wykaz z art. 6r ust. 1 uzk). mod-KK-cyberprzestepstwa: metryka PKE. ELI 2026-10-12.
 
 - 3.62 (2026-10-09g, AUDYT-2026-10-09g): PRD i u.k.p.: lista nowelizacji po t.j. uzupełniona o 2025/820, 1006, 1872 i ⏳ 2026/1073, ⏳ 2026/187 (daty z przepisów o wejściu w życie, ELI 2026-10-09).
