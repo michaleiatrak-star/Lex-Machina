@@ -23,6 +23,12 @@ transgraniczne" — rozróżnij od razu przy intake:
 - Ustawa z dnia 24 lipca 2015 r. o kontroli niektórych inwestycji
   Tekst jednolity: **Dz.U. 2026 poz. 47** (obwieszczenie Marszałka Sejmu
   z 9.01.2026) ✅ VER: isap.sejm.gov.pl 2026-07-15
+  ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026) — art. 16: w art. 12d ust. 2
+  pkt 1 wyrazy „w jednolitym wykazie obiektów, instalacji, urządzeń i usług
+  wchodzących w skład infrastruktury krytycznej, o którym mowa w art. 5b ust. 7
+  pkt 1” zastępuje się wyrazami „w wykazie, o którym mowa w art. 6r ust. 1”
+  (wykaz IK z ustawy o zarządzaniu kryzysowym) (zm. Dz.U. 2026 poz. 815,
+  od 4.07.2026); ELI 2026-10-12
 - Znowelizowana istotnie: ustawa z 9 lipca 2025 r. o zmianie ustawy o
   kontroli niektórych inwestycji oraz ustawy o dopłatach do oprocentowania
   kredytów bankowych... (Dz.U. 2025 poz. 973) — weszła w życie 24.07.2025

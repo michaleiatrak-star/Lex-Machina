@@ -176,6 +176,7 @@ Przed końcową odpowiedzią sprawdź:
 
 ```
 AKTUALNY TEKST JEDNOLITY USTAWY O KSC: Dz.U. 2026 poz. 20 t.j.
+  ⏳ Po t.j.: Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1003, 1206 — t.j. NIE oddaje stanu bieżącego
   (obwieszczenie Marszałka Sejmu z 29.12.2025) — POPRAWKA 2026-07-26
   (audyt pełnego systemu, T3): moduł wcześniej wspominał TYLKO nowelizację
   (poz. 252) bez podania aktualnego numeru bazowego t.j. — luka domknięta.
@@ -194,7 +195,25 @@ Kluczowe zmiany wdrażające NIS2 (Dyrektywa 2022/2555):
   → CSIRT sektorowe: dla każdego sektora/podsektora
   
 ✅ [VER] RZĄD 1 2026-09-16k — odczyt treści `Dz.U. 2026 poz. 252` (ogłoszona 2.03.2026,
-w życie 3.04.2026) na tle t.j. `Dz.U. 2026 poz. 20`. Brak dalszych nowelizacji w metryce ELI.
+w życie 3.04.2026) na tle t.j. `Dz.U. 2026 poz. 20`.
+⏳ Po t.j. (ELI 2026-10-12): Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1003, 1206
+  — (poprzednio: „Brak dalszych nowelizacji w metryce ELI” — NIEAKTUALNE).
+  Dz.U. 2026 poz. 815 art. 20 (zm. Dz.U. 2026 poz. 815, od 4.07.2026):
+  → art. 15 ust. 7 pkt 2 KSC — zamiast właściciela/posiadacza obiektów IK z wykazu
+    z art. 5b ust. 7 pkt 1 uzk: „operatorem infrastruktury krytycznej, o którym mowa
+    w art. 3 pkt 3a ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym”
+  → art. 26 ust. 3 pkt 13 — zamiast części Raportu o zagrożeniach bezpieczeństwa
+    narodowego: „propozycji do ujęcia w projekcie Krajowej Oceny Ryzyka, o której mowa
+    w art. 6e ust. 1 ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym,
+    dotyczących cyberbezpieczeństwa”; art. 26 ust. 5 pkt 1 — skreślone odesłanie do
+    jednolitego wykazu IK; art. 26 ust. 7 pkt 5 i 6 — „wykazem, o którym mowa
+    w art. 6r ust. 1 ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym”
+  → art. 46 ust. 1b (nowy): „System teleinformatyczny zapewnia wymianę informacji
+    między organami do spraw podmiotów krytycznych, o których mowa w art. 6zk ust. 1
+    ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym, dyrektorem Rządowego
+    Centrum Bezpieczeństwa a podmiotami krytycznymi, o których mowa w art. 3 pkt 1a
+    tej ustawy.”
+  Treść Dz.U. 2026 poz. 1003 i 1206 — odczytać u źródła przy sprawie.
 
 ZGŁASZANIE INCYDENTU POWAŻNEGO (art. 11 ust. 1 pkt 4–4c KSC w brzmieniu od 3.04.2026):
   → WCZESNE OSTRZEŻENIE — niezwłocznie, nie później niż w ciągu 24 GODZIN od wykrycia

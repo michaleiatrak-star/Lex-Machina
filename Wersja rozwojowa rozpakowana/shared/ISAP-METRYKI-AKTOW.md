@@ -22,7 +22,7 @@
 |---|---:|---|---|
 | Kodeks postępowania administracyjnego | Dz.U. 2025 poz. 1691 | aktualny na dzień audytu | ogólna procedura administracyjna; nie stosować do podatków, gdy Ordynacja stanowi lex specialis |
 | Prawo o postępowaniu przed sądami administracyjnymi | Dz.U. 2026 poz. 143 | aktualny na dzień audytu | skargi do WSA, skargi kasacyjne do NSA, bezczynność i przewlekłość |
-| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 268; tekst jednolity uwzględnia zmiany ogłoszone przed 18.02.2026 — ✅ POTWIERDZONE bezpośrednio na ISAP (Rząd 1) — ⚠️ UWAGA (zsynchronizowane 2026-08-09 z prawny-router-v3/references/ISAP-METRYKI-AKTOW.md): TA sama ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje: Dz.U. 2026 poz. 516, poz. 739, poz. 1003 — sam numer "poz. 268" NIE WYSTARCZY do cytowania AKTUALNEGO stanu | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
+| Ustawa o postępowaniu egzekucyjnym w administracji | Dz.U. 2026 poz. 1311 t.j. (obwieszczenie z 1.09.2026, ogł. 9.10.2026; zastąpił 2026 poz. 268); ⏳ po t.j.: 2026 poz. 1003 art. 116 (art. 17 § 1a, od 28.10.2026) (ELI 2026-10-12) — HISTORIA: ✅ POTWIERDZONE bezpośrednio na ISAP (Rząd 1) — ⚠️ UWAGA (zsynchronizowane 2026-08-09 z prawny-router-v3/references/ISAP-METRYKI-AKTOW.md): TA sama ustawa ma JUŻ TRZY kolejne, PÓŹNIEJSZE nowelizacje: Dz.U. 2026 poz. 516, poz. 739, poz. 1003 — sam numer "poz. 268" NIE WYSTARCZY do cytowania AKTUALNEGO stanu | aktualny na dzień audytu | odrębny tryb od egzekucji sądowej |
 | Ustawa o dostępie do informacji publicznej | tekst ujednolicony ISAP `D20011198Lj.pdf` | wymaga sprawdzenia Dz.U. przed cytowaniem | tryb wnioskowy, bezczynność, odmowa decyzją administracyjną |
 
 ---
@@ -54,8 +54,8 @@
 | Kodeks spółek handlowych | tekst ujednolicony ISAP `D20001037Lj.pdf`, opracowanie z 12.03.2026; widoczne zmiany 2025 i 2026 | wymaga sprawdzania wejścia zmian dla spółek | istotne przy zarządzie, KRS, odpowiedzialności, transformacjach |
 | Ustawa o ochronie konkurencji i konsumentów | Dz.U. 2025 poz. 1714 | aktualny na dzień audytu | moduł UOKiK/regulacyjny |
 | Prawo energetyczne | Dz.U. 2026 poz. 43; tekst ujednolicony ISAP `D19970348Lj.pdf` | aktualny na dzień audytu | sprawy URE, taryfy, przyłączenia, koncesje |
-| Prawo komunikacji elektronicznej | Dz.U. 2024 poz. 1221 | stosować zamiast uchylanego Prawa telekomunikacyjnego w nowych sprawach | sprawdzać przepisy przejściowe |
-| Ustawa o wspieraniu rozwoju usług i sieci telekomunikacyjnych | Dz.U. 2025 poz. 311 | aktualny na dzień audytu | inwestycje telekomunikacyjne i dostęp infrastrukturalny |
+| Prawo komunikacji elektronicznej | Dz.U. 2024 poz. 1221 (brak t.j.; zm. (ELI 2026-10-12): 2025 poz. 637, 820; 2026 poz. 252, 815 od 4.07.2026, 1296) | stosować zamiast uchylanego Prawa telekomunikacyjnego w nowych sprawach | sprawdzać przepisy przejściowe |
+| Ustawa o wspieraniu rozwoju usług i sieci telekomunikacyjnych | Dz.U. 2026 poz. 562 t.j. (poprzedni: 2025 poz. 311); po t.j. (ELI 2026-10-12): 2026 poz. 815 (od 4.07.2026) | aktualny na dzień audytu | inwestycje telekomunikacyjne i dostęp infrastrukturalny |
 
 ---
 
@@ -67,8 +67,8 @@
 | Prawo budowlane | Dz.U. 2026 poz. 524 t.j., ze zm. — zmiany z Dz.U. 2025 poz. 1847 (art. 1 pkt 1 lit. a i c, pkt 3) W MOCY od 20.09.2026 (F-195, RZĄD 1 ELI 2026-09-22); po t.j. także 2026/605, 2026/646, **2026/1161** (w mocy 2.10.2026; rozdz. 10a art. 102a–102c od 2.09.2026) ✅ [VER: ELI DU/1994/414/references, 2026-10-04]. ⛔ Rozp. WT budynków z 12.04.2002 (Dz.U. 2002 nr 75 poz. 690) NIE OBOWIĄZUJE od 20.09.2026 (art. 66 ustawy o zapewnianiu dostępności, t.j. Dz.U. 2024 poz. 1411); nowe — brak w ELI na 2026-10-04 (F-224); przejściowo art. 102a–102c | aktualny t.j. ze zm.; WT — reżim przejściowy | pozwolenie, zgłoszenie, samowola, PINB/WINB |
 | Prawo ochrony środowiska | Dz.U. 2025 poz. 647 t.j. — ⚠️ POPRAWIONE 2026-08-09 (FAZA 3E/ZASADA 14): poprzednia wersja BŁĘDNIE wskazywała "Dz.U. 2026 poz. 670" — TA pozycja jest tekstem jednolitym ZUPEŁNIE INNEJ ustawy (o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na środowisko — tzw. "ustawa OOŚ", akt Z 2008 R., ODRĘBNY od Prawa ochrony środowiska z 2001 r.) — potwierdzone bezpośrednio przez ISAP (obwieszczenie z 9.05.2025, WDU20250000647) | aktualny na dzień aktualizacji (VER 2026-08-09) | decyzje środowiskowe, emisje, kary administracyjne |
 | Ustawa o udostępnianiu informacji o środowisku (OOŚ) — ODRĘBNY akt od Prawa ochrony środowiska, dodane 2026-08-09 | Dz.U. 2026 poz. 670 t.j. (obwieszczenie z 15.05.2026) | aktualny na dzień aktualizacji | decyzje środowiskowe (udział społeczeństwa, oceny oddziaływania — OOŚ/EIA), NIE MYLIĆ z Prawem ochrony środowiska (wiersz wyżej) |
-| Ustawa o ochronie przyrody | Dz.U. 2026 poz. 13 | aktualny na dzień audytu | drzewa, formy ochrony, RDOŚ/GDOŚ |
-| Prawo wodne | Dz.U. 2025 poz. 960 | aktualny na dzień audytu z weryfikacją zmian | Wody Polskie, zgody wodnoprawne |
+| Ustawa o ochronie przyrody | Dz.U. 2026 poz. 1315 t.j. (obwieszczenie z 4.09.2026, ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912; brak zmian po t.j. (ELI 2026-10-12)) | aktualny na dzień audytu | drzewa, formy ochrony, RDOŚ/GDOŚ |
+| Prawo wodne | Dz.U. 2025 poz. 960 t.j.; po t.j. (ELI 2026-10-12): 2025 poz. 1535; 2026 poz. 445, 605, 815 (od 4.07.2026), 1033, 1156 | aktualny na dzień audytu z weryfikacją zmian | Wody Polskie, zgody wodnoprawne |
 
 ---
 
@@ -110,8 +110,8 @@
 | Prawo ochrony środowiska | Dz.U. 2026 poz. 670 | AKTUALNY-ISAP |
 | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 + zmiana Dz.U. 2025 poz. 1794 | PO-TJ-ZMIANY |
 | Prawo energetyczne | Dz.U. 2026 poz. 43 + zmiana Dz.U. 2026 poz. 516 | PO-TJ-ZMIANY |
-| Krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 + zmiana Dz.U. 2026 poz. 252 | PO-TJ-ZMIANY |
-| Ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 + zmiana Dz.U. 2026 poz. 646 ⚠️ vacatio legis do weryfikacji | PO-TJ-ZMIANY |
+| Krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 t.j.; po t.j. (ELI 2026-10-12): 2026 poz. 252, 815 (od 4.07.2026), 1003, 1206 | PO-TJ-ZMIANY |
+| Ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 (brak t.j.); zm. (ELI 2026-10-12): 2025 poz. 1705; 2026 poz. 646 (od 29.05.2026), 815 (od 4.07.2026) | PO-TJ-ZMIANY |
 | KSH | tekst ujednolicony ISAP, aktualizacja 2026-03-12 + zmiany 2026 | PO-TJ-ZMIANY |
 | PIT | Dz.U. 2026 poz. 592 (t.j. 17.04.2026) | PO-TJ-ZMIANY |
 | CIT | Dz.U. 2026 poz. 554 (t.j. 27.03.2026) | PO-TJ-ZMIANY |

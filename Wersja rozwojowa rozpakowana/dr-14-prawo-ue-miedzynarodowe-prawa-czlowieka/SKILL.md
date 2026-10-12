@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: "3.14"
+version: "3.15"
 description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 dependencies:
   requires:
@@ -176,7 +176,8 @@ INWESTYCJE TRANSGRANICZNE:
                warstwy kontroli: Mechanizm 1+2 ustawy o kontroli
                inwestycji + sankcje UE + compliance łańcucha dostaw)
               (utworzony 2026-07-15; DWA reżimy: A) kontrola FDI — ustawa
-               o kontroli niektórych inwestycji Dz.U. 2026 poz. 47 t.j.,
+               o kontroli niektórych inwestycji Dz.U. 2026 poz. 47 t.j.
+               (⏳ po t.j.: Dz.U. 2026 poz. 815, od 4.07.2026),
                mechanizm podstawowy + art. 12a-12k uczyniony bezterminowym
                nowelizacją 2025.973; rama UE rozp. 2019/452; B) ochrona
                traktatowa BIT/ISDS — Achmea C-284/16, Komstroy C-741/19,

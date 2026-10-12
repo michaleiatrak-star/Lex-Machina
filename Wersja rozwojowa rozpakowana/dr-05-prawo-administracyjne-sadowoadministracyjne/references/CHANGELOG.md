@@ -1,5 +1,7 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.35 (2026-10-12b, AUDYT-2026-10-12b): UPEA: nowy t.j. Dz.U. 2026 poz. 1311 (ogł. 9.10.2026; obejmuje zm. 516, 739) w MAPA-AKTOW i mod-UPEA; ⏳ zm. 2026/1003 art. 116 — art. 17 § 1a (zażalenie 7 dni), od 28.10.2026. ELI 2026-10-12.
+
 - 3.34 (2026-10-09g, AUDYT-2026-10-09g): ⛔ mod-ustawa-zaskarzanie-decyzji-wlasnosci: nowelizacja KPA art. 156 §2 to ustawa z 11.08.2021, Dz.U. 2021 poz. 1491 (było „z 09.06.2021, Dz.U. 2021 poz. 1706” — rozp. MKiŚ). ELI 2026-10-09.
 
 - 3.33 (2026-10-09, AUDYT-2026-10-09): cudzoziemcy: świadczenia rodzinne — t.j. Dz.U. 2026 poz. 1240 (ELI 2026-10-09).

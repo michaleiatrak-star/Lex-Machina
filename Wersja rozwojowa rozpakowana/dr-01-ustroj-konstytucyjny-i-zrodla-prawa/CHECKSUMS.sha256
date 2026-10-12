@@ -1,7 +1,7 @@
 5396fcd4ebacfdac971b32285f1ea8e8f463dcca05cc4c0d88a8c73d973838dd  ./MAPA-AKTOW.md
 dc43d0324833dbdb3e395f981d3c6d6ff511ca73516c22c4ebfeb3fb62f93a30  ./MAPA-POKRYCIA.md
 c3c0e8ed344a6c2b92568f11ca27beb5578fe25b56904efede551fb4ca05cd06  ./PORTABILITY-MANIFEST.md
-414cb85c7242f6efb28b7fa1d45c254438b643f818597d361913721164dbe812  ./SKILL.md
+b5419ab8237ed5f2bcbfe21c2994873d1cc3775af7d40a1385669eb49bc7aab4  ./SKILL.md
 9422acfeb4a236fb0929cb502f7748b182c9c3e8290c93223fe29bafef1e1abb  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 a8e32fb7a5c3ce4a08339a5ac7f9586a2736272e49d41d096a413c9f4cbdb909  ./modules/mod-KRS-current-state-COV.md
@@ -15,9 +15,9 @@ df399e8536c15a201257f213c68a166b812337dda9f30550330bc20b5cb99b9d  ./modules/mod-
 36d3a01e8dc9c907a7e2b84b9d9f2e1ce86c6b452c98ffa6f229b376cfc82a98  ./modules/mod-partie-polityczne-current-state-COV.md
 5d3744934193b74403de8a0fd5221402ec71030f82c1c19e2d8fd251ae4cdfe7  ./modules/mod-przewleklosc-current-state-COV.md
 89746833ccb3f807e8db2b3f733001e2d3198e928d807d4a6516321d819d4d8e  ./modules/mod-specustawy-lex-specialis-graf-zaleznosci.md
-6b295a941622b406779d4f89cbd1a3e0a6906205cf09406d41fa8b4914ec8bf0  ./modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md
+4fa415c158a4c87980e6d3d58fe31839e6d2f1a9301badad83c513010ae82628  ./modules/mod-stany-nadzwyczajne-sytuacje-kryzysowe.md
 cb58b30370f9fb947d23a12487801260d25eecfd9361105f8b1dae26060067f3  ./modules/mod-ustawa-KRS-i-ustroj-wladzy.md
 f597ae23a63a9bec63ede5645b220d621be8fa9b6d3d955523f30ec99b091d29  ./modules/mod-ustawa-SN-sad-najwyzszy.md
 56475c0513058326051a6684d3f482fa9b8c847538923634863bc90669e9cf10  ./modules/mod-ustawa-partie-polityczne-referendum.md
-9bebf48a979ef6ee2cf9466dc5c0da92f67d00f8df2ab0005630998038cc65fc  ./references/CHANGELOG.md
+0d9b72b7a110fd6ccb7db360d03627fbdd0fbdef90088f8e0416d66539154fe3  ./references/CHANGELOG.md
 83d66e067e25f3c75047ddefba576d0c4b8dfc273374e504015796e0fede41f6  ./references/HISTORIA-ZMIAN-PLIKOW.md

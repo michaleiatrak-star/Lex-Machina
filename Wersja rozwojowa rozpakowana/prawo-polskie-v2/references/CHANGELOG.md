@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.60 (2026-10-12b, AUDYT-2026-10-12b): ROUTING-MAP: UPEA t.j. 2026/1311 (⏳ 2026/1003 od 28.10.2026), ochrona przyrody t.j. 2026/1315; zmiany po t.j. z 2026/815 przy 20 aktach (Policja, SG, ŻW, SOP, obrona Ojczyzny, ochrona ludności, śpbp, ppoż., KSC, PKE, megaustawa, Prawo wodne, odpady, kontrola inwestycji); rzeczy znalezione — 2026/184 (od 19.05.2026, art. 187 KC: 6 miesięcy / rok). ELI 2026-10-12.
+
 - 6.59 (2026-10-11b, AUDYT-2026-10-11a): ROUTING-MAP: nowa sekcja „SKILLE WYKONAWCZE I SHARED — akty powołane poza DR (monitoring t.j.)” — u.k.s.c. (t.j. 2025/1228, zmiany 2026/473, 1003, 346), ZTP (2026/300), Prawo o adwokaturze, ustawa o radcach prawnych, z miejscami powołań; MONITORING: u.k.s.c. 1003 (28.10.2026) i 346 (30.09.2028), adwokatura 1290 (17.10.2026); wiersze DR-12 uzupełnione o zmiany po t.j. (adwokatura +1172, 370, 846; radcy +846). ELI `/references` 2026-10-11.
 
 - 6.58 (2026-10-11a): Routing błyskawiczny DR-02: „umowa najmu na czas określony”, „umowa najmu na czas nieokreślony”. „Napisz umowę najmu mieszkania na czas określony” stawiało DR-04 na pierwszym miejscu: fraza DR-04 „umowa na czas określony” (trzy słowa) przeważała nad „umowa najmu” (dwa). Fraza DR-02 z czterech słów obejmuje najem; pytania o umowę o pracę na czas określony zostają w DR-04. Dokumenty korporacyjne: „uchwała wspólników”, „zgromadzenie wspólników”, „walne zgromadzenie”, „uchwała zarządu” w DR-02 — „Przygotuj uchwałę zgromadzenia wspólników” trafiało do DR-08 (samorząd) przez jednowyrazowe „uchwała”.

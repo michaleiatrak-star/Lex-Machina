@@ -24,7 +24,7 @@ WSPÓLNE ZASADY DLA MODUŁU:
 |---|---|
 | UOKiK | ustawa o ochronie konkurencji i konsumentów — Dz.U. 2025 poz. 1714 według rejestru |
 | URE | Prawo energetyczne — Dz.U. 2026 poz. 43 według rejestru |
-| UKE | Prawo komunikacji elektronicznej — Dz.U. 2024 poz. 1221; ustawa o wspieraniu rozwoju usług i sieci telekomunikacyjnych — Dz.U. 2025 poz. 311 |
+| UKE | Prawo komunikacji elektronicznej — Dz.U. 2024 poz. 1221 (brak t.j.; ⏳ zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026 — art. 26: „uchyla się art. 42”), 1296); ustawa o wspieraniu rozwoju usług i sieci telekomunikacyjnych — Dz.U. 2026 poz. 562 t.j. (było: Dz.U. 2025 poz. 311 — nieaktualny t.j.; ELI 2026-10-12); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 13: nowe brzmienie art. 29d ust. 6a) |
 | KNF | ustawy sektorowe rynku finansowego — każdorazowo sprawdzić ISAP |
 | Sądowa kontrola | PPSA — Dz.U. 2026 poz. 143, chyba że przepis szczególny przewiduje inny sąd/tryb |
 

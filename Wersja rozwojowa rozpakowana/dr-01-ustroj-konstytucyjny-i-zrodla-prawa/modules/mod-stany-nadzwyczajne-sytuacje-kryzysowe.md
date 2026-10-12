@@ -104,14 +104,33 @@ aktów tej rodziny.
 ### 3.1 Ustawa o zarządzaniu kryzysowym (26.04.2007)
 
 Reguluje **"sytuację kryzysową"** — kategorię ustawową ODRĘBNĄ od
-konstytucyjnego "stanu nadzwyczajnego". Określa organy właściwe w sprawach
-zarządzania kryzysowego, ich zadania i zasady finansowania. Może działać
+konstytucyjnego "stanu nadzwyczajnego". Od 4.07.2026 art. 1 ust. 1 stanowi:
+"Ustawa określa: 1) organy właściwe w sprawach zarządzania kryzysowego oraz
+zadania i zasady działania tych organów; 2) organy właściwe w sprawach
+identyfikacji infrastruktury krytycznej oraz ich zadania; 3) zadania
+i obowiązki operatorów infrastruktury krytycznej; 4) usługi kluczowe oraz
+zadania i obowiązki podmiotów krytycznych; 5) organy do spraw podmiotów
+krytycznych oraz ich zadania; 6) zasady sprawowania nadzoru nad podmiotami
+krytycznymi oraz ich kontroli; 7) zasady finansowania zadań, o których mowa
+w pkt 1–6." (zm. Dz.U. 2026 poz. 815, od 4.07.2026). Definicja "sytuacji
+kryzysowej" (art. 3 pkt 1) w nowym brzmieniu: "sytuację wpływającą
+negatywnie na poziom bezpieczeństwa ludzi, mienia w znacznych rozmiarach,
+środowiska lub dziedzictwa kulturowego, wywołującą znaczne ograniczenia
+w działaniu właściwych organów administracji publicznej ze względu na
+nieadekwatność posiadanych sił i środków lub zakłócenia w obsłudze tych
+organów" (zm. Dz.U. 2026 poz. 815, od 4.07.2026). Może działać
 **RÓWNOLEGLE** do normalnego funkcjonowania państwa, bez uruchamiania
 Rozdziału XI Konstytucji — to jest właśnie różnica jakościowa, nie tylko
 stopnia. Aktualny t.j.: **Dz.U. 2026 poz. 574** (obwieszczenie Marszałka
 Sejmu z 21.04.2026, stan prawny na 16.04.2026), ze zmianą **Dz.U. 2026 poz.
 815** (ustawa z 29.05.2026 wdrażająca dyrektywę UE 2022/2557 o odporności
-podmiotów krytycznych). ✅ VER: isap.sejm.gov.pl (WDU20260000574,
+podmiotów krytycznych; w życie 4.07.2026 — art. 73: 14 dni od ogłoszenia
+19.06.2026; uchyla art. 5–6d i dodaje rozdziały 2–16, m.in. Krajowa Ocena
+Ryzyka — art. 6e; "planach zarządzania kryzysowego – należy przez to rozumieć
+plany zarządzania ryzykiem oraz plany reagowania kryzysowego" — art. 3 pkt 16;
+przepisy przejściowe: art. 28–35 ustawy zmieniającej); ⏳ dalsza zmiana po
+t.j.: Dz.U. 2026 poz. 1206 (w zakresie tej ustawy od 11.01.2027, ELI
+2026-10-12). ✅ VER: isap.sejm.gov.pl (WDU20260000574,
 api.sejm.gov.pl/eli/acts/DU/2026/574/text.pdf), samorzad.pap.pl,
 zamowieniapubliczne doradca.pl — 2026-08-14 (F-77). ⚠️ poprzedni zapis
 modułu nie podawał żadnego numeru ("dokładny numer pozycji do potwierdzenia
@@ -119,6 +138,10 @@ przy najbliższym audycie") — ustawa nowelizowana bardzo często, weryfikuj
 ponownie przed każdym użyciem w piśmie.
 
 ### 3.2 Ustawa o ochronie ludności i obronie cywilnej (5.12.2024, Dz.U. 2024 poz. 1907)
+
+⏳ Brak t.j.; zm.: Dz.U. 2025 poz. 1705, Dz.U. 2026 poz. 646, Dz.U. 2026
+poz. 815 (od 4.07.2026 — art. 27: art. 5 ust. 2, art. 15 ust. 1 pkt 6,
+art. 38, art. 40, art. 44; art. 5 ust. 1 bez zmian). ✅ ELI 2026-10-12.
 
 **Nowy element architektury** — weszła w życie od 1.01.2025 r., po latach
 prac legislacyjnych (poprzednie projekty z l. 2022-2023 nosiły roboczy tytuł

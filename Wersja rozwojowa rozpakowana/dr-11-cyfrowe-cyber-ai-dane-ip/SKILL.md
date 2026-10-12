@@ -1,6 +1,6 @@
 ---
 name: dr-11-cyfrowe-cyber-ai-dane-ip
-version: "3.27"
+version: "3.28"
 description: "Prawo cyfrowe, cyber, AI, dane i IP: RODO, KSC/NIS2, AI Act, usługi cyfrowe, prywatność, cyberbezpieczeństwo, prawo autorskie i własność intelektualna."
 dependencies:
   requires:
@@ -132,7 +132,8 @@ CYBERBEZPIECZEŃSTWO I TELEKOMUNIKACJA:
                podmioty kluczowe/ważne, samoidentyfikacja, CSIRT sektorowe,
                kary do 10 mln EUR / 7 mln EUR; termin obowiązków: 03.04.2027)
   [✓] OK    mod-PrTelekom-poczta-UKE
-              (Prawo komunikacji elektronicznej Dz.U. 2024 poz. 1221 (ELI 2026-10-09); UKE; poczta)
+              (Prawo komunikacji elektronicznej Dz.U. 2024 poz. 1221 (ELI 2026-10-09; brak t.j.;
+               zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026 — uchyla art. 42), 1296); UKE; poczta)
   [☐] STUB  mod-ustawa-certyfikacja-cyberbezpieczenstwa
               (nowa ustawa Dz.U. 2025 poz. 1017 z 25.06.2025 — krajowy system certyfikacji;
                STUB — wymaga rozbudowy po wejściu przepisów w pełni w życie)

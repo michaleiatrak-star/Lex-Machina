@@ -177,7 +177,8 @@ ustawy**. Ich treści merytorycznej NIE ustalono w tej sesji.
 ⚠️ [NIEWERYFIKOWANE] brzmienie art. 11, 12, 45 i 47 ustawy o ŚPB i BP —
 **przed sporządzeniem jakiegokolwiek pisma odczytać je ze źródła**
 (ustawa o środkach przymusu bezpośredniego i broni palnej, **Dz.U. 2026
-poz. 244** wg mapy centralnej — metryka do potwierdzenia). Zobacz też
+poz. 244** t.j.; ⏳ Po t.j.: Dz.U. 2026 poz. 737, 815 (od 4.07.2026) — zm.
+m.in. art. 4 pkt 9, art. 11, 12, 23, 33a–33c, 47). Zobacz też
 ostrzeżenie o kolizji terminologicznej w
 `dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md` (F-92).
 
@@ -344,13 +345,22 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
 
 1. ✅ **W WIĘKSZOŚCI ZWERYFIKOWANE (2026-08-18, F-93 priorytet #1):**
    brzmienie kluczowych przepisów ustawy z 24.05.2013 o środkach przymusu
-   bezpośredniego i broni palnej (Dz.U. aktualny t.j. 2026 poz. 244):
+   bezpośredniego i broni palnej (Dz.U. aktualny t.j. 2026 poz. 244; ⏳ Po t.j.:
+   Dz.U. 2026 poz. 737, 815 (od 4.07.2026)):
    - **Art. 11** (przesłanki użycia środków przymusu bezpośredniego) —
      katalog otwiera m.in. "konieczność odparcia bezpośredniego,
      bezprawnego zamachu na życie, zdrowie lub wolność uprawnionego lub
      innej osoby" (pkt 1) — PSŁ ma odesłanie do pkt 1–3, 8 i 10–14
      (ustalone w sesji wcześniejszej), więc dysponuje szerokim, ale nie
-     pełnym katalogiem 21 punktów.
+     pełnym katalogiem. ⚠️ KOREKTA: art. 11 liczył 15 punktów (nie 21);
+     od 4.07.2026 liczy **17** — „w art. 11 w pkt 15 kropkę zastępuje się
+     średnikiem i dodaje się pkt 16 i 17": pkt 16 „zniszczenia albo
+     unieruchomienia bezzałogowego obiektu pływającego albo przejęcia nad
+     nim kontroli w przypadkach, o których mowa w art. 28a ust. 1 ustawy
+     z dnia 4 września 2008 r. o ochronie żeglugi i portów morskich", pkt 17
+     „zniszczenia albo unieruchomienia bezzałogowego obiektu lądowego albo
+     przejęcia nad nim kontroli" (przesłanki lit. a–d) (zm. Dz.U. 2026
+     poz. 815, od 4.07.2026). Odesłanie PSŁ (pkt 1–3, 8, 10–14) bez zmian.
    - **Art. 45** (przesłanki UŻYCIA broni palnej) — pkt 1 lit. a:
      "konieczność odparcia bezpośredniego, bezprawnego zamachu na życie,
      zdrowie lub wolność uprawnionego lub innej osoby, albo konieczność
@@ -361,7 +371,10 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
      dostępu).
    - **Art. 47** (przesłanki WYKORZYSTANIA broni palnej — czyli strzał NIE
      w kierunku osoby/zwierzęcia w celu obezwładnienia, tylko np.
-     ostrzegawczy) — 7-punktowy katalog: zatrzymanie pojazdu zagrażającego
+     ostrzegawczy) — katalog 7-punktowy, od 4.07.2026 **8-punktowy**
+     (dodany pkt 8: „zniszczenia albo unieruchomienia bezzałogowego obiektu
+     lądowego w przypadkach, o których mowa w art. 11 pkt 17." — zm. Dz.U.
+     2026 poz. 815, od 4.07.2026; poza odesłaniem PSŁ): zatrzymanie pojazdu zagrażającego
      życiu (pkt 1), pokonanie przeszkody (pkt 2), alarm/wezwanie pomocy
      (pkt 3), neutralizacja materiałów wybuchowych (pkt 4),
      **unieszkodliwienie zwierzęcia zagrażającego życiu/zdrowiu (pkt 5)**
@@ -373,7 +386,14 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
      aktualny) ani przy pokonywaniu przeszkód budowlanych (pkt 2 poza
      odesłaniem PSŁ)**.
    - **Art. 12** (katalog środków przymusu bezpośredniego, pełny) —
-     **✅ ZWERYFIKOWANE (2026-08-18), Dz.U. 2026 poz. 244 t.j., 17 pozycji:**
+     **✅ ZWERYFIKOWANE (2026-08-18), Dz.U. 2026 poz. 244 t.j.** — ⚠️ katalog
+     art. 12 ust. 1 kończył się na pkt 21; od 4.07.2026 dodane pkt 22
+     „środki i urządzenia przeznaczone do zniszczenia albo unieruchomienia
+     bezzałogowego obiektu pływającego albo przejęcia nad nim kontroli" i
+     pkt 23 „środki i urządzenia przeznaczone do zniszczenia albo
+     unieruchomienia bezzałogowego obiektu lądowego albo przejęcia nad nim
+     kontroli." (zm. Dz.U. 2026 poz. 815, od 4.07.2026) — poza odesłaniem PSŁ.
+     Pozycje podstawowe (wg odczytu 2026-08-18):
      (1) siła fizyczna (techniki: transportowe/obrony/ataku/obezwładnienia);
      (2) kajdanki (na ręce/na nogi/zespolone); (3) kaftan bezpieczeństwa;
      (4) pas obezwładniający; (5) siatka obezwładniająca i podobne;
@@ -383,9 +403,13 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
      plecakowe miotacze, granaty łzawiące, inne urządzenia); (13) przedmioty
      do obezwładniania energią elektryczną; (14) cela zabezpieczająca;
      (15) izba izolacyjna; (16) pokój izolacyjny; (17) kolczatka drogowa i
-     podobne (+ dalsze pozycje 18-20 dot. pokonywania przeszkód budowlanych
-     z materiałami wybuchowymi oraz zwalczania dronów — poza podstawowym
-     katalogiem 1-17, odczytane fragmentarycznie z wtórnych odesłań).
+     podobne; (18) pojazdy służbowe; (19) środki do pokonywania zamknięć
+     budowlanych i innych przeszkód, w tym materiały wybuchowe; (20) środki
+     pirotechniczne ogłuszające/olśniewające; (21) środki i urządzenia do
+     zniszczenia albo unieruchomienia bezzałogowego statku powietrznego
+     albo przejęcia nad nim kontroli (t.j. Dz.U. 2026 poz. 244, ELI
+     2026-10-12); od 4.07.2026 (zm. Dz.U. 2026 poz. 815) także (22) i (23) —
+     środki wobec bezzałogowego obiektu pływającego i lądowego.
      **PSŁ ma dostęp WYŁĄCZNIE do: pkt 1, pkt 2 lit. a (kajdanki na ręce),
      pkt 7 (pałka), pkt 9 (pies służbowy), pkt 12 lit. a (ręczny miotacz
      substancji obezwładniających), pkt 13 (elektryczne)** — BRAK dostępu

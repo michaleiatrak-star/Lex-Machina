@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: "4.26"
+version: "4.27"
 description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 dependencies:
   requires:
@@ -302,7 +302,8 @@ PROKURATURA I ORGANY OCHRONY PRAWA:
 REGULATORZY:
   [✓] OK    mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF
               (decyzje sektorowe, kary, Dz.U. 2025 poz. 1714 UOKiK,
-               Dz.U. 2026 poz. 43 URE, Dz.U. 2024 poz. 1221 UKE;
+               Dz.U. 2026 poz. 43 URE, Dz.U. 2024 poz. 1221 UKE
+               (zm. m.in. Dz.U. 2026 poz. 815, od 4.07.2026);
                ⚠️ kontrola sądowa: WSA/NSA wg PPSA lub SOKiK — weryfikuj)
 
 ODPOWIEDZIALNOŚĆ DYSCYPLINARNA:

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.63 (2026-10-12b, AUDYT-2026-10-12b): mod-grzywny-mandaty-szczegolowe: UPEA t.j. Dz.U. 2026 poz. 1311 (było 2026/268, w stopce 2023/2505), ⏳ 2026/1003 art. 116 (art. 17 § 1a, od 28.10.2026); UDP ze zm. 2026/815, 982. mod-KK-art163-172: definicja infrastruktury krytycznej po 2026/815 (wykaz z art. 6r ust. 1 uzk). mod-KK-cyberprzestepstwa: metryka PKE. ELI 2026-10-12.
+
 - 3.62 (2026-10-09g, AUDYT-2026-10-09g): PRD i u.k.p.: lista nowelizacji po t.j. uzupełniona o 2025/820, 1006, 1872 i ⏳ 2026/1073, ⏳ 2026/187 (daty z przepisów o wejściu w życie, ELI 2026-10-09).
 
 - 3.61 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-KK-art163-172: odesłanie „infrastruktura krytyczna” kierowało do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (rejestr samorządów zawodowych, bez takiej sekcji) — teraz art. 3 pkt 2 ustawy o zarządzaniu kryzysowym (t.j. 2026/574, ELI 2026-10-09) i dr-08/mod-ustawa-zarzadzanie-kryzysowe.

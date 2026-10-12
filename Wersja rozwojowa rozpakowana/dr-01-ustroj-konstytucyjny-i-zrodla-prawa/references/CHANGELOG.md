@@ -1,5 +1,7 @@
 # CHANGELOG — dr-01-ustroj-konstytucyjny-i-zrodla-prawa
 
+- 3.19 (2026-10-12b, AUDYT-2026-10-12b): mod-stany-nadzwyczajne-sytuacje-kryzysowe: ustawa o zarządzaniu kryzysowym po zm. Dz.U. 2026 poz. 815 (od 4.07.2026) — nowy art. 1 ust. 1, definicja sytuacji kryzysowej i planów zarządzania kryzysowego dosłownie; ⏳ 2026/1206 (od 11.01.2027); ochrona ludności — zm. 2025/1705, 2026/646, 815. ELI 2026-10-12.
+
 - 3.18 (2026-10-09f, AUDYT-2026-10-09f): mod-mandat-posla-senatora: źródło kanoniczne t.j. Dz.U. 2026 poz. 1282 (było wygasłe 2024/907; ELI 2026-10-09).
 
 - 3.17 (2026-10-09, AUDYT-2026-10-09): mandat posła i senatora — t.j. Dz.U. 2026 poz. 1282 (ELI 2026-10-09; poprzedni 2024/907 wygasł).

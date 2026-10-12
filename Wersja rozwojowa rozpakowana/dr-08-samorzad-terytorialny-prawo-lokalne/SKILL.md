@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: "3.20"
+version: "3.21"
 description: "Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo, uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie."
 dependencies:
   requires:
@@ -118,7 +118,7 @@ MODUŁY DZIEDZINOWE (prawo materialne):
               (scalony: wod-kan + transport zbiorowy + czystość i porządek)
   [✓] OK    mod-ustawa-zabytki-rewitalizacja
   [✓] OK    mod-UDP-strefy-platnego-parkowania
-              (SPP/ŚSPP: opłaty art.13/13b/13f UDP Dz.U. 2025 poz. 889; opłata dodatkowa;
+              (SPP/ŚSPP: opłaty art.13/13b/13f UDP Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815 (od 4.07.2026), 982 (od 21.09.2026); opłata dodatkowa;
                brak zaskarżalności wezwania do WSA — tylko zarzuty UPEA art.33;
                stawki % płacy min.; karta parkingowa; parking prywatny; zaskarżenie uchwały)
               (scalony: zabytki + rewitalizacja + cmentarze)

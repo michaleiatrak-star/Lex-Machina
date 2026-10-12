@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.47"
+version: "3.48"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -298,7 +298,8 @@ BUDOWNICTWO:
                Główny i zarządy okręgowe POZA tym limitem — Łowczy Krajowy
                z nominacji MINISTRA, nie z wyboru [art. 32a]; ⭐ art. 32b —
                PZŁ jako podmiot ochrony ludności [ustawa z 5.12.2024,
-               Dz.U. 2024 poz. 1907, w życie 1.01.2025 — akt już w systemie:
+               Dz.U. 2024 poz. 1907, w życie 1.01.2025, zm. m.in. Dz.U. 2026
+               poz. 815 (od 4.07.2026) — akt już w systemie:
                dr-01/dr-08/dr-13, NIE luka rejestrowa]; koła łowieckie —
                ⭐⭐ art. 33 ust. 2a-2d ODPOWIEDZIALNOŚĆ PZŁ za odszkodowania
                koła [subsydiarna przy likwidacji, SOLIDARNA przy uchybieniu

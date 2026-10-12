@@ -15,6 +15,11 @@ Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, no
 lexlege.pl, arslege.pl, prawo.pl, eli.gov.pl, infor.pl.
 
 - **Prawo komunikacji elektronicznej (PKE)** — Dz.U. 2024 poz. 1221
+  (brak t.j.; ⏳ zm. po ogłoszeniu: Dz.U. 2025 poz. 637, 820, Dz.U. 2026
+  poz. 252, 815 (od 4.07.2026), 1296 — ELI 2026-10-12; art. 26 Dz.U. 2026
+  poz. 815: „uchyla się art. 42” — przepis o zarządzaniu przez wskazane
+  organy zastosowania urządzeń uniemożliwiających telekomunikację na
+  określonym obszarze (zm. Dz.U. 2026 poz. 815, od 4.07.2026))
   (ustawa z 12.07.2024, zastąpiła Prawo telekomunikacyjne z 2004 r.,
   weszła w życie 3 miesiące od ogłoszenia, tj. ok. listopada 2024, z
   wyjątkami wskazanymi w przepisach wprowadzających — niektóre przepisy

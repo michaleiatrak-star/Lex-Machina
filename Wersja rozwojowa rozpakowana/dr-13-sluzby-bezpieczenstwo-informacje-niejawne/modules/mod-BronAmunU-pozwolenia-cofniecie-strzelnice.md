@@ -43,7 +43,7 @@ trafiało na moduł KARNY i było obsługiwane niewłaściwym materiałem.
 > art. 15c oraz czy w międzyczasie nie doszło do kolejnej nowelizacji.**
 
 > ⚠️ **NIE MYLIĆ Z:** ustawą o środkach przymusu bezpośredniego i broni palnej
-> (t.j. Dz.U. 2026 poz. 244, moduł `mod-ustawa-policja`) — tamta reguluje
+> (t.j. Dz.U. 2026 poz. 244; ⏳ Po t.j.: Dz.U. 2026 poz. 737, 815 (od 4.07.2026); moduł `mod-ustawa-policja`) — tamta reguluje
 > UŻYCIE broni przez FUNKCJONARIUSZY, ta — pozwolenia dla osób CYWILNYCH.
 > Kolizja nazw jest źródłem błędnego routingu.
 
@@ -638,7 +638,7 @@ oba wątki równolegle — wynik sprawy wykroczeniowej nie wyczerpuje ryzyka.
   zwolnienie członków PZŁ z egzaminu, odstrzał sanitarny, świadectwo broni dla
   dzierżawcy obwodu (art. 29 ust. 1 pkt 8).
 - **`dr-13-sluzby-bezpieczenstwo-informacje-niejawne/modules/mod-ustawa-policja.md`** — ustawa o środkach przymusu bezpośredniego
-  i broni palnej (t.j. Dz.U. 2026 poz. 244) — INNY AKT, uzbrojenie służb.
+  i broni palnej (t.j. Dz.U. 2026 poz. 244 ze zm. 2026 poz. 737, 815) — INNY AKT, uzbrojenie służb.
 - **`dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-SKO.md`** — organ odwoławczy przy zatwierdzeniu regulaminu
   strzelnicy (decyzja wójta/burmistrza, art. 47).
 

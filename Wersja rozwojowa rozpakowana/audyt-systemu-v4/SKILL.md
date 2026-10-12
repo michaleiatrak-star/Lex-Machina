@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.222"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.223"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -646,7 +646,8 @@ Dla każdego aktu z tabeli MONITORING wykonaj:
 |---|---|---|---|---|---|
 | Prawo budowlane art. 1 pkt 1 lit. a i c, pkt 3 *(przykład formatu — historyczny; w mocy od 20.09.2026, źródło zmiany: 2025/1847, nie t.j. 2026/524 — F-195)* | Dz.U. 2025 poz. 1847 | 20.09.2026 | — (przepis nowy) | dr-09/mod-PrBud-* | ✅ WSZEDŁ |
 | Ordynacja podatkowa (część przepisów z Dz.U. 2025 poz. 1235) | Dz.U. 2026 poz. 622 | ~4 mies. od ogłoszenia | — (nowelizacja OP) | dr-06/mod-OP-* | ⏳ OCZEKUJE |
-| Obrona cywilna zm. | Dz.U. 2026 poz. 646 | vacatio legis — weryfikuj | Dz.U. 2024 poz. 1907 (część) | dr-13/mod-ustawa-zarzadzanie-kryzysowe-* | ⏳ OCZEKUJE |
+| Obrona cywilna zm. | Dz.U. 2026 poz. 646 | 29.05.2026 (ELI 2026-10-12) | Dz.U. 2024 poz. 1907 (część) | dr-13/mod-ustawa-zarzadzanie-kryzysowe-* | ✅ WSZEDŁ |
+| Zarządzanie kryzysowe zm. (+ obrona cywilna art. 27, obrona Ojczyzny art. 23) | Dz.U. 2026 poz. 815 | 4.07.2026 (art. 73: 14 dni od ogłoszenia 19.06.2026) | Dz.U. 2026 poz. 574 t.j. (uchyla art. 5–6d, dodaje rozdz. 2–16); Dz.U. 2024 poz. 1907 (art. 5, 15, 38, 40, 44) | dr-01/mod-stany-nadzwyczajne-*, dr-08/mod-ustawa-zarzadzanie-kryzysowe, dr-13/mod-ustawa-zarzadzanie-kryzysowe-*, dr-13/mod-ustawa-obrona-ojczyzny-* | ✅ WSZEDŁ |
 
 **Reguły statusów MONITORING:**
 
@@ -1333,4 +1334,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.222 | Ostatnia aktualizacja: 2026-10-12 (AUDYT-2026-10-12a). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.223 | Ostatnia aktualizacja: 2026-10-12 (AUDYT-2026-10-12b). Stopkę aktualizuj razem z polem `version`.*

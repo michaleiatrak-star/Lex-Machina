@@ -3,7 +3,7 @@
 > **Stan weryfikacji:** ✅ [VER] RZĄD 1 — odczyt treści: KPC `Dz.U. 2026 poz. 468`,
 > KPK `Dz.U. 2026 poz. 490`, KPW `Dz.U. 2025 poz. 860` (2026-09-12d);
 > **KPA `Dz.U. 2025 poz. 1691` i PPSA `Dz.U. 2026 poz. 143` (2026-09-12g);
-> UPEA `Dz.U. 2026 poz. 268` (2026-09-12h); Ordynacja podatkowa
+> UPEA `Dz.U. 2026 poz. 1311` t.j. (ELI 2026-10-12; ⏳ zm. 2026/1003 od 28.10.2026); Ordynacja podatkowa
 > `Dz.U. 2026 poz. 622` (2026-09-12i); KKW `Dz.U. 2025 poz. 911` (2026-09-12j);
 > KRO `Dz.U. 2026 poz. 236` (2026-09-12k); Prawo upadłościowe
 > `Dz.U. 2026 poz. 913` i Prawo restrukturyzacyjne `Dz.U. 2026 poz. 533`
@@ -200,8 +200,9 @@ podlega natychmiastowemu wykonaniu z mocy ustawy (§ 3).
 
 ## Egzekucja administracyjna (UPEA) — ⛔ dwa instrumenty, dwie podstawy
 
-✅ [VER] RZĄD 1 2026-09-12h — `Dz.U. 2026 poz. 268`; nowelizacja
-`Dz.U. 2026 poz. 739` sprawdzona — **nie dotyka art. 15, 33, 34, 54**.
+✅ [VER] ELI 2026-10-12 — `Dz.U. 2026 poz. 1311` t.j. (obejmuje zm. 516, 739 — **nie dotykały art. 15, 33, 34, 54**).
+⏳ Zm. `Dz.U. 2026 poz. 1003` art. 116 (od 28.10.2026) — nowe art. 17 § 1a: do zażaleń na postanowienia z art. 34 § 2
+wierzycieli bez organu wyższego stopnia albo podległych ministrowi stosuje się art. 127 § 3 KPA, termin **7 dni** od doręczenia postanowienia.
 
 | Termin | Czynność | Podstawa |
 |---|---|---|
@@ -739,6 +740,8 @@ i wniosków z działu VIII KPA). ⛔ **„Art. 50 ust. 4 u.o.d.o." nie istnieje.
 
 ✅ [VER] RZĄD 1 2026-09-16k — t.j. `Dz.U. 2026 poz. 20` + nowelizacja `Dz.U. 2026 poz. 252`
 (w życie **3.04.2026**; t.j. jej nie obejmuje — czytaj oba akty razem).
+⏳ Po t.j. (ELI 2026-10-12): Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1003, 1206 — zm. z poz. 815
+(art. 20: art. 15 ust. 7 pkt 2, art. 26 ust. 3, 5 i 7, nowy art. 46 ust. 1b KSC) nie zmieniają terminów z tabeli.
 
 | Termin | Czynność | Podstawa |
 |---|---|---|

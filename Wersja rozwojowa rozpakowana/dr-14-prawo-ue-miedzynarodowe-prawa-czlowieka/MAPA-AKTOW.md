@@ -29,7 +29,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan akt → moduł. Historia weryfi
 | MRG Polska–Ukraina — Drugi protokół (art. 4 pobyt do 90 dni, art. 9/9a opłaty, Załączniki 1 i 4) | Dz.U. 2016 poz. 664 | `mod-maly-ruch-graniczny` | 🟢 treść odczytana ze skanu 2026-10-04i; fresh gate |
 | MRG Polska–Rosja / obwód kaliningradzki | Dz.U. 2012 poz. 814 | `mod-maly-ruch-graniczny` | 🟡 status wykonywania wymaga fresh gate |
 | MRG Polska–Białoruś | dokumentacja ratyfikacyjna / urzędowa | `mod-maly-ruch-graniczny` | 🟡 status wejścia w życie i praktyki wymaga fresh gate |
-| Kontrola niektórych inwestycji (FDI screening) | Dz.U. 2026 poz. 47 t.j. | `mod-inwestycje-transgraniczne-FDI-BIT` | 🟢 operacyjny |
+| Kontrola niektórych inwestycji (FDI screening) | Dz.U. 2026 poz. 47 t.j.; po t.j. (ELI 2026-10-12): 2026/815 (w mocy 4.07.2026) | `mod-inwestycje-transgraniczne-FDI-BIT` | 🟢 operacyjny |
 | BIT/ISDS, w tym intra-UE | traktaty, EUR-Lex, orzecznictwo TSUE | `mod-inwestycje-transgraniczne-FDI-BIT` | 🟡 status konkretnego BIT zawsze fresh gate |
 | Konwencja wiedeńska o stosunkach dyplomatycznych | Dz.U. 1965 nr 37 poz. 232 | `mod-konwencje-wiedenskie-dyplomatyczne-konsularne` | 🟢 B+/COV |
 | Konwencja wiedeńska o stosunkach konsularnych | Dz.U. 1982 nr 13 poz. 98 | `mod-konwencje-wiedenskie-dyplomatyczne-konsularne` | 🟢 B+/COV |

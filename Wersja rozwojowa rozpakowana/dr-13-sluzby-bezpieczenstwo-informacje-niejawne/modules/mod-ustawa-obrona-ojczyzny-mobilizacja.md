@@ -12,8 +12,8 @@ Moduł obejmuje obowiązek obrony, służbę wojskową, kwalifikację wojskową,
 ### Akty i źródła kontrolne
 - Ustawa o obronie Ojczyzny — Dz.U. 2025 poz. 825 t.j. (obwieszczenie Marszałka
   Sejmu z 11.06.2025) — poprzedni t.j./pierwotna publikacja Dz.U. 2022 poz. 655
-  NIEAKTUALNA, zastąpiona przez t.j. 2025.825; dalsza nowelizacja: Dz.U. 2025 poz.
-  1014. ⚠️ [F-57, 2026-08-14] wcześniejsza wersja tego modułu błędnie podawała
+  NIEAKTUALNA, zastąpiona przez t.j. 2025.825; ⏳ Po t.j. (ELI 2026-10-12): Dz.U.
+  2025 poz. 1014, 1080; Dz.U. 2026 poz. 26, 426, 635, 815 (od 4.07.2026), 1123. ⚠️ [F-57, 2026-08-14] wcześniejsza wersja tego modułu błędnie podawała
   2022.655 jako podstawę mimo że mapa DR-13 od 2026-07-02 wskazywała już 2025.825
   jako aktualny t.j. — naprawione.
 - Kodeks karny — część wojskowa i przepisy szczególne, kontrola ISAP.
@@ -129,6 +129,14 @@ Ustawa o obronie Ojczyzny:
   — pierwotna publikacja Dz.U. 2022 poz. 655 NIEAKTUALNA jako podstawa cytowania
   → Dz.U. 2025 poz. 1014 — nowelizacja po t.j. 2025.825, weryfikuj czy uwzględniona
     w kolejnym t.j.
+  ⏳ Po t.j. (ELI 2026-10-12) także: Dz.U. 2025 poz. 1080; Dz.U. 2026 poz. 26, 426,
+    635, 815, 1123
+  → Dz.U. 2026 poz. 815 (od 4.07.2026), art. 23 — zmienia WYŁĄCZNIE art. 650:
+    pkt 1: wyrazy „w jednolitym wykazie obiektów, instalacji, urządzeń i usług
+    wchodzących w skład infrastruktury krytycznej” zastąpiono wyrazami „w wykazie,
+    o którym mowa w art. 6r ust. 1 ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu
+    kryzysowym”; pkt 2: „2) przepisach rozdziału 7 ustawy z dnia 26 kwietnia 2007 r.
+    o zarządzaniu kryzysowym.” (zm. Dz.U. 2026 poz. 815, od 4.07.2026)
   ✅ VER: isap.sejm.gov.pl (WDU20250000825) 2026-08-14 (F-57) — koryguje poprzedni
     błędny zapis tego modułu, który mimo poprawki mapy z 2026-07-02 nadal podawał
     2022.655 jako podstawę

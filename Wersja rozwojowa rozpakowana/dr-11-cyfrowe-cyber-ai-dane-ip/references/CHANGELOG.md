@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.28 (2026-10-12b, AUDYT-2026-10-12b): KSC: zmiany po t.j. 2026/20 (252, 815, 1003, 1206) i dosłowne zmiany z art. 20 ustawy 2026/815 (było „brak dalszych nowelizacji”); PKE: art. 42 uchylony przez 2026/815 (od 4.07.2026); MAPA-AKTOW. ELI 2026-10-12.
+
 - 3.27 (2026-10-09h, AUDYT-2026-10-09h): mod-ustawa-informatyzacja: zapytanie weryfikacyjne na t.j. 2026/1241 (było wygasłe 2025/1703).
 
 - 3.26 (2026-10-09g, AUDYT-2026-10-09g): ⛔ SKILL.md: Prawo komunikacji elektronicznej Dz.U. 2024 poz. 1221 (było 1220 — rozp. MF); ustawa o ochronie danych osobowych t.j. 2019/1781 — nowelizacje po t.j. 2026/252 art. 16, 2026/548 art. 38. ELI 2026-10-09.

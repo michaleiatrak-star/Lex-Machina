@@ -1,7 +1,7 @@
-e3636ed5e13257edb8942d0a48835aad0181a7f8f0a27fc99a9911619c38274d  ./MAPA-AKTOW.md
+2b1ee52a93e2a1b700a9b11b01b8ef00af1de265e2e8cfe5cbc7c3bbb5d6f28c  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-b034416ebed617271c450ecc8886875696d0213fee7a1b9f297f3654c3f06ee1  ./SKILL.md
+089613e34df2afc0e8ee9aed52afac4c8cdf1123435debf6306200d7042ac4a7  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 379c038ace0a42bd49321d6f0c8fe01cc6d56d31641c751c6d869e09600b65b7  ./modules/mod-AI-Act-framework.md
@@ -9,11 +9,11 @@ ab0928325b932801b79742bfcad9714d8639e3f88639a4703fd49ed7e1864af2  ./modules/mod-
 83f5ad66c63deda0e10c65fda4a062346b00ec38688a091e80fb0908f5efe32b  ./modules/mod-DORA-eIDAS-cyfrowe-finanse.md
 4cb1276fb79e6154a730a39813d45d16297211ead7b0e02ece7a4878fd6f203d  ./modules/mod-DSA-digital-services-act.md
 8711100d490acb9305df6d67ac77e30ea8c09630e41226d2deacf4912144f698  ./modules/mod-EUCS-CRA-akty-regulacyjne-UE.md
-5e79a9102608afb7829033bc35e10e30e6776cfe9877489c4c4b74c8f6429e9c  ./modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom.md
+f060d095875dc172fe91ce7d6edab741b63824956f512c428d4aaeeedd752eec  ./modules/mod-KSC-NIS2-cyberbezpieczenstwo-telekom.md
 7cd686e740da4079bf69ab18c3f15fcf10b84ad042dae4e34d997fb21035e6a6  ./modules/mod-MiCA-kryptoaktywa.md
 ec9919c8ae5514c14080f4abb0e271d454045eab52d1d8e17006a860fa38f5a3  ./modules/mod-PrAut-media-internet-dobra-osobiste.md
 b444303da37dd0d95c9a4a2589777db8809f407dd1ab675f7984dee5d530f4f8  ./modules/mod-PrAut-wlasnosc-intelektualna-IP.md
-943f79998ffbd89670cedc1cbfb84e3b464365efe6dc294b6937490015cb254e  ./modules/mod-PrTelekom-poczta-UKE.md
+8e8c696cb1466dc0483a3729aae3fbe4850cd4e4db73d0bf8cb3d9d318191f9e  ./modules/mod-PrTelekom-poczta-UKE.md
 7d621570b7f63fec93ab4d15017eb714fa5568ee66b77507e8a8c83d3627e9d1  ./modules/mod-RODO-DPIA-ocena-skutkow.md
 518c1b82701605f8602a57306749622282b1e5e8a80082131f321806a0a6502c  ./modules/mod-RODO-DSAR-zadania-osob.md
 65a6efe962c7b0fc2f1842fbc108b9a9669570ee4588ab524cf1979477b9b20c  ./modules/mod-RODO-GDPR-2016-679.md
@@ -26,4 +26,4 @@ f013f83a208eb349c5f64d03e60b9a24001bf6b0c42c6a9c21a82d76f4a1e8ba  ./modules/mod-
 aff4384416951db74063a36b73e12ddfdf3b3262d3075696e03597a1274233bb  ./modules/mod-ustawa-podpis-elektroniczny.md
 0bba80f38aaa77ace308d59347302ec2797f48cb15021051a06ad810cf181f50  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 130eef15304528cf161d78f760ed8c1cc9892c1f60ddd6b69834d47343c8fcfa  ./modules/mod-ustawa-uslugi-elektroniczne.md
-046c4b16a000dcc2653dde4bfb80f56c7cd78759cb4227ce3fe5010efe7078d7  ./references/CHANGELOG.md
+3b57c2881d28332efdc78aa4786f188618fd22c547478dce5012c58c239bc667  ./references/CHANGELOG.md

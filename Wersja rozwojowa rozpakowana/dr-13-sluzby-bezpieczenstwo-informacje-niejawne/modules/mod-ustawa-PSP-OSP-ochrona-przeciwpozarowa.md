@@ -4,7 +4,7 @@ Status: moduł prawa polskiego klasy wzorcowej (poziom A wg `shared/POLISH-LAW-C
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2025 poz. 1312 t.j. (obwieszczenie Marszałka Sejmu 15.09.2025; VER: isap.sejm.gov.pl WDU20250001312)
-- Ustawa z dnia 24 sierpnia 1991 r. o ochronie przeciwpożarowej — Dz.U. 2025 poz. 188 t.j. (obwieszczenie Marszałka Sejmu 5.02.2025; VER: isap.sejm.gov.pl WDU20250000188)
+- Ustawa z dnia 24 sierpnia 1991 r. o ochronie przeciwpożarowej — Dz.U. 2025 poz. 188 t.j. (obwieszczenie Marszałka Sejmu 5.02.2025; VER: isap.sejm.gov.pl WDU20250000188); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 5: nowe brzmienie art. 14fa ust. 3)
 - Ustawa z dnia 17 grudnia 2021 r. o ochotniczych strażach pożarnych (OSP) — Dz.U. 2025 poz. 244 t.j. (obwieszczenie Marszałka Sejmu 21.02.2025, akt pierwotny Dz.U. 2021 poz. 2490; VER: isap.sejm.gov.pl WDU20250000244)
 
 Uwaga architektoniczna: trzy akty w jednym module — analogicznie do mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md (wzorzec już przyjęty w DR-13 dla klastra domenowego). Ustawa o PSP i ustawa o ochronie przeciwpożarowej to DWA ODRĘBNE akty tego samego dnia (24.08.1991) — nie mylić numerów Dz.U.
@@ -173,6 +173,13 @@ Ustawa o Państwowej Straży Pożarnej: Dz.U. 2025 poz. 1312 t.j. (ustawa z 24.0
 Ustawa o ochronie przeciwpożarowej: Dz.U. 2025 poz. 188 t.j. (ustawa z 24.08.1991,
   obwieszczenie 5.02.2025) — WERYFIKUJ dalsze zmiany w ELI (RZĄD 1) przed cytowaniem
   VER: isap.sejm.gov.pl WDU20250000188
+  ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026) — art. 14fa ust. 3 otrzymał brzmienie:
+    „Plany ratownicze w zakresie zdarzeń z dużą liczbą poszkodowanych oraz działań ratowniczych
+    i działań pomocowych podczas katastrof, klęsk żywiołowych i zdarzeń nadzwyczajnych są
+    skorelowane z planami reagowania kryzysowego, o których mowa w art. 6j ustawy z dnia
+    26 kwietnia 2007 r. o zarządzaniu kryzysowym, oraz z planami postępowania awaryjnego,
+    o których mowa w art. 84 ust. 1 ustawy z dnia 29 listopada 2000 r. – Prawo atomowe"
+    (zm. Dz.U. 2026 poz. 815, od 4.07.2026)
   UWAGA: ten sam dzień uchwalenia (24.08.1991) co ustawa o PSP, ale ODRĘBNY akt
      i odrębny Dz.U. — nie mylić numerów.
   Art. 3-4 — obowiązki właściciela/zarządcy/użytkownika budynku, obiektu, terenu:
@@ -208,7 +215,11 @@ Ustawa o ochotniczych strażach pożarnych (OSP): Dz.U. 2025 poz. 244 t.j. (usta
   Młodzieżowe/dziecięce drużyny pożarnicze (art. 4) — osoby do 18 lat za zgodą opiekuna
 
 Powiązane akty do weryfikacji przy konkretnej sprawie (NIE w tym module — osobne akty):
-  -> Ustawa o ochronie ludności i obronie cywilnej (Dz.U. 2024 poz. 1907 ze zm.) — OSP jako
+  -> Ustawa o ochronie ludności i obronie cywilnej (Dz.U. 2024 poz. 1907 ze zm.: Dz.U. 2025 poz. 1705
+     (⏳ od 1.01.2027); 2026 poz. 646, 815 (od 4.07.2026 — art. 27, m.in. art. 5 ust. 2: podmioty
+     ochrony ludności współpracują „stosownie do swoich możliwości, kompetencji, obszaru działania
+     oraz zakresu działania ujętego w planach zarządzania kryzysowego, o których mowa w art. 3 pkt 16
+     ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym, i planach ciągłości działania")) — OSP jako
      podmioty ochrony ludności (patrz mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna)
   -> Ustawa o zakwaterowaniu funkcjonariuszy (Dz.U. 2025 poz. 1366) — zmienia równolegle PSP
   -> Kodeks wykroczeń art. 82 i n. (wykroczenia przeciwpożarowe) — DR-03

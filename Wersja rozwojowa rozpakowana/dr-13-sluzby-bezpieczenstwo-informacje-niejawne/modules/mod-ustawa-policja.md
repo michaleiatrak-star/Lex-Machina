@@ -177,6 +177,10 @@ Ustawa o Policji:
   → Dz.U. 2025 poz. 1366 — ⚡ zakwaterowanie funkcjonariuszy (zm. Policji, SG, PSP,
     ABW, AW, SKW, SWW, SOP jednocześnie) — NOWELIZACJA PO t.j. 2025.636, weryfikuj
     czy uwzględniona w kolejnym t.j.
+  ⏳ Po t.j.: Dz.U. 2025 poz. 718, 1366; 2026 poz. 187, 421, 646, 760, 815 (od 4.07.2026 —
+    art. 3: nowe brzmienie art. 16 ust. 1 [ŚPB: „art. 12 ust. 1 pkt 1–13 i 17–23"] i art. 18c
+    ust. 1 [urządzenia uniemożliwiające telekomunikację, m.in. po wprowadzeniu trzeciego lub
+    czwartego stopnia alarmowego]), 821, 864, 1004, 1123, 1281
   ✅ VER: isap.sejm.gov.pl, api.sejm.gov.pl 2026-08-14 (F-57)
 
 Ustawa o środkach przymusu bezpośredniego i broni palnej:
@@ -184,6 +188,10 @@ Ustawa o środkach przymusu bezpośredniego i broni palnej:
   — poprzednie t.j. Dz.U. 2023 poz. 202 i Dz.U. 2025 poz. 555 NIEAKTUALNE,
     zastąpione przez t.j. 2026.244
   ✅ VER: isap.sejm.gov.pl, inforlex.pl (Dz.U. 2026 poz. 244) 2026-08-14 (F-57)
+  ⏳ Po t.j.: Dz.U. 2026 poz. 737, 815 (od 4.07.2026 — art. 15: zm. art. 4 pkt 8 lit. b
+    i pkt 9, dodane art. 11 pkt 16–17 i art. 12 ust. 1 pkt 22–23 [bezzałogowe obiekty
+    pływające i lądowe], nowe brzmienie art. 23, art. 33a ust. 3, dodane art. 33b–33c,
+    art. 47 pkt 8)
   ⚠️ weryfikuj dalsze zm. w ELI (RZĄD 1) przed każdym powołaniem
 
 Odpowiedzialność odszkodowawcza Skarbu Państwa za działania Policji:

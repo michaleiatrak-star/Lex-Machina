@@ -1,5 +1,7 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.21 (2026-10-12b, AUDYT-2026-10-12b): mod-ustawa-zarzadzanie-kryzysowe: plany zarządzania kryzysowego po 2026/815 (plan zarządzania ryzykiem i plan reagowania kryzysowego, cykl do 3 lat, przepisy przejściowe art. 29); link źródłowy WDU20241194 (dozór techniczny) zastąpiony; mod-UDP: UPEA 2026/1311, UDP ze zm. 815, 982. ELI 2026-10-12.
+
 - 3.20 (2026-10-09g, AUDYT-2026-10-09g): Drogi publiczne: po t.j. 2025/889 także Dz.U. 2026 poz. 815 art. 2 (od 4.07.2026). ELI 2026-10-09.
 
 - 3.19 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-ustawa-zarzadzanie-kryzysowe i MAPA-AKTOW: dwie ustawy łączone pod numerem 2024/1907 — rozdzielone: zarządzanie kryzysowe t.j. 2026/574 (+815, +1206 art. 15 od 11.01.2027), ochrona ludności i obrona cywilna 2024/1907 (+646, +815, ⏳ 1705 od 1.01.2027); ⛔ „ustawa z 2022 r.” → z 5.12.2024. ELI 2026-10-09.

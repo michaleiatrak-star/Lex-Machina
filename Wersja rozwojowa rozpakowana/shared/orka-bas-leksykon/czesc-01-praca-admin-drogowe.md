@@ -154,10 +154,10 @@ nie uprawnia do wywłaszczenia ani przymusu sprzedaży.
 ### BAS-012 — Pas drogowy
 ```
 Weryfikacja: ustawa o drogach publicznych art. 4 pkt 1
-  (Dz.U. 2025 poz. 889 t.j.) — ZWERYFIKOWANO
+  (Dz.U. 2025 poz. 889 t.j. ze zm. 2026 poz. 815, 982 — art. 4 nie zmieniony) — ZWERYFIKOWANO
 Definicja: Wydzielony liniami granicznymi grunt wraz z przestrzenią nad i pod
 powierzchnią, obejmujący drogę oraz urządzenia związane z ruchem i zarządzaniem drogą.
-Podstawa: art. 4 pkt 1 ustawy o drogach publicznych (Dz.U. 2025 poz. 889 t.j.)
+Podstawa: art. 4 pkt 1 ustawy o drogach publicznych (Dz.U. 2025 poz. 889 t.j. ze zm.)
 Reguła: Pas drogowy obejmuje nie tylko nawierzchnię, ale całą przestrzeń
 pionową. Zajęcie pasa drogowego bez zezwolenia → opłata + kara (art. 40 UDP).
 ```
@@ -184,7 +184,7 @@ Podstawa: art. 2 pkt 16 PRD (Dz.U. 2024 poz. 1251 t.j.) + rozp. ws. znaków drog
 
 ### BAS-107 — Droga wewnętrzna
 ```
-Weryfikacja online: UDP art. 8 ust. 1 (Dz.U. 2025 poz. 889 t.j.) — ZWERYFIKOWANO
+Weryfikacja online: UDP art. 8 ust. 1 (Dz.U. 2025 poz. 889 t.j. ze zm. 2026 poz. 815, 982 — art. 8 nie zmieniony) — ZWERYFIKOWANO
 Definicja ustawowa (art. 8 ust. 1 UDP):
   Droga wewnętrzna = droga NIEstanowiąca drogi publicznej w rozumieniu UDP.
   Definicja negatywna: każda droga niepubliczna i niezlokalizowana w pasie

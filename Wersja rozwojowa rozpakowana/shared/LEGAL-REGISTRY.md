@@ -34,12 +34,12 @@ Stan rejestru: 2026-08-28. Źródło metryk: wyłącznie ISAP / Dziennik Ustaw. 
 | PBUD | Prawo budowlane | Dz.U. 2026 poz. 524 | AKTUALNY-ISAP | Zastępuje wcześniejsze odwołania do Dz.U. 2025 poz. 418. |
 | PLAN | Planowanie i zagospodarowanie przestrzenne | Dz.U. 2026 poz. 538 | AKTUALNY-ISAP | Zastępuje Dz.U. 2024 poz. 1130. |
 | POS | Prawo ochrony środowiska | Dz.U. 2026 poz. 670 | AKTUALNY-ISAP | Wysokie ryzyko częstych zmian. |
-| PRZYR | Ochrona przyrody | Dz.U. 2026 poz. 13 | AKTUALNY-ISAP | Moduł środowiskowy. |
+| PRZYR | Ochrona przyrody | Dz.U. 2026 poz. 1315 t.j. (obwieszczenie z 4.09.2026, ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912; brak zmian po t.j. (ELI 2026-10-12)) | AKTUALNY-ISAP | Moduł środowiskowy. |
 | CUDZ | Ustawa o cudzoziemcach | Dz.U. 2025 poz. 1079 + Dz.U. 2025 poz. 1794 | PO-TJ-ZMIANY | Sprawdzić przepisy przejściowe i rozporządzenia wykonawcze 2026. |
 | ENER | Prawo energetyczne | Dz.U. 2026 poz. 43 + zmiana Dz.U. 2026 poz. 516 | PO-TJ-ZMIANY | Sprawdzać status nowelizacji i przepisy przejściowe. |
-| KSCYBER | Krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 + Dz.U. 2026 poz. 252 | PO-TJ-ZMIANY | Moduł cyber/regulacyjny. |
+| KSCYBER | Krajowy system cyberbezpieczeństwa | Dz.U. 2026 poz. 20 t.j. + po t.j. (ELI 2026-10-12): 2026 poz. 252, 815 (od 4.07.2026), 1003, 1206 | PO-TJ-ZMIANY | Moduł cyber/regulacyjny. |
 | AML | Przeciwdziałanie praniu pieniędzy i finansowaniu terroryzmu | tekst ujednolicony ISAP, plik z 2025-12-19 | WYMAGA-KONTROLI-ISAP | Przed cytowaniem sprawdzić najnowszy tekst i zmiany. |
-| OLiOC | Ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 + Dz.U. 2026 poz. 646 | PO-TJ-ZMIANY | Nowy obszar, wymaga kontroli wejścia w życie. |
+| OLiOC | Ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 (brak t.j.) + zm. (ELI 2026-10-12): 2025 poz. 1705; 2026 poz. 646, 815 (od 4.07.2026) | PO-TJ-ZMIANY | Nowy obszar, wymaga kontroli wejścia w życie. |
 
 ## Reguła aktualizacji
 

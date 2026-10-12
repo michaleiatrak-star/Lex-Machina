@@ -14,6 +14,8 @@ ochrona ludności, obrona cywilna, obowiązki JST, przedsiębiorców i podmiotó
 | Ustawa o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 |
 | Zmiana ustawy o ochronie ludności i obronie cywilnej (zm. 2025) | Dz.U. 2025 poz. 1705 |
 | Zmiana ustawy o ochronie ludności i obronie cywilnej (zm. 2026) | Dz.U. 2026 poz. 646 |
+| Zmiana ustawy o ochronie ludności i obronie cywilnej — art. 27 ustawy z 29.05.2026 o zmianie ustawy o zarządzaniu kryzysowym (art. 5 ust. 2, art. 15 ust. 1 pkt 6, art. 38, 40, 44) | ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026) |
+| Ustawa o zarządzaniu kryzysowym (plany zarządzania kryzysowego — art. 3 pkt 16, do których odsyłają art. 5 ust. 2 i art. 38 ustawy o ochronie ludności) | t.j. Dz.U. 2026 poz. 574; ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026), Dz.U. 2026 poz. 1206 (od 11.01.2027) |
 | Program Ochrony Ludności i Obrony Cywilnej 2025–2026 | M.P. 2025 poz. 541 |
 | KPA | Dz.U. 2025 poz. 1691 |
 

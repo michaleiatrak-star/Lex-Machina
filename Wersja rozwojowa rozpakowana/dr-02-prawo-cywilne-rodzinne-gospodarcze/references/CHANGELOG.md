@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.95 (2026-10-12b, AUDYT-2026-10-12b): ⛔ mod-rzeczy-znalezione-zasiedzenie 1.1: Dz.U. 2026 poz. 184 (od 19.05.2026) — art. 187 § 1 KC: 6 miesięcy od wezwania / rok od znalezienia (było rok / 2 lata); broń → Policja (art. 6); sprzęt i dokumenty wojskowe → starosta albo ŻW (art. 5 ust. 4, 4a); dokumenty z danymi osobowymi, klucze, karty, piloty → powiat i zniszczenie (art. 187 § 2 KC, art. 19 ust. 2, art. 25a); starosta miejsca zamieszkania znalazcy (art. 5 ust. 6–7); zarządca budynku — 30 dni (art. 7 ust. 1a–1b); art. 3: do rzeczy znalezionych przed 19.05.2026 przepisy dotychczasowe. kc-zobowiazania/aneks D: metryka PKE z 2026/815. ELI 2026-10-12.
+
 - 3.94 (2026-10-11b, AUDYT-2026-10-11b, zewnętrzne code review): `scripts/prup.py article` — blokada czasowa domyślnie (bez `--as-of` na dziś); wcześniej działała wyłącznie z flagą, a bez niej tekst artykułu z nowelizacją już w mocy był zwracany z `blocked: true`. Od 11.01.2027 art. 452 i 456 (Dz.U. 2026 poz. 1206) → WYMAGANA_ZMIANA_WERSJI do odświeżenia snapshotu. Testy deterministyczne (`_today` podstawiane): +1, test art. 452 nie wygasa w 2027 r.
 
 - 3.93 (2026-10-10, AUDYT-2026-10-10a): mod-KC-konsumenckie: zapytanie weryfikacyjne na t.j. Dz.U. 2026 poz. 1244 (było wygasłe 2023/2759; ELI 2026-10-10).

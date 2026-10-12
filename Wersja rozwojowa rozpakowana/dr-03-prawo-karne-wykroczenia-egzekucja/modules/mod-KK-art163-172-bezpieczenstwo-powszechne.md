@@ -120,10 +120,22 @@ strajkową (pkt 5, klauzula generalna).
 użyteczności publicznej", NIE formalnym terminem "infrastruktura
 krytyczna" (który jest zdefiniowany USTAWOWO gdzie indziej — art. 3 pkt 2
 ustawy o zarządzaniu kryzysowym, t.j. Dz.U. 2026 poz. 574 ze zm., odczyt ELI
-2026-10-09; patrz `dr-08-samorzad-terytorialny-prawo-lokalne/modules/
+2026-10-09; ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026) nadała art. 3
+pkt 2 nowe brzmienie: "infrastrukturze krytycznej – należy przez to rozumieć
+obiekt, urządzenie, instalację, sieć, system lub usługę lub połączone ze sobą
+funkcjonalnie obiekty, urządzenia, instalacje, sieci, systemy lub usługi
+niezbędne do: a) realizacji ważnych interesów państwa, w tym zapewnienia
+funkcjonowania organów administracji publicznej, b) zapewnienia
+funkcjonowania przedsiębiorstw, c) zaspokajania oraz utrzymywania potrzeb
+obywateli, w tym potrzeb o charakterze lokalnym, d) zapewnienia świadczenia
+usług kluczowych" (zm. Dz.U. 2026 poz. 815, od 4.07.2026); patrz `dr-08-samorzad-terytorialny-prawo-lokalne/modules/
 mod-ustawa-zarzadzanie-kryzysowe.md` oraz `dr-01/mod-stany-nadzwyczajne-
 sytuacje-kryzysowe.md`). Przy konkretnej sprawie sprawdź, czy dany obiekt
-jest formalnie wpisany na listę infrastruktury krytycznej (co może
+jest formalnie wpisany do wykazu infrastruktury krytycznej prowadzonego
+przez dyrektora Rządowego Centrum Bezpieczeństwa (art. 6r ust. 1 ustawy
+o zarządzaniu kryzysowym; zm. Dz.U. 2026 poz. 815, od 4.07.2026; do czasu
+sporządzenia tego wykazu w mocy pozostaje dotychczasowy jednolity wykaz —
+art. 31 ust. 1 ustawy zmieniającej) (co może
 wpływać na kwalifikację dodatkową lub okoliczności obciążające), ale
 SAMO zastosowanie art. 165 §1 pkt 3 NIE WYMAGA takiego formalnego wpisu —
 wystarczy, że urządzenie służy dostarczaniu wody/światła/ciepła/gazu/

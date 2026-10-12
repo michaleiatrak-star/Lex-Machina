@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.59"
+version: "6.60"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.59 (2026-10-11b): ROUTING-MAP — sekcja aktów powołanych w skillach wykonawczych i shared (monitoring t.j.), zmiany po t.j. u.k.s.c., adwokatury i radców z ELI.
+  Wersja bieżąca: 6.60 (2026-10-12b, AUDYT-2026-10-12b): ROUTING-MAP: UPEA t.j. 2026/1311 (⏳ 2026/1003 od 28.10.2026), ochrona przyrody t.j. 2026/1315; zmiany po t.j. z 2026/815 przy 20 aktach (Policja, SG, ŻW, SOP, obrona Ojczyzny, ochrona ludności, śpbp, ppoż., KSC, PKE, megaustawa, Prawo wodne, odpady, kontrola inwestycji); rzeczy znalezione — 2026/184.
+  6.59 (2026-10-11b): ROUTING-MAP — sekcja aktów powołanych w skillach wykonawczych i shared (monitoring t.j.), zmiany po t.j. u.k.s.c., adwokatury i radców z ELI.
   6.58 (2026-10-11a): routing błyskawiczny DR-02 + „umowa najmu na czas określony/nieokreślony” — najem na czas określony nie trafia do DR-04 przez frazę „umowa na czas określony”; „uchwała wspólników”, „zgromadzenie wspólników”, „walne zgromadzenie”, „uchwała zarządu” w DR-02 (nie DR-08).
   Poprzednia: 6.57 (2026-10-10a): routing błyskawiczny — egzekucja komornicza, zajęcie rachunku i wynagrodzenia, kwota wolna od zajęcia do DR-02 (KPC, mod-KPC-egzekucja-windykacja), „komornik” do DR-12 (mod-ustawa-komornicy-sadowi-zawod); wcześniej DR-03 (prawo karne, bez treści o egzekucji cywilnej).
   Pełna historia: references/CHANGELOG.md (ZASADA 15).

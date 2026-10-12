@@ -142,7 +142,8 @@ zjazd — przedstawiciele wyłonieni w **wyborach bezpośrednich** (ust. 8).
 wykonuje zadania ochrony ludności i obrony cywilnej.
 
 **Źródło:** ustawa z **5.12.2024 r. o ochronie ludności i obronie cywilnej**
-(**Dz.U. 2024 poz. 1907**, w życie **1.01.2025**) — jej art. 17 wymienia PZŁ
+(**Dz.U. 2024 poz. 1907**, w życie **1.01.2025**; ⏳ zm.: Dz.U. 2025 poz. 1705,
+Dz.U. 2026 poz. 646, Dz.U. 2026 poz. 815 — od 4.07.2026) — jej art. 17 wymienia PZŁ
 w katalogu podmiotów ochrony ludności; równolegle dodano **art. 34 pkt 11b**
 Prawa łowieckiego (§ 6). Akt jest już w systemie (mapa centralna Dz.U.,
 konsumenci: dr-01, dr-08, dr-13) — **nie jest to luka rejestrowa**.
@@ -154,6 +155,16 @@ obowiązków PZŁ z tego tytułu — do ustalenia w `dr-13`, nie tutaj.
 ⚠️ Odnotować też nowelizację **Dz.U. 2026 poz. 646** (zmiana ustawy
 o ochronie ludności) i **Dz.U. 2025 poz. 1705** — obie w mapie centralnej;
 wpływ na art. 32b NIEUSTALONY.
+⚠️ **Dz.U. 2026 poz. 815** (od 4.07.2026), art. 27, zmienia ustawę
+o ochronie ludności wyłącznie w art. 5 ust. 2, art. 15 ust. 1 pkt 6,
+art. 38, 40 i 44 — art. 17 bez zmian. Nowe brzmienie art. 5 ust. 2
+(zastosowanie do PZŁ ustal w `dr-13`): „Podmioty ochrony
+ludności i obrony cywilnej są obowiązane do współpracy z organami ochrony
+ludności i obrony cywilnej, stosownie do swoich możliwości, kompetencji,
+obszaru działania oraz zakresu działania ujętego w planach zarządzania
+kryzysowego, o których mowa w art. 3 pkt 16 ustawy z dnia 26 kwietnia
+2007 r. o zarządzaniu kryzysowym, i planach ciągłości działania.” (zm. Dz.U.
+2026 poz. 815, od 4.07.2026).
 
 ---
 
@@ -405,7 +416,7 @@ sprawdzić przy sprawie przez `dr-05`.
   ministra i droga na WSA.
 - **Punkt styku dr-13 (bezpieczeństwo):** art. 32b i art. 34 pkt 11b — ustawa
   z 5.12.2024 o ochronie ludności i obronie cywilnej (Dz.U. 2024 poz. 1907,
-  + zmiany 2025.1705 i 2026.646); art. 33d — ustawa o IPN (aktualny t.j.
+  + zmiany 2025.1705, 2026.646 i 2026.815 — od 4.07.2026); art. 33d — ustawa o IPN (aktualny t.j.
   wyłącznie z `dr-13/MAPA-AKTOW.md`).
 - **Punkt styku dr-01:** art. 33e — stany nadzwyczajne.
 - **Punkt styku dr-10 (weterynaria):** art. 34 pkt 11a — choroby zakaźne

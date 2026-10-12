@@ -84,7 +84,8 @@ B. PLATFORMA / PORTAL:
 C. CYWILNE ŻĄDANIE IDENTYFIKACJI / ZABEZPIECZENIA DANYCH:
    → Nie powołuj automatycznie art. 159 dawnego Prawa telekomunikacyjnego.
      Dz.U. 2024 poz. 1221 to pierwotne ogłoszenie Prawa komunikacji
-     elektronicznej (PKE), a nie tekst jednolity Prawa telekomunikacyjnego.
+     elektronicznej (PKE), a nie tekst jednolity Prawa telekomunikacyjnego;
+     PKE nie ma t.j., zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1296.
    → Przed żądaniem ustal aktualną podstawę w PKE, RODO/DSA, prawie
      procesowym oraz status adresata (operator/platforma). Zakres tajemnicy
      komunikowania i dopuszczalność ujawnienia zależą od rodzaju danych,
@@ -164,7 +165,7 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 
 *KK: Dz.U. 2025 poz. 383 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
 *Prawo komunikacji elektronicznej: Dz.U. 2024 poz. 1221 (akt pierwotny,
-nie t.j.) — weryfikuj w ELI/ISAP wraz z późniejszymi zmianami*
+nie t.j.); zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1296 — weryfikuj w ELI/ISAP*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*
 *e-Evidence (Rozp. UE 2023/1543): wdrożenie transgraniczne — weryfikuj stan w EUR-LEX*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.17"
+version: "3.18"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 dependencies:
   requires:
@@ -36,7 +36,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 
 **Prawo służb mundurowych było wielokrotnie nowelizowane w 2024–2025.**
 Dz.U. 2025 poz. 1366 zmienia równocześnie: Policję, SG, PSP, ABW, AW, SKW, SWW, SOP.
-Ustawa o obronie Ojczyzny — t.j. Dz.U. 2025 poz. 825 (✅ [VER] RZĄD 1 2026-09-16e; ⛔ poprzedni zapis „nie ma nowego t.j." był nieprawdziwy; akt pierwotny 2022 poz. 655) — weryfikuj nowelizacje po t.j.
+Ustawa o obronie Ojczyzny — t.j. Dz.U. 2025 poz. 825 (✅ [VER] RZĄD 1 2026-09-16e; ⛔ poprzedni zapis „nie ma nowego t.j." był nieprawdziwy; akt pierwotny 2022 poz. 655) — ⏳ Po t.j.: Dz.U. 2025 poz. 1014, 1080; 2026 poz. 426, 635, 815 (od 4.07.2026 — art. 23: zm. art. 650); ⏳ 2026 poz. 26 (od 1.01.2027), 1123 (od 1.01.2028) — weryfikuj nowelizacje po t.j.
 
 
 > ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
@@ -87,10 +87,11 @@ mimo że cywilne odpowiedniki (ABW, AW) miały je od dawna. Pełny opis:
 ```
 SŁUŻBY MUNDUROWE:
   [✓] OK    mod-ustawa-policja
-              (Dz.U. 2024 poz. 1589 ze zm.: Dz.U. 2024 poz. 1248, 1562;
-               Dz.U. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy;
+              (Dz.U. 2025 poz. 636 t.j. z późn. zm. — po t.j. (ELI 2026-10-12) 12 zmian,
+               m.in. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy; 2026 poz. 815 (od 4.07.2026);
                legitymowanie, zatrzymanie, przeszukanie, środki przymusu,
-               skargi, dyscyplina, odpowiedzialność SP; ustawa o śpbp Dz.U. 2023 poz. 202)
+               skargi, dyscyplina, odpowiedzialność SP; ustawa o śpbp Dz.U. 2026 poz. 244 t.j.;
+               ⏳ Po t.j.: Dz.U. 2026 poz. 737, 815 (od 4.07.2026))
   [✓] OK    mod-ustawa-straz-graniczna
               (2026-07-21: dodano kontrolę legalności zatrudnienia/
                pobytu cudzoziemców [SG działa RÓWNOLEGLE z PIP],
@@ -100,11 +101,11 @@ SŁUŻBY MUNDUROWE:
                pracodawcy, dobrowolne zgłoszenie się cudzoziemca do SG.
                Dotąd 195 linii czystego szkieletu proceduralnego bez
                tej treści. Odpowiedź na pytanie użytkownika)
-              (Dz.U. 2024 poz. 1552 ze zm.: Dz.U. 2025 poz. 1366;
+              (Dz.U. 2026 poz. 367 t.j.; po t.j. (ELI 2026-10-12): 2026 poz. 646, 815 (od 4.07.2026), 821, 864, 1123, 1281;
                kontrola graniczna, detencja cudzoziemca, zobowiązanie do powrotu,
                odmowa wjazdu, push-back, skargi, dyscyplina)
   [✓] OK    mod-ustawa-zandarmeria-wojskowa
-              (Dz.U. 2024 poz. 1654 ze zm.;
+              (Dz.U. 2026 poz. 159 t.j.; po t.j. (ELI 2026-10-12): 2026 poz. 815 (od 4.07.2026), 1281;
                czynności wobec żołnierzy, dyscyplina wojskowa, odpowiedzialność)
 
 SŁUŻBY SPECJALNE:
@@ -118,7 +119,8 @@ SŁUŻBY SPECJALNE:
                zasygnalizowane punktowo jako punkt startowy)
               (ABW i AW — Dz.U. 2026 poz. 937 t.j.; CBA — Dz.U. 2025 poz. 712 t.j. (ELI 2026-10-09); SOP;
                czynności operacyjno-rozpoznawcze, kontrola operacyjna z sądem,
-               skargi: Kolegium/Sejm/RPO/ETPC; ustawa antyterrorystyczna Dz.U. 2025 poz. 194 t.j.)
+               skargi: Kolegium/Sejm/RPO/ETPC; ustawa antyterrorystyczna Dz.U. 2025 poz. 194 t.j.;
+               ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026))
   [✓] OK    mod-ustawa-sluzby-operacyjne-retencja-danych
               (czynności niejawne, poświadczenia bezpieczeństwa, retencja danych,
                odpowiedzialność za bezprawne działania, ETPC)
@@ -131,11 +133,13 @@ INFORMACJE NIEJAWNE:
 
 OBRONA I BEZPIECZEŃSTWO PAŃSTWA:
   [✓] OK    mod-ustawa-obrona-ojczyzny-mobilizacja
-              (t.j. Dz.U. 2025 poz. 825, ze zm.: Dz.U. 2025 poz. 1014;
+              (t.j. Dz.U. 2025 poz. 825, ze zm.: Dz.U. 2025 poz. 1014, 1080;
+               2026 poz. 426, 635, 815 (od 4.07.2026); ⏳ 2026 poz. 26, 1123;
                obowiązek obrony, kwalifikacja wojskowa WKU/WKL,
                WCR, mobilizacja, świadczenia na rzecz obrony, rekwizycja)
   [✓] OK    mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna
-              (Dz.U. 2024 poz. 1907 ze zm.: Dz.U. 2025 poz. 1705; Dz.U. 2026 poz. 646;
+              (Dz.U. 2024 poz. 1907 ze zm.: Dz.U. 2025 poz. 1705 (⏳ od 1.01.2027); Dz.U. 2026 poz. 646;
+               Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 27: art. 5 ust. 2, 15, 38, 40, 44);
                M.P. 2025 poz. 541 — Program Ochrony Ludności 2025–2026;
                obowiązki JST i przedsiębiorców, alerty RCB)
 
@@ -159,13 +163,15 @@ BROŃ CYWILNA — POZWOLENIA:
                domowej [art. 19a], strzelnice [art. 45-49], przepisy karne
                ustawy [art. 50-51])
               (t.j. Dz.U. 2024 poz. 485; ⚠️ NIE MYLIĆ z ustawą o środkach
-               przymusu bezpośredniego i broni palnej — Dz.U. 2026 poz. 244,
+               przymusu bezpośredniego i broni palnej — Dz.U. 2026 poz. 244
+               ze zm. 2026 poz. 737, 815 (od 4.07.2026),
                mod-ustawa-policja — tamta dotyczy UZBROJENIA SŁUŻB)
 
 OCHRONA PRZECIWPOŻAROWA:
   [✓] OK    mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa
               (PSP — Dz.U. 2025 poz. 1312 t.j.; ochrona przeciwpożarowa —
-               Dz.U. 2025 poz. 188 t.j.; OSP — Dz.U. 2025 poz. 244 t.j.;
+               Dz.U. 2025 poz. 188 t.j. ze zm. Dz.U. 2026 poz. 815 (od 4.07.2026);
+               OSP — Dz.U. 2025 poz. 244 t.j.;
                WARN-29 zamknięty 2026-07-07 — trzy akty, jeden moduł domenowy;
                dyscyplinarka PSP rozdz. 11, status stowarzyszeniowy OSP,
                obowiązki właściciela obiektu w zakresie ppoż.)

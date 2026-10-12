@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.223 (2026-10-12b, AUDYT-2026-10-12b): SKILL.md MONITORING: Dz.U. 2026 poz. 646 — w życie 29.05.2026 (było „OCZEKUJE”); dodana Dz.U. 2026 poz. 815 (zarządzanie kryzysowe i 26 innych ustaw, w mocy 4.07.2026, art. 73). ELI 2026-10-12.
+
 - 6.222 (2026-10-12a, AUDYT-2026-10-12a): wpis dziennika — uwagi zgłaszającego do #109 (walidator na Windows, dwa wzory zapisu w pisma-procesowe-v3) i #110 (porównanie agentów); zmiany w shared 3.99.31 i pisma-procesowe-v3 5.41.
 
 - 6.221 (2026-10-11b, AUDYT-2026-10-11b, zewnętrzne code review): T48 `check_testy_skilli.py` — testy jednostkowe skilli (4 katalogi, 142 testy; 0 testów = FAIL); T49 `test_mutacje_zestawu.py` — 31 mutacji, każdy bloker (poza T19b, T30) musi wykryć wprowadzony defekt, kontrola na czystej kopii; blokerami wszystkie testy deterministyczne offline (dodane T2, T9, T11–T14, T17, T23, T32, T42, T47–T49, MOCK; poza: T3, T8, T15, T33). CI (`f138-structural-audit.yml`): job `regression-suite` uruchamia pełny zestaw.

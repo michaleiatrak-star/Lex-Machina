@@ -50,7 +50,7 @@ BAS-120  Powierzenie cudzoziemcowi nielegalnego wykonywania pracy
   web_search: "powierzenie pracy cudzoziemcowi nielegalna ustawa definicja sankcje 2025"
 
 BAS-122  Żołnierz (definicja ustawowa)
-  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (**Dz.U. 2025 poz. 825 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
+  Kierunek: ustawa o obronie Ojczyzny art. 4 pkt 1 (**Dz.U. 2025 poz. 825 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 7 nowelizacji po tekście jednolitym (ELI 2026-10-12: Dz.U. 2025 poz. 1014, 1080; 2026 poz. 26, 426, 635, 815 — od 4.07.2026, zmienia tylko art. 650; 1123) — weryfikuj)
   web_search: "żołnierz definicja ustawa o obronie ojczyzny 2025"
 
 BAS-123  Choroba zawodowa

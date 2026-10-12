@@ -1,5 +1,7 @@
 # CHANGELOG — dr-13-sluzby-bezpieczenstwo-informacje-niejawne
 
+- 3.18 (2026-10-12b, AUDYT-2026-10-12b): Zmiany z Dz.U. 2026 poz. 815 (od 4.07.2026) w metrykach Policji, SG, ŻW, SOP, obrony Ojczyzny, ochrony ludności, śpbp, ppoż., ustawy antyterrorystycznej (MAPA-AKTOW, SKILL.md, moduły); ⛔ SKILL.md: Policja, SG, ŻW — t.j. 2025/636, 2026/367, 2026/159 (było 2024/1589, 1552, 1654); mod-PSP: art. 14fa ust. 3 dosłownie. ELI 2026-10-12.
+
 - 3.17 (2026-10-09g, AUDYT-2026-10-09g): ⛔ SKILL.md: ABW i AW — t.j. 2026/937, CBA — t.j. 2025/712 (było „ABW 2024/1183; AW, CBA 2024/1392” — obwieszczenie MF i rozp. RM o stanie klęski); poprzedni t.j. CBA to 2024/184. ELI 2026-10-09.
 
 - 3.16 (2026-10-09f, AUDYT-2026-10-09f): ⛔ mod-ustawa-straz-graniczna: „ustawa o udzielaniu ochrony cudzoziemcom — Dz.U. 2024 poz. 1546” to t.j. rozp. RM o zaświadczeniach de minimis — poprawione na t.j. 2026/862 (ELI 2026-10-09).

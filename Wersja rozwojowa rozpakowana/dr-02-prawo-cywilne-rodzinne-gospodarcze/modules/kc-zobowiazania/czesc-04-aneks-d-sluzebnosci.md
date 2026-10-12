@@ -168,11 +168,12 @@ STOSUJE SIĘ WPROST tylko do elektryczności/gazu/wody/ciepła.**
   Megaustawy, druga, równoległa "opłata za służebność" nie ma podstawy.
 □ **Ustawa Prawo telekomunikacyjne — ⛔ UCHYLONA, ZASTĄPIONA 10.11.2024
   r.** przez **ustawę z 12.07.2024 — Prawo komunikacji elektronicznej**
-  (Dz.U. 2024 poz. 1221). Stary art. 140 Prawa telekomunikacyjnego
+  (Dz.U. 2024 poz. 1221; brak t.j.; zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1296). Stary art. 140 Prawa telekomunikacyjnego
   (lex specialis regulujący dostęp węższy niż KC, TYLKO dla kabli/słupów
   telekomunikacyjnych, na podstawie umowy i za wynagrodzeniem) **NIE
   obowiązuje w tym brzmieniu/numeracji od 10.11.2024** — jego odpowiednik
-  w nowej ustawie **wymaga odczytu wprost z Dz.U. 2024 poz. 1221 (numer
+  w nowej ustawie **wymaga odczytu wprost z Dz.U. 2024 poz. 1221 ze zm. (zob. wyżej,
+  m.in. Dz.U. 2026 poz. 815, od 4.07.2026) (numer
   artykułu NIE ustalony w tej sesji)** — jeśli powołujesz się na "art.
   140 Prawa telekomunikacyjnego" w piśmie z datą po 10.11.2024, to
   odesłanie jest NIEAKTUALNE i wymaga korekty na aktualną podstawę z PKE.

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.48 (2026-10-12b, AUDYT-2026-10-12b): Ochrona przyrody: nowy t.j. Dz.U. 2026 poz. 1315 (ogł. 9.10.2026; obejmuje zm. 426, 737, 912) w MAPA-AKTOW i modułach POŚ; ⛔ mod-POS: „Prawo ochrony środowiska — Dz.U. 2026 poz. 670” → 2025 poz. 647 (670 to t.j. ustawy o udostępnianiu informacji o środowisku); zmiany po t.j. z 2026/815: Prawo wodne, odpady, drogi, kolej, śpbp (katalog art. 11, 12, 47 w mod-lowieckie-straz-lowiecka-PSL, pkt 18–23 z t.j. 2026/244), ochrona ludności. ELI 2026-10-12.
+
 - 3.47 (2026-10-09g, AUDYT-2026-10-09g): Transport (MAPA-AKTOW): nowelizacje po t.j. z datami z przepisów o wejściu w życie — transport drogowy, drogi publiczne, kolejowy, Prawo lotnicze, Kodeks morski; POŚ 10 (+1 ⏳), UOOŚiS 2 (+1 ⏳); ⛔ mod-PrWodne: Prawo wodne t.j. 2025/960 (było 2024/1773 — t.j. ustawy o minimalnym wynagrodzeniu); ⛔ ZRID t.j. 2024/311 (było 2024/1641 — rozp. RM). ELI 2026-10-09.
 
 - 3.46 (2026-10-09f, AUDYT-2026-10-09f): mod-ustawa-architekci-inzynierowie: odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (IARP, PIIB).

@@ -39,7 +39,7 @@ odpowiedzialność za szkodę w środowisku, predykcja wyniku.
 |---|---|---|
 | UOOŚiS | **Dz.U. 2026 poz. 670** ✅ [VER] RZĄD 1 — najnowszy | **1**: Dz.U. 2026 poz. 1097 |
 | POŚ | **Dz.U. 2025 poz. 647** ✅ [VER] RZĄD 1 — najnowszy | **9**: Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982 |
-| Ustawa o ochronie przyrody | **Dz.U. 2026 poz. 13** ✅ [VER] RZĄD 1 — najnowszy | **3**: Dz.U. 2026 poz. 426, 737, 912 |
+| Ustawa o ochronie przyrody | **Dz.U. 2026 poz. 1315** t.j. (ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912) (ELI 2026-10-12) | **0** |
 | KK (art. 181–188a) | **Dz.U. 2025 poz. 383** ✅ [VER] RZĄD 1 — najnowszy | **4**: Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988 |
 | KPA | **Dz.U. 2025 poz. 1691** ✅ [VER] RZĄD 1 — najnowszy | **0** |
 
@@ -168,13 +168,13 @@ OBSZARY SPECJALNEJ OCHRONY PTAKÓW (OSO) i SPECJALNEJ OCHRONY SIEDLISK (SOO):
   → DŚU dla inwestycji na obszarach Natura 2000 lub w sąsiedztwie: zawsze wymagana OOŚ
   → Organ: RDOŚ (dla I grupy) lub uzgodnienie RDOŚ (dla II grupy)
   → Zakaz pogarszania stanu siedlisk i gatunków chronionych (art. 33 ustawy o ochr. przyrody
-    Dz.U. 2026 poz. 13 t.j.)
+    Dz.U. 2026 poz. 1315 t.j.)
 
 DEROGACJE (wyjątkowe zezwolenia na odstępstwo):
   → RDOŚ może zezwolić gdy: nadrzędny interes publiczny + brak alternatyw + kompensacja
   → Decyzja RDOŚ → podlega kontroli WSA
 
-⚠️ Weryfikuj ustawa o ochronie przyrody: Dz.U. 2026 poz. 13 t.j. z 08.01.2026 w ELI (RZĄD 1).
+⚠️ Weryfikuj ustawa o ochronie przyrody: Dz.U. 2026 poz. 1315 t.j. (ogł. 9.10.2026) w ELI (RZĄD 1).
 ```
 
 ---

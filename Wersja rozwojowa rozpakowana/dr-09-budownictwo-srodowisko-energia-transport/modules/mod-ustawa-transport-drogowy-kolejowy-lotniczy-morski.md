@@ -3,9 +3,9 @@
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 **Źródło weryfikacji:**
 - Transport drogowy: Dz.U. 2025 poz. 1490 t.j. ze zm. ✅ VER: 2026-06-05
-- Drogi publiczne: **Dz.U. 2025 poz. 889 t.j.** z 26.06.2025 ✅ VER: 2026-06-05
+- Drogi publiczne: **Dz.U. 2025 poz. 889 t.j.** z 26.06.2025 ✅ VER: 2026-06-05; ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — dodany art. 20i: wojewoda „w drodze rozporządzenia porządkowego, po zasięgnięciu opinii zarządcy drogi" może w sytuacji kryzysowej wprowadzić „czasowe ograniczenia w korzystaniu z dróg publicznych, w tym czasowo wyłączyć je z ruchu"), 982 (od 21.09.2026)
 - Specustawa drogowa ZRID: Dz.U. 2024 poz. 311 t.j. ze zm. ✅ VER: 2026-06-05
-- Transport kolejowy: **Dz.U. 2025 poz. 1234 t.j.** z 01.09.2025 ✅ VER: 2026-06-05
+- Transport kolejowy: **Dz.U. 2025 poz. 1234 t.j.** z 01.09.2025 ✅ VER: 2026-06-05; ⏳ Po t.j.: Dz.U. 2026 poz. 41, 815 (od 4.07.2026 — dodany art. 29g: wojewoda „w drodze rozporządzenia porządkowego, po zasięgnięciu opinii zarządcy infrastruktury kolejowej" może w sytuacji kryzysowej „wprowadzić czasowe ograniczenia w dostępie do infrastruktury kolejowej, w tym całkowicie wyłączyć dostęp do infrastruktury kolejowej"), 912
 - Prawo lotnicze: Dz.U. 2025 poz. 1431 t.j. — VER RZĄD 1: ELI, 2026-08-26
 - Elektromobilność: **Dz.U. 2026 poz. 1243 t.j.** (obwieszczenie z 1.09.2026; poprzedni t.j. 2024/1289 wygasł) ✅ [VER] RZĄD 1 2026-10-04
 - Kodeks morski: Dz.U. 2023 poz. 1309 t.j. ze zm. ⛔ [POPRAWKA 2026-08-15n — BYŁO 2023.1523; poz. 1523/2023 to ustawa o delegowaniu kierowców w transporcie drogowym, nie Kodeks morski]
@@ -50,7 +50,7 @@ Mandat karny (art. 96 KPW): naruszenia z art. 92f ust. 1 i zał. nr 1 ustawy
 
 ---
 
-## 3. DROGI PUBLICZNE (Dz.U. 2025 poz. 889)
+## 3. DROGI PUBLICZNE (Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815, 982)
 
 ### Kategorie dróg i zarządcy
 
@@ -122,7 +122,7 @@ Prawo wejścia na teren: natychmiast po rygorzę natychmiastowej wykonalności
 
 ---
 
-## 5. TRANSPORT KOLEJOWY (Dz.U. 2025 poz. 1234)
+## 5. TRANSPORT KOLEJOWY (Dz.U. 2025 poz. 1234 ze zm. 2026 poz. 41, 815, 912)
 
 ### Organy i licencje
 

@@ -1,6 +1,6 @@
 # mod-rzeczy-znalezione-zasiedzenie
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-18
+**Wersja:** 1.1 | **Dodano:** 2026-07-18 | **Aktualizacja:** 2026-10-12 (Dz.U. 2026 poz. 184)
 **Rola w systemie:** odpowiedź na wskazanie użytkownika ("rzeczy
 znalezione, przywłaszczenie mienia i zasiedzenie"). Stan przed tym
 modułem: (1) rzeczy znalezione — CAŁKOWITA LUKA, ustawa z 2015 r. nigdzie
@@ -10,43 +10,89 @@ złej wiary, doliczania posiadania, ograniczeń rolnych; (3) przywłaszczenie
 mienia — JUŻ DOBRZE POKRYTE karnie (art. 284 KK w BLOK A/L kwalifikatora,
 art. 125 KW) — potwierdzone, bez potrzeby duplikacji, patrz sekcja 3.
 
-> ✅ **METRYKA RZĄD 1, VER 2026-08-28:** ustawa o rzeczach znalezionych — **Dz.U. 2023 poz. 501 t.j. ze zm.**; KC — **Dz.U. 2026 poz. 795 t.j.**. Fresh hard gate pozostaje obowiązkowy dla brzmienia konkretnego przepisu.
+> ✅ **METRYKA (ELI 2026-10-12):** ustawa o rzeczach znalezionych — **Dz.U. 2023 poz. 501 t.j.**; ⏳ po t.j.: **Dz.U. 2026 poz. 184** (ustawa z 23.01.2026, ogł. 18.02.2026, w mocy od 19.05.2026 — art. 4). KC — **Dz.U. 2026 poz. 795 t.j.** (brak zmian po t.j.; art. 187 § 1–2 w brzmieniu nadanym art. 2 ustawy 2026/184). Fresh hard gate pozostaje obowiązkowy dla brzmienia konkretnego przepisu.
+>
+> ⛔ **PRAWO INTERTEMPORALNE (art. 3 ustawy 2026/184):** „Do rzeczy znalezionych przed dniem wejścia w życie niniejszej ustawy stosuje się przepisy dotychczasowe.” Rozstrzyga **data znalezienia**: przed 19.05.2026 — stan dawny (terminy z art. 187 KC: rok / 2 lata; właściwy wyłącznie starosta miejsca znalezienia); od 19.05.2026 — stan poniżej.
 
 ---
 
-## CZĘŚĆ A — RZECZY ZNALEZIONE (ustawa z 20.02.2015 r., **Dz.U. 2023 poz. 501 t.j. ze zm.**, VER ELI 2026-08-28)
+## CZĘŚĆ A — RZECZY ZNALEZIONE (ustawa z 20.02.2015 r., **Dz.U. 2023 poz. 501 t.j.**, zm. **Dz.U. 2026 poz. 184** od 19.05.2026, ELI 2026-10-12)
 
 ### 1. Podstawowy obowiązek znalazcy (art. 183-187 KC + ustawa szczegółowa)
 
 ```
 □ Znalazca NIEZWŁOCZNIE zawiadamia osobę uprawnioną do odbioru (jeśli
-  zna jej tożsamość/miejsce pobytu) LUB właściwego STAROSTĘ
+  zna jej tożsamość/miejsce pobytu) LUB właściwego STAROSTĘ — art. 5
+  ust. 1: „starostę właściwego ze względu na miejsce znalezienia rzeczy
+  (właściwy starosta)”
+□ (zm. 2026/184, od 19.05.2026) art. 5 ust. 6: zamiast właściwego
+  starosty znalazca może zawiadomić starostę / oddać rzecz staroście
+  „właściwemu ze względu na miejsce swojego zamieszkania”; ten przesyła
+  odpis protokołu i rzecz właściwemu staroście (art. 5 ust. 7)
+□ (zm. 2026/184) art. 5 ust. 3: pieniądze, papiery wartościowe,
+  kosztowności, rzeczy o wartości historycznej/naukowej/artystycznej —
+  ODDAJE SIĘ niezwłocznie właściwemu staroście, „chyba że znalezione
+  zostały jedynie pieniądze, a ich kwota nie przekracza 5 % minimalnego
+  wynagrodzenia za pracę [...] obowiązującego w dniu znalezienia
+  pieniędzy” (waluta obca — równowartość wg kursu średniego NBP)
+□ (zm. 2026/184) art. 12 ust. 4: starosta może odmówić przyjęcia rzeczy
+  o szacunkowej wartości do 5 % minimalnego wynagrodzenia, chyba że to
+  rzecz o wartości historycznej/naukowej/artystycznej lub dokument
+  zawierający dane osobowe
 □ Jeśli przechowanie/oddanie rzeczy jest NIEMOŻLIWE albo połączone z
   NIEBEZPIECZEŃSTWEM pogorszenia, TRUDNOŚCIAMI lub ZNACZNYMI KOSZTAMI —
   znalazca MOŻE ograniczyć się do WSKAZANIA miejsca, w którym rzecz się
   znajduje (osobie uprawnionej, staroście lub zarządcy)
-□ PROCEDURA U STAROSTY: protokół + poświadczenie przyjęcia zawiadomienia
-  (z danymi znalazcy, opisem rzeczy, czasem/miejscem znalezienia) +
-  pouczenie o prawie do znaleźnego i zasadach nabycia własności
+□ PROCEDURA (art. 13 ust. 1–2, zm. 2026/184): protokół sporządza
+  właściwy starosta, starosta miejsca zamieszkania znalazcy, jednostka
+  Policji albo Żandarmerii Wojskowej — także przy samym wskazaniu
+  miejsca rzeczy; w protokole dane znalazcy, opis rzeczy, czas/miejsce
+  znalezienia, pouczenie o znaleźnym i zasadach nabycia własności;
+  żądanie znaleźnego — wzmianka w protokole; odpis na żądanie znalazcy
+□ OGŁOSZENIE (art. 15 ust. 3, zm. 2026/184): przy wartości > 5 %
+  minimalnego wynagrodzenia i braku możliwości doręczenia wezwania —
+  wywieszenie na tablicy przez 6 miesięcy od dnia znalezienia + BIP
+  w terminie 3 dni roboczych; dane także w portalu otwartych danych
+  (art. 15 ust. 5–7)
 ```
 
 ### 2. Kategorie szczególne wymagające odrębnego postępowania
 
 ```
-□ BROŃ, AMUNICJA, MATERIAŁY WYBUCHOWE lub rzecz, której oddanie
-  wiązałoby się z ZAGROŻENIEM życia/zdrowia — zawiadamia się właściwego
-  ZARZĄDCĘ (miejsca publicznego/środka transportu), nie starostę wprost
-□ SPRZĘT/EKWIPUNEK WOJSKOWY, dokumenty wojskowe (legitymacja, książeczka,
-  karta powołania) — starosta niezwłocznie oddaje odpowiednim organom
-  wojskowym
+□ BROŃ, AMUNICJA, MATERIAŁY WYBUCHOWE, inna rzecz wymagająca pozwolenia
+  lub rzecz, której oddanie wiązałoby się z ZAGROŻENIEM życia/zdrowia —
+  (zm. 2026/184) art. 6: znalazca „niezwłocznie zawiadamia o miejscu,
+  w którym rzecz się znajduje, jednostkę organizacyjną Policji”, a
+  Policja zawiadamia właściwego starostę. W budynku publicznym / środku
+  transportu publicznego — zawiadamia się właściwego zarządcę, a Policję
+  zawiadamia zarządca (art. 7 ust. 2)
+□ RZECZ ZNALEZIONA W BUDYNKU PUBLICZNYM / środku transportu publicznego —
+  oddaje się zarządcy (art. 7 ust. 1); (zm. 2026/184) zarządca wzywa
+  znaną osobę uprawnioną albo zamieszcza ogłoszenie na swojej stronie
+  (art. 7 ust. 1a), a po 30 dniach przekazuje rzecz właściwemu staroście
+  (art. 7 ust. 1b)
+□ SPRZĘT/EKWIPUNEK WOJSKOWY — (zm. 2026/184) art. 5 ust. 4: oddaje się
+  „właściwemu staroście albo najbliższej jednostce organizacyjnej
+  Żandarmerii Wojskowej”
+□ DOKUMENTY WOJSKOWE (legitymacja, książeczka, zaświadczenie, karta
+  powołania) — (zm. 2026/184) art. 5 ust. 4a: organowi wskazanemu
+  w dokumencie, a gdy dokument tego nie wskazuje — właściwemu staroście
+  albo najbliższej jednostce ŻW
 □ ZABYTKI lub MATERIAŁY ARCHIWALNE — SZCZEGÓLNY reżim: jeśli nie zostaną
   odebrane, stają się własnością SKARBU PAŃSTWA (nie znalazcy!), a
   znalazcy przysługuje NAGRODA (nie znaleźne) — wysokość określa
   rozporządzenie Ministra Kultury, uwzględniając wartość historyczną/
   naukową/artystyczną/materialną
-□ DOKUMENTY z danymi osobowymi, rzeczy umożliwiające DOSTĘP do pomieszczeń/
-  pojazdów (klucze, karty dostępu) — odrębny reżim proceduralny
-  (Rozdział 4 ustawy)
+□ DOKUMENTY z danymi osobowymi (dokument w rozumieniu art. 77³ KC) —
+  (zm. 2026/184) art. 5 ust. 3a: oddaje się niezwłocznie właściwemu
+  staroście, chyba że dokument wskazuje inny sposób postępowania
+□ DOWODY OSOBISTE, DOKUMENTY PASZPORTOWE i inne rzeczy z odrębnym trybem
+  w innych ustawach — (zm. 2026/184) art. 3 pkt 3: wyłączone spod ustawy
+□ DOKUMENTY z danymi osobowymi i rzeczy umożliwiające DOSTĘP do
+  pomieszczeń/pojazdów (klucze, karty dostępu, piloty) — (zm. 2026/184)
+  NIE przechodzą na znalazcę (art. 19 ust. 2); po upływie terminu stają
+  się własnością POWIATU (art. 187 § 2 KC), a starosta niezwłocznie je
+  NISZCZY z protokołem (art. 25a)
 ```
 
 ### 3. ⭐ ZNALEŹNE — wynagrodzenie znalazcy
@@ -68,10 +114,21 @@ WYJĄTEK: zabytki/materiały archiwalne → NAGRODA (nie znaleźne), patrz
 ### 4. ⭐⭐ NABYCIE WŁASNOŚCI PRZEZ ZNALAZCĘ (art. 187 KC) — kluczowy mechanizm
 
 ```
+⛔ ZMIANA TERMINÓW (art. 2 ustawy 2026/184, rzeczy znalezione od 19.05.2026):
+  art. 187 § 1 KC: „Rzecz znaleziona, która nie zostanie przez osobę
+  uprawnioną odebrana w ciągu 6 miesięcy od dnia doręczenia jej wezwania
+  do odbioru, a w przypadku niemożności wezwania – w ciągu roku od dnia
+  jej znalezienia, staje się własnością znalazcy, jeżeli uczynił on
+  zadość swoim obowiązkom. Jeżeli jednak rzecz została oddana staroście,
+  znalazca staje się jej właścicielem, jeżeli rzecz odebrał
+  w wyznaczonym przez starostę terminie.”
 WARUNEK CZASOWY: rzecz NIE zostanie odebrana przez osobę uprawnioną:
-  □ W CIĄGU ROKU od dnia DORĘCZENIA jej wezwania do odbioru, ALBO
-  □ W CIĄGU 2 LAT od dnia ZNALEZIENIA — gdy wezwanie było NIEMOŻLIWE
-    (brak wiedzy o tożsamości/miejscu pobytu osoby uprawnionej)
+  □ W CIĄGU 6 MIESIĘCY od dnia DORĘCZENIA jej wezwania do odbioru, ALBO
+  □ W CIĄGU ROKU od dnia ZNALEZIENIA — gdy wezwanie było NIEMOŻLIWE
+  □ rzecz znaleziona PRZED 19.05.2026 — terminy dawne: rok / 2 lata
+    (art. 3 ustawy 2026/184)
+□ (zm. 2026/184) art. 19 ust. 3: starosta wydaje znalazcy, który nabył
+  własność, zaświadczenie o upływie terminów z art. 187 § 1 KC
 WARUNEK DODATKOWY: znalazca musi UCZYNIĆ ZADOŚĆ swoim USTAWOWYM
   OBOWIĄZKOM (zawiadomienie, przechowanie itd. — sekcja 1) — brak
   dopełnienia obowiązków = brak nabycia własności mimo upływu terminu
@@ -79,8 +136,11 @@ WYJĄTEK: NIE dotyczy rzeczy wpisanej do KRAJOWEGO REJESTRU UTRACONYCH
   DÓBR KULTURY (art. 169 §3, 170 §2, 174 §2 KC, dodane nowelizacją 2015)
 JEŚLI znalazca NIE CHCE rzeczy lub NIE dopełnił obowiązków → po
   DALSZYM wezwaniu starosty (termin NIE KRÓTSZY niż 2 TYGODNIE) →
-  własność przechodzi na POWIAT (nie na Skarb Państwa, poza kategorią
-  zabytków)
+  własność przechodzi na POWIAT
+art. 187 § 2 KC (zm. 2026/184): zabytek / materiał archiwalny → SKARB
+  PAŃSTWA; klucze, karty dostępu, piloty, dokumenty z danymi osobowymi →
+  POWIAT (bez etapu znalazcy); inne rzeczy → POWIAT po upływie terminu
+  do ich odbioru przez znalazcę
 ```
 
 ### 5. Koszty i prawo zatrzymania
@@ -98,16 +158,17 @@ JEŚLI znalazca NIE CHCE rzeczy lub NIE dopełnił obowiązków → po
 ### 6. Checklist praktyczny — rzeczy znalezione
 
 ```
-□ Czy rzecz należy do kategorii SZCZEGÓLNEJ (broń, wojskowa, zabytek,
-  dane osobowe) wymagającej ODMIENNEJ procedury niż zwykłe zawiadomienie
-  starosty?
+□ DATA ZNALEZIENIA: przed czy od 19.05.2026 (art. 3 ustawy 2026/184)?
+□ Czy rzecz należy do kategorii SZCZEGÓLNEJ (broń → Policja, wojskowa →
+  starosta/ŻW, zabytek, dokument z danymi osobowymi, klucze/karty/piloty)
+  wymagającej ODMIENNEJ procedury niż zwykłe zawiadomienie starosty?
 □ Czy znalazca DOPEŁNIŁ wszystkich ustawowych obowiązków — to WARUNEK
   KONIECZNY zarówno znaleźnego, jak i nabycia własności
 □ Czy roszczenie o znaleźne zostało zgłoszone we WŁAŚCIWYM terminie
   (najpóźniej przy wydaniu rzeczy, lub miesiąc od zawiadomienia przy
   wskazaniu miejsca)?
-□ Czy upłynął termin do nabycia własności (rok od wezwania / 2 lata od
-  znalezienia) — i czy znalazca w ogóle CHCE nabyć rzecz (jeśli nie,
+□ Czy upłynął termin do nabycia własności (od 19.05.2026: 6 miesięcy od
+  wezwania / rok od znalezienia; wcześniej: rok / 2 lata) — i czy znalazca w ogóle CHCE nabyć rzecz (jeśli nie,
   przechodzi na powiat)?
 ```
 

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
 
+- 3.15 (2026-10-12b, AUDYT-2026-10-12b): mod-inwestycje-transgraniczne-FDI-BIT, MAPA-AKTOW, SKILL.md: po t.j. 2026/47 — zm. 2026/815 (art. 12d ust. 2 pkt 1, od 4.07.2026). ELI 2026-10-12.
+
 - 3.14 (2026-10-09c, AUDYT-2026-10-09c): mod-PMPP: linia „Hasła spraw” (kontrahent zagraniczny, sąd właściwy, prawo właściwe, spadek i majątek za granicą, uznanie zagranicznego wyroku). Treść prawna bez zmian.
 
 - 3.13 (2026-10-09, AUDYT-2026-10-09): ⛔ KOREKTA podmiany aktu: Traktat Waszyngtoński (NATO) to Dz.U. 2000 poz. 970 — wpis „Dz.U. 1999 nr 87 poz. 970” wskazywał w ELI rozporządzenie MF z 23.09.1999 o procedurze uszlachetniania czynnego (MAPA-AKTOW, SKILL.md, mod-NATO).

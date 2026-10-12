@@ -169,5 +169,7 @@ Ustawa o Żandarmerii Wojskowej i wojskowych organach porządkowych:
   ogłoszone 12.02.2026)
   — poprzedni t.j. Dz.U. 2024 poz. 1654 NIEAKTUALNY, zastąpiony przez t.j. 2026.159
   ✅ VER: isap.sejm.gov.pl (WDU20260000159), inforlex.pl, prawo.pl 2026-08-14 (F-57)
+  ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 8: nowe brzmienie art. 42 ust. 1–2
+    i art. 51 ust. 2–3 [katalogi ŚPB i broni palnej ŻW i wojskowych organów porządkowych]), 1281
   ⚠️ weryfikuj dalsze zm. w ELI (RZĄD 1) przed każdym powołaniem
 ```

@@ -1,7 +1,7 @@
 8e4d1ce1f72f99b1c6373a038b1d5ce317b50da9b841b0c2045e4df0a3f3ab1b  ./MAPA-AKTOW.md
 d1b8b84b8cbef170e62ceaad1d3c37824ee2ee5455432639a4fe15f780875dab  ./MAPA-POKRYCIA.md
 7114bc8b687168e76fb874a553183db97691e69a7864d60a31f348a6e408dc3f  ./PORTABILITY-MANIFEST.md
-8057b6f7ccf4bd517b8f2e986ad108f7c804e91d4f32d361a1795cb3d37c846a  ./SKILL.md
+a6322fa4dd686be4e7525be010e3b7a4944b2db906c57383c8b89e728aed72c0  ./SKILL.md
 d015e63761fe4291d6a7faa309515a05d52d9d0e65242b36d2693f056fef03b1  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 7440ab4253f3b2545e2a24aa641cc9f55e10d79588b2a519a0b49f8aec5eee3e  ./modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md
@@ -18,7 +18,7 @@ e49149224663c42f0026c70e6619b88a973d59297324e40c6dd0dc5f31ab69e7  ./modules/mod-
 22c31a26aa602adf420b8f647b65a5b76e7f27ddfdb0a306e2251649a9485d95  ./modules/mod-KK-art101-105-przedawnienie-karalnosci.md
 1ca5111f8ece5379ca0331748a0d31eb6552a856c6a7ceb5e836f0fd38c3c5a1  ./modules/mod-KK-art127-139-przeciwko-RP.md
 09763ec2380f26f9f56f97ae5ee316f35b47df42f584fc482eabf5d5936871ba  ./modules/mod-KK-art148-162-przeciwko-zyciu-zdrowiu.md
-9cf6bf7958783e263484e180b8fa245811de46fa3217802f999a89d2445e8234  ./modules/mod-KK-art163-172-bezpieczenstwo-powszechne.md
+33a8b585bf5bb720d5f176b88c1f93e897ed6cff754cfe674a5e4088255b7403  ./modules/mod-KK-art163-172-bezpieczenstwo-powszechne.md
 42942891f098f35803415ece15792da9f9879f65e3a49dd8e5cd0d23cac008fa  ./modules/mod-KK-art18-22-formy-popelnienia.md
 5f3f126116900e9575f43be8b05d55debd5bebe6bf63c81a98eb94e754f263ea  ./modules/mod-KK-art181-188a-przeciwko-srodowisku.md
 d6959a35d361bc9b73b16755a9fe96bd59431b7eb26d69be11b5c4b21519b39f  ./modules/mod-KK-art190a-stalking.md
@@ -40,7 +40,7 @@ a83d0378e0947f5a8c5895bc424cc16ef4b2914d56f746f4d4d8e8b339f6b2de  ./modules/mod-
 323e7fdadba03433b71e1d2c6be562e3d96186a9b37120f342c9ff29ac0c683e  ./modules/mod-KK-art64-recydywa.md
 97d66a8836c6eec62e0f895a7a0796e5521c705190be6cb80c634c0184335d91  ./modules/mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md
 d68ab4096b7addb609d022512a544f40d97679180ca70765f659f987a7e71344  ./modules/mod-KK-current-state-COV.md
-bd560b31412b2491b05abda11a47b8bb2592a2fb9c98998f8888fb881a945e04  ./modules/mod-KK-cyberprzestepstwa-szczegolowy.md
+064d806e5147709059e1b02a5469f850c1e7a8bdff3d58e8b0bc413b2625577a  ./modules/mod-KK-cyberprzestepstwa-szczegolowy.md
 633f56cad899c4bb0f67a3e08c721d78b7016bebc88628b3210b5919f30680c2  ./modules/mod-KK-kodeks-karny.md
 b0cb0cfeace28920c576ea904995205103b76e9f5c45b3dd282e4d27a3ea7947  ./modules/mod-KK-kwalifikator-karnomaterialny.md
 8b158b1d5a260f323bd08fd34b2c1a4b314dff301ac83649591fcc62bdab8cdc  ./modules/mod-KK-przemoc-domowa-szczegolowy.md
@@ -69,7 +69,7 @@ c1b92ee9c11b49302a1566dc24f710dfb05519b77889be5dbcd370ba2ab890d8  ./modules/mod-
 2dadd5bf13f1246285a5920c438429786068dc06c68051e2ff20756254e34543  ./modules/mod-PRD-prawo-jazdy-punkty-karne.md
 34ddd5e33da924ad6de3877835457677d7ca4b5ce5f8f9ebd557804f50370feb  ./modules/mod-czynny-zal-KK-KKS-samooskarzenie.md
 a0021075425d268ba3d7567dfb104c3c06c217b93f5fb961673a466e1d4137ef  ./modules/mod-dobrowolne-poddanie-sie-karze-KPK.md
-43911f3ea5bd95213430a5bc556172d1baec3a15e3dc83beec46ce364faa0bd9  ./modules/mod-grzywny-mandaty-szczegolowe.md
+ec38c771596fa881cce60b4a72182d2d869490f708c1573e347c38413bbeacba  ./modules/mod-grzywny-mandaty-szczegolowe.md
 7f2726f127de253b3dd8c4d8c4648fc05f9f883f552a0dd466f47b0c2754b8ac  ./modules/mod-lincz-ochrona-swiadkow-lowcy-pedofili.md
 03ef80d60d431b3e2d5229c3efb5a802273bb22e7da6c31174ba81e619c29dcc  ./modules/mod-narkomania-current-state-COV.md
 56cc89e957e306f97a62ea78802b259d80e0d9dd62bea1257757a49dcf321886  ./modules/mod-nielegalny-pobor-mediow.md
@@ -83,5 +83,5 @@ cd92c0a01a9255db6e1fa80bf81e9e05ab3ba30b16ee0d36a4a1d1e4ba13fe6b  ./modules/mod-
 a06b7d4ddee2514766e89d715d4edc82823255e29bedeaf055b8aa799c84326e  ./modules/mod-ustawa-narkomania.md
 cd2afa01cc7852747223d273f4a97af33cddc5af4fbd9310e5ad820dc6527921  ./modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md
 284436b77e82d5f5996debb93ca1141184fe701bc97b0f67cc8fff0336d40bfd  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
-23a32c2e679a99eeaf313014c66e7543e944bc275718be134f30e45813f40a82  ./references/CHANGELOG.md
+dc402734dce8b057540ec5aa6c0f535b029330bc58c73444e0a364aaa865a916  ./references/CHANGELOG.md
 c537bcd52ab8b224148b204932e65753214dbef21468654ff293799339ba752d  ./references/HISTORIA-ZMIAN-PLIKOW.md

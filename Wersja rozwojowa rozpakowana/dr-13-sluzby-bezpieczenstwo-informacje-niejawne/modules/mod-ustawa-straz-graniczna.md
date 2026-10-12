@@ -180,6 +180,9 @@ Ustawa o Straży Granicznej:
     BYŁA już odnotowana w lokalnej mapie DR-13 (audyt 2026-07-02iii),
     ale NIGDY nie trafiła do TEGO pliku — TERAZ zsynchronizowane
   → Dz.U. 2025 poz. 1366 — ⚡ zakwaterowanie funkcjonariuszy SG
+  ⏳ Po t.j.: Dz.U. 2026 poz. 646, 815 (od 4.07.2026 — art. 4: nowe brzmienie art. 10e ust. 1
+    [urządzenia uniemożliwiające telekomunikację] i art. 23 ust. 1 [ŚPB: „art. 12 ust. 1
+    pkt 1–13 i 16–23"]), 821, 864, 1123, 1281
   ✅ VER: isap.sejm.gov.pl 2026-07-21 (poprzednia weryfikacja 2026-06-05
     była NIEAKTUALNA co do numeru t.j.)
 

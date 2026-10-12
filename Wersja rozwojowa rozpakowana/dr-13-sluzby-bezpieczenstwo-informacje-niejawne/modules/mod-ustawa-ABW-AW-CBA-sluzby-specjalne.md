@@ -172,7 +172,8 @@ Ustawa o CBA: Dz.U. 2025 poz. 712 t.j. (obwieszczenie Marszałka Sejmu z 10.04.2
   ✅ VER: isap.sejm.gov.pl (WDU20250000712), infor.pl, lexlege.pl 2026-08-14 (F-57)
 Ustawa o SOP: Dz.U. 2025 poz. 34 t.j. ze zm.
   → Dz.U. 2025 poz. 1366 — zakwaterowanie funkcjonariuszy SOP
-Ustawa o działaniach antyterrorystycznych: **Dz.U. 2025 poz. 194 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a; poprzednio błędnie 2024/1474 — obwieszczenie MS o t.j. ROZPORZĄDZENIA, inny akt; ⛔ KROK 2C: nowelizacja po tekście jednolitym, Dz.U. 2026 poz. 815 — akt zmieniający) t.j. — weryfikuj
+  ⏳ Po t.j.: Dz.U. 2025 poz. 179, 718, 1366, 1823; 2026 poz. 646, 815 (od 4.07.2026 — art. 19: nowe brzmienie art. 37 ust. 1–2 [katalog ŚPB i broni palnej] i art. 39 ust. 1 [urządzenia uniemożliwiające telekomunikację]), 821, 1123, 1281
+Ustawa o działaniach antyterrorystycznych: **Dz.U. 2025 poz. 194 t.j.** ✅ [VER] RZĄD 1 2026-09-10c (F-148a; poprzednio błędnie 2024/1474 — obwieszczenie MS o t.j. ROZPORZĄDZENIA, inny akt; ⛔ KROK 2C: nowelizacja po tekście jednolitym, Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 17: uchylony art. 2 pkt 3; nowe brzmienie art. 4, art. 12 ust. 1 pkt 1–2 i ust. 2, dodane art. 12 ust. 3–4; zm. art. 5 ust. 1, 15 ust. 9, 16 ust. 1 pkt 4, 17) — akt zmieniający) t.j. — weryfikuj
   ✅ VER: isap.sejm.gov.pl 2026-06-05 (poz. ABW/AW/SOP/antyterrorystyczna nie objęte
     weryfikacją F-57 — dotyczyła wyłącznie CBA)
 
