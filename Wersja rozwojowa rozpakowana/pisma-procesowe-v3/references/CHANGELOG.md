@@ -1,5 +1,7 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.41 (2026-10-12a, AUDYT-2026-10-12a, uwaga do #109): wzory zapisu wg `shared/FORMAT-CYTOWANIA.md` — MOD-PRACODAWCA-RZECZYWISTY (art. 58 § 1 k.c.: pełny tytuł, `Dz. U. z RRRR r. poz. N; dalej: k.c.`, cytat dosłowny z t.j. ELI DU/2026/795 zamiast skróconego; `art. 23¹ k.p.`, `art. 25¹ § 1 k.p.`), MOD-DOKTRYNA (`art. X k.c.` + odesłanie do sekcji 1 zamiast `art. X KC (Dz.U. … poz. …)`). ⛔ Błąd merytoryczny w MOD-PRACODAWCA-RZECZYWISTY: I PK 241/13 był powołany jako poparcie nieważności (art. 58 § 1 k.c.), a SN w tej sprawie uchylił wyrok przyjmujący nieważność; „teza” była skróconym fragmentem uzasadnienia. Teraz: tylko definicja obejścia prawa, cytat dosłowny, WARN-ZAKRES, data słownie (SAOS 104820, 2026-10-12).
+
 - 5.40 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109 i #110): Zapis powołań wg `shared/FORMAT-CYTOWANIA.md` w W3-WERYFIKACJA (KROK 5, raport P, W3.6 + wiersz „ZAPIS F1–F9”), MOD-PRAWO, MOD-SZABLONY, MOD-BUDOWA-ARGUMENTU, MOD-ELIMINACJA-TEZ (bez „t.j.”, „Dz. U.”, „z … r.”, k.p., § 1; URL/ELI w raporcie, nie w piśmie). W Claude Code: W3.1 → `shared:weryfikator-isap`, W3.2 → `shared:weryfikator-orzeczen`, W3.7 → `shared:recenzent-niezalezny` (tylko plik pisma i akta); poza Claude Code kroki bez zmian.
 
 - 5.39 (2026-10-10b, AUDYT-2026-10-10b): W3-WERYFIKACJA KROK 1: najpierw narzędzia urzędowe (sn_/cbosa_/kio_sprawdz_sygnature), SAOS zastępczo w zasięgu.

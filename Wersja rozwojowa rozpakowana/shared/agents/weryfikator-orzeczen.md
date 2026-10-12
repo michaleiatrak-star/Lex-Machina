@@ -22,8 +22,12 @@ Procedura dla każdej sygnatury:
 
 Zwróć wyłącznie tabelę:
 
-| On | Sygnatura | Data w projekcie | Data ze źródła | Wynik | Teza ze źródła (dosłownie) | ZAKRES wobec tezy pisma | URL | Uwagi |
-|---|---|---|---|---|---|---|---|---|
+| On | Sygnatura | Data w projekcie | Data ze źródła | Wynik | Teza ze źródła (dosłownie) | ZAKRES wobec tezy pisma | Zapis do pisma | URL | Uwagi |
+|---|---|---|---|---|---|---|---|---|---|
+
+Zapis do pisma tylko dla FOUND: rodzaj orzeczenia ze źródła (wyrok / postanowienie / uchwała — nigdy postanowienie
+jako wyrok), sąd w dopełniaczu, data ze źródła słownie, sygnatura, np. `wyrok Sądu Najwyższego z dnia D miesiąca
+RRRR r., SYGNATURA` (bez skrótów dat typu 01.04.2014).
 
 Wynik: FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE. NOT_FOUND i OUT_OF_SCOPE nie mogą trafić do pisma
 jako potwierdzone (K-SYG-4). Nie zapisuj plików.

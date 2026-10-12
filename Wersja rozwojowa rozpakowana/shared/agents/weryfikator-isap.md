@@ -14,8 +14,11 @@ Instrukcje (czytaj je przed pracą; ścieżki podaje zlecający, a gdy ich brak,
 
 Procedura dla każdego powołania:
 1. Akt po ELI: `https://api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}` i `/references` (narzędzia MCP ISAP/ELI, gdy są,
-   inaczej WebFetch). Ustal ostatni tekst jednolity i akty zmieniające po nim, z datami wejścia w życie.
-2. Brzmienie jednostki odczytaj ze źródła (HTML albo PDF tekstu jednolitego; długi PDF — Bash `pdftotext`).
+   inaczej WebFetch). Ustal ostatni tekst jednolity i akty zmieniające ogłoszone po nim, z datami wejścia w życie.
+   Policz je i od razu wybierz zapis dziennika (FORMAT-CYTOWANIA, sekcja 1): do 5 — wymień, więcej — „z późn. zm.”.
+2. Brzmienie jednostki odczytaj ze źródła (HTML albo PDF tekstu jednolitego; długi PDF — Bash `pdftotext -enc UTF-8
+   -layout`). PDF zapisuj wyłącznie w katalogu tymczasowym sesji, z bezwzględną ścieżką w `curl -o`, nigdy w katalogu
+   projektu. Indeks górny bywa w PDF zapisany jako `Art. 77[2]` — w zapisie do pisma `art. 77²`.
    Cytuj dosłownie, bez parafrazy. Nowelizacje po t.j. sprawdź w tekstach aktów zmieniających.
 3. Porównaj z datą zdarzenia: które brzmienie obowiązywało; zgłoś ogłoszone zmiany z vacatio legis i przepisy
    przejściowe, także gdy nikt o nie nie pytał.

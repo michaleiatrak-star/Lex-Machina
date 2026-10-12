@@ -396,6 +396,12 @@ def raport_zapisu(text: str, quiet: bool = False) -> int:
 
 
 def main():
+    # Konsola Windows (cp1250) nie zna „✗”/„✓”: bez tego --format kończy się UnicodeEncodeError
+    # i kodem 1 zamiast 3 (zgłoszenie Kajetana Ciunelisa, #109).
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
     ap = argparse.ArgumentParser()
     ap.add_argument("--document", type=Path)
     ap.add_argument("--log", type=Path)

@@ -146,15 +146,24 @@ WARSTWA 1 — Pracodawca rzeczywisty (art. 3 k.p.) [KAT-II]
   PR-O3: SN II PK 170/11 — identyfikacja jednego z podmiotów powiązanych (web_search "II PK 170/11 SN")
   ⛔ ZAKAZ cytowania sygnatur z pamięci — każda musi być potwierdzona web_search/web_fetch na sn.pl
 
-WARSTWA 2 — Obejście prawa (art. 58 §1 k.c. w zw. z art. 300 k.p.)
-  Teza: przeniesienie pracownika do powiązanej spółki bez art. 23¹ KP i bez przerwy,
-  ze skutkiem resetowania limitu z art. 25¹ §1 KP, jest czynnością nieważną jako
+WARSTWA 2 — Obejście prawa (art. 58 § 1 k.c. w zw. z art. 300 k.p.)
+  Teza: przeniesienie pracownika do powiązanej spółki bez art. 23¹ k.p. i bez przerwy,
+  ze skutkiem resetowania limitu z art. 25¹ § 1 k.p., jest czynnością nieważną jako
   zmierzającą do obejścia normy ochronnej.
-  Podstawa: art. 58 §1 KC (Dz.U. z 2026 r. poz. 795 t.j.) — "czynność mająca
-  na celu obejście ustawy jest nieważna".
-  Orzeczenie: SN z 01.04.2014 r., I PK 241/13 — "umową mającą na celu obejście
-  prawa jest umowa, której treść formalnie nie sprzeciwia się ustawie, ale
-  w rzeczywistości zmierza do zrealizowania celu zakazanego" — WERYFIKUJ: web_search "I PK 241/13 SN"
+  Podstawa: art. 58 § 1 ustawy z dnia 23 kwietnia 1964 r. – Kodeks cywilny
+  (Dz. U. z RRRR r. poz. N; dalej: k.c.) — „Czynność prawna sprzeczna z ustawą albo
+  mająca na celu obejście ustawy jest nieważna, chyba że właściwy przepis przewiduje
+  inny skutek […]”. Rocznik, pozycję i zmiany po t.j. bierz z bieżącej weryfikacji ELI
+  (shared/FORMAT-CYTOWANIA.md, sekcja 1).
+  Orzeczenie (tylko definicja obejścia prawa): wyrok Sądu Najwyższego z dnia 1 kwietnia
+  2014 r., I PK 241/13 — fragment uzasadnienia, dosłownie: „umową mającą na celu obejście
+  prawa jest umowa, której treść z formalnego punktu widzenia nie sprzeciwia się ustawie,
+  ale w rzeczywistości zmierza do zrealizowania celu, którego osiągnięcie jest przez nią
+  zakazane”. ⚠️ WARN-ZAKRES: SN uchylił w tej sprawie wyrok przyjmujący nieważność umowy
+  zlecenia z art. 58 § 1 k.c. (spór o nadgodziny, nie art. 25¹ k.p.) — NIE powołuj go jako
+  potwierdzenia nieważności ani resetu limitu umów terminowych; na tę tezę osobne
+  orzecznictwo do art. 25¹ k.p., zweryfikowane (W3.2). Sprawdzono w SAOS 2026-10-12
+  (saos.org.pl/judgments/104820); przed użyciem potwierdź na sn.pl.
 
 WARSTWA 3 — Venire contra factum proprium (art. 8 k.p.)
   Teza: jeśli pracodawca wpisał błędny KRS na kolejnych umowach (systematycznie,

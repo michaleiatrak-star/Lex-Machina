@@ -123,6 +123,18 @@ class KontrolaZapisu(unittest.TestCase):
             self.assertEqual(run(zle).returncode, 3)
             self.assertEqual(run(dobrze).returncode, 0)
 
+    def test_cli_kod_wyjscia_3_konsola_cp1250(self):
+        # Konsola Windows: wyjście w cp1250 bez „✗”; kod nadal 3, nie 1 (UnicodeEncodeError, #109).
+        skrypt = os.path.join(os.path.dirname(os.path.abspath(__file__)), "walidator_cytowan.py")
+        with tempfile.TemporaryDirectory() as tmp:
+            zle = os.path.join(tmp, "zle.md")
+            with open(zle, "w", encoding="utf-8") as f:
+                f.write("Na podstawie art. 130 §1 KPC (Dz.U. 2025 poz. 869).")
+            env = {**os.environ, "PYTHONIOENCODING": "cp1250"}
+            run = subprocess.run([sys.executable, skrypt, "--document", zle, "--format"],
+                                 capture_output=True, env=env)
+            self.assertEqual(run.returncode, 3, run.stderr.decode("utf-8", "replace"))
+
 
 try:
     import docx  # python-docx

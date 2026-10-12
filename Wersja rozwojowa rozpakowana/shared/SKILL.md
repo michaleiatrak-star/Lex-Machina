@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.30"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.31"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.30 (2026-10-11a, AUDYT-2026-10-11a): FORMAT-CYTOWANIA.md (jedna reguła zapisu powołań wg ZTP, kontrola F1–F9), walidator_cytowan.py --format, subagenci Claude Code w agents/ (zgł. #109, #110).
+  Wersja bieżąca: 3.99.31 (2026-10-12a, AUDYT-2026-10-12a): walidator_cytowan.py na konsoli Windows (cp1250) zwraca kod 3, nie UnicodeEncodeError; agenci: liczba zmian po t.j. i zapis dziennika, PDF tylko w katalogu tymczasowym, walidator w recenzji, zapis orzeczenia z datą słownie (uwagi #109, #110).
   3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację sn.pl przechodzi człowiek, bez podmiany User-Agenta.
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)

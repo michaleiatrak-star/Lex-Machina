@@ -69942,6 +69942,14 @@ Bez nowych numerów; Dz.U. 2026 poz. 1243 — ✅ [VER] RZĄD 1 2026-10-04 (już
 Liczby plików bez zmian. Podbicia: DR-03 3.50 → **3.51**, DR-09 3.42 → **3.43**, prawo-polskie-v2 6.35 → **6.36**, audyt 6.165 → **6.166**.
 
 
+## AUDYT-2026-10-12a — uwagi zgłaszającego do #109 i #110 (6.222)
+
+- #109, Windows: `walidator_cytowan.py --format` z naruszeniami na konsoli cp1250 → UnicodeEncodeError („✗”), kod 1 zamiast 3; `test_cli_kod_wyjscia_3` nie przechodził na Windows. Odtworzone (PYTHONIOENCODING=cp1250: kod 1). Poprawka: `sys.stdout.reconfigure(encoding="utf-8")` na początku main() (propozycja zgłaszającego); test `test_cli_kod_wyjscia_3_konsola_cp1250` — bez poprawki FAIL, z poprawką 20/20 OK; self-test 32/32.
+- #109, wzory zapisu: MOD-PRACODAWCA-RZECZYWISTY:153 `art. 58 §1 KC (Dz.U. z 2026 r. poz. 795 t.j.)` → pełny tytuł i `Dz. U. z RRRR r. poz. N; dalej: k.c.`; przy okazji cytat art. 58 § 1 był skrócony bez zaznaczenia (brak „prawna sprzeczna z ustawą albo”) — teraz dosłownie z t.j. ELI DU/2026/795 (PDF, 2026-10-12; t.j. z 17.06.2026, bez zmian ogłoszonych później). MOD-DOKTRYNA:38 `art. X KC (Dz.U. ... poz. ...)` → `art. X k.c.` + odesłanie do FORMAT-CYTOWANIA sekcja 1.
+- Test agentów na wzorach z MOD-PRACODAWCA-RZECZYWISTY: weryfikator-isap — art. 58 § 1 k.c. (DU/2026/795) i art. 23¹ § 1 k.p. (DU/2026/1245) ✅, brak zmian ogłoszonych po t.j., zapis do pisma zgodny z FORMAT-CYTOWANIA. weryfikator-orzeczen — I PK 241/13: FOUND (SAOS 104820; sn.pl 403), data zgodna, ale ⛔ ZAKRES: SN uchylił wyrok przyjmujący nieważność z art. 58 § 1 k.c., spór o nadgodziny; moduł powoływał go jako poparcie nieważności, a „tezę” skrócił bez zaznaczenia → poprawione (tylko definicja obejścia, cytat dosłowny, WARN-ZAKRES).
+- #110, agenci (porównanie z plikami zgłaszającego): przejęte — liczba zmian po t.j. i wybór zapisu (≤ 5 / „z późn. zm.”), PDF tylko w katalogu tymczasowym, `Art. 77[2]` → `art. 77²` (weryfikator-isap); walidator uruchamiany w recenzji i .docx przez python-docx (recenzent-niezalezny); zapis orzeczenia z datą słownie i rodzajem ze źródła (weryfikator-orzeczen). Zostaje: dziedziczenie MCP z `disallowedTools`, werdykt PEER-OK/UWAGI/STOP z MOD-PEER-REVIEW.
+- Wersje: shared 3.99.31, pisma-procesowe-v3 5.41, audyt-systemu-v4 6.222.
+
 ## AUDYT-2026-10-11b — uwagi z zewnętrznego code review: separator tysięcy, blokada czasowa, CI (6.221)
 
 - Źródło: recenzja kodu przekazana przez właściciela (osoba z doświadczeniem ponad 1000 code review). Każda uwaga sprawdzona na `main` 8d4dbe977.

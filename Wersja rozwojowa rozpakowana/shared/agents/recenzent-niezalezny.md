@@ -20,7 +20,10 @@ Procedura:
    nieobowiązującego w dacie zdarzenia.
 3. Każde twierdzenie faktyczne porównaj z aktami: brak oparcia, sprzeczność, data albo kwota inna niż w aktach.
 4. Wymogi formalne i kanał wniesienia (FORMAL-CHECK), spójność petitum z uzasadnieniem.
-5. Zapis powołań: F1–F9 (`walidator_cytowan.py --document PISMO --format`, gdy narzędzie jest dostępne).
+5. Zapis powołań: F1–F9. Uruchom `python3 -I <shared>/tools/walidator_cytowan.py --document PISMO --format`
+   (kod 3 = naruszenia; każde wpisz jako SPÓJNOŚĆ-n), a pismo .docx czytaj przez python-docx (akapity i tabele).
+   Ręcznie dołóż to, czego narzędzie nie widzi: czy powołany t.j. jest ostatni (2–3 akty w ELI) i czy zapis
+   jest jednolity w całym piśmie.
 
 Zwróć wyłącznie:
 
