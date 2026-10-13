@@ -27,6 +27,10 @@ Sprawa wymaga [opis złożoności].
 Kontynuuję z użyciem pisma-procesowe-v3.
 ```
 
+W aplikacji Lex Machina, gdy wątek ma wybrany skill wykonawczy (pisma-proste-v2): nie pisz pisma,
+zamiast „Kontynuuję z użyciem pisma-procesowe-v3.” zakończ pytaniem „Czy przełączyć na
+pisma-procesowe-v3?” — wątek przełącza aplikacja po zgodzie użytkownika.
+
 ---
 
 ## KIEDY UŻYĆ ORZECZNICTWA

@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.41"
+version: "5.42"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -358,7 +358,15 @@ Pismo proste = spełnia WSZYSTKIE trzy warunki:
    doręczenie przez komornika (art. 139¹ KPC), sprzeciw od orzeczenia referendarza
    (art. 398²² KPC).
 
-→ TAK na wszystkie 3: zaproponuj `pisma-proste-v2` i zapytaj użytkownika.
+→ TAK na wszystkie 3: nie pisz pisma; zaproponuj `pisma-proste-v2` tym komunikatem i zapytaj użytkownika:
+
+```
+REDUKCJA DO pisma-proste-v2
+Przyczyna: [rodzaj pisma z katalogu; jedno żądanie; jedna podstawa prawna]
+Czy przełączyć na pisma-proste-v2?
+```
+
+W aplikacji Lex Machina wątek z wybranym skillem przełącza aplikacja po zgodzie użytkownika.
 → NIE na którykolwiek: przejdź do Testu C i kontynuuj model trzech wiadomości.
 
 ### Test C — Intake (dane minimalne)

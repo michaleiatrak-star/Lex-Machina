@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.29"
+version: "2.30"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."

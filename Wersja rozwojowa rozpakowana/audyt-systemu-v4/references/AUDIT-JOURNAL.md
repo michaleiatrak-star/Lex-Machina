@@ -70890,3 +70890,10 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Wynik: 6023 zgodne, 8 błędów (2 to literówki wzorca HTML), 36 braków (te same odmawia legal-cite; 34 to KP 238–241³⁰).
 - Wersje: audyt-systemu-v4 6.225, mcpb 1.3.5.
 
+## AUDYT-2026-10-13a — eskalacja i redukcja między pismami prostymi a procesowymi w trybie mechanicznym (6.226)
+
+- Problem (aplikacja Lex Machina, wątek z wybranym skillem wykonawczym): skill nie może sam wczytać pipeline'u drugiego skilla. Komunikat M7 („Kontynuuję z użyciem pisma-procesowe-v3”) obiecywał przejście, którego wątek nie wykona; odpowiedź bez sekcji pisma była blokowana. Test B w pisma-procesowe-v3 nie miał stałego komunikatu, a propozycja bez raportu CP-1a też była blokowana.
+- Zmiana w skillach: M7-eskalacja — w aplikacji z wybranym skillem pytanie o przełączenie zamiast „Kontynuuję…”; KROK 0 Test B — komunikat REDUKCJA DO pisma-proste-v2 / Przyczyna / pytanie, bez pisma. Kryteria eskalacji i Testu B bez zmian.
+- Zmiana w aplikacji (osobny PR w repozytorium aplikacji): komunikaty rozpoznawane jako oferta przełączenia (nie blokada), przełączenie wątku po zgodzie użytkownika, kontrola liczby zarzutów także przy przypiętym pisma-proste-v2.
+- Wersje: pisma-procesowe-v3 5.42, pisma-proste-v2 2.30, audyt-systemu-v4 6.226.
+
