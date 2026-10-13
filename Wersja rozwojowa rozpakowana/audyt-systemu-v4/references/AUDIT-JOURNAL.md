@@ -70890,3 +70890,9 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Wynik: 6023 zgodne, 8 błędów (2 to literówki wzorca HTML), 36 braków (te same odmawia legal-cite; 34 to KP 238–241³⁰).
 - Wersje: audyt-systemu-v4 6.225, mcpb 1.3.5.
 
+
+## AUDYT-2026-10-13a — konektory WL i KRS: osoby i adres dla pseudonimizacji (6.226)
+- Powód: aplikacja pseudonimizuje dane firmy (nazwa, adres, osoby reprezentujące) na podstawie NIP/KRS z pisma; `wl_sprawdz_nip` nie zwracał osób, `krs_lookup` adresu.
+- Zmiana: `osobyPodmiotu()` w wl (PESEL odrzucany w konektorze), `adresKRS()` w krs; testy jednostkowe bez sieci.
+- Ograniczenie: API KRS maskuje imiona i nazwiska członków organów; osoby daje tylko biała lista VAT.
+- Wersje: audyt-systemu-v4 6.226, mcpb 1.3.6.

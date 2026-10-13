@@ -1,5 +1,5 @@
 // Fixture: PRAWDZIWE odpisy aktualne KRS z 2026-09-28 (działy 1, 2, 6 + nagłówek). AUDYT-2026-09-27q.
-import { normalizujOdpowiedzKRS, normalizujReprezentacje, maskujPesel, regonPoprawny, nipPoprawny, KRS_WYSZUKIWARKA } from "./krs-mcp-server.js";
+import { normalizujOdpowiedzKRS, normalizujReprezentacje, maskujPesel, adresKRS, regonPoprawny, nipPoprawny, KRS_WYSZUKIWARKA } from "./krs-mcp-server.js";
 import assert from "node:assert";
 import { readFileSync } from "node:fs";
 const F = JSON.parse(readFileSync(new URL("./fixtures/krs_odpisy.json", import.meta.url)));
@@ -32,4 +32,9 @@ const F = JSON.parse(readFileSync(new URL("./fixtures/krs_odpisy.json", import.m
   assert.ok(regonPoprawny("610188201") && regonPoprawny("61018820100000") && !regonPoprawny("610188202"));
   assert.ok(nipPoprawny("7740001454") && !nipPoprawny("7740001455"));
   console.log("OK: wyszukiwarka KRS jako źródło, odpis aktualny (P/S) do podglądu, sumy NIP/REGON"); }
+{ assert.strictEqual(adresKRS({ ulica: "CHEMIKÓW", nrDomu: "7", miejscowosc: "PŁOCK", kodPocztowy: "09-411" }), "CHEMIKÓW 7, 09-411 PŁOCK");
+  assert.strictEqual(adresKRS({ ulica: "DŁUGA", nrDomu: "5", nrLokalu: "3", miejscowosc: "KIELCE", kodPocztowy: "25-001" }), "DŁUGA 5/3, 25-001 KIELCE");
+  assert.strictEqual(adresKRS(undefined), null);
+  assert.strictEqual(normalizujOdpowiedzKRS(F.pkp_0000019193, "0000019193").result.adres, null, "brak działu adresu w fixture → null");
+  console.log("OK: adres siedziby z działu 1"); }
 console.log("\nWSZYSTKIE TESTY JEDNOSTKOWE (bez sieci) PRZESZŁY");
