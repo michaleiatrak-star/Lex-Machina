@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.30"
+version: "2.31"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -47,6 +47,7 @@ wyszukiwaniem orzeczeń, wskaźnikiem pokrycia przesłanek i systemem alertów.
 5. **Wyszukaj orzeczenia** — portale priorytetowe i sieć lokalna, 5 kroków (Faza 1, 1-L);
    gdy cel to dopasowanie DOSŁOWNEJ tezy/uzasadnienia — najpierw pełnotekstowo (Faza 1-T)
 6. **Wyszukaj kierunek przeciwny** — test równoważny pod kątem linii przeciwnej (Faza 1-D)
+   ⛔ Przed prezentacją każdego trafienia: zgodność z pytaniem i treść tylko z pobranego dokumentu (Faza 1-Z)
 7. **Skategoryzuj z alertami** — taksonomia 8 kategorii + BILANS (Faza 2)
 8. **Zweryfikuj aktualność linii** — jednolitość, zmiany prawa (Faza 3)
 9. **Zrealizuj PLAN MINIMUM** — 5 wspierających + 5 linii przeciwnej z przesłankami rozstrzygnięcia dla każdego (Zasada 11)
@@ -963,6 +964,45 @@ KROK 4 — Policz i przekaż do Fazy 2/4:
 Jeśli profil oczekiwanego rozstrzygnięcia nie został ustalony w Fazie 0-C
 (pytanie neutralne) → pomiń tę fazę, prowadź wyszukiwanie bez podziału na
 kierunki, kategoryzuj wyłącznie wg Fazy 2 (Kat. 3A/3B linia większościowa/mniejszościowa).
+
+---
+
+## Faza 1-Z — Kontrola zgodności trafienia z pytaniem (przed prezentacją)
+
+⛔ Klasa błędu (2026-10-13, aplikacja 0.1.27): prawdziwa sygnatura WSA
+(II SAB/Po 175/26, bezczynność w udostępnieniu informacji publicznej) podana
+jako orzeczenie o halucynacjach AI pełnomocnika — treść dopisana z pytania,
+nie z pobranego dokumentu.
+
+Przed przedstawieniem każdego orzeczenia jako trafienia:
+
+1. **Tożsamość z pobranego tekstu** — sąd, sygnatura, data, forma i
+   przedmiot sprawy odczytane z dokumentu w tej sesji. Sama zgodność sygnatury
+   z rekordem nie potwierdza tematu.
+2. **Treść tylko z dokumentu** — opis orzeczenia (czego dotyczy, co sąd uznał)
+   wyłącznie z odczytanej metryki, sentencji lub uzasadnienia. Pojęcie z
+   pytania, którego nie ma w tekście, nie trafia do opisu.
+3. **Każde kryterium pytania osobno** — np. „AI”, „pełnomocnik zawodowy”,
+   „sąd inny niż SN”. Orzeczenie spełniające część kryteriów opisz jako
+   częściowe z nazwaniem brakującego; niespełniające — nie jest trafieniem.
+4. **Brak trafień** = wprost: „nie znalazłem orzeczenia spełniającego te
+   kryteria” + co sprawdzono (`OUT_OF_SCOPE`, nie dowód braku orzeczenia).
+   Ponowna prośba użytkownika o „inny wyrok” nie uzasadnia dopasowania
+   zastępczego.
+5. **Bez zapowiedzi zamiast wyniku** — „szukam teraz…”, „przeszukuję…” bez
+   wyniku w tej samej odpowiedzi jest zakazane: wykonaj wyszukiwanie narzędziami
+   i podaj wynik albo brak trafień.
+6. **Pytanie „co zawiodło”** — odpowiadaj z faktów: rejestr aplikacji przy
+   poprzedniej odpowiedzi (`[Rejestr aplikacji dla tej odpowiedzi: …]`) i
+   faktycznie wykonane wywołania. Bez domysłów („prawdopodobnie”); czego nie
+   widać w rejestrze, nazwij jako nieustalone.
+
+Aplikacja Lex Machina sprawdza punkt 2 mechanicznie
+(`CASE_CONTENT_GROUNDING`: pojęcia z pytania przypisane orzeczeniu i cytaty
+podane jako słowa sądu muszą występować w tekście pobranym w tej turze;
+rozjazd = runda korekty, potem ostrzeżenie przy odpowiedzi). To kontrola
+leksykalna: zgodność merytoryczną tezy z uzasadnieniem nadal oceniasz sam
+(Zasada 2B, Faza 1-D).
 
 ---
 

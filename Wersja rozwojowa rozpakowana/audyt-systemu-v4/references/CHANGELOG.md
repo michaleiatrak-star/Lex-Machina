@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.229 (2026-10-13d, AUDYT-2026-10-13d): błędy wyszukiwania orzeczeń z aplikacji 0.1.27 — orzeczenia-sadowe-v2 2.31 Faza 1-Z (zgodność trafienia z pytaniem, treść tylko z pobranego dokumentu, brak dopasowania zastępczego, zakaz zapowiedzi zamiast wyniku, analiza błędu z rejestru aplikacji); wpis w AUDIT-JOURNAL.
+
 - 6.228 (2026-10-13c, AUDYT-2026-10-13c): wyszukiwanie orzeczeń i przepisów — wyniki wyszukiwarki, LEX, Legalis i portali jako tropy weryfikowane według gradacji źródeł; usunięty ✅ [VER: web-fallback]; NSA/WSA jako snapshot w orzeczenia-sadowe-v2 i HIERARCHIA-ZRODEL; fixture `wl-example/test_normalizacja.mjs` z PESEL o niepoprawnej sumie kontrolnej (T40/T49 z 6.226); wpis w AUDIT-JOURNAL.
 
 - 6.227 (2026-10-13b, AUDYT-2026-10-13b): eskalacja i redukcja między pisma-proste-v2 a pisma-procesowe-v3 w trybie mechanicznym aplikacji — stałe komunikaty w M7-eskalacja i KROK 0 Test B; wpis w AUDIT-JOURNAL.

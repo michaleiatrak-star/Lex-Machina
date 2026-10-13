@@ -70911,3 +70911,12 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - orzeczenia-sadowe-v2 F-3: tropy z LEX, Legalis i serwisów wtórnych (sygnatura i data, Dz.U. nowelizacji, data wejścia w życie) — weryfikacja w bazie urzędowej i ELI; trop niepotwierdzony = ⚠️. F-1: brak web_search nie wyłącza rejestrów urzędowych. Google → `web_search` z `site:`.
 - Aplikacja (osobny PR): web_search zwraca wyciągnięte tropy z narzędziem weryfikacji; strona logowania LEX/Legalis rozpoznawana przy odczycie.
 - Wersje: shared 3.99.34, orzeczenia-sadowe-v2 2.30, audyt-systemu-v4 6.228.
+
+## AUDYT-2026-10-13d — wyszukiwanie orzeczeń: treść z dokumentu, ciągłość dopytań, G8 dla uchwały SN (6.229)
+
+- Źródło: sesja użytkownika w aplikacji 0.1.27 (wyszukiwanie wyroku o halucynacjach AI pełnomocnika, potem orzeczeń SN o neosędziach).
+- ⛔ Treść dopisana do prawdziwej sygnatury: II SAB/Po 175/26 (WSA Poznań, bezczynność w udostępnieniu informacji publicznej) przedstawiony jako orzeczenie o AI; G8 nie rozpoznawał sygnatur NSA/WSA z częścią „/Po”, „/Wa”, więc odpowiedź przeszła bez kontroli. orzeczenia-sadowe-v2 2.31 Faza 1-Z; aplikacja: CASE_CONTENT_GROUNDING (pojęcia z pytania przypisane orzeczeniu muszą być w tekście pobranym w turze; runda korekty, potem ostrzeżenie).
+- ⛔ Dopytanie „wyszukaj innego wyroku” uruchamiało analizę sądową (SD-VER bez plików), krótkie „ok, robisz to.” gubiło skill wyszukiwania. Aplikacja: wzorce wyszukania orzeczenia z kilkoma słowami między czasownikiem a „wyrokiem” oraz „inny wyrok”; krótkie dopytanie dziedziczy skill wykonawczy wcześniejszej prośby.
+- ⛔ Uchwała SN I KZP 3/24 zweryfikowana R1, a G8 MISSING_LEDGER_RECORD i zamknięta sesja: rekord pod brzmieniem modelu („uchwała SN, sygn. …”), odpowiedź „sygn. …”. Aplikacja: dopasowanie po sygnaturze znormalizowanej przy weryfikacji (tylko rekord pełnego tekstu).
+- Odpowiedzi-zapowiedzi („Szukam teraz…”, „Przeszukuję bazę pomocniczą SAOS…”) bez wyniku: aplikacja wykonuje dodatkową rundę z narzędziami. Skrócony disclaimer modelu zastępowany tekstem z shared/DISCLAIMER.md. Historia wątku niesie rejestr aplikacji każdej odpowiedzi.
+- Wersje: orzeczenia-sadowe-v2 2.31, audyt-systemu-v4 6.229.
