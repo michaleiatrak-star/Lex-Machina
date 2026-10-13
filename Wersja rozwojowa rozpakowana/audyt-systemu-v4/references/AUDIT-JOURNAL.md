@@ -70920,3 +70920,12 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - ⛔ Uchwała SN I KZP 3/24 zweryfikowana R1, a G8 MISSING_LEDGER_RECORD i zamknięta sesja: rekord pod brzmieniem modelu („uchwała SN, sygn. …”), odpowiedź „sygn. …”. Aplikacja: dopasowanie po sygnaturze znormalizowanej przy weryfikacji (tylko rekord pełnego tekstu).
 - Odpowiedzi-zapowiedzi („Szukam teraz…”, „Przeszukuję bazę pomocniczą SAOS…”) bez wyniku: aplikacja wykonuje dodatkową rundę z narzędziami. Skrócony disclaimer modelu zastępowany tekstem z shared/DISCLAIMER.md. Historia wątku niesie rejestr aplikacji każdej odpowiedzi.
 - Wersje: orzeczenia-sadowe-v2 2.31, audyt-systemu-v4 6.229.
+
+## AUDYT-2026-10-13e — kontrola trafienia: stanowisko organu, określenie sprawy, sąd z sygnatury (6.230)
+
+- Źródło: kalibracja kontroli zgodności dokumentu z tezą na 1000 syntetycznych przypadkach (orzeczenia SN/NSA/WSA/SA/SO/TK/KIO/TSUE, interpretacje KIS, decyzje UODO; 11 typów twierdzeń, 5 kodowań tekstu) oraz 30 rzeczywistych tez (portale urzędowe vs web search/fetch).
+- ⛔ Pułapka „twierdzenie strony jako stanowisko organu” (zarzut skargi, stanowisko wnioskodawcy, zdanie odrębne): orzeczenia-sadowe-v2 2.32 Faza 1-Z pkt 7. Aplikacja: role fragmentów w tekście dla kontrolera i reguła stanowiska organu.
+- Określenie sprawy przed tekstem: pkt 8 (odsiew kandydatów po przedmiocie). Aplikacja: przypięte [OKREŚLENIE SPRAWY]; osobne wywołanie triage nie opłaca się w kontroli następczej (oszczędność < koszt przy ok. 13% trafień nie na temat).
+- ⛔ Sąd przypisany sygnaturze niezgodny z sygnaturą (np. NSA jako SN): aplikacja CASE_COURT_ATTRIBUTION. Polityka korekty: tylko temat NO_MATCH lub twierdzenie nie w pełni wsparte.
+- Wynik: trafność decyzji o korekcie 0,993, pominięte korekty 0/590, fałszywe alarmy 7/410.
+- Wersje: orzeczenia-sadowe-v2 2.32, audyt-systemu-v4 6.230.

@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.230 (2026-10-13e, AUDYT-2026-10-13e): kalibracja kontroli trafienia (1000 przypadków) — orzeczenia-sadowe-v2 2.32 Faza 1-Z pkt 7–8 (stanowisko właściwego organu, nie strony; określenie sprawy przed tekstem); wpis w AUDIT-JOURNAL.
+
 - 6.229 (2026-10-13d, AUDYT-2026-10-13d): błędy wyszukiwania orzeczeń z aplikacji 0.1.27 — orzeczenia-sadowe-v2 2.31 Faza 1-Z (zgodność trafienia z pytaniem, treść tylko z pobranego dokumentu, brak dopasowania zastępczego, zakaz zapowiedzi zamiast wyniku, analiza błędu z rejestru aplikacji); wpis w AUDIT-JOURNAL.
 
 - 6.228 (2026-10-13c, AUDYT-2026-10-13c): wyszukiwanie orzeczeń i przepisów — wyniki wyszukiwarki, LEX, Legalis i portali jako tropy weryfikowane według gradacji źródeł; usunięty ✅ [VER: web-fallback]; NSA/WSA jako snapshot w orzeczenia-sadowe-v2 i HIERARCHIA-ZRODEL; fixture `wl-example/test_normalizacja.mjs` z PESEL o niepoprawnej sumie kontrolnej (T40/T49 z 6.226); wpis w AUDIT-JOURNAL.
