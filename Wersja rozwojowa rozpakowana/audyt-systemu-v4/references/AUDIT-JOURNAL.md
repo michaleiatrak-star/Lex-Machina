@@ -70897,3 +70897,11 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Zmiana w aplikacji (osobny PR w repozytorium aplikacji): komunikaty rozpoznawane jako oferta przełączenia (nie blokada), przełączenie wątku po zgodzie użytkownika, kontrola liczby zarzutów także przy przypiętym pisma-proste-v2.
 - Wersje: pisma-procesowe-v3 5.42, pisma-proste-v2 2.30, audyt-systemu-v4 6.226.
 
+## AUDYT-2026-10-13b — wyniki wyszukiwania jako tropy według gradacji źródeł; NSA/WSA jako snapshot (6.227)
+
+- Zasada właściciela: nie lekceważyć wyników wyszukiwarki, LEX ani Legalis (sygnatury, oznaczenia zmian prawa, daty wejścia nowelizacji), ale każdy wynik weryfikować — zawsze obowiązuje gradacja źródeł.
+- Rozbieżności usunięte: PRAWO-HARDGATE ŹRÓDŁO-3 dawał ✅ [VER: web-fallback] z serwisu tekstów, sprzecznie z E-4 (RZĄD 2B: 🟨/⚠️) i z aplikacją; orzeczenia-sadowe-v2 „jedno trafienie w portalach 1–6 = zweryfikowane” obejmowało CBOSA wbrew regule snapshotu (NSA/WSA 🟨 bez awansu, brak trafienia = OUT_OF_SCOPE); HIERARCHIA-ZRODEL 2A pokazywała CBOSA ze znacznikiem ✅.
+- orzeczenia-sadowe-v2 F-3: tropy z LEX, Legalis i serwisów wtórnych (sygnatura i data, Dz.U. nowelizacji, data wejścia w życie) — weryfikacja w bazie urzędowej i ELI; trop niepotwierdzony = ⚠️. F-1: brak web_search nie wyłącza rejestrów urzędowych. Google → `web_search` z `site:`.
+- Aplikacja (osobny PR): web_search zwraca wyciągnięte tropy z narzędziem weryfikacji; strona logowania LEX/Legalis rozpoznawana przy odczycie.
+- Wersje: shared 3.99.34, orzeczenia-sadowe-v2 2.30, audyt-systemu-v4 6.227.
+

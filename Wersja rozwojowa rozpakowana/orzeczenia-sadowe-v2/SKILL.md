@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.29"
+version: "2.30"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -295,7 +295,7 @@ jak potwierdzenie w wyszukiwarce głównej.
 
 Kiedy sięgać po OTK ZU zamiast/obok głównej wyszukiwarki:
 - Gdy znasz orientacyjną treść tezy, ale nie masz jeszcze sygnatury —
-  wyszukiwarka Google z frazą `site:otkzu.trybunal.gov.pl` + fraza tezy
+  `web_search` (wyszukiwarka hosta; w Lex Machina DuckDuckGo/Brave) z frazą `site:otkzu.trybunal.gov.pl` + fraza tezy
   bywa skuteczniejsza niż formularz TK (który wymaga zwykle sygnatury/hasła).
 - Gdy potrzebujesz PEŁNEGO tekstu uzasadnienia (nie tylko sentencji) do
   cytowania w piśmie — OTK ZU publikuje kompletne orzeczenie w PDF.
@@ -534,7 +534,8 @@ Kolejność priorytetu dla spraw polskich:
 6. hudoc.echr.coe.int — ETPC (dla materii objętej Konwencją)
 7. saos.org.pl — Agregator (discovery dla orzeczeń starszych/sądów powszechnych i cytator — Faza 1-0 C/D; weryfikacja zastępcza tylko przy awarii bazy urzędowej)
 
-Jedno trafienie w portalach 1–6 = orzeczenie zweryfikowane.
+Jedno trafienie w portalach 1–2 i 4–6 = orzeczenie zweryfikowane. NSA/WSA (3, CBOSA) =
+🟨 snapshot bez awansu do ✅; brak trafienia w CBOSA = `OUT_OF_SCOPE`.
 Brak trafienia w 1–6 + trafienie tylko w innych źródłach → status „Źródło niepotwierdzone w portalu sądowym".
 
 Strategia: fraza + przepis → instytucja prawna → zagadnienie ogólne; źródło
@@ -784,7 +785,7 @@ sygnatury" stosuj analogicznie wszędzie tam, gdzie portal na to pozwala:
   pełnotekstowe, część wyłącznie po sygnaturze/dacie — sprawdź formularz danego
   portalu przed założeniem, że pole istnieje,
 - `trybunal.gov.pl` — wyszukiwarka TK obejmuje treść uzasadnień; dla pełnego
-  tekstu urzędowego i wyszukiwania po frazie via Google (`site:` operator)
+  tekstu urzędowego i wyszukiwania po frazie przez `web_search` (operator `site:`)
   patrz też `otkzu.trybunal.gov.pl` (Zasada 5B — równoważne źródło, ten sam organ).
 Brak pola pełnotekstowego w danym portalu → wróć do strategii Fazy 1 (fraza → przepis
 → instytucja; SAOS jako uzupełnienie tylko w zasięgu — Faza 1-0).
@@ -971,8 +972,10 @@ Wykonaj gdy web_search lub web_fetch zwrócą błąd, timeout lub są niedostęp
 
 ```
 FALLBACK F-1: web_search niedostępny
-→ Poinformuj użytkownika: „Wyszukiwanie online chwilowo niedostępne.
-  Nie mogę zweryfikować orzeczeń online. Nie podam sygnatur bez weryfikacji."
+→ Poinformuj użytkownika: „Wyszukiwanie w internecie chwilowo niedostępne —
+  brak tropów z sieci." Rejestry urzędowe (verify_case_reference, search_case_law,
+  CBOSA, portal sądu) działają dalej: sygnatury podane przez użytkownika lub
+  z akt weryfikuj normalnie. Nie podam sygnatur bez weryfikacji."
 → Zaoferuj: opis instytucji prawnej i przesłanek bez powołania konkretnych sygnatur
 → Zalecenie: sprawdź orzeczenia samodzielnie na sn.pl, orzeczenia.ms.gov.pl,
   orzeczenia.nsa.gov.pl; saos.org.pl tylko w zasięgu (SP; SN do 2016, TK do 2015, KIO do 2018)
@@ -982,9 +985,14 @@ FALLBACK F-2: web_fetch na portalu sądowym zwraca błąd (portal niedostępny)
 → Po wyczerpaniu wszystkich portali Tier 1–3: status „Brak potwierdzenia URL"
 → NIE powołuj bez potwierdzonego URL
 
-FALLBACK F-3: wyniki wyszukiwania istnieją, ale URL prowadzi do płatnej bazy (LEX, Legalis)
-→ Zapisz: „Dostęp płatny — nie cytuję."
-→ Ustal sygnaturę (trop) i weryfikuj w bazie urzędowej (Faza 1-0 A); SAOS tylko w zasięgu
+FALLBACK F-3: wyniki wyszukiwania prowadzą do płatnej bazy (LEX, Legalis) lub serwisu wtórnego
+→ Zapisz: „Dostęp płatny — nie cytuję." (serwis wtórny: „źródło wtórne — nie cytuję")
+→ Nie lekceważ wyniku: weź z tytułu i fragmentu tropy — sygnaturę i datę orzeczenia,
+  oznaczenie nowelizacji (Dz.U. rok, poz.), datę wejścia w życie — i sprawdź każdy
+  według gradacji źródeł: sygnatura → baza urzędowa (Faza 1-0 A; SAOS tylko w zasięgu),
+  nowelizacja i data → ELI / Dz.U. (verify_legal_reference z datą zdarzenia).
+→ Trop niepotwierdzony urzędowo zostaje ⚠️ [NIEWERYFIKOWANE]; teza i cytat wyłącznie
+  ze zweryfikowanego tekstu urzędowego.
 
 FALLBACK F-4: luka pokrycia przesłanek < 40% po wyczerpaniu wyszukiwania
 → Alert luki: „Brak orzeczeń potwierdzających [przesłanka X]"

@@ -176,7 +176,8 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
 **2A — oficjalne, wykonawcze/orzecznicze (znacznik ✅ [VER: ...]):**
 - **Orzecznictwo z oficjalnych baz sądowych — RZĄD 2A dla treści
   rozstrzygnięcia**: `sn.pl`, `orzeczenia.ms.gov.pl`,
-  `orzeczenia.nsa.gov.pl` (CBOSA), `orzeczenia.uzp.gov.pl` (KIO),
+  `orzeczenia.nsa.gov.pl` (CBOSA — wyłącznie 🟨 snapshot bez awansu do ✅,
+  brak trafienia = `OUT_OF_SCOPE`; `CBOSA-ADAPTER.md`), `orzeczenia.uzp.gov.pl` (KIO),
   `trybunal.gov.pl` / `ipo.trybunal.gov.pl`. Orzeczenie NIE jest źródłem
   brzmienia przepisu, więc nie awansuje do RZĘDU 1; RZĄD 2A oznacza tu
   autentyczne źródło rozstrzygnięcia.

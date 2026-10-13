@@ -334,8 +334,12 @@ KROK 2: Weryfikacja online — sekwencja ŹRÓDEŁ (zatrzymaj się na pierwszym 
   ŹRÓDŁO-3 (szerokie, E-4 — ArsLege i inne serwisy tekstów; ostateczny fallback sieciowy):
     web_search: "art. X [ustawa] [rok bieżący] tekst obowiązujący"
     lub web_fetch: https://www.saos.org.pl (jeśli kontekst orzeczniczy)
-    → Wynik ✅: użyj TYLKO tekstu z oficjalnego fragmentu (gov.pl, lex.pl, legalis.pl).
-    Znacznik: ✅ [VER: web-fallback, data] + dopisz ⚠️ [ZALECANA WERYFIKACJA RZĄD 1]
+    → Wynik: serwis tekstów to RZĄD 2B (E-4 w HIERARCHIA-ZRODEL) — nigdy ✅.
+    Znacznik: 🟨 [KOTWICA-URZĘDOWA] na warunkach K-1…K-4; bez nich ⚠️ [NIEWERYFIKOWANE]
+    z jawnym zakresem nieweryfikowanym. (Do 3.99.33 ✅ [VER: web-fallback] — sprzeczne
+    z E-4 i z aplikacją Lex Machina, która z RZĘDU 2B/3 nie tworzy statusu ✅.)
+    Tropy z wyników wyszukiwarki, LEX, Legalis i portali (Dz.U. nowelizacji, data
+    wejścia w życie, numer artykułu po zmianie) wykorzystaj: sprawdź każdy w ELI / Dz.U.
 
   WSZYSTKIE ŹRÓDŁA NIEDOSTĘPNE:
     → ⛔ BLOKADA TWARDA — NIE podawaj przepisu z pamięci

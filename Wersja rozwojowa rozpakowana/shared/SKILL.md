@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.33"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.34"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.33 (2026-10-12c, AUDYT-2026-10-12c): korekta — t.j. UPEA 2026/1311 obejmuje zm. 2026/1003 (art. 17 § 1a w dwóch brzmieniach, nowe od 28.10.2026).
+  Wersja bieżąca: 3.99.34 (2026-10-13b, AUDYT-2026-10-13b): PRAWO-HARDGATE ŹRÓDŁO-3 bez ✅ [VER: web-fallback] (RZĄD 2B: 🟨/⚠️), tropy z wyszukiwarki/LEX/Legalis weryfikowane w ELI; HIERARCHIA-ZRODEL: CBOSA jako 🟨 snapshot.
   3.99.32 (2026-10-12b, AUDYT-2026-10-12b): ISAP-METRYKI-AKTOW, LEGAL-REGISTRY, terminy.md: UPEA t.j. 2026/1311 (⏳ 2026/1003 — art. 17 § 1a, od 28.10.2026), ochrona przyrody t.j. 2026/1315, megaustawa t.j. 2026/562, zmiany z 2026/815 (KSC, PKE, Prawo wodne, ochrona ludności); orka-bas-leksykon: metryki obrony Ojczyzny i UDP.
   3.99.31 (2026-10-12a, AUDYT-2026-10-12a): walidator_cytowan.py na konsoli Windows (cp1250) zwraca kod 3, nie UnicodeEncodeError; agenci: liczba zmian po t.j. i zapis dziennika, PDF tylko w katalogu tymczasowym, walidator w recenzji, zapis orzeczenia z datą słownie (uwagi #109, #110).
   3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację sn.pl przechodzi człowiek, bez podmiany User-Agenta.

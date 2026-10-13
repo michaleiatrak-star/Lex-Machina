@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.227 (2026-10-13b, AUDYT-2026-10-13b): wyszukiwanie orzeczeń i przepisów — wyniki wyszukiwarki, LEX, Legalis i portali jako tropy weryfikowane według gradacji źródeł; usunięty ✅ [VER: web-fallback]; NSA/WSA jako snapshot w orzeczenia-sadowe-v2 i HIERARCHIA-ZRODEL; wpis w AUDIT-JOURNAL.
+
 - 6.226 (2026-10-13a, AUDYT-2026-10-13a): eskalacja i redukcja między pisma-proste-v2 a pisma-procesowe-v3 w trybie mechanicznym aplikacji — stałe komunikaty w M7-eskalacja i KROK 0 Test B; wpis w AUDIT-JOURNAL.
 
 - 6.225 (2026-10-12d, AUDYT-2026-10-12d): `isap_tekst` czyta PDF t.j. tym samym kodem co RAG aplikacji (`mcp-servers/wspolne/akt-pdf.mjs`, generowany z aplikacji): wiersze z geometrii pozycji, przypisy z dołu strony (drobny druk) poza treścią, nagłówki „Art. 11 [1] .”, „Art. 6 1 .”, „Art. 133–142.”, brzmienie obowiązujące wg odnośników (`brzmienia_przyszle` dla jednostek wchodzących później, `odnosniki`, `proweniencja` z sha256 PDF). Benchmark 14 aktów / 6247 art. (wzorzec HTML ELI): zgodne 5092 → 6023, błędna treść 445 → 8, braki 532 → 36. Usunięte `czyscTekstPdf` i `wytnijArtykul`. mcpb 1.3.5.
