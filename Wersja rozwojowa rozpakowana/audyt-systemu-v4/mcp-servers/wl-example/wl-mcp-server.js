@@ -37,6 +37,15 @@ export function nrbPoprawny(nrb) {
 const dowod = (r) => ({ requestId: r?.requestId ?? null, requestDateTime: r?.requestDateTime ?? null });
 const STATUS = { Czynny: "obowiazuje", Zwolniony: "obowiazuje", Niezarejestrowany: "uchylony" };
 
+// Osoby powiązane z wykazu (reprezentanci, prokurenci, wspólnicy): imię, nazwisko lub firma, NIP; bez PESEL.
+// Służą aplikacji do pseudonimizacji danych firmy (te same osoby w treści pisma) — AUDYT-2026-10-13a.
+const ROLE_OSOB = { representatives: "reprezentant", authorizedClerks: "prokurent", partners: "wspolnik" };
+export function osobyPodmiotu(s) {
+  return Object.entries(ROLE_OSOB).flatMap(([pole, rola]) => (s?.[pole] ?? []).map((o) => ({ rola,
+    imie: o?.firstName ?? null, nazwisko: o?.lastName ?? null, nazwa_firmy: o?.companyName ?? null, nip: o?.nip ?? null })))
+    .filter((o) => o.nazwisko || o.nazwa_firmy);
+}
+
 export function normalizujPodmiot(raw, nip, data) {
   const baza = { query_type: "podatnik_vat", source: "biala-lista-vat" };
   const r = raw?.result;
@@ -48,7 +57,8 @@ export function normalizujPodmiot(raw, nip, data) {
   const w = { status: "FOUND", ...baza,
     result: { identyfikator: `NIP ${s.nip}`, tytul_lub_nazwa: s.name, status_vat: s.statusVat,
       status_obowiazywania: STATUS[s.statusVat] ?? "nieznany", regon: s.regon ?? null, krs: s.krs ?? null,
-      adres: s.workingAddress ?? s.residenceAddress ?? null, data_publikacji_lub_wyroku: data,
+      adres: s.workingAddress ?? s.residenceAddress ?? null, adres_zamieszkania: s.workingAddress && s.residenceAddress ? s.residenceAddress : null,
+      osoby: osobyPodmiotu(s), data_publikacji_lub_wyroku: data,
       data_rejestracji_vat: s.registrationLegalDate ?? null, data_wykreslenia: s.removalDate ?? null, podstawa_wykreslenia: s.removalBasis ?? null,
       liczba_rachunkow: rach.length, rachunki: rach.slice(0, 20), ma_rachunki_wirtualne: s.hasVirtualAccounts === true,
       url_zrodlowy: WL_WYSZUKIWARKA },

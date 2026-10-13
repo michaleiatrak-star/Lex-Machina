@@ -58,6 +58,12 @@ const osoba = (o) => [o?.imiona?.imie, o?.imiona?.imieDrugie, o?.nazwisko?.nazwi
 const naglowek = (raw) => raw?.odpis?.naglowekA ?? {};
 
 /** Normalizuje odpis aktualny (P albo S) do SCHEMAT-ODPOWIEDZI-MCP. Czysta funkcja. */
+export function adresKRS(a) {
+  if (!a?.miejscowosc) return null;
+  const ulica = [a.ulica, [a.nrDomu, a.nrLokalu].filter(Boolean).join("/")].filter(Boolean).join(" ");
+  return [ulica, [a.kodPocztowy, a.miejscowosc].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+}
+
 export function normalizujOdpowiedzKRS(raw, numerKrs) {
   if (raw?.status === 404 || raw == null) {
     return { status: "NOT_FOUND", query_type: "podmiot", source: "krs",
@@ -65,6 +71,7 @@ export function normalizujOdpowiedzKRS(raw, numerKrs) {
   }
   const n = naglowek(raw);
   const dp = raw?.odpis?.dane?.dzial1?.danePodmiotu ?? {};
+  const sa = raw?.odpis?.dane?.dzial1?.siedzibaIAdres ?? {};
   const nazwa = dp.nazwa ?? dp.nazwaPodmiotu ?? null;
   if (!nazwa) return { status: "NOT_FOUND", query_type: "podmiot", source: "krs" };
   // pole wykreślenia — ⚠️ niezmierzone na podmiocie wykreślonym (brak przypadku testowego)
@@ -86,6 +93,9 @@ export function normalizujOdpowiedzKRS(raw, numerKrs) {
       nip: dp.identyfikatory?.nip ?? null,
       // KRS dopełnia 9-cyfrowy REGON zerami do 14 cyfr; zwracamy REGON jednostki głównej.
       regon: dp.identyfikatory?.regon ? String(dp.identyfikatory.regon).replace(/^(\d{9})00000$/, "$1") : null,
+      // Adres siedziby (dział 1) — aplikacja pseudonimizuje go w treści pisma (AUDYT-2026-10-13a).
+      siedziba: sa.siedziba?.miejscowosc ?? null,
+      adres: adresKRS(sa.adres),
     },
     retrieved_at: new Date().toISOString(),
     confidence: "deterministic",

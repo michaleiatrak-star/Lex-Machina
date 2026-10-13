@@ -1,6 +1,6 @@
 # CHANGELOG — pisma-proste-v2
 
-- 2.30 (2026-10-13a, AUDYT-2026-10-13a): M7-eskalacja — w aplikacji Lex Machina z wybranym skillem pisma-proste-v2 komunikat eskalacji kończy pytanie o przełączenie zamiast „Kontynuuję z użyciem pisma-procesowe-v3.” (wątek nie może sam wczytać pipeline'u pisma procesowego; przełącza aplikacja). Bez zmian w kryteriach eskalacji.
+- 2.30 (2026-10-13b, AUDYT-2026-10-13b): M7-eskalacja — w aplikacji Lex Machina z wybranym skillem pisma-proste-v2 komunikat eskalacji kończy pytanie o przełączenie zamiast „Kontynuuję z użyciem pisma-procesowe-v3.” (wątek nie może sam wczytać pipeline'u pisma procesowego; przełącza aplikacja). Bez zmian w kryteriach eskalacji.
 
 - 2.29 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109): KROK 9d wczytuje `shared/FORMAT-CYTOWANIA.md`. SPH: ⛔ „art. 102 §1” u.k.s.c. → „art. 102 ust. 1” (ustawa ma ustępy; ELI DU/2025/1228, 2026-10-11), zapis „(Dz. U. z [rok] r. poz. [nr])”. SPF-SPG: metryka t.j. DU/2025/1228 oznaczona jako metryka, zapis do pisma z ELI wg reguły.
 

@@ -1,6 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
-- 3.99.34 (2026-10-13b, AUDYT-2026-10-13b): PRAWO-HARDGATE ŹRÓDŁO-3 — ⛔ usunięty znacznik ✅ [VER: web-fallback] (serwis tekstów to RZĄD 2B, E-4: 🟨 [KOTWICA-URZĘDOWA] na warunkach K-1…K-4, inaczej ⚠️; aplikacja Lex Machina i tak nie tworzy ✅ z RZĘDU 2B/3); tropy z wyszukiwarki, LEX, Legalis i portali (Dz.U. nowelizacji, data wejścia w życie) sprawdzane w ELI / Dz.U. HIERARCHIA-ZRODEL 2A: CBOSA wyłącznie 🟨 snapshot bez awansu, brak trafienia = OUT_OF_SCOPE (zgodnie z CBOSA-ADAPTER).
+- 3.99.34 (2026-10-13c, AUDYT-2026-10-13c): PRAWO-HARDGATE ŹRÓDŁO-3 — ⛔ usunięty znacznik ✅ [VER: web-fallback] (serwis tekstów to RZĄD 2B, E-4: 🟨 [KOTWICA-URZĘDOWA] na warunkach K-1…K-4, inaczej ⚠️; aplikacja Lex Machina i tak nie tworzy ✅ z RZĘDU 2B/3); tropy z wyszukiwarki, LEX, Legalis i portali (Dz.U. nowelizacji, data wejścia w życie) sprawdzane w ELI / Dz.U. HIERARCHIA-ZRODEL 2A: CBOSA wyłącznie 🟨 snapshot bez awansu, brak trafienia = OUT_OF_SCOPE (zgodnie z CBOSA-ADAPTER).
 
 - 3.99.33 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). ISAP-METRYKI-AKTOW; terminy.md — art. 17 § 1a: oba brzmienia z cytatem.
 

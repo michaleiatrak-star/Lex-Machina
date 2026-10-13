@@ -1,6 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
-- 5.42 (2026-10-13a, AUDYT-2026-10-13a): KROK 0 Test B — redukcja do `pisma-proste-v2` stałym komunikatem (REDUKCJA DO pisma-proste-v2 / Przyczyna / pytanie), bez pisma; w aplikacji Lex Machina wątek z wybranym skillem przełącza aplikacja po zgodzie użytkownika (wcześniej odpowiedź z samą propozycją była blokowana jako niepełny raport CP-1a).
+- 5.42 (2026-10-13b, AUDYT-2026-10-13b): KROK 0 Test B — redukcja do `pisma-proste-v2` stałym komunikatem (REDUKCJA DO pisma-proste-v2 / Przyczyna / pytanie), bez pisma; w aplikacji Lex Machina wątek z wybranym skillem przełącza aplikacja po zgodzie użytkownika (wcześniej odpowiedź z samą propozycją była blokowana jako niepełny raport CP-1a).
 
 - 5.41 (2026-10-12a, AUDYT-2026-10-12a, uwaga do #109): wzory zapisu wg `shared/FORMAT-CYTOWANIA.md` — MOD-PRACODAWCA-RZECZYWISTY (art. 58 § 1 k.c.: pełny tytuł, `Dz. U. z RRRR r. poz. N; dalej: k.c.`, cytat dosłowny z t.j. ELI DU/2026/795 zamiast skróconego; `art. 23¹ k.p.`, `art. 25¹ § 1 k.p.`), MOD-DOKTRYNA (`art. X k.c.` + odesłanie do sekcji 1 zamiast `art. X KC (Dz.U. … poz. …)`). ⛔ Błąd merytoryczny w MOD-PRACODAWCA-RZECZYWISTY: I PK 241/13 był powołany jako poparcie nieważności (art. 58 § 1 k.c.), a SN w tej sprawie uchylił wyrok przyjmujący nieważność; „teza” była skróconym fragmentem uzasadnienia. Teraz: tylko definicja obejścia prawa, cytat dosłowny, WARN-ZAKRES, data słownie (SAOS 104820, 2026-10-12).
 
