@@ -1,0 +1,364 @@
+From 2459ac11f3aeeca508b84fdaef96ec7d7ec3523a Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 15 Oct 2026 11:30:13 +0000
+Subject: [PATCH 2/5] OCR: niedokonczona instalacja modeli wykrywana i
+ naprawiana przez instalator
+
+Instalacja przerwana w trakcie pobierania modeli PaddleOCR zostawiala czesc
+katalogow (pierwsze dwa z pieciu); aplikacja startowala, a OCR konczyl sie
+tracebackiem RuntimeError.
+
+- paddle_worker: model kompletny = katalog z inference.pdiparams, inference.yml
+  i grafem; brak -> LEX_OCR_MODELS_INCOMPLETE na stderr, kod 3
+- runtime: OCR_MODELS_INCOMPLETE zamiast OCR_ENGINE_FAILED z tracebackiem
+- UI: komunikat 'Instalacja programu nie zostala dokonczona ... uruchom
+  instalator ponownie'; bez 'sprobuj ponownie'
+- sidecar --self-test: kazdy z 5 modeli z wagami (instalacja/aktualizacja
+  nie przejdzie z niepelnymi modelami)
+- bootstrap Windows/macOS i prefetch: gotowosc modeli po plikach, nie po
+  katalogach; niepelne katalogi usuwane przed pobraniem
+
+Claude-Session: https://claude.ai/code/session_011d6PDcZqYmtCkYJ17JwS7C
+---
+ app/installer/macos-online-bootstrap.sh       | 10 ++++++-
+ app/installer/prefetch-release-models.py      |  6 ++++-
+ app/installer/windows-online-bootstrap.ps1    | 22 +++++++++++++--
+ .../src-tauri/src/runtime_sidecar.rs          | 18 ++++++++++++-
+ app/lex-runtime/src/ocr/ocr-result.ts         | 12 +++++++++
+ .../src/ocr/paddle-image-ocr-engine.ts        |  8 ++----
+ app/lex-runtime/src/ocr/paddle-ocr-engine.ts  |  8 ++----
+ .../tests/ocr-worker-failure.test.ts          | 15 +++++++++++
+ app/lex-web/src/WorkspaceManager.tsx          |  2 ++
+ app/lex-web/src/document-errors.test.ts       |  9 +++++++
+ app/lex-web/src/document-errors.ts            |  9 +++++++
+ app/ocr/paddle_worker.py                      | 27 +++++++++++++++----
+ 12 files changed, 124 insertions(+), 22 deletions(-)
+ create mode 100644 app/lex-runtime/tests/ocr-worker-failure.test.ts
+
+diff --git a/app/installer/macos-online-bootstrap.sh b/app/installer/macos-online-bootstrap.sh
+index a41be61c..61898b83 100755
+--- a/app/installer/macos-online-bootstrap.sh
++++ b/app/installer/macos-online-bootstrap.sh
+@@ -96,11 +96,19 @@ MODELS="$COMPONENTS_ROOT/models"
+ models_ready() {
+   [ -d "$MODELS/stanza/pl" ] || return 1
+   for name in PP-LCNet_x1_0_doc_ori UVDoc PP-LCNet_x1_0_textline_ori PP-OCRv6_medium_det PP-OCRv6_medium_rec; do
+-    [ -d "$MODELS/paddle/official_models/$name" ] || return 1
++    [ -f "$MODELS/paddle/official_models/$name/inference.pdiparams" ] || return 1
++    [ -f "$MODELS/paddle/official_models/$name/inference.yml" ] || return 1
+   done
+ }
+ if ! models_ready; then
+   mkdir -p "$MODELS"
++  # PaddleX treats an existing model directory as downloaded: drop partial ones.
++  for name in PP-LCNet_x1_0_doc_ori UVDoc PP-LCNet_x1_0_textline_ori PP-OCRv6_medium_det PP-OCRv6_medium_rec; do
++    dir="$MODELS/paddle/official_models/$name"
++    if [ -d "$dir" ] && { [ ! -f "$dir/inference.pdiparams" ] || [ ! -f "$dir/inference.yml" ]; }; then
++      rm -rf "$dir"
++    fi
++  done
+   prefetched=0
+   # Official model hosters, as on Windows; each attempt in a fresh process.
+   for source in bos huggingface modelscope aistudio; do
+diff --git a/app/installer/prefetch-release-models.py b/app/installer/prefetch-release-models.py
+index 127a47c6..08196cc6 100644
+--- a/app/installer/prefetch-release-models.py
++++ b/app/installer/prefetch-release-models.py
+@@ -159,7 +159,11 @@ required = [
+     "PP-OCRv6_medium_det",
+     "PP-OCRv6_medium_rec",
+ ]
+-missing = [name for name in required if not (official / name).is_dir()]
++missing = [
++    name
++    for name in required
++    if not all((official / name / file).is_file() for file in ("inference.pdiparams", "inference.yml"))
++]
+ if missing:
+     print("MODEL_PREFETCH_INCOMPLETE:" + ",".join(missing), file=sys.stderr)
+     raise SystemExit(1)
+diff --git a/app/installer/windows-online-bootstrap.ps1 b/app/installer/windows-online-bootstrap.ps1
+index 4b69f0dc..c5f3a6da 100644
+--- a/app/installer/windows-online-bootstrap.ps1
++++ b/app/installer/windows-online-bootstrap.ps1
+@@ -541,13 +541,31 @@ $requiredPaddle = @(
+   "PP-OCRv6_medium_rec"
+ )
+ $modelsReady = (Test-Path -LiteralPath $stanzaPl -PathType Container)
++# A model counts only with its weights: an earlier install cut short during the
++# download leaves directories that exist but are empty or partial.
+ foreach ($name in $requiredPaddle) {
+-  if (-not (Test-Path -LiteralPath (Join-Path $paddleOfficial $name) -PathType Container)) {
+-    $modelsReady = $false
++  $modelDir = Join-Path $paddleOfficial $name
++  foreach ($file in @("inference.pdiparams", "inference.yml")) {
++    if (-not (Test-Path -LiteralPath (Join-Path $modelDir $file) -PathType Leaf)) {
++      $modelsReady = $false
++    }
+   }
+ }
+ if (-not $modelsReady) {
+   New-Item -ItemType Directory -Force -Path $modelRoot | Out-Null
++  # PaddleX treats an existing model directory as downloaded: remove the partial
++  # ones so the prefetch fetches them again (complete ones are kept).
++  foreach ($name in $requiredPaddle) {
++    $modelDir = Join-Path $paddleOfficial $name
++    if (
++      (Test-Path -LiteralPath $modelDir -PathType Container) -and -not (
++        (Test-Path -LiteralPath (Join-Path $modelDir "inference.pdiparams") -PathType Leaf) -and
++        (Test-Path -LiteralPath (Join-Path $modelDir "inference.yml") -PathType Leaf)
++      )
++    ) {
++      Remove-Item -LiteralPath $modelDir -Recurse -Force -ErrorAction SilentlyContinue
++    }
++  }
+ 
+   # PaddleX supports several official hosters. Prefer BOS because it serves
+   # the official inference tarballs directly and avoids the HuggingFace API
+diff --git a/app/lex-desktop/src-tauri/src/runtime_sidecar.rs b/app/lex-desktop/src-tauri/src/runtime_sidecar.rs
+index 529dd07c..68739742 100644
+--- a/app/lex-desktop/src-tauri/src/runtime_sidecar.rs
++++ b/app/lex-desktop/src-tauri/src/runtime_sidecar.rs
+@@ -7,6 +7,15 @@ use std::{
+     process::{Command, ExitCode, Stdio},
+ };
+ 
++// The models app/ocr/paddle_worker.py requires (same list as the installers).
++const PADDLE_MODELS: [&str; 5] = [
++    "PP-LCNet_x1_0_doc_ori",
++    "UVDoc",
++    "PP-LCNet_x1_0_textline_ori",
++    "PP-OCRv6_medium_det",
++    "PP-OCRv6_medium_rec",
++];
++
+ fn required_file(path: PathBuf, code: &str) -> Result<PathBuf, String> {
+     if path.is_file() { Ok(path) } else { Err(format!("{code}:{}", path.display())) }
+ }
+@@ -183,7 +192,14 @@ fn self_test(root: &Path) -> Result<(), String> {
+     required_file(uvx_executable(&components), "SIDECAR_UVX_MISSING")?;
+     required_file(root.join(SIDECAR_FILE), "SIDECAR_EXECUTABLE_MISSING")?;
+     required_dir(root.join("corpus"), "SIDECAR_CORPUS_MISSING")?;
+-    required_dir(components.join("models").join("paddle").join("official_models"), "SIDECAR_PADDLE_MODELS_MISSING")?;
++    let paddle_official = required_dir(components.join("models").join("paddle").join("official_models"), "SIDECAR_PADDLE_MODELS_MISSING")?;
++    // Every model the OCR worker loads, with its weights: a download cut short leaves
++    // some directories missing or empty, and OCR would fail only when a file is read.
++    for name in PADDLE_MODELS {
++        let model = required_dir(paddle_official.join(name), "SIDECAR_PADDLE_MODEL_MISSING")?;
++        required_file(model.join("inference.pdiparams"), "SIDECAR_PADDLE_MODEL_INCOMPLETE")?;
++        required_file(model.join("inference.yml"), "SIDECAR_PADDLE_MODEL_INCOMPLETE")?;
++    }
+     required_dir(components.join("models").join("stanza").join("pl"), "SIDECAR_STANZA_MODELS_MISSING")?;
+ 
+     let verified_files = validate_component_lock(root, &components)?;
+diff --git a/app/lex-runtime/src/ocr/ocr-result.ts b/app/lex-runtime/src/ocr/ocr-result.ts
+index 3656bc35..33cb211b 100644
+--- a/app/lex-runtime/src/ocr/ocr-result.ts
++++ b/app/lex-runtime/src/ocr/ocr-result.ts
+@@ -84,3 +84,15 @@ export async function readOcrPages(
+   }
+   return pages;
+ }
++
++/**
++ * The error of a failed PaddleOCR worker. Models left incomplete by an installation cut
++ * short get their own code (the UI asks to finish the installation); a missing Python
++ * package is OCR_ENGINE_MISSING; anything else OCR_ENGINE_FAILED with the worker's stderr.
++ */
++export function ocrWorkerFailure(stderr: string, code: number | null, worker: string): Error {
++  const incomplete = /LEX_OCR_MODELS_INCOMPLETE:([\w.,-]+)/u.exec(stderr);
++  if (incomplete) return new Error(`OCR_MODELS_INCOMPLETE: ${incomplete[1]!.split(",").join(", ")}`);
++  const kind = /ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED";
++  return new Error(`${kind}: Local PaddleOCR ${worker} failed with exit code ${code}: ${stderr.trim()}`);
++}
+diff --git a/app/lex-runtime/src/ocr/paddle-image-ocr-engine.ts b/app/lex-runtime/src/ocr/paddle-image-ocr-engine.ts
+index c1368cbd..e1bb153f 100644
+--- a/app/lex-runtime/src/ocr/paddle-image-ocr-engine.ts
++++ b/app/lex-runtime/src/ocr/paddle-image-ocr-engine.ts
+@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
+ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+ import os from "node:os";
+ import path from "node:path";
+-import { readOcrPages } from "./ocr-result.js";
++import { ocrWorkerFailure, readOcrPages } from "./ocr-result.js";
+ import { fileURLToPath } from "node:url";
+ import type {
+   ImageOcrEngine,
+@@ -144,11 +144,7 @@ implements ImageOcrEngine {
+           clearTimeout(timer);
+           if (code === 0) resolve();
+           else {
+-            reject(
+-              new Error(
+-                `${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR image worker failed with exit code ${code}: ${stderr.trim()}`
+-              )
+-            );
++            reject(ocrWorkerFailure(stderr, code, "image worker"));
+           }
+         });
+       });
+diff --git a/app/lex-runtime/src/ocr/paddle-ocr-engine.ts b/app/lex-runtime/src/ocr/paddle-ocr-engine.ts
+index b806a16b..ed8d48c6 100644
+--- a/app/lex-runtime/src/ocr/paddle-ocr-engine.ts
++++ b/app/lex-runtime/src/ocr/paddle-ocr-engine.ts
+@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
+ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+ import os from "node:os";
+ import path from "node:path";
+-import { evidenceBudget, readOcrPages, type EvidenceBudget } from "./ocr-result.js";
++import { evidenceBudget, ocrWorkerFailure, readOcrPages, type EvidenceBudget } from "./ocr-result.js";
+ import { fileURLToPath } from "node:url";
+ import type {
+   OcrEngine,
+@@ -205,11 +205,7 @@ implements OcrEngine {
+         clearTimeout(timer);
+         if (code === 0) resolve();
+         else {
+-          reject(
+-            new Error(
+-              `${/ModuleNotFoundError|No module named/.test(stderr) ? "OCR_ENGINE_MISSING" : "OCR_ENGINE_FAILED"}: Local PaddleOCR worker failed with exit code ${code}: ${stderr.trim()}`
+-            )
+-          );
++          reject(ocrWorkerFailure(stderr, code, "worker"));
+         }
+       });
+     });
+diff --git a/app/lex-runtime/tests/ocr-worker-failure.test.ts b/app/lex-runtime/tests/ocr-worker-failure.test.ts
+new file mode 100644
+index 00000000..3098e21d
+--- /dev/null
++++ b/app/lex-runtime/tests/ocr-worker-failure.test.ts
+@@ -0,0 +1,15 @@
++import { describe, expect, it } from "vitest";
++import { ocrWorkerFailure } from "../src/ocr/ocr-result.js";
++
++describe("PaddleOCR worker failures", () => {
++  it("models left incomplete by an installation cut short get their own code", () => {
++    const stderr = "warning: fitz\nLEX_OCR_MODELS_INCOMPLETE:PP-OCRv6_medium_det,PP-OCRv6_medium_rec\n";
++    expect(ocrWorkerFailure(stderr, 3, "worker").message).toBe("OCR_MODELS_INCOMPLETE: PP-OCRv6_medium_det, PP-OCRv6_medium_rec");
++  });
++
++  it("a missing Python package and any other failure keep their codes", () => {
++    expect(ocrWorkerFailure("ModuleNotFoundError: No module named 'paddleocr'", 1, "worker").message).toMatch(/^OCR_ENGINE_MISSING: /u);
++    expect(ocrWorkerFailure("Traceback ... MemoryError", 1, "image worker").message)
++      .toBe("OCR_ENGINE_FAILED: Local PaddleOCR image worker failed with exit code 1: Traceback ... MemoryError");
++  });
++});
+diff --git a/app/lex-web/src/WorkspaceManager.tsx b/app/lex-web/src/WorkspaceManager.tsx
+index 78d75567..e49233ee 100644
+--- a/app/lex-web/src/WorkspaceManager.tsx
++++ b/app/lex-web/src/WorkspaceManager.tsx
+@@ -53,6 +53,7 @@ import { DocumentEditor } from "./DocumentEditor.js";
+ import { SheetEditor } from "./SheetEditor.js";
+ import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
+ import { progressLabel, progressPercent } from "./processing-progress.js";
++import { OCR_MODELS_INCOMPLETE } from "./document-errors.js";
+ import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
+ import { PrivacyPreview, type PrivacyPreviewRequest } from "./PrivacyPreview.js";
+ import { ArtifactDeanonymize } from "./ArtifactDeanonymize.js";
+@@ -127,6 +128,7 @@ export function documentProcessingFailureMessage(
+   if (reason === "LOCAL_PRIVACY_MODEL_FAILED") {
+     return "Nie udało się przetworzyć dokumentu: lokalny model nie odpowiedział podczas sprawdzania pliku. Spróbuj ponownie albo wybierz tryb bez AI.";
+   }
++  if (reason === "OCR_MODELS_INCOMPLETE") return OCR_MODELS_INCOMPLETE;
+   const cause =
+     reason === "OCR_REQUIRED" || reason === "OCR_ENGINE_MISSING"
+       ? "dokument wymaga OCR, ale lokalny silnik OCR nie jest zainstalowany lub jest niekompletny"
+diff --git a/app/lex-web/src/document-errors.test.ts b/app/lex-web/src/document-errors.test.ts
+index 04404e9d..03125594 100644
+--- a/app/lex-web/src/document-errors.test.ts
++++ b/app/lex-web/src/document-errors.test.ts
+@@ -16,4 +16,13 @@ describe("document failures in plain Polish", () => {
+     expect(unknown.message).toMatch(/^Nie udało się odczytać pliku\./u);
+     expect(unknown.code).toBe("SOMETHING_NEW");
+   });
++
++  it("OCR models left incomplete by an installation cut short: finish the installation, no retry", () => {
++    const description = "Error: OCR_MODELS_INCOMPLETE: PP-OCRv6_medium_det, PP-OCRv6_medium_rec";
++    const failure = documentFailure(new ApiError("DOCUMENT_REVIEW_FAILED", 422, undefined, undefined, description));
++    expect(failure.message).toMatch(/^Instalacja programu nie została dokończona/u);
++    expect(failure.message).toContain("Uruchom instalator");
++    expect(failure.retryable).toBe(false);
++  });
+ });
++
+diff --git a/app/lex-web/src/document-errors.ts b/app/lex-web/src/document-errors.ts
+index ba56c059..e676bf42 100644
+--- a/app/lex-web/src/document-errors.ts
++++ b/app/lex-web/src/document-errors.ts
+@@ -44,6 +44,9 @@ const MESSAGES: Record<string, { message: string; retryable: boolean }> = {
+   }
+ };
+ 
++export const OCR_MODELS_INCOMPLETE =
++  "Instalacja programu nie została dokończona: brakuje części modeli OCR. Uruchom instalator Lex Machina ponownie i poczekaj, aż się zakończy (pobierze tylko brakujące modele).";
++
+ export function documentFailure(cause: unknown): DocumentFailure {
+   const code =
+     cause instanceof ApiError
+@@ -63,6 +66,12 @@ export function documentFailure(cause: unknown): DocumentFailure {
+   if (code.startsWith("DOCUMENT_") && /LIMIT|TOO_LARGE|PAGES/u.test(code)) {
+     return { code, message: "Dokument przekracza limity odczytu (rozmiar lub liczba stron).", retryable: false };
+   }
++  // An installation cut short while downloading the OCR models: retrying cannot help,
++  // running the installer again downloads only what is missing.
++  const description = cause instanceof ApiError ? cause.description ?? "" : "";
++  if (code === "OCR_MODELS_INCOMPLETE" || description.includes("OCR_MODELS_INCOMPLETE")) {
++    return { code, message: OCR_MODELS_INCOMPLETE, retryable: false };
++  }
+   const detail = cause instanceof ApiError && cause.description ? ` ${cause.description}` : "";
+   return {
+     code,
+diff --git a/app/ocr/paddle_worker.py b/app/ocr/paddle_worker.py
+index d49fb434..69f4eede 100644
+--- a/app/ocr/paddle_worker.py
++++ b/app/ocr/paddle_worker.py
+@@ -75,6 +75,18 @@ def paddle_native_path(path: Path) -> str:
+         f"{resolved}:winerr={ctypes.get_last_error()}"
+     )
+ 
++MODEL_FILES = ("inference.pdiparams", "inference.yml")
++
++
++def model_complete(path: Path) -> bool:
++    """A model directory with its weights, config and graph (json or pdmodel)."""
++    return (
++        path.is_dir()
++        and all((path / name).is_file() and (path / name).stat().st_size > 0 for name in MODEL_FILES)
++        and any((path / name).is_file() for name in ("inference.json", "inference.pdmodel"))
++    )
++
++
+ def parse_pages(raw: str) -> list[int]:
+     pages = sorted({int(value) for value in raw.split(",") if value.strip()})
+     if not pages or any(page < 1 for page in pages):
+@@ -327,16 +339,21 @@ def main() -> None:
+         "text_recognition_model_dir":
+             native_model_root / "PP-OCRv6_medium_rec",
+     }
++    # A download cut short (installer closed, network lost) leaves some model
++    # directories missing or without weights: the runtime tells the user to
++    # finish the installation instead of showing a traceback.
+     missing = [
+-        str(path)
++        path.name
+         for path in required_models.values()
+-        if not path.is_dir()
++        if not model_complete(path)
+     ]
+     if missing:
+-        raise RuntimeError(
+-            "Local PaddleOCR models are incomplete: " +
+-            ", ".join(missing)
++        print(
++            "LEX_OCR_MODELS_INCOMPLETE:" + ",".join(missing),
++            file=sys.stderr,
++            flush=True,
+         )
++        raise SystemExit(3)
+ 
+     ocr_kwargs = dict(
+         lang=args.lang,
+-- 
+2.43.0
+

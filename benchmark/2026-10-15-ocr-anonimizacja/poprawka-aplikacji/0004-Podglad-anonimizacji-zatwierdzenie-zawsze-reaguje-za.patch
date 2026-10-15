@@ -1,0 +1,510 @@
+From a742fc20692ce720626e38b077419d5bb77b27c4 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 15 Oct 2026 12:07:28 +0000
+Subject: [PATCH 4/5] Podglad anonimizacji: zatwierdzenie zawsze reaguje,
+ zaznaczenia nie gina
+
+- DocumentPrivacyPanel: odczyt wyprzedzony przez nowszy (kolejny plik, zmiana
+  sprawy) nie podmienia podgladu; plik przypisany do podgladu po documentId;
+  'Zatwierdz plik' nie konczy sie cichym return, a plik z kolejki po zmianie
+  sprawy jest czytany ponownie zamiast utknac
+- PrivacyPreview: zaznaczenie uzytkownika ma pierwszenstwo przed propozycja
+  automatyczna (wczesniej nie bylo rysowane, gdy propozycja zaczynala sie
+  wczesniej); nakladajace sie zaznaczenia sa laczone, 'zostaw jawne' pod
+  nowym zaznaczeniem ustepuje (runtime odrzucal nakladanie); fragment
+  zaznaczony, ale niezakryty, jest zakrywany przy zatwierdzeniu; bledy
+  zatwierdzenia widoczne w naglowku podgladu
+- MatterChatApp i akta: nieudane zatwierdzenie zostawia podglad otwarty
+  z zaznaczeniami i polskim komunikatem (wczesniej podglad znikal)
+- runtime: finalize zwraca kod przyczyny (reason) bez tresci dokumentu
+
+Claude-Session: https://claude.ai/code/session_011d6PDcZqYmtCkYJ17JwS7C
+---
+ app/lex-runtime/src/http/app.ts          |  5 ++-
+ app/lex-web/src/DocumentPrivacyPanel.tsx | 44 +++++++++++++++++------
+ app/lex-web/src/MatterChatApp.tsx        | 20 ++++++-----
+ app/lex-web/src/PrivacyPreview.tsx       | 46 +++++++++++++++++++-----
+ app/lex-web/src/WorkspaceManager.tsx     | 15 ++++++--
+ app/lex-web/src/document-errors.test.ts  |  8 ++++-
+ app/lex-web/src/document-errors.ts       | 18 ++++++++++
+ app/lex-web/src/privacy-marks.test.ts    | 26 ++++++++++++++
+ app/lex-web/src/privacy-marks.ts         | 36 +++++++++++++++++++
+ 9 files changed, 185 insertions(+), 33 deletions(-)
+ create mode 100644 app/lex-web/src/privacy-marks.test.ts
+ create mode 100644 app/lex-web/src/privacy-marks.ts
+
+diff --git a/app/lex-runtime/src/http/app.ts b/app/lex-runtime/src/http/app.ts
+index 6a2920f1..1635eeed 100644
+--- a/app/lex-runtime/src/http/app.ts
++++ b/app/lex-runtime/src/http/app.ts
+@@ -6914,8 +6914,11 @@ export function createLexHttpApp(options: LexHttpAppOptions): Express {
+             error
+           )
+         ) {
++          // The coded cause only (e.g. OVERLAPPING_PRIVACY_DIRECTIVES), never document text.
++          const reason = error instanceof Error ? /^[A-Z][A-Z0-9_]{2,80}(?=$|:)/.exec(error.message)?.[0] : undefined;
+           res.status(422).json({
+-            error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED"
++            error: "DOCUMENT_PRIVACY_FINALIZATION_FAILED",
++            ...(reason ? { reason } : {})
+           });
+         }
+       }
+diff --git a/app/lex-web/src/DocumentPrivacyPanel.tsx b/app/lex-web/src/DocumentPrivacyPanel.tsx
+index f123dfec..68abdbed 100644
+--- a/app/lex-web/src/DocumentPrivacyPanel.tsx
++++ b/app/lex-web/src/DocumentPrivacyPanel.tsx
+@@ -144,6 +144,11 @@ export function DocumentPrivacyPanel({
+     useRef<WeakSet<File>>(new WeakSet());
+   const activeFileRef =
+     useRef<File | null>(null);
++  // The file each preview belongs to: "Zatwierdź plik" stages that file, whatever else
++  // started in the meantime (the next file of the queue, a new case).
++  const reviewFiles = useRef(new Map<string, File>());
++  // Each read gets a number; a read overtaken by a newer one (or by a case change) is dropped.
++  const openCall = useRef(0);
+   const [activeFileName, setActiveFileName] =
+     useState("");
+   const [review, setReview] =
+@@ -176,21 +181,27 @@ export function DocumentPrivacyPanel({
+   const preparing =
+     useRef<Promise<unknown>>(Promise.resolve());
+ 
++  // Before the effect below: a case change drops what was read for the previous case, and
++  // the file at the head of the queue is read again for the new one (it no longer hangs).
+   useEffect(() => {
+-    if (!incomingFile) return;
+-    if (autoStartedFiles.current.has(incomingFile)) return;
+-    autoStartedFiles.current.add(incomingFile);
+-    void openFile(incomingFile);
+-  }, [incomingFile, caseId]);
+-
+-  useEffect(() => {
++    openCall.current += 1;
+     setBatchDrafts([]);
+     setFinalizedBatch([]);
+     setReview(null);
+     setDirectives([]);
+     activeFileRef.current = null;
++    reviewFiles.current.clear();
++    prepared.current.clear();
++    autoStartedFiles.current = new WeakSet();
+   }, [caseId]);
+ 
++  useEffect(() => {
++    if (!incomingFile) return;
++    if (autoStartedFiles.current.has(incomingFile)) return;
++    autoStartedFiles.current.add(incomingFile);
++    void openFile(incomingFile);
++  }, [incomingFile, caseId]);
++
+   const isArchive = (file: File) =>
+     file.type === "application/zip" || file.name.toLowerCase().endsWith(".zip");
+ 
+@@ -242,6 +253,7 @@ export function DocumentPrivacyPanel({
+     file: File | undefined
+   ): Promise<void> {
+     if (!file) return;
++    const call = ++openCall.current;
+     setLoading(true);
+     setError("");
+     setFailure(null);
+@@ -284,6 +296,8 @@ export function DocumentPrivacyPanel({
+       // The next files of the queue are already read; their failures show when they come up.
+       // Forgotten either way: a retry reads the file again.
+       const result = await prepare([file]).get(file)!.finally(() => prepared.current.delete(file));
++      if (call !== openCall.current) return;
++      reviewFiles.current.set(result.documentId, file);
+       setReview(result);
+       onCaseFilesChange?.();
+       const ocrPages = result.pages.filter(
+@@ -307,11 +321,12 @@ export function DocumentPrivacyPanel({
+         suggestions: result.suggestions.length
+       });
+     } catch (cause) {
++      if (call !== openCall.current) return;
+       const failed = documentFailure(cause);
+       setFailure(failed);
+       setError(failed.message);
+     } finally {
+-      setLoading(false);
++      if (call === openCall.current) setLoading(false);
+     }
+   }
+ 
+@@ -320,6 +335,7 @@ export function DocumentPrivacyPanel({
+     draft: DocumentPrivacyDraft
+   ): void {
+     activeFileRef.current = draft.file;
++    reviewFiles.current.set(draft.review.documentId, draft.file);
+     setActiveFileName(draft.fileName);
+     setDirectives(draft.directives);
+     setReview(draft.review);
+@@ -333,12 +349,17 @@ export function DocumentPrivacyPanel({
+     decisions: PagePrivacyDirective[],
+     mode: PrivacyDecisionMode
+   ): void {
+-    if (!activeFileRef.current) return;
++    const file = reviewFiles.current.get(review.documentId) ?? activeFileRef.current;
++    if (!file) {
++      // Never a silent click: the preview stays and says what to do.
++      setError("Nie udało się zatwierdzić: ten podgląd nie jest już powiązany z plikiem. Wybierz plik ponownie.");
++      return;
++    }
+     const draft: DocumentPrivacyDraft = {
+-      file: activeFileRef.current,
++      file,
+       fileName:
++        file.name ||
+         activeFileName ||
+-        activeFileRef.current.name ||
+         review.documentId,
+       review,
+       directives: decisions,
+@@ -652,6 +673,7 @@ export function DocumentPrivacyPanel({
+           keepClear={false}
+           initialDirectives={directives}
+           confirmLabel="Zatwierdź plik"
++          confirmError={error || undefined}
+           busy={loading || batchFinalizing}
+           onConfirm={(decisions, current) =>
+             stageWith(current, decisions, decisions.length ? "MANUAL" : "AUTO_PSEUDONYMIZE")
+diff --git a/app/lex-web/src/MatterChatApp.tsx b/app/lex-web/src/MatterChatApp.tsx
+index 37e66d76..6f1bd699 100644
+--- a/app/lex-web/src/MatterChatApp.tsx
++++ b/app/lex-web/src/MatterChatApp.tsx
+@@ -39,7 +39,7 @@ import {
+ import { CaseCollaborationPanel } from "./CaseCollaborationPanel.js";
+ import { DocumentCitationContent } from "./DocumentCitationContent.js";
+ import type { SourceClaim } from "./SourceLinkedText.js";
+-import { documentFailure } from "./document-errors.js";
++import { documentFailure, privacyConfirmFailure } from "./document-errors.js";
+ import { DocumentPrivacyPanel } from "./DocumentPrivacyPanel.js";
+ import { PrivacyPreview, type PrivacyPreviewRequest } from "./PrivacyPreview.js";
+ import { FirmKnowledgePanel } from "./FirmKnowledgePanel.js";
+@@ -1162,6 +1162,8 @@ export default function MatterChatApp({
+     resolve: (result: Awaited<ReturnType<typeof finalizeCaseDocument>> | null) => void;
+   } | null>(null);
+   const [privacyPreviewBusy, setPrivacyPreviewBusy] = useState(false);
++  // A failed confirmation keeps the preview open with the user's marks and says why.
++  const [privacyPreviewError, setPrivacyPreviewError] = useState("");
+   // Every document is finalized after its preview; null when the user cancels it.
+   function previewThenFinalize(
+     targetCase: string,
+@@ -4292,22 +4294,22 @@ export default function MatterChatApp({
+           <PrivacyPreview
+             {...privacyPreview.request}
+             busy={privacyPreviewBusy}
++            confirmError={privacyPreviewError}
+             onCancel={() => {
+               privacyPreview.resolve(null);
++              setPrivacyPreviewError("");
+               setPrivacyPreview(null);
+             }}
+             onConfirm={(directives) => {
+               setPrivacyPreviewBusy(true);
++              setPrivacyPreviewError("");
+               void finalizeCaseDocument(privacyPreview.request.caseId, privacyPreview.request.review.documentId, directives, undefined, true)
+-                .then((result) => privacyPreview.resolve(result))
+-                .catch((failure) => {
+-                  setCaseFilePickerError(failure instanceof Error ? failure.message : String(failure));
+-                  privacyPreview.resolve(null);
+-                })
+-                .finally(() => {
+-                  setPrivacyPreviewBusy(false);
++                .then((result) => {
++                  privacyPreview.resolve(result);
+                   setPrivacyPreview(null);
+-                });
++                })
++                .catch((failure) => setPrivacyPreviewError(privacyConfirmFailure(failure)))
++                .finally(() => setPrivacyPreviewBusy(false));
+             }}
+           />
+         </div>
+diff --git a/app/lex-web/src/PrivacyPreview.tsx b/app/lex-web/src/PrivacyPreview.tsx
+index 66564b3b..f33da595 100644
+--- a/app/lex-web/src/PrivacyPreview.tsx
++++ b/app/lex-web/src/PrivacyPreview.tsx
+@@ -8,6 +8,7 @@ import {
+ } from "./api.js";
+ import { PageScanView } from "./PageScanView.js";
+ import { KIND_LABEL } from "./PrivacyKeyTable.js";
++import { addMark, visibleSuggestions } from "./privacy-marks.js";
+ 
+ /**
+  * The preview every processed document passes before it is finalized: what to decide first
+@@ -34,6 +35,8 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+   // Decisions made earlier (back to a file in the batch preview).
+   initialDirectives?: PagePrivacyDirective[];
+   confirmLabel?: string;
++  // Why the last confirmation failed (shown here, next to the button that was clicked).
++  confirmError?: string;
+   // The review is passed back: the user may have corrected page texts.
+   onConfirm: (directives: PagePrivacyDirective[], review: DocumentReviewResponse) => void;
+   onCancel: () => void;
+@@ -130,25 +133,49 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+     if (end > start) setSelection({ page, start, end });
+   }
+ 
+-  function maskSelection(): void {
+-    if (!selection) return;
++  // The selection as a decision, joined with the decisions it touches; null when it cannot be one.
++  function withSelection(current: PagePrivacyDirective[]): PagePrivacyDirective[] | null {
++    if (!selection) return current;
+     const label = markLabel.trim();
+     if (markAction === "LABEL" && !label) {
+       setError("Wpisz etykietę, którą zastąpić zaznaczony fragment.");
+-      return;
++      return null;
+     }
+     setError("");
+-    setDirectives((current) => [
+-      ...current,
++    return addMark(
++      current,
+       markAction === "LABEL"
+         ? { ...selection, action: "LABEL", label }
+         : { ...selection, action: "PSEUDONYMIZE", kind, ...(label ? { label } : {}) }
+-    ]);
++    );
++  }
++
++  function maskSelection(): void {
++    const next = withSelection(directives);
++    if (!next) return;
++    setDirectives(next);
+     setSelection(null);
+     setMarkLabel("");
+     window.getSelection()?.removeAllRanges();
+   }
+ 
++  // A fragment selected but not yet masked is masked too: confirming never drops it.
++  function confirm(): void {
++    if (props.keepClear) {
++      props.onConfirm(keepAllDirectives(review), review);
++      return;
++    }
++    const next = withSelection(directives);
++    if (!next) return;
++    if (selection) {
++      setDirectives(next);
++      setSelection(null);
++      window.getSelection()?.removeAllRanges();
++    }
++    props.onConfirm(next, review);
++  }
++
++
+   async function savePage(): Promise<void> {
+     if (!editing) return;
+     setSaving(true);
+@@ -177,8 +204,9 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+       review.pages.map((page) => {
+         // OCR only: the text as it will be sent, nothing masked.
+         if (props.keepClear) return { page: page.page, parts: [page.text] as ReactNode[] };
++        const userMarks = directives.filter((item) => item.page === page.page && item.action !== "KEEP");
+         const marks = [
+-          ...review.suggestions.filter((item) => item.page === page.page).map((item) => ({ ...item, user: false })),
++          ...visibleSuggestions(review.suggestions.filter((item) => item.page === page.page), userMarks).map((item) => ({ ...item, user: false })),
+           ...directives
+             .filter((item) => item.page === page.page && item.action !== "KEEP")
+             .map((item) => ({
+@@ -272,11 +300,12 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+             type="button"
+             className="primary-button"
+             disabled={props.busy || saving || editing !== null}
+-            onClick={() => props.onConfirm(props.keepClear ? keepAllDirectives(review) : directives, review)}
++            onClick={confirm}
+           >
+             {props.busy ? "Zatwierdzam…" : props.confirmLabel ?? "Zatwierdź"}
+           </button>
+         </div>
++        {error || props.confirmError ? <p className="field-error" role="alert">{error || props.confirmError}</p> : null}
+       </header>
+ 
+       {aiHints.length || doubtful.length || fixes.length ? (
+@@ -441,7 +470,6 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+           )}
+         </div>
+       </div>
+-      {error ? <p className="field-error">{error}</p> : null}
+     </section>
+   );
+ }
+diff --git a/app/lex-web/src/WorkspaceManager.tsx b/app/lex-web/src/WorkspaceManager.tsx
+index fc3e80ad..030d8f23 100644
+--- a/app/lex-web/src/WorkspaceManager.tsx
++++ b/app/lex-web/src/WorkspaceManager.tsx
+@@ -53,7 +53,7 @@ import { DocumentEditor } from "./DocumentEditor.js";
+ import { SheetEditor } from "./SheetEditor.js";
+ import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
+ import { progressLabel, progressPercent } from "./processing-progress.js";
+-import { OCR_MODELS_INCOMPLETE } from "./document-errors.js";
++import { OCR_MODELS_INCOMPLETE, privacyConfirmFailure } from "./document-errors.js";
+ import {
+   clearFinished,
+   enqueueFiles,
+@@ -286,7 +286,10 @@ export function WorkspaceManager({
+   const [privacyPreview, setPrivacyPreview] = useState<PrivacyPreviewQueueItem | null>(null);
+   const queuedPreviews = useRef<PrivacyPreviewQueueItem[]>([]);
+   const privacyPreviewRef = useRef<PrivacyPreviewQueueItem | null>(null);
++  // Why confirming the open preview failed, shown in the preview itself.
++  const [previewError, setPreviewError] = useState("");
+   const showPrivacyPreview = (next: PrivacyPreviewQueueItem | null) => {
++    setPreviewError("");
+     privacyPreviewRef.current = next;
+     setPrivacyPreview(next);
+   };
+@@ -668,8 +671,15 @@ export function WorkspaceManager({
+   async function confirmPrivacyPreview(directives: PagePrivacyDirective[]): Promise<void> {
+     const pending = privacyPreview;
+     if (!pending) return;
++    setPreviewError("");
+     await run(async () => {
+-      const result = await finalizeDocument(caseId, pending.request.review.documentId, directives, undefined, true);
++      let result: Awaited<ReturnType<typeof finalizeDocument>>;
++      try {
++        result = await finalizeDocument(caseId, pending.request.review.documentId, directives, undefined, true);
++      } catch (failure) {
++        setPreviewError(privacyConfirmFailure(failure));
++        return;
++      }
+       nextPreview();
+       setNotice(
+         `„${pending.item.filename}”: zatwierdzono po podglądzie · ${result.ocrPages} stron OCR · ${result.privacy.findings} anonimizacji · osobny vault/deanonimizator zapisany dla ${result.documentId}.`
+@@ -1747,6 +1757,7 @@ export function WorkspaceManager({
+         <PrivacyPreview
+           {...privacyPreview.request}
+           busy={busy}
++          confirmError={previewError}
+           onConfirm={(directives) => void confirmPrivacyPreview(directives)}
+           onCancel={nextPreview}
+         />
+diff --git a/app/lex-web/src/document-errors.test.ts b/app/lex-web/src/document-errors.test.ts
+index 03125594..23853bf2 100644
+--- a/app/lex-web/src/document-errors.test.ts
++++ b/app/lex-web/src/document-errors.test.ts
+@@ -1,6 +1,6 @@
+ import { describe, expect, it } from "vitest";
+ import { ApiError } from "./api.js";
+-import { documentFailure } from "./document-errors.js";
++import { documentFailure, privacyConfirmFailure } from "./document-errors.js";
+ 
+ describe("document failures in plain Polish", () => {
+   it("an empty body (macOS transport) is a retryable message, the code only in details", () => {
+@@ -24,5 +24,11 @@ describe("document failures in plain Polish", () => {
+     expect(failure.message).toContain("Uruchom instalator");
+     expect(failure.retryable).toBe(false);
+   });
++
++  it("a failed confirmation of the privacy preview says why in Polish", () => {
++    const overlap = privacyConfirmFailure(new ApiError("DOCUMENT_PRIVACY_FINALIZATION_FAILED", 422, undefined, "OVERLAPPING_PRIVACY_DIRECTIVES"));
++    expect(overlap).toMatch(/^Nie zatwierdzono: dwa Twoje zaznaczenia nachodzą na siebie/u);
++    expect(privacyConfirmFailure(new ApiError("DOCUMENT_PRIVACY_FINALIZATION_FAILED", 422))).toContain("Kod: DOCUMENT_PRIVACY_FINALIZATION_FAILED");
++  });
+ });
+ 
+diff --git a/app/lex-web/src/document-errors.ts b/app/lex-web/src/document-errors.ts
+index e676bf42..301be63d 100644
+--- a/app/lex-web/src/document-errors.ts
++++ b/app/lex-web/src/document-errors.ts
+@@ -79,3 +79,21 @@ export function documentFailure(cause: unknown): DocumentFailure {
+     retryable: true
+   };
+ }
++
++const CONFIRM_REASONS: Record<string, string> = {
++  OVERLAPPING_PRIVACY_DIRECTIVES: "dwa Twoje zaznaczenia nachodzą na siebie. Cofnij jedno z nich (kliknij je) i zatwierdź ponownie.",
++  INVALID_PRIVACY_DIRECTIVE_RANGE: "zaznaczenie wychodzi poza tekst strony (tekst mógł się zmienić). Zaznacz fragment jeszcze raz.",
++  INVALID_PRIVACY_DIRECTIVE_LABEL: "etykieta zaznaczenia jest pusta albo za długa (do 120 znaków).",
++  INVALID_PRIVACY_DIRECTIVE_PAGE: "zaznaczenie wskazuje stronę, której nie ma w dokumencie. Zaznacz fragment jeszcze raz."
++};
++
++/** Why confirming a privacy preview failed, in plain Polish (the preview stays open). */
++export function privacyConfirmFailure(cause: unknown): string {
++  const reason = cause instanceof ApiError ? cause.reason ?? "" : "";
++  const code = cause instanceof ApiError ? cause.code : cause instanceof Error ? cause.message : String(cause);
++  const known = CONFIRM_REASONS[reason] ?? CONFIRM_REASONS[code];
++  if (known) return `Nie zatwierdzono: ${known}`;
++  if (code.startsWith("DESKTOP_RUNTIME_PROXY_FAILED")) return "Nie zatwierdzono: zapis trwał zbyt długo. Spróbuj ponownie.";
++  return `Nie zatwierdzono pliku. Spróbuj ponownie. Kod: ${reason || code}`;
++}
++
+diff --git a/app/lex-web/src/privacy-marks.test.ts b/app/lex-web/src/privacy-marks.test.ts
+new file mode 100644
+index 00000000..545eadb2
+--- /dev/null
++++ b/app/lex-web/src/privacy-marks.test.ts
+@@ -0,0 +1,26 @@
++import { describe, expect, it } from "vitest";
++import type { PagePrivacyDirective } from "./api.js";
++import { addMark, visibleSuggestions } from "./privacy-marks.js";
++
++const mask = (start: number, end: number, page = 1): PagePrivacyDirective => ({ page, start, end, action: "PSEUDONYMIZE", kind: "PERSON" });
++const keep = (start: number, end: number): PagePrivacyDirective => ({ page: 1, start, end, action: "KEEP" });
++
++describe("user marks in the privacy preview", () => {
++  it("a mark over an earlier one joins it: one decision, no overlap for the runtime", () => {
++    expect(addMark([mask(10, 20)], mask(15, 30))).toEqual([mask(10, 30)]);
++    expect(addMark([mask(0, 5), mask(10, 20)], mask(3, 12))).toEqual([mask(0, 20)]);
++  });
++
++  it("a mark over a 'leave in clear' decision replaces it", () => {
++    expect(addMark([keep(10, 20)], mask(5, 25))).toEqual([mask(5, 25)]);
++  });
++
++  it("marks on other pages or not touching stay as they are", () => {
++    expect(addMark([mask(10, 20, 2), mask(30, 40)], mask(10, 20))).toEqual([mask(10, 20, 2), mask(30, 40), mask(10, 20)]);
++  });
++
++  it("an automatic proposal under the user's mark is not drawn over it", () => {
++    const suggestions = [{ page: 1, start: 10, end: 20 }, { page: 1, start: 40, end: 45 }];
++    expect(visibleSuggestions(suggestions, [mask(5, 15)])).toEqual([{ page: 1, start: 40, end: 45 }]);
++  });
++});
+diff --git a/app/lex-web/src/privacy-marks.ts b/app/lex-web/src/privacy-marks.ts
+new file mode 100644
+index 00000000..cde1bd75
+--- /dev/null
++++ b/app/lex-web/src/privacy-marks.ts
+@@ -0,0 +1,36 @@
++import type { PagePrivacyDirective } from "./api.js";
++
++type Range = { page: number; start: number; end: number };
++
++function overlaps(a: Range, b: Range): boolean {
++  return a.page === b.page && a.start < b.end && b.start < a.end;
++}
++
++/**
++ * The user's new mark with the earlier decisions it touches: marks it overlaps are joined
++ * into one (the wider range is masked), a "leave in clear" decision under it gives way.
++ * The runtime rejects overlapping decisions, so none are sent.
++ */
++export function addMark(directives: readonly PagePrivacyDirective[], mark: PagePrivacyDirective): PagePrivacyDirective[] {
++  let start = mark.start;
++  let end = mark.end;
++  // Joining can reach further marks ("A" then "C", then "B" spanning both).
++  for (let changed = true; changed; ) {
++    changed = false;
++    for (const other of directives) {
++      if (other.action === "KEEP" || !overlaps(other, { page: mark.page, start, end })) continue;
++      if (other.start < start || other.end > end) {
++        start = Math.min(start, other.start);
++        end = Math.max(end, other.end);
++        changed = true;
++      }
++    }
++  }
++  const joined = { ...mark, start, end };
++  return [...directives.filter((other) => !overlaps(other, joined)), joined];
++}
++
++/** The automatic proposals not covered by the user's own marks (those are shown instead). */
++export function visibleSuggestions<T extends Range>(suggestions: readonly T[], userMarks: readonly Range[]): T[] {
++  return suggestions.filter((suggestion) => !userMarks.some((mark) => overlaps(mark, suggestion)));
++}
+-- 
+2.43.0
+

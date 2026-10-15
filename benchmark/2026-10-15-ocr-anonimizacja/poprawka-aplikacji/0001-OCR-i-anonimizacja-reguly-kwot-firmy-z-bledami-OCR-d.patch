@@ -1,0 +1,454 @@
+From 3a5e3410fd6ac66afe688362b314b4847873d1b1 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 15 Oct 2026 11:19:49 +0000
+Subject: [PATCH 1/5] OCR i anonimizacja: reguly kwot, firmy z bledami OCR,
+ data urodzenia w naglowku formularza
+
+- ocr-amounts.ts: typowe bledy OCR w kwotach przy walucie (o/O/D->0, l/I/|->1,
+  S->5, B->8, Z->2; kropka zamiast przecinka przed groszami, przecinki tysiecy,
+  zl->zl z ogonkiem); poprawka tylko gdy wynik to poprawna kwota, kazda zmiana
+  w page.corrections
+- review(): czyszczenie OCR bez modelu (w tym kwoty) zawsze, nie tylko z korekta AI
+- firm-names: forma prawna w pisowni OCR (Spolka, Sp6lka, sp. z 0.o.); zawod
+  i kancelaria przed nazwa spolki osobowej nie sa czescia nazwy
+- pseudonymizer: naglowek roli nad nazwiskiem (Radcow Prawnych / Nowak Lis)
+  nie jest osoba; bierzemy linie z nazwiskiem
+- podglad: dwa przebiegi przy wielu stronach, jak przy zatwierdzeniu
+- identifiers: data urodzenia po 'Data i miejsce urodzenia'
+- gazeter: tel./fax w nastepnej linii nie jest czescia nazwy ulicy
+
+Claude-Session: https://claude.ai/code/session_011d6PDcZqYmtCkYJ17JwS7C
+---
+ app/lex-runtime/src/document-service.ts       | 15 ++++--
+ app/lex-runtime/src/ocr-amounts.ts            | 50 +++++++++++++++++++
+ app/lex-runtime/src/ocr-correction.ts         | 10 ++--
+ app/lex-runtime/src/privacy/firm-names.ts     | 29 ++++++++---
+ app/lex-runtime/src/privacy/identifiers.ts    |  2 +-
+ app/lex-runtime/src/privacy/pseudonymizer.ts  | 21 ++++++--
+ .../tests/gazetteer-persistent.test.ts        | 10 ++++
+ app/lex-runtime/tests/identifiers.test.ts     |  9 ++++
+ app/lex-runtime/tests/ocr-correction.test.ts  | 37 ++++++++++++++
+ .../tests/privacy-firms-initials.test.ts      | 31 ++++++++++++
+ app/privacy/polish_pii_gazetteer.py           |  5 +-
+ 11 files changed, 198 insertions(+), 21 deletions(-)
+ create mode 100644 app/lex-runtime/src/ocr-amounts.ts
+
+diff --git a/app/lex-runtime/src/document-service.ts b/app/lex-runtime/src/document-service.ts
+index b409c998..4b0fccef 100644
+--- a/app/lex-runtime/src/document-service.ts
++++ b/app/lex-runtime/src/document-service.ts
+@@ -735,12 +735,14 @@ implements DocumentService {
+       onProgress
+     ));
+     const spaced = await this.restoreSpacing(extracted);
+-    // OCR correction: model-free cleanup, then the vision model on the doubtful lines. Line
+-    // images live only for that step; never kept with the document.
++    // Model-free cleanup on every OCR page (ligatures, look-alike letters, misread amounts;
++    // each change kept in page.corrections), then, when asked for, the vision model on the
++    // doubtful lines. Line images live only for that step; never kept with the document.
++    const cleaned = normalizedOcr(spaced, this.maxChunkChars);
+     const read = withoutCrops(
+       shouldCorrectOcr(security)
+-        ? await this.readWithVision(normalizedOcr(spaced, this.maxChunkChars), onProgress)
+-        : spaced
++        ? await this.readWithVision(cleaned, onProgress)
++        : cleaned
+     );
+     // Lines to check against the scan, marked after the corrections (which rebuild the text).
+     const source = await this.markReview(read);
+@@ -830,6 +832,10 @@ implements DocumentService {
+       new PseudonymizationVault();
+     const suggestions: PublicPrivacySuggestion[] = [];
+ 
++    // Jak przy zatwierdzeniu: przy kilku stronach pierwszy przebieg zbiera osoby i firmy
++    // ze wszystkich stron, żeby propozycja na s. 1 obejmowała też nazwę znalezioną na s. 3.
++    const passes = source.pages.length > 1 ? 2 : 1;
++    for (let pass = 1; pass <= passes; pass += 1)
+     for (const [index, page] of source.pages.entries()) {
+       onProgress?.({ stage: "DETECTING", done: index, total: source.pages.length, page: page.page });
+       const hints: PiiSpan[] = [];
+@@ -851,6 +857,7 @@ implements DocumentService {
+         ).pseudonymize(
+           page.text
+         );
++      if (pass < passes) continue;
+       for (const finding of preview.findings) {
+         suggestions.push(suggestionOf(page.page, finding, hints));
+       }
+diff --git a/app/lex-runtime/src/ocr-amounts.ts b/app/lex-runtime/src/ocr-amounts.ts
+new file mode 100644
+index 00000000..dd365fd6
+--- /dev/null
++++ b/app/lex-runtime/src/ocr-amounts.ts
+@@ -0,0 +1,50 @@
++/**
++ * Amounts misread by OCR, fixed by rule (no model): a kwota next to a currency
++ * with letters in place of digits ("20.ooo,00 zł", "60.0o0,00 zł", "1 5OO zl"),
++ * a dot or comma in the wrong place ("20.000.00 zł", "20,000,00 zł") or a lost
++ * diacritic in the currency ("zl"). A fix is taken only when the whole amount
++ * becomes a valid Polish amount; anything else stays as read.
++ */
++
++// Letters OCR typically reads in place of a digit. Lowercase z/s are left out:
++// they are too often real letters next to an amount.
++const CONFUSABLE: Record<string, string> = {
++  o: "0", O: "0", D: "0", Q: "0",
++  l: "1", I: "1", i: "1", "|": "1", "!": "1",
++  S: "5", B: "8", Z: "2"
++};
++const CHAR = "[\\dOoDQlIi|!SBZ]";
++const CURRENCY = "(?:złotych|złote|złoty|zł|zl|PLN|EUR|USD|€)";
++// The amount starts with a digit and ends right before the currency.
++const AMOUNT = new RegExp(
++  `(?<![\\p{L}\\p{N}.,])(\\d${CHAR}*(?:[. ,]${CHAR}+)*)(\\s?)(${CURRENCY})(?![\\p{L}])`,
++  "gu"
++);
++const VALID = /^(?:\d{1,3}(?:[. ]\d{3})+|\d+)(?:,\d{2})?$/u;
++
++function fixAmount(raw: string): string | null {
++  const letters = [...raw].filter((char) => CONFUSABLE[char]).length;
++  const digits = (raw.match(/\d/gu) ?? []).length;
++  // Digits carry the amount: at most two misread letters per digit read ("1 5OO,OO").
++  if (digits < 2 || letters > 2 * digits) return null;
++  let fixed = [...raw].map((char) => CONFUSABLE[char] ?? char).join("");
++  // Grosze after a dot, thousands after dots: "20.000.00" -> "20.000,00".
++  if (/^\d{1,3}(?:\.\d{3})+\.\d{2}$/u.test(fixed)) fixed = fixed.replace(/\.(\d{2})$/u, ",$1");
++  // Thousands after commas: "20,000,00" -> "20.000,00".
++  else if (/^\d{1,3}(?:,\d{3})+,\d{2}$/u.test(fixed)) fixed = fixed.replace(/,(?=\d{3}(?:[,]|$))/gu, ".");
++  return VALID.test(fixed) ? fixed : null;
++}
++
++/** The line with its amounts fixed and the changes made ("from" as read). */
++export function fixOcrAmounts(text: string): { text: string; fixes: Array<{ from: string; to: string }> } {
++  const fixes: Array<{ from: string; to: string }> = [];
++  const result = text.replace(AMOUNT, (whole, raw: string, space: string, currency: string) => {
++    const amount = fixAmount(raw) ?? raw;
++    const unit = currency === "zl" ? "zł" : currency;
++    const replaced = `${amount}${space}${unit}`;
++    if (replaced === whole) return whole;
++    fixes.push({ from: whole, to: replaced });
++    return replaced;
++  });
++  return { text: result, fixes };
++}
+diff --git a/app/lex-runtime/src/ocr-correction.ts b/app/lex-runtime/src/ocr-correction.ts
+index 6f37b7e7..85aaf378 100644
+--- a/app/lex-runtime/src/ocr-correction.ts
++++ b/app/lex-runtime/src/ocr-correction.ts
+@@ -1,4 +1,5 @@
+ import type { IngestedPage, OcrCorrection } from "./document-ingestion.js";
++import { fixOcrAmounts } from "./ocr-amounts.js";
+ 
+ /**
+  * Model-free cleanup of OCR lines: Unicode composition, ligatures, invisible characters, odd
+@@ -25,8 +26,8 @@ const HAS_INVISIBLE = new RegExp(INVISIBLE.source, "u");
+ 
+ /**
+  * Model-free cleanup of one line: Unicode composition, ligatures, invisible
+- * characters, odd spaces, and look-alike letters inside Latin words. Returns
+- * the visible changes.
++ * characters, odd spaces, look-alike letters inside Latin words and misread
++ * amounts. Returns the visible changes.
+  */
+ export function normalizeOcrLine(text: string): { text: string; fixes: Array<{ from: string; to: string }> } {
+   const fixes: Array<{ from: string; to: string }> = [];
+@@ -50,7 +51,10 @@ export function normalizeOcrLine(text: string): { text: string; fixes: Array<{ f
+     fixes.push({ from: word, to: fixed });
+     return fixed;
+   });
+-  return { text: result, fixes };
++  // Amounts: letters read in place of digits, misplaced separators ("20.ooo,00 zł").
++  const amounts = fixOcrAmounts(result);
++  fixes.push(...amounts.fixes);
++  return { text: amounts.text, fixes };
+ }
+ 
+ /** The OCR page with its lines cleaned (changes kept in page.corrections). */
+diff --git a/app/lex-runtime/src/privacy/firm-names.ts b/app/lex-runtime/src/privacy/firm-names.ts
+index a01d0955..b8ba59c3 100644
+--- a/app/lex-runtime/src/privacy/firm-names.ts
++++ b/app/lex-runtime/src/privacy/firm-names.ts
+@@ -8,10 +8,14 @@ import { genericWords } from "./generic-words.js";
+ // Public bodies stay visible.
+ 
+ // Legal forms in any letter case: headings and KRS extracts are written in capitals.
+-const LEGAL_FORM_AFTER =
+-  /^\s*,?\s*(?:sp\.\s?z\s?o\.\s?o\.|spółk[aiąę]\s+z\s+ograniczoną\s+odpowiedzialnością|spółk[aiąę]\s+(?:akcyjn|komandytow|jawn|partnersk)\p{L}*|s\.\s?a\.|sp\.\s?k\.(?:\s?a\.)?|sp\.\s?j\.|sp\.\s?p\.|s\.\s?c\.|s\.k\.a\.|p\.s\.a\.)/iu;
++// OCR spellings count too: "Spólka", "Sp6łka", "sp. z 0.o.", "sp. zo.o.".
++const SPOLK = "sp[óo60][łl1]k";
++const LEGAL_FORM_AFTER = new RegExp(
++  String.raw`^\s*,?\s*(?:sp\.\s?z\s?[o0]\.\s?[o0]\.|${SPOLK}[aiąę]\s+z\s+ograniczoną\s+odpowiedzialnością|${SPOLK}[aiąę]\s+(?:akcyjn|komandytow|jawn|partnersk)\p{L}*|s\.\s?a\.|sp\.\s?k\.(?:\s?a\.)?|sp\.\s?j\.|sp\.\s?p\.|s\.\s?c\.|s\.k\.a\.|p\.s\.a\.)`,
++  "iu"
++);
+ const PREFIX_BEFORE =
+-  /(?:\b(?:P\.?\s?P\.?\s?H\.?\s?U\.?|P\.?\s?H\.?\s?U\.?|F\.?\s?H\.?\s?U\.?|F\.?\s?P\.?\s?H\.?\s?U\.?)|(?<![\p{L}])(?:[Ff]irm(?:a|y|ie|ę|ą)|[Ss]półk(?:a|i|ę|ą)|[Ss]półce|Przedsiębiorstw(?:o|a|u|em)))\s+[„"»]?$/u;
++  /(?:\b(?:P\.?\s?P\.?\s?H\.?\s?U\.?|P\.?\s?H\.?\s?U\.?|F\.?\s?H\.?\s?U\.?|F\.?\s?P\.?\s?H\.?\s?U\.?)|(?<![\p{L}])(?:[Ff]irm(?:a|y|ie|ę|ą)|[Ss]p[óo60][łl1]k(?:a|i|ę|ą)|[Ss]p[óo60][łl1]ce|Przedsiębiorstw(?:o|a|u|em)))\s+[„"»]?$/u;
+ // Adjectives of a trade between a prefix and the name ("Firma Handlowa Budex",
+ // "Zakład Usługowy Mar-Pol", "Biuro Rachunkowe Bilans").
+ const TRADE_ADJECTIVE =
+@@ -34,9 +38,18 @@ const NOT_A_NAME = new Set([
+   // The legal form itself, written with capitals ("Ciecierski Rak Spółka Komandytowa").
+   "komandytowa", "komandytowej", "komandytową", "akcyjna", "akcyjnej", "akcyjną", "jawna", "jawnej", "jawną",
+   "partnerska", "partnerskiej", "partnerską", "cywilna", "cywilnej", "cywilną",
+-  "zarząd", "zarządu", "zarządem", "zarządzie"
++  "zarząd", "zarządu", "zarządem", "zarządzie",
++  // A profession or an office before a partnership's name ("Kancelaria Adwokatów i Radców
++  // Prawnych Nowak Lis sp.k."): the name is the partners', not the profession's.
++  "kancelaria", "kancelarii", "kancelarią", "adwokatów", "adwokata", "radców", "radcy", "prawnych", "prawnego",
++  "notariusza", "notarialna", "notarialnej", "komorniczej", "doradców", "podatkowych"
+ ]);
+ 
++// A role word as OCR spells it ("Spólka" for "Spółka") is still a role word.
++function notAName(lower: string): boolean {
++  return NOT_A_NAME.has(lower) || NOT_A_NAME.has(lower.replace(/^sp[óo60][łl1]k/u, "spółk").replace(/^sp[óo60][łl1]c/u, "spółc"));
++}
++
+ const NAME_WORD = /^(?:[„"»]?\p{Lu}[\p{L}\d&'’.-]*[”"«]?|\d[\p{L}\d-]*|i|&)$/u;
+ 
+ /** The firm name right before a legal form: up to four name words, back to a role word. */
+@@ -48,7 +61,7 @@ function nameBefore(text: string, end: number): { start: number; value: string }
+     const word = words[index]![0];
+     const clean = word.replace(/^[„"»(]+|[”"«),:;]+$/gu, "");
+     const joiner = clean === "i" || clean === "&";
+-    if (!clean || !NAME_WORD.test(clean) || (!joiner && NOT_A_NAME.has(clean.toLocaleLowerCase("pl")))) break;
++    if (!clean || !NAME_WORD.test(clean) || (!joiner && notAName(clean.toLocaleLowerCase("pl")))) break;
+     // A word ending a sentence is not part of the name ("…zapłaty. Budex S.A.").
+     if (index < words.length - 1 && /[.;:!?]$/u.test(word) && !/^\p{Lu}\.$/u.test(word)) break;
+     picked.unshift(words[index]!);
+@@ -102,7 +115,7 @@ function nameAfter(text: string, start: number, requireTrade = false, abbreviati
+     // After "P.H.U." every word is the firm's ("P.H.U. Mazowieckie Centrum Logistyki"); after
+     // "spółka"/"firma" an institution word opens no name ("spółka Skarbu Państwa").
+     const institution = !abbreviation && picked.length === 0 && institutions.has(lower);
+-    if (!joiner && (NOT_A_NAME.has(lower) || institution)) {
++    if (!joiner && (notAName(lower) || institution)) {
+       if (picked.length === 0) return null;
+       break;
+     }
+@@ -138,7 +151,7 @@ export type FirmSpan = PiiSpan & { legalForm?: string; canonical?: string };
+ export function detectFirmNames(text: string): FirmSpan[] {
+   const names = new Map<string, string | undefined>();
+   const spans: FirmSpan[] = [];
+-  for (const match of text.matchAll(/\s*,?\s*(?:sp\.|spółk|s\.\s?a\.|s\.\s?c\.|s\.k\.a\.|p\.s\.a\.)/giu)) {
++  for (const match of text.matchAll(/\s*,?\s*(?:sp\.|sp[óo60][łl1]k|s\.\s?a\.|s\.\s?c\.|s\.k\.a\.|p\.s\.a\.)/giu)) {
+     const legal = LEGAL_FORM_AFTER.exec(text.slice(match.index!, match.index! + 60));
+     if (!legal) continue;
+     // A sentence ends before the form: "magazyn w Gdyni. Spółka akcyjna zawarła..." names no firm.
+@@ -156,7 +169,7 @@ export function detectFirmNames(text: string): FirmSpan[] {
+     names.set(name.value, undefined);
+     spans.push({ start: name.start, end: name.start + name.value.length, kind: "PERSON", value: name.value, confidence: 0.9, source: "AUTO" });
+   };
+-  for (const match of text.matchAll(/(?:P\.?\s?P\.?\s?H\.?\s?U\.?|P\.?\s?H\.?\s?U\.?|F\.?\s?H\.?\s?U\.?|[Ff]irm(?:a|y|ie|ę|ą)|[Ss]półk(?:a|i|ę|ą)|[Ss]półce|Przedsiębiorstw(?:o|a|u|em))\s+/gu)) {
++  for (const match of text.matchAll(/(?:P\.?\s?P\.?\s?H\.?\s?U\.?|P\.?\s?H\.?\s?U\.?|F\.?\s?H\.?\s?U\.?|[Ff]irm(?:a|y|ie|ę|ą)|[Ss]p[óo60][łl1]k(?:a|i|ę|ą)|[Ss]p[óo60][łl1]ce|Przedsiębiorstw(?:o|a|u|em))\s+/gu)) {
+     const end = match.index! + match[0].length;
+     if (!PREFIX_BEFORE.test(text.slice(match.index!, end))) continue;
+     after(end, false, /^[PF]\.?\s?/u.test(match[0]) && !/^[Ff]irm|^Przeds/u.test(match[0]));
+diff --git a/app/lex-runtime/src/privacy/identifiers.ts b/app/lex-runtime/src/privacy/identifiers.ts
+index 1056b077..d630571a 100644
+--- a/app/lex-runtime/src/privacy/identifiers.ts
++++ b/app/lex-runtime/src/privacy/identifiers.ts
+@@ -183,7 +183,7 @@ const DETECTORS: Detector[] = [
+   {
+     kind: "BIRTH_DATE",
+     regex: new RegExp(
+-      `(?:ur\\.|urodzon[aey]j?|urodzin|data\\s+urodzenia|dat[ąy]\\s+urodzenia)\\s*(?:się\\s*)?(?:dnia\\s*|w\\s+dniu\\s*)?:?\\s*(${DATE})`,
++      `(?:ur\\.|urodzon[aey]j?|urodzin|(?:data|dat[ąy])(?:\\s+i\\s+miejsc[ae])?\\s+(?:urodzenia|ur\\.))\\s*(?:się\\s*)?(?:dnia\\s*|w\\s+dniu\\s*)?:?\\s*(${DATE})`,
+       "giu"
+     ),
+     group: 1
+diff --git a/app/lex-runtime/src/privacy/pseudonymizer.ts b/app/lex-runtime/src/privacy/pseudonymizer.ts
+index 5a1319f9..d31755e4 100644
+--- a/app/lex-runtime/src/privacy/pseudonymizer.ts
++++ b/app/lex-runtime/src/privacy/pseudonymizer.ts
+@@ -1,5 +1,5 @@
+ import { detectFirmNames, type FirmSpan } from "./firm-names.js";
+-import { personPart } from "./generic-words.js";
++import { genericWords, personPart } from "./generic-words.js";
+ import { detectIdentifiers } from "./identifiers.js";
+ import type { RegistryFormsProvider } from "./registry-enrichment.js";
+ import {
+@@ -848,6 +848,13 @@ export class PseudonymizationVault {
+   }
+ }
+ 
++/** A line naming a role or an office ("Radców Prawnych", "Kancelaria Adwokatów"), not a person. */
++function roleHeading(line: string): boolean {
++  const first = /\p{L}+/u.exec(line)?.[0]?.toLowerCase();
++  const words = genericWords();
++  return Boolean(first && (words.personOnlyTriggers.has(first) || words.institutions.has(first)));
++}
++
+ export class LocalPolishPseudonymizer {
+   constructor(
+     private readonly vault: PseudonymizationVault,
+@@ -944,11 +951,17 @@ export class LocalPolishPseudonymizer {
+         // A name never runs over a line: "Paweł Kania⏎os. Kosmonautów 86/9" (a heading
+         // and the address under it) is the name; the address is found on its own.
+         const lineEnd = recognized.kind === "PERSON" ? recognized.value.indexOf("\n") : -1;
++        // A role heading on the first line ("Radców Prawnych⏎Nowak Lis"): the name is below.
++        const heading = lineEnd > 0 && roleHeading(recognized.value.slice(0, lineEnd));
++        const below = heading ? recognized.value.slice(lineEnd + 1).split("\n")[0]!.trim() : "";
+         const found =
+-          lineEnd > 0
+-            ? { ...recognized, end: recognized.start + lineEnd, value: recognized.value.slice(0, lineEnd).trimEnd() }
+-            : recognized;
++          heading
++            ? { ...recognized, start: recognized.start + recognized.value.indexOf(below, lineEnd + 1), value: below }
++            : lineEnd > 0
++              ? { ...recognized, end: recognized.start + lineEnd, value: recognized.value.slice(0, lineEnd).trimEnd() }
++              : recognized;
+         if (lineEnd > 0) found.end = found.start + found.value.length;
++        if (!found.value) continue;
+         // A double surname the recognizer cut at the hyphen ("Nicole Brzezińska" of "Nicole Brzezińska-Król").
+         if (found.kind === "PERSON") {
+           const rest = /^-\p{Lu}\p{Ll}+/u.exec(text.slice(found.end, found.end + 40));
+diff --git a/app/lex-runtime/tests/gazetteer-persistent.test.ts b/app/lex-runtime/tests/gazetteer-persistent.test.ts
+index 525bb4ae..ac385441 100644
+--- a/app/lex-runtime/tests/gazetteer-persistent.test.ts
++++ b/app/lex-runtime/tests/gazetteer-persistent.test.ts
+@@ -36,3 +36,13 @@ describe.skipIf(!python)("gazetteer: a worker kept alive", () => {
+     fs.rmSync(dir, { recursive: true, force: true });
+   });
+ });
++
++describe.skipIf(!python)("gazetteer: addresses", () => {
++  it("a phone on the next line is not part of the street address", async () => {
++    const gazetteer = new LocalGazetteerRecognizer({ persistent: false });
++    const text = "43-100 Tychy, ul. Lipowa 7\nTel. 32-111 22 33; fax 32-444 55 66";
++    const addresses = (await gazetteer.recognize(text)).filter((span) => span.kind === "ADDRESS").map((span) => span.value);
++    expect(addresses).toContain("ul. Lipowa 7");
++    expect(addresses.some((value) => /Tel|32-111/u.test(value))).toBe(false);
++  });
++});
+diff --git a/app/lex-runtime/tests/identifiers.test.ts b/app/lex-runtime/tests/identifiers.test.ts
+index fa6deab5..4f1c4c26 100644
+--- a/app/lex-runtime/tests/identifiers.test.ts
++++ b/app/lex-runtime/tests/identifiers.test.ts
+@@ -95,6 +95,15 @@ describe("identifier detectors", () => {
+     expect(found.some(([, value]) => String(value).includes("1234/25"))).toBe(false);
+   });
+ 
++  it("a birth date in a form heading, also with the place of birth", () => {
++    const dates = (text: string) => detectIdentifiers(text).filter((span) => span.kind === "BIRTH_DATE").map((span) => span.value);
++    expect(dates("Data i miejsce urodzenia 02.11.1975 GDAŃSK")).toEqual(["02.11.1975"]);
++    expect(dates("data i miejsce ur.: 14.05.1944 r. Kraków")).toEqual(["14.05.1944 r."]);
++    expect(dates("Data urodzenia02.11.1975")).toEqual(["02.11.1975"]);
++    // "od urodzenia" with no date after it is not a birth date.
++    expect(dates("Niepełnosprawność istnieje od - urodzenia. Ustalony stopień datuje się od - 01.06.2010 r.")).toEqual([]);
++  });
++
+   it("detects a PESEL whose digits are split by spaces or hyphens", () => {
+     for (const written of ["440 514 01359", "44 05 14 01359", "4 4 0 5 1 4 0 1 3 5 9", "440514-01359"]) {
+       const found = detectIdentifiers(`PESEL: ${written}, adres jak wyżej.`);
+diff --git a/app/lex-runtime/tests/ocr-correction.test.ts b/app/lex-runtime/tests/ocr-correction.test.ts
+index c265a633..3f68d7a6 100644
+--- a/app/lex-runtime/tests/ocr-correction.test.ts
++++ b/app/lex-runtime/tests/ocr-correction.test.ts
+@@ -1,4 +1,5 @@
+ import { describe, expect, it } from "vitest";
++import { fixOcrAmounts } from "../src/ocr-amounts.js";
+ import { normalizeOcrLine, normalizeOcrPage } from "../src/ocr-correction.js";
+ 
+ describe("model-free OCR cleanup", () => {
+@@ -24,4 +25,40 @@ describe("model-free OCR cleanup", () => {
+     const digital = { page: 1, source: "DIGITAL" as const, text: "ﬁrma" };
+     expect(normalizeOcrPage(digital)).toBe(digital);
+   });
++
++  it("fixes typical OCR errors in amounts by rule", () => {
++    const fix = (text: string) => fixOcrAmounts(text).text;
++    expect(fix("kara umowna w wysokości 20.ooo,00 zł za każde")).toBe("kara umowna w wysokości 20.000,00 zł za każde");
++    expect(fix("zapłaty kwoty 60.0o0,00 zł w terminie")).toBe("zapłaty kwoty 60.000,00 zł w terminie");
++    expect(fix("kwota 1 5OO,OO PLN")).toBe("kwota 1 500,00 PLN");
++    expect(fix("kwota 12.34S,67zł")).toBe("kwota 12.345,67zł");
++    expect(fix("kwota 12.345,6S zł")).toBe("kwota 12.345,65 zł");
++    expect(fix("czynsz 2.5OO,00 złotych")).toBe("czynsz 2.500,00 złotych");
++    expect(fix("odsetki 1.200.50 zł")).toBe("odsetki 1.200,50 zł");
++    expect(fix("odsetki 20,000,00 zł")).toBe("odsetki 20.000,00 zł");
++    expect(fix("opłata 100,00 zl")).toBe("opłata 100,00 zł");
++    expect(fixOcrAmounts("kara 20.ooo,00 zł").fixes).toEqual([{ from: "20.ooo,00 zł", to: "20.000,00 zł" }]);
++  });
++
++  it("leaves what is not a misread amount", () => {
++    const same = (text: string) => expect(fixOcrAmounts(text).text).toBe(text);
++    same("dnia 18.03.2024 r. o godz. 10.00");
++    same("art. 187 ust. 1 pkt 3 kpc");
++    same("kwota 60.000,00 zł");
++    same("1 Ola zł");
++    same("rachunek 12 3456 7890 1234 5678 9012 3456");
++    // A letter that does not become a valid amount stays as read: the reader checks it.
++    same("kwota 6x.000,00 zł");
++  });
++
++  it("amounts are fixed in the model-free page cleanup and kept in corrections", () => {
++    const page = normalizeOcrPage({
++      page: 2,
++      source: "OCR",
++      text: "kara 20.ooo,00 zł",
++      lines: [{ text: "kara 20.ooo,00 zł", score: 0.97 }]
++    });
++    expect(page.text).toBe("kara 20.000,00 zł");
++    expect(page.corrections).toEqual([{ line: 0, from: "20.ooo,00 zł", to: "20.000,00 zł" }]);
++  });
+ });
+diff --git a/app/lex-runtime/tests/privacy-firms-initials.test.ts b/app/lex-runtime/tests/privacy-firms-initials.test.ts
+index bec31aa6..cf6183c7 100644
+--- a/app/lex-runtime/tests/privacy-firms-initials.test.ts
++++ b/app/lex-runtime/tests/privacy-firms-initials.test.ts
+@@ -17,6 +17,37 @@ describe("firm names ([FIRMA], REGULY-ANONIMIZACJI)", () => {
+     expect(detectFirmNames("Kowalski i Wspólnicy sp.k. oraz Inter-Trans S.A.").map((span) => span.value)).toEqual(["Kowalski i Wspólnicy", "Inter-Trans"]);
+   });
+ 
++  it("a legal form misread by OCR still marks a firm", () => {
++    const values = (text: string) => detectFirmNames(text).map((span) => span.value);
++    expect(values("Kancelaria Radców Prawnych\nNowak Lis Spólka Komandytowa")).toEqual(["Nowak Lis"]);
++    expect(values("Budex Sp6łka Akcyjna oraz Transkom sp. z 0.o. i Marbud sp. zo.o.")).toEqual(["Budex", "Transkom", "Marbud"]);
++    // "Spólka" opening a line is the role word, not part of the name.
++    expect(values("Spólka Transkom sp. z o.o.")).toEqual(["Transkom"]);
++    // A profession before a partnership's name on the same line is not part of the name.
++    expect(values("z Kancelarii Adwokatów i Radców Prawnych Nowak Lis Spółka Komandytowa")).toEqual(["Nowak Lis"]);
++  });
++
++  it("a firm found on a later page is protected on earlier pages in the second pass", async () => {
++    const vault = new PseudonymizationVault();
++    const service = new LocalPolishPseudonymizer(vault);
++    const pages = ["Stopka: Nowak Lis Spólka Komandytowa", "Pełnomocnicy z Nowak Lis Spółka Komandytowa"];
++    for (const page of pages) await service.pseudonymize(page);
++    const first = await service.pseudonymize(pages[0]!);
++    expect(first.text).not.toContain("Nowak Lis");
++  });
++
++  it("a role heading above a name is not the name", async () => {
++    const vault = new PseudonymizationVault();
++    const value = "Radców Prawnych\nNowak Lis";
++    const ner = { recognize: async (text: string) => {
++      const start = text.indexOf(value);
++      return start < 0 ? [] : [{ start, end: start + value.length, kind: "PERSON" as const, value, confidence: 0.9 }];
++    } };
++    const result = await new LocalPolishPseudonymizer(vault, ner).pseudonymize(`Kancelaria Adwokatów i ${value} sp.k.`);
++    expect(result.text).toContain("Radców Prawnych");
++    expect(result.text).not.toContain("Nowak Lis");
++  });
++
+   it("public bodies and roles stay", () => {
+     expect(detectFirmNames("Skarb Państwa reprezentowany przez Starostę. Zakład Ubezpieczeń Społecznych odmówił.")).toEqual([]);
+   });
+diff --git a/app/privacy/polish_pii_gazetteer.py b/app/privacy/polish_pii_gazetteer.py
+index dd81619f..4ab555fc 100644
+--- a/app/privacy/polish_pii_gazetteer.py
++++ b/app/privacy/polish_pii_gazetteer.py
+@@ -98,8 +98,11 @@ HOUSE_NUMBER = (
+ TOWN = rf"[{UPPER}][\w\-]+(?:[ \-][{UPPER}][\w\-]+){{0,2}}"
+ POSTAL = rf"\d{{2}}-\d{{3}}\s+{TOWN}"
+ 
++# A contact label after the house number starts the next field, not the street name:
++# "ul. Lipowa 7⏎Tel. 32-111 22 33" (the phone is not a house number).
++CONTACT = r"(?i:tel|fax|kom|e-?mail|www)\b"
+ STREET_ADDRESS_RE = re.compile(
+-    rf"(?<![\w.@/-]){STREET_MARKER}\s+{NAME_TOKEN}(?:\s+(?:{NAME_LINK}\s+)?{NAME_TOKEN}){{0,6}}\s+{HOUSE_NUMBER}(?![\w/])"
++    rf"(?<![\w.@/-]){STREET_MARKER}\s+{NAME_TOKEN}(?:\s+(?!{CONTACT})(?:{NAME_LINK}\s+)?{NAME_TOKEN}){{0,6}}\s+{HOUSE_NUMBER}(?![\w/])"
+     rf"(?:\s*,?\s*{POSTAL})?"
+ )
+ # OCR drops the space before the house number: "ul. Pukowca15, 40-847 Katowice".
+-- 
+2.43.0
+

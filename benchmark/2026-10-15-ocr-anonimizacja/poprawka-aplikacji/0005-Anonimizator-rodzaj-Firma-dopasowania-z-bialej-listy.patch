@@ -1,0 +1,303 @@
+From 764676a4ee03386b2b21da04e1577f06f7ebfa10 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 15 Oct 2026 12:17:42 +0000
+Subject: [PATCH 5/5] Anonimizator: rodzaj 'Firma', dopasowania z bialej listy VAT
+ widoczne i bez wzgledu na wielkosc liter
+
+- reczne zaznaczenie 'Firma' (kind FIRM): token firmy z odmiana jak nazwa,
+  forma prawna zostaje w tekscie
+- wyniki i propozycje z flaga firm: REGISTRY (biala lista VAT / KRS) albo
+  TEXT; podglad podpisuje je 'Firma (biala lista VAT / KRS)' / 'Firma'
+- formy z rejestru: adres bez wzgledu na wielkosc liter i odstepy (te same
+  litery z numerem domu nie pojawiaja sie przypadkiem); nazwa firmy tez,
+  ale nie zapisana w calosci malymi literami
+- adres z rejestru dla ulicy nazwanej od osoby takze z samym nazwiskiem
+  ('JOZEFA X 15' -> 'X 15')
+
+Claude-Session: https://claude.ai/code/session_011d6PDcZqYmtCkYJ17JwS7C
+---
+ app/lex-runtime/src/document-service.ts       | 17 +++++-
+ app/lex-runtime/src/http/app.ts               |  4 +-
+ app/lex-runtime/src/privacy/pseudonymizer.ts  | 26 +++++++--
+ .../src/privacy/registry-enrichment.ts        |  7 +++
+ .../tests/privacy-firm-kind.test.ts           | 58 +++++++++++++++++++
+ app/lex-web/src/PrivacyKeyTable.tsx           |  1 +
+ app/lex-web/src/PrivacyPreview.tsx            |  9 ++-
+ app/lex-web/src/api.ts                        |  6 +-
+ 8 files changed, 119 insertions(+), 9 deletions(-)
+ create mode 100644 app/lex-runtime/tests/privacy-firm-kind.test.ts
+
+diff --git a/app/lex-runtime/src/document-service.ts b/app/lex-runtime/src/document-service.ts
+index 4b0fccef..ababfc19 100644
+--- a/app/lex-runtime/src/document-service.ts
++++ b/app/lex-runtime/src/document-service.ts
+@@ -327,6 +327,8 @@ export type PublicPrivacySuggestion = {
+   start: number;
+   end: number;
+   kind: PiiKind;
++  // A firm's name, found in a public register (VAT white list, KRS) or in the text.
++  firm?: "REGISTRY" | "TEXT";
+   // The local model's answer that this is no person ("słowo pospolite"); masked until the user unmasks it.
+   aiNotPerson?: string;
+ };
+@@ -525,9 +527,20 @@ function collectingAiHints(inner: NamedEntityRecognizer, text: string, hints: Pi
+   };
+ }
+ 
+-function suggestionOf(page: number, finding: { start: number; end: number; kind: PiiKind }, hints: PiiSpan[]): PublicPrivacySuggestion {
++function suggestionOf(
++  page: number,
++  finding: { start: number; end: number; kind: PiiKind; firm?: "REGISTRY" | "TEXT" },
++  hints: PiiSpan[]
++): PublicPrivacySuggestion {
+   const hint = hints.find((span) => span.start < finding.end && span.end > finding.start);
+-  return { page, start: finding.start, end: finding.end, kind: finding.kind, ...(hint ? { aiNotPerson: hint.aiNotPerson } : {}) };
++  return {
++    page,
++    start: finding.start,
++    end: finding.end,
++    kind: finding.kind,
++    ...(finding.firm ? { firm: finding.firm } : {}),
++    ...(hint ? { aiNotPerson: hint.aiNotPerson } : {})
++  };
+ }
+ 
+ /** Reuses the local-AI findings of a page already checked during the review. */
+diff --git a/app/lex-runtime/src/http/app.ts b/app/lex-runtime/src/http/app.ts
+index 1635eeed..cabfc80d 100644
+--- a/app/lex-runtime/src/http/app.ts
++++ b/app/lex-runtime/src/http/app.ts
+@@ -394,7 +394,9 @@ const PRIVACY_KINDS = new Set([
+   "VEHICLE_PLATE",
+   "BAR_NUMBER",
+   "PAYMENT_CARD",
+-  "CUSTOM"
++  "CUSTOM",
++  // The user's mark of a firm name (a firm token, see ManualPrivacyDirective).
++  "FIRM"
+ ] as const);
+ 
+ function parsePrivacyDirectives(
+diff --git a/app/lex-runtime/src/privacy/pseudonymizer.ts b/app/lex-runtime/src/privacy/pseudonymizer.ts
+index d31755e4..8262aed6 100644
+--- a/app/lex-runtime/src/privacy/pseudonymizer.ts
++++ b/app/lex-runtime/src/privacy/pseudonymizer.ts
+@@ -52,7 +52,9 @@ export type ManualPrivacyDirective = {
+   start: number;
+   end: number;
+   action: PrivacyDirectiveAction;
+-  kind?: PiiKind;
++  // "FIRM": the user's mark of a firm name - a PERSON token with the firm's identity
++  // (declined as a name, its legal form left in the text), as found firms get.
++  kind?: PiiKind | "FIRM";
+   label?: string;
+ };
+ 
+@@ -63,6 +65,9 @@ export interface NamedEntityRecognizer {
+ export type PseudonymizationFinding = {
+   token: string;
+   kind: PiiKind;
++  // A firm's name: from a public register (VAT white list, KRS, CEIDG) or from the text
++  // (legal form, business prefix, the user's "Firma" mark).
++  firm?: "REGISTRY" | "TEXT";
+   start: number;
+   end: number;
+   source: "AUTO" | "USER";
+@@ -889,7 +894,7 @@ export class LocalPolishPseudonymizer {
+       .map((item) => ({
+         start: item.start,
+         end: item.end,
+-        kind: item.kind ?? "CUSTOM",
++        kind: item.kind === "FIRM" ? "PERSON" as const : item.kind ?? "CUSTOM",
+         value: text.slice(item.start, item.end),
+         source: "USER" as const,
+         ...(item.label ? { label: item.label } : {})
+@@ -911,8 +916,13 @@ export class LocalPolishPseudonymizer {
+       process.stderr.write(`REGISTRY_ENRICHMENT_DEGRADED:${error instanceof Error ? error.message : String(error)}\n`);
+     }
+     for (const form of registered) {
+-      const escaped = form.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+-      for (const match of text.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, "gu"))) {
++      // Any letter case and spacing ("UL. DŁUGA 5", "Długa  5", "DŁUGA 5"): the same letters with
++      // the register's house number do not appear by chance. A firm's name in any case too,
++      // but not written all in small letters (a common phrase, not the name).
++      const escaped = form.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/gu, "\\s+");
++      const anyCase = form.kind === "ADDRESS" || Boolean(form.organization);
++      for (const match of text.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, anyCase ? "giu" : "gu"))) {
++        if (form.organization && match[0] !== form.text && match[0] === match[0].toLocaleLowerCase("pl")) continue;
+         autoSpans.push({ start: match.index!, end: match.index! + match[0].length, kind: form.kind, value: match[0], confidence: 1, source: "AUTO" });
+         if (form.organization) registryFirms.set(match[0], form.organization.legalForm);
+       }
+@@ -1066,6 +1076,12 @@ export class LocalPolishPseudonymizer {
+     for (const [value, legalForm] of registryFirms) {
+       if (!entities.has(`PERSON\u0000${value}`)) entities.set(`PERSON\u0000${value}`, organizationEntity(value, legalForm));
+     }
++    // The user's "Firma" marks: the firm's identity, with the legal form written next to it.
++    for (const item of manual) {
++      if (item.action !== "PSEUDONYMIZE" || item.kind !== "FIRM") continue;
++      const value = text.slice(item.start, item.end);
++      entities.set(`PERSON\u0000${value}`, organizationEntity(value, firmContext(text, item.start, item.end)?.legalForm));
++    }
+     // Surfaces written after "państwo", "małżonkowie", a plural role...: a family.
+     const plural = new Set(
+       findings
+@@ -1208,9 +1224,11 @@ export class LocalPolishPseudonymizer {
+         output.slice(0, finding.start) +
+         token +
+         output.slice(finding.end);
++      const entity = byFinding.get(finding) ?? entities.get(`${finding.kind}\u0000${finding.value}`);
+       publicFindings.push({
+         token,
+         kind: finding.kind,
++        ...(entity?.type === "organization" ? { firm: registryFirms.has(finding.value) ? "REGISTRY" as const : "TEXT" as const } : {}),
+         start: finding.start,
+         end: finding.end,
+         source: finding.source ?? "AUTO",
+diff --git a/app/lex-runtime/src/privacy/registry-enrichment.ts b/app/lex-runtime/src/privacy/registry-enrichment.ts
+index c462d4dc..ed94b741 100644
+--- a/app/lex-runtime/src/privacy/registry-enrichment.ts
++++ b/app/lex-runtime/src/privacy/registry-enrichment.ts
+@@ -107,6 +107,13 @@ export function addressForms(address: string | undefined): RegistryForm[] {
+     // A street name before the house number ("Kolorowa 12", "Długa 5/3", "Polna 7A"), not a bare number.
+     if (bare.replace(/\s*\d+\p{L}?(?:\s*\/\s*\d+\p{L}?)?$/u, "").trim().length < 3) continue;
+     forms.push(street, bare, part, part.replace(STREET_PREFIX, ""), part.toLocaleUpperCase("pl"), part.toLocaleUpperCase("pl").replace(STREET_PREFIX, ""));
++    // A street named after a person, written in a letter by the surname only: the register
++    // has "JÓZEFA NOWAKOWSKIEGO 15", the letter "ul. Nowakowskiego 15".
++    const named = /^((?:\p{L}+[\s.-]+)+)(\p{L}{4,})\s+(\d+\p{L}?(?:\s*\/\s*\d+\p{L}?)?)$/u.exec(bare);
++    if (named && !ROMAN.test(named[2]!.toLocaleUpperCase("pl"))) {
++      const short = `${named[2]} ${named[3]}`;
++      forms.push(short, short.toLocaleUpperCase("pl"));
++    }
+   }
+   return [...new Set(forms)].map((form) => ({ text: form, kind: "ADDRESS" }));
+ }
+diff --git a/app/lex-runtime/tests/privacy-firm-kind.test.ts b/app/lex-runtime/tests/privacy-firm-kind.test.ts
+new file mode 100644
+index 00000000..cf21f588
+--- /dev/null
++++ b/app/lex-runtime/tests/privacy-firm-kind.test.ts
+@@ -0,0 +1,58 @@
++import { describe, expect, it } from "vitest";
++import { LocalPolishPseudonymizer, PseudonymizationVault } from "../src/privacy/pseudonymizer.js";
++import { addressForms, whiteListForms, type RegistryFormsProvider } from "../src/privacy/registry-enrichment.js";
++
++describe("firms in the anonymizer", () => {
++  it("the user's 'Firma' mark is a firm token, the legal form stays in the text", async () => {
++    const text = "Umowę zawarto z Mostbud sp. z o.o. w Lublinie.";
++    const start = text.indexOf("Mostbud");
++    const result = await new LocalPolishPseudonymizer(new PseudonymizationVault()).pseudonymize(text, [
++      { start, end: start + "Mostbud".length, action: "PSEUDONYMIZE", kind: "FIRM" }
++    ]);
++    expect(result.text).not.toContain("Mostbud");
++    expect(result.text).toContain("sp. z o.o.");
++    expect(result.findings).toEqual([expect.objectContaining({ kind: "PERSON", firm: "TEXT", source: "USER" })]);
++  });
++
++  it("a firm matched in the VAT white list is marked as found in the register", async () => {
++    const reply = {
++      status: "FOUND",
++      result: { tytul_lub_nazwa: "ZIELONY LAS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ", adres: "JANA NOWAKOWSKIEGO 15, 20-001 LUBLIN", osoby: [] }
++    };
++    const registry: RegistryFormsProvider = { forms: async () => whiteListForms(reply) };
++    const text = "Wezwanie od Zielony Las, NIP 526-025-02-74, ul. Nowakowskiego 15, 20-001 Lublin.";
++    const result = await new LocalPolishPseudonymizer(new PseudonymizationVault(), undefined, undefined, registry).pseudonymize(text);
++    expect(result.text).not.toContain("Zielony Las");
++    expect(result.text).not.toContain("Nowakowskiego 15");
++    expect(result.findings.find((finding) => finding.kind === "PERSON")).toMatchObject({ firm: "REGISTRY" });
++  });
++
++  it("a register address of a street named after a person also matches the surname only", () => {
++    const forms = addressForms("JÓZEFA NOWAKOWSKIEGO 15, 40-847 KATOWICE").map((form) => form.text);
++    expect(forms).toContain("Nowakowskiego 15");
++    expect(forms).toContain("Józefa Nowakowskiego 15");
++    // A Roman numeral is no surname: "Jana Pawła II 5" gives no "II 5".
++    expect(addressForms("JANA PAWŁA II 5, 00-001 WARSZAWA").map((form) => form.text)).not.toContain("II 5");
++  });
++
++  it("a register address and firm name in any letter case are masked; small-letter prose stays", async () => {
++    const reply = {
++      status: "FOUND",
++      result: { tytul_lub_nazwa: "ZIELONY LAS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ", adres: "JANA NOWAKOWSKIEGO 15, 20-001 LUBLIN", osoby: [] }
++    };
++    const registry: RegistryFormsProvider = { forms: async () => whiteListForms(reply) };
++    const text = [
++      "Zielony LAS, NIP 526-025-02-74.",
++      "Siedziba: UL. NOWAKOWSKIEGO 15, 20-001 lublin; korespondencja: ul. NowaKowskiego  15.",
++      "Spacer przez zielony las nie jest firmą."
++    ].join("\n");
++    const result = await new LocalPolishPseudonymizer(new PseudonymizationVault(), undefined, undefined, registry).pseudonymize(text);
++    expect(result.text).not.toMatch(/nowakowskiego\s+15/iu);
++    expect(result.text).not.toMatch(/20-001 lublin/iu);
++    expect(result.text).not.toContain("Zielony LAS");
++    expect(result.text).toContain("zielony las nie jest");
++    const firmTokens = new Set(result.findings.filter((finding) => finding.firm).map((finding) => finding.token));
++    expect(firmTokens.size).toBe(1);
++  });
++});
++
+diff --git a/app/lex-web/src/PrivacyKeyTable.tsx b/app/lex-web/src/PrivacyKeyTable.tsx
+index f7055d2b..a641576b 100644
+--- a/app/lex-web/src/PrivacyKeyTable.tsx
++++ b/app/lex-web/src/PrivacyKeyTable.tsx
+@@ -4,6 +4,7 @@ import { caseLabel } from "./restoration-review.js";
+ 
+ export const KIND_LABEL: Record<string, string> = {
+   PERSON: "Osoba",
++  FIRM: "Firma",
+   ADDRESS: "Adres",
+   PESEL: "PESEL",
+   NIP: "NIP",
+diff --git a/app/lex-web/src/PrivacyPreview.tsx b/app/lex-web/src/PrivacyPreview.tsx
+index f33da595..df233100 100644
+--- a/app/lex-web/src/PrivacyPreview.tsx
++++ b/app/lex-web/src/PrivacyPreview.tsx
+@@ -30,6 +30,13 @@ type Suggestion = DocumentReviewResponse["suggestions"][number];
+ 
+ const overlaps = (a: { start: number; end: number }, b: { start: number; end: number }) => a.start < b.end && a.end > b.start;
+ 
++// A firm found in the VAT white list or KRS says so: the register match is visible.
++function suggestionLabel(mark: { kind: string; firm?: "REGISTRY" | "TEXT" }): string {
++  if (mark.firm === "REGISTRY") return "Firma (biała lista VAT / KRS)";
++  if (mark.firm === "TEXT") return "Firma";
++  return KIND_LABEL[mark.kind] ?? mark.kind;
++}
++
+ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+   busy?: boolean;
+   // Decisions made earlier (back to a file in the batch preview).
+@@ -233,7 +240,7 @@ export function PrivacyPreview(props: PrivacyPreviewRequest & {
+                   ? `${KIND_LABEL[mark.kind] ?? mark.kind} - Twoje zaznaczenie; kliknij, aby cofnąć`
+                   : open
+                     ? "Zostanie jawne - kliknij, aby zakryć"
+-                    : `${KIND_LABEL[mark.kind] ?? mark.kind} - zostanie zakryte; kliknij, aby zostawić jawne`
++                    : `${suggestionLabel(mark)} - zostanie zakryte; kliknij, aby zostawić jawne`
+               }
+               onClick={() =>
+                 mark.user
+diff --git a/app/lex-web/src/api.ts b/app/lex-web/src/api.ts
+index 730465d2..d6e06fbf 100644
+--- a/app/lex-web/src/api.ts
++++ b/app/lex-web/src/api.ts
+@@ -130,7 +130,9 @@ export type PiiKind =
+   | "VEHICLE_PLATE"
+   | "BAR_NUMBER"
+   | "PAYMENT_CARD"
+-  | "CUSTOM";
++  | "CUSTOM"
++  // The user's mark of a firm name (a firm token on the runtime side).
++  | "FIRM";
+ 
+ export type PrivacyAction =
+   | "PSEUDONYMIZE"
+@@ -596,6 +598,8 @@ export type DocumentReviewResponse = {
+     start: number;
+     end: number;
+     kind: PiiKind;
++    // A firm's name, from a public register (VAT white list, KRS) or from the text.
++    firm?: "REGISTRY" | "TEXT";
+     // The local model read it as no person ("słowo pospolite"); masked until the user unmasks it.
+     aiNotPerson?: string;
+   }>;
+-- 
+2.43.0
+

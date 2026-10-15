@@ -1,0 +1,727 @@
+From f1d41c41c7b60d3a5f08ef55afd2d800adb2a443 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 15 Oct 2026 11:53:50 +0000
+Subject: [PATCH 3/5] Akta: kolejka OCR i anonimizacji wielu plikow; wybor
+ wielu plikow w czacie
+
+- processing-queue.ts: kolejka plikow sprawy (stany, kolejnosc, usuwanie,
+  zatrzymanie, ponowienie bledow) z testami
+- WorkspaceManager: 'Przetworz wszystkie' nie blokuje panelu; pliki czytane
+  po kolei (najpierw OCR wszystkich, potem anonimizacja - model tekstowy
+  startuje raz - potem podglad kazdego); w trakcie mozna dodawac kolejne
+  pliki ('Dodaj do kolejki', 'Do kolejki'); panel kolejki ze stanem kazdego
+  pliku, postepem, 'Usun z kolejki', 'Zatrzymaj kolejke', 'Wyczysc
+  zakonczone', 'Ponow' dla bledow; opcja 'Od razu do kolejki' dla
+  dodawanych grup plikow
+- podglady z kolejki i pojedynczego przetwarzania czekaja na swoja kolej
+  zamiast sie nadpisywac
+- DocumentPrivacyPanel (czat): wybor kilku plikow naraz trafia do kolejki
+  panelu (jak przeciagniecie)
+
+Claude-Session: https://claude.ai/code/session_011d6PDcZqYmtCkYJ17JwS7C
+---
+ app/lex-web/src/ChatApp.tsx              |   1 +
+ app/lex-web/src/DocumentPrivacyPanel.tsx |  18 +-
+ app/lex-web/src/WorkspaceManager.tsx     | 252 ++++++++++++++++++-----
+ app/lex-web/src/processing-queue.test.ts |  58 ++++++
+ app/lex-web/src/processing-queue.ts      | 100 +++++++++
+ app/lex-web/src/workspace.css            |  65 ++++++
+ 6 files changed, 440 insertions(+), 54 deletions(-)
+ create mode 100644 app/lex-web/src/processing-queue.test.ts
+ create mode 100644 app/lex-web/src/processing-queue.ts
+
+diff --git a/app/lex-web/src/ChatApp.tsx b/app/lex-web/src/ChatApp.tsx
+index ee642265..2a08b895 100644
+--- a/app/lex-web/src/ChatApp.tsx
++++ b/app/lex-web/src/ChatApp.tsx
+@@ -1054,6 +1054,7 @@ export default function ChatApp({
+               onCaseFilesChange={() =>
+                 setWorkspaceRefresh((value) => value + 1)
+               }
++              onFilesChosen={(files) => void acceptFiles(files)}
+               onAttachmentSelectionChange={(selection) => {
+                 if (!selection) return;
+                 setDocumentAttachments((current) =>
+diff --git a/app/lex-web/src/DocumentPrivacyPanel.tsx b/app/lex-web/src/DocumentPrivacyPanel.tsx
+index 38aeb2d3..f123dfec 100644
+--- a/app/lex-web/src/DocumentPrivacyPanel.tsx
++++ b/app/lex-web/src/DocumentPrivacyPanel.tsx
+@@ -120,7 +120,8 @@ export function DocumentPrivacyPanel({
+   onAttachmentSelectionChange,
+   onCaseFilesChange,
+   onProcessingEvent,
+-  processingOptionsFor
++  processingOptionsFor,
++  onFilesChosen
+ }: {
+   caseId: string;
+   incomingFile?: File | null;
+@@ -136,6 +137,8 @@ export function DocumentPrivacyPanel({
+   onProcessingEvent?: (
+     event: DocumentProcessingEvent
+   ) => void;
++  // Several files chosen at once go to the parent's queue (read one after another).
++  onFilesChosen?: (files: File[]) => void;
+ }) {
+   const autoStartedFiles =
+     useRef<WeakSet<File>>(new WeakSet());
+@@ -524,14 +527,23 @@ export function DocumentPrivacyPanel({
+             ? progress
+               ? progressLabel(progress)
+               : "Przetwarzanie…"
+-            : "Wybierz PDF, dokument, arkusz, zdjęcie lub ZIP"}
++            : onFilesChosen
++              ? "Wybierz pliki: PDF, dokumenty, arkusze, zdjęcia lub ZIP (także kilka naraz)"
++              : "Wybierz PDF, dokument, arkusz, zdjęcie lub ZIP"}
+           <input
+             type="file"
+             accept=".pdf,.docx,.odt,.xlsx,.xlsm,.csv,.tsv,.txt,.md,.zip,application/pdf,application/zip,text/plain,text/markdown,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroenabled.12,image/jpeg,image/png,image/webp,image/tiff"
++            multiple={Boolean(onFilesChosen)}
+             disabled={loading || batchFinalizing || !caseId}
+             onChange={(event) => {
++              const chosen = Array.from(event.target.files ?? []);
++              if (onFilesChosen && chosen.length > 1) {
++                event.target.value = "";
++                onFilesChosen(chosen);
++                return;
++              }
+               void openFile(
+-                event.target.files?.[0]
++                chosen[0]
+               );
+               event.currentTarget.value = "";
+             }}
+diff --git a/app/lex-web/src/WorkspaceManager.tsx b/app/lex-web/src/WorkspaceManager.tsx
+index e49233ee..fc3e80ad 100644
+--- a/app/lex-web/src/WorkspaceManager.tsx
++++ b/app/lex-web/src/WorkspaceManager.tsx
+@@ -54,6 +54,19 @@ import { SheetEditor } from "./SheetEditor.js";
+ import { documentFormatFor, sheetFormatFor } from "./office-editing.js";
+ import { progressLabel, progressPercent } from "./processing-progress.js";
+ import { OCR_MODELS_INCOMPLETE } from "./document-errors.js";
++import {
++  clearFinished,
++  enqueueFiles,
++  isActiveEntry,
++  nextToRead,
++  queueStatusLabel,
++  queueSummary,
++  readEntries,
++  removeQueued,
++  stopQueued,
++  updateEntry,
++  type ProcessingQueueEntry
++} from "./processing-queue.js";
+ import { AnonymizedDocumentView } from "./AnonymizedDocumentView.js";
+ import { PrivacyPreview, type PrivacyPreviewRequest } from "./PrivacyPreview.js";
+ import { ArtifactDeanonymize } from "./ArtifactDeanonymize.js";
+@@ -272,7 +285,44 @@ export function WorkspaceManager({
+   // "Przetwórz wszystkie" wait in the queue.
+   const [privacyPreview, setPrivacyPreview] = useState<PrivacyPreviewQueueItem | null>(null);
+   const queuedPreviews = useRef<PrivacyPreviewQueueItem[]>([]);
+-  const nextPreview = () => setPrivacyPreview(queuedPreviews.current.shift() ?? null);
++  const privacyPreviewRef = useRef<PrivacyPreviewQueueItem | null>(null);
++  const showPrivacyPreview = (next: PrivacyPreviewQueueItem | null) => {
++    privacyPreviewRef.current = next;
++    setPrivacyPreview(next);
++  };
++  const nextPreview = () => {
++    const done = privacyPreviewRef.current;
++    // A file of the queue leaves its list once its preview is confirmed or skipped.
++    if (done) setQueue((current) => current.filter((entry) => !(entry.itemId === done.item.itemId && entry.status === "READY")));
++    showPrivacyPreview(queuedPreviews.current.shift() ?? null);
++  };
++  // A file read by the queue while another preview is open waits for its turn.
++  const offerPreview = (next: PrivacyPreviewQueueItem) => {
++    if (privacyPreviewRef.current) queuedPreviews.current.push(next);
++    else showPrivacyPreview(next);
++  };
++  // Files waiting for OCR and anonymization, processed one at a time in the order added;
++  // the panel stays usable and more files can join while it runs.
++  const [queue, setQueueState] = useState<ProcessingQueueEntry[]>([]);
++  const queueRef = useRef<ProcessingQueueEntry[]>([]);
++  const setQueue = (change: (current: ProcessingQueueEntry[]) => ProcessingQueueEntry[]) => {
++    queueRef.current = change(queueRef.current);
++    setQueueState(queueRef.current);
++  };
++  const queueRunning = useRef(false);
++  const queuedItems = useRef(new Map<string, WorkspaceItem>());
++  const caseRef = useRef(caseId);
++  caseRef.current = caseId;
++  const inQueue = (item: WorkspaceItem) => queue.some((entry) => entry.itemId === item.itemId && isActiveEntry(entry));
++  const queueActive = queue.some(isActiveEntry);
++  useEffect(() => {
++    // Another case: its files are not this queue's; the file being read finishes and is dropped.
++    queueRef.current = [];
++    setQueueState([]);
++    queuedItems.current.clear();
++    queuedPreviews.current = [];
++    showPrivacyPreview(null);
++  }, [caseId]);
+   const localAiReady = Boolean(localRuntime?.configured && localRuntime.state === "READY");
+   useEffect(() => {
+     let cancelled = false;
+@@ -385,6 +435,17 @@ export function WorkspaceManager({
+     )?.processing;
+   }
+ 
++  // "Od razu do kolejki": files added in a group are read one after another without a click.
++  const [autoQueue, setAutoQueue] = useState(false);
++  const pendingAutoQueue = useRef(new Set<string>());
++  useEffect(() => {
++    if (!workspace || !pendingAutoQueue.current.size) return;
++    const items = workspace.items.filter((item) => pendingAutoQueue.current.has(item.itemId));
++    if (!items.length) return;
++    for (const item of items) pendingAutoQueue.current.delete(item.itemId);
++    void processAll(items.filter((item) => canRunPrivacyPipeline(item) && !processingFor(item)));
++  }, [workspace]);
++
+   async function addFiles(
+     files: FileList | null
+   ): Promise<void> {
+@@ -404,6 +465,7 @@ export function WorkspaceManager({
+             caseId,
+             file
+           );
++        if (autoQueue) pendingAutoQueue.current.add(stored.uploadId);
+         if (selectedFolder) {
+           await moveWorkspaceItem(
+             caseId,
+@@ -413,7 +475,9 @@ export function WorkspaceManager({
+         }
+       }
+       setNotice(
+-        `Dodano ${files.length} plik(ów) do akt sprawy.`
++        autoQueue
++          ? `Dodano ${files.length} plik(ów) do akt sprawy i do kolejki przetwarzania.`
++          : `Dodano ${files.length} plik(ów) do akt sprawy.`
+       );
+     });
+   }
+@@ -440,7 +504,7 @@ export function WorkspaceManager({
+   }
+ 
+   // Stage and page counts of one file while its request runs; text never leaves the runtime.
+-  async function withItemProgress<T>(item: WorkspaceItem, action: (progressId: string) => Promise<T>): Promise<T> {
++  async function withItemProgress<T>(item: Pick<WorkspaceItem, "itemId">, action: (progressId: string) => Promise<T>): Promise<T> {
+     const progressId = newProgressId();
+     setProgressByItem((current) => ({ ...current, [item.itemId]: { stage: "READING" } }));
+     const timer = window.setInterval(() => {
+@@ -476,61 +540,87 @@ export function WorkspaceManager({
+   }
+ 
+   /**
+-   * Every unprocessed file shown: the OCR of all of them first (with the AI, only the vision
+-   * model works), then their personal data (the text model starts once), then the preview
+-   * of each, one after another.
++   * Files join the queue of the case; it reads them one at a time in the order added: the OCR
++   * of every queued file first (with the AI, only the vision model works), then their personal
++   * data (the text model starts once), then the preview of each, one after another.
+    */
+-  async function processAll(items: WorkspaceItem[]): Promise<void> {
+-    const modes = [...new Set(items.map(modeFor))];
++  async function processAll(items: WorkspaceItem[], clearConfirmed = false): Promise<void> {
++    const fresh = items.filter((item) => !inQueue(item));
++    if (!fresh.length) return;
++    const modes = [...new Set(fresh.map(modeFor))];
+     for (const mode of modes) if (!(await modeReady(mode))) return;
+-    const clear = items.filter((item) => processingModeKeepsClearText(modeFor(item)));
++    const clear = fresh.filter((item) => processingModeKeepsClearText(modeFor(item)));
+     if (
+       clear.length &&
++      !clearConfirmed &&
+       !window.confirm(
+         `${clear.map((item) => `„${item.filename}”`).join(", ")}: bez anonimizacji - tekst jawny trafi do modelu. Kontynuować?`
+       )
+     ) {
+       return;
+     }
+-    setBusy(true);
+     setError("");
+-    setNotice("");
+-    const reads: Array<{ item: WorkspaceItem; review: DocumentReviewResponse }> = [];
+-    const failed: string[] = [];
++    for (const item of fresh) queuedItems.current.set(item.itemId, item);
++    setQueue((current) =>
++      enqueueFiles(current, fresh.map((item) => ({ itemId: item.itemId, filename: item.filename, mode: modeFor(item) })))
++    );
++    void runQueue();
++  }
++
++  async function runQueue(): Promise<void> {
++    if (queueRunning.current) return;
++    queueRunning.current = true;
++    const runCase = caseId;
++    const reviews = new Map<string, DocumentReviewResponse>();
+     try {
+-      for (const item of items) {
+-        const mode = modeFor(item);
+-        try {
+-          const review = await withItemProgress(item, (progressId) =>
+-            processStoredCaseFile(caseId, item.itemId, undefined, progressId, { ...processingModeOptions(mode), detect: false })
+-          );
+-          reads.push({ item, review });
+-        } catch (failure) {
+-          failed.push(`„${item.filename}”: ${documentProcessingFailureMessage(failure)}`);
++      while (caseRef.current === runCase) {
++        const next = nextToRead(queueRef.current);
++        if (next) {
++          setQueue((current) => updateEntry(current, next.itemId, { status: "READING" }));
++          try {
++            const review = await withItemProgress(next, (progressId) =>
++              processStoredCaseFile(runCase, next.itemId, undefined, progressId, { ...processingModeOptions(next.mode), detect: false })
++            );
++            reviews.set(next.itemId, review);
++            setQueue((current) => updateEntry(current, next.itemId, { status: "READ" }));
++          } catch (failure) {
++            setQueue((current) => updateEntry(current, next.itemId, { status: "FAILED", error: documentProcessingFailureMessage(failure) }));
++          }
++          continue;
+         }
+-      }
+-      const ready: PrivacyPreviewQueueItem[] = [];
+-      for (const { item, review } of reads) {
+-        const mode = modeFor(item);
+-        const keepClear = processingModeKeepsClearText(mode);
+-        try {
+-          const detected = keepClear
+-            ? review
+-            : await withItemProgress(item, (progressId) =>
+-                detectDocument(caseId, review.documentId, { localAi: processingModeOptions(mode)?.localAi === true }, progressId)
+-              );
+-          ready.push({ item, mode, request: { caseId, review: detected, fileName: item.filename, keepClear } });
+-        } catch (failure) {
+-          failed.push(`„${item.filename}”: ${documentProcessingFailureMessage(failure)}`);
++        const read = readEntries(queueRef.current);
++        if (!read.length) break;
++        for (const entry of read) {
++          if (caseRef.current !== runCase) break;
++          const review = reviews.get(entry.itemId);
++          const item = queuedItems.current.get(entry.itemId);
++          if (!review || !item) {
++            setQueue((current) => updateEntry(current, entry.itemId, { status: "FAILED", error: "Brak wyniku odczytu - dodaj plik ponownie." }));
++            continue;
++          }
++          const keepClear = processingModeKeepsClearText(entry.mode);
++          setQueue((current) => updateEntry(current, entry.itemId, { status: "DETECTING" }));
++          try {
++            const detected = keepClear
++              ? review
++              : await withItemProgress(entry, (progressId) =>
++                  detectDocument(runCase, review.documentId, { localAi: processingModeOptions(entry.mode)?.localAi === true }, progressId)
++                );
++            reviews.delete(entry.itemId);
++            setQueue((current) => updateEntry(current, entry.itemId, { status: "READY" }));
++            offerPreview({ item, mode: entry.mode, request: { caseId: runCase, review: detected, fileName: entry.filename, keepClear } });
++          } catch (failure) {
++            setQueue((current) => updateEntry(current, entry.itemId, { status: "FAILED", error: documentProcessingFailureMessage(failure) }));
++          }
+         }
+       }
+-      queuedPreviews.current = ready.slice(1);
+-      setPrivacyPreview(ready[0] ?? null);
+-      if (failed.length) setError(failed.join(" · "));
+-      else if (ready.length) setNotice(`Przetworzono ${ready.length} plików - sprawdź i zatwierdź podgląd każdego z nich.`);
+-      await refresh();
+     } finally {
+-      setBusy(false);
++      queueRunning.current = false;
++      if (caseRef.current === runCase) {
++        const summary = queueSummary(queueRef.current);
++        if (summary.ready) setNotice(`Kolejka zakończona: ${summary.ready} plików czeka na podgląd i zatwierdzenie${summary.failed ? `, ${summary.failed} z błędem` : ""}.`);
++        await refresh().catch(() => undefined);
++      }
+     }
+   }
+ 
+@@ -559,7 +649,7 @@ export function WorkspaceManager({
+           options ? { ...options, ...(ocrFix ? {} : { ocrFix: false }) } : undefined
+         );
+       // Finalized only after the preview (doubtful OCR lines, local AI hints, masks) is confirmed.
+-      setPrivacyPreview({
++      offerPreview({
+         item,
+         mode,
+         request: {
+@@ -568,7 +658,7 @@ export function WorkspaceManager({
+           fileName: item.filename,
+           keepClear,
+           ...(review.pages.some((page) => page.corrections?.length) && ocrFix
+-            ? { onUndoOcrFixes: () => { setPrivacyPreview(null); void runAutomaticPrivacy(item, mode, false); } }
++            ? { onUndoOcrFixes: () => { showPrivacyPreview(null); void runAutomaticPrivacy(item, mode, false); } }
+             : {})
+         }
+       });
+@@ -732,7 +822,7 @@ export function WorkspaceManager({
+       knowledgeHits
+     ]);
+   // Shown files never processed: "Przetwórz wszystkie", each in its chosen mode.
+-  const unprocessed = visibleItems.filter((item) => canRunPrivacyPipeline(item) && !processingFor(item));
++  const unprocessed = visibleItems.filter((item) => canRunPrivacyPipeline(item) && !processingFor(item) && !inQueue(item));
+ 
+   function knowledgeHitFor(
+     item: WorkspaceItem
+@@ -1031,6 +1121,12 @@ export function WorkspaceManager({
+               {localAiMessage ? <small className="workspace-local-ai-state" role="status">{localAiMessage}</small> : null}
+             </span>
+           ) : null}
++          {canWrite ? (
++            <label className="workspace-auto-queue" title="Dodane pliki trafiają od razu do kolejki: OCR i anonimizacja po kolei, w wybranym domyślnie sposobie">
++              <input type="checkbox" checked={autoQueue} onChange={(event) => setAutoQueue(event.target.checked)} />
++              Od razu do kolejki
++            </label>
++          ) : null}
+           {canWrite ? (
+             <label className="chat-secondary-action workspace-file-upload">
+               + Dodaj pliki
+@@ -1048,15 +1144,15 @@ export function WorkspaceManager({
+               />
+             </label>
+           ) : null}
+-          {canWrite && unprocessed.length > 1 ? (
++          {canWrite && (unprocessed.length > 1 || (queueActive && unprocessed.length > 0)) ? (
+             <button
+               type="button"
+               className="chat-secondary-action"
+               disabled={busy}
+-              title="Najpierw OCR wszystkich plików, potem anonimizacja (model tekstowy uruchamia się raz), potem podgląd każdego pliku do zatwierdzenia"
++              title="Kolejka: pliki po kolei - najpierw OCR wszystkich, potem anonimizacja (model tekstowy uruchamia się raz), potem podgląd każdego do zatwierdzenia. W trakcie można dodawać kolejne pliki."
+               onClick={() => void processAll(unprocessed)}
+             >
+-              Przetwórz wszystkie ({unprocessed.length})
++              {queueActive ? `Dodaj do kolejki (${unprocessed.length})` : `Przetwórz wszystkie (${unprocessed.length})`}
+             </button>
+           ) : null}
+           <button
+@@ -1293,7 +1389,16 @@ export function WorkspaceManager({
+                       </button>
+                     ) : null}
+ 
+-                    {canWrite && canRunPrivacyPipeline(item) ? (
++                    {canWrite && inQueue(item) ? (
++                      <span className="workspace-process" role="status">
++                        <small>Kolejka: {queueStatusLabel(queue.find((entry) => entry.itemId === item.itemId)!, queue)}</small>
++                        {queue.some((entry) => entry.itemId === item.itemId && entry.status === "QUEUED") ? (
++                          <button type="button" onClick={() => setQueue((current) => removeQueued(current, item.itemId))}>
++                            Usuń z kolejki
++                          </button>
++                        ) : null}
++                      </span>
++                    ) : canWrite && canRunPrivacyPipeline(item) ? (
+                       <span className="workspace-process">
+                         <select
+                           aria-label={`Sposób przetwarzania: ${item.filename}`}
+@@ -1326,10 +1431,12 @@ export function WorkspaceManager({
+                             ) {
+                               return;
+                             }
+-                            void runAutomaticPrivacy(item, mode);
++                            // One file at a time: while the queue runs, the file joins it.
++                            if (queueActive) void processAll([item], true);
++                            else void runAutomaticPrivacy(item, mode);
+                           }}
+                         >
+-                          Przetwórz
++                          {queueActive ? "Do kolejki" : "Przetwórz"}
+                         </button>
+                       </span>
+                     ) : null}
+@@ -1592,6 +1699,49 @@ export function WorkspaceManager({
+           Wyszukiwanie po nazwie działa. Indeks treści dokumentów jest chwilowo niedostępny: {knowledgeSearchError}
+         </p>
+       ) : null}
++      {queue.length ? (
++        <section className="workspace-queue" aria-label="Kolejka przetwarzania">
++          <header>
++            <strong>
++              Kolejka przetwarzania · {(() => {
++                const summary = queueSummary(queue);
++                return `w toku ${summary.running} · czeka ${summary.waiting} · do podglądu ${summary.ready}${summary.failed ? ` · błędy ${summary.failed}` : ""}`;
++              })()}
++            </strong>
++            {queue.some((entry) => entry.status === "QUEUED") ? (
++              <button type="button" onClick={() => setQueue(stopQueued)} title="Pliki czekające na OCR wypadają z kolejki; bieżący plik kończy się normalnie">
++                Zatrzymaj kolejkę
++              </button>
++            ) : null}
++            {queue.some((entry) => !isActiveEntry(entry)) ? (
++              <button type="button" onClick={() => setQueue(clearFinished)}>
++                Wyczyść zakończone
++              </button>
++            ) : null}
++          </header>
++          <ol>
++            {queue.map((entry) => (
++              <li key={entry.itemId} className={`workspace-queue-${entry.status.toLowerCase()}`}>
++                <span>{entry.filename}</span>
++                <small>{queueStatusLabel(entry, queue)}</small>
++                {progressByItem[entry.itemId] ? (
++                  <progress max={100} value={progressPercent(progressByItem[entry.itemId]!)} />
++                ) : null}
++                {entry.status === "FAILED" ? (
++                  <>
++                    <small className="chat-inline-error">{entry.error}</small>
++                    {queuedItems.current.get(entry.itemId) ? (
++                      <button type="button" disabled={busy} onClick={() => void processAll([queuedItems.current.get(entry.itemId)!])}>
++                        Ponów
++                      </button>
++                    ) : null}
++                  </>
++                ) : null}
++              </li>
++            ))}
++          </ol>
++        </section>
++      ) : null}
+       {notice ? <p className="workspace-notice">{notice}</p> : null}
+       {privacyPreview ? (
+         <PrivacyPreview
+diff --git a/app/lex-web/src/processing-queue.test.ts b/app/lex-web/src/processing-queue.test.ts
+new file mode 100644
+index 00000000..b2635c13
+--- /dev/null
++++ b/app/lex-web/src/processing-queue.test.ts
+@@ -0,0 +1,58 @@
++import { describe, expect, it } from "vitest";
++import {
++  clearFinished,
++  enqueueFiles,
++  nextToRead,
++  queueStatusLabel,
++  queueSummary,
++  readEntries,
++  removeQueued,
++  stopQueued,
++  updateEntry,
++  type ProcessingQueueEntry
++} from "./processing-queue.js";
++
++const file = (itemId: string) => ({ itemId, filename: `${itemId}.pdf`, mode: "ANONYMIZE" as const });
++
++describe("processing queue of a case", () => {
++  it("files are read in the order added; a file already waiting keeps its place", () => {
++    let queue = enqueueFiles([], [file("a"), file("b")]);
++    queue = enqueueFiles(queue, [file("b"), file("c")]);
++    expect(queue.map((entry) => entry.itemId)).toEqual(["a", "b", "c"]);
++    expect(nextToRead(queue)?.itemId).toBe("a");
++    queue = updateEntry(queue, "a", { status: "READING" });
++    expect(nextToRead(queue)?.itemId).toBe("b");
++  });
++
++  it("files added while one is read join the end of the queue", () => {
++    let queue = updateEntry(enqueueFiles([], [file("a"), file("b")]), "a", { status: "READING" });
++    queue = enqueueFiles(queue, [file("d")]);
++    expect(queue.map((entry) => `${entry.itemId}:${entry.status}`)).toEqual(["a:READING", "b:QUEUED", "d:QUEUED"]);
++    expect(queueStatusLabel(queue[2]!, queue)).toBe("w kolejce do OCR (2.)");
++  });
++
++  it("a failed file added again is queued again at the end", () => {
++    let queue = updateEntry(enqueueFiles([], [file("a"), file("b")]), "a", { status: "FAILED", error: "x" });
++    queue = enqueueFiles(queue, [file("a")]);
++    expect(queue.map((entry) => `${entry.itemId}:${entry.status}`)).toEqual(["b:QUEUED", "a:QUEUED"]);
++    expect(queue[1]!.error).toBeUndefined();
++  });
++
++  it("only waiting files can be removed or stopped; the file being read finishes", () => {
++    let queue: ProcessingQueueEntry[] = enqueueFiles([], [file("a"), file("b"), file("c")]);
++    queue = updateEntry(queue, "a", { status: "READING" });
++    expect(removeQueued(queue, "a")).toHaveLength(3);
++    expect(removeQueued(queue, "b").map((entry) => entry.itemId)).toEqual(["a", "c"]);
++    expect(stopQueued(queue).map((entry) => entry.itemId)).toEqual(["a"]);
++  });
++
++  it("read files wait for the personal data step; summary and clearing", () => {
++    let queue = enqueueFiles([], [file("a"), file("b"), file("c")]);
++    queue = updateEntry(queue, "a", { status: "READ" });
++    queue = updateEntry(queue, "b", { status: "FAILED", error: "OCR" });
++    queue = updateEntry(queue, "c", { status: "READY" });
++    expect(readEntries(queue).map((entry) => entry.itemId)).toEqual(["a"]);
++    expect(queueSummary(queue)).toEqual({ waiting: 1, running: 0, ready: 1, failed: 1, total: 3 });
++    expect(clearFinished(queue).map((entry) => entry.itemId)).toEqual(["a"]);
++  });
++});
+diff --git a/app/lex-web/src/processing-queue.ts b/app/lex-web/src/processing-queue.ts
+new file mode 100644
+index 00000000..97eec131
+--- /dev/null
++++ b/app/lex-web/src/processing-queue.ts
+@@ -0,0 +1,100 @@
++import type { DocumentProcessingMode } from "./document-processing-mode.js";
++
++// The files of a case waiting for OCR and anonymization, processed one at a time in the
++// order added. OCR of all queued files comes first, then their personal data (the local
++// text model starts once), then the preview of each. Files can be added while it runs.
++export type ProcessingQueueStatus =
++  | "QUEUED" // waits for OCR
++  | "READING" // OCR running
++  | "READ" // read; waits for the personal data step
++  | "DETECTING" // personal data being found
++  | "READY" // waits for the user's preview
++  | "FAILED";
++
++export type ProcessingQueueEntry = {
++  itemId: string;
++  filename: string;
++  mode: DocumentProcessingMode;
++  status: ProcessingQueueStatus;
++  error?: string;
++};
++
++const ACTIVE: ReadonlySet<ProcessingQueueStatus> = new Set(["QUEUED", "READING", "READ", "DETECTING"]);
++
++export function isActiveEntry(entry: ProcessingQueueEntry): boolean {
++  return ACTIVE.has(entry.status);
++}
++
++/** New files go to the end; a file already waiting keeps its place; a failed one is queued again. */
++export function enqueueFiles(
++  queue: readonly ProcessingQueueEntry[],
++  files: ReadonlyArray<Pick<ProcessingQueueEntry, "itemId" | "filename" | "mode">>
++): ProcessingQueueEntry[] {
++  const next = queue.filter((entry) => !(entry.status === "FAILED" && files.some((file) => file.itemId === entry.itemId)));
++  for (const file of files) {
++    if (next.some((entry) => entry.itemId === file.itemId)) continue;
++    next.push({ itemId: file.itemId, filename: file.filename, mode: file.mode, status: "QUEUED" });
++  }
++  return next;
++}
++
++export function updateEntry(
++  queue: readonly ProcessingQueueEntry[],
++  itemId: string,
++  patch: Partial<Pick<ProcessingQueueEntry, "status" | "error">>
++): ProcessingQueueEntry[] {
++  return queue.map((entry) => (entry.itemId === itemId ? { ...entry, ...patch } : entry));
++}
++
++/** Only a file still waiting for OCR can leave the queue; the one being read finishes. */
++export function removeQueued(queue: readonly ProcessingQueueEntry[], itemId: string): ProcessingQueueEntry[] {
++  return queue.filter((entry) => !(entry.itemId === itemId && entry.status === "QUEUED"));
++}
++
++/** "Zatrzymaj": the files waiting for OCR leave; the one being read and those read go on. */
++export function stopQueued(queue: readonly ProcessingQueueEntry[]): ProcessingQueueEntry[] {
++  return queue.filter((entry) => entry.status !== "QUEUED");
++}
++
++/** Finished entries (waiting for preview, failed) leave the list; the active ones stay. */
++export function clearFinished(queue: readonly ProcessingQueueEntry[]): ProcessingQueueEntry[] {
++  return queue.filter(isActiveEntry);
++}
++
++export function nextToRead(queue: readonly ProcessingQueueEntry[]): ProcessingQueueEntry | undefined {
++  return queue.find((entry) => entry.status === "QUEUED");
++}
++
++export function readEntries(queue: readonly ProcessingQueueEntry[]): ProcessingQueueEntry[] {
++  return queue.filter((entry) => entry.status === "READ");
++}
++
++export type ProcessingQueueSummary = { waiting: number; running: number; ready: number; failed: number; total: number };
++
++export function queueSummary(queue: readonly ProcessingQueueEntry[]): ProcessingQueueSummary {
++  const count = (status: ProcessingQueueStatus) => queue.filter((entry) => entry.status === status).length;
++  return {
++    waiting: count("QUEUED") + count("READ"),
++    running: count("READING") + count("DETECTING"),
++    ready: count("READY"),
++    failed: count("FAILED"),
++    total: queue.length
++  };
++}
++
++const LABELS: Record<ProcessingQueueStatus, string> = {
++  QUEUED: "w kolejce do OCR",
++  READING: "OCR…",
++  READ: "odczytany, czeka na anonimizację",
++  DETECTING: "wykrywanie danych osobowych…",
++  READY: "gotowy - czeka na podgląd",
++  FAILED: "błąd"
++};
++
++export function queueStatusLabel(entry: ProcessingQueueEntry, queue: readonly ProcessingQueueEntry[]): string {
++  if (entry.status === "QUEUED") {
++    const position = queue.filter((other) => other.status === "QUEUED").indexOf(entry) + 1;
++    return `${LABELS.QUEUED} (${position}.)`;
++  }
++  return LABELS[entry.status];
++}
+diff --git a/app/lex-web/src/workspace.css b/app/lex-web/src/workspace.css
+index 5b84a107..683aaa1f 100644
+--- a/app/lex-web/src/workspace.css
++++ b/app/lex-web/src/workspace.css
+@@ -800,6 +800,71 @@
+   color: #4d574f;
+ }
+ 
++/* Processing queue of a case: files read one at a time, in the order added. */
++.workspace-auto-queue {
++  display: inline-flex;
++  align-items: center;
++  gap: 6px;
++  font-size: 0.9em;
++  color: #4d574f;
++}
++
++.workspace-queue {
++  margin: 10px 0 0;
++  padding: 10px 12px;
++  border: 1px solid #c9d3cb;
++  border-radius: 10px;
++  background: #f7f9f7;
++}
++
++.workspace-queue header {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 8px;
++}
++
++.workspace-queue header strong {
++  flex: 1;
++  min-width: 200px;
++}
++
++.workspace-queue ol {
++  margin: 8px 0 0;
++  padding-left: 22px;
++}
++
++.workspace-queue li {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 8px;
++  padding: 3px 0;
++}
++
++.workspace-queue li > span {
++  overflow-wrap: anywhere;
++}
++
++.workspace-queue li small {
++  color: #4d574f;
++}
++
++.workspace-queue li progress {
++  width: 140px;
++  height: 8px;
++  accent-color: #5f8a4c;
++}
++
++.workspace-queue-reading > span,
++.workspace-queue-detecting > span {
++  font-weight: 600;
++}
++
++.workspace-queue-failed > span {
++  color: #8a2d2d;
++}
++
+ .privacy-key-wrap {
+   max-height: 520px;
+   overflow: auto;
+-- 
+2.43.0
+
