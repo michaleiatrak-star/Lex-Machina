@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 2026-10-14 (wersja stabilna 07.10.2026, poprawka): usunięto tools/mcp-servers/mcp-servers-examples.zip — ZIP w ZIP-ie psuje instalację skilla; serwery MCP działają z audyt-systemu-v4/mcp-servers/. Wpis w CHECKSUMS.sha256 usunięty. Odpowiada 3.99.22 linii rozwojowej.
 - 3.99.16 (2026-10-06): HIERARCHIA-ZRODEL i DOSTEP-MASZYNOWY-API: ETPCz (baza MS etpcz.ms.gov.pl, stałe linki, id dokumentu); Portal Orzeczeń tylko po sygnaturze albo frazie
 
 - 3.99.15 (2026-10-06): HIERARCHIA-ZRODEL i DOSTEP-MASZYNOWY-API: TK wyłącznie ze źródeł urzędowych (karta sprawy IPO po sygnaturze, OTK ZU, formularz IPO); SAOS nie jest źródłem TK
