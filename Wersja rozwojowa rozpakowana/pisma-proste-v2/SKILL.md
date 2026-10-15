@@ -134,6 +134,10 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPM-KIS — Interpretacja podatkowa** | `references/SPM-interpretacja-podatkowa.md` | Wniosek o interpretację indywidualną Dyrektora KIS — kod „SPM” zajęty przez oświadczenie SKD, stąd sufiks (AUDYT-2026-10-04b) |
 | **SPM — Oświadczenie SKD** | `references/SPM-skd-oswiadczenie.md` | Oświadczenie o skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.) — **UWAGA: wczytaj najpierw** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md` **dla podstawy prawnej i sporu o termin z art. 45 ust. 5**; jeśli sprawa wymaga od razu pozwu o zapłatę → `pisma-procesowe-v3` |
 | **SPN — Wypowiedzenie umowy** | `references/SPN-wypowiedzenie.md` | Wypowiedzenie najmu, Wypowiedzenie dzierżawy, Wypowiedzenie zlecenia, Wypowiedzenie usług, Wypowiedz najem, Wypowiedz dzierżawę, Wypowiedz zlecenie, Wypowiedz usługi, Wypowiedz agencyjną, Wypowiedz pożyczkę, Wypowiedz rachunek, Wypowiedz ubezpieczenie, Wypowiedz licencję, Wypowiedz udział, Wypowiedz współpracę, Wypowiedz franczyzę, Wypowiedz abonament, Wypowiedz internet, Wypowiedz energię (umowy najmu, dzierżawy, zlecenia, usług, agencyjne, pożyczki, rachunku, ubezpieczenia, licencji, spółki cywilnej, energii, telekomunikacyjne i inne ciągłe; art. 673, 688, 704, 746, 750, 365¹ KC; najem lokalu mieszkalnego przez wynajmującego — art. 11 u.o.p.l., forma pisemna i przyczyna pod rygorem nieważności) — **UWAGA: umowa o pracę → dr-04**; spór o skuteczność wypowiedzenia lub eksmisja → `pisma-procesowe-v3` |
+| **SPO — Reklamacja** | `references/SPO-reklamacja.md` | Reklamacja (towar, usługa, treść cyfrowa; odpowiedź przedsiębiorcy — art. 7a u.p.k.) — **UWAGA: wczytaj najpierw** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KC-konsumenckie.md` (reżim konsumencki, zmiana 2023, hierarchia uprawnień) |
+| **SPO-R — Rękojmia** | `references/SPO-reklamacja.md` | Rękojmia (art. 556–568 KC; przy towarze kupionym przez konsumenta — niezgodność z umową, art. 43a u.p.k.) — kod SPO-R, ten sam plik co SPO |
+| **SPO-N — Niezgodność z umową** | `references/SPO-reklamacja.md` | Niezgodność towaru z umową, Obniżenie ceny, Wymiana towaru, Naprawa towaru (art. 43b–43f u.p.k.) — kod SPO-N, ten sam plik co SPO |
+| **SPR — Odstąpienie od umowy** | `references/SPR-odstapienie.md` | Odstąpienie od umowy, Odstąp od umowy, Odstępuję od umowy, Zerwij umowę (art. 27–38 u.p.k.; art. 491, 492, 494, 395, 635, 636, 644, 656 KC) — z powodu wady towaru → SPO; wypowiedzenie umowy ciągłej → SPN |
 
 ---
 
@@ -239,6 +243,8 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Zwolnienie od kosztów / przywrócenie terminu / inne | patrz M5 | patrz M6 | SPH |
 | Odpowiedź na zawezwanie do próby ugodowej | **tydzień przed posiedzeniem** | brak | SPI |
 | Wypowiedzenie umowy (najem, dzierżawa, zlecenie, usługi, agencja, pożyczka, rachunek, ubezpieczenie, licencja, spółka cywilna, energia, telekomunikacja) | termin wypowiedzenia z umowy lub ustawy, liczony od doręczenia (art. 61 KC) | brak | SPN |
+| Reklamacja, rękojmia, niezgodność towaru z umową | konsument: 2 lata od dostarczenia (art. 43c u.p.k.); rękojmia KC: art. 568; B2B: niezwłoczne zawiadomienie (art. 563 KC) | brak | SPO |
+| Odstąpienie od umowy | konsument na odległość / poza lokalem: 14 dni, 30 dni (art. 27 u.p.k.); zwłoka: po terminie dodatkowym (art. 491 KC) | brak | SPR |
 
 ---
 

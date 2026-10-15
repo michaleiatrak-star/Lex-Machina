@@ -1,8 +1,8 @@
 49eca7b24319ac4a396f2e3ff07b4f2971ca7f70f749c47b18a8ffdfc0546969  ./PORTABILITY-MANIFEST.md
-4446b051811feb9847e5c3520f845b51457cad71706d46dc68391aef99812ef9  ./SKILL.md
+33558f00f1c09871fe8a0662e9826e5cfc49ee64fcff99ca9ed88bfa78c78761  ./SKILL.md
 7838c9ee5368ea708512d2c10455cd0b85db0707af3c0f1ef0c44d63480b4d85  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
-d59cdf0c9c96ab75b6ff1bef9c2c6165a639f53b1149b31282a58b0ba2dc3ada  ./references/CHANGELOG.md
+73450c4c4aa52f0f5e9d40a2301e45650c7083f6c9c0f3d516250a798f3fcae0  ./references/CHANGELOG.md
 ca00b89d47c27e8d4ef7167471e955330f0b31abf56107609db42435537f7dea  ./references/HISTORIA-ZMIAN-PLIKOW.md
 a9e075075bbc7a4cf60e633ae397d1b23f88e6ade6feecc6adfed3b4f720647f  ./references/M1-zasady.md
 61daeb1ef49dcb7ec76e94e19a4a8a21927b1125e2e5bd2434f7125ff19093e9  ./references/M2-intake.md
@@ -26,3 +26,5 @@ d703b445c32a7e8fe954e04e13957218d17a64d8788a0b7c0c3a084726c7f4e5  ./references/S
 90bdabd9b5e64e266cf0d8e480abb8e297018b7efb6d5d5e92b4b3cbe5eca725  ./references/SPM-interpretacja-podatkowa.md
 3b5dad940ca8c30c3d013a8c090390a2a8f858260bbe8aef160cebae5a5c3849  ./references/SPM-skd-oswiadczenie.md
 3243eba214741b2e446c4574ad8f755c7a36acbbae2c1edf48e0d9ead05e1340  ./references/SPN-wypowiedzenie.md
+33c1b91718792004ac6054bbeff9d91d313fa83dd36db7babbcf3a227ba36797  ./references/SPO-reklamacja.md
+5e2b1570acbeb48675ea22d4e6ba8f8d2d2c122e282135ba5bbea08638e451f9  ./references/SPR-odstapienie.md
