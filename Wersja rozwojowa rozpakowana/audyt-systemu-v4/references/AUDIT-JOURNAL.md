@@ -70929,3 +70929,12 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - ⛔ Sąd przypisany sygnaturze niezgodny z sygnaturą (np. NSA jako SN): aplikacja CASE_COURT_ATTRIBUTION. Polityka korekty: tylko temat NO_MATCH lub twierdzenie nie w pełni wsparte.
 - Wynik: trafność decyzji o korekcie 0,993, pominięte korekty 0/590, fałszywe alarmy 7/410.
 - Wersje: orzeczenia-sadowe-v2 2.32, audyt-systemu-v4 6.230.
+
+## AUDYT-2026-10-14a — wypowiedzenie umowy jako pismo proste (6.231)
+
+- Źródło: seria 200 testów aplikacji (2026-10-14): „Napisz wypowiedzenie tej umowy najmu” z dostarczoną umową trafiało do analizator-umow-v1 i pipeline'u umowy (409), bo żaden schemat pism prostych ani wiersz routera [3]/[4] nie obejmował wypowiedzenia.
+- pisma-proste-v2 2.31: schemat SPN (`references/SPN-wypowiedzenie.md`) — warianty P (z zachowaniem terminu), W-L (wynajmujący lokalu mieszkalnego, art. 11 u.o.p.l.: forma pisemna i przyczyna pod rygorem nieważności), U (uprzedzenie o zaległości: art. 687 KC, art. 11 ust. 2 pkt 2 u.o.p.l.), N (art. 682 KC); termin liczony od doręczenia (art. 61 KC); forma (art. 77 § 2–3 KC).
+- RZĄD 1 (ELI, 2026-10-14): KC t.j. Dz.U. 2026 poz. 795 — art. 61, 77, 365¹, 673, 682, 687, 688, 704, 746, 750 (odczyt brzmienia); u.o.p.l. t.j. Dz.U. 2023 poz. 725 — art. 2, 11; `zmiany_po_tj` puste.
+- Warianty katalogu dwuwyrazowe („Wypowiedzenie najmu”, „Wypowiedz najem”…): wiersz z „Wypowiedzenie umowy najmu” przejmowałby „napisz umowę najmu” (aplikacja dopuszcza pominięcie rzeczownika odczasownikowego), a „wypowiedzenie umowy o świadczenie usług” — „wypowiedzenie umowy o pracę”. Umowa o pracę poza zakresem (dr-04).
+- Orzecznictwo nie powołane w schemacie (sn.pl z automatu: ochrona przed botami; SAOS tylko jako trop) — odesłanie do orzeczenia-sadowe-v2.
+- Wersje: pisma-proste-v2 2.31, audyt-systemu-v4 6.231.

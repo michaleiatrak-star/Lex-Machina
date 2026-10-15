@@ -1,5 +1,7 @@
 # CHANGELOG — pisma-proste-v2
 
+- 2.31 (2026-10-14a, AUDYT-2026-10-14a): nowy schemat SPN — wypowiedzenie umowy (najem lokalu mieszkalnego i użytkowego, dzierżawa, zlecenie, usługi, umowa bezterminowa ciągła); warianty P, W-L (art. 11 u.o.p.l.), U (uprzedzenie o zaległości), N (art. 682 KC); obliczanie terminu od doręczenia (art. 61 KC). Przepisy odczytane w ELI 2026-10-14: KC t.j. Dz.U. 2026 poz. 795, u.o.p.l. t.j. Dz.U. 2023 poz. 725. Dotąd „napisz wypowiedzenie umowy najmu” trafiało do analizator-umow-v1 (pipeline umowy), bo żaden schemat pism prostych nie obejmował wypowiedzenia.
+
 - 2.30 (2026-10-13b, AUDYT-2026-10-13b): M7-eskalacja — w aplikacji Lex Machina z wybranym skillem pisma-proste-v2 komunikat eskalacji kończy pytanie o przełączenie zamiast „Kontynuuję z użyciem pisma-procesowe-v3.” (wątek nie może sam wczytać pipeline'u pisma procesowego; przełącza aplikacja). Bez zmian w kryteriach eskalacji.
 
 - 2.29 (2026-10-11a, AUDYT-2026-10-11a, zgł. #109): KROK 9d wczytuje `shared/FORMAT-CYTOWANIA.md`. SPH: ⛔ „art. 102 §1” u.k.s.c. → „art. 102 ust. 1” (ustawa ma ustępy; ELI DU/2025/1228, 2026-10-11), zapis „(Dz. U. z [rok] r. poz. [nr])”. SPF-SPG: metryka t.j. DU/2025/1228 oznaczona jako metryka, zapis do pisma z ELI wg reguły.

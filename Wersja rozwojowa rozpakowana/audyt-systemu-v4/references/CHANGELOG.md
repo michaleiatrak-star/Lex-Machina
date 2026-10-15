@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.231 (2026-10-14a, AUDYT-2026-10-14a): pisma-proste-v2 2.31 — nowy schemat SPN (wypowiedzenie umowy); wpis w AUDIT-JOURNAL.
+
 - 6.230 (2026-10-13e, AUDYT-2026-10-13e): kalibracja kontroli trafienia (1000 przypadków) — orzeczenia-sadowe-v2 2.32 Faza 1-Z pkt 7–8 (stanowisko właściwego organu, nie strony; określenie sprawy przed tekstem); wpis w AUDIT-JOURNAL.
 
 - 6.229 (2026-10-13d, AUDYT-2026-10-13d): błędy wyszukiwania orzeczeń z aplikacji 0.1.27 — orzeczenia-sadowe-v2 2.31 Faza 1-Z (zgodność trafienia z pytaniem, treść tylko z pobranego dokumentu, brak dopasowania zastępczego, zakaz zapowiedzi zamiast wyniku, analiza błędu z rejestru aplikacji); wpis w AUDIT-JOURNAL.
