@@ -538,8 +538,8 @@ Analiza ISU wykonywana PER DOKUMENT:
   Umowa 5: podmiot_B wskazany przez 6/7 elementów (E03 błędny) → strona = podmiot_B
 
 WYNIK ISU-2 per umowę:
-  ✅ PODMIOT WSKAZANY 1–2: podmiot_A (HP sp. z o.o.)
-  ✅ PODMIOT WSKAZANY 3–5: podmiot_B (HPG sp. z o.o.)
+  ✅ PODMIOT WSKAZANY 1–2: podmiot_A ([SPÓŁKA-A] sp. z o.o.)
+  ✅ PODMIOT WSKAZANY 3–5: podmiot_B ([SPÓŁKA-B] sp. z o.o.)
   ⚠️ ELEMENT BŁĘDNY umów 3–5: KRS (wskazuje podmiot_A zamiast podmiot_B)
 
 ⚠️ OGRANICZENIE: ISU ustala STRONĘ każdej umowy z osobna.
@@ -557,7 +557,7 @@ WYNIK ISU-2 per umowę:
 ┌───────────────────────┬──────────────────────────────┬───────────────────────┐
 │ Typ sporu             │ Element błędny               │ Efekt ISU             │
 ├───────────────────────┼──────────────────────────────┼───────────────────────┤
-│ Pracodawca            │ KRS przy prawidłowym NIP     │ Pracodawca = HPG;     │
+│ Pracodawca            │ KRS przy prawidłowym NIP     │ Pracodawca = [SPÓŁKA-B];     │
 │ wielopodmiotowy       │                              │ błąd w KRS nie        │
 │                       │                              │ zmienia strony umowy  │
 ├───────────────────────┼──────────────────────────────┼───────────────────────┤

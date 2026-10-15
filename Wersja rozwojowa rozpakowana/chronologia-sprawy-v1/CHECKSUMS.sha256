@@ -1,5 +1,5 @@
 62e97b5ff5f7dd3ca79458a6e1f10c1df48458e23ffacab0e3dd47aca4597253  ./PORTABILITY-MANIFEST.md
-e6e5036d11a87881c8da598a9c0c8fe7f0596a22c49835c3e479328f01bfe7b3  ./SKILL.md
+10c67db7e7eb481e8e14dddc0e5ff26d8dcdb4000bb3af120742343694e75681  ./SKILL.md
 286fd34fddbf54766f9ada49449e6f3631ee82851cd54ae75a7643a2f1bbce98  ./agents/openai.yaml
 73fa0b1d08999db088c2538f79c3bff3a87ea8655ce2dbcae874ba365cff84e3  ./assets/ChronologiaSprawy.jsx
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
@@ -7,8 +7,8 @@ ad9b811b2885cb427fb1b641873df9da09c883a5a5608de0369e5fb2a288c079  ./assets/widge
 eb13545f2104de310630c473e5700d3c7a1a73830d3ff22129018ad974bac86f  ./assets/widget-timeline.html
 1ac295b35e39c95d3e66f423b394b5a01c09ae23894a025c05e7b84512a4acb8  ./references/BLUEPRINT-SCHEMA.md
 8601c808a64dd48c1cf1a5ff3b99334df2ba27becb21559ee05d7a18b398e1e9  ./references/CHANGELOG.md
-1206801ca2476a256166949a69650ced453f0b44f07c18f47acf5eed28420b72  ./references/HISTORIA-ZMIAN-PLIKOW.md
-0004d13d40ec49a8ceffbf1bb8b634373e02204fb31e225e4a9c2fbeba7bd51f  ./references/ekstrakcja-zdarzen.md
+e22d1c8f223f614bb693419a44ccb139b09eb5a1aa34148bb1fb07cbb1f0b5cb  ./references/HISTORIA-ZMIAN-PLIKOW.md
+8f79100f38edcef930868182ef988f9980314f46e70e25185bfdb6ff2e6b6603  ./references/ekstrakcja-zdarzen.md
 f6322160214d2077234f87d07bdc9203abc57fd428e31827973bf86b6e6417b7  ./references/sprzecznosci-dat.md
 f88f3412317c7361b9831664afc170219d92cb713fdf8d477511fdafe325e529  ./upgrade-min8/MIN8-UPGRADE.md
 eb51d004f1f155ccbcc8b67a7129a5b0baa6852afc5e9da53dac5357959a387e  ./upgrade-min8/QUALITY-CHECKLIST.md

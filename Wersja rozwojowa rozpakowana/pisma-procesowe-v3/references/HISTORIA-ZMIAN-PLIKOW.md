@@ -50,7 +50,7 @@ ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*
   Naprawa KAT-I: zaktualizowano konsekwencję — ZASTOSUJ W0 (nie "zastosuj venire").
   Wbudowanie w system: brak nowego pliku — W0 jest warstwą w R3 istniejącego modułu.
 
-2.0.0 (2026-06-27) — Upgrade po błędzie krytycznym VII P 94/25:
+2.0.0 (2026-06-27) — Upgrade po błędzie krytycznym [SYGN-SPRAWY]:
   Root cause: moduł nie miał triggera w PRE-W2; pipeline generował pismo bez
   wywołania modułu gdy rozbieżność wykryta dopiero po wygenerowaniu tekstu.
   Skutek: pismo v3 opierało argument na błędnym KRS z umów ("ten sam KRS"),
@@ -64,13 +64,13 @@ ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*
       obejście prawa (art.58§1 KC) + venire (art.8 KP) + dowody tożsamości.
   (4) Dodano ⛔ LISTA ZAKAZÓW (R1-R4) — w szczególności ZAKAZ-R1 zakazuje
       argumentu "ten sam KRS" gdy KRS w umowach jest błędny.
-  (5) Dodano przykład VII P 94/25 jako case study.
+  (5) Dodano przykład [SYGN-SPRAWY] jako case study.
   (6) Scalono z nowym plikiem /home/claude/MOD-PRACODAWCA-RZECZYWISTY.md
       (duplikat stworzony w tej samej sesji — eliminacja zgodnie z CHECKLIST-DEDUP).
 
 1.0.0 (2026-06-21) — Pierwsza wersja.
   Przyczyna: brak dedykowanego modułu do obsługi spraw wielopodmiotowych.
-  System posiadał MOD-STRATEGIA-WYBOR (identyfikacja ścieżek, z przykładem VII P 94/25),
+  System posiadał MOD-STRATEGIA-WYBOR (identyfikacja ścieżek, z przykładem [SYGN-SPRAWY]),
   ale brakowało szczegółowej sekwencji z tabelą kryteriów i orzecznictwem.
 ```
 
@@ -79,9 +79,9 @@ ani odtworzona z pamięci; przeniesiony został istniejący tekst.)*
 ```
 1.0.0 (2026-06-21) — Pierwsza wersja.
 Przyczyna: brak dedykowanego modułu do obsługi spraw wielopodmiotowych.
-System posiadał MOD-STRATEGIA-WYBOR (identyfikacja ścieżek, z przykładem VII P 94/25),
+System posiadał MOD-STRATEGIA-WYBOR (identyfikacja ścieżek, z przykładem [SYGN-SPRAWY]),
 ale brakowało szczegółowej sekwencji PR1–PR4 z tabelą kryteriów i orzecznictwem.
 Zidentyfikowano po analizie porównawczej pisma generowanego i pisma poprawionego
-przez użytkownika w sprawie VII P 94/25: różnica w jakości opracowania tematu
+przez użytkownika w sprawie [SYGN-SPRAWY]: różnica w jakości opracowania tematu
 pracodawcy rzeczywistego była krytyczna dla oceny (6,8 vs 9,1/10).
 ```

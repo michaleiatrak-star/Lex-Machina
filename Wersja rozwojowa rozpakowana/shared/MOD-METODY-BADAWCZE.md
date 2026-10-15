@@ -226,7 +226,7 @@ ZASTOSOWANIE: Sprawy z wieloma podmiotami (spółki zależne, grupy kapitałowe,
              mobbing z udziałem kilku przełożonych, sprawy gospodarcze z
              łańcuchem pośredników), sprawy gdzie kwalifikacja konta/adresu
              jako "służbowe" vs "prywatne" jest sporna (por. przykład
-             INTRA-CONTRA VII P 94/25 w analizator-dowodow-v3 §P1).
+             INTRA-CONTRA [SYGN-SPRAWY] w analizator-dowodow-v3 §P1).
 WYNIK:       Diagram powiązań (do show_widget — Visualizer diagram) +
              tabela "podmiot × rola w dokumencie X / Y / Z" pokazująca
              niespójności ról.

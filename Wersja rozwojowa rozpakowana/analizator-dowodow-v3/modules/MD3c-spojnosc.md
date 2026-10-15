@@ -13,7 +13,7 @@
 [ ] Czy nazwy własne (adresy e-mail, nazwy firm, imiona) są identyczne wszędzie? (→ INTRA/CROSS)
 [ ] Czy TOŻSAMOŚĆ OSOBY PODPISUJĄCEJ dokument dowodowy (imię/nazwisko na podpisie,
     pokwitowaniu, formularzu) zgadza się z danymi strony/świadka używanymi w pismach
-    procesowych? Drobne różnice w zapisie nazwiska (np. "Wiatr" vs "Wiatrak",
+    procesowych? Drobne różnice w zapisie nazwiska (np. "Nowak" vs "Nowakowski",
     "Poudel" vs "Paudel") NIE są pomijane jako oczywista zgodność — wymagają
     explicit odnotowania jako [DOUBT] lub [CROSS], nawet jeśli prawdopodobnie
     chodzi o tę samą osobę. (→ DOUBT/CROSS, kategoria IDENT)

@@ -154,8 +154,8 @@ tabelę przypisania dokumentów i faktów do konkretnych podmiotów, np.:
 
 | Podmiot | NIP | Dokumenty/maile z tego podmiotu | Osoby podpisujące |
 |---|---|---|---|
-| Human Park sp. z o.o. | [nr] | [lista] | [imiona] |
-| Human Park Global sp. z o.o. | [nr] | [lista] | [imiona] |
+| [SPÓŁKA-A] sp. z o.o. | [nr] | [lista] | [imiona] |
+| [SPÓŁKA-B] sp. z o.o. | [nr] | [lista] | [imiona] |
 
 Aktualizuj tę tabelę przy każdym nowym dokumencie odnoszącym się do
 któregokolwiek z podmiotów. Udostępnij ją użytkownikowi, gdy:

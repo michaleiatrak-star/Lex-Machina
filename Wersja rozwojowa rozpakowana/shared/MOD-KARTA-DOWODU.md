@@ -132,10 +132,10 @@ D02 (protokół KRS, kl.A) ──wzmacnia──► F-002 (tożsamość podmiotu)
 
 Graf T-03 (wynagrodzenie PFRON):
 
-D03 (lista PFRON HPG, kl.A) ─────────────────────────────────────►
+D03 (lista PFRON [SPÓŁKA-B], kl.A) ─────────────────────────────────────►
                                     F-004 (fakt pobierania 123 445 zł)
                                                 │
-D04 (lista PFRON HP, kl.A) ──ciągłość──► F-005 (hist. pobieranie)
+D04 (lista PFRON [SPÓŁKA-A], kl.A) ──ciągłość──► F-005 (hist. pobieranie)
                                                 │
 D05 (zeznania Nawrota, kl.B) ──potwierdza──► F-006 (praktyka wypłat)
                                                 │

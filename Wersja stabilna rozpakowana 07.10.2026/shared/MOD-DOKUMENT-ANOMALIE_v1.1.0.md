@@ -20,12 +20,12 @@
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-Konkurencyjny system analizujący tę samą sprawę VII P 94/25 wychwycił trzy anomalie
+Konkurencyjny system analizujący tę samą sprawę [SYGN-SPRAWY] wychwycił trzy anomalie
 dokumentacyjne, które umknęły pierwszemu skanowi:
 
-1. **REGON 14-cyfrowy** w umowach HPG (52473117500000) zamiast 9-cyfrowego (524731175)
-2. **KRS/NIP cross-contamination**: umowy 3–5 zawierają KRS od HP sp. z o.o. (0000796445)
-   ale NIP od HPG sp. z o.o. (6343021499) — sprzeczność wewnętrzna w jednym dokumencie
+1. **REGON 14-cyfrowy** w umowach [SPÓŁKA-B] ([REGON-B-14]) zamiast 9-cyfrowego ([REGON-B])
+2. **KRS/NIP cross-contamination**: umowy 3–5 zawierają KRS od [SPÓŁKA-A] sp. z o.o. ([KRS-A])
+   ale NIP od [SPÓŁKA-B] sp. z o.o. ([NIP-B]) — sprzeczność wewnętrzna w jednym dokumencie
 3. **Rozbieżność adresowa powoda**: "Azot 21/31" w umowach vs "Azot 2A/31" w pismach
 
 Każda z tych anomalii ma wartość procesową:
@@ -107,8 +107,8 @@ DA-4: REJESTR ANOMALII (DA-REJ)
   ├──────┬────────────────┬─────────────┬──────────┬────────────────┤
   │ DA#  │ Dokument       │ Pole        │ Wartość  │ Klasa/Efekt    │
   ├──────┼────────────────┼─────────────┼──────────┼────────────────┤
-  │ DA01 │ Umowa 29.09.23 │ KRS         │ 0000796445 vs │ I → błąd  │
-  │      │                │             │ NIP 6343021499│ pracodawcy │
+  │ DA01 │ Umowa 29.09.23 │ KRS         │ [KRS-A] vs │ I → błąd  │
+  │      │                │             │ NIP [NIP-B]│ pracodawcy │
   │ DA02 │ Umowy 3-5      │ REGON       │ 14 cyfr  │ I → wzorzec    │
   │ DA03 │ Umowy vs pisma │ Adres pow.  │ 21/31 vs │ II → wyjaśnić  │
   │      │                │             │ 2A/31    │                │
@@ -143,7 +143,7 @@ REGUŁA-KRS-NIP-CROSS:
   → NIE argumentuj: "ten sam KRS = ten sam podmiot"
 
 REGUŁA-REGON-FORMAT:
-  REGON firm: 9 cyfr (np. 524731175)
+  REGON firm: 9 cyfr (np. [REGON-B])
   REGON jednostek budżetowych/ich wydziałów: 14 cyfr
   Jeśli firma ma REGON 14-cyfrowy w umowie → błąd wzorca → Klasa I
 

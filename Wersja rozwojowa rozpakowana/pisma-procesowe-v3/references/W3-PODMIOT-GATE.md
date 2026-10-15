@@ -63,7 +63,7 @@ KROK P4 — UPRASZCZANIE NAGŁÓWKA (po potwierdzeniu):
     → NIP (zawsze) + KRS (dla spółek) + REGON (gdy wymagany)
     → aktualny adres siedziby z rejestru (nie adres kancelarii)
   Reguła upraszczania: jeśli pełna nazwa jest długa, stosuj skrót TYLKO
-    gdy jest zarejestrowany (np. "HPG sp. z o.o." tylko gdy taki skrót
+    gdy jest zarejestrowany (np. "[SPÓŁKA-B] sp. z o.o." tylko gdy taki skrót
     figuruje w KRS). W przeciwnym razie: pełna nazwa przy pierwszym
     wystąpieniu, następnie: "pozwany" / "spółka".
 

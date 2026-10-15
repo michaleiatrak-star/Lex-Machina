@@ -91,7 +91,7 @@ DECYZJA:
   ≥1 przesłanka ⛔ krytyczna → ELIMINUJ ŻĄDANIE lub ZMIEŃ PODSTAWĘ
 ```
 
-**Przykład (sprawa VII P 94/25):**
+**Przykład (sprawa [SYGN-SPRAWY]):**
 
 ```
 PRZEPIS: art. 25¹ §3 KP (Dz.U. z 2025 r. poz. 277 t.j.)
@@ -100,7 +100,7 @@ FAKT F-001: umowy nr 1-4 w aktach sprawy (D01)
 SUBSUMPCJA: F-001 ✅ spełnia P1 — 4 umowy wykazane dokumentarnie
 
 PRZESŁANKA P2: umowy zawarto między tymi samymi stronami
-FAKT F-002: wszystkie umowy pod KRS 0000796445 (nie 0001025052)
+FAKT F-002: wszystkie umowy pod KRS [KRS-A] (nie [KRS-B])
 SUBSUMPCJA: F-002 ⚠️ CZĘŚCIOWA — tożsamość stron sporna
   → RATUNEK: art. 23¹ §1 KP jako ścieżka alternatywna S2 (CV-ALT)
 
