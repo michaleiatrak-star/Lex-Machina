@@ -48,6 +48,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2025 poz. 843 | Ustawa o ryczałcie od przychodów | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 670 | Ustawa o OOŚ / oceny środowiskowe | ustawa o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa… | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1587 | Ustawa o odpadach / gospodarka komunalna | ustawa o odpadach | 2026-09-10c, RZĄD 1 |
+| Dz.U. 2026 poz. 1328 | Ustawa o odpadach / gospodarka komunalna | ustawa o odpadach (nowy t.j. z 1.09.2026, zastępuje 2023/1587) | 2026-10-15c, RZĄD 1 |
 | Dz.U. 2026 poz. 1195 | Ustawa o zwolnieniach grupowych | ustawa o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników | 2026-09-16c, RZĄD 1 (t.j. z 4.09.2026; poprzedni t.j. 2025 poz. 570 — wygasły; wiersz naprawiony — podmiana numeru z 10r wkleiła adnotację do komórki numeru i rozbiła kontrakt T15) |
 | Dz.U. 2023 poz. 1725 | Ustawa o skardze na przewlekłość postępowania | ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1725 | Ustawa o skargach na przewlekłość | jw. | 2026-09-10c, RZĄD 1 |
@@ -71,6 +72,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2025 poz. 1208 | Ustawa o świadczeniach rodzinnych | ustawa o świadczeniach rodzinnych (wiersz złożony z „Za życiem") | 2026-09-16d, RZĄD 1 (T31) |
 | Dz.U. 2026 poz. 1240 | Ustawa o świadczeniach rodzinnych | ustawa o świadczeniach rodzinnych (wiersz złożony z „Za życiem"; nowy t.j. z 1.09.2026) | 2026-10-09, RZĄD 1 (T31) |
 | Dz.U. 2023 poz. 1587 | Ustawa o odpadach | ustawa o odpadach (wiersz złożony z gospodarką komunalną) | 2026-09-16d, RZĄD 1 (T31) |
+| Dz.U. 2026 poz. 1328 | Ustawa o odpadach | ustawa o odpadach (wiersz złożony z gospodarką komunalną; nowy t.j. z 1.09.2026) | 2026-10-15c, RZĄD 1 (T31) |
 
 ---
 

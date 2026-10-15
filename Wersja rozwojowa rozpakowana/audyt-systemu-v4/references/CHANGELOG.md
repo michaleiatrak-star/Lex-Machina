@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.233 (2026-10-15c, AUDYT-2026-10-15c): mapy aktów — t.j. 2026/1324 (transport kolejowy), 1335 (Prawo wodne), 1328 (odpady) w mapa_dzu (TJ + PREV) i ALIASY-NAZW-AKTOW; DU/2026/507 — tytuł i zakres w mapa_dzu, ⛔ korekta daty VAT (1.11.2028), MONITORING etapów; dr-02 3.96, dr-04 3.50, dr-06 3.99.1, dr-09 3.49, prawo-polskie-v2 6.62, shared 3.99.36; wpis w AUDIT-JOURNAL.
+
 - 6.232 (2026-10-15b, AUDYT-2026-10-15b): przyczynowość krokowo — analiza-sadowa-v6 6.17, pisma-procesowe-v3 5.43, chronologia-sprawy-v1 1.18, shared 3.99.35 (MOD-GRAF-PRZYCZYNOWY 1.2.0); wpis w AUDIT-JOURNAL.
 
 - 6.231 (2026-10-14a, AUDYT-2026-10-14a, 2026-10-15a): pisma-proste-v2 2.31 — nowe schematy SPN, SPO, SPR; anonimizacja danych sprawy użytkownika w treściach skilli i paczkach (AUDYT-2026-10-15a); wpisy w AUDIT-JOURNAL.

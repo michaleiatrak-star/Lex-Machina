@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.49 (2026-10-15c, AUDYT-2026-10-15c): Nowe t.j.: transport kolejowy Dz.U. 2026 poz. 1324 (obejmuje 2026/41, 815, 912), Prawo wodne Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033, 1156 — 1156 od 1.01.2027), ustawa o odpadach Dz.U. 2026 poz. 1328 (12 ustaw zmieniających, w tym 2026/875 od 1.01.2027); brak zmian po t.j. — MAPA-AKTOW, mod-ustawa-transport, mod-PrWodne, mod-POS, mod-UE-PPWR. ELI 2026-10-15.
+
 - 3.48 (2026-10-12b, AUDYT-2026-10-12b): Ochrona przyrody: nowy t.j. Dz.U. 2026 poz. 1315 (ogł. 9.10.2026; obejmuje zm. 426, 737, 912) w MAPA-AKTOW i modułach POŚ; ⛔ mod-POS: „Prawo ochrony środowiska — Dz.U. 2026 poz. 670” → 2025 poz. 647 (670 to t.j. ustawy o udostępnianiu informacji o środowisku); zmiany po t.j. z 2026/815: Prawo wodne, odpady, drogi, kolej, śpbp (katalog art. 11, 12, 47 w mod-lowieckie-straz-lowiecka-PSL, pkt 18–23 z t.j. 2026/244), ochrona ludności. ELI 2026-10-12.
 
 - 3.47 (2026-10-09g, AUDYT-2026-10-09g): Transport (MAPA-AKTOW): nowelizacje po t.j. z datami z przepisów o wejściu w życie — transport drogowy, drogi publiczne, kolejowy, Prawo lotnicze, Kodeks morski; POŚ 10 (+1 ⏳), UOOŚiS 2 (+1 ⏳); ⛔ mod-PrWodne: Prawo wodne t.j. 2025/960 (było 2024/1773 — t.j. ustawy o minimalnym wynagrodzeniu); ⛔ ZRID t.j. 2024/311 (było 2024/1641 — rozp. RM). ELI 2026-10-09.

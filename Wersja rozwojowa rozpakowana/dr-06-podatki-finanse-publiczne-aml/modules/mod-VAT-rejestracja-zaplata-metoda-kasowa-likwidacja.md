@@ -1,8 +1,11 @@
 # Moduł — VAT: rejestracja i wykreślenie (Dział X rozdz. 1), zapłata podatku (Dział X rozdz. 4), metoda kasowa małego podatnika (art. 21), likwidacja działalności i remanent (art. 14)
 
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**
-> (obwieszczenie Marszałka Sejmu z 21.05.2025). ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz.
-> 894, 896, 1203, 1811; Dz.U. 2026 poz. 507, 846 — sprawdź przed każdym powołaniem.
+> (obwieszczenie Marszałka Sejmu z 1.09.2026). ⚠️ t.j. OBEJMUJE Dz.U. 2025 poz.
+> 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507, 846. ⛔ 2026/507 art. 6 (art. 96 ust. 3e–3f:
+> zgłoszenie VAT jako część wniosku o publikację informacji o spółce cywilnej w CEIDG)
+> w życie dopiero 1.11.2028 (art. 31 pkt 4; art. 28 — do zgłoszeń złożonych i nierozpatrzonych
+> przed tą datą przepisy dotychczasowe). ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź przed każdym powołaniem.
 >
 > ⛔ **HARD GATE — patrz `shared/PRAWO-HARDGATE.md`.** Żaden przepis, próg, limit,
 > termin ani stawka z tego modułu NIE jest podstawą rozliczenia bez weryfikacji

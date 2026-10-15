@@ -68,7 +68,7 @@
 | Prawo ochrony środowiska | Dz.U. 2025 poz. 647 t.j. — ⚠️ POPRAWIONE 2026-08-09 (FAZA 3E/ZASADA 14): poprzednia wersja BŁĘDNIE wskazywała "Dz.U. 2026 poz. 670" — TA pozycja jest tekstem jednolitym ZUPEŁNIE INNEJ ustawy (o udostępnianiu informacji o środowisku i jego ochronie, udziale społeczeństwa w ochronie środowiska oraz o ocenach oddziaływania na środowisko — tzw. "ustawa OOŚ", akt Z 2008 R., ODRĘBNY od Prawa ochrony środowiska z 2001 r.) — potwierdzone bezpośrednio przez ISAP (obwieszczenie z 9.05.2025, WDU20250000647) | aktualny na dzień aktualizacji (VER 2026-08-09) | decyzje środowiskowe, emisje, kary administracyjne |
 | Ustawa o udostępnianiu informacji o środowisku (OOŚ) — ODRĘBNY akt od Prawa ochrony środowiska, dodane 2026-08-09 | Dz.U. 2026 poz. 670 t.j. (obwieszczenie z 15.05.2026) | aktualny na dzień aktualizacji | decyzje środowiskowe (udział społeczeństwa, oceny oddziaływania — OOŚ/EIA), NIE MYLIĆ z Prawem ochrony środowiska (wiersz wyżej) |
 | Ustawa o ochronie przyrody | Dz.U. 2026 poz. 1315 t.j. (obwieszczenie z 4.09.2026, ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912; brak zmian po t.j. (ELI 2026-10-12)) | aktualny na dzień audytu | drzewa, formy ochrony, RDOŚ/GDOŚ |
-| Prawo wodne | Dz.U. 2025 poz. 960 t.j.; po t.j. (ELI 2026-10-12): 2025 poz. 1535; 2026 poz. 445, 605, 815 (od 4.07.2026), 1033, 1156 | aktualny na dzień audytu z weryfikacją zmian | Wody Polskie, zgody wodnoprawne |
+| Prawo wodne | Dz.U. 2026 poz. 1335 t.j. (ogł. 14.10.2026; obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — 2026/1156 w tekście jako brzmienie od 1.01.2027); brak zmian po t.j. (ELI 2026-10-15) | aktualny na dzień audytu z weryfikacją zmian | Wody Polskie, zgody wodnoprawne |
 
 ---
 

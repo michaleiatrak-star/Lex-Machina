@@ -17,7 +17,7 @@ VAT — podatek od towarów i usług; BAZA WERYFIKACJI STAWEK (sekcja 3: ISAP/za
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa o VAT | Dz.U. 2026 poz. 1263 t.j. z 1.09.2026 (⛔ zawiera 2026/507 — w życie 14.10.2026) |
+| Ustawa o VAT | Dz.U. 2026 poz. 1263 t.j. z 1.09.2026 (⛔ zawiera 2026/507 art. 6 — art. 96 ust. 3e–3f, w życie dopiero 1.11.2028) |
 
 ---
 

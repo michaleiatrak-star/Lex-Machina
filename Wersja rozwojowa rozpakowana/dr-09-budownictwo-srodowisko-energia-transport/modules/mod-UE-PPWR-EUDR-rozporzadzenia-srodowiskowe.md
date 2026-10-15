@@ -73,7 +73,7 @@ documents"**, sekcja aktów wykonawczych.
 | Materia | Akt polski | Uwaga |
 |---|---|---|
 | system kaucyjny, gospodarka opakowaniami | `Dz.U. 2026 poz. 619 t.j. ze zm.` → `mod-system-kaucyjny-opakowania` | ⛔ przepisy krajowe **nie zastępują** PPWR; przy kolizji pierwszeństwo ma rozporządzenie |
-| odpady — reżim ogólny | `Dz.U. 2023 poz. 1587 t.j. ze zm.` → `mod-ustawa-odpadach-gospodarka-komunalna` | definicje odpadu z dyrektywy 2008/98/WE nadal właściwe |
+| odpady — reżim ogólny | `Dz.U. 2026 poz. 1328 t.j.` → `mod-ustawa-odpadach-gospodarka-komunalna` | definicje odpadu z dyrektywy 2008/98/WE nadal właściwe |
 
 ### ⛔⛔ ZWERYFIKOWANE 2026-09-13 — USTAWA POLSKA **NIE ZOSTAŁA** DOSTOSOWANA
 

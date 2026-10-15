@@ -324,8 +324,8 @@ Przed odpowiedzią lub pismem zastosuj:
 ## WERYFIKACJA Dz.U.
 
 ```
-Prawo wodne: Dz.U. 2025 poz. 960 t.j. ze zm. (ELI 2026-10-09); po t.j.: 2025/1535, 2026/445, 605, 815 (od 4.07.2026 — art. 18: art. 240 ust. 3 pkt 24), 1033; ⏳ 2026/1156 (od 1.01.2027) (⛔ KOREKTA: było „2024 poz. 1773” — t.j. ustawy o minimalnym wynagrodzeniu)
-  Metrum kontrolne: Dz.U. 2025 poz. 960 — weryfikuj w ELI (RZĄD 1) czy jest nowszy t.j.
+Prawo wodne: Dz.U. 2026 poz. 1335 t.j. (obwieszczenie 17.09.2026, ogł. 14.10.2026) ✅ [VER] RZĄD 1 2026-10-15 (ELI); brak zmian po t.j.; t.j. obejmuje 2025/1535, 2026/445, 605, 815 (od 4.07.2026 — art. 18: art. 240 ust. 3 pkt 24), 1033 oraz 2026/1156 (w tekście jako brzmienie od 1.01.2027) (⛔ KOREKTA: było „2024 poz. 1773” — t.j. ustawy o minimalnym wynagrodzeniu)
+  Metrum kontrolne: Dz.U. 2026 poz. 1335 — weryfikuj w ELI (RZĄD 1) czy jest nowszy t.j. (poprzedni t.j. 2025/960)
   ✅ VER: isap.sejm.gov.pl 2026-06-05
   → Źródło: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241773
 Wody Polskie: https://wody.gov.pl

@@ -1,7 +1,7 @@
 # Moduł — VAT: płatnicy i sprzedaż egzekucyjna (art. 18, 106c), kasy rejestrujące — reżim ustawowy (art. 111–111b), wewnątrzwspólnotowe transakcje trójstronne — procedura uproszczona (art. 135–138)
 
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
-> ⚠️ NOWELIZACJE PO t.j.: Dz.U. 2025 poz. 894, 896, 1203, 1811; Dz.U. 2026 poz. 507 (⛔ w życie 14.10.2026 — do tej daty NIE stosować), 846.
+> ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
 >
 > ⛔ **HARD GATE — patrz `shared/PRAWO-HARDGATE.md`.** Kwoty ulg, progów i kar
 > zmieniają się nowelizacjami i rozporządzeniami — każda liczba w tym module

@@ -28,9 +28,9 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o zwolnieniach grupowych — current-state | **Dz.U. 2026 poz. 1195 t.j.** ✅ [VER] RZĄD 1 2026-09-10r (poprzednio 2025 poz. 570 — wygaśnięcie aktu) t.j. ze zm. | `mod-zwolnienia-grupowe-current-state-COV.md` + `mod-ustawa-zwolnienia-grupowe` | 🟢 B+/COV; fresh gate |
 | Ustawa o układach zbiorowych pracy i porozumieniach zbiorowych + routing związkowy | Dz.U. 2025 poz. 1661 ze zm. + właściwe ustawy związkowe | `mod-ustawa-zwiazki-zawodowe-spory-zbiorowe` | ✅ aktywny |
 | Karta Nauczyciela — aspekty pracownicze | Dz.U. 2026 poz. 515 t.j. ze zm. | `mod-ustawa-karta-nauczyciela-pracownicze` | ✅ aktywny; fresh gate |
-| Ustawa o rynku pracy i służbach zatrudnienia | Dz.U. 2025 poz. 620 ze zm. | `mod-ustawa-rynek-pracy-zatrudnienie` | ✅ aktywny |
+| Ustawa o rynku pracy i służbach zatrudnienia | Dz.U. 2025 poz. 620 ze zm. (m.in. 2026/507 art. 11 — CEIDG, w życie 14.10.2026) | `mod-ustawa-rynek-pracy-zatrudnienie` | ✅ aktywny |
 | Ustawa o rehabilitacji zawodowej i społecznej oraz zatrudnianiu osób niepełnosprawnych / PFRON | Dz.U. 2026 poz. 884 t.j. ze zm. | `mod-ustawa-rehabilitacja-PFRON` | ✅ aktywny; ✅ VER 2026-09-01 RZĄD 1 (ELI DU/2026/884: obwieszczenie 19.06.2026, ogł. 1.07.2026, obowiązujący; DU/2025/913 — status wygaśnięcie aktu) |
-| Ustawa o systemie ubezpieczeń społecznych (SUS) — current-state | Dz.U. 2026 poz. 199 t.j. ze zm. | `mod-SUS-current-state-COV.md` + `mod-SUS-ZUS-ubezpieczenia-spoleczne` + rodzina modułów SUS | 🟢 B+/COV; fresh gate |
+| Ustawa o systemie ubezpieczeń społecznych (SUS) — current-state | Dz.U. 2026 poz. 199 t.j. ze zm.; ⏳ 2026/507 art. 5 (art. 36b ust. 2, art. 43 ust. 5aa — zgłoszenia przez CEIDG, spółka cywilna) od 1.11.2028 | `mod-SUS-current-state-COV.md` + `mod-SUS-ZUS-ubezpieczenia-spoleczne` + rodzina modułów SUS | 🟢 B+/COV; fresh gate |
 | SUS — podstawa wymiaru składek / rozporządzenie składkowe | aktualne brzmienie SUS + właściwego rozporządzenia składkowego | `mod-ROZP-SKLADKOWE-podstawa-wymiaru` | ✅ aktywny; fresh gate kwot, wyłączeń i limitów |
 | SUS — pozostałe rozdziały | jw. | `mod-SUS-uzupelnienie-pokrycia-2026` | 🟡 B |
 | SUS — podleganie ubezpieczeniom | jw. | `mod-SUS-dzial-2-podleganie-ubezpieczeniom` | ✅ aktywny |

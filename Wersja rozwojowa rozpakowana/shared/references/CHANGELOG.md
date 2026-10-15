@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
+
 - 3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — lista „Wywoływany z” uzupełniona o wywołania krokowe: analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a. Treść metody bez zmian.
 
 - 3.99.34 (2026-10-13c, AUDYT-2026-10-13c): PRAWO-HARDGATE ŹRÓDŁO-3 — ⛔ usunięty znacznik ✅ [VER: web-fallback] (serwis tekstów to RZĄD 2B, E-4: 🟨 [KOTWICA-URZĘDOWA] na warunkach K-1…K-4, inaczej ⚠️; aplikacja Lex Machina i tak nie tworzy ✅ z RZĘDU 2B/3); tropy z wyszukiwarki, LEX, Legalis i portali (Dz.U. nowelizacji, data wejścia w życie) sprawdzane w ELI / Dz.U. HIERARCHIA-ZRODEL 2A: CBOSA wyłącznie 🟨 snapshot bez awansu, brak trafienia = OUT_OF_SCOPE (zgodnie z CBOSA-ADAPTER).

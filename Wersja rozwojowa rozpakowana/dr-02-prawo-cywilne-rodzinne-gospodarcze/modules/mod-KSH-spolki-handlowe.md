@@ -444,6 +444,21 @@ PSA, S.A. — spółki cywilnej tam NIE MA).
 - typowe zastosowanie: mała działalność dwóch+ wspólników, niski próg
   formalności — często etap PRZEJŚCIOWY przed przekształceniem w spółkę
   handlową (np. sp. jawną) gdy biznes rośnie
+
+⏳ OD 1.11.2028 (Dz.U. 2026 poz. 507, art. 31 pkt 4; ✅ [VER] RZĄD 1
+2026-10-15, ELI):
+- art. 860 §3–4 KC (art. 2 ustawy 507): umowa spółki i inne czynności
+  dotyczące spółki mogą być dokonane na wzorach w systemie CEIDG, jeżeli
+  przepis ustawy tak stanowi; brzmienie zawarte już w t.j. KC 2026/795 —
+  do tej daty NIE stosować
+- CEIDG publikuje informację o spółce cywilnej (NIP, REGON, nazwa,
+  wspólnicy i reprezentacja, siedziba, PKD) — rozdz. 6a ustawy o CEIDG
+  (art. 42a i n.), na wniosek o publikację
+- przejście (art. 26 ustawy 507): wspólnik, który przed 1.11.2028 ma
+  we wpisie w CEIDG NIP/REGON spółki cywilnej, składa wniosek o rozpoczęcie
+  publikacji informacji o spółce cywilnej (art. 42b ust. 7 pkt 1 ustawy
+  o CEIDG) do 31.03.2029; od 1.04.2029 te numery są usuwane z wpisów
+  wspólników
 ```
 
 ### 3. Spółki handlowe (KSH) — kapitały minimalne (orientacyjne)
