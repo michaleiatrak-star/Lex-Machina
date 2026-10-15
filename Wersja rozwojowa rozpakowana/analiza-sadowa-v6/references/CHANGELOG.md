@@ -1,5 +1,7 @@
 # CHANGELOG — analiza-sadowa-v6
 
+- 6.17 (2026-10-15b, AUDYT-2026-10-15b): Przejście II krok 8 — przesłanka związku przyczynowego (szkoda, krzywda, skutek, przestępstwo skutkowe) badana krokowo przez `shared/MOD-GRAF-PRZYCZYNOWY.md` (dowód mechanizmu, csqn, post hoc, przerwanie, alternatywy MET-ACH); linia ZWIĄZEK PRZYCZYNOWY w macierzy fakt-norma; pytanie w PUNKCIE STOP. Kolejność dat ≠ związek.
+
 - 6.16 (2026-10-10b, AUDYT-2026-10-10b): Ścieżki katalogu wyjściowego neutralne względem hosta; sekwencja wyszukiwania orzeczeń zgodna z Fazą 1-0.
 
 - 6.15 (2026-10-05j, AUDYT-2026-10-05j): Etap KOLEJNA-TURA: Przejście III, Przejście IV, format raportu końcowego i sekwencja po raporcie (każde przejście to osobna wiadomość) dołączane od drugiej tury wątku. Treść bez zmian.

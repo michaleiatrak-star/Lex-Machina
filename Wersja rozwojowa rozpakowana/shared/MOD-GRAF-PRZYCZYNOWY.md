@@ -1,9 +1,11 @@
 # MOD-GRAF-PRZYCZYNOWY — sieć zależności zdarzeń, wzajemny wpływ, skutki i scenariusze
 
-> **Wersja:** 1.1.0 (shared 3.99.1, AUDYT-2026-10-02 — rewizja ekspercka: NESS, zaniechanie, przypisanie karne, model wykluczeniowy MET-ACH) | **Status:** PRODUKCJA — plik kanoniczny shared/
+> **Wersja:** 1.2.0 (shared 3.99.35, AUDYT-2026-10-15b — wywołania krokowe z analizy sądowej, pisma procesowego i chronologii; wcześniej 1.1.0: NESS, zaniechanie, przypisanie karne, model wykluczeniowy MET-ACH) | **Status:** PRODUKCJA — plik kanoniczny shared/
 > **Wywoływany z:**
 >   - `analizator-dowodow-v3` MP13 §13.2 (łańcuchy → graf, gdy ogniwa się rozgałęziają lub zbiegają)
->   - `chronologia-sprawy-v1` TRYB C „graf” (zdarzenia z osi czasu jako węzły; widget `assets/widget-graf-przyczynowy.html`)
+>   - `chronologia-sprawy-v1` TRYB C „graf” (zdarzenia z osi czasu jako węzły; widget `assets/widget-graf-przyczynowy.html`) oraz KROK A5a (zależności przyczynowe w raporcie chronologii)
+>   - `analiza-sadowa-v6` Przejście II krok 8 (przesłanka związku przyczynowego w macierzy fakt-norma)
+>   - `pisma-procesowe-v3` W1.2c KROK PRZ (przesłanka związku przyczynowego tezy pisma)
 >   - `shared/MOD-METODY-BADAWCZE.md` MET-PT (siła dowodu połączenia = atrybut krawędzi)
 >   - `shared/MOD-LANCUCH-DOWODOWY.md` (rachunek łańcucha szeregowego i dowodów równoległych)
 > **Silnik:** `shared/tools/graf_przyczynowy.py` (raport MD / JSON / Mermaid, `--selftest`); ten sam model liczbowy

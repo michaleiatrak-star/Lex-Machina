@@ -1,6 +1,6 @@
 ---
 name: chronologia-sprawy-v1
-version: "1.17"
+version: "1.18"
 type: executive-chronologia
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -120,8 +120,19 @@ KROK A2 — Inwentaryzacja dokumentów (DOK-01, DOK-02, …)
 KROK A3 — Identyfikuj WĄTKI PRAWNE (W1, W2, …)
 KROK A4 — Przeprowadź FAZĘ EKSTRAKCJI (patrz niżej) per dokument
 KROK A5 — Wczytaj references/sprzecznosci-dat.md → sprawdź kolizje → buduj INDEKS SPRZECZNOŚCI
+KROK A5a — ZALEŻNOŚCI PRZYCZYNOWE (⛔ obowiązkowy, gdy: ≥2 wątki ze wspólnymi węzłami
+           LUB sprawa dotyczy szkody, krzywdy, skutku, odpowiedzialności LUB pytanie
+           „co z czego wynika / czy X spowodowało Y / czy da się wykluczyć związek”):
+           view shared/MOD-GRAF-PRZYCZYNOWY.md → TRYB C KROK C1–C2 i C5 (bez widgetu,
+           chyba że użytkownik go chce) → każde połączenie osobno: dowód mechanizmu,
+           csqn, flaga post hoc, przerwanie związku, wyjaśnienia alternatywne
+           (wersja przeciwnika jako OSLABIA/PRZERYWA). Wynik: związek USTALONY /
+           WYKLUCZONY / NIEWYKAZANY. Kolejność dat ≠ przyczyna.
+           Gdy warunek nie zachodzi: w raporcie jedna linia
+           „ZALEŻNOŚCI PRZYCZYNOWE: nie dotyczy — [powód]”.
 KROK A6 — Wygeneruj raport chronologiczny (FORMAT RAPORTU niżej):
            osobna oś per wątek + widok zbiorczy + fakty bezsporne + indeks sprzeczności
+           + zależności przyczynowe (A5a)
 KROK A7 — Zaproponuj widget jeśli ≥5 zdarzeń lub ≥2 wątki lub użytkownik potrzebuje eksportu
 ```
 
@@ -555,6 +566,12 @@ DOK-02: …
 
 ### FAKTY BEZSPORNE
 ✓✓ [lista zdarzeń klasy BEZSPORNE — do prezentacji w piśmie bez dowodzenia]
+
+### ZALEŻNOŚCI PRZYCZYNOWE (KROK A5a)
+Z-001 → Z-004: [połączenie] | Dowód mechanizmu: [DOK, str.] | csqn: [TAK/NIE + uzasadnienie]
+        | Post hoc: [ryzyko + czym wykluczone] | Przerwanie: [brak / zdarzenie Z-nnn]
+        | Alternatywy: [wyjaśnienie / wersja przeciwnika] → USTALONY / WYKLUCZONY / NIEWYKAZANY
+[albo: ZALEŻNOŚCI PRZYCZYNOWE: nie dotyczy — powód]
 
 ### INDEKS SPRZECZNOŚCI
 

@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.16"
+version: "6.17"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.16 (2026-10-10b, AUDYT-2026-10-10b): Ścieżki katalogu wyjściowego neutralne względem hosta; sekwencja wyszukiwania orzeczeń zgodna z Fazą 1-0.
+  Wersja bieżąca: 6.17 (2026-10-15b, AUDYT-2026-10-15b): Przejście II krok 8 — przesłanka związku przyczynowego badana przez shared/MOD-GRAF-PRZYCZYNOWY.md (nie sama kolejność dat).
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -286,6 +286,13 @@ Sekwencja obowiązkowa:
 5. Macierz fakt-norma (format poniżej)
 6. Fakty bez normy → "procesowo neutralne"
 7. Dwie wykluczające się kwalifikacje tej samej kwoty → uruchom MOD-D
+8. ⛔ Przesłanka ZWIĄZKU PRZYCZYNOWEGO (szkoda, krzywda, rozstrój zdrowia, skutek,
+   przestępstwo skutkowe, odpowiedzialność odszkodowawcza) → view shared/MOD-GRAF-PRZYCZYNOWY.md:
+   każde połączenie fakt → skutek z Mapy Faktycznej osobno — dowód mechanizmu (nie sama
+   kolejność dat), csqn, flaga post hoc, przerwanie związku, wyjaśnienia alternatywne
+   (MET-ACH). Oś czasu sprawy (chronologia-sprawy-v1, pamięć sprawy) jest materiałem,
+   nie dowodem związku. SPEŁNIONE tylko przy dowodzie połączenia; brak przesłanki →
+   „ZWIĄZEK PRZYCZYNOWY: nie dotyczy — [powód]”.
 
 Format macierzy:
 ```
@@ -295,12 +302,15 @@ Fakt nr | Norma (art. X ustawy Y) [zweryfikowano: URL] | Znamię | Status | Uwag
 ZNAMIONA SPORNE:    [znamię] → [co jest potrzebne do wykazania]
 ZNAMIONA NIESPORNE: [znamię] → [dokument potwierdzający]
 FAKTY NEUTRALNE:    [fakt] → [dlaczego bez normy]
+ZWIĄZEK PRZYCZYNOWY: [fakt → skutek] → [dowód mechanizmu / csqn / post hoc / przerwanie /
+                     alternatywy] → USTALONY / WYKLUCZONY / NIEWYKAZANY
 ```
 
 PUNKT STOP przed Przejściem III:
 Czy każda norma pochodzi z ELI (RZĄD 1, kanon E-1…E-5) / oficjalnego źródła ZWERYFIKOWANEGO web_search w tej sesji?
 Czy żaden wniosek nie opiera się na fakcie spoza Mapy Faktycznej?
-TAK do obu → przejdź dalej. NIE → uzupełnij brakujące web_search przed przejściem dalej.
+Czy każda przesłanka związku przyczynowego ma badanie połączeń (krok 8), a nie samą kolejność dat?
+TAK do wszystkich → przejdź dalej. NIE → uzupełnij brakujące web_search lub badanie połączeń przed przejściem dalej.
 
 > ⚑ KONIEC WIADOMOŚCI 2 — wyślij tę wiadomość. Przejście III w kolejnej wiadomości.
 

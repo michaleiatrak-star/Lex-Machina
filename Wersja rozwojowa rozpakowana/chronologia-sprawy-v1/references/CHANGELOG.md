@@ -1,5 +1,7 @@
 # CHANGELOG — chronologia-sprawy-v1
 
+- 1.18 (2026-10-15b, AUDYT-2026-10-15b): KROK A5a — zależności przyczynowe obowiązkowo (≥2 wątki ze wspólnymi węzłami, szkoda/skutek/odpowiedzialność albo pytanie o przyczynę): TRYB C KROK C1–C2 i C5 bez widgetu; sekcja ZALEŻNOŚCI PRZYCZYNOWE w raporcie (USTALONY / WYKLUCZONY / NIEWYKAZANY albo „nie dotyczy — powód”). Wcześniej TRYB C tylko na pytanie użytkownika.
+
 - 1.17 (2026-10-05o, AUDYT-2026-10-05o): graf i oś czasu: escapowanie, wartości domyślne, brakujące pola widoczne (F-232)
 
 - 1.16 (2026-10-05d, AUDYT-2026-10-05d): Szablony `assets/widget-timeline.html` (SAMPLE_DATA) i `assets/widget-graf-przyczynowy.html` (GRAF): literał danych poprzedzony komentarzem `lex:dane`. Host obsługujący show_widget z polem `data` (Lex Machina) wstawia dane sam i dokłada pasek eksportu (oś czasu; graf zachowuje własny pasek MOD-WIDGET-IO), więc model przekazuje tylko dane zamiast przepisywać szablon. Na innych hostach bez zmian.

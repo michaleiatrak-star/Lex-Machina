@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.232 (2026-10-15b, AUDYT-2026-10-15b): przyczynowość krokowo — analiza-sadowa-v6 6.17, pisma-procesowe-v3 5.43, chronologia-sprawy-v1 1.18, shared 3.99.35 (MOD-GRAF-PRZYCZYNOWY 1.2.0); wpis w AUDIT-JOURNAL.
+
 - 6.231 (2026-10-14a, AUDYT-2026-10-14a, 2026-10-15a): pisma-proste-v2 2.31 — nowe schematy SPN, SPO, SPR; anonimizacja danych sprawy użytkownika w treściach skilli i paczkach (AUDYT-2026-10-15a); wpisy w AUDIT-JOURNAL.
 
 - 6.230 (2026-10-13e, AUDYT-2026-10-13e): kalibracja kontroli trafienia (1000 przypadków) — orzeczenia-sadowe-v2 2.32 Faza 1-Z pkt 7–8 (stanowisko właściwego organu, nie strony; określenie sprawy przed tekstem); wpis w AUDIT-JOURNAL.

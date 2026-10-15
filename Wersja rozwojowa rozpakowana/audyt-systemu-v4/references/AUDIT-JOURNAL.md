@@ -70947,3 +70947,14 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Zamiana na znaczniki: [SPÓŁKA-A], [SPÓŁKA-B], [KRS-A], [KRS-B], [NIP-A], [NIP-B], [REGON-B], [SYGN-SPRAWY], [SYGN-SPRAWY-2], [E-MAIL-POWODA], [DOMENA-POZWANEJ], [ŚWIADEK-K], [ŚWIADEK-P], [TELEFON], [OSOBA-…]; nazwisko w przykładach wariantów pisowni — nazwiska fikcyjne.
 - Zakres: wersja rozwojowa i stabilne (07.10.2026, 26.09.2026) w obu repozytoriach, paczki ZIP (z zachowaniem listy plików), paczki dostawcze z 04.10.2026 (pliki wewnątrz zagnieżdżonych archiwów, CHECKSUMS i SHA256SUMS). `test_router_contract.py`: wzorzec „bez narracji incydentów” na znacznikach. Słowniki prywatności aplikacji (nazwiska PESEL, TERYT) bez zmian — dane referencyjne, nie dane sprawy.
 - Historia commitów na GitHubie zachowuje poprzednie brzmienie; jej przepisanie wymaga osobnej decyzji właściciela.
+
+## AUDYT-2026-10-15b — związek przyczynowy krokowo w skillach (6.232)
+
+- Źródło: przegląd na prośbę użytkownika (2026-10-15): metodę `shared/MOD-GRAF-PRZYCZYNOWY.md` wywoływały tylko analizator-dowodow-v3 (MP13 §13.2a, warunkowo) i chronologia-sprawy-v1 (TRYB C wyłącznie na pytanie użytkownika). Skille, w których związek przyczynowy jest najczęściej przesłanką — analiza-sadowa-v6 (kwalifikacja prawna) i pisma-procesowe-v3 (teza pisma) — nie wywoływały jej wcale; oś czasu mogła zastąpić badanie połączeń samą kolejnością dat.
+- analiza-sadowa-v6 6.17: Przejście II krok 8, linia ZWIĄZEK PRZYCZYNOWY w macierzy fakt-norma, pytanie w PUNKCIE STOP.
+- pisma-procesowe-v3 5.43: W1.2c KROK PRZ przed W1.3 (NIEWYKAZANY → W1.5 ⬛ BRAK) i zakaz przesłanki z samej kolejności dat.
+- chronologia-sprawy-v1 1.18: KROK A5a (obowiązkowy przy ≥2 wątkach ze wspólnymi węzłami, szkodzie/skutku/odpowiedzialności albo pytaniu o przyczynę) i sekcja raportu ZALEŻNOŚCI PRZYCZYNOWE.
+- shared 3.99.35: MOD-GRAF-PRZYCZYNOWY 1.2.0 — lista wywołań; treść metody bez zmian.
+- Aplikacja Lex Machina (osobno): krok ZWIAZEK-PRZYCZYNOWY i OS-CZASU-SPRAWY w rejestrze ścieżki obowiązkowej (warstwa SKILL), runda poprawki przy braku; moduł wczytywany z góry przy pytaniu o związek przyczynowy.
+- Wersje: analiza-sadowa-v6 6.17, pisma-procesowe-v3 5.43, chronologia-sprawy-v1 1.18, shared 3.99.35, audyt-systemu-v4 6.232.
+

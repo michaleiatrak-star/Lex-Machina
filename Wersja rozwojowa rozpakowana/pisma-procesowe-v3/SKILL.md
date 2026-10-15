@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.42"
+version: "5.43"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -550,6 +550,15 @@ KROK ŁD: Zbuduj łańcuchy dowodowe z kart
   → Scoring ★-★★★★★ per teza główna
   → OUTPUT łańcucha ŁD-XX → wejście do W1.3
 
+KROK PRZ: Związek przyczynowy (⛔ OBOWIĄZKOWE, gdy teza ma przesłankę związku przyczynowego:
+  szkoda, krzywda, rozstrój zdrowia, skutek, odszkodowanie, zadośćuczynienie)
+  view shared/MOD-GRAF-PRZYCZYNOWY.md
+  → Per połączenie fakt F-nn → skutek: dowód mechanizmu (nie sama kolejność dat), csqn,
+    flaga post hoc, przerwanie związku, wyjaśnienia alternatywne (w tym wersja przeciwnika
+    jako OSLABIA/PRZERYWA); oś czasu sprawy (chronologia) jako materiał
+  → Wynik USTALONY → przesłanka do W1.3 z dowodem połączenia;
+    NIEWYKAZANY → W1.5 jako ⬛ BRAK KRYTYCZNY lub ISTOTNY; WYKLUCZONY → teza do eliminacji
+
 KROK MT: Macierz Dowód × Teza (⛔ OBOWIĄZKOWE gdy ≥2 dowody i ≥2 tezy)
   view shared/MOD-MACIERZ-DOWOD-TEZA.md
   → MT1: inwentaryzacja — lista T1..Tn z przesłankami + lista D1..Dm z kategorią A/B/C/D
@@ -587,6 +596,7 @@ KROK MT: Macierz Dowód × Teza (⛔ OBOWIĄZKOWE gdy ≥2 dowody i ≥2 tezy)
 ⛔ Generator pisma nie pyta "jakie dowody mam?"
    Pyta: "jakie FAKTY F-nn prowadzą do TEZY T-X i w jakim łańcuchu?"
 ⛔ ZAKAZ: sekcja "Na dowód" bez powiązania z F-nn z rejestru.
+⛔ ZAKAZ: przesłanka związku przyczynowego oparta na samej kolejności dat (bez KROKU PRZ).
 ⛔ ZAKAZ: W1.3 bez gotowych łańcuchów ŁD-XX dla tez głównych.
 ⛔ ZAKAZ: W1.3 bez gotowej macierzy D×T (gdy ≥2 dowody i ≥2 tezy).
 ⛔ ZAKAZ: wnioski dowodowe jako lista en bloc — każdy wniosek wskazuje tezę Tn.
