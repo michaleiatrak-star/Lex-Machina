@@ -1,8 +1,10 @@
-# SPN — Wypowiedzenie umowy (najem, dzierżawa, zlecenie, usługi, umowa bezterminowa)
+# SPN — Wypowiedzenie umowy (najem, dzierżawa, zlecenie, usługi, agencja, pożyczka, rachunek, ubezpieczenie, licencja, spółka cywilna, energia, telekomunikacja, umowa bezterminowa)
 
 *Ładuj gdy: użytkownik chce wypowiedzieć umowę cywilnoprawną jednostronnym oświadczeniem:
-najem lokalu (mieszkalnego lub użytkowego), dzierżawę, zlecenie, umowę o świadczenie usług,
-inną umowę o charakterze ciągłym zawartą na czas nieoznaczony.*
+najem lokalu (mieszkalnego lub użytkowego), dzierżawę, zlecenie, umowę o świadczenie usług
+(w tym B2B, księgowość, IT, obsługa), umowę agencyjną, pożyczkę, rachunek bankowy, ubezpieczenie,
+licencję, udział w spółce cywilnej, umowę sprzedaży energii lub gazu, umowę telekomunikacyjną
+(abonament, internet), inną umowę o charakterze ciągłym (współpraca, franczyza, dystrybucja).*
 
 *Poza zakresem (przełącz):* umowa o pracę → `dr-04-prawo-pracy-zus-swiadczenia` (Kodeks pracy, inny
 reżim formy i odwołania); spór o skuteczność wypowiedzenia, pozew o eksmisję, powództwo
@@ -41,6 +43,32 @@ i o zmianie Kodeksu cywilnego (u.o.p.l.) — t.j. Dz. U. z 2023 r. poz. 725 (ELI
 | art. 11 ust. 3–5, 7 | niezamieszkiwanie ponad 12 miesięcy (6 miesięcy); tytuł do innego lokalu (miesiąc); zamiar zamieszkania właściciela (pół roku z lokalem zamiennym / 3 lata bez); osoba bliska — wskazanie jej pod rygorem nieważności |
 | art. 11 ust. 12 | lokator powyżej 75 lat przy wypowiedzeniu z ust. 5 — szczególna skuteczność |
 
+### Inne umowy — podstawa i termin (odczyt ELI, RZĄD 1, 2026-10-15)
+
+| Umowa | Przepis | Reguła wypowiedzenia |
+|---|---|---|
+| świadczenie usług (nienazwana: B2B, księgowość, IT, obsługa) | art. 750 w zw. z art. 746 KC | jak zlecenie: w każdym czasie; bez ważnego powodu — skutki z art. 746 § 1–2; nie można zrzec się z góry wypowiedzenia z ważnych powodów (§ 3). Najpierw sprawdź termin i karę umowną w umowie |
+| agencyjna, czas nieoznaczony | art. 764¹ § 1–3 KC | 1 miesiąc w pierwszym roku, 2 w drugim, 3 w trzecim i dalszych; terminów ustawowych nie można skracać; upływ z końcem miesiąca kalendarzowego, jeżeli umowa nie stanowi inaczej |
+| agencyjna, bez terminu | art. 764² KC | niewykonanie obowiązków w całości lub znacznej części albo nadzwyczajne okoliczności, także przy umowie na czas oznaczony; strona odpowiedzialna naprawia szkodę |
+| agencyjna — skutek | art. 764³–764⁴ KC | świadczenie wyrównawcze agenta (żądanie przed upływem roku od rozwiązania); wyłączenia z art. 764⁴ — uwzględnij przy wyborze podstawy |
+| pożyczka bez oznaczonego terminu zwrotu | art. 723 KC | zwrot w ciągu sześciu tygodni po wypowiedzeniu przez dającego pożyczkę |
+| rachunek bankowy, czas nieoznaczony | art. 730 KC | każda strona w każdym czasie; bank tylko z ważnych powodów |
+| ubezpieczenie osobowe | art. 830 § 1 KC | ubezpieczający w każdym czasie z terminem z umowy lub OWU, w braku — ze skutkiem natychmiastowym |
+| ubezpieczenie zawarte na czas określony (wypowiedzenie przez ubezpieczyciela) | art. 812 § 5 KC | tylko w przypadkach ustawowych i z ważnych powodów z umowy lub OWU. Odstąpienie ubezpieczającego (30 dni / 7 dni) — art. 812 § 4, to nie wypowiedzenie. Ubezpieczenia obowiązkowe (np. OC posiadacza pojazdu) — ustawa szczególna, odczytaj w ELI |
+| licencja autorska, czas nieoznaczony | art. 68 ust. 1–2 ustawy o prawie autorskim i prawach pokrewnych (t.j. Dz. U. z 2025 r. poz. 24) | twórca: terminy umowne, w ich braku na rok naprzód na koniec roku kalendarzowego; licencja ponad 5 lat — po upływie 5 lat jak na czas nieoznaczony. Po t.j. ogłoszono zmianę ustawy (Dz. U. z 2026 r. poz. 1296, wejście 6.11.2026) — sprawdź, czy dotyczy art. 68 |
+| udział w spółce cywilnej | art. 869 KC | czas nieoznaczony: na trzy miesiące naprzód na koniec roku obrachunkowego; z ważnych powodów — bez terminów, także przy czasie oznaczonym (zastrzeżenie przeciwne nieważne) |
+| sprzedaż energii / paliw gazowych (odbiorca końcowy) | art. 4j ust. 3–3a Prawa energetycznego (t.j. Dz. U. z 2026 r. poz. 43) | czas nieoznaczony: oświadczenie bez kosztów (odbiorca płaci za pobraną energię i usługi); czas oznaczony: bez kosztów i odszkodowań innych niż wynikające z umowy. Po t.j. ogłoszono zmiany (Dz. U. z 2026 r. poz. 516, 607, 900) — odczytaj aktualne brzmienie art. 4j przed redakcją |
+| telekomunikacja (abonament, internet) | art. 304 ustawy — Prawo komunikacji elektronicznej (Dz. U. z 2024 r. poz. 1221) | wypowiedzenie przed upływem okresu umowy: odszkodowanie dostawcy ograniczone ust. 3; brak odszkodowania w przypadkach z ust. 2. Termin i sposób — z umowy i regulaminu |
+| inna umowa ciągła bez terminu (współpraca, franczyza, dystrybucja) | art. 365¹ KC | terminy umowne, ustawowe lub zwyczajowe; w ich braku wygasa niezwłocznie po wypowiedzeniu |
+
+**Nie wypowiedzenie (inne oświadczenie, osobne pismo):** umowa o dzieło — odstąpienie zamawiającego
+przed ukończeniem dzieła za zapłatą wynagrodzenia (art. 644 KC); przechowanie — żądanie zwrotu
+albo odebrania rzeczy (art. 844 KC); użyczenie — żądanie zwrotu rzeczy (art. 715–716 KC). Nazwij
+oświadczenie zgodnie z przepisem; nie tytułuj go „wypowiedzeniem”.
+
+**Poza zakresem:** umowa o pracę (dr-04); umowa kredytu konsumenckiego i rozliczenia z bankiem
+(odczytaj ustawę o kredycie konsumenckim w ELI; spór → pisma-procesowe-v3).
+
 Przed każdym użyciem sprawdź w ELI, czy po t.j. nie ogłoszono zmian tych przepisów
 (`isap_tekst` zwraca `zmiany_po_tj`). Brzmienie cytuj z ELI, nie z tego pliku.
 
@@ -69,7 +97,9 @@ eksmisji albo druga strona już kwestionuje wypowiedzenie → `pisma-procesowe-v
 
 ```
 1. Rodzaj umowy: najem lokalu mieszkalnego / najem lokalu użytkowego / dzierżawa /
-   zlecenie / świadczenie usług / inna umowa ciągła (jaka?) / umowa o pracę → dr-04
+   zlecenie / świadczenie usług / agencyjna / pożyczka / rachunek / ubezpieczenie /
+   licencja / spółka cywilna / energia, gaz / telekomunikacja / inna umowa ciągła
+   (jaka?) / umowa o pracę → dr-04 (tabela „Inne umowy” powyżej)
 2. Kto wypowiada: najemca, wynajmujący, zleceniodawca, zleceniobiorca, usługobiorca...
 3. Czas trwania: nieoznaczony / oznaczony (do kiedy?) — przy oznaczonym: czy umowa
    wskazuje wypadki wypowiedzenia (art. 673 § 3 KC)? Jeśli nie → wypowiedzenie
@@ -158,7 +188,9 @@ Dotyczy: umowy [najmu lokalu / dzierżawy / zlecenia / o świadczenie usług] z 
 WYPOWIEDZENIE UMOWY [NAJMU]
 
 Działając na podstawie [art. 673 § 1 i 2 / art. 688 / art. 704 / art. 746 § 1 lub 2 /
-art. 365¹ Kodeksu cywilnego] [oraz § … umowy], niniejszym wypowiadam umowę [rodzaj] z dnia
+art. 750 w zw. z art. 746 / art. 764¹ / art. 723 / art. 730 / art. 830 § 1 / art. 869 /
+art. 365¹ Kodeksu cywilnego; art. 68 ustawy o prawie autorskim; art. 4j Prawa
+energetycznego] [oraz § … umowy / regulaminu / OWU], niniejszym wypowiadam umowę [rodzaj] z dnia
 [data], z zachowaniem [umownego / ustawowego] [N-miesięcznego] terminu wypowiedzenia,
 tj. ze skutkiem na dzień [data rozwiązania].
 

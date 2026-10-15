@@ -133,7 +133,7 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **SPL-GIP — Interpretacja GIP** | `references/SPL-interpretacja-GIP.md` | Wniosek o interpretację indywidualną Głównego Inspektora Pracy (kwalifikacja modelu współpracy) — kod „SPL” zajęty przez skargę na komornika, stąd sufiks (AUDYT-2026-10-04b) |
 | **SPM-KIS — Interpretacja podatkowa** | `references/SPM-interpretacja-podatkowa.md` | Wniosek o interpretację indywidualną Dyrektora KIS — kod „SPM” zajęty przez oświadczenie SKD, stąd sufiks (AUDYT-2026-10-04b) |
 | **SPM — Oświadczenie SKD** | `references/SPM-skd-oswiadczenie.md` | Oświadczenie o skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.) — **UWAGA: wczytaj najpierw** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md` **dla podstawy prawnej i sporu o termin z art. 45 ust. 5**; jeśli sprawa wymaga od razu pozwu o zapłatę → `pisma-procesowe-v3` |
-| **SPN — Wypowiedzenie umowy** | `references/SPN-wypowiedzenie.md` | Wypowiedzenie najmu, Wypowiedzenie dzierżawy, Wypowiedzenie zlecenia, Wypowiedzenie usług, Wypowiedz najem, Wypowiedz dzierżawę, Wypowiedz zlecenie, Wypowiedz usługi (umowy najmu, dzierżawy, zlecenia i usług; art. 673, 688, 704, 746, 750, 365¹ KC; najem lokalu mieszkalnego przez wynajmującego — art. 11 u.o.p.l., forma pisemna i przyczyna pod rygorem nieważności) — **UWAGA: umowa o pracę → dr-04**; spór o skuteczność wypowiedzenia lub eksmisja → `pisma-procesowe-v3` |
+| **SPN — Wypowiedzenie umowy** | `references/SPN-wypowiedzenie.md` | Wypowiedzenie najmu, Wypowiedzenie dzierżawy, Wypowiedzenie zlecenia, Wypowiedzenie usług, Wypowiedz najem, Wypowiedz dzierżawę, Wypowiedz zlecenie, Wypowiedz usługi, Wypowiedz agencyjną, Wypowiedz pożyczkę, Wypowiedz rachunek, Wypowiedz ubezpieczenie, Wypowiedz licencję, Wypowiedz udział, Wypowiedz współpracę, Wypowiedz franczyzę, Wypowiedz abonament, Wypowiedz internet, Wypowiedz energię (umowy najmu, dzierżawy, zlecenia, usług, agencyjne, pożyczki, rachunku, ubezpieczenia, licencji, spółki cywilnej, energii, telekomunikacyjne i inne ciągłe; art. 673, 688, 704, 746, 750, 365¹ KC; najem lokalu mieszkalnego przez wynajmującego — art. 11 u.o.p.l., forma pisemna i przyczyna pod rygorem nieważności) — **UWAGA: umowa o pracę → dr-04**; spór o skuteczność wypowiedzenia lub eksmisja → `pisma-procesowe-v3` |
 
 ---
 
@@ -238,7 +238,7 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Wniosek o zabezpieczenie | brak | 100 zł (art. 68 pkt 1 KSCU); przed wniesieniem pozwu o roszczenie pieniężne — 1/4 opłaty od pozwu (art. 69 ust. 1 KSCU) | SPG |
 | Zwolnienie od kosztów / przywrócenie terminu / inne | patrz M5 | patrz M6 | SPH |
 | Odpowiedź na zawezwanie do próby ugodowej | **tydzień przed posiedzeniem** | brak | SPI |
-| Wypowiedzenie umowy (najem, dzierżawa, zlecenie, usługi) | termin wypowiedzenia z umowy lub ustawy, liczony od doręczenia (art. 61 KC) | brak | SPN |
+| Wypowiedzenie umowy (najem, dzierżawa, zlecenie, usługi, agencja, pożyczka, rachunek, ubezpieczenie, licencja, spółka cywilna, energia, telekomunikacja) | termin wypowiedzenia z umowy lub ustawy, liczony od doręczenia (art. 61 KC) | brak | SPN |
 
 ---
 
