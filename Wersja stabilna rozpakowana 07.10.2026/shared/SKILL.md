@@ -44,7 +44,7 @@ limitations:
     opisane tu jawnie, żeby FAZA 2E w trybie deklarowanym go NIE zgubiła.
     Decyzja architektoniczna (uznać jako świadomy wzorzec 'plik-most' czy
     wydzielić poza shared/) pozostaje OTWARTA — do następnego audytu."
-  - rozmiar (190 plików — stan 2026-10-04b po usunięciu 7 reliktów, F-225; wcześniej 197 — stan 2026-10-01b, z .claude-plugin/plugin.json) — każda zmiana pliku kanonicznego ma
+  - rozmiar (189 plików — stan 2026-10-14 po usunięciu archiwum mcp-servers-examples.zip (ZIP w ZIP-ie); 190 — stan 2026-10-04b po usunięciu 7 reliktów, F-225; wcześniej 197 — stan 2026-10-01b, z .claude-plugin/plugin.json) — każda zmiana pliku kanonicznego ma
     potencjalnie systemowy promień rażenia; edytować tylko przez
     audyt-systemu-v4 z pełną weryfikacją CHECKLIST-DEDUP.md
 required_modules: []
