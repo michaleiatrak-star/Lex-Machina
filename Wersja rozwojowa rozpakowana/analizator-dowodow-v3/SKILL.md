@@ -827,11 +827,11 @@ Obowiązek: porównywać twierdzenia tej samej strony **pismo po piśmie**, nie 
 twierdzenia stron między sobą. Sprzeczność wewnętrzna = zmiana wersji przez tę
 samą stronę w różnych dokumentach/terminach.
 
-Przykład kanoniczny (sprawa VII P 94/25):
-- Odp. na pozew (kwiecień 2025): konto = `m.wiatrak.humanpark@gmail.com`
-  → Pozwana kwalifikuje jako konto pracownicze na domenie humanpark.
+Przykład kanoniczny (sprawa [SYGN-SPRAWY]):
+- Odp. na pozew (kwiecień 2025): konto = `[E-MAIL-POWODA]`
+  → Pozwana kwalifikuje jako konto pracownicze na domenie [DOMENA-POZWANEJ].
 - Pismo procesowe (czerwiec 2025): „Powód stworzył PRYWATNEGO maila z dopiskiem
-  @humanpark.pl" → Pozwana zmienia kwalifikację na prywatne konto Powoda.
+  @[DOMENA-POZWANEJ]" → Pozwana zmienia kwalifikację na prywatne konto Powoda.
 - WYNIK: dwie wykluczające się charakterystyki tego samego konta w dwóch pismach
   tej samej strony → INTRA-CONTRA klasy KRYTYCZNEJ.
 
@@ -924,13 +924,13 @@ KROK KC3 — Skutek strategiczny (gdy nieoczywisty):
   → format: C-X.3: [zmiana pozycji] (opcjonalny)
 ```
 
-Przykład (sprawa pracownicza — wzorzec VII P 94/25):
+Przykład (sprawa pracownicza — wzorzec [SYGN-SPRAWY]):
 
 ```
 T-1: Ciągłość stosunku pracy / tożsamość pracodawcy rzeczywistego
-  C-1.1: Pracodawca rzeczywisty = HPG → żądanie zapłaty od HPG (art. 22 §1 KP)
+  C-1.1: Pracodawca rzeczywisty = [SPÓŁKA-B] → żądanie zapłaty od [SPÓŁKA-B] (art. 22 §1 KP)
   C-1.2: Ciągłość umów = czwarta umowa terminowa → art. 25¹ KP (bezterminowa)
-  C-1.3: Obciąża HPG całością roszczeń: wynagrodzenie, PFRON, gotowość
+  C-1.3: Obciąża [SPÓŁKA-B] całością roszczeń: wynagrodzenie, PFRON, gotowość
 
 T-2: Gotowość do pracy — niedopuszczenie po stronie pracodawcy
   C-2.1: Prawo do wynagrodzenia za przestój (art. 81 §1 KP) od daty niedopuszczenia
@@ -1112,13 +1112,13 @@ FORMAT IDENTYFIKATORÓW:
   F-NNN  = Fakt (wyekstrahowany z dowodu — TYLKO opis zdarzenia, NIE wniosek)
     Format: F-[numer trzycyfrowy]
     Zasada DTA W2: F-NNN zawiera WYŁĄCZNIE fakty, NIGDY wnioski prawne.
-    Przykład: F-101 = "Arkusze HP i HPG w jednym pliku XLS"
+    Przykład: F-101 = "Arkusze [SPÓŁKA-A] i [SPÓŁKA-B] w jednym pliku XLS"
               F-102 = "Numeracja pracowników ciągła — brak resetu po 1.07.2023"
     ⛔ ZAKAZ: F-101 = "Spółki stanowią jeden organizm" → to wniosek, nie fakt → [LA-WNIOSEK-W-FAKCIE]
 
   T-NN   = Teza procesowa (wniosek prawny z faktów)
     Format: T-[numer dwucyfrowy]
-    Przykład: T-01 = "HP i HPG korzystały ze wspólnego systemu kadrowego"
+    Przykład: T-01 = "[SPÓŁKA-A] i [SPÓŁKA-B] korzystały ze wspólnego systemu kadrowego"
               T-02 = "Powód manifestował gotowość do pracy"
 
 CROSS-REFERENCE w raportach i pismach:

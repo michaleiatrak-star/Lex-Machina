@@ -27,7 +27,7 @@
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-**Problem pierwotny (sprawa VII P 94/25, 2026-06-22):**
+**Problem pierwotny (sprawa [SYGN-SPRAWY], 2026-06-22):**
 Model przystąpił do generowania pisma procesowego na podstawie częściowej analizy dowodów:
 - ZIP z 35 plikami — odczytano wybrane, pominięto inne
 - ODT z obrazami — próbowano ekstrakcji tekstu (puste), nie dokonano rasteryzacji obrazów
@@ -443,7 +443,7 @@ REGUŁA-PFRON-SUDOP:
   → Zsumuj PER PODMIOT (NIP), nie łącznie.
   → Porównaj z okresem spornym: które miesiące pokrywa, które nie.
 
-REGUŁA-TRUNCATION-VIEW (dodana 2026-07-14, sprawa XI P 27/26 — świadek [ŚWIADEK-K], protokół rozprawy 08.07.2026):
+REGUŁA-TRUNCATION-VIEW (dodana 2026-07-14, sprawa [SYGN-SPRAWY-2] — świadek [ŚWIADEK-K], protokół rozprawy 08.07.2026):
   Narzędzie `view` wywołane BEZ `view_range` automatycznie obcina środek pliku,
   gdy treść przekracza próg znakowy — niezależnie od tego, czy plik "wygląda"
   na krótki (mało linii, mały rozmiar w KB). Sam plik protokołu rozprawy

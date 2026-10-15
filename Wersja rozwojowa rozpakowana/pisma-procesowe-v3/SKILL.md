@@ -65,7 +65,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodolog
 
 > Ten blok jest WIĄŻĄCY i NADRZĘDNY wobec „pamięci" modelu o treści plików
 > oraz wobec chęci szybkiego dostarczenia pisma.
-> Powstał po sprawie VII P 94/25: brak ponownego wczytania = brak wiedzy o krokach.
+> Powstał po sprawie [SYGN-SPRAWY]: brak ponownego wczytania = brak wiedzy o krokach.
 > Cel: przed każdym krokiem [CP] i przed każdą odpowiedzią w pipeline pisma
 > stan checkpointów oraz rejestr kroków są odczytywane ze ŚWIEŻEJ wersji z dysku —
 > nigdy z pamięci modelu, która może zawierać poprzednią wersję pliku.
@@ -118,7 +118,7 @@ UZASADNIENIE (dlaczego tylko view() gwarantuje poprawność):
 ## ⛔⛔⛔ HARD GATE STEP-DISCLOSURE — INFORMACJA WARUNKOWA ⛔⛔⛔
 
 > Ten blok jest WIĄŻĄCY i NADRZĘDNY wobec chęci szybkiego dostarczenia pisma.
-> Powstał po sprawie VII P 94/25 (2026-06-24), w której pismo zostało wydane
+> Powstał po sprawie [SYGN-SPRAWY] (2026-06-24), w której pismo zostało wydane
 > z pominięciem kilkunastu kroków kontroli jakości — BEZ poinformowania użytkownika.
 > Cel: każde pominięcie lub krok jeszcze-do-zrobienia MUSI być ujawniony, zanim
 > użytkownik dostanie plik. Żaden krok nie może zostać „cicho" przeskoczony.
@@ -483,7 +483,7 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
 > ⛔ HARD GATE — wykonaj natychmiast po SD-VER = KOMPLET, PRZED jakąkolwiek
 > pracą na macierzy lub kartach dowodowych.
 >
-> DIAGNOZA DLACZEGO FSL-D JEST KONIECZNE (sprawa VII P 94/25, 2026-06-27):
+> DIAGNOZA DLACZEGO FSL-D JEST KONIECZNE (sprawa [SYGN-SPRAWY], 2026-06-27):
 > Po SD-VER (wszystkie pliki odczytane ✅) model budował macierz D×T z PAMIĘCI
 > zamiast z per-teza przeszukania SD-FAKTY. Skutek: teza gotowości do pracy
 > miała 1 dowód zamiast 4. Teza pracodawcy faktycznego — argumenty ogólne
@@ -654,7 +654,7 @@ Jeśli warunek aktywacji NIE jest spełniony — pomiń ten krok, przejdź do W1
 >
 > **Przykłady błędów wyeliminowanych przez ten gate:**
 > - SR Katowice-Zachód VII Wydział Pracy: ul. Warszawska 45 (nie ul. Lompy 14)
-> - KRS 0000796445 = Human Park sp. z o.o.; HPG ma KRS 0001025052 — bez
+> - KRS [KRS-A] = [SPÓŁKA-A] sp. z o.o.; [SPÓŁKA-B] ma KRS [KRS-B] — bez
 >   sprawdzenia rejestru model błędnie zbudował argument "ten sam KRS"
 
 ---

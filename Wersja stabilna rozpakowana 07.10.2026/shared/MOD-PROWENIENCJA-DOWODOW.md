@@ -223,7 +223,7 @@ Konsekwencje procesowe:
       → sugestia dostępu do informacji poufnych lub koordynacji
   (+) Identyczne błędy w dokumentach "od różnych podmiotów" → dowód
       wspólnego źródła → argument za tezą o jednym pracodawcy rzeczywistym
-      (przykład: HRAppka w VII P 94/25)
+      (przykład: HRAppka w [SYGN-SPRAWY])
 
 ⛔ ZAKAZ: nie utożsamiaj podobieństwa tekstu z dowodem fabrykacji.
   Podobieństwo → [H-PROW]. Fabrykacja → wymaga dowodu klasy A lub G.

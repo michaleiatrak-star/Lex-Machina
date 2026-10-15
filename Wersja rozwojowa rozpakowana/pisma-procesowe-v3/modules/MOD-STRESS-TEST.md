@@ -129,8 +129,8 @@ PRZYCZYNA E: Brak przerzucenia ciężaru dowodu
 TEZA 1: Stosunek pracy na czas nieokreślony (art. 25¹ §3 k.p.)
 
 ODPOWIEDŹ PEŁNOMOCNIKA POZWANEGO:
-"Powód był zatrudniony na umowę z podmiotem KRS 0000796445 (Human Park
-sp. z o.o.), a nie pozwanym (KRS 0001025052). Pozwany jest odrębną osobą
+"Powód był zatrudniony na umowę z podmiotem KRS [KRS-A] ([SPÓŁKA-A]
+sp. z o.o.), a nie pozwanym (KRS [KRS-B]). Pozwany jest odrębną osobą
 prawną — nie może być stroną sporu o stosunek pracy wynikający z umów
 zawartych z innym podmiotem. Ponadto art. 25¹ §3 k.p. wymaga tożsamości
 stron — czego powód nie wykazał. Ewentualnie: nawet gdyby nastąpiło

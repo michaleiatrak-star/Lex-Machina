@@ -14,7 +14,7 @@
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-**Problem (sprawa VII P 94/25, 2026-06-24):**
+**Problem (sprawa [SYGN-SPRAWY], 2026-06-24):**
 Model wygenerował pismo procesowe bez wykonania obowiązkowych kroków:
 - Pominięto KROK 1 (detekcja trybu PRAWNIK/LAIK)
 - Pominięto W1 CLAIM-VALIDATION [CP-1-claim]

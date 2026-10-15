@@ -55,7 +55,7 @@ dokumentu" w FAZA EKSTRAKCJI ZDARZEŃ. Przyczyna: skill ekstrahuje chronologię
 bezpośrednio z dokumentów, ale nie miał NIGDZIE (grep 0 wyników na "SD-VER"/
 "SD-GATE"/"SKAN-DOWODOW") mechanizmu weryfikacji kompletności odczytu —
 dokładnie ten sam mechanizm luki, co udokumentowany incydent w
-przesluchanie-swiadkow-v2-min90 (sprawa XI P 27/26, AUDYT-2026-07-14b): częściowo
+przesluchanie-swiadkow-v2-min90 (sprawa [SYGN-SPRAWY-2], AUDYT-2026-07-14b): częściowo
 odczytany dokument generuje chronologię z cichą luką, nieodróżnialną od
 "w dokumencie po prostu nic więcej nie było". Pełny opis: audyt-systemu-v4/
 AUDIT-JOURNAL.md, AUDYT-2026-07-15e.

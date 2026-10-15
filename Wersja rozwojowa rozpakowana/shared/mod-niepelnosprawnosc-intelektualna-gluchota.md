@@ -319,7 +319,7 @@ PROBLEM 4: KONTAKT Z OBROŃCĄ
   art. 72 §2 KPK zobowiązuje do tłumacza przy KAŻDEJ czynności
 
 PROBLEM 5: ZUS / ORZECZNICTWO RENTOWE (luka systemowa 2025)
-  Stowarzyszenie HP do MRiPS 2025: ZUS ocenia zdolność do pracy pomijając
+  Stowarzyszenie [SPÓŁKA-A] do MRiPS 2025: ZUS ocenia zdolność do pracy pomijając
   bariery komunikacyjne głuchych → osoby głuche niesłusznie uznawane za
   "zdolne do pracy" mimo braku możliwości funkcjonowania w środowisku słyszących.
   Luka w definicji "niezdolności do pracy" (ustawa emerytalno-rentowa).

@@ -23,7 +23,7 @@ nie kończy tury w milczeniu na temat plików, których nie sprawdził.
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-**Incydent źródłowy (sprawa XI P 27/26, 2026-07-12):**
+**Incydent źródłowy (sprawa [SYGN-SPRAWY-2], 2026-07-12):**
 Model przeanalizował ZIP z ~30 plikami, ale w pierwszej odpowiedzi oparł
 tezy tylko na części z nich (protokoły, .odt, xlsx), pomijając bez
 zaznaczenia: 3 duże skany PDF (130 stron), maile poboczne, recepty,

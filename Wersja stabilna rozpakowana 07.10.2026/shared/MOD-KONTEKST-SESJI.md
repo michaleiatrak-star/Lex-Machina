@@ -51,7 +51,7 @@ AND przetwarzalny przez model przy wklejeniu w kolejnej sesji.
 ```markdown
 # KONTEKST SESJI — [skrócona nazwa sprawy]
 Wygenerowano: [data i czas UTC]
-Sprawa: [identyfikator, np. "VII P 94/25" lub "Sprawa o nadgodziny"]
+Sprawa: [identyfikator, np. "[SYGN-SPRAWY]" lub "Sprawa o nadgodziny"]
 Sesja nr: [n — jeśli użytkownik podał, inaczej "nieznana"]
 
 ---

@@ -93,7 +93,7 @@ KAT-I: BŁĄD FORMALNY PRACODAWCY
   Konsekwencja procesowa:
     → ZASTOSUJ WARSTWA 0 (dane większościowe) — to najsilniejszy argument dla KAT-I
     → ⛔ ZAKAZ-R1: NIE buduj argumentu "jeden podmiot bo ten sam KRS" — obalany przez
-      "literówkę". Gdy pozwana sama podnosi "literówka" → PRZYZNAJE że stroną była HPG.
+      "literówkę". Gdy pozwana sama podnosi "literówka" → PRZYZNAJE że stroną była [SPÓŁKA-B].
     → Warstwy 1–4 opcjonalne dla KAT-I (stosuj gdy potrzebne do zliczenia umów)
 
 KAT-II: CELOWA ZMIANA PODMIOTU (reset limitów)
@@ -263,15 +263,15 @@ Konkluzja: podmiot X = pracodawca rzeczywisty / niejednoznaczne / brak podstaw
 
 ---
 
-## PRZYKŁAD — VII P 94/25 (case study po naprawie v2.0.0)
+## PRZYKŁAD — [SYGN-SPRAWY] (case study po naprawie v2.0.0)
 
 ```
-PODMIOT_A: Human Park sp. z o.o.
-  KRS: 0000796445 | NIP: 8971869561 | Prezes: Juneyoung Park | Adres: Pukowca 15, Katowice ✅
-PODMIOT_B: Human Park Global sp. z o.o.
-  KRS: 0001025052 | NIP: 6343021499 | Prezes: Juneyoung Park | Adres: Pukowca 15, Katowice ✅
+PODMIOT_A: [SPÓŁKA-A] sp. z o.o.
+  KRS: [KRS-A] | NIP: [NIP-A] | Prezes: Juneyoung Park | Adres: Pukowca 15, Katowice ✅
+PODMIOT_B: [SPÓŁKA-B] sp. z o.o.
+  KRS: [KRS-B] | NIP: [NIP-B] | Prezes: Juneyoung Park | Adres: Pukowca 15, Katowice ✅
 POWIĄZANIA: Ten sam prezes ✅ | Ten sam adres ✅ | Ta sama branża PKD 78.x ✅
-KATEGORIA: KAT-II (celowa zmiana — HPG zarejestrowana 14.03.2023, powód przeniesiony od 01.07.2023)
+KATEGORIA: KAT-II (celowa zmiana — [SPÓŁKA-B] zarejestrowana 14.03.2023, powód przeniesiony od 01.07.2023)
 WARSTWY: W1 (PR1✅ PR2✅ PR6✅ PR7✅) + W2 (obejście art.25¹) + W3 (KRS błędny na 3 umowach) + W4
 HEDGE: OPCJA A (obie spółki aktywne — pozwanie współpozwanych)
 ```
@@ -384,7 +384,7 @@ KRYTERIUM 5: Tożsamość systemu kadrowego (jeden system = jeden pracodawca)
   → Czy baza danych była prowadzona przez powoda dla obu podmiotów JEDNOCZEŚNIE?
   → Czy numeracja wewnętrzna była ciągła między podmiotami?
   Dowód: arkusze XLS, zrzuty ekranu systemu, protokoły zeznań
-  Siła: ★★★ (por. sekcja IV pisma VII P 94/25 — arkusz z ciągłą numeracją)
+  Siła: ★★★ (por. sekcja IV pisma [SYGN-SPRAWY] — arkusz z ciągłą numeracją)
 
 KRYTERIUM 6: Tożsamość personelu kierowniczego
   → Czy ta sama osoba była przełożoną przed i po formalnej zmianie?
@@ -444,7 +444,7 @@ Dowód: [lista z PR2 — kryteria spełnione + konkretne dokumenty]
 
 Przesłanka FAKTYCZNA: podmiot X był pracodawcą rzeczywistym przez cały okres
 Dowód A: [kryteria 1-8 z PR2 — które są spełnione i jak]
-Dowód B: [tabela z MOD-DOWODY D6.3.D — ciągłość korespondencji HP→HPG]
+Dowód B: [tabela z MOD-DOWODY D6.3.D — ciągłość korespondencji [SPÓŁKA-A]→[SPÓŁKA-B]]
 
 Podstawa: art. 22 §1 KP w zw. z art. 3 KP + orzecznictwo SN (PR-O1, PR-O2)
 

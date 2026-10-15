@@ -43,7 +43,7 @@ Status: bezsporne / sporne / wymaga weryfikacji / kolizja
 
 **Reguła tożsamości (osoby/podmioty):** dla każdego faktu typu `osoba` zapisz
 *dosłowny* zapis imienia/nazwiska/nazwy jak w źródle — nie normalizuj, nie
-poprawiaj literówek, nie zakładaj że różne zapisy ("Wiatrak" / "Wiatr" / "Wlazło",
+poprawiaj literówek, nie zakładaj że różne zapisy ("Nowakowski" / "Nowak" / "Nowicki",
 "Poudel" / "Paudel") oznaczają tę samą osobę. Jeśli ten sam DOC-ID lub powiązany
 dokument zawiera różne zapisy dla osoby odgrywającej tę samą rolę procesową
 (strona, świadek, podpisujący), odnotuj to jako odrębny fakt `[F00X-IDENT]`

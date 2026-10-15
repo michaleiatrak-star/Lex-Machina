@@ -21,7 +21,7 @@
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-**Problem (sprawa VII P 94/25, sesja 2026-06-27):**
+**Problem (sprawa [SYGN-SPRAWY], sesja 2026-06-27):**
 
 Pismo procesowe zawierało twierdzenia faktyczne budowane przez model
 z ogólnej wiedzy o sprawie — bez przypisania do konkretnego pliku
@@ -35,7 +35,7 @@ dowodów w piśmie mimo że dowody ISTNIAŁY w aktach:
 
 - **Teza pracodawcy faktycznego:** pismo powołało art. 23¹ KP i art. 8 KP
   ogólnie. Dostępne były XLSX Pracownicy13.08.2024 (powód jako aktywny
-  pracownik HPG w VIII.2024) i Eksport-Pracownicy (HPG jako agencja
+  pracownik [SPÓŁKA-B] w VIII.2024) i Eksport-Pracownicy ([SPÓŁKA-B] jako agencja
   pracy) — nie użyte z tego samego powodu.
 
 **Root cause:** po SD-VER model budował macierz D×T z pamięci —
@@ -160,7 +160,7 @@ FSL-D-MACIERZ WYNIKOWA:
 
 T1: [treść tezy]
   TC[1,1]: [twierdzenie] → ✅ D02 str.4 godz.00:47:48 „[cytat]"
-  TC[1,2]: [twierdzenie] → ✅ D09 zakładka Pracownicy-HP-Global wiersz 371
+  TC[1,2]: [twierdzenie] → ✅ D09 zakładka Pracownicy-[SPÓŁKA-B] wiersz 371
   TC[1,3]: [twierdzenie] → ⚠️ D07 (pośrednio) — brak bezpośredniego potwierdzenia
   TC[1,4]: [twierdzenie] → ⬛ FSL-D-LUKA 🔴 KRYTYCZNA
 
@@ -254,11 +254,11 @@ PROTOKÓŁ PRZEKAZANIA:
 ```
 REGUŁA-NAZWA-PLIKU-MYLĄCA:
   ⛔ Nazwa pliku NIE określa jego zawartości dowodowej.
-  Przykłady z VII P 94/25:
+  Przykłady z [SYGN-SPRAWY]:
     „Szef.odt" → wiadomości RCS z gotowością do pracy (nie „korespondencja z szefem")
     „Szef stosunek pracy.odt" → wniosek o powrót do pracy + groźba ze strony szefa
     „Zatrudnienie.odt" → WhatsApp z kartami pobytu cudzoziemców (nie „pismo o zatrudnieniu")
-    „Pracownicy13.08.2024.xlsx" → status powoda jako aktywnego pracownika HPG w VIII.2024
+    „Pracownicy13.08.2024.xlsx" → status powoda jako aktywnego pracownika [SPÓŁKA-B] w VIII.2024
   ⛔ ZAKAZ wnioskowania o zawartości pliku z jego nazwy.
   ⛔ OBOWIĄZEK przeszukania KAŻDEGO pliku dla KAŻDEJ tezy — niezależnie od nazwy.
 

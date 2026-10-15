@@ -11,7 +11,7 @@
 
 ```
 1.1.0 (2026-06-26)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-26):
+Przyczyna: analiza błędów sprawa [SYGN-SPRAWY] (sesja 2026-06-26):
   Problem: pismo procesowe (rozszerzenie pozwu) pomijało co najmniej 6 wątków
   prawnych zawartych w pismach procesowych powoda dostępnych w materiale:
   - art. 94³ §3 KP (odszkodowanie za mobbing) — pismo Riposta, pismo 12.05.2026
@@ -40,17 +40,17 @@ Naprawa:
 ## HISTORIA WERSJI
 
 ```
-v1.1.0  2026-06-27  Naprawy z audytu VII P 94/25:
+v1.1.0  2026-06-27  Naprawy z audytu [SYGN-SPRAWY]:
                     1. Dodano [CP-FSL-D] do CP-REJESTRU (aktywny gdy SD-VER=KOMPLET i ≥1 teza)
                     2. Dodano §3A REGUŁA ZAKAZU FAŁSZYWEGO N/A (CRIT-NA):
                        N/A wyłącznie gdy techniczny warunek aktywacji = NIE;
                        zakaz N/A z powodu "typ pisma" / "prosta sprawa" / "brak prośby"
                     3. Dodano kontrolę CP-FSL-D w bramce CP-CHECK (§4)
-                    Root cause: w sprawie VII P 94/25 CP-1c-macierz i CP-1c-lancuch
+                    Root cause: w sprawie [SYGN-SPRAWY] CP-1c-macierz i CP-1c-lancuch
                     oznaczono N/A "pismo rozszerzające" — mimo 35 plików i 3 tez.
                     FSL-D nie istniał w rejestrze → nie blokował .docx.
 
-v1.0.0  2026-06-24  Pierwsza wersja — lekcja z sesji VII P 94/25.
+v1.0.0  2026-06-24  Pierwsza wersja — lekcja z sesji [SYGN-SPRAWY].
                     Przyczyna: model wygenerował .docx (15 stron) bez
                     żadnego z 14 wymaganych checkpointów, co grozi
                     złożeniem niezweryfikowanego pisma do sądu.
@@ -282,7 +282,7 @@ Weryfikacja online (24.06.2026): art. 248 ✅ · 261 ✅ · 266 ✅ · 271 ✅ �
   art. 258 ❌ UCHYLONY · art. 233 KK ✅ · art. 235² §1 KPC ✅
 
 1.0.0 (2026-06-24)
-Przyczyna: Sprawa VII P 94/25 — pismo procesowe rozszerzające pozew
+Przyczyna: Sprawa [SYGN-SPRAWY] — pismo procesowe rozszerzające pozew
 zawierało zeznania świadka Nawrota jako ogniwo BASE dla premii PFRON
 (1.000 zł/m-c), ale pismo nie zawierało:
   (1) antycypacji ataków na wiarygodność świadka
@@ -305,8 +305,8 @@ Integracje:
 
 ```
 1.0.0 (2026-06-23)
-Przyczyna: analiza porównawcza z konkurencyjnym systemem AI (sprawa VII P 94/25).
-Konkurencja wykryła: (1) REGON 14-cyfrowy w umowach HPG, (2) KRS/NIP cross-contamination
+Przyczyna: analiza porównawcza z konkurencyjnym systemem AI (sprawa [SYGN-SPRAWY]).
+Konkurencja wykryła: (1) REGON 14-cyfrowy w umowach [SPÓŁKA-B], (2) KRS/NIP cross-contamination
 w umowach 3-5, (3) rozbieżność adresu powoda Azot 21/31 vs 2A/31.
 Żadna z tych anomalii nie była wykryta przez system przed tym modułem.
 Efekt procesowy: każda anomalia Klasy I to gotowy argument "błąd pracodawcy nie szkodzi
@@ -320,7 +320,7 @@ pracownikowi" — wbudowany w uzasadnienie pisma.
 
 ```
 1.0.0 (2026-06-27)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-27):
+Przyczyna: analiza błędów sprawa [SYGN-SPRAWY] (sesja 2026-06-27):
   Root cause zidentyfikowany przez dewelopera:
   (1) SD-VER = KOMPLET (wszystkie pliki odczytane) — ale macierz D×T
       budowana z pamięci, nie z per-teza przeszukania SD-FAKTY.
@@ -398,7 +398,7 @@ Luki wypełnione: 5 typów łańcuchów (ŁB-3), 4 typy ogniw (ŁB-1),
 
 ```
 1.1.0 (2026-06-26)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-26):
+Przyczyna: analiza błędów sprawa [SYGN-SPRAWY] (sesja 2026-06-26):
   (1) Macierz D×T budowana poprawnie — ale jej wyniki NIE trafiały do treści pisma.
       Wynik: pismo powołuje 5 z 18+ dowodów, uzasadnienie ma 4 sekcje dla 8+ tez.
   (2) N_pismo << N_macierz bez żadnego alertu systemowego.
@@ -416,7 +416,7 @@ w kierunku Teza→Dowód i jest późniejszy w pipeline (po ustaleniu tez).
 Ten moduł jest wcześniejszy i komplementarny: skanuje dowody bi-directionally,
 buduje trwałą macierz D×T z klasami K/R/W/RK, identyfikuje dowody wielofunkcyjne
 i luki, zanim W1.3 zostanie wypełnione.
-Przykład z VII P 94/25: wiadomość RCS Prezesa Parka z 21.03.2026 obsługuje 3 tezy
+Przykład z [SYGN-SPRAWY]: wiadomość RCS Prezesa Parka z 21.03.2026 obsługuje 3 tezy
 jednocześnie (T1, T2, T5) i była w dowodach od początku — bez macierzy model
 przypisał ją tylko do T2 (gotowość do pracy), pomijając wartość dla T1 i T5.
 ```
@@ -425,7 +425,7 @@ przypisał ją tylko do T2 (gotowość do pracy), pomijając wartość dla T1 i 
 
 **1.2.0 (2026-06-26) — NAPRAWA: MT6 format sądowy + zakaz symboli w piśmie**
 
-Root cause (sprawa VII P 94/25, sesja 2026-06-26):
+Root cause (sprawa [SYGN-SPRAWY], sesja 2026-06-26):
 Moduł definiował jeden format wyjściowy (symbole ●/★/[K]) bez rozróżnienia
 między formatem roboczym (pipeline) a formatem sądowym (pismo procesowe).
 Model kopiował symbole wewnętrzne do tabeli w piśmie, co tworzyło dokument
@@ -483,7 +483,7 @@ Istniejący MOD-KONTEKST-SESJI działa między sesjami (export/import stanu),
 nie wewnątrz sesji. Ten moduł wypełnia tę lukę przez profilaktyczne
 szacowanie rozmiaru materiału przed analizą i podział na partie z protokołem
 checkpointów i wznawiania.
-Przykład triggera: ZIP z 35 plikami (9.5 MB) — sesja VII P 94/25 —
+Przykład triggera: ZIP z 35 plikami (9.5 MB) — sesja [SYGN-SPRAWY] —
 model przeanalizował go bez podziału, ryzykując utratę wyników.
 Przy STATUS KRYTYCZNE (≥30 plików) moduł wymusiłby podział na ~9 partii
 po 4 pliki, z 8 checkpointami między partiami.
@@ -497,8 +497,8 @@ po 4 pliki, z 8 checkpointami między partiami.
 ```
 1.0.0 (2026-06-23) — Pierwsza wersja. Moduł uniwersalny.
 Przyczyna: analiza porównawcza pisma generowanego (AI) vs pisma poprawionego
-przez użytkownika w sprawie VII P 94/25 — wersja poprawiona zawierała:
-(1) tabele graniczne HP→HPG z konkretnymi datami i kandydatami,
+przez użytkownika w sprawie [SYGN-SPRAWY] — wersja poprawiona zawierała:
+(1) tabele graniczne [SPÓŁKA-A]→[SPÓŁKA-B] z konkretnymi datami i kandydatami,
 (2) walory procesowe 1/2/3 dla osobistego aktu Prezesa,
 (3) antycypację zarzutów w 4 miejscach uzasadnienia,
 (4) ścieżkę alternatywną art. 23¹ KP + art. 25¹ §3 KP,
@@ -540,7 +540,7 @@ w sesji 160-kazusowej. Zarejestrowany w `shared/SKILL.md`.
 
 ```
 1.0.0 (2026-07-12, aktualizacja integracji 2026-07-14)
-Przyczyna: sprawa XI P 27/26, świadek [ŚWIADEK-K] — moduł istniał od
+Przyczyna: sprawa [SYGN-SPRAWY-2], świadek [ŚWIADEK-K] — moduł istniał od
   utworzenia (poniżej), ale w przesluchanie-swiadkow-v2-min90 nie był
   deklarowaną zależnością required, więc uruchamiał się wyłącznie
   reaktywnie (na wprost zadane pytanie użytkownika), a nie proaktywnie
@@ -556,7 +556,7 @@ Naprawa (2026-07-14): przesluchanie-swiadkow-v2-min90 — dodano ten
   merytoryczna samego modułu. Zob. changelog przesluchanie-swiadkow-v2-min90.
 
 1.0.0 (2026-07-12)
-Przyczyna: sprawa XI P 27/26 — model sprawdził materiał wybiórczo
+Przyczyna: sprawa [SYGN-SPRAWY-2] — model sprawdził materiał wybiórczo
   i nie zasygnalizował tego użytkownikowi; braki (w tym 2 kluczowe
   zrzuty WhatsApp) wyszły na jaw dopiero po pytaniu kontrolnym
   użytkownika. Utworzono na wyraźne polecenie użytkownika.
@@ -593,7 +593,7 @@ Naprawa: (1) dodano KROK SD-READ.1b — nową uniwersalną bramkę SD-GATE-PORCJ
 
 1.5.0 (2026-07-14)
 Przyczyna: sprawa świadka Marii Korolevej, protokół rozprawy z 08.07.2026
-  (XI P 27/26). Model odczytał plik tekstowy protokołu narzędziem `view` bez
+  ([SYGN-SPRAWY-2]). Model odczytał plik tekstowy protokołu narzędziem `view` bez
   `view_range` — narzędzie zwróciło adnotację `< truncated lines 174-230 >`,
   obcinając środek pliku mimo jego niewielkiego rozmiaru (394-403 linii,
   ~14 KB). Model kontynuował analizę i budował tezy/pytania na podstawie
@@ -633,7 +633,7 @@ Naprawa:
     z innymi, fizycznie obecnymi dokumentami o zbliżonej funkcji.
 
 1.3.0 (2026-06-27)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-27):
+Przyczyna: analiza błędów sprawa [SYGN-SPRAWY] (sesja 2026-06-27):
   SD-VER = KOMPLET ale macierz D×T budowana z pamięci — nie z per-teza
   przeszukania SD-FAKTY. Pliki o mylących nazwach (Szef.odt, Zatrudnienie.odt)
   pomijane w skanowaniu tez bo „intuicyjnie nie pasowały".
@@ -646,7 +646,7 @@ Naprawa:
   + Zmieniono pointer: SD-FAKTY → MOD-FSL-DOKUMENTY → FSL-D-MACIERZ → W1.3
 
 1.2.0 (2026-06-26)
-Przyczyna: analiza błędów sprawa VII P 94/25 (sesja 2026-06-26):
+Przyczyna: analiza błędów sprawa [SYGN-SPRAWY] (sesja 2026-06-26):
   (1) Pismo procesowe zawierało tylko 5 z 18+ kategorii dowodowych.
   (2) Pisma procesowe powoda (riposta, pismo 12.05.2026) zawierają
       co najmniej 6 wątków prawnych (mobbing, zakaz konkurencji,
@@ -666,7 +666,7 @@ Naprawy:
 ...
 
 1.0.0 (2026-06-22)
-Przyczyna: analiza błędów krytycznych w sprawie VII P 94/25:
+Przyczyna: analiza błędów krytycznych w sprawie [SYGN-SPRAWY]:
   (1) Pominięto odczyt obrazów z plików ODT (3 pliki × ~2-3 obrazy)
   (2) Nie wyekstrahowano zeznań Nawrota o premii PFRON z protokołu rozprawy
       → pismo wygenerowano z błędną kwotą roszczenia
@@ -722,7 +722,7 @@ Przyczyna: Moduł był OSIEROCONY — istniał w shared/ i był wpięty tylko w
   pisma-procesowe-v3, ale prawny-router-v3 NIE wywoływał go w żadnym kroku
   (0 wzmianek STEP-TRACKER w routerze i jego SELF-CHECK). Skutek: gdy model
   wygenerował pismo bez wczytania PRIMARY-skilla pisma-procesowe-v3 (sprawa
-  VII P 94/25, po poleceniu „kontynuuj"), nic nie wymusiło ST-INIT/ST-FINAL —
+  [SYGN-SPRAWY], po poleceniu „kontynuuj"), nic nie wymusiło ST-INIT/ST-FINAL —
   pismo .docx dostarczono bez REJESTRU KROKÓW i bez raportu pominięć.
 Naprawa (prawny-router-v3/SKILL.md):
   + KROK 0-ST (ST-INIT zaraz po HG-ACTIVE)
@@ -734,7 +734,7 @@ Zasada: router (jedyny punkt wejścia) musi sam wymuszać STEP-TRACKER —
   ominąć całą siatkę bezpieczeństwa.
 
 1.0.0 (2026-06-24)
-Przyczyna: Analiza błędów sprawa VII P 94/25 (2026-06-24):
+Przyczyna: Analiza błędów sprawa [SYGN-SPRAWY] (2026-06-24):
   Model pominął 10+ obowiązkowych kroków bez informowania użytkownika.
   Pismo dostarczone bez CLAIM-VALIDATION, STRATEGIA-WYBOR, MACIERZ,
   PODMIOT-GATE, LEGAL-QUALITY-GATE, AUDYT-KOŃCOWY, PEER-REVIEW.
@@ -754,7 +754,7 @@ Integracje:
 ```
 1.0.0 (2026-06-21) — Pierwsza wersja.
   Przyczyna: brak obligatoryjnego mechanizmu oceny i rankingu ścieżek przed
-  wyborem jednej, zidentyfikowany w sesji VII P 94/25 (rozszerzenie powództwa).
+  wyborem jednej, zidentyfikowany w sesji [SYGN-SPRAWY] (rozszerzenie powództwa).
   System posiadał: MOD-WARIANTY-POZWU (generowanie kart, warunkowo aktywowany),
   MOD-ATAK-NA-DRAFT (ocena po wyborze), MOD-RED-TEAM-WLASNY (ocena ram).
   Brakowało: spójnego pipeline'u który obligatoryjnie ocenia WSZYSTKIE ścieżki
@@ -788,11 +788,11 @@ w `shared/DEDUPLICATION-POLICY.md`.
 1.4.0 (2026-06-27) — ISU-first: MOD-IDENTYFIKACJA-STRONY-UMOWY wywołany przed MOD-PRACODAWCA-RZECZYWISTY:
   Root cause nowej naprawy: PRE-W2.C/D wykrywały rozbieżność podmiotową i
   zatrzymywały pipeline (GATE-STOP), ale NIE wywoływały modułu budującego
-  argument prawny. Skutek: pismo VII P 94/25 v3 opierało tezę 1 na argumencie
+  argument prawny. Skutek: pismo [SYGN-SPRAWY] v3 opierało tezę 1 na argumencie
   "ten sam KRS we wszystkich umowach" — obalonym przez "literówkę".
   Naprawy:
   (1) PRE-W2.C §SZCZEGÓLNA REGUŁA: dodano ⛔ TRIGGER MOD-PRACODAWCA-RZECZYWISTY
-      z ZAKAZEM-R1 (zakaz argumentu "ten sam KRS" gdy KRS błędny) i przykładem VII P 94/25.
+      z ZAKAZEM-R1 (zakaz argumentu "ten sam KRS" gdy KRS błędny) i przykładem [SYGN-SPRAWY].
   (2) PRE-W2.D §POV-D-TRIGGER: dodano [MOD-PRACODAWCA-TRIGGER] — po wykryciu
       rozbieżności NATYCHMIAST view MOD-PRACODAWCA-RZECZYWISTY + R1→R5.
   (3) Historia wersji zaktualizowana.
@@ -806,10 +806,10 @@ w `shared/DEDUPLICATION-POLICY.md`.
   Wpływ na router: KROK 0D, SELF-CHECK blok STATUS PODMIOTÓW, R0D w STEP-TRACKER.
   Wpływ na pisma-procesowe: SELF-CHECK-PISMA — blok STATUS PODMIOTÓW.
 
-1.1.0 (2026-06-26) — Naprawa root cause sesji VII P 94/25 (2026-06-26):
+1.1.0 (2026-06-26) — Naprawa root cause sesji [SYGN-SPRAWY] (2026-06-26):
   Problem: model traktował dane KRS/NIP z akt sprawy (umów) jako zweryfikowane.
-  Skutek: w piśmie wpisano KRS 0000796445 przy Human Park Global sp. z o.o.,
-          podczas gdy HPG ma KRS 0001025052 — błąd z umów pracodawcy skopiowany
+  Skutek: w piśmie wpisano KRS [KRS-A] przy [SPÓŁKA-B] sp. z o.o.,
+          podczas gdy [SPÓŁKA-B] ma KRS [KRS-B] — błąd z umów pracodawcy skopiowany
           do pisma procesowego powoda.
   Naprawy:
   (1) PRE-W2.C: dodano explicite zasadę "dane z akt ≠ zweryfikowane"
@@ -820,12 +820,12 @@ w `shared/DEDUPLICATION-POLICY.md`.
                    i reguła nadrzędna 18 zaktualizowane.
 
 1.0.0 (2026-06-21) — Pierwsza wersja.
-  Przyczyna: błędy krytyczne w piśmie procesowym VII P 94/25:
+  Przyczyna: błędy krytyczne w piśmie procesowym [SYGN-SPRAWY]:
   (1) Adres sądu z pamięci modelu (ul. Lompy 14 / SR Katowice-Wschód zamiast
       ul. Warszawska 45 / SR Katowice-Zachód VII Wydział Pracy).
   (2) Argument prawny "ten sam KRS" zbudowany bez sprawdzenia rejestru;
-      KRS 0000796445 należy do HP sp. z o.o., nie do HP Global sp. z o.o.
-      (KRS 0001025052) — co było widoczne z NIP-ów w aktach.
+      KRS [KRS-A] należy do [SPÓŁKA-A] sp. z o.o., nie do [SPÓŁKA-B] sp. z o.o.
+      (KRS [KRS-B]) — co było widoczne z NIP-ów w aktach.
   Naprawa: przeniesienie weryfikacji podmiotów PRZED generowanie W2,
   jako oddzielny moduł z twardą bramką blokującą.
   Wpływ na SKILL.md: dodano wywołanie PRE-W2-GATE po checkpoincie W1→W2.

@@ -93,8 +93,8 @@ Przykład: "powód nie zapłacił" gdy chodzi o pozwanego; zaimek "on/ona" przy 
 Wzorzec: w nagłówku wymienione podmioty A i B; w treści A i A (ta sama dwa razy)
 Test: czy każdy podmiot z nagłówka pojawia się w treści pisma pod własną nazwą?
 Źródło: Infoware — "copy-paste without updating party names"
-Przykład: wezwanie w imieniu "Human Park Global i Human Park Global" zamiast
-          "Human Park Global i Human Park"
+Przykład: wezwanie w imieniu "[SPÓŁKA-B] i [SPÓŁKA-B]" zamiast
+          "[SPÓŁKA-B] i [SPÓŁKA-A]"
 
 [LA-NAZWA-PODMIOT]
 Wzorzec: niejednolity zapis nazwy tego samego podmiotu w obrębie pisma
@@ -252,7 +252,7 @@ Wzorzec: odręczny dopisek do dokumentu bez własnej daty
 Test: czy fragment dopisany odręcznie ma osobną datę wskazującą moment jego powstania?
 Znaczenie: brak daty = niemożność weryfikacji czy dopisek pochodzi z tej samej sesji
            co reszta dokumentu; dopisek mógł być dodany przed lub po podpisaniu
-Przykład: "przez Michał Wiatrak" dopisane odręcznie w pokwitowaniu Poudela
+Przykład: "przez Jan Nowakowski" dopisane odręcznie w pokwitowaniu Poudela
           (5.12.2024) bez daty przy dopisku
 
 [LA-CHRONOLOGIA]
@@ -276,7 +276,7 @@ Przykład: "radca prawny obsługujący spółkę" gdy osoba jest wspólnikiem ka
 Wzorzec: sygnatura akt zapisana błędnie (błąd liter, cyfr, spacji)
 Test: czy sygnatura pisma odpowiada co do każdego znaku sygnaturze z akt sprawy?
 Uwaga: może być artefakt OCR — weryfikować w oryginale
-Przykład: "VIP 94/25" zamiast "VII P 94/25"
+Przykład: "VIP 94/25" zamiast "[SYGN-SPRAWY]"
 ```
 
 ---
@@ -408,7 +408,7 @@ Klasyfikacja opiera się na następujących źródłach:
 - BARBRI — vague terms and contradictory clauses jako najczęstsze błędy
 - Cornell LII / arxiv 2502.05675: taksonomia błędów rozumowania: błędy przesłanki (faktu, prawa) i błędy konkluzji
 
-**Wzorzec empiryczny z D01–D04 (sprawa VII P 94/25):**
+**Wzorzec empiryczny z D01–D04 (sprawa [SYGN-SPRAWY]):**
 - Lorica Iuris Ciecierski Rak Sp.k. — 4 pisma, 19 lapsusów skatalogowanych,
   wzorzec SYSTEMOWY [LA-RODZAJ] potwierdził się w każdym piśmie
 

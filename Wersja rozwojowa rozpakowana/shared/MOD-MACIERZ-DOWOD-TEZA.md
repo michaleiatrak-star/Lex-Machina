@@ -24,7 +24,7 @@
 - ale które mogłyby wesprzeć inną tezę lub obalić argumentację przeciwnika,
 - oraz brak wykrycia, że jeden dowód wspiera wiele tez jednocześnie.
 
-**Przykład z VII P 94/25:** wiadomość RCS Prezesa Parka z 21.03.2026 r.
+**Przykład z [SYGN-SPRAWY]:** wiadomość RCS Prezesa Parka z 21.03.2026 r.
 obsługuje co najmniej trzy tezy jednocześnie:
 - T2 (gotowość do pracy → przeszkoda po stronie pracodawcy)
 - T1 (tożsamość pracodawcy → osobisty akt art. 31 KP)
@@ -388,7 +388,7 @@ ZASADA STOP po MT4:
 
 ---
 
-## PRZYKŁAD PEŁNY — sprawa VII P 94/25
+## PRZYKŁAD PEŁNY — sprawa [SYGN-SPRAWY]
 
 ```
 TEZY:
@@ -399,7 +399,7 @@ TEZY:
   T5: Brak możliwości mediacji / zachowanie pracodawcy
 
 DOWODY:
-  D01: Umowy o pracę nr 1–5           | DOK-PRY | A | 5 umów, KRS 0000796445 w każdej
+  D01: Umowy o pracę nr 1–5           | DOK-PRY | A | 5 umów, KRS [KRS-A] w każdej
   D02: Protokół rozprawy 27.01.2026   | PRO-ROZ | A | zeznania Nawrota, wniosek powoda o PFRON
   D03: Lorica 4.05.2026               | DOK-PRY | B | zakaz kontaktu, żądanie usunięcia danych
   D04: Dokument 182 (odp. na wezw.)   | DOK-PRY | B | Ciecierski: umowa wygasła 31.12.2024
@@ -407,12 +407,12 @@ DOWODY:
   D06: Pismo powoda 12.05.2026        | DOK-PRY | B | oferta ugodowa, gotowość do pracy
   D07: RCS Prezes Park 21.03.2026     | ZRZ-EKR | B | zakaz kontaktu, odesłanie do kancelarii
   D08: RCS powód → Park (koreański)   | ZRZ-EKR | B | gotowość do pracy, milczenie Parka
-  D09: PFRON/SUDOP lista HPG          | REJ-PUB | A | 30 pozycji, 123.445 zł, daty refundacji
-  D10: PFRON/SUDOP lista HP sp.z o.o. | REJ-PUB | A | 6 pozycji HP (NIP 8971869561)
-  D11: Pracownicy13.08.2024.xlsx      | TAB-OPE | B | dwa arkusze HP/HPG, ciągła numeracja
-  D12: WhatsApp Sławek HP 09-29.06.23 | ZRZ-EKR | B | czynności rekrutacyjne (hp→hpg boundary)
-  D13: WhatsApp Yurij HP 08-09.08.23  | ZRZ-EKR | B | czynności rekrutacyjne (już HPG)
-  D14: Spis zdawczo-odbiorczy akt     | TAB-OPE | B | 964 wiersze, jeden podmiot HP sp.z o.o.
+  D09: PFRON/SUDOP lista [SPÓŁKA-B]          | REJ-PUB | A | 30 pozycji, 123.445 zł, daty refundacji
+  D10: PFRON/SUDOP lista [SPÓŁKA-A] sp.z o.o. | REJ-PUB | A | 6 pozycji [SPÓŁKA-A] (NIP [NIP-A])
+  D11: Pracownicy13.08.2024.xlsx      | TAB-OPE | B | dwa arkusze [SPÓŁKA-A]/[SPÓŁKA-B], ciągła numeracja
+  D12: WhatsApp [OSOBA-S] [SPÓŁKA-A] 09-29.06.23 | ZRZ-EKR | B | czynności rekrutacyjne ([SPÓŁKA-A]→[SPÓŁKA-B] boundary)
+  D13: WhatsApp [OSOBA-Y] [SPÓŁKA-A] 08-09.08.23  | ZRZ-EKR | B | czynności rekrutacyjne (już [SPÓŁKA-B])
+  D14: Spis zdawczo-odbiorczy akt     | TAB-OPE | B | 964 wiersze, jeden podmiot [SPÓŁKA-A] sp.z o.o.
   D15: Candidates/Zeszyt1.xlsx        | TAB-OPE | B | arkusze rekrutacyjne powoda, daty
   D16: Orzeczenie o niepełnosprawności| DOK-URZ | A | stopień znaczny, symbol 04-O (w aktach)
   D17: Riposta 17.01.2026             | DOK-PRY | B | pismo procesowe powoda z aktami

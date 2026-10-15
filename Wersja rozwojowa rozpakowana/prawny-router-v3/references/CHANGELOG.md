@@ -498,8 +498,8 @@
 
 **3.9 (2026-06-26) — naprawa [POV-D-TRIGGER] i zasady "dane z akt ≠ zweryfikowane":**
 - Root cause: model traktował KRS/NIP z umów/akt jako zweryfikowane online.
-  Skutek: KRS 0000796445 (HP sp. z o.o.) wpisany przy Human Park Global sp. z o.o.
-  (która ma KRS 0001025052) w piśmie procesowym VII P 94/25 (sesja 2026-06-26).
+  Skutek: KRS [KRS-A] ([SPÓŁKA-A] sp. z o.o.) wpisany przy [SPÓŁKA-B] sp. z o.o.
+  (która ma KRS [KRS-B]) w piśmie procesowym [SYGN-SPRAWY] (sesja 2026-06-26).
 - SELF-CHECK: blok POV-B/C/D rozbudowany o:
   (a) zasadę explicite "dane z akt ≠ zweryfikowane"
   (b) [POV-D] jako osobny krok z triggerem przy ≥2 różnych numerach KRS/NIP

@@ -52,7 +52,7 @@
 
 **5.7 (2026-06-26) — NAPRAWA KRYTYCZNA: MOD-MACIERZ-DOWOD-TEZA przeniesiona z W2.1 do W1.2c + WBUDOWANIE W PISMO**
 
-Root cause (sprawa VII P 94/25, sesja 2026-06-26):
+Root cause (sprawa [SYGN-SPRAWY], sesja 2026-06-26):
 Dwa niezależne błędy powodowały, że tabela D×T nigdy nie trafiała do pisma:
 
 BŁĄD 1 — Zła pozycja w pipeline:
@@ -77,12 +77,12 @@ Naprawy:
 
 **5.9 (2026-06-27) — NAPRAWA: FSL-D (Fact-Source-Lock Dokumentów) — per-teza weryfikacja z zakazem cytowania z pamięci**
 
-Root cause (sprawa VII P 94/25, sesja 2026-06-27):
+Root cause (sprawa [SYGN-SPRAWY], sesja 2026-06-27):
 Po SD-VER = KOMPLET (wszystkie pliki odczytane) macierz D×T była budowana
 z pamięci modelu, nie z per-teza przeszukania SD-FAKTY. Pliki o mylących
 nazwach (Szef.odt → wiadomości RCS z gotowością, Zatrudnienie.odt → WhatsApp
 z kartami pobytu, Pracownicy13.08.2024.xlsx → status powoda jako aktywny
-pracownik HPG) były pomijane w skanowaniu tez bo „intuicyjnie nie pasowały".
+pracownik [SPÓŁKA-B]) były pomijane w skanowaniu tez bo „intuicyjnie nie pasowały".
 Skutek: teza gotowości do pracy — 1 dowód zamiast 4. Teza pracodawcy
 faktycznego — argumenty ogólne zamiast dowodów dokumentowych.
 
@@ -195,7 +195,7 @@ Naprawa w KROK MT (W1.2c):
 > pominięć) — nie wymagały zmian. Pełny opis: audyt-systemu-v4/
 > AUDIT-JOURNAL.md, AUDYT-2026-07-15e.
 
-> **5.12 (2026-07-14, sprawa XI P 27/26 — dziedziczenie naprawy SD-GATE-TRUNC):**
+> **5.12 (2026-07-14, sprawa [SYGN-SPRAWY-2] — dziedziczenie naprawy SD-GATE-TRUNC):**
 > Ten skill pobiera SD-REJ z `shared/MOD-SKAN-DOWODOW-KOMPLETNY.md` jako HARD
 > GATE (patrz linia ~471, blok PRZED-MACIERZ). Naprawa wprowadzona w module
 > współdzielonym (1.4.0 → 1.5.0: bramka SD-GATE-TRUNC — obowiązkowe domykanie

@@ -433,7 +433,7 @@ NOT_FOUND:  „Nie znaleziono żadnego wyniku pasującego do zapytania"
 ```
 
 Zmierzone: `I C 100/15` → 9 trafień (poprawny **AMBIGUOUS** — sygnatura SR/SO
-nie jest unikalna krajowo); `I C 999999/15` → NOT_FOUND; `XI P 27/26` → NOT_FOUND.
+nie jest unikalna krajowo); `I C 999999/15` → NOT_FOUND; `[SYGN-SPRAWY-2]` → NOT_FOUND.
 Odtworzone niezależnie 2026-09-13d: `I C 100/15` → `big_number=9`, 18 odnośników
 `/details/` — liczba zgadza się co do jednostki.
 

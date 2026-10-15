@@ -107,7 +107,7 @@ PDF-skan (bez warstwy tekstowej):
 
 XLSX wielozakładkowy:
   "zakładka '[Nazwa]', wiersze N-M, kolumna '[Nagłówek]'"
-  Przykład: "zakładka 'Pracownicy HP Global', wiersze 1-765"
+  Przykład: "zakładka 'Pracownicy [SPÓŁKA-B]', wiersze 1-765"
 
 Lista PFRON (PDF tabelaryczny):
   "str. N-M, lp. X-Y, suma Z zł; kluczowe: lp. A-B (str. C) — opis"
@@ -480,7 +480,7 @@ Format w piśmie:
 
 ## D10 — ARCHITEKTURA TEZA+DOWÓD w treści pisma procesowego (OBLIGATORYJNA)
 
-> **Wersja modułu:** dodano w ramach poprawy po sprawie VII P 94/25 (2026-06-25)
+> **Wersja modułu:** dodano w ramach poprawy po sprawie [SYGN-SPRAWY] (2026-06-25)
 > **Trigger:** ZAWSZE — każde pismo z ≥1 tezą i ≥1 dowodem.
 > **Pozycja w pipeline:** W2.2 (redakcja pisma) — budowanie uzasadnienia.
 

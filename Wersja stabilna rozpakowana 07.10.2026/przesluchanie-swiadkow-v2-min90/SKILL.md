@@ -393,7 +393,7 @@ WYNIK:
 > własne pismo procesowe użytkownika ORAZ transkrypt zeznań świadka strony
 > przeciwnej — oba już dostępne w aktach — wprost tę przesłankę potwierdzają.
 
-> 🔴 **ROZRÓŻNIENIE 3.18 (naprawa incydentu — sprawa XI P 27/26, pismo 7.10.2024):**
+> 🔴 **ROZRÓŻNIENIE 3.18 (naprawa incydentu — sprawa [SYGN-SPRAWY-2], pismo 7.10.2024):**
 > PRAWO-HARDGATE (weryfikacja treści/numeracji przepisu przez web_search) i
 > PRZESŁANKI-GATE (dopasowanie faktów z dokumentu do przesłanek tego przepisu)
 > to DWA NIEZALEŻNE obowiązki. Wykonanie web_search potwierdzającego treść
@@ -525,8 +525,8 @@ tabelę przypisania dokumentów i faktów do konkretnych podmiotów, np.:
 
 | Podmiot | NIP | Dokumenty/maile z tego podmiotu | Osoby podpisujące |
 |---|---|---|---|
-| Human Park sp. z o.o. | [nr] | [lista] | [imiona] |
-| Human Park Global sp. z o.o. | [nr] | [lista] | [imiona] |
+| [SPÓŁKA-A] sp. z o.o. | [nr] | [lista] | [imiona] |
+| [SPÓŁKA-B] sp. z o.o. | [nr] | [lista] | [imiona] |
 
 Aktualizuj tę tabelę przy każdym nowym dokumencie odnoszącym się do
 któregokolwiek z podmiotów. Udostępnij ją użytkownikowi, gdy:
@@ -1693,7 +1693,7 @@ Nie wolno domyślnie:
 - **traktować web_search weryfikujący treść/numerację przepisu jako zakończenie obowiązku
   PRZESŁANKI-GATE — to dwa niezależne kroki, weryfikacja treści nie zwalnia z zestawienia
   przesłanek z faktami (KROKI 3-5)** —
-  patrz ROZRÓŻNIENIE 3.18 (audyt 3.18, KRYTYCZNA — incydent XI P 27/26),
+  patrz ROZRÓŻNIENIE 3.18 (audyt 3.18, KRYTYCZNA — incydent [SYGN-SPRAWY-2]),
 - **pomijać ocenę zgodności FORMALNEJ (proceduralnej) dokumentu stanowiącego karę porządkową
   lub inną sformalizowaną czynność, czekając aż użytkownik zapyta wprost o zgodność z prawem/
   wymogami formalnymi** —

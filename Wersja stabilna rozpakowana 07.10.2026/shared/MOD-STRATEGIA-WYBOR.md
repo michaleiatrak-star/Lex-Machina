@@ -13,7 +13,7 @@
 
 ## DLACZEGO TEN MODUŁ ISTNIEJE
 
-### Luka zidentyfikowana po analizie sesji VII P 94/25
+### Luka zidentyfikowana po analizie sesji [SYGN-SPRAWY]
 
 System posiadał fragmentaryczne narzędzia oceny ścieżek:
 - MOD-WARIANTY-POZWU: generuje warianty, ale aktywowany warunkowo, bez rankingu
@@ -79,7 +79,7 @@ Dla każdego żądania z W1.2a (CLAIM-VALIDATION):
     - podstawa prawna B (alternatywna)
     - podstawa C (ewentualna / posiłkowa)
 
-  KROK S1.2 — Anomalie podmiotowe (NOWE — lekcja z VII P 94/25):
+  KROK S1.2 — Anomalie podmiotowe (NOWE — lekcja z [SYGN-SPRAWY]):
     Czy w materiale dowodowym widoczna jest SPRZECZNOŚĆ podmiotowa?
     Przykłady:
       - ta sama nazwa handlowa, różne KRS/NIP w dokumentach
@@ -170,7 +170,7 @@ SCENARIUSZ 2: KILKA KOMPLEMENTARNYCH ŚCIEŻEK (każda mocna autonomicznie)
   → WARSTWOWA OBRONA: Warstwa A (najsilniejsza) + B + C
   → Każda warstwa samodzielnie wystarczająca
   → W piśmie: "Niezależnie od przyjęcia przez Sąd kwalifikacji..."
-  → Struktura: wielowarstwowa (jak w VII P 94/25 po korekcie)
+  → Struktura: wielowarstwowa (jak w [SYGN-SPRAWY] po korekcie)
 
 SCENARIUSZ 3: DWIE ALTERNATYWNE (wzajemnie się wykluczające)
   → Żądanie główne (ścieżka #1) + żądanie ewentualne (ścieżka #2)
@@ -232,13 +232,13 @@ Czy zatwierdzasz proponowaną strukturę?
    → Użytkownik może zdecydować inaczej — ale musi to być ŚWIADOMA DECYZJA,
      po przeczytaniu uzasadnienia dlaczego B jest słabsza.
 
-LEKCJA Z VII P 94/25:
-   ŚCIEŻKA SŁABA:  "ten sam KRS = ten sam podmiot" → atak 🔴 (KRS należy do HP sp. z o.o.,
-                    nie HPG; model zbudował argument bez weryfikacji rejestru)
+LEKCJA Z [SYGN-SPRAWY]:
+   ŚCIEŻKA SŁABA:  "ten sam KRS = ten sam podmiot" → atak 🔴 (KRS należy do [SPÓŁKA-A] sp. z o.o.,
+                    nie [SPÓŁKA-B]; model zbudował argument bez weryfikacji rejestru)
    ŚCIEŻKA MOCNA:  "błąd KRS po stronie pracodawcy → nie może szkodzić pracownikowi"
                     → atak 🟡 (Ciecierski podniesie, sąd prawdopodobnie oddali)
    ŚCIEŻKA MOCNA:  "art. 23¹ KP — przejście zakładu" → autonomiczna, atak 🟡
-   ŚCIEŻKA MOCNA:  "HPG samodzielnie wyczerpała limit 3 umów" → autonomiczna, brak ataku 🔴
+   ŚCIEŻKA MOCNA:  "[SPÓŁKA-B] samodzielnie wyczerpała limit 3 umów" → autonomiczna, brak ataku 🔴
 
    → System powinien był AUTOMATYCZNIE porzucić ścieżkę "ten sam KRS"
      i zbudować warstwową obronę A/B/C z pozostałych trzech.
@@ -282,18 +282,18 @@ WYWOŁANIE w SKILL.md:
 
 ---
 
-## PRZYKŁAD RAPORTU — sprawa VII P 94/25 (post-factum)
+## PRZYKŁAD RAPORTU — sprawa [SYGN-SPRAWY] (post-factum)
 
 ```
 ═══════════════════════════════════════════════════════════
 RAPORT STRATEGII — MOD-STRATEGIA-WYBOR
-Sprawa: VII P 94/25 | Pismo: Rozszerzenie powództwa | 21.06.2026
+Sprawa: [SYGN-SPRAWY] | Pismo: Rozszerzenie powództwa | 21.06.2026
 ═══════════════════════════════════════════════════════════
 
 ZIDENTYFIKOWANE ŚCIEŻKI (Żądanie I — ustalenie stosunku pracy):
 
   ŚCIEŻKA-A: Błąd KRS pracodawcy — nie może działać na niekorzyść pracownika
-    Podstawa: art. 8 KP (zakaz nadużycia prawa) + KRS 0000796445 w umowach 3-5
+    Podstawa: art. 8 KP (zakaz nadużycia prawa) + KRS [KRS-A] w umowach 3-5
               → pracodawca sam stworzył dokument z tym numerem
     Autonomiczna: TAK
 
@@ -301,14 +301,14 @@ ZIDENTYFIKOWANE ŚCIEŻKI (Żądanie I — ustalenie stosunku pracy):
     Podstawa: art. 23¹ §1 KP — ta sama siedziba, prezes, branża, pracownicy
     Autonomiczna: TAK
 
-  ŚCIEŻKA-C: HPG samodzielnie wyczerpała limit 3 umów terminowych
-    Podstawa: art. 25¹ §1 i §3 KP — umowy 3, 4, 5 = 3 umowy HPG
+  ŚCIEŻKA-C: [SPÓŁKA-B] samodzielnie wyczerpała limit 3 umów terminowych
+    Podstawa: art. 25¹ §1 i §3 KP — umowy 3, 4, 5 = 3 umowy [SPÓŁKA-B]
     Autonomiczna: TAK — niezależna od A i B
 
   ŚCIEŻKA-ODRZUCONA: "Ten sam KRS = ten sam podmiot"
-    Podstawa: KRS 0000796445 identyczny we wszystkich umowach
-    Problem: KRS 0000796445 należy do HP sp. z o.o. (NIP 8971869561),
-             a nie do HPG (KRS 0001025052, NIP 6343021499) — weryfikacja KRS
+    Podstawa: KRS [KRS-A] identyczny we wszystkich umowach
+    Problem: KRS [KRS-A] należy do [SPÓŁKA-A] sp. z o.o. (NIP [NIP-A]),
+             a nie do [SPÓŁKA-B] (KRS [KRS-B], NIP [NIP-B]) — weryfikacja KRS
 
 OCENA:
 
@@ -320,10 +320,10 @@ OCENA:
              (ta sama siedziba/prezes/branża/pracownicy)
              Siła: ★★
 
-  ŚCIEŻKA-C: Atak: 🟢 BRAK (arytmetyka: 3 umowy HPG = limit wyczerpany)
+  ŚCIEŻKA-C: Atak: 🟢 BRAK (arytmetyka: 3 umowy [SPÓŁKA-B] = limit wyczerpany)
              Siła: ★★★
 
-  ŚCIEŻKA-ODRZUCONA: Atak: 🔴 KRYTYCZNY (KRS 0000796445 ≠ HPG z rejestru)
+  ŚCIEŻKA-ODRZUCONA: Atak: 🔴 KRYTYCZNY (KRS [KRS-A] ≠ [SPÓŁKA-B] z rejestru)
                       Kontratak: NIE | Siła: ★
 
 RANKING:

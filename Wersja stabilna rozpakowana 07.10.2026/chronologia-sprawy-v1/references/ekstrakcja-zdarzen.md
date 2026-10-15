@@ -427,7 +427,7 @@ WPŁYW: wpływa na ważność czynności prawnej lub odpowiedzialność z rękoj
 ```
 PROBLEM: Dokument dowodowy (pokwitowanie, formularz, podpis) zawiera zapis
          imienia/nazwiska osoby, który różni się od danych strony lub świadka
-         używanych w pismach procesowych (np. "Wiatrak" w pozwie vs "Wiatr" na
+         używanych w pismach procesowych (np. "Nowakowski" w pozwie vs "Nowak" na
          pokwitowaniu; "Poudel" w pismach vs "Paudel" na pokwitowaniu)
 TYPOWE W: sprawach z dokumentami gotówkowymi/pokwitowaniami, sprawach z licznymi
           podobnymi nazwiskami, dokumentach skanowanych/OCR

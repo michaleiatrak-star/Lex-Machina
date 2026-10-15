@@ -92,7 +92,7 @@ def main() -> int:
         # niezależne progi; podniesienie któregokolwiek wymaga wpisu w dzienniku.
         ("lekki korpus ≤500 linii", len(body.splitlines()) <= 500),
         ("frontmatter ≤150 linii", len(skill.splitlines()) - len(body.splitlines()) <= 150),
-        ("bez narracji incydentów", not re.search(r"ROOT CAUSE|VII P 94/25|HP sp\. z o\.o\.|Dlaczego OSOBNA|przeniesione stąd|flaga F-126", skill, re.IGNORECASE)),
+        ("bez narracji incydentów", not re.search(r"ROOT CAUSE|\[SYGN-SPRAWY\]|\[SPÓŁKA-A\] sp\. z o\.o\.|Dlaczego OSOBNA|przeniesione stąd|flaga F-126", skill, re.IGNORECASE)),
         ("bez zduplikowanej reguły 13", "13" not in actual_rules and "13. Weryfikacja:" not in skill),
         ("stałe identyfikatory i kolejność reguł", actual_rules == expected_rules),
         ("numery reguł zachowują znaczenie", all(f"Reguła {number} — {meaning}:" in body for number, meaning in rule_meanings.items())),
