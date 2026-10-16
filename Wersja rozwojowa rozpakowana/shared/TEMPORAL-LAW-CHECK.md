@@ -90,7 +90,9 @@ przepisuje wynik. Mapowanie:
 
 Brak VER (`⚠️ [NIEWERYFIKOWANE]`) z przyczyną w `evidence`: dwa brzmienia bez
 czytelnej daty w odnośniku, artykuł `(uchylony)`, zmiana nieobowiązująca
-wydrukowana w t.j. bez rozstrzygających odnośników.
+wydrukowana w t.j. bez rozstrzygających odnośników, powołana jednostka
+(§ / ust. / pkt) wchodząca w życie później, uchylona albo nieistniejąca —
+powołuj wtedy jednostkę obowiązującą albo podaj datę wejścia w życie.
 
 **Kryterium zamknięcia bramki:** przebieg kontrolny na akcie z nowelizacją
 opublikowaną po dacie t.j. wykrywa ją BEZ podpowiedzi w treści polecenia.
