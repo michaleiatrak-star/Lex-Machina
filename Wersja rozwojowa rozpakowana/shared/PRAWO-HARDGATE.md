@@ -431,6 +431,14 @@ KROK 2C-3: Przy blokadzie źródła na KROK 2C-1 → status 🟨 [KOTWICA-URZĘD
 
 Pełna procedura i uzasadnienie: `shared/TEMPORAL-LAW-CHECK.md`.
 
+**W aplikacji (verify_legal_reference, 2026-10-16):** KROK 2C wykonuje narzędzie;
+model przepisuje wynik, nie szuka sam. `freshness.amendments` = pełna lista
+z Dz.U., datą i statusem `WESZLA_W_ZYCIE` / `OCZEKUJE` / `DATA_NIEUSTALONA`
+(z terminami etapowymi ELI) → to jest lista z KROK 2C-2; `evidence` = brzmienie
+obowiązujące w dniu sprawdzenia (wybrane po odnośnikach t.j.), `pendingWording` =
+brzmienie na później z datą. Szczegóły: `shared/TEMPORAL-LAW-CHECK.md`, sekcja
+„W aplikacji”.
+
 ### GDZIE SZUKAĆ NOWELIZACJI PO t.j. — adresy (dodano 2026-09-01k, F-156)
 
 | Co | Gdzie |

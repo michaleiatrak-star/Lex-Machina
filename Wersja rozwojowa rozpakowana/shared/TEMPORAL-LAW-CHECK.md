@@ -1,6 +1,6 @@
 # TEMPORAL-LAW-CHECK — stan prawny na dzień zdarzenia
 
-Stan: 2026-05-28.
+Stan: 2026-10-16.
 
 ## Cel
 
@@ -72,6 +72,25 @@ KROK T-5 → PRZY BLOKADZIE ŹRÓDŁA (robots.txt, brak dostępu) na KROK T-2:
            🟨 [KOTWICA-URZĘDOWA] (shared/PRAWO-HARDGATE.md, warunki
            K-1…K-4) zamiast twierdzić o aktualności bez sprawdzenia.
 ```
+
+### W aplikacji — wynik `verify_legal_reference` (2026-10-16)
+
+Kroki T-1…T-4 wykonuje narzędzie; model nie szuka nowelizacji sam, tylko
+przepisuje wynik. Mapowanie:
+
+| Krok | Pole wyniku | Jak użyć |
+|---|---|---|
+| T-1 | `freshness.currentEli` | t.j., na którym oparto brzmienie |
+| T-2/T-3 | `freshness.amendments[]` (`dzU`, `from`, `status`, `stages`) | pełna lista chronologiczna; pusta = „sprawdzono akty zmieniające po t.j. — brak”; nigdy sama liczba |
+| T-4 vacatio | `status: OCZEKUJE` | zmiana ogłoszona, jeszcze nie obowiązuje: podaj datę wejścia w życie |
+| T-4 etapy | `stages` (terminy z ELI) | inna data dla części przepisów noweli; liczy się data części zmieniającej ten akt |
+| T-4 brzmienie | `evidence` / `pendingWording[]` | `evidence` = obowiązujące w dniu sprawdzenia (odnośniki t.j.); `pendingWording` = brzmienie od `from`, nigdy jako obowiązujące |
+| pkt 5-6 | `freshness.transitionalProvisions[]` | przepisy przejściowe noweli z jej tekstu (małe litery = normalizacja); stosuj do czynności sprzed zmiany |
+| data zdarzenia | `asOf=RRRR-MM-DD` | brzmienie na dzień zdarzenia; nowela, która nie dotyczy artykułu, nie blokuje |
+
+Brak VER (`⚠️ [NIEWERYFIKOWANE]`) z przyczyną w `evidence`: dwa brzmienia bez
+czytelnej daty w odnośniku, artykuł `(uchylony)`, zmiana nieobowiązująca
+wydrukowana w t.j. bez rozstrzygających odnośników.
 
 **Kryterium zamknięcia bramki:** przebieg kontrolny na akcie z nowelizacją
 opublikowaną po dacie t.j. wykrywa ją BEZ podpowiedzi w treści polecenia.
