@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.31"
+version: "2.32"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -153,6 +153,7 @@ KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga op�
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]
 KROK 8  → Wczytaj references/M4-struktura.md          [zawsze — redagowanie pisma]
+           view shared/MOD-DLUGIE-PISMO.md   [pismo/regulamin ponad ok. 10 stron — części według planu]
 KROK 9  → Wczytaj references/M8-checklista.md         [zawsze — przed wydaniem]
 KROK 9b → WERYFIKACJA FAKTYCZNA (M-FAKTY)             [zawsze gdy pismo z dostarczonych źródeł]
            Porównaj każde twierdzenie faktyczne z materiałem źródłowym.

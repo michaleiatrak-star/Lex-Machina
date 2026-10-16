@@ -1,6 +1,6 @@
 94eb8d671ce15fc4ae0671df2499ca350f8dcc90e9f151e8d1b22a14de2cb463  ./NOTICE
 532165db1bcdc6a9634490d21847bb93a4f1596436b397287344d820e5beeec1  ./PORTABILITY-MANIFEST.md
-91aa1d26ab6d1388a1242f95f2b54e4ba4ec6d6b60d8925f7e76d0d87ed3fe2c  ./SKILL.md
+d0d598a1d9d773fafbc44727dae722f0726208f55b95089bdeae2d692f9dde70  ./SKILL.md
 a8894e5463f321487a6233c1b9b10f5caea8ac2a2b8a9deb9824ae245d237348  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
 f5adb2b1988ebfd743378091125076b20a5677ea2b478b3cb37d4f695541b082  ./benchmark/posiane-wady/README.md
@@ -12,7 +12,7 @@ ad7d21631521a47e2ba0285b4c88f1b0c2e56e63bd474b48bb86b1f1e72f8c89  ./benchmark/po
 5ffe95913b7d3e04e16c489c5fd9d712049eb527ecf29af2f9379ddbb048c2bb  ./benchmark/posiane-wady/umowy/04-matematyczna-tm.md
 26b46fbccbeaf79ae5be06a49314332f9a80e482ad2684739f4889121a60fce1  ./benchmark/posiane-wady/umowy/05-adwersarialne-injection.md
 70b200f4c7a85436d8d146204a71cda11c2ceb8ca2d0add25fd4dd1716bd7251  ./benchmark/posiane-wady/wyniki/oceny/README.md
-5117f029c96153c4beb695f98b28145bd99e0b41ebfde917be7d84652429a31c  ./references/CHANGELOG.md
+690f4327c4f92950cb239bb395cf87055467c8550160d088772f833eacad5717  ./references/CHANGELOG.md
 d8d6b296b3e0947ee81567992924b24508479a332758315f2078b40a555eb2c8  ./references/HISTORIA-ZMIAN-PLIKOW.md
 93dc21293d084a931cbb4282fe68e4ec9a8fd36b1c5ed6d124f1266fda8b0a1c  ./references/b2b-podwykonawcze.md
 41e7a97f2c301f10047726ecb0db6fb299031235548f6d6951871d62b4c72f68  ./references/generator/boilerplate-strukturalne.md

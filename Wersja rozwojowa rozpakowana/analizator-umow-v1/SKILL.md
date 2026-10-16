@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.49"
+version: "1.50"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -301,6 +301,8 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 > J20/J21.
 > Wczytaj `references/generator/rdzen-generowania.md` na starcie KAŻDEGO
 > z poniższych workflow.
+> Umowa lub regulamin ponad ok. 10 stron: `view shared/MOD-DLUGIE-PISMO.md` —
+> części według planu (AU-GENBUILD); AU-HYBRID i AU-STRIP obejmują całość.
 
 | Sygnał od użytkownika | Workflow | Essentialia z |
 |---|---|---|

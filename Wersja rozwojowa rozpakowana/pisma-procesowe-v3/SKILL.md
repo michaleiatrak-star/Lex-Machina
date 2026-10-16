@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.43"
+version: "5.44"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -693,6 +693,8 @@ Jeśli warunek aktywacji NIE jest spełniony — pomiń ten krok, przejdź do W1
 
 ```
 view pisma-procesowe-v3/modules/MOD-SZABLONY.md   (zawsze)
+view shared/MOD-DLUGIE-PISMO.md                   (pismo ponad ok. 10 stron: === CIĄG DALSZY ===;
+                                                                     W3 na długim projekcie: tylko ZMIANA SEKCJI)
 view pisma-procesowe-v3/modules/MOD-DOWODY.md     (gdy są dowody)
 view pisma-procesowe-v3/modules/MOD-OBAL.md       (gdy riposta/odpowiedź)
 view pisma-procesowe-v3/modules/MOD-OPLATY.md     (gdy pismo wszczynające)

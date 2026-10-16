@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 (nowy) — pismo, regulamin lub umowa ponad ok. 10 stron: części według planu (blok plan-pisma, znaczniki [CZĘŚĆ k/N] i [KONIEC CZĘŚCI k/N], reguły DP-1–DP-5); potok pisma procesowego W2–W3: `=== CIĄG DALSZY ===` (dalszy ciąg w tym samym kroku), `=== ZMIANA SEKCJI: … ===` dla długiego projektu, blok bez linii końca nie jest zapisywany; umowa z części po AU-HYBRID i AU-STRIP. Konsumenci: pisma-proste-v2 2.32, pisma-procesowe-v3 5.44, analizator-umow-v1 1.50.
+
 - 3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
 
 - 3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — lista „Wywoływany z” uzupełniona o wywołania krokowe: analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a. Treść metody bez zmian.

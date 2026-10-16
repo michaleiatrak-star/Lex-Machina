@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.44 (2026-10-16a, AUDYT-2026-10-16a): W2.1 — `shared/MOD-DLUGIE-PISMO.md`: pierwszy projekt ponad ok. 10 stron kończy blok linią `=== CIĄG DALSZY ===` (dalszy ciąg w tym samym kroku); kroki W3 na długim projekcie zwracają tylko `=== ZMIANA SEKCJI: … ===`; blok bez linii końca = ucięty, wersja nie zapisana.
 - 5.43 (2026-10-15b, AUDYT-2026-10-15b): W1.2c KROK PRZ — przesłanka związku przyczynowego tezy (szkoda, krzywda, odszkodowanie, zadośćuczynienie) badana przez `shared/MOD-GRAF-PRZYCZYNOWY.md` przed W1.3; NIEWYKAZANY → W1.5 jako ⬛ BRAK; zakaz przesłanki z samej kolejności dat.
 
 - 5.42 (2026-10-13b, AUDYT-2026-10-13b): KROK 0 Test B — redukcja do `pisma-proste-v2` stałym komunikatem (REDUKCJA DO pisma-proste-v2 / Przyczyna / pytanie), bez pisma; w aplikacji Lex Machina wątek z wybranym skillem przełącza aplikacja po zgodzie użytkownika (wcześniej odpowiedź z samą propozycją była blokowana jako niepełny raport CP-1a).
