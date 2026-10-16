@@ -105,6 +105,13 @@ pomiaru — a wynik pomiaru odbiegający od tej tabeli zgłoś jako flagę.
 
 ## 3. ŚCIEŻKI SZYBKIEGO DOSTĘPU
 
+**W aplikacji (2026-10-16):** artykuł rozporządzenia lub dyrektywy UE weryfikuje
+`verify_legal_reference` (`act` = RODO / AI Act / DSA / „rozporządzenie (UE) 2016/679” /
+„dyrektywa 2008/48/WE” / CELEX): treść z Cellar w wersji skonsolidowanej na dziś,
+status obowiązywania aktu, jednostka (ust.), `applicationRule` = stosowanie etapami
+(np. art. 113 AI Act) — podaj, od kiedy artykuł się stosuje. Akt uchylony, artykuł
+lub ustęp nieistniejący = bez VER. `eurlex_lookup` daje tylko metadane, nie treść.
+
 ```
 Prawo UE i orzeczenia TSUE
   curl "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:{celex}"
