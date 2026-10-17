@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.44"
+version: "5.45"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -699,6 +699,10 @@ view pisma-procesowe-v3/modules/MOD-DOWODY.md     (gdy są dowody)
 view pisma-procesowe-v3/modules/MOD-OBAL.md       (gdy riposta/odpowiedź)
 view pisma-procesowe-v3/modules/MOD-OPLATY.md     (gdy pismo wszczynające)
 view pisma-procesowe-v3/modules/MOD-ADMIN.md      (gdy sprawa adm./KPA/WSA)
+view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-wlasciwosc-miejscowa-sadow-powszechnych.md
+                                                  (⛔ OBOWIĄZKOWE dla pisma do sądu bez sądu w aktach:
+                                                                     sąd i adres tylko z court_for_address albo
+                                                                     z bloku SĄD SPRAWY; nigdy z pamięci)
 view shared/ZAZALENIE-ADRESAT-GATE.md             (⛔ OBOWIĄZKOWE gdy pismo to
                                                                      zażalenie/odwołanie/sprzeciw/
                                                                      zarzuty/skarga — ustal adresata

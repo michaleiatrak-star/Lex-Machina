@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
 - 6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
 - 6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).
 - 6.62 (2026-10-15c, AUDYT-2026-10-15c): ROUTING-MAP: t.j. transport kolejowy 2026/1324, Prawo wodne 2026/1335, odpady 2026/1328 (brak zmian po t.j.); ⛔ VAT — 2026/507 art. 6 od 1.11.2028 (było 14.10.2026); nowy wiersz ustawy o CEIDG (t.j. 2026/30, zm. 2026/734, 507); KC ⏳ art. 860 § 3–4 od 1.11.2028; SUS ⏳ 507 art. 5 od 1.11.2028; rynek pracy 507 art. 11 od 14.10.2026. ELI 2026-10-15.

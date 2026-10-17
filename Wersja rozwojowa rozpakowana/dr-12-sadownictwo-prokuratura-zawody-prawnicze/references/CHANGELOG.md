@@ -1,5 +1,6 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.28 (2026-10-17c, AUDYT-2026-10-17c): Nowy moduł mod-wlasciwosc-miejscowa-sadow-powszechnych (rozporządzenie MS z 28.12.2018, t.j. Dz.U. 2026 poz. 492 — siedziby i obszary sądów, zakres spraw SR; mechanizm aplikacji court_for_address i SĄD SPRAWY; tryb bez aplikacji) + references/wlasciwosc-sadow-tj-2026-492.tsv (319 SR z brzmieniem § 3); MAPA-AKTOW, MAPA-POKRYCIA. Przepisy KPC modułu (art. 17, 27 § 1, 34 § 1, 35, 37, 38 § 1) z t.j. 2026/468, ELI 2026-10-17.
 - 4.27 (2026-10-12b, AUDYT-2026-10-12b): mod-ustawa-regulatorzy: ⛔ ustawa o wspieraniu rozwoju usług i sieci telekom. — t.j. 2026/562 (było 2025/311); PKE i megaustawa — zm. 2026/815. ELI 2026-10-12.
 
 - 4.26 (2026-10-11a, AUDYT-2026-10-11a): MAPA-AKTOW: zmiany po t.j. z ELI `/references` — u.k.s.c. 2025/1228: 2026/473 (8.07.2026), 1003 (28.10.2026), 346 (30.09.2028); Prawo o adwokaturze 2024/1564: 2025/1172, 2026/370, 846, 1290; radcy 2024/499: 2025/1172, 2026/370, 731, 846. ⚠️ Treść mod-KSCU nie była przeglądana pod kątem 473/1003/346 — zadanie dla audytu DZU.

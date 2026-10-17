@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.236 (2026-10-17c, AUDYT-2026-10-17c): mapa_dzu: 2018/2548 (ORG), 2025/925 (TJ PREV), 2025/1012, 2025/1607, 2026/392 (NW, objęte t.j.), 2026/492 (TJ OK) — rozporządzenie o siedzibach i obszarach sądów; ELI 2026-10-17.
 - 6.235 (2026-10-17b, AUDYT-2026-10-17b): mapa_dzu: 2026/1306 (TJ, ochrona pokrzywdzonego i świadka, stan prawny 30.09.2026), 2026/1340 (NW, ZZ i informowanie pracowników, w życie 30.10.2026 — MONITORING); 2026/549 z adnotacją ⏳ po t.j.; 2015/21 — odesłanie do t.j. Przegląd ELI DU/2026 poz. 1301–1340.
 - 6.234 (2026-10-17a, AUDYT-2026-10-17a): mapa_dzu — KPW t.j. 2026/1336 (TJ, obwieszczenie z 2.10.2026, stan prawny 27.09.2026; obejmuje 2025/1178, 1661, 1814, 1818, 1872 i 2026/473; brak zmian po t.j. — ELI 2026-10-17), 2025/860 → PREV. Wykryte przez T15 (NEWER_TJ).
 - 6.233 (2026-10-15c, AUDYT-2026-10-15c): mapy aktów — t.j. 2026/1324 (transport kolejowy), 1335 (Prawo wodne), 1328 (odpady) w mapa_dzu (TJ + PREV) i ALIASY-NAZW-AKTOW; DU/2026/507 — tytuł i zakres w mapa_dzu, ⛔ korekta daty VAT (1.11.2028), MONITORING etapów; dr-02 3.96, dr-04 3.50, dr-06 3.99.1, dr-09 3.49, prawo-polskie-v2 6.62, shared 3.99.36; wpis w AUDIT-JOURNAL.
