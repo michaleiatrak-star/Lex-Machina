@@ -1,5 +1,6 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.66 (2026-10-17b, AUDYT-2026-10-17b): mod-lincz-ochrona-swiadkow-lowcy-pedofili: ustawa o ochronie i pomocy dla pokrzywdzonego i świadka — t.j. Dz.U. 2026 poz. 1306 (obwieszczenie z 2.10.2026, ogł. 8.10.2026, stan prawny 30.09.2026, obejmuje 2024/1228; brak zmian po t.j. — ELI 2026-10-17). ⛔ KOREKTA: zapis „bez odrębnego tekstu jednolitego” był nieaktualny.
 - 3.65 (2026-10-17a, AUDYT-2026-10-17a): KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17): MAPA-AKTOW, MAPA-POKRYCIA, mod-KPW, mod-KW-KPW-framework, mod-KW-kodeks-wykroczen, mod-grzywny-mandaty, mod-przerobki-modyfikacje-pojazdow. Ponowny odczyt art. 96 KPW (§ 1, 1a pkt 2, 1ad, 1ag, 1d, 1e) i art. 94 § 1 KPW z art. 506 § 1 KPK (t.j. 2026/490) — kwoty i termin bez zmian.
 - 3.64 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). mod-grzywny-mandaty-szczegolowe.
 

@@ -12,9 +12,12 @@ Podstawa główna: Kodeks karny art. 158-159 (bójka/pobicie) — zweryfikowany
 osobno w innych modułach systemu, nie duplikowany tutaj.
 
 Akt DODATKOWY dla wątku ochrony świadków (sekcja 3): ustawa z 28.11.2014 r.
-o ochronie i pomocy dla pokrzywdzonego i świadka, **Dz.U. 2015 poz. 21**
-(pierwotna publikacja — ustawa funkcjonuje w formie nowelizowanej, bez
-odrębnego tekstu jednolitego skonsolidowanego).
+o ochronie i pomocy dla pokrzywdzonego i świadka, **t.j. Dz.U. 2026 poz. 1306**
+(obwieszczenie z 2.10.2026, ogł. 8.10.2026, stan prawny 30.09.2026, obejmuje
+zm. Dz.U. 2024 poz. 1228; brak zmian po t.j.) ✅ [VER] RZĄD 1 2026-10-17
+(ELI DU/2026/1306 text.pdf, DU/2015/21 /references). ⛔ KOREKTA: wcześniejszy
+zapis „bez odrębnego tekstu jednolitego” nieaktualny; akt pierwotny Dz.U. 2015
+poz. 21 powołuj wyłącznie jako publikację pierwotną.
 ✅ VER: isap.sejm.gov.pl (WDU20150000021), lexlege.pl (cytuje wprost
 2015.21 jako aktualną podstawę, stan na 19.07.2026), policja.pl —
 2026-08-14 (F-77)

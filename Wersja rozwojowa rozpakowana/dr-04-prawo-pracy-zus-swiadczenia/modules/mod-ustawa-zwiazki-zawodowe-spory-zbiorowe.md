@@ -3,7 +3,7 @@
 ⚠️ **Nazwa pliku jest HISTORYCZNA i węższa niż rzeczywisty zakres** — ✅ ROZSTRZYGNIĘTE 2026-08-15 (F-28 pkt 4): moduł opisuje TRZY tematy, nie dwa sugerowane nazwą: (1) związki zawodowe, (2) UKŁADY ZBIOROWE PRACY (sekcja 3 — pominięte w nazwie, mimo że to jedna z dwóch ustaw źródłowych modułu), (3) spory zbiorowe. Rename pliku ŚWIADOMIE NIE wykonany — wymagałby synchronizacji 4 miejsc w 3 plikach (`SKILL.md`, `MAPA-AKTOW.md`, `prawo-polskie-v2/ROUTING-MAP.md` — 2 wiersze, oraz cross-odesłanie z `mod-ustawa-zwolnienia-grupowe.md`), z realnym ryzykiem rozerwania referencji, przy niskiej korzyści (moduł ma tylko 1 plik, łatwy do znalezienia przez treść). Zamiast tego — ten nagłówek jako trwałe wyjaśnienie zakresu.
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** Ustawa o związkach zawodowych — Dz.U. 2026 poz. 549 t.j. | Ustawa o układach zbiorowych i porozumieniach zbiorowych — Dz.U. 2025 poz. 1661 (NOWA — od 13.12.2025)
+**Źródło weryfikacji:** Ustawa o związkach zawodowych — Dz.U. 2026 poz. 549 t.j. (⏳ zm. Dz.U. 2026 poz. 1340 (ustawa z 4.09.2026, ogł. 15.10.2026) — w życie **30.10.2026**: art. 32 ust. 9¹ zd. 2 (powiadomienie w 7 dni od wniosku zarządu ZOZ złożonego na piśmie, w formie dokumentowej lub elektronicznej), nowy art. 32¹ (forma dokumentowa lub elektroniczna informacji z art. 26¹ ust. 1 i art. 32 ust. 9¹ zd. 1, jeśli przewiduje ją układ lub porozumienie) ✅ [VER] RZĄD 1 2026-10-17 (ELI DU/2026/1340 text.pdf)) | Ustawa o układach zbiorowych i porozumieniach zbiorowych — Dz.U. 2025 poz. 1661 (NOWA — od 13.12.2025)
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -31,7 +31,8 @@ Związki zawodowe (zakładanie, prawa, ochrona działaczy), zakładowe organizac
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Ustawa o związkach zawodowych | Dz.U. 2026 poz. 549 t.j. | Zawiera zm. z ustawy o układach zbiorowych |
+| Ustawa o związkach zawodowych | Dz.U. 2026 poz. 549 t.j. + ⏳ zm. Dz.U. 2026 poz. 1340 od 30.10.2026 (art. 32 ust. 9¹, art. 32¹) | Zawiera zm. z ustawy o układach zbiorowych; przed 30.10.2026 — brzmienie z t.j. 549, od 30.10.2026 — po zm. 1340 |
+| Ustawa o informowaniu pracowników i przeprowadzaniu z nimi konsultacji | Dz.U. 2006 poz. 550 ze zm. (bez t.j.) + ⏳ zm. Dz.U. 2026 poz. 1340 od 30.10.2026 (art. 5 ust. 1 pkt 1a–1b, art. 13 ust. 2 zd. 2 i ust. 3 — wniosek i informacje rady pracowników także w formie dokumentowej lub elektronicznej) | Rada pracowników; brzmienie zawsze z ELI |
 | Ustawa o układach zbiorowych i porozumieniach zbiorowych | Dz.U. 2025 poz. 1661 | NOWA od 13.12.2025 |
 
 ---
@@ -131,7 +132,7 @@ Procedura:
 ## 6. QUALITY GATE
 
 - [ ] Nowa ustawa Dz.U. 2025 poz. 1661 zastosowana (nie stare przepisy)?
-- [ ] Aktualny t.j. ustawy o ZZ (Dz.U. 2026 poz. 549) zweryfikowany?
+- [ ] Aktualny t.j. ustawy o ZZ (Dz.U. 2026 poz. 549) zweryfikowany? Zdarzenie od 30.10.2026 — art. 32 ust. 9¹ i art. 32¹ w brzmieniu po zm. Dz.U. 2026 poz. 1340?
 - [ ] Reprezentatywność ZOZ (≥ 8%) ustalona?
 - [ ] Ochrona działacza (zgoda zarządu ZOZ) sprawdzona?
 

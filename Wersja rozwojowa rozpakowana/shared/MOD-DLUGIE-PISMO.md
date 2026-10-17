@@ -1,8 +1,8 @@
 # MOD-DLUGIE-PISMO — Pismo dłuższe niż jedna odpowiedź (części, ciąg dalszy, zmiany sekcji)
 
-> **Wersja:** 1.0.0 (2026-10-16)
+> **Wersja:** 1.1.0 (2026-10-17)
 > **Typ:** moduł shared
-> **Wywołanie:** `view shared/MOD-DLUGIE-PISMO.md` — przed pisaniem pisma, regulaminu lub umowy ponad ok. 10 stron (ok. 20 000 znaków)
+> **Wywołanie:** `view shared/MOD-DLUGIE-PISMO.md` — przed pisaniem pisma, regulaminu lub umowy ponad ok. 10 stron (ok. 20 000 znaków); model lokalny: ponad ok. 3 strony (ok. 6 000 znaków)
 > **Konsumenci:** pisma-proste-v2, pisma-procesowe-v3 (W2–W3), analizator-umow-v1 (AU-GENBUILD)
 
 ```
@@ -31,13 +31,17 @@ Pierwsza odpowiedź: jedno zdanie, że pismo powstanie w N częściach, plan i c
 
 | Reguła | Treść |
 |---|---|
-| DP-1 | 2–12 części po ok. 6–8 stron; plan stały — nie zmieniaj go w kolejnych częściach |
+| DP-1 | 2–30 części; plan stały — nie zmieniaj go w kolejnych częściach |
+| DP-1a | Rozmiar części: model w chmurze ok. 6–8 stron; model lokalny (4 096 tokenów odpowiedzi) ok. 2 strony (do ok. 4 000 znaków) |
+| DP-1b | Ponad 30 części (chmura ok. 200 stron, model lokalny ok. 60 stron): powiedz to wprost i podziel na osobne dokumenty (np. umowa i załączniki) albo zaproponuj model w chmurze; nie powiększaj części |
+| DP-1c | Część ucięta na limicie wraca do poprawy: ten sam zakres planu, tekst zwięźlejszy |
 | DP-2 | Numeracja ciągła przez części (§, punkty, sekcje rzymskie); w części tylko numery z planu, w kolejności |
 | DP-3 | Bez powtórzeń sekcji z poprzednich części; pojęcia i numery załączników wyłącznie z planu |
 | DP-4 | Podpis i lista załączników tylko w ostatniej części |
 | DP-5 | Pismo procesowe: sekcje (`I.`, `II.`) w `sekcje` planu, punkty żądań w `punkty` |
+| DP-6 | Punkty numerowane przez całe pismo (`23.` w części 2): zawsze z numerem z planu, na początku wiersza; plik zachowuje ten numer, nie numeruje od 1 |
 
-**Lex Machina (aplikacja):** sprawdza każdą część z planem i poprzednimi (brak/powtórzenie §, luka w punktach, obca sekcja, nieznany załącznik, podpis przed końcem, brak znacznika końca). Część z błędem wraca z listą problemów (`Popraw część k z N`), kolejną część aplikacja zamawia blokiem `DŁUGIE PISMO — CZĘŚĆ k Z N`. Po ostatniej przyjętej części — jeden plik .docx z całości, po HYBRID-VAL.
+**Lex Machina (aplikacja):** sprawdza każdą część z planem i poprzednimi (brak/powtórzenie §, luka w punktach, obca sekcja, nieznany załącznik, podpis przed końcem, brak znacznika końca). Część z błędem wraca z listą problemów (`Popraw część k z N`), kolejną część aplikacja zamawia blokiem `DŁUGIE PISMO — CZĘŚĆ k Z N`. Po ostatniej przyjętej części — jeden plik .docx z całości, po HYBRID-VAL (konwersja we fragmentach, model lokalny po ok. 5 000 znaków; połączenie podtrzymywane przy pracy ponad 20 minut).
 
 **Bez aplikacji (claude.ai):** po każdej części zatrzymaj się; kolejna po „dalej”. Na początku każdej części wypisz ostatni § / punkt poprzedniej części.
 
