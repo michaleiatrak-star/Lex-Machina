@@ -40,6 +40,7 @@ Pierwsza odpowiedź: jedno zdanie, że pismo powstanie w N częściach, plan i c
 | DP-4 | Podpis i lista załączników tylko w ostatniej części |
 | DP-5 | Pismo procesowe: sekcje (`I.`, `II.`) w `sekcje` planu, punkty żądań w `punkty` |
 | DP-6 | Punkty numerowane przez całe pismo (`23.` w części 2): zawsze z numerem z planu, na początku wiersza; plik zachowuje ten numer, nie numeruje od 1 |
+| DP-7 | Spis załączników: własna numeracja od 1 (`1.`, `2.` …), jedna lista bez pustych wierszy; nie kontynuuj numeracji punktów uzasadnienia. Numery załączników = `zalaczniki` z planu |
 
 **Lex Machina (aplikacja):** sprawdza każdą część z planem i poprzednimi (brak/powtórzenie §, luka w punktach, obca sekcja, nieznany załącznik, podpis przed końcem, brak znacznika końca). Część z błędem wraca z listą problemów (`Popraw część k z N`), kolejną część aplikacja zamawia blokiem `DŁUGIE PISMO — CZĘŚĆ k Z N`. Po ostatniej przyjętej części — jeden plik .docx z całości, po HYBRID-VAL (konwersja we fragmentach, model lokalny po ok. 5 000 znaków; połączenie podtrzymywane przy pracy ponad 20 minut).
 
