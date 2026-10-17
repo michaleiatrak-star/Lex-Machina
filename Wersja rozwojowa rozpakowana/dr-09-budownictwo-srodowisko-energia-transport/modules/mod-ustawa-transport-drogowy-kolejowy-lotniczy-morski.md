@@ -44,7 +44,7 @@ Kara pieniężna: do 15 000 PLN (weryfikuj aktualny taryfikator)
 Mandat karny (art. 96 KPW): naruszenia z art. 92f ust. 1 i zał. nr 1 ustawy
   o transporcie drogowym (ITD, Policja, KAS, SG) — do 2 000 zł (§ 1a pkt 2);
   wykroczenia z rozdziału XI KW — do 5 000 zł, przy zbiegu 6 000 zł (§ 1ad)
-  ✅ [VER: ELI DU/2025/860 art. 96 + DU/2026/473, DU/2025/1814; 2026-10-04]
+  ✅ [VER: ELI DU/2026/1336 art. 96 § 1a pkt 2 i § 1ad (t.j. obejmuje DU/2026/473, DU/2025/1814); 2026-10-17]
   (korekta AUDYT-2026-10-04f: było „do 5 000 PLN” bez rozróżnienia)
 ```
 

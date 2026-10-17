@@ -1,7 +1,7 @@
 62b4c15bf7d4a94f4ff320f4631a5b7d4ce35f115ae2f71bb87ce578953e6965  ./MAPA-AKTOW.md
 83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-e745a790846ebc843f1217e86c47b71847e6f17456cb478f7d6489baf339e6b6  ./SKILL.md
+43c5454eff93b660ef8532ce8ad821879c7261ec7fdf1e1b671421b4d60f3870  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -39,12 +39,12 @@ ce49a8cf723be7afe261644e369b419bc4c1bd6576a14aa2aabc8ab6951c43f7  ./modules/mod-
 26ae639ac1ee820307048134f24a837ba772624f4054b9b7c0667d4fd6c022c3  ./modules/mod-ustawa-odpadach-gospodarka-komunalna.md
 7cda1dedfa7e4d12da1eb804c0d404db813b3d794263ff56d4a1430cbb804878  ./modules/mod-ustawa-planowanie-przestrzenne.md
 8fa88f604981675688e8f3bb24c43a27673ee1e2b98f4f307e0eeda736cd5b6e  ./modules/mod-ustawa-prawo-gazowe.md
-e3ff9a1193669cc864feca13f039015d80f62a3c5c82e8e7d9c86e97878eff67  ./modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md
+e79d6640939b840e802f5cf16610676e2c2d9d02ec61d26febf3039cb1772f46  ./modules/mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski.md
 adc58b3639ad5d06e0796a347783ae14cf6dd8d2b1bf3c948fd4c74f4cd83373  ./modules/ochrona-zabytkow/czesc-01-zabytki-dostepnosc.md
 523e2ae8729b291f383a9f98175cfa959e15d5aa19f8efdf21939e5036e35275  ./modules/ochrona-zabytkow/czesc-02-kategorie-apteka-zaklady.md
 50a6eb43f6ab349d49e35965cb5695cc0f0577a2777cbe79f1d7a2e799b22727  ./modules/ochrona-zabytkow/czesc-03-zlobki-transformatory-paliwa.md
 73b3f563521ce316ef090929d79a34cb3840b9c91b8c4bd000dd9d0dc2553287  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 4828d9f448834cc7f294608adc90329c1569bc4e8e89d5f7cf6ae8c13505c0b3  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 c4746a4f940f85d463e9290f5dd6295121ae24769e0765dd05bb70a289290960  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-b951ec4c6b996b60a2d633f6154e0e2e844603e7449a5c64f6f1b18b64865de4  ./references/CHANGELOG.md
+d34e90442c6463aed654541e8549c652cf09eb6aecfc3f34805b239a73eed6d8  ./references/CHANGELOG.md
 abe6aa1f0c7be329d8f30b4e26b575581c1ed0421413f61d72d7af313e414223  ./references/HISTORIA-ZMIAN-PLIKOW.md

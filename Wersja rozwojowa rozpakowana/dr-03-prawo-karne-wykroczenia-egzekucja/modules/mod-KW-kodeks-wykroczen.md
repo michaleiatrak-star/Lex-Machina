@@ -8,7 +8,7 @@ granica wykroczenie/przestępstwo (800 zł / 0,5‰).
 
 ## ZASADA ABSOLUTNA — TERMIN 7 DNI NA SPRZECIW
 
-Sprzeciw od wyroku nakazowego → **7 dni od doręczenia** (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK). ZAWITY. ✅ [VER] RZĄD 1 2026-09-16 — KPW `Dz.U. 2025 poz. 860`, KPK `Dz.U. 2026 poz. 490`.
+Sprzeciw od wyroku nakazowego → **7 dni od doręczenia** (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK). ZAWITY. ✅ [VER] RZĄD 1 2026-10-17 — KPW `Dz.U. 2026 poz. 1336` art. 94 § 1, KPK `Dz.U. 2026 poz. 490` art. 506 § 1.
 **Po upływie wyrok nakazowy staje się prawomocny — brak możliwości cofnięcia.**
 
 ---
@@ -32,7 +32,7 @@ Alkohol za kierownicą (art. 87 KW / 178a KK):
 ## KLUCZOWE AKTY PRAWNE
 
 - KW → ELI (RZĄD 1) (**Dz.U. 2025 poz. 734** t.j.) — **weryfikuj online**
-- KPSW → ELI (RZĄD 1) (**Dz.U. 2025 poz. 860** t.j.) — **weryfikuj online**
+- KPSW → ELI (RZĄD 1) (**Dz.U. 2026 poz. 1336** t.j.) — **weryfikuj online**
 - KPK (stosowany posiłkowo) → ELI (RZĄD 1) (**Dz.U. 2026 poz. 490; sprawdź Dz.U. 2026 poz. 638 i przepisy przejściowe** t.j.)
 
 ---

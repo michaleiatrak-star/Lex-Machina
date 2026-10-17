@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.234 (2026-10-17a, AUDYT-2026-10-17a): mapa_dzu — KPW t.j. 2026/1336 (TJ, obwieszczenie z 2.10.2026, stan prawny 27.09.2026; obejmuje 2025/1178, 1661, 1814, 1818, 1872 i 2026/473; brak zmian po t.j. — ELI 2026-10-17), 2025/860 → PREV. Wykryte przez T15 (NEWER_TJ).
 - 6.233 (2026-10-15c, AUDYT-2026-10-15c): mapy aktów — t.j. 2026/1324 (transport kolejowy), 1335 (Prawo wodne), 1328 (odpady) w mapa_dzu (TJ + PREV) i ALIASY-NAZW-AKTOW; DU/2026/507 — tytuł i zakres w mapa_dzu, ⛔ korekta daty VAT (1.11.2028), MONITORING etapów; dr-02 3.96, dr-04 3.50, dr-06 3.99.1, dr-09 3.49, prawo-polskie-v2 6.62, shared 3.99.36; wpis w AUDIT-JOURNAL.
 
 - 6.232 (2026-10-15b, AUDYT-2026-10-15b): przyczynowość krokowo — analiza-sadowa-v6 6.17, pisma-procesowe-v3 5.43, chronologia-sprawy-v1 1.18, shared 3.99.35 (MOD-GRAF-PRZYCZYNOWY 1.2.0); wpis w AUDIT-JOURNAL.

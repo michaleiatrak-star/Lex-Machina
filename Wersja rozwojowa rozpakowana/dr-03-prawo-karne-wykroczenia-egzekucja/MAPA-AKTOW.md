@@ -77,7 +77,7 @@ Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednol
 ### Wykroczenia i KPW
 
 **Baza KW:** Dz.U. 2025 poz. 734 t.j. ze zm.  
-**Baza KPW:** Dz.U. 2025 poz. 860 t.j. ze zm.
+**Baza KPW:** Dz.U. 2026 poz. 1336 t.j. (stan prawny na 27.09.2026, obejmuje nowele 2025/1178, 1661, 1814, 1818, 1872 i 2026/473; brak zmian po t.j. — ELI 2026-10-17)
 
 | Zakres | Moduł / routing | Status runtime |
 |---|---|---|
