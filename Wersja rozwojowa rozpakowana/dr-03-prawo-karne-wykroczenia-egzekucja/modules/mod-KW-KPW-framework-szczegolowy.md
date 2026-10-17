@@ -4,7 +4,7 @@
 > w isap.sejm.gov.pl przed każdą analizą.
 
 ## TERMIN 7 DNI NA SPRZECIW — ABSOLUTNY PRIORYTET
-Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK — art. 94 sam terminu nie podaje, odsyła do KPK). ✅ [VER] RZĄD 1 2026-09-16 — KPW `Dz.U. 2025 poz. 860`, KPK `Dz.U. 2026 poz. 490`.
+Sprzeciw od wyroku nakazowego: **7 dni od doręczenia** — termin ZAWITY (art. 94 § 1 KPW w zw. z art. 506 § 1 KPK — art. 94 sam terminu nie podaje, odsyła do KPK). ✅ [VER] RZĄD 1 2026-10-17 — KPW `Dz.U. 2026 poz. 1336` art. 94 § 1, KPK `Dz.U. 2026 poz. 490` art. 506 § 1.
 Sprawdź JAKO PIERWSZE w każdej sprawie nakazowej.
 
 ## SCHEMAT POSTĘPOWANIA
@@ -37,7 +37,7 @@ STAWKA konkretnego naruszenia: taryfikator (tabela niżej); kwota po ukośniku =
 SĄD: art. 24 § 1 KW — 20–5 000 zł; § 1a (m.in. art. 86, 86c, 87 § 1, 92a § 2, 94 § 1,
   96 § 3) — do 30 000 zł
 ⛔ Korekta AUDYT-2026-10-04f: poprzedni zapis „mandat max 2 500 / recydywa max 5 000;
-  sąd art. 24 § 1 do 30 000” był błędny. ✅ [VER: ELI RZĄD 1 — KPW t.j. DU/2025/860 art. 96 + zmiany po t.j.: DU/2025/1814 (§ 1ad, od 2.01.2026), DU/2025/1818 (§ 1ag, od 2.01.2026), DU/2025/1872 (§ 1e, od 29.01.2026), DU/2026/473 (§ 1a, od 8.07.2026); odczyt 2026-10-04]
+  sąd art. 24 § 1 do 30 000” był błędny. ✅ [VER: ELI RZĄD 1 — KPW t.j. DU/2026/1336 art. 96 (§ 1ad z DU/2025/1814 od 2.01.2026, § 1ag z DU/2025/1818 od 2.01.2026, § 1e z DU/2025/1872 od 29.01.2026, § 1a z DU/2026/473 od 8.07.2026); brak zmian po t.j.; odczyt 2026-10-17]
 ```
 
 ### Uchylenie prawomocnego mandatu (art. 101 KPSW)
@@ -208,7 +208,7 @@ NOWE PRZESTĘPSTWA KK (NIE wykroczenia — odesłanie):
 ```
 
 ---
-*KW (Dz.U. 2025 poz. 734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2025 poz. 860 t.j.)*
+*KW (Dz.U. 2025 poz. 734 t.j. ze zm. Dz.U. 2025 poz. 1872) + KPSW (Dz.U. 2026 poz. 1336 t.j.)*
 *KPK stosowany posiłkowo (Dz.U. 2026 poz. 490 t.j.)*
 *Uchwała SN I KZP 7/25 z 19.03.2026 — sn.pl (weryfikuj URL)*
 *Postanowienie SN IV KK 145/24 z 10.09.2024 — sn.pl*

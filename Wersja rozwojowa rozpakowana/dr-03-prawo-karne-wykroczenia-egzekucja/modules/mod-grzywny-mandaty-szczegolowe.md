@@ -9,7 +9,7 @@ kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
 | Kodeks wykroczeń (KW) | Dz.U. 2025 poz. 734 t.j. | art. 24–37 (grzywna sądowa) |
-| KPSW | Dz.U. 2025 poz. 860 t.j. ze zm. **Dz.U. 2026 poz. 473** | art. 95–102 (mandat karny). ⛔ 2026 poz. 473 to NOWELIZACJA (ustawa o zmianie ustawy o PIP oraz niektórych innych ustaw), **nie** t.j. — wcześniejszy zapis „2026.473 t.j." był błędny, sprostowany 2026-08-15 |
+| KPSW | Dz.U. 2026 poz. 1336 t.j. (obejmuje **Dz.U. 2026 poz. 473** i zmiany z 2025 r.; brak zmian po t.j. — ELI 2026-10-17) | art. 95–102 (mandat karny). ⛔ 2026 poz. 473 to NOWELIZACJA (ustawa o zmianie ustawy o PIP oraz niektórych innych ustaw), **nie** t.j. — wcześniejszy zapis „2026.473 t.j." był błędny, sprostowany 2026-08-15 |
 | KPA | Dz.U. 2025 poz. 1691 t.j. | Dział IVa art. 189a–189k (adm. kary pieniężne) |
 | KPA art. 88 | j.w. | grzywna porządkowa świadka/biegłego |
 | UPEA | Dz.U. 2026 poz. 1311 t.j. (ogł. 9.10.2026; obejmuje zm. 2026/516, 739 i 1003; art. 17 § 1a w dwóch brzmieniach — dotychczasowym do 27.10.2026 i nadanym art. 116 ustawy 2026/1003 od 28.10.2026 (odnośniki 13–14 t.j.); brak zmian po t.j. (ELI 2026-10-12, obwieszczenie odczytane)) | art. 119–125 (grzywna w celu przymuszenia). ⛔ POPRAWIONE 2026-08-15: wcześniej moduł podawał 2023 poz. 2505 — numer nieaktualny o DWA cykle t.j. |
@@ -62,7 +62,7 @@ TYP B — MANDAT KARNY (KPSW art. 95–102):
     górna granica wszystkich mandatów drogowych — § 1ad wyżej (5 000 / 6 000 zł).
     ⛔ Poprzedni zapis „standardowy max 2 500 zł / recydywa max 5 000 zł” oraz
     „art. 96 § 3 KW — dopuszczenie do prowadzenia” były błędne (korekta
-    AUDYT-2026-10-04f). ✅ [VER: ELI RZĄD 1 — KPW t.j. DU/2025/860 art. 96 + zmiany po t.j.: DU/2025/1814 (§ 1ad, od 2.01.2026), DU/2025/1818 (§ 1ag, od 2.01.2026), DU/2025/1872 (§ 1e, od 29.01.2026), DU/2026/473 (§ 1a, od 8.07.2026); odczyt 2026-10-04]
+    AUDYT-2026-10-04f). ✅ [VER: ELI RZĄD 1 — KPW t.j. DU/2026/1336 art. 96 (§ 1ad z DU/2025/1814 od 2.01.2026, § 1ag z DU/2025/1818 od 2.01.2026, § 1e z DU/2025/1872 od 29.01.2026, § 1a z DU/2026/473 od 8.07.2026); brak zmian po t.j.; odczyt 2026-10-17]
   → Mandat gotówkowy: zapłata na miejscu = natychmiastowe uprawomocnienie
   → Mandat bezgotówkowy: karta/instrument płatniczy, o ile funkcjonariusz
     ma terminal (art. 98 § 3a-3c KPSW); ⛔ koszty autoryzacji i przekazu
@@ -437,5 +437,5 @@ web_search:
 
 ---
 *mod-grzywny-mandaty-szczegolowe.md · DR-03 · 2026-06-09*
-*KW (Dz.U. 2025 poz. 734) + KPSW (Dz.U. 2025 poz. 860) + KPA (Dz.U. 2025 poz. 1691)*
+*KW (Dz.U. 2025 poz. 734) + KPSW (Dz.U. 2026 poz. 1336) + KPA (Dz.U. 2025 poz. 1691)*
 *UPEA (Dz.U. 2026 poz. 1311 t.j.) + UDP (Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815, 982)*

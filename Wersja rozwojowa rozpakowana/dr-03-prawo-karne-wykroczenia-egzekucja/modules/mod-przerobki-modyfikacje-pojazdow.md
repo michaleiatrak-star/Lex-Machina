@@ -280,7 +280,7 @@ KONSEKWENCJE JAZDY ZBYT MOCNYM/ODBLOKOWANYM MOTOCYKLEM NA KAT. A2:
     mechaniczny bez wymaganych uprawnień): areszt, ograniczenie wolności albo
     grzywna nie niższa niż 1 500 zł; tabela B nie ma wiersza dla art. 94 § 1,
     granica mandatu — art. 96 § 1ad KPW (5 000 zł). ✅ [VER: ELI DU/2025/734
-    art. 94, DU/2025/860 art. 96, 2026-10-04]
+    art. 94, DU/2026/1336 art. 96, 2026-10-17]
   → ⭐ REGRES UBEZPIECZENIOWY — w razie KOLIZJI/WYPADKU:
     ubezpieczyciel MOŻE żądać ZWROTU wypłaconego odszkodowania od
     kierującego, ponieważ pojazd BYŁ prowadzony NIEZGODNIE z
@@ -332,7 +332,7 @@ DRABINA KAR (Polska, po nowelizacji ustawy o transporcie drogowym z
     przykład **2 000 ZŁ** (mandat kredytowany, do zapłaty w
     terminie) — to górna granica z art. 96 § 1a pkt 2 KPW (naruszenia
     z zał. nr 1 ustawy o transporcie drogowym, ITD/Policja/KAS/SG)
-    ✅ [VER: ELI DU/2025/860 art. 96 § 1a, 2026-10-04]
+    ✅ [VER: ELI DU/2026/1336 art. 96 § 1a pkt 2, 2026-10-17]
   → ⭐ PROCEDURA OCENY "DOBREJ REPUTACJI" PRZEWOŹNIKA: jazda na
     magnesie KWALIFIKOWANA JEST jako NAJPOWAŻNIEJSZE naruszenie —
     MOŻE skutkować wszczęciem procedury dot. dobrej reputacji, CO

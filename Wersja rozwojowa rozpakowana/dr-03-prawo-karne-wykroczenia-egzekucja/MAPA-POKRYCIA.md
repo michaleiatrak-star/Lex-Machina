@@ -37,7 +37,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 | Akt / zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|
 | KW — current-state całość, rozdz. I–XIX | 🟢 B+ / COV | `mod-KW-current-state-COV.md` + rodzina modułów KW; ostatnia luka art. 65–69 ma `mod-KW-art65-69-instytucje.md` |
-| KPW — Dz.U. 2025 poz. 860, wszystkie 12 działów | 🟢 B+ / COV | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
+| KPW — Dz.U. 2026 poz. 1336 t.j., wszystkie 12 działów | 🟢 B+ / COV | `mod-KPW-kodeks-postepowania-w-sprawach-o-wykroczenia.md` |
 
 ## Kodeks karny wykonawczy
 

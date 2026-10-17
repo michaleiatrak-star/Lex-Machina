@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.37"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.38"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 — pismo, regulamin lub umowa ponad ok. 10 stron w częściach według planu (plan-pisma, [CZĘŚĆ k/N]); potok pisma procesowego: ciąg dalszy w tym samym kroku i zmiany sekcji długiego projektu; ucięty blok nie jest zapisywany.
+  Wersja bieżąca: 3.99.38 (2026-10-17a, AUDYT-2026-10-17a): terminy.md: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17).
+  3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 — pismo, regulamin lub umowa ponad ok. 10 stron w częściach według planu (plan-pisma, [CZĘŚĆ k/N]); potok pisma procesowego: ciąg dalszy w tym samym kroku i zmiany sekcji długiego projektu; ucięty blok nie jest zapisywany.
   3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
   3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — wywołania krokowe (analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a).
   3.99.32 (2026-10-12b, AUDYT-2026-10-12b): ISAP-METRYKI-AKTOW, LEGAL-REGISTRY, terminy.md: UPEA t.j. 2026/1311 (⏳ 2026/1003 — art. 17 § 1a, od 28.10.2026), ochrona przyrody t.j. 2026/1315, megaustawa t.j. 2026/562, zmiany z 2026/815 (KSC, PKE, Prawo wodne, ochrona ludności); orka-bas-leksykon: metryki obrony Ojczyzny i UDP.

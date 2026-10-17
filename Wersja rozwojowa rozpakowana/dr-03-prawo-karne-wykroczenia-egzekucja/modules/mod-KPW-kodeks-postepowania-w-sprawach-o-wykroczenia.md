@@ -1,15 +1,15 @@
 # KPW — Kodeks postępowania w sprawach o wykroczenia
 
-**Stan weryfikacji:** 2026-08-28  
-**Tekst jednolity:** Dz.U. 2025 poz. 860  
+**Stan weryfikacji:** 2026-10-17  
+**Tekst jednolity:** Dz.U. 2026 poz. 1336 (obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; stan prawny na 27.09.2026; brak zmian po t.j. — ELI 2026-10-17)  
 **Źródło kanoniczne:** ELI/ISAP  
 **Status pokrycia:** B+/COV — wszystkie działy mają mapę operacyjną; przed użyciem jednostki obowiązuje fresh gate.
 
 ## 1. Bramka źródłowa
 
-ELI/PDF tekstu jednolitego: `https://eli.gov.pl/api/acts/DU/2025/860/text/T/D20250860L.pdf`
+ELI/PDF tekstu jednolitego: `https://eli.gov.pl/api/acts/DU/2026/1336/text/T/D20261336L.pdf`
 
-Obwieszczenie Marszałka Sejmu z 13.06.2025 r. ogłasza jednolity tekst KPW. Przed cytowaniem artykułu sprawdź późniejsze zmiany oraz aktualne przepisy KPK, do których KPW odsyła.
+Obwieszczenie Marszałka Sejmu z 2.10.2026 r. (ogłoszone 15.10.2026) ogłasza jednolity tekst KPW; poprzedni t.j. Dz.U. 2025 poz. 860 — wyłącznie dla stanu sprzed 27.09.2026. Przed cytowaniem artykułu sprawdź późniejsze zmiany oraz aktualne przepisy KPK, do których KPW odsyła.
 
 **Zasada kluczowa z art. 1 § 2:** KPK stosuje się w postępowaniu wykroczeniowym tylko wtedy, gdy KPW wyraźnie tak stanowi. Nie przenoś procedury karnej automatycznie.
 
@@ -147,7 +147,7 @@ Przed sformułowaniem roszczenia ustal podstawę, prawomocność rozstrzygnięci
 
 ## 16. Quality gate
 
-- [ ] aktualny t.j. Dz.U. 2025 poz. 860 sprawdzony w ELI/ISAP;
+- [ ] aktualny t.j. Dz.U. 2026 poz. 1336 sprawdzony w ELI/ISAP;
 - [ ] późniejsze zmiany sprawdzone przed cytowaniem;
 - [ ] nie zastosowano KPK bez wyraźnego odesłania KPW;
 - [ ] etap czynności wyjaśniających odróżniono od postępowania sądowego;
@@ -158,4 +158,4 @@ Przed sformułowaniem roszczenia ustal podstawę, prawomocność rozstrzygnięci
 
 ## 17. Źródło urzędowe
 
-- ELI — KPW, Dz.U. 2025 poz. 860: `https://eli.gov.pl/api/acts/DU/2025/860/text/T/D20250860L.pdf`
+- ELI — KPW, Dz.U. 2026 poz. 1336: `https://eli.gov.pl/api/acts/DU/2026/1336/text/T/D20261336L.pdf`

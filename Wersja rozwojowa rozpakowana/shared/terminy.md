@@ -1,7 +1,7 @@
 # Terminy procesowe — tabela referencyjna
 
 > **Stan weryfikacji:** ✅ [VER] RZĄD 1 — odczyt treści: KPC `Dz.U. 2026 poz. 468`,
-> KPK `Dz.U. 2026 poz. 490`, KPW `Dz.U. 2025 poz. 860` (2026-09-12d);
+> KPK `Dz.U. 2026 poz. 490`, KPW `Dz.U. 2026 poz. 1336` (2026-10-17);
 > **KPA `Dz.U. 2025 poz. 1691` i PPSA `Dz.U. 2026 poz. 143` (2026-09-12g);
 > UPEA `Dz.U. 2026 poz. 1311` t.j. (ELI 2026-10-12; art. 17 § 1a w nowym brzmieniu od 28.10.2026); Ordynacja podatkowa
 > `Dz.U. 2026 poz. 622` (2026-09-12i); KKW `Dz.U. 2025 poz. 911` (2026-09-12j);

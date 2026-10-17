@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.38 (2026-10-17a, AUDYT-2026-10-17a): terminy.md: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17).
 - 3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 (nowy) — pismo, regulamin lub umowa ponad ok. 10 stron: części według planu (blok plan-pisma, znaczniki [CZĘŚĆ k/N] i [KONIEC CZĘŚCI k/N], reguły DP-1–DP-5); potok pisma procesowego W2–W3: `=== CIĄG DALSZY ===` (dalszy ciąg w tym samym kroku), `=== ZMIANA SEKCJI: … ===` dla długiego projektu, blok bez linii końca nie jest zapisywany; umowa z części po AU-HYBRID i AU-STRIP. Konsumenci: pisma-proste-v2 2.32, pisma-procesowe-v3 5.44, analizator-umow-v1 1.50.
 
 - 3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
