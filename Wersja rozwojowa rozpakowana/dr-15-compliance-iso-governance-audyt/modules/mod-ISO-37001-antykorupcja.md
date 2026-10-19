@@ -12,7 +12,7 @@ na iso.org lub PKN (pkn.pl). Powiązane akty prawne weryfikuj w ELI (RZĄD 1).
 - Ustawa o ochronie sygnalistów — Dz.U. 2024 poz. 928 ze zm.
   [WYMAGA WERYFIKACJI RZĄD 1: isap.sejm.gov.pl — kanał zgłoszeń jako element ABMS]
 - Kodeks karny — art. 228–231 (łapownictwo, płatna protekcja, nadużycie funkcji)
-  Dz.U. 2025 poz. 383 ze zm. [WYMAGA WERYFIKACJI RZĄD 1]
+  Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342) ze zm. [WYMAGA WERYFIKACJI RZĄD 1]
 - Ustawa o odpowiedzialności podmiotów zbiorowych — Dz.U. 2002 poz. 1661 ze zm.
   [WYMAGA WERYFIKACJI RZĄD 1 — reforma planowana/w toku; weryfikuj aktualny stan]
 - Ustawa o ograniczeniu prowadzenia działalności gospodarczej przez osoby

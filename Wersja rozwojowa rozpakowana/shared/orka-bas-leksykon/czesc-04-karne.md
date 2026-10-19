@@ -12,7 +12,7 @@
 
 ### BAS-013 — Treści pornograficzne
 ```
-Weryfikacja: KK art. 202 (Dz.U. 2025 poz. 383 t.j.) — brak definicji legalnej
+Weryfikacja: KK art. 202 (Dz.U. 2026 poz. 1342 t.j.) — brak definicji legalnej
   web_search: "treści pornograficzne art 202 KK definicja orzecznictwo SN 2025"
 Definicja: Pojęcie OCENNE, niezdefiniowane legalnie w prawie polskim.
 Oceniane przez: treść przekazu + społeczny odbiór + normy obyczajowe + kontekst
@@ -24,7 +24,7 @@ web_search: "treści pornograficzne art 202 KK definicja orzecznictwo SN 2024 20
 
 ### BAS-118 — Mowa nienawiści
 ```
-Weryfikacja online: KK art. 256–257 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja online: KK art. 256–257 (Dz.U. 2026 poz. 1342 t.j.)
 Status: BRAK legalnej definicji "mowy nienawiści" w polskim prawie karnym
 Przepisy KK: art. 256 (publiczne propagowanie totalitaryzmu, nawoływanie do
   nienawiści z powodów rasowych, etnicznych, religijnych), art. 257 (publiczne
@@ -53,7 +53,7 @@ z KP jak i z KK — zbieg odpowiedzialności dopuszczalny.
 
 ### BAS-121 — Handel ludźmi
 ```
-Weryfikacja online: KK art. 115 §22 (Dz.U. 2025 poz. 383 t.j.) + Palermo Protocol
+Weryfikacja online: KK art. 115 §22 (Dz.U. 2026 poz. 1342 t.j.) + Palermo Protocol
 Definicja ustawowa (art. 115 §22 KK — weryfikuj!):
   Werbowanie, transport, dostarczanie, przekazywanie, przechowywanie lub
   przyjmowanie osoby z zastosowaniem: przemocy, groźby, podstępu, nadużycia
@@ -72,7 +72,7 @@ Reguła: Zgoda ofiary jest IRRELEWANTNA gdy zastosowano środki z art. 115 §22 
 
 ### BAS-129 — Recydywa szczególna i multirecydywa (art. 64 KK)
 ```
-Weryfikacja: KK art. 64 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 64 (Dz.U. 2026 poz. 1342 t.j.)
 
 RECYDYWA ZWYKŁA / SZCZEGÓLNA PODSTAWOWA (art. 64 §1 KK):
   Przesłanki ŁĄCZNIE:
@@ -113,7 +113,7 @@ PRZESTĘPSTWO PODOBNE (art. 115 §3 KK — dla art. 64 §1):
 
 ### BAS-130 — Warunkowe umorzenie postępowania (art. 66 KK)
 ```
-Weryfikacja: KK art. 66–68 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 66–68 (Dz.U. 2026 poz. 1342 t.j.)
 
 DEFINICJA (art. 66 §1 KK):
   Sąd może warunkowo umorzyć postępowanie karne, jeżeli ŁĄCZNIE:

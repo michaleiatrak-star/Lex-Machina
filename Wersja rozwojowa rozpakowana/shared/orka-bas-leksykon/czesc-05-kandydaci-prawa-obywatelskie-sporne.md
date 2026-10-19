@@ -74,7 +74,7 @@ BAS-125  CRU JSFP — definicja jednostki w centralnym rejestrze umów
 ### BAS-134 — Środki karne + zatarcie skazania — odesłanie
 ```
 Weryfikacja: → mod-prawa-obywatelskie-srodki-karne.md (weryfikacja 2026-06-11)
-  KK art. 39–43b, 106–107 (Dz.U. 2025 poz. 383 t.j.) — ZWERYFIKOWANO
+  KK art. 39–43b, 106–107 (Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342)) — ZWERYFIKOWANO
 Środki karne (KK art. 39 — katalog ZAMKNIĘTY):
   9 typów środków + pozbawienie praw publicznych (art. 40 KK)
 
@@ -150,7 +150,7 @@ REGUŁA PROCESOWA: organ odmawiający udostępnienia informacji przetworzonej
 
 ### BAS-W22 — Czyn ciągły i "z góry powzięty zamiar" (art. 12 §1 KK)
 ```
-Weryfikacja: KK art. 12 (Dz.U. 2025 poz. 383 t.j.) + linia SN
+Weryfikacja: KK art. 12 (Dz.U. 2026 poz. 1342 t.j.) + linia SN
 
 STATUS: DEFINICJA W USTAWIE + sporna interpretacja "z góry powziętego zamiaru"
 
@@ -178,7 +178,7 @@ KWALIFIKOWANY CZYN CIĄGŁY (art. 12 §2 KK — dodany w 2019):
 
 ### BAS-W23 — Mienie znacznej / wielkiej wartości (art. 115 §5–6 KK)
 ```
-Weryfikacja: KK art. 115 §5–6 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 115 §5–6 (Dz.U. 2026 poz. 1342 t.j.)
 
 DEFINICJE USTAWOWE (art. 115 §5–6 KK):
   Mienie ZNACZNEJ wartości = powyżej 200 000 zł

@@ -1,8 +1,8 @@
 # Prawo o adwokaturze — moduł bieżący
 
-**Stan weryfikacji:** 2026-10-09 (ELI)  
+**Stan weryfikacji:** 2026-10-19 (ELI)  
 **Tekst jednolity bazowy:** Dz.U. 2024 poz. 1564  
-**Nowelizacja ogłoszona:** Dz.U. 2026 poz. 1290 — w życie **17.10.2026** (art. 1 pkt 16, 41, 42 — **1.01.2027**); patrz sekcja 8a.  
+**Nowelizacja w mocy:** Dz.U. 2026 poz. 1290 — obowiązuje od **17.10.2026** (art. 1 pkt 16, 41, 42 — od **1.01.2027**); t.j. 2024/1564 jej nie obejmuje — patrz sekcja 8a.  
 **Źródła kanoniczne:** ELI/ISAP + Naczelna Rada Adwokacka dla aktów korporacyjnych.
 
 ## 1. Bramka źródłowa
@@ -82,7 +82,7 @@ Kwoty i stawki nie są treścią stałą modułu. Korzystaj z aktualnych rozporz
 
 Ustawa z 29.05.2026 r., Dz.U. 2026 poz. 846, zmienia m.in. Prawo o adwokaturze w obszarze relacji tajemnicy do obowiązków raportowych. Zasadnicza data wejścia tej ustawy to **1.10.2026**.
 
-**Na dzień 2026-08-28 nie stosuj przyszłego brzmienia jako prawa obowiązującego.** Przy zdarzeniu po 1.10.2026 wykonaj nowy fresh gate i odczytaj dokładne brzmienie zmienionej jednostki.
+**Od 17.10.2026 obowiązuje brzmienie nadane przez Dz.U. 2026 poz. 1290 (poza art. 1 pkt 16, 41, 42 — od 1.01.2027).** Tekst jednolity 2024/1564 go nie zawiera: brzmienie zmienionej jednostki czytaj z ustawy zmieniającej (ELI text.pdf), przy zdarzeniu sprzed 17.10.2026 — z t.j.
 
 ## 8a. Nowelizacja Dz.U. 2026 poz. 1290 — w życie 17.10.2026
 
@@ -120,7 +120,24 @@ Ustawa z 4.09.2026 r. o zmianie ustawy – Prawo o adwokaturze oraz ustawy o św
 - postępowania dyscyplinarne wszczęte i niezakończone przed 17.10.2026 — przepisy dotychczasowe, z wyjątkiem art. 95j w nowym brzmieniu;
 - postępowania z art. 4c i art. 85 oraz o wpis na listy wszczęte przed 17.10.2026 — przepisy dotychczasowe;
 - kasacja od orzeczeń prawomocnych przed 17.10.2026 — art. 91a i 91d w brzmieniu dotychczasowym;
-- regulaminy organów adwokatury — dostosowanie w ciągu 6 miesięcy.
+- posiedzenia organów adwokatury i organów izb adwokackich zwołane przed 17.10.2026 i niezakończone przed tym dniem, wraz z uchwałami podejmowanymi na nich — przepisy dotychczasowe (art. 4 ust. 5);
+- sprawy z art. 10 ust. 5 ustawy o prawnikach zagranicznych wszczęte i niezakończone na podstawie art. 85 Prawa o adwokaturze przed 17.10.2026 — przepisy dotychczasowe (art. 5);
+- regulaminy organów adwokatury — dostosowanie w ciągu 6 miesięcy (art. 3);
+- przepisy wykonawcze wydane na podstawie art. 7 ust. 2 — moc do wydania rozporządzenia z art. 1 ust. 1c, nie dłużej niż 6 miesięcy (art. 6).
+
+✅ [VER] RZĄD 1 2026-10-19: ELI DU/2026/1290 text.pdf (art. 2–7).
+
+### Prawnicy zagraniczni — art. 2 ustawy zmieniającej (od 17.10.2026)
+
+Ustawa z 5.07.2002 r. o świadczeniu przez prawników zagranicznych pomocy prawnej w RP — t.j. Dz.U. 2020 poz. 823 (ELI: jedyny akt zmieniający po t.j. to Dz.U. 2026 poz. 1290). Nowe brzmienie art. 10 ust. 5:
+
+> „5. W przypadkach, o których mowa w art. 66 ust. 1 ustawy z dnia 6 lipca 1982 r. o radcach prawnych, dziekan rady okręgowej izby radców prawnych, który udzielił ostrzeżenia, doręcza organowi, o którym mowa w ust. 3, odpis zawiadomienia o udzieleniu ostrzeżenia oraz odpis odwołania, jeżeli zostało wniesione.”
+
+Sprawy wszczęte na podstawie art. 85 Prawa o adwokaturze przed 17.10.2026 — przepisy dotychczasowe (art. 5). Art. 85 Prawa o adwokaturze uchylony (art. 1 ustawy zmieniającej).
+
+### Akt wykonawczy uchylony
+
+Rozporządzenie MS z 8.09.2016 r. w sprawie minimalnej funkcjonalności oraz warunków organizacyjno-technicznych funkcjonowania systemu teleinformatycznego, w którym NRA prowadzi listę adwokatów, aplikantów adwokackich oraz prawników zagranicznych (Dz.U. 2016 poz. 1430) — ELI: status „uznany za uchylony” od 17.10.2026, uchylenie wynikające z Dz.U. 2026 poz. 1290. Od tego dnia jawny Krajowy Rejestr Adwokatów i Aplikantów Adwokackich (art. 49a). ✅ [VER] RZĄD 1 2026-10-19 (ELI DU/2016/1430).
 
 ## 9. Routing
 
@@ -134,7 +151,8 @@ Ustawa z 4.09.2026 r. o zmianie ustawy – Prawo o adwokaturze oraz ustawy o św
 ## 10. Quality gate
 
 - [ ] aktualny tekst ustawy sprawdzony w ELI/ISAP;
-- [ ] późniejsze akty zmieniające po Dz.U. 2024 poz. 1564 sprawdzone;
+- [ ] późniejsze akty zmieniające po Dz.U. 2024 poz. 1564 sprawdzone (2025/1172, 2026/370, 846, 1290);
+- [ ] dla prawnika zagranicznego: t.j. Dz.U. 2020 poz. 823 + art. 2 i 5 Dz.U. 2026 poz. 1290;
 - [ ] data wejścia zmiany została porównana z datą zdarzenia;
 - [ ] etyka pochodzi z oficjalnego NRA;
 - [ ] zwykły środek odwoławczy odróżniono od kasacji do SN;
@@ -148,3 +166,4 @@ Ustawa z 4.09.2026 r. o zmianie ustawy – Prawo o adwokaturze oraz ustawy o św
 - NRA — regulaminy / wykonywanie zawodu, etyka i doskonalenie zawodowe: oficjalna strona `adwokatura.pl`.
 - ELI — ustawa z 29.05.2026 r., Dz.U. 2026 poz. 846: `https://eli.gov.pl/eli/DU/2026/846/ogl`.
 - ELI — ustawa z 4.09.2026 r., Dz.U. 2026 poz. 1290: `https://eli.gov.pl/eli/DU/2026/1290/ogl`.
+- ELI — ustawa o świadczeniu przez prawników zagranicznych pomocy prawnej w RP, t.j. Dz.U. 2020 poz. 823: `https://eli.gov.pl/eli/DU/2020/823/ogl`.

@@ -10,7 +10,7 @@ view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.
 ```
 
 ## Akty prawne obsługiwane przez kanonik
-- Kodeks karny (KK) — Dz.U. 2025 poz. 383 ze zm.
+- Kodeks karny (KK) — Dz.U. 2026 poz. 1342 ze zm.
 - Kodeks postępowania karnego (KPK) — Dz.U. 2026 poz. 490 ze zm.
 
 ## Dla zakresu DR-06 (podatki/KAS/AML)

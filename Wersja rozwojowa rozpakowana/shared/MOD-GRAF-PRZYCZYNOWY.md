@@ -96,7 +96,7 @@ w MP13, pole `fakt_m1` wiąże węzeł z faktem M1 (F-nnn) — jedna przestrzeń
      „od stopnia, w jakim przyczyniła się do powstania szkody”) → jawne `sprawca: true` przy ≥ 2 węzłach różnych
      podmiotów;
    - prawo karne — art. 2 KK: za przestępstwo skutkowe popełnione przez zaniechanie odpowiada „ten tylko, na kim
-     ciążył prawny, szczególny obowiązek zapobiegnięcia skutkowi” (t.j. Dz.U. 2025 poz. 383; nowelizacje po t.j.
+     ciążył prawny, szczególny obowiązek zapobiegnięcia skutkowi” (t.j. Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342); nowelizacje po t.j.
      do 2026-10-01 nie zmieniają art. 2) → pole `obowiazek_dzialania` przy węźle `ZANIECHANIE`;
    - przerwanie związku (zdarzenie nowe, niezależne, które samo wywołało skutek) → krawędź `PRZERYWA`;
    - prawo karne, **obiektywne przypisanie skutku** (doktryna; poza art. 2 KK): sprawca stworzył albo zwiększył

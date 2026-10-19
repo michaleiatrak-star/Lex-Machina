@@ -1,7 +1,7 @@
 f0119a462e7c184604ef996063f54d7c5bfe5502b8689c72ecb583597aa49013  ./MAPA-AKTOW.md
 5b3fd066e29140dac6a2b9b19f0a2044684dc05b0d859a55d1fff628edf26916  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-1f450c2541c521fa0993564549925eea27667b430a5290e3fe9d573661f41d16  ./SKILL.md
+6afe533b37d39242c620b8ee5ce9ca9d3ee3a4b99d2c389039deca6e02212992  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -50,7 +50,7 @@ bd0768a47690a6d9ddc9f0991258263208bee017ddb8cf7cd37a66ba51aa36b3  ./modules/mod-
 e590e269e4da9059d0b688f89fcbcaa825a4618d7f03688b678919492a63746f  ./modules/mod-PrRestr-dzial-V-pomoc-publiczna.md
 87a574167acac53a5ab351e74101f53c2d297f403d5ace952df9fd976f110499  ./modules/mod-PrRestr-dzial-VI-uklad.md
 9d5351f729ff1aa57cf56037fbe65fb8721e877983f11cd3f0608ecbc6e5ba11  ./modules/mod-PrRestr-dzial-VII-uklad-czesciowy.md
-f7818804c025e077d1ce1be94d7ba17947939a5ac55270617cd23a734a079ab3  ./modules/mod-PrRestr-odrebne-miedzynarodowe.md
+2b120aa68536fbe7e3bd07a2f20441d7fa54df3a3e35f0b86391ed5d5ddf8aff  ./modules/mod-PrRestr-odrebne-miedzynarodowe.md
 5716f1c3d0277d70d00a4a68e22d7cdc97e16ac859642b91eb5b521b760f7d00  ./modules/mod-PrRestr-ppu-pu.md
 7f05bdf884f9b5667b894af28e94318a795b0ec1cbb209669edebf788a66f310  ./modules/mod-PrRestr-procedura-zakonczenie.md
 8cfa2b7eeffb6af3c7571f095d816c75f5422fef060b60256f262313db9f95ba  ./modules/mod-PrRestr-pzu.md
@@ -68,7 +68,7 @@ e04ef2ee07789e98a4b3710086ad531433ea48106e9e8eeb63adc332f9312a6c  ./modules/mod-
 79071e647a5310d5c42a5f766359ba619cdbd0fbac5105d56b46795479d6edbc  ./modules/mod-PrUpad-uklad-likwidacja-zakonczenie.md
 38bbe06baa3125581d67b58020a282a4972cd38121aa93699271997215cc7454  ./modules/mod-PrUpad-upadlosc-restrukturyzacja.md
 7a8913643ac7195bae1cba8c0fceb0d180ba7ac7c148f423d9c0d570a0dc14f4  ./modules/mod-PrUpad-wierzytelnosci-235-266.md
-fd7f288f933dc6bfabc68de07adf4136394ab07bddfa6fc465ef65edcf272792  ./modules/mod-PrUpad-wniosek-ogloszenie.md
+3577401c917190545972f0aa661c2b6001f7e93c65e3dfe292a3e797a19bdc51  ./modules/mod-PrUpad-wniosek-ogloszenie.md
 741cf118db73caad12ddbb8fb5c7c9bdc0741355f265895225d8a6dcdea870ea  ./modules/mod-PrUpad-zakonczenie-zakaz-karne.md
 e92e3a02fecd348282805e9a5742a4c622654db8ee9d0dc98eaca013e9151e8c  ./modules/mod-PrUpad-zrodla-i-wersje.md
 cbdea03190bad07adfbd0c74162001a7fd76c7de7bd6d6fe8ac9c9981ac060cd  ./modules/mod-Prawo-przedsiebiorcow-current-state-COV.md
@@ -105,7 +105,7 @@ bc9125f92d068cf5aae2c3d69a0413bd14303b5e5920ff4e6ec1547a1c809fb0  ./modules/mod-
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
 3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-cc76e131cdb94581d4b91b5121e7babb4d4af8cf1e195a35d8a0fe10e978144d  ./references/CHANGELOG.md
+e2a675008b54714c79a16802508d4c06acca3e8a721ec8eb78fe2c65046abadd  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json

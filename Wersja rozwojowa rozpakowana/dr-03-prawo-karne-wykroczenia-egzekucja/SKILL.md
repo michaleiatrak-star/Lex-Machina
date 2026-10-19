@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.66"
+version: "3.67"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 dependencies:
   requires:
@@ -265,7 +265,7 @@ AUDIT-JOURNAL.md`.
                komputerowe 287, zniszczenie 288, pojazd 289, paserstwo 291–293,
                kwalifikacje wartościowe 294, naprawienie szkody 295; tabela
                trybu ścigania, przedawnienie, granica z KW; brzmienie z ELI
-               DU/2025/383, żadna z 4 nowelizacji po t.j. nie zmienia art. 278–295)
+               DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342), żadna z 4 nowelizacji po t.j. nie zmienia art. 278–295)
   [✓] OK    mod-KK-art296-naduzycie-zaufania
               (nadrobienie 2026-07-21: działanie na szkodę majątkową,
                dodany 2026-07-16)

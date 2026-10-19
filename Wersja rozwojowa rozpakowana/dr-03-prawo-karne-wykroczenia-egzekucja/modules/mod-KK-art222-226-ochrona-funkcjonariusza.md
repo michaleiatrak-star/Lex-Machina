@@ -122,7 +122,7 @@ Ustawy zawodowe przyznają ochronę przysługującą funkcjonariuszowi publiczne
 | radca prawny | art. 12 ust. 1 ustawy o radcach prawnych, w brzmieniu Dz.U. 2026 poz. 731 | 18.06.2026 | podczas wykonywania czynności zawodowych lub w związku z ich wykonywaniem |
 | adwokat | art. 7 ust. 3 Prawa o adwokaturze, w brzmieniu Dz.U. 2026 poz. 1290 | **17.10.2026** | jw.; do 16.10.2026 art. 7 ust. 1: „ochrona prawna podobnie jak sędzia i prokurator” |
 
-✅ [VER] RZĄD 1 2026-10-09: ELI DU/2026/731 i DU/2026/1290 (text.pdf), KK t.j. Dz.U. 2025 poz. 383.
+✅ [VER] RZĄD 1 2026-10-09: ELI DU/2026/731 i DU/2026/1290 (text.pdf), KK t.j. Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342).
 
 **Ścieżka kwalifikacji (czyn wobec adwokata/radcy):**
 1. Data czynu → właściwy stan prawny (adwokat: przed 17.10.2026 inna podstawa ochrony — art. 7 ust. 1 w dotychczasowym brzmieniu; ustal jej skutek w aktualnym orzecznictwie, nie z pamięci).

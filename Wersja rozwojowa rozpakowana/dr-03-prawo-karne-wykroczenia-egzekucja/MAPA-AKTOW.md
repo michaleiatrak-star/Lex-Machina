@@ -6,9 +6,9 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 ### Kodeks karny i framework karny
 
-**Baza KK:** Dz.U. 2025 poz. 383 t.j. ✅ [VER] RZĄD 1 2026-09-10f.
-⛔ KROK 2C: **cztery nowelizacje po tekście jednolitym** — Dz.U. 2025 poz. 1818, 2025 poz. 1872,
-2026 poz. 902, 2026 poz. 988. Brzmienie każdego powoływanego artykułu KK czytać u źródła.  
+**Baza KK:** t.j. Dz.U. 2026 poz. 1342 (obwieszczenie Marszałka Sejmu z 2.10.2026, ogł. 16.10.2026; ELI: „obowiązujący”, brak nowelizacji po t.j.; 2026/902 i 988 — „akt objęty tekstem jednolitym”; 2025/1818 i 1872 weszły w życie przed obwieszczeniem — potwierdź w treści t.j.). ⛔ Na 2026-10-19 ELI nie udostępnia tekstu t.j. (textPDF/textHTML: false) — do czasu publikacji brzmienie czytaj z t.j. Dz.U. 2025 poz. 383 (DU/2025/383, status „wygaśnięcie aktu”) łącznie z 2025/1818, 1872, 2026/902, 988. ✅ [VER] RZĄD 1 2026-10-19 (metadane ELI DU/2026/1342 i references DU/1997/553).
+Poprzedni t.j. Dz.U. 2025 poz. 383 (✅ [VER] RZĄD 1 2026-09-10f) miał cztery nowelizacje po t.j. — Dz.U. 2025 poz. 1818, 1872,
+2026 poz. 902, 988. Brzmienie każdego powoływanego artykułu KK czytać u źródła.  
 **Baza KPK:** Dz.U. 2026 poz. 490 t.j. ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie Marszałka Sejmu z 27.03.2026.
 ⛔ KROK 2C: **pięć nowelizacji po tekście jednolitym** — Dz.U. 2026 poz. 421, 638, 760, 882, 901.
 Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednolity nie oddaje stanu bieżącego.  

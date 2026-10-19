@@ -437,7 +437,7 @@ NIEOBECNOŚĆ USPRAWIEDLIWIONA — elementy (rozp. MPiPS 1996, IZ6.nsf/5187F47C)
 ```
 Uchylanie się od obowiązku alimentacyjnego przez ≥3 miesiące LUB
 zaległość = co najmniej 3 świadczenia periodyczne
-→ Weryfikuj: KK Dz.U. 2025 poz. 383 art. 209
+→ Weryfikuj: KK Dz.U. 2026 poz. 1342 art. 209
 ⚠️ Relewantne także dla DR-03 (prawo karne) — przestępstwo z art. 209 KK
 ```
 

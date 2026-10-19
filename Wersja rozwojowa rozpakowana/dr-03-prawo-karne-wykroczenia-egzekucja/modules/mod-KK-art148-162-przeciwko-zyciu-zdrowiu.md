@@ -212,7 +212,7 @@ utraty życia albo CIĘŻKIEGO uszczerbku na zdrowiu?
 > założenia modułu (że HIV i inne choroby są nadal rozdzielone na dwa
 > paragrafy o różnym zagrożeniu karą).
 
-**Aktualna treść (Dz.U. 2025 poz. 383 t.j., źródła zbieżne: arslege.pl,
+**Aktualna treść (Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342), źródła zbieżne: arslege.pl,
 lexlege.pl, inforlex.pl):**
 ```
 □ Art. 161 §1 — POŁĄCZONY typ: "Kto, wiedząc, że jest zarażony wirusem

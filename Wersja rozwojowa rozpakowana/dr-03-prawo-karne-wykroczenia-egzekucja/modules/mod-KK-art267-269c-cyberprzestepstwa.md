@@ -7,7 +7,7 @@ phishing), art. 190a §2 KK (podszywanie w sieci), art. 212/216 KK (zniesławien
 online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberprzestępczości.
 
 **Weryfikacja:** 22.05.2026
-**Podstawa:** KK Dz.U. 2025 poz. 383 t.j. (wersja od 26.03.2025)
+**Podstawa:** KK Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342) (wersja od 26.03.2025)
 
 ---
 
@@ -26,12 +26,12 @@ online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberpr
    - Art. 269a KK (zakłócenie systemu — DDoS) → **Z URZĘDU**
    - Art. 269b KK (narzędzia hakerskie) → **Z URZĘDU**
    - Art. 287 KK (oszustwo komputerowe) → **Z URZĘDU**; wyjątek: osoba najbliższa → **na wniosek** (§3)
-     ✅ [VER: ELI DU/2025/383 text.pdf; art. 287 ma § 1–3 — „§ 4” nie istnieje; nowelizacje po t.j. bez zmian art. 287; odczyt 2026-10-04]
+     ✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf; art. 287 ma § 1–3 — „§ 4” nie istnieje; nowelizacje po t.j. bez zmian art. 287; odczyt 2026-10-04]
 4. **JURYSDYKCJA** → cyberprzestępstwo może być popełnione z zagranicy → MLAT (pomoc prawna
    międzynarodowa) przez prokuraturę. Efekty bardzo powolne.
 5. **PLATFORMY ZAGRANICZNE** → zgłoszenie do platformy (Facebook, Google, X) nie zastępuje
    zawiadomienia o przestępstwie. Obie ścieżki mogą i powinny być równoległe.
-6. **KLAUZULA WHITE-HAT** (art. 269b §1a + art. 269c KK — Dz.U. 2025 poz. 383):
+6. **KLAUZULA WHITE-HAT** (art. 269b §1a + art. 269c KK — Dz.U. 2026 poz. 1342):
    - Art. 269b §1a: nie popełnia przestępstwa (narzędzia hakerskie) ten, kto działa wyłącznie
      w celu zabezpieczenia systemu lub opracowania metody zabezpieczenia
    - Art. 269c: nie podlega karze za art. 267 §2 (nieautoryzowany dostęp) lub art. 269a (DDoS)
@@ -41,7 +41,7 @@ online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberpr
 
 ---
 
-## KATALOG PRZESTĘPSTW — PEŁNA TABELA (KK Dz.U. 2025 poz. 383)
+## KATALOG PRZESTĘPSTW — PEŁNA TABELA (KK Dz.U. 2026 poz. 1342)
 
 | Art. KK | Nazwa | Kara | Tryb ścigania |
 |---|---|---|---|
@@ -161,6 +161,6 @@ Prywatno-skargowe (212, 216 — zniesławienie/zniewaga online):
 
 ---
 
-*Weryfikacja: 22.05.2026 | KK Dz.U. 2025 poz. 383 t.j. (wersja od 26.03.2025)*
+*Weryfikacja: 22.05.2026 | KK Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342) (wersja od 26.03.2025)*
 *Art. 267–269c: Rozdział XXXIII KK — Przestępstwa przeciwko ochronie informacji*
 *Tryby ścigania zweryfikowane w arslege.pl i przepisy.gofin.pl — przed powołaniem weryfikuj w isap*

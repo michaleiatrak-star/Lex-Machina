@@ -4,7 +4,7 @@
 > **Zakres:** Utrata i odzyskanie praw obywatelskich + publicznych w prawie polskim.
 > Środki karne (KK art. 39–43b), zatarcie skazania (art. 106–107 KK),
 > prawa wyborcze (Konstytucja), degradacja wojskowa, utrata uprawnień zawodowych.
-> Weryfikacja online: 2026-06-11 · Dz.U. 2025 poz. 383 (KK t.j.)
+> Weryfikacja online: 2026-06-11 · Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342) (KK t.j.)
 
 ---
 
@@ -32,7 +32,7 @@ przywrócenia praw po zatarciu skazania. Pozostałe źródła → DR-02, DR-05.
 ## BLOK II — KATALOG ŚRODKÓW KARNYCH (art. 39 KK)
 
 ```
-Weryfikacja: KK art. 39–43b (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 39–43b (Dz.U. 2026 poz. 1342 t.j.)
 
 KATALOG ŚRODKÓW KARNYCH (art. 39 KK — pełny, zamknięty):
 
@@ -74,7 +74,7 @@ OKRESY TRWANIA (art. 43 KK):
 ## BLOK III — POZBAWIENIE PRAW PUBLICZNYCH (art. 40 KK)
 
 ```
-Weryfikacja: KK art. 40 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 40 (Dz.U. 2026 poz. 1342 t.j.)
 
 CO OBEJMUJE pozbawienie praw publicznych (art. 40 §1 KK):
   → Utrata CZYNNEGO prawa wyborczego (prawo głosowania)
@@ -147,7 +147,7 @@ SKUTKI ZAWODOWE POZA KK:
 ## BLOK V — ZATARCIE SKAZANIA (art. 106–108 KK)
 
 ```
-Weryfikacja: KK art. 106–108 (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 106–108 (Dz.U. 2026 poz. 1342 t.j.)
 
 DEFINICJA (art. 106 KK):
   "Z chwilą zatarcia skazania uważa się je za niebyłe; wpis o skazaniu usuwa
@@ -281,7 +281,7 @@ BIERNE PRAWO WYBORCZE (prawo kandydowania) — dodatkowe ograniczenia:
 ## BLOK VIII — DEGRADACJA WOJSKOWA (art. 39 pkt 9 + art. 43ba KK)
 
 ```
-Weryfikacja: KK art. 43ba–43bb (Dz.U. 2025 poz. 383 t.j.)
+Weryfikacja: KK art. 43ba–43bb (Dz.U. 2026 poz. 1342 t.j.)
 
 POZBAWIENIE STOPNIA WOJSKOWEGO:
   Sąd orzeka przy skazaniu żołnierza lub byłego żołnierza na:
@@ -327,7 +327,7 @@ TRYB STWIERDZENIA ZATARCIA:
 ## ŹRÓDŁA
 
 ```
-Podstawy prawne (Dz.U. 2025 poz. 383 t.j. — weryfikuj):
+Podstawy prawne (Dz.U. 2026 poz. 1342 t.j. — weryfikuj):
   KK art. 39–43b  — katalog środków karnych i okresy trwania
   KK art. 40      — pozbawienie praw publicznych (zakres)
   KK art. 41–41b  — zakaz zawodów, stanowisk, działalności z małoletnimi
@@ -349,4 +349,4 @@ web_search:
 
 ---
 *mod-prawa-obywatelskie-srodki-karne.md · shared/ · 2026-06-11*
-*Weryfikacja: Dz.U. 2025 poz. 383 KK + orzecznictwo SN + standardyprawa.pl*
+*Weryfikacja: Dz.U. 2026 poz. 1342 KK + orzecznictwo SN + standardyprawa.pl*

@@ -148,6 +148,6 @@ informacji, nie realizuje pełnego zespołu znamion § 1.
 ## 6. ŹRÓDŁA URZĘDOWE
 
 - ELI/ISAP: Dz.U. 2026 poz. 988 — ustawa dodająca art. 255b KK.
-- ELI/ISAP: Dz.U. 2025 poz. 383 ze zmianami — Kodeks karny.
+- ELI/ISAP: Dz.U. 2026 poz. 1342 ze zmianami — Kodeks karny.
 - ELI/ISAP: Dz.U. 2025 poz. 734 ze zmianami — Kodeks wykroczeń,
   w szczególności art. 107a.

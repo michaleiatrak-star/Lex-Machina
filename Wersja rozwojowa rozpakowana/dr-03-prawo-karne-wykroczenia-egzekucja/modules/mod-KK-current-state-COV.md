@@ -2,7 +2,7 @@
 
 **Stan operacyjny:** 2026-08-28  
 **Status:** B+ / COV  
-**Źródło kanoniczne:** ELI, Dz.U. 2025 poz. 383, tekst ujednolicony + akty zmieniające po t.j.
+**Źródło kanoniczne:** ELI, t.j. Dz.U. 2026 poz. 1342 (obwieszczenie Marszałka Sejmu z 2.10.2026, ogł. 16.10.2026; ELI: „obowiązujący”, brak nowelizacji po t.j.; 2026/902 i 988 — „akt objęty tekstem jednolitym”; 2025/1818 i 1872 weszły w życie przed obwieszczeniem — potwierdź w treści t.j.). ⛔ Na 2026-10-19 ELI nie udostępnia tekstu t.j. (textPDF/textHTML: false) — do czasu publikacji brzmienie czytaj z t.j. Dz.U. 2025 poz. 383 (DU/2025/383, status „wygaśnięcie aktu”) łącznie z 2025/1818, 1872, 2026/902, 988.
 
 ## Struktura
 
@@ -28,7 +28,7 @@ Każda kwalifikacja wymaga kolejno: czasu czynu, strony podmiotowej, znamion, st
 
 ## Temporal gate
 
-Dz.U. 2025 poz. 383 ma akty zmieniające ogłoszone po tekście jednolitym. Przed podaniem znamion, granic kary, środka karnego, terminu przedawnienia lub innej wartości normatywnej pobierz aktualny tekst ujednolicony ELI i sprawdź datę czynu.
+Najnowszy t.j. to Dz.U. 2026 poz. 1342; do czasu publikacji jego tekstu w ELI brzmienie pochodzi z Dz.U. 2025 poz. 383 i czterech nowelizacji po nim (2025/1818, 1872, 2026/902, 988). Przed podaniem znamion, granic kary, środka karnego, terminu przedawnienia lub innej wartości normatywnej pobierz aktualny tekst ujednolicony ELI i sprawdź datę czynu.
 
 ## Quality gate
 - [ ] ustalono datę czynu;

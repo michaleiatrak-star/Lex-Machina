@@ -12,7 +12,7 @@
 
 ### BAS-112 — Faktyczne wspólne pożycie
 ```
-Weryfikacja online: KK art. 115 §11 (Dz.U. 2025 poz. 383 t.j.) + orzecznictwo SN
+Weryfikacja online: KK art. 115 §11 (Dz.U. 2026 poz. 1342 t.j.) + orzecznictwo SN
 Definicja ustawowa: BRAK — pojęcie ocenne
 Definicja orzecznicza (SN):
   "Faktyczne wspólne pożycie" = trwały związek obojga płci o charakterze

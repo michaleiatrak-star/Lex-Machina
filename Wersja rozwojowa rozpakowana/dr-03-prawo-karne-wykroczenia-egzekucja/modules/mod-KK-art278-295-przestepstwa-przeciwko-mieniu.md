@@ -12,9 +12,9 @@
 
 ## ⛔ ŹRÓDŁO I STATUS WERYFIKACJI
 
-✅ [VER: ELI DU/2025/383 text.pdf (t.j. KK, obwieszczenie z 6.03.2025), RZĄD 1, odczyt 2026-10-04] — brzmienie art. 278–295, art. 4 § 1, 7, 11, 12, 101–104, 115 § 4–11 (w tym § 9a).
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf (t.j. KK, obwieszczenie z 6.03.2025), RZĄD 1, odczyt 2026-10-04] — brzmienie art. 278–295, art. 4 § 1, 7, 11, 12, 101–104, 115 § 4–11 (w tym § 9a).
 
-✅ [VER: ELI DU/2025/383, metadane `references` → „Nowelizacje po tekście jednolitym"; **kontrola krzyżowa:** ELI DU/1997/553 (akt pierwotny KK), pole `Akty zmieniające` — obie listy dają ten sam, zamknięty zbiór czterech aktów po t.j.: DU/2025/1818, DU/2025/1872, DU/2026/902, DU/2026/988; teksty odczytane 2026-10-04] — ⛔ KROK 2C: **żadna z czterech nowelizacji nie zmienia art. 278–295 KK.**
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342), metadane `references` → „Nowelizacje po tekście jednolitym"; **kontrola krzyżowa:** ELI DU/1997/553 (akt pierwotny KK), pole `Akty zmieniające` — obie listy dają ten sam, zamknięty zbiór czterech aktów po t.j.: DU/2025/1818, DU/2025/1872, DU/2026/902, DU/2026/988; teksty odczytane 2026-10-04] — ⛔ KROK 2C: **żadna z czterech nowelizacji nie zmienia art. 278–295 KK.**
 
 | Nowelizacja | Zmieniane artykuły KK (pełny wykaz z tekstu ustawy) | Art. 278–295? |
 |---|---|---|
@@ -23,7 +23,7 @@
 | 2026/902 (w mocy 21.07.2026) | odnośnik nr 1 do tytułu, 269b | ⛔ NIE |
 | 2026/988 (w mocy 23.08.2026) | dodany 255b | ⛔ NIE |
 
-⛔ **Art. 286 KK (oszustwo) — sprawdzony osobno i wprost: nie występuje w żadnej z czterech nowelizacji** (kontrola: wypis wszystkich wyrażeń „art. <nr>" z pełnych tekstów ustaw zmieniających + wyszukanie ciągu „286"). Brzmienie art. 286 § 1–4 z t.j. DU/2025/383 jest brzmieniem aktualnym na 2026-10-04.
+⛔ **Art. 286 KK (oszustwo) — sprawdzony osobno i wprost: nie występuje w żadnej z czterech nowelizacji** (kontrola: wypis wszystkich wyrażeń „art. <nr>" z pełnych tekstów ustaw zmieniających + wyszukanie ciągu „286"). Brzmienie art. 286 § 1–4 z t.j. DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) jest brzmieniem aktualnym na 2026-10-04.
 
 ⚠️ Dwie pułapki wykryte przy kontroli (nazwane, żeby nie wróciły):
 1. **„295" w ustawie 2025/1872 to art. 295 KPK, nie KK** — ta ustawa zmienia KPK w swoim art. 3 (tymczasowe zajęcie pojazdu). Nie czytaj tego jako zmiany art. 295 KK.
@@ -31,7 +31,7 @@
 
 ⚠️ **Zakres weryfikacji:** potwierdzone jest BRZMIENIE PRZEPISÓW. Orzecznictwo i doktryna (wykładnia znamion, zamiar pierwotny, zbieg, „mienie") NIE są tu zweryfikowane — przy konkretnej sprawie `orzeczenia-sadowe-v2`. Nie cytuj sygnatur z tego modułu.
 
-⚠️ Przed cytowaniem w piśmie pobierz bieżący tekst z ELI (PRAWO-HARDGATE) i sprawdź datę czynu (art. 4 § 1 KK — ELI: gdy w czasie orzekania obowiązuje inna ustawa niż w czasie czynu, stosuje się ustawę NOWĄ, jednakże ustawę obowiązującą poprzednio, jeżeli jest względniejsza dla sprawcy; ✅ [VER: ELI DU/2025/383, art. 4 § 1, 2026-10-04]).
+⚠️ Przed cytowaniem w piśmie pobierz bieżący tekst z ELI (PRAWO-HARDGATE) i sprawdź datę czynu (art. 4 § 1 KK — ELI: gdy w czasie orzekania obowiązuje inna ustawa niż w czasie czynu, stosuje się ustawę NOWĄ, jednakże ustawę obowiązującą poprzednio, jeżeli jest względniejsza dla sprawcy; ✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342), art. 4 § 1, 2026-10-04]).
 
 ---
 
@@ -109,7 +109,7 @@ art. 115 § 11  osoba najbliższa = małżonek, wstępny, zstępny, rodzeństwo,
                lub stopniu, osoba pozostająca w stosunku przysposobienia oraz jej małżonek, a także
                osoba pozostająca we wspólnym pożyciu
 ```
-✅ [VER: ELI DU/2025/383 text.pdf, art. 115, RZĄD 1, 2026-10-04]
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 115, RZĄD 1, 2026-10-04]
 
 Zastosowanie praktyczne:
 - „Kradzież szczególnie zuchwała" (art. 278 § 3a) to **typ kwalifikowany z własnym zagrożeniem 6 mies.–8 lat** i własną definicją ustawową — nie ocena „na oko". Kradzież kieszonkowa mieści się w pkt 2 definicji.
@@ -178,7 +178,7 @@ Pogłębienie (schematy, tabele błędnych kwalifikacji): `kwalifikator-karnomat
 § 4  mienie > 10-krotności „wielkiej wartości"
      (> 10 000 000 zł)                               → 5–25 lat  (ZBRODNIA)
 ```
-Kwoty w § 3–4 to **wynik obliczenia** z ustawowego „pięciokrotność/dziesięciokrotność kwoty określającej mienie wielkiej wartości" (art. 115 § 6 = 1 000 000 zł). ✅ [VER: ELI DU/2025/383 text.pdf, art. 115 § 6 i art. 294, RZĄD 1, 2026-10-04]
+Kwoty w § 3–4 to **wynik obliczenia** z ustawowego „pięciokrotność/dziesięciokrotność kwoty określającej mienie wielkiej wartości" (art. 115 § 6 = 1 000 000 zł). ✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 115 § 6 i art. 294, RZĄD 1, 2026-10-04]
 
 **Katalog przestępstw podstawowych jest INNY w każdym paragrafie:**
 
@@ -201,7 +201,7 @@ Kwoty w § 3–4 to **wynik obliczenia** z ustawowego „pięciokrotność/dzies
 
 Wniosek praktyczny: oszustwo (286 § 1–2) i przywłaszczenie (284 § 1–2) przy wartości > 200 000 zł → **art. 294 § 1 (1–10 lat)**; kradzież z włamaniem lub rozbój przy tej samej wartości **nie** podlega § 1 (ma własne, już wyższe zagrożenie). Wypadek mniejszej wagi (286 § 3, 284 § 3, 278 § 3, 288 § 2) **nie** jest wymieniony w art. 294. Przy wartości > 200 000 zł sprawdź więc najpierw, czy w ogóle zachodzi typ podstawowy.
 
-⛔ **Poza rozdziałem XXXV art. 294 nie działa — i nie zastępuje go art. 306b.** Katalog art. 306b § 1–2 (ELI) to wyłącznie: art. 296 § 1 lub 2, art. 296a § 1 lub 4, art. 299 § 1, 2, 5 lub 6, art. 303 § 1 — **art. 297 (oszustwo kredytowe/dotacyjne) NIE jest w tym katalogu**, więc nie ma dla niego eskalacji wartościowej ani z art. 294, ani z art. 306b; przy skazaniu z art. 297 sąd może orzec obok PW grzywnę do 3000 stawek dziennych (art. 309 KK). ✅ [VER: ELI DU/2025/383 text.pdf, art. 306b i art. 309, RZĄD 1, 2026-10-04] — korekta własnego błędu w pierwszej redakcji tego modułu (2026-10-04i), gdzie napisano, że eskalacja art. 297 idzie przez art. 306b. Zob. `mod-KK-art296-naduzycie-zaufania.md`, `mod-KK-art305-zmowa-przetargowa-karna.md`.
+⛔ **Poza rozdziałem XXXV art. 294 nie działa — i nie zastępuje go art. 306b.** Katalog art. 306b § 1–2 (ELI) to wyłącznie: art. 296 § 1 lub 2, art. 296a § 1 lub 4, art. 299 § 1, 2, 5 lub 6, art. 303 § 1 — **art. 297 (oszustwo kredytowe/dotacyjne) NIE jest w tym katalogu**, więc nie ma dla niego eskalacji wartościowej ani z art. 294, ani z art. 306b; przy skazaniu z art. 297 sąd może orzec obok PW grzywnę do 3000 stawek dziennych (art. 309 KK). ✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 306b i art. 309, RZĄD 1, 2026-10-04] — korekta własnego błędu w pierwszej redakcji tego modułu (2026-10-04i), gdzie napisano, że eskalacja art. 297 idzie przez art. 306b. Zob. `mod-KK-art296-naduzycie-zaufania.md`, `mod-KK-art305-zmowa-przetargowa-karna.md`.
 
 ---
 
@@ -214,7 +214,7 @@ Wniosek praktyczny: oszustwo (286 § 1–2) i przywłaszczenie (284 § 1–2) pr
 § 2  sprawca, który dobrowolnie naprawił szkodę w ZNACZNEJ CZĘŚCI → sąd MOŻE zastosować
      nadzwyczajne złagodzenie kary
 ```
-✅ [VER: ELI DU/2025/383 text.pdf, art. 295, RZĄD 1, 2026-10-04]
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 295, RZĄD 1, 2026-10-04]
 
 - ⛔ **Katalog zamknięty — nie obejmuje art. 279–283** (kradzież z włamaniem, rozbój, kradzież rozbójnicza, wymuszenie rozbójnicze), a art. 290 nie jest wymieniony wprost. Zakres art. 295 wobec art. 290 (odpowiedzialność „jak za kradzież") — kwestia wykładni, sprawdź orzecznictwo.
 - Ustawa mówi „dobrowolnie" i „sąd może" — to uprawnienie, nie automatyzm; brak obowiązku złagodzenia.
@@ -274,7 +274,7 @@ Metoda: górna granica zagrożenia z ELI → pkt art. 101 § 1. Wynik to **oblic
 | 278 § 3a, 279, 280 § 1, 281, 282, 286 § 1–2, 289 § 2–3, 294 § 1 | 8–15 lat | **15 lat** (pkt 2a — przekraczające 5 lat) |
 | 280 § 2, 294 § 3, 294 § 4 (**zbrodnie**, art. 7 § 2: kara nie krótsza niż 3 lata) | 20–25 lat | **20 lat** (pkt 2 — inna zbrodnia) |
 
-✅ [VER: ELI DU/2025/383 text.pdf, art. 7 § 2, art. 101 § 1, RZĄD 1, 2026-10-04] — brzmienie przepisów; przyporządkowanie wierszy jest obliczeniem własnym.
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 7 § 2, art. 101 § 1, RZĄD 1, 2026-10-04] — brzmienie przepisów; przyporządkowanie wierszy jest obliczeniem własnym.
 
 - Art. 104 § 1 (ELI): przedawnienie **nie biegnie**, jeśli przepis nie pozwala wszcząć lub prowadzić postępowania — **nie dotyczy to braku wniosku**. Dla przestępstw ściganych na wniosek (np. art. 288 § 4, art. 284 § 4, art. 286 § 4) brak wniosku NIE wstrzymuje biegu przedawnienia.
 - Przestępstwa tego rozdziału są ścigane z urzędu lub na wniosek — **nie** z oskarżenia prywatnego, więc art. 101 § 2 nie ma zastosowania.
@@ -306,7 +306,7 @@ Kradzież, przywłaszczenie, paserstwo i zniszczenie mienia mają odpowiedniki w
 294 § 1  art. 291 § 1 przy mieniu znacznej wartości → 1–10 lat (art. 292 NIE jest objęty art. 294)
 295      art. 291 i 292 objęte dobrowolnym naprawieniem szkody
 ```
-✅ [VER: ELI DU/2025/383 text.pdf, art. 291–295, RZĄD 1, 2026-10-04]
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 291–295, RZĄD 1, 2026-10-04]
 
 ⛔ **Korekta błędu w `mod-KK-art291-pranie-pieniedzy.md` (stan sprzed 2026-10-04i):** moduł podawał dla art. 291 „do 5 lat (lub do 8 lat przy znacznej wartości)", a rozdział XXXV KK jako „art. 291–297". ELI: art. 291 § 1 — 3 mies.–5 lat; **„8 lat" w tym przepisie nie występuje** (znaczna wartość podnosi zagrożenie przez art. 294 § 1 do 1–10 lat — i tylko dla art. 291 § 1, z art. 292 § 2 jako odrębnym, wyższym typem 3 mies.–5 lat); rozdział XXXV obejmuje art. 278–295, a art. 296–309 to rozdział XXXVI. Zdanie „nie można być ukarany za paserstwo w stosunku do własnego przestępstwa" **nie jest przepisem** — to zasada doktrynalna (współukarany czyn następczy), niezweryfikowana w tym module.
 
@@ -350,8 +350,8 @@ Pranie pieniędzy (art. 299, rozdz. XXXVI) — nadal w `mod-KK-art291-pranie-pie
 ## 12. WERYFIKACJA ONLINE
 
 ```
-ELI: https://api.sejm.gov.pl/eli/acts/DU/2025/383            (metadane + references → nowelizacje po t.j.)
-ELI: https://api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf   (tekst: rozdz. XXXV = art. 278–295)
+ELI: https://api.sejm.gov.pl/eli/acts/DU/2026/1342            (metadane + references → nowelizacje po t.j.)
+ELI: https://api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf   (tekst: rozdz. XXXV = art. 278–295) — (obecny t.j. Dz.U. 2026 poz. 1342)
 Przed pismem: sprawdź w `references` aktu, czy po 2026-08-28 (changeDate metadanych) pojawiły się nowe nowelizacje KK
 Orzecznictwo: orzeczenia-sadowe-v2 (SN, SA) — nie cytuj z pamięci
 ```

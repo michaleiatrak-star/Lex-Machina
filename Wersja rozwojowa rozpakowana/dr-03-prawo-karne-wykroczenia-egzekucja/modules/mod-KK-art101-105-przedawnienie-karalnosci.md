@@ -5,7 +5,7 @@
 > powszechnych z KK temat pojawiał się WYŁĄCZNIE incydentalnie. Ten moduł
 > naprawia tę lukę.
 > ✅ Brzmienie art. 101–105 zweryfikowane 2026-08-26 w urzędowym tekście
-> jednolitym KK: Dz.U. 2025 poz. 383. Każdorazowo sprawdź późniejsze
+> jednolitym KK: Dz.U. 2026 poz. 1342. Każdorazowo sprawdź późniejsze
 > nowelizacje i prawo intertemporalne przed użyciem w konkretnej sprawie.
 > ⚠️ Nowelizacja 2023 (Dz.U. 2022 poz. 2600, wejście w życie 01.10.2023) WYDŁUŻYŁA
 > terminy przedawnienia karalności — sprawdzaj ZAWSZE, czy czyn popełniono
@@ -47,7 +47,7 @@ liczy się od dnia, gdy skutek nastąpił — art. 101 §3)
 │  która wydłużyła ten termin z 30 DO 40 LAT. Ironicznie, ten sam moduł
 │  już wcześniej ostrzegał o istnieniu tej nowelizacji, ale nie
 │  zastosował jej do własnej liczby. Potwierdzone w 7+ źródłach: rp.pl
-│  (Rząd 2B, aktualizacja 13.04.2026), arslege.pl [t.j. Dz.U. 2025 poz. 383],
+│  (Rząd 2B, aktualizacja 13.04.2026), arslege.pl [t.j. Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342)],
 │  gov.pl [publikacja R. Kmiecik, Prokuratura i Prawo], kglegal.pl,
 │  zzbudowlani.pl, adwokat-grube.pl, tvn24.pl)
 │
@@ -177,7 +177,7 @@ służbą, oraz zbrodni międzynarodowych.
 | Kategorie czynów na szkodę małoletniego wymienione w art. 101 § 4 | przedawnienie nie może nastąpić przed ukończeniem przez pokrzywdzonego 40. r.ż. | j.w. + odpowiedni okres; sprawdź art. 105, bo wskazane tam typy nie przedawniają się w ogóle |
 
 > ⚠️ **POPRAWKA 2026-07-26c (WERYFIKACJA BEZPOŚREDNIO NA ISAP —
-> api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf, Rząd 1, pobrane
+> api.sejm.gov.pl/eli/acts/DU/2025/383/text.pdf, Rząd 1, pobrane — (obecny t.j. Dz.U. 2026 poz. 1342)
 > dosłownie):** poprzednia poprawka W TEJ SAMEJ SESJI (26n) nadal miała
 > błąd — dosłowne brzmienie art. 102 §1 KK: "Jeżeli w okresie, o którym
 > mowa w art. 101, wszczęto postępowanie, karalność przestępstw

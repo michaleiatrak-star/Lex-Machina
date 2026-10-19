@@ -62,7 +62,7 @@ REGUŁA ADEKWATNEGO ZWIĄZKU (art. 361 §1 KC):
 
 "ZNACZNA SZKODA MAJĄTKOWA" (art. 115 §7 KK): powyżej 200 000 zł
 "WIELKA SZKODA MAJĄTKOWA" (art. 115 §8 KK): powyżej 1 000 000 zł
-  → KK Dz.U. 2025 poz. 383 art. 115 §7-8
+  → KK Dz.U. 2026 poz. 1342 art. 115 §7-8
   ⚠️ Progi ZAMROŻONE od 2010 — patrz BAS-W23 (ORKA-BAS-LEKSYKON.md, DR-03)
   → ten sam próg co "mienie znacznej/wielkiej wartości" (art. 115 §5-6 KK)
 ```

@@ -497,7 +497,7 @@ AKTY PRAWNE (weryfikuj aktualne t.j. w ELI (RZĄD 1)):
   KPK art. 72 §2: tłumacz przy czynnościach
   KPC art. 256: głuchy jako świadek
   KK art. 31: niepoczytalność; art. 93a: środki zabezpieczające
-    isap.sejm.gov.pl → Dz.U. 2025 poz. 383
+    isap.sejm.gov.pl → Dz.U. 2026 poz. 1342
   Ustawa o języku migowym z 19.08.2011 r.
     isap.sejm.gov.pl → Dz.U. 2023 poz. 20
   Ustawa o świadczeniu wspierającym z 7.07.2023 r.

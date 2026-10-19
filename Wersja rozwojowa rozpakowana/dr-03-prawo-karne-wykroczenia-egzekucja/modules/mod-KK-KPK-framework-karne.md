@@ -25,7 +25,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
    Porozumienie z pokrzywdzonym → podstawa warunkowego umorzenia lub
    nadzwyczajnego złagodzenia kary.
 
-5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2025 poz. 383:**
+5. **PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2026 poz. 1342:**
 
    | Kategoria (art. 101 §1) | Termin |
    |---|---|
@@ -40,7 +40,7 @@ kuratora, zakaz prowadzenia pojazdów, przestępstwa przeciwko mieniu, zdrowiu.
 
 ## KLUCZOWE AKTY PRAWNE
 
-- KK → ELI (RZĄD 1) (Dz.U. 2025 poz. 383) — **weryfikuj online przed cytowaniem**
+- KK → ELI (RZĄD 1) (Dz.U. 2026 poz. 1342) — **weryfikuj online przed cytowaniem**
 - KPK → isap.sejm.gov.pl (Dz.U. 2026 poz. 490)
 - KKW → isap.sejm.gov.pl (Dz.U. 2026 poz. 1307 t.j.)
 
@@ -160,7 +160,7 @@ skill `analiza-sadowa-v6`.
 
 ## ANEKS: PRZESTĘPSTWA GOSPODARCZE I ALIMENTY
 
-> Weryfikuj przed każdym powołaniem: KK Dz.U. 2025 poz. 383 ze zm.
+> Weryfikuj przed każdym powołaniem: KK Dz.U. 2026 poz. 1342 ze zm.
 
 ### Przestępstwa gospodarcze — kluczowe typy (Rozdział XXXVI KK)
 

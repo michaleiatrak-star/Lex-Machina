@@ -153,7 +153,7 @@ Brak odpowiedzialności, gdy obowiązek powstał w czasie egzekucji przez zarzą
 **Przepisy powiązane (zweryfikowane w ELI 08.10.2026):**
 - KSH art. 299 (t.j. DU/2024/18): członkowie zarządu sp. z o.o. odpowiadają solidarnie przy bezskutecznej egzekucji; egzoneracja m.in. przez wniosek o upadłość „we właściwym czasie”, otwarcie restrukturyzacji albo zatwierdzenie układu, brak winy albo brak szkody; § 4 — brak odpowiedzialności w czasie egzekucji przez zarząd przymusowy/sprzedaż przedsiębiorstwa. ⚠️ Po t.j. ogłoszono zmiany KSH (m.in. DU/2026/644, DU/2026/176 od 18.02.2027) — przed powołaniem odczytaj brzmienie na dzień sprawy.
 - KSH art. 586: członek zarządu albo likwidator, który nie zgłasza wniosku mimo warunków upadłości — grzywna, ograniczenie wolności albo pozbawienie wolności do roku → przy sprawach karnych: dr-03 + kwalifikator.
-- KK art. 302 (t.j. DU/2025/383): faworyzowanie wierzycieli w razie grożącej niewypłacalności (§ 1) oraz przekupstwo wierzyciela w związku z postępowaniem upadłościowym (§ 2–3). Po t.j. KK ogłoszono zmiany (DU/2026/988, 902 i in.) — sprawdź na dzień czynu. Art. 300–301 KK — odczytaj w ELI przed powołaniem.
+- KK art. 302 (t.j. DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342)): faworyzowanie wierzycieli w razie grożącej niewypłacalności (§ 1) oraz przekupstwo wierzyciela w związku z postępowaniem upadłościowym (§ 2–3). Po t.j. KK ogłoszono zmiany (DU/2026/988, 902 i in.) — sprawdź na dzień czynu. Art. 300–301 KK — odczytaj w ELI przed powołaniem.
 
 **Treść wniosku (art. 22) — checklista:**
 ```

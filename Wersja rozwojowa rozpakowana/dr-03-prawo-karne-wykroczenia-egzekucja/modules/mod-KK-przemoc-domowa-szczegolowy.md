@@ -57,7 +57,7 @@ PODSTAWOWE PRZEPISY:
     §1: do 3 lat | TRYB: na wniosek (§2) — ZŁÓŻ WNIOSEK PISEMNIE
 
   Art. 190a KK — stalking / cyberstalking (często łącznie z art. 207)
-    §1/§2: **6 miesięcy – 8 lat** (Dz.U. 2025 poz. 383)
+    §1/§2: **6 miesięcy – 8 lat** (Dz.U. 2026 poz. 1342)
     §3:   targnięcie pokrzywdzonego na życie — **2–15 lat** (art. 190a §3 KK)
     TRYB: na wniosek pokrzywdzonego
 
@@ -155,7 +155,7 @@ REKOMENDACJA: □ Nakaz natychmiastowy  □ Zawiadomienie karne  □ Nakaz sądo
 | Przemoc ekonomiczna — rozdzielność | `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-KRO-rodzinne.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
-*Art. 207 KK: Dz.U. 2025 poz. 383 t.j. | Art. 190a KK: nowelizacja od 01.10.2023*
+*Art. 207 KK: Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342) | Art. 190a KK: nowelizacja od 01.10.2023*
 *Ustawa o przeciwdziałaniu przemocy domowej (dawniej „w rodzinie"): Dz.U. 2024 poz. 1673 t.j. (✅ [VER] RZĄD 1 2026-09-16e; `2021/1249` — wygasły) — weryfikuj w isap.sejm.gov.pl*
 *KRO: Dz.U. 2026 poz. 236 t.j. | KPC: Dz.U. 2026 poz. 468 t.j.*
 *Weryfikacja: 22.05.2026 — zakaz cytowania przepisów z pamięci*

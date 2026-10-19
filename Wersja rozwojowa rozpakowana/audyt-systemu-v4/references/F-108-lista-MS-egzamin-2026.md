@@ -36,7 +36,7 @@
 | 20 | Własność lokali | DR-02 | 🟢 B+ / COV — Dz.U. 2026 poz. 232 |
 | 21 | Zastaw rejestrowy | DR-02 | 🟢 B+ / COV |
 | 22 | Konstytucja | DR-01 | 🟢 B+ / COV |
-| 23 | KK | DR-03 | 🟢 B+ / COV — Dz.U. 2025 poz. 383 ze zm.; części ogólna, szczególna i wojskowa zmapowane przez `mod-KK-current-state-COV.md` |
+| 23 | KK | DR-03 | 🟢 B+ / COV — Dz.U. 2026 poz. 1342 ze zm.; części ogólna, szczególna i wojskowa zmapowane przez `mod-KK-current-state-COV.md` |
 | 24 | KPK | DR-03 | 🟢 B+ / COV — Dz.U. 2026 poz. 490 ze zm.; current-state indeks całej procedury w `mod-KPK-current-state-COV.md` |
 | 25 | KRS | DR-02 | 🟢 B+ / COV |
 | 26 | Gospodarka nieruchomościami | DR-09/08/02 | 🟢 B+ / COV — Dz.U. 2026 poz. 399 |

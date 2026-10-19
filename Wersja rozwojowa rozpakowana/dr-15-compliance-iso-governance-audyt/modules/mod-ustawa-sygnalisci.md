@@ -17,7 +17,7 @@ LEX/Legalis dopuszczalne pomocniczo.
 - Kodeks pracy art. 11² (zakaz dyskryminacji) — Dz.U. 2025 poz. 277 ze zm.
   [WYMAGA WERYFIKACJI RZĄD 1]
 - KK art. 218 (naruszenie praw pracowniczych), art. 231 (nadużycie uprawnień)
-  Dz.U. 2025 poz. 383 ze zm. [WYMAGA WERYFIKACJI RZĄD 1]
+  Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342) ze zm. [WYMAGA WERYFIKACJI RZĄD 1]
 - Ustawa o ochronie danych osobowych (UODO) — Dz.U. 2019 poz. 1781 ze zm.
   [WYMAGA WERYFIKACJI RZĄD 1]
 

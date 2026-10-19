@@ -2,8 +2,8 @@
 
 ## Akt prawny
 **Kodeks karny — art. 291–293 należą do rozdziału XXXV (art. 278–295, przestępstwa przeciwko mieniu); art. 299 — do rozdziału XXXVI (art. 296–309, przestępstwa przeciwko obrotowi gospodarczemu i interesom majątkowym w obrocie cywilnoprawnym)**
-- Tekst jednolity KK: **Dz.U. 2025 poz. 383**
-  ✅ [VER: ELI DU/2025/383 text.pdf, RZĄD 1, 2026-10-04]
+- Tekst jednolity KK: **Dz.U. 2026 poz. 1342**
+  ✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, RZĄD 1, 2026-10-04]
 - ⚠️ KOREKTA 2026-10-04i (nazwanie błędu): wcześniejszy nagłówek podawał „rozdział XXXV (art. 291–297) i rozdział XXXVI (art. 296–305)" — błędne granice rozdziałów (ELI: XXXV = art. 278–295; XXXVI zaczyna się od art. 296). Całość rozdziału XXXV (kradzież, rozbój, przywłaszczenie, oszustwo, paserstwo, art. 294–295): `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md`.
 
 **Ustawa AML — karny wymiar:**
@@ -23,7 +23,7 @@ Art. 293:      § 1 — odpowiednio do programu komputerowego; § 2 — fakultat
                rzecz nie była własnością sprawcy
 Art. 294 § 1:  art. 291 § 1 przy mieniu znacznej wartości — 1–10 lat (art. 292 NIE objęty)
 ```
-✅ [VER: ELI DU/2025/383 text.pdf, art. 291–295, RZĄD 1, 2026-10-04]
+✅ [VER: ELI DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) text.pdf, art. 291–295, RZĄD 1, 2026-10-04]
 
 ⛔ **Błędy usunięte w tej wersji (nazwane wprost):** (1) „do 8 lat przy znacznej wartości" przy art. 291 — takiej wartości w art. 291 nie ma; (2) „Art. 292 — do 2 lat (lub grzywna)" pomijał § 2 (3 mies.–5 lat przy znacznej wartości); (3) zdanie „Nie można być ukarany za paserstwo w stosunku do własnego przestępstwa" **nie jest przepisem** — to zasada doktrynalna (współukarany czyn następczy), niezweryfikowana tutaj; nie przytaczaj jej jako normy prawnej. Pełny opis, tryb, przedawnienie, art. 295: `mod-KK-art278-295-przestepstwa-przeciwko-mieniu.md` §9.
 
@@ -40,7 +40,7 @@ Art. 299 § 2:  ⚠️ POPRAWKA 2026-07-26b (FAZA 3E/ZASADA 14 — korekta
                przyjmuje środki płatnicze/instrumenty finansowe itd. —
                KARA TA SAMA CO §1 (6 m-cy — 8 lat), nie osobny, wyższy
                wymiar. Potwierdzone WPROST cytatem z arslege.pl (t.j.
-               Dz.U. 2025 poz. 383): "Karze określonej w §1 podlega, kto będąc
+               Dz.U. 2026 poz. 1342): "Karze określonej w §1 podlega, kto będąc
                pracownikiem lub działając w imieniu lub na rzecz banku,
                instytucji finansowej lub kredytowej..." — dosłowne
                brzmienie nie pozostawia wątpliwości.
@@ -91,7 +91,7 @@ jeśli czyn z art. 299 **§1, §2, §5 LUB §6** dotyczy mienia/szkody:
 > 5 mln zł  → art. 306b §1 → 3-20 lat (ZBRODNIA)
 > 10 mln zł → art. 306b §2 → 5-25 lat (ZBRODNIA)
 ```
-Wejście w życie 1.10.2023. Potwierdzone: arslege.pl (t.j. Dz.U. 2025 poz. 383),
+Wejście w życie 1.10.2023. Potwierdzone: arslege.pl (t.j. Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342)),
 kairp.pl, adwokatdulniak.pl, kancelarierp.pl, chmielniak.com.pl,
 russellbedford.pl.
 
@@ -211,6 +211,6 @@ Przestępstwo bazowe: wystarczy, że środki pochodzą z JAKIEGOKOLWIEK przestę
 
 ## Weryfikacja online
 ```
-web_search: "KK art. 299 pranie pieniędzy Dz.U. 2025 poz. 383 zakres"
+web_search: "KK art. 299 pranie pieniędzy Dz.U. 2026 poz. 1342 zakres"
 web_search: "pranie pieniędzy Polska orzecznictwo SN 2024 2025"
 ```

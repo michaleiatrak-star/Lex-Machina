@@ -57,7 +57,7 @@ JAK POWAŻNY JEST USZCZERBEK?
 │
 └─ Ciężki uszczerbek (utrata zmysłu, kalectwo, choroba nieuleczalna, zagrożenie życia)
     └─ → ART. 156 §1 KK — CIĘŻKI USZCZERBEK
-         Kara: 3–20 lat PW. Źródło: Dz.U. 2025 poz. 383 t.j.
+         Kara: 3–20 lat PW. Źródło: Dz.U. 2026 poz. 1342 t.j.
          Jeśli następstwem jest śmierć → art. 156 § 3:
          **nie krócej niż 5 lat albo dożywotnie pozbawienie wolności**
          Czy działanie było umyślne?
@@ -177,7 +177,7 @@ za udział w bójce lub pobiciu (art. 158/159) sąd ORZEKA świadczenie pienię�
 co najmniej 5 000 zł; jeżeli jednocześnie orzeka obowiązek lub nawiązkę z art. 46
 § 1 lub 2 — MOŻE je orzec. (Korekta AUDYT-2026-10-04c: wcześniej opisana była
 wyłącznie gałąź fakultatywna.) Górna granica świadczenia — art. 43a § 1: 60 000 zł.
-✅ [VER: ELI RZĄD 1 — DU/2025/383 (t.j. KK) text.pdf; nowelizacje po t.j. 2025/1818,
+✅ [VER: ELI RZĄD 1 — DU/2025/383 (obecny t.j. Dz.U. 2026 poz. 1342) (t.j. KK) text.pdf; nowelizacje po t.j. 2025/1818,
 2025/1872, 2026/902, 2026/988 — § 1 i § 4 bez zmian; odczyt 2026-10-04]
 ```
 

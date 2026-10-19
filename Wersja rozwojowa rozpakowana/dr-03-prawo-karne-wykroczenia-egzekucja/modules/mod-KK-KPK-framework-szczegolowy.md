@@ -76,7 +76,7 @@ SKUTKI:
 WNIOSEK: pisemny do prokuratora / sądu — złóż jak najwcześniej
 ```
 
-## PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2025 poz. 383
+## PRZEDAWNIENIE KARALNOŚCI (art. 101 KK) — Dz.U. 2026 poz. 1342
 ```
 Zbrodnia zabójstwa:                40 lat od popełnienia  ⚠️ (nie 30!)
 Inna zbrodnia (≥3 lat PW):        20 lat
@@ -104,7 +104,7 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
 | art. 190 §1 | Groźba karalna | do 3 lat PW ⚠️ |
 
 ## ART. 178a KK — JAZDA PO ALKOHOLU / NARKOTYKACH — SZCZEGÓŁY (nowelizacja 14.03.2024)
-⚠️ Weryfikuj każdorazowo w ELI (RZĄD 1) (Dz.U. 2025 poz. 383 t.j.)
+⚠️ Weryfikuj każdorazowo w ELI (RZĄD 1) (Dz.U. 2026 poz. 1342 t.j.)
 
 ### §1 — Typ podstawowy (pierwsza jazda w stanie nietrzeźwości >0,5‰ lub pod wpływem narkotyków)
 - Kara ustawowa: **pozbawienie wolności do lat 3** — sankcja jednorodna
@@ -145,11 +145,11 @@ Przedłużenie po wszczęciu (art. 102 KK): +10 lat dla przestępstw z §1 / +5 
   ⛔ Znaczenie procesowe: 3 lata < 8 lat → art. 258 §2 KPK nie działa;
      3 lata > 1 rok → art. 259 §3 KPK też nie działa
 ✅ [VER: ELI — Dz.U. 2025 poz. 734, art. 19, 24 §1a i 87 §1;
-   Dz.U. 2025 poz. 383, art. 178a §1 — odczyt 2026-08-25]
+   Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342), art. 178a §1 — odczyt 2026-08-25]
 ```
 
 ## ART. 190 KK — GROŹBA KARALNA — SZCZEGÓŁY
-⚠️ Weryfikuj w ELI (RZĄD 1) (Dz.U. 2025 poz. 383 t.j.)
+⚠️ Weryfikuj w ELI (RZĄD 1) (Dz.U. 2026 poz. 1342 t.j.)
 
 ### §1 — Znamiona
 - Grożenie popełnieniem PRZESTĘPSTWA (nie wykroczenia!) na szkodę pokrzywdzonego lub osoby mu najbliższej
@@ -209,7 +209,7 @@ REKOMENDACJA: □ Warunkowe umorzenie  □ Mediacja  □ Obrona na rozprawie  �
 | Przesłuchanie na rozprawie | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` + skill `przesluchanie-swiadkow-v2-min90` |
 | Stalking / nękanie jako przestępstwo | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 
-*KK (Dz.U. 2025 poz. 383 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2026 poz. 1307 t.j.)*
+*KK (Dz.U. 2026 poz. 1342 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2026 poz. 1307 t.j.)*
 *Weryfikacja art. 178a i 190 KK: ELI (RZĄD 1) — zmiany nowelizacja 07.07.2022 (w życie 01.10.2023) i 14.03.2024*
 *Audyt: 21.05.2026 — błędy zagrożeń art. 178a §1 (2→3 lata) i art. 190 §1 (2→3 lata) NAPRAWIONE*
 *Weryfikacja: orzeczenia.ms.gov.pl, sn.pl*

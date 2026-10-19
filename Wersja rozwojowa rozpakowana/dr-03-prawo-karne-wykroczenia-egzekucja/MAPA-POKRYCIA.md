@@ -12,7 +12,7 @@ Mapa zawiera wyłącznie bieżący stan pokrycia. Historia zmian i wcześniejsze
 
 ## Kodeks karny
 
-**Baza:** Dz.U. 2025 poz. 383 ze zmianami po t.j.
+**Baza:** Dz.U. 2026 poz. 1342 ze zmianami po t.j.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|

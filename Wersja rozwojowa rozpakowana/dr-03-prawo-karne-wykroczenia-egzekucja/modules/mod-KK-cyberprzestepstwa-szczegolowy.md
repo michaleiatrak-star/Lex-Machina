@@ -163,7 +163,7 @@ REKOMENDACJA: □ Zawiadomienie karne  □ Pozew cywilny  □ Zgłoszenie platfo
 | Kwalifikacja karno-materialna | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` |
 | Orzecznictwo SN / SA | `orzeczenia-sadowe-v2` |
 
-*KK: Dz.U. 2025 poz. 383 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
+*KK: Dz.U. 2026 poz. 1342 t.j. | Rozdział XXXIII — Przestępstwa przeciwko ochronie informacji*
 *Prawo komunikacji elektronicznej: Dz.U. 2024 poz. 1221 (akt pierwotny,
 nie t.j.); zm.: Dz.U. 2025 poz. 637, 820, Dz.U. 2026 poz. 252, 815 (od 4.07.2026), 1296 — weryfikuj w ELI/ISAP*
 *DSA (Rozp. UE 2022/2065): stosowany od 17.02.2024 dla wszystkich platform*

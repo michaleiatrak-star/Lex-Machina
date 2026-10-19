@@ -1,5 +1,6 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.28 (2026-10-19a, AUDYT-2026-10-19a): mod-ustawa-adwokatura 8a: Dz.U. 2026 poz. 1290 obowiązuje od 17.10.2026; dopisane art. 2 (ustawa o prawnikach zagranicznych t.j. 2020/823, art. 10 ust. 5 — brzmienie z text.pdf), art. 4 ust. 5, art. 5, art. 6; rozp. MS 2016/1430 uznane za uchylone od 17.10.2026 (ELI). MAPA-AKTOW: wiersze ustawy o prawnikach zagranicznych i rozp. 2016/1430.
 - 4.27 (2026-10-12b, AUDYT-2026-10-12b): mod-ustawa-regulatorzy: ⛔ ustawa o wspieraniu rozwoju usług i sieci telekom. — t.j. 2026/562 (było 2025/311); PKE i megaustawa — zm. 2026/815. ELI 2026-10-12.
 
 - 4.26 (2026-10-11a, AUDYT-2026-10-11a): MAPA-AKTOW: zmiany po t.j. z ELI `/references` — u.k.s.c. 2025/1228: 2026/473 (8.07.2026), 1003 (28.10.2026), 346 (30.09.2028); Prawo o adwokaturze 2024/1564: 2025/1172, 2026/370, 846, 1290; radcy 2024/499: 2025/1172, 2026/370, 731, 846. ⚠️ Treść mod-KSCU nie była przeglądana pod kątem 473/1003/346 — zadanie dla audytu DZU.

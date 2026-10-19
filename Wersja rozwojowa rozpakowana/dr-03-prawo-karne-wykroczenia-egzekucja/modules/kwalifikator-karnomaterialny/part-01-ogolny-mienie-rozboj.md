@@ -181,7 +181,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 └─ PO zaborze, cel: WYMUSZENIE rozporządzenia mieniem / zaprzestania działalności
     └─ → ART. 282 KK — WYMUSZENIE ROZBÓJNICZE
          Kara: 1–10 lat pozbawienia wolności
-         ⚠️ Źródło: Dz.U. 2025 poz. 383 t.j. — weryfikuj w ELI (RZĄD 1)
+         ⚠️ Źródło: Dz.U. 2026 poz. 1342 t.j. — weryfikuj w ELI (RZĄD 1)
          ⚠️ WĘZEŁ GRANICZNY 282 vs 191 §2 KK:
          → 282: żądanie mienia + przemoc/groźba
          → 191 §2: zmuszanie do zaprzestania działalności gospodarczej
@@ -194,7 +194,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 ```
 JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA?
 ⚠️ Aktualny próg 800 zł obowiązuje od 01.10.2023 — re-ver F-135: ELI/API Sejmu, Dz.U. 2025 poz. 734, 2026-08-28
-⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U. 2025 poz. 383 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
+⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U. 2026 poz. 1342 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
 │
 ├─ ≤ 800 zł → ART. 119 §1 KW — WYKROCZENIE KRADZIEŻY
 │              Kara: areszt / ograniczenie wolności / grzywna do 5 000 zł
