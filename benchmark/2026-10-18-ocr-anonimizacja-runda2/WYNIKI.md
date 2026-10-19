@@ -6,11 +6,11 @@ Dane osobowe z dokumentów testowych zastąpione opisami (osoba 1, spółka X); 
 ## Najważniejsze wnioski
 
 1. **Zgięte zdjęcia:** Lex 0.1.37+ gubi 7 z 206 wierszy; najlepsza darmowa konkurencja (docTR) 77, Lex 0.1.36 120.
-2. **Płaski skan:** po wyłączeniu z pomiaru odręcznych wpisów (aplikacja wydziela je celowo) Lex ma CER 2,33% wobec 4,04% (docTR) i 4,99% (Tesseract); pola krytyczne 30/30 wobec 28/30.
+2. **Płaski skan: Lex przegrywa w CER z docTR i Tesseractem.** Lex 0.1.38 ma CER 5,76% wobec 4,04% (docTR) i 4,99% (Tesseract). Wygrywa w polach krytycznych (30/30 wobec 28/30) i ma najmniej zgubionych wierszy (5/186, jak docTR; Tesseract 11). Wcześniej podawany CER 2,33% był liczony po usunięciu tylko z wyniku Lex wierszy oznaczonych jako pieczęć lub kolorowy tusz (odręczne wpisy); konkurencji tego samego nie usunięto, więc porównanie było nieuczciwe i zostało wycofane.
 3. **Polskie znaki (pismo szeryfowe):** drugi rozpoznawacz (latin PP-OCRv5) i korekta słownikowa (Morfeusz): diakrytyki pisma ORA 17% -> 83%, skanu 92,3% -> 94,8%, zdjęcia zgiętego 82,3% -> 90,4%.
 4. **Anonimizacja (7 stron, 19 danych):** 13/19 -> 18/19 po poprawkach 0.1.38; pozostała sygnatura (polityka sygnatur, nie wyciek). Konkurencja: GLiNER 10/19, Presidio 6/19, spaCy 3/19.
 5. **Spójność symboli:** jedna osoba lub firma = jeden symbol mimo różnych zapisów OCR; 13 -> 7 symboli na 7 podmiotów.
-6. **Najsłabszy punkt: szybkość.** Tesseract jest 10-20 razy szybszy (przy kilkukrotnie większej liczbie błędów).
+6. **Najsłabsze punkty: szybkość i odręczne wpisy na skanie.** Tesseract jest 10-20 razy szybszy. Odręczne wpisy i pieczęcie Lex odczytuje jako śmieci oznaczone „[PIECZĘĆ lub kolorowy tusz]”, ale zostają one w tekście i podnoszą CER.
 
 ## Dokumenty
 
@@ -22,28 +22,62 @@ Dane osobowe z dokumentów testowych zastąpione opisami (osoba 1, spółka X); 
 
 ## 1. OCR
 
-| Narzędzie | Skan: CER / pola krytyczne | ORA: CER / diakrytyki | Zgięte: CER / zgubione wiersze | Czas na stronę |
-|---|---|---|---|---|
-| Lex 0.1.36 | 6,05% / 30 z 30 | 5,65% / 17% | 73,6% / 120 z 206 | 11,5 s |
-| Lex 0.1.37 | 6,05% / 30 z 30 | 5,65% / 17% | 7,7% / 7 z 206 | 17 s |
-| **Lex 0.1.38** | **5,85% / 30 z 30** | **4,35% / 83%** | **7,9% / 7 z 206** | 17,5 s |
-| docTR | 4,04% / 28 z 30 | 10,7% / 83% | 34,1% / 77 | 7 s (+15 s ładowania) |
-| Tesseract | 4,99% / 28 z 30 | 33,7% / 75% | 38,8% / 92 | 1,4 s |
-| OCRmyPDF | 6,17% / 29 z 30 | 46,8% / 58% | 40,3% / 96 | 2,6 s |
-| EasyOCR | 6,1% / 27 z 30 | 15,3% / 83% | 42,2% / 98 | 15 s (+15 s ładowania) |
-| page-dewarp + Tesseract | 8,6% / 26 z 30 | 63,6% / 25% | 31,6% / 75 | 4,6 s |
+Wszystkie narzędzia liczone na tym samym pełnym tekście wzorcowym, bez wyłączania czegokolwiek z wyniku któregokolwiek narzędzia. Lex 0.1.38 = wersja wydana (z korektą słownikową).
 
-Cały 54-stronicowy skan: Tesseract 43 s, OCRmyPDF 49 s, Lex 0.1.37 774 s.
+### Skan (7 stron, 186 wierszy, 30 pól krytycznych)
 
-- CER skanu Lex 5,85% obejmuje odręczne wpisy, które aplikacja wydziela do przeglądu. Bez nich: **Lex 2,33%**, docTR 4,04%, Tesseract 4,99%. Przewaga konkurencji w pierwszym pomiarze wynikała ze sposobu liczenia.
-- Pola krytyczne: numery, daty, PESEL, sygnatury. Konkurencja gubi 1-4 z 30.
+| Narzędzie | CER | WER | Polskie znaki | Zgubione wiersze | Pola krytyczne |
+|---|---:|---:|---:|---:|---:|
+| docTR | **4,04%** | 12,2% | 94,4% | **5** | 28 |
+| Tesseract | 4,99% | 9,63% | **94,8%** | 11 | 28 |
+| **Lex 0.1.38** | 5,76% | 10,53% | **94,8%** | **5** | **30** |
+| Lex 0.1.36 / 0.1.37 | 6,05% | 11,75% | 89,8% | 6 | **30** |
+| EasyOCR | 6,1% | 21,07% | 91,0% | 9 | 27 |
+| OCRmyPDF | 6,17% | **9,51%** | 94,4% | 13 | 29 |
+| page-dewarp + Tesseract | 8,62% | 20,81% | 85,8% | 12 | 26 |
+
+- **Lex jest trzeci w CER.** Główna przyczyna: 10 wierszy odręcznych wpisów i pieczęci na s. 6-7 (podpisy, daty, numery) Lex odczytuje jako śmieci, oznacza „[PIECZĘĆ lub kolorowy tusz]”, ale zostawia w tekście. Usunięcie ich tylko z wyniku Lex dawało 2,33%, ale to nie jest porównanie z konkurencją (jej odczytów tych samych miejsc nie usuwano).
+- **Lex wygrywa w polach krytycznych** (numery, daty, PESEL, sygnatury): 30/30; docTR i Tesseract gubią po 2.
+
+### Pismo ORA (1 strona, czcionka szeryfowa, 18 wierszy, 16 pól krytycznych)
+
+| Narzędzie | CER | WER | Polskie znaki | Zgubione wiersze | Pola krytyczne |
+|---|---:|---:|---:|---:|---:|
+| **Lex 0.1.38** | **4,35%** | **9,64%** | **83,3%** | **0** | **15** |
+| Lex 0.1.36 / 0.1.37 | 5,65% | 19,28% | 16,7% | 0 | 11 |
+| docTR | 10,65% | 21,69% | **83,3%** | 1 | 11 |
+| EasyOCR | 15,32% | 37,35% | **83,3%** | 2 | 12 |
+| Tesseract | 33,71% | 49,4% | 75,0% | 6 | 10 |
+| OCRmyPDF | 46,77% | 54,22% | 58,3% | 10 | 6 |
+| page-dewarp + Tesseract | 63,55% | 73,49% | 25,0% | 11 | 3 |
+
+### Zgięte zdjęcia (5 stron, 206 wierszy, 50 pól krytycznych)
+
+| Narzędzie | CER | WER | Polskie znaki | Zgubione wiersze | Pola krytyczne |
+|---|---:|---:|---:|---:|---:|
+| **Lex 0.1.38** | **7,63%** | **15,0%** | **90,4%** | **7** | **44** |
+| Lex 0.1.37 | 7,68% | 16,61% | 82,3% | **7** | **44** |
+| page-dewarp + Tesseract | 31,57% | 54,1% | 69,0% | 75 | 21 |
+| docTR | 34,08% | 49,48% | 83,5% | 77 | 26 |
+| Tesseract | 38,81% | 58,85% | 73,4% | 92 | 22 |
+| OCRmyPDF | 40,28% | 58,85% | 67,2% | 96 | 26 |
+| EasyOCR | 42,24% | 60,34% | 73,6% | 98 | 20 |
+| Lex 0.1.36 | 73,63% | 76,91% | 19,9% | 120 | 19 |
+
+### Czas na stronę (CPU)
+
+| Lex 0.1.36 | Lex 0.1.37 | Lex 0.1.38 | docTR | Tesseract | OCRmyPDF | EasyOCR | page-dewarp + Tesseract |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 11,5 s | 17 s | 17,5 s | 7 s (+15 s ładowania) | 1,4 s | 2,6 s | 15 s (+15 s ładowania) | 4,6 s |
+
+Cały 54-stronicowy skan: Tesseract 43 s, OCRmyPDF 49 s, Lex 0.1.37 774 s. Po usunięciu drugiej detekcji zgięć (0.1.38) 7 stron skanu: 125 s -> 105 s (0.1.36: 83 s).
 
 ### Zmiany OCR w 0.1.38
 
 | Zmiana | Efekt |
 |---|---|
 | Drugi rozpoznawacz latin PP-OCRv5 (8 MB, opcjonalny w instalatorze); przy tych samych literach wygrywa odczyt z większą liczbą polskich znaków | ORA: diakrytyki 17% -> 83%, CER 5,65% -> 4,35%; skan: CER 6,05% -> 5,85%; czas +4% |
-| Korekta słownikowa (Morfeusz, osobny proces): słowo nieznane -> jedyne znane w zasięgu typowych pomyłek OCR („Spóika” -> „Spółka”) | skan: diakrytyki 92,3% -> 94,8%, CER 2,42% -> 2,33%; zgięte: 82,3% -> 90,4%, CER 7,9% -> 7,63%; pola krytyczne bez zmian |
+| Korekta słownikowa (Morfeusz, osobny proces): słowo nieznane -> jedyne znane w zasięgu typowych pomyłek OCR („Spóika” -> „Spółka”) | skan: polskie znaki 92,3% -> 94,8%, CER 5,85% -> 5,76%; zgięte: 82,3% -> 90,4%, CER 7,9% -> 7,63%; pola krytyczne bez zmian |
 | Obce akcenty zamieniane na polskie lub usuwane (ž->ż, č->ć, á->a) | drugi rozpoznawacz nie wygrywa obcymi znakami |
 | Kontrola zgięcia z mapy prawdopodobieństwa zwykłej detekcji zamiast drugiej detekcji | 0,06 s zamiast 4,7-6,5 s na stronę, te same decyzje; 7 stron skanu 125 s -> 105 s |
 | Tryb zgięcia zastępuje stronę tylko, gdy czyta więcej pewnych liter | pusta strona z przebitką nie daje już śmieci („注 ははは”) |
@@ -54,7 +88,7 @@ Cały 54-stronicowy skan: Tesseract 43 s, OCRmyPDF 49 s, Lex 0.1.37 774 s.
 
 | Narzędzie | Zamaskowane | Utrata treści | Czas |
 |---|---:|---:|---:|
-| **Lex 0.1.38 (po poprawkach)** | **18 z 19** | 0 | ok. 33 s |
+| **Lex 0.1.38 (po poprawkach)** | **18 z 19** | 0 | nie mierzono |
 | Lex przed poprawkami (biała lista VAT) | 13 z 19 | 0 | 33 s |
 | GLiNER | 10 z 19 | 1 | 127 s |
 | Presidio + spaCy | 6 z 19 | 0 | 70 s |
@@ -85,10 +119,11 @@ Dok. A (zgięte postanowienie): 12/12. Dok. B (wezwanie z pełnomocnictwem): 21/
 
 ## 3. Otwarte
 
-1. **Szybkość:** od 0.1.37 płaski skan jest wolniejszy niż w 0.1.36 (7 stron: 105 s wobec 83 s); różnicę robi drugi rozpoznawacz polskich znaków (ok. 2 s na stronę). Linii nie da się bezpiecznie odfiltrować z góry, bo brak ogonków zdarza się też przy wysokiej pewności.
-2. **Pismo ręczne:** żadne narzędzie nie odczytuje poprawnie odręcznych poprawek i podpisów; aplikacja oznacza je do przeglądu.
-3. **Mała próba:** jeden zgięty dokument; próg trybu zgięcia dobrany na nim.
-4. **Pusta strona z przebitką:** nadal kilka śmieciowych znaków (jak w 0.1.36).
+1. **Odręczne wpisy i pieczęcie na skanie:** odczytywane jako śmieci i zostawiane w tekście (z oznaczeniem). To główna przyczyna wyższego CER niż docTR i Tesseract; do rozważenia: nie wstawiać do tekstu wierszy pieczęci o niskiej pewności, tylko pokazywać je w przeglądzie.
+2. **Szybkość:** od 0.1.37 płaski skan jest wolniejszy niż w 0.1.36 (7 stron: 105 s wobec 83 s); różnicę robi drugi rozpoznawacz polskich znaków (ok. 2 s na stronę). Linii nie da się bezpiecznie odfiltrować z góry, bo brak ogonków zdarza się też przy wysokiej pewności.
+3. **Pismo ręczne (ogólnie):** żadne narzędzie nie odczytuje poprawnie odręcznych poprawek i podpisów; aplikacja oznacza je do przeglądu.
+4. **Mała próba:** jeden zgięty dokument; próg trybu zgięcia dobrany na nim.
+5. **Pusta strona z przebitką:** nadal kilka śmieciowych znaków (jak w 0.1.36).
 
 ## Wersje
 
