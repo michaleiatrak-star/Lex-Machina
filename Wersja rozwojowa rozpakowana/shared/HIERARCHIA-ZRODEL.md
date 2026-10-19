@@ -27,9 +27,10 @@ E-1  ELI — RZĄD 1, KANAŁ PODSTAWOWY
        /eli/acts/DU/{rok}/{poz}        → metryka, status, daty
        /eli/acts/DU/{rok}/{poz}/text.pdf → BRZMIENIE (t.j.; pułapka /text.html — B-T1…B-T3 PRAWO-HARDGATE)
        /eli/acts/DU/{rok}/{poz}/references → zmiany po t.j.
+       /eli/acts/MP/{rok}/{poz}/text.pdf → Monitor Polski (uchwały, obwieszczenia, zarządzenia) — ta sama ranga co Dz.U.
      → eli.gov.pl → dziennikustaw.gov.pl / monitorpolski.gov.pl (ten sam publikator)
      Host bez kanału kodu: sekwencja B-1 → B-2 (PRAWO-HARDGATE).
-     Znacznik: ✅ [VER: ELI DU/RRRR/NNN, data]
+     Znacznik: ✅ [VER: ELI DU/RRRR/NNN, data] · M.P.: ✅ [VER: ELI MP/RRRR/NNN, data]
 
 E-2  ISAP — ADRES DLA CZŁOWIEKA
      isap.sejm.gov.pl: link podawany czytelnikowi obok ELI, pomocnicza
@@ -77,19 +78,18 @@ Kolejność użycia — KANON E-1…E-5 wyżej. Lista mocy źródeł:
    często SZYBSZY w indeksacji nowych t.j. niż ISAP.
    Wzorzec adresu: `eli.gov.pl/eli/DU/{rok}/{poz}` (metryka),
    `.../text.html`, `.../text.pdf` (treść).
-3. ISAP — https://isap.sejm.gov.pl — ta sama moc co ELI, ale rola od v1.10:
+3. **Monitor Polski — najwyższa ranga, równa Dz.U.** (2026-09-01f; podniesione 2026-10-19) —
+   urzędowy publikator uchwał, obwieszczeń i zarządzeń: `api.sejm.gov.pl/eli/acts/MP/{rok}/{poz}`
+   (metryka, `text.pdf`) oraz `monitorpolski.gov.pl` (RCL). Aplikacja Lex Machina weryfikuje
+   z obu adresów (źródło urzędowe R1 od 2026-10-19). Obwieszczenie, uchwała lub zarządzenie
+   z M.P. potwierdzone tu ma ✅ [VER: ELI MP/RRRR/NNN, data] — nie wymaga RZĘDU 2.
+4. ISAP — https://isap.sejm.gov.pl — ta sama moc co ELI, ale rola od v1.10:
    **adres dla człowieka** i pomocnicza identyfikacja (E-2). Nie jest kanałem
    odczytu treści dla modelu.
-4. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
-5. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
-6. UODO — https://uodo.gov.pl — przepisy o ochronie danych
-7. BIP właściwego organu — dla rozporządzeń branżowych
-8. **Monitor Polski** (dodane 2026-09-01f) — urzędowy publikator uchwał,
-   obwieszczeń i zarządzeń: `monitorpolski.gov.pl` (RCL) oraz warstwa
-   strukturalna `api.sejm.gov.pl/eli/acts/MP/{rok}/{poz}`. ⛔ System miał
-   dotąd wpiętą wyłącznie ścieżkę Dz.U.; M.P. był publikatorem RZĘDU 1
-   nieobecnym w tej liście, mimo że rozstrzyga o obwieszczeniach i uchwałach
-   powoływanych w sprawach administracyjnych.
+5. Sejm RP — https://www.sejm.gov.pl/prawo/prawo.htm
+6. EUR-Lex — https://eur-lex.europa.eu — prawo UE implementowane w Polsce
+7. UODO — https://uodo.gov.pl — przepisy o ochronie danych
+8. BIP właściwego organu — dla rozporządzeń branżowych
 9. **Dziennik Ustaw — RCL** — `dziennikustaw.gov.pl`; ten sam publikator co
    ISAP/ELI, inny gospodarz serwisu. Przydatny, gdy pozostałe kanały zawodzą.
 10. **Dzienniki urzędowe ministrów i urzędów centralnych** —
