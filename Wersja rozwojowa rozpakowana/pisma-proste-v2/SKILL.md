@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.32"
+version: "2.33"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -471,6 +471,13 @@ Jeżeli pismo dotyczy terminu, sprzeciwu, zarzutów, uzasadnienia, apelacji, za�
 
 ```text
 view shared/TERM-CALC.md
+```
+
+Jeżeli pismo kierujesz do sądu, a sądu nie ma w aktach (blok SĄD SPRAWY), dołącz — sąd i jego adres
+wyłącznie z `court_for_address` (aplikacja) albo z tabeli aktu; nigdy z pamięci:
+
+```text
+view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-wlasciwosc-miejscowa-sadow-powszechnych.md
 ```
 
 Jeżeli pismo dotyczy JAKIEGOKOLWIEK środka zaskarżenia (zażalenie, odwołanie,

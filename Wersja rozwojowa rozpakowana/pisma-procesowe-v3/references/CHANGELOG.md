@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.45 (2026-10-17c, AUDYT-2026-10-17c): Sąd właściwy: pismo do sądu bez sądu w aktach — obowiązkowo DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych; sąd i adres tylko z court_for_address albo z bloku SĄD SPRAWY.
 - 5.44 (2026-10-16a, AUDYT-2026-10-16a): W2.1 — `shared/MOD-DLUGIE-PISMO.md`: pierwszy projekt ponad ok. 10 stron kończy blok linią `=== CIĄG DALSZY ===` (dalszy ciąg w tym samym kroku); kroki W3 na długim projekcie zwracają tylko `=== ZMIANA SEKCJI: … ===`; blok bez linii końca = ucięty, wersja nie zapisana.
 - 5.43 (2026-10-15b, AUDYT-2026-10-15b): W1.2c KROK PRZ — przesłanka związku przyczynowego tezy (szkoda, krzywda, odszkodowanie, zadośćuczynienie) badana przez `shared/MOD-GRAF-PRZYCZYNOWY.md` przed W1.3; NIEWYKAZANY → W1.5 jako ⬛ BRAK; zakaz przesłanki z samej kolejności dat.
 

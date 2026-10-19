@@ -1,7 +1,7 @@
-884ae3429802911d11f80ba2c439cd994d5e0d87062ab8e6d28eed8cbfecee9d  ./MAPA-AKTOW.md
-601a3dbac3a7233e0bfc7b70194fd08fa5380bf42b4cb614fc9b4522ee986f1b  ./MAPA-POKRYCIA.md
+92f2ff666118be5b3e25c1141c1203832139398594aeb43bcd6613110e2e13eb  ./MAPA-AKTOW.md
+f939758f67a214649de553c134ff4dafc4f4b325d47ac961644d34837469d35a  ./MAPA-POKRYCIA.md
 eac5e4f81d8a3c6282ed293c7dec591f0c0415e02c2739425f139bb644ff1846  ./PORTABILITY-MANIFEST.md
-ef728a38db10a5a7977471b82c0e89d2e58b768413f5a8425558c6071a0559fa  ./SKILL.md
+85d55257b4243ce65c43ba9e6df46107a67dba63189c8aa7807db21a45a0fbce  ./SKILL.md
 56eed0622890a10e5faf863e13f3e2c692f13d83c5e8e0f49319936852b100c5  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 41ecf6d89da12743636c67ab29de443bbe34596f68de7355e2aba491e60cf183  ./modules/mod-KPC-arbitraz-mediacja-ADR.md
@@ -17,5 +17,7 @@ bf84f95a35ce1fd037ab79b62a482f613ce4402d014892cad29b11fbb2cfe010  ./modules/mod-
 0ee08d188729cd0dca2a2afcde551893443c0e3401c02f0184dcf654293ebb57  ./modules/mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF.md
 07ddd71ea03d55f1f656f11bec015f69c408f3ac7279c68c23eb29808b63c4ee  ./modules/mod-ustawa-rzecznicy-patentowi-zawod.md
 fa1b245b7464740abf8946df58d35f81eab24f3c51155e7510c200a514a16248  ./modules/mod-ustawa-sedziowie-referendarze-kuratorzy.md
-bfefbb8eee86b3e0480bc7f44e7133344a5bf2855c4c159e105972fc77f782d3  ./references/CHANGELOG.md
+93d8b46d99cda65b8c8697d153871b9f8596ecb838b9942cb5a10cbdf262a551  ./references/CHANGELOG.md
 6d577f0ec1363735343a495462aadeddd8891741a26ca60e27a18a499fc8e5f0  ./references/HISTORIA-ZMIAN-PLIKOW.md
+7a92edc3e9524eefde1c451ad66cb4f0c6d9a4a1ed7cf088e157676de4287961  ./modules/mod-wlasciwosc-miejscowa-sadow-powszechnych.md
+2dfc25de5c6de2e9a50c66b14af9f7aa0cdff66af29c507f0c7886ae9dfc3508  ./references/wlasciwosc-sadow-tj-2026-492.tsv

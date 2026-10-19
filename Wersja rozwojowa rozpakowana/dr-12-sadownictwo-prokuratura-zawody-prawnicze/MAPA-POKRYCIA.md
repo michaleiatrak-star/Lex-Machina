@@ -16,6 +16,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | Akt / zakres | Moduł wejściowy | Status bieżący |
 |---|---|---|
 | Prawo o ustroju sądów powszechnych — Dz.U. 2024 poz. 334 ze zm. | DR-01 / `mod-USP-ustroj-sadow-powszechnych` | 🟢 B+ / COV — aktywne działy ustawy zmapowane; uwzględniono Dz.U. 2026 poz. 370 |
+| Siedziby i obszary sądów powszechnych — t.j. Dz.U. 2026 poz. 492 | `mod-wlasciwosc-miejscowa-sadow-powszechnych` | 🟢 — § 1–3 w całości (11 SA, 47 SO, 319 SR, zakres spraw, 9 miast dzielonych); kontrola z PRG 2026-10-17 |
 | Prawo o prokuraturze — Dz.U. 2026 poz. 810 | `mod-PrProkuratura-organy-ochrony-prawa` | 🟢 B+ / COV — ustrój, status, dyscyplinarne, routing proceduralny i EPPO zmapowane z aktualnego ELI 2026-08-28 |
 | sędziowie / referendarze / kuratorzy | `mod-ustawa-sedziowie-referendarze-kuratorzy` | 🟡 |
 | KSCU — Dz.U. 2025 poz. 1228 | `mod-KSCU-koszty-sadowe-i-pomoc-prawna` | 🟢 B+ / COV — opłaty, wydatki, zwolnienie i routing kosztowy zmapowane; kwoty wyłącznie fresh gate |
