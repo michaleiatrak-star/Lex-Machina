@@ -169,8 +169,8 @@ TYP PODSTAWOWY (art. 217a §1, przepis z 2011 r., BEZ zmian w 2025):
   to KLUCZOWE wzmocnienie ochrony w porównaniu do "zwykłego" art. 217
 
 ⭐ NOWY TYP KWALIFIKOWANY (art. 217a §2, DODANY ustawą z 7.11.2025,
-Dz.U. 2025 poz. 1818, w życie 14 dni od ogłoszenia — czyli grudzień
-2025): jeżeli sprawca czynu z §1 NARAŻA pokrzywdzonego na BEZPOŚREDNIE
+Dz.U. 2025 poz. 1818, ogł. 18.12.2025, w życie 2.01.2026 — art. 5
+ustawy 1818 ✅ [VER: ELI DU/2025/1818 text.pdf, RZĄD 1, 2026-10-20]): jeżeli sprawca czynu z §1 NARAŻA pokrzywdzonego na BEZPOŚREDNIE
 NIEBEZPIECZEŃSTWO utraty ŻYCIA albo CIĘŻKIEGO USZCZERBKU na zdrowiu →
 podlega karze pozbawienia wolności OD 3 MIESIĘCY DO 5 LAT
 

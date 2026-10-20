@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.69"
+version: "6.70"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.69 (2026-10-20, AUDYT-2026-10-20d): ROUTING-MAP: wiersze nowych modułów (KZN 1299, SIOZ 1304, obszary morskie 1305, przedsiębiorcy zagraniczni 1313, umowa PL–Japonia 1326), rozp. VAT 2023/2670 (13 nowelizacji, ostatnia 1288); 1354 odczytana (PCC 3000 zł od 3.11.2026, PIT, u.p.o.l.); 1358 odczytana (kąpieliska)
+  Wersja bieżąca: 6.70 (2026-10-20, AUDYT-2026-10-20e): ROUTING-MAP: KOREKTA dat 1872 (bez 03.06.2026) i zakres zmian (KPK 295 § 1a, KPW, u.w.r.n.); 1818 — pełny zakres i data 2.01.2026
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
   6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
   6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).

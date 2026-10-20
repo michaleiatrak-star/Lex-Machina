@@ -7,8 +7,8 @@
 |---|---|---|---|
 | Prawo o ruchu drogowym (PRD) | Dz.U. 2024 poz. 1251 t.j. ze zm. | ze zm. po t.j. (ELI 2026-10-09): Dz.U. 2025 poz. 820, 1006, 1676, 1734, 1843, 1872, Dz.U. 2026 poz. 180, 982; zapowiedź Dz.U. 2026 poz. 875 (01.01.2027), 1073 (11.05.2027) | Weryfikuj aktualny t.j. i brzmienie art. — ELI (RZĄD 1) |
 | Ustawa o kierujących pojazdami (u.k.p.) | Dz.U. 2025 poz. 1226 t.j. ze zm. | ze zm. po t.j. (ELI 2026-10-09): Dz.U. 2025 poz. 1676, 1872, Dz.U. 2026 poz. 180, 982; zapowiedź Dz.U. 2026 poz. 187 (19.05.2028) | Aktualny t.j. i brzmienie art. — weryfikuj ELI |
-| Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat, cofnięcie za jazdę po zatrzymaniu |
-| Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
+| Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | Ogł. 2.12.2025; zasadniczo od 3.03.2026 (w tym okres próbny art. 91–92 u.k.p.); część od 3.12.2025, 17.12.2025, 3.06.2026 i 3.09.2026 (art. 22) ✅ [VER: ELI DU/2025/1676 text.pdf, RZĄD 1, 2026-10-20] | Prawo jazdy od 17 lat, cofnięcie za jazdę po zatrzymaniu |
+| Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026; PRD art. 60 ust. 5, 135, 135a i u.k.p. art. 102 od 30.03.2026 (art. 9) ✅ [VER: ELI DU/2025/1872 text.pdf, RZĄD 1, 2026-10-20] | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Rozp. MSWiA ws. ewidencji kierujących | Dz.U. 2026 poz. 724 (nowe) | W życie 03.06.2026 | **ZASTĄPIONE**: Dz.U. 2023 poz. 1897 ze zm. Dz.U. 2026 poz. 144 → nowe rozporządzenie 29.05.2026 |
 | KK (art. 178a, 180a, 115 §26) | Dz.U. 2026 poz. 1342 t.j. | t.j. obejmuje Dz.U. 2025 poz. 1872; brak zmian po t.j. | Nowe przestępstwa drogowe od 29.01.2026; szczegóły: `mod-PRD-nowe-przestepstwa-drogowe-BRD` |
 | KW (art. 86c — drift, wyścigi) | Dz.U. 2025 poz. 734 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
@@ -132,29 +132,34 @@ NOWY OKRES PRÓBNY od 03.03.2026 (pj od 17 lat — Dz.U. 2025 poz. 1676):
     (ukończone 25 lat, ≥5 lat pj, brak zakazu, trzeźwość)
   → Każde poważne naruszenie → możliwość wydłużenia okresu próbnego lub cofnięcia
 
-⚠️ DODANE 2026-07-27 (FAZA 3E/ZASADA 14, NA ŻĄDANIE UŻYTKOWNIKA) —
-OGÓLNY SYSTEM OKRESU PRÓBNEGO od 3 WRZEŚNIA 2026 (Dz.U. 2025 poz.
-1872, ustawa z 4.12.2025) — TERMIN BARDZO BLISKI (ok. 5 tygodni od
-dnia audytu), DOTYCZY WSZYSTKICH nowych kierowców kat. B po raz
-pierwszy, NIE TYLKO 17-latków opisanych wyżej (który to system z
-03.03.2026 dotyczy WYŁĄCZNIE wcześniejszego dostępu do prawa jazdy
-od 17 lat — te dwa systemy WSPÓŁISTNIEJĄ, nie zastępują się nawzajem):
-  → Czas trwania: STANDARDOWO 2 lata; dla osób, które uzyskały
-    uprawnienia od 17. roku życia — do 3 lat, ale NIE DŁUŻEJ niż do
-    ukończenia 20. roku życia
-  → Limit 12 PUNKTÓW KARNYCH w okresie próbnym → OBOWIĄZKOWY kurs
-    dokształcający (1 GODZINA, cena SZTYWNA 300 zł) w terminie 12
-    MIESIĘCY od dnia przekroczenia limitu
-  → Poważniejsze naruszenia w okresie próbnym → STAROSTA MOŻE
-    WYDŁUŻYĆ okres próbny o kolejne 2 lata; jeśli kierowca NADAL nie
-    przestrzega przepisów → STAROSTA MOŻE COFNĄĆ uprawnienia w całości
-  → Osoby, które uzyskają prawo jazdy NAJPÓŹNIEJ 2 WRZEŚNIA 2026 r. —
-    NIE zostaną objęte tym systemem (przepis działa na przyszłość)
-  → Dodatkowo od 3.09.2026: podmiot wykonujący przewóz drogowy może
-    zatrudnić kierowcę 18+ z kwalifikacją wstępną do przewozu osób
-    (kat. D/D+E na liniach regularnych do 50 km, D1/D1+E)
-  Potwierdzone w 6+ zgodnych źródłach (gov.pl/mswia [Rząd 1],
-  otomoto.pl, autocentrum.pl, pwkancelaria.pl, informacje.wp.pl)
+⛔ KOREKTA 2026-10-20: poprzednia wersja tego fragmentu przypisywała okres
+próbny ustawie Dz.U. 2025 poz. 1872 i datowała go na 3.09.2026 — OBA BŁĘDNE.
+Źródło: ustawa z 17.10.2025 (BRD I), Dz.U. 2025 poz. 1676, art. 4 pkt 20
+(nowe art. 91–92 u.k.p.), w życie po 3 miesiącach od ogłoszenia (ogł. 2.12.2025)
+→ od 3.03.2026 (art. 22 ustawy 1676).
+✅ [VER: ELI DU/2025/1676 text.pdf, RZĄD 1, 2026-10-20]
+
+OKRES PRÓBNY — art. 91–92 u.k.p. (od 3.03.2026):
+  → Pierwsze prawo jazdy kat. B: 2 lata (osoba 18+) albo 3 lata (prawo jazdy
+    z art. 8a — 17-latek), ale nie dłużej niż do ukończenia 20 lat; liczony od
+    wydania dokumentu, przy tymczasowym e-PJ — od zdanego egzaminu (art. 91 ust. 1–2)
+  → W okresie próbnym: 0,0 ‰ alkoholu / środka działającego podobnie (ust. 4);
+    kierujący <18 lat: bez przewozu osób <18 lat bez pasażera z art. 8a ust. 2, bez
+    transportu drogowego rzeczy, taksówki i przewozu okazjonalnego (ust. 5)
+  → Przekroczenie 12 PUNKTÓW w okresie próbnym → obowiązkowe PRAKTYCZNE SZKOLENIE
+    w zakresie zagrożeń w ruchu drogowym przed upływem 12 miesięcy od naruszenia
+    (ust. 6); gdy rozstrzygnięcie uprawomocniło się po 9 miesiącach — 3 miesiące od
+    uprawomocnienia (ust. 7). Opłata za szkolenie — rozporządzenie (nie ustawa)
+  → Dwa wykroczenia przeciwko bezpieczeństwu w komunikacji (katalog art. 92 ust. 5)
+    stwierdzone prawomocnie → decyzja starosty: przedłużenie okresu próbnego o 2 lata
+    albo uzupełniający okres próbny 2 lata (art. 92 ust. 1)
+  → Cofnięcie uprawnień kat. B w okresie próbnym kończy okres próbny (art. 91 ust. 3a)
+  → Intertemporalnie: do osób, które uzyskały uprawnienia przed 3.03.2026 —
+    przepisy dotychczasowe (art. 16 ustawy 1676); postępowania w sprawie zatrzymania
+    PJ/cofnięcia uprawnień wszczęte przed tą datą — przepisy dotychczasowe (art. 14)
+  → [NIEWERYFIKOWANE] wcześniejsze twierdzenia o „1 godzinie / 300 zł” i o
+    zatrudnianiu kierowców 18+ kat. D od 3.09.2026 — nie wynikają z art. 91–92 u.k.p.;
+    przed użyciem sprawdź w ELI (ustawa o transporcie drogowym po zm. 1676, art. 3)
 
 Weryfikuj aktualne limity: web_search "limit punktów karnych 2026 art 98a ukp"
 ```
@@ -227,7 +232,9 @@ PODSTAWY ZATRZYMANIA — najważniejsze (weryfikuj aktualną listę w ELI (RZĄD
   □ Przekroczenie prędkości o >50 km/h poza terenem zabudowanym (jednojezdniowe,
     dwukierunkowe — od 03.03.2026, NIE autostrady/ekspresowe)
   □ Przekroczenie limitu 24 punktów karnych
-  □ Drift/wyścig — od 30.03.2026 (Dz.U. 2025 poz. 1872)
+  □ Kierowanie w sposób z art. 60 ust. 5 PRD (celowy poślizg kół — drift; celowa utrata
+    styczności koła z nawierzchnią; nie dot. osi podnoszonych N2, N3, M3) — art. 135 ust. 1
+    pkt 2 lit. c PRD, od 30.03.2026 (Dz.U. 2025 poz. 1872); ⛔ sam „wyścig” nie jest tu podstawą
   □ Brak dokumentu (pj) — ale od 03.03.2026 mObywatel = ważne pj w PL
 
 SKUTEK: pokwitowanie → zakaz prowadzenia
@@ -241,8 +248,14 @@ Weryfikuj: ELI (RZĄD 1) → PRD → art. 135 (aktualne brzmienie)
 
 ```
 PODSTAWY (art. 102 ust. 1 u.k.p. — weryfikuj w ELI (RZĄD 1)):
-  → Przekroczenie limitu 24/20 pkt → starosta MUSI wydać decyzję
   → Niezdolność medyczna (lekarz lub psycholog)
+  → pkt 9 (od 30.03.2026, Dz.U. 2025 poz. 1872 art. 6): kierujący celowo kierował
+    pojazdem silnikowym lub motorowerem w sposób powodujący poślizg kół (drift) lub
+    utratę styczności z nawierzchnią chociażby jednego koła (bez osi podnoszonych N2,
+    N3, M3) → decyzja o zatrzymaniu PJ na 3 miesiące (ust. 1c)
+  → ⚠️ Przekroczenie limitu punktów — sprawdź podstawę w ELI: art. 102 ust. 1 u.k.p.
+    (t.j. 2025/1226) nie wymienia punktów jako przesłanki; skutki punktów reguluje
+    odrębny przepis u.k.p. — nie powołuj art. 102 bez odczytu
   → Inne — weryfikuj aktualną listę w ELI (RZĄD 1)
 
 TRYB i ODWOŁANIE:

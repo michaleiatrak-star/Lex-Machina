@@ -185,7 +185,9 @@ ART. 86c KW (NOWY — od 29.01.2026) — CELOWY DRIFT / POŚLIZG:
   → Kara: grzywna nie niższa niż 1 500 zł (§ 1); gdy następstwem jest zagrożenie
     bezpieczeństwa w ruchu drogowym — nie niższa niż 2 500 zł (§ 2); górna granica
     30 000 zł (art. 24 § 1a — od 29.01.2026). ✅ [VER: ELI RZĄD 1 — DU/2025/734 (t.j. KW) text.pdf + DU/2025/1872 text.pdf (art. 1; wejście w życie art. 9: 30 dni od ogłoszenia 29.12.2025 → 29.01.2026, ELI entryIntoForce 2026-01-29); odczyt 2026-10-04]
-  → Od 30.03.2026: ZATRZYMANIE PJ na 3 miesiące (administracyjne — niezależnie od wypadku)
+  → Od 30.03.2026: ZATRZYMANIE PJ na 3 miesiące — art. 135 ust. 1 pkt 2 lit. c PRD (Policja)
+    i art. 102 ust. 1 pkt 9 u.k.p. (decyzja starosty), przy kierowaniu w sposób z art. 60
+    ust. 5 PRD (drift / celowa utrata styczności koła; bez osi podnoszonych N2, N3, M3)
   ⚠️ KLUCZOWY ELEMENT ZNAMION: CELOWOŚĆ — niezamierzony poślizg ≠ wykroczenie z art. 86c
 
 ORGANIZOWANIE SPOTKAŃ MOTORYZACYJNYCH BEZ ZGŁOSZENIA:
@@ -195,6 +197,31 @@ ORGANIZOWANIE SPOTKAŃ MOTORYZACYJNYCH BEZ ZGŁOSZENIA:
     niż 2 000 zł (§ 1); umyślny uczestnik — grzywna (§ 2); nie-kierujący uczestnik
     nielegalnego wyścigu i widz — ta sama kara (§ 3–4). Poprzedni zapis „grzywna do
     2 000 zł (organizator i uczestnicy)” był błędny. ✅ [VER: ELI RZĄD 1 — DU/2025/734 (t.j. KW) text.pdf + DU/2025/1872 text.pdf (art. 1; wejście w życie art. 9: 30 dni od ogłoszenia 29.12.2025 → 29.01.2026, ELI entryIntoForce 2026-01-29); odczyt 2026-10-04]
+
+ART. 90 KW — TAMOWANIE / UTRUDNIANIE RUCHU (nowe brzmienie od 29.01.2026):
+  § 1 kto tamuje lub utrudnia ruch na drodze publicznej, w strefie zamieszkania lub
+      ruchu → ograniczenie wolności albo grzywna
+  § 2 sprawcą jest prowadzący pojazd mechaniczny → ograniczenie wolności albo grzywna
+      NIE NIŻSZA niż 500 zł
+  § 3 sprawcą jest uczestnik spotkania z art. 65ja PRD bez wymaganego zawiadomienia →
+      grzywna NIE NIŻSZA niż 1 000 zł
+  § 4 przy poważnym zakłóceniu ruchu (§ 1–3) — nawiązka do 1 500 zł na cel społeczny
+  ⛔ Do czynów sprzed 29.01.2026 — dawne brzmienie art. 90 (art. 2 § 1 KW)
+
+ART. 96 KW (zm. od 29.01.2026): § 1 — kara ograniczenia wolności albo grzywny NIE NIŻSZEJ
+  niż 1 000 zł (było: grzywna); § 3 — niewskazanie na żądanie organu, komu powierzono
+  pojazd do kierowania lub używania w oznaczonym czasie → grzywna (nowe brzmienie)
+
+RECYDYWA DROGOWA — art. 38 § 2 KW (nowe brzmienie): kierujący ukarany za art. 86 § 1a i 2,
+  86b § 1, 86c, 87 § 1, 92 § 2, 92a § 2, 92b, 94 § 1 albo 97a, który w ciągu 2 lat od
+  ostatniego prawomocnego ukarania popełnia to samo wykroczenie → grzywna nie niższa niż
+  dwukrotność dolnej granicy ustawowego zagrożenia
+
+KPW (art. 5 ustawy 1872, od 29.01.2026): art. 45 § 1 — prawo zatrzymania także dla Straży
+  Granicznej; art. 96 § 1e — mandat za art. 52aa § 1 KW do 5 000 zł; art. 98 § 6 — na
+  wniosek pokrzywdzonego zawiadamia się go o prawomocnym mandacie i prawie dostępu do
+  informacji będących podstawą ukarania
+  ✅ [VER: ELI DU/2025/1872 text.pdf (art. 1 pkt 2, 5, 6; art. 5), RZĄD 1, 2026-10-20]
 
 TARYFIKATOR MANDATÓW — AKTUALIZACJA:
   → Mandaty: rozp. PRM z 24.11.2003 (t.j. Dz.U. 2013 poz. 1624, ostatnia zmiana Dz.U. 2023

@@ -6,7 +6,7 @@
 
 | Akt | Dz.U. | Status | Uwaga |
 |---|---|---|---|
-| Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
+| Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026; art. 4 pkt 1, 3, 4 (PRD art. 60 ust. 5, 135, 135a) i art. 6 (u.k.p. art. 102) od 30.03.2026 (art. 9) ✅ [VER: ELI DU/2025/1872 text.pdf, RZĄD 1, 2026-10-20]; ⛔ KOREKTA: data „03.06.2026” nie pochodzi z tej ustawy | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat |
 | KK (art. 42, 43a, 44b, 69 §4, 115 §26, 177 §2a, 178, 178c, 178d) | Dz.U. 2026 poz. 1342 t.j. | t.j. obejmuje Dz.U. 2025 poz. 1872; brak zmian po t.j. | Nowe przestępstwa drogowe od 29.01.2026; brzmienie poniżej z t.j. ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20] |
 | KW (art. 86c — drift, wyścigi) | Dz.U. 2025 poz. 734 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
@@ -62,11 +62,17 @@ OD 29.01.2026 — NOWE PRZESTĘPSTWA KK i WYKROCZENIA KW (brzmienie KK z t.j. 13
     w nielegalnym wyścigu, w warunkach art. 178d albo w czasie obowiązywania zakazu
     prowadzenia pojazdów (art. 39 pkt 3) — od roku do lat 10.
   → Art. 86c KW (NOWY) — celowe driftowanie:
-    "Celowe wprowadzenie pojazdu w poślizg lub utrata styczności choćby jednego koła
-     z nawierzchnią" na drodze publicznej, strefie ruchu/zamieszkania
-    → Grzywna min. 1 500 zł
+    § 1: prowadzenie pojazdu mechanicznego na drodze publicznej, w strefie zamieszkania
+    lub ruchu z celowym wprowadzeniem w poślizg albo utratą styczności z nawierzchnią
+    chociażby jednego koła → grzywna NIE NIŻSZA niż 1 500 zł
+    § 2: gdy następstwem jest zagrożenie bezpieczeństwa w ruchu drogowym → grzywna
+    NIE NIŻSZA niż 2 500 zł; recydywa (art. 38 § 2 KW, w ciągu 2 lat) — co najmniej
+    dwukrotność dolnej granicy; art. 86c objęty art. 24 § 1a KW
   → Organizowanie nielegalnych spotkań motoryzacyjnych (≥10 pojazdów bez zgłoszenia):
-    → art. 52aa KW (od 29.01.2026): organizator/przewodniczący — ograniczenie wolności albo grzywna NIE NIŻSZA niż 2 000 zł; umyślny uczestnik — grzywna (korekta AUDYT-2026-10-04c; ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3, odczyt 2026-10-04])
+    → obowiązek zawiadomienia organu gminy: art. 65ja PRD (spotkanie >10 pojazdów;
+      odpowiednio rozdz. 2 Prawa o zgromadzeniach)
+    → art. 52aa KW (od 29.01.2026): § 1 organizator/przewodniczący — ograniczenie wolności albo grzywna NIE NIŻSZA niż 2 000 zł (mandat do 5 000 zł — art. 96 § 1e KPW); § 2 umyślny uczestnik — grzywna; § 3 nie-kierujący umyślny uczestnik nielegalnego wyścigu (art. 115 § 26 KK) — grzywna; § 4 widz spotkania bez zawiadomienia lub nielegalnego wyścigu — grzywna ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3 i art. 5 pkt 2, RZĄD 1, 2026-10-20]
+    → art. 90 § 3 KW: tamowanie ruchu przez uczestnika takiego spotkania — grzywna ≥1 000 zł
   → Przepadek pojazdu (art. 44b KK): fakultatywny (§1) przy art. 178a §1 lub 4, 178c §1 pkt 2,
     178d, 244 (niezastosowanie się do zakazu) i wobec sprawcy z art. 178 §1 lub 1a;
     OBLIGATORYJNY (§1a) przy art. 178a §1 lub 4, 178c §1 pkt 2, 178d i sprawcy z art. 178
@@ -76,10 +82,16 @@ OD 29.01.2026 — NOWE PRZESTĘPSTWA KK i WYKROCZENIA KW (brzmienie KK z t.j. 13
     §6: wtedy nawiązka 5 000–500 000 zł (obligatoryjna przy §5 pkt 1, fakultatywna przy pkt 2).
   → Dożywotni zakaz prowadzenia pojazdów: art. 42 §3 i §4 KK (sekcja 1).
 
-OD 30.03.2026 — ZATRZYMANIE PJ:
-  → Administracyjne zatrzymanie PJ na 3 miesiące za drift/wyścig/jazdę na jednym kole
-    (niezależnie od tego czy doszło do wypadku)
-  → Weryfikuj: web_search "zatrzymanie prawa jazdy drift 2026 art 135 PRD"
+OD 30.03.2026 — ZATRZYMANIE PJ (art. 9 ustawy 1872):
+  → Podstawa: kierowanie w sposób z art. 60 ust. 5 PRD — (1) celowy poślizg kół (drift),
+    (2) celowa utrata styczności z nawierzchnią chociażby jednego koła; ⛔ nie dotyczy kół
+    na osiach podnoszonych w pojazdach N2, N3 i M3
+  → Policja zatrzymuje PJ: art. 135 ust. 1 pkt 2 lit. c i art. 135a ust. 1 pkt 2 lit. c PRD
+  → Starosta wydaje decyzję o zatrzymaniu na 3 miesiące: art. 102 ust. 1 pkt 9 u.k.p.
+    (odesłania w ust. 1b, 1c, 1e, 2b, 3 rozszerzone o pkt 9)
+  → ⛔ KOREKTA: sam „wyścig” NIE jest odrębną podstawą zatrzymania PJ z tych przepisów —
+    nielegalny wyścig to przestępstwo z art. 178c KK (środki karne z KK)
+  ✅ [VER: ELI DU/2025/1872 art. 4 pkt 1, 3, 4 i art. 6, RZĄD 1, 2026-10-20]
 ```
 
 ---
@@ -159,16 +171,38 @@ NIELEGALNE WYŚCIGI — art. 115 §26 (definicja) i art. 178c KK:
 DRIFT I CELOWY POŚLIZG (art. 86c KW — nowy):
   → "Celowe wprowadzenie pojazdu w poślizg lub utrata styczności ≥1 koła z nawierzchnią"
   → Na drodze publicznej, strefie ruchu/zamieszkania
-  → Kara: grzywna min. 1 500 zł + od 30.03.2026: zatrzymanie pj 3 miesiące
+  → Kara: grzywna min. 1 500 zł (§ 1), min. 2 500 zł przy zagrożeniu bezpieczeństwa (§ 2)
+    + od 30.03.2026: zatrzymanie PJ na 3 miesiące (art. 102 ust. 1 pkt 9 u.k.p.)
 
 SPOTY I ZLOTY BEZ ZGŁOSZENIA (≥10 pojazdów):
   → Obowiązek zgłoszenia organowi gminy
-  → Brak zgłoszenia: art. 52aa KW (od 29.01.2026): organizator/przewodniczący — ograniczenie wolności albo grzywna NIE NIŻSZA niż 2 000 zł; umyślny uczestnik — grzywna (korekta AUDYT-2026-10-04c; ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3, odczyt 2026-10-04])
+  → Podstawa obowiązku: art. 65ja PRD
+  → Brak zgłoszenia: art. 52aa KW (od 29.01.2026) — § 1 organizator/przewodniczący: ograniczenie wolności albo grzywna ≥2 000 zł; § 2 umyślny uczestnik, § 3 nie-kierujący uczestnik nielegalnego wyścigu, § 4 widz: grzywna ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3, RZĄD 1, 2026-10-20]
 
 PRZEPADEK POJAZDU — art. 44b KK (szczegóły w alercie wyżej):
   → §1a: alkohol ≥1,5‰ / 0,75 mg/dm³ — obligatoryjnie (wyjątkowy wypadek wyłącza)
   → §5–§6: pojazd nie wyłącznie sprawcy albo przepadek niemożliwy — nawiązka 5 000–500 000 zł
-  → Weryfikuj art. KKW dotyczące wykonania
+  → TYMCZASOWE ZAJĘCIE POJAZDU (art. 295 § 1a KPK w brzm. art. 3 ustawy 1872, od
+    29.01.2026): Policja zajmuje pojazd prowadzony przez sprawcę WYŁĄCZNIE gdy za
+    przestępstwo orzeka się przepadek z art. 44b § 1a KK (≥1,5‰ / 0,75 mg/dm³);
+    w pozostałych przypadkach — tylko na zasadach ogólnych art. 295 § 1 KPK
+  → Art. 8 ustawy 1872: zajęcia dokonane na podstawie dawnego art. 295 § 1a wobec sprawcy
+    z 1–1,5‰ (0,5–0,75 mg/dm³) UPADŁY z mocy prawa 29.01.2026; pojazd zwraca się
+    uprawnionemu, chyba że Policja zajmie go na podstawie art. 295 § 1 KPK
+  ✅ [VER: ELI DU/2025/1872 art. 3 i 8, RZĄD 1, 2026-10-20]
+
+PRAWO INTERTEMPORALNE — CZYNY SPRZED 29.01.2026 (art. 4 § 1 KK):
+  → STARE: przepadek obligatoryjny przy art. 178 § 1/1a, gdy alkohol >1‰ (dawny art. 178
+    § 3), i przy art. 178a § 1 lub 4, chyba że <1,5‰ (dawny art. 178a § 5); przepadek
+    RÓWNOWARTOŚCI pojazdu (dawny art. 44b § 2–4; nawiązka ≥5 000 zł przy pojeździe
+    służbowym — § 4)
+  → NOWE: przepadek obligatoryjny dopiero od 1,5‰ (art. 44b § 1a), poniżej — fakultatywny
+    (§ 1); zamiast równowartości — nawiązka 5 000–500 000 zł (§ 6); art. 178a § 5 uchylony
+  → Sąd stosuje ustawę względniejszą jako całość, in concreto; nowych typów i surowszych
+    instytucji (art. 177 § 2a, 178c, 178d, art. 42 § 1a, art. 69 § 4 pkt 3) NIE stosuje się
+    do czynów sprzed 29.01.2026
+  ✅ [VER: ELI DU/2025/383 (t.j. KK sprzed zmiany) art. 44b, 178 § 3, 178a § 5 i DU/2026/1342
+     art. 44b, RZĄD 1, 2026-10-20]
 
 ZAKAZ DOŻYWOTNI I NOWY OBOWIĄZKOWY ZAKAZ:
   → Pełne, zweryfikowane warunki — patrz sekcja 1 wyżej (art. 42 §1a i §3 KK)

@@ -71,9 +71,13 @@ grzywna (20-5000 zł, chyba że przepis szczególny stanowi inaczej).
 
 Jeśli czyn ma CHARAKTER CHULIGAŃSKI, LUB sprawca działał pod wpływem
 alkoholu/środka odurzającego/podobnie działającej substancji →
-grzywna NIE NIŻSZA niż **1000 zł** (podwyższone minimum, bez górnego
-ograniczenia w tym przepisie — sąd ustala w granicach ogólnych grzywny
-za wykroczenia).
+**kara aresztu, ograniczenia wolności albo grzywny nie niższej niż
+1000 złotych** (art. 51 § 2 KW w brzm. art. 2 pkt 1 ustawy z 7.11.2025,
+Dz.U. 2025 poz. 1818, od 2.01.2026) ✅ [VER: ELI DU/2025/1818 text.pdf,
+RZĄD 1, 2026-10-20]. Minimum 1000 zł dotyczy tylko grzywny — areszt
+i ograniczenie wolności pozostają. ⛔ Do czynów sprzed 2.01.2026 —
+dawne brzmienie bez minimum (art. 2 § 1 KW: ustawa względniejsza).
+Mandat: grzywna 1000 zł (art. 96 § 1ag KPW, od 2.01.2026).
 
 **Definicja charakteru chuligańskiego (przeniesiona z ogólnej definicji
 KW/KK):** wykroczenie polegające na umyślnym godzeniu w porządek/spokój
@@ -93,17 +97,20 @@ przez to rażące lekceważenie podstawowych zasad porządku prawnego.
 powodu" — jeśli sprawca miał choćby subiektywnie racjonalny powód
 (nawet błędny), charakter chuligański może nie zostać przypisany.
 
-### Rozszerzenie ochronne §2a (przepis stosunkowo nowy)
+### Rozszerzenie ochronne §2a (dodany ustawą Dz.U. 2025 poz. 1818, od 2.01.2026)
 
-Ta sama podwyższona kara (grzywna ≥1000 zł) za czyn z §1 popełniony:
+Ta sama kara co w § 2 (areszt, ograniczenie wolności albo grzywna ≥1000 zł)
+za czyn z §1 popełniony:
 w ZAKŁADZIE LECZNICZYM (w rozumieniu ustawy o działalności leczniczej),
 W TRAKCIE AKCJI MEDYCZNEJ (Państwowe Ratownictwo Medyczne), lub w SIEDZIBIE
 ORGANU ADMINISTRACJI RZĄDOWEJ/PAŃSTWOWEGO/SAMORZĄDU TERYTORIALNEGO —
 odzwierciedla wzmożoną ochronę personelu medycznego i urzędów po
 głośnych przypadkach agresji wobec ratowników/lekarzy.
+Postępowanie przyspieszone stosuje się także do sprawców z § 2a (art. 90
+§ 2a KPW w brzm. art. 3 pkt 1 ustawy 1818).
 
-### Podżeganie i pomocnictwo (§3, wg starszej numeracji — ⚠️ zweryfikuj
-aktualne oznaczenie paragrafu) — KARALNE, inaczej niż przy wielu
+### Podżeganie i pomocnictwo (§3: „Podżeganie i pomocnictwo są karalne.”
+— numeracja bez zmian po ustawie 1818) — KARALNE, inaczej niż przy wielu
 wykroczeniach.
 
 ### Praktyczne stanowisko władz (odpowiedź na interpelację poselską)
@@ -200,7 +207,7 @@ START: Czy zachowanie dotyczy hałasu/krzyku/alarmu/zgorszenia w miejscu
 ├─ TAK → art. 51 §1 → KROK 2: czy sprawca był pod wpływem alkoholu/
 │        środka odurzającego, LUB czyn ma charakter chuligański
 │        (publicznie + bez powodu/z błahego powodu)?
-│        TAK → §2, grzywna ≥1000 zł, wyklucz naganę, brak zawieszenia
+│        TAK → §2, areszt/ogr. wolności/grzywna ≥1000 zł, wyklucz naganę, brak zawieszenia
 │              aresztu, możliwa nawiązka
 │        NIE → §1, kara w zwykłych granicach
 │        DODATKOWO: czy miejsce to zakład leczniczy/akcja medyczna/

@@ -76,7 +76,7 @@ Przy przeszukaniu wykonaj dodatkowy gate KPK, ponieważ KPW odsyła do określon
 
 ## 8. Dział VI — środki przymusu
 
-Dział obejmuje m.in. zatrzymanie. Art. 45 określa przesłanki zatrzymania osoby ujętej na gorącym uczynku lub bezpośrednio potem. Art. 46 reguluje obowiązek poinformowania zatrzymanego o przyczynach i prawach oraz sporządzenie protokołu.
+Dział obejmuje m.in. zatrzymanie. Art. 45 określa przesłanki zatrzymania osoby ujętej na gorącym uczynku lub bezpośrednio potem. Od 29.01.2026 prawo zatrzymania mają Policja i Straż Graniczna (art. 45 § 1 w brzm. art. 5 pkt 1 ustawy Dz.U. 2025 poz. 1872). Art. 46 reguluje obowiązek poinformowania zatrzymanego o przyczynach i prawach oraz sporządzenie protokołu.
 
 Przy każdym zatrzymaniu ustal:
 - konkretną ustawową przesłankę;
@@ -104,6 +104,11 @@ KPW przewiduje m.in. postępowanie przyspieszone oraz inne szczególne tryby, w 
 Art. 89 nakazuje w postępowaniu przyspieszonym stosować przepisy postępowania zwyczajnego, jeżeli przepisy szczególne nie stanowią inaczej.
 
 **Gate:** nie wybieraj trybu przyspieszonego tylko dlatego, że czyn został ujawniony na gorącym uczynku. Sprawdź aktualne przesłanki z art. 90 i dalszych.
+
+Art. 90 § 2a (brzmienie od 2.01.2026, art. 3 pkt 1 ustawy Dz.U. 2025 poz. 1818): postępowanie przyspieszone stosuje się także wobec sprawców wykroczeń z art. 51 § 2a oraz art. 66b KW.
+
+Mandat — zmiany 2026: art. 96 § 1ag (od 2.01.2026) — za art. 51 § 2 lub § 2a KW grzywna mandatowa 1000 zł; art. 96 § 1e (od 29.01.2026) — za art. 52aa § 1 KW do 5000 zł; art. 98 § 6 (od 29.01.2026) — na wniosek pokrzywdzonego zawiadamia się go o prawomocnym mandacie i prawie dostępu do informacji będących podstawą ukarania.
+✅ [VER: ELI DU/2025/1818 text.pdf (art. 3) i DU/2025/1872 text.pdf (art. 5), RZĄD 1, 2026-10-20]
 
 ## 12. Dział X — środki odwoławcze
 
