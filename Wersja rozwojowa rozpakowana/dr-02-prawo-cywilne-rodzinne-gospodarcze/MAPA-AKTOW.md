@@ -11,7 +11,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Zakres | Moduł / routing | Status runtime |
 |---|---|---|
-| KC — indeks current-state całego kodeksu | `mod-KC-current-state-COV.md` | 🟢 B+/COV |
+| KC — indeks current-state całego kodeksu; szkoda na osobie: odszkodowanie i zadośćuczynienie za krzywdę | `mod-KC-current-state-COV.md` | 🟢 B+/COV |
 | KC — zobowiązania / odpowiedzialność | `mod-KC-cywilne-zobowiazania-odpowiedzialnosc` | ✅ aktywny; fresh gate |
 | KC — konsumenckie | `mod-KC-konsumenckie` | ✅ aktywny; fresh gate |
 | KC — spadki, część główna | `mod-KC-spadki` | ✅ aktywny |
@@ -24,7 +24,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | KP art. 94³ — mobbing / dyskryminacja (routing przekrojowy) | `mod-KP-art943-mobbing-dyskryminacja` | ✅ aktywny; fresh gate |
 | KPC — indeks current-state całego kodeksu | `mod-KPC-current-state-COV.md` | 🟢 B+/COV |
 | KPC — art. 162, zastrzeżenie do protokołu | `mod-KPC-art162-zastrzezenie-protokol` | ✅ aktywny; fresh gate |
-| KPC — egzekucja / windykacja | `mod-KPC-egzekucja-windykacja` | ✅ aktywny |
+| KPC — egzekucja / windykacja; komornik: skarga na czynności komornika, zajęcie rachunku i wynagrodzenia | `mod-KPC-egzekucja-windykacja` | ✅ aktywny |
 | KPC — prawomocność / granice apelacji | `mod-KPC-prawomocnosc-granice-apelacji` | ✅ aktywny |
 | KPC — nieproces, część ogólna | `mod-KPC-nieproces-czesc-ogolna` | ✅ aktywny |
 | KPC — uzupełnienie pokrycia | `mod-KPC-uzupelnienie-pokrycia-2026` | 🟡 B+ |

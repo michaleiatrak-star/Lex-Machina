@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.102 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KPC egzekucja (skarga na czynności komornika), KC current-state (szkoda na osobie, zadośćuczynienie) - dobór modułu aktu
 - 3.101 (2026-10-20, LEXAGENTO-P1): MAPA-POKRYCIA: pełna ścieżka modułu UGN
 - 3.100 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.99 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-ustawa-przedsiebiorcy-zagraniczni-oddzialy-przedstawicielstwa (t.j. Dz.U. 2026 poz. 1313: art. 4, oddział art. 14–20, przedstawicielstwo art. 21–31); MAPA-AKTOW, SKILL.md (86 modułów)

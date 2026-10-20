@@ -6,7 +6,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Kodeks pracy — indeks całego aktu | Dz.U. 2026 poz. 1245 t.j. ze zm. | `mod-KP-current-state-COV.md` + `mod-KP-prawo-pracy` | 🟢 B+/COV; fresh gate |
+| Kodeks pracy — indeks całego aktu; rozwiązanie umowy o pracę: wypowiedzenie, zwolnienie dyscyplinarne (rozwiązanie bez wypowiedzenia), odwołanie do sądu pracy | Dz.U. 2026 poz. 1245 t.j. ze zm. | `mod-KP-current-state-COV.md` + `mod-KP-prawo-pracy` | 🟢 B+/COV; fresh gate |
 | KP — praca zdalna | jw. | `mod-KP-praca-zdalna` | ✅ aktywny |
 | KP — czas pracy | jw. | `mod-KP-dzial-VI-czas-pracy` | 🟢 B+/COV |
 | KP — urlopy pracownicze | jw. | `mod-KP-dzial-VII-urlopy-pracownicze` | 🟢 B+/COV |

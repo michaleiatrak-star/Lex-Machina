@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.8 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: PIT - odpłatne zbycie mieszkania/nieruchomości (wcześniej dobierało VAT/akcyzę)
 - 3.99.7 (2026-10-20, LEXAGENTO-P1): MAPA-POKRYCIA: pełna ścieżka modułu KKS
 - 3.99.6 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.99.5 (2026-10-20, AUDYT-2026-10-20f): MAPA-AKTOW: pełne nazwy aktów w etykietach — „Ustawa o podatku od czynności cywilnoprawnych (PCC)”, u.p.o.l. — opłata miejscowa / uzdrowiskowa / targowa; resolver aplikacji rozpoznaje akt z pytania (wcześniej brak modułu dla „podatku od czynności cywilnoprawnych” i „opłaty miejscowej”)

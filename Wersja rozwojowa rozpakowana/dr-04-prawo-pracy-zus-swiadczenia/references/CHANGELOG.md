@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.54 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KP - zwolnienie dyscyplinarne, wypowiedzenie, odwołanie do sądu pracy (wcześniej dobierało zwolnienia grupowe)
 - 3.53 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.52 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-umowa-PL-Japonia-zabezpieczenie-spoleczne (ratyfikacja Dz.U. 2026 poz. 1326; tekst Umowy z druku 2810; Umowa jeszcze nieobowiązująca — art. 31); MAPA-AKTOW, SKILL.md (44 moduły)
 - 3.51 (2026-10-17b, AUDYT-2026-10-17b): mod-ustawa-zwiazki-zawodowe-spory-zbiorowe i MAPA-AKTOW: ⏳ Dz.U. 2026 poz. 1340 (ustawa z 4.09.2026, ogł. 15.10.2026, w życie 30.10.2026) — ZZ art. 32 ust. 9¹ zd. 2, nowy art. 32¹; ustawa o informowaniu pracowników (Dz.U. 2006 poz. 550, bez t.j.) art. 5 ust. 1 pkt 1a–1b, art. 13 ust. 2–3. Tekst ustawy odczytany z ELI 2026-10-17.

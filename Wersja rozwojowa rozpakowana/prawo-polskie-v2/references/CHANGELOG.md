@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.71 (2026-10-20, LEXAGENTO-P2): routing błyskawiczny: skarga na komornika -> DR-02 (art. 767 KPC, DR-12 drugi); orzecznictwo SN / Sądu Najwyższego -> DR-16 jako druga dziedzina po sprawie
 - 6.70 (2026-10-20, AUDYT-2026-10-20e): ROUTING-MAP: KOREKTA dat 1872 (bez 03.06.2026) i zakres zmian (KPK 295 § 1a, KPW, u.w.r.n.); 1818 — pełny zakres i data 2.01.2026
 - 6.69 (2026-10-20, AUDYT-2026-10-20d): ROUTING-MAP: wiersze nowych modułów (KZN 1299, SIOZ 1304, obszary morskie 1305, przedsiębiorcy zagraniczni 1313, umowa PL–Japonia 1326), rozp. VAT 2023/2670 (13 nowelizacji, ostatnia 1288); 1354 odczytana (PCC 3000 zł od 3.11.2026, PIT, u.p.o.l.); 1358 odczytana (kąpieliska)
 - 6.68 (2026-10-20, AUDYT-2026-10-20c): ROUTING-MAP: DU/2026/1296 (u.ś.u.d.e. — KOREKTA: nowelizacja z 18.12.2025 nie weszła w życie, DSA wdraża 1296; PrAut, PWP, UOKiK), 1287 (podatki sektorowe, PIT, CIT), 1348 (MONITORING — treść), 1354 (u.p.o.l.), 1358 (Prawo wodne po t.j.).
