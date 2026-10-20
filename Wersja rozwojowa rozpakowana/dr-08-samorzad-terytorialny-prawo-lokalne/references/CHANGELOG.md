@@ -1,5 +1,6 @@
 # CHANGELOG — dr-08-samorzad-terytorialny-prawo-lokalne
 
+- 3.22 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.21 (2026-10-12b, AUDYT-2026-10-12b): mod-ustawa-zarzadzanie-kryzysowe: plany zarządzania kryzysowego po 2026/815 (plan zarządzania ryzykiem i plan reagowania kryzysowego, cykl do 3 lat, przepisy przejściowe art. 29); link źródłowy WDU20241194 (dozór techniczny) zastąpiony; mod-UDP: UPEA 2026/1311, UDP ze zm. 815, 982. ELI 2026-10-12.
 
 - 3.20 (2026-10-09g, AUDYT-2026-10-09g): Drogi publiczne: po t.j. 2025/889 także Dz.U. 2026 poz. 815 art. 2 (od 4.07.2026). ELI 2026-10-09.

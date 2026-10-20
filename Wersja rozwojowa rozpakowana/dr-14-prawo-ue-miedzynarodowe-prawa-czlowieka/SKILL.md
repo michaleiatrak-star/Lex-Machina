@@ -1,6 +1,6 @@
 ---
 name: dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
-version: "3.15"
+version: "3.16"
 description: "Prawo UE, międzynarodowe i prawa człowieka: prawo pierwotne i wtórne UE, TSUE, EKPC/ETPC, traktaty, kolizje jurysdykcji i standardy praw człowieka."
 dependencies:
   requires:
@@ -106,6 +106,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Prawo UE, międzynarodowe, prawa człowieka — definicje TFUE/TUE/KPP/EKPC mają charakter pierwotny (prawo traktatowe) i są pokryte wprost w modułach dziedzinowych (mod-KPP-karta-praw-podstawowych-UE, mod-EKPC-ETPC-prawa-czlowieka). Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
 
 ```

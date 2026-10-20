@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: "3.19"
+version: "3.20"
 description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 dependencies:
   requires:
@@ -80,6 +80,7 @@ Brak dedykowanych rekordów ORKA dla tej dziedziny (pojęcia konstytucyjne mają
 ugruntowane definicje doktrynalne, kazuistyka TK). Pomocniczo:
 - BAS-W31 Właściwość sądu — zasady ogólne (gdy sprawa dotyczy podziału władz/sądów)
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (15 łącznie — ✓ 15 OK, ☐ 0 STUB)
 
   [✓] OK    mod-KRS-current-state-COV

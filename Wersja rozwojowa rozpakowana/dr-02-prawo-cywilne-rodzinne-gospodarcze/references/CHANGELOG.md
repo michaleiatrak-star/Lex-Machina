@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.100 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.99 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-ustawa-przedsiebiorcy-zagraniczni-oddzialy-przedstawicielstwa (t.j. Dz.U. 2026 poz. 1313: art. 4, oddział art. 14–20, przedstawicielstwo art. 21–31); MAPA-AKTOW, SKILL.md (86 modułów)
 - 3.98 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1296: mod-KPC-current-state-COV (zmiany po t.j. 468, art. 17 pkt 4⁶ — sąd okręgowy w sprawach z art. 54 DSA), MAPA-AKTOW UOKiK (Prezes UOKiK organem DSA).
 

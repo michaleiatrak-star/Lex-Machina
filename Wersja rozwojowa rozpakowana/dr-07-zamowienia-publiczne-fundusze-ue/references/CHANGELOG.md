@@ -1,5 +1,6 @@
 # CHANGELOG — dr-07-zamowienia-publiczne-fundusze-ue
 
+- 3.17 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.16 (2026-10-20, AUDYT-2026-10-20b): MAPA-AKTOW: Pzp — DU/2026/1347 art. 6 (art. 214 ust. 1 pkt 10, art. 364 ust. 1 pkt 1 bez „świadectw pochodzenia biogazu rolniczego”) od 1.12.2026.
 
 - 3.15 (2026-10-09g, AUDYT-2026-10-09g): mod-ustawa-fundusze-UE-pomoc-publiczna: ustawa wdrożeniowa — t.j. 2025/1733 jest pierwszym t.j. (było „zastępuje t.j. 2024.1655” — rozp. MON); nowelizacje po t.j. 2025/1844, 2026/912.

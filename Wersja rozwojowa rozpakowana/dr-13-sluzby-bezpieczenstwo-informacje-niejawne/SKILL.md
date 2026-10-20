@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.18"
+version: "3.19"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 dependencies:
   requires:
@@ -77,6 +77,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-13:** dodano `mod-ustawa-SKW-SWW.md` — zamyka F-59:

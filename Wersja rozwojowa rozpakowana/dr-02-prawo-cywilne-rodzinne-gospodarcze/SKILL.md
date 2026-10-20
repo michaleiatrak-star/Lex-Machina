@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.99"
+version: "3.100"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -115,6 +115,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (86 łącznie — rejestracja w SKILL.md; głębokość w MAPA-POKRYCIA)
 
   [✓] OK    mod-KC-current-state-COV

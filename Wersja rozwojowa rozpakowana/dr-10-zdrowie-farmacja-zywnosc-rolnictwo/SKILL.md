@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.55"
+version: "3.56"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 dependencies:
   requires:
@@ -77,6 +77,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-13 (F-45, częściowa):** dodano formalne wpisy `[✓]`

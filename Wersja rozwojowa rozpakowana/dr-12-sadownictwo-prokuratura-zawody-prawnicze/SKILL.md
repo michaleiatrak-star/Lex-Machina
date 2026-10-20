@@ -1,6 +1,6 @@
 ---
 name: dr-12-sadownictwo-prokuratura-zawody-prawnicze
-version: "4.29"
+version: "4.30"
 description: "Sądownictwo, prokuratura i zawody prawnicze: ustrój sądów, prokuratura, adwokaci, radcowie, notariusze, komornicy, koszty i odpowiedzialność zawodowa."
 dependencies:
   requires:
@@ -260,6 +260,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W29 Pełnomocnik / obrońca z urzędu (art. 117 KPC / art. 78-81a KPK —
   obligatoryjny vs fakultatywny, kryteria ETPCz art. 6 §3 lit. c)
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (14 łącznie — ✓ 14 OK, ☐ 0 STUB)
 
 ```

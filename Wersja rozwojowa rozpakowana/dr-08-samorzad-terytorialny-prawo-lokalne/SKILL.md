@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: "3.21"
+version: "3.22"
 description: "Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo, uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie."
 dependencies:
   requires:
@@ -77,6 +77,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-101 Strefa zamieszkania (skutki: pierwszeństwo pieszego, 20 km/h)
 - BAS-107 Droga wewnętrzna (definicja negatywna — mandat zasadniczo niedopuszczalny)
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
 
   [✓] OK    mod-wojewoda-administracja-rzadowa-current-state-COV

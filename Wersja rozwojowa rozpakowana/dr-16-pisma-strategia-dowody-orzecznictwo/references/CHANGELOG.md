@@ -1,5 +1,6 @@
 # CHANGELOG — dr-16-pisma-strategia-dowody-orzecznictwo
 
+- 3.14 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.13 (2026-10-09c, AUDYT-2026-10-09c): mod-ustawa-prawo-prasowe-media i mod-ustawa-obywatelstwo-paszporty-ewidencja: linie „Hasła spraw” (sprostowanie prasowe, sprostowanie artykułu, gazeta; wymeldowanie, zameldowanie, PESEL). Treść prawna bez zmian.
 
 - 3.12 (2026-10-04n, AUDYT-2026-10-04n): Historia zmian SKILL.md i modułów przeniesiona z plików roboczych do `references/HISTORIA-ZMIAN-PLIKOW.md` (plik historyczny, niewczytywany przez model). Treść robocza bez zmian.

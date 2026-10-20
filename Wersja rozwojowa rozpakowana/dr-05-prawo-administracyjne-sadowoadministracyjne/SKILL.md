@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: "3.36"
+version: "3.37"
 description: "Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje, bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe."
 dependencies:
   requires:
@@ -89,6 +89,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W21 Informacja przetworzona (UDIP art. 3 — "szczególna istotność")
 - BAS-W29 Pełnomocnik z urzędu — prawo do sądu (art. 117 KPC)
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (23 łącznie — ✓ 23 OK, ☐ 0 STUB)
 
   [✓] OK    mod-KPA-current-state-COV

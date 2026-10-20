@@ -1,5 +1,6 @@
 # CHANGELOG — dr-10-zdrowie-farmacja-zywnosc-rolnictwo
 
+- 3.56 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.55 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ (t.j. 1304; zm. 2025/1705 od 1.01.2027); MAPA-AKTOW, SKILL.md (32 moduły)
 - 3.54 (2026-10-09g, AUDYT-2026-10-09g): ⛔ mod-ustawa-medyczne-szczegolowy: próg SR 100 000 zł (KPC art. 17 pkt 4) wprowadziła ustawa z 9.03.2023, Dz.U. 2023 poz. 614 (było 2023/1114 — ustawa o pomocy w oszczędzaniu na cele mieszkaniowe). ELI 2026-10-09.
 

@@ -1,7 +1,7 @@
 5396fcd4ebacfdac971b32285f1ea8e8f463dcca05cc4c0d88a8c73d973838dd  ./MAPA-AKTOW.md
 dc43d0324833dbdb3e395f981d3c6d6ff511ca73516c22c4ebfeb3fb62f93a30  ./MAPA-POKRYCIA.md
 c3c0e8ed344a6c2b92568f11ca27beb5578fe25b56904efede551fb4ca05cd06  ./PORTABILITY-MANIFEST.md
-b5419ab8237ed5f2bcbfe21c2994873d1cc3775af7d40a1385669eb49bc7aab4  ./SKILL.md
+6b1f42568e047a9553ede72cedcb7926e84c49141cceebdc0d7f4d2ab483297a  ./SKILL.md
 9422acfeb4a236fb0929cb502f7748b182c9c3e8290c93223fe29bafef1e1abb  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 a8e32fb7a5c3ce4a08339a5ac7f9586a2736272e49d41d096a413c9f4cbdb909  ./modules/mod-KRS-current-state-COV.md
@@ -19,5 +19,5 @@ df399e8536c15a201257f213c68a166b812337dda9f30550330bc20b5cb99b9d  ./modules/mod-
 cb58b30370f9fb947d23a12487801260d25eecfd9361105f8b1dae26060067f3  ./modules/mod-ustawa-KRS-i-ustroj-wladzy.md
 f597ae23a63a9bec63ede5645b220d621be8fa9b6d3d955523f30ec99b091d29  ./modules/mod-ustawa-SN-sad-najwyzszy.md
 56475c0513058326051a6684d3f482fa9b8c847538923634863bc90669e9cf10  ./modules/mod-ustawa-partie-polityczne-referendum.md
-0d9b72b7a110fd6ccb7db360d03627fbdd0fbdef90088f8e0416d66539154fe3  ./references/CHANGELOG.md
+c7b99e3489cafb9230d253d987492dc55e509933a09905de318033a16200a293  ./references/CHANGELOG.md
 83d66e067e25f3c75047ddefba576d0c4b8dfc273374e504015796e0fede41f6  ./references/HISTORIA-ZMIAN-PLIKOW.md

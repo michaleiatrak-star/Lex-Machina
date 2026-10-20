@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.99.5"
+version: "3.99.6"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 dependencies:
   requires:
@@ -106,6 +106,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   (✅ [VER] RZĄD 1 2026-09-16). Opis zamiaru legislacyjnego, nie stanu prawa —
   przed powołaniem wskaż pozycję Dz.U. z odczytu treści
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (47 łącznie — ✓ 47 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-14:** dodano `mod-OP-dzial-IV-rozdzial-11-dowody.md`

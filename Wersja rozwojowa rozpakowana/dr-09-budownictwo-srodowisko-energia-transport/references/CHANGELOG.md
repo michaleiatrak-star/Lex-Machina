@@ -1,5 +1,6 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.55 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.54 (2026-10-20, AUDYT-2026-10-20d): NOWE mod-ustawa-Krajowy-Zasob-Nieruchomosci (t.j. 1299) i mod-ustawa-obszary-morskie-administracja-morska (t.j. 1305); DU/2026/1358 odczytana — wyłącznie kąpieliska, treść modułów bez zmian; MAPA-AKTOW, SKILL.md (38 modułów)
 - 3.53 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1348 odczytana (zmiana sprzedawcy w 21 dni do 19.04.2028, art. 9ja–9je PE, kary URE) w mod-PrEnergetyczne-URE-OZE i MAPA-AKTOW; DU/2026/1358 (zmiana Prawa wodnego po t.j. 1335, w mocy 3.11.2026) w MAPA-AKTOW i mod-PrWodne — tekst w ELI nieopublikowany.
 

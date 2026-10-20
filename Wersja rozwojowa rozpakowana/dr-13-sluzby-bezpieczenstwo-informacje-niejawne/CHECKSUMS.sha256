@@ -1,7 +1,7 @@
 513723644b846f1269f356f6463f652be4f31942be4a3b6ba11391949bf20452  ./MAPA-AKTOW.md
 07c444b5efb2f5bee7a497f769232642eaeadcfdb93937be6d697f95121d00e4  ./MAPA-POKRYCIA.md
 9cccae89f1335a356a3968945c139ce433612ef313651baf2636ce3e57732531  ./PORTABILITY-MANIFEST.md
-dfd36b1a7725f16a430e26d7662948e1fc02327cfc2df38471f5a82a208c4e01  ./SKILL.md
+a1b1be14ebc3bb00f0d9011bce6c1947a2ec3517d27969c3705a43a6c374cd73  ./SKILL.md
 d0fac2eae45c9f05968b785676ea2fd86fecc6beef64e367327343bdb0f4301c  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 39eebb49fb36b2596ad527264516fbd47391760dd51e34c18a2e1e33eeec0603  ./modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md
@@ -16,5 +16,5 @@ cd0fbd66fa18ba50c17cb5806253861bef41d6197cc999f1ac2d04309bead379  ./modules/mod-
 34f08c190f752ab3c873c990399ce6bcf4ee3f937cf26dbdd5fa5630aeb6c21d  ./modules/mod-ustawa-szczegolne-srodki-zabezpieczajace.md
 fbae6eb3da815ae3e2d4b7423c55781215c01f692a347aaf95f2d20c74826260  ./modules/mod-ustawa-zandarmeria-wojskowa.md
 45ebdef4230cd8705e4882740b4a84d95fe2a6dc7dbd99aa69fcbacf31373fee  ./modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna.md
-d9a984979b197fdb3da03c67cc332a4218fbe1ecd17dfcbb4a25d53f2b47fa3e  ./references/CHANGELOG.md
+5cd5723a0c1a29036d3bf3a568c753c8ee828ccdf3b913abf4c1dd3fa24108f6  ./references/CHANGELOG.md
 16b107867e63968318ef1c3db2b7593e5c96f63f824b8d3eb6c78775759d34b3  ./references/HISTORIA-ZMIAN-PLIKOW.md

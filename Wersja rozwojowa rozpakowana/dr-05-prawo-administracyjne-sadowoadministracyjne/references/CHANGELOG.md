@@ -1,5 +1,6 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.37 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.36 (2026-10-12c, AUDYT-2026-10-12c): ⛔ KOREKTA błędu z 12b: t.j. UPEA Dz.U. 2026 poz. 1311 OBEJMUJE zm. 2026/1003 (obwieszczenie pkt 1 ppkt 3; art. 17 § 1a w dwóch brzmieniach — do 27.10.2026 i od 28.10.2026, odnośniki 13–14); wpisy „⏳ po t.j.: 2026/1003” usunięte. Obwieszczenia 1311 i 1315 odczytane z ELI (text.pdf, 2026-10-12). MAPA-AKTOW, mod-UPEA-egzekucja-administracyjna.
 
 - 3.35 (2026-10-12b, AUDYT-2026-10-12b): UPEA: nowy t.j. Dz.U. 2026 poz. 1311 (ogł. 9.10.2026; obejmuje zm. 516, 739) w MAPA-AKTOW i mod-UPEA; ⏳ zm. 2026/1003 art. 116 — art. 17 § 1a (zażalenie 7 dni), od 28.10.2026. ELI 2026-10-12.

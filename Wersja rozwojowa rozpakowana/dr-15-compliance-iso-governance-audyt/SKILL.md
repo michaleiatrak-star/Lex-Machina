@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.18"
+version: "3.19"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 dependencies:
   requires:
@@ -86,6 +86,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   figurant/słup, zlecenie powiernicze (art. 734 i n. KC), Centralny Rejestr
   Beneficjentów Rzeczywistych (CRBR), ustawa AML art. 2 ust. 2 pkt 1)
   — kluczowe dla due diligence AML i compliance KYC
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (10 łącznie — ✓ 10 OK, ☐ 0 STUB)
 
 ```

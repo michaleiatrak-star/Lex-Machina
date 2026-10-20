@@ -1,5 +1,6 @@
 # CHANGELOG — dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
 
+- 3.16 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.15 (2026-10-12b, AUDYT-2026-10-12b): mod-inwestycje-transgraniczne-FDI-BIT, MAPA-AKTOW, SKILL.md: po t.j. 2026/47 — zm. 2026/815 (art. 12d ust. 2 pkt 1, od 4.07.2026). ELI 2026-10-12.
 
 - 3.14 (2026-10-09c, AUDYT-2026-10-09c): mod-PMPP: linia „Hasła spraw” (kontrahent zagraniczny, sąd właściwy, prawo właściwe, spadek i majątek za granicą, uznanie zagranicznego wyroku). Treść prawna bez zmian.

@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: "3.13"
+version: "3.14"
 description: "Pisma, strategia, dowody i orzecznictwo: routing narzędzi procesowych, analiza dowodowa, research orzeczeń, kalkulatory i wsparcie budowy strategii sprawy."
 dependencies:
   requires:
@@ -96,6 +96,7 @@ Przy redagowaniu pism rozważ doładowanie (`view`) definicji:
 - BAS-W33/W34 Kara umowna i odsetki — precyzja żądań pozwu
 - BAS-W35 Nakaz zapłaty: terminologia "sprzeciw" vs "zarzuty"
 
+<!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (11 łącznie — ✓ 11 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
 
 ```
