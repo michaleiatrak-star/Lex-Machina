@@ -110,6 +110,8 @@ CEL: orzecznictwo jako wsparcie do budowanego pisma (W3.2)
 | Przepis + pismo | analizator-przepisow-v2 | → orzeczenia-sadowe-v2 → pisma-procesowe-v3 |
 | Laik bez pojęcia | przewodnik-prawny-v2 | → dowolny skill zależnie od odpowiedzi |
 | Raport dla klienta | raport-klienta-v1 | ← raport-sytuacyjny-v2 (źródło danych) |
+| Chronologia sprawy | chronologia-sprawy-v1 | → pisma-procesowe-v3 (oś czasu i REKOMENDACJE DO PISMA jako materiał W1) |
+| Chronologia + akta | chronologia-sprawy-v1 | → analiza-sadowa-v6 |
 
 ---
 

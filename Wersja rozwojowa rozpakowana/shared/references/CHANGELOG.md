@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.45 (2026-10-20, AUDYT-2026-10-20h): ACTIVATION-MATRIX: KOMBINACJE SKILLI — po chronologii: chronologia-sprawy-v1 → pisma-procesowe-v3 (oś czasu i REKOMENDACJE DO PISMA jako materiał W1) oraz → analiza-sadowa-v6 (przy aktach); wcześniej po raporcie chronologii aplikacja nie proponowała kolejnego etapu
 - 3.99.44 (2026-10-20, AUDYT-2026-10-20d): ISAP-METRYKI-AKTOW: Prawo wodne — DU/2026/1358 odczytana (wyłącznie kąpieliska)
 - 3.99.43 (2026-10-20, AUDYT-2026-10-20c): ISAP-METRYKI-AKTOW: Prawo wodne — zmiana po t.j. 1335: DU/2026/1358 (w mocy 3.11.2026).
 
