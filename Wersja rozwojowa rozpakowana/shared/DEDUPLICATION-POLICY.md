@@ -76,15 +76,15 @@ Poniższe moduły istnieją w dwóch DR-skillach. **NIE są błędami.** Zakresy
 
 | Lokalizacja | Zakres | Kiedy ładować |
 |---|---|---|
-| `dr-05/.../mod-ustawa-sygnalisci.md` | Perspektywa procesowa sygnalisty: kanały zgłoszenia, ochrona przed odwetem, roszczenia, pisma do RPO/PIP | Gdy klient = sygnalista chroniący swoje prawa |
-| `dr-15/.../mod-ustawa-sygnalisci.md` | Perspektywa compliance pracodawcy: wdrożenie kanału, ISO 37301 CMS, AML, RODO w rejestrze, audyt | Gdy klient = pracodawca wdrażający lub audytujący system |
+| `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-sygnalisci.md` | Perspektywa procesowa sygnalisty: kanały zgłoszenia, ochrona przed odwetem, roszczenia, pisma do RPO/PIP | Gdy klient = sygnalista chroniący swoje prawa |
+| `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md` | Perspektywa compliance pracodawcy: wdrożenie kanału, ISO 37301 CMS, AML, RODO w rejestrze, audyt | Gdy klient = pracodawca wdrażający lub audytujący system |
 
 ### mod-ustawa-cudzoziemcy.md
 
 | Lokalizacja | Zakres | Kiedy ładować |
 |---|---|---|
-| `dr-05/.../mod-ustawa-cudzoziemcy.md` | **Kanoniczny** — pełna taksonomia tytułów pobytowych, wydalenie, SZUSC→WSA→NSA, ochrona międzynarodowa | Domyślny dla spraw administracyjnych i procesowych |
-| `dr-02/.../mod-ustawa-cudzoziemcy.md` | Skrócony — cywilno-pracowniczy, kary pracodawcy, ścieżka odwoławcza skrócona | Tylko gdy sprawa ograniczona do relacji pracodawca–cudzoziemiec |
+| `dr-05-prawo-administracyjne-sadowoadministracyjne/modules/mod-ustawa-cudzoziemcy.md` | **Kanoniczny** — pełna taksonomia tytułów pobytowych, wydalenie, SZUSC→WSA→NSA, ochrona międzynarodowa | Domyślny dla spraw administracyjnych i procesowych |
+| `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-cudzoziemcy.md` | Skrócony — cywilno-pracowniczy, kary pracodawcy, ścieżka odwoławcza skrócona | Tylko gdy sprawa ograniczona do relacji pracodawca–cudzoziemiec |
 
 Moduł DR-05 jest wersją kanoniczną. Aktualizuj merytorykę przede wszystkim w DR-05.
 

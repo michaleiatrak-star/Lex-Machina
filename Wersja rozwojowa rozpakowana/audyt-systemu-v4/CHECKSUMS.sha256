@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-3210b764348398776254bec93a1f631f535155d1463983746479cab2a229d7c8  ./SKILL.md
+71233720c9e5b7a94176553b8f7ff83ad5527e1bc2dcd1c3ae947e9e6e786d9d  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -13,7 +13,7 @@ c2c61b340f90522e08100a71e4ac5d74a46c8a5bf708730e0802ff7fcaf25393  ./mcp-servers/
 55dbd937ab8ed74d02b95ac874a4a79cf6f7551485302f7fad85617634585a1a  ./mcp-servers/ceidg-example/fixtures/firmy_nip_aktywny.json
 74b6c9bda725bbfbc3926510d234bb5cbfde501267ec28bd7d804c4a00823dab  ./mcp-servers/ceidg-example/test_normalizacja.mjs
 ad8df07cc7234d88ebdfd7eefa0a2ea8acf405c492683d783078c2fbe7cd1ad2  ./mcp-servers/dist/NOTICE-THIRD-PARTY.txt
-d3b3631558ee262273080df59ed92eac0ec23b5f27e9c2a5232eeb7a975e66fd  ./mcp-servers/dist/lex-mcp.mjs
+49edd7cd1ded872c111cc5514da09e18b40a90cd4ff6d77f296cfe484138c886  ./mcp-servers/dist/lex-mcp.mjs
 cdc5ee84a2eb1094bcf586e200394d306b70661202cee472eee1fe0fe9624edf  ./mcp-servers/etpcz-example/etpcz-mcp-server.js
 14729981c13e9f5585ad139c58b12b477defcc2ffe56b01c75b8869acc89733a  ./mcp-servers/eureka-example/eureka-mcp-server.js
 1aa02a2b1c340653a9e5dbdcfcba96c0023d2a9f30f50f19fe98dede3f0b2590  ./mcp-servers/eureka-example/fixtures/dok_445895.json
@@ -37,8 +37,8 @@ d64095fa343273bf885b3b7f2e964ea969b8a8d0b334fe21ea81c40c57ae6adf  ./mcp-servers/
 2c3f1c843ecb0aeb3e596d3d0d6ba050a6b25061a68d4686a85cc2673a8fe980  ./mcp-servers/isap-eli-example/fixtures/eli_DU_2026_795.json
 063f69d9a5abcfafdc59627aac8b06e54f9c0c719ffbdce81504921855dd2066  ./mcp-servers/isap-eli-example/fixtures/eli_szukaj_kc.json
 793e2f3f8e6e05a165069179f0e96481cbc72d3713acc276f3841ab9d1950bb0  ./mcp-servers/isap-eli-example/fixtures/tj_kc_2026_795_wycinek.txt
-e9d049376ebdf412367e1add398a6dfdd837b2e80c4b5bdff7f1e31eac576283  ./mcp-servers/isap-eli-example/isap-eli-mcp-server.js
-c00fa4935c76ab3b109176be95f2c07100d5ccc335a62748d30a8cb7755f0fcb  ./mcp-servers/isap-eli-example/test_normalizacja.mjs
+45a75dc2cff8af3bd17d569ca0289164304c1a63c0502e30840d019e83004f82  ./mcp-servers/isap-eli-example/isap-eli-mcp-server.js
+56ae4b19a39969e6044f09a19b44e368e5e4b8398519efbd371cc06cedee2454  ./mcp-servers/isap-eli-example/test_normalizacja.mjs
 9debc648200f3819ee1f4853c903eadfe7db2e020a0355a2244517b9303e30f6  ./mcp-servers/kio-example/README.md
 9aeee7dfba7ddef5aabd7039fb7043fc27ff94149afcef632bb35b69eb18b42b  ./mcp-servers/kio-example/fixtures/uzp.json
 0f9bd865314177ea3d850954c6e6f4e0b3e7325f80adc8264b81c07ff1992608  ./mcp-servers/kio-example/kio-mcp-server.js
@@ -92,10 +92,10 @@ bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/
 f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-PROPAGACJA-NOWELIZACJI.md
 c35f4cd69cbc0927216a9121554bb8b2167e2db6cfe507900f38a8639893dd56  ./modules/MOD-TRESC-MERYTORYCZNA.md
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
-d305f6452748a329b1e6a8741e639ad7c06f5d57e923dee64988b5714c82b8f7  ./references/ALIASY-NAZW-AKTOW.md
+8e35cbfde3fb3a785181e9e16a153437820762ad34887cf1e714086f497274e9  ./references/ALIASY-NAZW-AKTOW.md
 167144b386f010c66a1b88d1c9d06f0423038f29c31c908cd466d26e47f24a12  ./references/AUDIT-JOURNAL.md
-6a6c4eaee7fe1f4b00b9418a0590e38e5b786c3c3690dca3e86243543dac1840  ./references/CHANGELOG.md
-c692dd9b7d29da90c5c0af56b4ae742abdb52712e93df35517dd3c2b259a309f  ./references/CHECKLIST-DEDUP.md
+255cca679ba24336094ea846cfe9435448db6ea7f3e18abc76cad3eb3c5e3168  ./references/CHANGELOG.md
+ddb7a65f2c6adfe886e94b5e98305956c6eea65d5ae225fb5b2c57848cedcf96  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
 4daada2cfff51f2f20f9129cd04893336fe7d5e8c7a439b57579326d5d84b1fb  ./references/F-113-PREFLIGHT-2026-08-26.md

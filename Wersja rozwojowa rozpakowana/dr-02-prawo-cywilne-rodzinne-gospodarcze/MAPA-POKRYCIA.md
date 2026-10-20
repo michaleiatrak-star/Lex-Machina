@@ -37,7 +37,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | Prawo spółdzielcze — Dz.U. 2026 poz. 521 | 🟢 B+ / COV | `mod-prawo-spoldzielcze.md` |
 | ochrona praw lokatorów — Dz.U. 2023 poz. 725 | 🟢 B+ / COV | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja.md` |
 | księgi wieczyste i hipoteka — Dz.U. 2026 poz. 1066 | 🟢 B+ / COV | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci.md` |
-| gospodarka nieruchomościami — Dz.U. 2026 poz. 399 | 🟢 B+ / COV | `dr-09/.../mod-UGN-gospodarka-nieruchomosciami.md` |
+| gospodarka nieruchomościami — Dz.U. 2026 poz. 399 | 🟢 B+ / COV | `dr-09-budownictwo-srodowisko-energia-transport/modules/mod-UGN-gospodarka-nieruchomosciami.md` |
 | zastaw rejestrowy — Dz.U. 2018 poz. 2017 ze zm. | 🟢 B+ / COV | `mod-ustawa-zastaw-rejestrowy.md` |
 | KRS — Dz.U. 2025 poz. 869 ze zm. | 🟢 B+ / COV | `mod-ustawa-KRS-rejestr-sadowy.md` |
 

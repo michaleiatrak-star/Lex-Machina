@@ -85,6 +85,28 @@ const pozycja = (p) => ({
   url_zrodlowy: `https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=W${p.publisher ?? "DU"}${p.year}${String(p.pos).padStart(7, "0")}`,
 });
 
+const nazwaAktu = (t) => String(t ?? "").toLowerCase().replace(/[–—]/g, "-").replace(/\s+/g, " ").replace(/[.\s]+$/, "").trim();
+const NOWELIZACJA = /\bo zmianie\b|\bzmieniając|\bw sprawie zmiany\b|\bo uzupełnieniu\b/i;
+
+/** 0 akt bazowy (tytuł = zapytanie), 1 aktualny t.j. tego aktu, 2 inne, 3 bazowy uchylony, 4 nowelizacja, 5 t.j. zastąpiony. */
+export function rangaKandydata(p, zapytanie) {
+  const q = nazwaAktu(zapytanie);
+  const t = nazwaAktu(p.title);
+  // „Ustawa z dnia … 1964 r. - Kodeks …” albo bez myślnika („… 2000 r. Kodeks spółek handlowych”).
+  const nazwa = t.replace(/^.*?\b\d{4} r\.(?: -)? /, "");
+  const tj = /jednolitego tekstu/.test(t);
+  if (q && tj && (t.endsWith(`- ${q}`) || t.endsWith(`ustawy ${q}`))) return p.status === "obowiązujący" ? 1 : 5;
+  if (tj) return 5;
+  if (q && nazwa === q && !NOWELIZACJA.test(t)) return /uchyl|wygaśnięcie|nieobowiązując/.test(String(p.status ?? "").toLowerCase()) ? 3 : 0;
+  if (NOWELIZACJA.test(t)) return 4;
+  return 2;
+}
+
+/** Kandydaci AMBIGUOUS w kolejności rangi; w obrębie rangi kolejność ELI (od najnowszych). */
+export function uporzadkujKandydatow(rawItems, zapytanie) {
+  return rawItems.map((p, i) => ({ p, i, r: rangaKandydata(p, zapytanie) })).sort((a, b) => a.r - b.r || a.i - b.i).map((x) => x.p);
+}
+
 /** Wynik wyszukiwania po tytule albo odczytu po ELI → SCHEMAT-ODPOWIEDZI-MCP. */
 export function normalizujOdpowiedzELI(rawItems, queryLabel, aktualnyTj = null) {
   const baza = { query_type: "akt_prawny", source: "sejm-eli" };
@@ -92,9 +114,24 @@ export function normalizujOdpowiedzELI(rawItems, queryLabel, aktualnyTj = null) 
     return { status: "NOT_FOUND", ...baza, uwaga: "Brak pozycji w ELI dla zapytania — nie jest to dowód, że akt nie istnieje (sprawdź tytuł/ELI)." };
   }
   if (rawItems.length > 1) {
+    // ⛔ POPRAWKA 2026-10-20 (porównanie z LexAgento): ELI zwraca od najnowszych, więc dla
+    // „Kodeks postępowania cywilnego” pierwszym kandydatem była nowelizacja DU/2026/1046 (KP i KPC).
+    // Konsument biorący kandydaci[0] weryfikował przepis w nowelizacji. Teraz: akt bazowy, aktualny
+    // t.j., inne akty, nowelizacje; osobno pola akt_bazowy i tekst_jednolity_aktualny.
+    const uporzadkowane = uporzadkujKandydatow(rawItems, queryLabel);
+    const bazowy = uporzadkowane[0] && rangaKandydata(uporzadkowane[0], queryLabel) === 0 ? pozycja(uporzadkowane[0]) : null;
+    const tjAktualny = aktualnyTj ?? (() => {
+      const tj = rawItems.find((p) => rangaKandydata(p, queryLabel) === 1);
+      return tj ? pozycja(tj) : null;
+    })();
     return { status: "AMBIGUOUS", ...baza, liczba_trafien: rawItems.length,
-      kandydaci: rawItems.slice(0, 25).map(pozycja),
-      uwaga: rawItems.length > 25 ? `Pokazano 25 z ${rawItems.length} — zawęź tytuł albo podaj eli.` : undefined };
+      ...(bazowy ? { akt_bazowy: bazowy } : {}),
+      ...(tjAktualny ? { tekst_jednolity_aktualny: tjAktualny } : {}),
+      kandydaci: uporzadkowane.slice(0, 25).map(pozycja),
+      uwaga: [
+        bazowy ? `Akt bazowy: ${bazowy.identyfikator}${tjAktualny ? `; powołuj aktualny t.j. ${tjAktualny.identyfikator}` : ""}. Nowelizacje są na końcu listy.` : null,
+        rawItems.length > 25 ? `Pokazano 25 z ${rawItems.length} — zawęź tytuł albo podaj eli.` : null
+      ].filter(Boolean).join(" ") || undefined };
   }
   const r = pozycja(rawItems[0]);
   const w = { status: "FOUND", ...baza, result: r, retrieved_at: new Date().toISOString(), confidence: "deterministic" };
@@ -166,7 +203,13 @@ server.registerTool(
         const tj = st === "tekst_jednolity_nieaktualny" && d.status !== "wygaśnięcie aktu" ? await aktualnyTekstJednolity(eli) : null;
         wynik = normalizujOdpowiedzELI(d ? [d] : [], eli, tj);
       } else {
-        wynik = normalizujOdpowiedzELI(await pobierzZEli(query), query);
+        const pozycje = await pobierzZEli(query);
+        // Akt bazowy z t.j.: aktualny t.j. z /references (pewniejszy niż tytuł obwieszczenia w wynikach).
+        const bazowy = pozycje.length > 1 ? uporzadkujKandydatow(pozycje, query)[0] : null;
+        const tj = bazowy && rangaKandydata(bazowy, query) === 0 && mapujStatusEli(bazowy.status, bazowy.title) === "tekst_jednolity_nieaktualny"
+          ? await aktualnyTekstJednolity(bazowy.ELI ?? `${bazowy.publisher ?? "DU"}/${bazowy.year}/${bazowy.pos}`).catch(() => null)
+          : null;
+        wynik = normalizujOdpowiedzELI(pozycje, query, tj);
       }
     } catch (err) {
       wynik = { status: "ERROR", query_type: "akt_prawny", source: "sejm-eli", detail: String(err?.message ?? err), retrieved_at: new Date().toISOString() };

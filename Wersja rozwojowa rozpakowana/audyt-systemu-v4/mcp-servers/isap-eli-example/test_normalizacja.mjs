@@ -78,3 +78,26 @@ const wytnijArtykul = (z, n) => artykulObowiazujacy({ zalacznik: z, przypisy: {}
   assert.deepStrictEqual(Object.keys(a14.odnosniki), ["6"]);
   console.log("OK: isap_tekst — brzmienie obowiązujące wg odnośników, punkt jeszcze nieobowiązujący, znacznik sklejony");
   console.log("\nWSZYSTKIE TESTY isap_tekst PRZESZŁY"); }
+
+// ── AMBIGUOUS: akt bazowy przed nowelizacjami (2026-10-20; PRAWDZIWE wyniki ELI dla KPC i KC) ──
+import { uporzadkujKandydatow, rangaKandydata } from "./isap-eli-mcp-server.js";
+{ const kpc = fx("eli_szukaj_kpc");
+  assert.match(kpc[0].title, /o zmianie ustawy - Kodeks pracy oraz ustawy - Kodeks postępowania cywilnego/, "fixture: ELI podaje nowelizację pierwszą");
+  const w = normalizujOdpowiedzELI(kpc, "Kodeks postępowania cywilnego");
+  assert.strictEqual(w.status, "AMBIGUOUS");
+  assert.strictEqual(w.kandydaci[0].eli, "DU/1964/296", "pierwszy kandydat = akt bazowy KPC");
+  assert.strictEqual(w.akt_bazowy.eli, "DU/1964/296");
+  assert.strictEqual(w.tekst_jednolity_aktualny.eli, "DU/2026/468", "aktualny t.j. KPC z wyników (obwieszczenie obowiązujące)");
+  assert.strictEqual(w.kandydaci[1].eli, "DU/2026/468");
+  assert.ok(!w.kandydaci.slice(0, 2).some((k) => /o zmianie/.test(k.tytul_lub_nazwa)), "nowelizacje nie na początku");
+  assert.strictEqual(rangaKandydata(kpc.find((p) => p.ELI === "DU/1930/651"), "Kodeks postępowania cywilnego"), 3, "KPC z 1930 r. (uchylony) za bazowym");
+  assert.notStrictEqual(rangaKandydata(kpc.find((p) => p.ELI === "DU/1964/297"), "Kodeks postępowania cywilnego"), 0, "przepisy wprowadzające ≠ akt bazowy");
+  const t = normalizujOdpowiedzELI(kpc, "Kodeks postępowania cywilnego", { identyfikator: "DU 2026 poz. 468", eli: "DU/2026/468" });
+  assert.match(t.uwaga, /Akt bazowy: DU 1964 poz\. 296; powołuj aktualny t\.j\. DU 2026 poz\. 468/);
+  console.log("OK: KPC — akt bazowy DU/1964/296 i t.j. DU/2026/468 przed nowelizacjami");
+}
+{ const w = normalizujOdpowiedzELI(fx("eli_szukaj_kc"), "Kodeks cywilny");
+  const pierwszy = w.kandydaci[0];
+  assert.ok(!/o zmianie/.test(pierwszy.tytul_lub_nazwa), `KC: pierwszy kandydat nie jest nowelizacją (${pierwszy.eli})`);
+  console.log(`OK: KC — pierwszy kandydat ${pierwszy.eli}${w.akt_bazowy ? ", akt bazowy " + w.akt_bazowy.eli : ""}`);
+}

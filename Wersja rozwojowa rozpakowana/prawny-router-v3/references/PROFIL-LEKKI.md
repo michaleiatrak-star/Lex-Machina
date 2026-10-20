@@ -149,7 +149,7 @@ przez F-113.
 | `shared/MCP-INTEGRACJA.md` | host zgłasza podłączone MCP | KROK 1 |
 | `shared/MIEDZYNARODOWE-GATES.md` + `HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md` | jurysdykcja obca (UP-5) | zamiast OŚ/WYJ, przed analizą |
 | `references/AUDYT-KLUCZA-ODPOWIEDZI.md` | kategoria [11] | przed werdyktem porównawczym |
-| `dr-03/.../mod-KK-kwalifikator-karnomaterialny.md` | sprawa karna, po decyzji frameworku | przed kwalifikacją |
+| `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` | sprawa karna, po decyzji frameworku | przed kwalifikacją |
 
 ⛔ **UP-6 pozostaje bez zmian.** CN-GATE i REM-GATE działają w KAŻDEJ sprawie,
 w obu jurysdykcjach, bez wyjątku. Odroczony jest ODCZYT modułu, nie WYKONANIE

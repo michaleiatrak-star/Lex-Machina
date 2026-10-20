@@ -196,7 +196,7 @@ PATRZ TEŻ: shared/definicje/DEF-PROCEDURA.md — rozróżnienie KATEGORII
   ZOBOWIĄZAŃ PODATKOWYCH ma odrębny reżim (art. 70 i n. Ordynacji podatkowej)
   i NIE jest objęte regułami z KC poniżej.
 
-  PATRZ TEŻ (dodano 2026-06-13): dr-03/.../mod-grzywny-mandaty-szczegolowe.md
+  PATRZ TEŻ (dodano 2026-06-13): dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-grzywny-mandaty-szczegolowe.md
   sekcja 7 — tabela przedawnienia grzywien/kar odwołuje się do art.70 OP
   dla opłat parkingowych (UDP) i grzywien UPEA — ta sama nowelizacja
   01.10.2026 może ich dotyczyć.

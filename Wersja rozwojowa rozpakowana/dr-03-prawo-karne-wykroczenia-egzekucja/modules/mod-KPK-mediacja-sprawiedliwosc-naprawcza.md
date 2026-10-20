@@ -118,11 +118,11 @@ odrębnej, aktualnej weryfikacji orzecznictwa/doktryny online.
 
 ## 5. INTEGRACJA Z SYSTEMEM
 
-- **`dr-12/.../mod-techniki-mediacyjne-negocjacyjne.md`** — ogólne techniki
+- **`dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-techniki-mediacyjne-negocjacyjne.md`** — ogólne techniki
   (5 zasad, BATNA/ZOPA, style, komunikacja, caucus) mają zastosowanie
   również w mediacji karnej — ten moduł dostarcza wyłącznie specyfikę
   karnoprawną (podstawa ustawowa, przesłanki, poufność/art. 178a).
-- **`dr-12/.../mod-KPC-arbitraz-mediacja-ADR.md`** — status mediatora
+- **`dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-KPC-arbitraz-mediacja-ADR.md`** — status mediatora
   (zwykły/stały/KRM) dotyczy również mediatorów w sprawach karnych —
   nie duplikuj, odsyłaj tam.
 - **`mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md`** — ugoda z

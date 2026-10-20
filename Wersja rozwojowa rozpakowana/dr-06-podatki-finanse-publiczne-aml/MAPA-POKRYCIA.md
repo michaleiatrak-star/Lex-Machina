@@ -45,7 +45,7 @@ Mapa opisuje wyłącznie aktualne pokrycie używane przez system. Historia zmian
 | cło / UCC / CN | 🟢/🟡 | `mod-UCC-clo-taryfa-celna.md` + moduły celne |
 | finanse publiczne | 🟢/🟡; metryka aktualna w MAPA-AKTOW |
 | AML | 🟢/🟡; moduły instytucji obowiązanych i obowiązków AML |
-| KKS — warstwa karnoskarbowa | 🟢 B+ / COV — kanoniczny moduł `dr-03/.../mod-KKS-karny-skarbowy-i-AML.md`; DR-06 dostarcza właściwe prawo podatkowe/celne i wartości dynamiczne |
+| KKS — warstwa karnoskarbowa | 🟢 B+ / COV — kanoniczny moduł `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KKS-karny-skarbowy-i-AML.md`; DR-06 dostarcza właściwe prawo podatkowe/celne i wartości dynamiczne |
 
 ## Routing KKS
 

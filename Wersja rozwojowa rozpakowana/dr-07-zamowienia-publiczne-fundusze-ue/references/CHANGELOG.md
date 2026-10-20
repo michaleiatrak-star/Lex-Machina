@@ -1,5 +1,6 @@
 # CHANGELOG — dr-07-zamowienia-publiczne-fundusze-ue
 
+- 3.18 (2026-10-20, LEXAGENTO-P1): mod-PZP XI-XII: pełna ścieżka modułu PIP
 - 3.17 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.16 (2026-10-20, AUDYT-2026-10-20b): MAPA-AKTOW: Pzp — DU/2026/1347 art. 6 (art. 214 ust. 1 pkt 10, art. 364 ust. 1 pkt 1 bez „świadectw pochodzenia biogazu rolniczego”) od 1.12.2026.
 

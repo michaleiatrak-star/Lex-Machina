@@ -4,7 +4,8 @@
 > metodologii, HARD GATE, routingu dziedzinowego ani bramek jakości. Ujednolica
 > wyłącznie sposób rozumienia operacji zależnych od hosta.
 >
-> **Wersja:** 1.1 (2026-09-27, `shared` 3.85) — dodany §1A RESOLVER-SKILLI.
+> **Wersja:** 1.2 (2026-10-20) — §3: kontrakt `query_context` zdarzenia weryfikacji.
+> 1.1 (2026-09-27, `shared` 3.85) — dodany §1A RESOLVER-SKILLI.
 
 ## 1. Zasoby i ścieżki
 
@@ -103,6 +104,11 @@ lub równoważnego artefaktu. Brak takiej funkcji nie znosi bramek jakości.
   wolno podawać z pamięci, jeżeli istniejąca instrukcja wymaga świeżej weryfikacji.
 - Gdy host nie ma dostępu do wymaganej weryfikacji, zastosuj status przewidziany
   przez bramkę i poinformuj użytkownika; nie udawaj wykonania fetch/search.
+- **Zdarzenie weryfikacji** (log dla `tools/walidator_cytowan.py`): `query_context` niesie
+  numer jednostki i skrót aktu tak jak w piśmie, nie tylko ELI/URL.
+  `{"tool": "isap_tekst", "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/795/text.pdf", "query_context": "art. 415 k.c."}`
+  Bez skrótu walidator odrzuca poprawnie zweryfikowany przepis (fałszywy FAIL); sam rozpoznaje
+  tylko ELI aktów bazowych kodeksów, nie ELI tekstu jednolitego.
 
 ## 4. Pliki użytkownika
 

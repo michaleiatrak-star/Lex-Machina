@@ -265,7 +265,7 @@ KROK 5: Data ZŁOŻENIA pisma = data nadania w placówce pocztowej
          na dzień sporządzania pisma — ryzyko nieskuteczności czynności
          procesowej przy użyciu innego operatora jest realne i NIE zostało
          jednoznacznie wyeliminowane.** Patrz też
-         `dr-02/.../mod-ustawa-monopole-panstwowe.md` sekcja o operatorze
+         `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-monopole-panstwowe.md` sekcja o operatorze
          wyznaczonym (Poczta Polska) dla szerszego kontekstu.
 
 ALERT TERMINOWY:

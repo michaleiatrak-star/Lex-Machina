@@ -21,7 +21,7 @@ Sprawiedliwości** o t.j. **rozporządzenia** — przypisane ustawie
 o działaniach antyterrorystycznych; skorygowane na `Dz.U. 2025 poz. 194`)
 oraz **DWA realne błędy** i 17 zgłoszeń wynikających ze skrótu nazwy.
 
-Drugi błąd: `dr-08/.../mod-ustawa-zarzadzanie-kryzysowe.md` podawał
+Drugi błąd: `dr-08-samorzad-terytorialny-prawo-lokalne/modules/mod-ustawa-zarzadzanie-kryzysowe.md` podawał
 `Dz.U. 2024 poz. 1194` jako t.j. ustawy o zarządzaniu kryzysowym — to
 obwieszczenie o t.j. ustawy o **dozorze technicznym**. Skorygowane na
 `Dz.U. 2026 poz. 574`, z ostrzeżeniem o nowelizacji Dz.U. 2026 poz. 815.

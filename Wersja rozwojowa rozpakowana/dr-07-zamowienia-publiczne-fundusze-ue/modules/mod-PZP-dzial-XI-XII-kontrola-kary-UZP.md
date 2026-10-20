@@ -110,7 +110,7 @@ konkretnej kary).
 
 ⚠️ **Rozróżnij od kar z reformy PIP/KP (art. 281-283 KP)** — to CAŁKOWICIE
 ODRĘBNY reżim (prawo pracy, nie PZP) opisany w
-`dr-04/.../mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.3 — nie myl tych
+`dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md` sekcja 6.3 — nie myl tych
 dwóch systemów kar mimo podobnych rzędów wielkości kwot.
 
 ### 7. Checklist praktyczny — reakcja na kontrolę Prezesa UZP

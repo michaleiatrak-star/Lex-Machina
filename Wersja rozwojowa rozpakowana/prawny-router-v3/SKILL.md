@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.72"
+version: "3.73"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.72 (2026-10-20, AUDYT-2026-10-20a): KROK 2 i POKRYCIE DZIEDZINOWE oznaczone ROUTING; w trybie mechanicznym aplikacja podaje je odnośnikiem, w automatycznym w całości.
+  Wersja bieżąca: 3.73 (2026-10-20, LEXAGENTO-P1): PROFIL-LEKKI: pełna ścieżka modułu kwalifikatora karnomaterialnego (skrót dr-03/.../ nie działał poza lex-runtime)
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

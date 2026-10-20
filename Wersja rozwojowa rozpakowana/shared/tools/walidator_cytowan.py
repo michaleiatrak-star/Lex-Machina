@@ -38,6 +38,12 @@ SCHEMA_LOGU (JSON):
   ]
 }
 
+KONTRAKT query_context (hosty zewnętrzne, shared/UNIVERSAL-RUNTIME-ADAPTER.md §3):
+  zdarzenie weryfikacji artykułu MUSI nieść numer artykułu i skrót aktu w zapisie z pisma
+  („art. 415 k.c.”), nie tylko ELI/URL. ELI aktu bazowego kodeksu (DU/1964/93 itd., ELI_KODEKSOW)
+  walidator sam tłumaczy na skrót; ELI tekstu jednolitego się zmienia — tam skrót jest konieczny.
+  Brak skrótu = fałszywy FAIL poprawnie zweryfikowanego przepisu.
+
 Użycie:
     python3 walidator_cytowan.py --document pismo.md --log sesja.json
     python3 walidator_cytowan.py --document pismo.docx --log sesja.json  (wymaga python-docx)
@@ -63,6 +69,7 @@ from urllib.parse import unquote_plus, urlparse
 
 OFFICIAL_DOMAINS = (
     "isap.sejm.gov.pl",
+    "api.sejm.gov.pl",  # Sejm ELI API (isap_lookup / isap_tekst)
     "orzeczenia.ms.gov.pl",
     "sn.pl",
     "nsa.gov.pl",
@@ -218,6 +225,29 @@ def wzorce_identyfikatora(citation):
     return []
 
 
+# ELI aktu bazowego → skrót (sprawdzone w api.sejm.gov.pl 2026-10-20). Zdarzenie z samym ELI kodeksu
+# w URL lub query_context potwierdza „art. N <skrót>”; ELI tekstu jednolitego się zmienia (kontrakt wyżej).
+ELI_KODEKSOW = {
+    (1964, 93): "k.c.", (1964, 296): "k.p.c.", (1997, 553): "k.k.", (1997, 555): "k.p.k.",
+    (1997, 557): "k.k.w.", (1974, 141): "k.p.", (1964, 59): "k.r.o.", (2000, 1037): "k.s.h.",
+    (1960, 168): "k.p.a.", (1971, 114): "k.w.", (1999, 930): "k.k.s.", (2002, 1270): "p.p.s.a.",
+    (2001, 1148): "k.p.w.",
+}
+_ELI_W_TEKSCIE = re.compile(r"(?<![a-z])du/(\d{4})/(\d{1,5})(?!\d)|wdu(\d{4})\d{3}(\d{4})(?!\d)", re.IGNORECASE)
+
+
+def _skroty_z_eli(*teksty):
+    """Skróty kodeksów, których ELI aktu bazowego (DU/RRRR/N albo id ISAP WDU…) występuje w tekstach."""
+    skroty = []
+    for t in teksty:
+        for m in _ELI_W_TEKSCIE.finditer(t or ""):
+            rok, poz = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), m.group(4))
+            sk = ELI_KODEKSOW.get((int(rok), int(poz)))
+            if sk and sk not in skroty:
+                skroty.append(sk)
+    return skroty
+
+
 def log_has_verification(citation, events):
     """Zwraca (True, event), jeśli istnieje zdarzenie z URL na domenie urzędowej
     (host, https), którego query_context/query/URL zawiera PEŁNY identyfikator
@@ -232,8 +262,11 @@ def log_has_verification(citation, events):
         oficjalne = [u for u in [url, *result_urls] if _oficjalny_url(u)]
         if not oficjalne:
             continue
+        kontekst = ev.get("query_context")
+        skroty = _skroty_z_eli(str(kontekst or ""), *oficjalne)
+        # Skrót z ELI zaraz po kontekście: „art. 415” + DU/1964/93 → „art. 415 k.c.”.
         haystack = " ".join(
-            str(x) for x in (ev.get("query_context"), ev.get("query"), *oficjalne) if x
+            str(x) for x in (kontekst, *skroty, ev.get("query"), *oficjalne) if x
         )
         haystack = _normalizuj(haystack)
         if any(re.search(w, haystack) for w in wzorce):
@@ -335,6 +368,14 @@ def self_test() -> int:
         ("pozytyw: art. z §", True, "art. 415 § 1 KC", "artykul",
          {"url": isap, "query_context": "art. 415 § 1 kodeksu cywilnego (KC)"}),
         ("query_context = None", False, "art. 5 KC", "artykul", {"url": isap, "query_context": None}),
+        ("pozytyw: ELI KC w URL, skrót w piśmie", True, "art. 415 k.c.", "artykul",
+         {"url": "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.pdf", "query_context": "art. 415"}),
+        ("pozytyw: id ISAP KC (WDU19640160093)", True, "art. 415 k.c.", "artykul",
+         {"url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093", "query_context": "art. 415"}),
+        ("ELI KC nie potwierdza k.p.c.", False, "art. 415 k.p.c.", "artykul",
+         {"url": "https://api.sejm.gov.pl/eli/acts/DU/1964/93/text.pdf", "query_context": "art. 415"}),
+        ("ELI 1964/930 to nie KC (1964/93)", False, "art. 415 k.c.", "artykul",
+         {"url": "https://api.sejm.gov.pl/eli/acts/DU/1964/930", "query_context": "art. 415"}),
     ]
     # Dopasowanie skrótów i indeksów górnych do logu (zgł. #109).
     def z_tekstu(cytat, kontekst):

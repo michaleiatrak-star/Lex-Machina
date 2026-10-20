@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.241 (2026-10-20, LEXAGENTO-P1): isap_lookup AMBIGUOUS: akt bazowy i aktualny t.j. przed nowelizacjami (pola akt_bazowy, tekst_jednolity_aktualny); dist/lex-mcp.mjs przebudowany; pełne ścieżki w CHECKLIST-DEDUP/ALIASY
 - 6.240 (2026-10-20, AUDYT-2026-10-20d): mapa_dzu: nowe wiersze 2026/1288, 1299, 1304, 1305, 1313, 1326; 2023/2670 RE-VER (13 nowelizacji); 1354 i 1358 — treść odczytana; 2025/1705 — zmiana SIOZ
 - 6.239 (2026-10-20, AUDYT-2026-10-20c): mapa_dzu: nowe wiersze 2026/1287, 1296, 1354, 1358; 1348 — treść odczytana. Przegląd ELI 1–20.10.2026: 69 pozycji, 53 dotyczące aktów obecnych w skillach.
 
