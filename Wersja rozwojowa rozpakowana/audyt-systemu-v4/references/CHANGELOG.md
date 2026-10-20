@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.239 (2026-10-20, AUDYT-2026-10-20c): mapa_dzu: nowe wiersze 2026/1287, 1296, 1354, 1358; 1348 — treść odczytana. Przegląd ELI 1–20.10.2026: 69 pozycji, 53 dotyczące aktów obecnych w skillach.
+
 - 6.238 (2026-10-20, AUDYT-2026-10-20b): mapa_dzu: nowe wiersze 2026/1347 i 2026/1348 (MONITORING), wiersz 2026/1342 — tekst t.j. odczytany i porównany z 2025/383; prawny-router-v3 3.72 (ROUTING oznaczony dla trybu mechanicznego, AUDYT-2026-10-20a).
 
 - 6.237 (2026-10-19a, AUDYT-2026-10-19a): mapa_dzu: KK 2025/383 → PREV, nowy wiersz 2026/1342 (TJ; tekst w ELI nieopublikowany na 2026-10-19); 2026/1290 — art. 2, 4 ust. 5, 5 i skutek dla rozp. 2016/1430; nowe wiersze 2020/823 (t.j. ustawy o prawnikach zagranicznych) i 2016/1430 (UCH); MONITORING 1290: W MOCY od 17.10.2026 (art. 1 pkt 16, 41, 42 od 1.01.2027). F-108: KK 2026/1342.

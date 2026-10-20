@@ -41,9 +41,17 @@ pełnieniem obowiązków?
 ├─ Typ podstawowy (art. 222 §1) → grzywna, ograniczenie wolności lub
 │  do 3 lat
 │
-└─ Sprowokowany przez funkcjonariusza NIEWŁAŚCIWYM/PRZEKRACZAJĄCYM
-   UPRAWNIENIA zachowaniem (art. 222 §2) → sąd MOŻE zastosować
-   nadzwyczajne złagodzenie kary lub odstąpić od jej wymierzenia
+├─ Sprawca NARAŻA pokrzywdzonego na bezpośrednie niebezpieczeństwo utraty
+│  życia albo ciężkiego uszczerbku (art. 222 §1a, od 2.01.2026,
+│  Dz.U. 2025 poz. 1818) → od 3 miesięcy do 5 lat
+│
+├─ Czyn z §1 lub §1a wywołało niewłaściwe zachowanie funkcjonariusza lub
+│  osoby przybranej (art. 222 §2) → sąd MOŻE zastosować nadzwyczajne
+│  złagodzenie kary lub odstąpić od jej wymierzenia
+│
+└─ Na wniosek pokrzywdzonego sąd ORZEKA podanie wyroku skazującego do
+   publicznej wiadomości (art. 222 §3, od 2.01.2026)
+   ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20]
 ```
 
 ---
@@ -57,7 +65,10 @@ INNEGO PODOBNIE NIEBEZPIECZNEGO PRZEDMIOTU albo ŚRODKA OBEZWŁADNIAJĄCEGO?
 │
 └─ TAK → art. 223 §1 KK → od roku do 10 lat (typ kwalifikowany względem
    art. 222) — §2: ze skutkiem w postaci ciężkiego uszczerbku na
-   zdrowiu → od 2 do 15 lat
+   zdrowiu → od 2 do 15 lat — §3 (od 2.01.2026, Dz.U. 2025 poz. 1818):
+   na wniosek pokrzywdzonego sąd ORZEKA podanie wyroku skazującego do
+   publicznej wiadomości
+   ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20]
 ```
 
 ---
@@ -92,6 +103,7 @@ kumulatywny w praktyce.
 | Znieważenie funkcjonariusza | art. 226 §1 | grzywna/ogr. wolności/do 1 roku | z urzędu |
 | Znieważenie organu konstytucyjnego | art. 226 §3 | grzywna/ogr. wolności/do 2 lat | z urzędu |
 | Naruszenie nietykalności funkcjonariusza | art. 222 §1 | grzywna/ogr. wolności/do 3 lat | z urzędu |
+| Naruszenie nietykalności z narażeniem na utratę życia / ciężki uszczerbek | art. 222 §1a | 3 m-ce – 5 lat | z urzędu |
 | Czynna napaść (wspólnie/broń/niebezpieczny przedmiot/środek obezwładniający) | art. 223 §1 | 1–10 lat | z urzędu |
 | Czynna napaść ze skutkiem ciężkiego uszczerbku | art. 223 §2 | 2–15 lat | z urzędu |
 | Wpływ na organ / zmuszanie funkcjonariusza | art. 224 §1-2 | do 3 lat | z urzędu |
@@ -162,15 +174,19 @@ Dz.U. 2025 poz. 1818, w życie 14 dni od ogłoszenia — czyli grudzień
 NIEBEZPIECZEŃSTWO utraty ŻYCIA albo CIĘŻKIEGO USZCZERBKU na zdrowiu →
 podlega karze pozbawienia wolności OD 3 MIESIĘCY DO 5 LAT
 
-⭐ ta sama nowelizacja (2025 poz. 1818) wprowadziła ANALOGICZNY
-mechanizm (dodanie kwalifikowanego §1a/§2 z tą samą granicą 3 m-ce–5
-lat oraz możliwością nadzwyczajnego złagodzenia/odstąpienia od kary
-gdy czyn sprawcy zostały WYWOŁANE niewłaściwym zachowaniem
-funkcjonariusza) — RÓWNIEŻ do INNEGO przepisu tego samego rozdziału
-ochronnego (⚠️ dokładny numer artykułu, prawdopodobnie art. 222 lub
-223 — NIE potwierdzony z pewnością w tej sesji, sprawdź na ISAP czy
-ta sama nowelizacja objęła również przepisy opisane w DRZEWACH F.2-F.4
-wyżej w tym module — jeśli TAK, ZAKTUALIZUJ te sekcje analogicznie)
+⭐ ta sama nowelizacja (Dz.U. 2025 poz. 1818, w mocy 2.01.2026) — ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20]:
+  → art. 222 §1a (narażenie funkcjonariusza: 3 m-ce – 5 lat), §2 obejmuje §1 i §1a,
+    §3 publikacja wyroku na wniosek pokrzywdzonego — DRZEWO F.2;
+  → art. 223 §3 publikacja wyroku na wniosek pokrzywdzonego — DRZEWO F.3;
+  → art. 231b (obrońca porządku publicznego): §1 — osoba, która w obronie koniecznej
+    odpiera zamach na jakiekolwiek cudze dobro chronione prawem, chroniąc
+    bezpieczeństwo lub porządek publiczny, korzysta z ochrony prawnej funkcjonariusza
+    publicznego; §2 UCHYLONY (dawne wyłączenie ochrony); §3 NOWY — gdy czyn sprawcy
+    zamachu godzi wyłącznie w cześć lub godność tej osoby, ściganie na wniosek
+    pokrzywdzonego. Przepis przejściowy (art. 4 ustawy 1818): do czynów sprzed jej
+    wejścia w życie stosuje się art. 231b §2 w brzmieniu dotychczasowym.
+  ⛔ KOREKTA 2026-10-20: wcześniejsza wersja zostawiała numer przepisu jako
+  niepotwierdzony („prawdopodobnie art. 222 lub 223”).
 
 Checklist praktyczny:
 □ Czy pokrzywdzony był OSOBĄ PRYWATNĄ (nie funkcjonariuszem) podejmującą

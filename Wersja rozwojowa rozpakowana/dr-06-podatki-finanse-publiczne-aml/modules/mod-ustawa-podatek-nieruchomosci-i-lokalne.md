@@ -34,7 +34,7 @@ Podatek od nieruchomości (budynki, budowle, grunty), podatek rolny, podatek le�
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Ustawa o podatkach i opłatach lokalnych | **Dz.U. 2025 poz. 707 t.j.** | NOWA REFORMA od 01.01.2025 |
+| Ustawa o podatkach i opłatach lokalnych | **Dz.U. 2025 poz. 707 t.j.**; ⚡ zm. po t.j.: **Dz.U. 2026 poz. 1354** (ustawa z 18.09.2026, ogł. 19.10.2026, w mocy 1.01.2027; ⛔ tekst w ELI nieopublikowany na 2026-10-20 — przed powołaniem przepisu u.p.o.l. od 2027 r. odczytaj 1354) ✅ [VER] RZĄD 1 2026-10-20 (metadane ELI DU/2026/1354) | NOWA REFORMA od 01.01.2025; zmiana od 1.01.2027 |
 | Ustawa o podatku rolnym | Dz.U. 2025 poz. 1344 t.j. | |
 | Ustawa o podatku leśnym | weryfikuj aktualny t.j. w ELI (RZĄD 1) | |
 

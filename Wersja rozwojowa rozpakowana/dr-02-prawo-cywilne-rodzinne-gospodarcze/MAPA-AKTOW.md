@@ -80,7 +80,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
 | Prawa konsumenta | Dz.U. 2026 poz. 1244 t.j. ze zm. | `mod-ustawa-prawa-konsumenta` | 🟢 B+/COV |
-| UOKiK | Dz.U. 2025 poz. 1714 t.j. ze zm. | `mod-ustawa-UOKIK-antymonopolowe` | 🟢 B+/COV |
+| UOKiK | Dz.U. 2025 poz. 1714 t.j. ze zm. (m.in. 2026/1296 art. 6 — Prezes UOKiK organem DSA, art. 29 ust. 2b, od 6.11.2026) | `mod-ustawa-UOKIK-antymonopolowe` | 🟢 B+/COV |
 | Kredyt konsumencki / SKD | Dz.U. 2025 poz. 1362 t.j. ze zm. | `mod-ustawa-kredyt-konsumencki-SKD` | ✅ aktywny; fresh gate |
 | Parabanki / lombardy / lichwa | KC/KK + ustawa lombardowa Dz.U. 2024 poz. 1111 t.j. ze zm. + akty szczególne | `mod-parabanki-chwilowki-lombardy-lichwa.md` | ✅ aktywny; fresh gate |
 | Reklama wobec nieletnich | UPNPR Dz.U. 2023 poz. 845 t.j. + ustawa o radiofonii i telewizji Dz.U. 2022 poz. 1722 t.j. ze zm. | `mod-reklama-wobec-nieletnich` | ✅ aktywny; fresh gate |

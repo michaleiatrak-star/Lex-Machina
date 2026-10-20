@@ -8,7 +8,7 @@
 |---|---|---|---|
 | Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat |
-| KK (art. 178a, 180a, 115 §26) | Dz.U. 2026 poz. 1342 t.j. | zmiany z Dz.U. 2025 poz. 1872 (przed t.j.: 2025/383 + 1872) | Nowe przestępstwa drogowe od 29.01.2026 |
+| KK (art. 42, 43a, 44b, 69 §4, 115 §26, 177 §2a, 178, 178c, 178d) | Dz.U. 2026 poz. 1342 t.j. | t.j. obejmuje Dz.U. 2025 poz. 1872; brak zmian po t.j. | Nowe przestępstwa drogowe od 29.01.2026; brzmienie poniżej z t.j. ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20] |
 | KW (art. 86c — drift, wyścigi) | Dz.U. 2025 poz. 734 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
 
 ```
@@ -41,27 +41,40 @@ typów odpowiedzialności i uprawnień, wprowadzonych etapowo od 29.01.2026:
 ## ⚡ ALERT — BRD II (Dz.U. 2025 poz. 1872) — w życie 29.01.2026 i 30.03.2026
 
 ```
-OD 29.01.2026 — NOWE PRZESTĘPSTWA KK i WYKROCZENIA KW:
-  → Nielegalne wyścigi pojazdów — definicja legalna (art. 115 §26 KK):
-    "rywalizacja co najmniej dwóch kierujących bez zezwolenia, w celu jak najszybszego
-     pokonania odcinka drogi, obejmująca celowy drift oraz jazdę na jednym kole
-     podczas zorganizowanych spotkań"
-  → Brawurowa jazda — NOWE PRZESTĘPSTWO KK:
-    Trzy przesłanki łącznie: rażące przekroczenie prędkości + naruszenie innych zasad BRD
-    + stworzenie realnego zagrożenia dla innych uczestników ruchu
-    Kara: pozbawienie wolności 3 mies. – 5 lat; do 10 lat jeśli ciężki uszczerbek/śmierć
-    KLUCZOWE: brak wypadku NIE wyklucza odpowiedzialności karnej
+OD 29.01.2026 — NOWE PRZESTĘPSTWA KK i WYKROCZENIA KW (brzmienie KK z t.j. 1342):
+  → Nielegalny wyścig pojazdów mechanicznych — definicja legalna (art. 115 §26 KK):
+    1) rywalizacja kierujących co najmniej dwoma pojazdami mechanicznymi w ruchu lądowym,
+       w szczególności z zamiarem pokonania odcinka drogi w jak najkrótszym czasie,
+       z naruszeniem zasad bezpieczeństwa w ruchu lądowym, LUB
+    2) celowe wprowadzenie pojazdu mechanicznego w poślizg lub celowe doprowadzenie do utraty
+       styczności z nawierzchnią chociażby jednego z kół, wykonane w trakcie spotkania
+       zorganizowanego na otwartej lub ogólnodostępnej przestrzeni
+    – odbywające się bez wymaganego zezwolenia.
+  → Art. 178c §1 KK: organizowanie lub prowadzenie nielegalnego wyścigu (pkt 1) albo udział
+    w nim jako prowadzący pojazd mechaniczny (pkt 2) — 3 mies. do 5 lat; §2: przygotowania
+    do przestępstwa z §1 — do 3 lat (bez przeprowadzenia wyścigu).
+  → Art. 178d KK („brawurowa jazda”): prowadzenie pojazdu mechanicznego z RAŻĄCYM
+    przekroczeniem prędkości ORAZ rażącym naruszeniem innych zasad bezpieczeństwa w ruchu
+    lądowym, przez co sprawca NARAŻA CZŁOWIEKA na bezpośrednie niebezpieczeństwo utraty
+    życia albo skutku z art. 156 §1 lub 157 §1 — 3 mies. do 5 lat. Wypadek nie jest
+    znamieniem (przestępstwo z narażenia).
+  → Art. 177 §2a KK: wypadek ze skutkiem z §2 (śmierć, ciężki uszczerbek) spowodowany
+    w nielegalnym wyścigu, w warunkach art. 178d albo w czasie obowiązywania zakazu
+    prowadzenia pojazdów (art. 39 pkt 3) — od roku do lat 10.
   → Art. 86c KW (NOWY) — celowe driftowanie:
     "Celowe wprowadzenie pojazdu w poślizg lub utrata styczności choćby jednego koła
      z nawierzchnią" na drodze publicznej, strefie ruchu/zamieszkania
     → Grzywna min. 1 500 zł
   → Organizowanie nielegalnych spotkań motoryzacyjnych (≥10 pojazdów bez zgłoszenia):
     → art. 52aa KW (od 29.01.2026): organizator/przewodniczący — ograniczenie wolności albo grzywna NIE NIŻSZA niż 2 000 zł; umyślny uczestnik — grzywna (korekta AUDYT-2026-10-04c; ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3, odczyt 2026-10-04])
-  → Przygotowanie do wyścigu (blokowanie drogi, organizacja infrastruktury):
-    → Kara do 3 lat pozbawienia wolności — nawet bez przeprowadzenia wyścigu
-  → Obligatoryjny przepadek pojazdu: gdy alkohol ≥ 1,5‰ (art. 178a KK)
-    Alternatywa gdy niemożliwy (leasing, współwłasność): nawiązka 5 000–500 000 zł
-  → Dożywotni zakaz prowadzenia pojazdów: recydywiści jeżdżący mimo zakazu
+  → Przepadek pojazdu (art. 44b KK): fakultatywny (§1) przy art. 178a §1 lub 4, 178c §1 pkt 2,
+    178d, 244 (niezastosowanie się do zakazu) i wobec sprawcy z art. 178 §1 lub 1a;
+    OBLIGATORYJNY (§1a) przy art. 178a §1 lub 4, 178c §1 pkt 2, 178d i sprawcy z art. 178
+    §1 lub 1a, gdy alkohol ≥1,5‰ we krwi lub 0,75 mg/dm³ w wydychanym powietrzu (albo
+    prowadził do takiego stężenia), chyba że wyjątkowy wypadek. §5: nie orzeka się, gdy
+    pojazd nie był wyłączną własnością sprawcy albo przepadek niemożliwy/niecelowy;
+    §6: wtedy nawiązka 5 000–500 000 zł (obligatoryjna przy §5 pkt 1, fakultatywna przy pkt 2).
+  → Dożywotni zakaz prowadzenia pojazdów: art. 42 §3 i §4 KK (sekcja 1).
 
 OD 30.03.2026 — ZATRZYMANIE PJ:
   → Administracyjne zatrzymanie PJ na 3 miesiące za drift/wyścig/jazdę na jednym kole
@@ -78,38 +91,38 @@ PODSTAWY (bez zmian systemowych):
   Art. 42 KK — środek karny (sprawy karne)
   Art. 29 KW — środek karny (sprawy o wykroczenia)
 
-NOWE PRZEPISY OD 29.01.2026 (Dz.U. 2025 poz. 1872) — ⭐ ZWERYFIKOWANE 2026-07-20:
-  → NOWY OBOWIĄZKOWY zakaz (art. 42 §1a KK, nowy): sąd ORZEKA zakaz
-    prowadzenia WSZELKICH pojazdów mechanicznych (nie fakultatywnie,
-    lecz OBLIGATORYJNIE) w razie skazania za przestępstwo z art. 177
-    §2a, art. 178b, art. 178c §1 pkt 2, art. 178d (brawurowa jazda —
-    patrz sekcja 2) LUB art. 180a
-  → DOŻYWOTNI zakaz (art. 42 §3 KK, zweryfikowane brzmienie): sąd
-    ORZEKA zakaz DOŻYWOTNIO w razie popełnienia przestępstwa z art.
-    178a §4 (recydywa nietrzeźwego kierowcy) LUB art. 244 (złamanie
-    zakazu sądowego), GDY czyn polegał na NIEZASTOSOWANIU SIĘ do
-    wcześniejszego zakazu prowadzenia pojazdów — LUB gdy sprawca w
-    chwili popełnienia przestępstwa z art. 173 (katastrofa w ruchu, ze
-    skutkiem śmierci/ciężkiego uszczerbku) albo art. 177 §2/§2a lub
-    art. 355 §2 (wypadek popełniony przez żołnierza) BYŁ w stanie
-    NIETRZEŹWOŚCI lub pod wpływem środka odurzającego, LUB ZBIEGŁ z
-    miejsca zdarzenia (przed/po zdarzeniu, przed poddaniem się badaniu)
-  → Obligatoryjny PRZEPADEK POJAZDU (≥1,5‰): art. 44a §1 KK (nowy) — weryfikuj
-    lub nawiązka 5 000–500 000 zł gdy przepadek niemożliwy
+NOWE PRZEPISY OD 29.01.2026 (Dz.U. 2025 poz. 1872; brzmienie z t.j. 1342) ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20]:
+  → Art. 42 §1a KK: sąd ORZEKA (obligatoryjnie) zakaz prowadzenia WSZELKICH pojazdów
+    mechanicznych w razie skazania za art. 177 §2a, art. 178b, art. 178c §1 pkt 2,
+    art. 178d lub art. 180a.
+  → Art. 42 §3 KK: zakaz DOŻYWOTNI w razie popełnienia przestępstwa z art. 178a §4 lub
+    art. 244 (gdy czyn polegał na niezastosowaniu się do zakazu prowadzenia pojazdów
+    mechanicznych) albo gdy sprawca przestępstwa z art. 173 (ze skutkiem śmierci lub
+    ciężkiego uszczerbku), art. 177 §2 lub 2a lub art. 355 §2 był nietrzeźwy, pod wpływem
+    środka odurzającego, zbiegł z miejsca zdarzenia lub spożywał alkohol/środek przed
+    badaniem — chyba że wyjątkowy wypadek. §4: dożywotnio także przy ponownym skazaniu
+    osoby prowadzącej pojazd mechaniczny w warunkach §3 (bez wyjątku).
+  → Przepadek pojazdu i nawiązka — art. 44b KK (alert wyżej). ⛔ Nie „art. 44a” (wcześniejsza wersja modułu) —
+    art. 44a to przepadek przedsiębiorstwa.
+  → Świadczenie pieniężne (art. 43a §2 KK): co najmniej 5 000 zł m.in. przy art. 177 §2a,
+    178a §1, 178b, 178c §1, 178d, 244; §3: co najmniej 10 000 zł przy art. 178a §4 i 244
+    (niezastosowanie się do zakazu); górna granica 60 000 zł (§1).
+  → Warunkowe zawieszenie (art. 69 §4 pkt 3 KK): przy art. 173 §1 lub 3, art. 177 §1–2a
+    lub art. 355 §1 lub 2 popełnionych z alkoholem ≥1,5‰ / 0,75 mg/dm³ albo w czasie
+    zakazu z art. 39 pkt 3 — tylko w szczególnie uzasadnionych wypadkach.
 
-⭐ PODWYŻSZONE DOLNE GRANICE KARY dla wypadków/katastrof drogowych
-(zweryfikowane 2026-07-20, dokładny artykuł nowelizowany — prawdopodobnie
-art. 173/177 KK, ⚠️ zweryfikuj precyzyjnie na ISAP przy konkretnej sprawie):
-  → NIE NIŻSZA niż 3 LATA — gdy następstwem WYPADKU jest ciężki
-    uszczerbek na zdrowiu innej osoby ALBO następstwem KATASTROFY jest
-    ciężki uszczerbek na zdrowiu WIELU osób (do dwukrotności górnej
-    granicy ustawowego zagrożenia)
-  → NIE NIŻSZA niż 5 LAT — gdy następstwem czynu jest ŚMIERĆ człowieka
-    (do dwukrotności górnej granicy przy katastrofie, a DO 20 LAT
-    pozbawienia wolności przy wypadku)
-  ⭐ TO OZNACZA: sądy NIE MOGĄ już orzekać kar poniżej tych progów przy
-  najpoważniejszych skutkach wypadków/katastrof drogowych — istotne
-  ZAOSTRZENIE w porównaniu do stanu sprzed 29.01.2026
+⭐ ZAOSTRZENIE KARY — art. 178 §1 i §1a KK (TYLKO sprawca nietrzeźwy, pod wpływem środka
+odurzającego, zbiegły z miejsca zdarzenia albo spożywający alkohol/środek przed badaniem):
+  → §1: przy art. 173 §1 lub 2, 174, 177 §1 lub 2a, 178c §1 pkt 2, 178d — kara od dolnej
+    granicy zwiększonej o połowę do górnej granicy zwiększonej o połowę.
+  → §1a: przy art. 173 §3 lub 4, 177 §2 lub 2a, 178c §1 pkt 2, 178d w tych warunkach:
+    1) NIE NIŻSZA niż 3 LATA — ciężki uszczerbek innej osoby (wypadek) albo wielu osób
+       (katastrofa), do dwukrotności górnej granicy zagrożenia;
+    2) NIE NIŻSZA niż 5 LAT — śmierć człowieka; do dwukrotności górnej granicy (katastrofa),
+       do 20 lat (wypadek).
+  ⛔ KOREKTA 2026-10-20: wcześniejsza wersja modułu podawała te progi jako ogólne dla
+  wypadków/katastrof („prawdopodobnie art. 173/177”). Stosują się wyłącznie w warunkach
+  art. 178 §1 (alkohol, środek odurzający, ucieczka).
 
 SKRÓCENIE ZAKAZU (art. 84 KK):
   → Po połowie okresu (min. 1 rok), na wniosek skazanego
@@ -128,20 +141,20 @@ OBLICZANIE OKRESU:
 ```
 Ustawa z 04.12.2025 r. (Dz.U. 2025 poz. 1872) — weryfikuj: ELI (RZĄD 1)
 
-BRAWUROWA JAZDA (nowe przestępstwo KK):
-  Przesłanki ŁĄCZNIE:
-    1. Rażące przekroczenie prędkości
-    2. Naruszenie innych zasad BRD
-    3. Stworzenie realnego zagrożenia dla innych uczestników ruchu
-  Kara: 3 miesiące–5 lat pozbawienia wolności
-  Kwalifikowana (ciężki uszczerbek/śmierć): do 10 lat
-  KLUCZOWE: BRAK wypadku = NIE wyklucza odpowiedzialności karnej
-  → Weryfikuj: web_search "brawurowa jazda art KK Dz.U. 2025 poz. 1872 przesłanki"
+BRAWUROWA JAZDA — art. 178d KK:
+  Znamiona ŁĄCZNIE: rażące przekroczenie prędkości + rażące naruszenie innych zasad
+  bezpieczeństwa w ruchu lądowym + narażenie człowieka na BEZPOŚREDNIE niebezpieczeństwo
+  utraty życia albo skutku z art. 156 §1 lub 157 §1.
+  Kara: 3 miesiące–5 lat. Wypadek ze skutkiem z art. 177 §2 w warunkach art. 178d:
+  art. 177 §2a — od roku do lat 10 (+ art. 178 §1a, gdy alkohol/ucieczka).
+  KLUCZOWE: brak wypadku NIE wyklucza odpowiedzialności (przestępstwo z narażenia).
 
-NIELEGALNE WYŚCIGI (art. 115 §26 KK — definicja):
-  → Rywalizacja ≥2 kierujących bez zezwolenia + cel pokonania odcinka jak najszybciej
-  → Obejmuje: celowy drift + jazdę na jednym kole podczas zorganizowanych spotkań
-  → Przygotowanie (blokowanie drogi, infrastruktura): do 3 lat, nawet bez wyścigu
+NIELEGALNE WYŚCIGI — art. 115 §26 (definicja) i art. 178c KK:
+  → Definicja: patrz alert wyżej (rywalizacja ≥2 pojazdów mechanicznych z naruszeniem zasad
+    bezpieczeństwa albo celowy poślizg / utrata styczności koła na zorganizowanym spotkaniu
+    — w obu wypadkach bez wymaganego zezwolenia).
+  → Organizowanie, prowadzenie, udział jako kierujący: 3 mies.–5 lat (art. 178c §1).
+  → Przygotowania: do 3 lat (art. 178c §2), nawet bez wyścigu.
 
 DRIFT I CELOWY POŚLIZG (art. 86c KW — nowy):
   → "Celowe wprowadzenie pojazdu w poślizg lub utrata styczności ≥1 koła z nawierzchnią"
@@ -152,9 +165,9 @@ SPOTY I ZLOTY BEZ ZGŁOSZENIA (≥10 pojazdów):
   → Obowiązek zgłoszenia organowi gminy
   → Brak zgłoszenia: art. 52aa KW (od 29.01.2026): organizator/przewodniczący — ograniczenie wolności albo grzywna NIE NIŻSZA niż 2 000 zł; umyślny uczestnik — grzywna (korekta AUDYT-2026-10-04c; ✅ [VER: ELI DU/2025/1872 art. 1 pkt 3, odczyt 2026-10-04])
 
-OBLIGATORYJNY PRZEPADEK POJAZDU:
-  → Alkohol ≥1,5‰: sąd orzeka przepadek OBOWIĄZKOWO
-  → Niemożność przepadku: nawiązka 5 000–500 000 zł
+PRZEPADEK POJAZDU — art. 44b KK (szczegóły w alercie wyżej):
+  → §1a: alkohol ≥1,5‰ / 0,75 mg/dm³ — obligatoryjnie (wyjątkowy wypadek wyłącza)
+  → §5–§6: pojazd nie wyłącznie sprawcy albo przepadek niemożliwy — nawiązka 5 000–500 000 zł
   → Weryfikuj art. KKW dotyczące wykonania
 
 ZAKAZ DOŻYWOTNI I NOWY OBOWIĄZKOWY ZAKAZ:
@@ -209,8 +222,9 @@ OD ZAKAZU SĄDOWEGO:
 
 BRAWUROWA JAZDA (nowe):
   1. Kwestionowanie "rażącego" przekroczenia (interpretacja — próg nieostry)
-  2. Brak spełnienia WSZYSTKICH trzech przesłanek łącznie
-  3. Brak "realnego zagrożenia" — czy inne pojazdy faktycznie były zagrożone?
+  2. Brak spełnienia WSZYSTKICH znamion art. 178d łącznie (prędkość ORAZ inne zasady)
+  3. Brak BEZPOŚREDNIEGO niebezpieczeństwa dla człowieka (utrata życia, art. 156 §1,
+     157 §1) — samo zagrożenie abstrakcyjne nie wystarcza
 ```
 
 ---

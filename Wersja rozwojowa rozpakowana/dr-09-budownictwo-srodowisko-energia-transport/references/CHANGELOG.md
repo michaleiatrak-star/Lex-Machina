@@ -1,5 +1,7 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.53 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1348 odczytana (zmiana sprzedawcy w 21 dni do 19.04.2028, art. 9ja–9je PE, kary URE) w mod-PrEnergetyczne-URE-OZE i MAPA-AKTOW; DU/2026/1358 (zmiana Prawa wodnego po t.j. 1335, w mocy 3.11.2026) w MAPA-AKTOW i mod-PrWodne — tekst w ELI nieopublikowany.
+
 - 3.52 (2026-10-20, AUDYT-2026-10-20b): DU/2026/1347 (nowelizacja OZE, ogł. 16.10.2026) i DU/2026/1348 (PE, w mocy 17.10.2026) w MAPA-AKTOW (wiersze PE/URE/OZE i Prawo budowlane — art. 9a od 17.10.2027) oraz w mod-PrEnergetyczne-URE-OZE (tabela zmian i dat z art. 41); mod-POS i mod-POS-szczegoly: tekst t.j. KK 1342 opublikowany, art. 181–188a bez zmian.
 
 - 3.51 (2026-10-19a, AUDYT-2026-10-19a): mod-POS, mod-POS-szczegoly: KK — t.j. Dz.U. 2026 poz. 1342 (najnowszy; 0 zmian po t.j.; do publikacji tekstu 2025/383 + 4 nowelizacje).

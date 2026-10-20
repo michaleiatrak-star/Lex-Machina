@@ -1,7 +1,7 @@
-c730d6c6c0c88cc7e3a3da95c389db86ce49089ff9581a0fcdd2bcf7d36b5cd0  ./MAPA-AKTOW.md
+042cec4259777a91c2bb3f6803dd3bd414856283d14e94fb13054895b1ac1ceb  ./MAPA-AKTOW.md
 09b5b612b258f9798b1777158d3f8cd814a77081741ac9f99e80a9786b10ae4f  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-8959f4022d80c7b444daa8708b68f2379b3d0a7a8bcb2a02f395dd17a61ebcb1  ./SKILL.md
+29c3bef01298086788aaf889bcb5528c3303b09194fb4913275cf65b56721423  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 b957886f0c5a16a23f9690b0466af0ad5708097c1a1fddf05d14a4fcf1379099  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -36,7 +36,7 @@ a05ccbadd5b279fad5d38dfc27d671cd06952c24a11690218da6aa3052301180  ./modules/mod-
 7ef7ff30a0f1d807c60fcfa742c000896e74da9ca0e21a75e0877f0a2ed824ea  ./modules/mod-kasy-rejestrujace-fiskalizacja.md
 a6acf82148af843a61c08ee45a89c489c0d52d54b6dfe86a267ce79f2e6e10b0  ./modules/mod-limit-platnosci-gotowkowych.md
 b95429c53a3179532f58c8a1b0017d19a73a6bb2b937c0b4b112bd5c1de3302b  ./modules/mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP.md
-a2333ec097fba12e341c785a3fa1a632ad2491ee1f2b42fcc904a2df02058d32  ./modules/mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny.md
+e65e4d432c70733f1d68a72325800ae12d3e1de682ffec22ae94fa847c57816c  ./modules/mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny.md
 1153f48f3febf1c229dbc614b1b7594a462c87d7038a14ea78146fdeca72e364  ./modules/mod-prawo-bankowe-KNF-BFG.md
 a01c7ba74fd06a70eebfa6e2a3c01ae9133d6baf53598086f39d53b3c3906ae3  ./modules/mod-rachunkowosc-budzetowa-JSFP.md
 04ea4965466be269b4e1f2bd62d0b4b954768d11d92b03a8670ef1e270e579a7  ./modules/mod-ustawa-AML-instytucje-obowiazkowe.md
@@ -45,7 +45,7 @@ a01c7ba74fd06a70eebfa6e2a3c01ae9133d6baf53598086f39d53b3c3906ae3  ./modules/mod-
 be6ff6846af602b042e0a419429be338cace9a77961274aa35aca779235c61bc  ./modules/mod-ustawa-biegli-rewidenci-zawod.md
 50a63081de3354ef75808a41860842940b86a7dac2d6e460cf2918b6e60de749  ./modules/mod-ustawa-doradcy-podatkowi-zawod.md
 e4d301431077a197e12b4e583dcf250c6c2a62b2c93e04c04450439ebfb1eba3  ./modules/mod-ustawa-oplata-skarbowa.md
-3e2b975b412bd65ce4d6ae1b24aa2a846c8910175744b53818fdbe31e0bb213a  ./modules/mod-ustawa-podatek-nieruchomosci-i-lokalne.md
+da0d203e783c247d7fb7945a25b9c3096b14987633f502721d730d3fd2748612  ./modules/mod-ustawa-podatek-nieruchomosci-i-lokalne.md
 410e2e7324d98b9445f4a7933f44fc95d5298c13a00aee8a0c4d9cd7185a3231  ./modules/mod-ustawa-podatek-wydobycie-kopalin.md
 a73ef79207f66c74f397313f513244ecc17f30b8bbe101467ea0dae938763300  ./modules/mod-ustawa-rachunkowosci.md
 2596e380d97e25f2a37e3df0d3e0a011a0beabf2d6d9ea4bd7f5d303ebaf9f9d  ./modules/mod-ustawa-ryczalt-przychody.md
@@ -74,5 +74,5 @@ f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 5666286b9a042068711d23dd0689936598ec28bfb3fecee053c072dc80dce86e  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
 60c782cb9d4b774fe75cfe90775e835d84af0ce88ab056a541e7bc7fb82e1736  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-5f28c8a9e3cc0a466ccd3d23cb245976ccd9c3c1072b108dce1dad75be8e8b26  ./references/CHANGELOG.md
+7a351428daa77ce7f6edbf2a49cc2384151af9e87bdc984436e55ac8a7929dfe  ./references/CHANGELOG.md
 0f04d7c347f094d44d41df4e026937cf23482a7e4ce7e3393ee611dad0c8e05a  ./references/HISTORIA-ZMIAN-PLIKOW.md

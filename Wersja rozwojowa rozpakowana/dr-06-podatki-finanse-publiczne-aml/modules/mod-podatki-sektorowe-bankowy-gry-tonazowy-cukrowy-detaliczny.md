@@ -558,6 +558,36 @@ ORGAN WŁAŚCIWY (właściwość miejscowa, potwierdzona wprost w
 
 ---
 
+## CZĘŚĆ F — PODATEK OD NADZWYCZAJNYCH ZYSKÓW ZE ZBYCIA PALIW CIEKŁYCH (2026–2027)
+
+Ustawa z 18.09.2026 o podatku od nadzwyczajnych zysków osiągniętych w okresie od marca 2026 r.
+do marca 2027 r. ze zbycia paliw ciekłych — **Dz.U. 2026 poz. 1287**, ogł. 1.10.2026, w mocy
+**1.11.2026** (art. 11 — od 2.10.2026) ✅ [VER: ELI DU/2026/1287 text.pdf + metadane, RZĄD 1, 2026-10-20].
+
+```
+PODATNIK (art. 5): podmiot prowadzący w RP (sam lub przez inny podmiot) działalność w zakresie
+  wytwarzania paliw ciekłych (przerób ropy) albo obrotu paliwami ciekłymi z zagranicą na
+  podstawie koncesji. Paliwa ciekłe — art. 2 ust. 1 pkt 4 ustawy o systemie monitorowania
+  jakości paliw, bez olejów opałowych (art. 2 pkt 2).
+PRZEDMIOT (art. 6): przychody ze zbycia paliw ciekłych.
+ROK PODATKOWY (art. 4): 1.03.2026 – 31.03.2027 (jednorazowy).
+PODSTAWA (art. 7): nadwyżka przychodów faktycznych ponad przychody hipotetyczne
+  = koszty faktyczne ÷ (1 − marża referencyjna); marża referencyjna = średnia marża
+  sprzedaży paliw w 2025 r. + 20%, nie mniej niż 2,00% (2,00% także dla podatników bez
+  takiej działalności w 2025 r.).
+STAWKA (art. 8): 60% podstawy; podatnik niewytwarzający paliw (tylko obrót z zagranicą):
+  podatek nie wyższy niż 50% dochodu z działalności (PIT) / ze źródeł innych niż zyski
+  kapitałowe (CIT) / zysku netto, przypadającego proporcjonalnie na rok podatkowy.
+ZALICZKI (art. 9): miesięczne, narastająco, do 25. dnia następnego miesiąca; pierwsza
+  za 1.03–31.10.2026 (płatna do 25.11.2026). Zeznanie i dopłata: do 31.12.2027.
+  Nadpłata: zwrot w 3 mies. od zeznania (2 mies. od wniosku z korektą).
+KUP: podatek NIE jest kosztem uzyskania przychodów — art. 52zu PIT, art. 38zb CIT.
+AKCYZA (art. 11): MF może rozporządzeniem obniżać stawki akcyzy na paliwa (art. 89 ust. 1
+  pkt 2, 6, 8 u.p.a.) do końca roku podatkowego (31.03.2027).
+```
+
+---
+
 ## CHECKLIST ZBIORCZY — KIEDY SPRAWDZIĆ KTÓRY PODATEK SEKTOROWY
 
 ```

@@ -32,17 +32,19 @@ Pozew cywilny (dobra osobiste):   art. 4421 KC — 3 lata od dowiedzenia się o 
 | Czyn | Przepis | Zagrożenie | Tryb ścigania |
 |---|---|---|---|
 | Nielegalny dostęp do systemu | art. 267 §1 KK | do 2 lat | na wniosek |
-| Podsłuch / przechwyt danych | art. 267 §3 KK | do 3 lat | na wniosek |
-| Naruszenie integralności danych | art. 268 KK | do 2 lat (§1) / do 3 lat (§2 — znaczna szkoda) | na wniosek gdy os. bliska (art. 268 §3 KK) |
-| Sabotaż systemów informatycznych | art. 268a KK | do 3 (§1) / do 5 lat (§2) | na wniosek gdy os. bliska (art. 268a §3 KK) |
-| Zakłócenie pracy systemu (DDoS) | art. 269a KK | do 5 lat | z urzędu |
-| Wytwarzanie/obrót narzędziami hakerskimi | art. 269b KK | do 2 lat | z urzędu |
+| Podsłuch / przechwyt danych | art. 267 §3 KK | grzywna, ogr. wolności albo do 2 lat (jak §1) | na wniosek (§5) |
+| Naruszenie integralności zapisu informacji | art. 268 KK | grzywna, ogr. wolności albo do 2 lat (§1); do 3 lat — zapis na informatycznym nośniku (§2); 3 m–5 lat — znaczna szkoda majątkowa (§3) | na wniosek (§4) |
+| Naruszenie integralności danych informatycznych | art. 268a KK | do 3 lat (§1); 3 m–5 lat — znaczna szkoda majątkowa (§2) | na wniosek (§3) |
+| Zakłócenie pracy systemu (DDoS) | art. 269a KK | 3 m–5 lat | z urzędu |
+| Wytwarzanie/obrót narzędziami hakerskimi (katalog: art. 165 §1 pkt 4, 267 §1–3, 268a, 269, 269a, 270 §1, 270a §1) | art. 269b §1 KK | 3 m–5 lat; §1a — działanie wyłącznie w celu zabezpieczenia systemu | z urzędu |
 | Oszustwo komputerowe (phishing tylko wtedy, gdy spełnia znamiona przepisu) | art. 287 KK | 3 miesiące–5 lat (§ 1); wypadek mniejszej wagi: grzywna, ograniczenie wolności albo do roku (§ 2) | na wniosek, gdy czyn popełniono na szkodę osoby najbliższej (art. 287 § 3 KK) |
 | Kradzież tożsamości / podszywanie się | art. 190a §2 KK | 6 m–8 lat | na wniosek |
 | Stalking online | art. 190a §1 KK | 6 m–8 lat | na wniosek |
 | Groźby przez internet | art. 190 §1 KK | do 3 lat | na wniosek |
-| Zniesławienie online | art. 212 §2 KK | do 2 lat lub grzywna | prywatnoskargowy |
+| Zniesławienie online | art. 212 §2 KK | grzywna, ogr. wolności albo do roku | prywatnoskargowy (§4) |
 | Naruszenie wizerunku (intymne) | art. 191a KK | 3 m–5 lat | na wniosek |
+
+⛔ KOREKTA 2026-10-20 (art. 267 §3, 268, 268a, 269a, 269b, 212 §2): zagrożenia i tryby z t.j. KK Dz.U. 2026 poz. 1342 ✅ [VER: ELI DU/2026/1342 text.pdf, RZĄD 1, 2026-10-20]; art. 269b §1 w brzmieniu Dz.U. 2026 poz. 902 obejmuje art. 267 §1–3 (wcześniej tylko §3).
 
 ⚠️ WERYFIKUJ TRYB ŚCIGANIA przed udzieleniem porady — od trybu zależy czy Policja działa sama.
 

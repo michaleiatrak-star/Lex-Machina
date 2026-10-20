@@ -48,9 +48,15 @@ START: Jaka kara została orzeczona / ma być orzeczona?
 ├─ Grzywna albo ograniczenie wolności → art. 69 nie przewiduje
 │  warunkowego zawieszenia wykonania tych kar
 │
-└─ ⛔ Art. 69 §4: wobec sprawcy występku chuligańskiego oraz sprawcy
-   z art. 178a §4 zawieszenie jest możliwe jedynie w szczególnie
-   uzasadnionych wypadkach
+└─ ⛔ Art. 69 §4: zawieszenie jedynie w szczególnie uzasadnionych wypadkach wobec:
+   1) sprawcy występku o charakterze chuligańskim,
+   2) sprawcy z art. 178a §4,
+   3) sprawcy z art. 173 §1 lub 3, art. 177 §1–2a lub art. 355 §1 lub 2, jeśli
+      alkohol ≥1,5‰ we krwi lub 0,75 mg/dm³ w wydychanym powietrzu (albo
+      prowadził do takiego stężenia) lub w czasie czynu obowiązywał go zakaz
+      prowadzenia pojazdów (art. 39 pkt 3) — pkt 3 dodany Dz.U. 2025 poz. 1872,
+      od 29.01.2026
+   ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), art. 69 §4, RZĄD 1, 2026-10-20]
 ```
 
 ### 1.2 — OKRES PRÓBY (art. 70 KK)

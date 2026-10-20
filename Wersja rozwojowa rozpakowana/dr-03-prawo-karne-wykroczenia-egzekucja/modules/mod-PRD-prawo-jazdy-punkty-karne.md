@@ -10,7 +10,7 @@
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat, cofnięcie za jazdę po zatrzymaniu |
 | Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026 (cz. od 30.03.2026, 03.06.2026) | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Rozp. MSWiA ws. ewidencji kierujących | Dz.U. 2026 poz. 724 (nowe) | W życie 03.06.2026 | **ZASTĄPIONE**: Dz.U. 2023 poz. 1897 ze zm. Dz.U. 2026 poz. 144 → nowe rozporządzenie 29.05.2026 |
-| KK (art. 178a, 180a, 115 §26) | Dz.U. 2026 poz. 1342 t.j. | zmiany z Dz.U. 2025 poz. 1872 (przed t.j.: 2025/383 + 1872) | Nowe przestępstwa drogowe od 29.01.2026 |
+| KK (art. 178a, 180a, 115 §26) | Dz.U. 2026 poz. 1342 t.j. | t.j. obejmuje Dz.U. 2025 poz. 1872; brak zmian po t.j. | Nowe przestępstwa drogowe od 29.01.2026; szczegóły: `mod-PRD-nowe-przestepstwa-drogowe-BRD` |
 | KW (art. 86c — drift, wyścigi) | Dz.U. 2025 poz. 734 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
 
 ```
@@ -204,7 +204,8 @@ Przekroczenie prędkości (wartości ORIENTACYJNE — weryfikuj):
 Alkohol / środki podobne:
   0,2–0,5‰ (art. 87 KW): 10 pkt + możliwy zakaz
   >0,5‰ (art. 178a KK): przestępstwo + zakaz prowadzenia
-  ≥1,5‰: przepadek pojazdu OBLIGATORYJNY lub nawiązka 5 000–500 000 zł
+  ≥1,5‰: przepadek pojazdu OBLIGATORYJNY (art. 44b §1a KK, chyba że wyjątkowy wypadek);
+         pojazd nie wyłącznie sprawcy → nawiązka 5 000–500 000 zł (art. 44b §5–§6)
 
 Wyprzedzanie na przejściu dla pieszych: 15 pkt (weryfikuj)
 Nieustąpienie pierwszeństwa pieszemu: 15 pkt (weryfikuj)

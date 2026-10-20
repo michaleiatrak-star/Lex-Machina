@@ -1,5 +1,7 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.98 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1296: mod-KPC-current-state-COV (zmiany po t.j. 468, art. 17 pkt 4⁶ — sąd okręgowy w sprawach z art. 54 DSA), MAPA-AKTOW UOKiK (Prezes UOKiK organem DSA).
+
 - 3.97 (2026-10-19a, AUDYT-2026-10-19a): mod-PrUpad-wniosek-ogloszenie, mod-PrRestr-odrebne-miedzynarodowe: KK t.j. 2025/383 → dopisek „obecny t.j. Dz.U. 2026 poz. 1342”.
 - 3.96 (2026-10-15c, AUDYT-2026-10-15c): MAPA-AKTOW: nowy wiersz ustawy o CEIDG (t.j. Dz.U. 2026 poz. 30; zm. 2026/734 i 2026/507 etapami: 21.04.2026, 14.10.2026, 1.11.2026, 1.11.2028); KC: ⏳ 2026/507 art. 2 — art. 860 § 3–4 od 1.11.2028 (brzmienie już w t.j. 2026/795); Prawo przedsiębiorców: 2026/507 art. 7 od 14.10.2026. mod-KSH-spolki-handlowe: spółka cywilna od 1.11.2028 (wzory w CEIDG, publikacja informacji o s.c., przejście art. 26 ustawy 507). ELI 2026-10-15.
 

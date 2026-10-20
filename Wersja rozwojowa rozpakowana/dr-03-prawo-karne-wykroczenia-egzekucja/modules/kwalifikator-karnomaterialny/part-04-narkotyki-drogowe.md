@@ -110,8 +110,9 @@ CZY KIEROWCA BYŁ POD WPŁYWEM SUBSTANCJI?
 │           ─ art. 44b §2 (przepadek RÓWNOWARTOŚCI pojazdu) — UCHYLONY
 │           ─ art. 178a §5 (dawna podstawa przepadku w części szczególnej)
 │             — UCHYLONY; nie powołuj go
-│         ✅ [VER: arslege.pl/art-44b + lexlege.pl/kk/art-44b + inforlex
-│            (przypis nowelizacyjny do art. 44b), odczyt 2026-08-25]
+│         ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), art. 44b §1–§6, RZĄD 1,
+│            2026-10-20; §1 i §1a obejmują też art. 178c §1 pkt 2, 178d i sprawcę
+│            z art. 178 §1 lub 1a; §2–§4 uchylone]
 │         ✅ art. 44b § 6: gdy pojazd nie był wyłączną własnością
 │            sprawcy, sąd orzeka nawiązkę na rzecz Skarbu Państwa od
 │            5 000 do 500 000 zł; gdy przepadek jest niemożliwy lub niecelowy

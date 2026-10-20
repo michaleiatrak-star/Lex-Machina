@@ -1,5 +1,7 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.3 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1287 (podatek od nadzwyczajnych zysków ze zbycia paliw ciekłych) — część F mod-podatki-sektorowe, wiersze PIT (art. 52zu) i CIT (art. 38zb); DU/2026/1354 (u.p.o.l., PIT, PCC od 1.01.2027 / 3.11.2026) z metadanych — tekst w ELI nieopublikowany.
+
 - 3.99.2 (2026-10-20, AUDYT-2026-10-20b): MAPA-AKTOW: PIT — DU/2026/1347 art. 2 (art. 14 ust. 2 pkt 14 lit. b uchylona) od 1.12.2026; DU/2026/1354 od 1.01.2027 odnotowana, treść nie badana.
 
 - 3.99.1 (2026-10-15c, AUDYT-2026-10-15c): ⛔ KOREKTA: zmiana VAT z Dz.U. 2026 poz. 507 (art. 6 — art. 96 ust. 3e–3f) wchodzi w życie 1.11.2028 (art. 31 pkt 4), nie 14.10.2026 — MAPA-AKTOW, part-01 VAT, mod-VAT-kursy-walut, mod-VAT-platnicy, mod-VAT-import, mod-VAT-rejestracja (metryka t.j. 2026/1263, nie „po t.j.”), BAZA-AKTOW-OKOLOPODATKOWYCH. ELI 2026-10-15.

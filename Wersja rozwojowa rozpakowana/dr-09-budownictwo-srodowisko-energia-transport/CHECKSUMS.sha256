@@ -1,7 +1,7 @@
-21c5b78d55599aa817e97476b4fb9f2ddd113043f83335e1380d341cb2a3b63c  ./MAPA-AKTOW.md
+a16bff84d6b06007757cad2c3131843b255ed684ecd0a3ab9fc54b087a4a297b  ./MAPA-AKTOW.md
 83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-e372990bd25cae8292588367d448e9f5c71e0aa771c961b6c21c2104583dcdff  ./SKILL.md
+d7be736ad44b9aaf58d942cdf3ab2d4f8d6b1cee086fa3ed7e17a5415eca5958  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -10,9 +10,9 @@ fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-
 0324b78acf82daeff586de646db8a25f52ed2ed6db7fa2efe29f7abab3e71558  ./modules/mod-PrBud-patodeweloperka-uzytkowanie-male-obiekty-ograniczenia.md
 01f75b994edece0e3d71850f94cc99898f3b26197ae69a55da133e8dd7fdf477  ./modules/mod-PrBud-prawo-budowlane.md
 7a4d824387d4f1267f4c45dfd118b56675427751595eeaeea55e314a8552e0f7  ./modules/mod-PrBud-uzupelnienie-pokrycia-2026.md
-02aa4c1cadf1ae22232dac5d489231edf1e391946123fd7bf57289657013fab2  ./modules/mod-PrEnergetyczne-URE-OZE.md
+be55993698dd3c58ac6c82a4a08208ee4f8b6772eace593dc0522f6941f6c5cb  ./modules/mod-PrEnergetyczne-URE-OZE.md
 d9dbbb106248dd43f0e1207db156b5edcf4f91a6b189a860b05bd857ac8e3dbd  ./modules/mod-PrGeodezyjne-kartografia-wywlaszczenia.md
-28f8c538695f845b8b096421900e4546971aed424ece5a0fc13292516f6fcd3b  ./modules/mod-PrWodne-gospodarka-sciekowa.md
+402439c321815da3965e52a34179cba29ecb293e9e602b928e170bb30fe171c1  ./modules/mod-PrWodne-gospodarka-sciekowa.md
 9b95af98e3f20ac12b66e8da29219c76177203d9a222f9b76db2c9e82347d77d  ./modules/mod-UE-PPWR-EUDR-rozporzadzenia-srodowiskowe.md
 8df7fd2c417c13287c311f420a9229bf564387552bd4d4c93355636f6bc18af1  ./modules/mod-UGN-gospodarka-nieruchomosciami.md
 1373b6fc7f0305dc768de7901f93d2d73d41bb694b8e41eb1ad92a64b0a9438c  ./modules/mod-formy-ochrony-przyrody-obszary-chronione.md
@@ -46,5 +46,5 @@ adc58b3639ad5d06e0796a347783ae14cf6dd8d2b1bf3c948fd4c74f4cd83373  ./modules/ochr
 73b3f563521ce316ef090929d79a34cb3840b9c91b8c4bd000dd9d0dc2553287  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 4828d9f448834cc7f294608adc90329c1569bc4e8e89d5f7cf6ae8c13505c0b3  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 c4746a4f940f85d463e9290f5dd6295121ae24769e0765dd05bb70a289290960  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-3117eb452cb06557d17ac3767fde3323f9f94f7cc415f712f3dbfa0a95f4044a  ./references/CHANGELOG.md
+8cf8ed64d59e8338b49d23dab565440780e64c04bc7c7c3115e4d201ddf5dea5  ./references/CHANGELOG.md
 abe6aa1f0c7be329d8f30b4e26b575581c1ed0421413f61d72d7af313e414223  ./references/HISTORIA-ZMIAN-PLIKOW.md

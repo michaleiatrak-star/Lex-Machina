@@ -1,5 +1,7 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.29 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1296 (implementacja DSA, w mocy 6.11.2026): mod-ustawa-uslugi-elektroniczne (uchylony rozdz. 3 — art. 12–15, koordynator Prezes UKE, organy, skarga, sąd okręgowy, kary), mod-DSA (status: ustawa uchwalona i ogłoszona), MAPA-AKTOW (u.ś.u.d.e., PrAut, PWP).
+
 - 3.28 (2026-10-12b, AUDYT-2026-10-12b): KSC: zmiany po t.j. 2026/20 (252, 815, 1003, 1206) i dosłowne zmiany z art. 20 ustawy 2026/815 (było „brak dalszych nowelizacji”); PKE: art. 42 uchylony przez 2026/815 (od 4.07.2026); MAPA-AKTOW. ELI 2026-10-12.
 
 - 3.27 (2026-10-09h, AUDYT-2026-10-09h): mod-ustawa-informatyzacja: zapytanie weryfikacyjne na t.j. 2026/1241 (było wygasłe 2025/1703).

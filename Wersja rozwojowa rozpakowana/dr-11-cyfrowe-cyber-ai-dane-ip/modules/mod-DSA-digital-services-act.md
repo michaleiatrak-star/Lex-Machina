@@ -34,16 +34,21 @@ Luty 2026 — Rząd PODZIELIŁ projekt na DWA ODRĘBNE: (1) czysta
              wnioskowania o blokowanie treści w internecie
 Ok. czerwca 2026 — Rząd przyjął projekt (1) — implementację DSA bez
              spornej części
-02.07.2026 — pierwsze czytanie w Sejmie
-17.07.2026 (ostatnia potwierdzona aktualizacja) — Sejm KONTYNUUJE prace
-             — ⚠️ NIE POTWIERDZONO uchwalenia na dzień tego audytu
-             (26-27.07.2026) — SPRAWDŹ PONOWNIE aktualny status przed
-             cytowaniem, sytuacja zmienia się szybko (patrz precedens
-             AI Act w tej samej sesji — ustawy potrafią przejść cały
-             proces w kilka tygodni)
+4.09.2026 — USTAWA UCHWALONA: ustawa o zmianie ustawy o świadczeniu usług
+             drogą elektroniczną oraz niektórych innych ustaw
+6.10.2026 — ogłoszona: Dz.U. 2026 poz. 1296; W MOCY OD 6.11.2026
+             ✅ [VER: ELI DU/2026/1296 text.pdf + metadane, RZĄD 1, 2026-10-20]
 
-Nadzór docelowo: Prezes UKE (koordynator główny) + UOKiK + KRRiT
-             (współdzielony nadzór, zgodnie z projektem)
+Nadzór (ustawa 1296):
+  Koordynator ds. usług cyfrowych: PREZES UKE (art. 15b u.ś.u.d.e.)
+  Właściwe organy: Prezes UOKiK (sekcja 4 rozdz. III DSA + naruszenia interesów
+    konsumentów), Przewodniczący KRRiT (platformy udostępniania wideo, bez sekcji 4),
+    Prezes UKE w pozostałym zakresie
+  Skarga usługobiorcy do koordynatora (art. 22zh); kary do 6% światowego obrotu
+    (art. 22zzn); roszczenia z art. 54 DSA przed SĄDEM OKRĘGOWYM (art. 22zzi; KPC
+    art. 17 pkt 4⁶)
+  Szczegóły: `mod-ustawa-uslugi-elektroniczne`
+  ⛔ Blokowanie treści na wniosek policji/prokuratury/KAS — poza tą ustawą
 ```
 **Weryfikacja eur-lex przed kazdy cytowaniem.**
 
@@ -72,5 +77,5 @@ Srodki przymusu:    Do 6% globalnego obrotu (VLOP niezastosowanie sie do KE)
 ## Weryfikacja online
 ```
 web_search: "DSA Digital Services Act Rozp. UE 2022/2065 wymagania VLOP 2025"
-web_search: "DSA Polska DSC koordynator cyfrowy 2025 2026"
+Polska implementacja: ELI DU/2026/1296
 ```

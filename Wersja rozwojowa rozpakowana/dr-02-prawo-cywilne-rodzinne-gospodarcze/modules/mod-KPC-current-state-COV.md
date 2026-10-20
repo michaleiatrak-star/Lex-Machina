@@ -20,6 +20,11 @@ RZĄD 1:
 
 Po tekście jednolitym mogą występować dalsze zmiany oraz przepisy z odroczonym wejściem w życie. Każdy konkretny przepis przechodzi fresh gate.
 
+Zmiany po t.j. 468 (ELI `Akty zmieniające` DU/1964/296, odczyt 2026-10-20): 2026/473 i 830 (8.07.2026),
+2026/1003 (28.10.2026), 2026/1046 (5.11.2026), 2026/1296 (6.11.2026 — art. 17 pkt 4⁶: sąd okręgowy
+w sprawach o roszczenia odszkodowawcze z rozdz. 4e ustawy o świadczeniu usług drogą elektroniczną, DSA art. 54)
+✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1296 text.pdf).
+
 ## Mapa strukturalna
 
 | Część / księga | Zakres | Routing operacyjny |

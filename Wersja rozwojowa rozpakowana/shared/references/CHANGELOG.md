@@ -1,5 +1,7 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.43 (2026-10-20, AUDYT-2026-10-20c): ISAP-METRYKI-AKTOW: Prawo wodne — zmiana po t.j. 1335: DU/2026/1358 (w mocy 3.11.2026).
+
 - 3.99.42 (2026-10-20, AUDYT-2026-10-20b): LEGAL-REGISTRY i ISAP-METRYKI-AKTOW: KK — tekst t.j. Dz.U. 2026 poz. 1342 opublikowany w ELI (2026-10-20).
 
 - 3.99.41 (2026-10-19b, AUDYT-2026-10-19b): HIERARCHIA-ZRODEL: Monitor Polski podniesiony do najwyższej rangi RZĘDU 1 (pkt 3, równy Dz.U.); kanał ELI `/eli/acts/MP/{rok}/{poz}/text.pdf` w E-1 i znacznik ✅ [VER: ELI MP/RRRR/NNN, data]; aplikacja weryfikuje także z monitorpolski.gov.pl.

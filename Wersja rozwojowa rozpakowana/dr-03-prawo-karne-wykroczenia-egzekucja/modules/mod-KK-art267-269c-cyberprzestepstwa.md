@@ -57,7 +57,9 @@ online), naruszenie wizerunku, fałszywe profile, procedury dowodowe dla cyberpr
 | 269 §1 | Dane infrastruktury krytycznej (obronność, komunikacja, administracja) — niszczenie/zmiana | Poz. wolności od **6 m-cy do 8 lat** | **Z urzędu** |
 | 269 §2 | j.w. przez niszczenie nośnika lub urządzenia | j.w. | **Z urzędu** |
 | 269a | Zakłócenie pracy systemu (DDoS) — w istotnym stopniu | Poz. wolności od **3 m-cy do 5 lat** | **Z urzędu** |
-| 269b §1 | Wytwarzanie/zbywanie/udostępnianie narzędzi hakerskich (hasła, programy, urządzenia) | Poz. wolności od **3 m-cy do 5 lat** | **Z urzędu** |
+| 269b §1 | Wytwarzanie/pozyskiwanie/zbywanie/udostępnianie narzędzi hakerskich (hasła, programy, urządzenia) przystosowanych do przestępstw z art. 165 §1 pkt 4, **267 §1–3** (od 21.07.2026, Dz.U. 2026 poz. 902; wcześniej tylko 267 §3), 268a §1 lub §2 w zw. z §1, 269 §1–2, 269a, 270 §1, 270a §1 | Poz. wolności od **3 m-cy do 5 lat** | **Z urzędu** |
+
+✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), art. 267–269c, RZĄD 1, 2026-10-20] — zagrożenia i tryby w tabeli zgodne z t.j.
 | 269c | Klauzula white-hat — wyłączenie karalności dla art. 267 §2 i 269a | — | patrz Zasada 6 |
 | 287 §1 | Oszustwo komputerowe (phishing, ingerencja w dane w celu korzyści) | Poz. wolności od **3 m-cy do 5 lat** | **Z urzędu** (wyjątek: osoba najbliższa → wniosek, §3) |
 | 287 §2 | Mniejsza waga | Grzywna / ogr. wolności / poz. wolności do **1 roku** | **Z urzędu** |

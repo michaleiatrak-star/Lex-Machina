@@ -1,5 +1,7 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.68 (2026-10-20, AUDYT-2026-10-20c): ROUTING-MAP: DU/2026/1296 (u.ś.u.d.e. — KOREKTA: nowelizacja z 18.12.2025 nie weszła w życie, DSA wdraża 1296; PrAut, PWP, UOKiK), 1287 (podatki sektorowe, PIT, CIT), 1348 (MONITORING — treść), 1354 (u.p.o.l.), 1358 (Prawo wodne po t.j.).
+
 - 6.67 (2026-10-20, AUDYT-2026-10-20b): ROUTING-MAP: KK — tekst t.j. 1342 opublikowany w ELI; DU/2026/1347 w wierszach PE/URE/OZE, Prawo budowlane, Pzp, PIT; MONITORING: 1347 (etapy do 17.10.2027) i 1348.
 
 - 6.66 (2026-10-19a, AUDYT-2026-10-19a): ROUTING-MAP: KK — t.j. Dz.U. 2026 poz. 1342 (wiersze DR-03, tekst w ELI nieopublikowany — do publikacji 2025/383 + 4 nowelizacje); ⛔ KOREKTA: wiersz KK podawał „zm. 2026.638” — to nowelizacja KPK; Prawo o adwokaturze 1290: ⚡ WCHODZI → W MOCY od 17.10.2026; nowe wiersze ustawy o prawnikach zagranicznych (2020/823 + 1290 art. 2).

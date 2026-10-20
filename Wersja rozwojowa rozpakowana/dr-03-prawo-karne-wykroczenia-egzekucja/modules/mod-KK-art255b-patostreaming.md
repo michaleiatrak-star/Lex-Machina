@@ -3,7 +3,8 @@
 **Wersja:** 2.0 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-08-25
 **Stan prawny modułu:** art. 255b KK obowiązuje od **23.08.2026 r.**
 **Źródło urzędowe:** ustawa z 11.06.2026 r. o zmianie ustawy – Kodeks
-karny, ogłoszona 23.07.2026 r. w Dz.U. 2026 poz. 988.
+karny, ogłoszona 23.07.2026 r. w Dz.U. 2026 poz. 988; obecnie w t.j. KK Dz.U. 2026
+poz. 1342 — brzmienie § 1–4 zgodne z modułem ✅ [VER: ELI DU/2026/1342 text.pdf, RZĄD 1, 2026-10-20].
 
 > ⛔ HARD GATE: przepis jest bardzo świeży. Przed użyciem w sprawie
 > ponownie sprawdź tekst ustawy nowelizującej i aktualny tekst KK w ELI/ISAP.

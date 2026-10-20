@@ -13,8 +13,8 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | OP — ulgi w spłacie zobowiązań | jw. | `mod-OP-ulgi-w-splacie-dzial-III-rozdzial-7a` | ✅ aktywny |
 | OP — czynności sprawdzające | jw. | `mod-OP-czynnosci-sprawdzajace-dzial-V` | ✅ aktywny |
 | Interpretacje podatkowe / MDR / objaśnienia MF | OP jw. + właściwe akty wykonawcze | `mod-interpretacje-definicje-podatkowe` | ✅ aktywny; fresh gate |
-| Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. ze zm.; m.in. **2026/1347** art. 2 — uchylona lit. b w art. 14 ust. 2 pkt 14 od 1.12.2026 ✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1347 i 1348: metadane, `references`, 1347 text.pdf art. 1–6 i 41); ⏳ **2026/1354** (art. 2, od 1.01.2027) — treści nie badano | `mod-PIT-podatek-dochodowy-fizyczne` | ✅ aktywny |
-| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. ze zm. | `mod-CIT-podatek-dochodowy-prawne` | ✅ aktywny |
+| Ustawa o PIT | Dz.U. 2026 poz. 592 t.j. ze zm.; m.in. **2026/1287** art. 12 — art. 52zu (podatek od nadzwyczajnych zysków nie jest KUP) od 1.11.2026; **2026/1347** art. 2 — uchylona lit. b w art. 14 ust. 2 pkt 14 od 1.12.2026 ✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1347 i 1348: metadane, `references`, 1347 text.pdf art. 1–6 i 41); ⏳ **2026/1354** (od 1.01.2027; tekst w ELI nieopublikowany na 2026-10-20) | `mod-PIT-podatek-dochodowy-fizyczne` | ✅ aktywny |
+| Ustawa o CIT | Dz.U. 2026 poz. 554 t.j. ze zm. (m.in. 2026/1287 art. 13 — art. 38zb, od 1.11.2026) | `mod-CIT-podatek-dochodowy-prawne` | ✅ aktywny |
 | Ustawa o VAT | **Dz.U. 2026 poz. 1263 t.j.** ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) — obwieszczenie z 1.09.2026 (ogł. 28.09.2026), stan prawny na 26.08.2026; obejmuje nowelizacje 2025 poz. 894, 896, 1203, 1541, 1811 oraz 2026 poz. 507 i 846. ⛔ 2026/507 art. 6 (art. 96 ust. 3e–3f — spółka cywilna w CEIDG) wchodzi w życie dopiero 1.11.2028 (art. 31 pkt 4; ✅ [VER] RZĄD 1 2026-10-15) — t.j. zawiera już to brzmienie, do tej daty NIE stosować. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 (od 1.01.2027; art. 1 pkt 13 lit. b od 1.12.2026; dalsze części 1.07.2027, 1.01.2028, 1.07.2028) ✅ [VER] RZĄD 1 2026-10-09. Materia wyjątkowo ruchliwa: brzmienie każdego powoływanego artykułu czytać u źródła | `mod-VAT-podatek-od-towarow-i-uslug` + rodzina modułów VAT | 🟢 aktywny; fresh gate |
 | VAT — import towarów i zwolnienia importowe | jw. + właściwe akty wykonawcze | `mod-VAT-import-towarow-i-zwolnienia-importowe` | ✅ aktywny |
 | VAT — WIS | jw. | `mod-VAT-WIS-tryb-i-ochrona` | ✅ aktywny |
@@ -37,7 +37,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o podatku akcyzowym | Dz.U. 2026 poz. 412 t.j. ze zm. | `mod-ustawa-akcyzowa-i-clo-UCC` | ✅ aktywny; fresh gate |
 | Unijny kodeks celny (UCC) / taryfa celna | rozporządzenie (UE) nr 952/2013 + właściwa nomenklatura CN | `mod-UCC-clo-taryfa-celna` | ✅ aktywny; EUR-Lex fresh gate |
 | Kontrola środków pieniężnych / prawo dewizowe / podróżni | rozporządzenie (UE) 2018/1672 + Dz.U. 2024 poz. 1131 ze zm. + akty właściwe | `mod-clo-podroznych-limity-towary-zabronione` | ✅ aktywny; fresh gate |
-| Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. ze zm. | `mod-ustawa-podatek-nieruchomosci-i-lokalne` | ✅ aktywny |
+| Ustawa o podatkach i opłatach lokalnych | Dz.U. 2025 poz. 707 t.j. ze zm.; ⚡ zm. po t.j.: **Dz.U. 2026 poz. 1354** (ustawa z 18.09.2026, ogł. 19.10.2026, w mocy 1.01.2027; ⛔ tekst w ELI nieopublikowany na 2026-10-20 — przed powołaniem przepisu u.p.o.l. od 2027 r. odczytaj 1354) ✅ [VER] RZĄD 1 2026-10-20 (metadane ELI DU/2026/1354) | `mod-ustawa-podatek-nieruchomosci-i-lokalne` | ✅ aktywny |
 | Ustawa o opłacie skarbowej | Dz.U. 2025 poz. 1154 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-oplata-skarbowa` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o podatku od wydobycia niektórych kopalin | Dz.U. 2026 poz. 454 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-podatek-wydobycie-kopalin` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o ryczałcie od przychodów ewidencjonowanych | Dz.U. 2025 poz. 843 t.j. ze zm. | `mod-ustawa-ryczalt-przychody` | ✅ aktywny |
@@ -52,7 +52,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Kasy rejestrujące | właściwe akty wykonawcze MF | `mod-kasy-rejestrujace-fiskalizacja` | ✅ aktywny; fresh gate |
 | Rachunkowość budżetowa JSFP | Dz.U. 2026 poz. 909 t.j. | `mod-rachunkowosc-budzetowa-JSFP` | ✅ aktywny |
 | PKWiU / PKOB / CN | aktualne klasyfikacje statystyczne i okresy przejściowe | `mod-PKWiU-klasyfikacje-statystyczne` | ✅ aktywny; temporal gate |
-| Podatki sektorowe | akty właściwe dla podatku bankowego, gier, tonażowego, opłaty cukrowej i sprzedaży detalicznej | `mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny` | ✅ aktywny; fresh gate |
+| Podatki sektorowe | akty właściwe dla podatku bankowego, gier, tonażowego, opłaty cukrowej i sprzedaży detalicznej; podatek od nadzwyczajnych zysków ze zbycia paliw ciekłych — Dz.U. 2026 poz. 1287 (w mocy 1.11.2026) | `mod-podatki-sektorowe-bankowy-gry-tonazowy-cukrowy-detaliczny` | ✅ aktywny; fresh gate |
 | Regulacja alkoholu i tytoniu | właściwe ustawy sektorowe | `mod-alkohol-tyton-regulacja-sprzedazy` | ✅ aktywny; fresh gate |
 
 ## Reguły runtime
