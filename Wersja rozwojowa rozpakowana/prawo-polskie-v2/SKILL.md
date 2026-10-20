@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.66"
+version: "6.67"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.66 (2026-10-19a, AUDYT-2026-10-19a): ROUTING-MAP: KK — t.j. Dz.U. 2026 poz. 1342 (tekst w ELI nieopublikowany — do publikacji 2025/383 + 4 nowelizacje); KOREKTA „zm. 2026.638” (nowelizacja KPK); Prawo o adwokaturze 1290 — W MOCY od 17.10.2026; ustawa o prawnikach zagranicznych (2020/823 + 1290 art. 2); rozp. 2016/1430 uchylone.
+  Wersja bieżąca: 6.67 (2026-10-20, AUDYT-2026-10-20b): ROUTING-MAP: KK — tekst t.j. 1342 opublikowany w ELI; DU/2026/1347 w wierszach PE/URE/OZE, Prawo budowlane, Pzp, PIT; MONITORING: 1347 (etapy do 17.10.2027) i 1348.
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
   6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
   6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).

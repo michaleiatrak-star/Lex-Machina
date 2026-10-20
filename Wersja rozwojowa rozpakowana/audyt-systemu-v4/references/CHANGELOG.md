@@ -1,5 +1,7 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.238 (2026-10-20, AUDYT-2026-10-20b): mapa_dzu: nowe wiersze 2026/1347 i 2026/1348 (MONITORING), wiersz 2026/1342 — tekst t.j. odczytany i porównany z 2025/383; prawny-router-v3 3.72 (ROUTING oznaczony dla trybu mechanicznego, AUDYT-2026-10-20a).
+
 - 6.237 (2026-10-19a, AUDYT-2026-10-19a): mapa_dzu: KK 2025/383 → PREV, nowy wiersz 2026/1342 (TJ; tekst w ELI nieopublikowany na 2026-10-19); 2026/1290 — art. 2, 4 ust. 5, 5 i skutek dla rozp. 2016/1430; nowe wiersze 2020/823 (t.j. ustawy o prawnikach zagranicznych) i 2016/1430 (UCH); MONITORING 1290: W MOCY od 17.10.2026 (art. 1 pkt 16, 41, 42 od 1.01.2027). F-108: KK 2026/1342.
 - 6.236 (2026-10-17c, AUDYT-2026-10-17c): mapa_dzu: 2018/2548 (ORG), 2025/925 (TJ PREV), 2025/1012, 2025/1607, 2026/392 (NW, objęte t.j.), 2026/492 (TJ OK) — rozporządzenie o siedzibach i obszarach sądów; ELI 2026-10-17.
 - 6.235 (2026-10-17b, AUDYT-2026-10-17b): mapa_dzu: 2026/1306 (TJ, ochrona pokrzywdzonego i świadka, stan prawny 30.09.2026), 2026/1340 (NW, ZZ i informowanie pracowników, w życie 30.10.2026 — MONITORING); 2026/549 z adnotacją ⏳ po t.j.; 2015/21 — odesłanie do t.j. Przegląd ELI DU/2026 poz. 1301–1340.

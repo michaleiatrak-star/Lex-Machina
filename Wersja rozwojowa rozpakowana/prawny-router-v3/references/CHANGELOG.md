@@ -1,5 +1,7 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.72 (2026-10-20, AUDYT-2026-10-20a): „KROK 2 — ROUTING [1]–[11]” i „POKRYCIE DZIEDZINOWE” oznaczone `<!-- lex:wykonuje-aplikacja: ROUTING -->`. Aplikacja zastępuje je odnośnikiem tylko w trybie mechanicznym (skill wykonawczy wybrał użytkownik, dziedzinę wskazała aplikacja); w trybie automatycznym model dostaje je w całości. Rdzeń R-1…R-5, bramki KROK 5–6, reguły nadrzędne i SELF-CHECK bez zmian. Treść bez zmian.
+
 - 3.71 (2026-10-10b, AUDYT-2026-10-10b): Opis: router przy sprawach prawnych, nie przy wzmiankach prawnych w pracy nad kodem; preferencje użytkownika w zakresie sprawy prawnej; PROFIL-LEKKI 1.3 z kosztami zmierzonymi (rdzeń ≈103 kB ≈28 tys. tokenów, typowa sprawa ≈221 kB ≈55-60 tys.); HARD-GATES-ORZECZNICTWO i ZRODLA-AKTOW-FALLBACK bez obchodzenia WAF.
 
 - 3.70 (2026-10-09f, AUDYT-2026-10-09f): KANCELARIA-WORKFLOW, SOCIAL-SECURITY-LAW-STANDARD, DISCIPLINARY-PROCEEDINGS-STANDARD, JUDICIARY-LEGAL-STANDARD przeniesione z `shared/` do `references/` (jedyny konsument).

@@ -1,7 +1,7 @@
-9530ab71bc1d6a9b40c99af1e7083aa88452f0ba2633f6e0b9c9c085e3fea866  ./MAPA-AKTOW.md
+8f1d89701a1a889807dc1d2c1d037849992e03bfb6c33bfda572a2fd4276c440  ./MAPA-AKTOW.md
 27cee899b2a86f257784d131552adcd92631ed510be591329e3fbd1c023f6ad5  ./MAPA-POKRYCIA.md
 7114bc8b687168e76fb874a553183db97691e69a7864d60a31f348a6e408dc3f  ./PORTABILITY-MANIFEST.md
-e753e814054a08f6721af9d4aeae8bef81dff5d024c659913a392a0d13765820  ./SKILL.md
+3447224836e7b68f13645564b1ba841ccfd1b5db484ea46caafbbd11009f35bc  ./SKILL.md
 d015e63761fe4291d6a7faa309515a05d52d9d0e65242b36d2693f056fef03b1  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 5e8fb6e369f9779283b28bbc7253d62112435ad6bc362d09ad52491a942e0658  ./modules/kwalifikator-karnomaterialny/part-01-ogolny-mienie-rozboj.md
@@ -39,7 +39,7 @@ e7c68839a9ae6840b7944ef772de5a50bf272bb2bb1e54e46860c2b6fcbea1ed  ./modules/mod-
 c4db363de35ca90d41186c78485a766015b91a7444f6a1dddcbf497c8060e62e  ./modules/mod-KK-art305-zmowa-przetargowa-karna.md
 323e7fdadba03433b71e1d2c6be562e3d96186a9b37120f342c9ff29ac0c683e  ./modules/mod-KK-art64-recydywa.md
 97d66a8836c6eec62e0f895a7a0796e5521c705190be6cb80c634c0184335d91  ./modules/mod-KK-art69-84-warunkowe-zawieszenie-zwolnienie.md
-567f15bf7a44b360a0c5e033116731e9de87e0b463b6157420aa273c4e79dddf  ./modules/mod-KK-current-state-COV.md
+9d37097356c95d35c1b646d9beead1ca0b7e806f912f1891abeb14c5a464be48  ./modules/mod-KK-current-state-COV.md
 6f3e9984e7d04181acee71086b4225ee41d50aacc332ce5689598618daa3f09f  ./modules/mod-KK-cyberprzestepstwa-szczegolowy.md
 e09690b6ab9759bfdabc56389a80e7081533a08b6cb9446aaa11caac034a33d9  ./modules/mod-KK-kodeks-karny.md
 b0cb0cfeace28920c576ea904995205103b76e9f5c45b3dd282e4d27a3ea7947  ./modules/mod-KK-kwalifikator-karnomaterialny.md
@@ -83,5 +83,5 @@ cd92c0a01a9255db6e1fa80bf81e9e05ab3ba30b16ee0d36a4a1d1e4ba13fe6b  ./modules/mod-
 a06b7d4ddee2514766e89d715d4edc82823255e29bedeaf055b8aa799c84326e  ./modules/mod-ustawa-narkomania.md
 cd2afa01cc7852747223d273f4a97af33cddc5af4fbd9310e5ad820dc6527921  ./modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md
 284436b77e82d5f5996debb93ca1141184fe701bc97b0f67cc8fff0336d40bfd  ./modules/mod-ustawa-oplaty-w-sprawach-karnych.md
-2f522426e14c9ae0f7bc3840c23c657cdf4fd85c3cdfa28c37f0d600c4e8666e  ./references/CHANGELOG.md
+43e5ef1a8ab1d923a9453eaa2303ce7141bb8a84c8a128d3a8ff8a59b9236d48  ./references/CHANGELOG.md
 c537bcd52ab8b224148b204932e65753214dbef21468654ff293799339ba752d  ./references/HISTORIA-ZMIAN-PLIKOW.md

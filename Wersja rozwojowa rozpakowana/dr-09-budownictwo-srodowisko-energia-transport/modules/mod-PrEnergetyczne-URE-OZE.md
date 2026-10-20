@@ -138,6 +138,20 @@ ograniczenie zmian warunków przyłączenia (art. 7 ust. 8i3) — zakres czasowy
 
 ---
 
+## ⏳ NOWELIZACJE `Dz.U. 2026 poz. 1347` (OZE) i `poz. 1348` (PE) — ogł. 16.10.2026
+
+✅ [VER] RZĄD 1 2026-10-20 — 1347: metadane ELI i text.pdf (art. 1–6, 41); 1348: tylko metadane ELI.
+
+| Akt | Co zmienia 1347 | Od kiedy (art. 41) |
+|---|---|---|
+| ustawa o OZE (t.j. `2026/68`) | art. 1 — m.in. biometan i aukcje biometanu, spółdzielnie energetyczne (art. 13–14 przejściowe) | 1.12.2026; pkt 48 lit. c–e: 17.10.2026; pkt 19, pkt 57 lit. e: 19.10.2026; pkt 3: 17.01.2027; aukcje biometanu: 17.02.2027 |
+| Prawo energetyczne (t.j. `2026/43`) | art. 4: art. 3 pkt 3a (paliwa gazowe obejmują biometan, biogaz, biogaz rolniczy), art. 7 (ust. 1e–1ef: odmowa przyłączenia instalacji biometanu, lokalizacja alternatywna, deklaracja zawarcia umowy; ust. 2a pkt 3–4: termin pierwszego dostarczenia biometanu do 60 mies.; ust. 8d⁵, 8d¹²: mikroinstalacja z magazynem — moc magazynu do 2,2× mocy mikroinstalacji nie wlicza się), art. 9g, art. 16 | 1.12.2026 |
+| Prawo energetyczne | art. 4 pkt 3, 4, 7, 8: art. 7a ust. 5–7, art. 7a¹, art. 23 ust. 2 pkt 18b lit. m, art. 56 (gazociągi bezpośrednie) | 17.10.2027 |
+| kogeneracja (t.j. `2025/602`) | art. 5: uchylenia w art. 2 pkt 40, art. 11 pkt 2 lit. b, art. 14 ust. 2 pkt 1 lit. c, art. 94 ust. 1 pkt 2 lit. b | 1.12.2026 |
+| Prawo budowlane | art. 3: art. 9a — art. 9 nie stosuje się do gazociągu bezpośredniego biogazu, biogazu rolniczego, biometanu | 17.10.2027 |
+
+Przepisy przejściowe 1347: art. 12–40 (m.in. wnioski o przyłączenie złożone przed wejściem w życie — art. 31–34; art. 9g PE — art. 35). `1348` (PE; w mocy 17.10.2026, część od 31.10.2026): treść nie odczytana — przed powołaniem przepisu PE pobierz tekst ELI i ustal brzmienie na datę zdarzenia.
+
 ## PROSUMENT / PV
 
 Sprawdzaj: data zgłoszenia, system rozliczeń, moc instalacji, umowa kompleksowa, reklamacje faktur, błędy licznika, niedotrzymanie terminów.

@@ -1,5 +1,7 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.2 (2026-10-20, AUDYT-2026-10-20b): MAPA-AKTOW: PIT — DU/2026/1347 art. 2 (art. 14 ust. 2 pkt 14 lit. b uchylona) od 1.12.2026; DU/2026/1354 od 1.01.2027 odnotowana, treść nie badana.
+
 - 3.99.1 (2026-10-15c, AUDYT-2026-10-15c): ⛔ KOREKTA: zmiana VAT z Dz.U. 2026 poz. 507 (art. 6 — art. 96 ust. 3e–3f) wchodzi w życie 1.11.2028 (art. 31 pkt 4), nie 14.10.2026 — MAPA-AKTOW, part-01 VAT, mod-VAT-kursy-walut, mod-VAT-platnicy, mod-VAT-import, mod-VAT-rejestracja (metryka t.j. 2026/1263, nie „po t.j.”), BAZA-AKTOW-OKOLOPODATKOWYCH. ELI 2026-10-15.
 
 - 3.99 (2026-10-09g, AUDYT-2026-10-09g): VAT: nowa nowelizacja po t.j. 2026/1263 — Dz.U. 2026 poz. 1270 (od 1.12.2026/1.01.2027, dalsze etapy do 1.07.2028) w MAPA-AKTOW i 10 modułach VAT. ELI 2026-10-09.

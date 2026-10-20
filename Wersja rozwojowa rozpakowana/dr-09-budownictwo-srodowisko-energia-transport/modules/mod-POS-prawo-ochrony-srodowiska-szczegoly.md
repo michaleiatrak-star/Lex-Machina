@@ -40,7 +40,7 @@ odpowiedzialność za szkodę w środowisku, predykcja wyniku.
 | UOOŚiS | **Dz.U. 2026 poz. 670** ✅ [VER] RZĄD 1 — najnowszy | **1**: Dz.U. 2026 poz. 1097 |
 | POŚ | **Dz.U. 2025 poz. 647** ✅ [VER] RZĄD 1 — najnowszy | **9**: Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982 |
 | Ustawa o ochronie przyrody | **Dz.U. 2026 poz. 1315** t.j. (ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912) (ELI 2026-10-12) | **0** |
-| KK (art. 181–188a) | **Dz.U. 2026 poz. 1342** t.j. (najnowszy, ELI 2026-10-19; tekst jeszcze nieopublikowany; poprzedni Dz.U. 2025 poz. 383 ✅ [VER] RZĄD 1) | **0** (po 2025/383 były 4: Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988 — do publikacji tekstu 1342 czytaj 2025/383 + te cztery) |
+| KK (art. 181–188a) | **Dz.U. 2026 poz. 1342** t.j. (najnowszy; tekst w ELI od 2026-10-20; poprzedni Dz.U. 2025 poz. 383 ✅ [VER] RZĄD 1) | **0** (t.j. obejmuje Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988; art. 181–188a bez zmian wobec 2025/383 ✅ [VER] RZĄD 1 2026-10-20) |
 | KPA | **Dz.U. 2025 poz. 1691** ✅ [VER] RZĄD 1 — najnowszy | **0** |
 
 ⛔ **POŚ ma dziewięć nowelizacji po tekście jednolitym** — to najbardziej ruchliwy

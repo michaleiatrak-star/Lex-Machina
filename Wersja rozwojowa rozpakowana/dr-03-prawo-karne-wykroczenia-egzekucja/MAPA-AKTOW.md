@@ -6,7 +6,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 ### Kodeks karny i framework karny
 
-**Baza KK:** t.j. Dz.U. 2026 poz. 1342 (obwieszczenie Marszałka Sejmu z 2.10.2026, ogł. 16.10.2026; ELI: „obowiązujący”, brak nowelizacji po t.j.; 2026/902 i 988 — „akt objęty tekstem jednolitym”; 2025/1818 i 1872 weszły w życie przed obwieszczeniem — potwierdź w treści t.j.). ⛔ Na 2026-10-19 ELI nie udostępnia tekstu t.j. (textPDF/textHTML: false) — do czasu publikacji brzmienie czytaj z t.j. Dz.U. 2025 poz. 383 (DU/2025/383, status „wygaśnięcie aktu”) łącznie z 2025/1818, 1872, 2026/902, 988. ✅ [VER] RZĄD 1 2026-10-19 (metadane ELI DU/2026/1342 i references DU/1997/553).
+**Baza KK:** t.j. Dz.U. 2026 poz. 1342 (obwieszczenie Marszałka Sejmu z 2.10.2026, ogł. 16.10.2026; ELI: „obowiązujący”, brak nowelizacji po t.j.; 2026/902 i 988 — „akt objęty tekstem jednolitym”; 2025/1818 i 1872 weszły w życie przed obwieszczeniem i są w treści t.j.). Tekst t.j. udostępniony w ELI 2026-10-20 (text.pdf) — brzmienie czytaj z DU/2026/1342. ✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1342 text.pdf odczytany; porównanie artykułów z DU/2025/383: zmienione wyłącznie przepisy objęte 2025/1818, 1872, 2026/902, 988, m.in. art. 42, 43a, 44b, 69, 115 § 26, 177 § 2a, 178–178d, 217a, 222, 223, 231b, 255b, 269b; art. 278–295 bez zmian).
 Poprzedni t.j. Dz.U. 2025 poz. 383 (✅ [VER] RZĄD 1 2026-09-10f) miał cztery nowelizacje po t.j. — Dz.U. 2025 poz. 1818, 1872,
 2026 poz. 902, 988. Brzmienie każdego powoływanego artykułu KK czytać u źródła.  
 **Baza KPK:** Dz.U. 2026 poz. 490 t.j. ✅ [VER] RZĄD 1 2026-09-10f — obwieszczenie Marszałka Sejmu z 27.03.2026.

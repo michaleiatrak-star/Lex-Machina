@@ -25,7 +25,7 @@ Stan rejestru: 2026-08-28. Źródło metryk: wyłącznie ISAP / Dziennik Ustaw. 
 | KPA | Kodeks postępowania administracyjnego | Dz.U. 2025 poz. 1691 | AKTUALNY-ISAP | Procedura ogólna administracyjna. |
 | PPSA | Prawo o postępowaniu przed sądami administracyjnymi | Dz.U. 2026 poz. 143 | AKTUALNY-ISAP | Skargi WSA/NSA, kasacja, bezczynność. |
 | KC | Kodeks cywilny | Dz.U. 2026 poz. 795 t.j. | PO-TJ-ZMIANY | Najnowszy t.j.; zawsze sprawdzić późniejsze zmiany, konkretny artykuł i przepisy przejściowe. |
-| KK | Kodeks karny | Dz.U. 2026 poz. 1342 t.j. (ogł. 16.10.2026; tekst w ELI nieopublikowany na 2026-10-19 — do tego czasu Dz.U. 2025 poz. 383 + 2025/1818, 1872, 2026/902, 988) | PO-TJ-ZMIANY | Moduły karne nie mogą cytować bez sprawdzenia aktualnego tekstu. |
+| KK | Kodeks karny | Dz.U. 2026 poz. 1342 t.j. (ogł. 16.10.2026; tekst w ELI od 2026-10-20; obejmuje 2025/1818, 1872, 2026/902, 988; brak zmian po t.j.) | PO-TJ-ZMIANY | Moduły karne nie mogą cytować bez sprawdzenia aktualnego tekstu. |
 | KPK | Kodeks postępowania karnego | Dz.U. 2026 poz. 490 + zmiany 2025 | PO-TJ-ZMIANY | Szczególnie sprawdzać środki zaskarżenia i doręczenia. |
 | KSH | Kodeks spółek handlowych | tekst ujednolicony ISAP, aktualizacja pliku 2026-03-12; zmiany Dz.U. 2026 poz. 176 (⛔ w życie 18.02.2027) i 644 | PO-TJ-ZMIANY | Sprawdzać wejście w życie zmian 2026. |
 | KSCU | Koszty sądowe w sprawach cywilnych | Dz.U. 2025 poz. 1228 | PO-TJ-ZMIANY | Sprawdzać zmiany 2026, w tym Dz.U. 2026 poz. 346 (⛔ w życie 30.09.2028 — do tej daty NIE stosować). |

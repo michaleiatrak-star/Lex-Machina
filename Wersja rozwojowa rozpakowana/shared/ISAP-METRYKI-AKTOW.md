@@ -41,7 +41,7 @@
 
 | Akt | Metryka ISAP zweryfikowana | Status roboczy systemu | Uwagi wdrożeniowe |
 |---|---:|---|---|
-| Kodeks karny | Dz.U. 2026 poz. 1342 t.j. (ELI 2026-10-19: brak nowelizacji po t.j.; tekst t.j. jeszcze nieopublikowany — do tego czasu Dz.U. 2025 poz. 383 + 2025/1818, 1872, 2026/902, 988) | wymaga sprawdzenia przepisu na datę czynu | zawsze weryfikować brzmienie historyczne |
+| Kodeks karny | Dz.U. 2026 poz. 1342 t.j. (ELI 2026-10-20: tekst t.j. opublikowany, obejmuje 2025/1818, 1872, 2026/902, 988; brak nowelizacji po t.j.) | wymaga sprawdzenia przepisu na datę czynu | zawsze weryfikować brzmienie historyczne |
 | Kodeks postępowania karnego | Dz.U. 2026 poz. 490; widoczna nowelizacja Dz.U. 2026 poz. 638 oczekująca/zmieniająca | aktualny z koniecznym sprawdzeniem wejścia zmian | kontrolować datę czynności procesowej |
 
 ---

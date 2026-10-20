@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.237"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.238"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -1334,4 +1334,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.237 | Ostatnia aktualizacja: 2026-10-19 (AUDYT-2026-10-19a). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.238 | Ostatnia aktualizacja: 2026-10-20 (AUDYT-2026-10-20b). Stopkę aktualizuj razem z polem `version`.*

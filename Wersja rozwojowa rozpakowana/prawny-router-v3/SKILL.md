@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.71"
+version: "3.72"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,7 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.71 (2026-10-10b, AUDYT-2026-10-10b): Opis: router przy sprawach prawnych, nie przy wzmiankach prawnych w pracy nad kodem; preferencje użytkownika w zakresie sprawy prawnej; PROFIL-LEKKI 1.3 z kosztami zmierzonymi (rdzeń ≈103 kB ≈28 tys. tokenów, typowa sprawa ≈221 kB ≈55-60 tys.); HARD-GATES-ORZECZNICTWO i ZRODLA-AKTOW-FALLBACK bez obchodzenia WAF.
+  Wersja bieżąca: 3.72 (2026-10-20, AUDYT-2026-10-20a): KROK 2 i POKRYCIE DZIEDZINOWE oznaczone ROUTING; w trybie mechanicznym aplikacja podaje je odnośnikiem, w automatycznym w całości.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -308,6 +308,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 
 ---
 
+<!-- lex:wykonuje-aplikacja: ROUTING -->
 ## KROK 2 — ROUTING [1]–[11]
 
 ### [1] DOKUMENT / UMOWA
@@ -608,6 +609,7 @@ jawny TRYB ZDEGRADOWANY.
 
 ---
 
+<!-- lex:wykonuje-aplikacja: ROUTING -->
 ## POKRYCIE DZIEDZINOWE (wczytuj tylko gdy potrzebne)
 
 ```text

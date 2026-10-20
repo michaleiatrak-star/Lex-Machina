@@ -6,7 +6,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan aktu → moduł. Historia korek
 
 | Akt prawny / zakres | Dz.U. / źródło bieżące | Moduł | Status bieżący |
 |---|---|---|---|
-| Prawo zamówień publicznych (PZP) | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-zamowienia-publiczne-KIO` | 🟢 operacyjny; konkretny przepis wymaga fresh gate |
+| Prawo zamówień publicznych (PZP) | Dz.U. 2026 poz. 793 t.j.; zm. **2026/1347** art. 6 — art. 214 ust. 1 pkt 10 i art. 364 ust. 1 pkt 1 bez „świadectw pochodzenia biogazu rolniczego” od 1.12.2026 ✅ [VER] RZĄD 1 2026-10-20 (ELI DU/2026/1347 i 1348: metadane, `references`, 1347 text.pdf art. 1–6 i 41) | `mod-PZP-zamowienia-publiczne-KIO` | 🟢 operacyjny; konkretny przepis wymaga fresh gate |
 | PZP — uzupełnienie: polityka/plan, zamówienia mieszane, komunikacja, dokumentowanie, formalności wyboru, podprogowe, organy i ADR | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-uzupelnienie-pokrycia-2026` | 🟢 B+/COV |
 | PZP Dział II — kwalifikacja podmiotowa, JEDZ, kryteria oceny, unieważnienie | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-dzial-II-kwalifikacja-kryteria-uniewaznienie` | 🟢 B+/COV |
 | PZP Dział IV — umowa ramowa, dynamiczny system zakupów, konkurs i usługi społeczne | Dz.U. 2026 poz. 793 t.j. | `mod-PZP-dzial-IV-szczegolne-instrumenty` | 🟢 aktywny; fresh gate |
