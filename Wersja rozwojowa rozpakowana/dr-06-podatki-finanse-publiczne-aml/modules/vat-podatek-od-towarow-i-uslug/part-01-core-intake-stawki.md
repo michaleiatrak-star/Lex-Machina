@@ -55,12 +55,25 @@ VAT — podatek od towarów i usług; BAZA WERYFIKACJI STAWEK (sekcja 3: ISAP/za
   Naruszenie = naruszenie PRAWO-HARDGATE.
 
 ⭐⭐⭐ DLACZEGO NIE TABELA — DOWÓD Z SAMEGO SYSTEMU ŹRÓDEŁ:
-  Rozporządzenie o obniżonych stawkach (Dz.U. 2023 poz. 2670) było
-  zmieniane co najmniej DZIEWIĘĆ RAZY: Dz.U. 2024 poz. 387, 1381, 1399,
-  1944; Dz.U. 2025 poz. 1253; Dz.U. 2026 poz. 417, 573, 642, 699.
-  Sam § 11a (obniżka dla paliw) był przedłużany kolejno do 15.05.2026 →
-  31.05.2026 → 15.06.2026 → 30.06.2026, a zakres kodów CN korygowano w
-  trakcie (CN 2710 19 43 → CN 2710 19 42 i 2710 19 44).
+  Rozporządzenie o obniżonych stawkach (Dz.U. 2023 poz. 2670) zmieniono
+  TRZYNAŚCIE RAZY (ELI `references`, stan 2026-10-20): Dz.U. 2024 poz. 387,
+  1381, 1399, 1944; Dz.U. 2025 poz. 1253; Dz.U. 2026 poz. 417, 418, 573,
+  642, 699, 771, 1095, 1288.
+  ⛔ BŁĄD DO 2026-10-20: lista podawała dziewięć nowelizacji — pominięte
+  były 2026/418, 771, 1095 i 1288.
+  Paliwa — 8% w przepisach epizodycznych (podstawa: art. 146ej ust. 1 VAT):
+  • § 11a — przedłużany kolejno do 15.05.2026 → 31.05.2026 → 15.06.2026 →
+    30.06.2026 (ostatnie przedłużenie: Dz.U. 2026 poz. 771); kody CN
+    poprawione przez 2026/418 (CN 2710 19 43 → CN 2710 19 42, 2710 19 44);
+  • § 11b (Dz.U. 2026 poz. 1095) — od 17.08.2026 do 31.08.2026;
+  • § 11c (Dz.U. 2026 poz. 1288, w mocy 2.10.2026) — od 3.10.2026 do
+    31.12.2026.
+  Zakres § 11b i § 11c: benzyny silnikowe (CN 2710 12 45 lub 2710 12 49),
+  oleje napędowe (CN 2710 19 42, 2710 19 44 i 2710 20 11) oraz mieszaniny
+  z biokomponentami, a także biokomponenty stanowiące samoistne paliwa
+  (bez względu na kod CN) — dostawa, WNT i import.
+  ✅ [VER: ELI DU/2023/2670 `references`; DU/2026/418, 771, 1095, 1288
+  text.pdf, RZĄD 1, 2026-10-20]
   → KAŻDA TABELA STAWEK WPISANA DO MODUŁU JEST NIEAKTUALNA W CIĄGU
     TYGODNI. Wpisanie jej tworzy FAŁSZYWE POCZUCIE PEWNOŚCI — groźniejsze
     niż brak informacji, bo zniechęca do sprawdzenia.
@@ -72,7 +85,7 @@ VAT — podatek od towarów i usług; BAZA WERYFIKACJI STAWEK (sekcja 3: ISAP/za
 ┌─ POZIOM A — TEKST PRAWA (co jest opodatkowane jaką stawką) ─────────┐
 
 A1. USTAWA O VAT — ISAP
-    https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000775
+    https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001263 (t.j. Dz.U. 2026 poz. 1263; ⛔ do 2026-10-20 link wskazywał nieaktualny t.j. 2025 poz. 775)
     → art. 41 — konstrukcja stawek i odesłania do załączników
     → art. 146a i n. (przepisy epizodyczne, m.in. art. 146ea, 146ef,
       146ej) — CZASOWE poziomy stawek; ⛔ TO TU, A NIE W ART. 41, JEST
@@ -91,9 +104,9 @@ A2. ROZPORZĄDZENIE WYKONAWCZE — OBNIŻONE STAWKI
     Podstawa delegacji: art. 146ej ust. 1 ustawy o VAT
     Struktura: Rozdz. 1 przepisy ogólne (§ 1-2) | Rozdz. 2 stawka 0%
       (§ 3-7) | Rozdz. 3 stawka 8% (§ 8) | Rozdz. 4 przepisy epizodyczne
-      (§ 9-11, § 11a) + załącznik z listą towarów
+      (§ 9-11, § 11a-11c) + załącznik z listą towarów
     ⛔ OBOWIĄZKOWO sprawdź AKTUALNY tekst ujednolicony ORAZ datę
-      obowiązywania przepisu epizodycznego — patrz lista dziewięciu
+      obowiązywania przepisu epizodycznego — patrz lista trzynastu
       nowelizacji wyżej
 
 └────────────────────────────────────────────────────────────────────┘
@@ -227,7 +240,7 @@ używać jako podstawy rozliczenia ani wpisywać do pisma:
 `mod-PKWiU-klasyfikacje-statystyczne.md` (ramy klasyfikacji) |
 `mod-ustawa-akcyzowa-i-clo-UCC.md` (CN dla wyrobów akcyzowych)
 
-✅ [VER: rozporządzenie Dz.U. 2023 poz. 2670 wraz z wykazem dziewięciu
+✅ [VER: rozporządzenie Dz.U. 2023 poz. 2670 wraz z wykazem dziewięciu (⛔ niepełnym — 13 nowelizacji wg ELI, korekta 2026-10-20 wyżej)
    nowelizacji i strukturą rozdziałów — przepisy.gofin.pl; nowelizacje
    Dz.U. 2026 poz. 417, 642 z podstawą art. 146ej ust. 1 — prawo.pl
    (pełne teksty); ISZTAR4 (adresy, funkcja daty symulacji, zawartość

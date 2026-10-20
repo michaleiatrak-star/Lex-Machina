@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.54"
+version: "3.55"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 dependencies:
   requires:
@@ -77,7 +77,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 ## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
 Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zdrowie, farmacja, żywność, rolnictwo — pojęcia dziedzinowe (świadczenie zdrowotne, podmiot leczniczy, produkt leczniczy) zdefiniowane wprost w aktach sektorowych (ustawa o działalności leczniczej, Prawo farmaceutyczne) i pokryte w modułach DR-10. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
-## Moduły (31 łącznie — ✓ 31 OK, ☐ 0 STUB)
+## Moduły (32 łącznie — ✓ 32 OK, ☐ 0 STUB)
 
 **NAPRAWA 2026-08-13 (F-45, częściowa):** dodano formalne wpisy `[✓]`
 dla dwóch modułów niżej — istniały fizycznie od 2026-08-12 (podział
@@ -221,6 +221,8 @@ EDUKACJA I SPORT:
               (edukacja specjalna, dostępność dla osób z niepełnosprawnościami)
   [✓] OK    mod-ustawa-sport-turystyka-imprezy-masowe
               (ustawa o sporcie + imprezy masowe + usługi turystyczne)
+  [✓] NOWY  mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ
+              (SIOZ: SIM, EDM, IKP, rejestry medyczne, dostęp do danych; t.j. Dz.U. 2026 poz. 1304; zm. 2025/1705 od 1.01.2027)
 ```
 
 ---

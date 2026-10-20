@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.51"
+version: "3.52"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -99,7 +99,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
   mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
 
-## Moduły (43 łącznie — ✓ 43 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
+## Moduły (44 łącznie — ✓ 44 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
 
   [✓] OK    mod-KP-current-state-COV
   [✓] OK    mod-SUS-current-state-COV
@@ -160,6 +160,8 @@ AUDIT-JOURNAL.md`.
                wypadki przy pracy, zasiłek pogrzebowy, terminy z art. 24,
                zakaz legalizacji dokumentów art. 23, przepisy przejściowe
                art. 28; NIE jest to koordynacja unijna ani mały ruch graniczny)
+  [✓] NOWY  mod-umowa-PL-Japonia-zabezpieczenie-spoleczne
+              (Tokio 15.04.2026; ratyfikacja Dz.U. 2026 poz. 1326; ⛔ NIE obowiązuje do wejścia w życie z art. 31 i ogłoszenia w Dz.U.)
   [✓] NOWY  mod-ustawa-karta-nauczyciela-pracownicze
               (dodany 2026-07-27, domyka F-19 z WARN-OTWARTE.md: brak
                treści pracowniczej Karty Nauczyciela — wynagrodzenie

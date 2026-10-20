@@ -39,6 +39,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o zawodzie lekarza weterynarii i izbach lekarsko-weterynaryjnych | Dz.U. 2026 poz. 125 t.j. ze zm. | `mod-ustawa-lekarz-weterynarii-zawod` | ✅ aktywny |
 | Psycholog — aktualnie obowiązujący reżim zawodowy | akt obowiązujący na dzień sprawy | `mod-ustawa-psycholog-zawod` | ✅ aktywny; temporal gate |
 | Zawody prawnicze pokrewne występujące w sprawach DR-10 | właściwe ustawy korporacyjne | `mod-ustawa-zawody-prawnicze-pokrewne` + routing DR-12/DR-06 | ✅ routing |
+| Ustawa o systemie informacji w ochronie zdrowia (SIM, EDM, IKP, rejestry medyczne) | Dz.U. 2026 poz. 1304 t.j.; ⏳ zm. Dz.U. 2025 poz. 1705 (art. 3 ust. 3 pkt 11, art. 5, art. 24) od 1.01.2027 ✅ [VER: ELI DU/2026/1304 text.pdf, RZĄD 1, 2026-10-20] | `mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ` | ✅ NOWY 2026-10-20 |
 
 ## Reguły runtime
 

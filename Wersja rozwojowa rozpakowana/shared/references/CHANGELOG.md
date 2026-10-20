@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.44 (2026-10-20, AUDYT-2026-10-20d): ISAP-METRYKI-AKTOW: Prawo wodne — DU/2026/1358 odczytana (wyłącznie kąpieliska)
 - 3.99.43 (2026-10-20, AUDYT-2026-10-20c): ISAP-METRYKI-AKTOW: Prawo wodne — zmiana po t.j. 1335: DU/2026/1358 (w mocy 3.11.2026).
 
 - 3.99.42 (2026-10-20, AUDYT-2026-10-20b): LEGAL-REGISTRY i ISAP-METRYKI-AKTOW: KK — tekst t.j. Dz.U. 2026 poz. 1342 opublikowany w ELI (2026-10-20).

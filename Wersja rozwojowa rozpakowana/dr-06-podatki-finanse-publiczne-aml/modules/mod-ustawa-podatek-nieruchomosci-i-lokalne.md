@@ -34,7 +34,7 @@ Podatek od nieruchomości (budynki, budowle, grunty), podatek rolny, podatek le�
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Ustawa o podatkach i opłatach lokalnych | **Dz.U. 2025 poz. 707 t.j.**; ⚡ zm. po t.j.: **Dz.U. 2026 poz. 1354** (ustawa z 18.09.2026, ogł. 19.10.2026, w mocy 1.01.2027; ⛔ tekst w ELI nieopublikowany na 2026-10-20 — przed powołaniem przepisu u.p.o.l. od 2027 r. odczytaj 1354) ✅ [VER] RZĄD 1 2026-10-20 (metadane ELI DU/2026/1354) | NOWA REFORMA od 01.01.2025; zmiana od 1.01.2027 |
+| Ustawa o podatkach i opłatach lokalnych | **Dz.U. 2025 poz. 707 t.j.**; ⚡ zm. po t.j.: **Dz.U. 2026 poz. 1354** (ustawa z 18.09.2026, ogł. 19.10.2026; art. 1 — u.p.o.l. — w mocy 1.01.2027; nowy art. 17 — opłata miejscowa i uzdrowiskowa, sekcja 6a) ✅ [VER: ELI DU/2026/1354 text.pdf, RZĄD 1, 2026-10-20] | NOWA REFORMA od 01.01.2025; zmiana od 1.01.2027 |
 | Ustawa o podatku rolnym | Dz.U. 2025 poz. 1344 t.j. | |
 | Ustawa o podatku leśnym | weryfikuj aktualny t.j. w ELI (RZĄD 1) | |
 
@@ -245,6 +245,63 @@ orzeczenia WSA], litigato.pl, kalkulatorkatastralny.pl [styczeń 2026].
 ```
 
 ---
+
+## 6a. ⚡ OPŁATA MIEJSCOWA I UZDROWISKOWA OD 1.01.2027 (Dz.U. 2026 poz. 1354)
+
+✅ [VER: ELI DU/2026/1354 text.pdf — art. 1 pkt 1–5, art. 4–9, 11, RZĄD 1, 2026-10-20]
+⛔ Do 31.12.2026 obowiązuje dotychczasowy art. 17 u.p.o.l. (t.j. Dz.U. 2025 poz. 707) — przed powołaniem odczytaj go w ELI; ten moduł opisuje tylko stan od 1.01.2027.
+
+```
+PRZEDMIOT: usługa zakwaterowania (nowy art. 1a ust. 1 pkt 8) — usługi hotelarskie
+  w obiektach hotelarskich i innych obiektach z art. 35 ust. 1–3 ustawy o usługach
+  hotelarskich + noclegi w sanatoriach uzdrowiskowych (art. 6 pkt 2, 3 i 6 ustawy
+  o lecznictwie uzdrowiskowym). Kryterium celu pobytu (zdrowotny, turystyczny…) znika.
+
+KTO PŁACI (art. 17 ust. 4): osoba fizyczna, której usługa zakwaterowania obejmuje
+  co najmniej NOC (ust. 5: start w danym dniu, koniec następnego dnia).
+
+RODZAJE I MAKSYMALNE STAWKI (art. 17 ust. 1–3):
+  opłata miejscowa — walory krajobrazowe                 ≤ 5,00 zł za noc
+  opłata miejscowa — obszar ochrony uzdrowiskowej        ≤ 5,50 zł za noc
+  opłata uzdrowiskowa — uzdrowisko                       ≤ 6,86 zł za noc
+  W jednej miejscowości (części) — tylko jedna z opłat (ust. 3).
+  Stawki z ust. 2 podlegają waloryzacji (art. 20 ust. 1 i 20a ust. 1 — dopisany art. 17 ust. 2).
+
+ZWOLNIENIA USTAWOWE (ust. 6): dyplomaci (wzajemność), osoby ze znacznym stopniem
+  niepełnosprawności (niewidomi 04-O / głusi 03-L — także umiarkowany), dzieci
+  niepełnosprawne do 16 lat, jeden opiekun, zorganizowane grupy szkolne z opiekunami,
+  pobyt POWYŻEJ 29 kolejnych nocy w obiektach w gminie — za cały okres.
+  Rada gminy może dodać zwolnienia i różnicować stawki (ust. 19 pkt 3: lokalizacja/
+  rodzaj obiektu, część roku, długość pobytu, zamieszkanie w gminie, wiek, KDR,
+  stopień niepełnosprawności).
+
+POBÓR (ust. 7–18): obowiązek powstaje w dniu rozpoczęcia zakwaterowania w obiekcie;
+  zapłata ostatniego dnia pobytu; PŁATNIK = podmiot świadczący usługę zakwaterowania
+  (nie inkasent). Płatnik może żądać przedpłaty za deklarowane noce (ust. 10–12,
+  zwrot nadpłaty), wydaje potwierdzenie (ust. 13), prowadzi rejestr per obiekt
+  (ust. 15), do 15. dnia następnego miesiąca składa informację i wpłaca opłatę
+  pomniejszoną o wynagrodzenie (ust. 16). Wynagrodzenie: 10% albo więcej wg uchwały
+  (ust. 14). Informacja elektronicznie z podpisem elektronicznym (ust. 18);
+  do 31.12.2029 dopuszczalna papierowa (art. 6 ustawy 1354).
+  Informacja = podstawa tytułu wykonawczego (ust. 17 pkt 9).
+
+UCHWAŁA RADY GMINY (ust. 19): miejscowości, stawki, zróżnicowania i zwolnienia,
+  wyższe wynagrodzenie, sposób i podpis informacji elektronicznej.
+  Minimalne walory krajobrazowe — rozporządzenie RM (ust. 21).
+
+INTERTEMPORALNIE (ustawa 1354):
+  art. 4 — postępowania wszczęte przed 1.01.2027 → przepisy dotychczasowe;
+  art. 5 — pobyt trwający na przełomie 2026/2027: część do 31.12.2026 wg starych
+           przepisów (i nie liczy się do 29 nocy z ust. 6 pkt 6), od 1.01.2027 wg nowych,
+           obowiązek zapłaty powstaje 1.01.2027;
+  art. 7 — dotychczasowe rozporządzenia z art. 17 ust. 3 i 4 tracą moc;
+  art. 8 — dotychczasowe uchwały o opłacie miejscowej/uzdrowiskowej TRACĄ MOC
+           (gmina musi podjąć nowe na podstawie art. 17 ust. 19);
+  art. 9 — uchwały z art. 19 pkt 2 i 3 o innych opłatach (targowa, od psów,
+           reklamowa — inkaso) tracą moc z nowymi uchwałami, najpóźniej 1.01.2028.
+  Art. 19 pkt 1 po zmianie: rada gminy określa zasady opłaty targowej, od posiadania
+  psów i reklamowej (lit. b–d uchylone).
+```
 
 ## 6. PODATEK ROLNY
 

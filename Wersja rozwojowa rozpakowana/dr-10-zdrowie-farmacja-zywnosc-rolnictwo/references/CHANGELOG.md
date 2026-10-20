@@ -1,5 +1,6 @@
 # CHANGELOG — dr-10-zdrowie-farmacja-zywnosc-rolnictwo
 
+- 3.55 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ (t.j. 1304; zm. 2025/1705 od 1.01.2027); MAPA-AKTOW, SKILL.md (32 moduły)
 - 3.54 (2026-10-09g, AUDYT-2026-10-09g): ⛔ mod-ustawa-medyczne-szczegolowy: próg SR 100 000 zł (KPC art. 17 pkt 4) wprowadziła ustawa z 9.03.2023, Dz.U. 2023 poz. 614 (było 2023/1114 — ustawa o pomocy w oszczędzaniu na cele mieszkaniowe). ELI 2026-10-09.
 
 - 3.53 (2026-10-09f, AUDYT-2026-10-09f): mod-ustawa-zawod-lekarza: odesłanie do `shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` (NIL); mod-ustawa-zawody-prawnicze-pokrewne: doradztwo podatkowe t.j. 2026/1274.

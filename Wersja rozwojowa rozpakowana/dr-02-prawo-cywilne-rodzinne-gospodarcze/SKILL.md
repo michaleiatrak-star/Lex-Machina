@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.98"
+version: "3.99"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -115,7 +115,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W34 Odsetki: kapitałowe vs za opóźnienie vs handlowe (różne stopy!)
 - BAS-W35 Nakaz zapłaty: sprzeciw vs zarzuty vs EPU (różne terminy/skutki)
 
-## Moduły (85 łącznie — rejestracja w SKILL.md; głębokość w MAPA-POKRYCIA)
+## Moduły (86 łącznie — rejestracja w SKILL.md; głębokość w MAPA-POKRYCIA)
 
   [✓] OK    mod-KC-current-state-COV
   [✓] OK    mod-KPC-current-state-COV
@@ -604,6 +604,8 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
   [✓] OK    mod-ustawa-spoldzielnie-wlasnosc-lokali
   [✓] OK    mod-KP-art943-mobbing-dyskryminacja
   [✓] OK    mod-ustawa-cudzoziemcy
+  [✓] NOWY  mod-ustawa-przedsiebiorcy-zagraniczni-oddzialy-przedstawicielstwa
+              (u.p.z.: art. 4 dostęp osób zagranicznych, oddział art. 14–20, przedstawicielstwo art. 21–31; t.j. Dz.U. 2026 poz. 1313)
   [✓] OK    mod-ustawa-timeshare-zastaw-rejestrowy
 ```
 

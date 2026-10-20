@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.52 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-umowa-PL-Japonia-zabezpieczenie-spoleczne (ratyfikacja Dz.U. 2026 poz. 1326; tekst Umowy z druku 2810; Umowa jeszcze nieobowiązująca — art. 31); MAPA-AKTOW, SKILL.md (44 moduły)
 - 3.51 (2026-10-17b, AUDYT-2026-10-17b): mod-ustawa-zwiazki-zawodowe-spory-zbiorowe i MAPA-AKTOW: ⏳ Dz.U. 2026 poz. 1340 (ustawa z 4.09.2026, ogł. 15.10.2026, w życie 30.10.2026) — ZZ art. 32 ust. 9¹ zd. 2, nowy art. 32¹; ustawa o informowaniu pracowników (Dz.U. 2006 poz. 550, bez t.j.) art. 5 ust. 1 pkt 1a–1b, art. 13 ust. 2–3. Tekst ustawy odczytany z ELI 2026-10-17.
 - 3.50 (2026-10-15c, AUDYT-2026-10-15c): MAPA-AKTOW: SUS — ⏳ 2026/507 art. 5 (art. 36b ust. 2, art. 43 ust. 5aa) od 1.11.2028; rynek pracy — 2026/507 art. 11 od 14.10.2026. ELI 2026-10-15.
 

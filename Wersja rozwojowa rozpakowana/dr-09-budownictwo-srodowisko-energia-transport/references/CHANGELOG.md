@@ -1,5 +1,6 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.54 (2026-10-20, AUDYT-2026-10-20d): NOWE mod-ustawa-Krajowy-Zasob-Nieruchomosci (t.j. 1299) i mod-ustawa-obszary-morskie-administracja-morska (t.j. 1305); DU/2026/1358 odczytana — wyłącznie kąpieliska, treść modułów bez zmian; MAPA-AKTOW, SKILL.md (38 modułów)
 - 3.53 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1348 odczytana (zmiana sprzedawcy w 21 dni do 19.04.2028, art. 9ja–9je PE, kary URE) w mod-PrEnergetyczne-URE-OZE i MAPA-AKTOW; DU/2026/1358 (zmiana Prawa wodnego po t.j. 1335, w mocy 3.11.2026) w MAPA-AKTOW i mod-PrWodne — tekst w ELI nieopublikowany.
 
 - 3.52 (2026-10-20, AUDYT-2026-10-20b): DU/2026/1347 (nowelizacja OZE, ogł. 16.10.2026) i DU/2026/1348 (PE, w mocy 17.10.2026) w MAPA-AKTOW (wiersze PE/URE/OZE i Prawo budowlane — art. 9a od 17.10.2027) oraz w mod-PrEnergetyczne-URE-OZE (tabela zmian i dat z art. 41); mod-POS i mod-POS-szczegoly: tekst t.j. KK 1342 opublikowany, art. 181–188a bez zmian.

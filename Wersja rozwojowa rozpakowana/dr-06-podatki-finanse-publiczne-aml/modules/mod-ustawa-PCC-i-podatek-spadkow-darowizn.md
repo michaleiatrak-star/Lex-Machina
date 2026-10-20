@@ -1,7 +1,7 @@
 # mod-ustawa-PCC-i-podatek-spadkow-darowizn
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** PCC — Dz.U. 2026 poz. 191 t.j. ✅ VER: 2026-06-05 | Podatek SD — Dz.U. 2026 poz. 478 t.j. (⚠️ POPRAWIONE 2026-08-11: poprzednio "2024 poz. 1837 ze zm." — TEN numer był PRZESTARZAŁY, obwieszczenie z 27.03.2026 skonsolidowało poprzedni t.j. + nowelizacje z Dz.U. 2025 poz. 769, 1064, 1854 w JEDEN, nowy tekst jednolity — potwierdzone bezpośrednio ISAP) ✅ VER: 2026-08-11
+**Źródło weryfikacji:** PCC — Dz.U. 2026 poz. 191 t.j. ✅ VER: 2026-06-05; ⚡ zm. Dz.U. 2026 poz. 1354 art. 3 (art. 9 pkt 6: próg 1000 → 3000 zł od 3.11.2026) ✅ [VER: ELI DU/2026/1354 text.pdf, RZĄD 1, 2026-10-20] | Podatek SD — Dz.U. 2026 poz. 478 t.j. (⚠️ POPRAWIONE 2026-08-11: poprzednio "2024 poz. 1837 ze zm." — TEN numer był PRZESTARZAŁY, obwieszczenie z 27.03.2026 skonsolidowało poprzedni t.j. + nowelizacje z Dz.U. 2025 poz. 769, 1064, 1854 w JEDEN, nowy tekst jednolity — potwierdzone bezpośrednio ISAP) ✅ VER: 2026-08-11
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ Kwoty wolne od podatku SD — ZAWSZE weryfikuj aktualne przez web_search**
 
@@ -105,6 +105,21 @@ web_search: "PCC 6% mieszkanie 2025 warunki 2 lokal zwolnienie"
   WYJĄTEK: Sprzedaż nieruchomości zwolnionych z VAT → podlega PCC
 □ Notariusz pobiera PCC przy aktach notarialnych (brak obowiązku deklaracji)
 ```
+
+### ⚡ Sprzedaż rzeczy ruchomych — próg zwolnienia (art. 9 pkt 6) — ZMIANA OD 3.11.2026
+
+```
+DO 2.11.2026:  zwolniona sprzedaż rzeczy ruchomych, jeżeli podstawa
+               opodatkowania nie przekracza 1000 zł (t.j. Dz.U. 2026 poz. 191)
+OD 3.11.2026:  próg 3000 zł — art. 3 ustawy z 18.09.2026 (Dz.U. 2026 poz. 1354);
+               wchodzi w życie po 14 dniach od ogłoszenia (ogł. 19.10.2026) —
+               art. 11; reszta ustawy 1354 (u.p.o.l., PIT) dopiero 1.01.2027
+INTERTEMPORALNIE: do czynności dokonanych przed 3.11.2026 — przepisy
+               dotychczasowe, czyli próg 1000 zł (art. 10 ustawy 1354)
+⛔ Decyduje DATA CZYNNOŚCI (zawarcia umowy), nie data złożenia PCC-3.
+```
+✅ [VER: ELI DU/2026/191 text.pdf (art. 9 pkt 6) i DU/2026/1354 text.pdf (art. 3, 10, 11), RZĄD 1, 2026-10-20]
+⚠️ Data 3.11.2026 jest wyliczona z art. 11 i daty ogłoszenia. Metadane ELI podają dla całej ustawy `entryIntoForce` 2027-01-01, co jest niepełne.
 
 ### Termin i deklaracja
 
