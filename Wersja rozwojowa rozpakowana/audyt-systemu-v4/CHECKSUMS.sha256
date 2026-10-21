@@ -36,6 +36,7 @@ ce4caf3dba1c6e28f90d113d7fb21a738425e4095422887bfe7c24e47af28ba3  ./mcp-servers/
 d64095fa343273bf885b3b7f2e964ea969b8a8d0b334fe21ea81c40c57ae6adf  ./mcp-servers/isap-eli-example/fixtures/eli_DU_2025_1071.json
 2c3f1c843ecb0aeb3e596d3d0d6ba050a6b25061a68d4686a85cc2673a8fe980  ./mcp-servers/isap-eli-example/fixtures/eli_DU_2026_795.json
 063f69d9a5abcfafdc59627aac8b06e54f9c0c719ffbdce81504921855dd2066  ./mcp-servers/isap-eli-example/fixtures/eli_szukaj_kc.json
+a01a2f9cbfcdc477b158e913745701b5a87b19f975b2ab7779a219b19a559b87  ./mcp-servers/isap-eli-example/fixtures/eli_szukaj_kpc.json
 793e2f3f8e6e05a165069179f0e96481cbc72d3713acc276f3841ab9d1950bb0  ./mcp-servers/isap-eli-example/fixtures/tj_kc_2026_795_wycinek.txt
 45a75dc2cff8af3bd17d569ca0289164304c1a63c0502e30840d019e83004f82  ./mcp-servers/isap-eli-example/isap-eli-mcp-server.js
 56ae4b19a39969e6044f09a19b44e368e5e4b8398519efbd371cc06cedee2454  ./mcp-servers/isap-eli-example/test_normalizacja.mjs
