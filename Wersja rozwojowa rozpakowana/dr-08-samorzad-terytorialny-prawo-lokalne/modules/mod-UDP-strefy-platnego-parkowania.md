@@ -9,7 +9,7 @@
 |---|---|---|---|
 | Ustawa o drogach publicznych (UDP) | **Dz.U. 2025 poz. 889 t.j.** ze zm. Dz.U. 2026 poz. 815 (od 4.07.2026), 982 (od 21.09.2026) | art. 13, 13b, 13f | Aktualny t.j. — weryfikuj ELI (RZĄD 1). Poz. 815 dodała wyłącznie art. 20i (czasowe ograniczenia ruchu w sytuacji kryzysowej) — bez wpływu na SPP/ŚSPP |
 | Ustawa o postępowaniu egzekucyjnym w administracji (UPEA) | Dz.U. 2026 poz. 1311 t.j. | art. 33 (zarzuty) | Obrona w egzekucji |
-| KW | Dz.U. 2025 poz. 734 | art. 92 §1 | Wykroczenie — brak biletu |
+| KW | Dz.U. 2026 poz. 1372 t.j. | art. 92 §1 | Wykroczenie — brak biletu |
 | KPA | Dz.U. 2025 poz. 1691 | art. 189a i n. | Nie dotyczy bezpośrednio opł. park. |
 
 ```
@@ -289,5 +289,5 @@ web_search:
 
 ---
 *mod-UDP-strefy-platnego-parkowania.md · DR-08 · 2026-06-09*
-*Podstawa: UDP (Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815, 982) + UPEA (Dz.U. 2026 poz. 1311 t.j.) + KW (Dz.U. 2025 poz. 734)*
+*Podstawa: UDP (Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815, 982) + UPEA (Dz.U. 2026 poz. 1311 t.j.) + KW (Dz.U. 2026 poz. 1372 t.j.)*
 *Weryfikuj stawki: web_search co roku (% płacy minimalnej)*

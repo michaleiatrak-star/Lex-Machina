@@ -1,5 +1,6 @@
 # CHANGELOG — dr-15-compliance-iso-governance-audyt
 
+- 3.20 (2026-10-22, AUDYT-2026-10-22): PSWiN: t.j. Dz.U. 2026 poz. 1362 (było 2024/1571) w SKILL.md i MAPA-AKTOW.
 - 3.19 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.18 (2026-10-19a, AUDYT-2026-10-19a): KK — nowy t.j. Dz.U. 2026 poz. 1342 (obwieszczenie z 2.10.2026, ogł. 16.10.2026; ELI: 2025/383 „wygaśnięcie aktu”, 2026/902 i 988 „objęte t.j.”, brak zmian po t.j.). ⛔ ELI nie udostępnia jeszcze tekstu t.j. — do publikacji brzmienie z 2025/383 + 2025/1818, 1872, 2026/902, 988. Wskazania bazy przepięte na 2026/1342; zapisy odczytu ze starego t.j. bez zmian, z dopiskiem „obecny t.j.”. mod-ISO-37001, mod-ISO-37301, mod-ustawa-sygnalisci.
 - 3.17 (2026-10-04c, AUDYT-2026-10-04c): **F-227 (zamknięta).** SKILL.md nie wczytywał `MAPA-POKRYCIA.md`, choć `prawny-router-v3/references/pokrycie-dziedzinowe.md` nazywa lokalną mapę jedynym bieżącym źródłem statusu pokrycia — dodana sekcja „Mapa pokrycia treściowego” z `view`, wzorem DR-02…DR-06 i DR-16. Treść prawa bez zmian. Pełny opis: `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, AUDYT-2026-10-04c.

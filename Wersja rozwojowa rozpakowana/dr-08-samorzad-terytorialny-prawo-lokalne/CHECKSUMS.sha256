@@ -1,12 +1,12 @@
 321ba598bf7a85c334af54656b51af5389351f56f296686eb656038d3e185d22  ./MAPA-AKTOW.md
 2763701bd121dd6e70f1098ed71416e7d78852962b0289d7ec1db280fe520eae  ./MAPA-POKRYCIA.md
 5bb12ce059b79b514a3d11ba63efd201748c8e3a064a8f97bf576eace6a83782  ./PORTABILITY-MANIFEST.md
-6a7dc68264bde467e43cb4776763a7ff475df90d81841f1f0369940fec1b856f  ./SKILL.md
+bdd19c3fac55466f268f3c3082a7544595bfb74a453c4191e394cb1c20517f1f  ./SKILL.md
 5681f9c71bd5ec9f182f0618b4a75d9711a50f1d57cb6788f5a98b5b4603e99b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4da06fd5ff6fe8ee90f423e87688d02caa64e4a5165b02567b656c93bf67f83  ./modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md
 cd6a6747d79f319f28f8894f2c2fa29a659bf6e158aab0c196a61fccce08b942  ./modules/mod-MPZP-WZ-planowanie-przestrzenne.md
-9bb5971123160850e2763a6386a48f590525a75244e177b6c7e35b5089a60e4c  ./modules/mod-UDP-strefy-platnego-parkowania.md
+da43579618af536af67e6171ac73dcbdbdc1cd0a791c20ca7237eb54b86a7224  ./modules/mod-UDP-strefy-platnego-parkowania.md
 0f52aad13ea50d5a25a9de23ab77696e8e338400a302d0457a6d01c0aec5f86e  ./modules/mod-akty-porzadkowe-bezpieczenstwo-lokalne.md
 28888b2c9198e859b32b78d6e19b06458f22006d4853a9c7378ca501e91e9ed2  ./modules/mod-dzienniki-urzedowe-BIP-publikacja.md
 439e8202b13aea43885843ebfef7798b17d5343037a588df3dc25446cdec38b1  ./modules/mod-kontrola-administracji-inspekcje.md
@@ -24,4 +24,4 @@ a18e15e1ac8c6e62cbee58217dd5beec1701bbf682f92d950047bfa083872f78  ./modules/mod-
 aff6d1ee5b6b2d6b86c49d14a877c40fd919a014f2fb2b31d15d31e6940e42ff  ./modules/mod-ustawa-zabytki-rewitalizacja.md
 3eadd87f4d68e1c2cd836d8543fee9c089862d4038aa1e64abbefdaa3c42150e  ./modules/mod-ustawa-zarzadzanie-kryzysowe.md
 a63b556d8c55c3c190dce944b8a4780f76c019ae0fc70fc2f396c853d37990ee  ./modules/mod-wojewoda-administracja-rzadowa-current-state-COV.md
-eaf741198dfed77bc2aab4a577a950e44372b3babf0dcded8235d34e02f7f061  ./references/CHANGELOG.md
+dbc45342b6f590bb9c164b2a69ed943a9ca607d45cc8fc73d2d6f0a9ea1347fe  ./references/CHANGELOG.md

@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.72"
+version: "3.73"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 dependencies:
   requires:
@@ -346,7 +346,7 @@ AUDIT-JOURNAL.md`.
                przepisów art. 9, kontratypy 15-16), kary i środki karne
                (18-39, w tym katalog kar art. 18 i środków karnych art. 28),
                przedawnienie i zatarcie (45-46, TERMIN KRYTYCZNY: 1 rok),
-               stosunek do ustaw szczególnych (48). Dz.U. 2025 poz. 734 t.j.
+               stosunek do ustaw szczególnych (48). Dz.U. 2026 poz. 1372 t.j.
                ze zm. 1676/1814)
   [✓] OK    mod-KW-art119-131-przeciwko-mieniu
               (dodany 2026-07-17: Rozdz. XIV KW — kradzież/przywłaszczenie

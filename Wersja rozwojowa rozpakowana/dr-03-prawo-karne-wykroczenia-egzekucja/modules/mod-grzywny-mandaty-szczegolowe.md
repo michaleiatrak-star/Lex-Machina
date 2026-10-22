@@ -8,7 +8,7 @@ kary pieniężne administracyjne (KPA Dział IVa), przedawnienie, egzekucja
 
 | Akt | Dz.U. | Uwaga |
 |---|---|---|
-| Kodeks wykroczeń (KW) | Dz.U. 2025 poz. 734 t.j. | art. 24–37 (grzywna sądowa) |
+| Kodeks wykroczeń (KW) | Dz.U. 2026 poz. 1372 t.j. | art. 24–37 (grzywna sądowa) |
 | KPSW | Dz.U. 2026 poz. 1336 t.j. (obejmuje **Dz.U. 2026 poz. 473** i zmiany z 2025 r.; brak zmian po t.j. — ELI 2026-10-17) | art. 95–102 (mandat karny). ⛔ 2026 poz. 473 to NOWELIZACJA (ustawa o zmianie ustawy o PIP oraz niektórych innych ustaw), **nie** t.j. — wcześniejszy zapis „2026.473 t.j." był błędny, sprostowany 2026-08-15 |
 | KPA | Dz.U. 2025 poz. 1691 t.j. | Dział IVa art. 189a–189k (adm. kary pieniężne) |
 | KPA art. 88 | j.w. | grzywna porządkowa świadka/biegłego |
@@ -437,5 +437,5 @@ web_search:
 
 ---
 *mod-grzywny-mandaty-szczegolowe.md · DR-03 · 2026-06-09*
-*KW (Dz.U. 2025 poz. 734) + KPSW (Dz.U. 2026 poz. 1336) + KPA (Dz.U. 2025 poz. 1691)*
+*KW (Dz.U. 2026 poz. 1372 t.j.) + KPSW (Dz.U. 2026 poz. 1336) + KPA (Dz.U. 2025 poz. 1691)*
 *UPEA (Dz.U. 2026 poz. 1311 t.j.) + UDP (Dz.U. 2025 poz. 889 ze zm. 2026 poz. 815, 982)*

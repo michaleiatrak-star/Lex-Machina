@@ -154,7 +154,7 @@ ręcznie — nie ma testu, który by tego pilnował.
 | 3 lata | Roszczenia ze stosunku pracy | art. 291 KP |
 | 3/6 lat | Roszczenia cywilne ogólne — ⛔ szczegóły i pułapka końca roku kalendarzowego: sekcja **Prawo cywilne materialne (KC)** niżej | art. 118 KC |
 | 5 lat | Zachowek — wobec spadkobierców od **ogłoszenia testamentu** (§ 1); wobec obdarowanych, zapisobierców windykacyjnych, fundacji rodzinnej — od **otwarcia spadku** (§ 2–4) | art. 1007 KC |
-| 1 rok / maks. 3 lata przy wszczęciu postępowania w pierwszym roku | Wykroczenia — karalność | art. 45 §1 KW; re-ver ELI Dz.U. 2025 poz. 734, 2026-08-28 |
+| 1 rok / maks. 3 lata przy wszczęciu postępowania w pierwszym roku | Wykroczenia — karalność | art. 45 §1 KW; re-ver ELI t.j. Dz.U. 2026 poz. 1372 (stan 23.09.2026), 2026-10-22 |
 
 ---
 

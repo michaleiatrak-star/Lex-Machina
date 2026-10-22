@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.47 (2026-10-22, AUDYT-2026-10-22): terminy.md: karalność wykroczeń art. 45 §1 KW — re-ver na t.j. Dz.U. 2026 poz. 1372 (bez zmian).
 - 3.99.46 (2026-10-20, LEXAGENTO-P1): UNIVERSAL-RUNTIME-ADAPTER 1.2: kontrakt query_context (skrót aktu); walidator_cytowan: ELI aktów bazowych kodeksów -> skrót, api.sejm.gov.pl jako źródło urzędowe; pełne ścieżki modułów zamiast dr-NN/.../
 - 3.99.45 (2026-10-20, AUDYT-2026-10-20h): ACTIVATION-MATRIX: KOMBINACJE SKILLI — po chronologii: chronologia-sprawy-v1 → pisma-procesowe-v3 (oś czasu i REKOMENDACJE DO PISMA jako materiał W1) oraz → analiza-sadowa-v6 (przy aktach); wcześniej po raporcie chronologii aplikacja nie proponowała kolejnego etapu
 - 3.99.44 (2026-10-20, AUDYT-2026-10-20d): ISAP-METRYKI-AKTOW: Prawo wodne — DU/2026/1358 odczytana (wyłącznie kąpieliska)

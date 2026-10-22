@@ -10,11 +10,11 @@ source_policy: "RZĄD 1 ELI / tekst ujednolicony"
 
 ## 1. Źródło i zakres
 
-**Baza:** Kodeks wykroczeń, t.j. Dz.U. 2025 poz. 734, z późniejszymi zmianami.
+**Baza:** Kodeks wykroczeń, t.j. Dz.U. 2026 poz. 1372 (stan 23.09.2026; poprzednio 2025/734).
 ELI publikuje tekst ujednolicony; przy każdej konkretnej kwalifikacji odczytaj
 aktualne brzmienie jednostki i datę czynu.
 
-- https://eli.gov.pl/eli/DU/2025/734/ogl
+- https://eli.gov.pl/eli/DU/2026/1372/ogl
 - tekst ujednolicony ELI: D20250734Lj.pdf
 
 Moduł domyka lukę pomiędzy `mod-KW-art49-64-porzadek-publiczny.md`
@@ -49,7 +49,7 @@ a `mod-KW-art70-118-bezpieczenstwo-osoba-zdrowie.md`.
 ## 4. Quality gate
 
 - [ ] odczytano aktualny tekst ujednolicony KW na dzień czynu;
-- [ ] sprawdzono wszystkie późniejsze nowelizacje po t.j. 2025/734;
+- [ ] sprawdzono wszystkie późniejsze nowelizacje po t.j. 2026/1372;
 - [ ] ustalono właściwy organ i podstawę jego kompetencji;
 - [ ] zweryfikowano stronę podmiotową;
 - [ ] sankcja/kwota/nawiązka została odczytana świeżo, nie z pamięci;

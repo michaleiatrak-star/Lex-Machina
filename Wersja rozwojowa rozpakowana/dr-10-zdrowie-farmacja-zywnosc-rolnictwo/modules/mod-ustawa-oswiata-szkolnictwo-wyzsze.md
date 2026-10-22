@@ -54,13 +54,16 @@ Ustal, czy akt jest decyzją administracyjną, czynnością wewnętrzną, uchwa�
 ## 1A. AUTONOMIA UCZELNI (dodano 2026-07-27, na żądanie użytkownika)
 
 **Podstawa:** art. 3 ust. 1 oraz art. 9 ustawy z 20.07.2018 r. — Prawo o
-szkolnictwie wyższym i nauce (Dz.U. 2024 poz. 1571 t.j.). Zweryfikowano
+szkolnictwie wyższym i nauce (Dz.U. 2026 poz. 1362 t.j., stan 10.09.2026;
+art. 3 ust. 1 i art. 9 bez zmian względem 2024/1571 — ELI text.pdf, 2026-10-22). Zweryfikowano
 BEZPOŚREDNIO przez isap.sejm.gov.pl (Rząd 1, pobrany PDF ustawy) oraz
 lexlege.pl/arslege.pl/inforlex.pl (Rząd 2B) — wszystkie zgodne.
 ✅ FAZA 3E ZAMKNIĘTA 2026-08-21 (F-45): numer 2024.1571 PONOWNIE
 POTWIERDZONY jako aktualny (isap.sejm.gov.pl bezpośredni wpis, brak
 nowszego obwieszczenia t.j. znalezionego mimo upływu ~2 lat — ustawa
 rzadziej konsolidowana niż Prawo oświatowe).
+⬆ 2026-10-22: nowy t.j. Dz.U. 2026 poz. 1362 (obwieszczenie 17.09.2026,
+ogł. 21.10.2026) zastąpił 2024.1571; art. 3 ust. 1 i art. 9 bez zmian.
 
 ```
 Art. 3 ust. 1: "Podstawą systemu szkolnictwa wyższego i nauki jest

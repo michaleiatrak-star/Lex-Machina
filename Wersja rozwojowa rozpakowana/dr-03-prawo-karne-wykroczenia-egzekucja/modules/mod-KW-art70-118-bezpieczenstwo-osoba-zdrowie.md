@@ -79,7 +79,7 @@ grzywny. Ta sama nowelizacja zmieniła art. 24 § 1a KW i art. 96 § 1ad KPW,
 co ma znaczenie dla maksymalnej grzywny mandatowej.
 
 **RZĄD 1 / weryfikacja 2026-08-27:**
-- ELI, t.j. KW: Dz.U. 2025 poz. 734;
+- ELI, t.j. KW: Dz.U. 2026 poz. 1372 (stan 23.09.2026; poprzednio 2025/734);
 - ELI, nowelizacja: Dz.U. 2025 poz. 1814.
 
 Przed kwalifikacją konkretnego zachowania odczytaj pełny właściwy paragraf

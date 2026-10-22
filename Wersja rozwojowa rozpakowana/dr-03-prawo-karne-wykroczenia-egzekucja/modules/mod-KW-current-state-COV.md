@@ -10,11 +10,11 @@ source_policy: "RZĄD 1 ELI / tekst ujednolicony"
 
 ## 1. Baza
 
-**Kodeks wykroczeń:** t.j. Dz.U. 2025 poz. 734 ze zm.
+**Kodeks wykroczeń:** t.j. Dz.U. 2026 poz. 1372 (obwieszczenie 2.10.2026, ogł. 21.10.2026, stan 23.09.2026; ujmuje 2025 poz. 1676, 1814, 1818, 1872; po t.j. brak aktów zmieniających wg ELI 2026-10-22)
 ELI wskazuje akty zmieniające po tekście jednolitym; konkretny artykuł,
 sankcja, kwota i data wejścia w życie zawsze wymagają fresh/temporal gate.
 
-- https://eli.gov.pl/eli/DU/2025/734/ogl
+- https://eli.gov.pl/eli/DU/2026/1372/ogl
 
 ## 2. Mapa całej struktury
 
@@ -48,7 +48,7 @@ sankcja lub nowelizacja został omówiony w jednakowej głębokości.
 
 Przy każdej sprawie:
 1. odczytaj ELI dla KW;
-2. sprawdź nowelizacje po t.j. 2025/734 i ich wejście w życie;
+2. sprawdź nowelizacje po t.j. 2026/1372 i ich wejście w życie;
 3. ustal datę czynu (lex mitior / temporalność);
 4. dopiero potem użyj modułu szczegółowego.
 
