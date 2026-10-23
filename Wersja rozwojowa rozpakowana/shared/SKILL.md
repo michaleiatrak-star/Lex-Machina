@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.46"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.47"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.46 (2026-10-20, LEXAGENTO-P1): UNIVERSAL-RUNTIME-ADAPTER 1.2: kontrakt query_context (skrót aktu); walidator_cytowan: ELI aktów bazowych kodeksów -> skrót, api.sejm.gov.pl jako źródło urzędowe; pełne ścieżki modułów zamiast dr-NN/.../
+  Wersja bieżąca: 3.99.47 (2026-10-22, AUDYT-2026-10-22): terminy.md — art. 45 §1 KW re-ver na t.j. Dz.U. 2026 poz. 1372.
+  3.99.46 (2026-10-20, LEXAGENTO-P1): UNIVERSAL-RUNTIME-ADAPTER 1.2: kontrakt query_context (skrót aktu); walidator_cytowan: ELI aktów bazowych kodeksów -> skrót, api.sejm.gov.pl jako źródło urzędowe; pełne ścieżki modułów zamiast dr-NN/.../
   3.99.40 (2026-10-19a, AUDYT-2026-10-19a): KK — nowy t.j. Dz.U. 2026 poz. 1342 w LEGAL-REGISTRY, ISAP-METRYKI-AKTOW i modułach shared (tekst w ELI nieopublikowany — do publikacji 2025/383 + 2025/1818, 1872, 2026/902, 988); zapisy odczytu ze starego t.j. z dopiskiem „obecny t.j.”.
   3.99.39 (2026-10-17b, AUDYT-2026-10-17b): MOD-DLUGIE-PISMO 1.1.0 — do 30 części (pismo ponad 65 000 tokenów), rozmiar części zależny od modelu (lokalny ok. 2 strony), DP-1b (ponad 30 części: osobne dokumenty), DP-1c (część ucięta: zwięźlej), DP-6 (numer punktu zachowany w pliku).
   3.99.38 (2026-10-17a, AUDYT-2026-10-17a): terminy.md: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17).
@@ -61,7 +62,6 @@ changelog: |
   3.99.29 (2026-10-10c, AUDYT-2026-10-10c): DOSTEP-MASZYNOWY-API: konektor SN otwiera przeglądarkę użytkownika (Edge/Chrome), weryfikację sn.pl przechodzi człowiek, bez podmiany User-Agenta.
   3.99.22 (2026-10-08): usunięto archiwum tools/mcp-servers/mcp-servers-examples.zip (serwery MCP żyją w audyt-systemu-v4/mcp-servers/); CHECKSUMS bez wpisu
   3.99.21 (2026-10-07): CBOSA-ADAPTER 1.2 — sekcja „powiązane” poza kandydatami, etykieta pola w zagnieżdżonej tabeli (PR #84)
-  3.99.20 (2026-10-07): walidator_cytowan z PR #95 — zgodność po pełnym identyfikatorze (Dz.U. rok+pozycja/ELI/WDU, sygnatura całością, artykuł z § i kodeksem) zamiast samych liczb; domena po hoście, https także w result_urls (zgł. #89)
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 

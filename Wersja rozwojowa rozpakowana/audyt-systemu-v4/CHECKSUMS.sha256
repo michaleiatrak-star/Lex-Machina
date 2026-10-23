@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-71233720c9e5b7a94176553b8f7ff83ad5527e1bc2dcd1c3ae947e9e6e786d9d  ./SKILL.md
+433141cfb6f5c85758acd791ab97dfdbfc16c30aefb1311411bca4c5c34da96a  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -95,7 +95,7 @@ c35f4cd69cbc0927216a9121554bb8b2167e2db6cfe507900f38a8639893dd56  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 8e35cbfde3fb3a785181e9e16a153437820762ad34887cf1e714086f497274e9  ./references/ALIASY-NAZW-AKTOW.md
 167144b386f010c66a1b88d1c9d06f0423038f29c31c908cd466d26e47f24a12  ./references/AUDIT-JOURNAL.md
-255cca679ba24336094ea846cfe9435448db6ea7f3e18abc76cad3eb3c5e3168  ./references/CHANGELOG.md
+efd46958735664f7a7dd5502ed122c61f1e7d0a085b8919035843ac7e5dc2746  ./references/CHANGELOG.md
 ddb7a65f2c6adfe886e94b5e98305956c6eea65d5ae225fb5b2c57848cedcf96  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -118,7 +118,7 @@ c679e729f656a190e7f28f8322bd4b4787fa239fdce03fbe5d2ffaf2fdc1b990  ./references/P
 82a72e5ef250fdbbbd184bd943bfc2a408d5b6a459a8a3d913624c48573dc4b9  ./references/SYNC-DZU-AUTOMATYCZNY.md
 aeef1d2a5e59a6c6e649115bc63b5a452a56a8467fbcb42a562bb3e0c8a0b259  ./references/WARN-OTWARTE.md
 b53258f9480de7129bdc392b9fbd403dde496cfa6e17720c70b21a6a99b417b3  ./references/mapa_dzu_2026-08-28.md
-39de2939d81ae8503bde76e12f73ec98ee4aa2eab62f40748a297cb01bc5c131  ./references/mapa_dzu_2026-10-04.md
+20a75ff675f1d0c90947326e3ab93836d72f8e490727ebe3213eee3e8b2b7b13  ./references/mapa_dzu_2026-10-04.md
 24e8f5b4e4230b0d790a4bd12fd8a42abfe8cea7486a63d0dbb3f80fe30988ee  ./references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md
 641c3646c2a480cf0425f959157cc132ffe0f3655a4d08408d6881a01ab80584  ./references/raporty-pokrycia-2026-08-13/raport-pokrycia-KKW.md
 1b72486e7a61ec8a05af195bc16d06de252d08a686d3809ac5e114a51fb3d35e  ./references/raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md

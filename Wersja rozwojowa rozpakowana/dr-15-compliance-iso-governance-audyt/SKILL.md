@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.19"
+version: "3.20"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 dependencies:
   requires:
@@ -119,7 +119,7 @@ PRAWO KRAJOWE — COMPLIANCE I NADZÓR:
 
   [✓] OK    mod-ustawa-nauczyciele-uczelnie
               (Karta Nauczyciela — Dz.U. 2023 poz. 984 ze zm.;
-               Prawo o szkolnictwie wyższym i nauce — Dz.U. 2024 poz. 1571 ze zm.;
+               Prawo o szkolnictwie wyższym i nauce — Dz.U. 2026 poz. 1362 t.j.;
                dyscyplinarka nauczyciela/akademika, ocena pracy, awans,
                odpowiedzialność dyscyplinarna uczelni, dostosowania niepełnosprawności)
 

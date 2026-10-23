@@ -9,7 +9,7 @@
 | Ustawa o poprawie BRD (BRD II) | Dz.U. 2025 poz. 1872 | W życie 29.01.2026; art. 4 pkt 1, 3, 4 (PRD art. 60 ust. 5, 135, 135a) i art. 6 (u.k.p. art. 102) od 30.03.2026 (art. 9) ✅ [VER: ELI DU/2025/1872 text.pdf, RZĄD 1, 2026-10-20]; ⛔ KOREKTA: data „03.06.2026” nie pochodzi z tej ustawy | Nielegalne wyścigi, drift, brawurowa jazda — KK i KW |
 | Ustawa o zmianie PRD (BRD I) | Dz.U. 2025 poz. 1676 | W życie od 01.2026 (różne daty) | Prawo jazdy od 17 lat |
 | KK (art. 42, 43a, 44b, 69 §4, 115 §26, 177 §2a, 178, 178c, 178d) | Dz.U. 2026 poz. 1342 t.j. | t.j. obejmuje Dz.U. 2025 poz. 1872; brak zmian po t.j. | Nowe przestępstwa drogowe od 29.01.2026; brzmienie poniżej z t.j. ✅ [VER: ELI DU/2026/1342 text.pdf (t.j. KK), RZĄD 1, 2026-10-20] |
-| KW (art. 86c — drift, wyścigi) | Dz.U. 2025 poz. 734 t.j. ze zm. | ze zm.: Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
+| KW (art. 86c — drift, wyścigi) | Dz.U. 2026 poz. 1372 t.j. | ujmuje Dz.U. 2025 poz. 1872 | Nowe art. 86c od 29.01.2026 |
 
 ```
 ⛔ HARD GATE: Kary, kwoty grzywien i daty wejścia w życie ZMIENIAJĄ SIĘ.

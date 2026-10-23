@@ -116,7 +116,7 @@ Jeśli którykolwiek punkt = NIE → wróć do odpowiedniego drzewa.
 
 AKTY PRAWNE (weryfikuj aktualność przed użyciem):
   KK: Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342) (wersja od 29.01.2026)
-  KW: Dz.U. 2025 poz. 734
+  KW: Dz.U. 2026 poz. 1372 t.j.
   Ustawa PN: Dz.U. 2023 poz. 1939
 ```
 

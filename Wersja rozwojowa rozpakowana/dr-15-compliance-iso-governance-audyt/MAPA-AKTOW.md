@@ -8,7 +8,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / norma → moduł*
 |---|---|---|---|
 | Prawo zamówień publicznych — obronność i bezpieczeństwo | Dz.U. 2026 poz. 793 t.j. ze zm. | `mod-PZP-zamowienia-obronne-bezpieczenstwa` | ✅ aktywny; fresh gate |
 | Ustawa AML — nadzór finansowy / instytucje obowiązane | Dz.U. 2025 poz. 644 t.j. ze zm. | `mod-AML-nadzor-finansowy-instytucje` | ✅ aktywny; fresh gate |
-| Karta Nauczyciela + Prawo o szkolnictwie wyższym — compliance pracodawcy | KN: Dz.U. 2026 poz. 515 t.j. ze zm.; PSWiN: Dz.U. 2024 poz. 1571 t.j. ze zm. | `mod-ustawa-nauczyciele-uczelnie` | ✅ aktywny; fresh gate |
+| Karta Nauczyciela + Prawo o szkolnictwie wyższym — compliance pracodawcy | KN: Dz.U. 2026 poz. 515 t.j. ze zm.; PSWiN: Dz.U. 2026 poz. 1362 t.j. (stan 10.09.2026) | `mod-ustawa-nauczyciele-uczelnie` | ✅ aktywny; fresh gate |
 | Ustawa o ochronie sygnalistów | Dz.U. 2024 poz. 928 ze zm. | `mod-ustawa-sygnalisci` | ✅ aktywny |
 | Ustawa o ograniczeniu prowadzenia działalności gospodarczej przez osoby pełniące funkcje publiczne | Dz.U. 2025 poz. 499 t.j. ze zm. | `mod-ustawa-antykorupcyjna-1997-ograniczenia` | ✅ aktywny; fresh gate |
 | ISO 37001 — anti-bribery management | aktualna wersja normy ISO | `mod-ISO-37001-antykorupcja` | ✅ aktywny; norma fresh gate |

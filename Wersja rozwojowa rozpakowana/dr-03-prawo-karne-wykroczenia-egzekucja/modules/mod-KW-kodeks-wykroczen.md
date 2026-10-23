@@ -31,7 +31,7 @@ Alkohol za kierownicą (art. 87 KW / 178a KK):
 
 ## KLUCZOWE AKTY PRAWNE
 
-- KW → ELI (RZĄD 1) (**Dz.U. 2025 poz. 734** t.j.) — **weryfikuj online**
+- KW → ELI (RZĄD 1) (**Dz.U. 2026 poz. 1372** t.j., stan 23.09.2026) — **weryfikuj online**
 - KPSW → ELI (RZĄD 1) (**Dz.U. 2026 poz. 1336** t.j.) — **weryfikuj online**
 - KPK (stosowany posiłkowo) → ELI (RZĄD 1) (**Dz.U. 2026 poz. 490; sprawdź Dz.U. 2026 poz. 638 i przepisy przejściowe** t.j.)
 

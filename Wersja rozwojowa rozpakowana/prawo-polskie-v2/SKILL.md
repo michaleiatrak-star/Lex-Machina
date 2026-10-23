@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.72"
+version: "6.73"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
+  Wersja bieżąca: 6.73 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362
+  6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
   6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
   6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).
