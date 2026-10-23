@@ -1,5 +1,6 @@
 # CHANGELOG — Analizator Umów v1
 
+- 1.51 (2026-10-23, test 500: C03-001): FAZA 0 bez pytań, gdy dokument i cel są znane ("mam podpisać, sprawdź"): ANALIZA, strona użytkownika, założenie o kontekście decyzyjnym jednym zdaniem i pełna analiza; pytanie tylko o fakt zmieniający wynik, pytania o negocjacje opcjonalnie na końcu.
 - 1.50 (2026-10-16a, AUDYT-2026-10-16a): generowanie umowy lub regulaminu ponad ok. 10 stron w częściach według `shared/MOD-DLUGIE-PISMO.md`; plik z części dopiero po AU-HYBRID i AU-STRIP.
 - 1.49 (2026-10-11b, AUDYT-2026-10-11b, zewnętrzne code review): `kontrakt_rachunek.py` — ⛔ spacja jako separator tysięcy: „1 500 000 zł (słownie: jeden milion pięćset tysięcy złotych)” dawało fałszywą ROZBIEŻNOŚĆ (para z „000”), a narzędzie nie czytało własnego zapisu `fmt()`; `oblicz` przyjmuje „1 500”; grosze ułamkiem „złotych 50/100” doliczane do kwoty słownej. Testy: +2 (15/15).
 

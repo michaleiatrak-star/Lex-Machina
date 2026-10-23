@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.50"
+version: "1.51"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -431,7 +431,15 @@ o wykładnię postanowienia).
 
 ## FAZA 0 — INTAKE: pytania przed analizą (ROZBUDOWANA v1)
 
-Przed każdą analizą lub redakcją ustal JEDNYM pytaniem zbiorczym:
+⛔ **Bez pytań, gdy fakty są kompletne (od 1.51, test 500: C03-001).** Dokument jest w
+załączniku lub w aktach, a wiadomość podaje cel („mam podpisać, sprawdź”, „czy to zgodne
+z prawem”, „co zmienić”) → TRYB = ANALIZA, strona chroniona = użytkownik (ta, która ma
+podpisać), PRAWO = polskie, AU-GAP = N/A. KONTEKST DECYZYJNY nie zmienia oceny zgodności:
+przyjmij „brak presji, do negocjacji”, zapisz to założenie jednym zdaniem i wykonaj pełną
+analizę (AU-A…AU-F). Pytaj tylko o fakt, który zmienia wynik (np. nie wiadomo, którą stroną
+jest użytkownik). Pytania o negocjacje i termin dopisz na końcu jako opcjonalne.
+
+W pozostałych przypadkach przed analizą lub redakcją ustal JEDNYM pytaniem zbiorczym:
 
 ```
 □ TRYB:
