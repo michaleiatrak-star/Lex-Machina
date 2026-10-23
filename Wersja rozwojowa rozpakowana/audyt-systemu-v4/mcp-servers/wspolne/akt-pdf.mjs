@@ -1,5 +1,5 @@
 // WYGENEROWANE z aplikacji Lex Machina (app/lex-runtime/src: pdf-text-extractor.ts, core-law-index.ts,
-// core-law-footnotes.ts, source-anchor.ts; commit 8928937c) — nie edytować ręcznie.
+// core-law-footnotes.ts, source-anchor.ts; commit 750d0eb5) — nie edytować ręcznie.
 // Ten sam odczyt PDF t.j. co RAG aplikacji (wiersze z geometrii, przypisy, brzmienie obowiązujące).
 // Regeneracja: w aplikacji `npm run build:akt-pdf` (app/lex-runtime/scripts/akt-pdf.entry.ts).
 
@@ -182,6 +182,8 @@ function futureDate(note) {
   return `${match[3]}-${String(month).padStart(2, "0")}-${match[1].padStart(2, "0")}`;
 }
 function noteDate(note, footnotes, depth = 0) {
+  const act = depth > 0 ? /któr[aey] (?:weszł[ay]|wchodzi|wchodzą|wejdzie|wejdą) w życie z dniem (\d{1,2} \p{L}+ \d{4} r\.)/u.exec(note)?.[1] : void 0;
+  if (act) return futureDate(`wejdzie w \u017Cycie z dniem ${act}`);
   const direct = futureDate(note) ?? futureDate(note.replace(/weszł[ay] w życie/u, "wejdzie w \u017Cycie"));
   if (direct || depth >= 3) return direct;
   const next = /o której mowa w odnośniku (\d{1,3})/u.exec(note)?.[1];

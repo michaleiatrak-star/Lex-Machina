@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.243 (2026-10-23, test 500 na żywo): isap_tekst — odnośnik „ustawy, o której mowa w odnośniku N” bierze datę wejścia w życie ustawy z odnośnika N („która weszła w życie z dniem …”), nie datę jednostki dopisaną tam po średniku. Przykład (ELI): u.ś.p. t.j. Dz.U. 2026 poz. 854, art. 17 ust. 1a–1c i 4 obowiązują od 13.04.2026 (wcześniej błędnie w brzmienia_przyszle), ust. 1d–1e od 1.01.2027. wspolne/akt-pdf.mjs wygenerowany z aplikacji, dist/lex-mcp.mjs przebudowany (--sprawdz zgodny).
 - 6.242 (2026-10-22, AUDYT-2026-10-22): mapa_dzu: nowe wiersze 2026/1372 (KW t.j.) i 2026/1362 (PSWN t.j.); 2025/734 i 2024/1571 → PREV (AUDYT-2026-10-22).
 - 6.241 (2026-10-20, LEXAGENTO-P1): isap_lookup AMBIGUOUS: akt bazowy i aktualny t.j. przed nowelizacjami (pola akt_bazowy, tekst_jednolity_aktualny); dist/lex-mcp.mjs przebudowany; pełne ścieżki w CHECKLIST-DEDUP/ALIASY
 - 6.240 (2026-10-20, AUDYT-2026-10-20d): mapa_dzu: nowe wiersze 2026/1288, 1299, 1304, 1305, 1313, 1326; 2023/2670 RE-VER (13 nowelizacji); 1354 i 1358 — treść odczytana; 2025/1705 — zmiana SIOZ
