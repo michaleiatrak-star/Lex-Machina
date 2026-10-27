@@ -1,5 +1,6 @@
 # CHANGELOG — analizator-przepisow-v2
 
+- 2.13 (2026-10-27, AUDYT-2026-10-27b): Moduł 1 — tabela decyzji dla wyniku MCP `isap_tekst` (brzmienia_przyszle, partial/nierozstrzygniete, strony_bez_tekstu, jeszcze_nie_obowiazuje, numer z literą w indeksie); Moduł 1H — `na_dzien` na t.j. obowiązującym w dniu docelowym, OUT_OF_SCOPE = starszy t.j., jednostka dodana później = „nie istniała”, art. 131¹ᵃ ≠ art. 131. Analogia: legal-cite-pl #11, #12, #13.
 - 2.12 (2026-10-06): sn.pl: wyszukiwarka-orzeczen zamiast nieczynnego /orzecznictwo; link = karta
 
 - 2.11 (2026-10-05g, AUDYT-2026-10-05g): Szablony widgetów w `assets/`: `widget-wybor-przepisu.html` (Krok 0.3, formularz bez danych) i `widget-wyniki.html` (Moduł 8, 7 zakładek, zasilany danymi; tryb krokowy drzewa przesłanek, filtry tierów, powiązania przez sendPrompt). Krok 0.3 i Moduł 8: wariant szablonu oraz specyfikacja do samodzielnego wygenerowania z paskiem MOD-WIDGET-IO (oznaczona `lex:wykonuje-aplikacja: WIDGET-DANE`); instrukcja MOD-WIDGET-IO wyjęta z bloku sekwencji do tej podsekcji. Treść merytoryczna bez zmian.

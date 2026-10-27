@@ -294,9 +294,30 @@ export function naprawMacCEDokument(strony) {
 // pozycji stojący w następnym wierszu jako nagłówek treści (zmierzone na DU/2000/649).
 const PAGINA_2000_2009 = /^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$/gm;
 
+// Indeks górny z literą („131¹ᵃ”): litery w indeksie górnym → zwykłe, żeby numer nie spadł do „131”.
+const LITERY_GORNE = { "ᵃ": "a", "ᵇ": "b", "ᶜ": "c", "ᵈ": "d", "ᵉ": "e", "ᶠ": "f", "ᵍ": "g", "ʰ": "h", "ⁱ": "i" };
 export function normalizujNumerArt(a) {
-  return String(a).trim().replace(/^art\.?\s*/i, "").replace(/\s+/g, "")
-    .replace(/[\^(]\s*(\d+)\s*\)?$/, "[$1]").replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)$/, (m) => "[" + [...m].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + "]");
+  return String(a).trim().replace(/[ᵃᵇᶜᵈᵉᶠᵍʰⁱ]/g, (c) => LITERY_GORNE[c])
+    .replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)([a-z]+)$/, (m, g, l) => "[" + [...g].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + l + "]").replace(/^art\.?\s*/i, "").replace(/\s+/g, "")
+    .replace(/[\^(]\s*(\d+[a-z]*)\s*\)?$/, "[$1]").replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)$/, (m) => "[" + [...m].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + "]");
+}
+
+// ── Skany sprzed 2000 r. (zgł. #86): nagłówek „Art. N.” zniekształcony przez warstwę OCR
+// (Konstytucja DU/1997/483 text.pdf: „Art. ISO.”, „Art.1S1.”, „Art. lOB.”, „Arł.138.”), więc artykuł
+// nie jest znajdowany, a poprzedni wchłania następne. Poprawiamy tylko nagłówek na początku wiersza,
+// gdy po zamianie I/l→1, S→5, O→0, B→8 numer jest liczbą; token bez cyfry i bez S/O/B zostaje
+// („Art. I.”, „Art. II.” to numery rzymskie w aktach zmieniających).
+const OCR_CYFRY = { I: "1", l: "1", S: "5", O: "0", B: "8" };
+export function naprawNumeryArtOcr(tekst) {
+  const poprawki = [];
+  const t = tekst.replace(/(^|\n)([^\S\n]*)Ar([tł])(\.[^\S\n]*)([0-9IlSOB]{1,4})([^\S\n]*\.)/g, (m, p, wc, lit, kr, nr, kropka) => {
+    if (!/\d/.test(nr) && !/[SOB]/.test(nr)) return m;
+    const cyfry = nr.replace(/[IlSOB]/g, (c) => OCR_CYFRY[c]);
+    if (cyfry === nr && lit === "t") return m;
+    poprawki.push(`${lit === "t" ? "" : "Arł."}${nr}→${cyfry}`);
+    return `${p}${wc}Art${kr}${cyfry}${kropka}`;
+  });
+  return { tekst: t, poprawki };
 }
 
 /** Podział obwieszczenia: preambuła (pkt 1–2) i załącznik (tekst ustawy). */
@@ -309,9 +330,11 @@ export function podzielObwieszczenie(tekst) {
   return { preambula, zalacznik, nie_obejmuje: p2 ? p2[0].trim() : null, stan_prawny_na: stan ? stan[1] : null };
 }
 
+export const stronaBezTekstu = (t) => (t.match(/\p{L}/gu) ?? []).length < 3;
+
 /** PDF → tekst aktu tym samym odczytem co RAG aplikacji (wspolne/akt-pdf.mjs): wiersze składane
  * z geometrii pozycji, przypisy z dołu strony (drobny druk) wyjęte z treści, paginy usunięte.
- * Zwraca { tekst, strony, przypisy, sha256 }. Czysta funkcja na bajtach — testowalna offline. */
+ * Zwraca { tekst, strony, przypisy, sha256, strony_bez_tekstu, liczba_stron }. Czysta funkcja na bajtach — testowalna offline. */
 export async function tekstZPdf(dane) {
   const sha256 = createHash("sha256").update(dane).digest("hex");
   const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
@@ -322,10 +345,15 @@ export async function tekstZPdf(dane) {
     const elementy = (await (await doc.getPage(i)).getTextContent()).items;
     surowe.push(joinLineItems(elementy, true).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").trim());
   }
+  // Strona bez warstwy tekstowej (skan bez OCR, zgł. #86) dostaje znacznik zamiast cichej luki.
+  // Próg: mniej niż 3 litery — DU/1998/875 zwracał 1 znak na cały dokument.
+  const bezTekstu = surowe.flatMap((t, i) => (stronaBezTekstu(t) ? [i + 1] : []));
   const strony = naprawMacCEDokument(surowe)
-    .map((t) => stripPdfPageHeaders(repairDzuPdfEncoding(t.replace(PAGINA_2000_2009, ""))).trim());
+    .map((t, i) => (!stronaBezTekstu(t) ? stripPdfPageHeaders(repairDzuPdfEncoding(t.replace(PAGINA_2000_2009, ""))).trim()
+      : `[strona ${i + 1}: brak warstwy tekstowej]`));
   const { pages, footnotes } = extractPageFootnotes(strony);
-  return { tekst: pages.filter(Boolean).join("\n"), strony: pages, przypisy: footnotes, sha256 };
+  return { tekst: pages.filter(Boolean).join("\n"), strony: pages, przypisy: footnotes, sha256,
+    strony_bez_tekstu: bezTekstu, liczba_stron: surowe.length };
 }
 
 async function tekstPdf(eli, url = null) {
@@ -337,6 +365,13 @@ async function tekstPdf(eli, url = null) {
   return t;
 }
 
+const MIESIACE = { stycznia: 1, lutego: 2, marca: 3, kwietnia: 4, maja: 5, czerwca: 6, lipca: 7, sierpnia: 8, "września": 9, "października": 10, listopada: 11, grudnia: 12 };
+/** „24 marca 2026” → „2026-03-24”; null, gdy nie da się odczytać. */
+export function dataIso(tekst) {
+  const m = /^(\d{1,2}) (\p{L}+) (\d{4})/u.exec(String(tekst ?? "").trim());
+  const mies = m ? MIESIACE[m[2].toLocaleLowerCase("pl")] : null;
+  return mies ? `${m[3]}-${String(mies).padStart(2, "0")}-${m[1].padStart(2, "0")}` : null;
+}
 const dzisWarszawa = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Warsaw" }).format(new Date());
 
 /** Podział załącznika na artykuły (raz na dokument). Nagłówki: „Art. 11[1].”, „Art. 6 1 .”, zakresy
@@ -392,8 +427,10 @@ server.registerTool("isap_tekst", {
     artykul: z.string().max(12).optional(), szukaj: z.string().min(3).max(120).optional(),
     offset: z.number().int().min(0).optional(),
     wersja: z.enum(["aktualna", "ogloszona"]).optional().describe("domyślnie aktualna (t.j.)"),
+    na_dzien: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional()
+      .describe("RRRR-MM-DD: brzmienie artykułu na ten dzień (wymaga `artykul`; nie wcześniej niż stan prawny t.j.)"),
   },
-}, async ({ eli, artykul, szukaj, offset, wersja }) => {
+}, async ({ eli, artykul, szukaj, offset, wersja, na_dzien }) => {
   const baza = { query_type: "tekst_aktu", source: "sejm-eli" };
   try {
     const meta = await eliGet(eli);
@@ -409,7 +446,14 @@ server.registerTool("isap_tekst", {
     }
     const czysty = wybierzTekstCzysty(zrodlo.eli, meta);
     const pdf = await tekstPdf(zrodlo.eli, czysty?.url ?? null);
-    const obw = { ...(wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(pdf.tekst) : { zalacznik: pdf.tekst, nie_obejmuje: null, stan_prawny_na: null }), przypisy: pdf.przypisy };
+    const urlPdf = czysty?.url ?? `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf`;
+    if (pdf.liczba_stron && pdf.strony_bez_tekstu.length === pdf.liczba_stron) {
+      return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { identyfikator: zrodlo.identyfikator, eli_zrodla_tekstu: zrodlo.eli, url_zrodlowy: urlPdf },
+        powod: "PDF bez warstwy tekstowej (skan bez OCR) — treści nie odczytano. Brzmienie wyłącznie z PDF pod url_zrodlowy (odczyt wzrokowy/OCR), oznaczone jako niedeterministyczne." });
+    }
+    let ocr = { tekst: pdf.tekst, poprawki: [] };
+    if (!czysty && Number(zrodlo.eli.split("/")[1]) < 2000) ocr = naprawNumeryArtOcr(pdf.tekst);
+    const obw = { ...(wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(ocr.tekst) : { zalacznik: ocr.tekst, nie_obejmuje: null, stan_prawny_na: null }), przypisy: pdf.przypisy };
     const result = { identyfikator: zrodlo.identyfikator, eli_bazowy: eli, eli_zrodla_tekstu: zrodlo.eli, wersja_tekstu: czysty ? "tekst_ujednolicony" : wersjaTekstu,
       status_obowiazywania: wersjaTekstu === "tekst_jednolity" ? zrodlo.status_obowiazywania : st,
       tytul_lub_nazwa: zrodlo.tytul_lub_nazwa, stan_prawny_na: obw.stan_prawny_na,
@@ -419,33 +463,64 @@ server.registerTool("isap_tekst", {
     const uw = [];
     if (czysty) uw.push(`✅ Tekst ujednolicony (wersja „U”) — ${czysty.powod}; pominięto skan text.pdf.`);
     if (wersjaTekstu === "tekst_ogloszony" && !czysty) uw.push("⚠️ Tekst OGŁOSZONY (brzmienie z dnia ogłoszenia), nie stan obecny.");
+    let pewnosc = "deterministic";
+    if (pdf.strony_bez_tekstu?.length) {
+      result.strony_bez_tekstu = pdf.strony_bez_tekstu; pewnosc = "partial";
+      uw.push(`⚠️ Strony PDF bez warstwy tekstowej: ${pdf.strony_bez_tekstu.join(", ")} z ${pdf.liczba_stron} — ich treści brak w wyniku (znacznik „[strona N: brak warstwy tekstowej]”); brak artykułu lub frazy NIE dowodzi, że ich nie ma — sprawdź PDF.`);
+    }
+    if (ocr.poprawki.length) {
+      result.numery_art_ocr = ocr.poprawki;
+      uw.push(`⚠️ Skan z warstwą OCR: poprawiono numery artykułów (${ocr.poprawki.slice(0, 12).join(", ")}${ocr.poprawki.length > 12 ? ", …" : ""}) — przed powołaniem porównaj z PDF.`);
+    }
     if (obw.nie_obejmuje) result.tj_nie_obejmuje = obw.nie_obejmuje.slice(0, 4000);
     if (tj && !jestObwieszczeniemTj) {
       result.zmiany_po_tj = await zmianyPoTj(eli, tj);
       if (result.zmiany_po_tj.length) uw.push(`⚠️ ${result.zmiany_po_tj.length} akt(y) zmieniające ogłoszone po t.j. — brzmienie może być nieaktualne.`);
     }
     if (artykul) {
-      const art = artykulObowiazujacy(obw, artykul);
-      if (!art) return tekstOdp({ status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
+      const dzien = na_dzien ?? dzisWarszawa();
+      if (na_dzien) {
+        // T.j. scala zmiany sprzed stanu prawnego bez odnośników: wcześniejszego brzmienia z niego nie odczytasz.
+        const granica = dataIso(obw.stan_prawny_na) ?? zrodlo.data_publikacji_lub_wyroku ?? null;
+        if (wersjaTekstu !== "tekst_jednolity" || !granica || na_dzien < granica) {
+          return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { ...result, na_dzien },
+            powod: `Brzmienie na ${na_dzien} nie wynika z ${zrodlo.identyfikator}${granica ? ` (stan prawny / ogłoszenie: ${granica})` : ""}. ` +
+              "Ustal t.j. obowiązujący w tym dniu (ELI /references) i wywołaj isap_tekst z jego ELI." });
+        }
+        result.na_dzien = na_dzien;
+      }
+      const art = artykulObowiazujacy(obw, normalizujNumerArt(artykul), dzien);
+      if (!art) return tekstOdp(pewnosc === "partial"
+        ? { status: "OUT_OF_SCOPE", ...baza, result, powod: `Brak „Art. ${normalizujNumerArt(artykul)}.” w odczytanym tekście, ale strony ${pdf.strony_bez_tekstu.join(", ")} nie mają warstwy tekstowej — sprawdź PDF.` }
+        : { status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
       result.artykul = normalizujNumerArt(artykul); result.tresc = art.tresc;
+      // Artykuł dodany z datą późniejszą (KPK art. 100a od 1.10.2029): cała treść w brzmieniach przyszłych.
+      if (!art.tresc && art.brzmienia_przyszle?.length) {
+        const od = art.brzmienia_przyszle.map((b) => b.from).filter(Boolean).sort()[0] ?? null;
+        return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { ...result, jeszcze_nie_obowiazuje: true, wchodzi_w_zycie: od, brzmienia_przyszle: art.brzmienia_przyszle },
+          powod: `Art. ${result.artykul} nie obowiązuje na ${dzien}${od ? ` — wchodzi w życie z dniem ${od}` : ""}. Nie podawaj go jako obowiązującego.` });
+      }
       if (Object.keys(art.odnosniki).length) result.odnosniki = art.odnosniki;
       if (art.brzmienia_przyszle) {
         result.brzmienia_przyszle = art.brzmienia_przyszle;
-        uw.push("⚠️ T.j. drukuje też brzmienie wchodzące w życie później (brzmienia_przyszle); `tresc` = brzmienie obowiązujące dziś.");
+        uw.push(`⚠️ T.j. drukuje też brzmienie wchodzące w życie później (brzmienia_przyszle); „tresc” = brzmienie obowiązujące ${na_dzien ? "na " + na_dzien : "dziś"}.`);
       }
+      if (art.nierozstrzygniete) pewnosc = "partial";
       if (art.nierozstrzygniete) uw.push("⚠️ Kilka brzmień jednostki bez odczytywalnej daty wejścia w życie: `tresc` zawiera wszystkie — nie podawaj jej jako jednego obowiązującego brzmienia.");
       if (/^Art\.\s*\S+\.\s*\(uchylony\)/.test(art.tresc)) uw.push("⛔ Artykuł uchylony.");
     } else if (szukaj) {
       const fr = []; let i = -1; const low = obw.zalacznik.toLowerCase(), q = szukaj.toLowerCase();
       while (fr.length < 5 && (i = low.indexOf(q, i + 1)) >= 0) fr.push({ pozycja: i, fragment: obw.zalacznik.slice(Math.max(0, i - 400), i + 400) });
-      if (!fr.length) return tekstOdp({ status: "NOT_FOUND", ...baza, result, uwaga: `Fraza „${szukaj}” nie występuje w tekście.` });
+      if (!fr.length) return tekstOdp(pewnosc === "partial"
+        ? { status: "OUT_OF_SCOPE", ...baza, result, powod: `Fraza „${szukaj}” nie występuje w odczytanym tekście, ale strony ${pdf.strony_bez_tekstu.join(", ")} nie mają warstwy tekstowej — sprawdź PDF.` }
+        : { status: "NOT_FOUND", ...baza, result, uwaga: `Fraza „${szukaj}” nie występuje w tekście.` });
       result.fragmenty = fr;
     } else {
       const o = offset ?? 0; result.tresc = obw.zalacznik.slice(o, o + 20000);
       result.tresc_offset = o; result.tresc_dlugosc = obw.zalacznik.length;
     }
     uw.push("Tekst urzędowy integralny — nie parafrazuj; indeksy górne w zapisie Art. N[k].");
-    return tekstOdp({ status: "FOUND", ...baza, result, uwaga: uw.join(" "), retrieved_at: new Date().toISOString(), confidence: "deterministic" });
+    return tekstOdp({ status: "FOUND", ...baza, result, uwaga: uw.join(" "), retrieved_at: new Date().toISOString(), confidence: pewnosc });
   } catch (err) {
     return tekstOdp({ status: "ERROR", ...baza, detail: String(err?.message ?? err), retrieved_at: new Date().toISOString() });
   }

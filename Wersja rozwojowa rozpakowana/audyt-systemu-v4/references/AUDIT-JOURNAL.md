@@ -70970,3 +70970,20 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Parser mapy RAG aplikacji (`extractCoreActs`): DU/2026/1324, 1335, 1328, 30 jako t.j. (consolidated); 2025/1234, 2025/960, 2023/1587 nie są już pozycjami głównymi.
 - Wersje: dr-02 3.96, dr-04 3.50, dr-06 3.99.1, dr-09 3.49, prawo-polskie-v2 6.62, shared 3.99.36, audyt-systemu-v4 6.233.
 
+
+## AUDYT-2026-10-27a — przegląd otwartych zgłoszeń: #132 (ochrona przyrody), #86 (skany Dz.U.) (6.244)
+
+- Źródło: przegląd wszystkich otwartych zgłoszeń repozytorium na prośbę użytkownika (2026-10-27).
+- #132: zarzuty sprawdzone w RZĘDZIE 1 — t.j. Dz. U. z 2026 r. poz. 1315 (ELI DU/2026/1315, `isap_tekst`, 0 zmian po t.j.): art. 16, 17, 20 ust. 4 i 4a, 22 ust. 4, 23, 23a, 24; rozporządzenie roślin DU/2014/1409 obowiązuje. Wszystkie potwierdzone. dr-09 3.56: mod-formy-ochrony-przyrody-obszary-chronione 1.1 (szczegóły w CHANGELOG dr-09). Pozostałe moduły zaproponowane w zgłoszeniu (OOŚ, Prawo geologiczne i górnicze, MPZP/WZ) — do osobnego przeglądu.
+- #86: zob. CHANGELOG 6.244. Pomiar na PDF z ELI (2026-10-27): DU/1998/875 — 3/3 strony bez tekstu → OUT_OF_SCOPE; DU/1994/73 — strona 7; DU/1997/483 text.pdf — 12/12 numerów poprawione (Konstytucja i tak czytana z wersji „U”, 6.204).
+- Zgłoszenia już wykonane wcześniej, bez zmian w kodzie: #83 (6.170, 6.204), #109 i #110 (6.220, 6.222), #88 (konektory lex-* zamiast `npx`, README: marketplace z `#<TAG>`), #37 (konektory lex-saos, lex-cbosa, lex-sn), #77 (aplikacja: zasoby natywnego agenta llama.cpp opcjonalne, `buildOptionalLocalLaunchSpec`, testy startu).
+- Bez zmian w kodzie: #82 (konwencja opisów commitów — proces), #10 i #11 (propozycje zewnętrznego pomiaru; wymagają zbioru zgłaszającego).
+- Wersje: dr-09 3.56, audyt-systemu-v4 6.244.
+
+## AUDYT-2026-10-27b — analogie zgłoszeń legal-cite-pl w isap_tekst i skillach (6.245)
+
+- Źródło: prośba użytkownika — przegląd ostatnich zgłoszeń apiotrowski-afk/legal-cite-pl (#13, #12, #11, #7, komentarze w #6) i sprawdzenie analogii na żywym ELI (2026-10-27).
+- Występowały: #12 (jednostka jeszcze nieobowiązująca → pusta treść z FOUND: KPK art. 100a/100b/131a), #13 pkt 2 (dwa brzmienia zdań, KPK art. 505 — ostrzeżenie było, ale `deterministic`; KPK 180, 333, 517d, 589s bez ostrzeżenia), „Art. 1. 1.” z commitu UNNC (KPC art. 131[1a] nierozstrzygnięty mimo daty z odnośnika), #6 etykieta „I)” → u nas punkt „12 )” wycinany jako znacznik odnośnika (O.p. art. 3, 73, 119zw; KPC 485; KPK 237), #11 indeks z literą (`131¹ᵃ` w zapisie górnym nie był normalizowany).
+- Nie występowały: #7 (art. 14 u.ś.u.d.e. bez treści art. 15 — odczyt z PDF), #13 pkt 1 (litera na nowej stronie — brak `na_dzien` do tej pory; KC, KK, KW, u.o.p. bez różnic w pomiarze).
+- Kod: aplikacja `core-law-footnotes.ts` (560c510, testy vitest), `wspolne/akt-pdf.mjs` wygenerowany, `isap-eli-mcp-server.js`; skille: shared 3.99.48 (MCP-INTEGRACJA, weryfikator-isap), analizator-przepisow-v2 2.13 (Moduł 1, 1H).
+- Wersje: audyt-systemu-v4 6.245, shared 3.99.48, analizator-przepisow-v2 2.13.

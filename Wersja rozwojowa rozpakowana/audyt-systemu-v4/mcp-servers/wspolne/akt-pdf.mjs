@@ -1,5 +1,5 @@
 // WYGENEROWANE z aplikacji Lex Machina (app/lex-runtime/src: pdf-text-extractor.ts, core-law-index.ts,
-// core-law-footnotes.ts, source-anchor.ts; commit 750d0eb5) — nie edytować ręcznie.
+// core-law-footnotes.ts, source-anchor.ts; commit 560c510) — nie edytować ręcznie.
 // Ten sam odczyt PDF t.j. co RAG aplikacji (wiersze z geometrii, przypisy, brzmienie obowiązujące).
 // Regeneracja: w aplikacji `npm run build:akt-pdf` (app/lex-runtime/scripts/akt-pdf.entry.ts).
 
@@ -148,6 +148,24 @@ function stripTrailingHeadings(text) {
   return match ? text.slice(0, match.index).trimEnd() : text;
 }
 var LABEL_MARKER = /(?<=^(?:§ \d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\])?|\d+[a-z]*|Art\.\s*\d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\][a-z]*|\s+\d{1,3}[a-z]*)?)\s*\.\s*)(\d{1,3})\)(?=\s+(?:\p{Lu}|\d+[a-z]*\.\s|§))/gmu;
+var POINT_LINE = /^(\d{1,3})[a-z]*\)\s/u;
+var SPACED_POINT = /^(\d{1,3})([a-z]*) \)(?=\s)/u;
+function protectPointLabels(text) {
+  const lines = text.split("\n");
+  const number = (line) => {
+    const match = line === void 0 ? null : POINT_LINE.exec(line) ?? SPACED_POINT.exec(line);
+    return match ? Number(match[1]) : null;
+  };
+  return lines.map((line, index) => {
+    const spaced = SPACED_POINT.exec(line);
+    if (!spaced) return line;
+    const own = Number(spaced[1]);
+    const before = lines.slice(0, index).reverse().find((other) => number(other) !== null);
+    const after = lines.slice(index + 1).find((other) => number(other) !== null);
+    const neighbour = number(before) === own - 1 || number(after) === own + 1;
+    return neighbour ? line.replace(SPACED_POINT, "$1$2)") : line;
+  }).join("\n");
+}
 function articleFootnotes(text, footnotes) {
   const notes = [];
   const strip = (marker, number) => {
@@ -155,7 +173,7 @@ function articleFootnotes(text, footnotes) {
     notes.push(number);
     return "";
   };
-  const cleaned = text.replace(NOTE_MARKER, strip).replace(
+  const cleaned = protectPointLabels(text).replace(NOTE_MARKER, strip).replace(
     LABEL_MARKER,
     (marker, number) => NOTE_VOCABULARY.test(footnotes[number] ?? "") ? strip(marker, number) : marker
   );
@@ -192,6 +210,7 @@ function noteDate(note, footnotes, depth = 0) {
 var ARTICLE_LABEL = String.raw`Art\.\s*\d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\]\s*[a-z]*|\s+\d{1,3}[a-z]*(?=\s+\.))?\s*\.`;
 var UNIT_LABEL = new RegExp(String.raw`^(${ARTICLE_LABEL}|§ \d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\]|\s+\d{1,2}(?=\s*\.))?\s*\.|\d+[a-z]*\.(?=\s)|\d+[a-z]*\)|[a-z]{1,2}\))`, "u");
 var UNIT_LINE = new RegExp(String.raw`^(${ARTICLE_LABEL}|§ \d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\]|\s+\d{1,2}(?=\s*\.))?\s*\.|\d+[a-z]*\.(?=\s)|\d+[a-z]*\)|[a-z]{1,2}\))\s*(?:(\d{1,3}) \)|(?<=[.]\s*)(\d{1,3})\)(?=\s+\p{Lu}))`, "u");
+var FIRST_UNIT_IN_HEADING = new RegExp(String.raw`^(${ARTICLE_LABEL})\s+(?=§ \d+[a-z]*(?:\s*\[\s*\d+[a-z]*\s*\])?\s*\.|\d+[a-z]*\.\s)`, "u");
 function unitLevel(label) {
   if (label.startsWith("Art")) return -1;
   if (label.startsWith("\xA7")) return 0;
@@ -200,7 +219,18 @@ function unitLevel(label) {
   return 3;
 }
 function articleWording(markedText, footnotes, today) {
-  const lines = markedText.split("\n").map((line) => line.replace(LABEL_MARKER, (marker, number) => footnotes[number] === void 0 ? marker : `${number} )`));
+  const joinNext = /* @__PURE__ */ new Set();
+  const lines = [];
+  for (const raw of protectPointLabels(markedText).split("\n")) {
+    const line = raw.replace(LABEL_MARKER, (marker, number) => footnotes[number] === void 0 ? marker : `${number} )`);
+    const head = FIRST_UNIT_IN_HEADING.exec(line);
+    if (head) {
+      joinNext.add(lines.length);
+      lines.push(head[1], line.slice(head[0].length));
+    } else {
+      lines.push(line);
+    }
+  }
   const units = [];
   lines.forEach((line, index) => {
     const unit = UNIT_LINE.exec(line);
@@ -253,7 +283,23 @@ function articleWording(markedText, footnotes, today) {
       unresolved = true;
     }
   });
-  const kept = lines.filter((_, index) => !drop.has(index)).map((line) => line.replace(LABEL_MARKER, (marker, number) => footnotes[number] === void 0 ? marker : "")).join("\n");
+  const unitNotes = new Set(units.map((unit) => unit.note).filter((note) => note !== null));
+  lines.forEach((line, index) => {
+    if (drop.has(index)) return;
+    for (const match of line.matchAll(NOTE_MARKER)) {
+      const number = match[1];
+      if (!unitNotes.has(number) && /obowiązuje do wejścia w życie zmiany/u.test(footnotes[number] ?? "")) unresolved = true;
+    }
+  });
+  const keptLines = [];
+  let glue = false;
+  lines.forEach((line, index) => {
+    if (drop.has(index)) return;
+    if (glue && keptLines.length) keptLines[keptLines.length - 1] += ` ${line}`;
+    else keptLines.push(line);
+    glue = joinNext.has(index);
+  });
+  const kept = keptLines.map((line) => line.replace(LABEL_MARKER, (marker, number) => footnotes[number] === void 0 ? marker : "")).join("\n");
   return {
     text: kept.replace(NOTE_MARKER, (marker, number) => footnotes[number] === void 0 ? marker : "").replace(/[ \t]{2,}/g, " ").replace(/ +\n/g, "\n"),
     pending,

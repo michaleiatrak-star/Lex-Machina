@@ -1,6 +1,6 @@
 ---
 name: analizator-przepisow-v2
-version: "2.12"
+version: "2.13"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -188,6 +188,19 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 6. Zapisz DOSŁOWNĄ treść z oficjalnego źródła
 ```
 
+### Odczyt przez MCP `isap_tekst` (gdy host go ma) — pola wyniku decydują
+
+Kontrakt: `view shared/MCP-INTEGRACJA.md` (wiersz `isap_tekst`). Skrót reguł, które ten moduł stosuje:
+
+| Wynik | Działanie |
+|---|---|
+| `confidence: deterministic`, brak `zmiany_po_tj` | brzmienie do Karty Przepisu dosłownie |
+| `brzmienia_przyszle` | Karta: brzmienie na datę analizy + „Zmiana od [data]: [treść]” (vacatio → `references/MOD-VACATIO-LEGIS.md`) |
+| `confidence: partial` / `nierozstrzygniete` | ⛔ nie wybieraj brzmienia sam: pokaż oba z odnośnikami (np. „Zdanie pierwsze … obowiązuje do …”) i datą; status ⚠️ |
+| `strony_bez_tekstu` | brak jednostki nie jest dowodem — otwórz PDF (`url_zrodlowy`) |
+| OUT_OF_SCOPE + `jeszcze_nie_obowiazuje` | „Jednostka dodana, wchodzi w życie z dniem [data]” — nie stosuj do stanu na datę analizy |
+| NOT_FOUND przy numerze z literą w indeksie (`131^1a`) | ⛔ nie podawaj art. 131 zamiast art. 131¹ᵃ; sprawdź zapis numeru i t.j. |
+
 ### Karta Przepisu
 
 ```
@@ -218,8 +231,14 @@ Stosuj gdy użytkownik chce zbadać przepis w stanie na konkretną datę przesz�
 2. W ELI ustal historię aktu: /eli/acts/DU/{rok}/{poz}/references (zmiany,
    teksty jednolite) — ISAP tylko jako link dla czytelnika
 3. Zidentyfikuj tekst jednolity obowiązujący W DNIU docelowym
-4. Pobierz historyczną wersję przepisu
-5. Oznacz wyraźnie: "STAN NA [data]" we wszystkich wynikach
+4. Pobierz historyczną wersję przepisu — MCP: `isap_tekst` z `eli` TEGO t.j.,
+   `artykul` i `na_dzien` = data docelowa. OUT_OF_SCOPE „nie wynika z …” = data
+   sprzed stanu prawnego t.j. → wróć do kroku 3 (starszy t.j.), nie bierz brzmienia
+   z nowszego t.j.
+5. Jednostka dodana po dacie docelowej (`jeszcze_nie_obowiazuje`, odnośnik
+   „Dodany … z dniem X”, X > data) → „w dniu [data] jednostka nie istniała”;
+   ⛔ jednostka z literą w indeksie (art. 131¹ᵃ) ≠ jednostka bazowa (art. 131)
+6. Oznacz wyraźnie: "STAN NA [data]" we wszystkich wynikach
 ```
 
 ### Raport historyczny
