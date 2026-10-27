@@ -1,14 +1,17 @@
 # mod-formy-ochrony-przyrody-obszary-chronione
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-21
+**Wersja:** 1.1 | **Dodano:** 2026-07-21 | **Zmiana:** 2026-10-27 (zgł. #132: art. 16, 17, 23, 23a, 24
+odczytane z t.j. Dz. U. z 2026 r. poz. 1315, ELI DU/2026/1315; brak zmian po t.j. — ELI 2026-10-27)
 **Rola w systemie:** odpowiedź na pytanie użytkownika o obszary
 chronione z podziałem na typy i rodzaje ograniczeń — dotąd tylko
 GENERYCZNY szkielet proceduralny (`mod-ustawa-lesna-lowiecka-ochrona-
 przyrody.md`), BEZ merytorycznego opracowania 10 form ochrony
 przyrody i ich ZRÓŻNICOWANYCH reżimów zakazów.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. ustawy o ochronie przyrody z
-> 16.04.2004 r. na ISAP — Rozdział 2 (art. 6-64) bywał nowelizowany.
+> ⛔ HARDGATE — ustawa z dnia 16 kwietnia 2004 r. o ochronie przyrody, t.j. Dz. U. z 2026 r.
+> poz. 1315 (ELI DU/2026/1315, obejmuje zmiany Dz. U. z 2026 r. poz. 426, 737 i 912). Przed
+> powołaniem sprawdź `isap_tekst` (DU/2004/880) — pole `zmiany_po_tj`. Treść jednostek poniżej
+> to streszczenie robocze; do pisma brzmienie dosłowne z ELI.
 
 ---
 
@@ -79,8 +82,8 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
     (np. wycinka w celu ochrony ekosystemu)
   □ OCHRONA KRAJOBRAZOWA — nakierowana na zachowanie WALORÓW
     krajobrazowych, nie tylko biologicznych
-  Zadania ochronne USTANAWIA SIĘ na okres 1 ROKU LUB kolejnych lat, NIE
-  DŁUŻEJ niż na 5 LAT
+  Art. 22 ust. 4: zadania ochronne „mogą być ustanawiane na rok lub
+  równocześnie na kolejne lata, nie dłużej jednak niż na 5 lat"
 ```
 
 ---
@@ -93,11 +96,23 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
 □ Obejmuje obszar CHRONIONY ze względu na WARTOŚCI przyrodnicze,
   historyczne, kulturowe oraz WALORY KRAJOBRAZOWE — CEL: zachowanie,
   POPULARYZACJA tych wartości w warunkach ZRÓWNOWAŻONEGO rozwoju
-□ REŻIM ŁAGODNIEJSZY niż rezerwat/park narodowy — DOPUSZCZALNA
-  działalność gospodarcza/rolnicza/leśna w SPOSÓB nienaruszający
-  szczególnych wartości (⚠️ dokładny katalog zakazów niepotwierdzony w
-  pełni w tej sesji — sprawdź art. odpowiedni w ELI (RZĄD 1) przy konkretnej
-  sprawie)
+□ REŻIM ŁAGODNIEJSZY niż rezerwat/park narodowy — grunty rolne, leśne i
+  inne nieruchomości pozostawia się w gospodarczym wykorzystaniu (art. 16
+  ust. 6); zakazy → § 3.4
+□ ORGAN I TRYB (art. 16 ust. 3): utworzenie/powiększenie — UCHWAŁA SEJMIKU
+  WOJEWÓDZTWA (nazwa, obszar, przebieg granicy, otulina jeżeli wyznaczona,
+  szczególne cele ochrony, zakazy WYBRANE spośród art. 17 ust. 1).
+  Likwidacja/zmniejszenie — wyłącznie z powodu BEZPOWROTNEJ utraty wartości.
+  Park w kilku województwach — jednobrzmiące uchwały sejmików (ust. 3a).
+□ UZGODNIENIA (art. 16 ust. 4–4c): rada gminy i RDOŚ, tryb art. 106 k.p.a.;
+  milczenie przez miesiąc = uzgodnienie; rada gminy odmawia WYŁĄCZNIE przy
+  nieproporcjonalnym ograniczeniu możliwości rozwojowych z planu ogólnego/
+  MPZP (ust. 4b), a nie może odmówić, gdy uchwała wykonuje rekomendację
+  audytu krajobrazowego (ust. 4c). Wniosek rady gminy/zgromadzenia związku
+  metropolitalnego — ust. 4d–4e (rozpatrzenie do 3 miesięcy).
+□ PLAN OCHRONY (art. 20 ust. 4, 4a): wyznacza STREFY OCHRONY KRAJOBRAZU
+  (pkt 7) i wykaz obiektów o istotnym znaczeniu historycznym i kulturowym
+  (pkt 8); w tej części jest aktem prawa miejscowego.
 ```
 
 ### 3.2 Obszar chronionego krajobrazu
@@ -107,19 +122,30 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
   zróżnicowanych EKOSYSTEMACH, wartościowe pod względem możliwości
   zaspokajania potrzeb TURYSTYKI i WYPOCZYNKU, LUB pełniące funkcję
   KORYTARZY EKOLOGICZNYCH
-□ ⭐ ORGAN: SEJMIK WOJEWÓDZTWA, w drodze UCHWAŁY stanowiącej AKT PRAWA
-  MIEJSCOWEGO (patrz `mod-dzienniki-urzedowe-BIP-publikacja.md`,
-  DR-08, dla publikacji takich uchwał)
-□ ⭐ MECHANIZM STREF OCHRONY KRAJOBRAZU: sejmik MOŻE WYZNACZYĆ, W
-  GRANICACH krajobrazów PRIORYTETOWYCH (zidentyfikowanych w ramach
-  AUDYTU KRAJOBRAZOWEGO wg ustawy o planowaniu i zagospodarowaniu
-  przestrzennym, art. 38a) — STREFY ochrony krajobrazu, obejmujące W
-  SZCZEGÓLNOŚCI: PRZEDPOLA EKSPOZYCJI, OSIE WIDOKOWE, PUNKTY WIDOKOWE,
-  oraz OBSZARY ZABUDOWANE wyróżniające się LOKALNĄ formą architektoniczną
-  — WRAZ ze wskazaniem, KTÓRE z ustawowych zakazów mają zastosowanie w
-  danej strefie (⭐ to oznacza, że zakazy NIE SĄ jednolite dla całego
-  obszaru — MOGĄ różnić się STREFAMI w OBRĘBIE tego samego obszaru
-  chronionego krajobrazu)
+□ ⭐ ORGAN (art. 23 ust. 2): SEJMIK WOJEWÓDZTWA, w drodze UCHWAŁY (nazwa,
+  położenie, obszar, sprawujący nadzór, ustalenia czynnej ochrony
+  ekosystemów, zakazy WYBRANE spośród art. 24 ust. 1); publikacja →
+  `mod-dzienniki-urzedowe-BIP-publikacja.md` (DR-08). Uzgodnienia z radą
+  gminy i RDOŚ — art. 23 ust. 3–3c (tryb jak w parku krajobrazowym);
+  wniosek rady gminy — ust. 3d–3e. Zakazy → § 3.5.
+□ ⭐ STREFY OCHRONY KRAJOBRAZU (art. 23a ust. 1 pkt 1): ODRĘBNA uchwała
+  sejmiku (akt prawa miejscowego) wyznacza strefy w granicach krajobrazów
+  priorytetowych z audytu krajobrazowego (art. 38a u.p.z.p.) — przedpola
+  ekspozycji, osie widokowe, punkty widokowe, obszary zabudowane o lokalnej
+  formie architektonicznej — „wraz ze wskazaniem które z zakazów,
+  wymienionych w art. 24 ust. 1a, obowiązują w danej strefie”.
+  ⛔ Sejmik wskazuje zakazy WYŁĄCZNIE z art. 24 ust. 1a (nie z ust. 1).
+  Ta sama uchwała określa wykaz obiektów o istotnym znaczeniu
+  historycznym i kulturowym (ust. 1 pkt 2).
+□ TRYB UCHWAŁY STREFOWEJ (art. 23a ust. 2–8):
+  - projekt: zarząd województwa, z udziałem społeczeństwa (u.o.o.ś.);
+  - uzgodnienie z RDOŚ + opinia wojewódzkiego konserwatora zabytków;
+  - w części zakazów z art. 24 ust. 1a — uzgodnienie z radą gminy
+    (art. 106 k.p.a.; brak stanowiska w miesiąc = uzgodnienie);
+  - rada gminy odmawia WYŁĄCZNIE, gdy zakazy ograniczałyby możliwości
+    rozwojowe gminy z planu ogólnego/MPZP nieproporcjonalnie do
+    chronionych wartości (ust. 7) — przesłanka zamknięta;
+  - zmiana uchwały w trybie jej uchwalenia (ust. 8).
 ```
 
 ### 3.3 Obszary Natura 2000
@@ -137,63 +163,136 @@ TRZY RODZAJE OCHRONY W RAMACH ZADAŃ OCHRONNYCH (dotyczy OBU: park
   OOŚ — NIE duplikowanej tutaj)
 ```
 
-### 3.4 PARK KRAJOBRAZOWY — ZAKAZY (art. 17 ustawy) — dodano 2026-07-27,
-na wyraźne żądanie użytkownika (dotąd wspomniany tylko w jednej linii
-klasyfikacyjnej, BEZ treści merytorycznej — luka domknięta)
+### 3.4 PARK KRAJOBRAZOWY — ZAKAZY (art. 17, t.j. Dz. U. z 2026 r. poz. 1315)
 
 ```
-⚠️ KLUCZOWA CECHA SYSTEMOWA: zakazy z art. 17 ust. 1 SĄ FAKULTATYWNE
-  ("MOGĄ być wprowadzone") — to NIE jest jednolity, automatyczny
-  katalog dla WSZYSTKICH parków. SEJMIK WOJEWÓDZTWA w uchwale
-  tworzącej/zmieniającej dany park WYBIERA, KTÓRE z zakazów
-  katalogowych rzeczywiście obowiązują w TYM KONKRETNYM parku —
-  ZAWSZE sprawdź AKTUALNĄ uchwałę sejmiku dla konkretnego parku, NIE
-  zakładaj automatycznie pełnego katalogu
+⚠️ TRZY RÓŻNE ŹRÓDŁA ZAKAZÓW — nie mylić:
+  A) art. 17 ust. 1 (pkt 1–14) — FAKULTATYWNE: obowiązują tylko te, które
+     sejmik WYBRAŁ w uchwale z art. 16 ust. 3 → zawsze sprawdź uchwałę
+     danego parku (i jej zmiany).
+  B) art. 17 ust. 1a — USTAWOWE („wprowadza się zakazy”), ale tylko w
+     STREFACH OCHRONY KRAJOBRAZU wyznaczonych w PLANIE OCHRONY parku
+     (art. 20 ust. 4 pkt 7); plan ochrony wskazuje, które obowiązują w
+     danej strefie. Uchwała z art. 16 ust. 3 ich NIE wybiera.
+  C) art. 17 ust. 1b — USTAWOWY zakaz niszczenia i uszkadzania obiektów o
+     istotnym znaczeniu historycznym i kulturowym WSKAZANYCH W PLANIE
+     OCHRONY parku (art. 20 ust. 4 pkt 8) — nie wszystkich takich obiektów.
 
-KATALOG ZAKAZÓW MOŻLIWYCH DO WPROWADZENIA (wybór spośród, art. 17 ust. 1):
-  1) realizacji przedsięwzięć MOGĄCYCH ZNACZĄCO ODDZIAŁYWAĆ na
-     środowisko — z WYJĄTKIEM tych, dla których OOŚ wykazała BRAK
-     niekorzystnego wpływu na przyrodę/krajobraz parku
-  2) umyślnego zabijania dziko występujących zwierząt, niszczenia ich
-     nor/legowisk/miejsc rozrodu — z wyjątkiem amatorskiego połowu ryb
-     i racjonalnej gospodarki rolnej/leśnej/rybackiej/łowieckiej
-  3) likwidowania/niszczenia zadrzewień śródpolnych/przydrożnych/
-     nadwodnych — z wyjątkiem potrzeb przeciwpowodziowych/bezpieczeństwa
+A) KATALOG art. 17 ust. 1 (streszczenie; do pisma brzmienie z ELI):
+  1) realizacji przedsięwzięć mogących znacząco oddziaływać na
+     środowisko (w rozumieniu u.o.o.ś.) — wyjątek: ust. 3, niżej
+  2) umyślnego zabijania dziko występujących zwierząt, niszczenia nor,
+     legowisk, innych schronień, miejsc rozrodu, tarlisk i ikry — z
+     wyjątkiem amatorskiego połowu ryb i racjonalnej gospodarki rolnej,
+     leśnej, rybackiej i łowieckiej
+  3) likwidowania i niszczenia zadrzewień śródpolnych, przydrożnych i
+     nadwodnych — z wyjątkiem ochrony przeciwpowodziowej, bezpieczeństwa
+     ruchu drogowego lub wodnego, urządzeń wodnych
   4) pozyskiwania do celów gospodarczych skał (w tym torfu),
-     skamieniałości, minerałów, bursztynu
-  5) wykonywania prac ziemnych TRWALE ZNIEKSZTAŁCAJĄCYCH rzeźbę terenu
-  6) DOKONYWANIA ZMIAN STOSUNKÓW WODNYCH — jeśli NIE służą ochronie
-     przyrody lub racjonalnej gospodarce rolnej/leśnej/wodnej/rybackiej
-  7) ⭐ BUDOWANIA NOWYCH OBIEKTÓW BUDOWLANYCH W PASIE **100 M** od linii
-     brzegów rzek/jezior/innych naturalnych zbiorników wodnych oraz od
-     zasięgu lustra wody w zbiornikach SZTUCZNYCH przy normalnym
-     poziomie piętrzenia — NAJWAŻNIEJSZY zakaz DLA INWESTORÓW
-     PRYWATNYCH, konkretny próg METRAŻOWY
-  8) [analogiczny próg odległościowy — szczegóły w pełnym tekście art. 17]
-  ...oraz dalsze pozycje katalogu (niszczenie obiektów historycznych/
-  kulturowych — TEN akurat jest zakazem BEZWZGLĘDNYM, nie fakultatywnym)
+     skamieniałości, minerałów i bursztynu
+  5) prac ziemnych trwale zniekształcających rzeźbę terenu — z wyjątkiem
+     zabezpieczeń przeciwsztormowych/przeciwpowodziowych/
+     przeciwosuwiskowych i urządzeń wodnych
+  6) zmian stosunków wodnych, jeżeli nie służą ochronie przyrody lub
+     racjonalnej gospodarce rolnej, leśnej, wodnej lub rybackiej
+  7) ⭐ budowania nowych obiektów budowlanych w pasie 100 m od linii brzegów
+     rzek, jezior i innych naturalnych zbiorników wodnych oraz od zasięgu
+     lustra wody w sztucznych zbiornikach na wodach płynących (normalny
+     poziom piętrzenia z pozwolenia wodnoprawnego) — z wyjątkiem obiektów
+     służących TURYSTYCE WODNEJ, GOSPODARCE WODNEJ LUB RYBACKIEJ
+  8) lokalizowania obiektów budowlanych w pasie 200 m od KRAWĘDZI brzegów
+     klifowych oraz w pasie technicznym brzegu morskiego
+  9) likwidowania, zasypywania i przekształcania zbiorników wodnych,
+     starorzeczy oraz obszarów wodno-błotnych
+  10) wylewania gnojowicy, z wyjątkiem nawożenia własnych gruntów rolnych
+  11) chowu i hodowli zwierząt metodą bezściółkową
+  12) utrzymywania otwartych rowów ściekowych i zbiorników ściekowych
+  13) organizowania rajdów motorowych i samochodowych
+  14) używania łodzi motorowych i innego sprzętu motorowego na otwartych
+      zbiornikach wodnych (wyjątki podmiotowe: ust. 4)
+  ⛔ ODLEGŁOŚCI (ust. 5): uchwała z art. 16 ust. 3 może określić odległości
+     MNIEJSZE niż 100 m (pkt 7) i 200 m (pkt 8). Nie przyjmuj 100/200 m bez
+     odczytu uchwały danego parku.
 
-WYJĄTKI OD ZAKAZÓW (art. 17 ust. 2, stosują się NIEZALEŻNIE od tego,
-  czy dany zakaz wprowadzono): realizacja zadań z planu ochrony/planu
-  zadań ochronnych; zadania na rzecz obronności/bezpieczeństwa
-  państwa; akcje ratownicze; inwestycje celu publicznego w rozumieniu
-  ustawy o planowaniu przestrzennym
+B) STREFY z planu ochrony (ust. 1a):
+  - teren objęty MPZP: zakaz lokalizowania nowych obiektów budowlanych,
+    zakaz zalesiania;
+  - teren bez MPZP: jw. + zakaz obiektów odbiegających od lokalnej formy
+    architektonicznej + zakaz obiektów wyższych niż 2 kondygnacje lub 7 m.
 
-⚠️ WAŻNA ZASADA (potwierdzona orzecznictwem/doktryną): WOJEWODA/organ
-  wykonawczy NIE MOŻE wprowadzić SUROWSZYCH zakazów niż przewiduje
-  zamknięty katalog art. 17 ust. 1 — tylko sejmik województwa, w
-  granicach tego katalogu, kształtuje zakres ochrony
+WYJĄTKI:
+  - ust. 2 (od zakazów z ust. 1–1b): zadania z planu ochrony, zadań
+    ochronnych lub planu zadań ochronnych; obronność i bezpieczeństwo
+    państwa; akcje ratownicze i bezpieczeństwo powszechne; inwestycje celu
+    publicznego (art. 2 pkt 5 u.p.z.p.)
+  - ⛔ ust. 3 (od pkt 1): TYLKO przedsięwzięcia, dla których sporządzenie
+    raportu o oddziaływaniu na środowisko NIE JEST OBOWIĄZKOWE, i
+    przeprowadzona ocena wykazała brak niekorzystnego wpływu na przyrodę i
+    krajobraz parku. Przedsięwzięcie z OBOWIĄZKOWYM raportem (I grupa)
+    nie korzysta z wyjątku, choćby ocena była pozytywna.
+    Inaczej niż w OChK (art. 24 ust. 3 — bez warunku raportu, § 3.5).
+  - ust. 3a (od pkt 3): usunięcie drzewa lub krzewu z gatunku obcego
+    inwazyjnego (IGO stwarzający zagrożenie dla Unii lub dla Polski) w
+    obrębie zadrzewienia
+  - ust. 4 (od pkt 14): jednostki ratownicze, właściciel wód/urządzeń
+    wodnych, inspektorzy żeglugi śródlądowej, PSR i SSR, promy w ciągu
+    dróg publicznych, racjonalna gospodarka rybacka, Służba Parku
+    Krajobrazowego
 
-USTANOWIENIE/LIKWIDACJA: uchwała SEJMIKU WOJEWÓDZTWA (nazwa, obszar,
-  granice, otulina jeśli wyznaczona, cele ochrony, WYBRANE zakazy z
-  katalogu). Likwidacja/zmniejszenie — WYŁĄCZNIE z powodu
-  BEZPOWROTNEJ utraty wartości przyrodniczych/historycznych/
-  kulturowych/krajobrazowych.
+ORGAN I TRYB → § 3.1 (art. 16 ust. 3–4e).
+```
 
-Potwierdzone w 6+ zgodnych źródłach (lexlege.pl — dosłowny art. 17,
-arslege.pl, dlajurysty.pl, sip.lex.pl — w tym realny wyrok WSA VIII
-SA/Wa 883/25 dot. budowy budynku rekreacji indywidualnej w parku
-krajobrazowym pokrywającym się z Naturą 2000).
+### 3.5 OBSZAR CHRONIONEGO KRAJOBRAZU — ZAKAZY (art. 24, t.j. Dz. U. z 2026 r. poz. 1315)
+
+```
+⚠️ Katalog INNY niż art. 17 — nie przenoś wyjątków z parku krajobrazowego.
+  A) art. 24 ust. 1 (pkt 1–9) — FAKULTATYWNE, wybrane w uchwale z art. 23
+     ust. 2.
+  B) art. 24 ust. 1a — USTAWOWE, w strefach z art. 23a ust. 1 pkt 1; uchwała
+     strefowa wskazuje, które obowiązują w danej strefie (§ 3.2).
+  C) art. 24 ust. 1b — USTAWOWY zakaz niszczenia i uszkadzania obiektów o
+     istotnym znaczeniu historycznym i kulturowym WSKAZANYCH W UCHWALE z
+     art. 23a ust. 1.
+
+A) KATALOG art. 24 ust. 1 (streszczenie; różnice względem art. 17 ⚠️):
+  1) zabijania dziko występujących zwierząt, niszczenia nor, legowisk,
+     schronień, miejsc rozrodu, tarlisk, ikry (⚠️ bez „umyślnego”) — z
+     wyjątkiem amatorskiego połowu ryb i racjonalnej gospodarki rolnej,
+     leśnej, rybackiej i łowieckiej
+  2) realizacji przedsięwzięć mogących znacząco oddziaływać na środowisko
+     — wyjątek: ust. 3, niżej
+  3) likwidowania i niszczenia zadrzewień śródpolnych, przydrożnych i
+     nadwodnych — wyjątki jak w art. 17 ust. 1 pkt 3
+  4) ⚠️ WYDOBYWANIA (w parku: „pozyskiwania”) do celów gospodarczych skał,
+     w tym torfu, skamieniałości, minerałów i bursztynu
+  5) prac ziemnych trwale zniekształcających rzeźbę terenu — wyjątki jak
+     w art. 17 ust. 1 pkt 5
+  6) zmian stosunków wodnych, jeżeli służą innym celom niż ochrona przyrody
+     lub zrównoważone wykorzystanie użytków rolnych i leśnych oraz
+     racjonalna gospodarka wodna lub rybacka
+  7) likwidowania naturalnych zbiorników wodnych, starorzeczy i obszarów
+     wodno-błotnych (⚠️ węższy niż art. 17 ust. 1 pkt 9: „naturalnych”,
+     bez „zasypywania i przekształcania”)
+  8) budowania nowych obiektów budowlanych w pasie 100 m od brzegów /
+     lustra wody (jak art. 17 ust. 1 pkt 7) — ⚠️ wyjątek INNY: urządzenia
+     wodne oraz obiekty racjonalnej gospodarki rolnej, leśnej lub rybackiej
+  9) lokalizowania obiektów budowlanych w pasie 200 m od LINII brzegów
+     klifowych oraz w pasie technicznym brzegu morskiego
+  ⛔ ODLEGŁOŚCI (ust. 4): uchwała z art. 23 ust. 2 może określić odległości
+     mniejsze niż w pkt 8 i 9.
+
+B) STREFY (ust. 1a) — te same zakazy co art. 17 ust. 1a (MPZP: nowe obiekty,
+   zalesianie; bez MPZP: + forma architektoniczna, 2 kondygnacje / 7 m).
+
+WYJĄTKI:
+  - ust. 2 (od ust. 1–1b): obronność i bezpieczeństwo państwa; akcje
+    ratownicze; inwestycje celu publicznego; zadania z planu ochrony,
+    zadań ochronnych lub planu zadań ochronnych
+  - ust. 3 (od pkt 2): przedsięwzięcia, dla których przeprowadzona ocena
+    oddziaływania wykazała brak negatywnego wpływu na ochronę przyrody i
+    krajobrazu OChK — ⚠️ BEZ warunku „raport nieobowiązkowy” (por. art. 17
+    ust. 3)
+  - ust. 3a (od pkt 3): drzewa i krzewy IGO w obrębie zadrzewienia
 ```
 
 ---
@@ -266,8 +365,9 @@ ZWERYFIKOWANE (2026-08-19, F-42)
     ochrony strefowej + wielkość stref).
   - Rozporządzenie MŚ z 9.10.2014 r. w sprawie ochrony gatunkowej
     GRZYBÓW.
-  - Rozporządzenie MŚ w sprawie ochrony gatunkowej ROŚLIN (analogiczny
-    mechanizm, data nie potwierdzona w tej sesji).
+  - Rozporządzenie Ministra Środowiska z dnia 9 października 2014 r. w
+    sprawie ochrony gatunkowej ROŚLIN (Dz. U. z 2014 r. poz. 1409; ELI
+    DU/2014/1409 — obowiązujący, ELI 2026-10-27).
   ⚠️ Wszystkie 3 rozporządzenia mogły być nowelizowane po dacie
   pierwotnego wydania — sprawdź aktualny t.j. przy konkretnej sprawie,
   nie zakładaj automatycznie dat z 2014/2016 bez weryfikacji.
@@ -318,8 +418,8 @@ Forma ochrony                    | Organ ustanawiający
 ----------------------------------|---------------------------
 Park narodowy                     | Rada Ministrów (utworzenie) / Minister środowiska (zadania ochronne, zarządzenie)
 Rezerwat przyrody                 | Regionalny Dyrektor Ochrony Środowiska (RDOŚ)
-Park krajobrazowy                 | Sejmik województwa (⚠️ zweryfikuj dokładny tryb)
-Obszar chronionego krajobrazu     | Sejmik województwa (uchwała, akt prawa miejscowego)
+Park krajobrazowy                 | Sejmik województwa (uchwała, art. 16 ust. 3; zakazy wybrane z art. 17 ust. 1)
+Obszar chronionego krajobrazu     | Sejmik województwa (uchwała, art. 23 ust. 2; strefy — uchwała z art. 23a)
 Obszary Natura 2000                | Minister środowiska (na podstawie prawa UE)
 Pomnik przyrody                    | Rada gminy (uchwała)
 Stanowisko dokumentacyjne          | Rada gminy (uchwała)
@@ -343,6 +443,10 @@ Ochrona gatunkowa                  | Minister środowiska (rozporządzenie)
 □ Czy sprawa dotyczy OBSZARU CHRONIONEGO KRAJOBRAZU — sprawdź, czy
   nieruchomość leży w WYZNACZONEJ STREFIE ochrony krajobrazu (mogą
   obowiązywać INNE zakazy niż na pozostałym obszarze)
+□ Park krajobrazowy / OChK: odczytaj uchwałę sejmiku (wybrane zakazy,
+  ewentualnie zmniejszone odległości) i plan ochrony / uchwałę strefową
+  (strefy, wykaz obiektów); przy przedsięwzięciu w parku ustal, czy raport
+  OOŚ jest obowiązkowy (art. 17 ust. 3)
 □ Czy planowana inwestycja może ODDZIAŁYWAĆ na obszar NATURA 2000 —
   sprawdź obowiązek OCENY oddziaływania (`mod-ustawa-OOS-oceny-
   srodowiskowe.md`)
@@ -374,7 +478,12 @@ Ochrona gatunkowa                  | Minister środowiska (rozporządzenie)
 
 ---
 
-## 8. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-21)
+## 8. LITERATURA I ŹRÓDŁA
+
+- ⭐ RZĄD 1: t.j. Dz. U. z 2026 r. poz. 1315 (ELI DU/2026/1315, `isap_tekst`
+  2026-10-27) — art. 16, 17, 20 ust. 4 i 4a, 22 ust. 4, 23, 23a, 24.
+  Źródło brzmienia dla § 2.2, 3.1, 3.2, 3.4, 3.5; portale niżej wyłącznie
+  jako tropy z 2026-07-21, nie podstawa brzmienia.
 
 - lexlege.pl (3×), arslege.pl (2×), prawnik.cc — pełna treść art. 6
   (katalog 10 form) oraz art. 39-44 (pomniki, stanowiska dokumentacyjne,
