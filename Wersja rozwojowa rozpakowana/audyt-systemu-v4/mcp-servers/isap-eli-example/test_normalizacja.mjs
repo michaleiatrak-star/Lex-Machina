@@ -116,3 +116,12 @@ import { naprawNumeryArtOcr, stronaBezTekstu } from "./isap-eli-mcp-server.js";
   assert.ok(stronaBezTekstu("") && stronaBezTekstu(" 7 ") && stronaBezTekstu("—"));
   assert.ok(!stronaBezTekstu("§ 86. Uchyla się"));
   console.log("OK: #86 — numery artykułów z OCR (ISO→150, 1S1→151, lOB→108, Arł.→Art.), rzymskie bez zmian; strona bez liter = brak warstwy tekstowej"); }
+
+// ── legal-cite-pl #11: numer z literą w indeksie nie spada do numeru bazowego; data stanu prawnego t.j. ──
+import { dataIso } from "./isap-eli-mcp-server.js";
+{ for (const a of ["131¹ᵃ", "131^1a", "131[1a]", "art. 131 ^1a"]) assert.strictEqual(normalizujNumerArt(a), "131[1a]", a);
+  assert.strictEqual(normalizujNumerArt("479^45"), "479[45]");
+  const z = ["Art. 131. § 1. Pisma doręcza się.", "Art. 131 [ 1a ] . § 1. W razie niemożności doręczenia.", "Art. 132. Dalej."].join("\n");
+  assert.match(artykulObowiazujacy({ zalacznik: z, przypisy: {} }, normalizujNumerArt("131¹ᵃ")).tresc, /niemożności/);
+  assert.strictEqual(dataIso("24 marca 2026"), "2026-03-24"); assert.strictEqual(dataIso(null), null);
+  console.log("OK: 131¹ᵃ = 131^1a = 131[1a] (nie art. 131); stan prawny t.j. → ISO"); }

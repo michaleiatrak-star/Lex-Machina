@@ -294,9 +294,12 @@ export function naprawMacCEDokument(strony) {
 // pozycji stojący w następnym wierszu jako nagłówek treści (zmierzone na DU/2000/649).
 const PAGINA_2000_2009 = /^[^\S\n]*(?:Dziennik Ustaw|Monitor Polski)(?:[^\S\n]+Nr[^\S\n]*\d+)?[^\S\n]*(?:\n[^\S\n]*){0,2}[—–-][^\S\n]*\d+[^\S\n]*[—–-][^\S\n]*(?:\n[^\S\n]*){0,2}(?:Poz\.[^\S\n]*\d+(?:[^\S\n]*(?:,|i)[^\S\n]*\d+)*[^\S\n]*)?$/gm;
 
+// Indeks górny z literą („131¹ᵃ”): litery w indeksie górnym → zwykłe, żeby numer nie spadł do „131”.
+const LITERY_GORNE = { "ᵃ": "a", "ᵇ": "b", "ᶜ": "c", "ᵈ": "d", "ᵉ": "e", "ᶠ": "f", "ᵍ": "g", "ʰ": "h", "ⁱ": "i" };
 export function normalizujNumerArt(a) {
-  return String(a).trim().replace(/^art\.?\s*/i, "").replace(/\s+/g, "")
-    .replace(/[\^(]\s*(\d+)\s*\)?$/, "[$1]").replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)$/, (m) => "[" + [...m].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + "]");
+  return String(a).trim().replace(/[ᵃᵇᶜᵈᵉᶠᵍʰⁱ]/g, (c) => LITERY_GORNE[c])
+    .replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)([a-z]+)$/, (m, g, l) => "[" + [...g].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + l + "]").replace(/^art\.?\s*/i, "").replace(/\s+/g, "")
+    .replace(/[\^(]\s*(\d+[a-z]*)\s*\)?$/, "[$1]").replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)$/, (m) => "[" + [...m].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + "]");
 }
 
 // ── Skany sprzed 2000 r. (zgł. #86): nagłówek „Art. N.” zniekształcony przez warstwę OCR
@@ -362,6 +365,13 @@ async function tekstPdf(eli, url = null) {
   return t;
 }
 
+const MIESIACE = { stycznia: 1, lutego: 2, marca: 3, kwietnia: 4, maja: 5, czerwca: 6, lipca: 7, sierpnia: 8, "września": 9, "października": 10, listopada: 11, grudnia: 12 };
+/** „24 marca 2026” → „2026-03-24”; null, gdy nie da się odczytać. */
+export function dataIso(tekst) {
+  const m = /^(\d{1,2}) (\p{L}+) (\d{4})/u.exec(String(tekst ?? "").trim());
+  const mies = m ? MIESIACE[m[2].toLocaleLowerCase("pl")] : null;
+  return mies ? `${m[3]}-${String(mies).padStart(2, "0")}-${m[1].padStart(2, "0")}` : null;
+}
 const dzisWarszawa = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Warsaw" }).format(new Date());
 
 /** Podział załącznika na artykuły (raz na dokument). Nagłówki: „Art. 11[1].”, „Art. 6 1 .”, zakresy
@@ -417,8 +427,10 @@ server.registerTool("isap_tekst", {
     artykul: z.string().max(12).optional(), szukaj: z.string().min(3).max(120).optional(),
     offset: z.number().int().min(0).optional(),
     wersja: z.enum(["aktualna", "ogloszona"]).optional().describe("domyślnie aktualna (t.j.)"),
+    na_dzien: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional()
+      .describe("RRRR-MM-DD: brzmienie artykułu na ten dzień (wymaga `artykul`; nie wcześniej niż stan prawny t.j.)"),
   },
-}, async ({ eli, artykul, szukaj, offset, wersja }) => {
+}, async ({ eli, artykul, szukaj, offset, wersja, na_dzien }) => {
   const baza = { query_type: "tekst_aktu", source: "sejm-eli" };
   try {
     const meta = await eliGet(eli);
@@ -466,16 +478,34 @@ server.registerTool("isap_tekst", {
       if (result.zmiany_po_tj.length) uw.push(`⚠️ ${result.zmiany_po_tj.length} akt(y) zmieniające ogłoszone po t.j. — brzmienie może być nieaktualne.`);
     }
     if (artykul) {
-      const art = artykulObowiazujacy(obw, artykul);
+      const dzien = na_dzien ?? dzisWarszawa();
+      if (na_dzien) {
+        // T.j. scala zmiany sprzed stanu prawnego bez odnośników: wcześniejszego brzmienia z niego nie odczytasz.
+        const granica = dataIso(obw.stan_prawny_na) ?? zrodlo.data_publikacji_lub_wyroku ?? null;
+        if (wersjaTekstu !== "tekst_jednolity" || !granica || na_dzien < granica) {
+          return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { ...result, na_dzien },
+            powod: `Brzmienie na ${na_dzien} nie wynika z ${zrodlo.identyfikator}${granica ? ` (stan prawny / ogłoszenie: ${granica})` : ""}. ` +
+              "Ustal t.j. obowiązujący w tym dniu (ELI /references) i wywołaj isap_tekst z jego ELI." });
+        }
+        result.na_dzien = na_dzien;
+      }
+      const art = artykulObowiazujacy(obw, normalizujNumerArt(artykul), dzien);
       if (!art) return tekstOdp(pewnosc === "partial"
         ? { status: "OUT_OF_SCOPE", ...baza, result, powod: `Brak „Art. ${normalizujNumerArt(artykul)}.” w odczytanym tekście, ale strony ${pdf.strony_bez_tekstu.join(", ")} nie mają warstwy tekstowej — sprawdź PDF.` }
         : { status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
       result.artykul = normalizujNumerArt(artykul); result.tresc = art.tresc;
+      // Artykuł dodany z datą późniejszą (KPK art. 100a od 1.10.2029): cała treść w brzmieniach przyszłych.
+      if (!art.tresc && art.brzmienia_przyszle?.length) {
+        const od = art.brzmienia_przyszle.map((b) => b.from).filter(Boolean).sort()[0] ?? null;
+        return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { ...result, jeszcze_nie_obowiazuje: true, wchodzi_w_zycie: od, brzmienia_przyszle: art.brzmienia_przyszle },
+          powod: `Art. ${result.artykul} nie obowiązuje na ${dzien}${od ? ` — wchodzi w życie z dniem ${od}` : ""}. Nie podawaj go jako obowiązującego.` });
+      }
       if (Object.keys(art.odnosniki).length) result.odnosniki = art.odnosniki;
       if (art.brzmienia_przyszle) {
         result.brzmienia_przyszle = art.brzmienia_przyszle;
-        uw.push("⚠️ T.j. drukuje też brzmienie wchodzące w życie później (brzmienia_przyszle); `tresc` = brzmienie obowiązujące dziś.");
+        uw.push(`⚠️ T.j. drukuje też brzmienie wchodzące w życie później (brzmienia_przyszle); „tresc” = brzmienie obowiązujące ${na_dzien ? "na " + na_dzien : "dziś"}.`);
       }
+      if (art.nierozstrzygniete) pewnosc = "partial";
       if (art.nierozstrzygniete) uw.push("⚠️ Kilka brzmień jednostki bez odczytywalnej daty wejścia w życie: `tresc` zawiera wszystkie — nie podawaj jej jako jednego obowiązującego brzmienia.");
       if (/^Art\.\s*\S+\.\s*\(uchylony\)/.test(art.tresc)) uw.push("⛔ Artykuł uchylony.");
     } else if (szukaj) {

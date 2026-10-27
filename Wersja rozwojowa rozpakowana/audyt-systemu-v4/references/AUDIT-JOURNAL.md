@@ -70979,3 +70979,11 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Zgłoszenia już wykonane wcześniej, bez zmian w kodzie: #83 (6.170, 6.204), #109 i #110 (6.220, 6.222), #88 (konektory lex-* zamiast `npx`, README: marketplace z `#<TAG>`), #37 (konektory lex-saos, lex-cbosa, lex-sn), #77 (aplikacja: zasoby natywnego agenta llama.cpp opcjonalne, `buildOptionalLocalLaunchSpec`, testy startu).
 - Bez zmian w kodzie: #82 (konwencja opisów commitów — proces), #10 i #11 (propozycje zewnętrznego pomiaru; wymagają zbioru zgłaszającego).
 - Wersje: dr-09 3.56, audyt-systemu-v4 6.244.
+
+## AUDYT-2026-10-27b — analogie zgłoszeń legal-cite-pl w isap_tekst i skillach (6.245)
+
+- Źródło: prośba użytkownika — przegląd ostatnich zgłoszeń apiotrowski-afk/legal-cite-pl (#13, #12, #11, #7, komentarze w #6) i sprawdzenie analogii na żywym ELI (2026-10-27).
+- Występowały: #12 (jednostka jeszcze nieobowiązująca → pusta treść z FOUND: KPK art. 100a/100b/131a), #13 pkt 2 (dwa brzmienia zdań, KPK art. 505 — ostrzeżenie było, ale `deterministic`; KPK 180, 333, 517d, 589s bez ostrzeżenia), „Art. 1. 1.” z commitu UNNC (KPC art. 131[1a] nierozstrzygnięty mimo daty z odnośnika), #6 etykieta „I)” → u nas punkt „12 )” wycinany jako znacznik odnośnika (O.p. art. 3, 73, 119zw; KPC 485; KPK 237), #11 indeks z literą (`131¹ᵃ` w zapisie górnym nie był normalizowany).
+- Nie występowały: #7 (art. 14 u.ś.u.d.e. bez treści art. 15 — odczyt z PDF), #13 pkt 1 (litera na nowej stronie — brak `na_dzien` do tej pory; KC, KK, KW, u.o.p. bez różnic w pomiarze).
+- Kod: aplikacja `core-law-footnotes.ts` (560c510, testy vitest), `wspolne/akt-pdf.mjs` wygenerowany, `isap-eli-mcp-server.js`; skille: shared 3.99.48 (MCP-INTEGRACJA, weryfikator-isap), analizator-przepisow-v2 2.13 (Moduł 1, 1H).
+- Wersje: audyt-systemu-v4 6.245, shared 3.99.48, analizator-przepisow-v2 2.13.
