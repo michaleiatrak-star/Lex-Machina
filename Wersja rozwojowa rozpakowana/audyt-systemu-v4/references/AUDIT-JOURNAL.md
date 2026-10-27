@@ -70970,3 +70970,12 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Parser mapy RAG aplikacji (`extractCoreActs`): DU/2026/1324, 1335, 1328, 30 jako t.j. (consolidated); 2025/1234, 2025/960, 2023/1587 nie są już pozycjami głównymi.
 - Wersje: dr-02 3.96, dr-04 3.50, dr-06 3.99.1, dr-09 3.49, prawo-polskie-v2 6.62, shared 3.99.36, audyt-systemu-v4 6.233.
 
+
+## AUDYT-2026-10-27a — przegląd otwartych zgłoszeń: #132 (ochrona przyrody), #86 (skany Dz.U.) (6.244)
+
+- Źródło: przegląd wszystkich otwartych zgłoszeń repozytorium na prośbę użytkownika (2026-10-27).
+- #132: zarzuty sprawdzone w RZĘDZIE 1 — t.j. Dz. U. z 2026 r. poz. 1315 (ELI DU/2026/1315, `isap_tekst`, 0 zmian po t.j.): art. 16, 17, 20 ust. 4 i 4a, 22 ust. 4, 23, 23a, 24; rozporządzenie roślin DU/2014/1409 obowiązuje. Wszystkie potwierdzone. dr-09 3.56: mod-formy-ochrony-przyrody-obszary-chronione 1.1 (szczegóły w CHANGELOG dr-09). Pozostałe moduły zaproponowane w zgłoszeniu (OOŚ, Prawo geologiczne i górnicze, MPZP/WZ) — do osobnego przeglądu.
+- #86: zob. CHANGELOG 6.244. Pomiar na PDF z ELI (2026-10-27): DU/1998/875 — 3/3 strony bez tekstu → OUT_OF_SCOPE; DU/1994/73 — strona 7; DU/1997/483 text.pdf — 12/12 numerów poprawione (Konstytucja i tak czytana z wersji „U”, 6.204).
+- Zgłoszenia już wykonane wcześniej, bez zmian w kodzie: #83 (6.170, 6.204), #109 i #110 (6.220, 6.222), #88 (konektory lex-* zamiast `npx`, README: marketplace z `#<TAG>`), #37 (konektory lex-saos, lex-cbosa, lex-sn), #77 (aplikacja: zasoby natywnego agenta llama.cpp opcjonalne, `buildOptionalLocalLaunchSpec`, testy startu).
+- Bez zmian w kodzie: #82 (konwencja opisów commitów — proces), #10 i #11 (propozycje zewnętrznego pomiaru; wymagają zbioru zgłaszającego).
+- Wersje: dr-09 3.56, audyt-systemu-v4 6.244.

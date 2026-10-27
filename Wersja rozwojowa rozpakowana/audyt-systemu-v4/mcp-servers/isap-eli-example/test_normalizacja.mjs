@@ -101,3 +101,18 @@ import { uporzadkujKandydatow, rangaKandydata } from "./isap-eli-mcp-server.js";
   assert.ok(!/o zmianie/.test(pierwszy.tytul_lub_nazwa), `KC: pierwszy kandydat nie jest nowelizacją (${pierwszy.eli})`);
   console.log(`OK: KC — pierwszy kandydat ${pierwszy.eli}${w.akt_bazowy ? ", akt bazowy " + w.akt_bazowy.eli : ""}`);
 }
+
+// ── Skany sprzed 2000 r. (zgł. #86): numery artykułów z OCR i strony bez warstwy tekstowej ──
+import { naprawNumeryArtOcr, stronaBezTekstu } from "./isap-eli-mcp-server.js";
+{ const z = ["Art. 149. 1. Minister kieruje działem.", "Art. ISO. 1. Członek Rady Ministrów.", "Art.1S1. Wnioski.",
+    "Art. lO. Dziesiąty.", "Art. lOB. Sto ósmy.", "Arł.138. Sto trzydziesty ósmy.", "Art. I. W ustawie z dnia...", "Art. II. Ustawa wchodzi w życie.", "zob. Art. ISO. w tekście"].join("\n");
+  const { tekst, poprawki } = naprawNumeryArtOcr(z);
+  assert.deepStrictEqual(poprawki, ["ISO→150", "1S1→151", "lO→10", "lOB→108", "Arł.138→138"]);
+  assert.match(tekst, /^Art\.138\. Sto/m); assert.match(tekst, /^Art\. 108\. Sto/m);
+  assert.match(tekst, /^Art\. 150\. 1\. Członek/m); assert.match(tekst, /^Art\.151\. Wnioski/m);
+  assert.match(tekst, /^Art\. I\. W ustawie/m, "rzymskie I zostaje"); assert.match(tekst, /^Art\. II\. Ustawa/m, "rzymskie II zostaje");
+  assert.match(tekst, /zob\. Art\. ISO\./, "odesłanie w środku wiersza bez zmian");
+  assert.strictEqual(artykulObowiazujacy({ zalacznik: tekst, przypisy: {} }, "150").tresc.split("\n").length, 1, "art. 150 bez wchłoniętych następnych");
+  assert.ok(stronaBezTekstu("") && stronaBezTekstu(" 7 ") && stronaBezTekstu("—"));
+  assert.ok(!stronaBezTekstu("§ 86. Uchyla się"));
+  console.log("OK: #86 — numery artykułów z OCR (ISO→150, 1S1→151, lOB→108, Arł.→Art.), rzymskie bez zmian; strona bez liter = brak warstwy tekstowej"); }

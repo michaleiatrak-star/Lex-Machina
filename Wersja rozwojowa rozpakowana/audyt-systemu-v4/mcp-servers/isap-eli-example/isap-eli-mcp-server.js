@@ -299,6 +299,24 @@ export function normalizujNumerArt(a) {
     .replace(/[\^(]\s*(\d+)\s*\)?$/, "[$1]").replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)$/, (m) => "[" + [...m].map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹".indexOf(c)).join("") + "]");
 }
 
+// ── Skany sprzed 2000 r. (zgł. #86): nagłówek „Art. N.” zniekształcony przez warstwę OCR
+// (Konstytucja DU/1997/483 text.pdf: „Art. ISO.”, „Art.1S1.”, „Art. lOB.”, „Arł.138.”), więc artykuł
+// nie jest znajdowany, a poprzedni wchłania następne. Poprawiamy tylko nagłówek na początku wiersza,
+// gdy po zamianie I/l→1, S→5, O→0, B→8 numer jest liczbą; token bez cyfry i bez S/O/B zostaje
+// („Art. I.”, „Art. II.” to numery rzymskie w aktach zmieniających).
+const OCR_CYFRY = { I: "1", l: "1", S: "5", O: "0", B: "8" };
+export function naprawNumeryArtOcr(tekst) {
+  const poprawki = [];
+  const t = tekst.replace(/(^|\n)([^\S\n]*)Ar([tł])(\.[^\S\n]*)([0-9IlSOB]{1,4})([^\S\n]*\.)/g, (m, p, wc, lit, kr, nr, kropka) => {
+    if (!/\d/.test(nr) && !/[SOB]/.test(nr)) return m;
+    const cyfry = nr.replace(/[IlSOB]/g, (c) => OCR_CYFRY[c]);
+    if (cyfry === nr && lit === "t") return m;
+    poprawki.push(`${lit === "t" ? "" : "Arł."}${nr}→${cyfry}`);
+    return `${p}${wc}Art${kr}${cyfry}${kropka}`;
+  });
+  return { tekst: t, poprawki };
+}
+
 /** Podział obwieszczenia: preambuła (pkt 1–2) i załącznik (tekst ustawy). */
 export function podzielObwieszczenie(tekst) {
   const m = tekst.search(/\n\s*Załącznik do obwieszczenia/i);
@@ -309,9 +327,11 @@ export function podzielObwieszczenie(tekst) {
   return { preambula, zalacznik, nie_obejmuje: p2 ? p2[0].trim() : null, stan_prawny_na: stan ? stan[1] : null };
 }
 
+export const stronaBezTekstu = (t) => (t.match(/\p{L}/gu) ?? []).length < 3;
+
 /** PDF → tekst aktu tym samym odczytem co RAG aplikacji (wspolne/akt-pdf.mjs): wiersze składane
  * z geometrii pozycji, przypisy z dołu strony (drobny druk) wyjęte z treści, paginy usunięte.
- * Zwraca { tekst, strony, przypisy, sha256 }. Czysta funkcja na bajtach — testowalna offline. */
+ * Zwraca { tekst, strony, przypisy, sha256, strony_bez_tekstu, liczba_stron }. Czysta funkcja na bajtach — testowalna offline. */
 export async function tekstZPdf(dane) {
   const sha256 = createHash("sha256").update(dane).digest("hex");
   const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
@@ -322,10 +342,15 @@ export async function tekstZPdf(dane) {
     const elementy = (await (await doc.getPage(i)).getTextContent()).items;
     surowe.push(joinLineItems(elementy, true).replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").trim());
   }
+  // Strona bez warstwy tekstowej (skan bez OCR, zgł. #86) dostaje znacznik zamiast cichej luki.
+  // Próg: mniej niż 3 litery — DU/1998/875 zwracał 1 znak na cały dokument.
+  const bezTekstu = surowe.flatMap((t, i) => (stronaBezTekstu(t) ? [i + 1] : []));
   const strony = naprawMacCEDokument(surowe)
-    .map((t) => stripPdfPageHeaders(repairDzuPdfEncoding(t.replace(PAGINA_2000_2009, ""))).trim());
+    .map((t, i) => (!stronaBezTekstu(t) ? stripPdfPageHeaders(repairDzuPdfEncoding(t.replace(PAGINA_2000_2009, ""))).trim()
+      : `[strona ${i + 1}: brak warstwy tekstowej]`));
   const { pages, footnotes } = extractPageFootnotes(strony);
-  return { tekst: pages.filter(Boolean).join("\n"), strony: pages, przypisy: footnotes, sha256 };
+  return { tekst: pages.filter(Boolean).join("\n"), strony: pages, przypisy: footnotes, sha256,
+    strony_bez_tekstu: bezTekstu, liczba_stron: surowe.length };
 }
 
 async function tekstPdf(eli, url = null) {
@@ -409,7 +434,14 @@ server.registerTool("isap_tekst", {
     }
     const czysty = wybierzTekstCzysty(zrodlo.eli, meta);
     const pdf = await tekstPdf(zrodlo.eli, czysty?.url ?? null);
-    const obw = { ...(wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(pdf.tekst) : { zalacznik: pdf.tekst, nie_obejmuje: null, stan_prawny_na: null }), przypisy: pdf.przypisy };
+    const urlPdf = czysty?.url ?? `${ELI_BASE_URL}/${zrodlo.eli}/text.pdf`;
+    if (pdf.liczba_stron && pdf.strony_bez_tekstu.length === pdf.liczba_stron) {
+      return tekstOdp({ status: "OUT_OF_SCOPE", ...baza, result: { identyfikator: zrodlo.identyfikator, eli_zrodla_tekstu: zrodlo.eli, url_zrodlowy: urlPdf },
+        powod: "PDF bez warstwy tekstowej (skan bez OCR) — treści nie odczytano. Brzmienie wyłącznie z PDF pod url_zrodlowy (odczyt wzrokowy/OCR), oznaczone jako niedeterministyczne." });
+    }
+    let ocr = { tekst: pdf.tekst, poprawki: [] };
+    if (!czysty && Number(zrodlo.eli.split("/")[1]) < 2000) ocr = naprawNumeryArtOcr(pdf.tekst);
+    const obw = { ...(wersjaTekstu === "tekst_jednolity" ? podzielObwieszczenie(ocr.tekst) : { zalacznik: ocr.tekst, nie_obejmuje: null, stan_prawny_na: null }), przypisy: pdf.przypisy };
     const result = { identyfikator: zrodlo.identyfikator, eli_bazowy: eli, eli_zrodla_tekstu: zrodlo.eli, wersja_tekstu: czysty ? "tekst_ujednolicony" : wersjaTekstu,
       status_obowiazywania: wersjaTekstu === "tekst_jednolity" ? zrodlo.status_obowiazywania : st,
       tytul_lub_nazwa: zrodlo.tytul_lub_nazwa, stan_prawny_na: obw.stan_prawny_na,
@@ -419,6 +451,15 @@ server.registerTool("isap_tekst", {
     const uw = [];
     if (czysty) uw.push(`✅ Tekst ujednolicony (wersja „U”) — ${czysty.powod}; pominięto skan text.pdf.`);
     if (wersjaTekstu === "tekst_ogloszony" && !czysty) uw.push("⚠️ Tekst OGŁOSZONY (brzmienie z dnia ogłoszenia), nie stan obecny.");
+    let pewnosc = "deterministic";
+    if (pdf.strony_bez_tekstu?.length) {
+      result.strony_bez_tekstu = pdf.strony_bez_tekstu; pewnosc = "partial";
+      uw.push(`⚠️ Strony PDF bez warstwy tekstowej: ${pdf.strony_bez_tekstu.join(", ")} z ${pdf.liczba_stron} — ich treści brak w wyniku (znacznik „[strona N: brak warstwy tekstowej]”); brak artykułu lub frazy NIE dowodzi, że ich nie ma — sprawdź PDF.`);
+    }
+    if (ocr.poprawki.length) {
+      result.numery_art_ocr = ocr.poprawki;
+      uw.push(`⚠️ Skan z warstwą OCR: poprawiono numery artykułów (${ocr.poprawki.slice(0, 12).join(", ")}${ocr.poprawki.length > 12 ? ", …" : ""}) — przed powołaniem porównaj z PDF.`);
+    }
     if (obw.nie_obejmuje) result.tj_nie_obejmuje = obw.nie_obejmuje.slice(0, 4000);
     if (tj && !jestObwieszczeniemTj) {
       result.zmiany_po_tj = await zmianyPoTj(eli, tj);
@@ -426,7 +467,9 @@ server.registerTool("isap_tekst", {
     }
     if (artykul) {
       const art = artykulObowiazujacy(obw, artykul);
-      if (!art) return tekstOdp({ status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
+      if (!art) return tekstOdp(pewnosc === "partial"
+        ? { status: "OUT_OF_SCOPE", ...baza, result, powod: `Brak „Art. ${normalizujNumerArt(artykul)}.” w odczytanym tekście, ale strony ${pdf.strony_bez_tekstu.join(", ")} nie mają warstwy tekstowej — sprawdź PDF.` }
+        : { status: "NOT_FOUND", ...baza, result, uwaga: `Brak „Art. ${normalizujNumerArt(artykul)}.” w tekście ${zrodlo.identyfikator}.` });
       result.artykul = normalizujNumerArt(artykul); result.tresc = art.tresc;
       if (Object.keys(art.odnosniki).length) result.odnosniki = art.odnosniki;
       if (art.brzmienia_przyszle) {
@@ -438,14 +481,16 @@ server.registerTool("isap_tekst", {
     } else if (szukaj) {
       const fr = []; let i = -1; const low = obw.zalacznik.toLowerCase(), q = szukaj.toLowerCase();
       while (fr.length < 5 && (i = low.indexOf(q, i + 1)) >= 0) fr.push({ pozycja: i, fragment: obw.zalacznik.slice(Math.max(0, i - 400), i + 400) });
-      if (!fr.length) return tekstOdp({ status: "NOT_FOUND", ...baza, result, uwaga: `Fraza „${szukaj}” nie występuje w tekście.` });
+      if (!fr.length) return tekstOdp(pewnosc === "partial"
+        ? { status: "OUT_OF_SCOPE", ...baza, result, powod: `Fraza „${szukaj}” nie występuje w odczytanym tekście, ale strony ${pdf.strony_bez_tekstu.join(", ")} nie mają warstwy tekstowej — sprawdź PDF.` }
+        : { status: "NOT_FOUND", ...baza, result, uwaga: `Fraza „${szukaj}” nie występuje w tekście.` });
       result.fragmenty = fr;
     } else {
       const o = offset ?? 0; result.tresc = obw.zalacznik.slice(o, o + 20000);
       result.tresc_offset = o; result.tresc_dlugosc = obw.zalacznik.length;
     }
     uw.push("Tekst urzędowy integralny — nie parafrazuj; indeksy górne w zapisie Art. N[k].");
-    return tekstOdp({ status: "FOUND", ...baza, result, uwaga: uw.join(" "), retrieved_at: new Date().toISOString(), confidence: "deterministic" });
+    return tekstOdp({ status: "FOUND", ...baza, result, uwaga: uw.join(" "), retrieved_at: new Date().toISOString(), confidence: pewnosc });
   } catch (err) {
     return tekstOdp({ status: "ERROR", ...baza, detail: String(err?.message ?? err), retrieved_at: new Date().toISOString() });
   }
