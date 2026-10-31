@@ -216,7 +216,7 @@ KROK 5 — Czy czyn popełniono ZA GRANICĄ przez obywatela polskiego?
 
 ## 8. LITERATURA I ŹRÓDŁA (re-ver F-135: 2026-08-28)
 
-- **RZĄD 1 — ELI / API Sejmu:** Kodeks wykroczeń, t.j. Dz.U. 2025 poz. 734 — art. 119, 120, 122 i 124 potwierdzone z progiem 800 zł; art. 24 § 1 potwierdza ogólną grzywnę 20–5000 zł. Re-ver 2026-08-28.
+- **RZĄD 1 — ELI / API Sejmu:** Kodeks wykroczeń, **aktualny t.j. Dz.U. 2026 poz. 1372** (obwieszczenie z 2.10.2026; po t.j. brak zmian) — art. 119, 120 i 122 z progiem 800 zł oraz art. 24 § 1 (grzywna 20–5000 zł) potwierdzone 2026-10-31. Wcześniej: t.j. Dz.U. 2025 poz. 734, re-ver 2026-08-28 (art. 119, 120, 122, 124). Cytuj t.j. 2026 poz. 1372.
 - **RZĄD 1 — ELI:** tekst jednolity Dz.U. 2023 poz. 2119 odnotowuje, że zmiany art. 119/120/122/124 do 800 zł weszły w życie 1.10.2023.
 - e-prawnik.pl — komentarz do art. 119-131 (⚠️ część danych na tym portalu
   ODZWIERCIEDLA STARY próg 250 zł/75 zł sprzed podwyżki z 1.10.2023 —

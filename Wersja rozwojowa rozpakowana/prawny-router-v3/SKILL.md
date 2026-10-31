@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.73"
+version: "3.74"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -286,6 +286,11 @@ KROK 3A → [ŚLAD ROUTINGU — OBOWIĄZKOWY]
           pominięciem karanym jako uchybienie (patrz F-113 zakres (a)).
           `ROUTER-WCZYTANY: TAK` wymaga faktycznego odczytu w tej turze;
           kontrolę antyfasadową wykonaj z `references/SELF-CHECK.md`.
+          📍 MIEJSCE W ODPOWIEDZI: blok sporządzasz po KROK 3, ale w GOTOWEJ
+          odpowiedzi umieszczasz go PO treści merytorycznej, przed zastrzeżeniem
+          (disclaimer pozostaje ostatni) — odpowiedź zaczyna się od konkluzji
+          (KONKLUZJA-GATE). Wyjątek: nagłówek ⛔ TRYB ZDEGRADOWANY zostaje na
+          początku. Opis wykonanych bramek: zwięźle, w tym samym końcowym bloku.
 KROK 4  → Wykonaj analizę / zbierz dane
 KROK 5  → Sprawdź TYP WYJŚCIA → SEKWENCJA END-TO-END → poniżej
 KROK 5B → [EXPORT KONTEKSTU] → po KROK 5 jeśli sesja zawierała KROK 3B
@@ -593,6 +598,12 @@ Bramki blokujące:
 - VER-GRAIN i właściwe reguły warunkowe wykonane;
 - aktywne checkpointy, PRE-W2, RPK i ST-FINAL zamknięte;
 - przy ≥2 datach w stanie faktycznym blok OŚ-GATE jest WIDOCZNY w odpowiedzi przed konkluzją;
+- KONKLUZJA-GATE: pierwsze zdanie odpowiada wprost na pytanie — przy pytaniu zamkniętym
+  („czy…”, „czy można…”, „czy przysługuje…”, „czy obejmuje…”) zaczyna się od „Tak”, „Nie”
+  albo „Tak, ale…/Nie, chyba że…” z podstawą; „to zależy” tylko z odpowiedzią dla wariantu
+  typowego i jednym zdaniem, od jakiego faktu zależy zmiana; konkluzja warunkowa (nazwana),
+  gdy rozstrzyga wykładnia lub orzecznictwo, a nie sam przepis; skutek prawny (nieważność,
+  bezskuteczność, wygaśnięcie) tylko w brzmieniu przepisu;
 - disclaimer jest ostatnim elementem odpowiedzi prawnej.
 
 Niespełnienie któregokolwiek punktu → STOP; wykonaj brakujący krok albo uruchom

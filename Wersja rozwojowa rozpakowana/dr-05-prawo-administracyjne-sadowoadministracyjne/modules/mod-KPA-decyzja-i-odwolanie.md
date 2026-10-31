@@ -187,6 +187,23 @@ wpia.uwm.edu.pl [materiał akademicki].
 
 ---
 
+### Ostateczność a prawomocność decyzji — pytanie „klauzula ostateczności czy prawomocności?”
+
+✅ [VER: ELI DU/2025/1691 (KPA t.j.), art. 16 — odczyt 2026-10-31; DU/2026/143 (PPSA t.j.), art. 52 § 3 — odczyt 2026-10-31, RZĄD 1]
+
+- **art. 16 § 1 KPA:** decyzja, od której nie służy odwołanie ani wniosek o ponowne rozpatrzenie → **ostateczna**.
+- **art. 16 § 3 KPA:** decyzja ostateczna, której nie można zaskarżyć do sądu → **prawomocna**.
+- **art. 52 § 3 PPSA:** gdy stronie przysługuje wniosek o ponowne rozpatrzenie sprawy (decyzje ministrów, organów
+  centralnych), strona może wnieść skargę do WSA **bez** skorzystania z tego wniosku (wyjątek: minister spraw
+  zagranicznych w sprawach z ustawy o cudzoziemcach i konsul).
+- ⛔ **„Klauzula prawomocności” to instytucja KPC (art. 363–364)** — sąd stwierdza prawomocność orzeczenia sądu.
+  Decyzja administracyjna nie dostaje klauzuli z KPC; organ może natomiast **stwierdzić ostateczność, a po upływie
+  terminu do skargi (albo po prawomocnym wyroku sądu administracyjnego) — prawomocność**, w praktyce adnotacją lub
+  **zaświadczeniem** (art. 217 KPA). Konkluzja domyślna przy pytaniu „ostateczność czy prawomocność?”: najpierw
+  ostateczność (KPA), a **prawomocność — po upływie terminu do skargi do WSA lub po prawomocnym wyroku**; odpowiedz
+  wprost, które pojęcie dotyczy jakiego momentu, zamiast wybierać tylko jedno.
+
+
 ## 3e. ⭐⭐⭐ POSTANOWIENIA I ZAŻALENIA (art. 123-126, 141-144 KPA) —
 dodano 2026-08-12, na żądanie użytkownika — dotąd CAŁKOWICIE
 nieobecne, mimo że MODUŁ WIELOKROTNIE odsyła do "postanowień" w

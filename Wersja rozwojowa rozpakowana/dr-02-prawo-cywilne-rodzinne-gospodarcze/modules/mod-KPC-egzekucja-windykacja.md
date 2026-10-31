@@ -178,6 +178,25 @@ Termin na wniesienie pozwu po udzieleniu zabezpieczenia: 2 tygodnie (art. 733 KP
 ⚠️ Weryfikuj art. 730–757 KPC w ELI (RZĄD 1).
 ```
 
+### Nakaz zapłaty jako tytuł zabezpieczenia a wstrzymanie jego wykonania (art. 492 KPC)
+
+Brzmienie: ✅ [VER: ELI DU/2026/468 (KPC t.j.), art. 492 i 820 — odczyt 2026-10-31, RZĄD 1]
+
+| Jednostka | Treść | Skutek |
+|---|---|---|
+| art. 492 § 1 | nakaz zapłaty **z chwilą wydania** stanowi **tytuł zabezpieczenia**, wykonalny bez klauzuli | zabezpieczenie (np. zajęcie rachunku) bez odrębnego postanowienia |
+| art. 492 § 2 | powód wskazuje sposób zabezpieczenia; **sąd na wniosek pozwanego może ograniczyć zabezpieczenie**; art. 742 odpowiednio | ochrona pozwanego przed nadmiernym zabezpieczeniem |
+| art. 492 § 3 | nakaz z **weksla lub czeku** staje się **natychmiast wykonalny** po upływie terminu do zaspokojenia; po wniesieniu zarzutów sąd **na wniosek pozwanego może wstrzymać wykonanie nakazu** | dotyczy wykonalności (egzekucji) z § 3 |
+| art. 820 § 2 | na wniosek dłużnika postępowanie **egzekucyjne** ulega zawieszeniu, jeżeli sąd wstrzymał wykonanie tytułu | wstrzymanie działa w egzekucji |
+
+⛔ **Pytanie „czy wstrzymanie wykonania nakazu wekslowego blokuje zabezpieczenie na podstawie nakazu?”**
+→ **Konkluzja domyślna: NIE.** Wstrzymanie z § 3 odnosi się do natychmiastowej wykonalności (egzekucji), a § 1 jest
+odrębnym skutkiem — nakaz pozostaje tytułem zabezpieczenia. Ochroną pozwanego przed zabezpieczeniem jest **wniosek
+o ograniczenie zabezpieczenia (art. 492 § 2)** oraz art. 742, a nie samo wstrzymanie wykonania. [wniosek z wykładni
+systemowej § 1–3 i art. 820 § 2; orzecznictwo do sprawdzenia narzędziami — nie podawaj sygnatur z pamięci]
+→ Odpowiedz wprost „nie” z tą podstawą; dopiero potem zastrzeżenie: jeżeli postanowienie o wstrzymaniu wyraźnie
+obejmuje też zabezpieczenie, rozstrzyga jego treść.
+
 ---
 
 ## 6. POSTĘPOWANIE EGZEKUCYJNE

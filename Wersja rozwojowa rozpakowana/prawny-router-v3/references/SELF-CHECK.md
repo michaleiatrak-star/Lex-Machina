@@ -93,6 +93,13 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
 □ [KROK 3A ŚLAD ROUTINGU] Wypisałem blok TRYB/PRIMARY/SECONDARY/ODRZUCONE/
   PROFIL/ODROCZONE/WERSJA ROUTERA/ROUTER-WCZYTANY zaraz po KROK 3, przed KROK 4? Jeśli
   ROUTER-WCZYTANY: NIE dla PRIMARY → dodałem nagłówek ⛔ TRYB ZDEGRADOWANY?
+□ [KONKLUZJA-GATE] Pierwsze zdanie odpowiada wprost na pytanie? Pytanie zamknięte →
+  „Tak” / „Nie” / „Tak, ale…” / „Nie, chyba że…” + podstawa (nie samo „to zależy” —
+  podaj odpowiedź dla wariantu typowego i fakt, od którego zależy zmiana)? Konkluzja
+  kategoryczna tylko, gdy rozstrzyga brzmienie przepisu; gdy rozstrzyga wykładnia
+  (np. art. 65 KC) lub orzecznictwo — warunkowa i nazwana? Nieważność / bezskuteczność
+  / wygaśnięcie tylko, gdy tak mówi przepis? Blok KROK 3A i opis bramek PO treści,
+  przed zastrzeżeniem?
 □ [ŚLAD ROUTINGU] ⛔ KONTROLA NA WYJŚCIU — nie polegaj wyłącznie na własnej
   deklaracji z KROKU 3A:
   czy GOTOWA odpowiedź zawiera treść charakterystyczną dla PRIMARY-skilla
