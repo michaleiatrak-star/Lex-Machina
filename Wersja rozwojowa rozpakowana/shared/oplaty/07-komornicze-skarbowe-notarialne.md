@@ -96,7 +96,7 @@ przed kosztami wykładanymi, nie przed opłatą ściąganą z wyegzekwowanej kwo
 ## 6c. OPŁATA SKARBOWA — nie jest opłatą sądową
 
 **Akt:** ustawa z 16.11.2006 r. o opłacie skarbowej, t.j.
-**`Dz.U. 2025 poz. 1154`** ✅ [VER] RZĄD 1 2026-09-12c — status ELI
+**`Dz.U. 2026 poz. 1395`** ✅ [VER] RZĄD 1 2026-10-31 (t.j. z 9.10.2026; cz. IV: 17 zł od pełnomocnictwa bez zmian; poprzednio t.j. 2025 poz. 1154) — status ELI
 `obowiązujący`.
 
 ⛔ **Przedmiot opłaty jest wąski i łatwo go rozciągnąć za daleko.** Podlega jej

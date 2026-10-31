@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.47 (2026-10-31, AUDYT-2026-10-31): MOD-OPLATY: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395 (ELI RZĄD 1).
 - 5.46 (2026-10-20, LEXAGENTO-P1): MOD-OPLATY: pełna ścieżka modułu monopole
 - 5.45 (2026-10-17c, AUDYT-2026-10-17c): Sąd właściwy: pismo do sądu bez sądu w aktach — obowiązkowo DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych; sąd i adres tylko z court_for_address albo z bloku SĄD SPRAWY.
 - 5.44 (2026-10-16a, AUDYT-2026-10-16a): W2.1 — `shared/MOD-DLUGIE-PISMO.md`: pierwszy projekt ponad ok. 10 stron kończy blok linią `=== CIĄG DALSZY ===` (dalszy ciąg w tym samym kroku); kroki W3 na długim projekcie zwracają tylko `=== ZMIANA SEKCJI: … ===`; blok bez linii końca = ucięty, wersja nie zapisana.

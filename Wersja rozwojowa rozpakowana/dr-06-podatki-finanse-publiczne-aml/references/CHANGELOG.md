@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.9 (2026-10-31, AUDYT-2026-10-31): Opłata skarbowa — nowy t.j. Dz.U. 2026 poz. 1395 (ELI RZĄD 1; obejmuje 2025/1795, 1847, 2026/846, 875, 912, 1206): mod-ustawa-oplata-skarbowa (art. 9 ust. 2a–2c — zwrot bez decyzji w 2 mies. od 1.10.2026 z przepisem przejściowym; ⏳ art. 1 ust. 3 od 1.01.2027), MAPA-AKTOW, SKILL.md.
 - 3.99.8 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: PIT - odpłatne zbycie mieszkania/nieruchomości (wcześniej dobierało VAT/akcyzę)
 - 3.99.7 (2026-10-20, LEXAGENTO-P1): MAPA-POKRYCIA: pełna ścieżka modułu KKS
 - 3.99.6 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
