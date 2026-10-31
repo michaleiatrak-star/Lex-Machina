@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.50 (2026-10-31, BENCHMARK-02): MOD-WALIDACJA_v2 i terminy.md: art. 130² KPC — pismo profesjonalnego pełnomocnika nieopłacone → zwrot bez wezwania, tydzień na dopłatę (benchmark 02 P06; ELI DU/2026/468).
 - 3.99.49 (2026-10-31, AUDYT-2026-10-31): oplaty/07 i SKILL.md: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395 (cz. IV: 17 zł bez zmian; ELI RZĄD 1).
 - 3.99.48 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA, wiersz `isap_tekst`: parametr `na_dzien`, `confidence: partial` (nierozstrzygniete, strony_bez_tekstu) = nie podawaj jednego brzmienia, OUT_OF_SCOPE + `jeszcze_nie_obowiazuje`, `na_dzien` sprzed stanu prawnego t.j., numer z literą w indeksie ≠ numer bazowy. agents/weryfikator-isap: te same reguły przy W3.1.
 - 3.99.47 (2026-10-22, AUDYT-2026-10-22): terminy.md: karalność wykroczeń art. 45 §1 KW — re-ver na t.j. Dz.U. 2026 poz. 1372 (bez zmian).

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.32 (2026-10-31, BENCHMARK-02): mod-AI-Act-framework: deepfake (art. 3 pkt 60, art. 50 ust. 4) i wytyczne KE jako soft law (art. 96 ust. 1 lit. d; Cellar PL) — benchmark 02 P08. mod-PrAut-wlasnosc-intelektualna-IP: klauzula „wszelkie pola eksploatacji” — konkluzja warunkowa z art. 65 § 2 KC; art. 41 ust. 4 bez „nieważności” — P09/P10.
 - 3.31 (2026-10-31, AUDYT-2026-10-31): MAPA-AKTOW: u.o.d.o. — zmiana po t.j. 2026/1003 art. 123 (art. 59a, od 11.08.2026; ELI RZĄD 1).
 - 3.30 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.29 (2026-10-20, AUDYT-2026-10-20c): DU/2026/1296 (implementacja DSA, w mocy 6.11.2026): mod-ustawa-uslugi-elektroniczne (uchylony rozdz. 3 — art. 12–15, koordynator Prezes UKE, organy, skarga, sąd okręgowy, kary), mod-DSA (status: ustawa uchwalona i ogłoszona), MAPA-AKTOW (u.ś.u.d.e., PrAut, PWP).

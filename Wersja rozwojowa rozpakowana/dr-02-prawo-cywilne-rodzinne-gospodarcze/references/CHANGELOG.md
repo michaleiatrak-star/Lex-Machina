@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.104 (2026-10-31, BENCHMARK-02): mod-KPC-egzekucja-windykacja: art. 492 § 1–3 i art. 820 § 2 KPC — wstrzymanie wykonania nakazu wekslowego a tytuł zabezpieczenia, konkluzja domyślna „nie” (benchmark 02 P13; ELI DU/2026/468).
 - 3.103 (2026-10-31, AUDYT-2026-10-31): kro-rodzinne część 07: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395.
 - 3.102 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KPC egzekucja (skarga na czynności komornika), KC current-state (szkoda na osobie, zadośćuczynienie) - dobór modułu aktu
 - 3.101 (2026-10-20, LEXAGENTO-P1): MAPA-POKRYCIA: pełna ścieżka modułu UGN

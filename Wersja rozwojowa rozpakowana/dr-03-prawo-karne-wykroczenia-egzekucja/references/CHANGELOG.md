@@ -1,5 +1,6 @@
 # CHANGELOG — dr-03-prawo-karne-wykroczenia-egzekucja
 
+- 3.74 (2026-10-31, BENCHMARK-02): KW — aktualny t.j. Dz.U. 2026 poz. 1372 (benchmark 02 P01): re-ver art. 19, 24 § 1a, 87 § 1, 119, 120, 122 (800 zł) dopisane obok historycznych wpisów 2025 poz. 734.
 - 3.73 (2026-10-22, AUDYT-2026-10-22): KW — nowy t.j. Dz.U. 2026 poz. 1372 (obwieszczenie 2.10.2026, ogł. 21.10.2026, stan 23.09.2026; ujmuje 2025/1676, 1814, 1818, 1872; ELI: brak aktów zmieniających po t.j.). Treść modułów bez zmian merytorycznych — wszystkie cztery nowelizacje były już ujęte; kontrola text.pdf: art. 24 §1a, 45, 86c, 92a §2, 119, 120 zgodne. Zmienione cytowania bazy t.j. w MAPA-AKTOW, SKILL.md, mod-KW-*, mod-grzywny, mod-PRD-*, kwalifikator part-08, mod-KK-art255b; stemple VER historyczne pozostawione.
 - 3.72 (2026-10-20, LEXAGENTO-P1): mod-KPK-mediacja: pełne ścieżki modułów DR-12
 - 3.71 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości; KOREKTA: notatki zmian z 2026-07-15 i 2026-08-04 były zapisane jako nagłówki „##” i rozcinały rejestr modułów — teraz cytat

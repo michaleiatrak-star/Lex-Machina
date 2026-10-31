@@ -53,6 +53,15 @@ Twarde reguły wejścia:
 
 1. Ustal, czy mamy przeniesienie praw, licencję wyłączną czy niewyłączną.
 2. Umowa/licencja obejmuje pola eksploatacji wyraźnie w niej wymienione; nie zakładaj automatycznego przeniesienia „wszystkich praw”.
+   - **Klauzula ogólna („na wszelkie / wszystkie pola eksploatacji”)**: punkt wyjścia — nie spełnia art. 41 ust. 2 PA, pola trzeba wymienić.
+     Ale **konkluzja warunkowa, nie kategoryczna**: zakres przeniesienia ustala się także w drodze **wykładni umowy (art. 65 § 2 KC —
+     zgodny zamiar stron i cel umowy)**, więc w sporze sąd może odczytać, jakie pola strony faktycznie objęły (np. z opisu zlecenia,
+     przeznaczenia materiałów). Pisz: „sama klauzula ogólna nie wystarcza; zakres może jednak wynikać z wykładni całej umowy —
+     dla pewności wymień pola”. Orzecznictwo SN w tej kwestii — tylko po weryfikacji narzędziami.
+   - **Skutek prawny wyłącznie z brzmienia przepisu**: art. 41 ust. 3 mówi o **nieważności** (umowa co do wszystkich przyszłych utworów
+     twórcy), a art. 41 ust. 4 tylko, że umowa **„może dotyczyć tylko pól eksploatacji znanych w chwili jej zawarcia”** — nie nazywaj tego
+     nieważnością ani bezskutecznością, napisz, że pól nieznanych umowa nie obejmuje.
+   ✅ [VER: ELI DU/2025/24 (PA t.j.), art. 41 ust. 2–4; DU/2026/795 (KC t.j.), art. 65 — odczyt 2026-10-31, RZĄD 1]
 3. Kontroluj formę wymaganą ustawą dla danego rodzaju czynności.
 4. Aktualny tekst ustawy zawiera obowiązki dotyczące godziwego i odpowiedniego wynagrodzenia oraz mechanizmy korekty niewspółmiernie niskiego wynagrodzenia; przed zastosowaniem konkretnego roszczenia pobierz aktualne brzmienie właściwych artykułów z ELI.
 5. Przy długotrwałej eksploatacji kontroluj ustawowe obowiązki informacyjne nabywcy/licencjobiorcy wobec twórcy, jeżeli znajdują zastosowanie.
