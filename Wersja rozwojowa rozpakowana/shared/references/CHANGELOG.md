@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.49 (2026-10-31, AUDYT-2026-10-31): oplaty/07 i SKILL.md: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395 (cz. IV: 17 zł bez zmian; ELI RZĄD 1).
 - 3.99.48 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA, wiersz `isap_tekst`: parametr `na_dzien`, `confidence: partial` (nierozstrzygniete, strony_bez_tekstu) = nie podawaj jednego brzmienia, OUT_OF_SCOPE + `jeszcze_nie_obowiazuje`, `na_dzien` sprzed stanu prawnego t.j., numer z literą w indeksie ≠ numer bazowy. agents/weryfikator-isap: te same reguły przy W3.1.
 - 3.99.47 (2026-10-22, AUDYT-2026-10-22): terminy.md: karalność wykroczeń art. 45 §1 KW — re-ver na t.j. Dz.U. 2026 poz. 1372 (bez zmian).
 - 3.99.46 (2026-10-20, LEXAGENTO-P1): UNIVERSAL-RUNTIME-ADAPTER 1.2: kontrakt query_context (skrót aktu); walidator_cytowan: ELI aktów bazowych kodeksów -> skrót, api.sejm.gov.pl jako źródło urzędowe; pełne ścieżki modułów zamiast dr-NN/.../

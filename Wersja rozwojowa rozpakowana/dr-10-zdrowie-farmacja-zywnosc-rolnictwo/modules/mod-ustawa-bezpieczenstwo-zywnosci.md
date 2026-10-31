@@ -11,8 +11,14 @@
 > zachowując wszystkie unikalne elementy obu wersji.
 
 ## Akt prawny / źródło
-- Ustawa o bezpieczeństwie żywności i żywienia — Dz.U. 2023 poz. 1448 (t.j.)
-  ✅ [VER: isap.sejm.gov.pl, 2026-05-31]
+- Ustawa o bezpieczeństwie żywności i żywienia — Dz.U. 2026 poz. 1399 (t.j., obwieszczenie z 2.10.2026,
+  stan prawny na 28.09.2026; obejmuje zmiany Dz.U. 2025 poz. 1424 i 2026 poz. 1123); po t.j. brak zmian
+  ✅ [VER: ELI DU/2026/1399, RZĄD 1, 2026-10-31] (poprzednio t.j. Dz.U. 2023 poz. 1448)
+  - **Rejestr zakładów — zmiana danych (od 5.11.2025, Dz.U. 2025 poz. 1424):** zmiana danych podmiotu wpisanego
+    do rejestru zakładów → wniosek o zmianę, pisemnie, na urzędowym wzorze, **w 30 dni od zmiany**; zmiana podmiotu
+    prowadzącego zakład → wniosek nowego podmiotu w 30 dni od przejęcia zakładu (art. 64 ust. 1a–1b).
+  - ⏳ **Od 1.01.2028** (Dz.U. 2026 poz. 1123): kara pieniężna za stosowanie w żywieniu zbiorowym dzieci w żłobku
+    lub klubie dziecięcym środków spożywczych niespełniających wymagań ustawy o opiece nad dziećmi do lat 3 (art. 103 ust. 1 pkt 11).
 - Rozporządzenie (WE) nr 178/2002 — ogólne prawo żywnościowe (obowiązuje bezpośrednio)
   ✅ [VER: eur-lex.europa.eu, 2026-05-31]
 - Rozporządzenie (WE) nr 852/2004 — higiena środków spożywczych
@@ -920,6 +926,6 @@ rynekzdrowia.pl, portalspozywczy.pl [październik 2025], gov.pl/psse
 
 ## Weryfikacja online
 ```
-web_search: "ustawa bezpieczeństwo żywności żywienia Dz.U. 2023 poz. 1448 isap"
+web_search: "ustawa bezpieczeństwo żywności żywienia Dz.U. 2026 poz. 1399 isap"
 web_search: "HACCP znakowanie żywności alergeny 2025 wymagania"
 ```

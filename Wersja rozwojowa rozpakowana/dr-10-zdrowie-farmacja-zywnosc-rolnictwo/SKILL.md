@@ -1,6 +1,6 @@
 ---
 name: dr-10-zdrowie-farmacja-zywnosc-rolnictwo
-version: "3.57"
+version: "3.58"
 description: "Zdrowie, farmacja, żywność i rolnictwo: działalność lecznicza, prawa pacjenta, produkty lecznicze, żywność, weterynaria i regulacje sektora rolnego."
 dependencies:
   requires:
@@ -198,7 +198,7 @@ WYROBY MEDYCZNE I CHEMIA:
 
 ŻYWNOŚĆ, WETERYNARIA, ROLNICTWO:
   [✓] OK    mod-ustawa-rolne-zywnosc-weterynaria
-              (bezpieczeństwo żywności Dz.U. 2023 poz. 1448 + inspekcja weterynaryjna
+              (bezpieczeństwo żywności Dz.U. 2026 poz. 1399 + inspekcja weterynaryjna
                Dz.U. 2024 poz. 12 + ARiMR/PROW + IJHARS)
   [✓] OK    mod-ustawa-bezpieczenstwo-zywnosci
   [✓] NOWY  mod-ustawa-hodowla-zdrowie-zwierzat

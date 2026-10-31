@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.74 (2026-10-31, AUDYT-2026-10-31): ROUTING-MAP: nowe t.j. — opłata skarbowa 2026/1395, Prawo lotnicze 2026/1407, bezpieczeństwo żywności 2026/1399 (ELI RZĄD 1).
 - 6.73 (2026-10-22, AUDYT-2026-10-22): t.j. KW Dz.U. 2026 poz. 1372 (stan 23.09.2026; zastąpił 2025/734) w wierszach KW ROUTING-MAP; t.j. PSWN Dz.U. 2026 poz. 1362 (stan 10.09.2026; zastąpił 2024/1571) w wierszach oświata/uczelnie.
 - 6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
 - 6.71 (2026-10-20, LEXAGENTO-P2): routing błyskawiczny: skarga na komornika -> DR-02 (art. 767 KPC, DR-12 drugi); orzecznictwo SN / Sądu Najwyższego -> DR-16 jako druga dziedzina po sprawie

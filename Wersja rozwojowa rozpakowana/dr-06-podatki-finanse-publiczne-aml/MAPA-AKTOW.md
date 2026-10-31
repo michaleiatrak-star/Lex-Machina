@@ -39,7 +39,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Unijny kodeks celny (UCC) / taryfa celna | rozporządzenie (UE) nr 952/2013 + właściwa nomenklatura CN | `mod-UCC-clo-taryfa-celna` | ✅ aktywny; EUR-Lex fresh gate |
 | Kontrola środków pieniężnych / prawo dewizowe / podróżni | rozporządzenie (UE) 2018/1672 + Dz.U. 2024 poz. 1131 ze zm. + akty właściwe | `mod-clo-podroznych-limity-towary-zabronione` | ✅ aktywny; fresh gate |
 | Ustawa o podatkach i opłatach lokalnych — podatek od nieruchomości / opłata miejscowa / opłata uzdrowiskowa / opłata targowa | Dz.U. 2025 poz. 707 t.j. ze zm.; ⚡ zm. po t.j.: **Dz.U. 2026 poz. 1354** (ustawa z 18.09.2026, ogł. 19.10.2026; art. 1 — nowy art. 17 u.p.o.l., opłata miejscowa i uzdrowiskowa — od 1.01.2027; art. 3 — PCC art. 9 pkt 6, próg 3000 zł — od 3.11.2026) ✅ [VER: ELI DU/2026/1354 text.pdf, RZĄD 1, 2026-10-20] | `mod-ustawa-podatek-nieruchomosci-i-lokalne` | ✅ aktywny |
-| Ustawa o opłacie skarbowej | Dz.U. 2025 poz. 1154 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-oplata-skarbowa` | ✅ aktywny (od 2026-09-16) |
+| Ustawa o opłacie skarbowej | Dz.U. 2026 poz. 1395 t.j. (✅ RZĄD 1 2026-10-31) | `mod-ustawa-oplata-skarbowa` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o podatku od wydobycia niektórych kopalin | Dz.U. 2026 poz. 454 t.j. (✅ RZĄD 1 2026-09-16) | `mod-ustawa-podatek-wydobycie-kopalin` | ✅ aktywny (od 2026-09-16) |
 | Ustawa o ryczałcie od przychodów ewidencjonowanych | Dz.U. 2025 poz. 843 t.j. ze zm. | `mod-ustawa-ryczalt-przychody` | ✅ aktywny |
 | Ustawa o nadzorze nad rynkiem finansowym | Dz.U. 2026 poz. 935 t.j. ze zm. | `mod-prawo-bankowe-KNF-BFG` | ✅ aktywny |

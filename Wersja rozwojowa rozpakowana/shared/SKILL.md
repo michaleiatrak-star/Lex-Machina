@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.48"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.49"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -100,7 +100,7 @@ Nie jest samodzielnym skillem — pełni rolę biblioteki referencji.
 | `oplaty/04-wartosci-powtarzalne-kotwice.md` | Sekcja 4 z 4a–4g. ⛔ **DOKTRYNA „formuła zamiast procentu"** — wartości zakotwiczonych w stopach NBP NIE WOLNO utrwalać jako procentu. Odsetki cywilne, handlowe, podatkowe i ZUS; stopy składek; skala PIT; **trzy kotwice** (stopy NBP, minimalne wynagrodzenie, przeciętne wynagrodzenie w sektorze przedsiębiorstw). |
 | `oplaty/05-sprawy-karne.md` | Sekcje 5, 6e. Ustawa z 23.06.1973 (`Dz.U. 2023 poz. 123`) — ⛔ pułapka dwóch brzmień art. 2 ust. 1 pkt 6 (od 14.03.2023). Koszty procesu z KPK. ⛔ Zryczałtowana równowartość wydatków: **1000 zł od 1.07.2025** (kwota sprzed tej daty jest NIEAKTUALNA). |
 | `oplaty/06-administracyjne-wieczystoksiegowe-KIO.md` | Sekcje 6, 6a. Wpis do WSA (`Dz.U. 2021 poz. 535`) — procent z podłogą, nie ryczałt. Postępowanie wieczystoksięgowe (art. 42–48 KSCU). Skarga na KIO (art. 34 — trzykrotność wpisu z PZP). |
-| `oplaty/07-komornicze-skarbowe-notarialne.md` | Sekcje 6b, 6c, 6d. Koszty komornicze (`Dz.U. 2024 poz. 377`) — ⛔ art. 47: zwolnienie NIE zwalnia z opłaty egzekucyjnej. Opłata skarbowa (`Dz.U. 2025 poz. 1154`) — 17 zł od KAŻDEGO stosunku pełnomocnictwa. Taksa notarialna (`Dz.U. 2024 poz. 1566`) — stawki MAKSYMALNE, nie minimalne. |
+| `oplaty/07-komornicze-skarbowe-notarialne.md` | Sekcje 6b, 6c, 6d. Koszty komornicze (`Dz.U. 2024 poz. 377`) — ⛔ art. 47: zwolnienie NIE zwalnia z opłaty egzekucyjnej. Opłata skarbowa (`Dz.U. 2026 poz. 1395`) — 17 zł od KAŻDEGO stosunku pełnomocnictwa. Taksa notarialna (`Dz.U. 2024 poz. 1566`) — stawki MAKSYMALNE, nie minimalne. |
 | `PRAWO-HARDGATE.md` | ⛔ Globalny zakaz cytowania prawa/orzeczeń z pamięci — RDZEŃ, wczytaj przed każdym przepisem (zasada absolutna, PERMANENT GATE, hierarchia statusów, ŹRÓDŁO-0, KROK 2B/2C). Podzielony 2026-08-23h (F-111: 967 → 501 l.) i 2026-09-10b (F-180: 704 → 510 l., gałęzie warunkowe wydzielone niżej). |
 | `PRAWO-HARDGATE-BLOKADA.md` | ⛔ Gałąź niedostępnego źródła RZĘDU 1 — BRAMKA ANTY-FASADOWA + KOTWICA URZĘDOWA. **Wyzwalacz:** B-1/B-2 zwrócił blokadę i kanał kodu też zawiódł. Bez tego odczytu znacznik 🟨 i ⚠️ jest nieważny. |
 | `PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | Ścieżka B-L. **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego. Aktów tych NIE MA w ELI Kancelarii Sejmu — weryfikacja tam zwraca fałszywy negatyw. |
