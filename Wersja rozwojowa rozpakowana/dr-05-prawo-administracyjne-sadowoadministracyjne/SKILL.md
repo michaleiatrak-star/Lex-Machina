@@ -267,6 +267,13 @@ DR-05 zawiera RÓWNIEŻ akty szczegółowe prawa administracyjnego
 materialnego i procesowego (pozostałe moduły powyżej).
 ```
 
+## ⛔ Pułapki (sprawdź zawsze, gdy pytanie ich dotyczy)
+
+- **„Ostateczność czy prawomocność?” przy decyzji zaskarżalnej do WSA (np. zezwolenie ministra):** odpowiedź —
+  **prawomocność** (art. 16 § 3 KPA: po upływie terminu do skargi albo po prawomocnym wyroku), ostateczność to etap
+  wcześniejszy; skarga bez wniosku o ponowne rozpatrzenie — art. 52 § 3 PPSA; „klauzula prawomocności” to instytucja
+  KPC. Szczegóły: `modules/mod-KPA-decyzja-i-odwolanie.md`.
+
 ## Jak wywołać
 
 ```

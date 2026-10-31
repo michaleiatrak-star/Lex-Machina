@@ -610,6 +610,15 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
   [✓] OK    mod-ustawa-timeshare-zastaw-rejestrowy
 ```
 
+## ⛔ Pułapki procesowe (sprawdź zawsze, gdy pytanie ich dotyczy)
+
+- **Brak opłaty od pisma / środka zaskarżenia:** strona sama → wezwanie (art. 130 § 1 KPC); **adwokat, radca prawny,
+  rzecznik patentowy** i opłata stała albo stosunkowa od wskazanej WPS → **zwrot bez wezwania (art. 130² KPC)**,
+  tydzień na dopłatę ze skutkiem od pierwotnego wniesienia. Szczegóły: `shared/MOD-WALIDACJA_v2.md`.
+- **Nakaz zapłaty z weksla — wstrzymanie wykonania (art. 492 § 3 KPC) a zabezpieczenie (§ 1):** konkluzja domyślna
+  „nie obejmuje” — nakaz pozostaje tytułem zabezpieczenia; ochrona pozwanego: ograniczenie zabezpieczenia (§ 2),
+  art. 742; w egzekucji art. 820 § 2. Szczegóły: `modules/mod-KPC-egzekucja-windykacja.md`.
+
 ## Jak wywołać
 
 ```

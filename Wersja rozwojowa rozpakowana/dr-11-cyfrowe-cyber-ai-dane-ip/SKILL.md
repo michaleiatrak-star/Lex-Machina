@@ -181,6 +181,16 @@ USŁUGI CYFROWE I ELEKTRONICZNE:
 
 ---
 
+## ⛔ Pułapki (sprawdź zawsze, gdy pytanie ich dotyczy)
+
+- **Deepfake (AI Act art. 3 pkt 60):** dwa warunki łącznie — treść przypomina istniejącą osobę/przedmiot/miejsce/
+  zdarzenie **i** odbiorca mógłby ją uznać za autentyczną (test obiektywny, bez wymogu zamiaru); obowiązek ujawnienia
+  art. 50 ust. 4; zawsze wskaż wytyczne KE do art. 50 jako soft law (art. 96 ust. 1 lit. d). Szczegóły:
+  `modules/mod-AI-Act-framework.md`.
+- **„Przenosi na wszelkie pola eksploatacji”:** nie spełnia art. 41 ust. 2 PA, ale konkluzja **warunkowa** — zakres
+  może wynikać z wykładni umowy (art. 65 § 2 KC); art. 41 ust. 4 to nie „nieważność”. Szczegóły:
+  `modules/mod-PrAut-wlasnosc-intelektualna-IP.md`.
+
 ## Jak wywołać
 
 ```
