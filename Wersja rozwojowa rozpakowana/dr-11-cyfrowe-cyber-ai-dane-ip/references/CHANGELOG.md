@@ -1,5 +1,6 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.33 (2026-10-31, BENCHMARK-02-LIVE): SKILL.md: sekcja Pułapki (deepfake + wytyczne KE; pola eksploatacji + art. 65 § 2 KC).
 - 3.32 (2026-10-31, BENCHMARK-02): mod-AI-Act-framework: deepfake (art. 3 pkt 60, art. 50 ust. 4) i wytyczne KE jako soft law (art. 96 ust. 1 lit. d; Cellar PL) — benchmark 02 P08. mod-PrAut-wlasnosc-intelektualna-IP: klauzula „wszelkie pola eksploatacji” — konkluzja warunkowa z art. 65 § 2 KC; art. 41 ust. 4 bez „nieważności” — P09/P10.
 - 3.31 (2026-10-31, AUDYT-2026-10-31): MAPA-AKTOW: u.o.d.o. — zmiana po t.j. 2026/1003 art. 123 (art. 59a, od 11.08.2026; ELI RZĄD 1).
 - 3.30 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości

@@ -199,9 +199,14 @@ wpia.uwm.edu.pl [materiał akademicki].
 - ⛔ **„Klauzula prawomocności” to instytucja KPC (art. 363–364)** — sąd stwierdza prawomocność orzeczenia sądu.
   Decyzja administracyjna nie dostaje klauzuli z KPC; organ może natomiast **stwierdzić ostateczność, a po upływie
   terminu do skargi (albo po prawomocnym wyroku sądu administracyjnego) — prawomocność**, w praktyce adnotacją lub
-  **zaświadczeniem** (art. 217 KPA). Konkluzja domyślna przy pytaniu „ostateczność czy prawomocność?”: najpierw
-  ostateczność (KPA), a **prawomocność — po upływie terminu do skargi do WSA lub po prawomocnym wyroku**; odpowiedz
-  wprost, które pojęcie dotyczy jakiego momentu, zamiast wybierać tylko jedno.
+  **zaświadczeniem** (art. 217 KPA).
+- ⛔ **Konkluzja przy pytaniu „klauzula/stwierdzenie ostateczności czy prawomocności?” dla decyzji zaskarżalnej
+  do WSA (np. zezwolenie ministra): PRAWOMOCNOŚĆ** — decyzja ministra staje się ostateczna po upływie terminu na
+  wniosek o ponowne rozpatrzenie (lub po jego rozpoznaniu), ale ponieważ można ją zaskarżyć do WSA (art. 52 § 3
+  PPSA — także bez wniosku), **prawomocna** jest dopiero po bezskutecznym upływie terminu do skargi albo po
+  prawomocnym oddaleniu skargi (art. 16 § 3 KPA). To prawomocność potwierdza się zaświadczeniem organu, które
+  wydał decyzję (art. 217 KPA; wydawanie takich zaświadczeń przez organ — praktyka, nie wymóg przepisu — oznacz).
+  Nie zaczynaj odpowiedzi od „ostateczność” — wskaż ją jako etap wcześniejszy.
 
 
 ## 3e. ⭐⭐⭐ POSTANOWIENIA I ZAŻALENIA (art. 123-126, 141-144 KPA) —
