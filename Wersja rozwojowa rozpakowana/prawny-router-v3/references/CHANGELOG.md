@@ -1,5 +1,6 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.74 (2026-10-31, BENCHMARK-02): KONKLUZJA-GATE (benchmark 02: P04, P13, P09/P10): pierwsze zdanie odpowiada wprost — pytanie zamknięte → „Tak”/„Nie”/„Tak, ale…”; „zależy” tylko z wariantem typowym; konkluzja warunkowa nazwana, gdy rozstrzyga wykładnia; skutek prawny tylko w brzmieniu przepisu. Blok KROK 3A i opis bramek po treści, przed zastrzeżeniem (P01, A8). SKILL.md + references/SELF-CHECK.md; reguły dopisane, żadna nie usunięta.
 - 3.73 (2026-10-20, LEXAGENTO-P1): PROFIL-LEKKI: pełna ścieżka modułu kwalifikatora karnomaterialnego (skrót dr-03/.../ nie działał poza lex-runtime)
 - 3.72 (2026-10-20, AUDYT-2026-10-20a): „KROK 2 — ROUTING [1]–[11]” i „POKRYCIE DZIEDZINOWE” oznaczone `<!-- lex:wykonuje-aplikacja: ROUTING -->`. Aplikacja zastępuje je odnośnikiem tylko w trybie mechanicznym (skill wykonawczy wybrał użytkownik, dziedzinę wskazała aplikacja); w trybie automatycznym model dostaje je w całości. Rdzeń R-1…R-5, bramki KROK 5–6, reguły nadrzędne i SELF-CHECK bez zmian. Treść bez zmian.
 

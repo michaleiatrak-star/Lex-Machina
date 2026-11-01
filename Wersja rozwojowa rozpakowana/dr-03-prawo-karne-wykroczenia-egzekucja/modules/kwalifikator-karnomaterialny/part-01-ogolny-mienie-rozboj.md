@@ -193,7 +193,7 @@ CZY UŻYTO PRZEMOCY, GROŹBY LUB PODSTĘPU?
 
 ```
 JAKA JEST WARTOŚĆ SKRADZIONEGO MIENIA?
-⚠️ Aktualny próg 800 zł obowiązuje od 01.10.2023 — re-ver F-135: ELI/API Sejmu, Dz.U. 2025 poz. 734, 2026-08-28
+⚠️ Aktualny próg 800 zł obowiązuje od 01.10.2023 — re-ver F-135: ELI/API Sejmu, Dz.U. 2025 poz. 734, 2026-08-28; aktualny t.j. Dz.U. 2026 poz. 1372 — art. 119 § 1 (800 zł) potwierdzony 2026-10-31
 ⚠️ UWAGA art. 115 §5–6 KK: mienie znacznej wartości (>200 000 zł) i wielkiej wartości (>1 000 000 zł) — kwoty zamrożone od 2010 r., niezmienione w Dz.U. 2026 poz. 1342 — jednak realna siła nabywcza dramatycznie spadła (200k = 42x min. wynagrodzenie 2026 vs 152x w 2010). Przy sprawach granicznych zawsze weryfikuj w aktualnym t.j. KK.
 │
 ├─ ≤ 800 zł → ART. 119 §1 KW — WYKROCZENIE KRADZIEŻY

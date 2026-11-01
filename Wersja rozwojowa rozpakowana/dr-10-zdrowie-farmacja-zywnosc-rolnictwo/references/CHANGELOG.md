@@ -1,5 +1,6 @@
 # CHANGELOG — dr-10-zdrowie-farmacja-zywnosc-rolnictwo
 
+- 3.58 (2026-10-31, AUDYT-2026-10-31): Bezpieczeństwo żywności i żywienia — nowy t.j. Dz.U. 2026 poz. 1399 (ELI RZĄD 1; obejmuje 2025/1424 — art. 64 ust. 1a–1b, i 2026/1123 — ⏳ art. 103 ust. 1 pkt 11 od 1.01.2028): mod-ustawa-bezpieczenstwo-zywnosci, mod-ustawa-rolne-zywnosc-weterynaria, MAPA-AKTOW, SKILL.md.
 - 3.57 (2026-10-22, AUDYT-2026-10-22): PSWN — nowy t.j. Dz.U. 2026 poz. 1362 (obwieszczenie 17.09.2026, ogł. 21.10.2026, stan 10.09.2026; zastąpił 2024/1571). art. 3 ust. 1 i art. 9 (cytowane w module) bez zmian; ⏳ 2026/637 (art. 365 pkt 6, 402 pkt 3) od 1.01.2027.
 - 3.56 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.55 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-ustawa-system-informacji-ochrona-zdrowia-SIOZ (t.j. 1304; zm. 2025/1705 od 1.01.2027); MAPA-AKTOW, SKILL.md (32 moduły)

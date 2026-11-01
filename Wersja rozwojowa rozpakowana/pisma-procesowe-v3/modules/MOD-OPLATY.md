@@ -116,7 +116,7 @@ z 23.06.1973 i powstają one w orzeczeniu kończącym.
 | Rodzina | Akt ustanawiający | Punkty zapalne |
 |---|---|---|
 | **komornicze** | ustawa z 28.02.2018 o kosztach komorniczych, t.j. `Dz.U. 2024 poz. 377` | 10 % / **3 %** przy wpłacie w terminie miesiąca (art. 27); widełki 150–50 000 zł (art. 25 ust. 1); eksmisja 1500/2000 zł (art. 34); doręczenie 60 zł (art. 41 ust. 1); ⛔ art. 47 — zwolnienie **nie zwalnia** z opłaty egzekucyjnej |
-| **skarbowe** | ustawa z 16.11.2006 o opłacie skarbowej, t.j. `Dz.U. 2025 poz. 1154` | pełnomocnictwo **17 zł od każdego stosunku**; ⛔ art. 2 ust. 1 wyłącza całe kategorie spraw (alimentacyjne, pracy, pomoc społeczna, ubezpieczenia) |
+| **skarbowe** | ustawa z 16.11.2006 o opłacie skarbowej, t.j. `Dz.U. 2026 poz. 1395` | pełnomocnictwo **17 zł od każdego stosunku**; ⛔ art. 2 ust. 1 wyłącza całe kategorie spraw (alimentacyjne, pracy, pomoc społeczna, ubezpieczenia) |
 | **notarialne** | rozp. MS, t.j. `Dz.U. 2024 poz. 1566` | stawki **MAKSYMALNE**, nie minimalne (§ 3); § 4 — bez odliczania obciążeń |
 | **karne — koszty procesu** | KPK `Dz.U. 2026 poz. 490` art. 616–632a | ⛔ zryczałtowana równowartość wydatków przy oskarżeniu prywatnym: **1000 zł od 1.07.2025** (`Dz.U. 2025 poz. 770`), nie 300 zł |
 | **wieczystoksięgowe** | KSCU art. 42–48 | wpis 200 zł / udział min. 100 zł / dziedziczenie 150 zł; wykreślenie — **połowa** (art. 46); ⛔ brak opłaty podstawowej (art. 14 ust. 5) |

@@ -40,6 +40,15 @@ Brak któregokolwiek z poniższych = BLOKADA złożenia pisma.
 ☐ Opłata sądowa: uiszczona / zwolnienie wskazane?
    → Brak opłaty → wezwanie do uzupełnienia + 7 dni (art. 130 §1 KPC)
    → Po bezskutecznym wezwaniu: zwrot pisma
+   ⛔ WYJĄTEK — pismo ADWOKATA, RADCY PRAWNEGO lub RZECZNIKA PATENTOWEGO, nieopłacone
+     należycie, podlegające opłacie stałej albo stosunkowej od WPS wskazanej przez
+     stronę → przewodniczący ZWRACA BEZ WEZWANIA (art. 130² §1 KPC); strona może
+     uiścić brakującą opłatę w tydzień od doręczenia zarządzenia o zwrocie — pismo
+     wywołuje wtedy skutek od daty pierwotnego wniesienia, ale nie przy kolejnym
+     zwrocie z tej samej przyczyny (§2); §1 nie stosuje się, gdy opłata stosunkowa
+     wynika ze sprawdzenia WPS przez sąd (§5). Pytanie o „brak wezwania do opłaty”
+     → zawsze ustal, kto wniósł pismo (art. 130 vs 130²).
+     ✅ [VER: ELI DU/2026/468 (KPC t.j.), art. 130² — odczyt 2026-10-31, RZĄD 1]
 
 ☐ Pełnomocnictwo dołączone (jeśli pełnomocnik)?
    → Brak pełnomocnictwa → wezwanie do uzupełnienia (art. 130 §1 KPC)

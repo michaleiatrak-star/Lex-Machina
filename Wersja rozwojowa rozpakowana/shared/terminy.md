@@ -146,6 +146,14 @@ ręcznie — nie ma testu, który by tego pilnował.
 > Przed sporządzeniem zażalenia **zawsze ustal, którego postanowienia
 > dotyczy** i sprawdź właściwy przepis (art. 394 §1 / 394¹ᵃ §1 / 394² §1
 > KPC) zamiast zakładać domyślnie sąd wyższej instancji.
+>
+> **Brak opłaty od zażalenia / środka (dodane 2026-10-31):** zanim ocenisz, czy
+> „sąd powinien był wezwać do opłaty”, ustal, kto wniósł pismo. Strona działająca
+> sama → wezwanie (art. 130 §1 KPC). **Adwokat, radca prawny, rzecznik patentowy**
+> i opłata stała albo stosunkowa od wskazanej WPS → **zwrot bez wezwania
+> (art. 130² §1 KPC)**, z tygodniem na dopłatę od doręczenia zarządzenia o zwrocie
+> i skutkiem od pierwotnego wniesienia (§2). Szczegóły: `shared/MOD-WALIDACJA_v2.md`.
+> ✅ [VER: ELI DU/2026/468, art. 130², odczyt 2026-10-31, RZĄD 1]
 
 ## Przedawnienia (instrukcyjne)
 

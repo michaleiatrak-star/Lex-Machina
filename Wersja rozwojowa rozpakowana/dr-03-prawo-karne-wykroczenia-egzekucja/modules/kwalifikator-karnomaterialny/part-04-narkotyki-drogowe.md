@@ -74,7 +74,8 @@ CZY KIEROWCA BYŁ POD WPŁYWEM SUBSTANCJI?
 │   │         i prowadzi do błędnego wniosku o możliwej grzywnie symbolicznej
 │   │   + zakaz prowadzenia pojazdów OBLIGATORYJNY (art. 87 §3 KW)
 │   │   ✅ [VER: ELI, Dz.U. 2025 poz. 734, art. 19, 24 §1a i 87 §1,
-│   │      odczyt 2026-08-25]
+│   │      odczyt 2026-08-25; re-ver t.j. Dz.U. 2026 poz. 1372, 2026-10-31:
+│   │      bez zmian w zakresie art. 19, 87 §1 i obecności art. 87 §1 w art. 24 §1a]
 │   └─ > 0,5‰ (lub > 0,25 mg/dm³ w wydychanym powietrzu)
 │       → ART. 178a §1 KK — PRZESTĘPSTWO (jazda „w stanie nietrzeźwości")
 │       Kara: POZBAWIENIE WOLNOŚCI DO LAT 3 — sankcja JEDNORODNA

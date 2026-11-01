@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.99.8"
+version: "3.99.9"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 dependencies:
   requires:
@@ -614,7 +614,7 @@ przez cross-reference, bez duplikacji treści).
   [✓] NOWY  mod-ustawa-oplata-skarbowa
               (dodany 2026-09-16, O-11(d): przedmiot, zobowiązani i solidarność,
                powstanie obowiązku = termin zapłaty, zwolnienia podmiotowe, zwrot
-               z terminem 5 lat, organ — wójt/burmistrz; t.j. Dz.U. 2025 poz. 1154, RZĄD 1)
+               z terminem 5 lat, organ — wójt/burmistrz; t.j. Dz.U. 2026 poz. 1395, RZĄD 1 2026-10-31)
   [✓] NOWY  mod-ustawa-podatek-wydobycie-kopalin
               (dodany 2026-09-16, F-190: podatek od wydobycia miedzi, srebra,
                gazu i ropy — t.j. Dz.U. 2026 poz. 454, RZĄD 1; wcześniej widmowe

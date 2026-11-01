@@ -31,7 +31,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Ustawa o imprezach turystycznych i powiązanych usługach turystycznych | Dz.U. 2026 poz. 925 t.j. ze zm. | `mod-ustawa-sport-turystyka-imprezy-masowe` | ✅ aktywny |
 | Ustawa o jakości handlowej artykułów rolno-spożywczych / IJHARS | Dz.U. 2023 poz. 1980 t.j. ze zm. | `mod-ustawa-rolne-zywnosc-weterynaria` | ✅ aktywny |
 | ARiMR / WPR / PROW | właściwe akty bieżące | `mod-ustawa-rolne-zywnosc-weterynaria` | ✅ aktywny; fresh gate |
-| Ustawa o bezpieczeństwie żywności i żywienia | Dz.U. 2023 poz. 1448 t.j. ze zm. | `mod-ustawa-bezpieczenstwo-zywnosci` | ✅ aktywny |
+| Ustawa o bezpieczeństwie żywności i żywienia | Dz.U. 2026 poz. 1399 t.j. (✅ RZĄD 1 2026-10-31; po t.j. brak zmian) | `mod-ustawa-bezpieczenstwo-zywnosci` | ✅ aktywny |
 | Ustawa o Inspekcji Weterynaryjnej | Dz.U. 2024 poz. 12 t.j. ze zm. | `mod-ustawa-inspekcja-weterynaryjna` | ✅ aktywny |
 | Zdrowie / hodowla / dobrostan zwierząt | ustawa z 21.11.2025 o zdrowiu zwierząt Dz.U. 2025 poz. 1795 (w mocy 18.03.2026, cz. 18.12.2025; zastąpiła dawny reżim weterynaryjny — akty uchylone i wykonawcze czytać u źródła) ✅ [VER] 2026-10-06 ELI; pozostałe właściwe ustawy krajowe i akty UE na dzień sprawy | `mod-ustawa-hodowla-zdrowie-zwierzat` | ✅ aktywny; fresh gate |
 | Zezwolenia hodowlane / gatunki / gatunki inwazyjne | właściwe ustawy krajowe + CITES / rozporządzenie (WE) nr 338/97 | `mod-ustawa-hodowla-zezwolenia-gatunki` | ✅ aktywny; fresh gate |

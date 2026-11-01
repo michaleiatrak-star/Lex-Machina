@@ -2,9 +2,12 @@
 
 **Status:** moduł dziedzinowy — dodany 2026-09-16 (O-11(d): ustawa była w `dr-06` powoływana
 tylko ubocznie; stawki kanoniczne i wyłączenia przedmiotowe — `shared/oplaty/07-…` sekcja 6c).
-**Źródło:** ustawa z 16.11.2006 o opłacie skarbowej — **t.j. `Dz.U. 2025 poz. 1154`**.
-✅ [VER] RZĄD 1 2026-09-16 — odczyt treści art. 1, 3–12 (ELI); KPA — t.j. `Dz.U. 2025 poz. 1691`
-(art. 261). KROK 2C — przy sprawie (nowelizacje po t.j.).
+**Źródło:** ustawa z 16.11.2006 o opłacie skarbowej — **t.j. `Dz.U. 2026 poz. 1395`** (obwieszczenie
+z 9.10.2026, ogł. 23.10.2026; obejmuje zmiany Dz.U. 2025 poz. 1795, 1847 i 2026 poz. 846, 875, 912, 1206).
+✅ [VER] RZĄD 1 2026-10-31 — ELI DU/2026/1395 (art. 1, 9; po t.j. brak zmian); poprzednio t.j. `Dz.U. 2025 poz. 1154`
+(✅ RZĄD 1 2026-09-16: art. 1, 3–12). KPA — t.j. `Dz.U. 2025 poz. 1691` (art. 261). KROK 2C — przy sprawie (nowelizacje po t.j.).
+⏳ **Od 1.01.2027** art. 1 ust. 3 (Dz.U. 2026 poz. 875): w sprawie załatwionej milcząco czynność / zezwolenie uznaje się
+za dokonane w dniu milczącego załatwienia sprawy (ten dzień decyduje o obowiązku zapłaty).
 
 ⛔ **Opłata skarbowa NIE jest opłatą sądową** — nie stosuj do niej KSCU. Jedyny jej styk
 z sądem to **pełnomocnictwo składane w postępowaniu sądowym** (art. 1 ust. 1 pkt 2).
@@ -61,7 +64,8 @@ sprawdzaj oba źródła.
 | gdzie | kasa właściwego organu podatkowego lub jego rachunek; rada gminy może zarządzić inkaso | art. 8 ust. 1–2 |
 | potwierdzenie | organ lub podmiot dokonuje **adnotacji** o zapłacie, zwolnieniu lub wyłączeniu (poza art. 2 ust. 1 pkt 1 lit. e, art. 3, 3a) | art. 8 ust. 3–4 |
 | ⭐ **kopia dowodu zapłaty** | **adwokat, radca prawny, doradca podatkowy, rzecznik patentowy** mogą złożyć **uwierzytelnioną przez siebie kopię** dowodu zapłaty od pełnomocnictwa; w razie wątpliwości — żądanie oryginału | art. 8 ust. 5 |
-| **zwrot** | gdy mimo zapłaty **nie dokonano czynności** albo **nie wydano** zaświadczenia lub zezwolenia; **na wniosek** | art. 9 ust. 1–2 |
+| **zwrot** | gdy mimo zapłaty **nie dokonano czynności** albo **nie wydano** zaświadczenia lub zezwolenia; **na wniosek** osoby lub jednostki, która zapłaciła | art. 9 ust. 1–2 |
+| **tryb zwrotu (od 1.10.2026)** | zasadny wniosek: organ podatkowy zwraca **bez decyzji, w 2 miesiące** od złożenia wniosku, wnioskodawcy; po terminie — **oprocentowanie** od dnia złożenia wniosku w wysokości odsetek za zwłokę od zaległości podatkowych. Wniosek złożony **przed 1.10.2026** — przepisy dotychczasowe (art. 31 Dz.U. 2026 poz. 846) | art. 9 ust. 2a–2c |
 | ⛔ **termin zwrotu** | **5 lat od końca roku**, w którym zapłacono — po upływie zwrot nie przysługuje | art. 9 ust. 3 |
 
 ⚠️ Zwrot przewidziano tylko w dwóch sytuacjach z art. 9 ust. 1 — **opłata od pełnomocnictwa**
@@ -105,7 +109,7 @@ zwrotu pisma.
 □ Wyłączenie z art. 2 / art. 3–3b sprawdzone przed naliczeniem?
 □ Liczba stosunków pełnomocnictwa (mocodawcy × pełnomocnicy)?
 □ Zwolnienie podmiotowe (art. 7) albo z kolumny załącznika?
-□ Zwrot: przesłanka z art. 9 ust. 1 i termin 5 lat od końca roku zapłaty?
+□ Zwrot: przesłanka z art. 9 ust. 1, termin 5 lat od końca roku zapłaty; wniosek od 1.10.2026 — zwrot bez decyzji w 2 miesiące (art. 9 ust. 2a–2c)?
 □ Organ: wójt / burmistrz / prezydent miasta właściwy z art. 12 ust. 2?
 
-*Podstawa: ustawa o opłacie skarbowej — t.j. `Dz.U. 2025 poz. 1154` (✅ [VER] RZĄD 1 2026-09-16).*
+*Podstawa: ustawa o opłacie skarbowej — t.j. `Dz.U. 2026 poz. 1395` (✅ [VER] RZĄD 1 2026-10-31).*

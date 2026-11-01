@@ -213,6 +213,27 @@ Komisja ma wydać wytyczne wykonawcze do art. 6 najpóźniej 02.02.2026 r.
 (art. 6 ust. 5) — sprawdź, czy już opublikowane, przy każdym użyciu.
 ```
 
+### Deepfake i przejrzystość treści syntetycznych (art. 3 pkt 60, art. 50)
+
+✅ [VER: Cellar, CELEX 32024R1689, wersja PL (Dz.Urz. L 2024/1689, xhtml) — art. 3 pkt 60, art. 50 ust. 4,
+art. 96 ust. 1 lit. d — odczyt 2026-10-31, RZĄD 1]
+
+- **Definicja (art. 3 pkt 60):** „deepfake” to wygenerowane lub zmanipulowane przez AI obrazy, treści dźwiękowe
+  lub wideo, **które przypominają istniejące osoby, przedmioty, miejsca, podmioty lub zdarzenia**, **które odbiorca
+  mógłby niesłusznie uznać za autentyczne lub prawdziwe**. Dwa warunki łącznie; test obiektywny („mógłby”) —
+  nie wymaga zamiaru ani faktycznego wprowadzenia w błąd.
+- **Głos AI „który niczego nie udaje”:** konkluzja zależy od pierwszego warunku — głos przypominający istniejącą
+  osobę może być deepfake'iem bez względu na intencję; głos niepodobny do nikogo — co do zasady nie. Nie opieraj
+  konkluzji na samym braku zamiaru wprowadzenia w błąd.
+- **Obowiązek ujawnienia (art. 50 ust. 4):** podmiot stosujący system AI generujący/manipulujący treści deepfake
+  ujawnia ich sztuczne wygenerowanie lub zmanipulowanie (wyjątki: ściganie przestępstw; dla treści artystycznych,
+  satyrycznych, fikcyjnych — złagodzony sposób ujawnienia). Obowiązki z art. 50 innych ustępów (oznakowanie treści
+  syntetycznych przez dostawców, informacja o interakcji z AI) — pobierz brzmienie przed zastosowaniem.
+- **Soft law — zawsze wskaż:** art. 96 ust. 1 lit. d zobowiązuje Komisję do wytycznych dotyczących **praktycznego
+  wdrażania obowiązków przejrzystości z art. 50**; wytyczne i kodeksy praktyk mogą doprecyzować kryterium
+  „istniejących” osób. W odpowiedzi wskaż ich istnienie/znaczenie jako soft law; treść i sygnaturę dokumentu
+  Komisji podawaj tylko po weryfikacji narzędziem (bez sygnatur z pamięci).
+
 ### ⭐ Art. 25 — Odpowiedzialność w całym łańcuchu wartości AI
 
 > ✅ [VER: EUR-Lex, CELEX 32024R1689, art. 25, pobranie bezpośrednie 2026-09-27]

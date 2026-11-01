@@ -152,7 +152,7 @@ zakazu prowadzenia pojazdów mechanicznych orzeczonego w związku ze skazaniem z
         + zakaz prowadzenia min. 3 lata (art. 42 §2 KK)
   ⛔ Znaczenie procesowe: 3 lata < 8 lat → art. 258 §2 KPK nie działa;
      3 lata > 1 rok → art. 259 §3 KPK też nie działa
-✅ [VER: ELI — Dz.U. 2025 poz. 734, art. 19, 24 §1a i 87 §1;
+✅ [VER: ELI — Dz.U. 2025 poz. 734, art. 19, 24 §1a i 87 §1 (re-ver t.j. Dz.U. 2026 poz. 1372, 2026-10-31: bez zmian w tym zakresie);
    Dz.U. 2025 poz. 383 (obecny t.j. Dz.U. 2026 poz. 1342), art. 178a §1 — odczyt 2026-08-25]
 ```
 

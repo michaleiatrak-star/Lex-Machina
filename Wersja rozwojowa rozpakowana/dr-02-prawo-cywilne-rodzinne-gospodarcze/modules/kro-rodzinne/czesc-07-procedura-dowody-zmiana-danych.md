@@ -218,7 +218,7 @@ t.j. Dz.U. 2021 poz. 1988 ze zm.:
   w tym module)
 
 ⭐⭐ OPŁATA: opłata SKARBOWA za wydanie decyzji — **37 zł** (załącznik do
-  ustawy o opłacie skarbowej, cz. I pkt 7 — ✅ RZĄD 1 2026-09-17n, t.j. Dz.U. 2025 poz. 1154;
+  ustawy o opłacie skarbowej, cz. I pkt 7 — ✅ RZĄD 1 2026-09-17n, t.j. Dz.U. 2026 poz. 1395 (od 23.10.2026; poprzednio 2025 poz. 1154);
   nie podlega opłacie m.in. sprawa o zmianę imienia lub nazwiska BEZPRAWNIE zmienionego
   (wyłączenie z art. 2 ust. 1 u.o.s. — dokładny punkt: odczyt przy sprawie))
 

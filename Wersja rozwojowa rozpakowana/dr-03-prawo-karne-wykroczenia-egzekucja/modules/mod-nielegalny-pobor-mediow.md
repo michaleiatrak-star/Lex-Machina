@@ -38,7 +38,7 @@ PRZEDMIOT OCHRONY: energia ELEKTRYCZNA, CIEPLNA i JĄDROWA — rodzaj
   wykroczenie/przestępstwo)
 
 PRÓG WYKROCZENIE/PRZESTĘPSTWO: aktualny art. 119 § 1 KW posługuje się
-  progiem **800 zł** (Dz.U. 2025 poz. 734; re-ver ELI 2026-08-28), ale
+  progiem **800 zł** (t.j. Dz.U. 2026 poz. 1372, re-ver ELI 2026-10-31; wcześniej 2025 poz. 734), ale
   próg ten nie powinien być przenoszony automatycznie na kradzież energii.
   Teza modułu oparta na uchwale SN I KZP 43/00 jest taka, że art. 119 § 1 KW
   nie ma zastosowania do energii, a czyn kwalifikuje się z art. 278 § 5 KK
