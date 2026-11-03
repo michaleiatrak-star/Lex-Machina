@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.17"
+version: "6.18"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
@@ -105,8 +105,14 @@ FALLBACK), a nie ten plik — ale dla kogoś czytającego wyłącznie ten skill:
 ```
 SD-GATE-0: Czy w wiadomości wzmianka o aktach/pismach/dowodach/dokumentach
   BEZ faktycznie wgranego pliku?
-  TAK → ⛔ STOP. "Wskazujesz na dokumenty, których nie wykryłem.
-         Wgraj akta/pisma przed uruchomieniem analizy." Czekaj. Nie wyświetlaj komunikatu startowego.
+  TAK → SD-GATE-0-INFO (bez STOP — shared/CP-GATE.md §3B BRAK-DOK):
+         "⚠️ Wskazujesz na dokumenty, których nie wykryłem: [lista]. Analizuję to,
+          co jest w materiale; ustalenia oparte na brakujących dokumentach oznaczam
+          „według informacji strony”. Wgraj je, jeśli je masz — uwzględnię je."
+         Brakujące pozycje → REJESTR BRAK-DOK w raporcie (sekcja braków materiału).
+         Kontynuuj do SD-INW i Przejścia I.
+  Brak JAKIEGOKOLWIEK materiału (ani pliku, ani opisu stanu faktycznego) → jedno pytanie
+  o materiał; to nie jest BRAK-DOK, tylko brak przedmiotu analizy.
 
 SD-INW: Zinwentaryzuj WSZYSTKIE pliki.
   ZIP → rozpakowuj i inwentaryzuj zawartość.

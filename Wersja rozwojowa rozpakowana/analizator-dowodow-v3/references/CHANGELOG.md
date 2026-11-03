@@ -1,5 +1,6 @@
 # CHANGELOG — analizator-dowodow-v3
 
+- 5.16.24 (2026-11-03): SD-GATE-0: brak wgranego dowodu -> SD-GATE-0-INFO, status BRAK-DOK w mapie pokrycia (shared/CP-GATE.md §3B), bez STOP przed KROK 1.
 - 5.16.23 (2026-10-10b, AUDYT-2026-10-10b): widget-kreator: auto-fill lokalny, bez wysyłania treści rozmowy do api.anthropic.com; MD-NARR: katalog wyjściowy hosta zamiast /mnt/user-data.
 
 - 5.16.22 (2026-10-05o, AUDYT-2026-10-05o): dashboard: escapowanie danych, wartości domyślne pól, zakładka roszczeń od startu (F-232)

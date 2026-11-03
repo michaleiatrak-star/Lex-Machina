@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.23"
+version: "5.16.24"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -197,8 +197,12 @@ Wykonaj PRZED KROK 1. Mechanizm współdzielony z pisma-procesowe-v3 i analiza-s
 view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md → wykonaj sekwencję:
 
 SD-GATE-0: Czy w wiadomości wzmianka o załącznikach/dowodach/aktach BEZ wgranego pliku?
-  TAK → ⛔ STOP. Wyświetl: "Wskazujesz na dokumenty, ale nie wykryłem żadnego pliku.
-         Wgraj materiały przed analizą." Czekaj. Nie przechodzij do KROK 1.
+  TAK → SD-GATE-0-INFO (bez STOP — shared/CP-GATE.md §3B BRAK-DOK):
+         "⚠️ Wskazujesz na dokumenty, których nie wykryłem: [lista]. Oceniam materiał,
+          który jest; dowód, którego brak, ma w mapie pokrycia status BRAK-DOK (nie
+          zero mocy z powodu nieczytelności). Wgraj go, jeśli go masz."
+         Brakujące pozycje → REJESTR BRAK-DOK. Kontynuuj do KROK 1.
+  Brak JAKIEGOKOLWIEK materiału do oceny → jedno pytanie o materiał (to nie BRAK-DOK).
 
 SD-INW: Zinwentaryzuj WSZYSTKIE pliki (ZIP = zawartość, nie kontener).
   Zbuduj SD-REJ z każdym plikiem D[id] i liczbą stron/zakładek.

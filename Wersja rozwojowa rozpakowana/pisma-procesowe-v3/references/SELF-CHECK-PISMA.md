@@ -88,7 +88,7 @@
      NIE do któregokolwiek → STOP. Nie przechodzę dalej.
    Szczegóły + STATUS-LIFECYCLE: view shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
 □ ⛔ MOD-SKAN-DOWODOW-KOMPLETNY (W1.2c-PRE) — wykonaj jako PIERWSZY:
-   SD-GATE-0: czy wzmianka o załącznikach + faktyczny brak pliku? → STOP
+   SD-GATE-0: czy wzmianka o załącznikach + faktyczny brak pliku? → SD-GATE-0-INFO + REJESTR BRAK-DOK (CP-GATE §3B; bez STOP)
    SD-INW: WSZYSTKIE pliki zinwentaryzowane (ZIP = zawartość)?
    SD-READ: KAŻDA strona/zakładka/obraz przeanalizowana?
    SD-VER: status KOMPLET przed W1.3 i W2?
