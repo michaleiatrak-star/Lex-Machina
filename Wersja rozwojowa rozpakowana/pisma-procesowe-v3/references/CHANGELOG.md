@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.48 (2026-11-03, BRAK-DOK + PIPELINE-SZYBKI): brak dokumentu (nie wgrany, „uzupełnię później”, pozycja rejestru aplikacji bez treści) = adnotacja i REJESTR BRAK-DOK w raporcie i w pliku DRAFT, jedno pytanie, bez blokady FSL-D/SD-VER/.docx (`shared/CP-GATE.md` §3B). Pipeline: CP informacyjne wykonywane w jednej odpowiedzi, STOP tylko na CP decyzyjnych (CP-1a z T_BRAK, CP-1b, FSL-D luka krytyczna bez decyzji, CP-PD, ATAK-KRYTYCZNY, INFORMACJA WARUNKOWA) — §3C; „kontynuuj” w toku = zatwierdzenie bieżącego CP, zamknięty CP nie jest raportowany ponownie. AUTOMAT-STANOW, SKILL.md (FSL-D, ST-FINAL).
 - 5.47 (2026-10-31, AUDYT-2026-10-31): MOD-OPLATY: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395 (ELI RZĄD 1).
 - 5.46 (2026-10-20, LEXAGENTO-P1): MOD-OPLATY: pełna ścieżka modułu monopole
 - 5.45 (2026-10-17c, AUDYT-2026-10-17c): Sąd właściwy: pismo do sądu bez sądu w aktach — obowiązkowo DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych; sąd i adres tylko z court_for_address albo z bloku SĄD SPRAWY.

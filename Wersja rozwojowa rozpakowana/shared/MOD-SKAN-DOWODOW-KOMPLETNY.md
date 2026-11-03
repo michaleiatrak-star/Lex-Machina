@@ -66,14 +66,13 @@ SPRAWDŹ: czy w bieżącej wiadomości faktycznie istnieje plik do odczytania?
 
 WYNIK:
   Słowa kluczowe + BRAK pliku + BRAK treści wklejonej:
-    → ⛔ SD-GATE-0-STOP
+    → SD-GATE-0-INFO (bez STOP — CP-GATE §3B BRAK-DOK)
     → Wyświetl komunikat:
       "⚠️ W treści wiadomości wskazujesz na załączniki/dowody, ale nie wykryłem
-       żadnych wgranych plików. Przed przystąpieniem do analizy i generowania
-       pisma, proszę wgrać dokumenty, o których mowa.
-       Nie mogę przystąpić do pracy bez faktycznego odczytania dowodów —
-       pominięcie dokumentów to błąd krytyczny."
-    → STOP. Czekaj na wgranie plików.
+       wgranych plików: [lista]. Pracuję na tym, co jest w wiadomości; twierdzenia
+       oparte na tych dokumentach oznaczam „według informacji strony”.
+       Wgraj je, jeśli je masz — uwzględnię je od kolejnego kroku."
+    → Kontynuuj do FAZY 1. Brakujące pozycje -> REJESTR BRAK-DOK.
 
   Słowa kluczowe + JEST plik LUB wklejona treść:
     → Kontynuuj do FAZY 1.
@@ -247,7 +246,11 @@ KROK SD-VER.2 — Klasyfikacja wyników:
   ✅ KOMPLET: wszystkie pliki odczytane, wszystkie strony ✅
     → Kontynuuj do W1.3 / MD1 / macierzy
 
-  ⚠️ BRAKI ISTOTNE: ≥1 plik ze statusem ⬜ lub str. odczytane < N_stron:
+  ✅ KOMPLET Z BRAKAMI: wszystkie WGRANE pliki odczytane, ale rejestr aplikacji /
+     treść sprawy wskazuje dokumenty, których nie ma (BRAK-DOK, CP-GATE §3B)
+    → Wypisz brakujące pozycje (co wiadomo o każdej) i kontynuuj jak KOMPLET
+
+  ⚠️ BRAKI ISTOTNE: ≥1 WGRANY plik ze statusem ⬜ lub str. odczytane < N_stron:
     → Wróć do SD-READ.1 dla brakujących plików/stron
     → Nie kontynuuj do analizy bez zamknięcia braków
 
@@ -300,8 +303,8 @@ KROK SD-VER.3 — Wygeneruj RAPORT SD-VER (wyświetl użytkownikowi):
 ⛔ SD-GATE-4: BRAMKA PRE-GENERACJI
 
 Przed uruchomieniem W2 (projekt pisma) / MD2 (macierz dowód-teza):
-  □ SD-REJ istnieje i jest kompletny (każdy D[id] = ✅)?
-  □ SD-VER.2 = KOMPLET?
+  □ SD-REJ istnieje i jest kompletny (każdy wgrany D[id] = ✅; BRAK-DOK nie liczy się)?
+  □ SD-VER.2 = KOMPLET lub KOMPLET Z BRAKAMI?
   □ SD-FAKTY wypełnione dla każdego D[id]?
 
   Którykolwiek = NIE:

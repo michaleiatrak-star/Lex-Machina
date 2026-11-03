@@ -45,7 +45,8 @@ bez fizycznego powrotu do każdego pliku per każdą tezę.
 > ⛔ KAŻDE TWIERDZENIE FAKTYCZNE W PIŚMIE MUSI MIEĆ WSKAZANY PLIK ŹRÓDŁOWY
 >    (D[id]) + LOKALIZACJA (strona / zakładka / godzina / obraz-nr).
 > ⛔ Twierdzenie bez lokalizacji w SD-REJ = ⬛ FSL-D-LUKA.
-> ⛔ ⬛ FSL-D-LUKA klasy 🔴/🟠 = BLOKADA .docx.
+> ⛔ ⬛ FSL-D-LUKA klasy 🔴/🟠 bez decyzji użytkownika = BLOKADA wersji FINAL.
+> Luka wynikająca z BRAK-DOK (dokumentu nie ma) = informacja, nie blokada: `shared/CP-GATE.md` §3B.
 > ⛔ ZAKAZ CYTOWANIA FAKTÓW Z PAMIĘCI — każdy fakt weryfikowany
 >    przez powrót do SD-FAKTY[D[id]], nie przez odtworzenie z kontekstu.
 
@@ -67,8 +68,10 @@ KROK FSL-D-INIT.2 — Pobierz SD-REJ z MOD-SKAN-DOWODOW-KOMPLETNY:
   D02: [nazwa] — ✅ (typ, strony)
   ...D[N]: [nazwa] — ✅
 
-  ⛔ Jeśli SD-REJ niekompletny (brakuje pliku ⬜) → STOP.
-     Nie przystępuj do FSL-D dopóki SD-VER ≠ KOMPLET.
+  ⛔ Jeśli SD-REJ ma plik wgrany, ale nieodczytany (⬜) → wróć do SD-READ.
+  Pozycja bez pliku/treści (rejestr aplikacji wskazuje więcej pozycji niż widać,
+  użytkownik nie ma dokumentu) = BRAK-DOK (CP-GATE §3B): wpisz do REJESTRU BRAK-DOK,
+  wypisz, czego dotyczy, i kontynuuj FSL-D na dostępnych D[id]. Nie STOP.
 
 KROK FSL-D-INIT.3 — Zbuduj macierz FSL-D (pustą):
   FSL-D-MACIERZ:
@@ -200,7 +203,10 @@ PRZYPADEK A — brak ⬛ FSL-D-LUKA 🔴/🟠:
   → Format wpisów: per teza + per dowód + lokalizacja ze źródła
 
 PRZYPADEK B — wykryto ⬛ FSL-D-LUKA 🔴 (luka krytyczna):
-  → ⛔ STOP: nie przystępuj do macierzy ani do projektu pisma
+  → Użytkownik już wskazał, że dokumentu nie ma / pomiń / uzupełni później
+    (BRAK-DOK, CP-GATE §3B) → decyzja d) przyjęta: NIE pytaj ponownie, kontynuuj,
+    twierdzenie jako „według informacji strony” + REJESTR BRAK-DOK w pliku.
+  → W pozostałych przypadkach: ⛔ STOP przed projektem pisma (CP DECYZYJNY)
   → Wyświetl blok PYTANIA FSL-D:
     ┌─────────────────────────────────────────────────────────────┐
     │ ⬛ FSL-D-LUKA KRYTYCZNA                                     │
@@ -217,6 +223,8 @@ PRZYPADEK B — wykryto ⬛ FSL-D-LUKA 🔴 (luka krytyczna):
     │  d) Akceptuję lukę — piszę z oznaczeniem ⬛ [BRAK DOWODU]  │
     └─────────────────────────────────────────────────────────────┘
   → Czekaj na decyzję. NIE generuj pisma bez odpowiedzi.
+  → Odpowiedź „brak”, „pomiń”, „nie mam”, „tak”, „kontynuuj”, „zamknij” = d).
+    CP-FSL-D = ZAMKNIĘTY Z BRAKAMI; dalej bez kolejnego pytania.
 
 PRZYPADEK C — wykryto ⬛ FSL-D-LUKA 🟠 (luka istotna):
   → Kontynuuj do macierzy ale oznacz twierdzenie jako ⚠️

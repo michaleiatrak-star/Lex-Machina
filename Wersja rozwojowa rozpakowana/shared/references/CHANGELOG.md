@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.51 (2026-11-03, BRAK-DOK + PIPELINE-SZYBKI): CP-GATE §3B (BRAK-DOK: brak dokumentu = informacja w raporcie i w pliku, nie blokada; status ZAMKNIĘTY Z BRAKAMI) i §3C (TRYB PIPELINE-SZYBKI: CP informacyjne bez zatrzymania, STOP tylko na CP decyzyjnych); MOD-FSL-DOKUMENTY (FSL-D-INIT.2, PRZYPADEK B), MOD-SKAN-DOWODOW-KOMPLETNY (SD-GATE-0 bez STOP, KOMPLET Z BRAKAMI, SD-GATE-4), HYBRID-VALIDATION Block Zero (BRAK-DOK nie blokuje zapisu DRAFT), MOD-STEP-TRACKER (BRAK-DOK ≠ POMINIĘTY).
 - 3.99.50 (2026-10-31, BENCHMARK-02): MOD-WALIDACJA_v2 i terminy.md: art. 130² KPC — pismo profesjonalnego pełnomocnika nieopłacone → zwrot bez wezwania, tydzień na dopłatę (benchmark 02 P06; ELI DU/2026/468).
 - 3.99.49 (2026-10-31, AUDYT-2026-10-31): oplaty/07 i SKILL.md: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395 (cz. IV: 17 zł bez zmian; ELI RZĄD 1).
 - 3.99.48 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA, wiersz `isap_tekst`: parametr `na_dzien`, `confidence: partial` (nierozstrzygniete, strony_bez_tekstu) = nie podawaj jednego brzmienia, OUT_OF_SCOPE + `jeszcze_nie_obowiazuje`, `na_dzien` sprzed stanu prawnego t.j., numer z literą w indeksie ≠ numer bazowy. agents/weryfikator-isap: te same reguły przy W3.1.

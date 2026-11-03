@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.47"
+version: "5.48"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -60,6 +60,11 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodolog
 > musi w nim dosłownie występować, inaczej `[CYTAT NIEZWERYFIKOWANY]`) — przy każdym
 > cytacie; WD-3 (każdy obszar kontroli jawnie zamknięty) — przed prezentacją wyniku.
 > ⛔ Treść reguł NIE jest tu kopiowana (F-115, F-200) — obecność wywołania pilnuje T35.
+
+> **Tempo i braki (2026-11-03):** pipeline działa w TRYBIE PIPELINE-SZYBKIM —
+> CP informacyjne w jednej odpowiedzi, STOP tylko na CP decyzyjnych
+> (`shared/CP-GATE.md` §3C). Brak dokumentu = BRAK-DOK: adnotacja w raporcie
+> i w pliku, jedno pytanie, bez blokady (`shared/CP-GATE.md` §3B).
 
 ## ⛔⛔⛔ HARD GATE MRG — MANDATORY-REREAD-GATE ⛔⛔⛔
 
@@ -142,6 +147,9 @@ KROK C — ST-FINAL (OBOWIĄZKOWY i BLOKUJĄCY przed KAŻDYM present_files pisma
 ⛔ INFORMACJA WARUNKOWA (sedno bramki):
   Policz kroki WYMAGANE, których status ≠ ✅ WYKONANY i ≠ — N/A
   (tj. wszystkie ⚠️ POMINIĘTY oraz ○ OCZEKUJE).
+  Krok ZAMKNIĘTY Z BRAKAMI (BRAK-DOK, shared/CP-GATE.md §3B) = wykonany;
+  nie liczy się tu, nie blokuje zapisu DRAFT. REJESTR BRAK-DOK idzie do
+  UWAG REDAKCYJNYCH pliku i do raportu końcowego.
 
   • Jeśli liczba = 0:
        STATUS PISMA = ✅ FINAL — GOTOWE DO ZŁOŻENIA.
@@ -526,12 +534,15 @@ KROK ET: Eliminacja tez i weryfikacja przepisów
 
   Rozgałęzienie:
     ⬛ FSL-D-LUKA 🔴 → ⛔ STOP: zadaj PYTANIA FSL-D; czekaj na decyzję a/b/c/d
+                       (BRAK-DOK już zgłoszony przez użytkownika = d), bez STOP)
     ⬛ FSL-D-LUKA 🟠 → kontynuuj, ale w piśmie: żądanie ewentualne + UWAGI REDAKCYJNE
     ⬛ FSL-D-LUKA 🟡 → notacja w raporcie; nie blokuje
     brak luk 🔴/🟠 → przejdź do KROK KD (karty dowodowe)
 
   ⛔ ZAKAZ-FSL-D: NIE przystępuj do KROK KD ani KROK ŁD ani KROK MT
      dopóki FSL-D-REPORT nie jest wyświetlony i luki 🔴 nie są rozwiązane.
+     Luka „rozwiązana” = także decyzja d) lub BRAK-DOK (shared/CP-GATE.md §3B):
+     CP-FSL-D = ZAMKNIĘTY Z BRAKAMI, praca idzie dalej.
      Naruszenie = błąd krytyczny pipeline — równoważny pominięciu CLAIM-VALIDATION.
 ```
 

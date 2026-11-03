@@ -90,16 +90,18 @@ Po wykonaniu każdego kroku CP model:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**3.2** Kończy odpowiedź. Zero tekstu po raporcie CP.
+**3.2** CP DECYZYJNY (§3C): kończy odpowiedź, zero tekstu po raporcie CP.
+CP INFORMACYJNY (§3C): przechodzi do następnego CP w tej samej odpowiedzi.
 
-**3.3** Czeka na wiadomość użytkownika ("tak" / "ok" / uwagi).
+**3.3** Przy CP DECYZYJNYM czeka na wiadomość użytkownika ("tak" / "ok" / uwagi).
 
 **3.4** Po otrzymaniu potwierdzenia:
   - aktualizuje rejestr: zmienia `○ OTWARTE` → `✅ ZAMKNIĘTE [data/godz.]`
   - przechodzi do następnego kroku
 
-⛔ Bez wiadomości użytkownika model NIE przechodzi dalej — nawet jeśli
-   użytkownik wcześniej napisał "rób automatycznie" lub "bez checkpointów".
+⛔ Bez wiadomości użytkownika model NIE przechodzi przez CP DECYZYJNY (§3C) —
+   nawet jeśli użytkownik wcześniej napisał "rób automatycznie" lub "bez checkpointów".
+   CP INFORMACYJNE wykonuje bez zatrzymania (§3C).
 
 ---
 
@@ -140,6 +142,85 @@ WERYFIKACJA przed oznaczeniem N/A — model MUSI odpowiedzieć:
 
 ---
 
+## § 3B. BRAK-DOK — BRAK DOKUMENTU TO INFORMACJA, NIE BLOKADA
+
+Nadrzędne wobec każdego „STOP” / „BLOKADA” wywołanego wyłącznie brakiem dokumentu
+(SD-GATE-0, SD-VER, SD-GATE-4, FSL-D-INIT, PRZYPADEK B FSL-D, CP-CHECK, HYBRID-VAL Block Zero).
+
+```
+BRAK-DOK = dokument, którego nie ma w materiale, a który:
+  (1) użytkownik wskazał jako nieposiadany / „do uzupełnienia później” / „pomiń”, LUB
+  (2) figuruje w rejestrze aplikacji, ale nie ma jego identyfikatora ani treści
+      (rozbieżność liczby pozycji rejestru i widocznych plików), LUB
+  (3) wynika z treści sprawy (np. postanowienie o umorzeniu), ale nie został wgrany.
+
+NIE jest BRAK-DOK: plik wgrany, lecz nieodczytany -> nadal SD-READ (ponów odczyt).
+
+Postępowanie:
+  1. Wpisz pozycję do REJESTRU BRAK-DOK: nazwa/opis, do czego potrzebny (teza T[n]),
+     źródło wiedzy o nim (akta / wypowiedź użytkownika / rejestr aplikacji).
+  2. Twierdzenie oparte na brakującym dokumencie = „według informacji strony”
+     (lub wniosek dowodowy o dopuszczenie dokumentu z akt organu), nigdy fakt urzędowy.
+  3. Pytanie o brakujący dokument zadaj RAZ, w raporcie bieżącego CP — i pracuj dalej.
+     Odpowiedź „brak”, „pomiń”, „nie mam”, „uzupełnię później”, „zamknij”, „tak”,
+     „kontynuuj” = decyzja d) z PYTAŃ FSL-D (akceptuję lukę). Nie pytaj ponownie.
+  4. CP zamykasz jako „ZAMKNIĘTY Z BRAKAMI (BRAK-DOK: N)”. Ten status = zamknięty
+     dla §4 CP-CHECK, ZAKAZ-FSL-D, SD-GATE-4 i HYBRID-VAL. Nie jest krokiem
+     „zablokowanym” ani „pominiętym” w ST-FINAL.
+  5. REJESTR BRAK-DOK trafia do pliku wynikowego: sekcja „UWAGI REDAKCYJNE —
+     dokumenty do uzupełnienia” (DRAFT) oraz do raportu końcowego na czacie.
+     W treści pisma: wniosek dowodowy lub „według informacji strony”, bez symboli.
+  6. Pozycja z (2) bez treści: podaj w raporcie wszystko, co wiadomo (numer w rejestrze,
+     nazwa pliku jeśli widoczna, liczba brakujących pozycji), żeby użytkownik mógł
+     ją odszukać i wgrać. Nie zgaduj treści, nie uznawaj za neutralną.
+
+ZAKAZ-BRAK-DOK: zatrzymanie pipeline, odmowa zamknięcia CP lub odmowa zapisania
+  pliku DRAFT z powodu samego BRAK-DOK = błąd pipeline. Status FINAL nadal wymaga
+  zera ⬛ w treści pisma (§1) — BRAK-DOK obniża status do DRAFT, nie zatrzymuje pracy.
+```
+
+---
+
+## § 3C. TRYB PIPELINE-SZYBKI — SCALANIE CHECKPOINTÓW
+
+Tryb pipeline ma działać w tempie TRYB-AUTO. Różnica: zatrzymuje się tylko na
+checkpointach, w których decyzja należy do użytkownika.
+
+```
+CP DECYZYJNE (STOP — czekaj na odpowiedź):
+  CP-1a  tylko gdy C0 wykrył nowe wątki (T_BRAK) do wyboru zakresu
+  CP-1b  wybór strategii
+  CP-FSL-D tylko gdy luka KRYTYCZNA (nie BRAK-DOK, §3B) bez wcześniejszej decyzji
+  CP-PD  gdy ≥30 plików (plan partii)
+  CP-ATAK gdy wynik ATAK-KRYTYCZNY
+  przed .docx: INFORMACJA WARUNKOWA (a/b) — jeden raz, na końcu
+
+CP INFORMACYJNE (wykonaj, zaraportuj jednym blokiem, NIE zatrzymuj się):
+  wszystkie pozostałe: CP-1c-skan, CP-FSL-D (bez luki krytycznej), CP-1c-macierz,
+  CP-1c-lancuch, CP-1d-anomalie, CP-1d, CP-W1, CP-PRE-W2, CP-PODMIOT, CP-QUALITY,
+  CP-AUDYT, CP-PEER (PEER-OK / PEER-UWAGI)
+
+Reguły:
+  1. Po potwierdzeniu użytkownika („tak”, „ok”, „kontynuuj”, „dalej”, „zamknij i rób
+     dalej”) zamknij bieżący CP i wykonaj kolejne CP INFORMACYJNE w tej samej
+     odpowiedzi, aż do najbliższego CP DECYZYJNEGO albo do końca pipeline.
+  2. Każdy wykonany CP = krótki blok raportu (Wykonane / Wyniki / Problemy) w tej
+     samej odpowiedzi; rejestr CP wyświetl raz, na końcu odpowiedzi.
+  3. CP zamknięty i potwierdzony nie jest raportowany ponownie. Rozbieżność między
+     rejestrem CP z historii rozmowy a wskaźnikiem kroku aplikacji: rozstrzyga rejestr
+     z potwierdzeniem użytkownika (§7.1) — przejdź do następnego CP, nie powtarzaj
+     raportu zamkniętego CP.
+  4. Limit odpowiedzi (długość / liczba kroków): przerwij po pełnym CP i dopisz
+     „Następny: [CP]”. Kolejna wiadomość użytkownika wznawia od tego CP.
+  5. Użytkownik napisze „pełne checkpointy” / „krok po kroku” -> wróć do trybu §3
+     (STOP po każdym CP).
+
+Tryb §3C jest DOMYŚLNY dla pipeline pisma. §3.2–3.3 (STOP po każdym CP)
+stosuje się tylko na żądanie z reguły 5 i do CP DECYZYJNYCH.
+```
+
+---
+
 ## § 4. BRAMKA PRZED KAŻDYM WYWOŁANIEM .docx
 
 Przed KAŻDYM wywołaniem bash_tool/create_file tworzącym plik .docx model
@@ -156,7 +237,7 @@ CP-CHECK (obligatoryjny — nie można pominąć):
       NIE: → CP-CHECK FAIL — wyświetl komunikat FAIL i STOP
 
   ⛔ Dodatkowa kontrola CP-FSL-D (CRIT):
-  → Czy [CP-FSL-D] zamknięty lub uzasadniony N/A (per §3A)?
+  → Czy [CP-FSL-D] zamknięty (także ZAMKNIĘTY Z BRAKAMI, §3B) lub uzasadniony N/A (per §3A)?
       NIE → CP-CHECK FAIL z komunikatem:
             "⛔ CP-FSL-D niezamknięty — per-teza weryfikacja dowodów
              nie wykonana. Pismo może pomijać kluczowe dowody.
@@ -305,8 +386,10 @@ STAN 0 (przed routing):
 
 Po każdym zamkniętym CP:
   → zaktualizuj CP-REJESTR (○ → ✅)
-  → wyświetl raport CP z aktualnym rejestrem
-  → STOP → czekaj na użytkownika
+  → wyświetl raport CP
+  → CP DECYZYJNY: STOP → czekaj na użytkownika
+  → CP INFORMACYJNY: następny CP w tej samej odpowiedzi (§3C)
+  → BRAK-DOK: adnotacja + REJESTR BRAK-DOK, bez STOP (§3B)
 
 Przed każdym bash_tool tworzącym .docx:
   → CP-CHECK (§4)
