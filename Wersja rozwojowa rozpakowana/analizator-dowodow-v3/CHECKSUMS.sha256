@@ -1,4 +1,4 @@
-43b53dba0adf0caa9b9b324220264d09391a12a1e4556aa55e27902f31c5f1d9  ./SKILL.md
+1c9848227d26d74287adea4a921abba54e435429e42d27fd4f6c58c49a950b24  ./SKILL.md
 6a7c4cb707d9cdce519062eae055b60604f709df30e8dc702c09e6504b8b4179  ./agents/openai.yaml
 c83468edbc76f9aaa5a4e6bc40d7c8de3efff006935b44f4f1cf810a48cd0fb0  ./assets/dashboard.html
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
@@ -30,7 +30,7 @@ f755ae617d989360b9ad31dbe8bf944becacf53b5aecd634f3cac24eda8d6901  ./modules/MP2-
 383dd0c1decf97ddef7e61f55c491f32e93a017162ecb7d11386b78db3353491  ./modules/MP8-dowody.md
 484cbe02a3a93cff656800640874ab2f4611093e3ce71dcc782fd206b71e049a  ./modules/MP9-jakosc.md
 10667796daf3fd6fcf4e3d2acf80e578166f7c4f2a650faa793d04978da11e02  ./modules/MX-dziedziny.md
-b03285710bd03009cda37804bdbda2211dcfc2878409a36dd3a193afb45113fe  ./references/CHANGELOG.md
+d91a4ab14dc9f484944fc2b321b7ee9b8892f7ec4e15c9da321a7e792a57d216  ./references/CHANGELOG.md
 bd98fe34b6479adcb7e2ca5ad2138a560712546310c658ab4207caff89f81d52  ./references/HISTORIA-ZMIAN-PLIKOW.md
 852dd0672cf8e854fd6beae36ea6aaabd68c5fdb17e67752d59f4252af6d4121  ./references/engines/contradictory-evidence-engine-v10.md
 6f06a9a616eea04860567e0f1ea28fb1825550a1d2514945b51e1483c7073e5c  ./references/engines/evidence-driven-matrix.md

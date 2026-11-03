@@ -156,6 +156,9 @@ FORMAT RAPORTU POMINIĘĆ (włącz do każdego raportu CP gdy pominięcia istnie
 
   ⛔ Po wyświetleniu raportu pominięć — ZAKOŃCZ ODPOWIEDŹ.
   Czekaj na decyzję użytkownika (a/b).
+  Wyjątek BRAK-DOK (shared/CP-GATE.md §3B): krok zamknięty z brakami z powodu
+  braku dokumentu NIE jest „POMINIĘTY” — wpisz go do REJESTRU BRAK-DOK
+  w raporcie CP i pracuj dalej, bez pytania a/b.
 
   Użytkownik odpowiada "a"/tak → kontynuuj, oznacz pismo jako
     ⚠️ DRAFT — NIEZWERYFIKOWANY (wzmocniony watermark w .docx)

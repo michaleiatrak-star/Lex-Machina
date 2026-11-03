@@ -51,10 +51,16 @@ FORMAT RAPORTU CP (obowiązkowy — każdy CP musi go wyświetlić):
   │ ➡️ Generuję wersję FINAL .docx (bez watermarku DRAFT)  │
   └─────────────────────────────────────────────────────────┘
 
-⛔ ZAKAZ-CP: model NIE może przejść do następnego etapu
-   bez wiadomości użytkownika po każdym [CP].
+⛔ ZAKAZ-CP: model NIE może przejść przez CP DECYZYJNY
+   bez wiadomości użytkownika (lista: shared/CP-GATE.md §3C).
    Nawet gdy użytkownik napisał "rób wszystko automatycznie" —
    ZAKAZ-CP jest nadrzędny. Checkpointy zapewniają kontrolę jakości.
+
+TRYB PIPELINE-SZYBKI (domyślny, CP-GATE §3C): CP INFORMACYJNE wykonuj
+   jeden po drugim w tej samej odpowiedzi, każdy z krótkim raportem;
+   zatrzymaj się dopiero na CP DECYZYJNYM. Zamkniętego CP nie raportuj ponownie.
+BRAK-DOK (CP-GATE §3B): brak dokumentu = adnotacja w raporcie i w pliku,
+   jedno pytanie bez czekania; nigdy STOP ani odmowa zapisu DRAFT.
 
 WYJĄTEK: gdy użytkownik w tej samej wiadomości co trigger pisma napisał
    "bez checkpointów" lub "automatycznie bez zatwierdzeń" —
@@ -101,7 +107,7 @@ STAN 1: W1 — Rama i strategia
   → W1.2 Teza centralna (wstępna)
   → W1.2a CLAIM-VALIDATION [CP-1a]
       view shared/CLAIM-VALIDATION.md
-      ⛔ STOP [CP-1a] po zakończeniu → raport → czekaj na użytkownika
+      [CP-1a] → raport; STOP tylko gdy C0 wykrył wątki T_BRAK do wyboru (CP-GATE §3C), inaczej dalej
 
   → W1.2b MOD-STRATEGIA-WYBOR ⛔ (gdy ≥2 ścieżki LUB anomalia podmiotowa) [CP-1b]
       view shared/MOD-STRATEGIA-WYBOR.md
@@ -117,7 +123,7 @@ STAN 1: W1 — Rama i strategia
         ⛔ HARD GATE — wykonaj PRZED PD0 i PRZED macierzą
         view shared/MOD-SKAN-DOWODOW-KOMPLETNY.md
         → SD-GATE-0: czy plik faktycznie wgrany gdy wzmianka o załącznikach?
-          NIE → ⛔ BLOKADA W1.3 i W2 — zażądaj plików, nie kontynuuj
+          NIE → BRAK-DOK (CP-GATE §3B): poinformuj, poproś o pliki, kontynuuj
         → SD-INW: zinwentaryzuj WSZYSTKIE pliki (ZIP → zawartość, nie kontener)
         → SD-READ: odczytaj KAŻDĄ STRONĘ (PDF per str., XLSX per zakładkę,
           ODT z obrazami: każdy obraz, protokół sądowy: każde zdanie)
@@ -125,7 +131,7 @@ STAN 1: W1 — Rama i strategia
         → SD-GATE-4: jeśli SD-VER ≠ KOMPLET → BLOKADA W2, wróć do SD-READ
         ⛔ Pominięcie strony/zakładki/obrazu ODT = BŁĄD KRYTYCZNY
         ⛔ Szczególnie: protokoły sądowe → KAŻDE zdanie zeznań → SD-FAKTY
-        ⛔ STOP [CP-1c-skan] → raport SD-VER pełny → czekaj na użytkownika
+        [CP-1c-skan] INFORMACYJNY (CP-GATE §3C) → raport SD-VER → dalej do PD0/FSL-D
 
       KROK W1.2c-PD0 (PO SD-VER KOMPLET — zawsze):
         view shared/MOD-PORCJOWANIE-DOWODOW.md → PD0 (skan wstępny).
@@ -150,9 +156,10 @@ STAN 1: W1 — Rama i strategia
         → FSL-D-REPORT: macierz T×TC z klasyfikacją + zestawienie luk per klasa
         Rozgałęzienie po FSL-D-REPORT:
           ⬛ 🔴 = ⛔ STOP → pytania do użytkownika (a/b/c/d) → czekaj
+          ⬛ 🔴 z BRAK-DOK (dokumentu nie ma / „pomiń”) = decyzja d), dalej (CP-GATE §3B)
           ⬛ 🟠 = kontynuuj z żądaniem ewentualnym w petitum
           ⬛ 🟡 = notacja w RAPORCIE D (W2.4), kontynuuj
-        ⛔ STOP [CP-FSL-D] → wyświetl FSL-D-REPORT → czekaj na zatwierdzenie
+        [CP-FSL-D] → FSL-D-REPORT; STOP tylko przy luce krytycznej bez decyzji (BRAK-DOK = dalej, CP-GATE §3B/§3C)
         Po zatwierdzeniu: FSL-D-MACIERZ (nie SD-FAKTY bezpośrednio!) → W1.2c-MACIERZ
 
       KROK W1.2c-MACIERZ (gdy STATUS BEZPIECZNY lub po zatwierdzeniu planu P1): [CP-1c-macierz]
@@ -160,7 +167,7 @@ STAN 1: W1 — Rama i strategia
         MT1 (inwentaryzacja tez+dowodów z bieżącej partii) →
         MT2 (skan dwukierunkowy) → MT3 (klasyfikacja K/R/W/RK) →
         MT4 (RAPORT macierzy D×T)
-        ⛔ STOP [CP-1c-macierz] → wyświetl macierz → czekaj na zatwierdzenie
+        [CP-1c-macierz] INFORMACYJNY → wyświetl macierz → dalej (CP-GATE §3C)
         Po zatwierdzeniu: MT5 → zasilenie W1.3
 
       KROK W1.2c-LANCUCH (PO MACIERZY — gdy ≥1 teza główna): [CP-1c-lancuch]
@@ -185,7 +192,7 @@ STAN 1: W1 — Rama i strategia
           ŁD-6 Antycypacja ataku ŁA-1..ŁA-4 → lista do D7
         ⛔ EQG-1=WYKLUCZ → usuń z łańcucha bez wyjątku
         ⛔ Scoring ★ bez alternatywy → STOP — zażądaj uzupełnienia lub porzuć tezę
-        ⛔ STOP [CP-1c-lancuch] → wyświetl scoring ★ per teza + EQG → czekaj
+        [CP-1c-lancuch] INFORMACYJNY → scoring ★ per teza + EQG → dalej (CP-GATE §3C)
         Po zatwierdzeniu: lista łańcuchów ŁD-n → zasilenie W1.3 + D7 antycypacje
 
   → W1.2d-PRE MOD-DOKUMENT-ANOMALIE ⛔ (gdy ≥2 dokumenty strony przeciwnej lub pracodawcy) [CP-1d-anomalie]
@@ -196,7 +203,7 @@ STAN 1: W1 — Rama i strategia
       DA-3 (klasyfikacja: Klasa I = błąd pracodawcy / II = rozbieżność adresy / III = podejrzenie) →
       DA-4 (DA-REJ: tabela anomalii z efektem procesowym per anomalia) →
       DA-5 (zasilenie W1.3: Klasa I → argument "błąd pracodawcy nie szkodzi pracownikowi")
-      ⛔ STOP [CP-1d-anomalie] → wyświetl DA-REJ → czekaj na zatwierdzenie
+      [CP-1d-anomalie] INFORMACYJNY → wyświetl DA-REJ → dalej (CP-GATE §3C)
       ⛔ ZAKAZ: nie formułuj argumentu o tożsamości podmiotów bez DA-2 (online)
       ⛔ ZAKAZ: nie używaj "ten sam KRS = ten sam podmiot" — zawsze sprawdź DA-2
       Trigger: umowy pracodawcy / dokumenty XLSX / pisma strony przeciwnej
@@ -212,7 +219,7 @@ STAN 1: W1 — Rama i strategia
       PK5 (antycypacja systemowa — ZAWSZE dla każdej tezy, nie tylko pracownicze) →
       PK6 (roszczenie alternatywne S2 — po CV-ALT z CLAIM-VALIDATION)
       PK7 REJESTR [A]–[E] → zasilenie W1.3
-      ⛔ STOP [CP-1d] → wyświetl rejestr PK7 → czekaj na zatwierdzenie użytkownika
+      [CP-1d] INFORMACYJNY → wyświetl rejestr PK7 → dalej (CP-GATE §3C)
       ⛔ ZAKAZ-1D: nie przechodzij do W1.3 bez zamkniętego PK7 gdy ≥1 dokument
 
   → W1.3 Mapa przepisów + tezy (lista robocza ⚠️ nieweryfikowane)
@@ -220,7 +227,7 @@ STAN 1: W1 — Rama i strategia
       view shared/MOD-RED-TEAM-WLASNY.md
   → W1 RAPORT KOŃCOWY (typ pisma, teza centralna, ścieżka strategiczna,
       lista przepisów roboczych, lista dowodów z funkcją, słabości wykryte)
-  ⛔ STOP [CP-W1] → wyświetl raport W1 → czekaj na zatwierdzenie użytkownika
+  [CP-W1] INFORMACYJNY → raport W1 → dalej (CP-GATE §3C)
   ⛔ ZAKAZ: nie przechodzij do STAN 1.5 bez wiadomości "ok"/"kontynuuj"/uwag
 
 STAN 1.5: PRE-W2-VERIFICATION-GATE ⛔ BLOKUJE W2 [CP-PRE-W2]
@@ -229,7 +236,7 @@ STAN 1.5: PRE-W2-VERIFICATION-GATE ⛔ BLOKUJE W2 [CP-PRE-W2]
   PRE-W2.C (pozwany KRS — ekrs.ms.gov.pl) →
   PRE-W2.D (cross-check numerów rejestrowych z akt) →
   PRE-W2.E RAPORT PRE-W2
-  ⛔ STOP [CP-PRE-W2] → wyświetl raport PRE-W2 → czekaj na użytkownika
+  [CP-PRE-W2] INFORMACYJNY → raport PRE-W2 → dalej (CP-GATE §3C)
   GATE-OK/WARN: po zatwierdzeniu → W2.1
   GATE-STOP: czekaj na wyjaśnienie → aktualizuj raport → ponów → W2.1
 
@@ -263,17 +270,17 @@ STAN 2: W2 — Projekt pisma
         SW-TARCZKA: antycypacja ataku na NASZEGO świadka — wbuduj do W2
         SW-WNIOSKI: konfrontacja (art. 272) / wezwanie świadka (art. 258) /
           dokumenty (art. 248) — weryfikuj ISAP przed użyciem
-        ⛔ STOP po W2.4c → raporty D + SW-PRIOR łącznie → czekaj na użytkownika
+        Po W2.4c → raporty D + SW-PRIOR łącznie w raporcie CP-ATAK (STOP tylko przy ATAK-KRYTYCZNY)
         Zakres ataku: obejmuje ZARÓWNO świadków przeciwnika (atak)
           JAK I naszych świadków (antycypacja + szczepienie)
-      ⛔ STOP [CP-ATAK] → wyświetl RAPORT D + RAPORT SW → czekaj na użytkownika
+      [CP-ATAK] → RAPORT D + RAPORT SW; STOP tylko przy ATAK-KRYTYCZNY (CP-GATE §3C)
       ATAK-OK/UWAGI: po zatwierdzeniu → W3
       ATAK-STOP: czekaj na wyjaśnienie → popraw projekt → ponów D4 → W3
 
 STAN 3: W3 — Weryfikacja + walidacja
   ⛔ PODMIOT-GATE (W3.0) — ZAWSZE PIERWSZY [CP-PODMIOT]
       zweryfikuj KAŻDY ⚠️POD (strona + sąd/organ) online
-      ⛔ STOP [CP-PODMIOT] → raport statusów ✅/⚠️/⛔ per podmiot → czekaj
+      [CP-PODMIOT] INFORMACYJNY → raport statusów per podmiot → dalej (CP-GATE §3C)
       → dopiero po zamknięciu: W3.1
 
   → W3.1 ISAP — web_fetch/web_search KAŻDEGO ⚠️[artykuł] z W2
@@ -291,11 +298,11 @@ STAN 3: W3 — Weryfikacja + walidacja
       PASS → W3.6
       PASS-WITH-WARNING → W3.6 (zaznacz ostrzeżenia)
       FAIL → ⛔ BLOKADA .docx → wróć do W3.1/W3.2 → popraw
-      ⛔ STOP [CP-QUALITY] → wyświetl wynik gate → czekaj
+      [CP-QUALITY] INFORMACYJNY → wynik gate → dalej (CP-GATE §3C)
   → W3.6 Pismo finalne (wszystkie ⚠️ zamknięte, sygnatury z W3.2)
   → W3.6a AUDYT-KOŃCOWY [CP-AUDYT]
       COURT-SIMULATION → LEGAL-QUALITY-GATE → audyt punktowy 0-10
-      ⛔ STOP [CP-AUDYT] → wyświetl wyniki → czekaj
+      [CP-AUDYT] INFORMACYJNY → wyniki → dalej (CP-GATE §3C)
       audyt ≥7/10 każda kategoria → W3.7
       audyt <7/10 → wskaż kategorie → popraw → ponów audyt
   → W3.7 PEER-REVIEW + POST-VALIDATION [CP-PEER]
@@ -303,7 +310,7 @@ STAN 3: W3 — Weryfikacja + walidacja
       view shared/POST-VALIDATION.md (zawsze)
       FAZA 1: auto-raport braków
       FAZA 2: wstawienie danych / zamknięcie ⬛
-      ⛔ STOP [CP-PEER] → wyświetl wyniki → czekaj
+      [CP-PEER] INFORMACYJNY → wyniki → INFORMACJA WARUNKOWA przed .docx (CP-GATE §3C)
       PEER-STOP → ⛔ BLOKADA .docx → popraw → ponów
       PEER-OK → generuj .docx
 ```
@@ -380,7 +387,8 @@ STAN 3: W3 — Weryfikacja + walidacja
 ⛔ ZAKAZ-10: NIE generuj W2 (projektu pisma) bez ukończonego W1.2c-PRE
             (MOD-SKAN-DOWODOW-KOMPLETNY). SD-VER musi mieć status KOMPLET.
             Zakaz obejmuje sytuację gdy użytkownik wspomina o załącznikach/dowodach
-            ale ich nie wgrał — w takim wypadku: STOP, zażądaj plików, nie generuj.
+            ale ich nie wgrał — w takim wypadku: poproś o pliki raz i pracuj na tym,
+            co jest (BRAK-DOK, CP-GATE §3B); W2 jako DRAFT z REJESTREM BRAK-DOK.
             ⛔ Pominięcie choćby jednej strony / zakładki / obrazu ODT = BŁĄD KRYTYCZNY.
             ⛔ Protokoły sądowe: każde zdanie zeznań świadka = osobny wpis SD-FAKTY.
             W2.4 jest OBLIGATORYJNY — brak pliku MOD-ATAK-NA-DRAFT.md nie zwalnia z kroku;
@@ -440,9 +448,12 @@ STAN 3: W3 — Weryfikacja + walidacja
   □ Czy którykolwiek CP oznaczono N/A? → zweryfikuj ZAKAZ-14 (warunek techniczny = NIE?)
 
   NIE → wyświetl przypomnienie: "Czekam na potwierdzenie [CP-X] przed kontynuacją."
-  TAK → kontynuuj do następnego kroku → wykonaj → [CP-następny] → STOP
+  TAK → kontynuuj → wykonuj kolejne CP INFORMACYJNE w tej samej odpowiedzi →
+        STOP dopiero na CP DECYZYJNYM (CP-GATE §3C)
 
 Czy użytkownik prosił o pismo procesowe / zażalenie / pozew / apelację?
+  (drzewo pokazuje kolejność; „→ STOP” = koniec CP. Przy CP INFORMACYJNYM
+   zamiast STOP przejdź do następnej gałęzi w tej samej odpowiedzi — CP-GATE §3C)
   TAK → czy [CP-1a] CLAIM-VALIDATION zamknięty?
           NIE → wykonaj CLAIM-VALIDATION → [CP-1a] → STOP
           TAK → czy [CP-1c-skan] SD-VER zamknięty (gdy pliki)?
@@ -507,8 +518,9 @@ Jeśli wykryjesz, że pominąłeś W2.4c (MOD-ATAK-NA-SWIADKA) gdy ogniwa zeznan
 **REGUŁA-KONTYNUACJA — gdy użytkownik pisze "continue" / "kontynuuj" / "dalej":**
 
 ```
-⛔ HARD GATE — "continue" / "kontynuuj" / "dalej" NIE jest zatwierdzeniem
-   żadnego checkpointu ani sygnałem do pominięcia kroków pipeline'u.
+⛔ HARD GATE — "continue" / "kontynuuj" / "dalej" w toku pipeline = zatwierdzenie
+   bieżącego CP (Klasa A, CP-GATE §3C); NIE jest sygnałem do pominięcia kroków.
+   Po zatwierdzeniu: zamknij CP i przejdź dalej — nie powtarzaj raportu tego CP.
 
 ZASADA: słowo "continue" / "kontynuuj" / "ok" po gotowym piśmie = żądanie
   nowego pisma lub rozszerzenia, NIE wznowienie od miejsca pominięcia.
