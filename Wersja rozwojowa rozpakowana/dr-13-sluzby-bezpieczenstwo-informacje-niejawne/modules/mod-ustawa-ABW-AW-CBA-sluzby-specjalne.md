@@ -182,6 +182,8 @@ Kontrola operacyjna — postanowienie sądu:
   → Termin: 3 miesiące (przedłużalny)
   → Materiały z kontroli niezgodnej z prawem: niedopuszczalne jako dowód
   → Zniszczenie zebranych materiałów gdy nie użyto w postępowaniu
+  → Od 31.10.2026 (Dz.U. 2026 poz. 1281): nadzór sądu i prokuratora nad kontrolą operacyjną — informacja w toku, zakończenie kontroli z urzędu, uzasadnienie postanowień, terminy niszczenia materiałów; tabela przepisów i art. 11 (kontrola zarządzona przed 31.10.2026) → `mod-ustawa-sluzby-operacyjne-retencja-danych`, sekcja „KONTROLA OPERACYJNA — NADZÓR SĄDU I PROKURATORA”.
+    ABW art. 27, CBA art. 17, SOP art. 42–54 (w tym nowy art. 49a).
 
 Skargi na działania służb:
   → Skargi do Kolegium ds. Służb Specjalnych (przy Prezesie RM)

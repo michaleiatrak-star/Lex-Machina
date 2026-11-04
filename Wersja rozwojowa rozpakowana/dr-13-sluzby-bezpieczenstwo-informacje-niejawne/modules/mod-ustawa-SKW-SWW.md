@@ -116,10 +116,13 @@ naprawy, sygnalizacja tylko orientacyjna)
   ingerujące uprawnienia pozostają zastrzeżone dla samego Szefa,
   bez możliwości delegacji)
 
-⚠️ Wykonywanie kontroli operacyjnej (podsłuchy itp.) — analogicznie do
-  ABW zapewne wymaga zgody sądu (wzmianka o "posiedzeniu sądu" i roli
-  prokuratora w dostępnych źródłach, KPK jako podstawa odpowiedniego
-  stosowania) — NIEZWERYFIKOWANE szczegółowo, wymaga odrębnej sesji.
+✅ Kontrola operacyjna SKW — art. 31 ustawy o SKW/SWW; postanowienia wydaje sąd (zażalenie, ust. 10:
+  Pierwszy Zastępca PG Prokurator Krajowy i Szef SKW; do zażalenia — odpowiednio KPK); od 31.10.2026
+  (Dz.U. 2026 poz. 1281 art. 7: ust. 1a, 8, 10, 13, 13a, 14j, 15, 15a) Wojskowy Sąd Okręgowy w Warszawie
+  i Prokurator Krajowy mogą żądać informacji w toku i zakończyć kontrolę z urzędu (ust. 13a), sąd
+  uzasadnia postanowienia (ust. 8 zd. 3) ✅ [VER: ELI DU/2026/1281 art. 7, RZĄD 1, 2026-11-04].
+  Pozostałe ustępy art. 31 — z t.j. Dz.U. 2026 poz. 157 i ELI. Zestawienie służb i art. 11 (kontrola
+  zarządzona przed 31.10.2026) → `mod-ustawa-sluzby-operacyjne-retencja-danych`.
 ```
 
 ---
@@ -145,7 +148,7 @@ naprawy, sygnalizacja tylko orientacyjna)
 ## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
 - Pełny katalog uprawnień operacyjno-rozpoznawczych (Rozdział dot.
   czynności operacyjnych) — art. 29-34 i dalsze, zbadane tylko punktowo.
-- Tryb kontroli operacyjnej (zgoda sądu, rola prokuratora) — nie
-  zweryfikowany wprost w tej sesji.
+- Tryb kontroli operacyjnej — zweryfikowany wyłącznie w zakresie zmian Dz.U. 2026 poz. 1281
+  (art. 31 ust. 1a, 8, 10, 13, 13a, 14j, 15, 15a); przesłanki i katalog — z t.j. 2026/157.
 - Ustawa o służbie funkcjonariuszy SKW/SWW (pragmatyka) — odrębny akt,
   kandydat do osobnego modułu jeśli pojawi się aktywna sprawa kadrowa.

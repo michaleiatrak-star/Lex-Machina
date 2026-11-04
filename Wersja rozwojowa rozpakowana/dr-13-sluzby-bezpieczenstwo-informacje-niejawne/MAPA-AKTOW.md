@@ -6,13 +6,14 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 
 | Akt / zakres | Bieżąca podstawa | Moduł / routing | Status runtime |
 |---|---|---|---|
-| Ustawa o Policji | Dz.U. 2025 poz. 636 t.j. z późn. zm. (po t.j. (ELI 2026-10-12) 12 zmian, m.in. 2026/646, 2026/815 w mocy 4.07.2026, 2026/1281) | `mod-ustawa-policja` | ✅ aktywny; fresh gate |
-| Ustawa o Straży Granicznej | Dz.U. 2026 poz. 367 t.j. z późn. zm. (po t.j. (ELI 2026-10-12): 2026/646, 2026/815 w mocy 4.07.2026, 2026/821, 2026/864, 2026/1123, 2026/1281) | `mod-ustawa-straz-graniczna` | ✅ aktywny; fresh gate |
-| Ustawa o Żandarmerii Wojskowej | Dz.U. 2026 poz. 159 t.j.; po t.j. (ELI 2026-10-12): 2026/815 (w mocy 4.07.2026), 2026/1281 | `mod-ustawa-zandarmeria-wojskowa` | ✅ aktywny |
-| Ustawa o ABW oraz AW | Dz.U. 2026 poz. 937 t.j. ze zm. | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny; fresh gate |
-| Ustawa o CBA | Dz.U. 2025 poz. 712 t.j. ze zm. | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny |
-| Ustawa o SOP | Dz.U. 2025 poz. 34 t.j. z późn. zm. (po t.j. (ELI 2026-10-12) 9 zmian, m.in. 2026/646, 2026/815 w mocy 4.07.2026, 2026/1281) | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny |
-| Ustawa o SKW oraz SWW | Dz.U. 2026 poz. 157 t.j. ze zm. | `mod-ustawa-SKW-SWW` | ✅ aktywny; fresh gate |
+| Ustawa o Policji | Dz.U. 2025 poz. 636 t.j. z późn. zm. (po t.j. (ELI 2026-10-12) 12 zmian, m.in. 2026/646, 2026/815 w mocy 4.07.2026, 2026/1281 w mocy 31.10.2026 — art. 19) | `mod-ustawa-policja` | ✅ aktywny; fresh gate |
+| Ustawa o Straży Granicznej | Dz.U. 2026 poz. 367 t.j. z późn. zm. (po t.j. (ELI 2026-10-12): 2026/646, 2026/815 w mocy 4.07.2026, 2026/821, 2026/864, 2026/1123, 2026/1281 w mocy 31.10.2026 — art. 9e) | `mod-ustawa-straz-graniczna` | ✅ aktywny; fresh gate |
+| Ustawa o Żandarmerii Wojskowej | Dz.U. 2026 poz. 159 t.j.; po t.j. (ELI 2026-10-12): 2026/815 (w mocy 4.07.2026), 2026/1281 (w mocy 31.10.2026 — art. 31) | `mod-ustawa-zandarmeria-wojskowa` | ✅ aktywny |
+| Ustawa o ABW oraz AW | Dz.U. 2026 poz. 937 t.j. ze zm. (⚡ art. 27 — kontrola operacyjna: zm. 2026/1281 art. 5, w mocy 31.10.2026) | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny; fresh gate |
+| Ustawa o CBA | Dz.U. 2025 poz. 712 t.j. ze zm. (⚡ art. 17 — kontrola operacyjna: zm. 2026/1281 art. 6, w mocy 31.10.2026) | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny |
+| Ustawa o SOP | Dz.U. 2025 poz. 34 t.j. z późn. zm. (po t.j. (ELI 2026-10-12) 9 zmian, m.in. 2026/646, 2026/815 w mocy 4.07.2026, 2026/1281 w mocy 31.10.2026 — art. 42–54) | `mod-ustawa-ABW-AW-CBA-sluzby-specjalne` | ✅ aktywny |
+| Ustawa o SKW oraz SWW | Dz.U. 2026 poz. 157 t.j. ze zm. (⚡ art. 31 — kontrola operacyjna: zm. 2026/1281 art. 7, w mocy 31.10.2026) | `mod-ustawa-SKW-SWW` | ✅ aktywny; fresh gate |
+| Kontrola operacyjna — nadzór sądu i prokuratora (Policja, SG, ŻW, ABW, CBA, SKW/SWW, KAS, SOP) | Dz.U. 2026 poz. 1281 (ustawa z 4.09.2026; w mocy 31.10.2026; art. 11 — kontrola zarządzona wcześniej) | `mod-ustawa-sluzby-operacyjne-retencja-danych` | ✅ aktywny; fresh gate |
 | Ustawa o ochronie informacji niejawnych | Dz.U. 2025 poz. 1209 t.j. ze zm. | `mod-ustawa-informacje-niejawne` | ✅ aktywny |
 | Ustawa o obronie Ojczyzny | Dz.U. 2025 poz. 825 t.j. z późn. zm. (po t.j. (ELI 2026-10-12): 2025/1014, 2025/1080, 2026/26, 2026/426, 2026/635, 2026/815 w mocy 4.07.2026, 2026/1123) | `mod-ustawa-obrona-ojczyzny-mobilizacja` | ✅ aktywny; fresh gate |
 | Ustawa o ochronie ludności i obronie cywilnej | Dz.U. 2024 poz. 1907 (brak t.j.); zm. (ELI 2026-10-12): 2025/1705, 2026/646, 2026/815 (w mocy 4.07.2026) | `mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna` | ✅ aktywny; fresh gate |

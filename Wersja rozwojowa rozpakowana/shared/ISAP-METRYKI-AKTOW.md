@@ -32,7 +32,7 @@
 | Akt | Metryka ISAP zweryfikowana | Status roboczy systemu | Uwagi wdrożeniowe |
 |---|---:|---|---|
 | Ordynacja podatkowa | tekst ujednolicony ISAP `D19970926Lj.pdf`, opracowanie Kancelarii Sejmu z 25.05.2026 | aktualny na dzień audytu | postępowanie podatkowe jako moduł odrębny od KPA |
-| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131; tekst ujednolicony ISAP `D20161947Lj.pdf` | aktualny na dzień audytu z wymogiem sprawdzenia zmian po t.j. | kontrola celno-skarbowa, czynności sprawdzające, uprawnienia UCS |
+| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131; tekst ujednolicony ISAP `D20161947Lj.pdf` | aktualny na dzień audytu z wymogiem sprawdzenia zmian po t.j.; ⚡ zm. Dz.U. 2026 poz. 1281 art. 9 (art. 118, 122 ust. 4, 123 — kontrola operacyjna), w mocy 31.10.2026 | kontrola celno-skarbowa, czynności sprawdzające, uprawnienia UCS |
 | Kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j.; po t.j. opublikowano zmiany, dlatego sprawdzać ELI na dzień czynu/czynności | PO-TJ-ZMIANY | konkretny przepis zawsze fresh gate |
 
 ---

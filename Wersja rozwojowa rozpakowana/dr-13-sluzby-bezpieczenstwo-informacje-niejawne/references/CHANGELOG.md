@@ -1,5 +1,6 @@
 # CHANGELOG — dr-13-sluzby-bezpieczenstwo-informacje-niejawne
 
+- 3.20 (2026-11-04, AUDYT-2026-11-04): Dz.U. 2026 poz. 1281 (nadzór sądowy nad kontrolą operacyjną, w mocy 31.10.2026) — nowa sekcja w mod-ustawa-sluzby-operacyjne-retencja-danych (tabela przepisów Policji, SG, ŻW, ABW, CBA, SKW/SWW, KAS, SOP, PrProk, BNW; model zmian na art. 19 ustawy o Policji; przejściowe art. 11–13), odesłania w mod-ustawa-policja, -straz-graniczna, -zandarmeria-wojskowa, -ABW-AW-CBA-sluzby-specjalne, -SKW-SWW (zastąpiona uwaga „NIEZWERYFIKOWANE” o trybie kontroli SKW); MAPA-AKTOW: 1281 przy ABW, CBA, SKW/SWW oraz nowy wiersz. ✅ [VER: ELI DU/2026/1281 text.pdf, RZĄD 1]
 - 3.19 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.18 (2026-10-12b, AUDYT-2026-10-12b): Zmiany z Dz.U. 2026 poz. 815 (od 4.07.2026) w metrykach Policji, SG, ŻW, SOP, obrony Ojczyzny, ochrony ludności, śpbp, ppoż., ustawy antyterrorystycznej (MAPA-AKTOW, SKILL.md, moduły); ⛔ SKILL.md: Policja, SG, ŻW — t.j. 2025/636, 2026/367, 2026/159 (było 2024/1589, 1552, 1654); mod-PSP: art. 14fa ust. 3 dosłownie. ELI 2026-10-12.
 
