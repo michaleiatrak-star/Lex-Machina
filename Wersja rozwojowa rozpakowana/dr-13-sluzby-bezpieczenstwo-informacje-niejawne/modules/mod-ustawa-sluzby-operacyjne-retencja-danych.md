@@ -18,6 +18,57 @@ Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, no
 ## Zakres spraw
 Kontrola operacyjna, czynności niejawne, dostęp do danych, odmowa informacji, szkody wynikłe z czynności służb, skargi na funkcjonariuszy, postępowania sprawdzające, poświadczenia bezpieczeństwa, informacje niejawne i materiały zastrzeżone.
 
+## ⚡ KONTROLA OPERACYJNA — NADZÓR SĄDU I PROKURATORA OD 31.10.2026 (Dz.U. 2026 poz. 1281)
+
+✅ [VER: ELI DU/2026/1281 text.pdf — art. 1–14, RZĄD 1, 2026-11-04] Ustawa z 4.09.2026 o zmianie ustaw
+w celu wzmocnienia nadzoru sądowego nad kontrolą operacyjną; ogł. 30.09.2026, w mocy **31.10.2026** (art. 14).
+Zdarzenie przed 31.10.2026 → brzmienie dotychczasowe; kontrola zarządzona przed tą datą → art. 11 (niżej).
+
+| Służba | Przepis po zmianie | Zmieniona przez 2026/1281 |
+|---|---|---|
+| Policja | art. 19 ust. 1a, 10, 14, 14a, 15j, 17a, 20 | art. 1 |
+| Straż Graniczna | art. 9e ust. 1a, 11, 15, 15a, 16j, 18a, 19, 20, 21 (nowy) | art. 2 |
+| Żandarmeria Wojskowa | art. 31 ust. 1a, 11, 15, 15a, 16j, 18–19 | art. 4 |
+| ABW | art. 27 ust. 1a, 10, 11a, 14, 14a, 15l, 16, 16a | art. 5 |
+| CBA | art. 17 ust. 1a, 10, 14, 14a, 15j, 16–17 | art. 6 |
+| SKW / SWW | art. 31 ust. 1a, 8, 10, 13, 13a, 14j, 15, 15a | art. 7 |
+| KAS | art. 118 ust. 2, 8, 13, 13a, 16; art. 122 ust. 4; art. 123 ust. 1a, 3, 4 | art. 9 |
+| SOP | art. 42 ust. 3, art. 46 ust. 1, art. 49 ust. 2, art. 49a (nowy), art. 50, 53, 54 | art. 10 |
+| Prokuratura | art. 11 § 1 Prawa o prokuraturze (roczna informacja PG — nowe kategorie) | art. 8 |
+| Biuro Nadzoru Wewnętrznego MSWiA | ustawa 1996/491: art. 11n i 11o uchylone, art. 11p ust. 1, 7, 11 | art. 3 |
+
+Wspólny model zmian (na przykładzie Policji, art. 19 — brzmienie z art. 1 ustawy 2026/1281):
+- **wniosek:** na żądanie prokuratora lub sądu organ załącza dalsze materiały zgromadzone przed złożeniem
+  wniosku, w całości albo we wskazanym zakresie (ust. 1a zd. 2);
+- **uzasadnienie:** sąd uzasadnia postanowienia o zarządzeniu, przedłużeniu i zgodzie następczej (ust. 10 zd. 3);
+- **informacja w toku:** organ informuje **sąd oraz prokuratora** o wynikach po zakończeniu, a na ich żądanie
+  również o przebiegu kontroli w trakcie jej trwania, z materiałami (ust. 14; poprzednio — tylko prokuratora);
+- **zakończenie z urzędu:** sąd okręgowy i prokurator mogą w każdym czasie wydać postanowienie o zakończeniu
+  kontroli (przesłanki z ust. 7 pkt 3 i 5); postanowienie uzasadnia się; na postanowienie sądu zażalenie
+  przysługuje prokuratorowi i organowi; do zażalenia — odpowiednio KPK (ust. 14a);
+- **zniszczenie materiałów:** w ciągu 3 miesięcy od zarządzenia sądu, w szczególnie uzasadnionych
+  przypadkach + 3 miesiące; niezwłoczna informacja dla sądu i prokuratora (ust. 15j); informacja o zniszczeniu
+  materiałów z ust. 17 — najpóźniej w 14 dni od wykonania zarządzenia, sądowi i prokuratorowi (ust. 17a);
+- **zażalenie:** na postanowienia z ust. 1, 3, 8 i 9 — prokuratorowi i organowi, który złożył wniosek (ust. 20).
+
+Właściwy sąd i prokurator różnią się między służbami — np. SKW: Wojskowy Sąd Okręgowy w Warszawie i Pierwszy
+Zastępca PG Prokurator Krajowy (art. 31 ust. 13a); KAS i SOP: Pierwszy Zastępca PG Prokurator Krajowy, SOP — Sąd
+Okręgowy w Warszawie (art. 49a); Policja: sąd okręgowy i „właściwy prokurator” z art. 19 ust. 1 — zawsze z ustawy danej służby.
+
+Przepisy przejściowe (art. 11–13):
+- art. 11 ust. 1 — nowe brzmienie przepisów o informowaniu i niszczeniu materiałów (np. art. 19 ust. 14, 15j,
+  17a ustawy o Policji) **nie stosuje się** do kontroli zarządzonej przed 31.10.2026;
+- art. 11 ust. 2 — postanowienie o zakończeniu kontroli z urzędu (np. art. 19 ust. 14a ustawy o Policji, art. 49a
+  ustawy o SOP) **nie stosuje się** do kontroli zarządzonej przed 31.10.2026;
+- art. 12 — dotychczasowe rozporządzenia o dokumentowaniu kontroli zachowują moc do nowych, najdłużej 24
+  miesiące (SG i SOP — 12 miesięcy);
+- art. 13 — pierwsza roczna informacja MSWiA o kontroli przez SG (art. 9e ust. 21) — do 30.06.2027.
+
+Praktyka (pismo, analiza): przy zarzucie wadliwości kontroli ustal **datę zarządzenia** (art. 11) i czy sąd
+lub prokurator żądali informacji w toku albo zakończyli kontrolę — brak uzasadnienia postanowienia
+wydanego od 31.10.2026 jest naruszeniem art. 19 ust. 10 zd. 3 ustawy o Policji (odpowiednio u innych służb).
+Treść pozostałych ustępów — każdorazowo z t.j. i ELI aktu zmienianego, nie z tej tabeli.
+
 ## ⭐ DZIAŁANIA/FIRMY POD PRZYKRYCIEM ("PRZYKRYWKĄ") — dodane 2026-07-18
 
 > Odpowiedź na pytanie użytkownika ("firmy pod przykrywką") — dotąd

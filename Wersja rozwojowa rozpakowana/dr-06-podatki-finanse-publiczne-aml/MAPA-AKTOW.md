@@ -29,7 +29,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | VAT — ewidencja / deklaracje / zwrot | aktualne brzmienie VAT i właściwych aktów wykonawczych na dzień obowiązku | `mod-VAT-ewidencja-deklaracje` | ✅ aktywny; temporal gate |
 | VAT — klasyfikacja produktów / PKWiU / CN / WIS | jw. + właściwe klasyfikacje i akty UE | `mod-VAT-klasyfikacja-produktow-baza-niejednoznacznosci` | ✅ aktywny; fresh gate |
 | VAT / PIT / CIT — użytek mieszany i koszty samochodowe | właściwe bieżące przepisy VAT/PIT/CIT | `mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP` | ✅ aktywny; fresh gate |
-| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131 t.j. ze zm. | `mod-KAS-kontrola-celno-skarbowa` | ✅ aktywny |
+| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131 t.j. ze zm. (⚡ kontrola operacyjna: zm. Dz.U. 2026 poz. 1281 art. 9 — art. 118, 122 ust. 4, 123, w mocy 31.10.2026) | `mod-KAS-kontrola-celno-skarbowa` | ✅ aktywny |
 | Kodeks karny skarbowy — routing podatkowo-karny | Dz.U. 2025 poz. 633 t.j. ze zm. | DR-03 `mod-KKS-karny-skarbowy-i-AML.md` | 🟢 B+/COV |
 | Ustawa o finansach publicznych | Dz.U. 2025 poz. 1483 t.j. ze zm. | `mod-UFP-finanse-publiczne-NIK-RIO` | ✅ aktywny |
 | Prawo przedsiębiorców — limit płatności gotówkowych | Dz.U. 2025 poz. 1480 t.j. ze zm. | `mod-limit-platnosci-gotowkowych` + DR-02 `mod-Prawo-przedsiebiorcow-current-state-COV.md` | 🟢 B+/COV |

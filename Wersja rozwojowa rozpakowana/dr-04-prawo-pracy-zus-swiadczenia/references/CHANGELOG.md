@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.55 (2026-11-04, AUDYT-2026-11-04): Dz.U. 2026 poz. 1340 — ⏳ → ✅ w mocy od 30.10.2026 (mod-ustawa-zwiazki-zawodowe-spory-zbiorowe, MAPA-AKTOW); treść modułu już w brzmieniu po zmianie.
 - 3.54 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KP - zwolnienie dyscyplinarne, wypowiedzenie, odwołanie do sądu pracy (wcześniej dobierało zwolnienia grupowe)
 - 3.53 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.52 (2026-10-20, AUDYT-2026-10-20d): NOWY mod-umowa-PL-Japonia-zabezpieczenie-spoleczne (ratyfikacja Dz.U. 2026 poz. 1326; tekst Umowy z druku 2810; Umowa jeszcze nieobowiązująca — art. 31); MAPA-AKTOW, SKILL.md (44 moduły)
