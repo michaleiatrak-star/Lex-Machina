@@ -1,11 +1,11 @@
 # mod-NT — Notariat (Prawo o notariacie)
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
+- metryki aktów sprawdzaj w `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md`;
+- jeżeli sprawa jest procesowa, uruchom `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `prawo-polskie-v2/krajowe/shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
 - ⚠️ ZAKAZ podawania taksyz pamięci — weryfikuj aktualne rozp. MS w ELI (RZĄD 1).
 ---
 
@@ -98,7 +98,7 @@ Właściwy organ: notariusz / Minister Sprawiedliwości / sąd cywilny / organ d
   ↓
 Środek zaskarżenia: zaskarżenie odmowy (14 dni — weryfikuj) / powództwo / skarga
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
   ↓
@@ -184,16 +184,16 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy każda przesłanka ma dowód?
 □ Czy wskazano termin i czy nie upłynął?
 □ Czy podano ryzyki przeciwnika/organu?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+□ Czy użyto prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md?
 ```
 
 ## 9. Łącz obowiązkowo z
 
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
+| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md` |
 | stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
+| braki formalne | `prawo-polskie-v2/krajowe/shared/BRAKI-FORMALNE.md` |
 | warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
 | dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
 | ryzyka | `shared/RISK-ASSESSMENT.md` |
@@ -221,7 +221,7 @@ maksymalnych stawek taksy notarialnej**, t.j. `Dz.U. 2024 poz. 1566`
 ✅ [VER] RZĄD 1 2026-09-12c (status ELI `obowiązujący`).
 
 ```text
-view shared/TABELE-OPLAT.md      # sekcja 6d — tabela § 3 z odczytu treści
+view prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md      # sekcja 6d — tabela § 3 z odczytu treści
 ```
 
 ⛔ **Odwrotna logika niż w taksach adwokackiej i radcowskiej.** Tam § 2 podaje

@@ -36,8 +36,8 @@ Pięć bramek, każda z osobną, obserwowalną hipotezą:
 | # | Bramka | Lokalizacja kanoniczna | Hipoteza (co ma się zmienić przy bramce vs bez) |
 |---|---|---|---|
 | B1 | ANTY-FASADA (AF-1…AF-6) | `shared/SELF-CHECK-ANTY-FASADA.md` | spadek liczby deklaracji „zweryfikowano"/dat weryfikacji/URL-i przy przepisach, dla których w danej odpowiedzi NIE wywołano narzędzia |
-| B2 | KOTWICA URZĘDOWA `🟨` | `shared/PRAWO-HARDGATE.md` | wzrost odsetka cytatów z kotwicą (strona/§/akapit) zamiast samego linku |
-| B3 | DOMAIN-LOCK | `shared/DOMAIN-LOCK.md`, `PRAWO-HARDGATE.md` | spadek liczby przepisów wprowadzonych SPOZA dziedziny wiodącej bez wskazania faktu wypełniającego znamię |
+| B2 | KOTWICA URZĘDOWA `🟨` | `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` | wzrost odsetka cytatów z kotwicą (strona/§/akapit) zamiast samego linku |
+| B3 | DOMAIN-LOCK | `shared/DOMAIN-LOCK.md`, `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` | spadek liczby przepisów wprowadzonych SPOZA dziedziny wiodącej bez wskazania faktu wypełniającego znamię |
 | B4 | RATE-COMPLETENESS | `shared/MOD-GENERATOR-AKTU.md` | wzrost odsetka odpowiedzi o stawkach/terminach, które podają PEŁNY zestaw progów, nie jeden pasujący |
 | B5 | ŚLAD ROUTINGU (`ROUTER-WCZYTANY`) | `prawny-router-v3/SKILL.md` KROK 3A | wzrost odsetka odpowiedzi z jawnym blokiem śladu; osobno: **wiarygodność** pola (patrz § 5) |
 

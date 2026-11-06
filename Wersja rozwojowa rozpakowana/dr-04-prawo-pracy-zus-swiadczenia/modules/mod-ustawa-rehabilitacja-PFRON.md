@@ -10,7 +10,7 @@ Zakres: orzeczenia o niepełnosprawności, stopnie, symbole, wsparcie, PFRON, do
 
 Zawsze stosuj razem z:
 
-- `shared/MODULE-STANDARD-POLISH-LAW.md`,
+- `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md`,
 - `shared/ISAP-AUDIT-PROTOCOL.md`,
 - `shared/TEMPORAL-LAW-CHECK.md`,
 - `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`,

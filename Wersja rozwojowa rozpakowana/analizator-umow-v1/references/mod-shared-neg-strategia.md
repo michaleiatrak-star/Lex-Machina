@@ -296,6 +296,6 @@ MINIMUM AKCEPTOWALNE (bez podpisania):
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Powiązane: Moduł D.3 (rekomendacje zmian), Moduł F (raport końcowy)*
 *Weryfikacja przepisów: ELI (RZĄD 1) · orzeczenia.ms.gov.pl*

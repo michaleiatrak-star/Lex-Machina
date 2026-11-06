@@ -29,7 +29,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 
 ## REJESTR KONKRETNYCH SERWERÓW MCP — POZIOM A (dodany 2026-09-10, F-173)
 
-> ⛔ **Po co ten rozdział.** `shared/PRAWO-HARDGATE.md` definiuje POZIOM A
+> ⛔ **Po co ten rozdział.** `JUR:weryfikacja-przepisow-kanon` definiuje POZIOM A
 > (konektor MCP) jako najsilniejszy kanał weryfikacji i wymienia `mcp-isap`,
 > `legal-cite-pl`, `sententim` i `prawo-pl-saos` jako **wzorce**. Do 2026-09-10
 > system nie wskazywał ani jednego konkretnego, publicznego serwera — POZIOM A
@@ -42,7 +42,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 > Treść zwrócona przez konektor dziedziczy RZĄD **źródła**, do którego konektor
 > sięga, nigdy RZĄD samego konektora.
 >
-> ⛔ **Lista jest OTWARTA** (ZASADA OTWARTEJ LISTY, `HIERARCHIA-ZRODEL.md` §Rząd 3):
+> ⛔ **Lista jest OTWARTA** (ZASADA OTWARTEJ LISTY, `JUR:hierarchia-zrodel` §Rząd 3):
 > brak projektu w tej tabeli nie blokuje jego użycia. Stan rozpoznania:
 > 2026-09-10. Projekty rozwijają się niezależnie — przed wdrożeniem
 > produkcyjnym obowiązkowy audyt licencji, zakresu i aktualności po stronie
@@ -130,7 +130,7 @@ nich odwołują).
 | KRS (`ekrs.ms.gov.pl` / `prs.ms.gov.pl`) | 4 | ✅ **TAK** | Otwarte API KRS (`api-krs.ms.gov.pl`, RESTful, JSON) od 2022, na podstawie ustawy o otwartych danych — bez logowania. Osobne "Full API" (dane wrażliwe) wymaga decyzji ministra, nieistotne dla weryfikacji prawnej |
 | NBP (`nbp.pl`) | 3 | ✅ **TAK** | `api.nbp.pl` — kursy walut i złota, JSON/XML, bez autoryzacji, od 1.08.2025 wyłącznie HTTPS |
 | CEIDG / biznes.gov.pl | 3 | ✅ **TAK** (z kluczem) | Hurtownia Danych CEIDG i Biznes.gov.pl, API v2, dokumentacja publiczna, wymaga bezpłatnego wniosku o klucz API (`dane.biznes.gov.pl`) |
-| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `shared/SYGNATURY.md` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
+| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `JUR:sygnatury-repertoria` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
 
 **Wniosek końcowy (research zamknięty 2026-07-13k):** 5 źródeł z potwierdzonym
 publicznym API bez konektora przed tą sesją (EUR-Lex, KRS, NBP, SUDOP, CEIDG)

@@ -212,7 +212,7 @@ Przed odpowiedzią lub dokumentem compliance stosuj:
 - `shared/HYBRID-VALIDATION.md`
 - `shared/TEMPORAL-LAW-CHECK.md` — DORA stosowane od 17.01.2025; RTS wchodzą etapami
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` jeśli sporządzane pismo procesowe / raport compliance
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` jeśli sporządzane pismo procesowe / raport compliance
 
 ## Weryfikacja online
 

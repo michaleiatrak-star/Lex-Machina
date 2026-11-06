@@ -207,7 +207,7 @@ kalendarza terminów natychmiast po przyjęciu sprawy.
 ⚠️ [NIEWERYFIKOWANE] termin do wniesienia zażalenia (przepis go nie
 określa — prawdopodobne odesłanie do KPK przez ust. 1, ale **nie
 potwierdzone w tej sesji**); ustalić przed wniesieniem.
-⚠️ Odnotować dla `shared/ZAZALENIE-ADRESAT-GATE.md` (F-13): to kolejny
+⚠️ Odnotować dla `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` (F-13): to kolejny
 przypadek zażalenia o **nietypowym adresacie** — organ prokuratorski, nie sąd.
 
 **Ust. 11 — ochrona prawna:** strażnicy PSŁ przy czynnościach służbowych
@@ -332,7 +332,7 @@ sesji 16b). Nie powoływać żadnego z nich bez odczytu ze źródła.
   wojewódzkich** (art. 38 ust. 2).
 - **Punkt styku dr-11:** art. 39 ust. 2a — administrator danych osobowych
   w reżimie ustawy „policyjnej" o ochronie danych (14.12.2018).
-- **Punkt styku `shared/ZAZALENIE-ADRESAT-GATE.md` (F-13):** zażalenie
+- **Punkt styku `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` (F-13):** zażalenie
   do prokuratora — nietypowy adresat, do odnotowania w bramce.
 - **Pozostaje otwarte w F-91:** Rozdz. 3 (zasady gospodarki łowieckiej
   i plany, 8–16a), Rozdz. 1–2 (przepisy ogólne, w tym art. 4 ust. 3

@@ -1,7 +1,7 @@
 # QUESTION-ADMISSIBILITY-GATE — v3.3
 
 > ⛔ HARDGATE — przy każdej powołanej podstawie prawnej:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 ---
 
@@ -17,7 +17,7 @@ KROK FPW-1 — FAKT:
   Jeśli fakt nie wynika z żadnego źródła → pytanie niedopuszczalne (spekulacja).
 
 KROK FPW-2 — PODSTAWA PRAWNA (weryfikacja w ELI (RZĄD 1)):
-  ⛔ HARDGATE → view shared/PRAWO-HARDGATE.md
+  ⛔ HARDGATE → view JUR:weryfikacja-przepisow-kanon
   Wskaż przepis regulujący obowiązek/uprawnienie będące przedmiotem pytania LUB
   decydujący o skutku prawnym odpowiedzi.
   Weryfikacja: web_search przepisu w ELI (RZĄD 1) → oznacz ✅ [VER: ELI DU/RRRR/NNN, data].

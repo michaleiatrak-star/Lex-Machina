@@ -1,6 +1,6 @@
 ---
 name: dr-06-podatki-finanse-publiczne-aml
-version: "3.99.10"
+version: "3.99.11"
 description: "Podatki, finanse publiczne i AML: Ordynacja podatkowa, PIT, CIT, VAT, akcyza, cło, KAS, finanse publiczne i obowiązki przeciwdziałania praniu pieniędzy."
 dependencies:
   requires:
@@ -65,14 +65,14 @@ W sprawach podatkowych sama treść modułu lokalnego jest tylko punktem startu;
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 - **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - **Stawki podatkowe, kwoty wolne, progi — ZAWSZE weryfikuj przed podaniem (zmieniane co roku!)**
-- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-PODATKOWE.md` — dochód/przychód/koszty (wykładnia MF),
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PODATKOWE.md` — dochód/przychód/koszty (wykładnia MF),
   koszty uzyskania ZPCh, definicje podatkowe ustawowe
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: rzeczywisty
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: rzeczywisty
   beneficjent/UBO (AML art. 2 ust. 2 pkt 1, próg 25%, CRBR, kara do 1 mln zł)
   + alert: 3 RÓŻNE definicje "rzeczywistego właściciela" (AML/CIT-WHT art.4a
   pkt29/KSH art.4§1pkt4) — nie mylić
@@ -746,7 +746,7 @@ view dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
 ```
 
 Bazy aktów (rejestry pomocnicze — kierunek, nie weryfikacja; KROK 2C
-`shared/PRAWO-HARDGATE.md` obowiązuje przy każdym użyciu):
+`prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` obowiązuje przy każdym użyciu):
 
 ```
 view dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-OKOLOPODATKOWYCH.md   (akty podatkowe i okołopodatkowe)

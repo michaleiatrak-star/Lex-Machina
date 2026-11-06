@@ -103,7 +103,7 @@ KROK 5 — NOTYFIKACJA NARUSZENIA:
   □ Czy przy jednoczesnym istnieniu DPA (powierzenie danych osobowych) terminy
     notyfikacji są SPÓJNE — nie stosuj dwóch różnych terminów dla tego samego
     zdarzenia bez wyraźnego wskazania, który ma pierwszeństwo (lex specialis)
-    → patrz Pułapka K-7 i `mod-shared-rodo.md` RO.4 Pułapka RO-3.
+    → patrz Pułapka K-7 i `JUR:umowy-shared-rodo` RO.4 Pułapka RO-3.
 ```
 
 ---
@@ -204,7 +204,7 @@ REKOMENDACJA: Wskaż wprost regułę lex specialis — np. "Dla zdarzeń stanowi
 jednocześnie naruszenie ochrony danych osobowych w rozumieniu RODO, zastosowanie
 ma termin notyfikacji określony w Załączniku DPA (Umowa Powierzenia), jako
 przepis szczególny wobec niniejszej klauzuli poufności." Patrz też
-`mod-shared-rodo.md` RO.4 Pułapka RO-3.
+`JUR:umowy-shared-rodo` RO.4 Pułapka RO-3.
 ```
 
 ---
@@ -340,8 +340,8 @@ WYNIK OGÓLNY:
 
 ---
 
-*Moduł K / analizator-umow-v1 · Dla zakazu konkurencji → references/zakaz-konkurencji.md (Moduł I)*
+*Moduł K / analizator-umow-v1 · Dla zakazu konkurencji → JUR:umowy-zakaz-konkurencji (Moduł I)*
 *Dla kalkulacji ekonomicznej kar/limitów → references/mod-shared-economic.md (OEK.3, OEK.3a, OEK.5, OEK.5a)*
-*Dla RODO/DPA przy danych osobowych → references/mod-shared-rodo.md (Moduł RODO)*
-*Dla routingu typów umów → references/mod-J0-routing.md (Moduł J — nawigacja)*
+*Dla RODO/DPA przy danych osobowych → JUR:umowy-shared-rodo (Moduł RODO)*
+*Dla routingu typów umów → JUR:umowy-j0-routing (Moduł J — nawigacja)*
 *Prawo weryfikuj w ELI (RZĄD 1) · Orzeczenia: sn.pl · Zawsze aktualny tekst jednolity*

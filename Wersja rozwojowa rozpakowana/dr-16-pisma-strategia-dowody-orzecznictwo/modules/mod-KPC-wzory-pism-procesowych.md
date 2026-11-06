@@ -50,7 +50,7 @@ Odpisy:             Tyle egzemplarzy ile stron + 1 dla sądu (art. 128 KPC)
 
 ## Połącz z
 - DR-12/mod-KSCU-koszty-sadowe-i-pomoc-prawna (opłaty sądowe)
-- shared/FORMAL-CHECK.md (weryfikacja formalna pisma)
+- prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md (weryfikacja formalna pisma)
 
 ## Weryfikacja online
 ```

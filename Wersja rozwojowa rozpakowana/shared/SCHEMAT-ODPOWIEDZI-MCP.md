@@ -36,8 +36,8 @@ niezależnie od tego, w jakim natywnym formacie odpowiada dany serwer.
 - `status: "OUT_OF_SCOPE"` (od 3.94) → baza nie pokrywa zapytania albo wyniku nie da się rozstrzygnąć
   (fail-closed: drift HTML, niepełna paginacja, CAPTCHA; NSA/WSA w SAOS; brak exact-hit w CBOSA).
   ⛔ NIGDY dowód nieistnienia i NIGDY „sygnatura prawdopodobnie zmyślona” — przejdź do następnego
-  źródła wg HARDGATE (dla NSA/WSA: `PRAWO-HARDGATE-ORZECZENIA.md` KROK 0A pkt 2). Pole `powod` podaje przyczynę.
-  Odpowiada statusowi OUT_OF_SCOPE kontraktu `SYGNATURY.md` — oba kontrakty mają teraz tę samą wartość.
+  źródła wg HARDGATE (dla NSA/WSA: `JUR:weryfikacja-orzeczen-kanon` KROK 0A pkt 2). Pole `powod` podaje przyczynę.
+  Odpowiada statusowi OUT_OF_SCOPE kontraktu `JUR:sygnatury-repertoria` — oba kontrakty mają teraz tę samą wartość.
   (Do 3.93 serwery sygnalizowały to polem `zakres` przy `status: "NOT_FOUND"` — pole wycofane: skill
   czytający tylko `status` wziąłby prawdziwe orzeczenie NSA za zmyślone.)
 - `status: "ERROR"` (timeout, błąd serwera, brak autoryzacji) → traktuj identycznie

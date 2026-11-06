@@ -7,10 +7,10 @@
 > **Charakter:** moduł OPERACYJNY (proces + draft), komplementarny do merytorycznych
 > mod-RODO-GDPR-2016-679 i mod-RODO-szczegolowy — nie duplikuje ich treści.
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
-- przed cytowaniem przepisu zastosuj `shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR:
+- przed cytowaniem przepisu zastosuj `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR:
   CELEX 32016R0679; wykaz operacji UODO → uodo.gov.pl; ustawa o ochronie danych → ISAP/ELI);
 - ślad weryfikacji wg `shared/WERYFIKACJA-SLAD.md` (gradient: parafraza wytycznych EROD = poziom TREŚĆ);
 - moduł składa DRAFT — decyzja administratora i wniosek do UODO należą do człowieka.

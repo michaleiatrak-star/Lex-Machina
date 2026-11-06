@@ -1,11 +1,11 @@
 # ISAP-AUDIT-PROTOCOL — protokół aktualności prawa
 
 **Data wdrożenia:** 2026-05-28
-**Aktualizacja:** 2026-09-23 (v1.2) — kolejność wg KANONU E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md` v1.10): ELI pierwszy, ISAP adres dla człowieka.
+**Aktualizacja:** 2026-09-23 (v1.2) — kolejność wg KANONU E-1…E-5 (`JUR:hierarchia-zrodel` v1.10): ELI pierwszy, ISAP adres dla człowieka.
 **Aktualizacja poprzednia:** 2026-09-14 (v1.1) — zniesiona wyłączność ISAP; katalog RZĘDU 1
-zgodny z `shared/HIERARCHIA-ZRODEL.md` v1.7 i `shared/PRAWO-HARDGATE.md` v2.5.
+zgodny z `JUR:hierarchia-zrodel` v1.7 i `JUR:weryfikacja-przepisow-kanon` v2.5.
 
-> ⛔ HARD GATE — wczytaj view shared/PRAWO-HARDGATE.md przed pierwszym przepisem w każdej odpowiedzi.
+> ⛔ HARD GATE — wczytaj view JUR:weryfikacja-przepisow-kanon przed pierwszym przepisem w każdej odpowiedzi.
 
 ## Zasada nadrzędna
 
@@ -19,7 +19,7 @@ Nie wolno powoływać przepisów, numerów Dz.U., dat wejścia w życie ani stat
 
 ⛔ Osiągalność ≠ moc. Który z tych hostów odpowiada w danym środowisku i w
 którym kanale (`web_fetch` / wykonanie kodu) — rozstrzyga tabela kanałów w
-`shared/HIERARCHIA-ZRODEL.md`. Nie zakładaj dostępności żadnego z nich;
+`JUR:hierarchia-zrodel`. Nie zakładaj dostępności żadnego z nich;
 zmierz ją. ⛔ Źródła komercyjne (LEX/Legalis — E-3; lexlege, prawo.pl, arslege — E-4) NIE należą do
 RZĘDU 1 i nie zastępują publikatora; sięga się po nie, gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada, brak kanału) — wtedy obowiązkowo.
 
@@ -27,7 +27,7 @@ RZĘDU 1 i nie zastępują publikatora; sięga się po nie, gdy aktu nie da się
 
 1. Ustal dziedzinę prawa i właściwy tryb.
 2. Wczytaj lokalny moduł dziedzinowy.
-3. Wczytaj `shared/ISAP-METRYKI-AKTOW.md`.
+3. Wczytaj `JUR:isap-metryki-aktow`.
 4. Jeżeli akt występuje w rejestrze — użyj go jako punktu startowego, ale przy cytowaniu przepisu sprawdź tekst w publikatorze RZĘDU 1.
 5. Jeżeli aktu nie ma w rejestrze — oznacz `BRAK METRYKI` i sprawdź publikator RZĘDU 1 przed odpowiedzią.
 6. Dla zdarzeń przeszłych sprawdź brzmienie historyczne na datę zdarzenia.

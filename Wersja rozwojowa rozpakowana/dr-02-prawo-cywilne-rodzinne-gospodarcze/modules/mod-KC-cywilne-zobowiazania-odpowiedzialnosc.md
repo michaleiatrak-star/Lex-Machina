@@ -49,7 +49,7 @@ Delikt i kontrakt (dwa reżimy odpowiedzialności), kara umowna i miarkowanie, b
 ### Dwa reżimy odpowiedzialności — kwalifikator krytyczny
 
 > Definicje kanoniczne (przesłanki, podstawy prawne art. 415/471/442¹/361 KC):
-> shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md, sekcje C.2-C.3.
+> prawo-polskie-v2/krajowe/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md, sekcje C.2-C.3.
 > Tabela poniżej to praktyczna wersja porównawcza do szybkiej kwalifikacji
 > sprawy — nie zastępuje weryfikacji przesłanek w DEF przy sporządzaniu pisma.
 

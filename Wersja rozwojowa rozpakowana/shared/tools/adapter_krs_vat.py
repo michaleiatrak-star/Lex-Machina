@@ -12,7 +12,7 @@ skutków prawnych (np. art. 117ba Ordynacji podatkowej i art. 15d ustawy o CIT
 dla białej listy) zostaje po stronie modułów merytorycznych (PRAWO-HARDGATE);
 adapter zwraca fakty z rejestru, nigdy kwalifikację prawną.
 
-Wpięcie: shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (elementy E01-E05, F01-F06)
+Wpięcie: prawo-polskie-v2/krajowe/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md (elementy E01-E05, F01-F06)
 i shared/DOSTEP-MASZYNOWY-API.md §4. Kontrakt endpointów ustalony tam wcześniej
 (F-157b/F-152); DOKŁADNY SCHEMAT JSON poniżej zmierzony live w tej sesji
 (2026-09-26, patrz STATUS ŹRÓDEŁ niżej) — pierwszy raz udokumentowany jako kod,
@@ -65,7 +65,7 @@ from typing import Callable, Optional, Tuple
 KRS_BASE = "https://api-krs.ms.gov.pl/api/krs"
 WL_BASE = "https://wl-api.mf.gov.pl/api/search"
 
-# ⚠️ Neutralny UA wg shared/PRAWO-HARDGATE.md „KANAŁ KODU MA WŁASNE WYMOGI":
+# ⚠️ Neutralny UA wg prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md „KANAŁ KODU MA WŁASNE WYMOGI":
 # niektóre hosty rządowe blokują UA udający pełny łańcuch przeglądarki
 # silniej niż uczciwe przedstawienie się jako skrypt. Zmierzone dla KRS
 # (2026-09-26): domyślny UA urllib przechodzi bez problemu.

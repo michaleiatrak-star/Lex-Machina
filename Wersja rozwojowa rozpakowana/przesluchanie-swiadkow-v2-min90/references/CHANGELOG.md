@@ -8,6 +8,7 @@
 > potrzebujesz historii konkretnej naprawy (SKILL.md trzyma tylko krótkie
 > podsumowanie bieżącej wersji jako kontekst).
 
+- 3.33 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 3.32 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
 
 - 3.31 (2026-10-05j, AUDYT-2026-10-05j): Etap KOLEJNA-TURA: SELF-CHECK-PRZED-W3 i etapy W3–W6 (po obowiązkowej pauzie CHECKPOINT-W2) dołączane od drugiej tury wątku. Treść bez zmian.

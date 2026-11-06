@@ -1,6 +1,6 @@
 ---
 name: orzeczenia-sadowe-v2
-version: "2.32"
+version: "2.33"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_code_execution, optional_document_and_interactive_ui"
@@ -118,7 +118,7 @@ Zakaz nie wygasa po żadnej liczbie wiadomości. Nawet gdy model "jest pewny" �
 Jeśli nie możesz zweryfikować: „Nie odnalazłem tego źródła online. Nie powołuję."
 Przed cytowaniem wykonaj procedurę V-SYG z modułu SYGNATURY:
 ```
-view shared/SYGNATURY.md
+view JUR:sygnatury-repertoria
 → Wykonaj V-SYG-1 przez V-SYG-4
 → Dopiero po wyniku OK: cytuj z linkiem źródłowym
 ```
@@ -162,7 +162,7 @@ znalezionej na stronie internetowej (komentarz, artykuł, interpretacja
 urzędowa, glosa).**
 
 ⚠️ AKTUALIZACJA 2026-07-15: ten sam mechanizm wdrożono także CENTRALNIE do
-`shared/PRAWO-HARDGATE.md` (KROK 5A/5B, wersja 2.1) — jako HARD GATE
+`JUR:weryfikacja-przepisow-kanon` (KROK 5A/5B, wersja 2.1) — jako HARD GATE
 aktywny w całym systemie, nie tylko w tym module. Treść poniżej pozostaje
 jako szczegółowa specyfikacja robocza dla tego skilla; w razie rozbieżności
 rozstrzyga PRAWO-HARDGATE jako źródło nadrzędne.
@@ -233,7 +233,7 @@ ten sam standard — komentarz prawniczy, interpretacja urzędowa, glosa):
   (jeśli brak kotwicy: "..., sekcja »Kary za naruszenie«, akapit 3 od góry")
 
 **Zasada 2C — Weryfikacja ROLI cytowanego fragmentu (dodano 2026-08-14,
-na żądanie użytkownika — CENTRALNIE w `shared/PRAWO-HARDGATE.md`, sekcja
+na żądanie użytkownika — CENTRALNIE w `JUR:weryfikacja-przepisow-kanon`, sekcja
 "KROK DODATKOWY — WERYFIKACJA ROLI CYTOWANEGO FRAGMENTU").** Zasady 2/2A/
 2B wyżej potwierdzają, że cytat ISTNIEJE i jest DOKŁADNY — ale NIE mówią,
 czyją wypowiedź w uzasadnieniu cytujesz. Uzasadnienie typowo zawiera trzy
@@ -244,7 +244,7 @@ następuje"). TYLKO [1] i [2] nadają się do powołania jako stanowisko
 sądu. PRZED cytowaniem na poparcie tezy pisma — ustal warstwę wprost z
 treści źródłowej (web_fetch), nie z samego wyrwanego zdania. Pełna
 specyfikacja i sygnały tekstowe do rozpoznania warstwy [3]:
-`shared/PRAWO-HARDGATE.md`, sekcja jw. — w razie rozbieżności rozstrzyga
+`JUR:weryfikacja-przepisow-kanon`, sekcja jw. — w razie rozbieżności rozstrzyga
 PRAWO-HARDGATE jako źródło nadrzędne (ten sam wzorzec co Zasada 2B).
 
 **Zasada 3 — Limit cytatu: maksymalnie 30 słów.**
@@ -339,7 +339,7 @@ Tier 4 (zagraniczne): patrz sekcja „Jurysdykcje zagraniczne"
 
 ⛔ **Nota o dwóch skalach (dodane 2026-09-13, F-185).** „Tier" w tym skillu mierzy
 **dopuszczalność jako źródła potwierdzenia sygnatury w piśmie procesowym**;
-„RZĄD" w `shared/HIERARCHIA-ZRODEL.md` mierzy **moc źródła co do treści**.
+„RZĄD" w `JUR:hierarchia-zrodel` mierzy **moc źródła co do treści**.
 Od 2026-10-06 SAOS = Tier 3 i RZĄD 3 (agregator akademicki) — jedna ranga; najpierw
 baza urzędowa sądu właściwego dla repertorium, SAOS zastępczo przy jej awarii.
 
@@ -356,7 +356,7 @@ stosuj aktualny pomiar z `shared/DOSTEP-MASZYNOWY-API.md` oraz poniższe reguły
   wykonaniem kodu użyj `tools/cbosa_parser.py`. Adapter filtruje CAŁY zbiór po
   exact-match i zwraca `FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE`.
   Jeżeli bezpośredni kanał CBOSA nie działa — wróć do kanonicznego
-  `shared/SYGNATURY.md`, V-SYG-0.5 RETRIEVAL/SNAPSHOT. Wymuś POST-CHECK HOSTA
+  `JUR:sygnatury-repertoria`, V-SYG-0.5 RETRIEVAL/SNAPSHOT. Wymuś POST-CHECK HOSTA
   i exact-match. Jeśli host retrieval przekazuje oficjalny `/doc/{ID}`, zachowaj
   jego faktyczny `content_scope` (metryka+sentencja; czasem uzasadnienie) do
   researchu i analizy. Provenance pozostaje `CRAWLED_OR_INDEXED`; brak
@@ -509,7 +509,7 @@ ani żadnych NSA/WSA.
 
 | Sytuacja | Ścieżka |
 |---|---|
-| **A. Sygnatura znana** | od razu baza urzędowa po repertorium (`shared/SYGNATURY.md`, ROUTING BAZ; Faza 1-S). Bez `web_search`, bez SAOS. |
+| **A. Sygnatura znana** | od razu baza urzędowa po repertorium (`JUR:sygnatury-repertoria`, ROUTING BAZ; Faza 1-S). Bez `web_search`, bez SAOS. |
 | **B. Temat, orzeczenia nowsze** (SN po 2016, TK po 2015, KIO po 2018 albo dowolne z ostatnich ~2–3 lat) | **równolegle:** (1) `web_search` ogólny — szuka sygnatur w źródłach wtórnych (komunikaty prasowe sądów, serwisy prawnicze, artykuły kancelarii); (2) wyszukiwarki pełnotekstowe urzędowe: formularz `sn.pl` (pole treści), CBOSA (`wszystkieSlowa`), `orzeczenia.uzp.gov.pl`, TK. |
 | **C. Temat, orzeczenia starsze albo sądy powszechne** | SAOS (Faza 1-T.1) + `web_search`; SAOS także jako **cytator** (późniejsze orzeczenia powołujące sygnaturę: `saos_cytator` / `saos_cite_check`). |
 | **D. `sn.pl` zablokowany** (403 WAF / captcha) | `web_search` po tropy + SAOS **tylko dla orzeczeń sprzed 2017**. Brak trafienia ≠ nieistnienie orzeczenia (`OUT_OF_SCOPE`). Użytkownik może przejść weryfikację `sn.pl` we własnej przeglądarce (aplikacja Lex Machina: okno weryfikacji `sn.pl`) albo dostarczyć plik. ⛔ Bez podmiany UA i obchodzenia WAF (`shared/DOSTEP-MASZYNOWY-API.md` §0–§1). |
@@ -551,7 +551,7 @@ orzeczeń nowszych, SAOS API dla starszych i sądów powszechnych — Faza 1-0).
 Sądy wojskowe, postępowania dyscyplinarne Policji/PSP i status OSP NIE
 mieszczą się w Tier 1–3 powyżej wprost — mają odrębny status weryfikowalności
 (część niepubliczna/brak portalu, część routowana przez CBOSA/sn.pl jak
-zwykle). Pełna procedura: `shared/ORZECZENIA-HIERARCHIA.md` §4 — wczytaj
+zwykle). Pełna procedura: `JUR:orzecznictwo-hierarchia` §4 — wczytaj
 PRZED odpowiedzią dotyczącą orzeczenia/sygnatury z tych obszarów.
 
 ### Portale zagraniczne (Tier 4)
@@ -580,11 +580,11 @@ Dla Tier 4:
 > sygnatury podanej przez użytkownika.
 
 ```
-view shared/SYGNATURY.md
+view JUR:sygnatury-repertoria
 view shared/DOSTEP-MASZYNOWY-API.md §3
 ```
 
-Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.md`:
+Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `JUR:sygnatury-repertoria`:
 
 1. **Normalizuj** — pojedyncze spacje, bez kropek w repertorium, spacje wokół
    `/` nieistotne. Nie uzupełniaj brakującej izby, repertorium, numeru ani
@@ -603,7 +603,7 @@ Skrót operacyjny; kanoniczny kontrakt statusów pozostaje w `shared/SYGNATURY.m
      → tools/cbosa_parser.py (gdy host ma wykonanie kodu)
      ```
      Gdy direct CBOSA jest niedostępna → zastosuj V-SYG-0.5 z
-     `shared/SYGNATURY.md`.
+     `JUR:sygnatury-repertoria`.
 3. **Okno pokrycia** — zero trafień można zamienić na `NOT_FOUND` wyłącznie
    w źródle, którego pokrycie obejmuje badany sąd/okres i gdy wynik został
    pobrany kompletnie. Poza pokryciem lub przy awarii → `OUT_OF_SCOPE`.
@@ -748,11 +748,11 @@ Jeżeli potrzebujesz konkretnej tezy, odczytaj pełne `/doc/{ID}` kandydatów i
 wykonaj gradient TREŚĆ/FRAGMENT na realnym uzasadnieniu.
 
 ⚠️ **RZĄD źródła:** CBOSA jest źródłem **RZĘDU 2A** zgodnie z
-`shared/HIERARCHIA-ZRODEL.md`; adapter/parser jest wyłącznie kanałem transportowym
+`JUR:hierarchia-zrodel`; adapter/parser jest wyłącznie kanałem transportowym
 i nie ma własnego RZĘDU.
 
 ⚠️ Dostępność jest środowiskowa. Przed użyciem wykonaj fresh probe. Jeżeli direct
-CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `shared/SYGNATURY.md`. Retrieval może
+CBOSA jest niedostępna, zastosuj V-SYG-0.5 z `JUR:sygnatury-repertoria`. Retrieval może
 przekazać metrykę, sentencję, a czasem uzasadnienie; wykorzystaj faktycznie odczytaną
 treść badawczo z `access_mode=CRAWLED_OR_INDEXED`, ale nie promuj jej do ✅ [VER].
 
@@ -1249,15 +1249,15 @@ kategorię, tezę (≤30 słów), aktualność linii. Brak któregokolwiek = rek
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view shared/SYGNATURY.md           ← ZAWSZE przed cytowaniem sygnatury
-view shared/TRYBY-PROCESOWE.md
+view JUR:sygnatury-repertoria           ← ZAWSZE przed cytowaniem sygnatury
+view JUR:tryby-procesowe
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view shared/STRATEGIA-PROCESOWA.md
 view shared/QUALITY-CHECK.md
-view shared/ORZECZENIA-HIERARCHIA.md
+view JUR:orzecznictwo-hierarchia
 ```
 
 Nie dubluj logiki shared w lokalnych plikach. Lokalne moduły mogą tylko doprecyzować analizę dziedzinową.

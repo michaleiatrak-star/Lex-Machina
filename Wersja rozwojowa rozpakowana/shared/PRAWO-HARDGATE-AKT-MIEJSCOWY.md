@@ -1,7 +1,7 @@
 # PRAWO-HARDGATE-AKT-MIEJSCOWY — ścieżka B-L
 
 > **Plik:** `shared/PRAWO-HARDGATE-AKT-MIEJSCOWY.md`
-> **Wersja:** 1.0 (2026-09-10b) — wydzielony z `shared/PRAWO-HARDGATE.md` (F-180).
+> **Wersja:** 1.0 (2026-09-10b) — wydzielony z `JUR:weryfikacja-przepisow-kanon` (F-180).
 > **Status:** KANONICZNY. Treść bez zmian merytorycznych względem wersji sprzed wydzielenia.
 > **Wyzwalacz:** przedmiotem sprawy jest akt prawa miejscowego — uchwała rady gminy,
 > powiatu lub sejmiku, zarządzenie wójta/burmistrza/prezydenta, akt wojewody.

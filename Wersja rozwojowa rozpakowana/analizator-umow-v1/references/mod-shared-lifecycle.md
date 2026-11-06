@@ -244,6 +244,6 @@ KLAUZULA WALORYZACYJNA:
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: KC art. 123, 391, 471, 484, 491–493, 358¹ — weryfikuj: ELI (RZĄD 1)*
-*Powiązane: mod-shared-ryzyko-kwant.md (kwantyfikacja kar), mod-shared-fm-hardship.md*
+*Powiązane: mod-shared-ryzyko-kwant.md (kwantyfikacja kar), JUR:umowy-shared-fm-hardship*

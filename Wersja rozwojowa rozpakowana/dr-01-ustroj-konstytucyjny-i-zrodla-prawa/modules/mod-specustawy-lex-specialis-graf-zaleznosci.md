@@ -15,7 +15,7 @@ epizodyczne) — oraz dostarcza narzędzie do mapowania tych zależności (graf)
 > dwoma równolegle obowiązującymi aktami tej samej rangi, (b) ustaw z
 > ustawowo ograniczonym czasem obowiązywania, (c) mapowania tych relacji.
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym
 przepisem/aktem z tego modułu.
 
 ---

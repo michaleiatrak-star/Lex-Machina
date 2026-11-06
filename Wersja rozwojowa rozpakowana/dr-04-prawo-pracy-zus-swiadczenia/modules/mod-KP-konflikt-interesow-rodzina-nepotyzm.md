@@ -5,7 +5,7 @@
 interesów — rodzina, pracownik, konflikt jako aspekt konfliktu
 interesów". Dotąd system miał konflikt interesów opracowany WYŁĄCZNIE
 z perspektywy PROCESOWEJ (wyłączenie sędziego, świadka, pełnomocnika —
-`shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`) — BRAK było
+`prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`) — BRAK było
 perspektywy PRACOWNICZEJ/ZARZĄDCZEJ (zatrudnianie/awansowanie rodziny,
 relacje przełożony-podwładny).
 
@@ -183,7 +183,7 @@ zależy od tego, KTO ponosi ryzyko decyzji kadrowej:
 
 ## 7. INTEGRACJA Z SYSTEMEM
 
-- **`shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — konflikt
+- **`prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — konflikt
   interesów z perspektywy PROCESOWEJ (sędzia, świadek, pełnomocnik) —
   TEN moduł dostarcza perspektywę PRACOWNICZĄ/ZARZĄDCZĄ, komplementarną,
   nie duplikującą.

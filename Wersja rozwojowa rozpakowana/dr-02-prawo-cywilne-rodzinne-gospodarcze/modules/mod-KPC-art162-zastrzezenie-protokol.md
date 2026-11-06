@@ -213,7 +213,7 @@ razem z bezpośrednim zarzutem apelacyjnym.
 - `mod-KPC-prawomocnosc-granice-apelacji.md` — mechanizm pośredniej
   kontroli postanowień niezaskarżalnych (art. 380 KPC), z którym
   zastrzeżenie z art. 162 jest ściśle powiązane warunkowo.
-- `shared/PRAWO-HARDGATE.md` — metodologia weryfikacji Rząd 1/2/3
+- `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — metodologia weryfikacji Rząd 1/2/3
   zastosowana przy tworzeniu tego modułu.
 
 ## 10. POZOSTAJE DO POGŁĘBIENIA

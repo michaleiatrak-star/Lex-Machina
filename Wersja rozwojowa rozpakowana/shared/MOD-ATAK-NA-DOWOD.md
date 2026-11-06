@@ -29,8 +29,8 @@ CO JUŻ ISTNIEJE W SYSTEMIE (nie dublować):
   ✓ Atak na draft pisma (D1-D5)      → shared/MOD-ATAK-NA-DRAFT.md
   ✓ Atak na świadka/biegłego         → shared/MOD-ATAK-NA-SWIADKA.md
   ✓ Sprzeczności między dowodami     → MP3-spojnosc.md
-  ✓ Dopuszczalność prawna dowodu     → MD3b-walidacja-prawna.md (podstawy)
-  ✓ Prekluzja dowodowa               → shared/PREKLUZJA-DOWODOWA.md
+  ✓ Dopuszczalność prawna dowodu     → JUR:dowody-md3b-walidacja-prawna (podstawy)
+  ✓ Prekluzja dowodowa               → JUR:prekluzja-dowodowa
   ✓ Plan ataku przeciwnika (ogólny)  → MP5-atak.md §5.2 (8 typów ogólnie)
   ✓ Zakaz dowodowy (nagrania, RODO)  → MD3b §LEG-CONTRA-N
 
@@ -322,7 +322,7 @@ PODSTAWA PRAWNA:
   KPC art. 235² §1 — pomijanie spóźnionych twierdzeń i dowodów
   KPC art. 458⁵ — postępowanie gospodarcze (prekluzja po pozwie/odpowiedzi)
   KPK art. 170 §1 pkt 6 — wniosek po upływie terminu
-  → shared/PREKLUZJA-DOWODOWA.md — PEŁNY PROTOKÓŁ (odsyłam)
+  → JUR:prekluzja-dowodowa — PEŁNY PROTOKÓŁ (odsyłam)
 
 MECHANIZM ATAKU:
   "Twierdzenie [opis] i wniosek dowodowy [opis] powołany zostały

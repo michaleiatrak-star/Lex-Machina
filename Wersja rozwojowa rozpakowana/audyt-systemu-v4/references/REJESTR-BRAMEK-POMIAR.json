@@ -120,8 +120,8 @@
         ],
         [
           "shared/MIEDZYNARODOWE-GATES.md",
-          "NIE zastępuje: shared/MOD-CN-GATE.md, shared/MOD-REM-GATE.md,\n             shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n",
-          "NIE zastępuje: shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n"
+          "NIE zastępuje: shared/MOD-CN-GATE.md, shared/MOD-REM-GATE.md,\n             prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n",
+          "NIE zastępuje: prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach\n"
         ],
         [
           "prawny-router-v3/SKILL.md",
@@ -223,7 +223,7 @@
           "(b) używać zamiast odpowiedzi na merytoryczny zarzut."
         ],
         [
-          "shared/PRAWO-HARDGATE.md",
+          "prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md",
           "- napisać, że źródło jest niedostępne — Reguła 12d (REM-0) wymaga pomiaru",
           "- napisać, że źródło jest niedostępne — Reguła 12d wymaga pomiaru"
         ],

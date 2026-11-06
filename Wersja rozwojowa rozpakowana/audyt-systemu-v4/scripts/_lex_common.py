@@ -162,3 +162,16 @@ def logical_modules(skill_dir):
         if not any(pat.search(t) for t in texts):
             bez_rodzica.append(r)
     return top, bez_rodzica
+
+
+def modul_jurysdykcji(root, klucz, domyslny=None):
+    """Ścieżka (względem katalogu skilli) modułu klucza `JUR:` w manifeście aktywnej jurysdykcji
+    (LEX_JURISDICTION_PACK, domyślnie prawo-polskie-v2) — jak rejestr aplikacji. Bez manifestu
+    albo klucza: `domyslny` (np. w katalogu tymczasowym autotestu)."""
+    pakiet = os.environ.get("LEX_JURISDICTION_PACK", "").strip() or "prawo-polskie-v2"
+    try:
+        tekst = open(os.path.join(root, pakiet, "JURYSDYKCJA.md"), encoding="utf-8").read()
+    except OSError:
+        return domyslny
+    m = re.search(r"^\|\s*`" + re.escape(klucz) + r"`\s*\|\s*`([^`]+)`\s*\|", tekst, re.M)
+    return m.group(1) if m else domyslny

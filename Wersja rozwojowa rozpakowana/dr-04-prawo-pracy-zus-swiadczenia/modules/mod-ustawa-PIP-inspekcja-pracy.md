@@ -219,7 +219,7 @@ jak wskazywała poprzednia wersja)
   📌 To mechanizm ADMINISTRACYJNY. ODRĘBNY od PRAWNEGO obowiązku
   zawiadomienia prokuratora/Policji, gdy inspektor PIP natrafi na
   ślady przestępstwa POSPOLITEGO w toku kontroli (art. 304 §2 KPK) —
-  zob. `shared/ZAWIADOMIENIA-KRZYZOWE.md` (dodano 2026-07-27).
+  zob. `prawo-polskie-v2/krajowe/shared/ZAWIADOMIENIA-KRZYZOWE.md` (dodano 2026-07-27).
 □ Przepis przejściowy: 12-miesięczna "abolicja" — ochrona przed karą (NIE przed zaległościami
   finansowymi/składkowymi) dla podmiotów, które dobrowolnie skorygują nieprawidłowości
   w okresie przejściowym — weryfikuj dokładny zakres i terminy w tekście ustawy.
@@ -309,7 +309,7 @@ Output: stan faktyczny → naruszenie → tryb PIP (kontrola / skarga / wniosek 
 po 08.07.2026 / decyzja reklasyfikacyjna po 08.07.2026) → dowody → strategia → rekomendacja.
 
 **POWIĄZANIA:** `mod-KP-prawo-pracy` | `mod-ustawa-zwolnienia-grupowe` | `pisma-procesowe-v3` |
-`shared/INTERPRETACJE-URZEDOWE.md` (DR-04 → zus.pl, pip.gov.pl)
+`prawo-polskie-v2/krajowe/shared/INTERPRETACJE-URZEDOWE.md` (DR-04 → zus.pl, pip.gov.pl)
 **Źródła:** https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20241712 (t.j. 2024) |
 https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000473 (nowelizacja, sekcja 5) |
 https://pip.gov.pl | https://www.gov.pl/web/rodzina

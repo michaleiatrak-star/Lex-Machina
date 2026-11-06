@@ -1,6 +1,6 @@
 ---
 name: przesluchanie-swiadkow-v2-min90
-version: "3.32"
+version: "3.33"
 type: legal-skill
 domain: litigation-witness-examination
 status: production
@@ -63,7 +63,7 @@ pipeline:
     - W5-BINDER
     - W6-LIVE-DIRECT
 changelog: |
-  Wersja bieżąca: 3.32 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
+  Wersja bieżąca: 3.33 (2026-10-06): PRAWO-HARDGATE-WITNESS: sn.pl wyszukiwarka-orzeczen, link = karta
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -92,7 +92,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodolog
 > Skill może zawierać przepisy KPC, KPK, KW, KPA o dopuszczalności dowodów i pytań,
 > terminy zawite, podstawy impeachmentu oraz sygnatury orzeczeń o regułach dowodowych.
 > Przed podaniem jakiegokolwiek przepisu, artykułu lub sygnatury:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 > ⛔ **[WEJŚCIE-DOKUMENTU] — bramka materiału wejściowego (F-200; odtworzone 2026-09-27d, F-207).**
 > Gdy w tej turze użytkownik dostarczył dokument, akta, korespondencję lub wklejony tekst:
@@ -1354,7 +1354,7 @@ Podtyp RYZYKO-ODPOWIEDŹ.
 
 ```
 ⛔ HARDGATE — przed podaniem jakiejkolwiek podstawy prawnej:
-  view shared/PRAWO-HARDGATE.md
+  view JUR:weryfikacja-przepisow-kanon
 
 Podstawy wymagające weryfikacji online (przykłady — nie wyczerpująca lista):
   KPC: pytania sugestywne (art. 271), zakaz zeznań co do faktów objętych tajemnicą

@@ -1,6 +1,6 @@
 ---
 name: raport-sytuacyjny-v2
-version: "2.12"
+version: "2.13"
 type: executive-raport
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 2.12 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-sytuacyjny.html` zasilany blueprintem (7 zakładek); sekwencja: `show_widget(path, data=BLUEPRINT)`. Wariant bez pola `data` (MOD-WIDGET-IO, kod) w sekcji WIDGET-DANE.
+  Wersja bieżąca: 2.13 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-sytuacyjny.html` zasilany blueprintem (7 zakładek); sekwencja: `show_widget(path, data=BLUEPRINT)`. Wariant bez pola `data` (MOD-WIDGET-IO, kod) w sekcji WIDGET-DANE.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -53,7 +53,7 @@ w YAML — rozjazd o jedną wersję, klasa T12/F-102.)*
 > sygnatury orzeczenia lub skutku procesowego:
 >
 > ```
-> view shared/PRAWO-HARDGATE.md
+> view JUR:weryfikacja-przepisow-kanon
 > ```
 
 > ⛔ **[WEJŚCIE-DOKUMENTU] — bramka materiału wejściowego (F-200; odtworzone 2026-09-27d, F-207).**
@@ -526,7 +526,7 @@ Raport nie może być oznaczony jako gotowy gdy:
 - podano podstawę prawną bez weryfikacji albo zastrzeżenia,
 - ⛔ jakiekolwiek twierdzenie o prawie (przepis, termin ustawowy, sygnatura,
   skutek procesowy) trafiło do blueprintu bez statusu wg
-  `shared/PRAWO-HARDGATE.md` — `✅ [VER: źródło, data]`, `🟨 [KOTWICA-URZĘDOWA]`
+  `JUR:weryfikacja-przepisow-kanon` — `✅ [VER: źródło, data]`, `🟨 [KOTWICA-URZĘDOWA]`
   albo `⚠️ [NIEWERYFIKOWANE]` (F-123, 2026-08-23g); dotyczy też pola `podstawa`
   w mapie ryzyk i treści rekomendacji, nie tylko chronologii,
 - przedstawiono twierdzenie strony (status C) jako fakt udowodniony.
@@ -581,7 +581,7 @@ SEKCJA KONTRAKTOWA (lazy — tylko gdy analiza umowy była wcześniej):
   □ Ekspozycja finansowa klauzul → wynik z mod-shared-economic.md
   □ Brakujące klauzule TOP 3    → wynik z mod-shared-missing-clause.md
   □ Aktywne regulacje UE        → wynik z mod-shared-regulatory-horizon.md
-  □ Kluczowe orzecznictwo       → wynik z mod-shared-orzecznictwo-umow.md
+  □ Kluczowe orzecznictwo       → wynik z JUR:umowy-shared-orzecznictwo-umow
 
 Format w zakładce Ryzyka (dodaj jako osobny blok):
   | Klauzula | Ryzyko finansowe | Poziom A/B/C/D | Regulacja |
@@ -623,14 +623,14 @@ FAZA 3 — licznik ⬛ + zamknięcie
 Gdy wynik ma służyć strategii procesowej, ocenie ryzyka lub decyzji terminowej:
 
 ```
-view shared/PRAWO-HARDGATE.md      ← ⛔ ZAWSZE, gdy w raporcie
+view JUR:weryfikacja-przepisow-kanon      ← ⛔ ZAWSZE, gdy w raporcie
                                                        pada jakikolwiek przepis,
                                                        termin lub sygnatura (F-123)
-view shared/TRYBY-PROCESOWE.md
+view JUR:tryby-procesowe
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view shared/STRATEGIA-PROCESOWA.md
 view shared/QUALITY-CHECK.md
 ```

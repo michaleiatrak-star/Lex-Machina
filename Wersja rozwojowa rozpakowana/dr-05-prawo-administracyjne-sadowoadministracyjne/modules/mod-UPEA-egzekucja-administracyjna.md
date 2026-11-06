@@ -20,7 +20,7 @@ Egzekucja administracyjna (UPEA) — obowiązki z aktów administracyjnych
     POŚREDNICTWEM organu, który wydał postanowienie, art. 17 i art. 34 §3
     UPEA — WYJĄTEK: zażalenie na oszacowanie przez poborcę skarbowego
     rozpoznaje SAM organ egzekucyjny) → skarga do WSA. Zweryfikowano
-    online 2026-07-25 — patrz `shared/ZAZALENIE-ADRESAT-GATE.md`.
+    online 2026-07-25 — patrz `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md`.
 
 Egzekucja komornicza (KPC) — obowiązki z wyroków i nakazów sądowych
   → DR-02 → mod-KPC-egzekucja-windykacja
@@ -117,7 +117,7 @@ Zarzut w sprawie egzekucji (art. 33 § 5 UPEA) — wnosi się NIE PÓŹNIEJ NIŻ
   i obowiązek nie został wykonany — zarzut jest dopuszczalny.
   ⛔ Dawna adnotacja „POTWIERDZONE, Rząd 2B" przy regule „7 dni od TW"
   była błędna: dla terminów zawitych weryfikację domyka wyłącznie RZĄD 1.
-Zażalenie na postanowienie:               7 dni od doręczenia postanowienia (adresat: patrz sekcja wyżej i `shared/ZAZALENIE-ADRESAT-GATE.md` — NIE zakładaj domyślnie sądu)
+Zażalenie na postanowienie:               7 dni od doręczenia postanowienia (adresat: patrz sekcja wyżej i `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` — NIE zakładaj domyślnie sądu)
 Skarga na czynność egzekucyjną:           7 dni od doręczenia zobowiązanemu odpisu dokumentu
                                           stanowiącego podstawę czynności; do organu egzekucyjnego,
                                           który jej dokonał (art. 54 § 3 UPEA)
@@ -156,7 +156,7 @@ UWAGA: Zarzuty NIE służą do ponownego badania zasadności decyzji źródłowe
 | Środek | Organ egzekucyjny | Uwagi |
 |---|---|---|
 | Zajęcie wynagrodzenia za pracę | Naczelnik US | Kwoty wolne: weryfikuj UPEA w ELI (RZĄD 1) |
-| Zajęcie rachunku bankowego (art. 80 § 1–2 UPEA) | Naczelnik US | Kwota wolna — NIE w UPEA: art. 54 ust. 1 Prawa bankowego (`Dz.U. 2026 poz. 38`) — 75 % minimalnego wynagrodzenia miesięcznie (formuła, kwota zmienia się co roku — `shared/oplaty/04-wartosci-powtarzalne-kotwice.md` 4f) |
+| Zajęcie rachunku bankowego (art. 80 § 1–2 UPEA) | Naczelnik US | Kwota wolna — NIE w UPEA: art. 54 ust. 1 Prawa bankowego (`Dz.U. 2026 poz. 38`) — 75 % minimalnego wynagrodzenia miesięcznie (formuła, kwota zmienia się co roku — `prawo-polskie-v2/krajowe/shared/oplaty/04-wartosci-powtarzalne-kotwice.md` 4f) |
 | Zajęcie wierzytelności pieniężnej | Naczelnik US | |
 | Zajęcie ruchomości | Naczelnik US | Spis i oszacowanie |
 | Zajęcie nieruchomości | Naczelnik US | Wpis do KW, licytacja |

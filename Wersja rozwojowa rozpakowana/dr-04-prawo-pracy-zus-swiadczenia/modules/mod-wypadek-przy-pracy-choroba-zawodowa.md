@@ -2,7 +2,7 @@
 ## DR-04 · Prawo Pracy/ZUS · Wypadek przy pracy i choroba zawodowa — procedura
 
 > Wydzielony 2026-06-12 z mod-KP-prawo-pracy.md (ANEKS B).
-> Definicja wypadku przy pracy (4 elementy + typy): → shared/definicje/DEF-PRACA.md
+> Definicja wypadku przy pracy (4 elementy + typy): → prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md
 > Ten moduł skupia się na PROCEDURZE: intake, świadczenia, terminy, ścieżka sporna.
 
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
@@ -37,7 +37,7 @@ Kodeks pracy — art. 234–237 KP (obowiązki pracodawcy po wypadku)
 konieczne (nagłość/przyczyna zewnętrzna/uraz lub śmierć/związek z pracą),
 typy wypadków (lekki/ciężki/śmiertelny/zbiorowy) i wypadek zrównany (art. 3 ust.2)
 są w jednym, bardziej szczegółowym miejscu:
-→ `view shared/definicje/DEF-PRACA.md` (sekcja H.1.4)
+→ `view prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` (sekcja H.1.4)
 
 ### INTAKE wypadkowy — pytania obowiązkowe
 ```
@@ -167,7 +167,7 @@ Checklist praktyczny:
 
 ## ŁĄCZ Z
 
-- `shared/definicje/DEF-PRACA.md` — definicja wypadku przy pracy (4 elementy),
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` — definicja wypadku przy pracy (4 elementy),
   H.6 zasiłki/świadczenia ZUS
 - `mod-KP-prawo-pracy.md` — gdy wypadek jest podstawą roszczeń pracowniczych
   (rozwiązanie umowy z winy pracodawcy przy naruszeniu BHP)

@@ -78,7 +78,7 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
           + szereg podokresów BEZ LUK + znacznik na każdym wierszu?
           NIE → nie podawaj kwoty łącznej; pokaż tabelę z jawnymi ⬛.
           Procedura pełna: view shared/RATE-COMPLETENESS.md
-□ Sygnatury orzeczeń przeszły V-SYG-1/2/3/4 (shared/SYGNATURY.md)?
+□ Sygnatury orzeczeń przeszły V-SYG-1/2/3/4 (JUR:sygnatury-repertoria)?
 □ Sklasyfikowałem do [1]–[11] (lub BJ–BW)?
 □ ⛔ [11] CUDZY MATERIAŁ — czy wejściem jest klucz odpowiedzi, opinia, cudza
   analiza, notatki, wynik innego modelu lub pismo przeciwnika? TAK → PRIMARY
@@ -139,7 +139,7 @@ JEŚLI BLOK 0A nie zamknięty → STOP. Żaden punkt poniżej nie jest wykonywan
           3. czy sprawdziłem PRZYPISY przy jednostce redakcyjnej?
              ⛔ Art. 13 ust. 2 KSCU ma dwa brzmienia obok siebie; cap to
              100 000 zł od 23.09.2025, nie 200 000 zł.
-          Którekolwiek NIE → wykonaj `view shared/TABELE-OPLAT.md` i popraw.
+          Którekolwiek NIE → wykonaj `view JUR:oplaty-sadowe` i popraw.
 □ ⛔ [PROFIL-ODROCZENIA] KONTROLA NA WYJŚCIU (dodano 2026-09-10, F-175):
   czy w GOTOWEJ odpowiedzi padł wyzwalacz zasobu zadeklarowanego w KROKU 3A jako
   ODROCZONY (pierwszy URL, pierwszy artykuł, ≥2 daty, rozstrzygnięcie, oddanie

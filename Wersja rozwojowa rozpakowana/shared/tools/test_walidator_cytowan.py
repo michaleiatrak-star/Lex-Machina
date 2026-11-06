@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Testy walidator_cytowan.py: domena urzędowa po hoście, pełny identyfikator cytatu,
-kontrola zapisu powołań (shared/FORMAT-CYTOWANIA.md, zgł. #109).
+kontrola zapisu powołań (prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md, zgł. #109).
 
 Uruchomienie:  python3 -m unittest test_walidator_cytowan -v   (z katalogu shared/tools)
 """

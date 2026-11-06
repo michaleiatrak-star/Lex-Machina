@@ -1,14 +1,14 @@
 # mod-ustawa-biegli-rewidenci-zawod — Biegły rewident jako zawód zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (c) zawody powstałe w wyniku rozwoju gospodarki rynkowej,
 analiza Senatu OT-625).
 ---
 ⛔ ZAKAZ podawania artykułów, terminów, kwot, sygnatur z pamięci — weryfikuj
 w isap.sejm.gov.pl przed każdym powołaniem. Jeśli sprawa jest procesowa,
-uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`,
-`shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`.
+uruchom `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`,
+`prawo-polskie-v2/krajowe/shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`.
 ---
 
 ## KLUCZOWE AKTY PRAWNE — ZWERYFIKOWANE 2026-06-14
@@ -161,7 +161,7 @@ Właściwy organ: sąd dyscyplinarny PIBR / KNA / sąd cywilny / WSA (jeśli dec
   ↓
 Środek: odwołanie dyscyplinarne / skarga do WSA / pozew cywilny
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
 ```
 
 ---

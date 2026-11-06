@@ -5,7 +5,7 @@
 prywatności"*, *„przygotuj klauzulę informacyjną RODO"*.
 
 Przed startem: `view references/generator/rdzen-generowania.md`. Essentialia
-merytoryczne dla obu ścieżek **już istnieją** w `mod-J21-rodo-archiwizacja-regulaminy.md`
+merytoryczne dla obu ścieżek **już istnieją** w `JUR:umowy-j21-rodo-archiwizacja-regulaminy`
 — ten workflow dodaje wyłącznie warstwę procesową generowania (wywiad → szkielet
 → styl → bramka), której moduł J21 (zorientowany na analizę/audyt) nie zawierał.
 
@@ -13,7 +13,7 @@ merytoryczne dla obu ścieżek **już istnieją** w `mod-J21-rodo-archiwizacja-r
 
 ## ŚCIEŻKA A — REGULAMIN PRACY / WYNAGRADZANIA / ZFŚS
 
-`view references/mod-J21-rodo-archiwizacja-regulaminy.md § J21.4` (regulamin
+`view JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.4` (regulamin
 pracy/wynagradzania) lub `§ J21.5` (ZFŚS).
 
 ### KROK 1 — WYWIAD
@@ -57,7 +57,7 @@ brak organizacji / brak uzgodnienia w terminie)?”.
 
 ## ŚCIEŻKA B — POLITYKA PRYWATNOŚCI / KLAUZULA INFORMACYJNA (art. 13/14 RODO)
 
-`view references/mod-J21-rodo-archiwizacja-regulaminy.md § J21.2`.
+`view JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.2`.
 
 ### KROK 1 — WYWIAD
 
@@ -99,7 +99,7 @@ Język **prosty i zrozumiały** — to wymóg ustawowy (art. 12 RODO), nie tylko
 dobra praktyka; uruchom `mod-shared-legal-design.md` i traktuj wynik < 30/50
 jako niespełnienie wymogu przejrzystości, nie tylko estetyczny mankament.
 Sprawdź spójność z rejestrem czynności przetwarzania (RCP), jeśli klient go
-posiada (`mod-J21-rodo-archiwizacja-regulaminy.md § J21.3`) — cele i podstawy w
+posiada (`JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.3`) — cele i podstawy w
 polityce muszą pokrywać się z RCP, rozbieżność = flaga do wyjaśnienia przed
 finalizacją.
 

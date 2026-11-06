@@ -11,7 +11,7 @@ Zapobiega użyciu nieaktualnego przepisu przez wymuszenie kontroli cyklu życia 
 Przed analizą prawną wykonaj:
 
 1. Zidentyfikuj akt prawny.
-2. Sprawdź metrykę w `shared/LEGAL-REGISTRY.md`.
+2. Sprawdź metrykę w `JUR:legal-registry`.
 3. Jeżeli sprawa wymaga cytatu albo precyzyjnej podstawy prawnej — sprawdź ISAP online.
 4. Ustal:
    - status aktu,

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-12-sadownictwo-prokuratura-zawody-prawnicze
 
+- 4.32 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 4.31 (2026-11-04, AUDYT-2026-11-04): MAPA-AKTOW: Prawo o prokuraturze — art. 11 § 1 (roczna informacja PG o kontroli operacyjnej) zm. Dz.U. 2026 poz. 1281 art. 8, w mocy 31.10.2026.
 - 4.30 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 4.29 (2026-10-19a, AUDYT-2026-10-19a): mod-ustawa-adwokatura 8a: Dz.U. 2026 poz. 1290 obowiązuje od 17.10.2026; dopisane art. 2 (ustawa o prawnikach zagranicznych t.j. 2020/823, art. 10 ust. 5 — brzmienie z text.pdf), art. 4 ust. 5, art. 5, art. 6; rozp. MS 2016/1430 uznane za uchylone od 17.10.2026 (ELI). MAPA-AKTOW: ustawa o prawnikach zagranicznych i rozp. 2016/1430 w wierszu Prawa o adwokaturze (osobne wiersze wskazujące ten sam moduł obniżały wagę słowa „adwokat” w doborze modułu — test routing-corpus aplikacji).

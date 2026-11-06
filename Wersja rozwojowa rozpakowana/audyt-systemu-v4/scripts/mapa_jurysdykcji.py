@@ -9,7 +9,9 @@ sygnatury, waluta), klasa (MODUŁ PL ≥ 70% / MIESZANY / METODA < 15%) i klucz 
 gdy plik już ma swój klucz. Pomiar regułami słownikowymi — decyzję o przeniesieniu podejmuje
 migracja z testem równoważności (T50).
 
-Użycie: mapa_jurysdykcji.py [katalog_skilli] [--inwentarz | --plan [--app=<katalog src aplikacji>]]\n  --inwentarz: tabela E0 (udział treści PL per skill); --plan: plan migracji per skill wykonawczy
+Użycie: mapa_jurysdykcji.py [katalog_skilli] [--inwentarz | --plan [--app=<katalog src aplikacji>] | --migruj [...]]
+  --inwentarz: tabela E0 (udział treści PL per skill); --plan: plan migracji per skill wykonawczy;
+  --migruj: etap E3 (opis niżej, przy migruj()).
 """
 import re
 import sys
@@ -192,7 +194,180 @@ def plan(app_root=None):
             print()
 
 
+# ---------------------------------------------------------------------------------------------
+# E3 — --migruj
+"""
+migruj_jurysdykcje.py — etap E3 migracji prawa krajowego (wzór dla każdej jurysdykcji)
+
+Moduł prawa krajowego, który dziś leży w skillu wykonawczym albo w shared, przechodzi do pakietu
+jurysdykcji; skill wykonawczy wskazuje go kluczem `JUR:<klucz>` (jak pilot MD5-terminy).
+
+KROKI (dla każdego klucza z manifestu, którego moduł leży w skillu wykonawczym)
+  1. plik → <pakiet>/krajowe/<skill>/<ścieżka w skillu>; wiersz manifestu wskazuje nowe miejsce;
+  2. odwołania do pliku w skillach wykonawczych, shared, audycie i w samym pakiecie → `JUR:<klucz>`
+     (`view references/x.md` → `view JUR:<klucz>`, `x.md` → `JUR:<klucz>`);
+  3. warstwa prawa krajowego (dr-*, pakiet, moduły z manifestu), audyt i pliki inne niż .md:
+     treść bez zmian, tylko ścieżka przechodzi na nowe miejsce; skille z listy --bez-zmian
+     nie są dotykane;
+  4. odwołania względne w przeniesionym pliku do plików, które zostały w skillu
+     (`references/y.md`), dostają nazwę skilla (`<skill>/references/y.md`).
+  Historia (AUDIT-JOURNAL, CHANGELOG, CHECKSUMS, migracja-jurysdykcji/, ZIP) zostaje bez zmian.
+
+Użycie:
+  migruj_jurysdykcje.py [katalog_skilli] [--pakiet=prawo-polskie-v2] [--klucz=JUR:a,JUR:b]
+                        [--bez-zmian=<skill,...>] [--wykonaj]
+  Bez --wykonaj: tylko plan (co, dokąd, ile odwołań w których skillach).
+"""
+WYKONAWCZE = {
+    "analiza-sadowa-v6", "analizator-dowodow-v3", "analizator-przepisow-v2", "analizator-umow-v1",
+    "chronologia-sprawy-v1", "orzeczenia-sadowe-v2", "pisma-procesowe-v3", "pisma-proste-v2",
+    "przesluchanie-swiadkow-v2-min90", "przewodnik-prawny-v2", "raport-klienta-v1", "raport-sytuacyjny-v2",
+}
+HISTORIA = re.compile(r"(AUDIT-JOURNAL|CHANGELOG|HISTORIA-ZMIAN)", re.I)
+TEKST = {".md", ".json", ".py", ".txt", ".yaml", ".yml", ".tsv"}
+WZGLEDNE = ("references/", "modules/", "checklists/", "templates/", "assets/", "generator/", "agents/", "widgets/")
+
+
+def argumenty_migracji():
+    root, opts = None, {}
+    for arg in sys.argv[1:]:
+        if arg.startswith("--"):
+            name, _, value = arg[2:].partition("=")
+            opts[name] = value or True
+        else:
+            root = Path(arg)
+    return (root or HERE.parents[2]).resolve(), opts
+
+
+def manifest_wiersze(path):
+    rows = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        match = re.match(r"\|\s*`(JUR:[a-z0-9-]+)`\s*\|\s*`([^`]+)`\s*\|", line)
+        if match:
+            rows[match.group(1)] = match.group(2)
+    return rows
+
+
+def pliki(root):
+    for path in root.rglob("*"):
+        if path.is_file() and path.suffix in TEKST and "__pycache__" not in path.parts:
+            yield path
+
+
+def wzorzec(stara):
+    """Token ścieżki kończący się nazwą pliku; prefiks musi być sufiksem prawdziwej ścieżki."""
+    nazwa = re.escape(Path(stara).name)
+    return re.compile(r"(?<![\w/.\-])((?:/mnt/skills/user/)?(?:[\w.\-]+/)*)" + nazwa + r"(?![\w.\-])")
+
+
+def zgodny(prefiks, stara, plik_skill, skill_modulu, unikalna):
+    prefiks = prefiks.removeprefix("/mnt/skills/user/")  # ścieżka bezwzględna środowiska skilli
+    pelna = prefiks + Path(stara).name
+    if not stara.endswith(pelna):
+        return False
+    # Sama nazwa albo ścieżka względna skilla: tylko gdy nazwa jest jednoznaczna w korpusie
+    # albo odwołanie stoi w tym samym skillu.
+    if not prefiks.split("/", 1)[0] == skill_modulu:
+        return unikalna or plik_skill == skill_modulu
+    return True
+
+
+def migruj():
+    root, opts = argumenty_migracji()
+    pakiet = opts.get("pakiet", "prawo-polskie-v2")
+    bez_zmian = set(str(opts.get("bez-zmian", "")).split(",")) - {""}
+    wybrane = set(str(opts["klucz"]).split(",")) if "klucz" in opts else None
+    wykonaj = bool(opts.get("wykonaj"))
+    plik_manifestu = root / pakiet / "JURYSDYKCJA.md"
+    rows = manifest_wiersze(plik_manifestu)
+    nazwy = {}
+    for path in pliki(root):
+        nazwy[path.name] = nazwy.get(path.name, 0) + 1
+
+    ruchy = []
+    for key, module in rows.items():
+        skill = module.split("/", 1)[0]
+        # Skille wykonawcze i shared; agenci wtyczki zostają w agents/ (konwencja wykrywania).
+        if (skill not in WYKONAWCZE and skill != "shared") or "/agents/" in module or (wybrane and key not in wybrane):
+            continue
+        if not (root / module).is_file():
+            print(f"✗ {key}: brak {module}")
+            return 1
+        ruchy.append((key, module, f"{pakiet}/krajowe/{module}"))
+
+    korpus = {path: path.read_text(encoding="utf-8") for path in pliki(root)}
+    moduly_pl = set(rows.values())
+    zmiany = {}
+    kod = {}
+    for key, stara, nowa in ruchy:
+        skill_modulu = stara.split("/", 1)[0]
+        wz = wzorzec(stara)
+        unikalna = nazwy.get(Path(stara).name, 0) == 1
+        for path, text in list(korpus.items()):
+            rel = path.relative_to(root).as_posix()
+            plik_skill = rel.split("/", 1)[0]
+            if (plik_skill in bez_zmian or HISTORIA.search(path.name) or "migracja-jurysdykcji" in rel
+                    or path == plik_manifestu or path.name == "CHECKSUMS.sha256"):
+                continue
+            if path.suffix in (".py", ".ts", ".js"):
+                # Kod składa ścieżki z części: poprawka ręczna, z testem — tylko raport.
+                if wz.search(text):
+                    kod.setdefault(rel, set()).add(key)
+                continue
+            # Ścieżka zamiast klucza: warstwa prawa krajowego (dr-*, pakiet, moduły z manifestu),
+            # audyt (rejestry i kontrole czytają ścieżki) i pliki inne niż .md (kod testów).
+            dziedzinowy = (plik_skill.startswith("dr-") or plik_skill in (pakiet, "audyt-systemu-v4")
+                           or path.suffix != ".md" or rel in moduly_pl)
+
+            def podmien(match):
+                if not zgodny(match.group(1), stara, plik_skill, skill_modulu, unikalna):
+                    return match.group(0)
+                return nowa if dziedzinowy else key
+
+            nowy = wz.sub(podmien, text)
+            if nowy != text:
+                korpus[path] = nowy
+                zmiany.setdefault(rel, set()).add(key)
+
+    print(f"Pakiet: {pakiet}; moduły do przeniesienia: {len(ruchy)}; pliki z odwołaniami: {len(zmiany)}")
+    for key, stara, nowa in ruchy:
+        print(f"  {key}: {stara} → {nowa}")
+    for rel in sorted(zmiany):
+        print(f"  odwołania: {rel} ({len(zmiany[rel])})")
+    for rel in sorted(kod):
+        print(f"  KOD (ręcznie): {rel} ({', '.join(sorted(kod[rel]))})")
+    if not wykonaj:
+        print("PLAN (bez --wykonaj nic nie zmieniono)")
+        return 0
+
+    for path, text in korpus.items():
+        if path.relative_to(root).as_posix() in zmiany:
+            path.write_text(text, encoding="utf-8")
+    manifest_text = plik_manifestu.read_text(encoding="utf-8")
+    for key, stara, nowa in ruchy:
+        src, dst = root / stara, root / nowa
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        text = src.read_text(encoding="utf-8")
+        skill = stara.split("/", 1)[0]
+        # Odwołania względne do plików, które zostały w skillu wykonawczym.
+        text = re.sub(
+            r"(?<![\w/.\-])((?:" + "|".join(map(re.escape, WZGLEDNE)) + r")[\w./\-]+\.md)",
+            lambda m: f"{skill}/{m.group(1)}" if (root / skill / m.group(1)).is_file() else m.group(1),
+            text,
+        )
+        dst.write_text(text, encoding="utf-8")
+        src.unlink()
+        manifest_text = manifest_text.replace(f"| `{key}` | `{stara}` |", f"| `{key}` | `{nowa}` |")
+    plik_manifestu.write_text(manifest_text, encoding="utf-8")
+    print("WYKONANO")
+    return 0
+
+
+
+
 if __name__ == "__main__":
+    if "--migruj" in sys.argv:
+        sys.exit(migruj())
     if "--plan" in sys.argv:
         app = next((arg.split("=", 1)[1] for arg in sys.argv if arg.startswith("--app=")), None)
         plan(app)

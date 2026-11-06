@@ -167,7 +167,7 @@ Przy każdej analizie materiału dowodowego wczytaj:
 
 ```text
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 ```
 
 Nie klasyfikuj dowodu wyłącznie opisowo. Każdy dowód musi być przypisany do faktu istotnego prawnie i przesłanki prawnej.

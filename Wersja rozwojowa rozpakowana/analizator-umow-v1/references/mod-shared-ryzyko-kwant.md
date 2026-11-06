@@ -7,7 +7,7 @@
 
 > ⛔ HARD GATE — kary umowne, stopy odsetek, limity z KC zawsze weryfikuj
 > w ELI (RZĄD 1) przed podaniem kwot. Weryfikacja: ELI (RZĄD 1) → KC → art. 484
-> (ISAP wyłącznie jako adres dla człowieka — kanon E-1…E-5, `shared/HIERARCHIA-ZRODEL.md`).
+> (ISAP wyłącznie jako adres dla człowieka — kanon E-1…E-5, `JUR:hierarchia-zrodel`).
 
 > **v1.18 — źródła metodologiczne (zastępuje wcześniejszą heurystykę
 > „Likely × 2" bez podstawy):**
@@ -305,7 +305,7 @@ Wartość umowy: [X] PLN
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Powiązane: Moduł D.2 (scoring balansu), Moduł F (raport końcowy)*
 *Weryfikacja przepisów: ELI (RZĄD 1) → KC art. 361, 471, 484*
 *Stawki NBP: web_search "stopa referencyjna NBP [rok]"*

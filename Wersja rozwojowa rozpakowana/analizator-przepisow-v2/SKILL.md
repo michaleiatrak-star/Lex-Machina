@@ -1,6 +1,6 @@
 ---
 name: analizator-przepisow-v2
-version: "2.13"
+version: "2.14"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -31,7 +31,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmien
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Przed podaniem jakiegokolwiek przepisu, artykułu, numeru Dz.U. lub sygnatury orzeczenia:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 > ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
 > (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
@@ -53,7 +53,7 @@ Profesjonalne narzędzie do analizy przepisów prawnych z widgetem wizualnym, au
 
 ## ZASADA NACZELNA
 
-> ⛔ HARDGATE — Nigdy nie cytuj przepisów z pamięci. Każdy przepis MUSI być pobrany według kanonu E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md`): najpierw ELI (RZĄD 1), ISAP wyłącznie jako adres dla człowieka, LEX/Legalis → ArsLege, gdy aktu nie da się pobrać z RZĘDU 1 — procedura w `shared/PRAWO-HARDGATE.md`. Jeśli wszystkie źródła niedostępne — oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
+> ⛔ HARDGATE — Nigdy nie cytuj przepisów z pamięci. Każdy przepis MUSI być pobrany według kanonu E-1…E-5 (`JUR:hierarchia-zrodel`): najpierw ELI (RZĄD 1), ISAP wyłącznie jako adres dla człowieka, LEX/Legalis → ArsLege, gdy aktu nie da się pobrać z RZĘDU 1 — procedura w `JUR:weryfikacja-przepisow-kanon`. Jeśli wszystkie źródła niedostępne — oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
 
 ---
 
@@ -142,8 +142,8 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
 > ⛔ **KANONICZNA LOKALIZACJA (od 2026-07-15):** pełna treść tej hierarchii
 > (definicje RZĄD 1/2A/2B/3, listy domen, zakaz mieszania rzędów, znaczniki
 > obowiązkowe, procedura H-1→H-4) przeniesiona do
-> `view shared/HIERARCHIA-ZRODEL.md` — plik jest teraz
-> współdzielony przez `shared/PRAWO-HARDGATE.md`, `shared/WERYFIKACJA-SLAD.md`
+> `view JUR:hierarchia-zrodel` — plik jest teraz
+> współdzielony przez `JUR:weryfikacja-przepisow-kanon`, `shared/WERYFIKACJA-SLAD.md`
 > i każdy inny skill podający linki źródłowe, nie tylko ten moduł.
 > Wczytaj ten plik PRZED podaniem jakiegokolwiek linku/URL w analizie
 > przepisu — kategoryzacja RZĄD jest OBOWIĄZKOWA dla każdego źródła,
@@ -170,7 +170,7 @@ Paleta: --primary #1B3A6B, --accent #C8960C, --bg #F8F7F4, --success #16a34a, --
    (obwieszczenia standardowo wymieniają: „uwzględnia zmiany wprowadzone
    ustawami z dnia..."). To jest punkt wyjścia — te zmiany są już wliczone,
    nie trzeba ich szukać ponownie w kroku 4A.
-4A. ⛔ KROK 2C shared/PRAWO-HARDGATE.md — OSOBNE zapytanie o WSZYSTKIE
+4A. ⛔ KROK 2C JUR:weryfikacja-przepisow-kanon — OSOBNE zapytanie o WSZYSTKIE
     akty zmieniające OPUBLIKOWANE PO dacie t.j. z kroku 1-2 (skorygowano
     2026-08-23f, po pytaniu użytkownika — NIE zatrzymuj się na pierwszej
     znalezionej nowelizacji; między t.j. a dziś mogło wejść w życie
@@ -638,11 +638,11 @@ Zapytanie: "Czy art. 415 KC stosuje się do mojej sprawy? Stan na 1.01.2020."
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view shared/TRYBY-PROCESOWE.md
+view JUR:tryby-procesowe
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view shared/STRATEGIA-PROCESOWA.md
 view shared/QUALITY-CHECK.md
 ```

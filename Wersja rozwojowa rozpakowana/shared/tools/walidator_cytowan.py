@@ -50,7 +50,7 @@ Użycie:
     python3 walidator_cytowan.py --document pismo.docx --format   (kontrola zapisu, bez logu)
     python3 walidator_cytowan.py --self-test
 
-KONTROLA ZAPISU (--format, zgł. #109): reguła shared/FORMAT-CYTOWANIA.md, kody F1–F9.
+KONTROLA ZAPISU (--format, zgł. #109): reguła prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md, kody F1–F9.
   Sprawdzana jest treść dla adresata: tekst do nagłówka `CZĘŚĆ ROBOCZA` (dalej metryki są dozwolone).
 
 Testy jednostkowe: tools/test_walidator_cytowan.py (python3 -m unittest test_walidator_cytowan).
@@ -274,7 +274,7 @@ def log_has_verification(citation, events):
     return False, None
 
 
-# --- kontrola zapisu (shared/FORMAT-CYTOWANIA.md, kody F1–F9) -----------
+# --- kontrola zapisu (prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md, kody F1–F9) -----------
 
 CZESC_ROBOCZA = re.compile(r"^[#*\s]*CZ[EĘ][SŚ][CĆ]\s+ROBOCZA\b", re.IGNORECASE | re.MULTILINE)
 KODEKSY_WIELKIE = r"KPC|KPK|KPA|PPSA|KKS|KKW|KPW|KRO|KSH|KC|KP|KK|KW"
@@ -308,7 +308,7 @@ def tresc_dla_adresata(text: str) -> str:
 
 
 def kontrola_zapisu(text: str):
-    """Naruszenia reguły shared/FORMAT-CYTOWANIA.md w treści dla adresata: lista słowników
+    """Naruszenia reguły prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md w treści dla adresata: lista słowników
     {kod, opis, fragment, pozycja}, w kolejności tekstu."""
     tresc = tresc_dla_adresata(text)
     naruszenia = []
@@ -388,7 +388,7 @@ def self_test() -> int:
         ("398²² = 398^22", True, "art. 398²² k.p.c.", "art. 398^22 KPC"),
         ("398²² ≠ 398", False, "art. 398²² k.p.c.", "art. 398 KPC"),
     ]
-    # Kontrola zapisu (shared/FORMAT-CYTOWANIA.md): oczekiwany zbiór kodów naruszeń.
+    # Kontrola zapisu (prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md): oczekiwany zbiór kodów naruszeń.
     zapisy = [
         ("t.j., Dz.U., ze zm.", {"F1", "F3", "F4"}, "(t.j. Dz.U. z 2025 r. poz. 869 ze zm.)"),
         ("Dz.U. bez z … r.", {"F1", "F2"}, "(Dz.U. 2025 poz. 869)"),
@@ -428,7 +428,7 @@ def self_test() -> int:
 def raport_zapisu(text: str, quiet: bool = False) -> int:
     naruszenia = kontrola_zapisu(text)
     if not quiet:
-        print(f"KONTROLA ZAPISU (shared/FORMAT-CYTOWANIA.md): naruszeń {len(naruszenia)}")
+        print(f"KONTROLA ZAPISU (prawo-polskie-v2/krajowe/shared/FORMAT-CYTOWANIA.md): naruszeń {len(naruszenia)}")
         for n in naruszenia:
             print(f"  ✗ {n['kod']} {n['fragment']!r} (pozycja {n['pozycja']}) — {n['opis']}")
         if not naruszenia:

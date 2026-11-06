@@ -1,7 +1,7 @@
 bee2878bc39528f70f39a6e86b1222b844783a79d8a54a745927ed0fbbe623f0  ./MAPA-AKTOW.md
 346b51beaec59e5775c6a634a8390cfb0d55d01ee64027be16d54f2f4598d82e  ./MAPA-POKRYCIA.md
 a808237feda76fe62f698fa05077021474124d22b033504d5c34a649534077fd  ./PORTABILITY-MANIFEST.md
-397c9895db391bd7b1dee254d6078fdebe9c845db05fa56f40ff41568d5d021f  ./SKILL.md
+5fa969895f6cee5e8f2052b66fab3ce31450b79e10e17deb23f868a220cac61d  ./SKILL.md
 baecf8aed4d2ca051e8212f1e45ad5dc19ad072d16f130d24009bd3e8404214b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4440cd21b5b3b68d8b64601f5c5434a4f9e1b4751dd49412e1e124f086a2120  ./modules/kpa-tryby-nadzwyczajne/czesc-01-tryby-nadzwyczajne.md
@@ -13,7 +13,7 @@ f48e57c829427ca1ceb34b7efe831a65259a232e8ee3ef2972db97a828e189d7  ./modules/kpa-
 9c1faf8f21187b4aa6916d9406e286422608769d43939295c39c5b115f936453  ./modules/kpa-tryby-nadzwyczajne/czesc-07-oplaty-koszty.md
 fa7cced1102661866c90c95851a66255770233f5023cbfd3bad6fe79c20fc9f8  ./modules/kpa-tryby-nadzwyczajne/czesc-08-strategia-orzecznictwo-referencje.md
 d387b4d0509be0a9eb742ebf26435c2ada1b486a328182227ebe58bc0f57ff1b  ./modules/mod-KPA-current-state-COV.md
-f9d643544ae497ec8868ce5078a38b50e8ac121580c33e945b288b44d23d21c2  ./modules/mod-KPA-decyzja-i-odwolanie.md
+f1b4e61d302fff3cc91d7f19515f27baea1f4bdacd3e2f1f3abff8542a5399a5  ./modules/mod-KPA-decyzja-i-odwolanie.md
 4013a61243feed17c8653595ae840f0e18b3aa5a1c20f83884593776db5d385a  ./modules/mod-KPA-mechanizmy-w-toku-sprawy.md
 a8894026e8664904a3a99277fd50d2c79523a7297192658f400347680e028e49  ./modules/mod-KPA-postepowanie-administracyjne.md
 7e559fb3f842e361923ec207d5799b4d5bb6618a208d1f56ba336ec7404c4468  ./modules/mod-KPA-tryby-nadzwyczajne-i-strategia.md
@@ -22,7 +22,7 @@ e7a4b121ab08b339bc98c6248e340252dce32eb2a848c1c3cfb113c435ac5ce6  ./modules/mod-
 408c4f33643529297529c9fd53b4ebee8311cb5dac86177ce1d60adc4942a361  ./modules/mod-PPSA-terminy-kasacja-prawo-pomocy.md
 d9be85879bc1b3393dc15a2d03abf777ffaa0d5ddfe90adfa513b9b22e8e214a  ./modules/mod-PPSA-uzupelnienie-pokrycia-2026.md
 7784b47369704ebe199cb1bde1074a82e9e5a626458cc7eafd4e59052af90e9b  ./modules/mod-UDIP-dostep-informacji-publicznej.md
-ba25397e77542d7167994d475b535ff70aa19a87fdfd05705e708ba7d6a72837  ./modules/mod-UPEA-egzekucja-administracyjna.md
+4c9486650f510f2ef9ccd59a80c50cde5bcc86a1a8fb49ced6e8363067831f0d  ./modules/mod-UPEA-egzekucja-administracyjna.md
 d8bf28d02841b97c750b4c1062abf6098b6bcd3571a49c476aa5d02ad7a05361  ./modules/mod-ustawa-RPD.md
 36193062081e10a9e133e38824d4e75642870ab8138fbce0d4b4b8b64d32c507  ./modules/mod-ustawa-RPO.md
 fc50453d8ca5525250a2048c1ad17ba5256831f29b4a92388a7cfa2884cd1de6  ./modules/mod-ustawa-SKO.md
@@ -35,4 +35,4 @@ ec38358ff5b4a97da77e8626b92f63f9d79acab1854ab55973b9329902a3b861  ./modules/mod-
 0a4f7d990649346529a549a9532ca5ab40c1576c4d4c8ac936ba67af1a40f52e  ./modules/mod-ustawa-sygnalisci.md
 b06340e18a2ab4ee4dc8d92b5baa2f634ba53799f9e115ac31cd5e8636bf8ce3  ./modules/mod-ustawa-wojewoda-administracja-rzadowa.md
 dc5ec3dc4eed1bb9ba3a9b69f48317d1216e4b146d94b423931dbebf5fca3d6e  ./modules/mod-ustawa-zaskarzanie-decyzji-wlasnosci.md
-401c5b6fb1eac6358d8305288ea8984269159a1a000877ff7a1320546068007f  ./references/CHANGELOG.md
+495f7273dacea92b4dbc1ac3f226eb2283fe637bee4bb7c5a2782f982488b5fd  ./references/CHANGELOG.md

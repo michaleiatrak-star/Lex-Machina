@@ -8,7 +8,7 @@
 > wszystkie skille analityczne i pismowe
 > **Charakter:** ⛔ BLOKUJĄCA. Bez zamkniętego bloku CN-GATE nie wolno oddać
 > analizy, opinii ani pisma.
-> **Nie jest** bramką weryfikacyjną — nie zastępuje `shared/PRAWO-HARDGATE.md`.
+> **Nie jest** bramką weryfikacyjną — nie zastępuje `JUR:weryfikacja-przepisow-kanon`.
 > HARD GATE pyta „czy ten przepis brzmi tak, jak twierdzę". CN-GATE pyta
 > **„czy ten przepis w ogóle obowiązuje ten podmiot w tym stanie faktycznym"**.
 

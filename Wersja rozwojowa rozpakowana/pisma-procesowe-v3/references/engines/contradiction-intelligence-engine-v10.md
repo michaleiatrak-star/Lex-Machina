@@ -87,7 +87,7 @@ Sprzeczność wolno eksponować w piśmie tylko wtedy, gdy da się wskazać:
 ## ETAP 4A — AUDYT POWOŁAŃ ORZECZNICZYCH PRZECIWNIKA (dodano 2026-09-22, F-194)
 
 Dla każdej sygnatury powołanej przez przeciwnika wykonaj kontrakt statusów
-`shared/SYGNATURY.md` i gradient TREŚĆ `shared/WERYFIKACJA-SLAD.md` (GRAD-1..4,
+`JUR:sygnatury-repertoria` i gradient TREŚĆ `shared/WERYFIKACJA-SLAD.md` (GRAD-1..4,
 przy NSA/WSA także `GRAD-3b-SYM`):
 
 | Sygnatura | Status (FOUND / NOT_FOUND / AMBIGUOUS / OUT_OF_SCOPE) | Data zgodna? | Przedmiot zgodny? | Symbol CBOSA zgodny? | Skutek |

@@ -247,7 +247,7 @@ STANDARDOWA KLAUZULA ANTYKORUPCYJNA:
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: Dyrektywa CSDDD 2024/1760 — eur-lex.europa.eu*
 *CSRD: Dyrektywa 2022/2464 — eur-lex.europa.eu*
 *KK art. 228–230a (korupcja) — isap.sejm.gov.pl*

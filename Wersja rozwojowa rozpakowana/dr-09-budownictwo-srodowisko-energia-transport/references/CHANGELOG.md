@@ -1,5 +1,6 @@
 # CHANGELOG — dr-09-budownictwo-srodowisko-energia-transport
 
+- 3.58 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.57 (2026-10-31, AUDYT-2026-10-31): Prawo lotnicze — nowy t.j. Dz.U. 2026 poz. 1407 (ELI RZĄD 1; obejmuje 2025/1668, 2026/176, 607, 864, 1157 — dotąd jako zmiany po t.j.): mod-ustawa-transport-drogowy-kolejowy-lotniczy-morski, MAPA-AKTOW.
 - 3.56 (2026-10-27, AUDYT-2026-10-27a, zgł. #132): mod-formy-ochrony-przyrody-obszary-chronione 1.1 — brzmienie z t.j. Dz. U. z 2026 r. poz. 1315 (ELI, 0 zmian po t.j.): art. 17 ust. 3 (wyjątek od pkt 1 tylko bez obowiązkowego raportu OOŚ), ust. 1a (strefy z planu ochrony) i 1b (obiekty wskazane w planie ochrony), pełny katalog pkt 1–14, ust. 3a, 4, 5; tryb art. 16 ust. 3–4e; nowa § 3.5 OChK (art. 24 ust. 1–4, różnice wobec art. 17); art. 23 i 23a ust. 2–8; art. 22 ust. 4 dosłownie; rozporządzenie roślin Dz. U. z 2014 r. poz. 1409 (obowiązuje); usunięte zdanie bez podstawy o „wojewodzie/organie wykonawczym”.
 - 3.55 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości

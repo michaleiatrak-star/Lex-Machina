@@ -168,7 +168,7 @@ UZASADNIENIE: [dlaczego to ważne — wymóg 93/13, Omnibus, KC art. 385 §2]
 
 ```
 Klauzula niejasna (D3/D4 < 5) + podejrzana o abuzywność:
-  → Łącz wynik LD z oceną AB (mod-shared-abusive-clauses.md)
+  → Łącz wynik LD z oceną AB (JUR:umowy-shared-abusive-clauses)
   → Niejasność = dodatkowy argument za abuzywnością (KC art. 385 §2)
   → Format wspólny: [ABUZYWNA + NIEJASNA → RYZYKO PODWYŻSZONE]
 ```

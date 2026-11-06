@@ -12,7 +12,7 @@ prawna i konstytucyjna, jak ją zakwalifikować w argumentacji).
 > Ten moduł (MOD-ZTP) odpowiada na PÓŹNIEJSZE pytanie: **jaką technikę zastosował
 > ustawodawca i czy jest ona zgodna z Konstytucją** — komplementarnie, nie zamiennie.
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym przepisem z tego modułu.
 
 ---
 
@@ -188,7 +188,7 @@ KROK 5 — Brak przepisu przejściowego, brak kwalifikacji do KROK 2-4 →
 
 ⚠️ Pozycje książkowe/komentarzowe zweryfikuj co do aktualnego wydania przed
 powołaniem w piśmie procesowym (RZĄD 2B — duże wydawnictwa prawnicze) —
-zgodnie z `shared/HIERARCHIA-ZRODEL.md`.
+zgodnie z `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`.
 
 ---
 

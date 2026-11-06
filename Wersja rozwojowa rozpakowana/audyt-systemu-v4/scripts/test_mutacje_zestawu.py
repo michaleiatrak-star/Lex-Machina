@@ -79,7 +79,7 @@ MUTACJE = [
      lambda R: (R / "dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-MUTACJA-niezarejestrowany.md")
      .write_text("# mod-MUTACJA\n\nTreść.\n", encoding="utf-8")),
     ("T6_T7", "ci_check_shared.py", lambda R: ["--repo-root", R], "zerwane odwołanie do shared",
-     lambda R: _sub(R / "pisma-proste-v2/SKILL.md", "view shared/FORMAL-CHECK.md", "view shared/NIEISTNIEJACY-MUTACJA.md")),
+     lambda R: _sub(R / "pisma-proste-v2/SKILL.md", "view shared/HYBRID-VALIDATION.md", "view shared/NIEISTNIEJACY-MUTACJA.md")),
     ("T14", "check_description.py", lambda R: [R], "description > 200 znaków",
      lambda R: _frontmatter_description(R / "pisma-proste-v2/SKILL.md")),
     ("T17", "test_router_contract.py", lambda R: ["--repo-root", R], "utrata PATH-SELFTEST w routerze",
@@ -89,8 +89,12 @@ MUTACJE = [
      lambda R: (R / "prawo-polskie-v2/ROUTING-MAP.md").unlink()),
     ("T22", "check_frontmatter_rejestracja.py", lambda R: [R], "skrypt w scripts/ bez wpisu we frontmatterze",
      lambda R: (R / "audyt-systemu-v4/scripts" / _nazwa("check", ".py")).write_text("print('x')\n", encoding="utf-8")),
+    ("T50", "check_jurysdykcja.py", lambda R: [R], "klucz JUR: spoza manifestu jurysdykcji",
+     lambda R: _sub(R / "analizator-dowodow-v3/modules/MD5-terminy.md", "view JUR:terminy-procesowe", "view JUR:nie-ma-takiego-klucza")),
+    ("T50", "check_jurysdykcja.py", lambda R: [R], "moduł klucza JUR: usunięty z pakietu jurysdykcji",
+     lambda R: (R / "prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP10-koszty.md").unlink()),
     ("T29", "check_oplaty_mapa.py", lambda R: ["--katalog", R], "brak satelity TABELE-OPLAT",
-     lambda R: (R / "shared/oplaty/05-sprawy-karne.md").unlink()),
+     lambda R: (R / "prawo-polskie-v2/krajowe/shared/oplaty/05-sprawy-karne.md").unlink()),
     ("T34", "check_archiwa_repo.py", lambda R: ["--repo-root", R], "drzewo różne od paczki ZIP",
      lambda R: (R / "shared/DISCLAIMER.md").write_text(
          (R / "shared/DISCLAIMER.md").read_text(encoding="utf-8") + "\nMUTACJA\n", encoding="utf-8")),
@@ -142,10 +146,10 @@ MUTACJE = [
                 _sub(R / "audyt-systemu-v4/SKILL.md", "  - scripts/check_testy_skilli.py\n",
                      "  - scripts/check_testy_skilli.py\n  - scripts/check_mutacja_poza_zestawem.py\n"))),
     ("T28", "check_wartosci_prawne.py", lambda R: ["--katalog", R, "--tylko-fail"], "nawrót znanego błędnego cytatu (art. 328¹)",
-     lambda R: (R / "pisma-proste-v2/references/SPF-SPG.md").write_text(
-         (R / "pisma-proste-v2/references/SPF-SPG.md").read_text(encoding="utf-8") + "\nWniosek z art. 328¹ KPC.\n", encoding="utf-8")),
+     lambda R: (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPF-SPG.md").write_text(
+         (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPF-SPG.md").read_text(encoding="utf-8") + "\nWniosek z art. 328¹ KPC.\n", encoding="utf-8")),
     ("T32", "check_tabele_satelickie.py", lambda R: ["--repo-root", R], "plik z rejestru tabel opłat nie istnieje",
-     lambda R: (R / "pisma-proste-v2/references/M6-oplaty.md").unlink()),
+     lambda R: (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/M6-oplaty.md").unlink()),
     ("T36", "check_eli_extract.py", lambda R: ["--repo-root", R], "ekstraktor jednostek ELI zepsuty",
      lambda R: _sub(R / "shared/tools/eli_art_extract.py", "def wyciagnij(html: str, cytat: str) -> dict:\n",
                     "def wyciagnij(html: str, cytat: str) -> dict:\n    return {'status': 'NOT_FOUND'}\n")),

@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.249"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.250"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -170,7 +170,7 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 
 > ⚙️ **ZASADA 13 (2026-07-17, STAŁA — nie precedens):** Ponowna weryfikacja
 > oznaczeń/skrótów prawnych + wytrwałość wyszukiwania + oznaczanie przy
-> każdym użyciu. Pełna treść i uzasadnienie: `shared/PRAWO-HARDGATE.md`
+> każdym użyciu. Pełna treść i uzasadnienie: `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`
 > wersja 2.4. Skrót operacyjny na potrzeby audytu:
 > 1. Każde niepotwierdzone źródłowo oznaczenie/skrót prawny, gdy pojawia
 >    się PONOWNIE w dalszej części rozmowy jako podstawa wniosku, wymaga
@@ -195,14 +195,14 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 
 > ⚙️ **ZASADA 14 (2026-07-26, STAŁA — nie precedens):** Gradacja źródeł
 > przy weryfikacji merytorycznej (FAZA 3E) — obowiązkowe stosowanie
-> `shared/HIERARCHIA-ZRODEL.md` (Rząd 1/2A/2B/3), nie tylko przy
+> `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` (Rząd 1/2A/2B/3), nie tylko przy
 > podawaniu linków użytkownikowi, ale RÓWNIEŻ jako metodologia SAMEJ
 > weryfikacji przy audycie. Ustalone po dwóch transzach FAZA 3E
 > (AUDYT-2026-07-26h/i), na wyraźne polecenie użytkownika.
 >
 > **Procedura, w kolejności:**
 > 1. **Rząd 1 — ELI, próba pierwsza, zawsze (kanon E-1…E-5,
->    `shared/HIERARCHIA-ZRODEL.md`, od audytu 6.125).** Brzmienie i stan
+>    `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`, od audytu 6.125).** Brzmienie i stan
 >    aktu z `api.sejm.gov.pl/eli` kanałem kodu (`text.pdf` t.j.,
 >    `/references` dla zmian), host bez kanału kodu — B-1 → B-2 na
 >    `eli.gov.pl`. ISAP (`isap.sejm.gov.pl`) wyłącznie jako link dla
@@ -211,7 +211,7 @@ Po zakończeniu audytu: **obowiązkowa aktualizacja plików references**.
 >    i ISAP (akt niepobieralny z RZĘDU 1 — awaria, timeout, blokada; wynik
 >    zapisany): LEX/Legalis, potem lexlege.pl,
 >    arslege.pl, prawo.pl i analogiczne z rejestru
->    `HIERARCHIA-ZRODEL.md`/`PORTALE-BRANZOWE-RZAD-2B.md`. Traktuj jako
+>    `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`/`prawo-polskie-v2/krajowe/shared/PORTALE-BRANZOWE-RZAD-2B.md`. Traktuj jako
 >    wiarygodne dla BRZMIENIA przepisu, ale NIGDY nie zaznaczaj wyniku
 >    jako ✅ [VER] tak jakby to był Rząd 1 — użyj oznaczenia zgodnego z
 >    `shared/WERYFIKACJA-SLAD.md` odpowiedniego dla źródła Rządu 2.
@@ -722,7 +722,7 @@ Skrót procedury:
 5. CRIT-TREŚĆ → napraw treść modułu w tej samej sesji (str_replace na kopii), z adnotacją źródła i datą weryfikacji.
 
 > ⚙️ Przy KROKU 2/3 stosuj ZASADĘ 14 (gradacja źródeł, patrz sekcja
-> ZASADY KRYTYCZNE pkt 12 i `shared/HIERARCHIA-ZRODEL.md`) — Rząd 1
+> ZASADY KRYTYCZNE pkt 12 i `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`) — Rząd 1
 > pierwsza próba, Rząd 2B główne potwierdzenie gdy Rząd 1 niedostępny
 > wprost, Rząd 3 wyłącznie jako dodatkowe potwierdzenie zbieżności.
 
@@ -1129,7 +1129,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 
 12. ⛔ **ZASADA GRADACJI ŹRÓDEŁ PRZY WERYFIKACJI (dodana 2026-07-26,
     ZASADA 14 w nagłówku pliku, tu jako pozycja 12 listy operacyjnej) —
-    FAZA 3E stosuje `shared/HIERARCHIA-ZRODEL.md` jako metodologię, nie
+    FAZA 3E stosuje `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` jako metodologię, nie
     tylko jako zasadę oznaczania linków.**
 
     Kolejność: kanon E-1…E-5 — Rząd 1 ELI (próba zawsze pierwsza; ISAP
@@ -1169,7 +1169,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
     systemu ujawniającym pliki >1000 linii POZA katalogami `modules/`):**
     - **OBJĘTE:** wszystkie pliki `modules/mod-*.md` w DR-01…DR-16 oraz
       pliki merytoryczne w `shared/` opisujące jeden akt/jedną dziedzinę
-      (precedens: `ORKA-BAS-LEKSYKON.md`, `PORTALE-BRANZOWE-RZAD-2B.md`
+      (precedens: `ORKA-BAS-LEKSYKON.md`, `prawo-polskie-v2/krajowe/shared/PORTALE-BRANZOWE-RZAD-2B.md`
       już figurują w F-78).
     - **DO ROZSTRZYGNIĘCIA (nie egzekwować bez decyzji użytkownika):**
       pliki `SKILL.md` skilli-orchestratorów (`przesluchanie-swiadkow-v2-min90`
@@ -1235,13 +1235,13 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
     pól:
 
     ```
-    (1) STATUS  — wg rejestru statusów w shared/PRAWO-HARDGATE.md:
+    (1) STATUS  — wg rejestru statusów w prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md:
         ✅ [VER: źródło, data]        — potwierdzone w Rzędzie 1
         🟨 [KOTWICA-URZĘDOWA]         — potwierdzone kotwicą urzędową
         ⚠️ [NIEWERYFIKOWANE — HIPOTEZA] — NIEpotwierdzone; wolno zgłosić
                                          WYŁĄCZNIE z tym oznaczeniem
         (F-116 ANULOWANA — brak osobnej karty statusów, rejestr jest
-        i pozostaje w shared/PRAWO-HARDGATE.md)
+        i pozostaje w prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md)
     (2) IDENTYFIKATOR ŹRÓDŁA — plik + numer linii, albo numer Dz.U. +
         artykuł, albo URL z datą odczytu. „Widziałem gdzieś w systemie"
         NIE jest identyfikatorem.
@@ -1339,4 +1339,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.245 | Ostatnia aktualizacja: 2026-10-27 (isap_tekst: na_dzien, jednostki jeszcze nieobowiązujące, brzmienia nierozstrzygnięte; analogia legal-cite-pl). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.250 | Ostatnia aktualizacja: 2026-10-27 (isap_tekst: na_dzien, jednostki jeszcze nieobowiązujące, brzmienia nierozstrzygnięte; analogia legal-cite-pl). Stopkę aktualizuj razem z polem `version`.*

@@ -1,6 +1,6 @@
 # mod-ustawa-lekarz-weterynarii-zawod — Lekarz weterynarii jako zawód zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).
 
@@ -128,7 +128,7 @@ Właściwy organ: okręgowa izba / Krajowa Rada Lekarsko-Weterynaryjna /
 Środek: odwołanie korporacyjne / odwołanie w sądownictwie
   lekarsko-weterynaryjnym / skarga WSA / pozew cywilny
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
 ```
 
 ---
@@ -192,7 +192,7 @@ web_search: "odpowiedzialność cywilna lekarza weterynarii błąd w leczeniu or
 | ISAP — tekst jednolity | isap.sejm.gov.pl | Dz.U. 2026 poz. 125, 2023 poz. 154 |
 | Krajowa Izba Lekarsko-Weterynaryjna | vetpol.org.pl | Samorząd, sądownictwo lekarsko-weterynaryjne |
 | Orzecznictwo NSA | orzeczenia.nsa.gov.pl | Kontrola uchwał izb |
-| Orzecznictwo SN | sn.pl | Kasacja od orzeczeń sądu lekarsko-weterynaryjnego (⚙️ spięte z shared/PRAWO-HARDGATE.md — I instancja korporacyjna bez publicznej bazy, oznacz ⚠️ [NIEWERYFIKOWALNE]) |
+| Orzecznictwo SN | sn.pl | Kasacja od orzeczeń sądu lekarsko-weterynaryjnego (⚙️ spięte z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md — I instancja korporacyjna bez publicznej bazy, oznacz ⚠️ [NIEWERYFIKOWALNE]) |
 
 ---
 

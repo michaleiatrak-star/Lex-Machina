@@ -1,6 +1,6 @@
 # mod-ustawa-psycholog-zawod — Psycholog jako zawód zaufania publicznego (STAN PRZEJŚCIOWY 2026-2028)
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).
 
@@ -194,7 +194,7 @@ PO 19.05.2028 (lub wcześniej dla przepisów przejściowych dot. nauczycieli):
     organami samorządu psychologów
   → rejestr psychologów jako przesłanka formalna zatrudnienia
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   + ZAWSZE web_search aktualnego stanu wdrożenia przed finalną odpowiedzią
 ```
 

@@ -3,8 +3,8 @@
 """
 T29 — integralność podziału TABELE-OPLAT na rdzeń i satelity.
 
-Powstał 2026-09-12q wraz z podziałem `shared/TABELE-OPLAT.md` (1555 linii) na
-rdzeń nawigacyjny i siedem satelitów w `shared/oplaty/`.
+Powstał 2026-09-12q wraz z podziałem `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` (1555 linii) na
+rdzeń nawigacyjny i siedem satelitów w `oplaty/` obok rdzenia (moduł JUR:oplaty-sadowe).
 
 ⛔ PO CO. Sekcja 7 rdzenia opisuje, jak w tym systemie powstały „tabele
 satelickie": pliki z własnymi kwotami, bez właściciela i bez rejestru, które
@@ -15,7 +15,7 @@ i test, który jej pilnuje. Bez tego testu podział jest regresją, nie porządk
 Cztery bramki:
 
   B1  KOMPLETNOŚĆ MAPY W DÓŁ — każdy plik wymieniony w mapie rdzenia ISTNIEJE.
-  B2  KOMPLETNOŚĆ MAPY W GÓRĘ — każdy plik w `shared/oplaty/` jest W MAPIE.
+  B2  KOMPLETNOŚĆ MAPY W GÓRĘ — każdy plik w `oplaty/` obok rdzenia jest W MAPIE.
       (B1 bez B2 przepuszcza plik-sierotę, czyli satelitę bez właściciela.)
   B3  UNIKALNOŚĆ WŁAŚCICIELA — żaden nagłówek sekcji (`## 1a.`, `## 6b.`…)
       nie występuje w więcej niż jednym pliku. To jest właściwa bramka
@@ -31,11 +31,18 @@ import os
 import re
 import sys
 
-RDZEN = os.path.join('shared', 'TABELE-OPLAT.md')
-KATALOG = os.path.join('shared', 'oplaty')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _lex_common import modul_jurysdykcji  # noqa: E402
+
+# Rdzeń tabel opłat to moduł klucza JUR:oplaty-sadowe (manifest jurysdykcji); satelity obok niego.
+RDZEN_DOMYSLNY = os.path.join('prawo-polskie-v2', 'krajowe', 'shared', 'TABELE-OPLAT.md')
+
+
+def sciezka_rdzenia(root):
+    return modul_jurysdykcji(root, 'JUR:oplaty-sadowe', RDZEN_DOMYSLNY)
 
 # Pozycja mapy: `oplaty/NAZWA.md` wewnątrz tabeli w rdzeniu.
-WZ_MAPA = re.compile(r'`oplaty/([A-Za-z0-9._-]+\.md)`')
+WZ_MAPA = re.compile(r'`(?:[A-Za-z0-9._/-]*/)?oplaty/([A-Za-z0-9._-]+\.md)`')
 # Nagłówek sekcji numerowanej: "## 1.", "## 1a.", "## 6b.", "## 2e." …
 WZ_SEKCJA = re.compile(r'^##\s+(?:[⛔⭐⚠️\s]*)?(\d+[a-z]?)\.\s', re.MULTILINE)
 WZ_STOPKA = re.compile(r'Plik satelicki')
@@ -47,8 +54,9 @@ def sekcje(tekst):
 
 def sprawdz(root):
     bledy, info = [], []
+    RDZEN = sciezka_rdzenia(root)
     p_rdzen = os.path.join(root, RDZEN)
-    p_kat = os.path.join(root, KATALOG)
+    p_kat = os.path.join(os.path.dirname(p_rdzen), 'oplaty')
 
     if not os.path.isfile(p_rdzen):
         bledy.append(('B0', RDZEN, 'brak rdzenia'))
@@ -62,7 +70,7 @@ def sprawdz(root):
     for f in sorted(w_mapie - na_dysku):
         bledy.append(('B1', f, 'wymieniony w mapie rdzenia, ale NIE ISTNIEJE'))
     for f in sorted(na_dysku - w_mapie):
-        bledy.append(('B2', f, 'istnieje w shared/oplaty/, ale NIE MA GO W MAPIE '
+        bledy.append(('B2', f, 'istnieje w katalogu oplaty/ obok rdzenia, ale NIE MA GO W MAPIE '
                                '— satelita bez właściciela'))
 
     wlasciciel = {}
@@ -118,11 +126,12 @@ def selftest():
     ok = 0
     for opis, pliki, mapa, exp in PRZYPADKI:
         with tempfile.TemporaryDirectory() as d:
-            os.makedirs(os.path.join(d, 'shared', 'oplaty'))
-            open(os.path.join(d, RDZEN), 'w', encoding='utf-8').write(
+            katalog = os.path.join(d, os.path.dirname(RDZEN_DOMYSLNY), 'oplaty')
+            os.makedirs(katalog)
+            open(os.path.join(d, RDZEN_DOMYSLNY), 'w', encoding='utf-8').write(
                 '# rdzen\n' + mapa + '\n')
             for n, t in pliki.items():
-                open(os.path.join(d, KATALOG, n), 'w', encoding='utf-8').write(t)
+                open(os.path.join(katalog, n), 'w', encoding='utf-8').write(t)
             b, _ = sprawdz(d)
             got = 1 if b else 0
             if got == exp:

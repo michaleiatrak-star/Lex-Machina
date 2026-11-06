@@ -1,6 +1,6 @@
 ---
 name: dr-07-zamowienia-publiczne-fundusze-ue
-version: "3.18"
+version: "3.19"
 description: "Zamówienia publiczne i fundusze UE: PZP, postępowania zakupowe, KIO, środki ochrony prawnej, finansowanie UE i powiązane zagadnienia realizacyjne."
 dependencies:
   requires:
@@ -35,7 +35,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
 > Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
-> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> gradient weryfikacji cytatu): `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
 
@@ -72,9 +72,9 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W17 Rażąco niska cena (PZP art. 224 — brak definicji legalnej, linia KIO)
 
-## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
-Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
+Ta dziedzina nie ma dedykowanego pliku w `prawo-polskie-v2/krajowe/shared/definicje/`. Zamówienia publiczne, fundusze UE, pomoc publiczna — pojęcia (wykonawca, zamawiający, oferta, rażąco niska cena, kryteria oceny ofert) mają definicje ustawowe wprost w PZP (art. 7) i nie wymagają osobnego pliku w prawo-polskie-v2/krajowe/shared/definicje/. Żaden plik tematyczny nie obejmuje dziedziny PZP.
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (20 łącznie — ✓ 20 OK, ☐ 0 STUB)
 

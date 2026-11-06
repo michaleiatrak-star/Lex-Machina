@@ -28,7 +28,7 @@
 > a nie `web_fetch`.
 
 ⛔ **Ten plik NIE rozstrzyga, czy z danego źródła wolno cytować.** To robi
-`shared/HIERARCHIA-ZRODEL.md` (moc źródła) i `shared/PRAWO-HARDGATE.md`
+`JUR:hierarchia-zrodel` (moc źródła) i `JUR:weryfikacja-przepisow-kanon`
 (obowiązek weryfikacji). Tu jest wyłącznie **jak** wywołać, żeby dostać
 odpowiedź zamiast fałszywej awarii.
 
@@ -255,7 +255,7 @@ Wyszukiwanie po tytule: `/eli/acts/search?publisher=DU&year={rok}&title={fraza}`
 ⛔ **Skutek praktyczny dla reguły „ISAP każdy przepis":** brzmienie
 **weryfikuj przez ELI**, a **ISAP powołuj jako adres dla człowieka** w piśmie.
 To nie jest obejście HARD GATE — ELI jest tym samym publikatorem w RZĘDZIE 1
-(patrz `shared/HIERARCHIA-ZRODEL.md`, REALIA DOSTĘPNOŚCI).
+(patrz `JUR:hierarchia-zrodel`, REALIA DOSTĘPNOŚCI).
 
 ---
 
@@ -316,7 +316,7 @@ Dalej: `courtType` (`COMMON`/`SUPREME`/`ADMINISTRATIVE`/`CONSTITUTIONAL_TRIBUNAL
 dokładne, wielkość liter bez znaczenia. Zmierzone 2026-09-13: `III CZP 25/11` → 1,
 `iii czp 25/11` → 1, `III CZP 999/11` → 0, `CZP 25/11` (bez izby) → 0.
 ⛔ **Nie używaj `all=` do sprawdzania, czy sygnatura istnieje** — `all=III CZP 999/11`
-zwraca **67 576 trafień** na fabrykacie. Procedura: `shared/SYGNATURY.md`, V-SYG-0.
+zwraca **67 576 trafień** na fabrykacie. Procedura: `JUR:sygnatury-repertoria`, V-SYG-0.
 
 ⚠️ `pageSize` **≥ 10** — mniej to HTTP 400. Indeks bywa wolny, nie skracaj timeoutu.
 
@@ -452,13 +452,13 @@ w obrębie sądu**, więc portal lokalny zamienia AMBIGUOUS na rozstrzygnięcie.
 
 Wykaz hostów sądów z licznikami dokumentów jest w drzewie na
 `orzeczenia.ms.gov.pl/search/advanced` (sekcja „Portale sądów wraz z liczbą
-opublikowanych orzeczeń"). ➜ realizacja: **V-SYG-0.6** w `shared/SYGNATURY.md`.
+opublikowanych orzeczeń"). ➜ realizacja: **V-SYG-0.6** w `JUR:sygnatury-repertoria`.
 
 ### Pozostałe
 
 | Źródło | Kanał | Uwaga |
 |---|---|---|
-| `orzeczenia.nsa.gov.pl` | HTML server-side | **FRESH-PROBE obowiązkowy.** Pomiar 2026-09-13b/c w tamtym runtime: 503 na wszystkich ścieżkach; nie jest to globalny status źródła. Gdy portal odpowiada właściwym HTML-em → użyj direct CBOSA wg sekcji niżej i `shared/SYGNATURY.md` V-SYG-0.7. Gdy direct zawiedzie → V-SYG-0.5 fallback indeksowy. |
+| `orzeczenia.nsa.gov.pl` | HTML server-side | **FRESH-PROBE obowiązkowy.** Pomiar 2026-09-13b/c w tamtym runtime: 503 na wszystkich ścieżkach; nie jest to globalny status źródła. Gdy portal odpowiada właściwym HTML-em → użyj direct CBOSA wg sekcji niżej i `JUR:sygnatury-repertoria` V-SYG-0.7. Gdy direct zawiedzie → V-SYG-0.5 fallback indeksowy. |
 
 ### ⭐ CBOSA — direct HTML adapter (NSA/WSA, stan operacyjny 2026-09-14)
 
@@ -507,7 +507,7 @@ submit=Szukaj
 - 0 exact-match po kompletnym wyniku → NOT_FOUND;
 - 1 → FOUND; >=2 → AMBIGUOUS.
 
-Pełny kontrakt: `shared/SYGNATURY.md`, V-SYG-0.7.
+Pełny kontrakt: `JUR:sygnatury-repertoria`, V-SYG-0.7.
 Implementacja produkcyjna: `shared/CBOSA-ADAPTER.md`
 i implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`.
 
@@ -586,7 +586,7 @@ raportować `DIRECT_LIVE` ani ✅ [VER]. Globalny status śladu pozostaje zgodny
 z `shared/WERYFIKACJA-SLAD.md`.
 
 ⛔ Brak exact-hit w retrieval = `OUT_OF_SCOPE`, nigdy `NOT_FOUND`.
-Pełny kontrakt: `shared/SYGNATURY.md`, V-SYG-0.5.
+Pełny kontrakt: `JUR:sygnatury-repertoria`, V-SYG-0.5.
 | `ipo.trybunal.gov.pl`, `otkzu.trybunal.gov.pl` | HTML | osiągalne (`/ipo/Szukaj` → 200). Wyszukiwarka to JSF/PrimeFaces z `ViewState` — **POST-only**, `Sprawa?sygnatura=` nie jest kluczem. Stały adres karty sprawy (GET, bez sesji): `ipo.trybunal.gov.pl/ipo/view/sprawa.xhtml?pokaz=dokumenty&sygnatura=K+28%2F05`; dokumenty `Sprawa?dokument=…&sprawa=…`. OTK ZU: `otkzu.trybunal.gov.pl/Wyszukiwanie` (pole Sygnatura), pozycje `/{rok}/{A\|B}/{poz}`, PDF `downloadOTK?mpo=`. Konektor `tk` (2026-10-06): karta IPO → OTK ZU → formularz JSF IPO; **SAOS nie jest źródłem TK**. Pomiar na żywo: `test_poprawnosci.mjs` (10c) |
 | `etpcz.ms.gov.pl` | HTML | Baza MS orzeczeń ETPCz (polskie tłumaczenia, wybrane orzeczenia; ten sam silnik co Portal Orzeczeń). Stałe linki: treść `/etpccontent/$N/{id}`, metryka `/detailsetpc/$N/{id}`; id `990000000000001_I_ETPC_{nr skargi 6 cyfr}_{20RR}_{Wy\|De}_{data}_{nr}` (rok zawsze „20”+RR: 34503/97 → `2097`). Konektor `etpcz` (2026-10-06): formularz wyszukiwarki odczytywany z HTML; pomiar na żywo: G40B |
 | `hudoc.echr.coe.int` | ⚠️ HTML | ⛔ **Sprostowanie (F-186a, zamknięta 2026-09-13c):** ścieżka `/app/query/results` zwraca **404** (zmierzone w dwóch wariantach zapytania) — zapis z wersji 1.0 był nieprawdziwy. ✅ Działa pobranie dokumentu po `itemid`: `GET /app/conversion/docx/html/body?library=ECHR&id=001-57619` → 200, pełny tekst HTML (zmierzone: 177 kB). Wyszukiwanie po frazie pozostaje nierozstrzygnięte maszynowo |
@@ -627,7 +627,7 @@ wtedy odpis PDF.
 
 ✅ **Adapter kodu (F-204, 2026-09-26):** `shared/tools/adapter_krs_vat.py` —
 własny odczyt KRS + WL bez serwerów zewnętrznych, wpięty w
-`shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md` §ISU-1b. Schemat JSON KRS
+`JUR:identyfikacja-strony-umowy` §ISU-1b. Schemat JSON KRS
 zmierzony LIVE tą sesją (KRS 0000010681, ORANGE POLSKA S.A. — ta sama
 para NIP/REGON co w przykładzie WL niżej, potwierdzenie krzyżowe dwóch
 rejestrów). Szczegóły i stan weryfikacji: `shared/tools/README.md`.
@@ -677,7 +677,7 @@ weryfikacji razem z datą.
 2. Sprawdź **ścieżkę roboczą** zamiast roota.
 3. Ponów (limity tempa, hosty niedeterministyczne).
 4. Dopiero potem: `references/ZRODLA-AKTOW-FALLBACK.md` (routera) lub
-   `shared/HIERARCHIA-ZRODEL.md` → kanał zastępczy RZĘDU 1.
+   `JUR:hierarchia-zrodel` → kanał zastępczy RZĘDU 1.
 5. Jeśli nadal brak potwierdzenia — ⚠️ `[NIEWERYFIKOWANE]` i **poinformuj
    użytkownika**. ⛔ Nigdy cicho.
 

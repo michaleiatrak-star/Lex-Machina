@@ -1,6 +1,6 @@
 ---
 name: dr-08-samorzad-terytorialny-prawo-lokalne
-version: "3.23"
+version: "3.24"
 description: "Samorząd terytorialny i prawo lokalne: gmina, powiat, województwo, uchwały, akty prawa miejscowego, nadzór, kompetencje JST i lokalne planowanie."
 dependencies:
   requires:
@@ -62,11 +62,11 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - **Zakaz cytowania przepisów z pamięci — każde brzmienie weryfikuj w ELI (RZĄD 1)**
 - Prawo miejscowe i uchwały JST: pobieraj z dzienników wojewódzkich i BIP, nie z pamięci
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-BUDOWLANE-DROGOWE.md` — opłata SPP (charakter prawny,
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-BUDOWLANE-DROGOWE.md` — opłata SPP (charakter prawny,
   zaskarżenie wyłącznie w egzekucji), obiekt liniowy, samowola budowlana
-- `definicje/DEF-PROCEDURA.md` — termin zawity (art. 33 UPEA — 7 dni,
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PROCEDURA.md` — termin zawity (art. 33 UPEA — 7 dni,
   bezwzględny dla SPP)
 
 ## ORKA-BAS — Definicje wspomagające (shared/ORKA-BAS-LEKSYKON.md)
@@ -157,7 +157,7 @@ view dr-08-samorzad-terytorialny-prawo-lokalne/MAPA-POKRYCIA.md
 - Wychodzi do: `pisma-procesowe-v3` / `analiza-sadowa-v6` / `orzeczenia-sadowe-v2`
 - Orzecznictwo: orzeczenia.nsa.gov.pl, cbosa.nsa.gov.pl
 - Prawo miejscowe: dziennikiurzedowe.gov.pl (portal zbiorczy RCL — RZĄD 1), BIP właściwego urzędu jako źródło POMOCNICZE.
-  ⛔ Ścieżka odczytu aktu lokalnego: `shared/PRAWO-HARDGATE.md` → ŚCIEŻKA B-L
+  ⛔ Ścieżka odczytu aktu lokalnego: `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` → ŚCIEŻKA B-L
   (akty prawa miejscowego nie mają ELI ani tekstu jednolitego; adresu serwisu
   wojewódzkiego NIE buduj z szablonu). Korekta 2026-09-01g, F-154 — wcześniej
   wskazywano tu adres `dzienniki.gov.pl`.

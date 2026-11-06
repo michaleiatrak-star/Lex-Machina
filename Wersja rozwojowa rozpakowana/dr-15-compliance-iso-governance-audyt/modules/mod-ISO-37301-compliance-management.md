@@ -173,7 +173,7 @@ Wynik: risk register z oceną residual risk.
 
 ## 10. Quality gate
 Przed odpowiedzią lub dokumentem stosuj:
-- `shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`
+- `prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`
 - `shared/ISAP-AUDIT-PROTOCOL.md` (dla powiązanych aktów ustawowych)
 - `shared/TEMPORAL-LAW-CHECK.md`
 - `shared/LEGAL-QUALITY-GATE.md`

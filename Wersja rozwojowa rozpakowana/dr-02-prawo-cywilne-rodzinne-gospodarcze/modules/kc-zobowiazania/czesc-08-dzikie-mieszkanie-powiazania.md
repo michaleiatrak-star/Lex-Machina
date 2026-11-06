@@ -211,7 +211,7 @@ web_search: "zasiedzenie nieruchomość art 172 KC dobra zła wiara termin SN or
 - **Kredyty frankowe (abuzywność klauzul, art. 385¹ KC)** →
   mod-KC-kredyty-frankowe.md (wydzielony moduł, temat masowy)
 - **Definicje szkody/odpowiedzialności (art. 415, 442¹, 361 KC)** →
-  shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md C.2-C.3 (kanoniczna
+  prawo-polskie-v2/krajowe/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md C.2-C.3 (kanoniczna
   definicja dwóch reżimów odpowiedzialności; tabela w sekcji 3 PROCEDURA
   powyżej jest praktyczną wersją porównawczą dla kwalifikacji sprawy —
   oba ujęcia są celowo zachowane, gdyż służą różnym celom)
