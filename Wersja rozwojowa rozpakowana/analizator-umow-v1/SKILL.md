@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.52"
+version: "1.53"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -366,39 +366,44 @@ LEKKI) i od tego, który skill jest PRIMARY — także gdy dokument jest tylko z
 tabeli ekstrakcji MU.1, nie tej kontroli.
 
 ```
-CAL-1 INWENTARZ — każde postanowienie jednym wierszem:
-      kto → co → na czyją rzecz → sankcja / skutek (z numerem punktu lub §).
-CAL-2 PARY KRZYŻOWE — sprawdź KAŻDY wzorzec na całym dokumencie:
+CAL-1 WĘZŁY — każdy punkt / § jednym wierszem, osobno dla każdej strony:
+      | Pkt | Wiąże | Na rzecz | Rodzaj (obowiązek / prawo / kara / zrzeczenie / oświadczenie
+      / definicja / warunek) | Przedmiot | Znaczenie dla strony A | Znaczenie dla strony B |
+      Gdy aplikacja podała „GRAF RELACJI POSTANOWIEŃ” (szkielet z brzmienia), zacznij od niego:
+      każdy węzeł i każdą krawędź potwierdź albo popraw, nie buduj grafu od nowa.
+CAL-2 KRAWĘDZIE — relacja każdej pary punktów o wspólnym przedmiocie, wspólnej stronie lub
+      odesłaniu, jednym z typów:
+      SPRZECZNOŚĆ (nie da się stosować obu) · ZNOSI PRAWO (jeden odbiera to, co daje drugi) ·
+      WYJĄTEK / LEX SPECIALIS · UZUPEŁNIENIE · WARUNEK (aktywuje lub wyłącza) · SANKCJONUJE ·
+      ODSYŁA · DUBLUJE · PODWÓJNA SANKCJA · ASYMETRIA (obowiązek lub sankcja tylko po jednej
+      stronie). Wzorce do sprawdzenia na całym dokumencie:
   a) ZRZECZENIE / ZWOLNIENIE / „zrzeka się wszystkich roszczeń” ↔ świadczenia, kary,
-     wynagrodzenie, odszkodowanie należne TEJ SAMEJ stronie z innych postanowień tego
-     dokumentu (kara wzajemna „każda ze stron”, wynagrodzenie za okres zwolnienia z pracy,
-     zwrot kosztów). Dosłownie czytane zrzeczenie odbiera tej stronie to, co dokument jej
-     przyznaje → sprzeczność wewnętrzna.
-  b) PODWÓJNA SANKCJA — dwie kary lub różne kwoty za to samo zachowanie (np. poufność
-     za 5 000 zł i za 20 000 zł) → która ma zastosowanie, czy kumulacja, wpływ na miarkowanie.
-  c) ASYMETRIA — obowiązek jednej strony z sankcją, analogiczny obowiązek drugiej bez
-     sankcji; prawo jednej strony bez odpowiednika po drugiej.
-  d) SANKCJA NIEDOPASOWANA — kara za postanowienie, które nie jest obowiązkiem
-     (oświadczenie, odesłanie do przepisów), kara obok odszkodowania za to samo,
-     przesłanka kary inna niż naruszenie (np. „powzięcie informacji”).
-  e) CAŁOŚCIOWOŚĆ — „całkowite porozumienie” / „umowa zastępuje wcześniejsze” ↔ odesłania
-     do innych dokumentów, regulaminów, załączników, wcześniejszych umów.
-  f) ZAKRES PODMIOTOWY I DEFINICJE — ten sam termin w różnym znaczeniu; obowiązek lub
-     ochrona osób spoza stron (spółki powiązane, wspólnicy, pracownicy, konsumenci).
-  g) DATY, TERMINY, KWOTY, ODESŁANIA — wzajemna zgodność; odesłanie do nieistniejącego
-     punktu; termin sprzeczny z innym terminem lub z przepisem bezwzględnie obowiązującym.
-  h) REGULAMIN / WZORZEC / STATUT ↔ UMOWA LUB USTAWA — postanowienie wzorca sprzeczne
-     z umową indywidualną lub z ustawą; zmiana wzorca jednostronna bez trybu.
-CAL-3 ROZSTRZYGNIĘCIE każdej kolizji: wykładnia całego dokumentu — zgodny zamiar stron
-      i cel umowy (art. 65 § 2 KC, zweryfikuj w ELI). Podaj obie interpretacje i wskaż,
-      która jest korzystna dla strony chronionej (pracownik, konsument, słabsza strona).
-      Interpretacja, przy której inne postanowienie traci sens, wymaga wskazania tego wprost.
+     wynagrodzenie, odszkodowanie należne TEJ SAMEJ stronie z innych punktów (kara wzajemna
+     „każda ze stron”, wynagrodzenie za okres zwolnienia z pracy, zwrot kaucji) → ZNOSI PRAWO.
+  b) dwie kary lub różne kwoty za to samo zachowanie → PODWÓJNA SANKCJA (która, kumulacja,
+     miarkowanie).
+  c) obowiązek jednej strony z sankcją, analogiczny obowiązek drugiej bez → ASYMETRIA.
+  d) kara za postanowienie, które nie jest obowiązkiem (oświadczenie, odesłanie do ustawy),
+     kara obok odszkodowania za to samo, przesłanka kary inna niż naruszenie („powzięcie
+     informacji”) → SANKCJONUJE z wadą.
+  e) „całkowite porozumienie” ↔ odesłania do innych dokumentów, regulaminów, załączników.
+  f) ten sam termin w różnym znaczeniu; obowiązek lub ochrona osób spoza stron.
+  g) daty, terminy, kwoty, odesłania — wzajemna zgodność, odesłanie do nieistniejącego punktu.
+  h) regulamin / wzorzec / statut ↔ umowa indywidualna lub ustawa.
+CAL-3 ROZSTRZYGNIĘCIE każdej SPRZECZNOŚCI i ZNOSI PRAWO: wykładnia całego dokumentu — zgodny
+      zamiar stron i cel umowy (art. 65 § 2 KC, zweryfikuj w ELI). Podaj obie interpretacje
+      i wskaż, która jest korzystna dla strony chronionej (pracownik, konsument, słabsza strona).
       Kolizja nieusuwalna wykładnią → ryzyko sporu + gotowe brzmienie poprawki (Zasada 6).
       Prawo pracy: postanowienia mniej korzystne niż przepisy (art. 18 § 2 KP), zakaz
       zrzeczenia się prawa do wynagrodzenia (art. 84 KP) — weryfikuj w ELI.
-CAL-4 WYNIK — osobna sekcja odpowiedzi „Relacje między postanowieniami”:
-      | Postanowienie | ↔ Postanowienie | Kolizja (wzorzec a–h) | Skutek / argument | Dla kogo korzystne |
-      Brak kolizji → jedno zdanie „Sprawdzono wzorce CAL-2 a–h: brak kolizji”.
+      Punkt, który powtarza ustawę lub do niej odsyła: porównaj zakres podmiotowy, przedmiotowy
+      i WSZYSTKIE znamiona przepisu (np. cel działania) z brzmieniem z ELI; to, co punkt dodaje
+      ponad ustawę, jest własnym zobowiązaniem umownym, nie powtórzeniem.
+CAL-4 WYNIK — osobna sekcja „Relacje między postanowieniami”:
+      1) tabela krawędzi | Pkt | Relacja | Pkt | Skutek / argument | Dla kogo korzystne |;
+      2) bilans każdej strony: jej obowiązki, prawa, sankcje, które ponosi i które jej służą,
+         oraz co z tego zostaje po uwzględnieniu krawędzi ZNOSI PRAWO i SPRZECZNOŚĆ.
+      Brak kolizji → jedno zdanie „Sprawdzono graf i wzorce CAL-2 a–h: brak kolizji”.
       Pominięcie sekcji = uchybienie, także w profilu LEKKIM i w odpowiedzi roboczej.
 ```
 
