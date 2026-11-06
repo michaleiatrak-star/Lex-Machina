@@ -1,4 +1,4 @@
-# Serwery MCP Lex Machina — `audyt-systemu-v4/mcp-servers/`
+# Serwery MCP Lex Machina — `prawo-polskie-v2/mcp-servers/`
 
 Od audyt 6.143 / shared 3.93 (AUDYT-2026-09-27m). Serwery leżą **rozpakowane**, bo host
 uruchamia serwer z pliku na dysku, nie z archiwum.
@@ -8,7 +8,7 @@ uruchamia serwer z pliku na dysku, nie z archiwum.
 | Gdzie | Jak |
 |---|---|
 | **Claude Desktop — zalecane** | rozszerzenie `lex-machina.mcpb`: Ustawienia → Rozszerzenia → zainstaluj z pliku. Node.js jest wbudowany w Desktop — nie instalujesz nic więcej. Budowa: `python zbuduj_pakiet.py --mcpb` → `dist/lex-machina.mcpb` (poza repozytorium: artefakt wydania) |
-| Claude Code + plugin `audyt-systemu-v4` | nic — `../.mcp.json` startuje 8 serwerów `lex-*` z `${CLAUDE_PLUGIN_ROOT}` |
+| Claude Code + plugin `prawo-polskie-v2` | nic — `../.mcp.json` startuje 8 serwerów `lex-*` z `${CLAUDE_PLUGIN_ROOT}` |
 | Claude Desktop bez rozszerzenia / Claude Code bez pluginu / sieć z proxy HTTPS | `python instaluj_serwery_mcp.py [--scal-desktop]` (przepisuje `NODE_EXTRA_CA_CERTS`/proxy, których `.mcp.json` pluginu nie przekaże) |
 | claude.ai w przeglądarce | nie dotyczy — serwery stdio tam nie działają; potrzebny serwer pod HTTPS (F-8) |
 

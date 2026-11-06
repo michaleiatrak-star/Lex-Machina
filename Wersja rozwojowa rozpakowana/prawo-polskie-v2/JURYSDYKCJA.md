@@ -4,6 +4,35 @@ Skille wykonawcze opisują metodę; treść prawa krajowego wskazują kluczem `J
 Ten plik mapuje każdy klucz na moduł prawa polskiego. Inna jurysdykcja = inny pakiet
 z tym samym zestawem kluczy (`shared/UNIVERSAL-RUNTIME-ADAPTER.md` §1B).
 
+## DOSTAWCA JURYSDYKCJI
+
+Jeden blok na pakiet kraju; aplikacja i audyt czytają go, gdy ta jurysdykcja jest wybrana
+(lista „Jurysdykcja” w aplikacji, `LEX_JURISDICTION_PACK`; domyślnie `prawo-polskie-v2`).
+Pola komponentów to identyfikatory dostawców zaimplementowanych w aplikacji: kraj, dla którego
+aplikacja nie ma dostawcy danego komponentu, działa w trybie zdegradowanym z nazwanym brakiem —
+nigdy z komponentem innego kraju.
+
+| Pole | Wartość | Znaczenie |
+|---|---|---|
+| `kraj` | `PL` | kod kraju (ISO 3166-1) |
+| `nazwa` | `Polska — prawo polskie` | pozycja na liście „Jurysdykcja” |
+| `jezyk` | `pl` | język dokumentów, odpowiedzi i słowników |
+| `waluta` | `PLN` | kwoty, opłaty, kursy |
+| `dziedziny` | `prawo-polskie-v2/ROUTING-MAP.md` | skille dziedzinowe (dr-*) tej jurysdykcji |
+| `konektory` | `prawo-polskie-v2/mcp-servers` | serwery MCP (pakiet `dist/lex-mcp.mjs`, instalator) |
+| `konektory-serwery` | `isap, eurlex, saos, cbosa, sn, sp, tk, kio, etpcz, krs, wl, ceidg, nbp, eureka, sudop, uodo` | konektory widoczne przy tej jurysdykcji |
+| `weryfikacja-przepisow` | `pl-eli` | teksty aktów i stan prawny (Sejm ELI, kopia ELI) |
+| `hierarchia-zrodel` | `JUR:hierarchia-zrodel` | rzędy źródeł (moduł klucza) |
+| `orzecznictwo` | `pl-sady` | SN, sądy powszechne, NSA/WSA, TK, KIO; repertoria sygnatur |
+| `rejestry` | `pl-krs-vat-ceidg` | KRS, biała lista VAT, CEIDG, NBP |
+| `anonimizacja` | `pl` | imiona, nazwiska i adresy (Morfeusz, Stanza pl), PESEL, NIP, REGON |
+| `ocr` | `pl` | język modeli OCR, kwoty w zł |
+| `semantyka` | `pl` | reguły routingu i kontroli treści w języku polskim |
+| `sady` | `pl` | baza sądów, właściwość, wokandy |
+| `model-lokalny` | `bielik` | domyślny model lokalny dla języka jurysdykcji |
+
+## KLUCZE TREŚCI
+
 | Klucz | Moduł | Zakres |
 |---|---|---|
 | `JUR:terminy-procesowe` | `prawo-polskie-v2/krajowe/shared/terminy.md` | terminy procesowe i materialne wszystkich reżimów (KPC, KPK, KPW, KPA, PPSA, KP, KC i inne), reguły liczenia |

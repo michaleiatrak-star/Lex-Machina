@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.79 (2026-11-06): konektory MCP prawa polskiego (mcp-servers/, .mcp.json; 16 serwerów) przeniesione z audyt-systemu-v4 — plugin prawo-polskie-v2 startuje serwery lex-*; JURYSDYKCJA.md: blok DOSTAWCA JURYSDYKCJI (kraj, język, waluta, dziedziny, konektory, dostawcy komponentów aplikacji)
 - 6.78 (2026-11-06): migracja prawa polskiego E3: pakiet przyjął 95 modułów prawa krajowego (krajowe/<skill>/…) ze skilli wykonawczych i shared; JURYSDYKCJA.md wskazuje nowe miejsca, klucze bez zmian
 - 6.77 (2026-11-06, migracja prawa polskiego E1b): JURYSDYKCJA.md — pełna mapa modułów prawa polskiego: 95 nowych kluczy `JUR:` (moduły klasy MODUŁ PL z mapy E0b, opłaty `shared/oplaty/01–07`, procedura: wymogi formalne, braki, właściwość, sygnatury, tryby, prekluzja, liczenie terminów, kanony weryfikacji; kopie opłat w skillach wykonawczych) — adres, nie przeniesienie.
 - 6.76 (2026-11-06, migracja prawa polskiego E1): `JURYSDYKCJA.md` — manifest kluczy `JUR:` (terminy-procesowe, oplaty-sadowe, hierarchia-zrodel, zrodla-aktow, mapa-dziedzin) → moduły prawa polskiego; pakiet jurysdykcji PL, do którego skille wykonawcze odsyłają zamiast powtarzać treść krajową.

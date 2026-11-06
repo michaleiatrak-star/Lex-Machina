@@ -281,7 +281,7 @@ Przenieść do pakietu PL (E3; odesłanie `JUR:` w skillu, test równoważności
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md` (88%, 11493 zn.)
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/raport-pokrycia-PPSA.md` (86%, 11492 zn.)
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/raport-pokrycia-KW.md` (85%, 4984 zn.)
-- `audyt-systemu-v4/mcp-servers/ceidg-example/README.md` (81%, 2331 zn.)
+- `prawo-polskie-v2/mcp-servers/ceidg-example/README.md` (81%, 2331 zn.)
 - `audyt-systemu-v4/references/ALIASY-NAZW-AKTOW.md` (80%, 7922 zn.)
 - `audyt-systemu-v4/references/F-108-lista-MS-egzamin-2026.md` (77%, 5288 zn.)
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md` (77%, 36151 zn.)
@@ -289,7 +289,7 @@ Przenieść do pakietu PL (E3; odesłanie `JUR:` w skillu, test równoważności
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/raport-pokrycia-OP.md` (75%, 13355 zn.)
 - `audyt-systemu-v4/references/migracja-jurysdykcji/PLAN-I-MAPA.md` (73%, 59902 zn.)
 - `audyt-systemu-v4/references/WARN-OTWARTE.md` (71%, 47514 zn.)
-- `audyt-systemu-v4/mcp-servers/README.md` (70%, 5594 zn.)
+- `prawo-polskie-v2/mcp-servers/README.md` (70%, 5594 zn.)
 
 Rozdzielić (metoda zostaje, akapity z prawem krajowym → moduł PL z kluczem):
 - `audyt-systemu-v4/references/raporty-pokrycia-2026-08-13/raport-pokrycia-KSH.md` (69%)
@@ -303,7 +303,7 @@ Rozdzielić (metoda zostaje, akapity z prawem krajowym → moduł PL z kluczem):
 - `audyt-systemu-v4/references/F-171-pomiar-domen-2026-09-09.md` (51%)
 - `audyt-systemu-v4/SKILL.md` (50%)
 - `audyt-systemu-v4/modules/MOD-TRESC-MERYTORYCZNA.md` (48%)
-- `audyt-systemu-v4/mcp-servers/saos-example/README.md` (42%)
+- `prawo-polskie-v2/mcp-servers/saos-example/README.md` (42%)
 - … i 11 dalszych (udział < 39%)
 
 ### shared

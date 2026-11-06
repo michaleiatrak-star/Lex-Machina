@@ -175,3 +175,13 @@ def modul_jurysdykcji(root, klucz, domyslny=None):
         return domyslny
     m = re.search(r"^\|\s*`" + re.escape(klucz) + r"`\s*\|\s*`([^`]+)`\s*\|", tekst, re.M)
     return m.group(1) if m else domyslny
+
+
+def pole_jurysdykcji(root, pole, domyslny=None):
+    """Wartość pola bloku DOSTAWCA JURYSDYKCJI aktywnej jurysdykcji (np. `konektory`)."""
+    return modul_jurysdykcji(root, pole, domyslny)
+
+
+def katalog_konektorow(root):
+    """Katalog serwerów MCP aktywnej jurysdykcji (pole `konektory`; instalator, pakiet dist/)."""
+    return os.path.join(root, pole_jurysdykcji(root, "konektory", "prawo-polskie-v2/mcp-servers"))

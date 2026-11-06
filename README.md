@@ -397,7 +397,7 @@ dezaktualizacji, obowiązkowe skrzyżowanie z Rzędem 1/2A przed użyciem.
 | `lex-isap` | api.sejm.gov.pl/eli — akty Dz.U./M.P., status, aktualny t.j. | własny serwer repozytorium |
 | `lex-saos`, `lex-cbosa`, `lex-eurlex`, `lex-eureka`, `lex-krs`, `lex-wl`, `lex-nbp`, `lex-sudop`, `lex-uodo` | orzecznictwo, interpretacje, rejestry, kursy, pomoc publiczna, UODO | własne serwery repozytorium |
 
-Serwery leżą w [`audyt-systemu-v4/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/mcp-servers/) (`dist/lex-mcp.mjs`, zależności wbudowane, bez `npx` i bez pobierania z npm przy starcie).
+Serwery leżą w [`prawo-polskie-v2/mcp-servers/`](Wersja%20rozwojowa%20rozpakowana/prawo-polskie-v2/mcp-servers/) (`dist/lex-mcp.mjs`, zależności wbudowane, bez `npx` i bez pobierania z npm przy starcie).
 
 | Host | Konfiguracja |
 |---|---|

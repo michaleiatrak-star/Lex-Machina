@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.250"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.251"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -50,7 +50,6 @@ scripts:
   - scripts/check_wartosci_prawne.py
   - scripts/check_oplaty_mapa.py
   - scripts/check_utrata_tresci.py
-  - scripts/check_wydanie.py
   - scripts/check_archiwa_repo.py
   - scripts/check_wejscie_dokumentu.py
   - scripts/check_eli_extract.py
@@ -390,7 +389,9 @@ stanowiłoby obchodzenie zabezpieczenia. Wynik stały: `ZAPIS: NIEOBSŁUGIWANE W
 ## FAZA 0E — INSTALACJA SERWERÓW MCP (POZYCJA 14; wybór serwerów i klucz CEIDG od 6.152)
 
 Po wyborze pozycji 14 menu („Instalacja serwerów MCP”, plakietka 🖥️ *działa w Claude Desktop*)
-albo poleceniu „zainstaluj serwery MCP”. Narzędzie: `mcp-servers/instaluj_serwery_mcp.py` (ten skill).
+albo poleceniu „zainstaluj serwery MCP”. Narzędzie: `<konektory>/instaluj_serwery_mcp.py`, gdzie `<konektory>` to
+pole `konektory` manifestu aktywnej jurysdykcji (`JURYSDYKCJA.md`; prawo polskie: `prawo-polskie-v2/mcp-servers`).
+Serwery należą do pakietu kraju — inna jurysdykcja instaluje swoje.
 Przebieg ma **trzy tury**: (1) lista wyboru → (2) instalacja wybranych + prośba o klucz CEIDG, jeśli
 wybrano CEIDG → (3) sam klucz w kolejnej wiadomości → uzupełnienie. Tura 3 jest opcjonalna.
 
@@ -398,7 +399,7 @@ wybrano CEIDG → (3) sam klucz w kolejnej wiadomości → uzupełnienie. Tura 3
 wynikiem jest plik rozszerzenia do zainstalowania w Desktopie. Nie obiecuj działania w przeglądarce.
 
 **0. LISTA WYBORU (tura 1) — zanim cokolwiek zbudujesz.** Jedynym źródłem listy jest
-`python mcp-servers/instaluj_serwery_mcp.py --lista` (stan 6.202: 16 serwerów w 3 grupach, numeracja
+`python <konektory>/instaluj_serwery_mcp.py --lista` (stan 6.202: 16 serwerów w 3 grupach, numeracja
 stała); nie przepisuj jej z pamięci. Zapytaj jednym zdaniem, które serwery zainstalować:
    - host z przyciskami wyboru (np. `ask_user_input_v0`, limit 3 pytania × 4 opcje): **jedno pytanie
      multi_select na poziomie GRUP** z `--lista` — „Akty prawne i orzecznictwo”, „Rejestry podmiotów
@@ -413,7 +414,7 @@ stała); nie przepisuj jej z pamięci. Zapytaj jednym zdaniem, które serwery za
    o dostęp i zarejestruj się”, logowanie Profilem Zaufanym; token JWT = klucz API).
    Po wysłaniu pytania zakończ turę.
 
-1. **Ścieżka pomiarem, nie domysłem (tura 2).** `python mcp-servers/instaluj_serwery_mcp.py --diagnoza`.
+1. **Ścieżka pomiarem, nie domysłem (tura 2).** `python <konektory>/instaluj_serwery_mcp.py --diagnoza`.
    `WYBÓR` = numery/nazwy z tury 1 (argument `--serwery` przyjmuje jedne i drugie).
    - **kod 0 — „ŚCIEŻKA: --scal-desktop”** (komputer z Claude Desktop: Claude Code, terminal lokalny).
      Jednym zdaniem uprzedź, że skrypt dopisze wybrane serwery `lex-*` do `claude_desktop_config.json`
@@ -425,7 +426,7 @@ stała); nie przepisuj jej z pamięci. Zapytaj jednym zdaniem, które serwery za
      Instrukcja: Claude Desktop → Ustawienia → Rozszerzenia → zainstaluj z pliku.
      ⛔ Przy kodzie 3 NIGDY nie uruchamiaj `--scal-desktop` i nie raportuj „zainstalowano”.
    - **Bez wykonania kodu:** podaj polecenie do uruchomienia u siebie
-     (`python <katalog skilla>/mcp-servers/instaluj_serwery_mcp.py --scal-desktop --serwery WYBÓR`)
+     (`python <katalog skilli>/<konektory>/instaluj_serwery_mcp.py --scal-desktop --serwery WYBÓR`)
      — bez fikcyjnego raportu wykonania (adapter hosta, zasada 5).
    - **Wybrano CEIDG, a klucza jeszcze nie ma** → na końcu odpowiedzi DOKŁADNIE ta treść w sensie:
      „Klucz CEIDG uzyskasz tu: https://dane.biznes.gov.pl/pl/portal/034872. Gdy go dostaniesz, **wklej
@@ -1339,4 +1340,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.250 | Ostatnia aktualizacja: 2026-10-27 (isap_tekst: na_dzien, jednostki jeszcze nieobowiązujące, brzmienia nierozstrzygnięte; analogia legal-cite-pl). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.251 | Ostatnia aktualizacja: 2026-10-27 (isap_tekst: na_dzien, jednostki jeszcze nieobowiązujące, brzmienia nierozstrzygnięte; analogia legal-cite-pl). Stopkę aktualizuj razem z polem `version`.*

@@ -146,7 +146,7 @@ kompletności.
 
 ## Serwery referencyjne (2026-07-13g/i/k) — 7 z 9 zbadanych priorytetowych źródeł
 
-`audyt-systemu-v4/mcp-servers/` zawiera **realne, przetestowane protokołem MCP**
+`prawo-polskie-v2/mcp-servers/` zawiera **realne, przetestowane protokołem MCP**
 serwery dla 7 źródeł o potwierdzonym publicznym API. Napisane po tym jak: (a)
 żaden gotowy projekt OSS nie dał się zainstalować i przetestować z tego
 środowiska, (b) research 2026-07-13j/k potwierdził, które źródła mają
@@ -156,7 +156,7 @@ od zera" dla produkcji.
 ⛔ **Kolumna „pewność kształtu odpowiedzi” (do 3.89) była szacowana z dokumentacji, nie z
 pomiaru — i była odwrotnie skorelowana z rzeczywistością:** SAOS („Wysoka”) zwracał sygnaturę
 `null` dla każdego trafienia, NBP („Najwyższa”) zwracał NOT_FOUND w każdy weekend. Od 3.90
-kolumna podaje WYNIK POMIARU TREŚCI (`audyt-systemu-v4/mcp-servers/test_na_zywo.mjs`, 2026-09-27j).
+kolumna podaje WYNIK POMIARU TREŚCI (`prawo-polskie-v2/mcp-servers/test_na_zywo.mjs`, 2026-09-27j).
 
 | Serwer | Źródło | Klucz API? | Pomiar treści 2026-09-27j |
 |---|---|---|---|
@@ -199,7 +199,7 @@ Decyzja należy do dewelopera (F-8/F-94) — to nie jest wada, tylko konsekwencj
 miejsca, w którym plik dziś leży.
 
 ⭐ **INSTALACJA SERWERÓW MCP (od shared 3.93 / audyt 6.143, zmierzona 2026-09-27m).** Serwery leżą
-ROZPAKOWANE w `audyt-systemu-v4/mcp-servers/`; `dist/lex-mcp.mjs` to wszystkie serwery w jednym
+ROZPAKOWANE w `prawo-polskie-v2/mcp-servers/`; `dist/lex-mcp.mjs` to wszystkie serwery w jednym
 pliku z wbudowanymi zależnościami (629 KB; Claude Code nie instaluje zależności pluginów).
 - **Claude Code + plugin `audyt-systemu-v4`:** nic nie instalujesz — `.mcp.json` pluginu startuje
   8 serwerów `lex-*` (z CBOSA) z `${CLAUDE_PLUGIN_ROOT}` (CEIDG pominięty — wymaga klucza).
@@ -282,7 +282,7 @@ czy konfiguracja przekazuje `env`. To ta sama klasa błędu co F-151/F-162
 
 ### ✅ Status własnego konektora ISAP (zmierzony 2026-09-27h)
 
-`audyt-systemu-v4/mcp-servers/isap-eli-example/` — 132 linie na oficjalnym SDK
+`prawo-polskie-v2/mcp-servers/isap-eli-example/` — 132 linie na oficjalnym SDK
 (`McpServer` + `StdioServerTransport`), narzędzie `isap_lookup`.
 
 ⛔ **Wykryty i naprawiony błąd:** budował adres
@@ -316,7 +316,7 @@ pluginów (`mcp-isap-eli`, `mcp-saos`, `mcp-krs`, `mcp-wl-vat`, `mcp-uodo`, `mcp
 `mcp-nbp`), których **nie ma w repozytorium ani w `marketplace.json`** (sprawdzone 27j) —
 powstały w sesji 27h/27i i nie zostały wgrane (F-211). Kolumna „Pomiar” mierzyła wyłącznie kod
 HTTP: SAOS z „✅ 200” zwracał same `null`. Obecnie jedynym zmierzonym kodem w repo są przykłady
-z `audyt-systemu-v4/mcp-servers/`.
+z `prawo-polskie-v2/mcp-servers/`.
 
 | Kanał | Pomiar treści 27j | Konektor w repozytorium |
 |---|---|---|
@@ -343,7 +343,7 @@ wyszukiwarki urzędowe (sn.pl, CBOSA, UZP); sn.pl zablokowany → SAOS tylko spr
 ### ⭐ PORÓWNANIE Z `matematicsolutions` — uruchomione na tych samych przypadkach (2026-09-27k)
 
 Paczki npm `@matematicsolutions/*` (MIT) uruchomione przez protokół MCP obok przykładów z
-`audyt-systemu-v4/mcp-servers/`. Oceniane zachowanie, nie README.
+`prawo-polskie-v2/mcp-servers/`. Oceniane zachowanie, nie README.
 
 | Kanał | Ich przewaga | Nasza przewaga | Przypadek rozstrzygający |
 |---|---|---|---|
@@ -364,4 +364,4 @@ Wniosek: przewaga jakościowa (weryfikacja, status) po naszej stronie; przewaga 
 „pokryte jednym parametrem” nie było prawdziwe dla kodu w repo; od 1.1.0 jest.
 
 ⛔ **Reguła od 3.90:** wiersz tej tabeli może zawierać „✅” tylko po pomiarze TREŚCI odpowiedzi
-(asercja na polu, nie na statusie HTTP) — `audyt-systemu-v4/mcp-servers/test_na_zywo.mjs`.
+(asercja na polu, nie na statusie HTTP) — `prawo-polskie-v2/mcp-servers/test_na_zywo.mjs`.

@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 instaluj_serwery_mcp.py — konfiguracja serwerów MCP Lex Machina z katalogu
-audyt-systemu-v4/mcp-servers/ (pakiet dist/lex-mcp.mjs — bez npm, bez node_modules).
+prawo-polskie-v2/mcp-servers/ (pakiet dist/lex-mcp.mjs — bez npm, bez node_modules).
 
 KIEDY POTRZEBNY (AUDYT-2026-09-27m):
-  • Claude Code z pluginem audyt-systemu-v4 — NIE; serwery startują same z `.mcp.json` pluginu.
+  • Claude Code z pluginem prawo-polskie-v2 — NIE; serwery startują same z `.mcp.json` pluginu.
   • Claude Desktop — ZALECANE rozszerzenie dist/lex-machina.mcpb (bez Pythona i bez Node — Desktop ma
     własny Node.js); ten skrypt (`--scal-desktop`) to wariant zapasowy.
   • Claude Code bez pluginu albo sieć z proxy przechwytującym TLS — TAK: plugin nie może
@@ -290,7 +290,7 @@ def zbuduj_mcpb(wyjscie, wybrane=None, klucz=None):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Serwery MCP Lex Machina z audyt-systemu-v4/mcp-servers.")
+    ap = argparse.ArgumentParser(description="Serwery MCP Lex Machina z prawo-polskie-v2/mcp-servers.")
     ap.add_argument("--serwery", nargs="+", help="numery z --lista, nazwy albo „wszystkie”")
     ap.add_argument("--lista", action="store_true", help="pokaż listę wyboru serwerów i zakończ")
     ap.add_argument("--ceidg-klucz", help="odradzane (historia powłoki) — użyj --ceidg-klucz-plik")

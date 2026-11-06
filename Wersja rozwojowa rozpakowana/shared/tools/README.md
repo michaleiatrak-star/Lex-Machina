@@ -184,7 +184,7 @@ w `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-12g.
 
 Dla nowych integracji preferuj `{"session_id":"...","events":[...]}`. Event zawiera `tool`, źródło, opcjonalny `query_context` i status. Claude/Anthropic legacy pozostaje obsługiwany; obsługiwane są też generyczne tool-call/result i ukończone wpisy Responses-style. Sam call bez wyniku nie jest weryfikacją.
 
-Serwery MCP: od 3.93 w `audyt-systemu-v4/mcp-servers/` (rozpakowane; przeniesione z tego katalogu).
+Serwery MCP: od 3.93 w `prawo-polskie-v2/mcp-servers/` (rozpakowane; przeniesione z tego katalogu).
 
 ## F-206 (2026-09-26d) — przywrócenie 8 narzędzi z historii git
 
@@ -220,4 +220,4 @@ Pliki fixture `przyklady/konwersacja_api_przyklad.json`, `przyklady/przyklad_pis
 
 ## Serwery MCP
 
-Od 3.93: `audyt-systemu-v4/mcp-servers/` — instalacja: `KONEKTORY-REKOMENDOWANE.md` § GDZIE SIĘ KONFIGURUJE SERWER MCP.
+Od 3.93: `prawo-polskie-v2/mcp-servers/` — instalacja: `KONEKTORY-REKOMENDOWANE.md` § GDZIE SIĘ KONFIGURUJE SERWER MCP.

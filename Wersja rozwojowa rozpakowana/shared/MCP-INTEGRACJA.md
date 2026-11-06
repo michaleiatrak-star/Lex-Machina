@@ -52,7 +52,7 @@ narzędzi „nazwanych wg wzorca z `KONEKTORY-REKOMENDOWANE.md` (np. `isap_looku
   konwencji, której ten plik nigdy nie zawierał (jego tabela operuje kategoriami
   funkcjonalnymi, nie nazwami narzędzi);
 - (b) nazwa `isap_lookup` **istnieje** — to `registerTool("isap_lookup", …)`
-  w `audyt-systemu-v4/mcp-servers/` (`isap-eli-example`). ⚠️ Korekta wobec wydania 3.87,
+  w `prawo-polskie-v2/mcp-servers/` (`isap-eli-example`). ⚠️ Korekta wobec wydania 3.87,
   które twierdziło, że „narzędzia MCP nie nazywają się w ten sposób" — twierdzenie
   było za szerokie i niezmierzone wobec własnych serwerów tego repozytorium;
 - (c) **czego brakowało i co jest faktyczną przyczyną awarii wykrywania:** w hoście
@@ -74,9 +74,9 @@ Przykłady zmierzone w środowisku: mcp__memory__memory_list,
    (co narzędzie robi wg swojego opisu), nie po nazwie własnej.
 ```
 
-**⭐ Narzędzia Lex Machina (`audyt-systemu-v4/mcp-servers/`, od shared 3.94) — dopasowanie po
+**⭐ Narzędzia Lex Machina (`prawo-polskie-v2/mcp-servers/`, od shared 3.94) — dopasowanie po
 SUFIKSIE nazwy.** Prefiks zależy od hosta — zmierzone/udokumentowane:
-Claude Code + plugin: `mcp__plugin_audyt-systemu-v4_lex-<serwer>__<narzędzie>` (dokumentacja
+Claude Code + plugin: `mcp__plugin_prawo-polskie-v2_lex-<serwer>__<narzędzie>` (dokumentacja
 plugins-reference); instalator (`--scal-desktop`, `claude mcp add`): `mcp__lex-<serwer>__<narzędzie>`;
 rozszerzenie Claude Desktop (`lex-machina.mcpb`, jeden serwer `lex-machina`): prefiks hosta + nazwa
 narzędzia. **Rozpoznawaj narzędzie, gdy nazwa KOŃCZY SIĘ nazwą z tabeli** (po `__` albo w całości).
@@ -118,7 +118,7 @@ realnie, źródło danych: api.sejm.gov.pl/eli — ten sam publikator, co RZĄD 
 | `get_act` | `eli` (np. `DU/2018/1000`) | metryka aktu po identyfikatorze ELI |
 | `get_act_text` | `eli` | tekst aktu stronami po 5000 znaków |
 
-**Serwer własny repozytorium** (`audyt-systemu-v4/mcp-servers/isap-eli-example/`,
+**Serwer własny repozytorium** (`prawo-polskie-v2/mcp-servers/isap-eli-example/`,
 zmierzony 2026-09-27h): jedno narzędzie `isap_lookup` (arg `query`), zwraca schemat
 FOUND / NOT_FOUND / AMBIGUOUS / ERROR wg `SCHEMAT-ODPOWIEDZI-MCP.md` (wzorzec cienkiej warstwy
 normalizującej dla dewelopera: `shared/tools/przyklad-adapter-normalizujacy.md` — ilustracja, nie serwer). W hoście:
