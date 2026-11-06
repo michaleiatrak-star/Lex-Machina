@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.247"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.248"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -44,6 +44,8 @@ references:
   - references/PLAN-POMIARU-BRAMEK-UNIWERSALNY.md
   - references/REJESTR-BRAMEK-POMIAR.json
   - references/REJESTR-KORPUSU-POMIAROWEGO.md
+  - references/migracja-jurysdykcji/E0-inwentarz.md
+  - references/migracja-jurysdykcji/E2-MD5-terminy.tsv
 scripts:
   - scripts/check_wartosci_prawne.py
   - scripts/check_oplaty_mapa.py
@@ -68,6 +70,8 @@ scripts:
   - scripts/check_limit_plikow.py
   - scripts/check_tabele_satelickie.py
   - scripts/check_podmiana_aktu.py
+  - scripts/check_jurysdykcja.py
+  - scripts/inwentarz_jurysdykcji.py
   - scripts/check_widmowe_pokrycie.py
   - scripts/weryfikator_sygnatur.py
   - scripts/test_konstytucja_tekst_czysty.py
@@ -1285,6 +1289,7 @@ z WARN-OTWARTE.md, dodaj pełny wpis do AUDIT-JOURNAL.md.
 > `dist/lex-mcp.mjs`, manifest rozszerzenia MCPB, instalator, skrypt budowy, README) — łącznie **192 pliki** (6.144: +`mcp-servers/LICENSE`). Drzewo niżej nie
 > rozpisuje `mcp-servers/` — opis w `mcp-servers/README.md`. Licznik w pierwszej linii drzewa jest
 > historyczny (stan 2026-09-09b).
+> ⚡ **2026-11-06:** migracja prawa polskiego E0–E2: +`scripts/inwentarz_jurysdykcji.py` (raport `references/migracja-jurysdykcji/E0-inwentarz.md`), +`scripts/check_jurysdykcja.py` (T50: klucze `JUR:` i równoważność wierszy z `references/migracja-jurysdykcji/E2-MD5-terminy.tsv`).
 > ⚡ **2026-10-04e:** +`scripts/check_mapy_aktow.py` (T45) — **189 plików**.
 > ⚡ **2026-10-04d:** +`scripts/check_osiagalnosc_shared.py` (T44) — **188 plików**.
 > ⚡ **2026-10-04b:** usunięte 40 reliktów (30 `mcp-servers/*-example/*`, 2 `.pyc`, 6 `references/` z 6.146, raporty pokrycia KPK/KRO), dodany `scripts/check_sieroty.py` (T43) — **187 plików**.

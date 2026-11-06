@@ -22,6 +22,8 @@
 Dokument < 15 stron / prosta analiza jednej klauzuli / triage-szybki →
   POMIŃ MU.1-MU.3, przejdź bezpośrednio do routingu PRIMARY/DOMAIN.
   Koszt ekstrakcji dla krótkiego dokumentu przewyższa korzyść.
+  ⛔ NIE pomija się kontroli relacji między postanowieniami: CAL-GATE z SKILL.md
+  (wzorce CAL-2 a–h) obowiązuje przy każdym dokumencie, także 1-stronicowym.
 ```
 
 ---

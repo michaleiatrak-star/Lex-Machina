@@ -1,0 +1,16 @@
+# Wiersze przeniesione z analizator-dowodow-v3/modules/MD5-terminy.md (2026-11-06) do JUR:terminy-procesowe.
+# klucz	przepis (regex)	termin (regex, dowolna z form)	opis
+JUR:terminy-procesowe	art\.\s*328\s*§\s*1	tydzie|7 dni	KPC wniosek o uzasadnienie
+JUR:terminy-procesowe	art\.\s*369	2 tygodni|14 dni	KPC apelacja
+JUR:terminy-procesowe	art\.\s*394\s*§\s*2	7 dni|tydzie	KPC zażalenie
+JUR:terminy-procesowe	art\.\s*480²\s*§\s*2	2 tygodni|14 dni|miesi	KPC sprzeciw i zarzuty od nakazu
+JUR:terminy-procesowe	art\.\s*344\s*§\s*1	2 tygodni|14 dni	KPC sprzeciw od wyroku zaocznego
+JUR:terminy-procesowe	art\.\s*205¹	2 tygodni|14 dni	KPC odpowiedź na pozew
+JUR:terminy-procesowe	art\.\s*422\s*§\s*1	7 dni|tydzie	KPK wniosek o uzasadnienie
+JUR:terminy-procesowe	art\.\s*445\s*§\s*1	14 dni|2 tygodni	KPK apelacja
+JUR:terminy-procesowe	art\.\s*35\s*§\s*1\s*KPW	7 dni|tydzie	KPW wniosek o uzasadnienie
+JUR:terminy-procesowe	art\.\s*105\s*§\s*1	7 dni|tydzie	KPW apelacja
+JUR:terminy-procesowe	art\.\s*129\s*§\s*2	14 dni|2 tygodni	KPA odwołanie
+JUR:terminy-procesowe	art\.\s*53\s*§\s*1	30 dni	PPSA skarga do WSA
+JUR:terminy-procesowe	art\.\s*264\s*§\s*1	21 dni	KP odwołanie od wypowiedzenia
+JUR:terminy-procesowe	art\.\s*1015	6 miesi|sześciu miesi	KC przyjęcie lub odrzucenie spadku

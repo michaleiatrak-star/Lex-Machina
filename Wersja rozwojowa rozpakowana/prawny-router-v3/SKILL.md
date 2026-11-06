@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.74"
+version: "3.75"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -322,6 +322,7 @@ KROK 7  → DISCLAIMER → view shared/DISCLAIMER.md
 → SECONDARY: `orzeczenia-sadowe-v2` · FALLBACK: `przewodnik-prawny-v2`
 → „Na umowie zlecenie / o pracę / o dzieło” to podstawa zatrudnienia osoby, nie umowa do analizy → [10].
 → [1] wchodzi, gdy umowa jest przedmiotem pracy: analiza, sprawdzenie, napisanie, negocjacje, podpisanie, klauzule, zapisy. Umowa jako tło sporu („brak zgodności towaru z umową”, „deweloper nie wykonał umowy”, „umowa międzynarodowa”) → [10].
+→ ⛔ Dostarczony dokument z kategorii [1] (umowa, aneks, porozumienie, ugoda, regulamin, OWU, statut, uchwała organu spółki, pełnomocnictwo, polityka RODO, procedura, oferta, oświadczenie woli, testament — plik lub wklejony tekst) przy innym PRIMARY ([2] wezwanie lub pismo przeciwnika, [3]/[4] pismo, [6], [7] „co mam zrobić”, [10]) → `analizator-umow-v1` jako SECONDARY obowiązkowo, co najmniej w zakresie CAL-GATE (kontrola relacji między postanowieniami całego dokumentu). Ocena takiego dokumentu punkt po punkcie bez CAL-GATE = uchybienie.
 
 ### [2] AKTA / WYROK / ANALIZA SZANS
 `wyrok / nakaz zapłaty / wezwanie / pismo przeciwnika / "przeanalizuj wyrok" / "przeanalizuj orzeczenie" / "przeanalizuj postanowienie" / "analiza wyroku" / "analiza postanowienia" / "oceń wyrok" / "oceń postanowienie" / "jakie mam szanse" / "oceń szanse" / "szanse wygrania" / analiza akt / analiza pozycji`

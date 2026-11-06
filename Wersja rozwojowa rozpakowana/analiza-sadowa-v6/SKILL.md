@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.18"
+version: "6.19"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
@@ -560,6 +560,40 @@ GATE: RAPORT KOŃCOWY ZATWIERDZONY: TAK / NIE [blokada jeśli NIE]
 > (2) ukończeniu Weryfikacji Ostatecznej (Przejście IV) z GATE: ZATWIERDZONE TAK.
 
 > ⚑ KONIEC WIADOMOŚCI 4 — wyślij tę wiadomość. Raport końcowy §1-§11 w kolejnej wiadomości.
+
+---
+
+## PISMO PRZECIWNIKA / WEZWANIE — LISTA PP (⛔ każde pismo strony przeciwnej)
+
+**Wyzwalacz mechaniczny:** w materiale jest pismo strony przeciwnej albo jej pełnomocnika —
+wezwanie do zapłaty lub zaniechania, pozew, odpowiedź, sprzeciw, pismo przygotowawcze,
+nota obciążeniowa, wypowiedzenie. Każdy punkt PP wykonaj; profil LEKKI tego nie zwalnia.
+
+```
+PP-1 FAKTY — dla każdego żądania: co, kiedy, kto, w jaki sposób. Brak opisu zdarzenia
+     → zarzut braku podstawy faktycznej; ciężar dowodu po stronie żądającego (art. 6 KC,
+     weryfikuj w ELI).
+PP-2 KONSTRUKCJA — czy instytucja działa tak, jak pismo twierdzi: skutek wynika z przepisu
+     i umowy, nie z deklaracji nadawcy (np. kara umowna nie jest „nakładana” jednostronnie
+     — należy się tylko za wykazane niewykonanie zobowiązania; wypowiedzenie, odsetki,
+     potrącenie — przesłanki z przepisu).
+PP-3 RACHUNEK — każda kwota rozłożona na składniki; liczba sankcji = liczba wykazanych
+     zdarzeń, nie liczba przytoczonych punktów umowy; ta sama sankcja w innym punkcie
+     tego samego dokumentu za to samo zachowanie (CAL-GATE b) → argument o miarkowaniu.
+PP-4 POWOŁANE PRZEPISY — każdy przepis powołany w piśmie przeciwnika zweryfikuj w ELI
+     i sprawdź, czy mówi to, co pismo mu przypisuje; błędne powołanie nazwij wprost.
+PP-5 WŁAŚCIWOŚĆ, TRYB, TERMINY — jaki sąd i tryb dla tego roszczenia (np. sprawa z zakresu
+     prawa pracy → sąd pracy), termin z pisma a termin z ustawy, przedawnienie.
+PP-6 NADAWCA — status podmiotu i reprezentacja w KRS / CEIDG (KROK 0D: ⬛ do weryfikacji
+     narzędziem), pełnomocnictwo i jego zakres.
+PP-7 PODSTAWA UMOWNA — pismo opiera się na umowie, porozumieniu lub regulaminie →
+     analizator-umow-v1, CAL-GATE na całym dokumencie (relacje między postanowieniami).
+PP-8 ORZECZNICTWO — SN oraz sądy powszechne (SAOS, sądy apelacyjne i okręgowe), w sprawach
+     administracyjnych CBOSA; źródło niedostępne (captcha, HTTP 403) nie kończy
+     wyszukiwania — następne źródło i jawna informacja, które zawiodło.
+WYNIK — tabela „Zarzuty wobec pisma”: | Element pisma | Zarzut | Podstawa | Siła |.
+     Punkt bez zarzutu → jedno zdanie „sprawdzono PP-n: bez zarzutu”, nigdy pominięcie.
+```
 
 ---
 

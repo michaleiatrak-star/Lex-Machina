@@ -1,5 +1,6 @@
 # CHANGELOG — analizator-dowodow-v3
 
+- 5.16.25 (2026-11-06, migracja prawa polskiego E2 — pilot): `modules/MD5-terminy.md` — tabela terminów i reguły liczenia zastąpione odesłaniem `JUR:terminy-procesowe` (moduł PL: `shared/terminy.md`); w skillu zostaje metoda (format wyniku, ostrzeżenia). 14 wierszy sprawdzonych testem równoważności T50 — każdy ma odpowiednik w module.
 - 5.16.24 (2026-11-03): SD-GATE-0: brak wgranego dowodu -> SD-GATE-0-INFO, status BRAK-DOK w mapie pokrycia (shared/CP-GATE.md §3B), bez STOP przed KROK 1.
 - 5.16.23 (2026-10-10b, AUDYT-2026-10-10b): widget-kreator: auto-fill lokalny, bez wysyłania treści rozmowy do api.anthropic.com; MD-NARR: katalog wyjściowy hosta zamiast /mnt/user-data.
 

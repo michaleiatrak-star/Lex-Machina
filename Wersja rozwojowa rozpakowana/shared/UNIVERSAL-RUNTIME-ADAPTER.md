@@ -80,6 +80,15 @@ skilla i listą sprawdzonych lokalizacji.
 **R-5 — skill wołany bez routera.** Zanim wykona pierwszy `view shared/...`, stosuje
 R-1…R-4 do `shared`. Router robi to w PATH-SELFTEST i wypisuje wynik w KROKU 3A.
 
+## 1B. KLUCZE JURYSDYKCJI `JUR:`
+
+Odwołanie `view JUR:<klucz>` (np. `JUR:terminy-procesowe`) wskazuje treść prawa krajowego,
+nie plik. Rozwiązanie: otwórz manifest aktywnej jurysdykcji — dla prawa polskiego
+`prawo-polskie-v2/JURYSDYKCJA.md` — znajdź wiersz klucza i wczytaj moduł z kolumny „Moduł”
+(adresem logicznym jak w §1). Aplikacja Lex Machina robi to sama (`read_legal_resource`
+z `path=JUR:<klucz>`). Klucz bez wiersza albo brak modułu → `⛔ TRYB ZDEGRADOWANY — klucz
+jurysdykcji nierozwiązany`; nie zastępuj go pamięcią modelu.
+
 ## 2. Operacje semantyczne
 
 Nazwy odziedziczone z wcześniejszych runtime są semantyką, nie wymaganiem API:

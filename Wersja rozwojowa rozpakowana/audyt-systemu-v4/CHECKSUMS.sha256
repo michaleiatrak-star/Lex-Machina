@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-a812eed3768a2283380f0c59caf984859b78aa0d4c17fbff4fdec32bb164e1de  ./SKILL.md
+ccfbbff691515d6da2a4c4fe535f9457d64e04877b2b8f8a4de17e904eacfc24  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -95,7 +95,7 @@ c35f4cd69cbc0927216a9121554bb8b2167e2db6cfe507900f38a8639893dd56  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 8e35cbfde3fb3a785181e9e16a153437820762ad34887cf1e714086f497274e9  ./references/ALIASY-NAZW-AKTOW.md
 83c32f988dc7bea3a0137452aff036a2b4b0a2ed4cdf42db138d815b0a848dd4  ./references/AUDIT-JOURNAL.md
-9ea9e92ac249a98107c089c69ff315d35b8a512bb63b25c7ac79dc8192279b71  ./references/CHANGELOG.md
+fd64142a5a10dc15139e88783128f0deca84084181ad09e9de13986917e5b1c3  ./references/CHANGELOG.md
 ddb7a65f2c6adfe886e94b5e98305956c6eea65d5ae225fb5b2c57848cedcf96  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -110,7 +110,7 @@ baa43c96154b351da65b3af2c3971ba95f1b2c4199d317c77bb9c36a825c659e  ./references/F
 5c9b63407ba7627d9fd5610cdb73e7b0899753a733e714e5a5044ca3a8c7bef2  ./references/PLAN-TESTU-BRAMEK-F113.md
 c679e729f656a190e7f28f8322bd4b4787fa239fdce03fbe5d2ffaf2fdc1b990  ./references/PORTALE-ORZECZNICZE-API.md
 7055b3a91777f5ad47798ae7b4800e47f70a50cfdfe47468e7b6dc739c4973c4  ./references/PROTOKOL-WYKONAWCZY-F113.md
-9b22e5cb88ce5c8d3b4e0ffc03dabef229c81fb380fd32ab180763f095afff53  ./references/REGRESSION-TEST-PLAN.md
+055f4c2e4b0bfcff24a82afa43e812c5460d3f4671c44f1a2dd47d02c0c58d68  ./references/REGRESSION-TEST-PLAN.md
 4fc665105de446debd747f1cd1b26c3d8e086db268321778ca745f5cdf87006f  ./references/REJESTR-BRAMEK-POMIAR.json
 722f681125e6308658fb3b47433a57a3355409a245477df47f6a2e937c3981d4  ./references/REJESTR-KORPUSU-POMIAROWEGO.md
 6ae8e0d9e087d1ca377e66e641f21b21e8e6d6a5d42e4284ee41208dd6b43f0f  ./references/SCHEDULED-TASK-COWORK.md
@@ -119,6 +119,8 @@ c679e729f656a190e7f28f8322bd4b4787fa239fdce03fbe5d2ffaf2fdc1b990  ./references/P
 aeef1d2a5e59a6c6e649115bc63b5a452a56a8467fbcb42a562bb3e0c8a0b259  ./references/WARN-OTWARTE.md
 b53258f9480de7129bdc392b9fbd403dde496cfa6e17720c70b21a6a99b417b3  ./references/mapa_dzu_2026-08-28.md
 5ceddbfe9f79eb11da4810111270250e20c33a6d4e8dc60e3b07cd3845f3d7cb  ./references/mapa_dzu_2026-10-04.md
+0506b599b5e7dfd86693a8bb10c0310672a438a95f6fc06f737027e5bdfe3550  ./references/migracja-jurysdykcji/E0-inwentarz.md
+739de991711f7fce2ef84d99cbf0bbe7cb670ba00040d72bb19cd105d611560d  ./references/migracja-jurysdykcji/E2-MD5-terminy.tsv
 24e8f5b4e4230b0d790a4bd12fd8a42abfe8cea7486a63d0dbb3f80fe30988ee  ./references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md
 641c3646c2a480cf0425f959157cc132ffe0f3655a4d08408d6881a01ab80584  ./references/raporty-pokrycia-2026-08-13/raport-pokrycia-KKW.md
 1b72486e7a61ec8a05af195bc16d06de252d08a686d3809ac5e114a51fb3d35e  ./references/raporty-pokrycia-2026-08-13/raport-pokrycia-KPC.md
@@ -147,6 +149,7 @@ abd0a7650d3d131a37eac0ffbfedc44297dc3ed0b7c1bebb29b5676d590dc4c0  ./scripts/chec
 9a03fdd78994c19b2f2d1f2c5a73379c9dc587ac6da419037641a268d3670f4e  ./scripts/check_frontmatter_rejestracja.py
 edc50353be897bdc525b56e02074f4149bddc1df42e1ff49f651327923599d4b  ./scripts/check_frontmatter_yaml.py
 8cd3a4e7b506d85679d5b57197f04a434d17561574bd53ecc2b4db3fcb8412a1  ./scripts/check_graf_przyczynowy.py
+8c63780c64648babaa5297ffedd36d3e42815f6e821e8ff05c0448311126bb2c  ./scripts/check_jurysdykcja.py
 c1b4949c032d4cd1d724b18716a227d8b3c214a2f137b8dc7967da92206c195c  ./scripts/check_kontrakt_rachunek.py
 dced4d4eae046188d9cee9a69f6cd0863c46f2e30caffa1ff8e0ff3f7b3a1c1c  ./scripts/check_limit_plikow.py
 85abb9fa7b9305935a37ad3ebe73852607f422d5452844fe57d3e1341db7681c  ./scripts/check_mapy_aktow.py
@@ -172,10 +175,11 @@ ca06423c04ef1ea58186a52c14b26b93366d7c78c7567fbd5aee2af2a15afbf0  ./scripts/chec
 8d0bed7274765010317676c77943b4c5acaceb2e8dbf9823f96cd26a62fafedd  ./scripts/ci_check_shared.py
 b6d55c7955dca4c22b873de2f163de340ce94e5fc6e9b897abdbcb9e45dadef4  ./scripts/dostarcz_skill.sh
 3333bdd98e99d85f13ab66bf3bcc58066a0e5ab7e99a7af58becf287ffa41889  ./scripts/install_precommit_hook.sh
+99eb8591a0d575dda7dbf55b97d9e52c06c6a6ba3eeb17ecc262279c8330cf67  ./scripts/inwentarz_jurysdykcji.py
 0812db765a4605cad8958cfd9c3cfa4a47e27638277abb313038015f5209bd78  ./scripts/mock_eli_server_test.py
 bc8dc97eef65c4387acfffae9f3b4ff6d41061017168a893079f7174ac89e125  ./scripts/napraw_tekst_dzu.py
 bb9ec7223a3f8410cdbc5809326023024f23bca566149b4775dba6de4dcd466c  ./scripts/ocena_transkryptow_f113.py
-2684d877e0482d095a48bce4b2469991f1062d5307231074fce4b0c9abb6859c  ./scripts/run_regression_suite.py
+b0d47486f2f964c00eb0532e5732f3dc74d66567904ea7fe982d9860d3aabe53  ./scripts/run_regression_suite.py
 e305cf93cfaa97898c4457992eec69a355f474011b14b9e91bfecc8baecd1c8d  ./scripts/sync_dzu_eli.py
 828f7d962dc2f447168556b92d4bc450928139c380f240299fe4fa5fe6e0be0d  ./scripts/test_cross_map_dzu.py
 652c76d806f370deb5108197925241015e63c6bb4fb63f84ce77e285b35a1e35  ./scripts/test_f108_consistency.py

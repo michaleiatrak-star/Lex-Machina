@@ -401,6 +401,13 @@ PUŁAPKA PRACODAWCY: Wypowiedzenie pracownikowi w ciąży = nieważne
 □ Czy zawarto klauzulę o referencjach / świadectwie pracy?
 □ Czy BRAK klauzuli o "braku wzajemnych roszczeń" lub jest ograniczona?
 □ Czy wypłacono wszystkie zaległe: wynagrodzenie, ekwiwalent za urlop, premia?
+□ CAL-GATE (SKILL.md) — zrzeczenie się roszczeń zestaw z KAŻDYM punktem, który daje
+  pracownikowi świadczenie: wynagrodzenie za okres zwolnienia z pracy, odprawa, kara
+  wzajemna „każda ze stron”, ekwiwalent. Zrzeczenie „wszystkich roszczeń przyszłych”
+  czytane dosłownie znosi te punkty (sprzeczność wewnętrzna) i nie obejmuje prawa do
+  wynagrodzenia (art. 84 KP — weryfikuj w ELI).
+□ Kary umowne tylko dla pracownika, a obowiązki pracodawcy bez sankcji — asymetria
+  (CAL-2 c); dwie kary za tę samą poufność — CAL-2 b.
 
 WERYFIKUJ: ELI (RZĄD 1) → KP art. 171 (ekwiwalent za urlop)
            → obowiązek wypłaty w dniu rozwiązania UoP lub następnym roboczym
