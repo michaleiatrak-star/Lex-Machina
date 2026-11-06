@@ -1409,3 +1409,13 @@ wymieniały — tabela przerwana cytatem (DR-09) i wiersze 4-kolumnowe w tabeli 
 pierwsze jako tekst, w drugich odrzuca nadmiarowe komórki. Test negatywny: stan `main` `f66715f` → FAIL, 191 błędów (DR-03: 4, DR-09: 54 — w tym 26 modułów bez wiersza, ROUTING-MAP: 133).
 ⚠️ **Ograniczenie jawne.** T45 nie sprawdza aktualności numerów Dz.U. — to robi FAZA 3/T11 i odczyt ELI.
 
+
+## T50 — klucze jurysdykcji `JUR:` i równoważność migracji (dodany 2026-11-06, migracja prawa polskiego E1–E2)
+
+| Test | Co sprawdza | Waga | Uruchomienie |
+|---|---|---|---|
+| T50 | (A) każdy klucz w `prawo-polskie-v2/JURYSDYKCJA.md` wskazuje istniejący moduł; (B) każdy `JUR:<klucz>` użyty w skillach ma wiersz w manifeście; (C) każdy wiersz przeniesiony ze skilla wykonawczego (`references/migracja-jurysdykcji/*.tsv`) ma w module klucza linię z tym przepisem i tym terminem | KRYTYCZNY (BLOKER) | `python3 scripts/check_jurysdykcja.py <katalog skilli>` |
+
+Przesłanka: wydzielenie treści prawa polskiego ze skilli wykonawczych (metoda) do pakietu jurysdykcji nie może zgubić
+żadnego wiersza. Test negatywny 2026-11-06: termin „21 dni” (art. 264 § 1 KP) zmieniony w tabeli migracji na „99 dni” → FAIL
+z nazwą wiersza i modułu. Pilot E2: `analizator-dowodow-v3/modules/MD5-terminy.md` (14 wierszy) → `JUR:terminy-procesowe`.

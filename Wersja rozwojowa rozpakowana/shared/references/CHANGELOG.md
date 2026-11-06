@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.53 (2026-11-06, migracja prawa polskiego E1): UNIVERSAL-RUNTIME-ADAPTER §1B — klucze jurysdykcji `JUR:<klucz>` rozwiązywane przez manifest aktywnej jurysdykcji (`prawo-polskie-v2/JURYSDYKCJA.md`); klucz nierozwiązany → TRYB ZDEGRADOWANY.
 - 3.99.52 (2026-11-04, AUDYT-2026-11-04): ISAP-METRYKI-AKTOW: KAS — zm. Dz.U. 2026 poz. 1281 art. 9 (kontrola operacyjna), w mocy 31.10.2026.
 - 3.99.51 (2026-11-03, BRAK-DOK + PIPELINE-SZYBKI): CP-GATE §3B (BRAK-DOK: brak dokumentu = informacja w raporcie i w pliku, nie blokada; status ZAMKNIĘTY Z BRAKAMI) i §3C (TRYB PIPELINE-SZYBKI: CP informacyjne bez zatrzymania, STOP tylko na CP decyzyjnych); MOD-FSL-DOKUMENTY (FSL-D-INIT.2, PRZYPADEK B), MOD-SKAN-DOWODOW-KOMPLETNY (SD-GATE-0 bez STOP, KOMPLET Z BRAKAMI, SD-GATE-4), HYBRID-VALIDATION Block Zero (BRAK-DOK nie blokuje zapisu DRAFT), MOD-STEP-TRACKER (BRAK-DOK ≠ POMINIĘTY).
 - 3.99.50 (2026-10-31, BENCHMARK-02): MOD-WALIDACJA_v2 i terminy.md: art. 130² KPC — pismo profesjonalnego pełnomocnika nieopłacone → zwrot bez wezwania, tydzień na dopłatę (benchmark 02 P06; ELI DU/2026/468).

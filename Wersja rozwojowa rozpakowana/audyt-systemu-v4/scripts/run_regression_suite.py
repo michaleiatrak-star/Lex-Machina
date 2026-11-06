@@ -192,6 +192,8 @@ def main():
         ("T48", "T48 KRYTYCZNY — testy jednostkowe skilli (unittest, offline)", "check_testy_skilli.py", ["--repo-root", str(root)]),
         # 2026-10-11: mutacje z AUDYT-2026-10-10a utrwalone — każdy bloker musi umieć się nie udać.
         ("T49", "T49 KRYTYCZNY — mutacje: każdy bloker wykrywa wprowadzony defekt", "test_mutacje_zestawu.py", ["--repo-root", str(root)]),
+        # 2026-11-06: migracja prawa polskiego — klucze JUR: i równoważność przeniesionych wierszy.
+        ("T50", "T50 WYSOKI — klucze jurysdykcji JUR: i równoważność migracji", "check_jurysdykcja.py", [str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
