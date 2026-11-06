@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.77 (2026-11-06, migracja prawa polskiego E1b): JURYSDYKCJA.md — pełna mapa modułów prawa polskiego: 95 nowych kluczy `JUR:` (moduły klasy MODUŁ PL z mapy E0b, opłaty `shared/oplaty/01–07`, procedura: wymogi formalne, braki, właściwość, sygnatury, tryby, prekluzja, liczenie terminów, kanony weryfikacji; kopie opłat w skillach wykonawczych) — adres, nie przeniesienie.
 - 6.76 (2026-11-06, migracja prawa polskiego E1): `JURYSDYKCJA.md` — manifest kluczy `JUR:` (terminy-procesowe, oplaty-sadowe, hierarchia-zrodel, zrodla-aktow, mapa-dziedzin) → moduły prawa polskiego; pakiet jurysdykcji PL, do którego skille wykonawcze odsyłają zamiast powtarzać treść krajową.
 - 6.75 (2026-11-04, AUDYT-2026-11-04): ROUTING-MAP: nowy wiersz kontroli operacyjnej (Dz.U. 2026 poz. 1281 → dr-13 mod-ustawa-sluzby-operacyjne-retencja-danych); 1281 przy KAS, PrProk, ABW, CBA, SKW/SWW; ZZ i informowanie pracowników — 2026/1340 w mocy od 30.10.2026; ustawa antykorupcyjna — 2026/1003 art. 118 w mocy od 28.10.2026; MONITORING: KSCU — 1003 w mocy (zostaje 346), wiersz 2026/1348 usunięty (w mocy w całości od 31.10.2026).
 - 6.74 (2026-10-31, AUDYT-2026-10-31): ROUTING-MAP: nowe t.j. — opłata skarbowa 2026/1395, Prawo lotnicze 2026/1407, bezpieczeństwo żywności 2026/1399 (ELI RZĄD 1).
