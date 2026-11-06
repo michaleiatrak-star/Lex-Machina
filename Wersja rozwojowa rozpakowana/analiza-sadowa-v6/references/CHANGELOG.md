@@ -1,5 +1,6 @@
 # CHANGELOG — analiza-sadowa-v6
 
+- 6.19 (2026-11-06, porównanie aplikacja/czat — wezwanie do zapłaty kar umownych): lista PP-1…PP-8 dla każdego pisma strony przeciwnej (fakty, konstrukcja instytucji, rachunek sankcji, weryfikacja przepisów powołanych przez przeciwnika, właściwość i tryb, nadawca w KRS, CAL-GATE podstawy umownej, orzecznictwo SN i sądów powszechnych bez zatrzymania na captcha); wynik w tabeli „Zarzuty wobec pisma”.
 - 6.18 (2026-11-03): KROK 0 SD-GATE-0: wzmianka o dokumencie bez pliku -> SD-GATE-0-INFO i REJESTR BRAK-DOK (shared/CP-GATE.md §3B), bez STOP; lokalna kopia bramki przeslaniala modul wspolny.
 - 6.17 (2026-10-15b, AUDYT-2026-10-15b): Przejście II krok 8 — przesłanka związku przyczynowego (szkoda, krzywda, skutek, przestępstwo skutkowe) badana krokowo przez `shared/MOD-GRAF-PRZYCZYNOWY.md` (dowód mechanizmu, csqn, post hoc, przerwanie, alternatywy MET-ACH); linia ZWIĄZEK PRZYCZYNOWY w macierzy fakt-norma; pytanie w PUNKCIE STOP. Kolejność dat ≠ związek.
 
