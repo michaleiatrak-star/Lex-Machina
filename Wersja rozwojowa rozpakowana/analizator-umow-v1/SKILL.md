@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.51"
+version: "1.52"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -350,6 +350,67 @@ pliku) obowiązują generowanie identycznie jak analizę — bez wyjątku.
 | *„czy mogę to podpisać"*, *„szybki rzut oka"*, *„triage"* | `workflows/triage-szybki.md` | Szybszy filtr 🟢/🟡/🔴 PRZED decyzją o głębokości F.1/F.1-LITE/F.2 (FAZA 0) — nie zastępuje ich, poprzedza |
 | *„ocena drugiej strony"*, *„co mogą zarzucić"*, *„devil's advocate"*, *„red team"* | `workflows/ocena-drugiej-strony.md` | Komplementarny do Modułu D (audyt ryzyk z perspektywy KLIENTA) — ten patrzy z perspektywy OPONENTA |
 | *„popraw § X"*, wklejony fragment do korekty, przerwanie szerszego workflow dla jednej poprawki | `workflows/popraw-fragment.md` | Ustandaryzowana wersja Trybu 4 (UZUPEŁNIENIE) z E.1 `mod-core-checklist.md` dla POJEDYNCZEGO fragmentu |
+
+---
+
+## KONTROLA CAŁOŚCIOWA DOKUMENTU (CAL-GATE) — ⛔ KAŻDY DOKUMENT, KAŻDA DŁUGOŚĆ
+
+**Wyzwalacz mechaniczny:** w materiale jest dokument z kategorii tego skilla — umowa, aneks,
+porozumienie (także rozwiązujące umowę o pracę), ugoda, regulamin (sklepu, serwisu, pracy,
+wynagradzania, ZFŚS, organu spółki), OWU / wzorzec umowny, statut / umowa spółki, uchwała
+organu spółki, pełnomocnictwo, polityka prywatności / klauzula informacyjna, procedura /
+polityka wewnętrzna, oferta, oświadczenie woli (wypowiedzenie, odstąpienie, potrącenie),
+testament. Obowiązuje niezależnie od długości, trybu (LAIK / PRAWNIK), profilu (PEŁNY /
+LEKKI) i od tego, który skill jest PRIMARY — także gdy dokument jest tylko załącznikiem
+(do wezwania, pozwu, pytania „co mam zrobić”). Próg „> 15 stron” z MU.0 dotyczy wyłącznie
+tabeli ekstrakcji MU.1, nie tej kontroli.
+
+```
+CAL-1 INWENTARZ — każde postanowienie jednym wierszem:
+      kto → co → na czyją rzecz → sankcja / skutek (z numerem punktu lub §).
+CAL-2 PARY KRZYŻOWE — sprawdź KAŻDY wzorzec na całym dokumencie:
+  a) ZRZECZENIE / ZWOLNIENIE / „zrzeka się wszystkich roszczeń” ↔ świadczenia, kary,
+     wynagrodzenie, odszkodowanie należne TEJ SAMEJ stronie z innych postanowień tego
+     dokumentu (kara wzajemna „każda ze stron”, wynagrodzenie za okres zwolnienia z pracy,
+     zwrot kosztów). Dosłownie czytane zrzeczenie odbiera tej stronie to, co dokument jej
+     przyznaje → sprzeczność wewnętrzna.
+  b) PODWÓJNA SANKCJA — dwie kary lub różne kwoty za to samo zachowanie (np. poufność
+     za 5 000 zł i za 20 000 zł) → która ma zastosowanie, czy kumulacja, wpływ na miarkowanie.
+  c) ASYMETRIA — obowiązek jednej strony z sankcją, analogiczny obowiązek drugiej bez
+     sankcji; prawo jednej strony bez odpowiednika po drugiej.
+  d) SANKCJA NIEDOPASOWANA — kara za postanowienie, które nie jest obowiązkiem
+     (oświadczenie, odesłanie do przepisów), kara obok odszkodowania za to samo,
+     przesłanka kary inna niż naruszenie (np. „powzięcie informacji”).
+  e) CAŁOŚCIOWOŚĆ — „całkowite porozumienie” / „umowa zastępuje wcześniejsze” ↔ odesłania
+     do innych dokumentów, regulaminów, załączników, wcześniejszych umów.
+  f) ZAKRES PODMIOTOWY I DEFINICJE — ten sam termin w różnym znaczeniu; obowiązek lub
+     ochrona osób spoza stron (spółki powiązane, wspólnicy, pracownicy, konsumenci).
+  g) DATY, TERMINY, KWOTY, ODESŁANIA — wzajemna zgodność; odesłanie do nieistniejącego
+     punktu; termin sprzeczny z innym terminem lub z przepisem bezwzględnie obowiązującym.
+  h) REGULAMIN / WZORZEC / STATUT ↔ UMOWA LUB USTAWA — postanowienie wzorca sprzeczne
+     z umową indywidualną lub z ustawą; zmiana wzorca jednostronna bez trybu.
+CAL-3 ROZSTRZYGNIĘCIE każdej kolizji: wykładnia całego dokumentu — zgodny zamiar stron
+      i cel umowy (art. 65 § 2 KC, zweryfikuj w ELI). Podaj obie interpretacje i wskaż,
+      która jest korzystna dla strony chronionej (pracownik, konsument, słabsza strona).
+      Interpretacja, przy której inne postanowienie traci sens, wymaga wskazania tego wprost.
+      Kolizja nieusuwalna wykładnią → ryzyko sporu + gotowe brzmienie poprawki (Zasada 6).
+      Prawo pracy: postanowienia mniej korzystne niż przepisy (art. 18 § 2 KP), zakaz
+      zrzeczenia się prawa do wynagrodzenia (art. 84 KP) — weryfikuj w ELI.
+CAL-4 WYNIK — osobna sekcja odpowiedzi „Relacje między postanowieniami”:
+      | Postanowienie | ↔ Postanowienie | Kolizja (wzorzec a–h) | Skutek / argument | Dla kogo korzystne |
+      Brak kolizji → jedno zdanie „Sprawdzono wzorce CAL-2 a–h: brak kolizji”.
+      Pominięcie sekcji = uchybienie, także w profilu LEKKIM i w odpowiedzi roboczej.
+```
+
+⛔ Ocena pojedynczej klauzuli („zrzeczenie jest nieważne”, „kara jest wygórowana”) bez
+sprawdzenia jej par z CAL-2 to błąd izolowanej klauzuli (`mod-core-checklist.md` B.0).
+
+> Przykład (porozumienie rozwiązujące umowę o pracę, 2026-11): pkt 5 — kara 5 000 zł
+> „każda ze stron” za naruszenie poufności (roszczenie także pracownika) ↔ pkt 10 —
+> pracownik „zrzeka się wszystkich roszczeń przeszłych i przyszłych”: czytany dosłownie
+> pkt 10 znosi korzyść pracownika z pkt 5 i wynagrodzenie za okres zwolnienia z pracy
+> z pkt 2. Ten sam dokument: pkt 5 (5 000 zł) i pkt 9 (20 000 zł) sankcjonują tę samą
+> poufność (wzorzec b); pkt 14 — obowiązek pracodawcy bez sankcji (wzorzec c).
 
 ---
 

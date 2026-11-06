@@ -55,6 +55,10 @@ TYP DOKUMENTU:
 
 ### B.0 SYNTEZA KRZYŻOWA — OBOWIĄZKOWA PRZED WNIOSKAMI KOŃCOWYMI
 
+> Relacje między postanowieniami (zrzeczenie ↔ świadczenia tej samej strony, podwójna
+> sankcja, asymetria, całościowość, definicje, daty, wzorzec ↔ umowa) — CAL-GATE
+> w SKILL.md, wzorce CAL-2 a–h; wynik w sekcji „Relacje między postanowieniami”.
+
 > ⛔ ZASADA: analiza klauzula-po-klauzuli (B.1) jest warunkiem KONIECZNYM,
 > ale NIGDY wystarczającym. Żaden wniosek kwalifikacyjny (np. „to jest B2B",
 > „to nie jest stosunek pracy", „umowa jest zgodna z prawem") nie może

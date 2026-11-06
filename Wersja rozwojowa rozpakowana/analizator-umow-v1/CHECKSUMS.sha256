@@ -1,6 +1,6 @@
 94eb8d671ce15fc4ae0671df2499ca350f8dcc90e9f151e8d1b22a14de2cb463  ./NOTICE
 532165db1bcdc6a9634490d21847bb93a4f1596436b397287344d820e5beeec1  ./PORTABILITY-MANIFEST.md
-4673082631e275d03f6812db434335a6f4851f88d98ea863b8dd009b9412a4cb  ./SKILL.md
+2073b1ddc7220616cdc0d8cd38911bc7c1491d97add40db6db3d72398fef4705  ./SKILL.md
 a8894e5463f321487a6233c1b9b10f5caea8ac2a2b8a9deb9824ae245d237348  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
 f5adb2b1988ebfd743378091125076b20a5677ea2b478b3cb37d4f695541b082  ./benchmark/posiane-wady/README.md
@@ -12,7 +12,7 @@ ad7d21631521a47e2ba0285b4c88f1b0c2e56e63bd474b48bb86b1f1e72f8c89  ./benchmark/po
 5ffe95913b7d3e04e16c489c5fd9d712049eb527ecf29af2f9379ddbb048c2bb  ./benchmark/posiane-wady/umowy/04-matematyczna-tm.md
 26b46fbccbeaf79ae5be06a49314332f9a80e482ad2684739f4889121a60fce1  ./benchmark/posiane-wady/umowy/05-adwersarialne-injection.md
 70b200f4c7a85436d8d146204a71cda11c2ceb8ca2d0add25fd4dd1716bd7251  ./benchmark/posiane-wady/wyniki/oceny/README.md
-f0c45e47433dcf70c8c090655422e76a93ca8c80f556918a1f8700ffc92c92f2  ./references/CHANGELOG.md
+5ae8d5b7e45a2563b7627ac2aea7da7b72d85f080e36380b4311ada1953373d1  ./references/CHANGELOG.md
 d8d6b296b3e0947ee81567992924b24508479a332758315f2078b40a555eb2c8  ./references/HISTORIA-ZMIAN-PLIKOW.md
 93dc21293d084a931cbb4282fe68e4ec9a8fd36b1c5ed6d124f1266fda8b0a1c  ./references/b2b-podwykonawcze.md
 41e7a97f2c301f10047726ecb0db6fb299031235548f6d6951871d62b4c72f68  ./references/generator/boilerplate-strukturalne.md
@@ -36,7 +36,7 @@ b3837bbe733d8cfbabac520cca199622626b0b0c945b7edf7260ee249d2d9fd7  ./references/m
 a619c4fe31cf3394c16053c9b676aa54563a0766fe58485dbe9636be44760968  ./references/mod-J8-b2c.md
 a90e87c94956729b7a6eb663ec65edfc8af48d305179d56c550b49cb74283421  ./references/mod-J9-ip-prawa-autorskie.md
 b938a5196b8439e86886303724b1f1efa6a1a79b9928f86879fd6a5477e19b9a  ./references/mod-MA-transakcje.md
-6a5d3195a383d832f652707246b4ccdc7b29ebc5c5abb9a240ade4f4ff7f4d23  ./references/mod-core-checklist.md
+9b1e24b2db4cb7361493c6485ec1634bd208f786823bcee9fe9db83511c96d72  ./references/mod-core-checklist.md
 a50f71aac33a82ce2f98a65d546e9c60c5ffa94c244e33fde2c3b1c8db88a05e  ./references/mod-shared-abusive-clauses.md
 874698f39d1e3b262104c1dc6688b283eed775dc404920fef231851385d3e744  ./references/mod-shared-ai-act.md
 b80809146c9022a0f77df1e32cb6fc2a72e67e4f7649cd7fdc96ab7cb9352688  ./references/mod-shared-alt-drafts.md
@@ -50,17 +50,17 @@ c33f7e9c8b8bfd091aaaae49a7fe3e726ddb99aa8eb7e1edfb22bd2db6b3639d  ./references/m
 0d6cd35ae398f58d3843eda0d9f8a955123e097d467f32f75251107ffadf7b2d  ./references/mod-shared-legal-design.md
 8b51f53677218b3caf1aa826a536a87569e15cc113bcb125cc0ed0fe08febc27  ./references/mod-shared-lifecycle.md
 99164b7b5f99b06278deac3724472f8ed7dc3e5a180eb27e2c938d81939e4283  ./references/mod-shared-missing-clause.md
-316e392520ccbd1d42f939f4b01e7627940a3cb9e35254a07437196c8a71f0c8  ./references/mod-shared-model-umowy.md
+2ccdeef8bd8b06dbe499c35dfce8e4a63b2f4c2dffd49086ad04a5efd0f29d45  ./references/mod-shared-model-umowy.md
 35ef0df89841a495c593e08f10557c0220bc4b0be2b60d3a04a9107898b00c71  ./references/mod-shared-neg-strategia.md
 65066b6432bc7924162ff5faa8cbd7aa0b910d0efb9de43b1fcf7545b11e1fdf  ./references/mod-shared-orzecznictwo-umow.md
 43ac6e7626e4711070658ffc848c83ab5436e4b0a59effcf7bc4807ec76a3cc1  ./references/mod-shared-regulatory-horizon.md
 a906e3d16b70e7e0f6859feb8d1189cffdec7cd2c8849c3c6fae7ceb3a80f79c  ./references/mod-shared-rodo.md
 133718b1287fed9523c20cabd563f3c225295aebc2656785e332743f3b756e35  ./references/mod-shared-ryzyko-kwant.md
-9d52511f4e4cf8aad21bb6f776ea24b5b375eff9b64e9133d680cf46c71281d0  ./references/mod-shared-wykladnia.md
+79acd89f3adcf9dda868adce120524f8742385cdcd7bfa0173e1034c962de08a  ./references/mod-shared-wykladnia.md
 7e43c79b6c5849238d574f9fe74d46e97becc48cca2a39a86dc94187176ba6bd  ./references/mod-shared-zlote-reguly.md
 3dcfafc6664be8f2d03ca80db24ff15ee77be575cc4ae4f88a2803d24cc64052  ./references/poufnosc-nda.md
 38c6be5220f9a7a151f058dffbd8a332ac462ffc0308f1a0189e0cd34f10b3ae  ./references/szukaj_klauzul_uokik.py
-cfd1d41556f8269fea781e5db9f79833137f1e924641c5578b1bc3d0ddbcc4e2  ./references/umowy-o-prace.md
+07de9e4d25c7f9226d4ddec41926075035ec3037d85e8edae96c82f0d3915a2c  ./references/umowy-o-prace.md
 d58d7175525b8a3e72e97be3325b1a993e80485786047c0671c15ea656431a54  ./references/zakaz-konkurencji.md
 54125ae275d00c06b66f23e0acfe7c9b89cd6db70bb166864789e1f9f877f997  ./scripts/kontrakt_rachunek.py
 0a5a01654d4bbe3449c37f8e0540751c319ff210d95ccc4bd3cda246bf7ad802  ./scripts/test_kontrakt_rachunek.py
