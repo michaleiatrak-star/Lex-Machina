@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-2df63800bf2856460e68b2c4421aa2e6350de9b5335907eaee4fb54b557b21bd  ./SKILL.md
+2653ac8eaa6f5838cc2dbc30e113c99242ed5b382bdf9a5c301e45748e2447a4  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 4e1fb6c25693e16536b9397c060ecfb476328c75513dd15b7b77732009c02e52  ./modules/MOD-DESCRIPTION.md
@@ -10,7 +10,7 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 8e35cbfde3fb3a785181e9e16a153437820762ad34887cf1e714086f497274e9  ./references/ALIASY-NAZW-AKTOW.md
 83c32f988dc7bea3a0137452aff036a2b4b0a2ed4cdf42db138d815b0a848dd4  ./references/AUDIT-JOURNAL.md
-2dab709c305d80f8afaf4014f920599eddf4d1c598a7e0ae7da724c321163509  ./references/CHANGELOG.md
+e925beb1ccd1413274b4a32164378e4a9747ce621ffd60beab5d082fedcc3e26  ./references/CHANGELOG.md
 e7740174fe8894baaf9ea9cd5da5df31a862fad4cc071c831ccec7b438fbb06a  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -64,7 +64,7 @@ abd0a7650d3d131a37eac0ffbfedc44297dc3ed0b7c1bebb29b5676d590dc4c0  ./scripts/chec
 9a03fdd78994c19b2f2d1f2c5a73379c9dc587ac6da419037641a268d3670f4e  ./scripts/check_frontmatter_rejestracja.py
 edc50353be897bdc525b56e02074f4149bddc1df42e1ff49f651327923599d4b  ./scripts/check_frontmatter_yaml.py
 8cd3a4e7b506d85679d5b57197f04a434d17561574bd53ecc2b4db3fcb8412a1  ./scripts/check_graf_przyczynowy.py
-fe0c7f1e210c0d546ecdcffd379d3dc665273eca22e582f80075ca1c3e0ee64b  ./scripts/check_jurysdykcja.py
+1daf11a6f6225a1bf3387b65727feb56924c6e1ba72a3cc7a852e85fffa0b291  ./scripts/check_jurysdykcja.py
 c1b4949c032d4cd1d724b18716a227d8b3c214a2f137b8dc7967da92206c195c  ./scripts/check_kontrakt_rachunek.py
 dced4d4eae046188d9cee9a69f6cd0863c46f2e30caffa1ff8e0ff3f7b3a1c1c  ./scripts/check_limit_plikow.py
 85abb9fa7b9305935a37ad3ebe73852607f422d5452844fe57d3e1341db7681c  ./scripts/check_mapy_aktow.py

@@ -23,7 +23,7 @@ ROOT = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parents[2]
 MANIFEST = ROOT / "prawo-polskie-v2" / "JURYSDYKCJA.md"
 MIGRATIONS = HERE.parents[1] / "references" / "migracja-jurysdykcji"
 KEY = re.compile(r"JUR:[a-z0-9-]+")
-REQUIRED_FIELDS = ("kraj", "nazwa", "jezyk", "waluta", "dziedziny", "konektory", "konektory-serwery", "weryfikacja-przepisow",
+REQUIRED_FIELDS = ("kraj", "nazwa", "jezyk", "waluta", "dziedziny", "prefiks-dziedzin", "konektory", "konektory-serwery", "weryfikacja-przepisow",
                    "hierarchia-zrodel", "orzecznictwo", "rejestry", "anonimizacja", "ocr", "semantyka", "sady")
 
 

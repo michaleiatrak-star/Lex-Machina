@@ -8,6 +8,7 @@ z tym samym zestawem kluczy (`shared/UNIVERSAL-RUNTIME-ADAPTER.md` §1B).
 
 Jeden blok na pakiet kraju; aplikacja i audyt czytają go, gdy ta jurysdykcja jest wybrana
 (lista „Jurysdykcja” w aplikacji, `LEX_JURISDICTION_PACK`; domyślnie `prawo-polskie-v2`).
+Inny kraj ma własny pakiet (nazwa kraju) z analogami wszystkich pól i kluczy — nic z prawa polskiego.
 Pola komponentów to identyfikatory dostawców zaimplementowanych w aplikacji: kraj, dla którego
 aplikacja nie ma dostawcy danego komponentu, działa w trybie zdegradowanym z nazwanym brakiem —
 nigdy z komponentem innego kraju.
@@ -19,6 +20,7 @@ nigdy z komponentem innego kraju.
 | `jezyk` | `pl` | język dokumentów, odpowiedzi i słowników |
 | `waluta` | `PLN` | kwoty, opłaty, kursy |
 | `dziedziny` | `prawo-polskie-v2/ROUTING-MAP.md` | skille dziedzinowe (dr-*) tej jurysdykcji |
+| `prefiks-dziedzin` | `dr` | prefiks skilli dziedzinowych (`dr-02-…`); inny kraj: dwuliterowy kod (`de-02-…`) |
 | `konektory` | `prawo-polskie-v2/mcp-servers` | serwery MCP (pakiet `dist/lex-mcp.mjs`, instalator) |
 | `konektory-serwery` | `isap, eurlex, saos, cbosa, sn, sp, tk, kio, etpcz, krs, wl, ceidg, nbp, eureka, sudop, uodo` | konektory widoczne przy tej jurysdykcji |
 | `weryfikacja-przepisow` | `pl-eli` | teksty aktów i stan prawny (Sejm ELI, kopia ELI) |
