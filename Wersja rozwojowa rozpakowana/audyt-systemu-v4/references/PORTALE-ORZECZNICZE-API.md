@@ -13,8 +13,8 @@
 > `scripts/check_domeny_allowlist.py` (T25), 52 sondy, 52/52 zgodnych.
 > **UZUPEŁNIONY:** 2026-09-04b (F-158 częściowo ZAMKNIĘTA) — potwierdzone
 > API UODO (§7.6) i EUREKA (§7.7); F-157 propagowana do `shared/`.
-> **Rola:** materiał wykonawczy dla `shared/HIERARCHIA-ZRODEL.md` (RZĄD 1/2A)
-> i `shared/PRAWO-HARDGATE.md` (POZIOM A/B). Nie jest źródłem prawa i nie
+> **Rola:** materiał wykonawczy dla `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` (RZĄD 1/2A)
+> i `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (POZIOM A/B). Nie jest źródłem prawa i nie
 > zastępuje HARD GATE — mówi wyłącznie, CZY i JAK da się do źródła dotrzeć.
 > **Zakres pomiaru:** stan na 2026-09-01, środowisko wykonawcze audytu.
 
@@ -24,12 +24,12 @@
 
 System miał zapisaną hierarchię MOCY źródeł (RZĄD 1/2A/2B/3) i nie miał nigdzie
 zapisanej hierarchii ICH OSIĄGALNOŚCI. Skutek był mierzalny: procedura POZIOMU B
-w `PRAWO-HARDGATE.md` wskazywała endpoint, który zwraca tekst ogłoszony (F-150),
-a sekcja REALIA w `HIERARCHIA-ZRODEL.md` opisywała blokadę narzędzia jako zakaz
+w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` wskazywała endpoint, który zwraca tekst ogłoszony (F-150),
+a sekcja REALIA w `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` opisywała blokadę narzędzia jako zakaz
 serwera (F-151). Oba zapisy były nieweryfikowalne bez tabeli takiej jak poniższa.
 
 ⛔ Ten plik NIE rozstrzyga, czy z danego źródła wolno cytować — to nadal
-`HIERARCHIA-ZRODEL.md`. Rozstrzyga wyłącznie, czy da się je odczytać i czym.
+`prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`. Rozstrzyga wyłącznie, czy da się je odczytać i czym.
 
 ---
 
@@ -324,7 +324,7 @@ manifeście w kółko — nie.**
 
 ## 3. PUŁAPKA `/text.html` — skrót
 
-Pełny opis: `shared/PRAWO-HARDGATE.md`, sekcja „PUŁAPKA `/text.html`".
+Pełny opis: `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`, sekcja „PUŁAPKA `/text.html`".
 Skrót operacyjny: `/text.html` na akcie BAZOWYM = tekst **ogłoszony**.
 Treść tekstu jednolitego bierz z `/text.pdf` obwieszczenia wskazanego w
 `/references` → „Inf. o tekście jednolitym", pozycja ze statusem
@@ -347,7 +347,7 @@ nowelizacji ogłoszonych po dacie t.j. (2024-11-30).
 **Skutek narzędziowy:** `check_wyjatek_gate_eli.py` wypisuje od 2026-09-01d
 listę aktów zmieniających ogłoszonych po dacie t.j. i dopisuje ostrzeżenie do
 etykiety wersji. ⛔ Skrypt **nie scala** treści nowelizacji — rozpoznanie ich
-wpływu pozostaje ręczne, zgodnie z KROK 2C `shared/PRAWO-HARDGATE.md`.
+wpływu pozostaje ręczne, zgodnie z KROK 2C `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.
 
 ---
 
@@ -400,7 +400,7 @@ wpływu pozostaje ręczne, zgodnie z KROK 2C `shared/PRAWO-HARDGATE.md`.
 - **Zastrzeżenie „nie jest zbiorem urzędowym"** (CBOSA, UKE) dotyczy statusu
   publikatora, nie wiarygodności ustalenia, że orzeczenie istnieje.
 - **Ten plik nie jest listą zamkniętą** — obowiązuje ZASADA OTWARTEJ LISTY
-  z `shared/HIERARCHIA-ZRODEL.md` (v1.3).
+  z `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` (v1.3).
 
 ---
 

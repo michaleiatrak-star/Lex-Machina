@@ -1,5 +1,6 @@
 # CHANGELOG — dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka
 
+- 3.17 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.16 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.15 (2026-10-12b, AUDYT-2026-10-12b): mod-inwestycje-transgraniczne-FDI-BIT, MAPA-AKTOW, SKILL.md: po t.j. 2026/47 — zm. 2026/815 (art. 12d ust. 2 pkt 1, od 4.07.2026). ELI 2026-10-12.
 

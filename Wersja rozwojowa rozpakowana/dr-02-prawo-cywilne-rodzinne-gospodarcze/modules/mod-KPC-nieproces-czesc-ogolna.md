@@ -280,7 +280,7 @@ PREKLUZJA DOWODOWA (art. 205¹-205¹²) A NIEPROCES — ✅ ZWERYFIKOWANE
   służyła apelacja (i odwrotnie) to błąd prowadzący do odrzucenia
   środka. W razie wątpliwości, czy postanowienie orzeka „co do
   istoty" — rozstrzygnij to PRZED upływem terminu, nie po.
-  ⚠️ OBOWIĄZKOWO uruchom `shared/ZAZALENIE-ADRESAT-GATE.md`
+  ⚠️ OBOWIĄZKOWO uruchom `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md`
   (bramka wprowadzona przy fladze F-13) — dotyczy KAŻDEGO pisma
   zawierającego środek zaskarżenia, w tym w nieprocesie.
 
@@ -389,9 +389,9 @@ niemal zawsze modyfikuje regułę ogólną (zwłaszcza właściwość).
 - DR-02/mod-KPC-egzekucja-windykacja (wykonanie postanowień)
 - DR-02/mod-KC-spadki (materialnoprawna strona spraw spadkowych —
   ⚠️ strona proceduralna NIEPOKRYTA, patrz sekcja 8)
-- shared/ZAZALENIE-ADRESAT-GATE.md (⛔ OBOWIĄZKOWO przy każdym
+- prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md (⛔ OBOWIĄZKOWO przy każdym
   środku zaskarżenia)
-- shared/PRAWO-HARDGATE.md (zakaz cytowania z pamięci)
+- prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md (zakaz cytowania z pamięci)
 - pisma-proste-v2 (skarga na orzeczenie referendarza)
 - orzeczenia-sadowe-v2 (weryfikacja linii orzeczniczej do art. 510)
 

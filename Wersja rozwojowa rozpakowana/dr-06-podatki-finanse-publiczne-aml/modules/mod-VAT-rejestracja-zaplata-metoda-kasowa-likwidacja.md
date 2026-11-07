@@ -7,7 +7,7 @@
 > w życie dopiero 1.11.2028 (art. 31 pkt 4; art. 28 — do zgłoszeń złożonych i nierozpatrzonych
 > przed tą datą przepisy dotychczasowe). ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź przed każdym powołaniem.
 >
-> ⛔ **HARD GATE — patrz `shared/PRAWO-HARDGATE.md`.** Żaden przepis, próg, limit,
+> ⛔ **HARD GATE — patrz `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.** Żaden przepis, próg, limit,
 > termin ani stawka z tego modułu NIE jest podstawą rozliczenia bez weryfikacji
 > w ISAP na datę czynności. Limity kwotowe (mały podatnik, ulga na kasę) zmieniają
 > się **co roku** — kwoty poniżej są punktem startowym, nie źródłem.

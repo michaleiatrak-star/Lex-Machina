@@ -11,7 +11,7 @@ test_moved_to_shared.py — Test regresyjny T9: weryfikacja przeniesień do shar
   MAPA-AKTOW mimo kanonicznego routingu do shared/.
 
   Przypadek referencyjny F-138 / DR-16: `mod-KPC-przesluchanie-swiadkow.md`
-  pozostał fizycznie po migracji do `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` i
+  pozostał fizycznie po migracji do `prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md` i
   zawierał starszą treść niż kanoniczna kopia shared. Ręczny cross-check
   `dysk - MAPA-AKTOW` ujawnił kopię; T9 w poprzedniej postaci jej nie zgłaszał.
 

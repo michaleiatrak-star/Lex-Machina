@@ -48,7 +48,7 @@ Adresat: PODWÓJNA ŚCIEŻKA RÓWNOLEGLE —
       WSTRZYMANIU PRAC w trybie natychmiastowym (art. 11 ustawy o PIP)
   (b) Policja/Prokuratura — PIP jako instytucja ma OBOWIĄZEK
       zawiadomienia (art. 304 §2 KPK — zob.
-      `shared/ZAWIADOMIENIA-KRZYZOWE.md`), bo to PRZESTĘPSTWO, nie
+      `prawo-polskie-v2/krajowe/shared/ZAWIADOMIENIA-KRZYZOWE.md`), bo to PRZESTĘPSTWO, nie
       tylko naruszenie administracyjne
 Rozgraniczenie od TYPU 1: brak bezpośredniego związku przyczynowego
   między naruszeniem a KONKRETNYM zagrożeniem → SPADA do wykroczenia
@@ -132,7 +132,7 @@ Wskaźniki: zatrzymanie dokumentów tożsamości, izolacja, długi za
   "transport"/zakwaterowanie, brak swobody rozwiązania stosunku,
   nieproporcjonalne kary umowne uniemożliwiające odejście
 Adresat: ESKALACJA NATYCHMIASTOWA do Policji/Prokuratury/Straży
-  Granicznej — zob. `shared/ZAWIADOMIENIA-KRZYZOWE.md` sekcja "HANDEL
+  Granicznej — zob. `prawo-polskie-v2/krajowe/shared/ZAWIADOMIENIA-KRZYZOWE.md` sekcja "HANDEL
   LUDŹMI" dla pełnej procedury, numerów kontaktowych i podstawy
   prawnej (art. 189a KK, art. 240 KK — wzmocniony obowiązek
   zawiadomienia). PIP NIE jest tu adresatem docelowym, tylko
@@ -170,7 +170,7 @@ Adresat: jeśli naruszenie ma ZNAMIONA KORUPCJI (np. żądanie łapówki
 
 ## CROSS-REFERENCJE
 
-- Mechanizm zawiadomień krzyżowych (art. 304 KPK) → `shared/ZAWIADOMIENIA-KRZYZOWE.md`
+- Mechanizm zawiadomień krzyżowych (art. 304 KPK) → `prawo-polskie-v2/krajowe/shared/ZAWIADOMIENIA-KRZYZOWE.md`
 - Katalog dziedzin sygnalisty (potwierdzenie że prawo pracy JEST wyłączone) → `dr-15-compliance-iso-governance-audyt/modules/mod-ustawa-sygnalisci.md`
 - Mobbing/dyskryminacja, szczegóły odszkodowania → `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-mobbing-dyskryminacja.md`
 - PIP ogólnie (kontrola, decyzje, wymiana danych z ZUS/KAS) → `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-ustawa-PIP-inspekcja-pracy.md`

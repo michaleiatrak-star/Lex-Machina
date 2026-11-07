@@ -290,7 +290,7 @@ LEGALNYCH wzorców:
      pojawią się sprawy") — NIE są to błędy, lecz udokumentowane braki
      CELOWE
   4) Notatki HISTORYCZNE o przeniesieniu do shared/ pod NOWĄ nazwą
-     (np. mod-KK-stalking-szczegolowy → shared/STALKING-NEKANIE.md)
+     (np. mod-KK-stalking-szczegolowy → prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md)
 
 ⭐⭐⭐ DECYZJA: pełny, szeroki skaner dangling references ODRZUCONO
 jako NIEWARTY budowy w OBECNEJ formie — zgodnie z ZASADĄ z badanej
@@ -707,7 +707,7 @@ wyprzedzająco, KC-spadki obligatoryjnie): **0 ⛔, 5 ⚠️**, kod wyjścia 0.
 ⛔ **Wykryta ślepa plamka.** Do 2026-09-12p T13 mierzył **wyłącznie**
 `modules/mod-*.md` (warunek w `zbierz()`: `basename(root) == 'modules' and
 nazwa.startswith('mod-')`). Pliki leżące bezpośrednio w katalogu `shared/` były
-**poza zasięgiem testu w ogóle** — a `shared/TABELE-OPLAT.md` urósł przez serię
+**poza zasięgiem testu w ogóle** — a `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` urósł przez serię
 sesji wrześniowych do **1472 linii**, czyli **47 % ponad próg CRIT**, i nikt
 tego nie zmierzył.
 
@@ -720,21 +720,21 @@ tylko z **zawężenia jego zakresu do wzorca nazwy pliku**.
 blokująca.** Kod wyjścia bez zmian, jak przy `SKILL.md` wg F-78.
 
 ⛔ **Dlaczego nie CRIT.** Te pliki są **celowo scentralizowane**. Podział
-`TABELE-OPLAT.md` na kilka mniejszych odtworzyłby dokładnie tę strukturę, którą
+`prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` na kilka mniejszych odtworzyłby dokładnie tę strukturę, którą
 **sekcja 7 tego samego pliku** nazywa *tabelami satelickimi* i której cały
 audyt O-11 uczył się nie tworzyć. Test, który wymusza podział wbrew doktryny
 skilla, jest testem szkodliwym.
 
 ⚠️ **Zalecane działanie przy przekroczeniu progu: SPIS TREŚCI, nie cięcie.**
 Przy tej objętości realnym problemem jest **odnalezienie sekcji**, nie sama
-długość. Wykonane w tej samej sesji: `TABELE-OPLAT.md` (72 pozycje) i
-`terminy.md` (22 pozycje) dostały spisy treści.
+długość. Wykonane w tej samej sesji: `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` (72 pozycje) i
+`prawo-polskie-v2/krajowe/shared/terminy.md` (22 pozycje) dostały spisy treści.
 
 ### 13b. ⛔ TA SAMA PLAMKA DRUGI RAZ — poprawka zakresu (2026-09-12r)
 
 Rozszerzenie z 13a sprawdzało `basename(root) == 'shared'`, czyli **wyłącznie
 pliki leżące bezpośrednio w katalogu skilla**. Podział `TABELE-OPLAT` (sesja
-12q) utworzył `shared/oplaty/` z siedmioma satelitami — i **wszystkie
+12q) utworzył `prawo-polskie-v2/krajowe/shared/oplaty/` z siedmioma satelitami — i **wszystkie
 natychmiast wypadły poza zakres testu**, dokładnie tak, jak wcześniej wypadł
 z niego sam `TABELE-OPLAT`.
 
@@ -779,7 +779,7 @@ planistycznym na najbliższą edycję danego pliku.
 Powstał po stwierdzeniu, że trzy niezależne raporty zewnętrzne (TEST1/TEST2/
 TEST3, 2026-08-23e) oceniały system wobec etykiety `MEM` i rejestru
 `VER/MEM/NIEWERYFIKOWANE`, którego system **nie ma** — `AF-4` w
-`shared/PRAWO-HARDGATE.md` v2.6 wprost ZAKAZUJE etykiety `MEM`. Skutek:
+`prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` v2.6 wprost ZAKAZUJE etykiety `MEM`. Skutek:
 poprawne zachowanie systemu (odmowa użycia `MEM`) było punktowane jako
 uchybienie, a niedopuszczalne zachowanie portu porównawczego (użycie `MEM`)
 jako jego przewaga.
@@ -787,7 +787,7 @@ jako jego przewaga.
 **Reguła:** prompt testowy oceniający zgodność ze statusami weryfikacji
 NIE WPROWADZA własnego rejestru etykiet ani nie wymienia z góry kryteriów
 oceny w treści polecenia dla modelu. Jedyne poprawne źródło etykiet
-dopuszczalnych to sekcja statusów w `shared/PRAWO-HARDGATE.md`
+dopuszczalnych to sekcja statusów w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`
 (`✅ [VER]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE]` /
 `⬛ [DO UZUPEŁNIENIA]`) oraz rozszerzenie poziomu TREŚĆ/FRAGMENT
 w `shared/WERYFIKACJA-SLAD.md`. Etykieta spoza tych dwóch plików
@@ -800,7 +800,7 @@ wtedy zgodność z fikcyjną specyfikacją, nie zachowanie systemu.
 pliku `shared/KARTA-STATUSOW.md` jako "jednej strony, jedynego źródła
 prawdy" łączącej wszystkie rejestry statusów w systemie. **Odrzucono.**
 Uzasadnienie w AUDIT-JOURNAL, wpis 2026-08-23f, sekcja 2 — ryzyko
-utworzenia TRZECIEGO rejestru obok `PRAWO-HARDGATE.md` i
+utworzenia TRZECIEGO rejestru obok `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` i
 `WERYFIKACJA-SLAD.md`, przewyższające korzyść z konsolidacji. Zamiast
 karty, punkt niniejszy odsyła wprost do dwóch istniejących plików
 źródłowych jako jedynego kryterium ważności testu.
@@ -1005,7 +1005,7 @@ wystarczy". Ocena wpływu pozostaje ręczna, jak w WYJ-GATE.
 
 ⛔ Test nie widzi nowelizacji nieogłoszonych oraz aktów spoza publikatorów
 objętych API ELI (`DU` i `MP`) — akty prawa miejscowego są poza jego zasięgiem
-z definicji, patrz ŚCIEŻKA B-L w `shared/PRAWO-HARDGATE.md`.
+z definicji, patrz ŚCIEŻKA B-L w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.
 
 ⛔ WARN tego testu to stan świata, nie usterka repozytorium. FAIL zgłaszany jest
 tylko dla pozycji bez pokrycia w ELI albo nieobowiązujących.
@@ -1033,7 +1033,7 @@ pomiaru 2026-09-04; test zgłasza **regresję** tylko wtedy, gdy pozycja była
 OK, a dziś nie jest.
 
 **Czego NIE sprawdza:** czy z danego źródła wolno cytować. To
-`shared/HIERARCHIA-ZRODEL.md`, nie ten test.
+`prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`, nie ten test.
 
 **Uruchomienie:**
 ```bash
@@ -1153,8 +1153,8 @@ Kody: 0 = czysto (WARN dopuszczalne), 1 = FAIL, 2 = błąd wywołania.
 ### Wynik pierwszego przebiegu (2026-09-12f)
 
 410 plików. **31 trafień FAIL**, z czego **8 to realne, nienaprawione usterki**:
-`SPF-SPG.md` ×2 (zabezpieczenie z art. 69 zamiast art. 68 pkt 1),
-`SPB-zarzuty.md` ×2 i `pisma-proste-v2/SKILL.md` ×1 (opłata od zarzutów
+`prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPF-SPG.md` ×2 (zabezpieczenie z art. 69 zamiast art. 68 pkt 1),
+`prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPB-zarzuty.md` ×2 i `pisma-proste-v2/SKILL.md` ×1 (opłata od zarzutów
 z „art. 19 § 3" oraz termin 7 dni zamiast miesiąca), `dr-03` ×3
 (`art. 94 KPSW` bez odesłania do art. 506 § 1 KPK). Wszystkie naprawione
 w tej samej sesji; po naprawie **FAIL: brak**.
@@ -1184,8 +1184,8 @@ nie znalazły** — mimo że dotyczyły dokładnie tych rodzin, które te sesje 
 
 ## T29 — INTEGRALNOŚĆ PODZIAŁU TABELE-OPLAT (`check_oplaty_mapa.py`)
 
-**Dodany:** 2026-09-12q wraz z podziałem `shared/TABELE-OPLAT.md` (1555 linii)
-na rdzeń nawigacyjny i **siedem satelitów** w `shared/oplaty/`.
+**Dodany:** 2026-09-12q wraz z podziałem `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` (1555 linii)
+na rdzeń nawigacyjny i **siedem satelitów** w `prawo-polskie-v2/krajowe/shared/oplaty/`.
 **Priorytet: KRYTYCZNY.** Offline, do orkiestratora.
 
 ### ⛔ Po co — test jest WARUNKIEM dopuszczalności podziału
@@ -1205,7 +1205,7 @@ towarzyszący zmianie — to jej warunek.
 | Bramka | Co sprawdza | Czego sama nie wystarczy |
 |---|---|---|
 | **B1** | każdy plik z mapy rdzenia **istnieje** | — |
-| **B2** | każdy plik w `shared/oplaty/` jest **w mapie** | ⛔ B1 bez B2 przepuszcza **plik-sierotę** — satelitę bez właściciela, czyli dokładnie stary wzorzec |
+| **B2** | każdy plik w `prawo-polskie-v2/krajowe/shared/oplaty/` jest **w mapie** | ⛔ B1 bez B2 przepuszcza **plik-sierotę** — satelitę bez właściciela, czyli dokładnie stary wzorzec |
 | **B3** | żaden nagłówek sekcji (`## 1a.`, `## 6b.`…) nie występuje w **dwóch plikach** | właściwa bramka **antyduplikacyjna** |
 | **B4** | każdy satelita niesie blok **„Plik satelicki"** | plik odczytany w oderwaniu nie może udawać źródła samodzielnego |
 
@@ -1227,13 +1227,13 @@ Kody: 0 = czysto, 1 = naruszenie, 2 = błąd wywołania.
    przepisana do dwóch satelitów **pod różnymi nagłówkami**. B3 działa na
    numerach sekcji, bo tylko one mają jednoznacznego właściciela.
 2. **Nie sprawdza odesłań przychodzących.** W systemie jest **118 wystąpień**
-   `TABELE-OPLAT`, w tym kilkanaście w formie „`TABELE-OPLAT.md` sekcja 4c".
+   `TABELE-OPLAT`, w tym kilkanaście w formie „`prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` sekcja 4c".
    Po podziale rozwiązuje je **mapa w rdzeniu** — odesłanie nadal prowadzi do
    celu, ale przez jeden skok więcej. Test nie weryfikuje, czy numer sekcji
    w odesłaniu wciąż istnieje. Kandydat na rozszerzenie, **nie zobowiązanie**
    (osobny przebieg kalibracyjny — wniosek z `AUDYT-2026-09-12i`).
-3. **Zakres zaszyty na sztywno** (`shared/TABELE-OPLAT.md`, `shared/oplaty/`).
-   Jeżeli powstanie druga rodzina satelitów — np. dla `terminy.md` — test trzeba
+3. **Zakres zaszyty na sztywno** (`prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md`, `prawo-polskie-v2/krajowe/shared/oplaty/`).
+   Jeżeli powstanie druga rodzina satelitów — np. dla `prawo-polskie-v2/krajowe/shared/terminy.md` — test trzeba
    sparametryzować, a **nie kopiować**. Dwie rozjeżdżające się implementacje tej
    samej reguły byłyby gorsze niż brak testu (ta sama zasada co przy T24).
 
@@ -1394,7 +1394,7 @@ tak samo jak `view`). Pierwszy przebieg (2026-10-04b): 65 sierot przed naprawą,
 
 Allowlista (10 pozycji, w skrypcie): metadane hosta, CHECKSUMS, PORTABILITY-MANIFEST, DEPENDENCY-GRAPH (rejestr audytu),
 4 fikstury self-testu `tools/przyklady/`. Wpis allowlisty, który przestał być potrzebny, jest raportowany jako ⚠️.
-Test negatywny 2026-10-04d: odpięcie `MOD-GENERATOR-AKTU` w `MODULE-STANDARD-POLISH-LAW.md` → FAIL z nazwą pliku.
+Test negatywny 2026-10-04d: odpięcie `MOD-GENERATOR-AKTU` w `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` → FAIL z nazwą pliku.
 ⚠️ **Ograniczenie jawne.** Osiągalność ≠ wczytanie w każdej sprawie: łańcuch może prowadzić przez gałąź warunkową.
 T44 wykrywa plik, którego NIE wczyta żadna ścieżka; nie mierzy, jak często ścieżka jest używana.
 

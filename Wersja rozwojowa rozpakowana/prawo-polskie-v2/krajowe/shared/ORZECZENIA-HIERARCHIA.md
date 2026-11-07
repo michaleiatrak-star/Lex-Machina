@@ -1,0 +1,131 @@
+# ORZECZENIA-HIERARCHIA — ocena wartości orzecznictwa
+
+## 1. Zasada
+
+Nie wolno tworzyć sygnatur ani cytatów z pamięci. Każde orzeczenie musi być realnie istniejące i zweryfikowane w publicznym źródle. Jeżeli brak weryfikacji, oznacz: `orzeczenie niewykorzystane — brak potwierdzenia`.
+
+## 2. Hierarchia wartości
+
+| Źródło | Waga |
+|---|---|
+| uchwała SN w składzie 7 sędziów / zasada prawna | bardzo wysoka |
+| uchwała SN | wysoka |
+| wyrok SN | wysoka |
+| wyrok NSA / uchwała NSA | wysoka w sprawach administracyjnych |
+| wyrok SA / WSA | średnia-wysoka |
+| wyrok SO | średnia |
+| wyrok SR | pomocnicza |
+| komentarz / glosa | pomocnicza, nie jako samodzielna podstawa |
+
+
+### 2A. Routing źródłowy — skąd system ma pobrać orzeczenie
+
+Hierarchia **wartości orzeczenia** nie jest hierarchią **kanałów dostępu**.
+Kanał dobieraj deterministycznie wg rodziny sądu:
+
+| Rodzina | Źródło urzędowe / rozstrzygające | Mechanizm |
+|---|---|---|
+| SN | `sn.pl` | `shared/DOSTEP-MASZYNOWY-API.md` + `prawo-polskie-v2/krajowe/shared/SYGNATURY.md` |
+| SR/SO/SA | `orzeczenia.ms.gov.pl` + portal właściwego sądu | GET po sygnaturze; portal lokalny przy AMBIGUOUS |
+| **NSA/WSA** | **CBOSA — `orzeczenia.nsa.gov.pl`** | **fresh-probe → POST `/cbo/search` → kompletna paginacja `/cbo/find?p=N` → GET `/doc/{ID}` → exact-match**; wykonanie: `shared/CBOSA-ADAPTER.md` |
+| SAOS | `saos.org.pl` | discovery (orzeczenia starsze i SP — `orzeczenia-sadowe-v2` Faza 1-0) / kontrola krzyżowa / cytator; zasięg: SP bieżąco, SN do 2016, TK do 2015, KIO do 2018; nie źródło rozstrzygające, NSA/WSA brak |
+
+Dla CBOSA:
+- `0 exact-match` po **kompletnym** przeszukaniu → `NOT_FOUND`;
+- `1 exact-match` → `FOUND`;
+- `>=2 exact-match` → `AMBIGUOUS`;
+- drift HTML, nierozpoznany licznik, pętla paginacji, brak jednego dokumentu,
+  przerwany transport → `OUT_OF_SCOPE`;
+- brak opublikowanego uzasadnienia przy kompletnym dokumencie nie unieważnia
+  metryki/sentencji, ale zakazuje przypisywania tezy z uzasadnienia.
+
+Gdy direct CBOSA jest niedostępna w bieżącym runtime, użyj
+`prawo-polskie-v2/krajowe/shared/SYGNATURY.md` V-SYG-0.5 RETRIEVAL/SNAPSHOT. Kanał nigdy nie produkuje
+`NOT_FOUND`; po POST-CHECK HOSTA i exact-match zachowuje faktyczny `content_scope`
+(snapshot może zawierać metrykę, sentencję i uzasadnienie). Provenance pozostaje
+`CRAWLED_OR_INDEXED`, więc sama treść snapshotu nie daje ✅ [VER].
+
+## 3. Test aktualności
+
+Sprawdź:
+
+- datę,
+- czy przepis nie zmienił się po wydaniu orzeczenia,
+- czy linia nie została przełamana,
+- czy stan faktyczny jest porównywalny,
+- czy teza nie jest wyrwana z kontekstu,
+- czy orzeczenie dotyczy tego samego trybu.
+
+## 4. Sądy szczególne i dyscyplinarne służb mundurowych — status weryfikowalności
+
+> Dodano: 2026-07-06 (audyt kompletności baz orzecznictwa/interpretacji —
+> pytanie o sądownictwo wojskowe, Policję, PSP, OSP). Uzupełnia blok
+> "zawody zaufania publicznego" w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (linie ok. 226–259)
+> — ten sam problem braku scentralizowanej publicznej bazy występuje też
+> poza korporacjami zawodowymi.
+
+### 4.1 Sądy wojskowe (garnizonowe, okręgowe)
+
+- Dwuinstancyjne: wojskowy sąd garnizonowy (I inst.) → wojskowy sąd
+  okręgowy (II inst., odwoławczy). Dla spraw zastrzeżonych wojskowemu
+  sądowi okręgowemu jako I instancji (m.in. żołnierze st. majora i wyżej,
+  zbrodnie) — środek odwoławczy/kasacja idzie od razu do SN, Izba Karna
+  (brak odpowiednika sądu apelacyjnego w tej linii).
+- ⚠️ BRAK potwierdzonego scentralizowanego publicznego portalu treści
+  orzeczeń sądów wojskowych (odpowiednika orzeczenia.ms.gov.pl). Strony
+  wojskowych sądów okręgowych (domeny wp.mil.pl/mon.gov.pl) to serwisy
+  informacyjne, NIE bazy orzeczeń. SAOS ich nie indeksuje.
+- Traktuj sygnatury I/II instancji sądownictwa wojskowego jako
+  ⚠️ [NIEWERYFIKOWALNE — brak publicznego portalu], analogicznie do
+  scenariusza sądów korporacyjnych w PRAWO-HARDGATE — NIGDY ✅ [VER] bez
+  faktycznego odnalezienia treści.
+- WYJĄTEK: sprawa, która trafiła do SN (kasacja od wojskowego sądu
+  okręgowego jako I instancji, skarga nadzwyczajna) — orzeczenie SN jest
+  weryfikowalne normalnie przez sn.pl (Izba Karna), Tier 1 standardowy.
+- Nie mylić z dyscyplinarką sędziów/asesorów sądów wojskowych (Izba
+  Odpowiedzialności Zawodowej SN) — to odrębny tryb, opisany w dr-12.
+
+### 4.2 Policja i Państwowa Straż Pożarna — postępowania dyscyplinarne
+
+- I i II instancja dyscyplinarna to organy służbowe (przełożony/komendant),
+  NIE sądy — brak własnej publicznej bazy orzeczeń. Potwierdzone wyrokiem
+  WSA w Olsztynie: orzeczenia dyscyplinarne PSP są informacją publiczną,
+  ale dostępne wyłącznie na wniosek, nie z gotowej bazy przeszukiwalnej.
+- Na orzeczenie kończące postępowanie dyscyplinarne II instancji
+  przysługuje skarga do sądu administracyjnego (PSP: art. o skardze do
+  sądu administracyjnego w ustawie o PSP — WERYFIKUJ aktualny numer
+  artykułu/Dz.U. w ISAP przed cytowaniem, nie zgaduj; Policja: analogiczny
+  mechanizm w ustawie o Policji, również do weryfikacji per KROK 1 hardgate).
+- Skutek: orzeczenie WSA/NSA wydane w wyniku takiej skargi JEST
+  weryfikowalne normalnie przez CBOSA/orzeczenia.nsa.gov.pl (Tier 1).
+  Orzeczenie dyscyplinarne I/II instancji służbowej (przed skargą do sądu)
+  → ⚠️ [NIEWERYFIKOWALNE — baza służbowa niepubliczna, dostęp tylko na
+  wniosek o informację publiczną].
+
+### 4.3 Ochotnicza Straż Pożarna (OSP)
+
+- OSP to stowarzyszenie (Prawo o stowarzyszeniach + ustawa o OSP z 2021),
+  nie służba mundurowa ani sąd szczególny — nie generuje własnego
+  orzecznictwa dyscyplinarnego analogicznego do Policji/PSP.
+- Spory rejestrowe/wewnątrzstowarzyszeniowe → sądy powszechne (KRS, Tier 1
+  standardowy, orzeczenia.ms.gov.pl). Spory o dotacje, włączenie do KSRG,
+  decyzje nadzorcze wojewody/komendanta PSP wobec OSP → sądy
+  administracyjne (Tier 1 standardowy, CBOSA).
+- Nie trzeba dodawać nowego Tier/źródła — kanały weryfikacji już istnieją
+  w systemie. Luka była wyłącznie brakiem jawnej wzmianki, nie brakiem
+  pokrycia źródłowego.
+
+## 5. Karta orzeczenia
+
+```text
+ORZECZENIE
+Sąd: ...
+Data: ...
+Sygnatura: ...
+Źródło: ...
+Teza: ...
+Stan faktyczny: ...
+Podobieństwo do sprawy: niskie / średnie / wysokie
+Ryzyko użycia: ...
+Sposób użycia w piśmie: ...
+```

@@ -95,7 +95,7 @@ ODPOWIEDZIALNOŚĆ PODMIOTU ZBIOROWEGO: jeśli sprawcą był ktoś działający
 | Kategoria tajemnicy | Podstawa prawna | Gdzie w systemie | Sankcja karna |
 |---|---|---|---|
 | Tajemnica zawodowa/służbowa (ogólna, każdy zawód/funkcja) | art. 266 KK | **ten moduł** | grzywna/ogr. wolności/PW do 2 lat (§1) lub 3 lat (§2, funkcjonariusz) |
-| Tajemnica przedsiębiorstwa (know-how, dane handlowe) | art. 23 UZNK + ustawa o ochronie tajemnicy przedsiębiorstwa | analizator-umow-v1/references/zakaz-konkurencji.md; dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md | grzywna/ogr. wolności/PW do 2 lat, wymaga "poważnej szkody" (§1) lub nie (§2) |
+| Tajemnica przedsiębiorstwa (know-how, dane handlowe) | art. 23 UZNK + ustawa o ochronie tajemnicy przedsiębiorstwa | prawo-polskie-v2/krajowe/analizator-umow-v1/references/zakaz-konkurencji.md; dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md | grzywna/ogr. wolności/PW do 2 lat, wymaga "poważnej szkody" (§1) lub nie (§2) |
 | Tajemnica adwokacka | ustawa Prawo o adwokaturze | dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-adwokatura.md | brak odrębnej sankcji karnej — naruszenie = odpowiedzialność dyscyplinarna + możliwy zbieg z art. 266 KK |
 | Tajemnica radcy prawnego | ustawa o radcach prawnych | dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-ustawa-radcowie-prawni.md | jw. |
 | Tajemnica lekarska | ustawa o zawodach lekarza i lekarza dentysty | dr-10-zdrowie-farmacja-zywnosc-rolnictwo/modules/mod-ustawa-zawod-lekarza.md | jw. + możliwa odpowiedzialność zawodowa przed OSL/NSL |
@@ -113,7 +113,7 @@ ODPOWIEDZIALNOŚĆ PODMIOTU ZBIOROWEGO: jeśli sprawcą był ktoś działający
 |---|---|
 | Hacking / naruszenie tajemnicy korespondencji (art. 267-269c KK) | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md BLOK G |
 | Odpowiedzialność karna spółek | dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-ustawa-odpowiedzialnosc-podmiotow-zbiorowych.md |
-| Zakaz konkurencji, klauzule poufności w umowach | analizator-umow-v1/references/zakaz-konkurencji.md |
+| Zakaz konkurencji, klauzule poufności w umowach | prawo-polskie-v2/krajowe/analizator-umow-v1/references/zakaz-konkurencji.md |
 | Informacje niejawne (wyższe klauzule) | dr-13 |
 
 ## Weryfikacja online

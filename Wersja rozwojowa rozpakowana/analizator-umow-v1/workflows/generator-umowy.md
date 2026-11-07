@@ -16,7 +16,7 @@ głównej `SKILL.md` (G, H, I, J1–J10, J20, MA) — dokładnie ta sama tabela,
 używasz w trybie analizy. Essentialia negotii dla generowania i checklisty dla
 analizy pochodzą z **tego samego** modułu — nie duplikuj wiedzy w dwóch miejscach.
 
-Jeśli typ niejasny → `view references/mod-J0-routing.md`, zapytaj o brakujące
+Jeśli typ niejasny → `view JUR:umowy-j0-routing`, zapytaj o brakujące
 sygnały zanim przejdziesz dalej.
 
 ### KROK 2 — WYWIAD / INTAKE (BRAMKA 2)
@@ -45,7 +45,7 @@ modułu źródłowego + standardowego szkieletu:
 4. Essentialia specyficzne dla typu (patrz moduł z KROKU 1)
 5. Wynagrodzenie / rozliczenia
 6. Odpowiedzialność / kary umowne (jeśli dotyczy)
-7. Poufność / RODO (routing do mod-shared-rodo.md jeśli przetwarzanie danych)
+7. Poufność / RODO (routing do JUR:umowy-shared-rodo jeśli przetwarzanie danych)
 8. Czas trwania, wypowiedzenie, skutki ustania
 9. Postanowienia końcowe (prawo właściwe, spory, zmiany, załączniki)
 10. Podpisy

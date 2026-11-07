@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.57"
+version: "3.58"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -67,9 +67,9 @@ tekst sprzed 6 miesięcy może być już nieaktualny. Zawsze pobieraj aktualny t
 
 ---
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-BUDOWLANE-DROGOWE.md` — obiekt liniowy (kable w kanalizacji
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-BUDOWLANE-DROGOWE.md` — obiekt liniowy (kable w kanalizacji
   ≠ obiekt budowlany), samowola budowlana, decyzja WZ, definicje ministerialne
   prawa budowlanego (H.2) — PLIK GŁÓWNY dla tej dziedziny
 
@@ -556,7 +556,7 @@ view dr-09-budownictwo-srodowisko-energia-transport/MAPA-POKRYCIA.md
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Planowanie przestrzenne (MPZP, WZ) → też `dr-08` → `mod-MPZP-WZ-planowanie-przestrzenne`
   ⛔ Brzmienie samego planu/uchwały bierz z publikatora: `dziennikiurzedowe.gov.pl`
-  (RZĄD 1) wg ŚCIEŻKI B-L w `shared/PRAWO-HARDGATE.md`. MPZP, plan ogólny i WZ
+  (RZĄD 1) wg ŚCIEŻKI B-L w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`. MPZP, plan ogólny i WZ
   opierają się na aktach prawa miejscowego, których NIE MA w ISAP ani w API ELI
   (dodane 2026-09-01g, F-154).
 - Podatek od nieruchomości (reforma 2025) → `dr-06`

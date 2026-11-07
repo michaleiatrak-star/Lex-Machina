@@ -3,7 +3,7 @@
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 > ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
 >
-> ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
+> ⛔ **HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.** Ten moduł opisuje obszar
 > o najwyższej w całej ustawie gęstości odesłań do prawa celnego UE (UKC)
 > i do rozporządzeń wykonawczych. Żadna kwota progowa ani warunek proceduralny
 > NIE może być użyty bez weryfikacji w ELI (RZĄD 1) i w przepisach celnych na datę

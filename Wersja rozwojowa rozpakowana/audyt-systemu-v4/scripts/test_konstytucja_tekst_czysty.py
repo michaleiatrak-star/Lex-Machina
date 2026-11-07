@@ -32,7 +32,10 @@ import shutil
 import subprocess
 import sys
 
-JS_REL = "mcp-servers/isap-eli-example/isap-eli-mcp-server.js"
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from _lex_common import katalog_konektorow  # noqa: E402
+
+JS_REL = "isap-eli-example/isap-eli-mcp-server.js"
 NODE_PROBE = r"""
 import { wybierzTekstCzysty } from "./isap-eli-example/isap-eli-mcp-server.js";
 const meta = { texts: [{fileName:"D19970483.pdf",type:"O"},{fileName:"D19970483.pdf",type:"I"},{fileName:"D19970483Lj.pdf",type:"U"}] };
@@ -79,7 +82,9 @@ def main() -> int:
         audyt = pathlib.Path(__file__).resolve().parents[1]
     bledy: list[str] = []
 
-    js = audyt / JS_REL
+    # Serwery MCP leżą w pakiecie jurysdykcji (pole `konektory` manifestu JURYSDYKCJA.md).
+    konektory = pathlib.Path(katalog_konektorow(str(audyt.parent)))
+    js = konektory / JS_REL
     if not js.is_file():
         print("WYNIK T47: FAIL — BRAK PLIKU: {}".format(JS_REL))
         return 1
@@ -104,7 +109,7 @@ def main() -> int:
     # Hak ładowania podstawia za KAŻDY pakiet zewnętrzny zaślepkę (uniwersalny Proxy), więc
     # sprawdzana jest prawdziwa funkcja z niezmienionego pliku serwera, offline.
     r = subprocess.run([node, "--import", ZASLEPKI_PAKIETOW, "--input-type=module", "-e", NODE_PROBE],
-                       cwd=str(audyt / "mcp-servers"), capture_output=True, text=True, timeout=60)
+                       cwd=str(konektory), capture_output=True, text=True, timeout=60)
     if r.returncode != 0:
         bledy.append("node: wykonanie wybierzTekstCzysty nie powiodło się: {}".format(
             (r.stderr or r.stdout)[-400:]))

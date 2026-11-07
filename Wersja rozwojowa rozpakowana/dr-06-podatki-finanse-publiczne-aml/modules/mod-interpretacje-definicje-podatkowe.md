@@ -284,7 +284,7 @@ INTERPRETACJA OGÓLNA MF DTS5.8092.4.2024 z 24.12.2024 — LEASING:
 ## 5. KLUCZOWE DEFINICJE PODATKOWE — ZESTAWIENIE
 
 > Definicje "DZIAŁALNOŚĆ GOSPODARCZA" i "REZYDENT PODATKOWY" — kanoniczna
-> wersja w shared/definicje/DEF-PODATKOWE.md (BLOK G). Poniżej tylko
+> wersja w prawo-polskie-v2/krajowe/shared/definicje/DEF-PODATKOWE.md (BLOK G). Poniżej tylko
 > dopowiedzenie specyficzne dla interpretacji/orzecznictwa (NSA II FPS 1/21
 > dla działalności gospodarczej — patrz też sekcja 2A; rezydent — patrz 2B).
 
@@ -387,7 +387,7 @@ AKTUALNE SZUKANIA (generuj web_search gdy sprawdzasz konkretny temat):
 | Najem prywatny vs działalność | `mod-PIT-podatek-dochodowy-fizyczne` + `dr-02/mod-J1-najem` |
 | Ceny transferowe / podmiot powiązany | `mod-CIT-podatek-dochodowy-prawne` |
 | Prawa autorskie / IP (kwalifikowane) | `dr-11/mod-PrAut-wlasnosc-intelektualna-IP` |
-| Definicje kanoniczne: przychód, KUP, rezydent, działalność gospodarcza | `shared/definicje/DEF-PODATKOWE.md` (BLOK G) |
+| Definicje kanoniczne: przychód, KUP, rezydent, działalność gospodarcza | `prawo-polskie-v2/krajowe/shared/definicje/DEF-PODATKOWE.md` (BLOK G) |
 
 ---
 

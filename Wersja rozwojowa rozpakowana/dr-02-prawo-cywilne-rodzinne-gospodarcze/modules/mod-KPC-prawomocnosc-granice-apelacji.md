@@ -177,7 +177,7 @@ tę lukę dla dwóch najpilniejszych tematów.
 | Egzekucja i windykacja (KPC cz. III) | `mod-KPC-egzekucja-windykacja.md` — NIE duplikować |
 | Arbitraż i mediacja (KPC cz. V) | `mod-KPC-arbitraz-mediacja-ADR.md` (DR-02/DR-12) |
 | Skarga kasacyjna do SN (KPC Dział Va, art. 398¹-398²¹) | ⚠️ POZA zakresem tej naprawy — nadal bez podstawy prawnej, punkt startowy |
-| Skarga na orzeczenie referendarza (KPC Dział Vb, art. 398²²-398²⁴) | Treść ISTNIEJE, ale w `pisma-proste-v2/references/SPH-inne.md` (moduł DRAFTOWANIA pism), NIE w kanonicznym module DR- — ✅ ZWERYFIKOWANE 2026-08-14: to NIE jest realna luka merytoryczna, tylko rozproszenie lokalizacji (patrz F-65, punkt zamknięty jako "fałszywy alarm") |
+| Skarga na orzeczenie referendarza (KPC Dział Vb, art. 398²²-398²⁴) | Treść ISTNIEJE, ale w `prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPH-inne.md` (moduł DRAFTOWANIA pism), NIE w kanonicznym module DR- — ✅ ZWERYFIKOWANE 2026-08-14: to NIE jest realna luka merytoryczna, tylko rozproszenie lokalizacji (patrz F-65, punkt zamknięty jako "fałszywy alarm") |
 | Zażalenie (KPC Dział V, Rozdział 2) | ⚠️ POZA zakresem tej naprawy, punkt startowy |
 | Wznowienie postępowania CYWILNEGO (KPC Dział VI) | ⚠️ POZA zakresem tej naprawy, punkt startowy — NIE mylić z wznowieniem postępowania ADMINISTRACYJNEGO (DR-05, `mod-KPA-tryby-nadzwyczajne-i-strategia.md`) |
 

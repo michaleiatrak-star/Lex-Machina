@@ -321,7 +321,7 @@ ograniczenie wolności LUB pozbawienie wolności DO 2 LAT (art. 57)
 
 ⚠️ RPO MA OBOWIĄZEK zawiadomić PROKURATURĘ, jeśli poweźmie wiedzę, że
 zgłoszenie było CELOWO oparte na nieprawdziwych informacjach — to
-KONKRETNY PRZYKŁAD mechanizmu `shared/ZAWIADOMIENIA-KRZYZOWE.md`
+KONKRETNY PRZYKŁAD mechanizmu `prawo-polskie-v2/krajowe/shared/ZAWIADOMIENIA-KRZYZOWE.md`
 (art. 304 §2 KPK) zastosowany wprost do RPO.
 ```
 
@@ -500,12 +500,12 @@ Weryfikuj: web_search "ustawa sygnaliści odpowiedzialność karna art. Dz.U. 20
 
 ## 15. Quality gate
 Przed odpowiedzią lub pismem stosuj:
-- `shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`
+- `prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`
 - `shared/ISAP-AUDIT-PROTOCOL.md` — bezwzględnie dla wszystkich przepisów ustawy
 - `shared/TEMPORAL-LAW-CHECK.md` — ustawa stosunkowo nowa, mogły wejść zmiany
 - `shared/LEGAL-QUALITY-GATE.md`
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` jeśli sporządzane pismo
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` jeśli sporządzane pismo
 
 ## Weryfikacja online
 ```

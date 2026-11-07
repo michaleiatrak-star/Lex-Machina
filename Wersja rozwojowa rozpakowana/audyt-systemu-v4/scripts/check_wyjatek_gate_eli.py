@@ -257,7 +257,7 @@ def amendments_after(data, tj_promulgation):
     tylko o jedną wersję dalej.
 
     Funkcja NIE scala treści nowelizacji. Zwraca listę do ręcznego rozpoznania,
-    zgodnie z KROK 2C `shared/PRAWO-HARDGATE.md`.
+    zgodnie z KROK 2C `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.
     """
     if not isinstance(data, dict) or not tj_promulgation:
         return []

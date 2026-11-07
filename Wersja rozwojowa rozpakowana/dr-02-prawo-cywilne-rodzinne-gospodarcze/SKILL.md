@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.105"
+version: "3.106"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -35,7 +35,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
 > Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
-> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> gradient weryfikacji cytatu): `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
 
@@ -77,21 +77,21 @@ orzeczniczego; dobierz prawo do dat i faktów konkretnej sprawy.
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 - **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
-- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-PODMIOTY-WLASNOSC.md` — osoba fizyczna/prawna, przedsiębiorca,
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PODMIOTY-WLASNOSC.md` — osoba fizyczna/prawna, przedsiębiorca,
   konsument, nieruchomość, posiadanie, własność, "rzecz" (art. 45 KC)
-- `definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md` — szkoda (damnum emergens/lucrum
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md` — szkoda (damnum emergens/lucrum
   cessans), odpowiedzialność cywilna, odszkodowanie; ⚠️ NOWE: siła wyższa
   (brak def. ustawowej, 3 przesłanki SN) + rebus sic stantibus / art. 357¹ KC
   (4 przesłanki nieostre, tryb wyłącznie powództwem, granice modyfikacji umowy)
-- `definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny,
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny,
   strona postępowania
-- `definicje/DEF-CYWILNE-WYKLADNIA.md` — rękojmia vs gwarancja (reforma 2023)
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-CYWILNE-WYKLADNIA.md` — rękojmia vs gwarancja (reforma 2023)
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: czynność prawna
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: czynność prawna
   ukryta/pozorna (art. 83 KC — symulacja, dysymulacja, ochrona osoby trzeciej
   w dobrej wierze), wyłączenie sędziego/biegłego z powodu interesu własnego
   (art. 48-49/281 KPC + TK P 10/19), świadek i jego interes (art. 233/261 KPC)
@@ -565,7 +565,7 @@ nieobecnej art. 184). Rozgraniczenie od kuratora sądowego
                postępowania nieprocesowego]. Weryfikacja: "deklaracja
                bez pokrycia" ws. sprzeciwu od referendarza okazała
                się fałszywym alarmem, treść realnie istnieje w
-               pisma-proste-v2/references/SPH-inne.md)
+               prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPH-inne.md)
   [✓] OK    mod-ustawa-prawa-konsumenta
   [✓] OK    mod-ustawa-UZNK-nieuczciwa-konkurencja
   [✓] OK    mod-ustawa-UOKIK-antymonopolowe

@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 weryfikator_sygnatur.py — odtworzeniowa implementacja V-SYG-0
-(shared/SYGNATURY.md v1.2, shared/DOSTEP-MASZYNOWY-API.md v1.1 §3).
+(prawo-polskie-v2/krajowe/shared/SYGNATURY.md v1.2, shared/DOSTEP-MASZYNOWY-API.md v1.1 §3).
 
 Zakres: binarna kontrola istnienia sygnatury sądowej w kanale maszynowym,
 w czterech warstwach — NORMALIZUJ → ROUTUJ → OKNO POKRYCIA → POST-CHECK.
 
 ⛔ Ten skrypt NIE rozstrzyga o mocy źródła ani o dopuszczalności powołania.
-   Robi to shared/HIERARCHIA-ZRODEL.md i shared/PRAWO-HARDGATE.md.
+   Robi to prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md i prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md.
 
 ⛔ Statusy okna pokrycia STARZEJĄ SIĘ. Nie przepisuj ich z dokumentacji —
    uruchom `--okno` i zapisz datę pomiaru.

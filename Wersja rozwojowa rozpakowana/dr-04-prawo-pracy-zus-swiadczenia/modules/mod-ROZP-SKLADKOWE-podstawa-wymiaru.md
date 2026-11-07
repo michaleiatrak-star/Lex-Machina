@@ -5,7 +5,7 @@
 „obniżymy ZUS o 25%". Audyt `grep` całego drzewa `/mnt/skills/user`
 wykazał **ZERO trafień** dla: `1106`, `rozporządzenie składkowe`,
 `18 grudnia 1998`, `§ 2 ust. 1 pkt`. Jedyne trafienie na „1106"
-(`analizator-umow-v1/references/b2b-podwykonawcze.md`) to fałszywy
+(`prawo-polskie-v2/krajowe/analizator-umow-v1/references/b2b-podwykonawcze.md`) to fałszywy
 pozytyw — M.P. 2024 poz. 1106 (odsetki w transakcjach handlowych).
 System pokrywał ZUS **wyłącznie od strony ubezpieczonego**
 (`mod-SUS-ZUS-ubezpieczenia-spoleczne` — emerytura, renta, odwołanie),

@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.20"
+version: "3.21"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 dependencies:
   requires:
@@ -72,11 +72,11 @@ Ustawa o obronie Ojczyzny — t.j. Dz.U. 2025 poz. 825 (✅ [VER] RZĄD 1 2026-0
 Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-122 Żołnierz (definicja ustawowa — ustawa o obronie Ojczyzny)
 - BAS-134 Degradacja wojskowa — pozbawienie stopnia (art. 43ba-bb KK,
-  przywrócenie przez MON → mod-prawa-obywatelskie-srodki-karne.md)
+  przywrócenie przez MON → prawo-polskie-v2/krajowe/shared/mod-prawa-obywatelskie-srodki-karne.md)
 
-## DEFINICJE — shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (nieobecne — adnotacja audytowa 2026-06-14)
 
-Ta dziedzina nie ma dedykowanego pliku w `shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik shared/definicje/ nie obejmuje tej dziedziny.
+Ta dziedzina nie ma dedykowanego pliku w `prawo-polskie-v2/krajowe/shared/definicje/`. Służby, bezpieczeństwo, informacje niejawne — pojęcia (informacja niejawna, klauzula, dostęp) zdefiniowane wprost w ustawie o ochronie informacji niejawnych i pokryte w mod-ustawa-informacje-niejawne. Żaden plik prawo-polskie-v2/krajowe/shared/definicje/ nie obejmuje tej dziedziny.
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (12 łącznie — ✓ 12 OK, ☐ 0 STUB)
 

@@ -43,7 +43,7 @@ T4. Czy pismo dotyczy wniosku dowodowego, który może być objęty prekluzją?
     NIE → przejdź do T5
 
 T5. Czy jest termin zawity na złożenie tego pisma?
-    TAK → oblicz datę z TERM-CALC.md i złóż ≥7 dni przed terminem
+    TAK → oblicz datę z JUR:liczenie-terminow i złóż ≥7 dni przed terminem
     NIE → timing elastyczny; domyślnie: złóż po analizie T1–T4
 ```
 

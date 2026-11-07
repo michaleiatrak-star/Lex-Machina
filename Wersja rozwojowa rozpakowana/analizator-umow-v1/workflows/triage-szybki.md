@@ -53,7 +53,7 @@ gdy już wiadomo, że trzeba.
 - szerokie wyłączenia odpowiedzialności (szkody pośrednie, lucrum cessans) —
   zwykle akceptowalne w B2B, ale wymaga świadomej zgody klienta,
 - zakaz konkurencji / non-solicitation — sprawdź ekwiwalent, czas, zakres
-  (routing `zakaz-konkurencji.md`),
+  (routing `JUR:umowy-zakaz-konkurencji`),
 - poufność bez wskazanego okresu po zakończeniu umowy lub bez wyłączeń —
   routing `poufnosc-nda.md` (Moduł K),
 - przeniesienie praw autorskich „do wszystkich utworów" bez pól eksploatacji
@@ -63,7 +63,7 @@ gdy już wiadomo, że trzeba.
   konsensusu klienta,
 - klauzula audytu/inspekcji po stronie kontrahenta — sprawdź zakres,
 - brak umowy powierzenia danych (art. 28 RODO) mimo przetwarzania danych
-  osobowych — routing `mod-shared-rodo.md`,
+  osobowych — routing `JUR:umowy-shared-rodo`,
 - wynagrodzenie uzależnione od czynników zewnętrznych (KPI, success fee) bez
   zdefiniowanych metryk,
 - klauzula jednostronnej zmiany zakresu świadczeń — typowa nierównowaga.
@@ -146,11 +146,11 @@ nie zastępuje tego — jest pierwszym filtrem.
 
 **Kiedy NIE używać triage — od razu pełna analiza (F.1):**
 - wartość umowy > 100 000 PLN (już objęte obowiązkowym F.1 w FAZA 0 SKILL.md),
-- transakcje M&A (routing `mod-MA-transakcje.md`),
+- transakcje M&A (routing `JUR:umowy-ma-transakcje`),
 - umowa o pracę / B2B z elementami kontroli — ryzyko reklasyfikacji
-  (routing `b2b-podwykonawcze.md` G.1/G.1B),
+  (routing `JUR:umowy-b2b-podwykonawcze` G.1/G.1B),
 - dokumenty wpływające na strukturę kapitałową/korporacyjną klienta
-  (routing `mod-FA-founders-dokumenty-zalozycielskie.md`),
+  (routing `JUR:umowy-fa-founders-dokumenty-zalozycielskie`),
 - klient sygnalizuje wprost „to jest dla nas ważne, sprawdź dokładnie".
 
 ## Powiązania

@@ -59,7 +59,7 @@ from dataclasses import dataclass, field
 from html.parser import HTMLParser
 
 API = "https://api.sejm.gov.pl/eli/acts"
-# Kanał kodu (shared/PRAWO-HARDGATE.md, blok „KANAŁ KODU MA WŁASNE WYMOGI”):
+# Kanał kodu (prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md, blok „KANAŁ KODU MA WŁASNE WYMOGI”):
 # neutralny UA, jawny Accept, ścieżka zamiast roota.
 _UA = "curl/8.5.0"  # neutralny UA zmierzony w DOSTEP-MASZYNOWY-API §1
 _SUP = str.maketrans("¹²³⁴⁵⁶⁷⁸⁹⁰", "1234567890")

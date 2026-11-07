@@ -234,7 +234,7 @@ stanu prawnego, zweryfikuj status legislacyjny PRZED każdym użyciem.**
 ## ZAPRZECZENIE OJCOSTWA — TERMINY ZAWITE
 
 > ✅ [VER] RZĄD 1 2026-09-12k, ponownie 2026-09-16 (F-189) — odczyt treści
-> `Dz.U. 2026 poz. 236`. Tabela kanoniczna: `shared/terminy.md` (KRO).
+> `Dz.U. 2026 poz. 236`. Tabela kanoniczna: `prawo-polskie-v2/krajowe/shared/terminy.md` (KRO).
 > ⛔ NAPRAWIONE: poprzednio „matka — 6 miesięcy od urodzenia", „dziecko —
 > 3 lata od pełnoletności" (termin dziecka zawyżony TRZYKROTNIE — kierunek
 > niebezpieczny), „prokurator — brak terminu" (połowa normy).

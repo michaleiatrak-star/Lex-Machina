@@ -95,7 +95,7 @@ staje się pominięciem.** Ten plik zamyka go trzema rzeczami:
 
 ⛔ Korzyść jest **audytowa, nie wydajnościowa.** Redukcja rdzenia to osobna
 robota i wykonuje się ją w samych plikach rdzenia, nie tutaj — pierwszy krok
-wykonano w F-180 (`PRAWO-HARDGATE.md` 41 → 29 kB przez wydzielenie gałęzi
+wykonano w F-180 (`JUR:weryfikacja-przepisow-kanon` 41 → 29 kB przez wydzielenie gałęzi
 warunkowych), i to on, a nie ten plik, zmniejszył koszt.
 
 ---
@@ -108,7 +108,7 @@ Pięć pozycji. Kolejność wiążąca.
 R-1  prawny-router-v3/SKILL.md          — jesteś tutaj, routing i reguły
 R-2  references/KROK0A-anonimizer.md    — bramka twarda, blokuje wszystko dalej
 R-3  references/KROK1-detekcja.md       — tryb, jurysdykcja, hard gate
-R-4  shared/PRAWO-HARDGATE.md           — zakaz cytowania z pamięci
+R-4  JUR:weryfikacja-przepisow-kanon           — zakaz cytowania z pamięci
 R-5  references/SELF-CHECK.md           — przed wysłaniem odpowiedzi
 ```
 
@@ -127,10 +127,10 @@ przez F-113.
 
 | Zasób | Wyzwalacz odczytu | Najpóźniejszy moment |
 |---|---|---|
-| `shared/PRAWO-HARDGATE-BLOKADA.md` | B-1/B-2 zwrócił blokadę **i** kanał kodu też zawiódł | ⛔ przed nadaniem znacznika 🟨 lub ⚠️ |
+| `JUR:prawo-hardgate-blokada` | B-1/B-2 zwrócił blokadę **i** kanał kodu też zawiódł | ⛔ przed nadaniem znacznika 🟨 lub ⚠️ |
 | `shared/PRAWO-HARDGATE-AKT-MIEJSCOWY.md` | przedmiotem sprawy jest akt prawa miejscowego | przed pierwszą próbą weryfikacji tego aktu |
-| `shared/TABELE-OPLAT.md` | ⛔ zamierzasz podać KWOTĘ opłaty, taksy albo wyliczenia | przed pierwszą liczbą — KROK 0 to pytanie, czy strona w ogóle płaci |
-| `shared/HIERARCHIA-ZRODEL.md` | pierwszy URL w odpowiedzi | przed nadaniem pierwszego znacznika RZĄD |
+| `JUR:oplaty-sadowe` | ⛔ zamierzasz podać KWOTĘ opłaty, taksy albo wyliczenia | przed pierwszą liczbą — KROK 0 to pytanie, czy strona w ogóle płaci |
+| `JUR:hierarchia-zrodel` | pierwszy URL w odpowiedzi | przed nadaniem pierwszego znacznika RZĄD |
 | `references/ZRODLA-AKTOW-FALLBACK.md` | pierwszy akt polski | przed pierwszą próbą pobrania tekstu |
 | `shared/MOD-CN-GATE.md` | pierwsze rozstrzygnięcie / zarzut / roszczenie / kwalifikacja | przed sformułowaniem tego rozstrzygnięcia |
 | `shared/MOD-WYJATEK-GATE.md` | ≥1 powołany artykuł | przy pierwszym powołaniu aktu |
@@ -144,7 +144,7 @@ przez F-113.
 | `shared/MOD-REJESTR-ZALACZNIKOW-CHECKPOINT.md` | ≥1 załącznik do pisma | przed W3 |
 | `shared/MOD-KONTEKST-SESJI.md` | plik kontekstu / fraza importu | KROK 0B |
 | `shared/MOD-REJESTR-POKRYCIA-JEDNOSTEK.md` | ≥10 ponumerowanych jednostek | RPK-INIT |
-| `shared/PRE-W2-VERIFICATION-GATE.md` | ścieżka pisma, przed W2 | przed W2 |
+| `JUR:pre-w2-verification-gate` | ścieżka pisma, przed W2 | przed W2 |
 | `shared/CP-GATE.md` · `shared/HYBRID-VALIDATION.md` | ścieżka pisma | przed generowaniem `.docx` |
 | `shared/MCP-INTEGRACJA.md` | host zgłasza podłączone MCP | KROK 1 |
 | `shared/MIEDZYNARODOWE-GATES.md` + `HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md` | jurysdykcja obca (UP-5) | zamiast OŚ/WYJ, przed analizą |

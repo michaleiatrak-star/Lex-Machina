@@ -1,0 +1,234 @@
+{
+  "manifest_version": "0.3",
+  "name": "lex-machina",
+  "display_name": "Lex Machina — polskie źródła prawa",
+  "version": "1.3.6",
+  "description": "Weryfikacja źródeł prawa polskiego i UE: ISAP (z treścią), SAOS (z cytatorem), CBOSA, EUREKA, EUR-Lex i TSUE, KRS, NBP, SUDOP, UODO, biała lista VAT, CEIDG.",
+  "long_description": "Serwery MCP systemu Lex Machina (pakiet prawo-polskie-v2). Każdy wynik w schemacie FOUND / NOT_FOUND / AMBIGUOUS / ERROR, z jawnym statusem obowiązywania lub aktualności. Kontrola sygnatur z post-checkiem tożsamości (prefiks ani prawie-trafienie nie potwierdza sygnatury). NSA/WSA (CBOSA): snapshot, brak trafień = OUT_OF_SCOPE.",
+  "author": {
+    "name": "Lex Machina",
+    "url": "https://github.com/michaleiatrak-star/Lex-Machina"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaleiatrak-star/Lex-Machina.git"
+  },
+  "license": "GPL-3.0",
+  "server": {
+    "type": "node",
+    "entry_point": "server/lex-mcp.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/lex-mcp.mjs",
+        "wszystkie"
+      ],
+      "env": {
+        "CEIDG_API_KEY": "${user_config.ceidg_klucz}",
+        "SN_COOKIE": "${user_config.sn_cookie}",
+        "NODE_EXTRA_CA_CERTS": "${user_config.certyfikat_ca}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "isap_lookup",
+      "description": "ISAP/ELI: akty w Dz.U. i M.P. po tytule"
+    },
+    {
+      "name": "saos_search",
+      "description": "SAOS (agregator akademicki, ranga najniższa): orzeczenia SP, SN do 2016, TK do 2015, KIO do 2018; gdy źródło urzędowe nie działa"
+    },
+    {
+      "name": "krs_lookup",
+      "description": "KRS: dane podmiotu po numerze KRS"
+    },
+    {
+      "name": "nbp_kurs_waluty",
+      "description": "NBP: kurs średni tabeli A; dni wolne jawnie"
+    },
+    {
+      "name": "eurlex_lookup",
+      "description": "EUR-Lex/Cellar: akt UE po CELEX, status obowiązywania"
+    },
+    {
+      "name": "eureka_sprawdz_sygnature",
+      "description": "EUREKA: istnienie i aktualność interpretacji"
+    },
+    {
+      "name": "eureka_szukaj",
+      "description": "EUREKA: wyszukiwanie interpretacji i objaśnień"
+    },
+    {
+      "name": "eureka_pobierz",
+      "description": "EUREKA: pełna treść interpretacji"
+    },
+    {
+      "name": "sudop_szukaj_pomocy",
+      "description": "SUDOP: pomoc publiczna dla NIP (asynchroniczne)"
+    },
+    {
+      "name": "sudop_odbierz_wynik",
+      "description": "SUDOP: odbiór wyniku zlecenia"
+    },
+    {
+      "name": "cbosa_sprawdz_sygnature",
+      "description": "CBOSA: istnienie sygnatury NSA/WSA (snapshot)"
+    },
+    {
+      "name": "cbosa_szukaj",
+      "description": "CBOSA: wyszukiwanie orzeczeń NSA/WSA"
+    },
+    {
+      "name": "cbosa_pobierz",
+      "description": "CBOSA: pełny dokument orzeczenia"
+    },
+    {
+      "name": "sn_sprawdz_sygnature",
+      "description": "SN: czy orzeczenie o tej sygnaturze jest w bazie sn.pl; zwraca kartę orzeczenia"
+    },
+    {
+      "name": "sn_szukaj",
+      "description": "SN: wyszukiwarka sn.pl — treść, sygnatura, forma, data, izba, skład, sędziowie; karty orzeczeń"
+    },
+    {
+      "name": "sn_pobierz",
+      "description": "SN: pełny tekst orzeczenia po karcie (…?orzeczenie=ID)"
+    },
+    {
+      "name": "sn_sesja_status",
+      "description": "SN: czy jest zapisana sesja po weryfikacji sn.pl (bez wartości ciasteczek)"
+    },
+    {
+      "name": "sn_sesja_ustaw",
+      "description": "SN: zapis sesji po captcha — wklejony nagłówek Cookie z przeglądarki"
+    },
+    {
+      "name": "sn_captcha_auto",
+      "description": "SN: przejście weryfikacji sn.pl w oknie przeglądarki użytkownika (Edge/Chrome), sesja zapisuje się sama (bez płatnych usług)"
+    },
+    {
+      "name": "sp_sprawdz_sygnature",
+      "description": "Sądy powszechne: orzeczenie po sygnaturze w Portalu Orzeczeń; stały link do orzeczenia"
+    },
+    {
+      "name": "sp_pobierz",
+      "description": "Sądy powszechne: treść orzeczenia po stałym linku"
+    },
+    {
+      "name": "sp_szukaj",
+      "description": "Sądy powszechne: wyszukiwanie po frazie w Portalu Orzeczeń (SAOS tylko zastępczo)"
+    },
+    {
+      "name": "tk_sprawdz_sygnature",
+      "description": "TK: orzeczenie po sygnaturze wyłącznie ze źródeł urzędowych (karta sprawy IPO, OTK ZU, formularz IPO); bez SAOS"
+    },
+    {
+      "name": "tk_pobierz",
+      "description": "TK: treść dokumentu z IPO/OTK ZU z kontrolą sygnatury"
+    },
+    {
+      "name": "etpcz_szukaj",
+      "description": "ETPCz (baza MS etpcz.ms.gov.pl): orzeczenia po numerze skargi (dokładna kontrola) albo frazie; stałe linki do treści"
+    },
+    {
+      "name": "etpcz_pobierz",
+      "description": "ETPCz: treść orzeczenia spod stałego linku etpcz.ms.gov.pl z kontrolą numeru skargi"
+    },
+    {
+      "name": "kio_szukaj",
+      "description": "KIO: wyszukiwanie orzeczeń Krajowej Izby Odwoławczej (wyszukiwarka UZP) po frazie, sygnaturze i dacie"
+    },
+    {
+      "name": "kio_sprawdz_sygnature",
+      "description": "KIO: czy orzeczenie o tej sygnaturze jest w wyszukiwarce UZP"
+    },
+    {
+      "name": "kio_kontrola_sadowa",
+      "description": "KIO: wyroki sądu zamówień publicznych na skargę na orzeczenie KIO (sygnatura sądu, sposób rozstrzygnięcia)"
+    },
+    {
+      "name": "kio_pobierz",
+      "description": "KIO: metryka i treść orzeczenia"
+    },
+    {
+      "name": "ceidg_szukaj_firmy",
+      "description": "CEIDG: firmy jednoosobowe (wymaga klucza)"
+    },
+    {
+      "name": "krs_reprezentacja",
+      "description": "KRS: zarząd, sposób reprezentacji, prokura, stan rejestru"
+    },
+    {
+      "name": "krs_szukaj",
+      "description": "KRS: numer KRS i odpis po NIP albo REGON (przez wykaz podatników VAT)"
+    },
+    {
+      "name": "isap_tekst",
+      "description": "ISAP: obowiązujące brzmienie artykułu z aktualnego tekstu jednolitego"
+    },
+    {
+      "name": "eurlex_tsue",
+      "description": "TSUE: orzeczenie po sygnaturze (C-131/12), ECLI, CELEX lub frazie"
+    },
+    {
+      "name": "saos_cytator",
+      "description": "SAOS: późniejsze cytowania i sygnały odstąpienia (pełne treści, kierunek, to samo zdanie)"
+    },
+    {
+      "name": "uodo_sprawdz_sygnature",
+      "description": "UODO: istnienie decyzji Prezesa UODO i jej aktualna prawomocność"
+    },
+    {
+      "name": "uodo_szukaj",
+      "description": "UODO: wyszukiwanie decyzji z filtrem prawomocności i dat"
+    },
+    {
+      "name": "uodo_pobierz",
+      "description": "UODO: pełna treść decyzji"
+    },
+    {
+      "name": "wl_sprawdz_nip",
+      "description": "Biała lista VAT: status podatnika, rachunki, requestId"
+    },
+    {
+      "name": "wl_sprawdz_rachunek",
+      "description": "Biała lista VAT: czy rachunek jest przypisany do NIP (z requestId)"
+    }
+  ],
+  "user_config": {
+    "ceidg_klucz": {
+      "type": "string",
+      "title": "Klucz API CEIDG (opcjonalny)",
+      "description": "Token (JWT) z Hurtowni danych CEIDG: https://dane.biznes.gov.pl/pl/portal/034872 — wniosek o dostęp, logowanie Profilem Zaufanym. Bez tokenu narzędzie CEIDG jest wyłączone. Token zawiera Twoje dane osobowe (PESEL) — nie publikuj go.",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "sn_cookie": {
+      "type": "string",
+      "title": "Sesja sn.pl (opcjonalna)",
+      "description": "Gdy sn.pl blokuje zapytania (captcha): otwórz https://www.sn.pl/pl/wyszukiwarka-orzeczen w przeglądarce, przejdź weryfikację i wklej nagłówek Cookie tej strony (narzędzia deweloperskie → Sieć). W aplikacji Lex Machina weryfikacja jest wbudowana (przycisk „Zweryfikuj w sn.pl”).",
+      "sensitive": true,
+      "required": false,
+      "default": ""
+    },
+    "certyfikat_ca": {
+      "type": "file",
+      "title": "Certyfikat CA proxy (opcjonalny)",
+      "description": "Tylko w sieci firmowej z proxy przechwytującym HTTPS: plik .pem/.crt z certyfikatem głównym proxy.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

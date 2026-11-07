@@ -1,6 +1,6 @@
 ---
 name: przewodnik-prawny-v2
-version: "2.11"
+version: "2.12"
 type: ux-guide
 status: production
 description: "Przewodnik prawny i fallback routera: pomaga zidentyfikować problem, właściwą ścieżkę postępowania, potrzebne dokumenty i kolejny specjalistyczny skill."
@@ -10,7 +10,7 @@ dependencies:
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
 changelog: |
-  Wersja bieżąca: 2.11 (2026-10-10b, AUDYT-2026-10-10b): Katalog wyjściowy hosta zamiast stałej ścieżki /mnt/user-data.
+  Wersja bieżąca: 2.12 (2026-10-10b, AUDYT-2026-10-10b): Katalog wyjściowy hosta zamiast stałej ścieżki /mnt/user-data.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -103,9 +103,9 @@ Format: **[Termin]** — czyli [wyjaśnienie po ludzku] + przykład z życia.
 terminu jako pojęcia, Zasada 0 dotyczy każdej kolejnej wiadomości.)
 
 **Zasada 3 — Weryfikacja zawsze online + HARDGATE**
-Każdy przepis, artykuł, termin → odczyt z ELI (RZĄD 1, kanon E-1…E-5 `shared/HIERARCHIA-ZRODEL.md`) przed podaniem.
+Każdy przepis, artykuł, termin → odczyt z ELI (RZĄD 1, kanon E-1…E-5 `JUR:hierarchia-zrodel`) przed podaniem.
 ⛔ PRZED pierwszym przytoczeniem przepisu lub sygnatury w sesji:
-`view shared/PRAWO-HARDGATE.md`
+`view JUR:weryfikacja-przepisow-kanon`
 Brak dostępu do ISAP to stan normalny. Aktu nie da się pobrać z RZĘDU 1 (ELI ani ISAP — awaria, timeout, blokada) → E-3 LEX/Legalis → E-4 ArsLege; gdy i te zawiodą → ⚠ NIEWERYFIKOWANE i wskaż czytelnikowi eli.gov.pl / isap.sejm.gov.pl.
 Zakaz podawania sygnatur orzeczeń z pamięci — zawsze oznacz [PRZYKŁADOWA] lub weryfikuj online.
 
@@ -257,7 +257,7 @@ Implikacja procesowa: [co to oznacza praktycznie dla sprawy]
 
 ```
 ⛔ Jeśli PRAWO-HARDGATE nie był jeszcze wczytany w tej sesji:
-view shared/PRAWO-HARDGATE.md
+view JUR:weryfikacja-przepisow-kanon
 
 OBOWIĄZKOWO przed każdą odpowiedzią zawierającą przepis/termin/kwotę:
 
@@ -579,8 +579,8 @@ view przewodnik-prawny-v2/references/KROK-F.md
 
 ```
 ⛔ PRZED podaniem jakiegokolwiek terminu:
-view shared/PRAWO-HARDGATE.md
-view shared/terminy.md
+view JUR:weryfikacja-przepisow-kanon
+view JUR:terminy-procesowe
 
 ⚠ ZANIM cokolwiek — gdy pismo ma datę lub użytkownik wspomina decyzję/wyrok:
 
@@ -871,8 +871,8 @@ Nie wczytuj wszystkich naraz. Mapa wywołań:
 ```
 SYTUACJA → PLIK SHARED → GDZIE W SKILL
 
-Przepis / sygnatura orzeczenia → PRAWO-HARDGATE.md → Zasada 3, KROK G, Q.3
-Obliczanie terminu zawitego   → terminy.md          → KROK G (razem z HARDGATE)
+Przepis / sygnatura orzeczenia → JUR:weryfikacja-przepisow-kanon → Zasada 3, KROK G, Q.3
+Obliczanie terminu zawitego   → JUR:terminy-procesowe          → KROK G (razem z HARDGATE)
 Zbieranie danych do pisma     → INTAKE-GAP.md        → KROK D.2
 Weryfikacja faktów pisma      → FAKTY_v2.md          → KROK D.3
 Po wygenerowaniu pisma        → HYBRID-VALIDATION.md → KROK D.4 (przed present_files)
@@ -880,8 +880,8 @@ Raport sytuacyjny             → raport-sytuacyjny-integracja.md → KROK D.4, 
 Analiza strategiczna (prawnik)→ STRATEGIA-PROCESOWA.md → KROK I (tryb PRAWNIK)
 Ocena ryzyk procesowych       → RISK-ASSESSMENT.md   → KROK I (tryb PRAWNIK)
 Metodologia dowodowa          → DOWODY-METODOLOGIA.md → KROK A (analizator dowodów)
-Prekluzja dowodowa            → PREKLUZJA-DOWODOWA.md → KROK A (ostrzeżenie laika)
-Tryby procesowe               → TRYBY-PROCESOWE.md   → KROK B (wyrok/decyzja)
+Prekluzja dowodowa            → JUR:prekluzja-dowodowa → KROK A (ostrzeżenie laika)
+Tryby procesowe               → JUR:tryby-procesowe   → KROK B (wyrok/decyzja)
 Kontrola jakości              → QUALITY-CHECK.md     → SELF-CHECK (opcjonalnie)
 ```
 

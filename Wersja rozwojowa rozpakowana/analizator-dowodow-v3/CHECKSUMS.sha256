@@ -1,15 +1,14 @@
-0b91d088e76f7e805695927cdf4186cbf33303bbb63cb904e843c9075830acaf  ./SKILL.md
+4de0e8e38b5a6c892108e320860b245eecd4678c9ef34a81442e5af336d66883  ./SKILL.md
 6a7c4cb707d9cdce519062eae055b60604f709df30e8dc702c09e6504b8b4179  ./agents/openai.yaml
 c83468edbc76f9aaa5a4e6bc40d7c8de3efff006935b44f4f1cf810a48cd0fb0  ./assets/dashboard.html
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 019685c04dcdc57773acf19d33430324b6d2a4565dca479c03b8588e14d2797c  ./assets/widget-kreator.html
 fa231d1842d6ff0384ebbae3a49c8854e2d8e9c4123870794385c7c236e67376  ./checklists/kontrola-jakosci.md
 b560693d212b146707d6cdf86cd878f2af166056d60244c861693887184c2a18  ./checklists/sprawa-pracownicza.md
-6bff5876b32dc790c5a90d7b9775e0e64da694ed399793aefd3f566aedd5c455  ./modules/MD-NARR-raport-narracyjny.md
+9fb86e0e594c71c646d754ef8a5d5e9c3c63df7f3c09c4630ab0003838e97e38  ./modules/MD-NARR-raport-narracyjny.md
 c6b43d28accf8a3da82826fb1a1af72eece282b41fe5bbd556a7319253979f29  ./modules/MD1-klasyfikacja.md
 09b6560f1a359d973966936282093522e6a6a4e0de36570a9b2bdc28752e12a7  ./modules/MD2-scoring.md
 b7c8761361a4863868e6b76d2e674a892c23de56bb4272f4f5fc0bddf10f3bc4  ./modules/MD3a-walidacja-formalna.md
-acdfd2bcbbd2d2e5d58b1768117d4c6db4d4616d466b5b3ff7beb6a1c261f65f  ./modules/MD3b-walidacja-prawna.md
 a95f418e01860afad1b2891993d442464839f3116a3a3a226bedcaf0df32eb74  ./modules/MD3c-spojnosc.md
 fe9288ffeeb1fc65d40330ee24237b13646a43888d93cae9a6c4bb262251fae3  ./modules/MD4-pokrycie.md
 58c2b2877427c5f3e5f8ebf4409678d08c8d9685f8917980c9d43af1a2fb332e  ./modules/MD5-terminy.md
@@ -17,9 +16,6 @@ fe9288ffeeb1fc65d40330ee24237b13646a43888d93cae9a6c4bb262251fae3  ./modules/MD4-
 d9efaf567a7e42e643aa142e6016ada048810250b7903be7960dd532c1344665  ./modules/MOD-LAPSUS-AUDYT.md
 779e5303b7f7fb810fd6f42ad5386f37dd38ca733d000c3c72b4c4170e9d51df  ./modules/MP0-intake.md
 a3cf46f2b982c4852ec9fab0e1a2d36925317393ec44ae0c602f761a94bd35c8  ./modules/MP1-ekstrakcja.md
-242329cb8de4abe6d540b521e5530d197ba50e6300c9ecaabfd7432e52a6dab6  ./modules/MP10-koszty.md
-ffffd5a6493012dad6d2c6c77616492d2b121a3ac2ae709f06e86d984c9caba0  ./modules/MP11-rodo-cyber.md
-30d5b9f2504e344d337e25a047f574f11399b06dfacfbf701dd01aaeffc99d3c  ./modules/MP12-terminy.md
 134566eb46889183013d4d2e5710965830defdd750fd61d128794349e992d15a  ./modules/MP13-synteza-faktyczna.md
 f755ae617d989360b9ad31dbe8bf944becacf53b5aecd634f3cac24eda8d6901  ./modules/MP2-katalog.md
 049626dab31f4d9e35a0ffbcbd83bf7db34bd521e8827a002703357a315d5db6  ./modules/MP3-spojnosc.md
@@ -29,8 +25,7 @@ f755ae617d989360b9ad31dbe8bf944becacf53b5aecd634f3cac24eda8d6901  ./modules/MP2-
 21e14e1e265c07e8bbcae3d3496e9d8d0c5c9f79e4430345757be264811cba89  ./modules/MP7-synteza.md
 383dd0c1decf97ddef7e61f55c491f32e93a017162ecb7d11386b78db3353491  ./modules/MP8-dowody.md
 484cbe02a3a93cff656800640874ab2f4611093e3ce71dcc782fd206b71e049a  ./modules/MP9-jakosc.md
-10667796daf3fd6fcf4e3d2acf80e578166f7c4f2a650faa793d04978da11e02  ./modules/MX-dziedziny.md
-329ee704b43b928f8c06e7cba82a27aa196e8d284451d158798b0e01b916ca3d  ./references/CHANGELOG.md
+f8bb4565224569bf9ee57b5ba3b719f4ab3c20d4ec9af5ae0161f337257e1f7f  ./references/CHANGELOG.md
 bd98fe34b6479adcb7e2ca5ad2138a560712546310c658ab4207caff89f81d52  ./references/HISTORIA-ZMIAN-PLIKOW.md
 852dd0672cf8e854fd6beae36ea6aaabd68c5fdb17e67752d59f4252af6d4121  ./references/engines/contradictory-evidence-engine-v10.md
 6f06a9a616eea04860567e0f1ea28fb1825550a1d2514945b51e1483c7073e5c  ./references/engines/evidence-driven-matrix.md

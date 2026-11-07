@@ -3,7 +3,7 @@
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 > ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
 >
-> ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.**
+> ⛔ **HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.**
 >
 > ⚠️ **PRZYPOMNIENIE GLOBALNE RODZINY mod-VAT-*:** termin podstawowy zwrotu
 > różnicy podatku wynosi **40 dni** (art. 87 ust. 2 zd. 1), **NIE 60**.
@@ -145,7 +145,7 @@
   □ ZGODA/określenie niższej kwoty = POSTANOWIENIE → **ZAŻALENIE**
   □ ODMOWA = DECYZJA → **ODWOŁANIE**
   ⛔⛔ To jest dokładnie ten typ rozróżnienia, który jest przedmiotem
-  bramki `shared/ZAZALENIE-ADRESAT-GATE.md` — przy redagowaniu pisma
+  bramki `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` — przy redagowaniu pisma
   URUCHOM tę bramkę i zweryfikuj adresata oraz termin, zamiast
   przyjmować je z tego modułu.
 
@@ -246,7 +246,7 @@
   zbiorcza korekta opustowa (ust. 2)?
 □ RACHUNEK VAT: forma rozstrzygnięcia ustalona (postanowienie vs decyzja)
   i dobrany WŁAŚCIWY środek zaskarżenia? ⛔ URUCHOMIONO
-  shared/ZAZALENIE-ADRESAT-GATE.md?
+  prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md?
 □ RACHUNEK VAT: czy 60-dniowy termin z art. 108b ust. 3 nie został
   pomylony ze zwrotem różnicy podatku (40 dni, art. 87)?
 □ RACHUNEK VAT przy likwidacji: sprawdzono rachunek TECHNICZNY
@@ -277,7 +277,7 @@
 - DR-06/`mod-VAT-ewidencja-deklaracje` (pole TAX FREE w JPK_V7)
 - DR-06/`mod-prawo-bankowe-KNF-BFG` (art. 62b, 62e Prawa bankowego —
   katalog wypłat z rachunku VAT, rachunek techniczny)
-- `shared/ZAZALENIE-ADRESAT-GATE.md` (⛔ OBOWIĄZKOWO przy piśmie
+- `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` (⛔ OBOWIĄZKOWO przy piśmie
   kwestionującym rozstrzygnięcie z art. 108b)
 - `orzeczenia-sadowe-v2` (TSUE ws. wniosku syndyka o środki z rachunku
   VAT — ✅ ZWERYFIKOWANE 2026-08-20, patrz niżej sygn. C-709/22)

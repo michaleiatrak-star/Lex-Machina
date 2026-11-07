@@ -57,7 +57,7 @@ KPK (koszty procesu) ani rozporządzeniami o wydatkach.
 > **Obowiązuje wariant z odnośnika 3.** Odczyt tekstu jednolitego bez przypisów
 > daje brzmienie wygasłe, w którym **nie ma progu „powyżej 15 lat"**.
 > To ta sama klasa usterki co art. 13 ust. 2 KSCU (cap 100 000 zł obok
-> wygasłego 200 000 zł) — patrz `shared/TABELE-OPLAT.md` sekcje 1 i 5.
+> wygasłego 200 000 zł) — patrz `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` sekcje 1 i 5.
 > Reprodukcja: `curl -s api.sejm.gov.pl/eli/acts/DU/2023/123/text.pdf | pdftotext -layout - - | sed -n '/Art. 2. 1./,/Art. 3./p'`.
 
 ✅ [VER] RZĄD 1 2026-09-12 — odczyt treści; wykaz aktów zmieniających akt bazowy
@@ -223,7 +223,7 @@ przy sprawie.
 - wykonanie kary → mod-KKW-kodeks-karny-wykonawczy.md;
 - wykroczenia → mod-KW-KPW-framework-szczegolowy.md;
 - koszty cywilne → DR-12 / mod-KSCU-koszty-sadowe-i-pomoc-prawna.md;
-- ⛔ **tabela kanoniczna kwot i kolejność sięgania po nie → `shared/TABELE-OPLAT.md`**
+- ⛔ **tabela kanoniczna kwot i kolejność sięgania po nie → `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md`**
   (sekcja 5 jest wyciągiem z tego modułu; sekcja 7 prowadzi rejestr tabel
   satelickich). ⛔ Opłata **kancelaryjna 6 zł za stronę** z art. 19 ust. 1 tej
   ustawy bywa mylona z cywilną opłatą kancelaryjną, która wynosi **20 zł za każde

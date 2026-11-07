@@ -2,7 +2,7 @@
 
 > ⛔ Przy ocenie scoringu opartego na przepisach prawa (np. zakazy dowodowe,
 > ciężar dowodu art. 6 KC / art. 232 KPC):
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 ## Skala 0–10
 
@@ -31,7 +31,7 @@ Jeśli zeznania świadka mogą podlegać zakazowi dowodowemu lub ograniczeniu
 (prawo do odmowy, tajemnica zawodowa, zakaz impeachmentu):
 
 ```
-→ HARDGATE → view shared/PRAWO-HARDGATE.md
+→ HARDGATE → view JUR:weryfikacja-przepisow-kanon
 → Zweryfikuj przepis online
 → Zmniejsz scoring o 1–3 punkty jeśli zakaz potwierdzony
 → Odnotuj w uzasadnieniu: "Ryzyko: [przepis] ✅ [VER: ELI DU/RRRR/NNN, data]"

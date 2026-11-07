@@ -77,8 +77,8 @@ view prawny-router-v3/references/cyberprzestepstwa.md          → dr-03 (art. 2
 view prawny-router-v3/references/kwalifikator-karnomaterialny.md → dr-03 kwalifikator
 view prawny-router-v3/references/mobbing-dyskryminacja.md       → dr-04 mobbing/dyskryminacja
 view prawny-router-v3/references/przemoc-domowa.md              → dr-03 (art. 207 KK)
-view prawny-router-v3/references/przesluchanie-swiadkow.md      → shared/PRZESLUCHANIE-SWIADKOW-KPC.md
-view prawny-router-v3/references/stalking-nekanie.md            → dr-03 (art. 190a KK) + shared/STALKING-NEKANIE.md
+view prawny-router-v3/references/przesluchanie-swiadkow.md      → prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md
+view prawny-router-v3/references/stalking-nekanie.md            → dr-03 (art. 190a KK) + prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md
 view prawny-router-v3/references/tryby-scigania.md              → dr-03 tryby ścigania
 view prawny-router-v3/references/wykroczenia.md                 → dr-03 KW/KPW
 ```

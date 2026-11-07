@@ -2,7 +2,7 @@
 ## DR-04 · Prawo Pracy · Mobbing, dyskryminacja, molestowanie — kwalifikacja i strategia
 
 > Wydzielony 2026-06-12 z mod-KP-prawo-pracy.md (ANEKS A).
-> Definicja mobbingu i linia orzecznicza SN: → shared/definicje/DEF-PRACA.md
+> Definicja mobbingu i linia orzecznicza SN: → prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md
 > (eliminacja duplikacji — ten moduł skupia się na KWALIFIKACJI RÓŻNICUJĄCEJ
 > (mobbing/dyskryminacja/molestowanie) i STRATEGII PROCESOWEJ.
 
@@ -43,7 +43,7 @@ Karola Nawrockiego **30.07.2026** (DZIŚ na dzień tej weryfikacji) —
 wchodzi w życie za 3 miesiące od ogłoszenia. PEŁNA analiza zmian
 (nowa definicja, kwota 6× minimalne wynagrodzenie ≈28 836 zł, próg 9
 pracowników, prawo regresu, nowy art. 477⁶ᵃ KPC) →
-`shared/definicje/DEF-PRACA.md`, sekcja MOBBING — TAM jest KANONICZNA
+`prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md`, sekcja MOBBING — TAM jest KANONICZNA
 treść, NIE duplikuj tutaj. ✅ **TODO ZAMKNIĘTE 2026-09-10.** Wiersze „Powtarzalność" i „Min. odszkodowanie"
 niosą już oba stany z jawną cezurą czasową. Zdanie „tabela OPISUJE STAN SPRZED
 reformy" było nieaktualne wobec własnej treści tabeli — moduł przeczył sam sobie,
@@ -54,7 +54,7 @@ ta sama klasa co rozjazd nagłówek/treść z AUDYT-2026-09-10h.
 | Cecha | Mobbing (art. 94³ KP) | Dyskryminacja (art. 18³a KP) | Molestowanie seksualne (art. 18³a §6 KP) |
 |---|---|---|---|
 | Cecha chroniona | NIE | TAK (płeć, wiek, religia, niepełnosprawność itd.) | TAK |
-| Powtarzalność | ⚠️ **OD 5.11.2026**: "nawracający, powtarzający się lub stały" charakter, BEZ WZGLĘDU na skutki/motywacje (dawniej: uporczywe + długotrwałe, OBA łącznie) — patrz DEF-PRACA.md | NIE — jednorazowe wystarczy | NIE |
+| Powtarzalność | ⚠️ **OD 5.11.2026**: "nawracający, powtarzający się lub stały" charakter, BEZ WZGLĘDU na skutki/motywacje (dawniej: uporczywe + długotrwałe, OBA łącznie) — patrz prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md | NIE — jednorazowe wystarczy | NIE |
 | Ciężar dowodu | **Pracownik — przez cały proces** | Pracownik uprawdopodabnia → ciężar PRZESUWA SIĘ na pracodawcę | Pracodawca NIE może uzasadnić obiektywnie |
 | Min. odszkodowanie | ⚠️ **OD 5.11.2026**: **6× minimalne wynagrodzenie** — ⛔ kwota złotowa zależy od minimalnego wynagrodzenia w dacie orzekania, sprawdzić w rozporządzeniu RM; do 4.11.2026: **brak minimum** | min. wynagrodzenie za pracę | min. wynagrodzenie za pracę |
 
@@ -63,7 +63,7 @@ ta sama klasa co rozjazd nagłówek/treść z AUDYT-2026-09-10h.
 ⚠️ TREŚĆ PRZENIESIONA 2026-06-12 — definicja ustawowa, 5 przesłanek i pełna
 linia orzecznicza SN (przesłanki sporne: długotrwałość, uporczywość, wzorzec
 "ofiary rozsądnej", zamiar sprawcy) są w jednym miejscu:
-→ `view shared/definicje/DEF-PRACA.md` (sekcja MOBBING)
+→ `view prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` (sekcja MOBBING)
 
 ### Roszczenia
 
@@ -110,12 +110,12 @@ PLANOWANE ZMIANY (zestaw scalony):
   → Obowiązek regulaminu antymobbingowego: pracodawca ≥10 osób
     (⚠️ POPRAWIONE 2026-08-08: próg PODNIESIONO z 9 na 10 między
     projektem a ostateczną, podpisaną ustawą z 19.06.2026 — art.
-    94³a KP — szczegóły: shared/definicje/DEF-PRACA.md)
+    94³a KP — szczegóły: prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md)
   → PRAWO REGRESU pracodawcy wobec mobbera (pracodawca, który wypłacił
     zadośćuczynienie, może żądać zwrotu od pracownika-mobbera)
   → Planowane odejście od wymogu intencjonalności sprawcy
 
-Pełna treść alertu: → view shared/definicje/DEF-PRACA.md (sekcja MOBBING)
+Pełna treść alertu: → view prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md (sekcja MOBBING)
 web_search: "UD183 nowelizacja kodeks pracy mobbing Sejm 2026 status pierwsze czytanie"
 ```
 
@@ -133,7 +133,7 @@ Termin biegnie od dnia wymagalności roszczenia
 ---
 
 ## ŁĄCZ Z
-- `shared/definicje/DEF-PRACA.md` — definicja mobbingu, 5 przesłanek, linia SN,
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` — definicja mobbingu, 5 przesłanek, linia SN,
   pełny alert nowelizacji UD183
 - `mod-KP-prawo-pracy.md` — gdy mobbing jest PRZYCZYNĄ rozwiązania umowy
   przez pracownika (art. 55 §1¹ KP — rozwiązanie z winy pracodawcy)

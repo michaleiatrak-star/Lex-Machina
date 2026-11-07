@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.55"
+version: "3.56"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -60,11 +60,11 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 - **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
-- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-PRACA.md` — pracownik/pracodawca (A.4), mobbing (definicja
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` — pracownik/pracodawca (A.4), mobbing (definicja
   ustawowa + linia SN + alert nowelizacji 2026), dyskryminacja, forma umowy,
   nieobecności, urlopy, wypadek przy pracy, zasiłki ZUS, niealimentacja
   — PLIK GŁÓWNY dla tej dziedziny (313 linii, scalony z BAS-W20)
@@ -96,8 +96,8 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   AI + interwencji ludzkiej (art. 22 RODO)
 - BAS-W28 Nadużycie prawa w stosunkach pracy (art. 8 KP)
 - BAS-004/102/124/131-134 Niepełnosprawność — świadczenia, PFRON, świadczenie
-  wspierające (→ mod-niepelnosprawnosc-intelektualna-gluchota.md,
-  mod-niewidomy-prawa-prawne.md, mod-prawa-obywatelskie-srodki-karne.md)
+  wspierające (→ prawo-polskie-v2/krajowe/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md,
+  prawo-polskie-v2/krajowe/shared/mod-niewidomy-prawa-prawne.md, prawo-polskie-v2/krajowe/shared/mod-prawa-obywatelskie-srodki-karne.md)
 
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (44 łącznie — ✓ 44 OK, ☐ 0 STUB; 1 przeniesiony do DR-05)
@@ -194,7 +194,7 @@ AUDIT-JOURNAL.md`.
                do sygnalistów [DR-15] i BHP [luka odnotowana])
               (wydzielony z ANEKS A: kwalifikacja mobbing/dyskryminacja/
                molestowanie, tabela roszczeń, strategia dowodowa; definicja
-               i linia SN → shared/definicje/DEF-PRACA.md; projekt UD183/
+               i linia SN → prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md; projekt UD183/
                RM 17.02.2026 SCALONY z dwóch wcześniej rozbieżnych wpisów)
   [✓] NOWY  mod-wypadek-przy-pracy-choroba-zawodowa
               (2026-07-21: dodano obowiązek zawiadomienia PIP i
@@ -204,7 +204,7 @@ AUDIT-JOURNAL.md`.
                Odpowiedź na pytanie użytkownika o zgłoszenia do PIP)
               (wydzielony z ANEKS B: intake wypadkowy, świadczenia ZUS,
                terminy, ścieżka sporna; definicja 4-elementowa →
-               shared/definicje/DEF-PRACA.md H.1.4)
+               prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md H.1.4)
   [✓] NOWY  mod-KP-praca-zdalna
               (wydzielony z ANEKS C: obowiązki BHP, praca zdalna okazjonalna;
                wykładnia MRiPS → BAS-W03)

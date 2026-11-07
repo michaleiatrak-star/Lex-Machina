@@ -1,6 +1,6 @@
 # PORTALE — część 4: ogólne międzydziedzinowe, rekomendacje, metodologia
 
-> Część pliku `PORTALE-BRANZOWE-RZAD-2B.md` (podział 2026-08-20, naprawa
+> Część pliku `JUR:portale-branzowe` (podział 2026-08-20, naprawa
 > F-78 — plik źródłowy przekroczył 1000 linii). Pełny indeks i zasady
 > użycia: zobacz plik nadrzędny w katalogu `shared/`. To NIE jest
 > samodzielny skill — ładowany WYŁĄCZNIE przez indeks nadrzędny na
@@ -191,7 +191,7 @@ KROK 3: Wykonaj web_search z frazą "site:domena.pl [konkretne zapytanie]".
 KROK 4: Jeśli wynik jest SŁABY/niepowiązany (jak przy ⚠️ hrnaszpilkach.pl)
         — PRÓBUJ innego portalu z tej samej dziedziny, LUB przejdź na
         portal GENERALISTYCZNY (prawo.pl/infor.pl) z zawężoną frazą.
-KROK 5: ZAWSZE kategoryzuj wynik wg `shared/HIERARCHIA-ZRODEL.md`
+KROK 5: ZAWSZE kategoryzuj wynik wg `JUR:hierarchia-zrodel`
         (Rząd 2B, znacznik 📚) — ten rejestr NIE ZASTĘPUJE tamtej
         kategoryzacji wiarygodności, tylko ją UZUPEŁNIA o wymiar
         tematyczny.

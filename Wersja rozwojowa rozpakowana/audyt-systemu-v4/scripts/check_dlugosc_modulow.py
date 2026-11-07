@@ -64,7 +64,7 @@ def zbierz(katalog):
     # ⛔ Kategoria dodana 2026-09-12p: ZASOBY KANONICZNE `shared/` (pliki .md
     #    leżące bezpośrednio w katalogu skilla `shared`, poza SKILL.md).
     #    Do tej pory T13 mierzył WYŁĄCZNIE `modules/mod-*.md`, więc
-    #    `shared/TABELE-OPLAT.md` urósł do 1471 linii — o 47 % ponad próg CRIT —
+    #    `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` urósł do 1471 linii — o 47 % ponad próg CRIT —
     #    całkowicie poza zasięgiem testu. Nie jest to jednak naruszenie ZASADY 13
     #    w tym samym sensie: te pliki są CELOWO scentralizowane, a podział
     #    odtworzyłby dokładnie rozproszenie, które sekcja 7 TABELE-OPLAT nazywa
@@ -94,7 +94,7 @@ def zbierz(katalog):
                 # ⛔ ZAKRES POPRAWIONY 2026-09-12r. Wersja z 12p sprawdzała
                 #    `basename(root) == 'shared'`, więc obejmowała wyłącznie
                 #    pliki leżące BEZPOŚREDNIO w katalogu skilla. Podział
-                #    TABELE-OPLAT (12q) utworzył `shared/oplaty/` z siedmioma
+                #    TABELE-OPLAT (12q) utworzył `prawo-polskie-v2/krajowe/shared/oplaty/` z siedmioma
                 #    satelitami — i te NATYCHMIAST wypadły poza zakres testu,
                 #    dokładnie tak jak wcześniej wypadł z niego sam
                 #    TABELE-OPLAT. Ta sama plamka, drugi raz, w odstępie
@@ -107,7 +107,7 @@ PRZYPADKI_SELFTEST = [
     ('plik bezpośrednio w shared/ jest widziany',
      'shared/X.md', 'kanoniczne'),
     ('satelita w podkatalogu shared/ też jest widziany',
-     'shared/oplaty/01-a.md', 'kanoniczne'),
+     'prawo-polskie-v2/krajowe/shared/oplaty/01-a.md', 'kanoniczne'),
     ('moduł dziedzinowy trafia do kategorii modułów',
      'dr-99-x/modules/mod-y.md', 'moduly'),
     ('moduł bez prefiksu mod- (MD1-) też jest modułem',

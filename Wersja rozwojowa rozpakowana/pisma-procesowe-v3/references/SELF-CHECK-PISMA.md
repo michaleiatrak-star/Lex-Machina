@@ -86,7 +86,7 @@
      □ Czy wszystkie ⬛ mają już ✅ po web_search/web_fetch?             TAK/NIE
      □ Zero ⬛ w nagłówku i treści pisma przed generowaniem?             TAK/NIE
      NIE do któregokolwiek → STOP. Nie przechodzę dalej.
-   Szczegóły + STATUS-LIFECYCLE: view shared/PRE-W2-VERIFICATION-GATE.md (PRE-W2.0)
+   Szczegóły + STATUS-LIFECYCLE: view JUR:pre-w2-verification-gate (PRE-W2.0)
 □ ⛔ MOD-SKAN-DOWODOW-KOMPLETNY (W1.2c-PRE) — wykonaj jako PIERWSZY:
    SD-GATE-0: czy wzmianka o załącznikach + faktyczny brak pliku? → SD-GATE-0-INFO + REJESTR BRAK-DOK (CP-GATE §3B; bez STOP)
    SD-INW: WSZYSTKIE pliki zinwentaryzowane (ZIP = zawartość)?
@@ -116,7 +116,7 @@
               NIE → ⛔ STOP. Wyświetl raport zanim W2.1 się rozpocznie.
    Wszystkie ✅ → GATE-OK → przejdź do W2.1.
    Którykolwiek NIE → ⛔ BLOKADA. Wykonaj brakujące wywołanie. Nie generuj pisma.
-   Szczegóły procedury: view shared/PRE-W2-VERIFICATION-GATE.md
+   Szczegóły procedury: view JUR:pre-w2-verification-gate
 □ ⛔ MOD-MACIERZ-DOWOD-TEZA (W1.2c): czy macierz D×T zatwierdzona przez użytkownika?
    Gdy ≥2 dowody dostarczone:
    □ MT1: lista tez T1..Tn i dowodów D1..Dm sporządzona?

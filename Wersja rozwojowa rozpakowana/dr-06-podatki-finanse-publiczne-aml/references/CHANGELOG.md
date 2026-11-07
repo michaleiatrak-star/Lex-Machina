@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.11 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.99.10 (2026-11-04, AUDYT-2026-11-04): MAPA-AKTOW: KAS — zm. Dz.U. 2026 poz. 1281 art. 9 (art. 118, 122 ust. 4, 123 — kontrola operacyjna), w mocy 31.10.2026. 2026/1287 (w mocy 1.11.2026) i 2026/1354 art. 3 (PCC, w mocy 3.11.2026) — wpisy już z datami, bez zmian treści.
 - 3.99.9 (2026-10-31, AUDYT-2026-10-31): Opłata skarbowa — nowy t.j. Dz.U. 2026 poz. 1395 (ELI RZĄD 1; obejmuje 2025/1795, 1847, 2026/846, 875, 912, 1206): mod-ustawa-oplata-skarbowa (art. 9 ust. 2a–2c — zwrot bez decyzji w 2 mies. od 1.10.2026 z przepisem przejściowym; ⏳ art. 1 ust. 3 od 1.01.2027), MAPA-AKTOW, SKILL.md.
 - 3.99.8 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: PIT - odpłatne zbycie mieszkania/nieruchomości (wcześniej dobierało VAT/akcyzę)

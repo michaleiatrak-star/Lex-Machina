@@ -2,7 +2,7 @@
 
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 >
-> ⛔ **HARD GATE — `shared/PRAWO-HARDGATE.md`.** Opłaty, terminy i zakres
+> ⛔ **HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.** Opłaty, terminy i zakres
 > ochrony były wielokrotnie nowelizowane (m.in. SLIM VAT 3) — zweryfikuj
 > w ISAP i na `podatki.gov.pl` przed doradzaniem klientowi.
 >

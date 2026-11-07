@@ -51,7 +51,7 @@ START: Jaki był charakter działania sprawcy?
 │       ✅ [VER: lexlege.pl/kk/art-190a + arslege.pl/stalking +
 │          standardyprawa.pl/akt/1/art/307, odczyt 2026-08-25]
 │       OBRONA: brak powtarzalności / brak skutku / uzasadniony cel
-│       Plik referencyjny: shared/STALKING-NEKANIE.md
+│       Plik referencyjny: prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md
 │
 ├─ ZMUSZANIE do działania / zaniechania / znoszenia
 │   └─ → ART. 191 §1 KK — ZMUSZANIE
@@ -199,7 +199,7 @@ Przesłuchanie małoletniego pokrzywdzonego/świadka: tryb szczególny (nagranie
   udział psychologa, jednorazowość przesłuchania) — patrz shared/PRZESLUCHANIE-
   SWIADKOW-KPC.md i moduły dot. ochrony małoletnich w postępowaniu.
 Osoba niepełnosprawna intelektualnie jako ofiara: patrz
-  shared/mod-niepelnosprawnosc-intelektualna-gluchota.md — ocena zdolności
+  prawo-polskie-v2/krajowe/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md — ocena zdolności
   do złożenia zeznań, wiarygodności, potrzeby biegłego.
 ```
 

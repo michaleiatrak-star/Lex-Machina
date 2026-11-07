@@ -1,13 +1,13 @@
 # MCP-INTEGRACJA.md
-## Deterministyczna warstwa weryfikacji — uzupełnienie PRAWO-HARDGATE.md (nie zamiennik)
+## Deterministyczna warstwa weryfikacji — uzupełnienie JUR:weryfikacja-przepisow-kanon (nie zamiennik)
 
 status: production-ready (wymaga podłączenia connectorów przez developera)
 wprowadzono: 2026-07-13 (jako osobny skill `mcp-zrodla-prawa-v1`)
 skonsolidowano do `shared/`: 2026-07-13f (patrz AUDIT-JOURNAL, powód: uniknięcie
 duplikowania wzorca "protokół + narzędzia" już reprezentowanego przez
-PRAWO-HARDGATE.md i shared/tools/ — ten protokół nie jest samodzielnym skillem
+JUR:weryfikacja-przepisow-kanon i shared/tools/ — ten protokół nie jest samodzielnym skillem
 wywoływanym intencją użytkownika, tylko modułem ładowanym przez router, dokładnie
-jak PRAWO-HARDGATE.md)
+jak JUR:weryfikacja-przepisow-kanon)
 wywoływane przez: prawny-router-v3 (required_modules), potencjalnie każdy DR-skill
 narzędzia: shared/tools/test_mcp_protocol.py, shared/tools/connector_health_check.py
 
@@ -15,7 +15,7 @@ narzędzia: shared/tools/test_mcp_protocol.py, shared/tools/connector_health_che
 
 ## ⛔ ZASADA NADRZĘDNA — MCP UZUPEŁNIA, NIE ZASTĘPUJE HARD GATE
 
-> HARD GATE (`shared/PRAWO-HARDGATE.md`) pozostaje aktywny bez wyjątku, niezależnie od
+> HARD GATE (`JUR:weryfikacja-przepisow-kanon`) pozostaje aktywny bez wyjątku, niezależnie od
 > tego, czy serwer MCP jest podłączony. Ten moduł dodaje **dodatkową, twardszą warstwę**
 > przed HARD GATE — nie zwalnia z niej. Jeśli developer kiedykolwiek rozważy usunięcie
 > HARD GATE "bo MCP już weryfikuje" — to błąd architektoniczny: MCP-connectory mogą być
@@ -52,7 +52,7 @@ narzędzi „nazwanych wg wzorca z `KONEKTORY-REKOMENDOWANE.md` (np. `isap_looku
   konwencji, której ten plik nigdy nie zawierał (jego tabela operuje kategoriami
   funkcjonalnymi, nie nazwami narzędzi);
 - (b) nazwa `isap_lookup` **istnieje** — to `registerTool("isap_lookup", …)`
-  w `audyt-systemu-v4/mcp-servers/` (`isap-eli-example`). ⚠️ Korekta wobec wydania 3.87,
+  w `prawo-polskie-v2/mcp-servers/` (`isap-eli-example`). ⚠️ Korekta wobec wydania 3.87,
   które twierdziło, że „narzędzia MCP nie nazywają się w ten sposób" — twierdzenie
   było za szerokie i niezmierzone wobec własnych serwerów tego repozytorium;
 - (c) **czego brakowało i co jest faktyczną przyczyną awarii wykrywania:** w hoście
@@ -74,19 +74,19 @@ Przykłady zmierzone w środowisku: mcp__memory__memory_list,
    (co narzędzie robi wg swojego opisu), nie po nazwie własnej.
 ```
 
-**⭐ Narzędzia Lex Machina (`audyt-systemu-v4/mcp-servers/`, od shared 3.94) — dopasowanie po
+**⭐ Narzędzia Lex Machina (`prawo-polskie-v2/mcp-servers/`, od shared 3.94) — dopasowanie po
 SUFIKSIE nazwy.** Prefiks zależy od hosta — zmierzone/udokumentowane:
-Claude Code + plugin: `mcp__plugin_audyt-systemu-v4_lex-<serwer>__<narzędzie>` (dokumentacja
+Claude Code + plugin: `mcp__plugin_prawo-polskie-v2_lex-<serwer>__<narzędzie>` (dokumentacja
 plugins-reference); instalator (`--scal-desktop`, `claude mcp add`): `mcp__lex-<serwer>__<narzędzie>`;
 rozszerzenie Claude Desktop (`lex-machina.mcpb`, jeden serwer `lex-machina`): prefiks hosta + nazwa
 narzędzia. **Rozpoznawaj narzędzie, gdy nazwa KOŃCZY SIĘ nazwą z tabeli** (po `__` albo w całości).
 
 | Narzędzie (sufiks) | Zdolność | Krok HARDGATE | Status → decyzja |
 |---|---|---|---|
-| `isap_lookup` (`eli`: DU/RRRR/PPP) | akt Dz.U./M.P. po ELI; status; **aktualny t.j.** | ŹRÓDŁO-0 (`PRAWO-HARDGATE.md`) | FOUND+`obowiazuje` → MCP-VERIFIED metryki; `tekst_jednolity_nieaktualny` → powołuj `result.aktualny_tekst_jednolity` |
+| `isap_lookup` (`eli`: DU/RRRR/PPP) | akt Dz.U./M.P. po ELI; status; **aktualny t.j.** | ŹRÓDŁO-0 (`JUR:weryfikacja-przepisow-kanon`) | FOUND+`obowiazuje` → MCP-VERIFIED metryki; `tekst_jednolity_nieaktualny` → powołuj `result.aktualny_tekst_jednolity` |
 | `isap_tekst` (`eli`, `artykul` / `szukaj`, opcjonalnie `na_dzien` RRRR-MM-DD) | **obowiązujące brzmienie** artykułu z PDF aktualnego t.j. (automatyczne przejście z pozycji pierwotnej), na dziś albo na `na_dzien`; pkt 2 obwieszczenia („t.j. nie obejmuje”); akty zmieniające ogłoszone po t.j. | ŹRÓDŁO-0 — TREŚĆ przepisu | `wersja_tekstu` = `tekst_jednolity` + brak `zmiany_po_tj` + `confidence: deterministic` → brzmienie do cytowania dosłownie; `tekst_ogloszony` → brzmienie z dnia ogłoszenia, nie stan obecny; `brzmienia_przyszle` → podaj datę i treść zmiany, `tresc` to brzmienie na dzień; `confidence: partial` (`nierozstrzygniete`, `strony_bez_tekstu`) → ⛔ nie podawaj jednego brzmienia: pokaż wszystkie z odnośnikami albo sprawdź PDF; OUT_OF_SCOPE + `jeszcze_nie_obowiazuje` → jednostka nie obowiązuje (data w `wchodzi_w_zycie`); OUT_OF_SCOPE przy `na_dzien` sprzed stanu prawnego t.j. → wywołaj z ELI t.j. obowiązującego w tym dniu; numer z literą w indeksie (`131^1a`, `131¹ᵃ`) to INNA jednostka niż `131` — brak trafienia nie upoważnia do podania art. 131; indeksy górne jako `Art. N[k]` |
 | `isap_lookup` (`query`: tytuł) | identyfikacja aktu po tytule | ŹRÓDŁO-1 (zamiast web_search) | AMBIGUOUS → wybierz kandydata po tytule i statusie, potem `eli` |
-| `saos_search` (`sygnatura`) | istnienie sygnatury: SP (bieżąco), SN do 2016, TK do 2015, KIO do 2018 | `PRAWO-HARDGATE-ORZECZENIA.md` KROK 0 (SAOS) | kontrakt SYGNATURY; NSA/WSA oraz SN/TK/KIO spoza zasięgu → OUT_OF_SCOPE (nie „zmyślona”) |
+| `saos_search` (`sygnatura`) | istnienie sygnatury: SP (bieżąco), SN do 2016, TK do 2015, KIO do 2018 | `JUR:weryfikacja-orzeczen-kanon` KROK 0 (SAOS) | kontrakt SYGNATURY; NSA/WSA oraz SN/TK/KIO spoza zasięgu → OUT_OF_SCOPE (nie „zmyślona”) |
 | `saos_cytator` (`sygnatura`) | późniejsze orzeczenia cytujące (fraza w cudzysłowie, pełne treści) + sygnały odstąpienia w TYM SAMYM zdaniu, z kierunkiem (cytowane orzeczenie jako przedmiot vs aktor odstąpienia) | ocena aktualności linii orzeczniczej | KANDYDACI; próba 27t: 6/6 trafień z sygnałem prawdziwych; ⚠️ SN po 2016 i TK po 2015 niewidoczne — brak sygnału nie wyklucza zmiany linii |
 | `cbosa_sprawdz_sygnature` | istnienie sygnatury NSA/WSA (exact-match, fail-closed) | KROK 0A pkt 1 (MCP-FIRST) | FOUND = snapshot 🟨 bez awansu; OUT_OF_SCOPE → KROK 0A pkt 2 |
 | `cbosa_szukaj`, `cbosa_pobierz` | research NSA/WSA, treść orzeczenia | research, nie weryfikacja | KANDYDAT |
@@ -118,7 +118,7 @@ realnie, źródło danych: api.sejm.gov.pl/eli — ten sam publikator, co RZĄD 
 | `get_act` | `eli` (np. `DU/2018/1000`) | metryka aktu po identyfikatorze ELI |
 | `get_act_text` | `eli` | tekst aktu stronami po 5000 znaków |
 
-**Serwer własny repozytorium** (`audyt-systemu-v4/mcp-servers/isap-eli-example/`,
+**Serwer własny repozytorium** (`prawo-polskie-v2/mcp-servers/isap-eli-example/`,
 zmierzony 2026-09-27h): jedno narzędzie `isap_lookup` (arg `query`), zwraca schemat
 FOUND / NOT_FOUND / AMBIGUOUS / ERROR wg `SCHEMAT-ODPOWIEDZI-MCP.md` (wzorzec cienkiej warstwy
 normalizującej dla dewelopera: `shared/tools/przyklad-adapter-normalizujacy.md` — ilustracja, nie serwer). W hoście:
@@ -155,10 +155,10 @@ orzeczenia):
 ## KROK 3 — Fallback do HARD GATE (bez zmian względem obecnego stanu)
 
 Jeśli MCP niedostępne, zwróciło NOT_FOUND/AMBIGUOUS, lub przekroczyło rozsądny czas
-odpowiedzi → standardowa procedura z `shared/PRAWO-HARDGATE.md`.
+odpowiedzi → standardowa procedura z `JUR:weryfikacja-przepisow-kanon`.
 
 **Wyjątek wykonawczy NSA/WSA — zanim użyjesz ogólnego web_search:** jeżeli sprawa
-routuje do CBOSA, uruchom `shared/SYGNATURY.md` V-SYG-0.7 DIRECT-CBOSA
+routuje do CBOSA, uruchom `JUR:sygnatury-repertoria` V-SYG-0.7 DIRECT-CBOSA
 (`POST /cbo/search` → kompletna paginacja → `/doc/{ID}` → exact-match),
 zgodnie z `shared/DOSTEP-MASZYNOWY-API.md`. Implementacja parsera:
 implementacja referencyjna opisana w `shared/CBOSA-ADAPTER.md`. Dopiero jeśli direct CBOSA

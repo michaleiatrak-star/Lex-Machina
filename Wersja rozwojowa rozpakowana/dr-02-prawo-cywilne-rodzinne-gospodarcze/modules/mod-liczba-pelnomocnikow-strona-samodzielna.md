@@ -535,7 +535,7 @@ dostępu do protokołu konkretnej rozprawy).
 
 ## CROSS-REFERENCJE
 - Terminy procesowe (w tym zawite) i konsekwencje uchybienia →
-  `analizator-dowodow-v3/modules/MP12-terminy.md`,
+  `prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP12-terminy.md`,
   `chronologia-sprawy-v1/references/sprzecznosci-dat.md`
 - Pełnomocnictwo z urzędu, zwolnienie od kosztów sądowych → sprawdź
   istniejące moduły dr-02/pisma-procesowe-v3 dot. kosztów sądowych

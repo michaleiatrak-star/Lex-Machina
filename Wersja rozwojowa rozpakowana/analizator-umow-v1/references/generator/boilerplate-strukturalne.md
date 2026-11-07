@@ -120,7 +120,7 @@ stronę lub sąd (routing: `mod-shared-wykladnia.md` przy sporach o zakres).
 > wypadku [Strona] informuje [Stronę] o podstawie i okresie zachowania."*
 
 Routing: jeśli materiały obejmują dane osobowe — dodaj odesłanie do
-`mod-shared-rodo.md` (obowiązek zwrotu/usunięcia po zakończeniu powierzenia).
+`JUR:umowy-shared-rodo` (obowiązek zwrotu/usunięcia po zakończeniu powierzenia).
 
 ## B.6 Cesja wierzytelności — essentialia szybkie (art. 509–518 KC)
 
@@ -163,7 +163,7 @@ Routing: jeśli materiały obejmują dane osobowe — dodaj odesłanie do
 > ⚠️ Milcząca akceptacja raportu jako fikcja prawna działa w B2B; w relacji
 > z konsumentem może być kwestionowana jako klauzula niekorzystnie kształtująca
 > jego prawa (art. 385¹ KC) — nie stosuj bez zmian w umowach B2C, routing:
-> `mod-J8-b2c.md`.
+> `JUR:umowy-j8-b2c`.
 
 **Model abonamentowy / SaaS (płatność z góry):**
 > *„Opłata abonamentowa w wysokości [kwota] PLN netto miesięcznie płatna jest
@@ -173,7 +173,7 @@ Routing: jeśli materiały obejmują dane osobowe — dodaj odesłanie do
 > miesiąca kalendarzowego, opłata [podlega / nie podlega] proporcjonalnemu
 > rozliczeniu (pro rata) — [wybierz i uzasadnij wybór klientowi]."*
 > ⚠️ Brak pro rata jest dopuszczalny w B2B, jeśli wyraźnie zastrzeżony; w B2C
-> zwiększa ryzyko abuzywności — sprawdź `mod-shared-abusive-clauses.md`.
+> zwiększa ryzyko abuzywności — sprawdź `JUR:umowy-shared-abusive-clauses`.
 
 **Waloryzacja (umowy długoterminowe):**
 > *„Wynagrodzenie podlega corocznej waloryzacji o wskaźnik cen towarów i usług

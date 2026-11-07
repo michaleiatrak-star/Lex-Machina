@@ -1,6 +1,6 @@
 # mod-ustawa-doradcy-podatkowi-zawod — Doradca podatkowy jako zawód zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (c) zawody powstałe w wyniku rozwoju gospodarki rynkowej,
 analiza Senatu OT-625).
@@ -139,7 +139,7 @@ Kwalifikacja: postępowanie dyscyplinarne KIDP / spór cywilny (odpowiedzialnoś
   ↓
 Środek: odwołanie dyscyplinarne / skarga do WSA / pozew cywilny
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
 ```
 
 ---
@@ -213,7 +213,7 @@ web_search: "ustawa o doradztwie podatkowym tekst jednolity 2026 isap"
 
 ## ⚖️ DISCLAIMER
 
-**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 4 (KIDP); RZĄD 1 tylko z oficjalnego portalu samorządu.
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view prawo-polskie-v2/krajowe/shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 4 (KIDP); RZĄD 1 tylko z oficjalnego portalu samorządu.
 
 Po zakończeniu analizy: `view shared/DISCLAIMER.md` — wariant wg trybu (PRAWNIK/LAIK).
 

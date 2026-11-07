@@ -161,12 +161,12 @@ Oceń:
 ## 12. Quality gate
 Przed odpowiedzią lub pismem zastosuj:
 
-- `shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
+- `prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
 - `shared/ISAP-AUDIT-PROTOCOL.md`,
 - `shared/TEMPORAL-LAW-CHECK.md`,
 - `shared/LEGAL-QUALITY-GATE.md`,
 - `shared/RISK-ASSESSMENT.md`, jeżeli istnieje,
-- `shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
 
 ---
 

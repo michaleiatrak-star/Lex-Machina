@@ -270,6 +270,6 @@ REKOMENDACJA:
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: art. 65 KC — weryfikuj: ELI (RZĄD 1) → KC → art. 65*
 *Orzecznictwo SN: sn.pl → "kombinowana metoda wykładni" · "in dubio contra proferentem"*

@@ -8,10 +8,10 @@
 > kontrola klauzul umowy powierzenia (checklist a–h). Redakcja/redline samej umowy →
 > `analizator-umow-v1`.
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
-- przed cytowaniem przepisu zastosuj `shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR: CELEX 32016R0679);
+- przed cytowaniem przepisu zastosuj `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR: CELEX 32016R0679);
 - moduł WALIDUJE i wskazuje braki (brak pola = LUKA, nie zgadywanie treści);
 - podpis umowy i zatwierdzenie rejestru = człowiek.
 ---

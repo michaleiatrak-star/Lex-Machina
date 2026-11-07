@@ -24,14 +24,14 @@ Jeżeli użytkownik pyta o prawo polskie, najpierw ustal:
 ## Importy obowiązkowe
 
 ```text
-shared/MODULE-STANDARD-POLISH-LAW.md
-shared/POLISH-LAW-COMPLETENESS-MATRIX.md
-shared/LEGAL-REGISTRY.md
+prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md
+prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md
+prawo-polskie-v2/krajowe/shared/LEGAL-REGISTRY.md
 shared/LEGAL-LIFECYCLE-MANAGEMENT.md
 shared/TEMPORAL-LAW-CHECK.md
 shared/ISAP-AUDIT-PROTOCOL.md
-shared/ISAP-METRYKI-AKTOW.md
-shared/FORMAL-CHECK.md
+prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md
+prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md
 shared/WARUNKI-SKUTECZNOSCI.md
 shared/DOWODY-METODOLOGIA.md
 shared/RISK-ASSESSMENT.md

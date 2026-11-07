@@ -69,7 +69,7 @@ KROK T-4 → DLA KAŻDEJ nowelizacji z listy KROK T-3 (nie tylko dla
 
 KROK T-5 → PRZY BLOKADZIE ŹRÓDŁA (robots.txt, brak dostępu) na KROK T-2:
            ⛔ NIGDY nie pomijaj kroku milcząco — przejdź do statusu
-           🟨 [KOTWICA-URZĘDOWA] (shared/PRAWO-HARDGATE.md, warunki
+           🟨 [KOTWICA-URZĘDOWA] (JUR:weryfikacja-przepisow-kanon, warunki
            K-1…K-4) zamiast twierdzić o aktualności bez sprawdzenia.
 ```
 

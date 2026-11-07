@@ -43,7 +43,7 @@ w OBU wnioskach były IDENTYCZNE.
 
 ```
 □ Wykonaj TEST 8-punktowy z `analizator-umow-v1/references/
-  b2b-podwykonawcze.md` sekcja G.1 (osobiste wykonanie, podporządkowanie,
+  JUR:umowy-b2b-podwykonawcze` sekcja G.1 (osobiste wykonanie, podporządkowanie,
   ryzyko gospodarcze, wyłączność, itd.) — WYNIK testu POWINIEN
   determinować, CZY warto składać wniosek (przy 0-2 cechach ryzyko
   niskie, wniosek MOŻE być zbędny; przy 3+ cechach — ZDECYDOWANIE

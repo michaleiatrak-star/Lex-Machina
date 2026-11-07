@@ -61,7 +61,7 @@ rozstrzyga się w źródle, w momencie użycia:
 |---|---|
 | lista nowelizacji dla konkretnego t.j. | `api.sejm.gov.pl/eli/acts/DU/{rok}/{poz}/references` → sekcja **„Nowelizacje po tekście jednolitym"** |
 | kontrola uzupełniająca (sekcja bywa niepełna) | akty zmieniające aktu bazowego z datą promulgacji późniejszą niż data t.j. — ustalenie F-155 |
-| pełna procedura | `shared/PRAWO-HARDGATE.md` → KROK 2C |
+| pełna procedura | `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` → KROK 2C |
 | bramka, która zatrzyma zamiatanie | `audyt-systemu-v4/scripts/check_wyjatek_gate_eli.py` (F-153) |
 | bieżąca lista takich pozycji w całym repozytorium | `audyt-systemu-v4/scripts/check_nowelizacje_po_tj.py` (T24) |
 
@@ -70,5 +70,5 @@ rozstrzyga się w źródle, w momencie użycia:
 Przed podaniem konkretnego artykułu, terminu, kwoty, kompetencji albo skutku prawnego sprawdź aktualny tekst w ELI/ISAP oraz — gdy sprawa tego wymaga — aktualny akt prawa miejscowego. `MAPA-AKTOW.md` nie przechowuje historii audytu ani przyszłych zmian jako prawa obowiązującego.
 
 ⛔ Akt prawa miejscowego (uchwała rady gminy, MPZP, taryfa) NIE ma numeru Dz.U.
-i nie ma go w tej mapie z założenia. Ścieżka odczytu: `shared/PRAWO-HARDGATE.md`
+i nie ma go w tej mapie z założenia. Ścieżka odczytu: `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`
 → ŚCIEŻKA B-L, publikator `dziennikiurzedowe.gov.pl`.

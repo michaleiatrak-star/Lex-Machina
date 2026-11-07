@@ -18,7 +18,7 @@ Wydanie 2.17 zachowuje dotychczasowe pliki skilla i dodaje trzy własne zasoby C
 `references/CBOSA-ADAPTER.md`, `tools/cbosa_parser.py` oraz
 `tests/test_cbosa_parser.py`. `SKILL.md` został zaktualizowany punktowo:
 bezpośredni CBOSA jest używany po fresh probe, a przy niedostępności obowiązuje
-kanoniczny fallback V-SYG-0.5 z `shared/SYGNATURY.md`.
+kanoniczny fallback V-SYG-0.5 z `JUR:sygnatury-repertoria`.
 
 Parser działa fail-closed i nie zastępuje kanonicznych bramek shared. Status
 `FOUND` z direct CBOSA oznacza odczyt metryki i treści; `FRAGMENT` wymaga

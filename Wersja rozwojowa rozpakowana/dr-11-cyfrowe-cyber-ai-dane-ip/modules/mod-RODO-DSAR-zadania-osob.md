@@ -8,11 +8,11 @@
 > z deterministycznym liczeniem terminu. Komplementarny do mod-RODO-szczegolowy
 > (katalog praw) — tu: procedura i zegar, nie wykład prawa.
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
-- przed cytowaniem przepisu zastosuj `shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR: CELEX 32016R0679);
-- terminy licz wg sekcji "ZEGAR" poniżej + metodologia `shared/TERM-CALC.md`;
+- przed cytowaniem przepisu zastosuj `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (RODO → EUR-Lex/CELLAR: CELEX 32016R0679);
+- terminy licz wg sekcji "ZEGAR" poniżej + metodologia `prawo-polskie-v2/krajowe/shared/TERM-CALC.md`;
 - moduł składa DRAFT odpowiedzi i rejestr — decyzję o realizacji/odmowie, usunięcie/eksport
   danych i wysyłkę wykonuje administrator (akty nieodwracalne = zawsze człowiek).
 ---
@@ -45,7 +45,7 @@ deadline_3m  = data_wpływu + 3 miesiące (przedłużenie: +2 miesiące, art. 12
    nie jest już dostępne.
 
 Do odpowiedzi i rejestru wpisuj obie daty w ISO (YYYY-MM-DD).
-Ostatni dzień wolny od pracy → weryfikuj wg shared/TERM-CALC.md (art. 3 ust. 4
+Ostatni dzień wolny od pracy → weryfikuj wg prawo-polskie-v2/krajowe/shared/TERM-CALC.md (art. 3 ust. 4
 rozp. 1182/71: upływ następnego dnia roboczego).
 ```
 

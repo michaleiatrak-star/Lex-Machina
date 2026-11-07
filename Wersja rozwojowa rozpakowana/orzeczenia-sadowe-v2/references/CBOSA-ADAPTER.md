@@ -25,4 +25,4 @@ Regresje 2026-09-14: **22/22 PASS**.
 
 Jeżeli host nie ma wykonania kodu, wykonaj równoważną procedurę natywnymi
 narzędziami zgodnie z `shared/CBOSA-ADAPTER.md`. Brak parsera nie zwalnia z
-fail-closed ani z `shared/PRAWO-HARDGATE-ORZECZENIA.md`.
+fail-closed ani z `JUR:weryfikacja-orzeczen-kanon`.

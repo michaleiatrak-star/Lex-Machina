@@ -1,5 +1,6 @@
 # CHANGELOG — prawny-router-v3
 
+- 3.76 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md); korpus SKILL.md 506 → 500 linii (T17: trzy zbędne separatory `---` przed nagłówkami, blok `view` w jednej linii; reguły bez zmian)
 - 3.75 (2026-11-06, zgłoszenie użytkownika — porozumienie rozwiązujące jako załącznik do wezwania): routing [1] — dostarczony dokument z kategorii [1] przy innym PRIMARY uruchamia `analizator-umow-v1` jako SECONDARY obowiązkowo, co najmniej w zakresie CAL-GATE (analizator 1.52).
 - 3.74 (2026-10-31, BENCHMARK-02): KONKLUZJA-GATE (benchmark 02: P04, P13, P09/P10): pierwsze zdanie odpowiada wprost — pytanie zamknięte → „Tak”/„Nie”/„Tak, ale…”; „zależy” tylko z wariantem typowym; konkluzja warunkowa nazwana, gdy rozstrzyga wykładnia; skutek prawny tylko w brzmieniu przepisu. Blok KROK 3A i opis bramek po treści, przed zastrzeżeniem (P01, A8). SKILL.md + references/SELF-CHECK.md; reguły dopisane, żadna nie usunięta.
 - 3.73 (2026-10-20, LEXAGENTO-P1): PROFIL-LEKKI: pełna ścieżka modułu kwalifikatora karnomaterialnego (skrót dr-03/.../ nie działał poza lex-runtime)

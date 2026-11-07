@@ -1,6 +1,6 @@
 ---
 name: dr-15-compliance-iso-governance-audyt
-version: "3.20"
+version: "3.21"
 description: "Compliance, governance i audyt: systemy zgodności, sygnaliści, AML instytucjonalny, zarządzanie ryzykiem, kontrole, ISO i audyt organizacyjno-prawny."
 dependencies:
   requires:
@@ -79,9 +79,9 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
   kontekst związany z pracą, kanały zgłoszeń, odwrócony ciężar dowodu)
 - BAS-W25 Uzasadniony interes administratora RODO (LIA — istotne dla compliance danych)
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` (sekcja 6 — RZECZYWISTY
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` (sekcja 6 — RZECZYWISTY
   BENEFICJENT / UBO) — "strona ukryta" w strukturach własnościowych,
   figurant/słup, zlecenie powiernicze (art. 734 i n. KC), Centralny Rejestr
   Beneficjentów Rzeczywistych (CRBR), ustawa AML art. 2 ust. 2 pkt 1)

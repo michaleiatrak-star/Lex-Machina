@@ -1,6 +1,6 @@
 ---
 name: chronologia-sprawy-v1
-version: "1.18"
+version: "1.19"
 type: executive-chronologia
 status: production
 compatibility: "live_web_lookup, file_read, optional_interactive_ui"
@@ -33,7 +33,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmien
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Chronologia może zawierać terminy ustawowe, daty wejścia w życie aktów, terminy zawite.
 > Przed podaniem jakiegokolwiek przepisu lub sygnatury:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 > ⛔ **[WEJŚCIE-DOKUMENTU] — bramka materiału wejściowego (F-200; odtworzone 2026-09-27d, F-207).**
 > Gdy w tej turze użytkownik dostarczył dokument, akta, korespondencję lub wklejony tekst:
@@ -254,7 +254,7 @@ wniosków raportu, nie po niej.
 rozstrzyga, tylko oznacza `⚠️ sprzeczność` i przekazuje dalej.
 
 ⛔ Moduł shared **nie jest źródłem prawa**. Jego tablice CHWIL OCENY wskazują,
-gdzie patrzeć; `shared/PRAWO-HARDGATE.md` obowiązuje bez zmian.
+gdzie patrzeć; `JUR:weryfikacja-przepisow-kanon` obowiązuje bez zmian.
 
 ---
 
@@ -862,11 +862,11 @@ Plik `assets/ChronologiaSprawy.jsx` to dokumentacja struktury — nie kopiuj go.
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view shared/TRYBY-PROCESOWE.md
+view JUR:tryby-procesowe
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view shared/STRATEGIA-PROCESOWA.md
 view shared/QUALITY-CHECK.md
 ```

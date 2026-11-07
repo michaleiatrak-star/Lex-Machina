@@ -13,7 +13,7 @@ ELI oznacza tekst jednolity Dz.U. 2025 poz. 1228 jako obowiązujący. Przed poda
 
 **Zasada runtime:** moduł nie utrwala tabel kwot, które mogą ulec zmianie. Kwota jest wynikiem fresh gate do przepisu, nie stałą wiedzą modułu.
 
-⛔ **KOLEJNOŚĆ — `view shared/TABELE-OPLAT.md` PRZED pierwszą kwotą.** Ten moduł opisuje
+⛔ **KOLEJNOŚĆ — `view prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` PRZED pierwszą kwotą.** Ten moduł opisuje
 ustawę i jej strukturę; tabele zweryfikowane odczytem treści oraz **pełny katalog
 zwolnień** (art. 94–103) stoją tam. ⛔ KROK 0: **czy strona w ogóle płaci** —
 pytanie przed sięgnięciem po jakąkolwiek tabelę.

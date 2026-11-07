@@ -1,11 +1,11 @@
 # mod-KM — Komornik sądowy jako zawód (Ustawa o komornikach sądowych)
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.MD`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.MD`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
+- metryki aktów sprawdzaj w `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md`;
+- jeżeli sprawa jest procesowa, uruchom `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `prawo-polskie-v2/krajowe/shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
 - ⚠️ ZAKAZ podawania opłat egzekucyjnych z pamięci — weryfikuj w aktualnym rozp. MS.
 - Uwaga: ten moduł obejmuje komornika jako ZAWÓD i organ (status, odpowiedzialność,
   wybór, OC, skarga 767 KPC). Egzekucja jako TRYB proceduralny (KPC, UPEA) →
@@ -108,7 +108,7 @@ Właściwy organ: sąd rejonowy / KRK / MS / sąd cywilny
   ↓
 Środek zaskarżenia: skarga / zażalenie / pozew / zawiadomienie
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
   ↓
@@ -192,16 +192,16 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy wskazano prawidłowy organ nadzorczy?
 □ Czy każda przesłanka ma dowód?
 □ Czy podano ryzyka przeciwnika/organu?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+□ Czy użyto prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md?
 ```
 
 ## 9. Łącz obowiązkowo z
 
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
+| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md` |
 | stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
+| braki formalne | `prawo-polskie-v2/krajowe/shared/BRAKI-FORMALNE.md` |
 | warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
 | dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
 | ryzyka | `shared/RISK-ASSESSMENT.md` |
@@ -231,7 +231,7 @@ t.j. `Dz.U. 2024 poz. 377` ✅ [VER] RZĄD 1 2026-09-12c (status ELI
 `obowiązujący`, zero nowelizacji po tekście jednolitym).
 
 ```text
-view shared/TABELE-OPLAT.md      # sekcja 6b — tabele z odczytu treści
+view prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md      # sekcja 6b — tabele z odczytu treści
 ```
 
 ⛔ **Trzy akty regularnie mylone:**

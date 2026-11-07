@@ -32,6 +32,9 @@ import importlib.util
 import pathlib
 import re
 import sys
+import sys as _sys
+_sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from _lex_common import katalog_konektorow  # noqa: E402
 
 POLSKIE = "ĄąĆćĘęŁłŃńÓóŚśŹźŻż"
 
@@ -201,9 +204,10 @@ def main():
                 mow("  {}: wykrycie i pagina zgodne".format(plik))
 
     # 4: zgodność implementacji JS
-    js = audyt / "mcp-servers/isap-eli-example/isap-eli-mcp-server.js"
+    # Serwery MCP leżą w pakiecie jurysdykcji (pole `konektory` manifestu JURYSDYKCJA.md).
+    js = pathlib.Path(katalog_konektorow(str(audyt.parent))) / "isap-eli-example/isap-eli-mcp-server.js"
     if not js.exists():
-        bledy.append("BRAK PLIKU: mcp-servers/isap-eli-example/isap-eli-mcp-server.js")
+        bledy.append("BRAK PLIKU: {}".format(js))
     else:
         src = js.read_text(encoding="utf-8")
         m = re.search(r'\[\.\.\."([^"]+)"\]\.map\(\(c, i\) => \[c, "([^"]+)"\[i\]\]\)', src)

@@ -152,5 +152,5 @@ Załączniki:
 ## OPŁATY
 
 Samo oświadczenie nie podlega opłacie sądowej (pismo pozasądowe).
-Opłata pojawia się dopiero na etapie pozwu — patrz `M6-oplaty.md`
+Opłata pojawia się dopiero na etapie pozwu — patrz `JUR:pisma-proste-m6-oplaty`
 oraz moduł DR-02 SKD (właściwość sądu wg wartości przedmiotu sporu).

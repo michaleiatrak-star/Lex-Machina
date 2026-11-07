@@ -458,7 +458,7 @@ Riposta (przesłanki art. 235² §1 KPC):
   (b) "Powołanie we wcześniejszym piśmie nie było możliwe [opis]"
   (c) "Uwzględnienie nie spowoduje zwłoki w rozpoznaniu sprawy"
   ZAWSZE: podnieś który warunek zachodzi + uzasadnij.
-  → shared/PREKLUZJA-DOWODOWA.md — pełny protokół.
+  → JUR:prekluzja-dowodowa — pełny protokół.
 ```
 
 ### [N10] CHERRY-PICKING — SELEKTYWNE CYTOWANIE (MAN-05)

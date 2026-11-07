@@ -29,10 +29,10 @@
 | `POST-VALIDATION.md` | ACTIVE | analizator-umow-v1, pisma-procesowe-v3 |
 | `FACT-SOURCE-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
 | `LEGAL-STATUS-LOCK.md` | INTERNAL | wywoływany przez MOD-WALIDACJA_v2.md (Blok J), FAKTY_v2.md |
-| `FORMAL-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
-| `FORMAT-CYTOWANIA.md` | ACTIVE — KANONICZNY | pisma-procesowe-v3 (W3.1, W3.6, MOD-PRAWO, MOD-SZABLONY), pisma-proste-v2 (KROK 9d), via HYBRID-VALIDATION / FORMAL-CHECK / AUDYT-KONCOWY / PRAWO-HARDGATE wszystkie skille generujące dokument |
+| `JUR:wymogi-formalne-pism` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `JUR:format-cytowania` | ACTIVE — KANONICZNY | pisma-procesowe-v3 (W3.1, W3.6, MOD-PRAWO, MOD-SZABLONY), pisma-proste-v2 (KROK 9d), via HYBRID-VALIDATION / FORMAL-CHECK / AUDYT-KONCOWY / PRAWO-HARDGATE wszystkie skille generujące dokument |
 | `agents/*.md` (3) | ACTIVE (Claude Code) | pisma-procesowe-v3 W3.1/W3.2/W3.7 (W3-WERYFIKACJA), MOD-PEER-REVIEW |
-| `BRAKI-FORMALNE.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `JUR:braki-formalne` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `WARUNKI-SKUTECZNOSCI.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `QUALITY-CHECK.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `RISK-ASSESSMENT.md` | ACTIVE | wszystkie DR-skille, pisma-procesowe-v3 |
@@ -48,10 +48,10 @@
 
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
-| `terminy.md` | ACTIVE | analizator-dowodow-v3, pisma-procesowe-v3, pisma-proste-v2, analiza-sadowa-v6, przewodnik-prawny-v2, analizator-umow-v1 |
-| `TERM-CALC.md` | ACTIVE | pisma-procesowe-v3 (W3.4 walidacja formalna) |
-| `TRYBY-PROCESOWE.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
-| `PREKLUZJA-DOWODOWA.md` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `JUR:terminy-procesowe` | ACTIVE | analizator-dowodow-v3, pisma-procesowe-v3, pisma-proste-v2, analiza-sadowa-v6, przewodnik-prawny-v2, analizator-umow-v1 |
+| `JUR:liczenie-terminow` | ACTIVE | pisma-procesowe-v3 (W3.4 walidacja formalna) |
+| `JUR:tryby-procesowe` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
+| `JUR:prekluzja-dowodowa` | ACTIVE | pisma-procesowe-v3 (W3.4, via AUTOMAT-STANOW.md/W3-WERYFIKACJA.md) |
 | `DISCLAIMER.md` | ACTIVE | prawny-router-v3, przewodnik-prawny-v2 |
 
 ## Moduły dowodowe i orzecznicze
@@ -61,7 +61,7 @@
 | `DOWODY-METODOLOGIA.md` | ACTIVE | analizator-dowodow-v3, pisma-procesowe-v3 |
 | `MOD-DOKUMENT-GATES.md` | ACTIVE | przesluchanie-swiadkow-v2-min90 (PRE-W1a.5), analizator-dowodow-v3 (KROK 0d) — utworzony 2026-08-20z, F-100 A |
 | `MOD-WEJSCIE-DOKUMENTU.md` | ACTIVE | prawny-router-v3, analizator-umow-v1, analizator-dowodow-v3, analiza-sadowa-v6, chronologia-sprawy-v1, pisma-procesowe-v3, pisma-proste-v2, przesluchanie-swiadkow-v2-min90, raport-sytuacyjny-v2 — utworzony 2026-09-26, F-200; kontrola obecności wywołania: T35 |
-| `ORZECZENIA-HIERARCHIA.md` | INTERNAL→ACTIVE | orzeczenia-sadowe-v2, pisma-procesowe-v3 |
+| `JUR:orzecznictwo-hierarchia` | INTERNAL→ACTIVE | orzeczenia-sadowe-v2, pisma-procesowe-v3 |
 | `ROSZCZENIA.md` | INTERNAL→ACTIVE | pisma-procesowe-v3 |
 | `STRATEGIA-PROCESOWA.md` | ACTIVE | pisma-procesowe-v3, analiza-sadowa-v6 |
 
@@ -72,22 +72,22 @@
 | `RISK-ASSESSMENT.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `TEMPORAL-LAW-CHECK.md` | ACTIVE | wszystkie DR-01..DR-16 |
 | `ISAP-AUDIT-PROTOCOL.md` | ACTIVE | wszystkie DR-01..DR-16, pisma-procesowe-v3 (via KROK1-detekcja.md, W3-WERYFIKACJA.md) |
-| `MODULE-STANDARD-POLISH-LAW.md` | ACTIVE | wszystkie DR-01..DR-16 |
+| `JUR:standard-modulu-prawa-krajowego` | ACTIVE | wszystkie DR-01..DR-16 |
 | `LEGAL-QUALITY-GATE.md` | ACTIVE | wszystkie DR-01..DR-16 |
-| `ISAP-METRYKI-AKTOW.md` | ACTIVE | wszystkie DR-01..DR-16 |
-| `FORMAL-CHECK.md` | ACTIVE | wszystkie DR-01..DR-16 |
+| `JUR:isap-metryki-aktow` | ACTIVE | wszystkie DR-01..DR-16 |
+| `JUR:wymogi-formalne-pism` | ACTIVE | wszystkie DR-01..DR-16 |
 | `LEGAL-LIFECYCLE-MANAGEMENT.md` | ACTIVE | wybrane DR-skille |
-| `PRAWO-HARDGATE.md` | ACTIVE | wszystkie skille z przepisami |
-| `PRAWO-HARDGATE-ORZECZENIA.md` | ACTIVE | skille cytujące ORZECZENIA — załącznik do powyższego, wyzwalacz binarny: sygnatura w tekście (podział F-111, 2026-08-23h) |
+| `JUR:weryfikacja-przepisow-kanon` | ACTIVE | wszystkie skille z przepisami |
+| `JUR:weryfikacja-orzeczen-kanon` | ACTIVE | skille cytujące ORZECZENIA — załącznik do powyższego, wyzwalacz binarny: sygnatura w tekście (podział F-111, 2026-08-23h) |
 | `CBOSA-ADAPTER.md` | ACTIVE | HIERARCHIA-ZRODEL, SYGNATURY, DOSTEP-MASZYNOWY-API, PRAWO-HARDGATE-ORZECZENIA, MCP-INTEGRACJA; direct NSA/WSA przed fallbackiem indeksowym |
 
 ## Moduły scalone do shared/ 2026-07-12 (audyt komercyjny — ci_check_shared.py)
 
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
-| `NAZEWNICTWO-STRON.md` | ACTIVE | shared/FORMAL-CHECK.md, analizator-dowodow-v3, pisma-proste-v2 |
-| `STALKING-NEKANIE.md` | ACTIVE | dr-03 (mod-KK-art190a-stalking.md, mod-KK-kwalifikator-karnomaterialny.md) |
-| `PRZESLUCHANIE-SWIADKOW-KPC.md` | ACTIVE | dr-16 (ramowy KPC art. 258-305 — nie mylić z pełnym skillem przesluchanie-swiadkow-v2-min90) |
+| `JUR:nazewnictwo-stron` | ACTIVE | JUR:wymogi-formalne-pism, analizator-dowodow-v3, pisma-proste-v2 |
+| `JUR:stalking-nekanie` | ACTIVE | dr-03 (mod-KK-art190a-stalking.md, mod-KK-kwalifikator-karnomaterialny.md) |
+| `JUR:przesluchanie-swiadkow-procedura` | ACTIVE | dr-16 (ramowy KPC art. 258-305 — nie mylić z pełnym skillem przesluchanie-swiadkow-v2-min90) |
 
 ## Narzędzia deweloperskie (kod, nie markdown — poza pipeline'em LLM)
 
@@ -97,7 +97,7 @@
 | `tools/walidator_cytowan.py` | ACTIVE (produkcyjna bramka, poza LLM) | Sprawdza, czy każde powołanie w finalnym piśmie ma odpowiadające zdarzenie weryfikacji w logu sesji API — uruchamiane przez portal przed present_files, nie przez skille |
 | `tools/extract_api_verification_log.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Buduje log sesji wymagany przez walidator_cytowan.py automatycznie z surowej konwersacji Claude API (bloki server_tool_use/*_tool_result) — domyka lukę integracyjną opisaną w README (krok 1) |
 | `tools/export_gate.py` | ACTIVE (produkcyjna bramka, poza LLM) | Dodany 2026-07-13d. Łączy extract_api_verification_log.py + walidator_cytowan.py w jedno wywołanie — jedyny punkt, który portal musi wpiąć w pipeline przed present_files/eksportem |
-| `MCP-INTEGRACJA.md` + `KONEKTORY-REKOMENDOWANE.md` + `SCHEMAT-ODPOWIEDZI-MCP.md` | ACTIVE (protokół ładowany przez router) | Skonsolidowane 2026-07-13f z osobnego skilla mcp-zrodla-prawa-v1 (usunięty). Warstwa MCP jako uzupełnienie PRAWO-HARDGATE.md — patrz `required_modules` w prawny-router-v3 |
+| `MCP-INTEGRACJA.md` + `KONEKTORY-REKOMENDOWANE.md` + `SCHEMAT-ODPOWIEDZI-MCP.md` | ACTIVE (protokół ładowany przez router) | Skonsolidowane 2026-07-13f z osobnego skilla mcp-zrodla-prawa-v1 (usunięty). Warstwa MCP jako uzupełnienie JUR:weryfikacja-przepisow-kanon — patrz `required_modules` w prawny-router-v3 |
 | `tools/test_mcp_protocol.py` + `tools/connector_health_check.py` | ACTIVE (testy/narzędzia dev, poza LLM) | Skonsolidowane 2026-07-13f razem z MCP-INTEGRACJA.md. Klasyfikacja odpowiedzi connectora (6 testów jednostkowych) + health-check dostępności connectorów. ⚠️ Nieobecne na dysku 2026-08-27→2026-09-26d mimo statusu ACTIVE tutaj (usunięte tym samym mergem `d3385b9` co pliki F-206, spoza jego pierwotnie opisanego zakresu) — przywrócone 2026-09-26d, 6/6 testów i `--self-test` PASS |
 | `AUDIT-TRAIL-SPEC.md` | ACTIVE (specyfikacja, poza silnikiem) | Skonsolidowane 2026-07-13f z osobnego skilla audit-trail-portal-v1 (usunięty). Specyfikacja logu hash-chain zgodnego z art. 12 AI Act, do wdrożenia po stronie portalu |
 | `tools/hash_chain_verify.py` + `append_event.py` + `router_event_parser.py` | ACTIVE (referencyjne, poza LLM) | Skonsolidowane 2026-07-13f razem z AUDIT-TRAIL-SPEC.md. Zapis/weryfikacja/parsowanie logu hash-chain. ⚠️ Nieobecne na dysku 2026-08-27→2026-09-26d mimo statusu ACTIVE tutaj (usunięte tym samym mergem `d3385b9` co pliki F-206, spoza jego pierwotnie opisanego zakresu) — przywrócone 2026-09-26d, zweryfikowane end-to-end (zapis 3-wpisowego łańcucha + wykrycie ręcznie spreparowanego naruszenia) |
@@ -109,17 +109,17 @@
 |------|--------|-------------------|
 | `ACTIVATION-MATRIX.md` | ACTIVE | prawny-router-v3 |
 | `CROSS-DOMAIN-CONFLICT-ROUTER.md` | ACTIVE | prawny-router-v3, prawo-polskie-v2 |
-| `SYGNATURY.md` | ACTIVE | orzeczenia-sadowe-v2, prawny-router-v3 |
+| `JUR:sygnatury-repertoria` | ACTIVE | orzeczenia-sadowe-v2, prawny-router-v3 |
 
 ## Moduły pokrycia prawnego (matryce)
 
 | Plik | Status | Wywołujące skille |
 |------|--------|-------------------|
-| `POLISH-LAW-COMPLETENESS-MATRIX.md` | ACTIVE | DR-skille, audyt-systemu-v4 |
-| `POLISH-LAW-FINAL-COMPLETENESS-GATE.md` | ACTIVE | DR-skille |
+| `JUR:polish-law-completeness-matrix` | ACTIVE | DR-skille, audyt-systemu-v4 |
+| `JUR:kompletnosc-prawa-krajowego` | ACTIVE | DR-skille |
 | `POLISH-LAW-MAX-COVERAGE-STANDARD.md` | ACTIVE | DR-skille |
 | `LEGAL-KNOWLEDGE-GRAPH.md` | ACTIVE | DR-skille, analiza-sadowa-v6 |
-| `LEGAL-REGISTRY.md` | ACTIVE | DR-skille |
+| `JUR:legal-registry` | ACTIVE | DR-skille |
 | `EXPERT-OPINION-AUDIT.md` | ACTIVE | analiza-sadowa-v6, analizator-dowodow-v3 |
 
 ## Moduły zarządzania systemem

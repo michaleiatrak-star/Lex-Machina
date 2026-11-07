@@ -7,7 +7,7 @@
 > **Konsumenci:** `prawny-router-v3/references/SELF-CHECK.md`,
 > `pisma-procesowe-v3` (W2 — wyliczenia, W3 — walidacja), `pisma-proste-v2`
 > (wezwanie do zapłaty), `analiza-sadowa-v6`, `analizator-umow-v1`.
-> **Relacja do HARDGATE:** `shared/PRAWO-HARDGATE.md` odpowiada na pytanie
+> **Relacja do HARDGATE:** `JUR:weryfikacja-przepisow-kanon` odpowiada na pytanie
 > „czy ta liczba jest zweryfikowana". TEN plik odpowiada na pytanie
 > „czy zweryfikowano WSZYSTKIE liczby, których wymaga okres sprawy".
 
@@ -91,7 +91,7 @@ RC-6  BRAMKA ZAMKNIĘCIA. Analizy NIE wolno zamknąć, dopóki wszystkie cztery
 
 ## Reguła kosztowa (rozwiązanie konfliktu z PERMANENT GATE)
 
-`PRAWO-HARDGATE.md` żąda osobnego wywołania narzędzia na każde powołanie
+`JUR:weryfikacja-przepisow-kanon` żąda osobnego wywołania narzędzia na każde powołanie
 liczby. Przy szeregu trzyletnim to kilkanaście–kilkadziesiąt wywołań, co samo
 w sobie tworzy nacisk na skrót — i to jest realna przyczyna, dla której
 poprzedni przebieg podał jedną liczbę.
