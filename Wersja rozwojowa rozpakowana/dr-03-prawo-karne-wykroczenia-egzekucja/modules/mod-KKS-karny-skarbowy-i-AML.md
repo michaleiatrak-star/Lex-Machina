@@ -27,7 +27,7 @@ tj. 26.12.2026**.
 ## 1a. TERMINY I PROGI KKS (dodane 2026-09-16g, F-135)
 
 ✅ [VER] RZĄD 1 2026-09-16g — odczyt treści `Dz.U. 2025 poz. 633`; zmiany po t.j. sprawdzone.
-Tabela kanoniczna: `shared/terminy.md`, sekcja KKS.
+Tabela kanoniczna: `prawo-polskie-v2/krajowe/shared/terminy.md`, sekcja KKS.
 
 | Termin / wartość | Instytucja | Podstawa |
 |---|---|---|
@@ -49,7 +49,7 @@ Tabela kanoniczna: `shared/terminy.md`, sekcja KKS.
 | ⏳ **14 dni** od doręczenia mandatu | **mandat karny zaoczny** — zapłata; prawomocność z chwilą zapłaty w terminie; wpłata po terminie — zabezpieczenie, jeżeli postępowanie wszczęto w 14 dni od wpłaty, inaczej zwrot | art. 138 § 1 pkt 3, § 4 pkt 3, § 5a–5b KKS **w brzmieniu od 26.12.2026** (`Dz.U. 2026 poz. 846`) |
 
 ⛔ **Kwoty „krotności" liczy się według minimalnego wynagrodzenia z CZASU CZYNU**
-(art. 53 § 3, § 14–16) — nie z dnia orzekania. Kotwica kwotowa: `shared/oplaty/04-wartosci-powtarzalne-kotwice.md`.
+(art. 53 § 3, § 14–16) — nie z dnia orzekania. Kotwica kwotowa: `prawo-polskie-v2/krajowe/shared/oplaty/04-wartosci-powtarzalne-kotwice.md`.
 ⛔ **Art. 16 § 5:** czynny żal jest bezskuteczny po rozpoczęciu przeszukania, **czynności
 sprawdzającej** lub kontroli zmierzającej do ujawnienia czynu (chyba że nie dała podstaw do
 wszczęcia postępowania). **Art. 16a § 3:** korekta nie działa po wszczęciu postępowania

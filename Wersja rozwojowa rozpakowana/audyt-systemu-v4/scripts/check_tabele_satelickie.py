@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """T32 — tabele satelickie opłat: każda kwota musi mieć podstawę (O-11(b)).
 
-Powstał 2026-09-16e. `shared/TABELE-OPLAT.md` sekcja 7 prowadzi rejestr plików,
+Powstał 2026-09-16e. `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` sekcja 7 prowadzi rejestr plików,
 w których poza rdzeniem stoją kwoty opłat. Rejestr był kontrolą ręczną; pomiar
 z AUDYT-2026-09-12 wykazał w tych plikach trafność poniżej 80 %, a najczęstszą
 postacią była kwota bez podstawy albo z podstawą fałszywą.
@@ -19,13 +19,16 @@ przykładem obliczeniowym — ocena ręczna).
 """
 import argparse, glob, os, re, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _lex_common import modul_jurysdykcji  # noqa: E402
+
 KWOTA = re.compile(r"\d[\d\s\u00a0]*(?:,\d+)?\s*(?:zł|%)")
 PODST = re.compile(r"(?i)art\.|§|zał\.|ust\.|\bpkt\b|rozp|dz\.\s*u\.|kscu|kpc|kpk|kpa|ustaw|okw|uks")
 KOL_PODST = re.compile(r"(?i)podstaw|przepis|źródło|zrodlo")
 
 
 def rejestr(root):
-    p = os.path.join(root, "shared", "TABELE-OPLAT.md")
+    p = os.path.join(root, modul_jurysdykcji(root, "JUR:oplaty-sadowe", "prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md"))
     t = open(p, encoding="utf-8").read()
     a = t.find("## 7.")
     b = t.find("\n## ", a + 5)
@@ -111,7 +114,7 @@ def main():
         return selftest()
     fail = 0
     razem = 0
-    print("T32 — tabele satelickie opłat (rejestr: shared/TABELE-OPLAT.md §7)")
+    print("T32 — tabele satelickie opłat (rejestr: prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md §7)")
     for wz, pliki in rejestr(a.repo_root):
         if not pliki:
             print(f"  ⛔ BRAK PLIKU: {wz}")

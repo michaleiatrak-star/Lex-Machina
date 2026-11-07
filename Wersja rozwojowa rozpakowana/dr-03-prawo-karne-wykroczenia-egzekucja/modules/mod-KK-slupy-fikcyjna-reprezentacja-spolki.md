@@ -22,7 +22,7 @@ decyzyjnej, podczas gdy rzeczywisty decydent pozostaje ukryty. Typowe
 konteksty: wyłudzenia kredytów (art. 297 KK), oszustwa (art. 286 KK),
 "znikający podatnik" w karuzelach VAT (fikcyjne faktury), maskowanie
 rzeczywistego beneficjenta przed wierzycielami/organami (patrz też
-`shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — warstwa
+`prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — warstwa
 cywilno-podatkowa/AML tego samego zjawiska, UBO/CRBR — NIE duplikuj,
 ten moduł dostarcza warstwę KARNĄ).
 
@@ -294,7 +294,7 @@ START: Czy osoba formalnie pełni funkcję (prezes/wspólnik) BEZ
 
 ## 15. INTEGRACJA Z SYSTEMEM
 
-- **`shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — warstwa
+- **`prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — warstwa
   cywilno-podatkowa/AML tego samego zjawiska (UBO, powiernictwo, CRBR)
   — NIE duplikuj, ten moduł dostarcza wyłącznie warstwę karną.
 - **`mod-KK-art270-310-falszerstwa-dokumentow.md`** — zbieg przy

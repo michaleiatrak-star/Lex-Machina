@@ -1,6 +1,6 @@
 ---
 name: dr-03-prawo-karne-wykroczenia-egzekucja
-version: "3.74"
+version: "3.75"
 description: "Prawo karne, wykroczenia i egzekucja: KK, KPK, KKW, KW, KPW, KKS, kwalifikacja karnomaterialna, tryby ścigania i wykonanie orzeczeń."
 dependencies:
   requires:
@@ -89,13 +89,13 @@ najpierw indeks, potem WYŁĄCZNIE właściwy plik części wg tabeli. Ścieżka
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
   (KRYTYCZNE: terminy zawite w KPK — apelacje, zażalenia 14 dni)
-- `definicje/DEF-PRACA.md` — niealimentacja (art. 209 KK) — sekcja dolna pliku
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` — niealimentacja (art. 209 KK) — sekcja dolna pliku
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: świadek a interes
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: świadek a interes
   własny (KPK art. 182-186 — prawo odmowy zeznań/odpowiedzi, "osoba najbliższa"
   z faktycznym wspólnym pożyciem — BAS-112)
 
@@ -109,13 +109,13 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-121 Handel ludźmi (art. 115 §22 KK — zgoda ofiary irrelewantna)
 - BAS-129 Recydywa szczególna i multirecydywa (art. 64 KK — przesłanki łączne)
 - BAS-130 Warunkowe umorzenie (art. 66 KK — 6 przesłanek + wykluczenia)
-- BAS-134 Środki karne + zatarcie skazania (→ mod-prawa-obywatelskie-srodki-karne.md)
+- BAS-134 Środki karne + zatarcie skazania (→ prawo-polskie-v2/krajowe/shared/mod-prawa-obywatelskie-srodki-karne.md)
 - BAS-W22 Czyn ciągły / "z góry powzięty zamiar" (art. 12 KK)
 - BAS-W23 Mienie znacznej/wielkiej wartości (art. 115 §5-6 KK — progi zamrożone od 2010!)
 - BAS-W24 Nieznaczna ilość narkotyku (art. 62a ustawy PN — brak definicji)
 - BAS-131/132/133 Niewidomy / niepełnosprawność intelektualna / głuchota —
-  obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ mod-niewidomy-prawa-prawne.md,
-  mod-niepelnosprawnosc-intelektualna-gluchota.md)
+  obrona obligatoryjna art. 79 §1 pkt 2-4 KPK (→ prawo-polskie-v2/krajowe/shared/mod-niewidomy-prawa-prawne.md,
+  prawo-polskie-v2/krajowe/shared/mod-niepelnosprawnosc-intelektualna-gluchota.md)
 
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
 ## Moduły (71 łącznie — ✓ 71 OK, ☐ 0 STUB; 1 przeniesiony do shared/)
@@ -521,7 +521,7 @@ AUDIT-JOURNAL.md`.
 > **Przeniesiony do shared/ (2026-07-12):** `mod-KK-stalking-szczegolowy` był
 > bajt-w-bajt identyczny z dawną kopią routera `stalking-nekanie`
 > (wykryte przez `ci_check_shared.py`; obecny plik routera jest wyłącznie bridge’em). Scalony pod jedną kanoniczną lokalizacją:
-> `view shared/STALKING-NEKANIE.md`. Ładuj stamtąd bezpośrednio —
+> `view prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md`. Ładuj stamtąd bezpośrednio —
 > `mod-KK-art190a-stalking.md` zawiera odesłanie. Pełny opis:
 > `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` NOTA-12.
 

@@ -91,7 +91,7 @@ Nigdy nie podstawiaj „najbliższej” sygnatury.
   `reasoning_available=false`.
 
 Poziom FRAGMENT wymaga `shared/WERYFIKACJA-SLAD.md` i
-`shared/PRAWO-HARDGATE-ORZECZENIA.md`.
+`JUR:weryfikacja-orzeczen-kanon`.
 
 ## Provenance kanału
 
@@ -108,7 +108,7 @@ Adapter rozróżnia źródło treści od sposobu dostępu:
 
 ## Fallback retrieval/snapshot
 
-Jeżeli direct CBOSA jest niedostępna → `shared/SYGNATURY.md` V-SYG-0.5.
+Jeżeli direct CBOSA jest niedostępna → `JUR:sygnatury-repertoria` V-SYG-0.5.
 
 Minimalna sekwencja:
 1. discovery (natywny filtr domeny lub `site:`);

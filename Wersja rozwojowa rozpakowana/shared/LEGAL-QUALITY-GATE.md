@@ -13,7 +13,7 @@ Pismo albo analiza nie spełnia standardu kancelaryjnego, jeżeli:
 - miesza stan prawny z różnych dat,
 - cytuje orzecznictwo bez źródła oficjalnego,
 - nie oznacza ryzyka dezaktualizacji,
-- zapisuje powołania aktów niezgodnie z `shared/FORMAT-CYTOWANIA.md` (F1–F9: np. `Dz.U.`, brak „z … r.”,
+- zapisuje powołania aktów niezgodnie z `JUR:format-cytowania` (F1–F9: np. `Dz.U.`, brak „z … r.”,
   „t.j.”, `KPC`, `§1`, metryka ELI albo status konektora w treści).
 
 ## Wynik bramki

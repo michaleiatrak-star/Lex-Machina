@@ -112,7 +112,7 @@ Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
   ↓
 Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
   ↓

@@ -5,7 +5,7 @@
 usług elektronicznych"*.
 
 Przed startem: `view references/generator/rdzen-generowania.md`, następnie
-`view references/generator/essentialia-regulaminy-i-korporacyjne.md § 1`.
+`view JUR:umowy-essentialia-regulaminy-i-korporacyjne § 1`.
 
 ---
 
@@ -13,7 +13,7 @@ Przed startem: `view references/generator/rdzen-generowania.md`, następnie
 
 | Sygnał | Ścieżka |
 |---|---|
-| Sklep internetowy / sprzedaż online konsumentom | ŚCIEŻKA E-COMMERCE (+ `mod-J8-b2c.md`) |
+| Sklep internetowy / sprzedaż online konsumentom | ŚCIEŻKA E-COMMERCE (+ `JUR:umowy-j8-b2c`) |
 | Aplikacja/platforma SaaS, subskrypcja | ŚCIEŻKA SaaS (+ `mod-J6-it-konsorcjum.md`) |
 | Usługa informacyjna/serwis bez sprzedaży (blog z kontem, forum, newsletter) | ŚCIEŻKA OGÓLNA |
 | Platforma z treściami użytkowników (marketplace, UGC) | ŚCIEŻKA E-COMMERCE/SaaS + moderacja UGC (`mod-shared-regulatory-horizon.md`) |
@@ -53,7 +53,7 @@ Zatrzymaj się i pokaż szkielet (R6), chyba że tryb express.
 ### KROK 3 — TREŚĆ
 
 Wypełnij treścią wg `style-format-generowania.md`. Dla ŚCIEŻKI E-COMMERCE/UGC —
-**przed** finalizacją uruchom `mod-shared-abusive-clauses.md` na cały projekt
+**przed** finalizacją uruchom `JUR:umowy-shared-abusive-clauses` na cały projekt
 (nie tylko wyrywkowo), ponieważ regulamin generowany od zera dla konsumentów
 jest najczęstszym miejscem nieświadomego wprowadzenia klauzuli abuzywnej
 (np. jednostronna zmiana cen bez prawa odstąpienia, ograniczenie rękojmi).
@@ -68,7 +68,7 @@ eksportem — regulaminy konsumenckie niemal zawsze kwalifikują się do „ligh
 legal design", patrz LD-P.6), z dodatkowym punktem bramki:
 
 ```
-5. Klauzule abuzywne — skan mod-shared-abusive-clauses.md wykonany i czysty?
+5. Klauzule abuzywne — skan JUR:umowy-shared-abusive-clauses wykonany i czysty?
 6. Legal design — wynik D1–D5 ≥ 30/50 (60%)?
 ```
 

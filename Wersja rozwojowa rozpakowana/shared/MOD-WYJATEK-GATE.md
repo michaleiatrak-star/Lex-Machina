@@ -7,7 +7,7 @@
 > osie (strona chroniona / działalność regulowana), S4 uzupełnione o akt
 > o etapowym stosowaniu
 > **Wywołują:** `prawny-router-v3` (BRAMKA WYJĄTKÓW, przed KROK 4)
-> **Nie jest** bramką weryfikacyjną — nie zastępuje `shared/PRAWO-HARDGATE.md`.
+> **Nie jest** bramką weryfikacyjną — nie zastępuje `JUR:weryfikacja-przepisow-kanon`.
 > Nie rozstrzyga sprawy; produkuje listę jednostek i aktów, których pominięcie
 > trzeba świadomie uzasadnić.
 
@@ -238,7 +238,7 @@ i nie odpali, jeżeli status strony zostanie **założony** zamiast ustalony.
 Skrypt **nie ocenia wpływu** — klasyfikacja „wyłącza / zawęża / odsyła"
 pozostaje decyzją merytoryczną. Narzędzie, które by ją zgadywało, produkowałoby
 fasadę. Przy braku dostępu do API wykonaj S1–S3 ręcznie i oznacz źródła zgodnie
-z `shared/PRAWO-HARDGATE.md`.
+z `JUR:weryfikacja-przepisow-kanon`.
 
 ---
 

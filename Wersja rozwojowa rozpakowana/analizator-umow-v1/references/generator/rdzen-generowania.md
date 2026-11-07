@@ -17,7 +17,7 @@
 
 Każdy artykuł, próg kwotowy, termin ustawowy lub wymóg formy przywołany podczas
 generowania dokumentu podlega globalnemu HARD GATE tego skilla
-(`view shared/PRAWO-HARDGATE.md`) — **bez wyjątku dla trybu
+(`view JUR:weryfikacja-przepisow-kanon`) — **bez wyjątku dla trybu
 generowania**. Tworzenie dokumentu od zera jest tu równie ryzykowne jak analiza:
 błędny artykuł w wygenerowanej umowie/regulaminie trafia bezpośrednio do obrotu.
 
@@ -105,12 +105,12 @@ w przyszłości modyfikujesz ten moduł, nie dokumentów generowanych dla klient
 | Kategoria | Essentialia / wymogi ustawowe | Workflow generatora |
 |---|---|---|
 | Umowy (B2B, B2C, najem, IT, IP, itd.) | moduły J0–MA (routing wg tabeli głównej) | `workflows/generator-umowy.md` |
-| Regulaminy (usługi elektroniczne, sklep, SaaS) | `references/generator/essentialia-regulaminy-i-korporacyjne.md` §1 + `mod-shared-abusive-clauses.md` (jeśli B2C) | `workflows/generator-regulaminu.md` |
-| Statut / umowa spółki / akt założycielski | `mod-FA-founders-dokumenty-zalozycielskie.md` (J20.5) | `workflows/generator-dokumentow-korporacyjnych.md` |
-| Uchwały (zarząd/zgromadzenie/wspólnicy) + protokoły | `references/generator/essentialia-regulaminy-i-korporacyjne.md` §2 | `workflows/generator-dokumentow-korporacyjnych.md` |
-| Pełnomocnictwa (ogólne/rodzajowe/szczególne, prokura) | `references/generator/essentialia-regulaminy-i-korporacyjne.md` §3 | `workflows/generator-dokumentow-korporacyjnych.md` |
-| Regulamin pracy / wynagradzania / ZFŚS | `mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4–J21.5) | `workflows/generator-dokumentow-hr-rodo.md` |
-| Polityka prywatności / klauzula informacyjna RODO | `mod-J21-rodo-archiwizacja-regulaminy.md` (J21.2) | `workflows/generator-dokumentow-hr-rodo.md` |
+| Regulaminy (usługi elektroniczne, sklep, SaaS) | `JUR:umowy-essentialia-regulaminy-i-korporacyjne` §1 + `JUR:umowy-shared-abusive-clauses` (jeśli B2C) | `workflows/generator-regulaminu.md` |
+| Statut / umowa spółki / akt założycielski | `JUR:umowy-fa-founders-dokumenty-zalozycielskie` (J20.5) | `workflows/generator-dokumentow-korporacyjnych.md` |
+| Uchwały (zarząd/zgromadzenie/wspólnicy) + protokoły | `JUR:umowy-essentialia-regulaminy-i-korporacyjne` §2 | `workflows/generator-dokumentow-korporacyjnych.md` |
+| Pełnomocnictwa (ogólne/rodzajowe/szczególne, prokura) | `JUR:umowy-essentialia-regulaminy-i-korporacyjne` §3 | `workflows/generator-dokumentow-korporacyjnych.md` |
+| Regulamin pracy / wynagradzania / ZFŚS | `JUR:umowy-j21-rodo-archiwizacja-regulaminy` (J21.4–J21.5) | `workflows/generator-dokumentow-hr-rodo.md` |
+| Polityka prywatności / klauzula informacyjna RODO | `JUR:umowy-j21-rodo-archiwizacja-regulaminy` (J21.2) | `workflows/generator-dokumentow-hr-rodo.md` |
 | Polityka AI (dokument wewnętrzny, art. 4/50 AI Act) | `references/generator/doktryna-uzupelnienie.md § D.4` | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka C) |
 
 **Doktryna uzupełniająca (wczytuj przy trigerach — nie domyślnie):**

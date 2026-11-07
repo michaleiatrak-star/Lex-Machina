@@ -1,6 +1,6 @@
 # PORTALE — część 1: osoby niepełnosprawne, DR-02 do DR-04
 
-> Część pliku `PORTALE-BRANZOWE-RZAD-2B.md` (podział 2026-08-20, naprawa
+> Część pliku `JUR:portale-branzowe` (podział 2026-08-20, naprawa
 > F-78 — plik źródłowy przekroczył 1000 linii). Pełny indeks i zasady
 > użycia: zobacz plik nadrzędny w katalogu `shared/`. To NIE jest
 > samodzielny skill — ładowany WYŁĄCZNIE przez indeks nadrzędny na
@@ -19,7 +19,7 @@
 |---|---|---|
 | **niepelnosprawni.pl** | GŁÓWNY, najstarszy (od 2003 r.) polski portal o niepełnosprawności — sekcja "Prawnik radzi"/"Zapytaj doradcę" z odpowiedziami CYTUJĄCYMI konkretne artykuły ustaw i SYGNATURY wyroków TK/SN, artykuły poradnikowe (świadczenia, orzecznictwo, zatrudnienie) | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: świadczenie pielęgnacyjne + renta socjalna — wynik DOSKONAŁY, precyzyjne cytaty prawne, w tym konkretna sygnatura TK SK 2/17) |
 | **integracja.org** | Fundacja-matka niepelnosprawni.pl (od 1994 r., magazyn "Integracja") — TA SAMA platforma redakcyjna, dodatkowo: audyty/certyfikacja dostępności (Obiekt Bez Barier, Serwis Bez Barier), strona "Wsparcie prawne" z NAZWANYM ekspertem (dr Michał Urban, radca prawny specjalizujący się w prawie osób z niepełnosprawnościami od kilkunastu lat) | ✅ ZWERYFIKOWANE 2026-07-21 — TRAKTUJ jako JEDNĄ platformę z niepelnosprawni.pl (ta sama redakcja, wzajemne odesłania) |
-| niepelnosprawni.gov.pl | Biuro Pełnomocnika Rządu ds. Osób Niepełnosprawnych | ⛔ TO NIE JEST Rząd 2B — organ RZĄDOWY, klasyfikuj jako Rząd 1 (patrz `shared/HIERARCHIA-ZRODEL.md`) |
+| niepelnosprawni.gov.pl | Biuro Pełnomocnika Rządu ds. Osób Niepełnosprawnych | ⛔ TO NIE JEST Rząd 2B — organ RZĄDOWY, klasyfikuj jako Rząd 1 (patrz `JUR:hierarchia-zrodel`) |
 | gov.pl/web/rodzina/osoby-niepelnosprawne | MRPiPS, oficjalne informacje | ⛔ Rząd 1 (organ), NIE 2B |
 | infor.pl/prawo/pomoc-spoleczna/niepelnosprawni/ | Sekcja DEDYKOWANA niepełnosprawności w ramach szerszego portalu infor.pl | 📚 znane pośrednio (infor.pl już w rejestrze ogólnym), potwierdzona ISTNIENIE dedykowanej podsekcji przy tym teście |
 | psz.praca.gov.pl (Wortal PSZ, dział "Dla niepełnosprawnych") | Rynek pracy dla osób niepełnosprawnych — ⚠️ UWAGA: strona SAMA zaznacza "funkcja korzysta z technologii AI" przy generowanych opisach — TRAKTUJ z OSTROŻNOŚCIĄ WIĘKSZĄ niż zwykle dla treści AI-generowanej, zawsze SKRZYŻUJ z Rzędem 1 | ⚠️ Rząd 1 (urząd pracy), ale ZASTRZEŻENIE co do treści AI |
@@ -86,8 +86,8 @@
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | **e-prawnik.pl** (+ subdomena dokumenty.e-prawnik.pl) | ⭐⭐ WYPEŁNIA lukę odnotowaną poniżej — PEŁNY tekst Kodeksu wykroczeń Z KOMENTARZEM artykuł-po-artykule (art. 104-108, 119-131, 140-142 i inne), format praktycznego Q&A, PRECYZYJNE cytaty (art. 45 §1 KW — przedawnienie, art. 97 §2 KPSW — odmowa przyjęcia mandatu) | ✅✅ ZWERYFIKOWANE 2026-07-21 (test: prawo karne/wykroczenia — wynik DOSKONAŁY) — ⭐⭐⭐ ZMIENIA WCZEŚNIEJSZY WNIOSEK z tej samej sesji: DR-03 JEDNAK MA dedykowany portal 2B, po prostu WYMAGAŁ innej frazy wyszukiwania niż pierwotnie próbowana ("najlepsze portale prawo karne" nie trafiło na niego, "prawo karne wykroczenia przepisy" — TAK) |
-| *(nexto.pl — NIE rejestrujemy jako portal/księgarnia, to NIE jest cel tego rejestru)* | ⛔ ZAMKNIĘTE 2026-07-24c na wyraźne polecenie użytkownika: wszystkie 5 wcześniej monitorowanych bezpośrednich linków do pełnych plików PDF (flaga F-12) zostały USUNIĘTE z `nexto_free_files_registry.json` (historyczny rejestr został usunięty z bieżącego wydania po wyczyszczeniu do `[]`) — patrz `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-24c | ⛔ Żaden bezpośredni link do pełnego pliku PDF (wzorzec `.../free/[hash].pdf` lub jakikolwiek inny bezpośredni link do pliku PDF spoza Rządu 1/2A) nie jest przechowywany w systemie jako źródło i nie wolno go cytować — dotyczy to WYŁĄCZNIE pełnych plików; legalne próbki/podglądy pozostają dozwolone wg sekcji 3B `shared/HIERARCHIA-ZRODEL.md` |
-| nexto.pl — PRÓBKI/fragmenty książek (spis treści + ograniczone strony, funkcja standardowa księgarni cyfrowej) | ⭐ Dodane 2026-07-24, doprecyzowane 2026-07-24b — ODRĘBNE od wiersza F-12 powyżej (F-12 = pełne, nieautoryzowane pliki; ten wiersz = legalne próbki wydawnicze) | 📚 Rząd 3 domyślnie (3B-i), ALE Rząd 2B-równoważne (3B-ii) gdy wydawnictwo widoczne w próbce to C.H.Beck lub Wolters Kluwer (dziedziczy status marki już uznanej w 2B przez legalis.pl/lex.pl) — pełna procedura, oba znaczniki i wymóg weryfikacji ważności linku + aktualności wydania w `shared/HIERARCHIA-ZRODEL.md`, sekcja **3B**. Zawsze fragment, nigdy Rząd 1/2A |
+| *(nexto.pl — NIE rejestrujemy jako portal/księgarnia, to NIE jest cel tego rejestru)* | ⛔ ZAMKNIĘTE 2026-07-24c na wyraźne polecenie użytkownika: wszystkie 5 wcześniej monitorowanych bezpośrednich linków do pełnych plików PDF (flaga F-12) zostały USUNIĘTE z `nexto_free_files_registry.json` (historyczny rejestr został usunięty z bieżącego wydania po wyczyszczeniu do `[]`) — patrz `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-24c | ⛔ Żaden bezpośredni link do pełnego pliku PDF (wzorzec `.../free/[hash].pdf` lub jakikolwiek inny bezpośredni link do pliku PDF spoza Rządu 1/2A) nie jest przechowywany w systemie jako źródło i nie wolno go cytować — dotyczy to WYŁĄCZNIE pełnych plików; legalne próbki/podglądy pozostają dozwolone wg sekcji 3B `JUR:hierarchia-zrodel` |
+| nexto.pl — PRÓBKI/fragmenty książek (spis treści + ograniczone strony, funkcja standardowa księgarni cyfrowej) | ⭐ Dodane 2026-07-24, doprecyzowane 2026-07-24b — ODRĘBNE od wiersza F-12 powyżej (F-12 = pełne, nieautoryzowane pliki; ten wiersz = legalne próbki wydawnicze) | 📚 Rząd 3 domyślnie (3B-i), ALE Rząd 2B-równoważne (3B-ii) gdy wydawnictwo widoczne w próbce to C.H.Beck lub Wolters Kluwer (dziedziczy status marki już uznanej w 2B przez legalis.pl/lex.pl) — pełna procedura, oba znaczniki i wymóg weryfikacji ważności linku + aktualności wydania w `JUR:hierarchia-zrodel`, sekcja **3B**. Zawsze fragment, nigdy Rząd 1/2A |
 | komornik.pl (Krajowa Izba Komornicza) | Egzekucja komornicza — wytyczne, komunikaty | 📚 znane (już w systemie) |
 | infor.pl (sekcja /prawo/sprawy-karne/) | Ogólne prawo karne, komentarze praktyczne, "Z wokandy" (orzecznictwo) | ✅ STATUS PODNIESIONY 2026-07-25 z 📚 (fetch bezpośredni `infor.pl/prawo/`) — patrz uzasadnienie w DR-02 (ta sama sekcja ogólna portalu, obejmuje też DR-03 przez podsekcję Sprawy karne/Wykroczenia) |
 | gazetaprawna.pl | Prawo karne — bieżące komentarze, orzecznictwo | ✅✅ ZWERYFIKOWANE 2026-07-21 jako GENERALISTYCZNE źródło wysokiej jakości (patrz sekcja "OGÓLNE, MIĘDZYDZIEDZINOWE" w `czesc-04-ogolne-metodologia.md`) — status podniesiony z 📚 |
@@ -111,7 +111,7 @@ lekcję przy DALSZYM budowaniu rejestru — "brak wyniku" przy PIERWSZEJ
 próbie NIE zawsze oznacza "brak portalu", może oznaczać "zła fraza".
 
 Indywidualne blogi kancelaryjne WYMIENIONE wyżej NADAL TRAKTUJ jako
-Rząd 3 (patrz `shared/HIERARCHIA-ZRODEL.md`) — e-prawnik.pl jest
+Rząd 3 (patrz `JUR:hierarchia-zrodel`) — e-prawnik.pl jest
 WYJĄTKIEM, redakcyjnym portalem 2B, nie kancelaryjnym blogiem.
 ```
 
@@ -124,7 +124,7 @@ WYJĄTKIEM, redakcyjnym portalem 2B, nie kancelaryjnym blogiem.
 | kadry.infor.pl | Prawo pracy — komentarze praktyczne, kadry i płace | 📚 znane (HIERARCHIA-ZRODEL), używane wielokrotnie w tej sesji z dobrym skutkiem |
 | gofin.pl (patrz DR-06 w `czesc-02-dr05-dr09.md`, ale też prawo pracy) | Kadry-płace jako CZĘŚĆ szerszej oferty podatkowo-księgowej | ✅ ZWERYFIKOWANE (patrz DR-06 tamże, dotyczy też HR) |
 > ⛔ **USUNIĘTO 2026-07-27** (ZASADA STAŁA — rejestr tylko dla wartości Rząd 1/2A/2B): wcześniej tu był hrlaw.pl (portal kancelaryjny Wardyński i Wspólnicy, jednoznacznie Rząd 3 mimo wcześniejszego hedge'u "traktuj jak 2B-podobny"). Usunięty zgodnie z nową zasadą.
-| pip.gov.pl | Oficjalne stanowiska PIP — NIE 2B, to RZĄD 1 (organ urzędowy) | (dla porządku: to NIE portal komercyjny, patrz `shared/INTERPRETACJE-URZEDOWE.md`) |
+| pip.gov.pl | Oficjalne stanowiska PIP — NIE 2B, to RZĄD 1 (organ urzędowy) | (dla porządku: to NIE portal komercyjny, patrz `JUR:interpretacje-urzedowe`) |
 > ⚠️ **KOREKTA 2026-07-27b (na żądanie użytkownika):** wcześniejsze
 > usunięcie monikasmulewicz.pl było BŁĘDEM KLASYFIKACJI. "Poza
 > kategorią" w ZASADZIE STAŁEJ oznacza źródła marginalne/niejasne/

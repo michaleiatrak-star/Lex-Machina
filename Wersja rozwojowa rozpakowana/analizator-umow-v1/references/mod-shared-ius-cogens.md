@@ -9,7 +9,7 @@
 > `workflows/ocena-drugiej-strony.md`, lub gdy podejrzewasz, że klauzula nie
 > jest tylko niekorzystna, ale **nieważna z mocy prawa**.
 >
-> **Geneza (2026-08-02):** `mod-shared-abusive-clauses.md` pokrywa wyłącznie
+> **Geneza (2026-08-02):** `JUR:umowy-shared-abusive-clauses` pokrywa wyłącznie
 > abuzywność B2C (art. 385¹–385³ KC) i dyrektywy unijne konsumenckie. Nie było
 > w systemie skonsolidowanego katalogu **granic swobody umów w B2B** — norm,
 > których nie da się wynegocjować, bo prawo tego nie dopuszcza, niezależnie od
@@ -64,7 +64,7 @@ i treść przed cytowaniem).
 umowy leży poza jej zwykłą specjalizacją (np. software house sprzedający
 usługę IT jednoosobowej kancelarii adwokackiej — dla kancelarii to nie jest
 umowa "zawodowa"). Wtedy uruchom **dodatkowo** skan pod kątem klauzul
-abuzywnych z `mod-shared-abusive-clauses.md`, mimo że formalnie to umowa B2B.
+abuzywnych z `JUR:umowy-shared-abusive-clauses`, mimo że formalnie to umowa B2B.
 
 ## IC.4 TEST KLAUZULI GRANICZNEJ — efekt kumulatywny
 
@@ -101,7 +101,7 @@ mieści się w granicach dopuszczalności".
    Trafienie → 🔴 od razu, bo to nieważność, nie "ryzyko do rozważenia"
    (POZIOM 1 hierarchii z mod-core-checklist.md C.2).
 2. Sprawdź trigger mikroprzedsiębiorcy (IC.3) — jeśli aktywny, dołącz skan
-   abuzywności z mod-shared-abusive-clauses.md, mimo formalnie B2B.
+   abuzywności z JUR:umowy-shared-abusive-clauses, mimo formalnie B2B.
 3. Klauzule graniczne → test pięciopunktowy IC.4, z naciskiem na krok 5.
 4. Werdykt: klauzula nieważna z mocy prawa ZAWSZE przesuwa ocenę triage do
    🔴 (`workflows/triage-szybki.md`) — nieważność nie podlega miarkowaniu
@@ -110,7 +110,7 @@ mieści się w granicach dopuszczalności".
 
 ## Powiązania
 
-- Abuzywność B2C i dyrektywy unijne konsumenckie — `mod-shared-abusive-clauses.md`
+- Abuzywność B2C i dyrektywy unijne konsumenckie — `JUR:umowy-shared-abusive-clauses`
   (ten plik jej NIE zastępuje, uzupełnia o B2B i efekt kumulatywny).
 - Hierarchia poziomów naruszenia — `mod-core-checklist.md` Moduł C.2 (ten
   plik dostarcza konkretny katalog do POZIOMU 1 tej hierarchii).

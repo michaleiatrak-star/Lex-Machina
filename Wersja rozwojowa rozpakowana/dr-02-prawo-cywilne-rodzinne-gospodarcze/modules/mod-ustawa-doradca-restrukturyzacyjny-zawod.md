@@ -1,6 +1,6 @@
 # mod-ustawa-doradca-restrukturyzacyjny-zawod — Doradca restrukturyzacyjny (syndyk / nadzorca / zarządca) jako zawód regulowany
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14/15 (audyt: pokrycie zawodów
 prawniczych i pokrewnych — kontynuacja po module zawodów zaufania
 publicznego z AUDYT-2026-06-14j).
@@ -171,7 +171,7 @@ Właściwy organ: MS (licencja) / sąd upadłościowy-restrukturyzacyjny
 Środek: odwołanie od decyzji MS / zarzuty/zażalenie w postępowaniu
   upadłościowym-restrukturyzacyjnym / pozew cywilny / skarga WSA
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   + mod-PrUpad-upadlosc-restrukturyzacja (terminy procesowe specyficzne
   dla postępowania upadłościowego/restrukturyzacyjnego)
 ```

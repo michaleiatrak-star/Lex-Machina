@@ -214,7 +214,7 @@ REKOMENDACJA: □ Warunkowe umorzenie  □ Mediacja  □ Obrona na rozprawie  �
 | Analiza akt karnych / szanse | `analiza-sadowa-v6` |
 | Ocena dowodów / nagrań | `analizator-dowodow-v3` |
 | Orzecznictwo SN karne | `orzeczenia-sadowe-v2` |
-| Przesłuchanie na rozprawie | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` + skill `przesluchanie-swiadkow-v2-min90` |
+| Przesłuchanie na rozprawie | `prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md` + skill `przesluchanie-swiadkow-v2-min90` |
 | Stalking / nękanie jako przestępstwo | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-art190a-stalking.md` |
 
 *KK (Dz.U. 2026 poz. 1342 t.j.) + KPK (Dz.U. 2026 poz. 490) + KKW (Dz.U. 2026 poz. 1307 t.j.)*

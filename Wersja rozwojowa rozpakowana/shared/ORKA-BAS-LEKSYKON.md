@@ -75,26 +75,26 @@ ORKA-META-02 — BRAK JEDNOLITOŚCI DEFINICJI NIE OZNACZA SPRZECZNOŚCI PRAWA
 
 | Część | Temat | Linie orient. | Plik |
 |---|---|---|---|
-| I | Prawo pracy i rynek pracy | ~93 | `czesc-01-praca-admin-drogowe.md` |
-| II | Prawo administracyjne i procedura | ~42 | `czesc-01-praca-admin-drogowe.md` |
-| III | Prawo drogowe | ~56 | `czesc-01-praca-admin-drogowe.md` |
-| IV | Finanse publiczne i podatki | ~77 | `czesc-02-finanse-nieruchomosci-energetyczne.md` |
-| V | Nieruchomości i budownictwo | ~43 | `czesc-02-finanse-nieruchomosci-energetyczne.md` |
-| IX | Prawo energetyczne | ~20 | `czesc-02-finanse-nieruchomosci-energetyczne.md` |
-| VI | Prawo cywilne i rodzinne | ~25 | `czesc-03-cywilne-niepelnosprawnosc.md` |
-| XI | Prawo cywilne — uzupełnienie (DR-02) | ~105 | `czesc-03-cywilne-niepelnosprawnosc.md` |
-| VII | Niepełnosprawność (ogólna) | ~40 | `czesc-03-cywilne-niepelnosprawnosc.md` |
-| XIII | Osoba niewidoma — odesłanie do modułów specjalistycznych | ~41 | `czesc-03-cywilne-niepelnosprawnosc.md` |
-| XIV | Niepełnosprawność intelektualna i głuchota — odesłanie | ~49 | `czesc-03-cywilne-niepelnosprawnosc.md` |
-| VIII | Prawo karne i wykroczeniowe | ~57 | `czesc-04-karne.md` |
-| XII | Prawo karne — uzupełnienie (DR-03) | ~81 | `czesc-04-karne.md` |
-| X | Rekordy-kandydaci (wymagają pełnej weryfikacji online) | ~58 | `czesc-05-kandydaci-prawa-obywatelskie-sporne.md` |
-| XV | Prawa obywatelskie — utrata i odzyskanie | ~35 | `czesc-05-kandydaci-prawa-obywatelskie-sporne.md` |
-| XVI | Pojęcia sporne i ocenne — uzupełnienie z audytu DR-skillów | ~138 | `czesc-05-kandydaci-prawa-obywatelskie-sporne.md` |
-| XIX | Brakujące priorytety P1 (audyt archiwum v1.8) | ~207 | `czesc-06-priorytety-P1.md` |
-| XX | Priorytety P2 (audyt archiwum v1.8) | ~74 | `czesc-07-priorytety-P2-bas-v18.md` |
-| XVII | Brakujące z oryginału BAS v1.8 — uzupełnienie | ~298 | `czesc-07-priorytety-P2-bas-v18.md` |
-| XVIII | Kluczowe pojęcia praktyki prawniczej — audyt uzupełniający | ~345 | `czesc-08-praktyka-prawnicza.md` |
+| I | Prawo pracy i rynek pracy | ~93 | `JUR:leksykon-praca-admin-drogowe` |
+| II | Prawo administracyjne i procedura | ~42 | `JUR:leksykon-praca-admin-drogowe` |
+| III | Prawo drogowe | ~56 | `JUR:leksykon-praca-admin-drogowe` |
+| IV | Finanse publiczne i podatki | ~77 | `JUR:leksykon-finanse-nieruchomosci-energetyczne` |
+| V | Nieruchomości i budownictwo | ~43 | `JUR:leksykon-finanse-nieruchomosci-energetyczne` |
+| IX | Prawo energetyczne | ~20 | `JUR:leksykon-finanse-nieruchomosci-energetyczne` |
+| VI | Prawo cywilne i rodzinne | ~25 | `JUR:leksykon-cywilne-niepelnosprawnosc` |
+| XI | Prawo cywilne — uzupełnienie (DR-02) | ~105 | `JUR:leksykon-cywilne-niepelnosprawnosc` |
+| VII | Niepełnosprawność (ogólna) | ~40 | `JUR:leksykon-cywilne-niepelnosprawnosc` |
+| XIII | Osoba niewidoma — odesłanie do modułów specjalistycznych | ~41 | `JUR:leksykon-cywilne-niepelnosprawnosc` |
+| XIV | Niepełnosprawność intelektualna i głuchota — odesłanie | ~49 | `JUR:leksykon-cywilne-niepelnosprawnosc` |
+| VIII | Prawo karne i wykroczeniowe | ~57 | `JUR:leksykon-karne` |
+| XII | Prawo karne — uzupełnienie (DR-03) | ~81 | `JUR:leksykon-karne` |
+| X | Rekordy-kandydaci (wymagają pełnej weryfikacji online) | ~58 | `JUR:leksykon-kandydaci-prawa-obywatelskie-sporne` |
+| XV | Prawa obywatelskie — utrata i odzyskanie | ~35 | `JUR:leksykon-kandydaci-prawa-obywatelskie-sporne` |
+| XVI | Pojęcia sporne i ocenne — uzupełnienie z audytu DR-skillów | ~138 | `JUR:leksykon-kandydaci-prawa-obywatelskie-sporne` |
+| XIX | Brakujące priorytety P1 (audyt archiwum v1.8) | ~207 | `JUR:leksykon-priorytety-p1` |
+| XX | Priorytety P2 (audyt archiwum v1.8) | ~74 | `JUR:leksykon-priorytety-p2-bas-v18` |
+| XVII | Brakujące z oryginału BAS v1.8 — uzupełnienie | ~298 | `JUR:leksykon-priorytety-p2-bas-v18` |
+| XVIII | Kluczowe pojęcia praktyki prawniczej — audyt uzupełniający | ~345 | `JUR:leksykon-praktyka-prawnicza` |
 
 **Dane maszynowe:** `shared/ORKA-BAS-001-125.json` — 125 rekordów BAS-001…BAS-125
 (`id`, `haslo`, `modul`, `definicja`); 41 z nich (od BAS-025) nie ma odpowiednika

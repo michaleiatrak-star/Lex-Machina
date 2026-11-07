@@ -1,7 +1,7 @@
 ---
 name: baza-aktow-okoloakcyzowych
 version: 1.0.0
-utworzono: 2026-08-11 (AUDYT-2026-08-11 — patrz shared/PRAWO-HARDGATE.md v2.5)
+utworzono: 2026-08-11 (AUDYT-2026-08-11 — patrz prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md v2.5)
 status: production
 przeznaczenie: |
   Ustrukturyzowana mapa aktów prawnych regulujących materię akcyzową
@@ -9,22 +9,22 @@ przeznaczenie: |
   przewozu, wyrobu alkoholu). Cel: zmniejszyć ryzyko pomyłki numeracyjnej
   typu "numer artykułu istnieje, ale w złym akcie/dziale" — patrz
   incydent źródłowy niżej. To NIE jest substytut KROK 2C
-  (shared/PRAWO-HARDGATE.md) — to mapa, która pomaga ODNALEŹĆ właściwy
+  (prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md) — to mapa, która pomaga ODNALEŹĆ właściwy
   akt/dział PRZED weryfikacją treści konkretnego artykułu, którą i tak
   trzeba wykonać zgodnie z KROK 2C.
 powiązane:
   - dr-06-podatki-finanse-publiczne-aml/modules/mod-ustawa-akcyzowa-i-clo-UCC.md
   - dr-06-podatki-finanse-publiczne-aml/modules/mod-UCC-clo-taryfa-celna.md
   - dr-06-podatki-finanse-publiczne-aml/modules/mod-alkohol-tyton-regulacja-sprzedazy.md
-  - shared/PRAWO-HARDGATE.md (KROK 2C — obowiązkowa weryfikacja treści artykułu)
-  - shared/HIERARCHIA-ZRODEL.md (kategoryzacja RZĄD 1/2A/2B/3 dla linków)
+  - prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md (KROK 2C — obowiązkowa weryfikacja treści artykułu)
+  - prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md (kategoryzacja RZĄD 1/2A/2B/3 dla linków)
 incydent_zrodlowy: |
   AUDYT-2026-08-11: analiza sprawy karnoskarbowej ("produkcja poza składem
   podatkowym, brak zezwolenia") oznaczyła ✅ art. 100 ustawy o podatku
   akcyzowym jako podstawę — artykuł istnieje, ale reguluje wyłącznie
   opodatkowanie akcyzą samochodów osobowych. Prawidłowa podstawa:
   art. 63 § 3 lub art. 69a KKS. Root cause i naprawa mechanizmu
-  weryfikacji: shared/PRAWO-HARDGATE.md v2.5, KROK 2C.
+  weryfikacji: prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md v2.5, KROK 2C.
 ---
 
 # Baza aktów okołoakcyzowych
@@ -33,12 +33,12 @@ incydent_zrodlowy: |
 > Dz.U. — służy do ODNALEZIENIA właściwego aktu/działu. NIE zwalnia
 > z obowiązku weryfikacji aktualnego tekstu jednolitego i treści
 > konkretnego artykułu na ISAP przed cytowaniem (KROK 1-6 +
-> KROK 2C, `shared/PRAWO-HARDGATE.md`). Oznaczenia Dz.U. poniżej
+> KROK 2C, `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`). Oznaczenia Dz.U. poniżej
 > WERYFIKUJ — akty nowelizowane są tu orientacyjne, nie do cytowania wprost.
 
 ## 0. ⛔ STATUS AKTUALNOŚCI — wynik weryfikacji online (data kontroli: 2026-08-11)
 
-> Wykonano zgodnie z `shared/PRAWO-HARDGATE.md`, REGUŁA AKTUALNOŚCI —
+> Wykonano zgodnie z `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`, REGUŁA AKTUALNOŚCI —
 > sprawdzono na ISAP/obwieszczeniach Marszałka Sejmu najnowszy ogłoszony
 > tekst jednolity każdego aktu z sekcji 1 i 3. **Wynik: baza w wersji
 > 1.0.0 zawierała nieaktualne oznaczenie Dz.U. dla ustawy akcyzowej —
@@ -133,7 +133,7 @@ statusu procesu legislacyjnego.
    samego wyrobu.
 
 3. Po wyborze aktu i artykułu → OBOWIĄZKOWO KROK 2C
-   (shared/PRAWO-HARDGATE.md): pobierz pełną treść, zacytuj fragment,
+   (prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md): pobierz pełną treść, zacytuj fragment,
    porównaj tematycznie PRZED nadaniem ✅. Ta baza wskazuje TYLKO
    kierunek wyszukiwania — nie jest źródłem do cytowania wprost.
 ```
@@ -161,4 +161,4 @@ zaktualizować wszystkie trzy miejsca, nie tylko to najbardziej
 oczywiste. Rozważyć przy kolejnym audycie systemowym (`audyt-systemu-v4`),
 czy nie połączyć ich w jedno źródło prawdy — podobny problem duplikacji
 (dwie niezależne implementacje tego samego mechanizmu) opisano już
-wcześniej dla `PRAWO-HARDGATE.md` vs `WERYFIKACJA-SLAD.md` (v2.3).
+wcześniej dla `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` vs `WERYFIKACJA-SLAD.md` (v2.3).

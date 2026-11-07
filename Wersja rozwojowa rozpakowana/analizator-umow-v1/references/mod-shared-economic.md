@@ -267,7 +267,7 @@ WPŁYW ŁĄCZNY:
 Automatyczne połączenia:
   → mod-shared-ryzyko-kwant.md: po OEK.7 → scoring agregowany
   → mod-shared-fallback-library.md: klauzule z wysokim wpływem → FL poziomy
-  → mod-shared-orzecznictwo-umow.md: kara umowna → ORP.2
+  → JUR:umowy-shared-orzecznictwo-umow: kara umowna → ORP.2
   → raport-klienta-v1: eksport danych do raportu biznesowego
 ```
 

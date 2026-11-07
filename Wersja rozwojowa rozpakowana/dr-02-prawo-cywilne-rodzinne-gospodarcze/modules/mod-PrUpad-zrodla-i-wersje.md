@@ -3,8 +3,8 @@
 **Zakres:** cała ustawa z 28 lutego 2003 r. — Prawo upadłościowe.
 **Poziom:** pełny urzędowy tekst źródłowy; komentarze i procedury mają własne,
 oddzielne pokrycie. Nie deklaruj `FULL` komentarza na podstawie dostępności tekstu.
-**Standard:** `shared/MODULE-STANDARD-POLISH-LAW.md` (import 13 sekcji),
-`shared/PRAWO-HARDGATE.md`, `shared/TEMPORAL-LAW-CHECK.md`.
+**Standard:** `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` (import 13 sekcji),
+`prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`, `shared/TEMPORAL-LAW-CHECK.md`.
 
 ## Metryka i źródła
 

@@ -1,6 +1,6 @@
 # mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md — Państwowa Straż Pożarna, Ochotnicze Straże Pożarne, ochrona przeciwpożarowa
 
-Status: moduł prawa polskiego klasy wzorcowej (poziom A wg `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`). Stan metodyczny: 2026-07-07 — naprawa WARN-29 (audyt kompletności DR-13 z 2026-07-06, sesja dedykowana). Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis/portale branżowe dopuszczalne wyłącznie pomocniczo.
+Status: moduł prawa polskiego klasy wzorcowej (poziom A wg `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`). Stan metodyczny: 2026-07-07 — naprawa WARN-29 (audyt kompletności DR-13 z 2026-07-06, sesja dedykowana). Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis/portale branżowe dopuszczalne wyłącznie pomocniczo.
 
 ## 1. Akty i źródła do weryfikacji
 - Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2025 poz. 1312 t.j. (obwieszczenie Marszałka Sejmu 15.09.2025; VER: isap.sejm.gov.pl WDU20250001312)
@@ -140,13 +140,13 @@ Oceń:
 
 ## 12. Quality gate
 Przed odpowiedzią lub pismem zastosuj:
-- shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md,
+- prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md,
 - shared/ISAP-AUDIT-PROTOCOL.md,
 - shared/TEMPORAL-LAW-CHECK.md,
 - shared/LEGAL-QUALITY-GATE.md,
 - shared/RISK-ASSESSMENT.md, jeżeli istnieje,
-- shared/FORMAL-CHECK.md, jeżeli powstaje pismo,
-- shared/ORZECZENIA-HIERARCHIA.md §4.2 (PSP — dyscyplinarka) / §4.3 (OSP — status stowarzyszeniowy) przed powołaniem właściwości sądu.
+- prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md, jeżeli powstaje pismo,
+- prawo-polskie-v2/krajowe/shared/ORZECZENIA-HIERARCHIA.md §4.2 (PSP — dyscyplinarka) / §4.3 (OSP — status stowarzyszeniowy) przed powołaniem właściwości sądu.
 
 ---
 
@@ -199,7 +199,7 @@ Ustawa o ochotniczych strażach pożarnych (OSP): Dz.U. 2025 poz. 244 t.j. (usta
   STATUS PRAWNY KLUCZOWY: OSP = stowarzyszenie w rozumieniu Prawa o stowarzyszeniach
     (Dz.U. 2020 poz. 2261) — NIE jest służbą mundurową, NIE ma państwowego reżimu
     dyscyplinarnego. Strażacy ratownicy OSP nie są w stosunku służbowym.
-    (patrz shared/ORZECZENIA-HIERARCHIA.md §4.3)
+    (patrz prawo-polskie-v2/krajowe/shared/ORZECZENIA-HIERARCHIA.md §4.3)
   Art. 7 — gmina obowiązana zawrzeć umowę ze wszystkimi OSP na jej terenie
   Art. 5-6 — komendant powiatowy (miejski) prowadzi ewidencję sił/środków OSP;
     komendant wojewódzki zapewnia wsparcie

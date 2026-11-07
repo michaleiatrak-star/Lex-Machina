@@ -1,7 +1,7 @@
 ---
 name: mod-AP-oswiata-szkolnictwo-wyzsze
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 description: |
   Moduł prawa oświatowego i szkolnictwa wyższego. Stosuj przy szkołach, uczelniach,
   decyzjach rektora/dziekana, skreśleniu z listy studentów, pomocy materialnej,
@@ -188,7 +188,7 @@ Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
   ↓
 Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
   ↓
@@ -263,16 +263,16 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy podano ryzyka przeciwnika/organu?
 □ Czy wskazano słabe punkty klienta?
 □ Czy każdy przepis i Dz.U. ma kontrolę ISAP albo oznaczenie braku weryfikacji?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+□ Czy użyto prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md?
 ```
 
 ## 8. Łącz obowiązkowo z
 
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
+| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md` |
 | stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
+| braki formalne | `prawo-polskie-v2/krajowe/shared/BRAKI-FORMALNE.md` |
 | warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
 | dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
 | ryzyka | `shared/RISK-ASSESSMENT.md` |

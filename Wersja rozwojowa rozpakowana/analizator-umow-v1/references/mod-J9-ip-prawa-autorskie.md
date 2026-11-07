@@ -292,8 +292,8 @@ ustawa Prawo własności przemysłowej (p.w.p.) — weryfikuj w ELI (RZĄD 1), r
 | Sytuacja | Wczytaj dodatkowo |
 |---|---|
 | Oprogramowanie / kod / SaaS | `mod-J6-it-konsorcjum.md` (SD-1, art. 74–75) |
-| IP w umowie B2B / podwykonawczej | `b2b-podwykonawcze.md` (Pułapka 2 IP) |
-| IP wytworzone przez pracownika | `umowy-o-prace.md` (art. 12 PrAut — utwór pracowniczy, weryfikuj) |
+| IP w umowie B2B / podwykonawczej | `JUR:umowy-b2b-podwykonawcze` (Pułapka 2 IP) |
+| IP wytworzone przez pracownika | `JUR:umowy-umowy-o-prace` (art. 12 PrAut — utwór pracowniczy, weryfikuj) |
 | Kwantyfikacja ryzyka roszczeń IP w PLN | `mod-shared-ryzyko-kwant.md` |
 | Negocjacja zakresu pól / wynagrodzenia | `mod-shared-neg-strategia.md` + `mod-shared-alt-drafts.md` |
 | Klauzula IP niejasna / "wszelkie prawa" | `mod-shared-wykladnia.md` |
@@ -302,4 +302,4 @@ ustawa Prawo własności przemysłowej (p.w.p.) — weryfikuj w ELI (RZĄD 1), r
 
 *Moduł J9 / analizator-umow-v1 · IP nie-software (art. 41–68 PrAut) · dla software → J6*
 *HARD GATE: każdy art. PrAut weryfikuj w ELI (RZĄD 1) (uwzględnij nowelizację 26.07.2024)*
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*

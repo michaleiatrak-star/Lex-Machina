@@ -365,7 +365,7 @@ REKOMENDACJA: □ Odwołanie do sądu  □ Wniosek o przeliczenie  □ Biegły l
 ⭐ ZNACZENIE STRATEGICZNE: narzędzie PREWENCYJNE przy planowaniu modelu
 współpracy (B2B/zlecenie) budzącego wątpliwości co do ryzyka uznania
 za STOSUNEK PRACY — patrz test G.1 w `analizator-umow-v1/references/
-b2b-podwykonawcze.md` oraz reforma PIP 2026 (`mod-ustawa-PIP-
+prawo-polskie-v2/krajowe/analizator-umow-v1/references/b2b-podwykonawcze.md` oraz reforma PIP 2026 (`mod-ustawa-PIP-
 inspekcja-pracy.md` sekcja 6.2, DR-05) — pozytywna interpretacja
 uzyskana PRZED rozpoczęciem współpracy wzmacnia pozycję przedsiębiorcy
 przy kontroli.

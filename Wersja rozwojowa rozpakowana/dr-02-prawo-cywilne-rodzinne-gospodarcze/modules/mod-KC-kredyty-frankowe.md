@@ -91,5 +91,5 @@ web_search: "kredyt frankowy zabezpieczenie zawieszenie rat postanowienie sąd 2
   zachowaj podział: TEN = materialne prawo, TAMTEN = procedura
 - Ogólne reżimy odpowiedzialności kontraktowej/deliktowej (art. 415, 471 KC):
   → mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md (sekcja 3, PROCEDURA)
-- Definicje szkody/odszkodowania: → shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md
+- Definicje szkody/odszkodowania: → prawo-polskie-v2/krajowe/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md
 - Roszczenia konsumenckie ogólne: → mod-KC-konsumenckie.md

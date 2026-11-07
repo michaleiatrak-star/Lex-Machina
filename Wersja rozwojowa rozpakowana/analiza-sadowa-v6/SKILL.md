@@ -1,6 +1,6 @@
 ---
 name: analiza-sadowa-v6
-version: "6.19"
+version: "6.20"
 type: executive-analiza
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_interactive_ui"
@@ -10,7 +10,7 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.17 (2026-10-15b, AUDYT-2026-10-15b): Przejście II krok 8 — przesłanka związku przyczynowego badana przez shared/MOD-GRAF-PRZYCZYNOWY.md (nie sama kolejność dat).
+  Wersja bieżąca: 6.20 (2026-10-15b, AUDYT-2026-10-15b): Przejście II krok 8 — przesłanka związku przyczynowego badana przez shared/MOD-GRAF-PRZYCZYNOWY.md (nie sama kolejność dat).
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -55,7 +55,7 @@ analiza-sadowa-v6/
 │   ├── WERYFIKACJA-DOWODOW.md            ← Rozszerzony protokół dwukrotnej weryfikacji
 │   ├── moduly-spec.md                    ← fallback: wszystkie moduły (awaryjny)
 │   ├── orzecznictwo.md                   ← weryfikacja i cytowanie orzeczeń
-│   ├── koszty-terminy.md                 ← KSCU, terminy KPC/KPK/KPW/KPA/KP
+│   ├── JUR:analiza-koszty-terminy                 ← KSCU, terminy KPC/KPK/KPW/KPA/KP
 │   └── engines/
 │       ├── adversarial-litigation-analysis-v9.md
 │       ├── contradiction-case-analysis-v10.md
@@ -80,8 +80,8 @@ FALLBACK), a nie ten plik — ale dla kogoś czytającego wyłącznie ten skill:
   25 dziedzin MX), analiza śledcza (profilowanie, VSA, HUMINT), lub gdy
   wyjściem ma być graf/macierz, nie executive summary.
 - Terminy procesowe i hierarchia orzecznictwa: **oba skille korzystają z tych
-  samych plików kanonicznych** `shared/terminy.md` i
-  `shared/ORZECZENIA-HIERARCHIA.md` (patrz `references/koszty-terminy.md` i
+  samych plików kanonicznych** `JUR:terminy-procesowe` i
+  `JUR:orzecznictwo-hierarchia` (patrz `JUR:analiza-koszty-terminy` i
   `references/orzecznictwo.md` w tym skillu) — żadna z dwóch implementacji
   nie utrzymuje już własnej, potencjalnie rozbieżnej kopii tych tabel.
 - Gdy zapytanie pasuje do obu → router ładuje `analiza-sadowa-v6` jako
@@ -183,7 +183,7 @@ Moduły specjalne: błędy pełnomocnika, groźba bezprawna, nagrania, terminy, 
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 
 > Przed podaniem jakiegokolwiek przepisu, artykułu, terminu lub sygnatury orzeczenia:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 > Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
 
 > ⛔ **[WEJŚCIE-DOKUMENTU] — bramka materiału wejściowego (F-200; odtworzone 2026-09-27d, F-207).**
@@ -856,7 +856,7 @@ Po widgecie (lub gdy wyjątek powyżej — bezpośrednio po raporcie):
 | Odwołanie od wypowiedzenia | — | — | — | — | 21 dni ⚠ |
 
 ⚠ KP art. 264 §1 — termin ZAWITY; roszczenie wygasa bezpowrotnie.
-Pełne tabele: references/koszty-terminy.md
+Pełne tabele: JUR:analiza-koszty-terminy
 
 ---
 
@@ -881,7 +881,7 @@ Procedura: references/orzecznictwo.md
 | Moduły A+F łącznie | MOD-A.md + MOD-F.md |
 | Fallback | references/moduly-spec.md |
 | Orzecznictwo | references/orzecznictwo.md |
-| Koszty i terminy | references/koszty-terminy.md |
+| Koszty i terminy | JUR:analiza-koszty-terminy |
 | Mapa całego skilla | references/BLUEPRINT-SCHEMA.md |
 | Widget | show_widget HTML vanilla JS — TYLKO na żądanie |
 | Sprawa ≥10 dokumentów (model kontynentalny) | PRZEBIEG-1-ekstrakcja.md → PRZEBIEG-2-strukturalna.md → PRZEBIEG-3-predykcja.md |
@@ -908,11 +908,11 @@ Hard gate: nie przygotowuj repliki, odpowiedzi, apelacji bez V10 w Przejściu II
 
 Gdy wynik analizy służy do pisma, strategii lub decyzji terminowej:
 
-view shared/TRYBY-PROCESOWE.md
+view JUR:tryby-procesowe
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view shared/STRATEGIA-PROCESOWA.md
 view shared/QUALITY-CHECK.md
 

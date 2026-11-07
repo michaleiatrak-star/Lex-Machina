@@ -7,7 +7,7 @@
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA Z PAMIĘCI
 > Każdy artykuł powołany w raporcie walidacyjnym musi być zweryfikowany online przed podaniem.
 > Każda sygnatura orzeczenia musi być zweryfikowana w oficjalnej bazie przed podaniem.
-> Procedura: view shared/PRAWO-HARDGATE.md
+> Procedura: view JUR:weryfikacja-przepisow-kanon
 
 > ⛔ HARD GATE — ZAKAZ PRZYJMOWANIA TWIERDZEŃ STRONY JAKO FAKTÓW (nowość v2.0)
 > Przed każdą walidacją wykonaj F0 z MOD-FAKTY:

@@ -6,6 +6,7 @@
 > rozproszenia, którą ZASADA 15 zakazuje (i którą test T12 zgłasza jako ⚠️).
 > Pole YAML trzyma odtąd wyłącznie skrót bieżącej wersji.
 
+- 2.13 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 2.12 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-sytuacyjny.html` zasilany blueprintem (7 zakładek); sekwencja: `show_widget(path, data=BLUEPRINT)`. Wariant bez pola `data` (MOD-WIDGET-IO, kod) w sekcji WIDGET-DANE.
 
 - 2.11 (2026-09-27e, AUDYT-2026-09-27e): claude.ai po dodaniu marketplace instalował wyłącznie 4 z 32 pluginów (shared, prawny-router-v3, analizator-dowodow-v3, przesluchanie-swiadkow-v2-min90); jedyna cecha wspólna tych 4, nieobecna w żadnym z 28 pozostałych, to klucz `dependencies` we frontmatterze SKILL.md. Dodano go (`requires: [shared]` — zgodnie ze stanem faktycznym) oraz jawny manifest pluginu (name, description = description z SKILL.md, author, repository, license) — host nie musi niczego wnioskować z SKILL.md. `version` w manifeście = `version:` z SKILL.md (pilnuje T38 w audyt-systemu-v4) — host rozpoznaje aktualizację po podbiciu wersji. Treść skilla bez zmian.

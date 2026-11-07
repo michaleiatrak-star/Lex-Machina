@@ -11,14 +11,14 @@ przeznaczenie: |
   — wykryto, że MAPA-AKTOW.md (DR-06) i ROUTING-MAP.md (prawo-polskie-v2)
   są dwoma niezależnie utrzymywanymi rejestrami tych samych faktów i
   mogą się rozjechać bez wzajemnej synchronizacji. Ten plik NIE zastępuje
-  KROK 2C (shared/PRAWO-HARDGATE.md) — wskazuje kierunek, weryfikacja
+  KROK 2C (prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md) — wskazuje kierunek, weryfikacja
   treści konkretnego artykułu i tak jest obowiązkowa przy każdym użyciu.
 powiązane:
   - dr-06-podatki-finanse-publiczne-aml/MAPA-AKTOW.md
   - prawo-polskie-v2/ROUTING-MAP.md
   - dr-06-podatki-finanse-publiczne-aml/references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
-  - shared/PRAWO-HARDGATE.md (KROK 2C)
-  - (shared/AKTY-PRAWNE-MASTER.md — usunięty z shared w 3.19; rejestr Dz.U.: audyt-systemu-v4/references/mapa_dzu_*.md, metryki: shared/ISAP-METRYKI-AKTOW.md)
+  - prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md (KROK 2C)
+  - (shared/AKTY-PRAWNE-MASTER.md — usunięty z shared w 3.19; rejestr Dz.U.: audyt-systemu-v4/references/mapa_dzu_*.md, metryki: prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md)
 ---
 
 # Baza aktów okołopodatkowych
@@ -45,7 +45,7 @@ rewidentach, ustawa o doradztwie podatkowym, ustawa o finansach
 publicznych (UFP). Priorytet do kolejnej tury: UFP i podatek od
 instytucji finansowych — oznaczone 🔴 (najwyższe ryzyko dezaktualizacji)
 w dawnej tabeli ryzyka `shared/AKTY-PRAWNE-MASTER.md` (plik usunięty
-z shared w 3.19; priorytety kontroli — `shared/ISAP-METRYKI-AKTOW.md`).
+z shared w 3.19; priorytety kontroli — `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md`).
 
 ---
 

@@ -142,7 +142,7 @@ Wniosek o klauzulę (art. 781 KPC):
     w art. 795 §2, zażalenie jest w rzeczywistości POZIOME (SN, uchwała
     III CZP 58/20 z 20.08.2021) — rozpoznaje INNY SKŁAD TEGO SAMEGO sądu
     rejonowego, za pośrednictwem sądu, który wydał postanowienie. Pełny
-    wzorzec: `shared/ZAZALENIE-ADRESAT-GATE.md` (dodano 2026-08-20, F-13)
+    wzorzec: `prawo-polskie-v2/krajowe/shared/ZAZALENIE-ADRESAT-GATE.md` (dodano 2026-08-20, F-13)
 
 Klauzula na małżonka dłużnika (art. 787 KPC):
   → Wierzyciel wykazuje dokumentem, że zobowiązanie powstało za zgodą małżonka

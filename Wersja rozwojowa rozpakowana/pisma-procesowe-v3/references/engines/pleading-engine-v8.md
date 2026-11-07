@@ -7,12 +7,12 @@
 - replika,
 - pismo dowodowe,
 - wniosek o zabezpieczenie,
-- zażalenie, [⚠️ adresat: `shared/ZAZALENIE-ADRESAT-GATE.md`]
+- zażalenie, [⚠️ adresat: `JUR:zazalenie-adresat-gate`]
 - apelacja,
 - skarga do WSA,
 - skarga kasacyjna,
 - pismo administracyjne,
-- zażalenie do prokuratury, [⚠️ adresat: `shared/ZAZALENIE-ADRESAT-GATE.md` — wyjątki jak art. 306 §2 KPK trafiają do SĄDU mimo nazwy "do prokuratury"]
+- zażalenie do prokuratury, [⚠️ adresat: `JUR:zazalenie-adresat-gate` — wyjątki jak art. 306 §2 KPK trafiają do SĄDU mimo nazwy "do prokuratury"]
 - subsydiarny akt oskarżenia.
 
 ## Matryca roszczenia

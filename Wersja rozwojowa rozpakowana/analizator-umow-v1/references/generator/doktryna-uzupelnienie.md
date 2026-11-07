@@ -126,7 +126,7 @@ przedmiotem zmian].
    wbudowane w oprogramowanie biurowe, nie tylko dedykowane platformy;
 2. zakaz wprowadzania określonych kategorii danych do narzędzi AI (dane
    osobowe klientów, tajemnica przedsiębiorstwa, dane objęte NDA) — routing:
-   `mod-shared-rodo.md` dla podstawy prawnej zakazu;
+   `JUR:umowy-shared-rodo` dla podstawy prawnej zakazu;
 3. zasady weryfikacji wyników generowanych przez AI przed wykorzystaniem
    (kto odpowiada za treść merytoryczną — pracownik, nie narzędzie);
 4. obowiązek oznaczania treści wygenerowanych/zmodyfikowanych przez AI, w
@@ -143,7 +143,7 @@ przedmiotem zmian].
    (błędna treść, wyciek danych do narzędzia AI, podejrzenie „shadow AI" —
    nieautoryzowanego korzystania z narzędzi poza rejestrem);
 7. sankcje wewnętrzne za naruszenie polityki (routing: regulamin pracy,
-   `mod-J21-rodo-archiwizacja-regulaminy.md § J21.4`, jeśli polityka ma być
+   `JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.4`, jeśli polityka ma być
    częścią regulaminu pracy, a nie odrębnym dokumentem — ustal to z klientem
    w wywiadzie, obie opcje są praktykowane).
 

@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.49"
+version: "5.50"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -651,7 +651,7 @@ Jeśli warunek aktywacji NIE jest spełniony — pomiń ten krok, przejdź do W1
 <!-- lex:wczytaj-gdy: KOLEJNA-TURA -->
 ## ⛔⛔⛔ PRE-W2-VERIFICATION-GATE — BRAMKA OBOWIĄZKOWA PRZED W2 ⛔⛔⛔
 
-> **Wywołaj:** `view shared/PRE-W2-VERIFICATION-GATE.md`
+> **Wywołaj:** `view JUR:pre-w2-verification-gate`
 >
 > ⛔ HARD GATE — BEZWZGLĘDNY. Wykonaj PO zatwierdzeniu W1 przez użytkownika,
 > PRZED W2.1. NIE można pominąć. NIE ma wyjątków (nawet "prosta sprawa",
@@ -708,13 +708,13 @@ view shared/MOD-DLUGIE-PISMO.md                   (pismo ponad ok. 10 stron: ===
                                                                      W3 na długim projekcie: tylko ZMIANA SEKCJI)
 view pisma-procesowe-v3/modules/MOD-DOWODY.md     (gdy są dowody)
 view pisma-procesowe-v3/modules/MOD-OBAL.md       (gdy riposta/odpowiedź)
-view pisma-procesowe-v3/modules/MOD-OPLATY.md     (gdy pismo wszczynające)
+view JUR:pisma-oplaty     (gdy pismo wszczynające)
 view pisma-procesowe-v3/modules/MOD-ADMIN.md      (gdy sprawa adm./KPA/WSA)
 view dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-wlasciwosc-miejscowa-sadow-powszechnych.md
                                                   (⛔ OBOWIĄZKOWE dla pisma do sądu bez sądu w aktach:
                                                                      sąd i adres tylko z court_for_address albo
                                                                      z bloku SĄD SPRAWY; nigdy z pamięci)
-view shared/ZAZALENIE-ADRESAT-GATE.md             (⛔ OBOWIĄZKOWE gdy pismo to
+view JUR:zazalenie-adresat-gate             (⛔ OBOWIĄZKOWE gdy pismo to
                                                                      zażalenie/odwołanie/sprzeciw/
                                                                      zarzuty/skarga — ustal adresata
                                                                      PRZED redakcją nagłówka pisma,
@@ -733,7 +733,7 @@ view modules/MOD-DOKTRYNA.md                       (gdy uzasadnienie powołuje
           • dowody [W] powołuj RAZ z listą tez, nie per teza oddzielnie
           • tabela D×T z MT4 wchodzi do treści pisma jako sekcja widoczna dla sądu
           • MT5-MANDATE-ALL-EVIDENCE: sprawdź N_pismo ≥ 0.7 × N_macierzy po redakcji W2
-view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+view JUR:identyfikacja-strony-umowy
                                                                     (⛔ OBOWIĄZKOWE gdy: rozbieżne
                                                                      identyfikatory stron w dokumentach
                                                                      (różne KRS/NIP/nazwa); błędny PESEL;
@@ -741,7 +741,7 @@ view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
                                                                      ISU-1→ISU-5 przed W1.3;
                                                                      ⛔ gdy PESEL w aktach i znana data
                                                                      ur. lub płeć — wykonaj ISU-PESEL P1→P6)
-view pisma-procesowe-v3/modules/MOD-PRACODAWCA-RZECZYWISTY.md
+view JUR:pisma-pracodawca-rzeczywisty
                                                                     (⛔ OBOWIĄZKOWE gdy: w materiale
                                                                      widoczne są ≥2 podmioty / różne KRS
                                                                      na umowach / zmiana nazwy pracodawcy /
@@ -852,7 +852,7 @@ view shared/STRATEGIA-PROCESOWA.md                (⛔ OBOWIĄZKOWE — zawsze p
 > NIE → powtórz wywołanie zanim W3.1.
 >
 > Szczegóły procedury P1–P4, formaty raportu POD-1/2/3/S1/S2, ZAKAZ-7:
-> `view pisma-procesowe-v3/references/W3-PODMIOT-GATE.md`
+> `view JUR:pisma-w3-podmiot-gate`
 
 ### W3.1–W3.7 + Finalizacja
 

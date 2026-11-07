@@ -9,7 +9,7 @@
 
 ## Czym ten plik jest, a czym nie jest
 
-`shared/MODULE-STANDARD-POLISH-LAW.md` mówi **JAK MA WYGLĄDAĆ** gotowy moduł
+`JUR:standard-modulu-prawa-krajowego` mówi **JAK MA WYGLĄDAĆ** gotowy moduł
 (13 sekcji, format odpowiedzi, quality gate). Ten plik mówi **JAK GO ZBUDOWAĆ**
 — w jakiej kolejności, z jakich źródeł, z jaką bramką na każdym etapie.
 
@@ -35,7 +35,7 @@ Ustal i UDOKUMENTUJ, zanim napiszesz jedno zdanie treści:
   □ nowelizacje PO tekście jednolitym + ich vacatio legis
   □ status obowiązywania
 
-Procedura: shared/PRAWO-HARDGATE.md v2.5
+Procedura: JUR:weryfikacja-przepisow-kanon v2.5
   → POZIOM A (konektor MCP), gdy dostępny
   → POZIOM B: sekwencja DWUKROKOWA B-1 (web_search wprowadza URL RZĘDU 1
     do kontekstu) → B-2 (web_fetch na URL Z WYNIKU, kopiowany dosłownie)
@@ -107,16 +107,16 @@ Zakres jednej transzy: 1–2 działy. Zamykaj transzę wpisem, nie planem.
 ## G-5 — BUDOWA TREŚCI
 
 ```
-Struktura: shared/MODULE-STANDARD-POLISH-LAW.md (13 sekcji) — kanoniczna,
+Struktura: JUR:standard-modulu-prawa-krajowego (13 sekcji) — kanoniczna,
 nie powielaj jej tutaj ani w module; importuj.
-Poziom docelowy: ≥ B wg shared/POLISH-LAW-COMPLETENESS-MATRIX.md,
+Poziom docelowy: ≥ B wg JUR:polish-law-completeness-matrix,
 docelowo A-funkcjonalny.
 
 Na KAŻDY przepis w module:
   □ pełne oznaczenie z metryki G-1
   □ znacznik z ZAMKNIĘTEJ hierarchii czterech:
     ✅ [VER] · 🟨 [KOTWICA-URZĘDOWA] · ⚠️ [NIEWERYFIKOWANE] · ⬛ [DO UZUPEŁNIENIA]
-  □ kategoria RZĘDU źródła (shared/HIERARCHIA-ZRODEL.md)
+  □ kategoria RZĘDU źródła (JUR:hierarchia-zrodel)
   □ lokalizacja w źródle (PRAWO-HARDGATE KROK 5A)
 
 ⛔ ZAKAZ tworzenia piątej etykiety. Sytuacja nieopisana hierarchią to ⚠️,
@@ -138,7 +138,7 @@ Na KAŻDY przepis w module:
     ⭐ To jest wymóg twardy dla poz. 46 wykazu F-108 (transakcje handlowe)
       i dla każdej ustawy z opłatami/rekompensatami.
 □ Akt ma odesłania do prawa UE?        → dr-14 + EUR-Lex (RZĄD 1)
-□ Akt reguluje TERMINY procesowe?      → shared/TERM-CALC.md, shared/terminy.md
+□ Akt reguluje TERMINY procesowe?      → JUR:liczenie-terminow, JUR:terminy-procesowe
 □ Akt tworzy instytucję po 2024?       → shared/TEMPORAL-LAW-CHECK.md
 □ Moduł ma cytować orzecznictwo?       → PRAWO-HARDGATE, procedura orzeczeń
                                           + BRAMKA WTÓRNE-ŹRÓDŁO-STOP

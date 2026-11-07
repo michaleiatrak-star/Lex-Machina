@@ -12,7 +12,7 @@
 
 **W Claude Code** (dostępny subagent `shared:weryfikator-isap`, narzędzie Agent): deleguj ⚠️Pn w paczkach po 1–4 akty, kilka
 instancji równolegle (zgł. #110). Zlecenie: lista powołań z datą zdarzenia i tezą + ścieżki
-`shared/PRAWO-HARDGATE.md`, tego pliku i `shared/FORMAT-CYTOWANIA.md`. Do głównego kontekstu wraca tylko tabela
+`JUR:weryfikacja-przepisow-kanon`, tego pliku i `JUR:format-cytowania`. Do głównego kontekstu wraca tylko tabela
 (t.j., zmiany po t.j., brzmienie dosłowne, zapis do pisma, URL) — wpisz ją jako raport bloku P.
 **Gdzie indziej** (claude.ai, API, Codex, aplikacja Lex Machina) albo gdy subagent niedostępny: kroki poniżej, bez zmian.
 
@@ -23,7 +23,7 @@ Dla każdego ⚠️Pn z listy W2.3:
   KROK 2: Potwierdź: tytuł aktu, numer Dz.U., data tekstu jednolitego
   KROK 3: Odczytaj brzmienie artykułu ze źródła — nie parafrazuj z pamięci
   KROK 4: Sprawdź: czy artykuł nie był nowelizowany po dacie zdarzenia?
-  KROK 5: Zapisz zapis do pisma wg shared/FORMAT-CYTOWANIA.md:
+  KROK 5: Zapisz zapis do pisma wg JUR:format-cytowania:
           "art. [X] ustawy z dnia [...] r. o [...] (Dz. U. z [rok] r. poz. [nr])"
           URL i metryka ELI → tylko raport bloku P (część robocza), nie treść pisma
 
@@ -46,7 +46,7 @@ FORMAT RAPORTU bloku P (część robocza):
 > i tezy) — dotąd tylko domyślnie zakładana, teraz jawna.
 
 **W Claude Code** (dostępny subagent `shared:weryfikator-orzeczen`, narzędzie Agent): deleguj ⚠️On w paczkach po 3–5 sygnatur, równolegle.
-Zlecenie: sygnatura, data i teza z projektu, teza pisma + ścieżki tego pliku i `shared/SYGNATURY.md`.
+Zlecenie: sygnatura, data i teza z projektu, teza pisma + ścieżki tego pliku i `JUR:sygnatury-repertoria`.
 Wraca tabela FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE z dokładną datą, tezą ze źródła i ZAKRESEM.
 **Gdzie indziej** (claude.ai, API, Codex, aplikacja Lex Machina) albo gdy subagent niedostępny: kroki poniżej, bez zmian.
 
@@ -54,7 +54,7 @@ Dla każdego ⚠️On z listy W2.3:
 
 ```
   KROK 1: kanał strukturalny NAJPIERW (PRAWO-HARDGATE POZIOM A/B) — sygnatura znana →
-           od razu baza urzędowa po repertorium (orzeczenia-sadowe-v2 Faza 1-0 A; shared/SYGNATURY.md ROUTING BAZ):
+           od razu baza urzędowa po repertorium (orzeczenia-sadowe-v2 Faza 1-0 A; JUR:sygnatury-repertoria ROUTING BAZ):
            MCP: sn_sprawdz_sygnature / cbosa_sprawdz_sygnature / kio_sprawdz_sygnature, portal SP (Lex Machina —
            shared/MCP-INTEGRACJA.md; konektory obce: verify_signature);
            SAOS (saos_search z `sygnatura` / API caseNumber) tylko zastępczo i w zasięgu
@@ -62,13 +62,13 @@ Dla każdego ⚠️On z listy W2.3:
            fallback: web_search → "[opis orzeczenia] sygnatura site:orzeczenia.ms.gov.pl"
            lub: web_search → "[opis orzeczenia] sygnatura site:sn.pl"
            Klasyfikuj wynik wg kontraktu FOUND/NOT_FOUND/AMBIGUOUS/OUT_OF_SCOPE
-           (shared/SYGNATURY.md) — patrz również V-SYG w orzeczenia-sadowe-v2.
+           (JUR:sygnatury-repertoria) — patrz również V-SYG w orzeczenia-sadowe-v2.
   KROK 2: web_fetch → URL z wyników → potwierdź TRZY elementy niezależnie:
            (a) sygnaturę, (b) DATĘ WYDANIA orzeczenia — dokładną, dzień-miesiąc-rok,
            porównaną znak-po-znak z datą podaną w projekcie pisma (nie samym rokiem
            z sygnatury), (c) tezę/sentencję.
            ⛔ Rozbieżność na (b) — nawet przy zgodnej sygnaturze — traktuj jak
-           NOT_FOUND dla tej pary sygnatura+data (K-SYG-2, SYGNATURY.md) i USUŃ
+           NOT_FOUND dla tej pary sygnatura+data (K-SYG-2, JUR:sygnatury-repertoria) i USUŃ
            datę z pisma albo skoryguj na rzeczywistą, ze wskazaniem źródła.
   KROK 3: Odczytaj tezę ze źródła — nie parafrazuj z pamięci
 
@@ -158,7 +158,7 @@ BLOK C — styl procesowy (oceny moralne, ogólne negacje, precyzja wniosków)
          → view shared/QUALITY-CHECK.md (kontrola redakcyjna + logiczna)
          → QUALITY-CHECK §5: view shared/MOD-INTRO.md (executive summary)
 BLOK D — terminy i prekluzja
-         view shared/TERM-CALC.md (zawsze gdy termin zawity lub
+         view JUR:liczenie-terminow (zawsze gdy termin zawity lub
          środek zaskarżenia lub przedawnienie)
 BLOK E — logika prawna (przepis + fakt + dowód dla każdego roszczenia)
          view shared/ROSZCZENIA.md (gdy ≥2 roszczenia lub żądanie ewentualne)
@@ -171,7 +171,7 @@ BLOK H — zgodność z materiałem źródłowym (zakaz fabrykowania faktów)
 BLOK I — skrzyżowanie pismo ↔ dostarczone dowody
          view shared/DOWODY-METODOLOGIA.md (gdy ≥3 dowody lub
          dowód pośredni/ryzykowny)
-         view shared/PREKLUZJA-DOWODOWA.md (gdy pismo w toku
+         view JUR:prekluzja-dowodowa (gdy pismo w toku
          postępowania lub sprawa gospodarcza)
          view shared/EXPERT-OPINION-AUDIT.md (gdy w aktach jest
          opinia biegłego lub pismo kwestionuje biegłego)
@@ -183,9 +183,9 @@ BLOK J — weryfikacja statusu prawnego aktów (FSL/LSL) — nowość v2.0:
 
 Moduły proceduralne shared (wczytaj zawsze przed blokami):
 ```text
-view shared/TRYBY-PROCESOWE.md
-view shared/FORMAL-CHECK.md
-view shared/BRAKI-FORMALNE.md
+view JUR:tryby-procesowe
+view JUR:wymogi-formalne-pism
+view JUR:braki-formalne
 view shared/WARUNKI-SKUTECZNOSCI.md
 view shared/RISK-ASSESSMENT.md
 view shared/QUALITY-CHECK.md
@@ -195,14 +195,14 @@ Moduły jakości prawnej (zawsze po BLOK E):
 ```text
 view shared/LEGAL-QUALITY-GATE.md   (bramka: PASS/PASS-WITH-WARNING/FAIL
                                                        — blokuje .docx gdy FAIL)
-view shared/ORZECZENIA-HIERARCHIA.md (gdy pismo powołuje orzecznictwo)
+view JUR:orzecznictwo-hierarchia (gdy pismo powołuje orzecznictwo)
 ```
 
 Moduły warunkowe (triggery obowiązkowe — NIE "zależnie od sprawy"):
 ```text
-view shared/TERM-CALC.md            → ZAWSZE gdy: termin zawity / środek
+view JUR:liczenie-terminow            → ZAWSZE gdy: termin zawity / środek
                                                         zaskarżenia / przedawnienie roszczenia
-view shared/PREKLUZJA-DOWODOWA.md   → ZAWSZE gdy: pismo po pierwszym /
+view JUR:prekluzja-dowodowa   → ZAWSZE gdy: pismo po pierwszym /
                                                         sprawa gospodarcza / twierdzenia nowe
 view shared/DOWODY-METODOLOGIA.md   → ZAWSZE gdy: ≥3 dowody w sprawie /
                                                         dowód pośredni lub kontekstowy
@@ -232,7 +232,7 @@ FAZA 3: licznik ⬛ + docx gdy kompletne
 
 ### W3.6 — Pismo finalne
 
-Po zamknięciu wszystkich ⚠️ — wydaj wersję finalną. Zapis powołań w treści: `shared/FORMAT-CYTOWANIA.md`
+Po zamknięciu wszystkich ⚠️ — wydaj wersję finalną. Zapis powołań w treści: `JUR:format-cytowania`
 (F1–F9; gdy jest narzędzie: `walidator_cytowan.py --document PISMO --format`, kod 3 = popraw). Raport W3,
 metryki ELI i URL-e idą pod nagłówek `CZĘŚĆ ROBOCZA` albo do osobnego pliku, nigdy do treści pisma.
 

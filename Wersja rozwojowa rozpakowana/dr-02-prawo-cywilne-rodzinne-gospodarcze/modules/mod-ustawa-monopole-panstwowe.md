@@ -143,7 +143,7 @@ OD 1.01.2013: ZNIESIONY monopol na przesyłki listowne w OGÓLE — rynek
 ### ⭐⭐ NAJWAŻNIEJSZE, NAJBARDZIEJ SPORNE ZASTOSOWANIE — TERMINY PROCESOWE (art. 165 §2 KPC)
 
 **To bezpośrednio dotyczy praktyki PRAWNICZEJ, nie tylko ekonomii
-pocztowej — sprawdź też `pisma-procesowe-v3/modules/MOD-OPLATY.md`,
+pocztowej — sprawdź też `prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md`,
 gdzie dodano odpowiednie ostrzeżenie.**
 
 ```
@@ -373,7 +373,7 @@ reglamentacji/akcyzy z monopolem — to różne konstrukcje prawne.
 - **`mod-ustawa-UOKIK-antymonopolowe.md`** — rozgraniczenie: monopol
   PAŃSTWOWY (ustawowy, celowy) vs pozycja dominująca/monopol FAKTYCZNY
   (rynkowy, podlegający kontroli nadużyć) — NIE duplikuj.
-- **`pisma-procesowe-v3/modules/MOD-OPLATY.md`** — ostrzeżenie o spornej
+- **`prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md`** — ostrzeżenie o spornej
   interpretacji art. 165 §2 KPC dodane 2026-07-18, bezpośrednie
   powiązanie z sekcją 4 tego modułu.
 - **DR-06 (podatki)** — akcyza na alkohol/tytoń jako WSPÓŁCZESNY

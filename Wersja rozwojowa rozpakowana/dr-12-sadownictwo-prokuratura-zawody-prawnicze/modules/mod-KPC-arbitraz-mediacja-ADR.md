@@ -233,7 +233,7 @@ Przed końcową odpowiedzią sprawdź:
   inforlex.pl, prawo.pl, rp.pl — zgodna teza i zgodny skład). ⚠️ Pełny tekst
   uzasadnienia NIEODCZYTANY — przed cytowaniem tezy dosłownie w piśmie pobierz
   orzeczenie z sn.pl (RZĄD 1) i podaj KOTWICĘ do konkretnego fragmentu
-  (`shared/PRAWO-HARDGATE.md`, Zasada 2B). ⚠️ STARSZE źródła (money.pl
+  (`prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`, Zasada 2B). ⚠️ STARSZE źródła (money.pl
   z 2013, e-prawnik.pl) wciąż pokazują nieaktualne "3 miesiące" —
   termin został SKRÓCONY nowelizacją, sprawdź dokładną datę zmiany
   przed cytowaniem. Dodatkowo: BEZWZGLĘDNY termin maksymalny 5 LAT od

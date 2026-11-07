@@ -9,7 +9,7 @@ Każda sprawa, w której trzeba sprawdzić aktualność prawa, Dz.U., tekst jedn
 
 | Akt | Metryka | Status |
 |---|---:|---|
-| Rejestr centralny | `shared/LEGAL-REGISTRY.md` | nadrzędny |
+| Rejestr centralny | `prawo-polskie-v2/krajowe/shared/LEGAL-REGISTRY.md` | nadrzędny |
 | Protokół ISAP | `shared/ISAP-AUDIT-PROTOCOL.md` | obowiązkowy |
 | Bramka jakości | `shared/LEGAL-QUALITY-GATE.md` | obowiązkowa |
 
@@ -20,12 +20,12 @@ Każda sprawa, w której trzeba sprawdzić aktualność prawa, Dz.U., tekst jedn
 Przed analizą użyj:
 
 - `shared/ISAP-AUDIT-PROTOCOL.md`
-- `shared/LEGAL-REGISTRY.md`
+- `prawo-polskie-v2/krajowe/shared/LEGAL-REGISTRY.md`
 - `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`
 - `shared/TEMPORAL-LAW-CHECK.md`
 - `shared/LEGAL-QUALITY-GATE.md`
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` — jeżeli wynikiem ma być pismo.
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` — jeżeli wynikiem ma być pismo.
 
 ## Workflow kancelaryjny
 

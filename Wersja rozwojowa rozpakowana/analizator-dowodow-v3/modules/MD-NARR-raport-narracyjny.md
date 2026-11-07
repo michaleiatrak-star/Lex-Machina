@@ -171,7 +171,7 @@ nawet jeśli KROK 2 nie zostanie wykonany.
 
 KROK 2 (opcjonalny, wymaga HARDGATE w tej samej odpowiedzi): jeśli użytkownik
 prosi o weryfikację treści/aktualności przepisu, wykonaj
-`shared/PRAWO-HARDGATE.md` i uzupełnij pole Status.
+`JUR:weryfikacja-przepisow-kanon` i uzupełnij pole Status.
 
 Format:
 ### [Nazwa ustawy] — art. [X]
@@ -186,7 +186,7 @@ Status:
      — domyślny status przy samej ekstrakcji (KROK 1 bez KROK 2)
 
 ⛔ HARD GATE: nie podawaj treści/brzmienia przepisu w tej sekcji, jeśli nie
-przeszedł przez procedurę `shared/PRAWO-HARDGATE.md` w tej samej odpowiedzi.
+przeszedł przez procedurę `JUR:weryfikacja-przepisow-kanon` w tej samej odpowiedzi.
 Sama lista "co zostało powołane i gdzie" (KROK 1) nie wymaga weryfikacji —
 weryfikacji wymaga PODANIE TREŚCI/BRZMIENIA/NUMERU Dz.U. (KROK 2). Te dwa
 kroki są rozdzielone celowo — ekstrakcja nie powinna czekać na weryfikację,

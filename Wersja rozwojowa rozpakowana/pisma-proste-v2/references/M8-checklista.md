@@ -3,8 +3,8 @@
 Przed oddaniem pisma wczytaj obowiązkowo moduły shared:
 
 ```text
-view shared/FORMAL-CHECK.md
-view shared/BRAKI-FORMALNE.md
+view JUR:wymogi-formalne-pism
+view JUR:braki-formalne
 view shared/WARUNKI-SKUTECZNOSCI.md
 view shared/RISK-ASSESSMENT.md
 view shared/QUALITY-CHECK.md

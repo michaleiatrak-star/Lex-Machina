@@ -13,7 +13,7 @@
 ### ⛔ WYSOKOŚĆ ALIMENTÓW — art. 135 KRO (odczyt treści, ✅ [VER] RZĄD 1 2026-09-10u)
 
 Akt: KRO t.j. **Dz.U. 2026 poz. 236**. Obliczenia prowadzi
-`shared/TABELE-OPLAT.md` — tam też opłaty i WPS.
+`prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md` — tam też opłaty i WPS.
 
 > **§ 1.** Zakres świadczeń alimentacyjnych zależy od **usprawiedliwionych
 > potrzeb uprawnionego** oraz od **zarobkowych i majątkowych możliwości
@@ -69,7 +69,7 @@ NIEZALEŻNIE OD WPS** — § 4 ust. 1 pkt 9 obu taks (adwokackiej
 `Dz.U. 2026 poz. 215`, radcowskiej `Dz.U. 2026 poz. 118`), ✅ [VER] RZĄD 1
 2026-09-10v z odczytu treści. Tabela stawek od WPS (§ 2) **nie ma tu
 zastosowania** — policzenie z niej zawyża koszty blisko czterokrotnie.
-Pozostałe stawki rodzinne i pełne tabele: `shared/TABELE-OPLAT.md`.
+Pozostałe stawki rodzinne i pełne tabele: `prawo-polskie-v2/krajowe/shared/TABELE-OPLAT.md`.
 
 ### Zmiana / uchylenie (art. 138 KRO)
 ```

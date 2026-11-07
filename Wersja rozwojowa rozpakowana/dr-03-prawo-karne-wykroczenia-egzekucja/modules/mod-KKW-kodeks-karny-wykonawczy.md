@@ -595,7 +595,7 @@ oddzielny temat).
 ## 0T. TERMINY KKW — warstwa proceduralna (odtworzone 2026-09-16, F-189)
 
 ✅ [VER] RZĄD 1 2026-09-16 — odczyt treści `Dz.U. 2025 poz. 911`.
-Tabela kanoniczna: `shared/terminy.md`, sekcja „Postępowanie wykonawcze karne (KKW)".
+Tabela kanoniczna: `prawo-polskie-v2/krajowe/shared/terminy.md`, sekcja „Postępowanie wykonawcze karne (KKW)".
 
 | Termin | Czynność | Podstawa |
 |---|---|---|
@@ -792,9 +792,9 @@ Oceń:
 ## 12. Quality gate
 Przed odpowiedzią lub pismem zastosuj:
 
-- `shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
+- `prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
 - `shared/ISAP-AUDIT-PROTOCOL.md`,
 - `shared/TEMPORAL-LAW-CHECK.md`,
 - `shared/LEGAL-QUALITY-GATE.md`,
 - `shared/RISK-ASSESSMENT.md`, jeżeli istnieje,
-- `shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.

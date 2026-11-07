@@ -11,7 +11,7 @@ Najpierw przebieg kontrolny na kopii BEZ defektu: każdy test musi dać 0, inacz
 niczego nie dowodzi (test czerwony z innego powodu). Oryginalne drzewo nie jest zmieniane.
 
 Bez mutacji: T19b (test ma własne mutacje w pamięci), T30 (wymaga historii AUDIT-JOURNAL).
-Nie-blokery (T3, T8 heurystyki; T15 sieć; T33 pusty w repozytorium) — poza zakresem.
+Nie-blokery (T3, T8 heurystyki; T15 sieć) — poza zakresem.
 
 Użycie:  python3 test_mutacje_zestawu.py [--repo-root KORPUS] [--tylko T40,T47]
 Kod wyjścia: 0 = każda mutacja wykryta; 1 = co najmniej jedna niewykryta albo kontrola czerwona.
@@ -79,7 +79,7 @@ MUTACJE = [
      lambda R: (R / "dr-12-sadownictwo-prokuratura-zawody-prawnicze/modules/mod-MUTACJA-niezarejestrowany.md")
      .write_text("# mod-MUTACJA\n\nTreść.\n", encoding="utf-8")),
     ("T6_T7", "ci_check_shared.py", lambda R: ["--repo-root", R], "zerwane odwołanie do shared",
-     lambda R: _sub(R / "pisma-proste-v2/SKILL.md", "view shared/FORMAL-CHECK.md", "view shared/NIEISTNIEJACY-MUTACJA.md")),
+     lambda R: _sub(R / "pisma-proste-v2/SKILL.md", "view shared/HYBRID-VALIDATION.md", "view shared/NIEISTNIEJACY-MUTACJA.md")),
     ("T14", "check_description.py", lambda R: [R], "description > 200 znaków",
      lambda R: _frontmatter_description(R / "pisma-proste-v2/SKILL.md")),
     ("T17", "test_router_contract.py", lambda R: ["--repo-root", R], "utrata PATH-SELFTEST w routerze",
@@ -89,8 +89,14 @@ MUTACJE = [
      lambda R: (R / "prawo-polskie-v2/ROUTING-MAP.md").unlink()),
     ("T22", "check_frontmatter_rejestracja.py", lambda R: [R], "skrypt w scripts/ bez wpisu we frontmatterze",
      lambda R: (R / "audyt-systemu-v4/scripts" / _nazwa("check", ".py")).write_text("print('x')\n", encoding="utf-8")),
+    ("T50", "check_jurysdykcja.py", lambda R: [R], "klucz JUR: spoza manifestu jurysdykcji",
+     lambda R: _sub(R / "analizator-dowodow-v3/modules/MD5-terminy.md", "view JUR:terminy-procesowe", "view JUR:nie-ma-takiego-klucza")),
+    ("T50", "check_jurysdykcja.py", lambda R: [R], "moduł klucza JUR: usunięty z pakietu jurysdykcji",
+     lambda R: (R / "prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP10-koszty.md").unlink()),
+    ("T50", "check_jurysdykcja.py", lambda R: [R], "dostawca jurysdykcji bez katalogu konektorów",
+     lambda R: _sub(R / "prawo-polskie-v2/JURYSDYKCJA.md", "| `konektory` | `prawo-polskie-v2/mcp-servers` |", "| `konektory-usuniete` | `x` |")),
     ("T29", "check_oplaty_mapa.py", lambda R: ["--katalog", R], "brak satelity TABELE-OPLAT",
-     lambda R: (R / "shared/oplaty/05-sprawy-karne.md").unlink()),
+     lambda R: (R / "prawo-polskie-v2/krajowe/shared/oplaty/05-sprawy-karne.md").unlink()),
     ("T34", "check_archiwa_repo.py", lambda R: ["--repo-root", R], "drzewo różne od paczki ZIP",
      lambda R: (R / "shared/DISCLAIMER.md").write_text(
          (R / "shared/DISCLAIMER.md").read_text(encoding="utf-8") + "\nMUTACJA\n", encoding="utf-8")),
@@ -113,7 +119,7 @@ MUTACJE = [
     ("T45", "check_mapy_aktow.py", lambda R: ["--repo-root", R], "tabela mapy aktów bez separatora",
      lambda R: _drop_table_separator(R / "dr-12-sadownictwo-prokuratura-zawody-prawnicze/MAPA-AKTOW.md")),
     ("T47", "test_konstytucja_tekst_czysty.py", lambda R: ["--repo-root", R], "zły szablon URL tekstu ujednoliconego",
-     lambda R: _sub(R / "audyt-systemu-v4/mcp-servers/isap-eli-example/isap-eli-mcp-server.js", "/text/${w.typ}/", "/text/X${w.typ}/")),
+     lambda R: _sub(R / "prawo-polskie-v2/mcp-servers/isap-eli-example/isap-eli-mcp-server.js", "/text/${w.typ}/", "/text/X${w.typ}/")),
     ("T48", "check_testy_skilli.py", lambda R: ["--repo-root", R], "blokada czasowa prup znów tylko z --as-of",
      lambda R: _sub(R / "dr-02-prawo-cywilne-rodzinne-gospodarcze/scripts/prup.py",
                     "                status = temporal_status(meta, args.as_of, wanted)\n                if status['blocked']:",
@@ -142,17 +148,17 @@ MUTACJE = [
                 _sub(R / "audyt-systemu-v4/SKILL.md", "  - scripts/check_testy_skilli.py\n",
                      "  - scripts/check_testy_skilli.py\n  - scripts/check_mutacja_poza_zestawem.py\n"))),
     ("T28", "check_wartosci_prawne.py", lambda R: ["--katalog", R, "--tylko-fail"], "nawrót znanego błędnego cytatu (art. 328¹)",
-     lambda R: (R / "pisma-proste-v2/references/SPF-SPG.md").write_text(
-         (R / "pisma-proste-v2/references/SPF-SPG.md").read_text(encoding="utf-8") + "\nWniosek z art. 328¹ KPC.\n", encoding="utf-8")),
+     lambda R: (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPF-SPG.md").write_text(
+         (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/SPF-SPG.md").read_text(encoding="utf-8") + "\nWniosek z art. 328¹ KPC.\n", encoding="utf-8")),
     ("T32", "check_tabele_satelickie.py", lambda R: ["--repo-root", R], "plik z rejestru tabel opłat nie istnieje",
-     lambda R: (R / "pisma-proste-v2/references/M6-oplaty.md").unlink()),
+     lambda R: (R / "prawo-polskie-v2/krajowe/pisma-proste-v2/references/M6-oplaty.md").unlink()),
     ("T36", "check_eli_extract.py", lambda R: ["--repo-root", R], "ekstraktor jednostek ELI zepsuty",
      lambda R: _sub(R / "shared/tools/eli_art_extract.py", "def wyciagnij(html: str, cytat: str) -> dict:\n",
                     "def wyciagnij(html: str, cytat: str) -> dict:\n    return {'status': 'NOT_FOUND'}\n")),
     ("T42", "check_graf_przyczynowy.py", lambda R: ["--repo-root", R], "silnik grafu: zły wzór LUB",
      lambda R: _sub(R / "shared/tools/graf_przyczynowy.py", "                    f = 1 - iloczyn", "                    f = iloczyn")),
     ("T46", "test_mac_ce_litery.py", lambda R: ["--repo-root", R], "markery Mac CE w JS zawężone",
-     lambda R: _sub(R / "audyt-systemu-v4/mcp-servers/isap-eli-example/isap-eli-mcp-server.js",
+     lambda R: _sub(R / "prawo-polskie-v2/mcp-servers/isap-eli-example/isap-eli-mcp-server.js",
                     "const MARKERY_MAC_CE = /[¢´¸∏¡ƒÂÊ˚˝]/;", "const MARKERY_MAC_CE = /[¢]/;")),
     ("MOCK", "mock_eli_server_test.py", lambda R: [], "sync_dzu_eli bez górnej granicy dat",
      lambda R: _sub(R / "audyt-systemu-v4/scripts/sync_dzu_eli.py",

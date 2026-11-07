@@ -14,7 +14,7 @@
 - references/WITNESS-INTELLIGENCE.md
 - references/FACT-EVIDENCE-MAPPING.md
 - references/WITNESS-SCORING.md
-- references/PRAWO-HARDGATE-WITNESS.md
+- JUR:przesluchanie-prawo-hardgate-witness
 - references/CROSS-EXAMINATION-GATE.md
 - references/TEXT-FIRST-UI-GATE.md
 - typologies/witnesses/witness-types.yaml

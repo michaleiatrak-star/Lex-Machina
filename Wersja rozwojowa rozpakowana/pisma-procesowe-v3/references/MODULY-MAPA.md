@@ -69,7 +69,7 @@ MOD-PRAWO              W3.1       wbudowany w procedurę ⚠️Pn (hardgate + is
 ISAP-AUDIT-PROTOCOL    W3.1       gdy akty mogły być nowelizowane między datą
                                    zdarzenia a datą pisma; view shared/ISAP-AUDIT-PROTOCOL.md
 MOD-ORZE               W3.2       wbudowany w procedurę ⚠️On (→ orzeczenia-sadowe-v2)
-ORZECZENIA-HIERARCHIA  W3.2       gdy pismo powołuje orzecznictwo; view shared/ORZECZENIA-HIERARCHIA.md
+ORZECZENIA-HIERARCHIA  W3.2       gdy pismo powołuje orzecznictwo; view JUR:orzecznictwo-hierarchia
 MOD-FAKTY / FAKTY_v2   W3.3       gdy pismo z dostarczonych materiałów źródłowych
 MOD-WALIDACJA A–J      W3.4       zawsze — bloki A–J z triggerami per blok (patrz §W3.4)
 LEGAL-QUALITY-GATE     W3.4/W3.6a bramka jakości prawa: PASS/WARN/FAIL
@@ -106,7 +106,7 @@ ENGINES SPECJALISTYCZNE — MATRYCA AKTYWACJI
 pleading-engine-v8     W1/W2      zawsze przy piśmie złożonym (pozew, odpowiedź,
                                    replika, pismo dowodowe, zabezpieczenie) — matryca
                                    roszczenia, audyt anty-polemika, konstrukcja pisma;
-                                   adresat zażalenia → shared/ZAZALENIE-ADRESAT-GATE.md;
+                                   adresat zażalenia → JUR:zazalenie-adresat-gate;
                                    silnik specjalistyczny typu pisma (appellate/
                                    prosecution/admin) ma pierwszeństwo co do struktury;
                                    view references/engines/pleading-engine-v8.md
@@ -160,7 +160,7 @@ judicial-cred-v10      W1.2       view references/engines/judicial-credibility-s
 Pliki kanoniczne shared (kolejność ładowania w W3):
 ```
 view shared/MOD-STEP-TRACKER.md             (KROK 0-TRACKER, zawsze — ST-INIT przed pipeline)
-view shared/PRAWO-HARDGATE.md
+view JUR:weryfikacja-przepisow-kanon
 view shared/INTAKE-GAP.md
 view shared/CLAIM-VALIDATION.md             (W1.2a, zawsze)
 view shared/HYBRID-VALIDATION.md

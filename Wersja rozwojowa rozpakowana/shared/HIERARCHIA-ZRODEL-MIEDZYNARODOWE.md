@@ -3,7 +3,7 @@
 > **Plik kanoniczny:** `shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md`
 > **Wersja:** 1.0 | Utworzony: 2026-09-05 (F-162)
 > **Wywołują:** `prawny-router-v3` (UP-5), `dr-14`, `MIEDZYNARODOWE-GATES.md`
-> **Odpowiednik krajowy:** `shared/HIERARCHIA-ZRODEL.md` (ELI/ISAP/EUR-Lex)
+> **Odpowiednik krajowy:** `JUR:hierarchia-zrodel` (ELI/ISAP/EUR-Lex)
 
 ---
 

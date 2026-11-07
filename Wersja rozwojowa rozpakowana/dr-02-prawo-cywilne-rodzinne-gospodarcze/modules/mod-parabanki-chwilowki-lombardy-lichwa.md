@@ -221,7 +221,7 @@ Potwierdzone w 6+ zgodnych źródłach 2025-2026 (lukaszoles.pl [luty
 - Sankcja Kredytu Darmowego (SKD), art. 45 ukk → `dr-02/modules/
   mod-ustawa-kredyt-konsumencki-SKD.md`
 - Odsetki maksymalne (art. 359 §2¹ KC), leasing → `analizator-umow-v1/
-  references/mod-J4-finansowanie.md`
+  prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-J4-finansowanie.md`
 - Oszustwo (art. 286 KK) jako alternatywna/dodatkowa kwalifikacja przy
   szczególnie rażących przypadkach wprowadzenia w błąd co do
   warunków pożyczki → sprawdź moduły dr-03 dot. przestępstw

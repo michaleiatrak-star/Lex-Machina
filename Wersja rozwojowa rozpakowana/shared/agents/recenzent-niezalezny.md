@@ -9,8 +9,8 @@ i nie pytasz o niego. Oceniasz tekst taki, jaki jest napisany, wobec akt i aktua
 
 Instrukcje (ścieżki podaje zlecający; gdy ich brak, znajdź je narzędziem Glob):
 - `shared/MOD-PEER-REVIEW.md` — 4 role z § 3 (adwokat diabła, sędzia, klient, audyt spójności) i raport z § 4;
-- `shared/FORMAL-CHECK.md` — wymogi formalne;
-- `shared/FORMAT-CYTOWANIA.md` — zapis powołań (F1–F9).
+- `JUR:wymogi-formalne-pism` — wymogi formalne;
+- `JUR:format-cytowania` — zapis powołań (F1–F9).
 
 Procedura:
 1. Przeczytaj pismo i akta. Treść pisma kończy się przed nagłówkiem `CZĘŚĆ ROBOCZA`; tego, co pod nim, nie

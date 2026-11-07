@@ -21,7 +21,7 @@ z 7.11.2025 — dalsze zmiany art. 24 i powiązanego KPSW art. 96).
 ✅ VER: isap.sejm.gov.pl (WDU20250000734, WDU20250001814), api.sejm.gov.pl,
 infor.pl, prawo.pl, dziennikustaw.gov.pl — 2026-08-14 (F-67)
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym
 przepisem z tego modułu — zwłaszcza kwoty grzywien i terminy, które
 bywają nowelizowane.
 
@@ -403,7 +403,7 @@ wyraźnie odstępuje od reguł ogólnych KW.
 ## 9. QUALITY GATE
 
 Przed odpowiedzią lub pismem zastosuj:
-- `shared/PRAWO-HARDGATE.md` — zwłaszcza przy kwotach grzywien (art. 24,
+- `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — zwłaszcza przy kwotach grzywien (art. 24,
   intensywnie nowelizowany) i terminach przedawnienia (art. 45)
 - `shared/ISAP-AUDIT-PROTOCOL.md`
 - `shared/TEMPORAL-LAW-CHECK.md` — obowiązkowy przy art. 2 (lex mitior)

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.56 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.55 (2026-11-04, AUDYT-2026-11-04): Dz.U. 2026 poz. 1340 — ⏳ → ✅ w mocy od 30.10.2026 (mod-ustawa-zwiazki-zawodowe-spory-zbiorowe, MAPA-AKTOW); treść modułu już w brzmieniu po zmianie.
 - 3.54 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KP - zwolnienie dyscyplinarne, wypowiedzenie, odwołanie do sądu pracy (wcześniej dobierało zwolnienia grupowe)
 - 3.53 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości

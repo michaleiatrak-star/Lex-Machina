@@ -351,11 +351,11 @@ DOWODY KLUCZOWE:
   prekluzji) → wczytaj ten moduł jako źródło podstawy materialnoprawnej
   przed W2 (projekt)
 - **Analiza umowy kredytu konsumenckiego przy zawieraniu/negocjacji:**
-  `analizator-umow-v1` → `mod-J4-finansowanie.md` — dodano pointer SKD
+  `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-J4-finansowanie.md` — dodano pointer SKD
   (wykrywanie naruszeń art. 30 już na etapie analizy umowy, zanim
   dojdzie do sporu)
 - **Analiza dowodów / akt sprawy SKD:** `analizator-dowodow-v3` →
-  `modules/MX-dziedziny.md` — dodano kod `[KREDYT-SKD]`
+  `prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MX-dziedziny.md` — dodano kod `[KREDYT-SKD]`
 - **Ogólne roszczenia konsumenckie:** → `mod-KC-konsumenckie.md`
 - **Nienależne świadczenie (rozliczenie nadpłaty):** →
   `mod-KC-cywilne-zobowiazania-odpowiedzialnosc.md` (art. 405/410 KC)

@@ -32,7 +32,7 @@ Brzmienie każdego powoływanego artykułu KPK czytać u źródła; tekst jednol
 | KK art. 148–162 — życie i zdrowie | `mod-KK-art148-162-przeciwko-zyciu-zdrowiu` | ✅ aktywny |
 | KK art. 163–172 — bezpieczeństwo powszechne | `mod-KK-art163-172-bezpieczenstwo-powszechne` | ✅ aktywny |
 | KK art. 181–188a — środowisko | `mod-KK-art181-188a-przeciwko-srodowisku` | ✅ aktywny |
-| KK art. 190a — stalking | `mod-KK-art190a-stalking` + `shared/STALKING-NEKANIE.md` | ✅ aktywny |
+| KK art. 190a — stalking | `mod-KK-art190a-stalking` + `prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md` | ✅ aktywny |
 | KK art. 207 — przemoc domowa | `mod-KK-art207-przemoc-domowa` + `mod-KK-przemoc-domowa-szczegolowy` | ✅ aktywny |
 | KK art. 212–216 — cześć | `mod-KK-art212-216-przeciwko-czci` | ✅ aktywny |
 | KK art. 217a / 222–226 — ochrona funkcjonariusza i osoby interweniującej (także adwokat: Prawo o adwokaturze art. 7 ust. 3, Dz.U. 2026 poz. 1290, od 17.10.2026; radca prawny: art. 12 ust. 1 u.r.p., Dz.U. 2026 poz. 731, od 18.06.2026) | `mod-KK-art222-226-ochrona-funkcjonariusza` | ✅ aktywny |

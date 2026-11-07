@@ -1,7 +1,7 @@
 # mod-ustawa-oplata-skarbowa
 
 **Status:** moduł dziedzinowy — dodany 2026-09-16 (O-11(d): ustawa była w `dr-06` powoływana
-tylko ubocznie; stawki kanoniczne i wyłączenia przedmiotowe — `shared/oplaty/07-…` sekcja 6c).
+tylko ubocznie; stawki kanoniczne i wyłączenia przedmiotowe — `prawo-polskie-v2/krajowe/shared/oplaty/07-…` sekcja 6c).
 **Źródło:** ustawa z 16.11.2006 o opłacie skarbowej — **t.j. `Dz.U. 2026 poz. 1395`** (obwieszczenie
 z 9.10.2026, ogł. 23.10.2026; obejmuje zmiany Dz.U. 2025 poz. 1795, 1847 i 2026 poz. 846, 875, 912, 1206).
 ✅ [VER] RZĄD 1 2026-10-31 — ELI DU/2026/1395 (art. 1, 9; po t.j. brak zmian); poprzednio t.j. `Dz.U. 2025 poz. 1154`
@@ -27,7 +27,7 @@ z sądem to **pełnomocnictwo składane w postępowaniu sądowym** (art. 1 ust. 
 **Nie podlega:** czynność, zaświadczenie lub zezwolenie objęte **inną opłatą publicznoprawną**
 albo od niej zwolnione (art. 3); czynność lub zaświadczenie za pośrednictwem konsula
 z opłatą konsularną (art. 3a); zaświadczenie KAS na wniosek przez **e-Urząd Skarbowy** (art. 3b).
-Wyłączenia przedmiotowe całych kategorii spraw — **art. 2** (wyciąg: `shared/oplaty/07-…` 6c).
+Wyłączenia przedmiotowe całych kategorii spraw — **art. 2** (wyciąg: `prawo-polskie-v2/krajowe/shared/oplaty/07-…` 6c).
 Wykaz, stawki i zwolnienia szczegółowe — **załącznik** (art. 4).
 
 ## 2. Kto płaci i kiedy (art. 5–6)
@@ -98,7 +98,7 @@ zwrotu pisma.
 
 ## 7. Łącz z
 
-- `shared/oplaty/07-komornicze-skarbowe-notarialne.md` sekcja 6c — stawki (17 / 21 zł),
+- `prawo-polskie-v2/krajowe/shared/oplaty/07-komornicze-skarbowe-notarialne.md` sekcja 6c — stawki (17 / 21 zł),
   „od każdego stosunku pełnomocnictwa", wyłączenia art. 2, zwolnienia z załącznika
 - `mod-OP-ordynacja-podatkowa` — postępowanie przed wójtem jako organem podatkowym
 - `dr-05` (KPA) — wezwanie z art. 261

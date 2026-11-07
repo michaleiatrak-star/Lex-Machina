@@ -69,7 +69,7 @@ Wartość przedmiotu sporu: [kwota cyframi] zł
 (słownie: [kwota słownie] złotych)
 
 Opłata sądowa: [kwota] zł — ⛔ najpierw sprawdź ZWOLNIENIA (art. 94–103 KSCU),
-  potem kwotę z `shared/TABELE-OPLAT.md`; cap opłaty stosunkowej z art. 13 ust. 2
+  potem kwotę z `JUR:oplaty-sadowe`; cap opłaty stosunkowej z art. 13 ust. 2
   to 100 000 zł od 23.09.2025, nie 200 000 zł
                / wniosek o zwolnienie od kosztów w odrębnym piśmie
 
@@ -265,7 +265,7 @@ II. PODSTAWA PRAWNA
    [Przepis ogólny → przepis szczególny → przepisy wykonawcze]
    [Format: "Podstawę prawną niniejszego żądania stanowi art. X § Y
     ustawy z dnia [...] r. o [...] (Dz. U. z RRRR r. poz. N), zgodnie z którym [istota]."
-    Zapis powołania: shared/FORMAT-CYTOWANIA.md]
+    Zapis powołania: JUR:format-cytowania]
 
 III. ANALIZA PRAWNA
     III.1 [Nazwa roszczenia/zarzutu]
@@ -327,7 +327,7 @@ Po uzasadnieniu, przed podpisem:
 TEZY DOWODOWE I WSKAZANIE DOWODÓW
 
 Teza 1: [Treść — jedno zdanie]
-Podstawa: art. X § Y [ustawa] (Dz. U. z RRRR r. poz. N) — zapis: shared/FORMAT-CYTOWANIA.md
+Podstawa: art. X § Y [ustawa] (Dz. U. z RRRR r. poz. N) — zapis: JUR:format-cytowania
 Klasyfikacja: A / B / C / D
 Dowody:
   • [Nazwa dowodu] (str. X akt / zał. nr Y)

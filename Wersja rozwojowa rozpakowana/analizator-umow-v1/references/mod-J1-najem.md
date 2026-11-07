@@ -162,4 +162,4 @@ REKOMENDACJA:
 ---
 
 ---
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*

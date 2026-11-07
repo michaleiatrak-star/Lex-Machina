@@ -14,7 +14,7 @@
 > Każda umowa IT/SaaS gdzie kontrahent przetwarza dane osobowe → WYMAGA DPA (art. 28 RODO)
 > Ten moduł (J6) zawiera tylko sygnały RODO w kontekście SaaS/cloud.
 > Pełna analiza DPA, lista 13 elementów obowiązkowych, szablony klauzul:
-> → OBOWIĄZKOWO wczytaj: view references/mod-shared-rodo.md
+> → OBOWIĄZKOWO wczytaj: view JUR:umowy-shared-rodo
 
 ---
 
@@ -213,7 +213,7 @@ REKOMENDACJA:
 
 PUŁAPKA SaaS-2b — Dane klienta po zakończeniu umowy:
   PRAWO (art. 28 RODO): procesor musi usunąć lub zwrócić dane po zakończeniu przetwarzania
-  → Wczytaj: mod-shared-rodo.md → sekcja RO.4 (Pułapka RO-4)
+  → Wczytaj: JUR:umowy-shared-rodo → sekcja RO.4 (Pułapka RO-4)
   
 PUŁAPKA SaaS-2c — Zmiany funkcjonalności bez zgody:
   PROBLEM: "Usługodawca ma prawo modyfikować funkcjonalność Platformy."
@@ -339,7 +339,7 @@ KJ-2 — Własność IP wytworzona przez konsorcjum:
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: Prawo Autorskie — isap.sejm.gov.pl → t.j. Dz.U. 2025 poz. 24 (obwieszczenie 06.12.2024)*
 *KC art. 627–646 (o dzieło), art. 750 (usługi) · RODO art. 28 (DPA)*
-*Powiązane: mod-shared-rodo.md (DPA obowiązkowe dla SaaS/cloud)*
+*Powiązane: JUR:umowy-shared-rodo (DPA obowiązkowe dla SaaS/cloud)*

@@ -458,7 +458,7 @@ NIE używaj. Pozostałe nowelizacje Op po t.j.: poz. 825 (24.09.2026, art. 14i�
 poz. 1154 (16.09.2026, wyłącznie art. 299 § 3 pkt 17), poz. 875 (1.01.2027,
 wyłącznie art. 67a § 3–15 — milczące umorzenie do kwoty minimalnego wynagrodzenia)
 i poz. 1098 (1.01.2027, OKI — art. 3b, 297–299c, 306; NIE art. 70). Pełny zakres:
-`shared/terminy.md`, sekcja Ordynacja (F-OP-2026-09 zamknięta 2026-09-16).
+`prawo-polskie-v2/krajowe/shared/terminy.md`, sekcja Ordynacja (F-OP-2026-09 zamknięta 2026-09-16).
 ⚠️ Od 1.10.2026 art. 213 § 5 (poz. 846): odmowa uzupełnienia/sprostowania decyzji
 — bez zażalenia; termin odwołania biegnie od doręczenia tego postanowienia.
 

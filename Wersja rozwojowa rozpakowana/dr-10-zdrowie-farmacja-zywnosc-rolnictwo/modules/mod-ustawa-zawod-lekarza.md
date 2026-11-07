@@ -51,7 +51,7 @@ Organ: Okregowy Sad Lekarski -> Naczelny Sad Lekarski -> SN (kasacja)
 Kary: Upomnienie, nagana, zawieszenie PWZ (max 5 lat), pozbawienie PWZ
 Przedawnienie: 5 lat od popelnienia czynu lub 3 lata od dowiedzenia sie przez Izbe
 
-Baza orzeczen (⚙️ spięte z shared/PRAWO-HARDGATE.md, sekcja "zawody zaufania
+Baza orzeczen (⚙️ spięte z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md, sekcja "zawody zaufania
 publicznego — odpowiedzialność dyscyplinarna"; zweryfikowane online 2026-07-06):
   I i II instancja (Okregowy Sad Lekarski, Naczelny Sad Lekarski) ->
     nil.org.pl/orzeczenia (portal NIL prawomocnych orzeczen sadow lekarskich,
@@ -68,7 +68,7 @@ Pelny opis trybu, tabela zawodow i uzasadnienie: dr-12 ->
   "Orzecznictwo dyscyplinarne — instancje i bazy"
 ```
 
-**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 3 (NIL, w tym lekarze dentyści); RZĄD 1 tylko z oficjalnego portalu samorządu.
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view prawo-polskie-v2/krajowe/shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 3 (NIL, w tym lekarze dentyści); RZĄD 1 tylko z oficjalnego portalu samorządu.
 
 ## Weryfikacja online
 ```

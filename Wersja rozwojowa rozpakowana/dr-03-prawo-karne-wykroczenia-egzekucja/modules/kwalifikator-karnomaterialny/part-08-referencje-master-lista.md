@@ -263,7 +263,7 @@ Analiza konkretnego przepisu (znamiona, wykładnia):
   → analizator-przepisow-v2 (Moduł 5 — zbieg norm, Moduł 6 — tryb karny)
 
 Stalking / nękanie:
-  → moduł [J] SKILL.md + shared/STALKING-NEKANIE.md
+  → moduł [J] SKILL.md + prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md
 
 Przesłuchanie sprawcy lub świadka:
   → przesluchanie-swiadkow-v2-min90 + moduł [K] SKILL.md

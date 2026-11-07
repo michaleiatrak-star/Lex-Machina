@@ -5,7 +5,7 @@ status: specyfikacja gotowa do wdrożenia (implementacja po stronie portalu, nie
 wprowadzono: 2026-07-13 (jako osobny skill `shared/AUDIT-TRAIL-SPEC.md`)
 skonsolidowano do `shared/`: 2026-07-13f (patrz AUDIT-JOURNAL, powód: to
 specyfikacja + narzędzia bez własnej logiki triggerowania intencją użytkownika
-— dokładnie taki sam charakter jak PRAWO-HARDGATE.md czy HYBRID-VALIDATION.md,
+— dokładnie taki sam charakter jak JUR:weryfikacja-przepisow-kanon czy HYBRID-VALIDATION.md,
 więc naturalne miejsce to shared/, nie osobny skill)
 narzędzia: shared/tools/hash_chain_verify.py, shared/tools/append_event.py,
   shared/tools/router_event_parser.py, shared/tools/extract_api_verification_log.py,

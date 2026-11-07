@@ -14,7 +14,7 @@
 | **Reforma stażu pracy** (wliczanie zlecenia, JDG, służb mundurowych) | **Sektor publiczny: od 01.01.2026 | Sektor prywatny: od ~01.04.2026** — weryfikuj datę wejścia w życie | Dz.U. 2025 poz. 1423 — art. 30², 302¹ KP |
 | **Jawność wynagrodzeń** (art. 183ca KP — nowy) | **OBOWIĄZUJE** — pracodawca musi ujawnić widełki wynagrodzenia w ogłoszeniu o pracę | Dz.U. 2025 poz. 807 |
 | Minimalne wynagrodzenie 2026 | **4 806 zł brutto/mies. od 01.01.2026 | stawka godz.: 31,40 zł** | Dz.U. 2025 poz. 1242 |
-| ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
+| ⚡ **Regulamin pracy/wynagradzania — próg 20→50 pracowników** + forma "papierowa lub elektroniczna" dla wielu czynności KP + procedura uzgadniania ZFŚS bez ZZ | **OBOWIĄZUJE od 26/27.01.2026** (sprawdź dokładną datę) — bez przepisów przejściowych. Szczegóły i checklist redakcyjna → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21.4-J21.5) | Dz.U. 2026 poz. 25 — art. 104, 77² KP |
 | Projekt zniesienia umów cywilnoprawnych w stosunku pracy | Status: projekt — weryfikuj ELI (RZĄD 1) | — |
 
 ---
@@ -276,7 +276,7 @@ Wykonaj przed opuszczeniem stanowiska pracy:
 | Utrata terminu 21 dni | Termin zawity — brak przywrócenia | Priorytet absolutny — złóż odwołanie niezwłocznie |
 | Podpisanie porozumienia | Brak odwołania, karencja zasiłku | Nie podpisuj bez analizy prawnej |
 | Brak dowodów | Niemożność wykazania roszczeń | Zabezpieczaj dowody natychmiast |
-| Kwalifikacja prawna stosunku pracy | B2B zakwalifikowany jako pracowniczy | Analiza cech stosunku pracy (art. 22 KP); dla umowy ramowej zlecenia z systemem oferta–przyjęcie poszczególnych zleceń → `analizator-umow-v1/references/b2b-podwykonawcze.md` sekcja G.1D (dodane 2026-09-27, F-205) |
+| Kwalifikacja prawna stosunku pracy | B2B zakwalifikowany jako pracowniczy | Analiza cech stosunku pracy (art. 22 KP); dla umowy ramowej zlecenia z systemem oferta–przyjęcie poszczególnych zleceń → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/b2b-podwykonawcze.md` sekcja G.1D (dodane 2026-09-27, F-205) |
 
 ---
 
@@ -334,7 +334,7 @@ REKOMENDACJA: □ Sąd — odwołanie  □ Ugoda / negocjacje  □ PIP
 | ZUS (składki, zasiłki) | `mod-SUS-ZUS-ubezpieczenia-spoleczne` |
 | Pismo: pozew / odwołanie | `pisma-procesowe-v3` |
 | Orzecznictwo SN pracy | `orzeczenia-sadowe-v2` |
-| Redakcja/audyt: regulamin pracy/wynagradzania (⚡ próg 50 pracowników od Dz.U. 2026/25), ZFŚS, monitoringu, RODO wewnętrzne | `analizator-umow-v1` → `mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
+| Redakcja/audyt: regulamin pracy/wynagradzania (⚡ próg 50 pracowników od Dz.U. 2026/25), ZFŚS, monitoringu, RODO wewnętrzne | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
 
 ---
 
@@ -355,16 +355,16 @@ wypadkach przy pracy czy pracy zdalnej, jeśli sprawa ich nie dotyczy.
 - **Mobbing, dyskryminacja, molestowanie** (kwalifikacja różnicująca,
   strategia procesowa, projekt nowelizacji UD183/RM 17.02.2026):
   → `view dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-mobbing-dyskryminacja.md`
-  → definicja i linia SN: `shared/definicje/DEF-PRACA.md`
+  → definicja i linia SN: `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md`
 
 - **Wypadek przy pracy i choroba zawodowa** (intake, świadczenia ZUS,
   terminy, ścieżka sporna):
   → `view dr-04-prawo-pracy-zus-swiadczenia/modules/mod-wypadek-przy-pracy-choroba-zawodowa.md`
-  → definicja (4 elementy): `shared/definicje/DEF-PRACA.md` (H.1.4)
+  → definicja (4 elementy): `prawo-polskie-v2/krajowe/shared/definicje/DEF-PRACA.md` (H.1.4)
 
 - **Praca zdalna** (art. 67⁵-67²⁴ KP — obowiązki, BHP, praca okazjonalna):
   → `view dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-praca-zdalna.md`
-  → wykładnia MRiPS: `shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W03
+  → wykładnia MRiPS: `prawo-polskie-v2/krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W03
 
 ⚠️ KRZYŻOWE PRZYPADKI: mobbing/wypadek/praca zdalna MOGĄ być przyczyną
 rozwiązania umowy z winy pracodawcy (art. 55 §1¹ KP) — wtedy załaduj

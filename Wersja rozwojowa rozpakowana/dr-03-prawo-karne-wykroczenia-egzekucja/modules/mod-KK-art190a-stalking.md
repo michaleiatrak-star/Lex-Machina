@@ -56,7 +56,7 @@ o przestępstwie, zakaz zbliżania (środek zapobiegawczy i nakazowy).
 ## SZCZEGÓŁOWY FRAMEWORK
 
 ```
-view shared/STALKING-NEKANIE.md
+view prawo-polskie-v2/krajowe/shared/STALKING-NEKANIE.md
 ```
 
 Zawiera: znamiona art. 190a §1, §2, §3 (omówienie z przykładami), cyberstalking

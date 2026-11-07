@@ -11,7 +11,7 @@
 ⛔ **Ten plik dotyczy KOMUNIKACJI, nie prawa.** Zamienia sposób powiedzenia,
 nigdy treść ustalenia. Jeżeli uproszczenie zmieniłoby znaczenie prawne —
 **nie upraszczaj**: podaj termin i wyjaśnij go w nawiasie. Zakaz cytowania
-prawa z pamięci obowiązuje bez zmian (`shared/PRAWO-HARDGATE.md`).
+prawa z pamięci obowiązuje bez zmian (`JUR:weryfikacja-przepisow-kanon`).
 
 ⛔ **Filtr treści z SKILL.md obowiązuje nadrzędnie.** Żaden szablon z tego
 pliku nie uprawnia do pokazania klientowi rzeczy z listy „CZEGO NIGDY NIE

@@ -12,7 +12,7 @@ POTRAFI WYWOŁAĆ awarię, którą raportuje. CBOSA po serii żądań oddało 50
 a po 60 s pauzy 200/200/200. Pojedynczy przebieg jest bezpieczny; pętla — nie.
 
 ⛔ Materiał dowodowy pomiaru, **nie źródło prawa**. Nie rozstrzyga, czy wolno
-cytować (`shared/HIERARCHIA-ZRODEL.md`), tylko czy da się odczytać.
+cytować (`prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`), tylko czy da się odczytać.
 Statusu **nie przepisuj do tabel** — odtwórz uruchomieniem T25.
 
 ---

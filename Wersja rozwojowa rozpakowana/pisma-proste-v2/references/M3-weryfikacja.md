@@ -26,7 +26,7 @@ https://www.nbp.pl/home.aspx?f=/dzienne/stopy_procentowe.htm
 
 ### Opłaty sądowe (KSCU)
 Weryfikuj aktualną wersję KSCU na ELI (RZĄD 1).
-Tabela orientacyjna → M6-oplaty.md (może być nieaktualna — zawsze sprawdź).
+Tabela orientacyjna → JUR:pisma-proste-m6-oplaty (może być nieaktualna — zawsze sprawdź).
 
 ---
 

@@ -29,7 +29,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 
 ## REJESTR KONKRETNYCH SERWERÓW MCP — POZIOM A (dodany 2026-09-10, F-173)
 
-> ⛔ **Po co ten rozdział.** `shared/PRAWO-HARDGATE.md` definiuje POZIOM A
+> ⛔ **Po co ten rozdział.** `JUR:weryfikacja-przepisow-kanon` definiuje POZIOM A
 > (konektor MCP) jako najsilniejszy kanał weryfikacji i wymienia `mcp-isap`,
 > `legal-cite-pl`, `sententim` i `prawo-pl-saos` jako **wzorce**. Do 2026-09-10
 > system nie wskazywał ani jednego konkretnego, publicznego serwera — POZIOM A
@@ -42,7 +42,7 @@ nie na posiadaniu własnego kodu integracyjnego jako takiego.
 > Treść zwrócona przez konektor dziedziczy RZĄD **źródła**, do którego konektor
 > sięga, nigdy RZĄD samego konektora.
 >
-> ⛔ **Lista jest OTWARTA** (ZASADA OTWARTEJ LISTY, `HIERARCHIA-ZRODEL.md` §Rząd 3):
+> ⛔ **Lista jest OTWARTA** (ZASADA OTWARTEJ LISTY, `JUR:hierarchia-zrodel` §Rząd 3):
 > brak projektu w tej tabeli nie blokuje jego użycia. Stan rozpoznania:
 > 2026-09-10. Projekty rozwijają się niezależnie — przed wdrożeniem
 > produkcyjnym obowiązkowy audyt licencji, zakresu i aktualności po stronie
@@ -130,7 +130,7 @@ nich odwołują).
 | KRS (`ekrs.ms.gov.pl` / `prs.ms.gov.pl`) | 4 | ✅ **TAK** | Otwarte API KRS (`api-krs.ms.gov.pl`, RESTful, JSON) od 2022, na podstawie ustawy o otwartych danych — bez logowania. Osobne "Full API" (dane wrażliwe) wymaga decyzji ministra, nieistotne dla weryfikacji prawnej |
 | NBP (`nbp.pl`) | 3 | ✅ **TAK** | `api.nbp.pl` — kursy walut i złota, JSON/XML, bez autoryzacji, od 1.08.2025 wyłącznie HTTPS |
 | CEIDG / biznes.gov.pl | 3 | ✅ **TAK** (z kluczem) | Hurtownia Danych CEIDG i Biznes.gov.pl, API v2, dokumentacja publiczna, wymaga bezpłatnego wniosku o klucz API (`dane.biznes.gov.pl`) |
-| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `shared/SYGNATURY.md` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
+| CBOSA (`orzeczenia.nsa.gov.pl`) | (poza tą listą, ale kluczowe) | ❌ brak publicznego REST/JSON API; ✅ deterministyczny HTML | Formularz server-side jest wystarczający do adaptera: POST `/cbo/search` + cookies + `/cbo/find?p=N` + `/doc/{ID}`; exact-match/fail-closed wg `JUR:sygnatury-repertoria` V-SYG-0.7 i `shared/CBOSA-ADAPTER.md` |
 
 **Wniosek końcowy (research zamknięty 2026-07-13k):** 5 źródeł z potwierdzonym
 publicznym API bez konektora przed tą sesją (EUR-Lex, KRS, NBP, SUDOP, CEIDG)
@@ -146,7 +146,7 @@ kompletności.
 
 ## Serwery referencyjne (2026-07-13g/i/k) — 7 z 9 zbadanych priorytetowych źródeł
 
-`audyt-systemu-v4/mcp-servers/` zawiera **realne, przetestowane protokołem MCP**
+`prawo-polskie-v2/mcp-servers/` zawiera **realne, przetestowane protokołem MCP**
 serwery dla 7 źródeł o potwierdzonym publicznym API. Napisane po tym jak: (a)
 żaden gotowy projekt OSS nie dał się zainstalować i przetestować z tego
 środowiska, (b) research 2026-07-13j/k potwierdził, które źródła mają
@@ -156,7 +156,7 @@ od zera" dla produkcji.
 ⛔ **Kolumna „pewność kształtu odpowiedzi” (do 3.89) była szacowana z dokumentacji, nie z
 pomiaru — i była odwrotnie skorelowana z rzeczywistością:** SAOS („Wysoka”) zwracał sygnaturę
 `null` dla każdego trafienia, NBP („Najwyższa”) zwracał NOT_FOUND w każdy weekend. Od 3.90
-kolumna podaje WYNIK POMIARU TREŚCI (`audyt-systemu-v4/mcp-servers/test_na_zywo.mjs`, 2026-09-27j).
+kolumna podaje WYNIK POMIARU TREŚCI (`prawo-polskie-v2/mcp-servers/test_na_zywo.mjs`, 2026-09-27j).
 
 | Serwer | Źródło | Klucz API? | Pomiar treści 2026-09-27j |
 |---|---|---|---|
@@ -199,7 +199,7 @@ Decyzja należy do dewelopera (F-8/F-94) — to nie jest wada, tylko konsekwencj
 miejsca, w którym plik dziś leży.
 
 ⭐ **INSTALACJA SERWERÓW MCP (od shared 3.93 / audyt 6.143, zmierzona 2026-09-27m).** Serwery leżą
-ROZPAKOWANE w `audyt-systemu-v4/mcp-servers/`; `dist/lex-mcp.mjs` to wszystkie serwery w jednym
+ROZPAKOWANE w `prawo-polskie-v2/mcp-servers/`; `dist/lex-mcp.mjs` to wszystkie serwery w jednym
 pliku z wbudowanymi zależnościami (629 KB; Claude Code nie instaluje zależności pluginów).
 - **Claude Code + plugin `audyt-systemu-v4`:** nic nie instalujesz — `.mcp.json` pluginu startuje
   8 serwerów `lex-*` (z CBOSA) z `${CLAUDE_PLUGIN_ROOT}` (CEIDG pominięty — wymaga klucza).
@@ -282,7 +282,7 @@ czy konfiguracja przekazuje `env`. To ta sama klasa błędu co F-151/F-162
 
 ### ✅ Status własnego konektora ISAP (zmierzony 2026-09-27h)
 
-`audyt-systemu-v4/mcp-servers/isap-eli-example/` — 132 linie na oficjalnym SDK
+`prawo-polskie-v2/mcp-servers/isap-eli-example/` — 132 linie na oficjalnym SDK
 (`McpServer` + `StdioServerTransport`), narzędzie `isap_lookup`.
 
 ⛔ **Wykryty i naprawiony błąd:** budował adres
@@ -316,7 +316,7 @@ pluginów (`mcp-isap-eli`, `mcp-saos`, `mcp-krs`, `mcp-wl-vat`, `mcp-uodo`, `mcp
 `mcp-nbp`), których **nie ma w repozytorium ani w `marketplace.json`** (sprawdzone 27j) —
 powstały w sesji 27h/27i i nie zostały wgrane (F-211). Kolumna „Pomiar” mierzyła wyłącznie kod
 HTTP: SAOS z „✅ 200” zwracał same `null`. Obecnie jedynym zmierzonym kodem w repo są przykłady
-z `audyt-systemu-v4/mcp-servers/`.
+z `prawo-polskie-v2/mcp-servers/`.
 
 | Kanał | Pomiar treści 27j | Konektor w repozytorium |
 |---|---|---|
@@ -343,7 +343,7 @@ wyszukiwarki urzędowe (sn.pl, CBOSA, UZP); sn.pl zablokowany → SAOS tylko spr
 ### ⭐ PORÓWNANIE Z `matematicsolutions` — uruchomione na tych samych przypadkach (2026-09-27k)
 
 Paczki npm `@matematicsolutions/*` (MIT) uruchomione przez protokół MCP obok przykładów z
-`audyt-systemu-v4/mcp-servers/`. Oceniane zachowanie, nie README.
+`prawo-polskie-v2/mcp-servers/`. Oceniane zachowanie, nie README.
 
 | Kanał | Ich przewaga | Nasza przewaga | Przypadek rozstrzygający |
 |---|---|---|---|
@@ -364,4 +364,4 @@ Wniosek: przewaga jakościowa (weryfikacja, status) po naszej stronie; przewaga 
 „pokryte jednym parametrem” nie było prawdziwe dla kodu w repo; od 1.1.0 jest.
 
 ⛔ **Reguła od 3.90:** wiersz tej tabeli może zawierać „✅” tylko po pomiarze TREŚCI odpowiedzi
-(asercja na polu, nie na statusie HTTP) — `audyt-systemu-v4/mcp-servers/test_na_zywo.mjs`.
+(asercja na polu, nie na statusie HTTP) — `prawo-polskie-v2/mcp-servers/test_na_zywo.mjs`.

@@ -51,7 +51,7 @@ CBOSA (`orzeczenia.nsa.gov.pl`): po serii żądań 503 ×3, po 60 s pauzy
 z jednego adresu jest bezpieczny; pętla po manifeście w kółko — nie.
 
 ⛔ Skrypt NIE rozstrzyga, czy z danego źródła wolno cytować — to nadal
-`shared/HIERARCHIA-ZRODEL.md`. Mierzy wyłącznie, czy da się je odczytać.
+`prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`. Mierzy wyłącznie, czy da się je odczytać.
 """
 
 from __future__ import annotations

@@ -1,5 +1,6 @@
 # CHANGELOG — raport-klienta-v1
 
+- 1.9 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 1.8 (2026-10-05o, AUDYT-2026-10-05o): widget: delta.bez_zmian widoczne (F-232)
 
 - 1.7 (2026-10-05h, AUDYT-2026-10-05h): `assets/widget-raport-klienta.html` zasilany danymi: sekcje wg profilu IND/BIZ i trybu, „Eksportuj PDF”. Schemat: pola `co_dalej`, `potwierdzenie`, `data_raportu`, `najblizsze_zdarzenie`, `delta` jako obiekt.

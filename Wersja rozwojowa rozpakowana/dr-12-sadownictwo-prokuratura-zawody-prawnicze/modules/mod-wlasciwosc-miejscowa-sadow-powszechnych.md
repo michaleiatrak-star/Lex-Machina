@@ -1,6 +1,6 @@
 # mod-WMS — Sąd właściwy miejscowo: siedziby i obszary sądów powszechnych
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Źródło weryfikacji:** rozporządzenie Ministra Sprawiedliwości z 28.12.2018 r. w sprawie ustalenia siedzib i obszarów właściwości sądów apelacyjnych, sądów okręgowych i sądów rejonowych oraz zakresu rozpoznawanych przez nie spraw — **t.j. Dz.U. 2026 poz. 492** (obwieszczenie z 2.04.2026, ogł. 9.04.2026; obejmuje zm. Dz.U. 2025 poz. 1012, 1607 i 2026 poz. 392; brak zmian po t.j.) ✅ [VER] RZĄD 1 2026-10-17 (ELI DU/2018/2548 `/references`, text.pdf t.j. i trzech zmian odczytane). Podstawa: art. 20 pkt 1 Prawa o ustroju sądów powszechnych (→ DR-01/`mod-USP-ustroj-sadow-powszechnych`).
 **Przepisy KPC powołane w module:** art. 17, 27 § 1, 34 § 1, 35, 37 i 38 § 1 — brzmienie odczytane z t.j. Dz.U. 2026 poz. 468 ✅ [VER] RZĄD 1 2026-10-17 (ELI DU/2026/468 text.pdf); zmiany po t.j. (ELI DU/1964/296 `/references`: 2026/26, 473, 830, 1003, 1046, 1296) sprawdzaj przed cytowaniem w piśmie.
 **Konsumenci:** pisma-procesowe-v3, pisma-proste-v2, analiza-sadowa-v6, DR-02, DR-03, DR-04 (właściwość sądu w piśmie).

@@ -1,6 +1,6 @@
 # PORTALE — część 3: DR-10 do DR-16
 
-> Część pliku `PORTALE-BRANZOWE-RZAD-2B.md` (podział 2026-08-20, naprawa
+> Część pliku `JUR:portale-branzowe` (podział 2026-08-20, naprawa
 > F-78 — plik źródłowy przekroczył 1000 linii). Pełny indeks i zasady
 > użycia: zobacz plik nadrzędny w katalogu `shared/`. To NIE jest
 > samodzielny skill — ładowany WYŁĄCZNIE przez indeks nadrzędny na
@@ -39,7 +39,7 @@ dla swojej niszy.
 | gdpr.pl | RODO/IOD — portal z systemem TAGÓW tematycznych, ⚠️ NIE testowany bezpośrednio `site:` w tej sesji, ZNALEZIONY przy tym samym wyszukiwaniu co poradyodo.pl | 📚 znaleziony 2026-07-21, wymaga świeżego testu przed pierwszym użyciem |
 | portalodo.com | RODO — blog kancelaryjny z NAZWANYMI autorami (adwokaci/radcy), format bardziej eseistyczny niż poradyodo.pl | 📚 znaleziony 2026-07-21, NIE testowany bezpośrednio |
 | di.com.pl (Dziennik Internautów) | Tech ogólnie, w tym RODO/ochrona danych — ⚠️ UWAGA: część znalezionych artykułów DATOWANA na 2018 r. (moment wejścia RODO w życie) — ogólny ton dla SZEROKIEGO odbiorcy, NIE głęboka analiza prawnicza | ⚠️ ZWERYFIKOWANE 2026-07-21, ALE ZASTĄPIONE przez poradyodo.pl jako preferowane źródło — di.com.pl zachowaj JEDYNIE jako dodatkowy kontekst ogólnoinformacyjny |
-| uke.gov.pl | Oficjalne (Rząd 1, organ) | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| uke.gov.pl | Oficjalne (Rząd 1, organ) | patrz `JUR:interpretacje-urzedowe` |
 
 ## DR-12 — Sądownictwo, Prokuratura, Zawody Prawnicze
 
@@ -67,7 +67,7 @@ dziedziny dotyczy pytanie.
 | Portal | Specjalizacja | Status |
 |---|---|---|
 | strazgraniczna.pl (oficjalny, nie 2B) | Rząd 1 — organ | patrz odrębne traktowanie |
-| bip.abw.gov.pl, skw.gov.pl | Oficjalne (Rząd 1) — organizacja ochrony informacji niejawnych, spory kompetencyjne ABW/SKW | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| bip.abw.gov.pl, skw.gov.pl | Oficjalne (Rząd 1) — organizacja ochrony informacji niejawnych, spory kompetencyjne ABW/SKW | patrz `JUR:interpretacje-urzedowe` |
 | **gov.pl/web/kgpsp** (Komenda Główna Państwowej Straży Pożarnej) | ⛔ Rząd 1 — OFICJALNY portal PSP, dedykowana sekcja "Prawo" (menu "Co robimy"), KSRG (Krajowy System Ratowniczo-Gaśniczy), Prewencja, zarządzenia Komendanta Głównego | ✅ ZWERYFIKOWANE 2026-07-21 (pobrano stronę bezpośrednio, na wskazanie użytkownika) — TREŚĆ w WIĘKSZOŚCI aktualnościowo-wizerunkowa (zawody sportowe, apele, jubileusze OSP), sekcja "Prawo" NIE zbadana szczegółowo w tej turze — punkt startowy do pogłębienia |
 | **bip.kgp.policja.gov.pl / edziennik.policja.gov.pl** (Komenda Główna Policji) | ⛔ Rząd 1 — OFICJALNY portal KGP, WŁASNY Dziennik Urzędowy KGP (od 2012 r. elektroniczny, edziennik.policja.gov.pl), zarządzenia Komendanta Głównego, status prawny | ✅ ZWERYFIKOWANE 2026-07-21 (przy okazji poszukiwania analogicznych portali służb) — WARTOŚCIOWE źródło DLA aktów WEWNĘTRZNYCH Policji (zarządzenia, regulaminy), NIE dla ogólnego prawa karnego (patrz DR-03 w `czesc-01-niepelnosprawni-dr02-dr04.md` dla tego) |
 | **defence24.pl** | Bezpieczeństwo, obronność, służby specjalne — dziennikarstwo analityczno-branżowe (NIE głęboki komentarz prawny) | ✅ ZWERYFIKOWANE 2026-07-21 — ⚠️ ZASTRZEŻENIE: znalezione artykuły w WIĘKSZOŚCI STARSZE (2013-2017, dotyczące HISTORYCZNYCH procesów legislacyjnych) — profil BLIŻSZY dziennikarstwu bezpieczeństwa/obronności niż analizie prawnej; TRAKTUJ jako KONTEKST branżowy, NIE główne źródło prawne |
@@ -119,7 +119,7 @@ komentarza.
 |---|---|---|
 | prawo.pl (dział Compliance/ESG) | Compliance ogólnie | 📚 znane, ta sama redakcja co testowana ✅ |
 > ⛔ **USUNIĘTO 2026-07-27** (ZASADA STAŁA): wcześniej tu był wpis sygnalista.pl — status ostatecznie NIEROZSTRZYGNIĘTY (niejasne, czy podmiot niezależny czy powiązany z dostawcą oprogramowania) — poza kategorią, usunięty zgodnie z nową zasadą rejestru.
-| nik.gov.pl | Rząd 1 — organ (wystąpienia pokontrolne) | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| nik.gov.pl | Rząd 1 — organ (wystąpienia pokontrolne) | patrz `JUR:interpretacje-urzedowe` |
 
 ### ⚠️ UCZCIWA OBSERWACJA (dodane 2026-07-21)
 

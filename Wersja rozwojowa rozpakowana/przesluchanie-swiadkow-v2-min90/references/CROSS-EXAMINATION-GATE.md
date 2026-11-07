@@ -1,7 +1,7 @@
 # CROSS-EXAMINATION-GATE
 
 > ⛔ HARDGATE — przy każdej powołanej podstawie prawnej (KPC/KPK/KPW/KPA):
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 ## Zasady kontrprzesłuchania
 
@@ -45,7 +45,7 @@ KROK 2: Zbuduj sekwencję trzech pytań:
   Q2 — pytanie konfrontacyjne: "Czy w dniu X zeznał Pan, że [parafrazując protokół]?"
   Q3 — pytanie o przyczynę rozbieżności (tylko jeśli sąd tego oczekuje)
 KROK 3 — HARDGATE: jeśli powołujesz art. 391 KPK lub art. 272 KPC
-  → view shared/PRAWO-HARDGATE.md → weryfikuj ISAP
+  → view JUR:weryfikacja-przepisow-kanon → weryfikuj ISAP
 ```
 
 ---
