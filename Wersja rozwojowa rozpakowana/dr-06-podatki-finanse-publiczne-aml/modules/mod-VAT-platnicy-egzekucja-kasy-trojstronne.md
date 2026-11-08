@@ -379,5 +379,5 @@ RZĄD 2 — trójstronne: interpretacja KIS 0114-KDIP1-2.4012.141.2025.1.RM
   poradnikprzedsiebiorcy.pl (04.2026), isp-modzelewski.pl
 ⛔ ŻADNA sygnatura ani interpretacja z tego modułu NIE MOŻE trafić do pisma
   procesowego bez uprzedniej weryfikacji przez `orzeczenia-sadowe-v2` /
-  EUREKA — zgodnie z shared/PRAWO-HARDGATE.md.
+  EUREKA — zgodnie z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md.
 ```

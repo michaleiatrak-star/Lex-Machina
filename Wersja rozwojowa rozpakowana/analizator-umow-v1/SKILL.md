@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.54"
+version: "1.55"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -393,7 +393,7 @@ CAL-2 KRAWĘDZIE — relacja każdej pary punktów o wspólnym przedmiocie, wsp�
 CAL-3 ROZSTRZYGNIĘCIE każdej SPRZECZNOŚCI i ZNOSI PRAWO: wykładnia całego dokumentu — zgodny
       zamiar stron i cel umowy (art. 65 § 2 KC, zweryfikuj w ELI). Podaj obie interpretacje
       i wskaż, która jest korzystna dla strony chronionej (pracownik, konsument, słabsza strona).
-      Kolizja nieusuwalna wykładnią → ryzyko sporu + gotowe brzmienie poprawki (Zasada 6).
+      Kolizja nieusuwalna wykładnią → ryzyko sporu + poprawka według Zasady 6 (brzmienie przy dokumencie własnym, kierunek zmiany przy cudzym).
       Prawo pracy: postanowienia mniej korzystne niż przepisy (art. 18 § 2 KP), zakaz
       zrzeczenia się prawa do wynagrodzenia (art. 84 KP) — weryfikuj w ELI.
       Punkt, który powtarza ustawę lub do niej odsyła: porównaj zakres podmiotowy, przedmiotowy
@@ -463,8 +463,13 @@ Twierdzenie użytkownika o treści umowy → zweryfikuj wobec dostarczonego teks
 **Zasada 5 — Balans mierzony symetrycznie (Moduł D):**
 Scoring uprawnień/obowiązków każdej strony oddzielnie.
 
-**Zasada 6 — Rekomendacja = gotowe brzmienie:**
-Nie "zmień §3" lecz "§3 powinien brzmieć: [pełna treść]"
+**Zasada 6 — Rekomendacja zależy od tego, czyj jest dokument (2026-11-08):**
+- **Własny dokument** (REDAKCJA, PROJEKT, UZUPEŁNIENIE — użytkownik sporządza albo poprawia swój tekst):
+  rekomendacja = gotowe brzmienie. Nie "zmień §3" lecz "§3 powinien brzmieć: [pełna treść]".
+- **Cudzy dokument** (ANALIZA projektu drugiej strony, umowy do podpisu, dokumentu przysłanego):
+  ryzyka i pułapki — co postanowienie robi stronie chronionej, skutek, podstawa, waga, co negocjować
+  (kierunek zmiany, kategoria M/S/N/T). **Bez alternatywnego brzmienia punktu**, chyba że użytkownik
+  wprost o nie prosi ("zaproponuj brzmienie", "redline", "przeredaguj").
 
 **Zasada 7 — Ścisły język prawniczy (2026-07-13m, dotyczy WSZYSTKICH modułów G/H/I/J*):**
 Każde proponowane brzmienie klauzuli, każdy szablon i każda rekomendacja

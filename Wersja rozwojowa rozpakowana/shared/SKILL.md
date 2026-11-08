@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.55"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.56"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,7 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.55 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA — kontrakt isap_tekst (na_dzien, partial, jeszcze_nie_obowiazuje, indeks z literą); agents/weryfikator-isap jw.
+  Wersja bieżąca: 3.99.56 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA — kontrakt isap_tekst (na_dzien, partial, jeszcze_nie_obowiazuje, indeks z literą); agents/weryfikator-isap jw.
   3.99.47 (2026-10-22, AUDYT-2026-10-22): JUR:terminy-procesowe — art. 45 §1 KW re-ver na t.j. Dz.U. 2026 poz. 1372.
   3.99.46 (2026-10-20, LEXAGENTO-P1): UNIVERSAL-RUNTIME-ADAPTER 1.2: kontrakt query_context (skrót aktu); walidator_cytowan: ELI aktów bazowych kodeksów -> skrót, api.sejm.gov.pl jako źródło urzędowe; pełne ścieżki modułów zamiast dr-NN/.../
   3.99.40 (2026-10-19a, AUDYT-2026-10-19a): KK — nowy t.j. Dz.U. 2026 poz. 1342 w LEGAL-REGISTRY, ISAP-METRYKI-AKTOW i modułach shared (tekst w ELI nieopublikowany — do publikacji 2025/383 + 2025/1818, 1872, 2026/902, 988); zapisy odczytu ze starego t.j. z dopiskiem „obecny t.j.”.

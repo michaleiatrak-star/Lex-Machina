@@ -42,6 +42,9 @@ nigdy z komponentem innego kraju.
 | `JUR:hierarchia-zrodel` | `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md` | rzędy źródeł, kanon weryfikacji przepisów (ELI, ISAP) |
 | `JUR:zrodla-aktow` | `prawny-router-v3/references/ZRODLA-AKTOW-FALLBACK.md` | gdzie czytać akt, gdy źródło urzędowe zawodzi |
 | `JUR:mapa-dziedzin` | `prawo-polskie-v2/ROUTING-MAP.md` | dziedziny prawa (DR-01…DR-16) i ich skille |
+| `JUR:stan-prawny` | `prawo-polskie-v2/krajowe/shared/STAN-PRAWNY-PL.md` | nazwy i źródła stanu prawnego (t.j. jako osobna pozycja Dz.U., nowelizacje, ELI/ISAP), statusy aktu, kontrola w piśmie — parametry TEMPORAL-LAW-CHECK, LEGAL-LIFECYCLE-MANAGEMENT, LEGAL-QUALITY-GATE |
+| `JUR:ryzyko-dezaktualizacji` | `prawo-polskie-v2/krajowe/shared/RYZYKO-DEZAKTUALIZACJI.md` | macierz ryzyka dezaktualizacji według dziedzin prawa polskiego |
+| `JUR:konflikt-dziedzin` | `prawo-polskie-v2/krajowe/shared/KONFLIKT-DZIEDZIN.md` | sprawy wielowątkowe: procedura dominująca i moduły pomocnicze (CROSS-DOMAIN-CONFLICT-ROUTER) |
 
 ### Pełna mapa modułów prawa polskiego (E1b, 2026-11-06)
 

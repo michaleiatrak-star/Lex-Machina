@@ -121,7 +121,8 @@ KROK 2: Zakwalifikuj:
          □ Obchodzi prawo (art. 58 §1 KC)
 KROK 3: Wskaż podstawę prawną (weryfikowaną w ELI (RZĄD 1))
 KROK 4: Oceń ryzyko: Krytyczne / Wysokie / Średnie / Niskie
-KROK 5: Zaproponuj zmianę (gotowe brzmienie alternatywne)
+KROK 5: Dokument własny albo prośba o brzmienie: gotowe brzmienie alternatywne.
+         Dokument cudzy: pułapka i kierunek zmiany do negocjacji, bez brzmienia (SKILL.md Zasada 6)
 KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
 ```
 
@@ -258,7 +259,7 @@ OCENA KOŃCOWA:
 ```
 Dla każdego wymiaru z dysproporcją >2 pkt:
   IDENTYFIKUJ: którą klauzulę zmienić
-  PROPONUJ: gotowe brzmienie wyrównujące
+  PROPONUJ: gotowe brzmienie wyrównujące (dokument własny); przy cudzym — kierunek wyrównania
   KATEGORYZUJ: M (must) / S (should) / N (nice) / T (trade-off do negocjacji)
 
 DEFINICJE KATEGORII NEGOCJACYJNYCH (jakościowe — warstwa nadrzędna):
@@ -480,7 +481,7 @@ Klauzula o najwyższym ryzyku: §[X] → do [kwota] PLN
 [co powinno być, a nie jest — ze wskazaniem modułu SHARED]
 
 ## 10. REKOMENDACJE ZMIAN (priorytetowe — M → S → N)
-[lista z gotowymi brzmieniami + kategoriami negocjacyjnymi M/S/N/T]
+[lista: przy dokumencie własnym z gotowymi brzmieniami, przy cudzym z pułapką i kierunkiem zmiany; kategorie M/S/N/T]
 
 ## 11. PLAN DZIAŁANIA PRZED PODPISANIEM
 Krok 1: [działanie] — termin: [kiedy]
@@ -508,7 +509,7 @@ Wartość: [kwota PLN]
 ## 2. BALANS: A [X/10] vs B [Y/10]
 
 ## 3. KLAUZULE KRYTYCZNE I WYSOKIEGO RYZYKA
-[tylko M i S — z gotowymi brzmieniami]
+[tylko M i S — brzmienia albo kierunki zmiany według Zasady 6]
 
 ## 4. EKSPOZYCJA (skrócona)
 Worst case: [kwota PLN] — klauzula: §[X]
@@ -561,7 +562,7 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 2. Cytat PRZED interpretacją
 3. Strona chroniona ZAWSZE jawna
 4. Balans mierzony, nie odczuwany
-5. Rekomendacja = gotowe brzmienie
+5. Rekomendacja = gotowe brzmienie przy dokumencie własnym; przy cudzym = ryzyka i pułapki (Zasada 6)
 6. Nieważność odróżniona od bezskuteczności
 7. B2C vs B2B — różne standardy ochrony
 8. Forma pisemna zmian — klauzula §10
