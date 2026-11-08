@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.57 (2026-11-08): RODZINA-PRAWA-COMMON-LAW 1.0 — metoda dla rodziny common law i dziedzin systemów mieszanych opartych na common law (CL-1 jurysdykcja i źródła, CL-2 moc wiążąca, CL-3 ratio a obiter, CL-4 późniejsze losy precedensu, CL-5 ustawa a precedens, CL-6 odróżnienie, CL-7 forma pisma z reguł procedury danej jurysdykcji); wywoływana przez UP-5 routera 3.77. CN-GATE i REM-GATE bez zmian; treść merytoryczna (hierarchia sądów, reguły procedury) ze źródła, nie z pamięci.
 - 3.99.56 (2026-11-08): Rozdział metody i parametrów PL: TEMPORAL-LAW-CHECK, LEGAL-LIFECYCLE-MANAGEMENT, POLISH-LAW-MAX-COVERAGE-STANDARD, LEGAL-QUALITY-GATE, CROSS-DOMAIN-CONFLICT-ROUTER w pojęciach ELI; parametry krajowe kluczami JUR:stan-prawny, JUR:ryzyko-dezaktualizacji, JUR:konflikt-dziedzin
 - 3.99.55 (2026-11-06): konektory MCP w pakiecie jurysdykcji: ścieżki prawo-polskie-v2/mcp-servers, narzędzia pluginu mcp__plugin_prawo-polskie-v2_lex-*
 - 3.99.54 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
