@@ -1,6 +1,6 @@
 94eb8d671ce15fc4ae0671df2499ca350f8dcc90e9f151e8d1b22a14de2cb463  ./NOTICE
 532165db1bcdc6a9634490d21847bb93a4f1596436b397287344d820e5beeec1  ./PORTABILITY-MANIFEST.md
-f3eecdfaccac3bc8c5fa18f3faabdb5590de73fb3a2e0f04ac0cb15b182cfe5f  ./SKILL.md
+13987b73f6d41df2efb8e39c4093239b3888315df80755f195fef0bfc2bf0469  ./SKILL.md
 a8894e5463f321487a6233c1b9b10f5caea8ac2a2b8a9deb9824ae245d237348  ./agents/openai.yaml
 49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee  ./assets/icon.svg
 f5adb2b1988ebfd743378091125076b20a5677ea2b478b3cb37d4f695541b082  ./benchmark/posiane-wady/README.md
@@ -12,7 +12,7 @@ ad7d21631521a47e2ba0285b4c88f1b0c2e56e63bd474b48bb86b1f1e72f8c89  ./benchmark/po
 5ffe95913b7d3e04e16c489c5fd9d712049eb527ecf29af2f9379ddbb048c2bb  ./benchmark/posiane-wady/umowy/04-matematyczna-tm.md
 26b46fbccbeaf79ae5be06a49314332f9a80e482ad2684739f4889121a60fce1  ./benchmark/posiane-wady/umowy/05-adwersarialne-injection.md
 70b200f4c7a85436d8d146204a71cda11c2ceb8ca2d0add25fd4dd1716bd7251  ./benchmark/posiane-wady/wyniki/oceny/README.md
-2f7b28fd2b597213c6a082f8a158f1775ee509c6a094a4fba6bedc165d94f6d5  ./references/CHANGELOG.md
+4e814fbda5912cadb9325f6fd156eddbb35661d9a3c9b6a50bc9e9b39a55d0bd  ./references/CHANGELOG.md
 d8d6b296b3e0947ee81567992924b24508479a332758315f2078b40a555eb2c8  ./references/HISTORIA-ZMIAN-PLIKOW.md
 cecfc86dd3341cef7ea1ea508223f521dd73d485876eddcab617a5b1a7455852  ./references/generator/boilerplate-strukturalne.md
 5c7108b6e123561cb17d9925e34b49163bfb3c62c27a6ede39327ee981678a41  ./references/generator/doktryna-uzupelnienie.md
@@ -24,7 +24,7 @@ aad21043d2d729e61179f31925cdc7df3c6c8b8c69a23937a5ec007acb3838fa  ./references/m
 0aa64c94ee722d7e698cafb75cbc7a4f98613c0d867eb6bf9762bfe4ca862585  ./references/mod-J3-dystrybucja.md
 755595c9432be0cc8a898514f0920fb0d8c7e68d0559da0ff55948559279b046  ./references/mod-J6-it-konsorcjum.md
 6ee87c2ad7cc1b837020ec8ef5224181b0aaaede953b69a03cc1a927258a56aa  ./references/mod-J9-ip-prawa-autorskie.md
-be735b8f5647eb5073fbfa06b93be846c55c0073af6b597ffa1174a5220d5d39  ./references/mod-core-checklist.md
+5b8e260568853f6825e5640f89ec9b6d9b670b0bb11df49dce9f1d056f27e93b  ./references/mod-core-checklist.md
 e05ccda80261627116912d5f2d507d091fa152a164fb948e2c76e6858db1d1f8  ./references/mod-shared-ai-act.md
 24bab538cff90afc541a92847d75a6b80002326d6f72f91fd8a11882a295d53f  ./references/mod-shared-alt-drafts.md
 00958aedd0734bf32b39ae5adc916525765efec8224c9107a3d7bac441553150  ./references/mod-shared-antywzorce-jezykowe.md

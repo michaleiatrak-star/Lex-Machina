@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.56 (2026-11-08): Rozdział metody i parametrów PL: TEMPORAL-LAW-CHECK, LEGAL-LIFECYCLE-MANAGEMENT, POLISH-LAW-MAX-COVERAGE-STANDARD, LEGAL-QUALITY-GATE, CROSS-DOMAIN-CONFLICT-ROUTER w pojęciach ELI; parametry krajowe kluczami JUR:stan-prawny, JUR:ryzyko-dezaktualizacji, JUR:konflikt-dziedzin
 - 3.99.55 (2026-11-06): konektory MCP w pakiecie jurysdykcji: ścieżki prawo-polskie-v2/mcp-servers, narzędzia pluginu mcp__plugin_prawo-polskie-v2_lex-*
 - 3.99.54 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 3.99.53 (2026-11-06, migracja prawa polskiego E1): UNIVERSAL-RUNTIME-ADAPTER §1B — klucze jurysdykcji `JUR:<klucz>` rozwiązywane przez manifest aktywnej jurysdykcji (`prawo-polskie-v2/JURYSDYKCJA.md`); klucz nierozwiązany → TRYB ZDEGRADOWANY.

@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.81 (2026-11-08): Rozdział metody i parametrów PL: TEMPORAL-LAW-CHECK, LEGAL-LIFECYCLE-MANAGEMENT, POLISH-LAW-MAX-COVERAGE-STANDARD, LEGAL-QUALITY-GATE, CROSS-DOMAIN-CONFLICT-ROUTER w pojęciach ELI; parametry krajowe kluczami JUR:stan-prawny, JUR:ryzyko-dezaktualizacji, JUR:konflikt-dziedzin
 - 6.80 (2026-11-07): pole prefiks-dziedzin w bloku DOSTAWCA JURYSDYKCJI (dr dla PL; inne kraje: kod kraju); T50 wymaga pola
 - 6.79 (2026-11-06): konektory MCP prawa polskiego (mcp-servers/, .mcp.json; 16 serwerów) przeniesione z audyt-systemu-v4 — plugin prawo-polskie-v2 startuje serwery lex-*; JURYSDYKCJA.md: blok DOSTAWCA JURYSDYKCJI (kraj, język, waluta, dziedziny, konektory, dostawcy komponentów aplikacji)
 - 6.78 (2026-11-06): migracja prawa polskiego E3: pakiet przyjął 95 modułów prawa krajowego (krajowe/<skill>/…) ze skilli wykonawczych i shared; JURYSDYKCJA.md wskazuje nowe miejsca, klucze bez zmian
