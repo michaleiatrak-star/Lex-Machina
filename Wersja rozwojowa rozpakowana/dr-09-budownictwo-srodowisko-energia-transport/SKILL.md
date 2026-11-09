@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.58"
+version: "3.59"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -88,7 +88,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
-## Moduły (38 łącznie — ✓ 38 OK, ☐ 0 STUB)
+## Moduły (39 łącznie — ✓ 39 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -524,6 +524,8 @@ TRANSPORT:
               (KZN: zasób, przekazywanie nieruchomości, Komisja Rozjemcza, organy, najem i SIM/TBS; t.j. Dz.U. 2026 poz. 1299)
   [✓] NOWY  mod-ustawa-obszary-morskie-administracja-morska
               (obszary morskie, pozwolenia na sztuczne wyspy/MFW i kable, plan zagospodarowania obszarów morskich, administracja morska, kary do 1 000 000 SDR; t.j. Dz.U. 2026 poz. 1305)
+  [✓] NOWY  mod-umowa-przewozu-CMR-konwencje-przewozowe
+              (umowa przewozu i odpowiedzialność przewoźnika: KC art. 774–793, Prawo przewozowe t.j. Dz.U. 2024 poz. 1262, CMR Dz.U. 1962 poz. 238 z Protokołami 1978 i e-CMR 2008, Konwencja montrealska Dz.U. 2007 poz. 235, system warszawski, COTIF/CIM, konwencja o konosamentach; ELI 2026-11-09)
 ```
 
 ---

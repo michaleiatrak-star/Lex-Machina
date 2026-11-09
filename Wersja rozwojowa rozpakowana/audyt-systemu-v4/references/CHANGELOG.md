@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.253 (2026-11-09): mapa_dzu_2026-10-04 — uzupełnienie RZĄD 1 ELI: umowa przewozu i konwencje przewozowe (Prawo przewozowe t.j. 2024/1262; CMR 1962/238 z Protokołami 2011/382 i 2019/1487; Konwencja montrealska 2007/235; system warszawski 1933/49, 1963/189, 1965/167; COTIF 1985/158 z Protokołem 2007/674; Konwencja o konosamentach 1937/258 z Protokołami 1980/48, 1985/26) → DR-09
 - 6.252 (2026-11-07): pole prefiks-dziedzin w bloku DOSTAWCA JURYSDYKCJI (dr dla PL; inne kraje: kod kraju); T50 wymaga pola
 - 6.251 (2026-11-06): FAZA 0E instaluje serwery MCP z katalogu konektorów aktywnej jurysdykcji (pole `konektory`; PL: prawo-polskie-v2/mcp-servers); T46/T47 czytają serwer ISAP stamtąd (katalog_konektorow); T50 blokuje i sprawdza blok dostawcy (D), +1 mutacja; T33 usunięty (pusty sukces, rolę pełni T34 --archiwa)
 - 6.250 (2026-11-06): migracja prawa polskiego E3: mapa_jurysdykcji.py --migruj (przeniesienie modułu do pakietu jurysdykcji z odwołaniami JUR:/ścieżką, także ścieżki /mnt/skills/user); _lex_common.modul_jurysdykcji — T29/T32 czytają rdzeń opłat z manifestu jurysdykcji; T49: +2 mutacje T50 (klucz spoza manifestu, usunięty moduł); T30 liczy treść skilla także w <pakiet>/krajowe/<skill>/ (przeniesiona, nie utracona)

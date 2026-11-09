@@ -1,7 +1,7 @@
-2d17e5a81c6b20cc6be0a02aa2762deb406e184655e1f27bba1bd3187ed706bd  ./MAPA-AKTOW.md
+1e4ee8ed8a09ad0b1be271ef562d30fc05e2a512b1b42c5f615d253d0a883cc4  ./MAPA-AKTOW.md
 83afde5b91959f4ea4969efc140eba5f4e52d255c6cfee1892bb96db1c77ca89  ./MAPA-POKRYCIA.md
 b98cd207fee28b302956c1019e3235e74c558cdb35e87764a20020e630672fdb  ./PORTABILITY-MANIFEST.md
-978b6a2c9cf3ab01c06408acb1b410f0e7e4ce0cd83526a52c8636cc7d75c9c5  ./SKILL.md
+aff62ba7aebe2252061d68cb869866b34c9d0b369691ccb83890aaf4f11bc24c  ./SKILL.md
 a26e0ecdd82d926b5fbc5fdb70950895a2b41c69d18c97724274c1394341fae4  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 fa6f414d5b32cd2d84d9462569463771bdb6c4560cf6f16aa5f2ad89e9db8096  ./modules/mod-GDDKiA-specustawa-drogowa-ZRID.md
@@ -32,6 +32,7 @@ fc46892de5c48a07a6c860f3e5c4e59716425d8e492d4ab6a4539ea0ca88372f  ./modules/mod-
 022e8eba5d84e50dc5624a6e14aed6788f85f14b4fc05f310d882de948a1d0ba  ./modules/mod-srodowisko-wycinka-odpady-niebezpieczne-rekultywacja.md
 ce49a8cf723be7afe261644e369b419bc4c1bd6576a14aa2aabc8ab6951c43f7  ./modules/mod-system-kaucyjny-opakowania.md
 5fa9b66a596232bed0fbc8a38debe26c522ee40eace53e604d78d2d7aaeeb932  ./modules/mod-szkody-lowieckie-szacowanie-odszkodowanie.md
+e9e53c96e6c41f7b30582599a95d9daf37c83eef9e4156b6d3cc755f579acea4  ./modules/mod-umowa-przewozu-CMR-konwencje-przewozowe.md
 df9bda6e013aebdae6c717cc5e0bd2bb2f02d96702a25ada1419a82c1bb00626  ./modules/mod-ustawa-Krajowy-Zasob-Nieruchomosci.md
 1aa9037667f3ce9b15522c97555e77599d0f1f7017ee52b0a2273551554e6948  ./modules/mod-ustawa-OOS-oceny-srodowiskowe.md
 60aa973db6f86657c09c96c87d5c7bf2baca56ee895cffebab29bd06c6a299ad  ./modules/mod-ustawa-architekci-inzynierowie-budownictwa-zawod.md
@@ -48,5 +49,5 @@ adc58b3639ad5d06e0796a347783ae14cf6dd8d2b1bf3c948fd4c74f4cd83373  ./modules/ochr
 73b3f563521ce316ef090929d79a34cb3840b9c91b8c4bd000dd9d0dc2553287  ./modules/ochrona-zabytkow/czesc-04-dps-linie-napowietrzne.md
 4828d9f448834cc7f294608adc90329c1569bc4e8e89d5f7cf6ae8c13505c0b3  ./modules/ochrona-zabytkow/czesc-05-plac-zabaw-mikrokawalerki.md
 c4746a4f940f85d463e9290f5dd6295121ae24769e0765dd05bb70a289290960  ./modules/ochrona-zabytkow/czesc-06-parking-przeksztalcenie-cross.md
-e4866af7423e4d8dd2e9f363ad9aec01d7d6331d3bcb315fc382fb899e4da8fd  ./references/CHANGELOG.md
+3b78dd94efcaed6907f3ed6aeae20ae756f18a7f9fa7f6aa4e74dcdc8d2fbc4a  ./references/CHANGELOG.md
 abe6aa1f0c7be329d8f30b4e26b575581c1ed0421413f61d72d7af313e414223  ./references/HISTORIA-ZMIAN-PLIKOW.md
