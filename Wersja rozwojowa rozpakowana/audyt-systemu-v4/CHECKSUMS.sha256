@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-2653ac8eaa6f5838cc2dbc30e113c99242ed5b382bdf9a5c301e45748e2447a4  ./SKILL.md
+2d9fd6605b811a05411d9654db754a1ad3ba1183dfc855d0e793fe0a48fa03eb  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 4e1fb6c25693e16536b9397c060ecfb476328c75513dd15b7b77732009c02e52  ./modules/MOD-DESCRIPTION.md
@@ -10,7 +10,7 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 8e35cbfde3fb3a785181e9e16a153437820762ad34887cf1e714086f497274e9  ./references/ALIASY-NAZW-AKTOW.md
 83c32f988dc7bea3a0137452aff036a2b4b0a2ed4cdf42db138d815b0a848dd4  ./references/AUDIT-JOURNAL.md
-e925beb1ccd1413274b4a32164378e4a9747ce621ffd60beab5d082fedcc3e26  ./references/CHANGELOG.md
+382c206e8c86cbd32b8c9ef99d020a1ec3b4da9595be19d30ff4da6c656f2596  ./references/CHANGELOG.md
 e7740174fe8894baaf9ea9cd5da5df31a862fad4cc071c831ccec7b438fbb06a  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -33,7 +33,7 @@ bfac9ff481590d64373a55c926a58f8b23e530626104814759be78b9aa775045  ./references/S
 82a72e5ef250fdbbbd184bd943bfc2a408d5b6a459a8a3d913624c48573dc4b9  ./references/SYNC-DZU-AUTOMATYCZNY.md
 2413e6f5b42f1883970fc1398c4946cd746342f5b1eea697a53d8c209cf59073  ./references/WARN-OTWARTE.md
 b53258f9480de7129bdc392b9fbd403dde496cfa6e17720c70b21a6a99b417b3  ./references/mapa_dzu_2026-08-28.md
-5ceddbfe9f79eb11da4810111270250e20c33a6d4e8dc60e3b07cd3845f3d7cb  ./references/mapa_dzu_2026-10-04.md
+7e4e3cdef2aa6e565f7d6130bf28578b639ea3713769ead9a1b21c6b3eadbde6  ./references/mapa_dzu_2026-10-04.md
 739de991711f7fce2ef84d99cbf0bbe7cb670ba00040d72bb19cd105d611560d  ./references/migracja-jurysdykcji/E2-MD5-terminy.tsv
 de37fa13fcde1cf12dbd30791956571c03dccbda188c9e68d40bb1609cecee67  ./references/migracja-jurysdykcji/PLAN-I-MAPA.md
 24e8f5b4e4230b0d790a4bd12fd8a42abfe8cea7486a63d0dbb3f80fe30988ee  ./references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md

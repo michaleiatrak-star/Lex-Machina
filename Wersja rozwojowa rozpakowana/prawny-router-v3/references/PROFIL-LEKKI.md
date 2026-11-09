@@ -148,6 +148,7 @@ przez F-113.
 | `shared/CP-GATE.md` · `shared/HYBRID-VALIDATION.md` | ścieżka pisma | przed generowaniem `.docx` |
 | `shared/MCP-INTEGRACJA.md` | host zgłasza podłączone MCP | KROK 1 |
 | `shared/MIEDZYNARODOWE-GATES.md` + `HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md` | jurysdykcja obca (UP-5) | zamiast OŚ/WYJ, przed analizą |
+| `shared/RODZINA-PRAWA-COMMON-LAW.md` | jurysdykcja common law albo dziedzina systemu mieszanego oparta na common law (UP-5) | przed pierwszym powołaniem ustawy lub orzeczenia |
 | `references/AUDYT-KLUCZA-ODPOWIEDZI.md` | kategoria [11] | przed werdyktem porównawczym |
 | `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md` | sprawa karna, po decyzji frameworku | przed kwalifikacją |
 
