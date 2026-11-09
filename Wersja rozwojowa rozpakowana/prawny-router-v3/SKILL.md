@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.77"
+version: "3.78"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -68,7 +68,7 @@ escalation:
   - brak źródła dla powołania po wykorzystaniu dostępnych alternatyw
     → oznacz ⚠️ [NIEWERYFIKOWANE] i poinformuj użytkownika, nie kontynuuj cicho
   - "sprawa transgraniczna / prawo obce → pomiń prawo-polskie-v2 i ISAP,
-    ale NIE pomijaj weryfikacji — view shared/MIEDZYNARODOWE-GATES.md (common law / system mieszany: + shared/RODZINA-PRAWA-COMMON-LAW.md) +
+    ale NIE pomijaj weryfikacji — view shared/MIEDZYNARODOWE-GATES.md (common law / system mieszany: + shared/RODZINA-PRAWA-COMMON-LAW.md; prawo nordyckie: + shared/RODZINA-PRAWA-NORDYCKIE.md) +
     shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md, kanał RZĘDU 1 przełączony
     na depozytariusza/EUR-Lex/bazy organów; pozostałe zasady HG aktywne (UP-5)"
   - użytkownik zagubiony / brak klasyfikacji → [7] FALLBACK, nie zgadywanie dziedziny
@@ -120,7 +120,8 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.77 (2026-11-08): UP-5 — rodzina common law i systemy mieszane: shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7: jurysdykcja, moc wiążąca, ratio, losy precedensu, ustawa a precedens, odróżnienie, forma pisma)
+  Wersja bieżąca: 3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6: państwo i UE/EOG, ustawy wspólne a krajowe, nauka o źródłach, orzecznictwo bez stare decisis, brak kodeksu cywilnego, forma)
+  3.77 (2026-11-08): UP-5 — rodzina common law i systemy mieszane: shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7: jurysdykcja, moc wiążąca, ratio, losy precedensu, ustawa a precedens, odróżnienie, forma pisma)
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
@@ -205,7 +206,7 @@ UP-2: ELI PIERWSZY — kanon E-1…E-5 (JUR:hierarchia-zrodel):
 UP-3: Sprawy karne → KROK1-detekcja.md kieruje do dr-03; kwalifikacja przez
          view dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 UP-4: HYBRID-VALIDATION przed każdym .docx
-UP-5: Zagraniczne → pomiń prawo-polskie-v2 + ISAP (rodzina common law / system mieszany: także shared/RODZINA-PRAWA-COMMON-LAW.md, CL-1…CL-7); wczytaj
+UP-5: Zagraniczne → pomiń prawo-polskie-v2 + ISAP (rodzina common law / system mieszany: także shared/RODZINA-PRAWA-COMMON-LAW.md, CL-1…CL-7; rodzina nordycka: shared/RODZINA-PRAWA-NORDYCKIE.md, NR-1…NR-6); wczytaj
          shared/MIEDZYNARODOWE-GATES.md + shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md;
          PODMIANA BRAMEK: OŚ-GATE→MG-1 (ratyfikacja i zakres), WYJ-GATE→MG-2
          (wykładnia KWPT art. 31-33). ⛔ CN-GATE i REM-GATE NIE są podmieniane —
