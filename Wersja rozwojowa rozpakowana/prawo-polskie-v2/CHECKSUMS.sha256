@@ -1,7 +1,7 @@
 891ce2fb6fd0e49e96d09f740c37ab6c0cab87d427bd90e50300008e7f433815  ./JURYSDYKCJA.md
 f1cdf3365cc65a0884824ee41adb40058b6541d2073a03b2d7b6978e1d62d5f9  ./PORTABILITY-MANIFEST.md
-062c280b511e53880bc2366c4666b7e5f430a99c848c41abbf038205418dce51  ./ROUTING-MAP.md
-ebf9d7e287fe8b0e4db61140d937760d5418e3ae4f5c95f72d4567cbab0d53a9  ./SKILL.md
+a3fba8a81be3d21b69c024bc7c6d6fab80dc14f5bd84707dd5af3122cffeff3f  ./ROUTING-MAP.md
+8c2598bc135996e792451009cf217b07f29d5f26e88ae0417dfffb96d47fa39b  ./SKILL.md
 9534a6fc6d1ced5da09bf3de3cd8763e08a0cbe70a3b41813ce56de9f74c9015  ./agents/openai.yaml
 51a6923974188748638a424aa59b42b6afad2d910f910a1d43bb13ee10f3ce26  ./assets/icon.svg
 c07fe8367fe79ca5c5e2b5338523373f221a16a7a6f88eea95cda4bd7a825653  ./krajowe/analiza-sadowa-v6/references/koszty-terminy.md
@@ -45,7 +45,7 @@ dd6c027949d9c5cac13694bb7e7860ebdf844fcc3d25265fd907237e0e906855  ./krajowe/shar
 1bfe93669d93f94b3ae9c6294895e2c6bf18971ceeb378a1256550e850d7e179  ./krajowe/shared/FORMAT-CYTOWANIA.md
 8aa62f7c90b5a6c4dd84e7d1d7e4ea5c077624d33576041477d15fa1eb8c65b8  ./krajowe/shared/HIERARCHIA-ZRODEL.md
 aaaa96d66b0d54c0287fd899c482f3930167a5a0dfe4d7f863947b9e8148843a  ./krajowe/shared/INTERPRETACJE-URZEDOWE.md
-1772b69860c5657baba96a55591bc99e79fcd4e5ddd4d63297adb26aaae40cd6  ./krajowe/shared/ISAP-METRYKI-AKTOW.md
+18558632e3ede2da2b9cd67a5c1f361267d9b4ea1e33f98602c913714ac677cb  ./krajowe/shared/ISAP-METRYKI-AKTOW.md
 df82047619819ad2c7a552f4206ee63d4d75f536b9feabdf47ffe695f9dcaaae  ./krajowe/shared/KONFLIKT-DZIEDZIN.md
 de6e004421111bf6cf3b327cddf951fde1299a884baab07ea5aee2b6494cdc66  ./krajowe/shared/LEGAL-REGISTRY.md
 31af9a7506e9edd134a3d6e1697b8a07a14deae4171afe36596d079b4949d506  ./krajowe/shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
@@ -89,17 +89,17 @@ b17df9e7292035902beb6b41647f62a4d62f72b3c07238234090ed470ebd7fc4  ./krajowe/shar
 86cac69c708b001d82ff2af76d8f4d42575e3b376c08d4652acdde31627df018  ./krajowe/shared/oplaty/01-KSCU-cywilne-rodzinne-pracownicze.md
 be687eb85e3c3719d110e86f2b568a1b738f7d257cc6fafaed3841c6bf205bdb  ./krajowe/shared/oplaty/02-zwolnienia-zwrot-alimenty.md
 c58f64cfcf732df541198be03205843e5b55c595c36ef6387d7b2b0394b82328  ./krajowe/shared/oplaty/03-koszty-zastepstwa-taksy.md
-7b1fb4caa2cb75da5381a050d08f126c5cf9972926e0ccf26fe16bfd28a0d0a3  ./krajowe/shared/oplaty/04-wartosci-powtarzalne-kotwice.md
+cd14a8167599b5e6e5af21840cfbadc3c9b12ed59cb98959622f93ff715ed4eb  ./krajowe/shared/oplaty/04-wartosci-powtarzalne-kotwice.md
 a478a8d5d70d9c3f681f5aef9bff8f5ea12dc5076d347994d9298ac282b055c0  ./krajowe/shared/oplaty/05-sprawy-karne.md
 5f79861acad51aa6af208b83c1e59f26a00da922e678cde145ea66ada3cd14a6  ./krajowe/shared/oplaty/06-administracyjne-wieczystoksiegowe-KIO.md
 c624a291d2efa9a4ba0fda34716daff1e94e9e38096092e7e511da0a6a89ad47  ./krajowe/shared/oplaty/07-komornicze-skarbowe-notarialne.md
 702cb14ed4b2db3a6e22971f6c41e5d78ea00ebcfd39558d3ee2e6033338d3c4  ./krajowe/shared/orka-bas-leksykon/czesc-01-praca-admin-drogowe.md
-8adbeb9633bd4183692a908638de03abc86897c5f1da5811f74cd5b656f903d9  ./krajowe/shared/orka-bas-leksykon/czesc-02-finanse-nieruchomosci-energetyczne.md
+5d2b9e107e73a66f8645eaff4b05005f2ac8ad6cc2b954972e0cb253b7437554  ./krajowe/shared/orka-bas-leksykon/czesc-02-finanse-nieruchomosci-energetyczne.md
 4d982114ec44a3d359e35e9f1527b9a086d16f4858fe8e758d08e10aac0552ea  ./krajowe/shared/orka-bas-leksykon/czesc-03-cywilne-niepelnosprawnosc.md
 f1162baa6b9dc3fc6611484c9709ce596f3731b90ef225f9e8dcedb7dd87c605  ./krajowe/shared/orka-bas-leksykon/czesc-04-karne.md
 f0e9af7ef19cb733e7d2d9d1c33121efedfa8d5bd1413279bf62ba6ea3d71259  ./krajowe/shared/orka-bas-leksykon/czesc-05-kandydaci-prawa-obywatelskie-sporne.md
 2b22ae800b2f867084c46f2c46545e78bc17278893e4a6ef717b0a02593c42be  ./krajowe/shared/orka-bas-leksykon/czesc-06-priorytety-P1.md
-5c67ec36233a5f6743d87d7f506efd5fca85694b80f35a29db3b172338b8b29e  ./krajowe/shared/orka-bas-leksykon/czesc-07-priorytety-P2-bas-v18.md
+dadc01fd3c8061960575675a63a948bf1bbf039a2f96407747a4ef436e99cf80  ./krajowe/shared/orka-bas-leksykon/czesc-07-priorytety-P2-bas-v18.md
 f86d87ff0e95d7da3f4f26f95e58570bdd7c3fca85e5afce39d521095a8c2932  ./krajowe/shared/orka-bas-leksykon/czesc-08-praktyka-prawnicza.md
 4d777e95a26cda2f3c8974aafd0d418337e088a128899f2d26e5b8507b6b0a38  ./krajowe/shared/terminy.md
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
@@ -187,5 +187,5 @@ f7fae1f207120d39495399a975f2efe8c88850c28f895abc4a34f0a24f83a86d  ./mcp-servers/
 9c6eaac5509528bd5c6a9a57d5ce753b590fa2ad9c21e8a300cec6701e678535  ./mcp-servers/wspolne/formularz.mjs
 dd57ad59b047ce6e68151a423de62c7f51a995ef146374808a2db819e709ce5a  ./mcp-servers/wspolne/test_siec.mjs
 bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/zbuduj_pakiet.py
-b6c1155fd84d0bdaa98e9ded5fdcf20c59b6bcd84fe508d609f41c9868969187  ./references/CHANGELOG.md
+17fbb8b94df38fd739560915d3359c0b56ccebf9991379b38b6bc45fd3ede30a  ./references/CHANGELOG.md
 68b8052c1361e3a07733ee1fd2ad97e9169620b287e603c50b217ba4ffb57c48  ./references/HISTORIA-ZMIAN-PLIKOW.md

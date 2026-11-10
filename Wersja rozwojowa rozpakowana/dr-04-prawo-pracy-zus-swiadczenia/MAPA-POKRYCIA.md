@@ -36,7 +36,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 
 ## Ustawa o systemie ubezpieczeń społecznych (SUS)
 
-**Baza operacyjna:** Dz.U. 2026 poz. 199 t.j.; fresh gate przed cytowaniem jednostki.
+**Baza operacyjna:** Dz.U. 2026 poz. 1474 t.j. (ELI 2026-11-11); fresh gate przed cytowaniem jednostki.
 
 | Zakres | Status bieżący | Dowód pokrycia |
 |---|---|---|

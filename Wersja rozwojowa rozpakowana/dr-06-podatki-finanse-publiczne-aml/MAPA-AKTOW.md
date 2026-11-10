@@ -31,7 +31,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | VAT / PIT / CIT — użytek mieszany i koszty samochodowe | właściwe bieżące przepisy VAT/PIT/CIT | `mod-odliczenia-uzytek-mieszany-firma-prywatny-KUP` | ✅ aktywny; fresh gate |
 | Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131 t.j. ze zm. (⚡ kontrola operacyjna: zm. Dz.U. 2026 poz. 1281 art. 9 — art. 118, 122 ust. 4, 123, w mocy 31.10.2026) | `mod-KAS-kontrola-celno-skarbowa` | ✅ aktywny |
 | Kodeks karny skarbowy — routing podatkowo-karny | Dz.U. 2025 poz. 633 t.j. ze zm. | DR-03 `mod-KKS-karny-skarbowy-i-AML.md` | 🟢 B+/COV |
-| Ustawa o finansach publicznych | Dz.U. 2025 poz. 1483 t.j. ze zm. | `mod-UFP-finanse-publiczne-NIK-RIO` | ✅ aktywny |
+| Ustawa o finansach publicznych | Dz.U. 2026 poz. 1447 t.j. | `mod-UFP-finanse-publiczne-NIK-RIO` | ✅ aktywny; ELI 2026-11-11 |
 | Prawo przedsiębiorców — limit płatności gotówkowych | Dz.U. 2025 poz. 1480 t.j. ze zm. | `mod-limit-platnosci-gotowkowych` + DR-02 `mod-Prawo-przedsiebiorcow-current-state-COV.md` | 🟢 B+/COV |
 | Ustawa AML | Dz.U. 2025 poz. 644 t.j. ze zm. | `mod-ustawa-AML-instytucje-obowiazkowe` | ✅ aktywny |
 | Ustawa o podatku od czynności cywilnoprawnych (PCC) + ustawa o podatku od spadków i darowizn | PCC: Dz.U. 2026 poz. 191 t.j. ze zm.; ⚡ **2026/1354** art. 3 — art. 9 pkt 6: próg zwolnienia sprzedaży rzeczy ruchomych 1000 → 3000 zł od 3.11.2026 (czynności sprzed tej daty — próg 1000 zł, art. 10) ✅ [VER: ELI DU/2026/1354 text.pdf, RZĄD 1, 2026-10-20] | `mod-ustawa-PCC-i-podatek-spadkow-darowizn` | ✅ aktywny |

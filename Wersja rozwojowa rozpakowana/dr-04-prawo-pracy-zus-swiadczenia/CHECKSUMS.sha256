@@ -1,7 +1,7 @@
-304f0eac4b30fb59a01aae9d315e30e5bbed0be21ff6dbfab930fc052e7d9900  ./MAPA-AKTOW.md
-0d97a5a2e1e76e300f26de4be86efebf1a63c435e0765abdc4e169eb1d197127  ./MAPA-POKRYCIA.md
+4c7d1c018baac54fdf0f545877eefbc45e3bfb622b4e699d6db77d08aab8c4ec  ./MAPA-AKTOW.md
+610a40a169dbcbbd00256dec4cf2b64ca65de6f5ed2e898fb6f450ed992024a5  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-6069c5e8380c57eb0c8dbef38456fcdf034a6279abe64c6d9a101ca11db23daf  ./SKILL.md
+ea73ff91bdde9349d9dabcb928bc444ff4ff2481c3119f081a261b020d1101f2  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -19,10 +19,10 @@ bf74110cdad402837b008ab04d2959615aaad5d82ae5509cc2c3076312e2e28a  ./modules/mod-
 8471a4ba5a8aa1eb03734b60b4bc579db4c0e12d2bc58d1145afc5715a54c1eb  ./modules/mod-KP-prawo-pracy.md
 00cd0b0e86ad7cb5d1467af1ba5a4de880fd9df4c1301b14cf49b96755ca953f  ./modules/mod-KRUS-rolnicze-ubezpieczenia.md
 90af5951eb78b90aa7712b9a0e0fe0d28158a0ad314823572e54dc27cde35094  ./modules/mod-ROZP-SKLADKOWE-podstawa-wymiaru.md
-1b01bc84bfaa4cb073f9a7963b01cdb36586c222e58a9ae25a10e5d353d90f7d  ./modules/mod-SUS-ZUS-ubezpieczenia-spoleczne.md
-a3771b6d3b4fad39618f697f1461e60d5e49a5ae7c756526ce3fa972d066e52b  ./modules/mod-SUS-current-state-COV.md
+f25d0c8ec31d2e249a1a77a07c3f11558709583d521f893facf115f99c9057d9  ./modules/mod-SUS-ZUS-ubezpieczenia-spoleczne.md
+648785e8dcaed399e533a850819e344bce1cda9c8e506bed7d20f231bedf25a0  ./modules/mod-SUS-current-state-COV.md
 38dff9efb30954484f177ff95f394eebd3cd9e6e41c20bd8474ae7ea7b2b0be9  ./modules/mod-SUS-dzial-2-podleganie-ubezpieczeniom.md
-1367e20c02925ba72d58547292470a4c0977356ee58a3c4a96c63c671aecef0e  ./modules/mod-SUS-uzupelnienie-pokrycia-2026.md
+2e59766102b1f31b0893e29c4dddcb3d23a6ffbd62517b24e919580a966f936f  ./modules/mod-SUS-uzupelnienie-pokrycia-2026.md
 04022538e08f1b304748d987a0078282d0fdcbc5cd6c83dccf46730e2390c9b5  ./modules/mod-dodatek-pielegnacyjny-swiadczenie-rehabilitacyjne-wyrownawcze.md
 7b53e2058ada7f89639ee0976927e9fd919e5e1ab31b5841bd7291e258f0cf78  ./modules/mod-emerytury-pomostowe.md
 30592d8da091bce3a8176f13e0c16da6876ff00ea7f15c7402632aa0d800ab5a  ./modules/mod-klasyfikacja-naruszen-bhp-prawa-pracy.md
@@ -48,5 +48,5 @@ ef30f97173a7709a425c054aa2d32bfdf314505cf0aefadff7661d6e2c05a51e  ./modules/mod-
 ef83da86f346814a8b673d20401a9bca3eff8636744f8a32aad7f3eff2cf7acb  ./modules/mod-ustawa-zwolnienia-grupowe.md
 1816bbf2471a026093115094e1b41e669adc3fcfc639fd691435f79f98aa5a4a  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-f7a2320023fd14f8744cdcb2bfd0d505fff35ff0360f92bedbe22df3d10360c3  ./references/CHANGELOG.md
+5cb336b6af3fde50f9562e0c2b94ca846dc181e7c6fee27a9f7bf62269b6a136  ./references/CHANGELOG.md
 524575362b60f3d2eeb1b219131da9540142ca27bf15bcd7e46e31618e6ccc06  ./references/HISTORIA-ZMIAN-PLIKOW.md

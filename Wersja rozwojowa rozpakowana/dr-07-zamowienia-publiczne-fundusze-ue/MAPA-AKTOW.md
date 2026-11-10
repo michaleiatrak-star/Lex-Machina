@@ -26,7 +26,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan aktu → moduł. Historia korek
 | KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. | `mod-ustawa-arbitraz-mediacja` | 🟢 operacyjny |
 | Odpowiedzialność za naruszenie dyscypliny finansów publicznych | Dz.U. 2025 poz. 1484 t.j. | `mod-ustawa-dyscyplina-finansow-publicznych` | 🟢 operacyjny |
 | Ustawa wdrożeniowa 2021–2027 | Dz.U. 2025 poz. 1733 t.j. | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
-| Zasady prowadzenia polityki rozwoju | Dz.U. 2025 poz. 198 t.j. | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
+| Zasady prowadzenia polityki rozwoju | Dz.U. 2026 poz. 1366 t.j. (ELI 2026-11-11) | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
 
 ## Reguła użycia
 

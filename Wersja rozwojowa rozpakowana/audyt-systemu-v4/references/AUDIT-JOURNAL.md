@@ -70987,3 +70987,21 @@ Liczby plików bez zmian (prawo-polskie-v2 8, audyt 189). Podbicia: prawo-polski
 - Nie występowały: #7 (art. 14 u.ś.u.d.e. bez treści art. 15 — odczyt z PDF), #13 pkt 1 (litera na nowej stronie — brak `na_dzien` do tej pory; KC, KK, KW, u.o.p. bez różnic w pomiarze).
 - Kod: aplikacja `core-law-footnotes.ts` (560c510, testy vitest), `wspolne/akt-pdf.mjs` wygenerowany, `isap-eli-mcp-server.js`; skille: shared 3.99.48 (MCP-INTEGRACJA, weryfikator-isap), analizator-przepisow-v2 2.13 (Moduł 1, 1H).
 - Wersje: audyt-systemu-v4 6.245, shared 3.99.48, analizator-przepisow-v2 2.13.
+
+
+## AUDYT-2026-11-11 — nowe t.j. z ELI: PSP, UFP, polityka rozwoju, POŚ, Prawo geodezyjne, SUS (6.257–6.258)
+
+- Źródło: ELI (`api.sejm.gov.pl/eli`, odczyt 2026-11-11, RZĄD 1): obwieszczenia text.pdf (pkt 1 — ujęte zmiany, pkt 2 — poza t.j.), porównanie t.j. artykuł po artykule, odczyt przepisów zmieniających w ustawach nowelizujących; wykrycie przez T15 (`audit_tj_inventory.py --mode maps`: 14 × NEWER_TJ → 0).
+
+| Było | Jest | Skill — akt |
+|---|---|---|
+| `2025/1312` | **2026/1473** | `dr-13`, prawo-polskie-v2 — ustawa o PSP |
+| `2025/1483` | **2026/1447** | `dr-06`, prawo-polskie-v2 — UFP |
+| `2025/198` | **2026/1366** | `dr-07`, prawo-polskie-v2 — polityka rozwoju |
+| `2025/647` | **2026/1453** | `dr-09`, prawo-polskie-v2 — POŚ |
+| `2024/1151` | **2026/1389** | `dr-09`, prawo-polskie-v2 — Prawo geodezyjne |
+| `2026/199` | **2026/1474** | `dr-04`, prawo-polskie-v2 — SUS |
+
+- Treść: PSP rozdz. 8 zakwaterowanie (2025/1366), art. 106 ust. 1a–1f, 97g; UFP art. 243 ust. 3 pkt 1a; SUS decyzja PIP o stosunku pracy (2026/473: art. 18 ust. 1b, 24 ust. 5h, 36 ust. 4e, 38b) i zmiany ⏳ (2025/1413, 2026/734, 26, 507); POŚ z powoływanych artykułów zmieniony tylko art. 14 ust. 2.
+- ⛔ KOREKTA mapy Dz.U.: 2025/198 to t.j. ustawy o zasadach prowadzenia polityki rozwoju, nie ustawy o funduszach UE.
+- Wersje: dr-04 3.57, dr-06 3.99.13, dr-07 3.20, dr-09 3.60, dr-13 3.22, prawo-polskie-v2 6.83–6.84, audyt-systemu-v4 6.257–6.258.

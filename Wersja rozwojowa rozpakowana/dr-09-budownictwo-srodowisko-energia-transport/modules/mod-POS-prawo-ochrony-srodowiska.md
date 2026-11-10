@@ -47,7 +47,7 @@ odpowiedzialność karna za przestępstwa przeciwko środowisku (KK art. 181–1
 | Akt | Sygnatura t.j. / Uwagi |
 |---|---|
 | **Ustawa o udostępnianiu informacji o środowisku (UOOŚiS)** | **Dz.U. 2026 poz. 670 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — obwieszczenie z 15.05.2026 (wcześniejszy zapis podawał datę 14.06.2024 — błędna), najnowszy. ⛔ KROK 2C (✅ [VER] RZĄD 1 2026-10-09 (ELI, daty z przepisów o wejściu w życie)): **2** nowelizacje po nim w mocy — Dz.U. 2026 poz. 1097 art. 3 (od 2.09.2026), 1157 art. 5 (od 16.09.2026); ⏳ 2026 poz. 875 art. 10 (od 1.01.2027) — OOŚ, DŚU, udział społeczeństwa |
-| **Prawo ochrony środowiska (POŚ)** | **Dz.U. 2025 poz. 647 t.j.** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy. ⛔ KROK 2C (✅ [VER] RZĄD 1 2026-10-09 (ELI, daty z przepisów o wejściu w życie)): **10** nowelizacji po tekście jednolitym w mocy — Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982, 1157 (art. 3, od 16.09.2026); ⏳ 2026 poz. 176 art. 11 (od 18.02.2027) (zapis z 2026-09-10g wymieniał 9; wcześniej tylko 2025/1812) — pozwolenia, emisje, IPPC |
+| **Prawo ochrony środowiska (POŚ)** | **Dz.U. 2026 poz. 1453 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 22.10.2026, stan na 14.10.2026; ELI 2026-11-11; obejmuje Dz.U. 2025 poz. 1080 (art. 135), 1812 (art. 193 ust. 1c, 211a), 1863 (art. 400b, 401d); 2026 poz. 176 (art. 421d, ⏳ od 18.02.2027), 426 (art. 400q), 605 (art. 195, 400a, 400b), 607 (art. 400k, 401, 401c), 635 (art. 421l), 912 (art. 14 ust. 2 — plany adaptacji związku metropolitalnego, art. 17, 18, 18ca–18cb, 80d, 91, 92, 96), 982 (art. 400b), 1157 (art. 274, 285b, 286); poprzedni t.j. 2025.647). Przepisy powoływane w tym module (art. 3, 5, 6, 10–12, 14, 25, 29, 33, 44, 66, 71, 180–182, 298, 378, 415) — zmieniony tylko art. 14 ust. 2 — pozwolenia, emisje, IPPC |
 | **Ustawa o odpadach** | **Dz.U. 2026 poz. 1328 t.j.** (obwieszczenie 1.09.2026, ogł. 14.10.2026, stan prawny 24.08.2026) ✅ [VER] RZĄD 1 2026-10-15 (ELI) — najnowszy tekst jednolity; brak zmian po t.j. Obejmuje 12 ustaw zmieniających, m.in. Dz.U. 2023 poz. 1597, 1688, 1852, 2029; 2024 poz. 1834, 1911, 1914; 2025 poz. 1812; 2026 poz. 174, 815 (od 4.07.2026 — art. 14: nowe brzmienie art. 25 ust. 6i pkt 2, odesłanie do wykazu z art. 6r ust. 1 ustawy o zarządzaniu kryzysowym), 875 (w tekście jako brzmienie od 1.01.2027 — przed tą datą stosuj brzmienie dotychczasowe). Poprzedni t.j. 2023/1587 nie jest już aktualny |
 | **Ustawa o ochronie przyrody** | **Dz.U. 2026 poz. 1315 t.j.** (ELI 2026-10-12) — najnowszy, ogł. 9.10.2026 (poprzednie: 2026 poz. 13, 2024 poz. 1478); obejmuje nowelizacje 2026 poz. 426, 737, 912; brak zmian po t.j. — parki, rezerwaty, Natura 2000, gatunki chronione |
 | **Ustawa o zapobieganiu szkodom w środowisku i ich naprawie** | **t.j. Dz.U. 2020 poz. 2187** ✅ [VER] RZĄD 1 2026-09-10g — najnowszy, **ZERO** nowelizacji po tekście jednolitym (potwierdzone `/references`); poprzednio VER 2026-08-24 (ISAP WDU20200002187 — obwieszczenie Marszałka Sejmu z 18.11.2020, zastępuje t.j. Dz.U. 2019 poz. 1862) + RZĄD 2B (prawo.pl, infor.pl) + źródło rządowe (pgi.gov.pl). ⚠️ KOREKTA 2026-08-24 (F-125): wcześniej stało „Dz.U.2007.75.493 — **brak nowszego t.j.**” — twierdzenie NIEPRAWDZIWE, sprzeczne z własną mapą centralną, która od dawna oznaczała rocznik 2007 jako `PREV`. Zapis w notacji LEX ukrywał to przed testami T3/T11 (ślepota naprawiona przy F-125). ⚠️ NIEUSTALONE, czy po 2020 r. ogłoszono kolejny t.j. — zweryfikuj w ISAP przed powołaniem |
@@ -74,7 +74,7 @@ Odwołanie → GDOŚ (Generalny Dyrektor Ochrony Środowiska)
     ↓ skarga do WSA
 
 POZWOLENIA ZINTEGROWANE (IPPC / IED):
-I instancja — **zależy od rodzaju instalacji** (art. 378 POŚ Dz.U. 2025 poz. 647):
+I instancja — **zależy od rodzaju instalacji** (art. 378 POŚ Dz.U. 2026 poz. 1453 t.j.):
   → **Marszałek Województwa** — instalacje IPPC mogące zawsze znacząco oddziaływać na środowisko, duże fermy, instalacje komunalne
   → **Starosta / Prezydent miasta na prawach powiatu** — pozostałe instalacje IPPC
   → RDOŚ — instalacje na terenach zamkniętych (wojskowych)
@@ -140,7 +140,7 @@ Inwestycja na obszarze Natura 2000
 
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji
 online w ISAP / orzeczenia.nsa.gov.pl / sn.pl przed powołaniem.*
-*Weryfikacja: 22.05.2026 | UOOŚiS: Dz.U. 2024 poz. 1112 t.j. | POŚ: Dz.U. 2025 poz. 647 t.j. | Ochrona przyrody: Dz.U. 2026 poz. 1315 t.j. (ELI 2026-10-12) (poprzednie: 2026 poz. 13, 2024 poz. 1478) | KK: Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342)*
+*Weryfikacja: 22.05.2026 | UOOŚiS: Dz.U. 2024 poz. 1112 t.j. | POŚ: Dz.U. 2026 poz. 1453 t.j. (ELI 2026-11-11) | Ochrona przyrody: Dz.U. 2026 poz. 1315 t.j. (ELI 2026-10-12) (poprzednie: 2026 poz. 13, 2024 poz. 1478) | KK: Dz.U. 2025 poz. 383 t.j. (obecny t.j. Dz.U. 2026 poz. 1342)*
 *Zakaz cytowania przepisów i kar z pamięci — każdy artykuł weryfikuj w ELI (RZĄD 1)*
 
 ---
@@ -156,4 +156,4 @@ view dr-09-budownictwo-srodowisko-energia-transport/modules/mod-ustawa-lesna-low
 view dr-09-budownictwo-srodowisko-energia-transport/modules/mod-PrWodne-gospodarka-sciekowa.md
 ```
 
-Metryki kontrolne: Prawo ochrony środowiska — Dz.U. 2025 poz. 647 t.j. z koniecznością sprawdzenia zmian po t.j. (ELI 2026-10-12: m.in. 2026 poz. 605, 607, 635, 912, 982, 1157) (⛔ KOREKTA 2026-10-12: było „2026 poz. 670” — to t.j. ustawy o udostępnianiu informacji o środowisku); ustawa o ochronie przyrody — Dz.U. 2026 poz. 1315 t.j. (brak zmian po t.j., ELI 2026-10-12); Prawo wodne — Dz.U. 2026 poz. 1335 t.j. (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027; brak zmian po t.j., ELI 2026-10-15).
+Metryki kontrolne: Prawo ochrony środowiska — Dz.U. 2026 poz. 1453 t.j. (ELI 2026-11-11; obejmuje nowelizacje dotąd wymieniane jako zmiany po t.j.: 2025 poz. 1080, 1812, 1863; 2026 poz. 176, 426, 605, 607, 635, 912, 982, 1157) (⛔ KOREKTA 2026-10-12: było „2026 poz. 670” — to t.j. ustawy o udostępnianiu informacji o środowisku); ustawa o ochronie przyrody — Dz.U. 2026 poz. 1315 t.j. (brak zmian po t.j., ELI 2026-10-12); Prawo wodne — Dz.U. 2026 poz. 1335 t.j. (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027; brak zmian po t.j., ELI 2026-10-15).

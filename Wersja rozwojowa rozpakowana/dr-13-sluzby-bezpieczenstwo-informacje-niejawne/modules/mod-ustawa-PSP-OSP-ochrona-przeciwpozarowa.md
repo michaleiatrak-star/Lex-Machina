@@ -155,7 +155,7 @@ Przed odpowiedzią lub pismem zastosuj:
 ```
 Ustawa o Państwowej Straży Pożarnej: Dz.U. 2026 poz. 1473 t.j. (ustawa z 24.08.1991,
   obwieszczenie 2.10.2026, stan prawny na 23.09.2026) — weryfikuj dalsze zm. w ELI (RZĄD 1)
-  VER: ELI DU/2026/1473 (2026-11-11; porównanie z t.j. 2025/1312 artykuł po artykule:
+  VER: ELI DU/2026/1473 (2026-11-11; porównanie z poprzednim t.j. 2025/1312 artykuł po artykule:
   rozdz. 11 dyscyplinarny art. 115–124n bez zmian treści; zmiany: rozdz. 8 zakwaterowanie,
   art. 37r, 37u, 67 ust. 2, 93 ust. 1 pkt 8, 97g, 105b, 105e (⏳ 1.01.2028), 106 ust. 1a–1f)
   Organy: Komendant Główny PSP -> komendant wojewódzki -> komendant powiatowy (miejski)

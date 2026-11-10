@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.258 (2026-11-11, ELI 2026-11-11): mapa_dzu_2026-10-04: wiersze 2026/1447, 1366, 1453, 1389, 1474; poprzednie t.j. jako PREV; korekta opisu 2025/198 (t.j. ustawy o polityce rozwoju, nie o funduszach UE); ALIASY-NAZW-AKTOW.
 - 6.257 (2026-11-11, ELI 2026-11-11): mapa_dzu_2026-10-04: wiersz 2026/1473 (t.j. ustawy o PSP, zmiany 2025/1366 i 2026/252, 646, 821, 1123); 2025/1312 → PREV.
 - 6.256 (2026-11-11, LEGAL GAUNTLET v3 E4): T51: T26–T32 (ETPCz) pokryte bramkami E-1–E-7; stan 29/4/5.
 - 6.255 (2026-11-10, LEGAL GAUNTLET v3 E3): T51: T07, T09–T14, T20, T25 pokryte regułami E3 (MOD-DOPUSZCZALNOSC-GATE, CLAIM-VALIDATION C5, W1.1); stan 22/6/10.

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.13 (2026-11-11, ELI 2026-11-11): UFP — t.j. Dz.U. 2026 poz. 1447 (zastępuje 2025/1483; obejmuje 2021/2054 z 2025/1844, 2025/1846, 2026/426, 635, 680, 912); mod-UFP: art. 243 ust. 3 pkt 1a (wyłączenie wykupu papierów wartościowych z limitu); MAPA-AKTOW.
 - 3.99.12 (2026-11-07): Martwa ścieżka shared/PRAWO-HARDGATE.md w mod-VAT poprawiona na prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md (inspekcja dr-*)
 - 3.99.11 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.99.10 (2026-11-04, AUDYT-2026-11-04): MAPA-AKTOW: KAS — zm. Dz.U. 2026 poz. 1281 art. 9 (art. 118, 122 ust. 4, 123 — kontrola operacyjna), w mocy 31.10.2026. 2026/1287 (w mocy 1.11.2026) i 2026/1354 art. 3 (PCC, w mocy 3.11.2026) — wpisy już z datami, bez zmian treści.

@@ -8,6 +8,9 @@ Moduł prawa polskiego klasy eksperckiej. Stosować analogicznie do modułów pr
 
 Podstawą jest ISAP. Brzmienie przepisu, Dz.U., status aktu, tekst jednolity, nowelizacje i przepisy przejściowe muszą być sprawdzone w ISAP na dzień użycia. LEX/Legalis można użyć pomocniczo, gdy ISAP nie daje bezpośredniego dostępu do aktu albo gdy potrzebny jest komentarz/praktyka.
 
+✅ ELI 2026-11-11: Prawo geodezyjne i kartograficzne — t.j. Dz.U. 2026 poz. 1389 (obwieszczenie
+18.09.2026, stan na 17.09.2026); obejmuje Dz.U. 2024 poz. 1824, 2025 poz. 1019 (mObywatel), 1542
+i 1792 (statystyka publiczna); poza t.j. art. 3 ustawy 2024/1824. Poprzedni t.j. 2024.1151.
 ✅ FAZA 3E ZAMKNIĘTA 2026-08-20 (F-40): po korekcie numerów t.j. (Prawo
 geodezyjne 2023.1752→2024.1151 t.j.; UGN 2024.1899→2026.399 t.j.)
 sprawdzono nowelizacje międzyokresowe. Prawo geodezyjne: 2 nowelizacje

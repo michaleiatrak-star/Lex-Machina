@@ -60,7 +60,7 @@ i C-547/18 Dong Yang — aktualne wyroki dot. stałego miejsca działalności.
 
 ### BAS-015–BAS-095 — FINANSE PUBLICZNE (katalog pojęć budżetowych)
 ```
-Weryfikacja: ustawa o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
   + ustawa o dochodach JST (**Dz.U. 2024 poz. 1572** ✅ [VER] RZĄD 1 2026-09-10n — ⛔ **NOWA USTAWA** z 1.10.2024 o dochodach JST (zm. Dz.U. 2025 poz. 1659); stara ustawa z 2003 r. uchylona, jej ostatni t.j. `2024/356` też ma status *uchylony* — nie podstawiać go jako aktualnego) — ZWERYFIKOWANO
 Budżet państwa (BAS-015, 065): roczny plan dochodów, wydatków, przychodów i
   rozchodów uchwalany ustawą budżetową
@@ -79,7 +79,7 @@ Wydatki sztywne (BAS-042): wydatki ograniczające swobodę budżetową rządu
 Sektor finansów publicznych (BAS-091): wyodrębniony krąg podmiotów SFP (art. 9 UFP)
 Stabilizująca reguła wydatkowa (BAS-095): instrument fiskalny limitujący wzrost wydatków
 
-Podstawa: ustawa o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym — weryfikuj)
+Podstawa: ustawa o finansach publicznych (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912) — weryfikuj)
 web_search: "ustawa o finansach publicznych 2025 art [X] definicja" dla aktualizacji
 ```
 

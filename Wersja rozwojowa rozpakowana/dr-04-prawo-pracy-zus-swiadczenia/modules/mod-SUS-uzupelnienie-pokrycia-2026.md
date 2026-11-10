@@ -10,10 +10,10 @@ source_policy: "RZĄD 1 only"
 
 ## 1. Źródło
 
-Aktualny tekst jednolity: **Dz.U. 2026 poz. 199**, stan prawny 06.02.2026.
+Aktualny tekst jednolity: **Dz.U. 2026 poz. 1474**, stan prawny 4.10.2026 (ELI 2026-11-11; zmiany względem poprzedniego t.j. 2026/199 — `mod-SUS-current-state-COV.md` §1).
 ELI wskazuje cztery akty zmieniające po tekście jednolitym.
 
-- https://eli.gov.pl/eli/DU/2026/199/ogl
+- https://eli.gov.pl/eli/DU/2026/1474/ogl
 - https://eli.gov.pl/eli/DU/1998/887/tj
 
 ## 2. Rozdział 1 — art. 1–5
@@ -97,7 +97,7 @@ również DR-03/KKS.
 ## 10. Quality gate
 
 - [ ] tytuł ubezpieczenia ustalony;
-- [ ] aktualne akty zmieniające po 2026/199 sprawdzone;
+- [ ] aktualne akty zmieniające po 2026/1474 sprawdzone;
 - [ ] podstawa wymiaru = ustawa + właściwe rozporządzenie;
 - [ ] protokół kontroli odróżniony od decyzji;
 - [ ] odwołanie prowadzone według szczególnego KPC.
