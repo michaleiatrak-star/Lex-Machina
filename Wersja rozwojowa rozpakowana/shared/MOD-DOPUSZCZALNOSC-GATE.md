@@ -45,6 +45,9 @@ doręczenia (albo inne zdarzenie początkowe) jest nieznana:
   (wymiar, zakres, rozstrzygnięcie), to niewłaściwy środek → FATAL, chyba że przepis trybu wykonawczego przewiduje
   wprost taką zmianę (zweryfikuj w ELI).
 
+Skarga do ETPC: zamiast D1–D8 bramki E-1–E-7 z
+`dr-14-prawo-ue-miedzynarodowe-prawa-czlowieka/modules/mod-EKPC-ETPC-prawa-czlowieka.md` §11.
+
 ## 5. Wynik
 
 ```text

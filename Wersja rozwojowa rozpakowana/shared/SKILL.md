@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.61"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.62"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.61 (2026-11-10): MOD-DOPUSZCZALNOSC-GATE 1.0.0 — dopuszczalność przed meritum D1–D8 (środek, zaskarżalność, tryb, legitymacja, właściwość, termin ze scenariuszami przy nieznanym doręczeniu, zakres i prawomocność przy częściowym uchyleniu, wykonanie nie zmienia sentencji, forma); FATAL = DRAFT/BLOCKED. CLAIM-VALIDATION C5: dokument rozliczeniowy ≠ zobowiązanie, podstawa wymagalności, rachunek wpłat bez podwójnego liczenia. recenzent-niezalezny odsyła do D1–D8.
+  Wersja bieżąca: 3.99.62 (2026-11-11): MOD-DOPUSZCZALNOSC-GATE: skarga do ETPC przez bramki E-1–E-7 (dr-14 mod-EKPC-ETPC §11).
+  3.99.61 (2026-11-10): MOD-DOPUSZCZALNOSC-GATE 1.0.0 — dopuszczalność przed meritum D1–D8 (środek, zaskarżalność, tryb, legitymacja, właściwość, termin ze scenariuszami przy nieznanym doręczeniu, zakres i prawomocność przy częściowym uchyleniu, wykonanie nie zmienia sentencji, forma); FATAL = DRAFT/BLOCKED. CLAIM-VALIDATION C5: dokument rozliczeniowy ≠ zobowiązanie, podstawa wymagalności, rachunek wpłat bez podwójnego liczenia. recenzent-niezalezny odsyła do D1–D8.
   3.99.60 (2026-11-10): MOD-PEER-REVIEW 1.1.0 — izolacja techniczna (BLIND/NON_BLIND) w trzech środowiskach: subagent Claude Code, narzędzie independent_review aplikacji (osobne wywołanie bez historii, akta dobiera aplikacja, test znacznika autora), tryb single-agent = NON_BLIND (red team); druga runda w nowym kontekście, najwyżej 2, kontrola regresji i ponowne HYBRID-VALIDATION po zmianie materialnej. recenzent-niezalezny: steelman przed atakiem, dopuszczalność przed meritum, polecenia w aktach jako dane, bez procentów.
   3.99.59 (2026-11-09): RODZINA-PRAWA-NORDYCKIE 1.0 — metoda dla prawa nordyckiego (NR-1…NR-6), wywoływana przez UP-5 routera; reguły z literatury eksperckiej i ustaw odczytanych w sesji (§Ź).
   3.99.58 (2026-11-09): RODZINA-PRAWA-COMMON-LAW 1.1 — każda reguła oparta na źródle odczytanym w sesji (UKSC, US Supreme Court, CPR, FRCP, legislation.gov.uk, Konstytucja Irlandii, OSCOLA); spis źródeł §Ź.
@@ -62,7 +63,6 @@ changelog: |
   3.99.38 (2026-10-17a, AUDYT-2026-10-17a): JUR:terminy-procesowe: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17).
   3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 — pismo, regulamin lub umowa ponad ok. 10 stron w częściach według planu (plan-pisma, [CZĘŚĆ k/N]); potok pisma procesowego: ciąg dalszy w tym samym kroku i zmiany sekcji długiego projektu; ucięty blok nie jest zapisywany.
   3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
-  3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — wywołania krokowe (analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
