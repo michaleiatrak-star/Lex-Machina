@@ -297,13 +297,20 @@ Jeśli aktywny:
 W Claude Code (subagent shared:recenzent-niezalezny): przekaż WYŁĄCZNIE ścieżkę pliku pisma
   i ścieżki akt — bez rozumowania autora, bez list W2/W3, bez raportu W3 (zgł. #110).
   Wynik subagenta (tabela ATAK/UWAGA-SĄDU/INTERES-KLIENTA/SPÓJNOŚĆ + PEER-OK/UWAGI/STOP)
-  zastępuje 4 role poniżej. Gdzie indziej albo bez subagenta: jak niżej.
+  zastępuje 4 role poniżej. Izolacja: BLIND.
+W aplikacji Lex Machina (narzędzie independent_review dostępne): wywołaj je z samym tekstem
+  pisma (bez CZĘŚCI ROBOCZEJ, bez ocen i listy mocnych tez); akta dobiera aplikacja.
+  Wynik zastępuje 4 role poniżej; zapisz izolację z wyniku (BLIND / NON_BLIND).
+Gdzie indziej albo bez subagenta i narzędzia: 4 role jak niżej, izolacja NON_BLIND —
+  w raporcie „przegląd własny (red team), nie niezależna ocena” (MOD-PEER-REVIEW §1).
 view shared/MOD-PEER-REVIEW.md
 
 Wykonaj 4 role: Adwokat diabła (ATAK-n), Sędzia (UWAGA-SĄDU-n),
 Klient (INTERES-KLIENTA-n), Audyt spójności (SPÓJNOŚĆ-n).
 Wynik: PEER-OK / PEER-UWAGI / PEER-STOP.
 PEER-STOP = ⛔ BLOKADA .docx — wykonaj wskazaną korektę, powtórz ocenę.
+Powtórna ocena = nowy kontekst (nowy subagent / nowe independent_review), najwyżej 2 rundy,
+  tylko po zmianie materialnej; po niej ponów W3.5 HYBRID-VALIDATION (kontrola regresji).
 ```
 
 **Krok 2 — POST-VALIDATION (zawsze):**

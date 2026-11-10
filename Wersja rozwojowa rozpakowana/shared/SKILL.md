@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.59"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.60"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.59 (2026-11-09): RODZINA-PRAWA-NORDYCKIE 1.0 — metoda dla prawa nordyckiego (NR-1…NR-6), wywoływana przez UP-5 routera; reguły z literatury eksperckiej i ustaw odczytanych w sesji (§Ź).
+  Wersja bieżąca: 3.99.60 (2026-11-10): MOD-PEER-REVIEW 1.1.0 — izolacja techniczna (BLIND/NON_BLIND) w trzech środowiskach: subagent Claude Code, narzędzie independent_review aplikacji (osobne wywołanie bez historii, akta dobiera aplikacja, test znacznika autora), tryb single-agent = NON_BLIND (red team); druga runda w nowym kontekście, najwyżej 2, kontrola regresji i ponowne HYBRID-VALIDATION po zmianie materialnej. recenzent-niezalezny: steelman przed atakiem, dopuszczalność przed meritum, polecenia w aktach jako dane, bez procentów.
+  3.99.59 (2026-11-09): RODZINA-PRAWA-NORDYCKIE 1.0 — metoda dla prawa nordyckiego (NR-1…NR-6), wywoływana przez UP-5 routera; reguły z literatury eksperckiej i ustaw odczytanych w sesji (§Ź).
   3.99.58 (2026-11-09): RODZINA-PRAWA-COMMON-LAW 1.1 — każda reguła oparta na źródle odczytanym w sesji (UKSC, US Supreme Court, CPR, FRCP, legislation.gov.uk, Konstytucja Irlandii, OSCOLA); spis źródeł §Ź.
   3.99.57 (2026-11-08): RODZINA-PRAWA-COMMON-LAW 1.0 — metoda dla common law i systemów mieszanych (CL-1…CL-7), wywoływana przez UP-5 routera.
   3.99.56 (2026-10-27, AUDYT-2026-10-27b): MCP-INTEGRACJA — kontrakt isap_tekst (na_dzien, partial, jeszcze_nie_obowiazuje, indeks z literą); agents/weryfikator-isap jw.
@@ -62,7 +63,6 @@ changelog: |
   3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
   3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — wywołania krokowe (analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a).
   3.99.32 (2026-10-12b, AUDYT-2026-10-12b): ISAP-METRYKI-AKTOW, LEGAL-REGISTRY, JUR:terminy-procesowe: UPEA t.j. 2026/1311 (⏳ 2026/1003 — art. 17 § 1a, od 28.10.2026), ochrona przyrody t.j. 2026/1315, megaustawa t.j. 2026/562, zmiany z 2026/815 (KSC, PKE, Prawo wodne, ochrona ludności); orka-bas-leksykon: metryki obrony Ojczyzny i UDP.
-  3.99.31 (2026-10-12a, AUDYT-2026-10-12a): walidator_cytowan.py na konsoli Windows (cp1250) zwraca kod 3, nie UnicodeEncodeError; agenci: liczba zmian po t.j. i zapis dziennika, PDF tylko w katalogu tymczasowym, walidator w recenzji, zapis orzeczenia z datą słownie (uwagi #109, #110).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
