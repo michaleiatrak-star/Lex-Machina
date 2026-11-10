@@ -358,7 +358,7 @@ legalnabudowa.pl, przetargipubliczne.pl, gov.pl (opracowanie UZP).
   sekcja 6.1 tego modułu dostarcza SPECYFICZNE, ustawowe zastosowanie
   w kontekście PZP (art. 56), z węższym zakresem pokrewieństwa (2.
   stopień w linii bocznej) niż ogólne rozważania compliance.
-- **`shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — analogiczny
+- **`prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md`** — analogiczny
   mechanizm wyłączenia sędziego (art. 48-49 KPC, pokrewieństwo do 4.
   stopnia w linii bocznej — SZERSZY zakres niż art. 56 PZP) i biegłego
   sądowego (art. 281 KPC) — dla porównania między reżimami proceduralnymi.

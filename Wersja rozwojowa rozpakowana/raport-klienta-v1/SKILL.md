@@ -1,6 +1,6 @@
 ---
 name: raport-klienta-v1
-version: "1.8"
+version: "1.9"
 type: ux-raport
 status: production
 compatibility: "live_web_lookup, file_read, cross_skill_file_read, optional_document_and_interactive_ui"
@@ -34,7 +34,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Metodolog
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Raport może zawierać terminy, przepisy lub sygnatury — przed ich podaniem:
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 
 > ⛔ **SELF-CHECK ANTY-FASADA — obowiązkowy przed wysłaniem odpowiedzi/pisma**
 > (podłączone 2026-08-23i, flaga F-115 — ten skill cytuje prawo, a bramki nie miał):
@@ -452,7 +452,7 @@ Gdy wynik ma służyć ocenie ryzyka lub decyzji terminowej:
 
 ```
 view shared/RISK-ASSESSMENT.md
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view shared/QUALITY-CHECK.md
 ```
 

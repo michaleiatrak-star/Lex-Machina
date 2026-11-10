@@ -5,7 +5,7 @@
 > SaaS oparty na AI; umowy z dostawcami modeli LLM/ML; automatyczne podejmowanie
 > decyzji; rekrutacja AI, scoring AI, nadzór AI, diagnostyka AI.
 >
-> **NIE ten moduł, tylko `mod-J21-rodo-archiwizacja-regulaminy.md` J21.7a gdy:**
+> **NIE ten moduł, tylko `JUR:umowy-j21-rodo-archiwizacja-regulaminy` J21.7a gdy:**
 > klient pyta o wewnętrzną politykę/regulamin korzystania z AI dla WŁASNYCH
 > pracowników (relacja pracodawca-pracownicy), nie o klauzule w umowie z
 > dostawcą systemu AI (relacja dostawca-wdrażający, którą reguluje ten moduł).
@@ -232,7 +232,7 @@ KLAUZULA:
 | AI-P5 | Dostawca nie informuje o incydentach | Zgłoszenie poważnego incydentu organom nadzoru rynku: **natychmiast**, nie później niż **15 dni** od dowiedzenia się (art. 73 ust. 2); **2 dni** — powszechne naruszenie albo incydent z art. 3 pkt 49 lit. b (ust. 3); **10 dni** — gdy nastąpiła **śmierć** osoby (ust. 4); dopuszczalne zgłoszenie wstępne niepełne, potem kompletne (ust. 5). ⛔ nie „48 h jak RODO art. 33" — RODO daje 72 h po stwierdzeniu naruszenia. ✅ [VER] RZĄD 1 2026-09-17u — Cellar, polska wersja (CELEX 32024R1689) | <!-- T28-OK: cytat opisowy — dokumentacja korekty -->
 | AI-P6 | Umowa licencyjna AI z wyłączeniem odpowiedzialności za bias | Bias systemowy może = dyskryminacja → odpowiedzialność cywilna |
 | AI-P7 | Brak procesu aktualizacji modelu | Po aktualizacji modelu = możliwa zmiana klasyfikacji → powiadamiaj |
-| AI-P8 | Dane treningowe z naruszeniem RODO | Połącz z mod-shared-rodo.md → DPA dla danych treningowych |
+| AI-P8 | Dane treningowe z naruszeniem RODO | Połącz z JUR:umowy-shared-rodo → DPA dla danych treningowych |
 
 ---
 
@@ -240,13 +240,13 @@ KLAUZULA:
 
 ```
 System AI + dane osobowe użytkowników:
-  → mod-shared-rodo.md (DPA dla przetwarzania przez AI)
+  → JUR:umowy-shared-rodo (DPA dla przetwarzania przez AI)
 
 System AI + SaaS/cloud:
   → mod-J6-it-konsorcjum.md (SLA, dostępność, escrow kodu)
 
 System AI w zamówieniach publicznych:
-  → mod-J7-pzp.md (PZP i systemy AI: wymogi SIWZ/SWZ, KIO)
+  → JUR:umowy-j7-pzp (PZP i systemy AI: wymogi SIWZ/SWZ, KIO)
 
 Umowa z dostawcą LLM/modelu AI (B2B):
   → mod-J6-it-konsorcjum.md (umowy licencyjne, prawa IP do modelu)
@@ -255,12 +255,12 @@ Umowa z dostawcą LLM/modelu AI (B2B):
 Wewnętrzna polityka korzystania z AI dla pracowników organizacji (odrębna
 od klauzul kontraktowych powyżej — dotyczy relacji pracodawca-pracownicy,
 nie dostawca-wdrażający):
-  → mod-J21-rodo-archiwizacja-regulaminy.md, sekcja J21.7a (dodana 2026-07-30)
+  → JUR:umowy-j21-rodo-archiwizacja-regulaminy, sekcja J21.7a (dodana 2026-07-30)
 ```
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: Rozporządzenie UE 2024/1689 (AI Act) — eur-lex.europa.eu*
 *Harmonogram i daty stosowania AI Act: weryfikuj wyłącznie w tekście Rozporządzenia UE 2024/1689 (art. 113) — eur-lex.europa.eu*
-*Powiązane: mod-shared-rodo.md · mod-J6-it-konsorcjum.md · mod-J7-pzp.md*
+*Powiązane: JUR:umowy-shared-rodo · mod-J6-it-konsorcjum.md · JUR:umowy-j7-pzp*

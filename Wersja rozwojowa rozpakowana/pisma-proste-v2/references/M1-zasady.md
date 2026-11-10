@@ -32,7 +32,7 @@ Każdy przywołany artykuł **weryfikuj** na `ELI (RZĄD 1)` lub `prawo.sejm.gov
 Przy każdym piśmie wszczynającym postępowanie lub wymagającym opłaty:
 - podaj **wysokość opłaty** (kwotowo),
 - podaj **podstawę obliczenia** (artykuł KSCU),
-- podaj **sposób uiszczenia** (→ szczegóły w M6-oplaty.md).
+- podaj **sposób uiszczenia** (→ szczegóły w JUR:pisma-proste-m6-oplaty).
 
 Jeśli pismo jest zwolnione z opłaty — wskaż podstawę zwolnienia.
 
@@ -65,8 +65,8 @@ o uzasadnienie, sprzeciw od orzeczenia referendarza):
 
 | Zawsze ładuj | M1, M2, M4, M8, M9 |
 |---|---|
-| Tylko gdy termin zawity | `view shared/terminy.md` |
-| Tylko gdy opłata | M6-oplaty.md |
+| Tylko gdy termin zawity | `view JUR:terminy-procesowe` |
+| Tylko gdy opłata | JUR:pisma-proste-m6-oplaty |
 | Tylko gdy złożona/orzecznictwo | M7-eskalacja.md |
 | Tylko gdy weryfikacja kwot | M3-weryfikacja.md |
 

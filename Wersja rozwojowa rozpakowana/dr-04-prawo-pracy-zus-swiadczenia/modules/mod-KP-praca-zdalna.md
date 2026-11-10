@@ -3,7 +3,7 @@
 
 > Wydzielony 2026-06-12 z mod-KP-prawo-pracy.md (ANEKS C).
 > Definicje i wykładnia MRiPS (praca zdalna okazjonalna, "interes pracownika"):
-> → shared/ORKA-BAS-VIII-X-KADENCJA.md BAS-W03
+> → prawo-polskie-v2/krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md BAS-W03
 
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA Z PAMIĘCI
 
@@ -63,7 +63,7 @@ web_search: "ryczałt praca zdalna koszty pracodawca 2025 2026 wyrok SN"
 ---
 
 ## ŁĄCZ Z
-- `shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W03 — definicja pracy zdalnej
+- `prawo-polskie-v2/krajowe/shared/ORKA-BAS-VIII-X-KADENCJA.md` BAS-W03 — definicja pracy zdalnej
   (art. 67⁵ KP) + wykładnia MRiPS dla pracy zdalnej okazjonalnej
   ("uzasadnione wyłącznie interesem pracownika")
 - `mod-wypadek-przy-pracy-choroba-zawodowa.md` — wypadek przy pracy zdalnej

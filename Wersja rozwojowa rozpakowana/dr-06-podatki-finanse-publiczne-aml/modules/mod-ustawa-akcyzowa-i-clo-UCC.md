@@ -1,7 +1,7 @@
 ---
 name: mod-AD-akcyza-clo
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 description: |
   Moduł podatku akcyzowego. Stosuj ZAWSZE gdy użytkownik pyta o:
   - podatek akcyzowy (wyroby energetyczne, alkohol, tytoń, energia elektryczna,

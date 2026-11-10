@@ -22,6 +22,8 @@
 Dokument < 15 stron / prosta analiza jednej klauzuli / triage-szybki →
   POMIŃ MU.1-MU.3, przejdź bezpośrednio do routingu PRIMARY/DOMAIN.
   Koszt ekstrakcji dla krótkiego dokumentu przewyższa korzyść.
+  ⛔ NIE pomija się kontroli relacji między postanowieniami: CAL-GATE z SKILL.md
+  (wzorce CAL-2 a–h) obowiązuje przy każdym dokumencie, także 1-stronicowym.
 ```
 
 ---
@@ -82,8 +84,8 @@ KROK 1 — Zależności między klauzulami (na bazie tabeli MU.1):
 
 KROK 2 — Konflikty reżimów prawnych (na bazie modułów już wczytanych):
   | Klauzula | Reżim A | Reżim B | Charakter konfliktu |
-  Przykład: klauzula o profilowaniu klienta → RODO (mod-shared-rodo.md)
-  vs. Prawo konsumenckie (mod-J8-b2c.md) vs. AI Act (mod-shared-ai-act.md)
+  Przykład: klauzula o profilowaniu klienta → RODO (JUR:umowy-shared-rodo)
+  vs. Prawo konsumenckie (JUR:umowy-j8-b2c) vs. AI Act (mod-shared-ai-act.md)
   — jeśli reżimy nakładają się lub kolidują, wskaż który ma pierwszeństwo
   i na jakiej podstawie (lex specialis / hierarchia źródeł UE-PL).
 

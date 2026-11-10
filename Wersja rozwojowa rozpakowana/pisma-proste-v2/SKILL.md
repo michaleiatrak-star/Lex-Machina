@@ -1,6 +1,6 @@
 ---
 name: pisma-proste-v2
-version: "2.33"
+version: "2.34"
 type: executive-pisma
 status: production
 description: "Proste pisma prawne i urzędowe: wezwania, wnioski, odpowiedzi i krótsze dokumenty; kompletność danych, aktualna weryfikacja prawa i walidacja przed wygenerowaniem pliku."
@@ -47,8 +47,8 @@ jest skrócona do potwierdzenia aktualności przepisu i ewentualnej opłaty.
 ## ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 
 > Przed podaniem jakiegokolwiek artykułu, terminu, opłaty lub sygnatury:
-> `view shared/NAZEWNICTWO-STRON.md  ← tabele T1-T10, wzory N1-N7
-view shared/PRAWO-HARDGATE.md`
+> `view JUR:nazewnictwo-stron  ← tabele T1-T10, wzory N1-N7
+view JUR:weryfikacja-przepisow-kanon`
 > Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]`.
 
 ---
@@ -84,7 +84,7 @@ wniosek (art. 100–103). Podanie kwoty stronie zwolnionej z mocy ustawy
 zniechęca do wniesienia pisma, które nic nie kosztuje.
 
 Dopiero potem: podaj wysokość opłaty i podstawę jej obliczenia.
-⛔ Kwotę bierz z `shared/TABELE-OPLAT.md` (tabela ustanawiająca), nigdy z pamięci
+⛔ Kwotę bierz z `JUR:oplaty-sadowe` (tabela ustanawiająca), nigdy z pamięci
 ani z bazy katalogującej.
 
 **Zasada 4 — Termin zawity najpierw:**
@@ -106,8 +106,8 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 | **M2 — Intake i identyfikacja** | `references/M2-intake.md` | ZAWSZE na początku — zbieranie danych |
 | **M3 — Weryfikacja online** | `references/M3-weryfikacja.md` | Gdy pismo zawiera kwotę, opłatę lub nowelizowany przepis |
 | **M4 — Struktura i nagłówek** | `references/M4-struktura.md` | ZAWSZE przy redagowaniu pisma |
-| **M5 — Terminy zawite** | view shared/terminy.md | Gdy pismo ma termin zawity (sprzeciw, zarzuty, uzasadnienie, apelacja) |
-| **M6 — Opłaty sądowe** | `references/M6-oplaty.md` | Gdy pismo wymaga opłaty lub pytasz o jej wysokość |
+| **M5 — Terminy zawite** | view JUR:terminy-procesowe | Gdy pismo ma termin zawity (sprzeciw, zarzuty, uzasadnienie, apelacja) |
+| **M6 — Opłaty sądowe** | `JUR:pisma-proste-m6-oplaty` | Gdy pismo wymaga opłaty lub pytasz o jej wysokość |
 | **M7 — Eskalacja i orzecznictwo** | `references/M7-eskalacja.md` | Gdy sprawa może wymagać pisma-procesowe-v3 lub orzecznictwa |
 | **M8 — Lista kontrolna** | `references/M8-checklista.md` | ZAWSZE przed wydaniem gotowego pisma |
 | **M-FAKTY — Weryfikacja faktyczna** | *(wbudowana — patrz sekcja poniżej)* | ZAWSZE gdy pismo z dostarczonych dokumentów/akt |
@@ -117,19 +117,19 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 
 | Schemat | Plik | Typ pisma |
 |---------|------|-----------|
-| **SPA — Sprzeciw** | `references/SPA-sprzeciw.md` | Sprzeciw od nakazu zapłaty (art. 505 § 1 KPC; termin — art. 480² § 2 KPC) |
-| **SPB — Zarzuty** | `references/SPB-zarzuty.md` | Zarzuty od nakazu zapłaty (art. 493 KPC) |
+| **SPA — Sprzeciw** | `JUR:pisma-proste-spa-sprzeciw` | Sprzeciw od nakazu zapłaty (art. 505 § 1 KPC; termin — art. 480² § 2 KPC) |
+| **SPB — Zarzuty** | `JUR:pisma-proste-spb-zarzuty` | Zarzuty od nakazu zapłaty (art. 493 KPC) |
 | **SPC — Klauzula** | `references/SPC-SPD-SPE.md` → sekcja SPC | Wniosek o nadanie klauzuli wykonalności |
 | **SPD — Egzekucja** | `references/SPC-SPD-SPE.md` → sekcja SPD | Wniosek o wszczęcie egzekucji |
 | **SPE — Wezwanie** | `references/SPC-SPD-SPE.md` → sekcja SPE | Wezwanie przedsądowe do zapłaty |
 | **SPE-O — Ostateczne wezwanie** | `references/SPE-ostateczne.md` | Ostateczne przedsądowe wezwanie do zapłaty po bezskutecznym wcześniejszym wezwaniu albo bezpośrednio przed pozwem |
-| **SPF — Uzasadnienie** | `references/SPF-SPG.md` → sekcja SPF | Wniosek o uzasadnienie wyroku |
-| **SPG — Zabezpieczenie** | `references/SPF-SPG.md` → sekcja SPG | Wniosek o zabezpieczenie roszczenia |
-| **SPH — Inne wnioski** | `references/SPH-inne.md` | Zwolnienie od kosztów, przywrócenie terminu, wgląd do akt, doręczenie przez komornika, sprzeciw od orzeczenia referendarza |
+| **SPF — Uzasadnienie** | `JUR:pisma-proste-spf-spg` → sekcja SPF | Wniosek o uzasadnienie wyroku |
+| **SPG — Zabezpieczenie** | `JUR:pisma-proste-spf-spg` → sekcja SPG | Wniosek o zabezpieczenie roszczenia |
+| **SPH — Inne wnioski** | `JUR:pisma-proste-sph-inne` | Zwolnienie od kosztów, przywrócenie terminu, wgląd do akt, doręczenie przez komornika, sprzeciw od orzeczenia referendarza |
 | **SPI — Zawezwanie** | `references/SPI-zawezwanie.md` | Odpowiedź na zawezwanie do próby ugodowej |
-| **SPJ — Interpretacja ZUS** | `references/SPJ-interpretacja-zus.md` | Wniosek o interpretację indywidualną ZUS (art. 34 Prawa przedsiębiorców — obowiązek składkowy) |
+| **SPJ — Interpretacja ZUS** | `JUR:pisma-proste-spj-interpretacja-zus` | Wniosek o interpretację indywidualną ZUS (art. 34 Prawa przedsiębiorców — obowiązek składkowy) |
 | **SPK — Skarga do UODO** | `references/SPK-skarga-do-UODO.md` | Skarga do Prezesa UODO na administratora naruszającego RODO (art. 77 RODO, po wyczerpaniu ścieżki bezpośredniej) |
-| **SPL — Skarga na komornika** | `references/SPL-skarga-komornik.md` | Skarga na czynności komornika / na zaniechanie (art. 767 KPC) — **UWAGA: wnosi się do komornika, nie bezpośrednio do sądu**, patrz sekcja "Adresat" w pliku |
+| **SPL — Skarga na komornika** | `JUR:pisma-proste-spl-skarga-komornik` | Skarga na czynności komornika / na zaniechanie (art. 767 KPC) — **UWAGA: wnosi się do komornika, nie bezpośrednio do sądu**, patrz sekcja "Adresat" w pliku |
 | **SPL-GIP — Interpretacja GIP** | `references/SPL-interpretacja-GIP.md` | Wniosek o interpretację indywidualną Głównego Inspektora Pracy (kwalifikacja modelu współpracy) — kod „SPL” zajęty przez skargę na komornika, stąd sufiks (AUDYT-2026-10-04b) |
 | **SPM-KIS — Interpretacja podatkowa** | `references/SPM-interpretacja-podatkowa.md` | Wniosek o interpretację indywidualną Dyrektora KIS — kod „SPM” zajęty przez oświadczenie SKD, stąd sufiks (AUDYT-2026-10-04b) |
 | **SPM — Oświadczenie SKD** | `references/SPM-skd-oswiadczenie.md` | Oświadczenie o skorzystaniu z sankcji kredytu darmowego (art. 45 u.k.k.) — **UWAGA: wczytaj najpierw** `dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md` **dla podstawy prawnej i sporu o termin z art. 45 ust. 5**; jeśli sprawa wymaga od razu pozwu o zapłatę → `pisma-procesowe-v3` |
@@ -147,9 +147,9 @@ Nie cytuj przepisów ani orzeczeń z pamięci bez weryfikacji online.
 KROK 1  → Wczytaj references/M1-zasady.md             [zawsze]
 KROK 2  → Wczytaj references/M2-intake.md             [zawsze — ustal typ pisma i dane]
 KROK 3  → Wczytaj:
-           view shared/terminy.md            [jeśli pismo ma termin zawity]
+           view JUR:terminy-procesowe            [jeśli pismo ma termin zawity]
 KROK 4  → Wczytaj właściwy schemat SPA–SPM albo SPE-O [na podstawie wyniku M2; dla wezwania ostatecznego: references/SPE-ostateczne.md; dla SPM wczytaj NAJPIERW dr-02-prawo-cywilne-rodzinne-gospodarcze/modules/mod-ustawa-kredyt-konsumencki-SKD.md]
-KROK 5  → Wczytaj references/M6-oplaty.md             [jeśli pismo wymaga opłaty]
+KROK 5  → Wczytaj JUR:pisma-proste-m6-oplaty             [jeśli pismo wymaga opłaty]
 KROK 6  → Wczytaj references/M3-weryfikacja.md        [jeśli kwota/przepis wymaga weryfikacji]
 KROK 7  → Wczytaj references/M7-eskalacja.md          [jeśli sprawa może być złożona lub wymaga orzecznictwa]
 KROK 8  → Wczytaj references/M4-struktura.md          [zawsze — redagowanie pisma]
@@ -220,7 +220,7 @@ Przed redagowaniem ustal (patrz references/M2-intake.md — szczegóły):
   → web_search "[nazwa spółki] KRS NIP adres"
   → Potwierdź: firma rejestrowa + KRS + NIP + REGON + adres siedziby + status
   → Gdy rozbieżność identyfikatorów:
-    view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md → ISU-1→ISU-5
+    view JUR:identyfikacja-strony-umowy → ISU-1→ISU-5
   ✅ [VER: URL, data] lub ⚠️ [ROZBIEŻNOŚĆ: opis]
 ```
 
@@ -249,9 +249,9 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 
 ---
 
-## TERMINY ZAWITE — CZERWONA LINIA (szczegóły: view shared/terminy.md)
+## TERMINY ZAWITE — CZERWONA LINIA (szczegóły: view JUR:terminy-procesowe)
 
-**Przy każdym piśmie z terminem zawitym (→ view shared/terminy.md):**
+**Przy każdym piśmie z terminem zawitym (→ view JUR:terminy-procesowe):**
 1. Podaj termin **BOLD** na początku odpowiedzi
 2. Oblicz datę graniczną od podanej daty doręczenia
 3. Podaj liczbę pozostałych dni
@@ -271,13 +271,13 @@ Jeśli użytkownik nie podał wszystkich danych — zapytaj o brakujące
 | Odwołanie od wypowiedzenia (KP) | 21 dni od doręczenia | Utrata roszczenia |
 | Przywrócenie terminu | 7 dni od ustania przeszkody | Niedopuszczalność |
 
-*Terminy zawite — pełna tabela z podstawami prawnymi: view shared/terminy.md*
+*Terminy zawite — pełna tabela z podstawami prawnymi: view JUR:terminy-procesowe*
 
 ---
 
-## OPŁATY SĄDOWE — SKRÓCONA (szczegóły w references/M6-oplaty.md)
+## OPŁATY SĄDOWE — SKRÓCONA (szczegóły w JUR:pisma-proste-m6-oplaty)
 
-⛔ **KROK 0 przed jakąkolwiek kwotą: `view shared/TABELE-OPLAT.md`** — tabela
+⛔ **KROK 0 przed jakąkolwiek kwotą: `view JUR:oplaty-sadowe`** — tabela
 ustanawiająca i pełny katalog zwolnień (art. 94–103 KSCU). Poniższa tabela jest
 wyciągiem roboczym; w razie rozbieżności wiąże plik kanoniczny, a nad nim treść
 przepisu.
@@ -458,10 +458,10 @@ Procedura, klasyfikacja błędów, format raportu i nakazy bezwzględne są w FA
 Przed oddaniem jakiegokolwiek pisma, nawet prostego, wczytaj i zastosuj:
 
 ```text
-view shared/TRYBY-PROCESOWE.md
-view shared/FORMAL-CHECK.md
-view shared/FORMAT-CYTOWANIA.md
-view shared/BRAKI-FORMALNE.md
+view JUR:tryby-procesowe
+view JUR:wymogi-formalne-pism
+view JUR:format-cytowania
+view JUR:braki-formalne
 view shared/WARUNKI-SKUTECZNOSCI.md
 view shared/RISK-ASSESSMENT.md
 view shared/QUALITY-CHECK.md
@@ -470,7 +470,7 @@ view shared/QUALITY-CHECK.md
 Jeżeli pismo dotyczy terminu, sprzeciwu, zarzutów, uzasadnienia, apelacji, zażalenia albo przywrócenia terminu, dołącz:
 
 ```text
-view shared/TERM-CALC.md
+view JUR:liczenie-terminow
 ```
 
 Jeżeli pismo kierujesz do sądu, a sądu nie ma w aktach (blok SĄD SPRAWY), dołącz — sąd i jego adres
@@ -484,14 +484,14 @@ Jeżeli pismo dotyczy JAKIEGOKOLWIEK środka zaskarżenia (zażalenie, odwołani
 sprzeciw, zarzuty, skarga) — obowiązkowo dołącz, ZANIM wskażesz adresata w piśmie:
 
 ```text
-view shared/ZAZALENIE-ADRESAT-GATE.md
+view JUR:zazalenie-adresat-gate
 ```
 
 Jeżeli pismo zawiera dowody lub zarzuty faktyczne, dołącz:
 
 ```text
 view shared/DOWODY-METODOLOGIA.md
-view shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 ```
 
 Pismo proste nie może ominąć walidacji tylko dlatego, że jest krótkie.

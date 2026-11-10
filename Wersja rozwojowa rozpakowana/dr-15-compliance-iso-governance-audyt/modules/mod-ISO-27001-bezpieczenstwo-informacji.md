@@ -211,7 +211,7 @@ Przed odpowiedzią lub dokumentem stosuj:
 - `shared/ISAP-AUDIT-PROTOCOL.md` — dla KSC i RODO
 - `shared/TEMPORAL-LAW-CHECK.md` — KSC implementuje NIS2 (zmiany w toku); ISO 27001:2013 → 2022
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport compliance
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport compliance
 
 ## Weryfikacja online
 

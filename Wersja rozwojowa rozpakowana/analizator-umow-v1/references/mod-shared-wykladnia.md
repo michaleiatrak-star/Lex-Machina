@@ -197,6 +197,22 @@ ALGORYTM:
   3. Rekomendacja: uzupełnij przez aneks lub wskaż termin uzgodnienia
 ```
 
+### Postanowienie, które odbiera treść innemu (CAL-2 a)
+
+```
+PROBLEM: pkt 5 — kara „każda ze stron”; pkt 10 — „Pracownik zrzeka się wszystkich
+  roszczeń przeszłych i przyszłych”. Dosłownie pkt 10 znosi roszczenie pracownika z pkt 5.
+ZASADY:
+  1. Wykładnia całego dokumentu: zgodny zamiar stron i cel umowy (art. 65 § 2 KC —
+     weryfikuj w ELI), nie dosłowne brzmienie jednego punktu.
+  2. Podaj obie interpretacje: (A) zrzeczenie nie obejmuje roszczeń z tego samego
+     dokumentu — inaczej postanowienie przyznające je byłoby pozorne; (B) dosłowna —
+     wtedy wskaż wprost, że pkt 5 traci sens dla tej strony, i skutki (asymetria,
+     ocena zrzeczenia z art. 58 KC, w prawie pracy art. 18 § 2 i art. 84 KP).
+  3. Wskaż, która interpretacja jest korzystna dla strony chronionej, i gotowe
+     brzmienie poprawki usuwającej kolizję.
+```
+
 ### Sprzeczność między klauzulami
 
 ```
@@ -254,6 +270,6 @@ REKOMENDACJA:
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Podstawa prawna: art. 65 KC — weryfikuj: ELI (RZĄD 1) → KC → art. 65*
 *Orzecznictwo SN: sn.pl → "kombinowana metoda wykładni" · "in dubio contra proferentem"*

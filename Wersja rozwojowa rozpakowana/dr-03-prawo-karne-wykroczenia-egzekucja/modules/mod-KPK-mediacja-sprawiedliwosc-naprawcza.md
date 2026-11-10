@@ -14,7 +14,7 @@ rozwiązanie sporu cywilnego).
 > WYŁĄCZNIE specyfikę karnoprawną: podstawę ustawową, przesłanki, skutki
 > procesowe, ideę sprawiedliwości naprawczej.
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym
 przepisem z tego modułu.
 
 ---

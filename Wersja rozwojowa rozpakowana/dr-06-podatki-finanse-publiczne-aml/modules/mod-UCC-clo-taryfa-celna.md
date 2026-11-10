@@ -1,7 +1,7 @@
 ---
 name: mod-UCC-clo-taryfa-celna
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 description: |
   Moduł prawa celnego UE. Wydzielony z mod-ustawa-akcyzowa-i-clo-UCC (2026-06-14).
   Stosuj ZAWSZE gdy użytkownik pyta o:

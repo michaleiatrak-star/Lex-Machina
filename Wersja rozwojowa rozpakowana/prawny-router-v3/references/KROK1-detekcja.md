@@ -59,7 +59,7 @@ SEKWENCJA:
 ```
 ✓ Pełna terminologia bez upraszczania
 ✓ Raporty techniczne (filtry, hierarchie, kody)
-✓ Orzecznictwo z sygnaturami i linkami (po weryfikacji SYGNATURY.md)
+✓ Orzecznictwo z sygnaturami i linkami (po weryfikacji JUR:sygnatury-repertoria)
 ✓ Od razu analiza z dostępnych danych
 ✓ Braki → ⬛ [UZUPEŁNIJ: opis]
 ✓ Wynik: surowy raport → "Czy wygenerować dokument? (.docx / .pdf)"
@@ -115,7 +115,7 @@ KROK K4 → pisma-procesowe-v3 lub pisma-proste-v2
 > ⛔ BEZWZGLĘDNY ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Żaden artykuł, numer Dz.U., stawka, termin ustawowy, kara ani sygnatura orzeczenia
 > nie może być podany bez weryfikacji online w tym samym kroku. Dotyczy wszystkich dziedzin.
-> Procedura szczegółowa: `view shared/PRAWO-HARDGATE.md`
+> Procedura szczegółowa: `view JUR:weryfikacja-przepisow-kanon`
 >
 > ⛔ HARD GATE TRWAŁY — OBOWIĄZUJE PRZEZ CAŁĄ ROZMOWĘ
 > Zakaz nie wygasa po żadnej liczbie wiadomości. Nie ma znaczenia, czy przepis był
@@ -204,21 +204,21 @@ Po detekcji trybu i przed przekazaniem sprawy do skilla dziedzinowego — wczyta
 ```text
 Zawsze dla pism / strategii / akt / terminów / ryzyka / dowodów:
   view prawny-router-v3/references/KANCELARIA-WORKFLOW.md
-  view shared/TRYBY-PROCESOWE.md
+  view JUR:tryby-procesowe
   view shared/RISK-ASSESSMENT.md
 
 Gdy pismo lub ocena gotowości pisma:
-  view shared/FORMAL-CHECK.md
-  view shared/BRAKI-FORMALNE.md
+  view JUR:wymogi-formalne-pism
+  view JUR:braki-formalne
   view shared/WARUNKI-SKUTECZNOSCI.md
   view shared/QUALITY-CHECK.md
 
 Gdy termin / dowód / roszczenie / orzecznictwo / "co dalej":
-  view shared/TERM-CALC.md
-  view shared/PREKLUZJA-DOWODOWA.md
+  view JUR:liczenie-terminow
+  view JUR:prekluzja-dowodowa
   view shared/DOWODY-METODOLOGIA.md
   view shared/ROSZCZENIA.md
-  view shared/ORZECZENIA-HIERARCHIA.md
+  view JUR:orzecznictwo-hierarchia
   view shared/STRATEGIA-PROCESOWA.md
 ```
 
@@ -232,7 +232,7 @@ Przed użyciem każdego modułu prawnego wczytaj:
 
 ```text
 view shared/ISAP-AUDIT-PROTOCOL.md
-view shared/ISAP-METRYKI-AKTOW.md
+view JUR:isap-metryki-aktow
 ```
 
 Nowe moduły postępowań publicznoprawnych:
@@ -244,8 +244,8 @@ view prawo-polskie-v2/ROUTING-MAP.md
 ## STANDARD KOMPLETNOŚCI PRAWA POLSKIEGO
 
 Dla każdej sprawy z prawa polskiego stosuj:
-- `shared/MODULE-STANDARD-POLISH-LAW.md`
-- `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`
+- `JUR:standard-modulu-prawa-krajowego`
+- `JUR:polish-law-completeness-matrix`
 - `dr-16-pisma-strategia-dowody-orzecznictwo/modules/mod-narzedzie-kontroler-kompletnosci.md`
 - `shared/ISAP-AUDIT-PROTOCOL.md`
 - `shared/TEMPORAL-LAW-CHECK.md`

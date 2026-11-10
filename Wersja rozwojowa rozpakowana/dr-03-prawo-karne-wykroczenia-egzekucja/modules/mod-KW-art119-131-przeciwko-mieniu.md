@@ -12,7 +12,7 @@ samego rozdziału. To jedna z NAJCZĘSTSZYCH kategorii spraw wykroczeniowych.
 > `mod-KW-KPW-framework-szczegolowy.md`. Ten moduł dostarcza WYŁĄCZNIE
 > materialnoprawną treść Rozdziału XIV KW.
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym
 przepisem z tego modułu.
 
 ---

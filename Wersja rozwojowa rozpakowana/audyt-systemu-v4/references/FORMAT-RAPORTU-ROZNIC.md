@@ -41,7 +41,7 @@ kandydat do sprawdzenia — patrz punkt 4 wyżej) niesie trzy pola:
 
 | Pole | Treść | Czego NIE wolno wpisać |
 |---|---|---|
-| `STATUS` | `✅ [VER: źródło, data]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE — HIPOTEZA]` — rejestr w `shared/PRAWO-HARDGATE.md` | statusu ✅ na podstawie samego raportu automatycznego (to Rząd 1 co do FAKTU PUBLIKACJI, ale nie co do treści ani skutków aktu) |
+| `STATUS` | `✅ [VER: źródło, data]` / `🟨 [KOTWICA-URZĘDOWA]` / `⚠️ [NIEWERYFIKOWANE — HIPOTEZA]` — rejestr w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` | statusu ✅ na podstawie samego raportu automatycznego (to Rząd 1 co do FAKTU PUBLIKACJI, ale nie co do treści ani skutków aktu) |
 | `ŹRÓDŁO` | numer Dz.U./M.P. + pozycja + data publikacji z API, ALBO plik + numer linii przy zgłoszeniu o strukturze systemu | „wynika z raportu" bez identyfikatora pozycji |
 | `REPRODUKCJA` | polecenie odtwarzające zgłoszenie (`python3 scripts/sync_dzu_eli.py --od RRRR-MM-DD`, `grep -n "poz. N" references/mapa_dzu_*.md`) | opis słowny bez polecenia |
 

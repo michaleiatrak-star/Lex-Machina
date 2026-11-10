@@ -1,20 +1,19 @@
 # LEGAL-QUALITY-GATE — bramka jakości prawa
 
-Stan: 2026-05-28.
+Stan: 2026-11-08. Kryteria wspólne dla każdej jurysdykcji; nazwy krajowe: `JUR:stan-prawny`.
 
 ## Bramka przed oddaniem analizy/pisma
 
 Pismo albo analiza nie spełnia standardu kancelaryjnego, jeżeli:
 
-- zawiera podstawę prawną bez sprawdzenia ISAP,
-- używa starego Dz.U. mimo istnienia nowszego tekstu jednolitego,
-- nie rozróżnia tekstu jednolitego i ustawy zmieniającej,
+- zawiera podstawę prawną bez sprawdzenia w oficjalnym źródle aktów,
+- używa starej wersji skonsolidowanej mimo istnienia nowszej,
+- nie rozróżnia wersji skonsolidowanej i aktu zmieniającego,
 - pomija przepisy przejściowe,
 - miesza stan prawny z różnych dat,
 - cytuje orzecznictwo bez źródła oficjalnego,
-- nie oznacza ryzyka dezaktualizacji,
-- zapisuje powołania aktów niezgodnie z `shared/FORMAT-CYTOWANIA.md` (F1–F9: np. `Dz.U.`, brak „z … r.”,
-  „t.j.”, `KPC`, `§1`, metryka ELI albo status konektora w treści).
+- nie oznacza ryzyka dezaktualizacji (`JUR:ryzyko-dezaktualizacji`),
+- zapisuje powołania aktów niezgodnie z `JUR:format-cytowania` (reguły F1–F9 jurysdykcji).
 
 ## Wynik bramki
 
@@ -27,7 +26,7 @@ Pismo albo analiza nie spełnia standardu kancelaryjnego, jeżeli:
 Każdy moduł prawny musi zawierać:
 
 1. zakres modułu,
-2. źródła ISAP,
+2. oficjalne źródła aktów,
 3. status aktualności,
 4. procedurę weryfikacji,
 5. workflow merytoryczny,

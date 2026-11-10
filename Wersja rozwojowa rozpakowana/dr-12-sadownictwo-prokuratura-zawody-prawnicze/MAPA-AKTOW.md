@@ -10,7 +10,7 @@ Mapa zawiera wyłącznie akty i źródła używane obecnie. Historia korekt oraz
 |---|---|---|---|
 | Prawo o ustroju sądów powszechnych | aktualny tekst ELI/ISAP; kanonicznie DR-01 | → DR-01/`mod-USP-ustroj-sadow-powszechnych` | 🔗 |
 | Rozporządzenie MS z 28.12.2018 r. w sprawie siedzib i obszarów właściwości sądów powszechnych oraz zakresu spraw (art. 20 pkt 1 PUSP) — sąd właściwy miejscowo, zakres spraw SR | t.j. Dz.U. 2026 poz. 492 (obejmuje 2025/1012, 2025/1607, 2026/392; brak zmian po t.j.) ✅ [VER] RZĄD 1 2026-10-17 (ELI DU/2018/2548 + text.pdf); tabela 319 SR: `references/wlasciwosc-sadow-tj-2026-492.tsv`; aplikacja: `court_for_address` | `mod-wlasciwosc-miejscowa-sadow-powszechnych` | ✅ aktywny |
-| Prawo o prokuraturze | Dz.U. 2026 poz. 810 t.j. + późn. zm.; fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | 🟢 B+/COV |
+| Prawo o prokuraturze | Dz.U. 2026 poz. 810 t.j. + późn. zm. (⚡ art. 11 § 1 — roczna informacja PG o kontroli operacyjnej: zm. Dz.U. 2026 poz. 1281 art. 8, w mocy 31.10.2026); fresh gate ELI | `mod-PrProkuratura-organy-ochrony-prawa` | 🟢 B+/COV |
 | KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. + późn. zm. | `mod-KPC-arbitraz-mediacja-ADR` | ✅ |
 | Mediacja — techniki i metodyka | bieżące standardy mediacji i wiedza fachowa; konkretne źródło wymaga fresh gate | `mod-techniki-mediacyjne-negocjacyjne` | ✅ aktywny; soft law / metodyka |
 | regulatorzy UOKiK / URE / UKE / KNF | właściwe bieżące ustawy sektorowe; nie istnieje jeden zbiorczy Dz.U. | `mod-ustawa-regulatorzy-UOKiK-URE-UKE-KNF` | ✅ / fresh gate per regulator |

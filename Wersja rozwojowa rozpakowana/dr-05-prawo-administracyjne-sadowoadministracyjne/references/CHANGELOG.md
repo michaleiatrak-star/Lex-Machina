@@ -1,5 +1,6 @@
 # CHANGELOG — dr-05-prawo-administracyjne-sadowoadministracyjne
 
+- 3.40 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.39 (2026-10-31, BENCHMARK-02-LIVE): Konkluzja przy decyzji zaskarżalnej do WSA — prawomocność (art. 16 § 3 KPA), ostateczność jako etap wcześniejszy (benchmark 02 P04 na żywo); SKILL.md: sekcja Pułapki.
 - 3.38 (2026-10-31, BENCHMARK-02): mod-KPA-decyzja-i-odwolanie: ostateczność a prawomocność decyzji (art. 16 § 1 i § 3 KPA, art. 52 § 3 PPSA, art. 217 KPA; klauzula prawomocności to instytucja KPC) — benchmark 02 P04.
 - 3.37 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości

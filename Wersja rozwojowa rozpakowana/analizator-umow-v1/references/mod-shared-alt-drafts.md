@@ -204,7 +204,7 @@ umownej — odpowiedzialność na zasadach ogólnych KC."
 ### AD.2.5 Klauzula siły wyższej (FM)
 
 > ℹ Mechanizm prawny FM/hardship (art. 471, 357¹, 475/495 KC, przesłanki,
-> skutki braku klauzuli) — `view references/mod-shared-fm-hardship.md`.
+> skutki braku klauzuli) — `view JUR:umowy-shared-fm-hardship`.
 > Poniżej — warianty negocjacyjne A/U/M.
 
 ```
@@ -290,6 +290,6 @@ PRIORYTET: Krytyczny / Wysoki / Średni / Informacyjny
 
 ---
 
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
 *Powiązane: mod-shared-neg-strategia.md (kategorie M/S/N/T)*
 *Moduł D.3 (rekomendacje zmian) — rozszerz o format wariantów AD.3*

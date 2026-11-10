@@ -231,7 +231,7 @@ STAN 1: W1 — Rama i strategia
   ⛔ ZAKAZ: nie przechodzij do STAN 1.5 bez wiadomości "ok"/"kontynuuj"/uwag
 
 STAN 1.5: PRE-W2-VERIFICATION-GATE ⛔ BLOKUJE W2 [CP-PRE-W2]
-  view shared/PRE-W2-VERIFICATION-GATE.md
+  view JUR:pre-w2-verification-gate
   PRE-W2.A → PRE-W2.B (sąd online — web_search/web_fetch) →
   PRE-W2.C (pozwany KRS — ekrs.ms.gov.pl) →
   PRE-W2.D (cross-check numerów rejestrowych z akt) →
@@ -545,7 +545,7 @@ NIE traktuj "continue" jako wyjątku od ZAKAZ-1B (PRE-W2-GATE obowiązkowy).
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
 > Żaden artykuł, numer Dz.U., stawka, termin ustawowy, kara ani sygnatura orzeczenia
 > nie może być podany bez weryfikacji online. Dotyczy wszystkich trzech wiadomości.
-> Procedura: view shared/PRAWO-HARDGATE.md
+> Procedura: view JUR:weryfikacja-przepisow-kanon
 
 ---
 

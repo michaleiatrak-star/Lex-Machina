@@ -2,7 +2,7 @@
 
 **Wersja:** 1.0 | **Wyodrębniono z SKILL.md:** 2026-06-14 (refaktoryzacja — eliminacja monolitu)
 **Wywołaj z:** analizator-przepisow-v2/SKILL.md → INSTRUKCJE OPERACYJNE, kroki 5–9 i 13.
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym orzeczeniem i przepisem z tego modułu — sygnatury wyłącznie po weryfikacji online.
+**Zasada:** `view JUR:weryfikacja-przepisow-kanon` przed każdym orzeczeniem i przepisem z tego modułu — sygnatury wyłącznie po weryfikacji online.
 
 Zawiera moduły: 7 (Linia orzecznicza), 7A (MOD-ORZECZ-PRZEPIS), 7B (MOD-ZBIEZNOSC — mapa powiązań), 7C (MOD-HISTORIA-ZMIAN + MOD-VACATIO-LEGIS), 7D (MOD-KONTEKST-PRAKTYCZNY), 8 (Widget wyników — 7 zakładek).
 

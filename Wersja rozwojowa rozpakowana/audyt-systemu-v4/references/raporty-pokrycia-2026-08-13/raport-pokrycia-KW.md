@@ -3,7 +3,7 @@
 **Data analizy:** 2026-08-13
 **Zakres skilla:** `dr-03-prawo-karne-wykroczenia-egzekucja`
 **Stan prawny bazowy w modułach:** Dz.U. 2025 poz. 734 t.j. (KW), Dz.U. 2025 poz. 860 t.j. (KPSW)
-**Metodologia:** inwentaryzacja treści rzeczywiście obecnej w modułach `mod-KW-*`, nie stanu wiedzy prawnej w ogóle. Każdy przepis wymaga weryfikacji ISAP przed użyciem w piśmie (HARD GATE — `shared/PRAWO-HARDGATE.md`), niezależnie od statusu w tym raporcie.
+**Metodologia:** inwentaryzacja treści rzeczywiście obecnej w modułach `mod-KW-*`, nie stanu wiedzy prawnej w ogóle. Każdy przepis wymaga weryfikacji ISAP przed użyciem w piśmie (HARD GATE — `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`), niezależnie od statusu w tym raporcie.
 
 ---
 

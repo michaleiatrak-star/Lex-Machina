@@ -12,7 +12,7 @@ DR-16 jest rodziną mieszaną: zawiera narzędzia procesowe oraz akty pomocnicze
 
 | Zakres | Moduł / źródło | Status bieżący |
 |---|---|---|
-| KPC — przesłuchanie świadków | `shared/PRZESLUCHANIE-SWIADKOW-KPC.md` | 🟢/🟡 B+ |
+| KPC — przesłuchanie świadków | `prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md` | 🟢/🟡 B+ |
 | KPC — e-doręczenia / portal sądowy | `mod-KPC-e-doreczenia-portal-sadowy` | 🟡 |
 | procedury UE / TSUE / ETPC | `mod-KPC-procedury-UE-TSUE-ETPC` | 🟡; dołącz DR-14 |
 | arbitraż sportowy / dyscyplinarny | `mod-KPC-arbitraz-sportowy-dyscyplinarny` | 🟡 |

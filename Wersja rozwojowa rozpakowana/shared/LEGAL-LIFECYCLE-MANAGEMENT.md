@@ -1,6 +1,7 @@
 # LEGAL-LIFECYCLE-MANAGEMENT
 
-Stan: 2026-05-28. Moduł wspólny dla wszystkich skilli prawniczych.
+Stan: 2026-11-08. Moduł wspólny dla wszystkich skilli prawniczych i każdej jurysdykcji. Pojęcia według
+ontologii ELI; nazwy, źródła i statusy krajowe: `JUR:stan-prawny`.
 
 ## Cel
 
@@ -11,44 +12,35 @@ Zapobiega użyciu nieaktualnego przepisu przez wymuszenie kontroli cyklu życia 
 Przed analizą prawną wykonaj:
 
 1. Zidentyfikuj akt prawny.
-2. Sprawdź metrykę w `shared/LEGAL-REGISTRY.md`.
-3. Jeżeli sprawa wymaga cytatu albo precyzyjnej podstawy prawnej — sprawdź ISAP online.
+2. Sprawdź metrykę w `JUR:legal-registry`.
+3. Jeżeli sprawa wymaga cytatu albo precyzyjnej podstawy prawnej — sprawdź oficjalne źródło aktów (`JUR:hierarchia-zrodel`) online.
 4. Ustal:
    - status aktu,
-   - tekst jednolity,
-   - nowelizacje po tekście jednolitym,
+   - wersję skonsolidowaną (punkt w czasie),
+   - akty zmieniające po tej wersji,
    - datę wejścia w życie,
    - przepisy przejściowe,
    - czy przepis obowiązywał w dacie zdarzenia.
 5. Oznacz wynik w analizie:
    - `stan prawny na dzień ...`,
-   - `źródło: ISAP`,
-   - `ryzyko dezaktualizacji: niskie/średnie/wysokie`.
+   - `źródło: [oficjalne źródło aktów]`,
+   - `ryzyko dezaktualizacji: niskie/średnie/wysokie` według `JUR:ryzyko-dezaktualizacji`.
 
 ## Zakazy
 
-- Nie wolno przywoływać Dz.U. z pamięci.
+- Nie wolno przywoływać metryki aktu (pozycji w dzienniku urzędowym) z pamięci.
 - Nie wolno rekonstruować brzmienia przepisu na podstawie starszych modułów.
 - Nie wolno poprawiać metryki aktem z nieoficjalnego bloga, komentarza albo komercyjnej bazy.
-- Nie wolno ignorować ustaw zmieniających po tekście jednolitym.
-
-## Macierz ryzyka dezaktualizacji
-
-| Ryzyko | Dziedziny |
-|---|---|
-| Bardzo wysokie | podatki, KAS, cudzoziemcy, energetyka, cyberbezpieczeństwo, środowisko, planowanie, zamówienia publiczne |
-| Wysokie | karne, KPK, KSH, upadłość/restrukturyzacja, koszty sądowe |
-| Średnie | KPC, KPA, prawo pracy, RODO, konsumenckie |
-| Niższe | część prawa rzeczowego/spadkowego, ale tylko po kontroli KC |
+- Nie wolno ignorować aktów zmieniających po wersji skonsolidowanej.
 
 ## Format odpowiedzi po kontroli
 
 ```text
 Stan prawny: [data]
-Źródło: ISAP
+Źródło: [oficjalne źródło aktów]
 Akt: [tytuł]
-Metryka: [Dz.U.]
-Status: [AKTUALNY-ISAP / PO-TJ-ZMIANY / WYMAGA-KONTROLI-ISAP]
+Metryka: [zapis według JUR:format-cytowania]
+Status: [statusy z JUR:stan-prawny]
 Ryzyko dezaktualizacji: [poziom]
-Zastrzeżenie: cytat przepisu wymaga bieżącego odczytu ISAP, jeżeli nie został pobrany w tej samej sesji.
+Zastrzeżenie: cytat przepisu wymaga bieżącego odczytu oficjalnego źródła, jeżeli nie został pobrany w tej samej sesji.
 ```

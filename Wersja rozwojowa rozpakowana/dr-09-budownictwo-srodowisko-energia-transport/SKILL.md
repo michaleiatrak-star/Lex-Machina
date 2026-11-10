@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.57"
+version: "3.59"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -67,9 +67,9 @@ tekst sprzed 6 miesięcy może być już nieaktualny. Zawsze pobieraj aktualny t
 
 ---
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-BUDOWLANE-DROGOWE.md` — obiekt liniowy (kable w kanalizacji
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-BUDOWLANE-DROGOWE.md` — obiekt liniowy (kable w kanalizacji
   ≠ obiekt budowlany), samowola budowlana, decyzja WZ, definicje ministerialne
   prawa budowlanego (H.2) — PLIK GŁÓWNY dla tej dziedziny
 
@@ -88,7 +88,7 @@ Przy sprawach z tej dziedziny rozważ doładowanie (`view`) definicji:
 - BAS-W14 ⚠️ Reforma upol 2025 — nowe definicje budynek/budowla (dot. też DR-06)
 
 <!-- lex:wykonuje-aplikacja: REJESTR-MODULOW -->
-## Moduły (38 łącznie — ✓ 38 OK, ☐ 0 STUB)
+## Moduły (39 łącznie — ✓ 39 OK, ☐ 0 STUB)
 
 ```
 BUDOWNICTWO:
@@ -524,6 +524,8 @@ TRANSPORT:
               (KZN: zasób, przekazywanie nieruchomości, Komisja Rozjemcza, organy, najem i SIM/TBS; t.j. Dz.U. 2026 poz. 1299)
   [✓] NOWY  mod-ustawa-obszary-morskie-administracja-morska
               (obszary morskie, pozwolenia na sztuczne wyspy/MFW i kable, plan zagospodarowania obszarów morskich, administracja morska, kary do 1 000 000 SDR; t.j. Dz.U. 2026 poz. 1305)
+  [✓] NOWY  mod-umowa-przewozu-CMR-konwencje-przewozowe
+              (umowa przewozu i odpowiedzialność przewoźnika: KC art. 774–793, Prawo przewozowe t.j. Dz.U. 2024 poz. 1262, CMR Dz.U. 1962 poz. 238 z Protokołami 1978 i e-CMR 2008, Konwencja montrealska Dz.U. 2007 poz. 235, system warszawski, COTIF/CIM, konwencja o konosamentach; ELI 2026-11-09)
 ```
 
 ---
@@ -556,7 +558,7 @@ view dr-09-budownictwo-srodowisko-energia-transport/MAPA-POKRYCIA.md
 - Wchodzi z: `prawo-polskie-v2` → `ROUTING-MAP.md` → ten skill
 - Planowanie przestrzenne (MPZP, WZ) → też `dr-08` → `mod-MPZP-WZ-planowanie-przestrzenne`
   ⛔ Brzmienie samego planu/uchwały bierz z publikatora: `dziennikiurzedowe.gov.pl`
-  (RZĄD 1) wg ŚCIEŻKI B-L w `shared/PRAWO-HARDGATE.md`. MPZP, plan ogólny i WZ
+  (RZĄD 1) wg ŚCIEŻKI B-L w `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`. MPZP, plan ogólny i WZ
   opierają się na aktach prawa miejscowego, których NIE MA w ISAP ani w API ELI
   (dodane 2026-09-01g, F-154).
 - Podatek od nieruchomości (reforma 2025) → `dr-06`

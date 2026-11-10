@@ -1,6 +1,6 @@
 # mod-ustawa-aptekarz-zawod — Aptekarz (farmaceuta) jako zawód zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (b) zawody medyczne i pokrewne, analiza Senatu OT-625).
 
@@ -71,7 +71,7 @@ Powiązane (kontekst — patrz mod-PrFarm-* dla treści):
 5. Odpowiedzialność dyscyplinarna i zawodowa farmaceuty — sądy/rzecznicy
    dyscyplinarni samorządu aptekarskiego. WERYFIKUJ aktualną procedurę
    (rozdziały dot. odpowiedzialności zawodowej w t.j. 2025/1693).
-   Baza orzeczeń (⚙️ spięte z shared/PRAWO-HARDGATE.md, sekcja "zawody
+   Baza orzeczeń (⚙️ spięte z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md, sekcja "zawody
    zaufania publicznego — odpowiedzialność dyscyplinarna"): I instancja
    (sąd dyscyplinarny izby aptekarskiej) → z reguły BRAK publicznej bazy,
    oznacz ⚠️ [NIEWERYFIKOWALNE — instancja korporacyjna]; odwołanie/kasacja
@@ -123,7 +123,7 @@ Właściwy organ: okręgowa izba aptekarska / Naczelna Izba Aptekarska / sąd
 Środek: odwołanie korporacyjne (do NIA) / skarga do WSA / odwołanie
   dyscyplinarne
   ↓
-Walidacja: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
 ```
 
 ---

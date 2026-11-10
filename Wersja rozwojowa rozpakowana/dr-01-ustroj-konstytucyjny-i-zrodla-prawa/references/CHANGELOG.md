@@ -1,5 +1,6 @@
 # CHANGELOG — dr-01-ustroj-konstytucyjny-i-zrodla-prawa
 
+- 3.21 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.20 (2026-10-20, AUDYT-2026-10-20g): SKILL.md: znacznik `lex:wykonuje-aplikacja: REJESTR-MODULOW` nad rejestrem modułów — w trybie mechanicznym aplikacja podaje modelowi indeks nazw (moduły aktów dobiera z MAPA-AKTOW), w AUTO rejestr w całości
 - 3.19 (2026-10-12b, AUDYT-2026-10-12b): mod-stany-nadzwyczajne-sytuacje-kryzysowe: ustawa o zarządzaniu kryzysowym po zm. Dz.U. 2026 poz. 815 (od 4.07.2026) — nowy art. 1 ust. 1, definicja sytuacji kryzysowej i planów zarządzania kryzysowego dosłownie; ⏳ 2026/1206 (od 11.01.2027); ochrona ludności — zm. 2025/1705, 2026/646, 815. ELI 2026-10-12.
 

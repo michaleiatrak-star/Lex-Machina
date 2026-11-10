@@ -216,7 +216,7 @@ Przed odpowiedzią lub dokumentem stosuj:
 - `shared/ISAP-AUDIT-PROTOCOL.md` — dla powiązanych aktów ustawowych (KK, sygnaliści)
 - `shared/TEMPORAL-LAW-CHECK.md` — ustawa o odpowiedzialności podmiotów zbiorowych: reforma w toku
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport
 
 ## Weryfikacja online
 

@@ -66,7 +66,7 @@ odpowiednie moduły wspólne (lazy loading — tylko właściwy do sprawy):
 ```
 view shared/INTAKE-GAP.md
 view shared/ROSZCZENIA.md
-view shared/TERM-CALC.md
+view prawo-polskie-v2/krajowe/shared/TERM-CALC.md
 view shared/STRATEGIA-PROCESOWA.md
 ```
 
@@ -83,8 +83,8 @@ Dla BENCHMARKINGU orzeczniczego i predykcji wyniku wywołaj skill `orzeczenia-sa
 | Naruszenie wizerunku + IP | `dr-11-cyfrowe-cyber-ai-dane-ip/modules/mod-PrAut-wlasnosc-intelektualna-IP.md` |
 | Monitoring w miejscu pracy | `dr-04-prawo-pracy-zus-swiadczenia/modules/mod-KP-prawo-pracy.md` |
 | Analiza szans procesowych | `analiza-sadowa-v6` |
-| Redakcja/audyt: polityka prywatności, RCP/RCO, PBI, upoważnienia, IOD, procedura naruszeń, archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS | `analizator-umow-v1` → `mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
-| Klauzule RODO/DPA w umowie z kontrahentem | `analizator-umow-v1` → `mod-shared-rodo.md` |
+| Redakcja/audyt: polityka prywatności, RCP/RCO, PBI, upoważnienia, IOD, procedura naruszeń, archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-J21-rodo-archiwizacja-regulaminy.md` (J21) |
+| Klauzule RODO/DPA w umowie z kontrahentem | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-shared-rodo.md` |
 
 *⚠️ Moduł strategiczny — wszystkie przepisy i orzecznictwo wymagają weryfikacji online przed powołaniem.*
 

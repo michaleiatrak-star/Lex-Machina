@@ -162,8 +162,6 @@ def main():
         ("T32", "T32 WYSOKI — tabele satelickie opłat: kwota bez podstawy", "check_tabele_satelickie.py", ["--repo-root", str(root)]),
         # 2026-09-17r: kontrola PO wydaniu. Brak katalogu paczek → PASS, więc test nie przeszkadza
         # w środowiskach bez wydań; rozjazd paczka↔drzewo jest jednak twardym FAIL.
-        ("T33", "T33 WYSOKI — zgodność wydanych paczek z drzewem", "check_wydanie.py", ["--repo-root", str(root)]),
-        # 2026-09-26 (F-196): T33 porównuje z katalogiem wydań sesji; w repozytorium był bezprzedmiotowy.
         ("T34", "T34 KRYTYCZNY — drzewo ↔ paczki ZIP repozytorium", "check_archiwa_repo.py", ["--repo-root", str(root)]),
         # 2026-09-26 (F-200): bramka materiału wejściowego wołana, nie kopiowana.
         ("T35", "T35 KRYTYCZNY — wywołanie MOD-WEJSCIE-DOKUMENTU u konsumentów", "check_wejscie_dokumentu.py", ["--repo-root", str(root)]),
@@ -192,6 +190,8 @@ def main():
         ("T48", "T48 KRYTYCZNY — testy jednostkowe skilli (unittest, offline)", "check_testy_skilli.py", ["--repo-root", str(root)]),
         # 2026-10-11: mutacje z AUDYT-2026-10-10a utrwalone — każdy bloker musi umieć się nie udać.
         ("T49", "T49 KRYTYCZNY — mutacje: każdy bloker wykrywa wprowadzony defekt", "test_mutacje_zestawu.py", ["--repo-root", str(root)]),
+        # 2026-11-06: migracja prawa polskiego — klucze JUR: i równoważność przeniesionych wierszy.
+        ("T50", "T50 WYSOKI — klucze jurysdykcji JUR: i równoważność migracji", "check_jurysdykcja.py", [str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -216,12 +216,13 @@ def main():
     # 2026-10-11 (AUDYT-2026-10-11b, zewnętrzne code review — „CI uruchamia garstkę, część nie
     # potrafi się nie udać”): blokerem jest każdy test deterministyczny i offline; wcześniej
     # KRYTYCZNE T14, T17, T42 i WYSOKIE T47 były zielone bez względu na wynik. Poza blokerami
-    # zostają: T3 i T8 (heurystyki, wymagają osądu), T15 (sieć: ELI Sejmu) i T33 (w repozytorium
-    # sprawdza 0 paczek sesji — pusty sukces; tę rolę pełni T34). Każdy bloker ma mutację w T49
+    # zostają: T3 i T8 (heurystyki, wymagają osądu) i T15 (sieć: ELI Sejmu). T33 usunięty (6.251):
+    # był pustym sukcesem, kontrolę paczek pełni T34 (także `--archiwa` dla wydań sesji). T50 blokuje
+    # od migracji E3 (treść krajowa tylko przez klucze JUR:). Każdy bloker ma mutację w T49
     # poza T19b (własne mutacje w pamięci) i T30 (wymaga historii dziennika).
     BLOCKERY = ("T1", "T2", "T6_T7", "T9", "T11", "T12", "T13", "T14", "T17", "T18", "T19", "T19b",
                 "T22", "T23", "T28", "T29", "T30", "T32", "T34", "T35", "T36", "T38", "T39", "T40",
-                "T41", "T42", "T43", "T44", "T45", "T46", "T47", "T48", "T49", "MOCK")
+                "T41", "T42", "T43", "T44", "T45", "T46", "T47", "T48", "T49", "T50", "MOCK")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

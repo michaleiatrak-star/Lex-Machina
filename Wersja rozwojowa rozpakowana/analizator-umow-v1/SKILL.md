@@ -1,6 +1,6 @@
 ---
 name: analizator-umow-v1
-version: "1.51"
+version: "1.55"
 type: executive-umowy
 status: production
 description: "Analiza, redakcja, negocjacje i generowanie umów oraz dokumentów korporacyjnych, HR i RODO: ryzyka klauzul, B2B/B2C, praca, najem, IT/SaaS, IP, founders, finansowanie i PZP."
@@ -34,7 +34,7 @@ Ta sekcja zmienia wyłącznie sposób wykonania operacji technicznych. Nie zmien
 
 ## ⛔ HARD GATE GLOBALNY — ZAKAZ CYTOWANIA PRAWA Z PAMIĘCI
 
-> `view shared/PRAWO-HARDGATE.md`
+> `view JUR:weryfikacja-przepisow-kanon`
 > Jeśli źródło niedostępne → oznacz `⚠️ [NIEWERYFIKOWANE]` i kontynuuj bez treści przepisu.
 
 **STOP przed podaniem jakiegokolwiek artykułu, terminu, kwoty, kary, orzeczenia.**
@@ -196,12 +196,12 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 
 | Typ umowy | Moduł | Ścieżka |
 |---|---|---|
-| Umowa B2B / kontrakt menedżerski | **G** | `view references/b2b-podwykonawcze.md` |
-| Umowa podwykonawcza budowlana | **G + G.3** | `view references/b2b-podwykonawcze.md` |
-| Umowa podwykonawcza IT / software | **G + J6** | `view references/b2b-podwykonawcze.md` + `view references/mod-J6-it-konsorcjum.md` |
-| Pseudosamozatrudnienie / test pracy | **G.1 + G.1B** | `view references/b2b-podwykonawcze.md` |
-| Umowa o pracę / kontrakt pracowniczy | **H** | `view references/umowy-o-prace.md` |
-| Zakaz konkurencji (każdy typ) | **I** | `view references/zakaz-konkurencji.md` |
+| Umowa B2B / kontrakt menedżerski | **G** | `view JUR:umowy-b2b-podwykonawcze` |
+| Umowa podwykonawcza budowlana | **G + G.3** | `view JUR:umowy-b2b-podwykonawcze` |
+| Umowa podwykonawcza IT / software | **G + J6** | `view JUR:umowy-b2b-podwykonawcze` + `view references/mod-J6-it-konsorcjum.md` |
+| Pseudosamozatrudnienie / test pracy | **G.1 + G.1B** | `view JUR:umowy-b2b-podwykonawcze` |
+| Umowa o pracę / kontrakt pracowniczy | **H** | `view JUR:umowy-umowy-o-prace` |
+| Zakaz konkurencji (każdy typ) | **I** | `view JUR:umowy-zakaz-konkurencji` |
 | Poufność / NDA (każdy typ) | **K** | `view references/poufnosc-nda.md` |
 
 ### Moduły DOMAIN — lazy loading
@@ -209,26 +209,26 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 | Typ umowy | Moduł | Ścieżka |
 |---|---|---|
 | Najem (mieszkaniowy / komercyjny / okazjonalny) | **J1** | `view references/mod-J1-najem.md` |
-| Umowa deweloperska / przedwstępna / UUDE | **J2** | `view references/mod-J2-nieruchomosci.md` |
+| Umowa deweloperska / przedwstępna / UUDE | **J2** | `view JUR:umowy-j2-nieruchomosci` |
 | Franczyza / agencyjna / dystrybucyjna | **J3** | `view references/mod-J3-dystrybucja.md` |
-| Pożyczka / leasing / factoring | **J4** | `view references/mod-J4-finansowanie.md` |
-| Dzieło / zlecenie / ugoda | **J5** | `view references/mod-J5-umowy-wykonawcze.md` |
+| Pożyczka / leasing / factoring | **J4** | `view JUR:umowy-j4-finansowanie` |
+| Dzieło / zlecenie / ugoda | **J5** | `view JUR:umowy-j5-umowy-wykonawcze` |
 | IT / SaaS / agile / cloud / SLA / konsorcjum | **J6** | `view references/mod-J6-it-konsorcjum.md` |
-| Zamówienia publiczne / PZP / FIDIC | **J7** | `view references/mod-J7-pzp.md` |
-| Umowa konsumencka B2C (sprzedaż, OWU, treść cyfrowa, reklamacja, odstąpienie) | **J8** | `view references/mod-J8-b2c.md` |
+| Zamówienia publiczne / PZP / FIDIC | **J7** | `view JUR:umowy-j7-pzp` |
+| Umowa konsumencka B2C (sprzedaż, OWU, treść cyfrowa, reklamacja, odstąpienie) | **J8** | `view JUR:umowy-j8-b2c` |
 | Własność intelektualna: przeniesienie praw autorskich, licencje, IP (art. 41–68 PrAut), utwory nie-software (grafika, tekst, foto, muzyka, projekt) | **J9** | `view references/mod-J9-ip-prawa-autorskie.md` |
-| Ubezpieczenia: OWU/polisy majątkowe i życiowe poza B2C (mienie firmy, OC, D&O, cargo, UFK/IBIP, grupowe) | **J10** | `view references/mod-J10-ubezpieczenia.md` |
-| Founders' agreement, umowa spółki/statut (akt założycielski), umowa spółki cywilnej, regulamin zarządu/RN/rady dyrektorów/walnego | **J20** | `view references/mod-FA-founders-dokumenty-zalozycielskie.md` |
-| RODO: polityka prywatności, klauzule informacyjne, RCP/RCO, PBI, upoważnienia, IOD, naruszenia, archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS/monitoringu | **J21** | `view references/mod-J21-rodo-archiwizacja-regulaminy.md` |
-| Transakcje M&A (SPA / SHA / LOI) | **MA** | `view references/mod-MA-transakcje.md` |
-| Routing wielotypowy / niejasny | **J0** | `view references/mod-J0-routing.md` |
+| Ubezpieczenia: OWU/polisy majątkowe i życiowe poza B2C (mienie firmy, OC, D&O, cargo, UFK/IBIP, grupowe) | **J10** | `view JUR:umowy-j10-ubezpieczenia` |
+| Founders' agreement, umowa spółki/statut (akt założycielski), umowa spółki cywilnej, regulamin zarządu/RN/rady dyrektorów/walnego | **J20** | `view JUR:umowy-fa-founders-dokumenty-zalozycielskie` |
+| RODO: polityka prywatności, klauzule informacyjne, RCP/RCO, PBI, upoważnienia, IOD, naruszenia, archiwizacja/retencja, regulamin pracy/wynagradzania/ZFŚS/monitoringu | **J21** | `view JUR:umowy-j21-rodo-archiwizacja-regulaminy` |
+| Transakcje M&A (SPA / SHA / LOI) | **MA** | `view JUR:umowy-ma-transakcje` |
+| Routing wielotypowy / niejasny | **J0** | `view JUR:umowy-j0-routing` |
 
 ### Moduły SHARED — wczytuj lazily gdy potrzebne
 
 | Sytuacja | Moduł | Ścieżka |
 |---|---|---|
-| Klauzule abuzywne (art. 385¹–385³ KC, DSA, DMA, Data Act, Omnibus) | **ABUSIVE** | `view references/mod-shared-abusive-clauses.md` |
-| Orzecznictwo klauzul (SN/TSUE/SA — triggery automatyczne) | **ORZECZ** | `view references/mod-shared-orzecznictwo-umow.md` |
+| Klauzule abuzywne (art. 385¹–385³ KC, DSA, DMA, Data Act, Omnibus) | **ABUSIVE** | `view JUR:umowy-shared-abusive-clauses` |
+| Orzecznictwo klauzul (SN/TSUE/SA — triggery automatyczne) | **ORZECZ** | `view JUR:umowy-shared-orzecznictwo-umow` |
 | Playbook poziomów A/B/C/D (Fallback Library) | **FALLBACK** | `view references/mod-shared-fallback-library.md` |
 | Kalkulator ekonomiczny klauzul (%, PLN, ekspozycja finansowa) | **ECONOMIC** | `view references/mod-shared-economic.md` |
 | Brakujące klauzule (SaaS/B2C/B2B/IT/IoT/M&A) | **MCD** | `view references/mod-shared-missing-clause.md` |
@@ -238,8 +238,8 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 | Warianty klauzul (agresywna/umiarkowana/min.) | **ALT** | `view references/mod-shared-alt-drafts.md` |
 | Niejasna / wieloznaczna klauzula | **WYKLADNIA** | `view references/mod-shared-wykladnia.md` |
 | Kwantyfikacja ryzyka w PLN | **RYZYKO** | `view references/mod-shared-ryzyko-kwant.md` |
-| Klauzula FM / hardship / renegocjacja | **FM** | `view references/mod-shared-fm-hardship.md` |
-| Dane osobowe / DPA / RODO | **RODO** | `view references/mod-shared-rodo.md` |
+| Klauzula FM / hardship / renegocjacja | **FM** | `view JUR:umowy-shared-fm-hardship` |
+| Dane osobowe / DPA / RODO | **RODO** | `view JUR:umowy-shared-rodo` |
 | Umowa długoterminowa / terminy / naruszenia | **LIFECYCLE** | `view references/mod-shared-lifecycle.md` |
 | Klauzule ESG / CSDDD / łańcuch dostaw | **ESG** | `view references/mod-shared-esg.md` |
 | Systemy AI / AI Act / klauzule AI | **AI-ACT** | `view references/mod-shared-ai-act.md` |
@@ -250,8 +250,8 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 > **Zasada lazy loading:** wczytuj TYLKO moduły potrzebne dla konkretnej sprawy.
 > Nigdy nie ładuj wszystkich modułów naraz.
 > **mod-core-checklist.md** wczytuj gdy: tryb redakcji/draft/uzupełnienie LUB pełny raport F.1 LUB pytanie o metodologię/format raportu/balans.
-> **mod-shared-abusive-clauses.md** wczytuj gdy: regulamin, SaaS, marketplace, e-commerce, OWU, B2C, klauzule Data Act/DSA/DMA. Może działać NIEZALEŻNIE.
-> **mod-shared-orzecznictwo-umow.md** wczytuj AUTOMATYCZNIE gdy wykryto: kara umowna / odpowiedzialność / wypowiedzenie / FM / SLA / IP / RODO.
+> **JUR:umowy-shared-abusive-clauses** wczytuj gdy: regulamin, SaaS, marketplace, e-commerce, OWU, B2C, klauzule Data Act/DSA/DMA. Może działać NIEZALEŻNIE.
+> **JUR:umowy-shared-orzecznictwo-umow** wczytuj AUTOMATYCZNIE gdy wykryto: kara umowna / odpowiedzialność / wypowiedzenie / FM / SLA / IP / RODO.
 > **mod-shared-fallback-library.md** wczytuj gdy: negocjacje lub prośba o warianty poziomów A/B/C/D klauzul.
 > **mod-shared-economic.md** wczytuj AUTOMATYCZNIE gdy klauzula zawiera % / PLN / termin z konsekwencjami finansowymi.
 > **mod-shared-missing-clause.md** wczytuj przy pełnym raporcie F.1 lub pytaniu "czego brakuje".
@@ -275,10 +275,10 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 | Po wygenerowaniu dokumentu — walidacja spójności | **POST-VALIDATION** | `view shared/POST-VALIDATION.md` |
 | Formalna walidacja pisma (bloki A–J) | **MOD-WALIDACJA** | `view shared/MOD-WALIDACJA_v2.md` |
 | Weryfikacja zgodności treści z faktami źródłowymi | **FAKTY** | `view shared/FAKTY_v2.md` |
-| Terminy procesowe KPC/KP/KPA | **terminy** | `view shared/terminy.md` |
+| Terminy procesowe KPC/KP/KPA | **terminy** | `view JUR:terminy-procesowe` |
 | Po Raporcie F — widget statusu sprawy | **raport-sytuacyjny** | `view shared/raport-sytuacyjny-integracja.md` |
 | Każda odpowiedź z analizą prawną | **DISCLAIMER** | `view shared/DISCLAIMER.md` |
-| Walidacja formatu/istnienia sygnatury sądowej | **SYGNATURY** | `view shared/SYGNATURY.md` |
+| Walidacja formatu/istnienia sygnatury sądowej | **SYGNATURY** | `view JUR:sygnatury-repertoria` |
 | Znaczniki VER przy przepisach/terminach/orzeczeniach | **WERYFIKACJA-ŚLAD** | `view shared/WERYFIKACJA-SLAD.md` |
 
 > **Priorytet systemowy:** moduły `user/shared` mają pierwszeństwo przed lokalnymi odpowiednikami.
@@ -307,12 +307,12 @@ ST-INIT: zainicjuj podzbiór REJESTRU właściwy dla wykrytego trybu:
 | Sygnał od użytkownika | Workflow | Essentialia z |
 |---|---|---|
 | *„wygeneruj/napisz/przygotuj umowę [typ]"* | `workflows/generator-umowy.md` | moduły G/H/I/J0–J10/MA (routing jak w analizie) |
-| *„wygeneruj/napisz regulamin [sklepu/SaaS/usług]"* | `workflows/generator-regulaminu.md` | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 1` + `mod-shared-abusive-clauses.md` |
-| *„wygeneruj statut/umowę spółki"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka A) | `mod-FA-founders-dokumenty-zalozycielskie.md` (J20.5) |
-| *„przygotuj uchwałę/protokół zgromadzenia/zarządu"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka B) | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 2` |
-| *„przygotuj pełnomocnictwo/prokurę"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka C) | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 3` |
-| *„wygeneruj regulamin pracy/wynagradzania/ZFŚS"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka A) | `mod-J21-rodo-archiwizacja-regulaminy.md § J21.4–J21.5` |
-| *„napisz politykę prywatności/klauzulę informacyjną RODO"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka B) | `mod-J21-rodo-archiwizacja-regulaminy.md § J21.2` |
+| *„wygeneruj/napisz regulamin [sklepu/SaaS/usług]"* | `workflows/generator-regulaminu.md` | `JUR:umowy-essentialia-regulaminy-i-korporacyjne § 1` + `JUR:umowy-shared-abusive-clauses` |
+| *„wygeneruj statut/umowę spółki"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka A) | `JUR:umowy-fa-founders-dokumenty-zalozycielskie` (J20.5) |
+| *„przygotuj uchwałę/protokół zgromadzenia/zarządu"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka B) | `JUR:umowy-essentialia-regulaminy-i-korporacyjne § 2` |
+| *„przygotuj pełnomocnictwo/prokurę"* | `workflows/generator-dokumentow-korporacyjnych.md` (Ścieżka C) | `JUR:umowy-essentialia-regulaminy-i-korporacyjne § 3` |
+| *„wygeneruj regulamin pracy/wynagradzania/ZFŚS"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka A) | `JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.4–J21.5` |
+| *„napisz politykę prywatności/klauzulę informacyjną RODO"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka B) | `JUR:umowy-j21-rodo-archiwizacja-regulaminy § J21.2` |
 | *„napisz politykę AI / politykę wykorzystania AI w firmie"* | `workflows/generator-dokumentow-hr-rodo.md` (Ścieżka C) | `references/generator/doktryna-uzupelnienie.md § D.4` |
 | *„sprawdź odesłania/spójność"* w długim dokumencie (analiza LUB generowanie) | `workflows/weryfikacja-spojnosci-odeslan.md` | — (narzędzie diagnostyczne, nie essentialia) |
 
@@ -350,6 +350,72 @@ pliku) obowiązują generowanie identycznie jak analizę — bez wyjątku.
 | *„czy mogę to podpisać"*, *„szybki rzut oka"*, *„triage"* | `workflows/triage-szybki.md` | Szybszy filtr 🟢/🟡/🔴 PRZED decyzją o głębokości F.1/F.1-LITE/F.2 (FAZA 0) — nie zastępuje ich, poprzedza |
 | *„ocena drugiej strony"*, *„co mogą zarzucić"*, *„devil's advocate"*, *„red team"* | `workflows/ocena-drugiej-strony.md` | Komplementarny do Modułu D (audyt ryzyk z perspektywy KLIENTA) — ten patrzy z perspektywy OPONENTA |
 | *„popraw § X"*, wklejony fragment do korekty, przerwanie szerszego workflow dla jednej poprawki | `workflows/popraw-fragment.md` | Ustandaryzowana wersja Trybu 4 (UZUPEŁNIENIE) z E.1 `mod-core-checklist.md` dla POJEDYNCZEGO fragmentu |
+
+---
+
+## KONTROLA CAŁOŚCIOWA DOKUMENTU (CAL-GATE) — ⛔ KAŻDY DOKUMENT, KAŻDA DŁUGOŚĆ
+
+**Wyzwalacz mechaniczny:** w materiale jest dokument z kategorii tego skilla — umowa, aneks,
+porozumienie (także rozwiązujące umowę o pracę), ugoda, regulamin (sklepu, serwisu, pracy,
+wynagradzania, ZFŚS, organu spółki), OWU / wzorzec umowny, statut / umowa spółki, uchwała
+organu spółki, pełnomocnictwo, polityka prywatności / klauzula informacyjna, procedura /
+polityka wewnętrzna, oferta, oświadczenie woli (wypowiedzenie, odstąpienie, potrącenie),
+testament. Obowiązuje niezależnie od długości, trybu (LAIK / PRAWNIK), profilu (PEŁNY /
+LEKKI) i od tego, który skill jest PRIMARY — także gdy dokument jest tylko załącznikiem
+(do wezwania, pozwu, pytania „co mam zrobić”). Próg „> 15 stron” z MU.0 dotyczy wyłącznie
+tabeli ekstrakcji MU.1, nie tej kontroli.
+
+```
+CAL-1 WĘZŁY — każdy punkt / § jednym wierszem, osobno dla każdej strony:
+      | Pkt | Wiąże | Na rzecz | Rodzaj (obowiązek / prawo / kara / zrzeczenie / oświadczenie
+      / definicja / warunek) | Przedmiot | Znaczenie dla strony A | Znaczenie dla strony B |
+      Gdy aplikacja podała „GRAF RELACJI POSTANOWIEŃ” (szkielet z brzmienia), zacznij od niego:
+      każdy węzeł i każdą krawędź potwierdź albo popraw, nie buduj grafu od nowa.
+CAL-2 KRAWĘDZIE — relacja każdej pary punktów o wspólnym przedmiocie, wspólnej stronie lub
+      odesłaniu, jednym z typów:
+      SPRZECZNOŚĆ (nie da się stosować obu) · ZNOSI PRAWO (jeden odbiera to, co daje drugi) ·
+      WYJĄTEK / LEX SPECIALIS · UZUPEŁNIENIE · WARUNEK (aktywuje lub wyłącza) · SANKCJONUJE ·
+      ODSYŁA · DUBLUJE · PODWÓJNA SANKCJA · ASYMETRIA (obowiązek lub sankcja tylko po jednej
+      stronie). Wzorce do sprawdzenia na całym dokumencie:
+  a) ZRZECZENIE / ZWOLNIENIE / „zrzeka się wszystkich roszczeń” ↔ świadczenia, kary,
+     wynagrodzenie, odszkodowanie należne TEJ SAMEJ stronie z innych punktów (kara wzajemna
+     „każda ze stron”, wynagrodzenie za okres zwolnienia z pracy, zwrot kaucji) → ZNOSI PRAWO.
+  b) dwie kary lub różne kwoty za to samo zachowanie → PODWÓJNA SANKCJA (która, kumulacja,
+     miarkowanie).
+  c) obowiązek jednej strony z sankcją, analogiczny obowiązek drugiej bez → ASYMETRIA.
+  d) kara za postanowienie, które nie jest obowiązkiem (oświadczenie, odesłanie do ustawy),
+     kara obok odszkodowania za to samo, przesłanka kary inna niż naruszenie („powzięcie
+     informacji”) → SANKCJONUJE z wadą.
+  e) „całkowite porozumienie” ↔ odesłania do innych dokumentów, regulaminów, załączników.
+  f) ten sam termin w różnym znaczeniu; obowiązek lub ochrona osób spoza stron.
+  g) daty, terminy, kwoty, odesłania — wzajemna zgodność, odesłanie do nieistniejącego punktu.
+  h) regulamin / wzorzec / statut ↔ umowa indywidualna lub ustawa.
+CAL-3 ROZSTRZYGNIĘCIE każdej SPRZECZNOŚCI i ZNOSI PRAWO: wykładnia całego dokumentu — zgodny
+      zamiar stron i cel umowy (art. 65 § 2 KC, zweryfikuj w ELI). Podaj obie interpretacje
+      i wskaż, która jest korzystna dla strony chronionej (pracownik, konsument, słabsza strona).
+      Kolizja nieusuwalna wykładnią → ryzyko sporu + poprawka według Zasady 6 (brzmienie przy dokumencie własnym, kierunek zmiany przy cudzym).
+      Prawo pracy: postanowienia mniej korzystne niż przepisy (art. 18 § 2 KP), zakaz
+      zrzeczenia się prawa do wynagrodzenia (art. 84 KP) — weryfikuj w ELI.
+      Punkt, który powtarza ustawę lub do niej odsyła: porównaj zakres podmiotowy, przedmiotowy
+      i WSZYSTKIE znamiona przepisu (np. cel działania) z brzmieniem z ELI; to, co punkt dodaje
+      ponad ustawę, jest własnym zobowiązaniem umownym, nie powtórzeniem.
+CAL-4 WYNIK — osobna sekcja „Relacje między postanowieniami”:
+      1) tabela krawędzi | Pkt | Relacja | Pkt | Skutek / argument | Dla kogo korzystne |;
+      2) bilans każdej strony: jej obowiązki, prawa, sankcje, które ponosi i które jej służą,
+         oraz co z tego zostaje po uwzględnieniu krawędzi ZNOSI PRAWO i SPRZECZNOŚĆ.
+      Brak kolizji → jedno zdanie „Sprawdzono graf i wzorce CAL-2 a–h: brak kolizji”.
+      Pominięcie sekcji = uchybienie, także w profilu LEKKIM i w odpowiedzi roboczej.
+```
+
+⛔ Ocena pojedynczej klauzuli („zrzeczenie jest nieważne”, „kara jest wygórowana”) bez
+sprawdzenia jej par z CAL-2 to błąd izolowanej klauzuli (`mod-core-checklist.md` B.0).
+
+> Przykład (porozumienie rozwiązujące umowę o pracę, 2026-11): pkt 5 — kara 5 000 zł
+> „każda ze stron” za naruszenie poufności (roszczenie także pracownika) ↔ pkt 10 —
+> pracownik „zrzeka się wszystkich roszczeń przeszłych i przyszłych”: czytany dosłownie
+> pkt 10 znosi korzyść pracownika z pkt 5 i wynagrodzenie za okres zwolnienia z pracy
+> z pkt 2. Ten sam dokument: pkt 5 (5 000 zł) i pkt 9 (20 000 zł) sankcjonują tę samą
+> poufność (wzorzec b); pkt 14 — obowiązek pracodawcy bez sankcji (wzorzec c).
 
 ---
 
@@ -397,8 +463,13 @@ Twierdzenie użytkownika o treści umowy → zweryfikuj wobec dostarczonego teks
 **Zasada 5 — Balans mierzony symetrycznie (Moduł D):**
 Scoring uprawnień/obowiązków każdej strony oddzielnie.
 
-**Zasada 6 — Rekomendacja = gotowe brzmienie:**
-Nie "zmień §3" lecz "§3 powinien brzmieć: [pełna treść]"
+**Zasada 6 — Rekomendacja zależy od tego, czyj jest dokument (2026-11-08):**
+- **Własny dokument** (REDAKCJA, PROJEKT, UZUPEŁNIENIE — użytkownik sporządza albo poprawia swój tekst):
+  rekomendacja = gotowe brzmienie. Nie "zmień §3" lecz "§3 powinien brzmieć: [pełna treść]".
+- **Cudzy dokument** (ANALIZA projektu drugiej strony, umowy do podpisu, dokumentu przysłanego):
+  ryzyka i pułapki — co postanowienie robi stronie chronionej, skutek, podstawa, waga, co negocjować
+  (kierunek zmiany, kategoria M/S/N/T). **Bez alternatywnego brzmienia punktu**, chyba że użytkownik
+  wprost o nie prosi ("zaproponuj brzmienie", "redline", "przeredaguj").
 
 **Zasada 7 — Ścisły język prawniczy (2026-07-13m, dotyczy WSZYSTKICH modułów G/H/I/J*):**
 Każde proponowane brzmienie klauzuli, każdy szablon i każda rekomendacja
@@ -484,7 +555,7 @@ bez uprzedniego przejścia przez INTAKE-GAP.
   → Potwierdź: firma rejestrowa + KRS + NIP + REGON + adres + status (aktywna?)
   → Gdy w dokumencie rozbieżność identyfikatorów (np. KRS≠NIP co do podmiotu):
     ⛔ TRIGGER ISU:
-    view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+    view JUR:identyfikacja-strony-umowy
     → ISU-1 → ISU-2 → ISU-3 → ISU-4 → ISU-5
     → Formuła ISU-5 wchodzi do sekcji "Identyfikacja stron" raportu
   → Gdy PESEL osoby fizycznej w dokumencie:

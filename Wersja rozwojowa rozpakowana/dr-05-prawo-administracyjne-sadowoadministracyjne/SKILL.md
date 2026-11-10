@@ -1,6 +1,6 @@
 ---
 name: dr-05-prawo-administracyjne-sadowoadministracyjne
-version: "3.39"
+version: "3.40"
 description: "Prawo administracyjne i sądowoadministracyjne: KPA, PPSA, decyzje, bezczynność, WSA/NSA, egzekucja administracyjna, cudzoziemcy i postępowania urzędowe."
 dependencies:
   requires:
@@ -35,7 +35,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
 > Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
-> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> gradient weryfikacji cytatu): `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
 
@@ -65,16 +65,16 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 - **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
-- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-ADMINISTRACYJNE.md` — decyzja administracyjna: definicja
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-ADMINISTRACYJNE.md` — decyzja administracyjna: definicja
   + wykonalność (scalone E.3+H.5.1)
-- `definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
   (KPA art. 35 instrukcyjny, art. 128 zawity)
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE, PLIK GŁÓWNY:
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE, PLIK GŁÓWNY:
   interes prawny vs interes faktyczny (art. 28 KPA — definicja strony
   postępowania, NSA II GSK 163/06, granica sporna przy immisjach/COVID)
 

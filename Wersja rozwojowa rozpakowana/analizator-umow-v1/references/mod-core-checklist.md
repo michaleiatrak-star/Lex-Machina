@@ -55,6 +55,10 @@ TYP DOKUMENTU:
 
 ### B.0 SYNTEZA KRZYŻOWA — OBOWIĄZKOWA PRZED WNIOSKAMI KOŃCOWYMI
 
+> Relacje między postanowieniami (zrzeczenie ↔ świadczenia tej samej strony, podwójna
+> sankcja, asymetria, całościowość, definicje, daty, wzorzec ↔ umowa) — CAL-GATE
+> w SKILL.md, wzorce CAL-2 a–h; wynik w sekcji „Relacje między postanowieniami”.
+
 > ⛔ ZASADA: analiza klauzula-po-klauzuli (B.1) jest warunkiem KONIECZNYM,
 > ale NIGDY wystarczającym. Żaden wniosek kwalifikacyjny (np. „to jest B2B",
 > „to nie jest stosunek pracy", „umowa jest zgodna z prawem") nie może
@@ -117,7 +121,8 @@ KROK 2: Zakwalifikuj:
          □ Obchodzi prawo (art. 58 §1 KC)
 KROK 3: Wskaż podstawę prawną (weryfikowaną w ELI (RZĄD 1))
 KROK 4: Oceń ryzyko: Krytyczne / Wysokie / Średnie / Niskie
-KROK 5: Zaproponuj zmianę (gotowe brzmienie alternatywne)
+KROK 5: Dokument własny albo prośba o brzmienie: gotowe brzmienie alternatywne.
+         Dokument cudzy: pułapka i kierunek zmiany do negocjacji, bez brzmienia (SKILL.md Zasada 6)
 KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
 ```
 
@@ -126,11 +131,11 @@ KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
 ```
 ⚠ NOWE w v1 — Sprawdź przy KAŻDEJ umowie usługowej B2B:
   □ Czy kontrahent przetwarza dane osobowe Twoich klientów/pracowników?
-    TAK → wymagana umowa DPA (art. 28 RODO) → wczytaj mod-shared-rodo.md
+    TAK → wymagana umowa DPA (art. 28 RODO) → wczytaj JUR:umowy-shared-rodo
   □ Czy umowa zawiera klauzule o przetwarzaniu danych?
     → Sprawdź kompletność wg RO.3 (lista kontrolna 13 elementów)
   □ Czy umowa IT/SaaS ma klauzulę o podprocesorach?
-    → Wczytaj mod-J6 + mod-shared-rodo.md
+    → Wczytaj mod-J6 + JUR:umowy-shared-rodo
 ```
 
 ### B.3 Katalog typowych klauzul ryzykownych
@@ -166,7 +171,7 @@ KROK 6: Oznacz kategorię negocjacyjną: M / S / N / T (→ Moduł NEG)
 > Przed KROK 1 — jeśli umowa jest B2B (nie konsumencka), przebiegnij bramkę
 > `view references/mod-shared-ius-cogens.md` (IC.2 katalog + IC.3 trigger
 > mikroprzedsiębiorcy + IC.4 test kumulatywny). Dla umów B2C — analogicznie
-> `mod-shared-abusive-clauses.md`. Trafienie w katalogu IC.2 = 🔴 automatycznie,
+> `JUR:umowy-shared-abusive-clauses`. Trafienie w katalogu IC.2 = 🔴 automatycznie,
 > nie czekaj na resztę Modułu C.
 
 ### C.1 Procedura weryfikacji online — obowiązkowa
@@ -254,7 +259,7 @@ OCENA KOŃCOWA:
 ```
 Dla każdego wymiaru z dysproporcją >2 pkt:
   IDENTYFIKUJ: którą klauzulę zmienić
-  PROPONUJ: gotowe brzmienie wyrównujące
+  PROPONUJ: gotowe brzmienie wyrównujące (dokument własny); przy cudzym — kierunek wyrównania
   KATEGORYZUJ: M (must) / S (should) / N (nice) / T (trade-off do negocjacji)
 
 DEFINICJE KATEGORII NEGOCJACYJNYCH (jakościowe — warstwa nadrzędna):
@@ -389,13 +394,13 @@ TRYB 4 — UZUPEŁNIENIE (mam szkielet, uzupełnij):
     - Prawo właściwe + sąd właściwy
     - Liczba egzemplarzy
 □ Klauzule warunkowe (wczytaj moduł gdy stosowne):
-    - DPA → mod-shared-rodo.md (każda umowa usługowa B2B z dostępem do danych)
-    - FM → mod-shared-fm-hardship.md (umowy >12 mies.)
+    - DPA → JUR:umowy-shared-rodo (każda umowa usługowa B2B z dostępem do danych)
+    - FM → JUR:umowy-shared-fm-hardship (umowy >12 mies.)
     - Waloryzacja → mod-shared-lifecycle.md (umowy >24 mies.)
-    - Zakaz konkurencji → zakaz-konkurencji.md (UoP + B2B)
+    - Zakaz konkurencji → JUR:umowy-zakaz-konkurencji (UoP + B2B)
     - Poufność / NDA → poufnosc-nda.md (Moduł K — odrębna instytucja od
       zakazu konkurencji, patrz Moduł I Pułapka ZK-11)
-    - IP / prawa autorskie → mod-J6 lub b2b-podwykonawcze.md
+    - IP / prawa autorskie → mod-J6 lub JUR:umowy-b2b-podwykonawcze
 □ Język: precyzyjny, bez wieloznaczności; unikaj "itp.", "m.in." bez definicji
 □ Numeracja: §1, §2 ... lub Artykuł 1, 2... (konsekwentnie)
 □ Definicje: kluczowe pojęcia zdefiniowane w §1 lub słowniku
@@ -467,7 +472,7 @@ Worst case: [kwota PLN]  |  Likely case: [kwota PLN]
 Klauzula o najwyższym ryzyku: §[X] → do [kwota] PLN
 
 ## 7. ALERTY RODO (NOWE w v1)
-[Czy wymagana DPA? Brakujące elementy DPA? → mod-shared-rodo.md]
+[Czy wymagana DPA? Brakujące elementy DPA? → JUR:umowy-shared-rodo]
 
 ## 8. KLAUZULE KORZYSTNE DLA STRONY CHRONIONEJ
 [lista]
@@ -476,7 +481,7 @@ Klauzula o najwyższym ryzyku: §[X] → do [kwota] PLN
 [co powinno być, a nie jest — ze wskazaniem modułu SHARED]
 
 ## 10. REKOMENDACJE ZMIAN (priorytetowe — M → S → N)
-[lista z gotowymi brzmieniami + kategoriami negocjacyjnymi M/S/N/T]
+[lista: przy dokumencie własnym z gotowymi brzmieniami, przy cudzym z pułapką i kierunkiem zmiany; kategorie M/S/N/T]
 
 ## 11. PLAN DZIAŁANIA PRZED PODPISANIEM
 Krok 1: [działanie] — termin: [kiedy]
@@ -504,7 +509,7 @@ Wartość: [kwota PLN]
 ## 2. BALANS: A [X/10] vs B [Y/10]
 
 ## 3. KLAUZULE KRYTYCZNE I WYSOKIEGO RYZYKA
-[tylko M i S — z gotowymi brzmieniami]
+[tylko M i S — brzmienia albo kierunki zmiany według Zasady 6]
 
 ## 4. EKSPOZYCJA (skrócona)
 Worst case: [kwota PLN] — klauzula: §[X]
@@ -557,7 +562,7 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 2. Cytat PRZED interpretacją
 3. Strona chroniona ZAWSZE jawna
 4. Balans mierzony, nie odczuwany
-5. Rekomendacja = gotowe brzmienie
+5. Rekomendacja = gotowe brzmienie przy dokumencie własnym; przy cudzym = ryzyka i pułapki (Zasada 6)
 6. Nieważność odróżniona od bezskuteczności
 7. B2C vs B2B — różne standardy ochrony
 8. Forma pisemna zmian — klauzula §10
@@ -583,8 +588,8 @@ na żądanie         → zawsze F.1 niezależnie od kwoty
 | Umowa ustna — brak dokumentu | Ryzyko dowodowe + zaproponuj pisemne potwierdzenie |
 | Aneks sprzeczny z umową główną | Lex posterior + wskaż sprzeczność |
 | OWU vs umowa indywidualna | Umowa indywidualna ma pierwszeństwo (art. 385 §1 KC) |
-| Przetwarzanie danych bez DPA | ALERT RODO: wczytaj mod-shared-rodo.md |
-| Umowa >2 lata bez FM | Rekomendacja: wczytaj mod-shared-fm-hardship.md |
+| Przetwarzanie danych bez DPA | ALERT RODO: wczytaj JUR:umowy-shared-rodo |
+| Umowa >2 lata bez FM | Rekomendacja: wczytaj JUR:umowy-shared-fm-hardship |
 
 ---
 
@@ -622,10 +627,10 @@ Klauzula jest niejasna / "co to znaczy" / sprzeczność klauzul?
   → view references/mod-shared-ryzyko-kwant.md
 
 Umowa zawiera FM / pandemic / inflacja / klauzulę siły wyższej?
-  → view references/mod-shared-fm-hardship.md
+  → view JUR:umowy-shared-fm-hardship
 
 Umowa IT, SaaS, HR, outsourcing — dane osobowe?
-  → view references/mod-shared-rodo.md
+  → view JUR:umowy-shared-rodo
 
 Umowa >12 miesięcy, terminy po podpisaniu, naruszenie?
   → view references/mod-shared-lifecycle.md
@@ -637,13 +642,13 @@ System AI, AI Act, rekrutacja AI, scoring, GPAI, high-risk AI?
   → view references/mod-shared-ai-act.md
 
 Transakcja M&A, sprzedaż udziałów, SPA, SHA, LOI, earn-out?
-  → view references/mod-MA-transakcje.md
+  → view JUR:umowy-ma-transakcje
 
 Zamówienie publiczne, przetarg, PZP, FIDIC, KIO?
-  → view references/mod-J7-pzp.md
+  → view JUR:umowy-j7-pzp
 
 Umowa B2C, reklamacja, odstąpienie, OWU e-commerce, klauzule abuzywne?
-  → view references/mod-J8-b2c.md
+  → view JUR:umowy-j8-b2c
 
 Dokument > 15 stron — ekstrakcja do tabeli PRZED wczytaniem PRIMARY/DOMAIN?
   → view references/mod-shared-model-umowy.md (BRAMKA 0)
@@ -664,7 +669,7 @@ PO wygenerowaniu dokumentu — walidacja spójności:
   → view shared/POST-VALIDATION.md
 
 Terminy procesowe / zawite / przedawnienia (KPC, KP, KPA)?
-  → view shared/terminy.md
+  → view JUR:terminy-procesowe
 
 Weryfikacja zgodności treści dokumentu z faktami źródłowymi?
   → view shared/FAKTY_v2.md
@@ -677,7 +682,7 @@ Każda odpowiedź zawierająca analizę prawną (umowy, klauzule, ocena prawna)?
   → dodaj disclaimer JAKO OSTATNI ELEMENT odpowiedzi (tryb LAIK lub PRAWNIK)
 
 Sygnatura sądowa w piśmie lub raporcie — walidacja formatu i istnienia?
-  → view shared/SYGNATURY.md
+  → view JUR:sygnatury-repertoria
 
 Przepis / termin / orzeczenie w odpowiedzi — wymóg znacznika weryfikacji?
   → view shared/WERYFIKACJA-SLAD.md

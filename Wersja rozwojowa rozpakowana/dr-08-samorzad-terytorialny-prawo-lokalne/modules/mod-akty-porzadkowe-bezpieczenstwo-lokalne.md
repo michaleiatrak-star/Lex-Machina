@@ -71,10 +71,10 @@ Przed wygenerowaniem pisma lub analizy odpowiedz:
 - czy dobrano właściwy środek procesowy?
 
 ## Powiązania shared
-- `shared/HIERARCHIA-ZRODEL.md`
+- `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`
 - `shared/LEGAL-QUALITY-GATE.md`
 - `shared/CROSS-DOMAIN-CONFLICT-ROUTER.md`
-- `shared/LEGAL-REGISTRY.md`
+- `prawo-polskie-v2/krajowe/shared/LEGAL-REGISTRY.md`
 - `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`
 - `shared/TEMPORAL-LAW-CHECK.md`
 

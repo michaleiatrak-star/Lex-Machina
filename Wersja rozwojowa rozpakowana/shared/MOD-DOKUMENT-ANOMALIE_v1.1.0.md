@@ -89,14 +89,14 @@ DA-3: KLASYFIKACJA ANOMALII
     EFEKT: wniosek o zbadanie autentyczności dokumentu (art. 253 k.p.c.)
 
 ⛔ TRIGGER ISU — PO DA-3, GDY KLASA I LUB II (rozbieżność identyfikatorów podmiotu):
-  → view shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md
+  → view JUR:identyfikacja-strony-umowy
   → Wykonaj ISU-1 → ISU-2 → ISU-3 → ISU-4 (jeśli wynik niejednoznaczny) → ISU-5
   → Formuła ISU-5 [A] = gotowy akapit "Identyfikacja strony" do DA-5
   → Wynik ISU wchodzi do DA-REJ jako kolumna "Podmiot wskazany / element błędny"
   ⛔ Nie przechodź do DA-4 bez wykonanego ISU gdy Klasa I dotyczy KRS/NIP/nazwy
 
 ⛔ TRIGGER ISU-PESEL — GDY KLASA I/III DOTYCZY PESEL:
-  → Wykonaj ISU-PESEL (P1→P6) z MOD-IDENTYFIKACJA-STRONY-UMOWY.md §ISU-PESEL
+  → Wykonaj ISU-PESEL (P1→P6) z JUR:identyfikacja-strony-umowy §ISU-PESEL
   → Wynik RAPORTU PESEL wchodzi do DA-REJ
 
 DA-4: REJESTR ANOMALII (DA-REJ)

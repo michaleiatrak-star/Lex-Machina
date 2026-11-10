@@ -1,6 +1,6 @@
 ---
 name: dr-16-pisma-strategia-dowody-orzecznictwo
-version: "3.14"
+version: "3.15"
 description: "Pisma, strategia, dowody i orzecznictwo: routing narzędzi procesowych, analiza dowodowa, research orzeczeń, kalkulatory i wsparcie budowy strategii sprawy."
 dependencies:
   requires:
@@ -71,16 +71,16 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 
 ---
 
-## DEFINICJE — shared/definicje/ (bezpośrednie, lazy loading per temat)
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 
-- `definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md` — szkoda/damnum emergens/lucrum
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-ODPOWIEDZIALNOSC-SZKODA.md` — szkoda/damnum emergens/lucrum
   cessans — precyzja żądania pozwu; ⚠️ NOWE: siła wyższa + rebus sic stantibus
   (art. 357¹ KC) — przy pismach dot. niewykonania zobowiązań w nadzwyczajnych
   okolicznościach (wojna, inflacja, embargo)
-- `definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-PROCEDURA.md` — termin zawity vs przedawnienie vs instrukcyjny
   — KRYTYCZNE dla każdego pisma z terminem
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: interes
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE: interes
   prawny/faktyczny (strategia legitymacji procesowej), wyłączenie sędziego/
   biegłego, ocena wiarygodności świadka z interesem własnym, czynność prawna
   ukryta/pozorna (art. 83 KC) — przy zarzutach pozorności w pismach
@@ -106,9 +106,9 @@ KPC — PROCEDURY SZCZEGÓLNE I NARZĘDZIA PROCESOWE:
 > (Dz.U. 2026 poz. 468 ze zm. — art. 258–305 KPC; typologia świadków, 10 technik
 > procesowych, cross-examination, impeachment, sekwencje pytań; KPK art. 171,
 > 272, 391; KPC art. 259, 261 — WYMAGA WERYFIKACJI RZĄD 1) był bajt-w-bajt
-> kanoniczna warstwa KPC jest w `shared/PRZESLUCHANIE-SWIADKOW-KPC.md`; router zawiera wyłącznie bridge, nie kopię prawa materialnego
+> kanoniczna warstwa KPC jest w `prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md`; router zawiera wyłącznie bridge, nie kopię prawa materialnego
 > (wykryte przez `ci_check_shared.py`). Scalony pod jedną kanoniczną lokalizacją:
-> `view shared/PRZESLUCHANIE-SWIADKOW-KPC.md`. Dla zaawansowanej
+> `view prawo-polskie-v2/krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md`. Dla zaawansowanej
 > strategii przesłuchania (przygotowanie pytań, kontrprzesłuchanie, scoring
 > dowodowy) → osobny skill `przesluchanie-swiadkow-v2-min90`, różny zakres.
 > Pełny opis: `audyt-systemu-v4/references/CHECKLIST-DEDUP.md` NOTA-13.

@@ -1,5 +1,5 @@
 # METODOLOGIA-ORKA2.md
-## shared/definicje/ · Instrukcje weryfikacji interpelacji (orka2.sejm.gov.pl)
+## prawo-polskie-v2/krajowe/shared/definicje/ · Instrukcje weryfikacji interpelacji (orka2.sejm.gov.pl)
 
 > Wydzielony z DEFINICJE-KLUCZOWE.md (H.7).
 > Plik METODOLOGICZNY — nie zawiera definicji prawnych, tylko instrukcje
@@ -38,5 +38,5 @@ WARTOŚĆ PRAWNA ODPOWIEDZI MINISTERIALNYCH:
 *Wersja: 2026-06-09 · Weryfikuj aktualność: isap.sejm.gov.pl + pip.gov.pl + podatki.gov.pl*
 
 ---
-*METODOLOGIA-ORKA2.md · shared/definicje/ · 2026-06-12*
+*METODOLOGIA-ORKA2.md · prawo-polskie-v2/krajowe/shared/definicje/ · 2026-06-12*
 *Wydzielono z DEFINICJE-KLUCZOWE.md (Blok H.7)*

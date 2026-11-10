@@ -1,6 +1,6 @@
 ---
 name: dr-01-ustroj-konstytucyjny-i-zrodla-prawa
-version: "3.20"
+version: "3.21"
 description: "Prawo konstytucyjne i ustrojowe: Konstytucja, organy państwa, TK, źródła prawa, legislacja i skarga konstytucyjna; analiza z aktualną weryfikacją źródeł."
 dependencies:
   requires:
@@ -35,7 +35,7 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 3. **NIGDY** nie podawaj artykułu, terminu, kary ani sygnatury wyłącznie z pamięci modelu.
 
 > Procedura szczegółowa (warstwa strukturalna SAOS/MCP, kontrakt sygnatur,
-> gradient weryfikacji cytatu): `view shared/PRAWO-HARDGATE.md` — wczytaj
+> gradient weryfikacji cytatu): `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` — wczytaj
 > PRZED pierwszym przepisem w każdej odpowiedzi. Integruje się z
 > `shared/ISAP-AUDIT-PROTOCOL.md`.
 
@@ -65,11 +65,11 @@ Ta sekcja zmienia wyłącznie wykonanie operacji technicznych. Merytoryka dziedz
 - Wyjątek: wydzielone rozdziały jednej ustawy mogą mieć osobny moduł (z adnotacją)
 - Ten sam akt NIE może pokrywać dwóch różnych DR-skills
 - **Zakaz cytowania przepisów z pamięci modelu podczas sesji — każde brzmienie weryfikuj w ELI (RZĄD 1)**
-- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `shared/HIERARCHIA-ZRODEL.md`)
+- Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 
-## DEFINICJE — shared/definicje/
+## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/
 
-- `definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE 2026-06-12: wyłączenie
+- `prawo-polskie-v2/krajowe/shared/definicje/DEF-INTERES-WLASNY-WYLACZENIA.md` — ⚠️ NOWE 2026-06-12: wyłączenie
   sędziego (iudex inhabilis/suspectus, art. 48-49 KPC + odpowiedniki KPK/PPSA),
   z KRYTYCZNYM alertem TK P 10/19+P 7/23 (neoKRS, ZAKTUALIZOWANO 06-13: art.48+49 KPC, + kryzys publikacji wyroków TK) — SCALONE z mod-USP-ustroj-sadow-
   powszechnych.md, który wcześniej miał własny, krótszy opis bez tego alertu

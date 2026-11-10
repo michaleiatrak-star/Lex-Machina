@@ -13,16 +13,16 @@ Przed startem: `view references/generator/rdzen-generowania.md`.
 
 | Sygnał | Moduł essentialia | Uwaga |
 |---|---|---|
-| Statut / umowa spółki / akt założycielski / founders' agreement | `mod-FA-founders-dokumenty-zalozycielskie.md` (J20) | Moduł już istnieje w systemie — użyj go, nie duplikuj essentialia tutaj |
-| Uchwała zarządu / zgromadzenia / wspólników + protokół | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 2` | Nowy moduł |
-| Regulamin organu (zarząd/RN/rada dyrektorów/walne) | `mod-FA-founders-dokumenty-zalozycielskie.md § J20.6` | Moduł już istnieje |
-| Pełnomocnictwo (ogólne/rodzajowe/szczególne) lub prokura | `references/generator/essentialia-regulaminy-i-korporacyjne.md § 3` | Nowy moduł |
+| Statut / umowa spółki / akt założycielski / founders' agreement | `JUR:umowy-fa-founders-dokumenty-zalozycielskie` (J20) | Moduł już istnieje w systemie — użyj go, nie duplikuj essentialia tutaj |
+| Uchwała zarządu / zgromadzenia / wspólników + protokół | `JUR:umowy-essentialia-regulaminy-i-korporacyjne § 2` | Nowy moduł |
+| Regulamin organu (zarząd/RN/rada dyrektorów/walne) | `JUR:umowy-fa-founders-dokumenty-zalozycielskie § J20.6` | Moduł już istnieje |
+| Pełnomocnictwo (ogólne/rodzajowe/szczególne) lub prokura | `JUR:umowy-essentialia-regulaminy-i-korporacyjne § 3` | Nowy moduł |
 
 ---
 
 ## ŚCIEŻKA A — STATUT / UMOWA SPÓŁKI
 
-`view references/mod-FA-founders-dokumenty-zalozycielskie.md § J20.5` i prowadź
+`view JUR:umowy-fa-founders-dokumenty-zalozycielskie § J20.5` i prowadź
 generowanie wg essentialia tam wskazanych. Ten workflow dodaje wyłącznie warstwę
 procesową (wywiad → szkielet → styl → bramka), analogicznie do KROKÓW 2–5
 w `generator-umowy.md` — nie powtarzaj ich tutaj osobno, zastosuj wprost.

@@ -223,7 +223,7 @@ Wywołanie:   prawny-router-v3 → UP-5 (sprawa transgraniczna / prawo obce)
 Zastępuje:   shared/MOD-OS-CZASU-PRZESLANEK.md → MG-1
              shared/MOD-WYJATEK-GATE.md → MG-2
 NIE zastępuje: shared/MOD-CN-GATE.md, shared/MOD-REM-GATE.md,
-             shared/PRAWO-HARDGATE.md — aktywne w obu ścieżkach
+             JUR:weryfikacja-przepisow-kanon — aktywne w obu ścieżkach
 Źródła:      shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md
 Rejestr:     shared/MOD-STEP-TRACKER.md — pozycje „MG-1" i „MG-2" obowiązkowe
 ```

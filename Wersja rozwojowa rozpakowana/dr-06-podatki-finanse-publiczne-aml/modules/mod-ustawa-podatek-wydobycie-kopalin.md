@@ -108,7 +108,7 @@ i izb administracji skarbowej w sprawie podatku od wydobycia niektórych kopalin
 (`Dz.U. 2025 poz. 1850`, w życie 1.01.2026; ✅ status z ELI, treść — odczyt przy sprawie).
 Wzór deklaracji — rozporządzenie z art. 14 ust. 2 (ostatnia zmiana: `Dz.U. 2025 poz. 1856`).
 Rejestr podatników — właściwy naczelnik US (art. 13).
-Postępowanie — Ordynacja podatkowa (`mod-OP-ordynacja-podatkowa`; terminy — `shared/terminy.md`).
+Postępowanie — Ordynacja podatkowa (`mod-OP-ordynacja-podatkowa`; terminy — `prawo-polskie-v2/krajowe/shared/terminy.md`).
 
 ## 6. Łącz z
 

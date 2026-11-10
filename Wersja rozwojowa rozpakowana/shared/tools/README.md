@@ -22,7 +22,7 @@ python3 walidator_cytowan.py --document pismo.docx --format   # zapis powołań,
 python3 walidator_cytowan.py --self-test   # przypadki zgł. #89 i #109
 ```
 
-Kontrola zapisu (`--format`, od shared 3.99.30, zgł. #109): reguła `shared/FORMAT-CYTOWANIA.md`, kody F1–F9
+Kontrola zapisu (`--format`, od shared 3.99.30, zgł. #109): reguła `JUR:format-cytowania`, kody F1–F9
 (`Dz.U.` bez spacji, brak „z … r.”, „t.j.”, „ze zm.”, `Dz.U.RRRR.N`, metryka/ELI/URL w treści, `KPC`, `§1` / przecinki /
 `^`, skrót przed wprowadzeniem). Sprawdzana treść kończy się na nagłówku `CZĘŚĆ ROBOCZA`. Kod wyjścia 3 = naruszenia
 (1 = brak weryfikacji ma pierwszeństwo). Ekstrakcja: skróty z kropkami i mieszane (`k.p.c.`, `u.KRS`), jednostki
@@ -129,7 +129,7 @@ przed podłączeniem do produkcji.
 ## adapter_krs_vat.py — odczyt KRS i Białej listy VAT (F-204)
 
 Własny adapter (bez serwerów zewnętrznych, bez klucza API) dwóch rejestrów
-publicznych, wpięty w `shared/MOD-IDENTYFIKACJA-STRONY-UMOWY.md` przy
+publicznych, wpięty w `JUR:identyfikacja-strony-umowy` przy
 weryfikacji elementów E01 (NIP), E02 (nazwa rejestrowa), E03 (KRS), E05
 (adres siedziby) i przy ustalaniu sposobu reprezentacji podmiotu.
 
@@ -184,7 +184,7 @@ w `audyt-systemu-v4/references/AUDIT-JOURNAL.md`, wpis AUDYT-2026-07-12g.
 
 Dla nowych integracji preferuj `{"session_id":"...","events":[...]}`. Event zawiera `tool`, źródło, opcjonalny `query_context` i status. Claude/Anthropic legacy pozostaje obsługiwany; obsługiwane są też generyczne tool-call/result i ukończone wpisy Responses-style. Sam call bez wyniku nie jest weryfikacją.
 
-Serwery MCP: od 3.93 w `audyt-systemu-v4/mcp-servers/` (rozpakowane; przeniesione z tego katalogu).
+Serwery MCP: od 3.93 w `prawo-polskie-v2/mcp-servers/` (rozpakowane; przeniesione z tego katalogu).
 
 ## F-206 (2026-09-26d) — przywrócenie 8 narzędzi z historii git
 
@@ -220,4 +220,4 @@ Pliki fixture `przyklady/konwersacja_api_przyklad.json`, `przyklady/przyklad_pis
 
 ## Serwery MCP
 
-Od 3.93: `audyt-systemu-v4/mcp-servers/` — instalacja: `KONEKTORY-REKOMENDOWANE.md` § GDZIE SIĘ KONFIGURUJE SERWER MCP.
+Od 3.93: `prawo-polskie-v2/mcp-servers/` — instalacja: `KONEKTORY-REKOMENDOWANE.md` § GDZIE SIĘ KONFIGURUJE SERWER MCP.

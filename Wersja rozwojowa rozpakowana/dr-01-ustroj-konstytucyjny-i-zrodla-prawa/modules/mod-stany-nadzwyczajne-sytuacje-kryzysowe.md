@@ -16,7 +16,7 @@ epidemię** — i jak te reżimy (konstytucyjny i ustawowe) mają się do siebie
 > jest, nie powielaj). Ten moduł dostarcza WARSTWĘ WYŻSZĄ — konstytucyjną
 > i ustrojową architekturę, w którą te specustawy się wpisują.
 
-**Zasada:** `view shared/PRAWO-HARDGATE.md` przed każdym
+**Zasada:** `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` przed każdym
 przepisem/aktem z tego modułu.
 
 ---

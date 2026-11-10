@@ -8,7 +8,7 @@ Zakres: orzeczenia PPP, kształcenie specjalne, uczelnie, dostosowania, dyskrymi
 
 Zawsze stosuj razem z:
 
-- `shared/MODULE-STANDARD-POLISH-LAW.md`,
+- `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md`,
 - `shared/ISAP-AUDIT-PROTOCOL.md`,
 - `shared/TEMPORAL-LAW-CHECK.md`,
 - `shared/LEGAL-LIFECYCLE-MANAGEMENT.md`,

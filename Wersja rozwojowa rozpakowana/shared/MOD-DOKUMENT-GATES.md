@@ -245,7 +245,7 @@ w. 1277-1285; treść niezmieniona.)*
 - `shared/MOD-STEP-TRACKER.md` — pominięcie którejkolwiek z bramek §1-§8
   raportuje się jako „⚠️ POMINIĘTY" na tych samych zasadach co pominięcie
   kroku pipeline'u.
-- `shared/PRAWO-HARDGATE.md` — §8 dotyczy cytatów z DOKUMENTÓW SPRAWY;
+- `JUR:weryfikacja-przepisow-kanon` — §8 dotyczy cytatów z DOKUMENTÓW SPRAWY;
   cytaty z przepisów i orzeczeń podlegają dodatkowo PRAWO-HARDGATE.
 
 ## Historia

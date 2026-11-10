@@ -22,6 +22,8 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - przepisy przejściowe,
 - właściwy organ i tryb zaskarżenia.
 
+- ⚡ **Kontrola operacyjna od 31.10.2026** — Straż Graniczna: art. 9e (zmiany: art. 2 ustawy 2026/1281; nowy ust. 21 — roczna informacja MSWiA dla Sejmu i Senatu, pierwsza do 30.06.2027): sąd i prokurator mogą żądać informacji w toku i zakończyć kontrolę z urzędu, sąd uzasadnia postanowienia, materiały niszczy się w 3 miesiące; kontrola zarządzona przed 31.10.2026 → art. 11 ustawy 2026/1281. Szczegóły: `mod-ustawa-sluzby-operacyjne-retencja-danych`. ✅ [VER: ELI DU/2026/1281, RZĄD 1, 2026-11-04]
+
 ## 2. Zakres spraw
 - kontrola graniczna
 - zobowiązanie do powrotu
@@ -159,12 +161,12 @@ Oceń:
 ## 12. Quality gate
 Przed odpowiedzią lub pismem zastosuj:
 
-- `shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
+- `prawo-polskie-v2/krajowe/shared/POLISH-LAW-FINAL-COMPLETENESS-GATE.md`,
 - `shared/ISAP-AUDIT-PROTOCOL.md`,
 - `shared/TEMPORAL-LAW-CHECK.md`,
 - `shared/LEGAL-QUALITY-GATE.md`,
 - `shared/RISK-ASSESSMENT.md`, jeżeli istnieje,
-- `shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, jeżeli powstaje pismo.
 
 ---
 

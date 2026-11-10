@@ -1,8 +1,8 @@
 # ISAP-METRYKI-AKTOW — ODESŁANIE (kopia wycofana 2026-09-22, F-195)
 
 ⛔ **Ten plik nie jest rejestrem.** Kanoniczny rejestr metryk aktów:
-`shared/ISAP-METRYKI-AKTOW.md` — tam odsyła `references/KROK1-detekcja.md`
-(`view shared/ISAP-METRYKI-AKTOW.md`).
+`JUR:isap-metryki-aktow` — tam odsyła `references/KROK1-detekcja.md`
+(`view JUR:isap-metryki-aktow`).
 
 Powód wycofania: lokalna kopia była osieroconym, nieaktualnym duplikatem
 (stan audytu 2026-06-07 wobec 2026-08-28 w shared; 49 rozbieżnych linii;

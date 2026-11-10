@@ -3,7 +3,7 @@
 > **Akt:** ustawa z 11.03.2004 o podatku od towarów i usług — **t.j. Dz.U. 2026 poz. 1263**.
 > ⚠️ t.j. 2026/1263 OBEJMUJE Dz.U. 2025 poz. 894, 896, 1203, 1541, 1811; Dz.U. 2026 poz. 507 (⛔ art. 6 — art. 96 ust. 3e–3f — w życie dopiero 1.11.2028, art. 31 pkt 4; do tej daty NIE stosować), 846. ⏳ Po t.j.: Dz.U. 2026 poz. 1270 — sprawdź w ELI przed każdym powołaniem.
 >
-> ⛔ **HARD GATE — patrz `shared/PRAWO-HARDGATE.md`.** Kwoty ulg, progów i kar
+> ⛔ **HARD GATE — patrz `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`.** Kwoty ulg, progów i kar
 > zmieniają się nowelizacjami i rozporządzeniami — każda liczba w tym module
 > jest PUNKTEM STARTOWYM wymagającym weryfikacji w ELI (RZĄD 1) na datę czynności.
 >
@@ -379,5 +379,5 @@ RZĄD 2 — trójstronne: interpretacja KIS 0114-KDIP1-2.4012.141.2025.1.RM
   poradnikprzedsiebiorcy.pl (04.2026), isp-modzelewski.pl
 ⛔ ŻADNA sygnatura ani interpretacja z tego modułu NIE MOŻE trafić do pisma
   procesowego bez uprzedniej weryfikacji przez `orzeczenia-sadowe-v2` /
-  EUREKA — zgodnie z shared/PRAWO-HARDGATE.md.
+  EUREKA — zgodnie z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md.
 ```

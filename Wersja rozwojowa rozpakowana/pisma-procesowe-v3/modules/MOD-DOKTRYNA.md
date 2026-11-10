@@ -36,7 +36,7 @@ REGUŁA D-4 (zakaz doktryny zamiast prawa):
   NIGDY nie cytuj komentarza zamiast przepisu. Komentarz interpretuje prawo
   — przepis jest źródłem. Format błędny: "Zgodnie z Gniewkiem art. X KC..."
   Format poprawny: "Zgodnie z art. X k.c. [...]; zob. Gniewek..." — przy pierwszym
-  powołaniu aktu pełny zapis wg shared/FORMAT-CYTOWANIA.md, sekcja 1.
+  powołaniu aktu pełny zapis wg JUR:format-cytowania, sekcja 1.
 ```
 
 ---

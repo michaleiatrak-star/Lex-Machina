@@ -1,5 +1,6 @@
 # CHANGELOG — analizator-przepisow-v2
 
+- 2.14 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 2.13 (2026-10-27, AUDYT-2026-10-27b): Moduł 1 — tabela decyzji dla wyniku MCP `isap_tekst` (brzmienia_przyszle, partial/nierozstrzygniete, strony_bez_tekstu, jeszcze_nie_obowiazuje, numer z literą w indeksie); Moduł 1H — `na_dzien` na t.j. obowiązującym w dniu docelowym, OUT_OF_SCOPE = starszy t.j., jednostka dodana później = „nie istniała”, art. 131¹ᵃ ≠ art. 131. Analogia: legal-cite-pl #11, #12, #13.
 - 2.12 (2026-10-06): sn.pl: wyszukiwarka-orzeczen zamiast nieczynnego /orzecznictwo; link = karta
 

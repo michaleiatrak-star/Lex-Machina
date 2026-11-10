@@ -502,7 +502,7 @@ Kluczowe osie różnic:
 ## DOKUMENTY ZAŁOŻYCIELSKIE I WEWNĘTRZNE (NOWA SEKCJA 2026-06-15)
 
 > Dla ANALIZY/REDAKCJI tych dokumentów → `analizator-umow-v1`, nowy moduł
-> `references/mod-FA-founders-dokumenty-zalozycielskie.md` (J.20). Tu:
+> `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-FA-founders-dokumenty-zalozycielskie.md` (J.20). Tu:
 > przegląd typów dokumentów i kiedy który jest właściwy/wymagany.
 
 ### Tabela dokumentów wg formy
@@ -566,7 +566,7 @@ TYPOWA TREŚĆ (minimum 9 elementów wg branżowych wzorców):
 □ procedury decyzyjne (większości głosów, weto, sprawy wymagające zgody
   wszystkich)
 □ zakaz konkurencji po odejściu (okres, zakres, ekwiwalent — patrz
-  analizator-umow-v1/references/zakaz-konkurencji.md)
+  prawo-polskie-v2/krajowe/analizator-umow-v1/references/zakaz-konkurencji.md)
 □ poufność (NDA) — zakres, okres, sankcje
 □ mechanizmy wyjścia/rozstania:
   - lock-up (zakaz sprzedaży udziałów przez określony czas)
@@ -588,7 +588,7 @@ KOLEJNOŚĆ DOKUMENTÓW PRZY WEJŚCIU INWESTORA (osobny etap, nie część FA):
 Founders' Agreement → (gdy pojawia się inwestor) → Term Sheet / LOI →
 Umowa inwestycyjna (reguluje m.in. powoływanie zarządu, prawa nadzorcze
 inwestora, exit plan) → SHA (umowa wspólników/akcjonariuszy, post-investment)
-→ patrz analizator-umow-v1/references/mod-MA-transakcje.md (MA.2 — LOI/Term Sheet,
+→ patrz prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-MA-transakcje.md (MA.2 — LOI/Term Sheet,
 MA.4 — SHA)
 ```
 
@@ -751,8 +751,8 @@ web_search: "kapitał minimalny prosta spółka akcyjna art 300(2) KSH aktualne 
 | Upadłość / restrukturyzacja | `mod-PrUpad-upadlosc-restrukturyzacja` |
 | Status syndyka/nadzorcy/zarządcy (zawód) | `mod-ustawa-doradca-restrukturyzacyjny-zawod` |
 | Analiza umowy (B2B, spółka) | `analizator-umow-v1` |
-| Redakcja/analiza: umowa spółki, statut, regulamin organu, founders' agreement | `analizator-umow-v1` → `mod-FA-founders-dokumenty-zalozycielskie.md` (J.20) |
-| M&A — SPA/SHA/LOI (etap post-formation / inwestycja) | `analizator-umow-v1` → `mod-MA-transakcje.md` |
+| Redakcja/analiza: umowa spółki, statut, regulamin organu, founders' agreement | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-FA-founders-dokumenty-zalozycielskie.md` (J.20) |
+| M&A — SPA/SHA/LOI (etap post-formation / inwestycja) | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-MA-transakcje.md` |
 | Pismo: wniosek o upadłość, zgłoszenie wierzytelności | `pisma-procesowe-v3` |
 | Rejestracja JDG / działalność nierejestrowana — pisma do CEIDG | `pisma-proste-v2` (jeśli dotyczy prostego wniosku) |
 | Orzecznictwo SN gospodarcze | `orzeczenia-sadowe-v2` |

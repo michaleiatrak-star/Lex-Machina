@@ -240,7 +240,7 @@ Przed odpowiedzią lub dokumentem stosuj:
 - `shared/HYBRID-VALIDATION.md`
 - `shared/TEMPORAL-LAW-CHECK.md` — AI Act stosowany etapami; daty obowiązywania krytyczne
 - `shared/RISK-ASSESSMENT.md`
-- `shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport compliance
+- `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md` jeśli sporządzane pismo lub raport compliance
 
 ## Weryfikacja online
 

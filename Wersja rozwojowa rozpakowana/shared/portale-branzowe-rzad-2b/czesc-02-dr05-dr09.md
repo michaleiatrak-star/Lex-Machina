@@ -1,6 +1,6 @@
 # PORTALE — część 2: DR-05 do DR-09
 
-> Część pliku `PORTALE-BRANZOWE-RZAD-2B.md` (podział 2026-08-20, naprawa
+> Część pliku `JUR:portale-branzowe` (podział 2026-08-20, naprawa
 > F-78 — plik źródłowy przekroczył 1000 linii). Pełny indeks i zasady
 > użycia: zobacz plik nadrzędny w katalogu `shared/`. To NIE jest
 > samodzielny skill — ładowany WYŁĄCZNIE przez indeks nadrzędny na
@@ -69,7 +69,7 @@ poziomie porównywalnym do gofin.pl.
 
 | Portal | Specjalizacja | Status |
 |---|---|---|
-| uzp.gov.pl, kio.gov.pl | Oficjalne (Rząd 1/2A, nie 2B — organy) | patrz `shared/INTERPRETACJE-URZEDOWE.md` |
+| uzp.gov.pl, kio.gov.pl | Oficjalne (Rząd 1/2A, nie 2B — organy) | patrz `JUR:interpretacje-urzedowe` |
 | **portalzp.pl** | Zamówienia publiczne — schematy procedur (przetarg nieograniczony/ograniczony, tryb podstawowy), progi kwotowe UNIJNE/krajowe, terminy, wzory dokumentów, komentarze eksperckie z cytatami art. ustawy Pzp | ✅ ZWERYFIKOWANE 2026-07-21 (test: przetarg nieograniczony — wynik DOBRY, konkretne progi kwotowe 2025, art. 132-139 Pzp, terminy 35 dni; ⚠️ CZĘŚĆ treści PŁATNA — "zaloguj się lub zamów dostęp" pojawia się przy niektórych artykułach, ale WYSTARCZAJĄCO dużo treści darmowej/indeksowanej do praktycznego użytku) |
 
 ## DR-08 — Samorząd Terytorialny, Prawo Lokalne

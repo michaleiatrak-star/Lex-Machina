@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.106 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.105 (2026-10-31, BENCHMARK-02-LIVE): SKILL.md: sekcja Pułapki procesowe (art. 130² KPC; art. 492/820 KPC) — profil lekki aplikacji wczytuje tylko SKILL.md, a reguły z modułów nie docierały (benchmark 02 P06 na żywo).
 - 3.104 (2026-10-31, BENCHMARK-02): mod-KPC-egzekucja-windykacja: art. 492 § 1–3 i art. 820 § 2 KPC — wstrzymanie wykonania nakazu wekslowego a tytuł zabezpieczenia, konkluzja domyślna „nie” (benchmark 02 P13; ELI DU/2026/468).
 - 3.103 (2026-10-31, AUDYT-2026-10-31): kro-rodzinne część 07: opłata skarbowa — t.j. Dz.U. 2026 poz. 1395.

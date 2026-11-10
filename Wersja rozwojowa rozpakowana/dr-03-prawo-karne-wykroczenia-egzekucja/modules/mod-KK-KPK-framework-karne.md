@@ -131,8 +131,8 @@ obsługiwane przez skille wykonawcze (lazy loading — wczytaj wg potrzeby spraw
 
 ```
 view shared/STRATEGIA-PROCESOWA.md
-view shared/TERM-CALC.md
-view shared/TRYBY-PROCESOWE.md
+view prawo-polskie-v2/krajowe/shared/TERM-CALC.md
+view prawo-polskie-v2/krajowe/shared/TRYBY-PROCESOWE.md
 ```
 
 Pełna analiza etapowa (dochodzenie/śledztwo → akt oskarżenia → rozprawa → wyrok →

@@ -60,7 +60,7 @@ DL-3  Trafienie? → zadaj TRZY pytania. Każde musi mieć odpowiedź TAK:
           (dla karnego: `dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-KPK-framework-karne.md`, a gdy
           framework wskaże TAK — `mod-KK-kwalifikator-karnomaterialny.md`)?
       (c) Czy przepis przeszedł pełną weryfikację wg
-          `shared/PRAWO-HARDGATE.md` w TEJ odpowiedzi?
+          `JUR:weryfikacja-przepisow-kanon` w TEJ odpowiedzi?
 
 DL-4  Którekolwiek NIE → ⛔ USUŃ powołanie z odpowiedzi. Bez wyjątku.
       Nie osłabiaj sformułowania, nie dopisuj "potencjalnie", nie

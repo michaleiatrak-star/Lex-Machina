@@ -11,7 +11,7 @@
 > (wzorzec `SELF-CHECK-ANTY-FASADA.md`, lekcja F-115: kopie dryfują przy pierwszej
 > zmianie źródła). Obecność wywołania pilnuje test **T35**.
 >
-> **Relacje:** `PRAWO-HARDGATE.md` pilnuje cytatów **prawa** (źródło zewnętrzne);
+> **Relacje:** `JUR:weryfikacja-przepisow-kanon` pilnuje cytatów **prawa** (źródło zewnętrzne);
 > ten moduł pilnuje cytatów i poleceń z **dokumentu wejściowego** (źródło zamknięte).
 > WD-2 jest regułą OGÓLNĄ cytatu z dokumentu. Reguły szczególne pozostają w swoich
 > lokalizacjach kanonicznych i stosuje się je obok WD-2, nie zamiast:

@@ -1,11 +1,11 @@
 # Moduł [AZ] — Postępowania dyscyplinarne zawodów zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
+- metryki aktów sprawdzaj w `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md`;
+- jeżeli sprawa jest procesowa, uruchom `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `prawo-polskie-v2/krajowe/shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
 - nie mieszaj trybów: KPA, Ordynacja podatkowa, KAS, PPSA i egzekucja administracyjna mają odrębne rygory.
 ---
 
@@ -69,7 +69,7 @@ Matryca dowodowa: fakt → dowód → ciężar dowodu → luka
   ↓
 Dobór pisma/środka: wniosek / odwołanie / zażalenie / skarga / pozew / zawiadomienie
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md + shared/QUALITY-CHECK.md
   ↓
@@ -144,10 +144,10 @@ Przed końcową odpowiedzią sprawdź:
 □ Czy podano ryzyka przeciwnika/organu?
 □ Czy wskazano słabe punkty klienta?
 □ Czy każdy przepis i Dz.U. ma kontrolę ISAP albo oznaczenie braku weryfikacji?
-□ Czy użyto shared/MODULE-STANDARD-POLISH-LAW.md?
+□ Czy użyto prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md?
 ```
 
-## Orzecznictwo dyscyplinarne — instancje i bazy (⚙️ spięte z shared/PRAWO-HARDGATE.md)
+## Orzecznictwo dyscyplinarne — instancje i bazy (⚙️ spięte z prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md)
 
 **Stan zweryfikowany online (nie z pamięci) — 2026-07-06, zaktualizowany po
 dodatkowej weryfikacji miast/instancji zwykłych (I instancja izbowa):**
@@ -217,19 +217,19 @@ niezawodnej procedurze weryfikacji sygnatury wg PRAWO-HARDGATE KROK 0–5.
 
 | Potrzeba | Moduł współdzielony / skill |
 |---|---|
-| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `shared/ISAP-METRYKI-AKTOW.md` |
+| aktualność prawa | `shared/ISAP-AUDIT-PROTOCOL.md` + `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md` |
 | stan prawny w czasie | `shared/TEMPORAL-LAW-CHECK.md` |
-| braki formalne | `shared/BRAKI-FORMALNE.md` |
+| braki formalne | `prawo-polskie-v2/krajowe/shared/BRAKI-FORMALNE.md` |
 | warunki skuteczności | `shared/WARUNKI-SKUTECZNOSCI.md` |
 | dowody | `shared/DOWODY-METODOLOGIA.md` + `analizator-dowodow-v3` |
 | ryzyka | `shared/RISK-ASSESSMENT.md` |
-| **weryfikacja orzeczeń dyscyplinarnych** | `shared/PRAWO-HARDGATE.md` (sekcja "zawody zaufania publicznego — odpowiedzialność dyscyplinarna") + `orzeczenia-sadowe-v2` |
+| **weryfikacja orzeczeń dyscyplinarnych** | `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` (sekcja "zawody zaufania publicznego — odpowiedzialność dyscyplinarna") + `orzeczenia-sadowe-v2` |
 | pisma | `pisma-procesowe-v3` albo `pisma-proste-v2` |
 | analiza sądowa | `analiza-sadowa-v6` |
 
 ---
 
-**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 2 (zawody prawnicze), 3–4 (pozostałe); RZĄD 1 tylko z oficjalnego portalu samorządu.
+**Dokumenty samorządu zawodowego** (uchwały, kodeks etyki, regulaminy, rejestr członków): `view prawo-polskie-v2/krajowe/shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md` — sekcja 2 (zawody prawnicze), 3–4 (pozostałe); RZĄD 1 tylko z oficjalnego portalu samorządu.
 
 ## STATUS KANCELARSKI
 

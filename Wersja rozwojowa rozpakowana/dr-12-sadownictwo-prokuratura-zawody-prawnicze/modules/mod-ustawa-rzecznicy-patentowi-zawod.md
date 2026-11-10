@@ -1,14 +1,14 @@
 # mod-ustawa-rzecznicy-patentowi-zawod — Rzecznik patentowy jako zawód zaufania publicznego
 
-**Standard jakości:** stosuj `shared/MODULE-STANDARD-POLISH-LAW.md` oraz `shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
+**Standard jakości:** stosuj `prawo-polskie-v2/krajowe/shared/MODULE-STANDARD-POLISH-LAW.md` oraz `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`.
 **Status:** moduł NOWY — utworzony 2026-06-14 (audyt: pokrycie "zawodów zaufania
 publicznego" — grupa (c) zawody powstałe w wyniku rozwoju gospodarki rynkowej,
 analiza Senatu OT-625).
 ---
 WSPÓLNE ZASADY DLA MODUŁU:
 - przed cytowaniem przepisu zastosuj `shared/ISAP-AUDIT-PROTOCOL.md`;
-- metryki aktów sprawdzaj w `shared/ISAP-METRYKI-AKTOW.md`;
-- jeżeli sprawa jest procesowa, uruchom `shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
+- metryki aktów sprawdzaj w `prawo-polskie-v2/krajowe/shared/ISAP-METRYKI-AKTOW.md`;
+- jeżeli sprawa jest procesowa, uruchom `prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md`, `shared/WARUNKI-SKUTECZNOSCI.md`, `prawo-polskie-v2/krajowe/shared/TERM-CALC.md`, `shared/RISK-ASSESSMENT.md`;
 - ⛔ ZAKAZ podawania artykułów, terminów, sygnatur z pamięci — weryfikuj w ELI (RZĄD 1).
 ---
 
@@ -106,7 +106,7 @@ Właściwy organ: UP RP / WSA w Warszawie (z zasady dla decyzji UP RP) /
 Środek: odwołanie / skarga do WSA (30 dni od uchwały KRRP wg art. 24) /
   pozew / odwołanie dyscyplinarne
   ↓
-Walidacja formalna: shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
+Walidacja formalna: prawo-polskie-v2/krajowe/shared/FORMAL-CHECK.md + shared/WARUNKI-SKUTECZNOSCI.md
   ↓
 Ocena ryzyka: shared/RISK-ASSESSMENT.md
 ```

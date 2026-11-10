@@ -110,7 +110,7 @@ SEKWENCJA END-TO-END
 | MOD-F.md | Przejście IV — audyt własnych pism | gdy audyt pełnomocnika własnego |
 | moduly-spec.md | FALLBACK AWARYJNY | gdy brak dostępu do osobnych MOD-X |
 | orzecznictwo.md | Filtr #2 (po Przejściu IV) | gdy weryfikacja orzecznictwa |
-| koszty-terminy.md | Pytania o terminy/koszty | na żądanie |
+| JUR:analiza-koszty-terminy | Pytania o terminy/koszty | na żądanie |
 | engines/adversarial-v9.md | Przejście III 3A | gdy obszerny materiał |
 | engines/contradiction-v10.md | Przejście III 3B | gdy obszerny materiał |
 | engines/staged-engine.md | Cały model — obszerny materiał | gdy ≥5 dokumentów |

@@ -8,7 +8,7 @@
   repozytorium `michaleiatrak-star/lex-machina`, commit sprzed `6dbe7a0`; 42 luźne pliki
   `tools/mcp-servers/**/*` NIE trzymane osobno na dysku — tylko w ZIP-ie, żeby zmieścić się w
   limicie 200 plików)
-- ⚠️ (historyczne) Archiwum `tools/mcp-servers/mcp-servers-examples.zip` — od 3.93 przeniesione do `audyt-systemu-v4/mcp-servers/` jako pliki rozpakowane; PRZYWRÓCONE 2026-09-26d
+- ⚠️ (historyczne) Archiwum `tools/mcp-servers/mcp-servers-examples.zip` — od 3.93 przeniesione do `prawo-polskie-v2/mcp-servers/` jako pliki rozpakowane; PRZYWRÓCONE 2026-09-26d
   (F-206) — od 2026-08-27 (merge `d3385b9`) do 2026-09-26d było nieobecne w pakiecie mimo opisu w `SKILL.md`
 - Original files: **205**
 - Expanded files after lossless MCP-example compaction, before manifest/checksums: **164**
@@ -22,7 +22,7 @@
 
 `shared` pozostaje jedynym SSOT. Wszystkie moduły promptowe pozostają rozwinięte. Jedynie przykładowe serwery MCP — kod techniczny, którego `SKILL.md` nie każe wczytywać jako prompt — są zapakowane wewnętrznie z pełną listą oryginalnych ścieżek i SHA-256 poniżej.
 
-## Serwery MCP — przeniesione do `audyt-systemu-v4/mcp-servers/` (3.93, AUDYT-2026-09-27m)
+## Serwery MCP — przeniesione do `prawo-polskie-v2/mcp-servers/` (3.93, AUDYT-2026-09-27m)
 
 Archiwum `tools/mcp-servers/mcp-servers-examples.zip` usunięte z shared: serwer musi leżeć
 rozpakowany, żeby host mógł go uruchomić, a plugin `audyt-systemu-v4` ma na to miejsce

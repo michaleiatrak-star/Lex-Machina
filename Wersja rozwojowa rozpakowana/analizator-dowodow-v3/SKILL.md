@@ -1,6 +1,6 @@
 ---
 name: analizator-dowodow-v3
-version: "5.16.24"
+version: "5.16.26"
 type: executive-analiza
 status: production
 description: "Ocena dowodów, dokumentów, zeznań i akt: siła dowodowa, hierarchia A-D, pokrycie przesłanek, sprzeczności, terminy procesowe i analiza śledcza."
@@ -39,14 +39,14 @@ pipeline:
     - AD-KROK3-WYKONANIE
     - AD-KROK4-DASHBOARD
 changelog: |
-  Wersja bieżąca: 5.16.23 (2026-10-10b, AUDYT-2026-10-10b): widget-kreator: auto-fill lokalny, bez wysyłania treści rozmowy do api.anthropic.com; MD-NARR: katalog wyjściowy hosta zamiast /mnt/user-data.
+  Wersja bieżąca: 5.16.26 (2026-10-10b, AUDYT-2026-10-10b): widget-kreator: auto-fill lokalny, bez wysyłania treści rozmowy do api.anthropic.com; MD-NARR: katalog wyjściowy hosta zamiast /mnt/user-data.
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 # Analizator Dowodów Procesowych v5
 
 > ⛔ HARD GATE — ZAKAZ CYTOWANIA PRAWA I ORZECZEŃ Z PAMIĘCI
-> Przed każdą analizą z powołaniem na przepisy lub sygnatury: `view /mnt/skills/user/shared/PRAWO-HARDGATE.md`
+> Przed każdą analizą z powołaniem na przepisy lub sygnatury: `view JUR:weryfikacja-przepisow-kanon`
 
 > ⛔ **[WEJŚCIE-DOKUMENTU] — bramka materiału wejściowego (F-200; odtworzone 2026-09-27d, F-207).**
 > Gdy w tej turze użytkownik dostarczył dokument, akta, korespondencję lub wklejony tekst:
@@ -101,7 +101,7 @@ changelog: |
 > `analiza-sadowa-v6` jest PRIMARY dla executive summary szans w sprawie i
 > audytu błędów pełnomocnika. Terminy procesowe (MP12) i hierarchia
 > orzecznictwa korzystają z tych samych plików kanonicznych
-> `shared/terminy.md` / `shared/ORZECZENIA-HIERARCHIA.md` co
+> `JUR:terminy-procesowe` / `JUR:orzecznictwo-hierarchia` co
 > `analiza-sadowa-v6` — nie utrzymuj tu równoległej kopii tych tabel.
 
 ---
@@ -499,7 +499,7 @@ E6. Konieczna kontrola jakości / audyt antyhalucynacyjny analizy?
 F1. Analiza dotyczy oceny prawnej (D4=TAK) LUB sprawa obejmuje wiele reżimów
     prawnych LUB użytkownik pyta o dziedziny prawa?
     TAK → wczytaj MX przed MP2
-         view /mnt/skills/user/analizator-dowodow-v3/modules/MX-dziedziny.md
+         view JUR:dowody-mx-dziedziny
          Wynik MX uzupełni moduły specjalistyczne (np. MP11 dla RODO/CYBER,
          MP6 dla [KARNE-ZN], MD3b dla [PRAC-ROZW]).
 
@@ -543,7 +543,7 @@ G2. Materiał zawiera pisma jednej strony (analiza wyłącznie pism Pozwanej lub
     TAK → dodaj: BLOK-NAZW (kontrola nazewnictwa procesowego)
 
     Wczytaj tabelę nazewnictwa dla trybu sprawy:
-    view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md
+    view JUR:nazewnictwo-stron
     → Tabela T1 (cywilne procesowe), T2 (nieprocesowe), T3 (karne), T4 (wykroczenia)
        T5 (KPA), T6 (PPSA/WSA), T7 (pracownicze), T8 (egzekucja), T9 (zabezpieczenie)
        T10 (rodzinne)
@@ -572,7 +572,7 @@ G2. Materiał zawiera pisma jednej strony (analiza wyłącznie pism Pozwanej lub
 ```
 Wczytaj moduł przed wykonaniem:
 view /mnt/skills/user/analizator-dowodow-v3/modules/MOD-LAPSUS-AUDYT.md
-    view /mnt/skills/user/shared/NAZEWNICTWO-STRON.md
+    view JUR:nazewnictwo-stron
     (tabele T1-T10 wymagane dla KROK L0 i KROK L1 w MOD-LAPSUS-AUDYT)
 
 Moduł zawiera pełny protokół L0-L5 + 22 typy lapsusów w 4 kategoriach:
@@ -1171,11 +1171,11 @@ KROK DTA-4: Zasilenie macierzy D×T (MOD-MACIERZ-DOWOD-TEZA)
 Jeżeli wynik tego skilla ma służyć do pisma, strategii procesowej, oceny ryzyka albo decyzji terminowej, wczytaj właściwe moduły shared:
 
 ```text
-view /mnt/skills/user/shared/TRYBY-PROCESOWE.md
+view JUR:tryby-procesowe
 view /mnt/skills/user/shared/RISK-ASSESSMENT.md
-view /mnt/skills/user/shared/TERM-CALC.md
+view JUR:liczenie-terminow
 view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view /mnt/skills/user/shared/STRATEGIA-PROCESOWA.md
 view /mnt/skills/user/shared/QUALITY-CHECK.md
 ```
@@ -1190,7 +1190,7 @@ Przy analizie dowodów obowiązkowo wczytaj:
 
 ```text
 view /mnt/skills/user/shared/DOWODY-METODOLOGIA.md
-view /mnt/skills/user/shared/PREKLUZJA-DOWODOWA.md
+view JUR:prekluzja-dowodowa
 view /mnt/skills/user/shared/RISK-ASSESSMENT.md
 view /mnt/skills/user/shared/MOD-SKAN-DOWODOW-KOMPLETNY.md   ← KROK 0b (SD-VER), już HARD GATE
 view /mnt/skills/user/shared/MOD-STEP-TRACKER.md              ← KROK 0c (ST-INIT), dodane w audycie 5.13.0

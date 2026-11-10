@@ -41,9 +41,13 @@ def _skille(root):
 
 
 def _pliki(root, skill):
-    for f in glob.glob(os.path.join(root, skill, "**", "*.md"), recursive=True):
-        if not any(p in f for p in POMIN):
-            yield f
+    # Treść prawa krajowego skilla po migracji jurysdykcji (E3) mieszka w pakiecie kraju:
+    # <pakiet>/krajowe/<skill>/ — to nadal treść tego skilla, nie utrata.
+    wzorce = [os.path.join(root, skill, "**", "*.md"), os.path.join(root, "*", "krajowe", skill, "**", "*.md")]
+    for wzorzec in wzorce:
+        for f in glob.glob(wzorzec, recursive=True):
+            if not any(p in f for p in POMIN):
+                yield f
 
 
 def _wzor(y, n):

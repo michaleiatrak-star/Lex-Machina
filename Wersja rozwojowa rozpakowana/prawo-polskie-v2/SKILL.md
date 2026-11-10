@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.74"
+version: "6.82"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.73 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362
+  Wersja bieżąca: 6.82 (2026-11-09): ROUTING-MAP i słowa kluczowe DR-09: umowa przewozu, Prawo przewozowe, CMR z protokołami, Konwencja montrealska i system warszawski, COTIF/CIM, konosamenty → mod-umowa-przewozu-CMR-konwencje-przewozowe
+  6.81 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362
   6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
   6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
@@ -56,7 +57,7 @@ jeśli ten plik zostanie kiedykolwiek wywołany bezpośrednio, z pominięciem
 routera (np. błąd w innym skillu) — potraktuj to jako naruszenie UP-1 i
 najpierw wczytaj `prawny-router-v3/SKILL.md` zanim przejdziesz dalej.
 
-## ⛔ DECYZJA ZAPISANA — ZAKRES `shared/PRAWO-HARDGATE.md` W TYM SKILLU
+## ⛔ DECYZJA ZAPISANA — ZAKRES `prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` W TYM SKILLU
 
 *(zapisana 2026-08-23g, flaga F-123 w `audyt-systemu-v4`. Powód zapisania, nie
 tylko podjęcia: pomiar `grep -rl PRAWO-HARDGATE` wykazał tu ZERO odesłań i
@@ -80,7 +81,7 @@ weryfikacji w Rzędzie 1/2 jest naruszeniem tego reżimu.
 ⛔ **Wyzwalacz zmiany decyzji.** Jeżeli do któregokolwiek pliku tego skilla
 trafi kiedykolwiek twierdzenie o TREŚCI prawa — przesłanka, termin, właściwość
 sądu, skutek procesowy, cokolwiek poza nazwą aktu, jego numerem i wskazaniem
-modułu — decyzja wygasa z automatu i `view shared/PRAWO-HARDGATE.md`
+modułu — decyzja wygasa z automatu i `view prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md`
 staje się obowiązkowe. Zakres „tylko routing" jest warunkiem tej decyzji, nie
 jej trwałą cechą.
 
@@ -118,7 +119,7 @@ view prawo-polskie-v2/ROUTING-MAP.md
 | PIT, VAT, CIT, podatki, podatek, urząd skarbowy, kontrola podatkowa, interpretacja podatkowa, ryczałt, KAS, akcyza, cło, finanse publiczne, podatek od nieruchomości, koszty uzyskania przychodu, opłata skarbowa, PCC, KSeF, biała lista, zeznanie roczne, podatek od wygranej, zeznanie podatkowe, korekta deklaracji, deklaracja VAT, odliczenie VAT, ulga na dziecko, ulga podatkowa, podatek od spadków i darowizn, podatek od darowizny, zgłoszenie darowizny, kantor, zaległość podatkowa, zaległość w podatku, zwolnienie z podatku, PIT-38, sprzedaż mieszkania a podatek, przychód, Ordynacja podatkowa, decyzja podatkowa, ryczałt od najmu, kontrola celno-skarbowa, rozliczenie najmu, wynajem krótkoterminowy, koszty w działalności, darowizna od rodziny, otrzymałem darowiznę, darowizna od rodziców, biuro rachunkowe | `dr-06-Podatki-Finanse-Publiczne-AML` |
 | Przetarg, KIO, PZP, zamówienie, fundusze UE, notariat, zamówienie publiczne, partnerstwo publiczno-prywatne, PPP, akt notarialny, zamawiający, wykonawca w przetargu, najkorzystniejsza oferta, wadium, tryb podstawowy, koncesja na roboty, NIK, Najwyższa Izba Kontroli, RIO, regionalna izba obrachunkowa, dyscyplina finansów publicznych, dotacja unijna, dofinansowanie z funduszy europejskich, oferta przetargowa, SWZ, specyfikacja warunków zamówienia, odwołanie do KIO, zamówienie z wolnej ręki, podwykonawca, korekta finansowa, instytucja zarządzająca, beneficjent, wniosek o płatność, waloryzacja wynagrodzenia, konsorcjum, JEDZ, samooczyszczenie, rażąco niska cena, próg bagatelności, próg unijny, unieważnienie postępowania o udzielenie zamówienia, wykluczenie wykonawcy, odrzucenie oferty, termin realizacji umowy, realizacja zamówienia | `dr-07-Zamowienia-Publiczne-Fundusze-UE` |
 | Gmina, powiat, JST, MPZP, miejscowy plan, warunki zabudowy, uchwała, radny, wójt, burmistrz, prawo lokalne, samorząd, referendum lokalne, odwołanie burmistrza, odwołanie wójta, strefa płatnego parkowania, rada gminy, renta planistyczna, odszkodowanie planistyczne, plan miejscowy, sołectwo, sołtys, budżet obywatelski, mienie komunalne, akt prawa miejscowego, dziennik urzędowy województwa, prezydent miasta, starosta, sejmik, uchwała krajobrazowa, skarga na wójta, skarga na działalność wójta, droga powiatowa, droga gminna, obywatelska inicjatywa uchwałodawcza, dodatek mieszkaniowy, regulamin utrzymania czystości, opłata za śmieci, opłata za odpady, nadzór wojewody, rozstrzygnięcie nadzorcze, nieważność uchwały, skarga na uchwałę, odśnieżanie chodnika, rada miasta, mieszkańcy gminy, odwołać burmistrza, odwołać wójta | `dr-08-Samorzad-Terytorialny-Prawo-Lokalne` |
-| Budowa, pozwolenie na budowę, samowola, PINB, nadzór budowlany, środowisko, odpady, energia, fotowoltaika, transport, szkody łowieckie, łowiectwo, obwód łowiecki, wywłaszczenie, ZRID, wycinka drzew, farma wiatrowa, decyzja środowiskowa, charakterystyka energetyczna, system kaucyjny, pozwolenie na użytkowanie, odbiór budynku, usunięcie drzewa, URE, taryfa za prąd, polowanie, myśliwy, koło łowieckie, droga publiczna, pozwolenie wodnoprawne, studnia, prawo geologiczne, kopalina, konserwator zabytków, zabytek, geodeta, rozgraniczenie, Natura 2000, BDO, nadzór budowlany, prawo budowlane, zgłoszenie budowy, wiata, altana, zmiana sposobu użytkowania, odległość od granicy działki, zrzut ścieków, zanieczyszczenie rzeki, emisja, pompa ciepła, przyłączenie do sieci, operator sieci, sieć gazowa, OZE, elektrownia słoneczna, mikroinstalacja, przewóz osób, licencja na przewóz, taksówka, transport drogowy, las, wycinka lasu, linia energetyczna, służebność przesyłu, ferma, uciążliwość zapachowa, budowa domu letniskowego, inspektor nadzoru budowlanego, wstrzymanie budowy, legalizacja samowoli, nakaz rozbiórki, warunki techniczne, przewoźnik towar, list przewozowy, prawo przewozowe, przerwa w dostawie prądu, farma fotowoltaiczna, kamieniołom, wibracje, biogazownia, wyciął drzewa, drzewa na granicy, zakład przemysłowy, zanieczyszcza, linia wysokiego napięcia, koncesja geologiczna, wydobywanie piasku, panele fotowoltaiczne, wycięcie drzewa, wyciąłem drzewo, wyciąłem dąb | `dr-09-Budownictwo-Srodowisko-Energia-Transport` |
+| Budowa, pozwolenie na budowę, samowola, PINB, nadzór budowlany, środowisko, odpady, energia, fotowoltaika, transport, szkody łowieckie, łowiectwo, obwód łowiecki, wywłaszczenie, ZRID, wycinka drzew, farma wiatrowa, decyzja środowiskowa, charakterystyka energetyczna, system kaucyjny, pozwolenie na użytkowanie, odbiór budynku, usunięcie drzewa, URE, taryfa za prąd, polowanie, myśliwy, koło łowieckie, droga publiczna, pozwolenie wodnoprawne, studnia, prawo geologiczne, kopalina, konserwator zabytków, zabytek, geodeta, rozgraniczenie, Natura 2000, BDO, nadzór budowlany, prawo budowlane, zgłoszenie budowy, wiata, altana, zmiana sposobu użytkowania, odległość od granicy działki, zrzut ścieków, zanieczyszczenie rzeki, emisja, pompa ciepła, przyłączenie do sieci, operator sieci, sieć gazowa, OZE, elektrownia słoneczna, mikroinstalacja, przewóz osób, licencja na przewóz, taksówka, transport drogowy, las, wycinka lasu, linia energetyczna, służebność przesyłu, ferma, uciążliwość zapachowa, budowa domu letniskowego, inspektor nadzoru budowlanego, wstrzymanie budowy, legalizacja samowoli, nakaz rozbiórki, warunki techniczne, przewoźnik towar, list przewozowy, prawo przewozowe, CMR, list CMR, e-CMR, przewóz międzynarodowy, szkoda w transporcie, uszkodzony towar w transporcie, reklamacja przewoźnika, konwencja montrealska, zagubiony bagaż, COTIF, CIM, konosament, przerwa w dostawie prądu, farma fotowoltaiczna, kamieniołom, wibracje, biogazownia, wyciął drzewa, drzewa na granicy, zakład przemysłowy, zanieczyszcza, linia wysokiego napięcia, koncesja geologiczna, wydobywanie piasku, panele fotowoltaiczne, wycięcie drzewa, wyciąłem drzewo, wyciąłem dąb | `dr-09-Budownictwo-Srodowisko-Energia-Transport` |
 | Lekarz, szpital, pacjent, błąd medyczny, NFZ, apteka, farmacja, żywność, rolnictwo, rolnik, szkoła, uczeń, sport, impreza masowa, sanepid, szpital psychiatryczny, suplement diety, GIS, matura, egzamin maturalny, uczelnia, student, hodowla, weterynarz, wyroby medyczne, pielęgniarka, położna, telemedycyna, e-recepta, recepta, dokumentacja medyczna, lekarz rodzinny, przyjęcie do szpitala, skierowanie do szpitala, refundacja leczenia, produkt leczniczy, działanie niepożądane leku, rolniczy handel detaliczny, inspekcja weterynaryjna, eksperyment medyczny, badanie kliniczne, druga opinia lekarska, zakażenie szpitalne, Rzecznik Praw Pacjenta, prawa pacjenta, zdarzenie medyczne, ARiMR, dopłaty bezpośrednie, susza, gospodarstwo rolne, praktyka lekarska, działalność lecznicza, leczenie, przychodnia, zapisać do lekarza, agencja rolna, dopłaty do hektara, dopłaty rolnicze, Karta Nauczyciela, awans nauczyciela, nauczyciel w szkole, suplementy, nauczyciel ucznia, pielęgniarka środowiskowa | `dr-10-Zdrowie-Farmacja-Zywnosc-Rolnictwo` |
 | RODO, dane osobowe, ochrona danych, przetwarzanie danych, UODO, IOD, inspektor ochrony danych, wyciek danych, naruszenie ochrony danych, rejestr czynności przetwarzania, powierzenie przetwarzania, klauzula informacyjna, monitoring wizyjny, nagrywanie rozmów, wizerunek, cookies, spam, newsletter, profilowanie, KSC, NIS2, AI Act, cyberbezpieczeństwo, IP, prawo autorskie, znak towarowy, patent, wizerunek dziecka, publikacja wizerunku, ujawnienie danych, udostępnienie danych, lista dłużników z nazwiskami, podpis kwalifikowany, podpis zaufany, Digital Services Act, DSA, platforma internetowa, dostęp do danych, usunięcie danych, monitoruje, kamera, nagrywa, telemarketing, plagiat, skopiowany artykuł, autor utworu, CSIRT, incydent, atak hakerski, kryptowaluty, MiCA, dane klientów, baza klientów, hakerzy, ransomware, zaszyfrowali dane, włamanie do systemu, wzór przemysłowy, nazwa domeny, prawa do utworu, utwór muzyczny, nagranie w internecie, zdjęcie w internecie, prywatne maile, sklep internetowy dane, strona internetowa skopiowana, ochrona danych osobowych, zdjęcia uczniów, publikuje zdjęcia, nazwa marki, nazwy marki, akt o sztucznej inteligencji, AI Act, licencja na oprogramowanie, prawa do programu komputerowego, zablokowane konto w serwisie, usunięty post, skopiował kurs online, oprogramowanie sztuczna inteligencja, opublikował nagranie, przejęcie konta, przejął konto, konto na Facebooku, fałszywy profil, podszywa się, chatbot musi informować, zbiera lokalizację, przekazał moje dane, wysłał moje dane, udostępnił moje dane, sprostowanie danych, zdjęcie bez zgody, zdjęcie użyte bez zgody | `dr-11-Cyfrowe-Cyber-AI-Dane-IP` |
 | Sąd, prokuratura, adwokat, radca, notariusz, koszty sądowe, opłata sądowa, biegły sądowy, mediacja, taksa notarialna, izba adwokacka, pełnomocnik z urzędu, opłata od pozwu, sąd polubowny, arbitraż, zapis na sąd polubowny, opłata egzekucyjna, komornik, komornik sądowy, wybór komornika, kurator sądowy, referendarz, asesor sądowy, rzecznik patentowy, doradca restrukturyzacyjny, odpowiedzialność dyscyplinarna, sędzia, koszty zastępstwa procesowego, radca prawny, ławnik, aplikacja adwokacka, aplikacja radcowska, skarga na sędziego, prezes sądu, wyłączenie sędziego, opłata od apelacji, zwolnienie od kosztów sądowych, tajemnica adwokacka, tajemnica zawodowa, postępowanie dyscyplinarne, adwokat z urzędu, nie wyznaczył rozprawy, wyznaczenie rozprawy, pełnomocnik nie informuje, mediator, biegły nie stawił się, zaginęły akta, aplikant adwokacki, aplikant radcowski, aplikacja adwokacka, aplikacja radcowska, ochrona adwokata, ochrona radcy prawnego, adwokat funkcjonariusz publiczny, radca prawny funkcjonariusz publiczny, adwokaci funkcjonariusze publiczni, nowelizacja prawa o adwokaturze, kancelaria adwokacka, tytuł adwokata, koszty pozwu | `dr-12-Sadownictwo-Prokuratura-Zawody-Prawnicze` |
@@ -136,11 +137,17 @@ view dr-[XX]-[Nazwa]/modules/mod-[akt].md
 ```
 
 ## Weryfikacja
-- Teksty aktów: kanon E-1…E-5 (`shared/HIERARCHIA-ZRODEL.md`) — E-1 api.sejm.gov.pl/eli | eli.gov.pl; E-2 isap.sejm.gov.pl jako adres dla człowieka; E-3 LEX/Legalis; E-4 ArsLege
+- Teksty aktów: kanon E-1…E-5 (`prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`) — E-1 api.sejm.gov.pl/eli | eli.gov.pl; E-2 isap.sejm.gov.pl jako adres dla człowieka; E-3 LEX/Legalis; E-4 ArsLege
 - Prawo UE: eur-lex.europa.eu
 - Orzeczenia: orzeczenia.ms.gov.pl | sn.pl | nsa.gov.pl
 
 ---
+
+## Pakiet jurysdykcji PL
+
+- `JURYSDYKCJA.md` — dostawca jurysdykcji (język, waluta, dostawcy komponentów aplikacji) i klucze `JUR:` treści krajowej.
+- `krajowe/` — moduły prawa polskiego wskazywane kluczami ze skilli wykonawczych i shared.
+- `mcp-servers/` i `.mcp.json` — konektory MCP prawa polskiego (ISAP/ELI, SN, SAOS, CBOSA, KRS, biała lista VAT, CEIDG, NBP i in.); w Claude Code z pluginem `prawo-polskie-v2` startują same, instalacja w Claude Desktop: `mcp-servers/instaluj_serwery_mcp.py` (audyt, pozycja 14).
 
 ## Protokół integracji DR → prawo-polskie → audyt
 
@@ -177,6 +184,6 @@ F-102(C), dwa źródła prawdy o wersji zawsze się rozjeżdżają (ta stopka ni
 „5.2" przy `version: 6.1`, rozjazd o dziewięć wersji, usunięty 2026-08-23g).*
 
 *Ostatnia zmiana treści: 2026-08-23g — zapisana decyzja o zakresie
-`shared/PRAWO-HARDGATE.md` w tym skillu (F-123). Wcześniej: 2026-07-02,
+`prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md` w tym skillu (F-123). Wcześniej: 2026-07-02,
 WARN-28 zamknięty — ABW/AW to nowy t.j. tej samej ustawy z 2002 r., nie
 reforma; sync ROUTING-MAP.*

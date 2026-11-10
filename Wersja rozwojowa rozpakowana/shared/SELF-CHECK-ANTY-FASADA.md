@@ -1,13 +1,13 @@
 # SELF-CHECK-ANTY-FASADA — moduł kanoniczny self-checku antyfasadowego
 
-> **Plik nadrzędny:** `shared/PRAWO-HARDGATE.md`, sekcja BRAMKA ANTY-FASADOWA
+> **Plik nadrzędny:** `JUR:weryfikacja-przepisow-kanon`, sekcja BRAMKA ANTY-FASADOWA
 > (reguły AF-1…AF-6 — uzasadnienie, definicje i przypadki graniczne).
 > Ten plik zawiera WYŁĄCZNIE listę kontrolną do wykonania przed wysłaniem
 > odpowiedzi. Historia wersji: `shared/references/CHANGELOG.md`.
 >
 > **Powstał 2026-08-23i, flaga F-115.** Powód nie jest porządkowy: do tej daty
 > self-check istniał jako KOPIA w 7 plikach. Kiedy F-117 dodała regułę AF-6 i
-> drugą linię listy do `PRAWO-HARDGATE.md`, **żadna z 7 kopii nie została
+> drugą linię listy do `JUR:weryfikacja-przepisow-kanon`, **żadna z 7 kopii nie została
 > zaktualizowana** — źródło miało 2 pozycje, kopie 1. Dryf zmaterializował się
 > przy pierwszej kolejnej zmianie brzmienia, dokładnie tak, jak przewidywała
 > rekomendacja flagi. Od teraz treść jest w JEDNYM miejscu, a skille ją WOŁAJĄ.
@@ -53,7 +53,7 @@ odpowiedzi**, nie brak narzędzi w sesji. Nie wolno uzasadniać pominięcia tego
 1. **Zmiana brzmienia listy idzie WYŁĄCZNIE tutaj.** Skille wołają ten plik i
    nie trzymają własnych kopii — po to powstał. Dopisanie kopii do skilla
    odtwarza problem, który ten moduł rozwiązuje.
-2. **Zmiana tutaj wymaga sprawdzenia spójności z `PRAWO-HARDGATE.md`** (AF-1…AF-6).
+2. **Zmiana tutaj wymaga sprawdzenia spójności z `JUR:weryfikacja-przepisow-kanon`** (AF-1…AF-6).
    Lista jest wykonawczym skrótem tamtych reguł — rozjazd między nimi znaczy,
    że jedno z dwóch miejsc zostało zaktualizowane, a drugie nie.
 3. **Rejestr wołających** (stan 2026-08-23i) — aktualizuj przy każdym nowym

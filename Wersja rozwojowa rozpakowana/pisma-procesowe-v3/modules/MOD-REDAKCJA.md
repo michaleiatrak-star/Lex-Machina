@@ -191,7 +191,7 @@ KROK 3 — Wczytaj moduły wsparcia:
          view shared/MOD-WALIDACJA_v2.md   (sekcja BLOK C)
          Jeśli pismo procesowe i użytkownik prosi o sprawdzenie formalne
          (zob. R.6) → dodatkowo:
-         view shared/FORMAL-CHECK.md
+         view JUR:wymogi-formalne-pism
 
 KROK 4 — Wygeneruj poprawioną wersję, zachowując:
          - wszystkie żądania/wnioski (petitum) w niezmienionej kolejności

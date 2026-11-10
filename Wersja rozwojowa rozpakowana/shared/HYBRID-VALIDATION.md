@@ -78,7 +78,7 @@ Na podstawie typu pisma — czy użytkownik nie pominął:
 □ Czy żądanie jest precyzyjne i wykonalne przez sąd/organ?
 □ Czy termin do złożenia pisma nie jest zagrożony?
 □ Czy podstawa prawna po weryfikacji online nadal pasuje?
-□ Czy zapis każdego powołania aktu jest zgodny z shared/FORMAT-CYTOWANIA.md (F1–F9)?
+□ Czy zapis każdego powołania aktu jest zgodny z JUR:format-cytowania (F1–F9)?
   Narzędzie, gdy dostępne: walidator_cytowan.py --document PLIK --format (kod 3 = popraw przed .docx)
 ```
 

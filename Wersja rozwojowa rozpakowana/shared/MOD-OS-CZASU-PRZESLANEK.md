@@ -7,7 +7,7 @@
 > **Moduł siostrzany:** `shared/MOD-WYJATEK-GATE.md` (WYJ-GATE) — wyjątki
 > i przepisy szczególne. Ten moduł odpowiada na pytanie KIEDY i KTÓRY REŻIM;
 > tamten na pytanie CO TĘ REGUŁĘ WYŁĄCZA. Nie duplikuj między nimi tablic.
-> **Nie jest** bramką weryfikacyjną — nie zastępuje `shared/PRAWO-HARDGATE.md`.
+> **Nie jest** bramką weryfikacyjną — nie zastępuje `JUR:weryfikacja-przepisow-kanon`.
 > Nie rozstrzyga sprawy; produkuje pytania, na które rozstrzygnięcie musi
 > odpowiedzieć.
 
@@ -134,7 +134,7 @@ Czy w tym oknie mógł zmienić się:
   (d) stan prawny — reżim, właściwa ustawa, brzmienie przepisu?
 Jeżeli TAK → nazwij instytucję i przenieś ją do OŚ-4.
 Jeżeli NIE → zapisz „sprawdzono — brak" (milczenie NIE jest odpowiedzią
-negatywną, dokładnie jak w KROK 2C shared/PRAWO-HARDGATE.md).
+negatywną, dokładnie jak w KROK 2C JUR:weryfikacja-przepisow-kanon).
 ```
 
 ⛔ Pytanie (d) uruchamia dodatkowo **kontrolę reżimu** — patrz §5.
@@ -177,8 +177,8 @@ rozstrzygnięciu dopisz pozycję do tablicy zgodnie z §6.
 > ⛔ **TA TABLICA NIE JEST ŹRÓDŁEM PRAWA.** Kolumna „chwila oceny" jest
 > wskazówką, GDZIE patrzeć, nie ustaleniem, CO tam stoi. Każda pozycja
 > użyta w odpowiedzi lub piśmie przechodzi normalny HARD GATE
-> (`shared/PRAWO-HARDGATE.md`) — świeży odczyt przepisu i, gdy w grę
-> wchodzi sygnatura, `shared/PRAWO-HARDGATE-ORZECZENIA.md`.
+> (`JUR:weryfikacja-przepisow-kanon`) — świeży odczyt przepisu i, gdy w grę
+> wchodzi sygnatura, `JUR:weryfikacja-orzeczen-kanon`.
 > Kolumna „źródło ustalenia" mówi, skąd wiadomo — nie zwalnia z weryfikacji.
 
 | # | Instytucja | Przesłanka | Chwila oceny | Źródło ustalenia |
@@ -296,7 +296,7 @@ DOPISZ WIERSZ, gdy zachodzi którykolwiek warunek:
 
 FORMAT WPISU — obowiązkowe pola:
   instytucja · przesłanka · chwila oceny · źródło ustalenia (z datą odczytu
-  i statusem wg shared/PRAWO-HARDGATE.md) · numer kazusu/sesji
+  i statusem wg JUR:weryfikacja-przepisow-kanon) · numer kazusu/sesji
 
 ⛔ ZAKAZ dopisywania pozycji „na zapas", z pamięci modelu albo z
    systematycznego przeglądu kodeksu bez odczytu źródła. Wiersz bez pola
@@ -310,7 +310,7 @@ FORMAT WPISU — obowiązkowe pola:
 ## 7. BLOK WYJŚCIOWY — WIDOCZNY W ODPOWIEDZI
 
 > ⛔ Krok niewidoczny w dostarczonym tekście jest krokiem, który można
-> pominąć bez śladu. Ta sama zasada, którą `shared/PRAWO-HARDGATE.md`
+> pominąć bez śladu. Ta sama zasada, którą `JUR:weryfikacja-przepisow-kanon`
 > stosuje do znaczników weryfikacji.
 
 Blok umieszcza się **przed** konkluzją prawną, nie po niej:

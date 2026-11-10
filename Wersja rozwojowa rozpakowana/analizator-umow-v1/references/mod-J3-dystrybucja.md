@@ -54,7 +54,7 @@ REKOMENDACJA:
 
 **FR-3 — Zakaz konkurencji bez odszkodowania po zakończeniu (CRITICAL)**
 ```
-→ Patrz Moduł I (references/zakaz-konkurencji.md) — sekcja I.3 ZK-1 do ZK-11
+→ Patrz Moduł I (JUR:umowy-zakaz-konkurencji) — sekcja I.3 ZK-1 do ZK-11
   W umowach franczyzowych zakaz jest szczególnie dotkliwy:
   → Franczyzobiorca inwestuje kapitał w markę, której potem nie może używać
   → Zakaz może uniemożliwić wykorzystanie nabytego doświadczenia branżowego
@@ -134,4 +134,4 @@ PUŁAPKA: "Agent odpowiada za wypłacalność klientów pozyskanych przez agenta
 ---
 
 ---
-*← Powrót do routingu: `view references/mod-J0-routing.md`*
+*← Powrót do routingu: `view JUR:umowy-j0-routing`*
