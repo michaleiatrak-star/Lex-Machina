@@ -95,6 +95,8 @@ MUTACJE = [
      lambda R: (R / "prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP10-koszty.md").unlink()),
     ("T50", "check_jurysdykcja.py", lambda R: [R], "dostawca jurysdykcji bez katalogu konektorów",
      lambda R: _sub(R / "prawo-polskie-v2/JURYSDYKCJA.md", "| `konektory` | `prawo-polskie-v2/mcp-servers` |", "| `konektory-usuniete` | `x` |")),
+    ("T51", "check_gauntlet_akceptacja.py", lambda R: ["--repo-root", R], "reguła izolacji recenzenta usunięta z MOD-PEER-REVIEW",
+     lambda R: _sub(R / "shared/MOD-PEER-REVIEW.md", "nigdy pytanie w starej sesji", "pytanie w tej samej sesji")),
     ("T29", "check_oplaty_mapa.py", lambda R: ["--katalog", R], "brak satelity TABELE-OPLAT",
      lambda R: (R / "prawo-polskie-v2/krajowe/shared/oplaty/05-sprawy-karne.md").unlink()),
     ("T34", "check_archiwa_repo.py", lambda R: ["--repo-root", R], "drzewo różne od paczki ZIP",
