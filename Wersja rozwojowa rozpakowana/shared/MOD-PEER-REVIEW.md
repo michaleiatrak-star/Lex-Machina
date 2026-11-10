@@ -1,6 +1,6 @@
 # MOD-PEER-REVIEW — weryfikacja krzyżowa pisma przed złożeniem
 
-> Wersja: 1.0.0 | Typ: moduł jakości | shared/
+> Wersja: 1.1.0 | Typ: moduł jakości | shared/
 > Wywoływany z: pisma-procesowe-v3 (W3, krok W3.7 — po HYBRID-VALIDATION)
 > Opcjonalny: TAK — aktywuj gdy pismo ma status GOTOWE DO ZŁOŻENIA i dotyczy
 >             sprawy o wartości powyżej progu istotności lub wysokiego ryzyka
@@ -18,12 +18,19 @@ Moduł symuluje "drugiego adwokata" — niezależny przegląd pisma z perspektyw
 - sędziego (co wzbudzi wątpliwości sądu?),
 - klienta (czy pismo realizuje jego interes, nie tylko formalne żądania?).
 
-**W Claude Code** przegląd wykonuje subagent `shared:recenzent-niezalezny` (`shared/agents/recenzent-niezalezny.md`)
-we własnym kontekście: dostaje tylko plik pisma i akta, nie zna zamiaru autora (zgł. #110). To jedyny tryb, w którym
-przegląd jest rzeczywiście niezależny od autora.
-**Gdzie indziej** (claude.ai, API, Codex, aplikacja) silnik jest single-agent: peer review realizowany jest przez
-wywołanie `analiza-sadowa-v6` w trybie weryfikacji krzyżowej na gotowym piśmie z W3, w tym samym kontekście co autor.
-Wynik oznacz wtedy jako przegląd własny (nie niezależny).
+Niezależność to izolacja techniczna, nie polecenie „bądź bezstronny” (LEGAL GAUNTLET v3, II.4): nowy kontekst,
+brak historii autora, na wejściu tylko pismo (bez CZĘŚCI ROBOCZEJ), akta i sprawdzone przepisy. Trzy tryby:
+
+| Środowisko | Jak | Izolacja |
+|---|---|---|
+| Claude Code | subagent `shared:recenzent-niezalezny` (`shared/agents/recenzent-niezalezny.md`), tylko plik pisma i akta (zgł. #110) | BLIND |
+| Aplikacja Lex Machina (modele w chmurze, sprawa z aktami) | narzędzie `independent_review`: osobne wywołanie modelu bez historii; akta czyta aplikacja (każdy dokument, także materiał przeciwnika); test znacznika autora | BLIND albo NON_BLIND (wynik narzędzia) |
+| Pozostałe (claude.ai, API, Codex, model lokalny) | `analiza-sadowa-v6` w trybie weryfikacji krzyżowej w tym samym kontekście co autor | NON_BLIND |
+
+**NON_BLIND** = wewnętrzny red team, nie niezależna ocena. Napisz to w raporcie wprost; nie przedstawiaj wyniku jako
+opinii niezależnego recenzenta. Do recenzenta nie przekazuj: własnych ocen, listy mocnych tez, wyników wcześniejszego
+przeglądu ani oczekiwanego werdyktu. Druga runda = nowe wywołanie (nowy subagent / nowe `independent_review`),
+nigdy pytanie w starej sesji; najwyżej 2 rundy i tylko po materialnej zmianie pisma.
 
 ---
 
@@ -117,6 +124,7 @@ RAPORT MOD-PEER-REVIEW
 ═══════════════════════════════════════════════════════════
 Pismo:      [typ] | Sprawa: [sygn./opis] | Data: [data]
 Weryfikacja: pisma-procesowe-v3 W3.7
+Izolacja:   [BLIND — tryb: subagent / independent_review | NON_BLIND — powód]
 ═══════════════════════════════════════════════════════════
 
 ROLA 1 — Adwokat diabła:
@@ -160,6 +168,10 @@ W3.7 MOD-PEER-REVIEW (gdy warunek aktywacji spełniony)
   → Wyświetl RAPORT MOD-PEER-REVIEW
   → Wynik PEER-OK lub PEER-UWAGI → generuj .docx
   → Wynik PEER-STOP → powróć do W2 z listą korekt
+  → Po każdej korekcie materialnej (fakt, kwota, data, żądanie, podstawa prawna):
+    kontrola regresji (nowy fakt? inny ciężar dowodu? sprzeczność z wcześniejszym pismem? termin?),
+    ponowne W3.5 HYBRID-VALIDATION i nowa runda W3.7 w nowym kontekście.
+    Korekta czysto redakcyjna (literówka) — bez nowej rundy.
   ↓
-W3.8 (po PEER-OK) → .docx → present_files
+W3.8 (po PEER-OK / PEER-UWAGI) → .docx → present_files
 ```

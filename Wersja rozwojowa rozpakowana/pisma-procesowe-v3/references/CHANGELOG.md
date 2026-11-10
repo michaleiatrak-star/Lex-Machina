@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.51 (2026-11-10, LEGAL GAUNTLET v3 E1): W3.7: recenzja niezależna w aplikacji narzędziem independent_review (sam tekst pisma, akta dobiera aplikacja), izolacja BLIND/NON_BLIND w raporcie; tryb single-agent oznaczany jako przegląd własny; powtórna ocena w nowym kontekście, najwyżej 2 rundy, po zmianie materialnej ponowne W3.5.
 - 5.50 (2026-11-06): migracja prawa polskiego E3: moduły prawa krajowego tego skilla i shared przeniesione do prawo-polskie-v2/krajowe/; odwołania jako klucze `JUR:` (manifest jurysdykcji prawo-polskie-v2/JURYSDYKCJA.md)
 - 5.49 (2026-11-03): SELF-CHECK-PISMA: SD-GATE-0 zgodnie z CP-GATE §3B (SD-GATE-0-INFO + REJESTR BRAK-DOK), bez STOP; lista kontrolna przeczyla AUTOMAT-STANOW 5.48.
 - 5.48 (2026-11-03, BRAK-DOK + PIPELINE-SZYBKI): brak dokumentu (nie wgrany, „uzupełnię później”, pozycja rejestru aplikacji bez treści) = adnotacja i REJESTR BRAK-DOK w raporcie i w pliku DRAFT, jedno pytanie, bez blokady FSL-D/SD-VER/.docx (`shared/CP-GATE.md` §3B). Pipeline: CP informacyjne wykonywane w jednej odpowiedzi, STOP tylko na CP decyzyjnych (CP-1a z T_BRAK, CP-1b, FSL-D luka krytyczna bez decyzji, CP-PD, ATAK-KRYTYCZNY, INFORMACJA WARUNKOWA) — §3C; „kontynuuj” w toku = zatwierdzenie bieżącego CP, zamknięty CP nie jest raportowany ponownie. AUTOMAT-STANOW, SKILL.md (FSL-D, ST-FINAL).
