@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.83 (2026-11-11, ELI 2026-11-11): ROUTING-MAP: ustawa o PSP — t.j. Dz.U. 2026 poz. 1473 (sync z dr-13 3.22).
 - 6.82 (2026-11-09): konwencje przewozowe i CMR przy prawie polskim — ROUTING-MAP: Prawo przewozowe (t.j. 2024/1262) z KC art. 774–793, CMR (1962/238) z Protokołem 1978 (2011/382) i e-CMR (2019/1487), Konwencja montrealska (2007/235) i system warszawski (1933/49, 1963/189, 1965/167), COTIF (1985/158) z Protokołem wileńskim (2007/674), Konwencja o konosamentach (1937/258) z Protokołami (1980/48, 1985/26) → DR-09 mod-umowa-przewozu-CMR-konwencje-przewozowe; słowa kluczowe DR-09 (CMR, e-CMR, konwencja montrealska, zagubiony bagaż, COTIF, CIM, konosament); metryki z ELI 2026-11-09
 - 6.81 (2026-11-08): Rozdział metody i parametrów PL: TEMPORAL-LAW-CHECK, LEGAL-LIFECYCLE-MANAGEMENT, POLISH-LAW-MAX-COVERAGE-STANDARD, LEGAL-QUALITY-GATE, CROSS-DOMAIN-CONFLICT-ROUTER w pojęciach ELI; parametry krajowe kluczami JUR:stan-prawny, JUR:ryzyko-dezaktualizacji, JUR:konflikt-dziedzin
 - 6.80 (2026-11-07): pole prefiks-dziedzin w bloku DOSTAWCA JURYSDYKCJI (dr dla PL; inne kraje: kod kraju); T50 wymaga pola

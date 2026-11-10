@@ -1,12 +1,12 @@
-8f7334e34b800e1ffef3f60159167e1b881cdb61545a37e7324f7daaea99f6e1  ./MAPA-AKTOW.md
+aba21498ee105e85b915012bd69c2ac272362d5088fae72a494c8cf1cfb723b4  ./MAPA-AKTOW.md
 07c444b5efb2f5bee7a497f769232642eaeadcfdb93937be6d697f95121d00e4  ./MAPA-POKRYCIA.md
 9cccae89f1335a356a3968945c139ce433612ef313651baf2636ce3e57732531  ./PORTABILITY-MANIFEST.md
-22da51d17a36b1516745a9b8b68e1050801a8aea90413049bb81b85ad74335cd  ./SKILL.md
+55b54ddc8563f56443b7f2022d65a96695b835eb6a42918d002b24916548d8f3  ./SKILL.md
 d0fac2eae45c9f05968b785676ea2fd86fecc6beef64e367327343bdb0f4301c  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 39eebb49fb36b2596ad527264516fbd47391760dd51e34c18a2e1e33eeec0603  ./modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md
 fc9826e4ec148bcf8bbe1bf51e5f4cab92b142d42ed3546a47804e4b795d2a48  ./modules/mod-ustawa-ABW-AW-CBA-sluzby-specjalne.md
-c4bde2d0d6186571f916da103eb82964b77561aa6e57136e3aed88812da7a8da  ./modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md
+7bbf00c4f8ff959d4c93a406aef87c41428470521e8de2f9f79c7fb509faae26  ./modules/mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa.md
 64acf8296c63c79ed54ea3e4b45492d41a8e2eec5b849db142c3573f9fc86ffa  ./modules/mod-ustawa-SKW-SWW.md
 3f25510d84298f1d948c0d028beb270d7e7b917b33b25c007bb5ba87bca43e34  ./modules/mod-ustawa-informacje-niejawne.md
 8033e14ff753577eab55dfbc1b4525f9071506064e875a91307951ff09bbfdd8  ./modules/mod-ustawa-obrona-ojczyzny-mobilizacja.md
@@ -16,5 +16,5 @@ eb210cbd5d2b7af06b0a3b91b988bcce1d2843d4e4ba5150f8e9d8b35ffe9827  ./modules/mod-
 34f08c190f752ab3c873c990399ce6bcf4ee3f937cf26dbdd5fa5630aeb6c21d  ./modules/mod-ustawa-szczegolne-srodki-zabezpieczajace.md
 e54b40a65f6ebcc1597e12cbbf0703cf705b0ef0da72a88bcaa4dc3b243aa3f7  ./modules/mod-ustawa-zandarmeria-wojskowa.md
 dfa669974030588a6527ed4dd73c4a79d3250a13b23322fdc6abdea695665764  ./modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna.md
-e99d21e4693a4c017feccb64d3e907c76a809bf7548e5cfa7b55029e70bbe5e6  ./references/CHANGELOG.md
+314b5772ab38e342efd93fb1a33b33178c693ce3e71df0a578efe36be52bad0f  ./references/CHANGELOG.md
 16b107867e63968318ef1c3db2b7593e5c96f63f824b8d3eb6c78775759d34b3  ./references/HISTORIA-ZMIAN-PLIKOW.md

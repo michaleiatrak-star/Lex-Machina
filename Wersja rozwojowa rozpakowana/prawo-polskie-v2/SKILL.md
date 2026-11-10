@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.82"
+version: "6.83"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.82 (2026-11-09): ROUTING-MAP i słowa kluczowe DR-09: umowa przewozu, Prawo przewozowe, CMR z protokołami, Konwencja montrealska i system warszawski, COTIF/CIM, konosamenty → mod-umowa-przewozu-CMR-konwencje-przewozowe
+  Wersja bieżąca: 6.83 (2026-11-11): ROUTING-MAP: ustawa o PSP — t.j. Dz.U. 2026 poz. 1473 (sync z dr-13 3.22).
+  6.82 (2026-11-09): ROUTING-MAP i słowa kluczowe DR-09: umowa przewozu, Prawo przewozowe, CMR z protokołami, Konwencja montrealska i system warszawski, COTIF/CIM, konosamenty → mod-umowa-przewozu-CMR-konwencje-przewozowe
   6.81 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362
   6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
@@ -22,7 +23,6 @@ changelog: |
   6.59 (2026-10-11b): ROUTING-MAP — sekcja aktów powołanych w skillach wykonawczych i shared (monitoring t.j.), zmiany po t.j. u.k.s.c., adwokatury i radców z ELI.
   6.58 (2026-10-11a): routing błyskawiczny DR-02 + „umowa najmu na czas określony/nieokreślony” — najem na czas określony nie trafia do DR-04 przez frazę „umowa na czas określony”; „uchwała wspólników”, „zgromadzenie wspólników”, „walne zgromadzenie”, „uchwała zarządu” w DR-02 (nie DR-08).
   Poprzednia: 6.57 (2026-10-10a): routing błyskawiczny — egzekucja komornicza, zajęcie rachunku i wynagrodzenia, kwota wolna od zajęcia do DR-02 (KPC, mod-KPC-egzekucja-windykacja), „komornik” do DR-12 (mod-ustawa-komornicy-sadowi-zawod); wcześniej DR-03 (prawo karne, bez treści o egzekucji cywilnej).
-  Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

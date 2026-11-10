@@ -3,7 +3,7 @@
 Status: moduł prawa polskiego klasy wzorcowej (poziom A wg `prawo-polskie-v2/krajowe/shared/POLISH-LAW-COMPLETENESS-MATRIX.md`). Stan metodyczny: 2026-07-07 — naprawa WARN-29 (audyt kompletności DR-13 z 2026-07-06, sesja dedykowana). Źródła prawa muszą być każdorazowo weryfikowane w ISAP / Dzienniku Ustaw; LEX/Legalis/portale branżowe dopuszczalne wyłącznie pomocniczo.
 
 ## 1. Akty i źródła do weryfikacji
-- Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2025 poz. 1312 t.j. (obwieszczenie Marszałka Sejmu 15.09.2025; VER: isap.sejm.gov.pl WDU20250001312)
+- Ustawa z dnia 24 sierpnia 1991 r. o Państwowej Straży Pożarnej — Dz.U. 2026 poz. 1473 t.j. (obwieszczenie Marszałka Sejmu 2.10.2026, stan prawny na 23.09.2026; VER: ELI DU/2026/1473, 2026-11-11). Uwzględnia zmiany: Dz.U. 2025 poz. 1366, 2026 poz. 252, 646, 821, 1123. Poza t.j. (pkt 2 obwieszczenia): przepisy przejściowe i końcowe tych ustaw (m.in. art. 12, 13, 15, 18, 23 ustawy 2025/1366 — dotychczasowe lokale i kwatery). ⏳ Zmiana z 2026 poz. 1123 (art. 5: art. 105b ust. 2 pkt 5 lit. a, art. 105e ust. 8) od 1.01.2028.
 - Ustawa z dnia 24 sierpnia 1991 r. o ochronie przeciwpożarowej — Dz.U. 2025 poz. 188 t.j. (obwieszczenie Marszałka Sejmu 5.02.2025; VER: isap.sejm.gov.pl WDU20250000188); ⏳ Po t.j.: Dz.U. 2026 poz. 815 (od 4.07.2026 — art. 5: nowe brzmienie art. 14fa ust. 3)
 - Ustawa z dnia 17 grudnia 2021 r. o ochotniczych strażach pożarnych (OSP) — Dz.U. 2025 poz. 244 t.j. (obwieszczenie Marszałka Sejmu 21.02.2025, akt pierwotny Dz.U. 2021 poz. 2490; VER: isap.sejm.gov.pl WDU20250000244)
 
@@ -16,13 +16,13 @@ Nie cytuj literalnego brzmienia przepisu bez aktualnego sprawdzenia źródła. P
 - przepisy przejściowe,
 - właściwy organ i tryb zaskarżenia.
 
-Dz.U. 2025 poz. 1366 (zakwaterowanie funkcjonariuszy Policji/SG/PSP/ABW/AW/SKW/SWW/SOP) zmienia równolegle ustawę o PSP — weryfikuj w ELI (RZĄD 1) przed cytowaniem przepisów o zakwaterowaniu.
+Zakwaterowanie strażaków (rozdz. 8 „Zakwaterowanie strażaków Państwowej Straży Pożarnej”, art. 74–82a) w brzmieniu nadanym ustawą Dz.U. 2025 poz. 1366 (art. 4, z mocą od 1.07.2025): prawo do zakwaterowania od przyjęcia do służby do zwolnienia, w formach z art. 74 ust. 2 (przydział lokalu mieszkalnego, przydział kwatery tymczasowej, miejsce w internacie albo kwatera internatowa, świadczenie mieszkaniowe); dodane art. 74a–74c, 80a–80c, 81a, 82a; uchylone art. 77–81 i 83–84. Strażak, który otrzymał lokal albo kwaterę przed tą ustawą: przepisy przejściowe ustawy 2025/1366 (art. 12 i n.), nie t.j. — czytaj je w ELI DU/2025/1366. Inne zmiany w t.j. 2026/1473: art. 93 ust. 1 pkt 8 i art. 97g — świadczenie teleinformatyczne (Dz.U. 2026 poz. 252, od 3.04.2026); art. 37r ust. 3 i art. 37u ust. 1 (Dz.U. 2026 poz. 646, od 1.06.2026); art. 106 ust. 1a–1f — umowa i zwrot kosztów nauki strażaka (Dz.U. 2026 poz. 821, od 23.06.2026).
 
 ## 2. Zakres spraw
 - status prawny i zadania PSP (formacja zawodowa, umundurowana) vs OSP (stowarzyszenie w rozumieniu Prawa o stowarzyszeniach, Dz.U. 2020 poz. 2261)
 - krajowy system ratowniczo-gaśniczy (KSRG) — organizacja, dysponowanie siłami
 - obowiązki właściciela/zarządcy/użytkownika budynku, obiektu, terenu w zakresie ochrony przeciwpożarowej (art. 3-4 ustawy o ochronie przeciwpożarowej)
-- służba w PSP: nabór, korpusy i stopnie, prawa i obowiązki strażaków, uposażenie, mieszkania służbowe
+- służba w PSP: nabór, korpusy i stopnie, prawa i obowiązki strażaków, uposażenie, zakwaterowanie (rozdz. 8, art. 74–82a po zm. 2025/1366), zwrot kosztów nauki (art. 106 ust. 1a–1f)
 - odpowiedzialność dyscyplinarna strażaków PSP (rozdz. 11 ustawy o PSP, art. 115-124n)
 - świadczenia dla strażaków ratowników OSP (rozdz. 3 ustawy o OSP, art. 12-31) — ekwiwalent, świadczenie ratownicze, odszkodowania/renty za wypadki
 - finansowanie PSP (rozdz. 2a ustawy o PSP) i OSP (rozdz. 4 ustawy o OSP)
@@ -153,9 +153,11 @@ Przed odpowiedzią lub pismem zastosuj:
 ## KLUCZOWE AKTY — ZWERYFIKOWANE 2026-07-07 (naprawa WARN-29)
 
 ```
-Ustawa o Państwowej Straży Pożarnej: Dz.U. 2025 poz. 1312 t.j. (ustawa z 24.08.1991,
-  obwieszczenie 15.09.2025, weszła w życie 30.09.2025) — weryfikuj dalsze zm. w ELI (RZĄD 1)
-  VER: isap.sejm.gov.pl WDU20250001312
+Ustawa o Państwowej Straży Pożarnej: Dz.U. 2026 poz. 1473 t.j. (ustawa z 24.08.1991,
+  obwieszczenie 2.10.2026, stan prawny na 23.09.2026) — weryfikuj dalsze zm. w ELI (RZĄD 1)
+  VER: ELI DU/2026/1473 (2026-11-11; porównanie z t.j. 2025/1312 artykuł po artykule:
+  rozdz. 11 dyscyplinarny art. 115–124n bez zmian treści; zmiany: rozdz. 8 zakwaterowanie,
+  art. 37r, 37u, 67 ust. 2, 93 ust. 1 pkt 8, 97g, 105b, 105e (⏳ 1.01.2028), 106 ust. 1a–1f)
   Organy: Komendant Główny PSP -> komendant wojewódzki -> komendant powiatowy (miejski)
   Rozdz. 11 (art. 115-124n) — odpowiedzialność dyscyplinarna strażaków:
     -> przedawnienie: 1 rok od czynu / 2 lata od wszczęcia postępowania (art. 119)
@@ -221,7 +223,7 @@ Powiązane akty do weryfikacji przy konkretnej sprawie (NIE w tym module — oso
      oraz zakresu działania ujętego w planach zarządzania kryzysowego, o których mowa w art. 3 pkt 16
      ustawy z dnia 26 kwietnia 2007 r. o zarządzaniu kryzysowym, i planach ciągłości działania")) — OSP jako
      podmioty ochrony ludności (patrz mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna)
-  -> Ustawa o zakwaterowaniu funkcjonariuszy (Dz.U. 2025 poz. 1366) — zmienia równolegle PSP
+  -> Ustawa o zakwaterowaniu funkcjonariuszy (Dz.U. 2025 poz. 1366) — zmiany PSP w t.j. 2026/1473; przepisy przejściowe (art. 12 i n.) poza t.j.
   -> Kodeks wykroczeń art. 82 i n. (wykroczenia przeciwpożarowe) — DR-03
   -> Prawo budowlane — sankcje techniczno-budowlane — DR-09
   -> Ustawa z 2014 r. o świadczeniach odszkodowawczych w razie wypadku/choroby związanej

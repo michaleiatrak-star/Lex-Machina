@@ -1,6 +1,6 @@
 ---
 name: dr-13-sluzby-bezpieczenstwo-informacje-niejawne
-version: "3.21"
+version: "3.22"
 description: "Służby, bezpieczeństwo i informacje niejawne: Policja, ABW/AW i inne służby, obrona, ochrona informacji niejawnych oraz publicznoprawne ramy bezpieczeństwa."
 dependencies:
   requires:
@@ -171,7 +171,7 @@ BROŃ CYWILNA — POZWOLENIA:
 
 OCHRONA PRZECIWPOŻAROWA:
   [✓] OK    mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa
-              (PSP — Dz.U. 2025 poz. 1312 t.j.; ochrona przeciwpożarowa —
+              (PSP — Dz.U. 2026 poz. 1473 t.j. (ELI 2026-11-11; rozdz. 8 zakwaterowanie po zm. 2025/1366); ochrona przeciwpożarowa —
                Dz.U. 2025 poz. 188 t.j. ze zm. Dz.U. 2026 poz. 815 (od 4.07.2026);
                OSP — Dz.U. 2025 poz. 244 t.j.;
                WARN-29 zamknięty 2026-07-07 — trzy akty, jeden moduł domenowy;
