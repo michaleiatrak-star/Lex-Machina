@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.51"
+version: "5.52"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -419,6 +419,10 @@ TRYB:           [uproszczony / zwykły / nakazowy / KPA / PPSA]
 OPŁATA:         orientacyjna [kwota ⚠️ — weryfikacja w W3]
 TERMIN ZAWITY:  [data lub "brak" — weryfikacja w W3]
 ```
+
+> ⛔ Dopuszczalność przed meritum: view shared/MOD-DOPUSZCZALNOSC-GATE.md (D1–D8: środek,
+> zaskarżalność, tryb, legitymacja, właściwość, termin — przy nieznanej dacie doręczenia scenariusze,
+> zakres i prawomocność, forma). FATAL = status DRAFT/BLOCKED z przyczyną, stop przed W1.2.
 
 ### W1.2 — Teza centralna
 

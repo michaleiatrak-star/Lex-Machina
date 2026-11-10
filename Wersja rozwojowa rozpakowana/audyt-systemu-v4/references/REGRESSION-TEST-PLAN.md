@@ -1427,5 +1427,5 @@ z nazwą wiersza i modułu. Pilot E2: `analizator-dowodow-v3/modules/MD5-terminy
 | T51 | każdy test akceptacyjny T01–T38 (cz. VII specyfikacji) ma w skillach regułę (plik + wzorzec) albo jawną LUKĘ z etapem E3–E7; reguła oznaczona jako pokryta nie może zniknąć | KRYTYCZNY (BLOKER) | `python3 scripts/check_gauntlet_akceptacja.py --repo-root <katalog skilli>` (`--selftest`: mutacja) |
 
 Zachowania modelu nie da się sprawdzić offline; test pilnuje kontraktu i pokazuje listę luk w każdym przebiegu.
-Stan 2026-11-10: pokryte 14, częściowo 7, luka 17. Izolację recenzenta (T16/T17) w aplikacji sprawdza
+Stan 2026-11-10 po E3: pokryte 22, częściowo 6, luka 10. Izolację recenzenta (T16/T17) w aplikacji sprawdza
 lex-runtime `independent-review.test.ts`. Mutacja w T49: usunięta reguła „nigdy pytanie w starej sesji”.

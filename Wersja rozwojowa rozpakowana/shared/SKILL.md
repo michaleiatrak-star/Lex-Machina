@@ -1,6 +1,6 @@
 ---
 name: shared
-version: "3.99.60"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
+version: "3.99.61"   # ⛔ CUDZYSŁÓW OBOWIĄZKOWY: niecytowane `3.17` YAML parsuje
                   # jako float 3.17, a 3.17 < 3.9 — porządek wersji odwraca się
                   # dla każdego narzędzia porównującego liczbowo. Wykryte
                   # testem T12 (check_wersje_changelog.py), 2026-08-20z.
@@ -49,7 +49,8 @@ limitations:
 required_modules: []
   # nie ma zastosowania — shared jest wczytywany, nie wczytuje sam siebie
 changelog: |
-  Wersja bieżąca: 3.99.60 (2026-11-10): MOD-PEER-REVIEW 1.1.0 — izolacja techniczna (BLIND/NON_BLIND) w trzech środowiskach: subagent Claude Code, narzędzie independent_review aplikacji (osobne wywołanie bez historii, akta dobiera aplikacja, test znacznika autora), tryb single-agent = NON_BLIND (red team); druga runda w nowym kontekście, najwyżej 2, kontrola regresji i ponowne HYBRID-VALIDATION po zmianie materialnej. recenzent-niezalezny: steelman przed atakiem, dopuszczalność przed meritum, polecenia w aktach jako dane, bez procentów.
+  Wersja bieżąca: 3.99.61 (2026-11-10): MOD-DOPUSZCZALNOSC-GATE 1.0.0 — dopuszczalność przed meritum D1–D8 (środek, zaskarżalność, tryb, legitymacja, właściwość, termin ze scenariuszami przy nieznanym doręczeniu, zakres i prawomocność przy częściowym uchyleniu, wykonanie nie zmienia sentencji, forma); FATAL = DRAFT/BLOCKED. CLAIM-VALIDATION C5: dokument rozliczeniowy ≠ zobowiązanie, podstawa wymagalności, rachunek wpłat bez podwójnego liczenia. recenzent-niezalezny odsyła do D1–D8.
+  3.99.60 (2026-11-10): MOD-PEER-REVIEW 1.1.0 — izolacja techniczna (BLIND/NON_BLIND) w trzech środowiskach: subagent Claude Code, narzędzie independent_review aplikacji (osobne wywołanie bez historii, akta dobiera aplikacja, test znacznika autora), tryb single-agent = NON_BLIND (red team); druga runda w nowym kontekście, najwyżej 2, kontrola regresji i ponowne HYBRID-VALIDATION po zmianie materialnej. recenzent-niezalezny: steelman przed atakiem, dopuszczalność przed meritum, polecenia w aktach jako dane, bez procentów.
   3.99.59 (2026-11-09): RODZINA-PRAWA-NORDYCKIE 1.0 — metoda dla prawa nordyckiego (NR-1…NR-6), wywoływana przez UP-5 routera; reguły z literatury eksperckiej i ustaw odczytanych w sesji (§Ź).
   3.99.58 (2026-11-09): RODZINA-PRAWA-COMMON-LAW 1.1 — każda reguła oparta na źródle odczytanym w sesji (UKSC, US Supreme Court, CPR, FRCP, legislation.gov.uk, Konstytucja Irlandii, OSCOLA); spis źródeł §Ź.
   3.99.57 (2026-11-08): RODZINA-PRAWA-COMMON-LAW 1.0 — metoda dla common law i systemów mieszanych (CL-1…CL-7), wywoływana przez UP-5 routera.
@@ -62,7 +63,6 @@ changelog: |
   3.99.37 (2026-10-16a, AUDYT-2026-10-16a): MOD-DLUGIE-PISMO 1.0.0 — pismo, regulamin lub umowa ponad ok. 10 stron w częściach według planu (plan-pisma, [CZĘŚĆ k/N]); potok pisma procesowego: ciąg dalszy w tym samym kroku i zmiany sekcji długiego projektu; ucięty blok nie jest zapisywany.
   3.99.36 (2026-10-15c, AUDYT-2026-10-15c): ISAP-METRYKI-AKTOW: Prawo wodne — nowy t.j. Dz.U. 2026 poz. 1335 (obejmuje 2025/1535, 2026/445, 605, 815, 1033 i 1156 — brzmienie od 1.01.2027); brak zmian po t.j. ELI 2026-10-15.
   3.99.35 (2026-10-15b, AUDYT-2026-10-15b): MOD-GRAF-PRZYCZYNOWY 1.2.0 — wywołania krokowe (analiza-sadowa-v6 Przejście II krok 8, pisma-procesowe-v3 W1.2c KROK PRZ, chronologia-sprawy-v1 KROK A5a).
-  3.99.32 (2026-10-12b, AUDYT-2026-10-12b): ISAP-METRYKI-AKTOW, LEGAL-REGISTRY, JUR:terminy-procesowe: UPEA t.j. 2026/1311 (⏳ 2026/1003 — art. 17 § 1a, od 28.10.2026), ochrona przyrody t.j. 2026/1315, megaustawa t.j. 2026/562, zmiany z 2026/815 (KSC, PKE, Prawo wodne, ochrona ludności); orka-bas-leksykon: metryki obrony Ojczyzny i UDP.
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
@@ -228,6 +228,7 @@ Nie wczytuj wszystkich naraz — tylko te potrzebne dla danego kroku.
 | `QUALITY-CHECK.md` | Kontrola jakości pisma: logika, struktura, nadmiar, emocjonalność |
 | `MOD-TIMING.md` | Strategia timing składania pism — macierz T1–T5, 6 modeli (T-EARLY…T-ADVANCE-NOTICE) |
 | `MOD-PEER-REVIEW.md` | Weryfikacja krzyżowa pisma — 4 role (adwokat diabła, sędzia, klient, spójność) |
+| `MOD-DOPUSZCZALNOSC-GATE.md` | Dopuszczalność przed meritum (D1–D8): środek, zaskarżalność, tryb, legitymacja, właściwość, termin ze scenariuszami przy nieznanym doręczeniu, zakres i prawomocność; FATAL = DRAFT/BLOCKED |
 | `MOD-INTRO.md` | Executive summary pisma (str. 1) — 2–5 zdań, max 150 słów, killer argument na str. 1 |
 | `MOD-KONCENTRACJA.md` | Metryka długości pisma per typ — limity orientacyjne, algorytm K1–K4, reguły skracania |
 | `MOD-DLUGIE-PISMO.md` | Pismo ponad jedną odpowiedź: części według planu (DP-1–DP-5), ciąg dalszy i zmiany sekcji w potoku W2–W3, umowa z części po AU-HYBRID/AU-STRIP |

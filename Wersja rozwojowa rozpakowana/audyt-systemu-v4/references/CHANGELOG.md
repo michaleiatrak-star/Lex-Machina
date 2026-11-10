@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.255 (2026-11-10, LEGAL GAUNTLET v3 E3): T51: T07, T09–T14, T20, T25 pokryte regułami E3 (MOD-DOPUSZCZALNOSC-GATE, CLAIM-VALIDATION C5, W1.1); stan 22/6/10.
 - 6.254 (2026-11-10, LEGAL GAUNTLET v3 E2): T51 — kontrakt testów akceptacyjnych T01–T38 (scripts/check_gauntlet_akceptacja.py, bloker, mutacja w T49); stan: pokryte 14, częściowo 7, luka 17 z etapami E3–E7.
 - 6.253 (2026-11-09): mapa_dzu_2026-10-04 — uzupełnienie RZĄD 1 ELI: umowa przewozu i konwencje przewozowe (Prawo przewozowe t.j. 2024/1262; CMR 1962/238 z Protokołami 2011/382 i 2019/1487; Konwencja montrealska 2007/235; system warszawski 1933/49, 1963/189, 1965/167; COTIF 1985/158 z Protokołem 2007/674; Konwencja o konosamentach 1937/258 z Protokołami 1980/48, 1985/26) → DR-09
 - 6.252 (2026-11-07): pole prefiks-dziedzin w bloku DOSTAWCA JURYSDYKCJI (dr dla PL; inne kraje: kod kraju); T50 wymaga pola

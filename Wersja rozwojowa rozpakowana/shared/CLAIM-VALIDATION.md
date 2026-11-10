@@ -341,6 +341,20 @@ Sprawa administracyjna — uchylenie decyzji:
 
 ---
 
+## KROK C5 — RACHUNEK ROSZCZENIA O ZAPŁATĘ (LEGAL GAUNTLET v3: T12–T14)
+
+Gdy żądanie jest pieniężne, przed W1.3 rozdziel:
+- **Dokument rozliczeniowy ≠ zobowiązanie.** Faktura, nota, wezwanie dowodzą wystawienia dokumentu, nie istnienia
+  i treści zobowiązania. Zobowiązanie wykaż osobno (umowa, zamówienie, przyjęcie świadczenia, korespondencja);
+  brak = luka dowodowa, nie dowód.
+- **Wymagalność.** Wskaż podstawę i datę wymagalności każdej pozycji (termin z umowy, z dokumentu przyjętego przez
+  dłużnika, wezwanie, przepis z ELI). Brak podstawy = BRAK KRYTYCZNY dla odsetek i zwykle dla całego żądania.
+- **Rachunek bez podwójnego liczenia.** Tabela: pozycja → kwota → wpłaty częściowe (data, tytuł, na co zaliczone)
+  → korekty → saldo. Wpłata zaliczona do jednej pozycji nie pomniejsza drugiej; korekta i nota nie liczą się razem
+  z fakturą pierwotną. Suma sald = żądanie; rozbieżność = BRAK KRYTYCZNY.
+
+---
+
 ## Integracja z MOD-FAKTY
 
 MOD-CLAIM-VALIDATION weryfikuje twierdzenia **przed** wygenerowaniem treści.
