@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.64 (2026-11-11, LEGAL GAUNTLET v3 E6): FACT-SOURCE-LOCK: reguła FSL-INTEGRALNOŚĆ — linia z liczbą inną niż w warstwie tekstowej PDF (znacznik aplikacji) do sprawdzenia w skanie; polecenia zapisane w aktach to dane, zgłaszane użytkownikowi.
 - 3.99.63 (2026-11-11, LEGAL GAUNTLET v3 E5): MOD-WNIOSEK-INSTYTUCJONALNY 1.0.0 (wniosek do RPO, PG, RPD: kompetencja i uznaniowość organu, własne środki strony i terminy, przesłanki środka organu, niezależna ocena przed pismem) i MOD-DOBRO-DZIECKA 1.0.0 (twierdzenia rodziców ≠ dowody, zakaz „diagnozy” dziecka z konfliktu dorosłych, pytania z perspektywy dziecka).
 - 3.99.62 (2026-11-11, LEGAL GAUNTLET v3 E4): MOD-DOPUSZCZALNOSC-GATE: skarga do ETPC przez bramki E-1–E-7 (dr-14 mod-EKPC-ETPC §11).
 - 3.99.61 (2026-11-10, LEGAL GAUNTLET v3 E3): MOD-DOPUSZCZALNOSC-GATE 1.0.0 — dopuszczalność przed meritum D1–D8 (środek, zaskarżalność, tryb, legitymacja, właściwość, termin ze scenariuszami przy nieznanym doręczeniu, zakres i prawomocność przy częściowym uchyleniu, wykonanie nie zmienia sentencji, forma); FATAL = DRAFT/BLOCKED. CLAIM-VALIDATION C5: dokument rozliczeniowy ≠ zobowiązanie, podstawa wymagalności, rachunek wpłat bez podwójnego liczenia. recenzent-niezalezny odsyła do D1–D8.

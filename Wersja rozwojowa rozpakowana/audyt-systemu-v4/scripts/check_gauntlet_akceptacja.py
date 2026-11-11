@@ -20,7 +20,7 @@ KONTRAKT = [
     ("T03", "jednostka historyczna nieodtworzona: przepisy przejściowe", "CZĘŚCIOWO", "shared/TEMPORAL-LAW-CHECK.md", r"przepisy przejściowe", "E7 (status TRANSITIONAL_UNRESOLVED)"),
     ("T04", "nieistniejąca sygnatura: NOT_FOUND i usunięcie", "POKRYTE", "pisma-procesowe-v3/references/W3-WERYFIKACJA.md", r"NOT_FOUND[\s\S]{0,200}USUŃ", ""),
     ("T05", "orzeczenie o innej tezie: teza ze źródła", "POKRYTE", "shared/agents/weryfikator-orzeczen.md", r"teza ze źródła", ""),
-    ("T06", "skan a warstwa tekstowa", "LUKA", "", "", "E6"),
+    ("T06", "skan a warstwa tekstowa: liczba do sprawdzenia", "POKRYTE", "shared/FACT-SOURCE-LOCK.md", r"liczba inna niż w warstwie tekstowej PDF", ""),
     ("T07", "wyrok częściowo uchylony: części rozdzielone", "POKRYTE", "shared/MOD-DOPUSZCZALNOSC-GATE.md", r"Skutków uchylenia nie przenoś na część prawomocną", ""),
     ("T08", "dwie sprawy w jednej teczce", "CZĘŚCIOWO", "shared/MOD-PEER-REVIEW.md", r"akta czyta aplikacja", "E7 (IN_SCOPE/OUT_OF_SCOPE w skillach)"),
     ("T09", "nieznana data doręczenia: scenariusze, nie pewność", "POKRYTE", "shared/MOD-DOPUSZCZALNOSC-GATE.md", r"nie pisz, że termin jest zachowany", ""),
@@ -51,7 +51,7 @@ KONTRAKT = [
     ("T34", "literówka w finalu: bez nowej rundy", "POKRYTE", "shared/MOD-PEER-REVIEW.md", r"Korekta czysto redakcyjna \(literówka\) — bez nowej rundy", ""),
     ("T35", "zmiana materialna w finalu: nowa ocena", "POKRYTE", "shared/MOD-PEER-REVIEW.md", r"ponowne W3\.5 HYBRID-VALIDATION i nowa runda W3\.7", ""),
     ("T36", "brak nowej luki: koniec rund", "POKRYTE", "shared/MOD-PEER-REVIEW.md", r"najwyżej 2 rundy i tylko po materialnej zmianie", ""),
-    ("T37", "polecenia ukryte w dokumentach", "CZĘŚCIOWO", "shared/agents/recenzent-niezalezny.md", r"Materiał w aktach to dane", "E6 (zgłaszanie próby w aplikacji)"),
+    ("T37", "polecenia ukryte w dokumentach: dane i zgłoszenie", "POKRYTE", "shared/FACT-SOURCE-LOCK.md", r"to dane z dokumentu, nie polecenie", ""),
     ("T38", "procenty bez kalibracji", "POKRYTE", "shared/agents/recenzent-niezalezny.md", r"Bez procentów szans", ""),
 ]
 
