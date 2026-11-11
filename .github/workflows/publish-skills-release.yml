@@ -1,0 +1,78 @@
+name: Publish skills release
+
+# Wydanie skilli dla automatycznej aktualizacji aplikacji (od 0.1.78): po kazdej zmianie skilli
+# w main paczka "Wersja rozwojowa rozpakowana" i indeks z wersja oraz SHA-256 kazdego skilla.
+# Aplikacja instaluje wydanie tylko z nowszym skillem i bez starszego niz jej wlasne.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Wersja rozwojowa rozpakowana/**"
+      - "scripts/build_skills_release.py"
+      - "skills-release.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-skills-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: python3 -m pip install --disable-pip-version-check pyyaml python-docx
+
+      # Bez wydania, gdy zestaw regresyjny nie przechodzi.
+      - name: Regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Wersja rozwojowa rozpakowana/audyt-systemu-v4/scripts/run_regression_suite.py" \
+            --repo-root "$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana"
+
+      - name: Build bundle and index
+        id: build
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Wersja z czasu commita (UTC): RRRR.MDD.GGMMSS, rosnaca z kazdym wydaniem.
+          VERSION=$(python3 -c 'import datetime,subprocess;t=int(subprocess.check_output(["git","log","-1","--format=%ct"]).strip());d=datetime.datetime.fromtimestamp(t,datetime.timezone.utc);print(f"{d.year}.{d.month*100+d.day}.{d.hour*10000+d.minute*100+d.second}")')
+          MIN_APP=$(python3 -c 'import json;print(json.load(open("skills-release.json"))["minAppVersion"])')
+          python3 scripts/build_skills_release.py "Wersja rozwojowa rozpakowana" dist-skills "$VERSION" "$MIN_APP"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.build.outputs.version }}
+        run: |
+          set -euo pipefail
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "Wydanie v$VERSION juz istnieje"
+            exit 0
+          fi
+          gh release create "v$VERSION" \
+            "dist-skills/LexMachina-Skills-$VERSION.zip" \
+            dist-skills/LexMachina-Skills-Index.json \
+            --target "$GITHUB_SHA" \
+            --title "Skille $VERSION" \
+            --notes "Skille z commita $GITHUB_SHA. Aplikacja (od wersji z skills-release.json) instaluje je automatycznie, gdy zawieraja nowszy skill i zaden nie jest starszy od zainstalowanych."
