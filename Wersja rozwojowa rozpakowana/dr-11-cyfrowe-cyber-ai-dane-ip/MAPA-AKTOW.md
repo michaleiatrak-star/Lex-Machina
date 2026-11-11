@@ -14,7 +14,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Krajowy System Cyberbezpieczeństwa / NIS2 | Dz.U. 2026 poz. 20 t.j.; po t.j. (ELI 2026-10-12): 2026/252, 2026/815 (w mocy 4.07.2026), 2026/1003, 2026/1206 | `mod-KSC-NIS2-cyberbezpieczenstwo-telekom` | ✅ aktywny; fresh gate |
 | DORA / eIDAS 2.0 | rozporządzenie (UE) 2022/2554 + rozporządzenie (UE) 2024/1183 | `mod-DORA-eIDAS-cyfrowe-finanse` | ✅ aktywny; EUR-Lex fresh gate |
 | Prawo komunikacji elektronicznej + poczta + UKE | Dz.U. 2024 poz. 1221 (brak t.j.); zm. (ELI 2026-10-12): 2025/637, 2025/820, 2026/252, 2026/815 (w mocy 4.07.2026), 2026/1296 + właściwe akty pocztowe | `mod-PrTelekom-poczta-UKE` | ✅ aktywny; fresh gate |
-| Prawo autorskie i prawa pokrewne | Dz.U. 2025 poz. 24 t.j. ze zm. (m.in. 2026/1296 art. 4 — art. 22¹ ust. 3, od 6.11.2026) | `mod-PrAut-wlasnosc-intelektualna-IP` | 🟢 B+/COV |
+| Prawo autorskie i prawa pokrewne | Dz.U. 2025 poz. 24 t.j. ze zm. (m.in. 2026/1296 art. 4 — art. 22¹ ust. 3, od 6.11.2026; 2026/1477 art. 1 — art. 35¹ ust. 7 wynagrodzenie za użyczanie i nowy art. 127², od 10.11.2026) ✅ [VER] ELI 2026-11-11 | `mod-PrAut-wlasnosc-intelektualna-IP` | 🟢 B+/COV |
 | Prawo autorskie — media / internet / dobra osobiste | jw. | `mod-PrAut-media-internet-dobra-osobiste` | ✅ aktywny |
 | AI Act + krajowy reżim systemów AI | rozporządzenie (UE) 2024/1689 + Dz.U. 2026 poz. 1003 ze zm. | `mod-AI-Act-framework` | ✅ aktywny; temporal/EUR-Lex fresh gate |
 | Digital Markets Act | rozporządzenie (UE) 2022/1925 | `mod-DMA-digital-markets-act` | ✅ aktywny |

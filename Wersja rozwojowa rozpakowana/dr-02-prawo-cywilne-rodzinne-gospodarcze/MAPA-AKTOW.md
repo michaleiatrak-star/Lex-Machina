@@ -87,7 +87,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | Reklama wobec nieletnich | UPNPR Dz.U. 2023 poz. 845 t.j. + ustawa o radiofonii i telewizji Dz.U. 2022 poz. 1722 t.j. ze zm. | `mod-reklama-wobec-nieletnich` | ✅ aktywny; fresh gate |
 | Ochrona praw lokatorów | Dz.U. 2023 poz. 725 t.j. ze zm. | `mod-ustawa-ochrona-praw-lokatorow-najem-eksmisja` | 🟢 B+/COV |
 | Kaucja przy najmie lokalu | ustawa o ochronie praw lokatorów — aktualne brzmienie na dzień sprawy | `mod-kaucja-najem-lokalu` | ✅ aktywny; fresh gate |
-| Ustawa deweloperska / ochrona nabywcy | właściwe aktualne brzmienie ustawy deweloperskiej | `mod-ustawa-deweloperska` | ✅ aktywny; fresh gate |
+| Ustawa deweloperska / ochrona nabywcy | Dz.U. 2026 poz. 880 t.j.; po t.j.: 2026/1077 art. 1 (art. 19b ust. 1, 2a–2b — dane w formie dokumentu elektronicznego, od 11.11.2026) ✅ [VER] ELI 2026-11-11 | `mod-ustawa-deweloperska` | ✅ aktywny; fresh gate |
 | Własność lokali | Dz.U. 2026 poz. 232 t.j. ze zm. | `mod-ustawa-spoldzielnie-wlasnosc-lokali` | 🟢 B+/COV |
 | Księgi wieczyste i hipoteka | Dz.U. 2026 poz. 1066 t.j. ze zm. | `mod-KW-ksiega-wieczysta-zakup-nieruchomosci` | 🟢 B+/COV |
 | Prawo spółdzielcze | Dz.U. 2026 poz. 521 t.j. ze zm. | `mod-prawo-spoldzielcze` | 🟢 B+/COV |

@@ -1,5 +1,6 @@
 # CHANGELOG — dr-11-cyfrowe-cyber-ai-dane-ip
 
+- 3.35 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: prawo autorskie — zmiana po t.j. 2026/1477 (art. 35¹ ust. 7 wynagrodzenie za użyczanie, nowy art. 127², od 10.11.2026); moduły bez zmian (przepisy nieomawiane).
 - 3.34 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.33 (2026-10-31, BENCHMARK-02-LIVE): SKILL.md: sekcja Pułapki (deepfake + wytyczne KE; pola eksploatacji + art. 65 § 2 KC).
 - 3.32 (2026-10-31, BENCHMARK-02): mod-AI-Act-framework: deepfake (art. 3 pkt 60, art. 50 ust. 4) i wytyczne KE jako soft law (art. 96 ust. 1 lit. d; Cellar PL) — benchmark 02 P08. mod-PrAut-wlasnosc-intelektualna-IP: klauzula „wszelkie pola eksploatacji” — konkluzja warunkowa z art. 65 § 2 KC; art. 41 ust. 4 bez „nieważności” — P09/P10.

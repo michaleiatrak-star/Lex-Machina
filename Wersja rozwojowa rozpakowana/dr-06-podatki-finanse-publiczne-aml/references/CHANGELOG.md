@@ -1,5 +1,6 @@
 # CHANGELOG — dr-06-podatki-finanse-publiczne-aml
 
+- 3.99.14 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: CIT — zmiany po t.j. 2026/554 wg ELI: 2026/779, 912 (art. 17 ust. 1 pkt 4g), 846, 1287, 1371; ⏳ 2026/1123 od 1.01.2028.
 - 3.99.13 (2026-11-11, ELI 2026-11-11): UFP — t.j. Dz.U. 2026 poz. 1447 (zastępuje 2025/1483; obejmuje 2021/2054 z 2025/1844, 2025/1846, 2026/426, 635, 680, 912); mod-UFP: art. 243 ust. 3 pkt 1a (wyłączenie wykupu papierów wartościowych z limitu); MAPA-AKTOW.
 - 3.99.12 (2026-11-07): Martwa ścieżka shared/PRAWO-HARDGATE.md w mod-VAT poprawiona na prawo-polskie-v2/krajowe/shared/PRAWO-HARDGATE.md (inspekcja dr-*)
 - 3.99.11 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)

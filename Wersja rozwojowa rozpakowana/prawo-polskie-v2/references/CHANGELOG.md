@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.86 (2026-11-11, ELI 2026-11-11): ROUTING-MAP: związki metropolitalne (pomorski 2026/912, śląski 2025/186) → dr-08 mod-zwiazki-metropolitalne; zmiany po t.j. z ELI: deweloperska 2026/1077, prawo autorskie 2026/1477, CIT, USG, USP, ogłaszanie aktów, czystość, rewitalizacja, MPZP, UGN, wdrożeniowa (2026/912); słowa kluczowe DR-08: związek metropolitalny.
 - 6.85 (2026-11-11): konektory MCP — wspólna warstwa wspolne/sesja-przegladarki.mjs (lex-mcp.js): strona ochrony antybotowej (Cloudflare, DataDome, Imperva, F5) zamiast danych kończy się LAW_SOURCE_VERIFICATION_REQUIRED:<host> (nie brak danych); sesja z okna weryfikacji aplikacji (LEX_BROWSER_SESSIONS_FILE) dokładana do zapytań danego hosta; sn.pl bez zmian (własna obsługa); dist/lex-mcp.mjs przebudowany.
 - 6.84 (2026-11-11, ELI 2026-11-11): ROUTING-MAP, ISAP-METRYKI-AKTOW, leksykon ORKA-BAS, kotwice opłat: nowe t.j. UFP 2026/1447, polityka rozwoju 2026/1366, POŚ 2026/1453, Prawo geodezyjne 2026/1389, SUS 2026/1474 (powołane artykuły porównane w ELI).
 - 6.83 (2026-11-11, ELI 2026-11-11): ROUTING-MAP: ustawa o PSP — t.j. Dz.U. 2026 poz. 1473 (sync z dr-13 3.22).
