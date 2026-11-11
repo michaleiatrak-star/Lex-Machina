@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.84"
+version: "6.85"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.84 (2026-11-11): ROUTING-MAP, ISAP-METRYKI-AKTOW, leksykon ORKA-BAS, kotwice opłat: nowe t.j. UFP 2026/1447, polityka rozwoju 2026/1366, POŚ 2026/1453, Prawo geodezyjne 2026/1389, SUS 2026/1474 (powołane artykuły porównane w ELI).
+  Wersja bieżąca: 6.85 (2026-11-11): konektory MCP — strona ochrony antybotowej kończy się LAW_SOURCE_VERIFICATION_REQUIRED:<host> (okno weryfikacji aplikacji, nie brak danych); sesja z okna dokładana do zapytań (wspolne/sesja-przegladarki.mjs).
+  6.84 (2026-11-11): ROUTING-MAP, ISAP-METRYKI-AKTOW, leksykon ORKA-BAS, kotwice opłat: nowe t.j. UFP 2026/1447, polityka rozwoju 2026/1366, POŚ 2026/1453, Prawo geodezyjne 2026/1389, SUS 2026/1474 (powołane artykuły porównane w ELI).
   6.83 (2026-11-11): ROUTING-MAP: ustawa o PSP — t.j. Dz.U. 2026 poz. 1473 (sync z dr-13 3.22).
   6.82 (2026-11-09): ROUTING-MAP i słowa kluczowe DR-09: umowa przewozu, Prawo przewozowe, CMR z protokołami, Konwencja montrealska i system warszawski, COTIF/CIM, konosamenty → mod-umowa-przewozu-CMR-konwencje-przewozowe
   6.81 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362

@@ -2,6 +2,11 @@
 // Budowany esbuildem do dist/lex-mcp.mjs z wbudowanymi zależnościami (SDK MCP, zod), żeby działał
 // z katalogu pluginu bez `npm install` — Claude Code nie instaluje zależności pluginów.
 // Użycie: node dist/lex-mcp.mjs <serwer>
+// Źródła za ochroną antybotową: sesja z okna weryfikacji aplikacji i rozpoznanie strony ochrony
+// (wspolne/sesja-przegladarki.mjs) dla wszystkich konektorów, zanim którykolwiek się wczyta.
+import { zainstalujSesjePrzegladarki } from "./wspolne/sesja-przegladarki.mjs";
+zainstalujSesjePrzegladarki();
+
 const SERWERY = {
   isap: () => import("./isap-eli-example/isap-eli-mcp-server.js"),
   saos: () => import("./saos-example/saos-mcp-server.js"),
