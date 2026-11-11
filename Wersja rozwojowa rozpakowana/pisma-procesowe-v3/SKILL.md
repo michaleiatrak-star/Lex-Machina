@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.52"
+version: "5.53"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -423,6 +423,8 @@ TERMIN ZAWITY:  [data lub "brak" — weryfikacja w W3]
 > ⛔ Dopuszczalność przed meritum: view shared/MOD-DOPUSZCZALNOSC-GATE.md (D1–D8: środek,
 > zaskarżalność, tryb, legitymacja, właściwość, termin — przy nieznanej dacie doręczenia scenariusze,
 > zakres i prawomocność, forma). FATAL = status DRAFT/BLOCKED z przyczyną, stop przed W1.2.
+> Wniosek do organu o podjęcie działania (RPO, PG, RPD, rzecznicy): view shared/MOD-WNIOSEK-INSTYTUCJONALNY.md
+> (I-1–I-6 i niezależna ocena przed pismem). Pismo dotyczące dziecka: view shared/MOD-DOBRO-DZIECKA.md.
 
 ### W1.2 — Teza centralna
 
