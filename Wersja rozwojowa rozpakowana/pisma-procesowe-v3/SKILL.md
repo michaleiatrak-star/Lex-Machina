@@ -1,6 +1,6 @@
 ---
 name: pisma-procesowe-v3
-version: "5.53"
+version: "5.54"
 type: executive-pisma
 status: production
 description: "Zaawansowane pisma procesowe: pozwy, odpowiedzi, apelacje, zażalenia i inne pisma wymagające strategii, faktów, dowodów, weryfikacji prawa i finalnej walidacji dokumentu."
@@ -425,6 +425,9 @@ TERMIN ZAWITY:  [data lub "brak" — weryfikacja w W3]
 > zakres i prawomocność, forma). FATAL = status DRAFT/BLOCKED z przyczyną, stop przed W1.2.
 > Wniosek do organu o podjęcie działania (RPO, PG, RPD, rzecznicy): view shared/MOD-WNIOSEK-INSTYTUCJONALNY.md
 > (I-1–I-6 i niezależna ocena przed pismem). Pismo dotyczące dziecka: view shared/MOD-DOBRO-DZIECKA.md.
+> Zakres i statusy: view shared/MOD-SLOWNIK-STATUSOW.md — przy kilku postępowaniach w materiale ZAKRES IN_SCOPE /
+> OUT_OF_SCOPE (§4) przed W1.2; ustalenia W3 jako rekordy teza → źródło → akapit (§6); status pliku DRAFT_UNVERIFIED /
+> DRAFT_REVIEWABLE / READY_FOR_HUMAN_REVIEW (§5), READY tylko po FILE CHECK PASS (HYBRID-VALIDATION F3.0).
 
 ### W1.2 — Teza centralna
 

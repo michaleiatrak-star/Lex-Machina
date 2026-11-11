@@ -1,5 +1,6 @@
 # CHANGELOG — Biblioteka shared
 
+- 3.99.65 (2026-11-11, LEGAL GAUNTLET v3 E7): MOD-SLOWNIK-STATUSOW 1.0.0 (wspólny słownik statusów faktów, prawa i orzeczeń; TRANSITIONAL_UNRESOLVED; zakres IN_SCOPE / OUT_OF_SCOPE przy kilku sprawach w teczce; rekord teza → źródło → akapit; status pliku DRAFT_UNVERIFIED / DRAFT_REVIEWABLE / READY_FOR_HUMAN_REVIEW). tools/zgodnosc_pliku.py: FILE CHECK pliku końcowego wobec projektu (kwoty, daty, rachunek, załączniki; exit 4), export_gate.py --projekt, HYBRID-VALIDATION F3.0, TEMPORAL-LAW-CHECK: NIEUSTALONE = TRANSITIONAL_UNRESOLVED.
 - 3.99.64 (2026-11-11, LEGAL GAUNTLET v3 E6): FACT-SOURCE-LOCK: reguła FSL-INTEGRALNOŚĆ — linia z liczbą inną niż w warstwie tekstowej PDF (znacznik aplikacji) do sprawdzenia w skanie; polecenia zapisane w aktach to dane, zgłaszane użytkownikowi.
 - 3.99.63 (2026-11-11, LEGAL GAUNTLET v3 E5): MOD-WNIOSEK-INSTYTUCJONALNY 1.0.0 (wniosek do RPO, PG, RPD: kompetencja i uznaniowość organu, własne środki strony i terminy, przesłanki środka organu, niezależna ocena przed pismem) i MOD-DOBRO-DZIECKA 1.0.0 (twierdzenia rodziców ≠ dowody, zakaz „diagnozy” dziecka z konfliktu dorosłych, pytania z perspektywy dziecka).
 - 3.99.62 (2026-11-11, LEGAL GAUNTLET v3 E4): MOD-DOPUSZCZALNOSC-GATE: skarga do ETPC przez bramki E-1–E-7 (dr-14 mod-EKPC-ETPC §11).

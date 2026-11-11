@@ -12,9 +12,12 @@ present_files/eksportu.
 
 Użycie:
     python3 export_gate.py --document pismo.docx --api-conversation konwersacja_api.json
+    python3 export_gate.py --document pismo.docx --api-conversation konwersacja_api.json --projekt projekt.md
 
 Kod wyjścia:
     0 — wszystkie powołania mają ślad weryfikacji → dopuść do eksportu
+    4 — z --projekt: FILE CHECK FAIL (kwoty, daty, rachunek lub załączniki niezgodne z projektem)
+        → ZABLOKUJ eksport (zgodnosc_pliku.py)
     1 — co najmniej jedno powołanie bez śladu weryfikacji → ZABLOKUJ eksport,
         pokaż listę prawnikowi do ręcznej decyzji (patrz README, sekcja
         "Ograniczenia" — to sito pierwszego rzutu, nie automatyczne odrzucenie)
@@ -44,6 +47,7 @@ def _zaladuj_modul(nazwa: str, plik: str):
 
 extract = _zaladuj_modul("extract_api_verification_log", "extract_api_verification_log.py")
 walidator = _zaladuj_modul("walidator_cytowan", "walidator_cytowan.py")
+zgodnosc = _zaladuj_modul("zgodnosc_pliku", "zgodnosc_pliku.py")
 
 
 def uruchom_bramke(document_path: str, api_conversation_path: str,
@@ -99,6 +103,8 @@ def main():
     parser.add_argument("--api-conversation", required=False,
                          help="Ścieżka do JSON z pełną konwersacją API (format extract_api_verification_log.py)")
     parser.add_argument("--zapisz-log-posredni", help="Opcjonalnie zapisz sesja.json pośredni pod tą ścieżką")
+    parser.add_argument("--projekt", help="Opcjonalnie zatwierdzony projekt: FILE CHECK kwot, dat, rachunków i "
+                                            "załączników (zgodnosc_pliku.py, G99/T33)")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
 
@@ -111,6 +117,12 @@ def main():
         sys.exit(2)
 
     kod = uruchom_bramke(args.document, args.api_conversation, args.zapisz_log_posredni)
+    if args.projekt:
+        from pathlib import Path
+        print()
+        kod_pliku = zgodnosc.raport(zgodnosc.porownaj(walidator.read_document_text(Path(args.projekt)),
+                                                     walidator.read_document_text(Path(args.document))))
+        kod = kod or kod_pliku  # 1 (powołania) ma pierwszeństwo przed 4 (FILE CHECK)
     sys.exit(kod)
 
 

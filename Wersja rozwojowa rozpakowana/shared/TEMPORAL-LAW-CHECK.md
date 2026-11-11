@@ -129,3 +129,8 @@ Czy sprawdzono WSZYSTKIE akty zmieniające PO dacie wersji skonsolidowanej (KROK
 Czy cytat pochodzi z oficjalnego źródła aktów z dnia bieżącej kontroli? TAK/NIE
 ```
 
+NIEUSTALONE przy przepisach przejściowych albo brzmieniu z dnia zdarzenia = status TRANSITIONAL_UNRESOLVED
+(shared/MOD-SLOWNIK-STATUSOW.md §3): ELI jest, ale jednostki historycznej nie odtworzono. Nie podawaj wtedy
+dzisiejszego brzmienia jako brzmienia z dnia zdarzenia; wskaż brakujący akt zmieniający lub przepis przejściowy.
+Norma kluczowa z tym statusem blokuje READY_FOR_HUMAN_REVIEW (dopuszczalny DRAFT z ostrzeżeniem).
+

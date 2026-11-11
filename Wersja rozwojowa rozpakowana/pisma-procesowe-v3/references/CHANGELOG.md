@@ -1,5 +1,6 @@
 # CHANGELOG — pisma-procesowe-v3
 
+- 5.54 (2026-11-11, LEGAL GAUNTLET v3 E7): W1.1: zakres IN_SCOPE / OUT_OF_SCOPE przy kilku postępowaniach w materiale, ustalenia W3 jako rekordy teza → źródło → akapit, READY tylko po FILE CHECK PASS (shared/MOD-SLOWNIK-STATUSOW.md, HYBRID-VALIDATION F3.0).
 - 5.53 (2026-11-11, LEGAL GAUNTLET v3 E5): W1.1: wniosek do organu → MOD-WNIOSEK-INSTYTUCJONALNY; pismo dotyczące dziecka → MOD-DOBRO-DZIECKA.
 - 5.52 (2026-11-10, LEGAL GAUNTLET v3 E3): W1.1: bramka MOD-DOPUSZCZALNOSC-GATE przed tezą centralną; FATAL = DRAFT/BLOCKED, stop przed W1.2.
 - 5.51 (2026-11-10, LEGAL GAUNTLET v3 E1): W3.7: recenzja niezależna w aplikacji narzędziem independent_review (sam tekst pisma, akta dobiera aplikacja), izolacja BLIND/NON_BLIND w raporcie; tryb single-agent oznaczany jako przegląd własny; powtórna ocena w nowym kontekście, najwyżej 2 rundy, po zmianie materialnej ponowne W3.5.
