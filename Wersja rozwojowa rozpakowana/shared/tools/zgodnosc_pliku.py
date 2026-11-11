@@ -163,8 +163,9 @@ def porownaj(projekt: str, plik: str):
     numery = [n for n, _ in sf if n is not None]
     if numery and numery != list(range(1, len(numery) + 1)):
         out.append({"kod": "P6", "opis": f"numeracja spisu załączników: {numery}"})
+    dostepne = set(numery) if len(numery) == len(sf) else set(range(1, len(sf) + 1))  # numery spisu albo 1..n
     for n in sorted({int(m.group(1)) for m in ODWOLANIE.finditer(tresc_pliku)}):
-        if n < 1 or n > len(sf):
+        if n not in dostepne:
             out.append({"kod": "P7", "opis": f"odwołanie do załącznika nr {n}, w spisie pozycji: {len(sf)}"})
     opisy_pliku = {_opis(o) for _, o in sf}
     for _, o in sp:

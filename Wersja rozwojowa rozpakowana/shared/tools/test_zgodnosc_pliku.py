@@ -49,7 +49,7 @@ class Zgodnosc(unittest.TestCase):
         self.assertEqual(kody(PROJEKT, plik), ["P5", "P7", "P8"])
 
     def test_numeracja_nieciagla(self):
-        self.assertEqual(kody(PROJEKT, PROJEKT.replace("2. wezwanie", "3. wezwanie")), ["P6"])
+        self.assertEqual(kody(PROJEKT, PROJEKT.replace("2. wezwanie", "3. wezwanie")), ["P6", "P7"])
 
     def test_czesc_robocza_pominieta(self):
         plik = PROJEKT + "\nCZĘŚĆ ROBOCZA\nkwota kontrolna 999 zł z 01.01.2020\n"
