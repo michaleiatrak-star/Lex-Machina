@@ -1419,3 +1419,13 @@ pierwsze jako tekst, w drugich odrzuca nadmiarowe komórki. Test negatywny: stan
 Przesłanka: wydzielenie treści prawa polskiego ze skilli wykonawczych (metoda) do pakietu jurysdykcji nie może zgubić
 żadnego wiersza. Test negatywny 2026-11-06: termin „21 dni” (art. 264 § 1 KP) zmieniony w tabeli migracji na „99 dni” → FAIL
 z nazwą wiersza i modułu. Pilot E2: `analizator-dowodow-v3/modules/MD5-terminy.md` (14 wierszy) → `JUR:terminy-procesowe`.
+
+## T51 — kontrakt testów akceptacyjnych LEGAL GAUNTLET UNIVERSAL v3 (dodany 2026-11-10, etap E2)
+
+| Test | Co sprawdza | Waga | Uruchomienie |
+|---|---|---|---|
+| T51 | każdy test akceptacyjny T01–T38 (cz. VII specyfikacji) ma w skillach regułę (plik + wzorzec) albo jawną LUKĘ z etapem E3–E7; reguła oznaczona jako pokryta nie może zniknąć | KRYTYCZNY (BLOKER) | `python3 scripts/check_gauntlet_akceptacja.py --repo-root <katalog skilli>` (`--selftest`: mutacja) |
+
+Zachowania modelu nie da się sprawdzić offline; test pilnuje kontraktu i pokazuje listę luk w każdym przebiegu.
+Stan 2026-11-11 po E6: pokryte 35, częściowo 3, luka 0. Izolację recenzenta (T16/T17) w aplikacji sprawdza
+lex-runtime `independent-review.test.ts`. Mutacja w T49: usunięta reguła „nigdy pytanie w starej sesji”.

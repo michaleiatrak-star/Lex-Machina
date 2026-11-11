@@ -159,8 +159,19 @@ Pozostałe braki: 🔴 [n] · 🟡 [n] · ⬛ [n] pól
 
 ## FAZA 3 — ZAKOŃCZENIE
 
+**F3.0 FILE CHECK (G99, T33)** — plik końcowy (.docx) zgodny z zatwierdzonym projektem, przed present_files:
+
 ```
-□ Zero braków 🔴 i 🟡 → "Pismo gotowe do złożenia."
+python3 shared/tools/zgodnosc_pliku.py --projekt projekt.md --plik pismo.docx
+  (albo export_gate.py ... --projekt projekt.md)
+P1/P2 kwoty · P3 daty · P4 rachunek „A + B = C” · P5–P8 spis załączników, numeracja, odwołania „zał. nr N”
+Kod 4 = FILE CHECK FAIL → status pliku DRAFT_UNVERIFIED (MOD-SLOWNIK-STATUSOW §5), popraw plik, nie projekt,
+chyba że błąd jest w projekcie; po poprawce ponów F3.0. Bez narzędzia: porównaj ręcznie te same pozycje.
+```
+
+```
+□ Zero braków 🔴 i 🟡 i FILE CHECK PASS → "Pismo gotowe do przeglądu i podpisu" (READY_FOR_HUMAN_REVIEW;
+  złożenie i podpis to czynności użytkownika, nie pisz, że pismo złożono)
 □ Pozostałe ⬛ → "Wyszukaj ⬛ w tekście i uzupełnij przed złożeniem."
 □ Użytkownik powiedział "gotowe" przy otwartych 🔴 → przypomnij raz, nie naciskaj
 □ Pismo [3] lub [4] wg routera → uruchom docx-skill i present_files

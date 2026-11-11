@@ -192,6 +192,8 @@ def main():
         ("T49", "T49 KRYTYCZNY — mutacje: każdy bloker wykrywa wprowadzony defekt", "test_mutacje_zestawu.py", ["--repo-root", str(root)]),
         # 2026-11-06: migracja prawa polskiego — klucze JUR: i równoważność przeniesionych wierszy.
         ("T50", "T50 WYSOKI — klucze jurysdykcji JUR: i równoważność migracji", "check_jurysdykcja.py", [str(root)]),
+        # 2026-11-10: LEGAL GAUNTLET v3 cz. VII — każdy test T01–T38 ma regułę w skillach albo jawną LUKĘ z etapem.
+        ("T51", "T51 KRYTYCZNY — kontrakt testów akceptacyjnych LEGAL GAUNTLET v3", "check_gauntlet_akceptacja.py", ["--repo-root", str(root)]),
         ("MOCK", "MOCK — self-test sync_dzu_eli wobec lokalnego mock-ELI", "mock_eli_server_test.py", []),
     ]:
         sekcja(label)
@@ -222,7 +224,7 @@ def main():
     # poza T19b (własne mutacje w pamięci) i T30 (wymaga historii dziennika).
     BLOCKERY = ("T1", "T2", "T6_T7", "T9", "T11", "T12", "T13", "T14", "T17", "T18", "T19", "T19b",
                 "T22", "T23", "T28", "T29", "T30", "T32", "T34", "T35", "T36", "T38", "T39", "T40",
-                "T41", "T42", "T43", "T44", "T45", "T46", "T47", "T48", "T49", "T50", "MOCK")
+                "T41", "T42", "T43", "T44", "T45", "T46", "T47", "T48", "T49", "T50", "T51", "MOCK")
     critical_fail = False
     for key, code in results.items():
         if code == "MANUAL":

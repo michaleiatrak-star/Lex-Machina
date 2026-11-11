@@ -4,7 +4,7 @@ description: "Audyt jakości, spójności i bezpieczeństwa systemu prawnych ski
 dependencies:
   requires:
     - shared
-version: "6.253"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
+version: "6.261"   # zawsze w cudzysłowie (6.10 bez niego = float 6.1)
 type: governance-audit
 compatibility: "host-neutral; file read/write, fresh legal-source lookup and optional archive/UI operations mapped by the runtime adapter"
 entrypoint: SKILL.md
@@ -70,6 +70,7 @@ scripts:
   - scripts/check_tabele_satelickie.py
   - scripts/check_podmiana_aktu.py
   - scripts/check_jurysdykcja.py
+  - scripts/check_gauntlet_akceptacja.py
   - scripts/mapa_jurysdykcji.py
   - scripts/check_widmowe_pokrycie.py
   - scripts/weryfikator_sygnatur.py
@@ -1340,4 +1341,4 @@ audyt-systemu-v4/                               ← 89 plików (stan 2026-09-09b
 
 ---
 
-*Wersja: 6.253 | Ostatnia aktualizacja: 2026-11-09 (mapa_dzu: umowa przewozu i konwencje przewozowe). Stopkę aktualizuj razem z polem `version`.*
+*Wersja: 6.261 | Ostatnia aktualizacja: 2026-11-11 (LEGAL GAUNTLET v3 E7). Stopkę aktualizuj razem z polem `version`.*

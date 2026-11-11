@@ -1,7 +1,7 @@
-79cc78f49c93f6809528aa063d3f2c4b1b664b072875855a99cebfe77fd9a7ef  ./MAPA-AKTOW.md
+0842f39b9ee6741a46038438df0795f2971b0e2163aa05cd84d44629d5122164  ./MAPA-AKTOW.md
 0339ff7dbb3747573f2b26997627864b98c7246b62561e11c7336aaf57a3a6ff  ./MAPA-POKRYCIA.md
 7c457e1307ad99afea550a549ede21895435a27f83e9063245575b7342edcca4  ./PORTABILITY-MANIFEST.md
-da6e7237e7bb17c39d6b7caba052d2d069ca7e3a16178410d43624db45378576  ./SKILL.md
+56fa7d5fdef6251846edb1573c574992bd41f2018c4594f89ed6a455d19ab718  ./SKILL.md
 0723118e130945c731bd069a055c853011fcada42c7815680bd87b474239c8c5  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 b957886f0c5a16a23f9690b0466af0ad5708097c1a1fddf05d14a4fcf1379099  ./modules/mod-CIT-podatek-dochodowy-prawne.md
@@ -17,7 +17,7 @@ a0b1d9dd600318e946460b27456b3e06e21750515a8d7c9c3b54ca27228976ba  ./modules/mod-
 391c9fe063d9c1bd54170179cb93286077ba86f8e55b75ed62231d13cb18d44c  ./modules/mod-PKPiR-ewidencje-uproszczone.md
 f4ba3a9ab509bc44edc79d12ef6bdeaec606e67a1260a0701f670c2de7cd658e  ./modules/mod-PKWiU-klasyfikacje-statystyczne.md
 730ba02cbb2ddeffe511e7eb0f73d991703d2053e8855b0849869732bde1a558  ./modules/mod-UCC-clo-taryfa-celna.md
-9976905316c1fa529b9ab6ead205161e9663ec1e3482394f55a7966d8f595d7c  ./modules/mod-UFP-finanse-publiczne-NIK-RIO.md
+9d83d7d96ef227b9e9243c22c90505c2aa5d4c1dd0d7a7dd2d0f03947c9470ca  ./modules/mod-UFP-finanse-publiczne-NIK-RIO.md
 08df98e7a6bcddbe48cedb4ff80d8b3e41446ee78fe637eef54b784781260f8b  ./modules/mod-VAT-WIS-tryb-i-ochrona.md
 dc765870d538d3deb9e41c7ae19cfd123f27dd8cea60a1e65400457d78a0aed3  ./modules/mod-VAT-ewidencja-deklaracje.md
 1ab3f15c0d1aa55c1278971ae76b7280b3a014377b611fecacdcf4c63dc6d6c2  ./modules/mod-VAT-import-towarow-i-zwolnienia-importowe.md
@@ -74,5 +74,5 @@ f7b1b6e938fd2f581807c44123ed9c86b5809cbba8691e96016fad4b365380f5  ./modules/vat-
 3e68b7cef36e384a60b951bc96ef2e0f2d8945e113af875b7c0b1c7d3ad8ce7c  ./modules/vat-podatek-od-towarow-i-uslug/part-06-grupa-zlozona.md
 96b0b7e6d97ec2eee1d0e3790763ad44fad0ec2d2a0aafb6404e60617d203450  ./references/BAZA-AKTOW-OKOLOAKCYZOWYCH.md
 b55393d05271d0441889e9ac233dace33c737367cadee0aec693c60bd6429f7d  ./references/BAZA-AKTOW-OKOLOPODATKOWYCH.md
-16eda15ee6aa52dc203862e47bf91b45d879a92c2bfd37c9e502446409b3a4c8  ./references/CHANGELOG.md
+f3f218b62ec17229a96346b4c42cbb17475bf0e5baa1bf93638cc38562a05242  ./references/CHANGELOG.md
 0f04d7c347f094d44d41df4e026937cf23482a7e4ce7e3393ee611dad0c8e05a  ./references/HISTORIA-ZMIAN-PLIKOW.md

@@ -1,7 +1,7 @@
 # mod-SUS-ZUS-ubezpieczenia-spoleczne
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** SUS — Dz.U. 2026 poz. 199 t.j. | FUS — Dz.U. 2025 poz. 1749 t.j. | Ustawa orzecznicza — Dz.U. 2026 poz. 26 | KPC art. 477⁸–477¹⁴ — Dz.U. 2026 poz. 468
+**Źródło weryfikacji:** SUS — Dz.U. 2026 poz. 1474 t.j. (ELI 2026-11-11) | FUS — Dz.U. 2025 poz. 1749 t.j. | Ustawa orzecznicza — Dz.U. 2026 poz. 26 | KPC art. 477⁸–477¹⁴ — Dz.U. 2026 poz. 468
 **Data weryfikacji online:** 2026-06-05
 **Zasada:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 
@@ -30,7 +30,7 @@ Ubezpieczenia społeczne (emerytalne, rentowe, chorobowe, wypadkowe), odwołanie
 
 | Akt | Dz.U. |
 |---|---|
-| Ustawa SUS (system ubezpieczeń społecznych) | Dz.U. 2026 poz. 199 t.j. |
+| Ustawa SUS (system ubezpieczeń społecznych) | Dz.U. 2026 poz. 1474 t.j. |
 | Ustawa FUS (świadczenia z Funduszu Ubezpieczeń Społecznych) | Dz.U. 2025 poz. 1749 t.j. |
 | Ustawa zasiłkowa (świadczenia pieniężne w razie choroby i macierzyństwa) | weryfikuj aktualny t.j. w ELI (RZĄD 1) |
 | Ustawa orzecznicza (reforma orzecznictwa ZUS) | Dz.U. 2026 poz. 26 |
@@ -260,7 +260,7 @@ web_search: "renta niezdolność do pracy biegły sądowy orzecznictwo SN sn.pl"
 
 ## ŹRÓDŁA ONLINE
 
-- Ustawa SUS: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000199
+- Ustawa SUS: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001474
 - Ustawa FUS: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20251749
 - ZUS (wnioski): https://www.zus.pl
 - SN (orzeczenia): https://www.sn.pl

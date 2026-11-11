@@ -138,3 +138,28 @@ Karta Praw Podstawowych UE (KPP):
   Stosowanie: wyłącznie gdy państwo wdraża prawo UE (art. 51 ust. 1 KPP)
   ✅ VER: eur-lex.europa.eu 2026-06-07
 ```
+
+## 11. BRAMKI SKARGI DO ETPC (LEGAL GAUNTLET v3, E4)
+
+Przed redakcją i przed wysyłką skargi. Każdy punkt z wynikiem i źródłem; parametry (termin, limity stron,
+formularz, wymogi reguły 47) wyłącznie z aktualnych tekstów na echr.coe.int (Rules of Court, Practice Directions,
+formularz i Notes) sprawdzonych w dniu składania — nie z pamięci i nie z tego modułu.
+
+| Bramka | Pytanie | Wada |
+|---|---|---|
+| E-1 Wyczerpanie | Czy każdy zarzut konwencyjny został w istocie podniesiony przed sądami krajowymi (w piśmie, nie tylko w faktach)? Zarzut niepodniesiony = niedopuszczalny w tej części. | KRYTYCZNA |
+| E-2 Termin | Liczony od ostatecznej decyzji krajowej właściwej dla danego zarzutu (doręczenie, a gdy brak skutecznego środka — od zdarzenia). Decyzja wydana w środku nieskutecznym nie otwiera terminu na nowo. Data niepewna → scenariusze (MOD-DOPUSZCZALNOSC-GATE §3). | KRYTYCZNA |
+| E-3 Czwarta instancja | Czy zarzut dotyczy naruszenia prawa konwencyjnego, a nie wyłącznie oceny dowodów, ustaleń faktycznych lub wykładni prawa krajowego? Spór tylko o ocenę dowodów = ryzyko odrzucenia jako oczywiście bezzasadnej. | KRYTYCZNA |
+| E-4 Zakres artykułu | Czy sprawa mieści się w zakresie zastosowania powołanego artykułu (ratione materiae, personae, loci, temporis — także ratyfikacja protokołu przez państwo)? Brak zakresu → zarzut do usunięcia. | KRYTYCZNA |
+| E-5 Status ofiary i istotna niekorzyść | Czy skarżący jest bezpośrednio dotknięty i czy szkoda nie jest znikoma w rozumieniu warunku istotnej niekorzyści? | ISTOTNA |
+| E-6 Formularz (reguła 47) | Każdy zarzut, fakty i wyczerpanie są w samym formularzu, w miejscach i limitach z aktualnej reguły 47 i Practice Direction; załącznik może tylko rozwinąć to, co jest w formularzu. Zarzut tylko w załączniku = ryzyko nierozpatrzenia. Dokument dodatkowy ponad aktualny limit = do skrócenia. | KRYTYCZNA |
+| E-7 Kompletowanie | Kompletowanie (formularz, załączniki, lista dokumentów) nie dodaje nowego zarzutu ani nowej teorii sprawy: każdy zarzut w paczce ma ślad do zatwierdzonego projektu. Nowy zarzut przy kompletowaniu = usuń i wróć do E-1–E-4. | KRYTYCZNA |
+
+Orzecznictwo do każdej bramki: HUDOC (hudoc.echr.coe.int), z sygnaturą i datą sprawdzonymi u źródła; przewodniki
+Trybunału po artykułach i po dopuszczalności (ks.echr.coe.int) jako mapa, nie jako cytat zamiast orzeczenia.
+
+Wynik:
+```text
+BRAMKI ETPC: E-1 ... | E-2 ... (scenariusze: ...) | E-3 ... | E-4 ... | E-5 ... | E-6 ... | E-7 ...
+WERDYKT: DO WYSŁANIA PO PRZEGLĄDZIE / DO POPRAWY (lista) / NIEDOPUSZCZALNA (zarzuty i przyczyny)
+```

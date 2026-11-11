@@ -1,5 +1,13 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.261 (2026-11-11, LEGAL GAUNTLET v3 E7): T51: T03, T08 i T33 pokryte (MOD-SLOWNIK-STATUSOW, TEMPORAL-LAW-CHECK, HYBRID-VALIDATION F3.0); kontrakt Gauntleta 38/38.
+- 6.260 (2026-11-11, LEGAL GAUNTLET v3 E6): T51: T06 i T37 pokryte (FSL-INTEGRALNOŚĆ; w aplikacji ocr-layer-check i prompt-injection-scan); stan 35/3/0.
+- 6.259 (2026-11-11, LEGAL GAUNTLET v3 E5): T51: T21–T24 pokryte (MOD-WNIOSEK-INSTYTUCJONALNY, MOD-DOBRO-DZIECKA); stan 33/4/1.
+- 6.258 (2026-11-11, ELI 2026-11-11): mapa_dzu_2026-10-04: wiersze 2026/1447, 1366, 1453, 1389, 1474; poprzednie t.j. jako PREV; korekta opisu 2025/198 (t.j. ustawy o polityce rozwoju, nie o funduszach UE); ALIASY-NAZW-AKTOW.
+- 6.257 (2026-11-11, ELI 2026-11-11): mapa_dzu_2026-10-04: wiersz 2026/1473 (t.j. ustawy o PSP, zmiany 2025/1366 i 2026/252, 646, 821, 1123); 2025/1312 → PREV.
+- 6.256 (2026-11-11, LEGAL GAUNTLET v3 E4): T51: T26–T32 (ETPCz) pokryte bramkami E-1–E-7; stan 29/4/5.
+- 6.255 (2026-11-10, LEGAL GAUNTLET v3 E3): T51: T07, T09–T14, T20, T25 pokryte regułami E3 (MOD-DOPUSZCZALNOSC-GATE, CLAIM-VALIDATION C5, W1.1); stan 22/6/10.
+- 6.254 (2026-11-10, LEGAL GAUNTLET v3 E2): T51 — kontrakt testów akceptacyjnych T01–T38 (scripts/check_gauntlet_akceptacja.py, bloker, mutacja w T49); stan: pokryte 14, częściowo 7, luka 17 z etapami E3–E7.
 - 6.253 (2026-11-09): mapa_dzu_2026-10-04 — uzupełnienie RZĄD 1 ELI: umowa przewozu i konwencje przewozowe (Prawo przewozowe t.j. 2024/1262; CMR 1962/238 z Protokołami 2011/382 i 2019/1487; Konwencja montrealska 2007/235; system warszawski 1933/49, 1963/189, 1965/167; COTIF 1985/158 z Protokołem 2007/674; Konwencja o konosamentach 1937/258 z Protokołami 1980/48, 1985/26) → DR-09
 - 6.252 (2026-11-07): pole prefiks-dziedzin w bloku DOSTAWCA JURYSDYKCJI (dr dla PL; inne kraje: kod kraju); T50 wymaga pola
 - 6.251 (2026-11-06): FAZA 0E instaluje serwery MCP z katalogu konektorów aktywnej jurysdykcji (pole `konektory`; PL: prawo-polskie-v2/mcp-servers); T46/T47 czytają serwer ISAP stamtąd (katalog_konektorow); T50 blokuje i sprawdza blok dostawcy (D), +1 mutacja; T33 usunięty (pusty sukces, rolę pełni T34 --archiwa)

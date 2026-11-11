@@ -53,7 +53,7 @@ w rejestrze operacyjnym unieważnia alias i sygnał wraca — celowo.
 | Dz.U. 2023 poz. 1725 | Ustawa o skardze na przewlekłość postępowania | ustawa o skardze na naruszenie prawa strony do rozpoznania sprawy bez nieuzasadnionej zwłoki | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2023 poz. 1725 | Ustawa o skargach na przewlekłość | jw. | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 522 | ⭐⭐ Ustawa o rachunkowości z 29.09.1994 | ustawa o rachunkowości | 2026-09-10c, RZĄD 1 |
-| Dz.U. 2025 poz. 198 | Ustawa o polityce rozwoju | ustawa o zasadach prowadzenia polityki rozwoju | 2026-09-10c, RZĄD 1 |
+| Dz.U. 2026 poz. 1366 | Ustawa o polityce rozwoju | ustawa o zasadach prowadzenia polityki rozwoju | 2026-11-11, RZĄD 1 (t.j.; poprzednio 2025 poz. 198) |
 | Dz.U. 2025 poz. 1461 | Ustawa o świadczeniach zdrowotnych | ustawa o świadczeniach opieki zdrowotnej finansowanych ze środków publicznych | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2026 poz. 37 | Ustawa o zawodzie lekarza | ustawa o zawodach lekarza i lekarza dentysty | 2026-09-10c, RZĄD 1 |
 | Dz.U. 2024 poz. 1725 | Ustawa o podpisie elektronicznym i eIDAS | ustawa o usługach zaufania oraz identyfikacji elektronicznej | 2026-09-10c, RZĄD 1 |

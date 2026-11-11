@@ -38,7 +38,7 @@ odpowiedzialność za szkodę w środowisku, predykcja wyniku.
 | Akt | Tekst jednolity | ⛔ KROK 2C — nowelizacje PO tekście jednolitym |
 |---|---|---|
 | UOOŚiS | **Dz.U. 2026 poz. 670** ✅ [VER] RZĄD 1 — najnowszy | **1**: Dz.U. 2026 poz. 1097 |
-| POŚ | **Dz.U. 2025 poz. 647** ✅ [VER] RZĄD 1 — najnowszy | **9**: Dz.U. 2025 poz. 1080, 1812, 1863; 2026 poz. 426, 605, 607, 635, 912, 982 |
+| POŚ | **Dz.U. 2026 poz. 1453 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 — najnowszy (poprzedni t.j. 2025 poz. 647) | **0** po t.j.; t.j. obejmuje 2025 poz. 1080, 1812, 1863; 2026 poz. 176 (⏳ art. 421d od 18.02.2027), 426, 605, 607, 635, 912, 982, 1157 |
 | Ustawa o ochronie przyrody | **Dz.U. 2026 poz. 1315** t.j. (ogł. 9.10.2026; obejmuje zm. 2026/426, 737, 912) (ELI 2026-10-12) | **0** |
 | KK (art. 181–188a) | **Dz.U. 2026 poz. 1342** t.j. (najnowszy; tekst w ELI od 2026-10-20; poprzedni Dz.U. 2025 poz. 383 ✅ [VER] RZĄD 1) | **0** (t.j. obejmuje Dz.U. 2025 poz. 1818, 1872; 2026 poz. 902, 988; art. 181–188a bez zmian wobec 2025/383 ✅ [VER] RZĄD 1 2026-10-20) |
 | KPA | **Dz.U. 2025 poz. 1691** ✅ [VER] RZĄD 1 — najnowszy | **0** |
@@ -140,7 +140,7 @@ ORGANIZACJA EKOLOGICZNA (art. 44 u.u.i.ś.):
 
 ## KARY ADMINISTRACYJNE — WIOŚ
 
-### Administracyjne kary pieniężne (POŚ art. 298–318 — Dz.U. 2025 poz. 647)
+### Administracyjne kary pieniężne (POŚ art. 298–318 — Dz.U. 2026 poz. 1453 t.j.)
 
 ```
 NARUSZENIA KARALNE ADMINISTRACYJNIE (m.in.):

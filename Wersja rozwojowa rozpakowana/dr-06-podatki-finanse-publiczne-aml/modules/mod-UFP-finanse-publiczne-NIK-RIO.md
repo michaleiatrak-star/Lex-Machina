@@ -135,7 +135,7 @@ Przed wygenerowaniem pisma lub analizy odpowiedz na każde pytanie:
 ## STATUS KANCELARSKI
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
-**Źródło weryfikacji:** UFP — **Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10o ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym (poprzednio 2024 poz. 1530 — wygaśnięcie aktu) t.j. | Ustawa o dyscyplinie finansów publicznych — weryfikuj aktualny t.j. w ISAP | Ustawa o NIK — weryfikuj aktualny t.j. w ISAP | Ustawa o RIO — weryfikuj aktualny t.j. w ISAP
+**Źródło weryfikacji:** UFP — **Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje 2021/2054 z 2025/1844, 2025/1846, 2026/426, 635, 680, 912; poprzednio t.j. 2025 poz. 1483). Zmiana istotna dla relacji z art. 242–244: art. 243 ust. 3 pkt 1a — z ograniczenia wyłączono wykupy papierów wartościowych emitowanych w związku z umową na program, projekt lub zadanie finansowane ze środków z art. 5 ust. 1 pkt 2, wraz z odsetkami i dyskontem. | Ustawa o dyscyplinie finansów publicznych — weryfikuj aktualny t.j. w ISAP | Ustawa o NIK — weryfikuj aktualny t.j. w ISAP | Ustawa o RIO — weryfikuj aktualny t.j. w ISAP
 **Data weryfikacji online:** 2026-06-05
 
 ---

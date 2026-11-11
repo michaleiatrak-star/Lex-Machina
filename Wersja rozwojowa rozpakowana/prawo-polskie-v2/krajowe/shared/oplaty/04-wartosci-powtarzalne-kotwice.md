@@ -110,7 +110,7 @@ z doktryną tej sekcji.
 ### 4c. Odsetki za zwłokę — podatki i ZUS
 
 ✅ [VER] RZĄD 1 2026-09-12e — odczyt treści Ordynacji podatkowej
-`Dz.U. 2026 poz. 622` i ustawy o SUS `Dz.U. 2026 poz. 199`.
+`Dz.U. 2026 poz. 622` i ustawy o SUS — poprzedni t.j. `Dz.U. 2026 poz. 199`; od 2026-11-11 t.j. `Dz.U. 2026 poz. 1474` (art. 23 bez zmian treści, porównanie w ELI).
 
 | Stawka | Wzór | Podstawa |
 |---|---|---|

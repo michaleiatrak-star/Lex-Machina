@@ -1,5 +1,6 @@
 # CHANGELOG — dr-04-prawo-pracy-zus-swiadczenia
 
+- 3.57 (2026-11-11, ELI 2026-11-11): SUS — t.j. Dz.U. 2026 poz. 1474 (zastępuje 2026/199); mod-SUS-current-state-COV §1: zmiany z 2026/473 (decyzja PIP o stosunku pracy: art. 18 ust. 1b, 24 ust. 5h, 36 ust. 4e, 38b, od 8.07.2026), 2026/252, 426, 734 (⏳ art. 36 ust. 13a–13b od 6.12.2026), 507 (⏳ 1.11.2028), ⏳ 2025/1413 od 1.11.2026 (art. 45 ust. 1 pkt 4, art. 50 ust. 28–31), ⏳ 2026/26 od 1.01.2027; moduły SUS, MAPA-AKTOW, MAPA-POKRYCIA.
 - 3.56 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)
 - 3.55 (2026-11-04, AUDYT-2026-11-04): Dz.U. 2026 poz. 1340 — ⏳ → ✅ w mocy od 30.10.2026 (mod-ustawa-zwiazki-zawodowe-spory-zbiorowe, MAPA-AKTOW); treść modułu już w brzmieniu po zmianie.
 - 3.54 (2026-10-20, LEXAGENTO-P2): MAPA-AKTOW: KP - zwolnienie dyscyplinarne, wypowiedzenie, odwołanie do sądu pracy (wcześniej dobierało zwolnienia grupowe)

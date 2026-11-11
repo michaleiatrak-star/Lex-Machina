@@ -19,7 +19,7 @@ Weryfikacja: ustawa o działalności leczniczej art. 5 pkt 40
 
 ### BAS-070 — Jednostka budżetowa i IGB (DR-06)
 ```
-Weryfikacja: UFP art. 11–15 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10l — ⛔ KROK 2C: 5 nowelizacji po nim; poprzedni zapis `2024 poz. 1530` — wygaśnięcie aktu)
+Weryfikacja: UFP art. 11–15 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912; poprzedni t.j. 2025 poz. 1483); poprzedni zapis `2024 poz. 1530` — wygaśnięcie aktu)
 
 JEDNOSTKA BUDŻETOWA (art. 11 UFP):
   Jednostka SFP pokrywająca wydatki bezpośrednio z budżetu i odprowadzająca
@@ -89,17 +89,17 @@ WERYFIKUJ: ELI (RZĄD 1) → ustawa o obronie Ojczyzny — wielokrotnie nowelizo
 
 ### BAS-022 — Budżet JST
 ```
-Weryfikacja: ustawa o finansach publicznych art. 211 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 211 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Roczny plan dochodów i wydatków jednostki samorządu terytorialnego,
   uchwalany przez organ stanowiący JST (radę gminy/powiatu/sejmik województwa).
-Podstawa: art. 211 ustawy o finansach publicznych (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Podstawa: art. 211 ustawy o finansach publicznych (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Reguła: Budżet JST jest częścią Wieloletniej Prognozy Finansowej (WPF) —
   wydatki majątkowe wymagają pokrycia w WPF co najmniej przez okres realizacji.
 ```
 
 ### BAS-023 / BAS-096 — Dług Skarbu Państwa
 ```
-Weryfikacja: ustawa o finansach publicznych art. 72 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 72 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Zobowiązania finansowe zaciągnięte bezpośrednio przez Skarb Państwa
   (nie tożsamy z Państwowym Długiem Publicznym — PDP obejmuje cały sektor finansów publ.)
 Podstawa: art. 72 ustawy o finansach publicznych
@@ -108,7 +108,7 @@ Reguła: Dług SP < PDP (różnica: zobowiązania innych jednostek SFP niekonsol
 
 ### BAS-045 / BAS-055 — Państwowy fundusz celowy
 ```
-Weryfikacja: ustawa o finansach publicznych art. 29 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 29 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Fundusz ustawowo wyodrębniony z budżetu państwa, posiadający plan finansowy
   i przeznaczony na realizację określonego zadania publicznego.
 Podstawa: art. 29 ust. 1 ustawy o finansach publicznych
@@ -119,7 +119,7 @@ Reguła: Fundusz celowy ≠ fundusz rezerwowy; ma własny plan finansowy zatwier
 
 ### BAS-050 — Wieloletnia prognoza finansowa (WPF)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 226–232 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 226–232 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Instrument wieloletniego planowania finansowego JST,
   uchwalany na co najmniej 4 lata, obejmujący dochody, wydatki i zadania inwestycyjne.
 Podstawa: art. 226–232 ustawy o finansach publicznych
@@ -130,7 +130,7 @@ Reguła: WPF jest wiążąca dla budżetu JST w zakresie wydatków majątkowych 
 ### BAS-053 — Funkcja państwa (budżet zadaniowy)
 ```
 Weryfikacja: rozp. MF ws. budżetu zadaniowego + UFP art. 174–175
-  (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+  (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Najwyższy poziom w klasyfikacji zadaniowej budżetu — grupuje zadania
   według dziedzin aktywności państwa (np. "Bezpieczeństwo wewnętrzne i porządek publiczny").
 Podstawa: rozporządzenie MF ws. szczegółowego sposobu, trybu i terminów
@@ -141,7 +141,7 @@ Reguła: 22 funkcje państwa w budżecie zadaniowym → zadania → podzadania �
 ### BAS-054 — Miernik realizacji zadania / działania
 ```
 Weryfikacja: rozp. MF ws. szczegółowego sposobu budżetu zadaniowego
-  (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym art. 174)
+  (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912) art. 174)
 Definicja: Wskaźnik liczbowy służący do oceny stopnia realizacji celu określonego
   w budżecie zadaniowym (output, outcome lub result indicator).
 Podstawa: rozporządzenie MF ws. budżetu zadaniowego
@@ -175,7 +175,7 @@ Reguła: EDP → Komisja Europejska wszczyna → Rada ECOFIN wydaje zalecenia �
 
 ### BAS-071 — Instytucja gospodarki budżetowej (IGB)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 23–28 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 23–28 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Jednostka sektora finansów publicznych tworzona przez ministra lub organ
   kierujący jednostką nadrzędną, prowadząca odpłatną działalność i pokrywająca
   koszty z uzyskiwanych przychodów (może być dofinansowana z budżetu).
@@ -186,7 +186,7 @@ Reguła: IGB ≠ agencja wykonawcza (agencja ma własną ustawę; IGB — zarzą
 
 ### BAS-073 — Państwowa osoba prawna
 ```
-Weryfikacja: ustawa o finansach publicznych art. 9 pkt 14 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 9 pkt 14 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 Definicja: Podmiot z osobowością prawną, niebędący Skarbem Państwa,
   nieposiadający statusu spółki handlowej, który wykonuje zadania publiczne
   i w całości lub dominującej części jest finansowany ze środków publicznych.
@@ -223,7 +223,7 @@ Reguła: Dochody własne + subwencja + dotacje celowe = trzy filary finansowania
 
 ### BAS-086 / BAS-087 — Dochody bieżące i majątkowe JST
 ```
-Weryfikacja: ustawa o finansach publicznych art. 235–236 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 235–236 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
 DOCHODY BIEŻĄCE: wpływy przeznaczane na finansowanie wydatków bieżących
   (wynagrodzenia, zakup usług, dotacje bieżące); muszą w pełni finansować
   wydatki bieżące → złota reguła budżetowa.
@@ -245,7 +245,7 @@ Reguła: Proporcje między filarami decydują o samodzielności finansowej JST �
 
 ### BAS-092 — Jednostki sektora finansów publicznych (katalog)
 ```
-Weryfikacja: ustawa o finansach publicznych art. 9 (**Dz.U. 2025 poz. 1483 t.j.** ✅ [VER] RZĄD 1 2026-09-10n ⛔ KROK 2C: 5 nowelizacji po tekście jednolitym)
+Weryfikacja: ustawa o finansach publicznych art. 9 (**Dz.U. 2026 poz. 1447 t.j.** ✅ [VER] RZĄD 1 ELI 2026-11-11 (obwieszczenie 2.10.2026, stan na 27.09.2026; obejmuje m.in. 2025/1846, 2026/426, 635, 680, 912))
   ZWERYFIKOWANO — katalog zamknięty
 Definicja: Katalog z art. 9 ustawy o finansach publicznych:
   organy władzy publicznej (Sejm, Senat, Prezydent, NSA, TK, NIK...),

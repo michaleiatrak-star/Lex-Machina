@@ -21,7 +21,7 @@ Mapa runtime zawiera wyłącznie bieżące przypisanie **akt / zakres → moduł
 | KOZZiD — osoby z zaburzeniami psychicznymi stwarzające zagrożenie | Dz.U. 2022 poz. 1689 t.j. ze zm. | `mod-ustawa-szczegolne-srodki-zabezpieczajace` | ✅ aktywny |
 | Ustawa o środkach przymusu bezpośredniego i broni palnej | Dz.U. 2026 poz. 244 t.j.; po t.j. (ELI 2026-10-12): 2026/737, 2026/815 (w mocy 4.07.2026) | `mod-ustawa-policja` | ✅ aktywny; fresh gate |
 | Prawo komunikacji elektronicznej — retencja danych / działania służb | Dz.U. 2024 poz. 1221 (brak t.j.); zm. (ELI 2026-10-12): 2025/637, 2025/820, 2026/252, 2026/815 (w mocy 4.07.2026), 2026/1296 | `mod-ustawa-sluzby-operacyjne-retencja-danych` + routing DR-11 | ✅ aktywny; fresh gate |
-| Ustawa o Państwowej Straży Pożarnej | Dz.U. 2025 poz. 1312 t.j. ze zm. | `mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa` | ✅ aktywny |
+| Ustawa o Państwowej Straży Pożarnej | Dz.U. 2026 poz. 1473 t.j.; ⏳ 2026/1123 art. 5 (art. 105b, 105e) od 1.01.2028 | `mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa` | ✅ aktywny; ELI 2026-11-11 |
 | Ustawa o ochronie przeciwpożarowej | Dz.U. 2025 poz. 188 t.j.; po t.j. (ELI 2026-10-12): 2026/815 (w mocy 4.07.2026) | `mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa` | ✅ aktywny |
 | Ustawa o ochotniczych strażach pożarnych | Dz.U. 2025 poz. 244 t.j. ze zm. | `mod-ustawa-PSP-OSP-ochrona-przeciwpozarowa` | ✅ aktywny |
 | Ustawa o broni i amunicji | Dz.U. 2024 poz. 485 t.j. ze zm. | `mod-BronAmunU-pozwolenia-cofniecie-strzelnice` | ✅ aktywny; temporal/fresh gate |

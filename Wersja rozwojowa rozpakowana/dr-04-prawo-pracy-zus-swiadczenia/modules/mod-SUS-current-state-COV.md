@@ -10,11 +10,27 @@ source_policy: "RZĄD 1 ELI"
 
 ## 1. Baza
 
-**Ustawa o systemie ubezpieczeń społecznych:** t.j. Dz.U. 2026 poz. 199.
-ELI wskazuje akty zmieniające po t.j.; konkretna jednostka wymaga kontroli
-tekstu ujednoliconego, daty zdarzenia i dat wejścia w życie.
+**Ustawa o systemie ubezpieczeń społecznych:** t.j. Dz.U. 2026 poz. 1474
+(obwieszczenie 9.10.2026, stan na 4.10.2026; ELI 2026-11-11; poprzedni t.j. 2026/199).
+Konkretna jednostka nadal wymaga kontroli daty zdarzenia i dat wejścia w życie.
 
-- https://eli.gov.pl/eli/DU/2026/199/ogl
+- https://eli.gov.pl/eli/DU/2026/1474/ogl
+
+Zmiany ujęte w t.j. 2026/1474 względem poprzedniego t.j. 2026/199 (odczyt przepisów zmieniających w ELI):
+- Dz.U. 2026 poz. 473 (ustawa o PIP, art. 5; od 8.07.2026) — decyzja inspektora pracy
+  stwierdzająca istnienie stosunku pracy (art. 11 ust. 1 pkt 7a ustawy o PIP):
+  art. 18 ust. 1b (do ostateczności decyzji albo prawomocności wyroku podstawą wymiaru
+  są kwoty wykazane z tytułu umowy zlecenia/agencyjnej), art. 24 ust. 5h (zawieszenie
+  przedawnienia składek od odwołania do ostateczności/prawomocności), art. 36 ust. 4e
+  (zgłoszenie w 7 dni od ostateczności/prawomocności), art. 38b (składki z tytułu zlecenia
+  zaliczane na poczet składek pracowniczych; bez art. 24 ust. 6a–6g), art. 50 ust. 11–13a;
+- Dz.U. 2026 poz. 252 (od 3.04.2026) — art. 50 ust. 32 (dane dla organów cyberbezpieczeństwa);
+- Dz.U. 2026 poz. 426 (od 14.04.2026) — art. 53 ust. 2 (dotacje i pożyczki dla FUS);
+- Dz.U. 2026 poz. 734 (art. 2) — art. 50 ust. 16a; ⏳ art. 36 ust. 13a–13b od 6.12.2026;
+- Dz.U. 2026 poz. 507 (art. 5) — ⏳ art. 36b ust. 2, art. 43 ust. 5aa od 1.11.2028.
+Ujęte w t.j. z datą przyszłą: ⏳ Dz.U. 2025 poz. 1413 od 1.11.2026 — art. 45 ust. 1 pkt 4,
+art. 50 ust. 28–31 (dane z konta płatnika dla banków i przedsiębiorców za jego zgodą);
+⏳ Dz.U. 2026 poz. 26 — część zmian od 1.01.2027 (przypisy t.j.).
 
 ## 2. Mapa 13 rozdziałów
 
@@ -49,7 +65,7 @@ strukturalnego COV całego aktu, ale wyklucza status `FULL`.
 ## 4. Quality gate
 
 - [ ] ustalono tytuł ubezpieczenia;
-- [ ] sprawdzono tekst ujednolicony po t.j. 2026/199;
+- [ ] sprawdzono tekst ujednolicony po t.j. 2026/1474 (zmiany ⏳ z datą przyszłą);
 - [ ] sprawdzono cztery akty zmieniające wskazane przez ELI i daty wejścia;
 - [ ] dla składek odczytano również właściwy akt wykonawczy;
 - [ ] dla odwołania uruchomiono właściwy reżim KPC;

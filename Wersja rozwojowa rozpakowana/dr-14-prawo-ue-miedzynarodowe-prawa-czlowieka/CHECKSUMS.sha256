@@ -1,10 +1,10 @@
 48372c32b188ddbbe261229eb3ce5850d5c013da9179c1f67b53e773629adff8  ./MAPA-AKTOW.md
 afc080fa6c163b25960985dc80c541245402958855d3ac853835e9640037f01d  ./MAPA-POKRYCIA.md
 433b720250fe97d5e9dd1f0db7ce7a1bb464a4de16c6e9b8fe4fc16e2396a083  ./PORTABILITY-MANIFEST.md
-033c094a9d3918f6c553759eb9f7392de797e78f03022346fced258caa9b1c77  ./SKILL.md
+f9dc153a1a77d02c24d5970bff5b650838c67fec08f0d4f3f82935ead96706dc  ./SKILL.md
 674c95294d72b9adf311234a798c639d004bd5e0fdcaacbcd912be772e223a2e  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
-b5caba60082a311151beb50575b9b13880f70a87d9bf278e79b9a75b43a6c630  ./modules/mod-EKPC-ETPC-prawa-czlowieka.md
+914fc2763521673e04c59f33739212bfa6db9acc95147c480fab98404cb718c2  ./modules/mod-EKPC-ETPC-prawa-czlowieka.md
 ad3edefc48813f61bfa3c1fd32e12d08ca3b17d21f3c5f983b825860e6c03b51  ./modules/mod-KPC-egzekucja-transgraniczna-UE.md
 3f1b4d928870c02555a4c218e6538251ebc181a3a211fe34e47bf45425dde5cd  ./modules/mod-KPP-karta-praw-podstawowych-UE.md
 eaaa5f8fa4609bbb138fa036853fd3248df14cd99990ecde2042e0c0642ca864  ./modules/mod-NATO-umowy-miedzynarodowe.md
@@ -16,4 +16,4 @@ f71a5f7c5c783bb78979d8db494314383a7537499eb53ef34d6cf484af196e01  ./modules/mod-
 70beba420b8669cfbef88a7e7e118e3f2a3417d22c4d6f7e0a1f9c78ed3de4c8  ./modules/mod-konwencje-wiedenskie-dyplomatyczne-konsularne.md
 5c02c655d2125482abd6453bb434c3ca3903c4ff254b1c00e06fbb709d8776ad  ./modules/mod-maly-ruch-graniczny.md
 27e58f815aa4689bed7376ddda6e57bc9906abde0f49846e5897ed326a16238a  ./modules/mod-rejestr-zrodla-prawa-lifecycle.md
-5e954aa99a55493e43062486b4241d7c1a9f5016efa218b777ca4493b6a48bf0  ./references/CHANGELOG.md
+094282247fbeea9d325e2caa0b1ee4f357306214f8ceea8f6e43f8b8bc7ba5bb  ./references/CHANGELOG.md
