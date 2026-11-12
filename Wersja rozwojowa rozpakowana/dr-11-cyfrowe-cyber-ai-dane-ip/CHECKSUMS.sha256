@@ -1,7 +1,7 @@
-6b6e58cb5dd131bb40272a39308fa76ad202d6bca7c8b25ae657ba1baa0952ea  ./MAPA-AKTOW.md
+35b179df1b20d842683ebb654c9a9414a6569cb8668f8f23016432d58e085e4b  ./MAPA-AKTOW.md
 35b3a4d5e748e47ee80ca3c8e89c39da077b03045fc0fbddb3a60862f55554d6  ./MAPA-POKRYCIA.md
 6c3d025cebaf55649c653846e434164faad4a8ed618f3489bcc72a53f0447ddc  ./PORTABILITY-MANIFEST.md
-93c380bcff012a3fada780e706536cc0c841825354beedd05590b897d1b94fae  ./SKILL.md
+3f413ed898c722b7e24a190985e567a734d43aacb589f6e789ca576353ec323f  ./SKILL.md
 d27a6bc6669c2682e6f6b034bae8e340e317cacdd03d8bb5411ab000182eebd0  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 c8a9d11bccacbda6dda80b21bf7d32d15d05e39bbeb3150d1d1ecc7f44531916  ./modules/mod-AI-Act-framework.md
@@ -26,4 +26,4 @@ f013f83a208eb349c5f64d03e60b9a24001bf6b0c42c6a9c21a82d76f4a1e8ba  ./modules/mod-
 aff4384416951db74063a36b73e12ddfdf3b3262d3075696e03597a1274233bb  ./modules/mod-ustawa-podpis-elektroniczny.md
 0bba80f38aaa77ace308d59347302ec2797f48cb15021051a06ad810cf181f50  ./modules/mod-ustawa-prawo-wlasnosci-przemyslowej.md
 2b10c15850e71154e6e0aed62026503cf29bad989989ede89b8ee2efb0e50f69  ./modules/mod-ustawa-uslugi-elektroniczne.md
-219697c330c8d691291f7c1e490be1297338fe823487d445def7c67b481ff704  ./references/CHANGELOG.md
+ec0cae3ed913c55986c3a9e9de2eaf4686f56e64a83180d5cdff12c53d17af60  ./references/CHANGELOG.md

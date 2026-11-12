@@ -5,29 +5,31 @@
 
 | Akt / zakres | Aktualna podstawa | Moduł wejściowy | Status bieżący |
 |---|---|---|---|
-| samorząd gminny | Dz.U. 2026 poz. 662 t.j. | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md` | 🟢 B+ / COV |
-| samorząd powiatowy | Dz.U. 2025 poz. 1684 t.j. | `mod-ustawa-samorzad-powiatowy.md` | 🟢 B+ / COV |
+| samorząd gminny | Dz.U. 2026 poz. 662 t.j.; po t.j.: 2026/912 art. 65 (art. 10b ust. 1, od 31.07.2026), ⏳ 2026/1273 (od 30.03.2027) ✅ [VER] ELI 2026-11-11 | `mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md` | 🟢 B+ / COV |
+| samorząd powiatowy | Dz.U. 2025 poz. 1684 t.j.; po t.j.: 2026/252, 2026/912 art. 70 (od 31.07.2026) ✅ [VER] ELI 2026-11-11 | `mod-ustawa-samorzad-powiatowy.md` | 🟢 B+ / COV |
 | samorząd województwa | Dz.U. 2026 poz. 720 t.j. | `mod-ustawa-samorzad-wojewodztwa.md` | 🟢 B+ / COV |
 | wojewoda i administracja rządowa w województwie | Dz.U. 2025 poz. 428 t.j. | `mod-wojewoda-administracja-rzadowa-current-state-COV.md` | 🟢 B+ / COV |
 | nadzór wojewody i RIO nad JST | USG/USP/USW + właściwe przepisy szczególne | `mod-nadzor-wojewody-RIO-legalnosc-uchwal.md` | 🟢 operacyjne |
 | skargi na akty prawa miejscowego | PPSA + właściwa ustawa ustrojowa | `mod-skargi-na-prawo-miejscowe-WSA-NSA.md` | 🟢 operacyjne |
 | statuty i regulaminy JST | właściwa ustawa ustrojowa + aktualny akt lokalny | `mod-procedury-JST-statuty-regulaminy.md` | 🟢 operacyjne |
-| ogłaszanie aktów normatywnych i dzienniki urzędowe | Dz.U. 2019 poz. 1461 t.j. | `mod-dzienniki-urzedowe-BIP-publikacja.md` | 🟢 operacyjne; fresh gate przed powołaniem |
+| ogłaszanie aktów normatywnych i dzienniki urzędowe | Dz.U. 2019 poz. 1461 t.j.; po t.j.: 2026/912 art. 71 (art. 13 pkt 2a — akty prawa miejscowego związku metropolitalnego, od 31.07.2026) ✅ [VER] ELI 2026-11-11 | `mod-dzienniki-urzedowe-BIP-publikacja.md` | 🟢 operacyjne; fresh gate przed powołaniem |
 | kontrola w administracji rządowej | Dz.U. 2026 poz. 158 t.j. | `mod-kontrola-administracji-inspekcje.md` | 🟢 operacyjne; inspekcje sektorowe routowane do lex specialis |
 | akty porządkowe | właściwe przepisy USG/USP/USW | `mod-akty-porzadkowe-bezpieczenstwo-lokalne.md` | 🟢 operacyjne |
 | lokalne dane publiczne | RODO + UDIP + przepisy lokalne | `mod-lokalne-dane-publiczne-RODO-BIP.md` | 🟢 operacyjne |
-| planowanie przestrzenne — MPZP/WZ | Dz.U. 2026 poz. 538 t.j. | `mod-MPZP-WZ-planowanie-przestrzenne.md` | 🟢 operacyjne |
+| planowanie przestrzenne — MPZP/WZ | Dz.U. 2026 poz. 538 t.j.; po t.j.: 2026/781, 2026/864, 2026/912 art. 73 ✅ [VER] ELI 2026-11-11 | `mod-MPZP-WZ-planowanie-przestrzenne.md` | 🟢 operacyjne |
 | lokalne podatki i opłaty | Dz.U. 2025 poz. 707 t.j. + aktualna uchwała lokalna | `mod-lokalne-podatki-oplaty-taryfy.md` | 🟢 operacyjne |
 | dochody JST | akt pierwotny Dz.U. 2024 poz. 1572; t.j. Dz.U. 2026 poz. 1252 ✅ [VER] RZĄD 1 2026-10-09 (ELI, obwieszczenie odczytane) (⛔ obejmuje 2026/875 — w życie 1.01.2027) | `mod-ustawa-dochody-JST.md` | 🟢 operacyjne; fresh gate |
 | zarządzanie kryzysowe | Dz.U. 2026 poz. 574 t.j.; po t.j.: 2026/815, 2026/1206 art. 15 (od 11.01.2027) ✅ [VER] 2026-10-09 | `mod-ustawa-zarzadzanie-kryzysowe.md` | 🟢 operacyjne; temporal gate |
 | ochrona ludności i obrona cywilna | Dz.U. 2024 poz. 1907 (ustawa, brak t.j.) ze zm. 2026/646, 2026/815; ⏳ 2025/1705 od 1.01.2027 ✅ [VER] 2026-10-09 | `mod-ustawa-zarzadzanie-kryzysowe.md` | 🟢 operacyjne; stan po wejściu zmian z 2026 r. |
 | publiczny transport zbiorowy | Dz.U. 2026 poz. 1231 t.j. | `mod-ustawa-komunalne-wod-kan-transport-czystosc.md` | 🟢 operacyjne |
 | referendum lokalne | Dz.U. 2025 poz. 472 t.j. | `mod-ustawa-referendum-lokalne.md` | 🟢 operacyjne |
+| związek metropolitalny w województwie pomorskim | Dz.U. 2026 poz. 912 (ustawa, w mocy od 31.07.2026; związek powstaje z dniem wejścia w życie rozporządzenia RM — brak w ELI na 2026-11-11) ✅ [VER] ELI 2026-11-11 | `mod-zwiazki-metropolitalne.md` | 🟢 operacyjne; fresh gate (istnienie związku) |
+| związek metropolitalny w województwie śląskim | Dz.U. 2025 poz. 186 t.j.; po t.j.: 2026/912 art. 81 (od 31.07.2026); utworzenie: rozporządzenie RM Dz.U. 2017 poz. 1290 ✅ [VER] ELI 2026-11-11 | `mod-zwiazki-metropolitalne.md` | 🟢 operacyjne |
 | pracownicy samorządowi | Dz.U. 2024 poz. 1135 t.j. | `mod-ustawa-pracownicy-samorzadowi.md` | 🟢 operacyjne |
-| utrzymanie czystości i porządku w gminach | Dz.U. 2025 poz. 733 t.j. | `mod-ustawa-komunalne-wod-kan-transport-czystosc.md` | 🟢 operacyjne |
+| utrzymanie czystości i porządku w gminach | Dz.U. 2025 poz. 733 t.j.; po t.j.: 2026/912 art. 68 (od 31.07.2026) ✅ [VER] ELI 2026-11-11 | `mod-ustawa-komunalne-wod-kan-transport-czystosc.md` | 🟢 operacyjne |
 | zbiorowe zaopatrzenie w wodę i odprowadzanie ścieków | Dz.U. 2024 poz. 757 t.j. (ostatnia znana zmiana: Dz.U. 2026 poz. 605) | `mod-ustawa-komunalne-wod-kan-transport-czystosc.md` | 🟢 operacyjne |
 | ochrona zabytków | Dz.U. 2024 poz. 1292 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne; fresh gate |
-| rewitalizacja | Dz.U. 2024 poz. 278 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne |
+| rewitalizacja | Dz.U. 2024 poz. 278 t.j.; po t.j.: 2026/912 art. 80 (od 31.07.2026) ✅ [VER] ELI 2026-11-11 | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne |
 | cmentarze i chowanie zmarłych | Dz.U. 2025 poz. 1590 t.j. | `mod-ustawa-zabytki-rewitalizacja.md` | 🟢 operacyjne |
 | drogi publiczne — SPP/ŚSPP | Dz.U. 2025 poz. 889 t.j.; po t.j.: zm. Dz.U. 2026 poz. 815 art. 2 (w mocy 4.07.2026) i Dz.U. 2026 poz. 982 (w mocy 21.09.2026 — brzmienie art. 13/13b/13f czytać u źródła) ✅ [VER] 2026-10-06 ELI | `mod-UDP-strefy-platnego-parkowania.md` | 🟢 operacyjne |
 

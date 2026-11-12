@@ -29,6 +29,7 @@ Mapa pokazuje tylko bieżące pokrycie używane przez system. Rejestracja aktu n
 | zarządzanie kryzysowe / ochrona ludności | `mod-ustawa-zarzadzanie-kryzysowe` | 🟡 |
 | publiczny transport zbiorowy | `mod-ustawa-komunalne-wod-kan-transport-czystosc` | 🟡 |
 | referendum lokalne | `mod-ustawa-referendum-lokalne` | 🟡 B+ |
+| związki metropolitalne (pomorski, śląski) | `mod-zwiazki-metropolitalne` | 🟡 B |
 | pracownicy samorządowi | `mod-ustawa-pracownicy-samorzadowi` | 🟡 |
 | utrzymanie czystości i porządku w gminach | `mod-ustawa-komunalne-wod-kan-transport-czystosc` | 🟡 B+ |
 | zbiorowe zaopatrzenie w wodę / ścieki | `mod-ustawa-komunalne-wod-kan-transport-czystosc` | 🟡 |

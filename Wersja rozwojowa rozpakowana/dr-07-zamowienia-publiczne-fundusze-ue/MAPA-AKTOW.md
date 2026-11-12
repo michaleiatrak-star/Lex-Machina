@@ -25,7 +25,7 @@ Mapa runtime pokazuje wyłącznie bieżący stan aktu → moduł. Historia korek
 | Regionalne izby obrachunkowe | Dz.U. 2025 poz. 7 t.j. | `mod-ustawa-RIO-regionalne-izby` | 🟢 operacyjny |
 | KPC — arbitraż i mediacja | Dz.U. 2026 poz. 468 t.j. | `mod-ustawa-arbitraz-mediacja` | 🟢 operacyjny |
 | Odpowiedzialność za naruszenie dyscypliny finansów publicznych | Dz.U. 2025 poz. 1484 t.j. | `mod-ustawa-dyscyplina-finansow-publicznych` | 🟢 operacyjny |
-| Ustawa wdrożeniowa 2021–2027 | Dz.U. 2025 poz. 1733 t.j. | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
+| Ustawa wdrożeniowa 2021–2027 | Dz.U. 2025 poz. 1733 t.j.; po t.j.: 2025/1844 (od 1.01.2026), 2026/912 art. 86 (od 31.07.2026) ✅ [VER] ELI 2026-11-11 | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
 | Zasady prowadzenia polityki rozwoju | Dz.U. 2026 poz. 1366 t.j. (ELI 2026-11-11) | `mod-ustawa-fundusze-UE-pomoc-publiczna` | 🟢 operacyjny |
 
 ## Reguła użycia

@@ -1,7 +1,7 @@
-6b09854cab463ca5da839a86d3f13d1100b10c7575a968d2063e147eadbe9441  ./MAPA-AKTOW.md
-2763701bd121dd6e70f1098ed71416e7d78852962b0289d7ec1db280fe520eae  ./MAPA-POKRYCIA.md
+e3cbe826e51059882d9a276cfe257de349283405139ee6870422c879450ddd6a  ./MAPA-AKTOW.md
+df90749f7ba4a3b162c670fb50dcc853f53e979ea56a7e0d7270963c92337761  ./MAPA-POKRYCIA.md
 5bb12ce059b79b514a3d11ba63efd201748c8e3a064a8f97bf576eace6a83782  ./PORTABILITY-MANIFEST.md
-96b6b3a29a5d6d608cfea8881862113667c9ebfaf83793109f0c6689f36d23cc  ./SKILL.md
+8057035761968dd5173c982f1cb6b960102532c2dcd0791d5dbaf7d7e4c2375b  ./SKILL.md
 5681f9c71bd5ec9f182f0618b4a75d9711a50f1d57cb6788f5a98b5b4603e99b  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 a4da06fd5ff6fe8ee90f423e87688d02caa64e4a5165b02567b656c93bf67f83  ./modules/mod-JST-ustroj-samorzad-gminny-powiatowy-wojewodztwa.md
@@ -24,4 +24,5 @@ a18e15e1ac8c6e62cbee58217dd5beec1701bbf682f92d950047bfa083872f78  ./modules/mod-
 aff6d1ee5b6b2d6b86c49d14a877c40fd919a014f2fb2b31d15d31e6940e42ff  ./modules/mod-ustawa-zabytki-rewitalizacja.md
 3eadd87f4d68e1c2cd836d8543fee9c089862d4038aa1e64abbefdaa3c42150e  ./modules/mod-ustawa-zarzadzanie-kryzysowe.md
 a63b556d8c55c3c190dce944b8a4780f76c019ae0fc70fc2f396c853d37990ee  ./modules/mod-wojewoda-administracja-rzadowa-current-state-COV.md
-34234fbe66f30e4834e5b5e3f7adff4309ff9f2f7690320c9e27ba46677b3861  ./references/CHANGELOG.md
+7f3ef4760869020c472ccee5936ef44f91f9d666a686d67da658602f0a6e2c8e  ./modules/mod-zwiazki-metropolitalne.md
+d3252b0708ef6f421627540e155a532802110caca3d32d052186527cc7a7d18e  ./references/CHANGELOG.md
