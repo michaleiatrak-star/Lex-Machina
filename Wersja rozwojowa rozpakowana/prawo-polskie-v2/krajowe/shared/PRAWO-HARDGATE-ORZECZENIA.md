@@ -118,6 +118,9 @@ KROK 1: Wyszukaj sygnaturę WYŁĄCZNIE w oficjalnej bazie:
                  postępowaniach na rzecznik.gov.pl (to NIE są pełne orzeczenia)
       notariusz, komornik, rzecznik patentowy → BRAK potwierdzonego
                  scentralizowanego publicznego portalu I/II instancji
+    Ranga: orzeczenie odczytane na portalu samego sądu dyscyplinarnego (wsd.adwokatura.pl,
+    wsd.kirp.pl, nil.org.pl/orzeczenia) = RZĄD 2A → ✅ [VER: portal, data], jak sn.pl;
+    nie 🟨 i nie 📚 RZĄD 3 (HIERARCHIA-ZRODEL.md, od 2026-11-12).
     Niezależnie od powyższego: brak trafienia w bazie korporacyjnej NIE jest
     dowodem, że sygnatura jest zmyślona — oznacz ⚠️ [NIEWERYFIKOWALNE — baza
     korporacyjna niekompletna/nieaktualna/lokalna], NIGDY ✅ [VER] bez faktycznego

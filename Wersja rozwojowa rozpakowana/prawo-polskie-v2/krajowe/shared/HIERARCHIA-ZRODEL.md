@@ -181,6 +181,17 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   `trybunal.gov.pl` / `ipo.trybunal.gov.pl`. Orzeczenie NIE jest źródłem
   brzmienia przepisu, więc nie awansuje do RZĘDU 1; RZĄD 2A oznacza tu
   autentyczne źródło rozstrzygnięcia.
+- **Sądy dyscyplinarne zawodów — RZĄD 2A dla treści rozstrzygnięcia (od 2026-11-12).**
+  Publikacja orzeczenia na portalu samego sądu dyscyplinarnego jest urzędowym źródłem
+  rozstrzygnięcia, tak jak `sn.pl` dla SN: `wsd.adwokatura.pl` (Wyższy Sąd Dyscyplinarny
+  Adwokatury, „Portal Orzecznictwa Dyscyplinarnego Adwokatury”, `rejestry/showMain/orzecznictwo-19`),
+  `wsd.kirp.pl` (WSD KIRP), `nil.org.pl/orzeczenia` (NSL/OSL). Orzeczenie odczytane tam,
+  ze zgodną sygnaturą w treści → ✅ [VER: wsd.adwokatura.pl, data] (nie 🟨, nie
+  📚 RZĄD 3). Ranga to autentyczność źródła, nie moc wiążąca: orzeczenie WSD nie wiąże
+  innych sądów, ale nie jest „materiałem pomocniczym”. Brak trafienia ≠ zmyślenie
+  (bazy korporacyjne są niepełne) → ⚠️ [NIEWERYFIKOWANE — brak w portalu WSD]. Odpisy,
+  omówienia i cytaty orzeczeń WSD na innych stronach (blogi kancelarii, portale) pozostają
+  RZĘDEM 2B/3 — wyłącznie trop do portalu sądu.
 - ⛔ **WYJĄTEK SN — link = KARTA SPRAWY (od 2026-10-06).** Źródłem orzeczenia SN
   podawanym użytkownikowi jest karta `https://www.sn.pl/pl/wyszukiwarka-orzeczen?orzeczenie=ID`
   (zwraca ją `verify_case_reference` / `sn_sprawdz_sygnature`), nigdy adres tekstu:
@@ -205,6 +216,7 @@ ryzyku dezaktualizacji, redakcja profesjonalna).
   | TK | `ipo.trybunal.gov.pl` / `otkzu.trybunal.gov.pl` | tylko źródła urzędowe, **bez SAOS**: karta sprawy IPO GET `view/sprawa.xhtml?pokaz=dokumenty&sygnatura=K+33%2F07` → wyszukiwarka OTK ZU (`/Wyszukiwanie`, pozycja `/{rok}/{A\|B}/{poz}`) → formularz JSF `Szukaj?cid=1` (bywa niesprawny); brak trafienia = OUT_OF_SCOPE z linkami urzędowymi; MCP `tk_*`, odczyt dokumentu z kontrolą sygnatury; link = dokument orzeczenia |
   | ETPCz | `etpcz.ms.gov.pl` (baza MS, polskie tłumaczenia; wybrane orzeczenia) / `hudoc.echr.coe.int` (pełny zbiór) | formularz wyszukiwarki odczytany ze strony; numer skargi kontrolowany po id dokumentu (`…_ETPC_{nr 6 cyfr}_{20RR}_…`); **link = treść `/etpccontent/$N/{id}` (stały)**; brak trafienia ≠ brak orzeczenia (HUDOC); MCP `etpcz_*` |
   | **NSA/WSA** | **`orzeczenia.nsa.gov.pl` / CBOSA** | **fresh-probe → direct HTML: `POST /cbo/search` → sesyjna paginacja `/cbo/find?p=N` → `/doc/{ID}` → exact-match**; implementacja: `shared/CBOSA-ADAPTER.md` + `tools/cbosa_parser.py`. Gdy direct CBOSA niedostępna → `prawo-polskie-v2/krajowe/shared/SYGNATURY.md` V-SYG-0.5 |
+  | Sądy dyscyplinarne (adwokaci, radcowie, lekarze) | `wsd.adwokatura.pl`, `wsd.kirp.pl`, `nil.org.pl/orzeczenia` | **RZĄD 2A**: wyszukiwarka portalu po sygnaturze (WSD Adwokatury: rejestr 19, pole sygnatury) → strona orzeczenia → zgodność sygnatury w treści; w aplikacji sygnatury WSD z akt sprawdza aplikacja przed odpowiedzią; web_search tylko jako trop |
   | SAOS | `saos.org.pl` | **RZĄD 3** (agregator akademicki): discovery / kontrola krzyżowa / cytator; zastępczo tylko przy awarii bazy urzędowej albo braku trwałego linku w portalu. Zasięg: SP bieżąco, SN do 2016, TK do 2015, KIO do 2018, bez NSA/WSA |
 
   ⛔ **Kolejność odkrywania** (kanon: `orzeczenia-sadowe-v2`, Faza 1-0): sygnatura znana →

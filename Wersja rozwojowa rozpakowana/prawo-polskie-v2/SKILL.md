@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.86"
+version: "6.87"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
