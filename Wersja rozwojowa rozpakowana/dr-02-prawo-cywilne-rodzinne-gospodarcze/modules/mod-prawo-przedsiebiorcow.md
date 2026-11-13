@@ -12,9 +12,9 @@ source_policy: "RZĄD 1 only"
 
 **Akt:** ustawa z 6 marca 2018 r. — Prawo przedsiębiorców.
 
-**Tekst jednolity:** Dz.U. 2025 poz. 1480, obwieszczenie Marszałka Sejmu
-z 20.10.2025. Aktualne późniejsze zmiany potwierdzone w urzędowym ELI:
-Dz.U. 2025 poz. 1795 i 1826 oraz Dz.U. 2026 poz. 507.
+**Tekst jednolity:** Dz.U. 2026 poz. 1484, obwieszczenie Marszałka Sejmu
+z 3.11.2026 (stan prawny 28.10.2026); obejmuje zm. Dz.U. 2025 poz. 1795
+i 1826 oraz Dz.U. 2026 poz. 507 (ELI 2026-11-13).
 
 - ELI rocznik 2025: https://eli.gov.pl/eli/DU/2025 {RZĄD: 1}
 - zmiana Dz.U. 2026 poz. 507:

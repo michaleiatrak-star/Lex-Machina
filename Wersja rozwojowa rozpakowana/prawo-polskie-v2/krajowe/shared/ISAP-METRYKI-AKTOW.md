@@ -12,7 +12,7 @@
 |---|---:|---|---|
 | Kodeks postępowania cywilnego | Dz.U. 2026 poz. 468; tekst ujednolicony opracowany na podstawie Dz.U. 2026 poz. 468 i 473 | aktualny na dzień audytu | używać dla pism cywilnych, pracy, gospodarczych i egzekucji sądowej |
 | Kodeks cywilny | Dz.U. 2026 poz. 795 t.j.; późniejsze zmiany sprawdzać przed zastosowaniem | aktualny t.j. na 2026-08-28 | konkretny artykuł i temporalność zawsze fresh gate |
-| Prawo przedsiębiorców | tekst ujednolicony opracowany na podstawie Dz.U. 2025 poz. 1480, 1795, 1826 oraz Dz.U. 2026 poz. 507 | aktualny na dzień audytu | stosować przy działalności regulowanej i gospodarczej |
+| Prawo przedsiębiorców | Dz.U. 2026 poz. 1484 t.j. (obwieszczenie 3.11.2026, stan 28.10.2026; obejmuje 2025/1795, 1826, 2026/507) | aktualny wg ELI 2026-11-13 | stosować przy działalności regulowanej i gospodarczej |
 
 ---
 
@@ -32,7 +32,7 @@
 | Akt | Metryka ISAP zweryfikowana | Status roboczy systemu | Uwagi wdrożeniowe |
 |---|---:|---|---|
 | Ordynacja podatkowa | tekst ujednolicony ISAP `D19970926Lj.pdf`, opracowanie Kancelarii Sejmu z 25.05.2026 | aktualny na dzień audytu | postępowanie podatkowe jako moduł odrębny od KPA |
-| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2025 poz. 1131; tekst ujednolicony ISAP `D20161947Lj.pdf` | aktualny na dzień audytu z wymogiem sprawdzenia zmian po t.j.; ⚡ zm. Dz.U. 2026 poz. 1281 art. 9 (art. 118, 122 ust. 4, 123 — kontrola operacyjna), w mocy 31.10.2026 | kontrola celno-skarbowa, czynności sprawdzające, uprawnienia UCS |
+| Ustawa o Krajowej Administracji Skarbowej | Dz.U. 2026 poz. 1492 t.j. (obwieszczenie 22.10.2026, stan 21.10.2026) | aktualny wg ELI 2026-11-13 z wymogiem sprawdzenia zmian po t.j.; obejmuje zm. Dz.U. 2026 poz. 1281 art. 9 (art. 118, 122 ust. 4, 123 — kontrola operacyjna, w mocy 31.10.2026) | kontrola celno-skarbowa, czynności sprawdzające, uprawnienia UCS |
 | Kodeks karny skarbowy | Dz.U. 2025 poz. 633 t.j.; po t.j. opublikowano zmiany, dlatego sprawdzać ELI na dzień czynu/czynności | PO-TJ-ZMIANY | konkretny przepis zawsze fresh gate |
 
 ---

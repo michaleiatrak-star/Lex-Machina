@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.109 (2026-11-13): Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (ELI 2026-11-13; obwieszczenie 3.11.2026, stan 28.10.2026; obejmuje 2025/1795, 1826, 2026/507): MAPA-AKTOW, MAPA-POKRYCIA, mod-prawo-przedsiebiorcow, mod-Prawo-przedsiebiorcow-current-state-COV (linki ELI), mod-KSH
 - 3.108 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: ustawa deweloperska — t.j. Dz.U. 2026 poz. 880 i zmiana po t.j. 2026/1077 (art. 19b ust. 1, 2a–2b, od 11.11.2026); moduł bez zmian (art. 19b nieomawiany).
 - 3.107 (2026-11-11, LEGAL GAUNTLET v3 E5): mod-KRO-rodzinne: twarda bramka dobra dziecka (MOD-DOBRO-DZIECKA) w sprawach o władzę rodzicielską, kontakty, miejsce pobytu i pieczę.
 - 3.106 (2026-11-06): migracja prawa polskiego E3: ścieżki odwołań do modułów przeniesionych z shared i skilli wykonawczych do prawo-polskie-v2/krajowe/ (treść bez zmian)

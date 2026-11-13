@@ -1,0 +1,97 @@
+name: Teksty jednolite z ELI (codziennie)
+
+# Raz dziennie: nieaktualne numery t.j. -> najnowsze z ELI, podbicie wersji,
+# przepakowanie ZIP-ów, pełna regresja. Wynik trafia do PR na gałęzi
+# auto/tj-eli; scalenie zawsze ręczne. PR utworzony tokenem GITHUB_TOKEN nie
+# uruchamia innych workflow, dlatego regresja biegnie tutaj, a jej wynik
+# jest w opisie PR.
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: tj-eli
+  cancel-in-progress: false
+
+jobs:
+  aktualizacja:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: auto/tj-eli
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Zależności testów
+        run: python3 -m pip install --disable-pip-version-check pyyaml python-docx
+
+      - name: Aktualizacja t.j. z ELI
+        id: tj
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/aktualizuj_tj.py --raport "$RUNNER_TEMP/raport.md"
+          if git diff --quiet; then
+            echo "zmiany=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "zmiany=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Regresja
+        if: steps.tj.outputs.zmiany == '1'
+        id: regresja
+        shell: bash
+        run: |
+          set -uo pipefail
+          python3 "Wersja rozwojowa rozpakowana/audyt-systemu-v4/scripts/run_regression_suite.py" \
+            --repo-root "$GITHUB_WORKSPACE/Wersja rozwojowa rozpakowana" > "$RUNNER_TEMP/regresja.txt" 2>&1
+          echo "kod=$?" >> "$GITHUB_OUTPUT"
+          tail -40 "$RUNNER_TEMP/regresja.txt"
+
+      - name: PR do akceptacji
+        if: steps.tj.outputs.zmiany == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          DZIEN=$(date -u +%F)
+          {
+            cat "$RUNNER_TEMP/raport.md"
+            echo
+            if [ "${{ steps.regresja.outputs.kod }}" = "0" ]; then
+              echo "Regresja: PASS."
+            else
+              echo "Regresja: FAIL (kod ${{ steps.regresja.outputs.kod }}). Nie scalać przed poprawą."
+              echo; echo '```'; tail -40 "$RUNNER_TEMP/regresja.txt"; echo '```'
+            fi
+          } > "$RUNNER_TEMP/opis.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$BRANCH"
+          git add -A
+          git commit -q -m "Teksty jednolite z ELI ($DZIEN): automatyczna aktualizacja numerów"
+          # Gałąź należy wyłącznie do tego workflow: codziennie od nowa z main.
+          git push --force origin "$BRANCH"
+          if gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$BRANCH" --title "Teksty jednolite z ELI ($DZIEN)" --body-file "$RUNNER_TEMP/opis.md"
+          else
+            gh pr create --base main --head "$BRANCH" \
+              --title "Teksty jednolite z ELI ($DZIEN)" --body-file "$RUNNER_TEMP/opis.md"
+          fi

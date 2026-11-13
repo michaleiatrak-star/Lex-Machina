@@ -3,7 +3,11 @@
 
 Waliduje, czy wskazana pozycja istnieje, czy rzeczywiście jest obwieszczeniem
 o tekście jednolitym oraz czy ELI nie zna nowszego tekstu jednolitego tej samej
-ustawy/rozporządzenia. Nie modyfikuje plików.
+ustawy/rozporządzenia. Bez `--napraw` nie modyfikuje plików.
+
+`--napraw`: w wierszu z NEWER_TJ zamienia tylko tę jedną parę rok/pozycja na
+najnowszy t.j. z ELI. Pomija wiersze-zapisy weryfikacji (REKORD_RE): numer
+w nich opisuje stan sprawdzony w dniu zapisu. Wynik: `--raport-json`.
 """
 
 from __future__ import annotations
@@ -28,6 +32,12 @@ HIST_RE = re.compile(
     r"(?:poprzedni|poprzednio|archiwaln|historyczn|zastąpion|zastepion|"
     r"\bbyło\b|\bbylo\b)", re.I
 )
+# Wiersz-zapis wykonanej weryfikacji: zmiana numeru sfałszowałaby historię.
+REKORD_RE = re.compile(
+    r"(?:potwierdz|zweryfikow|re-?ver|wersja\s+od|openlex|dopisane\s+obok)", re.I
+)
+ZMIANA_RE = re.compile(r"\b(20\d{2})\s*(?:/|\s+poz\.\s*)(\d+)\b")
+KONTEKST_RE = re.compile(r"(?:obwieszczeni|stan\w*\s+prawn|późniejsze|po\s+t\.\s*j\.)", re.I)
 TITLE_STOPWORDS = {
     "ustawa", "ustawy", "rozporzadzenie", "oraz",
     "sprawie", "tekst", "jednolity", "jednolitego", "polskiej", "rzeczypospolitej",
@@ -154,6 +164,11 @@ def iter_md_files(root: Path, mode: str):
     # Operacyjna treść skilli: bez dzienników, map historycznych i raportów.
     for path in root.rglob("*.md"):
         rel = path.relative_to(root)
+        # krajowe/: moduły prawa polskiego przeniesione z shared i skilli
+        # wykonawczych (migracja E3), także te z dawnych katalogów references/.
+        if "krajowe" in rel.parts[:2] and "CHANGELOG" not in path.name:
+            yield path
+            continue
         if "references" in rel.parts:
             continue
         if path.name == "SKILL.md" or "modules" in rel.parts or path.name in {
@@ -162,12 +177,72 @@ def iter_md_files(root: Path, mode: str):
             yield path
 
 
+def zamien_pare(line: str, year: int, pos: int, new_year: int, new_pos: int) -> str | None:
+    """Zamienia pierwszą parę (year, pos) w wierszu; None, gdy jej brak."""
+    for match in PAIR_RE.finditer(line):
+        if int(match.group("year")) == year and int(match.group("pos")) == pos:
+            text = match.group(0)
+            ps, pe = match.span("pos")
+            base = match.start()
+            text = (text[:ps - base].replace(str(year), str(new_year), 1)
+                    + str(new_pos) + text[pe - base:])
+            return line[:match.start()] + text + line[match.end():]
+    return None
+
+
+def napraw(fixes, apply: bool) -> dict:
+    """Stosuje poprawki NEWER_TJ; zwraca raport z naprawionymi i pominiętymi."""
+    report = {"naprawione": [], "do_przegladu": []}
+    by_file = defaultdict(list)
+    for fix in fixes:
+        by_file[fix[0]].append(fix)
+    for path, items in by_file.items():
+        text = path.read_text(encoding="utf-8")
+        lines = text.split("\n")
+        changed = False
+        for _path, rel, lineno, year, pos, new_year, new_pos, title in items:
+            entry = {"plik": str(rel), "wiersz": lineno, "stary": f"{year}/{pos}",
+                     "nowy": f"{new_year}/{new_pos}", "tytul": title}
+            line = lines[lineno - 1]
+            if REKORD_RE.search(line):
+                report["do_przegladu"].append({**entry, "powod": "zapis weryfikacji"})
+                continue
+            new_line = zamien_pare(line, year, pos, new_year, new_pos)
+            if new_line is None:
+                report["do_przegladu"].append({**entry, "powod": "brak pary w wierszu"})
+                continue
+            lines[lineno - 1] = new_line
+            changed = True
+            # Linki ELI do obwieszczenia starego t.j. w pobliżu: ten sam schemat
+            # adresu, więc zamiana jest jednoznaczna. Daty i opisy obok: flaga.
+            window = range(max(0, lineno - 4), min(len(lines), lineno + 6))
+            for i in window:
+                lines[i] = lines[i].replace(f"/DU/{year}/{pos}/", f"/DU/{new_year}/{new_pos}/")
+            if any(KONTEKST_RE.search(lines[i]) for i in window):
+                entry["kontekst"] = "daty obwieszczenia / stan prawny / zmiany obok — do sprawdzenia"
+            # Zmiany wymienione obok starego t.j. mogą już być w nowym:
+            # numer poprawiony, lista zmian do ręcznego sprawdzenia.
+            starsze = [f"{a}/{b}" for a, b in ZMIANA_RE.findall(new_line)
+                       if (int(a), int(b)) < (new_year, new_pos)
+                       and (int(a), int(b)) != (year, pos)]
+            if starsze and re.search(r"\bzm(?:\.|ian)", new_line, re.I):
+                entry["uwaga"] = "zmiany obok t.j. do sprawdzenia: " + ", ".join(starsze)
+            report["naprawione"].append(entry)
+        if apply and changed:
+            path.write_text("\n".join(lines), encoding="utf-8")
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--mode", choices=("maps", "operational", "all"), default="operational")
     parser.add_argument("--year-from", type=int, default=1997)
     parser.add_argument("--year-to", type=int, default=date.today().year)
+    parser.add_argument("--napraw", action="store_true",
+                        help="zamień nieaktualne numery t.j. (NEWER_TJ) w plikach")
+    parser.add_argument("--raport-json", type=Path,
+                        help="zapisz listę poprawek i pominięć (JSON)")
     args = parser.parse_args()
 
     claims = []
@@ -184,10 +259,18 @@ def main() -> int:
             matches = list(PAIR_RE.finditer(citation))
             for index, match in enumerate(matches):
                 end = matches[index + 1].start() if index + 1 < len(matches) else len(citation)
-                before = citation[max(0, match.start() - 16):match.start()]
-                history = citation[max(0, match.start() - 90):match.start()]
+                # Wiersz złamany w środku opisu („… po\nt.j.: Dz.U."): kontekst
+                # z końca poprzedniego wiersza.
+                carry = lines[lineno - 2][-90:] + " " if lineno > 1 and len(cells) < 4 else ""
+                before = (carry + citation[:match.start()])[-24:]
+                history = (carry + citation[:match.start()])[-90:]
                 after = citation[match.end():min(end, match.end() + 28)]
-                prefixed = re.search(r"(?:t\.?\s*j\.?|tekst\s+jednolity)\s*$", before, re.I)
+                # Znacznik t.j. może mieć formatowanie Markdown między sobą a numerem:
+                # „**Tekst jednolity:** Dz.U. …", „aktualny t.j. **Dz.U. …".
+                # „po t.j.: Dz.U. …" to nowelizacja, nie tekst jednolity.
+                prefixed = (re.search(r"(?:t\.?\s*j\.?|tekst\s+jednolity)[\s:*]*$", before, re.I)
+                            and not re.search(r"\bpo\s+(?:t\.?\s*j\.?|tekst\w*\s+jednolit\w*)[\s:*]*$",
+                                              before, re.I))
                 suffixed = re.match(r"^[\s*(),;:-]*(?:t\.?\s*j\.?|tekst\s+jednolity)", after, re.I)
                 if not (prefixed or suffixed) or HIST_RE.search(history):
                     continue
@@ -227,6 +310,7 @@ def main() -> int:
                 tj_by_title[key].append((year, pos, item.get("title", "")))
 
     problems = []
+    newer_fixes = []
     valid = 0
     row_claims = defaultdict(set)
     blok_claims = defaultdict(set)   # F-148(b): sąsiedztwo, nie tylko wiersz
@@ -305,6 +389,20 @@ def main() -> int:
             y, p, title_new = newer[-1]
             problems.append(("NEWER_TJ", year, pos, rel, lineno,
                              f"nowszy: Dz.U. {y} poz. {p} — {title_new}", line))
+            newer_fixes.append((path, rel, lineno, year, pos, y, p, title_new))
+
+    if args.napraw or args.raport_json:
+        report = napraw(newer_fixes, apply=args.napraw)
+        if args.raport_json:
+            args.raport_json.write_text(json.dumps(report, ensure_ascii=False, indent=1),
+                                        encoding="utf-8")
+        print(f"NAPRAWIONE={len(report['naprawione'])}")
+        print(f"DO_PRZEGLADU={len(report['do_przegladu'])}")
+        if args.napraw:
+            fixed = {(r["plik"], r["wiersz"], r["stary"]) for r in report["naprawione"]}
+            problems = [pr for pr in problems if not (
+                pr[0] == "NEWER_TJ"
+                and (str(pr[3]), pr[4], f"{pr[1]}/{pr[2]}") in fixed)]
 
     print(f"FILES={len(set(path for path, *_ in claims))}")
     print(f"CLAIMS={len(claims)}")

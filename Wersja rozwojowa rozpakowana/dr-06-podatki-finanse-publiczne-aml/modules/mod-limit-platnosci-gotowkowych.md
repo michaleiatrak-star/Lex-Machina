@@ -9,7 +9,7 @@ polcard.pl, rankomat.pl — wszystkie zgodne co do stanu na 2026 r.
 
 ```
 Podstawa: art. 19 ustawy z 6.03.2018 r. — Prawo przedsiębiorców
-Tekst jednolity: Dz.U. 2025 poz. 1480
+Tekst jednolity: Dz.U. 2026 poz. 1484
 
 LIMIT: 15 000 zł BRUTTO na jedną transakcję (NIE na jedną fakturę/płatność)
   — dotyczy WYŁĄCZNIE transakcji między DWOMA PRZEDSIĘBIORCAMI

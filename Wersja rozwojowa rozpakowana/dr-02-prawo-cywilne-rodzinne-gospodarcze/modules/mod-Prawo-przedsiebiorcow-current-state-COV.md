@@ -11,13 +11,13 @@ source_policy: "RZĄD 1 only"
 ## 1. Źródło urzędowe
 
 Ustawa z 6 marca 2018 r. — Prawo przedsiębiorców.
-Aktualny tekst jednolity: **Dz.U. 2025 poz. 1480**.
-Obwieszczenie Marszałka Sejmu z 20.10.2025, publikacja 28.10.2025, stan prawny tekstu jednolitego 10.10.2025.
-ELI wskazuje późniejsze akty zmieniające — przed użyciem konkretnego artykułu obowiązuje fresh gate.
+Aktualny tekst jednolity: **Dz.U. 2026 poz. 1484**.
+Obwieszczenie Marszałka Sejmu z 3.11.2026, publikacja 10.11.2026, stan prawny tekstu jednolitego 28.10.2026; obejmuje zm. Dz.U. 2025 poz. 1795, 1826 i Dz.U. 2026 poz. 507 (ELI 2026-11-13).
+Przed użyciem konkretnego artykułu obowiązuje fresh gate (zmiany po t.j. w ELI).
 
 RZĄD 1:
-- https://eli.gov.pl/eli/DU/2025/1480/ogl
-- https://eli.gov.pl/eli/DU/2025/1480/ogl/pol/pdf
+- https://eli.gov.pl/eli/DU/2026/1484/ogl
+- https://eli.gov.pl/eli/DU/2026/1484/ogl/pol/pdf
 
 ## 2. Mapa funkcjonalna aktu
 

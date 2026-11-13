@@ -230,7 +230,7 @@ brak analogicznego wyłączenia).
 Odesłanie SUBSYDIARNE — analogicznie do konstrukcji art. 7 (Rozdz. 1-2,
 moduł przepisy-ogolne): najpierw sprawdzić, czy Rozdz. 4 Prawa łowieckiego
 reguluje daną kwestię wprost, dopiero przy luce sięgnąć do Prawa
-przedsiębiorców (aktualny t.j. **Dz.U. 2025 poz. 1480** — patrz UWAGA na
+przedsiębiorców (aktualny t.j. **Dz.U. 2026 poz. 1484** — patrz UWAGA na
 wstępie modułu, NIE metryki cytowane wewnątrz nieaktualizowanego tekstu
 Prawa łowieckiego).
 
@@ -324,6 +324,6 @@ Sprawa dotyczy przedsiębiorcy oferującego USŁUGI TURYSTYCZNE z polowaniami
   następny krok po zamknięciu Rozdz. 1-2. Ustalono strukturalnie kluczowy
   fakt: art. 17, 19, 20 są UCHYLONE — rozdział ma tylko 6 aktywnych
   przepisów mimo pozornie 9-artykułowej numeracji. Rozstrzygnięta
-  najnowsza metryka Prawa przedsiębiorców (Dz.U. 2025 poz. 1480,
+  najnowsza wówczas metryka Prawa przedsiębiorców (Dz.U. 2025 poz. 1480; od 10.11.2026 t.j. Dz.U. 2026 poz. 1484,
   potwierdzona bezpośrednio w ISAP i dziennikustaw.gov.pl) wobec
   rozbieżnych, starszych metryk cytowanych w źródłach Rządu 2B.
