@@ -1,6 +1,6 @@
 ---
 name: prawny-router-v3
-version: "3.78"
+version: "3.79"
 type: orchestration
 status: production
 entrypoint: SKILL.md
@@ -120,7 +120,8 @@ required_modules:
   - shared/MOD-REM-GATE.md
   - dr-03-prawo-karne-wykroczenia-egzekucja/modules/mod-KK-kwalifikator-karnomaterialny.md
 changelog: |
-  Wersja bieżąca: 3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6: państwo i UE/EOG, ustawy wspólne a krajowe, nauka o źródłach, orzecznictwo bez stare decisis, brak kodeksu cywilnego, forma)
+  Wersja bieżąca: 3.79 (2026-11-13): UP-5: kanał prawa UE = eurlex_tekst / Cellar REST (Accept xhtml, pol); eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B (pomiar 2026-11-13) — usunięto sprzeczne zdanie „curl działa dla eur-lex”.
+  3.78 (2026-11-09): UP-5 — rodzina prawa nordyckiego: shared/RODZINA-PRAWA-NORDYCKIE.md (NR-1…NR-6: państwo i UE/EOG, ustawy wspólne a krajowe, nauka o źródłach, orzecznictwo bez stare decisis, brak kodeksu cywilnego, forma)
   3.77 (2026-11-08): UP-5 — rodzina common law i systemy mieszane: shared/RODZINA-PRAWA-COMMON-LAW.md (CL-1…CL-7: jurysdykcja, moc wiążąca, ratio, losy precedensu, ustawa a precedens, odróżnienie, forma pisma)
   Pełna historia: references/CHANGELOG.md (ZASADA 15).
 ---
@@ -210,10 +211,10 @@ UP-5: Zagraniczne → pomiń prawo-polskie-v2 + ISAP (rodzina common law / syste
          shared/MIEDZYNARODOWE-GATES.md + shared/HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md;
          PODMIANA BRAMEK: OŚ-GATE→MG-1 (ratyfikacja i zakres), WYJ-GATE→MG-2
          (wykładnia KWPT art. 31-33). ⛔ CN-GATE i REM-GATE NIE są podmieniane —
-         działają w obu ścieżkach. Kanał: bash/curl DZIAŁA dla eur-lex.europa.eu
-         i legal.un.org (zmierzone 2026-09-05, korekta F-162 — poprzednie brzmienie
-         „NIE bash/curl" było fałszywe); dla unoosa/cites/icsid/uncitral
-         web_search→web_fetch. Tabela kanałów: HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md §2
+         działają w obu ścieżkach. Prawo UE: treść = eurlex_tekst (Cellar; bez MCP
+         curl Cellar, HIERARCHIA-ZRODEL-MIEDZYNARODOWE.md §2); eur-lex.europa.eu w kanale
+         kodu = HTTP 202, 0 B (2026-11-13), to nie „akt niedostępny”. legal.un.org: curl;
+         unoosa/cites/icsid/uncitral: web_search→web_fetch.
 UP-6: KAŻDA sprawa → CN-GATE przed analizą (shared/MOD-CN-GATE.md) i REM-GATE
          przed oddaniem (shared/MOD-REM-GATE.md). Bez podmiany, bez wyjątku
          jurysdykcyjnego

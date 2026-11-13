@@ -27,7 +27,10 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { sygnal, owinSerwer, budzetWyczerpany, pozostalyBudzet, opisBleduSieci } from "../wspolne/budzet.mjs";
+import { sygnal, owinSerwer, budzetWyczerpany, pozostalyBudzet, opisBleduSieci, przyczynaSieci } from "../wspolne/budzet.mjs";
+import { promises as dnsP } from "node:dns";
+import net from "node:net";
+import tls from "node:tls";
 
 const BASE = "https://orzeczenia.nsa.gov.pl";
 const HOST = "orzeczenia.nsa.gov.pl";
@@ -280,7 +283,7 @@ class Sesja {
     for (let skok = 0; skok < 6; skok++) {
       const u = new URL(url);
       if (u.protocol !== "https:" || u.hostname !== HOST) throw new Error(`Odmowa: host spoza CBOSA (${u.host})`);
-      const headers = { "User-Agent": "lex-machina-cbosa/1.0", Accept: "text/html,application/xhtml+xml,*/*;q=0.8", "Accept-Language": "pl-PL,pl;q=0.9", ...(init.headers ?? {}) };
+      const headers = { "User-Agent": process.env.LEX_CBOSA_USER_AGENT || "lex-machina-cbosa/1.0", Accept: "text/html,application/xhtml+xml,*/*;q=0.8", "Accept-Language": "pl-PL,pl;q=0.9", ...(init.headers ?? {}) };
       if (this.cookies.size) headers.Cookie = [...this.cookies].map(([k, v]) => `${k}=${v}`).join("; ");
       const r = await fetch(url, { ...init, headers, redirect: "manual", signal: sygnal(40000), lexPowtarzalne: true }); // wyszukiwarka i odczyt niczego nie zmieniają
       for (const c of r.headers.getSetCookie?.() ?? []) { const [kv] = c.split(";"); const i = kv.indexOf("="); if (i > 0) this.cookies.set(kv.slice(0, i).trim(), kv.slice(i + 1).trim()); }
@@ -320,7 +323,12 @@ async function szukaj(sesja, pola) {
     headers: { "Content-Type": "application/x-www-form-urlencoded" } });
 }
 
-const blad = (e) => ({ status: "ERROR", query_type: "orzeczenie", source: "cbosa", detail: String(e?.message ?? e), retrieved_at: new Date().toISOString() });
+// Błąd kanału (sieć, HTTP 5xx, ucięty transport): zawsze ERROR z przyczyną — nie OUT_OF_SCOPE, które
+// znaczy „przeszukano, brak trafienia” (zgł. 2026-11-13: ta sama awaria dawała ERROR i OUT_OF_SCOPE).
+const blad = (e, sygnatura) => ({ status: "ERROR", query_type: "orzeczenie", source: "cbosa", detail: String(e?.message ?? e),
+  przyczyna: przyczynaSieci(e, HOST), retryable: przyczynaSieci(e, HOST).retryable,
+  kanal_zastepczy: `CBOSA niedostępna — awaria kanału, nie wynik. Trop zastępczy (F-183a): web_search site:orzeczenia.nsa.gov.pl${sygnatura ? ` "${sygnatura}"` : ""}; wynik wyszukiwarki to trop, nie weryfikacja. Diagnoza: cbosa_diagnoza.`,
+  retrieved_at: new Date().toISOString() });
 const tekst = (w) => ({ content: [{ type: "text", text: JSON.stringify(w, null, 2) }] });
 const server = owinSerwer(globalThis.__LEX_MCP_WSPOLNY ?? new McpServer({ name: "cbosa-connector", version: "1.0.0" }));
 
@@ -336,7 +344,7 @@ server.registerTool("cbosa_sprawdz_sygnature", {
     const v = await weryfikujSygnature(pierwsza, sygnatura,
       (p) => s.zadanie(`${BASE}/cbo/find?p=${p}`), (id) => s.zadanie(`${BASE}/doc/${id}`));
     return tekst(naSchemat(v));
-  } catch (e) { return tekst({ ...blad(e), snapshot: "🟨" }); }
+  } catch (e) { return tekst({ ...blad(e, sygnatura), snapshot: "🟨" }); }
 });
 
 server.registerTool("cbosa_szukaj", {
@@ -372,7 +380,43 @@ server.registerTool("cbosa_pobierz", {
         ...(d.finality ? { prawomocnosc: `${d.finality} (wg CBOSA)` } : {}),
         sentencja: d.operative_part, uzasadnienie: d.reasoning, uzasadnienie_dostepne: d.reasoning_available },
       uwaga: d.brak_metadanych ? `Karta bez pól: ${d.brak_metadanych.join(", ")} (inny układ karty) — treść odczytana. ${SNAP}` : SNAP });
-  } catch (e) { return tekst({ ...blad(e), status: "OUT_OF_SCOPE", powod: String(e?.message ?? e) }); }
+  } catch (e) {
+    // Dokument odczytany, ale niekompletny/zmieniony układ (fail-closed parsera) = OUT_OF_SCOPE; awaria kanału = ERROR.
+    if (/HTTP|sieci|Połączenie|TLS|DNS|limicie czasu|Niekompletny transport|Niekompletny HTML|fetch failed/i.test(String(e?.message ?? e))) return tekst({ ...blad(e), snapshot: "🟨" });
+    return tekst({ status: "OUT_OF_SCOPE", query_type: "orzeczenie", source: "cbosa", powod: String(e?.message ?? e), retrieved_at: new Date().toISOString() });
+  }
+});
+
+// ── cbosa_diagnoza (zgł. 2026-11-13): gdzie pęka połączenie — DNS, port 80, TLS 443, HTTP ──
+async function etapy() {
+  const wynik = { host: HOST, czas: new Date().toISOString() };
+  const zLimitem = (p, ms) => Promise.race([p, new Promise((_, nie) => setTimeout(() => nie(Object.assign(new Error("limit czasu"), { code: "ETIMEDOUT" })), ms))]);
+  try { wynik.dns = { ok: true, adresy: (await zLimitem(dnsP.lookup(HOST, { all: true }), 8000)).map((a) => a.address) }; }
+  catch (e) { wynik.dns = { ok: false, kod: e.code ?? String(e.message) }; return wynik; }
+  wynik.tcp_80 = await new Promise((ok) => { const s = net.connect({ host: HOST, port: 80, timeout: 8000 }, () => { s.destroy(); ok({ ok: true }); });
+    s.on("timeout", () => { s.destroy(); ok({ ok: false, kod: "ETIMEDOUT" }); }); s.on("error", (e) => ok({ ok: false, kod: e.code })); });
+  wynik.tls_443 = await new Promise((ok) => { const s = tls.connect({ host: HOST, port: 443, servername: HOST, timeout: 10000 }, () => {
+      const r = { ok: true, protokol: s.getProtocol(), szyfr: s.getCipher()?.name, ip: s.remoteAddress, certyfikat_waznosc_do: s.getPeerCertificate()?.valid_to ?? null };
+      s.destroy(); ok(r); });
+    s.on("timeout", () => { s.destroy(); ok({ ok: false, kod: "ETIMEDOUT" }); }); s.on("error", (e) => ok({ ok: false, kod: e.code ?? e.message })); });
+  for (const sciezka of ["/cbo/query"]) {
+    try { const r = await fetch(`${BASE}${sciezka}`, { headers: { "User-Agent": process.env.LEX_CBOSA_USER_AGENT || "lex-machina-cbosa/1.0" }, redirect: "manual", signal: sygnal(20000) });
+      wynik.https = { ok: r.status < 400, status: r.status, sciezka }; }
+    catch (e) { wynik.https = { ok: false, sciezka, ...przyczynaSieci(e, HOST), detail: String(e?.message ?? e) }; }
+  }
+  wynik.wniosek = !wynik.tcp_80.ok && !wynik.tls_443.ok ? "Serwer nieosiągalny z tej sieci (zapora, awaria albo blokada IP)."
+    : wynik.tls_443.ok && wynik.https?.ok ? "Kanał działa — błąd dotyczył konkretnego zapytania; ponów."
+    : wynik.tls_443.ok ? "TLS działa, serwer zrywa żądanie HTTP (przeciążenie, WAF albo blokada ruchu automatycznego) — awaria po stronie CBOSA, nie narzędzia."
+    : "Serwer przyjmuje TCP, ale zrywa TLS (awaria/konfiguracja TLS CBOSA albo blokada) — awaria po stronie CBOSA, nie narzędzia.";
+  return wynik;
+}
+server.registerTool("cbosa_diagnoza", {
+  title: "CBOSA — diagnoza połączenia (DNS, TCP 80, TLS 443, HTTP)",
+  description: "Gdy narzędzia CBOSA zwracają ERROR: sprawdza każdy etap połączenia z orzeczenia.nsa.gov.pl i mówi, czy to awaria źródła, czy narzędzia.",
+  inputSchema: {},
+}, async () => {
+  try { return tekst({ status: "OK", query_type: "diagnoza", source: "cbosa", ...(await etapy()) }); }
+  catch (e) { return tekst({ status: "ERROR", query_type: "diagnoza", source: "cbosa", detail: String(e?.message ?? e) }); }
 });
 
 if (!globalThis.__LEX_MCP_WSPOLNY && process.argv[1] && fileURLToPath(import.meta.url) === realpathSync(process.argv[1])) {

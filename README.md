@@ -401,8 +401,10 @@ Serwery leżą w [`prawo-polskie-v2/mcp-servers/`](Wersja%20rozwojowa%20rozpakow
 
 | Host | Konfiguracja |
 |---|---|
-| Claude Code + marketplace (plugin `audyt-systemu-v4`) | automatycznie — [`.mcp.json` pluginu](Wersja%20rozwojowa%20rozpakowana/audyt-systemu-v4/.mcp.json) instaluje się z wtyczką |
-| Claude Desktop | [`claude_desktop_config.json`](claude_desktop_config.json) — zamień `<KATALOG_REPOZYTORIUM>` na ścieżkę klonu; albo rozszerzenie `lex-machina.mcpb` (`python zbuduj_pakiet.py --mcpb`) |
+| Claude Code + marketplace (plugin `prawo-polskie-v2`) | automatycznie — [`.mcp.json` pluginu](Wersja%20rozwojowa%20rozpakowana/prawo-polskie-v2/.mcp.json) instaluje się z wtyczką |
+| Claude Desktop (bez pluginu) | [`claude_desktop_config.json`](claude_desktop_config.json) — zamień `<KATALOG_REPOZYTORIUM>` na ścieżkę klonu; albo rozszerzenie `lex-machina.mcpb` (`python zbuduj_pakiet.py --mcpb`) |
+
+> ⚠️ Jedno źródło rejestracji. Gdy działa plugin `prawo-polskie-v2`, usuń wpisy `lex-*` z `claude_desktop_config.json` (i starszy `.mcp.json` z `audyt-systemu-v4` ≤ 6.2xx, jeśli został w instalacji) — inaczej sesja widzi dwa komplety tych samych narzędzi (`lex-*` i `plugin_…_lex-*`).
 
 Rekomendacje: [`shared/KONEKTORY-REKOMENDOWANE.md`](Wersja%20rozwojowa%20rozpakowana/shared/KONEKTORY-REKOMENDOWANE.md).
 

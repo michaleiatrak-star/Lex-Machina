@@ -125,3 +125,16 @@ import { dataIso } from "./isap-eli-mcp-server.js";
   assert.match(artykulObowiazujacy({ zalacznik: z, przypisy: {} }, normalizujNumerArt("131¹ᵃ")).tresc, /niemożności/);
   assert.strictEqual(dataIso("24 marca 2026"), "2026-03-24"); assert.strictEqual(dataIso(null), null);
   console.log("OK: 131¹ᵃ = 131^1a = 131[1a] (nie art. 131); stan prawny t.j. → ISO"); }
+
+{ // Zgł. 2026-11-13: „ustawa o transporcie drogowym” — rodzaj aktu na początku zapytania; akt bazowy pierwszy.
+  const lista = [
+    { ELI: "DU/2023/1523", year: 2023, pos: 1523, title: "Ustawa z dnia 28 lipca 2023 r. o delegowaniu kierowców w transporcie drogowym", status: "akt posiada tekst jednolity" },
+    { ELI: "DU/2025/100", year: 2025, pos: 100, title: "Ustawa z dnia 5 grudnia 2024 r. o zmianie ustawy o transporcie drogowym", status: "obowiązujący" },
+    { ELI: "DU/2001/1371", year: 2001, pos: 1371, title: "Ustawa z dnia 6 września 2001 r. o transporcie drogowym.", status: "akt posiada tekst jednolity" },
+    { ELI: "DU/2025/1490", year: 2025, pos: 1490, title: "Obwieszczenie Marszałka Sejmu Rzeczypospolitej Polskiej z dnia 1 października 2025 r. w sprawie ogłoszenia jednolitego tekstu ustawy o transporcie drogowym", status: "obowiązujący" },
+  ];
+  const w = normalizujOdpowiedzELI(lista, "ustawa o transporcie drogowym");
+  assert.strictEqual(w.akt_bazowy?.eli, "DU/2001/1371");
+  assert.strictEqual(w.tekst_jednolity_aktualny?.eli, "DU/2025/1490");
+  assert.strictEqual(w.kandydaci.at(-1).eli, "DU/2025/100", "nowelizacja na końcu");
+  console.log("OK: „ustawa o transporcie drogowym” → akt bazowy DU/2001/1371 i t.j. DU/2025/1490, nowelizacje na końcu"); }
