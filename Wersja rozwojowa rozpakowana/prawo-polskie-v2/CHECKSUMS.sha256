@@ -1,7 +1,7 @@
 891ce2fb6fd0e49e96d09f740c37ab6c0cab87d427bd90e50300008e7f433815  ./JURYSDYKCJA.md
 f1cdf3365cc65a0884824ee41adb40058b6541d2073a03b2d7b6978e1d62d5f9  ./PORTABILITY-MANIFEST.md
 67c6506e8ce66fea88428736d25cdb38a73872e05db2159d793b75fe2b0a33b6  ./ROUTING-MAP.md
-33b02dd3337b4c1a8238a34ee2eaf55e660f982e00fd644e711113913c567ff8  ./SKILL.md
+60f710675af8f37461439651c0b6856a384cd10b4c953bdd170c7867acd348c9  ./SKILL.md
 9534a6fc6d1ced5da09bf3de3cd8763e08a0cbe70a3b41813ce56de9f74c9015  ./agents/openai.yaml
 51a6923974188748638a424aa59b42b6afad2d910f910a1d43bb13ee10f3ce26  ./assets/icon.svg
 c07fe8367fe79ca5c5e2b5338523373f221a16a7a6f88eea95cda4bd7a825653  ./krajowe/analiza-sadowa-v6/references/koszty-terminy.md
@@ -104,7 +104,7 @@ f86d87ff0e95d7da3f4f26f95e58570bdd7c3fca85e5afce39d521095a8c2932  ./krajowe/shar
 4d777e95a26cda2f3c8974aafd0d418337e088a128899f2d26e5b8507b6b0a38  ./krajowe/shared/terminy.md
 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986  ./mcp-servers/LICENSE
 1f7210efaf360e363240a550681c0638fd314c1f9ff2ebbe963b748249baea19  ./mcp-servers/README.md
-d76954a768d86bec617fe4ac58fcce06ac7a3956cb44c60098a82c1d8333d1b0  ./mcp-servers/cbosa-example/cbosa-mcp-server.js
+25f9172d7ee27c7cb756eb6495f02db28c6f63c01ec6cdb794ad2fb51932aeb9  ./mcp-servers/cbosa-example/cbosa-mcp-server.js
 baf50d982bbb087327e36ecbe0e729b853301d1b91fee880e9c301cf57fbcad8  ./mcp-servers/cbosa-example/fixtures/rownowaznosc.json
 ee1316a2dce2d4a96e578198eb5ec0b22050cad0fa8e127acbd14375fbe79a69  ./mcp-servers/cbosa-example/test_normalizacja.mjs
 9d4b1b611c9bf9e521bd38ba7ac597bda8eec6719c631df829e57b6f989fa75a  ./mcp-servers/ceidg-example/README.md
@@ -112,7 +112,7 @@ c2c61b340f90522e08100a71e4ac5d74a46c8a5bf708730e0802ff7fcaf25393  ./mcp-servers/
 55dbd937ab8ed74d02b95ac874a4a79cf6f7551485302f7fad85617634585a1a  ./mcp-servers/ceidg-example/fixtures/firmy_nip_aktywny.json
 74b6c9bda725bbfbc3926510d234bb5cbfde501267ec28bd7d804c4a00823dab  ./mcp-servers/ceidg-example/test_normalizacja.mjs
 ad8df07cc7234d88ebdfd7eefa0a2ea8acf405c492683d783078c2fbe7cd1ad2  ./mcp-servers/dist/NOTICE-THIRD-PARTY.txt
-c451dec02bec83eaff3d2a7149f9a2837a91bedbe08dc03f821a1d4558f9a7d6  ./mcp-servers/dist/lex-mcp.mjs
+83c8b91fba02c3ba405283e34577f630a95e45a9665a2c34665eaa822a87dbb6  ./mcp-servers/dist/lex-mcp.mjs
 cdc5ee84a2eb1094bcf586e200394d306b70661202cee472eee1fe0fe9624edf  ./mcp-servers/etpcz-example/etpcz-mcp-server.js
 14729981c13e9f5585ad139c58b12b477defcc2ffe56b01c75b8869acc89733a  ./mcp-servers/eureka-example/eureka-mcp-server.js
 1aa02a2b1c340653a9e5dbdcfcba96c0023d2a9f30f50f19fe98dede3f0b2590  ./mcp-servers/eureka-example/fixtures/dok_445895.json
@@ -123,12 +123,12 @@ cdc5ee84a2eb1094bcf586e200394d306b70661202cee472eee1fe0fe9624edf  ./mcp-servers/
 4a3c11cea8172e2c9ebfcedd4a080284572580869064ecd8d6dc38c624ee9902  ./mcp-servers/eureka-example/fixtures/syg_prefiks.json
 8495a254ce89f78e91032d5b5e829e93c7c49564fb0e093aa484d4c4a2df4986  ./mcp-servers/eureka-example/test_normalizacja.mjs
 367b8e13dddef0aede4db2dcee3b1f71eca7335d044a7dd8df321d89477b005e  ./mcp-servers/eurlex-example/README.md
-e294e9e089c7573c02b1c92078af2bb48824e2828ce3c8e11f79813aecfd2a27  ./mcp-servers/eurlex-example/eurlex-mcp-server.js
+ea1cb95642188a1a8991bf88da3f2aba6f8f3bd3bbe9b8940e862095b26c29cb  ./mcp-servers/eurlex-example/eurlex-mcp-server.js
 9b7aaad2e01bd3e747b1d11cbdca2d401d9ab078019148442f86d363c6fd71b3  ./mcp-servers/eurlex-example/fixtures/cellar_31995L0046.json
 ab43c39b83862629a3af0b6905807b21bb421dfbb809dde4d8855955eb5e228f  ./mcp-servers/eurlex-example/fixtures/cellar_32016R0679.json
 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945  ./mcp-servers/eurlex-example/fixtures/cellar_39999R9999.json
 d9a5d9004263de7cfc02782632595e62c81cf53e8dd38e9818f03e343fd49d52  ./mcp-servers/eurlex-example/fixtures/cellar_tsue.json
-96a5b06ff1938b9d55466f3c76b248aa07091ad82a436f5e4d089188fb8c434e  ./mcp-servers/eurlex-example/test_normalizacja.mjs
+111775fa9b14c5809f84f59e1b5d748817d10f2ddca26f5b52bd6fd8a046cbdf  ./mcp-servers/eurlex-example/test_normalizacja.mjs
 6272b701befd40d79d4e039b5b216212d92d801f06bcd124c06c82f3015da2b2  ./mcp-servers/instaluj_serwery_mcp.py
 8f362e55fe6e6db9fc2aed831d5d19eae4563da2d9f99213078a6f788e627a81  ./mcp-servers/isap-eli-example/README.md
 ce4caf3dba1c6e28f90d113d7fb21a738425e4095422887bfe7c24e47af28ba3  ./mcp-servers/isap-eli-example/fixtures/eli_DU_1964_93.json
@@ -137,8 +137,8 @@ d64095fa343273bf885b3b7f2e964ea969b8a8d0b334fe21ea81c40c57ae6adf  ./mcp-servers/
 063f69d9a5abcfafdc59627aac8b06e54f9c0c719ffbdce81504921855dd2066  ./mcp-servers/isap-eli-example/fixtures/eli_szukaj_kc.json
 a01a2f9cbfcdc477b158e913745701b5a87b19f975b2ab7779a219b19a559b87  ./mcp-servers/isap-eli-example/fixtures/eli_szukaj_kpc.json
 793e2f3f8e6e05a165069179f0e96481cbc72d3713acc276f3841ab9d1950bb0  ./mcp-servers/isap-eli-example/fixtures/tj_kc_2026_795_wycinek.txt
-27bb4f395f4de8a5da412049340827915e8837cfc72d0185f0adc495c379beaf  ./mcp-servers/isap-eli-example/isap-eli-mcp-server.js
-45d8a983fa36596ce0cb1d0222ce8afe561bc256f39fcf456f00bf723eeb7001  ./mcp-servers/isap-eli-example/test_normalizacja.mjs
+3cd320cdb97ff580b062d6976b8ce26220cee7c3264b0cf025c4bd5dc7f92512  ./mcp-servers/isap-eli-example/isap-eli-mcp-server.js
+70fbf06f1a87c0c9940dee778a791d42ea4a49621250aea39cd5d0792292d719  ./mcp-servers/isap-eli-example/test_normalizacja.mjs
 9debc648200f3819ee1f4853c903eadfe7db2e020a0355a2244517b9303e30f6  ./mcp-servers/kio-example/README.md
 9aeee7dfba7ddef5aabd7039fb7043fc27ff94149afcef632bb35b69eb18b42b  ./mcp-servers/kio-example/fixtures/uzp.json
 0f9bd865314177ea3d850954c6e6f4e0b3e7325f80adc8264b81c07ff1992608  ./mcp-servers/kio-example/kio-mcp-server.js
@@ -183,10 +183,10 @@ f516617dbeb8440625f4253f69a16d82523f778d35cfd8a4f3f867088f92fd3e  ./mcp-servers/
 4bc4ac0bca2bc66ce72e62876ed21dbfd993f6ef4591bb6fa28c0d8c66ca5e67  ./mcp-servers/wl-example/test_normalizacja.mjs
 1bdd86d0ab8bfb6e3814aabe7a163156531d0e209af6eea1372baae67d08dc65  ./mcp-servers/wl-example/wl-mcp-server.js
 f7fae1f207120d39495399a975f2efe8c88850c28f895abc4a34f0a24f83a86d  ./mcp-servers/wspolne/akt-pdf.mjs
-54349c399233e8c6e82cb5e13e958f5004db23e6a2b902e9ef4c5b0115cb2639  ./mcp-servers/wspolne/budzet.mjs
+1166173eaa71f629a46e1585dcb9a4c05ad6c54613e91848a0f98320dafc3ffc  ./mcp-servers/wspolne/budzet.mjs
 9c6eaac5509528bd5c6a9a57d5ce753b590fa2ad9c21e8a300cec6701e678535  ./mcp-servers/wspolne/formularz.mjs
 37db3fcf1fd27379de4b60519712293c7456b62dadf3a55deffb25cc45b44921  ./mcp-servers/wspolne/sesja-przegladarki.mjs
 dd57ad59b047ce6e68151a423de62c7f51a995ef146374808a2db819e709ce5a  ./mcp-servers/wspolne/test_siec.mjs
 bb692d5e777e49ac05c434e1fa7b570e08191f5a166b39ccf68d97c49f0db24e  ./mcp-servers/zbuduj_pakiet.py
-7dede86088f2aeeb181d8b107fd36a25740df449be83ad792e957187d795d511  ./references/CHANGELOG.md
+fd2459fe4c80df119569be7e737c67590def0711e82b008a181ad041261ac0b8  ./references/CHANGELOG.md
 68b8052c1361e3a07733ee1fd2ad97e9169620b287e603c50b217ba4ffb57c48  ./references/HISTORIA-ZMIAN-PLIKOW.md

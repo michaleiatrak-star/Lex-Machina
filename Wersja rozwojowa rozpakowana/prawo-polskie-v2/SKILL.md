@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.87"
+version: "6.88"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.87 (2026-11-12): HIERARCHIA-ZRODEL i PRAWO-HARDGATE-ORZECZENIA: orzeczenia odczytane na portalu samego sądu dyscyplinarnego (wsd.adwokatura.pl, wsd.kirp.pl, nil.org.pl/orzeczenia) = RZĄD 2A, jak orzeczenia sądów z ich portali.
+  Wersja bieżąca: 6.88 (2026-11-13): konektory MCP po zgłoszeniu ActiFlow: eurlex_tekst (treść aktu UE z Cellar, artykuł, domyślnie najnowsza konsolidacja); eurlex_lookup bez fałszywej daty końca (MAX z dat Cellar, data sprzeczna ze statusem pominięta), tytul_aktu bez „- Deklaracja”, konsolidacja_najnowsza i tekst_url_cellar; CBOSA: awaria kanału zawsze ERROR z przyczyną (kod, etap DNS/TCP/TLS/HTTP, IP, retryable) i kanałem zastępczym, cbosa_diagnoza, User-Agent z LEX_CBOSA_USER_AGENT; isap_lookup: „ustawa o …” rozpoznaje akt bazowy.
+  6.87 (2026-11-12): HIERARCHIA-ZRODEL i PRAWO-HARDGATE-ORZECZENIA: orzeczenia odczytane na portalu samego sądu dyscyplinarnego (wsd.adwokatura.pl, wsd.kirp.pl, nil.org.pl/orzeczenia) = RZĄD 2A, jak orzeczenia sądów z ich portali.
   6.86 (2026-11-11, ELI 2026-11-11): ROUTING-MAP: związki metropolitalne (pomorski 2026/912, śląski 2025/186) → dr-08 mod-zwiazki-metropolitalne; zmiany po t.j. z ELI: deweloperska 2026/1077, prawo autorskie 2026/1477, CIT, USG, USP, ogłaszanie aktów, czystość, rewitalizacja, MPZP, UGN, wdrożeniowa (2026/912); słowa kluczowe DR-08: związek metropolitalny.
   6.85 (2026-11-11): konektory MCP — strona ochrony antybotowej kończy się LAW_SOURCE_VERIFICATION_REQUIRED:<host> (okno weryfikacji aplikacji, nie brak danych); sesja z okna dokładana do zapytań (wspolne/sesja-przegladarki.mjs).
   6.84 (2026-11-11): ROUTING-MAP, ISAP-METRYKI-AKTOW, leksykon ORKA-BAS, kotwice opłat: nowe t.j. UFP 2026/1447, polityka rozwoju 2026/1366, POŚ 2026/1453, Prawo geodezyjne 2026/1389, SUS 2026/1474 (powołane artykuły porównane w ELI).
@@ -23,7 +24,6 @@ changelog: |
   6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).
   6.62 (2026-10-15c, AUDYT-2026-10-15c): ROUTING-MAP — t.j. transport kolejowy 2026/1324, Prawo wodne 2026/1335, odpady 2026/1328; VAT: 2026/507 art. 6 od 1.11.2028; nowy wiersz ustawy o CEIDG (t.j. 2026/30, zm. 2026/507 etapami).
   6.61 (2026-10-12c, AUDYT-2026-10-12c): korekta — t.j. UPEA 2026/1311 obejmuje zm. 2026/1003 (art. 17 § 1a w dwóch brzmieniach, nowe od 28.10.2026).
-  6.60 (2026-10-12b, AUDYT-2026-10-12b): ROUTING-MAP: UPEA t.j. 2026/1311 (⏳ 2026/1003 od 28.10.2026), ochrona przyrody t.j. 2026/1315; zmiany po t.j. z 2026/815 przy 20 aktach (Policja, SG, ŻW, SOP, obrona Ojczyzny, ochrona ludności, śpbp, ppoż., KSC, PKE, megaustawa, Prawo wodne, odpady, kontrola inwestycji); rzeczy znalezione — 2026/184.
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

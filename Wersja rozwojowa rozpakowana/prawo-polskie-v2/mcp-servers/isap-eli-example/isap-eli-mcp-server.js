@@ -90,7 +90,9 @@ const NOWELIZACJA = /\bo zmianie\b|\bzmieniając|\bw sprawie zmiany\b|\bo uzupe�
 
 /** 0 akt bazowy (tytuł = zapytanie), 1 aktualny t.j. tego aktu, 2 inne, 3 bazowy uchylony, 4 nowelizacja, 5 t.j. zastąpiony. */
 export function rangaKandydata(p, zapytanie) {
-  const q = nazwaAktu(zapytanie);
+  // „ustawa o transporcie drogowym” — tytuł aktu to „Ustawa z dnia … o transporcie drogowym”: rodzaj aktu
+  // z początku zapytania nie jest częścią nazwy (zgł. 2026-11-13: akt bazowy nie był rozpoznany).
+  const q = nazwaAktu(zapytanie).replace(/^(?:ustaw[aęyą]|rozporządzeni[eua])\s+(?=o\b|w\b|dotycząc)/u, "");
   const t = nazwaAktu(p.title);
   // „Ustawa z dnia … 1964 r. - Kodeks …” albo bez myślnika („… 2000 r. Kodeks spółek handlowych”).
   const nazwa = t.replace(/^.*?\b\d{4} r\.(?: -)? /, "");

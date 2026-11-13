@@ -70,6 +70,28 @@ export function kodSieci(e) {
   return null;
 }
 
+/**
+ * Przyczyna błędu sieci do wyniku narzędzia (zgł. 2026-11-13, CBOSA): kod, etap połączenia
+ * (DNS / TCP / TLS / HTTP), host, adres IP i czas — żeby odróżnić awarię źródła od błędu narzędzia.
+ */
+export function przyczynaSieci(e, host) {
+  let kod = null, ip = null;
+  for (let c = e, i = 0; c && i < 6; c = c.cause, i++) {
+    if (!kod && typeof c.code === "string" && c.code !== "ERR_INVALID_STATE") kod = c.code;
+    ip ??= c.socket?.remoteAddress ?? c.address ?? null;
+  }
+  const http = /HTTP (\d{3})/.exec(String(e?.message ?? ""))?.[1] ?? null;
+  const etap = http ? "HTTP"
+    : e?.name === "TimeoutError" ? "ODPOWIEDŹ (limit czasu)"
+    : !kod ? "nieznany"
+    : kod === "ENOTFOUND" || kod === "EAI_AGAIN" ? "DNS"
+    : TLS.test(kod) ? "TLS"
+    : ["ECONNREFUSED", "ETIMEDOUT", "UND_ERR_CONNECT_TIMEOUT", "ENETUNREACH", "EHOSTUNREACH"].includes(kod) ? "TCP"
+    : "TLS/HTTP (połączenie zerwane przed pełną odpowiedzią)";
+  return { kod: http ? `HTTP_${http}` : kod, etap, host: host ?? null, ip, czas: new Date().toISOString(),
+    retryable: !http || Number(http) >= 500 || http === "429" };
+}
+
 /** Komunikat błędu sieci zrozumiały dla użytkownika: host, kod i co to znaczy. */
 export function opisBleduSieci(e, host) {
   const kod = kodSieci(e);
