@@ -1,437 +1,146 @@
 # mod-KSH-spolki-osobowe-rada-nadzorcza
 
-**Wersja:** 1.0.0 | **Dodano:** 2026-08-20 (NAPRAWA — F-68: `mod-KSH-
-spolki-handlowe.md` opisywał spółki osobowe wyłącznie tabelą
-kwalifikatora odpowiedzialności [1 wiersz na typ spółki, art. 22/31
-jako jedyne odniesienie], bez podstawy prawnej dla prowadzenia spraw,
-reprezentacji, rozwiązania czy odpowiedzialności komandytariusza. Rada
-nadzorcza sp. z o.o. [Oddział 2, art. 212-226] nie miała ŻADNEGO
-dedykowanego opracowania mimo istnienia `mod-KSH-organy-spolki-zoo.md`
-dla zarządu i zgromadzenia.)
+**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/644 — art. 402⁷; 2026/1440 od 3.12.2026 — art. 238, 243, 300⁹⁵; 2026/176 od 18.02.2027; 2026/187 od 19.05.2028). Żadna z tych zmian nie dotyczy przepisów wskazanych w tym module (stan 2026-11-13).
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.pdf` kanałem hosta; zmiany po t.j. — ELI, „Akty zmieniające”.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem w piśmie.
-> Akt bazowy: Kodeks spółek handlowych. ⚠️ [NIEWERYFIKOWANE RZĄD 1] —
-> większość treści z RZĄD 2/3 (lexlege.pl, arslege.pl, przepisy.gofin.pl,
-> standardyprawa.pl, radcaprawnykorcyl.pl, materiały branżowe), t.j.
-> cytowany w źródłach: Dz.U. 2024 poz. 18 — ⚠️ ZWERYFIKUJ zgodność z aktualnym
-> t.j. KSH używanym w pozostałych modułach systemu (mod-KSH-spolki-
-> handlowe.md nie podaje jawnie numeru t.j. we fragmencie sprawdzonym
-> w tej sesji) przed cytowaniem w piśmie.
+**Pułapka numeracji:** grupa spółek to art. 21¹–21¹⁶ (Tytuł I, Dział IV); rada nadzorcza sp. z o.o. to art. 213–222. W tekstach bez indeksów górnych „21³” i „213” wyglądają tak samo — sprawdzaj kontekst (Dział / Oddział).
 
-**Rola w systemie:** uzupełnia `mod-KSH-spolki-handlowe.md` (typy
-spółek, kwalifikator odpowiedzialności, formy działalności) i
-`mod-KSH-organy-spolki-zoo.md` (zarząd, zgromadzenie wspólników sp.
-z o.o.) — TEN moduł to RDZEŃ przepisowy spółek osobowych (jawna,
-komandytowa) i rady nadzorczej sp. z o.o., dotąd nieopracowany numerami
-artykułów.
+Zakres: spółka jawna (Dział I, art. 22–85), spółka komandytowa (Dział III, art. 102–124), rada nadzorcza i komisja rewizyjna sp. z o.o. (art. 213–222). Typy spółek i odpowiedzialność ogólnie — `mod-KSH-spolki-handlowe`; zarząd i zgromadzenie sp. z o.o. — `mod-KSH-organy-spolki-zoo`.
 
 ---
 
-## 1. STRUKTURA TYTUŁU II KSH — SPÓŁKI OSOBOWE (art. 22-150)
+## FAZA 0 — INTAKE
 
 ```
-Dział I — Spółka jawna (22-85)
-  Rozdz. 1 — Przepisy ogólne (22-27)
-  Rozdz. 2 — Stosunek do osób trzecich (28-36)
-  Rozdz. 3 — Stosunki wewnętrzne spółki (37-57)
-  Rozdz. 4 — Rozwiązanie spółki i wystąpienie wspólnika (58-66)
-  Rozdz. 5 — Likwidacja (67-85)
-Dział II — Spółka partnerska (86-101)
-Dział III — Spółka komandytowa (102-124)
-  Rozdz. 1 — Przepisy ogólne (102-110)
-  Rozdz. 2 — Stosunek do osób trzecich (111-119)
-  Rozdz. 3 — Stosunki wewnętrzne spółki (120-124)
-Dział IV — Spółka komandytowo-akcyjna (125-150) — POZA ZAKRESEM tej
-  naprawy, nie w pierwotnym zakresie F-68
+□ Typ spółki (jawna / komandytowa / partnerska / S.K.A. / sp. z o.o. z RN)?
+□ Stosunek wewnętrzny (prowadzenie spraw) czy zewnętrzny (reprezentacja, odpowiedzialność)?
+□ Kto jest stroną sporu: wspólnik, wierzyciel, komandytariusz, członek zarządu, RN?
+□ Treść umowy spółki — co modyfikuje przepisy dyspozytywne (art. 37 § 1)?
+□ Daty: przystąpienie, wpis do KRS, wypowiedzenie, dowiedzenie się o naruszeniu zakazu konkurencji.
 ```
 
 ---
 
-## 2. SPÓŁKA JAWNA — DEFINICJA I ODPOWIEDZIALNOŚĆ (art. 22-27)
+## 1. SPÓŁKA JAWNA
 
-```
-⭐⭐⭐ ART. 22 §1 — spółka jawna to SPÓŁKA OSOBOWA, która PROWADZI
-  PRZEDSIĘBIORSTWO pod własną firmą, a NIE JEST inną spółką handlową
-  (⭐ definicja negatywna/rezydualna — "domyślny" typ spółki osobowej)
-  §2 — KAŻDY wspólnik odpowiada za zobowiązania spółki BEZ OGRANICZENIA
-  całym majątkiem, SOLIDARNIE z pozostałymi wspólnikami ORAZ ze spółką
-  — z uwzględnieniem art. 31 (⭐⭐⭐ zasada odpowiedzialności solidarnej —
-  PUNKT WYJŚCIA dla całego reżimu odpowiedzialności spółek osobowych,
-  powielany przez odesłania w spółce komandytowej i partnerskiej)
+### Przepisy ogólne i stosunek do osób trzecich (art. 22–36)
 
-⭐⭐⭐ ART. 31 — ODPOWIEDZIALNOŚĆ SUBSYDIARNA:
-  §1: wierzyciel spółki MOŻE prowadzić egzekucję z majątku wspólnika
-    TYLKO GDY egzekucja z majątku SPÓŁKI okaże się BEZSKUTECZNA
-    (⭐⭐⭐ "beneficium ordinis" — wspólnik odpowiada dopiero W DRUGIEJ
-    KOLEJNOŚCI, nie jednocześnie ze spółką)
-  §2: subsydiarność NIE JEST przeszkodą do WNIESIENIA POWÓDZTWA
-    przeciwko wspólnikowi ZANIM egzekucja z majątku spółki okaże się
-    bezskuteczna (⭐⭐ rozróżnienie: pozwać można od razu, EGZEKWOWAĆ —
-    dopiero po bezskuteczności wobec spółki; klauzula wykonalności
-    przeciw wspólnikowi wymaga wykazania bezskuteczności, patrz analiza
-    przy spółce komandytowej niżej)
-  §3: subsydiarna odpowiedzialność NIE DOTYCZY zobowiązań POWSTAŁYCH
-    PRZED wpisem spółki do rejestru (⭐ osoba przystępująca do spółki
-    odpowiada za zobowiązania powstałe PRZED dniem jej przystąpienia —
-    zasada kontynuacji odpowiedzialności mimo zmiany składu wspólników)
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 22 § 1 | definicja rezydualna: spółka osobowa prowadząca przedsiębiorstwo pod własną firmą, niebędąca inną spółką handlową | |
+| art. 22 § 2 | każdy wspólnik odpowiada bez ograniczenia, całym majątkiem, solidarnie z innymi wspólnikami i spółką — z uwzględnieniem art. 31 | punkt wyjścia dla komplementariusza (art. 103) |
+| art. 23, 23¹ | umowa na piśmie pod rygorem nieważności; albo wzorzec umowy w systemie teleinformatycznym (art. 23¹) | |
+| art. 25 | treść umowy: firma i siedziba, wkłady i ich wartość, przedmiot działalności, czas trwania (jeśli oznaczony) | |
+| art. 25¹ | spółka powstaje z chwilą wpisu do rejestru | |
+| art. 29 | każdy wspólnik ma prawo reprezentacji; obejmuje czynności sądowe i pozasądowe; § 3 — nie można jej ograniczyć ze skutkiem wobec osób trzecich | |
+| art. 30 | § 1: umowa może pozbawić prawa reprezentacji albo wprowadzić łączną (z innym wspólnikiem lub prokurentem); § 2: pozbawienie wbrew umowie — tylko z ważnych powodów, prawomocnym orzeczeniem sądu | |
+| art. 31 | § 1: egzekucja z majątku wspólnika dopiero, gdy egzekucja ze spółki bezskuteczna (subsydiarność); § 2: pozew przeciw wspólnikowi dopuszczalny wcześniej; § 3: subsydiarność nie dotyczy zobowiązań powstałych przed wpisem do rejestru | pozwać można od razu, egzekwować po bezskuteczności wobec spółki; bezskuteczność wykazuje się przy klauzuli przeciw wspólnikowi (KPC — `mod-KPC-egzekucja-windykacja`) |
+| art. 32 | przystępujący odpowiada za zobowiązania spółki sprzed przystąpienia | to art. 32, nie art. 31 § 3 |
 
-⭐⭐ ART. 25 — TREŚĆ umowy spółki jawnej (firma i siedziba, określenie
-  wkładów każdego wspólnika, przedmiot działalności, czas trwania
-  spółki jeżeli oznaczony) — forma PISEMNA pod rygorem NIEWAŻNOŚCI
-  (art. 23), lub wzorzec umowy w systemie teleinformatycznym (S24)
-```
+### Stosunki wewnętrzne (art. 37–57)
 
----
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 37 | § 1: przepisy rozdziału dyspozytywne (jeśli umowa nie stanowi inaczej); § 2: art. 38 bezwzględnie obowiązujący | |
+| art. 38 | § 1: zakaz powierzenia prowadzenia spraw osobom trzecim z wyłączeniem wspólników; § 2: nieważne umowne ograniczenie osobistego prawa do informacji i przeglądania ksiąg | |
+| art. 39 | § 1: każdy wspólnik ma prawo i obowiązek prowadzenia spraw; § 2: sprawy zwykłe bez uchwały; § 3: sprzeciw innego wspólnika → wymagana uchwała | |
+| art. 40 | powierzenie prowadzenia spraw niektórym wspólnikom (umowa lub uchwała) wyłącza pozostałych; § 2: między nimi stosuje się zasady ogólne | |
+| art. 43 | sprawy przekraczające zwykły zarząd — **zgoda wszystkich** wspólników, także wyłączonych od prowadzenia spraw | przepis mówi o zgodzie, nie o „jednomyślnej uchwale” |
+| art. 44 | czynność nagła (zaniechanie mogłoby wyrządzić poważną szkodę) — wspólnik prowadzący sprawy działa bez uchwały | to art. 44, nie art. 43 |
+| art. 46 | za prowadzenie spraw wspólnik nie otrzymuje wynagrodzenia | dyspozytywne (art. 37 § 1) |
+| art. 47 | odebranie prawa prowadzenia spraw (i zwolnienie z obowiązku) — tylko z ważnych powodów, prawomocnym orzeczeniem sądu | odpowiednik art. 30 § 2 dla stosunków wewnętrznych |
+| art. 56 | § 1: powstrzymanie się od działalności sprzecznej z interesami spółki; § 2: zakaz interesów konkurencyjnych bez wyraźnej lub domniemanej zgody (m.in. wspólnik s.c., sp.j., partner, komplementariusz, członek organu spółki konkurencyjnej) | |
+| art. 57 | § 1: każdy wspólnik żąda wydania spółce korzyści lub naprawienia szkody; § 2: przedawnienie 6 miesięcy od dowiedzenia się przez **wszystkich** pozostałych wspólników, nie później niż 3 lata; § 3: nie ogranicza art. 63 | |
 
-## 3. PROWADZENIE SPRAW I REPREZENTACJA (art. 37-47) — ⭐⭐⭐ kluczowy
-podział stosunków WEWNĘTRZNYCH vs ZEWNĘTRZNYCH
+### Rozwiązanie i wystąpienie (art. 58–66)
 
-```
-⭐⭐⭐ ROZRÓŻNIENIE FUNDAMENTALNE: PROWADZENIE SPRAW (stosunki
-  WEWNĘTRZNE — zarządzanie, decyzje) vs REPREZENTACJA (stosunki
-  ZEWNĘTRZNE — składanie oświadczeń woli wobec osób trzecich) to DWIE
-  ODRĘBNE instytucje, regulowane różnymi przepisami — mylenie ich jest
-  częstym błędem praktycznym
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 58 § 1 | przyczyny rozwiązania (pkt 1–6): umowa, jednomyślna uchwała, upadłość spółki, śmierć lub upadłość wspólnika, wypowiedzenie przez wspólnika lub jego wierzyciela, prawomocne orzeczenie sądu | § 2: uchwała na wzorcu przy spółce z wzorca |
+| art. 63 | § 1: rozwiązanie przez sąd z ważnych powodów (każdy wspólnik); § 2: ważny powód po stronie jednego wspólnika → sąd może, na wniosek pozostałych, **wyłączyć tego wspólnika**; § 3: przeciwne postanowienia umowy nieważne | wyłączenie wspólnika to art. 63 § 2; przejęcie majątku w spółce dwuosobowej to art. 66 |
+| art. 64 | § 1: spółka trwa mimo śmierci, upadłości lub wypowiedzenia, jeśli umowa tak stanowi lub pozostali tak postanowią; § 2: przy śmierci/upadłości — niezwłocznie, przy wypowiedzeniu — przed upływem terminu wypowiedzenia; inaczej spadkobierca/syndyk/wypowiadający/wierzyciel mogą żądać likwidacji | |
+| art. 65 | rozliczenie z występującym: § 1 osobny bilans z wartością zbywczą majątku; § 2 dzień bilansowy (wypowiedzenie — ostatni dzień roku obrotowego, w którym upłynął termin; śmierć/upadłość — ten dzień; wyłączenie sądowe — dzień wniesienia pozwu); § 3 wypłata w pieniądzu, rzeczy do używania w naturze; § 4 wartość ujemna → obowiązek wyrównania; § 5 udział w zysku/stracie spraw niezakończonych | |
+| art. 66 | spółka dwuosobowa, powód rozwiązania po stronie jednego wspólnika → sąd **może** przyznać drugiemu prawo przejęcia majątku z rozliczeniem wg art. 65 | uprawnienie sądu, nie skutek automatyczny |
 
-⭐⭐⭐ ART. 38 §1 — ZAKAZ powierzenia prowadzenia spraw spółki OSOBOM
-  TRZECIM z wyłączeniem wspólników (⭐⭐ bezwzględny — nie można "oddać"
-  zarządzania spółką jawną komuś spoza grona wspólników)
-  §2 — NIEWAŻNE jest umowne ograniczenie prawa wspólnika do OSOBISTEGO
-  zasięgania informacji o stanie majątku/interesów spółki i do
-  OSOBISTEGO przeglądania ksiąg i dokumentów (⭐⭐⭐ prawo bezwzględnie
-  chronione — nie można go wyłączyć nawet za zgodą wspólnika)
-
-⭐⭐⭐ ART. 39 §1 — KAŻDY wspólnik ma PRAWO I OBOWIĄZEK prowadzenia
-  spraw spółki (⭐ domyślna zasada — modyfikowalna umową, patrz art. 37
-  §1: przepisy Rozdziału 3 stosuje się, JEŻELI umowa nie stanowi
-  inaczej — dyspozytywność większości tych przepisów)
-  ART. 40 §1 — jeżeli prowadzenie spraw POWIERZONO jednemu lub kilku
-  wspólnikom, POZOSTALI są WYŁĄCZENI od prowadzenia spraw (⭐ zwolnienie
-  = jednocześnie odebranie uprawnienia pozostałym)
-
-⭐⭐ ART. 43 — CZYNNOŚCI PRZEKRACZAJĄCE zakres zwykłych czynności
-  WYMAGAJĄ jednomyślnej UCHWAŁY WSZYSTKICH wspólników — W TYM tych,
-  którzy NIE MAJĄ prawa prowadzenia spraw (⭐⭐⭐ WYJĄTEK od zasady
-  wyłączenia z pkt wyżej — sprawy nadzwyczajne wymagają głosu
-  WSZYSTKICH, nawet "wyłączonych" wspólników)
-  ⭐ CZYNNOŚĆ NAGŁA (której zaniechanie groziłoby spółce poważną
-  szkodą) — wspólnik uprawniony do prowadzenia spraw MOŻE jej dokonać
-  BEZ uchwały (⭐ wyjątek praktyczny od wymogu kolegialności)
-
-⭐⭐ ART. 46 — wspólnik NIE MOŻE żądać WYNAGRODZENIA za prowadzenie
-  spraw spółki (⭐ domniemanie nieodpłatności, dyspozytywne)
-
-⭐⭐⭐ ART. 47 — SĄDOWE POZBAWIENIE prawa i obowiązku prowadzenia spraw:
-  z WAŻNYCH POWODÓW, na mocy PRAWOMOCNEGO orzeczenia sądu — obejmuje
-  RÓWNIEŻ zwolnienie z obowiązku (⭐⭐⭐ jedyna droga odebrania tego
-  uprawnienia wbrew woli wspólnika, poza umową spółki; legitymacja
-  procesowa — bierne współuczestnictwo konieczne między pozostałymi
-  wspólnikami niewystępującymi jako powodowie, wg orzecznictwa
-  cytowanego w doktrynie)
-
-⭐⭐⭐ REPREZENTACJA (stosunki ZEWNĘTRZNE, art. 29 — poza zakresem
-  szczegółowego rozdziału 3): KAŻDY wspólnik ma PRAWO reprezentować
-  spółkę (nie obowiązek, chyba że umowa stanowi inaczej) — prawo to
-  MOŻE zostać ODEBRANE: (a) w umowie spółki za zgodą wspólnika, (b)
-  WBREW jego woli z ważnych powodów prawomocnym orzeczeniem sądu (art.
-  30 §2, analogicznie do art. 47 dla prowadzenia spraw) — umowa MOŻE
-  wprowadzać reprezentację ŁĄCZNĄ z innym wspólnikiem lub prokurentem
-```
+Likwidacja: art. 67–85 (art. 67 § 1 — likwidacja w przypadkach z art. 58, chyba że wspólnicy uzgodnią inny sposób zakończenia). Spółka partnerska: art. 86–101 (art. 89 — odesłanie do spółki jawnej). S.K.A.: art. 125–150. Brzmienie — ELI.
 
 ---
 
-## 4. ZAKAZ KONKURENCJI (art. 56-57)
+## 2. SPÓŁKA KOMANDYTOWA (art. 102–124)
 
-```
-⭐⭐ ART. 56 §1 — wspólnik OBOWIĄZANY jest powstrzymać się od WSZELKIEJ
-  działalności SPRZECZNEJ z interesami spółki
-  §2 — wspólnik NIE MOŻE, bez WYRAŹNEJ lub DOMNIEMANEJ zgody
-  pozostałych wspólników, zajmować się interesami KONKURENCYJNYMI — w
-  szczególności uczestniczyć w spółce konkurencyjnej jako wspólnik
-  spółki cywilnej, spółki jawnej, PARTNER, KOMPLEMENTARIUSZ lub
-  CZŁONEK ORGANU spółki (⭐⭐ katalog szeroki — obejmuje też role w
-  innych spółkach osobowych i kapitałowych)
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 102 | co najmniej jeden komplementariusz (bez ograniczenia) i co najmniej jeden komandytariusz (odpowiedzialność ograniczona) | brak którejkolwiek roli = nie jest to sp.k. |
+| art. 103 | § 1: w sprawach nieuregulowanych — odpowiednio przepisy o spółce jawnej; § 2: spółka z wzorca — przepisy o sp.j. z wzorca | stąd art. 22 § 2, 31, 43, 47, 56–66 stosowane odpowiednio |
+| art. 104 | § 1–3: firma z nazwiskiem komplementariusza (albo pełną firmą komplementariusza-osoby prawnej) + „spółka komandytowa” / „sp.k.”; § 4: nazwisko lub firma komandytariusza w firmie → odpowiada wobec osób trzecich jak komplementariusz | sankcja jest w § 4 |
+| art. 111 | komandytariusz odpowiada wobec wierzycieli tylko do wysokości sumy komandytowej | odpowiedzialność osobista, solidarna i subsydiarna (art. 103 → art. 22 § 2, 31) |
+| art. 112 | § 1: wolny od odpowiedzialności w granicach wartości wniesionego wkładu; § 2: zwrot wkładu przywraca odpowiedzialność do wartości zwrotu; § 3: przy stracie każda wypłata przed uzupełnieniem wkładu = zwrot (bez wpisu); § 4: pobrany zysk ze sprawozdania nie podlega zwrotowi, chyba że zła wiara | |
+| art. 113 | obniżenie sumy komandytowej bez skutku wobec wierzycieli, których wierzytelności powstały przed wpisem obniżenia | |
+| art. 117 | reprezentują komplementariusze nie pozbawieni tego prawa umową lub prawomocnym orzeczeniem | |
+| art. 118 | § 1: komandytariusz reprezentuje spółkę wyłącznie jako pełnomocnik; § 2: działanie bez ujawnienia pełnomocnictwa, bez umocowania lub z przekroczeniem → odpowiedzialność wobec osób trzecich bez ograniczenia | |
+| art. 119 | postanowienia umowy niezgodne z art. 111–118 **nie wywołują skutków wobec osób trzecich** | skutek tylko zewnętrzny — nie jest to „bezwzględna nieważność” postanowień między wspólnikami |
+| art. 120 | § 1–2: prawo komandytariusza do sprawozdania i przeglądania ksiąg; wniosek do sądu rejestrowego z ważnych powodów; § 3: nie można wyłączyć ani ograniczyć | |
+| art. 121 | § 1: komandytariusz nie prowadzi spraw, chyba że umowa inaczej; § 2: sprawy przekraczające zwykły zarząd — wymagana jego zgoda (dyspozytywnie); § 3: zakaz konkurencji (art. 56–57) nie dotyczy komandytariusza bez prawa prowadzenia spraw i reprezentacji, chyba że umowa inaczej | |
 
-⭐⭐ ART. 57 — SANKCJE naruszenia zakazu konkurencji: każdy wspólnik ma
-  prawo żądać WYDANIA spółce korzyści osiągniętych przez naruszającego
-  LUB NAPRAWIENIA wyrządzonej szkody. PRZEDAWNIENIE: 6 MIESIĘCY od dnia,
-  gdy WSZYSCY pozostali wspólnicy dowiedzieli się o naruszeniu, NIE
-  PÓŹNIEJ niż 3 LATA (⭐⭐ krótki termin subiektywny + dłuższy
-  obiektywny, typowa konstrukcja dwuterminowa)
-```
+Pułapka praktyczna: osoba będąca członkiem zarządu komplementariusza (sp. z o.o.) i jednocześnie komandytariuszem — w czynności wskazuj wprost, w jakiej roli działa (pełnomocnik sp.k. czy organ komplementariusza); ryzyko art. 118 § 2. Stosowanie art. 210 § 1 do umów sp.k. z członkiem zarządu komplementariusza — sporne; sprawdź aktualne orzecznictwo SN (`orzeczenia-sadowe-v2`) przed opinią.
 
 ---
 
-## 5. ROZWIĄZANIE SPÓŁKI I WYSTĄPIENIE WSPÓLNIKA (art. 58-66)
+## 3. RADA NADZORCZA I KOMISJA REWIZYJNA SP. Z O.O. (art. 213–222)
 
-```
-⭐⭐⭐ ART. 58 §1 — PRZYCZYNY rozwiązania spółki (⭐ katalog ZAMKNIĘTY,
-  6 pozycji):
-  1) przyczyny PRZEWIDZIANE W UMOWIE spółki
-  2) JEDNOMYŚLNA uchwała wszystkich wspólników
-  3) OGŁOSZENIE UPADŁOŚCI spółki
-  4) ŚMIERĆ wspólnika LUB ogłoszenie JEGO upadłości
-  5) WYPOWIEDZENIE umowy spółki przez wspólnika LUB WIERZYCIELA
-     wspólnika
-  6) PRAWOMOCNE orzeczenie SĄDU
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 210 § 1 | w umowie spółki z członkiem zarządu i w sporze z nim spółkę reprezentuje RN albo pełnomocnik powołany uchwałą wspólników | § 2: jedyny wspólnik będący jedynym członkiem zarządu — forma aktu notarialnego (wyjątek: wzorzec, § 3) |
+| art. 212 | indywidualna kontrola wspólnika (księgi, dokumenty, wyjaśnienia); § 2–4: odmowa zarządu, uchwała w miesiąc, wniosek do sądu rejestrowego w 7 dni | |
+| art. 213 | § 1: RN lub komisja rewizyjna albo oba organy — fakultatywnie; § 2: obowiązkowo, gdy kapitał zakładowy > 500 000 zł **i** wspólników > 25; § 3: po ustanowieniu organu umowa może wyłączyć albo ograniczyć indywidualną kontrolę wspólników | § 3 dotyczy kontroli z art. 212, nie innych uprawnień |
+| art. 214 | § 1: niepołączalność — członek zarządu, prokurent, likwidator, kierownik oddziału/zakładu, zatrudniony w spółce główny księgowy, radca prawny, adwokat; § 2: także osoby bezpośrednio podległe członkowi zarządu lub likwidatorowi; § 3: członkowie zarządu i likwidatorzy spółki lub spółdzielni zależnej | |
+| art. 214¹ | członek RN/KR: staranność zawodowa i lojalność; tajemnica także po mandacie | |
+| art. 215 | § 1: co najmniej 3 członków, powoływanych i odwoływanych uchwałą wspólników; § 2: umowa może przewidzieć inny sposób | |
+| art. 216 | § 1: kadencja roczna, jeśli umowa nie stanowi inaczej; § 2: odwołanie uchwałą wspólników w każdym czasie | |
+| art. 217 | komisja rewizyjna — co najmniej 3 członków, jak RN | |
+| art. 218 | wygaśnięcie mandatów: ze zgromadzeniem zatwierdzającym sprawozdanie za pierwszy pełny rok obrotowy (§ 1) albo ostatni pełny rok kadencji dłuższej (§ 2); § 3 — art. 202 § 3–5 odpowiednio | |
+| art. 219 | § 1: stały nadzór we wszystkich dziedzinach; § 2: **brak prawa wiążących poleceń** dla zarządu; § 3: ocena sprawozdań i wniosku o podział zysku + sprawozdanie RN; § 4: badanie dokumentów, rewizja majątku, żądanie informacji (także od pracowników i zleceniobiorców, o spółkach zależnych i powiązanych); § 4¹: termin 2 tygodnie; § 4²: zarząd nie może ograniczać dostępu; § 5: każdy członek nadzoruje samodzielnie (dyspozytywnie); § 6: udział biegłego rewidenta | |
+| art. 219¹ | komitety RN (bez zwolnienia członków z odpowiedzialności) | |
+| art. 219² | doradca RN — tylko gdy umowa spółki tak stanowi; RN reprezentuje spółkę w umowie z doradcą | |
+| art. 220 | umowa może rozszerzyć uprawnienia RN, w szczególności: zgoda RN na oznaczone czynności zarządu; prawo zawieszania członków zarządu z ważnych powodów | **art. 220 nie przewiduje limitu 3 miesięcy ani delegowania** — to rozwiązania S.A. (art. 383 § 1) i P.S.A. (art. 300⁷⁰); w sp. z o.o. wynikają tylko z umowy spółki |
+| art. 221 | obowiązki komisji rewizyjnej (ocena sprawozdań i wniosku o podział zysku, sprawozdanie); § 2 — rozszerzenie w spółce bez RN | |
+| art. 222 | kworum (połowa członków + zaproszenie wszystkich), udział zdalny, głos na piśmie, tryb obiegowy, jawność, większość bezwzględna; § 6 regulamin RN | § 5 uchylony; § 7 — odpowiednio do KR |
+| art. 223–226 | biegły rewident wyznaczany przez sąd rejestrowy na żądanie wspólników reprezentujących co najmniej 1/10 kapitału zakładowego (art. 223) | |
 
-⭐⭐⭐ ART. 63 — ROZWIĄZANIE PRZEZ SĄD "Z WAŻNYCH POWODÓW": każdy
-  wspólnik MOŻE żądać rozwiązania spółki przez sąd, jeśli istnieją
-  ważne powody (⭐⭐ klauzula generalna, ocena ad casum) — ⭐⭐⭐ SZCZEGÓLNY
-  MECHANIZM przy DWÓCH wspólnikach: jeżeli powód rozwiązania zaistnieje
-  PO STRONIE JEDNEGO z nich, SĄD MOŻE przyznać DRUGIEMU wspólnikowi
-  prawo do PRZEJĘCIA majątku spółki, z obowiązkiem rozliczenia się z
-  występującym wspólnikiem wg art. 65 (⭐⭐⭐ alternatywa dla likwidacji
-  — spółka "jednoosobowa" przejmuje działalność zamiast pełnej
-  likwidacji, praktycznie bardzo istotne dla spółek 2-osobowych w
-  konflikcie)
-
-⭐⭐⭐ ART. 64 §1 — TRWANIE SPÓŁKI MIMO PRZESŁANEK: mimo śmierci
-  wspólnika, ogłoszenia jego upadłości LUB wypowiedzenia umowy przez
-  wspólnika/wierzyciela, spółka TRWA NADAL między pozostałymi
-  wspólnikami — JEŻELI umowa spółki tak stanowi LUB pozostali wspólnicy
-  tak postanowią (⭐⭐⭐ WYSTĄPIENIE przesłanki NIE oznacza automatycznego
-  końca bytu spółki — dopiero WYKREŚLENIE z rejestru powoduje ustanie;
-  przy wypowiedzeniu decyzja musi zapaść PRZED upływem terminu
-  wypowiedzenia, przy śmierci/upadłości — niezwłocznie po zdarzeniu)
-
-⭐⭐⭐ ART. 65 §1 — ROZLICZENIE z WYSTĘPUJĄCYM wspólnikiem: wartość
-  udziału KAPITAŁOWEGO oznacza się na podstawie OSOBNEGO BILANSU
-  (uwzględniającego WARTOŚĆ ZBYWCZĄ majątku spółki — orzecznictwo:
-  wartość RYNKOWA, nie księgowa, obejmująca aktywa i pasywa) — udział
-  WYPŁACA SIĘ W PIENIĄDZU; rzeczy wniesione TYLKO DO UŻYWANIA zwraca
-  się W NATURZE (⭐⭐⭐ UJEMNA wartość udziału = OBOWIĄZEK DOPŁATY —
-  jeśli wkład ustępującego wspólnika nie pokrywa strat spółki, musi
-  dopłacić różnicę)
-
-⭐⭐ ART. 66 — jeśli w spółce z DWÓCH wspólników jeden z nich WYSTĄPIŁ
-  (lub przejął majątek na podstawie art. 63 wyżej), majątek spółki
-  PRZECHODZI na drugiego wspólnika z obowiązkiem rozliczenia zgodnie
-  z art. 65
-```
+Uchwały RN: KSH nie przewiduje zaskarżania uchwał RN w trybie art. 249–252 (dotyczą uchwał wspólników); wadliwość uchwały RN oceniana jest na zasadach ogólnych (powództwo o ustalenie — KPC art. 189). Brzmienie i orzecznictwo — przed opinią.
 
 ---
 
-## 6. SPÓŁKA KOMANDYTOWA — DEFINICJA I DWA RODZAJE WSPÓLNIKÓW (art. 102-105)
+## WORKFLOW
 
-```
-⭐⭐⭐ ART. 102 — spółka komandytowa to spółka osobowa mająca na celu
-  prowadzenie przedsiębiorstwa pod własną firmą, w której wobec
-  wierzycieli za zobowiązania spółki co najmniej JEDEN wspólnik
-  (KOMPLEMENTARIUSZ) odpowiada BEZ OGRANICZENIA, a odpowiedzialność co
-  najmniej JEDNEGO wspólnika (KOMANDYTARIUSZA) jest OGRANICZONA (⭐⭐⭐
-  definicja strukturalna — DWIE role o fundamentalnie różnym reżimie
-  odpowiedzialności, obie obligatoryjne — nie może istnieć spółka
-  komandytowa z samymi komplementariuszami lub samymi komandytariuszami)
+1. Ustal typ spółki i treść umowy (co jest dyspozytywne — art. 37 § 1, art. 121).
+2. Rozdziel prowadzenie spraw od reprezentacji.
+3. Pobierz z ELI brzmienie wskazanych przepisów; przy sp.k. — także przepis sp.j. stosowany przez art. 103.
+4. Odpowiedzialność wobec wierzyciela: art. 22 § 2 → 31 → 32 (sp.j.); 111–113, 104 § 4, 118 § 2 (komandytariusz).
+5. Spory wewnętrzne: art. 47, 30 § 2, 63, 66; terminy — art. 57 § 2, 64 § 2.
+6. RN sp. z o.o.: obowiązkowość (art. 213 § 2), niepołączalność (art. 214), zakres (219, 220 + umowa).
 
-⭐⭐⭐ ART. 103 §1 — ODESŁANIE: w sprawach NIEUREGULOWANYCH dla spółki
-  komandytowej, ODPOWIEDNIO stosuje się przepisy o SPÓŁCE JAWNEJ
-  (chyba że ustawa stanowi inaczej) — ⭐⭐⭐ KLUCZOWA TECHNIKA
-  LEGISLACYJNA: cały aparat pojęciowy z pkt 2-5 tego modułu (prowadzenie
-  spraw, zakaz konkurencji, rozwiązanie, odpowiedzialność solidarno-
-  subsydiarna z art. 22 §2/31) stosuje się ODPOWIEDNIO do
-  KOMPLEMENTARIUSZA, chyba że przepisy Działu III modyfikują to wprost
-  (jak np. dla komandytariusza w pkt 7 niżej)
+## QUALITY GATE
 
-⭐⭐ ART. 104 §1 — FIRMA spółki komandytowej MUSI zawierać nazwisko
-  jednego LUB kilku komplementariuszy + dodatkowe oznaczenie "spółka
-  komandytowa" (dop. skrót "sp.k.") — JEŻELI komplementariuszem jest
-  OSOBA PRAWNA, firma zawiera PEŁNE brzmienie firmy tej osoby prawnej +
-  oznaczenie "spółka komandytowa" — ⭐⭐⭐ SANKCJA: umieszczenie
-  nazwiska/firmy KOMANDYTARIUSZA w firmie spółki powoduje, że TEN
-  komandytariusz odpowiada wobec osób trzecich TAK JAK komplementariusz
-  (⭐⭐⭐ utrata ograniczenia odpowiedzialności jako sankcja za mylące
-  oznaczenie firmy — istotne ostrzeżenie praktyczne)
-```
+- [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
+- [ ] Odróżniono art. 21¹–21¹⁶ (grupa spółek) od art. 212–219 (kontrola wspólnika, RN)?
+- [ ] Czy rozwiązanie z S.A. (art. 383) nie zostało przeniesione na sp. z o.o.?
+- [ ] Odpowiedzialność komandytariusza: suma komandytowa, wkład wniesiony, zwroty (art. 111–113)?
+- [ ] Umowa spółki przeczytana — postanowienia modyfikujące przepisy dyspozytywne?
 
----
+## OUTPUT
 
-## 7. ODPOWIEDZIALNOŚĆ KOMANDYTARIUSZA — SUMA KOMANDYTOWA (art. 111-112)
-
-```
-⭐⭐⭐ ART. 111 — KOMANDYTARIUSZ odpowiada za zobowiązania spółki wobec
-  jej wierzycieli TYLKO DO WYSOKOŚCI sumy komandytowej (⭐⭐⭐ "suma
-  komandytowa" — kwota pieniężna określona W UMOWIE SPÓŁKI odrębnie dla
-  każdego komandytariusza i UJAWNIANA w KRS — górna granica
-  odpowiedzialności) — odpowiedzialność ma charakter OSOBISTY (całym
-  majątkiem, nie tylko wkładem), SOLIDARNY ze spółką i pozostałymi
-  wspólnikami, oraz SUBSYDIARNY (art. 31 w zw. z art. 103 — ta sama
-  konstrukcja "beneficium ordinis" co przy spółce jawnej)
-
-⭐⭐⭐ ART. 112 §1 — komandytariusz jest WOLNY od odpowiedzialności W
-  GRANICACH wartości WKŁADU WNIESIONEGO do spółki (⭐⭐⭐ MECHANIZM
-  PRAKTYCZNY: jeśli wkład ≥ suma komandytowa, odpowiedzialność osobista
-  komandytariusza jest w praktyce "wyzerowana" — wierzyciel nie może
-  sięgnąć do majątku osobistego, dopóki pokrycie sumy komandytowej
-  trwa; jeśli wkład < suma komandytowa, komandytariusz odpowiada
-  różnicą)
-  §2-4 — UTRATA tej ochrony przy USZCZUPLENIU majątku przez STRATĘ: za
-  ZWROT WKŁADU (uszczuplający ochronę) uważa się KAŻDĄ wypłatę na rzecz
-  komandytariusza PRZED uzupełnieniem wkładu do pierwotnej wartości —
-  BEZ wymogu wpisu do rejestru dla samej wypłaty. WYJĄTEK: komandytariusz
-  NIE MUSI zwracać tego, co pobrał TYTUŁEM ZYSKU na podstawie
-  sprawozdania finansowego, CHYBA że działał w ZŁEJ WIERZE (⭐⭐
-  ochrona dobrej wiary przy wypłatach dywidendowych)
-
-⭐⭐ PRAKTYCZNE ZNACZENIE ART. 31 + 103 dla wierzyciela: klauzula
-  wykonalności PRZECIWKO wspólnikowi (komplementariuszowi lub
-  komandytariuszowi) wymaga WYKAZANIA bezskuteczności egzekucji wobec
-  SPÓŁKI — badane na ETAPIE nadania klauzuli; wierzyciel powinien
-  NAJPIERW próbować zaspokojenia z majątku spółki
-```
-
----
-
-## 8. REPREZENTACJA SPÓŁKI KOMANDYTOWEJ (art. 117-119)
-
-```
-⭐⭐⭐ ART. 117 — spółkę komandytową REPREZENTUJĄ KOMPLEMENTARIUSZE,
-  których z mocy umowy spółki ALBO prawomocnego orzeczenia sądu NIE
-  pozbawiono prawa reprezentowania (⭐ zasada kodeksowa: KAŻDY
-  komplementariusz może reprezentować SAMODZIELNIE, chyba że umowa
-  ustanawia inny sposób — np. reprezentację łączną)
-
-⭐⭐⭐ ART. 118 §1 — KOMANDYTARIUSZ może reprezentować spółkę WYŁĄCZNIE
-  jako PEŁNOMOCNIK (⭐⭐⭐ fundamentalne ograniczenie — komandytariusz
-  NIE MA prawa reprezentacji z mocy samego statusu wspólnika, w
-  przeciwieństwie do komplementariusza)
-  §2 — jeżeli komandytariusz dokona czynności w imieniu spółki BEZ
-  UJAWNIENIA pełnomocnictwa (lub bez umocowania, lub przekraczając
-  jego zakres) — odpowiada za skutki tej czynności wobec osób trzecich
-  BEZ OGRANICZENIA (⭐⭐⭐ SANKCJA analogiczna do art. 104 §3 — utrata
-  ograniczenia odpowiedzialności za nieprawidłowe działanie jako
-  "quasi-reprezentant")
-
-⭐⭐ ART. 119 — zasady reprezentacji z art. 117-118 są BEZWZGLĘDNIE
-  OBOWIĄZUJĄCE — umowa spółki NIE MOŻE ich modyfikować ani zastępować
-  odmiennymi regulacjami
-
-⭐⭐ PRAKTYCZNY PROBLEM — komplementariusz-spółka z o.o.: gdy
-  komplementariuszem jest sp. z o.o. reprezentowana przez osobę, która
-  JEST RÓWNOCZEŚNIE komandytariuszem tej spółki komandytowej, osoba ta
-  MUSI wyraźnie wskazać w umowie rolę, w jakiej występuje (pełnomocnik
-  spółki komandytowej vs członek zarządu komplementariusza) — brak
-  wskazania grozi odpowiedzialnością z art. 118 §2 (SN, III CSK 12/15).
-  Przy UMOWIE MIĘDZY spółką komandytową a CZŁONKIEM ZARZĄDU jej
-  komplementariusza (sp. z o.o.) — art. 210 §1 KSH (rada nadzorcza/
-  pełnomocnik dla umów sp. z o.o. z członkiem zarządu, patrz pkt 9
-  niżej) ma zastosowanie WPROST wg SN (uchwała cytowana w doktrynie) —
-  ⚠️ [NIEWERYFIKOWANE RZĄD 1, spór doktrynalny sygnalizowany w jednym
-  źródle — inne źródło wskazuje, że art. 210 §1 NIE powinien być
-  stosowany do umów SPÓŁKI KOMANDYTOWEJ z członkiem zarządu jej
-  komplementariusza, tylko do umów SAMEJ sp. z o.o. — rozbieżność
-  doktrynalna, wymaga weryfikacji przy konkretnej sprawie]
-```
-
----
-
-## 9. RADA NADZORCZA SP. Z O.O. (Oddział 2, art. 212-226)
-
-```
-⭐⭐⭐ ART. 213 §1 — umowa spółki MOŻE ustanowić RADĘ NADZORCZĄ lub
-  KOMISJĘ REWIZYJNĄ, albo OBA te organy (⭐⭐⭐ organ FAKULTATYWNY co do
-  zasady)
-  §2 — OBOWIĄZEK ustanowienia rady nadzorczej LUB komisji rewizyjnej
-  W SPÓŁKACH, w których kapitał zakładowy PRZEKRACZA 500 000 ZŁ, a
-  wspólników jest WIĘCEJ niż 25 (⭐⭐⭐ próg OBLIGATORYJNOŚCI — kumulatywny:
-  oba warunki kapitałowy i liczbowy muszą być spełnione)
-  §3 — powołanie rady NIE WYŁĄCZA uprawnień nadzorczych WSPÓLNIKÓW z
-  mocy ustawy — chyba że umowa spółki tak stanowi (⭐⭐ dwa niezależne
-  ośrodki nadzoru mogą współistnieć, chyba że wspólnicy świadomie
-  zrzekną się swoich uprawnień w umowie, by uniknąć dublowania)
-
-⭐⭐ ART. 215 — rada nadzorcza SKŁADA SIĘ z MINIMUM 3 CZŁONKÓW,
-  powoływanych i odwoływanych przez ZGROMADZENIE WSPÓLNIKÓW (⭐ umowa
-  może przewidzieć inny sposób powoływania, np. przez osobę trzecią)
-  ⭐⭐⭐ ZAKAZ ŁĄCZENIA FUNKCJI: członkami rady nadzorczej NIE MOGĄ być:
-  członkowie ZARZĄDU, PROKURENT, LIKWIDATOR, kierownik oddziału/
-  zakładu, ZATRUDNIONY w spółce GŁÓWNY KSIĘGOWY, RADCA PRAWNY lub
-  ADWOKAT — zakaz dotyczy RÓWNIEŻ osób BEZPOŚREDNIO PODLEGŁYCH członkom
-  zarządu/likwidatorom oraz członków zarządu/likwidatorów SPÓŁEK
-  ZALEŻNYCH (⭐⭐⭐ szeroki katalog niezgodności — chroni niezależność
-  nadzoru)
-
-⭐ ART. 216 — członków rady powołuje się na ROK, CHYBA że umowa spółki
-  stanowi inaczej (⭐ rada NIE musi być organem kadencyjnym — możliwe
-  powołanie na czas nieoznaczony)
-
-⭐⭐⭐ ART. 219 §1 — rada nadzorcza sprawuje STAŁY NADZÓR nad
-  działalnością spółki WE WSZYSTKICH DZIEDZINACH jej działalności (⭐⭐
-  zakres nadzoru — pełny, nieograniczony przedmiotowo)
-  §2 — ZAKAZ WYDAWANIA WIĄŻĄCYCH POLECEŃ zarządowi przez radę nadzorczą
-  (⭐⭐⭐ fundamentalne rozgraniczenie kompetencji — rada NADZORUJE, nie
-  ZARZĄDZA; naruszenie tego zakazu potwierdzone w orzecznictwie SA/WSA/SN)
-  §3 — rada składa zgromadzeniu wspólników COROCZNE PISEMNE
-  SPRAWOZDANIE z wyników oceny [sprawozdania finansowego i zarządu]
-  §4 — w celu wykonania obowiązków rada MOŻE: badać WSZYSTKIE dokumenty
-  spółki, żądać od zarządu i pracowników SPRAWOZDAŃ i WYJAŚNIEŃ, oraz
-  dokonywać REWIZJI stanu majątku spółki
-
-⭐⭐⭐ ART. 220 — ROZSZERZENIE uprawnień rady nadzorczej UMOWĄ spółki —
-  W SZCZEGÓLNOŚCI umowa MOŻE stanowić, że:
-  (a) zarząd jest OBOWIĄZANY uzyskać ZGODĘ rady nadzorczej PRZED
-      dokonaniem OZNACZONYCH w umowie czynności
-  (b) radzie nadzorczej przekazuje się prawo ZAWIESZANIA W CZYNNOŚCIACH,
-      z WAŻNYCH POWODÓW, poszczególnych lub WSZYSTKICH członków zarządu
-  ⭐⭐⭐ ZAWIESZENIE — SKUTKI I OGRANICZENIA (z doktryny/orzecznictwa,
-  ⚠️ [NIEWERYFIKOWANE RZĄD 1] co do dokładnego umiejscowienia w
-  przepisie): zawieszenie NIE MOŻE trwać dłużej niż 3 MIESIĄCE. Rada
-  MOŻE delegować ze swojego składu osoby do CZASOWEGO wykonywania
-  czynności zawieszonych/odwołanych/rezygnujących członków zarządu —
-  delegowanie POWIĄZANE z okresem zawieszenia (kończy się z chwilą
-  odwieszenia). ⭐⭐ Rozszerzenie kompetencji na podstawie art. 220 MA
-  GRANICE — orzecznictwo (WSA, SN) wyróżnia zakres DOPUSZCZALNY i
-  NIEDOPUSZCZALNY poszerzenia uprawnień rady, ⚠️ dokładne kryteria tej
-  granicy NIE zbadane szczegółowo w tej sesji.
-
-⭐⭐ ART. 210 §1 (przypomnienie — powiązanie z pkt 8 wyżej) — w UMOWIE
-  między spółką A CZŁONKIEM ZARZĄDU oraz w SPORZE z nim, spółkę
-  reprezentuje RADA NADZORCZA lub PEŁNOMOCNIK powołany UCHWAŁĄ
-  zgromadzenia wspólników (⭐⭐⭐ wyłączenie zwykłej reprezentacji zarządu
-  w sytuacji konfliktu interesów — kluczowe przy transakcjach spółki z
-  własnym członkiem zarządu, w tym przy zmianie jego wynagrodzenia)
-
-⭐ UCHWAŁA rady nadzorczej podjęta NIEZGODNIE z jej uprawnieniami JEST
-  NIEWAŻNA, ale MOŻE BYĆ ZASKARŻALNA (⭐ rozróżnienie nieważności
-  bezwzględnej od zaskarżalności — z doktryny, niepotwierdzone wprost
-  numerem przepisu w tej sesji)
-```
-
----
-
-## 10. ROZGRANICZENIE
-
-| Temat | Gdzie |
-|---|---|
-| Typy spółek, kwalifikator odpowiedzialności (tabela ogólna), formy działalności gospodarczej | `mod-KSH-spolki-handlowe.md` — NIE duplikować, TAM zostaje ogólny przegląd |
-| Zarząd sp. z o.o., zgromadzenie wspólników | `mod-KSH-organy-spolki-zoo.md` |
-| Odpowiedzialność zarządu sp. z o.o. za zaległości (art. 299 KSH) | `mod-KSH-spolki-handlowe.md` sekcja dedykowana |
-| Spółka partnerska (art. 86-101) i spółka komandytowo-akcyjna (art. 125-150) | POZA ZAKRESEM tego modułu — nie w pierwotnym zakresie F-68, pozostają nieopracowane numerami artykułów |
-| Prawo restrukturyzacyjne — komplementariusz/komandytariusz w kontekście postępowania restrukturyzacyjnego | dr-02, moduły PrRestr (Działy III-VII) — inny reżim |
+1. Stan faktyczny i typ spółki; 2. Podstawa (przepis + brzmienie z ELI); 3. Stosunki wewnętrzne / zewnętrzne;
+4. Odpowiedzialność i kolejność egzekucji; 5. Terminy; 6. Ryzyka i rekomendacja.
 
 ## ŁĄCZ Z
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Umowa spółki jawnej/komandytowej, zmiana umowy, uchwała o rozwiązaniu | `pisma-procesowe-v3`, `analizator-umow-v1` |
-| Spór o pozbawienie wspólnika prawa prowadzenia spraw/reprezentacji (art. 47, 30 §2) | `pisma-procesowe-v3` |
-| Orzecznictwo dot. odpowiedzialności subsydiarnej, zawieszenia członka zarządu | `orzeczenia-sadowe-v2` |
-
----
-
-## ⚠️ POZOSTAJE DO POGŁĘBIENIA (jawnie oznaczone, poza zakresem tej naprawy)
-- Likwidacja spółki jawnej (Rozdz. 5, art. 67-85) — całkowicie nieopracowana.
-- Spółka partnerska (Dział II, art. 86-101) — poza pierwotnym zakresem F-68,
-  ale logicznie sąsiaduje; odesłanie do przepisów o spółce jawnej (art. 89)
-  odnotowane przy okazji, treść własna NIE opracowana.
-- Przepisy ogólne spółki komandytowej poza już opisanymi (art. 105-110)
-  i stosunki wewnętrzne (Rozdz. 3, art. 120-124).
-- Dokładna treść art. 220 (numer paragrafu dla limitu 3-miesięcznego
-  zawieszenia) — oparta na materiale wtórnym, nie na literalnym brzmieniu.
-- Rozbieżność doktrynalna co do stosowania art. 210 §1 do umów spółki
-  komandytowej z członkiem zarządu jej komplementariusza (pkt 8) —
-  wymaga pogłębienia przy konkretnej sprawie.
-- Potwierdzenie aktualnego t.j. KSH używanego w tym module (Dz.U. 2024 poz. 18
-  wg źródeł wtórnych) względem t.j. używanego w `mod-KSH-spolki-
-  handlowe.md` i `mod-KSH-organy-spolki-zoo.md` — brak jawnego
-  porównania w tej sesji.
+| Typy spółek, odpowiedzialność zarządu (art. 299), przekształcenia | `mod-KSH-spolki-handlowe` |
+| Zarząd i zgromadzenie wspólników sp. z o.o. | `mod-KSH-organy-spolki-zoo` |
+| Klauzula wykonalności przeciw wspólnikowi, egzekucja | `mod-KPC-egzekucja-windykacja` |
+| Umowa spółki, uchwały | `analizator-umow-v1`, `pisma-procesowe-v3` |
+| Restrukturyzacja / upadłość spółki | moduły `mod-PrRestr-*`, `mod-PrUpad-*` |
+| Orzecznictwo | `orzeczenia-sadowe-v2` |
