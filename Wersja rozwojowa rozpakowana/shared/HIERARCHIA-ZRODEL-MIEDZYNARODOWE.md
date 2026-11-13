@@ -49,9 +49,16 @@ albo `⚠️ [ZALECANA WERYFIKACJA / NIEWERYFIKOWANE — powód]`.
 > nieprawda dla części domen. Twierdzenie było analogiczne do luki F-151
 > (fałszywa diagnoza niedostępności kanału).
 
+> ⛔ **STAN 2026-11-13 (prawo UE):** strona `eur-lex.europa.eu` w kanale kodu (curl,
+> WebFetch) zwraca HTTP 202 i 0 B (zmierzone też 2026-09-16 i 2026-09-17). Pierwszy kanał
+> treści aktu UE: narzędzie `eurlex_tekst` (Cellar REST, domyślnie najnowsza konsolidacja);
+> bez MCP: `curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol"
+> http://publications.europa.eu/resource/celex/<CELEX>`. Awaria Cellar (HTTP 5xx) = ERROR do
+> ponowienia, nie „akt niedostępny”. Tabela niżej opisuje pomiar 2026-09-05 dla eur-lex.
+
 ```
-DZIAŁA przez curl (HTTP 200, pełny tekst):
-  eur-lex.europa.eu       ← preferowany kanał dla prawa UE ORAZ dla umów
+DZIAŁA przez curl (HTTP 200, pełny tekst) — pomiar 2026-09-05; eur-lex: patrz stan 2026-11-13 wyżej:
+  eur-lex.europa.eu       ← (2026-11-13: tylko Cellar) prawo UE ORAZ dla umów
                             międzynarodowych zawartych przez UE: teksty
                             konwencji bywają załączone do decyzji Rady
                             (KRB → CELEX 21993A1213(01);
@@ -81,7 +88,8 @@ odmowa w jednym nie dowodzi niczego o drugim. Zmierzone 2026-09-05:
 
 | Domena | curl | web_fetch | Wniosek |
 | --- | --- | --- | --- |
-| `eur-lex.europa.eu` | 200 | 200 | RZĄD 1 oboma kanałami |
+| `eur-lex.europa.eu` | 202, 0 B (2026-11-13) | pusta strona (2026-11-13) | treść przez Cellar (`eurlex_tekst`) |
+| `publications.europa.eu/resource/celex/` (Cellar) | 200 (2026-11-13 08:13) | — | RZĄD 1: `eurlex_tekst` |
 | `legal.un.org` | 200 | 200 | RZĄD 1 oboma kanałami |
 | `treaties.un.org` | 200 | — | RZĄD 1 przez curl |
 | `ohchr.org` | **403** | **✅ RZĄD 1** | ⚠️ curl myli — użyj web_fetch |
@@ -110,11 +118,14 @@ pomiaru — a wynik pomiaru odbiegający od tej tabeli zgłoś jako flagę.
 „dyrektywa 2008/48/WE” / CELEX): treść z Cellar w wersji skonsolidowanej na dziś,
 status obowiązywania aktu, jednostka (ust.), `applicationRule` = stosowanie etapami
 (np. art. 113 AI Act) — podaj, od kiedy artykuł się stosuje. Akt uchylony, artykuł
-lub ustęp nieistniejący = bez VER. `eurlex_lookup` daje tylko metadane, nie treść.
+lub ustęp nieistniejący = bez VER. W czacie: `eurlex_lookup` = metadane i najnowsza
+konsolidacja; `eurlex_tekst` = brzmienie artykułu z Cellar.
 
 ```
 Prawo UE i orzeczenia TSUE
-  curl "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:{celex}"
+  eurlex_tekst(celex, artykul)   ← treść (Cellar; eur-lex HTML w kanale kodu: 202, 0 B)
+  curl -sL -H "Accept: application/xhtml+xml" -H "Accept-Language: pol" \
+    "http://publications.europa.eu/resource/celex/{celex}"
   TFUE skonsolidowany → 12016E/TXT · KPP → 12016P/TXT
   orzeczenie → 6{RRRR}CJ{NNNN} (Achmea → 62016CJ0284)
 

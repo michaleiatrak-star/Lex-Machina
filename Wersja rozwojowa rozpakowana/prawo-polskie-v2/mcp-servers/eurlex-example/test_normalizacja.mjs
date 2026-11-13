@@ -1,5 +1,5 @@
 // ⛔ 2026-09-27j: fixture'y to PRAWDZIWE odpowiedzi Cellar SPARQL z 2026-09-27 (fixtures/).
-import { normalizujOdpowiedzEURLEX, budujZapytanieSparql } from "./eurlex-mcp-server.js";
+import { normalizujOdpowiedzEURLEX, budujZapytanieSparql, artykulUe, artykulyUe } from "./eurlex-mcp-server.js";
 import assert from "node:assert";
 import { readFileSync } from "node:fs";
 const fx = (c) => JSON.parse(readFileSync(new URL(`./fixtures/cellar_${c}.json`, import.meta.url)));
@@ -44,6 +44,27 @@ const fx = (c) => JSON.parse(readFileSync(new URL(`./fixtures/cellar_${c}.json`,
 { assert.match(budujZapytanieSparql("32016R0679"), /"32016R0679"\^\^xsd:string/);
   assert.throws(() => budujZapytanieSparql('3" } ; DROP'), /Niepoprawny numer CELEX/);
   console.log("OK: literał typowany; wstrzyknięcie odrzucone"); }
+
+{ // Zgł. 2026-11-13: 561/2006 — tytuł PL w Cellar kończy się „- Deklaracja”, a dzieło ma dwie daty końca
+  // (2014-02-28 i 9999-12-31). MAX(?e) daje 9999 → brak końca; tytul_aktu bez deklaracji.
+  const w = normalizujOdpowiedzEURLEX(fx("32006R0561"), "32006R0561");
+  assert.strictEqual(w.status, "FOUND");
+  assert.strictEqual(w.result.status_obowiazywania, "obowiazuje");
+  assert.strictEqual(w.result.koniec_obowiazywania, null);
+  assert.match(w.result.tytul_aktu, /561\/2006/); assert.doesNotMatch(w.result.tytul_aktu, /Deklaracja/);
+  assert.match(w.result.tekst_url_cellar, /resource\/celex\/32006R0561$/);
+  const sprzeczny = normalizujOdpowiedzEURLEX([{ ...fx("32006R0561")[0], end: { value: "2014-02-28" } }], "32006R0561");
+  assert.strictEqual(sprzeczny.result.koniec_obowiazywania, null); assert.match(sprzeczny.uwaga_daty, /2014-02-28/);
+  console.log("OK: 561/2006 — obowiązuje, bez fałszywej daty końca, tytuł bez deklaracji"); }
+
+{ // eurlex_tekst: artykuł z elementu id="art_N" i (starsze teksty) od tytułu do następnego artykułu / załącznika.
+  const nowy = '<div class="eli-subdivision" id="art_10"><p class="title-article-norm">Artykuł 10</p><div><p>4. Przedsiębiorstwa, nadawcy, spedytorzy … zapewniają, że uzgodnione harmonogramy są zgodne z niniejszym rozporządzeniem.</p></div></div><div class="eli-subdivision" id="art_11"><p>Artykuł 11</p></div>';
+  assert.match(artykulUe(nowy, "10"), /^Artykuł 10\n4\. Przedsiębiorstwa, nadawcy, spedytorzy/);
+  assert.deepStrictEqual(artykulyUe(nowy), ["10", "11"]);
+  const stary = '<p class="ti-art">Artykuł 28</p><p>1. Jeżeli przetwarzanie ma być dokonywane w imieniu administratora…</p><p class="ti-art">Artykuł 29</p><p>Inny.</p>';
+  assert.match(artykulUe(stary, "art. 28"), /^Artykuł 28\n1\. Jeżeli przetwarzanie/); assert.doesNotMatch(artykulUe(stary, "28"), /Inny/);
+  assert.strictEqual(artykulUe(stary, "99"), null);
+  console.log("OK: eurlex_tekst — wycięcie artykułu (nowy i stary układ), brak artykułu → null"); }
 
 console.log("\nWSZYSTKIE TESTY JEDNOSTKOWE (bez sieci) PRZESZŁY");
 

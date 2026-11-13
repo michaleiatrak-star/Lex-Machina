@@ -26,7 +26,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { sygnal, owinSerwer, budzetWyczerpany } from "../wspolne/budzet.mjs";
+import { sygnal, owinSerwer, budzetWyczerpany, opisBleduSieci } from "../wspolne/budzet.mjs";
 
 // ⛔ POPRAWKA 2026-09-27j (AUDYT-2026-09-27j) — diagnoza z 27h była BŁĘDNA.
 //    27h: „SPARQL zwraca 406 przy Accept: application/json”. Zmierzone 27j: SPARQL zwraca
@@ -44,6 +44,7 @@ import { sygnal, owinSerwer, budzetWyczerpany } from "../wspolne/budzet.mjs";
 //    Pełny TEKST aktu: Cellar REST (Accept: application/xhtml+xml + Accept-Language: pol),
 //    nie ten konektor — F-135: strona EUR-Lex ucina długie akty.
 const CELLAR_SPARQL_URL = "https://publications.europa.eu/webapi/rdf/sparql";
+const CELLAR_TEXT_URL = "http://publications.europa.eu/resource/celex/";
 const CELEX_RE = /^[0-9CE][0-9]{4}[A-Z]{1,2}[0-9A-Z()_.\-]{1,20}$/;
 
 const server = owinSerwer(globalThis.__LEX_MCP_WSPOLNY ?? new McpServer({ name: "eurlex-connector", version: "1.1.0" }));
@@ -53,7 +54,7 @@ export function budujZapytanieSparql(celex) {
   return `
 PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT ?work (SAMPLE(?t) AS ?title) (SAMPLE(?d) AS ?date) (SAMPLE(?f) AS ?inforce) (SAMPLE(?e) AS ?end)
+SELECT ?work (SAMPLE(?t) AS ?title) (SAMPLE(?d) AS ?date) (SAMPLE(?f) AS ?inforce) (MAX(STR(?e)) AS ?end)
 WHERE {
   ?work cdm:resource_legal_id_celex "${celex}"^^xsd:string .
   OPTIONAL { ?work cdm:work_date_document ?d . }
@@ -102,12 +103,26 @@ export function normalizujOdpowiedzEURLEX(rawBindings, celex) {
       data_publikacji_lub_wyroku: b.date?.value ?? null,
       koniec_obowiazywania: koniec,
       url_zrodlowy: `https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:${celex}`,
+      // Treść aktu: eurlex_tekst (Cellar REST); strona eur-lex.europa.eu w kanale kodu daje HTTP 202 i 0 B.
+      tekst_url_cellar: `${CELLAR_TEXT_URL}${celex}`,
       cellar_work: b.work?.value ?? null,
     },
     retrieved_at: new Date().toISOString(),
     confidence: "deterministic",
   };
   if (!b.title?.value) wynik.uwaga = "Brak tytułu w wersji polskiej w Cellar.";
+  // „… (Tekst mający znaczenie dla EOG) - Deklaracja”: polski tytuł w Cellar obejmuje deklarację
+  // opublikowaną razem z aktem (zgł. 2026-11-13, 561/2006) — to ten sam akt, nie osobne dzieło.
+  if (/\s[-–]\s*(?:Deklaracj\w*|Oświadczeni\w*)\s*$/u.test(b.title?.value ?? "")) {
+    wynik.result.tytul_aktu = b.title.value.replace(/\s[-–]\s*(?:Deklaracj\w*|Oświadczeni\w*)\s*$/u, "").trim();
+    wynik.uwaga_tytul = "Tytuł w Cellar kończy się nazwą dołączonej do aktu deklaracji/oświadczenia; tytul_aktu = tytuł samego aktu.";
+  }
+  // Cellar potrafi trzymać dla aktu obowiązującego kilka dat końca (561/2006: 2014-02-28 i 9999-12-31,
+  // zgł. 2026-11-13): bierzemy najpóźniejszą; data przeszła przy statusie „obowiązuje” jest sprzeczna.
+  if (status === "obowiazuje" && koniec && koniec < new Date().toISOString().slice(0, 10)) {
+    wynik.result.koniec_obowiazywania = null;
+    wynik.uwaga_daty = `Cellar podaje datę końca ${koniec} sprzeczną ze statusem „obowiązuje” — pominięto; sprawdź w tekście skonsolidowanym.`;
+  }
   if (status === "uchylony") {
     wynik.uwaga = `⛔ Akt nie obowiązuje${koniec ? ` od dnia następnego po ${koniec}` : ""} ` +
       `(uchylony lub wygasły). Nie powołuj jako prawa obowiązującego.`;
@@ -117,6 +132,29 @@ export function normalizujOdpowiedzEURLEX(rawBindings, celex) {
       `Cellar zwrócił też ${pominiete} powiązany zasób bez tytułu PL dla tego CELEX — pominięto.`;
   }
   return wynik;
+}
+
+export async function zapytajSparql(query, ms = 40000) {
+  const body = new URLSearchParams({ query });
+  let ostatni;
+  for (let proba = 1; proba <= 3; proba++) {
+    try {
+      const resp = await fetch(CELLAR_SPARQL_URL, { method: "POST", headers: { Accept: "application/sparql-results+json" }, body, signal: sygnal(ms) });
+      if (!resp.ok) throw new Error(`CELLAR SPARQL zwrócił HTTP ${resp.status}`);
+      return (await resp.json())?.results?.bindings ?? [];
+    } catch (e) { ostatni = e; }
+  }
+  throw ostatni;
+}
+
+/** Najnowszy tekst skonsolidowany aktu (CELEX 0…-RRRRMMDD) albo null. */
+export async function najnowszaKonsolidacja(celex) {
+  if (!CELEX_RE.test(celex) || !/^3/.test(celex)) return null;
+  const rows = await zapytajSparql(`PREFIX cdm: <http://publications.europa.eu/ontology/cdm#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?cx WHERE { ?w cdm:resource_legal_id_celex "${celex}"^^xsd:string . ?c cdm:act_consolidated_consolidates_resource_legal ?w ; cdm:resource_legal_id_celex ?cx . } ORDER BY DESC(?cx) LIMIT 1`);
+  const cx = rows[0]?.cx?.value;
+  const m = /-(\d{4})(\d{2})(\d{2})$/.exec(cx ?? "");
+  return cx ? { celex: cx, data: m ? `${m[1]}-${m[2]}-${m[3]}` : null, tekst_url_cellar: `${CELLAR_TEXT_URL}${cx}` } : null;
 }
 
 async function pobierzZCellar(celex) {
@@ -145,7 +183,7 @@ server.registerTool(
     description:
       "Tytuł (PL), data, status obowiązywania i data końca obowiązywania aktu UE z Cellar " +
       "(SPARQL) po numerze CELEX, np. 32016R0679 (RODO). FOUND/NOT_FOUND/AMBIGUOUS/ERROR. " +
-      "Nie pobiera pełnego tekstu.",
+      "Podaje też najnowszą konsolidację (CELEX 0…-RRRRMMDD). Treść artykułu: eurlex_tekst.",
     inputSchema: {
       celex: z.string().regex(CELEX_RE).describe("Numer CELEX, np. '32016R0679' (RODO)"),
     },
@@ -154,6 +192,10 @@ server.registerTool(
     let wynik;
     try {
       wynik = normalizujOdpowiedzEURLEX(await pobierzZCellar(celex), celex);
+      if (wynik.status === "FOUND") {
+        try { wynik.result.konsolidacja_najnowsza = await najnowszaKonsolidacja(celex); }
+        catch { wynik.result.konsolidacja_najnowsza = null; }
+      }
     } catch (err) {
       wynik = { status: "ERROR", query_type: "akt_prawny_ue", source: "eur-lex",
         detail: String(err?.message ?? err), retrieved_at: new Date().toISOString() };
@@ -253,6 +295,91 @@ server.registerTool("eurlex_tsue", {
     return { content: [{ type: "text", text: JSON.stringify(w, null, 2) }] };
   } catch (e) {
     return { content: [{ type: "text", text: JSON.stringify({ status: "ERROR", ...baza, detail: String(e?.message ?? e), retrieved_at: new Date().toISOString() }, null, 2) }] };
+  }
+});
+
+// ── eurlex_tekst (zgł. 2026-11-13: router wymaga brzmienia artykułu, eurlex_lookup daje tylko metrykę) ──
+// Cellar REST: Accept application/xhtml+xml + Accept-Language pol (kanał z DOSTEP-MASZYNOWY-API §3,
+// ten sam co w aplikacji: eu-law-verifier). Artykuł: element id="art_N" albo od tytułu „Artykuł N”
+// do następnego artykułu lub załącznika.
+const ARTYKUL_TYTUL = /<p\b[^>]*class="(?:title-article-norm|ti-art|oj-ti-art)"[^>]*>\s*Artykuł\s+(\d+[a-z]*)\s*<\/p>/giu;
+export function czytelny(html) {
+  return String(html)
+    .replace(/<sup\b[^>]*>([\s\S]*?)<\/sup>/giu, "^$1")
+    .replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>/giu, " ")
+    .replace(/<\s*(?:br\b[^>]*|\/?(?:p|div|li|tr|td|th|h[1-6]|table)\b[^>]*)>/giu, "\n")
+    .replace(/<[^>]+>/gu, " ")
+    .replace(/&nbsp;|&#160;/gu, " ").replace(/&amp;/gu, "&").replace(/&lt;/gu, "<").replace(/&gt;/gu, ">").replace(/&quot;/gu, '"')
+    .normalize("NFKC").replace(/[ \t\f\v]+/gu, " ").replace(/ *\n */gu, "\n").replace(/\n{2,}/gu, "\n").trim();
+}
+export function artykulUe(html, artykul) {
+  const nr = String(artykul).toLowerCase().replace(/^art\.?\s*/u, "").match(/^\d+[a-z]*/u)?.[0];
+  if (!nr) return null;
+  const start = html.search(new RegExp(`<div\\b[^>]*\\bid="art_${nr}"`, "u"));
+  if (start >= 0) {
+    let depth = 0; const tags = /<\/?div\b[^>]*>/giu; tags.lastIndex = start;
+    for (let t = tags.exec(html); t; t = tags.exec(html)) {
+      depth += t[0].startsWith("</") ? -1 : 1;
+      if (depth === 0) return czytelny(html.slice(start, t.index + t[0].length));
+    }
+  }
+  const tytuly = [...html.matchAll(ARTYKUL_TYTUL)];
+  const i = tytuly.findIndex((m) => m[1].toLowerCase() === nr);
+  if (i < 0) return null;
+  const od = tytuly[i].index, doK = tytuly[i + 1]?.index ?? html.length;
+  const zal = html.slice(od, doK).search(/<p\b[^>]*class="(?:title-annex-1|doc-ti|oj-doc-ti)"/u);
+  return czytelny(html.slice(od, zal > 0 ? od + zal : doK));
+}
+export function artykulyUe(html) {
+  const ids = [...html.matchAll(/<div\b[^>]*class="eli-subdivision"[^>]*\bid="art_(\d+[a-z]*)"/gu)].map((m) => m[1]);
+  return ids.length ? ids : [...html.matchAll(ARTYKUL_TYTUL)].map((m) => m[1]);
+}
+async function pobierzTekstCellar(celex) {
+  const url = `${CELLAR_TEXT_URL}${celex}`;
+  let ostatni;
+  for (let proba = 1; proba <= 3; proba++) {
+    try {
+      const r = await fetch(url, { headers: { Accept: "application/xhtml+xml", "Accept-Language": "pol" }, redirect: "follow", signal: sygnal(60000) });
+      if (r.status >= 500 && proba < 3) { ostatni = new Error(`Cellar HTTP ${r.status} (${(await r.text()).slice(0, 120)})`); await new Promise((ok) => setTimeout(ok, 1500 * proba)); continue; }
+      if (!r.ok) throw Object.assign(new Error(`Cellar HTTP ${r.status}`), { http: r.status });
+      return { url, html: await r.text() };
+    } catch (e) { ostatni = e.http ? e : new Error(opisBleduSieci(e, "publications.europa.eu"), { cause: e }); if (e.http) break; }
+  }
+  throw ostatni;
+}
+server.registerTool("eurlex_tekst", {
+  title: "Treść aktu UE z Cellar — cały tekst porcjami albo jeden artykuł",
+  description: "Brzmienie aktu UE po CELEX (także konsolidacji 0…-RRRRMMDD) z Cellar REST. Z `artykul` (np. \"10\") — tekst artykułu; " +
+    "bez — porcja tekstu (offset) i lista artykułów. Domyślnie najnowsza konsolidacja, gdy istnieje (pole wersja). FOUND/NOT_FOUND/ERROR.",
+  inputSchema: {
+    celex: z.string().regex(CELEX_RE).describe("CELEX aktu, np. 32006R0561, albo konsolidacji 02006R0561-20241231"),
+    artykul: z.string().max(20).optional().describe("Numer artykułu, np. \"10\" albo \"6a\""),
+    wersja: z.enum(["najnowsza", "pierwotna"]).optional().describe("najnowsza (domyślnie) = ostatnia konsolidacja; pierwotna = tekst z Dz.Urz."),
+    offset: z.number().int().min(0).optional(),
+  },
+}, async ({ celex, artykul, wersja, offset }) => {
+  const baza = { query_type: "tekst_aktu_ue", source: "cellar" };
+  try {
+    let cel = celex, konsolidacja = null;
+    if ((wersja ?? "najnowsza") === "najnowsza" && /^3/.test(celex)) {
+      try { konsolidacja = await najnowszaKonsolidacja(celex); } catch { konsolidacja = null; }
+      if (konsolidacja) cel = konsolidacja.celex;
+    }
+    const { url, html } = await pobierzTekstCellar(cel);
+    const wynik = { status: "FOUND", ...baza, celex: cel, akt: celex, wersja: cel === celex ? "tekst wskazany" : `konsolidacja ${konsolidacja.data}`, url_zrodlowy: url, retrieved_at: new Date().toISOString(),
+      uwaga: "Tekst skonsolidowany UE to dokument dokumentacyjny; moc prawną ma wersja z Dz.Urz. UE." };
+    if (artykul) {
+      const t = artykulUe(html, artykul);
+      if (!t) return { content: [{ type: "text", text: JSON.stringify({ status: "NOT_FOUND", ...baza, celex: cel, artykul, uwaga: `Brak artykułu ${artykul} w tym tekście.`, artykuly: artykulyUe(html).slice(0, 200) }, null, 2) }] };
+      wynik.artykul = artykul; wynik.tekst = t.slice(0, 15000); if (t.length > 15000) wynik.uwaga += " Artykuł ucięty do 15 000 znaków.";
+    } else {
+      const caly = czytelny(html), od = Math.min(offset ?? 0, caly.length);
+      Object.assign(wynik, { offset: od, nastepny_offset: od + 15000 < caly.length ? od + 15000 : null, dlugosc: caly.length, artykuly: artykulyUe(html).slice(0, 400), tekst: caly.slice(od, od + 15000) });
+    }
+    return { content: [{ type: "text", text: JSON.stringify(wynik, null, 2) }] };
+  } catch (e) {
+    return { content: [{ type: "text", text: JSON.stringify({ status: "ERROR", ...baza, celex, retryable: !e?.http || e.http >= 500, detail: String(e?.message ?? e),
+      uwaga: "Cellar niedostępny — to awaria źródła, nie dowód nieistnienia aktu; ponów później.", retrieved_at: new Date().toISOString() }, null, 2) }] };
   }
 });
 
