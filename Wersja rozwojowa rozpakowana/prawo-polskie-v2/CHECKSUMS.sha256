@@ -62,6 +62,7 @@ f546ee8dcf86581087eda8e47764c34222cdeb1e4a28187640598036feb46d30  ./krajowe/shar
 4978803e84020fb2758ffd6450d606b6087679c265b9444e96ce38fe0899f264  ./krajowe/shared/PRE-W2-VERIFICATION-GATE.md
 94694cf9d08da4af399d850d16503ad9d097496a3956a550c0cbee858ba7c469  ./krajowe/shared/PREKLUZJA-DOWODOWA.md
 0ae2db7321b716bbc4103a850a68bbc7844f7417273d465bfd8d764a77a35003  ./krajowe/shared/PRZESLUCHANIE-SWIADKOW-KPC.md
+d8e377e032a26827ed778d9e5c307b13e72f2aa811afa07edef720c972683042  ./krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md
 bf0b9bcb50353ef6f6904ad377a9d1117c50dcc5f6bc3f783c982da297ae87eb  ./krajowe/shared/RYZYKO-DEZAKTUALIZACJI.md
 bdac9e0666b216ad43b7dfe52beaa538d005e3261e0e65d0e8f197f7879b0bb3  ./krajowe/shared/SAMORZADY-ZAWODOWE-DOKUMENTY.md
 6c054870d323d16cede19104aec6dbbde588d37b25e63787545f88a4a7644c5e  ./krajowe/shared/STALKING-NEKANIE.md
@@ -125,6 +126,7 @@ cdc5ee84a2eb1094bcf586e200394d306b70661202cee472eee1fe0fe9624edf  ./mcp-servers/
 367b8e13dddef0aede4db2dcee3b1f71eca7335d044a7dd8df321d89477b005e  ./mcp-servers/eurlex-example/README.md
 ea1cb95642188a1a8991bf88da3f2aba6f8f3bd3bbe9b8940e862095b26c29cb  ./mcp-servers/eurlex-example/eurlex-mcp-server.js
 9b7aaad2e01bd3e747b1d11cbdca2d401d9ab078019148442f86d363c6fd71b3  ./mcp-servers/eurlex-example/fixtures/cellar_31995L0046.json
+6437a8b4d35dcc58d909830a0e0f8ea8704da0a86d9b70f15f81b0504f9c674f  ./mcp-servers/eurlex-example/fixtures/cellar_32006R0561.json
 ab43c39b83862629a3af0b6905807b21bb421dfbb809dde4d8855955eb5e228f  ./mcp-servers/eurlex-example/fixtures/cellar_32016R0679.json
 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945  ./mcp-servers/eurlex-example/fixtures/cellar_39999R9999.json
 d9a5d9004263de7cfc02782632595e62c81cf53e8dd38e9818f03e343fd49d52  ./mcp-servers/eurlex-example/fixtures/cellar_tsue.json
