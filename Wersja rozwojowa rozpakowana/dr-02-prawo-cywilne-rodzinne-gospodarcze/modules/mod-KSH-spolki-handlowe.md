@@ -36,7 +36,7 @@ Powiązane moduły: organy sp. z o.o. `mod-KSH-organy-spolki-zoo`; spółki osob
 
 **Kapitał minimalny:** sp. z o.o. 5000 zł, udział ≥ 50 zł (art. 154 § 1–2); S.A. 100 000 zł, akcja ≥ 1 gr (art. 308 § 1–2); PSA kapitał akcyjny ≥ 1 zł, akcje bez wartości nominalnej (art. 300³ § 1, 300² § 3), wkład może być pracą lub usługami (art. 300² § 2).
 
-**Rada nadzorcza:** S.A. — obowiązkowa (art. 381); sp. z o.o. — obowiązkowa RN lub komisja rewizyjna, gdy kapitał > 500 000 zł i > 25 wspólników (art. 213 § 2); S.K.A. — obowiązkowa przy > 25 akcjonariuszach (art. 142 § 1). Grupa spółek (wiążące polecenia): art. 211¹ i n., w tym art. 213–214 (uchwała o wykonaniu / odmowie).
+**Rada nadzorcza:** S.A. — obowiązkowa (art. 381); sp. z o.o. — obowiązkowa RN lub komisja rewizyjna, gdy kapitał > 500 000 zł i > 25 wspólników (art. 213 § 2); S.K.A. — obowiązkowa przy > 25 akcjonariuszach (art. 142 § 1). Grupa spółek (wiążące polecenia): art. 21¹–21¹⁶ (Tytuł I, Dział IV), w tym art. 21³–21⁴ (uchwała o wykonaniu / odmowie) — nie mylić z art. 213–214 (RN sp. z o.o.).
 
 **Spółka partnerska — katalog zawodów:** art. 88; psycholog dodany przez art. 138 ustawy Dz.U. 2026 poz. 187 — w mocy od 19.05.2028 (art. 161 tej ustawy). Przed tą datą psycholog nie może być partnerem.
 

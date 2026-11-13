@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-2522b3761fd13e1ed7c05a7c3a0dc3d6a522dc05abe48d77c69901eeef529ee8  ./SKILL.md
+4d57850032878d325310523dc6fb3b4d1e36b8c83b4bf0f11c14e13d77adf268  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 4e1fb6c25693e16536b9397c060ecfb476328c75513dd15b7b77732009c02e52  ./modules/MOD-DESCRIPTION.md
@@ -10,7 +10,7 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 134eaa7d63b7b973dac02b5c8509a47a6a84c275fb7b3d9bf2ea95c1e3af9f5b  ./references/ALIASY-NAZW-AKTOW.md
 8a69f6dd59b87d0c7f03073108b7d14db9cf6d98eb6367ff8488534f0a614fba  ./references/AUDIT-JOURNAL.md
-957673299829ddc6d41c658160d5a515edd5075f2a3182839f6c7fe55cff444f  ./references/CHANGELOG.md
+7e61df6da5622c078df2f68d58adfab270681f00dffcf7fb1e62d7fa2688333e  ./references/CHANGELOG.md
 ab6fb86a3771c34a9c09220e260f8d831224751eb33ab594004300c19b801d68  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -70,7 +70,7 @@ edc50353be897bdc525b56e02074f4149bddc1df42e1ff49f651327923599d4b  ./scripts/chec
 c1b4949c032d4cd1d724b18716a227d8b3c214a2f137b8dc7967da92206c195c  ./scripts/check_kontrakt_rachunek.py
 dced4d4eae046188d9cee9a69f6cd0863c46f2e30caffa1ff8e0ff3f7b3a1c1c  ./scripts/check_limit_plikow.py
 85abb9fa7b9305935a37ad3ebe73852607f422d5452844fe57d3e1341db7681c  ./scripts/check_mapy_aktow.py
-e274fc9fd2bc0ff6260b7e1daa84e037e1ec36438b0a831b895392d5ac7bd0e9  ./scripts/check_nowelizacje.py
+fe765c16c4b059e3c197e0326321f84085059cffe22edfd96ee5e01766f0a252  ./scripts/check_nowelizacje.py
 be560e094d73cdce8beaf318a8213200e883402e88a3ffe9b87f9078574f89ca  ./scripts/check_nowelizacje_po_tj.py
 aa17310524ada7589b89c9b193439b4de843d31402bde31ac72f964a68878ab3  ./scripts/check_oplaty_mapa.py
 b025882a32f6f317b397b8f200525eeaf2309b384c4a31f666352840edb13fcc  ./scripts/check_osiagalnosc_shared.py

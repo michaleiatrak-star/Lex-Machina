@@ -13,9 +13,14 @@ w dniu wejścia zmiany w życie; ten sam przebieg zgłasza moduły do wdrożenia
 <!-- GENEROWANE:check_nowelizacje.py START -->
 | Wchodzi | Nowelizacja | Akt (t.j.) | Zakres | Moduły |
 |---|---|---|---|---|
+| 2026-11-21 | 2026/1466 — Ustawa z dnia 8 października 2026 r. o zmianie ustawy - Prawo o ruchu  | 2026/1342 | nie dotyczy art. 109–111, 206 | dr-02/mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne |
 | 2026-12-03 | 2026/1440 — Ustawa z dnia 4 września 2026 r. o zmianie ustawy - Kodeks spółek hand | 2024/18 | art. 238 § 1, 243 § 2; art. 238 § 1, 243 § 2, 300⁹⁵ § 2: zgoda i pełnomocnictwo w formie dokumentowej, przepis przejściowy art. 3; art. 238, 243, 300⁹⁵, nie art. 22–124 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza |
-| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2026/913 | tylko art. 452, 456 | dr-02/mod-KSH-spolki-handlowe |
-| 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2024/18 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza |
+| 2027-01-01 | 2026/1040 — Ustawa z dnia 19 czerwca 2026 r. o zmianie ustawy o działalności pożyt | 2025/595 | art. 88a | dr-02/mod-ustawa-monopole-panstwowe |
+| 2027-01-01 | 2026/1098 — Ustawa z dnia 3 lipca 2026 r. o osobistych kontach inwestycyjnych | 2022/2025 | art. 38 ust. 2 pkt 6, nie dotyczy art. 4 | dr-02/mod-ustawa-monopole-panstwowe |
+| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2025/595 | art. 63; tylko art. 452, 456 | dr-02/mod-ustawa-monopole-panstwowe |
+| 2027-01-11 | 2026/1206 — Ustawa z dnia 31 lipca 2026 r. o zmianie ustawy - Prawo bankowe oraz n | 2026/913 | art. 63; tylko art. 452, 456 | dr-02/mod-KSH-spolki-handlowe |
+| 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2024/18 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 42, 43 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza |
+| 2027-02-18 | 2026/176 — Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy - Kodeks spółek han | 2025/595 | S.A./PSA, nie art. 201–254; S.A./PSA/S.K.A., nie art. 22–124; art. 10, 42, 43 | dr-02/mod-ustawa-monopole-panstwowe |
 | 2028-05-19 | 2026/187 — Ustawa z dnia 23 stycznia 2026 r. o zawodzie psychologa oraz samorządz | 2024/18 | art. 88 | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza |
 | 2028-09-30 | 2026/346 — Ustawa z dnia 27 lutego 2026 r. o zmianie ustawy - Prawo o stowarzysze | 2025/1228 | art. 52 ust. 2, 53 ust. 3: opłaty od wniosków przy wzorcach S24 | dr-02/mod-KPC-egzekucja-windykacja |
 | 2030-01-10 | 2026/644 — Ustawa z dnia 17 kwietnia 2026 r. o zmianie niektórych ustaw w związku | 2024/18 | art. 402⁷, 421¹ | dr-02/mod-KSH-organy-spolki-zoo, dr-02/mod-KSH-spolki-handlowe, dr-02/mod-KSH-spolki-osobowe-rada-nadzorcza |
@@ -58,3 +63,6 @@ Każda nowelizacja z tabeli A ma wiersz: data odczytu treści nowelizacji w ELI 
 | 2026/473 | 2026-11-13 | KPC (art. 2), KSCU (art. 7); przejściowy art. 15 → tabela B; wejście art. 20: 3 miesiące od ogłoszenia (2026-07-08) |
 | 2026/830 | 2026-11-13 | KPC art. 4¹ zd. 2 (art. 18); przejściowy art. 19 → tabela B; wejście art. 20: 14 dni (2026-07-08) |
 | 2026/1046 | 2026-11-13 | KPC art. 47, 461 § 1¹, 477⁶ᵃ (art. 2); przejściowy art. 5 → tabela B; wejście art. 6: 3 miesiące (2026-11-05) |
+| 2026/1040 | 2026-11-13 | UGH art. 88a (art. 2 noweli, wśród wyjątków: od 2027-01-01); przejściowe art. 3–4 dotyczą ustawy o pożytku publicznym, nie UGH; wejście art. 6 |
+| 2026/1098 | 2026-11-13 | ustawa o NBP art. 38 ust. 2 pkt 6 (art. 36 noweli); brak przejściowych dla NBP (art. 45 dotyczy przepisów wykonawczych innych ustaw); wejście art. 46: 2027-01-01 |
+| 2026/1466 | 2026-11-13 | KK (art. 2 noweli) — moduł: nie dotyczy art. 109–111, 206; brak przepisów przejściowych; wejście art. 4: 14 dni (2026-11-21) |

@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.92"
+version: "6.93"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.92 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: KSCU 2026/346 (od 2028-09-30) w tabeli A; tabela B: przepisy przejściowe KPC 2026/473 art. 15, 2026/830 art. 19, 2026/1046 art. 5; tabela C: odczyty W-4 dla 2026/346, 473, 830, 1046
+  Wersja bieżąca: 6.93 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: zmiany nadchodzące modułów paczki 2 DR-02 (UGH 2026/1040, KK 2026/1466, NBP 2026/1098) i odczyty W-4 w tabeli C
+  6.92 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: KSCU 2026/346 (od 2028-09-30) w tabeli A; tabela B: przepisy przejściowe KPC 2026/473 art. 15, 2026/830 art. 19, 2026/1046 art. 5; tabela C: odczyty W-4 dla 2026/346, 473, 830, 1046
   6.91 (2026-11-13): REJESTR-ZMIAN-W-CZASIE (JUR:rejestr-zmian-w-czasie): zmiany z datą przyszłą (tabela generowana z ELI, wiersz znika w dniu wejścia w życie) i przepisy czasowe z okresem Od–Do (2026/1440 art. 3; 2026/176 art. 28, 29, 31–34 — z treści nowelizacji w ELI 2026-11-13); STAN-PRAWNY-PL: odesłanie przed KROKIEM T-2; JURYSDYKCJA: nowy klucz
   6.90 (2026-11-13): mod-FA-founders: odesłanie JDG / działalność nierejestrowana → DR-02 mod-prawo-przedsiebiorcow
   6.89 (2026-11-13): nowe t.j. (ELI 2026-11-13): Prawo przedsiębiorców Dz.U. 2026 poz. 1484 (zastępuje 2025/1480; obejmuje 2025/1795, 1826, 2026/507), KAS Dz.U. 2026 poz. 1492 (zastępuje 2025/1131; obejmuje 2026/1281) — ROUTING-MAP, ISAP-METRYKI-AKTOW, DEF-PODATKOWE, DEF-PODMIOTY-WLASNOSC, leksykon ORKA-BAS, mod-FA-founders; ROUTING-MAP: ustawa antymobbingowa 2026/1046 opisana jako ustawa zmieniająca, nie t.j.
@@ -23,7 +24,6 @@ changelog: |
   6.82 (2026-11-09): ROUTING-MAP i słowa kluczowe DR-09: umowa przewozu, Prawo przewozowe, CMR z protokołami, Konwencja montrealska i system warszawski, COTIF/CIM, konosamenty → mod-umowa-przewozu-CMR-konwencje-przewozowe
   6.81 (2026-10-22, AUDYT-2026-10-22): ROUTING-MAP: KW t.j. Dz.U. 2026 poz. 1372, PSWN t.j. Dz.U. 2026 poz. 1362
   6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
-  6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.

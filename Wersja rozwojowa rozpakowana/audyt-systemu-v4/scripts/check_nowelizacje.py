@@ -141,7 +141,10 @@ def draft_w4(amendment: str, base: str, cache: Path) -> str:
     if not m:
         return "nie ustalono daty aktu bazowego — odczyt ręczny"
     text = re.sub(r"\s+", " ", re.sub(r"\n\s*Dziennik Ustaw\s*–\s*\d+\s*–\s*Poz\. \d+\s*\n", "\n", amendment_text(amendment, cache)))
-    head = re.search(rf"Art\. (\d+)\. W ustawie z dnia {m.group(1)} {m.group(2)} {m.group(3)} r\.", text)
+    # Data i tytuł: kilka ustaw ma tę samą datę (29 sierpnia 1997 r.: NBP i Ordynacja podatkowa).
+    name = re.sub(r"^[\s\-–]+", "", title[m.end():]).strip().rstrip(".")
+    words = r"\s+".join(re.escape(w) for w in name.split()[:4])
+    head = re.search(rf"Art\. (\d+)\. W ustawie z dnia {m.group(1)} {m.group(2)} {m.group(3)} r\.\s*[–-]?\s*{words}", text)
     own = head is not None and re.search(rf"^.{{0,400}}?Ustawa z dnia [^.]*? o zmianie ustawy", text) is None
     k = head.group(1) if head else None
     parts = []
@@ -240,6 +243,14 @@ def update_registry(path: Path, upcoming: dict, scopes: dict, today: str, cache:
     return found, errors
 
 
+def expand_tags(text: str) -> str:
+    """„2026/473, 830 i 1003” -> dopisuje „2026/830 2026/1003”: lista numerów z rokiem tylko przy pierwszym."""
+    extra = []
+    for m in re.finditer(r"\b(\d{4})/(\d+)((?:\s*(?:,|i|oraz)\s*\d{2,5}\b(?!/|\s*poz))+)", text):
+        extra += [f"{m.group(1)}/{n}" for n in re.findall(r"\d{2,5}", m.group(3))]
+    return text + (" " + " ".join(extra) if extra else "")
+
+
 def short(act_id: str) -> str:
     _, year, pos = act_id.split("/")
     return f"{year}/{pos}"
@@ -308,7 +319,7 @@ def main() -> int:
             for cid, date, prom, title in info["changes"]:
                 tag = short(cid)
                 year_c, pos_c = tag.split("/")
-                mentioned = tag in head or re.search(rf"{year_c}\s*poz\.\s*{pos_c}\b", head)
+                mentioned = tag in expand_tags(head) or re.search(rf"{year_c}\s*poz\.\s*{pos_c}\b", head)
                 if not mentioned:
                     found += 1
                     report(f"BRAK_NOWELIZACJI\t{rel}\t{tj_id}\t{tag} od {date}\t{title[:110]}")

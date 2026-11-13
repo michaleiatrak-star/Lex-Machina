@@ -6,6 +6,8 @@
 **Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.pdf`; zmiany po t.j. — ELI, „Akty zmieniające” aktu DU/2000/1037.
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
+**Pułapka numeracji:** grupa spółek to art. 21¹–21¹⁶ (Tytuł I, Dział IV); rada nadzorcza sp. z o.o. to art. 213–222. W tekstach bez indeksów górnych „21³” i „213” wyglądają tak samo — rozstrzyga identyfikator jednostki w ELI (`arti_21_3` ≠ `arti_213`).
+
 Zakres: Tytuł II Działy I–III (spółka jawna art. 22–85, partnerska art. 86–101, komandytowa art. 102–124). **Rada nadzorcza sp. z o.o. (art. 212–226) przeniesiona do `mod-KSH-organy-spolki-zoo`** (nazwa pliku zachowana dla odesłań). S.K.A. (art. 125–150) — poza zakresem; typy spółek i odpowiedzialność w skrócie — `mod-KSH-spolki-handlowe`.
 
 ---

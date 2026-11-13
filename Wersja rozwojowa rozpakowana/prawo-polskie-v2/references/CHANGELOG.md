@@ -1,5 +1,6 @@
 # CHANGELOG — prawo-polskie-v2
 
+- 6.93 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: zmiany nadchodzące modułów paczki 2 DR-02 (UGH 2026/1040, KK 2026/1466, NBP 2026/1098) i odczyty W-4 w tabeli C
 - 6.92 (2026-11-13): REJESTR-ZMIAN-W-CZASIE: KSCU 2026/346 (od 2028-09-30) w tabeli A; tabela B: przepisy przejściowe KPC 2026/473 art. 15, 2026/830 art. 19, 2026/1046 art. 5; tabela C: odczyty W-4 dla 2026/346, 473, 830, 1046
 - 6.91 (2026-11-13): REJESTR-ZMIAN-W-CZASIE (JUR:rejestr-zmian-w-czasie): zmiany z datą przyszłą (tabela generowana z ELI, wiersz znika w dniu wejścia w życie) i przepisy czasowe z okresem Od–Do (2026/1440 art. 3; 2026/176 art. 28, 29, 31–34 — z treści nowelizacji w ELI 2026-11-13); STAN-PRAWNY-PL: odesłanie przed KROKIEM T-2; JURYSDYKCJA: nowy klucz; tabela C: odczyt W-4 dla 2026/1440, 176, 187, 644, 1206
 - 6.90 (2026-11-13): mod-FA-founders: odesłanie JDG / działalność nierejestrowana → DR-02 mod-prawo-przedsiebiorcow

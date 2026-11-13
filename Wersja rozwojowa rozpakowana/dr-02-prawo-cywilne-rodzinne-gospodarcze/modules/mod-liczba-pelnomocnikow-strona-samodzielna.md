@@ -1,543 +1,133 @@
-# Liczba pełnomocników procesowych i strona samodzielnie się
-v1.3.0 (dodany 2026-08-05, rozbudowywany wielokrotnie tego samego dnia — na żądanie użytkownika; 2026-08-05 skorygowano scenariusz 4 po doprecyzowaniu użytkownika i naprawiono numerację)
-v1.0.0 (dodany 2026-08-05, na żądanie użytkownika)
+# mod-liczba-pelnomocnikow-strona-samodzielna
 
-Zweryfikowano 2026-08-05 (ZASADA 14): Rząd 2B — lexlege.pl (dosłowny
-tekst KPC), e-prawnik.pl, palestrapolska.wordpress.com, rp.pl,
-Palestra (czasopismo naukowe adwokatury), bankier.pl.
+**Akt:** KPC — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 i 2026/830 od 8.07.2026; 2026/1003 od 28.10.2026; 2026/1046 od 5.11.2026 — art. 47 § 2 pkt 1 lit. d; 2026/1296 od 6.11.2026).
+**Inne akty:** KPK — t.j. Dz.U. 2026 poz. 490 (zm. w mocy: 2026/421 — art. 213, 332, 336; 2026/638 — art. 25 § 1 pkt 2; 2026/760 — art. 213; 2026/882 — art. 607k, 607m, 607t, 607y; 2026/901 — art. 87 § 4–5, zażalenie na odmowę dopuszczenia pełnomocnika, w brzmieniu od 2026-07-21; art. 77 bez zmian) | Prawo o adwokaturze (PrAdw) — t.j. Dz.U. 2024 poz. 1564 (zm. 2025/1172; 2026/370; 2026/846; **2026/1290 od 17.10.2026 — art. 77 ust. 3, 5, 6**, część przepisów od 1.01.2027) | ustawa o radcach prawnych (URP) — t.j. Dz.U. 2024 poz. 499 (zm. 2025/1172; 2026/370; **2026/731 od 18.06.2026 — art. 35¹ ust. 5**; 2026/846). Przepisy o aplikantach czytaj w brzmieniu po tych nowelizacjach — t.j. ich nie zawiera.
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf` (KPK `.../DU/2026/490/...`, PrAdw `.../DU/2024/1564/...`, URP `.../DU/2024/499/...`) kanałem hosta; zmiany po t.j. — ELI, „Nowelizacje po tekście jednolitym”.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
+
+Powiązane: skład sądu `mod-sklad-sadu-liczba-sedziow`; koszty i pełnomocnik z urzędu — `pisma-procesowe-v3`.
 
 ---
 
-## 1. DOPUSZCZALNA LICZBA PEŁNOMOCNIKÓW — RÓŻNE POSTĘPOWANIA, RÓŻNE
-ZASADY
+## FAZA 0 — INTAKE
 
 ```
-⭐⭐ KLUCZOWA RÓŻNICA MIĘDZY POSTĘPOWANIAMI (odpowiedź na pytanie
-użytkownika o "różne typy sądów" — RÓŻNICA leży NIE w TYPIE SĄDU
-[rejonowy/okręgowy/apelacyjny], TYLKO w RODZAJU POSTĘPOWANIA
-[cywilne/karne]):
-
-  → POSTĘPOWANIE CYWILNE (KPC) — BRAK OGRANICZENIA LICZBY: strona
-    MOŻE ustanowić DOWOLNĄ liczbę pełnomocników procesowych —
-    TA SAMA zasada obowiązuje NIEZALEŻNIE od tego, czy sprawa toczy
-    się przed SĄDEM REJONOWYM, SĄDEM OKRĘGOWYM (I lub II instancja),
-    czy SĄDEM APELACYJNYM — brak jest przepisu różnicującego limit
-    wg szczebla sądu
-    ⚠️ WYJĄTEK DOTYCZĄCY NIE LICZBY, TYLKO RODZAJU postępowania:
-    przed SĄDEM NAJWYŻSZYM obowiązuje PRZYMUS adwokacko-radcowski
-    (art. 871 KPC) — strona MUSI być reprezentowana przez adwokata/
-    radcę prawnego (a w sprawach własności intelektualnej — także
-    rzecznika patentowego) — TO NIE JEST limit LICZBY, tylko wymóg
-    KWALIFIKACJI pełnomocnika na tym szczeblu
-
-  → POSTĘPOWANIE KARNE (KPK) — LIMIT: oskarżony MOŻE mieć
-    JEDNOCZEŚNIE MAKSYMALNIE **3 OBROŃCÓW** — TO JEDYNY, wyraźny
-    przykład ustawowego LIMITU liczbowego w polskim prawie
-    procesowym
-
-⭐ ZJAWISKO "KOPIDOŁA" (potoczne określenie z praktyki adwokackiej):
-  kolejny adwokat/radca prawny WSTĘPUJĄCY do już toczącej się sprawy
-  — W PRAKTYCE RZADKO stosowane w postępowaniu cywilnym (mimo braku
-  formalnego zakazu), GŁÓWNIE z powodu: (a) WYŻSZYCH kosztów dla
-  klienta (opłaca WIELU pełnomocników), (b) sąd, W RAZIE WYGRANIA
-  sprawy, ZASĄDZA zwrot kosztów zastępstwa procesowego TYLKO ZA
-  JEDNEGO pełnomocnika — DRUGI/KOLEJNI pełnomocnicy generują KOSZT
-  BEZ możliwości jego odzyskania od strony przegrywającej
-
-PODZIAŁ RÓL MIĘDZY WIELOMA PEŁNOMOCNIKAMI — DOPUSZCZALNY: strona
-  MOŻE ustanowić np. kancelarię DO SPORZĄDZANIA pism procesowych
-  ORAZ osobę bliską (np. syna) DO OSOBISTEGO występowania na
-  rozprawach — JEŚLI pełnomocnictwo NIE OKREŚLA podziału zadań
-  między pełnomocnikami — DOMNIEMANIE: WSZYSCY pełnomocnicy MAJĄ
-  PEŁNY zakres uprawnień wynikających z art. 91 KPC (zakres
-  ustawowy pełnomocnictwa procesowego)
-
-KOMU MOŻNA UDZIELIĆ PEŁNOMOCNICTWA (katalog ZAMKNIĘTY, art. 87 §1-2
-  KPC — WARUNEK dla WSZYSTKICH pełnomocników niezależnie od ich
-  liczby): adwokat, radca prawny, rzecznik patentowy (w sprawach
-  własności przemysłowej), osoba SPRAWUJĄCA ZARZĄD majątkiem/
-  interesami strony, osoba pozostająca ZE STRONĄ w STAŁYM stosunku
-  ZLECENIA (jeśli przedmiot sprawy WCHODZI w zakres tego zlecenia),
-  WSPÓŁUCZESTNIK sporu, oraz — dla OSÓB FIZYCZNYCH — RODZINA:
-  małżonek, rodzeństwo, ZSTĘPNI (dzieci, wnuki), WSTĘPNI (rodzice,
-  dziadkowie), osoby pozostające w STOSUNKU PRZYSPOSOBIENIA
-
-⚠️ FORMA SPÓŁKI PRAWNICZEJ MA ZNACZENIE: pełnomocnikiem może być
-  kancelaria z OSOBOWOŚCIĄ PRAWNĄ — kancelaria działająca w formie
-  SPÓŁKI CYWILNEJ (bez osobowości prawnej) NIE MOŻE być
-  pełnomocnikiem SAMA W SOBIE — pełnomocnikiem MUSI być wówczas
-  KONKRETNY, WSKAZANY z imienia i nazwiska adwokat/radca prawny
-
-ZGŁOSZENIE PEŁNOMOCNIKÓW SĄDOWI: pełnomocnik OBOWIĄZANY jest przy
-  PIERWSZEJ czynności procesowej DOŁĄCZYĆ do akt DOKUMENT
-  pełnomocnictwa (z podpisem mocodawcy) LUB jego uwierzytelniony
-  odpis — BRAK ustawowego, ODRĘBNEGO terminu "zgłoszenia" poza tym
-  wymogiem — KAŻDY pełnomocnik zgłasza się NIEZALEŻNIE, przy WŁASNEJ
-  pierwszej czynności
-
-Potwierdzone w 6+ zgodnych źródłach (e-prawnik.pl [x3],
-palestrapolska.wordpress.com [czerwiec 2015], lexlege.pl [dosłowny
-tekst KPC Dział V], fssm.pl, pelnomocnictwo.info).
+□ Rodzaj postępowania: cywilne (KPC) czy karne (KPK)? Instancja (SN = przymus)?
+□ Kto występuje: pełnomocnik z art. 87, substytut (art. 91 pkt 3), aplikant (PrAdw art. 77 / URP art. 35¹)?
+□ Czy pełnomocnictwo jest w aktach (art. 89) albo w rejestrze dostępnym dla sądu?
+□ Czy był problem na rozprawie: odmowa dopuszczenia, brak pouczenia, „limit” wskazany przez sąd?
+□ Co klient chce osiągnąć: ocena prawidłowości, zarzut apelacyjny, koszty?
 ```
 
-## 2. STRONA SAMODZIELNIE SIĘ REPREZENTUJĄCA (BEZ PEŁNOMOCNIKA
-PROFESJONALNEGO) — GDY PRZECIWNIK MA PEŁNOMOCNIKA
+---
 
-```
-ZASADA WYJŚCIOWA: w polskim procesie CYWILNYM NIE OBOWIĄZUJE
-  ogólny "przymus adwokacko-radcowski" — KAŻDA strona MOŻE
-  reprezentować się SAMODZIELNIE, NIEZALEŻNIE od tego, czy DRUGA
-  strona korzysta z profesjonalnego pełnomocnika — BRAK JEST
-  przepisu WYRÓWNUJĄCEGO tę sytuację przez NARZUCENIE obowiązkowego
-  pełnomocnika STRONIE, która SAMA nie chce/nie może go mieć
+## 1. PEŁNOMOCNICY W KPC
 
-⭐⭐ KLUCZOWA ZMIANA HISTORYCZNA — OSŁABIENIE OBOWIĄZKU POUCZEŃ (OD
-  5 LUTEGO 2005 R.): PRZED tą datą sąd MUSIAŁ (obowiązek sztywny)
-  udzielać stronie działającej BEZ profesjonalnego pełnomocnika
-  potrzebnych WSKAZÓWEK co do czynności procesowych oraz POUCZAĆ o
-  SKUTKACH tych czynności/zaniedbań. OD 2005 R.: sąd MOŻE (nie
-  MUSI) udzielać takich pouczeń, i TYLKO "W RAZIE UZASADNIONEJ
-  POTRZEBY" — ZNACZĄCE OSŁABIENIE ochrony strony niereprezentowanej
-  → CEL reformy: PRZYSPIESZENIE postępowań, ograniczenie
-    "angażowania się" sądu w POSZUKIWANIE dowodów za stronę
-  → WSKAZÓWKI sądu NIE MOGĄ dotyczyć PRAWA MATERIALNEGO (np. czy
-    żądać kwoty brutto czy netto) — TYLKO kwestii PROCEDURALNYCH
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 86 | strona działa osobiście lub przez pełnomocników | KPC nie ogranicza liczby pełnomocników, niezależnie od szczebla sądu |
+| art. 87 § 1 | zamknięty katalog osób: adwokat, radca prawny, rzecznik patentowy (własność intelektualna), doradca restrukturyzacyjny (restrukturyzacja i upadłość), zarządca majątku/interesów, stały zleceniobiorca, współuczestnik, małżonek, rodzeństwo, zstępni, wstępni, przysposobienie | katalog wymienia osoby, nie spółki — umocuj konkretnego adwokata/radcę, nie kancelarię |
+| art. 87 § 2–5 | dodatkowo: pracownik osoby prawnej/przedsiębiorcy; przedstawiciel organu pomocy społecznej lub organizacji (pochodzenie dziecka, alimenty); organizacja rolników; organizacja konsumencka | § 6 uchylony — brak dalszej kategorii |
+| art. 87¹ § 1–3 | przymus adwokacko-radcowski przed SN (także czynności przed sądem niższej instancji związane z postępowaniem przed SN) | § 2 wyjątki (zwolnienie od kosztów, ustanowienie pełnomocnika, sędzia/prokurator/notariusz/profesor, dr hab. nauk prawnych itd.); to wymóg kwalifikacji, nie limit liczby |
+| art. 88 | pełnomocnictwo procesowe (ogólne lub do sprawy) albo do poszczególnych czynności; § 2 pełnomocnik do doręczeń — każda osoba fizyczna | |
+| art. 89 § 1 | przy pierwszej czynności — pełnomocnictwo lub wierzytelny odpis (+ odpis dla przeciwnika); profesjonalista sam uwierzytelnia; zbędne, gdy sąd sprawdzi umocowanie w rejestrze elektronicznym | § 1¹ uchylony od 1.03.2026; § 1² — forma elektroniczna: podpis kwalifikowany, zaufany albo osobisty; § 2 ustnie do protokołu; § 3 uchylony |
+| art. 91 | zakres ustawowy pełnomocnictwa procesowego (pkt 1–5) | pkt 3: substytucja wyłącznie na rzecz adwokata lub radcy prawnego — aplikant nie jest substytutem; pkt 4: ugoda/zrzeczenie/uznanie, chyba że wyłączone |
+| art. 94 | wypowiedzenie: skutek wobec sądu z zawiadomieniem, wobec przeciwnika z doręczeniem | § 2: adwokat/radca działa jeszcze 2 tygodnie, chyba że zwolniony |
+| art. 97 | tymczasowe dopuszczenie (po wniesieniu pozwu) do **naglącej** czynności osoby niemogącej na razie przedstawić pełnomocnictwa; fakultatywne („może”), możliwe zabezpieczenie kosztów | § 2: sąd wyznacza termin na złożenie pełnomocnictwa lub zatwierdzenie; po bezskutecznym upływie pomija czynności; przeciwnik może żądać zwrotu kosztów od działającego |
+| art. 98 § 3, art. 99 | koszty zastępstwa zwracane w granicach stawek i wydatków **jednego** adwokata (radca, rzecznik — art. 99) | kolejni pełnomocnicy = koszt nieodzyskiwalny od przeciwnika |
+| art. 379 pkt 2, 5 | nieważność: pełnomocnik nienależycie umocowany (pkt 2); pozbawienie możności obrony (pkt 5) | zarzut apelacyjny przy błędnej odmowie dopuszczenia lub działaniu osoby spoza art. 87 |
 
-⭐ WCIĄŻ OBOWIĄZUJĄCE, KONKRETNE, USTAWOWE OBOWIĄZKI POUCZENIA (mimo
-  ogólnego osłabienia z 2005 r.) — dotyczą SPOSOBU i TERMINU
-  wniesienia ŚRODKA ZASKARŻENIA: art. 327 §1, art. 343, art. 357
-  §2, art. 502 §2 KPC — TE konkretne przepisy NADAL nakładają
-  OBOWIĄZEK (nie tylko uprawnienie) pouczenia strony
-  niereprezentowanej — ⚠️ ALE: uchwała SN (cytowana w Palestrze
-  7-8/2012) — BRAK pouczenia LUB WADLIWE pouczenie strony
-  działającej BEZ pełnomocnika o dopuszczalności/terminie/sposobie
-  wniesienia środka zaskarżenia NIE MA WPŁYWU na ROZPOCZĘCIE BIEGU
-  TERMINU do jego wniesienia — TERMIN i TAK BIEGNIE, mimo braku
-  właściwego pouczenia — TO ISTOTNE OGRANICZENIE PRAKTYCZNEJ
-  wartości tego obowiązku
+Wielu pełnomocników: brak podziału zadań w pełnomocnictwie = każdy ma pełny zakres z art. 91.
 
-⭐ GENUINE, AKTYWNY SPÓR DOKTRYNALNY O SPRAWIEDLIWOŚĆ POUCZEŃ:
-  ISTNIEJE argumentacja PRAWNICZA (np. w komentarzach adwokackich),
-  że NADMIERNE "podpowiadanie" przez sąd stronie niereprezentowanej
-  MOŻE być NIESPRAWIEDLIWE WOBEC drugiej strony, KTÓRA STARANNIE
-  zaangażowała I OPŁACIŁA profesjonalnego pełnomocnika — argument:
-  strona z pełnomocnikiem może POCZUĆ SIĘ potraktowana "nie fair",
-  gdy jej PRZECIWNIK (Z WŁASNEGO WYBORU niereprezentowany) OTRZYMUJE
-  "podpowiedzi" od sądu — REKOMENDACJA CZĘŚCI DOKTRYNY: pouczenia
-  sądu POWINNY być ABSOLUTNYM WYJĄTKIEM, ograniczonym WYŁĄCZNIE do
-  informacji o TERMINACH procesowych oraz o MOŻLIWOŚCI/ZASADNOŚCI
-  ustanowienia pełnomocnika Z URZĘDU — NIE do FAKTYCZNEGO "prowadzenia
-  sprawy za stronę" — ⚠️ TO POGLĄD DOKTRYNALNY/KOMENTATORSKI, NIE
-  jednolita, wiążąca linia orzecznicza — TRAKTUJ jako element
-  DEBATY, nie rozstrzygniętą zasadę
+**KPK (porównanie):** art. 77 — oskarżony może mieć jednocześnie nie więcej niż trzech obrońców. To limit dla obrońców w procesie karnym; w KPC odpowiednika brak.
 
-⭐ MECHANIZM WYRÓWNUJĄCY NIERÓWNOŚĆ FAKTYCZNĄ — PEŁNOMOCNIK Z URZĘDU:
-  strona, KTÓRA NIE MA WYSTARCZAJĄCYCH ŚRODKÓW na profesjonalnego
-  pełnomocnika, MOŻE wnioskować o USTANOWIENIE pełnomocnika Z
-  URZĘDU (art. 117 i n. KPC) — TO GŁÓWNY, systemowy mechanizm
-  ŁAGODZENIA nierówności "pełnomocnik kontra brak pełnomocnika" —
-  sąd OCENIA zasadność wniosku (m.in. sytuację majątkową, stopień
-  skomplikowania sprawy) — NIE JEST to prawo AUTOMATYCZNE
+---
 
-ETYCZNY ZAKAZ DLA PEŁNOMOCNIKA DRUGIEJ STRONY: § 32 Kodeksu Etyki
-  Adwokackiej — NIEDOPUSZCZALNE jest porozumiewanie się adwokata ZE
-  STRONĄ PRZECIWNĄ Z POMINIĘCIEM jej pełnomocnika — ⚠️ TEN przepis
-  DOTYCZY WPROST sytuacji, gdy STRONA PRZECIWNA MA WŁASNEGO
-  pełnomocnika (zakaz "przeskakiwania" GO) — GDY strona przeciwna
-  NIE MA pełnomocnika (reprezentuje się sama), TEN KONKRETNY zakaz
-  NIE MA zastosowania WPROST (nie ma kogo "pomijać") — ALE ogólne
-  zasady deontologii zawodowej (uczciwość, lojalność procesowa)
-  NADAL obowiązują adwokata drugiej strony w KONTAKTACH z
-  niereprezentowanym przeciwnikiem
+## 2. STRONA BEZ PROFESJONALNEGO PEŁNOMOCNIKA
 
-PRAKTYCZNE KONSEKWENCJE braku profesjonalnego pełnomocnika (poza
-  samym ograniczeniem pouczeń):
-  → SAM MUSISZ znać/przestrzegać terminów procesowych, w tym TYCH
-    NIEELASTYCZNYCH (zawitych) — patrz inne moduły tego systemu dot.
-    terminów
-  → SAM ODPOWIADASZ za PRAWIDŁOWE sformułowanie żądań (np. właściwa
-    kwota, właściwa podstawa prawna) — sąd CO DO ZASADY NIE
-    "poprawia" merytorycznych błędów strony
-  → RYZYKO PRZEGRANEJ wskutek BRAKU wiedzy proceduralnej/merytorycznej
-    JEST WYŻSZE — stąd rekomendacja (powtarzana w wielu źródłach
-    poradniczych): przy sprawach SKOMPLIKOWANYCH/o WYSOKIEJ
-    STAWCE — ROZWAŻ profesjonalnego pełnomocnika, NAWET jeśli
-    formalnie NIE JEST wymagany
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 5 | sąd **może** (w razie uzasadnionej potrzeby) udzielić niezbędnych pouczeń co do czynności procesowych stronie bez adwokata, radcy, rzecznika patentowego lub radcy PG RP | uprawnienie, nie obowiązek; nie obejmuje porad materialnoprawnych |
+| art. 212 § 2 | przewodniczący może pouczyć i zwraca uwagę na celowość ustanowienia pełnomocnika | |
+| art. 327 § 1, 4, 5 | **obowiązek** pouczenia strony niezastępowanej o wniosku o uzasadnienie i środku zaskarżenia (przy ogłoszeniu albo z wyrokiem doręczanym z urzędu); § 5 — o przymusie adwokackim, gdy obowiązuje | |
+| art. 343 § 1 | wyrok zaoczny — pouczenie o środkach zaskarżenia; pozwanego także o obowiązku przedstawienia wszystkich twierdzeń i dowodów w sprzeciwie | |
+| art. 357 § 2 | postanowienie z posiedzenia niejawnego — pouczenie o uzasadnieniu i zaskarżeniu (albo o ich braku) | |
+| art. 117 | pełnomocnik z urzędu: § 1 strona zwolniona od kosztów; § 2 osoba fizyczna z oświadczeniem o braku środków; § 3 osoba prawna/jednostka — wykazanie braku środków | § 5: sąd uwzględnia, gdy udział pełnomocnika uzna za potrzebny (nie automatycznie); § 6: wniosek po raz pierwszy w postępowaniu kasacyjnym — co do zasady sąd I instancji |
+| art. 168–169 | przywrócenie terminu przy braku winy; wniosek w tygodniu od ustania przyczyny + dokonanie czynności | § 4: po roku tylko w wypadkach wyjątkowych |
 
-Potwierdzone w 6+ zgodnych źródłach (bankier.pl [luty 2005 —
-opisujący SAMĄ reformę], adwokat-sawinski.pl [maj 2020 — komentarz
-doktrynalny o sprawiedliwości pouczeń], Palestra 7-8/2012 [uchwała
-SN ws. skutków braku pouczenia], arslege.pl [dosłowny tekst § 32
-KEA]).
-```
+**Pułapka:** art. 502 KPC jest uchylony — nie powołuj go jako źródła obowiązku pouczenia; obowiązki pouczeń dla strony niezastępowanej wynikają z art. 327, 343, 357 § 2 (i przepisów szczególnych).
 
-## 3. ⭐⭐ APLIKANCI "Z UPOWAŻNIENIA" — ODRĘBNA KATEGORIA, NIE TRZECI/
-CZWARTY PEŁNOMOCNIK (dodane 2026-08-05, na żądanie użytkownika —
-odpowiedź na konkretną, zaobserwowaną sytuację: dwóch pełnomocników
-pozwanego w sprawie pracowniczej przed sądem okręgowym + aplikanci
-"z upoważnienia")
+**Orzecznictwo (snapshot, sprawdź w sn.pl przed powołaniem):** pogląd, że brak lub wadliwe pouczenie nie wstrzymuje biegu terminu do zaskarżenia — droga naprawcza to art. 168. Brak sygnatury w module = nie powołuj bez ustalenia orzeczenia.
 
-```
-⭐⭐ KLUCZOWE ROZRÓŻNIENIE — TO NIE JEST "TRZECI PEŁNOMOCNIK": aplikant
-  (adwokacki/radcowski) występujący "z upoważnienia" NIE STAJE SIĘ
-  pełnomocnikiem strony w ogóle — działa W IMIENIU swojego
-  PATRONA (adwokata/radcy prawnego), NIE w imieniu strony
-  bezpośrednio — TO FUNDAMENTALNIE inna konstrukcja niż
-  "pełnomocnictwo substytucyjne" (dalsze pełnomocnictwo)
+**Etyka:** zakaz kontaktowania się z reprezentowaną stroną przeciwną z pominięciem jej pełnomocnika — zbiory zasad etyki adwokackiej (NRA) i radcowskiej (KRRP); numer jednostki sprawdź w aktualnym tekście uchwały samorządu (poza ELI). Gdy przeciwnik nie ma pełnomocnika, zakaz nie ma przedmiotu, ale obowiązki lojalności zawodowej trwają.
 
-⭐ DWA RÓŻNE MECHANIZMY, ŁATWO MYLONE:
-  (A) PEŁNOMOCNICTWO SUBSTYTUCYJNE (dalsze, art. 91 pkt 3 KPC) —
-      adwokat/radca UDZIELA pełnomocnictwa dalszego INNEMU adwokatowi/
-      radcy — TEN drugi STAJE SIĘ RÓWNORZĘDNYM pełnomocnikiem
-      procesowym (uchwała 7 sędziów SN z 1938 r., zasada prawna wciąż
-      aktualna) — ⭐ art. 91 pkt 3 KPC WYRAŹNIE ogranicza KRĄG
-      substytutów WYŁĄCZNIE do adwokata LUB radcy prawnego — APLIKANT
-      jest z TEGO mechanizmu CAŁKOWICIE WYKLUCZONY — potwierdzone
-      wprost uchwałą SN (przytoczoną w orzecznictwie z 2006 r.):
-      "aplikant radcowski NIE MOŻE zastępować adwokata w postępowaniu
-      cywilnym" w drodze substytucji
-  (B) UPOWAŻNIENIE KORPORACYJNE DO ZASTĘPSTWA (całkowicie ODRĘBNA
-      podstawa prawna — NIE z KPC, tylko z Prawa o adwokaturze/ustawy
-      o radcach prawnych i regulaminów aplikacji — § 13 Regulaminu
-      aplikacji adwokackiej, § 6 Regulaminu aplikacji radcowskiej):
-      aplikant NIE OTRZYMUJE statusu pełnomocnika — jedynie
-      WYKONUJE CZYNNOŚCI NA ROZPRAWIE w ZASTĘPSTWIE nieobecnego
-      adwokata/radcy, DZIAŁAJĄC W JEGO IMIENIU — CEL tej instytucji
-      jest PRZEDE WSZYSTKIM SZKOLENIOWY (relacja "uczeń-mistrz"), NIE
-      zwykła substytucja procesowa
+---
 
-⭐ BARIERA MIĘDZYKORPORACYJNA — POTWIERDZONA ORZECZNICTWEM: aplikant
-  ADWOKACKI może zastępować WYŁĄCZNIE adwokata; aplikant RADCOWSKI
-  może zastępować WYŁĄCZNIE radcę prawnego — ZASTĘPSTWO
-  "KRZYŻOWE" (aplikant radcowski za adwokata lub odwrotnie) JEST
-  ZAKAZANE — uzasadnienie: aplikacja oparta jest na relacji
-  TUTORSKIEJ z KONKRETNYM patronem WŁASNEGO samorządu, nie na
-  ogólnym "zastępstwie procesowym"
-  ⭐ ODNOTOWANA PRAKTYKA OBEJŚCIA (przyznana w interpelacji
-  poselskiej, komentowana przez Ministerstwo Sprawiedliwości jako
-  "niepowszechne", ale ISTNIEJĄCE): kancelarie CHCĄC upoważnić
-  aplikanta INNEGO samorządu — udzielają NAJPIERW pełnomocnictwa
-  SUBSTYTUCYJNEGO adwokatowi/radcy z TEGO drugiego samorządu, KTÓRY
-  DOPIERO wtedy upoważnia "swojego" aplikanta — DODATKOWY krok,
-  generujący dodatkowe koszty, ale POKAZUJĄCY że sama bariera
-  międzykorporacyjna jest TRAKTOWANA poważnie w praktyce
+## 3. APLIKANCI — ZASTĘPSTWO PATRONA (nie kolejny pełnomocnik)
 
-WARUNEK CZASOWY dla aplikanta: uprawnienie do zastępowania patrona
-  przysługuje od UKOŃCZENIA **6. MIESIĄCA** aplikacji DO **1 ROKU**
-  PO jej ukończeniu (okres "przejściowy" dla świeżo upieczonych
-  adwokatów/radców jeszcze przed wpisem na listę)
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| PrAdw art. 77 ust. 1 | po 6 miesiącach aplikacji aplikant adwokacki może zastępować adwokata przed sądami, organami ścigania i innymi instytucjami | wyjątki: SN, NSA, TK, Trybunał Stanu |
+| PrAdw art. 77 ust. 2 | także przez rok od zakończenia aplikacji (2 lata, gdy uchwała z art. 79a wydłużyła okres z art. 79 ust. 1 pkt 4) | |
+| PrAdw art. 77 ust. 3 | od 17.10.2026: aplikant **radcowski** może zastępować adwokata na takich samych zasadach jak aplikant adwokacki | wcześniej (t.j. 2024/1564) tylko w spółce adwokacko-radcowskiej i bez obrony karnej/karnoskarbowej — nie stosuj dawnego brzmienia do czynności od 17.10.2026 |
+| PrAdw art. 77 ust. 5 | od 17.10.2026: aplikant adwokacki sporządza projekty pism; podpisuje pisma z wyraźnego upoważnienia adwokata | wyłączenie: apelacja oraz pisma do SN, NSA, TK i Trybunału Stanu |
+| PrAdw art. 77 ust. 6 | od 17.10.2026: uprawnienia z ust. 1, 2, 4, 5 i URP art. 35¹ ust. 5 ma też osoba wpisana na listę adwokatów — do ślubowania, w granicach okresu z art. 79 ust. 1 pkt 4 lub 5 | |
+| URP art. 35¹ ust. 1–2 | aplikant radcowski: te same zasady wobec radcy prawnego (6 miesięcy; rok po aplikacji, 2 lata przy uchwale z art. 37¹) | wyjątki: SN, NSA, TK, Trybunał Stanu |
+| URP art. 35¹ ust. 4 | podpisywanie pism z wyraźnego upoważnienia radcy | bez apelacji, skargi kasacyjnej, skargi konstytucyjnej |
+| URP art. 35¹ ust. 5 | od 18.06.2026: aplikant **adwokacki** może zastępować radcę prawnego na takich samych zasadach jak aplikant radcowski | wcześniej — tylko w spółce adwokacko-radcowskiej |
 
-⚠️ POWAŻNA KONSEKWENCJA PROCEDURALNA nieprawidłowego zastępstwa:
-  jeśli osoba NIE MOGĄCA być pełnomocnikiem (np. aplikant
-  "podszywający się" pod substytuta, lub zastępstwo krzyżowe wbrew
-  zakazowi) DOKONA czynności procesowej — TA czynność NIE PODLEGA
-  ZATWIERDZENIU przez stronę (rygoryzm art. 87 KPC, zamknięty katalog
-  osób mogących być pełnomocnikiem) — POWAŻNE ryzyko dla strony,
-  której "pełnomocnik" okazał się nieuprawniony
+Wnioski praktyczne:
+- Aplikant działa w zastępstwie patrona (podstawa: PrAdw/URP), nie jest substytutem z art. 91 pkt 3 KPC i nie zwiększa liczby pełnomocników strony.
+- Zastępstwo „krzyżowe” (aplikant jednego samorządu za członka drugiego): od 18.06.2026 aplikant adwokacki za radcę (URP art. 35¹ ust. 5), od 17.10.2026 aplikant radcowski za adwokata (PrAdw art. 77 ust. 3) — na zasadach jak aplikant „własny”. Dla czynności wcześniejszych — dawne brzmienie (tylko spółka adwokacko-radcowska). Ustal datę czynności.
+- Aplikant przy obecnym i działającym patronie nie ma odrębnej roli procesowej; zastępstwo zakłada działanie w miejsce patrona. Planowany czynny udział aplikanta — zgłoś upoważnienie przed posiedzeniem, nie improwizuj na sali.
+- Odmowa dopuszczenia: najpierw ustal datę, czy był zastępowany patron nieobecny, czy było upoważnienie, czy minęło 6 miesięcy aplikacji, czy sąd nie jest SN/NSA. Przy pełnomocniku bez dokumentu umocowania — art. 97 (naglącość + uprawdopodobnienie umocowania). Błędna odmowa wpływająca na obronę → zarzut z art. 379 pkt 5.
 
-⭐ ODPOWIEDŹ NA KONKRETNĄ, OPISANĄ SYTUACJĘ: "dwóch pełnomocników
-  pozwanego + aplikanci z upoważnienia" w sprawie PRACOWNICZEJ przed
-  SĄDEM OKRĘGOWYM — TO W PEŁNI PRAWIDŁOWA, legalna konfiguracja:
-  → DWAJ pełnomocnicy pozwanego — zgodne z zasadą braku limitu
-    liczby pełnomocników w postępowaniu cywilnym (sekcja 1 wyżej) —
-    NIC nietypowego dla sprawy pracowniczej, TA SAMA zasada co w
-    każdej innej sprawie cywilnej
-  → APLIKANCI występujący "z upoważnienia" — DODATKOWA, ODRĘBNA
-    kategoria — NIE liczy się jako "kolejny pełnomocnik" (nie ma
-    więc formalnie "czterech pełnomocników", tylko dwóch
-    pełnomocników I dodatkowo osoby ich ZASTĘPUJĄCE na tej
-    KONKRETNEJ rozprawie) — WARTO sprawdzić (jeśli ma to znaczenie
-    dla oceny sprawy), CZY aplikanci byli PRAWIDŁOWO przypisani do
-    SWOJEGO samorządu względem patrona (np. aplikant radcowski
-    zastępujący WŁAŚNIE radcę prawnego spośród tych dwóch
-    pełnomocników, NIE adwokata) — BARIERA międzykorporacyjna
-    OPISANA wyżej
+**Orzecznictwo (snapshot, sprawdź w sn.pl):** SN, postanowienie z 7.02.2018, V CSK 188/17 — odmowa tymczasowego dopuszczenia mimo uprawdopodobnionego upoważnienia (faks) przy naglącej czynności jako pozbawienie możności obrony; SN III CZP 22/08 — uprawdopodobnienie umocowania kopią. Treść i tezy zweryfikuj przed powołaniem.
 
-Potwierdzone w 6+ zgodnych źródłach, w tym Palestra 1-2/2023
-(analiza akademicka), gazetaprawna.pl [marzec 2026, z cytowaną
-interpelacją poselską i stanowiskiem MS], SAOS (orzeczenie z
-20.05.2015), e-prawnik.pl [z uchwałą SN], temidium.pl [orzeczenie z
-7.10.2015].
-```
+---
 
-## 4. ⭐⭐ ODMOWA DOPUSZCZENIA APLIKANTA ("ODESŁANIE NA WIDOWNIĘ") —
-DWA RÓŻNE SCENARIUSZE (dodane 2026-08-05, na żądanie użytkownika,
-SKORYGOWANE tego samego dnia po doprecyzowaniu przez użytkownika)
+## 4. „MAKSYMALNIE DWÓCH” W SĄDZIE PRACY — CO MOGŁO BYĆ MIERZONE
 
-```
-⚠️ WAŻNE SPROSTOWANIE (2026-08-05): PIERWOTNA wersja tej sekcji
-(niżej, jako 4B) BŁĘDNIE założyła kontekst art. 97 KPC (sytuacja
-NAGLĄCA, GDY NIKT z formalnym umocowaniem nie jest obecny). Po
-DOPRECYZOWANIU przez użytkownika: PEŁNOMOCNIK (patron) BYŁ OBECNY i
-AKTYWNY na sali — aplikant PRZYSZEDŁ RAZEM z nim, ale NIE MÓGŁ brać
-CZYNNEGO udziału. TO JEST SCENARIUSZ 4A (WŁAŚCIWY), ISTOTNIE
-RÓŻNY prawnie od 4B — art. 97 KPC W OGÓLE NIE MA tu zastosowania,
-bo NIE BYŁO żadnej "naglącej" potrzeby zastępstwa — zastępowany
-BYŁ przecież obecny i mógł działać samodzielnie.
-```
+Liczba pełnomocników w KPC nie jest ograniczona (pkt 1). Liczba „2” w sądzie pracy pasuje do **ławników**:
 
-### 4A. APLIKANT OBECNY RAZEM Z AKTYWNYM PATRONEM — BRAK
-SAMODZIELNEJ PODSTAWY DO CZYNNEGO UDZIAŁU (WŁAŚCIWY scenariusz)
+| Przepis | Kwalifikator |
+|---|---|
+| art. 47 § 1 | I instancja — co do zasady jeden sędzia |
+| art. 47 § 2 pkt 1 | sędzia + dwóch ławników w sprawach z zakresu prawa pracy: lit. a (istnienie/treść/nawiązanie/wygaśnięcie stosunku pracy, bezskuteczność wypowiedzenia, przywrócenie do pracy i warunków, łącznie dochodzone roszczenia, odszkodowanie za wadliwe wypowiedzenie lub rozwiązanie); lit. b (równe traktowanie); lit. c (mobbing); lit. d (naruszenie dóbr osobistych — od 5.11.2026, Dz.U. 2026 poz. 1046) |
+| art. 47 § 2 pkt 2 | sprawy rodzinne z ławnikami: rozwód, separacja, bezskuteczność uznania ojcostwa, rozwiązanie przysposobienia |
+| art. 47 § 4 | prezes sądu może zarządzić skład trzech sędziów (zawiłość, precedens) |
 
-```
-⭐⭐ KLUCZOWE, PROSTE WYJAŚNIENIE: gdy PATRON (adwokat/radca) JEST
-  OBECNY i W PEŁNI ZDOLNY do prowadzenia sprawy — aplikant
-  TOWARZYSZĄCY MU nie MA żadnej SAMODZIELNEJ, ODRĘBNEJ podstawy
-  prawnej do CZYNNEGO uczestniczenia w czynnościach procesowych
-  (np. zadawania pytań świadkowi, przemawiania) — PRZYCZYNA jest
-  PROSTA: uprawnienie aplikanta do DZIAŁANIA (zastępstwo, patrz
-  sekcja 3 wyżej) WYMAGA KONKRETNEGO upoważnienia patrona DO
-  DZIAŁANIA W JEGO ZASTĘPSTWIE — a SKORO patron NIE BYŁ zastępowany
-  (bo BYŁ obecny i działał SAM), aplikant formalnie NIE MIAŁ ŻADNEJ
-  roli procesowej do wykonania — TYLKO ROLĘ OBSERWATORA/UCZĄCEGO SIĘ
+Inne możliwe źródła wypowiedzi sędziego: zarządzenie porządkowe dotyczące sali (nie norma KPC), podział ról między pełnomocnikami zabierającymi głos, nieścisłość ustna. Rozstrzyga protokół rozprawy — wnioskuj o jego odczyt/odsłuch przed formułowaniem zarzutu.
 
-⭐ TO NIE JEST BŁĄD SĄDU, TYLKO NATURALNA KONSEKWENCJA STRUKTURY
-  PRAWNEJ: aplikant nigdy NIE JEST "dodatkowym", SAMODZIELNYM
-  uczestnikiem procesu OBOK swojego patrona — MOŻE albo (a)
-  ZASTĘPOWAĆ patrona, GDY ten jest NIEOBECNY/nie może działać (na
-  podstawie upoważnienia do zastępstwa, sekcja 3), ALBO (b) po
-  prostu OBSERWOWAĆ z pozycji publiczności, GDY patron jest OBECNY i
-  działa SAM — NIE ISTNIEJE TRZECI wariant "aktywnego współdziałania
-  OBOK w pełni sprawnego patrona" jako ODRĘBNE, SAMODZIELNE
-  uprawnienie procesowe aplikanta
+---
 
-⭐ POTWIERDZONA, REALNA PRAKTYKA ŚRODOWISKOWA (relacja aplikantki
-  radcowskiej, blog branżowy "Aplikancie, znaj swoje miejsce… na
-  publiczności!"): OPISANY WPROST identyczny mechanizm — sędzia,
-  gdy aplikant NIE MIAŁ SAMODZIELNEJ podstawy do działania, KAZAŁ
-  "zmienić miejsce i usiąść na sali w charakterze publiczności" —
-  TA relacja POTWIERDZA, że jest to ROZPOWSZECHNIONA, ZNANA w
-  środowisku aplikanckim PRAKTYKA sądowa, NIE odosobniony przypadek
+## WORKFLOW
 
-⚠️ WYJĄTKI/NIUANSE — KIEDY aplikant MÓGŁBY jednak działać OBOK
-  obecnego patrona:
-  → JEŚLI patron WYRAŹNIE, na bieżąco, USTNIE upoważnił aplikanta
-    DO KONKRETNEJ, WSKAZANEJ czynności (np. "proszę, by w moim
-    imieniu zadał Pan/Pani to jedno pytanie") — TAKIE, WĄSKIE,
-    doraźne umocowanie MOŻE być, w PRAKTYCE niektórych sądów,
-    respektowane — ALE zależy to OD DYSKRECJI konkretnego składu
-    orzekającego, NIE JEST to GWARANTOWANE prawo
-  → JEŚLI sprawa dotyczyła DWÓCH pełnomocników jednocześnie (jak w
-    poprzednio opisanej sytuacji z sądu okręgowego — sekcja 2/3
-    wyżej) — a APLIKANT był upoważniony przez JEDNEGO z DWÓCH
-    pełnomocników do ZASTĘPOWANIA WŁAŚNIE TEGO PEŁNOMOCNIKA (nie
-    całej strony) — GDY TEN KONKRETNY pełnomocnik był NIEOBECNY na
-    danej czynności (nawet gdy DRUGI pełnomocnik BYŁ obecny) — TU
-    aplikant MÓGŁBY mieć WŁASNĄ, samodzielną podstawę do działania w
-    ZASTĘPSTWIE TEGO JEDNEGO, KONKRETNEGO pełnomocnika — ⚠️ TO
-    WYMAGAŁOBY jednak, żeby UPOWAŻNIENIE BYŁO wcześniej ZŁOŻONE/
-    zgłoszone sądowi, NIE tylko dorozumiane z faktu "przyjścia
-    razem"
+1. Ustal rodzaj postępowania i instancję (KPC / KPK; SN → art. 87¹).
+2. Pobierz z ELI brzmienie art. 87, 89, 91, 97 KPC (i PrAdw art. 77 / URP art. 35¹ przy aplikantach).
+3. Sprawdź protokół: kto był obecny, w jakim charakterze, czy złożono pełnomocnictwo/upoważnienie.
+4. Oceń skutki: koszty (art. 98 § 3), nieważność (art. 379 pkt 2, 5), przywrócenie terminu (art. 168–169).
+5. Orzecznictwo — tylko po weryfikacji w sn.pl / orzeczenia.ms.gov.pl.
 
-⭐ PRAKTYCZNA REKOMENDACJA NA PRZYSZŁOŚĆ (dla oceny PODOBNYCH
-  sytuacji): jeśli KONKRETNY cel obecności aplikanta na danej
-  rozprawie WYKRACZA poza samo OBSERWOWANIE (np. planowane jest, że
-  TO WŁAŚNIE aplikant ma zadać pytania określonemu świadkowi,
-  podczas gdy patron zajmuje się czymś innym) — WYMAGANE jest
-  WCZEŚNIEJSZE, FORMALNE zgłoszenie sądowi (pisemne upoważnienie do
-  zastępstwa złożone do akt PRZED rozprawą, NIE improwizowane NA
-  MIEJSCU) — SAMO "przyjście razem" z patronem NIE TWORZY żadnego
-  automatycznego uprawnienia procesowego
+## QUALITY GATE
 
-Potwierdzone w 4+ zgodnych źródłach, w tym relacja praktyczna
-środowiska aplikanckiego (palestrapolska.wordpress.com, marzec 2016)
-oraz ogólna struktura uprawnień aplikanta (sekcja 3 wyżej, Palestra
-1-2/2023).
-```
+- [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
+- [ ] Nie powołano jednostek uchylonych (art. 502, art. 87 § 6, art. 89 § 1¹ i § 3 KPC)?
+- [ ] Rozróżniono pełnomocnika, substytuta i aplikanta zastępującego patrona?
+- [ ] Przy aplikancie sprawdzono 6 miesięcy, sąd (SN/NSA) i datę czynności względem nowelizacji 2026/731 i 2026/1290?
+- [ ] Orzeczenia oznaczone jako zweryfikowane albo jako snapshot?
 
-### 4B. ⚠️ ODRĘBNY, INNY SCENARIUSZ — GDY NIKT Z FORMALNYM
-UMOCOWANIEM NIE JEST OBECNY (art. 97 KPC — NIE dotyczy sytuacji
-opisanej przez użytkownika, ZACHOWANE dla kompletności jako
-ODRĘBNY, możliwy w INNYCH okolicznościach scenariusz)
+## OUTPUT
 
-```
-⭐ KLUCZOWY MECHANIZM PRAWNY, KTÓRY MÓGŁ (lecz NIE MUSIAŁ) mieć
-zastosowanie: art. 97 KPC — TYMCZASOWE DOPUSZCZENIE osoby
-niemogącej NA RAZIE przedstawić pełnomocnictwa
+1. Stan faktyczny (kto, w jakim charakterze, na jakim posiedzeniu); 2. Podstawa (przepis + brzmienie z ELI);
+3. Ocena prawidłowości; 4. Skutki (koszty, nieważność, terminy); 5. Rekomendacja (zarzut, wniosek, zmiana składu reprezentacji).
 
-  § 1: sąd MOŻE dopuścić TYMCZASOWO do podjęcia NAGLĄCEJ czynności
-    procesowej osobę niemogącą NA RAZIE przedstawić pełnomocnictwa —
-    sąd MOŻE uzależnić to OD ZABEZPIECZENIA KOSZTÓW
-  § 2: sąd RÓWNOCZEŚNIE wyznacza TERMIN, w którym osoba działająca
-    bez pełnomocnictwa POWINNA je złożyć ALBO przedstawić
-    ZATWIERDZENIE swej czynności przez stronę — jeśli TERMIN upłynie
-    BEZSKUTECZNIE — sąd POMIJA czynności tej osoby (a przeciwnik
-    MOŻE żądać zwrotu kosztów spowodowanych tym tymczasowym
-    dopuszczeniem)
+## ŁĄCZ Z
 
-⭐⭐ KLUCZOWA, WAŻNA ZASADA — TO NIE JEST OBOWIĄZEK SĄDU: dopuszczenie
-  na podstawie art. 97 KPC ma charakter FAKULTATYWNY ("sąd MOŻE"),
-  NIE OBLIGATORYJNY — zależy od "OGRANICZONEGO UZNANIA sądu" (SN,
-  cytowane w standardyprawa.pl) — ⭐ WNIOSEK PRAKTYCZNY: sam FAKT, że
-  sąd ODMÓWIŁ dopuszczenia, NIE JEST automatycznie błędem — TRZEBA
-  ocenić OKOLICZNOŚCI KONKRETNEJ sprawy
-
-DWIE PRZESŁANKI WARUNKUJĄCE ZASTOSOWANIE art. 97 KPC (OBIE MUSZĄ
-  wystąpić, żeby odmowa MOGŁA być kwestionowana jako błąd):
-  1) CZYNNOŚĆ musi być NAGLĄCA (pilna potrzeba działania W TYM
-     MOMENCIE, nie możliwość odłożenia na później) — jeśli sytuacja
-     NIE BYŁA naglącą (np. był to zwykły termin rozprawy, BEZ presji
-     czasowej, i sprawa MOGŁA być odroczona lub kontynuowana przez
-     drugiego pełnomocnika już obecnego) — art. 97 W OGÓLE się NIE
-     AKTUALIZUJE
-  2) MUSI istnieć CHOĆBY WYSOKI STOPIEŃ UPRAWDOPODOBNIENIA faktu
-     udzielenia pełnomocnictwa/upoważnienia (SN, postanowienie III
-     CZP 22/08) — NAWET faksem/kopią BEZ podpisu — TAKI dokument NIE
-     JEST formalnym pełnomocnictwem, ALE MOŻE "wykazywać jego treść"
-     i SPEŁNIAĆ wymóg uprawdopodobnienia — ⚠️ JEŚLI aplikant NIE MIAŁ
-     ŻADNEGO dokumentu/potwierdzenia (nawet nieformalnego) — BRAK
-     PODSTAWY do zastosowania art. 97 w ogóle, odmowa BYŁABY
-     zasadna
-
-⭐⭐⭐ REALNY, PRECEDENSOWY WYROK SN (postanowienie z 7.02.2018 r.,
-  sygn. V CSK 188/17) — POKAZUJĄCY, KIEDY ODMOWA JEST POWAŻNYM
-  BŁĘDEM: sąd odmówił tymczasowego dopuszczenia aplikantki
-  radcowskiej, MIMO że 2 GODZINY przed rozprawą wpłynął FAKS z
-  upoważnieniem (nieco nieczytelny technicznie, ALE MOŻLIWY do
-  zidentyfikowania) — SN UZNAŁ: taka odmowa, GDY BEZ WĄTPIENIA
-  ISTNIAŁA potrzeba podjęcia naglącej czynności — NARUSZA art. 97
-  §2 KPC i PROWADZI DO POZBAWIENIA MOŻNOŚCI OBRONY PRAW — SKUTEK:
-  **NIEWAŻNOŚĆ POSTĘPOWANIA** (art. 379 pkt 5 KPC) — jedna z
-  NAJPOWAŻNIEJSZYCH, BEZWZGLĘDNYCH podstaw uchylenia orzeczenia w
-  polskim prawie procesowym
-
-⭐ CYTOWANE STANOWISKO ŚRODOWISKA APLIKANCKIEGO (Stowarzyszenie
-  Adwokackie Defensor Iuris): "niedopuszczanie do udziału w
-  czynnościach procesowych pełnomocnika — I TO BEZ ZNACZENIA, czy
-  jest nim aplikant adwokacki czy radcowski, czy też adwokat czy
-  radca prawny — jest KOMPLETNIE NIEUZASADNIONE i NARUSZA prawo do
-  obrony", GDY spełnione są przesłanki art. 97 — TO STANOWISKO
-  ŚRODOWISKOWE (organizacji aplikanckiej), NIE oficjalna, wiążąca
-  wykładnia — ale ODZWIERCIEDLA realny problem sygnalizowany w
-  praktyce
-
-⭐⭐ PRAKTYCZNE, PRAWDOPODOBNE PRZYCZYNY "ODESŁANIA NA WIDOWNIĘ" — dla
-  ODRÓŻNIENIA sytuacji ZASADNEJ od BŁĘDNEJ (BRAK możliwości
-  jednoznacznej oceny KONKRETNEJ sytuacji użytkownika bez wglądu w
-  akta — poniżej ogólne, orientacyjne scenariusze):
-  → SCENARIUSZ A (odmowa PRAWDOPODOBNIE zasadna): aplikant NIE MIAŁ
-    przy sobie ŻADNEGO dokumentu/potwierdzenia upoważnienia (nawet
-    ustnego oświadczenia obecnego na sali pełnomocnika-patrona) —
-    LUB sytuacja NIE BYŁA naglącą (np. inny z DWÓCH pełnomocników
-    pozwanego BYŁ obecny i mógł prowadzić sprawę samodzielnie, więc
-    NIE BYŁO "naglącej potrzeby" dopuszczenia dodatkowo aplikanta)
-    — LUB aplikant NIE UKOŃCZYŁ jeszcze 6. miesiąca aplikacji (patrz
-    sekcja 3 wyżej) — LUB doszło do NIEDOZWOLONEGO zastępstwa
-    KRZYŻOWEGO (aplikant JEDNEJ korporacji próbujący zastąpić
-    pełnomocnika DRUGIEJ)
-  → SCENARIUSZ B (odmowa POTENCJALNIE błędna, warta rozważenia
-    zaskarżenia jeśli miała ZNACZENIE dla wyniku sprawy): aplikant
-    MIAŁ jakiekolwiek upoważnienie (choćby nieformalne, np.
-    przekazane mailem/telefonicznie wcześniej patronowi, LUB PATRON
-    BYŁ obecny na sali i USTNIE potwierdził upoważnienie) ORAZ
-    ISTNIAŁA rzeczywista, PILNA potrzeba jego udziału (np. DRUGI z
-    dwóch pełnomocników pozwanego BYŁ NIEOBECNY na TEJ konkretnej
-    rozprawie), A sąd MIMO TO odmówił BEZ rozważenia art. 97 KPC
-  ⚠️ REKOMENDACJA: jeśli odmowa MIAŁA WPŁYW na wynik/przebieg sprawy
-  (np. strona NIE MOGŁA zadać pytań świadkowi z powodu braku
-  odpowiedniej reprezentacji w danym momencie) — WARTO ROZWAŻYĆ
-  konsultację z prawnikiem co do ZASADNOŚCI zarzutu procesowego W
-  APELACJI, z powołaniem na art. 97 §2 w zw. z art. 379 pkt 5 KPC —
-  NIE JEST to jednak GWARANCJA sukcesu, bo OCENA "naglącości" i
-  "wysokiego stopnia uprawdopodobnienia" NALEŻY DO SĄDU II instancji
-  KAŻDORAZOWO INDYWIDUALNIE
-
-Potwierdzone w 6+ zgodnych źródłach, w tym BEZPOŚREDNIO dosłowny
-tekst art. 97 KPC (arslege.pl, lexlege.pl), realny wyrok SN (V CSK
-188/17, cytowany przez defensoriuris.pl i temidium.pl), oraz analiza
-orzecznicza (standardyprawa.pl).
-```
-
-## 5. ⭐⭐ "MAKSYMALNIE DWÓCH" W SĄDZIE PRACY — PRAWDOPODOBNE
-WYJAŚNIENIE ŹRÓDŁA TEJ LICZBY (dodane 2026-08-05, na żądanie
-użytkownika — sędzia wspomniał o "maksymalnie 2" w sądzie
-okręgowym/sądzie pracy)
-
-```
-⚠️ WAŻNE ZASTRZEŻENIE WSTĘPNE: NIE MAM dostępu do DOKŁADNEJ treści
-  wypowiedzi sędziego z opisanej rozprawy — PONIŻSZA analiza
-  przedstawia NAJBARDZIEJ PRAWDOPODOBNE, ZWERYFIKOWANE źródło liczby
-  "2" w kontekście SĄDU PRACY, WYSTĘPUJĄCE w polskim prawie — ALE TO
-  NIE DOTYCZY LICZBY PEŁNOMOCNIKÓW (potwierdzone wyżej: BRAK limitu)
-  — DOTYCZY CZEGOŚ INNEGO, co MOGŁO zostać przywołane przez sędziego
-  w kontekście, który przy relacjonowaniu ROZPRAWY MÓGŁ zostać
-  POMYLONY/POŁĄCZONY z tematem pełnomocników
-
-⭐⭐ PRAWDOPODOBNE ŹRÓDŁO: SKŁAD SĄDU (NIE liczba pełnomocników) —
-  art. 47 §2 KPC — W NIEKTÓRYCH sprawach z zakresu prawa pracy SĄD
-  ORZEKA w składzie: JEDEN SĘDZIA (przewodniczący) + **DWÓCH
-  ŁAWNIKÓW** — TA "DWÓJKA" dotyczy ŁAWNIKÓW (czyli SKŁADU
-  ORZEKAJĄCEGO SĄDU), NIE liczby pełnomocników STRON
-
-  KONKRETNE KATEGORIE SPRAW wymagające składu z 2 ławnikami (art. 47
-  §2 pkt 1 KPC):
-  a) ustalenie ISTNIENIA lub TREŚCI stosunku pracy, NAWIĄZANIE lub
-     WYGAŚNIĘCIE stosunku pracy
-  b) uznanie BEZSKUTECZNOŚCI wypowiedzenia stosunku pracy
-  c) PRZYWRÓCENIE do pracy i przywrócenie POPRZEDNICH warunków
-     pracy/płacy
-  d) ŁĄCZNIE dochodzone z powyższymi roszczenia oraz ODSZKODOWANIE
-     przy NIEUZASADNIONYM/naruszającym przepisy wypowiedzeniu
-  e) naruszenie ZASADY RÓWNEGO TRAKTOWANIA w zatrudnieniu
-  f) odszkodowanie/zadośćuczynienie z tytułu MOBBINGU
-  → DLA POZOSTAŁYCH spraw pracowniczych (np. o zwykłą zapłatę
-    wynagrodzenia) — skład JEDNOOSOBOWY (sam sędzia, bez ławników)
-
-⭐ HIPOTEZA WYJAŚNIAJĄCA sytuację opisaną przez użytkownika: JEŚLI
-  sprawa DOTYCZYŁA jednej z powyższych kategorii (np. przywrócenie
-  do pracy, ustalenie stosunku pracy) — SKŁAD SĄDU MÓGŁ obejmować
-  DWÓCH ŁAWNIKÓW obok sędziego zawodowego — sędzia MÓGŁ wspomnieć o
-  TEJ liczbie "2" W INNYM kontekście (np. wyjaśniając SKŁAD sądu
-  stronom/uczestnikom) — a PRZY relacjonowaniu/wspominaniu rozprawy
-  PO FAKCIE, temat "2" MÓGŁ zostać SKOJARZONY/POMYLONY z liczbą
-  pełnomocników pozwanego (którzy TEŻ byli dwaj — czysty ZBIEG
-  liczbowy, NIE związek przyczynowy)
-
-⚠️ ALTERNATYWNE, MNIEJ PRAWDOPODOBNE WYJAŚNIENIA (do rozważenia,
-  jeśli powyższa hipoteza NIE pasuje do konkretnych okoliczności):
-  → SĘDZIA MÓGŁ MÓWIĆ o PRAKTYCZNYM/ORGANIZACYJNYM ograniczeniu
-    DOTYCZĄCYM KONKRETNEJ SALI/rozprawy (np. LICZBA MIEJSC przy
-    stole dla pełnomocników, kwestia PORZĄDKOWA NIE mająca
-    charakteru NORMY PRAWNEJ) — TAKIE ograniczenia MOGĄ wynikać z
-    ZARZĄDZEŃ WEWNĘTRZNYCH konkretnego sądu/przewodniczącego
-    wydziału, NIE z KPC — jeśli TAK BYŁO, NIE JEST to ogólna zasada
-    prawna, tylko LOKALNA praktyka
-  → SĘDZIA MÓGŁ ODNOSIĆ SIĘ do liczby pełnomocników, KTÓRZY
-    FAKTYCZNIE ZABIERAJĄ GŁOS na DANYM POSIEDZENIU (np. gdy JEDEN z
-    dwóch pełnomocników reprezentuje pozwanego W ZAKRESIE
-    MERYTORYCZNYM, a DRUGI jedynie TOWARZYSZY/obserwuje) — TO NIE
-    JEST formalny limit LICZBY pełnomocników, tylko PRAKTYCZNY
-    PODZIAŁ RÓL między JUŻ USTANOWIONYMI pełnomocnikami
-  → MNIEJ PRAWDOPODOBNE, ALE MOŻLIWE: SĘDZIA POPEŁNIŁ zwykłą
-    NIEŚCISŁOŚĆ w wypowiedzi USTNEJ (sędziowie, jak KAŻDY człowiek,
-    mogą się przejęzyczyć/uprościć w BIEŻĄCEJ komunikacji na sali) —
-    TAKA wypowiedź USTNA sędziego NIE TWORZY prawa i NIE JEST
-    WIĄŻĄCA jako WYKŁADNIA — DECYDUJE tekst USTAWY (patrz sekcja 1
-    wyżej: BRAK limitu w KPC), NIE potoczna wypowiedź na sali
-
-⭐ REKOMENDACJA PRAKTYCZNA: jeśli TA kwestia MA znaczenie dla
-  KONKRETNEJ sprawy użytkownika (np. planowane zaskarżenie/zarzut
-  proceduralny) — WARTO sprawdzić PROTOKÓŁ rozprawy (protokół
-  elektroniczny/pisemny) dla DOKŁADNEGO brzmienia wypowiedzi sędziego
-  ORAZ ustalić, JAKIEJ KATEGORII dotyczyła sprawa (czy mieściła się w
-  katalogu art. 47 §2 pkt 1 KPC wymagającym ławników) — TA analiza
-  NIE ZASTĘPUJE bezpośredniej weryfikacji KONKRETNYCH okoliczności
-  tej sprawy
-
-Potwierdzone w 5+ zgodnych źródłach co do SAMEGO składu sądu z
-ławnikami (arslege.pl [dosłowny tekst art. 47 §2 KPC],
-doradcawpomocyspolecznej.pl [sierpień 2024], dev.kssip.gov.pl
-[Krajowa Szkoła Sądownictwa i Prokuratury — Rząd 1-adjacent,
-publikacja akademicka z uchwałą SN III PO 42/64]) — POWIĄZANIE z
-sytuacją użytkownika to HIPOTEZA, nie potwierdzony fakt (bez
-dostępu do protokołu konkretnej rozprawy).
-```
-
-## CROSS-REFERENCJE
-- Terminy procesowe (w tym zawite) i konsekwencje uchybienia →
-  `prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP12-terminy.md`,
-  `chronologia-sprawy-v1/references/sprzecznosci-dat.md`
-- Pełnomocnictwo z urzędu, zwolnienie od kosztów sądowych → sprawdź
-  istniejące moduły dr-02/pisma-procesowe-v3 dot. kosztów sądowych
-- Przymus adwokacko-radcowski przed SN → sprawdź moduły dr-12
-  (sądownictwo) dot. postępowania przed Sądem Najwyższym
+| Sytuacja | Skill / Moduł |
+|---|---|
+| Skład sądu, liczba sędziów | `mod-sklad-sadu-liczba-sedziow` |
+| Apelacja z zarzutem nieważności, wniosek o przywrócenie terminu | `pisma-procesowe-v3` |
+| Terminy procesowe | `prawo-polskie-v2/krajowe/analizator-dowodow-v3/modules/MP12-terminy.md` |
+| Obrońcy w procesie karnym | DR-03 |
+| Orzecznictwo | `orzeczenia-sadowe-v2` |
