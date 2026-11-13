@@ -1,7 +1,7 @@
 # mod-KSH-spolki-handlowe
 
-**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/176 od 18.02.2027; 2026/187 art. 138 od 19.05.2028).
-**Inne akty:** KC (spółka cywilna, prokura) — t.j. Dz.U. 2026 poz. 795 | PrUp — t.j. Dz.U. 2026 poz. 913.
+**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/176 [OD 2027-02-18: 2026/176]; 2026/187 art. 138 [OD 2028-05-19: 2026/187] — art. 88; 2026/644 [OD 2030-01-10: 2026/644] — art. 402⁷, 421¹; **2026/1440 [OD 2026-12-03: 2026/1440]** — art. 238 § 1, 243 § 2, 300⁹⁵ § 2: zgoda i pełnomocnictwo w formie dokumentowej, przepis przejściowy art. 3).
+**Inne akty:** KC (spółka cywilna, prokura) — t.j. Dz.U. 2026 poz. 795 | PrUp — t.j. Dz.U. 2026 poz. 913 (zm. 2026/1206 [OD 2027-01-11: 2026/1206] — tylko art. 452, 456; art. 11 i 21 bez zmian).
 **Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.pdf`; zmiany po t.j. — ELI, „Akty zmieniające”.
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 

@@ -11,8 +11,7 @@ source_policy: "RZĄD 1 only"
 ## 1. Źródło i zasada
 
 Akt bazowy: ustawa z 15.09.2000 r. — Kodeks spółek handlowych.
-Tekst jednolity: **Dz.U. 2024 poz. 18**, status obowiązujący; przed każdą
-sprawą odczytaj w ELI także wszystkie późniejsze akty zmieniające.
+Tekst jednolity: **Dz.U. 2024 poz. 18**, status obowiązujący (zm. 2024/96 — wyrok TK; 2026/1440 [OD 2026-12-03: 2026/1440] — art. 238 § 1, 243 § 2, 300⁹⁵ § 2; 2026/176 [OD 2027-02-18: 2026/176] — akcje S.A./PSA/S.K.A.; 2026/187 [OD 2028-05-19: 2026/187] — art. 88; 2026/644 [OD 2030-01-10: 2026/644] — art. 402⁷, 421¹). Zakresy artykułów sprawdzone ze strukturą t.j. w ELI (`/struct`) 2026-11-13.
 
 RZĄD 1:
 - https://eli.gov.pl/eli/DU/2024/18/ogl
@@ -128,9 +127,13 @@ Mapa minimalna:
 Dla każdej czynności kapitałowej sprawdź szczególną procedurę, większość,
 prawo poboru, ogłoszenia i wpis do KRS w aktualnym tekście.
 
-## 9. Operacje transgraniczne — art. 584¹ i dalsze
+## 9. Operacje transgraniczne — art. 516¹–516¹⁹, 550²–550²², 580¹–580¹⁹
 
-Transgraniczne przekształcenie/podział wymagają:
+Łączenie transgraniczne: art. 516¹–516¹⁹; podział transgraniczny: art. 550²–550²²;
+przekształcenie transgraniczne: art. 580¹–580¹⁹. Art. 584¹–584¹³ to przekształcenie
+przedsiębiorcy (osoby fizycznej) w spółkę kapitałową — operacja krajowa.
+
+Każda operacja transgraniczna (łączenie, podział, przekształcenie) wymaga:
 - kwalifikacji dopuszczalności podmiotowej;
 - planu operacji i dokumentów;
 - ochrony wspólników/pracowników/wierzycieli;
@@ -139,7 +142,7 @@ Transgraniczne przekształcenie/podział wymagają:
 
 Nie stosuj procedury krajowej 1:1.
 
-## 10. Tytuł V — przepisy karne, art. 585–595
+## 10. Tytuł V — przepisy karne, art. 585–595²
 
 Przed kwalifikacją:
 - odczytaj aktualny katalog czynów w Tytule V;

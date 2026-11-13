@@ -1,6 +1,6 @@
 ---
 name: dr-02-prawo-cywilne-rodzinne-gospodarcze
-version: "3.110"
+version: "3.111"
 description: "Prawo cywilne, rodzinne i gospodarcze: KC, KPC, spadki, rodzina, spółki, upadłość, restrukturyzacja, windykacja i odpowiedzialność kontraktowa/deliktowa."
 dependencies:
   requires:
@@ -80,6 +80,7 @@ orzeczniczego; dobierz prawo do dat i faktów konkretnej sprawy.
 - Źródło podstawowe: ELI (RZĄD 1); ISAP — adres dla człowieka; LEX/Legalis, potem ArsLege — gdy aktu nie da się pobrać z RZĘDU 1 (awaria serwera, timeout, blokada) (kanon E-1…E-5: `prawo-polskie-v2/krajowe/shared/HIERARCHIA-ZRODEL.md`)
 - **Format modułu: wskazanie + kwalifikator.** Moduł podaje przepis (art./ust./pkt) i jego funkcję w jednym zdaniu, nie przepisuje brzmienia; brzmienie pobiera się z ELI kanałem hosta (MCP `isap_tekst`, odczyt `api.sejm.gov.pl/eli/acts/DU/<rok>/<poz>/text.pdf`, kopia lokalna aplikacji). Kwalifikator sprawdzony z t.j. w ELI, z datą.
 - **Jednostki uchylone:** kwalifikator mówi, co obowiązuje po uchyleniu (np. „wyłącznie organizacja z pkt 2; pkt 1, 3, 4 uchylone — Prezes UOKiK nie ma legitymacji”), nie tylko „uchylony”. Powołanie uchylonej jednostki bez tej informacji = błąd (kontrola `check_uchylone.py`).
+- **Wdrażanie i utrzymanie modułu: `audyt-systemu-v4/references/METODYKA-MODULY-DR.md` (W-1…W-7)** — t.j., nowelizacje po t.j., jednostki uchylone, przepisy przejściowe, zmiany z datą przyszłą ze znacznikiem `[OD RRRR-MM-DD: RRRR/poz]`; po wejściu w życie zmiana staje się brzmieniem podstawowym („w brzmieniu od …”). Kontrola: `check_uchylone.py`, `check_nowelizacje.py`. Zmiany nadchodzące i przepisy czasowe: `prawo-polskie-v2/krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md` (`JUR:rejestr-zmian-w-czasie`).
 
 ## DEFINICJE — prawo-polskie-v2/krajowe/shared/definicje/ (bezpośrednie, lazy loading per temat)
 

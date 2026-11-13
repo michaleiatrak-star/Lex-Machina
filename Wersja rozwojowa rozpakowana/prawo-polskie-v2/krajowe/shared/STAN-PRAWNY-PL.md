@@ -19,6 +19,12 @@ ontologii ELI; ten moduł mówi, jak nazywa je i publikuje prawo polskie.
 | źródła pomocnicze | LEX, Legalis (komentarze, wersje historyczne) | tylko przy braku dostępu do aktu lub komentarza |
 | sądy najwyższe dla hierarchii orzeczeń | SN, NSA, TK (+ TSUE, ETPC) | `JUR:orzecznictwo-hierarchia` |
 
+## Rejestr zmian w czasie
+
+Zmiany z datą przyszłą i przepisy czasowe (przejściowe, dostosowujące, terminy) aktów powoływanych w modułach
+DR: `JUR:rejestr-zmian-w-czasie`. Przed KROKIEM T-2 sprawdź wiersz aktu; rejestr skraca odczyt, nie zastępuje
+brzmienia z ELI.
+
 ## Kontrola w piśmie (brzmienie PL)
 
 ```text

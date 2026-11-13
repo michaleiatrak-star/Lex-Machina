@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 concurrency:
   group: tj-eli
@@ -44,19 +45,49 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check pyyaml python-docx
 
       - name: Aktualizacja t.j. z ELI
-        id: tj
         shell: bash
         run: |
           set -euo pipefail
           python3 scripts/aktualizuj_tj.py --raport "$RUNNER_TEMP/raport.md"
-          if git diff --quiet; then
-            echo "zmiany=0" >> "$GITHUB_OUTPUT"
+
+      # Monitoring modułów DR (METODYKA-MODULY-DR W-2, W-5, W-6): nowelizacje po t.j.
+      # nieodnotowane w module, zmiany z datą przyszłą i te, które właśnie weszły w życie.
+      # Wynik w jednym zgłoszeniu aktualizowanym codziennie; nie blokuje aktualizacji t.j.
+      - name: Monitoring zmian w aktach modułów DR
+        shell: bash
+        run: |
+          set -uo pipefail
+          python3 "Wersja rozwojowa rozpakowana/audyt-systemu-v4/scripts/check_nowelizacje.py" \
+            --root "Wersja rozwojowa rozpakowana" --tylko-wskazania \
+            --rejestr "Wersja rozwojowa rozpakowana/prawo-polskie-v2/krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md" \
+            --raport "$RUNNER_TEMP/monitoring.md" > "$RUNNER_TEMP/monitoring.txt" 2>&1
+          KOD=$?
+          tail -5 "$RUNNER_TEMP/monitoring.txt"
+          TYTUL="Monitoring zmian w aktach modułów DR"
+          NR=$(gh issue list --state open --search "\"$TYTUL\" in:title" --json number -q '.[0].number' 2>/dev/null || true)
+          # Zgłoszenie żyje, gdy są znaleziska albo zmiany z datą przyszłą.
+          if [ "$KOD" = "0" ] && ! grep -q '^| 20' "$RUNNER_TEMP/monitoring.md" && [ -z "$NR" ]; then
+            exit 0
+          fi
+          if [ -n "$NR" ]; then
+            gh issue edit "$NR" --body-file "$RUNNER_TEMP/monitoring.md"
+            # Alarm tylko dla zmian, które weszły w życie i czekają na wdrożenie (W-6).
+            if grep -qE '^(ZMIANA_WESZLA|WESZLA_PO_PRZEGLADZIE)' "$RUNNER_TEMP/monitoring.txt"; then
+              gh issue comment "$NR" --body "$(date -u +%F): zmiany weszły w życie — wdrożyć jako brzmienie obowiązujące (METODYKA-MODULY-DR W-6). $(grep -E '^(ZMIANA_WESZLA|WESZLA_PO_PRZEGLADZIE)' "$RUNNER_TEMP/monitoring.txt" | head -20)"
+            fi
           else
-            echo "zmiany=1" >> "$GITHUB_OUTPUT"
+            gh issue create --title "$TYTUL" --body-file "$RUNNER_TEMP/monitoring.md"
           fi
 
+      # Zmiana t.j. albo rejestru zmian w czasie (wiersze wchodzące w życie znikają) -> PR.
+      - name: Zmiany do PR
+        id: zm
+        shell: bash
+        run: |
+          if git diff --quiet; then echo "zmiany=0" >> "$GITHUB_OUTPUT"; else echo "zmiany=1" >> "$GITHUB_OUTPUT"; fi
+
       - name: Regresja
-        if: steps.tj.outputs.zmiany == '1'
+        if: steps.zm.outputs.zmiany == '1'
         id: regresja
         shell: bash
         run: |
@@ -67,13 +98,15 @@ jobs:
           tail -40 "$RUNNER_TEMP/regresja.txt"
 
       - name: PR do akceptacji
-        if: steps.tj.outputs.zmiany == '1'
+        if: steps.zm.outputs.zmiany == '1'
         shell: bash
         run: |
           set -euo pipefail
           DZIEN=$(date -u +%F)
           {
             cat "$RUNNER_TEMP/raport.md"
+            echo
+            cat "$RUNNER_TEMP/monitoring.md" 2>/dev/null || true
             echo
             if [ "${{ steps.regresja.outputs.kod }}" = "0" ]; then
               echo "Regresja: PASS."

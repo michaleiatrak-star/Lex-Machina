@@ -1,6 +1,6 @@
 ---
 name: prawo-polskie-v2
-version: "6.90"
+version: "6.91"
 type: domain-router
 status: production
 compatibility: "live_web_lookup, cross_skill_file_read"
@@ -10,7 +10,8 @@ dependencies:
     - shared
   # 2026-09-27e: jawna zależność (każdy skill systemu korzysta z `shared`); pole czytane przy imporcie z marketplace
 changelog: |
-  Wersja bieżąca: 6.90 (2026-11-13): mod-FA-founders: odesłanie JDG / działalność nierejestrowana → DR-02 mod-prawo-przedsiebiorcow
+  Wersja bieżąca: 6.91 (2026-11-13): REJESTR-ZMIAN-W-CZASIE (JUR:rejestr-zmian-w-czasie): zmiany z datą przyszłą (tabela generowana z ELI, wiersz znika w dniu wejścia w życie) i przepisy czasowe z okresem Od–Do (2026/1440 art. 3; 2026/176 art. 28, 29, 31–34 — z treści nowelizacji w ELI 2026-11-13); STAN-PRAWNY-PL: odesłanie przed KROKIEM T-2; JURYSDYKCJA: nowy klucz
+  6.90 (2026-11-13): mod-FA-founders: odesłanie JDG / działalność nierejestrowana → DR-02 mod-prawo-przedsiebiorcow
   6.89 (2026-11-13): nowe t.j. (ELI 2026-11-13): Prawo przedsiębiorców Dz.U. 2026 poz. 1484 (zastępuje 2025/1480; obejmuje 2025/1795, 1826, 2026/507), KAS Dz.U. 2026 poz. 1492 (zastępuje 2025/1131; obejmuje 2026/1281) — ROUTING-MAP, ISAP-METRYKI-AKTOW, DEF-PODATKOWE, DEF-PODMIOTY-WLASNOSC, leksykon ORKA-BAS, mod-FA-founders; ROUTING-MAP: ustawa antymobbingowa 2026/1046 opisana jako ustawa zmieniająca, nie t.j.
   6.88 (2026-11-13): konektory MCP po zgłoszeniu ActiFlow: eurlex_tekst (treść aktu UE z Cellar, artykuł, domyślnie najnowsza konsolidacja); eurlex_lookup bez fałszywej daty końca (MAX z dat Cellar, data sprzeczna ze statusem pominięta), tytul_aktu bez „- Deklaracja”, konsolidacja_najnowsza i tekst_url_cellar; CBOSA: awaria kanału zawsze ERROR z przyczyną (kod, etap DNS/TCP/TLS/HTTP, IP, retryable) i kanałem zastępczym, cbosa_diagnoza, User-Agent z LEX_CBOSA_USER_AGENT; isap_lookup: „ustawa o …” rozpoznaje akt bazowy.
   6.87 (2026-11-12): HIERARCHIA-ZRODEL i PRAWO-HARDGATE-ORZECZENIA: orzeczenia odczytane na portalu samego sądu dyscyplinarnego (wsd.adwokatura.pl, wsd.kirp.pl, nil.org.pl/orzeczenia) = RZĄD 2A, jak orzeczenia sądów z ich portali.
@@ -23,7 +24,6 @@ changelog: |
   6.72 (2026-10-20, PROBE-2026-10-21): routing błyskawiczny DR-02: uprowadzenie / wywiezienie dziecka za granicę (z DR-14 przy elemencie zagranicznym)
   6.65 (2026-10-17c, AUDYT-2026-10-17c): ROUTING-MAP: rozporządzenie MS w sprawie siedzib i obszarów właściwości sądów powszechnych (t.j. Dz.U. 2026 poz. 492) → DR-12 mod-wlasciwosc-miejscowa-sadow-powszechnych.
   6.64 (2026-10-17b, AUDYT-2026-10-17b): ROUTING-MAP: ZZ — ⏳ zm. 2026/1340 od 30.10.2026; nowy wiersz ustawy o informowaniu pracowników (2006/550 + 2026/1340); nowy wiersz ustawy o ochronie i pomocy dla pokrzywdzonego i świadka (t.j. 2026/1306). ELI 2026-10-17.
-  6.63 (2026-10-17a, AUDYT-2026-10-17a): ROUTING-MAP: KPW — nowy t.j. Dz.U. 2026 poz. 1336 (obwieszczenie z 2.10.2026, ogłoszone 15.10.2026; stan prawny na 27.09.2026; obejmuje Dz.U. 2025 poz. 1178, 1661, 1814, 1818, 1872 i 2026 poz. 473; brak zmian po t.j. — ELI 2026-10-17) (wiersz KPW i wiersz grzywna/mandat).
 ---
 
 > **Universal runtime:** przed wykonaniem zastosuj kanoniczny `shared/UNIVERSAL-RUNTIME-ADAPTER.md` z osobnego skilla `shared`. Lokalna sekcja adaptera poniżej jedynie go doprecyzowuje.
