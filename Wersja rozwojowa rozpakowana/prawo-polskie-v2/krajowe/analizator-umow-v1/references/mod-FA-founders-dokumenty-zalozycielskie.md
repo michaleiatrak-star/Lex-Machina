@@ -396,7 +396,7 @@ sprawdź DODATKOWO:
 | PCC od umowy spółki, opodatkowanie form działalności | DR-06 → moduły PIT/CIT/PCC |
 | Rejestracja w KRS | DR-02/`mod-ustawa-KRS-rejestr-sadowy` |
 | Spór między wspólnikami — pismo procesowe | `pisma-procesowe-v3` |
-| Rejestracja JDG / działalność nierejestrowana | DR-02/`mod-KSH-spolki-handlowe` (sekcja "FORMY DZIAŁALNOŚCI") |
+| Rejestracja JDG / działalność nierejestrowana | DR-02/`mod-prawo-przedsiebiorcow` |
 
 ---
 

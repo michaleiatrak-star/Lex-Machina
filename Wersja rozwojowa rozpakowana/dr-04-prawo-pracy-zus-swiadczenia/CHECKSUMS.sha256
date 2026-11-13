@@ -1,7 +1,7 @@
 4c7d1c018baac54fdf0f545877eefbc45e3bfb622b4e699d6db77d08aab8c4ec  ./MAPA-AKTOW.md
 610a40a169dbcbbd00256dec4cf2b64ca65de6f5ed2e898fb6f450ed992024a5  ./MAPA-POKRYCIA.md
 a986dcd31efdd096cf4b443546167244d8a775903ead547b5efd34c80f594660  ./PORTABILITY-MANIFEST.md
-ea73ff91bdde9349d9dabcb928bc444ff4ff2481c3119f081a261b020d1101f2  ./SKILL.md
+0cc88700846c1addda84798d93d0f7ce0487fc2c4583c7a5519a2b5e6d6ecc24  ./SKILL.md
 47051ab8dbef53d8b88099b73b2ef0aa23b5d25890379654938526598bbafd37  ./agents/openai.yaml
 9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91  ./assets/icon.svg
 f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-FUS-uzupelnienie-pokrycia-2026.md
@@ -11,7 +11,7 @@ f15d0a304001f9eae8cbe1a398bbd535cfacbca9ed264ff11b65137dbb738860  ./modules/mod-
 ee85d428330c8a1a101a9d29bc497466a7f53fbae8b02d1b709caa2195128817  ./modules/mod-KP-dzial-V-XIV-odpowiedzialnosc-materialna-przedawnienie.md
 2b9c82a4639feaeae7f1722b72f454218ce6311a83a383544fc49cfd987473b0  ./modules/mod-KP-dzial-VI-czas-pracy.md
 067e22f29f0293730e818cdaecb85c2dd29cb4240507dc1357fea628d5cb6c05  ./modules/mod-KP-dzial-VII-urlopy-pracownicze.md
-3585793a54306e8ae3001bb6a42a9052e17378a509c4141dad572ea257dc9907  ./modules/mod-KP-dzial-VIII-rodzicielstwo.md
+05384c7ebd5da667ca9d1b4b96c542aea4c993cbf87541f2a9c5e6c45a0fa8d3  ./modules/mod-KP-dzial-VIII-rodzicielstwo.md
 c45477f5e8ab8216ae9a4ee050cadb7b9515695353018c2709a4119fcb8b1e49  ./modules/mod-KP-konflikt-interesow-rodzina-nepotyzm.md
 bf74110cdad402837b008ab04d2959615aaad5d82ae5509cc2c3076312e2e28a  ./modules/mod-KP-mobbing-dyskryminacja.md
 70a1b210d5e08ccf3ba12b4dd652d28f7ff637fe6a009c871abb2639b81e2ce7  ./modules/mod-KP-naduzycia-pracodawcy-limity-kary-degradacja.md
@@ -48,5 +48,5 @@ ef30f97173a7709a425c054aa2d32bfdf314505cf0aefadff7661d6e2c05a51e  ./modules/mod-
 ef83da86f346814a8b673d20401a9bca3eff8636744f8a32aad7f3eff2cf7acb  ./modules/mod-ustawa-zwolnienia-grupowe.md
 1816bbf2471a026093115094e1b41e669adc3fcfc639fd691435f79f98aa5a4a  ./modules/mod-wypadek-przy-pracy-choroba-zawodowa.md
 00a9823645fab9dd42ea700d96e101a7b581e35d78423142d8c3a68dfa914ec0  ./modules/mod-zwolnienia-grupowe-current-state-COV.md
-5cb336b6af3fde50f9562e0c2b94ca846dc181e7c6fee27a9f7bf62269b6a136  ./references/CHANGELOG.md
+47191f066f917b77dee1fc52d2001d147662129544cd85360c78224926e056c3  ./references/CHANGELOG.md
 524575362b60f3d2eeb1b219131da9540142ca27bf15bcd7e46e31618e6ccc06  ./references/HISTORIA-ZMIAN-PLIKOW.md

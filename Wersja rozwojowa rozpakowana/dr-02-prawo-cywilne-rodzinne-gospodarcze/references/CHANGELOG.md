@@ -1,5 +1,6 @@
 # CHANGELOG — dr-02-prawo-cywilne-rodzinne-gospodarcze
 
+- 3.110 (2026-11-13): format wskazanie + kwalifikator (ELI 2026-11-13): mod-ustawa-UZNK 36,5→8,4 KB i mod-KSH-spolki-handlowe 46,4→11,8 KB; poprawione błędy parafraz (art. 205 § 1/373 § 1 reprezentacja łączna, art. 17 KSH, art. 527, 213, 300³, 528 § 1 S.K.A.; UZNK art. 19 ust. 1 pkt 1 uchylony, 17a ust. 2, 10 ust. 2, 23 ust. 3); SKILL: reguła formatu i jednostek uchylonych; kontrola przedsiębiorcy → mod-wekslowe-kontrola-przedsiebiorcy-koncesje
 - 3.109 (2026-11-13): Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (ELI 2026-11-13; obwieszczenie 3.11.2026, stan 28.10.2026; obejmuje 2025/1795, 1826, 2026/507): MAPA-AKTOW, MAPA-POKRYCIA, mod-prawo-przedsiebiorcow, mod-Prawo-przedsiebiorcow-current-state-COV (linki ELI), mod-KSH
 - 3.108 (2026-11-11, ELI 2026-11-11): MAPA-AKTOW: ustawa deweloperska — t.j. Dz.U. 2026 poz. 880 i zmiana po t.j. 2026/1077 (art. 19b ust. 1, 2a–2b, od 11.11.2026); moduł bez zmian (art. 19b nieomawiany).
 - 3.107 (2026-11-11, LEGAL GAUNTLET v3 E5): mod-KRO-rodzinne: twarda bramka dobra dziecka (MOD-DOBRO-DZIECKA) w sprawach o władzę rodzicielską, kontakty, miejsce pobytu i pieczę.

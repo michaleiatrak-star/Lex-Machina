@@ -86,7 +86,7 @@
 ⛔ OPŁATA: reżim opłat od wniosku o WIS był nowelizowany (SLIM VAT 3
   m.in. w zakresie opłaty podstawowej). ⛔ NIE podawaj kwoty z pamięci
   ani z tego modułu — sprawdź aktualny stan na podatki.gov.pl
-  i w art. 42d/42e ISAP.
+  i w art. 42e (opłata za badania/analizy; art. 42d uchylony) w ELI.
 ```
 
 ---

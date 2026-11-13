@@ -46,7 +46,7 @@
 | art. 17f | BIG: wierzyciel (ust. 1) i biuro (ust. 2) | ustawa z 9.04.2010 o udostępnianiu informacji gospodarczych |
 | art. 17g | nieuzasadnione wydłużanie terminów zapłaty | katalog otwarty; `mod-transakcje-handlowe-opoznienia` |
 | art. 17h | platformy i wyszukiwarki — naruszenie rozp. (UE) 2019/1150 | legitymacja szczególna art. 19 ust. 3; wyłączone z art. 19 ust. 1 |
-| art. 17b, 17e, 21, 24b | uchylone | nie powołuj |
+| art. 17b, 17e, 21, 24b | uchylone | nie powołuj; skutek opisany przy przepisie, który zastąpił (jeśli jest) |
 
 ---
 
@@ -59,7 +59,7 @@
 | art. 18 ust. 2 | orzeczenie o wyrobach, opakowaniach, materiałach (np. zniszczenie) | na wniosek uprawnionego |
 | art. 18 ust. 3–5 | tajemnica przedsiębiorstwa: publikacja wyroku, wynagrodzenie zamiast zakazu, ryczałt licencyjny | ust. 4 — przesłanki kumulatywne |
 | art. 18a | odwrócony ciężar dowodu prawdziwości oznaczeń i reklamy | przy czynach „wprowadzenia w błąd” (art. 10, 14, 16) |
-| art. 19 | legitymacja organizacji przedsiębiorców do roszczeń z art. 18 ust. 1 pkt 1–3 i 6 | ust. 1 pkt 1, 3, 4 uchylone; ust. 2 wyłączenia; ust. 3 (art. 17h) i lista ministra art. 19a–19e |
+| art. 19 | poza poszkodowanym przedsiębiorcą roszczenia z art. 18 ust. 1 pkt 1–3 i 6 ma **wyłącznie** krajowa lub regionalna organizacja przedsiębiorców (ust. 1 pkt 2) | ust. 1 pkt 1, 3, 4 uchylone — Prezes UOKiK, rzecznik konsumentów i inni **nie mają** tej legitymacji; ust. 2: brak legitymacji organizacji przy art. 5–7, 11, 14, 15a, 17h; ust. 3: art. 17h (zaniechanie) i lista ministra art. 19a–19e |
 | art. 20 | przedawnienie | ust. 1: 3 lata, osobno dla każdego naruszenia; ust. 2: szkoda → art. 442¹ KC; ust. 3: prawo konkurencji; ust. 4: tajemnica + przestępstwo |
 | art. 22 | oczywiście bezzasadne powództwo — oświadczenie i szkoda pozwanego | instrument obrony pozwanego |
 

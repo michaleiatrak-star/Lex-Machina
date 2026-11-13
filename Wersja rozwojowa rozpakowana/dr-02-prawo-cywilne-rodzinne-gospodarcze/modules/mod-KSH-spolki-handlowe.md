@@ -1,746 +1,144 @@
 # mod-KSH-spolki-handlowe
 
-**Status:** moduł klasy kancelaryjnej — poziom DR-03
+**Akt:** KSH — t.j. Dz.U. 2024 poz. 18 (zm. 2024/96; 2026/176 od 18.02.2027; 2026/187 art. 138 od 19.05.2028).
+**Inne akty:** KC (spółka cywilna, prokura) — t.j. Dz.U. 2026 poz. 795 | PrUp — t.j. Dz.U. 2026 poz. 913.
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2024/18/text.pdf`; zmiany po t.j. — ELI, „Akty zmieniające”.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
-**Źródło weryfikacji:** KSH — Dz.U. 2024 poz. 18 t.j. ze zm. (w tym Dz.U. 2026 poz. 176) | PrUp — Dz.U. 2026 poz. 913 t.j. | Prawo przedsiębiorców — Dz.U. 2026 poz. 1484 t.j. | KC (spółka cywilna) — Dz.U. 2026 poz. 795 ze zm.
-**Data weryfikacji online:** 2026-06-05 (KSH/PrUp) · 2026-06-15 (Prawo przedsiębiorców, formy działalności, dokumenty założycielskie) · 2026-07-15 (nowelizacja Dz.U. 2026 poz. 176 — patrz sekcja niżej; koryguje wcześniejszą flagę F-6, która błędnie wskazywała "art. 130 (2026.187)" — poz. 187/2026 dotyczy w rzeczywistości zmian w ustawie o Policji, nie KSH)
-**ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
-**⚠️ KSH był wielokrotnie nowelizowany — przed każdą sprawą weryfikuj aktualny t.j. w ISAP.**
-
----
-
-## NOWELIZACJA 2026 — REJESTR AKCJONARIUSZY I DEMATERIALIZACJA AKCJI (Dz.U. 2026 poz. 176)
-
-```
-Ustawa z dnia 23 stycznia 2026 r. o zmianie ustawy – Kodeks spółek handlowych
-oraz niektórych innych ustaw. Uchwalona przez Sejm, podpisana przez Prezydenta
-12.02.2026, ogłoszona w Dz.U. 17.02.2026 (poz. 176).
-
-WEJŚCIE W ŻYCIE (⛔ dwa różne terminy — nie mylić):
-  → WIĘKSZOŚĆ przepisów: 18.02.2027 (12 miesięcy od ogłoszenia)
-  → WYJĄTEK — przedłużenie mocy dowodowej dokumentu akcji: już od 28.02.2026
-
-CO SIĘ ZMIENIA (dotyczy S.A., S.K.A., prostej spółki akcyjnej, spółki europejskiej):
-  1. Przedłużenie okresu ochronnego dokumentu akcji o kolejne 2 lata — pierwotny
-     5-letni okres z dematerializacji 2021 r. (do 01.03.2026) wydłużony do
-     29.02.2028. Po tym terminie dokument akcji (papierowy) całkowicie traci
-     moc dowodową nawet między akcjonariuszem a spółką.
-  2. Całkowite zniesienie rozróżnienia akcji imiennych i na okaziciela —
-     uznane za nieaktualne w dobie powszechnej demateriaizacji akcji.
-  3. Nowe obowiązki informacyjne spółek i podmiotów prowadzących rejestr
-     akcjonariuszy — m.in. ujawnianie podmiotu prowadzącego rejestr,
-     zgłaszanie zawarcia/rozwiązania umowy o prowadzenie rejestru do sądu
-     rejestrowego (nowy art. 25da ustawy o KRS), przekazywanie szczegółowych
-     danych akcjonariuszy przy wykreśleniu spółki z rejestru.
-  4. Przepis przejściowy (transitional): S.A., S.K.A., proste spółki akcyjne
-     i spółki europejskie istniejące w dniu wejścia w życie ustawy muszą
-     dostosować umowy/statuty do zmian NIE PÓŹNIEJ niż w terminie 2 lat od
-     wejścia w życie — czyli praktyczny deadline dostosowawczy przypada
-     ok. 18.02.2029 (2 lata od głównego terminu wejścia w życie 18.02.2027).
-
-PRAKTYCZNE ZASTOSOWANIE:
-  → Sprawa dot. akcji na okaziciela sprzed dematerializacji, spór o moc
-    dowodową dokumentu → sprawdź, czy data zdarzenia mieści się w oknie
-    ochronnym (do 29.02.2028), nie w starym terminie (01.03.2026).
-  → Doradztwo dla S.A./S.K.A. o dostosowaniu statutu → przypomnij o
-    dwuletnim terminie dostosowawczym z Art. 34 ustawy nowelizującej.
-  → NIE dotyczy sp. z o.o. ani spółek osobowych (dotyczy wyłącznie spółek
-    akcyjnych/kapitałowych z akcjami: S.A., S.K.A., P.S.A., SE).
-
-ZWIĄZEK Z FLAGĄ F-5 (ustawa ESAP, Dz.U. 2026 poz. 644):
-  Flaga F-5 wskazywała, że omnibus ESAP dotyczy KSH "incydentalnie" — TEGO
-  konkretnego związku NIE udało się jednoznacznie potwierdzić w tej sesji
-  (brak źródła wprost łączącego poz. 644 ze zmianą treści KSH). F-5 pozostaje
-  OTWARTA jako osobna flaga — nie zamykać jej na podstawie tej sekcji.
-```
-
----
-
-## NOWELIZACJA 2026 — SPÓŁKA PARTNERSKA: PSYCHOLOG DODANY DO KATALOGU ZAWODÓW (art. 88 KSH, zmiana przez Dz.U. 2026 poz. 187)
-
-```
-⚠️ KOREKTA WCZEŚNIEJSZEJ FLAGI F-6: flaga błędnie wskazywała "art. 130
-(2026.187)". Po weryfikacji źródłowej: Dz.U. 2026 poz. 187 to ustawa z dnia
-23 stycznia 2026 r. o zawodzie psychologa oraz samorządzie zawodowym
-psychologów — akt SAMODZIELNY (nie nowelizacja KSH wprost), który przy
-okazji (jako jeden z ok. 20 zmienianych aktów towarzyszących) zmienia
-ART. 88 KSH, NIE art. 130. Art. 130 KSH dotyczy zupełnie czego innego
-(reprezentacja w spółce komandytowej) i nie ma związku z tą nowelizacją.
-
-CO SIĘ ZMIENIA:
-  Art. 88 KSH (katalog zawodów uprawnionych do bycia partnerem w spółce
-  partnerskiej) rozszerzony o zawód PSYCHOLOGA — analogicznie jak
-  wcześniej rozszerzano go o inne zawody zaufania publicznego (adwokat,
-  aptekarz, architekt, biegły rewident, diagnosta laboratoryjny,
-  fizjoterapeuta, inżynier budownictwa, lekarz, notariusz, pielęgniarka,
-  położna, radca prawny, rzecznik patentowy, rzeczoznawca majątkowy,
-  tłumacz przysięgły i in.).
-
-WEJŚCIE W ŻYCIE: powiązane z wejściem w życie ustawy o zawodzie psychologa
-  — sprawdź aktualny stan w ELI (RZĄD 1) przed powołaniem (ustawa główna miała
-  różne terminy wejścia w życie dla różnych przepisów, w tym część
-  przepisów odroczona o 2 lata i 3 miesiące od ogłoszenia).
-
-PRAKTYCZNE ZASTOSOWANIE:
-  → Zakładanie spółki partnerskiej przez psychologów (np. wspólna praktyka
-    psychoterapeutyczna/diagnostyczna) → od wejścia w życie tego przepisu
-    jest to prawnie dopuszczalne na tych samych zasadach co inne wolne
-    zawody w art. 88 KSH.
-  → Sprawdź w ELI (RZĄD 1), czy przepis już obowiązuje w dacie zdarzenia w sprawie
-    klienta (możliwe długie vacatio legis głównej ustawy o zawodzie
-    psychologa).
-```
+Powiązane moduły: organy sp. z o.o. `mod-KSH-organy-spolki-zoo`; spółki osobowe i RN `mod-KSH-spolki-osobowe-rada-nadzorcza`; obrona przed przejęciem `mod-KSH-wrogie-przejecie-obrona-bialy-rycerz`; uzupełnienia `mod-KSH-uzupelnienie-pokrycia-2026`.
 
 ---
 
 ## FAZA 0 — INTAKE
 
 ```
-□ Jaki typ spółki: sp. z o.o. / S.A. / spółka osobowa / inna?
-□ Problem: rejestracja / zmiana umowy / odpowiedzialność zarządu /
-  uchwała / representacja / przekształcenie / fuzja / podział?
-□ Czy jest kwestia odpowiedzialności art. 299 KSH (sp. z o.o.)?
-□ Czy spółka jest niewypłacalna? → rozważ upadłość/restrukturyzację
-□ Jaka forma wymagana do czynności? (akt notarialny / forma pisemna / wpis do KRS)
-□ Jakie terminy obowiązują (zgłoszenie do KRS, wniosek o upadłość)?
+□ Typ spółki: jawna / partnerska / komandytowa / S.K.A. / sp. z o.o. / PSA / S.A.?
+□ Problem: założenie, zmiana umowy, reprezentacja, uchwała, odpowiedzialność zarządu (art. 299),
+  łączenie / podział / przekształcenie?
+□ Daty: uchwały, wiadomości o niej, ogłoszenia (spółka publiczna) — terminy art. 251, 252, 424, 425.
+□ Niewypłacalność? → PrUp art. 11, 21; DR-02 moduły PrUpad / PrRestr.
+□ Stan prawny na dzień zdarzenia: 2026/176 (akcje, od 18.02.2027), 2026/187 (art. 88, od 19.05.2028).
 ```
 
 ---
 
-## TYPY SPÓŁEK — KWALIFIKATOR ODPOWIEDZIALNOŚCI
+## TYPY SPÓŁEK — ODPOWIEDZIALNOŚĆ I FORMA UMOWY
 
-| Typ spółki | Odpowiedzialność wspólników/akcjonariuszy | Kluczowy przepis |
+| Spółka | Odpowiedzialność za zobowiązania | Forma umowy / statutu |
 |---|---|---|
-| Spółka jawna | Nieograniczona całym majątkiem (subsydiarnie) | art. 22, 31 KSH |
-| Spółka partnerska | Partner odpowiada za własne działania, nie partnerów | art. 95 KSH |
-| Spółka komandytowa | Komplementariusz: nieograniczona; komandytariusz: do sumy komandytowej | art. 111 KSH |
-| Spółka komandytowo-akcyjna (S.K.A.) | Komplementariusz: nieograniczona; akcjonariusz: brak odpowiedzialności osobistej | art. 125, 135 KSH |
-| Sp. z o.o. | Brak odpowiedzialności wspólników; zarząd: art. 299 KSH | art. 151 §4, 299 KSH |
-| Prosta spółka akcyjna (PSA) | Brak odpowiedzialności akcjonariuszy | art. 300¹ i n. KSH |
-| S.A. | Brak odpowiedzialności akcjonariuszy | art. 301 §5 KSH |
+| jawna | wspólnik: bez ograniczenia, solidarnie (art. 22 § 2), subsydiarnie (art. 31 § 1; pozew wcześniej — § 2) | pisemna pod rygorem nieważności (art. 23); wzorzec S24 (art. 23¹) |
+| partnerska | partner nie odpowiada za błędy zawodowe innych partnerów (art. 95 § 1) | pisemna pod rygorem nieważności (art. 92) |
+| komandytowa | komandytariusz do sumy komandytowej (art. 111), wolny w granicach wniesionego wkładu (art. 112) | akt notarialny (art. 106); S24 (art. 106¹) |
+| S.K.A. | akcjonariusz nie odpowiada (art. 135) | statut — akt notarialny |
+| sp. z o.o. | wspólnicy nie odpowiadają (art. 151 § 4); zarząd — art. 299 | akt notarialny (art. 157 § 2); S24 (art. 157¹) |
+| PSA | akcjonariusze nie odpowiadają (art. 300¹ § 4) | akt notarialny (art. 300⁶) |
+| S.A. | akcjonariusze nie odpowiadają | statut — akt notarialny (art. 301 § 2) |
 
-> ℹ️ S.K.A. i PSA dodane do tabeli 2026-06-15 dla kompletności (S.K.A. —
-> obecna w KSH od 2000; PSA — wprowadzona nowelizacją z 2019, w życie od
-> 1.07.2021, Dział Ia KSH art. 300¹–300¹³⁴).
+**Kapitał minimalny:** sp. z o.o. 5000 zł, udział ≥ 50 zł (art. 154 § 1–2); S.A. 100 000 zł, akcja ≥ 1 gr (art. 308 § 1–2); PSA kapitał akcyjny ≥ 1 zł, akcje bez wartości nominalnej (art. 300³ § 1, 300² § 3), wkład może być pracą lub usługami (art. 300² § 2).
 
----
+**Rada nadzorcza:** S.A. — obowiązkowa (art. 381); sp. z o.o. — obowiązkowa RN lub komisja rewizyjna, gdy kapitał > 500 000 zł i > 25 wspólników (art. 213 § 2); S.K.A. — obowiązkowa przy > 25 akcjonariuszach (art. 142 § 1). Grupa spółek (wiążące polecenia): art. 211¹ i n., w tym art. 213–214 (uchwała o wykonaniu / odmowie).
 
-## ODPOWIEDZIALNOŚĆ ZARZĄDU SP. Z O.O. (art. 299 KSH)
-
-> ⚠️ Brzmienie art. 299 KSH — weryfikuj w aktualnym tekście KSH w ELI (RZĄD 1).
-
-```
-ZASADA: Członek zarządu odpowiada osobiście za zobowiązania sp. z o.o.
-  gdy egzekucja z majątku spółki okazała się bezskuteczna.
-
-PRZESŁANKA UWOLNIENIA SIĘ (ciężar na zarządzie):
-  □ We właściwym czasie złożono wniosek o upadłość, LUB
-  □ Otwarto postępowanie restrukturyzacyjne / zatwierdzono układ, LUB
-  □ Niezgłoszenie wniosku o upadłość nastąpiło nie z winy członka zarządu, LUB
-  □ Wierzyciel nie poniósł szkody
-
-TERMIN ZŁOŻENIA WNIOSKU O UPADŁOŚĆ:
-  30 dni od dnia zaistnienia podstawy upadłości (art. 21 PrUp — Dz.U. 2026 poz. 913)
-  ⚠️ Termin — weryfikuj aktualny art. 21 PrUp w ELI (RZĄD 1).
-
-PRZEDAWNIENIE roszczenia z art. 299 KSH: 3 lata — weryfikuj orzecznictwo SN.
-```
+**Spółka partnerska — katalog zawodów:** art. 88; psycholog dodany przez art. 138 ustawy Dz.U. 2026 poz. 187 — w mocy od 19.05.2028 (art. 161 tej ustawy). Przed tą datą psycholog nie może być partnerem.
 
 ---
 
-## REPREZENTACJA SPÓŁKI
+## ODPOWIEDZIALNOŚĆ CZŁONKÓW ZARZĄDU SP. Z O.O. (art. 299)
 
-```
-Sp. z o.o. / S.A.:
-  Domyślnie: każdy członek zarządu samodzielnie
-  CHYBA ŻE: umowa/statut zastrzega reprezentację łączną
-  Prokura: prokurenci wpisani do KRS
-
-⚠️ Zawsze weryfikuj aktualny sposób reprezentacji w KRS (dane publiczne):
-  https://ekrs.ms.gov.pl lub https://rejestr.io
-```
-
----
-
-## UCHWAŁY ZGROMADZENIA WSPÓLNIKÓW / WALNEGO ZGROMADZENIA
-
-```
-Forma:
-  Zmiana umowy spółki → AKT NOTARIALNY
-  Zbycie nieruchomości spółki → AKT NOTARIALNY
-  Uchwały zwykłe → protokół pisemny (sp. z o.o.) lub notarialny (S.A.)
-  Brak formy = bezwzględna nieważność (art. 17 KSH)
-
-Zaskarżenie uchwały — CZTERY REŻIMY (nie jeden)
-✅ [VER] RZĄD 1 2026-09-12m, ponownie 2026-09-16 (F-189) — `Dz.U. 2024 poz. 18`.
-KROK 2C: `Dz.U. 2026 poz. 176` (w życie 18.02.2027) nie dotyka art. 251, 252, 424, 425.
-
-  Spółka            | Powództwo   | Krótszy termin             | Granica      | Podstawa
-  sp. z o.o.        | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 251
-  sp. z o.o.        | nieważność  | 6 miesięcy od wiadomości   | ⛔ 3 LATA    | art. 252 § 3
-  S.A. niepubliczna | uchylenie   | miesiąc od wiadomości      | 6 miesięcy   | art. 424 § 1
-  S.A. publiczna    | uchylenie   | miesiąc od wiadomości      | ⛔ 3 MIESIĄCE| art. 424 § 2
-  S.A. niepubliczna | nieważność  | 6 miesięcy od wiadomości   | ⛔ 2 LATA    | art. 425 § 2
-  S.A. publiczna    | nieważność  | ⛔ 30 dni od OGŁOSZENIA    | ⛔ ROK       | art. 425 § 3
-  (granice liczone od dnia powzięcia uchwały)
-
-  ⛔ Przeniesienie liczby między reżimami kosztuje rok (3 lata sp. z o.o. vs 2 lata S.A.).
-  ⛔ Spółka publiczna, nieważność — termin od OGŁOSZENIA uchwały, nie od wiedzy.
-  ⭐ Art. 252 § 4 i art. 425 § 4: upływ terminów NIE wyłącza podniesienia
-     ZARZUTU nieważności uchwały — powództwo przepada, zarzut nie.
-```
-
----
-
-## SCHEMAT: SPÓŁKA W TRUDNOŚCIACH
-
-```
-Trudności finansowe
-  ↓
-  [TEST NIEWYPŁACALNOŚCI — art. 11 PrUp — Dz.U. 2026 poz. 913]
-  Dłużnik utracił zdolność do wykonywania wymagalnych zobowiązań pieniężnych
-  (opóźnienie > 3 miesiące — domniemanie)
-  Zobowiązania pieniężne > majątek przez > 24 miesiące (osoby prawne)
-  ↓
-Restrukturyzacja (zachowanie przedsiębiorstwa)     Upadłość (likwidacja)
-  → postępowanie o zatwierdzenie układu (PZU)         → wniosek do sądu upadłościowego
-  → przyspieszone postępowanie układowe               → syndyk + masa upadłości
-  → postępowanie układowe                             → zgłoszenie wierzytelności
-  → postępowanie sanacyjne                            → plan spłaty (konsument)
-  ↓
-⚠️ Złóż wniosek o upadłość w terminie 30 dni! → inaczej odpowiedzialność z art. 299 KSH
-```
-
----
-
-## FORMY DZIAŁALNOŚCI GOSPODARCZEJ — PEŁNY PRZEGLĄD (NOWA SEKCJA 2026-06-15)
-
-> **Status:** sekcja NOWA — domyka pokrycie form prowadzenia działalności
-> w Polsce poza KSH (działalność nierejestrowana, JDG, spółka cywilna),
-> łącznie z kapitałami minimalnymi spółek KSH (poprzednia treść tej sekcji).
-> ✅ VER online 2026-06-15.
-
-### 0. Działalność nierejestrowana (Prawo przedsiębiorców, art. 5)
-
-```
-Podstawa: Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (obwieszczenie
-20.10.2025), art. 5 w brzmieniu OD 1.01.2026 wg nowelizacji Dz.U. 2025
-poz. 769 (ustawa z 25.07.2025 o uproszczeniach administracyjnych i wsparciu
-przedsiębiorczości, podpisana przez Prezydenta 21.08.2025)
-✅ VER: 2026-06-15
-
-WARUNKI (art. 5 ust. 1):
-□ osoba fizyczna
-□ przychód należny ≤ 225% minimalnego wynagrodzenia za pracę W ŻADNYM
-  KWARTALE (od 1.01.2026 — limit KWARTALNY, wcześniej był miesięczny 75%)
-  → 2026: ok. 10 813,50 zł/kwartał — WERYFIKUJ aktualną kwotę minimalnego
-    wynagrodzenia online, bo limit "podąża" za nią
-□ brak prowadzenia działalności gospodarczej w ostatnich 60 miesiącach
-□ działalność NIE wymaga koncesji/zezwolenia/wpisu do rejestru
-  działalności regulowanej
-
-PRZEKROCZENIE LIMITU (art. 5 ust. 3–4):
-→ działalność staje się działalnością gospodarczą OD DNIA przekroczenia
-→ obowiązek wpisu do CEIDG w terminie 7 dni od przekroczenia
-
-PRZYCHÓD NALEŻNY (art. 5 ust. 6): kwoty należne, NIEZALEŻNIE od faktycznego
-wpływu na rachunek, po wyłączeniu zwrotów/bonifikat/rabatów — liczy się
-data wymagalności (np. termin płatności faktury), nie data zapłaty.
-
-SKUTKI:
-- brak ZUS, brak zaliczek PIT w trakcie roku
-- obowiązek ewidencji sprzedaży + rozliczenie w PIT-36 (rubryka
-  "działalność nierejestrowana"), zasady ogólne (skala 12%/32%)
-- VAT: możliwe zwolnienie podmiotowe (limit obrotów, art. 113 ustawy o VAT
-  — weryfikuj aktualny próg) — przy zwolnieniu: faktura bez VAT + uproszczony
-  rejestr sprzedaży (art. 109 ust. 1 ustawy o VAT)
-- BRAK dokumentu założycielskiego — co najwyżej umowy cywilnoprawne
-  z klientami (zlecenie/dzieło) i regulamin świadczenia usług (jeśli online)
-```
-
-### 1. Jednoosobowa działalność gospodarcza (JDG / CEIDG)
-
-```
-Podstawa: Prawo przedsiębiorców (Dz.U. 2026 poz. 1484 t.j.)
-- rejestracja w CEIDG (Centralna Ewidencja i Informacja o Działalności
-  Gospodarczej) — bezpłatna, online (Profil Zaufany / e-dowód / podpis
-  kwalifikowany)
-- BRAK osobowości prawnej; przedsiębiorca = osoba fizyczna
-- odpowiedzialność: CAŁYM majątkiem, BEZ rozdzielenia od majątku
-  prywatnego (brak separacji jak w spółkach kapitałowych)
-- opodatkowanie: PIT (skala / podatek liniowy 19% / ryczałt ewidencjonowany
-  — wybór formy przy rejestracji lub do 20. dnia miesiąca następującego po
-  pierwszym przychodzie) + składki ZUS (weryfikuj aktualne stawki — Mały
-  ZUS Plus, ulga na start — online)
-- BRAK dokumentu założycielskiego w sensie korporacyjnym; opcjonalnie:
-  regulamin świadczenia usług / sprzedaży (jeśli działalność online, B2C
-  → patrz DR-02/mod-ustawa-prawa-konsumenta i analizator-umow-v1/J8)
-```
-
-### 1a. ⭐ KONTROLA PRZEDSIĘBIORCY (Rozdział 5 Prawa przedsiębiorców, art. 45-65) — dodane 2026-07-19
-
-> Odpowiedź na audyt pokrycia prawa gospodarczego — dotąd całkowita
-> luka, mimo praktycznego znaczenia dla KAŻDEGO przedsiębiorcy.
-
-```
-□ ZASADA: organ kontroli ZAWIADAMIA przedsiębiorcę o ZAMIARZE
-  wszczęcia kontroli PRZED jej rozpoczęciem
-□ TERMIN wszczęcia: NIE WCZEŚNIEJ niż po 7 DNIACH i NIE PÓŹNIEJ niż
-  przed upływem 30 DNI od doręczenia zawiadomienia
-  → jeśli kontrola NIE zostanie wszczęta w 30 dni — WYMAGANE ponowne
-    zawiadomienie
-  → NA WNIOSEK przedsiębiorcy — kontrola MOŻE zacząć się PRZED
-    upływem 7 dni (skrócenie na korzyść przedsiębiorcy)
-□ TREŚĆ zawiadomienia: oznaczenie organu, data/miejsce, oznaczenie
-  przedsiębiorcy, zakres PRZEDMIOTOWY kontroli, WSTĘPNA lista
-  dokumentów/informacji oczekiwanych, (przy kontroli PLANOWEJ)
-  informacja o KATEGORII RYZYKA, podpis osoby upoważnionej
-
-WYJĄTKI od obowiązku zawiadomienia (kontrola BEZ uprzedzenia):
-  □ Podstawa: ratyfikowana umowa międzynarodowa lub bezpośrednio
-    stosowane prawo UE
-  □ Kontrola NIEZBĘDNA dla przeciwdziałania przestępstwu/wykroczeniu
-    (w tym skarbowemu) lub zabezpieczenia dowodów jego popełnienia
-  □ Kontrola uzasadniona BEZPOŚREDNIM zagrożeniem życia/zdrowia/środowiska
-  □ Brak możliwości SKUTECZNEGO doręczenia przedsiębiorcy (nieznany
-    adres, doręczanie bezskuteczne/utrudnione)
-  □ Czynności zw. z pobieraniem PRÓBEK, OGLĘDZINAMI (w tym pojazdów)
-    lub POMIARAMI — mogą być wykonane PRZED upływem 7 dni (ale
-    oględziny w tym trybie NIE MOGĄ dotyczyć TREŚCI dokumentów)
-
-⭐ ZAKAZ PODWÓJNEJ KONTROLI TYCH SAMYCH KWESTII: książka kontroli
-  pozwala organowi ustalić, czy tożsame czynności NIE BYŁY już
-  wcześniej sprawdzane — urzędnicy CO DO ZASADY nie mogą dwukrotnie
-  badać tych samych zagadnień (wyjątki w art. 58 ust. 2)
-
-⭐ SPRZECIW PRZEDSIĘBIORCY (art. 59) — środek obrony w TRAKCIE kontroli:
-  □ TERMIN: 3 DNI ROBOCZE od wszczęcia kontroli (lub od wystąpienia
-    przesłanki sprzeciwu) — WYMAGA UZASADNIENIA, wnosi się NA PIŚMIE
-  □ DOTYCZY: konkretnych czynności kontrolnych wykonywanych z
-    naruszeniem przepisów (odesłanie do konkretnych artykułów: 48, 49,
-    50 ust. 1 i 5, 51 ust. 1, 54 ust. 1, 55 ust. 1-2, 58)
-  □ NIEDOPUSZCZALNY, gdy czynność była NIEZBĘDNA dla przeciwdziałania
-    przestępstwu/wykroczeniu (w tym skarbowemu) lub zabezpieczenia
-    dowodów
-  □ SKUTEK wniesienia: WSTRZYMANIE czynności kontrolnych organu (od
-    doręczenia zawiadomienia o sprzeciwie) ORAZ wstrzymanie BIEGU
-    CZASU TRWANIA kontroli (do zakończenia postępowania ws. sprzeciwu)
-  □ Organ MA 3 DNI ROBOCZE na rozpatrzenie — wydaje POSTANOWIENIE:
-    odstąpienie od czynności ALBO kontynuowanie
-  □ NIEROZPATRZENIE w terminie = RÓWNOZNACZNE z postanowieniem o
-    ODSTĄPIENIU od czynności (milczące rozstrzygnięcie NA KORZYŚĆ
-    przedsiębiorcy — analogia do milczącego załatwienia sprawy KPA)
-  □ Na postanowienie o KONTYNUOWANIU — ZAŻALENIE w 3 dni, rozpatrywane
-    w 7 dni — sprzeciw i zażalenie rozpatruje się WG PRZEPISÓW KPA
-  □ Mimo wniesienia sprzeciwu — organ MOŻE, POSTANOWIENIEM, zabezpieczyć
-    DOWODY związane z przedmiotem kontroli na czas rozpatrywania
-    sprzeciwu (sprzeciw nie "zamraża" wszystkiego bezwzględnie)
-
-□ INNE ZASADY: czynności kontrolne w OBECNOŚCI przedsiębiorcy/osoby
-  upoważnionej; prowadzenie w sposób SPRAWNY i możliwie NIEZAKŁÓCAJĄCY
-  funkcjonowania firmy (jeśli przedsiębiorca WSKAŻE NA PIŚMIE istotne
-  zakłócenie — organ musi to UZASADNIĆ w protokole)
-□ ODSZKODOWANIE: przedsiębiorca, który poniósł SZKODĘ wskutek kontroli
-  przeprowadzonej Z NARUSZENIEM przepisów — MA roszczenie odszkodowawcze
-
-Checklist praktyczny:
-□ Czy zawiadomienie zawiera WSZYSTKIE wymagane elementy i zachowano
-  termin 7-30 dni?
-□ Czy zachodzi jeden z WYJĄTKÓW uzasadniających kontrolę bez
-  zawiadomienia — jeśli TAK, sprawdź czy w protokole podano
-  UZASADNIENIE braku zawiadomienia (wymóg obligatoryjny)
-□ Czy dana kwestia NIE BYŁA już wcześniej kontrolowana (książka kontroli)
-□ Czy warto wnieść SPRZECIW — pamiętaj o terminie 3 DNI ROBOCZYCH i
-  wymogu UZASADNIENIA
-□ Czy kontrola nadmiernie ZAKŁÓCA działalność — rozważ pisemne
-  zgłoszenie tego faktu organowi
-```
-
-### 1b. ⭐ REGLAMENTACJA DZIAŁALNOŚCI — KONCESJA, ZEZWOLENIE, WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ (Rozdział 4 Prawa przedsiębiorców, art. 37-49) — dodane 2026-07-19
-
-```
-TRZY STOPNIE REGLAMENTACJI — OD NAJSUROWSZEGO DO NAJŁAGODNIEJSZEGO:
-
-1️⃣ KONCESJA — NAJBARDZIEJ RYGORYSTYCZNA forma
-   □ Dotyczy dziedzin o SZCZEGÓLNYM znaczeniu dla bezpieczeństwa
-     państwa/obywateli lub WAŻNEGO interesu publicznego
-   □ ZASADA SUBSYDIARNOŚCI (art. 37 ust. 1): koncesja wymagana
-     WYŁĄCZNIE, gdy działalności NIE MOŻNA wykonywać jako WOLNEJ ani
-     po zezwoleniu/wpisie do rejestru — koncesja to OSTATECZNOŚĆ
-   □ ⭐ KLUCZOWA CECHA ODRÓŻNIAJĄCA: organ koncesyjny MOŻE ODMÓWIĆ
-     udzielenia koncesji NAWET gdy przedsiębiorca formalnie SPEŁNIA
-     wszystkie wymogi — decyzja ma charakter UZNANIOWY (w
-     przeciwieństwie do zezwolenia/wpisu, gdzie spełnienie warunków
-     RODZI OBOWIĄZEK wydania pozytywnej decyzji)
-   □ FORMA: DECYZJA ministra właściwego ze względu na przedmiot
-     działalności (chyba że przepisy odrębne stanowią inaczej)
-   □ MOŻLIWA "PROMESA KONCESJI" — przyrzeczenie jej wydania, przed
-     pełnym spełnieniem wszystkich warunków (np. przed uzyskaniem
-     nieruchomości/sprzętu wymaganego dla działalności)
-   □ PRZYKŁADOWE DZIEDZINY: materiały wybuchowe/broń/amunicja, paliwa
-     i energia, ochrona osób i mienia, rozpowszechnianie programów
-     radiowych/telewizyjnych
-
-2️⃣ ZEZWOLENIE — pośredni stopień
-   □ DECYZJA administracyjna POTWIERDZAJĄCA spełnienie określonych
-     prawem WARUNKÓW — organ NIE MA swobody uznaniowej: spełnienie
-     warunków = OBOWIĄZEK wydania pozytywnej decyzji
-   □ Różni się od koncesji BRAKIEM elementu uznaniowości
-
-3️⃣ WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ — NAJŁAGODNIEJSZA forma
-   □ Przedsiębiorca SKŁADA WNIOSEK o wpis + OŚWIADCZENIE o spełnianiu
-     warunków (jako załącznik) — BEZ konieczności ich uprzedniego
-     WERYFIKOWANIA przez organ w formie decyzji
-   □ Rozstrzygnięcie ma formę ZAŚWIADCZENIA, NIE decyzji (organ
-     dokonuje jedynie CZYNNOŚCI MATERIALNO-TECHNICZNEJ wpisu, oparty
-     na OŚWIADCZENIU przedsiębiorcy — SPÓR DOKTRYNALNY, czy to w ogóle
-     forma "reglamentacji" sensu stricto, czy już coś innego —
-     odnotowany, ale nierozstrzygnięty w tej sesji)
-   □ Przedsiębiorca MUSI PRZECHOWYWAĆ dokumenty potwierdzające
-     spełnianie warunków — NA POTRZEBY ewentualnej KONTROLI (patrz
-     sekcja 1a)
-   □ REJESTRY są JAWNE — każdy może je przeglądać za pośrednictwem
-     prowadzącego je organu
-   □ PRZYKŁADOWE DZIEDZINY: prowadzenie ośrodka szkolenia kierowców,
-     pracowni psychologicznej dla instruktorów/egzaminatorów,
-     organizowanie kursów dla kierowców przewożących towary niebezpieczne
-
-KOLEJNOŚĆ PRAKTYCZNA: rejestracja PODSTAWOWA działalności (CEIDG dla
-  JDG / KRS dla spółki — patrz sekcje 1 i 3 wyżej) ZAWSZE POPRZEDZA
-  złożenie wniosku o koncesję/zezwolenie/wpis do rejestru regulowanego
-  — nie da się ubiegać o reglamentację BEZ uprzedniej rejestracji
-  podstawowej.
-
-Checklist praktyczny:
-□ Sprawdź NAJPIERW, czy planowana działalność w OGÓLE podlega
-  reglamentacji — większość działalności jest WOLNA
-□ Jeśli TAK — ustal, KTÓRY z trzech stopni ma zastosowanie (sprawdź
-  przepis SZCZEGÓLNY dla danej branży — Prawo przedsiębiorców określa
-  TYLKO ramy ogólne, konkretne wymogi są w odrębnych ustawach
-  branżowych)
-□ Przy KONCESJI — przygotuj klienta na MOŻLIWĄ odmowę mimo spełnienia
-  formalnych warunków (element uznaniowy) — rozważ wcześniej promesę
-□ Przy WPISIE do rejestru regulowanego — ZADBAJ o kompletną
-  dokumentację potwierdzającą warunki, przechowywaną NA WYPADEK
-  kontroli
-```
-
-### 2. Spółka cywilna
-
-```
-Podstawa: Kodeks cywilny art. 860–875 (Dz.U. 2026 poz. 795 ze zm.) — NIE
-KSH. Spółka cywilna NIE jest spółką handlową (KSH art. 1 §2 — katalog
-zamknięty: jawna, partnerska, komandytowa, komandytowo-akcyjna, sp. z o.o.,
-PSA, S.A. — spółki cywilnej tam NIE MA).
-
-- BRAK osobowości prawnej i BRAK zdolności prawnej samej spółki —
-  podmiotami praw i obowiązków są WSPÓLNICY (każdy wspólnik jest odrębnym
-  przedsiębiorcą wpisanym do CEIDG)
-- odpowiedzialność: SOLIDARNA, całym majątkiem wspólników (art. 864 KC)
-- DOKUMENT ZAŁOŻYCIELSKI: umowa spółki cywilnej — forma pisemna dla celów
-  dowodowych (ad probationem, art. 860 §2 KC), NIE wymaga aktu notarialnego
-- NIE wpisuje się do KRS — każdy wspólnik wpisany do CEIDG, spółka ma
-  własny NIP/REGON dla celów rozliczeniowych (VAT, ZUS pracowników)
-- typowe zastosowanie: mała działalność dwóch+ wspólników, niski próg
-  formalności — często etap PRZEJŚCIOWY przed przekształceniem w spółkę
-  handlową (np. sp. jawną) gdy biznes rośnie
-
-⏳ OD 1.11.2028 (Dz.U. 2026 poz. 507, art. 31 pkt 4; ✅ [VER] RZĄD 1
-2026-10-15, ELI):
-- art. 860 §3–4 KC (art. 2 ustawy 507): umowa spółki i inne czynności
-  dotyczące spółki mogą być dokonane na wzorach w systemie CEIDG, jeżeli
-  przepis ustawy tak stanowi; brzmienie zawarte już w t.j. KC 2026/795 —
-  do tej daty NIE stosować
-- CEIDG publikuje informację o spółce cywilnej (NIP, REGON, nazwa,
-  wspólnicy i reprezentacja, siedziba, PKD) — rozdz. 6a ustawy o CEIDG
-  (art. 42a i n.), na wniosek o publikację
-- przejście (art. 26 ustawy 507): wspólnik, który przed 1.11.2028 ma
-  we wpisie w CEIDG NIP/REGON spółki cywilnej, składa wniosek o rozpoczęcie
-  publikacji informacji o spółce cywilnej (art. 42b ust. 7 pkt 1 ustawy
-  o CEIDG) do 31.03.2029; od 1.04.2029 te numery są usuwane z wpisów
-  wspólników
-```
-
-### 3. Spółki handlowe (KSH) — kapitały minimalne (orientacyjne)
-
-> ⚠️ Kwoty minimalne — weryfikuj aktualne przepisy KSH w ELI (RZĄD 1) przed każdą sprawą.
-
-| Forma | Minimalny kapitał zakładowy |
+| Przepis | Kwalifikator |
 |---|---|
-| Spółki osobowe (jawna, partnerska, komandytowa, S.K.A. — wkład komplementariusza) | brak wymogu kapitałowego |
-| Sp. z o.o. | 5 000 zł (art. 154 §1 KSH — weryfikuj w ELI (RZĄD 1)) |
-| Prosta spółka akcyjna (PSA) | 1 zł (kapitał akcyjny, art. 300² §2 KSH — weryfikuj w ELI (RZĄD 1); brak tradycyjnego "kapitału zakładowego") |
-| S.A. (i S.K.A. — kapitał zakładowy akcjonariuszy) | 100 000 zł (art. 308 §1 KSH — weryfikuj w ELI (RZĄD 1)) |
-
-### PODSUMOWANIE — DROGA "OD NAJPROSTSZEJ DO NAJBARDZIEJ ZŁOŻONEJ"
-
-```
-Działalność nierejestrowana → JDG → spółka cywilna → spółka osobowa
-(jawna/partnerska/komandytowa/S.K.A.) → spółka kapitałowa (sp. z o.o./PSA/S.A.)
-
-Kluczowe osie różnic:
-1. Odpowiedzialność: osobista nieograniczona (nierejestrowana, JDG, cywilna,
-   jawna) → ograniczona/mieszana (komandytowa, S.K.A.) → brak odpow.
-   osobistej wspólników/akcjonariuszy (sp. z o.o., PSA, S.A. — ale art. 299
-   KSH dla zarządu sp. z o.o.)
-2. Rejestracja: brak (nierejestrowana) → CEIDG (JDG, wspólnicy spółki
-   cywilnej) → KRS (spółki handlowe)
-3. Opodatkowanie: PIT/ryczałt transparentny (nierejestrowana, JDG, cywilna,
-   spółki osobowe poza komandytową/S.K.A.) → CIT (sp. z o.o., PSA, S.A.,
-   komandytowa, S.K.A. — od 2021/2022 są podatnikami CIT, weryfikuj aktualny
-   stan w DR-06)
-4. Formalności: minimalne (nierejestrowana) → księgowość uproszczona
-   możliwa (JDG, cywilna na starcie) → pełna księgowość + sprawozdania
-   finansowe (spółki kapitałowe)
-5. Dokument założycielski: brak → brak → umowa spółki cywilnej → umowa
-   spółki (osobowe) → umowa spółki / statut (kapitałowe) — patrz sekcja
-   "DOKUMENTY ZAŁOŻYCIELSKIE I WEWNĘTRZNE" poniżej
-```
+| art. 299 § 1 | bezskuteczna egzekucja przeciwko spółce → solidarna odpowiedzialność członków zarządu |
+| art. 299 § 2 | przesłanki uwolnienia (ciężar na członku zarządu): wniosek o upadłość we właściwym czasie / otwarcie restrukturyzacji lub zatwierdzenie układu / brak winy / brak szkody wierzyciela |
+| art. 299 § 1–2 + TK | wyrok TK (skutek od 19.04.2023, przypis w t.j.): były członek zarządu może bronić się zarzutem nieistnienia wierzytelności stwierdzonej orzeczeniem wobec spółki — pobierz przypis z t.j. |
+| PrUp art. 11, 21 | niewypłacalność i termin na wniosek o upadłość — brzmienie z ELI (t.j. 2026/913) |
+| przedawnienie | brak przepisu szczególnego w art. 299 — ustal z KC i orzecznictwem SN (`orzeczenia-sadowe-v2`) |
 
 ---
 
-## DOKUMENTY ZAŁOŻYCIELSKIE I WEWNĘTRZNE (NOWA SEKCJA 2026-06-15)
+## REPREZENTACJA I PROKURA
 
-> Dla ANALIZY/REDAKCJI tych dokumentów → `analizator-umow-v1`, nowy moduł
-> `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-FA-founders-dokumenty-zalozycielskie.md` (J.20). Tu:
-> przegląd typów dokumentów i kiedy który jest właściwy/wymagany.
+| Przepis | Kwalifikator |
+|---|---|
+| art. 205 § 1 (sp. z o.o.), art. 373 § 1 (S.A.) | zarząd wieloosobowy, umowa/statut milczy → **dwóch członków zarządu łącznie albo członek z prokurentem** (nie każdy członek samodzielnie) |
+| art. 205 § 2, 373 § 2 | oświadczenia i doręczenia **do** spółki — wobec jednego członka zarządu lub prokurenta |
+| art. 17 § 1–3 | czynność bez **wymaganej ustawą uchwały** organu — nieważna (zgoda do 2 mies. po czynności, § 2); wymóg tylko z umowy/statutu — czynność ważna, odpowiedzialność zarządu (§ 3) |
+| KC art. 109¹ | prokura — pełnomocnictwo przedsiębiorcy wpisanego do CEIDG/KRS; forma pisemna pod rygorem nieważności (art. 109²) |
+| KC art. 109³ | wymagane pełnomocnictwo do poszczególnej czynności: zbycie przedsiębiorstwa, oddanie go do czasowego korzystania, zbywanie i obciążanie nieruchomości |
+| KC art. 109⁴–109⁶ | prokura łączna (także z członkiem zarządu — § 1¹), oddziałowa; prokury nie można przenieść |
+| KC art. 109⁷–109⁸ | odwołanie, wygaśnięcie, zgłoszenie do rejestru |
 
-### Tabela dokumentów wg formy
-
-| Forma | Dokument "konstytucyjny" | Forma prawna | Dokumenty wewnętrzne (fakultatywne/obowiązkowe wg KSH) |
-|---|---|---|---|
-| Działalność nierejestrowana | brak | — | brak |
-| JDG | brak | — | regulamin sprzedaży/usług (jeśli B2C online) |
-| Spółka cywilna | umowa spółki cywilnej | pisemna ad probationem (art. 860 §2 KC) | brak organów — wspólnicy prowadzą sprawy spółki |
-| Sp. jawna | umowa spółki jawnej | pisemna (forma elektroniczna dopuszczalna; S24 — wzorzec) | brak organów obligatoryjnych |
-| Sp. partnerska | umowa spółki partnerskiej | pisemna pod rygorem nieważności | regulamin wykonywania wolnego zawodu (jeśli wymaga ustawa zawodowa) |
-| Sp. komandytowa | umowa spółki komandytowej | akt notarialny (lub S24) | — |
-| S.K.A. | statut | akt notarialny | regulamin rady nadzorczej (obligatoryjna w S.K.A. przy >25 akcjonariuszach — weryfikuj art. 142 KSH) |
-| Sp. z o.o. | umowa spółki | akt notarialny (lub S24 — wzorzec uproszczony) | regulamin zarządu, regulamin rady nadzorczej/komisji rewizyjnej (jeśli powołane) |
-| PSA | umowa spółki | akt notarialny (lub S24) | regulamin zarządu / rady dyrektorów (system monistyczny — art. 300⁷³ i n. KSH), regulamin rady nadzorczej (jeśli system dualistyczny) |
-| S.A. | statut | akt notarialny | regulamin zarządu, regulamin rady nadzorczej, regulamin walnego zgromadzenia |
-
-> ℹ️ TERMINOLOGIA "umowa spółki" vs "statut": dla spółek osobowych i sp.
-> z o.o. dokument nazywa się "umową spółki"; dla S.A., PSA i S.K.A. —
-> "statutem". Różnica głównie terminologiczna/formalna, ale statut bywa
-> bardziej "instytucjonalny" (mniej zależny od tożsamości konkretnych
-> wspólników, łatwiej zbywalne akcje).
-
-### Founders' Agreement (umowa założycielska) — dokument NIEZALEŻNY od formy
-
-```
-✅ VER online 2026-06-15 (Legal Geek, RPMS, Creativa Legal i inne — zgodne
-źródła branżowe; brak regulacji ustawowej — dokument oparty na art. 353¹ KC,
-swoboda umów)
-
-CHARAKTER:
-- NIE jest tym samym co umowa spółki/statut — NIE tworzy odrębnego podmiotu,
-  NIE jest obligatoryjny
-- może istnieć RÓWNOLEGLE z umową spółki, regulując kwestie, których
-  wspólnicy nie chcą umieszczać w (publicznym, jawnym w KRS) dokumencie
-  spółki
-
-ETAPY ZASTOSOWANIA:
-1. PRZED rejestracją spółki (pre-formation) — substytut/zarys przyszłej
-   umowy spółki, gdy founderzy mają już plan, ale spółka jeszcze nie istnieje
-2. PRZY rejestracji — jako dokument UZUPEŁNIAJĄCY umowę spółki (szczególnie
-   przy S24, gdzie umowa spółki ma formę uproszczonego wzorca)
-3. W TRAKCIE działania spółki — doprecyzowanie/zmiana relacji między
-   wspólnikami (nowi wspólnicy, zmiana ról)
-4. PRZY ZAKOŃCZENIU współpracy — rozliczenie wypracowanych korzyści/praw
-
-TYPOWA TREŚĆ (minimum 9 elementów wg branżowych wzorców):
-□ podział udziałów/akcji (w tym zasady zmiany podziału)
-□ wkłady wspólników (pieniężne, niepieniężne, praca/usługi — PSA dopuszcza
-  wkład w postaci pracy/usług na kapitał akcyjny)
-□ role i obowiązki founderów (kto za co odpowiada operacyjnie)
-□ VESTING i REVERSE VESTING:
-  - vesting: prawo do udziałów "nabywane" w czasie (typowo 4 lata, 1 rok
-    cliff = brak nabycia przed upływem roku)
-  - reverse vesting: jeśli founder odchodzi przed końcem vestingu, spółka/
-    pozostali wspólnicy mogą odkupić jego NIEnabytą część
-□ własność intelektualna: przeniesienie praw IP wytworzonych przez
-  founderów na spółkę (kluczowe — bez tego spółka może NIE mieć praw do
-  własnego produktu! → patrz analizator-umow-v1/J9)
-□ wynagrodzenia founderów (czy i kiedy zaczynają, z jakiego budżetu)
-□ procedury decyzyjne (większości głosów, weto, sprawy wymagające zgody
-  wszystkich)
-□ zakaz konkurencji po odejściu (okres, zakres, ekwiwalent — patrz
-  prawo-polskie-v2/krajowe/analizator-umow-v1/references/zakaz-konkurencji.md)
-□ poufność (NDA) — zakres, okres, sankcje
-□ mechanizmy wyjścia/rozstania:
-  - lock-up (zakaz sprzedaży udziałów przez określony czas)
-  - prawo odkupu (od odchodzącego founder'a)
-  - shotgun clause (jedna strona proponuje cenę, druga musi sprzedać LUB
-    kupić po tej cenie)
-  - procedura przy sytuacji patowej (deadlock): rozmowy → mediacja →
-    arbitraż/sąd
-
-⚠️ PUŁAPKA PRAWNA: jeśli founders' agreement zawierany jest PRZED rejestracją
-spółki handlowej i strony dążą do wspólnego celu gospodarczego przez wkłady
-— może zostać zakwalifikowany jako UMOWA SPÓŁKI CYWILNEJ (art. 860 KC) ze
-wszystkimi tego skutkami (solidarna odpowiedzialność!), nawet jeśli strony
-tego nie chciały. REKOMENDACJA: zawrzeć w founders' agreement WYRAŹNE
-zastrzeżenie wyłączające zastosowanie przepisów o spółce cywilnej, jeśli
-strony nie chcą takiego skutku.
-
-KOLEJNOŚĆ DOKUMENTÓW PRZY WEJŚCIU INWESTORA (osobny etap, nie część FA):
-Founders' Agreement → (gdy pojawia się inwestor) → Term Sheet / LOI →
-Umowa inwestycyjna (reguluje m.in. powoływanie zarządu, prawa nadzorcze
-inwestora, exit plan) → SHA (umowa wspólników/akcjonariuszy, post-investment)
-→ patrz prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-MA-transakcje.md (MA.2 — LOI/Term Sheet,
-MA.4 — SHA)
-```
-
-### Regulaminy organów spółek kapitałowych — kiedy wymagane / fakultatywne
-
-```
-ZARZĄD (sp. z o.o., PSA, S.A.):
-- regulamin zarządu zwykle FAKULTATYWNY (chyba że umowa/statut wymaga) —
-  ustala podział kompetencji, kworum, sposób podejmowania uchwał zarządu,
-  reprezentację
-- weryfikuj: czy umowa spółki/statut PRZEWIDUJE obowiązek uchwalenia
-  regulaminu i KTO go uchwala (zarząd sam / zgromadzenie wspólników / RN)
-
-RADA NADZORCZA / RADA DYREKTORÓW:
-- sp. z o.o.: RN fakultatywna (poza wyjątkami ustawowymi — np. spółki
-  powyżej określonych progów, weryfikuj art. 213 KSH)
-- S.A.: RN OBLIGATORYJNA (art. 381 i n. KSH)
-- S.K.A.: RN obligatoryjna przy >25 akcjonariuszach (weryfikuj art. 142 KSH)
-- PSA: SYSTEM DUALISTYCZNY (zarząd + RN, jak w sp. z o.o./S.A.) ALBO
-  SYSTEM MONISTYCZNY (rada dyrektorów łącząca funkcje zarządcze i nadzorcze
-  — art. 300⁷³ i n. KSH) — wybór systemu w umowie spółki
-- regulamin RN/rady dyrektorów: tryb posiedzeń, kworum, kompetencje
-  nadzorcze, ew. delegowanie członków do indywidualnego nadzoru
-
-WALNE ZGROMADZENIE (S.A., PSA w wariancie z walnym):
-- regulamin walnego zgromadzenia: zwykle fakultatywny, reguluje organizację
-  obrad, sposób głosowania, prowadzenie protokołu
-
-⚠️ HIERARCHIA: statut/umowa spółki > regulamin organu. Regulamin NIE może
-być sprzeczny ze statutem/umową — w razie kolizji statut/umowa ma
-pierwszeństwo. Zmiana regulaminu zwykle wymaga niższego kworum/formy niż
-zmiana statutu (która wymaga aktu notarialnego — art. 255 §3, 430 §1 KSH —
-weryfikuj).
-```
+Weryfikacja aktualnej reprezentacji: odpis KRS (`krs_reprezentacja` / ekrs.ms.gov.pl).
 
 ---
 
-## ŁĄCZENIE, PODZIAŁ I PRZEKSZTAŁCANIE SPÓŁEK (Tytuł IV KSH, art. 491–584¹³)
+## UCHWAŁY — ZASKARŻANIE
 
-> ⛔ **NAPRAWA F-68, priorytet 1 (sesja 2026-08-15v):** dotąd całkowicie
-> nieobecne mimo rosnącego znaczenia praktycznego w transakcjach M&A —
-> ~94 artykuły kompletnie pustej luki. Weryfikacja wielosźródłowa:
-> lexlege.pl, arslege.pl, przepisy.gofin.pl, rp.pl (2024–2025).
+| Spółka | Powództwo | Termin od wiadomości | Termin graniczny | Przepis |
+|---|---|---|---|---|
+| sp. z o.o. | uchylenie | 1 miesiąc | 6 miesięcy od powzięcia | art. 251 |
+| sp. z o.o. | nieważność | 6 miesięcy | **3 lata** od powzięcia | art. 252 § 3 |
+| S.A. | uchylenie | 1 miesiąc | 6 miesięcy | art. 424 § 1 |
+| S.A. publiczna | uchylenie | 1 miesiąc | **3 miesiące** | art. 424 § 2 |
+| S.A. | nieważność | 6 miesięcy | **2 lata** | art. 425 § 2 |
+| S.A. publiczna | nieważność | **30 dni od ogłoszenia** | **1 rok** | art. 425 § 3 |
 
-**Struktura:** Dział I Łączenie się spółek (491–527), Dział II Podział
-spółek (528–550¹), Dział III Przekształcenia spółek (551–595).
-
-### ŁĄCZENIE SPÓŁEK (Dział I, art. 491–527)
-
-```
-KTO MOŻE SIĘ ŁĄCZYĆ (art. 491):
-□ Spółki kapitałowe mogą łączyć się między sobą ORAZ ze spółkami
-    osobowymi — ale spółka osobowa NIE MOŻE być spółką przejmującą ani
-    nowo zawiązaną
-□ Spółki osobowe mogą łączyć się między sobą WYŁĄCZNIE przez zawiązanie
-    spółki kapitałowej (lub przejęcie przez S.K.A.)
-□ NIE MOŻE łączyć się spółka w likwidacji, która rozpoczęła podział
-    majątku, ani spółka w upadłości
-
-DWIE METODY (art. 492 § 1):
-  1) ŁĄCZENIE PRZEZ PRZEJĘCIE (inkorporacja) — cały majątek spółki
-     przejmowanej przechodzi na spółkę przejmującą za udziały/akcje
-     wydawane wspólnikom przejmowanej
-  2) ŁĄCZENIE PRZEZ ZAWIĄZANIE NOWEJ SPÓŁKI (fuzja/konsolidacja) —
-     majątek WSZYSTKICH łączących się spółek przechodzi na nowo
-     zawiązaną spółkę kapitałową lub S.K.A.
-
-□ Dopłaty gotówkowe dopuszczalne obok udziałów/akcji — do 10% wartości
-    bilansowej/nominalnej przyznanych udziałów (art. 492 § 2)
-□ Sukcesja UNIWERSALNA — spółka przejmująca/nowo zawiązana wstępuje we
-    WSZYSTKIE prawa i obowiązki spółki przejmowanej (art. 494 § 1) —
-    kluczowe dla oceny ryzyka: przejęte zobowiązania, umowy, spory
-□ Spółka przejmowana/łączące się rozwiązują się BEZ likwidacji, z dniem
-    wykreślenia z rejestru (art. 493 § 1)
-□ Dzień połączenia = dzień wpisu do rejestru spółki przejmującej/nowej
-    (art. 493 § 2)
-□ Roszczenia o naprawienie szkody przy łączeniu — przedawnienie 3 LATA
-    od dnia ogłoszenia o połączeniu (art. 527)
-```
-
-### PODZIAŁ SPÓŁEK (Dział II, art. 528–550¹)
-
-```
-□ WYŁĄCZNIE spółka KAPITAŁOWA może być dzielona na dwie lub więcej
-    spółek kapitałowych (art. 528 § 1)
-□ Spółka OSOBOWA NIE PODLEGA podziałowi (art. 528 § 2)
-□ NIE MOŻE być dzielona: spółka akcyjna z niepokrytym w całości
-    kapitałem zakładowym; spółka w likwidacji, która rozpoczęła podział
-    majątku; spółka w upadłości (art. 528 § 1, § 3)
-
-PIĘĆ SPOSOBÓW PODZIAŁU (art. 529 § 1) — ⭐ piąty dodany nowelizacją z
-15.09.2023 r., starsze źródła wskazują wyłącznie 4:
-  1) PODZIAŁ PRZEZ PRZEJĘCIE — cały majątek na inne (istniejące) spółki,
-     wspólnicy dzielonej obejmują udziały/akcje przejmujących
-  2) PODZIAŁ PRZEZ ZAWIĄZANIE NOWYCH SPÓŁEK — cały majątek na nowo
-     zawiązane spółki
-  3) PODZIAŁ PRZEZ PRZEJĘCIE I ZAWIĄZANIE NOWEJ SPÓŁKI — kombinacja 1+2
-  4) PODZIAŁ PRZEZ WYDZIELENIE — CZĘŚĆ majątku na istniejącą/nową
-     spółkę; spółka dzielona NIE TRACI bytu prawnego, kontynuuje
-     działalność; udziały/akcje obejmują WSPÓLNICY spółki dzielonej
-  5) PODZIAŁ PRZEZ WYODRĘBNIENIE (nowość 2023) — CZĘŚĆ majątku na
-     istniejącą/nową spółkę; RÓŻNICA względem wydzielenia: udziały/akcje
-     obejmuje SAMA SPÓŁKA DZIELONA (nie jej wspólnicy) — praktyczne
-     narzędzie do budowy struktur holdingowych bez zaangażowania
-     wspólników w nową strukturę właścicielską
-
-□ Przy wyodrębnieniu — UPROSZCZONY plan podziału (nie wymaga elementów
-    dot. stosunku wymiany udziałów, bo obejmuje je sama spółka dzielona)
-□ Dopłaty gotówkowe — analogicznie do łączenia, do 10%
-```
-
-### PRZEKSZTAŁCENIA SPÓŁEK (Dział III, art. 551–595)
-
-```
-□ Każda spółka handlowa (jawna, partnerska, komandytowa, komandytowo-
-    akcyjna, z o.o., prosta akcyjna, akcyjna) MOŻE być przekształcona
-    w INNĄ spółkę handlową (art. 551 § 1)
-□ Możliwe też przekształcenie PRZEDSIĘBIORCY (osoby fizycznej
-    prowadzącej działalność) w spółkę kapitałową — z odpowiedzialnością
-    tej osoby wobec spółki/wspólników/osób trzecich za szkody z winy
-    (analogicznie do odpowiedzialności biegłego rewidenta)
-□ Elementy postępowania: plan przekształcenia + załączniki + opinia
-    biegłego rewidenta → wpis spółki przekształconej i wykreślenie
-    formy pierwotnej z właściwego rejestru (KRS lub CEIDG)
-□ Firma spółki przekształconej — jeśli zmiana nie ogranicza się do
-    dodania oznaczenia formy prawnej, obowiązek podawania dawnej firmy
-    w nawiasie z dopiskiem "dawniej" przez CO NAJMNIEJ ROK
-```
-
-> ⚠️ **Znaczenie praktyczne dla M&A:** sukcesja uniwersalna przy
-> łączeniu (art. 494 § 1) oznacza, że due diligence musi obejmować
-> WSZYSTKIE zobowiązania spółki przejmowanej — nie da się "wybrać"
-> tylko korzystnych aktywów jak przy nabyciu przedsiębiorstwa. Dla
-> selektywnego nabycia rozważyć podział przez wydzielenie/wyodrębnienie
-> zamiast pełnego łączenia.
-> ⚠️ Weryfikuj aktualne brzmienie i ewentualne dalsze nowelizacje w
-> ISAP przed powołaniem w piśmie — obszar aktywnie nowelizowany
-> (transgraniczność, podział przez wyodrębnienie z 2023 r.).
+- Upływ terminów nie wyłącza **zarzutu** nieważności (art. 252 § 4, 425 § 4); art. 189 KPC wyłączony (art. 252 § 1, 425 § 1).
+- Legitymacja: art. 250 (sp. z o.o.), art. 422 § 2 (S.A.).
+- Forma: zmiana umowy sp. z o.o. — uchwała + wpis (art. 255 § 1), protokół notarialny (art. 255 § 3); zmiana statutu S.A. — uchwała WZ + wpis (art. 430 § 1), protokół notarialny (art. 421 § 1). Skutek braku formy szczególnej — KC art. 73 § 2 (nie art. 17 KSH).
 
 ---
 
-## WERYFIKACJA ONLINE
+## ŁĄCZENIE, PODZIAŁ, PRZEKSZTAŁCENIE (Tytuł IV)
 
-```
-web_search: "KSH kodeks spółek handlowych isap.sejm.gov.pl Dz.U. 2024 poz. 18 tekst jednolity"
-web_search: "art 299 KSH odpowiedzialność zarządu orzecznictwo SN przesłanki"
-web_search: "wniosek o upadłość termin 30 dni art 21 PrUp orzecznictwo"
-web_search: "zaskarżenie uchwały sp z o.o. termin art 251 252 KSH"
-web_search: "Prawo przedsiębiorców tekst jednolity isap działalność nierejestrowana limit aktualny"
-web_search: "minimalne wynagrodzenie za pracę 2026 kwota działalność nierejestrowana limit kwartalny"
-web_search: "kapitał minimalny prosta spółka akcyjna art 300(2) KSH aktualne brzmienie"
-```
+| Przepis | Kwalifikator |
+|---|---|
+| art. 491 § 1 | kapitałowe łączą się ze sobą i z osobowymi; osobowa (poza S.K.A.) nie może być przejmującą ani nowo zawiązaną |
+| art. 491 § 1¹ | łączenie transgraniczne (kapitałowe i S.K.A.) |
+| art. 491 § 2 | osobowe między sobą — tylko przez zawiązanie spółki kapitałowej lub S.K.A. albo przejęcie przez S.K.A. |
+| art. 491 § 3 | zakaz: spółka w likwidacji po rozpoczęciu podziału majątku, spółka w upadłości |
+| art. 492 § 1–2 | przejęcie / zawiązanie nowej spółki; dopłaty ≤ 10% |
+| art. 493 § 1–2 | rozwiązanie bez likwidacji w dniu wykreślenia; dzień połączenia = wpis do rejestru przejmującej/nowej |
+| art. 494 § 1–4 | sukcesja uniwersalna (także zezwolenia, koncesje, ulgi — § 2, chyba że ustawa/decyzja inaczej) |
+| art. 528 § 1–3 | podział: spółka kapitałowa **i S.K.A.**; inna osobowa nie podlega podziałowi; zakazy jak przy łączeniu; S.A./S.K.A. z niepokrytym kapitałem |
+| art. 528 § 1¹ | podział transgraniczny |
+| art. 529 § 1 pkt 1–5 | przejęcie, zawiązanie nowych, przejęcie + zawiązanie, wydzielenie (pkt 4), wyodrębnienie (pkt 5 — udziały obejmuje spółka dzielona) |
+| art. 551 § 1, § 1¹ | przekształcenie każdej spółki handlowej w inną; transgraniczne |
+| art. 551 § 2–4 | spółka cywilna → spółka handlowa inna niż jawna (§ 2–3); zakaz: likwidacja po podziale majątku, upadłość (§ 4) |
+| art. 551 § 5, 584¹ i n. | przekształcenie przedsiębiorcy (osoby fizycznej) w jednoosobową spółkę kapitałową; dzień przekształcenia = wpis (art. 584¹) |
+
+M&A: sukcesja uniwersalna oznacza due diligence wszystkich zobowiązań spółki przejmowanej; selektywne nabycie — podział przez wydzielenie/wyodrębnienie lub nabycie przedsiębiorstwa (KC art. 55¹–55⁴).
+
+---
+
+## NOWELIZACJE W TOKU
+
+| Akt | Wejście w życie | Kwalifikator |
+|---|---|---|
+| Dz.U. 2026 poz. 176 | 18.02.2027 (art. 35); art. 28 i 33 — od 28.02.2026 | S.A., S.K.A., PSA, SE: koniec podziału na akcje imienne i na okaziciela (do rejestracji akcji — dotychczasowe przepisy); art. 28: dokument akcji zachowuje moc dowodową (wobec spółki, co do praw udziałowych) przez 7 lat od wejścia w życie ustawy 2019/1798 — w mocy od 1.03.2021 wg ELI, więc do ok. 1.03.2028 (dzień końcowy: KC art. 110–116); art. 34: dostosowanie statutów/umów w 2 lata od 18.02.2027 |
+| Dz.U. 2026 poz. 187, art. 138 | 19.05.2028 | art. 88 — psycholog w katalogu zawodów spółki partnerskiej |
+
+---
+
+## FORMY DZIAŁALNOŚCI POZA KSH — ODESŁANIA
+
+| Temat | Gdzie |
+|---|---|
+| działalność nierejestrowana (Prawo przedsiębiorców art. 5), JDG/CEIDG | `mod-prawo-przedsiebiorcow`, `mod-Prawo-przedsiebiorcow-current-state-COV` |
+| kontrola przedsiębiorcy (art. 45–65, sprzeciw art. 59), reglamentacja (koncesja, zezwolenie, rejestr) | `mod-wekslowe-kontrola-przedsiebiorcy-koncesje` (cz. B kontrola, cz. C reglamentacja) |
+| spółka cywilna — KC art. 860–875 (umowa: art. 860 § 2; solidarność: art. 864); od 1.11.2028 wzorce i publikacja w CEIDG (Dz.U. 2026 poz. 507) | KC t.j. 2026/795; `mod-KC-cywilne-zobowiazania-odpowiedzialnosc` |
+| umowa spółki, statut, regulaminy, founders' agreement, SHA/SPA | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-FA-founders-dokumenty-zalozycielskie.md`, `mod-MA-transakcje.md` |
+| opodatkowanie form działalności | DR-06 (PIT, CIT, ryczałt) |
+
+Pułapka: founders' agreement przed rejestracją spółki z wkładami na wspólny cel może zostać zakwalifikowany jako umowa spółki cywilnej (KC art. 860) — zastrzeż wyłączenie w umowie.
+
+---
+
+## STRATEGIA
+
+**Wierzyciel sp. z o.o.:** odpis KRS (skład zarządu w dacie powstania zobowiązania) → tytuł i bezskuteczna egzekucja przeciw spółce → pozew z art. 299 § 1; przesłanki z § 2 po stronie pozwanego; skarga pauliańska przy przesunięciach majątku (`kc-zobowiazania/czesc-02-skarga-paulianska`).
+
+**Zarząd spółki w trudnościach:** test niewypłacalności i termin z PrUp art. 11, 21 (ELI) → wniosek o upadłość lub otwarcie restrukturyzacji we właściwym czasie (art. 299 § 2) → dokumentacja przesłanek uwolnienia.
+
+**Spór o uchwałę:** ustal datę wiadomości i powzięcia (tabela), legitymację, rodzaj wady (uchylenie vs nieważność); po terminie — zarzut nieważności.
 
 ---
 
@@ -748,129 +146,23 @@ web_search: "kapitał minimalny prosta spółka akcyjna art 300(2) KSH aktualne 
 
 | Sytuacja | Skill / Moduł |
 |---|---|
-| Upadłość / restrukturyzacja | `mod-PrUpad-upadlosc-restrukturyzacja` |
-| Status syndyka/nadzorcy/zarządcy (zawód) | `mod-ustawa-doradca-restrukturyzacyjny-zawod` |
-| Analiza umowy (B2B, spółka) | `analizator-umow-v1` |
-| Redakcja/analiza: umowa spółki, statut, regulamin organu, founders' agreement | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-FA-founders-dokumenty-zalozycielskie.md` (J.20) |
-| M&A — SPA/SHA/LOI (etap post-formation / inwestycja) | `analizator-umow-v1` → `prawo-polskie-v2/krajowe/analizator-umow-v1/references/mod-MA-transakcje.md` |
-| Pismo: wniosek o upadłość, zgłoszenie wierzytelności | `pisma-procesowe-v3` |
-| Rejestracja JDG / działalność nierejestrowana — pisma do CEIDG | `pisma-proste-v2` (jeśli dotyczy prostego wniosku) |
-| Orzecznictwo SN gospodarcze | `orzeczenia-sadowe-v2` |
-| KRS (rejestr spółki) | `mod-ustawa-KRS-rejestr-sadowy` |
-| UZNK (nieuczciwa konkurencja) | `mod-ustawa-UZNK-nieuczciwa-konkurencja` |
-| Opodatkowanie form działalności (PIT/CIT/ryczałt) | DR-06 → `mod-PIT-podatek-dochodowy-fizyczne`, `mod-CIT-podatek-dochodowy-prawne`, `mod-ustawa-ryczalt-przychody` |
-
----
-
-## ŹRÓDŁA ONLINE
-
-- KSH: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000018
-- PrUp: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000614
-- Prawo przedsiębiorców (t.j. 2025/1480): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250001480
-- Nowelizacja art. 5 (działalność nierejestrowana, Dz.U. 2025/769): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20250000769
-- KC (spółka cywilna, art. 860–875): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000795
-- KRS online: https://ekrs.ms.gov.pl
-- CEIDG online: https://www.biznes.gov.pl/pl/firma/ceidg
-
----
-
-## UMOWY B2B — KLUCZOWE ELEMENTY
-
-```
-□ Strony: NIP, REGON, KRS / CEIDG — ZAWSZE weryfikuj w rejestrze przed podpisaniem
-□ Przedmiot: precyzyjny opis + parametry jakościowe / ilościowe
-□ Wynagrodzenie: stałe / zmienne + VAT / netto + termin płatności
-□ Kara umowna: TYLKO za zobowiązania NIEPIENIĘŻNE (art. 483 KC)
-□ Zakaz konkurencji: ograniczony terytorialnie + zakres + ekwiwalent
-□ Poufność (NDA): czas trwania + zakres + sankcja umowna
-□ Prawo właściwe + sąd właściwy (klauzula jurysdykcyjna)
-□ Rozwiązanie: tryb + wypowiedzenie + skutki
-□ Siła wyższa (force majeure): definicja + skutki
-```
-
----
-
-## PROKURA (art. 109¹ i n. KC)
-
-```
-Prokura = pełnomocnictwo handlowe udzielane przez zarząd spółki
-Zakres: wszystkie czynności związane z prowadzeniem przedsiębiorstwa
-  WYJĄTKI (wymagają pełnomocnictwa szczególnego):
-  → Zbycie lub obciążenie nieruchomości
-  → Ustanowienie prokury (nie może subprokurent)
-
-Formy prokury:
-  → Samoistna: prokurent działa samodzielnie
-  → Łączna: kilku prokurentów musi działać razem (LUB z członkiem zarządu)
-  → Oddziałowa: ograniczona do oddziału spółki
-
-Wpis prokury do KRS jest OBOWIĄZKOWY — sprawdzaj KRS przed zawarciem umowy.
-```
-
+| Upadłość / restrukturyzacja | moduły `mod-PrUpad-*`, `mod-PrRestr-*` (DR-02) |
+| KRS | `mod-ustawa-KRS-rejestr-sadowy` |
+| Pozew, wniosek o upadłość, zgłoszenie wierzytelności | `pisma-procesowe-v3` |
+| Orzecznictwo SN | `orzeczenia-sadowe-v2` |
+| Nieuczciwa konkurencja | `mod-ustawa-UZNK-nieuczciwa-konkurencja` |
 
 ---
 
 ## QUALITY GATE
 
-- [ ] Aktualny tekst t.j. aktu zweryfikowany w ISAP?
-- [ ] Stan prawny właściwy temporalnie (na dzień zdarzenia i na dzień orzekania)?
-- [ ] Każda przesłanka ma przypisany dowód?
-- [ ] Termin nie upłynął?
-- [ ] Właściwy organ / sąd wskazany?
-- [ ] Ryzyka formalne i dowodowe ocenione?
-- [ ] Brzmienie przepisów pobrane ze źródeł, nie z pamięci modelu?
-- [ ] Jeśli sprawa dotyczy WYBORU FORMY DZIAŁALNOŚCI — czy rozważono pełną
-      drogę (nierejestrowana → JDG → cywilna → osobowa → kapitałowa) i
-      kluczowe osie różnic (odpowiedzialność, rejestracja, opodatkowanie)?
-- [ ] Jeśli sprawa dotyczy DOKUMENTU ZAŁOŻYCIELSKIEGO/WEWNĘTRZNEGO (umowa
-      spółki, statut, regulamin organu, founders' agreement) — czy
-      rozróżniono dokument "konstytucyjny" (umowa/statut) od dokumentów
-      pomocniczych (regulaminy, founders' agreement) i sprawdzono hierarchię
-      (statut/umowa > regulamin)?
-- [ ] Jeśli founders' agreement zawierany PRZED rejestracją spółki — czy
-      sprawdzono ryzyko niezamierzonej kwalifikacji jako spółka cywilna
-      (art. 860 KC) i potrzebę zastrzeżenia wyłączającego?
-- [ ] Przy działalności nierejestrowanej — czy zweryfikowano AKTUALNĄ kwotę
-      minimalnego wynagrodzenia (limit = 225% tej kwoty, kwartalnie)?
+- [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
+- [ ] Stan prawny na dzień zdarzenia (2026/176, 2026/187 — daty wejścia w życie)?
+- [ ] Reprezentacja ustalona z umowy/statutu i KRS, z regułą art. 205 § 1 / 373 § 1?
+- [ ] Terminy zaskarżenia uchwały liczone od właściwego zdarzenia?
+- [ ] Przy art. 299: bezskuteczność egzekucji wykazana; przesłanki § 2 i wyrok TK rozważone?
 
 ## OUTPUT
 
-Wynik pracy modułu:
-1. Stan faktyczny;
-2. Stan prawny i źródła (Dz.U. z ISAP);
-3. Kwalifikacja trybu i właściwość;
-4. Terminy (obliczone, z datami granicznymi);
-5. Przesłanki (spełnione / wątpliwe / niespełnione);
-6. Matryca dowodowa (teza → dowód → siła → luka);
-7. Zarzuty i kontrargumenty;
-8. Analiza ryzyk;
-9. Strategia (wariant podstawowy + ewentualny);
-10. Rekomendacja + kolejne kroki;
-11. Kontrola ISAP/temporalności.
-
----
-
-## STRATEGIA
-
-### Perspektywa wierzyciela spółki z o.o.
-
-1. Sprawdź KRS — aktualny skład zarządu (ekrs.ms.gov.pl).
-2. Jeśli egzekucja bezskuteczna → pozew przeciwko członkom zarządu (art. 299 KSH).
-3. Sprawdź czy złożono wniosek o upadłość w terminie 30 dni — jeśli nie → podstawa roszczenia.
-4. Oceń czynności bezskuteczne (przesunięcia majątkowe przed upadłością) → skarga pauliańska.
-
-### Perspektywa zarządu zagrożonej spółki
-
-1. Monitoruj test niewypłacalności (art. 11 PrUp) — termin 30 dni biegnie od jego zaistnienia.
-2. Złóż wniosek o restrukturyzację przed złożeniem wniosku o upadłość — ochrona przed egzekucją.
-3. Dokumentuj przesłanki uwolnienia się od odpowiedzialności (art. 299 §2 KSH).
-4. Uchwały ważne formalnie → zachowaj wymagane kworum, formę i głosowanie.
-
-### Ryzyka
-
-| Ryzyko | Opis | Działanie zaradcze |
-|---|---|---|
-| Termin 30 dni na wniosek o upadłość | Przekroczenie = odpow. osobista zarządu | Monitoring kondycji finansowej spółki |
-| Nieważna uchwała (brak formy) | Art. 17 KSH — nieważność bezwzgl. | Akt notarialny przy zmianach umowy/statutu |
-| Zaskarżenie uchwały | Terminy wg reżimu (art. 251, 252 § 3, 424, 425 KSH — tabela wyżej); biegną od WIADOMOŚCI o uchwale (S.A. publiczna, nieważność — od ogłoszenia) | Prawidłowe doręczenie uchwał wszystkim wspólnikom; zarzut nieważności po terminie (art. 252 § 4, 425 § 4) |
-| Prokurent przekracza umocowanie | Brak skutku wobec spółki | Sprawdzaj wpisy prokury w KRS |
+1. Stan faktyczny; 2. Typ spółki i stan prawny (przepisy z ELI); 3. Kwalifikacja i właściwość;
+4. Terminy z datami granicznymi; 5. Przesłanki i dowody; 6. Ryzyka; 7. Strategia i kolejne kroki.

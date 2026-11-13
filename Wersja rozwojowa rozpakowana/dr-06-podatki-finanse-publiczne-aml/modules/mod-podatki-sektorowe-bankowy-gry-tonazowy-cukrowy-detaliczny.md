@@ -596,7 +596,7 @@ AKCYZA (art. 11): MF może rozporządzeniem obniżać stawki akcyzy na paliwa (a
 □ Klient prowadzi/planuje działalność HAZARDOWĄ (kasyno, zakłady
   wzajemne, automaty, loterie) → sprawdź RÓWNOLEGLE podatek od gier
   (stawki 2,5%-50% zależnie od typu, Część B) ORAZ wymóg koncesji
-  (mod-KSH-spolki-handlowe.md sekcja 1b) ORAZ ewentualne kary
+  (`mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md` (DR-02) cz. C) ORAZ ewentualne kary
   pieniężne za działalność bez zezwolenia
 □ Klient jest ARMATOREM MORSKIM (statki >100 GT) → rozważ opcjonalny
   podatek tonażowy (stawka 19%, Część C) jako alternatywę dla CIT —
@@ -615,7 +615,7 @@ AKCYZA (art. 11): MF może rozporządzeniem obniżać stawki akcyzy na paliwa (a
 
 ## INTEGRACJA Z SYSTEMEM
 
-- **`mod-KSH-spolki-handlowe.md`** (DR-02) sekcja 1b — reglamentacja
+- `mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md` (DR-02) cz. C — reglamentacja
   działalności (koncesja dla hazardu) — bezpośrednie powiązanie z
   Częścią B tego modułu.
 - **`mod-CIT-podatek-dochodowy-prawne.md`** — podatek tonażowy jako

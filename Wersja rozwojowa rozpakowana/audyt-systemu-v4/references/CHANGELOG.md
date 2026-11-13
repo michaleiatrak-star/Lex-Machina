@@ -1,5 +1,6 @@
 # CHANGELOG — audyt-systemu-v4
 
+- 6.263 (2026-11-13): check_uchylone.py: powołania uchylonych art./ust./§/pkt w modułach DR względem t.j. z ELI (skróty aktów z nagłówka, indeksy górne, zakresy); CHECKLIST-DEDUP: kontrola przedsiębiorcy → mod-wekslowe-kontrola-przedsiebiorcy-koncesje
 - 6.262 (2026-11-13): audit_tj_inventory.py: tryb --napraw/--raport-json (NEWER_TJ -> najnowszy t.j. z ELI, linki ELI obok; zapisy weryfikacji pomijane); znacznik t.j. z formatowaniem Markdown; 'po t.j.' = nowelizacja (koniec fałszywych NOT_TJ); kontekst wiersza złamanego; tryb operational obejmuje prawo-polskie-v2/krajowe/; skrypty repo: scripts/aktualizuj_tj.py, scripts/podbij_wersje_skilli.py
 - 6.261 (2026-11-11, LEGAL GAUNTLET v3 E7): T51: T03, T08 i T33 pokryte (MOD-SLOWNIK-STATUSOW, TEMPORAL-LAW-CHECK, HYBRID-VALIDATION F3.0); kontrakt Gauntleta 38/38.
 - 6.260 (2026-11-11, LEGAL GAUNTLET v3 E6): T51: T06 i T37 pokryte (FSL-INTEGRALNOŚĆ; w aplikacji ocr-layer-check i prompt-injection-scan); stan 35/3/0.

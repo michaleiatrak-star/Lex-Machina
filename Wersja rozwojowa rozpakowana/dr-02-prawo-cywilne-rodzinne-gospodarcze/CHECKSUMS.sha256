@@ -1,7 +1,7 @@
 21bcb564ba9b68b989989e4312872ef6583f8cfd173cb70504ea2ffa1df16e6e  ./MAPA-AKTOW.md
 c3baa5e256c73658f09cd07050b7c2c896c010d65c42127bd0bd40a45d99f824  ./MAPA-POKRYCIA.md
 cd7bd68c282c1dd8fc5b99072282ebc1b74eddbaf3985b53ebb69ec554af1413  ./PORTABILITY-MANIFEST.md
-9a061ce9170aa566f30f64b0ac9dab71dd1927e63a4f99e1a3ccbc1cd8c22a39  ./SKILL.md
+67533e3e9b50ed91323c25576d5576de6c641d357efdc1c4d0586d032106c50c  ./SKILL.md
 069bc49db133821e80d2750404468587e1e29b9982151c0e333c89f68c55a153  ./agents/openai.yaml
 d80a4c3e0fd2efa7af88433a53b25a92c78a644175c6669dd78fee50fb53acf6  ./assets/icon.svg
 bc1802487f84e7c9daaa7a1e5deefb78e89e483e8f99614a25448b16b6764f14  ./modules/kc-zobowiazania/czesc-01-przedawnienie-kara-umowna-wady-wzbogacenie-odsetki.md
@@ -40,7 +40,7 @@ c40dcb6efb5e0f40988fa44d3edd15753d68d0957c702f7c708157d5c83b46e6  ./modules/mod-
 12c93559313a3ba20dbde2b663ca1ab5ee95de8543a239a5f5d55ffb527e6248  ./modules/mod-KRO-rodzinne.md
 8da0885b0c5555a46340eaff45746b7284c82774195a5bb7421afaefcf9a8e60  ./modules/mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne.md
 5e93c28c0d1f38f341130e2d98e65952f8a9cbb54623fcfaa27924cb3a7f10d1  ./modules/mod-KSH-organy-spolki-zoo.md
-732888f365babe3737204aeae0de31312fe1c986a6ce86747afe43cfafc4e85a  ./modules/mod-KSH-spolki-handlowe.md
+857b5262623f16276df4fafdb715ad254c6db97620fb77880219ab2d1b27aa0c  ./modules/mod-KSH-spolki-handlowe.md
 592252cd9f56ce15c3ab0acc1f512511327169515cc3ec98ddd558dd2023826c  ./modules/mod-KSH-spolki-osobowe-rada-nadzorcza.md
 f51278c6161f1b5d73d005b45130a958ce17de6bac218e1938c8076a275ea32f  ./modules/mod-KSH-uzupelnienie-pokrycia-2026.md
 75031ab497d40b7d8e501164d4519df7ae205a8186a54354f69485ad7e3c175d  ./modules/mod-KSH-wrogie-przejecie-obrona-bialy-rycerz.md
@@ -87,7 +87,7 @@ e8f9f3e56aedd19f386373e470326bcc71f1d469085cca561ba101974c4b5b9f  ./modules/mod-
 281e1142049ff3e3f1d5c078e47bddbb69b9956ce091cffee107c91bb185228b  ./modules/mod-ubezwlasnowolnienie-opieka-kuratela.md
 c30daded1d6e82a214500fc541797137d344fd5ad0ff3d79306debcfc9ba41d0  ./modules/mod-ustawa-KRS-rejestr-sadowy.md
 8de473ec24deb6faf2da874d585478e4ec2f6289b26fba593f8aa6619a35ea26  ./modules/mod-ustawa-UOKIK-antymonopolowe.md
-dc8fbe9afb0e4d11f1ae7a89483c0d2538a50af0c8cfb79561444ffa62a1dfe7  ./modules/mod-ustawa-UZNK-nieuczciwa-konkurencja.md
+0ea99349234cd2bf1c2bf06fc5caf91512a49b551eda841c82e7985def9fd6e1  ./modules/mod-ustawa-UZNK-nieuczciwa-konkurencja.md
 3d1842ba79ec66d9e872bb8468eeab3ec3344322681eb077bc8211a8c90e1939  ./modules/mod-ustawa-cudzoziemcy.md
 6df309462c4cf518066d65c05bea44d372bc50d2f9bccc7553abc0e49be3cf0c  ./modules/mod-ustawa-deweloperska.md
 fde31e898fe15264a56e7933d7d423604837afd0456086cf27c2bc8318847a86  ./modules/mod-ustawa-doradca-restrukturyzacyjny-zawod.md
@@ -105,8 +105,8 @@ a556920b43699e8c2ffa51b8b166a6175ca0e78afa95c3d86d6dd2d3d1cd1de7  ./modules/mod-
 5e887b9b1520d670a83d123bd75a7bc37834bf27d34ac37e2e83e2c60dab6818  ./modules/mod-ustawa-timeshare-zastaw-rejestrowy.md
 c6ea7ab2905c46963de42d3150e6f1e1de7197a05c2df189e10d263d56240ad6  ./modules/mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md
 0d27f04cfedf651c1c4feedb203e2c1e456b673688952c2472f1cacf3f29a6cf  ./modules/mod-ustawa-zastaw-rejestrowy.md
-3c41d52638a1d16adea5e28a28e74e51dde90d13565e98fe087b706ea93356a5  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
-00b94880153a3d03b5afe0c5b4c8d794a26f9cf0ce81b05dd9e396fb969d509d  ./references/CHANGELOG.md
+62ebf3d9f84110b425cc254c4e4e2cb9ce3042847ff9c28b85a892441f7c437a  ./modules/mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md
+db710c7ba568ed52e89bf0ed9f266d103624b8a23b920bc472e7b9a6dcd91547  ./references/CHANGELOG.md
 4d51963f97e602ce7096f71b128555e98a58e34f91ce0b97b0f8cc4f04c31824  ./references/HISTORIA-ZMIAN-PLIKOW.md
 75f689351857edca8c4ab78f188cc885b289b14e26f549431869548fcbd21c46  ./references/REJESTR-ZRODEL.json
 df54acfa82cfd439fe06603cd0c54dba3494c9337c0a016f9f3d961dde35cd59  ./references/insolvency/coverage-summary.json
