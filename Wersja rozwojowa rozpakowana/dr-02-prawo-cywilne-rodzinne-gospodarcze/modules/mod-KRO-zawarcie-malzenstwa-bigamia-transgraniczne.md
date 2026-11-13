@@ -1,439 +1,147 @@
 # mod-KRO-zawarcie-malzenstwa-bigamia-transgraniczne
 
-**Wersja:** 1.0 | **Dodano:** 2026-07-19
-**Rola w systemie:** odpowiedź na klaster pytań użytkownika: śluby
-(zawarcie małżeństwa — dotąd CAŁKOWICIE nieobecne, moduł `mod-KRO-
-rodzinne.md` opisuje wyłącznie ROZWÓD, nie samo zawarcie małżeństwa),
-bigamia (dotąd jedna wzmianka bez treści), małżeństwo zawarte za
-granicą, bigamia zawarta za granicą w kraju to dopuszczającym,
-małżeństwo jednopłciowe i prawa z nim związane.
+**Akt:** KRO — t.j. Dz.U. 2026 poz. 236 (brak zmian po t.j. w ELI na 2026-11-13).
+**Inne akty:** KK — t.j. Dz.U. 2026 poz. 1342 (zm. 2026/1466 od 21.11.2026 — nie dotyczy art. 109–111, 206) | Prawo prywatne międzynarodowe (PPM) — t.j. Dz.U. 2023 poz. 503 | Prawo o aktach stanu cywilnego (PASC) — t.j. Dz.U. 2026 poz. 393 | Konstytucja RP — Dz.U. 1997 nr 78 poz. 483.
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2026/236/text.pdf` (KK `.../DU/2026/1342/...`, PPM `.../DU/2023/503/...`, PASC `.../DU/2026/393/...`) kanałem hosta; zmiany po t.j. — ELI, „Akty zmieniające”.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP. **Temat małżeństw
-> jednopłciowych jest OBECNIE (2026) przedmiotem ŻYWEGO, ŚWIEŻEGO i
-> POLITYCZNIE SPORNEGO rozwoju orzeczniczego — sprawdź NAJNOWSZY status
-> przy KAŻDYM użyciu, sytuacja może się zmienić w ciągu tygodni/miesięcy.**
+Powiązane: rozwód, alimenty, władza rodzicielska — `mod-KRO-rodzinne`; przysposobienie — `mod-KRO-przysposobienie-adopcja-miedzynarodowa`; kwalifikacja karna — DR-03.
 
 ---
 
-## CZĘŚĆ A — ZAWARCIE MAŁŻEŃSTWA (art. 1-22 KRO)
-
-### 1. Dwie formy zawarcia małżeństwa w Polsce
+## FAZA 0 — INTAKE
 
 ```
-FORMA CYWILNA — oświadczenia złożone JEDNOCZEŚNIE, w obecności
-  KIEROWNIKA URZĘDU STANU CYWILNEGO, że wstępują ze sobą w związek
-  małżeński (art. 1 §1 KRO)
-
-FORMA KONKORDATOWA (wyznaniowa ze skutkiem cywilnym) — na podstawie
-  Konkordatu między Stolicą Apostolską a RP (1993) i art. 1 §2-3 KRO:
-  □ Oświadczenia składane w obecności DUCHOWNEGO
-  □ SKUTKI CYWILNE powstają, gdy: (a) zachowano wymagania prawa
-    polskiego dot. zawarcia małżeństwa (m.in. brak przeszkód
-    małżeńskich, wcześniejsze złożenie zaświadczenia z USC), (b)
-    kierownik USC SPORZĄDZA akt małżeństwa NA PODSTAWIE zaświadczenia,
-    które DUCHOWNY przekazuje do USC przed upływem PIĘCIU DNI od dnia
-    zawarcia małżeństwa; przy obliczaniu NIE UWZGLĘDNIA SIĘ dni ustawowo
-    wolnych od pracy (sobota nie jest takim dniem — ⚠️ to nie to samo co
-    „5 dni roboczych"); siła wyższa zawiesza bieg; nadanie przesyłką
-    poleconą w polskiej placówce operatora wyznaczonego jest równoznaczne
-    z przekazaniem (art. 8 § 3 KRO;
-    ✅ RZĄD 1 2026-09-17n, KRO t.j. Dz.U. 2026 poz. 236)
-  □ Bez zachowania tego trybu — małżeństwo wyznaniowe wywołuje skutki
-    WYŁĄCZNIE na gruncie prawa KANONICZNEGO/wewnętrznego danego
-    związku wyznaniowego, NIE prawa cywilnego (para NIE jest małżeństwem
-    w rozumieniu polskiego prawa)
-```
-
-### 2. Przesłanki pozytywne (zdolność do zawarcia małżeństwa)
-
-```
-□ RÓŻNA PŁEĆ obojga nupturientów (art. 1 §1 KRO w zw. z art. 18
-  Konstytucji RP — małżeństwo jako związek KOBIETY i MĘŻCZYZNY — patrz
-  Część D niżej dla pełnej analizy tego ograniczenia)
-□ PEŁNOLETNOŚĆ (18 lat) — WYJĄTEK: sąd opiekuńczy MOŻE zezwolić na
-  zawarcie małżeństwa KOBIECIE, która ukończyła 16 lat, gdy okoliczności
-  wskazują, że zawarcie małżeństwa będzie zgodne z dobrem założonej
-  rodziny (⚠️ zweryfikuj czy przepis nie był ograniczany/znoszony w
-  ostatnich latach — kwestia obniżania wieku małżeńskiego bywa
-  przedmiotem debaty legislacyjnej)
-□ Brak PRZESZKÓD MAŁŻEŃSKICH (patrz sekcja 3)
-```
-
-### 3. Przeszkody małżeńskie (art. 10-15¹ KRO) — katalog
-
-```
-BEZWZGLĘDNE (nie podlegają dyspensie/zwolnieniu):
-  □ BIGAMIA (art. 13 KRO) — pozostawanie w innym związku małżeńskim
-    (patrz Część B — pełne opracowanie)
-  □ UBEZWŁASNOWOLNIENIE CAŁKOWITE (art. 11 KRO)
-  □ CHOROBA PSYCHICZNA lub NIEDOROZWÓJ UMYSŁOWY (art. 12 KRO) — sąd
-    MOŻE zezwolić, jeśli stan zdrowia/umysłu nie zagraża małżeństwu ani
-    zdrowiu przyszłego potomstwa
-  □ POKREWIEŃSTWO W LINII PROSTEJ, między rodzeństwem (art. 14 KRO)
-  □ STOSUNEK PRZYSPOSOBIENIA (art. 15 KRO)
-
-WZGLĘDNE (możliwe zwolnienie przez sąd w wyjątkowych przypadkach):
-  □ Powinowactwo w linii prostej (art. 14 §2 KRO) — sąd MOŻE zwolnić
-    z tej przeszkody z WAŻNYCH powodów
-```
-
-### 4. Nieważność (unieważnienie) małżeństwa vs stwierdzenie nieistnienia
-
-```
-UNIEWAŻNIENIE (art. 10-16 KRO) — małżeństwo BYŁO ważnie zawarte, ale
-  z NARUSZENIEM jednej z przesłanek — sąd KONSTYTUTYWNIE je unieważnia
-  na żądanie UPRAWNIONEGO podmiotu (krąg osób różni się w zależności od
-  przesłanki — przy bigamii: KAŻDY mający interes prawny, w tym
-  spadkobiercy — patrz Część B)
-STWIERDZENIE NIEISTNIENIA MAŁŻEŃSTWA — gdy w OGÓLE nie doszło do
-  złożenia oświadczeń wymaganej treści/formy (np. brak faktycznego
-  oświadczenia woli, symulacja całkowita) — ⚠️ dokładne rozgraniczenie
-  z unieważnieniem NIE zweryfikowane w pełni w tej sesji
-
-KONWALIDACJA — możliwe "uzdrowienie" małżeństwa zawartego mimo przeszkody
-  BEZWZGLĘDNEJ, jeśli przeszkoda USTAŁA przed wytoczeniem powództwa o
-  unieważnienie (patrz Część B, sekcja 6 — szczegółowo dla bigamii)
+□ Forma zawarcia: przed kierownikiem USC, wyznaniowa (art. 1 § 2), przed konsulem (art. 1 § 4), za granicą wg prawa miejscowego?
+□ Obywatelstwo każdej ze stron w chwili zawarcia (PPM art. 48 — prawo ojczyste)?
+□ Przeszkoda: wiek, ubezwłasnowolnienie, choroba psychiczna, bigamia, pokrewieństwo/powinowactwo, przysposobienie?
+□ Czy małżeństwo trwa, ustało, czy przeszkoda ustała przed pozwem (konwalidacja)?
+□ Cel: unieważnienie, ustalenie nieistnienia, transkrypcja, odpowiedzialność karna?
 ```
 
 ---
 
-## CZĘŚĆ B — BIGAMIA (art. 13 KRO + art. 206 KK) — PEŁNE OPRACOWANIE
+## A. ZAWARCIE MAŁŻEŃSTWA (KRO art. 1–9)
 
-### 5. Warstwa CYWILNA — przeszkoda małżeńska i unieważnienie (art. 13 KRO)
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| art. 1 § 1 | mężczyzna i kobieta, jednocześnie obecni, składają oświadczenia przed kierownikiem USC | |
+| art. 1 § 2–3 | forma wyznaniowa ze skutkiem cywilnym: oświadczenie w obecności duchownego + sporządzenie aktu przez kierownika USC; małżeństwo uważa się za zawarte w chwili oświadczenia; tylko gdy umowa międzynarodowa lub ustawa wyznaniowa to przewiduje | bez sporządzenia aktu — brak skutku cywilnego |
+| art. 1 § 4 | obywatele polscy za granicą — także przed polskim konsulem | |
+| art. 2 | akt sporządzony mimo niezachowania art. 1 → powództwo o ustalenie nieistnienia małżeństwa (każdy z interesem prawnym) | nieistnienie ≠ unieważnienie |
+| art. 4 | miesiąc od złożenia zapewnienia o braku przeszkód; kierownik USC może skrócić z ważnych względów | |
+| art. 5 | kierownik USC odmawia przy przeszkodzie; w razie wątpliwości — wniosek do sądu | |
+| art. 6 | pełnomocnik do złożenia oświadczenia — tylko za zezwoleniem sądu z ważnych powodów; pełnomocnictwo pisemne z podpisem urzędowo poświadczonym, z oznaczeniem drugiej osoby | sankcja — art. 16 |
+| art. 7 | publicznie, dwóch pełnoletnich świadków; treść oświadczenia | |
+| art. 8 § 1–2 | duchowny przyjmuje oświadczenia tylko po przedstawieniu zaświadczenia USC o braku przeszkód; sporządza zaświadczenie podpisane przez małżonków i dwóch świadków | |
+| art. 8 § 3 | zaświadczenia do USC przed upływem **5 dni** od zawarcia; nadanie przesyłką poleconą w polskiej placówce **operatora wyznaczonego** = przekazanie; siła wyższa zawiesza bieg; nie liczy się dni ustawowo wolnych od pracy | sobota nie jest dniem ustawowo wolnym — to nie „5 dni roboczych” |
+| art. 9 | niebezpieczeństwo dla życia — oświadczenia bez dokumentów (przed USC) lub bez zaświadczenia (przed duchownym), z zapewnieniem o braku przeszkód | |
 
-```
-§1 — NIE MOŻE zawrzeć małżeństwa, kto JUŻ POZOSTAJE w związku małżeńskim
-§2 — Unieważnienia małżeństwa z powodu bigamii MOŻE żądać KAŻDY, kto
-     MA W TYM INTERES PRAWNY — krąg SZEROKI, obejmuje m.in.:
-     □ Małżonka z DRUGIEGO ("bigamicznego") małżeństwa
-     □ Małżonka z PIERWSZEGO małżeństwa
-     □ DZIECI z obu związków (interes w postaci dziedziczenia)
-     □ PROKURATORA (może wytoczyć powództwo niezależnie od interesu
-       osobistego, z urzędu w interesie publicznym)
-     □ SPADKOBIERCÓW bigamisty PO JEGO ŚMIERCI (mają interes prawny
-       jako potencjalni dziedzice — orzecznictwo potwierdza to WPROST)
-
-⚠️ Bez znaczenia jest FORMA zawarcia drugiego małżeństwa — unieważnienie
-z powodu bigamii dotyczy RÓWNIEŻ małżeństw WYZNANIOWYCH (konkordatowych),
-nie tylko cywilnych.
-
-⚠️ Przeszkoda dotyczy TAKŻE osoby, która w FORMIE WYZNANIOWEJ złożyła
-oświadczenie o zawarciu małżeństwa cywilnego, CHOĆBY akt małżeństwa nie
-został jeszcze sporządzony — WYSTARCZY, że nie upłynął jeszcze ustawowy
-termin na jego sporządzenie (patrz Część A, sekcja 1 — termin przekazania
-zaświadczenia).
-```
-
-### 6. Konwalidacja małżeństwa bigamicznego (art. 13 §2 zd. 2 KRO)
-
-```
-⭐ NIE MOŻNA unieważnić małżeństwa z powodu bigamii, JEŻELI POPRZEDNIE
-małżeństwo USTAŁO lub zostało UNIEWAŻNIONE PRZED wytoczeniem powództwa
-o unieważnienie DRUGIEGO małżeństwa — CHYBA że ustanie poprzedniego
-małżeństwa nastąpiło przez ŚMIERĆ osoby, która zawarła ponowne
-małżeństwo (czyli: śmierć SAMEGO bigamisty NIE konwaliduje jego
-drugiego małżeństwa retroaktywnie w sposób automatyczny w tym
-konkretnym wariancie — ⚠️ dokładna logika tego wyjątku od wyjątku
-wymaga ostrożnej analizy przy konkretnej sprawie, sformułowanie
-przepisu jest NIEINTUICYJNE)
-
-PRAKTYCZNA KONSEKWENCJA: jeśli bigamista ROZWIÓDŁ SIĘ z pierwszym
-małżonkiem PRZED wytoczeniem powództwa o unieważnienie drugiego
-małżeństwa (nawet jeśli rozwód nastąpił PO zawarciu drugiego
-małżeństwa, ale PRZED wniesieniem pozwu o unieważnienie) — drugie
-małżeństwo ULEGA KONWALIDACJI i NIE MOŻE już zostać unieważnione z
-powodu (już nieaktualnej) bigamii.
-```
-
-### 7. Warstwa KARNA — art. 206 KK
-
-```
-Art. 206 KK — kto ZAWIERA MAŁŻEŃSTWO, pomimo że POZOSTAJE w związku
-  małżeńskim → grzywna, ograniczenie wolności albo pozbawienie wolności
-  do 2 lat (⚠️ dokładny wymiar kary — zweryfikuj na ISAP)
-⚠️ Zasada MONOGAMII jako podstawa aksjologiczna zarówno przeszkody
-cywilnej (art. 13 KRO), jak i przestępstwa (art. 206 KK) — te dwa
-reżimy działają RÓWNOLEGLE i NIEZALEŻNIE: skazanie karne NIE JEST
-warunkiem unieważnienia cywilnego, ani odwrotnie.
-```
-
-### 8. Checklist praktyczny — bigamia
-
-```
-□ Czy poprzednie małżeństwo NADAL TRWA w chwili wytoczenia powództwa
-  o unieważnienie — jeśli NIE (ustało/unieważnione PRZED pozwem, poza
-  wyjątkiem śmierci bigamisty) → KONWALIDACJA, powództwo bezzasadne
-□ Kto wytacza powództwo — sprawdź czy ma INTERES PRAWNY (szeroki krąg:
-  oboje małżonkowie z obu związków, dzieci, spadkobiercy, prokurator)
-□ Czy forma drugiego małżeństwa (cywilna czy wyznaniowa) ma znaczenie —
-  NIE, oba podlegają unieważnieniu na tej samej podstawie
-□ Czy równolegle toczy się/powinno się wszcząć postępowanie KARNE z
-  art. 206 KK — niezależne od sprawy cywilnej
-```
+Konstytucja art. 18 — ochrona małżeństwa jako związku kobiety i mężczyzny; KRO art. 1 wymaga różnej płci w polskiej formie zawarcia.
 
 ---
 
-## CZĘŚĆ C — MAŁŻEŃSTWO ZAWARTE ZA GRANICĄ (prawo prywatne międzynarodowe)
+## B. PRZESZKODY I UNIEWAŻNIENIE (KRO art. 10–22)
 
-### 9. Forma zawarcia — zasada „locus regit actum"
+| Przepis | Przeszkoda | Możliwe zezwolenie sądu | Kto żąda unieważnienia | Kiedy unieważnienie wyłączone |
+|---|---|---|---|---|
+| art. 10 | wiek < 18 | tak: kobieta ≥ 16, ważne powody, dobro założonej rodziny (§ 1) | każdy z małżonków (§ 2) | wiek osiągnięty przed pozwem (§ 3); mąż nie może żądać, gdy kobieta zaszła w ciążę (§ 4) |
+| art. 11 | ubezwłasnowolnienie całkowite | nie | każdy z małżonków | ubezwłasnowolnienie uchylone (§ 3) |
+| art. 12 | choroba psychiczna, niedorozwój umysłowy | tak, gdy stan nie zagraża małżeństwu ani zdrowiu potomstwa i brak ubezwłasnowolnienia całkowitego | każdy z małżonków | po ustaniu choroby psychicznej (§ 3) |
+| art. 13 | pozostawanie w związku małżeńskim (bigamia) | nie | **każdy, kto ma interes prawny** (§ 2) | poprzednie małżeństwo ustało lub unieważnione — chyba że ustało przez śmierć osoby, która zawarła ponowne małżeństwo (§ 3) |
+| art. 14 | pokrewieństwo w linii prostej, rodzeństwo; powinowactwo w linii prostej | tylko przy powinowactwie (§ 1 zd. 2) | pokrewieństwo — każdy z interesem prawnym (§ 2); powinowactwo — każdy z małżonków (§ 3) | |
+| art. 15 | przysposobienie | nie | każdy z małżonków | stosunek przysposobienia ustał (§ 3) |
+| art. 16 | pełnomocnik bez zezwolenia sądu / pełnomocnictwo nieważne lub odwołane | — | mocodawca | podjęcie wspólnego pożycia |
 
-```
-□ ZASADA OGÓLNA prawa prywatnego międzynarodowego: forma czynności
-  prawnej (w tym zawarcia małżeństwa) podlega PRAWU PAŃSTWA, w KTÓRYM
-  czynność została DOKONANA (miejsce zawarcia) — małżeństwo zawarte
-  ZGODNIE z prawem miejscowym jest, CO DO ZASADY, ważne co do FORMY
-□ Podstawa: ustawa Prawo prywatne międzynarodowe (2011) — ⚠️ dokładny
-  artykuł regulujący MAŁŻEŃSTWO (prawdopodobnie art. 48 i n.) NIE
-  zweryfikowany precyzyjnie w tej sesji, zweryfikuj na ISAP
-```
+Pułapki:
+- Podział „bezwzględne / względne” nie wynika z kodeksu. Dla praktyki liczy się: czy sąd może zezwolić (art. 10, 12, 14 — powinowactwo), kto ma legitymację i kiedy unieważnienie jest wyłączone.
+- Konwalidacja przy bigamii to **art. 13 § 3**. Wyjątek: śmierć bigamisty nie konwaliduje drugiego małżeństwa.
 
-### 10. Uznanie w Polsce — TRANSKRYPCJA aktu małżeństwa
+| Przepis | Kwalifikator |
+|---|---|
+| art. 17 | unieważnienie tylko z przyczyn działu I (katalog zamknięty) |
+| art. 18 | po ustaniu małżeństwa unieważnienie wyłączone — **poza** pokrewieństwem i bigamią |
+| art. 19 | śmierć pozwanego małżonka — kurator; śmierć powoda — dochodzą zstępni |
+| art. 20 | sąd orzeka o złej wierze (wiedza o przyczynie w chwili zawarcia) |
+| art. 21 | skutki wobec dzieci i majątkowe — odpowiednio przepisy o rozwodzie; zła wiara = jak wina rozkładu |
+| art. 22 | prokurator może wytoczyć powództwo o unieważnienie oraz ustalenie istnienia lub nieistnienia małżeństwa |
 
-```
-□ Małżeństwo ważnie zawarte za granicą WYMAGA, dla celów PEŁNEGO
-  posługiwania się nim w polskim obrocie prawnym (np. zmiana nazwiska
-  w dowodzie osobistym, wspólne rozliczenie podatkowe, prawa
-  spadkowe/alimentacyjne), TRANSKRYPCJI — wpisania zagranicznego aktu
-  małżeństwa do POLSKIEGO REJESTRU STANU CYWILNEGO przez kierownika
-  USC
-□ ORGAN: kierownik USC właściwy wg miejsca zamieszkania wnioskodawcy
-  (lub inny właściwy wg ustawy Prawo o aktach stanu cywilnego)
-□ ⚠️⚠️ KLAUZULA PORZĄDKU PUBLICZNEGO (ORDRE PUBLIC) — art. 7 ustawy
-  Prawo prywatne międzynarodowe + art. 103 ustawy Prawo o aktach stanu
-  cywilnego: kierownik USC ODMÓWI transkrypcji, jeśli SKUTKI uznania
-  zagranicznego aktu małżeństwa byłyby SPRZECZNE z PODSTAWOWYMI
-  ZASADAMI PORZĄDKU PRAWNEGO Rzeczypospolitej Polskiej — to KLUCZOWA
-  klauzula, stosowana m.in. (choć z WAŻNYM, świeżym wyjątkiem — patrz
-  Część D) do małżeństw JEDNOPŁCIOWYCH i — patrz sekcja 11 niżej — do
-  małżeństw BIGAMICZNYCH ważnie zawartych za granicą.
-```
-
-### 11. ⭐ BIGAMIA ZAWARTA ZA GRANICĄ W KRAJU TO DOPUSZCZAJĄCYM (odpowiedź na pytanie użytkownika)
-
-```
-SCENARIUSZ: obywatel Polski (lub cudzoziemiec, którego sprawa trafia
-przed polskie władze) zawiera ZA GRANICĄ kolejne małżeństwo w PAŃSTWIE,
-KTÓREGO PRAWO DOPUSZCZA POLIGAMIĘ (np. niektóre jurysdykcje prawa
-muzułmańskiego), będąc JUŻ w związku małżeńskim.
-
-ANALIZA:
-□ Z PERSPEKTYWY PRAWA TEGO PAŃSTWA — drugie małżeństwo może być
-  CAŁKOWICIE ważne i legalne (zgodnie z jego prawem wewnętrznym,
-  poligamia dozwolona)
-□ Z PERSPEKTYWY PRAWA POLSKIEGO — bigamia jest PRZESZKODĄ BEZWZGLĘDNĄ
-  (art. 13 KRO), a zasada MONOGAMII jest UZNAWANA za JEDNĄ Z
-  PODSTAWOWYCH ZASAD polskiego porządku prawnego — stąd:
-  1. Takie drugie małżeństwo NIE BĘDZIE UZNANE w Polsce (klauzula
-     porządku publicznego, art. 7 PPM/art. 103 uPASC — sekcja 10) —
-     kierownik USC ODMÓWI transkrypcji
-  2. JEŚLI sprawca jest OBYWATELEM POLSKIM (lub podlega polskiej
-     jurysdykcji karnej z innego tytułu) — może ponosić
-     ODPOWIEDZIALNOŚĆ KARNĄ z art. 206 KK ZA SAM FAKT zawarcia drugiego
-     małżeństwa, NIEZALEŻNIE od tego, że w miejscu zawarcia było to
-     legalne — ⚠️ WAŻNE ZASTRZEŻENIE: dokładna analiza jurysdykcyjna
-     (czy polskie prawo karne w ogóle się stosuje do czynu popełnionego
-     za granicą przez obywatela polskiego — zasada obywatelstwa, art.
-     109-114 KK) NIE została w pełni zweryfikowana w tej sesji — to
-     WYMAGA odrębnej analizy przy konkretnej sprawie, sprawdź zasady
-     odpowiedzialności za przestępstwa popełnione za granicą
-  3. PIERWSZE małżeństwo (zawarte w Polsce lub gdziekolwiek uznawane
-     przez polskie prawo) POZOSTAJE W MOCY i chronione — DRUGIE
-     małżeństwo jest dla polskiego porządku prawnego PRAWNIE
-     NIEISTNIEJĄCE/NIEUZNAWANE, niezależnie od jego ważności za granicą
-  4. PRAKTYCZNE KONSEKWENCJE dla osoby z pierwszego małżeństwa: może
-     dochodzić swoich praw (np. spadkowych, alimentacyjnych) TAK, JAKBY
-     drugie małżeństwo NIE ISTNIAŁO z perspektywy polskiego prawa —
-     brak "konkurencji" dwóch uznawanych małżonek/małżonków w polskim
-     porządku prawnym
-
-⚠️ Temat WYMAGA dalszego pogłębienia w przyszłej sesji co do PEŁNEJ
-analizy jurysdykcyjnej prawa karnego (czy art. 206 KK faktycznie
-znajdzie zastosowanie w każdym takim przypadku) — oznaczone jako
-częściowo niedokończone.
-```
+Skład sądu w tych sprawach i właściwość — `mod-sklad-sadu-liczba-sedziow`, KPC (brzmienie z ELI).
 
 ---
 
-## CZĘŚĆ D — ⭐⭐ MAŁŻEŃSTWO JEDNOPŁCIOWE I PRAWA Z TYM ZWIĄZANE (bardzo świeży, żywy rozwój prawny 2025-2026)
+## C. BIGAMIA — WARSTWA KARNA
 
-### 12. Stan bazowy — brak w prawie krajowym
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| KK art. 206 | zawarcie małżeństwa mimo pozostawania w związku małżeńskim — grzywna, ograniczenie wolności albo pozbawienie wolności do lat 2 | niezależne od unieważnienia cywilnego (art. 13 KRO) |
+| KK art. 109 | polska ustawa karna wobec obywatela polskiego za przestępstwo popełnione za granicą | |
+| KK art. 111 § 1 | **warunek podwójnej przestępności**: czyn za granicą musi być przestępstwem także w miejscu popełnienia | drugie małżeństwo zawarte legalnie w państwie dopuszczającym poligamię co do zasady **nie** rodzi odpowiedzialności z art. 206 KK; wyjątki § 3 (funkcjonariusz w służbie za granicą; miejsce bez władzy państwowej) i art. 112–113 nie obejmują bigamii |
+| KK art. 111 § 2 | różnice ustaw — sąd może uwzględnić na korzyść sprawcy | |
 
-```
-□ Art. 18 Konstytucji RP: małżeństwo jako związek KOBIETY i MĘŻCZYZNY
-  jest pod OCHRONĄ i OPIEKĄ Rzeczypospolitej Polskiej
-□ Art. 1 §1 KRO: zgodnie z tą normą konstytucyjną, małżeństwo w Polsce
-  MOŻE być zawarte WYŁĄCZNIE między kobietą a mężczyzną
-□ W POLSCE NIE ISTNIEJE żadna forma prawna związku jednopłciowego
-  (ani małżeństwo, ani zarejestrowany związek partnerski — BRAK ustawy
-  o związkach partnerskich, mimo wielokrotnych projektów legislacyjnych)
-```
-
-### 13. ⭐⭐⭐ PRZEŁOM: TSUE C-713/23 (25.11.2025) i wyrok NSA (20.03.2026)
-
-**To NAJWAŻNIEJSZY, NAJBARDZIEJ AKTUALNY element tego modułu —
-zweryfikuj status PRZED każdym praktycznym użyciem, sytuacja jest
-polityczne sporna i może ewoluować.**
-
-```
-STAN FAKTYCZNY SPRAWY: dwaj obywatele Polski zawarli związek małżeński
-  w Niemczech (2018), gdzie mieszkali, korzystając z unijnej swobody
-  przemieszczania się. Po powrocie do Polski złożyli wniosek o
-  TRANSKRYPCJĘ niemieckiego aktu małżeństwa — wojewoda mazowiecki
-  ODMÓWIŁ. NSA (2023) skierował pytanie prejudycjalne do TSUE.
-
-WYROK TSUE z 25.11.2025 (sygn. C-713/23):
-  □ Każde PAŃSTWO CZŁONKOWSKIE UE ma OBOWIĄZEK uznawania małżeństwa
-    PAR TEJ SAMEJ PŁCI, zawartego W INNYM PAŃSTWIE CZŁONKOWSKIM, GDY
-    dotyczy to OBYWATELI UE korzystających z PRAWA DO SWOBODNEGO
-    PRZEMIESZCZANIA SIĘ i osiedlania (art. 21 TFUE)
-  □ ⭐ KLUCZOWE ZASTRZEŻENIE (dla praktyki, by nie przeceniać zakresu
-    wyroku): OBOWIĄZEK ten NIE OZNACZA wprowadzenia małżeństw osób tej
-    samej płci DO PRAWA KRAJOWEGO — Polska NIE MUSI zmieniać swojego
-    prawa materialnego (art. 18 Konstytucji, art. 1 KRO POZOSTAJĄ w
-    mocy) — obowiązek dotyczy WYŁĄCZNIE UZNANIA już istniejącego,
-    zagranicznego stanu cywilnego DLA CELÓW ADMINISTRACYJNYCH, nie
-    stworzenia identycznej instytucji w prawie krajowym
-  □ TSUE: takie uznanie NIE NARUSZA "tożsamości narodowej" ani nie
-    zagraża "porządkowi publicznemu" państwa członkowskiego w stopniu
-    uzasadniającym odmowę — czyli KLAUZULA PORZĄDKU PUBLICZNEGO
-    (sekcja 10 wyżej) NIE MOŻE być powoływana jako podstawa odmowy W
-    TYM KONKRETNYM KONTEKŚCIE (obywatele UE korzystający ze swobody
-    przemieszczania się)
-
-WYROK NSA z 20.03.2026 (w następstwie odpowiedzi TSUE):
-  □ NSA UCHYLIŁ wcześniejsze decyzje odmowne (sądów, wojewodów, USC)
-  □ NAKAZAŁ dokonanie TRANSKRYPCJI aktu małżeństwa w TERMINIE 30 DNI
-    od zwrotu akt administracyjnych
-  □ NSA WPROST STWIERDZIŁ: art. 18 Konstytucji NIE STANOWI bezwzględnej
-    przeszkody dla uznania (transkrypcji) zagranicznego małżeństwa osób
-    tej samej płci, zawartego zgodnie z prawem INNEGO państwa UE —
-    argumentacja: przepis konstytucyjny obejmuje POLSKĄ instytucję
-    małżeństwa pod szczególną ochroną, ale NIE WYKLUCZA odrębnie
-    uznania SKUTKÓW zagranicznego aktu stanu cywilnego dla celów
-    ewidencyjnych
-  □ NSA ODRZUCIŁ argument o "trudnościach technicznych/
-    teleinformatycznych" (systemy USC nieprzystosowane do wpisania
-    dwóch osób tej samej płci jako małżonków) jako NIEWYSTARCZAJĄCE
-    uzasadnienie dla niewykonania wyroku
-```
-
-### 14. ⚠️⚠️ KONTEKST POLITYCZNY — SPÓR NIEROZSTRZYGNIĘTY OSTATECZNIE
-
-```
-□ Partia opozycyjna (PiS) ZAPOWIEDZIAŁA złożenie WNIOSKU do Trybunału
-  Konstytucyjnego o zbadanie zgodności takiej wykładni z Konstytucją —
-  ⚠️ STATUS tego wniosku (czy złożony, czy TK się nim zajął, ewentualny
-  wynik) NIE POTWIERDZONY w tej sesji — ZWERYFIKUJ NAJNOWSZY STAN PRZED
-  KAŻDYM UŻYCIEM
-□ Prezydent RP publicznie zadeklarował (cytat pośredni z mediów, NIE
-  weryfikowany dosłownie): nie podpisze żadnej ustawy umożliwiającej
-  zawieranie małżeństw jednopłciowych ani uznanie "trzeciej płci" —
-  odnosi się do EWENTUALNEJ przyszłej USTAWY, NIE do samego wyroku
-  TSUE/NSA (który nie wymaga ustawy, działa przez orzecznictwo)
-□ Minister Sprawiedliwości (kontekst z 2026) odniósł się do wyroku
-  TSUE w sposób wskazujący na ZAMIAR jego WYKONANIA
-□ Poseł Lewicy publicznie ogłosił interpretację, że "polska Konstytucja
-  NIE ZAKAZUJE małżeństw jednopłciowych" — to STANOWISKO POLITYCZNE
-  jednej ze stron sporu, NIE ustalony, bezsporny stan prawny — NIE
-  przedstawiaj tego jako "faktu prawnego", tylko jako element
-  TOCZĄCEGO SIĘ sporu interpretacyjnego
-□ SPRZECZNE stanowisko doktrynalne (część komentatorów, np. w rp.pl):
-  wyrok TSUE "niewiele zmienia" fundamentalnie, bo Polska NADAL nie
-  uznaje małżeństwa jednopłciowego jako TAKIEGO w prawie krajowym —
-  zmienia się WYŁĄCZNIE obowiązek transkrypcji dla WĄSKIEJ kategorii
-  spraw (pary z elementem unijnym, obywatele UE korzystający ze swobody
-  przemieszczania)
-```
-
-### 15. Zasięg praktyczny wyroku — KOGO dotyczy, a kogo NIE
-
-```
-✅ DOTYCZY: par jednopłciowych złożonych z OBYWATELI PAŃSTW UE, którzy
-   zawarli małżeństwo W INNYM PAŃSTWIE UE, korzystając ze SWOBODY
-   PRZEMIESZCZANIA SIĘ i osiedlania (art. 21 TFUE) — sytuacja
-   TRANSGRANICZNA WEWNĄTRZUNIJNA jest KLUCZOWYM elementem uzasadniającym
-   zastosowanie prawa UE
-⚠️ NIEPEWNE/NIEPOTWIERDZONE w tej sesji: czy analogiczny obowiązek
-   dotyczy PAR spoza UE (np. małżeństwo zawarte w USA/Kanadzie/innym
-   państwie SPOZA UE) — wyrok TSUE opiera się na PRAWIE UNIJNYM
-   (swoboda przemieszczania OBYWATELI UE), więc PRAWDOPODOBNIE NIE
-   rozciąga się automatycznie na małżeństwa zawarte poza UE — ale to
-   WYMAGA odrębnej weryfikacji, NIE zakładaj z pewnością w żadną stronę
-□ SKUTEK OGRANICZONY DO TRANSKRYPCJI/EWIDENCJI — NIE oznacza pełnego
-  "upoważnienia" pary jednopłciowej do WSZYSTKICH praw małżeńskich w
-  polskim prawie materialnym (np. wspólność majątkowa małżeńska,
-  dziedziczenie ustawowe jako małżonek, prawo do nazwiska) — TE
-  kwestie pozostają OTWARTE i, wg cytowanego w źródłach prawnika,
-  będą przedmiotem KOLEJNYCH sporów sądowych ("nowy rozdział walki
-  o uprawnienia małżonków")
-```
-
-### 16. Prawa, których pary jednopłciowe mogą dochodzić NIEZALEŻNIE (kontekst ETPC)
-
-Z orzecznictwa Europejskiego Trybunału Praw Człowieka (przywoływanego w
-źródłach, ⚠️ konkretne wyroki NIE zweryfikowane w tej sesji z dokładnymi
-sygnaturami) wynika, że pary jednopłciowe posługujące się (po
-transkrypcji) polskim aktem małżeństwa MOGĄ dochodzić przed sądami
-poszczególnych PRAW WYNIKAJĄCYCH z faktu zawarcia małżeństwa — sprawa
-rodzicielstwa dziecka urodzonego za granicą przez parę jednopłciową
-(rodzice tej samej płci wpisani do polskich dokumentów) była PRZEDMIOTEM
-ODRĘBNEGO, RÓWNIEŻ NIEDAWNEGO wyroku NSA (⚠️ dokładna data/sygnatura NIE
-zweryfikowana w tej sesji) — kontekst wskazuje na SZERSZY, TOCZĄCY SIĘ
-proces sądowego kształtowania praw par jednopłciowych W POSZCZEGÓLNYCH
-obszarach (rodzicielstwo, majątek, dziedziczenie), NIE jednorazowe,
-całościowe rozstrzygnięcie.
-
-### 17. Checklist praktyczny — małżeństwo jednopłciowe
-
-```
-□ Czy para składa się z OBYWATELI UE, którzy zawarli małżeństwo W
-  INNYM PAŃSTWIE UE — jeśli TAK, powołaj się wprost na TSUE C-713/23
-  i wyrok NSA z 20.03.2026 jako podstawę żądania TRANSKRYPCJI
-□ Czy USC/wojewoda odmawia transkrypcji powołując się na TRUDNOŚCI
-  TECHNICZNE — NSA WPROST odrzucił ten argument, powołaj się na to
-□ Czy sprawa dotyczy PAR SPOZA UE — NIEPEWNE, zweryfikuj odrębnie
-  przed przyjęciem, że ten sam mechanizm się stosuje
-□ Czy klient oczekuje PEŁNI praw małżeńskich (majątkowych, spadkowych,
-  nazwiskowych) — WYJAŚNIJ, że wyrok dotyczy WYŁĄCZNIE transkrypcji/
-  ewidencji, dalsze prawa mogą wymagać ODRĘBNYCH postępowań sądowych
-□ ⚠️ ZAWSZE zweryfikuj NAJNOWSZY status sporu politycznego/
-  konstytucyjnego (ewentualny wniosek do TK, jego wynik, ewentualne
-  zmiany ustawowe) PRZED sporządzeniem pisma opartego na tym
-  orzecznictwie — temat jest w TOKU, nie ostatecznie rozstrzygnięty
-```
+Kwalifikacja i proces karny — DR-03.
 
 ---
 
-## 18. INTEGRACJA Z SYSTEMEM
+## D. MAŁŻEŃSTWO ZAWARTE ZA GRANICĄ (PPM, PASC)
 
-- **`mod-KRO-rodzinne.md`** (DR-02, istniejący) — dostarcza ROZWÓD,
-  alimenty, władzę rodzicielską — TEN moduł dostarcza KOMPLEMENTARNIE
-  zawarcie małżeństwa (etap wcześniejszy) — dodaj odesłanie zwrotne
-  przy najbliższej aktualizacji tamtego modułu.
-- **`mod-KK-kwalifikator-karnomaterialny.md`** (DR-03) — art. 206 KK
-  (bigamia) był tylko przykładem klasyfikacyjnym — ten moduł dostarcza
-  pełną treść, rozważ dodanie odesłania zwrotnego z kwalifikatora.
-- **DR-14 (Prawo UE, Międzynarodowe)** — kontekst TSUE/swoboda
-  przemieszczania się (art. 21 TFUE) — sprawdź `mod-TFUE-TUE-prawo-
-  pierwotne-UE.md` dla szerszego omówienia tej swobody.
-- **`mod-rzeczy-znalezione-zasiedzenie.md`** (DR-02) — pośrednio, przy
-  kwestiach majątkowych par jednopłciowych (współposiadanie, brak
-  wspólności ustawowej małżeńskiej wobec braku uznanego małżeństwa w
-  prawie materialnym).
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| PPM art. 48 | możność zawarcia małżeństwa — prawo ojczyste każdej ze stron z chwili zawarcia | obywatel polski: przeszkody KRO (w tym art. 13) obowiązują go także za granicą |
+| PPM art. 49 | forma — prawo miejsca zawarcia; za granicą wystarczy też forma prawa ojczystego obojga albo wspólnego prawa zamieszkania/pobytu | |
+| PPM art. 50 | skutki braku możności i niezachowania formy — prawo właściwe z art. 48 / 49 | bigamia obywatela polskiego → skutek wg KRO (unieważnienie, art. 13) |
+| PPM art. 51 | stosunki osobiste i majątkowe małżonków — wspólne prawo ojczyste, potem zamieszkanie, pobyt, najściślejszy związek | |
+| PPM art. 7 | klauzula porządku publicznego wobec prawa obcego | |
+| PASC art. 104 | transkrypcja zagranicznego dokumentu stanu cywilnego; ust. 5 — obligatoryjna, gdy obywatel polski z polskimi aktami żąda czynności USC, dokumentu tożsamości lub PESEL; ust. 6 — także z urzędu | |
+| PASC art. 107 | odmowa transkrypcji: pkt 1 wady dokumentu lub zdarzenie inne niż urodzenie/małżeństwo/zgon; pkt 2 dokument z transkrypcji w państwie trzecim; pkt 3 sprzeczność z podstawowymi zasadami porządku prawnego RP | podstawa odmowy transkrypcji to art. 107 pkt 3, nie art. 103 (art. 103 dotyczy rejestracji zdarzenia) |
+| PASC art. 103 | odmowa rejestracji zdarzenia zagranicznego (brak dokumentu albo sprzeczność z podstawowymi zasadami porządku prawnego) | |
+
+Bigamia za granicą (obywatel polski już w związku małżeńskim): przeszkoda z art. 13 KRO przez PPM art. 48; transkrypcja — odmowa (PASC art. 107 pkt 3); pierwsze małżeństwo trwa; drugie podlega unieważnieniu na żądanie każdego z interesem prawnym (także po śmierci — art. 18); odpowiedzialność karna — zwykle wyłączona przez KK art. 111 § 1.
 
 ---
 
-## 19. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-19)
+## E. MAŁŻEŃSTWO OSÓB TEJ SAMEJ PŁCI ZAWARTE W INNYM PAŃSTWIE UE
 
-- czasopisma.kul.pl, kul.pl, cejsh.icm.edu.pl — małżeństwo konkordatowe,
-  przeszkody małżeńskie (analiza akademicka, w tym prawo kanoniczne
-  dla kontekstu porównawczego).
-- e-prawnik.pl, infor.pl (2×) — przeszkody małżeńskie, unieważnienie z
-  powodu bigamii, konwalidacja.
-- prawo.pl, oko.press, rp.pl (2×), bankier.pl, i.pl — WYCZERPUJĄCE,
-  wieloźródłowe pokrycie wyroku TSUE C-713/23 (25.11.2025) i wyroku NSA
-  (20.03.2026) dot. transkrypcji małżeństw jednopłciowych, w tym
-  kontekst polityczny (zapowiedź PiS wniosku do TK, stanowisko
-  Prezydenta, Ministra Sprawiedliwości, posła Lewicy) — WSZYSTKIE
-  źródła potwierdzają spójnie kluczowe fakty, rozbieżne WYŁĄCZNIE co do
-  OCENY politycznej/doktrynalnej znaczenia wyroku.
+Stan prawa krajowego: KRO art. 1 i Konstytucja art. 18 — w Polsce brak formy zawarcia małżeństwa osób tej samej płci i brak ustawy o związkach partnerskich (sprawdź ELI przed opinią — temat legislacyjnie aktywny).
+
+**Orzecznictwo — snapshot, NIE zweryfikowany w tej sesji (sprawdź w curia.europa.eu i CBOSA przed powołaniem; nie awansuj do rangi ustalonego stanu prawnego):**
+- TSUE, wyrok z 25.11.2025, C-713/23 — według źródeł wtórnych: obowiązek uznania (transkrypcji) małżeństwa obywateli UE zawartego w innym państwie członkowskim w związku ze swobodą przemieszczania się (art. 21 TFUE); bez obowiązku wprowadzenia takiego małżeństwa do prawa krajowego.
+- NSA, wyrok z 20.03.2026 (sygnatura do ustalenia w CBOSA) — według źródeł wtórnych: uchylenie odmów i nakaz transkrypcji. Brak trafienia w CBOSA = nie powołuj.
+
+Praktyka do czasu weryfikacji:
+- Zakres: pary obywateli UE, małżeństwo zawarte w innym państwie UE, element swobody przemieszczania. Małżeństwa spoza UE — nie zakładaj tego samego skutku.
+- Transkrypcja ≠ pełnia skutków materialnych (wspólność, dziedziczenie, nazwisko) — każdy skutek wymaga odrębnej analizy i aktualnego orzecznictwa.
+- Odmowa USC oparta na PASC art. 107 pkt 3 — forma decyzji administracyjnej (PASC art. 2 ust. 6), organ odwoławczy wojewoda (PASC art. 11 ust. 2), dalej skarga do WSA (PPSA — brzmienie z ELI).
+
+---
+
+## WORKFLOW
+
+1. Ustal formę i miejsce zawarcia, obywatelstwo stron, daty (zawarcie, ustanie poprzedniego małżeństwa, pozew).
+2. Pobierz z ELI brzmienie właściwych przepisów KRO (art. 1–22) i — przy elemencie zagranicznym — PPM art. 48–50, PASC art. 104, 107.
+3. Przeszkoda → legitymacja → wyłączenia unieważnienia (art. 10–18).
+4. Wątek karny: KK art. 206 + art. 109–111 (podwójna przestępność).
+5. Orzecznictwo (TSUE, NSA, SN) — tylko po weryfikacji w źródłach oficjalnych.
+
+## QUALITY GATE
+
+- [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
+- [ ] Konwalidacja liczona wg art. 13 § 3 i art. 18 KRO (nie z pamięci)?
+- [ ] Przy czynie za granicą sprawdzono KK art. 111 § 1?
+- [ ] Przy transkrypcji powołano PASC art. 107 (nie art. 103)?
+- [ ] Orzeczenia oznaczone jako zweryfikowane albo jako snapshot?
+
+## OUTPUT
+
+1. Stan faktyczny i element zagraniczny; 2. Prawo właściwe (PPM); 3. Przeszkoda i legitymacja (KRO + brzmienie z ELI);
+4. Skutki (unieważnienie, nieistnienie, transkrypcja); 5. Wątek karny; 6. Ryzyka i kolejne kroki.
+
+## ŁĄCZ Z
+
+| Sytuacja | Skill / Moduł |
+|---|---|
+| Rozwód, separacja, alimenty | `mod-KRO-rodzinne` |
+| Pozew o unieważnienie / ustalenie nieistnienia | `pisma-procesowe-v3` |
+| Bigamia — kwalifikacja karna | DR-03 (`mod-KK-kwalifikator-karnomaterialny`) |
+| Swoboda przemieszczania, prawo UE | DR-14 |
+| Orzecznictwo TSUE / NSA / SN | `orzeczenia-sadowe-v2` |

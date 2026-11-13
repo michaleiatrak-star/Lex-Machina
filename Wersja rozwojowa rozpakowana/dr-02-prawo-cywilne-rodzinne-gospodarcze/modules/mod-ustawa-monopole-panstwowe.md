@@ -1,413 +1,117 @@
 # mod-ustawa-monopole-panstwowe
 
-**Wersja:** 1.1 | **Dodano:** 2026-07-18 | **Zaktualizowano:** 2026-07-18 (korekta Mennica Polska + dodano PWPW)
-**Rola w systemie:** odpowiedź na wyraźne pytanie użytkownika o "prawo
-antymonopolowe i monopole państwowe" — kontynuacja tematu z poprzedniej
-tury. `mod-ustawa-UOKIK-antymonopolowe.md` dostarcza ogólne prawo
-ANTYMONOPOLOWE (ochrona konkurencji, kontrola koncentracji) — TEN moduł
-dostarcza odrębny, komplementarny temat: MONOPOLE PAŃSTWOWE jako
-KATEGORIĘ KONSTYTUCYJNĄ (państwo samo ustanawia wyłączność), dotąd
-nieobecną.
+**Akty:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 | ustawa o grach hazardowych (UGH) — t.j. Dz.U. 2025 poz. 595 (zm. 2026/1040 od 1.01.2027 — art. 88a; 2026/1206 od 11.01.2027 — art. 63; 2026/176 od 18.02.2027 — art. 10, 42, 43; żadna nie zmienia art. 5) | Prawo pocztowe (PrPoczt) — t.j. Dz.U. 2026 poz. 558 | KPC — t.j. Dz.U. 2026 poz. 468 | ustawa o NBP — t.j. Dz.U. 2022 poz. 2025 (zm. 2026/340 — nie dotyczy art. 4) | ustawa o dokumentach publicznych (UDP) — t.j. Dz.U. 2026 poz. 1208.
+**Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/<rok>/<poz>/text.pdf` dla aktu z listy (np. UGH `.../DU/2025/595/...`, UDP `.../DU/2026/1208/...`) kanałem hosta; zmiany po t.j. — ELI, „Akty zmieniające”.
+**Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
-> ⛔ HARDGATE — zweryfikuj aktualny t.j. na ISAP przed użyciem. Ten temat
-> jest w Polsce w ciągłej ewolucji — kilka z opisanych niżej monopoli
-> było w ostatnich latach LIBERALIZOWANYCH lub ZNOSZONYCH.
+Rozgraniczenie: monopol państwowy = wyłączność ustanowiona ustawą; pozycja dominująca i jej nadużycie = `mod-ustawa-UOKIK-antymonopolowe`.
 
 ---
 
-## 1. ROZGRANICZENIE — MONOPOL PAŃSTWOWY vs POZYCJA DOMINUJĄCA (UOKiK)
+## FAZA 0 — INTAKE
 
 ```
-MONOPOL PAŃSTWOWY (ten moduł) — państwo ŚWIADOMIE i CELOWO ustanawia
-  wyłączność w drodze USTAWY, w konkretnej dziedzinie uznanej za
-  wymagającą szczególnej reglamentacji (art. 216 ust. 3 Konstytucji) —
-  WYJĄTEK od zasady wolności działalności gospodarczej (art. 22
-  Konstytucji), wymaga uzasadnienia "WAŻNYM INTERESEM SPOŁECZNYM"
-
-POZYCJA DOMINUJĄCA / MONOPOL FAKTYCZNY (UOKiK, patrz `mod-ustawa-UOKIK-
-  antymonopolowe.md`) — powstaje SPONTANICZNIE na rynku (jeden
-  przedsiębiorca dostarcza całość produkcji), NIE jest z definicji
-  nielegalny, problemem prawnym jest NADUŻYWANIE tej pozycji, nie samo
-  jej istnienie ani tym bardziej decyzja państwa o jej ustanowieniu
+□ Jaka „wyłączność”: ustawowa (monopol), koncesja/zezwolenie, operator wyznaczony, umowa (kontrakt), faktyczna dominacja?
+□ Jaki przepis ustawy ją ustanawia i kto ją wykonuje?
+□ Czy spór dotyczy legalności działalności klienta w obszarze monopolu, skutku procesowego (nadanie pisma), czy zgodności z prawem UE?
+□ Data stanu prawnego (monopole i wyłączności bywają zmieniane nowelizacjami).
 ```
 
 ---
 
-## 2. PODSTAWA KONSTYTUCYJNA (art. 216 ust. 3 Konstytucji RP)
+## 1. PODSTAWA KONSTYTUCYJNA
 
-**Treść normy:** "Ustanowienie monopolu następuje w drodze ustawy."
-Konstytucja NIE DEFINIUJE pojęcia "monopol" — konieczne odwołanie do
-definicji SŁOWNIKOWEJ: monopol to wyłączne prawo do produkcji lub handlu
-w jakiejś dziedzinie, przysługujące jednej osobie, grupie osób ALBO
-PAŃSTWU, a także przedsiębiorstwo mające takie prawo.
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| Konstytucja art. 216 ust. 3 | ustanowienie monopolu następuje w drodze ustawy | nie rozporządzeniem ani aktem wewnętrznym |
+| Konstytucja art. 22 | ograniczenie wolności działalności gospodarczej tylko ustawą i tylko ze względu na **ważny interes publiczny** | przesłanka brzmi „interes publiczny”, nie „społeczny” |
+| Konstytucja art. 227 ust. 1 | NBP — wyłączne prawo emisji pieniądza oraz ustalania i realizowania polityki pieniężnej | |
+| ustawa o NBP art. 4 | NBP — wyłączne prawo emitowania znaków pieniężnych RP | emisja (władztwo) ≠ fizyczna produkcja |
 
-**Wymogi konstytucyjne dla ważności monopolu:**
-```
-□ WYŁĄCZNIE w drodze USTAWY (nie rozporządzenia, nie aktu wewnętrznego)
-□ Stanowi WYJĄTEK od art. 22 Konstytucji (wolność działalności
-  gospodarczej) — wymaga UZASADNIENIA w "WAŻNYM INTERESIE SPOŁECZNYM"
-□ TK, wyrok z 19.01.2010, sygn. SK 35/08 — kluczowe orzeczenie
-  interpretujące granice dopuszczalności monopolu państwa
-```
-
-**Zasada wykładni ścisłej:** monopol państwa NALEŻY INTERPRETOWAĆ W SPOSÓB
-ŚCISŁY — dotyczy WYŁĄCZNIE zakresu WYRAŹNIE pozostawionego przez
-ustawodawcę do uregulowania form/sposobów urządzania danej działalności
-przez państwo, NIE można go rozszerzająco domniemywać na dziedziny
-pokrewne.
+Wykładnia monopolu — ścisła (wyjątek od art. 22). Orzecznictwo TK (np. SK 35/08 z 19.01.2010 — według poprzedniej wersji modułu) — snapshot; sprawdź w otk.trybunal.gov.pl przed powołaniem.
 
 ---
 
-## 3. PRZYKŁAD GŁÓWNY — MONOPOL PAŃSTWA NA GRY HAZARDOWE
+## 2. GRY HAZARDOWE (UGH)
 
-### Podstawa: ustawa z 19 listopada 2009 r. o grach hazardowych
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| UGH art. 5 ust. 1 | monopol państwa: gry liczbowe, loterie pieniężne, telebingo, gry na automatach poza kasynem gry | |
+| art. 5 ust. 1a | gry multijurysdykcyjne (liczbowe, loterie) | |
+| art. 5 ust. 1b | **urządzanie gier hazardowych przez Internet** objęte monopolem — z wyjątkiem zakładów wzajemnych i loterii promocyjnych | np. kasyno internetowe = monopol, nie koncesja |
+| art. 5 ust. 1c | automaty poza kasynem — wyłącznie w salonach gier na automatach | |
+| art. 5 ust. 2 | wykonywanie monopolu należy do **ministra właściwego do spraw aktywów państwowych**, który tworzy jednoosobowe spółki Skarbu Państwa (w porozumieniu z ministrem finansów) | nie Prezes Rady Ministrów; podmiot wykonujący w praktyce — sprawdź aktualny stan (np. KRS) |
+| art. 5 ust. 3 | do działalności monopolowej nie stosuje się przepisów o ochronie konkurencji | |
+| art. 6 ust. 1–3 | poza monopolem: kasyno (koncesja), bingo pieniężne (zezwolenie), zakłady wzajemne (zezwolenie, także online) | ust. 5: tylko S.A. lub sp. z o.o. z siedzibą w RP; ust. 6: wymogi co do udziałowców (UE/EFTA) |
 
-```
-ZAKRES MONOPOLU PAŃSTWA (rozszerzany kolejnymi nowelizacjami):
-□ Gry LICZBOWE
-□ LOTERIE pieniężne
-□ Gra TELEBINGO
-□ Gry na AUTOMATACH POZA KASYNEM (od nowelizacji w życie 1.04.2017) —
-  wcześniej automaty poza kasynem były PRAWNIE ZAKAZANE w ogóle;
-  nowelizacja 2017 r. wprowadziła PAŃSTWOWY MONOPOL na tę działalność
-  zamiast całkowitego zakazu (częściowa liberalizacja połączona z
-  monopolizacją)
-```
-
-### Mechanizm wykonywania monopolu
-
-```
-□ Wykonywaniem monopolu zajmuje się PREZES RADY MINISTRÓW, który
-  WYZNACZA w tym celu JEDNOOSOBOWE SPÓŁKI SKARBU PAŃSTWA
-□ Wyznaczenie NASTĘPUJE W DRODZE POWIERZENIA (nie rozporządzenia —
-  ⚠️ istotne rozróżnienie proceduralne potwierdzone historycznie: w
-  2017 r. opóźnienie podpisania takiego "powierzenia" przez premier
-  Beatę Szydło spowodowało chwilowy paraliż wykonania nowelizacji)
-□ OBECNIE (stan zweryfikowany, ale re-weryfikuj przy użyciu) podmiotem
-  wykonującym monopol jest **Totalizator Sportowy S.A.**
-□ NADZÓR: Krajowa Administracja Skarbowa (KAS) sprawuje kontrolę nad
-  całą działalnością hazardową
-```
-
-### Rozszerzenie na Internet
-
-Ustawodawca UCHYLIŁ ogólny zakaz urządzania gier hazardowych przez sieć
-Internet — ZAMIAST tego, zasady monopolu państwa (i systemu koncesji dla
-pozostałych gier) STOSUJE SIĘ RÓWNIEŻ do gier online — czyli internetowa
-forma gier hazardowych OBJĘTYCH monopolem PODLEGA TEJ SAMEJ wyłączności
-państwa (przez Totalizator Sportowy), nie jest to "szara strefa" ani
-osobna kategoria wolna od reglamentacji.
-
-### Relacja z prawem UE (kontekst sporny historycznie)
-
-Monopol państwa na hazard był PRZEDMIOTEM SPORU co do zgodności z
-prawem UE (swoboda świadczenia usług, swoboda przedsiębiorczości) —
-⚠️ dokładny status tego sporu i ewentualne orzeczenia TSUE NIE zostały
-w pełni zbadane w tej sesji, zweryfikuj przy konkretnej sprawie
-transgranicznej.
+Zgodność monopolu z prawem UE (swoboda usług) — sprawdź orzecznictwo TSUE przy sprawie transgranicznej (`orzeczenia-sadowe-v2`, DR-14).
 
 ---
 
-## 4. PRZYKŁAD DRUGI — OPERATOR WYZNACZONY (POCZTA POLSKA) — MONOPOL W EWOLUCJI
+## 3. POCZTA — OPERATOR WYZNACZONY (nie monopol)
 
-### Historia liberalizacji (WAŻNE: monopol ZNACZĄCO OGRANICZONY od 2013 r.)
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| PrPoczt art. 3 pkt 13 | operator wyznaczony — operator obowiązany do świadczenia usług powszechnych | |
+| PrPoczt art. 71 ust. 1 | wybór na 10 lat przez Prezesa UKE, decyzją, spośród operatorów wyłonionych w konkursie | art. 73 ust. 3–4 — konkurs nierozstrzygnięty → obowiązki wykonuje dotychczasowy operator wyznaczony; Prezes UKE przedłuża je decyzją na 3–10 lat |
 
-```
-DO 2013 r.: Poczta Polska miała PEŁNY monopol na przesyłki listowe
-OD 1.01.2013: ZNIESIONY monopol na przesyłki listowne w OGÓLE — rynek
-  formalnie zliberalizowany, ALE:
-  □ Pozostawiono zastrzeżony obszar: przesyłki z korespondencją,
-    reklamowe i inne (o nieweryfikowalnej zawartości) do 50 GRAMÓW —
-    wyłączność Poczty Polskiej jako "operatora wyznaczonego" utrzymana
-    w TYM WĄSKIM zakresie przez PRZEJŚCIOWY okres
-  □ Cel zachowania cząstkowego monopolu: ochrona rentowności "usługi
-    powszechnej" (dostarczanie wszędzie, 5 dni w tygodniu) w okresie
-    przejściowym budowania konkurencji rynkowej
-```
+Obowiązujące Prawo pocztowe nie przewiduje obszaru zastrzeżonego (wyłączności) dla operatora wyznaczonego; „obszar zastrzeżony” występuje w t.j. 2026/558 tylko w przepisach o rachunkowości regulacyjnej. Status Poczty Polskiej jako operatora wyznaczonego i okres wyznaczenia — sprawdź w decyzji Prezesa UKE (stan faktyczny, nie norma).
 
-### Instytucja "operatora wyznaczonego" — mechanizm rotacyjny
+### Nadanie pisma procesowego (KPC art. 165 § 2)
 
-```
-□ Operator wyznaczony pełni funkcję PRZEZ OKREŚLONY OKRES (historycznie:
-  Poczta Polska "automatycznie" na 3 lata, następnie 10-letnie okresy
-  wyłaniane w KONKURSIE Prezesa Urzędu Komunikacji Elektronicznej (UKE)
-□ ⚠️ Poczta Polska WYGRYWAŁA kolejne konkursy (brak realnej konkurencji
-  zdolnej przejąć obowiązek usługi powszechnej w całym kraju) — monopol
-  "formalnie konkursowy" pozostawał W PRAKTYCE przy tym samym podmiocie
-□ FUNDUSZ KOMPENSACYJNY — inni operatorzy pocztowi WSPÓŁFINANSUJĄ straty
-  operatora wyznaczonego wynikające z obowiązku usługi powszechnej
-  (nawet do kilkuset mln zł rocznie) — to mechanizm "opłaty za brak
-  monopolu w innych obszarach", nie sam monopol
-```
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| KPC art. 165 § 2 | oddanie pisma w polskiej placówce **operatora świadczącego pocztowe usługi powszechne** w RP albo w placówce operatora świadczącego takie usługi w innym państwie UE = wniesienie do sądu | brzmienie nie odsyła do „operatora wyznaczonego”; ustal, czy dany operator świadczy usługi powszechne |
+| KPC art. 165 § 3 | żołnierz — dowództwo jednostki; osoba pozbawiona wolności — administracja zakładu; załoga statku — kapitan | |
+| KPC art. 165 § 4 | system teleinformatyczny / portal informacyjny — z chwilą wskazaną w elektronicznym potwierdzeniu, gdy przepis szczególny przewiduje taki sposób | |
+| KRO art. 8 § 3 (dla porównania) | zaświadczenie duchownego: nadanie przesyłką poleconą w placówce **operatora wyznaczonego** | różne kryteria w różnych ustawach — sprawdzaj każdą osobno |
 
-### ⭐⭐ NAJWAŻNIEJSZE, NAJBARDZIEJ SPORNE ZASTOSOWANIE — TERMINY PROCESOWE (art. 165 §2 KPC)
-
-**To bezpośrednio dotyczy praktyki PRAWNICZEJ, nie tylko ekonomii
-pocztowej — sprawdź też `prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md`,
-gdzie dodano odpowiednie ostrzeżenie.**
-
-```
-HISTORIA ZMIAN (min. 4 nowelizacje w ostatnich latach):
-1. Pierwotnie: nadanie pisma procesowego dawało skutek złożenia w sądzie
-   TYLKO gdy nadane u "operatora WYZNACZONEGO" (czyli konkretnie Poczty
-   Polskiej) — inny operator (np. InPost) = BRAK skutku procesowego
-2. TSUE, wyrok C-545/17 (27.03.2019) — taka regulacja UZNANA za
-   NIEZGODNĄ z prawem UE (dyrektywa pocztowa 97/67/WE)
-3. Nowelizacja w reakcji na wyrok TSUE — rozszerzenie na "operatora
-   świadczącego POCZTOWE USŁUGI POWSZECHNE" (nie tylko formalnie
-   "wyznaczonego")
-4. ⚠️ SPÓR INTERPRETACYJNY UTRZYMUJĄCY SIĘ DO DZIŚ: część doktryny/
-   praktyków twierdzi, że MIMO zmiany brzmienia, w PRAKTYCE nadal
-   TYLKO Poczta Polska spełnia kryterium "świadczącego usługi
-   powszechne" (bo tylko ona ma status operatora publicznego wg
-   rozporządzenia wykonawczego Prawa pocztowego) — więc zmiana
-   przepisu MOGŁA NIE ZMIENIĆ praktycznego rezultatu
-5. Kolejne projekty nowelizacji (m.in. "wrzutka" do Ordynacji podatkowej,
-   sygnalizowana luty 2025) proponują ROZSZERZENIE na KAŻDEGO z 259
-   zarejestrowanych operatorów pocztowych — status USTAWODAWCZY tej
-   propozycji na dzień weryfikacji w tej sesji NIEPOTWIERDZONY
-   (mogła zostać uchwalona, odrzucona lub być nadal w toku)
-```
-
-**⚠️⚠️ REKOMENDACJA PRAKTYCZNA DLA KAŻDEJ SPRAWY Z TERMINEM ZAWITYM:**
-NIE polegaj na tym opisie jako ostatecznym stanie prawnym — zweryfikuj
-AKTUALNE brzmienie art. 165 §2 KPC (i analogicznych przepisów w KPA,
-Ordynacji podatkowej, KPK) na ISAP BEZPOŚREDNIO PRZED sporządzeniem
-pisma z terminem krytycznym. Dla bezpieczeństwa, przy braku czasu na
-głęboką weryfikację — ZAWSZE nadawaj pismo procesowe za pośrednictwem
-Poczty Polskiej, niezależnie od tego, jak aktualnie interpretuje się
-przepis — to JEDYNA opcja NIEPODWAŻALNA niezależnie od sporu
-interpretacyjnego.
-
-**Inny kontekst — obsługa sądów/administracji (osobny wątek historyczny):**
-Poczta Polska przez pewien czas miała ODRĘBNY monopol na doręczanie
-PRZESYŁEK POLECONYCH W POSTĘPOWANIACH SĄDOWYCH I ADMINISTRACYJNYCH (z
-uzasadnieniem "zapewnienia skutecznego i bezpiecznego doręczania")
-— ten monopol był PRZEDMIOTEM ZNOSZENIA w nowelizacjach z 2025 r.
-(rozszerzenie na dowolnego operatora dla doręczeń URZĘDOWYCH,
-niekoniecznie identyczne z regulacją art. 165 §2 KPC dla NADAWANIA
-pism przez stronę — to DWIE ODRĘBNE kwestie: doręczanie PRZEZ sąd/organ
-vs. nadawanie DO sądu/organu przez stronę — nie myl ich).
+Pułapka praktyczna: termin zawity + wątpliwość co do statusu operatora → nadaj u operatora wyznaczonego albo wnieś elektronicznie (jeśli dopuszczalne) — jedyna opcja bez ryzyka sporu. Odpowiedniki w KPA, Ordynacji podatkowej, KPK, PPSA — brzmienie z ELI, kryteria mogą się różnić. TSUE C-545/17 (27.03.2019) — snapshot dot. dawnego brzmienia; sprawdź przed powołaniem. Powiązanie: `prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md`.
 
 ---
 
-## 5. MONOPOL EMISYJNY NBP I PRODUKCJA ZNAKÓW PIENIĘŻNYCH — ROZBUDOWANE 2026-07-18 (korekta założenia użytkownika o Mennicy Polskiej)
+## 4. ZNAKI PIENIĘŻNE I DOKUMENTY PUBLICZNE
 
-### 5.1 Monopol emisyjny NBP (art. 227 Konstytucji) — prawdziwy, niekwestionowany
+| Przepis | Kwalifikator | Pułapki |
+|---|---|---|
+| UDP art. 16a ust. 1 | Polskiej Wytwórni Papierów Wartościowych S.A. („wytwórca wyłączny”) powierza się prawo wyłączne z art. 17 dla niektórych dokumentów z art. 5 ust. 2 — ze względu na bezpieczeństwo państwa i porządek publiczny | dodany ustawą z 4.12.2025 (Dz.U. 2025 poz. 1881), w życie od 31.12.2025 — nie jest już projektem |
+| UDP art. 16a ust. 2 | wykaz dokumentów objętych prawem wyłącznym — rozporządzenie Rady Ministrów | sprawdź aktualne rozporządzenie w ELI |
+| UDP art. 17 ust. 1 | prawo wyłączne: wytwarzanie blankietów dokumentów z art. 5 ust. 2 pkt 16, 17, 19 i 32 lit. a–e, g, h, m oraz z rozporządzenia; może obejmować indywidualizację i personalizację w procesie wytwarzania | ust. 2–3: certyfikat ISO 14298, świadectwo bezpieczeństwa przemysłowego („tajne”); ust. 4–5: odpłatnie, cena w umowie z emitentem; ust. 6: niektóre dokumenty z pkt 32 może wytwarzać ABW |
+| UDP art. 18 | dokumenty z art. 5 ust. 3 i 4 — wytwórca wyłączny **albo** inne podmioty spełniające wymogi bezpieczeństwa | tu brak wyłączności |
 
-```
-Art. 227 ust. 1 Konstytucji: Narodowemu Bankowi Polskiemu przysługuje
-  WYŁĄCZNE prawo EMISJI PIENIĄDZA oraz ustalania i realizowania polityki
-  pieniężnej. NBP odpowiada za wartość polskiego pieniądza.
-Doktryna (potwierdzona wprost): kompetencja do emisji pieniądza ma
-  charakter WYŁĄCZNY i NIEPODZIELNY — NIE MOŻE być ani PRZENOSZONA,
-  ani WSPÓŁDZIELONA z żadnym innym podmiotem.
-Art. 4 ustawy o NBP (29.08.1997) doprecyzowuje: NBP przysługuje wyłączne
-  prawo EMITOWANIA znaków pieniężnych RP.
-```
+Fizyczna produkcja monet i banknotów dla NBP nie jest monopolem ustawowym w rozumieniu art. 216 ust. 3 — wynika z umów NBP z wykonawcami (stan faktyczny — sprawdź aktualne umowy i komunikaty NBP). Status właścicielski spółek (Mennica Polska, PWPW) — KRS, nie moduł.
 
-**⚠️ KLUCZOWE ROZRÓŻNIENIE (odpowiedź na sugestię użytkownika o
-Mennicy Polskiej):** "EMISJA" w sensie konstytucyjnym to WŁADZTWO PRAWNE
-(decyzja, CO jest prawnym środkiem płatniczym, w jakich nominałach,
-wprowadzenie do obiegu) — NIE to samo, co FIZYCZNA PRODUKCJA (drukowanie
-banknotów, bicie monet). NBP **SAM NIE PRODUKUJE** fizycznie pieniędzy —
-ZLECA produkcję innym podmiotom, zachowując wyłącznie WŁADZTWO PRAWNE
-nad emisją. To rozróżnienie ma kluczowe znaczenie dla poniższej korekty.
+Zgodność wyłączności PWPW z prawem UE (zamówienia publiczne) — wcześniejsze postępowania TSUE dotyczyły stanu sprzed art. 16a; sprawdź aktualny status (curia.europa.eu) przed opinią.
 
-### 5.2 ⭐ KOREKTA: Mennica Polska S.A. NIE JEST monopolem państwowym — jest w pełni sprywatyzowana
-
-**Ustalenie zweryfikowane online (2026-07-18):** Mennica Polska S.A.
-została **W PEŁNI SPRYWATYZOWANA** — Ministerstwo Skarbu Państwa wraz z
-Bankiem Gospodarstwa Krajowego SPRZEDAŁY pozostałe akcje (42%) inwestorom
-instytucjonalnym, kończąc prywatyzację. **Obecnie największym
-akcjonariuszem jest Zbigniew Jakubas** (42,32% akcji wraz z podmiotami
-zależnymi) — **PRYWATNY** biznesmen, NIE Skarb Państwa. Spółka jest
-notowana na GPW — jedyna mennica na świecie notowana na giełdzie.
-
-```
-CO TO OZNACZA PRAWNIE:
-□ Mennica Polska produkuje monety obiegowe (10/20/50 groszy, 1/2/5 zł)
-  i wszystkie monety kolekcjonerskie NA ZLECENIE NBP — ale to relacja
-  UMOWNA (kontrakt/zlecenie), NIE konstytucyjny monopol z art. 216 ust. 3
-□ "Wyłączność" Mennicy Polskiej na produkcję monet obiegowych wynikała
-  DOTYCHCZAS z WYBORU KONTRAHENTA przez NBP (relacja handlowa), nie z
-  ustawy ustanawiającej monopol państwowy
-□ ⚠️ TA WYŁĄCZNOŚĆ MOŻE SIĘ KOŃCZYĆ: doniesienia z 2026 r. wskazują,
-  że NBP przy wprowadzaniu NOWYCH monet (stalowy rdzeń) rozważa
-  otwarcie zamówienia na konkurencję, zamiast automatycznego
-  kontynuowania z Mennicą Polską — "dla MP umowa z NBP ma przede
-  wszystkim znaczenie PRESTIŻOWE i marketingowe... jak dotąd MIAŁA
-  wyłączność" (czas przeszły w źródle sugeruje zmianę w toku)
-□ Podlega WPROST prawu antymonopolowemu (`mod-ustawa-UOKIK-
-  antymonopolowe.md`) i PZP (jeśli zamówienie NBP przekracza progi —
-  `mod-PZP-dzial-I-...md`), NIE reżimowi monopolu konstytucyjnego
-```
-
-**Wniosek:** to, co POTOCZNIE bywa nazywane "monopolem mennicy", jest w
-rzeczywistości monopolem PRAWNYM WYŁĄCZNIE po stronie NBP (emisja jako
-władztwo prawne) — sama FIZYCZNA produkcja jest dziś rynkiem, na którym
-działa prywatna spółka giełdowa, obecnie faktycznie jedyna, ale NIE z
-mocy monopolu ustawowego, tylko z mocy dotychczasowej praktyki
-kontraktowej NBP, która może się zmienić.
-
-### 5.3 ⭐⭐ PRAWDZIWY, OBECNIE SPORNY MONOPOL — PWPW (Polska Wytwórnia Papierów Wartościowych)
-
-**To jest odpowiedź na to, co użytkownik prawdopodobnie miał na myśli
-jako "najważniejszy monopol" — i faktycznie jest nim, choć nie mennica.**
-
-```
-STATUS PRAWNY: jednoosobowa spółka SKARBU PAŃSTWA (100% udziałów) —
-  w PRZECIWIEŃSTWIE do Mennicy Polskiej, TO jest rzeczywiście spółka
-  W CAŁOŚCI państwowa
-NADZÓR: od stycznia 2017 — Minister Spraw Wewnętrznych i Administracji
-  (przeniesiony spod wcześniejszego nadzoru)
-PRZEDMIOT MONOPOLU (katalog SZEROKI, potwierdzony wprost):
-  □ BANKNOTY (PWPW akredytowana od 2006 przez Europejski Bank Centralny
-    jako producent banknotów euro — usługi RÓWNIEŻ dla zagranicznych
-    banków centralnych: Dżibuti, Dominikana, Gruzja, Gwatemala, Peru)
-  □ DOWODY OSOBISTE (produkcja od 1953 r., dziś z warstwą biometryczną
-    od 2021)
-  □ PASZPORTY i dokumenty podróży
-  □ Naklejki WIZOWE
-  □ Książeczki ŻEGLARSKIE
-  □ Legitymacje osób z NIEPEŁNOSPRAWNOŚCIAMI
-  □ Karta KIEROWCY
-  □ BANDEROLE (akcyzowe), znaczki
-```
-
-**⭐⭐⭐ SPÓR PRAWNY Z UE — AKTUALNY, NIEROZSTRZYGNIĘTY (stan zweryfikowany
-2026-07-18, ZAWSZE re-weryfikuj przed użyciem — sytuacja dynamiczna):**
-
-```
-□ TSUE (wyrok dot. Austrii, analogiczny problem) orzekł: firmy
-  drukujące dokumenty publiczne (dowody, paszporty) POWINNY być
-  wyłaniane W DRODZE PRZETARGU, nie przez automatyczne przypisanie
-  monopolu jednemu podmiotowi krajowemu
-□ Rzecznik Generalny TSUE wydał OPINIĘ (2023) w sprawie DOTYCZĄCEJ
-  WPROST POLSKI/PWPW — Komisja Europejska zakwestionowała argumentację
-  Polski, że TYLKO PWPW może zapewnić bezpieczeństwo państwa,
-  wskazując, że inne przedsiębiorstwa w UE (m.in. niemiecki
-  Bundesdruckerei, hiszpańska Fábrica Nacional de Moneda y Timbre)
-  dają PODOBNE gwarancje techniczne/bezpieczeństwa
-□ ⚠️⚠️ REAKCJA USTAWODAWCZA POLSKI (projekt z listopada 2025,
-  ZWERYFIKUJ AKTUALNY STATUS UCHWALENIA): zamiast dostosować się do
-  wyroku TSUE, przygotowano projekt ustawy PRZEDEFINIOWUJĄCY PWPW jako
-  "WYTWÓRCA WYŁĄCZNY" określonych dokumentów — próba UTRZYMANIA
-  monopolu inną drogą prawną, w sposób oceniany przez komentatorów
-  jako DE FACTO SPRZECZNY z kierunkiem orzeczenia TSUE (choć formalnie
-  omijający bezpośrednie naruszenie, bo TSUE orzekał o wadliwej
-  IMPLEMENTACJI dyrektywy o zamówieniach publicznych, nie o zakazie
-  monopolu jako takiego)
-□ Uzasadnienie rządowe: bezpieczeństwo państwa, porządek publiczny,
-  pewność obrotu prawnego, ochrona zasad współdziałania systemów/
-  rejestrów/ewidencji
-```
-
-**Znaczenie praktyczne:** to JEDEN Z NAJWAŻNIEJSZYCH, żywych sporów
-dotyczących zakresu dopuszczalności monopolu państwowego w kontekście
-prawa UE — bezpośrednio odnosi się do granic art. 216 ust. 3 Konstytucji
-RP w starciu z unijnym prawem zamówień publicznych i swobodami rynku
-wewnętrznego. Stan na dzień weryfikacji w tej sesji: SPÓR NIEROZSTRZYGNIĘTY
-OSTATECZNIE — sprawdź NAJNOWSZY status projektu ustawy i ewentualnego
-wyroku TSUE (nie tylko opinii Rzecznika Generalnego, która NIE jest
-wiążąca dla samego Trybunału) przed każdym praktycznym zastosowaniem.
-
-### 5.4 Rozróżnienie trzech podmiotów w łańcuchu produkcji pieniądza (podsumowanie)
-
-```
-NBP           — WŁADZTWO PRAWNE (emisja, art. 227 Konstytucji) —
-                PRAWDZIWY, niekwestionowany monopol konstytucyjny
-PWPW          — PRODUKCJA BANKNOTÓW (fizyczna) — PRAWDZIWY monopol
-                państwowy (100% Skarb Państwa), ale OBECNIE PRAWNIE
-                KWESTIONOWANY przez TSUE co do zgodności z prawem UE
-Mennica Polska — PRODUKCJA MONET (fizyczna) — NIE JEST monopolem
-                państwowym, to PRYWATNA spółka giełdowa z UMOWNĄ (nie
-                ustawową) wyłącznością, która może się zmienić
-```
+Monopole historyczne (spirytusowy, tytoniowy, solny) — nie obowiązują; dziś reglamentacja koncesyjno-akcyzowa (DR-06).
 
 ---
 
-### 5.5 Monopole historyczne (zniesione, kontekst akademicki — NIE obowiązujące)
+## WORKFLOW
 
-Monopol spirytusowy, monopol tytoniowy, monopol solny — funkcjonowały w
-różnych okresach historii Polski (w tym II RP). Obecnie NIE obowiązują
-jako monopole państwowe sensu stricto — rynek alkoholu/tytoniu podlega
-dziś REGLAMENTACJI koncesyjno-akcyzowej (DR-06), nie monopolowi
-państwowemu w rozumieniu art. 216 ust. 3 Konstytucji. ⚠️ NIE mylić
-reglamentacji/akcyzy z monopolem — to różne konstrukcje prawne.
+1. Ustal podstawę wyłączności (konstytucja / ustawa / decyzja / umowa / rynek).
+2. Pobierz z ELI brzmienie przepisu ustanawiającego wyłączność i ustal, kto ją wykonuje.
+3. Sprawdź zmiany po t.j. (Akty zmieniające) i orzecznictwo TK/TSUE — tylko po weryfikacji.
+4. Przy terminach procesowych — przepis o nadaniu pisma w danej procedurze, nie ogólna wiedza o „monopolu poczty”.
 
----
+## QUALITY GATE
 
-## 6. CHECKLIST PRAKTYCZNY
+- [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
+- [ ] Odróżniono monopol ustawowy od koncesji, operatora wyznaczonego i wyłączności umownej?
+- [ ] Przy nadaniu pisma ustalono kryterium z właściwej procedury (np. KPC art. 165 § 2)?
+- [ ] Stan faktyczny (kto wykonuje monopol, kto jest operatorem) potwierdzony w KRS / decyzji, nie z modułu?
 
-```
-□ Czy sprawa dotyczy dziedziny objętej USTAWOWYM monopolem państwa
-  (hazard — Totalizator Sportowy; usługa powszechna pocztowa —
-  operator wyznaczony; dokumenty publiczne — PWPW) czy zwykłej
-  POZYCJI DOMINUJĄCEJ na rynku (→ `mod-ustawa-UOKIK-antymonopolowe.md`)?
-□ ⚠️ Czy klient/przeciwnik zakłada, że dana "wyłączność rynkowa" to
-  monopol PAŃSTWOWY, podczas gdy w rzeczywistości to WYŁĄCZNOŚĆ
-  UMOWNA sprywatyzowanej spółki (jak Mennica Polska)? — sprawdź ZAWSZE
-  rzeczywisty status własnościowy i podstawę prawną wyłączności PRZED
-  zakwalifikowaniem czegoś jako "monopol państwowy" — łatwa pułapka
-  do pomylenia
-□ Jeśli sprawa dot. produkcji dokumentów publicznych (PWPW) — sprawdź
-  AKTUALNY status projektu ustawy "wytwórca wyłączny" i ewentualnego
-  wyroku TSUE — sytuacja jest DYNAMICZNA i prawnie sporna
-□ Jeśli hazard — czy dotyczy KATEGORII objętej monopolem (gry liczbowe/
-  loterie/telebingo/automaty poza kasynem) czy kategorii KONCESYJNEJ
-  (kasyno, zakłady wzajemne) — to RÓŻNE reżimy w tej samej ustawie?
-□ Jeśli sprawa dot. TERMINU procesowego i nadania pisma pocztą —
-  ZAWSZE zweryfikuj AKTUALNY stan art. 165 §2 KPC (lub odpowiednika w
-  innej procedurze) PRZED poleceniem klientowi konkretnego operatora —
-  rekomenduj Pocztę Polską jako bezpieczny wybór przy wątpliwościach
-□ Czy monopol, o którym mowa, ma PODSTAWĘ USTAWOWĄ zgodną z art. 216
-  ust. 3 Konstytucji, czy to tylko FAKTYCZNA dominacja rynkowa bez
-  celowej decyzji ustawodawcy?
-```
+## OUTPUT
 
----
+1. Kwalifikacja wyłączności (przepis + brzmienie z ELI); 2. Podmiot wykonujący; 3. Skutki dla klienta (legalność działalności, termin, zamówienie);
+4. Ryzyka (prawo UE, zmiany ustawowe); 5. Rekomendacja.
 
-## 7. INTEGRACJA Z SYSTEMEM
+## ŁĄCZ Z
 
-- **`mod-ustawa-UOKIK-antymonopolowe.md`** — rozgraniczenie: monopol
-  PAŃSTWOWY (ustawowy, celowy) vs pozycja dominująca/monopol FAKTYCZNY
-  (rynkowy, podlegający kontroli nadużyć) — NIE duplikuj.
-- **`prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md`** — ostrzeżenie o spornej
-  interpretacji art. 165 §2 KPC dodane 2026-07-18, bezpośrednie
-  powiązanie z sekcją 4 tego modułu.
-- **DR-06 (podatki)** — akcyza na alkohol/tytoń jako WSPÓŁCZESNY
-  odpowiednik dawnych monopoli (reglamentacja fiskalna, nie monopol
-  sensu stricto) — sprawdź krzyżowo, jeśli sprawa dotyczy historycznego
-  kontekstu tych branż.
-
----
-
-## 8. LITERATURA I ŹRÓDŁA (zweryfikowane online 2026-07-18)
-
-- journals.umcs.pl — "Hazardowa działalność gospodarcza w Polsce" —
-  art. 216 ust. 3 Konstytucji, definicja monopolu, TK SK 35/08, rola
-  Totalizatora Sportowego.
-- kruczek.pl — "Monopol państwa na prowadzenie działalności w zakresie
-  gier hazardowych a przepisy UE" — historia rozszerzania zakresu
-  monopolu, inne przykłady monopoli prawnych (operator pocztowy).
-- e-debica.pl, prawo.pl, wgospodarce.pl, tvn24.pl, money.pl — mechanizm
-  powierzenia wykonywania monopolu Totalizatorowi Sportowemu (2017).
-- rp.pl, forbes.pl, natemat.pl, innpoland.pl, orka2.sejm.gov.pl —
-  historia liberalizacji monopolu Poczty Polskiej (2013, fundusz
-  kompensacyjny, operator wyznaczony w konkursach UKE).
-- lexlege.pl, arslege.pl — art. 227 Konstytucji, monopol emisyjny NBP.
-- dspace.uni.lodz.pl (Ofiarski) — analiza monopolu emisyjnego NBP,
-  dane o dostawach banknotów/monet do NBP.
-- press.uni.lodz.pl — "Pojęcie pieniądza w ujęciu prawnym" — wyłączny i
-  niepodzielny charakter kompetencji emisyjnej NBP.
-- forsal.pl, pl.wikipedia.org (Mennica Polska), gazetaprawna.pl,
-  e-numizmatyk.pl, money.pl, mennica.com.pl — status własnościowy Mennicy
-  Polskiej (pełna prywatyzacja, główny akcjonariusz Zbigniew Jakubas),
-  charakter umowny (nie ustawowy) wyłączności na produkcję monet.
-- pl.wikipedia.org (PWPW), tvn24.pl, infor.pl, skarbnicanarodowa.pl —
-  status PWPW jako w pełni państwowej spółki, katalog produkowanych
-  dokumentów, nadzór MSWiA.
-- bankier.pl, bank.pl, czasopismo.legeartis.org — spór PWPW z prawem UE
-  (wyrok TSUE dot. Austrii, opinia Rzecznika Generalnego w sprawie
-  polskiej, projekt ustawy "wytwórca wyłączny" z listopada 2025).
+| Sytuacja | Skill / Moduł |
+|---|---|
+| Pozycja dominująca, praktyki ograniczające konkurencję | `mod-ustawa-UOKIK-antymonopolowe` |
+| Terminy i opłaty w piśmie procesowym | `prawo-polskie-v2/krajowe/pisma-procesowe-v3/modules/MOD-OPLATY.md` |
+| Akcyza, koncesje alkoholowe i tytoniowe | DR-06 |
+| Prawo UE (swobody, zamówienia) | DR-14 |
+| Orzecznictwo TK / TSUE | `orzeczenia-sadowe-v2` |
