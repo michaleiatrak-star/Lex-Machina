@@ -1,7 +1,7 @@
 # mod-liczba-pelnomocnikow-strona-samodzielna
 
 **Akt:** KPC — t.j. Dz.U. 2026 poz. 468 (zm. po t.j.: 2026/473 i 2026/830 od 8.07.2026; 2026/1003 od 28.10.2026; 2026/1046 od 5.11.2026 — art. 47 § 2 pkt 1 lit. d; 2026/1296 od 6.11.2026).
-**Inne akty:** KPK — t.j. Dz.U. 2026 poz. 490 | Prawo o adwokaturze (PrAdw) — t.j. Dz.U. 2024 poz. 1564 | ustawa o radcach prawnych (URP) — t.j. Dz.U. 2024 poz. 499.
+**Inne akty:** KPK — t.j. Dz.U. 2026 poz. 490 | Prawo o adwokaturze (PrAdw) — t.j. Dz.U. 2024 poz. 1564 (zm. 2025/1172; 2026/370; 2026/846; **2026/1290 od 17.10.2026 — art. 77 ust. 3, 5, 6**, część przepisów od 1.01.2027) | ustawa o radcach prawnych (URP) — t.j. Dz.U. 2024 poz. 499 (zm. 2025/1172; 2026/370; **2026/731 od 18.06.2026 — art. 35¹ ust. 5**; 2026/846). Przepisy o aplikantach czytaj w brzmieniu po tych nowelizacjach — t.j. ich nie zawiera.
 **Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/2026/468/text.pdf` (KPK `.../DU/2026/490/...`, PrAdw `.../DU/2024/1564/...`, URP `.../DU/2024/499/...`) kanałem hosta; zmiany po t.j. — ELI, „Nowelizacje po tekście jednolitym”.
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
@@ -69,17 +69,18 @@ Wielu pełnomocników: brak podziału zadań w pełnomocnictwie = każdy ma peł
 |---|---|---|
 | PrAdw art. 77 ust. 1 | po 6 miesiącach aplikacji aplikant adwokacki może zastępować adwokata przed sądami, organami ścigania i innymi instytucjami | wyjątki: SN, NSA, TK, Trybunał Stanu |
 | PrAdw art. 77 ust. 2 | także przez rok od zakończenia aplikacji (2 lata, gdy uchwała z art. 79a wydłużyła okres z art. 79 ust. 1 pkt 4) | |
-| PrAdw art. 77 ust. 3 | aplikant **radcowski** może zastępować adwokata, jeżeli adwokat jest wspólnikiem spółki adwokacko-radcowskiej | wyjątek: obrona w sprawach karnych i karnoskarbowych |
-| PrAdw art. 77 ust. 5 | aplikant adwokacki może podpisywać pisma procesowe z wyraźnego upoważnienia | z wyłączeniem apelacji, skargi kasacyjnej, skargi konstytucyjnej |
+| PrAdw art. 77 ust. 3 | od 17.10.2026: aplikant **radcowski** może zastępować adwokata na takich samych zasadach jak aplikant adwokacki | wcześniej (t.j. 2024/1564) tylko w spółce adwokacko-radcowskiej i bez obrony karnej/karnoskarbowej — nie stosuj dawnego brzmienia do czynności od 17.10.2026 |
+| PrAdw art. 77 ust. 5 | od 17.10.2026: aplikant adwokacki sporządza projekty pism; podpisuje pisma z wyraźnego upoważnienia adwokata | wyłączenie: apelacja oraz pisma do SN, NSA, TK i Trybunału Stanu |
+| PrAdw art. 77 ust. 6 | od 17.10.2026: uprawnienia z ust. 1, 2, 4, 5 i URP art. 35¹ ust. 5 ma też osoba wpisana na listę adwokatów — do ślubowania, w granicach okresu z art. 79 ust. 1 pkt 4 lub 5 | |
 | URP art. 35¹ ust. 1–2 | aplikant radcowski: te same zasady wobec radcy prawnego (6 miesięcy; rok po aplikacji, 2 lata przy uchwale z art. 37¹) | wyjątki: SN, NSA, TK, Trybunał Stanu |
 | URP art. 35¹ ust. 4 | podpisywanie pism z wyraźnego upoważnienia radcy | bez apelacji, skargi kasacyjnej, skargi konstytucyjnej |
-| URP art. 35¹ ust. 5 | aplikant **adwokacki** może zastępować radcę, jeżeli radca jest wspólnikiem spółki adwokacko-radcowskiej | |
+| URP art. 35¹ ust. 5 | od 18.06.2026: aplikant **adwokacki** może zastępować radcę prawnego na takich samych zasadach jak aplikant radcowski | wcześniej — tylko w spółce adwokacko-radcowskiej |
 
 Wnioski praktyczne:
 - Aplikant działa w zastępstwie patrona (podstawa: PrAdw/URP), nie jest substytutem z art. 91 pkt 3 KPC i nie zwiększa liczby pełnomocników strony.
-- Zastępstwo „krzyżowe” (aplikant jednego samorządu za członka drugiego) jest dopuszczalne **tylko** w spółce adwokacko-radcowskiej (PrAdw art. 77 ust. 3, URP art. 35¹ ust. 5); poza nią — brak podstawy.
+- Zastępstwo „krzyżowe” (aplikant jednego samorządu za członka drugiego): od 18.06.2026 aplikant adwokacki za radcę (URP art. 35¹ ust. 5), od 17.10.2026 aplikant radcowski za adwokata (PrAdw art. 77 ust. 3) — na zasadach jak aplikant „własny”. Dla czynności wcześniejszych — dawne brzmienie (tylko spółka adwokacko-radcowska). Ustal datę czynności.
 - Aplikant przy obecnym i działającym patronie nie ma odrębnej roli procesowej; zastępstwo zakłada działanie w miejsce patrona. Planowany czynny udział aplikanta — zgłoś upoważnienie przed posiedzeniem, nie improwizuj na sali.
-- Odmowa dopuszczenia: najpierw ustal, czy był zastępowany patron nieobecny, czy było upoważnienie, czy minęło 6 miesięcy aplikacji, czy sąd nie jest SN/NSA. Przy pełnomocniku bez dokumentu umocowania — art. 97 (naglącość + uprawdopodobnienie umocowania). Błędna odmowa wpływająca na obronę → zarzut z art. 379 pkt 5.
+- Odmowa dopuszczenia: najpierw ustal datę, czy był zastępowany patron nieobecny, czy było upoważnienie, czy minęło 6 miesięcy aplikacji, czy sąd nie jest SN/NSA. Przy pełnomocniku bez dokumentu umocowania — art. 97 (naglącość + uprawdopodobnienie umocowania). Błędna odmowa wpływająca na obronę → zarzut z art. 379 pkt 5.
 
 **Orzecznictwo (snapshot, sprawdź w sn.pl):** SN, postanowienie z 7.02.2018, V CSK 188/17 — odmowa tymczasowego dopuszczenia mimo uprawdopodobnionego upoważnienia (faks) przy naglącej czynności jako pozbawienie możności obrony; SN III CZP 22/08 — uprawdopodobnienie umocowania kopią. Treść i tezy zweryfikuj przed powołaniem.
 
@@ -113,7 +114,7 @@ Inne możliwe źródła wypowiedzi sędziego: zarządzenie porządkowe dotycząc
 - [ ] Brzmienie każdego powołanego przepisu pobrane z ELI (nie z kwalifikatora)?
 - [ ] Nie powołano jednostek uchylonych (art. 502, art. 87 § 6, art. 89 § 1¹ i § 3 KPC)?
 - [ ] Rozróżniono pełnomocnika, substytuta i aplikanta zastępującego patrona?
-- [ ] Przy aplikancie sprawdzono 6 miesięcy, sąd (SN/NSA), spółkę adwokacko-radcowską?
+- [ ] Przy aplikancie sprawdzono 6 miesięcy, sąd (SN/NSA) i datę czynności względem nowelizacji 2026/731 i 2026/1290?
 - [ ] Orzeczenia oznaczone jako zweryfikowane albo jako snapshot?
 
 ## OUTPUT

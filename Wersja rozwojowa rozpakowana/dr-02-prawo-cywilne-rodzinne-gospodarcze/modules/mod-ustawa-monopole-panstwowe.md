@@ -1,6 +1,6 @@
 # mod-ustawa-monopole-panstwowe
 
-**Akty:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 | ustawa o grach hazardowych (UGH) — t.j. Dz.U. 2025 poz. 595 (zm. 2026/1040 od 1.01.2027 — art. 88a; 2026/1206 od 11.01.2027 — art. 63; 2026/176 od 18.02.2027 — art. 10, 42, 43; żadna nie zmienia art. 5) | Prawo pocztowe (PrPoczt) — t.j. Dz.U. 2026 poz. 558 | KPC — t.j. Dz.U. 2026 poz. 468 | ustawa o NBP — t.j. Dz.U. 2022 poz. 2025 | ustawa o dokumentach publicznych (UDP) — t.j. Dz.U. 2026 poz. 1208.
+**Akty:** Konstytucja RP — Dz.U. 1997 nr 78 poz. 483 | ustawa o grach hazardowych (UGH) — t.j. Dz.U. 2025 poz. 595 (zm. 2026/1040 od 1.01.2027 — art. 88a; 2026/1206 od 11.01.2027 — art. 63; 2026/176 od 18.02.2027 — art. 10, 42, 43; żadna nie zmienia art. 5) | Prawo pocztowe (PrPoczt) — t.j. Dz.U. 2026 poz. 558 | KPC — t.j. Dz.U. 2026 poz. 468 | ustawa o NBP — t.j. Dz.U. 2022 poz. 2025 (zm. 2026/340 — nie dotyczy art. 4) | ustawa o dokumentach publicznych (UDP) — t.j. Dz.U. 2026 poz. 1208.
 **Brzmienie:** przed powołaniem pobierz z ELI (RZĄD 1): `isap_tekst` albo `https://api.sejm.gov.pl/eli/acts/DU/<rok>/<poz>/text.pdf` dla aktu z listy (np. UGH `.../DU/2025/595/...`, UDP `.../DU/2026/1208/...`) kanałem hosta; zmiany po t.j. — ELI, „Akty zmieniające”.
 **Moduł wskazuje przepis i jego funkcję (kwalifikator), nie zastępuje brzmienia.** Kwalifikatory sprawdzone z t.j. w ELI 2026-11-13.
 
