@@ -20,7 +20,8 @@ z brzmieniem nowelizacji z ELI).
 --rejestr PLIK: utrzymuje `prawo-polskie-v2/krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md` —
 tabela A (zmiany nadchodzące) generowana od nowa, tabela B (przepisy czasowe) bez wierszy
 z datą „Do” wcześniejszą niż dziś (USUNIETY_PRZEPIS_CZASOWY) i z kontrolą, że nowelizacja
-istnieje w ELI (PRZEPIS_CZASOWY_BEZ_AKTU).
+istnieje w ELI (PRZEPIS_CZASOWY_BEZ_AKTU); tabela C (odczyt W-4) — każda nowelizacja z tabeli A
+ma wiersz (BRAK_W4), wiersze nowelizacji spoza A i bez wierszy w B są usuwane.
 
 Kod wyjścia: 0 brak znalezisk, 1 znaleziska, 2 błąd ELI.
 Użycie: check_nowelizacje.py --root "Wersja rozwojowa rozpakowana" [--skill dr-02-…]
@@ -37,6 +38,8 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
+# Bez zapisu .pyc: __pycache__ jest śledzony w repozytorium (fałszywe „zmiany” skilli).
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_uchylone import header_acts  # noqa: E402
 
@@ -140,7 +143,27 @@ def update_registry(path: Path, upcoming: dict, scopes: dict, today: str, cache:
                 errors += 1
                 report(f"ELI_ERROR\tREJESTR\t{cells[0]}\t{exc}")
         kept.append(line)
-    path.write_text("\n".join(kept) + "\n", encoding="utf-8")
+    # Tabela C: odczyt W-4 dla każdej nowelizacji z tabeli A.
+    pending = {short(cid) for (_, cid, _, _) in upcoming}
+    in_b = {re.match(r"\| (\d{4}/\d+) art", l).group(1) for l in kept if re.match(r"\| \d{4}/\d+ art", l)}
+    final, read = [], set()
+    in_c = False
+    for line in kept:
+        if line.startswith("## C."):
+            in_c = True
+        elif line.startswith("## "):
+            in_c = False
+        m = re.match(r"\| (\d{4}/\d+) \| (\d{4}-\d{2}-\d{2}) \|", line) if in_c else None
+        if m:
+            if m.group(1) not in pending and m.group(1) not in in_b:
+                report(f"USUNIETY_ODCZYT_W4\t{m.group(1)}")
+                continue
+            read.add(m.group(1))
+        final.append(line)
+    for tag in sorted(pending - read):
+        found += 1
+        report(f"BRAK_W4\t{tag}\tprzepisy przejściowe i daty wejścia nieodczytane (METODYKA W-4)")
+    path.write_text("\n".join(final) + "\n", encoding="utf-8")
     return found, errors
 
 
@@ -229,13 +252,12 @@ def main() -> int:
                     upcoming.setdefault((date, cid, title, tj_id), set()).add(str(rel))
                     for zm in re.finditer(rf"\[OD {re.escape(date)}: {year_c}/{pos_c}\]\**\s*—\s*([^;)\n|]+)", head):
                         scopes.setdefault(cid, set()).add(zm.group(1).replace("*", "").strip().rstrip("."))
-    print(f"PLIKI={len(files)} ZNALEZISKA={found} BLEDY_ELI={errors}")
-
     if args.rejestr:
         found_r, errors_r = update_registry(args.rejestr, upcoming, scopes, args.dzis, args.cache, report)
         found += found_r
         errors += errors_r
         print(f"REJESTR={args.rejestr} ZMIANY_NADCHODZACE={len(upcoming)}")
+    print(f"PLIKI={len(files)} ZNALEZISKA={found} BLEDY_ELI={errors}")
 
     if args.raport:
         lines = [f"## Nadchodzące zmiany w aktach modułów DR (stan ELI {args.dzis})", ""]

@@ -33,7 +33,8 @@ niemonitorowalny (`BRAK_NAGLOWKA_TJ`).
 `prawo-polskie-v2/krajowe/shared/REJESTR-ZMIAN-W-CZASIE.md`: tabela A (zmiany nadchodzące) generowana
 codziennie z ELI i znaczników `[OD …]` — wiersz znika w dniu wejścia w życie; tabela B (przepisy czasowe
 z okresem `Od`–`Do`) wpisywana w W-4 — wiersz po terminie usuwa skrypt. Każdy przepis przejściowy
-odczytany w W-4 trafia do tabeli B, także gdy moduł opisuje go w kwalifikatorze.
+odczytany w W-4 trafia do tabeli B, także gdy moduł opisuje go w kwalifikatorze. Tabela C (odczyt W-4): każda nowelizacja z tabeli A ma
+wiersz z datą odczytu i wynikiem (wiersze B albo „brak”) — brak wiersza = `BRAK_W4`.
 
 ## Monitoring
 
