@@ -22,7 +22,8 @@ majacych siedzibe w Polsce (lub swiadczacych uslugi dla polskich uzytkownikow).
 Usluga droga elektroniczna: Realizowana bez jednoczesnej obecnosci stron przez systemy IT
 Obowiazkowe informacje (art. 5): Nazwa, adres, kontakt, NIP, KRS, UODO
 Regulamin: Art. 8 - obowiazkowy regulamin uslug elektronicznych
-Zgoda na marketing: Art. 10 - zakaz spamu bez wyraznej zgody (opt-in)
+Zgoda na marketing: art. 398 ust. 1-3 Prawa komunikacji elektronicznej (Dz.U. 2024 poz. 1221) - opt-in;
+  art. 10 USUDE uchylony (art. 26 pkt 3 ustawy Dz.U. 2024 poz. 1222) - ELI 2026-11-13
 ```
 
 ## Odpowiedzialnosc dostawcy - safe harbour

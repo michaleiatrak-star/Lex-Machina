@@ -403,9 +403,8 @@ WPIS DO REJESTRU DZIAŁALNOŚCI REGULOWANEJ — orientacyjnie: działalność
 
 ## 25. INTEGRACJA Z SYSTEMEM
 
-- **mod-KSH-spolki-handlowe.md** (DR-02) — sekcja "FORMY DZIAŁALNOŚCI
-  GOSPODARCZEJ" (działalność nierejestrowana, JDG/CEIDG, spółka
-  cywilna) — TEN moduł dostarcza KOMPLEMENTARNIE reglamentację
+- **mod-prawo-przedsiebiorcow.md** i **mod-KSH-spolki-handlowe.md** (DR-02) — formy
+  działalności (nierejestrowana, JDG/CEIDG, spółka cywilna — odesłania) — TEN moduł dostarcza KOMPLEMENTARNIE reglamentację
   (Część C) i kontrolę (Część B), które NAKŁADAJĄ SIĘ NA już
   zarejestrowaną działalność opisaną tam.
 - **mod-KPC-egzekucja-windykacja.md** (DR-02) — postępowanie nakazowe

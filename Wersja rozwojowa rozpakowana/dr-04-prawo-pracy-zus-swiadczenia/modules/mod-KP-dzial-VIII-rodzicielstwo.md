@@ -46,7 +46,7 @@ pracowniczych. Zamyka F-27.
 
 ---
 
-## 2. URLOP RODZICIELSKI (art. 182¹ i n.) — ⭐⭐⭐ najczęściej mylona z
+## 2. URLOP RODZICIELSKI (art. 182¹ᵃ i n.; art. 182¹ uchylony) — ⭐⭐⭐ najczęściej mylona z
 macierzyńskim instytucja, WYMAGA precyzji
 
 ```

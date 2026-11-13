@@ -430,12 +430,13 @@ z tą instytucją (sprawa Marek Petelski — art. 161 § 4, ryzyko
   kompetencji "lub przekaza..." — urwana w źródle, NIE w pełni
   potwierdzona] (⭐⭐⭐ KLUCZOWY mechanizm kontroli sądowej — sędzia
   penitencjarny jako organ NADZORU nad decyzjami dyrektora ZK w
-  sprawach dyscyplinarnych, komplementarny do skargi z art. 144 §5)
+  sprawach dyscyplinarnych; art. 144 § 5 uchylony — kontrola decyzji
+  dyrektora ZK: skarga do sądu z art. 7 § 1 KKW, ELI 2026-11-13)
 
 ⚠️ POZOSTAJE DO POGŁĘBIENIA: pełny katalog art. 143 §1 (pkt 4-7 poza
-  już wymienionymi), dokładna treść art. 148-149, tryb i termin skargi
-  z art. 144 §5 (czy to skarga do sędziego penitencjarnego, czy inny
-  organ — NIE jednoznacznie potwierdzone w tej sesji, wymaga
+  już wymienionymi), dokładna treść art. 148-149; art. 144 § 5 jest
+  uchylony — tryb skargi: art. 7 KKW (pobierz z ELI; termin i sąd
+  właściwy — art. 7 § 2–3), wymaga
   rozróżnienia od mechanizmu z art. 148 wyżej).
 ```
 

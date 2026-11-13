@@ -256,7 +256,7 @@ Kluczowe sprawy SG:
   rozpocząć się NIE WCZEŚNIEJ niż po 7 DNIACH i NIE PÓŹNIEJ niż w
   CIĄGU 30 DNI (⭐ MECHANIZM IDENTYCZNY jak ogólne zasady kontroli
   przedsiębiorcy z Rozdziału 5 Prawa przedsiębiorców, patrz
-  `mod-KSH-spolki-handlowe.md` sekcja 1a, DR-02 — PO upływie 30 dni
+  `mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md` (DR-02) cz. B — PO upływie 30 dni
   zawiadomienie WYGASA, wymaga PONOWNEGO doręczenia)
 □ BEZ zawiadomienia — w określonych, WYJĄTKOWYCH okolicznościach
   (⚠️ dokładny katalog wyjątków analogiczny do ogólnych zasad Prawa
@@ -284,7 +284,7 @@ Kluczowe sprawy SG:
 □ Kontrolowany MOŻE złożyć SPRZECIW wobec podjęcia i wykonywania przez
   organy kontroli (W TYM inspektorów pracy I funkcjonariuszy SG)
   czynności NARUSZAJĄCYCH przepisy ustawy — analogicznie do
-  MECHANIZMU już opisanego w `mod-KSH-spolki-handlowe.md` sekcja 1a
+  MECHANIZMU już opisanego w `mod-wekslowe-kontrola-przedsiebiorcy-koncesje.md` (DR-02) cz. B
   (DR-02) dla kontroli WIOŚ/innych organów — TEN SAM instrument
   proceduralny, TERAZ potwierdzony jako STOSOWANY RÓWNIEŻ wobec SG
 □ PRZYKŁADOWE podstawy sprzeciwu: BRAK zawiadomienia kontrolowanego o

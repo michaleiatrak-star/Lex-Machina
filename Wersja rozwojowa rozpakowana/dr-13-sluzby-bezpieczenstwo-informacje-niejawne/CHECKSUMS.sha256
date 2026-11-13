@@ -1,7 +1,7 @@
 aba21498ee105e85b915012bd69c2ac272362d5088fae72a494c8cf1cfb723b4  ./MAPA-AKTOW.md
 07c444b5efb2f5bee7a497f769232642eaeadcfdb93937be6d697f95121d00e4  ./MAPA-POKRYCIA.md
 9cccae89f1335a356a3968945c139ce433612ef313651baf2636ce3e57732531  ./PORTABILITY-MANIFEST.md
-55b54ddc8563f56443b7f2022d65a96695b835eb6a42918d002b24916548d8f3  ./SKILL.md
+711de0307f345cfe9ad27d6289b72f31db20d2a34471e3cd37259c59fe683698  ./SKILL.md
 d0fac2eae45c9f05968b785676ea2fd86fecc6beef64e367327343bdb0f4301c  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 39eebb49fb36b2596ad527264516fbd47391760dd51e34c18a2e1e33eeec0603  ./modules/mod-BronAmunU-pozwolenia-cofniecie-strzelnice.md
@@ -12,9 +12,9 @@ beebd4d8c518e881d0249529b22691f3b1fbb6713e578b3f472dd30ff9983c48  ./modules/mod-
 8033e14ff753577eab55dfbc1b4525f9071506064e875a91307951ff09bbfdd8  ./modules/mod-ustawa-obrona-ojczyzny-mobilizacja.md
 b7de7b93c86c1457a2b5e51dd70c1db1296bfeb8dc6511269eddceb042f68b92  ./modules/mod-ustawa-policja.md
 eb210cbd5d2b7af06b0a3b91b988bcce1d2843d4e4ba5150f8e9d8b35ffe9827  ./modules/mod-ustawa-sluzby-operacyjne-retencja-danych.md
-3fefd4d5166389d1c188e3f5efc5040a8e9668425fa84a60ce1d217fa32665dc  ./modules/mod-ustawa-straz-graniczna.md
+21893556e4fdc7bc87aac786a2418168c738b4aeba6687f5fa37e2b993204976  ./modules/mod-ustawa-straz-graniczna.md
 34f08c190f752ab3c873c990399ce6bcf4ee3f937cf26dbdd5fa5630aeb6c21d  ./modules/mod-ustawa-szczegolne-srodki-zabezpieczajace.md
 e54b40a65f6ebcc1597e12cbbf0703cf705b0ef0da72a88bcaa4dc3b243aa3f7  ./modules/mod-ustawa-zandarmeria-wojskowa.md
 dfa669974030588a6527ed4dd73c4a79d3250a13b23322fdc6abdea695665764  ./modules/mod-ustawa-zarzadzanie-kryzysowe-obrona-cywilna.md
-314b5772ab38e342efd93fb1a33b33178c693ce3e71df0a578efe36be52bad0f  ./references/CHANGELOG.md
+0574d441e40324fc2a026c16981fba9164845e9b8092681852542beaf78363f3  ./references/CHANGELOG.md
 16b107867e63968318ef1c3db2b7593e5c96f63f824b8d3eb6c78775759d34b3  ./references/HISTORIA-ZMIAN-PLIKOW.md

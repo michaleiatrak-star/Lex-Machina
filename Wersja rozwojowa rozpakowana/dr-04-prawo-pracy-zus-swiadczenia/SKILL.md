@@ -1,6 +1,6 @@
 ---
 name: dr-04-prawo-pracy-zus-swiadczenia
-version: "3.57"
+version: "3.58"
 description: "Prawo pracy, ZUS i świadczenia: KP, zatrudnienie, rozwiązanie stosunku pracy, ubezpieczenia społeczne, emerytury, renty, KRUS, PFRON i pomoc społeczna."
 dependencies:
   requires:
@@ -217,7 +217,7 @@ AUDIT-JOURNAL.md`.
   [✓] NOWY  mod-KP-dzial-VIII-rodzicielstwo
               (dodany 2026-08-13 — naprawa F-27: KP Dział VIII, art.
                176-189¹. Urlop macierzyński [180, 20 tyg. + warianty],
-               rodzicielski [182¹, 41/43 tyg., 9 tyg. nieprzenoszalnych
+               rodzicielski [182¹ᵃ (182¹ uchylony), 41/43 tyg., 9 tyg. nieprzenoszalnych
                per rodzic — reforma 2023], ojcowski [2 tyg., termin do
                12 mies. dziecka], wychowawczy [186, do 36 mies. +
                dodatkowy dla dziecka z niepełnosprawnością, ochrona
