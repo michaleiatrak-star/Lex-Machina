@@ -1,6 +1,6 @@
 ---
 name: dr-09-budownictwo-srodowisko-energia-transport
-version: "3.61"
+version: "3.62"
 description: "Budownictwo, środowisko, energia i transport: prawo budowlane, planowanie, odpady, ochrona środowiska, energetyka, drogi i regulacje transportowe."
 dependencies:
   requires:
@@ -451,7 +451,7 @@ BUDOWNICTWO:
                zwierzynę [odesłanie do art. 15 Rozdz. 3]; ⭐⭐ art. 22a —
                dwuetapowa sankcja [wezwanie → decyzja o zakazie na SZTYWNE
                3 lata]; art. 22b — odesłanie do Prawa przedsiębiorców,
-               ⭐ ROZSTRZYGNIĘTA aktualna metryka **Dz.U. 2025 poz. 1480**
+               ⭐ ROZSTRZYGNIĘTA metryka **Dz.U. 2025 poz. 1480** (od 10.11.2026 t.j. **Dz.U. 2026 poz. 1484**, ELI)
                [potwierdzona bezpośrednio w ISAP i dziennikustaw.gov.pl]
                wobec rozbieżnych starszych metryk cytowanych przez różne
                źródła Rządu 2B. 5 punktów ⚠️ NIEWERYFIKOWANE, w tym możliwa

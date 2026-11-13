@@ -1,6 +1,6 @@
 f1306e7d29cbbac14d14f7a3c096c646d340ab41c8bae37f1250c6c3916e5978  ./PORTABILITY-MANIFEST.md
 2cf33abe59a4fc8cfb7ca289790b86a818eaf6c885379d4ef2fa5c63d749ac3b  ./README.md
-374b5bd38bd5820a73697b204e90b5ba5e8fcc7d2ef75c68d71a599691d9999d  ./SKILL.md
+3ee63efadb6439b08c2e5598212232fd43a5442946d2b5903d4e87c4e3559756  ./SKILL.md
 6ab72bd687f07b8de1615a237b2c3813b4375c88775ae09e9c16136a424cb68b  ./agents/openai.yaml
 e9301497fa98ef56aaca7ede0857b9a18dc06c34040f0679c609a6bf49b1d38b  ./assets/icon.svg
 4e1fb6c25693e16536b9397c060ecfb476328c75513dd15b7b77732009c02e52  ./modules/MOD-DESCRIPTION.md
@@ -10,7 +10,7 @@ f06c3969a5625a2560967736e6ff8646e822d6af40573c4a77910816f281cf7d  ./modules/MOD-
 1e9a008f510d7c111cf383cc8d189de424c03d1b319d7261dbf05001aeabd803  ./modules/MOD-WSTAWKI.md
 134eaa7d63b7b973dac02b5c8509a47a6a84c275fb7b3d9bf2ea95c1e3af9f5b  ./references/ALIASY-NAZW-AKTOW.md
 8a69f6dd59b87d0c7f03073108b7d14db9cf6d98eb6367ff8488534f0a614fba  ./references/AUDIT-JOURNAL.md
-f4004971a11295af098d00e5c06cbf9e4d23e9bde72e50310f8009efc5b04f33  ./references/CHANGELOG.md
+0af15db733386b2cf2a198eb46cc11193747c8e2f28bfe2f2dc7f0b55dab6bbf  ./references/CHANGELOG.md
 e7740174fe8894baaf9ea9cd5da5df31a862fad4cc071c831ccec7b438fbb06a  ./references/CHECKLIST-DEDUP.md
 07e3147e3888c7e81ff3f7ca82de4434653787ce1ff03f5be03f05736c86fcf0  ./references/COWORK-HARMONOGRAM-NATYWNY.md
 1f88191f1bdb4d3170f23c48f9874b499f750e94ad13d6cd14c2f234a7ead034  ./references/F-108-lista-MS-egzamin-2026.md
@@ -33,7 +33,7 @@ bfac9ff481590d64373a55c926a58f8b23e530626104814759be78b9aa775045  ./references/S
 82a72e5ef250fdbbbd184bd943bfc2a408d5b6a459a8a3d913624c48573dc4b9  ./references/SYNC-DZU-AUTOMATYCZNY.md
 2413e6f5b42f1883970fc1398c4946cd746342f5b1eea697a53d8c209cf59073  ./references/WARN-OTWARTE.md
 b53258f9480de7129bdc392b9fbd403dde496cfa6e17720c70b21a6a99b417b3  ./references/mapa_dzu_2026-08-28.md
-77a2a41660754f24c60539532026b07c2c536295c83e2eb7847dd70d10595cef  ./references/mapa_dzu_2026-10-04.md
+775eebf50159bd8864e5f52f8922a1924f6be9e27cc7736a7a58d1ec21b87ae2  ./references/mapa_dzu_2026-10-04.md
 739de991711f7fce2ef84d99cbf0bbe7cb670ba00040d72bb19cd105d611560d  ./references/migracja-jurysdykcji/E2-MD5-terminy.tsv
 de37fa13fcde1cf12dbd30791956571c03dccbda188c9e68d40bb1609cecee67  ./references/migracja-jurysdykcji/PLAN-I-MAPA.md
 24e8f5b4e4230b0d790a4bd12fd8a42abfe8cea7486a63d0dbb3f80fe30988ee  ./references/raporty-pokrycia-2026-08-13/00-indeks-raportow-pokrycia.md
@@ -50,7 +50,7 @@ db33c3e885beb20fdc33296dd08bdbcdb722f78c9a77455ac09ee55c338a4df5  ./references/r
 1964f5482b6bf80d6f5abe0da61fc4076d4151431b54e035560b7ec1fd79235b  ./scripts/README.md
 81bdca1dbdf527be6e3a3c5caa0620ff9ec1af29361bd84c68aa14d2b543c410  ./scripts/_lex_common.py
 d0f6f0559b46c41958494a7a1327c9c15b6a54f0f33b8d80fd9b5b0a9e3fc580  ./scripts/audit_amendment_scope.py
-0f2628bd15e17bd321b179493d15b16eca7a4eb8494d80de919ab866592ba526  ./scripts/audit_tj_inventory.py
+17a9004611b4ac9d10b53b327c8bc2aea5f053ce7525df3e3bbbae9317cf7ee8  ./scripts/audit_tj_inventory.py
 b113f1e89b2793db5ec3fdbf9b5f478cbe447acbd5b27b99c767591c399504fc  ./scripts/bootstrap_last_sync_date.py
 e256c3a7a452de7442a9613d0a4a48149dce68266e49bb902e07ee6951e0e56b  ./scripts/build_ramie_kontrolne.py
 ffb97d05cdba8ba94b18c6e183eb7aa9bb280a0a9e60bf75b945af2104fa68c4  ./scripts/build_ramie_kontrolne_f113.py

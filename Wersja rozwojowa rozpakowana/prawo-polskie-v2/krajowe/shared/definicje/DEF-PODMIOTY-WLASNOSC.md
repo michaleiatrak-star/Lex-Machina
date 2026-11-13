@@ -40,7 +40,7 @@ DEFINICJA USTAWOWA (art. 4 ust. 1 Prawa przedsiębiorców):
   niebędąca osobą prawną, której odrębna ustawa przyznaje zdolność prawną,
   wykonująca działalność gospodarczą."
   Wspólnicy spółki cywilnej = przedsiębiorcy w zakresie działalności (art. 4 ust. 2)
-  → Prawo przedsiębiorców Dz.U. 2025 poz. 1480 t.j. (weryfikuj w ELI (RZĄD 1))
+  → Prawo przedsiębiorców Dz.U. 2026 poz. 1484 t.j. (weryfikuj w ELI (RZĄD 1))
 
 DZIAŁALNOŚĆ NIEEWIDENCJONOWANA (art. 5 Prawa przedsiębiorców):
   Nie jest działalnością gosp. gdy przychód ≤ 225% min. wynagrodzenia w kwartale

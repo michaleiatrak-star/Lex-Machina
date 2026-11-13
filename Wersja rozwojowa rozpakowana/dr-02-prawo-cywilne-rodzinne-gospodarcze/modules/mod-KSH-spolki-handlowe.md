@@ -2,7 +2,7 @@
 
 **Status:** moduł klasy kancelaryjnej — poziom DR-03
 
-**Źródło weryfikacji:** KSH — Dz.U. 2024 poz. 18 t.j. ze zm. (w tym Dz.U. 2026 poz. 176) | PrUp — Dz.U. 2026 poz. 913 t.j. | Prawo przedsiębiorców — Dz.U. 2025 poz. 1480 t.j. | KC (spółka cywilna) — Dz.U. 2026 poz. 795 ze zm.
+**Źródło weryfikacji:** KSH — Dz.U. 2024 poz. 18 t.j. ze zm. (w tym Dz.U. 2026 poz. 176) | PrUp — Dz.U. 2026 poz. 913 t.j. | Prawo przedsiębiorców — Dz.U. 2026 poz. 1484 t.j. | KC (spółka cywilna) — Dz.U. 2026 poz. 795 ze zm.
 **Data weryfikacji online:** 2026-06-05 (KSH/PrUp) · 2026-06-15 (Prawo przedsiębiorców, formy działalności, dokumenty założycielskie) · 2026-07-15 (nowelizacja Dz.U. 2026 poz. 176 — patrz sekcja niżej; koryguje wcześniejszą flagę F-6, która błędnie wskazywała "art. 130 (2026.187)" — poz. 187/2026 dotyczy w rzeczywistości zmian w ustawie o Policji, nie KSH)
 **ZASADA:** Każde brzmienie przepisu przed powołaniem → isap.sejm.gov.pl
 **⚠️ KSH był wielokrotnie nowelizowany — przed każdą sprawą weryfikuj aktualny t.j. w ISAP.**
@@ -223,7 +223,7 @@ Restrukturyzacja (zachowanie przedsiębiorstwa)     Upadłość (likwidacja)
 ### 0. Działalność nierejestrowana (Prawo przedsiębiorców, art. 5)
 
 ```
-Podstawa: Prawo przedsiębiorców — t.j. Dz.U. 2025 poz. 1480 (obwieszczenie
+Podstawa: Prawo przedsiębiorców — t.j. Dz.U. 2026 poz. 1484 (obwieszczenie
 20.10.2025), art. 5 w brzmieniu OD 1.01.2026 wg nowelizacji Dz.U. 2025
 poz. 769 (ustawa z 25.07.2025 o uproszczeniach administracyjnych i wsparciu
 przedsiębiorczości, podpisana przez Prezydenta 21.08.2025)
@@ -261,7 +261,7 @@ SKUTKI:
 ### 1. Jednoosobowa działalność gospodarcza (JDG / CEIDG)
 
 ```
-Podstawa: Prawo przedsiębiorców (Dz.U. 2025 poz. 1480 t.j.)
+Podstawa: Prawo przedsiębiorców (Dz.U. 2026 poz. 1484 t.j.)
 - rejestracja w CEIDG (Centralna Ewidencja i Informacja o Działalności
   Gospodarczej) — bezpłatna, online (Profil Zaufany / e-dowód / podpis
   kwalifikowany)

@@ -41,7 +41,7 @@ BAS-117  Godziny ponadwymiarowe nauczycieli
   web_search: "godziny ponadwymiarowe nauczyciel Karta Nauczyciela art 35 2025"
 
 BAS-119  Przedsiębiorca
-  Kierunek: Prawo przedsiębiorców art. 4 (Dz.U. 2025 poz. 1480 t.j.) — ZDEFINIOWANY
+  Kierunek: Prawo przedsiębiorców art. 4 (Dz.U. 2026 poz. 1484 t.j.) — ZDEFINIOWANY
   Definicja: osoba fizyczna, prawna lub JONIOPO wykonująca działalność gospodarczą
   → patrz: shared/DEFINICJE-KLUCZOWE.md Blok A.2
 

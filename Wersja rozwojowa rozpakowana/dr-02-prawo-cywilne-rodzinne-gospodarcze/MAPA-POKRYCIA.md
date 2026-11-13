@@ -52,7 +52,7 @@ Mapa pokazuje wyłącznie bieżący stan pokrycia używany przez system. Histori
 | ubezpieczenia obowiązkowe, UFG i PBUK | 🟢 B+ / COV | `mod-ustawa-ubezpieczenia-obowiazkowe-UFG-PBUK.md` |
 | fundacja rodzinna | 🟢 B+ / COV | `mod-ustawa-fundacja-rodzinna.md` |
 | opóźnienia w transakcjach handlowych | 🟢 B+ / COV | `mod-transakcje-handlowe-opoznienia.md` |
-| Prawo przedsiębiorców — Dz.U. 2025 poz. 1480 | 🟢 B+ / COV | `mod-Prawo-przedsiebiorcow-current-state-COV.md` |
+| Prawo przedsiębiorców — Dz.U. 2026 poz. 1484 t.j. | 🟢 B+ / COV | `mod-Prawo-przedsiebiorcow-current-state-COV.md` |
 
 ## Aktywne luki
 

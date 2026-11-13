@@ -180,7 +180,7 @@ REGUŁA: W każdej sprawie WZ ustal OBSZAR ANALIZOWANY przez organ —
 
 ### BAS-119 — Przedsiębiorca (DR-02)
 ```
-Weryfikacja: Prawo przedsiębiorców art. 4 (Dz.U. 2025 poz. 1480 t.j.)
+Weryfikacja: Prawo przedsiębiorców art. 4 (Dz.U. 2026 poz. 1484 t.j.)
 
 DEFINICJA USTAWOWA (art. 4 PrPrzedsięb):
   "Przedsiębiorcą jest osoba fizyczna, osoba prawna lub jednostka organizacyjna
